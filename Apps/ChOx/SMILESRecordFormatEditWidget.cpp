@@ -1,0 +1,115 @@
+/* -*- mode: c++; c-basic-offset: 4; tab-width: 4; indent-tabs-mode: t -*- */
+
+/* 
+ * SMILESRecordFormatEditWidget.cpp 
+ *
+ * This file is part of the Chemical Data Processing Toolkit
+ *
+ * Copyright (C) 2003-2010 Thomas A. Seidel <thomas.seidel@univie.ac.at>
+ *
+ * This program is free software; you can redistribute it and/or
+ * modify it under the terms of the GNU Lesser General Public
+ * License as published by the Free Software Foundation; either
+ * version 2 of the License, or (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU
+ * Lesser General Public License for more details.
+ *
+ * You should have received a copy of the GNU Lesser General Public License
+ * along with this program; see the file COPYING. If not, write to
+ * the Free Software Foundation, Inc., 59 Temple Place - Suite 330,
+ * Boston, MA 02111-1307, USA.
+ */
+
+
+#include <QHBoxLayout>
+#include <QComboBox>
+
+#include "SMILESRecordFormatEditWidget.hpp"
+
+
+using namespace ChOx;
+
+
+SMILESRecordFormatEditWidget::SMILESRecordFormatEditWidget(QWidget* parent, std::string& format):
+	QWidget(parent), recordFormat(format)
+{
+	init();
+}
+
+void SMILESRecordFormatEditWidget::updateGUI()
+{
+	recordFormatComboBox->blockSignals(true);
+
+	if (recordFormat == "S:") 
+		recordFormatComboBox->setCurrentIndex(1);
+	else if (recordFormat == "S$")
+		recordFormatComboBox->setCurrentIndex(2);
+	else if (recordFormat == "S:N")
+		recordFormatComboBox->setCurrentIndex(3);
+	else if (recordFormat == "S:N:")
+		recordFormatComboBox->setCurrentIndex(4);
+	else if (recordFormat == "S:N$")
+		recordFormatComboBox->setCurrentIndex(5);
+	else
+		recordFormatComboBox->setCurrentIndex(0);
+
+	recordFormatComboBox->blockSignals(false);
+}
+
+void SMILESRecordFormatEditWidget::handleFormatSelection(int idx)
+{
+	switch (idx) {
+
+		case 1:
+			recordFormat = "S:";
+			break;
+
+		case 2:
+			recordFormat = "S$";
+			break;
+
+		case 3:
+			recordFormat = "S:N";
+			break;
+
+		case 4:
+			recordFormat = "S:N:";
+			break;
+
+		case 5:
+			recordFormat = "S:N$";
+			break;
+
+		default:
+			recordFormat = "S";
+	}
+
+	emit recordFormatChanged();
+}
+
+void SMILESRecordFormatEditWidget::init()
+{
+	QHBoxLayout* main_layout = new QHBoxLayout(this);
+
+	main_layout->setMargin(0);
+
+	recordFormatComboBox = new QComboBox(this);
+
+	connect(recordFormatComboBox, SIGNAL(activated(int)), this, SLOT(handleFormatSelection(int)));
+
+	setFocusProxy(recordFormatComboBox);
+
+	recordFormatComboBox->addItem(tr("Smiles"));
+	recordFormatComboBox->addItem(tr("Smiles:Space"));
+	recordFormatComboBox->addItem(tr("Smiles:Linebreak"));
+	recordFormatComboBox->addItem(tr("Smiles:Space:Name"));
+	recordFormatComboBox->addItem(tr("Smiles:Space:Name:Space"));
+	recordFormatComboBox->addItem(tr("Smiles:Space:Name:Linebreak"));
+
+	main_layout->addWidget(recordFormatComboBox);
+
+	updateGUI();
+}

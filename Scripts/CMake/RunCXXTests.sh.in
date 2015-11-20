@@ -1,0 +1,7 @@
+#!/bin/sh
+
+export CDPTK_DATA_DIR="@CDPTK_DATA_DIR@"
+export BOOST_TEST_LOG_LEVEL=test_suite
+export BOOST_TEST_REPORT_LEVEL=short
+
+exec "$1"

@@ -1,0 +1,49 @@
+/* -*- mode: java; tab-width: 4 -*- */
+
+package CDPL.Chem;
+
+/**
+ * \brief MolecularComplexityCalculator.
+ */
+public class MolecularComplexityCalculator extends Boost.Python.instance {
+
+	/**
+	 * \brief __init__.
+	 * \param self The <tt>%MolecularComplexityCalculator</tt> instance.
+	 */
+	public None __init__(object self) {}
+
+	/**
+	 * \brief __init__.
+	 * \param self The <tt>%MolecularComplexityCalculator</tt> instance.
+	 */
+	public None __init__(object self, MolecularGraph molgraph) {}
+
+	/**
+	 * \brief calculate.
+	 * \param self The <tt>%MolecularComplexityCalculator</tt> instance.
+	 */
+	public float calculate(MolecularComplexityCalculator self, MolecularGraph molgraph) {}
+
+	/**
+	 * \brief getObjectID.
+	 * \param self The <tt>%MolecularComplexityCalculator</tt> instance.
+	 */
+	public int getObjectID(MolecularComplexityCalculator self) {}
+
+	/**
+	 * \brief getResult.
+	 * \param self The <tt>%MolecularComplexityCalculator</tt> instance.
+	 */
+	public float getResult(MolecularComplexityCalculator self) {}
+
+	/**
+	 * \brief objectID.
+	 */
+	public None objectID;
+
+	/**
+	 * \brief result.
+	 */
+	public None result;
+}

@@ -1,0 +1,27 @@
+/* -*- mode: java; tab-width: 4 -*- */
+
+package CDPL.Chem;
+
+/**
+ * \brief MolecularGraphComponentGroupingMatchExpression.
+ */
+public class MolecularGraphComponentGroupingMatchExpression extends MolecularGraphMatchExpression {
+
+	/**
+	 * \brief __init__.
+	 * \param self The <tt>%MolecularGraphComponentGroupingMatchExpression</tt> instance.
+	 */
+	public None __init__(object self, MolecularGraphComponentGroupingMatchExpression expr) {}
+
+	/**
+	 * \brief __init__.
+	 * \param self The <tt>%MolecularGraphComponentGroupingMatchExpression</tt> instance.
+	 */
+	public None __init__(object self, FragmentList comp_grouping) {}
+
+	/**
+	 * \brief assign.
+	 * \param self The <tt>%MolecularGraphComponentGroupingMatchExpression</tt> instance.
+	 */
+	public MolecularGraphComponentGroupingMatchExpression assign(MolecularGraphComponentGroupingMatchExpression self, MolecularGraphComponentGroupingMatchExpression expr) {}
+}

@@ -1,0 +1,251 @@
+/* -*- mode: java; tab-width: 4 -*- */
+
+package CDPL.Math;
+
+/**
+ * \brief ULMatrixRow.
+ */
+public class ULMatrixRow extends Boost.Python.instance {
+
+	/**
+	 * \brief __init__.
+	 * \param self The <tt>%ULMatrixRow</tt> instance.
+	 */
+	public None __init__(object self, ULMatrixRow mr) {}
+
+	/**
+	 * \brief __init__.
+	 * \param self The <tt>%ULMatrixRow</tt> instance.
+	 */
+	public None __init__(object self, ULMatrixExpression e, int i) {}
+
+	/**
+	 * \brief getObjectID.
+	 * \param self The <tt>%ULMatrixRow</tt> instance.
+	 */
+	public int getObjectID(ULMatrixRow self) {}
+
+	/**
+	 * \brief getSize.
+	 * \param self The <tt>%ULMatrixRow</tt> instance.
+	 */
+	public int getSize(ULMatrixRow self) {}
+
+	/**
+	 * \brief getIndex.
+	 * \param self The <tt>%ULMatrixRow</tt> instance.
+	 */
+	public int getIndex(ULMatrixRow self) {}
+
+	/**
+	 * \brief getElement.
+	 * \param self The <tt>%ULMatrixRow</tt> instance.
+	 */
+	public int getElement(ULMatrixRow self, int i) {}
+
+	/**
+	 * \brief isEmpty.
+	 * \param self The <tt>%ULMatrixRow</tt> instance.
+	 */
+	public bool isEmpty(ULMatrixRow self) {}
+
+	/**
+	 * \brief swap.
+	 * \param self The <tt>%ULMatrixRow</tt> instance.
+	 */
+	public None swap(ULMatrixRow self, ULMatrixRow r) {}
+
+	/**
+	 * \brief getData.
+	 * \param self The <tt>%ULMatrixRow</tt> instance.
+	 */
+	public ULMatrixExpression getData(ULMatrixRow self) {}
+
+	/**
+	 * \brief setElement.
+	 * \param self The <tt>%ULMatrixRow</tt> instance.
+	 */
+	public None setElement(ULMatrixRow self, int i, int v) {}
+
+	/**
+	 * \brief assign.
+	 * \param self The <tt>%ULMatrixRow</tt> instance.
+	 */
+	public ULMatrixRow assign(ULMatrixRow self, ConstFVectorExpression e) {}
+
+	/**
+	 * \brief assign.
+	 * \param self The <tt>%ULMatrixRow</tt> instance.
+	 */
+	public ULMatrixRow assign(ULMatrixRow self, ConstDVectorExpression e) {}
+
+	/**
+	 * \brief assign.
+	 * \param self The <tt>%ULMatrixRow</tt> instance.
+	 */
+	public ULMatrixRow assign(ULMatrixRow self, ConstLVectorExpression e) {}
+
+	/**
+	 * \brief assign.
+	 * \param self The <tt>%ULMatrixRow</tt> instance.
+	 */
+	public ULMatrixRow assign(ULMatrixRow self, ConstULVectorExpression e) {}
+
+	/**
+	 * \brief assign.
+	 * \param self The <tt>%ULMatrixRow</tt> instance.
+	 */
+	public ULMatrixRow assign(ULMatrixRow self, ULMatrixRow r) {}
+
+	/**
+	 * \brief __isub__.
+	 * \param self The <tt>%ULMatrixRow</tt> instance.
+	 */
+	public ULMatrixRow __isub__(ULMatrixRow self, ULMatrixRow r) {}
+
+	/**
+	 * \brief __isub__.
+	 * \param self The <tt>%ULMatrixRow</tt> instance.
+	 */
+	public ULMatrixRow __isub__(ULMatrixRow self, ConstULVectorExpression e) {}
+
+	/**
+	 * \brief __str__.
+	 * \param self The <tt>%ULMatrixRow</tt> instance.
+	 */
+	public str __str__(ULMatrixRow self) {}
+
+	/**
+	 * \brief __rmul__.
+	 * \param self The <tt>%ULMatrixRow</tt> instance.
+	 */
+	public ConstULVectorExpression __rmul__(object self, int t) {}
+
+	/**
+	 * \brief __pos__.
+	 * \param self The <tt>%ULMatrixRow</tt> instance.
+	 */
+	public ULMatrixRow __pos__(ULMatrixRow self) {}
+
+	/**
+	 * \brief __call__.
+	 * \param self The <tt>%ULMatrixRow</tt> instance.
+	 */
+	public int __call__(ULMatrixRow self, int i) {}
+
+	/**
+	 * \brief __len__.
+	 * \param self The <tt>%ULMatrixRow</tt> instance.
+	 */
+	public int __len__(ULMatrixRow self) {}
+
+	/**
+	 * \brief __neg__.
+	 * \param self The <tt>%ULMatrixRow</tt> instance.
+	 */
+	public ConstULVectorExpression __neg__(object self) {}
+
+	/**
+	 * \brief __ne__.
+	 * \param self The <tt>%ULMatrixRow</tt> instance.
+	 */
+	public bool __ne__(ULMatrixRow self, ULMatrixRow r) {}
+
+	/**
+	 * \brief __ne__.
+	 * \param self The <tt>%ULMatrixRow</tt> instance.
+	 */
+	public bool __ne__(ULMatrixRow self, ConstULVectorExpression e) {}
+
+	/**
+	 * \brief __getitem__.
+	 * \param self The <tt>%ULMatrixRow</tt> instance.
+	 */
+	public int __getitem__(ULMatrixRow self, int i) {}
+
+	/**
+	 * \brief __idiv__.
+	 * \param self The <tt>%ULMatrixRow</tt> instance.
+	 */
+	public ULMatrixRow __idiv__(ULMatrixRow self, int t) {}
+
+	/**
+	 * \brief __setitem__.
+	 * \param self The <tt>%ULMatrixRow</tt> instance.
+	 */
+	public None __setitem__(ULMatrixRow self, int i, int v) {}
+
+	/**
+	 * \brief __add__.
+	 * \param self The <tt>%ULMatrixRow</tt> instance.
+	 */
+	public ConstULVectorExpression __add__(object self, ConstULVectorExpression e) {}
+
+	/**
+	 * \brief __eq__.
+	 * \param self The <tt>%ULMatrixRow</tt> instance.
+	 */
+	public bool __eq__(ULMatrixRow self, ULMatrixRow r) {}
+
+	/**
+	 * \brief __eq__.
+	 * \param self The <tt>%ULMatrixRow</tt> instance.
+	 */
+	public bool __eq__(ULMatrixRow self, ConstULVectorExpression e) {}
+
+	/**
+	 * \brief __imul__.
+	 * \param self The <tt>%ULMatrixRow</tt> instance.
+	 */
+	public ULMatrixRow __imul__(ULMatrixRow self, int t) {}
+
+	/**
+	 * \brief __iadd__.
+	 * \param self The <tt>%ULMatrixRow</tt> instance.
+	 */
+	public ULMatrixRow __iadd__(ULMatrixRow self, ULMatrixRow r) {}
+
+	/**
+	 * \brief __iadd__.
+	 * \param self The <tt>%ULMatrixRow</tt> instance.
+	 */
+	public ULMatrixRow __iadd__(ULMatrixRow self, ConstULVectorExpression e) {}
+
+	/**
+	 * \brief __div__.
+	 * \param self The <tt>%ULMatrixRow</tt> instance.
+	 */
+	public ConstULVectorExpression __div__(object self, int t) {}
+
+	/**
+	 * \brief __mul__.
+	 * \param self The <tt>%ULMatrixRow</tt> instance.
+	 */
+	public ConstULVectorExpression __mul__(object self, int t) {}
+
+	/**
+	 * \brief __sub__.
+	 * \param self The <tt>%ULMatrixRow</tt> instance.
+	 */
+	public ConstULVectorExpression __sub__(object self, ConstULVectorExpression e) {}
+
+	/**
+	 * \brief objectID.
+	 */
+	public None objectID;
+
+	/**
+	 * \brief size.
+	 */
+	public None size;
+
+	/**
+	 * \brief index.
+	 */
+	public None index;
+
+	/**
+	 * \brief data.
+	 */
+	public None data;
+}

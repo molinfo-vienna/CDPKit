@@ -1,0 +1,15 @@
+/* -*- mode: java; tab-width: 4 -*- */
+
+package CDPL.Vis;
+
+/**
+ * \brief SVGMolecularGraphOutputHandler.
+ */
+public class SVGMolecularGraphOutputHandler extends Chem.MolecularGraphOutputHandler {
+
+	/**
+	 * \brief __init__.
+	 * \param self The <tt>%SVGMolecularGraphOutputHandler</tt> instance.
+	 */
+	public None __init__(object self) {}
+}

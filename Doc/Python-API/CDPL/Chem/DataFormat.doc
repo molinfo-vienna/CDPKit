@@ -1,0 +1,49 @@
+/* -*- mode: java; tab-width: 4 -*- */
+
+package CDPL.Chem;
+
+/**
+ * \brief DataFormat.
+ */
+public class DataFormat extends Boost.Python.instance {
+
+	/**
+	 * \brief SMILES.
+	 */
+	public static Base.DataFormat SMILES;
+
+	/**
+	 * \brief SMARTS.
+	 */
+	public static Base.DataFormat SMARTS;
+
+	/**
+	 * \brief RXN.
+	 */
+	public static Base.DataFormat RXN;
+
+	/**
+	 * \brief SDF.
+	 */
+	public static Base.DataFormat SDF;
+
+	/**
+	 * \brief RDF.
+	 */
+	public static Base.DataFormat RDF;
+
+	/**
+	 * \brief MOL.
+	 */
+	public static Base.DataFormat MOL;
+
+	/**
+	 * \brief INCHI.
+	 */
+	public static Base.DataFormat INCHI;
+
+	/**
+	 * \brief JME.
+	 */
+	public static Base.DataFormat JME;
+}

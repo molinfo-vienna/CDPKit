@@ -1,0 +1,181 @@
+/* -*- mode: java; tab-width: 4 -*- */
+
+package CDPL.Math;
+
+/**
+ * \brief ConstULVectorQuaternionAdapter.
+ */
+public class ConstULVectorQuaternionAdapter extends Boost.Python.instance {
+
+	/**
+	 * \brief __init__.
+	 * \param self The <tt>%ConstULVectorQuaternionAdapter</tt> instance.
+	 */
+	public None __init__(object self, ConstULVectorQuaternionAdapter a) {}
+
+	/**
+	 * \brief __init__.
+	 * \param self The <tt>%ConstULVectorQuaternionAdapter</tt> instance.
+	 */
+	public None __init__(object self, ConstULVectorExpression e) {}
+
+	/**
+	 * \brief getObjectID.
+	 * \param self The <tt>%ConstULVectorQuaternionAdapter</tt> instance.
+	 */
+	public int getObjectID(ConstULVectorQuaternionAdapter self) {}
+
+	/**
+	 * \brief getC4.
+	 * \param self The <tt>%ConstULVectorQuaternionAdapter</tt> instance.
+	 */
+	public int getC4(ConstULVectorQuaternionAdapter self) {}
+
+	/**
+	 * \brief getData.
+	 * \param self The <tt>%ConstULVectorQuaternionAdapter</tt> instance.
+	 */
+	public ConstULVectorExpression getData(ConstULVectorQuaternionAdapter self) {}
+
+	/**
+	 * \brief getC1.
+	 * \param self The <tt>%ConstULVectorQuaternionAdapter</tt> instance.
+	 */
+	public int getC1(ConstULVectorQuaternionAdapter self) {}
+
+	/**
+	 * \brief getC2.
+	 * \param self The <tt>%ConstULVectorQuaternionAdapter</tt> instance.
+	 */
+	public int getC2(ConstULVectorQuaternionAdapter self) {}
+
+	/**
+	 * \brief getC3.
+	 * \param self The <tt>%ConstULVectorQuaternionAdapter</tt> instance.
+	 */
+	public int getC3(ConstULVectorQuaternionAdapter self) {}
+
+	/**
+	 * \brief __str__.
+	 * \param self The <tt>%ConstULVectorQuaternionAdapter</tt> instance.
+	 */
+	public str __str__(ConstULVectorQuaternionAdapter self) {}
+
+	/**
+	 * \brief __radd__.
+	 * \param self The <tt>%ConstULVectorQuaternionAdapter</tt> instance.
+	 */
+	public ConstULQuaternionExpression __radd__(object self, int t) {}
+
+	/**
+	 * \brief __rsub__.
+	 * \param self The <tt>%ConstULVectorQuaternionAdapter</tt> instance.
+	 */
+	public ConstULQuaternionExpression __rsub__(object self, int t) {}
+
+	/**
+	 * \brief __rdiv__.
+	 * \param self The <tt>%ConstULVectorQuaternionAdapter</tt> instance.
+	 */
+	public ConstULQuaternionExpression __rdiv__(object self, int t) {}
+
+	/**
+	 * \brief __rmul__.
+	 * \param self The <tt>%ConstULVectorQuaternionAdapter</tt> instance.
+	 */
+	public ConstULQuaternionExpression __rmul__(object self, int t) {}
+
+	/**
+	 * \brief __pos__.
+	 * \param self The <tt>%ConstULVectorQuaternionAdapter</tt> instance.
+	 */
+	public ConstULVectorQuaternionAdapter __pos__(ConstULVectorQuaternionAdapter self) {}
+
+	/**
+	 * \brief __mul__.
+	 * \param self The <tt>%ConstULVectorQuaternionAdapter</tt> instance.
+	 */
+	public ConstULQuaternionExpression __mul__(object self, int t) {}
+
+	/**
+	 * \brief __mul__.
+	 * \param self The <tt>%ConstULVectorQuaternionAdapter</tt> instance.
+	 */
+	public ConstULQuaternionExpression __mul__(object self, ConstULQuaternionExpression e) {}
+
+	/**
+	 * \brief __ne__.
+	 * \param self The <tt>%ConstULVectorQuaternionAdapter</tt> instance.
+	 */
+	public bool __ne__(ConstULVectorQuaternionAdapter self, ConstULVectorQuaternionAdapter a) {}
+
+	/**
+	 * \brief __ne__.
+	 * \param self The <tt>%ConstULVectorQuaternionAdapter</tt> instance.
+	 */
+	public bool __ne__(ConstULVectorQuaternionAdapter self, ConstULQuaternionExpression q) {}
+
+	/**
+	 * \brief __add__.
+	 * \param self The <tt>%ConstULVectorQuaternionAdapter</tt> instance.
+	 */
+	public ConstULQuaternionExpression __add__(object self, int t) {}
+
+	/**
+	 * \brief __add__.
+	 * \param self The <tt>%ConstULVectorQuaternionAdapter</tt> instance.
+	 */
+	public ConstULQuaternionExpression __add__(object self, ConstULQuaternionExpression e) {}
+
+	/**
+	 * \brief __eq__.
+	 * \param self The <tt>%ConstULVectorQuaternionAdapter</tt> instance.
+	 */
+	public bool __eq__(ConstULVectorQuaternionAdapter self, ConstULVectorQuaternionAdapter a) {}
+
+	/**
+	 * \brief __eq__.
+	 * \param self The <tt>%ConstULVectorQuaternionAdapter</tt> instance.
+	 */
+	public bool __eq__(ConstULVectorQuaternionAdapter self, ConstULQuaternionExpression q) {}
+
+	/**
+	 * \brief __div__.
+	 * \param self The <tt>%ConstULVectorQuaternionAdapter</tt> instance.
+	 */
+	public ConstULQuaternionExpression __div__(object self, int t) {}
+
+	/**
+	 * \brief __div__.
+	 * \param self The <tt>%ConstULVectorQuaternionAdapter</tt> instance.
+	 */
+	public ConstULQuaternionExpression __div__(object self, ConstULQuaternionExpression e) {}
+
+	/**
+	 * \brief __neg__.
+	 * \param self The <tt>%ConstULVectorQuaternionAdapter</tt> instance.
+	 */
+	public ConstULQuaternionExpression __neg__(object self) {}
+
+	/**
+	 * \brief __sub__.
+	 * \param self The <tt>%ConstULVectorQuaternionAdapter</tt> instance.
+	 */
+	public ConstULQuaternionExpression __sub__(object self, int t) {}
+
+	/**
+	 * \brief __sub__.
+	 * \param self The <tt>%ConstULVectorQuaternionAdapter</tt> instance.
+	 */
+	public ConstULQuaternionExpression __sub__(object self, ConstULQuaternionExpression e) {}
+
+	/**
+	 * \brief objectID.
+	 */
+	public None objectID;
+
+	/**
+	 * \brief data.
+	 */
+	public None data;
+}

@@ -1,0 +1,283 @@
+/* -*- mode: java; tab-width: 4 -*- */
+
+package CDPL.Vis;
+
+/**
+ * \brief Line2D.
+ */
+public class Line2D extends Boost.Python.instance {
+
+	/**
+	 * \brief __init__.
+	 * \param self The <tt>%Line2D</tt> instance.
+	 */
+	public None __init__(object self) {}
+
+	/**
+	 * \brief __init__.
+	 * \param self The <tt>%Line2D</tt> instance.
+	 */
+	public None __init__(object self, Line2D line) {}
+
+	/**
+	 * \brief __init__.
+	 * \param self The <tt>%Line2D</tt> instance.
+	 */
+	public None __init__(object self, Math.Vector2D beg, Math.Vector2D end) {}
+
+	/**
+	 * \brief __init__.
+	 * \param self The <tt>%Line2D</tt> instance.
+	 */
+	public None __init__(object self, float beg_x, float beg_y, float end_x, float end_y) {}
+
+	/**
+	 * \brief setEnd.
+	 * \param self The <tt>%Line2D</tt> instance.
+	 */
+	public None setEnd(Line2D self, Math.Vector2D pt) {}
+
+	/**
+	 * \brief setEnd.
+	 * \param self The <tt>%Line2D</tt> instance.
+	 */
+	public None setEnd(Line2D self, float x, float y) {}
+
+	/**
+	 * \brief getBegin.
+	 * \param self The <tt>%Line2D</tt> instance.
+	 */
+	public Math.Vector2D getBegin(Line2D self) {}
+
+	/**
+	 * \brief getObjectID.
+	 * \param self The <tt>%Line2D</tt> instance.
+	 */
+	public int getObjectID(Line2D self) {}
+
+	/**
+	 * \brief getCCWPerpDirection.
+	 * \param self The <tt>%Line2D</tt> instance.
+	 */
+	public Math.Vector2D getCCWPerpDirection(Line2D self) {}
+
+	/**
+	 * \brief getCCWPerpDirection.
+	 * \param self The <tt>%Line2D</tt> instance.
+	 */
+	public None getCCWPerpDirection(Line2D self, Math.Vector2D dir) {}
+
+	/**
+	 * \brief getDirection.
+	 * \param self The <tt>%Line2D</tt> instance.
+	 */
+	public Math.Vector2D getDirection(Line2D self) {}
+
+	/**
+	 * \brief getDirection.
+	 * \param self The <tt>%Line2D</tt> instance.
+	 */
+	public None getDirection(Line2D self, Math.Vector2D dir) {}
+
+	/**
+	 * \brief clipBeginAgainstLineSeg.
+	 * \param self The <tt>%Line2D</tt> instance.
+	 */
+	public bool clipBeginAgainstLineSeg(Line2D self, Line2D line) {}
+
+	/**
+	 * \brief getCWPerpDirection.
+	 * \param self The <tt>%Line2D</tt> instance.
+	 */
+	public Math.Vector2D getCWPerpDirection(Line2D self) {}
+
+	/**
+	 * \brief getCWPerpDirection.
+	 * \param self The <tt>%Line2D</tt> instance.
+	 */
+	public None getCWPerpDirection(Line2D self, Math.Vector2D dir) {}
+
+	/**
+	 * \brief translateBegin.
+	 * \param self The <tt>%Line2D</tt> instance.
+	 */
+	public None translateBegin(Line2D self, Math.Vector2D vec) {}
+
+	/**
+	 * \brief getLength.
+	 * \param self The <tt>%Line2D</tt> instance.
+	 */
+	public float getLength(Line2D self) {}
+
+	/**
+	 * \brief translateEnd.
+	 * \param self The <tt>%Line2D</tt> instance.
+	 */
+	public None translateEnd(Line2D self, Math.Vector2D vec) {}
+
+	/**
+	 * \brief setBegin.
+	 * \param self The <tt>%Line2D</tt> instance.
+	 */
+	public None setBegin(Line2D self, Math.Vector2D pt) {}
+
+	/**
+	 * \brief setBegin.
+	 * \param self The <tt>%Line2D</tt> instance.
+	 */
+	public None setBegin(Line2D self, float x, float y) {}
+
+	/**
+	 * \brief getDistance.
+	 * \param self The <tt>%Line2D</tt> instance.
+	 */
+	public float getDistance(Line2D self, Math.Vector2D pt) {}
+
+	/**
+	 * \brief translate.
+	 * \param self The <tt>%Line2D</tt> instance.
+	 */
+	public None translate(Line2D self, Math.Vector2D vec) {}
+
+	/**
+	 * \brief getEnd.
+	 * \param self The <tt>%Line2D</tt> instance.
+	 */
+	public Math.Vector2D getEnd(Line2D self) {}
+
+	/**
+	 * \brief clipBeginAgainstRectangle.
+	 * \param self The <tt>%Line2D</tt> instance.
+	 */
+	public bool clipBeginAgainstRectangle(Line2D self, Rectangle2D rect) {}
+
+	/**
+	 * \brief clipEndAgainstRectangle.
+	 * \param self The <tt>%Line2D</tt> instance.
+	 */
+	public bool clipEndAgainstRectangle(Line2D self, Rectangle2D rect) {}
+
+	/**
+	 * \brief clipEndAgainstLineSeg.
+	 * \param self The <tt>%Line2D</tt> instance.
+	 */
+	public bool clipEndAgainstLineSeg(Line2D self, Line2D line) {}
+
+	/**
+	 * \brief getCenter.
+	 * \param self The <tt>%Line2D</tt> instance.
+	 */
+	public Math.Vector2D getCenter(Line2D self) {}
+
+	/**
+	 * \brief getCenter.
+	 * \param self The <tt>%Line2D</tt> instance.
+	 */
+	public None getCenter(Line2D self, Math.Vector2D ctr) {}
+
+	/**
+	 * \brief setEndToLineSegIntersection.
+	 * \param self The <tt>%Line2D</tt> instance.
+	 */
+	public bool setEndToLineSegIntersection(Line2D self, Line2D line) {}
+
+	/**
+	 * \brief setPoints.
+	 * \param self The <tt>%Line2D</tt> instance.
+	 */
+	public None setPoints(Line2D self, Math.Vector2D beg, Math.Vector2D end) {}
+
+	/**
+	 * \brief setPoints.
+	 * \param self The <tt>%Line2D</tt> instance.
+	 */
+	public None setPoints(Line2D self, float beg_x, float beg_y, float end_x, float end_y) {}
+
+	/**
+	 * \brief swapPoints.
+	 * \param self The <tt>%Line2D</tt> instance.
+	 */
+	public None swapPoints(Line2D self) {}
+
+	/**
+	 * \brief getIntersectionPoint.
+	 * \param self The <tt>%Line2D</tt> instance.
+	 */
+	public object getIntersectionPoint(Line2D self, Line2D pt) {}
+
+	/**
+	 * \brief containsPoint.
+	 * \param self The <tt>%Line2D</tt> instance.
+	 */
+	public bool containsPoint(Line2D self, Math.Vector2D pt) {}
+
+	/**
+	 * \brief assign.
+	 * \param self The <tt>%Line2D</tt> instance.
+	 */
+	public Line2D assign(Line2D self, Line2D line) {}
+
+	/**
+	 * \brief setBeginToLineSegIntersection.
+	 * \param self The <tt>%Line2D</tt> instance.
+	 */
+	public bool setBeginToLineSegIntersection(Line2D self, Line2D line) {}
+
+	/**
+	 * \brief __eq__.
+	 * \param self The <tt>%Line2D</tt> instance.
+	 */
+	public bool __eq__(Line2D self, Line2D line) {}
+
+	/**
+	 * \brief __ne__.
+	 * \param self The <tt>%Line2D</tt> instance.
+	 */
+	public bool __ne__(Line2D self, Line2D line) {}
+
+	/**
+	 * \brief __contains__.
+	 * \param self The <tt>%Line2D</tt> instance.
+	 */
+	public bool __contains__(Line2D self, Math.Vector2D pt) {}
+
+	/**
+	 * \brief objectID.
+	 */
+	public None objectID;
+
+	/**
+	 * \brief direction.
+	 */
+	public None direction;
+
+	/**
+	 * \brief end.
+	 */
+	public None end;
+
+	/**
+	 * \brief ccwPerpDirection.
+	 */
+	public None ccwPerpDirection;
+
+	/**
+	 * \brief cwPerpDirection.
+	 */
+	public None cwPerpDirection;
+
+	/**
+	 * \brief begin.
+	 */
+	public None begin;
+
+	/**
+	 * \brief center.
+	 */
+	public None center;
+
+	/**
+	 * \brief length.
+	 */
+	public None length;
+}

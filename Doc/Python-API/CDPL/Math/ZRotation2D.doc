@@ -1,0 +1,21 @@
+/* -*- mode: java; tab-width: 4 -*- */
+
+package CDPL.Math;
+
+/**
+ * \brief ZRotation2D.
+ */
+public class ZRotation2D extends AffineTransform2D {
+
+	/**
+	 * \brief __init__.
+	 * \param self The <tt>%ZRotation2D</tt> instance.
+	 */
+	public None __init__(object self, ZRotation2D xform) {}
+
+	/**
+	 * \brief __init__.
+	 * \param self The <tt>%ZRotation2D</tt> instance.
+	 */
+	public None __init__(object self, float theta) {}
+}

@@ -1,0 +1,9 @@
+/* -*- mode: java; tab-width: 4 -*- */
+
+package CDPL.Base;
+
+/**
+ * \brief SizeError.
+ */
+public class SizeError extends ValueError {
+}

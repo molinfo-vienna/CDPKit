@@ -1,0 +1,180 @@
+/* -*- mode: java; tab-width: 4 -*- */
+
+package CDPL.Math;
+
+/**
+ * \brief DUnitVector.
+ */
+public class DUnitVector extends Boost.Python.instance {
+
+	/**
+	 * \brief __init__.
+	 * \param self The <tt>%DUnitVector</tt> instance.
+	 */
+	public None __init__(object self) {}
+
+	/**
+	 * \brief __init__.
+	 * \param self The <tt>%DUnitVector</tt> instance.
+	 */
+	public None __init__(object self, DUnitVector v) {}
+
+	/**
+	 * \brief __init__.
+	 * \param self The <tt>%DUnitVector</tt> instance.
+	 */
+	public None __init__(object self, int n, int i) {}
+
+	/**
+	 * \brief getObjectID.
+	 * \param self The <tt>%DUnitVector</tt> instance.
+	 */
+	public int getObjectID(DUnitVector self) {}
+
+	/**
+	 * \brief getSize.
+	 * \param self The <tt>%DUnitVector</tt> instance.
+	 */
+	public int getSize(DUnitVector self) {}
+
+	/**
+	 * \brief getIndex.
+	 * \param self The <tt>%DUnitVector</tt> instance.
+	 */
+	public int getIndex(DUnitVector arg1) {}
+
+	/**
+	 * \brief getElement.
+	 * \param self The <tt>%DUnitVector</tt> instance.
+	 */
+	public float getElement(DUnitVector self, int i) {}
+
+	/**
+	 * \brief isEmpty.
+	 * \param self The <tt>%DUnitVector</tt> instance.
+	 */
+	public bool isEmpty(DUnitVector self) {}
+
+	/**
+	 * \brief swap.
+	 * \param self The <tt>%DUnitVector</tt> instance.
+	 */
+	public None swap(DUnitVector self, DUnitVector v) {}
+
+	/**
+	 * \brief resize.
+	 * \param self The <tt>%DUnitVector</tt> instance.
+	 */
+	public None resize(DUnitVector self, int n) {}
+
+	/**
+	 * \brief assign.
+	 * \param self The <tt>%DUnitVector</tt> instance.
+	 */
+	public DUnitVector assign(DUnitVector self, DUnitVector v) {}
+
+	/**
+	 * \brief __str__.
+	 * \param self The <tt>%DUnitVector</tt> instance.
+	 */
+	public str __str__(DUnitVector self) {}
+
+	/**
+	 * \brief __rmul__.
+	 * \param self The <tt>%DUnitVector</tt> instance.
+	 */
+	public ConstDVectorExpression __rmul__(object self, float t) {}
+
+	/**
+	 * \brief __pos__.
+	 * \param self The <tt>%DUnitVector</tt> instance.
+	 */
+	public DUnitVector __pos__(DUnitVector self) {}
+
+	/**
+	 * \brief __call__.
+	 * \param self The <tt>%DUnitVector</tt> instance.
+	 */
+	public float __call__(DUnitVector self, int i) {}
+
+	/**
+	 * \brief __len__.
+	 * \param self The <tt>%DUnitVector</tt> instance.
+	 */
+	public int __len__(DUnitVector self) {}
+
+	/**
+	 * \brief __mul__.
+	 * \param self The <tt>%DUnitVector</tt> instance.
+	 */
+	public ConstDVectorExpression __mul__(object self, float t) {}
+
+	/**
+	 * \brief __ne__.
+	 * \param self The <tt>%DUnitVector</tt> instance.
+	 */
+	public bool __ne__(DUnitVector self, DUnitVector v) {}
+
+	/**
+	 * \brief __ne__.
+	 * \param self The <tt>%DUnitVector</tt> instance.
+	 */
+	public bool __ne__(DUnitVector self, ConstDVectorExpression e) {}
+
+	/**
+	 * \brief __getitem__.
+	 * \param self The <tt>%DUnitVector</tt> instance.
+	 */
+	public float __getitem__(DUnitVector self, int i) {}
+
+	/**
+	 * \brief __add__.
+	 * \param self The <tt>%DUnitVector</tt> instance.
+	 */
+	public ConstDVectorExpression __add__(object self, ConstDVectorExpression e) {}
+
+	/**
+	 * \brief __eq__.
+	 * \param self The <tt>%DUnitVector</tt> instance.
+	 */
+	public bool __eq__(DUnitVector self, DUnitVector v) {}
+
+	/**
+	 * \brief __eq__.
+	 * \param self The <tt>%DUnitVector</tt> instance.
+	 */
+	public bool __eq__(DUnitVector self, ConstDVectorExpression e) {}
+
+	/**
+	 * \brief __div__.
+	 * \param self The <tt>%DUnitVector</tt> instance.
+	 */
+	public ConstDVectorExpression __div__(object self, float t) {}
+
+	/**
+	 * \brief __neg__.
+	 * \param self The <tt>%DUnitVector</tt> instance.
+	 */
+	public ConstDVectorExpression __neg__(object self) {}
+
+	/**
+	 * \brief __sub__.
+	 * \param self The <tt>%DUnitVector</tt> instance.
+	 */
+	public ConstDVectorExpression __sub__(object self, ConstDVectorExpression e) {}
+
+	/**
+	 * \brief objectID.
+	 */
+	public None objectID;
+
+	/**
+	 * \brief size.
+	 */
+	public None size;
+
+	/**
+	 * \brief index.
+	 */
+	public None index;
+}

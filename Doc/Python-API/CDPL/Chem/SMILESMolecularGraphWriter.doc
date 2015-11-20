@@ -1,0 +1,15 @@
+/* -*- mode: java; tab-width: 4 -*- */
+
+package CDPL.Chem;
+
+/**
+ * \brief SMILESMolecularGraphWriter.
+ */
+public class SMILESMolecularGraphWriter extends MolecularGraphWriter {
+
+	/**
+	 * \brief __init__.
+	 * \param self The <tt>%SMILESMolecularGraphWriter</tt> instance.
+	 */
+	public None __init__(object self, Base.OStream os) {}
+}

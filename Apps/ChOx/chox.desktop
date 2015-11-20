@@ -1,0 +1,11 @@
+[Desktop Entry]
+Name=ChOx
+GenericName=Chemical Object Explorer
+Comment=Load and inspect chemical data files
+Exec=/usr/bin/chox
+Icon=/usr/share/pixmaps/chox.png
+Terminal=false
+MultipleArgs=false
+Type=Application
+Categories=Application;Science;
+StartupNotify=true

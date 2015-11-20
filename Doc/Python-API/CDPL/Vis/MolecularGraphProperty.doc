@@ -1,0 +1,109 @@
+/* -*- mode: java; tab-width: 4 -*- */
+
+package CDPL.Vis;
+
+/**
+ * \brief MolecularGraphProperty.
+ */
+public class MolecularGraphProperty extends Boost.Python.instance {
+
+	/**
+	 * \brief BOND_COLOR.
+	 */
+	public static Base.LookupKey BOND_COLOR;
+
+	/**
+	 * \brief TRIPLE_BOND_TRIM_LENGTH.
+	 */
+	public static Base.LookupKey TRIPLE_BOND_TRIM_LENGTH;
+
+	/**
+	 * \brief ATOM_LABEL_FONT.
+	 */
+	public static Base.LookupKey ATOM_LABEL_FONT;
+
+	/**
+	 * \brief DOUBLE_BOND_TRIM_LENGTH.
+	 */
+	public static Base.LookupKey DOUBLE_BOND_TRIM_LENGTH;
+
+	/**
+	 * \brief BOND_LABEL_FONT.
+	 */
+	public static Base.LookupKey BOND_LABEL_FONT;
+
+	/**
+	 * \brief BOND_LABEL_MARGIN.
+	 */
+	public static Base.LookupKey BOND_LABEL_MARGIN;
+
+	/**
+	 * \brief REACTION_CENTER_LINE_SPACING.
+	 */
+	public static Base.LookupKey REACTION_CENTER_LINE_SPACING;
+
+	/**
+	 * \brief BOND_LINE_SPACING.
+	 */
+	public static Base.LookupKey BOND_LINE_SPACING;
+
+	/**
+	 * \brief STEREO_BOND_HASH_SPACING.
+	 */
+	public static Base.LookupKey STEREO_BOND_HASH_SPACING;
+
+	/**
+	 * \brief BOND_LINE_WIDTH.
+	 */
+	public static Base.LookupKey BOND_LINE_WIDTH;
+
+	/**
+	 * \brief REACTION_CENTER_LINE_LENGTH.
+	 */
+	public static Base.LookupKey REACTION_CENTER_LINE_LENGTH;
+
+	/**
+	 * \brief ATOM_COLOR.
+	 */
+	public static Base.LookupKey ATOM_COLOR;
+
+	/**
+	 * \brief STEREO_BOND_WEDGE_WIDTH.
+	 */
+	public static Base.LookupKey STEREO_BOND_WEDGE_WIDTH;
+
+	/**
+	 * \brief ATOM_LABEL_MARGIN.
+	 */
+	public static Base.LookupKey ATOM_LABEL_MARGIN;
+
+	/**
+	 * \brief SECONDARY_ATOM_LABEL_FONT.
+	 */
+	public static Base.LookupKey SECONDARY_ATOM_LABEL_FONT;
+
+	/**
+	 * \brief BOND_LABEL_SIZE.
+	 */
+	public static Base.LookupKey BOND_LABEL_SIZE;
+
+	/**
+	 * \brief ATOM_COLOR_TABLE.
+	 */
+	public static Base.LookupKey ATOM_COLOR_TABLE;
+
+	/**
+	 * \brief SECONDARY_ATOM_LABEL_SIZE.
+	 */
+	public static Base.LookupKey SECONDARY_ATOM_LABEL_SIZE;
+
+	/**
+	 * \brief RADICAL_ELECTRON_DOT_SIZE.
+	 */
+	public static Base.LookupKey RADICAL_ELECTRON_DOT_SIZE;
+
+	/**
+	 * \brief ATOM_LABEL_SIZE.
+	 */
+	public static Base.LookupKey ATOM_LABEL_SIZE;
+}

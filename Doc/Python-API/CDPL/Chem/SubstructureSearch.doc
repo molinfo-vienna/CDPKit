@@ -1,0 +1,143 @@
+/* -*- mode: java; tab-width: 4 -*- */
+
+package CDPL.Chem;
+
+/**
+ * \brief SubstructureSearch.
+ */
+public class SubstructureSearch extends Boost.Python.instance {
+
+	/**
+	 * \brief __init__.
+	 * \param self The <tt>%SubstructureSearch</tt> instance.
+	 */
+	public None __init__(object self) {}
+
+	/**
+	 * \brief __init__.
+	 * \param self The <tt>%SubstructureSearch</tt> instance.
+	 */
+	public None __init__(object self, MolecularGraph query) {}
+
+	/**
+	 * \brief getObjectID.
+	 * \param self The <tt>%SubstructureSearch</tt> instance.
+	 */
+	public int getObjectID(SubstructureSearch self) {}
+
+	/**
+	 * \brief setMaxNumMappings.
+	 * \param self The <tt>%SubstructureSearch</tt> instance.
+	 */
+	public None setMaxNumMappings(SubstructureSearch self, int max_num_mappings) {}
+
+	/**
+	 * \brief addAtomMappingConstraint.
+	 * \param self The <tt>%SubstructureSearch</tt> instance.
+	 */
+	public None addAtomMappingConstraint(SubstructureSearch self, int query_atom_idx, int target_atom_idx) {}
+
+	/**
+	 * \brief clearAtomMappingConstraints.
+	 * \param self The <tt>%SubstructureSearch</tt> instance.
+	 */
+	public None clearAtomMappingConstraints(SubstructureSearch self) {}
+
+	/**
+	 * \brief clearBondMappingConstraints.
+	 * \param self The <tt>%SubstructureSearch</tt> instance.
+	 */
+	public None clearBondMappingConstraints(SubstructureSearch self) {}
+
+	/**
+	 * \brief uniqueMappingsOnly.
+	 * \param self The <tt>%SubstructureSearch</tt> instance.
+	 */
+	public None uniqueMappingsOnly(SubstructureSearch self, bool unique) {}
+
+	/**
+	 * \brief uniqueMappingsOnly.
+	 * \param self The <tt>%SubstructureSearch</tt> instance.
+	 */
+	public bool uniqueMappingsOnly(SubstructureSearch self) {}
+
+	/**
+	 * \brief getMaxNumMappings.
+	 * \param self The <tt>%SubstructureSearch</tt> instance.
+	 */
+	public int getMaxNumMappings(SubstructureSearch self) {}
+
+	/**
+	 * \brief mappingExists.
+	 * \param self The <tt>%SubstructureSearch</tt> instance.
+	 */
+	public bool mappingExists(SubstructureSearch self, MolecularGraph target) {}
+
+	/**
+	 * \brief getMapping.
+	 * \param self The <tt>%SubstructureSearch</tt> instance.
+	 */
+	public AtomBondMapping getMapping(SubstructureSearch self, int idx) {}
+
+	/**
+	 * \brief addBondMappingConstraint.
+	 * \param self The <tt>%SubstructureSearch</tt> instance.
+	 */
+	public None addBondMappingConstraint(SubstructureSearch self, int query_bond_idx, int target_bond_idx) {}
+
+	/**
+	 * \brief findMappings.
+	 * \param self The <tt>%SubstructureSearch</tt> instance.
+	 */
+	public bool findMappings(SubstructureSearch self, MolecularGraph target) {}
+
+	/**
+	 * \brief setQuery.
+	 * \param self The <tt>%SubstructureSearch</tt> instance.
+	 */
+	public None setQuery(SubstructureSearch self, MolecularGraph query) {}
+
+	/**
+	 * \brief getNumMappings.
+	 * \param self The <tt>%SubstructureSearch</tt> instance.
+	 */
+	public int getNumMappings(SubstructureSearch self) {}
+
+	/**
+	 * \brief __len__.
+	 * \param self The <tt>%SubstructureSearch</tt> instance.
+	 */
+	public int __len__(SubstructureSearch self) {}
+
+	/**
+	 * \brief __getitem__.
+	 * \param self The <tt>%SubstructureSearch</tt> instance.
+	 */
+	public AtomBondMapping __getitem__(SubstructureSearch self, int idx) {}
+
+	/**
+	 * \brief __nonzero__.
+	 * \param self The <tt>%SubstructureSearch</tt> instance.
+	 */
+	public bool __nonzero__(SubstructureSearch arg1, MolecularGraph self) {}
+
+	/**
+	 * \brief objectID.
+	 */
+	public None objectID;
+
+	/**
+	 * \brief uniqueMappings.
+	 */
+	public None uniqueMappings;
+
+	/**
+	 * \brief maxNumMappings.
+	 */
+	public None maxNumMappings;
+
+	/**
+	 * \brief numMappings.
+	 */
+	public None numMappings;
+}

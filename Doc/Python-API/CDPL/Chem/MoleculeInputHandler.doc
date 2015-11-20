@@ -1,0 +1,38 @@
+/* -*- mode: java; tab-width: 4 -*- */
+
+package CDPL.Chem;
+
+/**
+ * \brief MoleculeInputHandler.
+ */
+public class MoleculeInputHandler extends Boost.Python.instance {
+
+	/**
+	 * \brief __init__.
+	 * \param self The <tt>%MoleculeInputHandler</tt> instance.
+	 */
+	public None __init__(object self) {}
+
+	/**
+	 * \brief getDataFormat.
+	 * \param self The <tt>%MoleculeInputHandler</tt> instance.
+	 */
+	public Base.DataFormat getDataFormat(MoleculeInputHandler self) {}
+
+	/**
+	 * \brief getObjectID.
+	 * \param self The <tt>%MoleculeInputHandler</tt> instance.
+	 */
+	public int getObjectID(MoleculeInputHandler self) {}
+
+	/**
+	 * \brief createReader.
+	 * \param self The <tt>%MoleculeInputHandler</tt> instance.
+	 */
+	public MoleculeReader createReader(MoleculeInputHandler self, Base.IStream is) {}
+
+	/**
+	 * \brief objectID.
+	 */
+	public None objectID;
+}

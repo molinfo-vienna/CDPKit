@@ -1,0 +1,21 @@
+/* -*- mode: java; tab-width: 4 -*- */
+
+package CDPL.Chem;
+
+/**
+ * \brief BasicAtom.
+ */
+public class BasicAtom extends Atom {
+
+	/**
+	 * \brief assign.
+	 * \param self The <tt>%BasicAtom</tt> instance.
+	 */
+	public Atom assign(Atom self, Atom atom) {}
+
+	/**
+	 * \brief assign.
+	 * \param self The <tt>%BasicAtom</tt> instance.
+	 */
+	public BasicAtom assign(BasicAtom self, BasicAtom atom) {}
+}

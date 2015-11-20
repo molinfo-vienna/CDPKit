@@ -1,0 +1,38 @@
+/* -*- mode: java; tab-width: 4 -*- */
+
+package CDPL.Chem;
+
+/**
+ * \brief ReactionPropertyFunctor.
+ */
+public class ReactionPropertyFunctor extends Boost.Python.instance {
+
+	/**
+	 * \brief __init__.
+	 * \param self The <tt>%ReactionPropertyFunctor</tt> instance.
+	 */
+	public None __init__(object self) {}
+
+	/**
+	 * \brief getObjectID.
+	 * \param self The <tt>%ReactionPropertyFunctor</tt> instance.
+	 */
+	public int getObjectID(ReactionPropertyFunctor self) {}
+
+	/**
+	 * \brief addDependency.
+	 * \param self The <tt>%ReactionPropertyFunctor</tt> instance.
+	 */
+	public None addDependency(ReactionPropertyFunctor self, Base.PropertyContainer cntnr1, Base.PropertyKey key1, Base.PropertyContainer cntnr2, Base.PropertyKey key2) {}
+
+	/**
+	 * \brief __call__.
+	 * \param self The <tt>%ReactionPropertyFunctor</tt> instance.
+	 */
+	public Base.Variant __call__(ReactionPropertyFunctor self, Base.PropertyKey key, Reaction rxn) {}
+
+	/**
+	 * \brief objectID.
+	 */
+	public None objectID;
+}

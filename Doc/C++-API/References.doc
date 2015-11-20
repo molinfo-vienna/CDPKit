@@ -1,0 +1,428 @@
+/**
+
+\page References References and Further Reading
+
+<table border="0">
+
+<tr>
+<td valign="top">\anchor AUCOR<i>[AUCOR]</i></td>
+<td valign="top">
+G. Moreau, P. Broto, The Autocorrelation of a Topological Structure: A New Molecular Descriptor, 
+<i>Nouv. J. Chim.</i> <b>1980</b>, 4, 359-360
+</td>
+</tr>
+<tr><td></td>
+<td valign="top">
+G. Moreau, P. Broto, Autocorrelation of Molecular Structures, Application to SAR Studies, 
+<i>Nouv. J. Chim.</i> <b>1980</b>, 4, 757-764
+</td>
+</tr>
+
+<tr>
+<td valign="top">\anchor BOOST<i>[BOOST]</i></td>
+<td valign="top">
+Boost C++ Libraries homepage: http://www.boost.org/
+</td>
+</tr>
+
+<tr>
+<td valign="top">\anchor BALD<i>[BALD]</i></td>
+<td valign="top">
+R. Balducci, R. S. Pearlman, Efficient exact solution of the ring perception problem, 
+<i>J. Chem. Inf. Comput. Sci.</i> <b>1994</b>, 34, 822-831
+</td>
+</tr>
+
+<tr>
+<td valign="top">\anchor BANY<i>[BANY]</i></td>
+<td valign="top">
+Boost.Any documentation: http://www.boost.org/doc/html/any.html
+</td>
+</tr>
+
+<tr>
+<td valign="top">\anchor BCUT<i>[BCUT]</i></td>
+<td valign="top">
+R. S. Pearlman, K. M. SMith, Novel Software Tools for Chemical Diversity, 
+<i>Persp. Drug Disc. Design</i> <b>1998</b>, 9, 339-353
+</td>
+</tr>
+
+<tr>
+<td valign="top">\anchor BDBS<i>[BDBS]</i></td>
+<td valign="top">
+Boost \c dynamic_bitset documentation: http://www.boost.org/libs/dynamic_bitset/dynamic_bitset.html
+</td>
+</tr>
+
+<tr>
+<td valign="top">\anchor BFUN<i>[BFUN]</i></td>
+<td valign="top">
+Boost.Function documentation: http://www.boost.org/doc/html/function.html
+</td>
+</tr>
+
+<tr>
+<td valign="top">\anchor BSHPTR<i>[BSHPTR]</i></td>
+<td valign="top">
+Boost \c shared_ptr documentation: http://www.boost.org/libs/smart_ptr/shared_ptr.htm
+</td>
+</tr>
+
+<tr>
+<td valign="top">\anchor BUBLAS<i>[BUBLAS]</i></td>
+<td valign="top">
+Boost.uBLAS documentation: http://www.boost.org/libs/numeric/ublas/doc/index.htm
+</td>
+</tr>
+
+<tr>
+<td valign="top">\anchor BURMA<i>[BURMA]</i></td>
+<td valign="top">
+F. R. Burden, Molecular identification number for substructure searches, 
+<i>J. Chem. Inf. Comput. Sci.</i> <b>1989</b>, 29, 225–227
+</td>
+</tr>
+
+<tr>
+<td valign="top">\anchor CAIRO<i>[CAIRO]</i></td>
+<td valign="top">
+Cairo 2D Graphics Library homepage: http://www.cairographics.org/
+</td>
+</tr>
+
+<tr>
+<td valign="top">\anchor CTFILE<i>[CTFILE]</i></td>
+<td valign="top">
+MDL CTFile Formats Specification download page: http://www.mdli.com/downloads/public/ctfile/ctfile.jsp
+</td>
+</tr>
+<tr><td></td>
+<td valign="top">
+A. Dalby <i>et al.</i>,
+Description of several chemical structure file formats used by computer programs developed at Molecular Design Limited,
+<i>J. Chem. Inf. Comput. Sci.</i> <b>1992</b>, 32, 244-255
+</td>
+</tr>
+
+<tr>
+<td valign="top">\anchor PDB<i>[PDB]</i></td>
+<td valign="top">
+Protein Data Bank File Format Documentation page: http://www.wwpdb.org/docs.html
+</td>
+</tr>
+
+<tr>
+<td valign="top">\anchor CITB<i>[CITB]</i></td>
+<td valign="top">
+Chemoinformatics - A Textbook; Johann Gasteiger and Thomas Engel (Eds.), WILEY-VCH, ISBN 3-527-30681-1
+</td>
+</tr>
+
+<tr>
+<td valign="top">\anchor DTPFP<i>[DTPFP]</i></td>
+<td valign="top">
+Daylight Fingerprint Theory website: http://www.daylight.com/dayhtml/doc/theory/theory.finger.html
+</td>
+</tr>
+
+<tr>
+<td valign="top">\anchor HANSER<i>[HANSER]</i></td>
+<td valign="top">
+Th. Hanser, Ph. Jauffret, G. Kaufmann, A New Algorithm for Exhaustive Ring Perception in a Molecular Graph, 
+<i>J. Chem. Inf. Comput. Sci.</i> <b>1996</b>, 36, 1146-1152
+</td>
+</tr>
+
+<tr>
+<td valign="top">\anchor HBMD<i>[HBMD]</i></td>
+<td valign="top">
+Handbook of Molecular Descriptors, by R. Todeschini and V. Consonni; 
+R. Mannhold, H. Kubinyi and H. Timmerman (Eds.), WILEY-VCH, ISBN 3-52-29913-0
+</td>
+</tr>
+
+<tr>
+<td valign="top">\anchor INCHI<i>[INCHI]</i></td>
+<td valign="top">
+Official IUPAC International Chemical Identifier website: http://www.iupac.org/inchi/
+</td>
+</tr>
+<tr><td></td>
+<td valign="top">
+Wikipedia article about InChI: http://en.wikipedia.org/wiki/inchi
+</td>
+</tr>
+
+<tr>
+<td valign="top">\anchor JME<i>[JME]</i></td>
+<td valign="top">
+JME Molecular Editor website: http://www.molinspiration.com/jme/
+</td>
+</tr>
+
+<tr>
+<td valign="top">\anchor LOGS<i>[LOGS]</i></td>
+<td valign="top">
+T. J. Hou, K. Xia, W. Zhang, X. J. Xu, ADME Evaluation in Drug Discovery. 4. Prediction of Aqueous Solubility Based on
+Atom Contribution Approach, <i>J. Chem. Inf. Comput. Sci.</i> <b>2004</b>, 44, 266-275
+</td>
+</tr>
+
+<tr>
+<td valign="top">\anchor MCKAY<i>[MCKAY]</i></td>
+<td valign="top">
+B. D. McKay, Practical graph isomorphism, 10th Manitoba Conference on Numerical Mathematics and Computing (Winnipeg, 1980), 
+<i>Congressus Numerantium</i> <b>1981</b>, 30, 45-87
+</td>
+</tr>
+
+<tr>
+<td valign="top">\anchor MCPLX<i>[MCPLX]</i></td>
+<td valign="top">
+J. B. Hendrickson, P. Huang, A. G. Toczko, Molecular complexity: a simplified formula adapted to individual atoms, 
+<i>J. Chem. Inf. Comput. Sci.</i> <b>1987</b>, 27, 63-67 
+</td>
+</tr>
+
+<tr>
+<td valign="top">\anchor MCSA<i>[MCSA]</i></td>
+<td valign="top">
+D. M. Bayada, R. W. Simpson, A. P. Johnson, C. Laurenco, An Algorithm for the Multiple Common Subgraph Problem,
+<i>J. Chem. Inf. Comput. Sci.</i> <b>1992</b>, 32, 680–685
+</td>
+</tr>
+
+<tr>
+<td valign="top">\anchor MCASA<i>[MCASA]</i></td>
+<td valign="top">
+H. Bunke, P. Foggia, C. Guidobaldi, C. Sansone, M. Vento, A Comparison of Algorithms for Maximum Common Subgraph on Randomly Connected Graphs,
+in Structural, Syntactic, and Statistical Pattern Recognition -
+Joint IAPR International Workshops SSPR 2002 and SPR 2002 Proceedings (Windsor, Ontario, Canada, 2002), 123-132;
+Springer Berlin/Heidelberg, ISBN 978-3-540-44011-6
+</td>
+</tr>
+
+<tr>
+<td valign="top">\anchor MCESA<i>[MCESA]</i></td>
+<td valign="top">
+J. W. Raymond, E. J. Gardiner, P. Willett, Heuristics for Similarity Searching of Chemical Graphs Using a Maximum Common Edge Subgraph Algorithm,
+<i>J. Chem. Inf. Comput. Sci.</i>,<b>2002</b>, 42, 305–316
+</td>
+</tr>
+
+<tr>
+<td valign="top">\anchor MHASH<i>[MHASH]</i></td>
+<td valign="top">
+W.-D. Ihlenfeldt, J. Gasteiger, Hash Codes for the Identification and Classification of Molecular Structure Elements,
+<i>J. Comput. Chem.</i> <b>1994</b>, 15, 793-813
+</td>
+</tr>
+
+<tr>
+<td valign="top">\anchor MOCAN<i>[MOCAN]</i></td>
+<td valign="top">
+H. L. Morgan, The Generation of a Unique Machine Description for Chemical Structures - A Technique Developed at Chemical Abstracts Service, 
+<i>J. Chem. Doc.</i> <b>1965</b>, 5, 107-113
+</td>
+</tr>
+
+<tr>
+<td valign="top">\anchor NRIC<i>[NRIC]</i></td>
+<td valign="top">
+Numerical Recipes in C: The Art of Scientific Computing, Second Edition, by W. H. Press <i>et al.</i>; Cambridge University Press,
+ISBN 0-521-43108-5, http://www.nr.com/
+</td>
+</tr>
+
+<tr>
+<td valign="top">\anchor PEOE<i>[PEOE]</i></td>
+<td valign="top">
+J. Gasteiger, M. Marsili, Iterative Partial Equalization of Orbital Electronegativity - A Rapid Access to Atomic Charges,
+<i>Tetrahedron</i> <b>1980</b>, 36, 3219-3228)
+</td>
+</tr>
+
+<tr>
+<td valign="top">\anchor QTDOC<i>[QTDOC]</i></td>
+<td valign="top">
+Qt Online Reference Documentation: http://doc.trolltech.com/
+</td>
+</tr>
+
+<tr>
+<td valign="top">\anchor SMARTS<i>[SMARTS]</i></td>
+<td valign="top">
+Daylight SMARTS Theory website: http://www.daylight.com/dayhtml/doc/theory/theory.smarts.html
+</td>
+</tr>
+
+<tr>
+<td valign="top">\anchor PDB<i>[PDB]</i></td>
+<td valign="top">
+PDB File-Format Specification website: http://www.wwpdb.org/docs.html
+</td>
+</tr>
+
+<tr>
+<td valign="top">\anchor SMILES<i>[SMILES]</i></td>
+<td valign="top">
+Daylight SMILES Theory website: http://www.daylight.com/dayhtml/doc/theory/theory.smiles.html
+</td>
+</tr>
+<tr><td></td>
+<td valign="top">
+D. Weininger,
+SMILES, a chemical language and information system. 1. Introduction to methodology and encoding rules,
+<i>J. Chem. Inf. Comput. Sci.</i> <b>1988</b>, 28, 31-36
+</td>
+</tr>
+<tr><td></td>
+<td valign="top">
+D. Weininger, A. Weininger and J. L. Weininger, 
+SMILES. 2. Algorithm for generation of unique SMILES notation,
+<i>J. Chem. Inf. Comput. Sci.</i> <b>1989</b>, 29, 97-101
+</td>
+</tr>
+
+<tr>
+<td valign="top">\anchor STLRAI<i>[STLRAI]</i></td>
+<td valign="top">
+Random Access Iterator concept definition: http://www.sgi.com/tech/stl/RandomAccessIterator.html
+</td>
+</tr>
+
+<tr>
+<td valign="top">\anchor TCIP<i>[TCIP]</i></td>
+<td valign="top">
+P. Labute, An Efficient Algorithm For The Determination Of Topological RS Chirality, 
+<i>Journal of the Chemical Computing Group</i> <b>1996</b>, http://www.chemcomp.com/journal/chiral.htm
+</td>
+</tr>
+
+<tr>
+<td valign="top">\anchor TOPSY<i>[TOPSY]</i></td>
+<td valign="top">
+Z. Ouyang, S. Yuan, J. Brandt, C. Zheng, An Effective Topological Symmetry Perception and Unique Numbering Algorithm, 
+<i>J. Chem. Inf. Comput. Sci.</i> <b>1999</b>, 39, 299–303
+</td>
+</tr>
+
+<tr>
+<td valign="top">\anchor TPSA<i>[TPSA]</i></td>
+<td valign="top">
+P. Ertl, B. Rohde, P. Selzer, Fast calculation of molecular polar surface area as a sum of fragment based contributions 
+and its application to the prediction of drug transport properties, <i>J. Med. Chem.</i> <b>2000</b>, 43, 3714-3717
+</td>
+</tr>
+
+<tr>
+<td valign="top">\anchor VFLIB2<i>[VFLIB2]</i></td>
+<td valign="top">
+P. Foggia, C. Sansone, M. Vento, An Improved Algorithm for Matching Large Graphs, 3rd IAPR-TC15 Workshop on Graph-based Representations (Ischia, 2001),
+http://amalfi.dis.unina.it/graph/db/papers/vf-algorithm.pdf
+</td>
+</tr>
+
+<tr>
+<td valign="top">\anchor WHAM<i>[WHAM]</i></td>
+<td valign="top">
+Wikipedia article about the Hamming Distance: http://en.wikipedia.org/wiki/Hamming_distance
+</td>
+</tr>
+
+<tr>
+<td valign="top">\anchor WJACO<i>[WJACO]</i></td>
+<td valign="top">
+Wikipedia article about Jacobi's Eigenvalue Algorithm: http://en.wikipedia.org/wiki/Jacobi_eigenvalue_algorithm
+</td>
+</tr>
+
+<tr>
+<td valign="top">\anchor WLIREG<i>[WLIREG]</i></td>
+<td valign="top">
+Wikipedia article about Linear Regression: http://en.wikipedia.org/wiki/Linear_regression
+</td>
+</tr>
+
+<tr>
+<td valign="top">\anchor WLSQRS<i>[WLSQRS]</i></td>
+<td valign="top">
+Wikipedia article about Least Squares Analysis: http://en.wikipedia.org/wiki/Least_squares
+</td>
+</tr>
+
+<tr>
+<td valign="top">\anchor WMVC<i>[WMVC]</i></td>
+<td valign="top">
+Wikipedia article about the Model-View-Controller concept: http://en.wikipedia.org/wiki/Model-view-controller
+</td>
+</tr>
+
+<tr>
+<td valign="top">\anchor WPDF<i>[WPDF]</i></td>
+<td valign="top">
+Wikipedia article about the Adobe Portable Document Format: http://en.wikipedia.org/wiki/PDF
+</td>
+</tr>
+
+<tr>
+<td valign="top">\anchor WPNG<i>[WPNG]</i></td>
+<td valign="top">
+Wikipedia article about the Portable Network Graphics format: http://en.wikipedia.org/wiki/Portable_Network_Graphics
+</td>
+</tr>
+
+<tr>
+<td valign="top">\anchor WPS<i>[WPS]</i></td>
+<td valign="top">
+Wikipedia article about the PostScript format: http://en.wikipedia.org/wiki/PostScript
+</td>
+</tr>
+
+<tr>
+<td valign="top">\anchor WSHA<i>[WSHA]</i></td>
+<td valign="top">
+Wikipedia article about SHA hash functions: http://en.wikipedia.org/wiki/Sha1
+</td>
+</tr>
+
+<tr>
+<td valign="top">\anchor WSKF<i>[WSKF]</i></td>
+<td valign="top">
+Wikipedia article about Skeletal Formulas of chemical compounds: http://en.wikipedia.org/wiki/Skeletal_formula
+</td>
+</tr>
+
+<tr>
+<td valign="top">\anchor WSTF<i>[WSTF]</i></td>
+<td valign="top">
+Wikipedia article about Structural Formulas of chemical compounds: http://en.wikipedia.org/wiki/Structural_formula
+</td>
+</tr>
+
+<tr>
+<td valign="top">\anchor WSVD<i>[WSVD]</i></td>
+<td valign="top">
+Wikipedia article about Singular Value Decomposition: http://en.wikipedia.org/wiki/Singular_value_decomposition
+</td>
+</tr>
+
+<tr>
+<td valign="top">\anchor WSVG<i>[WSVG]</i></td>
+<td valign="top">
+Wikipedia article about the Scalable Vector Graphics format: http://en.wikipedia.org/wiki/SVG
+</td>
+</tr>
+
+<tr>
+<td valign="top">\anchor XLOGP<i>[XLOGP]</i></td>
+<td valign="top">
+R. Wang, Y. Gao, L. Lai, Calculation of the partition coefficient by an atom-additive method, 
+<i>Persp. Drug Disc. Design</i> <b>2000</b>, 19, 47-66
+</td>
+</tr>
+
+</table>
+
+*/

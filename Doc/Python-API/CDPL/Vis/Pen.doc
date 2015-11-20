@@ -1,0 +1,285 @@
+/* -*- mode: java; tab-width: 4 -*- */
+
+package CDPL.Vis;
+
+/**
+ * \brief Pen.
+ */
+public class Pen extends Boost.Python.instance {
+
+	/**
+	 * \brief CapStyle.
+	 */
+	public static class CapStyle extends Boost.Python.enum {
+
+		/**
+		 * \brief FLAT_CAP.
+		 */
+		public static CapStyle FLAT_CAP;
+
+		/**
+		 * \brief SQUARE_CAP.
+		 */
+		public static CapStyle SQUARE_CAP;
+
+		/**
+		 * \brief ROUND_CAP.
+		 */
+		public static CapStyle ROUND_CAP;
+	}
+
+	/**
+	 * \brief See CapStyle.FLAT_CAP.
+	 */
+	public static Pen.CapStyle FLAT_CAP;
+
+	/**
+	 * \brief See CapStyle.SQUARE_CAP.
+	 */
+	public static Pen.CapStyle SQUARE_CAP;
+
+	/**
+	 * \brief See CapStyle.ROUND_CAP.
+	 */
+	public static Pen.CapStyle ROUND_CAP;
+
+	/**
+	 * \brief LineStyle.
+	 */
+	public static class LineStyle extends Boost.Python.enum {
+
+		/**
+		 * \brief NO_LINE.
+		 */
+		public static LineStyle NO_LINE;
+
+		/**
+		 * \brief SOLID_LINE.
+		 */
+		public static LineStyle SOLID_LINE;
+
+		/**
+		 * \brief DASH_LINE.
+		 */
+		public static LineStyle DASH_LINE;
+
+		/**
+		 * \brief DOT_LINE.
+		 */
+		public static LineStyle DOT_LINE;
+
+		/**
+		 * \brief DASH_DOT_LINE.
+		 */
+		public static LineStyle DASH_DOT_LINE;
+
+		/**
+		 * \brief DASH_DOT_DOT_LINE.
+		 */
+		public static LineStyle DASH_DOT_DOT_LINE;
+	}
+
+	/**
+	 * \brief See LineStyle.NO_LINE.
+	 */
+	public static Pen.LineStyle NO_LINE;
+
+	/**
+	 * \brief See LineStyle.SOLID_LINE.
+	 */
+	public static Pen.LineStyle SOLID_LINE;
+
+	/**
+	 * \brief See LineStyle.DASH_LINE.
+	 */
+	public static Pen.LineStyle DASH_LINE;
+
+	/**
+	 * \brief See LineStyle.DOT_LINE.
+	 */
+	public static Pen.LineStyle DOT_LINE;
+
+	/**
+	 * \brief See LineStyle.DASH_DOT_LINE.
+	 */
+	public static Pen.LineStyle DASH_DOT_LINE;
+
+	/**
+	 * \brief See LineStyle.DASH_DOT_DOT_LINE.
+	 */
+	public static Pen.LineStyle DASH_DOT_DOT_LINE;
+
+	/**
+	 * \brief JoinStyle.
+	 */
+	public static class JoinStyle extends Boost.Python.enum {
+
+		/**
+		 * \brief MITER_JOIN.
+		 */
+		public static JoinStyle MITER_JOIN;
+
+		/**
+		 * \brief BEVEL_JOIN.
+		 */
+		public static JoinStyle BEVEL_JOIN;
+
+		/**
+		 * \brief ROUND_JOIN.
+		 */
+		public static JoinStyle ROUND_JOIN;
+	}
+
+	/**
+	 * \brief See JoinStyle.MITER_JOIN.
+	 */
+	public static Pen.JoinStyle MITER_JOIN;
+
+	/**
+	 * \brief See JoinStyle.BEVEL_JOIN.
+	 */
+	public static Pen.JoinStyle BEVEL_JOIN;
+
+	/**
+	 * \brief See JoinStyle.ROUND_JOIN.
+	 */
+	public static Pen.JoinStyle ROUND_JOIN;
+
+	/**
+	 * \brief __init__.
+	 * \param self The <tt>%Pen</tt> instance.
+	 */
+	public None __init__(object self) {}
+
+	/**
+	 * \brief __init__.
+	 * \param self The <tt>%Pen</tt> instance.
+	 */
+	public None __init__(object self, Pen pen) {}
+
+	/**
+	 * \brief __init__.
+	 * \param self The <tt>%Pen</tt> instance.
+	 */
+	public None __init__(object self, LineStyle line_style) {}
+
+	/**
+	 * \brief __init__.
+	 * \param self The <tt>%Pen</tt> instance.
+	 */
+	public None __init__(object self, Color color, float width = 1.0, LineStyle line_style = CDPL.Vis._vis.LineStyle.SOLID_LINE, CapStyle cap_style = CDPL.Vis._vis.CapStyle.ROUND_CAP, JoinStyle join_style = CDPL.Vis._vis.JoinStyle.ROUND_JOIN) {}
+
+	/**
+	 * \brief getObjectID.
+	 * \param self The <tt>%Pen</tt> instance.
+	 */
+	public int getObjectID(Pen self) {}
+
+	/**
+	 * \brief setCapStyle.
+	 * \param self The <tt>%Pen</tt> instance.
+	 */
+	public None setCapStyle(Pen self, CapStyle cap_style) {}
+
+	/**
+	 * \brief setLineStyle.
+	 * \param self The <tt>%Pen</tt> instance.
+	 */
+	public None setLineStyle(Pen self, LineStyle line_style) {}
+
+	/**
+	 * \brief setWidth.
+	 * \param self The <tt>%Pen</tt> instance.
+	 */
+	public None setWidth(Pen self, float width) {}
+
+	/**
+	 * \brief getJoinStyle.
+	 * \param self The <tt>%Pen</tt> instance.
+	 */
+	public JoinStyle getJoinStyle(Pen self) {}
+
+	/**
+	 * \brief setJoinStyle.
+	 * \param self The <tt>%Pen</tt> instance.
+	 */
+	public None setJoinStyle(Pen self, JoinStyle join_style) {}
+
+	/**
+	 * \brief getCapStyle.
+	 * \param self The <tt>%Pen</tt> instance.
+	 */
+	public CapStyle getCapStyle(Pen self) {}
+
+	/**
+	 * \brief setColor.
+	 * \param self The <tt>%Pen</tt> instance.
+	 */
+	public None setColor(Pen self, Color color) {}
+
+	/**
+	 * \brief getWidth.
+	 * \param self The <tt>%Pen</tt> instance.
+	 */
+	public float getWidth(Pen self) {}
+
+	/**
+	 * \brief getLineStyle.
+	 * \param self The <tt>%Pen</tt> instance.
+	 */
+	public LineStyle getLineStyle(Pen self) {}
+
+	/**
+	 * \brief getColor.
+	 * \param self The <tt>%Pen</tt> instance.
+	 */
+	public Color getColor(Pen self) {}
+
+	/**
+	 * \brief assign.
+	 * \param self The <tt>%Pen</tt> instance.
+	 */
+	public Pen assign(Pen self, Pen pen) {}
+
+	/**
+	 * \brief __ne__.
+	 * \param self The <tt>%Pen</tt> instance.
+	 */
+	public bool __ne__(Pen self, Pen pen) {}
+
+	/**
+	 * \brief __eq__.
+	 * \param self The <tt>%Pen</tt> instance.
+	 */
+	public bool __eq__(Pen self, Pen pen) {}
+
+	/**
+	 * \brief objectID.
+	 */
+	public None objectID;
+
+	/**
+	 * \brief color.
+	 */
+	public None color;
+
+	/**
+	 * \brief joinStyle.
+	 */
+	public None joinStyle;
+
+	/**
+	 * \brief width.
+	 */
+	public None width;
+
+	/**
+	 * \brief capStyle.
+	 */
+	public None capStyle;
+
+	/**
+	 * \brief lineStyle.
+	 */
+	public None lineStyle;
+}

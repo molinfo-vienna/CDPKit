@@ -1,0 +1,27 @@
+/* -*- mode: java; tab-width: 4 -*- */
+
+package CDPL.Chem;
+
+/**
+ * \brief ANDBondMatchExpressionList.
+ */
+public class ANDBondMatchExpressionList extends BondMatchExpressionList {
+
+	/**
+	 * \brief __init__.
+	 * \param self The <tt>%ANDBondMatchExpressionList</tt> instance.
+	 */
+	public None __init__(object self) {}
+
+	/**
+	 * \brief __init__.
+	 * \param self The <tt>%ANDBondMatchExpressionList</tt> instance.
+	 */
+	public None __init__(object self, ANDBondMatchExpressionList expr) {}
+
+	/**
+	 * \brief assign.
+	 * \param self The <tt>%ANDBondMatchExpressionList</tt> instance.
+	 */
+	public ANDBondMatchExpressionList assign(ANDBondMatchExpressionList self, ANDBondMatchExpressionList expr) {}
+}

@@ -1,0 +1,27 @@
+/* -*- mode: java; tab-width: 4 -*- */
+
+package CDPL.Chem;
+
+/**
+ * \brief ORReactionMatchExpressionList.
+ */
+public class ORReactionMatchExpressionList extends ReactionMatchExpressionList {
+
+	/**
+	 * \brief __init__.
+	 * \param self The <tt>%ORReactionMatchExpressionList</tt> instance.
+	 */
+	public None __init__(object self) {}
+
+	/**
+	 * \brief __init__.
+	 * \param self The <tt>%ORReactionMatchExpressionList</tt> instance.
+	 */
+	public None __init__(object self, ORReactionMatchExpressionList expr) {}
+
+	/**
+	 * \brief assign.
+	 * \param self The <tt>%ORReactionMatchExpressionList</tt> instance.
+	 */
+	public ORReactionMatchExpressionList assign(ORReactionMatchExpressionList self, ORReactionMatchExpressionList expr) {}
+}

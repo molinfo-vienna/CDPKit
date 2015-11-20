@@ -1,0 +1,858 @@
+/* -*- mode: java; tab-width: 4 -*- */
+
+package CDPL.Math;
+
+/**
+ * \brief column.
+ */
+ConstFMatrixColumn column(ConstFMatrixExpression e, int i) {}
+
+/**
+ * \brief column.
+ */
+ConstDMatrixColumn column(ConstDMatrixExpression e, int i) {}
+
+/**
+ * \brief column.
+ */
+ConstLMatrixColumn column(ConstLMatrixExpression e, int i) {}
+
+/**
+ * \brief column.
+ */
+ConstULMatrixColumn column(ConstULMatrixExpression e, int i) {}
+
+/**
+ * \brief column.
+ */
+FMatrixColumn column(FMatrixExpression e, int i) {}
+
+/**
+ * \brief column.
+ */
+DMatrixColumn column(DMatrixExpression e, int i) {}
+
+/**
+ * \brief column.
+ */
+LMatrixColumn column(LMatrixExpression e, int i) {}
+
+/**
+ * \brief column.
+ */
+ULMatrixColumn column(ULMatrixExpression e, int i) {}
+
+/**
+ * \brief conj.
+ */
+ConstFQuaternionExpression conj(ConstFQuaternionExpression e) {}
+
+/**
+ * \brief conj.
+ */
+ConstDQuaternionExpression conj(ConstDQuaternionExpression e) {}
+
+/**
+ * \brief conj.
+ */
+ConstLQuaternionExpression conj(ConstLQuaternionExpression e) {}
+
+/**
+ * \brief conj.
+ */
+ConstULQuaternionExpression conj(ConstULQuaternionExpression e) {}
+
+/**
+ * \brief elemDiv.
+ */
+ConstFQuaternionExpression elemDiv(ConstFQuaternionExpression e1, ConstFQuaternionExpression e2) {}
+
+/**
+ * \brief elemDiv.
+ */
+ConstDQuaternionExpression elemDiv(ConstDQuaternionExpression e1, ConstDQuaternionExpression e2) {}
+
+/**
+ * \brief elemDiv.
+ */
+ConstLQuaternionExpression elemDiv(ConstLQuaternionExpression e1, ConstLQuaternionExpression e2) {}
+
+/**
+ * \brief elemDiv.
+ */
+ConstULQuaternionExpression elemDiv(ConstULQuaternionExpression e1, ConstULQuaternionExpression e2) {}
+
+/**
+ * \brief elemProd.
+ */
+ConstFQuaternionExpression elemProd(ConstFQuaternionExpression e1, ConstFQuaternionExpression e2) {}
+
+/**
+ * \brief elemProd.
+ */
+ConstDQuaternionExpression elemProd(ConstDQuaternionExpression e1, ConstDQuaternionExpression e2) {}
+
+/**
+ * \brief elemProd.
+ */
+ConstLQuaternionExpression elemProd(ConstLQuaternionExpression e1, ConstLQuaternionExpression e2) {}
+
+/**
+ * \brief elemProd.
+ */
+ConstULQuaternionExpression elemProd(ConstULQuaternionExpression e1, ConstULQuaternionExpression e2) {}
+
+/**
+ * \brief equals.
+ */
+bool equals(ConstFQuaternionExpression e1, ConstFQuaternionExpression e2, float eps) {}
+
+/**
+ * \brief equals.
+ */
+bool equals(ConstDQuaternionExpression e1, ConstDQuaternionExpression e2, float eps) {}
+
+/**
+ * \brief equals.
+ */
+bool equals(ConstLQuaternionExpression e1, ConstLQuaternionExpression e2, int eps) {}
+
+/**
+ * \brief inv.
+ */
+ConstFQuaternionExpression inv(ConstFQuaternionExpression e) {}
+
+/**
+ * \brief inv.
+ */
+ConstDQuaternionExpression inv(ConstDQuaternionExpression e) {}
+
+/**
+ * \brief inv.
+ */
+ConstLQuaternionExpression inv(ConstLQuaternionExpression e) {}
+
+/**
+ * \brief inv.
+ */
+ConstULQuaternionExpression inv(ConstULQuaternionExpression e) {}
+
+/**
+ * \brief norm.
+ */
+float norm(ConstFQuaternionExpression e) {}
+
+/**
+ * \brief norm.
+ */
+float norm(ConstDQuaternionExpression e) {}
+
+/**
+ * \brief norm.
+ */
+int norm(ConstLQuaternionExpression e) {}
+
+/**
+ * \brief norm.
+ */
+int norm(ConstULQuaternionExpression e) {}
+
+/**
+ * \brief norm2.
+ */
+float norm2(ConstFQuaternionExpression e) {}
+
+/**
+ * \brief norm2.
+ */
+float norm2(ConstDQuaternionExpression e) {}
+
+/**
+ * \brief norm2.
+ */
+int norm2(ConstLQuaternionExpression e) {}
+
+/**
+ * \brief norm2.
+ */
+int norm2(ConstULQuaternionExpression e) {}
+
+/**
+ * \brief quat.
+ */
+ConstFVectorQuaternionAdapter quat(ConstFVectorExpression e) {}
+
+/**
+ * \brief quat.
+ */
+ConstDVectorQuaternionAdapter quat(ConstDVectorExpression e) {}
+
+/**
+ * \brief quat.
+ */
+ConstLVectorQuaternionAdapter quat(ConstLVectorExpression e) {}
+
+/**
+ * \brief quat.
+ */
+ConstULVectorQuaternionAdapter quat(ConstULVectorExpression e) {}
+
+/**
+ * \brief quat.
+ */
+FVectorQuaternionAdapter quat(FVectorExpression e) {}
+
+/**
+ * \brief quat.
+ */
+DVectorQuaternionAdapter quat(DVectorExpression e) {}
+
+/**
+ * \brief quat.
+ */
+LVectorQuaternionAdapter quat(LVectorExpression e) {}
+
+/**
+ * \brief quat.
+ */
+ULVectorQuaternionAdapter quat(ULVectorExpression e) {}
+
+/**
+ * \brief quat.
+ */
+FRealQuaternion quat(float t) {}
+
+/**
+ * \brief quat.
+ */
+LRealQuaternion quat(int t) {}
+
+/**
+ * \brief quat.
+ */
+FQuaternion quat(float t1, float t2) {}
+
+/**
+ * \brief quat.
+ */
+LQuaternion quat(int t1, int t2) {}
+
+/**
+ * \brief quat.
+ */
+FQuaternion quat(float t1, float t2, float t3) {}
+
+/**
+ * \brief quat.
+ */
+LQuaternion quat(int t1, int t2, int t3) {}
+
+/**
+ * \brief quat.
+ */
+FQuaternion quat(float t1, float t2, float t3, float t4) {}
+
+/**
+ * \brief quat.
+ */
+LQuaternion quat(int t1, int t2, int t3, int t4) {}
+
+/**
+ * \brief range.
+ */
+Range range(int start, int stop) {}
+
+/**
+ * \brief range.
+ */
+ConstFVectorRange range(ConstFVectorExpression e, Range r) {}
+
+/**
+ * \brief range.
+ */
+ConstFVectorRange range(ConstFVectorExpression e, int start, int stop) {}
+
+/**
+ * \brief range.
+ */
+ConstDVectorRange range(ConstDVectorExpression e, Range r) {}
+
+/**
+ * \brief range.
+ */
+ConstDVectorRange range(ConstDVectorExpression e, int start, int stop) {}
+
+/**
+ * \brief range.
+ */
+ConstLVectorRange range(ConstLVectorExpression e, Range r) {}
+
+/**
+ * \brief range.
+ */
+ConstLVectorRange range(ConstLVectorExpression e, int start, int stop) {}
+
+/**
+ * \brief range.
+ */
+ConstULVectorRange range(ConstULVectorExpression e, Range r) {}
+
+/**
+ * \brief range.
+ */
+ConstULVectorRange range(ConstULVectorExpression e, int start, int stop) {}
+
+/**
+ * \brief range.
+ */
+FVectorRange range(FVectorExpression e, Range r) {}
+
+/**
+ * \brief range.
+ */
+FVectorRange range(FVectorExpression e, int start, int stop) {}
+
+/**
+ * \brief range.
+ */
+DVectorRange range(DVectorExpression e, Range r) {}
+
+/**
+ * \brief range.
+ */
+DVectorRange range(DVectorExpression e, int start, int stop) {}
+
+/**
+ * \brief range.
+ */
+LVectorRange range(LVectorExpression e, Range r) {}
+
+/**
+ * \brief range.
+ */
+LVectorRange range(LVectorExpression e, int start, int stop) {}
+
+/**
+ * \brief range.
+ */
+ULVectorRange range(ULVectorExpression e, Range r) {}
+
+/**
+ * \brief range.
+ */
+ULVectorRange range(ULVectorExpression e, int start, int stop) {}
+
+/**
+ * \brief range.
+ */
+ConstFMatrixRange range(ConstFMatrixExpression e, Range r1, Range r2) {}
+
+/**
+ * \brief range.
+ */
+ConstFMatrixRange range(ConstFMatrixExpression e, int start1, int stop1, int start2, int stop2) {}
+
+/**
+ * \brief range.
+ */
+ConstDMatrixRange range(ConstDMatrixExpression e, Range r1, Range r2) {}
+
+/**
+ * \brief range.
+ */
+ConstDMatrixRange range(ConstDMatrixExpression e, int start1, int stop1, int start2, int stop2) {}
+
+/**
+ * \brief range.
+ */
+ConstLMatrixRange range(ConstLMatrixExpression e, Range r1, Range r2) {}
+
+/**
+ * \brief range.
+ */
+ConstLMatrixRange range(ConstLMatrixExpression e, int start1, int stop1, int start2, int stop2) {}
+
+/**
+ * \brief range.
+ */
+ConstULMatrixRange range(ConstULMatrixExpression e, Range r1, Range r2) {}
+
+/**
+ * \brief range.
+ */
+ConstULMatrixRange range(ConstULMatrixExpression e, int start1, int stop1, int start2, int stop2) {}
+
+/**
+ * \brief range.
+ */
+FMatrixRange range(FMatrixExpression e, Range r1, Range r2) {}
+
+/**
+ * \brief range.
+ */
+FMatrixRange range(FMatrixExpression e, int start1, int stop1, int start2, int stop2) {}
+
+/**
+ * \brief range.
+ */
+DMatrixRange range(DMatrixExpression e, Range r1, Range r2) {}
+
+/**
+ * \brief range.
+ */
+DMatrixRange range(DMatrixExpression e, int start1, int stop1, int start2, int stop2) {}
+
+/**
+ * \brief range.
+ */
+LMatrixRange range(LMatrixExpression e, Range r1, Range r2) {}
+
+/**
+ * \brief range.
+ */
+LMatrixRange range(LMatrixExpression e, int start1, int stop1, int start2, int stop2) {}
+
+/**
+ * \brief range.
+ */
+ULMatrixRange range(ULMatrixExpression e, Range r1, Range r2) {}
+
+/**
+ * \brief range.
+ */
+ULMatrixRange range(ULMatrixExpression e, int start1, int stop1, int start2, int stop2) {}
+
+/**
+ * \brief real.
+ */
+float real(ConstFQuaternionExpression e) {}
+
+/**
+ * \brief real.
+ */
+float real(ConstDQuaternionExpression e) {}
+
+/**
+ * \brief real.
+ */
+int real(ConstLQuaternionExpression e) {}
+
+/**
+ * \brief real.
+ */
+int real(ConstULQuaternionExpression e) {}
+
+/**
+ * \brief row.
+ */
+ConstFMatrixRow row(ConstFMatrixExpression e, int i) {}
+
+/**
+ * \brief row.
+ */
+ConstDMatrixRow row(ConstDMatrixExpression e, int i) {}
+
+/**
+ * \brief row.
+ */
+ConstLMatrixRow row(ConstLMatrixExpression e, int i) {}
+
+/**
+ * \brief row.
+ */
+ConstULMatrixRow row(ConstULMatrixExpression e, int i) {}
+
+/**
+ * \brief row.
+ */
+FMatrixRow row(FMatrixExpression e, int i) {}
+
+/**
+ * \brief row.
+ */
+DMatrixRow row(DMatrixExpression e, int i) {}
+
+/**
+ * \brief row.
+ */
+LMatrixRow row(LMatrixExpression e, int i) {}
+
+/**
+ * \brief row.
+ */
+ULMatrixRow row(ULMatrixExpression e, int i) {}
+
+/**
+ * \brief slice.
+ */
+Slice slice(int start, int stride, int size) {}
+
+/**
+ * \brief slice.
+ */
+ConstFVectorSlice slice(ConstFVectorExpression e, Slice s) {}
+
+/**
+ * \brief slice.
+ */
+ConstFVectorSlice slice(ConstFVectorExpression e, int start, int stride, int size) {}
+
+/**
+ * \brief slice.
+ */
+ConstDVectorSlice slice(ConstDVectorExpression e, Slice s) {}
+
+/**
+ * \brief slice.
+ */
+ConstDVectorSlice slice(ConstDVectorExpression e, int start, int stride, int size) {}
+
+/**
+ * \brief slice.
+ */
+ConstLVectorSlice slice(ConstLVectorExpression e, Slice s) {}
+
+/**
+ * \brief slice.
+ */
+ConstLVectorSlice slice(ConstLVectorExpression e, int start, int stride, int size) {}
+
+/**
+ * \brief slice.
+ */
+ConstULVectorSlice slice(ConstULVectorExpression e, Slice s) {}
+
+/**
+ * \brief slice.
+ */
+ConstULVectorSlice slice(ConstULVectorExpression e, int start, int stride, int size) {}
+
+/**
+ * \brief slice.
+ */
+FVectorSlice slice(FVectorExpression e, Slice s) {}
+
+/**
+ * \brief slice.
+ */
+FVectorSlice slice(FVectorExpression e, int start, int stride, int size) {}
+
+/**
+ * \brief slice.
+ */
+DVectorSlice slice(DVectorExpression e, Slice s) {}
+
+/**
+ * \brief slice.
+ */
+DVectorSlice slice(DVectorExpression e, int start, int stride, int size) {}
+
+/**
+ * \brief slice.
+ */
+LVectorSlice slice(LVectorExpression e, Slice s) {}
+
+/**
+ * \brief slice.
+ */
+LVectorSlice slice(LVectorExpression e, int start, int stride, int size) {}
+
+/**
+ * \brief slice.
+ */
+ULVectorSlice slice(ULVectorExpression e, Slice s) {}
+
+/**
+ * \brief slice.
+ */
+ULVectorSlice slice(ULVectorExpression e, int start, int stride, int size) {}
+
+/**
+ * \brief slice.
+ */
+ConstFMatrixSlice slice(ConstFMatrixExpression e, Slice s1, Slice s2) {}
+
+/**
+ * \brief slice.
+ */
+ConstFMatrixSlice slice(ConstFMatrixExpression e, int start1, int stride1, int size1, int start2, int stride2, int size2) {}
+
+/**
+ * \brief slice.
+ */
+ConstDMatrixSlice slice(ConstDMatrixExpression e, Slice s1, Slice s2) {}
+
+/**
+ * \brief slice.
+ */
+ConstDMatrixSlice slice(ConstDMatrixExpression e, int start1, int stride1, int size1, int start2, int stride2, int size2) {}
+
+/**
+ * \brief slice.
+ */
+ConstLMatrixSlice slice(ConstLMatrixExpression e, Slice s1, Slice s2) {}
+
+/**
+ * \brief slice.
+ */
+ConstLMatrixSlice slice(ConstLMatrixExpression e, int start1, int stride1, int size1, int start2, int stride2, int size2) {}
+
+/**
+ * \brief slice.
+ */
+ConstULMatrixSlice slice(ConstULMatrixExpression e, Slice s1, Slice s2) {}
+
+/**
+ * \brief slice.
+ */
+ConstULMatrixSlice slice(ConstULMatrixExpression e, int start1, int stride1, int size1, int start2, int stride2, int size2) {}
+
+/**
+ * \brief slice.
+ */
+FMatrixSlice slice(FMatrixExpression e, Slice s1, Slice s2) {}
+
+/**
+ * \brief slice.
+ */
+FMatrixSlice slice(FMatrixExpression e, int start1, int stride1, int size1, int start2, int stride2, int size2) {}
+
+/**
+ * \brief slice.
+ */
+DMatrixSlice slice(DMatrixExpression e, Slice s1, Slice s2) {}
+
+/**
+ * \brief slice.
+ */
+DMatrixSlice slice(DMatrixExpression e, int start1, int stride1, int size1, int start2, int stride2, int size2) {}
+
+/**
+ * \brief slice.
+ */
+LMatrixSlice slice(LMatrixExpression e, Slice s1, Slice s2) {}
+
+/**
+ * \brief slice.
+ */
+LMatrixSlice slice(LMatrixExpression e, int start1, int stride1, int size1, int start2, int stride2, int size2) {}
+
+/**
+ * \brief slice.
+ */
+ULMatrixSlice slice(ULMatrixExpression e, Slice s1, Slice s2) {}
+
+/**
+ * \brief slice.
+ */
+ULMatrixSlice slice(ULMatrixExpression e, int start1, int stride1, int size1, int start2, int stride2, int size2) {}
+
+/**
+ * \brief sum.
+ */
+float sum(ConstFQuaternionExpression e) {}
+
+/**
+ * \brief sum.
+ */
+float sum(ConstDQuaternionExpression e) {}
+
+/**
+ * \brief sum.
+ */
+int sum(ConstLQuaternionExpression e) {}
+
+/**
+ * \brief sum.
+ */
+int sum(ConstULQuaternionExpression e) {}
+
+/**
+ * \brief trans.
+ */
+ConstFMatrixTranspose trans(ConstFMatrixExpression e) {}
+
+/**
+ * \brief trans.
+ */
+ConstDMatrixTranspose trans(ConstDMatrixExpression e) {}
+
+/**
+ * \brief trans.
+ */
+ConstLMatrixTranspose trans(ConstLMatrixExpression e) {}
+
+/**
+ * \brief trans.
+ */
+ConstULMatrixTranspose trans(ConstULMatrixExpression e) {}
+
+/**
+ * \brief trans.
+ */
+FMatrixTranspose trans(FMatrixExpression e) {}
+
+/**
+ * \brief trans.
+ */
+DMatrixTranspose trans(DMatrixExpression e) {}
+
+/**
+ * \brief trans.
+ */
+LMatrixTranspose trans(LMatrixExpression e) {}
+
+/**
+ * \brief trans.
+ */
+ULMatrixTranspose trans(ULMatrixExpression e) {}
+
+/**
+ * \brief triang.
+ */
+ConstUpperTriangularFMatrixAdapter triang(ConstFMatrixExpression e, Upper type) {}
+
+/**
+ * \brief triang.
+ */
+ConstUnitUpperTriangularFMatrixAdapter triang(ConstFMatrixExpression e, UnitUpper type) {}
+
+/**
+ * \brief triang.
+ */
+ConstLowerTriangularFMatrixAdapter triang(ConstFMatrixExpression e, Lower type) {}
+
+/**
+ * \brief triang.
+ */
+ConstUnitLowerTriangularFMatrixAdapter triang(ConstFMatrixExpression e, UnitLower type) {}
+
+/**
+ * \brief triang.
+ */
+ConstUpperTriangularDMatrixAdapter triang(ConstDMatrixExpression e, Upper type) {}
+
+/**
+ * \brief triang.
+ */
+ConstUnitUpperTriangularDMatrixAdapter triang(ConstDMatrixExpression e, UnitUpper type) {}
+
+/**
+ * \brief triang.
+ */
+ConstLowerTriangularDMatrixAdapter triang(ConstDMatrixExpression e, Lower type) {}
+
+/**
+ * \brief triang.
+ */
+ConstUnitLowerTriangularDMatrixAdapter triang(ConstDMatrixExpression e, UnitLower type) {}
+
+/**
+ * \brief triang.
+ */
+ConstUpperTriangularLMatrixAdapter triang(ConstLMatrixExpression e, Upper type) {}
+
+/**
+ * \brief triang.
+ */
+ConstUnitUpperTriangularLMatrixAdapter triang(ConstLMatrixExpression e, UnitUpper type) {}
+
+/**
+ * \brief triang.
+ */
+ConstLowerTriangularLMatrixAdapter triang(ConstLMatrixExpression e, Lower type) {}
+
+/**
+ * \brief triang.
+ */
+ConstUnitLowerTriangularLMatrixAdapter triang(ConstLMatrixExpression e, UnitLower type) {}
+
+/**
+ * \brief triang.
+ */
+ConstUpperTriangularULMatrixAdapter triang(ConstULMatrixExpression e, Upper type) {}
+
+/**
+ * \brief triang.
+ */
+ConstUnitUpperTriangularULMatrixAdapter triang(ConstULMatrixExpression e, UnitUpper type) {}
+
+/**
+ * \brief triang.
+ */
+ConstLowerTriangularULMatrixAdapter triang(ConstULMatrixExpression e, Lower type) {}
+
+/**
+ * \brief triang.
+ */
+ConstUnitLowerTriangularULMatrixAdapter triang(ConstULMatrixExpression e, UnitLower type) {}
+
+/**
+ * \brief unreal.
+ */
+ConstFQuaternionExpression unreal(ConstFQuaternionExpression e) {}
+
+/**
+ * \brief unreal.
+ */
+ConstDQuaternionExpression unreal(ConstDQuaternionExpression e) {}
+
+/**
+ * \brief unreal.
+ */
+ConstLQuaternionExpression unreal(ConstLQuaternionExpression e) {}
+
+/**
+ * \brief unreal.
+ */
+ConstULQuaternionExpression unreal(ConstULQuaternionExpression e) {}
+
+/**
+ * \brief vec.
+ */
+ConstFQuaternionVectorAdapter vec(ConstFQuaternionExpression e) {}
+
+/**
+ * \brief vec.
+ */
+ConstDQuaternionVectorAdapter vec(ConstDQuaternionExpression e) {}
+
+/**
+ * \brief vec.
+ */
+ConstLQuaternionVectorAdapter vec(ConstLQuaternionExpression e) {}
+
+/**
+ * \brief vec.
+ */
+ConstULQuaternionVectorAdapter vec(ConstULQuaternionExpression e) {}
+
+/**
+ * \brief vec.
+ */
+Vector2F vec(float t1, float t2) {}
+
+/**
+ * \brief vec.
+ */
+Vector2L vec(int t1, int t2) {}
+
+/**
+ * \brief vec.
+ */
+Vector3F vec(float t1, float t2, float t3) {}
+
+/**
+ * \brief vec.
+ */
+Vector3L vec(int t1, int t2, int t3) {}
+
+/**
+ * \brief vec.
+ */
+Vector4F vec(float t1, float t2, float t3, float t4) {}
+
+/**
+ * \brief vec.
+ */
+Vector4L vec(int t1, int t2, int t3, int t4) {}

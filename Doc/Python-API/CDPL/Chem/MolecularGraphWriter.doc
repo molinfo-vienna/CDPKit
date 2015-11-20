@@ -1,0 +1,27 @@
+/* -*- mode: java; tab-width: 4 -*- */
+
+package CDPL.Chem;
+
+/**
+ * \brief MolecularGraphWriter.
+ */
+public class MolecularGraphWriter extends Base.DataIOBase {
+
+	/**
+	 * \brief __init__.
+	 * \param self The <tt>%MolecularGraphWriter</tt> instance.
+	 */
+	public None __init__(object self) {}
+
+	/**
+	 * \brief write.
+	 * \param self The <tt>%MolecularGraphWriter</tt> instance.
+	 */
+	public MolecularGraphWriter write(MolecularGraphWriter self, MolecularGraph molgraph) {}
+
+	/**
+	 * \brief __nonzero__.
+	 * \param self The <tt>%MolecularGraphWriter</tt> instance.
+	 */
+	public bool __nonzero__(MolecularGraphWriter self) {}
+}

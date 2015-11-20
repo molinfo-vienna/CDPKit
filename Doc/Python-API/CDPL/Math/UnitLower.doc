@@ -1,0 +1,21 @@
+/* -*- mode: java; tab-width: 4 -*- */
+
+package CDPL.Math;
+
+/**
+ * \brief UnitLower.
+ */
+public class UnitLower extends Boost.Python.instance {
+
+	/**
+	 * \brief __init__.
+	 * \param self The <tt>%UnitLower</tt> instance.
+	 */
+	public None __init__(object self) {}
+
+	/**
+	 * \brief __init__.
+	 * \param self The <tt>%UnitLower</tt> instance.
+	 */
+	public None __init__(object self, UnitLower t) {}
+}

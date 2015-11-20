@@ -1,0 +1,109 @@
+/* -*- mode: java; tab-width: 4 -*- */
+
+package CDPL.Vis;
+
+/**
+ * \brief ReactionProperty.
+ */
+public class ReactionProperty extends Boost.Python.instance {
+
+	/**
+	 * \brief AGENT_LAYOUT_DIRECTION.
+	 */
+	public static Base.LookupKey AGENT_LAYOUT_DIRECTION;
+
+	/**
+	 * \brief PLUS_SIGN_SIZE.
+	 */
+	public static Base.LookupKey PLUS_SIGN_SIZE;
+
+	/**
+	 * \brief SHOW_REACTANTS.
+	 */
+	public static Base.LookupKey SHOW_REACTANTS;
+
+	/**
+	 * \brief PLUS_SIGN_LINE_WIDTH.
+	 */
+	public static Base.LookupKey PLUS_SIGN_LINE_WIDTH;
+
+	/**
+	 * \brief COMPONENT_MARGIN.
+	 */
+	public static Base.LookupKey COMPONENT_MARGIN;
+
+	/**
+	 * \brief ARROW_LINE_WIDTH.
+	 */
+	public static Base.LookupKey ARROW_LINE_WIDTH;
+
+	/**
+	 * \brief ARROW_STYLE.
+	 */
+	public static Base.LookupKey ARROW_STYLE;
+
+	/**
+	 * \brief PLUS_SIGN_COLOR.
+	 */
+	public static Base.LookupKey PLUS_SIGN_COLOR;
+
+	/**
+	 * \brief AGENT_ALIGNMENT.
+	 */
+	public static Base.LookupKey AGENT_ALIGNMENT;
+
+	/**
+	 * \brief SHOW_PRODUCTS.
+	 */
+	public static Base.LookupKey SHOW_PRODUCTS;
+
+	/**
+	 * \brief ARROW_HEAD_WIDTH.
+	 */
+	public static Base.LookupKey ARROW_HEAD_WIDTH;
+
+	/**
+	 * \brief ARROW_COLOR.
+	 */
+	public static Base.LookupKey ARROW_COLOR;
+
+	/**
+	 * \brief SHOW_AGENTS.
+	 */
+	public static Base.LookupKey SHOW_AGENTS;
+
+	/**
+	 * \brief ARROW_HEAD_LENGTH.
+	 */
+	public static Base.LookupKey ARROW_HEAD_LENGTH;
+
+	/**
+	 * \brief AGENT_LAYOUT.
+	 */
+	public static Base.LookupKey AGENT_LAYOUT;
+
+	/**
+	 * \brief COMPONENT_LAYOUT.
+	 */
+	public static Base.LookupKey COMPONENT_LAYOUT;
+
+	/**
+	 * \brief ARROW_LENGTH.
+	 */
+	public static Base.LookupKey ARROW_LENGTH;
+
+	/**
+	 * \brief ARROW_SHAFT_WIDTH.
+	 */
+	public static Base.LookupKey ARROW_SHAFT_WIDTH;
+
+	/**
+	 * \brief COMPONENT_LAYOUT_DIRECTION.
+	 */
+	public static Base.LookupKey COMPONENT_LAYOUT_DIRECTION;
+
+	/**
+	 * \brief SHOW_PLUS_SIGNS.
+	 */
+	public static Base.LookupKey SHOW_PLUS_SIGNS;
+}

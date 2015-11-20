@@ -1,0 +1,21 @@
+/* -*- mode: java; tab-width: 4 -*- */
+
+package CDPL.Util;
+
+/**
+ * \brief ConstantValue.
+ */
+public class ConstantValue extends object {
+
+	/**
+	 * \brief __init__.
+	 * \param self The <tt>%ConstantValue</tt> instance.
+	 */
+	public None __init__(ConstantValue self, object value) {}
+
+	/**
+	 * \brief __call__.
+	 * \param self The <tt>%ConstantValue</tt> instance.
+	 */
+	public object __call__(ConstantValue self, tuple *args) {}
+}

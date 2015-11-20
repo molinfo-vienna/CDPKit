@@ -1,0 +1,33 @@
+/* -*- mode: java; tab-width: 4 -*- */
+
+package CDPL.Base;
+
+/**
+ * \brief DataIOBase.
+ */
+public class DataIOBase extends ControlParameterContainer {
+
+	/**
+	 * \brief __init__.
+	 * \param self The <tt>%DataIOBase</tt> instance.
+	 */
+	public None __init__(object self) {}
+
+	/**
+	 * \brief invokeIOCallbacks.
+	 * \param self The <tt>%DataIOBase</tt> instance.
+	 */
+	public None invokeIOCallbacks(DataIOBase self) {}
+
+	/**
+	 * \brief registerIOCallback.
+	 * \param self The <tt>%DataIOBase</tt> instance.
+	 */
+	public int registerIOCallback(DataIOBase arg1, object func) {}
+
+	/**
+	 * \brief unregisterIOCallback.
+	 * \param self The <tt>%DataIOBase</tt> instance.
+	 */
+	public None unregisterIOCallback(DataIOBase self, int id) {}
+}

@@ -1,0 +1,101 @@
+/* -*- mode: java; tab-width: 4 -*- */
+
+package CDPL.Vis;
+
+/**
+ * \brief TextLabelPrimitive2D.
+ */
+public class TextLabelPrimitive2D extends GraphicsPrimitive2D {
+
+	/**
+	 * \brief __init__.
+	 * \param self The <tt>%TextLabelPrimitive2D</tt> instance.
+	 */
+	public None __init__(object self) {}
+
+	/**
+	 * \brief __init__.
+	 * \param self The <tt>%TextLabelPrimitive2D</tt> instance.
+	 */
+	public None __init__(object self, TextLabelPrimitive2D prim) {}
+
+	/**
+	 * \brief getFont.
+	 * \param self The <tt>%TextLabelPrimitive2D</tt> instance.
+	 */
+	public Font getFont(TextLabelPrimitive2D self) {}
+
+	/**
+	 * \brief setText.
+	 * \param self The <tt>%TextLabelPrimitive2D</tt> instance.
+	 */
+	public None setText(TextLabelPrimitive2D self, str txt) {}
+
+	/**
+	 * \brief getText.
+	 * \param self The <tt>%TextLabelPrimitive2D</tt> instance.
+	 */
+	public str getText(TextLabelPrimitive2D self) {}
+
+	/**
+	 * \brief assign.
+	 * \param self The <tt>%TextLabelPrimitive2D</tt> instance.
+	 */
+	public TextLabelPrimitive2D assign(TextLabelPrimitive2D self, TextLabelPrimitive2D prim) {}
+
+	/**
+	 * \brief getPosition.
+	 * \param self The <tt>%TextLabelPrimitive2D</tt> instance.
+	 */
+	public Math.Vector2D getPosition(TextLabelPrimitive2D self) {}
+
+	/**
+	 * \brief setPen.
+	 * \param self The <tt>%TextLabelPrimitive2D</tt> instance.
+	 */
+	public None setPen(TextLabelPrimitive2D self, Pen pen) {}
+
+	/**
+	 * \brief setFont.
+	 * \param self The <tt>%TextLabelPrimitive2D</tt> instance.
+	 */
+	public None setFont(TextLabelPrimitive2D self, Font font) {}
+
+	/**
+	 * \brief setPosition.
+	 * \param self The <tt>%TextLabelPrimitive2D</tt> instance.
+	 */
+	public None setPosition(TextLabelPrimitive2D self, Math.Vector2D pos) {}
+
+	/**
+	 * \brief setPosition.
+	 * \param self The <tt>%TextLabelPrimitive2D</tt> instance.
+	 */
+	public None setPosition(TextLabelPrimitive2D self, float x, float y) {}
+
+	/**
+	 * \brief getPen.
+	 * \param self The <tt>%TextLabelPrimitive2D</tt> instance.
+	 */
+	public Pen getPen(TextLabelPrimitive2D self) {}
+
+	/**
+	 * \brief font.
+	 */
+	public None font;
+
+	/**
+	 * \brief text.
+	 */
+	public None text;
+
+	/**
+	 * \brief pen.
+	 */
+	public None pen;
+
+	/**
+	 * \brief position.
+	 */
+	public None position;
+}

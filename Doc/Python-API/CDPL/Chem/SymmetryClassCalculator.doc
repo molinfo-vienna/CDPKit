@@ -1,0 +1,110 @@
+/* -*- mode: java; tab-width: 4 -*- */
+
+package CDPL.Chem;
+
+/**
+ * \brief SymmetryClassCalculator.
+ */
+public class SymmetryClassCalculator extends Boost.Python.instance {
+
+	/**
+	 * \brief DEF_ATOM_PROPERTY_FLAGS.
+	 */
+	public static int DEF_ATOM_PROPERTY_FLAGS = 158;
+
+	/**
+	 * \brief DEF_BOND_PROPERTY_FLAGS.
+	 */
+	public static int DEF_BOND_PROPERTY_FLAGS = 10;
+
+	/**
+	 * \brief __init__.
+	 * \param self The <tt>%SymmetryClassCalculator</tt> instance.
+	 */
+	public None __init__(object self) {}
+
+	/**
+	 * \brief __init__.
+	 * \param self The <tt>%SymmetryClassCalculator</tt> instance.
+	 */
+	public None __init__(object self, MolecularGraph molgraph) {}
+
+	/**
+	 * \brief includeImplicitHydrogens.
+	 * \param self The <tt>%SymmetryClassCalculator</tt> instance.
+	 */
+	public None includeImplicitHydrogens(SymmetryClassCalculator self, bool include) {}
+
+	/**
+	 * \brief getAtomPropertyFlags.
+	 * \param self The <tt>%SymmetryClassCalculator</tt> instance.
+	 */
+	public int getAtomPropertyFlags(SymmetryClassCalculator self) {}
+
+	/**
+	 * \brief getObjectID.
+	 * \param self The <tt>%SymmetryClassCalculator</tt> instance.
+	 */
+	public int getObjectID(SymmetryClassCalculator self) {}
+
+	/**
+	 * \brief getResult.
+	 * \param self The <tt>%SymmetryClassCalculator</tt> instance.
+	 */
+	public Util.STArray getResult(SymmetryClassCalculator self) {}
+
+	/**
+	 * \brief getBondPropertyFlags.
+	 * \param self The <tt>%SymmetryClassCalculator</tt> instance.
+	 */
+	public int getBondPropertyFlags(SymmetryClassCalculator self) {}
+
+	/**
+	 * \brief setBondPropertyFlags.
+	 * \param self The <tt>%SymmetryClassCalculator</tt> instance.
+	 */
+	public None setBondPropertyFlags(SymmetryClassCalculator self, int flags) {}
+
+	/**
+	 * \brief implicitHydrogensIncluded.
+	 * \param self The <tt>%SymmetryClassCalculator</tt> instance.
+	 */
+	public bool implicitHydrogensIncluded(SymmetryClassCalculator self) {}
+
+	/**
+	 * \brief setAtomPropertyFlags.
+	 * \param self The <tt>%SymmetryClassCalculator</tt> instance.
+	 */
+	public None setAtomPropertyFlags(SymmetryClassCalculator self, int flags) {}
+
+	/**
+	 * \brief calculate.
+	 * \param self The <tt>%SymmetryClassCalculator</tt> instance.
+	 */
+	public Util.STArray calculate(SymmetryClassCalculator self, MolecularGraph molgraph) {}
+
+	/**
+	 * \brief atomPropertyFlags.
+	 */
+	public None atomPropertyFlags;
+
+	/**
+	 * \brief objectID.
+	 */
+	public None objectID;
+
+	/**
+	 * \brief hydrogenComplete.
+	 */
+	public None hydrogenComplete;
+
+	/**
+	 * \brief bondPropertyFlags.
+	 */
+	public None bondPropertyFlags;
+
+	/**
+	 * \brief result.
+	 */
+	public None result;
+}

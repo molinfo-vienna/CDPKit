@@ -1,0 +1,154 @@
+/* -*- mode: java; tab-width: 4 -*- */
+
+package CDPL.Chem;
+
+/**
+ * \brief AtomProperty.
+ */
+public class AtomProperty extends Boost.Python.instance {
+
+	/**
+	 * \brief COORDINATES_3D.
+	 */
+	public static Base.LookupKey COORDINATES_3D;
+
+	/**
+	 * \brief SYMMETRY_CLASS.
+	 */
+	public static Base.LookupKey SYMMETRY_CLASS;
+
+	/**
+	 * \brief CIP_PRIORITY.
+	 */
+	public static Base.LookupKey CIP_PRIORITY;
+
+	/**
+	 * \brief SYMBOL.
+	 */
+	public static Base.LookupKey SYMBOL;
+
+	/**
+	 * \brief RING_FLAG.
+	 */
+	public static Base.LookupKey RING_FLAG;
+
+	/**
+	 * \brief MATCH_EXPRESSION_STRING.
+	 */
+	public static Base.LookupKey MATCH_EXPRESSION_STRING;
+
+	/**
+	 * \brief FORMAL_CHARGE.
+	 */
+	public static Base.LookupKey FORMAL_CHARGE;
+
+	/**
+	 * \brief HYBRIDIZATION.
+	 */
+	public static Base.LookupKey HYBRIDIZATION;
+
+	/**
+	 * \brief MORGAN_NUMBER.
+	 */
+	public static Base.LookupKey MORGAN_NUMBER;
+
+	/**
+	 * \brief CIP_CONFIGURATION.
+	 */
+	public static Base.LookupKey CIP_CONFIGURATION;
+
+	/**
+	 * \brief MDL_DB_STEREO_CARE_FLAG.
+	 */
+	public static Base.LookupKey MDL_DB_STEREO_CARE_FLAG;
+
+	/**
+	 * \brief ISOTOPE.
+	 */
+	public static Base.LookupKey ISOTOPE;
+
+	/**
+	 * \brief IMPLICIT_HYDROGEN_COUNT.
+	 */
+	public static Base.LookupKey IMPLICIT_HYDROGEN_COUNT;
+
+	/**
+	 * \brief MATCH_EXPRESSION.
+	 */
+	public static Base.LookupKey MATCH_EXPRESSION;
+
+	/**
+	 * \brief PEOE_CHARGE.
+	 */
+	public static Base.LookupKey PEOE_CHARGE;
+
+	/**
+	 * \brief RADICAL_TYPE.
+	 */
+	public static Base.LookupKey RADICAL_TYPE;
+
+	/**
+	 * \brief AROMATICITY_FLAG.
+	 */
+	public static Base.LookupKey AROMATICITY_FLAG;
+
+	/**
+	 * \brief REACTION_CENTER_STATUS.
+	 */
+	public static Base.LookupKey REACTION_CENTER_STATUS;
+
+	/**
+	 * \brief UNPAIRED_ELECTRON_COUNT.
+	 */
+	public static Base.LookupKey UNPAIRED_ELECTRON_COUNT;
+
+	/**
+	 * \brief MATCH_CONSTRAINTS.
+	 */
+	public static Base.LookupKey MATCH_CONSTRAINTS;
+
+	/**
+	 * \brief COORDINATES_2D.
+	 */
+	public static Base.LookupKey COORDINATES_2D;
+
+	/**
+	 * \brief STEREO_DESCRIPTOR.
+	 */
+	public static Base.LookupKey STEREO_DESCRIPTOR;
+
+	/**
+	 * \brief COMPONENT_GROUP_ID.
+	 */
+	public static Base.LookupKey COMPONENT_GROUP_ID;
+
+	/**
+	 * \brief CANONICAL_NUMBER.
+	 */
+	public static Base.LookupKey CANONICAL_NUMBER;
+
+	/**
+	 * \brief STEREO_CENTER_FLAG.
+	 */
+	public static Base.LookupKey STEREO_CENTER_FLAG;
+
+	/**
+	 * \brief NAME.
+	 */
+	public static Base.LookupKey NAME;
+
+	/**
+	 * \brief REACTION_ATOM_MAPPING_ID.
+	 */
+	public static Base.LookupKey REACTION_ATOM_MAPPING_ID;
+
+	/**
+	 * \brief TYPE.
+	 */
+	public static Base.LookupKey TYPE;
+
+	/**
+	 * \brief MDL_PARITY.
+	 */
+	public static Base.LookupKey MDL_PARITY;
+}

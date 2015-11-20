@@ -1,0 +1,93 @@
+/* -*- mode: java; tab-width: 4 -*- */
+
+package CDPL.Math;
+
+/**
+ * \brief ULMatrixExpression.
+ */
+public class ULMatrixExpression extends ConstULMatrixExpression {
+
+	/**
+	 * \brief setElement.
+	 * \param self The <tt>%ULMatrixExpression</tt> instance.
+	 */
+	public None setElement(ULMatrixExpression self, int i, int j, int v) {}
+
+	/**
+	 * \brief swap.
+	 * \param self The <tt>%ULMatrixExpression</tt> instance.
+	 */
+	public None swap(ULMatrixExpression self, ULMatrixExpression e) {}
+
+	/**
+	 * \brief assign.
+	 * \param self The <tt>%ULMatrixExpression</tt> instance.
+	 */
+	public ULMatrixExpression assign(ULMatrixExpression self, ULMatrixExpression e) {}
+
+	/**
+	 * \brief assign.
+	 * \param self The <tt>%ULMatrixExpression</tt> instance.
+	 */
+	public ULMatrixExpression assign(ULMatrixExpression self, ConstFMatrixExpression e) {}
+
+	/**
+	 * \brief assign.
+	 * \param self The <tt>%ULMatrixExpression</tt> instance.
+	 */
+	public ULMatrixExpression assign(ULMatrixExpression self, ConstDMatrixExpression e) {}
+
+	/**
+	 * \brief assign.
+	 * \param self The <tt>%ULMatrixExpression</tt> instance.
+	 */
+	public ULMatrixExpression assign(ULMatrixExpression self, ConstLMatrixExpression e) {}
+
+	/**
+	 * \brief assign.
+	 * \param self The <tt>%ULMatrixExpression</tt> instance.
+	 */
+	public ULMatrixExpression assign(ULMatrixExpression self, ConstULMatrixExpression e) {}
+
+	/**
+	 * \brief __isub__.
+	 * \param self The <tt>%ULMatrixExpression</tt> instance.
+	 */
+	public ULMatrixExpression __isub__(ULMatrixExpression self, ULMatrixExpression e) {}
+
+	/**
+	 * \brief __isub__.
+	 * \param self The <tt>%ULMatrixExpression</tt> instance.
+	 */
+	public ULMatrixExpression __isub__(ULMatrixExpression self, ConstULMatrixExpression e) {}
+
+	/**
+	 * \brief __imul__.
+	 * \param self The <tt>%ULMatrixExpression</tt> instance.
+	 */
+	public ULMatrixExpression __imul__(ULMatrixExpression self, int t) {}
+
+	/**
+	 * \brief __idiv__.
+	 * \param self The <tt>%ULMatrixExpression</tt> instance.
+	 */
+	public ULMatrixExpression __idiv__(ULMatrixExpression self, int t) {}
+
+	/**
+	 * \brief __iadd__.
+	 * \param self The <tt>%ULMatrixExpression</tt> instance.
+	 */
+	public ULMatrixExpression __iadd__(ULMatrixExpression self, ULMatrixExpression e) {}
+
+	/**
+	 * \brief __iadd__.
+	 * \param self The <tt>%ULMatrixExpression</tt> instance.
+	 */
+	public ULMatrixExpression __iadd__(ULMatrixExpression self, ConstULMatrixExpression e) {}
+
+	/**
+	 * \brief __setitem__.
+	 * \param self The <tt>%ULMatrixExpression</tt> instance.
+	 */
+	public None __setitem__(ULMatrixExpression self, tuple ij, int v) {}
+}

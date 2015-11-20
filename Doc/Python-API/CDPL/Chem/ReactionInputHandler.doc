@@ -1,0 +1,38 @@
+/* -*- mode: java; tab-width: 4 -*- */
+
+package CDPL.Chem;
+
+/**
+ * \brief ReactionInputHandler.
+ */
+public class ReactionInputHandler extends Boost.Python.instance {
+
+	/**
+	 * \brief __init__.
+	 * \param self The <tt>%ReactionInputHandler</tt> instance.
+	 */
+	public None __init__(object self) {}
+
+	/**
+	 * \brief getDataFormat.
+	 * \param self The <tt>%ReactionInputHandler</tt> instance.
+	 */
+	public Base.DataFormat getDataFormat(ReactionInputHandler self) {}
+
+	/**
+	 * \brief getObjectID.
+	 * \param self The <tt>%ReactionInputHandler</tt> instance.
+	 */
+	public int getObjectID(ReactionInputHandler self) {}
+
+	/**
+	 * \brief createReader.
+	 * \param self The <tt>%ReactionInputHandler</tt> instance.
+	 */
+	public ReactionReader createReader(ReactionInputHandler self, Base.IStream is) {}
+
+	/**
+	 * \brief objectID.
+	 */
+	public None objectID;
+}

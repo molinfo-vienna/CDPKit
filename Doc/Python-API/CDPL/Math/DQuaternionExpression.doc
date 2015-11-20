@@ -1,0 +1,147 @@
+/* -*- mode: java; tab-width: 4 -*- */
+
+package CDPL.Math;
+
+/**
+ * \brief DQuaternionExpression.
+ */
+public class DQuaternionExpression extends ConstDQuaternionExpression {
+
+	/**
+	 * \brief set.
+	 * \param self The <tt>%DQuaternionExpression</tt> instance.
+	 */
+	public None set(DQuaternionExpression self, float c1 = 0.0, float c2 = 0.0, float c3 = 0.0, float c4 = 0.0) {}
+
+	/**
+	 * \brief setC2.
+	 * \param self The <tt>%DQuaternionExpression</tt> instance.
+	 */
+	public None setC2(DQuaternionExpression self, float v) {}
+
+	/**
+	 * \brief setC1.
+	 * \param self The <tt>%DQuaternionExpression</tt> instance.
+	 */
+	public None setC1(DQuaternionExpression self, float v) {}
+
+	/**
+	 * \brief swap.
+	 * \param self The <tt>%DQuaternionExpression</tt> instance.
+	 */
+	public None swap(DQuaternionExpression self, DQuaternionExpression e) {}
+
+	/**
+	 * \brief setC4.
+	 * \param self The <tt>%DQuaternionExpression</tt> instance.
+	 */
+	public None setC4(DQuaternionExpression self, float v) {}
+
+	/**
+	 * \brief assign.
+	 * \param self The <tt>%DQuaternionExpression</tt> instance.
+	 */
+	public DQuaternionExpression assign(DQuaternionExpression self, DQuaternionExpression e) {}
+
+	/**
+	 * \brief assign.
+	 * \param self The <tt>%DQuaternionExpression</tt> instance.
+	 */
+	public DQuaternionExpression assign(DQuaternionExpression self, ConstFQuaternionExpression e) {}
+
+	/**
+	 * \brief assign.
+	 * \param self The <tt>%DQuaternionExpression</tt> instance.
+	 */
+	public DQuaternionExpression assign(DQuaternionExpression self, ConstDQuaternionExpression e) {}
+
+	/**
+	 * \brief assign.
+	 * \param self The <tt>%DQuaternionExpression</tt> instance.
+	 */
+	public DQuaternionExpression assign(DQuaternionExpression self, ConstLQuaternionExpression e) {}
+
+	/**
+	 * \brief assign.
+	 * \param self The <tt>%DQuaternionExpression</tt> instance.
+	 */
+	public DQuaternionExpression assign(DQuaternionExpression self, ConstULQuaternionExpression e) {}
+
+	/**
+	 * \brief setC3.
+	 * \param self The <tt>%DQuaternionExpression</tt> instance.
+	 */
+	public None setC3(DQuaternionExpression self, float v) {}
+
+	/**
+	 * \brief __isub__.
+	 * \param self The <tt>%DQuaternionExpression</tt> instance.
+	 */
+	public DQuaternionExpression __isub__(DQuaternionExpression self, float t) {}
+
+	/**
+	 * \brief __isub__.
+	 * \param self The <tt>%DQuaternionExpression</tt> instance.
+	 */
+	public DQuaternionExpression __isub__(DQuaternionExpression self, DQuaternionExpression e) {}
+
+	/**
+	 * \brief __isub__.
+	 * \param self The <tt>%DQuaternionExpression</tt> instance.
+	 */
+	public DQuaternionExpression __isub__(DQuaternionExpression self, ConstDQuaternionExpression q) {}
+
+	/**
+	 * \brief __imul__.
+	 * \param self The <tt>%DQuaternionExpression</tt> instance.
+	 */
+	public DQuaternionExpression __imul__(DQuaternionExpression self, float t) {}
+
+	/**
+	 * \brief __imul__.
+	 * \param self The <tt>%DQuaternionExpression</tt> instance.
+	 */
+	public DQuaternionExpression __imul__(DQuaternionExpression self, DQuaternionExpression e) {}
+
+	/**
+	 * \brief __imul__.
+	 * \param self The <tt>%DQuaternionExpression</tt> instance.
+	 */
+	public DQuaternionExpression __imul__(DQuaternionExpression self, ConstDQuaternionExpression q) {}
+
+	/**
+	 * \brief __idiv__.
+	 * \param self The <tt>%DQuaternionExpression</tt> instance.
+	 */
+	public DQuaternionExpression __idiv__(DQuaternionExpression self, float t) {}
+
+	/**
+	 * \brief __idiv__.
+	 * \param self The <tt>%DQuaternionExpression</tt> instance.
+	 */
+	public DQuaternionExpression __idiv__(DQuaternionExpression self, DQuaternionExpression e) {}
+
+	/**
+	 * \brief __idiv__.
+	 * \param self The <tt>%DQuaternionExpression</tt> instance.
+	 */
+	public DQuaternionExpression __idiv__(DQuaternionExpression self, ConstDQuaternionExpression q) {}
+
+	/**
+	 * \brief __iadd__.
+	 * \param self The <tt>%DQuaternionExpression</tt> instance.
+	 */
+	public DQuaternionExpression __iadd__(DQuaternionExpression self, float t) {}
+
+	/**
+	 * \brief __iadd__.
+	 * \param self The <tt>%DQuaternionExpression</tt> instance.
+	 */
+	public DQuaternionExpression __iadd__(DQuaternionExpression self, DQuaternionExpression e) {}
+
+	/**
+	 * \brief __iadd__.
+	 * \param self The <tt>%DQuaternionExpression</tt> instance.
+	 */
+	public DQuaternionExpression __iadd__(DQuaternionExpression self, ConstDQuaternionExpression q) {}
+}

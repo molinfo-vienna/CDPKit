@@ -1,0 +1,63 @@
+/* -*- mode: java; tab-width: 4 -*- */
+
+package CDPL.Chem;
+
+/**
+ * \brief MoleculeReader.
+ */
+public class MoleculeReader extends Base.DataIOBase {
+
+	/**
+	 * \brief __init__.
+	 * \param self The <tt>%MoleculeReader</tt> instance.
+	 */
+	public None __init__(object self) {}
+
+	/**
+	 * \brief getNumRecords.
+	 * \param self The <tt>%MoleculeReader</tt> instance.
+	 */
+	public int getNumRecords(MoleculeReader self) {}
+
+	/**
+	 * \brief read.
+	 * \param self The <tt>%MoleculeReader</tt> instance.
+	 */
+	public MoleculeReader read(MoleculeReader self, Molecule mol) {}
+
+	/**
+	 * \brief read.
+	 * \param self The <tt>%MoleculeReader</tt> instance.
+	 */
+	public MoleculeReader read(MoleculeReader self, int idx, Molecule mol) {}
+
+	/**
+	 * \brief skip.
+	 * \param self The <tt>%MoleculeReader</tt> instance.
+	 */
+	public MoleculeReader skip(MoleculeReader self) {}
+
+	/**
+	 * \brief hasMoreData.
+	 * \param self The <tt>%MoleculeReader</tt> instance.
+	 */
+	public bool hasMoreData(MoleculeReader self) {}
+
+	/**
+	 * \brief setRecordIndex.
+	 * \param self The <tt>%MoleculeReader</tt> instance.
+	 */
+	public None setRecordIndex(MoleculeReader self, int idx) {}
+
+	/**
+	 * \brief getRecordIndex.
+	 * \param self The <tt>%MoleculeReader</tt> instance.
+	 */
+	public int getRecordIndex(MoleculeReader self) {}
+
+	/**
+	 * \brief __nonzero__.
+	 * \param self The <tt>%MoleculeReader</tt> instance.
+	 */
+	public bool __nonzero__(MoleculeReader self) {}
+}

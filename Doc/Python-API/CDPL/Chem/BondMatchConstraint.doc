@@ -1,0 +1,79 @@
+/* -*- mode: java; tab-width: 4 -*- */
+
+package CDPL.Chem;
+
+/**
+ * \brief BondMatchConstraint.
+ */
+public class BondMatchConstraint extends Boost.Python.instance {
+
+	/**
+	 * \brief AROMATICITY.
+	 */
+	public static int AROMATICITY = 2;
+
+	/**
+	 * \brief ANY_ORDER.
+	 */
+	public static int ANY_ORDER = 15;
+
+	/**
+	 * \brief DIRECTION.
+	 */
+	public static int DIRECTION = 6;
+
+	/**
+	 * \brief REACTION_CENTER_STATUS.
+	 */
+	public static int REACTION_CENTER_STATUS = 7;
+
+	/**
+	 * \brief IGNORE_AROMATICITY.
+	 */
+	public static int IGNORE_AROMATICITY = 16;
+
+	/**
+	 * \brief RING_TOPOLOGY.
+	 */
+	public static int RING_TOPOLOGY = 3;
+
+	/**
+	 * \brief DIRECTION_CONFIG.
+	 */
+	public static int DIRECTION_CONFIG = 5;
+
+	/**
+	 * \brief AROMATIC.
+	 */
+	public static int AROMATIC = 8;
+
+	/**
+	 * \brief CONSTRAINT_LIST.
+	 */
+	public static int CONSTRAINT_LIST = 0;
+
+	/**
+	 * \brief SINGLE.
+	 */
+	public static int SINGLE = 1;
+
+	/**
+	 * \brief TRIPLE.
+	 */
+	public static int TRIPLE = 4;
+
+	/**
+	 * \brief DOUBLE.
+	 */
+	public static int DOUBLE = 2;
+
+	/**
+	 * \brief CONFIGURATION.
+	 */
+	public static int CONFIGURATION = 4;
+
+	/**
+	 * \brief ORDER.
+	 */
+	public static int ORDER = 1;
+}

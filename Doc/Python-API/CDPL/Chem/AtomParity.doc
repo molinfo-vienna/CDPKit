@@ -1,0 +1,34 @@
+/* -*- mode: java; tab-width: 4 -*- */
+
+package CDPL.Chem;
+
+/**
+ * \brief AtomParity.
+ */
+public class AtomParity extends Boost.Python.instance {
+
+	/**
+	 * \brief EVEN.
+	 */
+	public static int EVEN = 4;
+
+	/**
+	 * \brief UNDEF.
+	 */
+	public static int UNDEF = 0;
+
+	/**
+	 * \brief NONE.
+	 */
+	public static int NONE = 1;
+
+	/**
+	 * \brief EITHER.
+	 */
+	public static int EITHER = 8;
+
+	/**
+	 * \brief ODD.
+	 */
+	public static int ODD = 2;
+}

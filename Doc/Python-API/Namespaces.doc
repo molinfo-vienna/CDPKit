@@ -1,0 +1,27 @@
+/**
+
+\namespace CDPL 
+\brief The namespace of the Chemical Data Processing Library.
+
+\namespace CDPL::Chem 
+\brief Contains chemistry related classes and functions.
+
+\namespace CDPL::Base 
+\brief Contains core framework classes and functions.
+
+\namespace CDPL::Math 
+\brief Contains classes and functions related to mathematics.
+
+\namespace CDPL::Util 
+\brief Contains general purpose algorithms, containers, functors and other classes.
+
+\namespace CDPL::Vis
+\brief Contains classes and functions related to data visualization.
+
+\namespace CDPL::Vis::QtBackend
+\brief Contains classes related to the implementation of CDPL::Vis interfaces on top of the <em>Qt Toolkit</em> [\ref QTDOC].
+
+\namespace CDPL::Vis::CairoBackend
+\brief Contains classes related to the implementation of CDPL::Vis interfaces on top of the <em>Cairo 2D Graphics Library</em> [\ref CAIRO].
+
+*/

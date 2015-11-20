@@ -1,0 +1,114 @@
+/* -*- mode: java; tab-width: 4 -*- */
+
+package CDPL.Chem;
+
+/**
+ * \brief StereoDescriptor.
+ */
+public class StereoDescriptor extends Boost.Python.instance {
+
+	/**
+	 * \brief ReferenceAtomArray.
+	 */
+	public class ReferenceAtomArray extends Boost.Python.instance {
+
+		/**
+		 * \brief __getitem__.
+		 * \param self The <tt>%ReferenceAtomArray</tt> instance.
+		 */
+		public Atom __getitem__(ReferenceAtomArray self, int idx) {}
+
+		/**
+		 * \brief __contains__.
+		 * \param self The <tt>%ReferenceAtomArray</tt> instance.
+		 */
+		public bool __contains__(ReferenceAtomArray self, Atom atom) {}
+
+		/**
+		 * \brief __len__.
+		 * \param self The <tt>%ReferenceAtomArray</tt> instance.
+		 */
+		public int __len__(ReferenceAtomArray self) {}
+	}
+
+	/**
+	 * \brief __init__.
+	 * \param self The <tt>%StereoDescriptor</tt> instance.
+	 */
+	public None __init__(object self, int config) {}
+
+	/**
+	 * \brief __init__.
+	 * \param self The <tt>%StereoDescriptor</tt> instance.
+	 */
+	public None __init__(object self, StereoDescriptor descr) {}
+
+	/**
+	 * \brief __init__.
+	 * \param self The <tt>%StereoDescriptor</tt> instance.
+	 */
+	public None __init__(object self, int config, Atom atom1, Atom atom2, Atom atom3) {}
+
+	/**
+	 * \brief __init__.
+	 * \param self The <tt>%StereoDescriptor</tt> instance.
+	 */
+	public None __init__(object self, int config, Atom atom1, Atom atom2, Atom atom3, Atom atom4) {}
+
+	/**
+	 * \brief setConfiguration.
+	 * \param self The <tt>%StereoDescriptor</tt> instance.
+	 */
+	public None setConfiguration(StereoDescriptor self, int config) {}
+
+	/**
+	 * \brief isValid.
+	 * \param self The <tt>%StereoDescriptor</tt> instance.
+	 */
+	public bool isValid(StereoDescriptor self, Atom atom) {}
+
+	/**
+	 * \brief getConfiguration.
+	 * \param self The <tt>%StereoDescriptor</tt> instance.
+	 */
+	public int getConfiguration(StereoDescriptor self) {}
+
+	/**
+	 * \brief getReferenceAtoms.
+	 * \param self The <tt>%StereoDescriptor</tt> instance.
+	 */
+	public ReferenceAtomArray getReferenceAtoms(StereoDescriptor self) {}
+
+	/**
+	 * \brief assign.
+	 * \param self The <tt>%StereoDescriptor</tt> instance.
+	 */
+	public StereoDescriptor assign(StereoDescriptor self, StereoDescriptor descr) {}
+
+	/**
+	 * \brief getPermutationParity.
+	 * \param self The <tt>%StereoDescriptor</tt> instance.
+	 */
+	public int getPermutationParity(StereoDescriptor self, Atom atom1, Atom atom2, Atom atom3, Atom atom4) {}
+
+	/**
+	 * \brief getNumReferenceAtoms.
+	 * \param self The <tt>%StereoDescriptor</tt> instance.
+	 */
+	public int getNumReferenceAtoms(StereoDescriptor self) {}
+
+	/**
+	 * \brief configuration.
+	 */
+	public None configuration;
+
+	/**
+	 * \brief numReferenceAtoms.
+	 */
+	public None numReferenceAtoms;
+
+	/**
+	 * \brief referenceAtoms.
+	 */
+	public None referenceAtoms;
+}

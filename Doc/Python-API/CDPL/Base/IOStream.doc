@@ -1,0 +1,20 @@
+/* -*- mode: java; tab-width: 4 -*- */
+
+package CDPL.Base;
+
+/**
+ * \brief IOStream.
+ */
+public class IOStream extends IStream, OStream {
+
+	/**
+	 * \brief getObjectID.
+	 * \param self The <tt>%IOStream</tt> instance.
+	 */
+	public int getObjectID(IOStream self) {}
+
+	/**
+	 * \brief objectID.
+	 */
+	public None objectID;
+}

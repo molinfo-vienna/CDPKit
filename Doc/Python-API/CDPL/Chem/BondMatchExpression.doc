@@ -1,0 +1,44 @@
+/* -*- mode: java; tab-width: 4 -*- */
+
+package CDPL.Chem;
+
+/**
+ * \brief BondMatchExpression.
+ */
+public class BondMatchExpression extends Boost.Python.instance {
+
+	/**
+	 * \brief __init__.
+	 * \param self The <tt>%BondMatchExpression</tt> instance.
+	 */
+	public None __init__(object self) {}
+
+	/**
+	 * \brief matches.
+	 * \param self The <tt>%BondMatchExpression</tt> instance.
+	 */
+	public bool matches(BondMatchExpression self, Bond query_bond, MolecularGraph query_molgraph, Bond target_bond, MolecularGraph target_molgraph, Base.Variant aux_data) {}
+
+	/**
+	 * \brief getObjectID.
+	 * \param self The <tt>%BondMatchExpression</tt> instance.
+	 */
+	public int getObjectID(BondMatchExpression self) {}
+
+	/**
+	 * \brief requiresAtomBondMapping.
+	 * \param self The <tt>%BondMatchExpression</tt> instance.
+	 */
+	public bool requiresAtomBondMapping(BondMatchExpression self) {}
+
+	/**
+	 * \brief mappingMatches.
+	 * \param self The <tt>%BondMatchExpression</tt> instance.
+	 */
+	public bool mappingMatches(BondMatchExpression self, Bond query_bond, MolecularGraph query_molgraph, Bond target_bond, MolecularGraph target_molgraph, AtomBondMapping mapping, Base.Variant aux_data) {}
+
+	/**
+	 * \brief objectID.
+	 */
+	public None objectID;
+}

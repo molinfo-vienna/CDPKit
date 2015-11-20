@@ -1,0 +1,111 @@
+/* -*- mode: java; tab-width: 4 -*- */
+
+package CDPL.Vis.CairoBackend;
+
+/**
+ * \brief CairoRenderer2D.
+ */
+public class CairoRenderer2D extends Vis.Renderer2D {
+
+	/**
+	 * \brief __init__.
+	 * \param self The <tt>%CairoRenderer2D</tt> instance.
+	 */
+	public None __init__(CairoRenderer2D self, cairo.Context cairo_ctxt) {}
+
+	/**
+	 * \brief restoreState.
+	 * \param self The <tt>%CairoRenderer2D</tt> instance.
+	 */
+	public None restoreState(CairoRenderer2D self) {}
+
+	/**
+	 * \brief saveState.
+	 * \param self The <tt>%CairoRenderer2D</tt> instance.
+	 */
+	public None saveState(CairoRenderer2D self) {}
+
+	/**
+	 * \brief drawLine.
+	 * \param self The <tt>%CairoRenderer2D</tt> instance.
+	 */
+	public None drawLine(CairoRenderer2D self, float x1, float y1, float x2, float y2) {}
+
+	/**
+	 * \brief drawPolyline.
+	 * \param self The <tt>%CairoRenderer2D</tt> instance.
+	 */
+	public None drawPolyline(CairoRenderer2D self, Math.Vector2DArray points) {}
+
+	/**
+	 * \brief setBrush.
+	 * \param self The <tt>%CairoRenderer2D</tt> instance.
+	 */
+	public None setBrush(CairoRenderer2D self, Vis.Brush brush) {}
+
+	/**
+	 * \brief drawLineSegments.
+	 * \param self The <tt>%CairoRenderer2D</tt> instance.
+	 */
+	public None drawLineSegments(CairoRenderer2D self, Math.Vector2DArray points) {}
+
+	/**
+	 * \brief _CairoRenderer2D__fillPath.
+	 * \param self The <tt>%CairoRenderer2D</tt> instance.
+	 */
+	public None _CairoRenderer2D__fillPath(CairoRenderer2D self) {}
+
+	/**
+	 * \brief _CairoRenderer2D__strokePath.
+	 * \param self The <tt>%CairoRenderer2D</tt> instance.
+	 */
+	public None _CairoRenderer2D__strokePath(CairoRenderer2D self) {}
+
+	/**
+	 * \brief setPen.
+	 * \param self The <tt>%CairoRenderer2D</tt> instance.
+	 */
+	public None setPen(CairoRenderer2D self, Vis.Pen pen) {}
+
+	/**
+	 * \brief drawRectangle.
+	 * \param self The <tt>%CairoRenderer2D</tt> instance.
+	 */
+	public None drawRectangle(CairoRenderer2D self, float x, float y, float width, float height) {}
+
+	/**
+	 * \brief drawPolygon.
+	 * \param self The <tt>%CairoRenderer2D</tt> instance.
+	 */
+	public None drawPolygon(CairoRenderer2D self, Math.Vector2DArray points) {}
+
+	/**
+	 * \brief drawText.
+	 * \param self The <tt>%CairoRenderer2D</tt> instance.
+	 */
+	public None drawText(CairoRenderer2D self, float x, float y, str txt) {}
+
+	/**
+	 * \brief transform.
+	 * \param self The <tt>%CairoRenderer2D</tt> instance.
+	 */
+	public None transform(CairoRenderer2D self, Math.AffineTransform3D xform) {}
+
+	/**
+	 * \brief setTransform.
+	 * \param self The <tt>%CairoRenderer2D</tt> instance.
+	 */
+	public None setTransform(CairoRenderer2D self, Math.AffineTransform3D xform) {}
+
+	/**
+	 * \brief drawPoint.
+	 * \param self The <tt>%CairoRenderer2D</tt> instance.
+	 */
+	public None drawPoint(CairoRenderer2D self, float x, float y) {}
+
+	/**
+	 * \brief setFont.
+	 * \param self The <tt>%CairoRenderer2D</tt> instance.
+	 */
+	public None setFont(CairoRenderer2D self, Vis.Font font) {}
+}

@@ -1,0 +1,251 @@
+/* -*- mode: java; tab-width: 4 -*- */
+
+package CDPL.Math;
+
+/**
+ * \brief FMatrixTranspose.
+ */
+public class FMatrixTranspose extends Boost.Python.instance {
+
+	/**
+	 * \brief __init__.
+	 * \param self The <tt>%FMatrixTranspose</tt> instance.
+	 */
+	public None __init__(object self, FMatrixTranspose mt) {}
+
+	/**
+	 * \brief __init__.
+	 * \param self The <tt>%FMatrixTranspose</tt> instance.
+	 */
+	public None __init__(object self, FMatrixExpression e) {}
+
+	/**
+	 * \brief getObjectID.
+	 * \param self The <tt>%FMatrixTranspose</tt> instance.
+	 */
+	public int getObjectID(FMatrixTranspose self) {}
+
+	/**
+	 * \brief getElement.
+	 * \param self The <tt>%FMatrixTranspose</tt> instance.
+	 */
+	public float getElement(FMatrixTranspose self, int i, int j) {}
+
+	/**
+	 * \brief isEmpty.
+	 * \param self The <tt>%FMatrixTranspose</tt> instance.
+	 */
+	public bool isEmpty(FMatrixTranspose self) {}
+
+	/**
+	 * \brief swap.
+	 * \param self The <tt>%FMatrixTranspose</tt> instance.
+	 */
+	public None swap(FMatrixTranspose self, FMatrixTranspose mt) {}
+
+	/**
+	 * \brief getData.
+	 * \param self The <tt>%FMatrixTranspose</tt> instance.
+	 */
+	public FMatrixExpression getData(FMatrixTranspose self) {}
+
+	/**
+	 * \brief getSize1.
+	 * \param self The <tt>%FMatrixTranspose</tt> instance.
+	 */
+	public int getSize1(FMatrixTranspose self) {}
+
+	/**
+	 * \brief setElement.
+	 * \param self The <tt>%FMatrixTranspose</tt> instance.
+	 */
+	public None setElement(FMatrixTranspose self, int i, int j, float v) {}
+
+	/**
+	 * \brief getSize2.
+	 * \param self The <tt>%FMatrixTranspose</tt> instance.
+	 */
+	public int getSize2(FMatrixTranspose self) {}
+
+	/**
+	 * \brief assign.
+	 * \param self The <tt>%FMatrixTranspose</tt> instance.
+	 */
+	public FMatrixTranspose assign(FMatrixTranspose self, ConstFMatrixExpression e) {}
+
+	/**
+	 * \brief assign.
+	 * \param self The <tt>%FMatrixTranspose</tt> instance.
+	 */
+	public FMatrixTranspose assign(FMatrixTranspose self, ConstDMatrixExpression e) {}
+
+	/**
+	 * \brief assign.
+	 * \param self The <tt>%FMatrixTranspose</tt> instance.
+	 */
+	public FMatrixTranspose assign(FMatrixTranspose self, ConstLMatrixExpression e) {}
+
+	/**
+	 * \brief assign.
+	 * \param self The <tt>%FMatrixTranspose</tt> instance.
+	 */
+	public FMatrixTranspose assign(FMatrixTranspose self, ConstULMatrixExpression e) {}
+
+	/**
+	 * \brief assign.
+	 * \param self The <tt>%FMatrixTranspose</tt> instance.
+	 */
+	public FMatrixTranspose assign(FMatrixTranspose self, FMatrixTranspose mt) {}
+
+	/**
+	 * \brief __isub__.
+	 * \param self The <tt>%FMatrixTranspose</tt> instance.
+	 */
+	public FMatrixTranspose __isub__(FMatrixTranspose self, FMatrixTranspose mt) {}
+
+	/**
+	 * \brief __isub__.
+	 * \param self The <tt>%FMatrixTranspose</tt> instance.
+	 */
+	public FMatrixTranspose __isub__(FMatrixTranspose self, ConstFMatrixExpression e) {}
+
+	/**
+	 * \brief __str__.
+	 * \param self The <tt>%FMatrixTranspose</tt> instance.
+	 */
+	public str __str__(FMatrixTranspose self) {}
+
+	/**
+	 * \brief __rmul__.
+	 * \param self The <tt>%FMatrixTranspose</tt> instance.
+	 */
+	public ConstFMatrixExpression __rmul__(object self, float t) {}
+
+	/**
+	 * \brief __pos__.
+	 * \param self The <tt>%FMatrixTranspose</tt> instance.
+	 */
+	public FMatrixTranspose __pos__(FMatrixTranspose self) {}
+
+	/**
+	 * \brief __call__.
+	 * \param self The <tt>%FMatrixTranspose</tt> instance.
+	 */
+	public float __call__(FMatrixTranspose self, int i, int j) {}
+
+	/**
+	 * \brief __len__.
+	 * \param self The <tt>%FMatrixTranspose</tt> instance.
+	 */
+	public int __len__(FMatrixTranspose self) {}
+
+	/**
+	 * \brief __mul__.
+	 * \param self The <tt>%FMatrixTranspose</tt> instance.
+	 */
+	public ConstFMatrixExpression __mul__(object self, float t) {}
+
+	/**
+	 * \brief __ne__.
+	 * \param self The <tt>%FMatrixTranspose</tt> instance.
+	 */
+	public bool __ne__(FMatrixTranspose self, FMatrixTranspose mt) {}
+
+	/**
+	 * \brief __ne__.
+	 * \param self The <tt>%FMatrixTranspose</tt> instance.
+	 */
+	public bool __ne__(FMatrixTranspose self, ConstFMatrixExpression e) {}
+
+	/**
+	 * \brief __getitem__.
+	 * \param self The <tt>%FMatrixTranspose</tt> instance.
+	 */
+	public float __getitem__(FMatrixTranspose self, tuple ij) {}
+
+	/**
+	 * \brief __idiv__.
+	 * \param self The <tt>%FMatrixTranspose</tt> instance.
+	 */
+	public FMatrixTranspose __idiv__(FMatrixTranspose self, float t) {}
+
+	/**
+	 * \brief __setitem__.
+	 * \param self The <tt>%FMatrixTranspose</tt> instance.
+	 */
+	public None __setitem__(FMatrixTranspose self, tuple ij, float v) {}
+
+	/**
+	 * \brief __add__.
+	 * \param self The <tt>%FMatrixTranspose</tt> instance.
+	 */
+	public ConstFMatrixExpression __add__(object self, ConstFMatrixExpression e) {}
+
+	/**
+	 * \brief __eq__.
+	 * \param self The <tt>%FMatrixTranspose</tt> instance.
+	 */
+	public bool __eq__(FMatrixTranspose self, FMatrixTranspose mt) {}
+
+	/**
+	 * \brief __eq__.
+	 * \param self The <tt>%FMatrixTranspose</tt> instance.
+	 */
+	public bool __eq__(FMatrixTranspose self, ConstFMatrixExpression e) {}
+
+	/**
+	 * \brief __imul__.
+	 * \param self The <tt>%FMatrixTranspose</tt> instance.
+	 */
+	public FMatrixTranspose __imul__(FMatrixTranspose self, float t) {}
+
+	/**
+	 * \brief __iadd__.
+	 * \param self The <tt>%FMatrixTranspose</tt> instance.
+	 */
+	public FMatrixTranspose __iadd__(FMatrixTranspose self, FMatrixTranspose mt) {}
+
+	/**
+	 * \brief __iadd__.
+	 * \param self The <tt>%FMatrixTranspose</tt> instance.
+	 */
+	public FMatrixTranspose __iadd__(FMatrixTranspose self, ConstFMatrixExpression e) {}
+
+	/**
+	 * \brief __div__.
+	 * \param self The <tt>%FMatrixTranspose</tt> instance.
+	 */
+	public ConstFMatrixExpression __div__(object self, float t) {}
+
+	/**
+	 * \brief __neg__.
+	 * \param self The <tt>%FMatrixTranspose</tt> instance.
+	 */
+	public ConstFMatrixExpression __neg__(object self) {}
+
+	/**
+	 * \brief __sub__.
+	 * \param self The <tt>%FMatrixTranspose</tt> instance.
+	 */
+	public ConstFMatrixExpression __sub__(object self, ConstFMatrixExpression e) {}
+
+	/**
+	 * \brief objectID.
+	 */
+	public None objectID;
+
+	/**
+	 * \brief size1.
+	 */
+	public None size1;
+
+	/**
+	 * \brief data.
+	 */
+	public None data;
+
+	/**
+	 * \brief size2.
+	 */
+	public None size2;
+}

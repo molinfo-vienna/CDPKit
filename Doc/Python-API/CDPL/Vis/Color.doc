@@ -1,0 +1,220 @@
+/* -*- mode: java; tab-width: 4 -*- */
+
+package CDPL.Vis;
+
+/**
+ * \brief Color.
+ */
+public class Color extends Boost.Python.instance {
+
+	/**
+	 * \brief DARK_MAGENTA.
+	 */
+	public static Color DARK_MAGENTA;
+
+	/**
+	 * \brief YELLOW.
+	 */
+	public static Color YELLOW;
+
+	/**
+	 * \brief RED.
+	 */
+	public static Color RED;
+
+	/**
+	 * \brief BLACK.
+	 */
+	public static Color BLACK;
+
+	/**
+	 * \brief CYAN.
+	 */
+	public static Color CYAN;
+
+	/**
+	 * \brief WHITE.
+	 */
+	public static Color WHITE;
+
+	/**
+	 * \brief GRAY.
+	 */
+	public static Color GRAY;
+
+	/**
+	 * \brief DARK_CYAN.
+	 */
+	public static Color DARK_CYAN;
+
+	/**
+	 * \brief DARK_YELLOW.
+	 */
+	public static Color DARK_YELLOW;
+
+	/**
+	 * \brief DARK_GRAY.
+	 */
+	public static Color DARK_GRAY;
+
+	/**
+	 * \brief DARK_RED.
+	 */
+	public static Color DARK_RED;
+
+	/**
+	 * \brief DARK_BLUE.
+	 */
+	public static Color DARK_BLUE;
+
+	/**
+	 * \brief BLUE.
+	 */
+	public static Color BLUE;
+
+	/**
+	 * \brief DARK_GREEN.
+	 */
+	public static Color DARK_GREEN;
+
+	/**
+	 * \brief TRANSPARENT.
+	 */
+	public static Color TRANSPARENT;
+
+	/**
+	 * \brief LIGHT_GRAY.
+	 */
+	public static Color LIGHT_GRAY;
+
+	/**
+	 * \brief GREEN.
+	 */
+	public static Color GREEN;
+
+	/**
+	 * \brief MAGENTA.
+	 */
+	public static Color MAGENTA;
+
+	/**
+	 * \brief __init__.
+	 * \param self The <tt>%Color</tt> instance.
+	 */
+	public None __init__(object self) {}
+
+	/**
+	 * \brief __init__.
+	 * \param self The <tt>%Color</tt> instance.
+	 */
+	public None __init__(object self, Color color) {}
+
+	/**
+	 * \brief __init__.
+	 * \param self The <tt>%Color</tt> instance.
+	 */
+	public None __init__(object self, float red, float green, float blue, float alpha = 1.0) {}
+
+	/**
+	 * \brief setBlue.
+	 * \param self The <tt>%Color</tt> instance.
+	 */
+	public None setBlue(Color self, float blue) {}
+
+	/**
+	 * \brief getObjectID.
+	 * \param self The <tt>%Color</tt> instance.
+	 */
+	public int getObjectID(Color self) {}
+
+	/**
+	 * \brief setGreen.
+	 * \param self The <tt>%Color</tt> instance.
+	 */
+	public None setGreen(Color self, float green) {}
+
+	/**
+	 * \brief setRed.
+	 * \param self The <tt>%Color</tt> instance.
+	 */
+	public None setRed(Color self, float red) {}
+
+	/**
+	 * \brief getRed.
+	 * \param self The <tt>%Color</tt> instance.
+	 */
+	public float getRed(Color self) {}
+
+	/**
+	 * \brief setAlpha.
+	 * \param self The <tt>%Color</tt> instance.
+	 */
+	public None setAlpha(Color self, float alpha) {}
+
+	/**
+	 * \brief setRGBA.
+	 * \param self The <tt>%Color</tt> instance.
+	 */
+	public None setRGBA(Color self, float red, float green, float blue, float alpha = 1.0) {}
+
+	/**
+	 * \brief getGreen.
+	 * \param self The <tt>%Color</tt> instance.
+	 */
+	public float getGreen(Color self) {}
+
+	/**
+	 * \brief getBlue.
+	 * \param self The <tt>%Color</tt> instance.
+	 */
+	public float getBlue(Color self) {}
+
+	/**
+	 * \brief getAlpha.
+	 * \param self The <tt>%Color</tt> instance.
+	 */
+	public float getAlpha(Color self) {}
+
+	/**
+	 * \brief assign.
+	 * \param self The <tt>%Color</tt> instance.
+	 */
+	public Color assign(Color self, Color color) {}
+
+	/**
+	 * \brief __ne__.
+	 * \param self The <tt>%Color</tt> instance.
+	 */
+	public bool __ne__(Color arg1, Color self) {}
+
+	/**
+	 * \brief __eq__.
+	 * \param self The <tt>%Color</tt> instance.
+	 */
+	public bool __eq__(Color arg1, Color self) {}
+
+	/**
+	 * \brief objectID.
+	 */
+	public None objectID;
+
+	/**
+	 * \brief blue.
+	 */
+	public None blue;
+
+	/**
+	 * \brief red.
+	 */
+	public None red;
+
+	/**
+	 * \brief alpha.
+	 */
+	public None alpha;
+
+	/**
+	 * \brief green.
+	 */
+	public None green;
+}

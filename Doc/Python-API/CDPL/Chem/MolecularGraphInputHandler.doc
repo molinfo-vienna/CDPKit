@@ -1,0 +1,38 @@
+/* -*- mode: java; tab-width: 4 -*- */
+
+package CDPL.Chem;
+
+/**
+ * \brief MolecularGraphInputHandler.
+ */
+public class MolecularGraphInputHandler extends Boost.Python.instance {
+
+	/**
+	 * \brief __init__.
+	 * \param self The <tt>%MolecularGraphInputHandler</tt> instance.
+	 */
+	public None __init__(object self) {}
+
+	/**
+	 * \brief getDataFormat.
+	 * \param self The <tt>%MolecularGraphInputHandler</tt> instance.
+	 */
+	public Base.DataFormat getDataFormat(MolecularGraphInputHandler self) {}
+
+	/**
+	 * \brief getObjectID.
+	 * \param self The <tt>%MolecularGraphInputHandler</tt> instance.
+	 */
+	public int getObjectID(MolecularGraphInputHandler self) {}
+
+	/**
+	 * \brief createReader.
+	 * \param self The <tt>%MolecularGraphInputHandler</tt> instance.
+	 */
+	public MolecularGraphReader createReader(MolecularGraphInputHandler self, Base.IStream is) {}
+
+	/**
+	 * \brief objectID.
+	 */
+	public None objectID;
+}

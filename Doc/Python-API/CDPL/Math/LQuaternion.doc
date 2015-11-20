@@ -1,0 +1,338 @@
+/* -*- mode: java; tab-width: 4 -*- */
+
+package CDPL.Math;
+
+/**
+ * \brief LQuaternion.
+ */
+public class LQuaternion extends Boost.Python.instance {
+
+	/**
+	 * \brief __init__.
+	 * \param self The <tt>%LQuaternion</tt> instance.
+	 */
+	public None __init__(object self) {}
+
+	/**
+	 * \brief __init__.
+	 * \param self The <tt>%LQuaternion</tt> instance.
+	 */
+	public None __init__(object self, LQuaternion q) {}
+
+	/**
+	 * \brief __init__.
+	 * \param self The <tt>%LQuaternion</tt> instance.
+	 */
+	public None __init__(object self, int c1, int c2 = 0, int c3 = 0, int c4 = 0) {}
+
+	/**
+	 * \brief __init__.
+	 * \param self The <tt>%LQuaternion</tt> instance.
+	 */
+	public object __init__(object arg1, ConstFQuaternionExpression e) {}
+
+	/**
+	 * \brief __init__.
+	 * \param self The <tt>%LQuaternion</tt> instance.
+	 */
+	public object __init__(object arg1, ConstDQuaternionExpression e) {}
+
+	/**
+	 * \brief __init__.
+	 * \param self The <tt>%LQuaternion</tt> instance.
+	 */
+	public object __init__(object arg1, ConstLQuaternionExpression e) {}
+
+	/**
+	 * \brief __init__.
+	 * \param self The <tt>%LQuaternion</tt> instance.
+	 */
+	public object __init__(object arg1, ConstULQuaternionExpression e) {}
+
+	/**
+	 * \brief set.
+	 * \param self The <tt>%LQuaternion</tt> instance.
+	 */
+	public None set(LQuaternion self, int c1 = 0, int c2 = 0, int c3 = 0, int c4 = 0) {}
+
+	/**
+	 * \brief getObjectID.
+	 * \param self The <tt>%LQuaternion</tt> instance.
+	 */
+	public int getObjectID(LQuaternion self) {}
+
+	/**
+	 * \brief getC4.
+	 * \param self The <tt>%LQuaternion</tt> instance.
+	 */
+	public int getC4(LQuaternion self) {}
+
+	/**
+	 * \brief swap.
+	 * \param self The <tt>%LQuaternion</tt> instance.
+	 */
+	public None swap(LQuaternion self, LQuaternion q) {}
+
+	/**
+	 * \brief setC4.
+	 * \param self The <tt>%LQuaternion</tt> instance.
+	 */
+	public None setC4(LQuaternion self, int v) {}
+
+	/**
+	 * \brief setC2.
+	 * \param self The <tt>%LQuaternion</tt> instance.
+	 */
+	public None setC2(LQuaternion self, int v) {}
+
+	/**
+	 * \brief getC1.
+	 * \param self The <tt>%LQuaternion</tt> instance.
+	 */
+	public int getC1(LQuaternion self) {}
+
+	/**
+	 * \brief getC2.
+	 * \param self The <tt>%LQuaternion</tt> instance.
+	 */
+	public int getC2(LQuaternion self) {}
+
+	/**
+	 * \brief getC3.
+	 * \param self The <tt>%LQuaternion</tt> instance.
+	 */
+	public int getC3(LQuaternion self) {}
+
+	/**
+	 * \brief setC1.
+	 * \param self The <tt>%LQuaternion</tt> instance.
+	 */
+	public None setC1(LQuaternion self, int v) {}
+
+	/**
+	 * \brief setC3.
+	 * \param self The <tt>%LQuaternion</tt> instance.
+	 */
+	public None setC3(LQuaternion self, int v) {}
+
+	/**
+	 * \brief assign.
+	 * \param self The <tt>%LQuaternion</tt> instance.
+	 */
+	public LQuaternion assign(LQuaternion self, ConstFQuaternionExpression e) {}
+
+	/**
+	 * \brief assign.
+	 * \param self The <tt>%LQuaternion</tt> instance.
+	 */
+	public LQuaternion assign(LQuaternion self, ConstDQuaternionExpression e) {}
+
+	/**
+	 * \brief assign.
+	 * \param self The <tt>%LQuaternion</tt> instance.
+	 */
+	public LQuaternion assign(LQuaternion self, ConstLQuaternionExpression e) {}
+
+	/**
+	 * \brief assign.
+	 * \param self The <tt>%LQuaternion</tt> instance.
+	 */
+	public LQuaternion assign(LQuaternion self, ConstULQuaternionExpression e) {}
+
+	/**
+	 * \brief assign.
+	 * \param self The <tt>%LQuaternion</tt> instance.
+	 */
+	public LQuaternion assign(LQuaternion self, LQuaternion q) {}
+
+	/**
+	 * \brief __isub__.
+	 * \param self The <tt>%LQuaternion</tt> instance.
+	 */
+	public LQuaternion __isub__(LQuaternion self, int t) {}
+
+	/**
+	 * \brief __isub__.
+	 * \param self The <tt>%LQuaternion</tt> instance.
+	 */
+	public LQuaternion __isub__(LQuaternion self, LQuaternion q) {}
+
+	/**
+	 * \brief __isub__.
+	 * \param self The <tt>%LQuaternion</tt> instance.
+	 */
+	public LQuaternion __isub__(LQuaternion self, ConstLQuaternionExpression q) {}
+
+	/**
+	 * \brief __str__.
+	 * \param self The <tt>%LQuaternion</tt> instance.
+	 */
+	public str __str__(LQuaternion self) {}
+
+	/**
+	 * \brief __radd__.
+	 * \param self The <tt>%LQuaternion</tt> instance.
+	 */
+	public ConstLQuaternionExpression __radd__(object self, int t) {}
+
+	/**
+	 * \brief __rsub__.
+	 * \param self The <tt>%LQuaternion</tt> instance.
+	 */
+	public ConstLQuaternionExpression __rsub__(object self, int t) {}
+
+	/**
+	 * \brief __rdiv__.
+	 * \param self The <tt>%LQuaternion</tt> instance.
+	 */
+	public ConstLQuaternionExpression __rdiv__(object self, int t) {}
+
+	/**
+	 * \brief __rmul__.
+	 * \param self The <tt>%LQuaternion</tt> instance.
+	 */
+	public ConstLQuaternionExpression __rmul__(object self, int t) {}
+
+	/**
+	 * \brief __pos__.
+	 * \param self The <tt>%LQuaternion</tt> instance.
+	 */
+	public LQuaternion __pos__(LQuaternion self) {}
+
+	/**
+	 * \brief __mul__.
+	 * \param self The <tt>%LQuaternion</tt> instance.
+	 */
+	public ConstLQuaternionExpression __mul__(object self, int t) {}
+
+	/**
+	 * \brief __mul__.
+	 * \param self The <tt>%LQuaternion</tt> instance.
+	 */
+	public ConstLQuaternionExpression __mul__(object self, ConstLQuaternionExpression e) {}
+
+	/**
+	 * \brief __ne__.
+	 * \param self The <tt>%LQuaternion</tt> instance.
+	 */
+	public bool __ne__(LQuaternion self, LQuaternion q) {}
+
+	/**
+	 * \brief __ne__.
+	 * \param self The <tt>%LQuaternion</tt> instance.
+	 */
+	public bool __ne__(LQuaternion self, ConstLQuaternionExpression q) {}
+
+	/**
+	 * \brief __idiv__.
+	 * \param self The <tt>%LQuaternion</tt> instance.
+	 */
+	public LQuaternion __idiv__(LQuaternion self, int t) {}
+
+	/**
+	 * \brief __idiv__.
+	 * \param self The <tt>%LQuaternion</tt> instance.
+	 */
+	public LQuaternion __idiv__(LQuaternion self, LQuaternion q) {}
+
+	/**
+	 * \brief __idiv__.
+	 * \param self The <tt>%LQuaternion</tt> instance.
+	 */
+	public LQuaternion __idiv__(LQuaternion self, ConstLQuaternionExpression q) {}
+
+	/**
+	 * \brief __add__.
+	 * \param self The <tt>%LQuaternion</tt> instance.
+	 */
+	public ConstLQuaternionExpression __add__(object self, int t) {}
+
+	/**
+	 * \brief __add__.
+	 * \param self The <tt>%LQuaternion</tt> instance.
+	 */
+	public ConstLQuaternionExpression __add__(object self, ConstLQuaternionExpression e) {}
+
+	/**
+	 * \brief __eq__.
+	 * \param self The <tt>%LQuaternion</tt> instance.
+	 */
+	public bool __eq__(LQuaternion self, LQuaternion q) {}
+
+	/**
+	 * \brief __eq__.
+	 * \param self The <tt>%LQuaternion</tt> instance.
+	 */
+	public bool __eq__(LQuaternion self, ConstLQuaternionExpression q) {}
+
+	/**
+	 * \brief __imul__.
+	 * \param self The <tt>%LQuaternion</tt> instance.
+	 */
+	public LQuaternion __imul__(LQuaternion self, int t) {}
+
+	/**
+	 * \brief __imul__.
+	 * \param self The <tt>%LQuaternion</tt> instance.
+	 */
+	public LQuaternion __imul__(LQuaternion self, LQuaternion q) {}
+
+	/**
+	 * \brief __imul__.
+	 * \param self The <tt>%LQuaternion</tt> instance.
+	 */
+	public LQuaternion __imul__(LQuaternion self, ConstLQuaternionExpression q) {}
+
+	/**
+	 * \brief __iadd__.
+	 * \param self The <tt>%LQuaternion</tt> instance.
+	 */
+	public LQuaternion __iadd__(LQuaternion self, int t) {}
+
+	/**
+	 * \brief __iadd__.
+	 * \param self The <tt>%LQuaternion</tt> instance.
+	 */
+	public LQuaternion __iadd__(LQuaternion self, LQuaternion q) {}
+
+	/**
+	 * \brief __iadd__.
+	 * \param self The <tt>%LQuaternion</tt> instance.
+	 */
+	public LQuaternion __iadd__(LQuaternion self, ConstLQuaternionExpression q) {}
+
+	/**
+	 * \brief __div__.
+	 * \param self The <tt>%LQuaternion</tt> instance.
+	 */
+	public ConstLQuaternionExpression __div__(object self, int t) {}
+
+	/**
+	 * \brief __div__.
+	 * \param self The <tt>%LQuaternion</tt> instance.
+	 */
+	public ConstLQuaternionExpression __div__(object self, ConstLQuaternionExpression e) {}
+
+	/**
+	 * \brief __neg__.
+	 * \param self The <tt>%LQuaternion</tt> instance.
+	 */
+	public ConstLQuaternionExpression __neg__(object self) {}
+
+	/**
+	 * \brief __sub__.
+	 * \param self The <tt>%LQuaternion</tt> instance.
+	 */
+	public ConstLQuaternionExpression __sub__(object self, int t) {}
+
+	/**
+	 * \brief __sub__.
+	 * \param self The <tt>%LQuaternion</tt> instance.
+	 */
+	public ConstLQuaternionExpression __sub__(object self, ConstLQuaternionExpression e) {}
+
+	/**
+	 * \brief objectID.
+	 */
+	public None objectID;
+}

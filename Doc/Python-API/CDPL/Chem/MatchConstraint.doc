@@ -1,0 +1,166 @@
+/* -*- mode: java; tab-width: 4 -*- */
+
+package CDPL.Chem;
+
+/**
+ * \brief MatchConstraint.
+ */
+public class MatchConstraint extends Boost.Python.instance {
+
+	/**
+	 * \brief Relation.
+	 */
+	public static class Relation extends Boost.Python.enum {
+
+		/**
+		 * \brief ANY.
+		 */
+		public static Relation ANY;
+
+		/**
+		 * \brief LESS.
+		 */
+		public static Relation LESS;
+
+		/**
+		 * \brief EQUAL.
+		 */
+		public static Relation EQUAL;
+
+		/**
+		 * \brief GREATER.
+		 */
+		public static Relation GREATER;
+
+		/**
+		 * \brief LESS_OR_EQUAL.
+		 */
+		public static Relation LESS_OR_EQUAL;
+
+		/**
+		 * \brief GREATER_OR_EQUAL.
+		 */
+		public static Relation GREATER_OR_EQUAL;
+
+		/**
+		 * \brief NOT_EQUAL.
+		 */
+		public static Relation NOT_EQUAL;
+	}
+
+	/**
+	 * \brief See Relation.ANY.
+	 */
+	public static MatchConstraint.Relation ANY;
+
+	/**
+	 * \brief See Relation.LESS.
+	 */
+	public static MatchConstraint.Relation LESS;
+
+	/**
+	 * \brief See Relation.EQUAL.
+	 */
+	public static MatchConstraint.Relation EQUAL;
+
+	/**
+	 * \brief See Relation.GREATER.
+	 */
+	public static MatchConstraint.Relation GREATER;
+
+	/**
+	 * \brief See Relation.LESS_OR_EQUAL.
+	 */
+	public static MatchConstraint.Relation LESS_OR_EQUAL;
+
+	/**
+	 * \brief See Relation.GREATER_OR_EQUAL.
+	 */
+	public static MatchConstraint.Relation GREATER_OR_EQUAL;
+
+	/**
+	 * \brief See Relation.NOT_EQUAL.
+	 */
+	public static MatchConstraint.Relation NOT_EQUAL;
+
+	/**
+	 * \brief __init__.
+	 * \param self The <tt>%MatchConstraint</tt> instance.
+	 */
+	public None __init__(object self, MatchConstraint constr) {}
+
+	/**
+	 * \brief __init__.
+	 * \param self The <tt>%MatchConstraint</tt> instance.
+	 */
+	public None __init__(object self, int id, Relation relation) {}
+
+	/**
+	 * \brief __init__.
+	 * \param self The <tt>%MatchConstraint</tt> instance.
+	 */
+	public None __init__(object self, int id, Relation relation, Base.Variant value) {}
+
+	/**
+	 * \brief getRelation.
+	 * \param self The <tt>%MatchConstraint</tt> instance.
+	 */
+	public Relation getRelation(MatchConstraint self) {}
+
+	/**
+	 * \brief getID.
+	 * \param self The <tt>%MatchConstraint</tt> instance.
+	 */
+	public int getID(MatchConstraint self) {}
+
+	/**
+	 * \brief assign.
+	 * \param self The <tt>%MatchConstraint</tt> instance.
+	 */
+	public MatchConstraint assign(MatchConstraint self, MatchConstraint constr) {}
+
+	/**
+	 * \brief hasValue.
+	 * \param self The <tt>%MatchConstraint</tt> instance.
+	 */
+	public bool hasValue(MatchConstraint self) {}
+
+	/**
+	 * \brief setValue.
+	 * \param self The <tt>%MatchConstraint</tt> instance.
+	 */
+	public None setValue(MatchConstraint self, Base.Variant value) {}
+
+	/**
+	 * \brief setID.
+	 * \param self The <tt>%MatchConstraint</tt> instance.
+	 */
+	public None setID(MatchConstraint self, int id) {}
+
+	/**
+	 * \brief getValue.
+	 * \param self The <tt>%MatchConstraint</tt> instance.
+	 */
+	public Base.Variant getValue(MatchConstraint self) {}
+
+	/**
+	 * \brief setRelation.
+	 * \param self The <tt>%MatchConstraint</tt> instance.
+	 */
+	public None setRelation(MatchConstraint self, Relation relation) {}
+
+	/**
+	 * \brief relation.
+	 */
+	public None relation;
+
+	/**
+	 * \brief ID.
+	 */
+	public None ID;
+
+	/**
+	 * \brief value.
+	 */
+	public None value;
+}

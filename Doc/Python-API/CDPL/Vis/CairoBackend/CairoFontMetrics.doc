@@ -1,0 +1,57 @@
+/* -*- mode: java; tab-width: 4 -*- */
+
+package CDPL.Vis.CairoBackend;
+
+/**
+ * \brief CairoFontMetrics.
+ */
+public class CairoFontMetrics extends Vis.FontMetrics {
+
+	/**
+	 * \brief __init__.
+	 * \param self The <tt>%CairoFontMetrics</tt> instance.
+	 */
+	public None __init__(CairoFontMetrics self, cairo.Context cairo_ctxt) {}
+
+	/**
+	 * \brief getHeight.
+	 * \param self The <tt>%CairoFontMetrics</tt> instance.
+	 */
+	public float getHeight(CairoFontMetrics self) {}
+
+	/**
+	 * \brief getAscent.
+	 * \param self The <tt>%CairoFontMetrics</tt> instance.
+	 */
+	public float getAscent(CairoFontMetrics self) {}
+
+	/**
+	 * \brief getWidth.
+	 * \param self The <tt>%CairoFontMetrics</tt> instance.
+	 */
+	public float getWidth(CairoFontMetrics self) {}
+
+	/**
+	 * \brief setFont.
+	 * \param self The <tt>%CairoFontMetrics</tt> instance.
+	 */
+	public None setFont(CairoFontMetrics self, Vis.Font font) {}
+
+	/**
+	 * \brief getBounds.
+	 * \param self The <tt>%CairoFontMetrics</tt> instance.
+	 */
+	public float getBounds(CairoFontMetrics self, str string, Vis.Rectangle2D bounds) {}
+
+	/**
+	 * \brief getLeading.
+	 * \param self The <tt>%CairoFontMetrics</tt> instance.
+	 */
+	public float getLeading(CairoFontMetrics self) {}
+
+	/**
+	 * \brief getDescent.
+	 * \param self The <tt>%CairoFontMetrics</tt> instance.
+	 */
+	public float getDescent(CairoFontMetrics self) {}
+}

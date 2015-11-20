@@ -1,0 +1,64 @@
+/* -*- mode: java; tab-width: 4 -*- */
+
+package CDPL.Chem;
+
+/**
+ * \brief HybridizationState.
+ */
+public class HybridizationState extends Boost.Python.instance {
+
+	/**
+	 * \brief SP3.
+	 */
+	public static int SP3 = 3;
+
+	/**
+	 * \brief SD3.
+	 */
+	public static int SD3 = 5;
+
+	/**
+	 * \brief UNKNOWN.
+	 */
+	public static int UNKNOWN = 0;
+
+	/**
+	 * \brief SP2.
+	 */
+	public static int SP2 = 2;
+
+	/**
+	 * \brief SP.
+	 */
+	public static int SP = 1;
+
+	/**
+	 * \brief SP3D3.
+	 */
+	public static int SP3D3 = 9;
+
+	/**
+	 * \brief SP3D2.
+	 */
+	public static int SP3D2 = 8;
+
+	/**
+	 * \brief DP.
+	 */
+	public static int DP = 4;
+
+	/**
+	 * \brief SP1.
+	 */
+	public static int SP1 = 1;
+
+	/**
+	 * \brief SP3D.
+	 */
+	public static int SP3D = 7;
+
+	/**
+	 * \brief SP2D.
+	 */
+	public static int SP2D = 6;
+}

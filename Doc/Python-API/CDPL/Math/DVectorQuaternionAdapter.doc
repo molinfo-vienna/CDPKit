@@ -1,0 +1,319 @@
+/* -*- mode: java; tab-width: 4 -*- */
+
+package CDPL.Math;
+
+/**
+ * \brief DVectorQuaternionAdapter.
+ */
+public class DVectorQuaternionAdapter extends Boost.Python.instance {
+
+	/**
+	 * \brief __init__.
+	 * \param self The <tt>%DVectorQuaternionAdapter</tt> instance.
+	 */
+	public None __init__(object self, DVectorQuaternionAdapter a) {}
+
+	/**
+	 * \brief __init__.
+	 * \param self The <tt>%DVectorQuaternionAdapter</tt> instance.
+	 */
+	public None __init__(object self, DVectorExpression e) {}
+
+	/**
+	 * \brief set.
+	 * \param self The <tt>%DVectorQuaternionAdapter</tt> instance.
+	 */
+	public None set(DVectorQuaternionAdapter self, float c1 = 0.0, float c2 = 0.0, float c3 = 0.0, float c4 = 0.0) {}
+
+	/**
+	 * \brief getObjectID.
+	 * \param self The <tt>%DVectorQuaternionAdapter</tt> instance.
+	 */
+	public int getObjectID(DVectorQuaternionAdapter self) {}
+
+	/**
+	 * \brief getC4.
+	 * \param self The <tt>%DVectorQuaternionAdapter</tt> instance.
+	 */
+	public float getC4(DVectorQuaternionAdapter self) {}
+
+	/**
+	 * \brief swap.
+	 * \param self The <tt>%DVectorQuaternionAdapter</tt> instance.
+	 */
+	public None swap(DVectorQuaternionAdapter self, DVectorQuaternionAdapter a) {}
+
+	/**
+	 * \brief setC4.
+	 * \param self The <tt>%DVectorQuaternionAdapter</tt> instance.
+	 */
+	public None setC4(DVectorQuaternionAdapter self, float v) {}
+
+	/**
+	 * \brief getData.
+	 * \param self The <tt>%DVectorQuaternionAdapter</tt> instance.
+	 */
+	public DVectorExpression getData(DVectorQuaternionAdapter self) {}
+
+	/**
+	 * \brief setC2.
+	 * \param self The <tt>%DVectorQuaternionAdapter</tt> instance.
+	 */
+	public None setC2(DVectorQuaternionAdapter self, float v) {}
+
+	/**
+	 * \brief getC1.
+	 * \param self The <tt>%DVectorQuaternionAdapter</tt> instance.
+	 */
+	public float getC1(DVectorQuaternionAdapter self) {}
+
+	/**
+	 * \brief getC2.
+	 * \param self The <tt>%DVectorQuaternionAdapter</tt> instance.
+	 */
+	public float getC2(DVectorQuaternionAdapter self) {}
+
+	/**
+	 * \brief getC3.
+	 * \param self The <tt>%DVectorQuaternionAdapter</tt> instance.
+	 */
+	public float getC3(DVectorQuaternionAdapter self) {}
+
+	/**
+	 * \brief setC1.
+	 * \param self The <tt>%DVectorQuaternionAdapter</tt> instance.
+	 */
+	public None setC1(DVectorQuaternionAdapter self, float v) {}
+
+	/**
+	 * \brief setC3.
+	 * \param self The <tt>%DVectorQuaternionAdapter</tt> instance.
+	 */
+	public None setC3(DVectorQuaternionAdapter self, float v) {}
+
+	/**
+	 * \brief assign.
+	 * \param self The <tt>%DVectorQuaternionAdapter</tt> instance.
+	 */
+	public DVectorQuaternionAdapter assign(DVectorQuaternionAdapter self, ConstFQuaternionExpression e) {}
+
+	/**
+	 * \brief assign.
+	 * \param self The <tt>%DVectorQuaternionAdapter</tt> instance.
+	 */
+	public DVectorQuaternionAdapter assign(DVectorQuaternionAdapter self, ConstDQuaternionExpression e) {}
+
+	/**
+	 * \brief assign.
+	 * \param self The <tt>%DVectorQuaternionAdapter</tt> instance.
+	 */
+	public DVectorQuaternionAdapter assign(DVectorQuaternionAdapter self, ConstLQuaternionExpression e) {}
+
+	/**
+	 * \brief assign.
+	 * \param self The <tt>%DVectorQuaternionAdapter</tt> instance.
+	 */
+	public DVectorQuaternionAdapter assign(DVectorQuaternionAdapter self, ConstULQuaternionExpression e) {}
+
+	/**
+	 * \brief assign.
+	 * \param self The <tt>%DVectorQuaternionAdapter</tt> instance.
+	 */
+	public DVectorQuaternionAdapter assign(DVectorQuaternionAdapter self, DVectorQuaternionAdapter a) {}
+
+	/**
+	 * \brief __isub__.
+	 * \param self The <tt>%DVectorQuaternionAdapter</tt> instance.
+	 */
+	public DVectorQuaternionAdapter __isub__(DVectorQuaternionAdapter self, float t) {}
+
+	/**
+	 * \brief __isub__.
+	 * \param self The <tt>%DVectorQuaternionAdapter</tt> instance.
+	 */
+	public DVectorQuaternionAdapter __isub__(DVectorQuaternionAdapter self, DVectorQuaternionAdapter a) {}
+
+	/**
+	 * \brief __isub__.
+	 * \param self The <tt>%DVectorQuaternionAdapter</tt> instance.
+	 */
+	public DVectorQuaternionAdapter __isub__(DVectorQuaternionAdapter self, ConstDQuaternionExpression q) {}
+
+	/**
+	 * \brief __str__.
+	 * \param self The <tt>%DVectorQuaternionAdapter</tt> instance.
+	 */
+	public str __str__(DVectorQuaternionAdapter self) {}
+
+	/**
+	 * \brief __radd__.
+	 * \param self The <tt>%DVectorQuaternionAdapter</tt> instance.
+	 */
+	public ConstDQuaternionExpression __radd__(object self, float t) {}
+
+	/**
+	 * \brief __rsub__.
+	 * \param self The <tt>%DVectorQuaternionAdapter</tt> instance.
+	 */
+	public ConstDQuaternionExpression __rsub__(object self, float t) {}
+
+	/**
+	 * \brief __rdiv__.
+	 * \param self The <tt>%DVectorQuaternionAdapter</tt> instance.
+	 */
+	public ConstDQuaternionExpression __rdiv__(object self, float t) {}
+
+	/**
+	 * \brief __rmul__.
+	 * \param self The <tt>%DVectorQuaternionAdapter</tt> instance.
+	 */
+	public ConstDQuaternionExpression __rmul__(object self, float t) {}
+
+	/**
+	 * \brief __pos__.
+	 * \param self The <tt>%DVectorQuaternionAdapter</tt> instance.
+	 */
+	public DVectorQuaternionAdapter __pos__(DVectorQuaternionAdapter self) {}
+
+	/**
+	 * \brief __mul__.
+	 * \param self The <tt>%DVectorQuaternionAdapter</tt> instance.
+	 */
+	public ConstDQuaternionExpression __mul__(object self, float t) {}
+
+	/**
+	 * \brief __mul__.
+	 * \param self The <tt>%DVectorQuaternionAdapter</tt> instance.
+	 */
+	public ConstDQuaternionExpression __mul__(object self, ConstDQuaternionExpression e) {}
+
+	/**
+	 * \brief __ne__.
+	 * \param self The <tt>%DVectorQuaternionAdapter</tt> instance.
+	 */
+	public bool __ne__(DVectorQuaternionAdapter self, DVectorQuaternionAdapter a) {}
+
+	/**
+	 * \brief __ne__.
+	 * \param self The <tt>%DVectorQuaternionAdapter</tt> instance.
+	 */
+	public bool __ne__(DVectorQuaternionAdapter self, ConstDQuaternionExpression q) {}
+
+	/**
+	 * \brief __idiv__.
+	 * \param self The <tt>%DVectorQuaternionAdapter</tt> instance.
+	 */
+	public DVectorQuaternionAdapter __idiv__(DVectorQuaternionAdapter self, float t) {}
+
+	/**
+	 * \brief __idiv__.
+	 * \param self The <tt>%DVectorQuaternionAdapter</tt> instance.
+	 */
+	public DVectorQuaternionAdapter __idiv__(DVectorQuaternionAdapter self, DVectorQuaternionAdapter a) {}
+
+	/**
+	 * \brief __idiv__.
+	 * \param self The <tt>%DVectorQuaternionAdapter</tt> instance.
+	 */
+	public DVectorQuaternionAdapter __idiv__(DVectorQuaternionAdapter self, ConstDQuaternionExpression q) {}
+
+	/**
+	 * \brief __add__.
+	 * \param self The <tt>%DVectorQuaternionAdapter</tt> instance.
+	 */
+	public ConstDQuaternionExpression __add__(object self, float t) {}
+
+	/**
+	 * \brief __add__.
+	 * \param self The <tt>%DVectorQuaternionAdapter</tt> instance.
+	 */
+	public ConstDQuaternionExpression __add__(object self, ConstDQuaternionExpression e) {}
+
+	/**
+	 * \brief __eq__.
+	 * \param self The <tt>%DVectorQuaternionAdapter</tt> instance.
+	 */
+	public bool __eq__(DVectorQuaternionAdapter self, DVectorQuaternionAdapter a) {}
+
+	/**
+	 * \brief __eq__.
+	 * \param self The <tt>%DVectorQuaternionAdapter</tt> instance.
+	 */
+	public bool __eq__(DVectorQuaternionAdapter self, ConstDQuaternionExpression q) {}
+
+	/**
+	 * \brief __imul__.
+	 * \param self The <tt>%DVectorQuaternionAdapter</tt> instance.
+	 */
+	public DVectorQuaternionAdapter __imul__(DVectorQuaternionAdapter self, float t) {}
+
+	/**
+	 * \brief __imul__.
+	 * \param self The <tt>%DVectorQuaternionAdapter</tt> instance.
+	 */
+	public DVectorQuaternionAdapter __imul__(DVectorQuaternionAdapter self, DVectorQuaternionAdapter a) {}
+
+	/**
+	 * \brief __imul__.
+	 * \param self The <tt>%DVectorQuaternionAdapter</tt> instance.
+	 */
+	public DVectorQuaternionAdapter __imul__(DVectorQuaternionAdapter self, ConstDQuaternionExpression q) {}
+
+	/**
+	 * \brief __iadd__.
+	 * \param self The <tt>%DVectorQuaternionAdapter</tt> instance.
+	 */
+	public DVectorQuaternionAdapter __iadd__(DVectorQuaternionAdapter self, float t) {}
+
+	/**
+	 * \brief __iadd__.
+	 * \param self The <tt>%DVectorQuaternionAdapter</tt> instance.
+	 */
+	public DVectorQuaternionAdapter __iadd__(DVectorQuaternionAdapter self, DVectorQuaternionAdapter a) {}
+
+	/**
+	 * \brief __iadd__.
+	 * \param self The <tt>%DVectorQuaternionAdapter</tt> instance.
+	 */
+	public DVectorQuaternionAdapter __iadd__(DVectorQuaternionAdapter self, ConstDQuaternionExpression q) {}
+
+	/**
+	 * \brief __div__.
+	 * \param self The <tt>%DVectorQuaternionAdapter</tt> instance.
+	 */
+	public ConstDQuaternionExpression __div__(object self, float t) {}
+
+	/**
+	 * \brief __div__.
+	 * \param self The <tt>%DVectorQuaternionAdapter</tt> instance.
+	 */
+	public ConstDQuaternionExpression __div__(object self, ConstDQuaternionExpression e) {}
+
+	/**
+	 * \brief __neg__.
+	 * \param self The <tt>%DVectorQuaternionAdapter</tt> instance.
+	 */
+	public ConstDQuaternionExpression __neg__(object self) {}
+
+	/**
+	 * \brief __sub__.
+	 * \param self The <tt>%DVectorQuaternionAdapter</tt> instance.
+	 */
+	public ConstDQuaternionExpression __sub__(object self, float t) {}
+
+	/**
+	 * \brief __sub__.
+	 * \param self The <tt>%DVectorQuaternionAdapter</tt> instance.
+	 */
+	public ConstDQuaternionExpression __sub__(object self, ConstDQuaternionExpression e) {}
+
+	/**
+	 * \brief objectID.
+	 */
+	public None objectID;
+
+	/**
+	 * \brief data.
+	 */
+	public None data;
+}

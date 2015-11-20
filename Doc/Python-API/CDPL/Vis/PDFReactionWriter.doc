@@ -1,0 +1,15 @@
+/* -*- mode: java; tab-width: 4 -*- */
+
+package CDPL.Vis;
+
+/**
+ * \brief PDFReactionWriter.
+ */
+public class PDFReactionWriter extends Chem.ReactionWriter {
+
+	/**
+	 * \brief __init__.
+	 * \param self The <tt>%PDFReactionWriter</tt> instance.
+	 */
+	public None __init__(object self, Base.OStream os) {}
+}

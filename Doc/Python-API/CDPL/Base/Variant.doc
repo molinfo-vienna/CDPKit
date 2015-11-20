@@ -1,0 +1,9 @@
+/* -*- mode: java; tab-width: 4 -*- */
+
+package CDPL.Base;
+
+/**
+ * \brief Variant.
+ */
+public class Variant extends Boost.Python.instance {
+}

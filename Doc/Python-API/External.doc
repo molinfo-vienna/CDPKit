@@ -1,0 +1,16 @@
+/* -*- mode: java; tab-width: 4 -*- */
+
+/**
+ * \brief Serves as namespace for internal <em>%Boost.%Python</em> types.
+ */
+package Boost.Python;
+
+/**
+ * \brief The \e %Python base class of all wrapped C++ enumerations.
+ */
+class enum extends int {}
+
+/**
+ * \brief The \e %Python base class of all wrapped C++ classes.
+ */
+class instance extends object {}

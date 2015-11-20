@@ -1,0 +1,15 @@
+/* -*- mode: java; tab-width: 4 -*- */
+
+package CDPL.Vis;
+
+/**
+ * \brief PSMolecularGraphWriter.
+ */
+public class PSMolecularGraphWriter extends Chem.MolecularGraphWriter {
+
+	/**
+	 * \brief __init__.
+	 * \param self The <tt>%PSMolecularGraphWriter</tt> instance.
+	 */
+	public None __init__(object self, Base.OStream os) {}
+}

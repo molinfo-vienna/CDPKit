@@ -1,0 +1,33 @@
+/* -*- mode: java; tab-width: 4 -*- */
+
+package CDPL.Vis;
+
+/**
+ * \brief View2D.
+ */
+public class View2D extends Base.ControlParameterContainer {
+
+	/**
+	 * \brief __init__.
+	 * \param self The <tt>%View2D</tt> instance.
+	 */
+	public None __init__(object self) {}
+
+	/**
+	 * \brief setFontMetrics.
+	 * \param self The <tt>%View2D</tt> instance.
+	 */
+	public None setFontMetrics(View2D self, FontMetrics font_metrics) {}
+
+	/**
+	 * \brief render.
+	 * \param self The <tt>%View2D</tt> instance.
+	 */
+	public None render(View2D self, Renderer2D er) {}
+
+	/**
+	 * \brief getModelBounds.
+	 * \param self The <tt>%View2D</tt> instance.
+	 */
+	public None getModelBounds(View2D self, Rectangle2D bounds) {}
+}

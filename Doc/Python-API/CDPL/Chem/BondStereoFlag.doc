@@ -1,0 +1,44 @@
+/* -*- mode: java; tab-width: 4 -*- */
+
+package CDPL.Chem;
+
+/**
+ * \brief BondStereoFlag.
+ */
+public class BondStereoFlag extends Boost.Python.instance {
+
+	/**
+	 * \brief REVERSE_UP.
+	 */
+	public static int REVERSE_UP = 2;
+
+	/**
+	 * \brief PLAIN.
+	 */
+	public static int PLAIN = 0;
+
+	/**
+	 * \brief UP.
+	 */
+	public static int UP = 1;
+
+	/**
+	 * \brief DOWN.
+	 */
+	public static int DOWN = 3;
+
+	/**
+	 * \brief REVERSE_DOWN.
+	 */
+	public static int REVERSE_DOWN = 4;
+
+	/**
+	 * \brief REVERSE_EITHER.
+	 */
+	public static int REVERSE_EITHER = 6;
+
+	/**
+	 * \brief EITHER.
+	 */
+	public static int EITHER = 5;
+}

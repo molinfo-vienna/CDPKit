@@ -1,0 +1,21 @@
+/* -*- mode: java; tab-width: 4 -*- */
+
+package CDPL.Chem;
+
+/**
+ * \brief AtomConfigurationMatchExpression.
+ */
+public class AtomConfigurationMatchExpression extends AtomMatchExpression {
+
+	/**
+	 * \brief __init__.
+	 * \param self The <tt>%AtomConfigurationMatchExpression</tt> instance.
+	 */
+	public None __init__(object self, AtomConfigurationMatchExpression expr) {}
+
+	/**
+	 * \brief __init__.
+	 * \param self The <tt>%AtomConfigurationMatchExpression</tt> instance.
+	 */
+	public None __init__(object self, StereoDescriptor query_stereo_descr, Atom query_atom, bool not_match, bool allow_part_maps) {}
+}

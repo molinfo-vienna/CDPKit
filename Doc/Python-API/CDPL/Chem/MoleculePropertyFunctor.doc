@@ -1,0 +1,38 @@
+/* -*- mode: java; tab-width: 4 -*- */
+
+package CDPL.Chem;
+
+/**
+ * \brief MoleculePropertyFunctor.
+ */
+public class MoleculePropertyFunctor extends Boost.Python.instance {
+
+	/**
+	 * \brief __init__.
+	 * \param self The <tt>%MoleculePropertyFunctor</tt> instance.
+	 */
+	public None __init__(object self) {}
+
+	/**
+	 * \brief getObjectID.
+	 * \param self The <tt>%MoleculePropertyFunctor</tt> instance.
+	 */
+	public int getObjectID(MoleculePropertyFunctor self) {}
+
+	/**
+	 * \brief addDependency.
+	 * \param self The <tt>%MoleculePropertyFunctor</tt> instance.
+	 */
+	public None addDependency(MoleculePropertyFunctor self, Base.PropertyContainer cntnr1, Base.PropertyKey key1, Base.PropertyContainer cntnr2, Base.PropertyKey key2) {}
+
+	/**
+	 * \brief __call__.
+	 * \param self The <tt>%MoleculePropertyFunctor</tt> instance.
+	 */
+	public Base.Variant __call__(MoleculePropertyFunctor self, Base.PropertyKey key, Molecule mol) {}
+
+	/**
+	 * \brief objectID.
+	 */
+	public None objectID;
+}

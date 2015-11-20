@@ -1,0 +1,201 @@
+/* -*- mode: java; tab-width: 4 -*- */
+
+package CDPL.Base;
+
+/**
+ * \brief ControlParameterList.
+ */
+public class ControlParameterList extends Boost.Python.instance {
+
+	/**
+	 * \brief __init__.
+	 * \param self The <tt>%ControlParameterList</tt> instance.
+	 */
+	public None __init__(object arg1) {}
+
+	/**
+	 * \brief __init__.
+	 * \param self The <tt>%ControlParameterList</tt> instance.
+	 */
+	public None __init__(object self, ControlParameterList cpl) {}
+
+	/**
+	 * \brief getObjectID.
+	 * \param self The <tt>%ControlParameterList</tt> instance.
+	 */
+	public int getObjectID(ControlParameterList self) {}
+
+	/**
+	 * \brief getSize.
+	 * \param self The <tt>%ControlParameterList</tt> instance.
+	 */
+	public int getSize(ControlParameterList self) {}
+
+	/**
+	 * \brief registerParameterRemovedCallback.
+	 * \param self The <tt>%ControlParameterList</tt> instance.
+	 */
+	public int registerParameterRemovedCallback(ControlParameterList self, object func) {}
+
+	/**
+	 * \brief removeParameter.
+	 * \param self The <tt>%ControlParameterList</tt> instance.
+	 */
+	public bool removeParameter(ControlParameterList self, ControlParameterKey key) {}
+
+	/**
+	 * \brief setParameter.
+	 * \param self The <tt>%ControlParameterList</tt> instance.
+	 */
+	public None setParameter(ControlParameterList self, ControlParameterKey key, Variant value) {}
+
+	/**
+	 * \brief getParameterOrDefault.
+	 * \param self The <tt>%ControlParameterList</tt> instance.
+	 */
+	public Variant getParameterOrDefault(ControlParameterList self, ControlParameterKey key, Variant def_value, bool local = False) {}
+
+	/**
+	 * \brief setParent.
+	 * \param self The <tt>%ControlParameterList</tt> instance.
+	 */
+	public None setParent(ControlParameterList self, ControlParameterList cpl) {}
+
+	/**
+	 * \brief unregisterParameterRemovedCallback.
+	 * \param self The <tt>%ControlParameterList</tt> instance.
+	 */
+	public None unregisterParameterRemovedCallback(ControlParameterList self, int id) {}
+
+	/**
+	 * \brief getParameter.
+	 * \param self The <tt>%ControlParameterList</tt> instance.
+	 */
+	public Variant getParameter(ControlParameterList self, ControlParameterKey key, bool throw_ = False, bool local = False) {}
+
+	/**
+	 * \brief registerParameterChangedCallback.
+	 * \param self The <tt>%ControlParameterList</tt> instance.
+	 */
+	public int registerParameterChangedCallback(ControlParameterList self, object func) {}
+
+	/**
+	 * \brief unregisterParentChangedCallback.
+	 * \param self The <tt>%ControlParameterList</tt> instance.
+	 */
+	public None unregisterParentChangedCallback(ControlParameterList self, int id) {}
+
+	/**
+	 * \brief getParameterValues.
+	 * \param self The <tt>%ControlParameterList</tt> instance.
+	 */
+	public list getParameterValues(ControlParameterList self) {}
+
+	/**
+	 * \brief registerParentChangedCallback.
+	 * \param self The <tt>%ControlParameterList</tt> instance.
+	 */
+	public int registerParentChangedCallback(ControlParameterList self, object func) {}
+
+	/**
+	 * \brief unregisterParameterChangedCallback.
+	 * \param self The <tt>%ControlParameterList</tt> instance.
+	 */
+	public None unregisterParameterChangedCallback(ControlParameterList self, int id) {}
+
+	/**
+	 * \brief copy.
+	 * \param self The <tt>%ControlParameterList</tt> instance.
+	 */
+	public ControlParameterList copy(ControlParameterList self, ControlParameterList cpl) {}
+
+	/**
+	 * \brief getParameters.
+	 * \param self The <tt>%ControlParameterList</tt> instance.
+	 */
+	public list getParameters(ControlParameterList self) {}
+
+	/**
+	 * \brief isParameterSet.
+	 * \param self The <tt>%ControlParameterList</tt> instance.
+	 */
+	public bool isParameterSet(ControlParameterList self, ControlParameterKey key, bool local = False) {}
+
+	/**
+	 * \brief getParent.
+	 * \param self The <tt>%ControlParameterList</tt> instance.
+	 */
+	public ControlParameterList getParent(ControlParameterList self) {}
+
+	/**
+	 * \brief getParameterKeys.
+	 * \param self The <tt>%ControlParameterList</tt> instance.
+	 */
+	public list getParameterKeys(ControlParameterList self) {}
+
+	/**
+	 * \brief clear.
+	 * \param self The <tt>%ControlParameterList</tt> instance.
+	 */
+	public None clear(ControlParameterList self) {}
+
+	/**
+	 * \brief __getitem__.
+	 * \param self The <tt>%ControlParameterList</tt> instance.
+	 */
+	public Variant __getitem__(ControlParameterList self, ControlParameterKey key) {}
+
+	/**
+	 * \brief __contains__.
+	 * \param self The <tt>%ControlParameterList</tt> instance.
+	 */
+	public bool __contains__(ControlParameterList arg1, ControlParameterKey self, bool key) {}
+
+	/**
+	 * \brief __delitem__.
+	 * \param self The <tt>%ControlParameterList</tt> instance.
+	 */
+	public bool __delitem__(ControlParameterList arg1, ControlParameterKey self) {}
+
+	/**
+	 * \brief __len__.
+	 * \param self The <tt>%ControlParameterList</tt> instance.
+	 */
+	public int __len__(ControlParameterList self) {}
+
+	/**
+	 * \brief __setitem__.
+	 * \param self The <tt>%ControlParameterList</tt> instance.
+	 */
+	public None __setitem__(ControlParameterList self, ControlParameterKey key, Variant value) {}
+
+	/**
+	 * \brief objectID.
+	 */
+	public None objectID;
+
+	/**
+	 * \brief size.
+	 */
+	public None size;
+
+	/**
+	 * \brief parameters.
+	 */
+	public None parameters;
+
+	/**
+	 * \brief parent.
+	 */
+	public None parent;
+
+	/**
+	 * \brief parameterValues.
+	 */
+	public None parameterValues;
+
+	/**
+	 * \brief parameterKeys.
+	 */
+	public None parameterKeys;
+}

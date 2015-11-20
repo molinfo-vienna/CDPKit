@@ -1,0 +1,157 @@
+/* -*- mode: java; tab-width: 4 -*- */
+
+package CDPL.Chem;
+
+/**
+ * \brief AtomMapping.
+ */
+public class AtomMapping extends Boost.Python.instance {
+
+	/**
+	 * \brief __init__.
+	 * \param self The <tt>%AtomMapping</tt> instance.
+	 */
+	public None __init__(object self) {}
+
+	/**
+	 * \brief __init__.
+	 * \param self The <tt>%AtomMapping</tt> instance.
+	 */
+	public None __init__(object self, AtomMapping mapping) {}
+
+	/**
+	 * \brief removeEntries.
+	 * \param self The <tt>%AtomMapping</tt> instance.
+	 */
+	public int removeEntries(AtomMapping self, Atom key) {}
+
+	/**
+	 * \brief getObjectID.
+	 * \param self The <tt>%AtomMapping</tt> instance.
+	 */
+	public int getObjectID(AtomMapping self) {}
+
+	/**
+	 * \brief getValues.
+	 * \param self The <tt>%AtomMapping</tt> instance.
+	 */
+	public object getValues(AtomMapping self) {}
+
+	/**
+	 * \brief getValues.
+	 * \param self The <tt>%AtomMapping</tt> instance.
+	 */
+	public object getValues(AtomMapping self, Atom key) {}
+
+	/**
+	 * \brief getSize.
+	 * \param self The <tt>%AtomMapping</tt> instance.
+	 */
+	public int getSize(AtomMapping self) {}
+
+	/**
+	 * \brief getNumEntries.
+	 * \param self The <tt>%AtomMapping</tt> instance.
+	 */
+	public int getNumEntries(AtomMapping self, Atom key) {}
+
+	/**
+	 * \brief isEmpty.
+	 * \param self The <tt>%AtomMapping</tt> instance.
+	 */
+	public bool isEmpty(AtomMapping self) {}
+
+	/**
+	 * \brief removeEntry.
+	 * \param self The <tt>%AtomMapping</tt> instance.
+	 */
+	public bool removeEntry(AtomMapping self, Atom key) {}
+
+	/**
+	 * \brief setEntry.
+	 * \param self The <tt>%AtomMapping</tt> instance.
+	 */
+	public None setEntry(AtomMapping self, Atom key, Atom value) {}
+
+	/**
+	 * \brief getKeys.
+	 * \param self The <tt>%AtomMapping</tt> instance.
+	 */
+	public object getKeys(AtomMapping self) {}
+
+	/**
+	 * \brief getEntries.
+	 * \param self The <tt>%AtomMapping</tt> instance.
+	 */
+	public object getEntries(AtomMapping self) {}
+
+	/**
+	 * \brief clear.
+	 * \param self The <tt>%AtomMapping</tt> instance.
+	 */
+	public None clear(AtomMapping self) {}
+
+	/**
+	 * \brief getValue.
+	 * \param self The <tt>%AtomMapping</tt> instance.
+	 */
+	public Atom getValue(AtomMapping self, Atom key) {}
+
+	/**
+	 * \brief getValue.
+	 * \param self The <tt>%AtomMapping</tt> instance.
+	 */
+	public Atom getValue(AtomMapping self, Atom key, Atom def_value) {}
+
+	/**
+	 * \brief insertEntry.
+	 * \param self The <tt>%AtomMapping</tt> instance.
+	 */
+	public None insertEntry(AtomMapping self, Atom key, Atom value) {}
+
+	/**
+	 * \brief assign.
+	 * \param self The <tt>%AtomMapping</tt> instance.
+	 */
+	public AtomMapping assign(AtomMapping self, AtomMapping map) {}
+
+	/**
+	 * \brief __contains__.
+	 * \param self The <tt>%AtomMapping</tt> instance.
+	 */
+	public int __contains__(AtomMapping self, Atom key) {}
+
+	/**
+	 * \brief __len__.
+	 * \param self The <tt>%AtomMapping</tt> instance.
+	 */
+	public int __len__(AtomMapping self) {}
+
+	/**
+	 * \brief __getitem__.
+	 * \param self The <tt>%AtomMapping</tt> instance.
+	 */
+	public Atom __getitem__(AtomMapping self, Atom key) {}
+
+	/**
+	 * \brief __setitem__.
+	 * \param self The <tt>%AtomMapping</tt> instance.
+	 */
+	public None __setitem__(AtomMapping self, Atom key, Atom value) {}
+
+	/**
+	 * \brief __delitem__.
+	 * \param self The <tt>%AtomMapping</tt> instance.
+	 */
+	public bool __delitem__(AtomMapping self, Atom key) {}
+
+	/**
+	 * \brief objectID.
+	 */
+	public None objectID;
+
+	/**
+	 * \brief size.
+	 */
+	public None size;
+}

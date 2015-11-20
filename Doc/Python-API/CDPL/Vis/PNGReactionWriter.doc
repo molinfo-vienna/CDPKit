@@ -1,0 +1,15 @@
+/* -*- mode: java; tab-width: 4 -*- */
+
+package CDPL.Vis;
+
+/**
+ * \brief PNGReactionWriter.
+ */
+public class PNGReactionWriter extends Chem.ReactionWriter {
+
+	/**
+	 * \brief __init__.
+	 * \param self The <tt>%PNGReactionWriter</tt> instance.
+	 */
+	public None __init__(object self, Base.OStream os) {}
+}

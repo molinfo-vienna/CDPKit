@@ -1,0 +1,158 @@
+/* -*- mode: java; tab-width: 4 -*- */
+
+package CDPL.Chem;
+
+/**
+ * \brief DaylightFingerprintCalculator.
+ */
+public class DaylightFingerprintCalculator extends Boost.Python.instance {
+
+	/**
+	 * \brief DefBondDescriptorFunctor.
+	 */
+	public class DefBondDescriptorFunctor extends Boost.Python.instance {
+
+		/**
+		 * \brief __init__.
+		 * \param self The <tt>%DefBondDescriptorFunctor</tt> instance.
+		 */
+		public None __init__(object self, int flags = 14) {}
+
+		/**
+		 * \brief __call__.
+		 * \param self The <tt>%DefBondDescriptorFunctor</tt> instance.
+		 */
+		public int __call__(DefBondDescriptorFunctor self, Bond bond) {}
+	}
+
+	/**
+	 * \brief DefAtomDescriptorFunctor.
+	 */
+	public class DefAtomDescriptorFunctor extends Boost.Python.instance {
+
+		/**
+		 * \brief __init__.
+		 * \param self The <tt>%DefAtomDescriptorFunctor</tt> instance.
+		 */
+		public None __init__(object self, int flags = 142) {}
+
+		/**
+		 * \brief __call__.
+		 * \param self The <tt>%DefAtomDescriptorFunctor</tt> instance.
+		 */
+		public int __call__(DefAtomDescriptorFunctor self, Atom atom) {}
+	}
+
+	/**
+	 * \brief DEF_ATOM_PROPERTY_FLAGS.
+	 */
+	public static int DEF_ATOM_PROPERTY_FLAGS = 142;
+
+	/**
+	 * \brief DEF_BOND_PROPERTY_FLAGS.
+	 */
+	public static int DEF_BOND_PROPERTY_FLAGS = 14;
+
+	/**
+	 * \brief __init__.
+	 * \param self The <tt>%DaylightFingerprintCalculator</tt> instance.
+	 */
+	public None __init__(object self) {}
+
+	/**
+	 * \brief __init__.
+	 * \param self The <tt>%DaylightFingerprintCalculator</tt> instance.
+	 */
+	public None __init__(object self, MolecularGraph molgraph) {}
+
+	/**
+	 * \brief getObjectID.
+	 * \param self The <tt>%DaylightFingerprintCalculator</tt> instance.
+	 */
+	public int getObjectID(DaylightFingerprintCalculator self) {}
+
+	/**
+	 * \brief getMaxPathLength.
+	 * \param self The <tt>%DaylightFingerprintCalculator</tt> instance.
+	 */
+	public int getMaxPathLength(DaylightFingerprintCalculator self) {}
+
+	/**
+	 * \brief setMinPathLength.
+	 * \param self The <tt>%DaylightFingerprintCalculator</tt> instance.
+	 */
+	public None setMinPathLength(DaylightFingerprintCalculator self, int min_length) {}
+
+	/**
+	 * \brief calculate.
+	 * \param self The <tt>%DaylightFingerprintCalculator</tt> instance.
+	 */
+	public Util.BitSet calculate(DaylightFingerprintCalculator self, MolecularGraph molgraph) {}
+
+	/**
+	 * \brief getResult.
+	 * \param self The <tt>%DaylightFingerprintCalculator</tt> instance.
+	 */
+	public Util.BitSet getResult(DaylightFingerprintCalculator self) {}
+
+	/**
+	 * \brief getMinPathLength.
+	 * \param self The <tt>%DaylightFingerprintCalculator</tt> instance.
+	 */
+	public int getMinPathLength(DaylightFingerprintCalculator self) {}
+
+	/**
+	 * \brief getNumBits.
+	 * \param self The <tt>%DaylightFingerprintCalculator</tt> instance.
+	 */
+	public int getNumBits(DaylightFingerprintCalculator self) {}
+
+	/**
+	 * \brief setNumBits.
+	 * \param self The <tt>%DaylightFingerprintCalculator</tt> instance.
+	 */
+	public None setNumBits(DaylightFingerprintCalculator self, int num_bits) {}
+
+	/**
+	 * \brief setAtomDescriptorFunction.
+	 * \param self The <tt>%DaylightFingerprintCalculator</tt> instance.
+	 */
+	public None setAtomDescriptorFunction(DaylightFingerprintCalculator self, object func) {}
+
+	/**
+	 * \brief setMaxPathLength.
+	 * \param self The <tt>%DaylightFingerprintCalculator</tt> instance.
+	 */
+	public None setMaxPathLength(DaylightFingerprintCalculator self, int max_length) {}
+
+	/**
+	 * \brief setBondDescriptorFunction.
+	 * \param self The <tt>%DaylightFingerprintCalculator</tt> instance.
+	 */
+	public None setBondDescriptorFunction(DaylightFingerprintCalculator self, object func) {}
+
+	/**
+	 * \brief objectID.
+	 */
+	public None objectID;
+
+	/**
+	 * \brief maxPathLength.
+	 */
+	public None maxPathLength;
+
+	/**
+	 * \brief result.
+	 */
+	public None result;
+
+	/**
+	 * \brief numBits.
+	 */
+	public None numBits;
+
+	/**
+	 * \brief minPathLength.
+	 */
+	public None minPathLength;
+}

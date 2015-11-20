@@ -1,0 +1,21 @@
+/* -*- mode: java; tab-width: 4 -*- */
+
+package CDPL.Math;
+
+/**
+ * \brief YTranslation3D.
+ */
+public class YTranslation3D extends AffineTransform3D {
+
+	/**
+	 * \brief __init__.
+	 * \param self The <tt>%YTranslation3D</tt> instance.
+	 */
+	public None __init__(object self, YTranslation3D xform) {}
+
+	/**
+	 * \brief __init__.
+	 * \param self The <tt>%YTranslation3D</tt> instance.
+	 */
+	public None __init__(object self, float delta) {}
+}

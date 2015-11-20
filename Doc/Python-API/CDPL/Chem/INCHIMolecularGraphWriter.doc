@@ -1,0 +1,48 @@
+/* -*- mode: java; tab-width: 4 -*- */
+
+package CDPL.Chem;
+
+/**
+ * \brief INCHIMolecularGraphWriter.
+ */
+public class INCHIMolecularGraphWriter extends MolecularGraphWriter {
+
+	/**
+	 * \brief __init__.
+	 * \param self The <tt>%INCHIMolecularGraphWriter</tt> instance.
+	 */
+	public None __init__(object self, Base.OStream os) {}
+
+	/**
+	 * \brief getLogOutput.
+	 * \param self The <tt>%INCHIMolecularGraphWriter</tt> instance.
+	 */
+	public str getLogOutput(INCHIMolecularGraphWriter self) {}
+
+	/**
+	 * \brief getMessage.
+	 * \param self The <tt>%INCHIMolecularGraphWriter</tt> instance.
+	 */
+	public str getMessage(INCHIMolecularGraphWriter self) {}
+
+	/**
+	 * \brief getReturnCode.
+	 * \param self The <tt>%INCHIMolecularGraphWriter</tt> instance.
+	 */
+	public int getReturnCode(INCHIMolecularGraphWriter self) {}
+
+	/**
+	 * \brief returnCode.
+	 */
+	public None returnCode;
+
+	/**
+	 * \brief logOutput.
+	 */
+	public None logOutput;
+
+	/**
+	 * \brief message.
+	 */
+	public None message;
+}

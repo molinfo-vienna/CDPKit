@@ -1,0 +1,21 @@
+/* -*- mode: java; tab-width: 4 -*- */
+
+package CDPL.Chem;
+
+/**
+ * \brief BondConfigurationMatchExpression.
+ */
+public class BondConfigurationMatchExpression extends BondMatchExpression {
+
+	/**
+	 * \brief __init__.
+	 * \param self The <tt>%BondConfigurationMatchExpression</tt> instance.
+	 */
+	public None __init__(object self, BondConfigurationMatchExpression expr) {}
+
+	/**
+	 * \brief __init__.
+	 * \param self The <tt>%BondConfigurationMatchExpression</tt> instance.
+	 */
+	public None __init__(object self, StereoDescriptor query_stereo_descr, Bond query_bond, bool not_match, bool allow_part_maps) {}
+}

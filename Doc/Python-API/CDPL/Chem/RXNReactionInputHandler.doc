@@ -1,0 +1,15 @@
+/* -*- mode: java; tab-width: 4 -*- */
+
+package CDPL.Chem;
+
+/**
+ * \brief RXNReactionInputHandler.
+ */
+public class RXNReactionInputHandler extends ReactionInputHandler {
+
+	/**
+	 * \brief __init__.
+	 * \param self The <tt>%RXNReactionInputHandler</tt> instance.
+	 */
+	public None __init__(object self) {}
+}

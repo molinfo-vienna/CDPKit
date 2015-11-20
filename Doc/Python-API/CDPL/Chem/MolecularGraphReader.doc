@@ -1,0 +1,63 @@
+/* -*- mode: java; tab-width: 4 -*- */
+
+package CDPL.Chem;
+
+/**
+ * \brief MolecularGraphReader.
+ */
+public class MolecularGraphReader extends Base.DataIOBase {
+
+	/**
+	 * \brief __init__.
+	 * \param self The <tt>%MolecularGraphReader</tt> instance.
+	 */
+	public None __init__(object self) {}
+
+	/**
+	 * \brief getNumRecords.
+	 * \param self The <tt>%MolecularGraphReader</tt> instance.
+	 */
+	public int getNumRecords(MolecularGraphReader self) {}
+
+	/**
+	 * \brief read.
+	 * \param self The <tt>%MolecularGraphReader</tt> instance.
+	 */
+	public MolecularGraphReader read(MolecularGraphReader self, MolecularGraph molgraph) {}
+
+	/**
+	 * \brief read.
+	 * \param self The <tt>%MolecularGraphReader</tt> instance.
+	 */
+	public MolecularGraphReader read(MolecularGraphReader self, int idx, MolecularGraph molgraph) {}
+
+	/**
+	 * \brief skip.
+	 * \param self The <tt>%MolecularGraphReader</tt> instance.
+	 */
+	public MolecularGraphReader skip(MolecularGraphReader self) {}
+
+	/**
+	 * \brief hasMoreData.
+	 * \param self The <tt>%MolecularGraphReader</tt> instance.
+	 */
+	public bool hasMoreData(MolecularGraphReader self) {}
+
+	/**
+	 * \brief setRecordIndex.
+	 * \param self The <tt>%MolecularGraphReader</tt> instance.
+	 */
+	public None setRecordIndex(MolecularGraphReader self, int idx) {}
+
+	/**
+	 * \brief getRecordIndex.
+	 * \param self The <tt>%MolecularGraphReader</tt> instance.
+	 */
+	public int getRecordIndex(MolecularGraphReader self) {}
+
+	/**
+	 * \brief __nonzero__.
+	 * \param self The <tt>%MolecularGraphReader</tt> instance.
+	 */
+	public bool __nonzero__(MolecularGraphReader self) {}
+}

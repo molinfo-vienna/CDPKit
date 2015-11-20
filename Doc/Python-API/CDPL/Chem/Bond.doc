@@ -1,0 +1,220 @@
+/* -*- mode: java; tab-width: 4 -*- */
+
+package CDPL.Chem;
+
+/**
+ * \brief Bond.
+ */
+public class Bond extends AtomContainer, Base.PropertyContainer {
+
+	/**
+	 * \brief AtomSequence.
+	 */
+	public class AtomSequence extends Boost.Python.instance {
+
+		/**
+		 * \brief __getitem__.
+		 * \param self The <tt>%AtomSequence</tt> instance.
+		 */
+		public Atom __getitem__(AtomSequence self, int idx) {}
+
+		/**
+		 * \brief __contains__.
+		 * \param self The <tt>%AtomSequence</tt> instance.
+		 */
+		public bool __contains__(AtomSequence self, Atom atom) {}
+
+		/**
+		 * \brief __len__.
+		 * \param self The <tt>%AtomSequence</tt> instance.
+		 */
+		public int __len__(AtomSequence self) {}
+	}
+
+	/**
+	 * \brief __init__.
+	 * \param self The <tt>%Bond</tt> instance.
+	 */
+	public None __init__(object self) {}
+
+	/**
+	 * \brief containsAtom.
+	 * \param self The <tt>%Bond</tt> instance.
+	 */
+	public bool containsAtom(AtomContainer self, Atom atom) {}
+
+	/**
+	 * \brief containsAtom.
+	 * \param self The <tt>%Bond</tt> instance.
+	 */
+	public None containsAtom(Bond arg1, Atom arg2) {}
+
+	/**
+	 * \brief getBegin.
+	 * \param self The <tt>%Bond</tt> instance.
+	 */
+	public Atom getBegin(Bond self) {}
+
+	/**
+	 * \brief getIndex.
+	 * \param self The <tt>%Bond</tt> instance.
+	 */
+	public int getIndex(Bond self) {}
+
+	/**
+	 * \brief clearProperties.
+	 * \param self The <tt>%Bond</tt> instance.
+	 */
+	public None clearProperties(Bond self) {}
+
+	/**
+	 * \brief getAtom.
+	 * \param self The <tt>%Bond</tt> instance.
+	 */
+	public Atom getAtom(Bond self, int idx) {}
+
+	/**
+	 * \brief getNeighbor.
+	 * \param self The <tt>%Bond</tt> instance.
+	 */
+	public Atom getNeighbor(Bond arg1, Bond self, Atom atom) {}
+
+	/**
+	 * \brief isPropertySet.
+	 * \param self The <tt>%Bond</tt> instance.
+	 */
+	public bool isPropertySet(Bond self, Base.LookupKey key) {}
+
+	/**
+	 * \brief getAtoms.
+	 * \param self The <tt>%Bond</tt> instance.
+	 */
+	public object getAtoms(AtomContainer self) {}
+
+	/**
+	 * \brief getEnd.
+	 * \param self The <tt>%Bond</tt> instance.
+	 */
+	public Atom getEnd(Bond self) {}
+
+	/**
+	 * \brief getNumAtoms.
+	 * \param self The <tt>%Bond</tt> instance.
+	 */
+	public int getNumAtoms(Bond self) {}
+
+	/**
+	 * \brief copyProperties.
+	 * \param self The <tt>%Bond</tt> instance.
+	 */
+	public None copyProperties(Base.PropertyContainer self, Base.PropertyContainer cntnr) {}
+
+	/**
+	 * \brief removeProperty.
+	 * \param self The <tt>%Bond</tt> instance.
+	 */
+	public bool removeProperty(Bond self, Base.LookupKey key) {}
+
+	/**
+	 * \brief setProperty.
+	 * \param self The <tt>%Bond</tt> instance.
+	 */
+	public None setProperty(Bond self, Base.LookupKey key, Base.Variant value) {}
+
+	/**
+	 * \brief getAtomIndex.
+	 * \param self The <tt>%Bond</tt> instance.
+	 */
+	public int getAtomIndex(AtomContainer self, Atom atom) {}
+
+	/**
+	 * \brief getAtomIndex.
+	 * \param self The <tt>%Bond</tt> instance.
+	 */
+	public None getAtomIndex(Bond arg1, Atom arg2) {}
+
+	/**
+	 * \brief addProperties.
+	 * \param self The <tt>%Bond</tt> instance.
+	 */
+	public None addProperties(Base.PropertyContainer self, Base.PropertyContainer cntnr) {}
+
+	/**
+	 * \brief getProperty.
+	 * \param self The <tt>%Bond</tt> instance.
+	 */
+	public Base.Variant getProperty(Bond self, Base.LookupKey key, bool throw_ = False) {}
+
+	/**
+	 * \brief getMolecule.
+	 * \param self The <tt>%Bond</tt> instance.
+	 */
+	public Molecule getMolecule(Bond self) {}
+
+	/**
+	 * \brief assign.
+	 * \param self The <tt>%Bond</tt> instance.
+	 */
+	public Bond assign(Bond self, Bond bond) {}
+
+	/**
+	 * \brief __contains__.
+	 * \param self The <tt>%Bond</tt> instance.
+	 */
+	public bool __contains__(AtomContainer self, Atom atom) {}
+
+	/**
+	 * \brief __contains__.
+	 * \param self The <tt>%Bond</tt> instance.
+	 */
+	public bool __contains__(Bond self, Base.LookupKey key) {}
+
+	/**
+	 * \brief __len__.
+	 * \param self The <tt>%Bond</tt> instance.
+	 */
+	public int __len__(Bond self) {}
+
+	/**
+	 * \brief __getitem__.
+	 * \param self The <tt>%Bond</tt> instance.
+	 */
+	public Base.Variant __getitem__(Base.PropertyContainer self, Base.LookupKey key) {}
+
+	/**
+	 * \brief __delitem__.
+	 * \param self The <tt>%Bond</tt> instance.
+	 */
+	public bool __delitem__(Bond self, Base.LookupKey key) {}
+
+	/**
+	 * \brief __setitem__.
+	 * \param self The <tt>%Bond</tt> instance.
+	 */
+	public None __setitem__(Bond self, Base.LookupKey key, Base.Variant value) {}
+
+	/**
+	 * \brief index.
+	 */
+	public None index;
+
+	/**
+	 * \brief end.
+	 */
+	public None end;
+
+	/**
+	 * \brief begin.
+	 */
+	public None begin;
+
+	/**
+	 * \brief molecule.
+	 */
+	public None molecule;
+
+	/**
+	 * \brief atoms.
+	 */
+	public None atoms;
+}

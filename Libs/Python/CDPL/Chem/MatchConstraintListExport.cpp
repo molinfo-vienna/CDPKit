@@ -1,0 +1,122 @@
+/* -*- mode: c++; c-basic-offset: 4; tab-width: 4; indent-tabs-mode: t -*- */
+
+/* 
+ * MatchConstraintListExport.cpp 
+ *
+ * This file is part of the Chemical Data Processing Toolkit
+ *
+ * Copyright (C) 2003-2010 Thomas A. Seidel <thomas.seidel@univie.ac.at>
+ *
+ * This library is free software; you can redistribute it and/or
+ * modify it under the terms of the GNU Lesser General Public
+ * License as published by the Free Software Foundation; either
+ * version 2 of the License, or (at your option) any later version.
+ *
+ * This library is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU
+ * Lesser General Public License for more details.
+ *
+ * You should have received a copy of the GNU Lesser General Public License
+ * along with this library; see the file COPYING. If not, write to
+ * the Free Software Foundation, Inc., 59 Temple Place - Suite 330,
+ * Boston, MA 02111-1307, USA.
+ */
+
+
+#include <boost/python.hpp>
+
+#include "CDPL/Chem/MatchConstraintList.hpp"
+
+#include "Util/ArrayVisitor.hpp"
+
+#include "ClassExports.hpp"
+
+
+namespace
+{
+
+	const CDPL::Base::Variant& getConstraintValue(const CDPL::Chem::MatchConstraint& constr) 
+	{
+		return constr.getValue();
+	}
+}
+
+
+void CDPLPythonChem::exportMatchConstraintList()
+{
+	using namespace CDPL;
+	using namespace boost;
+
+	void (Chem::MatchConstraintList::*addElementFunc1)(unsigned int, Chem::MatchConstraint::Relation) 
+		= &Chem::MatchConstraintList::addElement;
+	void (Chem::MatchConstraintList::*addElementFunc2)(unsigned int, Chem::MatchConstraint::Relation, const Base::Variant&) 
+		= &Chem::MatchConstraintList::addElement;
+
+	{
+		python::class_<Chem::MatchConstraint> mc_class("MatchConstraint", python::no_init);
+		python::scope scope = mc_class;
+
+		python::enum_<Chem::MatchConstraint::Relation>("Relation")
+			.value("ANY", Chem::MatchConstraint::ANY)
+			.value("LESS", Chem::MatchConstraint::LESS)
+			.value("EQUAL", Chem::MatchConstraint::EQUAL)
+			.value("GREATER", Chem::MatchConstraint::GREATER)
+			.value("LESS_OR_EQUAL", Chem::MatchConstraint::LESS_OR_EQUAL)
+			.value("GREATER_OR_EQUAL", Chem::MatchConstraint::GREATER_OR_EQUAL)
+			.value("NOT_EQUAL", Chem::MatchConstraint::NOT_EQUAL)
+			.export_values();
+
+		mc_class
+			.def(python::init<const Chem::MatchConstraint&>((python::arg("self"), python::arg("constr"))))
+			.def(python::init<unsigned int, Chem::MatchConstraint::Relation>((python::arg("self"), 
+																			  python::arg("id"), 
+																			  python::arg("relation"))))
+			.def(python::init<unsigned int, Chem::MatchConstraint::Relation, Base::Variant>((python::arg("self"), 
+																							 python::arg("id"), 
+																							 python::arg("relation"), 
+																							 python::arg("value"))))
+			.def("assign", &Chem::MatchConstraint::operator=, (python::arg("self"), python::arg("constr")),
+				 python::return_self<>())
+			.def("getID", &Chem::MatchConstraint::getID, python::arg("self")) 
+			.def("setID", &Chem::MatchConstraint::setID, (python::arg("self"), python::arg("id")))
+			.def("getRelation", &Chem::MatchConstraint::getRelation, python::arg("self")) 
+			.def("setRelation", &Chem::MatchConstraint::setRelation, (python::arg("self"), python::arg("relation")))
+			.def("getValue", &getConstraintValue, python::arg("self"), 
+				 python::return_value_policy<python::copy_const_reference>())
+			.def("setValue", &Chem::MatchConstraint::setValue, (python::arg("self"), python::arg("value")))
+			.def("hasValue", &Chem::MatchConstraint::hasValue, python::arg("self")) 
+			.add_property("ID", &Chem::MatchConstraint::getID, &Chem::MatchConstraint::setID)
+			.add_property("relation", &Chem::MatchConstraint::getRelation, &Chem::MatchConstraint::setRelation)
+			.add_property("value", python::make_function(&getConstraintValue,
+														 python::return_value_policy<python::copy_const_reference>()),
+						  &Chem::MatchConstraint::setValue);
+	}
+
+	python::class_<Chem::MatchConstraintList, Chem::MatchConstraintList::SharedPointer> 
+		mcl_class("MatchConstraintList", python::no_init);
+
+	python::scope scope = mcl_class;
+
+	python::enum_<Chem::MatchConstraintList::Type>("Type")
+		.value("AND_LIST", Chem::MatchConstraintList::AND_LIST)
+		.value("OR_LIST", Chem::MatchConstraintList::OR_LIST)
+		.value("NOT_AND_LIST", Chem::MatchConstraintList::NOT_AND_LIST)
+		.value("NOT_OR_LIST", Chem::MatchConstraintList::NOT_OR_LIST)
+		.export_values();
+
+	mcl_class
+		.def(python::init<const Chem::MatchConstraintList&>((python::arg("self"), python::arg("list"))))
+		.def(python::init<Chem::MatchConstraintList::Type>((python::arg("self"), python::arg("type") = Chem::MatchConstraintList::AND_LIST)))
+		.def(CDPLPythonUtil::ArrayVisitor<Chem::MatchConstraintList, 
+			 python::return_internal_reference<>, python::default_call_policies,
+			 python::default_call_policies, python::default_call_policies>())
+		.def("assign", &Chem::MatchConstraintList::operator=, (python::arg("self"), python::arg("list")),
+			 python::return_self<>())
+		.def("getType", &Chem::MatchConstraintList::getType, python::arg("self"))
+		.def("setType", &Chem::MatchConstraintList::setType, (python::arg("self"), python::arg("type")))
+		.def("addElement", addElementFunc1, (python::arg("self"), python::arg("id"), python::arg("relation")))
+		.def("addElement", addElementFunc2, (python::arg("self"), python::arg("id"), python::arg("relation"), 
+											 python::arg("value")))
+		.add_property("type", &Chem::MatchConstraintList::getType, &Chem::MatchConstraintList::setType);   
+}

@@ -1,0 +1,27 @@
+/* -*- mode: java; tab-width: 4 -*- */
+
+package CDPL.Chem;
+
+/**
+ * \brief CompleteRingSet.
+ */
+public class CompleteRingSet extends FragmentList {
+
+	/**
+	 * \brief __init__.
+	 * \param self The <tt>%CompleteRingSet</tt> instance.
+	 */
+	public None __init__(object self) {}
+
+	/**
+	 * \brief __init__.
+	 * \param self The <tt>%CompleteRingSet</tt> instance.
+	 */
+	public None __init__(object self, MolecularGraph molgraph) {}
+
+	/**
+	 * \brief perceive.
+	 * \param self The <tt>%CompleteRingSet</tt> instance.
+	 */
+	public None perceive(CompleteRingSet self, MolecularGraph molgraph) {}
+}

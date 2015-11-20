@@ -1,0 +1,38 @@
+/* -*- mode: java; tab-width: 4 -*- */
+
+package CDPL.Chem;
+
+/**
+ * \brief MolecularGraphOutputHandler.
+ */
+public class MolecularGraphOutputHandler extends Boost.Python.instance {
+
+	/**
+	 * \brief __init__.
+	 * \param self The <tt>%MolecularGraphOutputHandler</tt> instance.
+	 */
+	public None __init__(object self) {}
+
+	/**
+	 * \brief getDataFormat.
+	 * \param self The <tt>%MolecularGraphOutputHandler</tt> instance.
+	 */
+	public Base.DataFormat getDataFormat(MolecularGraphOutputHandler self) {}
+
+	/**
+	 * \brief getObjectID.
+	 * \param self The <tt>%MolecularGraphOutputHandler</tt> instance.
+	 */
+	public int getObjectID(MolecularGraphOutputHandler self) {}
+
+	/**
+	 * \brief createWriter.
+	 * \param self The <tt>%MolecularGraphOutputHandler</tt> instance.
+	 */
+	public MolecularGraphWriter createWriter(MolecularGraphOutputHandler self, Base.OStream os) {}
+
+	/**
+	 * \brief objectID.
+	 */
+	public None objectID;
+}

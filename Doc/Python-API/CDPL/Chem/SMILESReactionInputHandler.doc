@@ -1,0 +1,15 @@
+/* -*- mode: java; tab-width: 4 -*- */
+
+package CDPL.Chem;
+
+/**
+ * \brief SMILESReactionInputHandler.
+ */
+public class SMILESReactionInputHandler extends ReactionInputHandler {
+
+	/**
+	 * \brief __init__.
+	 * \param self The <tt>%SMILESReactionInputHandler</tt> instance.
+	 */
+	public None __init__(object self) {}
+}

@@ -1,0 +1,3383 @@
+/* -*- mode: java; tab-width: 4 -*- */
+
+package CDPL.Chem;
+
+/**
+ * \brief buildAdjacencyMatrix.
+ */
+None buildAdjacencyMatrix(MolecularGraph molgraph, Math.ULMatrix mtx) {}
+
+/**
+ * \brief buildAtomTypeMask.
+ */
+int buildAtomTypeMask(MolecularGraph molgraph, Util.BitSet mask, int atom_type) {}
+
+/**
+ * \brief buildBondElectronMatrix.
+ */
+None buildBondElectronMatrix(MolecularGraph molgraph, Math.ULMatrix mtx) {}
+
+/**
+ * \brief buildBondMatrix.
+ */
+None buildBondMatrix(MolecularGraph molgraph, Math.ULMatrix mtx) {}
+
+/**
+ * \brief buildElementHistogram.
+ */
+None buildElementHistogram(MolecularGraph molgraph, ElementHistogram hist) {}
+
+/**
+ * \brief buildExplicitElementHistogram.
+ */
+None buildExplicitElementHistogram(AtomContainer cntnr, ElementHistogram hist) {}
+
+/**
+ * \brief buildExplicitMassCompositionString.
+ */
+str buildExplicitMassCompositionString(AtomContainer cntnr) {}
+
+/**
+ * \brief buildExplicitMolecularFormula.
+ */
+str buildExplicitMolecularFormula(AtomContainer cntnr) {}
+
+/**
+ * \brief buildIncidenceMatrix.
+ */
+None buildIncidenceMatrix(MolecularGraph molgraph, Math.ULMatrix mtx) {}
+
+/**
+ * \brief buildMassCompositionString.
+ */
+str buildMassCompositionString(MolecularGraph molgraph) {}
+
+/**
+ * \brief buildMatchExpression.
+ */
+AtomMatchExpression buildMatchExpression(Atom atom, MolecularGraph molgraph) {}
+
+/**
+ * \brief buildMatchExpression.
+ */
+BondMatchExpression buildMatchExpression(Bond bond, MolecularGraph molgraph) {}
+
+/**
+ * \brief buildMatchExpression.
+ */
+MolecularGraphMatchExpression buildMatchExpression(MolecularGraph molgraph) {}
+
+/**
+ * \brief buildMatchExpression.
+ */
+MolecularGraphMatchExpression buildMatchExpression(MolecularGraph molgraph, bool overwrite) {}
+
+/**
+ * \brief buildMatchExpression.
+ */
+ReactionMatchExpression buildMatchExpression(Reaction rxn) {}
+
+/**
+ * \brief buildMatchExpression.
+ */
+ReactionMatchExpression buildMatchExpression(Reaction rxn, bool overwrite) {}
+
+/**
+ * \brief buildMatchExpressionString.
+ */
+str buildMatchExpressionString(Atom atom, MolecularGraph molgraph) {}
+
+/**
+ * \brief buildMatchExpressionString.
+ */
+str buildMatchExpressionString(Bond bond, MolecularGraph molgraph) {}
+
+/**
+ * \brief buildMatchExpressionStrings.
+ */
+None buildMatchExpressionStrings(MolecularGraph molgraph, bool overwrite) {}
+
+/**
+ * \brief buildMatchExpressions.
+ */
+None buildMatchExpressions(MolecularGraph molgraph, bool overwrite) {}
+
+/**
+ * \brief buildMatchExpressions.
+ */
+None buildMatchExpressions(Reaction rxn, bool overwrite) {}
+
+/**
+ * \brief buildMolecularFormula.
+ */
+str buildMolecularFormula(MolecularGraph molgraph) {}
+
+/**
+ * \brief calc2DCoordinates.
+ */
+None calc2DCoordinates(MolecularGraph molgraph, bool overwrite) {}
+
+/**
+ * \brief calcAtomCIPConfigurations.
+ */
+None calcAtomCIPConfigurations(MolecularGraph molgraph, bool overwrite) {}
+
+/**
+ * \brief calcAtomStereoDescriptors.
+ */
+None calcAtomStereoDescriptors(MolecularGraph molgraph, bool overwrite, int dim = 1) {}
+
+/**
+ * \brief calcAtomStereoDescriptorsFromMDLParities.
+ */
+None calcAtomStereoDescriptorsFromMDLParities(MolecularGraph molgraph, bool overwrite) {}
+
+/**
+ * \brief calcBond2DStereoFlags.
+ */
+None calcBond2DStereoFlags(MolecularGraph molgraph, bool overwrite) {}
+
+/**
+ * \brief calcBondCIPConfigurations.
+ */
+None calcBondCIPConfigurations(MolecularGraph molgraph, bool overwrite) {}
+
+/**
+ * \brief calcBondDirections.
+ */
+None calcBondDirections(MolecularGraph molgraph, bool overwrite, bool ring_bonds = True, int min_ring_size = 8) {}
+
+/**
+ * \brief calcBondStereoDescriptors.
+ */
+None calcBondStereoDescriptors(MolecularGraph molgraph, bool overwrite, int dim = 1, int min_ring_size = 8) {}
+
+/**
+ * \brief calcCIPConfiguration.
+ */
+int calcCIPConfiguration(Atom atom, MolecularGraph molgraph) {}
+
+/**
+ * \brief calcCIPConfiguration.
+ */
+int calcCIPConfiguration(Bond bond, MolecularGraph molgraph) {}
+
+/**
+ * \brief calcCIPPriorities.
+ */
+None calcCIPPriorities(MolecularGraph molgraph, bool overwrite) {}
+
+/**
+ * \brief calcCanonicalNumbers.
+ */
+None calcCanonicalNumbers(MolecularGraph molgraph, bool overwrite, int atom_flags = 2147483648, int bond_flags = 2147483648) {}
+
+/**
+ * \brief calcCyclomaticNumber.
+ */
+int calcCyclomaticNumber(MolecularGraph molgraph) {}
+
+/**
+ * \brief calcEffectivePolarizability.
+ */
+float calcEffectivePolarizability(Atom atom, MolecularGraph molgraph, float damping = 0.75) {}
+
+/**
+ * \brief calcEuclideanDistance.
+ */
+float calcEuclideanDistance(Util.BitSet bs1, Util.BitSet bs2) {}
+
+/**
+ * \brief calcExplicitMass.
+ */
+float calcExplicitMass(AtomContainer cntnr) {}
+
+/**
+ * \brief calcExplicitMassComposition.
+ */
+None calcExplicitMassComposition(AtomContainer cntnr, MassComposition mass_comp) {}
+
+/**
+ * \brief calcExplicitValence.
+ */
+int calcExplicitValence(Atom atom, MolecularGraph molgraph) {}
+
+/**
+ * \brief calcFormalCharge.
+ */
+int calcFormalCharge(AtomContainer cntnr) {}
+
+/**
+ * \brief calcFormalCharge.
+ */
+int calcFormalCharge(Atom atom, MolecularGraph molgraph) {}
+
+/**
+ * \brief calcFormalCharges.
+ */
+None calcFormalCharges(MolecularGraph molgraph, bool overwrite) {}
+
+/**
+ * \brief calcFreeValenceElectronCount.
+ */
+int calcFreeValenceElectronCount(Atom atom, MolecularGraph molgraph) {}
+
+/**
+ * \brief calcGeometricalDiameter.
+ */
+float calcGeometricalDiameter(AtomContainer cntnr) {}
+
+/**
+ * \brief calcGeometricalDistanceMatrix.
+ */
+None calcGeometricalDistanceMatrix(AtomContainer cntnr, Math.DMatrix mtx) {}
+
+/**
+ * \brief calcGeometricalDistanceMatrix.
+ */
+Math.DMatrix calcGeometricalDistanceMatrix(MolecularGraph molgraph, bool overwrite) {}
+
+/**
+ * \brief calcGeometricalRadius.
+ */
+float calcGeometricalRadius(AtomContainer cntnr) {}
+
+/**
+ * \brief calcHammingDistance.
+ */
+int calcHammingDistance(Util.BitSet bs1, Util.BitSet bs2) {}
+
+/**
+ * \brief calcHashCode.
+ */
+int calcHashCode(MolecularGraph molgraph, int atom_flags = 2147483648, int bond_flags = 2147483648, bool global_stereo = True, bool ord_h_deplete = True) {}
+
+/**
+ * \brief calcHashCode.
+ */
+int calcHashCode(Reaction rxn, int role_mask = 7, int atom_flags = 2147483648, int bond_flags = 2147483648, bool global_stereo = True, bool ord_h_deplete = True) {}
+
+/**
+ * \brief calcImplicitHydrogenCount.
+ */
+int calcImplicitHydrogenCount(Atom atom, MolecularGraph molgraph) {}
+
+/**
+ * \brief calcImplicitHydrogenCounts.
+ */
+None calcImplicitHydrogenCounts(MolecularGraph molgraph, bool overwrite) {}
+
+/**
+ * \brief calcKierShape1.
+ */
+float calcKierShape1(MolecularGraph molgraph) {}
+
+/**
+ * \brief calcKierShape2.
+ */
+float calcKierShape2(MolecularGraph molgraph) {}
+
+/**
+ * \brief calcKierShape3.
+ */
+float calcKierShape3(MolecularGraph molgraph) {}
+
+/**
+ * \brief calcLogS.
+ */
+float calcLogS(MolecularGraph molgraph) {}
+
+/**
+ * \brief calcMDLParities.
+ */
+None calcMDLParities(MolecularGraph molgraph, bool overwrite) {}
+
+/**
+ * \brief calcMDLParity.
+ */
+int calcMDLParity(Atom atom, MolecularGraph molgraph) {}
+
+/**
+ * \brief calcMass.
+ */
+float calcMass(MolecularGraph molgraph) {}
+
+/**
+ * \brief calcMassComposition.
+ */
+None calcMassComposition(MolecularGraph molgraph, MassComposition comp) {}
+
+/**
+ * \brief calcMeanPolarizability.
+ */
+float calcMeanPolarizability(MolecularGraph molgraph) {}
+
+/**
+ * \brief calcMolecularComplexity.
+ */
+float calcMolecularComplexity(MolecularGraph molgraph) {}
+
+/**
+ * \brief calcMorganNumbers.
+ */
+None calcMorganNumbers(MolecularGraph molgraph, bool overwrite) {}
+
+/**
+ * \brief calcPEOECharges.
+ */
+None calcPEOECharges(MolecularGraph molgraph, bool overwrite, int num_iter = 6, float damping = 0.5) {}
+
+/**
+ * \brief calcPolarizability.
+ */
+float calcPolarizability(Bond bond, MolecularGraph molgraph, float damping = 0.75) {}
+
+/**
+ * \brief calcRandicIndex.
+ */
+float calcRandicIndex(MolecularGraph molgraph) {}
+
+/**
+ * \brief calcRingComplexity.
+ */
+float calcRingComplexity(MolecularGraph molgraph) {}
+
+/**
+ * \brief calcRuleOfFiveScore.
+ */
+int calcRuleOfFiveScore(MolecularGraph molgraph) {}
+
+/**
+ * \brief calcStereoDescriptor.
+ */
+StereoDescriptor calcStereoDescriptor(Atom atom, MolecularGraph molgraph, int dim = 1) {}
+
+/**
+ * \brief calcStereoDescriptor.
+ */
+StereoDescriptor calcStereoDescriptor(Bond bond, MolecularGraph molgraph, int dim = 1, int min_ring_size = 8, bool check_order = True) {}
+
+/**
+ * \brief calcStereoDescriptorFromMDLParity.
+ */
+StereoDescriptor calcStereoDescriptorFromMDLParity(Atom atom, MolecularGraph molgraph) {}
+
+/**
+ * \brief calcSymmetryClasses.
+ */
+None calcSymmetryClasses(MolecularGraph molgraph, bool overwrite, int atom_flags = 2147483648, int bond_flags = 2147483648, bool inc_impl_h = True) {}
+
+/**
+ * \brief calcTPSA.
+ */
+float calcTPSA(MolecularGraph molgraph) {}
+
+/**
+ * \brief calcTanimotoSimilarity.
+ */
+float calcTanimotoSimilarity(Util.BitSet bs1, Util.BitSet bs2) {}
+
+/**
+ * \brief calcTopologicalDiameter.
+ */
+int calcTopologicalDiameter(MolecularGraph molgraph) {}
+
+/**
+ * \brief calcTopologicalDistanceMatrix.
+ */
+Math.ULMatrix calcTopologicalDistanceMatrix(MolecularGraph molgraph, bool overwrite) {}
+
+/**
+ * \brief calcTopologicalDistanceMatrix.
+ */
+None calcTopologicalDistanceMatrix(MolecularGraph molgraph, Math.ULMatrix mtx) {}
+
+/**
+ * \brief calcTopologicalRadius.
+ */
+int calcTopologicalRadius(MolecularGraph molgraph) {}
+
+/**
+ * \brief calcTotalWalkCount.
+ */
+int calcTotalWalkCount(MolecularGraph molgraph) {}
+
+/**
+ * \brief calcValence.
+ */
+int calcValence(Atom atom, MolecularGraph molgraph) {}
+
+/**
+ * \brief calcValenceElectronCount.
+ */
+int calcValenceElectronCount(Atom atom) {}
+
+/**
+ * \brief calcWienerIndex.
+ */
+int calcWienerIndex(MolecularGraph molgraph) {}
+
+/**
+ * \brief calcXLogP.
+ */
+float calcXLogP(MolecularGraph molgraph) {}
+
+/**
+ * \brief calcZagrebIndex1.
+ */
+int calcZagrebIndex1(MolecularGraph molgraph) {}
+
+/**
+ * \brief calcZagrebIndex2.
+ */
+int calcZagrebIndex2(MolecularGraph molgraph) {}
+
+/**
+ * \brief clear2DCoordinates.
+ */
+None clear2DCoordinates(Atom atom) {}
+
+/**
+ * \brief clear2DStereoFlag.
+ */
+None clear2DStereoFlag(Bond bond) {}
+
+/**
+ * \brief clear3DCoordinates.
+ */
+None clear3DCoordinates(Atom atom) {}
+
+/**
+ * \brief clearAromaticRings.
+ */
+None clearAromaticRings(MolecularGraph molgraph) {}
+
+/**
+ * \brief clearAromaticSubstructure.
+ */
+None clearAromaticSubstructure(MolecularGraph molgraph) {}
+
+/**
+ * \brief clearAromaticityFlag.
+ */
+None clearAromaticityFlag(Atom atom) {}
+
+/**
+ * \brief clearAromaticityFlag.
+ */
+None clearAromaticityFlag(Bond bond) {}
+
+/**
+ * \brief clearAtomMapping.
+ */
+None clearAtomMapping(Reaction rxn) {}
+
+/**
+ * \brief clearBondMemberSwapStereoFixParameter.
+ */
+None clearBondMemberSwapStereoFixParameter(Base.ControlParameterContainer cntnr) {}
+
+/**
+ * \brief clearCIPConfiguration.
+ */
+None clearCIPConfiguration(Atom atom) {}
+
+/**
+ * \brief clearCIPConfiguration.
+ */
+None clearCIPConfiguration(Bond bond) {}
+
+/**
+ * \brief clearCIPPriority.
+ */
+None clearCIPPriority(Atom atom) {}
+
+/**
+ * \brief clearCanonicalNumber.
+ */
+None clearCanonicalNumber(Atom atom) {}
+
+/**
+ * \brief clearComponentGroupID.
+ */
+None clearComponentGroupID(Atom atom) {}
+
+/**
+ * \brief clearComponentGroups.
+ */
+None clearComponentGroups(MolecularGraph molgraph) {}
+
+/**
+ * \brief clearComponentGroups.
+ */
+None clearComponentGroups(Reaction rxn) {}
+
+/**
+ * \brief clearComponents.
+ */
+None clearComponents(MolecularGraph molgraph) {}
+
+/**
+ * \brief clearCoordinatesDimensionParameter.
+ */
+None clearCoordinatesDimensionParameter(Base.ControlParameterContainer cntnr) {}
+
+/**
+ * \brief clearCyclicSubstructure.
+ */
+None clearCyclicSubstructure(MolecularGraph molgraph) {}
+
+/**
+ * \brief clearDirection.
+ */
+None clearDirection(Bond bond) {}
+
+/**
+ * \brief clearFormalCharge.
+ */
+None clearFormalCharge(Atom atom) {}
+
+/**
+ * \brief clearGeometricalDistanceMatrix.
+ */
+None clearGeometricalDistanceMatrix(MolecularGraph molgraph) {}
+
+/**
+ * \brief clearHybridizationState.
+ */
+None clearHybridizationState(Atom atom) {}
+
+/**
+ * \brief clearINCHIInputOptionsParameter.
+ */
+None clearINCHIInputOptionsParameter(Base.ControlParameterContainer cntnr) {}
+
+/**
+ * \brief clearINCHIOutputOptionsParameter.
+ */
+None clearINCHIOutputOptionsParameter(Base.ControlParameterContainer cntnr) {}
+
+/**
+ * \brief clearImplicitHydrogenCount.
+ */
+None clearImplicitHydrogenCount(Atom atom) {}
+
+/**
+ * \brief clearIsotope.
+ */
+None clearIsotope(Atom atom) {}
+
+/**
+ * \brief clearJMESeparateComponentsParameter.
+ */
+None clearJMESeparateComponentsParameter(Base.ControlParameterContainer cntnr) {}
+
+/**
+ * \brief clearMDLCTABVersion.
+ */
+None clearMDLCTABVersion(MolecularGraph molgraph) {}
+
+/**
+ * \brief clearMDLCTABVersionParameter.
+ */
+None clearMDLCTABVersionParameter(Base.ControlParameterContainer cntnr) {}
+
+/**
+ * \brief clearMDLChiralFlag.
+ */
+None clearMDLChiralFlag(MolecularGraph molgraph) {}
+
+/**
+ * \brief clearMDLComment.
+ */
+None clearMDLComment(MolecularGraph molgraph) {}
+
+/**
+ * \brief clearMDLComment.
+ */
+None clearMDLComment(Reaction rxn) {}
+
+/**
+ * \brief clearMDLDimensionality.
+ */
+None clearMDLDimensionality(MolecularGraph molgraph) {}
+
+/**
+ * \brief clearMDLEnergy.
+ */
+None clearMDLEnergy(MolecularGraph molgraph) {}
+
+/**
+ * \brief clearMDLExternalRegistryNumber.
+ */
+None clearMDLExternalRegistryNumber(Reaction rxn) {}
+
+/**
+ * \brief clearMDLIgnoreLineLengthLimitParameter.
+ */
+None clearMDLIgnoreLineLengthLimitParameter(Base.ControlParameterContainer cntnr) {}
+
+/**
+ * \brief clearMDLIgnoreParityParameter.
+ */
+None clearMDLIgnoreParityParameter(Base.ControlParameterContainer cntnr) {}
+
+/**
+ * \brief clearMDLInternalRegistryNumber.
+ */
+None clearMDLInternalRegistryNumber(Reaction rxn) {}
+
+/**
+ * \brief clearMDLMoleculeRecord.
+ */
+None clearMDLMoleculeRecord(Reaction rxn) {}
+
+/**
+ * \brief clearMDLParity.
+ */
+None clearMDLParity(Atom atom) {}
+
+/**
+ * \brief clearMDLProgramName.
+ */
+None clearMDLProgramName(MolecularGraph molgraph) {}
+
+/**
+ * \brief clearMDLProgramName.
+ */
+None clearMDLProgramName(Reaction rxn) {}
+
+/**
+ * \brief clearMDLRXNFileVersion.
+ */
+None clearMDLRXNFileVersion(Reaction rxn) {}
+
+/**
+ * \brief clearMDLRXNFileVersionParameter.
+ */
+None clearMDLRXNFileVersionParameter(Base.ControlParameterContainer cntnr) {}
+
+/**
+ * \brief clearMDLReactionData.
+ */
+None clearMDLReactionData(Reaction rxn) {}
+
+/**
+ * \brief clearMDLRegistryNumber.
+ */
+None clearMDLRegistryNumber(MolecularGraph molgraph) {}
+
+/**
+ * \brief clearMDLRegistryNumber.
+ */
+None clearMDLRegistryNumber(Reaction rxn) {}
+
+/**
+ * \brief clearMDLScalingFactor1.
+ */
+None clearMDLScalingFactor1(MolecularGraph molgraph) {}
+
+/**
+ * \brief clearMDLScalingFactor2.
+ */
+None clearMDLScalingFactor2(MolecularGraph molgraph) {}
+
+/**
+ * \brief clearMDLStereoCareFlag.
+ */
+None clearMDLStereoCareFlag(Atom atom) {}
+
+/**
+ * \brief clearMDLStructureData.
+ */
+None clearMDLStructureData(MolecularGraph molgraph) {}
+
+/**
+ * \brief clearMDLTimestamp.
+ */
+None clearMDLTimestamp(MolecularGraph molgraph) {}
+
+/**
+ * \brief clearMDLTimestamp.
+ */
+None clearMDLTimestamp(Reaction rxn) {}
+
+/**
+ * \brief clearMDLTrimLinesParameter.
+ */
+None clearMDLTrimLinesParameter(Base.ControlParameterContainer cntnr) {}
+
+/**
+ * \brief clearMDLTrimStringsParameter.
+ */
+None clearMDLTrimStringsParameter(Base.ControlParameterContainer cntnr) {}
+
+/**
+ * \brief clearMDLTruncateLinesParameter.
+ */
+None clearMDLTruncateLinesParameter(Base.ControlParameterContainer cntnr) {}
+
+/**
+ * \brief clearMDLTruncateStringsParameter.
+ */
+None clearMDLTruncateStringsParameter(Base.ControlParameterContainer cntnr) {}
+
+/**
+ * \brief clearMDLUpdateTimestampParameter.
+ */
+None clearMDLUpdateTimestampParameter(Base.ControlParameterContainer cntnr) {}
+
+/**
+ * \brief clearMDLUserInitials.
+ */
+None clearMDLUserInitials(MolecularGraph molgraph) {}
+
+/**
+ * \brief clearMDLUserInitials.
+ */
+None clearMDLUserInitials(Reaction rxn) {}
+
+/**
+ * \brief clearMatchConstraints.
+ */
+None clearMatchConstraints(Atom atom) {}
+
+/**
+ * \brief clearMatchConstraints.
+ */
+None clearMatchConstraints(Bond bond) {}
+
+/**
+ * \brief clearMatchConstraints.
+ */
+None clearMatchConstraints(MolecularGraph molgraph) {}
+
+/**
+ * \brief clearMatchConstraints.
+ */
+None clearMatchConstraints(Reaction rxn) {}
+
+/**
+ * \brief clearMatchExpression.
+ */
+None clearMatchExpression(Atom atom) {}
+
+/**
+ * \brief clearMatchExpression.
+ */
+None clearMatchExpression(Bond bond) {}
+
+/**
+ * \brief clearMatchExpression.
+ */
+None clearMatchExpression(MolecularGraph molgraph) {}
+
+/**
+ * \brief clearMatchExpression.
+ */
+None clearMatchExpression(Reaction rxn) {}
+
+/**
+ * \brief clearMatchExpressionString.
+ */
+None clearMatchExpressionString(Atom atom) {}
+
+/**
+ * \brief clearMatchExpressionString.
+ */
+None clearMatchExpressionString(Bond bond) {}
+
+/**
+ * \brief clearMorganNumber.
+ */
+None clearMorganNumber(Atom atom) {}
+
+/**
+ * \brief clearName.
+ */
+None clearName(Atom atom) {}
+
+/**
+ * \brief clearName.
+ */
+None clearName(MolecularGraph molgraph) {}
+
+/**
+ * \brief clearName.
+ */
+None clearName(Reaction rxn) {}
+
+/**
+ * \brief clearOrder.
+ */
+None clearOrder(Bond bond) {}
+
+/**
+ * \brief clearOrdinaryHydrogenDepleteParameter.
+ */
+None clearOrdinaryHydrogenDepleteParameter(Base.ControlParameterContainer cntnr) {}
+
+/**
+ * \brief clearPEOECharge.
+ */
+None clearPEOECharge(Atom atom) {}
+
+/**
+ * \brief clearRadicalType.
+ */
+None clearRadicalType(Atom atom) {}
+
+/**
+ * \brief clearReactionAtomMappingID.
+ */
+None clearReactionAtomMappingID(Atom atom) {}
+
+/**
+ * \brief clearReactionCenterStatus.
+ */
+None clearReactionCenterStatus(Atom atom) {}
+
+/**
+ * \brief clearReactionCenterStatus.
+ */
+None clearReactionCenterStatus(Bond bond) {}
+
+/**
+ * \brief clearRecordSeparatorParameter.
+ */
+None clearRecordSeparatorParameter(Base.ControlParameterContainer cntnr) {}
+
+/**
+ * \brief clearRingFlag.
+ */
+None clearRingFlag(Atom atom) {}
+
+/**
+ * \brief clearRingFlag.
+ */
+None clearRingFlag(Bond bond) {}
+
+/**
+ * \brief clearRings.
+ */
+None clearRings(MolecularGraph molgraph) {}
+
+/**
+ * \brief clearSMILESMinStereoBondRingSizeParameter.
+ */
+None clearSMILESMinStereoBondRingSizeParameter(Base.ControlParameterContainer cntnr) {}
+
+/**
+ * \brief clearSMILESMolWriteAtomMappingIDParameter.
+ */
+None clearSMILESMolWriteAtomMappingIDParameter(Base.ControlParameterContainer cntnr) {}
+
+/**
+ * \brief clearSMILESNoOrganicSubsetParameter.
+ */
+None clearSMILESNoOrganicSubsetParameter(Base.ControlParameterContainer cntnr) {}
+
+/**
+ * \brief clearSMILESRecordFormatParameter.
+ */
+None clearSMILESRecordFormatParameter(Base.ControlParameterContainer cntnr) {}
+
+/**
+ * \brief clearSMILESRxnWriteAtomMappingIDParameter.
+ */
+None clearSMILESRxnWriteAtomMappingIDParameter(Base.ControlParameterContainer cntnr) {}
+
+/**
+ * \brief clearSMILESWriteAromaticBondsParameter.
+ */
+None clearSMILESWriteAromaticBondsParameter(Base.ControlParameterContainer cntnr) {}
+
+/**
+ * \brief clearSMILESWriteAtomStereoParameter.
+ */
+None clearSMILESWriteAtomStereoParameter(Base.ControlParameterContainer cntnr) {}
+
+/**
+ * \brief clearSMILESWriteBondStereoParameter.
+ */
+None clearSMILESWriteBondStereoParameter(Base.ControlParameterContainer cntnr) {}
+
+/**
+ * \brief clearSMILESWriteCanonicalFormParameter.
+ */
+None clearSMILESWriteCanonicalFormParameter(Base.ControlParameterContainer cntnr) {}
+
+/**
+ * \brief clearSMILESWriteIsotopeParameter.
+ */
+None clearSMILESWriteIsotopeParameter(Base.ControlParameterContainer cntnr) {}
+
+/**
+ * \brief clearSMILESWriteKekuleFormParameter.
+ */
+None clearSMILESWriteKekuleFormParameter(Base.ControlParameterContainer cntnr) {}
+
+/**
+ * \brief clearSMILESWriteRingBondStereoParameter.
+ */
+None clearSMILESWriteRingBondStereoParameter(Base.ControlParameterContainer cntnr) {}
+
+/**
+ * \brief clearSMILESWriteSingleBondsParameter.
+ */
+None clearSMILESWriteSingleBondsParameter(Base.ControlParameterContainer cntnr) {}
+
+/**
+ * \brief clearSSSR.
+ */
+None clearSSSR(MolecularGraph molgraph) {}
+
+/**
+ * \brief clearStereoCenterFlag.
+ */
+None clearStereoCenterFlag(Atom atom) {}
+
+/**
+ * \brief clearStereoCenterFlag.
+ */
+None clearStereoCenterFlag(Bond bond) {}
+
+/**
+ * \brief clearStereoDescriptor.
+ */
+None clearStereoDescriptor(Atom atom) {}
+
+/**
+ * \brief clearStereoDescriptor.
+ */
+None clearStereoDescriptor(Bond bond) {}
+
+/**
+ * \brief clearStoichiometricNumber.
+ */
+None clearStoichiometricNumber(MolecularGraph molgraph) {}
+
+/**
+ * \brief clearStrictErrorCheckingParameter.
+ */
+None clearStrictErrorCheckingParameter(Base.ControlParameterContainer cntnr) {}
+
+/**
+ * \brief clearSymbol.
+ */
+None clearSymbol(Atom atom) {}
+
+/**
+ * \brief clearSymmetryClass.
+ */
+None clearSymmetryClass(Atom atom) {}
+
+/**
+ * \brief clearTopologicalDistanceMatrix.
+ */
+None clearTopologicalDistanceMatrix(MolecularGraph molgraph) {}
+
+/**
+ * \brief clearType.
+ */
+None clearType(Atom atom) {}
+
+/**
+ * \brief clearUnpairedElectronCount.
+ */
+None clearUnpairedElectronCount(Atom atom) {}
+
+/**
+ * \brief extractReactionCenter.
+ */
+None extractReactionCenter(MolecularGraph molgraph, Fragment rxn_center) {}
+
+/**
+ * \brief foldBitSet.
+ */
+None foldBitSet(Util.BitSet bs, int num_times) {}
+
+/**
+ * \brief generateINCHI.
+ */
+object generateINCHI(MolecularGraph molgraph, str options = '/WarnOnEmptyStructure /AuxNone /NEWPSOFF', int dim = 0) {}
+
+/**
+ * \brief generateINCHIKey.
+ */
+object generateINCHIKey(MolecularGraph molgraph) {}
+
+/**
+ * \brief generateSMILES.
+ */
+object generateSMILES(MolecularGraph molgraph, bool canonical = False, bool ord_h_deplete = True, int atom_flags = 2147483648, int bond_flags = 2147483648) {}
+
+/**
+ * \brief generateSMILES.
+ */
+object generateSMILES(Reaction rxn, bool canonical = False, bool ord_h_deplete = True, int atom_flags = 2147483648, int bond_flags = 2147483648) {}
+
+/**
+ * \brief get2DCoordinates.
+ */
+None get2DCoordinates(AtomContainer cntnr, Math.Vector2DArray coords) {}
+
+/**
+ * \brief get2DCoordinates.
+ */
+Math.Vector2D get2DCoordinates(Atom atom) {}
+
+/**
+ * \brief get2DStereoFlag.
+ */
+int get2DStereoFlag(Bond bond) {}
+
+/**
+ * \brief get3DCoordinates.
+ */
+None get3DCoordinates(AtomContainer cntnr, Math.Vector3DArray coords) {}
+
+/**
+ * \brief get3DCoordinates.
+ */
+Math.Vector3D get3DCoordinates(Atom atom) {}
+
+/**
+ * \brief getAllredRochowElectronegativity.
+ */
+float getAllredRochowElectronegativity(Atom atom) {}
+
+/**
+ * \brief getAromaticAtomCount.
+ */
+int getAromaticAtomCount(AtomContainer cntnr) {}
+
+/**
+ * \brief getAromaticAtomCount.
+ */
+int getAromaticAtomCount(Atom atom, MolecularGraph molgraph) {}
+
+/**
+ * \brief getAromaticBondCount.
+ */
+int getAromaticBondCount(BondContainer cntnr) {}
+
+/**
+ * \brief getAromaticBondCount.
+ */
+int getAromaticBondCount(Atom atom, MolecularGraph molgraph) {}
+
+/**
+ * \brief getAromaticRings.
+ */
+FragmentList getAromaticRings(MolecularGraph molgraph) {}
+
+/**
+ * \brief getAromaticSubstructure.
+ */
+Fragment getAromaticSubstructure(MolecularGraph molgraph) {}
+
+/**
+ * \brief getAromaticityFlag.
+ */
+bool getAromaticityFlag(Atom atom) {}
+
+/**
+ * \brief getAromaticityFlag.
+ */
+bool getAromaticityFlag(Bond bond) {}
+
+/**
+ * \brief getAtomCount.
+ */
+int getAtomCount(Atom atom, MolecularGraph molgraph, int type) {}
+
+/**
+ * \brief getAtomCount.
+ */
+int getAtomCount(MolecularGraph molgraph) {}
+
+/**
+ * \brief getAtomCount.
+ */
+int getAtomCount(MolecularGraph molgraph, int type) {}
+
+/**
+ * \brief getAtomMapping.
+ */
+AtomMapping getAtomMapping(Reaction rxn) {}
+
+/**
+ * \brief getAtomicWeight.
+ */
+float getAtomicWeight(Atom atom) {}
+
+/**
+ * \brief getBondCount.
+ */
+int getBondCount(Atom atom, MolecularGraph molgraph) {}
+
+/**
+ * \brief getBondCount.
+ */
+int getBondCount(Atom atom, MolecularGraph molgraph, int order) {}
+
+/**
+ * \brief getBondCount.
+ */
+int getBondCount(Atom atom, MolecularGraph molgraph, int order, int type) {}
+
+/**
+ * \brief getBondCount.
+ */
+int getBondCount(MolecularGraph molgraph) {}
+
+/**
+ * \brief getBondCount.
+ */
+int getBondCount(MolecularGraph molgraph, int order) {}
+
+/**
+ * \brief getBondMemberSwapStereoFixParameter.
+ */
+bool getBondMemberSwapStereoFixParameter(Base.ControlParameterContainer cntnr) {}
+
+/**
+ * \brief getCIPConfiguration.
+ */
+int getCIPConfiguration(Atom atom) {}
+
+/**
+ * \brief getCIPConfiguration.
+ */
+int getCIPConfiguration(Bond bond) {}
+
+/**
+ * \brief getCIPPriority.
+ */
+int getCIPPriority(Atom atom) {}
+
+/**
+ * \brief getCanonicalNumber.
+ */
+int getCanonicalNumber(Atom atom) {}
+
+/**
+ * \brief getChainAtomCount.
+ */
+int getChainAtomCount(Atom atom, MolecularGraph molgraph) {}
+
+/**
+ * \brief getChainAtomCount.
+ */
+int getChainAtomCount(MolecularGraph molgraph) {}
+
+/**
+ * \brief getChainBondCount.
+ */
+int getChainBondCount(Atom atom, MolecularGraph molgraph) {}
+
+/**
+ * \brief getChainBondCount.
+ */
+int getChainBondCount(MolecularGraph molgraph) {}
+
+/**
+ * \brief getComponentGroupID.
+ */
+int getComponentGroupID(Atom atom) {}
+
+/**
+ * \brief getComponentGroups.
+ */
+FragmentList getComponentGroups(MolecularGraph molgraph) {}
+
+/**
+ * \brief getComponentGroups.
+ */
+FragmentList getComponentGroups(Reaction rxn) {}
+
+/**
+ * \brief getComponents.
+ */
+FragmentList getComponents(MolecularGraph molgraph) {}
+
+/**
+ * \brief getConnectedAtoms.
+ */
+int getConnectedAtoms(Atom atom, MolecularGraph molgraph, list atoms) {}
+
+/**
+ * \brief getConnectedAtomsAndBonds.
+ */
+int getConnectedAtomsAndBonds(Atom atom, MolecularGraph molgraph, list atoms, list bonds) {}
+
+/**
+ * \brief getContainingFragments.
+ */
+None getContainingFragments(Atom atom, FragmentList frag_list, FragmentList cont_frag_list) {}
+
+/**
+ * \brief getContainingFragments.
+ */
+None getContainingFragments(Bond bond, FragmentList frag_list, FragmentList cont_frag_list) {}
+
+/**
+ * \brief getCoordinatesDimensionParameter.
+ */
+int getCoordinatesDimensionParameter(Base.ControlParameterContainer cntnr) {}
+
+/**
+ * \brief getCyclicSubstructure.
+ */
+Fragment getCyclicSubstructure(MolecularGraph molgraph) {}
+
+/**
+ * \brief getDirection.
+ */
+int getDirection(Bond bond) {}
+
+/**
+ * \brief getElementName.
+ */
+object getElementName(Atom atom) {}
+
+/**
+ * \brief getElementValenceElectronCount.
+ */
+int getElementValenceElectronCount(Atom atom) {}
+
+/**
+ * \brief getExplicitAtomCount.
+ */
+int getExplicitAtomCount(AtomContainer cntnr) {}
+
+/**
+ * \brief getExplicitAtomCount.
+ */
+int getExplicitAtomCount(AtomContainer cntnr, int type) {}
+
+/**
+ * \brief getExplicitAtomCount.
+ */
+int getExplicitAtomCount(Atom atom, MolecularGraph molgraph, int type) {}
+
+/**
+ * \brief getExplicitBondCount.
+ */
+int getExplicitBondCount(BondContainer cntnr) {}
+
+/**
+ * \brief getExplicitBondCount.
+ */
+int getExplicitBondCount(BondContainer cntnr, int order) {}
+
+/**
+ * \brief getExplicitBondCount.
+ */
+int getExplicitBondCount(Atom atom, MolecularGraph molgraph) {}
+
+/**
+ * \brief getExplicitBondCount.
+ */
+int getExplicitBondCount(Atom atom, MolecularGraph molgraph, int order) {}
+
+/**
+ * \brief getExplicitBondCount.
+ */
+int getExplicitBondCount(Atom atom, MolecularGraph molgraph, int order, int type) {}
+
+/**
+ * \brief getExplicitChainAtomCount.
+ */
+int getExplicitChainAtomCount(AtomContainer cntnr) {}
+
+/**
+ * \brief getExplicitChainAtomCount.
+ */
+int getExplicitChainAtomCount(Atom atom, MolecularGraph molgraph) {}
+
+/**
+ * \brief getExplicitChainBondCount.
+ */
+int getExplicitChainBondCount(BondContainer cntnr) {}
+
+/**
+ * \brief getExplicitChainBondCount.
+ */
+int getExplicitChainBondCount(Atom atom, MolecularGraph molgraph) {}
+
+/**
+ * \brief getExplicitHydrogenBondCount.
+ */
+int getExplicitHydrogenBondCount(BondContainer cntnr) {}
+
+/**
+ * \brief getExplicitOrdinaryHydrogenCount.
+ */
+int getExplicitOrdinaryHydrogenCount(MolecularGraph molgraph, int flags = 2147483648) {}
+
+/**
+ * \brief getFormalCharge.
+ */
+int getFormalCharge(Atom atom) {}
+
+/**
+ * \brief getGenericType.
+ */
+int getGenericType(Atom atom) {}
+
+/**
+ * \brief getGeometricalDistanceMatrix.
+ */
+Math.DMatrix getGeometricalDistanceMatrix(MolecularGraph molgraph) {}
+
+/**
+ * \brief getHeavyAtomCount.
+ */
+int getHeavyAtomCount(AtomContainer cntnr) {}
+
+/**
+ * \brief getHeavyAtomCount.
+ */
+int getHeavyAtomCount(Atom atom, MolecularGraph molgraph) {}
+
+/**
+ * \brief getHeavyBondCount.
+ */
+int getHeavyBondCount(BondContainer cntnr) {}
+
+/**
+ * \brief getHeavyBondCount.
+ */
+int getHeavyBondCount(Atom atom, MolecularGraph molgraph) {}
+
+/**
+ * \brief getHybridPolarizability.
+ */
+float getHybridPolarizability(Atom atom, MolecularGraph molgraph) {}
+
+/**
+ * \brief getHybridizationState.
+ */
+int getHybridizationState(Atom atom) {}
+
+/**
+ * \brief getHydrogenAcceptorAtomCount.
+ */
+int getHydrogenAcceptorAtomCount(MolecularGraph molgraph) {}
+
+/**
+ * \brief getHydrogenBondCount.
+ */
+int getHydrogenBondCount(MolecularGraph molgraph) {}
+
+/**
+ * \brief getHydrogenDonorAtomCount.
+ */
+int getHydrogenDonorAtomCount(MolecularGraph molgraph) {}
+
+/**
+ * \brief getINCHIInputOptionsParameter.
+ */
+str getINCHIInputOptionsParameter(Base.ControlParameterContainer cntnr) {}
+
+/**
+ * \brief getINCHIOutputOptionsParameter.
+ */
+str getINCHIOutputOptionsParameter(Base.ControlParameterContainer cntnr) {}
+
+/**
+ * \brief getIUPACGroup.
+ */
+int getIUPACGroup(Atom atom) {}
+
+/**
+ * \brief getImplicitHydrogenCount.
+ */
+int getImplicitHydrogenCount(Atom atom) {}
+
+/**
+ * \brief getImplicitHydrogenCount.
+ */
+int getImplicitHydrogenCount(MolecularGraph molgraph) {}
+
+/**
+ * \brief getIncidentBonds.
+ */
+int getIncidentBonds(Atom atom, MolecularGraph molgraph, list bonds) {}
+
+/**
+ * \brief getIsotope.
+ */
+int getIsotope(Atom atom) {}
+
+/**
+ * \brief getJMESeparateComponentsParameter.
+ */
+bool getJMESeparateComponentsParameter(Base.ControlParameterContainer cntnr) {}
+
+/**
+ * \brief getMDLCTABVersion.
+ */
+int getMDLCTABVersion(MolecularGraph molgraph) {}
+
+/**
+ * \brief getMDLCTABVersionParameter.
+ */
+int getMDLCTABVersionParameter(Base.ControlParameterContainer cntnr) {}
+
+/**
+ * \brief getMDLChiralFlag.
+ */
+bool getMDLChiralFlag(MolecularGraph molgraph) {}
+
+/**
+ * \brief getMDLComment.
+ */
+str getMDLComment(MolecularGraph molgraph) {}
+
+/**
+ * \brief getMDLComment.
+ */
+str getMDLComment(Reaction rxn) {}
+
+/**
+ * \brief getMDLDimensionality.
+ */
+int getMDLDimensionality(MolecularGraph molgraph) {}
+
+/**
+ * \brief getMDLEnergy.
+ */
+float getMDLEnergy(MolecularGraph molgraph) {}
+
+/**
+ * \brief getMDLExternalRegistryNumber.
+ */
+str getMDLExternalRegistryNumber(Reaction rxn) {}
+
+/**
+ * \brief getMDLIgnoreLineLengthLimitParameter.
+ */
+bool getMDLIgnoreLineLengthLimitParameter(Base.ControlParameterContainer cntnr) {}
+
+/**
+ * \brief getMDLIgnoreParityParameter.
+ */
+bool getMDLIgnoreParityParameter(Base.ControlParameterContainer cntnr) {}
+
+/**
+ * \brief getMDLInternalRegistryNumber.
+ */
+str getMDLInternalRegistryNumber(Reaction rxn) {}
+
+/**
+ * \brief getMDLMoleculeRecord.
+ */
+object getMDLMoleculeRecord(Reaction rxn) {}
+
+/**
+ * \brief getMDLParity.
+ */
+int getMDLParity(Atom atom) {}
+
+/**
+ * \brief getMDLProgramName.
+ */
+str getMDLProgramName(MolecularGraph molgraph) {}
+
+/**
+ * \brief getMDLProgramName.
+ */
+str getMDLProgramName(Reaction rxn) {}
+
+/**
+ * \brief getMDLRXNFileVersion.
+ */
+int getMDLRXNFileVersion(Reaction rxn) {}
+
+/**
+ * \brief getMDLRXNFileVersionParameter.
+ */
+int getMDLRXNFileVersionParameter(Base.ControlParameterContainer cntnr) {}
+
+/**
+ * \brief getMDLReactionData.
+ */
+MDLDataBlock getMDLReactionData(Reaction rxn) {}
+
+/**
+ * \brief getMDLRegistryNumber.
+ */
+int getMDLRegistryNumber(MolecularGraph molgraph) {}
+
+/**
+ * \brief getMDLRegistryNumber.
+ */
+int getMDLRegistryNumber(Reaction rxn) {}
+
+/**
+ * \brief getMDLScalingFactor1.
+ */
+int getMDLScalingFactor1(MolecularGraph molgraph) {}
+
+/**
+ * \brief getMDLScalingFactor2.
+ */
+float getMDLScalingFactor2(MolecularGraph molgraph) {}
+
+/**
+ * \brief getMDLStereoCareFlag.
+ */
+bool getMDLStereoCareFlag(Atom atom) {}
+
+/**
+ * \brief getMDLStructureData.
+ */
+MDLDataBlock getMDLStructureData(MolecularGraph molgraph) {}
+
+/**
+ * \brief getMDLTimestamp.
+ */
+int getMDLTimestamp(MolecularGraph molgraph) {}
+
+/**
+ * \brief getMDLTimestamp.
+ */
+int getMDLTimestamp(Reaction rxn) {}
+
+/**
+ * \brief getMDLTrimLinesParameter.
+ */
+bool getMDLTrimLinesParameter(Base.ControlParameterContainer cntnr) {}
+
+/**
+ * \brief getMDLTrimStringsParameter.
+ */
+bool getMDLTrimStringsParameter(Base.ControlParameterContainer cntnr) {}
+
+/**
+ * \brief getMDLTruncateLinesParameter.
+ */
+bool getMDLTruncateLinesParameter(Base.ControlParameterContainer cntnr) {}
+
+/**
+ * \brief getMDLTruncateStringsParameter.
+ */
+bool getMDLTruncateStringsParameter(Base.ControlParameterContainer cntnr) {}
+
+/**
+ * \brief getMDLUpdateTimestampParameter.
+ */
+bool getMDLUpdateTimestampParameter(Base.ControlParameterContainer cntnr) {}
+
+/**
+ * \brief getMDLUserInitials.
+ */
+str getMDLUserInitials(MolecularGraph molgraph) {}
+
+/**
+ * \brief getMDLUserInitials.
+ */
+str getMDLUserInitials(Reaction rxn) {}
+
+/**
+ * \brief getMatchConstraints.
+ */
+MatchConstraintList getMatchConstraints(Atom atom) {}
+
+/**
+ * \brief getMatchConstraints.
+ */
+MatchConstraintList getMatchConstraints(Bond bond) {}
+
+/**
+ * \brief getMatchConstraints.
+ */
+MatchConstraintList getMatchConstraints(MolecularGraph molgraph) {}
+
+/**
+ * \brief getMatchConstraints.
+ */
+MatchConstraintList getMatchConstraints(Reaction rxn) {}
+
+/**
+ * \brief getMatchExpression.
+ */
+object getMatchExpression(Atom atom) {}
+
+/**
+ * \brief getMatchExpression.
+ */
+object getMatchExpression(Bond bond) {}
+
+/**
+ * \brief getMatchExpression.
+ */
+object getMatchExpression(MolecularGraph molgraph) {}
+
+/**
+ * \brief getMatchExpression.
+ */
+object getMatchExpression(Reaction rxn) {}
+
+/**
+ * \brief getMatchExpressionString.
+ */
+str getMatchExpressionString(Atom atom) {}
+
+/**
+ * \brief getMatchExpressionString.
+ */
+str getMatchExpressionString(Bond bond) {}
+
+/**
+ * \brief getMorganNumber.
+ */
+int getMorganNumber(Atom atom) {}
+
+/**
+ * \brief getName.
+ */
+str getName(Atom atom) {}
+
+/**
+ * \brief getName.
+ */
+str getName(MolecularGraph molgraph) {}
+
+/**
+ * \brief getName.
+ */
+str getName(Reaction rxn) {}
+
+/**
+ * \brief getNumContainingFragments.
+ */
+int getNumContainingFragments(Atom atom, FragmentList frag_list) {}
+
+/**
+ * \brief getNumContainingFragments.
+ */
+int getNumContainingFragments(Bond bond, FragmentList frag_list) {}
+
+/**
+ * \brief getNumContainingSSSRRings.
+ */
+int getNumContainingSSSRRings(Atom atom, MolecularGraph molgraph) {}
+
+/**
+ * \brief getNumContainingSSSRRings.
+ */
+int getNumContainingSSSRRings(Bond bond, MolecularGraph molgraph) {}
+
+/**
+ * \brief getOrder.
+ */
+int getOrder(Bond bond) {}
+
+/**
+ * \brief getOrdinaryHydrogenCount.
+ */
+int getOrdinaryHydrogenCount(Atom atom, MolecularGraph molgraph, int flags = 2147483648) {}
+
+/**
+ * \brief getOrdinaryHydrogenCount.
+ */
+int getOrdinaryHydrogenCount(MolecularGraph molgraph, int flags = 2147483648) {}
+
+/**
+ * \brief getOrdinaryHydrogenDepleteParameter.
+ */
+bool getOrdinaryHydrogenDepleteParameter(Base.ControlParameterContainer cntnr) {}
+
+/**
+ * \brief getPEOECharge.
+ */
+float getPEOECharge(Atom atom) {}
+
+/**
+ * \brief getRadicalType.
+ */
+int getRadicalType(Atom atom) {}
+
+/**
+ * \brief getReactionAtomMappingID.
+ */
+int getReactionAtomMappingID(Atom atom) {}
+
+/**
+ * \brief getReactionCenterStatus.
+ */
+int getReactionCenterStatus(Atom atom) {}
+
+/**
+ * \brief getReactionCenterStatus.
+ */
+int getReactionCenterStatus(Bond bond) {}
+
+/**
+ * \brief getRecordSeparatorParameter.
+ */
+str getRecordSeparatorParameter(Base.ControlParameterContainer cntnr) {}
+
+/**
+ * \brief getRingAtomCount.
+ */
+int getRingAtomCount(AtomContainer cntnr) {}
+
+/**
+ * \brief getRingAtomCount.
+ */
+int getRingAtomCount(Atom atom, MolecularGraph molgraph) {}
+
+/**
+ * \brief getRingBondCount.
+ */
+int getRingBondCount(BondContainer cntnr) {}
+
+/**
+ * \brief getRingBondCount.
+ */
+int getRingBondCount(Atom atom, MolecularGraph molgraph) {}
+
+/**
+ * \brief getRingFlag.
+ */
+bool getRingFlag(Atom atom) {}
+
+/**
+ * \brief getRingFlag.
+ */
+bool getRingFlag(Bond bond) {}
+
+/**
+ * \brief getRings.
+ */
+FragmentList getRings(MolecularGraph molgraph) {}
+
+/**
+ * \brief getRotatableBondCount.
+ */
+int getRotatableBondCount(Atom atom, MolecularGraph molgraph) {}
+
+/**
+ * \brief getRotatableBondCount.
+ */
+int getRotatableBondCount(MolecularGraph molgraph) {}
+
+/**
+ * \brief getSMILESMinStereoBondRingSizeParameter.
+ */
+int getSMILESMinStereoBondRingSizeParameter(Base.ControlParameterContainer cntnr) {}
+
+/**
+ * \brief getSMILESMolWriteAtomMappingIDParameter.
+ */
+bool getSMILESMolWriteAtomMappingIDParameter(Base.ControlParameterContainer cntnr) {}
+
+/**
+ * \brief getSMILESNoOrganicSubsetParameter.
+ */
+bool getSMILESNoOrganicSubsetParameter(Base.ControlParameterContainer cntnr) {}
+
+/**
+ * \brief getSMILESRecordFormatParameter.
+ */
+str getSMILESRecordFormatParameter(Base.ControlParameterContainer cntnr) {}
+
+/**
+ * \brief getSMILESRxnWriteAtomMappingIDParameter.
+ */
+bool getSMILESRxnWriteAtomMappingIDParameter(Base.ControlParameterContainer cntnr) {}
+
+/**
+ * \brief getSMILESWriteAromaticBondsParameter.
+ */
+bool getSMILESWriteAromaticBondsParameter(Base.ControlParameterContainer cntnr) {}
+
+/**
+ * \brief getSMILESWriteAtomStereoParameter.
+ */
+bool getSMILESWriteAtomStereoParameter(Base.ControlParameterContainer cntnr) {}
+
+/**
+ * \brief getSMILESWriteBondStereoParameter.
+ */
+bool getSMILESWriteBondStereoParameter(Base.ControlParameterContainer cntnr) {}
+
+/**
+ * \brief getSMILESWriteCanonicalFormParameter.
+ */
+bool getSMILESWriteCanonicalFormParameter(Base.ControlParameterContainer cntnr) {}
+
+/**
+ * \brief getSMILESWriteIsotopeParameter.
+ */
+bool getSMILESWriteIsotopeParameter(Base.ControlParameterContainer cntnr) {}
+
+/**
+ * \brief getSMILESWriteKekuleFormParameter.
+ */
+bool getSMILESWriteKekuleFormParameter(Base.ControlParameterContainer cntnr) {}
+
+/**
+ * \brief getSMILESWriteRingBondStereoParameter.
+ */
+bool getSMILESWriteRingBondStereoParameter(Base.ControlParameterContainer cntnr) {}
+
+/**
+ * \brief getSMILESWriteSingleBondsParameter.
+ */
+bool getSMILESWriteSingleBondsParameter(Base.ControlParameterContainer cntnr) {}
+
+/**
+ * \brief getSSSR.
+ */
+FragmentList getSSSR(MolecularGraph molgraph) {}
+
+/**
+ * \brief getSizeOfLargestContainingFragment.
+ */
+int getSizeOfLargestContainingFragment(Atom atom, FragmentList frag_list) {}
+
+/**
+ * \brief getSizeOfLargestContainingFragment.
+ */
+int getSizeOfLargestContainingFragment(Bond bond, FragmentList frag_list) {}
+
+/**
+ * \brief getSizeOfSmallestContainingFragment.
+ */
+int getSizeOfSmallestContainingFragment(Atom atom, FragmentList frag_list) {}
+
+/**
+ * \brief getSizeOfSmallestContainingFragment.
+ */
+int getSizeOfSmallestContainingFragment(Bond bond, FragmentList frag_list) {}
+
+/**
+ * \brief getStereoCenterFlag.
+ */
+bool getStereoCenterFlag(Atom atom) {}
+
+/**
+ * \brief getStereoCenterFlag.
+ */
+bool getStereoCenterFlag(Bond bond) {}
+
+/**
+ * \brief getStereoDescriptor.
+ */
+StereoDescriptor getStereoDescriptor(Atom atom) {}
+
+/**
+ * \brief getStereoDescriptor.
+ */
+StereoDescriptor getStereoDescriptor(Bond bond) {}
+
+/**
+ * \brief getStoichiometricNumber.
+ */
+float getStoichiometricNumber(MolecularGraph molgraph) {}
+
+/**
+ * \brief getStrictErrorCheckingParameter.
+ */
+bool getStrictErrorCheckingParameter(Base.ControlParameterContainer cntnr) {}
+
+/**
+ * \brief getSymbol.
+ */
+str getSymbol(Atom atom) {}
+
+/**
+ * \brief getSymbolForType.
+ */
+object getSymbolForType(Atom atom) {}
+
+/**
+ * \brief getSymmetryClass.
+ */
+int getSymmetryClass(Atom atom) {}
+
+/**
+ * \brief getTopologicalDistanceMatrix.
+ */
+Math.ULMatrix getTopologicalDistanceMatrix(MolecularGraph molgraph) {}
+
+/**
+ * \brief getType.
+ */
+int getType(Atom atom) {}
+
+/**
+ * \brief getTypeForSymbol.
+ */
+int getTypeForSymbol(Atom atom) {}
+
+/**
+ * \brief getUnpairedElectronCount.
+ */
+int getUnpairedElectronCount(Atom atom) {}
+
+/**
+ * \brief getVdWRadius.
+ */
+float getVdWRadius(Atom atom) {}
+
+/**
+ * \brief has2DCoordinates.
+ */
+bool has2DCoordinates(Atom atom) {}
+
+/**
+ * \brief has2DStereoFlag.
+ */
+bool has2DStereoFlag(Bond bond) {}
+
+/**
+ * \brief has3DCoordinates.
+ */
+bool has3DCoordinates(Atom atom) {}
+
+/**
+ * \brief hasAromaticRings.
+ */
+bool hasAromaticRings(MolecularGraph molgraph) {}
+
+/**
+ * \brief hasAromaticSubstructure.
+ */
+bool hasAromaticSubstructure(MolecularGraph molgraph) {}
+
+/**
+ * \brief hasAromaticityFlag.
+ */
+bool hasAromaticityFlag(Atom atom) {}
+
+/**
+ * \brief hasAromaticityFlag.
+ */
+bool hasAromaticityFlag(Bond bond) {}
+
+/**
+ * \brief hasAtomMapping.
+ */
+bool hasAtomMapping(Reaction rxn) {}
+
+/**
+ * \brief hasBondMemberSwapStereoFixParameter.
+ */
+bool hasBondMemberSwapStereoFixParameter(Base.ControlParameterContainer cntnr) {}
+
+/**
+ * \brief hasCIPConfiguration.
+ */
+bool hasCIPConfiguration(Atom atom) {}
+
+/**
+ * \brief hasCIPConfiguration.
+ */
+bool hasCIPConfiguration(Bond bond) {}
+
+/**
+ * \brief hasCIPPriority.
+ */
+bool hasCIPPriority(Atom atom) {}
+
+/**
+ * \brief hasCanonicalNumber.
+ */
+bool hasCanonicalNumber(Atom atom) {}
+
+/**
+ * \brief hasComponentGroupID.
+ */
+bool hasComponentGroupID(Atom atom) {}
+
+/**
+ * \brief hasComponentGroups.
+ */
+bool hasComponentGroups(MolecularGraph molgraph) {}
+
+/**
+ * \brief hasComponentGroups.
+ */
+bool hasComponentGroups(Reaction rxn) {}
+
+/**
+ * \brief hasComponents.
+ */
+bool hasComponents(MolecularGraph molgraph) {}
+
+/**
+ * \brief hasCoordinates.
+ */
+bool hasCoordinates(AtomContainer cntnr, int dim) {}
+
+/**
+ * \brief hasCoordinatesDimensionParameter.
+ */
+bool hasCoordinatesDimensionParameter(Base.ControlParameterContainer cntnr) {}
+
+/**
+ * \brief hasCyclicSubstructure.
+ */
+bool hasCyclicSubstructure(MolecularGraph molgraph) {}
+
+/**
+ * \brief hasDirection.
+ */
+bool hasDirection(Bond bond) {}
+
+/**
+ * \brief hasFormalCharge.
+ */
+bool hasFormalCharge(Atom atom) {}
+
+/**
+ * \brief hasGeometricalDistanceMatrix.
+ */
+bool hasGeometricalDistanceMatrix(MolecularGraph molgraph) {}
+
+/**
+ * \brief hasHybridizationState.
+ */
+bool hasHybridizationState(Atom atom) {}
+
+/**
+ * \brief hasINCHIInputOptionsParameter.
+ */
+bool hasINCHIInputOptionsParameter(Base.ControlParameterContainer cntnr) {}
+
+/**
+ * \brief hasINCHIOutputOptionsParameter.
+ */
+bool hasINCHIOutputOptionsParameter(Base.ControlParameterContainer cntnr) {}
+
+/**
+ * \brief hasImplicitHydrogenCount.
+ */
+bool hasImplicitHydrogenCount(Atom atom) {}
+
+/**
+ * \brief hasIsotope.
+ */
+bool hasIsotope(Atom atom) {}
+
+/**
+ * \brief hasJMESeparateComponentsParameter.
+ */
+bool hasJMESeparateComponentsParameter(Base.ControlParameterContainer cntnr) {}
+
+/**
+ * \brief hasMDLCTABVersion.
+ */
+bool hasMDLCTABVersion(MolecularGraph molgraph) {}
+
+/**
+ * \brief hasMDLCTABVersionParameter.
+ */
+bool hasMDLCTABVersionParameter(Base.ControlParameterContainer cntnr) {}
+
+/**
+ * \brief hasMDLChiralFlag.
+ */
+bool hasMDLChiralFlag(MolecularGraph molgraph) {}
+
+/**
+ * \brief hasMDLComment.
+ */
+bool hasMDLComment(MolecularGraph molgraph) {}
+
+/**
+ * \brief hasMDLComment.
+ */
+bool hasMDLComment(Reaction rxn) {}
+
+/**
+ * \brief hasMDLDimensionality.
+ */
+bool hasMDLDimensionality(MolecularGraph molgraph) {}
+
+/**
+ * \brief hasMDLEnergy.
+ */
+bool hasMDLEnergy(MolecularGraph molgraph) {}
+
+/**
+ * \brief hasMDLExternalRegistryNumber.
+ */
+bool hasMDLExternalRegistryNumber(Reaction rxn) {}
+
+/**
+ * \brief hasMDLIgnoreLineLengthLimitParameter.
+ */
+bool hasMDLIgnoreLineLengthLimitParameter(Base.ControlParameterContainer cntnr) {}
+
+/**
+ * \brief hasMDLIgnoreParityParameter.
+ */
+bool hasMDLIgnoreParityParameter(Base.ControlParameterContainer cntnr) {}
+
+/**
+ * \brief hasMDLInternalRegistryNumber.
+ */
+bool hasMDLInternalRegistryNumber(Reaction rxn) {}
+
+/**
+ * \brief hasMDLMoleculeRecord.
+ */
+bool hasMDLMoleculeRecord(Reaction rxn) {}
+
+/**
+ * \brief hasMDLParity.
+ */
+bool hasMDLParity(Atom atom) {}
+
+/**
+ * \brief hasMDLProgramName.
+ */
+bool hasMDLProgramName(MolecularGraph molgraph) {}
+
+/**
+ * \brief hasMDLProgramName.
+ */
+bool hasMDLProgramName(Reaction rxn) {}
+
+/**
+ * \brief hasMDLRXNFileVersion.
+ */
+bool hasMDLRXNFileVersion(Reaction rxn) {}
+
+/**
+ * \brief hasMDLRXNFileVersionParameter.
+ */
+bool hasMDLRXNFileVersionParameter(Base.ControlParameterContainer cntnr) {}
+
+/**
+ * \brief hasMDLReactionData.
+ */
+bool hasMDLReactionData(Reaction rxn) {}
+
+/**
+ * \brief hasMDLRegistryNumber.
+ */
+bool hasMDLRegistryNumber(MolecularGraph molgraph) {}
+
+/**
+ * \brief hasMDLRegistryNumber.
+ */
+bool hasMDLRegistryNumber(Reaction rxn) {}
+
+/**
+ * \brief hasMDLScalingFactor1.
+ */
+bool hasMDLScalingFactor1(MolecularGraph molgraph) {}
+
+/**
+ * \brief hasMDLScalingFactor2.
+ */
+bool hasMDLScalingFactor2(MolecularGraph molgraph) {}
+
+/**
+ * \brief hasMDLStereoCareFlag.
+ */
+bool hasMDLStereoCareFlag(Atom atom) {}
+
+/**
+ * \brief hasMDLStructureData.
+ */
+bool hasMDLStructureData(MolecularGraph molgraph) {}
+
+/**
+ * \brief hasMDLTimestamp.
+ */
+bool hasMDLTimestamp(MolecularGraph molgraph) {}
+
+/**
+ * \brief hasMDLTimestamp.
+ */
+bool hasMDLTimestamp(Reaction rxn) {}
+
+/**
+ * \brief hasMDLTrimLinesParameter.
+ */
+bool hasMDLTrimLinesParameter(Base.ControlParameterContainer cntnr) {}
+
+/**
+ * \brief hasMDLTrimStringsParameter.
+ */
+bool hasMDLTrimStringsParameter(Base.ControlParameterContainer cntnr) {}
+
+/**
+ * \brief hasMDLTruncateLinesParameter.
+ */
+bool hasMDLTruncateLinesParameter(Base.ControlParameterContainer cntnr) {}
+
+/**
+ * \brief hasMDLTruncateStringsParameter.
+ */
+bool hasMDLTruncateStringsParameter(Base.ControlParameterContainer cntnr) {}
+
+/**
+ * \brief hasMDLUpdateTimestampParameter.
+ */
+bool hasMDLUpdateTimestampParameter(Base.ControlParameterContainer cntnr) {}
+
+/**
+ * \brief hasMDLUserInitials.
+ */
+bool hasMDLUserInitials(MolecularGraph molgraph) {}
+
+/**
+ * \brief hasMDLUserInitials.
+ */
+bool hasMDLUserInitials(Reaction rxn) {}
+
+/**
+ * \brief hasMatchConstraints.
+ */
+bool hasMatchConstraints(Atom atom) {}
+
+/**
+ * \brief hasMatchConstraints.
+ */
+bool hasMatchConstraints(Bond bond) {}
+
+/**
+ * \brief hasMatchConstraints.
+ */
+bool hasMatchConstraints(MolecularGraph molgraph) {}
+
+/**
+ * \brief hasMatchConstraints.
+ */
+bool hasMatchConstraints(Reaction rxn) {}
+
+/**
+ * \brief hasMatchExpression.
+ */
+bool hasMatchExpression(Atom atom) {}
+
+/**
+ * \brief hasMatchExpression.
+ */
+bool hasMatchExpression(Bond bond) {}
+
+/**
+ * \brief hasMatchExpression.
+ */
+bool hasMatchExpression(MolecularGraph molgraph) {}
+
+/**
+ * \brief hasMatchExpression.
+ */
+bool hasMatchExpression(Reaction rxn) {}
+
+/**
+ * \brief hasMatchExpressionString.
+ */
+bool hasMatchExpressionString(Atom atom) {}
+
+/**
+ * \brief hasMatchExpressionString.
+ */
+bool hasMatchExpressionString(Bond bond) {}
+
+/**
+ * \brief hasMorganNumber.
+ */
+bool hasMorganNumber(Atom atom) {}
+
+/**
+ * \brief hasName.
+ */
+bool hasName(Atom atom) {}
+
+/**
+ * \brief hasName.
+ */
+bool hasName(MolecularGraph molgraph) {}
+
+/**
+ * \brief hasName.
+ */
+bool hasName(Reaction rxn) {}
+
+/**
+ * \brief hasOrder.
+ */
+bool hasOrder(Bond bond) {}
+
+/**
+ * \brief hasOrdinaryHydrogenDepleteParameter.
+ */
+bool hasOrdinaryHydrogenDepleteParameter(Base.ControlParameterContainer cntnr) {}
+
+/**
+ * \brief hasPEOECharge.
+ */
+bool hasPEOECharge(Atom atom) {}
+
+/**
+ * \brief hasRadicalType.
+ */
+bool hasRadicalType(Atom atom) {}
+
+/**
+ * \brief hasReactionAtomMappingID.
+ */
+bool hasReactionAtomMappingID(Atom atom) {}
+
+/**
+ * \brief hasReactionCenterStatus.
+ */
+bool hasReactionCenterStatus(Atom atom) {}
+
+/**
+ * \brief hasReactionCenterStatus.
+ */
+bool hasReactionCenterStatus(Bond bond) {}
+
+/**
+ * \brief hasRecordSeparatorParameter.
+ */
+bool hasRecordSeparatorParameter(Base.ControlParameterContainer cntnr) {}
+
+/**
+ * \brief hasRingFlag.
+ */
+bool hasRingFlag(Atom atom) {}
+
+/**
+ * \brief hasRingFlag.
+ */
+bool hasRingFlag(Bond bond) {}
+
+/**
+ * \brief hasRings.
+ */
+bool hasRings(MolecularGraph molgraph) {}
+
+/**
+ * \brief hasSMILESMinStereoBondRingSizeParameter.
+ */
+bool hasSMILESMinStereoBondRingSizeParameter(Base.ControlParameterContainer cntnr) {}
+
+/**
+ * \brief hasSMILESMolWriteAtomMappingIDParameter.
+ */
+bool hasSMILESMolWriteAtomMappingIDParameter(Base.ControlParameterContainer cntnr) {}
+
+/**
+ * \brief hasSMILESNoOrganicSubsetParameter.
+ */
+bool hasSMILESNoOrganicSubsetParameter(Base.ControlParameterContainer cntnr) {}
+
+/**
+ * \brief hasSMILESRecordFormatParameter.
+ */
+bool hasSMILESRecordFormatParameter(Base.ControlParameterContainer cntnr) {}
+
+/**
+ * \brief hasSMILESRxnWriteAtomMappingIDParameter.
+ */
+bool hasSMILESRxnWriteAtomMappingIDParameter(Base.ControlParameterContainer cntnr) {}
+
+/**
+ * \brief hasSMILESWriteAromaticBondsParameter.
+ */
+bool hasSMILESWriteAromaticBondsParameter(Base.ControlParameterContainer cntnr) {}
+
+/**
+ * \brief hasSMILESWriteAtomStereoParameter.
+ */
+bool hasSMILESWriteAtomStereoParameter(Base.ControlParameterContainer cntnr) {}
+
+/**
+ * \brief hasSMILESWriteBondStereoParameter.
+ */
+bool hasSMILESWriteBondStereoParameter(Base.ControlParameterContainer cntnr) {}
+
+/**
+ * \brief hasSMILESWriteCanonicalFormParameter.
+ */
+bool hasSMILESWriteCanonicalFormParameter(Base.ControlParameterContainer cntnr) {}
+
+/**
+ * \brief hasSMILESWriteIsotopeParameter.
+ */
+bool hasSMILESWriteIsotopeParameter(Base.ControlParameterContainer cntnr) {}
+
+/**
+ * \brief hasSMILESWriteKekuleFormParameter.
+ */
+bool hasSMILESWriteKekuleFormParameter(Base.ControlParameterContainer cntnr) {}
+
+/**
+ * \brief hasSMILESWriteRingBondStereoParameter.
+ */
+bool hasSMILESWriteRingBondStereoParameter(Base.ControlParameterContainer cntnr) {}
+
+/**
+ * \brief hasSMILESWriteSingleBondsParameter.
+ */
+bool hasSMILESWriteSingleBondsParameter(Base.ControlParameterContainer cntnr) {}
+
+/**
+ * \brief hasSSSR.
+ */
+bool hasSSSR(MolecularGraph molgraph) {}
+
+/**
+ * \brief hasStereoCenterFlag.
+ */
+bool hasStereoCenterFlag(Atom atom) {}
+
+/**
+ * \brief hasStereoCenterFlag.
+ */
+bool hasStereoCenterFlag(Bond bond) {}
+
+/**
+ * \brief hasStereoDescriptor.
+ */
+bool hasStereoDescriptor(Atom atom) {}
+
+/**
+ * \brief hasStereoDescriptor.
+ */
+bool hasStereoDescriptor(Bond bond) {}
+
+/**
+ * \brief hasStoichiometricNumber.
+ */
+bool hasStoichiometricNumber(MolecularGraph molgraph) {}
+
+/**
+ * \brief hasStrictErrorCheckingParameter.
+ */
+bool hasStrictErrorCheckingParameter(Base.ControlParameterContainer cntnr) {}
+
+/**
+ * \brief hasSymbol.
+ */
+bool hasSymbol(Atom atom) {}
+
+/**
+ * \brief hasSymmetryClass.
+ */
+bool hasSymmetryClass(Atom atom) {}
+
+/**
+ * \brief hasTopologicalDistanceMatrix.
+ */
+bool hasTopologicalDistanceMatrix(MolecularGraph molgraph) {}
+
+/**
+ * \brief hasType.
+ */
+bool hasType(Atom atom) {}
+
+/**
+ * \brief hasUnpairedElectronCount.
+ */
+bool hasUnpairedElectronCount(Atom atom) {}
+
+/**
+ * \brief initSubstructureSearchQuery.
+ */
+None initSubstructureSearchQuery(MolecularGraph molgraph, bool overwrite) {}
+
+/**
+ * \brief initSubstructureSearchQuery.
+ */
+None initSubstructureSearchQuery(Reaction rxn, bool overwrite) {}
+
+/**
+ * \brief initSubstructureSearchTarget.
+ */
+None initSubstructureSearchTarget(MolecularGraph molgraph, bool overwrite) {}
+
+/**
+ * \brief initSubstructureSearchTarget.
+ */
+None initSubstructureSearchTarget(Reaction rxn, bool overwrite) {}
+
+/**
+ * \brief isChemElement.
+ */
+bool isChemElement(Atom atom) {}
+
+/**
+ * \brief isHalogen.
+ */
+bool isHalogen(Atom atom) {}
+
+/**
+ * \brief isHeavy.
+ */
+bool isHeavy(Atom atom) {}
+
+/**
+ * \brief isHydrogenAcceptor.
+ */
+bool isHydrogenAcceptor(Atom atom, MolecularGraph molgraph) {}
+
+/**
+ * \brief isHydrogenBond.
+ */
+bool isHydrogenBond(Bond bond) {}
+
+/**
+ * \brief isHydrogenDonor.
+ */
+bool isHydrogenDonor(Atom atom, MolecularGraph molgraph) {}
+
+/**
+ * \brief isInFragmentOfSize.
+ */
+bool isInFragmentOfSize(Atom atom, FragmentList frag_list, int size) {}
+
+/**
+ * \brief isInFragmentOfSize.
+ */
+bool isInFragmentOfSize(Bond bond, FragmentList frag_list, int size) {}
+
+/**
+ * \brief isInRing.
+ */
+bool isInRing(Atom atom, MolecularGraph molgraph) {}
+
+/**
+ * \brief isInRing.
+ */
+bool isInRing(Bond bond, MolecularGraph molgraph) {}
+
+/**
+ * \brief isInRingOfSize.
+ */
+bool isInRingOfSize(Atom atom, MolecularGraph molgraph, int size) {}
+
+/**
+ * \brief isInRingOfSize.
+ */
+bool isInRingOfSize(Bond bond, MolecularGraph molgraph, int size) {}
+
+/**
+ * \brief isMainGroupElement.
+ */
+bool isMainGroupElement(Atom atom) {}
+
+/**
+ * \brief isMetal.
+ */
+bool isMetal(Atom atom) {}
+
+/**
+ * \brief isNobleGas.
+ */
+bool isNobleGas(Atom atom) {}
+
+/**
+ * \brief isNonMetal.
+ */
+bool isNonMetal(Atom atom) {}
+
+/**
+ * \brief isOrdinaryHydrogen.
+ */
+bool isOrdinaryHydrogen(Atom atom, MolecularGraph molgraph, int flags = 2147483648) {}
+
+/**
+ * \brief isRotatable.
+ */
+bool isRotatable(Bond bond, MolecularGraph molgraph) {}
+
+/**
+ * \brief isSemiMetal.
+ */
+bool isSemiMetal(Atom atom) {}
+
+/**
+ * \brief isStereoCenter.
+ */
+bool isStereoCenter(Atom atom, MolecularGraph molgraph) {}
+
+/**
+ * \brief isStereoCenter.
+ */
+bool isStereoCenter(Bond bond, MolecularGraph molgraph, int min_ring_size = 8) {}
+
+/**
+ * \brief isTransitionMetal.
+ */
+bool isTransitionMetal(Atom atom) {}
+
+/**
+ * \brief isUnsaturated.
+ */
+bool isUnsaturated(Atom atom, MolecularGraph molgraph) {}
+
+/**
+ * \brief kekulizeBonds.
+ */
+bool kekulizeBonds(MolecularGraph molgraph, int start_atom_idx = 0, int start_bond_idx = 0) {}
+
+/**
+ * \brief makeHydrogenComplete.
+ */
+None makeHydrogenComplete(Molecule mol) {}
+
+/**
+ * \brief makeHydrogenDeplete.
+ */
+None makeHydrogenDeplete(Molecule mol) {}
+
+/**
+ * \brief makeHydrogenDeplete.
+ */
+None makeHydrogenDeplete(Fragment frag) {}
+
+/**
+ * \brief makeOrdinaryHydrogenDeplete.
+ */
+None makeOrdinaryHydrogenDeplete(Molecule mol, int flags) {}
+
+/**
+ * \brief makeOrdinaryHydrogenDeplete.
+ */
+None makeOrdinaryHydrogenDeplete(Fragment frag, int flags) {}
+
+/**
+ * \brief perceiveAromaticRings.
+ */
+FragmentList perceiveAromaticRings(MolecularGraph molgraph) {}
+
+/**
+ * \brief perceiveAromaticRings.
+ */
+FragmentList perceiveAromaticRings(MolecularGraph molgraph, bool overwrite) {}
+
+/**
+ * \brief perceiveAromaticSubstructure.
+ */
+Fragment perceiveAromaticSubstructure(MolecularGraph molgraph) {}
+
+/**
+ * \brief perceiveAromaticSubstructure.
+ */
+Fragment perceiveAromaticSubstructure(MolecularGraph molgraph, bool overwrite) {}
+
+/**
+ * \brief perceiveAtomMapping.
+ */
+AtomMapping perceiveAtomMapping(Reaction rxn) {}
+
+/**
+ * \brief perceiveAtomMapping.
+ */
+AtomMapping perceiveAtomMapping(Reaction rxn, bool overwrite) {}
+
+/**
+ * \brief perceiveAtomStereoCenters.
+ */
+None perceiveAtomStereoCenters(MolecularGraph molgraph, bool overwrite) {}
+
+/**
+ * \brief perceiveBondStereoCenters.
+ */
+None perceiveBondStereoCenters(MolecularGraph molgraph, bool overwrite, int min_ring_size = 8) {}
+
+/**
+ * \brief perceiveComponentGroups.
+ */
+FragmentList perceiveComponentGroups(MolecularGraph molgraph) {}
+
+/**
+ * \brief perceiveComponentGroups.
+ */
+FragmentList perceiveComponentGroups(MolecularGraph molgraph, bool overwrite) {}
+
+/**
+ * \brief perceiveComponentGroups.
+ */
+FragmentList perceiveComponentGroups(Reaction rxn) {}
+
+/**
+ * \brief perceiveComponentGroups.
+ */
+FragmentList perceiveComponentGroups(Reaction rxn, bool overwrite) {}
+
+/**
+ * \brief perceiveComponents.
+ */
+FragmentList perceiveComponents(MolecularGraph molgraph) {}
+
+/**
+ * \brief perceiveComponents.
+ */
+FragmentList perceiveComponents(MolecularGraph molgraph, bool overwrite) {}
+
+/**
+ * \brief perceiveCyclicSubstructure.
+ */
+Fragment perceiveCyclicSubstructure(MolecularGraph molgraph) {}
+
+/**
+ * \brief perceiveCyclicSubstructure.
+ */
+Fragment perceiveCyclicSubstructure(MolecularGraph molgraph, bool overwrite) {}
+
+/**
+ * \brief perceiveHybridizationState.
+ */
+int perceiveHybridizationState(Atom atom, MolecularGraph molgraph) {}
+
+/**
+ * \brief perceiveHybridizationStates.
+ */
+None perceiveHybridizationStates(MolecularGraph molgraph, bool overwrite) {}
+
+/**
+ * \brief perceiveRings.
+ */
+FragmentList perceiveRings(MolecularGraph molgraph) {}
+
+/**
+ * \brief perceiveRings.
+ */
+FragmentList perceiveRings(MolecularGraph molgraph, bool overwrite) {}
+
+/**
+ * \brief perceiveSSSR.
+ */
+FragmentList perceiveSSSR(MolecularGraph molgraph) {}
+
+/**
+ * \brief perceiveSSSR.
+ */
+FragmentList perceiveSSSR(MolecularGraph molgraph, bool overwrite) {}
+
+/**
+ * \brief replaceAtomStereoReferenceAtoms.
+ */
+None replaceAtomStereoReferenceAtoms(Molecule mol_copy, MolecularGraph molgraph, int atom_idx_offs = 0) {}
+
+/**
+ * \brief replaceBondStereoReferenceAtoms.
+ */
+None replaceBondStereoReferenceAtoms(Molecule mol_copy, MolecularGraph molgraph, int atom_idx_offs = 0, int bond_start_idx = 0) {}
+
+/**
+ * \brief set2DCoordinates.
+ */
+None set2DCoordinates(AtomContainer cntnr, Math.Vector2DArray coords) {}
+
+/**
+ * \brief set2DCoordinates.
+ */
+None set2DCoordinates(Atom atom, Math.Vector2D coords) {}
+
+/**
+ * \brief set2DStereoFlag.
+ */
+None set2DStereoFlag(Bond bond, int flag) {}
+
+/**
+ * \brief set3DCoordinates.
+ */
+None set3DCoordinates(AtomContainer cntnr, Math.Vector3DArray coords) {}
+
+/**
+ * \brief set3DCoordinates.
+ */
+None set3DCoordinates(Atom atom, Math.Vector3D coords) {}
+
+/**
+ * \brief setAromaticRings.
+ */
+None setAromaticRings(MolecularGraph molgraph, FragmentList rings) {}
+
+/**
+ * \brief setAromaticSubstructure.
+ */
+None setAromaticSubstructure(MolecularGraph molgraph, Fragment substruct) {}
+
+/**
+ * \brief setAromaticityFlag.
+ */
+None setAromaticityFlag(Atom atom, bool aromatic) {}
+
+/**
+ * \brief setAromaticityFlag.
+ */
+None setAromaticityFlag(Bond bond, bool aromatic) {}
+
+/**
+ * \brief setAromaticityFlags.
+ */
+None setAromaticityFlags(MolecularGraph molgraph, bool overwrite) {}
+
+/**
+ * \brief setAtomMapping.
+ */
+None setAtomMapping(Reaction rxn, AtomMapping mapping) {}
+
+/**
+ * \brief setAtomMatchConstraints.
+ */
+None setAtomMatchConstraints(MolecularGraph molgraph, MatchConstraintList constr, bool overwrite) {}
+
+/**
+ * \brief setAtomMatchConstraints.
+ */
+None setAtomMatchConstraints(Reaction rxn, MatchConstraintList constr, bool overwrite) {}
+
+/**
+ * \brief setAtomSymbolsFromTypes.
+ */
+None setAtomSymbolsFromTypes(MolecularGraph molgraph, bool overwrite) {}
+
+/**
+ * \brief setAtomTypesFromSymbols.
+ */
+None setAtomTypesFromSymbols(MolecularGraph molgraph, bool overwrite) {}
+
+/**
+ * \brief setBondMatchConstraints.
+ */
+None setBondMatchConstraints(MolecularGraph molgraph, MatchConstraintList constr, bool overwrite) {}
+
+/**
+ * \brief setBondMatchConstraints.
+ */
+None setBondMatchConstraints(Reaction rxn, MatchConstraintList constr, bool overwrite) {}
+
+/**
+ * \brief setBondMemberSwapStereoFixParameter.
+ */
+None setBondMemberSwapStereoFixParameter(Base.ControlParameterContainer cntnr, bool fix) {}
+
+/**
+ * \brief setCIPConfiguration.
+ */
+None setCIPConfiguration(Atom atom, int config) {}
+
+/**
+ * \brief setCIPConfiguration.
+ */
+None setCIPConfiguration(Bond bond, int config) {}
+
+/**
+ * \brief setCIPPriority.
+ */
+None setCIPPriority(Atom atom, int priority) {}
+
+/**
+ * \brief setCanonicalNumber.
+ */
+None setCanonicalNumber(Atom atom, int num) {}
+
+/**
+ * \brief setComponentGroupID.
+ */
+None setComponentGroupID(Atom atom, int id) {}
+
+/**
+ * \brief setComponentGroups.
+ */
+None setComponentGroups(MolecularGraph molgraph, FragmentList comp_groups) {}
+
+/**
+ * \brief setComponentGroups.
+ */
+None setComponentGroups(Reaction rxn, FragmentList comp_groups) {}
+
+/**
+ * \brief setComponentMatchConstraints.
+ */
+None setComponentMatchConstraints(Reaction rxn, MatchConstraintList constr, bool overwrite) {}
+
+/**
+ * \brief setComponents.
+ */
+None setComponents(MolecularGraph molgraph, FragmentList comps) {}
+
+/**
+ * \brief setCoordinatesDimensionParameter.
+ */
+None setCoordinatesDimensionParameter(Base.ControlParameterContainer cntnr, int dim) {}
+
+/**
+ * \brief setCyclicSubstructure.
+ */
+None setCyclicSubstructure(MolecularGraph molgraph, Fragment substruct) {}
+
+/**
+ * \brief setDirection.
+ */
+None setDirection(Bond bond, int dir) {}
+
+/**
+ * \brief setFormalCharge.
+ */
+None setFormalCharge(Atom atom, int charge) {}
+
+/**
+ * \brief setGeometricalDistanceMatrix.
+ */
+None setGeometricalDistanceMatrix(MolecularGraph molgraph, Math.DMatrix mtx) {}
+
+/**
+ * \brief setHybridizationState.
+ */
+None setHybridizationState(Atom atom, int state) {}
+
+/**
+ * \brief setINCHIInputOptionsParameter.
+ */
+None setINCHIInputOptionsParameter(Base.ControlParameterContainer cntnr, str opts) {}
+
+/**
+ * \brief setINCHIOutputOptionsParameter.
+ */
+None setINCHIOutputOptionsParameter(Base.ControlParameterContainer cntnr, str opts) {}
+
+/**
+ * \brief setImplicitHydrogenCount.
+ */
+None setImplicitHydrogenCount(Atom atom, int count) {}
+
+/**
+ * \brief setIsotope.
+ */
+None setIsotope(Atom atom, int isotope) {}
+
+/**
+ * \brief setJMESeparateComponentsParameter.
+ */
+None setJMESeparateComponentsParameter(Base.ControlParameterContainer cntnr, bool separate) {}
+
+/**
+ * \brief setMDLCTABVersion.
+ */
+None setMDLCTABVersion(MolecularGraph molgraph, int version) {}
+
+/**
+ * \brief setMDLCTABVersionParameter.
+ */
+None setMDLCTABVersionParameter(Base.ControlParameterContainer cntnr, int version) {}
+
+/**
+ * \brief setMDLChiralFlag.
+ */
+None setMDLChiralFlag(MolecularGraph molgraph, bool flag) {}
+
+/**
+ * \brief setMDLComment.
+ */
+None setMDLComment(MolecularGraph molgraph, str comment) {}
+
+/**
+ * \brief setMDLComment.
+ */
+None setMDLComment(Reaction rxn, str comment) {}
+
+/**
+ * \brief setMDLDimensionality.
+ */
+None setMDLDimensionality(MolecularGraph molgraph, int dim) {}
+
+/**
+ * \brief setMDLEnergy.
+ */
+None setMDLEnergy(MolecularGraph molgraph, float energy) {}
+
+/**
+ * \brief setMDLExternalRegistryNumber.
+ */
+None setMDLExternalRegistryNumber(Reaction rxn, str reg_no) {}
+
+/**
+ * \brief setMDLIgnoreLineLengthLimitParameter.
+ */
+None setMDLIgnoreLineLengthLimitParameter(Base.ControlParameterContainer cntnr, bool ignore) {}
+
+/**
+ * \brief setMDLIgnoreParityParameter.
+ */
+None setMDLIgnoreParityParameter(Base.ControlParameterContainer cntnr, bool ignore) {}
+
+/**
+ * \brief setMDLInternalRegistryNumber.
+ */
+None setMDLInternalRegistryNumber(Reaction rxn, str reg_no) {}
+
+/**
+ * \brief setMDLMoleculeRecord.
+ */
+None setMDLMoleculeRecord(Reaction rxn, Molecule mol_rec) {}
+
+/**
+ * \brief setMDLParity.
+ */
+None setMDLParity(Atom atom, int parity) {}
+
+/**
+ * \brief setMDLProgramName.
+ */
+None setMDLProgramName(MolecularGraph molgraph, str name) {}
+
+/**
+ * \brief setMDLProgramName.
+ */
+None setMDLProgramName(Reaction rxn, str name) {}
+
+/**
+ * \brief setMDLRXNFileVersion.
+ */
+None setMDLRXNFileVersion(Reaction rxn, int version) {}
+
+/**
+ * \brief setMDLRXNFileVersionParameter.
+ */
+None setMDLRXNFileVersionParameter(Base.ControlParameterContainer cntnr, int version) {}
+
+/**
+ * \brief setMDLReactionData.
+ */
+None setMDLReactionData(Reaction rxn, MDLDataBlock data) {}
+
+/**
+ * \brief setMDLRegistryNumber.
+ */
+None setMDLRegistryNumber(MolecularGraph molgraph, int reg_no) {}
+
+/**
+ * \brief setMDLRegistryNumber.
+ */
+None setMDLRegistryNumber(Reaction rxn, int reg_no) {}
+
+/**
+ * \brief setMDLScalingFactor1.
+ */
+None setMDLScalingFactor1(MolecularGraph molgraph, int factor) {}
+
+/**
+ * \brief setMDLScalingFactor2.
+ */
+None setMDLScalingFactor2(MolecularGraph molgraph, float factor) {}
+
+/**
+ * \brief setMDLStereoCareFlag.
+ */
+None setMDLStereoCareFlag(Atom atom, bool flag) {}
+
+/**
+ * \brief setMDLStructureData.
+ */
+None setMDLStructureData(MolecularGraph molgraph, MDLDataBlock data) {}
+
+/**
+ * \brief setMDLTimestamp.
+ */
+None setMDLTimestamp(MolecularGraph molgraph, int time) {}
+
+/**
+ * \brief setMDLTimestamp.
+ */
+None setMDLTimestamp(Reaction rxn, int time) {}
+
+/**
+ * \brief setMDLTrimLinesParameter.
+ */
+None setMDLTrimLinesParameter(Base.ControlParameterContainer cntnr, bool trim) {}
+
+/**
+ * \brief setMDLTrimStringsParameter.
+ */
+None setMDLTrimStringsParameter(Base.ControlParameterContainer cntnr, bool trim) {}
+
+/**
+ * \brief setMDLTruncateLinesParameter.
+ */
+None setMDLTruncateLinesParameter(Base.ControlParameterContainer cntnr, bool trunc) {}
+
+/**
+ * \brief setMDLTruncateStringsParameter.
+ */
+None setMDLTruncateStringsParameter(Base.ControlParameterContainer cntnr, bool trunc) {}
+
+/**
+ * \brief setMDLUpdateTimestampParameter.
+ */
+None setMDLUpdateTimestampParameter(Base.ControlParameterContainer cntnr, bool update) {}
+
+/**
+ * \brief setMDLUserInitials.
+ */
+None setMDLUserInitials(MolecularGraph molgraph, str initials) {}
+
+/**
+ * \brief setMDLUserInitials.
+ */
+None setMDLUserInitials(Reaction rxn, str initials) {}
+
+/**
+ * \brief setMatchConstraints.
+ */
+None setMatchConstraints(Atom atom, MatchConstraintList constr, bool overwrite = True) {}
+
+/**
+ * \brief setMatchConstraints.
+ */
+None setMatchConstraints(Bond bond, MatchConstraintList constr, bool overwrite = True) {}
+
+/**
+ * \brief setMatchConstraints.
+ */
+None setMatchConstraints(MolecularGraph molgraph, MatchConstraintList constr, bool overwrite = True) {}
+
+/**
+ * \brief setMatchConstraints.
+ */
+None setMatchConstraints(Reaction rxn, MatchConstraintList constr, bool overwrite = True) {}
+
+/**
+ * \brief setMatchExpression.
+ */
+None setMatchExpression(Atom atom, AtomMatchExpression expr) {}
+
+/**
+ * \brief setMatchExpression.
+ */
+None setMatchExpression(Bond bond, BondMatchExpression expr) {}
+
+/**
+ * \brief setMatchExpression.
+ */
+None setMatchExpression(MolecularGraph molgraph, MolecularGraphMatchExpression expr) {}
+
+/**
+ * \brief setMatchExpression.
+ */
+None setMatchExpression(Reaction rxn, ReactionMatchExpression expr) {}
+
+/**
+ * \brief setMatchExpressionString.
+ */
+None setMatchExpressionString(Atom atom, str expr_str) {}
+
+/**
+ * \brief setMatchExpressionString.
+ */
+None setMatchExpressionString(Bond bond, str expr_str) {}
+
+/**
+ * \brief setMorganNumber.
+ */
+None setMorganNumber(Atom atom, int num) {}
+
+/**
+ * \brief setName.
+ */
+None setName(Atom atom, str name) {}
+
+/**
+ * \brief setName.
+ */
+None setName(MolecularGraph molgraph, str name) {}
+
+/**
+ * \brief setName.
+ */
+None setName(Reaction rxn, str name) {}
+
+/**
+ * \brief setOrder.
+ */
+None setOrder(Bond bond, int order) {}
+
+/**
+ * \brief setOrdinaryHydrogenDepleteParameter.
+ */
+None setOrdinaryHydrogenDepleteParameter(Base.ControlParameterContainer cntnr, bool deplete) {}
+
+/**
+ * \brief setPEOECharge.
+ */
+None setPEOECharge(Atom atom, float charge) {}
+
+/**
+ * \brief setRadicalType.
+ */
+None setRadicalType(Atom atom, int type) {}
+
+/**
+ * \brief setReactionAtomMappingID.
+ */
+None setReactionAtomMappingID(Atom atom, int id) {}
+
+/**
+ * \brief setReactionCenterStatus.
+ */
+None setReactionCenterStatus(Atom atom, int status) {}
+
+/**
+ * \brief setReactionCenterStatus.
+ */
+None setReactionCenterStatus(Bond bond, int status) {}
+
+/**
+ * \brief setRecordSeparatorParameter.
+ */
+None setRecordSeparatorParameter(Base.ControlParameterContainer cntnr, str sep) {}
+
+/**
+ * \brief setRingFlag.
+ */
+None setRingFlag(Atom atom, bool in_ring) {}
+
+/**
+ * \brief setRingFlag.
+ */
+None setRingFlag(Bond bond, bool in_ring) {}
+
+/**
+ * \brief setRingFlags.
+ */
+None setRingFlags(MolecularGraph molgraph, bool overwrite) {}
+
+/**
+ * \brief setRings.
+ */
+None setRings(MolecularGraph molgraph, FragmentList rings) {}
+
+/**
+ * \brief setSMILESMinStereoBondRingSizeParameter.
+ */
+None setSMILESMinStereoBondRingSizeParameter(Base.ControlParameterContainer cntnr, int min_size) {}
+
+/**
+ * \brief setSMILESMolWriteAtomMappingIDParameter.
+ */
+None setSMILESMolWriteAtomMappingIDParameter(Base.ControlParameterContainer cntnr, bool write) {}
+
+/**
+ * \brief setSMILESNoOrganicSubsetParameter.
+ */
+None setSMILESNoOrganicSubsetParameter(Base.ControlParameterContainer cntnr, bool no_subset) {}
+
+/**
+ * \brief setSMILESRecordFormatParameter.
+ */
+None setSMILESRecordFormatParameter(Base.ControlParameterContainer cntnr, str format) {}
+
+/**
+ * \brief setSMILESRxnWriteAtomMappingIDParameter.
+ */
+None setSMILESRxnWriteAtomMappingIDParameter(Base.ControlParameterContainer cntnr, bool write) {}
+
+/**
+ * \brief setSMILESWriteAromaticBondsParameter.
+ */
+None setSMILESWriteAromaticBondsParameter(Base.ControlParameterContainer cntnr, bool write) {}
+
+/**
+ * \brief setSMILESWriteAtomStereoParameter.
+ */
+None setSMILESWriteAtomStereoParameter(Base.ControlParameterContainer cntnr, bool write) {}
+
+/**
+ * \brief setSMILESWriteBondStereoParameter.
+ */
+None setSMILESWriteBondStereoParameter(Base.ControlParameterContainer cntnr, bool write) {}
+
+/**
+ * \brief setSMILESWriteCanonicalFormParameter.
+ */
+None setSMILESWriteCanonicalFormParameter(Base.ControlParameterContainer cntnr, bool write) {}
+
+/**
+ * \brief setSMILESWriteIsotopeParameter.
+ */
+None setSMILESWriteIsotopeParameter(Base.ControlParameterContainer cntnr, bool write) {}
+
+/**
+ * \brief setSMILESWriteKekuleFormParameter.
+ */
+None setSMILESWriteKekuleFormParameter(Base.ControlParameterContainer cntnr, bool write) {}
+
+/**
+ * \brief setSMILESWriteRingBondStereoParameter.
+ */
+None setSMILESWriteRingBondStereoParameter(Base.ControlParameterContainer cntnr, bool write) {}
+
+/**
+ * \brief setSMILESWriteSingleBondsParameter.
+ */
+None setSMILESWriteSingleBondsParameter(Base.ControlParameterContainer cntnr, bool write) {}
+
+/**
+ * \brief setSSSR.
+ */
+None setSSSR(MolecularGraph molgraph, FragmentList sssr) {}
+
+/**
+ * \brief setStereoCenterFlag.
+ */
+None setStereoCenterFlag(Atom atom, bool is_center) {}
+
+/**
+ * \brief setStereoCenterFlag.
+ */
+None setStereoCenterFlag(Bond bond, bool is_center) {}
+
+/**
+ * \brief setStereoDescriptor.
+ */
+None setStereoDescriptor(Atom atom, StereoDescriptor descr) {}
+
+/**
+ * \brief setStereoDescriptor.
+ */
+None setStereoDescriptor(Bond bond, StereoDescriptor descr) {}
+
+/**
+ * \brief setStoichiometricNumber.
+ */
+None setStoichiometricNumber(MolecularGraph molgraph, float num) {}
+
+/**
+ * \brief setStrictErrorCheckingParameter.
+ */
+None setStrictErrorCheckingParameter(Base.ControlParameterContainer cntnr, bool strict) {}
+
+/**
+ * \brief setSymbol.
+ */
+None setSymbol(Atom atom, str symbol) {}
+
+/**
+ * \brief setSymmetryClass.
+ */
+None setSymmetryClass(Atom atom, int class_id) {}
+
+/**
+ * \brief setTopologicalDistanceMatrix.
+ */
+None setTopologicalDistanceMatrix(MolecularGraph molgraph, Math.ULMatrix mtx) {}
+
+/**
+ * \brief setType.
+ */
+None setType(Atom atom, int type) {}
+
+/**
+ * \brief setUnpairedElectronCount.
+ */
+None setUnpairedElectronCount(Atom atom, int count) {}

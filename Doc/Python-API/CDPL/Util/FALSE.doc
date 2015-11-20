@@ -1,0 +1,15 @@
+/* -*- mode: java; tab-width: 4 -*- */
+
+package CDPL.Util;
+
+/**
+ * \brief FALSE.
+ */
+public class FALSE extends object {
+
+	/**
+	 * \brief __call__.
+	 * \param self The <tt>%FALSE</tt> instance.
+	 */
+	public bool __call__(FALSE self, tuple *args) {}
+}

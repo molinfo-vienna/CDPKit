@@ -1,0 +1,27 @@
+/* -*- mode: java; tab-width: 4 -*- */
+
+package CDPL.Vis;
+
+/**
+ * \brief PointArray2D.
+ */
+public class PointArray2D extends Math.Vector2DArray {
+
+	/**
+	 * \brief __init__.
+	 * \param self The <tt>%PointArray2D</tt> instance.
+	 */
+	public None __init__(object self) {}
+
+	/**
+	 * \brief __init__.
+	 * \param self The <tt>%PointArray2D</tt> instance.
+	 */
+	public None __init__(object self, PointArray2D array) {}
+
+	/**
+	 * \brief translate.
+	 * \param self The <tt>%PointArray2D</tt> instance.
+	 */
+	public None translate(PointArray2D self, Math.Vector2D vec) {}
+}

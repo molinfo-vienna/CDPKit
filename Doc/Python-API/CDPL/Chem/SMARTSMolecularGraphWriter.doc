@@ -1,0 +1,15 @@
+/* -*- mode: java; tab-width: 4 -*- */
+
+package CDPL.Chem;
+
+/**
+ * \brief SMARTSMolecularGraphWriter.
+ */
+public class SMARTSMolecularGraphWriter extends MolecularGraphWriter {
+
+	/**
+	 * \brief __init__.
+	 * \param self The <tt>%SMARTSMolecularGraphWriter</tt> instance.
+	 */
+	public None __init__(object self, Base.OStream os) {}
+}

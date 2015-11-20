@@ -1,0 +1,19 @@
+/* -*- mode: java; tab-width: 4 -*- */
+
+package CDPL.Vis;
+
+/**
+ * \brief LayoutDirection.
+ */
+public class LayoutDirection extends Boost.Python.instance {
+
+	/**
+	 * \brief VERTICAL.
+	 */
+	public static int VERTICAL = 1;
+
+	/**
+	 * \brief HORIZONTAL.
+	 */
+	public static int HORIZONTAL = 0;
+}

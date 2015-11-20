@@ -1,0 +1,30 @@
+/**
+
+\namespace CDPL 
+\brief The namespace of the Chemical Data Processing Library.
+
+\namespace CDPL::Chem 
+\brief Contains classes and functions related to chemistry.
+
+\namespace CDPL::Base 
+\brief Contains core framework classes and functions.
+
+\namespace CDPL::Math 
+\brief Contains classes and functions related to mathematics.
+
+\namespace CDPL::Util 
+\brief Contains general purpose algorithms, containers, functors and other classes.
+
+\namespace CDPL::Vis
+\brief Contains classes and functions related to data visualization.
+
+\namespace boost
+\brief The namespace of the Boost C++ Libraries (see [\ref BOOST] for details).
+
+\namespace boost::numeric
+\brief The namespace of Boost libraries for mathematics and numerics.
+
+\namespace boost::numeric::ublas
+\brief The namespace of the Boost.uBLAS library (see [\ref BUBLAS] for details).
+
+*/

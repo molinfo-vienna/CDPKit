@@ -1,0 +1,27 @@
+/* -*- mode: java; tab-width: 4 -*- */
+
+package CDPL.Chem;
+
+/**
+ * \brief ORAtomMatchExpressionList.
+ */
+public class ORAtomMatchExpressionList extends AtomMatchExpressionList {
+
+	/**
+	 * \brief __init__.
+	 * \param self The <tt>%ORAtomMatchExpressionList</tt> instance.
+	 */
+	public None __init__(object self) {}
+
+	/**
+	 * \brief __init__.
+	 * \param self The <tt>%ORAtomMatchExpressionList</tt> instance.
+	 */
+	public None __init__(object self, ORAtomMatchExpressionList expr) {}
+
+	/**
+	 * \brief assign.
+	 * \param self The <tt>%ORAtomMatchExpressionList</tt> instance.
+	 */
+	public ORAtomMatchExpressionList assign(ORAtomMatchExpressionList self, ORAtomMatchExpressionList expr) {}
+}

@@ -1,0 +1,21 @@
+/* -*- mode: java; tab-width: 4 -*- */
+
+package CDPL.Math;
+
+/**
+ * \brief ZScaling4D.
+ */
+public class ZScaling4D extends AffineTransform4D {
+
+	/**
+	 * \brief __init__.
+	 * \param self The <tt>%ZScaling4D</tt> instance.
+	 */
+	public None __init__(object self, ZScaling4D xform) {}
+
+	/**
+	 * \brief __init__.
+	 * \param self The <tt>%ZScaling4D</tt> instance.
+	 */
+	public None __init__(object self, float factor) {}
+}

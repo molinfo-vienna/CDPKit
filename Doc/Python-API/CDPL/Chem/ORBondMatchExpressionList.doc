@@ -1,0 +1,27 @@
+/* -*- mode: java; tab-width: 4 -*- */
+
+package CDPL.Chem;
+
+/**
+ * \brief ORBondMatchExpressionList.
+ */
+public class ORBondMatchExpressionList extends BondMatchExpressionList {
+
+	/**
+	 * \brief __init__.
+	 * \param self The <tt>%ORBondMatchExpressionList</tt> instance.
+	 */
+	public None __init__(object self) {}
+
+	/**
+	 * \brief __init__.
+	 * \param self The <tt>%ORBondMatchExpressionList</tt> instance.
+	 */
+	public None __init__(object self, ORBondMatchExpressionList expr) {}
+
+	/**
+	 * \brief assign.
+	 * \param self The <tt>%ORBondMatchExpressionList</tt> instance.
+	 */
+	public ORBondMatchExpressionList assign(ORBondMatchExpressionList self, ORBondMatchExpressionList expr) {}
+}

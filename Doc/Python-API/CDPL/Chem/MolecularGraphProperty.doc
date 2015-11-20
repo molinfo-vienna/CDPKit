@@ -1,0 +1,134 @@
+/* -*- mode: java; tab-width: 4 -*- */
+
+package CDPL.Chem;
+
+/**
+ * \brief MolecularGraphProperty.
+ */
+public class MolecularGraphProperty extends Boost.Python.instance {
+
+	/**
+	 * \brief MDL_SCALING_FACTOR2.
+	 */
+	public static Base.LookupKey MDL_SCALING_FACTOR2;
+
+	/**
+	 * \brief MDL_USER_INITIALS.
+	 */
+	public static Base.LookupKey MDL_USER_INITIALS;
+
+	/**
+	 * \brief MDL_SCALING_FACTOR1.
+	 */
+	public static Base.LookupKey MDL_SCALING_FACTOR1;
+
+	/**
+	 * \brief RINGS.
+	 */
+	public static Base.LookupKey RINGS;
+
+	/**
+	 * \brief MDL_ENERGY.
+	 */
+	public static Base.LookupKey MDL_ENERGY;
+
+	/**
+	 * \brief COMPONENT_GROUPS.
+	 */
+	public static Base.LookupKey COMPONENT_GROUPS;
+
+	/**
+	 * \brief AROMATIC_RINGS.
+	 */
+	public static Base.LookupKey AROMATIC_RINGS;
+
+	/**
+	 * \brief MDL_STRUCTURE_DATA.
+	 */
+	public static Base.LookupKey MDL_STRUCTURE_DATA;
+
+	/**
+	 * \brief MDL_DIMENSIONALITY.
+	 */
+	public static Base.LookupKey MDL_DIMENSIONALITY;
+
+	/**
+	 * \brief MDL_COMMENT.
+	 */
+	public static Base.LookupKey MDL_COMMENT;
+
+	/**
+	 * \brief STOICHIOMETRIC_NUMBER.
+	 */
+	public static Base.LookupKey STOICHIOMETRIC_NUMBER;
+
+	/**
+	 * \brief GEOMETRICAL_DISTANCE_MATRIX.
+	 */
+	public static Base.LookupKey GEOMETRICAL_DISTANCE_MATRIX;
+
+	/**
+	 * \brief COMPONENTS.
+	 */
+	public static Base.LookupKey COMPONENTS;
+
+	/**
+	 * \brief MATCH_EXPRESSION.
+	 */
+	public static Base.LookupKey MATCH_EXPRESSION;
+
+	/**
+	 * \brief MDL_TIMESTAMP.
+	 */
+	public static Base.LookupKey MDL_TIMESTAMP;
+
+	/**
+	 * \brief MDL_CTAB_VERSION.
+	 */
+	public static Base.LookupKey MDL_CTAB_VERSION;
+
+	/**
+	 * \brief CYCLIC_SUBSTRUCTURE.
+	 */
+	public static Base.LookupKey CYCLIC_SUBSTRUCTURE;
+
+	/**
+	 * \brief MATCH_CONSTRAINTS.
+	 */
+	public static Base.LookupKey MATCH_CONSTRAINTS;
+
+	/**
+	 * \brief MDL_REGISTRY_NUMBER.
+	 */
+	public static Base.LookupKey MDL_REGISTRY_NUMBER;
+
+	/**
+	 * \brief SSSR.
+	 */
+	public static Base.LookupKey SSSR;
+
+	/**
+	 * \brief TOPOLOGICAL_DISTANCE_MATRIX.
+	 */
+	public static Base.LookupKey TOPOLOGICAL_DISTANCE_MATRIX;
+
+	/**
+	 * \brief NAME.
+	 */
+	public static Base.LookupKey NAME;
+
+	/**
+	 * \brief AROMATIC_SUBSTRUCTURE.
+	 */
+	public static Base.LookupKey AROMATIC_SUBSTRUCTURE;
+
+	/**
+	 * \brief MDL_PROGRAM_NAME.
+	 */
+	public static Base.LookupKey MDL_PROGRAM_NAME;
+
+	/**
+	 * \brief MDL_CHIRAL_FLAG.
+	 */
+	public static Base.LookupKey MDL_CHIRAL_FLAG;
+}

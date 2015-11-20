@@ -1,0 +1,241 @@
+/* -*- mode: java; tab-width: 4 -*- */
+
+package CDPL.Chem;
+
+/**
+ * \brief MolecularGraph.
+ */
+public class MolecularGraph extends AtomContainer, BondContainer, Base.PropertyContainer {
+
+	/**
+	 * \brief AtomSequence.
+	 */
+	public class AtomSequence extends Boost.Python.instance {
+
+		/**
+		 * \brief __getitem__.
+		 * \param self The <tt>%AtomSequence</tt> instance.
+		 */
+		public Atom __getitem__(AtomSequence self, int idx) {}
+
+		/**
+		 * \brief __contains__.
+		 * \param self The <tt>%AtomSequence</tt> instance.
+		 */
+		public bool __contains__(AtomSequence self, Atom atom) {}
+
+		/**
+		 * \brief __len__.
+		 * \param self The <tt>%AtomSequence</tt> instance.
+		 */
+		public int __len__(AtomSequence self) {}
+	}
+
+	/**
+	 * \brief BondSequence.
+	 */
+	public class BondSequence extends Boost.Python.instance {
+
+		/**
+		 * \brief __getitem__.
+		 * \param self The <tt>%BondSequence</tt> instance.
+		 */
+		public Bond __getitem__(BondSequence self, int idx) {}
+
+		/**
+		 * \brief __contains__.
+		 * \param self The <tt>%BondSequence</tt> instance.
+		 */
+		public bool __contains__(BondSequence self, Bond bond) {}
+
+		/**
+		 * \brief __len__.
+		 * \param self The <tt>%BondSequence</tt> instance.
+		 */
+		public int __len__(BondSequence self) {}
+	}
+
+	/**
+	 * \brief __init__.
+	 * \param self The <tt>%MolecularGraph</tt> instance.
+	 */
+	public None __init__(object self) {}
+
+	/**
+	 * \brief containsAtom.
+	 * \param self The <tt>%MolecularGraph</tt> instance.
+	 */
+	public bool containsAtom(AtomContainer self, Atom atom) {}
+
+	/**
+	 * \brief containsAtom.
+	 * \param self The <tt>%MolecularGraph</tt> instance.
+	 */
+	public None containsAtom(MolecularGraph arg1, Atom arg2) {}
+
+	/**
+	 * \brief getBond.
+	 * \param self The <tt>%MolecularGraph</tt> instance.
+	 */
+	public Bond getBond(MolecularGraph self, int idx) {}
+
+	/**
+	 * \brief containsBond.
+	 * \param self The <tt>%MolecularGraph</tt> instance.
+	 */
+	public bool containsBond(BondContainer self, Bond bond) {}
+
+	/**
+	 * \brief containsBond.
+	 * \param self The <tt>%MolecularGraph</tt> instance.
+	 */
+	public None containsBond(MolecularGraph arg1, Bond arg2) {}
+
+	/**
+	 * \brief getBondIndex.
+	 * \param self The <tt>%MolecularGraph</tt> instance.
+	 */
+	public int getBondIndex(BondContainer self, Bond bond) {}
+
+	/**
+	 * \brief getBondIndex.
+	 * \param self The <tt>%MolecularGraph</tt> instance.
+	 */
+	public None getBondIndex(MolecularGraph arg1, Bond arg2) {}
+
+	/**
+	 * \brief getNumBonds.
+	 * \param self The <tt>%MolecularGraph</tt> instance.
+	 */
+	public int getNumBonds(MolecularGraph self) {}
+
+	/**
+	 * \brief clearProperties.
+	 * \param self The <tt>%MolecularGraph</tt> instance.
+	 */
+	public None clearProperties(MolecularGraph self) {}
+
+	/**
+	 * \brief getAtom.
+	 * \param self The <tt>%MolecularGraph</tt> instance.
+	 */
+	public Atom getAtom(MolecularGraph self, int idx) {}
+
+	/**
+	 * \brief getBonds.
+	 * \param self The <tt>%MolecularGraph</tt> instance.
+	 */
+	public BondSequence getBonds(MolecularGraph self) {}
+
+	/**
+	 * \brief isPropertySet.
+	 * \param self The <tt>%MolecularGraph</tt> instance.
+	 */
+	public bool isPropertySet(MolecularGraph self, Base.LookupKey key) {}
+
+	/**
+	 * \brief getAtoms.
+	 * \param self The <tt>%MolecularGraph</tt> instance.
+	 */
+	public AtomSequence getAtoms(MolecularGraph self) {}
+
+	/**
+	 * \brief getNumAtoms.
+	 * \param self The <tt>%MolecularGraph</tt> instance.
+	 */
+	public int getNumAtoms(MolecularGraph self) {}
+
+	/**
+	 * \brief copyProperties.
+	 * \param self The <tt>%MolecularGraph</tt> instance.
+	 */
+	public None copyProperties(Base.PropertyContainer self, Base.PropertyContainer cntnr) {}
+
+	/**
+	 * \brief removeProperty.
+	 * \param self The <tt>%MolecularGraph</tt> instance.
+	 */
+	public bool removeProperty(MolecularGraph self, Base.LookupKey key) {}
+
+	/**
+	 * \brief setProperty.
+	 * \param self The <tt>%MolecularGraph</tt> instance.
+	 */
+	public None setProperty(MolecularGraph self, Base.LookupKey key, Base.Variant value) {}
+
+	/**
+	 * \brief getAtomIndex.
+	 * \param self The <tt>%MolecularGraph</tt> instance.
+	 */
+	public int getAtomIndex(AtomContainer self, Atom atom) {}
+
+	/**
+	 * \brief getAtomIndex.
+	 * \param self The <tt>%MolecularGraph</tt> instance.
+	 */
+	public None getAtomIndex(MolecularGraph arg1, Atom arg2) {}
+
+	/**
+	 * \brief addProperties.
+	 * \param self The <tt>%MolecularGraph</tt> instance.
+	 */
+	public None addProperties(Base.PropertyContainer self, Base.PropertyContainer cntnr) {}
+
+	/**
+	 * \brief getProperty.
+	 * \param self The <tt>%MolecularGraph</tt> instance.
+	 */
+	public Base.Variant getProperty(MolecularGraph self, Base.LookupKey key, bool throw_ = False) {}
+
+	/**
+	 * \brief __contains__.
+	 * \param self The <tt>%MolecularGraph</tt> instance.
+	 */
+	public bool __contains__(AtomContainer self, Atom atom) {}
+
+	/**
+	 * \brief __contains__.
+	 * \param self The <tt>%MolecularGraph</tt> instance.
+	 */
+	public bool __contains__(BondContainer self, Bond bond) {}
+
+	/**
+	 * \brief __contains__.
+	 * \param self The <tt>%MolecularGraph</tt> instance.
+	 */
+	public bool __contains__(MolecularGraph self, Base.LookupKey key) {}
+
+	/**
+	 * \brief __len__.
+	 * \param self The <tt>%MolecularGraph</tt> instance.
+	 */
+	public int __len__(MolecularGraph self) {}
+
+	/**
+	 * \brief __getitem__.
+	 * \param self The <tt>%MolecularGraph</tt> instance.
+	 */
+	public Base.Variant __getitem__(Base.PropertyContainer self, Base.LookupKey key) {}
+
+	/**
+	 * \brief __delitem__.
+	 * \param self The <tt>%MolecularGraph</tt> instance.
+	 */
+	public bool __delitem__(MolecularGraph self, Base.LookupKey key) {}
+
+	/**
+	 * \brief __setitem__.
+	 * \param self The <tt>%MolecularGraph</tt> instance.
+	 */
+	public None __setitem__(MolecularGraph self, Base.LookupKey key, Base.Variant value) {}
+
+	/**
+	 * \brief bonds.
+	 */
+	public None bonds;
+
+	/**
+	 * \brief atoms.
+	 */
+	public None atoms;
+}

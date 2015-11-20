@@ -1,0 +1,27 @@
+/* -*- mode: java; tab-width: 4 -*- */
+
+package CDPL.Chem;
+
+/**
+ * \brief CyclicSubstructure.
+ */
+public class CyclicSubstructure extends Fragment {
+
+	/**
+	 * \brief __init__.
+	 * \param self The <tt>%CyclicSubstructure</tt> instance.
+	 */
+	public None __init__(object self) {}
+
+	/**
+	 * \brief __init__.
+	 * \param self The <tt>%CyclicSubstructure</tt> instance.
+	 */
+	public None __init__(object self, MolecularGraph molgraph) {}
+
+	/**
+	 * \brief perceive.
+	 * \param self The <tt>%CyclicSubstructure</tt> instance.
+	 */
+	public None perceive(CyclicSubstructure self, MolecularGraph molgraph) {}
+}

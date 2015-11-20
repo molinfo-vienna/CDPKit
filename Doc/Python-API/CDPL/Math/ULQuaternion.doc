@@ -1,0 +1,338 @@
+/* -*- mode: java; tab-width: 4 -*- */
+
+package CDPL.Math;
+
+/**
+ * \brief ULQuaternion.
+ */
+public class ULQuaternion extends Boost.Python.instance {
+
+	/**
+	 * \brief __init__.
+	 * \param self The <tt>%ULQuaternion</tt> instance.
+	 */
+	public None __init__(object self) {}
+
+	/**
+	 * \brief __init__.
+	 * \param self The <tt>%ULQuaternion</tt> instance.
+	 */
+	public None __init__(object self, ULQuaternion q) {}
+
+	/**
+	 * \brief __init__.
+	 * \param self The <tt>%ULQuaternion</tt> instance.
+	 */
+	public None __init__(object self, int c1, int c2 = 0, int c3 = 0, int c4 = 0) {}
+
+	/**
+	 * \brief __init__.
+	 * \param self The <tt>%ULQuaternion</tt> instance.
+	 */
+	public object __init__(object arg1, ConstFQuaternionExpression e) {}
+
+	/**
+	 * \brief __init__.
+	 * \param self The <tt>%ULQuaternion</tt> instance.
+	 */
+	public object __init__(object arg1, ConstDQuaternionExpression e) {}
+
+	/**
+	 * \brief __init__.
+	 * \param self The <tt>%ULQuaternion</tt> instance.
+	 */
+	public object __init__(object arg1, ConstLQuaternionExpression e) {}
+
+	/**
+	 * \brief __init__.
+	 * \param self The <tt>%ULQuaternion</tt> instance.
+	 */
+	public object __init__(object arg1, ConstULQuaternionExpression e) {}
+
+	/**
+	 * \brief set.
+	 * \param self The <tt>%ULQuaternion</tt> instance.
+	 */
+	public None set(ULQuaternion self, int c1 = 0, int c2 = 0, int c3 = 0, int c4 = 0) {}
+
+	/**
+	 * \brief getObjectID.
+	 * \param self The <tt>%ULQuaternion</tt> instance.
+	 */
+	public int getObjectID(ULQuaternion self) {}
+
+	/**
+	 * \brief getC4.
+	 * \param self The <tt>%ULQuaternion</tt> instance.
+	 */
+	public int getC4(ULQuaternion self) {}
+
+	/**
+	 * \brief swap.
+	 * \param self The <tt>%ULQuaternion</tt> instance.
+	 */
+	public None swap(ULQuaternion self, ULQuaternion q) {}
+
+	/**
+	 * \brief setC4.
+	 * \param self The <tt>%ULQuaternion</tt> instance.
+	 */
+	public None setC4(ULQuaternion self, int v) {}
+
+	/**
+	 * \brief setC2.
+	 * \param self The <tt>%ULQuaternion</tt> instance.
+	 */
+	public None setC2(ULQuaternion self, int v) {}
+
+	/**
+	 * \brief getC1.
+	 * \param self The <tt>%ULQuaternion</tt> instance.
+	 */
+	public int getC1(ULQuaternion self) {}
+
+	/**
+	 * \brief getC2.
+	 * \param self The <tt>%ULQuaternion</tt> instance.
+	 */
+	public int getC2(ULQuaternion self) {}
+
+	/**
+	 * \brief getC3.
+	 * \param self The <tt>%ULQuaternion</tt> instance.
+	 */
+	public int getC3(ULQuaternion self) {}
+
+	/**
+	 * \brief setC1.
+	 * \param self The <tt>%ULQuaternion</tt> instance.
+	 */
+	public None setC1(ULQuaternion self, int v) {}
+
+	/**
+	 * \brief setC3.
+	 * \param self The <tt>%ULQuaternion</tt> instance.
+	 */
+	public None setC3(ULQuaternion self, int v) {}
+
+	/**
+	 * \brief assign.
+	 * \param self The <tt>%ULQuaternion</tt> instance.
+	 */
+	public ULQuaternion assign(ULQuaternion self, ConstFQuaternionExpression e) {}
+
+	/**
+	 * \brief assign.
+	 * \param self The <tt>%ULQuaternion</tt> instance.
+	 */
+	public ULQuaternion assign(ULQuaternion self, ConstDQuaternionExpression e) {}
+
+	/**
+	 * \brief assign.
+	 * \param self The <tt>%ULQuaternion</tt> instance.
+	 */
+	public ULQuaternion assign(ULQuaternion self, ConstLQuaternionExpression e) {}
+
+	/**
+	 * \brief assign.
+	 * \param self The <tt>%ULQuaternion</tt> instance.
+	 */
+	public ULQuaternion assign(ULQuaternion self, ConstULQuaternionExpression e) {}
+
+	/**
+	 * \brief assign.
+	 * \param self The <tt>%ULQuaternion</tt> instance.
+	 */
+	public ULQuaternion assign(ULQuaternion self, ULQuaternion q) {}
+
+	/**
+	 * \brief __isub__.
+	 * \param self The <tt>%ULQuaternion</tt> instance.
+	 */
+	public ULQuaternion __isub__(ULQuaternion self, int t) {}
+
+	/**
+	 * \brief __isub__.
+	 * \param self The <tt>%ULQuaternion</tt> instance.
+	 */
+	public ULQuaternion __isub__(ULQuaternion self, ULQuaternion q) {}
+
+	/**
+	 * \brief __isub__.
+	 * \param self The <tt>%ULQuaternion</tt> instance.
+	 */
+	public ULQuaternion __isub__(ULQuaternion self, ConstULQuaternionExpression q) {}
+
+	/**
+	 * \brief __str__.
+	 * \param self The <tt>%ULQuaternion</tt> instance.
+	 */
+	public str __str__(ULQuaternion self) {}
+
+	/**
+	 * \brief __radd__.
+	 * \param self The <tt>%ULQuaternion</tt> instance.
+	 */
+	public ConstULQuaternionExpression __radd__(object self, int t) {}
+
+	/**
+	 * \brief __rsub__.
+	 * \param self The <tt>%ULQuaternion</tt> instance.
+	 */
+	public ConstULQuaternionExpression __rsub__(object self, int t) {}
+
+	/**
+	 * \brief __rdiv__.
+	 * \param self The <tt>%ULQuaternion</tt> instance.
+	 */
+	public ConstULQuaternionExpression __rdiv__(object self, int t) {}
+
+	/**
+	 * \brief __rmul__.
+	 * \param self The <tt>%ULQuaternion</tt> instance.
+	 */
+	public ConstULQuaternionExpression __rmul__(object self, int t) {}
+
+	/**
+	 * \brief __pos__.
+	 * \param self The <tt>%ULQuaternion</tt> instance.
+	 */
+	public ULQuaternion __pos__(ULQuaternion self) {}
+
+	/**
+	 * \brief __mul__.
+	 * \param self The <tt>%ULQuaternion</tt> instance.
+	 */
+	public ConstULQuaternionExpression __mul__(object self, int t) {}
+
+	/**
+	 * \brief __mul__.
+	 * \param self The <tt>%ULQuaternion</tt> instance.
+	 */
+	public ConstULQuaternionExpression __mul__(object self, ConstULQuaternionExpression e) {}
+
+	/**
+	 * \brief __ne__.
+	 * \param self The <tt>%ULQuaternion</tt> instance.
+	 */
+	public bool __ne__(ULQuaternion self, ULQuaternion q) {}
+
+	/**
+	 * \brief __ne__.
+	 * \param self The <tt>%ULQuaternion</tt> instance.
+	 */
+	public bool __ne__(ULQuaternion self, ConstULQuaternionExpression q) {}
+
+	/**
+	 * \brief __idiv__.
+	 * \param self The <tt>%ULQuaternion</tt> instance.
+	 */
+	public ULQuaternion __idiv__(ULQuaternion self, int t) {}
+
+	/**
+	 * \brief __idiv__.
+	 * \param self The <tt>%ULQuaternion</tt> instance.
+	 */
+	public ULQuaternion __idiv__(ULQuaternion self, ULQuaternion q) {}
+
+	/**
+	 * \brief __idiv__.
+	 * \param self The <tt>%ULQuaternion</tt> instance.
+	 */
+	public ULQuaternion __idiv__(ULQuaternion self, ConstULQuaternionExpression q) {}
+
+	/**
+	 * \brief __add__.
+	 * \param self The <tt>%ULQuaternion</tt> instance.
+	 */
+	public ConstULQuaternionExpression __add__(object self, int t) {}
+
+	/**
+	 * \brief __add__.
+	 * \param self The <tt>%ULQuaternion</tt> instance.
+	 */
+	public ConstULQuaternionExpression __add__(object self, ConstULQuaternionExpression e) {}
+
+	/**
+	 * \brief __eq__.
+	 * \param self The <tt>%ULQuaternion</tt> instance.
+	 */
+	public bool __eq__(ULQuaternion self, ULQuaternion q) {}
+
+	/**
+	 * \brief __eq__.
+	 * \param self The <tt>%ULQuaternion</tt> instance.
+	 */
+	public bool __eq__(ULQuaternion self, ConstULQuaternionExpression q) {}
+
+	/**
+	 * \brief __imul__.
+	 * \param self The <tt>%ULQuaternion</tt> instance.
+	 */
+	public ULQuaternion __imul__(ULQuaternion self, int t) {}
+
+	/**
+	 * \brief __imul__.
+	 * \param self The <tt>%ULQuaternion</tt> instance.
+	 */
+	public ULQuaternion __imul__(ULQuaternion self, ULQuaternion q) {}
+
+	/**
+	 * \brief __imul__.
+	 * \param self The <tt>%ULQuaternion</tt> instance.
+	 */
+	public ULQuaternion __imul__(ULQuaternion self, ConstULQuaternionExpression q) {}
+
+	/**
+	 * \brief __iadd__.
+	 * \param self The <tt>%ULQuaternion</tt> instance.
+	 */
+	public ULQuaternion __iadd__(ULQuaternion self, int t) {}
+
+	/**
+	 * \brief __iadd__.
+	 * \param self The <tt>%ULQuaternion</tt> instance.
+	 */
+	public ULQuaternion __iadd__(ULQuaternion self, ULQuaternion q) {}
+
+	/**
+	 * \brief __iadd__.
+	 * \param self The <tt>%ULQuaternion</tt> instance.
+	 */
+	public ULQuaternion __iadd__(ULQuaternion self, ConstULQuaternionExpression q) {}
+
+	/**
+	 * \brief __div__.
+	 * \param self The <tt>%ULQuaternion</tt> instance.
+	 */
+	public ConstULQuaternionExpression __div__(object self, int t) {}
+
+	/**
+	 * \brief __div__.
+	 * \param self The <tt>%ULQuaternion</tt> instance.
+	 */
+	public ConstULQuaternionExpression __div__(object self, ConstULQuaternionExpression e) {}
+
+	/**
+	 * \brief __neg__.
+	 * \param self The <tt>%ULQuaternion</tt> instance.
+	 */
+	public ConstULQuaternionExpression __neg__(object self) {}
+
+	/**
+	 * \brief __sub__.
+	 * \param self The <tt>%ULQuaternion</tt> instance.
+	 */
+	public ConstULQuaternionExpression __sub__(object self, int t) {}
+
+	/**
+	 * \brief __sub__.
+	 * \param self The <tt>%ULQuaternion</tt> instance.
+	 */
+	public ConstULQuaternionExpression __sub__(object self, ConstULQuaternionExpression e) {}
+
+	/**
+	 * \brief objectID.
+	 */
+	public None objectID;
+}

@@ -1,0 +1,93 @@
+/* -*- mode: java; tab-width: 4 -*- */
+
+package CDPL.Math;
+
+/**
+ * \brief ULVectorExpression.
+ */
+public class ULVectorExpression extends ConstULVectorExpression {
+
+	/**
+	 * \brief setElement.
+	 * \param self The <tt>%ULVectorExpression</tt> instance.
+	 */
+	public None setElement(ULVectorExpression self, int i, int v) {}
+
+	/**
+	 * \brief swap.
+	 * \param self The <tt>%ULVectorExpression</tt> instance.
+	 */
+	public None swap(ULVectorExpression self, ULVectorExpression e) {}
+
+	/**
+	 * \brief assign.
+	 * \param self The <tt>%ULVectorExpression</tt> instance.
+	 */
+	public ULVectorExpression assign(ULVectorExpression self, ULVectorExpression e) {}
+
+	/**
+	 * \brief assign.
+	 * \param self The <tt>%ULVectorExpression</tt> instance.
+	 */
+	public ULVectorExpression assign(ULVectorExpression self, ConstFVectorExpression e) {}
+
+	/**
+	 * \brief assign.
+	 * \param self The <tt>%ULVectorExpression</tt> instance.
+	 */
+	public ULVectorExpression assign(ULVectorExpression self, ConstDVectorExpression e) {}
+
+	/**
+	 * \brief assign.
+	 * \param self The <tt>%ULVectorExpression</tt> instance.
+	 */
+	public ULVectorExpression assign(ULVectorExpression self, ConstLVectorExpression e) {}
+
+	/**
+	 * \brief assign.
+	 * \param self The <tt>%ULVectorExpression</tt> instance.
+	 */
+	public ULVectorExpression assign(ULVectorExpression self, ConstULVectorExpression e) {}
+
+	/**
+	 * \brief __isub__.
+	 * \param self The <tt>%ULVectorExpression</tt> instance.
+	 */
+	public ULVectorExpression __isub__(ULVectorExpression self, ULVectorExpression e) {}
+
+	/**
+	 * \brief __isub__.
+	 * \param self The <tt>%ULVectorExpression</tt> instance.
+	 */
+	public ULVectorExpression __isub__(ULVectorExpression self, ConstULVectorExpression e) {}
+
+	/**
+	 * \brief __imul__.
+	 * \param self The <tt>%ULVectorExpression</tt> instance.
+	 */
+	public ULVectorExpression __imul__(ULVectorExpression self, int t) {}
+
+	/**
+	 * \brief __idiv__.
+	 * \param self The <tt>%ULVectorExpression</tt> instance.
+	 */
+	public ULVectorExpression __idiv__(ULVectorExpression self, int t) {}
+
+	/**
+	 * \brief __iadd__.
+	 * \param self The <tt>%ULVectorExpression</tt> instance.
+	 */
+	public ULVectorExpression __iadd__(ULVectorExpression self, ULVectorExpression e) {}
+
+	/**
+	 * \brief __iadd__.
+	 * \param self The <tt>%ULVectorExpression</tt> instance.
+	 */
+	public ULVectorExpression __iadd__(ULVectorExpression self, ConstULVectorExpression e) {}
+
+	/**
+	 * \brief __setitem__.
+	 * \param self The <tt>%ULVectorExpression</tt> instance.
+	 */
+	public None __setitem__(ULVectorExpression self, int i, int v) {}
+}

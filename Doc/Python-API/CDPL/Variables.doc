@@ -1,0 +1,63 @@
+/* -*- mode: java; tab-width: 4 -*- */
+
+package CDPL;
+
+/**
+ * \brief BUILD_DATE.
+ */
+int BUILD_DATE = 20140811;
+
+/**
+ * \brief HAVE_CAIRO.
+ */
+bool HAVE_CAIRO = True;
+
+/**
+ * \brief HAVE_CAIRO_PDF_SUPPORT.
+ */
+bool HAVE_CAIRO_PDF_SUPPORT = True;
+
+/**
+ * \brief HAVE_CAIRO_PNG_SUPPORT.
+ */
+bool HAVE_CAIRO_PNG_SUPPORT = True;
+
+/**
+ * \brief HAVE_CAIRO_PS_SUPPORT.
+ */
+bool HAVE_CAIRO_PS_SUPPORT = True;
+
+/**
+ * \brief HAVE_CAIRO_SVG_SUPPORT.
+ */
+bool HAVE_CAIRO_SVG_SUPPORT = True;
+
+/**
+ * \brief HAVE_QT.
+ */
+bool HAVE_QT = True;
+
+/**
+ * \brief MAJOR_VERSION.
+ */
+int MAJOR_VERSION = 1;
+
+/**
+ * \brief MINOR_VERSION.
+ */
+int MINOR_VERSION = 0;
+
+/**
+ * \brief PATCH_VERSION.
+ */
+int PATCH_VERSION = 0;
+
+/**
+ * \brief VERSION.
+ */
+int VERSION = 10000;
+
+/**
+ * \brief VERSION_STRING.
+ */
+str VERSION_STRING = "1.0.0";

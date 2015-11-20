@@ -1,0 +1,27 @@
+/* -*- mode: java; tab-width: 4 -*- */
+
+package CDPL.Chem;
+
+/**
+ * \brief BondReactionCenterStatusMatchExpression.
+ */
+public class BondReactionCenterStatusMatchExpression extends BondMatchExpression {
+
+	/**
+	 * \brief __init__.
+	 * \param self The <tt>%BondReactionCenterStatusMatchExpression</tt> instance.
+	 */
+	public None __init__(object self, BondReactionCenterStatusMatchExpression expr) {}
+
+	/**
+	 * \brief __init__.
+	 * \param self The <tt>%BondReactionCenterStatusMatchExpression</tt> instance.
+	 */
+	public None __init__(object self, int status) {}
+
+	/**
+	 * \brief assign.
+	 * \param self The <tt>%BondReactionCenterStatusMatchExpression</tt> instance.
+	 */
+	public BondReactionCenterStatusMatchExpression assign(BondReactionCenterStatusMatchExpression self, BondReactionCenterStatusMatchExpression expr) {}
+}

@@ -1,0 +1,9 @@
+/* -*- mode: java; tab-width: 4 -*- */
+
+package CDPL.Base;
+
+/**
+ * \brief CalculationFailed.
+ */
+public class CalculationFailed extends OperationFailed {
+}

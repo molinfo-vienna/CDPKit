@@ -1,0 +1,38 @@
+/* -*- mode: java; tab-width: 4 -*- */
+
+package CDPL.Chem;
+
+/**
+ * \brief AtomContainerPropertyFunctor.
+ */
+public class AtomContainerPropertyFunctor extends Boost.Python.instance {
+
+	/**
+	 * \brief __init__.
+	 * \param self The <tt>%AtomContainerPropertyFunctor</tt> instance.
+	 */
+	public None __init__(object self) {}
+
+	/**
+	 * \brief getObjectID.
+	 * \param self The <tt>%AtomContainerPropertyFunctor</tt> instance.
+	 */
+	public int getObjectID(AtomContainerPropertyFunctor self) {}
+
+	/**
+	 * \brief addDependency.
+	 * \param self The <tt>%AtomContainerPropertyFunctor</tt> instance.
+	 */
+	public None addDependency(AtomContainerPropertyFunctor self, Base.PropertyContainer cntnr1, Base.PropertyKey key1, Base.PropertyContainer cntnr2, Base.PropertyKey key2) {}
+
+	/**
+	 * \brief __call__.
+	 * \param self The <tt>%AtomContainerPropertyFunctor</tt> instance.
+	 */
+	public Base.Variant __call__(AtomContainerPropertyFunctor self, Base.PropertyKey key, AtomContainer atom_cntnr) {}
+
+	/**
+	 * \brief objectID.
+	 */
+	public None objectID;
+}

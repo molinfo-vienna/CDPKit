@@ -1,0 +1,27 @@
+/* -*- mode: java; tab-width: 4 -*- */
+
+package CDPL.Chem;
+
+/**
+ * \brief NOTAtomMatchExpression.
+ */
+public class NOTAtomMatchExpression extends AtomMatchExpression {
+
+	/**
+	 * \brief __init__.
+	 * \param self The <tt>%NOTAtomMatchExpression</tt> instance.
+	 */
+	public None __init__(object arg1, NOTAtomMatchExpression expression) {}
+
+	/**
+	 * \brief __init__.
+	 * \param self The <tt>%NOTAtomMatchExpression</tt> instance.
+	 */
+	public None __init__(object arg1, AtomMatchExpression expression) {}
+
+	/**
+	 * \brief assign.
+	 * \param self The <tt>%NOTAtomMatchExpression</tt> instance.
+	 */
+	public NOTAtomMatchExpression assign(NOTAtomMatchExpression arg1, NOTAtomMatchExpression expression) {}
+}

@@ -1,0 +1,69 @@
+/* -*- mode: java; tab-width: 4 -*- */
+
+package CDPL.Vis;
+
+/**
+ * \brief BondProperty.
+ */
+public class BondProperty extends Boost.Python.instance {
+
+	/**
+	 * \brief REACTION_CENTER_LINE_LENGTH.
+	 */
+	public static Base.LookupKey REACTION_CENTER_LINE_LENGTH;
+
+	/**
+	 * \brief LINE_WIDTH.
+	 */
+	public static Base.LookupKey LINE_WIDTH;
+
+	/**
+	 * \brief STEREO_BOND_WEDGE_WIDTH.
+	 */
+	public static Base.LookupKey STEREO_BOND_WEDGE_WIDTH;
+
+	/**
+	 * \brief COLOR.
+	 */
+	public static Base.LookupKey COLOR;
+
+	/**
+	 * \brief TRIPLE_BOND_TRIM_LENGTH.
+	 */
+	public static Base.LookupKey TRIPLE_BOND_TRIM_LENGTH;
+
+	/**
+	 * \brief REACTION_CENTER_LINE_SPACING.
+	 */
+	public static Base.LookupKey REACTION_CENTER_LINE_SPACING;
+
+	/**
+	 * \brief LINE_SPACING.
+	 */
+	public static Base.LookupKey LINE_SPACING;
+
+	/**
+	 * \brief LABEL_FONT.
+	 */
+	public static Base.LookupKey LABEL_FONT;
+
+	/**
+	 * \brief STEREO_BOND_HASH_SPACING.
+	 */
+	public static Base.LookupKey STEREO_BOND_HASH_SPACING;
+
+	/**
+	 * \brief DOUBLE_BOND_TRIM_LENGTH.
+	 */
+	public static Base.LookupKey DOUBLE_BOND_TRIM_LENGTH;
+
+	/**
+	 * \brief LABEL_MARGIN.
+	 */
+	public static Base.LookupKey LABEL_MARGIN;
+
+	/**
+	 * \brief LABEL_SIZE.
+	 */
+	public static Base.LookupKey LABEL_SIZE;
+}

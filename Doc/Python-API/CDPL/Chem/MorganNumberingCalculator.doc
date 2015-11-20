@@ -1,0 +1,49 @@
+/* -*- mode: java; tab-width: 4 -*- */
+
+package CDPL.Chem;
+
+/**
+ * \brief MorganNumberingCalculator.
+ */
+public class MorganNumberingCalculator extends Boost.Python.instance {
+
+	/**
+	 * \brief __init__.
+	 * \param self The <tt>%MorganNumberingCalculator</tt> instance.
+	 */
+	public None __init__(object self) {}
+
+	/**
+	 * \brief __init__.
+	 * \param self The <tt>%MorganNumberingCalculator</tt> instance.
+	 */
+	public None __init__(object self, MolecularGraph molgraph) {}
+
+	/**
+	 * \brief calculate.
+	 * \param self The <tt>%MorganNumberingCalculator</tt> instance.
+	 */
+	public Util.STArray calculate(MorganNumberingCalculator self, MolecularGraph molgraph) {}
+
+	/**
+	 * \brief getObjectID.
+	 * \param self The <tt>%MorganNumberingCalculator</tt> instance.
+	 */
+	public int getObjectID(MorganNumberingCalculator self) {}
+
+	/**
+	 * \brief getResult.
+	 * \param self The <tt>%MorganNumberingCalculator</tt> instance.
+	 */
+	public Util.STArray getResult(MorganNumberingCalculator self) {}
+
+	/**
+	 * \brief objectID.
+	 */
+	public None objectID;
+
+	/**
+	 * \brief result.
+	 */
+	public None result;
+}

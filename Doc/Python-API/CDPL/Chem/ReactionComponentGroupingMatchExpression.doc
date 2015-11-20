@@ -1,0 +1,27 @@
+/* -*- mode: java; tab-width: 4 -*- */
+
+package CDPL.Chem;
+
+/**
+ * \brief ReactionComponentGroupingMatchExpression.
+ */
+public class ReactionComponentGroupingMatchExpression extends ReactionMatchExpression {
+
+	/**
+	 * \brief __init__.
+	 * \param self The <tt>%ReactionComponentGroupingMatchExpression</tt> instance.
+	 */
+	public None __init__(object self, ReactionComponentGroupingMatchExpression expr) {}
+
+	/**
+	 * \brief __init__.
+	 * \param self The <tt>%ReactionComponentGroupingMatchExpression</tt> instance.
+	 */
+	public None __init__(object self, FragmentList comp_grouping) {}
+
+	/**
+	 * \brief assign.
+	 * \param self The <tt>%ReactionComponentGroupingMatchExpression</tt> instance.
+	 */
+	public ReactionComponentGroupingMatchExpression assign(ReactionComponentGroupingMatchExpression self, ReactionComponentGroupingMatchExpression expr) {}
+}

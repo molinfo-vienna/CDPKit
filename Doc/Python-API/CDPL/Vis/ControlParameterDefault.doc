@@ -1,0 +1,294 @@
+/* -*- mode: java; tab-width: 4 -*- */
+
+package CDPL.Vis;
+
+/**
+ * \brief ControlParameterDefault.
+ */
+public class ControlParameterDefault extends Boost.Python.instance {
+
+	/**
+	 * \brief BOND_COLOR.
+	 */
+	public static Color BOND_COLOR;
+
+	/**
+	 * \brief SHOW_REACTION_PLUS_SIGNS.
+	 */
+	public static bool SHOW_REACTION_PLUS_SIGNS = True;
+
+	/**
+	 * \brief SHOW_STEREO_BONDS.
+	 */
+	public static bool SHOW_STEREO_BONDS = True;
+
+	/**
+	 * \brief REACTION_COMPONENT_MARGIN.
+	 */
+	public static SizeSpecification REACTION_COMPONENT_MARGIN;
+
+	/**
+	 * \brief REACTION_AGENT_LAYOUT_DIRECTION.
+	 */
+	public static int REACTION_AGENT_LAYOUT_DIRECTION = 0;
+
+	/**
+	 * \brief REACTION_COMPONENT_LAYOUT_DIRECTION.
+	 */
+	public static int REACTION_COMPONENT_LAYOUT_DIRECTION = 0;
+
+	/**
+	 * \brief SHOW_NON_CARBON_HYDROGEN_COUNTS.
+	 */
+	public static bool SHOW_NON_CARBON_HYDROGEN_COUNTS = True;
+
+	/**
+	 * \brief REACTION_ARROW_HEAD_LENGTH.
+	 */
+	public static SizeSpecification REACTION_ARROW_HEAD_LENGTH;
+
+	/**
+	 * \brief BOND_LABEL_FONT.
+	 */
+	public static Font BOND_LABEL_FONT;
+
+	/**
+	 * \brief REACTION_ARROW_LINE_WIDTH.
+	 */
+	public static SizeSpecification REACTION_ARROW_LINE_WIDTH;
+
+	/**
+	 * \brief REACTION_COMPONENT_LAYOUT.
+	 */
+	public static int REACTION_COMPONENT_LAYOUT = 2;
+
+	/**
+	 * \brief REACTION_PLUS_SIGN_COLOR.
+	 */
+	public static Color REACTION_PLUS_SIGN_COLOR;
+
+	/**
+	 * \brief BOND_LABEL_SIZE.
+	 */
+	public static SizeSpecification BOND_LABEL_SIZE;
+
+	/**
+	 * \brief SHOW_ATOM_REACTION_INFOS.
+	 */
+	public static bool SHOW_ATOM_REACTION_INFOS = True;
+
+	/**
+	 * \brief REACTION_ARROW_HEAD_WIDTH.
+	 */
+	public static SizeSpecification REACTION_ARROW_HEAD_WIDTH;
+
+	/**
+	 * \brief DOUBLE_BOND_TRIM_LENGTH.
+	 */
+	public static SizeSpecification DOUBLE_BOND_TRIM_LENGTH;
+
+	/**
+	 * \brief REACTION_CENTER_LINE_SPACING.
+	 */
+	public static SizeSpecification REACTION_CENTER_LINE_SPACING;
+
+	/**
+	 * \brief BOND_LINE_SPACING.
+	 */
+	public static SizeSpecification BOND_LINE_SPACING;
+
+	/**
+	 * \brief SHOW_CARBONS.
+	 */
+	public static bool SHOW_CARBONS = False;
+
+	/**
+	 * \brief REACTION_ARROW_STYLE.
+	 */
+	public static int REACTION_ARROW_STYLE = 1;
+
+	/**
+	 * \brief USE_CALCULATED_ATOM_COORDINATES.
+	 */
+	public static bool USE_CALCULATED_ATOM_COORDINATES = False;
+
+	/**
+	 * \brief STEREO_BOND_HASH_SPACING.
+	 */
+	public static SizeSpecification STEREO_BOND_HASH_SPACING;
+
+	/**
+	 * \brief TRIPLE_BOND_TRIM_LENGTH.
+	 */
+	public static SizeSpecification TRIPLE_BOND_TRIM_LENGTH;
+
+	/**
+	 * \brief SECONDARY_ATOM_LABEL_FONT.
+	 */
+	public static Font SECONDARY_ATOM_LABEL_FONT;
+
+	/**
+	 * \brief SHOW_REACTION_REACTANTS.
+	 */
+	public static bool SHOW_REACTION_REACTANTS = True;
+
+	/**
+	 * \brief SHOW_REACTION_PRODUCTS.
+	 */
+	public static bool SHOW_REACTION_PRODUCTS = True;
+
+	/**
+	 * \brief BOND_LABEL_MARGIN.
+	 */
+	public static SizeSpecification BOND_LABEL_MARGIN;
+
+	/**
+	 * \brief REACTION_ARROW_LENGTH.
+	 */
+	public static SizeSpecification REACTION_ARROW_LENGTH;
+
+	/**
+	 * \brief REACTION_CENTER_LINE_LENGTH.
+	 */
+	public static SizeSpecification REACTION_CENTER_LINE_LENGTH;
+
+	/**
+	 * \brief REACTION_ARROW_SHAFT_WIDTH.
+	 */
+	public static SizeSpecification REACTION_ARROW_SHAFT_WIDTH;
+
+	/**
+	 * \brief ATOM_COLOR.
+	 */
+	public static Color ATOM_COLOR;
+
+	/**
+	 * \brief REACTION_PLUS_SIGN_LINE_WIDTH.
+	 */
+	public static SizeSpecification REACTION_PLUS_SIGN_LINE_WIDTH;
+
+	/**
+	 * \brief STEREO_BOND_WEDGE_WIDTH.
+	 */
+	public static SizeSpecification STEREO_BOND_WEDGE_WIDTH;
+
+	/**
+	 * \brief SHOW_BOND_REACTION_INFOS.
+	 */
+	public static bool SHOW_BOND_REACTION_INFOS = True;
+
+	/**
+	 * \brief REACTION_ARROW_COLOR.
+	 */
+	public static Color REACTION_ARROW_COLOR;
+
+	/**
+	 * \brief ATOM_LABEL_MARGIN.
+	 */
+	public static SizeSpecification ATOM_LABEL_MARGIN;
+
+	/**
+	 * \brief ATOM_LABEL_FONT.
+	 */
+	public static Font ATOM_LABEL_FONT;
+
+	/**
+	 * \brief BOND_LINE_WIDTH.
+	 */
+	public static SizeSpecification BOND_LINE_WIDTH;
+
+	/**
+	 * \brief VIEWPORT.
+	 */
+	public static Rectangle2D VIEWPORT;
+
+	/**
+	 * \brief SHOW_ATOM_QUERY_INFOS.
+	 */
+	public static bool SHOW_ATOM_QUERY_INFOS = True;
+
+	/**
+	 * \brief SHOW_ISOTOPES.
+	 */
+	public static bool SHOW_ISOTOPES = True;
+
+	/**
+	 * \brief SIZE_ADJUSTMENT.
+	 */
+	public static int SIZE_ADJUSTMENT = 2;
+
+	/**
+	 * \brief SHOW_BOND_QUERY_INFOS.
+	 */
+	public static bool SHOW_BOND_QUERY_INFOS = True;
+
+	/**
+	 * \brief BACKGROUND_COLOR.
+	 */
+	public static Color BACKGROUND_COLOR;
+
+	/**
+	 * \brief SHOW_EXPLICIT_HYDROGENS.
+	 */
+	public static bool SHOW_EXPLICIT_HYDROGENS = True;
+
+	/**
+	 * \brief SECONDARY_ATOM_LABEL_SIZE.
+	 */
+	public static SizeSpecification SECONDARY_ATOM_LABEL_SIZE;
+
+	/**
+	 * \brief REACTION_AGENT_LAYOUT.
+	 */
+	public static int REACTION_AGENT_LAYOUT = 1;
+
+	/**
+	 * \brief BOND_LENGTH.
+	 */
+	public static SizeSpecification BOND_LENGTH;
+
+	/**
+	 * \brief REACTION_PLUS_SIGN_SIZE.
+	 */
+	public static SizeSpecification REACTION_PLUS_SIGN_SIZE;
+
+	/**
+	 * \brief RADICAL_ELECTRON_DOT_SIZE.
+	 */
+	public static SizeSpecification RADICAL_ELECTRON_DOT_SIZE;
+
+	/**
+	 * \brief SHOW_RADICAL_ELECTRONS.
+	 */
+	public static bool SHOW_RADICAL_ELECTRONS = True;
+
+	/**
+	 * \brief REACTION_AGENT_ALIGNMENT.
+	 */
+	public static int REACTION_AGENT_ALIGNMENT = 12;
+
+	/**
+	 * \brief ATOM_LABEL_SIZE.
+	 */
+	public static SizeSpecification ATOM_LABEL_SIZE;
+
+	/**
+	 * \brief SHOW_REACTION_AGENTS.
+	 */
+	public static bool SHOW_REACTION_AGENTS = True;
+
+	/**
+	 * \brief SHOW_CHARGES.
+	 */
+	public static bool SHOW_CHARGES = True;
+
+	/**
+	 * \brief ALIGNMENT.
+	 */
+	public static int ALIGNMENT = 15;
+
+	/**
+	 * \brief SHOW_HYDROGEN_COUNTS.
+	 */
+	public static bool SHOW_HYDROGEN_COUNTS = False;
+}

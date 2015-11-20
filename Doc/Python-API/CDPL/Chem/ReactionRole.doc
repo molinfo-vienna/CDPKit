@@ -1,0 +1,39 @@
+/* -*- mode: java; tab-width: 4 -*- */
+
+package CDPL.Chem;
+
+/**
+ * \brief ReactionRole.
+ */
+public class ReactionRole extends Boost.Python.instance {
+
+	/**
+	 * \brief REACTANT.
+	 */
+	public static int REACTANT = 1;
+
+	/**
+	 * \brief ALL.
+	 */
+	public static int ALL = 7;
+
+	/**
+	 * \brief NONE.
+	 */
+	public static int NONE = 0;
+
+	/**
+	 * \brief AGENT.
+	 */
+	public static int AGENT = 2;
+
+	/**
+	 * \brief PRODUCT.
+	 */
+	public static int PRODUCT = 4;
+
+	/**
+	 * \brief CATALYST.
+	 */
+	public static int CATALYST = 2;
+}

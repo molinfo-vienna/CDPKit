@@ -1,0 +1,44 @@
+/* -*- mode: java; tab-width: 4 -*- */
+
+package CDPL.Vis;
+
+/**
+ * \brief AtomProperty.
+ */
+public class AtomProperty extends Boost.Python.instance {
+
+	/**
+	 * \brief COLOR.
+	 */
+	public static Base.LookupKey COLOR;
+
+	/**
+	 * \brief SECONDARY_LABEL_FONT.
+	 */
+	public static Base.LookupKey SECONDARY_LABEL_FONT;
+
+	/**
+	 * \brief SECONDARY_LABEL_SIZE.
+	 */
+	public static Base.LookupKey SECONDARY_LABEL_SIZE;
+
+	/**
+	 * \brief RADICAL_ELECTRON_DOT_SIZE.
+	 */
+	public static Base.LookupKey RADICAL_ELECTRON_DOT_SIZE;
+
+	/**
+	 * \brief LABEL_FONT.
+	 */
+	public static Base.LookupKey LABEL_FONT;
+
+	/**
+	 * \brief LABEL_MARGIN.
+	 */
+	public static Base.LookupKey LABEL_MARGIN;
+
+	/**
+	 * \brief LABEL_SIZE.
+	 */
+	public static Base.LookupKey LABEL_SIZE;
+}

@@ -1,0 +1,337 @@
+/* -*- mode: java; tab-width: 4 -*- */
+
+package CDPL.Chem;
+
+/**
+ * \brief Molecule.
+ */
+public class Molecule extends MolecularGraph {
+
+	/**
+	 * \brief AtomSequence.
+	 */
+	public class AtomSequence extends Boost.Python.instance {
+
+		/**
+		 * \brief __delitem__.
+		 * \param self The <tt>%AtomSequence</tt> instance.
+		 */
+		public None __delitem__(AtomSequence self, int idx) {}
+
+		/**
+		 * \brief __getitem__.
+		 * \param self The <tt>%AtomSequence</tt> instance.
+		 */
+		public Atom __getitem__(AtomSequence self, int idx) {}
+
+		/**
+		 * \brief __contains__.
+		 * \param self The <tt>%AtomSequence</tt> instance.
+		 */
+		public bool __contains__(AtomSequence self, Atom atom) {}
+
+		/**
+		 * \brief __len__.
+		 * \param self The <tt>%AtomSequence</tt> instance.
+		 */
+		public int __len__(AtomSequence self) {}
+	}
+
+	/**
+	 * \brief BondSequence.
+	 */
+	public class BondSequence extends Boost.Python.instance {
+
+		/**
+		 * \brief __delitem__.
+		 * \param self The <tt>%BondSequence</tt> instance.
+		 */
+		public None __delitem__(BondSequence self, int idx) {}
+
+		/**
+		 * \brief __getitem__.
+		 * \param self The <tt>%BondSequence</tt> instance.
+		 */
+		public Bond __getitem__(BondSequence self, int idx) {}
+
+		/**
+		 * \brief __contains__.
+		 * \param self The <tt>%BondSequence</tt> instance.
+		 */
+		public bool __contains__(BondSequence self, Bond bond) {}
+
+		/**
+		 * \brief __len__.
+		 * \param self The <tt>%BondSequence</tt> instance.
+		 */
+		public int __len__(BondSequence self) {}
+	}
+
+	/**
+	 * \brief __init__.
+	 * \param self The <tt>%Molecule</tt> instance.
+	 */
+	public None __init__(object self) {}
+
+	/**
+	 * \brief containsAtom.
+	 * \param self The <tt>%Molecule</tt> instance.
+	 */
+	public bool containsAtom(AtomContainer self, Atom atom) {}
+
+	/**
+	 * \brief containsAtom.
+	 * \param self The <tt>%Molecule</tt> instance.
+	 */
+	public None containsAtom(Molecule arg1, Atom arg2) {}
+
+	/**
+	 * \brief getBond.
+	 * \param self The <tt>%Molecule</tt> instance.
+	 */
+	public Bond getBond(Molecule self, int idx) {}
+
+	/**
+	 * \brief containsBond.
+	 * \param self The <tt>%Molecule</tt> instance.
+	 */
+	public bool containsBond(BondContainer self, Bond bond) {}
+
+	/**
+	 * \brief containsBond.
+	 * \param self The <tt>%Molecule</tt> instance.
+	 */
+	public None containsBond(Molecule arg1, Bond arg2) {}
+
+	/**
+	 * \brief getBondIndex.
+	 * \param self The <tt>%Molecule</tt> instance.
+	 */
+	public int getBondIndex(BondContainer self, Bond bond) {}
+
+	/**
+	 * \brief getBondIndex.
+	 * \param self The <tt>%Molecule</tt> instance.
+	 */
+	public None getBondIndex(Molecule arg1, Bond arg2) {}
+
+	/**
+	 * \brief getNumBonds.
+	 * \param self The <tt>%Molecule</tt> instance.
+	 */
+	public int getNumBonds(Molecule self) {}
+
+	/**
+	 * \brief append.
+	 * \param self The <tt>%Molecule</tt> instance.
+	 */
+	public None append(Molecule self, Molecule mol) {}
+
+	/**
+	 * \brief append.
+	 * \param self The <tt>%Molecule</tt> instance.
+	 */
+	public None append(Molecule self, MolecularGraph molgraph) {}
+
+	/**
+	 * \brief clearProperties.
+	 * \param self The <tt>%Molecule</tt> instance.
+	 */
+	public None clearProperties(Molecule self) {}
+
+	/**
+	 * \brief getAtom.
+	 * \param self The <tt>%Molecule</tt> instance.
+	 */
+	public Atom getAtom(Molecule self, int idx) {}
+
+	/**
+	 * \brief removeBond.
+	 * \param self The <tt>%Molecule</tt> instance.
+	 */
+	public None removeBond(Molecule self, int idx) {}
+
+	/**
+	 * \brief getBonds.
+	 * \param self The <tt>%Molecule</tt> instance.
+	 */
+	public BondSequence getBonds(Molecule self) {}
+
+	/**
+	 * \brief isPropertySet.
+	 * \param self The <tt>%Molecule</tt> instance.
+	 */
+	public bool isPropertySet(Molecule self, Base.LookupKey key) {}
+
+	/**
+	 * \brief getAtoms.
+	 * \param self The <tt>%Molecule</tt> instance.
+	 */
+	public AtomSequence getAtoms(Molecule self) {}
+
+	/**
+	 * \brief getNumAtoms.
+	 * \param self The <tt>%Molecule</tt> instance.
+	 */
+	public int getNumAtoms(Molecule self) {}
+
+	/**
+	 * \brief clone.
+	 * \param self The <tt>%Molecule</tt> instance.
+	 */
+	public Molecule clone(Molecule self) {}
+
+	/**
+	 * \brief addBond.
+	 * \param self The <tt>%Molecule</tt> instance.
+	 */
+	public Bond addBond(Molecule self, int atom1_idx, int atom2_idx) {}
+
+	/**
+	 * \brief addAtom.
+	 * \param self The <tt>%Molecule</tt> instance.
+	 */
+	public Atom addAtom(Molecule self) {}
+
+	/**
+	 * \brief copyProperties.
+	 * \param self The <tt>%Molecule</tt> instance.
+	 */
+	public None copyProperties(Base.PropertyContainer self, Base.PropertyContainer cntnr) {}
+
+	/**
+	 * \brief removeProperty.
+	 * \param self The <tt>%Molecule</tt> instance.
+	 */
+	public bool removeProperty(Molecule self, Base.LookupKey key) {}
+
+	/**
+	 * \brief setProperty.
+	 * \param self The <tt>%Molecule</tt> instance.
+	 */
+	public None setProperty(Molecule self, Base.LookupKey key, Base.Variant value) {}
+
+	/**
+	 * \brief copy.
+	 * \param self The <tt>%Molecule</tt> instance.
+	 */
+	public None copy(Molecule self, Molecule mol) {}
+
+	/**
+	 * \brief copy.
+	 * \param self The <tt>%Molecule</tt> instance.
+	 */
+	public None copy(Molecule self, MolecularGraph molgraph) {}
+
+	/**
+	 * \brief getAtomIndex.
+	 * \param self The <tt>%Molecule</tt> instance.
+	 */
+	public int getAtomIndex(AtomContainer self, Atom atom) {}
+
+	/**
+	 * \brief getAtomIndex.
+	 * \param self The <tt>%Molecule</tt> instance.
+	 */
+	public None getAtomIndex(Molecule arg1, Atom arg2) {}
+
+	/**
+	 * \brief addProperties.
+	 * \param self The <tt>%Molecule</tt> instance.
+	 */
+	public None addProperties(Base.PropertyContainer self, Base.PropertyContainer cntnr) {}
+
+	/**
+	 * \brief getProperty.
+	 * \param self The <tt>%Molecule</tt> instance.
+	 */
+	public Base.Variant getProperty(Molecule self, Base.LookupKey key, bool throw_ = False) {}
+
+	/**
+	 * \brief clear.
+	 * \param self The <tt>%Molecule</tt> instance.
+	 */
+	public None clear(Molecule self) {}
+
+	/**
+	 * \brief removeAtom.
+	 * \param self The <tt>%Molecule</tt> instance.
+	 */
+	public None removeAtom(Molecule self, int idx) {}
+
+	/**
+	 * \brief assign.
+	 * \param self The <tt>%Molecule</tt> instance.
+	 */
+	public Molecule assign(Molecule self, Molecule mol) {}
+
+	/**
+	 * \brief assign.
+	 * \param self The <tt>%Molecule</tt> instance.
+	 */
+	public Molecule assign(Molecule self, MolecularGraph molgraph) {}
+
+	/**
+	 * \brief __contains__.
+	 * \param self The <tt>%Molecule</tt> instance.
+	 */
+	public bool __contains__(AtomContainer self, Atom atom) {}
+
+	/**
+	 * \brief __contains__.
+	 * \param self The <tt>%Molecule</tt> instance.
+	 */
+	public bool __contains__(BondContainer self, Bond bond) {}
+
+	/**
+	 * \brief __contains__.
+	 * \param self The <tt>%Molecule</tt> instance.
+	 */
+	public bool __contains__(Molecule self, Base.LookupKey key) {}
+
+	/**
+	 * \brief __len__.
+	 * \param self The <tt>%Molecule</tt> instance.
+	 */
+	public int __len__(Molecule self) {}
+
+	/**
+	 * \brief __getitem__.
+	 * \param self The <tt>%Molecule</tt> instance.
+	 */
+	public Base.Variant __getitem__(Base.PropertyContainer self, Base.LookupKey key) {}
+
+	/**
+	 * \brief __delitem__.
+	 * \param self The <tt>%Molecule</tt> instance.
+	 */
+	public bool __delitem__(Molecule self, Base.LookupKey key) {}
+
+	/**
+	 * \brief __setitem__.
+	 * \param self The <tt>%Molecule</tt> instance.
+	 */
+	public None __setitem__(Molecule self, Base.LookupKey key, Base.Variant value) {}
+
+	/**
+	 * \brief __iadd__.
+	 * \param self The <tt>%Molecule</tt> instance.
+	 */
+	public Molecule __iadd__(Molecule self, Molecule mol) {}
+
+	/**
+	 * \brief __iadd__.
+	 * \param self The <tt>%Molecule</tt> instance.
+	 */
+	public Molecule __iadd__(Molecule self, MolecularGraph molgraph) {}
+
+	/**
+	 * \brief bonds.
+	 */
+	public None bonds;
+
+	/**
+	 * \brief atoms.
+	 */
+	public None atoms;
+}

@@ -1,0 +1,48 @@
+/* -*- mode: java; tab-width: 4 -*- */
+
+package CDPL.Chem;
+
+/**
+ * \brief INCHIMoleculeReader.
+ */
+public class INCHIMoleculeReader extends MoleculeReader {
+
+	/**
+	 * \brief __init__.
+	 * \param self The <tt>%INCHIMoleculeReader</tt> instance.
+	 */
+	public None __init__(object self, Base.IStream is) {}
+
+	/**
+	 * \brief getLogOutput.
+	 * \param self The <tt>%INCHIMoleculeReader</tt> instance.
+	 */
+	public str getLogOutput(INCHIMoleculeReader self) {}
+
+	/**
+	 * \brief getMessage.
+	 * \param self The <tt>%INCHIMoleculeReader</tt> instance.
+	 */
+	public str getMessage(INCHIMoleculeReader self) {}
+
+	/**
+	 * \brief getReturnCode.
+	 * \param self The <tt>%INCHIMoleculeReader</tt> instance.
+	 */
+	public int getReturnCode(INCHIMoleculeReader self) {}
+
+	/**
+	 * \brief returnCode.
+	 */
+	public None returnCode;
+
+	/**
+	 * \brief logOutput.
+	 */
+	public None logOutput;
+
+	/**
+	 * \brief message.
+	 */
+	public None message;
+}

@@ -1,0 +1,624 @@
+/* -*- mode: java; tab-width: 4 -*- */
+
+package CDPL.Chem;
+
+/**
+ * \brief AtomType.
+ */
+public class AtomType extends Boost.Python.instance {
+
+	/**
+	 * \brief Ru.
+	 */
+	public static int Ru = 44;
+
+	/**
+	 * \brief Re.
+	 */
+	public static int Re = 75;
+
+	/**
+	 * \brief Rf.
+	 */
+	public static int Rf = 104;
+
+	/**
+	 * \brief Ra.
+	 */
+	public static int Ra = 88;
+
+	/**
+	 * \brief Rb.
+	 */
+	public static int Rb = 37;
+
+	/**
+	 * \brief Rn.
+	 */
+	public static int Rn = 86;
+
+	/**
+	 * \brief Rh.
+	 */
+	public static int Rh = 45;
+
+	/**
+	 * \brief MAX_ATOMIC_NO.
+	 */
+	public static int MAX_ATOMIC_NO = 109;
+
+	/**
+	 * \brief Be.
+	 */
+	public static int Be = 4;
+
+	/**
+	 * \brief Ba.
+	 */
+	public static int Ba = 56;
+
+	/**
+	 * \brief Bh.
+	 */
+	public static int Bh = 107;
+
+	/**
+	 * \brief Bi.
+	 */
+	public static int Bi = 83;
+
+	/**
+	 * \brief Bk.
+	 */
+	public static int Bk = 97;
+
+	/**
+	 * \brief Br.
+	 */
+	public static int Br = 35;
+
+	/**
+	 * \brief Na.
+	 */
+	public static int Na = 11;
+
+	/**
+	 * \brief D.
+	 */
+	public static int D = 1;
+
+	/**
+	 * \brief H.
+	 */
+	public static int H = 1;
+
+	/**
+	 * \brief P.
+	 */
+	public static int P = 15;
+
+	/**
+	 * \brief T.
+	 */
+	public static int T = 1;
+
+	/**
+	 * \brief X.
+	 */
+	public static int X = 116;
+
+	/**
+	 * \brief Os.
+	 */
+	public static int Os = 76;
+
+	/**
+	 * \brief Hg.
+	 */
+	public static int Hg = 80;
+
+	/**
+	 * \brief Ge.
+	 */
+	public static int Ge = 32;
+
+	/**
+	 * \brief Gd.
+	 */
+	public static int Gd = 64;
+
+	/**
+	 * \brief Ga.
+	 */
+	public static int Ga = 31;
+
+	/**
+	 * \brief Pr.
+	 */
+	public static int Pr = 59;
+
+	/**
+	 * \brief Pt.
+	 */
+	public static int Pt = 78;
+
+	/**
+	 * \brief Pu.
+	 */
+	public static int Pu = 94;
+
+	/**
+	 * \brief C.
+	 */
+	public static int C = 6;
+
+	/**
+	 * \brief Pb.
+	 */
+	public static int Pb = 82;
+
+	/**
+	 * \brief Pa.
+	 */
+	public static int Pa = 91;
+
+	/**
+	 * \brief Pd.
+	 */
+	public static int Pd = 46;
+
+	/**
+	 * \brief Xe.
+	 */
+	public static int Xe = 54;
+
+	/**
+	 * \brief Po.
+	 */
+	public static int Po = 84;
+
+	/**
+	 * \brief Pm.
+	 */
+	public static int Pm = 61;
+
+	/**
+	 * \brief Hs.
+	 */
+	public static int Hs = 108;
+
+	/**
+	 * \brief Ho.
+	 */
+	public static int Ho = 67;
+
+	/**
+	 * \brief Hf.
+	 */
+	public static int Hf = 72;
+
+	/**
+	 * \brief Mo.
+	 */
+	public static int Mo = 42;
+
+	/**
+	 * \brief He.
+	 */
+	public static int He = 2;
+
+	/**
+	 * \brief Md.
+	 */
+	public static int Md = 101;
+
+	/**
+	 * \brief Mg.
+	 */
+	public static int Mg = 12;
+
+	/**
+	 * \brief K.
+	 */
+	public static int K = 19;
+
+	/**
+	 * \brief Mn.
+	 */
+	public static int Mn = 25;
+
+	/**
+	 * \brief O.
+	 */
+	public static int O = 8;
+
+	/**
+	 * \brief Mt.
+	 */
+	public static int Mt = 109;
+
+	/**
+	 * \brief S.
+	 */
+	public static int S = 16;
+
+	/**
+	 * \brief W.
+	 */
+	public static int W = 74;
+
+	/**
+	 * \brief Zn.
+	 */
+	public static int Zn = 30;
+
+	/**
+	 * \brief MH.
+	 */
+	public static int MH = 115;
+
+	/**
+	 * \brief Eu.
+	 */
+	public static int Eu = 63;
+
+	/**
+	 * \brief ANY.
+	 */
+	public static int ANY = 118;
+
+	/**
+	 * \brief Es.
+	 */
+	public static int Es = 99;
+
+	/**
+	 * \brief Er.
+	 */
+	public static int Er = 68;
+
+	/**
+	 * \brief Ni.
+	 */
+	public static int Ni = 28;
+
+	/**
+	 * \brief No.
+	 */
+	public static int No = 102;
+
+	/**
+	 * \brief UNKNOWN.
+	 */
+	public static int UNKNOWN = 0;
+
+	/**
+	 * \brief Nb.
+	 */
+	public static int Nb = 41;
+
+	/**
+	 * \brief Nd.
+	 */
+	public static int Nd = 60;
+
+	/**
+	 * \brief Ne.
+	 */
+	public static int Ne = 10;
+
+	/**
+	 * \brief Np.
+	 */
+	public static int Np = 93;
+
+	/**
+	 * \brief Fr.
+	 */
+	public static int Fr = 87;
+
+	/**
+	 * \brief Fe.
+	 */
+	public static int Fe = 26;
+
+	/**
+	 * \brief Fm.
+	 */
+	public static int Fm = 100;
+
+	/**
+	 * \brief XH.
+	 */
+	public static int XH = 117;
+
+	/**
+	 * \brief B.
+	 */
+	public static int B = 5;
+
+	/**
+	 * \brief F.
+	 */
+	public static int F = 9;
+
+	/**
+	 * \brief Sr.
+	 */
+	public static int Sr = 38;
+
+	/**
+	 * \brief N.
+	 */
+	public static int N = 7;
+
+	/**
+	 * \brief Kr.
+	 */
+	public static int Kr = 36;
+
+	/**
+	 * \brief Si.
+	 */
+	public static int Si = 14;
+
+	/**
+	 * \brief Sn.
+	 */
+	public static int Sn = 50;
+
+	/**
+	 * \brief Sm.
+	 */
+	public static int Sm = 62;
+
+	/**
+	 * \brief V.
+	 */
+	public static int V = 23;
+
+	/**
+	 * \brief Sc.
+	 */
+	public static int Sc = 21;
+
+	/**
+	 * \brief Sb.
+	 */
+	public static int Sb = 51;
+
+	/**
+	 * \brief Sg.
+	 */
+	public static int Sg = 106;
+
+	/**
+	 * \brief Se.
+	 */
+	public static int Se = 34;
+
+	/**
+	 * \brief MAX_TYPE.
+	 */
+	public static int MAX_TYPE = 118;
+
+	/**
+	 * \brief Co.
+	 */
+	public static int Co = 27;
+
+	/**
+	 * \brief Cm.
+	 */
+	public static int Cm = 96;
+
+	/**
+	 * \brief Cl.
+	 */
+	public static int Cl = 17;
+
+	/**
+	 * \brief Ca.
+	 */
+	public static int Ca = 20;
+
+	/**
+	 * \brief Cf.
+	 */
+	public static int Cf = 98;
+
+	/**
+	 * \brief Ce.
+	 */
+	public static int Ce = 58;
+
+	/**
+	 * \brief Cd.
+	 */
+	public static int Cd = 48;
+
+	/**
+	 * \brief Tm.
+	 */
+	public static int Tm = 69;
+
+	/**
+	 * \brief Cs.
+	 */
+	public static int Cs = 55;
+
+	/**
+	 * \brief Cr.
+	 */
+	public static int Cr = 24;
+
+	/**
+	 * \brief Cu.
+	 */
+	public static int Cu = 29;
+
+	/**
+	 * \brief La.
+	 */
+	public static int La = 57;
+
+	/**
+	 * \brief Li.
+	 */
+	public static int Li = 3;
+
+	/**
+	 * \brief Tl.
+	 */
+	public static int Tl = 81;
+
+	/**
+	 * \brief Lu.
+	 */
+	public static int Lu = 71;
+
+	/**
+	 * \brief Lr.
+	 */
+	public static int Lr = 103;
+
+	/**
+	 * \brief Th.
+	 */
+	public static int Th = 90;
+
+	/**
+	 * \brief Ti.
+	 */
+	public static int Ti = 22;
+
+	/**
+	 * \brief Te.
+	 */
+	public static int Te = 52;
+
+	/**
+	 * \brief Tb.
+	 */
+	public static int Tb = 65;
+
+	/**
+	 * \brief Tc.
+	 */
+	public static int Tc = 43;
+
+	/**
+	 * \brief Ta.
+	 */
+	public static int Ta = 73;
+
+	/**
+	 * \brief Yb.
+	 */
+	public static int Yb = 70;
+
+	/**
+	 * \brief Db.
+	 */
+	public static int Db = 105;
+
+	/**
+	 * \brief Zr.
+	 */
+	public static int Zr = 40;
+
+	/**
+	 * \brief Dy.
+	 */
+	public static int Dy = 66;
+
+	/**
+	 * \brief A.
+	 */
+	public static int A = 110;
+
+	/**
+	 * \brief I.
+	 */
+	public static int I = 53;
+
+	/**
+	 * \brief AH.
+	 */
+	public static int AH = 111;
+
+	/**
+	 * \brief M.
+	 */
+	public static int M = 114;
+
+	/**
+	 * \brief Q.
+	 */
+	public static int Q = 112;
+
+	/**
+	 * \brief U.
+	 */
+	public static int U = 92;
+
+	/**
+	 * \brief Y.
+	 */
+	public static int Y = 39;
+
+	/**
+	 * \brief Ac.
+	 */
+	public static int Ac = 89;
+
+	/**
+	 * \brief Ag.
+	 */
+	public static int Ag = 47;
+
+	/**
+	 * \brief Ir.
+	 */
+	public static int Ir = 77;
+
+	/**
+	 * \brief Am.
+	 */
+	public static int Am = 95;
+
+	/**
+	 * \brief Al.
+	 */
+	public static int Al = 13;
+
+	/**
+	 * \brief As.
+	 */
+	public static int As = 33;
+
+	/**
+	 * \brief Ar.
+	 */
+	public static int Ar = 18;
+
+	/**
+	 * \brief Au.
+	 */
+	public static int Au = 79;
+
+	/**
+	 * \brief At.
+	 */
+	public static int At = 85;
+
+	/**
+	 * \brief In.
+	 */
+	public static int In = 49;
+
+	/**
+	 * \brief QH.
+	 */
+	public static int QH = 113;
+}

@@ -1,0 +1,15 @@
+/* -*- mode: java; tab-width: 4 -*- */
+
+package CDPL.Chem;
+
+/**
+ * \brief JMEMoleculeInputHandler.
+ */
+public class JMEMoleculeInputHandler extends MoleculeInputHandler {
+
+	/**
+	 * \brief __init__.
+	 * \param self The <tt>%JMEMoleculeInputHandler</tt> instance.
+	 */
+	public None __init__(object self) {}
+}

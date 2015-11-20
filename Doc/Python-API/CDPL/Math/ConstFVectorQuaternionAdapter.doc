@@ -1,0 +1,181 @@
+/* -*- mode: java; tab-width: 4 -*- */
+
+package CDPL.Math;
+
+/**
+ * \brief ConstFVectorQuaternionAdapter.
+ */
+public class ConstFVectorQuaternionAdapter extends Boost.Python.instance {
+
+	/**
+	 * \brief __init__.
+	 * \param self The <tt>%ConstFVectorQuaternionAdapter</tt> instance.
+	 */
+	public None __init__(object self, ConstFVectorQuaternionAdapter a) {}
+
+	/**
+	 * \brief __init__.
+	 * \param self The <tt>%ConstFVectorQuaternionAdapter</tt> instance.
+	 */
+	public None __init__(object self, ConstFVectorExpression e) {}
+
+	/**
+	 * \brief getObjectID.
+	 * \param self The <tt>%ConstFVectorQuaternionAdapter</tt> instance.
+	 */
+	public int getObjectID(ConstFVectorQuaternionAdapter self) {}
+
+	/**
+	 * \brief getC4.
+	 * \param self The <tt>%ConstFVectorQuaternionAdapter</tt> instance.
+	 */
+	public float getC4(ConstFVectorQuaternionAdapter self) {}
+
+	/**
+	 * \brief getData.
+	 * \param self The <tt>%ConstFVectorQuaternionAdapter</tt> instance.
+	 */
+	public ConstFVectorExpression getData(ConstFVectorQuaternionAdapter self) {}
+
+	/**
+	 * \brief getC1.
+	 * \param self The <tt>%ConstFVectorQuaternionAdapter</tt> instance.
+	 */
+	public float getC1(ConstFVectorQuaternionAdapter self) {}
+
+	/**
+	 * \brief getC2.
+	 * \param self The <tt>%ConstFVectorQuaternionAdapter</tt> instance.
+	 */
+	public float getC2(ConstFVectorQuaternionAdapter self) {}
+
+	/**
+	 * \brief getC3.
+	 * \param self The <tt>%ConstFVectorQuaternionAdapter</tt> instance.
+	 */
+	public float getC3(ConstFVectorQuaternionAdapter self) {}
+
+	/**
+	 * \brief __str__.
+	 * \param self The <tt>%ConstFVectorQuaternionAdapter</tt> instance.
+	 */
+	public str __str__(ConstFVectorQuaternionAdapter self) {}
+
+	/**
+	 * \brief __radd__.
+	 * \param self The <tt>%ConstFVectorQuaternionAdapter</tt> instance.
+	 */
+	public ConstFQuaternionExpression __radd__(object self, float t) {}
+
+	/**
+	 * \brief __rsub__.
+	 * \param self The <tt>%ConstFVectorQuaternionAdapter</tt> instance.
+	 */
+	public ConstFQuaternionExpression __rsub__(object self, float t) {}
+
+	/**
+	 * \brief __rdiv__.
+	 * \param self The <tt>%ConstFVectorQuaternionAdapter</tt> instance.
+	 */
+	public ConstFQuaternionExpression __rdiv__(object self, float t) {}
+
+	/**
+	 * \brief __rmul__.
+	 * \param self The <tt>%ConstFVectorQuaternionAdapter</tt> instance.
+	 */
+	public ConstFQuaternionExpression __rmul__(object self, float t) {}
+
+	/**
+	 * \brief __pos__.
+	 * \param self The <tt>%ConstFVectorQuaternionAdapter</tt> instance.
+	 */
+	public ConstFVectorQuaternionAdapter __pos__(ConstFVectorQuaternionAdapter self) {}
+
+	/**
+	 * \brief __mul__.
+	 * \param self The <tt>%ConstFVectorQuaternionAdapter</tt> instance.
+	 */
+	public ConstFQuaternionExpression __mul__(object self, float t) {}
+
+	/**
+	 * \brief __mul__.
+	 * \param self The <tt>%ConstFVectorQuaternionAdapter</tt> instance.
+	 */
+	public ConstFQuaternionExpression __mul__(object self, ConstFQuaternionExpression e) {}
+
+	/**
+	 * \brief __ne__.
+	 * \param self The <tt>%ConstFVectorQuaternionAdapter</tt> instance.
+	 */
+	public bool __ne__(ConstFVectorQuaternionAdapter self, ConstFVectorQuaternionAdapter a) {}
+
+	/**
+	 * \brief __ne__.
+	 * \param self The <tt>%ConstFVectorQuaternionAdapter</tt> instance.
+	 */
+	public bool __ne__(ConstFVectorQuaternionAdapter self, ConstFQuaternionExpression q) {}
+
+	/**
+	 * \brief __add__.
+	 * \param self The <tt>%ConstFVectorQuaternionAdapter</tt> instance.
+	 */
+	public ConstFQuaternionExpression __add__(object self, float t) {}
+
+	/**
+	 * \brief __add__.
+	 * \param self The <tt>%ConstFVectorQuaternionAdapter</tt> instance.
+	 */
+	public ConstFQuaternionExpression __add__(object self, ConstFQuaternionExpression e) {}
+
+	/**
+	 * \brief __eq__.
+	 * \param self The <tt>%ConstFVectorQuaternionAdapter</tt> instance.
+	 */
+	public bool __eq__(ConstFVectorQuaternionAdapter self, ConstFVectorQuaternionAdapter a) {}
+
+	/**
+	 * \brief __eq__.
+	 * \param self The <tt>%ConstFVectorQuaternionAdapter</tt> instance.
+	 */
+	public bool __eq__(ConstFVectorQuaternionAdapter self, ConstFQuaternionExpression q) {}
+
+	/**
+	 * \brief __div__.
+	 * \param self The <tt>%ConstFVectorQuaternionAdapter</tt> instance.
+	 */
+	public ConstFQuaternionExpression __div__(object self, float t) {}
+
+	/**
+	 * \brief __div__.
+	 * \param self The <tt>%ConstFVectorQuaternionAdapter</tt> instance.
+	 */
+	public ConstFQuaternionExpression __div__(object self, ConstFQuaternionExpression e) {}
+
+	/**
+	 * \brief __neg__.
+	 * \param self The <tt>%ConstFVectorQuaternionAdapter</tt> instance.
+	 */
+	public ConstFQuaternionExpression __neg__(object self) {}
+
+	/**
+	 * \brief __sub__.
+	 * \param self The <tt>%ConstFVectorQuaternionAdapter</tt> instance.
+	 */
+	public ConstFQuaternionExpression __sub__(object self, float t) {}
+
+	/**
+	 * \brief __sub__.
+	 * \param self The <tt>%ConstFVectorQuaternionAdapter</tt> instance.
+	 */
+	public ConstFQuaternionExpression __sub__(object self, ConstFQuaternionExpression e) {}
+
+	/**
+	 * \brief objectID.
+	 */
+	public None objectID;
+
+	/**
+	 * \brief data.
+	 */
+	public None data;
+}

@@ -1,0 +1,17 @@
+/**
+
+\defgroup CDPL_BASE Core Framework
+
+
+\defgroup CDPL_CHEM Chemistry
+
+
+\defgroup CDPL_MATH Mathematics
+
+
+\defgroup CDPL_VIS Data Visualization
+
+
+\defgroup CDPL_UTIL General Utilities
+
+*/

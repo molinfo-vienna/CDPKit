@@ -1,0 +1,131 @@
+/* -*- mode: java; tab-width: 4 -*- */
+
+package CDPL.Base;
+
+/**
+ * \brief FileIOStream.
+ */
+public class FileIOStream extends IOStream {
+
+	/**
+	 * \brief __init__.
+	 * \param self The <tt>%FileIOStream</tt> instance.
+	 */
+	public None __init__(object self, str file_name, str mode = 'r') {}
+
+	/**
+	 * \brief flush.
+	 * \param self The <tt>%FileIOStream</tt> instance.
+	 */
+	public None flush(FileIOStream self) {}
+
+	/**
+	 * \brief readlines.
+	 * \param self The <tt>%FileIOStream</tt> instance.
+	 */
+	public list readlines(FileIOStream self, int size = -1) {}
+
+	/**
+	 * \brief xreadlines.
+	 * \param self The <tt>%FileIOStream</tt> instance.
+	 */
+	public FileIOStream xreadlines(FileIOStream self) {}
+
+	/**
+	 * \brief close.
+	 * \param self The <tt>%FileIOStream</tt> instance.
+	 */
+	public None close(FileIOStream self) {}
+
+	/**
+	 * \brief tellw.
+	 * \param self The <tt>%FileIOStream</tt> instance.
+	 */
+	public int tellw(FileIOStream self) {}
+
+	/**
+	 * \brief seek.
+	 * \param self The <tt>%FileIOStream</tt> instance.
+	 */
+	public None seek(FileIOStream self, int offs, int whence = 0) {}
+
+	/**
+	 * \brief tellr.
+	 * \param self The <tt>%FileIOStream</tt> instance.
+	 */
+	public int tellr(FileIOStream self) {}
+
+	/**
+	 * \brief next.
+	 * \param self The <tt>%FileIOStream</tt> instance.
+	 */
+	public str next(FileIOStream self) {}
+
+	/**
+	 * \brief write.
+	 * \param self The <tt>%FileIOStream</tt> instance.
+	 */
+	public None write(FileIOStream self, object string) {}
+
+	/**
+	 * \brief seekw.
+	 * \param self The <tt>%FileIOStream</tt> instance.
+	 */
+	public None seekw(FileIOStream self, int offs, int whence = 0) {}
+
+	/**
+	 * \brief tell.
+	 * \param self The <tt>%FileIOStream</tt> instance.
+	 */
+	public int tell(FileIOStream self) {}
+
+	/**
+	 * \brief seekr.
+	 * \param self The <tt>%FileIOStream</tt> instance.
+	 */
+	public None seekr(FileIOStream self, int offs, int whence = 0) {}
+
+	/**
+	 * \brief read.
+	 * \param self The <tt>%FileIOStream</tt> instance.
+	 */
+	public str read(FileIOStream self, int size = -1) {}
+
+	/**
+	 * \brief readline.
+	 * \param self The <tt>%FileIOStream</tt> instance.
+	 */
+	public str readline(FileIOStream self, int size = -1) {}
+
+	/**
+	 * \brief writelines.
+	 * \param self The <tt>%FileIOStream</tt> instance.
+	 */
+	public None writelines(FileIOStream self, object iterable) {}
+
+	/**
+	 * \brief __iter__.
+	 * \param self The <tt>%FileIOStream</tt> instance.
+	 */
+	public FileIOStream __iter__(FileIOStream self) {}
+
+	/**
+	 * \brief softspace.
+	 */
+	public None softspace;
+
+	/**
+	 * \brief closed.
+	 */
+	public None closed;
+
+	/**
+	 * \brief name.
+	 */
+	public None name;
+
+	/**
+	 * \brief mode.
+	 */
+	public None mode;
+}

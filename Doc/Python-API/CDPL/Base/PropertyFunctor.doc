@@ -1,0 +1,38 @@
+/* -*- mode: java; tab-width: 4 -*- */
+
+package CDPL.Base;
+
+/**
+ * \brief PropertyFunctor.
+ */
+public class PropertyFunctor extends Boost.Python.instance {
+
+	/**
+	 * \brief __init__.
+	 * \param self The <tt>%PropertyFunctor</tt> instance.
+	 */
+	public None __init__(object self) {}
+
+	/**
+	 * \brief getObjectID.
+	 * \param self The <tt>%PropertyFunctor</tt> instance.
+	 */
+	public int getObjectID(PropertyFunctor self) {}
+
+	/**
+	 * \brief addDependency.
+	 * \param self The <tt>%PropertyFunctor</tt> instance.
+	 */
+	public None addDependency(PropertyFunctor self, PropertyContainer cntnr1, PropertyKey key1, PropertyContainer cntnr2, PropertyKey key2) {}
+
+	/**
+	 * \brief __call__.
+	 * \param self The <tt>%PropertyFunctor</tt> instance.
+	 */
+	public Variant __call__(PropertyFunctor self, PropertyKey key, PropertyContainer cntnr) {}
+
+	/**
+	 * \brief objectID.
+	 */
+	public None objectID;
+}

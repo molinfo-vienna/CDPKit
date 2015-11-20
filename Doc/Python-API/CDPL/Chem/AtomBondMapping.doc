@@ -1,0 +1,78 @@
+/* -*- mode: java; tab-width: 4 -*- */
+
+package CDPL.Chem;
+
+/**
+ * \brief AtomBondMapping.
+ */
+public class AtomBondMapping extends Boost.Python.instance {
+
+	/**
+	 * \brief __init__.
+	 * \param self The <tt>%AtomBondMapping</tt> instance.
+	 */
+	public None __init__(object self) {}
+
+	/**
+	 * \brief __init__.
+	 * \param self The <tt>%AtomBondMapping</tt> instance.
+	 */
+	public None __init__(object self, AtomBondMapping mapping) {}
+
+	/**
+	 * \brief getAtomMapping.
+	 * \param self The <tt>%AtomBondMapping</tt> instance.
+	 */
+	public AtomMapping getAtomMapping(AtomBondMapping self) {}
+
+	/**
+	 * \brief getObjectID.
+	 * \param self The <tt>%AtomBondMapping</tt> instance.
+	 */
+	public int getObjectID(AtomBondMapping self) {}
+
+	/**
+	 * \brief clear.
+	 * \param self The <tt>%AtomBondMapping</tt> instance.
+	 */
+	public None clear(AtomBondMapping self) {}
+
+	/**
+	 * \brief assign.
+	 * \param self The <tt>%AtomBondMapping</tt> instance.
+	 */
+	public AtomBondMapping assign(AtomBondMapping self, AtomBondMapping mapping) {}
+
+	/**
+	 * \brief getBondMapping.
+	 * \param self The <tt>%AtomBondMapping</tt> instance.
+	 */
+	public BondMapping getBondMapping(AtomBondMapping self) {}
+
+	/**
+	 * \brief __ne__.
+	 * \param self The <tt>%AtomBondMapping</tt> instance.
+	 */
+	public bool __ne__(AtomBondMapping self, AtomBondMapping mapping) {}
+
+	/**
+	 * \brief __eq__.
+	 * \param self The <tt>%AtomBondMapping</tt> instance.
+	 */
+	public bool __eq__(AtomBondMapping self, AtomBondMapping mapping) {}
+
+	/**
+	 * \brief objectID.
+	 */
+	public None objectID;
+
+	/**
+	 * \brief bondMapping.
+	 */
+	public None bondMapping;
+
+	/**
+	 * \brief atomMapping.
+	 */
+	public None atomMapping;
+}

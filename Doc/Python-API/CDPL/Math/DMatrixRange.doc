@@ -1,0 +1,273 @@
+/* -*- mode: java; tab-width: 4 -*- */
+
+package CDPL.Math;
+
+/**
+ * \brief DMatrixRange.
+ */
+public class DMatrixRange extends Boost.Python.instance {
+
+	/**
+	 * \brief __init__.
+	 * \param self The <tt>%DMatrixRange</tt> instance.
+	 */
+	public None __init__(object self, DMatrixRange r) {}
+
+	/**
+	 * \brief __init__.
+	 * \param self The <tt>%DMatrixRange</tt> instance.
+	 */
+	public None __init__(object self, DMatrixExpression e, Range r1, Range r2) {}
+
+	/**
+	 * \brief getObjectID.
+	 * \param self The <tt>%DMatrixRange</tt> instance.
+	 */
+	public int getObjectID(DMatrixRange self) {}
+
+	/**
+	 * \brief getElement.
+	 * \param self The <tt>%DMatrixRange</tt> instance.
+	 */
+	public float getElement(DMatrixRange self, int i, int j) {}
+
+	/**
+	 * \brief isEmpty.
+	 * \param self The <tt>%DMatrixRange</tt> instance.
+	 */
+	public bool isEmpty(DMatrixRange self) {}
+
+	/**
+	 * \brief swap.
+	 * \param self The <tt>%DMatrixRange</tt> instance.
+	 */
+	public None swap(DMatrixRange self, DMatrixRange r) {}
+
+	/**
+	 * \brief getData.
+	 * \param self The <tt>%DMatrixRange</tt> instance.
+	 */
+	public DMatrixExpression getData(DMatrixRange self) {}
+
+	/**
+	 * \brief getSize1.
+	 * \param self The <tt>%DMatrixRange</tt> instance.
+	 */
+	public int getSize1(DMatrixRange self) {}
+
+	/**
+	 * \brief getSize2.
+	 * \param self The <tt>%DMatrixRange</tt> instance.
+	 */
+	public int getSize2(DMatrixRange self) {}
+
+	/**
+	 * \brief setElement.
+	 * \param self The <tt>%DMatrixRange</tt> instance.
+	 */
+	public None setElement(DMatrixRange self, int i, int j, float v) {}
+
+	/**
+	 * \brief getStart1.
+	 * \param self The <tt>%DMatrixRange</tt> instance.
+	 */
+	public int getStart1(DMatrixRange self) {}
+
+	/**
+	 * \brief getStart2.
+	 * \param self The <tt>%DMatrixRange</tt> instance.
+	 */
+	public int getStart2(DMatrixRange self) {}
+
+	/**
+	 * \brief assign.
+	 * \param self The <tt>%DMatrixRange</tt> instance.
+	 */
+	public DMatrixRange assign(DMatrixRange self, ConstFMatrixExpression e) {}
+
+	/**
+	 * \brief assign.
+	 * \param self The <tt>%DMatrixRange</tt> instance.
+	 */
+	public DMatrixRange assign(DMatrixRange self, ConstDMatrixExpression e) {}
+
+	/**
+	 * \brief assign.
+	 * \param self The <tt>%DMatrixRange</tt> instance.
+	 */
+	public DMatrixRange assign(DMatrixRange self, ConstLMatrixExpression e) {}
+
+	/**
+	 * \brief assign.
+	 * \param self The <tt>%DMatrixRange</tt> instance.
+	 */
+	public DMatrixRange assign(DMatrixRange self, ConstULMatrixExpression e) {}
+
+	/**
+	 * \brief assign.
+	 * \param self The <tt>%DMatrixRange</tt> instance.
+	 */
+	public DMatrixRange assign(DMatrixRange self, DMatrixRange r) {}
+
+	/**
+	 * \brief __isub__.
+	 * \param self The <tt>%DMatrixRange</tt> instance.
+	 */
+	public DMatrixRange __isub__(DMatrixRange self, DMatrixRange r) {}
+
+	/**
+	 * \brief __isub__.
+	 * \param self The <tt>%DMatrixRange</tt> instance.
+	 */
+	public DMatrixRange __isub__(DMatrixRange self, ConstDMatrixExpression e) {}
+
+	/**
+	 * \brief __str__.
+	 * \param self The <tt>%DMatrixRange</tt> instance.
+	 */
+	public str __str__(DMatrixRange self) {}
+
+	/**
+	 * \brief __rmul__.
+	 * \param self The <tt>%DMatrixRange</tt> instance.
+	 */
+	public ConstDMatrixExpression __rmul__(object self, float t) {}
+
+	/**
+	 * \brief __pos__.
+	 * \param self The <tt>%DMatrixRange</tt> instance.
+	 */
+	public DMatrixRange __pos__(DMatrixRange self) {}
+
+	/**
+	 * \brief __call__.
+	 * \param self The <tt>%DMatrixRange</tt> instance.
+	 */
+	public float __call__(DMatrixRange self, int i, int j) {}
+
+	/**
+	 * \brief __len__.
+	 * \param self The <tt>%DMatrixRange</tt> instance.
+	 */
+	public int __len__(DMatrixRange self) {}
+
+	/**
+	 * \brief __ne__.
+	 * \param self The <tt>%DMatrixRange</tt> instance.
+	 */
+	public bool __ne__(DMatrixRange self, DMatrixRange r) {}
+
+	/**
+	 * \brief __ne__.
+	 * \param self The <tt>%DMatrixRange</tt> instance.
+	 */
+	public bool __ne__(DMatrixRange self, ConstDMatrixExpression e) {}
+
+	/**
+	 * \brief __getitem__.
+	 * \param self The <tt>%DMatrixRange</tt> instance.
+	 */
+	public float __getitem__(DMatrixRange self, tuple ij) {}
+
+	/**
+	 * \brief __idiv__.
+	 * \param self The <tt>%DMatrixRange</tt> instance.
+	 */
+	public DMatrixRange __idiv__(DMatrixRange self, float t) {}
+
+	/**
+	 * \brief __setitem__.
+	 * \param self The <tt>%DMatrixRange</tt> instance.
+	 */
+	public None __setitem__(DMatrixRange self, tuple ij, float v) {}
+
+	/**
+	 * \brief __add__.
+	 * \param self The <tt>%DMatrixRange</tt> instance.
+	 */
+	public ConstDMatrixExpression __add__(object self, ConstDMatrixExpression e) {}
+
+	/**
+	 * \brief __eq__.
+	 * \param self The <tt>%DMatrixRange</tt> instance.
+	 */
+	public bool __eq__(DMatrixRange self, DMatrixRange r) {}
+
+	/**
+	 * \brief __eq__.
+	 * \param self The <tt>%DMatrixRange</tt> instance.
+	 */
+	public bool __eq__(DMatrixRange self, ConstDMatrixExpression e) {}
+
+	/**
+	 * \brief __imul__.
+	 * \param self The <tt>%DMatrixRange</tt> instance.
+	 */
+	public DMatrixRange __imul__(DMatrixRange self, float t) {}
+
+	/**
+	 * \brief __iadd__.
+	 * \param self The <tt>%DMatrixRange</tt> instance.
+	 */
+	public DMatrixRange __iadd__(DMatrixRange self, DMatrixRange r) {}
+
+	/**
+	 * \brief __iadd__.
+	 * \param self The <tt>%DMatrixRange</tt> instance.
+	 */
+	public DMatrixRange __iadd__(DMatrixRange self, ConstDMatrixExpression e) {}
+
+	/**
+	 * \brief __div__.
+	 * \param self The <tt>%DMatrixRange</tt> instance.
+	 */
+	public ConstDMatrixExpression __div__(object self, float t) {}
+
+	/**
+	 * \brief __mul__.
+	 * \param self The <tt>%DMatrixRange</tt> instance.
+	 */
+	public ConstDMatrixExpression __mul__(object self, float t) {}
+
+	/**
+	 * \brief __neg__.
+	 * \param self The <tt>%DMatrixRange</tt> instance.
+	 */
+	public ConstDMatrixExpression __neg__(object self) {}
+
+	/**
+	 * \brief __sub__.
+	 * \param self The <tt>%DMatrixRange</tt> instance.
+	 */
+	public ConstDMatrixExpression __sub__(object self, ConstDMatrixExpression e) {}
+
+	/**
+	 * \brief objectID.
+	 */
+	public None objectID;
+
+	/**
+	 * \brief size1.
+	 */
+	public None size1;
+
+	/**
+	 * \brief start2.
+	 */
+	public None start2;
+
+	/**
+	 * \brief data.
+	 */
+	public None data;
+
+	/**
+	 * \brief start1.
+	 */
+	public None start1;
+
+	/**
+	 * \brief size2.
+	 */
+	public None size2;
+}

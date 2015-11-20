@@ -1,0 +1,29 @@
+/* -*- mode: java; tab-width: 4 -*- */
+
+package CDPL.Vis;
+
+/**
+ * \brief DataFormat.
+ */
+public class DataFormat extends Boost.Python.instance {
+
+	/**
+	 * \brief PS.
+	 */
+	public static Base.DataFormat PS;
+
+	/**
+	 * \brief SVG.
+	 */
+	public static Base.DataFormat SVG;
+
+	/**
+	 * \brief PDF.
+	 */
+	public static Base.DataFormat PDF;
+
+	/**
+	 * \brief PNG.
+	 */
+	public static Base.DataFormat PNG;
+}

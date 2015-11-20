@@ -1,0 +1,56 @@
+/* -*- mode: java; tab-width: 4 -*- */
+
+package CDPL.Vis;
+
+/**
+ * \brief LinePrimitive2D.
+ */
+public class LinePrimitive2D extends Line2D, GraphicsPrimitive2D {
+
+	/**
+	 * \brief __init__.
+	 * \param self The <tt>%LinePrimitive2D</tt> instance.
+	 */
+	public None __init__(object self) {}
+
+	/**
+	 * \brief __init__.
+	 * \param self The <tt>%LinePrimitive2D</tt> instance.
+	 */
+	public None __init__(object self, LinePrimitive2D prim) {}
+
+	/**
+	 * \brief __init__.
+	 * \param self The <tt>%LinePrimitive2D</tt> instance.
+	 */
+	public None __init__(object self, Line2D line) {}
+
+	/**
+	 * \brief __init__.
+	 * \param self The <tt>%LinePrimitive2D</tt> instance.
+	 */
+	public None __init__(object self, Math.Vector2D beg, Math.Vector2D end) {}
+
+	/**
+	 * \brief assign.
+	 * \param self The <tt>%LinePrimitive2D</tt> instance.
+	 */
+	public LinePrimitive2D assign(LinePrimitive2D self, LinePrimitive2D prim) {}
+
+	/**
+	 * \brief setPen.
+	 * \param self The <tt>%LinePrimitive2D</tt> instance.
+	 */
+	public None setPen(LinePrimitive2D self, Pen pen) {}
+
+	/**
+	 * \brief getPen.
+	 * \param self The <tt>%LinePrimitive2D</tt> instance.
+	 */
+	public Pen getPen(LinePrimitive2D self) {}
+
+	/**
+	 * \brief pen.
+	 */
+	public None pen;
+}

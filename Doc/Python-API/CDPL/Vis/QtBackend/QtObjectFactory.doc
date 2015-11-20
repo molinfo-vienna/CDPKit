@@ -1,0 +1,29 @@
+/* -*- mode: java; tab-width: 4 -*- */
+
+package CDPL.Vis.QtBackend;
+
+/**
+ * \brief QtObjectFactory.
+ */
+public class QtObjectFactory extends object {
+
+	/**
+	 * \brief createQBrush.
+	 */
+	public static PyQt4.QtGui.QBrush createQBrush(Vis.Brush brush) {}
+
+	/**
+	 * \brief createQColor.
+	 */
+	public static PyQt4.QtGui.QColor createQColor(Vis.Color color) {}
+
+	/**
+	 * \brief createQFont.
+	 */
+	public static PyQt4.QtGui.QFont createQFont(Vis.Font font) {}
+
+	/**
+	 * \brief createQPen.
+	 */
+	public static PyQt4.QtGui.QPen createQPen(Vis.Pen pen) {}
+}

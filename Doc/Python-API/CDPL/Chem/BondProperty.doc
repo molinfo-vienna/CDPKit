@@ -1,0 +1,69 @@
+/* -*- mode: java; tab-width: 4 -*- */
+
+package CDPL.Chem;
+
+/**
+ * \brief BondProperty.
+ */
+public class BondProperty extends Boost.Python.instance {
+
+	/**
+	 * \brief AROMATICITY_FLAG.
+	 */
+	public static Base.LookupKey AROMATICITY_FLAG;
+
+	/**
+	 * \brief REACTION_CENTER_STATUS.
+	 */
+	public static Base.LookupKey REACTION_CENTER_STATUS;
+
+	/**
+	 * \brief STEREO_2D_FLAG.
+	 */
+	public static Base.LookupKey STEREO_2D_FLAG;
+
+	/**
+	 * \brief CIP_CONFIGURATION.
+	 */
+	public static Base.LookupKey CIP_CONFIGURATION;
+
+	/**
+	 * \brief MATCH_CONSTRAINTS.
+	 */
+	public static Base.LookupKey MATCH_CONSTRAINTS;
+
+	/**
+	 * \brief RING_FLAG.
+	 */
+	public static Base.LookupKey RING_FLAG;
+
+	/**
+	 * \brief DIRECTION.
+	 */
+	public static Base.LookupKey DIRECTION;
+
+	/**
+	 * \brief ORDER.
+	 */
+	public static Base.LookupKey ORDER;
+
+	/**
+	 * \brief MATCH_EXPRESSION.
+	 */
+	public static Base.LookupKey MATCH_EXPRESSION;
+
+	/**
+	 * \brief STEREO_DESCRIPTOR.
+	 */
+	public static Base.LookupKey STEREO_DESCRIPTOR;
+
+	/**
+	 * \brief MATCH_EXPRESSION_STRING.
+	 */
+	public static Base.LookupKey MATCH_EXPRESSION_STRING;
+
+	/**
+	 * \brief STEREO_CENTER_FLAG.
+	 */
+	public static Base.LookupKey STEREO_CENTER_FLAG;
+}

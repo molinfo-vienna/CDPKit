@@ -1,0 +1,69 @@
+/* -*- mode: java; tab-width: 4 -*- */
+
+package CDPL.Chem;
+
+/**
+ * \brief AtomPropertyFlag.
+ */
+public class AtomPropertyFlag extends Boost.Python.instance {
+
+	/**
+	 * \brief H_COUNT.
+	 */
+	public static int H_COUNT = 16;
+
+	/**
+	 * \brief DEFAULT.
+	 */
+	public static int DEFAULT = 2147483648;
+
+	/**
+	 * \brief CIP_CONFIGURATION.
+	 */
+	public static int CIP_CONFIGURATION = 1;
+
+	/**
+	 * \brief NONE.
+	 */
+	public static int NONE = 0;
+
+	/**
+	 * \brief ISOTOPE.
+	 */
+	public static int ISOTOPE = 4;
+
+	/**
+	 * \brief AROMATICITY.
+	 */
+	public static int AROMATICITY = 128;
+
+	/**
+	 * \brief SYMBOL.
+	 */
+	public static int SYMBOL = 32;
+
+	/**
+	 * \brief ATOM_MAPPING_ID.
+	 */
+	public static int ATOM_MAPPING_ID = 64;
+
+	/**
+	 * \brief FORMAL_CHARGE.
+	 */
+	public static int FORMAL_CHARGE = 8;
+
+	/**
+	 * \brief CONFIGURATION.
+	 */
+	public static int CONFIGURATION = 256;
+
+	/**
+	 * \brief TYPE.
+	 */
+	public static int TYPE = 2;
+
+	/**
+	 * \brief TOPOLOGY.
+	 */
+	public static int TOPOLOGY = 64;
+}

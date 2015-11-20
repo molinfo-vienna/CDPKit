@@ -1,0 +1,142 @@
+/* -*- mode: java; tab-width: 4 -*- */
+
+package CDPL.Chem;
+
+/**
+ * \brief CommonConnectedSubstructureSearch.
+ */
+public class CommonConnectedSubstructureSearch extends Boost.Python.instance {
+
+	/**
+	 * \brief __init__.
+	 * \param self The <tt>%CommonConnectedSubstructureSearch</tt> instance.
+	 */
+	public None __init__(object self) {}
+
+	/**
+	 * \brief __init__.
+	 * \param self The <tt>%CommonConnectedSubstructureSearch</tt> instance.
+	 */
+	public None __init__(object self, MolecularGraph query) {}
+
+	/**
+	 * \brief getObjectID.
+	 * \param self The <tt>%CommonConnectedSubstructureSearch</tt> instance.
+	 */
+	public int getObjectID(CommonConnectedSubstructureSearch self) {}
+
+	/**
+	 * \brief setMaxNumMappings.
+	 * \param self The <tt>%CommonConnectedSubstructureSearch</tt> instance.
+	 */
+	public None setMaxNumMappings(CommonConnectedSubstructureSearch self, int max_num_mappings) {}
+
+	/**
+	 * \brief findAllMappings.
+	 * \param self The <tt>%CommonConnectedSubstructureSearch</tt> instance.
+	 */
+	public bool findAllMappings(CommonConnectedSubstructureSearch self, MolecularGraph target) {}
+
+	/**
+	 * \brief uniqueMappingsOnly.
+	 * \param self The <tt>%CommonConnectedSubstructureSearch</tt> instance.
+	 */
+	public None uniqueMappingsOnly(CommonConnectedSubstructureSearch self, bool unique) {}
+
+	/**
+	 * \brief uniqueMappingsOnly.
+	 * \param self The <tt>%CommonConnectedSubstructureSearch</tt> instance.
+	 */
+	public bool uniqueMappingsOnly(CommonConnectedSubstructureSearch self) {}
+
+	/**
+	 * \brief getMaxNumMappings.
+	 * \param self The <tt>%CommonConnectedSubstructureSearch</tt> instance.
+	 */
+	public int getMaxNumMappings(CommonConnectedSubstructureSearch self) {}
+
+	/**
+	 * \brief mappingExists.
+	 * \param self The <tt>%CommonConnectedSubstructureSearch</tt> instance.
+	 */
+	public bool mappingExists(CommonConnectedSubstructureSearch self, MolecularGraph target) {}
+
+	/**
+	 * \brief getMapping.
+	 * \param self The <tt>%CommonConnectedSubstructureSearch</tt> instance.
+	 */
+	public AtomBondMapping getMapping(CommonConnectedSubstructureSearch self, int idx) {}
+
+	/**
+	 * \brief setMinSubstructureSize.
+	 * \param self The <tt>%CommonConnectedSubstructureSearch</tt> instance.
+	 */
+	public None setMinSubstructureSize(CommonConnectedSubstructureSearch self, int min_size) {}
+
+	/**
+	 * \brief setQuery.
+	 * \param self The <tt>%CommonConnectedSubstructureSearch</tt> instance.
+	 */
+	public None setQuery(CommonConnectedSubstructureSearch self, MolecularGraph query) {}
+
+	/**
+	 * \brief getNumMappings.
+	 * \param self The <tt>%CommonConnectedSubstructureSearch</tt> instance.
+	 */
+	public int getNumMappings(CommonConnectedSubstructureSearch self) {}
+
+	/**
+	 * \brief getMinSubstructureSize.
+	 * \param self The <tt>%CommonConnectedSubstructureSearch</tt> instance.
+	 */
+	public int getMinSubstructureSize(CommonConnectedSubstructureSearch self) {}
+
+	/**
+	 * \brief findMaxMappings.
+	 * \param self The <tt>%CommonConnectedSubstructureSearch</tt> instance.
+	 */
+	public bool findMaxMappings(CommonConnectedSubstructureSearch self, MolecularGraph target) {}
+
+	/**
+	 * \brief __len__.
+	 * \param self The <tt>%CommonConnectedSubstructureSearch</tt> instance.
+	 */
+	public int __len__(CommonConnectedSubstructureSearch self) {}
+
+	/**
+	 * \brief __getitem__.
+	 * \param self The <tt>%CommonConnectedSubstructureSearch</tt> instance.
+	 */
+	public AtomBondMapping __getitem__(CommonConnectedSubstructureSearch self, int idx) {}
+
+	/**
+	 * \brief __nonzero__.
+	 * \param self The <tt>%CommonConnectedSubstructureSearch</tt> instance.
+	 */
+	public bool __nonzero__(CommonConnectedSubstructureSearch arg1, MolecularGraph self) {}
+
+	/**
+	 * \brief objectID.
+	 */
+	public None objectID;
+
+	/**
+	 * \brief uniqueMappings.
+	 */
+	public None uniqueMappings;
+
+	/**
+	 * \brief minSubstructureSize.
+	 */
+	public None minSubstructureSize;
+
+	/**
+	 * \brief maxNumMappings.
+	 */
+	public None maxNumMappings;
+
+	/**
+	 * \brief numMappings.
+	 */
+	public None numMappings;
+}

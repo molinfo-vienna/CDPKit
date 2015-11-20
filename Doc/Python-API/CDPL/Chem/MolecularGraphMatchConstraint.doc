@@ -1,0 +1,19 @@
+/* -*- mode: java; tab-width: 4 -*- */
+
+package CDPL.Chem;
+
+/**
+ * \brief MolecularGraphMatchConstraint.
+ */
+public class MolecularGraphMatchConstraint extends Boost.Python.instance {
+
+	/**
+	 * \brief CONSTRAINT_LIST.
+	 */
+	public static int CONSTRAINT_LIST = 0;
+
+	/**
+	 * \brief COMPONENT_GROUPING.
+	 */
+	public static int COMPONENT_GROUPING = 1;
+}

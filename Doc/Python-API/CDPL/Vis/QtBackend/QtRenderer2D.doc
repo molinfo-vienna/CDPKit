@@ -1,0 +1,105 @@
+/* -*- mode: java; tab-width: 4 -*- */
+
+package CDPL.Vis.QtBackend;
+
+/**
+ * \brief QtRenderer2D.
+ */
+public class QtRenderer2D extends Vis.Renderer2D {
+
+	/**
+	 * \brief __init__.
+	 * \param self The <tt>%QtRenderer2D</tt> instance.
+	 */
+	public None __init__(QtRenderer2D self, cairo.Context cairo_ctxt) {}
+
+	/**
+	 * \brief restoreState.
+	 * \param self The <tt>%QtRenderer2D</tt> instance.
+	 */
+	public None restoreState(QtRenderer2D self) {}
+
+	/**
+	 * \brief saveState.
+	 * \param self The <tt>%QtRenderer2D</tt> instance.
+	 */
+	public None saveState(QtRenderer2D self) {}
+
+	/**
+	 * \brief drawLine.
+	 * \param self The <tt>%QtRenderer2D</tt> instance.
+	 */
+	public None drawLine(QtRenderer2D self, float x1, float y1, float x2, float y2) {}
+
+	/**
+	 * \brief drawPolyline.
+	 * \param self The <tt>%QtRenderer2D</tt> instance.
+	 */
+	public None drawPolyline(QtRenderer2D self, Math.Vector2DArray points) {}
+
+	/**
+	 * \brief setBrush.
+	 * \param self The <tt>%QtRenderer2D</tt> instance.
+	 */
+	public None setBrush(QtRenderer2D self, Vis.Brush brush) {}
+
+	/**
+	 * \brief drawLineSegments.
+	 * \param self The <tt>%QtRenderer2D</tt> instance.
+	 */
+	public None drawLineSegments(QtRenderer2D self, Math.Vector2DArray points) {}
+
+	/**
+	 * \brief setPen.
+	 * \param self The <tt>%QtRenderer2D</tt> instance.
+	 */
+	public None setPen(QtRenderer2D self, Vis.Pen pen) {}
+
+	/**
+	 * \brief drawRectangle.
+	 * \param self The <tt>%QtRenderer2D</tt> instance.
+	 */
+	public None drawRectangle(QtRenderer2D self, float x, float y, float width, float height) {}
+
+	/**
+	 * \brief drawPolygon.
+	 * \param self The <tt>%QtRenderer2D</tt> instance.
+	 */
+	public None drawPolygon(QtRenderer2D self, Math.Vector2DArray points) {}
+
+	/**
+	 * \brief drawText.
+	 * \param self The <tt>%QtRenderer2D</tt> instance.
+	 */
+	public None drawText(QtRenderer2D self, float x, float y, str txt) {}
+
+	/**
+	 * \brief transform.
+	 * \param self The <tt>%QtRenderer2D</tt> instance.
+	 */
+	public None transform(QtRenderer2D self, Math.AffineTransform3D xform) {}
+
+	/**
+	 * \brief setTransform.
+	 * \param self The <tt>%QtRenderer2D</tt> instance.
+	 */
+	public None setTransform(QtRenderer2D self, Math.AffineTransform3D xform) {}
+
+	/**
+	 * \brief _QtRenderer2D__convertToQPolygon.
+	 * \param self The <tt>%QtRenderer2D</tt> instance.
+	 */
+	public None _QtRenderer2D__convertToQPolygon(QtRenderer2D self) {}
+
+	/**
+	 * \brief drawPoint.
+	 * \param self The <tt>%QtRenderer2D</tt> instance.
+	 */
+	public None drawPoint(QtRenderer2D self, float x, float y) {}
+
+	/**
+	 * \brief setFont.
+	 * \param self The <tt>%QtRenderer2D</tt> instance.
+	 */
+	public None setFont(QtRenderer2D self, Vis.Font font) {}
+}

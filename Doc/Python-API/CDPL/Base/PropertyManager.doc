@@ -1,0 +1,54 @@
+/* -*- mode: java; tab-width: 4 -*- */
+
+package CDPL.Base;
+
+/**
+ * \brief PropertyManager.
+ */
+public class PropertyManager extends Boost.Python.instance {
+
+	/**
+	 * \brief dependencyTracking.
+	 */
+	public static bool dependencyTracking = True;
+
+	/**
+	 * \brief unregisterPropertyFunctor.
+	 */
+	public static None unregisterPropertyFunctor() {}
+
+	/**
+	 * \brief dependencyTrackingEnabled.
+	 */
+	public static bool dependencyTrackingEnabled( ) {}
+
+	/**
+	 * \brief setPropertyName.
+	 */
+	public static None setPropertyName(PropertyKey key, str name) {}
+
+	/**
+	 * \brief getPropertyFunctor.
+	 */
+	public static None getPropertyFunctor() {}
+
+	/**
+	 * \brief allocPropertyKey.
+	 */
+	public static PropertyKey allocPropertyKey(str name) {}
+
+	/**
+	 * \brief getPropertyName.
+	 */
+	public static str getPropertyName(PropertyKey key) {}
+
+	/**
+	 * \brief registerPropertyFunctor.
+	 */
+	public static None registerPropertyFunctor() {}
+
+	/**
+	 * \brief enableDependencyTracking.
+	 */
+	public static None enableDependencyTracking(bool enable) {}
+}

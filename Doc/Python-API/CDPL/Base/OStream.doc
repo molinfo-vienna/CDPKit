@@ -1,0 +1,9 @@
+/* -*- mode: java; tab-width: 4 -*- */
+
+package CDPL.Base;
+
+/**
+ * \brief OStream.
+ */
+public class OStream extends Boost.Python.instance {
+}

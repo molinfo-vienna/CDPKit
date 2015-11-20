@@ -1,0 +1,59 @@
+/* -*- mode: java; tab-width: 4 -*- */
+
+package CDPL.Chem;
+
+/**
+ * \brief ReactionCenterStatus.
+ */
+public class ReactionCenterStatus extends Boost.Python.instance {
+
+	/**
+	 * \brief BOND_ORDER_CHANGE.
+	 */
+	public static int BOND_ORDER_CHANGE = 16;
+
+	/**
+	 * \brief NO_CHANGE.
+	 */
+	public static int NO_CHANGE = 32;
+
+	/**
+	 * \brief BOND_MADE.
+	 */
+	public static int BOND_MADE = 4;
+
+	/**
+	 * \brief IS_CENTER.
+	 */
+	public static int IS_CENTER = 2;
+
+	/**
+	 * \brief NONE.
+	 */
+	public static int NONE = 0;
+
+	/**
+	 * \brief STEREO_INVERSION.
+	 */
+	public static int STEREO_INVERSION = 64;
+
+	/**
+	 * \brief BOND_BROKEN.
+	 */
+	public static int BOND_BROKEN = 8;
+
+	/**
+	 * \brief STEREO_RETENTION.
+	 */
+	public static int STEREO_RETENTION = 128;
+
+	/**
+	 * \brief EXACT_CHANGE.
+	 */
+	public static int EXACT_CHANGE = 128;
+
+	/**
+	 * \brief NO_CENTER.
+	 */
+	public static int NO_CENTER = 1;
+}

@@ -1,0 +1,83 @@
+/* -*- mode: java; tab-width: 4 -*- */
+
+package CDPL.Chem;
+
+/**
+ * \brief BondDirectionCalculator.
+ */
+public class BondDirectionCalculator extends Boost.Python.instance {
+
+	/**
+	 * \brief __init__.
+	 * \param self The <tt>%BondDirectionCalculator</tt> instance.
+	 */
+	public None __init__(object self) {}
+
+	/**
+	 * \brief __init__.
+	 * \param self The <tt>%BondDirectionCalculator</tt> instance.
+	 */
+	public None __init__(object self, MolecularGraph molgraph) {}
+
+	/**
+	 * \brief getRingSizeLimit.
+	 * \param self The <tt>%BondDirectionCalculator</tt> instance.
+	 */
+	public int getRingSizeLimit(BondDirectionCalculator self) {}
+
+	/**
+	 * \brief getObjectID.
+	 * \param self The <tt>%BondDirectionCalculator</tt> instance.
+	 */
+	public int getObjectID(BondDirectionCalculator self) {}
+
+	/**
+	 * \brief ringBondsIncluded.
+	 * \param self The <tt>%BondDirectionCalculator</tt> instance.
+	 */
+	public bool ringBondsIncluded(BondDirectionCalculator self) {}
+
+	/**
+	 * \brief getResult.
+	 * \param self The <tt>%BondDirectionCalculator</tt> instance.
+	 */
+	public Util.UIArray getResult(BondDirectionCalculator self) {}
+
+	/**
+	 * \brief includeRingBonds.
+	 * \param self The <tt>%BondDirectionCalculator</tt> instance.
+	 */
+	public None includeRingBonds(BondDirectionCalculator self, bool include) {}
+
+	/**
+	 * \brief setRingSizeLimit.
+	 * \param self The <tt>%BondDirectionCalculator</tt> instance.
+	 */
+	public None setRingSizeLimit(BondDirectionCalculator self, int min_size) {}
+
+	/**
+	 * \brief calculate.
+	 * \param self The <tt>%BondDirectionCalculator</tt> instance.
+	 */
+	public Util.UIArray calculate(BondDirectionCalculator self, MolecularGraph molgraph) {}
+
+	/**
+	 * \brief objectID.
+	 */
+	public None objectID;
+
+	/**
+	 * \brief ringSizeLimit.
+	 */
+	public None ringSizeLimit;
+
+	/**
+	 * \brief ringBonds.
+	 */
+	public None ringBonds;
+
+	/**
+	 * \brief result.
+	 */
+	public None result;
+}

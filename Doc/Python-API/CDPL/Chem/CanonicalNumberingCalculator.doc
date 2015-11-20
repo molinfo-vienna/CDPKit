@@ -1,0 +1,93 @@
+/* -*- mode: java; tab-width: 4 -*- */
+
+package CDPL.Chem;
+
+/**
+ * \brief CanonicalNumberingCalculator.
+ */
+public class CanonicalNumberingCalculator extends Boost.Python.instance {
+
+	/**
+	 * \brief DEF_ATOM_PROPERTY_FLAGS.
+	 */
+	public static int DEF_ATOM_PROPERTY_FLAGS = 414;
+
+	/**
+	 * \brief DEF_BOND_PROPERTY_FLAGS.
+	 */
+	public static int DEF_BOND_PROPERTY_FLAGS = 26;
+
+	/**
+	 * \brief __init__.
+	 * \param self The <tt>%CanonicalNumberingCalculator</tt> instance.
+	 */
+	public None __init__(object self) {}
+
+	/**
+	 * \brief __init__.
+	 * \param self The <tt>%CanonicalNumberingCalculator</tt> instance.
+	 */
+	public None __init__(object self, MolecularGraph molgraph) {}
+
+	/**
+	 * \brief getAtomPropertyFlags.
+	 * \param self The <tt>%CanonicalNumberingCalculator</tt> instance.
+	 */
+	public int getAtomPropertyFlags(CanonicalNumberingCalculator self) {}
+
+	/**
+	 * \brief getObjectID.
+	 * \param self The <tt>%CanonicalNumberingCalculator</tt> instance.
+	 */
+	public int getObjectID(CanonicalNumberingCalculator self) {}
+
+	/**
+	 * \brief getResult.
+	 * \param self The <tt>%CanonicalNumberingCalculator</tt> instance.
+	 */
+	public Util.STArray getResult(CanonicalNumberingCalculator self) {}
+
+	/**
+	 * \brief getBondPropertyFlags.
+	 * \param self The <tt>%CanonicalNumberingCalculator</tt> instance.
+	 */
+	public int getBondPropertyFlags(CanonicalNumberingCalculator self) {}
+
+	/**
+	 * \brief setBondPropertyFlags.
+	 * \param self The <tt>%CanonicalNumberingCalculator</tt> instance.
+	 */
+	public None setBondPropertyFlags(CanonicalNumberingCalculator self, int flags) {}
+
+	/**
+	 * \brief setAtomPropertyFlags.
+	 * \param self The <tt>%CanonicalNumberingCalculator</tt> instance.
+	 */
+	public None setAtomPropertyFlags(CanonicalNumberingCalculator self, int flags) {}
+
+	/**
+	 * \brief calculate.
+	 * \param self The <tt>%CanonicalNumberingCalculator</tt> instance.
+	 */
+	public Util.STArray calculate(CanonicalNumberingCalculator self, MolecularGraph molgraph) {}
+
+	/**
+	 * \brief atomPropertyFlags.
+	 */
+	public None atomPropertyFlags;
+
+	/**
+	 * \brief objectID.
+	 */
+	public None objectID;
+
+	/**
+	 * \brief bondPropertyFlags.
+	 */
+	public None bondPropertyFlags;
+
+	/**
+	 * \brief result.
+	 */
+	public None result;
+}

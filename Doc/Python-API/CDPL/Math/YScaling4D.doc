@@ -1,0 +1,21 @@
+/* -*- mode: java; tab-width: 4 -*- */
+
+package CDPL.Math;
+
+/**
+ * \brief YScaling4D.
+ */
+public class YScaling4D extends AffineTransform4D {
+
+	/**
+	 * \brief __init__.
+	 * \param self The <tt>%YScaling4D</tt> instance.
+	 */
+	public None __init__(object self, YScaling4D xform) {}
+
+	/**
+	 * \brief __init__.
+	 * \param self The <tt>%YScaling4D</tt> instance.
+	 */
+	public None __init__(object self, float factor) {}
+}

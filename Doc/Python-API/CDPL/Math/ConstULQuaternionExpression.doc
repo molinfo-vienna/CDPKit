@@ -1,0 +1,146 @@
+/* -*- mode: java; tab-width: 4 -*- */
+
+package CDPL.Math;
+
+/**
+ * \brief ConstULQuaternionExpression.
+ */
+public class ConstULQuaternionExpression extends Boost.Python.instance {
+
+	/**
+	 * \brief getObjectID.
+	 * \param self The <tt>%ConstULQuaternionExpression</tt> instance.
+	 */
+	public int getObjectID(ConstULQuaternionExpression self) {}
+
+	/**
+	 * \brief getC4.
+	 * \param self The <tt>%ConstULQuaternionExpression</tt> instance.
+	 */
+	public int getC4(ConstULQuaternionExpression self) {}
+
+	/**
+	 * \brief getC1.
+	 * \param self The <tt>%ConstULQuaternionExpression</tt> instance.
+	 */
+	public int getC1(ConstULQuaternionExpression self) {}
+
+	/**
+	 * \brief getC2.
+	 * \param self The <tt>%ConstULQuaternionExpression</tt> instance.
+	 */
+	public int getC2(ConstULQuaternionExpression self) {}
+
+	/**
+	 * \brief getC3.
+	 * \param self The <tt>%ConstULQuaternionExpression</tt> instance.
+	 */
+	public int getC3(ConstULQuaternionExpression self) {}
+
+	/**
+	 * \brief __str__.
+	 * \param self The <tt>%ConstULQuaternionExpression</tt> instance.
+	 */
+	public str __str__(ConstULQuaternionExpression self) {}
+
+	/**
+	 * \brief __radd__.
+	 * \param self The <tt>%ConstULQuaternionExpression</tt> instance.
+	 */
+	public ConstULQuaternionExpression __radd__(object self, int t) {}
+
+	/**
+	 * \brief __rsub__.
+	 * \param self The <tt>%ConstULQuaternionExpression</tt> instance.
+	 */
+	public ConstULQuaternionExpression __rsub__(object self, int t) {}
+
+	/**
+	 * \brief __rdiv__.
+	 * \param self The <tt>%ConstULQuaternionExpression</tt> instance.
+	 */
+	public ConstULQuaternionExpression __rdiv__(object self, int t) {}
+
+	/**
+	 * \brief __rmul__.
+	 * \param self The <tt>%ConstULQuaternionExpression</tt> instance.
+	 */
+	public ConstULQuaternionExpression __rmul__(object self, int t) {}
+
+	/**
+	 * \brief __pos__.
+	 * \param self The <tt>%ConstULQuaternionExpression</tt> instance.
+	 */
+	public ConstULQuaternionExpression __pos__(ConstULQuaternionExpression self) {}
+
+	/**
+	 * \brief __mul__.
+	 * \param self The <tt>%ConstULQuaternionExpression</tt> instance.
+	 */
+	public ConstULQuaternionExpression __mul__(object self, int t) {}
+
+	/**
+	 * \brief __mul__.
+	 * \param self The <tt>%ConstULQuaternionExpression</tt> instance.
+	 */
+	public ConstULQuaternionExpression __mul__(object self, ConstULQuaternionExpression e) {}
+
+	/**
+	 * \brief __ne__.
+	 * \param self The <tt>%ConstULQuaternionExpression</tt> instance.
+	 */
+	public bool __ne__(ConstULQuaternionExpression self, ConstULQuaternionExpression e) {}
+
+	/**
+	 * \brief __add__.
+	 * \param self The <tt>%ConstULQuaternionExpression</tt> instance.
+	 */
+	public ConstULQuaternionExpression __add__(object self, int t) {}
+
+	/**
+	 * \brief __add__.
+	 * \param self The <tt>%ConstULQuaternionExpression</tt> instance.
+	 */
+	public ConstULQuaternionExpression __add__(object self, ConstULQuaternionExpression e) {}
+
+	/**
+	 * \brief __eq__.
+	 * \param self The <tt>%ConstULQuaternionExpression</tt> instance.
+	 */
+	public bool __eq__(ConstULQuaternionExpression self, ConstULQuaternionExpression e) {}
+
+	/**
+	 * \brief __div__.
+	 * \param self The <tt>%ConstULQuaternionExpression</tt> instance.
+	 */
+	public ConstULQuaternionExpression __div__(object self, int t) {}
+
+	/**
+	 * \brief __div__.
+	 * \param self The <tt>%ConstULQuaternionExpression</tt> instance.
+	 */
+	public ConstULQuaternionExpression __div__(object self, ConstULQuaternionExpression e) {}
+
+	/**
+	 * \brief __neg__.
+	 * \param self The <tt>%ConstULQuaternionExpression</tt> instance.
+	 */
+	public ConstULQuaternionExpression __neg__(object self) {}
+
+	/**
+	 * \brief __sub__.
+	 * \param self The <tt>%ConstULQuaternionExpression</tt> instance.
+	 */
+	public ConstULQuaternionExpression __sub__(object self, int t) {}
+
+	/**
+	 * \brief __sub__.
+	 * \param self The <tt>%ConstULQuaternionExpression</tt> instance.
+	 */
+	public ConstULQuaternionExpression __sub__(object self, ConstULQuaternionExpression e) {}
+
+	/**
+	 * \brief objectID.
+	 */
+	public None objectID;
+}

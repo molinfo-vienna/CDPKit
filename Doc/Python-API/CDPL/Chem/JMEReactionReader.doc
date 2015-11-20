@@ -1,0 +1,15 @@
+/* -*- mode: java; tab-width: 4 -*- */
+
+package CDPL.Chem;
+
+/**
+ * \brief JMEReactionReader.
+ */
+public class JMEReactionReader extends ReactionReader {
+
+	/**
+	 * \brief __init__.
+	 * \param self The <tt>%JMEReactionReader</tt> instance.
+	 */
+	public None __init__(object self, Base.IStream is) {}
+}

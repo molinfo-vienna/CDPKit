@@ -1,0 +1,24 @@
+/* -*- mode: java; tab-width: 4 -*- */
+
+package CDPL.Vis;
+
+/**
+ * \brief SizeAdjustment.
+ */
+public class SizeAdjustment extends Boost.Python.instance {
+
+	/**
+	 * \brief NONE.
+	 */
+	public static int NONE = 0;
+
+	/**
+	 * \brief IF_REQUIRED.
+	 */
+	public static int IF_REQUIRED = 2;
+
+	/**
+	 * \brief BEST_FIT.
+	 */
+	public static int BEST_FIT = 1;
+}

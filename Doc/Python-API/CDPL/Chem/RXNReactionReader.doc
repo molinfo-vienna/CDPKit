@@ -1,0 +1,15 @@
+/* -*- mode: java; tab-width: 4 -*- */
+
+package CDPL.Chem;
+
+/**
+ * \brief RXNReactionReader.
+ */
+public class RXNReactionReader extends ReactionReader {
+
+	/**
+	 * \brief __init__.
+	 * \param self The <tt>%RXNReactionReader</tt> instance.
+	 */
+	public None __init__(object self, Base.IStream is) {}
+}

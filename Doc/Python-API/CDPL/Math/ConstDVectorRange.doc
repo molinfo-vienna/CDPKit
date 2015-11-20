@@ -1,0 +1,167 @@
+/* -*- mode: java; tab-width: 4 -*- */
+
+package CDPL.Math;
+
+/**
+ * \brief ConstDVectorRange.
+ */
+public class ConstDVectorRange extends Boost.Python.instance {
+
+	/**
+	 * \brief __init__.
+	 * \param self The <tt>%ConstDVectorRange</tt> instance.
+	 */
+	public None __init__(object self, ConstDVectorRange r) {}
+
+	/**
+	 * \brief __init__.
+	 * \param self The <tt>%ConstDVectorRange</tt> instance.
+	 */
+	public None __init__(object self, ConstDVectorExpression e, Range r) {}
+
+	/**
+	 * \brief getObjectID.
+	 * \param self The <tt>%ConstDVectorRange</tt> instance.
+	 */
+	public int getObjectID(ConstDVectorRange self) {}
+
+	/**
+	 * \brief getSize.
+	 * \param self The <tt>%ConstDVectorRange</tt> instance.
+	 */
+	public int getSize(ConstDVectorRange self) {}
+
+	/**
+	 * \brief getElement.
+	 * \param self The <tt>%ConstDVectorRange</tt> instance.
+	 */
+	public float getElement(ConstDVectorRange self, int i) {}
+
+	/**
+	 * \brief isEmpty.
+	 * \param self The <tt>%ConstDVectorRange</tt> instance.
+	 */
+	public bool isEmpty(ConstDVectorRange self) {}
+
+	/**
+	 * \brief getData.
+	 * \param self The <tt>%ConstDVectorRange</tt> instance.
+	 */
+	public ConstDVectorExpression getData(ConstDVectorRange self) {}
+
+	/**
+	 * \brief getStart.
+	 * \param self The <tt>%ConstDVectorRange</tt> instance.
+	 */
+	public int getStart(ConstDVectorRange self) {}
+
+	/**
+	 * \brief __str__.
+	 * \param self The <tt>%ConstDVectorRange</tt> instance.
+	 */
+	public str __str__(ConstDVectorRange self) {}
+
+	/**
+	 * \brief __rmul__.
+	 * \param self The <tt>%ConstDVectorRange</tt> instance.
+	 */
+	public ConstDVectorExpression __rmul__(object self, float t) {}
+
+	/**
+	 * \brief __pos__.
+	 * \param self The <tt>%ConstDVectorRange</tt> instance.
+	 */
+	public ConstDVectorRange __pos__(ConstDVectorRange self) {}
+
+	/**
+	 * \brief __call__.
+	 * \param self The <tt>%ConstDVectorRange</tt> instance.
+	 */
+	public float __call__(ConstDVectorRange self, int i) {}
+
+	/**
+	 * \brief __len__.
+	 * \param self The <tt>%ConstDVectorRange</tt> instance.
+	 */
+	public int __len__(ConstDVectorRange self) {}
+
+	/**
+	 * \brief __neg__.
+	 * \param self The <tt>%ConstDVectorRange</tt> instance.
+	 */
+	public ConstDVectorExpression __neg__(object self) {}
+
+	/**
+	 * \brief __ne__.
+	 * \param self The <tt>%ConstDVectorRange</tt> instance.
+	 */
+	public bool __ne__(ConstDVectorRange self, ConstDVectorRange r) {}
+
+	/**
+	 * \brief __ne__.
+	 * \param self The <tt>%ConstDVectorRange</tt> instance.
+	 */
+	public bool __ne__(ConstDVectorRange self, ConstDVectorExpression e) {}
+
+	/**
+	 * \brief __getitem__.
+	 * \param self The <tt>%ConstDVectorRange</tt> instance.
+	 */
+	public float __getitem__(ConstDVectorRange self, int i) {}
+
+	/**
+	 * \brief __add__.
+	 * \param self The <tt>%ConstDVectorRange</tt> instance.
+	 */
+	public ConstDVectorExpression __add__(object self, ConstDVectorExpression e) {}
+
+	/**
+	 * \brief __eq__.
+	 * \param self The <tt>%ConstDVectorRange</tt> instance.
+	 */
+	public bool __eq__(ConstDVectorRange self, ConstDVectorRange r) {}
+
+	/**
+	 * \brief __eq__.
+	 * \param self The <tt>%ConstDVectorRange</tt> instance.
+	 */
+	public bool __eq__(ConstDVectorRange self, ConstDVectorExpression e) {}
+
+	/**
+	 * \brief __div__.
+	 * \param self The <tt>%ConstDVectorRange</tt> instance.
+	 */
+	public ConstDVectorExpression __div__(object self, float t) {}
+
+	/**
+	 * \brief __mul__.
+	 * \param self The <tt>%ConstDVectorRange</tt> instance.
+	 */
+	public ConstDVectorExpression __mul__(object self, float t) {}
+
+	/**
+	 * \brief __sub__.
+	 * \param self The <tt>%ConstDVectorRange</tt> instance.
+	 */
+	public ConstDVectorExpression __sub__(object self, ConstDVectorExpression e) {}
+
+	/**
+	 * \brief objectID.
+	 */
+	public None objectID;
+
+	/**
+	 * \brief size.
+	 */
+	public None size;
+
+	/**
+	 * \brief start.
+	 */
+	public None start;
+
+	/**
+	 * \brief data.
+	 */
+	public None data;
+}

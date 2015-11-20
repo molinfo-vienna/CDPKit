@@ -1,0 +1,27 @@
+/* -*- mode: java; tab-width: 4 -*- */
+
+package CDPL.Base;
+
+/**
+ * \brief Exception.
+ */
+public class Exception extends exceptions.Exception {
+
+	/**
+	 * \brief __init__.
+	 * \param self The <tt>%Exception</tt> instance.
+	 */
+	public None __init__(Exception self, str msg = '') {}
+
+	/**
+	 * \brief what.
+	 * \param self The <tt>%Exception</tt> instance.
+	 */
+	public str what(Exception self) {}
+
+	/**
+	 * \brief __str__.
+	 * \param self The <tt>%Exception</tt> instance.
+	 */
+	public str __str__(Exception self) {}
+}

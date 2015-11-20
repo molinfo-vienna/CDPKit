@@ -1,0 +1,121 @@
+SET(HTML_DOC_DIR "@CMAKE_CURRENT_BINARY_DIR@/html")
+
+FILE(GLOB HTML_DOC_FILES RELATIVE "${HTML_DOC_DIR}" "${HTML_DOC_DIR}/*.html")
+
+LIST(REMOVE_ITEM HTML_DOC_FILES 
+     index.html
+     namespace
+     pages.html 
+	 annotated.html
+     modules.html
+     FDL.html
+     LGPL.html
+     References.html
+     hierarchy.html
+     functions.html
+     )
+
+SET(TYPE_NAME_EXPR "[A-Za-z0-9.:_]+")
+SET(DOXYTAG_EXPR "<!-- doxytag: [0-9A-Za-z_,.:()\"= ]+ -->")
+SET(HREF_EXPR "[0-9A-Za-z_#]+")
+
+FOREACH(HTML_DOC_FILE ${HTML_DOC_FILES})
+  MESSAGE(STATUS "Postprocessing file ${HTML_DOC_FILE}...")
+  
+  FILE(READ "${HTML_DOC_DIR}/${HTML_DOC_FILE}" CONTENT)
+
+  STRING(REPLACE "::" "." CONTENT "${CONTENT}")
+
+  IF(HTML_DOC_FILE STREQUAL "classes.html" OR HTML_DOC_FILE STREQUAL "classBoost_1_1Python_1_1instance.html")
+	# NTD
+  ELSE(HTML_DOC_FILE STREQUAL "classes.html" OR HTML_DOC_FILE STREQUAL "classBoost_1_1Python_1_1instance.html")
+    STRING(REPLACE "static " "" CONTENT "${CONTENT}")
+ 
+    STRING(REGEX REPLACE 
+           "class=\"memItemLeft\" nowrap align=\"right\" valign=\"top\">(${TYPE_NAME_EXPR})&"
+           "class=\"memItemLeft\" nowrap align=\"right\" valign=\"top\">[\\1]&"
+           CONTENT "${CONTENT}")
+  
+    STRING(REGEX REPLACE 
+           "class=\"memItemLeft\" align=\"right\" valign=\"top\">(${TYPE_NAME_EXPR})&"
+           "class=\"memItemLeft\" align=\"right\" valign=\"top\">[\\1]&"
+           CONTENT "${CONTENT}")
+  
+    STRING(REGEX REPLACE 
+           "class=\"memItemLeft\" nowrap align=\"right\" valign=\"top\"><a class=\"el\" href=\"(${HREF_EXPR})\\.html\">(${TYPE_NAME_EXPR})</a>&"
+           "class=\"memItemLeft\" nowrap align=\"right\" valign=\"top\"><a class=\"el\" href=\"\\1.html\">[\\2]</a>&"
+           CONTENT "${CONTENT}")
+
+    STRING(REGEX REPLACE 
+           "class=\"memItemLeft\" align=\"right\" valign=\"top\"><a class=\"el\" href=\"(${HREF_EXPR})\\.html\">(${TYPE_NAME_EXPR})</a>&"
+           "class=\"memItemLeft\" align=\"right\" valign=\"top\"><a class=\"el\" href=\"\\1.html\">[\\2]</a>&"
+           CONTENT "${CONTENT}")
+
+    STRING(REGEX REPLACE 
+          "class=\"memItemLeft\" nowrap align=\"right\" valign=\"top\"><a class=\"anchor\" name=\"([a-z0-9]+)\"></a>(${DOXYTAG_EXPR})\n(${TYPE_NAME_EXPR})&"
+          "class=\"memItemLeft\" nowrap align=\"right\" valign=\"top\"><a class=\"anchor\" name=\"\\1\"></a>\\2\n[\\3]&"
+          CONTENT "${CONTENT}")
+ 
+    STRING(REGEX REPLACE 
+           "class=\"memItemLeft\" align=\"right\" valign=\"top\"><a class=\"anchor\" id=\"([a-z0-9]+)\"></a>(${DOXYTAG_EXPR})\n(${TYPE_NAME_EXPR})&"
+           "class=\"memItemLeft\" align=\"right\" valign=\"top\"><a class=\"anchor\" id=\"\\1\"></a>\\2\n[\\3]&"
+           CONTENT "${CONTENT}")
+
+    STRING(REGEX REPLACE 
+           "class=\"memItemLeft\" nowrap align=\"right\" valign=\"top\"><a class=\"anchor\" name=\"([a-z0-9]+)\"></a>(${DOXYTAG_EXPR})\n<a class=\"el\" href=\"(${HREF_EXPR})\\.html\">(${TYPE_NAME_EXPR})</a>&"
+           "class=\"memItemLeft\" nowrap align=\"right\" valign=\"top\"><a class=\"anchor\" name=\"\\1\"></a>\\2\n<a class=\"el\" href=\"\\3.html\">[\\4]</a>&"
+           CONTENT "${CONTENT}")
+ 
+    STRING(REGEX REPLACE 
+           "class=\"memItemLeft\" align=\"right\" valign=\"top\"><a class=\"anchor\" id=\"([a-z0-9]+)\"></a>(${DOXYTAG_EXPR})\n<a class=\"el\" href=\"(${HREF_EXPR})\\.html\">(${TYPE_NAME_EXPR})</a>&"
+           "class=\"memItemLeft\" align=\"right\" valign=\"top\"><a class=\"anchor\" id=\"\\1\"></a>\\2\n<a class=\"el\" href=\"\\3.html\">[\\4]</a>&"
+           CONTENT "${CONTENT}")
+
+    STRING(REGEX REPLACE 
+           "\\(<a class=\"el\" href=\"(${HREF_EXPR})\\.html\">(${TYPE_NAME_EXPR})</a>" 
+           "(<a class=\"el\" href=\"\\1.html\">[\\2]</a>" 
+           CONTENT "${CONTENT}")
+
+    STRING(REGEX REPLACE 
+           ", (${TYPE_NAME_EXPR}) <a class=\"el\" href=\"" 
+           ", [\\1] <a class=\"el\" href=\"" 
+           CONTENT "${CONTENT}")
+  
+    STRING(REGEX REPLACE 
+           ", (${TYPE_NAME_EXPR}) (${TYPE_NAME_EXPR})" 
+           ", [\\1] \\2" 
+           CONTENT "${CONTENT}")
+  
+    STRING(REGEX REPLACE 
+           " \\((${TYPE_NAME_EXPR}) (${TYPE_NAME_EXPR})" 
+           " ([\\1] \\2" 
+           CONTENT "${CONTENT}")
+ 
+    STRING(REGEX REPLACE 
+           ", <a class=\"el\" href=\"(${HREF_EXPR})\\.html\">(${TYPE_NAME_EXPR})</a>" 
+           ", <a class=\"el\" href=\"\\1.html\">[\\2]</a>" 
+           CONTENT "${CONTENT}")
+
+    STRING(REGEX REPLACE 
+           "<td class=\"paramtype\"><a class=\"el\" href=\"(${HREF_EXPR})\\.html\">(${TYPE_NAME_EXPR})</a>&nbsp;</td>"
+           "<td class=\"paramtype\"><a class=\"el\" href=\"\\1.html\">[\\2]</a>&nbsp;</td>"
+           CONTENT "${CONTENT}")
+
+    STRING(REGEX REPLACE 
+           "<td class=\"paramtype\">(${TYPE_NAME_EXPR})&nbsp;</td>"
+           "<td class=\"paramtype\">[\\1]&nbsp;</td>"
+           CONTENT "${CONTENT}")
+
+    STRING(REGEX REPLACE 
+           "<td class=\"memname\"><a class=\"el\" href=\"(${HREF_EXPR})\\.html\">(${TYPE_NAME_EXPR})</a> "
+           "<td class=\"memname\"><a class=\"el\" href=\"\\1.html\">[\\2]</a> "
+           CONTENT "${CONTENT}")
+
+    STRING(REGEX REPLACE 
+           "<td class=\"memname\">(${TYPE_NAME_EXPR}) "
+           "<td class=\"memname\">[\\1] "
+           CONTENT "${CONTENT}")
+  ENDIF(HTML_DOC_FILE STREQUAL "classes.html" OR HTML_DOC_FILE STREQUAL "classBoost_1_1Python_1_1instance.html")
+
+  FILE(WRITE "${HTML_DOC_DIR}/${HTML_DOC_FILE}" "${CONTENT}")
+ENDFOREACH(HTML_DOC_FILE)

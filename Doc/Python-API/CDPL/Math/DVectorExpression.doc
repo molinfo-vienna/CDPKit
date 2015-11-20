@@ -1,0 +1,93 @@
+/* -*- mode: java; tab-width: 4 -*- */
+
+package CDPL.Math;
+
+/**
+ * \brief DVectorExpression.
+ */
+public class DVectorExpression extends ConstDVectorExpression {
+
+	/**
+	 * \brief setElement.
+	 * \param self The <tt>%DVectorExpression</tt> instance.
+	 */
+	public None setElement(DVectorExpression self, int i, float v) {}
+
+	/**
+	 * \brief swap.
+	 * \param self The <tt>%DVectorExpression</tt> instance.
+	 */
+	public None swap(DVectorExpression self, DVectorExpression e) {}
+
+	/**
+	 * \brief assign.
+	 * \param self The <tt>%DVectorExpression</tt> instance.
+	 */
+	public DVectorExpression assign(DVectorExpression self, DVectorExpression e) {}
+
+	/**
+	 * \brief assign.
+	 * \param self The <tt>%DVectorExpression</tt> instance.
+	 */
+	public DVectorExpression assign(DVectorExpression self, ConstFVectorExpression e) {}
+
+	/**
+	 * \brief assign.
+	 * \param self The <tt>%DVectorExpression</tt> instance.
+	 */
+	public DVectorExpression assign(DVectorExpression self, ConstDVectorExpression e) {}
+
+	/**
+	 * \brief assign.
+	 * \param self The <tt>%DVectorExpression</tt> instance.
+	 */
+	public DVectorExpression assign(DVectorExpression self, ConstLVectorExpression e) {}
+
+	/**
+	 * \brief assign.
+	 * \param self The <tt>%DVectorExpression</tt> instance.
+	 */
+	public DVectorExpression assign(DVectorExpression self, ConstULVectorExpression e) {}
+
+	/**
+	 * \brief __isub__.
+	 * \param self The <tt>%DVectorExpression</tt> instance.
+	 */
+	public DVectorExpression __isub__(DVectorExpression self, DVectorExpression e) {}
+
+	/**
+	 * \brief __isub__.
+	 * \param self The <tt>%DVectorExpression</tt> instance.
+	 */
+	public DVectorExpression __isub__(DVectorExpression self, ConstDVectorExpression e) {}
+
+	/**
+	 * \brief __imul__.
+	 * \param self The <tt>%DVectorExpression</tt> instance.
+	 */
+	public DVectorExpression __imul__(DVectorExpression self, float t) {}
+
+	/**
+	 * \brief __idiv__.
+	 * \param self The <tt>%DVectorExpression</tt> instance.
+	 */
+	public DVectorExpression __idiv__(DVectorExpression self, float t) {}
+
+	/**
+	 * \brief __iadd__.
+	 * \param self The <tt>%DVectorExpression</tt> instance.
+	 */
+	public DVectorExpression __iadd__(DVectorExpression self, DVectorExpression e) {}
+
+	/**
+	 * \brief __iadd__.
+	 * \param self The <tt>%DVectorExpression</tt> instance.
+	 */
+	public DVectorExpression __iadd__(DVectorExpression self, ConstDVectorExpression e) {}
+
+	/**
+	 * \brief __setitem__.
+	 * \param self The <tt>%DVectorExpression</tt> instance.
+	 */
+	public None __setitem__(DVectorExpression self, int i, float v) {}
+}

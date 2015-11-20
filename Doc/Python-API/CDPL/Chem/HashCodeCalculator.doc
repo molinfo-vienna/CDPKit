@@ -1,0 +1,130 @@
+/* -*- mode: java; tab-width: 4 -*- */
+
+package CDPL.Chem;
+
+/**
+ * \brief HashCodeCalculator.
+ */
+public class HashCodeCalculator extends Boost.Python.instance {
+
+	/**
+	 * \brief DefBondHashSeedFunctor.
+	 */
+	public class DefBondHashSeedFunctor extends Boost.Python.instance {
+
+		/**
+		 * \brief __init__.
+		 * \param self The <tt>%DefBondHashSeedFunctor</tt> instance.
+		 */
+		public None __init__(object self, HashCodeCalculator calculator, int flags = 30) {}
+
+		/**
+		 * \brief __call__.
+		 * \param self The <tt>%DefBondHashSeedFunctor</tt> instance.
+		 */
+		public int __call__(DefBondHashSeedFunctor self, Bond bond) {}
+	}
+
+	/**
+	 * \brief DefAtomHashSeedFunctor.
+	 */
+	public class DefAtomHashSeedFunctor extends Boost.Python.instance {
+
+		/**
+		 * \brief __init__.
+		 * \param self The <tt>%DefAtomHashSeedFunctor</tt> instance.
+		 */
+		public None __init__(object self, HashCodeCalculator calculator, int flags = 414) {}
+
+		/**
+		 * \brief __call__.
+		 * \param self The <tt>%DefAtomHashSeedFunctor</tt> instance.
+		 */
+		public int __call__(DefAtomHashSeedFunctor self, Atom atom) {}
+	}
+
+	/**
+	 * \brief DEF_BOND_PROPERTY_FLAGS.
+	 */
+	public static int DEF_BOND_PROPERTY_FLAGS = 30;
+
+	/**
+	 * \brief DEF_ATOM_PROPERTY_FLAGS.
+	 */
+	public static int DEF_ATOM_PROPERTY_FLAGS = 414;
+
+	/**
+	 * \brief __init__.
+	 * \param self The <tt>%HashCodeCalculator</tt> instance.
+	 */
+	public None __init__(object self) {}
+
+	/**
+	 * \brief __init__.
+	 * \param self The <tt>%HashCodeCalculator</tt> instance.
+	 */
+	public None __init__(object self, MolecularGraph molgraph) {}
+
+	/**
+	 * \brief setBondHashSeedFunction.
+	 * \param self The <tt>%HashCodeCalculator</tt> instance.
+	 */
+	public None setBondHashSeedFunction(HashCodeCalculator self, object func) {}
+
+	/**
+	 * \brief calculate.
+	 * \param self The <tt>%HashCodeCalculator</tt> instance.
+	 */
+	public int calculate(HashCodeCalculator self, MolecularGraph molgraph) {}
+
+	/**
+	 * \brief getObjectID.
+	 * \param self The <tt>%HashCodeCalculator</tt> instance.
+	 */
+	public int getObjectID(HashCodeCalculator self) {}
+
+	/**
+	 * \brief getResult.
+	 * \param self The <tt>%HashCodeCalculator</tt> instance.
+	 */
+	public int getResult(HashCodeCalculator self) {}
+
+	/**
+	 * \brief includeGlobalStereoFeatures.
+	 * \param self The <tt>%HashCodeCalculator</tt> instance.
+	 */
+	public None includeGlobalStereoFeatures(HashCodeCalculator self, bool include) {}
+
+	/**
+	 * \brief globalStereoFeaturesIncluded.
+	 * \param self The <tt>%HashCodeCalculator</tt> instance.
+	 */
+	public bool globalStereoFeaturesIncluded(HashCodeCalculator self) {}
+
+	/**
+	 * \brief setAtomHashSeedFunction.
+	 * \param self The <tt>%HashCodeCalculator</tt> instance.
+	 */
+	public None setAtomHashSeedFunction(HashCodeCalculator self, object func) {}
+
+	/**
+	 * \brief __call__.
+	 * \param self The <tt>%HashCodeCalculator</tt> instance.
+	 */
+	public int __call__(HashCodeCalculator self, MolecularGraph molgraph) {}
+
+	/**
+	 * \brief objectID.
+	 */
+	public None objectID;
+
+	/**
+	 * \brief globalStereoFeatures.
+	 */
+	public None globalStereoFeatures;
+
+	/**
+	 * \brief result.
+	 */
+	public None result;
+}

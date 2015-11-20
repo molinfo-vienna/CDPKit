@@ -1,0 +1,39 @@
+/* -*- mode: java; tab-width: 4 -*- */
+
+package CDPL.Chem;
+
+/**
+ * \brief BondContainerProperty.
+ */
+public class BondContainerProperty extends Boost.Python.instance {
+
+	/**
+	 * \brief BOND_COUNT.
+	 */
+	public static Base.PropertyKey BOND_COUNT;
+
+	/**
+	 * \brief DOUBLE_BOND_COUNT.
+	 */
+	public static Base.PropertyKey DOUBLE_BOND_COUNT;
+
+	/**
+	 * \brief TRIPLE_BOND_COUNT.
+	 */
+	public static Base.PropertyKey TRIPLE_BOND_COUNT;
+
+	/**
+	 * \brief HEAVY_BOND_COUNT.
+	 */
+	public static Base.PropertyKey HEAVY_BOND_COUNT;
+
+	/**
+	 * \brief SINGLE_BOND_COUNT.
+	 */
+	public static Base.PropertyKey SINGLE_BOND_COUNT;
+
+	/**
+	 * \brief H_BOND_COUNT.
+	 */
+	public static Base.PropertyKey H_BOND_COUNT;
+}

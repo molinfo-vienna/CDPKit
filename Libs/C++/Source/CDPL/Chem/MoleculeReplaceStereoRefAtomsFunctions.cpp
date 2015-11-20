@@ -1,0 +1,91 @@
+/* -*- mode: c++; c-basic-offset: 4; tab-width: 4; indent-tabs-mode: t -*- */
+
+/* 
+ * MoleculeReplaceStereoRefAtomsFunctions.cpp 
+ *
+ * This file is part of the Chemical Data Processing Toolkit
+ *
+ * Copyright (C) 2003-2010 Thomas A. Seidel <thomas.seidel@univie.ac.at>
+ *
+ * This library is free software; you can redistribute it and/or
+ * modify it under the terms of the GNU Lesser General Public
+ * License as published by the Free Software Foundation; either
+ * version 2 of the License, or (at your option) any later version.
+ *
+ * This library is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU
+ * Lesser General Public License for more details.
+ *
+ * You should have received a copy of the GNU Lesser General Public License
+ * along with this library; see the file COPYING. If not, write to
+ * the Free Software Foundation, Inc., 59 Temple Place - Suite 330,
+ * Boston, MA 02111-1307, USA.
+ */
+
+
+#include "StaticInit.hpp"
+
+#include "CDPL/Chem/MoleculeFunctions.hpp"
+#include "CDPL/Chem/AtomFunctions.hpp"
+#include "CDPL/Chem/BondFunctions.hpp"
+#include "CDPL/Chem/Molecule.hpp"
+#include "CDPL/Chem/Atom.hpp"
+#include "CDPL/Chem/Bond.hpp"
+#include "CDPL/Chem/StereoDescriptor.hpp"
+
+
+using namespace CDPL; 
+
+
+void Chem::replaceAtomStereoReferenceAtoms(Molecule& mol_copy, const MolecularGraph& molgraph,
+										   std::size_t atom_idx_offs)
+{
+	Molecule::AtomIterator atoms_end = mol_copy.getAtomsEnd();
+	
+	for (Molecule::AtomIterator a_it = mol_copy.getAtomsBegin() + atom_idx_offs; a_it != atoms_end; ++a_it) {
+		Atom& atom = *a_it;
+		const StereoDescriptor& stereo_desc = getStereoDescriptor(atom);
+		std::size_t num_ref_atoms = stereo_desc.getNumReferenceAtoms();
+
+		if (num_ref_atoms < 3)
+			continue;
+
+		const Atom* const* ref_atoms = stereo_desc.getReferenceAtoms();
+
+		if (num_ref_atoms == 3) 
+			setStereoDescriptor(atom, StereoDescriptor(stereo_desc.getConfiguration(),
+													   mol_copy.getAtom(molgraph.getAtomIndex(*ref_atoms[0]) + atom_idx_offs),
+													   mol_copy.getAtom(molgraph.getAtomIndex(*ref_atoms[1]) + atom_idx_offs),
+													   mol_copy.getAtom(molgraph.getAtomIndex(*ref_atoms[2]) + atom_idx_offs)));
+		else
+			setStereoDescriptor(atom, StereoDescriptor(stereo_desc.getConfiguration(),
+													   mol_copy.getAtom(molgraph.getAtomIndex(*ref_atoms[0]) + atom_idx_offs),
+													   mol_copy.getAtom(molgraph.getAtomIndex(*ref_atoms[1]) + atom_idx_offs),
+													   mol_copy.getAtom(molgraph.getAtomIndex(*ref_atoms[2]) + atom_idx_offs),
+													   mol_copy.getAtom(molgraph.getAtomIndex(*ref_atoms[3]) + atom_idx_offs)));
+	}
+}
+
+void Chem::replaceBondStereoReferenceAtoms(Molecule& mol_copy, const MolecularGraph& molgraph, 
+										   std::size_t atom_idx_offs, std::size_t bond_start_idx)
+{
+	Molecule::BondIterator bonds_end = mol_copy.getBondsEnd();
+	
+	for (Molecule::BondIterator b_it = mol_copy.getBondsBegin() + bond_start_idx; b_it != bonds_end; ++b_it) {
+		Bond& bond = *b_it;
+		const StereoDescriptor& stereo_desc = getStereoDescriptor(bond);
+		std::size_t num_ref_atoms = stereo_desc.getNumReferenceAtoms();
+
+		if (num_ref_atoms < 4)
+			continue;
+
+		const Atom* const* ref_atoms = stereo_desc.getReferenceAtoms();
+
+		setStereoDescriptor(bond, StereoDescriptor(stereo_desc.getConfiguration(),
+												   mol_copy.getAtom(molgraph.getAtomIndex(*ref_atoms[0]) + atom_idx_offs),
+												   mol_copy.getAtom(molgraph.getAtomIndex(*ref_atoms[1]) + atom_idx_offs),
+												   mol_copy.getAtom(molgraph.getAtomIndex(*ref_atoms[2]) + atom_idx_offs),
+												   mol_copy.getAtom(molgraph.getAtomIndex(*ref_atoms[3]) + atom_idx_offs)));
+	}
+}

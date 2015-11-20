@@ -1,0 +1,21 @@
+/* -*- mode: java; tab-width: 4 -*- */
+
+package CDPL.Math;
+
+/**
+ * \brief ZTranslation4D.
+ */
+public class ZTranslation4D extends AffineTransform4D {
+
+	/**
+	 * \brief __init__.
+	 * \param self The <tt>%ZTranslation4D</tt> instance.
+	 */
+	public None __init__(object self, ZTranslation4D xform) {}
+
+	/**
+	 * \brief __init__.
+	 * \param self The <tt>%ZTranslation4D</tt> instance.
+	 */
+	public None __init__(object self, float delta) {}
+}

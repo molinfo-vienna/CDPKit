@@ -1,0 +1,4 @@
+INSTALL(DIRECTORY CDPL DESTINATION "${CDPKIT_INCLUDE_INSTALL_DIR}" 
+        COMPONENT CDPLHeaderFiles
+        REGEX "\\.txt$|~$|\\.in$" EXCLUDE
+       )

@@ -1,0 +1,27 @@
+/* -*- mode: java; tab-width: 4 -*- */
+
+package CDPL.Chem;
+
+/**
+ * \brief AromaticRingSet.
+ */
+public class AromaticRingSet extends FragmentList {
+
+	/**
+	 * \brief __init__.
+	 * \param self The <tt>%AromaticRingSet</tt> instance.
+	 */
+	public None __init__(object self) {}
+
+	/**
+	 * \brief __init__.
+	 * \param self The <tt>%AromaticRingSet</tt> instance.
+	 */
+	public None __init__(object self, MolecularGraph molgraph) {}
+
+	/**
+	 * \brief perceive.
+	 * \param self The <tt>%AromaticRingSet</tt> instance.
+	 */
+	public None perceive(AromaticRingSet self, MolecularGraph molgraph) {}
+}

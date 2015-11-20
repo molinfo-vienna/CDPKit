@@ -1,0 +1,15 @@
+/* -*- mode: java; tab-width: 4 -*- */
+
+package CDPL.Chem;
+
+/**
+ * \brief JMEReactionInputHandler.
+ */
+public class JMEReactionInputHandler extends ReactionInputHandler {
+
+	/**
+	 * \brief __init__.
+	 * \param self The <tt>%JMEReactionInputHandler</tt> instance.
+	 */
+	public None __init__(object self) {}
+}

@@ -1,0 +1,34 @@
+/* -*- mode: java; tab-width: 4 -*- */
+
+package CDPL.Chem;
+
+/**
+ * \brief BondGeometry.
+ */
+public class BondGeometry extends Boost.Python.instance {
+
+	/**
+	 * \brief UNDEF.
+	 */
+	public static int UNDEF = 0;
+
+	/**
+	 * \brief NONE.
+	 */
+	public static int NONE = 1;
+
+	/**
+	 * \brief CIS.
+	 */
+	public static int CIS = 2;
+
+	/**
+	 * \brief EITHER.
+	 */
+	public static int EITHER = 8;
+
+	/**
+	 * \brief TRANS.
+	 */
+	public static int TRANS = 4;
+}

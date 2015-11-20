@@ -1,0 +1,15 @@
+/* -*- mode: java; tab-width: 4 -*- */
+
+package CDPL.Chem;
+
+/**
+ * \brief SMARTSReactionInputHandler.
+ */
+public class SMARTSReactionInputHandler extends ReactionInputHandler {
+
+	/**
+	 * \brief __init__.
+	 * \param self The <tt>%SMARTSReactionInputHandler</tt> instance.
+	 */
+	public None __init__(object self) {}
+}

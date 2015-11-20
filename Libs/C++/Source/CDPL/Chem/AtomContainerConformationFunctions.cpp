@@ -1,0 +1,91 @@
+/* -*- mode: c++; c-basic-offset: 4; tab-width: 4; indent-tabs-mode: t -*- */
+
+/* 
+ * AtomContainerConformationFunctions.cpp 
+ *
+ * This file is part of the Chemical Data Processing Toolkit
+ *
+ * Copyright (C) 2003-2010 Thomas A. Seidel <thomas.seidel@univie.ac.at>
+ *
+ * This library is free software; you can redistribute it and/or
+ * modify it under the terms of the GNU Lesser General Public
+ * License as published by the Free Software Foundation; either
+ * version 2 of the License, or (at your option) any later version.
+ *
+ * This library is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU
+ * Lesser General Public License for more details.
+ *
+ * You should have received a copy of the GNU Lesser General Public License
+ * along with this library; see the file COPYING. If not, write to
+ * the Free Software Foundation, Inc., 59 Temple Place - Suite 330,
+ * Boston, MA 02111-1307, USA.
+ */
+
+
+#include "StaticInit.hpp"
+
+#include <algorithm>
+#include <limits>
+
+#include "CDPL/Chem/AtomContainerFunctions.hpp"
+#include "CDPL/Chem/AtomFunctions.hpp"
+#include "CDPL/Chem/Atom.hpp"
+
+
+using namespace CDPL; 
+
+
+void Chem::setActiveConformation(AtomContainer& cntnr, std::size_t conf_idx)
+{
+	for (AtomContainer::AtomIterator it = cntnr.getAtomsBegin(), end = cntnr.getAtomsEnd(); it != end; ++it) {
+		Atom& atom = *it;
+
+		set3DCoordinates(atom, (*get3DCoordinatesArray(atom))[conf_idx]);
+	}
+}
+
+void Chem::getConformationData(const AtomContainer& cntnr, std::size_t conf_idx, Math::Vector3DArray& coords)
+{
+	for (AtomContainer::ConstAtomIterator it = cntnr.getAtomsBegin(), end = cntnr.getAtomsEnd(); it != end; ++it)
+		coords.addElement((*get3DCoordinatesArray(*it))[conf_idx]);
+}
+
+void Chem::addConformationData(AtomContainer& cntnr, const Math::Vector3DArray& coords)
+{
+	std::size_t i = 0;
+	
+	for (AtomContainer::AtomIterator it = cntnr.getAtomsBegin(), end = cntnr.getAtomsEnd(); it != end; ++it, i++) {
+		Atom& atom = *it;
+		Math::Vector3DArray::SharedPointer coords_array;
+
+		if (!has3DCoordinatesArray(atom)) {
+			coords_array.reset(new Math::Vector3DArray());
+
+			set3DCoordinatesArray(atom, coords_array);
+
+		} else
+			coords_array = get3DCoordinatesArray(atom);
+		
+		coords_array->addElement(coords[i]);
+	}
+}
+
+std::size_t Chem::getNumConformations(const AtomContainer& cntnr)
+{
+	std::size_t num_confs = std::numeric_limits<std::size_t>::max();
+
+	for (AtomContainer::ConstAtomIterator it = cntnr.getAtomsBegin(), end = cntnr.getAtomsEnd(); it != end; ++it) {
+		const Atom& atom = *it;
+
+		if (!has3DCoordinatesArray(atom))
+			return 0;
+
+		const Math::Vector3DArray::SharedPointer& coords_array = get3DCoordinatesArray(atom);
+		
+		num_confs = std::min(num_confs, coords_array->getSize());
+	}
+
+	return (num_confs == std::numeric_limits<std::size_t>::max() ? 0 : num_confs);
+}

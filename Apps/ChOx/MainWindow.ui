@@ -1,0 +1,2165 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>MainWindow</class>
+ <widget class="QMainWindow" name="MainWindow">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>770</width>
+    <height>504</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>ChOx</string>
+  </property>
+  <property name="windowIcon">
+   <iconset resource="Resources.qrc">
+    <normaloff>:/Icons/chox.png</normaloff>:/Icons/chox.png</iconset>
+  </property>
+  <widget class="QWidget" name="widget"/>
+  <widget class="QToolBar" name="fileToolBar">
+   <property name="windowTitle">
+    <string>File Toolbar</string>
+   </property>
+   <property name="orientation">
+    <enum>Qt::Horizontal</enum>
+   </property>
+   <attribute name="toolBarArea">
+    <enum>TopToolBarArea</enum>
+   </attribute>
+   <attribute name="toolBarBreak">
+    <bool>false</bool>
+   </attribute>
+   <addaction name="fileNewAction"/>
+   <addaction name="fileOpenAction"/>
+   <addaction name="fileSaveAsAction"/>
+   <addaction name="filePrintAction"/>
+   <addaction name="separator"/>
+   <addaction name="fileQuitAction"/>
+   <addaction name="separator"/>
+   <addaction name="editUndoAction"/>
+   <addaction name="editRedoAction"/>
+  </widget>
+  <widget class="QMenuBar" name="MenuBar">
+   <property name="geometry">
+    <rect>
+     <x>0</x>
+     <y>0</y>
+     <width>770</width>
+     <height>25</height>
+    </rect>
+   </property>
+   <widget class="QMenu" name="viewMenu">
+    <property name="title">
+     <string>&amp;View</string>
+    </property>
+    <widget class="QMenu" name="viewColumnMenu">
+     <property name="title">
+      <string>&amp;Columns</string>
+     </property>
+     <addaction name="addPageColumnAction"/>
+     <addaction name="deletePageColumnAction"/>
+    </widget>
+    <widget class="QMenu" name="viewHorAlignmentMenu">
+     <property name="title">
+      <string>&amp;Horizontal Alignment</string>
+     </property>
+     <addaction name="viewLeftAlignmentAction"/>
+     <addaction name="viewHorCenterAlignmentAction"/>
+     <addaction name="viewRightAlignmentAction"/>
+    </widget>
+    <widget class="QMenu" name="viewVerAlignmentMenu">
+     <property name="title">
+      <string>&amp;Vertical Alignment</string>
+     </property>
+     <addaction name="viewTopAlignmentAction"/>
+     <addaction name="viewVerCenterAlignmentAction"/>
+     <addaction name="viewBottomAlignmentAction"/>
+    </widget>
+    <widget class="QMenu" name="viewSizeAdjustmentMenu">
+     <property name="title">
+      <string>S&amp;ize Adjustment</string>
+     </property>
+     <addaction name="viewBestFitSizeAdjustmentAction"/>
+     <addaction name="viewVisibilitySizeAdjustmentAction"/>
+     <addaction name="viewNoSizeAdjustmentAction"/>
+    </widget>
+    <widget class="QMenu" name="viewAtomMenu">
+     <property name="title">
+      <string>&amp;Atom Appearance</string>
+     </property>
+     <addaction name="viewShowCarbonsAction"/>
+     <addaction name="viewShowChargesAction"/>
+     <addaction name="viewShowIsotopesAction"/>
+     <addaction name="viewShowExplicitHsAction"/>
+     <addaction name="viewShowHCountsAction"/>
+     <addaction name="viewShowNonCHCountsAction"/>
+     <addaction name="viewShowAtomQueryInfosAction"/>
+     <addaction name="viewShowAtomReactionInfosAction"/>
+     <addaction name="viewShowRadicalElectronsAction"/>
+    </widget>
+    <widget class="QMenu" name="viewRowsMenu">
+     <property name="title">
+      <string>&amp;Rows</string>
+     </property>
+     <addaction name="addPageRowAction"/>
+     <addaction name="deletePageRowAction"/>
+    </widget>
+    <widget class="QMenu" name="viewBondMenu">
+     <property name="title">
+      <string>&amp;Bond Appearance</string>
+     </property>
+     <addaction name="viewShowBondQueryInfosAction"/>
+     <addaction name="viewShowBondReactionInfosAction"/>
+     <addaction name="viewShowBondStereoAction"/>
+    </widget>
+    <widget class="QMenu" name="viewReactionMenu">
+     <property name="title">
+      <string>R&amp;eaction Appearance</string>
+     </property>
+     <widget class="QMenu" name="viewAgentLayoutStyleMenu">
+      <property name="title">
+       <string>Agent &amp;Layout</string>
+      </property>
+      <addaction name="viewPackedAgentLayoutStyleAction"/>
+      <addaction name="viewLinearAgentLayoutStyleAction"/>
+     </widget>
+     <widget class="QMenu" name="viewAgentLayoutDirMenu">
+      <property name="title">
+       <string>Agent Layout &amp;Direction</string>
+      </property>
+      <addaction name="viewHorAgentLayoutDirAction"/>
+      <addaction name="viewVerAgentLayoutDirAction"/>
+     </widget>
+     <widget class="QMenu" name="viewAgentAlignmentMenu">
+      <property name="title">
+       <string>Agent Align&amp;ment</string>
+      </property>
+      <addaction name="viewTopAgentAlignmentAction"/>
+      <addaction name="viewCenterAgentAlignmentAction"/>
+      <addaction name="viewBottomAgentAlignmentAction"/>
+     </widget>
+     <widget class="QMenu" name="viewArrowStyleMenu">
+      <property name="title">
+       <string>Arrow &amp;Style</string>
+      </property>
+      <addaction name="viewStandardReactionArrowAction"/>
+      <addaction name="viewHollowReactionArrowAction"/>
+      <addaction name="viewNoReactionArrowAction"/>
+     </widget>
+     <widget class="QMenu" name="viewComponentLayoutStyleMenu">
+      <property name="title">
+       <string>Reactant/Product Layou&amp;t</string>
+      </property>
+      <addaction name="viewPackedComponentLayoutStyleAction"/>
+      <addaction name="viewLinearComponentLayoutStyleAction"/>
+     </widget>
+     <widget class="QMenu" name="viewComponentLayoutDirMenu">
+      <property name="title">
+       <string>Reactant/Product Layout Directio&amp;n</string>
+      </property>
+      <addaction name="viewHorComponentLayoutDirAction"/>
+      <addaction name="viewVerComponentLayoutDirAction"/>
+     </widget>
+     <addaction name="viewShowReactantsAction"/>
+     <addaction name="viewShowAgentsAction"/>
+     <addaction name="viewShowProductsAction"/>
+     <addaction name="separator"/>
+     <addaction name="viewShowReactionPlusSignsAction"/>
+     <addaction name="separator"/>
+     <addaction name="viewArrowStyleMenu"/>
+     <addaction name="separator"/>
+     <addaction name="viewAgentAlignmentMenu"/>
+     <addaction name="viewAgentLayoutStyleMenu"/>
+     <addaction name="viewAgentLayoutDirMenu"/>
+     <addaction name="viewComponentLayoutStyleMenu"/>
+     <addaction name="viewComponentLayoutDirMenu"/>
+    </widget>
+    <addaction name="viewRowsMenu"/>
+    <addaction name="viewColumnMenu"/>
+    <addaction name="separator"/>
+    <addaction name="viewShowGridAction"/>
+    <addaction name="viewShowRecordNumbersAction"/>
+    <addaction name="separator"/>
+    <addaction name="viewHorAlignmentMenu"/>
+    <addaction name="viewVerAlignmentMenu"/>
+    <addaction name="separator"/>
+    <addaction name="viewSizeAdjustmentMenu"/>
+    <addaction name="separator"/>
+    <addaction name="viewReactionMenu"/>
+    <addaction name="viewAtomMenu"/>
+    <addaction name="viewBondMenu"/>
+   </widget>
+   <widget class="QMenu" name="editMenu">
+    <property name="title">
+     <string>&amp;Edit</string>
+    </property>
+    <addaction name="editUndoAction"/>
+    <addaction name="editRedoAction"/>
+    <addaction name="separator"/>
+    <addaction name="editSelectAllAction"/>
+    <addaction name="editSelectRangeAction"/>
+    <addaction name="editInvertSelectionAction"/>
+    <addaction name="separator"/>
+    <addaction name="editRemoveSelectionAction"/>
+    <addaction name="editClearAction"/>
+    <addaction name="separator"/>
+    <addaction name="editAppendFilesAction"/>
+    <addaction name="separator"/>
+    <addaction name="editSettingsAction"/>
+    <addaction name="editSaveSettingsAction"/>
+   </widget>
+   <widget class="QMenu" name="fileMenu">
+    <property name="title">
+     <string>&amp;File</string>
+    </property>
+    <widget class="QMenu" name="recentFilesMenu">
+     <property name="title">
+      <string>&amp;Recent Files</string>
+     </property>
+     <addaction name="separator"/>
+     <addaction name="clearRecentFilesAction"/>
+    </widget>
+    <addaction name="fileNewAction"/>
+    <addaction name="fileOpenAction"/>
+    <addaction name="recentFilesMenu"/>
+    <addaction name="separator"/>
+    <addaction name="fileCloseAction"/>
+    <addaction name="separator"/>
+    <addaction name="fileSaveAsAction"/>
+    <addaction name="fileSaveSelectionAsAction"/>
+    <addaction name="separator"/>
+    <addaction name="filePrintAction"/>
+    <addaction name="separator"/>
+    <addaction name="fileQuitAction"/>
+   </widget>
+   <widget class="QMenu" name="helpMenu">
+    <property name="title">
+     <string>&amp;Help</string>
+    </property>
+    <addaction name="helpAboutAction"/>
+   </widget>
+   <widget class="QMenu" name="windowMenu">
+    <property name="title">
+     <string>&amp;Window</string>
+    </property>
+    <addaction name="windowTileAction"/>
+    <addaction name="windowCascadeAction"/>
+    <addaction name="separator"/>
+   </widget>
+   <addaction name="fileMenu"/>
+   <addaction name="editMenu"/>
+   <addaction name="viewMenu"/>
+   <addaction name="windowMenu"/>
+   <addaction name="separator"/>
+   <addaction name="helpMenu"/>
+  </widget>
+  <action name="fileOpenAction">
+   <property name="icon">
+    <iconset resource="Resources.qrc">
+     <normaloff>:/Icons/open.png</normaloff>:/Icons/open.png</iconset>
+   </property>
+   <property name="text">
+    <string>&amp;Open...</string>
+   </property>
+   <property name="iconText">
+    <string>Open</string>
+   </property>
+   <property name="toolTip">
+    <string>Open File(s)</string>
+   </property>
+   <property name="shortcut">
+    <string>Ctrl+O</string>
+   </property>
+  </action>
+  <action name="filePrintAction">
+   <property name="icon">
+    <iconset resource="Resources.qrc">
+     <normaloff>:/Icons/print.png</normaloff>:/Icons/print.png</iconset>
+   </property>
+   <property name="text">
+    <string>&amp;Print...</string>
+   </property>
+   <property name="iconText">
+    <string>Print</string>
+   </property>
+   <property name="toolTip">
+    <string>Print Data</string>
+   </property>
+   <property name="shortcut">
+    <string>Ctrl+P</string>
+   </property>
+  </action>
+  <action name="fileQuitAction">
+   <property name="icon">
+    <iconset resource="Resources.qrc">
+     <normaloff>:/Icons/exit.png</normaloff>:/Icons/exit.png</iconset>
+   </property>
+   <property name="text">
+    <string>E&amp;xit</string>
+   </property>
+   <property name="iconText">
+    <string>Exit</string>
+   </property>
+   <property name="toolTip">
+    <string>Exit ChOx</string>
+   </property>
+   <property name="shortcut">
+    <string>Ctrl+Q</string>
+   </property>
+  </action>
+  <action name="helpAboutAction">
+   <property name="icon">
+    <iconset resource="Resources.qrc">
+     <normaloff>:/Icons/help.png</normaloff>:/Icons/help.png</iconset>
+   </property>
+   <property name="text">
+    <string>&amp;About ChOx</string>
+   </property>
+   <property name="iconText">
+    <string>About ChOx</string>
+   </property>
+   <property name="shortcut">
+    <string/>
+   </property>
+  </action>
+  <action name="fileCloseAction">
+   <property name="icon">
+    <iconset resource="Resources.qrc">
+     <normaloff>:/Icons/close.png</normaloff>:/Icons/close.png</iconset>
+   </property>
+   <property name="text">
+    <string>&amp;Close</string>
+   </property>
+   <property name="iconText">
+    <string>Close</string>
+   </property>
+   <property name="toolTip">
+    <string>Close Window</string>
+   </property>
+  </action>
+  <action name="viewRowsAction">
+   <property name="text">
+    <string>&amp;Rows</string>
+   </property>
+   <property name="iconText">
+    <string>Rows</string>
+   </property>
+   <property name="toolTip">
+    <string>Add/Delete Rows</string>
+   </property>
+  </action>
+  <action name="viewColumnsAction">
+   <property name="text">
+    <string>&amp;Columns</string>
+   </property>
+   <property name="iconText">
+    <string>Columns</string>
+   </property>
+   <property name="toolTip">
+    <string>Add/Delete Columns</string>
+   </property>
+  </action>
+  <action name="addPageRowAction">
+   <property name="text">
+    <string>&amp;Add</string>
+   </property>
+   <property name="iconText">
+    <string>Add</string>
+   </property>
+   <property name="toolTip">
+    <string>Add Row</string>
+   </property>
+   <property name="shortcut">
+    <string>Ctrl++</string>
+   </property>
+  </action>
+  <action name="deletePageRowAction">
+   <property name="text">
+    <string>&amp;Delete</string>
+   </property>
+   <property name="iconText">
+    <string>Delete</string>
+   </property>
+   <property name="toolTip">
+    <string>Delete Row</string>
+   </property>
+   <property name="shortcut">
+    <string>Ctrl+-</string>
+   </property>
+  </action>
+  <action name="addPageColumnAction">
+   <property name="text">
+    <string>&amp;Add</string>
+   </property>
+   <property name="iconText">
+    <string>Add</string>
+   </property>
+   <property name="toolTip">
+    <string>Add Column</string>
+   </property>
+   <property name="whatsThis">
+    <string/>
+   </property>
+   <property name="shortcut">
+    <string>Ctrl+Shift++</string>
+   </property>
+  </action>
+  <action name="deletePageColumnAction">
+   <property name="text">
+    <string>&amp;Delete</string>
+   </property>
+   <property name="iconText">
+    <string>Delete </string>
+   </property>
+   <property name="toolTip">
+    <string>Delete Column</string>
+   </property>
+   <property name="shortcut">
+    <string>Ctrl+Shift+-</string>
+   </property>
+  </action>
+  <action name="editAppendFilesAction">
+   <property name="icon">
+    <iconset resource="Resources.qrc">
+     <normaloff>:/Icons/add.png</normaloff>:/Icons/add.png</iconset>
+   </property>
+   <property name="text">
+    <string>Append &amp;Files(s)...</string>
+   </property>
+   <property name="iconText">
+    <string>Append File(s)</string>
+   </property>
+   <property name="toolTip">
+    <string>Append File(s)</string>
+   </property>
+   <property name="statusTip">
+    <string>Append File(s)</string>
+   </property>
+   <property name="shortcut">
+    <string>Ctrl+Shift+O</string>
+   </property>
+  </action>
+  <action name="fileNewAction">
+   <property name="icon">
+    <iconset resource="Resources.qrc">
+     <normaloff>:/Icons/new.png</normaloff>:/Icons/new.png</iconset>
+   </property>
+   <property name="text">
+    <string>&amp;New</string>
+   </property>
+   <property name="iconText">
+    <string>New</string>
+   </property>
+   <property name="toolTip">
+    <string>New Window</string>
+   </property>
+   <property name="shortcut">
+    <string>Ctrl+N</string>
+   </property>
+  </action>
+  <action name="windowTileAction">
+   <property name="text">
+    <string>&amp;Tile</string>
+   </property>
+   <property name="iconText">
+    <string>Tile</string>
+   </property>
+   <property name="toolTip">
+    <string>Tile Windows</string>
+   </property>
+  </action>
+  <action name="windowCascadeAction">
+   <property name="text">
+    <string>&amp;Cascade</string>
+   </property>
+   <property name="iconText">
+    <string>Cascade</string>
+   </property>
+   <property name="toolTip">
+    <string>Cascade Windows</string>
+   </property>
+  </action>
+  <action name="viewShowGridAction">
+   <property name="checkable">
+    <bool>true</bool>
+   </property>
+   <property name="checked">
+    <bool>true</bool>
+   </property>
+   <property name="text">
+    <string>Show &amp;Grid</string>
+   </property>
+   <property name="iconText">
+    <string>Show Grid</string>
+   </property>
+  </action>
+  <action name="viewShowRecordNumbersAction">
+   <property name="checkable">
+    <bool>true</bool>
+   </property>
+   <property name="checked">
+    <bool>true</bool>
+   </property>
+   <property name="text">
+    <string>Show Record &amp;Numbers</string>
+   </property>
+   <property name="iconText">
+    <string>Show Record Numbers</string>
+   </property>
+  </action>
+  <action name="viewReactionAction">
+   <property name="text">
+    <string>R&amp;eaction Appearance</string>
+   </property>
+   <property name="iconText">
+    <string>Reaction Appearance</string>
+   </property>
+   <property name="toolTip">
+    <string>Reaction Appearance Settings</string>
+   </property>
+  </action>
+  <action name="viewShowReactantsAction">
+   <property name="checkable">
+    <bool>true</bool>
+   </property>
+   <property name="checked">
+    <bool>true</bool>
+   </property>
+   <property name="text">
+    <string>Show &amp;Reactants</string>
+   </property>
+   <property name="iconText">
+    <string>Show Reactants</string>
+   </property>
+   <property name="toolTip">
+    <string>Show Reactants</string>
+   </property>
+  </action>
+  <action name="viewShowAgentsAction">
+   <property name="checkable">
+    <bool>true</bool>
+   </property>
+   <property name="checked">
+    <bool>true</bool>
+   </property>
+   <property name="text">
+    <string>Show &amp;Agents</string>
+   </property>
+   <property name="iconText">
+    <string>Show Agents</string>
+   </property>
+  </action>
+  <action name="viewShowProductsAction">
+   <property name="checkable">
+    <bool>true</bool>
+   </property>
+   <property name="checked">
+    <bool>true</bool>
+   </property>
+   <property name="text">
+    <string>Show &amp;Products</string>
+   </property>
+   <property name="iconText">
+    <string>Show Products</string>
+   </property>
+  </action>
+  <action name="viewShowReactionPlusSignsAction">
+   <property name="checkable">
+    <bool>true</bool>
+   </property>
+   <property name="checked">
+    <bool>true</bool>
+   </property>
+   <property name="text">
+    <string>Show Pl&amp;us Signs</string>
+   </property>
+   <property name="iconText">
+    <string>Show Plus Signs</string>
+   </property>
+   <property name="toolTip">
+    <string>Show Reaction Component Plus Signs</string>
+   </property>
+  </action>
+  <action name="viewAtomAction">
+   <property name="text">
+    <string>&amp;Atom Appearance</string>
+   </property>
+   <property name="iconText">
+    <string>Atom Appearance</string>
+   </property>
+   <property name="toolTip">
+    <string>Atom Appearance Settings</string>
+   </property>
+  </action>
+  <action name="viewBondAction">
+   <property name="text">
+    <string>&amp;Bond Appearance</string>
+   </property>
+   <property name="iconText">
+    <string>Bond Appearance</string>
+   </property>
+   <property name="toolTip">
+    <string>Bond Appearance Settings</string>
+   </property>
+  </action>
+  <action name="viewShowCarbonsAction">
+   <property name="checkable">
+    <bool>true</bool>
+   </property>
+   <property name="text">
+    <string>Show Carbon &amp;Symbols</string>
+   </property>
+   <property name="iconText">
+    <string>Show Carbon Symbols</string>
+   </property>
+  </action>
+  <action name="viewShowChargesAction">
+   <property name="checkable">
+    <bool>true</bool>
+   </property>
+   <property name="checked">
+    <bool>true</bool>
+   </property>
+   <property name="text">
+    <string>Show Formal &amp;Charges</string>
+   </property>
+   <property name="iconText">
+    <string>Show Formal Charges</string>
+   </property>
+  </action>
+  <action name="viewShowIsotopesAction">
+   <property name="checkable">
+    <bool>true</bool>
+   </property>
+   <property name="checked">
+    <bool>true</bool>
+   </property>
+   <property name="text">
+    <string>Show &amp;Isotopic Mass</string>
+   </property>
+   <property name="iconText">
+    <string>Show Isotopic Mass</string>
+   </property>
+  </action>
+  <action name="viewShowExplicitHsAction">
+   <property name="checkable">
+    <bool>true</bool>
+   </property>
+   <property name="text">
+    <string>Show E&amp;xplicit Hydrogens</string>
+   </property>
+   <property name="iconText">
+    <string>Show Explicit Hydrogens</string>
+   </property>
+  </action>
+  <action name="viewShowHCountsAction">
+   <property name="checkable">
+    <bool>true</bool>
+   </property>
+   <property name="text">
+    <string>Show &amp;Hydrogen Counts</string>
+   </property>
+   <property name="iconText">
+    <string>Show Hydrogen Counts</string>
+   </property>
+  </action>
+  <action name="viewShowNonCHCountsAction">
+   <property name="checkable">
+    <bool>true</bool>
+   </property>
+   <property name="checked">
+    <bool>true</bool>
+   </property>
+   <property name="text">
+    <string>Show &amp;Non-Carbon Hydrogen Counts</string>
+   </property>
+   <property name="iconText">
+    <string>Show Non-Carbon Hydrogen Counts</string>
+   </property>
+  </action>
+  <action name="viewShowAtomQueryInfosAction">
+   <property name="checkable">
+    <bool>true</bool>
+   </property>
+   <property name="checked">
+    <bool>true</bool>
+   </property>
+   <property name="text">
+    <string>Show &amp;Query Information</string>
+   </property>
+   <property name="iconText">
+    <string>Show Query Information</string>
+   </property>
+  </action>
+  <action name="viewShowAtomReactionInfosAction">
+   <property name="checkable">
+    <bool>true</bool>
+   </property>
+   <property name="checked">
+    <bool>true</bool>
+   </property>
+   <property name="text">
+    <string>Show Atom-Atom-&amp;Mappings</string>
+   </property>
+   <property name="iconText">
+    <string>Show Atom-Atom-Mappings</string>
+   </property>
+  </action>
+  <action name="viewShowRadicalElectronsAction">
+   <property name="checkable">
+    <bool>true</bool>
+   </property>
+   <property name="checked">
+    <bool>true</bool>
+   </property>
+   <property name="text">
+    <string>Show Unpaired &amp;Electrons</string>
+   </property>
+   <property name="iconText">
+    <string>Show Unpaired Electrons</string>
+   </property>
+  </action>
+  <action name="viewShowBondQueryInfosAction">
+   <property name="checkable">
+    <bool>true</bool>
+   </property>
+   <property name="checked">
+    <bool>true</bool>
+   </property>
+   <property name="text">
+    <string>Show &amp;Query Information</string>
+   </property>
+   <property name="iconText">
+    <string>Show Query Information</string>
+   </property>
+  </action>
+  <action name="viewShowBondReactionInfosAction">
+   <property name="checkable">
+    <bool>true</bool>
+   </property>
+   <property name="checked">
+    <bool>true</bool>
+   </property>
+   <property name="text">
+    <string>Show &amp;Reaction Center Marks</string>
+   </property>
+   <property name="iconText">
+    <string>Show Reaction Center Marks</string>
+   </property>
+  </action>
+  <action name="viewShowBondStereoAction">
+   <property name="checkable">
+    <bool>true</bool>
+   </property>
+   <property name="checked">
+    <bool>true</bool>
+   </property>
+   <property name="text">
+    <string>Show Bond &amp;Stereo</string>
+   </property>
+   <property name="iconText">
+    <string>Show Bond Stereo</string>
+   </property>
+  </action>
+  <action name="editSettingsAction">
+   <property name="icon">
+    <iconset resource="Resources.qrc">
+     <normaloff>:/Icons/settings.png</normaloff>:/Icons/settings.png</iconset>
+   </property>
+   <property name="text">
+    <string>&amp;Settings...</string>
+   </property>
+   <property name="iconText">
+    <string>Edit Settings</string>
+   </property>
+   <property name="toolTip">
+    <string>Edit Settings</string>
+   </property>
+  </action>
+  <action name="editSelectAllAction">
+   <property name="text">
+    <string>Select A&amp;ll</string>
+   </property>
+   <property name="iconText">
+    <string>Select All Records</string>
+   </property>
+   <property name="shortcut">
+    <string>Ctrl+A</string>
+   </property>
+  </action>
+  <action name="editInvertSelectionAction">
+   <property name="text">
+    <string>&amp;Invert Selection</string>
+   </property>
+   <property name="iconText">
+    <string>Invert Record Selection</string>
+   </property>
+   <property name="shortcut">
+    <string>Ctrl+I</string>
+   </property>
+  </action>
+  <action name="editRemoveSelectionAction">
+   <property name="icon">
+    <iconset resource="Resources.qrc">
+     <normaloff>:/Icons/cut.png</normaloff>:/Icons/cut.png</iconset>
+   </property>
+   <property name="text">
+    <string>&amp;Remove Selected</string>
+   </property>
+   <property name="iconText">
+    <string>Remove Selected Records</string>
+   </property>
+   <property name="shortcut">
+    <string>Ctrl+X</string>
+   </property>
+  </action>
+  <action name="editClearAction">
+   <property name="icon">
+    <iconset resource="Resources.qrc">
+     <normaloff>:/Icons/clear.png</normaloff>:/Icons/clear.png</iconset>
+   </property>
+   <property name="text">
+    <string>&amp;Clear</string>
+   </property>
+   <property name="iconText">
+    <string>Clear Dataset</string>
+   </property>
+   <property name="toolTip">
+    <string>Clear Dataset</string>
+   </property>
+  </action>
+  <action name="fileSaveAsAction">
+   <property name="icon">
+    <iconset resource="Resources.qrc">
+     <normaloff>:/Icons/saveas.png</normaloff>:/Icons/saveas.png</iconset>
+   </property>
+   <property name="text">
+    <string>&amp;Save As...</string>
+   </property>
+   <property name="iconText">
+    <string>Save As</string>
+   </property>
+   <property name="toolTip">
+    <string>Save Records As</string>
+   </property>
+   <property name="shortcut">
+    <string>Ctrl+S</string>
+   </property>
+  </action>
+  <action name="Action">
+   <property name="iconText">
+    <string>Unnamed</string>
+   </property>
+  </action>
+  <action name="editSelectRangeAction">
+   <property name="text">
+    <string>Select/Unselect Ran&amp;ge...</string>
+   </property>
+   <property name="iconText">
+    <string>Select/Unselect Record Range</string>
+   </property>
+   <property name="toolTip">
+    <string>Select/Unselect Record Range</string>
+   </property>
+   <property name="shortcut">
+    <string>Ctrl+R</string>
+   </property>
+  </action>
+  <action name="editUndoAction">
+   <property name="icon">
+    <iconset resource="Resources.qrc">
+     <normaloff>:/Icons/undo.png</normaloff>:/Icons/undo.png</iconset>
+   </property>
+   <property name="text">
+    <string>&amp;Undo</string>
+   </property>
+   <property name="iconText">
+    <string>Undo Last Action</string>
+   </property>
+   <property name="shortcut">
+    <string>Ctrl+Z</string>
+   </property>
+  </action>
+  <action name="editRedoAction">
+   <property name="icon">
+    <iconset resource="Resources.qrc">
+     <normaloff>:/Icons/redo.png</normaloff>:/Icons/redo.png</iconset>
+   </property>
+   <property name="text">
+    <string>&amp;Redo</string>
+   </property>
+   <property name="iconText">
+    <string>Redo Last Action</string>
+   </property>
+   <property name="shortcut">
+    <string>Ctrl+Y</string>
+   </property>
+  </action>
+  <action name="fileSaveSelectionAsAction">
+   <property name="icon">
+    <iconset resource="Resources.qrc">
+     <normaloff>:/Icons/saveas.png</normaloff>:/Icons/saveas.png</iconset>
+   </property>
+   <property name="text">
+    <string>Save S&amp;election As...</string>
+   </property>
+   <property name="iconText">
+    <string>Save Selection As...</string>
+   </property>
+   <property name="toolTip">
+    <string>Save Selected Records As</string>
+   </property>
+   <property name="shortcut">
+    <string>Ctrl+Shift+S</string>
+   </property>
+  </action>
+  <action name="editSaveSettingsAction">
+   <property name="text">
+    <string>S&amp;ave Settings</string>
+   </property>
+   <property name="iconText">
+    <string>Save Settings</string>
+   </property>
+  </action>
+  <action name="clearRecentFilesAction">
+   <property name="text">
+    <string>&amp;Clear List</string>
+   </property>
+   <property name="toolTip">
+    <string>Clear Recent Files</string>
+   </property>
+  </action>
+  <actiongroup name="viewHorAlignmentActionGroup">
+   <action name="viewLeftAlignmentAction">
+    <property name="checkable">
+     <bool>true</bool>
+    </property>
+    <property name="text">
+     <string>&amp;Left</string>
+    </property>
+    <property name="iconText">
+     <string>Left</string>
+    </property>
+    <property name="toolTip">
+     <string>Align Left</string>
+    </property>
+   </action>
+   <action name="viewHorCenterAlignmentAction">
+    <property name="checkable">
+     <bool>true</bool>
+    </property>
+    <property name="checked">
+     <bool>false</bool>
+    </property>
+    <property name="text">
+     <string>&amp;Center</string>
+    </property>
+    <property name="iconText">
+     <string>Center</string>
+    </property>
+    <property name="toolTip">
+     <string>Align Center</string>
+    </property>
+   </action>
+   <action name="viewRightAlignmentAction">
+    <property name="checkable">
+     <bool>true</bool>
+    </property>
+    <property name="text">
+     <string>&amp;Right</string>
+    </property>
+    <property name="iconText">
+     <string>Right</string>
+    </property>
+    <property name="toolTip">
+     <string>Align Right</string>
+    </property>
+   </action>
+  </actiongroup>
+  <actiongroup name="viewVerAlignmentActionGroup">
+   <action name="viewTopAlignmentAction">
+    <property name="checkable">
+     <bool>true</bool>
+    </property>
+    <property name="text">
+     <string>&amp;Top</string>
+    </property>
+    <property name="iconText">
+     <string>Top</string>
+    </property>
+    <property name="toolTip">
+     <string>Align Top</string>
+    </property>
+   </action>
+   <action name="viewVerCenterAlignmentAction">
+    <property name="checkable">
+     <bool>true</bool>
+    </property>
+    <property name="checked">
+     <bool>false</bool>
+    </property>
+    <property name="text">
+     <string>&amp;Center</string>
+    </property>
+    <property name="iconText">
+     <string>Center</string>
+    </property>
+    <property name="toolTip">
+     <string>Align Center</string>
+    </property>
+   </action>
+   <action name="viewBottomAlignmentAction">
+    <property name="checkable">
+     <bool>true</bool>
+    </property>
+    <property name="text">
+     <string>&amp;Bottom</string>
+    </property>
+    <property name="iconText">
+     <string>Bottom</string>
+    </property>
+    <property name="toolTip">
+     <string>Align Bottom</string>
+    </property>
+   </action>
+  </actiongroup>
+  <actiongroup name="viewSizeAdjustmentActionGroup">
+   <action name="viewBestFitSizeAdjustmentAction">
+    <property name="checkable">
+     <bool>true</bool>
+    </property>
+    <property name="text">
+     <string>Best &amp;Fit</string>
+    </property>
+    <property name="iconText">
+     <string>Best Fit</string>
+    </property>
+    <property name="toolTip">
+     <string>Scale for Best Fit</string>
+    </property>
+   </action>
+   <action name="viewVisibilitySizeAdjustmentAction">
+    <property name="checkable">
+     <bool>true</bool>
+    </property>
+    <property name="checked">
+     <bool>false</bool>
+    </property>
+    <property name="text">
+     <string>For &amp;Visibility</string>
+    </property>
+    <property name="iconText">
+     <string>For Visibility</string>
+    </property>
+    <property name="toolTip">
+     <string>Scale to ensure Visibility</string>
+    </property>
+   </action>
+   <action name="viewNoSizeAdjustmentAction">
+    <property name="checkable">
+     <bool>true</bool>
+    </property>
+    <property name="text">
+     <string>&amp;None</string>
+    </property>
+    <property name="iconText">
+     <string>None</string>
+    </property>
+    <property name="toolTip">
+     <string>No Scaling</string>
+    </property>
+   </action>
+  </actiongroup>
+  <actiongroup name="viewArrowStyleActionGroup">
+   <action name="viewNoReactionArrowAction">
+    <property name="checkable">
+     <bool>true</bool>
+    </property>
+    <property name="text">
+     <string>&amp;No Arrow</string>
+    </property>
+    <property name="iconText">
+     <string>No Arrow</string>
+    </property>
+    <property name="toolTip">
+     <string>No Reaction Arrow</string>
+    </property>
+   </action>
+   <action name="viewStandardReactionArrowAction">
+    <property name="checkable">
+     <bool>true</bool>
+    </property>
+    <property name="checked">
+     <bool>false</bool>
+    </property>
+    <property name="text">
+     <string>&amp;Filled</string>
+    </property>
+    <property name="iconText">
+     <string>Filled</string>
+    </property>
+    <property name="toolTip">
+     <string>Filled Reaction Arrow</string>
+    </property>
+   </action>
+   <action name="viewHollowReactionArrowAction">
+    <property name="checkable">
+     <bool>true</bool>
+    </property>
+    <property name="text">
+     <string>&amp;Hollow</string>
+    </property>
+    <property name="iconText">
+     <string>Hollow</string>
+    </property>
+    <property name="toolTip">
+     <string>Hollow Reaction Arrow</string>
+    </property>
+   </action>
+  </actiongroup>
+  <actiongroup name="viewAgentAlignmentActionGroup">
+   <action name="viewTopAgentAlignmentAction">
+    <property name="checkable">
+     <bool>true</bool>
+    </property>
+    <property name="checked">
+     <bool>false</bool>
+    </property>
+    <property name="text">
+     <string>&amp;Top</string>
+    </property>
+    <property name="iconText">
+     <string>Top</string>
+    </property>
+    <property name="toolTip">
+     <string>Align Top</string>
+    </property>
+   </action>
+   <action name="viewBottomAgentAlignmentAction">
+    <property name="checkable">
+     <bool>true</bool>
+    </property>
+    <property name="checked">
+     <bool>false</bool>
+    </property>
+    <property name="text">
+     <string>&amp;Bottom</string>
+    </property>
+    <property name="iconText">
+     <string>Bottom</string>
+    </property>
+    <property name="toolTip">
+     <string>Align Bottom</string>
+    </property>
+   </action>
+   <action name="viewCenterAgentAlignmentAction">
+    <property name="checkable">
+     <bool>true</bool>
+    </property>
+    <property name="checked">
+     <bool>false</bool>
+    </property>
+    <property name="text">
+     <string>&amp;Center</string>
+    </property>
+    <property name="iconText">
+     <string>Center</string>
+    </property>
+    <property name="toolTip">
+     <string>Align Center</string>
+    </property>
+   </action>
+   <property name="exclusive">
+    <bool>true</bool>
+   </property>
+  </actiongroup>
+  <actiongroup name="viewAgentLayoutActionGroup">
+   <action name="viewLinearAgentLayoutStyleAction">
+    <property name="checkable">
+     <bool>true</bool>
+    </property>
+    <property name="text">
+     <string>&amp;Linear</string>
+    </property>
+    <property name="iconText">
+     <string>Linear</string>
+    </property>
+    <property name="toolTip">
+     <string>Linear Layout</string>
+    </property>
+   </action>
+   <action name="viewPackedAgentLayoutStyleAction">
+    <property name="checkable">
+     <bool>true</bool>
+    </property>
+    <property name="checked">
+     <bool>false</bool>
+    </property>
+    <property name="text">
+     <string>&amp;Packed</string>
+    </property>
+    <property name="iconText">
+     <string>Packed</string>
+    </property>
+    <property name="toolTip">
+     <string>Packed Layout</string>
+    </property>
+   </action>
+  </actiongroup>
+  <actiongroup name="viewAgentLayoutDirActionGroup">
+   <action name="viewHorAgentLayoutDirAction">
+    <property name="checkable">
+     <bool>true</bool>
+    </property>
+    <property name="checked">
+     <bool>false</bool>
+    </property>
+    <property name="text">
+     <string>&amp;Horizontal</string>
+    </property>
+    <property name="iconText">
+     <string>Horizontal</string>
+    </property>
+    <property name="toolTip">
+     <string>Layout Horizontal</string>
+    </property>
+   </action>
+   <action name="viewVerAgentLayoutDirAction">
+    <property name="checkable">
+     <bool>true</bool>
+    </property>
+    <property name="text">
+     <string>&amp;Vertical</string>
+    </property>
+    <property name="iconText">
+     <string>Vertical</string>
+    </property>
+    <property name="toolTip">
+     <string>Layout Vertical</string>
+    </property>
+   </action>
+  </actiongroup>
+  <actiongroup name="viewComponentLayoutActionGroup">
+   <action name="viewLinearComponentLayoutStyleAction">
+    <property name="checkable">
+     <bool>true</bool>
+    </property>
+    <property name="text">
+     <string>&amp;Linear</string>
+    </property>
+    <property name="iconText">
+     <string>Linear</string>
+    </property>
+    <property name="toolTip">
+     <string>Linear Layout</string>
+    </property>
+   </action>
+   <action name="viewPackedComponentLayoutStyleAction">
+    <property name="checkable">
+     <bool>true</bool>
+    </property>
+    <property name="checked">
+     <bool>false</bool>
+    </property>
+    <property name="text">
+     <string>&amp;Packed</string>
+    </property>
+    <property name="iconText">
+     <string>Packed</string>
+    </property>
+    <property name="toolTip">
+     <string>Packed Layout</string>
+    </property>
+   </action>
+  </actiongroup>
+  <actiongroup name="viewComponentLayoutDirActionGroup">
+   <action name="viewHorComponentLayoutDirAction">
+    <property name="checkable">
+     <bool>true</bool>
+    </property>
+    <property name="checked">
+     <bool>false</bool>
+    </property>
+    <property name="text">
+     <string>&amp;Horizontal</string>
+    </property>
+    <property name="iconText">
+     <string>Horizontal</string>
+    </property>
+    <property name="toolTip">
+     <string>Layout Horizontal</string>
+    </property>
+   </action>
+   <action name="viewVerComponentLayoutDirAction">
+    <property name="checkable">
+     <bool>true</bool>
+    </property>
+    <property name="text">
+     <string>&amp;Vertical</string>
+    </property>
+    <property name="iconText">
+     <string>Vertical</string>
+    </property>
+    <property name="toolTip">
+     <string>Layout Vertical</string>
+    </property>
+   </action>
+  </actiongroup>
+ </widget>
+ <layoutdefault spacing="6" margin="11"/>
+ <resources>
+  <include location="Resources.qrc"/>
+ </resources>
+ <connections>
+  <connection>
+   <sender>fileOpenAction</sender>
+   <signal>triggered()</signal>
+   <receiver>MainWindow</receiver>
+   <slot>fileOpen()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>-1</x>
+     <y>-1</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>20</x>
+     <y>20</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>filePrintAction</sender>
+   <signal>triggered()</signal>
+   <receiver>MainWindow</receiver>
+   <slot>filePrint()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>-1</x>
+     <y>-1</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>20</x>
+     <y>20</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>helpAboutAction</sender>
+   <signal>triggered()</signal>
+   <receiver>MainWindow</receiver>
+   <slot>helpAbout()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>-1</x>
+     <y>-1</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>20</x>
+     <y>20</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>fileCloseAction</sender>
+   <signal>triggered()</signal>
+   <receiver>MainWindow</receiver>
+   <slot>close()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>-1</x>
+     <y>-1</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>20</x>
+     <y>20</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>fileQuitAction</sender>
+   <signal>triggered()</signal>
+   <receiver>MainWindow</receiver>
+   <slot>fileQuit()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>-1</x>
+     <y>-1</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>20</x>
+     <y>20</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>fileNewAction</sender>
+   <signal>triggered()</signal>
+   <receiver>MainWindow</receiver>
+   <slot>fileNew()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>-1</x>
+     <y>-1</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>20</x>
+     <y>20</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>editAppendFilesAction</sender>
+   <signal>triggered()</signal>
+   <receiver>MainWindow</receiver>
+   <slot>fileAppend()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>-1</x>
+     <y>-1</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>20</x>
+     <y>20</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>windowTileAction</sender>
+   <signal>triggered()</signal>
+   <receiver>MainWindow</receiver>
+   <slot>tileWindows()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>-1</x>
+     <y>-1</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>20</x>
+     <y>20</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>windowCascadeAction</sender>
+   <signal>triggered()</signal>
+   <receiver>MainWindow</receiver>
+   <slot>cascadeWindows()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>-1</x>
+     <y>-1</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>20</x>
+     <y>20</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>viewLeftAlignmentAction</sender>
+   <signal>triggered()</signal>
+   <receiver>MainWindow</receiver>
+   <slot>viewAlignmentChanged()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>-1</x>
+     <y>-1</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>20</x>
+     <y>20</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>viewHorCenterAlignmentAction</sender>
+   <signal>triggered()</signal>
+   <receiver>MainWindow</receiver>
+   <slot>viewAlignmentChanged()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>-1</x>
+     <y>-1</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>20</x>
+     <y>20</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>viewRightAlignmentAction</sender>
+   <signal>triggered()</signal>
+   <receiver>MainWindow</receiver>
+   <slot>viewAlignmentChanged()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>-1</x>
+     <y>-1</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>20</x>
+     <y>20</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>viewVerCenterAlignmentAction</sender>
+   <signal>triggered()</signal>
+   <receiver>MainWindow</receiver>
+   <slot>viewAlignmentChanged()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>-1</x>
+     <y>-1</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>20</x>
+     <y>20</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>viewTopAlignmentAction</sender>
+   <signal>triggered()</signal>
+   <receiver>MainWindow</receiver>
+   <slot>viewAlignmentChanged()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>-1</x>
+     <y>-1</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>20</x>
+     <y>20</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>viewBottomAlignmentAction</sender>
+   <signal>triggered()</signal>
+   <receiver>MainWindow</receiver>
+   <slot>viewAlignmentChanged()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>-1</x>
+     <y>-1</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>20</x>
+     <y>20</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>viewBestFitSizeAdjustmentAction</sender>
+   <signal>triggered()</signal>
+   <receiver>MainWindow</receiver>
+   <slot>viewSizeAdjustmentChanged()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>-1</x>
+     <y>-1</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>20</x>
+     <y>20</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>viewNoSizeAdjustmentAction</sender>
+   <signal>triggered()</signal>
+   <receiver>MainWindow</receiver>
+   <slot>viewSizeAdjustmentChanged()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>-1</x>
+     <y>-1</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>20</x>
+     <y>20</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>viewVisibilitySizeAdjustmentAction</sender>
+   <signal>triggered()</signal>
+   <receiver>MainWindow</receiver>
+   <slot>viewSizeAdjustmentChanged()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>-1</x>
+     <y>-1</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>20</x>
+     <y>20</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>viewNoReactionArrowAction</sender>
+   <signal>triggered()</signal>
+   <receiver>MainWindow</receiver>
+   <slot>reactionArrowStyleChanged()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>-1</x>
+     <y>-1</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>20</x>
+     <y>20</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>viewStandardReactionArrowAction</sender>
+   <signal>triggered()</signal>
+   <receiver>MainWindow</receiver>
+   <slot>reactionArrowStyleChanged()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>-1</x>
+     <y>-1</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>20</x>
+     <y>20</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>viewCenterAgentAlignmentAction</sender>
+   <signal>triggered()</signal>
+   <receiver>MainWindow</receiver>
+   <slot>reactionAgentAlignmentChanged()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>-1</x>
+     <y>-1</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>20</x>
+     <y>20</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>viewBottomAgentAlignmentAction</sender>
+   <signal>triggered()</signal>
+   <receiver>MainWindow</receiver>
+   <slot>reactionAgentAlignmentChanged()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>-1</x>
+     <y>-1</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>20</x>
+     <y>20</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>viewTopAgentAlignmentAction</sender>
+   <signal>triggered()</signal>
+   <receiver>MainWindow</receiver>
+   <slot>reactionAgentAlignmentChanged()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>-1</x>
+     <y>-1</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>20</x>
+     <y>20</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>viewLinearAgentLayoutStyleAction</sender>
+   <signal>triggered()</signal>
+   <receiver>MainWindow</receiver>
+   <slot>reactionAgentLayoutStyleChanged()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>-1</x>
+     <y>-1</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>20</x>
+     <y>20</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>viewPackedAgentLayoutStyleAction</sender>
+   <signal>triggered()</signal>
+   <receiver>MainWindow</receiver>
+   <slot>reactionAgentLayoutStyleChanged()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>-1</x>
+     <y>-1</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>20</x>
+     <y>20</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>viewHorAgentLayoutDirAction</sender>
+   <signal>triggered()</signal>
+   <receiver>MainWindow</receiver>
+   <slot>reactionAgentLayoutDirChanged()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>-1</x>
+     <y>-1</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>20</x>
+     <y>20</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>viewVerAgentLayoutDirAction</sender>
+   <signal>triggered()</signal>
+   <receiver>MainWindow</receiver>
+   <slot>reactionAgentLayoutDirChanged()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>-1</x>
+     <y>-1</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>20</x>
+     <y>20</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>viewPackedComponentLayoutStyleAction</sender>
+   <signal>triggered()</signal>
+   <receiver>MainWindow</receiver>
+   <slot>reactionCompLayoutStyleChanged()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>-1</x>
+     <y>-1</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>20</x>
+     <y>20</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>viewLinearComponentLayoutStyleAction</sender>
+   <signal>triggered()</signal>
+   <receiver>MainWindow</receiver>
+   <slot>reactionCompLayoutStyleChanged()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>-1</x>
+     <y>-1</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>20</x>
+     <y>20</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>viewHorComponentLayoutDirAction</sender>
+   <signal>triggered()</signal>
+   <receiver>MainWindow</receiver>
+   <slot>reactionCompLayoutDirChanged()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>-1</x>
+     <y>-1</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>20</x>
+     <y>20</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>viewVerComponentLayoutDirAction</sender>
+   <signal>triggered()</signal>
+   <receiver>MainWindow</receiver>
+   <slot>reactionCompLayoutDirChanged()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>-1</x>
+     <y>-1</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>20</x>
+     <y>20</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>viewShowAgentsAction</sender>
+   <signal>toggled(bool)</signal>
+   <receiver>MainWindow</receiver>
+   <slot>viewReactionSettingsChanged(bool)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>-1</x>
+     <y>-1</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>20</x>
+     <y>20</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>viewShowReactantsAction</sender>
+   <signal>toggled(bool)</signal>
+   <receiver>MainWindow</receiver>
+   <slot>viewReactionSettingsChanged(bool)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>-1</x>
+     <y>-1</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>20</x>
+     <y>20</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>viewShowProductsAction</sender>
+   <signal>toggled(bool)</signal>
+   <receiver>MainWindow</receiver>
+   <slot>viewReactionSettingsChanged(bool)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>-1</x>
+     <y>-1</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>20</x>
+     <y>20</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>viewShowReactionPlusSignsAction</sender>
+   <signal>toggled(bool)</signal>
+   <receiver>MainWindow</receiver>
+   <slot>viewReactionSettingsChanged(bool)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>-1</x>
+     <y>-1</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>20</x>
+     <y>20</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>viewShowAtomQueryInfosAction</sender>
+   <signal>toggled(bool)</signal>
+   <receiver>MainWindow</receiver>
+   <slot>viewAtomSettingsChanged(bool)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>-1</x>
+     <y>-1</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>20</x>
+     <y>20</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>viewShowAtomReactionInfosAction</sender>
+   <signal>toggled(bool)</signal>
+   <receiver>MainWindow</receiver>
+   <slot>viewAtomSettingsChanged(bool)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>-1</x>
+     <y>-1</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>20</x>
+     <y>20</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>viewShowBondQueryInfosAction</sender>
+   <signal>toggled(bool)</signal>
+   <receiver>MainWindow</receiver>
+   <slot>viewBondSettingsChanged(bool)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>-1</x>
+     <y>-1</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>20</x>
+     <y>20</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>viewShowBondReactionInfosAction</sender>
+   <signal>toggled(bool)</signal>
+   <receiver>MainWindow</receiver>
+   <slot>viewBondSettingsChanged(bool)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>-1</x>
+     <y>-1</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>20</x>
+     <y>20</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>viewShowBondStereoAction</sender>
+   <signal>toggled(bool)</signal>
+   <receiver>MainWindow</receiver>
+   <slot>viewBondSettingsChanged(bool)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>-1</x>
+     <y>-1</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>20</x>
+     <y>20</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>viewShowCarbonsAction</sender>
+   <signal>toggled(bool)</signal>
+   <receiver>MainWindow</receiver>
+   <slot>viewAtomSettingsChanged(bool)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>-1</x>
+     <y>-1</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>20</x>
+     <y>20</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>viewShowChargesAction</sender>
+   <signal>toggled(bool)</signal>
+   <receiver>MainWindow</receiver>
+   <slot>viewAtomSettingsChanged(bool)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>-1</x>
+     <y>-1</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>20</x>
+     <y>20</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>viewShowExplicitHsAction</sender>
+   <signal>toggled(bool)</signal>
+   <receiver>MainWindow</receiver>
+   <slot>viewAtomSettingsChanged(bool)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>-1</x>
+     <y>-1</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>20</x>
+     <y>20</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>viewShowHCountsAction</sender>
+   <signal>toggled(bool)</signal>
+   <receiver>MainWindow</receiver>
+   <slot>viewAtomSettingsChanged(bool)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>-1</x>
+     <y>-1</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>20</x>
+     <y>20</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>viewShowIsotopesAction</sender>
+   <signal>toggled(bool)</signal>
+   <receiver>MainWindow</receiver>
+   <slot>viewAtomSettingsChanged(bool)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>-1</x>
+     <y>-1</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>20</x>
+     <y>20</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>viewShowNonCHCountsAction</sender>
+   <signal>toggled(bool)</signal>
+   <receiver>MainWindow</receiver>
+   <slot>viewAtomSettingsChanged(bool)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>-1</x>
+     <y>-1</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>20</x>
+     <y>20</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>viewShowRadicalElectronsAction</sender>
+   <signal>toggled(bool)</signal>
+   <receiver>MainWindow</receiver>
+   <slot>viewAtomSettingsChanged(bool)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>-1</x>
+     <y>-1</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>20</x>
+     <y>20</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>editSettingsAction</sender>
+   <signal>triggered()</signal>
+   <receiver>MainWindow</receiver>
+   <slot>editSettings()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>-1</x>
+     <y>-1</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>20</x>
+     <y>20</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>viewHollowReactionArrowAction</sender>
+   <signal>triggered()</signal>
+   <receiver>MainWindow</receiver>
+   <slot>reactionArrowStyleChanged()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>-1</x>
+     <y>-1</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>20</x>
+     <y>20</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>fileSaveAsAction</sender>
+   <signal>triggered()</signal>
+   <receiver>MainWindow</receiver>
+   <slot>fileSaveAs()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>-1</x>
+     <y>-1</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>20</x>
+     <y>20</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>editSelectRangeAction</sender>
+   <signal>triggered()</signal>
+   <receiver>MainWindow</receiver>
+   <slot>selectRecordRange()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>-1</x>
+     <y>-1</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>20</x>
+     <y>20</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>fileSaveSelectionAsAction</sender>
+   <signal>triggered()</signal>
+   <receiver>MainWindow</receiver>
+   <slot>fileSaveSelectionAs()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>-1</x>
+     <y>-1</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>20</x>
+     <y>20</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>editSaveSettingsAction</sender>
+   <signal>triggered()</signal>
+   <receiver>MainWindow</receiver>
+   <slot>saveSettings()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>-1</x>
+     <y>-1</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>20</x>
+     <y>20</y>
+    </hint>
+   </hints>
+  </connection>
+ </connections>
+</ui>

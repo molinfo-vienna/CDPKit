@@ -1,0 +1,294 @@
+/* -*- mode: java; tab-width: 4 -*- */
+
+package CDPL.Vis;
+
+/**
+ * \brief ControlParameter.
+ */
+public class ControlParameter extends Boost.Python.instance {
+
+	/**
+	 * \brief SHOW_EXPLICIT_HYDROGENS.
+	 */
+	public static Base.LookupKey SHOW_EXPLICIT_HYDROGENS;
+
+	/**
+	 * \brief BOND_COLOR.
+	 */
+	public static Base.LookupKey BOND_COLOR;
+
+	/**
+	 * \brief TRIPLE_BOND_TRIM_LENGTH.
+	 */
+	public static Base.LookupKey TRIPLE_BOND_TRIM_LENGTH;
+
+	/**
+	 * \brief ATOM_LABEL_FONT.
+	 */
+	public static Base.LookupKey ATOM_LABEL_FONT;
+
+	/**
+	 * \brief DOUBLE_BOND_TRIM_LENGTH.
+	 */
+	public static Base.LookupKey DOUBLE_BOND_TRIM_LENGTH;
+
+	/**
+	 * \brief REACTION_COMPONENT_LAYOUT_DIRECTION.
+	 */
+	public static Base.LookupKey REACTION_COMPONENT_LAYOUT_DIRECTION;
+
+	/**
+	 * \brief SHOW_NON_CARBON_HYDROGEN_COUNTS.
+	 */
+	public static Base.LookupKey SHOW_NON_CARBON_HYDROGEN_COUNTS;
+
+	/**
+	 * \brief REACTION_ARROW_HEAD_LENGTH.
+	 */
+	public static Base.LookupKey REACTION_ARROW_HEAD_LENGTH;
+
+	/**
+	 * \brief BOND_LABEL_FONT.
+	 */
+	public static Base.LookupKey BOND_LABEL_FONT;
+
+	/**
+	 * \brief REACTION_ARROW_LINE_WIDTH.
+	 */
+	public static Base.LookupKey REACTION_ARROW_LINE_WIDTH;
+
+	/**
+	 * \brief REACTION_COMPONENT_LAYOUT.
+	 */
+	public static Base.LookupKey REACTION_COMPONENT_LAYOUT;
+
+	/**
+	 * \brief BOND_LABEL_MARGIN.
+	 */
+	public static Base.LookupKey BOND_LABEL_MARGIN;
+
+	/**
+	 * \brief SHOW_ATOM_REACTION_INFOS.
+	 */
+	public static Base.LookupKey SHOW_ATOM_REACTION_INFOS;
+
+	/**
+	 * \brief REACTION_ARROW_HEAD_WIDTH.
+	 */
+	public static Base.LookupKey REACTION_ARROW_HEAD_WIDTH;
+
+	/**
+	 * \brief SHOW_STEREO_BONDS.
+	 */
+	public static Base.LookupKey SHOW_STEREO_BONDS;
+
+	/**
+	 * \brief REACTION_CENTER_LINE_SPACING.
+	 */
+	public static Base.LookupKey REACTION_CENTER_LINE_SPACING;
+
+	/**
+	 * \brief BOND_LINE_SPACING.
+	 */
+	public static Base.LookupKey BOND_LINE_SPACING;
+
+	/**
+	 * \brief SHOW_CARBONS.
+	 */
+	public static Base.LookupKey SHOW_CARBONS;
+
+	/**
+	 * \brief REACTION_ARROW_STYLE.
+	 */
+	public static Base.LookupKey REACTION_ARROW_STYLE;
+
+	/**
+	 * \brief USE_CALCULATED_ATOM_COORDINATES.
+	 */
+	public static Base.LookupKey USE_CALCULATED_ATOM_COORDINATES;
+
+	/**
+	 * \brief STEREO_BOND_HASH_SPACING.
+	 */
+	public static Base.LookupKey STEREO_BOND_HASH_SPACING;
+
+	/**
+	 * \brief BOND_LINE_WIDTH.
+	 */
+	public static Base.LookupKey BOND_LINE_WIDTH;
+
+	/**
+	 * \brief SHOW_REACTION_REACTANTS.
+	 */
+	public static Base.LookupKey SHOW_REACTION_REACTANTS;
+
+	/**
+	 * \brief SHOW_REACTION_PRODUCTS.
+	 */
+	public static Base.LookupKey SHOW_REACTION_PRODUCTS;
+
+	/**
+	 * \brief REACTION_PLUS_SIGN_COLOR.
+	 */
+	public static Base.LookupKey REACTION_PLUS_SIGN_COLOR;
+
+	/**
+	 * \brief REACTION_ARROW_LENGTH.
+	 */
+	public static Base.LookupKey REACTION_ARROW_LENGTH;
+
+	/**
+	 * \brief REACTION_CENTER_LINE_LENGTH.
+	 */
+	public static Base.LookupKey REACTION_CENTER_LINE_LENGTH;
+
+	/**
+	 * \brief ATOM_COLOR.
+	 */
+	public static Base.LookupKey ATOM_COLOR;
+
+	/**
+	 * \brief REACTION_ARROW_SHAFT_WIDTH.
+	 */
+	public static Base.LookupKey REACTION_ARROW_SHAFT_WIDTH;
+
+	/**
+	 * \brief REACTION_PLUS_SIGN_LINE_WIDTH.
+	 */
+	public static Base.LookupKey REACTION_PLUS_SIGN_LINE_WIDTH;
+
+	/**
+	 * \brief STEREO_BOND_WEDGE_WIDTH.
+	 */
+	public static Base.LookupKey STEREO_BOND_WEDGE_WIDTH;
+
+	/**
+	 * \brief SHOW_BOND_REACTION_INFOS.
+	 */
+	public static Base.LookupKey SHOW_BOND_REACTION_INFOS;
+
+	/**
+	 * \brief REACTION_ARROW_COLOR.
+	 */
+	public static Base.LookupKey REACTION_ARROW_COLOR;
+
+	/**
+	 * \brief ATOM_LABEL_MARGIN.
+	 */
+	public static Base.LookupKey ATOM_LABEL_MARGIN;
+
+	/**
+	 * \brief REACTION_COMPONENT_MARGIN.
+	 */
+	public static Base.LookupKey REACTION_COMPONENT_MARGIN;
+
+	/**
+	 * \brief SECONDARY_ATOM_LABEL_FONT.
+	 */
+	public static Base.LookupKey SECONDARY_ATOM_LABEL_FONT;
+
+	/**
+	 * \brief VIEWPORT.
+	 */
+	public static Base.LookupKey VIEWPORT;
+
+	/**
+	 * \brief SHOW_ATOM_QUERY_INFOS.
+	 */
+	public static Base.LookupKey SHOW_ATOM_QUERY_INFOS;
+
+	/**
+	 * \brief BOND_LABEL_SIZE.
+	 */
+	public static Base.LookupKey BOND_LABEL_SIZE;
+
+	/**
+	 * \brief SIZE_ADJUSTMENT.
+	 */
+	public static Base.LookupKey SIZE_ADJUSTMENT;
+
+	/**
+	 * \brief ATOM_COLOR_TABLE.
+	 */
+	public static Base.LookupKey ATOM_COLOR_TABLE;
+
+	/**
+	 * \brief REACTION_AGENT_LAYOUT_DIRECTION.
+	 */
+	public static Base.LookupKey REACTION_AGENT_LAYOUT_DIRECTION;
+
+	/**
+	 * \brief SHOW_REACTION_AGENTS.
+	 */
+	public static Base.LookupKey SHOW_REACTION_AGENTS;
+
+	/**
+	 * \brief SHOW_BOND_QUERY_INFOS.
+	 */
+	public static Base.LookupKey SHOW_BOND_QUERY_INFOS;
+
+	/**
+	 * \brief SECONDARY_ATOM_LABEL_SIZE.
+	 */
+	public static Base.LookupKey SECONDARY_ATOM_LABEL_SIZE;
+
+	/**
+	 * \brief REACTION_AGENT_LAYOUT.
+	 */
+	public static Base.LookupKey REACTION_AGENT_LAYOUT;
+
+	/**
+	 * \brief BOND_LENGTH.
+	 */
+	public static Base.LookupKey BOND_LENGTH;
+
+	/**
+	 * \brief REACTION_PLUS_SIGN_SIZE.
+	 */
+	public static Base.LookupKey REACTION_PLUS_SIGN_SIZE;
+
+	/**
+	 * \brief RADICAL_ELECTRON_DOT_SIZE.
+	 */
+	public static Base.LookupKey RADICAL_ELECTRON_DOT_SIZE;
+
+	/**
+	 * \brief SHOW_RADICAL_ELECTRONS.
+	 */
+	public static Base.LookupKey SHOW_RADICAL_ELECTRONS;
+
+	/**
+	 * \brief SHOW_ISOTOPES.
+	 */
+	public static Base.LookupKey SHOW_ISOTOPES;
+
+	/**
+	 * \brief REACTION_AGENT_ALIGNMENT.
+	 */
+	public static Base.LookupKey REACTION_AGENT_ALIGNMENT;
+
+	/**
+	 * \brief ATOM_LABEL_SIZE.
+	 */
+	public static Base.LookupKey ATOM_LABEL_SIZE;
+
+	/**
+	 * \brief BACKGROUND_COLOR.
+	 */
+	public static Base.LookupKey BACKGROUND_COLOR;
+
+	/**
+	 * \brief SHOW_CHARGES.
+	 */
+	public static Base.LookupKey SHOW_CHARGES;
+
+	/**
+	 * \brief ALIGNMENT.
+	 */
+	public static Base.LookupKey ALIGNMENT;
+
+	/**
+	 * \brief SHOW_HYDROGEN_COUNTS.
+	 */
+	public static Base.LookupKey SHOW_HYDROGEN_COUNTS;
+}

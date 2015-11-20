@@ -1,0 +1,44 @@
+/* -*- mode: java; tab-width: 4 -*- */
+
+package CDPL.Chem;
+
+/**
+ * \brief ConnectedSubstructureSet.
+ */
+public class ConnectedSubstructureSet extends FragmentList {
+
+	/**
+	 * \brief __init__.
+	 * \param self The <tt>%ConnectedSubstructureSet</tt> instance.
+	 */
+	public None __init__(object self) {}
+
+	/**
+	 * \brief __init__.
+	 * \param self The <tt>%ConnectedSubstructureSet</tt> instance.
+	 */
+	public None __init__(object self, MolecularGraph molgraph) {}
+
+	/**
+	 * \brief reset.
+	 * \param self The <tt>%ConnectedSubstructureSet</tt> instance.
+	 */
+	public None reset(ConnectedSubstructureSet self, MolecularGraph molgraph) {}
+
+	/**
+	 * \brief findSubstructures.
+	 * \param self The <tt>%ConnectedSubstructureSet</tt> instance.
+	 */
+	public None findSubstructures(ConnectedSubstructureSet self, int size) {}
+
+	/**
+	 * \brief getSubstructureSize.
+	 * \param self The <tt>%ConnectedSubstructureSet</tt> instance.
+	 */
+	public int getSubstructureSize(ConnectedSubstructureSet self) {}
+
+	/**
+	 * \brief substructureSize.
+	 */
+	public None substructureSize;
+}

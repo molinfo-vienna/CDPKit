@@ -1,0 +1,34 @@
+/* -*- mode: java; tab-width: 4 -*- */
+
+package CDPL.Chem;
+
+/**
+ * \brief AtomConfiguration.
+ */
+public class AtomConfiguration extends Boost.Python.instance {
+
+	/**
+	 * \brief UNDEF.
+	 */
+	public static int UNDEF = 0;
+
+	/**
+	 * \brief NONE.
+	 */
+	public static int NONE = 1;
+
+	/**
+	 * \brief S.
+	 */
+	public static int S = 4;
+
+	/**
+	 * \brief R.
+	 */
+	public static int R = 2;
+
+	/**
+	 * \brief EITHER.
+	 */
+	public static int EITHER = 8;
+}

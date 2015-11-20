@@ -1,0 +1,27 @@
+/* -*- mode: java; tab-width: 4 -*- */
+
+package CDPL.Chem;
+
+/**
+ * \brief NOTBondMatchExpression.
+ */
+public class NOTBondMatchExpression extends BondMatchExpression {
+
+	/**
+	 * \brief __init__.
+	 * \param self The <tt>%NOTBondMatchExpression</tt> instance.
+	 */
+	public None __init__(object arg1, NOTBondMatchExpression expression) {}
+
+	/**
+	 * \brief __init__.
+	 * \param self The <tt>%NOTBondMatchExpression</tt> instance.
+	 */
+	public None __init__(object arg1, BondMatchExpression expression) {}
+
+	/**
+	 * \brief assign.
+	 * \param self The <tt>%NOTBondMatchExpression</tt> instance.
+	 */
+	public NOTBondMatchExpression assign(NOTBondMatchExpression arg1, NOTBondMatchExpression expression) {}
+}

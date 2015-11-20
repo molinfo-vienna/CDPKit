@@ -1,0 +1,55 @@
+/* -*- mode: java; tab-width: 4 -*- */
+
+package CDPL.Chem;
+
+/**
+ * \brief XLogPCalculator.
+ */
+public class XLogPCalculator extends Boost.Python.instance {
+
+	/**
+	 * \brief __init__.
+	 * \param self The <tt>%XLogPCalculator</tt> instance.
+	 */
+	public None __init__(object self) {}
+
+	/**
+	 * \brief __init__.
+	 * \param self The <tt>%XLogPCalculator</tt> instance.
+	 */
+	public None __init__(object self, MolecularGraph molgraph) {}
+
+	/**
+	 * \brief calculate.
+	 * \param self The <tt>%XLogPCalculator</tt> instance.
+	 */
+	public float calculate(XLogPCalculator self, MolecularGraph molgraph) {}
+
+	/**
+	 * \brief getObjectID.
+	 * \param self The <tt>%XLogPCalculator</tt> instance.
+	 */
+	public int getObjectID(XLogPCalculator self) {}
+
+	/**
+	 * \brief getFeatureVector.
+	 * \param self The <tt>%XLogPCalculator</tt> instance.
+	 */
+	public Math.DVector getFeatureVector(XLogPCalculator self) {}
+
+	/**
+	 * \brief getResult.
+	 * \param self The <tt>%XLogPCalculator</tt> instance.
+	 */
+	public float getResult(XLogPCalculator self) {}
+
+	/**
+	 * \brief objectID.
+	 */
+	public None objectID;
+
+	/**
+	 * \brief result.
+	 */
+	public None result;
+}

@@ -1,0 +1,157 @@
+/* -*- mode: java; tab-width: 4 -*- */
+
+package CDPL.Chem;
+
+/**
+ * \brief BondMapping.
+ */
+public class BondMapping extends Boost.Python.instance {
+
+	/**
+	 * \brief __init__.
+	 * \param self The <tt>%BondMapping</tt> instance.
+	 */
+	public None __init__(object self) {}
+
+	/**
+	 * \brief __init__.
+	 * \param self The <tt>%BondMapping</tt> instance.
+	 */
+	public None __init__(object self, BondMapping mapping) {}
+
+	/**
+	 * \brief removeEntries.
+	 * \param self The <tt>%BondMapping</tt> instance.
+	 */
+	public int removeEntries(BondMapping self, Bond key) {}
+
+	/**
+	 * \brief getObjectID.
+	 * \param self The <tt>%BondMapping</tt> instance.
+	 */
+	public int getObjectID(BondMapping self) {}
+
+	/**
+	 * \brief getValues.
+	 * \param self The <tt>%BondMapping</tt> instance.
+	 */
+	public object getValues(BondMapping self) {}
+
+	/**
+	 * \brief getValues.
+	 * \param self The <tt>%BondMapping</tt> instance.
+	 */
+	public object getValues(BondMapping self, Bond key) {}
+
+	/**
+	 * \brief getSize.
+	 * \param self The <tt>%BondMapping</tt> instance.
+	 */
+	public int getSize(BondMapping self) {}
+
+	/**
+	 * \brief getNumEntries.
+	 * \param self The <tt>%BondMapping</tt> instance.
+	 */
+	public int getNumEntries(BondMapping self, Bond key) {}
+
+	/**
+	 * \brief isEmpty.
+	 * \param self The <tt>%BondMapping</tt> instance.
+	 */
+	public bool isEmpty(BondMapping self) {}
+
+	/**
+	 * \brief removeEntry.
+	 * \param self The <tt>%BondMapping</tt> instance.
+	 */
+	public bool removeEntry(BondMapping self, Bond key) {}
+
+	/**
+	 * \brief setEntry.
+	 * \param self The <tt>%BondMapping</tt> instance.
+	 */
+	public None setEntry(BondMapping self, Bond key, Bond value) {}
+
+	/**
+	 * \brief getKeys.
+	 * \param self The <tt>%BondMapping</tt> instance.
+	 */
+	public object getKeys(BondMapping self) {}
+
+	/**
+	 * \brief getEntries.
+	 * \param self The <tt>%BondMapping</tt> instance.
+	 */
+	public object getEntries(BondMapping self) {}
+
+	/**
+	 * \brief clear.
+	 * \param self The <tt>%BondMapping</tt> instance.
+	 */
+	public None clear(BondMapping self) {}
+
+	/**
+	 * \brief getValue.
+	 * \param self The <tt>%BondMapping</tt> instance.
+	 */
+	public Bond getValue(BondMapping self, Bond key) {}
+
+	/**
+	 * \brief getValue.
+	 * \param self The <tt>%BondMapping</tt> instance.
+	 */
+	public Bond getValue(BondMapping self, Bond key, Bond def_value) {}
+
+	/**
+	 * \brief insertEntry.
+	 * \param self The <tt>%BondMapping</tt> instance.
+	 */
+	public None insertEntry(BondMapping self, Bond key, Bond value) {}
+
+	/**
+	 * \brief assign.
+	 * \param self The <tt>%BondMapping</tt> instance.
+	 */
+	public BondMapping assign(BondMapping self, BondMapping map) {}
+
+	/**
+	 * \brief __contains__.
+	 * \param self The <tt>%BondMapping</tt> instance.
+	 */
+	public int __contains__(BondMapping self, Bond key) {}
+
+	/**
+	 * \brief __len__.
+	 * \param self The <tt>%BondMapping</tt> instance.
+	 */
+	public int __len__(BondMapping self) {}
+
+	/**
+	 * \brief __getitem__.
+	 * \param self The <tt>%BondMapping</tt> instance.
+	 */
+	public Bond __getitem__(BondMapping self, Bond key) {}
+
+	/**
+	 * \brief __setitem__.
+	 * \param self The <tt>%BondMapping</tt> instance.
+	 */
+	public None __setitem__(BondMapping self, Bond key, Bond value) {}
+
+	/**
+	 * \brief __delitem__.
+	 * \param self The <tt>%BondMapping</tt> instance.
+	 */
+	public bool __delitem__(BondMapping self, Bond key) {}
+
+	/**
+	 * \brief objectID.
+	 */
+	public None objectID;
+
+	/**
+	 * \brief size.
+	 */
+	public None size;
+}

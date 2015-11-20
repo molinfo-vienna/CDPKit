@@ -1,0 +1,27 @@
+/* -*- mode: java; tab-width: 4 -*- */
+
+package CDPL.Chem;
+
+/**
+ * \brief ORMolecularGraphMatchExpressionList.
+ */
+public class ORMolecularGraphMatchExpressionList extends MolecularGraphMatchExpressionList {
+
+	/**
+	 * \brief __init__.
+	 * \param self The <tt>%ORMolecularGraphMatchExpressionList</tt> instance.
+	 */
+	public None __init__(object self) {}
+
+	/**
+	 * \brief __init__.
+	 * \param self The <tt>%ORMolecularGraphMatchExpressionList</tt> instance.
+	 */
+	public None __init__(object self, ORMolecularGraphMatchExpressionList expr) {}
+
+	/**
+	 * \brief assign.
+	 * \param self The <tt>%ORMolecularGraphMatchExpressionList</tt> instance.
+	 */
+	public ORMolecularGraphMatchExpressionList assign(ORMolecularGraphMatchExpressionList self, ORMolecularGraphMatchExpressionList expr) {}
+}

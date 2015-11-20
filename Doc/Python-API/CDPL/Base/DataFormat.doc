@@ -1,0 +1,236 @@
+/* -*- mode: java; tab-width: 4 -*- */
+
+package CDPL.Base;
+
+/**
+ * \brief DataFormat.
+ */
+public class DataFormat extends Boost.Python.instance {
+
+	/**
+	 * \brief FileExtensionSequence.
+	 */
+	public class FileExtensionSequence extends Boost.Python.instance {
+
+		/**
+		 * \brief __delitem__.
+		 * \param self The <tt>%FileExtensionSequence</tt> instance.
+		 */
+		public None __delitem__(FileExtensionSequence self, int idx) {}
+
+		/**
+		 * \brief __getitem__.
+		 * \param self The <tt>%FileExtensionSequence</tt> instance.
+		 */
+		public str __getitem__(FileExtensionSequence self, int idx) {}
+
+		/**
+		 * \brief __contains__.
+		 * \param self The <tt>%FileExtensionSequence</tt> instance.
+		 */
+		public bool __contains__(FileExtensionSequence self, str file_ext) {}
+
+		/**
+		 * \brief __setitem__.
+		 * \param self The <tt>%FileExtensionSequence</tt> instance.
+		 */
+		public None __setitem__(FileExtensionSequence self, int idx, str file_ext) {}
+
+		/**
+		 * \brief __len__.
+		 * \param self The <tt>%FileExtensionSequence</tt> instance.
+		 */
+		public int __len__(FileExtensionSequence self) {}
+	}
+
+	/**
+	 * \brief __init__.
+	 * \param self The <tt>%DataFormat</tt> instance.
+	 */
+	public None __init__(object self) {}
+
+	/**
+	 * \brief __init__.
+	 * \param self The <tt>%DataFormat</tt> instance.
+	 */
+	public None __init__(object self, DataFormat fmt) {}
+
+	/**
+	 * \brief __init__.
+	 * \param self The <tt>%DataFormat</tt> instance.
+	 */
+	public None __init__(object self, str name, str descr, str mime_type, bool multi_rec) {}
+
+	/**
+	 * \brief __init__.
+	 * \param self The <tt>%DataFormat</tt> instance.
+	 */
+	public None __init__(object self, str name, str description, str mime_type, object file_extensions, bool multi_rec) {}
+
+	/**
+	 * \brief setFileExtension.
+	 * \param self The <tt>%DataFormat</tt> instance.
+	 */
+	public None setFileExtension(DataFormat self, int idx, str file_ext) {}
+
+	/**
+	 * \brief getObjectID.
+	 * \param self The <tt>%DataFormat</tt> instance.
+	 */
+	public int getObjectID(DataFormat self) {}
+
+	/**
+	 * \brief isMultiRecordFormat.
+	 * \param self The <tt>%DataFormat</tt> instance.
+	 */
+	public bool isMultiRecordFormat(DataFormat self) {}
+
+	/**
+	 * \brief setDescription.
+	 * \param self The <tt>%DataFormat</tt> instance.
+	 */
+	public None setDescription(DataFormat self, str descr) {}
+
+	/**
+	 * \brief setMimeType.
+	 * \param self The <tt>%DataFormat</tt> instance.
+	 */
+	public None setMimeType(DataFormat self, str mime_type) {}
+
+	/**
+	 * \brief getName.
+	 * \param self The <tt>%DataFormat</tt> instance.
+	 */
+	public str getName(DataFormat self) {}
+
+	/**
+	 * \brief setMultiRecordFormat.
+	 * \param self The <tt>%DataFormat</tt> instance.
+	 */
+	public None setMultiRecordFormat(DataFormat self, bool multi_rec) {}
+
+	/**
+	 * \brief getFileExtensions.
+	 * \param self The <tt>%DataFormat</tt> instance.
+	 */
+	public FileExtensionSequence getFileExtensions(DataFormat self) {}
+
+	/**
+	 * \brief clearFileExtensions.
+	 * \param self The <tt>%DataFormat</tt> instance.
+	 */
+	public None clearFileExtensions(DataFormat self) {}
+
+	/**
+	 * \brief getMimeType.
+	 * \param self The <tt>%DataFormat</tt> instance.
+	 */
+	public str getMimeType(DataFormat self) {}
+
+	/**
+	 * \brief matchesFileExtension.
+	 * \param self The <tt>%DataFormat</tt> instance.
+	 */
+	public bool matchesFileExtension(DataFormat self, str file_ext) {}
+
+	/**
+	 * \brief setName.
+	 * \param self The <tt>%DataFormat</tt> instance.
+	 */
+	public None setName(DataFormat self, str name) {}
+
+	/**
+	 * \brief getDescription.
+	 * \param self The <tt>%DataFormat</tt> instance.
+	 */
+	public str getDescription(DataFormat self) {}
+
+	/**
+	 * \brief removeFileExtension.
+	 * \param self The <tt>%DataFormat</tt> instance.
+	 */
+	public None removeFileExtension(DataFormat self, int idx) {}
+
+	/**
+	 * \brief getNumFileExtensions.
+	 * \param self The <tt>%DataFormat</tt> instance.
+	 */
+	public int getNumFileExtensions(DataFormat self) {}
+
+	/**
+	 * \brief getFileExtension.
+	 * \param self The <tt>%DataFormat</tt> instance.
+	 */
+	public str getFileExtension(DataFormat self, int idx) {}
+
+	/**
+	 * \brief matchesMimeType.
+	 * \param self The <tt>%DataFormat</tt> instance.
+	 */
+	public bool matchesMimeType(DataFormat self, str mime_type) {}
+
+	/**
+	 * \brief matchesName.
+	 * \param self The <tt>%DataFormat</tt> instance.
+	 */
+	public bool matchesName(DataFormat self, str name) {}
+
+	/**
+	 * \brief addFileExtension.
+	 * \param self The <tt>%DataFormat</tt> instance.
+	 */
+	public DataFormat addFileExtension(DataFormat self, str file_ext) {}
+
+	/**
+	 * \brief assign.
+	 * \param self The <tt>%DataFormat</tt> instance.
+	 */
+	public DataFormat assign(DataFormat self, DataFormat fmt) {}
+
+	/**
+	 * \brief __eq__.
+	 * \param self The <tt>%DataFormat</tt> instance.
+	 */
+	public bool __eq__(DataFormat self, DataFormat fmt) {}
+
+	/**
+	 * \brief __ne__.
+	 * \param self The <tt>%DataFormat</tt> instance.
+	 */
+	public bool __ne__(DataFormat self, DataFormat fmt) {}
+
+	/**
+	 * \brief mimeType.
+	 */
+	public None mimeType;
+
+	/**
+	 * \brief objectID.
+	 */
+	public None objectID;
+
+	/**
+	 * \brief description.
+	 */
+	public None description;
+
+	/**
+	 * \brief numFileExtensions.
+	 */
+	public None numFileExtensions;
+
+	/**
+	 * \brief multiRecordFormat.
+	 */
+	public None multiRecordFormat;
+
+	/**
+	 * \brief fileExtensions.
+	 */
+	public None fileExtensions;
+
+	/**
+	 * \brief name.
+	 */
+	public None name;
+}

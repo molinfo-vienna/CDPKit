@@ -1,0 +1,15 @@
+/* -*- mode: java; tab-width: 4 -*- */
+
+package CDPL.Chem;
+
+/**
+ * \brief JMEReactionWriter.
+ */
+public class JMEReactionWriter extends ReactionWriter {
+
+	/**
+	 * \brief __init__.
+	 * \param self The <tt>%JMEReactionWriter</tt> instance.
+	 */
+	public None __init__(object self, Base.OStream os) {}
+}

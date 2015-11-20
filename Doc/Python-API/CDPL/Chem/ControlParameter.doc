@@ -1,0 +1,159 @@
+/* -*- mode: java; tab-width: 4 -*- */
+
+package CDPL.Chem;
+
+/**
+ * \brief ControlParameter.
+ */
+public class ControlParameter extends Boost.Python.instance {
+
+	/**
+	 * \brief ORDINARY_HYDROGEN_DEPLETE.
+	 */
+	public static Base.LookupKey ORDINARY_HYDROGEN_DEPLETE;
+
+	/**
+	 * \brief SMILES_WRITE_ATOM_STEREO.
+	 */
+	public static Base.LookupKey SMILES_WRITE_ATOM_STEREO;
+
+	/**
+	 * \brief STRICT_ERROR_CHECKING.
+	 */
+	public static Base.LookupKey STRICT_ERROR_CHECKING;
+
+	/**
+	 * \brief SMILES_RXN_WRITE_ATOM_MAPPING_ID.
+	 */
+	public static Base.LookupKey SMILES_RXN_WRITE_ATOM_MAPPING_ID;
+
+	/**
+	 * \brief SMILES_NO_ORGANIC_SUBSET.
+	 */
+	public static Base.LookupKey SMILES_NO_ORGANIC_SUBSET;
+
+	/**
+	 * \brief SMILES_MOL_WRITE_ATOM_MAPPING_ID.
+	 */
+	public static Base.LookupKey SMILES_MOL_WRITE_ATOM_MAPPING_ID;
+
+	/**
+	 * \brief SMILES_WRITE_KEKULE_FORM.
+	 */
+	public static Base.LookupKey SMILES_WRITE_KEKULE_FORM;
+
+	/**
+	 * \brief SMILES_WRITE_AROMATIC_BONDS.
+	 */
+	public static Base.LookupKey SMILES_WRITE_AROMATIC_BONDS;
+
+	/**
+	 * \brief MDL_IGNORE_PARITY.
+	 */
+	public static Base.LookupKey MDL_IGNORE_PARITY;
+
+	/**
+	 * \brief MDL_RXN_FILE_VERSION.
+	 */
+	public static Base.LookupKey MDL_RXN_FILE_VERSION;
+
+	/**
+	 * \brief JME_SEPARATE_COMPONENTS.
+	 */
+	public static Base.LookupKey JME_SEPARATE_COMPONENTS;
+
+	/**
+	 * \brief SMILES_WRITE_CANONICAL_FORM.
+	 */
+	public static Base.LookupKey SMILES_WRITE_CANONICAL_FORM;
+
+	/**
+	 * \brief SMILES_WRITE_ISOTOPE.
+	 */
+	public static Base.LookupKey SMILES_WRITE_ISOTOPE;
+
+	/**
+	 * \brief MDL_CTAB_VERSION.
+	 */
+	public static Base.LookupKey MDL_CTAB_VERSION;
+
+	/**
+	 * \brief SMILES_WRITE_RING_BOND_STEREO.
+	 */
+	public static Base.LookupKey SMILES_WRITE_RING_BOND_STEREO;
+
+	/**
+	 * \brief SMILES_WRITE_SINGLE_BONDS.
+	 */
+	public static Base.LookupKey SMILES_WRITE_SINGLE_BONDS;
+
+	/**
+	 * \brief SMILES_RECORD_FORMAT.
+	 */
+	public static Base.LookupKey SMILES_RECORD_FORMAT;
+
+	/**
+	 * \brief SMILES_WRITE_BOND_STEREO.
+	 */
+	public static Base.LookupKey SMILES_WRITE_BOND_STEREO;
+
+	/**
+	 * \brief RECORD_SEPARATOR.
+	 */
+	public static Base.LookupKey RECORD_SEPARATOR;
+
+	/**
+	 * \brief SMILES_MIN_STEREO_BOND_RING_SIZE.
+	 */
+	public static Base.LookupKey SMILES_MIN_STEREO_BOND_RING_SIZE;
+
+	/**
+	 * \brief MDL_IGNORE_LINE_LENGTH_LIMIT.
+	 */
+	public static Base.LookupKey MDL_IGNORE_LINE_LENGTH_LIMIT;
+
+	/**
+	 * \brief INCHI_OUTPUT_OPTIONS.
+	 */
+	public static Base.LookupKey INCHI_OUTPUT_OPTIONS;
+
+	/**
+	 * \brief MDL_TRIM_STRINGS.
+	 */
+	public static Base.LookupKey MDL_TRIM_STRINGS;
+
+	/**
+	 * \brief INCHI_INPUT_OPTIONS.
+	 */
+	public static Base.LookupKey INCHI_INPUT_OPTIONS;
+
+	/**
+	 * \brief MDL_TRUNCATE_LINES.
+	 */
+	public static Base.LookupKey MDL_TRUNCATE_LINES;
+
+	/**
+	 * \brief MDL_TRIM_LINES.
+	 */
+	public static Base.LookupKey MDL_TRIM_LINES;
+
+	/**
+	 * \brief COORDINATES_DIMENSION.
+	 */
+	public static Base.LookupKey COORDINATES_DIMENSION;
+
+	/**
+	 * \brief MDL_UPDATE_TIMESTAMP.
+	 */
+	public static Base.LookupKey MDL_UPDATE_TIMESTAMP;
+
+	/**
+	 * \brief MDL_TRUNCATE_STRINGS.
+	 */
+	public static Base.LookupKey MDL_TRUNCATE_STRINGS;
+
+	/**
+	 * \brief BOND_MEMBER_SWAP_STEREO_FIX.
+	 */
+	public static Base.LookupKey BOND_MEMBER_SWAP_STEREO_FIX;
+}

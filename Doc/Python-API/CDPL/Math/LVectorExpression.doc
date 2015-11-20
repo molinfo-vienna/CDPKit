@@ -1,0 +1,93 @@
+/* -*- mode: java; tab-width: 4 -*- */
+
+package CDPL.Math;
+
+/**
+ * \brief LVectorExpression.
+ */
+public class LVectorExpression extends ConstLVectorExpression {
+
+	/**
+	 * \brief setElement.
+	 * \param self The <tt>%LVectorExpression</tt> instance.
+	 */
+	public None setElement(LVectorExpression self, int i, int v) {}
+
+	/**
+	 * \brief swap.
+	 * \param self The <tt>%LVectorExpression</tt> instance.
+	 */
+	public None swap(LVectorExpression self, LVectorExpression e) {}
+
+	/**
+	 * \brief assign.
+	 * \param self The <tt>%LVectorExpression</tt> instance.
+	 */
+	public LVectorExpression assign(LVectorExpression self, LVectorExpression e) {}
+
+	/**
+	 * \brief assign.
+	 * \param self The <tt>%LVectorExpression</tt> instance.
+	 */
+	public LVectorExpression assign(LVectorExpression self, ConstFVectorExpression e) {}
+
+	/**
+	 * \brief assign.
+	 * \param self The <tt>%LVectorExpression</tt> instance.
+	 */
+	public LVectorExpression assign(LVectorExpression self, ConstDVectorExpression e) {}
+
+	/**
+	 * \brief assign.
+	 * \param self The <tt>%LVectorExpression</tt> instance.
+	 */
+	public LVectorExpression assign(LVectorExpression self, ConstLVectorExpression e) {}
+
+	/**
+	 * \brief assign.
+	 * \param self The <tt>%LVectorExpression</tt> instance.
+	 */
+	public LVectorExpression assign(LVectorExpression self, ConstULVectorExpression e) {}
+
+	/**
+	 * \brief __isub__.
+	 * \param self The <tt>%LVectorExpression</tt> instance.
+	 */
+	public LVectorExpression __isub__(LVectorExpression self, LVectorExpression e) {}
+
+	/**
+	 * \brief __isub__.
+	 * \param self The <tt>%LVectorExpression</tt> instance.
+	 */
+	public LVectorExpression __isub__(LVectorExpression self, ConstLVectorExpression e) {}
+
+	/**
+	 * \brief __imul__.
+	 * \param self The <tt>%LVectorExpression</tt> instance.
+	 */
+	public LVectorExpression __imul__(LVectorExpression self, int t) {}
+
+	/**
+	 * \brief __idiv__.
+	 * \param self The <tt>%LVectorExpression</tt> instance.
+	 */
+	public LVectorExpression __idiv__(LVectorExpression self, int t) {}
+
+	/**
+	 * \brief __iadd__.
+	 * \param self The <tt>%LVectorExpression</tt> instance.
+	 */
+	public LVectorExpression __iadd__(LVectorExpression self, LVectorExpression e) {}
+
+	/**
+	 * \brief __iadd__.
+	 * \param self The <tt>%LVectorExpression</tt> instance.
+	 */
+	public LVectorExpression __iadd__(LVectorExpression self, ConstLVectorExpression e) {}
+
+	/**
+	 * \brief __setitem__.
+	 * \param self The <tt>%LVectorExpression</tt> instance.
+	 */
+	public None __setitem__(LVectorExpression self, int i, int v) {}
+}

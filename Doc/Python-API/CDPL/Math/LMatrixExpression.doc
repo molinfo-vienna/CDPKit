@@ -1,0 +1,93 @@
+/* -*- mode: java; tab-width: 4 -*- */
+
+package CDPL.Math;
+
+/**
+ * \brief LMatrixExpression.
+ */
+public class LMatrixExpression extends ConstLMatrixExpression {
+
+	/**
+	 * \brief setElement.
+	 * \param self The <tt>%LMatrixExpression</tt> instance.
+	 */
+	public None setElement(LMatrixExpression self, int i, int j, int v) {}
+
+	/**
+	 * \brief swap.
+	 * \param self The <tt>%LMatrixExpression</tt> instance.
+	 */
+	public None swap(LMatrixExpression self, LMatrixExpression e) {}
+
+	/**
+	 * \brief assign.
+	 * \param self The <tt>%LMatrixExpression</tt> instance.
+	 */
+	public LMatrixExpression assign(LMatrixExpression self, LMatrixExpression e) {}
+
+	/**
+	 * \brief assign.
+	 * \param self The <tt>%LMatrixExpression</tt> instance.
+	 */
+	public LMatrixExpression assign(LMatrixExpression self, ConstFMatrixExpression e) {}
+
+	/**
+	 * \brief assign.
+	 * \param self The <tt>%LMatrixExpression</tt> instance.
+	 */
+	public LMatrixExpression assign(LMatrixExpression self, ConstDMatrixExpression e) {}
+
+	/**
+	 * \brief assign.
+	 * \param self The <tt>%LMatrixExpression</tt> instance.
+	 */
+	public LMatrixExpression assign(LMatrixExpression self, ConstLMatrixExpression e) {}
+
+	/**
+	 * \brief assign.
+	 * \param self The <tt>%LMatrixExpression</tt> instance.
+	 */
+	public LMatrixExpression assign(LMatrixExpression self, ConstULMatrixExpression e) {}
+
+	/**
+	 * \brief __isub__.
+	 * \param self The <tt>%LMatrixExpression</tt> instance.
+	 */
+	public LMatrixExpression __isub__(LMatrixExpression self, LMatrixExpression e) {}
+
+	/**
+	 * \brief __isub__.
+	 * \param self The <tt>%LMatrixExpression</tt> instance.
+	 */
+	public LMatrixExpression __isub__(LMatrixExpression self, ConstLMatrixExpression e) {}
+
+	/**
+	 * \brief __imul__.
+	 * \param self The <tt>%LMatrixExpression</tt> instance.
+	 */
+	public LMatrixExpression __imul__(LMatrixExpression self, int t) {}
+
+	/**
+	 * \brief __idiv__.
+	 * \param self The <tt>%LMatrixExpression</tt> instance.
+	 */
+	public LMatrixExpression __idiv__(LMatrixExpression self, int t) {}
+
+	/**
+	 * \brief __iadd__.
+	 * \param self The <tt>%LMatrixExpression</tt> instance.
+	 */
+	public LMatrixExpression __iadd__(LMatrixExpression self, LMatrixExpression e) {}
+
+	/**
+	 * \brief __iadd__.
+	 * \param self The <tt>%LMatrixExpression</tt> instance.
+	 */
+	public LMatrixExpression __iadd__(LMatrixExpression self, ConstLMatrixExpression e) {}
+
+	/**
+	 * \brief __setitem__.
+	 * \param self The <tt>%LMatrixExpression</tt> instance.
+	 */
+	public None __setitem__(LMatrixExpression self, tuple ij, int v) {}
+}

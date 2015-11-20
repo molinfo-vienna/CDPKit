@@ -1,0 +1,49 @@
+/* -*- mode: java; tab-width: 4 -*- */
+
+package CDPL.Chem;
+
+/**
+ * \brief TPSACalculator.
+ */
+public class TPSACalculator extends Boost.Python.instance {
+
+	/**
+	 * \brief __init__.
+	 * \param self The <tt>%TPSACalculator</tt> instance.
+	 */
+	public None __init__(object self) {}
+
+	/**
+	 * \brief __init__.
+	 * \param self The <tt>%TPSACalculator</tt> instance.
+	 */
+	public None __init__(object self, MolecularGraph molgraph) {}
+
+	/**
+	 * \brief calculate.
+	 * \param self The <tt>%TPSACalculator</tt> instance.
+	 */
+	public float calculate(TPSACalculator self, MolecularGraph molgraph) {}
+
+	/**
+	 * \brief getObjectID.
+	 * \param self The <tt>%TPSACalculator</tt> instance.
+	 */
+	public int getObjectID(TPSACalculator self) {}
+
+	/**
+	 * \brief getResult.
+	 * \param self The <tt>%TPSACalculator</tt> instance.
+	 */
+	public float getResult(TPSACalculator self) {}
+
+	/**
+	 * \brief objectID.
+	 */
+	public None objectID;
+
+	/**
+	 * \brief result.
+	 */
+	public None result;
+}
