@@ -55,9 +55,16 @@ def processMolecule(mol, stats):
         Chem.perceiveSSSR(largest_comp, False)
         Chem.setName(largest_comp, Chem.getName(mol))
 
-        print 'Removed Components from Molecule ' + Chem.generateSMILES(mol) + ' ' + Chem.getName(mol)
+        print 'Removed Components from Molecule ' + str(stats.read) + ': ' + Chem.generateSMILES(mol) + ' ' + Chem.getName(mol)
 
         modified = True
+
+        if Chem.hasName(mol):
+            Chem.setName(largest_comp, Chem.getName(mol))
+
+        if Chem.hasMDLStructureData(mol):
+            Chem.setMDLStructureData(largest_comp, Chem.getMDLStructureData(mol))
+
         mol = largest_comp
 
     if Chem.getHeavyAtomCount(mol) < 5:
@@ -95,13 +102,18 @@ def processMolecule(mol, stats):
     return mol
 
 def cleanStructures():
-    if len(sys.argv) < 4:
-        print >> sys.stderr, 'Usage:', sys.argv[0], '[input *.sdf] [output *.sdf] [dropped *.sdf]'
+    if len(sys.argv) < 5:
+        print >> sys.stderr, 'Usage:', sys.argv[0], 'input.sdf output.sdf dropped.sdf start_index [count]'
         sys.exit(2)
 
     ifs = Base.FileIOStream(sys.argv[1], 'r')
     ofs = Base.FileIOStream(sys.argv[2], 'w')
     dofs = Base.FileIOStream(sys.argv[3], 'w')
+    offset = int(sys.argv[4])
+    count = 0
+
+    if len(sys.argv) > 5:
+        count = int(sys.argv[5])
 
     reader = Chem.SDFMoleculeReader(ifs)
     writer = Chem.SDFMolecularGraphWriter(ofs)
@@ -117,8 +129,18 @@ def cleanStructures():
     stats.dropped = 0
     stats.modified = 0
 
+    Chem.setMultiConfImportParameter(reader, False)
+    Chem.setMultiConfExportParameter(writer, False)
+    Chem.setMultiConfExportParameter(dwriter, False)
+
+    print 'Skipping Molecules to Start Index ' + str(offset)
+    reader.setRecordIndex(offset)
+
+    stats.read = offset
+    #print 'Finished Setting Record Index'
+    
     while reader.read(mol):
-        stats.read += 1;
+        #print 'Processing Molecule ' + str(stats.read)
         proc_mol = processMolecule(mol, stats)
 
         if proc_mol:
@@ -126,12 +148,17 @@ def cleanStructures():
         else:
             stats.dropped += 1
             dwriter.write(mol)
-            print 'Dropped Molecule ' + Chem.generateSMILES(mol) + ' ' + Chem.getName(mol)
+            print 'Dropped Molecule ' + str(stats.read) + ': ' + Chem.generateSMILES(mol) + ' ' + Chem.getName(mol)
 
         mol.clear()
       
+        stats.read += 1;
+
         if stats.read % 10000 == 0:
             print 'Processed ' + str(stats.read) + ' Molecules...'
+
+        if count > 0 and stats.read - offset >= count:
+            break
 
     print ''
     print '-- Summary --'
