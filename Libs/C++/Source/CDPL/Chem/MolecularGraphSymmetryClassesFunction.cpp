@@ -40,8 +40,8 @@
 using namespace CDPL; 
 
 
-void Chem::calcSymmetryClasses(MolecularGraph& molgraph, bool overwrite,
-							   unsigned int atom_flags, unsigned int bond_flags, bool inc_impl_h)
+void Chem::perceiveSymmetryClasses(MolecularGraph& molgraph, bool overwrite,
+								   unsigned int atom_flags, unsigned int bond_flags, bool inc_impl_h)
 {
 	if (!overwrite && std::find_if(molgraph.getAtomsBegin(), molgraph.getAtomsEnd(),
 								   boost::bind(std::equal_to<bool>(), false,

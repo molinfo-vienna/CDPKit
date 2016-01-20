@@ -34,7 +34,7 @@
 using namespace CDPL; 
 
 
-void Chem::calc2DCoordinates(MolecularGraph& molgraph, bool overwrite)
+void Chem::generate2DCoordinates(MolecularGraph& molgraph, bool overwrite)
 {
 	if (!overwrite && hasCoordinates(molgraph, 2))
 		return;

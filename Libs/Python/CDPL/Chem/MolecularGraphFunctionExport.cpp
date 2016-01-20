@@ -229,22 +229,22 @@ void CDPLPythonChem::exportMolecularGraphFunctions()
  	python::def("calcPEOECharges", &Chem::calcPEOECharges, 
 				(python::arg("molgraph"), python::arg("overwrite"), 
 				 python::arg("num_iter") = 6, python::arg("damping") = 0.5));
-	python::def("calc2DCoordinates", &Chem::calc2DCoordinates, 
+	python::def("generate2DCoordinates", &Chem::generate2DCoordinates, 
 				(python::arg("molgraph"), python::arg("overwrite")));
-	python::def("calcBond2DStereoFlags", &Chem::calcBond2DStereoFlags, 
+	python::def("generateBond2DStereoFlags", &Chem::generateBond2DStereoFlags, 
 				(python::arg("molgraph"), python::arg("overwrite")));
-	python::def("calcBondDirections", &Chem::calcBondDirections,
+	python::def("generateBondDirections", &Chem::generateBondDirections,
 				(python::arg("molgraph"), python::arg("overwrite"), 
 				 python::arg("ring_bonds") = true, python::arg("min_ring_size") = 8));
 	python::def("calcCIPPriorities", &Chem::calcCIPPriorities,
 				(python::arg("molgraph"), python::arg("overwrite")));
-	python::def("calcSymmetryClasses", &Chem::calcSymmetryClasses, 
+	python::def("perceiveSymmetryClasses", &Chem::perceiveSymmetryClasses, 
 				(python::arg("molgraph"), python::arg("overwrite"), python::arg("atom_flags") = Chem::AtomPropertyFlag::DEFAULT, 
 				 python::arg("bond_flags") = Chem::BondPropertyFlag::DEFAULT, python::arg("inc_impl_h") = true));
-	python::def("calcCanonicalNumbers", &Chem::calcCanonicalNumbers, 
+	python::def("generateCanonicalNumbering", &Chem::generateCanonicalNumbering, 
 				(python::arg("molgraph"), python::arg("overwrite"), python::arg("atom_flags") = Chem::AtomPropertyFlag::DEFAULT,
 				 python::arg("bond_flags") =  Chem::BondPropertyFlag::DEFAULT));
-	python::def("calcMorganNumbers", &Chem::calcMorganNumbers, 
+	python::def("generateMorganNumbering", &Chem::generateMorganNumbering, 
 				(python::arg("molgraph"), python::arg("overwrite")));
 	python::def("calcImplicitHydrogenCounts", &Chem::calcImplicitHydrogenCounts, 
 				(python::arg("molgraph"), python::arg("overwrite")));

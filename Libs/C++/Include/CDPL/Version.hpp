@@ -3,7 +3,7 @@
  *
  * This file is part of the Chemical Data Processing Toolkit
  *
- * Copyright (C) 2003-2008 Thomas A. Seidel <thomas.seidel@univie.ac.at>
+ * Copyright (C) 2003-2008 Thomas A. Seidel <thomas.seidel@chemit.at>
  *
  * This library is free software; you can redistribute it and/or
  * modify it under the terms of the GNU Lesser General Public
@@ -52,7 +52,7 @@
 /**
  * \brief The \e %CDPL build date in the format \e YYYYMMDD. 
  */
-#define CDPL_BUILD_DATE 20151120
+#define CDPL_BUILD_DATE 20151126
 
 
 /** 

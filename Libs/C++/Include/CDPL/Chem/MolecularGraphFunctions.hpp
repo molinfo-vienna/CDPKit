@@ -504,26 +504,26 @@ namespace CDPL
 										   double damping = 0.5);
 
 
-		CDPL_CHEM_API void calc2DCoordinates(MolecularGraph& molgraph, bool overwrite);
+		CDPL_CHEM_API void generate2DCoordinates(MolecularGraph& molgraph, bool overwrite);
 
 
-		CDPL_CHEM_API void calcBond2DStereoFlags(MolecularGraph& molgraph, bool overwrite);
+		CDPL_CHEM_API void generateBond2DStereoFlags(MolecularGraph& molgraph, bool overwrite);
 
-		CDPL_CHEM_API void calcBondDirections(MolecularGraph& molgraph, bool overwrite, bool ring_bonds = true, 
-											  std::size_t min_ring_size = 8);
+		CDPL_CHEM_API void generateBondDirections(MolecularGraph& molgraph, bool overwrite, bool ring_bonds = true, 
+												  std::size_t min_ring_size = 8);
 
 		
 		CDPL_CHEM_API void calcCIPPriorities(MolecularGraph& molgraph, bool overwrite);
 
-		CDPL_CHEM_API void calcSymmetryClasses(MolecularGraph& molgraph, bool overwrite, 
-											   unsigned int atom_flags = AtomPropertyFlag::DEFAULT,
-											   unsigned int bond_flags = BondPropertyFlag::DEFAULT, bool inc_impl_h = true);
+		CDPL_CHEM_API void perceiveSymmetryClasses(MolecularGraph& molgraph, bool overwrite, 
+												   unsigned int atom_flags = AtomPropertyFlag::DEFAULT,
+												   unsigned int bond_flags = BondPropertyFlag::DEFAULT, bool inc_impl_h = true);
 
-		CDPL_CHEM_API void calcCanonicalNumbers(MolecularGraph& molgraph, bool overwrite,
-												unsigned int atom_flags = AtomPropertyFlag::DEFAULT, 
-												unsigned int bond_flags = BondPropertyFlag::DEFAULT);
+		CDPL_CHEM_API void generateCanonicalNumbering(MolecularGraph& molgraph, bool overwrite,
+													  unsigned int atom_flags = AtomPropertyFlag::DEFAULT, 
+													  unsigned int bond_flags = BondPropertyFlag::DEFAULT);
 
-		CDPL_CHEM_API void calcMorganNumbers(MolecularGraph& molgraph, bool overwrite);
+		CDPL_CHEM_API void generateMorganNumbering(MolecularGraph& molgraph, bool overwrite);
 
 
 		CDPL_CHEM_API void calcImplicitHydrogenCounts(MolecularGraph& molgraph, bool overwrite);

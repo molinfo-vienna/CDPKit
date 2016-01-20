@@ -39,9 +39,6 @@ def processMolecule(mol, stats):
     Chem.perceiveHybridizationStates(mol, False)
     Chem.setAromaticityFlags(mol, False)
 
-    if Chem.getAtomCount(mol, Chem.AtomType.F) > 9:
-        return None
-
     modified = False
     comps = Chem.getComponents(mol)
 
@@ -63,12 +60,34 @@ def processMolecule(mol, stats):
         modified = True
         mol = largest_comp
 
+    if Chem.getHeavyAtomCount(mol) < 5:
+        return None
+
+    if Chem.getAtomCount(mol, Chem.AtomType.F) > 9:
+        return None
+
+    valid_atom_types = [Chem.AtomType.H, Chem.AtomType.C, Chem.AtomType.F, Chem.AtomType.Cl, Chem.AtomType.Br, Chem.AtomType.I, Chem.AtomType.N, Chem.AtomType.O, Chem.AtomType.S, Chem.AtomType.Se, Chem.AtomType.P, Chem.AtomType.Pt, Chem.AtomType.As]    
+
+    carbon_seen = False
+
     for atom in mol.atoms:
-        if Chem.getType(atom) == Chem.AtomType.C and Chem.getFormalCharge(atom) != 0:
+        atom_type = Chem.getType(atom)
+
+        if atom_type not in valid_atom_types:
+            #print 'Invalid atom type: ' + str(Chem.getType(atom))
+            return None
+
+        if atom_type == Chem.AtomType.C:
+            carbon_seen = True
+
+        if atom_type == Chem.AtomType.C and Chem.getFormalCharge(atom) != 0:
             Chem.setFormalCharge(atom, 0)
             Chem.setImplicitHydrogenCount(atom, Chem.calcImplicitHydrogenCount(atom, mol))
             Chem.setHybridizationState(atom, Chem.perceiveHybridizationState(atom, mol))
             modified = True
+
+    if carbon_seen == False:
+        return None
 
     if modified:
         stats.modified += 1
@@ -77,21 +96,21 @@ def processMolecule(mol, stats):
 
 def cleanStructures():
     if len(sys.argv) < 4:
-        print >> sys.stderr, 'Usage:', sys.argv[0], '[input *.smi] [output *.smi] [dropped *.smi]'
+        print >> sys.stderr, 'Usage:', sys.argv[0], '[input *.sdf] [output *.sdf] [dropped *.sdf]'
         sys.exit(2)
 
     ifs = Base.FileIOStream(sys.argv[1], 'r')
     ofs = Base.FileIOStream(sys.argv[2], 'w')
     dofs = Base.FileIOStream(sys.argv[3], 'w')
 
-    reader = Chem.SMILESMoleculeReader(ifs)
-    writer = Chem.SMILESMolecularGraphWriter(ofs)
-    dwriter = Chem.SMILESMolecularGraphWriter(dofs)
+    reader = Chem.SDFMoleculeReader(ifs)
+    writer = Chem.SDFMolecularGraphWriter(ofs)
+    dwriter = Chem.SDFMolecularGraphWriter(dofs)
     mol = Chem.BasicMolecule()
     
-    Chem.setSMILESRecordFormatParameter(reader, 'S:N$')
-    Chem.setSMILESRecordFormatParameter(writer, 'S:N$')
-    Chem.setSMILESRecordFormatParameter(dwriter, 'S:N$')
+    #Chem.setSMILESRecordFormatParameter(reader, 'S:N$')
+    #Chem.setSMILESRecordFormatParameter(writer, 'S:N$')
+    #Chem.setSMILESRecordFormatParameter(dwriter, 'S:N$')
 
     stats = Stats()
     stats.read = 0
