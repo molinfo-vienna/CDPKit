@@ -109,6 +109,7 @@ SET(cdpl-chem_LIB_SRCS
     CIPPriorityCalculator.cpp
     CanonicalNumberingGenerator.cpp
     Atom2DCoordinatesGenerator.cpp
+    Hydrogen3DCoordinatesGenerator.cpp
     BondStereoFlagGenerator.cpp
     BondDirectionGenerator.cpp
     BondOrderGenerator.cpp
@@ -287,6 +288,7 @@ SET(cdpl-chem_LIB_SRCS
     MolecularGraphAtomTypesFromSymbolFunction.cpp
     MolecularGraphAtomSymbolsFromTypeFunction.cpp
     MolecularGraph2DCoordinatesFunction.cpp
+    MolecularGraph3DCoordinatesFunctions.cpp
 
     ReactionNameFunctions.cpp
     ReactionMatchConstraintsFunctions.cpp

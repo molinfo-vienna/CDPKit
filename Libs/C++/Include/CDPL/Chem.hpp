@@ -174,6 +174,7 @@
 #include "CDPL/Chem/CanonicalNumberingGenerator.hpp"
 #include "CDPL/Chem/HashCodeCalculator.hpp"
 #include "CDPL/Chem/Atom2DCoordinatesGenerator.hpp"
+#include "CDPL/Chem/Hydrogen3DCoordinatesGenerator.hpp"
 #include "CDPL/Chem/DaylightFingerprintGenerator.hpp"
 #include "CDPL/Chem/BondStereoFlagGenerator.hpp"
 #include "CDPL/Chem/BondDirectionGenerator.hpp"

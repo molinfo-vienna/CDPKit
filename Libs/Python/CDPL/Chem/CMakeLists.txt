@@ -67,6 +67,7 @@ SET(chem_MOD_SRCS
     ComponentSetExport.cpp 
    
     Atom2DCoordinatesGeneratorExport.cpp 
+    Hydrogen3DCoordinatesGeneratorExport.cpp 
     MorganNumberingGeneratorExport.cpp 
     CanonicalNumberingGeneratorExport.cpp 
     CIPPriorityCalculatorExport.cpp 

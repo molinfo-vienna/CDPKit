@@ -162,6 +162,20 @@ JME Molecular Editor website: http://www.molinspiration.com/jme/
 </tr>
 
 <tr>
+<td valign="top">\anchor KABA<i>[KABA]</i></td>
+<td valign="top">
+W. Kabsch, A solution for the best rotation to relate two sets of vectors, 
+<i>Acta Cryst. A</i> <b>1976</b>, 32, 922-923
+</td>
+</tr>
+<tr><td></td>
+<td valign="top">
+W. Kabsch, A discussion of the solution for the best rotation to relate two sets of vectors, 
+<i>Acta Cryst. A</i> <b>1978</b>, 34, 827-828
+</td>
+</tr>
+
+<tr>
 <td valign="top">\anchor LOGS<i>[LOGS]</i></td>
 <td valign="top">
 T. J. Hou, K. Xia, W. Zhang, X. J. Xu, ADME Evaluation in Drug Discovery. 4. Prediction of Aqueous Solubility Based on

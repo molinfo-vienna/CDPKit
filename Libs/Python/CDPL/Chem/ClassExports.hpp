@@ -92,6 +92,7 @@ namespace CDPLPythonChem
 	void exportCanonicalNumberingGenerator();
 	void exportCIPPriorityCalculator();
 	void exportAtom2DCoordinatesGenerator();
+	void exportHydrogen3DCoordinatesGenerator();
 	void exportBondStereoFlagGenerator();
 	void exportBondOrderGenerator();
 	void exportKekuleStructureGenerator();

@@ -231,6 +231,8 @@ void CDPLPythonChem::exportMolecularGraphFunctions()
 				 python::arg("num_iter") = 6, python::arg("damping") = 0.5));
 	python::def("generate2DCoordinates", &Chem::generate2DCoordinates, 
 				(python::arg("molgraph"), python::arg("overwrite")));
+	python::def("generateHydrogen3DCoordinates", &Chem::generateHydrogen3DCoordinates, 
+				(python::arg("molgraph"), python::arg("undef_only") = true));
 	python::def("generateBond2DStereoFlags", &Chem::generateBond2DStereoFlags, 
 				(python::arg("molgraph"), python::arg("overwrite")));
 	python::def("generateBondDirections", &Chem::generateBondDirections,

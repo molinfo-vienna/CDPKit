@@ -353,6 +353,9 @@ namespace CDPL
 			}
 
 			CDPL_MATH_INLINE void resize(SizeType m, SizeType n, bool preserve = true, const ValueType& v = ValueType()) {
+				if (size1 == m && size2 == n)
+					return;
+
 				if (preserve) {
 					Matrix tmp(m, n, v);
 

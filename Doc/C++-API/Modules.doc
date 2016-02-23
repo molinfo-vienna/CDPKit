@@ -77,6 +77,9 @@
 \defgroup CDPL_CHEM_2D_STRUCTURE_LAYOUT 2D Structure Layout
 \ingroup CDPL_CHEM
 
+\defgroup CDPL_CHEM_3D_COORDINATES_GENERATION 3D Coordinates Generation
+\ingroup CDPL_CHEM
+
 \defgroup CDPL_CHEM_BOND_STEREO_FLAGS 2D Bond Stereo Flag Calculation
 \ingroup CDPL_CHEM
 

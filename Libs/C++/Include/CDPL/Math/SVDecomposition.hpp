@@ -82,7 +82,7 @@ namespace CDPL
 			SizeType n = a().getSize2();
 
 			CDPL_MATH_CHECK(SizeType(w().getSize()) >= n && SizeType(v().getSize1()) >= n && SizeType(v().getSize2()) >= n, 
-						   "Preconditions violated",  Base::SizeError);
+						   "svDecompose: Preconditions violated",  Base::SizeError);
 
 			Vector<ValueType> rv1(n);
 			SizeType l;
@@ -481,7 +481,7 @@ namespace CDPL
 
 		    CDPL_MATH_CHECK(w().getSize() == n && v().getSize1() == n && v().getSize2() == n &&
 						   b().getSize() == m && x().getSize() == n,
-						   "Preconditions violated",  Base::SizeError); 
+						   "svSubstitute: Preconditions violated",  Base::SizeError); 
 			
 			Vector<ValueType> tmp(n);
 			ValueType thresh = 0.5 * std::sqrt(m + n + 1.0) * w()(0) * std::numeric_limits<ValueType>::epsilon();
@@ -541,7 +541,7 @@ namespace CDPL
 
 		    CDPL_MATH_CHECK(SizeType(w().getSize()) == n && SizeType(v().getSize1()) == n && SizeType(v().getSize2()) == n &&
 							SizeType(b().getSize1()) == m && SizeType(x().getSize1()) == n && SizeType(x().getSize2()) == p,
-							"Preconditions violated",  Base::SizeError); 
+							"svSubstitute: Preconditions violated",  Base::SizeError); 
 
 			Vector<ValueType> tmp(n);
 			ValueType thresh = 0.5 * std::sqrt(m + n + 1.0) * w()(0) * std::numeric_limits<ValueType>::epsilon();

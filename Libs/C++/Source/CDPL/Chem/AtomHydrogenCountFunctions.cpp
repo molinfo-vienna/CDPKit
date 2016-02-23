@@ -34,6 +34,20 @@
 #include "CDPL/Chem/AtomTypeFunctions.hpp"
 
 
+
+/*
+  const unsigned int SP      = 1;
+  const unsigned int SP2     = 2;
+  const unsigned int SP3     = 3;
+  const unsigned int DP      = 4;
+  const unsigned int SD3     = 5;
+  const unsigned int SP2D    = 6;
+  const unsigned int SP3D    = 7;
+  const unsigned int SP3D2   = 8;
+  const unsigned int SP3D3   = 9;
+
+ */
+
 using namespace CDPL; 
 
 

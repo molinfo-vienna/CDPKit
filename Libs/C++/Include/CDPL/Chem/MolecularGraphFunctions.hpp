@@ -507,6 +507,9 @@ namespace CDPL
 		CDPL_CHEM_API void generate2DCoordinates(MolecularGraph& molgraph, bool overwrite);
 
 
+		CDPL_CHEM_API void generateHydrogen3DCoordinates(MolecularGraph& molgraph, bool undef_only = true);
+
+
 		CDPL_CHEM_API void generateBond2DStereoFlags(MolecularGraph& molgraph, bool overwrite);
 
 		CDPL_CHEM_API void generateBondDirections(MolecularGraph& molgraph, bool overwrite, bool ring_bonds = true, 

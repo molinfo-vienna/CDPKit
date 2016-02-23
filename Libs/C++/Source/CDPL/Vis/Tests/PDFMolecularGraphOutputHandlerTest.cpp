@@ -68,7 +68,7 @@ BOOST_AUTO_TEST_CASE(PDFMolecularGraphOutputHandlerTest)
 
 	BasicMolecule mol;
 
-	std::ifstream is(std::string(std::string(std::getenv("CDPTK_DATA_DIR")) + "/TestMolData.jme").c_str());
+	std::ifstream is(std::string(std::string(std::getenv("CDPKIT_DATA_DIR")) + "/TestMolData.jme").c_str());
 
 	BOOST_CHECK(is);
 	BOOST_CHECK(JMEMoleculeReader(is).read(mol));

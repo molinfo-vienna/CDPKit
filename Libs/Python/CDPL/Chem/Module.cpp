@@ -95,6 +95,7 @@ BOOST_PYTHON_MODULE(_chem)
 	exportCanonicalNumberingGenerator();
 	exportCIPPriorityCalculator();
 	exportAtom2DCoordinatesGenerator();
+	exportHydrogen3DCoordinatesGenerator();
 	exportBondStereoFlagGenerator();
 	exportBondDirectionGenerator();
 	exportBondOrderGenerator();

@@ -34,6 +34,7 @@ SET(test-suite_SRCS
     LinearSolveTest.cpp
     IOTest.cpp
     BFGSMinimizerTest.cpp
+    KabschAlgorithmTest.cpp
     #VectorIteratorTest.cpp
    )
 
