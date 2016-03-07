@@ -77,8 +77,8 @@ namespace CDPL
 			 * \param ref_points A \f$ D \times N \f$-matrix storing the reference points as column vectors.
 			 * \param weights A \f$ N \f$-dimensional vector storing the non-negative weights that are assigned to the points.
 			 * \param do_center \c true if centering of the data points needs to be performed, and \c false if not.
-			 * \param num_svd_iter The maximum number of iterations to perform in the SV-decomposition, or \a 0 if no limit. 
-			 * \return \c true if convergence in the internal SV-decomposition has been reached in \a num_svd_iter iterations, and \c false otherwise. 
+			 * \param max_svd_iter The maximum number of iterations to perform in the SV-decomposition, or \a 0 if no limit. 
+			 * \return \c true if convergence in the internal SV-decomposition has been reached in \a max_svd_iter iterations, and \c false otherwise. 
 			 * \pre <tt>points().getSize1() == ref_points().getSize1()</tt>
 			 * \pre <tt>points().getSize2() == ref_points().getSize2()</tt>
 			 * \pre <tt>weights().getSize() == points().getSize2()</tt>
@@ -87,7 +87,7 @@ namespace CDPL
 			 */
 			template <typename M1, typename M2, typename V>
 			bool calcTransform(const MatrixExpression<M1>& points, const MatrixExpression<M2>& ref_points, const VectorExpression<V>& weights, 
-							   bool do_center = true, std::size_t num_svd_iter = 0) {
+							   bool do_center = true, std::size_t max_svd_iter = 0) {
 
 				typedef typename CommonType<typename CommonType<typename M1::SizeType, typename M2::SizeType>::Type,
 											typename V::SizeType>::Type SizeType;
@@ -143,7 +143,7 @@ namespace CDPL
 				else
 					prod(tmpPoints, trans(ref_points), covarMatrix);
 
-				return calcTransform(dim, do_center, num_svd_iter);
+				return calcTransform(dim, do_center, max_svd_iter);
 			}
 
 			/**
@@ -153,15 +153,15 @@ namespace CDPL
 			 * \param points A \f$ D \times N \f$-matrix storing the points to align as column vectors.
 			 * \param ref_points A \f$ D \times N \f$-matrix storing the reference points as column vectors.
 			 * \param do_center \c true if centering of the data points needs to be performed, and \c false if not.
-			 * \param num_svd_iter The maximum number of iterations to perform in the SV-decomposition, or \a 0 if no limit. 
-			 * \return \c true if convergence in the internal SV-decomposition has been reached in \a num_svd_iter iterations, and \c false otherwise. 
+			 * \param max_svd_iter The maximum number of iterations to perform in the SV-decomposition, or \a 0 if no limit. 
+			 * \return \c true if convergence in the internal SV-decomposition has been reached in \a max_svd_iter iterations, and \c false otherwise. 
 			 * \pre <tt>points().getSize1() == ref_points().getSize1()</tt>
 			 * \pre <tt>points().getSize2() == ref_points().getSize2()</tt>
 			 * \throw Base::SizeError if preconditions got violated.
 			 */
 			template <typename M1, typename M2>
 			bool calcTransform(const MatrixExpression<M1>& points, const MatrixExpression<M2>& ref_points, 
-							   bool do_center = true, std::size_t num_svd_iter = 0) {
+							   bool do_center = true, std::size_t max_svd_iter = 0) {
 
 				typedef typename CommonType<typename M1::SizeType, typename M2::SizeType>::Type SizeType;
 
@@ -194,7 +194,7 @@ namespace CDPL
 				else
 					prod(points, trans(ref_points), covarMatrix);
 
-				return calcTransform(dim, do_center, num_svd_iter);
+				return calcTransform(dim, do_center, max_svd_iter);
 			}
 
 			const MatrixType& getTransform() const {
@@ -203,11 +203,11 @@ namespace CDPL
 
 		private:
 			template <typename SizeType>
-			bool calcTransform(SizeType dim, bool do_center, std::size_t num_svd_iter) {
+			bool calcTransform(SizeType dim, bool do_center, std::size_t max_svd_iter) {
 				svdW.resize(dim);
 				svdV.resize(dim, dim, false);
 
-				if (!svDecompose(covarMatrix, svdW, svdV, num_svd_iter))
+				if (!svDecompose(covarMatrix, svdW, svdV, max_svd_iter))
 					return false;
 
 				if (det(prod(covarMatrix, trans(svdV))) < ValueType())

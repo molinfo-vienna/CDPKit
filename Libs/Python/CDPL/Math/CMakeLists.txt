@@ -29,6 +29,7 @@ SET(math_MOD_SRCS
     VectorArrayExport.cpp
     MLRModelExport.cpp
     BFGSMinimizerExport.cpp
+    KabschAlgorithmExport.cpp
     ToPythonConverterRegistration.cpp
     FromPythonConverterRegistration.cpp
    )

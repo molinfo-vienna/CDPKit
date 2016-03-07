@@ -51,6 +51,7 @@ namespace CDPLPythonMath
 
 	void exportMLRModels();
 	void exportBFGSMinimizers();
+	void exportKabschAlgorithms();
 
 	void exportVectorArrays();
 }

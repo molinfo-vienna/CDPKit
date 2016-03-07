@@ -56,6 +56,7 @@ BOOST_PYTHON_MODULE(_math)
 	exportVectorArrays();
 	exportMLRModels();
 	exportBFGSMinimizers();
+	exportKabschAlgorithms();
 
 	exportVectorFunctions();
 	exportMatrixFunctions();
