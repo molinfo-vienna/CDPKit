@@ -36,6 +36,8 @@
 
 #include "CDPL/Chem/APIPrefix.hpp"
 #include "CDPL/Math/VectorArray.hpp"
+#include "CDPL/Math/Matrix.hpp"
+#include "CDPL/Math/KabschAlgorithm.hpp"
 #include "CDPL/Util/BitSet.hpp"
 
 
@@ -114,21 +116,44 @@ namespace CDPL
 				
 			void init(const MolecularGraph&);
 
-			void assignHydrogenCoords();
+			void assignCoordinates();
+			void assignDiatomicMolCoords(const Atom&, std::size_t);
+			void assignLinearCoords(const Atom&, std::size_t, std::size_t);
+			void assignTrigonalPlanarCoords(const Atom&, std::size_t, std::size_t);
+			void assignTetrahedralCoords(const Atom&, std::size_t, std::size_t);
+			void assignSquarePlanarCoords(const Atom&, std::size_t, std::size_t);
+			void assignTrigonalBipyramidalCoords(const Atom&, std::size_t, std::size_t);
+			void assignOctahedralCoords(const Atom&, std::size_t, std::size_t);
+			void assignPentagonalBipyramidalCoords(const Atom&, std::size_t, std::size_t);
+			void assignEvenlyDistributedCoords(const Atom&, std::size_t, std::size_t);
 
-			void assignDiatomicMolNbrCoords(const Atom&, std::size_t);
-			void assignLinearGeomCoords(const Atom&, std::size_t, std::size_t);
+			void assignTemplateCoords(const Atom&, std::size_t, std::size_t, 
+									  std::size_t, const Math::Vector3D[], const std::size_t*);
 
-			std::size_t getConnectedAtoms(const Atom&);
+			std::size_t getConnectedAtoms(const Atom&, AtomIndexList&);
+			bool getConnectedAtomWithCoords(std::size_t, const Atom&, std::size_t&) const;
 
 			double getHydrogenBondLength(const Atom&) const;
 
-			const MolecularGraph* molGraph;
-			bool                  undefOnly;
-			Math::Vector3DArray   coordinates;
-			Util::BitSet          defCoordsMask;
-			AtomIndexList         centerAtoms;
-			AtomIndexList         conctdAtoms;
+			unsigned int getHybridizationState(const Atom&, std::size_t) const;
+
+			void buildOrthogonalBasis(const Math::Vector3D&, const Math::Vector3D&, Math::Matrix3D&, bool) const;
+			void getRotationReferenceVector(const Atom&, std::size_t, std::size_t, std::size_t, Math::Vector3D&) const;
+			void getPerpendicularVector(const Math::Vector3D&, Math::Vector3D&) const;
+			
+			typedef std::vector<Math::Vector3D> DynamicPointArray;
+			
+			const MolecularGraph*         molGraph;
+			bool                          undefOnly;
+			Math::Vector3DArray           coordinates;
+			Util::BitSet                  defCoordsMask;
+			AtomIndexList                 centerAtoms;
+			AtomIndexList                 conctdAtoms;
+			Math::DMatrix                 refPoints;
+			Math::DMatrix                 tmpltPoints;
+			DynamicPointArray             genPoints;
+			Math::KabschAlgorithm<double> kabschAlgo;
+			Util::BitSet                  usedPosMask;
 
 			/** \endcond */
 		};
