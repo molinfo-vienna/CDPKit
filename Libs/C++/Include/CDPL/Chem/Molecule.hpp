@@ -54,7 +54,7 @@ namespace CDPL
 		class CDPL_CHEM_API Molecule : public MolecularGraph
 		{
 
-		public:
+		  public:
 			/**	
 			 * \brief A reference-counted smart pointer [\ref BSHPTR] for dynamically allocated \c %Molecule instances.
 			 */

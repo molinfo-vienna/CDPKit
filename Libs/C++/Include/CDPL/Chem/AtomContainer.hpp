@@ -71,7 +71,7 @@ namespace CDPL
 			typedef Util::IndexedElementIterator<const Atom, ConstAtomAccessor> ConstAtomIterator;
 
 			/**
-			 * \brief A constant random access iterator used to iterate over the stored \c const Chem::Atom objects.
+			 * \brief A mutable random access iterator used to iterate over the stored Chem::Atom objects.
 			 */
 			typedef Util::IndexedElementIterator<Atom, AtomAccessor> AtomIterator;
 
@@ -110,14 +110,14 @@ namespace CDPL
 			ConstAtomIterator getAtomsEnd() const;
 
 			/**
-			 * \brief Returns a mutable iterator pointing to the beginning of the stored \c const Chem::Atom objects.
-			 * \return A mutable iterator pointing to the beginning of the stored \c const Chem::Atom objects.
+			 * \brief Returns a mutable iterator pointing to the beginning of the stored Chem::Atom objects.
+			 * \return A mutable iterator pointing to the beginning of the stored Chem::Atom objects.
 			 */
 			AtomIterator getAtomsBegin();
 
 			/**
-			 * \brief Returns a mutable iterator pointing to the end of the stored \c const Chem::Atom objects.
-			 * \return A mutable iterator pointing to the end of the stored \c const Chem::Atom objects.
+			 * \brief Returns a mutable iterator pointing to the end of the stored Chem::Atom objects.
+			 * \return A mutable iterator pointing to the end of the stored Chem::Atom objects.
 			 */
 			AtomIterator getAtomsEnd();
 

@@ -71,7 +71,7 @@ namespace CDPL
 			typedef Util::IndexedElementIterator<const Bond, ConstBondAccessor> ConstBondIterator;
 
 			/**
-			 * \brief A constant random access iterator used to iterate over the stored \c const Chem::Bond objects.
+			 * \brief A mutable random access iterator used to iterate over the stored Chem::Bond objects.
 			 */
 			typedef Util::IndexedElementIterator<Bond, BondAccessor> BondIterator;
 
@@ -110,14 +110,14 @@ namespace CDPL
 			ConstBondIterator getBondsEnd() const;
 
 			/**
-			 * \brief Returns a mutable iterator pointing to the beginning of the stored \c const Chem::Bond objects.
-			 * \return A mutable iterator pointing to the beginning of the stored \c const Chem::Bond objects.
+			 * \brief Returns a mutable iterator pointing to the beginning of the stored Chem::Bond objects.
+			 * \return A mutable iterator pointing to the beginning of the stored Chem::Bond objects.
 			 */
 			BondIterator getBondsBegin();
 
 			/**
-			 * \brief Returns a mutable iterator pointing to the end of the stored \c const Chem::Bond objects.
-			 * \return A mutable iterator pointing to the end of the stored \c const Chem::Bond objects.
+			 * \brief Returns a mutable iterator pointing to the end of the stored Chem::Bond objects.
+			 * \return A mutable iterator pointing to the end of the stored Chem::Bond objects.
 			 */
 			BondIterator getBondsEnd();
 
