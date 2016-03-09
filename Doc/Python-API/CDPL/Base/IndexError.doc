@@ -1,9 +1,0 @@
-/* -*- mode: java; tab-width: 4 -*- */
-
-package CDPL.Base;
-
-/**
- * \brief IndexError.
- */
-public class IndexError extends RangeError, exceptions.IndexError {
-}

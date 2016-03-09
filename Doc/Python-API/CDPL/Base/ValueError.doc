@@ -1,9 +1,0 @@
-/* -*- mode: java; tab-width: 4 -*- */
-
-package CDPL.Base;
-
-/**
- * \brief ValueError.
- */
-public class ValueError extends Exception, exceptions.ValueError {
-}
