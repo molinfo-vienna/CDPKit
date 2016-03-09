@@ -71,12 +71,14 @@ namespace CDPL
 			/**
 			 * \brief Constructs the \c %BondDirectionGenerator instance and generates direction flags for a minimum set of
 			 *        directional bonds that unambiguously define the configuration of double bonds in the molecular graph \a molgraph.
-			 *
-			 * The generated bond direction flags can be retrieved by a call to getResult().
-			 *
 			 * \param molgraph The molecular graph for which to generate the bond direction flags.
+			 * \param dirs An array containing the generated bond direction flags (possible
+			 *         values are defined as constants in namespace Chem::BondDirection). The
+			 *         directions are stored in the same order as the bonds appear in the bond list of
+			 *         the molecular graph (i.e. the direction flag of a bond is accessible via
+			 *         its index).
 			 */
-			BondDirectionGenerator(const MolecularGraph& molgraph);
+			BondDirectionGenerator(const MolecularGraph& molgraph, Util::UIArray& dirs);
 
 			/**
 			 * \brief Allows to specify whether or not the configuration of ring double bonds shall also be regarded in the
@@ -115,23 +117,13 @@ namespace CDPL
 			 * \brief Generates direction flags for a minimum set of directional bonds that unambiguously define the configuration
 			 *        of double bonds in the molecular graph \a molgraph.
 			 * \param molgraph The molecular graph for which to generate the bond direction flags.
-			 * \return An array containing the generated bond direction flags (possible
+			 * \param dirs An array containing the generated bond direction flags (possible
 			 *         values are defined as constants in namespace Chem::BondDirection). The
 			 *         directions are stored in the same order as the bonds appear in the bond list of
 			 *         the molecular graph (i.e. the direction flag of a bond is accessible via
 			 *         its index).
 			 */
-			const Util::UIArray& generate(const MolecularGraph& molgraph);
-
-			/**
-			 * \brief Returns the result of the last bond direction flag calculation.
-			 * \return An array containing the generated bond direction flags (possible
-			 *         values are defined as constants in namespace Chem::BondDirection). If
-			 *         direction flags for a molecular graph have not yet been generated, the
-			 *         returned array is empty.
-			 * \see generate()
-			 */
-			const Util::UIArray& getResult() const;
+			void generate(const MolecularGraph& molgraph, Util::UIArray& dirs);
 
 		private:
 			/** \cond CDPL_PRIVATE_SECTION_DOC */
@@ -154,11 +146,11 @@ namespace CDPL
 
 			BondDirectionGenerator& operator=(const BondDirectionGenerator&);
 
-			void init(const MolecularGraph&);
+			void init(const MolecularGraph&, Util::UIArray&);
 
-			bool assignDirections(std::size_t);
+			bool assignDirections(std::size_t, Util::UIArray&);
 
-			void switchBondDirection(unsigned int&);
+			void switchDirection(unsigned int&);
 
 			class StereoBond
 			{
@@ -201,8 +193,7 @@ namespace CDPL
 			StereoBondArray        stereoBonds;
 			StereoBondPtrArray     orderedStereoBonds;
 			StereoBondPtrArray     atomStereoBondTable;
-			Util::UIArray          bondDirections;
-			Util::UIArray          workingBondDirections;
+			Util::UIArray          workingDirs;
 			Util::BitSet           configMatchMask;
 			std::size_t            numMismatches;
 			std::size_t            minNumMismatches;

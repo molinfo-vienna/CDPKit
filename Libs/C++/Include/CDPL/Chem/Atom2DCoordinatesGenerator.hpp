@@ -77,30 +77,23 @@ namespace CDPL
 			/**
 			 * \brief Constructs the \c %Atom2DCoordinatesGenerator instance and generates 2D coordinates for
 			 *        the atoms of the molecular graph \a molgraph.
-			 *
-			 * The generated coordinates can be retrieved by a call to getResult().
-			 *
 			 * \param molgraph The molecular graph for which to generate 2D coordinates.
-			 */
-			Atom2DCoordinatesGenerator(const MolecularGraph& molgraph);
-
-			/**
-			 * \brief Generates 2D coordinates for the atoms of the molecular graph \a molgraph.
-			 * \param molgraph The molecular graph for which to generate 2D coordinates.
-			 * \return An array containing the generated 2D coordinates. The coordinates
+			 * \param coords An array containing the generated 2D coordinates. The coordinates
 			 *         are stored in the same order as the atoms appear in the atom list of
 			 *         the molecular graph (i.e. the coordinates of an atom are accessible via
 			 *         its index).
 			 */
-			const Math::Vector2DArray& generate(const MolecularGraph& molgraph);
+			Atom2DCoordinatesGenerator(const MolecularGraph& molgraph, Math::Vector2DArray& coords);
 
 			/**
-			 * \brief Returns the result of the last 2D coordinates calculation.
-			 * \return An array containing the generated 2D coordinates. If a calculation
-			 *         has not yet been performed, the returned array is empty.
-			 * \see generate()
+			 * \brief Generates 2D coordinates for the atoms of the molecular graph \a molgraph.
+			 * \param molgraph The molecular graph for which to generate 2D coordinates.
+			 * \param coords An array containing the generated 2D coordinates. The coordinates
+			 *         are stored in the same order as the atoms appear in the atom list of
+			 *         the molecular graph (i.e. the coordinates of an atom are accessible via
+			 *         its index).
 			 */
-			const Math::Vector2DArray& getResult() const;
+			void generate(const MolecularGraph& molgraph, Math::Vector2DArray& coords);
 
 		private:
 			/** \cond CDPL_PRIVATE_SECTION_DOC */
@@ -474,25 +467,25 @@ namespace CDPL
 
 			Atom2DCoordinatesGenerator& operator=(const Atom2DCoordinatesGenerator&);
 
-			void init(const MolecularGraph&);
+			void init(const MolecularGraph&, Math::Vector2DArray&);
 
 			void extractRingInformation();
 
 			void calcAtomPriorities();
 			void calcRingPriorities();
 
-			void layoutComponents();
-			void layoutComponent(const Fragment&);
+			void layoutComponents(Math::Vector2DArray&);
+			void layoutComponent(const Fragment&, Math::Vector2DArray&);
 
-			void alignComponents();
+			void alignComponents(Math::Vector2DArray&);
 
-			void moveComponent(const BoundingBox&, double, double, const Fragment&);
+			void moveComponent(const BoundingBox&, double, double, const Fragment&, Math::Vector2DArray&);
 			void addPoint(BoundingBox&, const Math::Vector2D&) const;
-			void calcBounds(BoundingBox&, const Fragment&) const;
+			void calcBounds(BoundingBox&, const Fragment&, Math::Vector2DArray&) const;
 
-			void createLayoutTree(const Fragment&);
-			void createRingSysNodes(const Fragment&);
-			void createAtomNodes(const Fragment&);
+			void createLayoutTree(const Fragment&, Math::Vector2DArray&);
+			void createRingSysNodes(const Fragment&, Math::Vector2DArray&);
+			void createAtomNodes(const Fragment&, Math::Vector2DArray&);
 			void createBondEdges(const Fragment&);
 			void createSpiroEdges(const Fragment&);
 
@@ -515,8 +508,8 @@ namespace CDPL
 
 			const RingInfo* allocRingInfo(const Fragment&);
 
-			RingSysNode* allocRingSysNode(const RingInfo::SharedPointer&);
-			AtomNode* allocAtomNode(const Atom*);
+			RingSysNode* allocRingSysNode(const RingInfo::SharedPointer&, Math::Vector2DArray&);
+			AtomNode* allocAtomNode(const Atom*, Math::Vector2DArray&);
 
   			void freeAllocEdges();
   			void freeAllocRingInfos();
@@ -545,7 +538,6 @@ namespace CDPL
 			Util::BitSet          atomMask;
 			Util::BitSet          ringAtomMask;
 			Util::BitSet          tmpBitMask;
-			Math::Vector2DArray   coords;
 			AtomPriorityTable     atomPriorityTable;
 			std::size_t           numAtoms;
 			std::size_t           numBonds;

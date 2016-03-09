@@ -41,25 +41,18 @@
 using namespace CDPL;
 
 
-Chem::CIPPriorityCalculator::CIPPriorityCalculator(const MolecularGraph& molgraph)
+Chem::CIPPriorityCalculator::CIPPriorityCalculator(const MolecularGraph& molgraph, Util::STArray& priorities)
 {
-	calculate(molgraph);
+	calculate(molgraph, priorities);
 }
 
-const Util::STArray& Chem::CIPPriorityCalculator::calculate(const MolecularGraph& molgraph)
+void Chem::CIPPriorityCalculator::calculate(const MolecularGraph& molgraph, Util::STArray& priorities)
 {
-	init(molgraph);
-	determinePriorities();	
-
-	return priorities;
+	init(molgraph, priorities);
+	determinePriorities(priorities);	
 }
 
-const Util::STArray& Chem::CIPPriorityCalculator::getResult() const
-{
-	return priorities;
-}
-
-void Chem::CIPPriorityCalculator::init(const MolecularGraph& molgraph)
+void Chem::CIPPriorityCalculator::init(const MolecularGraph& molgraph, Util::STArray& priorities)
 {
 	std::size_t num_atoms = molgraph.getNumAtoms();
 
@@ -127,7 +120,7 @@ void Chem::CIPPriorityCalculator::init(const MolecularGraph& molgraph)
 	}
 }
 
-void Chem::CIPPriorityCalculator::determinePriorities()
+void Chem::CIPPriorityCalculator::determinePriorities(Util::STArray& priorities)
 {
 	AtomNode::LessCmpFunc node_cmp_func;
 

@@ -39,7 +39,8 @@ void Chem::generate2DCoordinates(MolecularGraph& molgraph, bool overwrite)
 	if (!overwrite && hasCoordinates(molgraph, 2))
 		return;
 
-	Atom2DCoordinatesGenerator generator(molgraph);
+	Math::Vector2DArray coords;
+	Atom2DCoordinatesGenerator generator(molgraph, coords);
 
-	set2DCoordinates(molgraph, generator.getResult());
+	set2DCoordinates(molgraph, coords);
 }

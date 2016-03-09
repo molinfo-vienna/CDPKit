@@ -41,22 +41,17 @@ void CDPLPythonChem::exportPEOEChargeCalculator()
 
 	python::class_<Chem::PEOEChargeCalculator, boost::noncopyable>("PEOEChargeCalculator", python::no_init)
 		.def(python::init<>(python::arg("self")))
-		.def(python::init<const Chem::MolecularGraph&>((python::arg("self"), python::arg("molgraph"))))
+		.def(python::init<const Chem::MolecularGraph&, Util::DArray&>(
+				 (python::arg("self"), python::arg("molgraph"), python::arg("charges"))))
 		.def(CDPLPythonBase::ObjectIdentityCheckVisitor<Chem::PEOEChargeCalculator>())	
 		.def("setNumIterations", &Chem::PEOEChargeCalculator::setNumIterations, (python::arg("self"), python::arg("num_iter")))
 		.def("setDampingFactor", &Chem::PEOEChargeCalculator::setDampingFactor, (python::arg("self"), python::arg("factor")))
 		.def("getNumIterations", &Chem::PEOEChargeCalculator::getNumIterations, python::arg("self"))
 		.def("getDampingFactor", &Chem::PEOEChargeCalculator::getDampingFactor, python::arg("self"))
-		.def("calculate", &Chem::PEOEChargeCalculator::calculate, (python::arg("self"), python::arg("molgraph")), 
-			 python::return_internal_reference<>())
-		.def("getResult", &Chem::PEOEChargeCalculator::getResult, python::arg("self"), 
-			 python::return_internal_reference<>())
-		.def("getElectronegativities", &Chem::PEOEChargeCalculator::getElectronegativities, python::arg("self"), 
-			 python::return_internal_reference<>())
-		.add_property("result", python::make_function(&Chem::PEOEChargeCalculator::getResult,
-													  python::return_internal_reference<>()))
-		.add_property("electronegativities", python::make_function(&Chem::PEOEChargeCalculator::getElectronegativities,
-													  python::return_internal_reference<>()))
+		.def("calculate", &Chem::PEOEChargeCalculator::calculate, 
+			 (python::arg("self"), python::arg("molgraph"), python::arg("charges")))
+		.def("getElectronegativities", &Chem::PEOEChargeCalculator::getElectronegativities, 
+			 (python::arg("self"), python::arg("elnegs")))
 		.add_property("numIterations", &Chem::PEOEChargeCalculator::getNumIterations, 
 					  &Chem::PEOEChargeCalculator::setNumIterations)
 		.add_property("dampingFactor", &Chem::PEOEChargeCalculator::getDampingFactor,

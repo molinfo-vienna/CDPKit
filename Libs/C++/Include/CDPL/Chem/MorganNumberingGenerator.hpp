@@ -73,29 +73,21 @@ namespace CDPL
 			/**
 			 * \brief Constructs the \c %MorganNumberingGenerator instance and performs a canonical numbering
 			 *        of the atoms in the molecular graph \a molgraph.
-			 *
-			 * The generated canonical atom labels can be retrieved by a call to getResult().
-			 *
 			 * \param molgraph The molecular graph for which to perform the canonical numbering.
+			 * \param numbering An array that contains the generated canonical atom numbering. The numbers
+			 *         are stored in the same order as the atoms appear in the atom list of the molecular graph
+			 *         (i.e. the canonical number of an atom is accessible via its index).
 			 */
-			MorganNumberingGenerator(const MolecularGraph& molgraph);
+			MorganNumberingGenerator(const MolecularGraph& molgraph, Util::STArray& numbering);
 
 			/**
 			 * \brief Performs a canonical numbering of the atoms in the molecular graph \a molgraph.
 			 * \param molgraph The molecular graph for which to perform the canonical numbering.
-			 * \return An array that contains the generated canonical atom labels. The labels
+			 * \param numbering An array that contains the generated canonical atom numbering. The numbers
 			 *         are stored in the same order as the atoms appear in the atom list of the molecular graph
 			 *         (i.e. the canonical number of an atom is accessible via its index).
 			 */
-			const Util::STArray& generate(const MolecularGraph& molgraph);
-
-			/**
-			 * \brief Returns the result of the last canonical numbering.
-			 * \return An array that contains the canonical atom labels. If a canonical
-			 *         numbering has not yet been performed, the returned array is empty.
-			 * \see generate()
-			 */
-			const Util::STArray& getResult() const;
+			void generate(const MolecularGraph& molgraph, Util::STArray& numbering);
 
 		private:
 			/** \cond CDPL_PRIVATE_SECTION_DOC */
@@ -120,8 +112,7 @@ namespace CDPL
 					symClassIDs(sym_class_ids), atomSymbols(symbols), 
 					atomCharges(charges), atomIsotopes(isotopes), bondMatrix(bond_mtx) {}
 
-				const Util::STArray& generate(const MolecularGraph&);	
-				const Util::STArray& getResult() const;	
+				void generate(const MolecularGraph&, Util::STArray&);	
 
 			private:
 				NumberingState() {}
@@ -130,7 +121,7 @@ namespace CDPL
 
 				void perceiveSymClasses();
 
-				void distributeNumbers();
+				void distributeNumbers(Util::STArray&);
 				void distributeNumbers(std::size_t);
 
 				void getNextAtomIndices(STArray&);
@@ -147,7 +138,6 @@ namespace CDPL
 				STArray*                 atomIsotopes;
 				Math::ULMatrix*          bondMatrix;
 				const MolecularGraph*    molGraph;
-				Util::STArray            finalNumbering;
 				STPairArray              atomNumbering;
 				STArray                  indexLookupTable;
 				STArray                  fromList;

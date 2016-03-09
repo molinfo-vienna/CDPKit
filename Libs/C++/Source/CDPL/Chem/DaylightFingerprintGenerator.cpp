@@ -132,11 +132,11 @@ Chem::DaylightFingerprintGenerator::DaylightFingerprintGenerator():
 	molGraph(0), numBits(256), minPathLength(0), maxPathLength(5),
 	atomDescriptorFunc(DefAtomDescriptorFunctor()), bondDescriptorFunc(DefBondDescriptorFunctor()) {}
 
-Chem::DaylightFingerprintGenerator::DaylightFingerprintGenerator(const MolecularGraph& molgraph):
+Chem::DaylightFingerprintGenerator::DaylightFingerprintGenerator(const MolecularGraph& molgraph, Util::BitSet& fprint):
 	molGraph(0), numBits(256), minPathLength(0), maxPathLength(5), 
 	atomDescriptorFunc(DefAtomDescriptorFunctor()), bondDescriptorFunc(DefBondDescriptorFunctor())
 {
-	generate(molgraph);
+	generate(molgraph, fprint);
 }
 
 void Chem::DaylightFingerprintGenerator::setMinPathLength(std::size_t min_length)
@@ -169,16 +169,9 @@ std::size_t Chem::DaylightFingerprintGenerator::getNumBits() const
 	return numBits;
 }
 
-const Util::BitSet& Chem::DaylightFingerprintGenerator::generate(const MolecularGraph& molgraph)
+void Chem::DaylightFingerprintGenerator::generate(const MolecularGraph& molgraph, Util::BitSet& fprint)
 {
-	calcFingerprint(molgraph);	
-
-	return fingerprint;
-}
-
-const Util::BitSet& Chem::DaylightFingerprintGenerator::getResult() const
-{
-	return fingerprint;
+	calcFingerprint(molgraph, fprint);	
 }
 
 void Chem::DaylightFingerprintGenerator::setAtomDescriptorFunction(const AtomDescriptorFunction& func)
@@ -191,12 +184,12 @@ void Chem::DaylightFingerprintGenerator::setBondDescriptorFunction(const BondDes
 	bondDescriptorFunc = func;
 }
 
-void Chem::DaylightFingerprintGenerator::calcFingerprint(const MolecularGraph& molgraph)
+void Chem::DaylightFingerprintGenerator::calcFingerprint(const MolecularGraph& molgraph, Util::BitSet& fprint)
 {
 	molGraph = &molgraph;
 
-	fingerprint.resize(numBits);
-	fingerprint.reset();
+	fprint.resize(numBits);
+	fprint.reset();
 
 	std::size_t num_atoms = molgraph.getNumAtoms();
 
@@ -239,10 +232,10 @@ void Chem::DaylightFingerprintGenerator::calcFingerprint(const MolecularGraph& m
 	visBondMask.reset();
 
 	std::for_each(molgraph.getAtomsBegin(), molgraph.getAtomsEnd(),
-				  boost::bind(&DaylightFingerprintGenerator::growPath, this, _1));
+				  boost::bind(&DaylightFingerprintGenerator::growPath, this, _1, boost::ref(fprint)));
 }
 
-void Chem::DaylightFingerprintGenerator::growPath(const Atom& atom)
+void Chem::DaylightFingerprintGenerator::growPath(const Atom& atom, Util::BitSet& fprint)
 {
 	std::size_t atom_idx = molGraph->getAtomIndex(atom);
 
@@ -251,7 +244,7 @@ void Chem::DaylightFingerprintGenerator::growPath(const Atom& atom)
 	std::size_t bond_path_len = bondPath.size();
 
 	if (bond_path_len >= minPathLength)
-		fingerprint.set(calcBitIndex());
+		fprint.set(calcBitIndex());
 
 	if (bond_path_len < maxPathLength) {
 		Atom::ConstAtomIterator nbrs_end = atom.getAtomsEnd();
@@ -269,7 +262,7 @@ void Chem::DaylightFingerprintGenerator::growPath(const Atom& atom)
 			visBondMask.set(bond_idx);
 			bondPath.push_back(bond_idx);
 
-			growPath(*a_it);
+			growPath(*a_it, fprint);
 
 			bondPath.pop_back();
 			visBondMask.reset(bond_idx);

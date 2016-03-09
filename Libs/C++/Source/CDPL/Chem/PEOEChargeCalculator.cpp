@@ -53,10 +53,10 @@ namespace
 Chem::PEOEChargeCalculator::PEOEChargeCalculator():
 	numIterations(DEF_NUM_ITERATIONS), dampingFactor(DEF_DAMPING_FACTOR) {}
 
-Chem::PEOEChargeCalculator::PEOEChargeCalculator(const MolecularGraph& molgraph):
+Chem::PEOEChargeCalculator::PEOEChargeCalculator(const MolecularGraph& molgraph, Util::DArray& charges):
 	numIterations(DEF_NUM_ITERATIONS), dampingFactor(DEF_DAMPING_FACTOR)
 {
-	calculate(molgraph);
+	calculate(molgraph, charges);
 }
 
 void Chem::PEOEChargeCalculator::setNumIterations(std::size_t num_iter)
@@ -79,25 +79,24 @@ double Chem::PEOEChargeCalculator::getDampingFactor() const
 	return dampingFactor;
 }
 
-const Util::DArray& Chem::PEOEChargeCalculator::calculate(const MolecularGraph& molgraph)
+void Chem::PEOEChargeCalculator::calculate(const MolecularGraph& molgraph, Util::DArray& charges)
 {
-	init(molgraph);
-	calcCharges();
-
-	return resCharges;
+	init(molgraph, charges);
+	calcCharges(charges);
 }
 
-const Util::DArray& Chem::PEOEChargeCalculator::getResult() const
+void Chem::PEOEChargeCalculator::getElectronegativities(Util::DArray& elnegs) const
 {
-	return resCharges;
+	elnegs.clear();
+	elnegs.reserve(atomStates.size());
+	
+	std::for_each(atomStates.begin(), atomStates.end(), 
+				  boost::bind(&Util::DArray::addElement, 
+							  boost::ref(elnegs),
+							  boost::bind(&PEOEAtomState::getElectronegativity, _1)));
 }
 
-const Util::DArray& Chem::PEOEChargeCalculator::getElectronegativities() const
-{
-	return resEnegativities;
-}
-
-void Chem::PEOEChargeCalculator::init(const MolecularGraph& molgraph)
+void Chem::PEOEChargeCalculator::init(const MolecularGraph& molgraph, Util::DArray& charges)
 {
 	std::size_t num_atoms = molgraph.getNumAtoms();
 
@@ -107,11 +106,8 @@ void Chem::PEOEChargeCalculator::init(const MolecularGraph& molgraph)
 	implHStates.clear();
 	implHStates.reserve(num_atoms);
 
-	resCharges.clear();
-	resCharges.reserve(num_atoms);
-
-	resEnegativities.clear();
-	resEnegativities.reserve(num_atoms);
+	charges.clear();
+	charges.reserve(num_atoms);
 
 	MolecularGraph::ConstAtomIterator atoms_end = molgraph.getAtomsEnd();
 
@@ -154,7 +150,7 @@ void Chem::PEOEChargeCalculator::init(const MolecularGraph& molgraph)
 	}
 }
 
-void Chem::PEOEChargeCalculator::calcCharges()
+void Chem::PEOEChargeCalculator::calcCharges(Util::DArray& charges)
 {
 	PEOEAtomStateList::iterator atom_states_beg = atomStates.begin();
 	PEOEAtomStateList::iterator atom_states_end = atomStates.end();
@@ -179,12 +175,8 @@ void Chem::PEOEChargeCalculator::calcCharges()
 	}
 
 	std::for_each(atom_states_beg, atom_states_end, boost::bind(&Util::DArray::addElement, 
-																boost::ref(resCharges),
+																boost::ref(charges),
 																boost::bind(&PEOEAtomState::getCharge, _1)));
-
-	std::for_each(atom_states_beg, atom_states_end, boost::bind(&Util::DArray::addElement, 
-																boost::ref(resEnegativities),
-																boost::bind(&PEOEAtomState::getElectronegativity, _1)));
 }
 
 

@@ -36,9 +36,9 @@ using namespace CDPL;
 
 void Chem::kekulizeBonds(MolecularGraph& molgraph)
 {
-	KekuleStructureGenerator kekulizer(molgraph);
+	Util::STArray orders;
+	KekuleStructureGenerator kekulizer(molgraph, orders);
 
-	const Util::STArray& orders = kekulizer.getResult();
 	std::size_t num_bonds = molgraph.getNumBonds();
 
 	for (std::size_t i = 0; i < num_bonds; i++)

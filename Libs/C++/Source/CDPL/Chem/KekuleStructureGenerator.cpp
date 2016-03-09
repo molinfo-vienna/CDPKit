@@ -67,24 +67,19 @@ namespace
 
 Chem::KekuleStructureGenerator::KekuleStructureGenerator() {}
 
-Chem::KekuleStructureGenerator::KekuleStructureGenerator(const MolecularGraph& molgraph) 
+Chem::KekuleStructureGenerator::KekuleStructureGenerator(const MolecularGraph& molgraph, Util::STArray& orders) 
 {
-	generate(molgraph);
+	generate(molgraph, orders);
 }
 
-const Util::STArray& Chem::KekuleStructureGenerator::getResult() const
+void Chem::KekuleStructureGenerator::generate(const MolecularGraph& molgraph, Util::STArray& orders)
 {
-	return bondOrders;
-}
-
-const Util::STArray& Chem::KekuleStructureGenerator::generate(const MolecularGraph& molgraph)
-{
-	init(molgraph);
+	init(molgraph, orders);
 
 	std::size_t num_atoms = molgraph.getNumAtoms();
 
 	if (startAtomIdx == num_atoms)
-		return bondOrders;
+		return;
 
 	for (std::size_t i = startAtomIdx; i < num_atoms; i++) {
 		const Atom& atom = molgraph.getAtom(i);
@@ -122,7 +117,7 @@ const Util::STArray& Chem::KekuleStructureGenerator::generate(const MolecularGra
 			if (!defOrderMask.test(bond_idx))
 				num_undef_nbr_bonds++;
 			else
-				free_valence -= bondOrders[bond_idx];
+				free_valence -= orders[bond_idx];
 		}
 
 		if (free_valence < 0 || long(num_undef_nbr_bonds) >= free_valence)
@@ -199,20 +194,18 @@ const Util::STArray& Chem::KekuleStructureGenerator::generate(const MolecularGra
 				std::size_t atom_idx2 = atom_index_map[max_match[*vi]] + startAtomIdx;
 				std::size_t bond_idx = molgraph.getBondIndex(molgraph.getAtom(atom_idx1).getBondToAtom(molgraph.getAtom(atom_idx2)));
 
-				bondOrders[bond_idx] = 2;
+				orders[bond_idx] = 2;
 			}
 		}
 	}
-
-	return bondOrders;
 }
 
-void Chem::KekuleStructureGenerator::init(const MolecularGraph& molgraph)
+void Chem::KekuleStructureGenerator::init(const MolecularGraph& molgraph, Util::STArray& orders)
 {
 	std::size_t num_bonds = molgraph.getNumBonds();
 	molGraph = &molgraph;
 
-	bondOrders.assign(num_bonds, 0);
+	orders.assign(num_bonds, 0);
 	defOrderMask.resize(num_bonds);
 	defOrderMask.set();
 
@@ -225,10 +218,10 @@ void Chem::KekuleStructureGenerator::init(const MolecularGraph& molgraph)
 			continue;
 
 		if (hasOrder(bond)) {
-			bondOrders[i] = getOrder(bond);
+			orders[i] = getOrder(bond);
 
 		} else {
-			bondOrders[i] = 1;
+			orders[i] = 1;
 			defOrderMask.reset(i);
 
 			startAtomIdx = std::min(startAtomIdx, molgraph.getAtomIndex(bond.getBegin()));

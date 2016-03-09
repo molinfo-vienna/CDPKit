@@ -42,12 +42,8 @@ void CDPLPythonChem::exportMorganNumberingGenerator()
 	python::class_<Chem::MorganNumberingGenerator, boost::noncopyable>("MorganNumberingGenerator", 
 																	   python::no_init)
 		.def(python::init<>(python::arg("self")))
-		.def(python::init<const Chem::MolecularGraph&>((python::arg("self"), python::arg("molgraph"))))
+		.def(python::init<const Chem::MolecularGraph&, Util::STArray&>((python::arg("self"), python::arg("molgraph"), python::arg("numbering"))))
 		.def(CDPLPythonBase::ObjectIdentityCheckVisitor<Chem::MorganNumberingGenerator>())	
-		.def("generate", &Chem::MorganNumberingGenerator::generate, (python::arg("self"), python::arg("molgraph")), 
-			 python::return_internal_reference<>())
-		.def("getResult", &Chem::MorganNumberingGenerator::getResult, python::arg("self"),
-			 python::return_internal_reference<>())
-		.add_property("result", python::make_function(&Chem::MorganNumberingGenerator::getResult,
-													  python::return_internal_reference<>()));
+		.def("generate", &Chem::MorganNumberingGenerator::generate, 
+			 (python::arg("self"), python::arg("molgraph"), python::arg("numbering")));
 }

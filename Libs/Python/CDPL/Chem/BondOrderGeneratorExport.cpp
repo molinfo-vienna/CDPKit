@@ -44,15 +44,12 @@ void CDPLPythonChem::exportBondOrderGenerator()
 
     python::class_<Chem::BondOrderGenerator, boost::noncopyable>("BondOrderGenerator", python::no_init)
 		.def(python::init<>(python::arg("self")))
-		.def(python::init<const Chem::MolecularGraph&, bool>((python::arg("self"), python::arg("molgraph"), python::arg("undef_only") = true)))
+		.def(python::init<const Chem::MolecularGraph&, Util::STArray&, bool>(
+				 (python::arg("self"), python::arg("molgraph"), python::arg("orders"), python::arg("undef_only") = true)))
 		.def(CDPLPythonBase::ObjectIdentityCheckVisitor<Chem::BondOrderGenerator>())	
 		.def("undefinedOnly", undefOnlySetterFunc, (python::arg("self"), python::arg("undef_only")))
 		.def("undefinedOnly", undefOnlyGetterFunc, python::arg("self"))
-		.def("generate", &Chem::BondOrderGenerator::generate, (python::arg("self"), python::arg("molgraph")),
-			python::return_internal_reference<>())
-		.def("getResult", &Chem::BondOrderGenerator::getResult, python::arg("self"),
-			 python::return_internal_reference<>())
-		.add_property("undefinedOnly", undefOnlyGetterFunc, undefOnlySetterFunc)
-		.add_property("result", python::make_function(&Chem::BondOrderGenerator::getResult,
-													  python::return_internal_reference<>()));
+		.def("generate", &Chem::BondOrderGenerator::generate, 
+			 (python::arg("self"), python::arg("molgraph"), python::arg("orders")))
+		.add_property("undefinedOnly", undefOnlyGetterFunc, undefOnlySetterFunc);
 }

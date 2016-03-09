@@ -41,12 +41,8 @@ void CDPLPythonChem::exportAtom2DCoordinatesGenerator()
 
 	python::class_<Chem::Atom2DCoordinatesGenerator, boost::noncopyable>("Atom2DCoordinatesGenerator", python::no_init)
 		.def(python::init<>(python::arg("self")))
-		.def(python::init<const Chem::MolecularGraph&>((python::arg("self"), python::arg("molgraph"))))
+		.def(python::init<const Chem::MolecularGraph&, Math::Vector2DArray&>((python::arg("self"), python::arg("molgraph"), python::arg("coords"))))
 		.def(CDPLPythonBase::ObjectIdentityCheckVisitor<Chem::Atom2DCoordinatesGenerator>())	
-		.def("generate", &Chem::Atom2DCoordinatesGenerator::generate, (python::arg("self"), python::arg("molgraph")), 
-			 python::return_internal_reference<>())
-		.def("getResult", &Chem::Atom2DCoordinatesGenerator::getResult, python::arg("self"),
-			 python::return_internal_reference<>())
-		.add_property("result", python::make_function(&Chem::Atom2DCoordinatesGenerator::getResult,
-													  python::return_internal_reference<>()));
+		.def("generate", &Chem::Atom2DCoordinatesGenerator::generate, 
+			 (python::arg("self"), python::arg("molgraph"), python::arg("coords")));
 }

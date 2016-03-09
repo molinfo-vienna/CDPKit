@@ -84,8 +84,9 @@ namespace CDPL
 			 * The calculated \e RDF code can be retrieved by a call to getResult().
 			 *
 			 * \param molgraph The molecular graph for which to calculate the \e RDF code vector.
+			 * \param rdf_code The calculated \e RDF code vector.
 			 */
-			RDFCodeCalculator(const MolecularGraph& molgraph);
+			RDFCodeCalculator(const MolecularGraph& molgraph, Math::DVector& rdf_code);
 
 			/**
 			 * \brief Allows to specify the smoothing factor used in the calculation of
@@ -176,17 +177,9 @@ namespace CDPL
 			 * the specified number of incrementation steps (see setNumSteps()) plus \e 1.
 			 * 
 			 * \param molgraph The molecular graph for which to calculate the \e RDF code.
-			 * \return The calculated \e RDF code vector.
+			 * \param rdf_code The calculated \e RDF code vector.
 			 */
-			const Math::DVector& calculate(const MolecularGraph& molgraph);
-
-			/**
-			 * \brief Returns the result of the last \e RDF code calculation.
-			 * \return The calculated \e RDF code vector. The length of the returned vector is zero if
-			 *         a calculation has not yet been performed.
-			 * \see calculate()
-			 */
-			const Math::DVector& getResult() const;
+			void calculate(const MolecularGraph& molgraph, Math::DVector& rdf_code);
 
 		private:
 			RDFCodeCalculator(const RDFCodeCalculator&);
@@ -201,7 +194,6 @@ namespace CDPL
 			double                 radiusIncrement;
 			std::size_t            numSteps;
 			AtomPairWeightFunction weightFunc;
-			Math::DVector          rdfCode;
 			Math::DMatrix          weightMatrix;
 		}; 
 

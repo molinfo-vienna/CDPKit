@@ -62,8 +62,8 @@ void CDPLPythonChem::exportMolecularGraph()
 	using namespace CDPL;
 
 	python::scope scope = python::class_<MolecularGraphWrapper, MolecularGraphWrapper::SharedPointer,
-		python::bases<Chem::AtomContainer, Chem::BondContainer, Base::PropertyContainer>,
-		boost::noncopyable>("MolecularGraph", python::no_init)
+										 python::bases<Chem::AtomContainer, Chem::BondContainer, Base::PropertyContainer>,
+										 boost::noncopyable>("MolecularGraph", python::no_init)
 		.def(python::init<>(python::arg("self")))
 		.def("getAtoms", &createAtomSequence<Chem::MolecularGraph>, python::arg("self"),
 			 python::with_custodian_and_ward_postcall<0, 1>())

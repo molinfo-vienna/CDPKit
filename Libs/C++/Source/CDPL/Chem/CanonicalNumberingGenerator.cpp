@@ -55,10 +55,10 @@ const unsigned int Chem::CanonicalNumberingGenerator::DEF_BOND_PROPERTY_FLAGS;
 Chem::CanonicalNumberingGenerator::CanonicalNumberingGenerator():
 	atomPropertyFlags(DEF_ATOM_PROPERTY_FLAGS), bondPropertyFlags(DEF_BOND_PROPERTY_FLAGS) {}
 
-Chem::CanonicalNumberingGenerator::CanonicalNumberingGenerator(const MolecularGraph& molgraph):
+Chem::CanonicalNumberingGenerator::CanonicalNumberingGenerator(const MolecularGraph& molgraph, Util::STArray& numbering):
 	atomPropertyFlags(DEF_ATOM_PROPERTY_FLAGS), bondPropertyFlags(DEF_BOND_PROPERTY_FLAGS)
 {
-	generate(molgraph);
+	generate(molgraph, numbering);
 }
 
 void Chem::CanonicalNumberingGenerator::setAtomPropertyFlags(unsigned int flags)
@@ -81,20 +81,13 @@ unsigned int Chem::CanonicalNumberingGenerator::getBondPropertyFlags() const
 	return bondPropertyFlags;
 }
 
-const Util::STArray& Chem::CanonicalNumberingGenerator::generate(const MolecularGraph& molgraph)
+void Chem::CanonicalNumberingGenerator::generate(const MolecularGraph& molgraph, Util::STArray& numbering)
 {
-	init(molgraph);
-	canonicalize(molgraph);	
-
-	return canonNumbering;
+	init(molgraph, numbering);
+	canonicalize(molgraph, numbering);	
 }
 
-const Util::STArray& Chem::CanonicalNumberingGenerator::getResult() const
-{
-	return canonNumbering;
-}
-
-void Chem::CanonicalNumberingGenerator::init(const MolecularGraph& molgraph)
+void Chem::CanonicalNumberingGenerator::init(const MolecularGraph& molgraph, Util::STArray& numbering)
 {
 	molGraph = &molgraph;
 
@@ -110,7 +103,7 @@ void Chem::CanonicalNumberingGenerator::init(const MolecularGraph& molgraph)
 	compConnectionTables.clear();
 	canonComponentList.clear();
 
-	canonNumbering.assign(num_atoms, 0);
+	numbering.assign(num_atoms, 0);
 
 	equivNodeStack.clear();
 	nodeLabelingStack.clear();
@@ -248,7 +241,7 @@ void Chem::CanonicalNumberingGenerator::setup(const MolecularGraph& comp)
 	}
 }
 
-void Chem::CanonicalNumberingGenerator::canonicalize(const MolecularGraph& molgraph)
+void Chem::CanonicalNumberingGenerator::canonicalize(const MolecularGraph& molgraph, Util::STArray& numbering)
 {
 	if (getComponents(molgraph)->getSize() <= 1) {
 		if (molgraph.getNumAtoms() == 0)
@@ -256,7 +249,7 @@ void Chem::CanonicalNumberingGenerator::canonicalize(const MolecularGraph& molgr
 
 		setup(molgraph);
 		canonicalize(0);
-		establishCanonNumbering();
+		establishCanonNumbering(numbering);
 		return;
 	}
 
@@ -272,7 +265,7 @@ void Chem::CanonicalNumberingGenerator::canonicalize(const MolecularGraph& molgr
 
 		setup(comp);
 		canonicalize(0);
-		establishCanonNumbering();
+		establishCanonNumbering(numbering);
 	}
 
 	ConnectionTableList::const_iterator ctab_it = compConnectionTables.begin();
@@ -301,7 +294,7 @@ void Chem::CanonicalNumberingGenerator::canonicalize(const MolecularGraph& molgr
 		for (Fragment::ConstAtomIterator a_it = comp->getAtomsBegin(); a_it != atoms_end; ++a_it) {
 			const Atom& atom = *a_it;
 
-			canonNumbering[molgraph.getAtomIndex(atom)] += comp_offset;
+			numbering[molgraph.getAtomIndex(atom)] += comp_offset;
 		}
 
 		comp_offset += comp->getNumAtoms();
@@ -593,7 +586,7 @@ void Chem::CanonicalNumberingGenerator::appendBondConfigs(ConnectionTable& ctab)
 	foundStereogenicBonds = (old_ctab_size != ctab.size());
 }
 
-void Chem::CanonicalNumberingGenerator::establishCanonNumbering()
+void Chem::CanonicalNumberingGenerator::establishCanonNumbering(Util::STArray& numbering)
 {
 	NodeList::const_iterator nodes_end = minNodeList.end();
 	std::size_t canon_number = 1;
@@ -601,7 +594,7 @@ void Chem::CanonicalNumberingGenerator::establishCanonNumbering()
 	for (NodeList::const_iterator n_it = minNodeList.begin(); n_it != nodes_end; ++n_it) {
 		const Atom* atom = (*n_it)->getAtom();
 
-		canonNumbering[molGraph->getAtomIndex(*atom)] = canon_number++;
+		numbering[molGraph->getAtomIndex(*atom)] = canon_number++;
 	}
 }
 

@@ -74,7 +74,8 @@ void CDPLPythonChem::exportDaylightFingerprintGenerator()
 	python::scope scope = python::class_<Chem::DaylightFingerprintGenerator, 
 										 boost::noncopyable>("DaylightFingerprintGenerator", python::no_init)
 		.def(python::init<>(python::arg("self")))
-		.def(python::init<const Chem::MolecularGraph&>((python::arg("self"), python::arg("molgraph"))))
+		.def(python::init<const Chem::MolecularGraph&, Util::BitSet&>(
+				 (python::arg("self"), python::arg("molgraph"), python::arg("fprint"))))
 		.def(CDPLPythonBase::ObjectIdentityCheckVisitor<Chem::DaylightFingerprintGenerator>())	
 		.def("setAtomDescriptorFunction", &setAtomDescriptorFunction, 
 			 (python::arg("self"), python::arg("func")))
@@ -90,11 +91,7 @@ void CDPLPythonChem::exportDaylightFingerprintGenerator()
 		.def("getMaxPathLength", &Chem::DaylightFingerprintGenerator::getMaxPathLength, python::arg("self"))
 		.def("getNumBits", &Chem::DaylightFingerprintGenerator::getNumBits, python::arg("self"))
 		.def("generate", &Chem::DaylightFingerprintGenerator::generate,
-			 (python::arg("self"), python::arg("molgraph")), python::return_internal_reference<1>())
-		.def("getResult", &Chem::DaylightFingerprintGenerator::getResult, python::arg("self"),
-			 python::return_internal_reference<1>())
-		.add_property("result", python::make_function(&Chem::DaylightFingerprintGenerator::getResult, 
-													  python::return_internal_reference<1>()))
+			 (python::arg("self"), python::arg("molgraph"), python::arg("fprint")))
 		.add_property("minPathLength", &Chem::DaylightFingerprintGenerator::getMinPathLength,
 					  &Chem::DaylightFingerprintGenerator::setMinPathLength)
 		.add_property("maxPathLength", &Chem::DaylightFingerprintGenerator::getMaxPathLength,

@@ -47,8 +47,8 @@ void Chem::generateBond2DStereoFlags(MolecularGraph& molgraph, bool overwrite)
 											   boost::bind(&has2DStereoFlag, _1))) == molgraph.getBondsEnd())
 		return;
 
-	BondStereoFlagGenerator generator(molgraph);
-	const Util::UIArray& flags = generator.getResult();
+	Util::UIArray flags;
+	BondStereoFlagGenerator generator(molgraph, flags);
 	std::size_t num_bonds = molgraph.getNumBonds();
 
 	for (std::size_t i = 0; i < num_bonds; i++) 

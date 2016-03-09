@@ -36,7 +36,8 @@ using namespace CDPL;
 
 void Chem::generateHydrogen3DCoordinates(MolecularGraph& molgraph, bool undef_only)
 {
-	Hydrogen3DCoordinatesGenerator generator(molgraph, undef_only);
+	Math::Vector3DArray coords;
+	Hydrogen3DCoordinatesGenerator generator(molgraph, coords, undef_only);
 
-	set3DCoordinates(molgraph, generator.getResult());
+	set3DCoordinates(molgraph, coords);
 }

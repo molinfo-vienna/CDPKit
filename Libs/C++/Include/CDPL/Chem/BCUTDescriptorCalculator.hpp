@@ -78,8 +78,9 @@ namespace CDPL
 			 * The calculated descriptor can be retrieved by a call to getResult().
 			 *
 			 * \param molgraph The molecular graph for which to calculate the \e BCUT descriptor.
+			 * \param descr The calculated \e BCUT descriptor. 
 			 */
-			BCUTDescriptorCalculator(const MolecularGraph& molgraph);
+			BCUTDescriptorCalculator(const MolecularGraph& molgraph, Math::DVector& descr);
 
 			/**
 			 * \brief Allows to specify a custom atom weight function for the initialization of the
@@ -92,24 +93,16 @@ namespace CDPL
 			/**
 			 * \brief Calculates the \e BCUT descriptor of the molecular graph \a molgraph.
 			 *
-			 * The returned \e BCUT descriptor is a vector that contains the calculated eigenvalues of the
+			 * The calculated \e BCUT descriptor is a vector that contains the calculated eigenvalues of the
 			 * underlying \e Burden matrix [\ref BURMA]. The elements of the vector are sorted in ascending order.
 			 * Note that explicit hydrogen atoms are included in the calculation of the \e BCUT descriptor.
-			 * To calculate the descriptor for a hydrogen depleted molecular graph, any hydrogen atoms have
+			 * In order to calculate the descriptor for a hydrogen depleted molecular graph, any hydrogen atoms have
 			 * to be removed from the molecular graph \e before the calculation is performed.
 			 *
 			 * \param molgraph The molecular graph for which to calculate the \e BCUT descriptor.
-			 * \return The calculated \e BCUT descriptor. 
+			 * \param descr The calculated \e BCUT descriptor. 
 			 */
-			const Math::DVector& calculate(const MolecularGraph& molgraph);
-
-			/**
-			 * \brief Returns the result of the last \e BCUT descriptor calculation.
-			 * \return The calculated \e BCUT descriptor. The vector is empty if a calculation has not yet been
-			 *         performed.
-			 * \see calculate()
-			 */
-			const Math::DVector& getResult() const;
+			void calculate(const MolecularGraph& molgraph, Math::DVector& descr);
 
 		private:
 			BCUTDescriptorCalculator(const BCUTDescriptorCalculator&);

@@ -74,9 +74,13 @@ namespace CDPL
 			 * The generated coordinates can be retrieved by a call to getResult().
 			 *
 			 * \param molgraph The molecular graph for which to generate 3D coordinates.
+			 * \param coords An array containing the heavy atom and generated hydrogen 3D coordinates. The coordinates
+			 *         are stored in the same order as the atoms appear in the atom list of
+			 *         the molecular graph (i.e. the coordinates of an atom are accessible via
+			 *         its index).
 			 * \param undef_only Specifies whether or not to recalculate already defined hydrogen atom coordinates.
 			 */
-			Hydrogen3DCoordinatesGenerator(const MolecularGraph& molgraph, bool undef_only = true);
+			Hydrogen3DCoordinatesGenerator(const MolecularGraph& molgraph, Math::Vector3DArray& coords, bool undef_only = true);
 
 			/**
 			 * \brief Allows to specify whether already defined hydrogen atom coordinates have to be recalculated or are left unchanged.
@@ -94,41 +98,34 @@ namespace CDPL
 			/**
 			 * \brief Generates 3D coordinates for the hydrogen atoms of the molecular graph \a molgraph.
 			 * \param molgraph The molecular graph for which to generate 3D coordinates.
-			 * \return An array containing the heavy atom and generated hydrogen 3D coordinates. The coordinates
+			 * \param coords An array containing the heavy atom and generated hydrogen 3D coordinates. The coordinates
 			 *         are stored in the same order as the atoms appear in the atom list of
 			 *         the molecular graph (i.e. the coordinates of an atom are accessible via
 			 *         its index).
 			 */
-			const Math::Vector3DArray& generate(const MolecularGraph& molgraph);
-
-			/**
-			 * \brief Returns the result of the last 3D coordinates calculation.
-			 * \return An array containing the generated 3D coordinates. If a calculation
-			 *         has not yet been performed, the returned array is empty.
-			 * \see generate()
-			 */
-			const Math::Vector3DArray& getResult() const;
+			void generate(const MolecularGraph& molgraph, Math::Vector3DArray& coords);
 
 		private:
 			/** \cond CDPL_PRIVATE_SECTION_DOC */
 
 			typedef std::vector<std::size_t> AtomIndexList;
 				
-			void init(const MolecularGraph&);
+			void init(const MolecularGraph&, Math::Vector3DArray&);
 
-			void assignCoordinates();
-			void assignDiatomicMolCoords(const Atom&, std::size_t);
-			void assignLinearCoords(const Atom&, std::size_t, std::size_t);
-			void assignTrigonalPlanarCoords(const Atom&, std::size_t, std::size_t);
-			void assignTetrahedralCoords(const Atom&, std::size_t, std::size_t);
-			void assignSquarePlanarCoords(const Atom&, std::size_t, std::size_t);
-			void assignTrigonalBipyramidalCoords(const Atom&, std::size_t, std::size_t);
-			void assignOctahedralCoords(const Atom&, std::size_t, std::size_t);
-			void assignPentagonalBipyramidalCoords(const Atom&, std::size_t, std::size_t);
-			void assignEvenlyDistributedCoords(const Atom&, std::size_t, std::size_t);
+			void assignCoordinates(Math::Vector3DArray&);
+			void assignDiatomicMolCoords(const Atom&, std::size_t, Math::Vector3DArray&);
+			void assignLinearCoords(const Atom&, std::size_t, std::size_t, Math::Vector3DArray&);
+			void assignTrigonalPlanarCoords(const Atom&, std::size_t, std::size_t, Math::Vector3DArray&);
+			void assignTetrahedralCoords(const Atom&, std::size_t, std::size_t, Math::Vector3DArray&);
+			void assignSquarePlanarCoords(const Atom&, std::size_t, std::size_t, Math::Vector3DArray&);
+			void assignTrigonalBipyramidalCoords(const Atom&, std::size_t, std::size_t, Math::Vector3DArray&);
+			void assignOctahedralCoords(const Atom&, std::size_t, std::size_t, Math::Vector3DArray&);
+			void assignPentagonalBipyramidalCoords(const Atom&, std::size_t, std::size_t, Math::Vector3DArray&);
+			void assignEvenlyDistributedCoords(const Atom&, std::size_t, std::size_t, Math::Vector3DArray&);
 
 			void assignTemplateCoords(const Atom&, std::size_t, std::size_t, 
-									  std::size_t, const Math::Vector3D[], const std::size_t*);
+									  std::size_t, const Math::Vector3D[], const std::size_t*, 
+									  Math::Vector3DArray&);
 
 			std::size_t getConnectedAtoms(const Atom&, AtomIndexList&);
 			bool getConnectedAtomWithCoords(std::size_t, const Atom&, std::size_t&) const;
@@ -137,15 +134,16 @@ namespace CDPL
 
 			unsigned int getHybridizationState(const Atom&, std::size_t) const;
 
-			void buildOrthogonalBasis(const Math::Vector3D&, const Math::Vector3D&, Math::Matrix3D&, bool) const;
-			void getRotationReferenceVector(const Atom&, std::size_t, std::size_t, std::size_t, Math::Vector3D&) const;
+			void buildOrthogonalBasis(const Math::Vector3D&, const Math::Vector3D&, 
+									  Math::Matrix3D&, bool) const;
+			void getRotationReferenceVector(const Atom&, std::size_t, std::size_t, std::size_t, 
+											Math::Vector3D&, Math::Vector3DArray&) const;
 			void getPerpendicularVector(const Math::Vector3D&, Math::Vector3D&) const;
 			
 			typedef std::vector<Math::Vector3D> DynamicPointArray;
 			
 			const MolecularGraph*         molGraph;
 			bool                          undefOnly;
-			Math::Vector3DArray           coordinates;
 			Util::BitSet                  defCoordsMask;
 			AtomIndexList                 centerAtoms;
 			AtomIndexList                 conctdAtoms;

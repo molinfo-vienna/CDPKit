@@ -76,13 +76,13 @@ namespace CDPL
 			/**
 			 * \brief Constructs the \c %BondOrderGenerator instance and perceives the order of the bonds
 			 *        in the molecular graph \a molgraph.
-			 *
-			 * The generated bond orders can be retrieved by a call to getResult().
-			 *
 			 * \param molgraph The molecular graph for which to perceive the bond orders.
+			 * \param orders An array containing the perceived bond orders. The orders are stored in the same sequence
+			 *         as the bonds appear in the input molecular graph, i.e. the order of a particular bond is
+			 *         accessible via its index in the molecular graph.
 			 * \param undef_only Specifies whether or not to perceive only undefined (= unset) bond orders.
 			 */
-			BondOrderGenerator(const MolecularGraph& molgraph, bool undef_only = true);
+			BondOrderGenerator(const MolecularGraph& molgraph, Util::STArray& orders, bool undef_only = true);
 
 			/**
 			 * \brief Allows to specify whether already defined bond orders should be left unchanged.
@@ -101,18 +101,11 @@ namespace CDPL
 			 * \brief Perceives the order of the bonds in the molecular graph \a molgraph from its 3D structure 
 			 *        and atom connectivity.
 			 * \param molgraph The molecular graph for which to perceive the bond orders.
-			 * \return An array containing the generated bond orders.
-			 */
-			const Util::STArray& generate(const MolecularGraph& molgraph);
-
-			/**
-			 * \brief Returns the result of the last call to generate().
-			 * \return An array containing the bond orders. The orders are stored in the same sequence
+			 * \param orders An array containing the perceived bond orders. The orders are stored in the same sequence
 			 *         as the bonds appear in the input molecular graph, i.e. the order of a particular bond is
-			 *         accessible via its index in the molecular graph. If generate() has not yet been called,
-			 *         the returned array is empty.
+			 *         accessible via its index in the molecular graph.
 			 */
-			const Util::STArray& getResult() const;
+			void generate(const MolecularGraph& molgraph, Util::STArray& orders);
 
 		private:
 			/** \cond CDPL_PRIVATE_SECTION_DOC */
@@ -140,29 +133,29 @@ namespace CDPL
 
 			friend class BondMatchExpression;
 
-			void init(const MolecularGraph& molgraph);
+			void init(const MolecularGraph& molgraph, Util::STArray& orders);
 
-			void calcFreeAtomValences();
-			void perceiveAtomGeometries();
-			void assignBondOrders();
+			void calcFreeAtomValences(Util::STArray& orders);
+			void perceiveAtomGeometries(Util::STArray& orders);
+			void assignBondOrders(Util::STArray& orders);
 
-			void assignTetrahedralAtomBondOrders();
-			void assignFunctionalGroupBondOrders();
-			void assignConjRingBondOrders();
-			void assignRemainingBondOrders();
+			void assignTetrahedralAtomBondOrders(Util::STArray& orders);
+			void assignFunctionalGroupBondOrders(Util::STArray& orders);
+			void assignConjRingBondOrders(Util::STArray& orders);
+			void assignRemainingBondOrders(Util::STArray& orders);
 
-			void assignFragBondOrders(std::size_t depth);
+			void assignFragBondOrders(std::size_t depth, Util::STArray& orders);
 
 			double calcHybridizationMatchScore();
 			double calcMappingScore(const AtomBondMapping& mapping) const;
 
-			void markConjRingBonds();
+			void markConjRingBonds(Util::STArray& orders);
 
 			Geometry perceiveInitialGeometry(const Atom& atom);
 			void fixRingAtomGeometries(const Fragment& ring);
-			void postprocessGeometry(const Atom& atom);
+			void postprocessGeometry(const Atom& atom, Util::STArray& orders);
 			
-			void assignNbrBondOrders(const Atom& atom);
+			void assignNbrBondOrders(const Atom& atom, Util::STArray& orders);
 
 			void getNeighborAtoms(const Atom& atom, AtomList& atom_list, const Atom* exclude_atom) const;
 			std::size_t countBondsWithOrder(const Atom& atom, std::size_t order, const UIntTable& order_table) const;
@@ -180,7 +173,6 @@ namespace CDPL
 	
 			const MolecularGraph*  molGraph;
 			bool                   undefOnly;
-			Util::STArray          bondOrders;
 			Util::BitSet           defOrderMask;
 			Util::BitSet           multibondAtomMask;
 			UIntTable              freeAtomValences;

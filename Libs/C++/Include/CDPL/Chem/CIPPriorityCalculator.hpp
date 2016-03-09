@@ -70,29 +70,21 @@ namespace CDPL
 			/**
 			 * \brief Constructs the \c %CIPPriorityCalculator instance and calculates the topological \e CIP priorities
 			 *        of the atoms in the molecular graph \a molgraph.
-			 *
-			 * The calculated \e CIP priorities can be retrieved by a call to getResult().
-			 *
 			 * \param molgraph The molecular graph for which to calculate the \e CIP priorities.
+			 * \param priorities An array containing the calculated \e CIP priorities. The \e CIP priorities
+			 *         are stored in the same order as the atoms appear in the atom list of the molecular graph
+			 *         (i.e. the \e CIP priority of an atom is accessible via its index).
 			 */
-			CIPPriorityCalculator(const MolecularGraph& molgraph);
+			CIPPriorityCalculator(const MolecularGraph& molgraph, Util::STArray& priorities);
 
 			/**
 			 * \brief Calculates the topological \e CIP priorities of the atoms in the molecular graph \a molgraph.
 			 * \param molgraph The molecular graph for which to calculate the \e CIP priorities.
-			 * \return An array containing the calculated \e CIP priorities. The \e CIP priorities
+			 * \param priorities An array containing the calculated \e CIP priorities. The \e CIP priorities
 			 *         are stored in the same order as the atoms appear in the atom list of the molecular graph
 			 *         (i.e. the \e CIP priority of an atom is accessible via its index).
 			 */
-			const Util::STArray& calculate(const MolecularGraph& molgraph);
-
-			/**
-			 * \brief Returns the result of the last \e CIP priority calculation.
-			 * \return An array containing the calculated \e CIP priorities. If a calculation
-			 *         has not yet been performed, the returned array is empty.
-			 * \see calculate()
-			 */
-			const Util::STArray& getResult() const;
+			void calculate(const MolecularGraph& molgraph, Util::STArray& priorities);
 
 		private:
 			/** \cond CDPL_PRIVATE_SECTION_DOC */
@@ -101,8 +93,8 @@ namespace CDPL
 
 			CIPPriorityCalculator& operator=(const CIPPriorityCalculator&);
 
-			void init(const MolecularGraph&);
-			void determinePriorities();
+			void init(const MolecularGraph&, Util::STArray&);
+			void determinePriorities(Util::STArray&);
 
 			class AtomNode;
 
@@ -154,7 +146,6 @@ namespace CDPL
 			AllocNodeList allocAtomNodes;
 			AllocNodeList allocImplHNodes;
 			NodeList      atomNodes;
-			Util::STArray priorities;
 
 			/** \endcond */
 		};

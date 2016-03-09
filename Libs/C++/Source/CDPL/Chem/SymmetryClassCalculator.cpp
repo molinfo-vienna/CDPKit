@@ -50,10 +50,10 @@ const unsigned int Chem::SymmetryClassCalculator::DEF_BOND_PROPERTY_FLAGS;
 Chem::SymmetryClassCalculator::SymmetryClassCalculator(): 
 	atomPropertyFlags(DEF_ATOM_PROPERTY_FLAGS), bondPropertyFlags(DEF_BOND_PROPERTY_FLAGS), hComplete(true) {}
 
-Chem::SymmetryClassCalculator::SymmetryClassCalculator(const MolecularGraph& molgraph):
+Chem::SymmetryClassCalculator::SymmetryClassCalculator(const MolecularGraph& molgraph, Util::STArray& class_ids):
 	atomPropertyFlags(DEF_ATOM_PROPERTY_FLAGS), bondPropertyFlags(DEF_BOND_PROPERTY_FLAGS), hComplete(true)
 {
-	calculate(molgraph);
+	calculate(molgraph, class_ids);
 }
 
 void Chem::SymmetryClassCalculator::setAtomPropertyFlags(unsigned int flags)
@@ -86,22 +86,15 @@ bool Chem::SymmetryClassCalculator::implicitHydrogensIncluded() const
 	return hComplete;
 }
 
-const Util::STArray& Chem::SymmetryClassCalculator::calculate(const MolecularGraph& molgraph)
+void Chem::SymmetryClassCalculator::calculate(const MolecularGraph& molgraph, Util::STArray& class_ids)
 {
-	init(molgraph);
+	init(molgraph, class_ids);
 
 	calcSVMNumbers();
-	perceiveSymClasses(molgraph);
-
-	return symClassIDs;
+	perceiveSymClasses(molgraph, class_ids);
 }
 
-const Util::STArray& Chem::SymmetryClassCalculator::getResult() const
-{
-	return symClassIDs;
-}
-
-void Chem::SymmetryClassCalculator::init(const MolecularGraph& molgraph)
+void Chem::SymmetryClassCalculator::init(const MolecularGraph& molgraph, Util::STArray& class_ids)
 {
 	const std::size_t ATOMIC_NO_PRIME_TAB_IDX = 0;
 	const std::size_t ISO_PRIME_TAB_IDX = ATOMIC_NO_PRIME_TAB_IDX + AtomType::MAX_TYPE + 1; 
@@ -124,8 +117,8 @@ void Chem::SymmetryClassCalculator::init(const MolecularGraph& molgraph)
 	sortedAtomNodes.clear();
 	sortedAtomNodes.reserve(num_atoms * 2);
 
-	symClassIDs.clear();
-	symClassIDs.reserve(num_atoms);
+	class_ids.clear();
+	class_ids.reserve(num_atoms);
 
 	MolecularGraph::ConstAtomIterator atoms_end = molgraph.getAtomsEnd();
 
@@ -253,7 +246,7 @@ void Chem::SymmetryClassCalculator::calcSVMNumbers()
 	}
 }
 
-void Chem::SymmetryClassCalculator::perceiveSymClasses(const MolecularGraph& molgraph)
+void Chem::SymmetryClassCalculator::perceiveSymClasses(const MolecularGraph& molgraph, Util::STArray& class_ids)
 {
 	NodeList::iterator sorted_nodes_begin = sortedAtomNodes.begin();
 	NodeList::iterator sorted_nodes_end = sortedAtomNodes.end();
@@ -284,7 +277,7 @@ void Chem::SymmetryClassCalculator::perceiveSymClasses(const MolecularGraph& mol
 	}
 
 	std::for_each(allocAtomNodes.begin(), allocAtomNodes.end() + molgraph.getNumAtoms(), 
-				  boost::bind(&Util::STArray::addElement, boost::ref(symClassIDs), boost::bind(&AtomNode::getSymClassID, _1)));
+				  boost::bind(&Util::STArray::addElement, boost::ref(class_ids), boost::bind(&AtomNode::getSymClassID, _1)));
 }
 
 

@@ -48,6 +48,7 @@ void Chem::generateCanonicalNumbering(MolecularGraph& molgraph, bool overwrite,
 											   boost::bind(&hasCanonicalNumber, _1))) == molgraph.getAtomsEnd())
 		return;
 
+	Util::STArray numbering;
 	CanonicalNumberingGenerator generator;
 
 	if (atom_flags == AtomPropertyFlag::DEFAULT)
@@ -58,8 +59,8 @@ void Chem::generateCanonicalNumbering(MolecularGraph& molgraph, bool overwrite,
 
 	generator.setAtomPropertyFlags(atom_flags);
 	generator.setBondPropertyFlags(bond_flags);
+	generator.generate(molgraph, numbering);
 
-	const Util::STArray& numbering = generator.generate(molgraph);
 	std::size_t num_atoms = molgraph.getNumAtoms();
 
 	for (std::size_t i = 0; i < num_atoms; i++) 

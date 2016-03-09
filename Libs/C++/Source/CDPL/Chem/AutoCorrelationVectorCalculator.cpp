@@ -44,16 +44,16 @@ Chem::AutoCorrelationVectorCalculator::AutoCorrelationVectorCalculator():
 	weightFunc(boost::bind(std::multiplies<unsigned int>(),
 						   boost::bind(&getType, _1), boost::bind(&getType, _1))) {}
 
-Chem::AutoCorrelationVectorCalculator::AutoCorrelationVectorCalculator(const MolecularGraph& molgraph):
+Chem::AutoCorrelationVectorCalculator::AutoCorrelationVectorCalculator(const MolecularGraph& molgraph, Math::DVector& corr_vec):
 	weightFunc(boost::bind(std::multiplies<unsigned int>(),
 						   boost::bind(&getType, _1), boost::bind(&getType, _1)))
 {
-	calculate(molgraph);
+	calculate(molgraph, corr_vec);
 }
 
-const Math::DVector& Chem::AutoCorrelationVectorCalculator::calculate(const MolecularGraph& molgraph)
+void Chem::AutoCorrelationVectorCalculator::calculate(const MolecularGraph& molgraph, Math::DVector& corr_vec)
 {
-	autoCorrVector.resize(0, false);
+	corr_vec.resize(0, false);
 
 	const Math::ULMatrix& dist_mtx = *getTopologicalDistanceMatrix(molgraph);
 
@@ -74,24 +74,17 @@ const Math::DVector& Chem::AutoCorrelationVectorCalculator::calculate(const Mole
 
 			double weight = weightFunc(atom1, atom2);
 		
-			if (dist >= autoCorrVector.getSize()) {
-				std::size_t old_size = autoCorrVector.getSize();
+			if (dist >= corr_vec.getSize()) {
+				std::size_t old_size = corr_vec.getSize();
 
-				autoCorrVector.resize(dist + 1);
+				corr_vec.resize(dist + 1);
 				
-				std::fill(Math::vectorBegin(autoCorrVector) + old_size, Math::vectorEnd(autoCorrVector), 0.0);
+				std::fill(Math::vectorBegin(corr_vec) + old_size, Math::vectorEnd(corr_vec), 0.0);
 			}
 
-			autoCorrVector(dist) += 2.0 * weight;
+			corr_vec(dist) += 2.0 * weight;
 		}
 	}
-
-	return autoCorrVector;
-}
-
-const Math::DVector& Chem::AutoCorrelationVectorCalculator::getResult() const
-{
-	return autoCorrVector;
 }
 
 void Chem::AutoCorrelationVectorCalculator::setAtomPairWeightFunction(const AtomPairWeightFunction& func)

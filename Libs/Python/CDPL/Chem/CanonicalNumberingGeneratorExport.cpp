@@ -41,7 +41,7 @@ void CDPLPythonChem::exportCanonicalNumberingGenerator()
 
 	python::class_<Chem::CanonicalNumberingGenerator, boost::noncopyable>("CanonicalNumberingGenerator", python::no_init)
 		.def(python::init<>(python::arg("self")))
-		.def(python::init<const Chem::MolecularGraph&>((python::arg("self"), python::arg("molgraph"))))
+		.def(python::init<const Chem::MolecularGraph&, Util::STArray&>((python::arg("self"), python::arg("molgraph"), python::arg("numbering"))))
 		.def(CDPLPythonBase::ObjectIdentityCheckVisitor<Chem::CanonicalNumberingGenerator>())	
 		.def("setAtomPropertyFlags", &Chem::CanonicalNumberingGenerator::setAtomPropertyFlags, 
 			 (python::arg("self"), python::arg("flags")))
@@ -49,16 +49,11 @@ void CDPLPythonChem::exportCanonicalNumberingGenerator()
 		.def("setBondPropertyFlags", &Chem::CanonicalNumberingGenerator::setBondPropertyFlags, 
 			 (python::arg("self"), python::arg("flags")))
 		.def("getBondPropertyFlags", &Chem::CanonicalNumberingGenerator::getBondPropertyFlags, python::arg("self"))
-		.def("generate", &Chem::CanonicalNumberingGenerator::generate, (python::arg("self"), python::arg("molgraph")), 
-			 python::return_internal_reference<>())
-		.def("getResult", &Chem::CanonicalNumberingGenerator::getResult, python::arg("self"), 
-			 python::return_internal_reference<>())
+		.def("generate", &Chem::CanonicalNumberingGenerator::generate, (python::arg("self"), python::arg("molgraph"), python::arg("numbering")))
 		.add_property("atomPropertyFlags", &Chem::CanonicalNumberingGenerator::getAtomPropertyFlags, 
 					  &Chem::CanonicalNumberingGenerator::setAtomPropertyFlags)
 		.add_property("bondPropertyFlags", &Chem::CanonicalNumberingGenerator::getBondPropertyFlags, 
 					  &Chem::CanonicalNumberingGenerator::setBondPropertyFlags)
-		.add_property("result", python::make_function(&Chem::CanonicalNumberingGenerator::getResult,
-													  python::return_internal_reference<>()))
 		.def_readonly("DEF_ATOM_PROPERTY_FLAGS", Chem::CanonicalNumberingGenerator::DEF_ATOM_PROPERTY_FLAGS)
 		.def_readonly("DEF_BOND_PROPERTY_FLAGS", Chem::CanonicalNumberingGenerator::DEF_BOND_PROPERTY_FLAGS);
 }

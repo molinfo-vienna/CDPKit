@@ -77,12 +77,10 @@ namespace CDPL
 			/**
 			 * \brief Constructs the \c %BCUTDescriptorGenerator instance and generates the \e Burden matrix of
 			 *        the molecular graph \a molgraph.
-			 *
-			 * The generated \e Burden matrix can be retrieved by a call to getResult().
-			 *
 			 * \param molgraph The molecular graph for which to generate the \e Burden matrix.
+			 * \param mtx The generated \e Burden matrix of the specified molecular graph.
 			 */
-			BurdenMatrixGenerator(const MolecularGraph& molgraph);
+			BurdenMatrixGenerator(const MolecularGraph& molgraph, Math::DMatrix& mtx);
 
 			/**
 			 * \brief Allows to specify a custom atom weight function for the diagonal elements of the \e Burden matrix.
@@ -95,16 +93,9 @@ namespace CDPL
 			/**
 			 * \brief Generates the \e Burden matrix of the molecular graph \a molgraph.
 			 * \param molgraph The molecular graph for which to generate the \e Burden matrix.
-			 * \return The \e Burden matrix of the specified molecular graph.
+			 * \param mtx The generated \e Burden matrix of the specified molecular graph.
 			 */
-			const Math::DMatrix& generate(const MolecularGraph& molgraph);
-
-			/**
-			 * \brief Returns the lastly generated \e Burden matrix.
-			 * \return The lastly generated \e Burden matrix. The returned \e Burden matrix is empty
-			 *         if it has not yet been generated.
-			 */
-			const Math::DMatrix& getResult() const;
+			void generate(const MolecularGraph& molgraph, Math::DMatrix& mtx);
 
 		private:
 			BurdenMatrixGenerator(const BurdenMatrixGenerator&);
@@ -112,7 +103,6 @@ namespace CDPL
 			BurdenMatrixGenerator& operator=(const BurdenMatrixGenerator&);
 
 			AtomWeightFunction atomWeightFunc;
-			Math::DMatrix      burdenMatrix;
 		}; 
 
 		/**

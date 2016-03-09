@@ -41,12 +41,9 @@ void CDPLPythonChem::exportKekuleStructureGenerator()
 
     python::class_<Chem::KekuleStructureGenerator, boost::noncopyable>("KekuleStructureGenerator", python::no_init)
 		.def(python::init<>(python::arg("self")))
-		.def(python::init<const Chem::MolecularGraph&>((python::arg("self"), python::arg("molgraph"))))
+		.def(python::init<const Chem::MolecularGraph&, Util::STArray&>(
+				 (python::arg("self"), python::arg("molgraph"), python::arg("orders"))))
 		.def(CDPLPythonBase::ObjectIdentityCheckVisitor<Chem::KekuleStructureGenerator>())	
-		.def("generate", &Chem::KekuleStructureGenerator::generate, (python::arg("self"), python::arg("molgraph")), 
-			 python::return_internal_reference<>())
-		.def("getResult", &Chem::KekuleStructureGenerator::getResult, python::arg("self"),
-			 python::return_internal_reference<>())
-		.add_property("result", python::make_function(&Chem::KekuleStructureGenerator::getResult,
-													  python::return_internal_reference<>()));
+		.def("generate", &Chem::KekuleStructureGenerator::generate, 
+			 (python::arg("self"), python::arg("molgraph"), python::arg("orders")));
 }

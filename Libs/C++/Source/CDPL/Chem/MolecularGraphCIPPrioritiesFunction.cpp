@@ -47,8 +47,8 @@ void Chem::calcCIPPriorities(MolecularGraph& molgraph, bool overwrite)
 											   boost::bind(&hasCIPPriority, _1))) == molgraph.getAtomsEnd())
 		return;
 
-	CIPPriorityCalculator calculator(molgraph);
-	const Util::STArray& priorities = calculator.getResult();
+	Util::STArray priorities;
+	CIPPriorityCalculator calculator(molgraph, priorities);
 	std::size_t num_atoms = molgraph.getNumAtoms();
 
 	for (std::size_t i = 0; i < num_atoms; i++) 

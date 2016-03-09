@@ -53,13 +53,10 @@ void CDPLPythonChem::exportBCUTDescriptorCalculator()
 
 	python::class_<Chem::BCUTDescriptorCalculator, boost::noncopyable>("BCUTDescriptorCalculator", python::no_init)
 		.def(python::init<>(python::arg("self")))
-		.def(python::init<const Chem::MolecularGraph&>((python::arg("self"), python::arg("molgraph"))))
+		.def(python::init<const Chem::MolecularGraph&, Math::DVector&>(
+				 (python::arg("self"), python::arg("molgraph"), python::arg("descr"))))
 		.def(CDPLPythonBase::ObjectIdentityCheckVisitor<Chem::BCUTDescriptorCalculator>())	
 		.def("setAtomWeightFunction", &setAtomWeightFunction, (python::arg("self"), python::arg("func")))
-		.def("calculate", &Chem::BCUTDescriptorCalculator::calculate, (python::arg("self"), python::arg("molgraph")),
-			 python::return_internal_reference<>())
-		.def("getResult", &Chem::BCUTDescriptorCalculator::getResult, python::arg("self"),
-			 python::return_internal_reference<>())
-		.add_property("result", python::make_function(&Chem::BCUTDescriptorCalculator::getResult,
-													  python::return_internal_reference<>()));
+		.def("calculate", &Chem::BCUTDescriptorCalculator::calculate, 
+			 (python::arg("self"), python::arg("molgraph"), python::arg("descr")));
 }

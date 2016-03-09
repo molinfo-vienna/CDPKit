@@ -36,6 +36,8 @@
 
 #include <boost/shared_ptr.hpp>
 
+#include "CDPL/Util/Array.hpp"
+
 
 namespace CDPL 
 {
@@ -257,6 +259,8 @@ namespace CDPL
 			BondDirGeneratorPtr         bondDirGenerator;
 			CanonNumberingGeneratorPtr  canonNumberingGenerator;
 			CanonSMILESList             canonSMILESStrings;
+			Util::STArray               canonNumbering;
+			Util::UIArray               bondDirections;
 			CtrlParameters              ctrlParameters;
 			RingClosureNumberStack      ringClosureNumberStack;
 			std::size_t                 highestRingClosureNumber;

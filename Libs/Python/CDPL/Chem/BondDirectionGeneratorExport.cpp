@@ -41,20 +41,15 @@ void CDPLPythonChem::exportBondDirectionGenerator()
 
 	python::class_<Chem::BondDirectionGenerator, boost::noncopyable>("BondDirectionGenerator", python::no_init)
 		.def(python::init<>(python::arg("self")))
-		.def(python::init<const Chem::MolecularGraph&>((python::arg("self"), python::arg("molgraph"))))
+		.def(python::init<const Chem::MolecularGraph&, Util::UIArray&>((python::arg("self"), python::arg("molgraph"), python::arg("dirs"))))
 		.def(CDPLPythonBase::ObjectIdentityCheckVisitor<Chem::BondDirectionGenerator>())	
 		.def("includeRingBonds", &Chem::BondDirectionGenerator::includeRingBonds, (python::arg("self"), python::arg("include")))
 		.def("ringBondsIncluded", &Chem::BondDirectionGenerator::ringBondsIncluded, python::arg("self"))
 		.def("setRingSizeLimit", &Chem::BondDirectionGenerator::setRingSizeLimit, (python::arg("self"), python::arg("min_size")))
 		.def("getRingSizeLimit", &Chem::BondDirectionGenerator::getRingSizeLimit, python::arg("self"))
-		.def("generate", &Chem::BondDirectionGenerator::generate, (python::arg("self"), python::arg("molgraph")),
-			 python::return_internal_reference<>())
-		.def("getResult", &Chem::BondDirectionGenerator::getResult, python::arg("self"),
-			 python::return_internal_reference<>())
+		.def("generate", &Chem::BondDirectionGenerator::generate, (python::arg("self"), python::arg("molgraph"), python::arg("dirs")))
 		.add_property("ringSizeLimit", &Chem::BondDirectionGenerator::getRingSizeLimit, 
 					  &Chem::BondDirectionGenerator::setRingSizeLimit)
 		.add_property("ringBonds", &Chem::BondDirectionGenerator::ringBondsIncluded,
-					  &Chem::BondDirectionGenerator::includeRingBonds)
-		.add_property("result", python::make_function(&Chem::BondDirectionGenerator::getResult,
-													  python::return_internal_reference<>()));
+					  &Chem::BondDirectionGenerator::includeRingBonds);
 }

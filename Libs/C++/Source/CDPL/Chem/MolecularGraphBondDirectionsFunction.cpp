@@ -48,14 +48,15 @@ void Chem::generateBondDirections(MolecularGraph& molgraph, bool overwrite, bool
 		return;
 
 	BondDirectionGenerator generator;
+	Util::UIArray dirs;
 
 	generator.includeRingBonds(ring_bonds);
 	generator.setRingSizeLimit(min_ring_size);
+	generator.generate(molgraph, dirs);
 
-	const Util::UIArray& directions = generator.generate(molgraph);
 	std::size_t num_bonds = molgraph.getNumBonds();
 
 	for (std::size_t i = 0; i < num_bonds; i++) 
-		setDirection(molgraph.getBond(i), directions[i]);
+		setDirection(molgraph.getBond(i), dirs[i]);
 }
 	

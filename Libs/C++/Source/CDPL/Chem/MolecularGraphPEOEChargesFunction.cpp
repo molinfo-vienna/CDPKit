@@ -48,12 +48,13 @@ void Chem::calcPEOECharges(MolecularGraph& molgraph, bool overwrite, std::size_t
 											   boost::bind(&hasPEOECharge, _1))) == molgraph.getAtomsEnd())
 		return;
 
+	Util::DArray charges;
 	PEOEChargeCalculator calculator;
 
 	calculator.setNumIterations(num_iter);
 	calculator.setDampingFactor(damping);
-	
-	const Util::DArray& charges = calculator.calculate(molgraph);
+	calculator.calculate(molgraph, charges);
+
 	std::size_t num_atoms = molgraph.getNumAtoms();
 
 	for (std::size_t i = 0; i < num_atoms; i++) 

@@ -58,40 +58,31 @@ namespace
 
 Chem::BondStereoFlagGenerator::BondStereoFlagGenerator() {}
 
-Chem::BondStereoFlagGenerator::BondStereoFlagGenerator(const MolecularGraph& molgraph)
+Chem::BondStereoFlagGenerator::BondStereoFlagGenerator(const MolecularGraph& molgraph, Util::UIArray& flags)
 {
-	generate(molgraph);
+	generate(molgraph, flags);
 }
 
-Chem::BondStereoFlagGenerator::BondStereoFlagGenerator(const MolecularGraph& molgraph, const Math::Vector2DArray& coords)
+Chem::BondStereoFlagGenerator::BondStereoFlagGenerator(const MolecularGraph& molgraph, const Math::Vector2DArray& coords, Util::UIArray& flags)
 {
-	generate(molgraph, coords);
+	generate(molgraph, coords, flags);
 }
 
-const Util::UIArray& Chem::BondStereoFlagGenerator::generate(const MolecularGraph& molgraph)
+void Chem::BondStereoFlagGenerator::generate(const MolecularGraph& molgraph, Util::UIArray& flags)
 {
-	init(molgraph, 0);
+	init(molgraph, 0, flags);
 
-	assignStereoFlags();
-
-	return stereoFlags;
+	assignStereoFlags(flags);
 }
 
-const Util::UIArray& Chem::BondStereoFlagGenerator::generate(const MolecularGraph& molgraph, const Math::Vector2DArray& coords)
+void Chem::BondStereoFlagGenerator::generate(const MolecularGraph& molgraph, const Math::Vector2DArray& coords, Util::UIArray& flags)
 {
-	init(molgraph, &coords);
+	init(molgraph, &coords, flags);
 
-	assignStereoFlags();
-
-	return stereoFlags;
+	assignStereoFlags(flags);
 }
 
-const Util::UIArray& Chem::BondStereoFlagGenerator::getResult() const
-{
-	return stereoFlags;
-}
-
-void Chem::BondStereoFlagGenerator::init(const MolecularGraph& molgraph, const Math::Vector2DArray* coords)
+void Chem::BondStereoFlagGenerator::init(const MolecularGraph& molgraph, const Math::Vector2DArray* coords, Util::UIArray& flags)
 {
 	molGraph = &molgraph;
 
@@ -119,7 +110,7 @@ void Chem::BondStereoFlagGenerator::init(const MolecularGraph& molgraph, const M
 
 	eitherBondList.clear();
 
-	stereoFlags.assign(num_bonds, BondStereoFlag::PLAIN);
+	flags.assign(num_bonds, BondStereoFlag::PLAIN);
 
 	numMismatchingCtrs = 0;
 	minNumMismatchingCtrs = num_atoms + 1;
@@ -214,20 +205,20 @@ void Chem::BondStereoFlagGenerator::init(const MolecularGraph& molgraph, const M
 							  boost::ref(ringBondMask)));
 }
 
-void Chem::BondStereoFlagGenerator::assignStereoFlags()
+void Chem::BondStereoFlagGenerator::assignStereoFlags(Util::UIArray& flags)
 {
-	assignFlagsForEitherDoubleBonds();
+	assignFlagsForEitherDoubleBonds(flags);
 
 	StereoAtomInfoList::iterator isolated_ctrs_beg = std::partition(stereoAtomList.begin(), 
 																	stereoAtomList.end(),
 																	boost::bind(&StereoAtomInfo::hasStereoAtomNbrs, _1));
 	std::for_each(isolated_ctrs_beg, stereoAtomList.end(),
-				  boost::bind(&BondStereoFlagGenerator::assignFlagsForIsolatedCenter, this, _1));
+				  boost::bind(&BondStereoFlagGenerator::assignFlagsForIsolatedCenter, this, _1, boost::ref(flags)));
 
 	if (isolated_ctrs_beg != stereoAtomList.begin()) {
-		currentStereoFlags = stereoFlags;
+		currentStereoFlags = flags;
 
-		assignFlagsForNonIsolatedCenters(0, isolated_ctrs_beg - stereoAtomList.begin());
+		assignFlagsForNonIsolatedCenters(0, isolated_ctrs_beg - stereoAtomList.begin(), flags);
 	}
 
 	MolecularGraph::ConstBondIterator bonds_end = molGraph->getBondsEnd();
@@ -235,7 +226,7 @@ void Chem::BondStereoFlagGenerator::assignStereoFlags()
 	for (MolecularGraph::ConstBondIterator it = molGraph->getBondsBegin(); it != bonds_end; ++it) {
 		const Bond& bond = *it;
 		std::size_t bond_idx = molGraph->getBondIndex(bond);
-		unsigned int stereo_flag = stereoFlags[bond_idx];
+		unsigned int stereo_flag = flags[bond_idx];
 
 		if (stereo_flag == BondStereoFlag::PLAIN)
 			continue;
@@ -247,22 +238,22 @@ void Chem::BondStereoFlagGenerator::assignStereoFlags()
 			switch (stereo_flag) {
 
 				case BondStereoFlag::UP:
-					stereoFlags[bond_idx] = BondStereoFlag::REVERSE_DOWN;
+					flags[bond_idx] = BondStereoFlag::REVERSE_DOWN;
 					break;
 
 				case BondStereoFlag::DOWN:
-					stereoFlags[bond_idx] = BondStereoFlag::REVERSE_UP;
+					flags[bond_idx] = BondStereoFlag::REVERSE_UP;
 					break;
 
 				case BondStereoFlag::EITHER:
-					stereoFlags[bond_idx] = BondStereoFlag::REVERSE_EITHER;
+					flags[bond_idx] = BondStereoFlag::REVERSE_EITHER;
 					break;
 			} 
 		}
 	}
 }
 
-void Chem::BondStereoFlagGenerator::assignFlagsForEitherDoubleBonds()
+void Chem::BondStereoFlagGenerator::assignFlagsForEitherDoubleBonds(Util::UIArray& flags)
 {
 	MolecularGraph::ConstBondIterator bonds_end = molGraph->getBondsEnd();
 
@@ -315,7 +306,7 @@ void Chem::BondStereoFlagGenerator::assignFlagsForEitherDoubleBonds()
 
 				std::size_t nbr_bond_idx = molGraph->getBondIndex(*nbr_bond);
 
-				if (stereoFlags[nbr_bond_idx] == BondStereoFlag::EITHER) {
+				if (flags[nbr_bond_idx] == BondStereoFlag::EITHER) {
 					flag_set = true;
 					break;
 				}
@@ -363,18 +354,18 @@ void Chem::BondStereoFlagGenerator::assignFlagsForEitherDoubleBonds()
 
 		if (!flag_set) {
 			if (best_bond) {
-				stereoFlags[molGraph->getBondIndex(*best_bond)] = BondStereoFlag::EITHER;
+				flags[molGraph->getBondIndex(*best_bond)] = BondStereoFlag::EITHER;
 
 				if (stereoAtomMask.test(best_bond_nbr_idx))
 					configMatchMask.set(best_bond_nbr_idx);
 
 			} else
-				stereoFlags[molGraph->getBondIndex(*bond)] = BondStereoFlag::EITHER;
+				flags[molGraph->getBondIndex(*bond)] = BondStereoFlag::EITHER;
 		}
 	}
 }
 
-void Chem::BondStereoFlagGenerator::assignFlagsForIsolatedCenter(const StereoAtomInfo* stereo_atom)
+void Chem::BondStereoFlagGenerator::assignFlagsForIsolatedCenter(const StereoAtomInfo* stereo_atom, Util::UIArray& flags)
 {
 	if (stereo_atom->getConfiguration() == AtomConfiguration::EITHER) 
 		return;
@@ -387,27 +378,27 @@ void Chem::BondStereoFlagGenerator::assignFlagsForIsolatedCenter(const StereoAto
 		if (!singleBondMask.test(bond_idx))
 			continue;
 
-		stereoFlags[bond_idx] = BondStereoFlag::UP;
+		flags[bond_idx] = BondStereoFlag::UP;
 
-		if (stereo_atom->configMatches(stereoFlags))
+		if (stereo_atom->configMatches(flags))
 			return;
 
-		stereoFlags[bond_idx] = BondStereoFlag::DOWN;
+		flags[bond_idx] = BondStereoFlag::DOWN;
 
-		if (stereo_atom->configMatches(stereoFlags))
+		if (stereo_atom->configMatches(flags))
 			return;
 
-		stereoFlags[bond_idx] = BondStereoFlag::PLAIN;
+		flags[bond_idx] = BondStereoFlag::PLAIN;
 	}
 }
 
-bool Chem::BondStereoFlagGenerator::assignFlagsForNonIsolatedCenters(std::size_t list_idx, std::size_t max_idx)
+bool Chem::BondStereoFlagGenerator::assignFlagsForNonIsolatedCenters(std::size_t list_idx, std::size_t max_idx, Util::UIArray& flags)
 {
 	if (numMismatchingCtrs >= minNumMismatchingCtrs)
 		return false;
 
 	if (list_idx == max_idx) {
-		stereoFlags = currentStereoFlags;
+		flags = currentStereoFlags;
 		minNumMismatchingCtrs = numMismatchingCtrs;
 
 		if (numMismatchingCtrs == 0)
@@ -420,14 +411,14 @@ bool Chem::BondStereoFlagGenerator::assignFlagsForNonIsolatedCenters(std::size_t
 	std::size_t atom_idx = stereo_atom->getAtomIndex();
 
 	if (configMatchMask.test(atom_idx)) 
-		return assignFlagsForNonIsolatedCenters(list_idx + 1, max_idx);
+		return assignFlagsForNonIsolatedCenters(list_idx + 1, max_idx, flags);
 	
 	bool already_matches = stereo_atom->configMatches(currentStereoFlags);
 
 	if (already_matches) {
 		configMatchMask.set(atom_idx);
 
-		if (assignFlagsForNonIsolatedCenters(list_idx + 1, max_idx)) 
+		if (assignFlagsForNonIsolatedCenters(list_idx + 1, max_idx, flags)) 
 			return true;
 
 		configMatchMask.reset(atom_idx);
@@ -458,7 +449,7 @@ bool Chem::BondStereoFlagGenerator::assignFlagsForNonIsolatedCenters(std::size_t
 
 				configMatchMask.set(atom_idx);
 
-				if (assignFlagsForNonIsolatedCenters(list_idx + 1, max_idx))
+				if (assignFlagsForNonIsolatedCenters(list_idx + 1, max_idx, flags))
 					return true;
 
 				configMatchMask.reset(atom_idx);
@@ -471,7 +462,7 @@ bool Chem::BondStereoFlagGenerator::assignFlagsForNonIsolatedCenters(std::size_t
     if (!already_matches) {
 		numMismatchingCtrs++;
 
-		assignFlagsForNonIsolatedCenters(list_idx + 1, max_idx);
+		assignFlagsForNonIsolatedCenters(list_idx + 1, max_idx, flags);
 
 		numMismatchingCtrs--;
 	}

@@ -36,28 +36,21 @@
 using namespace CDPL;
 
 
-Chem::BCUTDescriptorCalculator::BCUTDescriptorCalculator(const MolecularGraph& molgraph)
+Chem::BCUTDescriptorCalculator::BCUTDescriptorCalculator(const MolecularGraph& molgraph, Math::DVector& descr)
 {
-	calculate(molgraph);
+	calculate(molgraph, descr);
 }
 
-const Math::DVector& Chem::BCUTDescriptorCalculator::calculate(const MolecularGraph& molgraph)
+void Chem::BCUTDescriptorCalculator::calculate(const MolecularGraph& molgraph, Math::DVector& descr)
 {
-	tmpBurdenMatrix = burdenMatrixGenerator.generate(molgraph);
+	burdenMatrixGenerator.generate(molgraph, tmpBurdenMatrix);
 
 	eigenVectors.resize(tmpBurdenMatrix.getSize1(), tmpBurdenMatrix.getSize1());
-	bcutDescriptor.resize(tmpBurdenMatrix.getSize1());
+	descr.resize(tmpBurdenMatrix.getSize1());
 	
-	Math::jacobiDiagonalize(tmpBurdenMatrix, bcutDescriptor, eigenVectors);
+	jacobiDiagonalize(tmpBurdenMatrix, descr, eigenVectors);
 
-	std::sort(Math::vectorBegin(bcutDescriptor), Math::vectorEnd(bcutDescriptor));
-
-	return bcutDescriptor;
-}
-
-const Math::DVector& Chem::BCUTDescriptorCalculator::getResult() const
-{
-	return bcutDescriptor;
+	std::sort(vectorBegin(descr), vectorEnd(descr));
 }
 
 void Chem::BCUTDescriptorCalculator::setAtomWeightFunction(const AtomWeightFunction& func)

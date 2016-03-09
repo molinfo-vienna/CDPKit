@@ -54,13 +54,10 @@ void CDPLPythonChem::exportAutoCorrelationVectorCalculator()
 
 	python::class_<Chem::AutoCorrelationVectorCalculator, boost::noncopyable>("AutoCorrelationVectorCalculator", python::no_init)
 		.def(python::init<>(python::arg("self")))
-		.def(python::init<const Chem::MolecularGraph&>((python::arg("self"), python::arg("molgraph"))))
+		.def(python::init<const Chem::MolecularGraph&, Math::DVector&>(
+				 (python::arg("self"), python::arg("molgraph"), python::arg("corr_vec"))))
 		.def(CDPLPythonBase::ObjectIdentityCheckVisitor<Chem::AutoCorrelationVectorCalculator>())	
 		.def("setAtomPairWeightFunction", &setAtomPairWeightFunction, (python::arg("self"), python::arg("func")))
-		.def("calculate", &Chem::AutoCorrelationVectorCalculator::calculate, (python::arg("self"), python::arg("molgraph")),
-			 python::return_internal_reference<>())
-		.def("getResult", &Chem::AutoCorrelationVectorCalculator::getResult, python::arg("self"),
-			 python::return_internal_reference<>())
-		.add_property("result", python::make_function(&Chem::AutoCorrelationVectorCalculator::getResult,
-													  python::return_internal_reference<>()));
+		.def("calculate", &Chem::AutoCorrelationVectorCalculator::calculate, 
+			 (python::arg("self"), python::arg("molgraph"), python::arg("corr_vec")));
 }

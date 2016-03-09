@@ -48,6 +48,7 @@ void Chem::perceiveSymmetryClasses(MolecularGraph& molgraph, bool overwrite,
 											   boost::bind(&hasSymmetryClass, _1))) == molgraph.getAtomsEnd())
 		return;
 
+	Util::STArray sym_classes;
 	SymmetryClassCalculator calculator;
 
 	if (atom_flags == AtomPropertyFlag::DEFAULT)
@@ -59,8 +60,8 @@ void Chem::perceiveSymmetryClasses(MolecularGraph& molgraph, bool overwrite,
 	calculator.setAtomPropertyFlags(atom_flags);
 	calculator.setBondPropertyFlags(bond_flags);
 	calculator.includeImplicitHydrogens(inc_impl_h);
+	calculator.calculate(molgraph, sym_classes);
 
-	const Util::STArray& sym_classes = calculator.calculate(molgraph);
 	std::size_t num_atoms = molgraph.getNumAtoms();
 
 	for (std::size_t i = 0; i < num_atoms; i++) 

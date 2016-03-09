@@ -329,7 +329,7 @@ void Chem::SMILESDataWriter::writeNonCanonSMILES(std::ostream& os, const Molecul
 		}
 
 		if (ctrlParameters.writeBondStereo)
-			bondDirGenerator->generate(*output_molgraph);
+			bondDirGenerator->generate(*output_molgraph, bondDirections);
 
 		if (!first_comp)
 			os << SMILES::COMPONENT_SEPARATOR;
@@ -410,7 +410,7 @@ void Chem::SMILESDataWriter::generateCanonComponentSMILES(const MolecularGraph& 
 		}
 
 		if (ctrlParameters.writeBondStereo)
-			bondDirGenerator->generate(*canonMolGraph);
+			bondDirGenerator->generate(*canonMolGraph, bondDirections);
 
 		freeNodes();
 		freeEdges();
@@ -566,7 +566,7 @@ void Chem::SMILESDataWriter::buildCanonMolGraph(const MolecularGraph& molgraph)
 	else
 		canonMolGraph->clear();
 
-	canonNumberingGenerator->generate(molgraph);
+	canonNumberingGenerator->generate(molgraph, canonNumbering);
 
 	canonAtomList.clear();
 
@@ -874,7 +874,7 @@ void Chem::SMILESDataWriter::freeEdges()
 
 bool Chem::SMILESDataWriter::CanonAtomCmpFunc::operator()(const Atom* atom1, const Atom* atom2) const
 {
-	const Util::STArray& can_numbering = writer.canonNumberingGenerator->getResult();
+	const Util::STArray& can_numbering = writer.canonNumbering;
 
 	return (can_numbering[molGraph.getAtomIndex(*atom1)] < can_numbering[molGraph.getAtomIndex(*atom2)]);
 }
@@ -1294,7 +1294,7 @@ void Chem::SMILESDataWriter::DFSTreeEdge::writeBondSymbol(std::ostream& os) cons
 
 	if (writer.ctrlParameters.writeBondStereo && order == 1) {
 		
-		switch (writer.bondDirGenerator->getResult()[molGraph->getBondIndex(*bond)]) {
+		switch (writer.bondDirections[molGraph->getBondIndex(*bond)]) {
 
 			case BondDirection::UP:
 				os << SMILES::BondSymbol::UP_DIR_FLAG;

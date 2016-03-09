@@ -69,33 +69,26 @@ namespace CDPL
 			/**
 			 * \brief Constructs the \c %KekuleStructureGenerator instance and generates an alternating
 			 *        single/double bond pattern for all undefined bonds of the molecular graph \a molgraph.
-			 *
-			 * The generated bond orders can be retrieved by a call to getResult().
-			 *
 			 * \param molgraph The molecular graph for which to generate the alternating single/double bond pattern.
+			 * \param orders An array containing the assigned bond orders. The orders are stored in the same sequence
+			 *         as the bonds appear in the input molecular graph, i.e. the order of a particular bond is
+			 *         accessible via its index in the molecular graph.
 			 */
-			KekuleStructureGenerator(const MolecularGraph& molgraph);
+			KekuleStructureGenerator(const MolecularGraph& molgraph, Util::STArray& orders);
 
 			/**
 			 * \brief Generates an alternating single/double bond pattern for all undefined bonds of the molecular graph \a molgraph.
 			 * \param molgraph The molecular graph for which to generate the alternating single/double bond pattern.
-			 * \return \c true if the generation of an alternating single/double bond pattern was successful, and \c false otherwise.
-			 */
-			const Util::STArray& generate(const MolecularGraph& molgraph);
-
-			/**
-			 * \brief Returns the result of the last call to generate().
-			 * \return An array containing the bond orders. The orders are stored in the same sequence
+			 * \param orders An array containing the assigned bond orders. The orders are stored in the same sequence
 			 *         as the bonds appear in the input molecular graph, i.e. the order of a particular bond is
-			 *         accessible via its index in the molecular graph. If generate() has not yet been called,
-			 *         the returned array is empty.
+			 *         accessible via its index in the molecular graph.
 			 */
-			const Util::STArray& getResult() const;
+			void generate(const MolecularGraph& molgraph, Util::STArray& orders);
 
 		private:
 			/** \cond CDPL_PRIVATE_SECTION_DOC */
 		
-			void init(const MolecularGraph& molgraph);
+			void init(const MolecularGraph& molgraph, Util::STArray& orders);
 
 			void defineNbrBondOrders(const Atom& atom);
 			void getConnectedUndefBonds(const Atom& atom);
@@ -104,7 +97,6 @@ namespace CDPL
 
 			const MolecularGraph*  molGraph;
 			std::size_t            startAtomIdx;
-			Util::STArray          bondOrders;
 			Util::BitSet           defOrderMask;
 			BondList               conctdUndefBonds;
 

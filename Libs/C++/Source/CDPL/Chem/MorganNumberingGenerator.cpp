@@ -72,35 +72,23 @@ namespace
 Chem::MorganNumberingGenerator::MorganNumberingGenerator(): 
 	numbering(&symClassIDs, &atomSymbols, &atomCharges, &atomIsotopes, &bondMatrix) {}
 
-Chem::MorganNumberingGenerator::MorganNumberingGenerator(const MolecularGraph& molgraph): 
+Chem::MorganNumberingGenerator::MorganNumberingGenerator(const MolecularGraph& molgraph, Util::STArray& output): 
 	numbering(&symClassIDs, &atomSymbols, &atomCharges, &atomIsotopes, &bondMatrix)
 {
-	numbering.generate(molgraph);
+	numbering.generate(molgraph, output);
 }
 
-const Util::STArray& Chem::MorganNumberingGenerator::generate(const MolecularGraph& molgraph) 
+void Chem::MorganNumberingGenerator::generate(const MolecularGraph& molgraph, Util::STArray& output) 
 {
-	return numbering.generate(molgraph);
+	numbering.generate(molgraph, output);
 }
 
-const Util::STArray& Chem::MorganNumberingGenerator::getResult() const
-{
-	return numbering.getResult();
-}
-
-const Util::STArray& Chem::MorganNumberingGenerator::NumberingState::generate(const MolecularGraph& molgraph) 
+void Chem::MorganNumberingGenerator::NumberingState::generate(const MolecularGraph& molgraph, Util::STArray& output) 
 {
 	init(molgraph);
 
 	perceiveSymClasses();
-	distributeNumbers();
-
-	return finalNumbering;
-}
-
-const Util::STArray& Chem::MorganNumberingGenerator::NumberingState::getResult() const 
-{
-	return finalNumbering;
+	distributeNumbers(output);
 }
 
 void Chem::MorganNumberingGenerator::NumberingState::init(const MolecularGraph& molgraph) 
@@ -210,7 +198,7 @@ void Chem::MorganNumberingGenerator::NumberingState::perceiveSymClasses()
 	lastSymClass = symClassIDs->begin();
 }
 
-void Chem::MorganNumberingGenerator::NumberingState::distributeNumbers()
+void Chem::MorganNumberingGenerator::NumberingState::distributeNumbers(Util::STArray& output)
 {
 	STArray atom_indices;	
 
@@ -250,11 +238,11 @@ void Chem::MorganNumberingGenerator::NumberingState::distributeNumbers()
 		getNextAtomIndices(atom_indices);
 	}
 
-	finalNumbering.clear();
-	finalNumbering.reserve(molGraph->getNumAtoms());
+	output.clear();
+	output.reserve(molGraph->getNumAtoms());
 
 	std::for_each(atomNumbering.begin(), atomNumbering.end(), boost::bind(&Util::STArray::addElement, 
-																		  boost::ref(finalNumbering),
+																		  boost::ref(output),
 																		  boost::bind(&STPair::second, _1)));
 }
 

@@ -181,7 +181,7 @@ class Chem::BondOrderGenerator::BondMatchExpression : public Chem::MatchExpressi
 {
 
 public:
-	BondMatchExpression(const BondOrderGenerator& gen): generator(gen) {}
+	BondMatchExpression(const BondOrderGenerator& gen, const Util::STArray& ordrs): generator(gen), orders(ordrs) {}
 
 	bool operator()(const Bond& qry_bond, const MolecularGraph&, const Bond& tgt_bond, 
 					const MolecularGraph& tgt_molgraph, const Base::Variant&) const {
@@ -192,7 +192,7 @@ public:
 		std::size_t qry_order = getOrder(qry_bond);
 		std::size_t tgt_bond_idx = tgt_molgraph.getBondIndex(tgt_bond);
 
-		if (generator.defOrderMask.test(tgt_bond_idx) && generator.bondOrders[tgt_bond_idx] != qry_order)
+		if (generator.defOrderMask.test(tgt_bond_idx) && orders[tgt_bond_idx] != qry_order)
 			return false;
 
 		if (qry_order > 1) {
@@ -232,14 +232,15 @@ public:
 
 private:
 	const BondOrderGenerator& generator;
+	const Util::STArray&      orders;
 };
 
 
 Chem::BondOrderGenerator::BondOrderGenerator(): undefOnly(true) {}
 
-Chem::BondOrderGenerator::BondOrderGenerator(const MolecularGraph& molgraph, bool undef_only): undefOnly(undef_only) 
+Chem::BondOrderGenerator::BondOrderGenerator(const MolecularGraph& molgraph, Util::STArray& orders, bool undef_only): undefOnly(undef_only) 
 {
-	generate(molgraph);
+	generate(molgraph, orders);
 }
 
 void Chem::BondOrderGenerator::undefinedOnly(bool undef_only) 
@@ -252,32 +253,25 @@ bool Chem::BondOrderGenerator::undefinedOnly() const
 	return undefOnly;
 }
 
-const Util::STArray& Chem::BondOrderGenerator::generate(const MolecularGraph& molgraph)
+void Chem::BondOrderGenerator::generate(const MolecularGraph& molgraph, Util::STArray& orders)
 {
-	init(molgraph);
+	init(molgraph, orders);
 
 	if (undefBonds.empty())
-		return bondOrders;
+		return;
 
-	calcFreeAtomValences();
-	perceiveAtomGeometries();
-	assignBondOrders();
-
-	return bondOrders;
+	calcFreeAtomValences(orders);
+	perceiveAtomGeometries(orders);
+	assignBondOrders(orders);
 }
 
-const Util::STArray& Chem::BondOrderGenerator::getResult() const
-{
-	return bondOrders;
-}
-
-void Chem::BondOrderGenerator::init(const MolecularGraph& molgraph)
+void Chem::BondOrderGenerator::init(const MolecularGraph& molgraph, Util::STArray& orders)
 {
 	std::size_t num_bonds = molgraph.getNumBonds();
 
 	molGraph = &molgraph;
 	
-	bondOrders.assign(num_bonds, 0);
+	orders.assign(num_bonds, 0);
 	
 	defOrderMask.resize(num_bonds);
 	defOrderMask.set();
@@ -297,10 +291,10 @@ void Chem::BondOrderGenerator::init(const MolecularGraph& molgraph)
 			continue;
 
 		if (undefOnly && hasOrder(bond)) {
-			bondOrders[i] = getOrder(bond);
+			orders[i] = getOrder(bond);
 
 		} else {
-			//bondOrders[i] = 1; // UNCOMMENT ME
+			//orders[i] = 1; // UNCOMMENT ME
 			defOrderMask.reset(i);
 			undefBonds.push_back(&bond);
 		}
@@ -326,7 +320,7 @@ void Chem::BondOrderGenerator::init(const MolecularGraph& molgraph)
 	initFunctionalGroupPatterns();
 
 	MatchExpression<Atom, MolecularGraph>::SharedPointer atom_expr(new AtomMatchExpression());
-	MatchExpression<Bond, MolecularGraph>::SharedPointer bond_expr(new BondMatchExpression(*this));
+	MatchExpression<Bond, MolecularGraph>::SharedPointer bond_expr(new BondMatchExpression(*this, orders));
 
 	std::size_t num_patterns = funcGroupPatternMols.size();
 
@@ -349,7 +343,7 @@ void Chem::BondOrderGenerator::init(const MolecularGraph& molgraph)
 	}
 }
 
-void Chem::BondOrderGenerator::calcFreeAtomValences()
+void Chem::BondOrderGenerator::calcFreeAtomValences(Util::STArray& orders)
 {
 	for (MolecularGraph::ConstAtomIterator it = molGraph->getAtomsBegin(), end = molGraph->getAtomsEnd(); it != end; ++it) {
 		const Atom& atom = *it;
@@ -370,7 +364,7 @@ void Chem::BondOrderGenerator::calcFreeAtomValences()
 			if (!defOrderMask.test(bond_idx))
 				num_undef_nbr_bonds++;
 			else
-				valence += bondOrders[bond_idx];
+				valence += orders[bond_idx];
 		}
 
 		if (num_undef_nbr_bonds == 0) {
@@ -416,13 +410,13 @@ void Chem::BondOrderGenerator::calcFreeAtomValences()
 		}
 
 		if (def_nbr_bonds) {
-			assignNbrBondOrders(atom);
+			assignNbrBondOrders(atom, orders);
 			freeAtomValences.push_back(0);
 		}
 	}
 }
 
-void Chem::BondOrderGenerator::perceiveAtomGeometries()
+void Chem::BondOrderGenerator::perceiveAtomGeometries(Util::STArray& orders)
 {
 	std::transform(molGraph->getAtomsBegin(), molGraph->getAtomsEnd(), 
 				   std::back_inserter(atomGeometries),
@@ -434,18 +428,18 @@ void Chem::BondOrderGenerator::perceiveAtomGeometries()
 				  boost::bind(&BondOrderGenerator::fixRingAtomGeometries, this, _1));
 
 	std::for_each(molGraph->getAtomsBegin(), molGraph->getAtomsEnd(), 
-				  boost::bind(&BondOrderGenerator::postprocessGeometry, this, _1));
+				  boost::bind(&BondOrderGenerator::postprocessGeometry, this, _1, boost::ref(orders)));
 }
 
-void Chem::BondOrderGenerator::assignBondOrders()
+void Chem::BondOrderGenerator::assignBondOrders(Util::STArray& orders)
 {
-	assignTetrahedralAtomBondOrders();
-	assignFunctionalGroupBondOrders();
-	assignConjRingBondOrders();
-	assignRemainingBondOrders();
+	assignTetrahedralAtomBondOrders(orders);
+	assignFunctionalGroupBondOrders(orders);
+	assignConjRingBondOrders(orders);
+	assignRemainingBondOrders(orders);
 }
 
-void Chem::BondOrderGenerator::assignTetrahedralAtomBondOrders()
+void Chem::BondOrderGenerator::assignTetrahedralAtomBondOrders(Util::STArray& orders)
 {
 	for (BondList::const_iterator it = undefBonds.begin(), end = undefBonds.end(); it != end; ++it) {
 		const Bond* bond = *it;
@@ -464,7 +458,7 @@ void Chem::BondOrderGenerator::assignTetrahedralAtomBondOrders()
 			(atomGeometries[atom2_idx] == TETRAHEDRAL && getType(atom2) < AtomType::Ne && getExplicitBondCount(atom2, *molGraph) > 2)) {
 
 			defOrderMask.set(bond_idx);
-			bondOrders[bond_idx] = 1; // REMOVE ME
+			orders[bond_idx] = 1; // REMOVE ME
 			
 			assert(freeAtomValences[atom1_idx] > 0);
 			freeAtomValences[atom1_idx]--;
@@ -475,7 +469,7 @@ void Chem::BondOrderGenerator::assignTetrahedralAtomBondOrders()
 	}
 }
 
-void Chem::BondOrderGenerator::assignFunctionalGroupBondOrders()
+void Chem::BondOrderGenerator::assignFunctionalGroupBondOrders(Util::STArray& orders)
 {
 	for (MolecularGraphPtrList::const_iterator ptn_it = funcGroupPatterns.begin(), ptn_end = funcGroupPatterns.end(); 
 		 ptn_it != ptn_end; ++ptn_it) {
@@ -574,7 +568,7 @@ void Chem::BondOrderGenerator::assignFunctionalGroupBondOrders()
 
 						if (freeAtomValences[mpd_atom1_idx] >= order && freeAtomValences[mpd_atom2_idx] >= order) {
 							defOrderMask.set(mpd_bond_idx);
-							bondOrders[mpd_bond_idx] = order;
+							orders[mpd_bond_idx] = order;
 
 							freeAtomValences[mpd_atom1_idx] -= order;
 							freeAtomValences[mpd_atom2_idx] -= order;
@@ -594,10 +588,10 @@ void Chem::BondOrderGenerator::assignFunctionalGroupBondOrders()
 								std::size_t atom1_idx = molGraph->getAtomIndex(atom1);
 								std::size_t atom2_idx = molGraph->getAtomIndex(atom2);
 
-								freeAtomValences[atom1_idx] += bondOrders[bond_idx];
-								freeAtomValences[atom2_idx] += bondOrders[bond_idx];
+								freeAtomValences[atom1_idx] += orders[bond_idx];
+								freeAtomValences[atom2_idx] += orders[bond_idx];
 
-								bondOrders[bond_idx] = 0; // REMOVE ME
+								orders[bond_idx] = 0; // REMOVE ME
 							}
 
 							success = false;
@@ -640,9 +634,9 @@ double Chem::BondOrderGenerator::calcMappingScore(const AtomBondMapping& mapping
 	return score;
 }
 
-void Chem::BondOrderGenerator::assignConjRingBondOrders()
+void Chem::BondOrderGenerator::assignConjRingBondOrders(Util::STArray& orders)
 {
-	markConjRingBonds();
+	markConjRingBonds(orders);
 
 	typedef boost::adjacency_list<boost::vecS, boost::vecS, boost::undirectedS> BondGraph; 
 	typedef boost::property_map<BondGraph, boost::vertex_index_t>::type AtomIndexMap;
@@ -683,7 +677,7 @@ void Chem::BondOrderGenerator::assignConjRingBondOrders()
 			std::size_t atom1_idx = molGraph->getAtomIndex(atom1);
 			std::size_t atom2_idx = molGraph->getAtomIndex(atom2);
 
-			bondOrders[molGraph->getBondIndex(*bond)] = 1; // REMOVE ME
+			orders[molGraph->getBondIndex(*bond)] = 1; // REMOVE ME
 
 			assert(freeAtomValences[atom1_idx] > 0);
 			freeAtomValences[atom1_idx]--;
@@ -736,7 +730,7 @@ void Chem::BondOrderGenerator::assignConjRingBondOrders()
 
 				bondMappingMask1.set(bond_idx);
 				
-				bondOrders[bond_idx] = 2;
+				orders[bond_idx] = 2;
 
 				assert(freeAtomValences[atom1_idx] > 0);
 				freeAtomValences[atom1_idx]--;
@@ -748,7 +742,7 @@ void Chem::BondOrderGenerator::assignConjRingBondOrders()
 	}
 }
 
-void Chem::BondOrderGenerator::assignRemainingBondOrders()
+void Chem::BondOrderGenerator::assignRemainingBondOrders(Util::STArray& orders)
 {
 	for (BondList::const_iterator it = undefBonds.begin(), end = undefBonds.end(); it != end; ++it) {
 		const Bond* bond = *it;
@@ -800,7 +794,7 @@ void Chem::BondOrderGenerator::assignRemainingBondOrders()
 
 		if (avg_tor_angle >= 30) {
 			defOrderMask.set(bond_idx);
-			bondOrders[bond_idx] = 1;  // REMOVE ME
+			orders[bond_idx] = 1;  // REMOVE ME
 			
 			assert(freeAtomValences[atom1_idx] > 0);
 			freeAtomValences[atom1_idx]--;
@@ -810,7 +804,7 @@ void Chem::BondOrderGenerator::assignRemainingBondOrders()
 		}
 	}
 
-	workingBondOrders.assign(bondOrders.getElementsBegin(), bondOrders.getElementsEnd());
+	workingBondOrders.assign(orders.getElementsBegin(), orders.getElementsEnd());
 
 	for (BondList::const_iterator it = undefBonds.begin(), end = undefBonds.end(); it != end; ++it) {
 		const Bond* bond = *it;
@@ -829,13 +823,13 @@ void Chem::BondOrderGenerator::assignRemainingBondOrders()
 
 		fragBondOrders.resize(fragBondList.size());
 
-		assignFragBondOrders(0);
+		assignFragBondOrders(0, orders);
 
 		// fix order of certain terminal double bonds
 
 		for (BondList::const_iterator it1 = fragBondList.begin(), end1 = fragBondList.end(); it1 != end1; ++it1) {
 			const Bond* bond = *it1;
-			std::size_t& order = bondOrders[molGraph->getBondIndex(*bond)];
+			std::size_t& order = orders[molGraph->getBondIndex(*bond)];
 
 			if (order != 2)
 				continue;
@@ -892,7 +886,7 @@ void Chem::BondOrderGenerator::assignRemainingBondOrders()
 	}
 }
 
-void Chem::BondOrderGenerator::assignFragBondOrders(std::size_t depth)
+void Chem::BondOrderGenerator::assignFragBondOrders(std::size_t depth, Util::STArray& orders)
 {
 	std::size_t frag_size = fragBondList.size();
 
@@ -903,7 +897,7 @@ void Chem::BondOrderGenerator::assignFragBondOrders(std::size_t depth)
 			return;
 
 		for (std::size_t i = 0; i < frag_size; i++)
-			bondOrders[molGraph->getBondIndex(*fragBondList[i])] = fragBondOrders[i]; 
+			orders[molGraph->getBondIndex(*fragBondList[i])] = fragBondOrders[i]; 
 		
 		bestOrderAssmentScore = currOrderAssmentScore;
 		return;
@@ -1004,7 +998,7 @@ void Chem::BondOrderGenerator::assignFragBondOrders(std::size_t depth)
 
 		fragBondOrders[depth] = order;
 
-		assignFragBondOrders(depth + 1);
+		assignFragBondOrders(depth + 1, orders);
 	}
 
 	currOrderAssmentScore = saved_score;
@@ -1061,7 +1055,7 @@ double Chem::BondOrderGenerator::calcHybridizationMatchScore()
 	return score;
 }
 
-void Chem::BondOrderGenerator::markConjRingBonds() 
+void Chem::BondOrderGenerator::markConjRingBonds(Util::STArray& orders) 
 {
 	FragmentList::SharedPointer sssr = getSSSR(*molGraph);
 
@@ -1091,8 +1085,8 @@ void Chem::BondOrderGenerator::markConjRingBonds()
 					std::size_t bond_idx = molGraph->getBondIndex(bond);
 					std::size_t prev_bond_idx = molGraph->getBondIndex(ring.getBond((i + size - 1) % size));
 
-					if (defOrderMask.test(bond_idx) && bondOrders[bond_idx] == 1 && 
-						defOrderMask.test(prev_bond_idx) && bondOrders[prev_bond_idx] == 1) {
+					if (defOrderMask.test(bond_idx) && orders[bond_idx] == 1 && 
+						defOrderMask.test(prev_bond_idx) && orders[prev_bond_idx] == 1) {
 						skip = true;
 					}
 
@@ -1119,7 +1113,7 @@ void Chem::BondOrderGenerator::markConjRingBonds()
 	}
 }
 
-void Chem::BondOrderGenerator::assignNbrBondOrders(const Atom& atom)
+void Chem::BondOrderGenerator::assignNbrBondOrders(const Atom& atom, Util::STArray& orders)
 {
 	Atom::ConstBondIterator bonds_end = atom.getBondsEnd();
 	Atom::ConstAtomIterator a_it = atom.getAtomsBegin();
@@ -1136,11 +1130,11 @@ void Chem::BondOrderGenerator::assignNbrBondOrders(const Atom& atom)
 
 		defOrderMask.set(bond_idx);
 		freeAtomValences[nbr_atom_idx]--;
-		bondOrders[bond_idx] = 1; // REMOVE ME
+		orders[bond_idx] = 1; // REMOVE ME
 	}
 }
 
-void Chem::BondOrderGenerator::postprocessGeometry(const Atom& atom)
+void Chem::BondOrderGenerator::postprocessGeometry(const Atom& atom, Util::STArray& orders)
 {
 	std::size_t atom_idx = molGraph->getAtomIndex(atom);
 	Geometry& geom = atomGeometries[atom_idx];
@@ -1177,7 +1171,7 @@ void Chem::BondOrderGenerator::postprocessGeometry(const Atom& atom)
 					return;
 
 				if (defOrderMask.test(bond_idx)) {
-					if (bondOrders[bond_idx] >= 2)
+					if (orders[bond_idx] >= 2)
 						return;
 
 					continue;

@@ -73,56 +73,51 @@ namespace CDPL
 			/**
 			 * \brief Constructs the \c %BondStereoFlagGenerator instance and generates the 2D stereo flags of the
 			 *        bonds in the molecular graph \a molgraph.
-			 *
-			 * The generated stereo flags can be retrieved by a call to getResult().
-			 *
 			 * \param molgraph The molecular graph for which to generate the stereo flags. 
-			 */
-			BondStereoFlagGenerator(const MolecularGraph& molgraph);
-
-			/**
-			 * \brief Constructs the \c %BondStereoFlagGenerator instance and generates the 2D stereo flags of the
-			 *        bonds in the molecular graph \a molgraph using the atom coordinates \a coords.
-			 *
-			 * The generated stereo flags can be retrieved by a call to getResult().
-			 *
-			 * \param molgraph The molecular graph for which to generate the stereo flags. 
-			 * \param coords The atom coordinates to use for the calculation. 
-			 */
-			BondStereoFlagGenerator(const MolecularGraph& molgraph, const Math::Vector2DArray& coords);
-
-			/**
-			 * \brief Generates the 2D stereo flags of the bonds in the molecular graph \a molgraph.
-			 * \param molgraph The molecular graph for which to generate the stereo flags. 
-			 * \return An array containing the generated stereo flags (possible values are defined
+			 * \param flags An array containing the generated stereo flags (possible values are defined
 			 *         as constants in namespace Chem::BondStereoFlag). The stereo flags
 			 *         are stored in the same order as the bonds appear in the bond list of
 			 *         the molecular graph (i.e. the 2D stereo flag of a bond is accessible via
 			 *         its index).
 			 */
-			const Util::UIArray& generate(const MolecularGraph& molgraph);
+			BondStereoFlagGenerator(const MolecularGraph& molgraph, Util::UIArray& flags);
+
+			/**
+			 * \brief Constructs the \c %BondStereoFlagGenerator instance and generates the 2D stereo flags of the
+			 *        bonds in the molecular graph \a molgraph using the atom coordinates \a coords.
+			 * \param molgraph The molecular graph for which to generate the stereo flags. 
+			 * \param coords The atom coordinates to use for the calculation. 
+			 * \param flags An array containing the generated stereo flags (possible values are defined
+			 *         as constants in namespace Chem::BondStereoFlag). The stereo flags
+			 *         are stored in the same order as the bonds appear in the bond list of
+			 *         the molecular graph (i.e. the 2D stereo flag of a bond is accessible via
+			 *         its index).
+			 */
+			BondStereoFlagGenerator(const MolecularGraph& molgraph, const Math::Vector2DArray& coords, Util::UIArray& flags);
+
+			/**
+			 * \brief Generates the 2D stereo flags of the bonds in the molecular graph \a molgraph.
+			 * \param molgraph The molecular graph for which to generate the stereo flags. 
+			 * \param flags An array containing the generated stereo flags (possible values are defined
+			 *         as constants in namespace Chem::BondStereoFlag). The stereo flags
+			 *         are stored in the same order as the bonds appear in the bond list of
+			 *         the molecular graph (i.e. the 2D stereo flag of a bond is accessible via
+			 *         its index).
+			 */
+			void generate(const MolecularGraph& molgraph, Util::UIArray& flags);
 
 			/**
 			 * \brief Generates the 2D stereo flags of the bonds in the molecular graph \a molgraph
 			 *        using the atom coordinates \a coords.
 			 * \param molgraph The molecular graph for which to generate the stereo flags. 
 			 * \param coords The atom coordinates to use for the calculation. 
-			 * \return An array containing the generated stereo flags (possible values are defined
+			 * \param flags An array containing the generated stereo flags (possible values are defined
 			 *         as constants in namespace Chem::BondStereoFlag). The stereo flags
 			 *         are stored in the same order as the bonds appear in the bond list of
 			 *         the molecular graph (i.e. the 2D stereo flag of a bond is accessible via
 			 *         its index).
 			 */
-			const Util::UIArray& generate(const MolecularGraph& molgraph, const Math::Vector2DArray& coords);
-
-			/**
-			 * \brief Returns the result of the last 2D bond stereo flag calculation.
-			 * \return An array containing the generated stereo flags (possible values are defined
-			 *         as constants in namespace Chem::BondStereoFlag). If a calculation
-			 *         has not yet been performed, the returned array is empty.
-			 * \see generate()
-			 */
-			const Util::UIArray& getResult() const;
+			void generate(const MolecularGraph& molgraph, const Math::Vector2DArray& coords, Util::UIArray& flags);
 
 		private:
 			/** \cond CDPL_PRIVATE_SECTION_DOC */
@@ -133,13 +128,13 @@ namespace CDPL
 
 			BondStereoFlagGenerator& operator=(const BondStereoFlagGenerator&);
 
-			void init(const MolecularGraph&, const Math::Vector2DArray*);
+			void init(const MolecularGraph&, const Math::Vector2DArray*, Util::UIArray&);
 
-			void assignStereoFlags();
+			void assignStereoFlags(Util::UIArray&);
 
-			void assignFlagsForEitherDoubleBonds();
-			void assignFlagsForIsolatedCenter(const StereoAtomInfo*);
-			bool assignFlagsForNonIsolatedCenters(std::size_t, std::size_t);
+			void assignFlagsForEitherDoubleBonds(Util::UIArray&);
+			void assignFlagsForIsolatedCenter(const StereoAtomInfo*, Util::UIArray&);
+			bool assignFlagsForNonIsolatedCenters(std::size_t, std::size_t, Util::UIArray&);
 
 			void switchStereoFlag(std::size_t);
 
@@ -186,7 +181,6 @@ namespace CDPL
 			typedef std::vector<const Bond*> BondList;
 
 			const MolecularGraph*      molGraph;
-			Util::UIArray              stereoFlags;
 			Util::UIArray              currentStereoFlags;
 			StereoAtomInfoPtrTable     stereoAtomTable;
 			StereoAtomInfoList         stereoAtomList;

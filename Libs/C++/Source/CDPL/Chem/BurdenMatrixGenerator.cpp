@@ -39,17 +39,17 @@ using namespace CDPL;
 Chem::BurdenMatrixGenerator::BurdenMatrixGenerator(): 
 	atomWeightFunc(&getType) {}
 
-Chem::BurdenMatrixGenerator::BurdenMatrixGenerator(const MolecularGraph& molgraph): 
+Chem::BurdenMatrixGenerator::BurdenMatrixGenerator(const MolecularGraph& molgraph, Math::DMatrix& mtx): 
 	atomWeightFunc(&getType)
 {
-	generate(molgraph);
+	generate(molgraph, mtx);
 }
 
-const Math::DMatrix& Chem::BurdenMatrixGenerator::generate(const MolecularGraph& molgraph)
+void Chem::BurdenMatrixGenerator::generate(const MolecularGraph& molgraph, Math::DMatrix& mtx)
 {
 	std::size_t num_atoms = molgraph.getNumAtoms();
 
-	burdenMatrix = Math::ScalarMatrix<double>(num_atoms, num_atoms, 0.001);
+	mtx = Math::ScalarMatrix<double>(num_atoms, num_atoms, 0.001);
 
 	MolecularGraph::ConstAtomIterator atoms_end = molgraph.getAtomsEnd();
 
@@ -57,7 +57,7 @@ const Math::DMatrix& Chem::BurdenMatrixGenerator::generate(const MolecularGraph&
 		const Atom& atom = *it;
 		std::size_t atom_idx = molgraph.getAtomIndex(atom);
 
-		burdenMatrix(atom_idx, atom_idx) = atomWeightFunc(atom);
+		mtx(atom_idx, atom_idx) = atomWeightFunc(atom);
 	}
 
 	MolecularGraph::ConstBondIterator bonds_end = molgraph.getBondsEnd();
@@ -110,16 +110,9 @@ const Math::DMatrix& Chem::BurdenMatrixGenerator::generate(const MolecularGraph&
 			}
 		}
 
-		burdenMatrix(atom_idx2, atom_idx1) = bond_val;
-		burdenMatrix(atom_idx1, atom_idx2) = bond_val;
+		mtx(atom_idx2, atom_idx1) = bond_val;
+		mtx(atom_idx1, atom_idx2) = bond_val;
 	}
-
-	return burdenMatrix;
-}
-
-const Math::DMatrix& Chem::BurdenMatrixGenerator::getResult() const
-{
-	return burdenMatrix;
 }
 
 void Chem::BurdenMatrixGenerator::setAtomWeightFunction(const AtomWeightFunction& func)

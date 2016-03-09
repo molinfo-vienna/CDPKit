@@ -185,12 +185,10 @@ namespace CDPL
 			/**
 			 * \brief Constructs the \c %DaylightFingerprintGenerator instance and generates the fingerprint of the
 			 *        molecular graph \a molgraph.
-			 *
-			 * The generated fingerprint can be retrieved by a call to getResult().
-			 *
 			 * \param molgraph The molecular graph for which to generate the fingerprint.
+			 * \param fprint The generated fingerprint.
 			 */
-			DaylightFingerprintGenerator(const MolecularGraph& molgraph);
+			DaylightFingerprintGenerator(const MolecularGraph& molgraph, Util::BitSet& fprint);
 
 			/**
 			 * \brief Allows to specify a custom function for the generation of atom descriptors.
@@ -258,25 +256,18 @@ namespace CDPL
 			/**
 			 * \brief Generates the fingerprint of the molecular graph \a molgraph.
 			 * \param molgraph The molecular graph for which to generate the fingerprint.
-			 * \return The generated fingerprint.
+			 * \param fprint The generated fingerprint.
 			 */
-			const Util::BitSet& generate(const MolecularGraph& molgraph);
-
-			/**
-			 * \brief Returns the last generated fingerprint.
-			 * \return The generated fingerprint. If a fingerprint has not yet been
-			 *         generated, the returned bitset is empty.
-			 */
-			const Util::BitSet& getResult() const;
+			void generate(const MolecularGraph& molgraph, Util::BitSet& fprint);
 
 		private:
 			DaylightFingerprintGenerator(const DaylightFingerprintGenerator&);
 
 			DaylightFingerprintGenerator& operator=(const DaylightFingerprintGenerator&);
 
-			void calcFingerprint(const MolecularGraph&);
+			void calcFingerprint(const MolecularGraph&, Util::BitSet&);
 
-			void growPath(const Atom&);
+			void growPath(const Atom&, Util::BitSet&);
 
 			std::size_t calcBitIndex();
 
@@ -296,7 +287,6 @@ namespace CDPL
 			IndexList              bondPath;
 			UInt64Array            fwdPathDescriptor;
 			UInt64Array            revPathDescriptor;
-			Util::BitSet           fingerprint;
 			boost::rand48          randGenerator;
 		}; 
 

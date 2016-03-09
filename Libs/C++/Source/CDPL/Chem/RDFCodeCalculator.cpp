@@ -45,12 +45,12 @@ Chem::RDFCodeCalculator::RDFCodeCalculator():
 	 weightFunc(boost::bind(std::multiplies<unsigned int>(),
 							boost::bind(&getType, _1), boost::bind(&getType, _1))) {}
 
-Chem::RDFCodeCalculator::RDFCodeCalculator(const MolecularGraph& molgraph): 
+Chem::RDFCodeCalculator::RDFCodeCalculator(const MolecularGraph& molgraph, Math::DVector& rdf_code): 
 	 smoothingFactor(1.0), scalingFactor(100.0), startRadius(0.0), radiusIncrement(0.1), numSteps(128), 
 	 weightFunc(boost::bind(std::multiplies<unsigned int>(),
 							boost::bind(&getType, _1), boost::bind(&getType, _1)))
 {
-	calculate(molgraph);
+	calculate(molgraph, rdf_code);
 }
 
 void CDPL::Chem::RDFCodeCalculator::setSmoothingFactor(double factor)
@@ -103,11 +103,11 @@ std::size_t CDPL::Chem::RDFCodeCalculator::getNumSteps() const
 	return numSteps;
 }
 
-const Math::DVector& Chem::RDFCodeCalculator::calculate(const MolecularGraph& molgraph)
+void Chem::RDFCodeCalculator::calculate(const MolecularGraph& molgraph, Math::DVector& rdf_code)
 {
 	init(molgraph);
 
-	rdfCode.resize(numSteps + 1, false);
+	rdf_code.resize(numSteps + 1, false);
 
 	const Math::DMatrix& dist_mtx = *getGeometricalDistanceMatrix(molgraph);
 
@@ -131,15 +131,8 @@ const Math::DVector& Chem::RDFCodeCalculator::calculate(const MolecularGraph& mo
 			}
 		}
 
-		rdfCode(i) = scalingFactor * sum;
+		rdf_code(i) = scalingFactor * sum;
 	}
-
-	return rdfCode;
-}
-
-const Math::DVector& Chem::RDFCodeCalculator::getResult() const
-{
-	return rdfCode;
 }
 
 void Chem::RDFCodeCalculator::setAtomPairWeightFunction(const AtomPairWeightFunction& func)

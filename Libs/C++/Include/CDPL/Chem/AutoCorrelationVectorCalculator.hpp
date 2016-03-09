@@ -81,8 +81,9 @@ namespace CDPL
 			 * The calculated autocorrelation vector can be retrieved by a call to getResult().
 			 *
 			 * \param molgraph The molecular graph for which to calculate the autocorrelation vector.
+			 * \param corr_vec The calculated autocorrelation vector. 
 			 */
-			AutoCorrelationVectorCalculator(const MolecularGraph& molgraph);
+			AutoCorrelationVectorCalculator(const MolecularGraph& molgraph, Math::DVector& corr_vec);
 
 			/**
 			 * \brief Allows to specify a custom atom pair weight function.
@@ -100,17 +101,9 @@ namespace CDPL
 			 * topological diameter of the molecular graph.
 			 *
 			 * \param molgraph The molecular graph for which to calculate the autocorrelation vector.
-			 * \return The calculated autocorrelation vector. 
+			 * \param corr_vec The calculated autocorrelation vector. 
 			 */
-			const Math::DVector& calculate(const MolecularGraph& molgraph);
-
-			/**
-			 * \brief Returns the result of the last autocorrelation vector calculation.
-			 * \return The calculated autocorrelation vector. The length of the returned vector is zero if
-			 *         a calculation has not yet been performed.
-			 * \see calculate()
-			 */
-			const Math::DVector& getResult() const;
+			void calculate(const MolecularGraph& molgraph, Math::DVector& corr_vec);
 
 		private:
 			AutoCorrelationVectorCalculator(const AutoCorrelationVectorCalculator&);
@@ -118,7 +111,6 @@ namespace CDPL
 			AutoCorrelationVectorCalculator& operator=(const AutoCorrelationVectorCalculator&);
 
 			AtomPairWeightFunction weightFunc;
-			Math::DVector          autoCorrVector;
 		}; 
 
 		/**

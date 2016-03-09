@@ -41,12 +41,9 @@ void CDPLPythonChem::exportCIPPriorityCalculator()
 
 	python::class_<Chem::CIPPriorityCalculator, boost::noncopyable>("CIPPriorityCalculator", python::no_init)
 		.def(python::init<>(python::arg("self")))
-		.def(python::init<const Chem::MolecularGraph&>((python::arg("self"), python::arg("molgraph"))))
+		.def(python::init<const Chem::MolecularGraph&, Util::STArray&>((python::arg("self"), python::arg("molgraph"), python::arg("priorities"))))
 		.def(CDPLPythonBase::ObjectIdentityCheckVisitor<Chem::CIPPriorityCalculator>())	
-		.def("calculate", &Chem::CIPPriorityCalculator::calculate, (python::arg("self"), python::arg("molgraph")), 
-			 python::return_internal_reference<>())
-		.def("getResult", &Chem::CIPPriorityCalculator::getResult, python::arg("self"),
-			 python::return_internal_reference<>())
-		.add_property("result", python::make_function(&Chem::CIPPriorityCalculator::getResult,
-													  python::return_internal_reference<>()));
+		.def("calculate", &Chem::CIPPriorityCalculator::calculate, 
+			 (python::arg("self"), python::arg("molgraph"), python::arg("priorities")));
+
 }

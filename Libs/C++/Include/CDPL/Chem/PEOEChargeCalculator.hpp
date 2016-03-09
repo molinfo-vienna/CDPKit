@@ -75,12 +75,12 @@ namespace CDPL
 			/**
 			 * \brief Constructs the \c %PEOEChargeCalculator instance and calculates the \e PEOE charges of
 			 *        the atoms in the molecular graph \a molgraph.
-			 *
-			 * The calculated partial atomic charges can be retrieved by a call to getResult().
-			 *
 			 * \param molgraph The molecular graph for which to calculate the \e PEOE charges.
+			 * \param charges An array containing the calculated partial atomic charges. The charges
+			 *         are stored in the same order as the atoms appear in the atom list of the
+			 *         molecular graph (i.e. the partial charge of an atom is accessible via its index).
 			 */
-			PEOEChargeCalculator(const MolecularGraph& molgraph);
+			PEOEChargeCalculator(const MolecularGraph& molgraph, Util::DArray& charges);
 
 			/**
 			 * \brief Allows to specify the number of charge shifting iterations that have to be performed.
@@ -111,29 +111,21 @@ namespace CDPL
 			/**
 			 * \brief Calculates the \e PEOE charges of the atoms in the molecular graph \a molgraph.
 			 * \param molgraph The molecular graph for which to calculate the \e PEOE charges.  
-			 * \return An array containing the calculated partial atomic charges. The charges
+			 * \param charges An array containing the calculated partial atomic charges. The charges
 			 *         are stored in the same order as the atoms appear in the atom list of the
 			 *         molecular graph (i.e. the partial charge of an atom is accessible via its index).
 			 */
-			const Util::DArray& calculate(const MolecularGraph& molgraph);
+			void calculate(const MolecularGraph& molgraph, Util::DArray& charges);
 
 			/**
-			 * \brief Returns the result of the last \e PEOE charge calculation.
-			 * \return An array containing the calculated partial atomic charges. If a calculation has not yet
-			 *         been performed, the returned array is empty.
-			 * \see calculate()
-			 */
-			const Util::DArray& getResult() const;
-
-			/**
-			 * \brief Returns the residual atom electronegativities resulting from the last \e PEOE charge calculation.
-			 * \return An array containing the residual electronegativities. If a calculation has not yet
-			 *         been performed, the returned array is empty. The electronegativities
+			 * \brief Retrieves the residual atom electronegativities resulting from the last \e PEOE charge calculation.
+			 * \param elnegs An array containing the calculated residual electronegativities. If a calculation has not yet
+			 *         been performed, the array will be empty. The electronegativities
 			 *         are stored in the same order as the atoms appear in the atom list of the
 			 *         molecular graph (i.e. the residual electronegativity of an atom is accessible via
 			 *         its index).
 			 */
-			const Util::DArray& getElectronegativities() const;
+			void getElectronegativities(Util::DArray& elnegs) const;
 
 		private:
 			/** \cond CDPL_PRIVATE_SECTION_DOC */
@@ -142,8 +134,8 @@ namespace CDPL
 
 			PEOEChargeCalculator& operator=(const PEOEChargeCalculator&);
 
-			void init(const MolecularGraph&);
-			void calcCharges();
+			void init(const MolecularGraph&, Util::DArray&);
+			void calcCharges(Util::DArray&);
 
 			class PEOEAtomState
 			{
@@ -180,8 +172,6 @@ namespace CDPL
 			double             dampingFactor;
 			PEOEAtomStateList  atomStates;
 			PEOEAtomStateList  implHStates;
-			Util::DArray       resCharges;
-			Util::DArray       resEnegativities;
 
 			/** \endcond */
 		};

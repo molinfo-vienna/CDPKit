@@ -44,15 +44,12 @@ void CDPLPythonChem::exportHydrogen3DCoordinatesGenerator()
 
     python::class_<Chem::Hydrogen3DCoordinatesGenerator, boost::noncopyable>("Hydrogen3DCoordinatesGenerator", python::no_init)
 		.def(python::init<>(python::arg("self")))
-		.def(python::init<const Chem::MolecularGraph&, bool>((python::arg("self"), python::arg("molgraph"), python::arg("undef_only") = true)))
+		.def(python::init<const Chem::MolecularGraph&, Math::Vector3DArray&, bool>(
+				 (python::arg("self"), python::arg("molgraph"), python::arg("coords"), python::arg("undef_only") = true)))
 		.def(CDPLPythonBase::ObjectIdentityCheckVisitor<Chem::Hydrogen3DCoordinatesGenerator>())	
 		.def("undefinedOnly", undefOnlySetterFunc, (python::arg("self"), python::arg("undef_only")))
 		.def("undefinedOnly", undefOnlyGetterFunc, python::arg("self"))
-		.def("generate", &Chem::Hydrogen3DCoordinatesGenerator::generate, (python::arg("self"), python::arg("molgraph")),
-			python::return_internal_reference<>())
-		.def("getResult", &Chem::Hydrogen3DCoordinatesGenerator::getResult, python::arg("self"),
-			 python::return_internal_reference<>())
-		.add_property("undefinedOnly", undefOnlyGetterFunc, undefOnlySetterFunc)
-		.add_property("result", python::make_function(&Chem::Hydrogen3DCoordinatesGenerator::getResult,
-													  python::return_internal_reference<>()));
+		.def("generate", &Chem::Hydrogen3DCoordinatesGenerator::generate, 
+			 (python::arg("self"), python::arg("molgraph"), python::arg("coords")))
+		.add_property("undefinedOnly", undefOnlyGetterFunc, undefOnlySetterFunc);
 }

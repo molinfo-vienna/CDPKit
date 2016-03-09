@@ -47,8 +47,8 @@ void Chem::generateMorganNumbering(MolecularGraph& molgraph, bool overwrite)
 											   boost::bind(&hasMorganNumber, _1))) == molgraph.getAtomsEnd())
 		return;
 
-	MorganNumberingGenerator generator(molgraph);
-	const Util::STArray& numbering = generator.getResult();
+	Util::STArray numbering;
+	MorganNumberingGenerator generator(molgraph, numbering);
 	std::size_t num_atoms = molgraph.getNumAtoms();
 
 	for (std::size_t i = 0; i < num_atoms; i++) 

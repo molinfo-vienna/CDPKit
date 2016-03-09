@@ -88,8 +88,11 @@ namespace CDPL
 			 * \brief Constructs the \c %SymmetryClassCalculator instance and perceives the topological symmetry
 			 *        classes of the atoms in the molecular graph \a molgraph.
 			 * \param molgraph The molecular graph for which to perceive the symmetry classes.
+			 * \param class_ids An array containing the perceived symmetry class IDs. The class IDs
+			 *         are stored in the same order as the atoms appear in the atom list of the molecular graph
+			 *         (i.e. the symmetry class of an atom is accessible via its index).
 			 */
-			SymmetryClassCalculator(const MolecularGraph& molgraph);
+			SymmetryClassCalculator(const MolecularGraph& molgraph, Util::STArray& class_ids);
 
 			/**
 			 * \brief Allows to specify the set of atomic properties that has to be considered in the perception of
@@ -156,19 +159,11 @@ namespace CDPL
 			/**
 			 * \brief Perceives the topological symmetry classes of the atoms in the molecular graph \a molgraph.
 			 * \param molgraph The molecular graph for which to perceive the symmetry classes.
-			 * \return An array containing the perceived symmetry classes. The symmetry classes
+			 * \param class_ids An array containing the perceived symmetry class IDs. The class IDs
 			 *         are stored in the same order as the atoms appear in the atom list of the molecular graph
 			 *         (i.e. the symmetry class of an atom is accessible via its index).
 			 */
-			const Util::STArray& calculate(const MolecularGraph& molgraph);
-
-			/**
-			 * \brief Returns the result of the last symmetry class perception.
-			 * \return An array containing the perceived symmetry classes. If a symmetry
-			 *         class perception has not yet been performed, the returned array is empty.
-			 * \see calculate()
-			 */
-			const Util::STArray& getResult() const;
+			void calculate(const MolecularGraph& molgraph, Util::STArray& class_ids);
 
 		private:
 			/** \cond CDPL_PRIVATE_SECTION_DOC */
@@ -177,10 +172,10 @@ namespace CDPL
 
 			SymmetryClassCalculator& operator=(const SymmetryClassCalculator&);
 
-			void init(const MolecularGraph&);
+			void init(const MolecularGraph&, Util::STArray&);
 
 			void calcSVMNumbers();
-			void perceiveSymClasses(const MolecularGraph&);
+			void perceiveSymClasses(const MolecularGraph&, Util::STArray&);
 
 			class AtomNode;
 
@@ -240,7 +235,6 @@ namespace CDPL
 			AllocNodeList  allocAtomNodes;
 			AllocNodeList  allocImplHNodes;
 			NodeList       sortedAtomNodes;
-			Util::STArray  symClassIDs;
 
 			/** \endcond */
 		};

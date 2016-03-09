@@ -43,11 +43,6 @@ namespace
 	{
 		calculator.setAtomPairWeightFunction(CDPLPythonBase::BinaryFunctionAdapter<double, CDPL::Chem::Atom, CDPL::Chem::Atom>(callable)); 
 	}
-
-	const CDPL::Math::DVector& calculate(CDPL::Chem::RDFCodeCalculator& calculator, CDPL::Chem::MolecularGraph& molgraph)
-	{
-		return calculator.calculate(molgraph);
-	}
 }
 
 
@@ -58,7 +53,8 @@ void CDPLPythonChem::exportRDFCodeCalculator()
 
 	python::class_<Chem::RDFCodeCalculator, boost::noncopyable>("RDFCodeCalculator", python::no_init)
 		.def(python::init<>(python::arg("self")))
-		.def(python::init<Chem::MolecularGraph&>((python::arg("self"), python::arg("molgraph"))))
+		.def(python::init<Chem::MolecularGraph&, Math::DVector&>(
+				 (python::arg("self"), python::arg("molgraph"), python::arg("rdf_code"))))
 		.def(CDPLPythonBase::ObjectIdentityCheckVisitor<Chem::RDFCodeCalculator>())	
 		.def("setAtomPairWeightFunction", &setAtomPairWeightFunction, 
 			 (python::arg("self"), python::arg("func")))
@@ -77,12 +73,8 @@ void CDPLPythonChem::exportRDFCodeCalculator()
 		.def("setScalingFactor", &Chem::RDFCodeCalculator::setScalingFactor, 
 			 (python::arg("self"), python::arg("factor")))
 		.def("getScalingFactor", &Chem::RDFCodeCalculator::getScalingFactor, python::arg("self"))
-		.def("calculate", &calculate, (python::arg("self"), python::arg("molgraph")),
-			 python::return_internal_reference<>())
-		.def("getResult", &Chem::RDFCodeCalculator::getResult, python::arg("self"),
-			 python::return_internal_reference<>())
-		.add_property("result", python::make_function(&Chem::RDFCodeCalculator::getResult,
-													  python::return_internal_reference<>()))
+		.def("calculate", &Chem::RDFCodeCalculator::calculate, 
+			 (python::arg("self"), python::arg("molgraph"), python::arg("rdf_code")))
 		.add_property("smoothingFactor", &Chem::RDFCodeCalculator::getSmoothingFactor,
 					  &Chem::RDFCodeCalculator::setSmoothingFactor)
 		.add_property("scalingFactor", &Chem::RDFCodeCalculator::getScalingFactor,

@@ -211,32 +211,25 @@ private:
 };
 
 
-Chem::Atom2DCoordinatesGenerator::Atom2DCoordinatesGenerator(const MolecularGraph& molgraph) 
+Chem::Atom2DCoordinatesGenerator::Atom2DCoordinatesGenerator(const MolecularGraph& molgraph, Math::Vector2DArray& coords) 
 {
-	generate(molgraph);
+	generate(molgraph, coords);
 }
 
-const Math::Vector2DArray& Chem::Atom2DCoordinatesGenerator::generate(const MolecularGraph& molgraph)
+void Chem::Atom2DCoordinatesGenerator::generate(const MolecularGraph& molgraph, Math::Vector2DArray& coords)
 {
-	init(molgraph);
+	init(molgraph, coords);
 
 	extractRingInformation();
 
 	calcAtomPriorities();
 	calcRingPriorities();
 
-	layoutComponents();
-	alignComponents();
-
-	return coords;
+	layoutComponents(coords);
+	alignComponents(coords );
 }
 
-const Math::Vector2DArray& Chem::Atom2DCoordinatesGenerator::getResult() const
-{
-	return coords;
-}
-
-void Chem::Atom2DCoordinatesGenerator::init(const MolecularGraph& molgraph)
+void Chem::Atom2DCoordinatesGenerator::init(const MolecularGraph& molgraph, Math::Vector2DArray& coords)
 {
 	molGraph = &molgraph;
 
@@ -337,15 +330,15 @@ void Chem::Atom2DCoordinatesGenerator::calcRingPriorities()
 	}
 }
 
-void Chem::Atom2DCoordinatesGenerator::layoutComponents()
+void Chem::Atom2DCoordinatesGenerator::layoutComponents(Math::Vector2DArray& coords)
 {
 	const FragmentList& components = *getComponents(*molGraph);
 
 	std::for_each(components.getElementsBegin(), components.getElementsEnd(), 
-				  boost::bind(&Atom2DCoordinatesGenerator::layoutComponent, this, _1));
+				  boost::bind(&Atom2DCoordinatesGenerator::layoutComponent, this, _1, boost::ref(coords)));
 }
 
-void Chem::Atom2DCoordinatesGenerator::alignComponents()
+void Chem::Atom2DCoordinatesGenerator::alignComponents(Math::Vector2DArray& coords)
 {
 	const FragmentList& components = *getComponents(*molGraph);
 
@@ -365,7 +358,7 @@ void Chem::Atom2DCoordinatesGenerator::alignComponents()
 		for (FragmentList::ConstElementIterator it2 = it; i < row_size && it2 != comps_end; i++, ++it2) {
 			BoundingBox& bbox = comp_bounds[i];
 
-			calcBounds(bbox, *it2);
+			calcBounds(bbox, *it2, coords);
 
 			row_x_dim += bbox.second[0] - bbox.first[0] + COMPONENT_X_SPACING;
 			row_y_dim = std::max(row_y_dim, bbox.second[1] - bbox.first[1]);
@@ -378,7 +371,7 @@ void Chem::Atom2DCoordinatesGenerator::alignComponents()
 			const BoundingBox& bbox = comp_bounds[j];
 			double x_dim = bbox.second[0] - bbox.first[0];
 
-			moveComponent(bbox, comp_x_pos + 0.5 * x_dim, comp_y_pos, *it);
+			moveComponent(bbox, comp_x_pos + 0.5 * x_dim, comp_y_pos, *it, coords);
 
 			comp_x_pos += x_dim + COMPONENT_X_SPACING;
 		}
@@ -396,7 +389,7 @@ void Chem::Atom2DCoordinatesGenerator::addPoint(BoundingBox& bbox, const Math::V
 	bbox.second[1] = std::max(pt[1], bbox.second[1]);
 }
 
-void Chem::Atom2DCoordinatesGenerator::calcBounds(BoundingBox& bbox, const Fragment& comp) const
+void Chem::Atom2DCoordinatesGenerator::calcBounds(BoundingBox& bbox, const Fragment& comp, Math::Vector2DArray& coords) const
 {
 	bbox.first.clear();
 	bbox.second.clear();
@@ -407,7 +400,7 @@ void Chem::Atom2DCoordinatesGenerator::calcBounds(BoundingBox& bbox, const Fragm
 		addPoint(bbox, coords[molGraph->getAtomIndex(*it)]);
 }
 
-void Chem::Atom2DCoordinatesGenerator::moveComponent(const BoundingBox& bbox, double x_pos, double y_pos, const Fragment& comp)
+void Chem::Atom2DCoordinatesGenerator::moveComponent(const BoundingBox& bbox, double x_pos, double y_pos, const Fragment& comp, Math::Vector2DArray& coords)
 {
 	Math::Vector2D t;
 	
@@ -420,17 +413,17 @@ void Chem::Atom2DCoordinatesGenerator::moveComponent(const BoundingBox& bbox, do
 		coords[molGraph->getAtomIndex(*it)] += t;
 }
 
-void Chem::Atom2DCoordinatesGenerator::layoutComponent(const Fragment& comp)
+void Chem::Atom2DCoordinatesGenerator::layoutComponent(const Fragment& comp, Math::Vector2DArray& coords)
 {
-	createLayoutTree(comp);
+	createLayoutTree(comp, coords);
 
 	layoutNodes();
 }
 
-void Chem::Atom2DCoordinatesGenerator::createLayoutTree(const Fragment& comp)
+void Chem::Atom2DCoordinatesGenerator::createLayoutTree(const Fragment& comp, Math::Vector2DArray& coords)
 {
-	createRingSysNodes(comp);
-	createAtomNodes(comp);
+	createRingSysNodes(comp, coords);
+	createAtomNodes(comp, coords);
 
 	freeAllocEdges();
 
@@ -444,7 +437,7 @@ void Chem::Atom2DCoordinatesGenerator::createLayoutTree(const Fragment& comp)
 	createBFSNodeList();
 }
 
-void Chem::Atom2DCoordinatesGenerator::createRingSysNodes(const Fragment& comp)
+void Chem::Atom2DCoordinatesGenerator::createRingSysNodes(const Fragment& comp, Math::Vector2DArray& coords)
 {
 	freeAllocRingSysNodes();
 
@@ -471,7 +464,7 @@ void Chem::Atom2DCoordinatesGenerator::createRingSysNodes(const Fragment& comp)
 	RingInfoPtrList::iterator comp_rings_end = tmpRingList.end();
 
 	for (RingInfoPtrList::iterator it = tmpRingList.begin(); it != comp_rings_end; ) {
-		RingSysNode* rsys_node = allocRingSysNode(*it);
+		RingSysNode* rsys_node = allocRingSysNode(*it, coords);
 
 		tmpRingList.erase(it++);		
 
@@ -499,7 +492,7 @@ void Chem::Atom2DCoordinatesGenerator::createRingSysNodes(const Fragment& comp)
 	}
 }
 
-void Chem::Atom2DCoordinatesGenerator::createAtomNodes(const Fragment& comp)
+void Chem::Atom2DCoordinatesGenerator::createAtomNodes(const Fragment& comp, Math::Vector2DArray& coords)
 {
 	freeAllocAtomNodes();
 
@@ -512,7 +505,7 @@ void Chem::Atom2DCoordinatesGenerator::createAtomNodes(const Fragment& comp)
 		if (ringAtomMask.test(atom_idx))
 			continue;
 
-		atomNodeTable[atom_idx] = allocAtomNode(&atom);
+		atomNodeTable[atom_idx] = allocAtomNode(&atom, coords);
 	}
 }
 
@@ -854,7 +847,7 @@ const Chem::Atom2DCoordinatesGenerator::RingInfo* Chem::Atom2DCoordinatesGenerat
 }
 
 Chem::Atom2DCoordinatesGenerator::RingSysNode* 
-Chem::Atom2DCoordinatesGenerator::allocRingSysNode(const RingInfo::SharedPointer& ring_info)
+Chem::Atom2DCoordinatesGenerator::allocRingSysNode(const RingInfo::SharedPointer& ring_info, Math::Vector2DArray& coords)
 {
 	RingSysNode::SharedPointer node_ptr(new RingSysNode(molGraph, ring_info, coords, procAtomList, procBondList));
 	
@@ -863,7 +856,7 @@ Chem::Atom2DCoordinatesGenerator::allocRingSysNode(const RingInfo::SharedPointer
 	return node_ptr.get();
 }
 
-Chem::Atom2DCoordinatesGenerator::AtomNode* Chem::Atom2DCoordinatesGenerator::allocAtomNode(const Atom* atom)
+Chem::Atom2DCoordinatesGenerator::AtomNode* Chem::Atom2DCoordinatesGenerator::allocAtomNode(const Atom* atom, Math::Vector2DArray& coords)
 {
 	AtomNode::SharedPointer node_ptr(new AtomNode(molGraph, atom, atomPriorityTable[molGraph->getAtomIndex(*atom)],
 												  coords, procAtomList, procBondList));

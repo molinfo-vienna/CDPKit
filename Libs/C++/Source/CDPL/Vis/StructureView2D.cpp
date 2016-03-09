@@ -2382,8 +2382,8 @@ void Vis::StructureView2D::initInputAtomPosTable()
 		if (structureChanged || parameters->explicitHVisibilityChanged() || 
 			calcInputAtomCoords.isEmpty() || calcBondStereoFlags.isEmpty()) {
 
-			calcInputAtomCoords = Chem::Atom2DCoordinatesGenerator(*structure).getResult();
-			calcBondStereoFlags = Chem::BondStereoFlagGenerator(*structure, calcInputAtomCoords).getResult();
+			Chem::Atom2DCoordinatesGenerator(*structure, calcInputAtomCoords);
+			Chem::BondStereoFlagGenerator(*structure, calcInputAtomCoords, calcBondStereoFlags);
 		}
 
 		inputAtomCoords = calcInputAtomCoords;

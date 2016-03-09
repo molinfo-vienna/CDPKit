@@ -46,10 +46,10 @@ using namespace CDPL;
 Chem::BondDirectionGenerator::BondDirectionGenerator():
 	incRingBonds(true), minRingSize(8) {}
 
-Chem::BondDirectionGenerator::BondDirectionGenerator(const MolecularGraph& molgraph):
+Chem::BondDirectionGenerator::BondDirectionGenerator(const MolecularGraph& molgraph, Util::UIArray& dirs):
 	incRingBonds(true), minRingSize(8)
 {
-	generate(molgraph);
+	generate(molgraph, dirs);
 }
 
 void Chem::BondDirectionGenerator::includeRingBonds(bool include) 
@@ -72,29 +72,22 @@ std::size_t Chem::BondDirectionGenerator::getRingSizeLimit() const
 	return minRingSize;
 }
 
-const Util::UIArray& Chem::BondDirectionGenerator::generate(const MolecularGraph& molgraph)
+void Chem::BondDirectionGenerator::generate(const MolecularGraph& molgraph, Util::UIArray& dirs)
 {
-	init(molgraph);
+	init(molgraph, dirs);
 
 	if (!stereoBonds.empty())
-		assignDirections(0);
-
-	return bondDirections;
+		assignDirections(0, dirs);
 }
 
-const Util::UIArray& Chem::BondDirectionGenerator::getResult() const
-{
-	return bondDirections;
-}
-
-void Chem::BondDirectionGenerator::init(const MolecularGraph& molgraph)
+void Chem::BondDirectionGenerator::init(const MolecularGraph& molgraph, Util::UIArray& dirs)
 {
 	molGraph = &molgraph;
 
 	std::size_t num_bonds = molgraph.getNumBonds();
 
-	bondDirections.assign(num_bonds, BondDirection::NONE);
-	workingBondDirections.assign(num_bonds, BondDirection::NONE);
+	dirs.assign(num_bonds, BondDirection::NONE);
+	workingDirs.assign(num_bonds, BondDirection::NONE);
 
 	if (configMatchMask.size() < num_bonds)
 		configMatchMask.resize(num_bonds);
@@ -241,7 +234,7 @@ void Chem::BondDirectionGenerator::init(const MolecularGraph& molgraph)
 	}
 }
 
-bool Chem::BondDirectionGenerator::assignDirections(std::size_t list_idx)
+bool Chem::BondDirectionGenerator::assignDirections(std::size_t list_idx, Util::UIArray& dirs)
 {	
 	if (numMismatches > minNumMismatches)
 		return false;
@@ -250,7 +243,7 @@ bool Chem::BondDirectionGenerator::assignDirections(std::size_t list_idx)
 		return false;
 
 	if (list_idx == stereoBonds.size()) {
-		bondDirections = workingBondDirections;
+		dirs = workingDirs;
 
 		if (numMismatches == 0 && numDirBonds <= stereoBonds.size() * 2)
 			return true;
@@ -264,10 +257,10 @@ bool Chem::BondDirectionGenerator::assignDirections(std::size_t list_idx)
 	const StereoBond& stereo_bond = *orderedStereoBonds[list_idx];
 	std::size_t bond_idx = molGraph->getBondIndex(stereo_bond.getBond());
 
-	if (stereo_bond.configMatches(workingBondDirections)) {
+	if (stereo_bond.configMatches(workingDirs)) {
 		configMatchMask.set(bond_idx);
 
-		if (assignDirections(list_idx + 1))
+		if (assignDirections(list_idx + 1, dirs))
 			return true;
 
 		configMatchMask.reset(bond_idx);
@@ -276,15 +269,15 @@ bool Chem::BondDirectionGenerator::assignDirections(std::size_t list_idx)
 	}
 
 	if (stereo_bond.getConfiguration() != BondConfiguration::EITHER) {
-		bool has_dir_bonds1 = stereo_bond.hasDirBonds(workingBondDirections, 0);
-		bool has_dir_bonds2 = stereo_bond.hasDirBonds(workingBondDirections, 1);
+		bool has_dir_bonds1 = stereo_bond.hasDirBonds(workingDirs, 0);
+		bool has_dir_bonds2 = stereo_bond.hasDirBonds(workingDirs, 1);
 
 		if (!has_dir_bonds1 && !has_dir_bonds2) {
 			std::size_t num_nbrs1 = stereo_bond.getNumNeighbors(0);
 			std::size_t num_nbrs2 = stereo_bond.getNumNeighbors(1);
 
 			for (std::size_t i = 0; i < num_nbrs1; i++) {
-				unsigned int& nbr_dir1 = workingBondDirections[stereo_bond.getNeighborBondIndex(0, i)];
+				unsigned int& nbr_dir1 = workingDirs[stereo_bond.getNeighborBondIndex(0, i)];
 
 				assert(nbr_dir1 == BondDirection::NONE);
 
@@ -295,10 +288,10 @@ bool Chem::BondDirectionGenerator::assignDirections(std::size_t list_idx)
 					check_nbr_stereo_bond1 = configMatchMask.test(molGraph->getBondIndex(nbr_stereo_bond1->getBond()));
 
 				for (std::size_t j = 0; j < 2; j++) {
-					switchBondDirection(nbr_dir1);
+					switchDirection(nbr_dir1);
 
 					for (std::size_t k = 0; k < num_nbrs2; k++) {
-						unsigned int& nbr_dir2 = workingBondDirections[stereo_bond.getNeighborBondIndex(1, k)];
+						unsigned int& nbr_dir2 = workingDirs[stereo_bond.getNeighborBondIndex(1, k)];
 
 						assert(nbr_dir2 == BondDirection::NONE);
 
@@ -309,28 +302,28 @@ bool Chem::BondDirectionGenerator::assignDirections(std::size_t list_idx)
 							check_nbr_stereo_bond2 = configMatchMask.test(molGraph->getBondIndex(nbr_stereo_bond2->getBond()));
 
 						for (std::size_t l = 0; l < 2; l++) {
-							switchBondDirection(nbr_dir2);
+							switchDirection(nbr_dir2);
 
-							if (stereo_bond.configMatches(workingBondDirections)
-								&& (!check_nbr_stereo_bond1 || nbr_stereo_bond1->configMatches(workingBondDirections))
-								&& (!check_nbr_stereo_bond2 || nbr_stereo_bond2->configMatches(workingBondDirections))) {
+							if (stereo_bond.configMatches(workingDirs)
+								&& (!check_nbr_stereo_bond1 || nbr_stereo_bond1->configMatches(workingDirs))
+								&& (!check_nbr_stereo_bond2 || nbr_stereo_bond2->configMatches(workingDirs))) {
 
 								configMatchMask.set(bond_idx);
 
-								if (assignDirections(list_idx + 1))
+								if (assignDirections(list_idx + 1, dirs))
 									return true;
 
 								configMatchMask.reset(bond_idx);
 							}
 						}
 
-						switchBondDirection(nbr_dir2);
+						switchDirection(nbr_dir2);
 
 						assert(nbr_dir2 == BondDirection::NONE);
 					}
 				}
 
-				switchBondDirection(nbr_dir1);
+				switchDirection(nbr_dir1);
 
 				assert(nbr_dir1 == BondDirection::NONE);
 			}
@@ -340,7 +333,7 @@ bool Chem::BondDirectionGenerator::assignDirections(std::size_t list_idx)
 			std::size_t num_nbrs = stereo_bond.getNumNeighbors(atom_idx);
 
 			for (std::size_t i = 0; i < num_nbrs; i++) {
-				unsigned int& nbr_dir = workingBondDirections[stereo_bond.getNeighborBondIndex(atom_idx, i)];
+				unsigned int& nbr_dir = workingDirs[stereo_bond.getNeighborBondIndex(atom_idx, i)];
 
 				assert(nbr_dir == BondDirection::NONE);
 
@@ -351,21 +344,21 @@ bool Chem::BondDirectionGenerator::assignDirections(std::size_t list_idx)
 					check_nbr_stereo_bond = configMatchMask.test(molGraph->getBondIndex(nbr_stereo_bond->getBond()));
 
 				for (std::size_t j = 0; j < 2; j++) {
-					switchBondDirection(nbr_dir);
+					switchDirection(nbr_dir);
 
-					if (stereo_bond.configMatches(workingBondDirections)
-						&& (!check_nbr_stereo_bond || nbr_stereo_bond->configMatches(workingBondDirections))) {
+					if (stereo_bond.configMatches(workingDirs)
+						&& (!check_nbr_stereo_bond || nbr_stereo_bond->configMatches(workingDirs))) {
 
 						configMatchMask.set(bond_idx);
 
-						if (assignDirections(list_idx + 1))
+						if (assignDirections(list_idx + 1, dirs))
 							return true;
 
 						configMatchMask.reset(bond_idx);
 					}
 				}
 
-				switchBondDirection(nbr_dir);
+				switchDirection(nbr_dir);
 
 				assert(nbr_dir == BondDirection::NONE);
 			}
@@ -374,14 +367,14 @@ bool Chem::BondDirectionGenerator::assignDirections(std::size_t list_idx)
 
 	numMismatches++;
 
-	assignDirections(list_idx + 1);
+	assignDirections(list_idx + 1, dirs);
 
 	numMismatches--;
 
 	return false;
 }
 
-void Chem::BondDirectionGenerator::switchBondDirection(unsigned int& bond_dir)
+void Chem::BondDirectionGenerator::switchDirection(unsigned int& bond_dir)
 {
 	switch (bond_dir) {
 
@@ -482,12 +475,12 @@ void Chem::BondDirectionGenerator::StereoBond::addNeighborIndices(std::size_t at
 	nbrAtomIndices[atom_idx][nbrBondCounts[atom_idx]++] = nbr_atom_idx;
 }
 
-bool Chem::BondDirectionGenerator::StereoBond::hasDirBonds(const Util::UIArray& bond_dirs, std::size_t atom_idx) const
+bool Chem::BondDirectionGenerator::StereoBond::hasDirBonds(const Util::UIArray& dirs, std::size_t atom_idx) const
 {
 	assert(atom_idx <= 1);
 
 	for (std::size_t i = 0; i < nbrBondCounts[atom_idx]; i++) {
-		unsigned int dir = bond_dirs[nbrBondIndices[atom_idx][i]];
+		unsigned int dir = dirs[nbrBondIndices[atom_idx][i]];
 
 		if (dir == BondDirection::UP || dir == BondDirection::DOWN)
 			return true;
@@ -496,32 +489,32 @@ bool Chem::BondDirectionGenerator::StereoBond::hasDirBonds(const Util::UIArray& 
 	return false;
 }
 
-bool Chem::BondDirectionGenerator::StereoBond::configMatches(const Util::UIArray& bond_dirs) const
+bool Chem::BondDirectionGenerator::StereoBond::configMatches(const Util::UIArray& dirs) const
 {
 	for (std::size_t i = 0; i < 2; i++)
 		if (nbrBondCounts[i] > 1) {
-			unsigned int dir1 = bond_dirs[nbrBondIndices[i][0]] & (BondDirection::UP | BondDirection::DOWN);
-			unsigned int dir2 = bond_dirs[nbrBondIndices[i][1]] & (BondDirection::UP | BondDirection::DOWN);
+			unsigned int dir1 = dirs[nbrBondIndices[i][0]] & (BondDirection::UP | BondDirection::DOWN);
+			unsigned int dir2 = dirs[nbrBondIndices[i][1]] & (BondDirection::UP | BondDirection::DOWN);
 
 			if (dir1 != BondDirection::NONE && dir2 != BondDirection::NONE && dir1 == dir2)
 				return false;
 		}
 
 	if (configuration == BondConfiguration::EITHER) 
-		return (!hasDirBonds(bond_dirs, 0) || !hasDirBonds(bond_dirs, 1));
+		return (!hasDirBonds(dirs, 0) || !hasDirBonds(dirs, 1));
 
 	bool match = false;
 
 	for (std::size_t i = 0; i < nbrBondCounts[0]; i++) {
 		std::size_t bond_idx1 = nbrBondIndices[0][i];
-		unsigned int bond_dir1 = bond_dirs[bond_idx1] & (BondDirection::UP | BondDirection::DOWN);
+		unsigned int bond_dir1 = dirs[bond_idx1] & (BondDirection::UP | BondDirection::DOWN);
 
 		if (bond_dir1 == 0)
 			continue;
 
 		for (std::size_t j = 0; j < nbrBondCounts[1]; j++) {
 			std::size_t bond_idx2 = nbrBondIndices[1][j];
-			unsigned int bond_dir2 = bond_dirs[bond_idx2] & (BondDirection::UP | BondDirection::DOWN);
+			unsigned int bond_dir2 = dirs[bond_idx2] & (BondDirection::UP | BondDirection::DOWN);
 
 			if (bond_dir2 == 0)
 				continue;

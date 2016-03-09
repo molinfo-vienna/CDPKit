@@ -53,13 +53,10 @@ void CDPLPythonChem::exportBurdenMatrixGenerator()
 
 	python::class_<Chem::BurdenMatrixGenerator, boost::noncopyable>("BurdenMatrixGenerator", python::no_init)
 		.def(python::init<>(python::arg("self")))
-		.def(python::init<const Chem::MolecularGraph&>((python::arg("self"), python::arg("molgraph"))))
+		.def(python::init<const Chem::MolecularGraph&, Math::DMatrix&>(
+				 (python::arg("self"), python::arg("molgraph"), python::arg("mtx"))))
 		.def(CDPLPythonBase::ObjectIdentityCheckVisitor<Chem::BurdenMatrixGenerator>())	
 		.def("setAtomWeightFunction", &setAtomWeightFunction, (python::arg("self"), python::arg("func")))
-		.def("generate", &Chem::BurdenMatrixGenerator::generate, (python::arg("self"), python::arg("molgraph")),
-			 python::return_internal_reference<>())
-		.def("getResult", &Chem::BurdenMatrixGenerator::getResult, python::arg("self"), 
-			 python::return_internal_reference<>())
-		.add_property("result", python::make_function(&Chem::BurdenMatrixGenerator::getResult,
-													  python::return_internal_reference<>()));
+		.def("generate", &Chem::BurdenMatrixGenerator::generate, 
+			 (python::arg("self"), python::arg("molgraph"), python::arg("mtx")));
 }

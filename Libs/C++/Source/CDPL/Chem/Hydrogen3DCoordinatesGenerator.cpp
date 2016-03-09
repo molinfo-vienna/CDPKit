@@ -185,9 +185,10 @@ namespace
 
 Chem::Hydrogen3DCoordinatesGenerator::Hydrogen3DCoordinatesGenerator(): undefOnly(true) {}
 
-Chem::Hydrogen3DCoordinatesGenerator::Hydrogen3DCoordinatesGenerator(const MolecularGraph& molgraph, bool undef_only): undefOnly(undef_only) 
+Chem::Hydrogen3DCoordinatesGenerator::Hydrogen3DCoordinatesGenerator(
+	const MolecularGraph& molgraph, Math::Vector3DArray& coords, bool undef_only): undefOnly(undef_only) 
 {
-	generate(molgraph);
+	generate(molgraph, coords);
 }
 
 void Chem::Hydrogen3DCoordinatesGenerator::undefinedOnly(bool undef_only) 
@@ -200,26 +201,19 @@ bool Chem::Hydrogen3DCoordinatesGenerator::undefinedOnly() const
 	return undefOnly;
 }
 
-const Math::Vector3DArray& Chem::Hydrogen3DCoordinatesGenerator::generate(const MolecularGraph& molgraph)
+void Chem::Hydrogen3DCoordinatesGenerator::generate(const MolecularGraph& molgraph, Math::Vector3DArray& coords)
 {
-	init(molgraph);
-	assignCoordinates();
-
-	return coordinates;
+	init(molgraph, coords);
+	assignCoordinates(coords);
 }
 
-const Math::Vector3DArray& Chem::Hydrogen3DCoordinatesGenerator::getResult() const
-{
-	return coordinates;
-}
-
-void Chem::Hydrogen3DCoordinatesGenerator::init(const MolecularGraph& molgraph)
+void Chem::Hydrogen3DCoordinatesGenerator::init(const MolecularGraph& molgraph, Math::Vector3DArray& coords)
 {
 	std::size_t num_atoms = molgraph.getNumAtoms();
 
 	molGraph = &molgraph;
 	
-	coordinates.resize(num_atoms);
+	coords.resize(num_atoms);
 	
 	defCoordsMask.resize(num_atoms);
 	defCoordsMask.set();
@@ -231,20 +225,22 @@ void Chem::Hydrogen3DCoordinatesGenerator::init(const MolecularGraph& molgraph)
 
 		getConnectedAtoms(atom, conctdAtoms);
 
-		if (conctdAtoms.size() == 1 && getType(atom) == AtomType::H && has3DCoordinates(molgraph.getAtom(conctdAtoms[0]))) {
+		if (conctdAtoms.size() == 1 && 
+			getType(atom) == AtomType::H && has3DCoordinates(molgraph.getAtom(conctdAtoms[0]))) {
+
 			if (undefOnly && has3DCoordinates(atom)) 
-				coordinates[i] = get3DCoordinates(atom);
+				coords[i] = get3DCoordinates(atom);
 			else 
 				defCoordsMask.reset(i);
 			
 		} else {
-		    coordinates[i] = get3DCoordinates(atom);
+		    coords[i] = get3DCoordinates(atom);
 			centerAtoms.push_back(i);
 		}
 	}
 }
 
-void Chem::Hydrogen3DCoordinatesGenerator::assignCoordinates()
+void Chem::Hydrogen3DCoordinatesGenerator::assignCoordinates(Math::Vector3DArray& coords)
 {
 	using namespace HybridizationState;
 
@@ -257,7 +253,7 @@ void Chem::Hydrogen3DCoordinatesGenerator::assignCoordinates()
 			continue;
 
 		if (num_def_atoms == 0 && conctdAtoms.size() == 1) {
-			assignDiatomicMolCoords(atom, atom_idx);
+			assignDiatomicMolCoords(atom, atom_idx, coords);
 			continue;
 		}
 		
@@ -265,55 +261,57 @@ void Chem::Hydrogen3DCoordinatesGenerator::assignCoordinates()
 
 			case SP:
 			case DP:
-				assignLinearCoords(atom, atom_idx, num_def_atoms);
+				assignLinearCoords(atom, atom_idx, num_def_atoms, coords);
 				continue;
 
 			case SP2:
-				assignTrigonalPlanarCoords(atom, atom_idx, num_def_atoms);
+				assignTrigonalPlanarCoords(atom, atom_idx, num_def_atoms, coords);
 				continue;
 
 			case SP3:
 			case SD3:
-				assignTetrahedralCoords(atom, atom_idx, num_def_atoms);
+				assignTetrahedralCoords(atom, atom_idx, num_def_atoms, coords);
 				continue;
 
 			case SP2D:
-				assignSquarePlanarCoords(atom, atom_idx, num_def_atoms);
+				assignSquarePlanarCoords(atom, atom_idx, num_def_atoms, coords);
 				continue;
 
 			case SP3D:
-				assignTrigonalBipyramidalCoords(atom, atom_idx, num_def_atoms);
+				assignTrigonalBipyramidalCoords(atom, atom_idx, num_def_atoms, coords);
 				continue;
 
 			case SP3D2:
-				assignOctahedralCoords(atom, atom_idx, num_def_atoms);
+				assignOctahedralCoords(atom, atom_idx, num_def_atoms, coords);
 				continue;
 
 			case SP3D3:
-				assignPentagonalBipyramidalCoords(atom, atom_idx, num_def_atoms);
+				assignPentagonalBipyramidalCoords(atom, atom_idx, num_def_atoms, coords);
 				continue;
 
 			default:
-				assignEvenlyDistributedCoords(atom, atom_idx, num_def_atoms);
+				assignEvenlyDistributedCoords(atom, atom_idx, num_def_atoms, coords);
 				break;
 		}
 	}
 }
 
-void Chem::Hydrogen3DCoordinatesGenerator::assignDiatomicMolCoords(const Atom& atom, std::size_t atom_idx)
+void Chem::Hydrogen3DCoordinatesGenerator::assignDiatomicMolCoords(
+	const Atom& atom, std::size_t atom_idx, Math::Vector3DArray& coords)
 {
 	double b_length = getHydrogenBondLength(atom);
 	std::size_t h_index = conctdAtoms[0];
 
-	coordinates[h_index].assign(coordinates[atom_idx]);
-	coordinates[h_index](0) += b_length;
+	coords[h_index].assign(coords[atom_idx]);
+	coords[h_index](0) += b_length;
 	defCoordsMask.set(h_index);
 }
 
-void Chem::Hydrogen3DCoordinatesGenerator::assignLinearCoords(const Atom& atom, std::size_t atom_idx, std::size_t num_def_atoms)
+void Chem::Hydrogen3DCoordinatesGenerator::assignLinearCoords(
+	const Atom& atom, std::size_t atom_idx, std::size_t num_def_atoms, Math::Vector3DArray& coords)
 {
 	if (conctdAtoms.size() > 2)
-		return assignTrigonalPlanarCoords(atom, atom_idx, num_def_atoms);
+		return assignTrigonalPlanarCoords(atom, atom_idx, num_def_atoms, coords);
 
 	double b_length = getHydrogenBondLength(atom);
 
@@ -321,8 +319,8 @@ void Chem::Hydrogen3DCoordinatesGenerator::assignLinearCoords(const Atom& atom, 
 		for (std::size_t i = 0; i < 2; i++) {
 			std::size_t h_index = conctdAtoms[i];
 
-			coordinates[h_index].assign(coordinates[atom_idx]);
-			coordinates[h_index](0) += b_length * (i == 0 ? 1.0 : -1.0);
+			coords[h_index].assign(coords[atom_idx]);
+			coords[h_index](0) += b_length * (i == 0 ? 1.0 : -1.0);
 			defCoordsMask.set(h_index);
 		}
 
@@ -331,64 +329,71 @@ void Chem::Hydrogen3DCoordinatesGenerator::assignLinearCoords(const Atom& atom, 
 
 	std::size_t h_index = conctdAtoms[1];
 
-	coordinates[h_index].assign(coordinates[atom_idx] - coordinates[conctdAtoms[0]]);
-	coordinates[h_index] *= b_length / length(coordinates[h_index]); 
-	coordinates[h_index].plusAssign(coordinates[atom_idx]);
+	coords[h_index].assign(coords[atom_idx] - coords[conctdAtoms[0]]);
+	coords[h_index] *= b_length / length(coords[h_index]); 
+	coords[h_index].plusAssign(coords[atom_idx]);
 	defCoordsMask.set(h_index);
 }
 
-void Chem::Hydrogen3DCoordinatesGenerator::assignTrigonalPlanarCoords(const Atom& atom, std::size_t atom_idx, std::size_t num_def_atoms)
+void Chem::Hydrogen3DCoordinatesGenerator::assignTrigonalPlanarCoords(
+	const Atom& atom, std::size_t atom_idx, std::size_t num_def_atoms, Math::Vector3DArray& coords)
 {
 	if (conctdAtoms.size() > 3)
-		return assignTetrahedralCoords(atom, atom_idx, num_def_atoms);
+		return assignTetrahedralCoords(atom, atom_idx, num_def_atoms, coords);
 
-	assignTemplateCoords(atom, atom_idx, num_def_atoms, 3, trigonalPlanarTemplate, 0);
+	assignTemplateCoords(atom, atom_idx, num_def_atoms, 3, trigonalPlanarTemplate, 0, coords);
 }
 
-void Chem::Hydrogen3DCoordinatesGenerator::assignTetrahedralCoords(const Atom& atom, std::size_t atom_idx, std::size_t num_def_atoms)
+void Chem::Hydrogen3DCoordinatesGenerator::assignTetrahedralCoords(
+	const Atom& atom, std::size_t atom_idx, std::size_t num_def_atoms, Math::Vector3DArray& coords)
 {
 	if (conctdAtoms.size() > 4)
-		return assignTrigonalBipyramidalCoords(atom, atom_idx, num_def_atoms);
+		return assignTrigonalBipyramidalCoords(atom, atom_idx, num_def_atoms, coords);
 
 	if (num_def_atoms < 3)
-		assignTemplateCoords(atom, atom_idx, num_def_atoms, 4, tetrahedralTemplate, 0);
+		assignTemplateCoords(atom, atom_idx, num_def_atoms, 4, tetrahedralTemplate, 0, coords);
 	else
-		assignTemplateCoords(atom, atom_idx, num_def_atoms, 4, tetrahedralTemplate, tetrahedralCoordPerms);
+		assignTemplateCoords(atom, atom_idx, num_def_atoms, 4, tetrahedralTemplate, tetrahedralCoordPerms, coords);
 }
 
-void Chem::Hydrogen3DCoordinatesGenerator::assignSquarePlanarCoords(const Atom& atom, std::size_t atom_idx, std::size_t num_def_atoms)
+void Chem::Hydrogen3DCoordinatesGenerator::assignSquarePlanarCoords(
+	const Atom& atom, std::size_t atom_idx, std::size_t num_def_atoms, Math::Vector3DArray& coords)
 {
 	if (conctdAtoms.size() > 4)
-		return assignOctahedralCoords(atom, atom_idx, num_def_atoms);
+		return assignOctahedralCoords(atom, atom_idx, num_def_atoms, coords);
 
-	assignTemplateCoords(atom, atom_idx, num_def_atoms, 4, squarePlanarTemplate, squarePlanarCoordPerms);
+	assignTemplateCoords(atom, atom_idx, num_def_atoms, 4, squarePlanarTemplate, squarePlanarCoordPerms, coords);
 }
 
-void Chem::Hydrogen3DCoordinatesGenerator::assignTrigonalBipyramidalCoords(const Atom& atom, std::size_t atom_idx, std::size_t num_def_atoms)
+void Chem::Hydrogen3DCoordinatesGenerator::assignTrigonalBipyramidalCoords(
+	const Atom& atom, std::size_t atom_idx, std::size_t num_def_atoms, Math::Vector3DArray& coords)
 {
 	if (conctdAtoms.size() > 5)
-		return assignOctahedralCoords(atom, atom_idx, num_def_atoms);
+		return assignOctahedralCoords(atom, atom_idx, num_def_atoms, coords);
 
-	assignTemplateCoords(atom, atom_idx, num_def_atoms, 5, trigonalBipyramidalTemplate, trigonalBipyramidalCoordPerms);
+	assignTemplateCoords(atom, atom_idx, num_def_atoms, 5, trigonalBipyramidalTemplate, trigonalBipyramidalCoordPerms, coords);
 }
 
-void Chem::Hydrogen3DCoordinatesGenerator::assignOctahedralCoords(const Atom& atom, std::size_t atom_idx, std::size_t num_def_atoms)
+void Chem::Hydrogen3DCoordinatesGenerator::assignOctahedralCoords(
+	const Atom& atom, std::size_t atom_idx, std::size_t num_def_atoms, Math::Vector3DArray& coords)
 {
 	if (conctdAtoms.size() > 6)
-		return assignPentagonalBipyramidalCoords(atom, atom_idx, num_def_atoms);
+		return assignPentagonalBipyramidalCoords(atom, atom_idx, num_def_atoms, coords);
 
-	assignTemplateCoords(atom, atom_idx, num_def_atoms, 6, octahedralTemplate, octahedralCoordPerms);
+	assignTemplateCoords(atom, atom_idx, num_def_atoms, 6, octahedralTemplate, octahedralCoordPerms, coords);
 }
 
-void Chem::Hydrogen3DCoordinatesGenerator::assignPentagonalBipyramidalCoords(const Atom& atom, std::size_t atom_idx, std::size_t num_def_atoms)
+void Chem::Hydrogen3DCoordinatesGenerator::assignPentagonalBipyramidalCoords(
+	const Atom& atom, std::size_t atom_idx, std::size_t num_def_atoms, Math::Vector3DArray& coords)
 {
 	if (conctdAtoms.size() > 7)
-		return assignEvenlyDistributedCoords(atom, atom_idx, num_def_atoms);
+		return assignEvenlyDistributedCoords(atom, atom_idx, num_def_atoms, coords);
 
-	assignTemplateCoords(atom, atom_idx, num_def_atoms, 7, pentagonalBipyramidalTemplate, pentagonalBipyramidalCoordPerms);
+	assignTemplateCoords(atom, atom_idx, num_def_atoms, 7, pentagonalBipyramidalTemplate, pentagonalBipyramidalCoordPerms, coords);
 }
 
-void Chem::Hydrogen3DCoordinatesGenerator::assignEvenlyDistributedCoords(const Atom& atom, std::size_t atom_idx, std::size_t num_def_atoms)
+void Chem::Hydrogen3DCoordinatesGenerator::assignEvenlyDistributedCoords(
+	const Atom& atom, std::size_t atom_idx, std::size_t num_def_atoms, Math::Vector3DArray& coords)
 {
 	std::size_t num_points = conctdAtoms.size();
 
@@ -409,8 +414,10 @@ void Chem::Hydrogen3DCoordinatesGenerator::assignEvenlyDistributedCoords(const A
 		genPoints[i](2) = std::sin(phi) * r;
 	}
 
-	if (num_def_atoms < 2)
-		return assignTemplateCoords(atom, atom_idx, num_def_atoms, num_points, &genPoints[0], 0);
+	if (num_def_atoms < 2) {
+		assignTemplateCoords(atom, atom_idx, num_def_atoms, num_points, &genPoints[0], 0, coords);
+		return;
+	}
 
 	refPoints.resize(3, 3, false);
 	tmpltPoints.resize(3, 3, false);
@@ -418,8 +425,8 @@ void Chem::Hydrogen3DCoordinatesGenerator::assignEvenlyDistributedCoords(const A
 	column(refPoints, 0) = Math::ZeroVector<double>(3);
 	column(tmpltPoints, 0) = Math::ZeroVector<double>(3);
 
-	Math::Vector3D b_vec1 = coordinates[conctdAtoms[0]] - coordinates[atom_idx];
-	Math::Vector3D b_vec2 = coordinates[conctdAtoms[1]] - coordinates[atom_idx];
+	Math::Vector3D b_vec1 = coords[conctdAtoms[0]] - coords[atom_idx];
+	Math::Vector3D b_vec2 = coords[conctdAtoms[1]] - coords[atom_idx];
 
 	b_vec1 /= length(b_vec1);
 	b_vec2 /= length(b_vec2);
@@ -458,7 +465,7 @@ void Chem::Hydrogen3DCoordinatesGenerator::assignEvenlyDistributedCoords(const A
 	}
 
 	for (std::size_t i = 2; i < num_def_atoms; i++) {
-		b_vec1.assign(coordinates[conctdAtoms[i]] - coordinates[atom_idx]);
+		b_vec1.assign(coords[conctdAtoms[i]] - coords[atom_idx]);
 		b_vec1 /= length(b_vec1);
 
 		std::size_t nearest_tmplt_pos_idx = 0;
@@ -486,13 +493,14 @@ void Chem::Hydrogen3DCoordinatesGenerator::assignEvenlyDistributedCoords(const A
 
 		std::size_t h_index = conctdAtoms[i];
 
-		coordinates[h_index].assign(genPoints[j++] * b_length + coordinates[atom_idx]);
+		coords[h_index].assign(genPoints[j++] * b_length + coords[atom_idx]);
 		defCoordsMask.set(h_index);
 	}
 }
 
-void Chem::Hydrogen3DCoordinatesGenerator::assignTemplateCoords(const Atom& atom, std::size_t atom_idx, std::size_t num_def_atoms, 
-																std::size_t tmplt_size, const Math::Vector3D tmplt[], const std::size_t* tmplt_perms)
+void Chem::Hydrogen3DCoordinatesGenerator::assignTemplateCoords(
+	const Atom& atom, std::size_t atom_idx, std::size_t num_def_atoms, std::size_t tmplt_size, 
+	const Math::Vector3D tmplt[], const std::size_t* tmplt_perms, Math::Vector3DArray& coords)
 {
 	std::size_t num_cnctd_atoms = conctdAtoms.size();
 	double b_length = getHydrogenBondLength(atom);
@@ -501,7 +509,7 @@ void Chem::Hydrogen3DCoordinatesGenerator::assignTemplateCoords(const Atom& atom
 		for (std::size_t i = 0; i < num_cnctd_atoms; i++) {
 			std::size_t h_index = conctdAtoms[i];
 
-			coordinates[h_index].assign(tmplt[i] * b_length + coordinates[atom_idx]);
+			coords[h_index].assign(tmplt[i] * b_length + coords[atom_idx]);
 			defCoordsMask.set(h_index);
 		}
 
@@ -509,8 +517,8 @@ void Chem::Hydrogen3DCoordinatesGenerator::assignTemplateCoords(const Atom& atom
 	}
 
 	if (num_def_atoms == 1) {
-		Math::Vector3D ref_vec;	getRotationReferenceVector(atom, atom_idx, conctdAtoms[0], num_def_atoms, ref_vec);
-		Math::Vector3D bond_vec = coordinates[conctdAtoms[0]] - coordinates[atom_idx];
+		Math::Vector3D ref_vec;	getRotationReferenceVector(atom, atom_idx, conctdAtoms[0], num_def_atoms, ref_vec, coords);
+		Math::Vector3D bond_vec = coords[conctdAtoms[0]] - coords[atom_idx];
 
 		ref_vec /= length(ref_vec);
 		bond_vec /= length(bond_vec);
@@ -522,7 +530,7 @@ void Chem::Hydrogen3DCoordinatesGenerator::assignTemplateCoords(const Atom& atom
 		for (std::size_t i = 1; i < num_cnctd_atoms; i++) {
 			std::size_t h_index = conctdAtoms[i];
 
-			coordinates[h_index].assign(prod(tmplt_xform, tmplt[i] * b_length) + coordinates[atom_idx]);
+			coords[h_index].assign(prod(tmplt_xform, tmplt[i] * b_length) + coords[atom_idx]);
 			defCoordsMask.set(h_index);
 		}
 		
@@ -541,7 +549,7 @@ void Chem::Hydrogen3DCoordinatesGenerator::assignTemplateCoords(const Atom& atom
 		tmplt_perms += (tmplt_perms[num_def_atoms - 2] + 1) * tmplt_size - 1;
 
 		for (std::size_t i = 0; i < num_def_atoms; i++) {
-			Math::Vector3D tmp = coordinates[conctdAtoms[i]] - coordinates[atom_idx];
+			Math::Vector3D tmp = coords[conctdAtoms[i]] - coords[atom_idx];
 			tmp /= length(tmp);
 
 			column(refPoints, i + 1).assign(tmp);
@@ -585,13 +593,13 @@ void Chem::Hydrogen3DCoordinatesGenerator::assignTemplateCoords(const Atom& atom
 		for (std::size_t i = num_def_atoms; i < num_cnctd_atoms; i++) {
 			std::size_t h_index = conctdAtoms[i];
 
-			coordinates[h_index].assign(prod(best_tmplt_xform, tmplt[best_tmplt_perm[i]] * b_length) + coordinates[atom_idx]);
+			coords[h_index].assign(prod(best_tmplt_xform, tmplt[best_tmplt_perm[i]] * b_length) + coords[atom_idx]);
 			defCoordsMask.set(h_index);
 		}
 
 	} else {
 		for (std::size_t i = 0; i < num_def_atoms; i++) {
-			Math::Vector3D tmp = coordinates[conctdAtoms[i]] - coordinates[atom_idx];
+			Math::Vector3D tmp = coords[conctdAtoms[i]] - coords[atom_idx];
 			tmp /= length(tmp);
 
 			column(refPoints, i + 1).assign(tmp);
@@ -604,7 +612,7 @@ void Chem::Hydrogen3DCoordinatesGenerator::assignTemplateCoords(const Atom& atom
 			for (std::size_t i = num_def_atoms; i < num_cnctd_atoms; i++) {
 				std::size_t h_index = conctdAtoms[i];
 
-				coordinates[h_index].assign(prod(tmplt_xform, tmplt[i] * b_length) + coordinates[atom_idx]);
+				coords[h_index].assign(prod(tmplt_xform, tmplt[i] * b_length) + coords[atom_idx]);
 				defCoordsMask.set(h_index);
 			}
 		}
@@ -640,7 +648,8 @@ std::size_t Chem::Hydrogen3DCoordinatesGenerator::getConnectedAtoms(const Atom& 
 	return num_def_atoms;
 }
 
-bool Chem::Hydrogen3DCoordinatesGenerator::getConnectedAtomWithCoords(std::size_t atom_idx, const Atom& excl_atom, std::size_t& con_atom_idx) const
+bool Chem::Hydrogen3DCoordinatesGenerator::getConnectedAtomWithCoords(
+	std::size_t atom_idx, const Atom& excl_atom, std::size_t& con_atom_idx) const
 {
 	const Atom& atom = molGraph->getAtom(atom_idx);
 	Atom::ConstAtomIterator a_it = atom.getAtomsBegin();
@@ -680,7 +689,8 @@ double Chem::Hydrogen3DCoordinatesGenerator::getHydrogenBondLength(const Atom& a
 	return (h_cov_rad + atom_cov_rad);
 }
 
-unsigned int Chem::Hydrogen3DCoordinatesGenerator::getHybridizationState(const Atom& atom, std::size_t num_def_atoms) const
+unsigned int Chem::Hydrogen3DCoordinatesGenerator::getHybridizationState(
+	const Atom& atom, std::size_t num_def_atoms) const
 {
 	unsigned int state = Chem::getHybridizationState(atom);
 
@@ -712,7 +722,8 @@ unsigned int Chem::Hydrogen3DCoordinatesGenerator::getHybridizationState(const A
 	return state;
 }
 
-void Chem::Hydrogen3DCoordinatesGenerator::buildOrthogonalBasis(const Math::Vector3D& v1, const Math::Vector3D& v2, Math::Matrix3D& basis, bool transp) const
+void Chem::Hydrogen3DCoordinatesGenerator::buildOrthogonalBasis(
+	const Math::Vector3D& v1, const Math::Vector3D& v2, Math::Matrix3D& basis, bool transp) const
 {
 	if (transp) {
 		row(basis, 0) = v1;
@@ -726,8 +737,9 @@ void Chem::Hydrogen3DCoordinatesGenerator::buildOrthogonalBasis(const Math::Vect
 	column(basis, 1) = crossProd(column(basis, 2), v1);
 }
 
-void Chem::Hydrogen3DCoordinatesGenerator::getRotationReferenceVector(const Atom& atom, std::size_t atom_idx, std::size_t nbr_atom_idx, 
-																	  std::size_t num_def_atoms, Math::Vector3D& ref_vec) const
+void Chem::Hydrogen3DCoordinatesGenerator::getRotationReferenceVector(
+	const Atom& atom, std::size_t atom_idx, std::size_t nbr_atom_idx, 
+	std::size_t num_def_atoms, Math::Vector3D& ref_vec, Math::Vector3DArray& coords) const
 {
 	using namespace HybridizationState;
 
@@ -738,34 +750,35 @@ void Chem::Hydrogen3DCoordinatesGenerator::getRotationReferenceVector(const Atom
 
 			case SP2:
 				if (Chem::getHybridizationState(molGraph->getAtom(nbr_atom_idx)) == SP2) {
-					ref_vec.assign(coordinates[ref_atom_idx] - coordinates[nbr_atom_idx]);
+					ref_vec.assign(coords[ref_atom_idx] - coords[nbr_atom_idx]);
 					return;
 				}
 
-				ref_vec.assign(crossProd(coordinates[atom_idx] - coordinates[nbr_atom_idx],
-										 coordinates[ref_atom_idx] - coordinates[nbr_atom_idx]));
+				ref_vec.assign(crossProd(coords[atom_idx] - coords[nbr_atom_idx],
+										 coords[ref_atom_idx] - coords[nbr_atom_idx]));
 				return;
 
 			case SP3:
 			case SD3:
 				if (Chem::getHybridizationState(molGraph->getAtom(nbr_atom_idx)) == SP2) {
-					ref_vec.assign(crossProd(coordinates[atom_idx] - coordinates[nbr_atom_idx],
-											 coordinates[ref_atom_idx] - coordinates[nbr_atom_idx]));
+					ref_vec.assign(crossProd(coords[atom_idx] - coords[nbr_atom_idx],
+											 coords[ref_atom_idx] - coords[nbr_atom_idx]));
 					return;
 				}
 
 			default:
-				ref_vec.assign(coordinates[nbr_atom_idx] - coordinates[ref_atom_idx]);
+				ref_vec.assign(coords[nbr_atom_idx] - coords[ref_atom_idx]);
 				return;
 		}
 	}
 
-	Math::Vector3D tmp = coordinates[nbr_atom_idx] - coordinates[atom_idx];
+	Math::Vector3D tmp = coords[nbr_atom_idx] - coords[atom_idx];
 
 	getPerpendicularVector(tmp, ref_vec);
 }
 
-void Chem::Hydrogen3DCoordinatesGenerator::getPerpendicularVector(const Math::Vector3D& v, Math::Vector3D& perp_vec) const
+void Chem::Hydrogen3DCoordinatesGenerator::getPerpendicularVector(
+	const Math::Vector3D& v, Math::Vector3D& perp_vec) const
 {
 	if (v(0) != 0) {
 		perp_vec(0) = v(1);

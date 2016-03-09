@@ -97,12 +97,12 @@ namespace CDPL
 			/**
 			 * \brief Constructs the \c %CanonicalNumberingGenerator instance and performs a canonical numbering
 			 *        of the atoms in the molecular graph \a molgraph.
-			 *
-			 * The generated canonical atom labels can be retrieved by a call to getResult().
-			 *
 			 * \param molgraph The molecular graph for which to perform the canonical numbering.
+			 * \param numbering An array that contains the generated canonical atom labels. The labels
+			 *         are stored in the same order as the atoms appear in the atom list of the molecular graph
+			 *         (i.e. the canonical number of an atom is accessible via its index).
 			 */
-			CanonicalNumberingGenerator(const MolecularGraph& molgraph);
+			CanonicalNumberingGenerator(const MolecularGraph& molgraph, Util::STArray& numberin);
 		
 			/**
 			 * \brief Allows to specify the set of atomic properties that has to be considered by the
@@ -158,19 +158,11 @@ namespace CDPL
 			/**
 			 * \brief Performs a canonical numbering of the atoms in the molecular graph \a molgraph.
 			 * \param molgraph The molecular graph for which to perform the canonical numbering.
-			 * \return An array that contains the generated canonical atom labels. The labels
+			 * \param numbering An array that contains the generated canonical atom labels. The labels
 			 *         are stored in the same order as the atoms appear in the atom list of the molecular graph
 			 *         (i.e. the canonical number of an atom is accessible via its index).
 			 */
-			const Util::STArray& generate(const MolecularGraph& molgraph);
-
-			/**
-			 * \brief Returns the result of the last canonical numbering.
-			 * \return An array that contains the canonical atom labels. If a canonical
-			 *         numbering has not yet been performed, the returned array is empty.
-			 * \see generate()
-			 */
-			const Util::STArray& getResult() const;
+			void generate(const MolecularGraph& molgraph, Util::STArray& numbering);
 
 		private:
 			/** \cond CDPL_PRIVATE_SECTION_DOC */
@@ -181,11 +173,11 @@ namespace CDPL
 
 			typedef std::vector<Base::uint64> ConnectionTable;
 
-			void init(const MolecularGraph&);
+			void init(const MolecularGraph&, Util::STArray&);
 			void setup(const MolecularGraph&);
 
-			void canonicalize(const MolecularGraph& mol);			
-			void canonicalize(std::size_t depth);
+			void canonicalize(const MolecularGraph&, Util::STArray&);			
+			void canonicalize(std::size_t);
 
 			void processNewSolution();
 
@@ -195,7 +187,7 @@ namespace CDPL
 			void appendAtomConfigs(ConnectionTable& ctab);
 			void appendBondConfigs(ConnectionTable& ctab);
 
-			void establishCanonNumbering();
+			void establishCanonNumbering(Util::STArray&);
 
 			void saveState();
 			void restoreState();
@@ -348,7 +340,6 @@ namespace CDPL
 			ConnectionTable        testConnectionTable;
 			NodeList               minNodeList;
 			CanonComponentList     canonComponentList;
-			Util::STArray          canonNumbering;
 			Util::BitSet           visitedEdgeMask;
 
 			/** \endcond */

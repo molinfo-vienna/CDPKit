@@ -40,24 +40,20 @@ void CDPLPythonChem::exportBondStereoFlagGenerator()
 	using namespace boost;
 	using namespace CDPL;
 
-	const Util::UIArray& (Chem::BondStereoFlagGenerator::*calcFunc1)(const Chem::MolecularGraph&) = 
+	void (Chem::BondStereoFlagGenerator::*calcFunc1)(const Chem::MolecularGraph&, Util::UIArray&) = 
 		&Chem::BondStereoFlagGenerator::generate;
 
-	const Util::UIArray& (Chem::BondStereoFlagGenerator::*calcFunc2)(const Chem::MolecularGraph&, const Math::Vector2DArray&) = 
+	void (Chem::BondStereoFlagGenerator::*calcFunc2)(const Chem::MolecularGraph&, const Math::Vector2DArray&, Util::UIArray&) = 
 		&Chem::BondStereoFlagGenerator::generate;
 
 	python::class_<Chem::BondStereoFlagGenerator, boost::noncopyable>("BondStereoFlagGenerator", python::no_init)
 		.def(python::init<>(python::arg("self")))
-		.def(python::init<const Chem::MolecularGraph&>((python::arg("self"), python::arg("molgraph"))))
-		.def(python::init<const Chem::MolecularGraph&, const Math::Vector2DArray&>
-			 ((python::arg("self"), python::arg("molgraph"), python::arg("coords"))))
+		.def(python::init<const Chem::MolecularGraph&, Util::UIArray&>(
+				 (python::arg("self"), python::arg("molgraph"), python::arg("flags"))))
+		.def(python::init<const Chem::MolecularGraph&, const Math::Vector2DArray&, Util::UIArray&>
+			 ((python::arg("self"), python::arg("molgraph"), python::arg("coords"), python::arg("flags"))))
 		.def(CDPLPythonBase::ObjectIdentityCheckVisitor<Chem::BondStereoFlagGenerator>())	
-		.def("generate", calcFunc1, (python::arg("self"), python::arg("molgraph")), 
-			 python::return_internal_reference<>())
-		.def("generate", calcFunc2, (python::arg("self"), python::arg("molgraph"), python::arg("coords")), 
-			 python::return_internal_reference<>())
-		.def("getResult", &Chem::BondStereoFlagGenerator::getResult, python::arg("self"),
-			 python::return_internal_reference<>())
-		.add_property("result", python::make_function(&Chem::BondStereoFlagGenerator::getResult,
-													  python::return_internal_reference<>()));
+		.def("generate", calcFunc1, (python::arg("self"), python::arg("molgraph"), python::arg("flags")))
+		.def("generate", calcFunc2, (python::arg("self"), python::arg("molgraph"), python::arg("coords"), 
+									 python::arg("flags")));
 }
