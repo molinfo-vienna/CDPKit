@@ -32,6 +32,15 @@
 \defgroup CDPL_CHEM_STRUCTURE_IMPLEMENTATIONS Implementations
 \ingroup CDPL_CHEM_STRUCTURES
 
+\defgroup CDPL_CHEM_PHARMACOPHORES Representation of Pharmacophores 
+\ingroup CDPL_CHEM_CORE_CLASSES
+
+\defgroup CDPL_CHEM_PHARMACOPHORE_INTERFACES Interfaces
+\ingroup CDPL_CHEM_PHARMACOPHORES
+
+\defgroup CDPL_CHEM_PHARMACOPHORE_IMPLEMENTATIONS Implementations
+\ingroup CDPL_CHEM_PHARMACOPHORES
+
 \defgroup CDPL_CHEM_REACTIONS Representation of Chemical Reactions
 \ingroup CDPL_CHEM_CORE_CLASSES
 

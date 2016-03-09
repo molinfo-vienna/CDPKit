@@ -43,6 +43,11 @@
 #include "CDPL/Chem/BasicAtom.hpp"
 #include "CDPL/Chem/BasicBond.hpp"
 #include "CDPL/Chem/Fragment.hpp"
+#include "CDPL/Chem/Pharmacophore.hpp"
+#include "CDPL/Chem/PharmacophoreFeature.hpp"
+#include "CDPL/Chem/BasicPharmacophore.hpp"
+#include "CDPL/Chem/BasicPharmacophoreFeature.hpp"
+
 #include "CDPL/Chem/FragmentList.hpp"
 #include "CDPL/Chem/AtomMapping.hpp"
 #include "CDPL/Chem/BondMapping.hpp"

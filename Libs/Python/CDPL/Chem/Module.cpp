@@ -47,6 +47,10 @@ BOOST_PYTHON_MODULE(_chem)
 	exportBasicBond();
 	exportBasicMolecule();
 	exportBasicReaction();
+	exportPharmacophore();
+	exportPharmacophoreFeature();
+	exportBasicPharmacophore();
+	exportBasicPharmacophoreFeature();
 	exportFragment();
 	exportAtomMapping();
 	exportBondMapping();

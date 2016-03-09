@@ -12,6 +12,10 @@ SET(cdpl-chem_LIB_SRCS
     BasicMolecule.cpp
     BasicAtom.cpp
     BasicBond.cpp
+    Pharmacophore.cpp
+    PharmacophoreFeature.cpp
+    BasicPharmacophore.cpp
+    BasicPharmacophoreFeature.cpp
     Fragment.cpp
     AtomBondMapping.cpp
 

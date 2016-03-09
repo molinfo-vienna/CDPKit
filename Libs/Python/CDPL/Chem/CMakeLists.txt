@@ -20,6 +20,10 @@ SET(chem_MOD_SRCS
     BasicBondExport.cpp
     BasicMoleculeExport.cpp
     BasicReactionExport.cpp
+    PharmacophoreExport.cpp
+    PharmacophoreFeatureExport.cpp
+    BasicPharmacophoreExport.cpp
+    BasicPharmacophoreFeatureExport.cpp
     FragmentExport.cpp 
     AtomMappingExport.cpp 
     BondMappingExport.cpp 
