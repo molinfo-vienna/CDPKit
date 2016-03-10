@@ -161,6 +161,8 @@ SET(chem_MOD_SRCS
     AtomPropertyExport.cpp 
     BondPropertyExport.cpp 
     ReactionPropertyExport.cpp 
+    PharmacophorePropertyExport.cpp 
+    PharmacophoreFeaturePropertyExport.cpp 
     ControlParameterExport.cpp 
     ControlParameterDefaultExport.cpp 
     DataFormatExport.cpp 
@@ -168,6 +170,8 @@ SET(chem_MOD_SRCS
     BondPropertyFlagExport.cpp 
     ReactionRoleExport.cpp 
     AtomTypeExport.cpp 
+    PharmacophoreFeatureTypeExport.cpp 
+    PharmacophoreFeatureGeometryExport.cpp 
     ResidueTypeExport.cpp 
     AtomConfigurationExport.cpp 
     BondConfigurationExport.cpp 
@@ -194,6 +198,8 @@ SET(chem_MOD_SRCS
     MoleculeFunctionExport.cpp 
     FragmentFunctionExport.cpp 
     ReactionFunctionExport.cpp 
+    PharmacophoreFunctionExport.cpp 
+    PharmacophoreFeatureFunctionExport.cpp 
     SimilarityFunctionExport.cpp 
     AtomTypeFunctionExport.cpp 
     ResidueFunctionExport.cpp 

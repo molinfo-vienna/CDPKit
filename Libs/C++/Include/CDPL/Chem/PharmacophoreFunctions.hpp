@@ -1,7 +1,7 @@
 /* -*- mode: c++; c-basic-offset: 4; tab-width: 4; indent-tabs-mode: t -*- */
 
 /* 
- * FunctionExports.hpp 
+ * PharmacophoreFunctions.hpp 
  *
  * This file is part of the Chemical Data Processing Toolkit
  *
@@ -23,29 +23,39 @@
  * Boston, MA 02111-1307, USA.
  */
 
+/**
+ * \file
+ * \brief Declaration of functions that operate on Chem::Pharmacophore instances.
+ */
 
-#ifndef CDPL_PYTHON_CHEM_FUNCTIONEXPORTS_HPP
-#define CDPL_PYTHON_CHEM_FUNCTIONEXPORTS_HPP
+#ifndef CDPL_CHEM_PHARMACOPHOREFUNCTIONS_HPP
+#define CDPL_CHEM_PHARMACOPHOREFUNCTIONS_HPP
+
+#include <cstddef>
+
+#include "CDPL/Chem/APIPrefix.hpp"
 
 
-namespace CDPLPythonChem
+namespace CDPL 
 {
 
-	void exportAtomTypeFunctions();
-	void exportResidueFunctions();
-	void exportUtilityFunctions();
-	void exportControlParameterFunctions();
-	void exportAtomContainerFunctions();
-	void exportBondContainerFunctions();
-	void exportAtomFunctions();
-	void exportBondFunctions();
-	void exportMolecularGraphFunctions();
-	void exportMoleculeFunctions();
-	void exportFragmentFunctions();
-	void exportReactionFunctions();
-	void exportPharmacophoreFunctions();
-	void exportPharmacophoreFeatureFunctions();
-	void exportSimilarityFunctions();
+    namespace Chem 
+    {
+	
+	class Pharmacophore;
+	
+	/**
+	 * \addtogroup CDPL_CHEM_PHARMACOPHORE_FUNCTIONS
+	 * @{
+	 */
+	
+	CDPL_CHEM_API std::size_t getFeatureCount(const Pharmacophore& pharm, unsigned int type);
+
+	/**
+	 * @}
+	 */
+    }
 }
 
-#endif // CDPL_PYTHON_CHEM_FUNCTIONEXPORTS_HPP
+#endif // CDPL_CHEM_PHARMACOPHOREFUNCTIONS_HPP
+ 

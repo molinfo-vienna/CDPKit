@@ -200,6 +200,12 @@
 \defgroup CDPL_CHEM_REACTION_PROPERTIES Reaction Properties
 \ingroup CDPL_CHEM_PROPERTIES
 
+\defgroup CDPL_CHEM_PHARMACOPHOREFEATURE_PROPERTIES Pharmacophore Feature Properties
+\ingroup CDPL_CHEM_PROPERTIES
+
+\defgroup CDPL_CHEM_PHARMACOPHORE_PROPERTIES Pharmacophore Properties
+\ingroup CDPL_CHEM_PROPERTIES
+
 \defgroup CDPL_CHEM_CONTROL_PARAMETERS Control-Parameter Keys
 \ingroup CDPL_CHEM
 
@@ -240,6 +246,12 @@
 \ingroup CDPL_CHEM_FUNCTIONS
 
 \defgroup CDPL_CHEM_REACTION_FUNCTIONS Reaction Functions
+\ingroup CDPL_CHEM_FUNCTIONS
+
+\defgroup CDPL_CHEM_PHARMACOPHOREFEATURE_FUNCTIONS Pharmacophore Feature Functions
+\ingroup CDPL_CHEM_FUNCTIONS
+
+\defgroup CDPL_CHEM_PHARMACOPHORE_FUNCTIONS Pharmacophore Functions
 \ingroup CDPL_CHEM_FUNCTIONS
 
 \defgroup CDPL_CHEM_SIMILARITY_FUNCTIONS Similarity Functions

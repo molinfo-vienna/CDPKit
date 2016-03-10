@@ -1,7 +1,7 @@
 /* -*- mode: c++; c-basic-offset: 4; tab-width: 4; indent-tabs-mode: t -*- */
 
 /* 
- * FunctionExports.hpp 
+ * PharmacophorePropertyExport.cpp 
  *
  * This file is part of the Chemical Data Processing Toolkit
  *
@@ -24,28 +24,26 @@
  */
 
 
-#ifndef CDPL_PYTHON_CHEM_FUNCTIONEXPORTS_HPP
-#define CDPL_PYTHON_CHEM_FUNCTIONEXPORTS_HPP
+#include <boost/python.hpp>
+
+#include "CDPL/Chem/PharmacophoreProperty.hpp"
+#include "CDPL/Base/LookupKey.hpp"
+
+#include "NamespaceExports.hpp"
 
 
-namespace CDPLPythonChem
+namespace 
 {
 
-	void exportAtomTypeFunctions();
-	void exportResidueFunctions();
-	void exportUtilityFunctions();
-	void exportControlParameterFunctions();
-	void exportAtomContainerFunctions();
-	void exportBondContainerFunctions();
-	void exportAtomFunctions();
-	void exportBondFunctions();
-	void exportMolecularGraphFunctions();
-	void exportMoleculeFunctions();
-	void exportFragmentFunctions();
-	void exportReactionFunctions();
-	void exportPharmacophoreFunctions();
-	void exportPharmacophoreFeatureFunctions();
-	void exportSimilarityFunctions();
+	struct PharmacophoreProperty {};
 }
 
-#endif // CDPL_PYTHON_CHEM_FUNCTIONEXPORTS_HPP
+
+void CDPLPythonChem::exportPharmacophoreProperties()
+{
+	using namespace boost;
+	using namespace CDPL;
+
+	python::class_<PharmacophoreProperty, boost::noncopyable>("PharmacophoreProperty", python::no_init)
+	    ;
+}

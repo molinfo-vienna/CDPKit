@@ -83,6 +83,8 @@
 #include "CDPL/Chem/BondProperty.hpp"
 #include "CDPL/Chem/MolecularGraphProperty.hpp"
 #include "CDPL/Chem/ReactionProperty.hpp"
+#include "CDPL/Chem/PharmacophoreProperty.hpp"
+#include "CDPL/Chem/PharmacophoreFeatureProperty.hpp"
 #include "CDPL/Chem/AtomPropertyFlag.hpp"
 #include "CDPL/Chem/BondPropertyFlag.hpp"
 #include "CDPL/Chem/ControlParameter.hpp"
@@ -102,6 +104,8 @@
 #include "CDPL/Chem/RadicalType.hpp"
 #include "CDPL/Chem/INCHIReturnCode.hpp"
 #include "CDPL/Chem/MDLDataFormatVersion.hpp"
+#include "CDPL/Chem/PharmacophoreFeatureType.hpp"
+#include "CDPL/Chem/PharmacophoreFeatureGeometry.hpp"
 #include "CDPL/Chem/DataFormat.hpp"
 
 #include "CDPL/Chem/AtomMatchConstraint.hpp"
@@ -208,5 +212,7 @@
 #include "CDPL/Chem/MoleculeFunctions.hpp"
 #include "CDPL/Chem/FragmentFunctions.hpp"
 #include "CDPL/Chem/ReactionFunctions.hpp"
+#include "CDPL/Chem/PharmacophoreFunctions.hpp"
+#include "CDPL/Chem/PharmacophoreFeatureFunctions.hpp"
 
 #endif // CDPL_CHEM_HPP

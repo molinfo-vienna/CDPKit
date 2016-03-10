@@ -1,7 +1,7 @@
 /* -*- mode: c++; c-basic-offset: 4; tab-width: 4; indent-tabs-mode: t -*- */
 
 /* 
- * FunctionExports.hpp 
+ * PharmacophoreFeatureTypeExport.cpp 
  *
  * This file is part of the Chemical Data Processing Toolkit
  *
@@ -24,28 +24,31 @@
  */
 
 
-#ifndef CDPL_PYTHON_CHEM_FUNCTIONEXPORTS_HPP
-#define CDPL_PYTHON_CHEM_FUNCTIONEXPORTS_HPP
+#include <boost/python.hpp>
+
+#include "CDPL/Chem/PharmacophoreFeatureType.hpp"
+
+#include "NamespaceExports.hpp"
 
 
-namespace CDPLPythonChem
+namespace 
 {
 
-	void exportAtomTypeFunctions();
-	void exportResidueFunctions();
-	void exportUtilityFunctions();
-	void exportControlParameterFunctions();
-	void exportAtomContainerFunctions();
-	void exportBondContainerFunctions();
-	void exportAtomFunctions();
-	void exportBondFunctions();
-	void exportMolecularGraphFunctions();
-	void exportMoleculeFunctions();
-	void exportFragmentFunctions();
-	void exportReactionFunctions();
-	void exportPharmacophoreFunctions();
-	void exportPharmacophoreFeatureFunctions();
-	void exportSimilarityFunctions();
+    struct PharmacophoreFeatureType {};
 }
 
-#endif // CDPL_PYTHON_CHEM_FUNCTIONEXPORTS_HPP
+
+void CDPLPythonChem::exportPharmacophoreFeatureTypes()
+{
+    using namespace boost;
+    using namespace CDPL;
+
+    python::class_<PharmacophoreFeatureType, boost::noncopyable>("PharmacophoreFeatureType", python::no_init)
+	.def_readonly("UNKNOWN", &Chem::PharmacophoreFeatureType::UNKNOWN)
+	.def_readonly("LIPOPHILIC", &Chem::PharmacophoreFeatureType::LIPOPHILIC)
+	.def_readonly("AROMATIC", &Chem::PharmacophoreFeatureType::AROMATIC)
+	.def_readonly("NEG_IONIZABLE", &Chem::PharmacophoreFeatureType::NEG_IONIZABLE)
+	.def_readonly("POS_IONIZABLE", &Chem::PharmacophoreFeatureType::POS_IONIZABLE)
+	.def_readonly("H_BOND_DONOR", &Chem::PharmacophoreFeatureType::H_BOND_DONOR)
+	.def_readonly("H_BOND_ACCEPTOR", &Chem::PharmacophoreFeatureType::H_BOND_ACCEPTOR);
+}

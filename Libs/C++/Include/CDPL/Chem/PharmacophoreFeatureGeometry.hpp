@@ -1,7 +1,7 @@
 /* -*- mode: c++; c-basic-offset: 4; tab-width: 4; indent-tabs-mode: t -*- */
 
 /* 
- * FunctionExports.hpp 
+ * PharmacophoreFeatureGeometry.hpp 
  *
  * This file is part of the Chemical Data Processing Toolkit
  *
@@ -23,29 +23,45 @@
  * Boston, MA 02111-1307, USA.
  */
 
+/**
+ * \file
+ * \brief Definition of constants in namespace CDPL::Chem::PharmacophoreFeatureGeometry.
+ */
 
-#ifndef CDPL_PYTHON_CHEM_FUNCTIONEXPORTS_HPP
-#define CDPL_PYTHON_CHEM_FUNCTIONEXPORTS_HPP
+#ifndef CDPL_CHEM_PHARMACOPHOREFEATUREGEOMETRY_HPP
+#define CDPL_CHEM_PHARMACOPHOREFEATUREGEOMETRY_HPP
 
 
-namespace CDPLPythonChem
+namespace CDPL 
 {
 
-	void exportAtomTypeFunctions();
-	void exportResidueFunctions();
-	void exportUtilityFunctions();
-	void exportControlParameterFunctions();
-	void exportAtomContainerFunctions();
-	void exportBondContainerFunctions();
-	void exportAtomFunctions();
-	void exportBondFunctions();
-	void exportMolecularGraphFunctions();
-	void exportMoleculeFunctions();
-	void exportFragmentFunctions();
-	void exportReactionFunctions();
-	void exportPharmacophoreFunctions();
-	void exportPharmacophoreFeatureFunctions();
-	void exportSimilarityFunctions();
+    namespace Chem 
+    {
+
+	/**
+	 * \addtogroup CDPL_CHEM_CONSTANTS
+	 * @{
+	 */
+
+	/**
+	 * \brief Provides constants for the specification of the generic geometry of a pharmacophore feature.
+	 */
+	namespace PharmacophoreFeatureGeometry 
+	{
+		
+	    const unsigned int UNDEF    = 0;
+
+	    const unsigned int SPHERE   = 1;
+
+	    const unsigned int VECTOR   = 2;
+
+	    const unsigned int PLANE    = 3;
+	}
+
+	/**
+	 * @}
+	 */
+    }
 }
 
-#endif // CDPL_PYTHON_CHEM_FUNCTIONEXPORTS_HPP
+#endif // CDPL_CHEM_PHARMACOPHOREFEATUREGEOMETRY_HPP

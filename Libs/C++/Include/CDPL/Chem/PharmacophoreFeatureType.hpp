@@ -1,7 +1,7 @@
 /* -*- mode: c++; c-basic-offset: 4; tab-width: 4; indent-tabs-mode: t -*- */
 
 /* 
- * FunctionExports.hpp 
+ * PharmacophoreFeatureType.hpp 
  *
  * This file is part of the Chemical Data Processing Toolkit
  *
@@ -23,29 +23,51 @@
  * Boston, MA 02111-1307, USA.
  */
 
+/**
+ * \file
+ * \brief Definition of constants in namespace CDPL::Chem::PharmacophoreFeatureType.
+ */
 
-#ifndef CDPL_PYTHON_CHEM_FUNCTIONEXPORTS_HPP
-#define CDPL_PYTHON_CHEM_FUNCTIONEXPORTS_HPP
+#ifndef CDPL_CHEM_PHARMACOPHOREFEATURETYPE_HPP
+#define CDPL_CHEM_PHARMACOPHOREFEATURETYPE_HPP
 
 
-namespace CDPLPythonChem
+namespace CDPL 
 {
 
-	void exportAtomTypeFunctions();
-	void exportResidueFunctions();
-	void exportUtilityFunctions();
-	void exportControlParameterFunctions();
-	void exportAtomContainerFunctions();
-	void exportBondContainerFunctions();
-	void exportAtomFunctions();
-	void exportBondFunctions();
-	void exportMolecularGraphFunctions();
-	void exportMoleculeFunctions();
-	void exportFragmentFunctions();
-	void exportReactionFunctions();
-	void exportPharmacophoreFunctions();
-	void exportPharmacophoreFeatureFunctions();
-	void exportSimilarityFunctions();
+    namespace Chem 
+    {
+
+	/**
+	 * \addtogroup CDPL_CHEM_CONSTANTS
+	 * @{
+	 */
+
+	/**
+	 * \brief Provides constants for the specification of the generic type of a pharmacophore feature.
+	 */
+	namespace PharmacophoreFeatureType 
+	{
+		
+	    const unsigned int UNKNOWN         = 0x00;
+
+	    const unsigned int LIPOPHILIC      = 0x01;
+
+	    const unsigned int AROMATIC        = 0x02;
+
+	    const unsigned int NEG_IONIZABLE   = 0x04;
+
+	    const unsigned int POS_IONIZABLE   = 0x08;
+
+	    const unsigned int H_BOND_DONOR    = 0x10;
+
+	    const unsigned int H_BOND_ACCEPTOR = 0x20;
+	}
+
+	/**
+	 * @}
+	 */
+    }
 }
 
-#endif // CDPL_PYTHON_CHEM_FUNCTIONEXPORTS_HPP
+#endif // CDPL_CHEM_PHARMACOPHOREFEATURETYPE_HPP

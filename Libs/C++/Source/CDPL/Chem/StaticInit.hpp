@@ -39,6 +39,8 @@ namespace CDPL
 		void initBondProperties();
 		void initMolecularGraphProperties();
 		void initReactionProperties();
+		void initPharmacophoreProperties();
+		void initPharmacophoreFeatureProperties();
 		void initControlParameters();
 		void initControlParameterDefaults();
 		void initDataFormats();
@@ -56,6 +58,8 @@ namespace
 			CDPL::Chem::initBondProperties();
 			CDPL::Chem::initMolecularGraphProperties();
 			CDPL::Chem::initReactionProperties();
+			CDPL::Chem::initPharmacophoreProperties();
+			CDPL::Chem::initPharmacophoreFeatureProperties();
 			CDPL::Chem::initControlParameters();
 			CDPL::Chem::initControlParameterDefaults();
 			CDPL::Chem::initDataFormats();

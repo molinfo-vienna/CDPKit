@@ -23,6 +23,8 @@ SET(cdpl-chem_LIB_SRCS
     BondProperty.cpp
     MolecularGraphProperty.cpp
     ReactionProperty.cpp
+    PharmacophoreProperty.cpp
+    PharmacophoreFeatureProperty.cpp
     ControlParameter.cpp
     ControlParameterDefault.cpp
     DataFormat.cpp
@@ -312,6 +314,9 @@ SET(cdpl-chem_LIB_SRCS
     ReactionSubstructSearchInitializationFunctions.cpp
     ReactionMaxReactionAtomMappingIDFunction.cpp
     ReactionMaxComponentGroupIDFunction.cpp
+
+    PharmacophoreFeatureTypeFunctions.cpp
+    PharmacophoreFeatureGeometryFunctions.cpp
 
     MoleculeHydrogenManipulationFunctions.cpp
     MoleculeReplaceStereoRefAtomsFunctions.cpp  

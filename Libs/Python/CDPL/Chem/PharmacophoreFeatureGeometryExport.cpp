@@ -1,7 +1,7 @@
 /* -*- mode: c++; c-basic-offset: 4; tab-width: 4; indent-tabs-mode: t -*- */
 
 /* 
- * FunctionExports.hpp 
+ * PharmacophoreFeatureGeometryExport.cpp 
  *
  * This file is part of the Chemical Data Processing Toolkit
  *
@@ -24,28 +24,28 @@
  */
 
 
-#ifndef CDPL_PYTHON_CHEM_FUNCTIONEXPORTS_HPP
-#define CDPL_PYTHON_CHEM_FUNCTIONEXPORTS_HPP
+#include <boost/python.hpp>
+
+#include "CDPL/Chem/PharmacophoreFeatureGeometry.hpp"
+
+#include "NamespaceExports.hpp"
 
 
-namespace CDPLPythonChem
+namespace 
 {
 
-	void exportAtomTypeFunctions();
-	void exportResidueFunctions();
-	void exportUtilityFunctions();
-	void exportControlParameterFunctions();
-	void exportAtomContainerFunctions();
-	void exportBondContainerFunctions();
-	void exportAtomFunctions();
-	void exportBondFunctions();
-	void exportMolecularGraphFunctions();
-	void exportMoleculeFunctions();
-	void exportFragmentFunctions();
-	void exportReactionFunctions();
-	void exportPharmacophoreFunctions();
-	void exportPharmacophoreFeatureFunctions();
-	void exportSimilarityFunctions();
+    struct PharmacophoreFeatureGeometry {};
 }
 
-#endif // CDPL_PYTHON_CHEM_FUNCTIONEXPORTS_HPP
+
+void CDPLPythonChem::exportPharmacophoreFeatureGeometries()
+{
+    using namespace boost;
+    using namespace CDPL;
+
+    python::class_<PharmacophoreFeatureGeometry, boost::noncopyable>("PharmacophoreFeatureGeometry", python::no_init)
+	.def_readonly("UNDEF", &Chem::PharmacophoreFeatureGeometry::UNDEF)
+	.def_readonly("SPHERE", &Chem::PharmacophoreFeatureGeometry::SPHERE)
+	.def_readonly("VECTOR", &Chem::PharmacophoreFeatureGeometry::VECTOR)
+	.def_readonly("PLANE", &Chem::PharmacophoreFeatureGeometry::PLANE);
+}

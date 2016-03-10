@@ -1,7 +1,7 @@
 /* -*- mode: c++; c-basic-offset: 4; tab-width: 4; indent-tabs-mode: t -*- */
 
 /* 
- * FunctionExports.hpp 
+ * PharmacophoreFeatureProperty.hpp 
  *
  * This file is part of the Chemical Data Processing Toolkit
  *
@@ -23,29 +23,48 @@
  * Boston, MA 02111-1307, USA.
  */
 
+/**
+ * \file
+ * \brief Definition of constants in namespace CDPL::Chem::PharmacophoreFeatureProperty.
+ */
 
-#ifndef CDPL_PYTHON_CHEM_FUNCTIONEXPORTS_HPP
-#define CDPL_PYTHON_CHEM_FUNCTIONEXPORTS_HPP
+#ifndef CDPL_CHEM_PHARMACOPHOREFEATUREPROPERTY_HPP
+#define CDPL_CHEM_PHARMACOPHOREFEATUREPROPERTY_HPP
+
+#include "CDPL/Chem/APIPrefix.hpp"
 
 
-namespace CDPLPythonChem
+namespace CDPL 
 {
 
-	void exportAtomTypeFunctions();
-	void exportResidueFunctions();
-	void exportUtilityFunctions();
-	void exportControlParameterFunctions();
-	void exportAtomContainerFunctions();
-	void exportBondContainerFunctions();
-	void exportAtomFunctions();
-	void exportBondFunctions();
-	void exportMolecularGraphFunctions();
-	void exportMoleculeFunctions();
-	void exportFragmentFunctions();
-	void exportReactionFunctions();
-	void exportPharmacophoreFunctions();
-	void exportPharmacophoreFeatureFunctions();
-	void exportSimilarityFunctions();
+    namespace Base
+    {
+
+	class LookupKey;
+    }
+
+    namespace Chem
+    {
+
+	/**
+	 * \addtogroup CDPL_CHEM_PHARMACOPHOREFEATURE_PROPERTIES
+	 * @{
+	 */
+
+	/**
+	 * \brief Provides keys for built-in Chem::PharmacophoreFeature properties.
+	 */
+	namespace PharmacophoreFeatureProperty
+	{
+
+	    extern CDPL_CHEM_API const Base::LookupKey TYPE; 
+	    extern CDPL_CHEM_API const Base::LookupKey GEOMETRY; 
+	}
+
+	/**
+	 * @}
+	 */
+    }
 }
 
-#endif // CDPL_PYTHON_CHEM_FUNCTIONEXPORTS_HPP
+#endif // CDPL_CHEM_PHARMACOPHOREFEATUREPROPERTY_HPP
