@@ -31,6 +31,8 @@
 #ifndef CDPL_CHEM_HPP
 #define CDPL_CHEM_HPP
 
+#include "CDPL/Chem/Entity3D.hpp"
+#include "CDPL/Chem/Entity3DContainer.hpp"
 #include "CDPL/Chem/AtomContainer.hpp"
 #include "CDPL/Chem/BondContainer.hpp"
 #include "CDPL/Chem/MolecularGraph.hpp"

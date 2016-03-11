@@ -1,7 +1,7 @@
 /* -*- mode: c++; c-basic-offset: 4; tab-width: 4; indent-tabs-mode: t -*- */
 
 /* 
- * Atom.cpp 
+ * Entity3D.cpp 
  *
  * This file is part of the Chemical Data Processing Toolkit
  *
@@ -26,20 +26,22 @@
  
 #include "StaticInit.hpp"
 
-#include "CDPL/Chem/Atom.hpp"
+#include "CDPL/Chem/Entity3D.hpp"
 
 
 using namespace CDPL;
 
 
-Chem::Atom& Chem::Atom::operator=(const Atom& atom) 
+Chem::Entity3D::Entity3D() {}
+
+Chem::Entity3D::Entity3D(const Entity3D& entity): Base::PropertyContainer(entity) {}
+
+Chem::Entity3D& Chem::Entity3D::operator=(const Entity3D& entity) 
 {
-	if (this == &atom)
+	if (this == &entity)
 		return *this;
 
-	AtomContainer::operator=(atom);
-	BondContainer::operator=(atom);
-	Entity3D::operator=(atom);
+	PropertyContainer::operator=(entity);
 
 	return *this;
 }

@@ -36,6 +36,7 @@
 #include <boost/ref.hpp>
 
 #include "CDPL/Chem/APIPrefix.hpp"
+#include "CDPL/Chem/Entity3DContainer.hpp"
 #include "CDPL/Util/IndexedElementIterator.hpp"
 
 
@@ -58,7 +59,7 @@ namespace CDPL
 		 * Implementations have to guarantee that a given Chem::Atom object is stored only once and its index is unique amongst
 		 * all contained Chem::Atom instances. Otherwise algorithms that rely on this behaviour may not work correctly!
 		 */
-		class CDPL_CHEM_API AtomContainer
+		class CDPL_CHEM_API AtomContainer : public Entity3DContainer
 		{
 
 			class ConstAtomAccessor;
@@ -135,6 +136,12 @@ namespace CDPL
 			 * \throw Base::ItemNotFound if the specified Chem::Atom instance could not be found.
 			 */
 			virtual std::size_t getAtomIndex(const Atom& atom) const = 0;
+
+			virtual std::size_t getNumEntities() const;
+
+			virtual const Entity3D& getEntity(std::size_t idx) const;
+
+			virtual Entity3D& getEntity(std::size_t idx);
 
 		protected:
 			/**

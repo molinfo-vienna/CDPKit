@@ -34,7 +34,7 @@
 #include "CDPL/Chem/APIPrefix.hpp"
 #include "CDPL/Chem/AtomContainer.hpp"
 #include "CDPL/Chem/BondContainer.hpp"
-#include "CDPL/Base/PropertyContainer.hpp"
+#include "CDPL/Chem/Entity3D.hpp"
 
 
 namespace CDPL 
@@ -53,7 +53,7 @@ namespace CDPL
 		/**
 		 * \brief Atom.
 		 */
-		class CDPL_CHEM_API Atom : public AtomContainer, public BondContainer, public Base::PropertyContainer
+		class CDPL_CHEM_API Atom : public AtomContainer, public BondContainer, public Entity3D
 		{
 
 		public:

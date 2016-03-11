@@ -55,7 +55,24 @@ Chem::AtomContainer::AtomIterator Chem::AtomContainer::getAtomsEnd()
 
 Chem::AtomContainer& Chem::AtomContainer::operator=(const AtomContainer& cntnr) 
 {
+	Entity3DContainer::operator=(cntnr);
+
 	return *this;
+}
+
+std::size_t Chem::AtomContainer::getNumEntities() const
+{
+	return getNumAtoms();
+}
+
+const Chem::Entity3D& Chem::AtomContainer::getEntity(std::size_t idx) const
+{
+	return getAtom(idx);
+}
+
+Chem::Entity3D& Chem::AtomContainer::getEntity(std::size_t idx)
+{
+	return getAtom(idx);
 }
 
 

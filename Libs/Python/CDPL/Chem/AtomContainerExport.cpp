@@ -29,8 +29,6 @@
 #include "CDPL/Chem/AtomContainer.hpp"
 #include "CDPL/Chem/Atom.hpp"
 
-#include "Base/ObjectIdentityCheckVisitor.hpp"
-
 #include "AtomContainerVisitor.hpp"
 #include "ClassExports.hpp"
 
@@ -51,10 +49,9 @@ void CDPLPythonChem::exportAtomContainer()
 	using namespace boost;
 	using namespace CDPL;
 
-	python::class_<AtomContainerWrapper, boost::noncopyable>("AtomContainer", python::no_init)
+	python::class_<AtomContainerWrapper, python::bases<Chem::Entity3DContainer>, boost::noncopyable>("AtomContainer", python::no_init)
 		.def(python::init<>(python::arg("self")))
-		.def(AtomContainerVirtualFunctionsVisitor())
+		.def(AtomContainerVirtualFunctionsVisitor<AtomContainerWrapper>())
 		.def(AtomContainerSpecialFunctionsVisitor(false))
-		.def(CDPLPythonBase::ObjectIdentityCheckVisitor<Chem::AtomContainer>())
 		.add_property("numAtoms", &Chem::AtomContainer::getNumAtoms);
 }

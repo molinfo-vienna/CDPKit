@@ -37,7 +37,7 @@ Chem::PharmacophoreFeature& Chem::PharmacophoreFeature::operator=(const Pharmaco
     if (this == &feature)
 	return *this;
 
-    PropertyContainer::operator=(feature);
+    Entity3D::operator=(feature);
 
     return *this;
 }

@@ -1,6 +1,7 @@
 INCLUDE_DIRECTORIES("${CMAKE_CURRENT_SOURCE_DIR}" "${CDPKIT_EXTERNAL_DIR}")
 
 SET(cdpl-chem_LIB_SRCS
+    Entity3D.cpp
     AtomContainer.cpp
     BondContainer.cpp
     MolecularGraph.cpp

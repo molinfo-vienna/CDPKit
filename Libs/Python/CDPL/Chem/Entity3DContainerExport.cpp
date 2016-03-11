@@ -1,7 +1,7 @@
 /* -*- mode: c++; c-basic-offset: 4; tab-width: 4; indent-tabs-mode: t -*- */
 
 /* 
- * BasicPharmacophoreFeature.cpp 
+ * Entity3DContainerExport.cpp 
  *
  * This file is part of the Chemical Data Processing Toolkit
  *
@@ -23,47 +23,38 @@
  * Boston, MA 02111-1307, USA.
  */
 
- 
-#include "StaticInit.hpp"
 
-#include "CDPL/Chem/BasicPharmacophoreFeature.hpp"
-#include "CDPL/Chem/BasicPharmacophore.hpp"
+#include <boost/python.hpp>
+
+#include "CDPL/Chem/Entity3DContainer.hpp"
+#include "CDPL/Chem/Entity3D.hpp"
+
+#include "Base/ObjectIdentityCheckVisitor.hpp"
+
+#include "Entity3DContainerVisitor.hpp"
+#include "ClassExports.hpp"
 
 
-using namespace CDPL;
-
-
-Chem::BasicPharmacophoreFeature::BasicPharmacophoreFeature(BasicPharmacophore* pharm): pharmacophore(pharm) {}
- 
-Chem::BasicPharmacophoreFeature::~BasicPharmacophoreFeature() {}
-
-std::size_t Chem::BasicPharmacophoreFeature::getIndex() const
+namespace
 {
-    return index;
+
+	struct Entity3DContainerWrapper : CDPL::Chem::Entity3DContainer, boost::python::wrapper<CDPL::Chem::Entity3DContainer> 
+	{
+
+		ENTITY3DCONTAINER_IMPL()
+	};
 }
 
-const Chem::Pharmacophore& Chem::BasicPharmacophoreFeature::getPharmacophore() const
+
+void CDPLPythonChem::exportEntity3DContainer()
 {
-    return *pharmacophore;
+	using namespace boost;
+	using namespace CDPL;
+
+	python::class_<Entity3DContainerWrapper, boost::noncopyable>("Entity3DContainer", python::no_init)
+		.def(python::init<>(python::arg("self")))
+		.def(Entity3DContainerVirtualFunctionsVisitor())
+		.def(Entity3DContainerSpecialFunctionsVisitor())
+		.def(CDPLPythonBase::ObjectIdentityCheckVisitor<Chem::Entity3DContainer>())
+		.add_property("numEntities", &Chem::Entity3DContainer::getNumEntities);
 }
-
-Chem::Pharmacophore& Chem::BasicPharmacophoreFeature::getPharmacophore()
-{
-    return *pharmacophore;
-}
-
-void Chem::BasicPharmacophoreFeature::setIndex(std::size_t idx)
-{
-    index = idx;
-}
-
-Chem::BasicPharmacophoreFeature& Chem::BasicPharmacophoreFeature::operator=(const BasicPharmacophoreFeature& feature) 
-{
-    if (this == &feature)
-	return *this;
-
-    PharmacophoreFeature::operator=(feature);
-
-    return *this;
-}
-

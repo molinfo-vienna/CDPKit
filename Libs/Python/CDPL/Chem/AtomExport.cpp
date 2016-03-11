@@ -100,7 +100,7 @@ void CDPLPythonChem::exportAtom()
 
 	Chem::Molecule& (Chem::Atom::*getMoleculeFunc)() = &Chem::Atom::getMolecule;
 
-	python::scope scope = python::class_<AtomWrapper, python::bases<Chem::AtomContainer, Chem::BondContainer, Base::PropertyContainer>,
+	python::scope scope = python::class_<AtomWrapper, python::bases<Chem::AtomContainer, Chem::BondContainer, Chem::Entity3D>,
 		boost::noncopyable>("Atom", python::no_init)
 		.def(python::init<>(python::arg("self")))
 		.def("getMolecule", python::pure_virtual(getMoleculeFunc), python::arg("self"),
@@ -115,7 +115,7 @@ void CDPLPythonChem::exportAtom()
 			 python::with_custodian_and_ward_postcall<0, 1>())
 		.def("getBonds", &createBondSequence<Chem::BondContainer>, python::arg("self"),
 			 python::with_custodian_and_ward_postcall<0, 1>())
-		.def(AtomContainerVirtualFunctionsVisitor())
+		.def(AtomContainerVirtualFunctionsVisitor<AtomWrapper>())
 		.def(BondContainerVirtualFunctionsVisitor())
 		.def(CDPLPythonBase::PropertyContainerVirtualFunctionsVisitor<AtomWrapper>())
 		.def(AtomContainerSpecialFunctionsVisitor(true))

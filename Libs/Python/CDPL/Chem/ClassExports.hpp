@@ -31,6 +31,8 @@
 namespace CDPLPythonChem
 {
 
+	void exportEntity3D();
+	void exportEntity3DContainer();
 	void exportAtomContainer();
 	void exportBondContainer();
 	void exportAtom();

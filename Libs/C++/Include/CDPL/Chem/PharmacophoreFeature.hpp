@@ -32,7 +32,7 @@
 #define CDPL_CHEM_PHARMACOPHOREFEATURE_HPP
 
 #include "CDPL/Chem/APIPrefix.hpp"
-#include "CDPL/Base/PropertyContainer.hpp"
+#include "CDPL/Chem/Entity3D.hpp"
 
 
 namespace CDPL 
@@ -51,7 +51,7 @@ namespace CDPL
 	/**
 	 * \brief PharmacophoreFeature.
 	 */
-	class CDPL_CHEM_API PharmacophoreFeature : public Base::PropertyContainer
+	class CDPL_CHEM_API PharmacophoreFeature : public Entity3D
 	{
 
 	  public:

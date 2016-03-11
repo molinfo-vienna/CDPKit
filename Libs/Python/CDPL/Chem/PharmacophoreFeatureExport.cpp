@@ -68,7 +68,7 @@ void CDPLPythonChem::exportPharmacophoreFeature()
 
     Chem::Pharmacophore& (Chem::PharmacophoreFeature::*getPharmacophoreFunc)() = &Chem::PharmacophoreFeature::getPharmacophore;
 
-    python::class_<PharmacophoreFeatureWrapper, python::bases<Base::PropertyContainer>,
+    python::class_<PharmacophoreFeatureWrapper, python::bases<Chem::Entity3D>,
 		   boost::noncopyable>("PharmacophoreFeature", python::no_init)
 	.def(python::init<>(python::arg("self")))
 	.def("getPharmacophore", python::pure_virtual(getPharmacophoreFunc), python::arg("self"),

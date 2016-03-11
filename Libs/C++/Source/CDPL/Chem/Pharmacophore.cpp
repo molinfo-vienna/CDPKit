@@ -57,7 +57,7 @@ Chem::Pharmacophore::FeatureIterator Chem::Pharmacophore::getFeaturesEnd()
 Chem::Pharmacophore::FeatureIterator Chem::Pharmacophore::removeFeature(const FeatureIterator& it)
 {
     if (it.getIndex() >= getNumFeatures())
-	throw Base::RangeError("Pharmacophore: feature iterator out of valid range");
+		throw Base::RangeError("Pharmacophore: feature iterator out of valid range");
 
     removeFeature(it.getIndex());
 
@@ -67,7 +67,7 @@ Chem::Pharmacophore::FeatureIterator Chem::Pharmacophore::removeFeature(const Fe
 Chem::Pharmacophore& Chem::Pharmacophore::operator=(const Pharmacophore& pharm) 
 {
     if (this == &pharm)
-	return *this;
+		return *this;
 
     copy(pharm);
 
@@ -79,6 +79,21 @@ Chem::Pharmacophore& Chem::Pharmacophore::operator+=(const Pharmacophore& pharm)
     append(pharm);
 
     return *this;
+}
+
+std::size_t Chem::Pharmacophore::getNumEntities() const
+{
+	return getNumFeatures();
+}
+
+const Chem::Entity3D& Chem::Pharmacophore::getEntity(std::size_t idx) const
+{
+	return getFeature(idx);
+}
+
+Chem::Entity3D& Chem::Pharmacophore::getEntity(std::size_t idx)
+{
+	return getFeature(idx);
 }
 
 

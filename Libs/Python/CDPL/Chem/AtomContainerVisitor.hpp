@@ -50,6 +50,35 @@
                                                                      \
 	CDPL::Chem::Atom& getAtom(std::size_t idx)  {                    \
 		return this->get_override("getAtom")(idx);                   \
+	}                                                                \
+                                                                     \
+	std::size_t getNumEntities() const {                             \
+		if (boost::python::override f = this->get_override("getNumEntities")) \
+            return f();                                                       \
+                                                                              \
+		return CDPL::Chem::AtomContainer::getNumEntities();                   \
+	}                                                                \
+                                                                     \
+	std::size_t getNumEntitiesDef() const {                          \
+		return CDPL::Chem::AtomContainer::getNumEntities();          \
+	}                                                                \
+                                                                     \
+	const CDPL::Chem::Entity3D& getEntity(std::size_t idx) const {   \
+		if (boost::python::override f = this->get_override("getEntity")) \
+            return f(idx);                                               \
+                                                                         \
+		return CDPL::Chem::AtomContainer::getEntity(idx);                \
+	}                                                                \
+                                                                     \
+	CDPL::Chem::Entity3D& getEntity(std::size_t idx) {               \
+		if (boost::python::override f = this->get_override("getEntity")) \
+            return f(idx);                                               \
+                                                                         \
+		return CDPL::Chem::AtomContainer::getEntity(idx);                \
+	}                                                                \
+                                                                     \
+	CDPL::Chem::Entity3D& getEntityDef(std::size_t idx) {            \
+		return CDPL::Chem::AtomContainer::getEntity(idx);            \
 	}
 
 
@@ -65,8 +94,9 @@ namespace CDPLPythonChem
 		}
 	};
 
+	template <typename Wrapper>
 	class AtomContainerVirtualFunctionsVisitor : private AtomContainerVisitorBase, 
-												 public boost::python::def_visitor<AtomContainerVirtualFunctionsVisitor>
+												 public boost::python::def_visitor<AtomContainerVirtualFunctionsVisitor<Wrapper> >
 	{
 
 		friend class boost::python::def_visitor_access;
@@ -81,7 +111,11 @@ namespace CDPLPythonChem
 					 (python::arg("self"), python::arg("idx")), python::return_internal_reference<1>())
 				.def("containsAtom", python::pure_virtual(&this->containsAtom), (python::arg("self"), python::arg("atom")))
 				.def("getAtomIndex", python::pure_virtual(&getAtomIndex), (python::arg("self"), python::arg("atom")))
-				.def("getNumAtoms", python::pure_virtual(&Chem::AtomContainer::getNumAtoms), python::arg("self"));
+				.def("getNumAtoms", python::pure_virtual(&Chem::AtomContainer::getNumAtoms), python::arg("self"))
+				.def("getEntity", static_cast<Chem::Entity3D& (Chem::AtomContainer::*)(std::size_t)>(&Chem::AtomContainer::getEntity), 
+					 &Wrapper::getEntityDef, (python::arg("self"), python::arg("idx")),
+					 python::return_internal_reference<1>())
+				.def("getNumEntities", &Chem::AtomContainer::getNumEntities, &Wrapper::getNumEntitiesDef, python::arg("self"));
 		}
 
 		static std::size_t getAtomIndex(CDPL::Chem::AtomContainer& cntnr, CDPL::Chem::Atom& atom) {

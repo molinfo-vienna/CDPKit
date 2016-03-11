@@ -30,6 +30,7 @@
 #include "CDPL/Chem/Pharmacophore.hpp"
 #include "CDPL/Chem/PharmacophoreFeature.hpp"
 
+#include "Chem/Entity3DContainerVisitor.hpp"
 #include "Base/PropertyContainerVisitor.hpp"
 
 #include "ClassExports.hpp"
@@ -87,7 +88,36 @@ namespace
                                                                      
 		std::size_t getFeatureIndex(const CDPL::Chem::PharmacophoreFeature& feature) const {   
 			return this->get_override("getFeatureIndex")(boost::ref(feature)); 
+		}                
+
+		std::size_t getNumEntities() const {                             
+			if (boost::python::override f = this->get_override("getNumEntities")) 
+				return f();                                                       
+                                                                              
+			return Pharmacophore::getNumEntities();                   
 		}                                                                
+                                                                     
+		std::size_t getNumEntitiesDef() const {                          
+			return Pharmacophore::getNumEntities();          
+		}                                                                
+                                                                     
+		const CDPL::Chem::Entity3D& getEntity(std::size_t idx) const {   
+			if (boost::python::override f = this->get_override("getEntity")) 
+				return f(idx);                                               
+                                                                         
+			return Pharmacophore::getEntity(idx);                
+		}                                                                
+                                                                     
+		CDPL::Chem::Entity3D& getEntity(std::size_t idx) {         
+			if (boost::python::override f = this->get_override("getEntity")) 
+				return f(idx);                                               
+                                                                         
+			return Pharmacophore::getEntity(idx);                
+		}                                                                
+                                                                     
+		CDPL::Chem::Entity3D& getEntityDef(std::size_t idx) {      
+			return Pharmacophore::getEntity(idx);            
+		}                                              
 	};
 
 	bool containsFeature(CDPL::Chem::Pharmacophore& pharm, CDPL::Chem::PharmacophoreFeature& feature) {
@@ -109,7 +139,7 @@ void CDPLPythonChem::exportPharmacophore()
 	Chem::PharmacophoreFeature& (Chem::Pharmacophore::*getFeatureFunc)(std::size_t) = &Chem::Pharmacophore::getFeature;
 
 	python::scope scope = python::class_<PharmacophoreWrapper, PharmacophoreWrapper::SharedPointer, 
-										 python::bases<Base::PropertyContainer>,
+										 python::bases<Chem::Entity3DContainer, Base::PropertyContainer>,
 										 boost::noncopyable>("Pharmacophore", python::no_init)
 		.def(python::init<>(python::arg("self")))
 		.def("clear",  python::pure_virtual(&Chem::Pharmacophore::clear), python::arg("self"))
@@ -126,6 +156,10 @@ void CDPLPythonChem::exportPharmacophore()
 		.def("containsFeature", python::pure_virtual(&containsFeature), (python::arg("self"), python::arg("feature")))
 		.def("getFeatureIndex", python::pure_virtual(&getFeatureIndex), (python::arg("self"), python::arg("feature")))
 		.def("getNumFeatures", python::pure_virtual(&Chem::Pharmacophore::getNumFeatures), python::arg("self"))
+		.def("getEntity", static_cast<Chem::Entity3D& (Chem::Pharmacophore::*)(std::size_t)>(&Chem::Pharmacophore::getEntity), 
+			 &PharmacophoreWrapper::getEntityDef, (python::arg("self"), python::arg("idx")),
+			 python::return_internal_reference<1>())
+		.def("getNumEntities", &Chem::Pharmacophore::getNumEntities, &PharmacophoreWrapper::getNumEntitiesDef, python::arg("self"))
 		.def("__iadd__", &Chem::Pharmacophore::operator+=, (python::arg("self"), python::arg("pharm")), 
 			 python::return_self<>())
 		.def("__len__", &Chem::Pharmacophore::getNumFeatures, python::arg("self"))

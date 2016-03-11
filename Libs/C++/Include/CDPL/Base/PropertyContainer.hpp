@@ -211,18 +211,12 @@ namespace CDPL
 
 			/**
 			 * \brief Constructs a copy of the \c %PropertyContainer instance \a cntnr.
-			 *
-			 * Only properties of \a cntnr whose value was assigned by setProperty() get copied. Calculated
-			 * properties are ignored.
-			 *
 			 * \param cntnr The \c %PropertyContainer instance to copy.
 			 */
 			PropertyContainer(const PropertyContainer& cntnr);
 
 			/**
 			 * \brief Virtual destructor.
-			 *
-			 * Any calculated properties that depend on the value of a property of the destroyed instance get invalidated.
 			 */
 			virtual ~PropertyContainer();
 

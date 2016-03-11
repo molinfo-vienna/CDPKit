@@ -1,7 +1,7 @@
 /* -*- mode: c++; c-basic-offset: 4; tab-width: 4; indent-tabs-mode: t -*- */
 
 /* 
- * BasicPharmacophoreFeature.cpp 
+ * Entity3DExport.cpp 
  *
  * This file is part of the Chemical Data Processing Toolkit
  *
@@ -23,47 +23,34 @@
  * Boston, MA 02111-1307, USA.
  */
 
- 
-#include "StaticInit.hpp"
 
-#include "CDPL/Chem/BasicPharmacophoreFeature.hpp"
-#include "CDPL/Chem/BasicPharmacophore.hpp"
+#include <boost/python.hpp>
+
+#include "CDPL/Chem/Entity3D.hpp"
+
+#include "Base/PropertyContainerVisitor.hpp"
+
+#include "ClassExports.hpp"
 
 
-using namespace CDPL;
-
-
-Chem::BasicPharmacophoreFeature::BasicPharmacophoreFeature(BasicPharmacophore* pharm): pharmacophore(pharm) {}
- 
-Chem::BasicPharmacophoreFeature::~BasicPharmacophoreFeature() {}
-
-std::size_t Chem::BasicPharmacophoreFeature::getIndex() const
+namespace
 {
-    return index;
+
+    struct Entity3DWrapper : CDPL::Chem::Entity3D, boost::python::wrapper<CDPL::Chem::Entity3D> 
+    {
+
+	PROPERTYCONTAINER_IMPL(Entity3DWrapper) 
+    };
 }
 
-const Chem::Pharmacophore& Chem::BasicPharmacophoreFeature::getPharmacophore() const
+
+void CDPLPythonChem::exportEntity3D()
 {
-    return *pharmacophore;
+    using namespace boost;
+    using namespace CDPL;
+
+    python::class_<Entity3DWrapper, python::bases<Base::PropertyContainer>, boost::noncopyable>("Entity3D", python::no_init)
+	.def(python::init<>(python::arg("self")))
+	.def(CDPLPythonBase::PropertyContainerVirtualFunctionsVisitor<Entity3DWrapper>())
+	.def(CDPLPythonBase::PropertyContainerSpecialFunctionsVisitor());
 }
-
-Chem::Pharmacophore& Chem::BasicPharmacophoreFeature::getPharmacophore()
-{
-    return *pharmacophore;
-}
-
-void Chem::BasicPharmacophoreFeature::setIndex(std::size_t idx)
-{
-    index = idx;
-}
-
-Chem::BasicPharmacophoreFeature& Chem::BasicPharmacophoreFeature::operator=(const BasicPharmacophoreFeature& feature) 
-{
-    if (this == &feature)
-	return *this;
-
-    PharmacophoreFeature::operator=(feature);
-
-    return *this;
-}
-

@@ -36,6 +36,8 @@ BOOST_PYTHON_MODULE(_chem)
 {
 	using namespace CDPLPythonChem;
 
+	exportEntity3D();
+	exportEntity3DContainer();
 	exportAtomContainer();
 	exportBondContainer();
 	exportAtom();

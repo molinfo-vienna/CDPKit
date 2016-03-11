@@ -9,6 +9,8 @@ ENDFOREACH(PYTHON_FILE)
 
 SET(chem_MOD_SRCS
     Module.cpp
+    Entity3DExport.cpp
+    Entity3DContainerExport.cpp
     AtomContainerExport.cpp
     BondContainerExport.cpp
     AtomExport.cpp
