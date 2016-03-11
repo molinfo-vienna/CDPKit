@@ -10,6 +10,10 @@ SET(test-suite_SRCS
     MoleculeTest.cpp
     AtomTest.cpp
     BondTest.cpp
+    PharmacophoreFeatureTest.cpp
+    BasicPharmacophoreFeatureTest.cpp
+    PharmacophoreTest.cpp
+    BasicPharmacophoreTest.cpp
     #AtomContainerTest.cpp
     #BondContainerTest.cpp
     FragmentTest.cpp
