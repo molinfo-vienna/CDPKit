@@ -295,15 +295,6 @@ namespace CDPL
 		CDPL_CHEM_API bool has2DCoordinates(const Atom& atom);
 
 
-		CDPL_CHEM_API const Math::Vector3D& get3DCoordinates(const Atom& atom);
-
-		CDPL_CHEM_API void set3DCoordinates(Atom& atom, const Math::Vector3D& coords);
-
-		CDPL_CHEM_API void clear3DCoordinates(Atom& atom);
-	
-		CDPL_CHEM_API bool has3DCoordinates(const Atom& atom);
-
-
 		CDPL_CHEM_API const Math::Vector3DArray::SharedPointer& get3DCoordinatesArray(const Atom& atom);
 
 		CDPL_CHEM_API void set3DCoordinatesArray(Atom& atom, const Math::Vector3DArray::SharedPointer& coords_array);

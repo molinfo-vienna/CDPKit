@@ -54,6 +54,7 @@ namespace CDPLPythonChem
 	void exportMDLParities();
 
 	void exportMolecularGraphProperties();
+	void exportEntity3DProperties();
 	void exportAtomProperties();
 	void exportBondProperties();
 	void exportReactionProperties();

@@ -36,6 +36,7 @@
 #include <boost/ref.hpp>
 
 #include "CDPL/Chem/APIPrefix.hpp"
+#include "CDPL/Util/IndexedElementIterator.hpp"
 
 
 namespace CDPL 
@@ -52,7 +53,7 @@ namespace CDPL
 		 */
 
 		/**
-		 * \brief A common interface for data-structures that support a random access to stored immutable Chem::Entity3D instances.
+		 * \brief A common interface for data-structures that support a random access to stored Chem::Entity3D instances.
 		 *
 		 * Implementations have to guarantee that a given Chem::Entity3D object is stored only once and its index is unique amongst
 		 * all contained Chem::Entity3D instances. Otherwise algorithms that rely on this behaviour may not work correctly!
@@ -60,7 +61,20 @@ namespace CDPL
 		class CDPL_CHEM_API Entity3DContainer
 		{
 
+			class ConstEntityAccessor;
+			class EntityAccessor;
+
 		public:
+			/**
+			 * \brief A constant random access iterator used to iterate over the stored \c const Chem::Entity3D objects.
+			 */
+			typedef Util::IndexedElementIterator<const Entity3D, ConstEntityAccessor> ConstEntityIterator;
+
+			/**
+			 * \brief A mutable random access iterator used to iterate over the stored Chem::Entity3D objects.
+			 */
+			typedef Util::IndexedElementIterator<Entity3D, EntityAccessor> EntityIterator;
+
 			/**
 			 * \brief Returns the number of stored Chem::Entity3D objects.
 			 * \return The number of stored Chem::Entity3D objects.
@@ -79,9 +93,33 @@ namespace CDPL
 			 * \brief Returns a non-\c const reference to the entity at index \a idx.
 			 * \param idx The zero-based index of the Chem::Entity3D instance to return.
 			 * \return A non-\c const reference to the entity at the specified index.
-			 * \throw Base::IndexError if the number of entitys is zero or \a idx is not in the range [0, getNumEntities() - 1].
+			 * \throw Base::IndexError if the number of entities is zero or \a idx is not in the range [0, getNumEntities() - 1].
 			 */
 			virtual Entity3D& getEntity(std::size_t idx) = 0;
+
+			/**
+			 * \brief Returns a constant iterator pointing to the beginning of the stored \c const Chem::Entity3D objects.
+			 * \return A constant iterator pointing to the beginning of the stored \c const Chem::Entity3D objects.
+			 */
+			ConstEntityIterator getEntitiesBegin() const;
+
+			/**
+			 * \brief Returns a constant iterator pointing to the end of the stored \c const Chem::Entity3D objects.
+			 * \return A constant iterator pointing to the end of the stored \c const Chem::Entity3D objects.
+			 */
+			ConstEntityIterator getEntitiesEnd() const;
+
+			/**
+			 * \brief Returns a mutable iterator pointing to the beginning of the stored Chem::Entity3D objects.
+			 * \return A mutable iterator pointing to the beginning of the stored Chem::Entity3D objects.
+			 */
+			EntityIterator getEntitiesBegin();
+
+			/**
+			 * \brief Returns a mutable iterator pointing to the end of the stored Chem::Entity3D objects.
+			 * \return A mutable iterator pointing to the end of the stored Chem::Entity3D objects.
+			 */
+			EntityIterator getEntitiesEnd();
 	
 		protected:
 			/**
@@ -94,7 +132,42 @@ namespace CDPL
 			 * \param cntnr The other container to copy.
 			 * \return A reference to itself.
 			 */
-			Entity3DContainer& operator=(const Entity3DContainer& cntnr) { return *this; }
+			Entity3DContainer& operator=(const Entity3DContainer& cntnr);
+
+		  private:
+			class CDPL_CHEM_API ConstEntityAccessor
+			{
+			
+			public:
+				ConstEntityAccessor(const EntityAccessor& accessor): container(accessor.container) {}
+
+				ConstEntityAccessor(const Entity3DContainer& cntnr): container(cntnr) {}
+
+				const Entity3D& operator()(std::size_t idx) const;
+
+				bool operator==(const ConstEntityAccessor& accessor) const;
+
+				ConstEntityAccessor& operator=(const EntityAccessor& accessor);
+
+			private:
+				boost::reference_wrapper<const Entity3DContainer> container;
+			};
+
+			class CDPL_CHEM_API EntityAccessor
+			{
+			
+				friend class ConstEntityAccessor;
+
+			public:
+				EntityAccessor(Entity3DContainer& cntnr): container(cntnr) {}
+
+				Entity3D& operator()(std::size_t idx) const;
+
+				bool operator==(const EntityAccessor& accessor) const;
+
+			private:
+				boost::reference_wrapper<Entity3DContainer> container;
+			};
 		};
 
 		/**

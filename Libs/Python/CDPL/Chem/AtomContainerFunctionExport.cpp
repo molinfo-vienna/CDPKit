@@ -51,12 +51,8 @@ namespace
 
 	MAKE_FUNCTION_WRAPPER2(void, calcExplicitMassComposition, CDPL::Chem::AtomContainer&, CDPL::Chem::MassComposition&)
 	MAKE_FUNCTION_WRAPPER2(void, buildExplicitElementHistogram, CDPL::Chem::AtomContainer&, CDPL::Chem::ElementHistogram&);
-	MAKE_FUNCTION_WRAPPER2(void, calcGeometricalDistanceMatrix, CDPL::Chem::AtomContainer&, CDPL::Math::DMatrix&);
-	MAKE_FUNCTION_WRAPPER1(double, calcGeometricalRadius, CDPL::Chem::AtomContainer&);
-	MAKE_FUNCTION_WRAPPER1(double, calcGeometricalDiameter, CDPL::Chem::AtomContainer&);
 	MAKE_FUNCTION_WRAPPER2(bool, hasCoordinates, CDPL::Chem::AtomContainer&, std::size_t);
 	MAKE_FUNCTION_WRAPPER2(void, get2DCoordinates, CDPL::Chem::AtomContainer&, CDPL::Math::Vector2DArray&);
-	MAKE_FUNCTION_WRAPPER2(void, get3DCoordinates, CDPL::Chem::AtomContainer&, CDPL::Math::Vector3DArray&);
 
 	MAKE_FUNCTION_WRAPPER3(void, getConformationData, CDPL::Chem::AtomContainer&, std::size_t, CDPL::Math::Vector3DArray&);
 
@@ -97,14 +93,9 @@ void CDPLPythonChem::exportAtomContainerFunctions()
 	python::def("buildExplicitMassCompositionString", &buildExplicitMassCompositionStringWrapper, python::arg("cntnr"));
 	python::def("buildExplicitMolecularFormula", &buildExplicitMolecularFormulaWrapper, python::arg("cntnr"));
 	python::def("buildExplicitElementHistogram", &buildExplicitElementHistogramWrapper2, (python::arg("cntnr"), python::arg("hist")));
-	python::def("calcGeometricalDistanceMatrix", &calcGeometricalDistanceMatrixWrapper2, (python::arg("cntnr"), python::arg("mtx")));
-	python::def("calcGeometricalRadius", &calcGeometricalRadiusWrapper1, python::arg("cntnr"));
-	python::def("calcGeometricalDiameter", &calcGeometricalDiameterWrapper1, python::arg("cntnr"));
 	python::def("hasCoordinates", &hasCoordinatesWrapper2, (python::arg("cntnr"), python::arg("dim")));
 	python::def("get2DCoordinates", &get2DCoordinatesWrapper2, (python::arg("cntnr"),  python::arg("coords")));
-	python::def("get3DCoordinates", &get3DCoordinatesWrapper2, (python::arg("cntnr"),  python::arg("coords")));
 	python::def("set2DCoordinates", &Chem::set2DCoordinates, (python::arg("cntnr"), python::arg("coords")));
-	python::def("set3DCoordinates", &Chem::set3DCoordinates, (python::arg("cntnr"), python::arg("coords")));
 	python::def("setActiveConformation", &Chem::setActiveConformation, (python::arg("cntnr"), python::arg("conf_idx")));
 	python::def("getConformationData", &getConformationDataWrapper3, (python::arg("cntnr"), python::arg("conf_idx"),python::arg("coords")));
 	python::def("addConformationData", &Chem::addConformationData, (python::arg("cntnr"), python::arg("coords")));

@@ -1,7 +1,7 @@
 /* -*- mode: c++; c-basic-offset: 4; tab-width: 4; indent-tabs-mode: t -*- */
 
 /* 
- * AtomContainerGeometricalDistanceMatrixFunction.cpp 
+ * Entity3DContainerCoordinatesFunctions.cpp 
  *
  * This file is part of the Chemical Data Processing Toolkit
  *
@@ -26,38 +26,26 @@
 
 #include "StaticInit.hpp"
 
-#include "CDPL/Chem/AtomContainerFunctions.hpp"
-#include "CDPL/Chem/AtomFunctions.hpp"
-#include "CDPL/Chem/AtomContainer.hpp"
-#include "CDPL/Chem/Atom.hpp"
+
+#include "CDPL/Chem/Entity3DContainerFunctions.hpp"
+#include "CDPL/Chem/Entity3DFunctions.hpp"
+#include "CDPL/Chem/Entity3DContainer.hpp"
+#include "CDPL/Chem/Entity3D.hpp"
 
 
 using namespace CDPL; 
 
 
-void Chem::calcGeometricalDistanceMatrix(const AtomContainer& cntnr, Math::DMatrix& mtx)
+void Chem::get3DCoordinates(const Entity3DContainer& cntnr, Math::Vector3DArray& coords)
 {
-	std::size_t num_atoms = cntnr.getNumAtoms();
+	for (Entity3DContainer::ConstEntityIterator it = cntnr.getEntitiesBegin(), end = cntnr.getEntitiesEnd(); it != end; ++it)
+		coords.addElement(get3DCoordinates(*it));
+}
 
-	mtx.resize(num_atoms, num_atoms, false);
-	mtx.clear();
+void Chem::set3DCoordinates(Entity3DContainer& cntnr, const Math::Vector3DArray& coords)
+{
+	std::size_t num_ents = cntnr.getNumEntities();
 
-	AtomContainer::ConstAtomIterator atoms_end = cntnr.getAtomsEnd();
-
-	for (AtomContainer::ConstAtomIterator it1 = cntnr.getAtomsBegin(); it1 != atoms_end; ) {
-		const Atom& atom1 = *it1;
-		std::size_t atom1_idx = cntnr.getAtomIndex(atom1);
-		const Math::Vector3D& coords1 = get3DCoordinates(atom1);
-
-		for (AtomContainer::ConstAtomIterator it2 = ++it1; it2 != atoms_end; ++it2) {
-			const Atom& atom2 = *it2;
-			std::size_t atom2_idx = cntnr.getAtomIndex(atom2);
-			const Math::Vector3D& coords2 = get3DCoordinates(atom2);
-
-			double dist = norm2(coords1 - coords2);
-
-			mtx(atom1_idx, atom2_idx) = dist;
-			mtx(atom2_idx, atom1_idx) = dist;
-		}
-	}
+	for (std::size_t i = 0; i < num_ents; i++) 
+		set3DCoordinates(cntnr.getEntity(i), coords[i]);
 }

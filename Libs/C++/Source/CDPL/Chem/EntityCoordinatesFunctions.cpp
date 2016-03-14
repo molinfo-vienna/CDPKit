@@ -54,6 +54,26 @@ bool Chem::has2DCoordinates(const Atom& atom)
     return atom.isPropertySet(AtomProperty::COORDINATES_2D);
 }
 
+const Math::Vector3D& Chem::get3DCoordinates(const Atom& atom)
+{
+    return atom.getProperty<Math::Vector3D>(AtomProperty::COORDINATES_3D);
+}
+
+void Chem::set3DCoordinates(Atom& atom, const Math::Vector3D& coords)
+{
+    atom.setProperty(AtomProperty::COORDINATES_3D, coords);
+}
+
+void Chem::clear3DCoordinates(Atom& atom)
+{
+    atom.removeProperty(AtomProperty::COORDINATES_3D);
+}
+	
+bool Chem::has3DCoordinates(const Atom& atom)
+{
+    return atom.isPropertySet(AtomProperty::COORDINATES_3D);
+}
+
 const Math::Vector3DArray::SharedPointer& Chem::get3DCoordinatesArray(const Atom& atom)
 {
     return atom.getProperty<Math::Vector3DArray::SharedPointer>(AtomProperty::COORDINATES_3D_ARRAY);

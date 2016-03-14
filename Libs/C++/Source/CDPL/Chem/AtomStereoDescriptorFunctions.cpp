@@ -31,6 +31,7 @@
 
 #include <boost/bind.hpp>
 
+#include "CDPL/Chem/Entity3DFunctions.hpp"
 #include "CDPL/Chem/AtomFunctions.hpp"
 #include "CDPL/Chem/BondFunctions.hpp"
 #include "CDPL/Chem/Atom.hpp"

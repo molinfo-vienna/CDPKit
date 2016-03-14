@@ -1,7 +1,7 @@
 /* -*- mode: c++; c-basic-offset: 4; tab-width: 4; indent-tabs-mode: t -*- */
 
 /* 
- * FunctionExports.hpp 
+ * Entity3DFunctions.hpp 
  *
  * This file is part of the Chemical Data Processing Toolkit
  *
@@ -23,31 +23,44 @@
  * Boston, MA 02111-1307, USA.
  */
 
+/**
+ * \file
+ * \brief Declaration of functions that operate on Chem::Entity3D instances.
+ */
 
-#ifndef CDPL_PYTHON_CHEM_FUNCTIONEXPORTS_HPP
-#define CDPL_PYTHON_CHEM_FUNCTIONEXPORTS_HPP
+#ifndef CDPL_CHEM_ENTITY3DFUNCTIONS_HPP
+#define CDPL_CHEM_ENTITY3DFUNCTIONS_HPP
+
+#include "CDPL/Chem/APIPrefix.hpp"
+#include "CDPL/Math/Vector.hpp"
 
 
-namespace CDPLPythonChem
+namespace CDPL 
 {
 
-	void exportAtomTypeFunctions();
-	void exportResidueFunctions();
-	void exportUtilityFunctions();
-	void exportControlParameterFunctions();
-	void exportAtomContainerFunctions();
-	void exportBondContainerFunctions();
-	void exportEntity3DContainerFunctions();
-	void exportEntity3DFunctions();
-	void exportAtomFunctions();
-	void exportBondFunctions();
-	void exportMolecularGraphFunctions();
-	void exportMoleculeFunctions();
-	void exportFragmentFunctions();
-	void exportReactionFunctions();
-	void exportPharmacophoreFunctions();
-	void exportPharmacophoreFeatureFunctions();
-	void exportSimilarityFunctions();
+	namespace Chem 
+	{
+
+		class Entity3D;
+	
+		/**
+		 * \addtogroup CDPL_CHEM_ENTITY3D_FUNCTIONS
+		 * @{
+		 */
+
+		CDPL_CHEM_API const Math::Vector3D& get3DCoordinates(const Entity3D& entity);
+
+		CDPL_CHEM_API void set3DCoordinates(Entity3D& entity, const Math::Vector3D& coords);
+
+		CDPL_CHEM_API void clear3DCoordinates(Entity3D& entity);
+	
+		CDPL_CHEM_API bool has3DCoordinates(const Entity3D& entity);
+
+		/**
+		 * @}
+		 */
+	}
 }
 
-#endif // CDPL_PYTHON_CHEM_FUNCTIONEXPORTS_HPP
+#endif // CDPL_CHEM_ENTITY3DFUNCTIONS_HPP
+ 

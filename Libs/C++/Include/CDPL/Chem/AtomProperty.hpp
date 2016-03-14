@@ -74,7 +74,6 @@ namespace CDPL
 			extern CDPL_CHEM_API const Base::LookupKey IMPLICIT_HYDROGEN_COUNT;
 	
 			extern CDPL_CHEM_API const Base::LookupKey COORDINATES_2D;
-			extern CDPL_CHEM_API const Base::LookupKey COORDINATES_3D;
 			extern CDPL_CHEM_API const Base::LookupKey COORDINATES_3D_ARRAY;
 		
 			extern CDPL_CHEM_API const Base::LookupKey MORGAN_NUMBER;

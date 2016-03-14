@@ -224,10 +224,16 @@
 \defgroup CDPL_CHEM_CONTROL_PARAMTER_FUNCTIONS Control-Parameter Functions
 \ingroup CDPL_CHEM_FUNCTIONS
 
+\defgroup CDPL_CHEM_ENTITY3D_CONTAINER_FUNCTIONS Entity3DContainer Functions
+\ingroup CDPL_CHEM_FUNCTIONS
+
 \defgroup CDPL_CHEM_ATOM_CONTAINER_FUNCTIONS AtomContainer Functions
 \ingroup CDPL_CHEM_FUNCTIONS
 
 \defgroup CDPL_CHEM_BOND_CONTAINER_FUNCTIONS BondContainer Functions
+\ingroup CDPL_CHEM_FUNCTIONS
+
+\defgroup CDPL_CHEM_ENTITY3D_FUNCTIONS Entity3D Functions
 \ingroup CDPL_CHEM_FUNCTIONS
 
 \defgroup CDPL_CHEM_ATOM_FUNCTIONS Atom Functions

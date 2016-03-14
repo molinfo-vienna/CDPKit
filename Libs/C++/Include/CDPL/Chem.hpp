@@ -81,6 +81,7 @@
 #include "CDPL/Chem/ReactionAtomMappingMatchExpression.hpp"
 #include "CDPL/Chem/ReactionComponentGroupingMatchExpression.hpp"
 
+#include "CDPL/Chem/Entity3DProperty.hpp"
 #include "CDPL/Chem/AtomProperty.hpp"
 #include "CDPL/Chem/BondProperty.hpp"
 #include "CDPL/Chem/MolecularGraphProperty.hpp"
@@ -208,6 +209,8 @@
 #include "CDPL/Chem/ResidueFunctions.hpp"
 #include "CDPL/Chem/AtomContainerFunctions.hpp"
 #include "CDPL/Chem/BondContainerFunctions.hpp"
+#include "CDPL/Chem/AtomContainerFunctions.hpp"
+#include "CDPL/Chem/Entity3DContainerFunctions.hpp"
 #include "CDPL/Chem/AtomFunctions.hpp"
 #include "CDPL/Chem/BondFunctions.hpp"
 #include "CDPL/Chem/MolecularGraphFunctions.hpp"

@@ -1,7 +1,7 @@
 /* -*- mode: c++; c-basic-offset: 4; tab-width: 4; indent-tabs-mode: t -*- */
 
 /* 
- * MolecularGraph3DCoordinatesFunctions.cpp 
+ * Entity3DCoordinatesFunctions.cpp 
  *
  * This file is part of the Chemical Data Processing Toolkit
  *
@@ -26,18 +26,30 @@
 
 #include "StaticInit.hpp"
 
-#include "CDPL/Chem/MolecularGraphFunctions.hpp"
-#include "CDPL/Chem/Entity3DContainerFunctions.hpp"
-#include "CDPL/Chem/Hydrogen3DCoordinatesGenerator.hpp"
+#include "CDPL/Chem/Entity3DFunctions.hpp"
+#include "CDPL/Chem/Entity3D.hpp"
+#include "CDPL/Chem/Entity3DProperty.hpp"
 
 
 using namespace CDPL; 
 
 
-void Chem::generateHydrogen3DCoordinates(MolecularGraph& molgraph, bool undef_only)
+const Math::Vector3D& Chem::get3DCoordinates(const Entity3D& entity)
 {
-	Math::Vector3DArray coords;
-	Hydrogen3DCoordinatesGenerator generator(molgraph, coords, undef_only);
+    return entity.getProperty<Math::Vector3D>(Entity3DProperty::COORDINATES_3D);
+}
 
-	set3DCoordinates(molgraph, coords);
+void Chem::set3DCoordinates(Entity3D& entity, const Math::Vector3D& coords)
+{
+    entity.setProperty(Entity3DProperty::COORDINATES_3D, coords);
+}
+
+void Chem::clear3DCoordinates(Entity3D& entity)
+{
+    entity.removeProperty(Entity3DProperty::COORDINATES_3D);
+}
+	
+bool Chem::has3DCoordinates(const Entity3D& entity)
+{
+    return entity.isPropertySet(Entity3DProperty::COORDINATES_3D);
 }

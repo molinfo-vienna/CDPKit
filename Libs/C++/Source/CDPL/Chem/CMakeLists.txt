@@ -2,6 +2,7 @@ INCLUDE_DIRECTORIES("${CMAKE_CURRENT_SOURCE_DIR}" "${CDPKIT_EXTERNAL_DIR}")
 
 SET(cdpl-chem_LIB_SRCS
     Entity3D.cpp
+    Entity3DContainer.cpp
     AtomContainer.cpp
     BondContainer.cpp
     MolecularGraph.cpp
@@ -24,6 +25,7 @@ SET(cdpl-chem_LIB_SRCS
     BondProperty.cpp
     MolecularGraphProperty.cpp
     ReactionProperty.cpp
+    Entity3DProperty.cpp
     PharmacophoreProperty.cpp
     PharmacophoreFeatureProperty.cpp
     ControlParameter.cpp
@@ -134,12 +136,16 @@ SET(cdpl-chem_LIB_SRCS
     BurdenMatrixGenerator.cpp
     BCUTDescriptorCalculator.cpp
 
+    Entity3DCoordinatesFunctions.cpp
+
+    Entity3DContainerCoordinatesFunctions.cpp
+    Entity3DContainerGeometricalDistanceMatrixFunction.cpp
+    Entity3DContainerGeometricalDistanceFunctions.cpp
+
     AtomContainerAtomCountFunctions.cpp
     AtomContainerFormalChargeFunction.cpp
     AtomContainerElementalCompositionFunctions.cpp
     AtomContainerMassCompositionFunctions.cpp
-    AtomContainerGeometricalDistanceMatrixFunction.cpp
-    AtomContainerGeometricalDistanceFunctions.cpp
     AtomContainerCoordinatesFunctions.cpp
     AtomContainerMaxReactionAtomMappingIDFunction.cpp
     AtomContainerMaxComponentGroupIDFunction.cpp

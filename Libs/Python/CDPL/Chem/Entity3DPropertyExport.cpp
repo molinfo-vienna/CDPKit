@@ -1,7 +1,7 @@
 /* -*- mode: c++; c-basic-offset: 4; tab-width: 4; indent-tabs-mode: t -*- */
 
 /* 
- * FunctionExports.hpp 
+ * Entity3DPropertyExport.cpp 
  *
  * This file is part of the Chemical Data Processing Toolkit
  *
@@ -24,30 +24,27 @@
  */
 
 
-#ifndef CDPL_PYTHON_CHEM_FUNCTIONEXPORTS_HPP
-#define CDPL_PYTHON_CHEM_FUNCTIONEXPORTS_HPP
+#include <boost/python.hpp>
+
+#include "CDPL/Chem/Entity3DProperty.hpp"
+#include "CDPL/Base/LookupKey.hpp"
+
+#include "NamespaceExports.hpp"
 
 
-namespace CDPLPythonChem
+namespace 
 {
 
-	void exportAtomTypeFunctions();
-	void exportResidueFunctions();
-	void exportUtilityFunctions();
-	void exportControlParameterFunctions();
-	void exportAtomContainerFunctions();
-	void exportBondContainerFunctions();
-	void exportEntity3DContainerFunctions();
-	void exportEntity3DFunctions();
-	void exportAtomFunctions();
-	void exportBondFunctions();
-	void exportMolecularGraphFunctions();
-	void exportMoleculeFunctions();
-	void exportFragmentFunctions();
-	void exportReactionFunctions();
-	void exportPharmacophoreFunctions();
-	void exportPharmacophoreFeatureFunctions();
-	void exportSimilarityFunctions();
+	struct Entity3DProperty {};
 }
 
-#endif // CDPL_PYTHON_CHEM_FUNCTIONEXPORTS_HPP
+
+void CDPLPythonChem::exportEntity3DProperties()
+{
+	using namespace boost;
+	using namespace CDPL;
+
+	python::class_<Entity3DProperty, boost::noncopyable>("Entity3DProperty", python::no_init)
+		.def_readonly("COORDINATES_3D", &Chem::Entity3DProperty::COORDINATES_3D)
+		;
+}

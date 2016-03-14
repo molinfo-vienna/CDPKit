@@ -186,6 +186,7 @@ BOOST_PYTHON_MODULE(_chem)
 	exportSMARTSReactionOutputHandler();
 
 	exportMolecularGraphProperties();
+	exportEntity3DProperties();
 	exportAtomProperties();
 	exportBondProperties();
 	exportReactionProperties();
@@ -223,6 +224,8 @@ BOOST_PYTHON_MODULE(_chem)
 	exportUtilityFunctions();
 	exportAtomContainerFunctions();
 	exportBondContainerFunctions();
+	exportEntity3DContainerFunctions();
+	exportEntity3DFunctions();
 	exportAtomFunctions();
 	exportBondFunctions();
 	exportMolecularGraphFunctions();

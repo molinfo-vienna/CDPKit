@@ -1,7 +1,7 @@
 /* -*- mode: c++; c-basic-offset: 4; tab-width: 4; indent-tabs-mode: t -*- */
 
 /* 
- * MolecularGraph3DCoordinatesFunctions.cpp 
+ * Entity3DContainerGeometricalDistanceMatrixFunction.cpp 
  *
  * This file is part of the Chemical Data Processing Toolkit
  *
@@ -26,18 +26,33 @@
 
 #include "StaticInit.hpp"
 
-#include "CDPL/Chem/MolecularGraphFunctions.hpp"
 #include "CDPL/Chem/Entity3DContainerFunctions.hpp"
-#include "CDPL/Chem/Hydrogen3DCoordinatesGenerator.hpp"
+#include "CDPL/Chem/Entity3DFunctions.hpp"
+#include "CDPL/Chem/Entity3DContainer.hpp"
 
 
 using namespace CDPL; 
 
 
-void Chem::generateHydrogen3DCoordinates(MolecularGraph& molgraph, bool undef_only)
+void Chem::calcGeometricalDistanceMatrix(const Entity3DContainer& cntnr, Math::DMatrix& mtx)
 {
-	Math::Vector3DArray coords;
-	Hydrogen3DCoordinatesGenerator generator(molgraph, coords, undef_only);
+	std::size_t num_entities = cntnr.getNumEntities();
 
-	set3DCoordinates(molgraph, coords);
+	mtx.resize(num_entities, num_entities, false);
+	mtx.clear();
+
+	for (std::size_t i = 0; i < num_entities; ) {
+		const Entity3D& entity1 = cntnr.getEntity(i);
+		const Math::Vector3D& coords1 = get3DCoordinates(entity1);
+
+		for (std::size_t j = ++i; j < num_entities; j++) {
+			const Entity3D& entity2 = cntnr.getEntity(j);
+			const Math::Vector3D& coords2 = get3DCoordinates(entity2);
+
+			double dist = norm2(coords1 - coords2);
+
+			mtx(i, j) = dist;
+			mtx(j, i) = dist;
+		}
+	}
 }

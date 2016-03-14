@@ -80,22 +80,11 @@ namespace CDPL
 		CDPL_CHEM_API void buildExplicitElementHistogram(const AtomContainer& cntnr, ElementHistogram& hist);
 
 
-		CDPL_CHEM_API void calcGeometricalDistanceMatrix(const AtomContainer& cntnr, Math::DMatrix& mtx);
-
-		CDPL_CHEM_API double calcGeometricalRadius(const AtomContainer& cntnr);
-
-		CDPL_CHEM_API double calcGeometricalDiameter(const AtomContainer& cntnr);
-
-
 		CDPL_CHEM_API bool hasCoordinates(const AtomContainer& cntnr, std::size_t dim);
 
 		CDPL_CHEM_API void get2DCoordinates(const AtomContainer& cntnr, Math::Vector2DArray& coords);
 
 		CDPL_CHEM_API void set2DCoordinates(AtomContainer& cntnr, const Math::Vector2DArray& coords);
-
-		CDPL_CHEM_API void get3DCoordinates(const AtomContainer& cntnr, Math::Vector3DArray& coords);
-
-		CDPL_CHEM_API void set3DCoordinates(AtomContainer& cntnr, const Math::Vector3DArray& coords);	
 
 
 		CDPL_CHEM_API void setActiveConformation(AtomContainer& cntnr, std::size_t conf_idx);	

@@ -37,12 +37,12 @@
 #define MAKE_FEATURE_FUNC_WRAPPERS(TYPE, FUNC_SUFFIX)                       \
 TYPE get##FUNC_SUFFIX##Wrapper(CDPL::Chem::PharmacophoreFeature& feature)   \
 {                                                                           \
-	return get##FUNC_SUFFIX(feature);                                   \
+	return get##FUNC_SUFFIX(feature);                                       \
 }                                                                           \
                                                                             \
 bool has##FUNC_SUFFIX##Wrapper(CDPL::Chem::PharmacophoreFeature& feature)   \
 {                                                                           \
-	return has##FUNC_SUFFIX(feature);                                   \
+	return has##FUNC_SUFFIX(feature);                                       \
 }
 
 #define EXPORT_FEATURE_FUNCS(FUNC_SUFFIX, ARG_NAME)                                                             \

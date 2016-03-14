@@ -52,7 +52,7 @@
 /**
  * \brief The \e %CDPL build date in the format \e YYYYMMDD. 
  */
-#define CDPL_BUILD_DATE 20160311
+#define CDPL_BUILD_DATE 20160314
 
 
 /** 

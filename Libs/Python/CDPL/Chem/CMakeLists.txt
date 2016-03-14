@@ -160,6 +160,7 @@ SET(chem_MOD_SRCS
     RDFReactionWriterExport.cpp 
    
     MolecularGraphPropertyExport.cpp 
+    Entity3DPropertyExport.cpp 
     AtomPropertyExport.cpp 
     BondPropertyExport.cpp 
     ReactionPropertyExport.cpp 
@@ -194,6 +195,8 @@ SET(chem_MOD_SRCS
     UtilityFunctionExport.cpp 
     AtomContainerFunctionExport.cpp 
     BondContainerFunctionExport.cpp 
+    Entity3DContainerFunctionExport.cpp 
+    Entity3DFunctionExport.cpp 
     AtomFunctionExport.cpp 
     BondFunctionExport.cpp 
     MolecularGraphFunctionExport.cpp 

@@ -27,7 +27,7 @@
 #include "StaticInit.hpp"
 
 #include "CDPL/Chem/MolecularGraphFunctions.hpp"
-#include "CDPL/Chem/AtomContainerFunctions.hpp"
+#include "CDPL/Chem/Entity3DContainerFunctions.hpp"
 #include "CDPL/Chem/MolecularGraphProperty.hpp"
 
 

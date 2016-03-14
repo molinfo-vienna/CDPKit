@@ -32,6 +32,7 @@
 #include <boost/bind.hpp>
 
 #include "CDPL/Chem/AtomContainerFunctions.hpp"
+#include "CDPL/Chem/Entity3DFunctions.hpp"
 #include "CDPL/Chem/AtomFunctions.hpp"
 #include "CDPL/Chem/Atom.hpp"
 
@@ -41,11 +42,14 @@ using namespace CDPL;
 
 bool Chem::hasCoordinates(const AtomContainer& cntnr, std::size_t dim)
 {
-	bool (*predFunc)(const Atom&) = (dim == 3 ? &has3DCoordinates : &has2DCoordinates);
+	if (dim == 3)
+		return (std::find_if(cntnr.getAtomsBegin(), cntnr.getAtomsEnd(),
+							 boost::bind(std::equal_to<bool>(), false,
+										 boost::bind(&has3DCoordinates, _1))) == cntnr.getAtomsEnd());
 
 	return (std::find_if(cntnr.getAtomsBegin(), cntnr.getAtomsEnd(),
 						 boost::bind(std::equal_to<bool>(), false,
-									 boost::bind(predFunc, _1))) == cntnr.getAtomsEnd());
+									 boost::bind(&has2DCoordinates, _1))) == cntnr.getAtomsEnd());
 }
 
 void Chem::get2DCoordinates(const AtomContainer& cntnr, Math::Vector2DArray& coords)
@@ -60,18 +64,4 @@ void Chem::set2DCoordinates(AtomContainer& cntnr, const Math::Vector2DArray& coo
 
 	for (std::size_t i = 0; i < num_atoms; i++) 
 		set2DCoordinates(cntnr.getAtom(i), coords[i]);
-}
-
-void Chem::get3DCoordinates(const AtomContainer& cntnr, Math::Vector3DArray& coords)
-{
-	for (AtomContainer::ConstAtomIterator it = cntnr.getAtomsBegin(), end = cntnr.getAtomsEnd(); it != end; ++it)
-		coords.addElement(get3DCoordinates(*it));
-}
-
-void Chem::set3DCoordinates(AtomContainer& cntnr, const Math::Vector3DArray& coords)
-{
-	std::size_t num_atoms = cntnr.getNumAtoms();
-
-	for (std::size_t i = 0; i < num_atoms; i++) 
-		set3DCoordinates(cntnr.getAtom(i), coords[i]);
 }
