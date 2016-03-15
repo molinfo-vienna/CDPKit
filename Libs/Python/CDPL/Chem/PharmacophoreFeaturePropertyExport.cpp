@@ -46,5 +46,12 @@ void CDPLPythonChem::exportPharmacophoreFeatureProperties()
 
 	python::class_<PharmacophoreFeatureProperty, boost::noncopyable>("PharmacophoreFeatureProperty", python::no_init)
 	    .def_readonly("TYPE", &Chem::PharmacophoreFeatureProperty::TYPE)
-	    .def_readonly("GEOMETRY", &Chem::PharmacophoreFeatureProperty::GEOMETRY);
+	    .def_readonly("GEOMETRY", &Chem::PharmacophoreFeatureProperty::GEOMETRY)
+	    .def_readonly("LENGTH", &Chem::PharmacophoreFeatureProperty::LENGTH)
+	    .def_readonly("ORIENTATION", &Chem::PharmacophoreFeatureProperty::ORIENTATION)
+	    .def_readonly("TOLERANCE", &Chem::PharmacophoreFeatureProperty::TOLERANCE)
+	    .def_readonly("SUBSTRUCTURE", &Chem::PharmacophoreFeatureProperty::SUBSTRUCTURE)
+	    .def_readonly("DISABLED_FLAG", &Chem::PharmacophoreFeatureProperty::DISABLED_FLAG)
+	    .def_readonly("OPTIONAL_FLAG", &Chem::PharmacophoreFeatureProperty::OPTIONAL_FLAG)
+		;
 }

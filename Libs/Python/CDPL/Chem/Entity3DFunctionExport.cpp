@@ -62,7 +62,7 @@ python::def("set"#FUNC_SUFFIX, &Chem::set##FUNC_SUFFIX, (python::arg("entity"), 
 namespace
 {
 
-    MAKE_ENTITY_FUNC_WRAPPERS(const CDPL::Math::Vector2D&, 3DCoordinates)
+    MAKE_ENTITY_FUNC_WRAPPERS(const CDPL::Math::Vector3D&, 3DCoordinates)
 }
 
 

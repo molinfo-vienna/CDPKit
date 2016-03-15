@@ -45,11 +45,27 @@ bool has##FUNC_SUFFIX##Wrapper(CDPL::Chem::PharmacophoreFeature& feature)   \
 	return has##FUNC_SUFFIX(feature);                                       \
 }
 
-#define EXPORT_FEATURE_FUNCS(FUNC_SUFFIX, ARG_NAME)                                                             \
-python::def("get"#FUNC_SUFFIX, &get##FUNC_SUFFIX##Wrapper, python::arg("feature"));                             \
-python::def("has"#FUNC_SUFFIX, &has##FUNC_SUFFIX##Wrapper, python::arg("feature"));                             \
-python::def("clear"#FUNC_SUFFIX, &Chem::clear##FUNC_SUFFIX, python::arg("feature"));                            \
+#define EXPORT_FEATURE_FUNCS(FUNC_SUFFIX, ARG_NAME)                                                           \
+python::def("get"#FUNC_SUFFIX, &get##FUNC_SUFFIX##Wrapper, python::arg("feature"));                           \
+python::def("has"#FUNC_SUFFIX, &has##FUNC_SUFFIX##Wrapper, python::arg("feature"));                           \
+python::def("clear"#FUNC_SUFFIX, &Chem::clear##FUNC_SUFFIX, python::arg("feature"));                          \
 python::def("set"#FUNC_SUFFIX, &Chem::set##FUNC_SUFFIX, (python::arg("feature"), python::arg(#ARG_NAME))); 
+
+#define EXPORT_FEATURE_FUNCS_INT_REF(FUNC_SUFFIX, ARG_NAME)                                                   \
+python::def("get"#FUNC_SUFFIX, &get##FUNC_SUFFIX##Wrapper, python::arg("feature"),                            \
+            python::return_internal_reference<1>());                                                          \
+python::def("has"#FUNC_SUFFIX, &has##FUNC_SUFFIX##Wrapper, python::arg("feature"));                           \
+python::def("clear"#FUNC_SUFFIX, &Chem::clear##FUNC_SUFFIX, python::arg("feature"));                          \
+python::def("set"#FUNC_SUFFIX, &Chem::set##FUNC_SUFFIX, (python::arg("feature"), python::arg(#ARG_NAME))); 
+
+#define EXPORT_FEATURE_FUNCS_COPY_REF_CW(FUNC_SUFFIX, ARG_NAME)                                               \
+python::def("get"#FUNC_SUFFIX, &get##FUNC_SUFFIX##Wrapper, python::arg("feature"),                            \
+            python::return_value_policy<python::copy_const_reference,                                         \
+			python::with_custodian_and_ward_postcall<0, 1> >());                                              \
+python::def("has"#FUNC_SUFFIX, &has##FUNC_SUFFIX##Wrapper, python::arg("feature"));                           \
+python::def("clear"#FUNC_SUFFIX, &Chem::clear##FUNC_SUFFIX, python::arg("feature"));                          \
+python::def("set"#FUNC_SUFFIX, &Chem::set##FUNC_SUFFIX, (python::arg("feature"), python::arg(#ARG_NAME)),     \
+			python::with_custodian_and_ward<1, 2>());                                                            
 
 
 namespace
@@ -57,6 +73,12 @@ namespace
 
     MAKE_FEATURE_FUNC_WRAPPERS(unsigned int, Type)
     MAKE_FEATURE_FUNC_WRAPPERS(unsigned int, Geometry)
+    MAKE_FEATURE_FUNC_WRAPPERS(double, Length)
+    MAKE_FEATURE_FUNC_WRAPPERS(double, Tolerance)
+    MAKE_FEATURE_FUNC_WRAPPERS(bool, DisabledFlag)
+    MAKE_FEATURE_FUNC_WRAPPERS(bool, OptionalFlag)
+	MAKE_FEATURE_FUNC_WRAPPERS(const CDPL::Math::Vector3D&, Orientation)
+	MAKE_FEATURE_FUNC_WRAPPERS(const CDPL::Chem::Fragment::SharedPointer&, Substructure)
 }
 
 
@@ -67,4 +89,10 @@ void CDPLPythonChem::exportPharmacophoreFeatureFunctions()
     
     EXPORT_FEATURE_FUNCS(Type, type)
     EXPORT_FEATURE_FUNCS(Geometry, geom)
+    EXPORT_FEATURE_FUNCS(Length, length)
+    EXPORT_FEATURE_FUNCS(Tolerance, tol)
+    EXPORT_FEATURE_FUNCS(DisabledFlag, flag)
+    EXPORT_FEATURE_FUNCS(OptionalFlag, flag)
+	EXPORT_FEATURE_FUNCS_INT_REF(Orientation, orient)
+	EXPORT_FEATURE_FUNCS_COPY_REF_CW(Substructure, substruct)
 }

@@ -1,7 +1,7 @@
 /* -*- mode: c++; c-basic-offset: 4; tab-width: 4; indent-tabs-mode: t -*- */
 
 /* 
- * PharmacophoreFeatureProperty.cpp 
+ * PharmacophoreFeatureDisabledFlagFunctions.cpp 
  *
  * This file is part of the Chemical Data Processing Toolkit
  *
@@ -9,7 +9,7 @@
  *
  * This library is free software; you can redistribute it and/or
  * modify it under the terms of the GNU Lesser General Public
- * License as published by the Free Software Foundation; either  
+ * License as published by the Free Software Foundation; either
  * version 2 of the License, or (at your option) any later version.
  *
  * This library is distributed in the hope that it will be useful,
@@ -26,32 +26,30 @@
 
 #include "StaticInit.hpp"
 
+#include "CDPL/Chem/PharmacophoreFeatureFunctions.hpp"
+#include "CDPL/Chem/PharmacophoreFeature.hpp"
 #include "CDPL/Chem/PharmacophoreFeatureProperty.hpp"
-#include "CDPL/Base/LookupKeyDefinition.hpp"
 
 
-namespace CDPL 
+using namespace CDPL; 
+
+
+bool Chem::getDisabledFlag(const PharmacophoreFeature& feature)
 {
+    return feature.getPropertyOrDefault<bool>(PharmacophoreFeatureProperty::DISABLED_FLAG, false);
+}
 
-    namespace Chem
-    {
+void Chem::setDisabledFlag(PharmacophoreFeature& feature, bool flag)
+{
+    feature.setProperty(PharmacophoreFeatureProperty::DISABLED_FLAG, flag);
+}
 
-	namespace PharmacophoreFeatureProperty
-	{
+void Chem::clearDisabledFlag(PharmacophoreFeature& feature)
+{
+    feature.removeProperty(PharmacophoreFeatureProperty::DISABLED_FLAG);
+}
 
-	    CDPL_DEFINE_LOOKUP_KEY(TYPE);
-
-	    CDPL_DEFINE_LOOKUP_KEY(GEOMETRY);
-	    CDPL_DEFINE_LOOKUP_KEY(LENGTH);
-	    CDPL_DEFINE_LOOKUP_KEY(ORIENTATION);
-	    CDPL_DEFINE_LOOKUP_KEY(TOLERANCE);
-
-	    CDPL_DEFINE_LOOKUP_KEY(SUBSTRUCTURE);
-
-	    CDPL_DEFINE_LOOKUP_KEY(DISABLED_FLAG);
-	    CDPL_DEFINE_LOOKUP_KEY(OPTIONAL_FLAG);
-	}
-
-	void initPharmacophoreFeatureProperties() {}
-    }
+bool Chem::hasDisabledFlag(const PharmacophoreFeature& feature)
+{
+    return feature.isPropertySet(PharmacophoreFeatureProperty::DISABLED_FLAG);
 }

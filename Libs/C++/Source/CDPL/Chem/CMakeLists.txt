@@ -138,6 +138,15 @@ SET(cdpl-chem_LIB_SRCS
 
     Entity3DCoordinatesFunctions.cpp
 
+    PharmacophoreFeatureTypeFunctions.cpp
+    PharmacophoreFeatureGeometryFunctions.cpp
+    PharmacophoreFeatureOrientationFunctions.cpp
+    PharmacophoreFeatureLengthFunctions.cpp
+    PharmacophoreFeatureToleranceFunctions.cpp
+    PharmacophoreFeatureSubstructureFunctions.cpp
+    PharmacophoreFeatureDisabledFlagFunctions.cpp
+    PharmacophoreFeatureOptionalFlagFunctions.cpp
+
     Entity3DContainerCoordinatesFunctions.cpp
     Entity3DContainerGeometricalDistanceMatrixFunction.cpp
     Entity3DContainerGeometricalDistanceFunctions.cpp
@@ -321,9 +330,6 @@ SET(cdpl-chem_LIB_SRCS
     ReactionSubstructSearchInitializationFunctions.cpp
     ReactionMaxReactionAtomMappingIDFunction.cpp
     ReactionMaxComponentGroupIDFunction.cpp
-
-    PharmacophoreFeatureTypeFunctions.cpp
-    PharmacophoreFeatureGeometryFunctions.cpp
 
     MoleculeHydrogenManipulationFunctions.cpp
     MoleculeReplaceStereoRefAtomsFunctions.cpp  

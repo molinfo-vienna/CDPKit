@@ -102,7 +102,7 @@ namespace CDPL
 			 *         are stored in the same order as the atoms appear in the atom list of the molecular graph
 			 *         (i.e. the canonical number of an atom is accessible via its index).
 			 */
-			CanonicalNumberingGenerator(const MolecularGraph& molgraph, Util::STArray& numberin);
+			CanonicalNumberingGenerator(const MolecularGraph& molgraph, Util::STArray& numbering);
 		
 			/**
 			 * \brief Allows to specify the set of atomic properties that has to be considered by the

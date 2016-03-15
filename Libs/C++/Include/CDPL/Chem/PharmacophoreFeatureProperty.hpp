@@ -40,30 +40,39 @@ namespace CDPL
     namespace Base
     {
 
-	class LookupKey;
+		class LookupKey;
     }
 
     namespace Chem
     {
 
-	/**
-	 * \addtogroup CDPL_CHEM_PHARMACOPHOREFEATURE_PROPERTIES
-	 * @{
-	 */
+		/**
+		 * \addtogroup CDPL_CHEM_PHARMACOPHOREFEATURE_PROPERTIES
+		 * @{
+		 */
 
-	/**
-	 * \brief Provides keys for built-in Chem::PharmacophoreFeature properties.
-	 */
-	namespace PharmacophoreFeatureProperty
-	{
+		/**
+		 * \brief Provides keys for built-in Chem::PharmacophoreFeature properties.
+		 */
+		namespace PharmacophoreFeatureProperty
+		{
 
-	    extern CDPL_CHEM_API const Base::LookupKey TYPE; 
-	    extern CDPL_CHEM_API const Base::LookupKey GEOMETRY; 
-	}
+			extern CDPL_CHEM_API const Base::LookupKey TYPE; 
 
-	/**
-	 * @}
-	 */
+			extern CDPL_CHEM_API const Base::LookupKey GEOMETRY; 
+			extern CDPL_CHEM_API const Base::LookupKey LENGTH; 
+			extern CDPL_CHEM_API const Base::LookupKey ORIENTATION; 
+			extern CDPL_CHEM_API const Base::LookupKey TOLERANCE; 
+
+			extern CDPL_CHEM_API const Base::LookupKey SUBSTRUCTURE; 
+
+			extern CDPL_CHEM_API const Base::LookupKey DISABLED_FLAG; 
+			extern CDPL_CHEM_API const Base::LookupKey OPTIONAL_FLAG; 
+		}
+
+		/**
+		 * @}
+		 */
     }
 }
 
