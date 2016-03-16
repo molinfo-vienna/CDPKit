@@ -1,7 +1,7 @@
 /* -*- mode: c++; c-basic-offset: 4; tab-width: 4; indent-tabs-mode: t -*- */
 
 /* 
- * PharmFeatureGeometry.hpp 
+ * FeatureProperty.hpp 
  *
  * This file is part of the Chemical Data Processing Toolkit
  *
@@ -25,43 +25,55 @@
 
 /**
  * \file
- * \brief Definition of constants in namespace CDPL::Chem::PharmFeatureGeometry.
+ * \brief Definition of constants in namespace CDPL::Chem::FeatureProperty.
  */
 
-#ifndef CDPL_CHEM_PHARMACOPHOREFEATUREGEOMETRY_HPP
-#define CDPL_CHEM_PHARMACOPHOREFEATUREGEOMETRY_HPP
+#ifndef CDPL_CHEM_FEATUREPROPERTY_HPP
+#define CDPL_CHEM_FEATUREPROPERTY_HPP
+
+#include "CDPL/Chem/APIPrefix.hpp"
 
 
 namespace CDPL 
 {
 
-    namespace Chem 
+    namespace Base
     {
 
-	/**
-	 * \addtogroup CDPL_CHEM_CONSTANTS
-	 * @{
-	 */
+		class LookupKey;
+    }
 
-	/**
-	 * \brief Provides constants for the specification of the generic geometry of a pharmacophore feature.
-	 */
-	namespace PharmFeatureGeometry 
-	{
-		
-	    const unsigned int UNDEF    = 0;
+    namespace Chem
+    {
 
-	    const unsigned int SPHERE   = 1;
+		/**
+		 * \addtogroup CDPL_CHEM_FEATURE_PROPERTIES
+		 * @{
+		 */
 
-	    const unsigned int VECTOR   = 2;
+		/**
+		 * \brief Provides keys for built-in Chem::Feature properties.
+		 */
+		namespace FeatureProperty
+		{
 
-	    const unsigned int PLANE    = 3;
-	}
+			extern CDPL_CHEM_API const Base::LookupKey TYPE; 
 
-	/**
-	 * @}
-	 */
+			extern CDPL_CHEM_API const Base::LookupKey GEOMETRY; 
+			extern CDPL_CHEM_API const Base::LookupKey LENGTH; 
+			extern CDPL_CHEM_API const Base::LookupKey ORIENTATION; 
+			extern CDPL_CHEM_API const Base::LookupKey TOLERANCE; 
+
+			extern CDPL_CHEM_API const Base::LookupKey SUBSTRUCTURE; 
+
+			extern CDPL_CHEM_API const Base::LookupKey DISABLED_FLAG; 
+			extern CDPL_CHEM_API const Base::LookupKey OPTIONAL_FLAG; 
+		}
+
+		/**
+		 * @}
+		 */
     }
 }
 
-#endif // CDPL_CHEM_PHARMACOPHOREFEATUREGEOMETRY_HPP
+#endif // CDPL_CHEM_FEATUREPROPERTY_HPP

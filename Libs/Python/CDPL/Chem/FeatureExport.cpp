@@ -1,7 +1,7 @@
 /* -*- mode: c++; c-basic-offset: 4; tab-width: 4; indent-tabs-mode: t -*- */
 
 /* 
- * PharmFeatureExport.cpp 
+ * FeatureExport.cpp 
  *
  * This file is part of the Chemical Data Processing Toolkit
  *
@@ -26,7 +26,7 @@
 
 #include <boost/python.hpp>
 
-#include "CDPL/Chem/PharmFeature.hpp"
+#include "CDPL/Chem/Feature.hpp"
 #include "CDPL/Chem/Pharmacophore.hpp"
 
 #include "Base/PropertyContainerVisitor.hpp"
@@ -37,10 +37,10 @@
 namespace
 {
 
-    struct PharmFeatureWrapper : CDPL::Chem::PharmFeature, boost::python::wrapper<CDPL::Chem::PharmFeature> 
+    struct FeatureWrapper : CDPL::Chem::Feature, boost::python::wrapper<CDPL::Chem::Feature> 
     {
 
-		PROPERTYCONTAINER_IMPL(PharmFeatureWrapper) 
+		PROPERTYCONTAINER_IMPL(FeatureWrapper) 
 
 		const CDPL::Chem::Pharmacophore& getPharmacophore() const {
 			return this->get_override("getPharmacophore")();
@@ -54,31 +54,31 @@ namespace
 			return this->get_override("getIndex")();
 		}
 
-		static CDPL::Chem::PharmFeature& assign(CDPL::Chem::PharmFeature& self, CDPL::Chem::PharmFeature& feature) {
+		static CDPL::Chem::Feature& assign(CDPL::Chem::Feature& self, CDPL::Chem::Feature& feature) {
 			return (self = feature);
 		}
     };
 }
 
 
-void CDPLPythonChem::exportPharmFeature()
+void CDPLPythonChem::exportFeature()
 {
     using namespace boost;
     using namespace CDPL;
 
-    Chem::Pharmacophore& (Chem::PharmFeature::*getPharmacophoreFunc)() = &Chem::PharmFeature::getPharmacophore;
+    Chem::Pharmacophore& (Chem::Feature::*getPharmacophoreFunc)() = &Chem::Feature::getPharmacophore;
 
-    python::class_<PharmFeatureWrapper, python::bases<Chem::Entity3D>,
-				   boost::noncopyable>("PharmFeature", python::no_init)
+    python::class_<FeatureWrapper, python::bases<Chem::Entity3D>,
+				   boost::noncopyable>("Feature", python::no_init)
 		.def(python::init<>(python::arg("self")))
 		.def("getPharmacophore", python::pure_virtual(getPharmacophoreFunc), python::arg("self"),
 			 python::return_internal_reference<1>())
-		.def("getIndex", python::pure_virtual(&Chem::PharmFeature::getIndex), python::arg("self"))
-		.def("assign", &PharmFeatureWrapper::assign, (python::arg("self"), python::arg("feature")), 
+		.def("getIndex", python::pure_virtual(&Chem::Feature::getIndex), python::arg("self"))
+		.def("assign", &FeatureWrapper::assign, (python::arg("self"), python::arg("feature")), 
 			 python::return_self<>())
-		.def(CDPLPythonBase::PropertyContainerVirtualFunctionsVisitor<PharmFeatureWrapper>())
+		.def(CDPLPythonBase::PropertyContainerVirtualFunctionsVisitor<FeatureWrapper>())
 		.def(CDPLPythonBase::PropertyContainerSpecialFunctionsVisitor())
 		.add_property("pharmacophore", python::make_function(getPharmacophoreFunc, 
 															 python::return_internal_reference<1>()))
-		.add_property("index", &Chem::PharmFeature::getIndex);
+		.add_property("index", &Chem::Feature::getIndex);
 }

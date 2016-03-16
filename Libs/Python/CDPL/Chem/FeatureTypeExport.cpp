@@ -1,7 +1,7 @@
 /* -*- mode: c++; c-basic-offset: 4; tab-width: 4; indent-tabs-mode: t -*- */
 
 /* 
- * PharmFeatureType.hpp 
+ * FeatureTypeExport.cpp 
  *
  * This file is part of the Chemical Data Processing Toolkit
  *
@@ -23,53 +23,33 @@
  * Boston, MA 02111-1307, USA.
  */
 
-/**
- * \file
- * \brief Definition of constants in namespace CDPL::Chem::PharmFeatureType.
- */
 
-#ifndef CDPL_CHEM_PHARMFEATURETYPE_HPP
-#define CDPL_CHEM_PHARMFEATURETYPE_HPP
+#include <boost/python.hpp>
+
+#include "CDPL/Chem/FeatureType.hpp"
+
+#include "NamespaceExports.hpp"
 
 
-namespace CDPL 
+namespace 
 {
 
-    namespace Chem 
-    {
-
-	/**
-	 * \addtogroup CDPL_CHEM_CONSTANTS
-	 * @{
-	 */
-
-	/**
-	 * \brief Provides constants for the specification of the generic type of a pharmacophore feature.
-	 */
-	namespace PharmFeatureType 
-	{
-		
-	    const unsigned int UNKNOWN         = 0x00;
-
-	    const unsigned int HYDROPHOBIC     = 0x01;
-
-	    const unsigned int AROMATIC        = 0x02;
-
-	    const unsigned int NEG_IONIZABLE   = 0x04;
-
-	    const unsigned int POS_IONIZABLE   = 0x08;
-
-	    const unsigned int H_BOND_DONOR    = 0x10;
-
-	    const unsigned int H_BOND_ACCEPTOR = 0x20;
-
-	    const unsigned int X_VOLUME        = 0x40;
-	}
-
-	/**
-	 * @}
-	 */
-    }
+    struct FeatureType {};
 }
 
-#endif // CDPL_CHEM_PHARMFEATURETYPE_HPP
+
+void CDPLPythonChem::exportFeatureTypes()
+{
+    using namespace boost;
+    using namespace CDPL;
+
+    python::class_<FeatureType, boost::noncopyable>("FeatureType", python::no_init)
+	.def_readonly("UNKNOWN", &Chem::FeatureType::UNKNOWN)
+	.def_readonly("HYDROPHOBIC", &Chem::FeatureType::HYDROPHOBIC)
+	.def_readonly("AROMATIC", &Chem::FeatureType::AROMATIC)
+	.def_readonly("NEG_IONIZABLE", &Chem::FeatureType::NEG_IONIZABLE)
+	.def_readonly("POS_IONIZABLE", &Chem::FeatureType::POS_IONIZABLE)
+	.def_readonly("H_BOND_DONOR", &Chem::FeatureType::H_BOND_DONOR)
+	.def_readonly("H_BOND_ACCEPTOR", &Chem::FeatureType::H_BOND_ACCEPTOR)
+	.def_readonly("X_VOLUME", &Chem::FeatureType::X_VOLUME);
+}

@@ -45,9 +45,9 @@ namespace CDPLPythonChem
 	void exportBasicMolecule();
 	void exportBasicReaction();
 	void exportPharmacophore();
-	void exportPharmFeature();
+	void exportFeature();
 	void exportBasicPharmacophore();
-	void exportBasicPharmFeature();
+	void exportBasicFeature();
 	void exportFragment();
 	void exportAtomMapping();
 	void exportBondMapping();

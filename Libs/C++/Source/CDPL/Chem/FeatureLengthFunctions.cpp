@@ -1,7 +1,7 @@
 /* -*- mode: c++; c-basic-offset: 4; tab-width: 4; indent-tabs-mode: t -*- */
 
 /* 
- * PharmFeatureLengthFunctions.cpp 
+ * FeatureLengthFunctions.cpp 
  *
  * This file is part of the Chemical Data Processing Toolkit
  *
@@ -26,30 +26,30 @@
 
 #include "StaticInit.hpp"
 
-#include "CDPL/Chem/PharmFeatureFunctions.hpp"
-#include "CDPL/Chem/PharmFeature.hpp"
-#include "CDPL/Chem/PharmFeatureProperty.hpp"
+#include "CDPL/Chem/FeatureFunctions.hpp"
+#include "CDPL/Chem/Feature.hpp"
+#include "CDPL/Chem/FeatureProperty.hpp"
 
 
 using namespace CDPL; 
 
 
-double Chem::getLength(const PharmFeature& feature)
+double Chem::getLength(const Feature& feature)
 {
-    return feature.getPropertyOrDefault<double>(PharmFeatureProperty::LENGTH, 1.0);
+    return feature.getPropertyOrDefault<double>(FeatureProperty::LENGTH, 1.0);
 }
 
-void Chem::setLength(PharmFeature& feature, double length)
+void Chem::setLength(Feature& feature, double length)
 {
-    feature.setProperty(PharmFeatureProperty::LENGTH, length);
+    feature.setProperty(FeatureProperty::LENGTH, length);
 }
 
-void Chem::clearLength(PharmFeature& feature)
+void Chem::clearLength(Feature& feature)
 {
-    feature.removeProperty(PharmFeatureProperty::LENGTH);
+    feature.removeProperty(FeatureProperty::LENGTH);
 }
 
-bool Chem::hasLength(const PharmFeature& feature)
+bool Chem::hasLength(const Feature& feature)
 {
-    return feature.isPropertySet(PharmFeatureProperty::LENGTH);
+    return feature.isPropertySet(FeatureProperty::LENGTH);
 }

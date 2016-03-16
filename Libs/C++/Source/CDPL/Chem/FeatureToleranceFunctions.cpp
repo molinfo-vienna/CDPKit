@@ -1,7 +1,7 @@
 /* -*- mode: c++; c-basic-offset: 4; tab-width: 4; indent-tabs-mode: t -*- */
 
 /* 
- * PharmFeatureOrientationFunctions.cpp 
+ * FeatureToleranceFunctions.cpp 
  *
  * This file is part of the Chemical Data Processing Toolkit
  *
@@ -26,30 +26,30 @@
 
 #include "StaticInit.hpp"
 
-#include "CDPL/Chem/PharmFeatureFunctions.hpp"
-#include "CDPL/Chem/PharmFeature.hpp"
-#include "CDPL/Chem/PharmFeatureProperty.hpp"
+#include "CDPL/Chem/FeatureFunctions.hpp"
+#include "CDPL/Chem/Feature.hpp"
+#include "CDPL/Chem/FeatureProperty.hpp"
 
 
 using namespace CDPL; 
 
 
-const Math::Vector3D& Chem::getOrientation(const PharmFeature& feature)
+double Chem::getTolerance(const Feature& feature)
 {
-    return feature.getProperty<Math::Vector3D>(PharmFeatureProperty::ORIENTATION);
+    return feature.getPropertyOrDefault<double>(FeatureProperty::TOLERANCE, 1.0);
 }
 
-void Chem::setOrientation(PharmFeature& feature, const Math::Vector3D& orient)
+void Chem::setTolerance(Feature& feature, double tol)
 {
-    feature.setProperty(PharmFeatureProperty::ORIENTATION, orient);
+    feature.setProperty(FeatureProperty::TOLERANCE, tol);
 }
 
-void Chem::clearOrientation(PharmFeature& feature)
+void Chem::clearTolerance(Feature& feature)
 {
-    feature.removeProperty(PharmFeatureProperty::ORIENTATION);
+    feature.removeProperty(FeatureProperty::TOLERANCE);
 }
 
-bool Chem::hasOrientation(const PharmFeature& feature)
+bool Chem::hasTolerance(const Feature& feature)
 {
-    return feature.isPropertySet(PharmFeatureProperty::ORIENTATION);
+    return feature.isPropertySet(FeatureProperty::TOLERANCE);
 }

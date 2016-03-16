@@ -1,7 +1,7 @@
 /* -*- mode: c++; c-basic-offset: 4; tab-width: 4; indent-tabs-mode: t -*- */
 
 /* 
- * BasicPharmFeatureExport.cpp 
+ * BasicFeature.cpp 
  *
  * This file is part of the Chemical Data Processing Toolkit
  *
@@ -23,36 +23,47 @@
  * Boston, MA 02111-1307, USA.
  */
 
+ 
+#include "StaticInit.hpp"
 
-#include <boost/python.hpp>
-
-#include "CDPL/Chem/BasicPharmFeature.hpp"
-
-#include "ClassExports.hpp"
+#include "CDPL/Chem/BasicFeature.hpp"
+#include "CDPL/Chem/BasicPharmacophore.hpp"
 
 
-namespace
+using namespace CDPL;
+
+
+Chem::BasicFeature::BasicFeature(BasicPharmacophore* pharm): pharmacophore(pharm) {}
+ 
+Chem::BasicFeature::~BasicFeature() {}
+
+std::size_t Chem::BasicFeature::getIndex() const
 {
-
-    CDPL::Chem::BasicPharmFeature& assignBasicFeature(CDPL::Chem::BasicPharmFeature& self, CDPL::Chem::BasicPharmFeature& feature)
-    {
-		return self.operator=(feature);
-    }
-
-    CDPL::Chem::PharmFeature& assignFeature(CDPL::Chem::PharmFeature& self, CDPL::Chem::PharmFeature& feature)
-    {
-		return self.operator=(feature);
-    }
+    return index;
 }
 
-
-void CDPLPythonChem::exportBasicPharmFeature()
+const Chem::Pharmacophore& Chem::BasicFeature::getPharmacophore() const
 {
-    using namespace boost;
-    using namespace CDPL;
-
-    python::class_<Chem::BasicPharmFeature, python::bases<Chem::PharmFeature>, 
-				   boost::noncopyable>("BasicPharmFeature", python::no_init)
-		.def("assign", &assignFeature, (python::arg("self"), python::arg("feature")), python::return_self<>())
-		.def("assign", &assignBasicFeature, (python::arg("self"), python::arg("feature")), python::return_self<>());
+    return *pharmacophore;
 }
+
+Chem::Pharmacophore& Chem::BasicFeature::getPharmacophore()
+{
+    return *pharmacophore;
+}
+
+void Chem::BasicFeature::setIndex(std::size_t idx)
+{
+    index = idx;
+}
+
+Chem::BasicFeature& Chem::BasicFeature::operator=(const BasicFeature& feature) 
+{
+    if (this == &feature)
+	return *this;
+
+    Feature::operator=(feature);
+
+    return *this;
+}
+

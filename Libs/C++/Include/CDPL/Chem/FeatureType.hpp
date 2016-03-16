@@ -1,7 +1,7 @@
 /* -*- mode: c++; c-basic-offset: 4; tab-width: 4; indent-tabs-mode: t -*- */
 
 /* 
- * PharmFeatureTypeExport.cpp 
+ * FeatureType.hpp 
  *
  * This file is part of the Chemical Data Processing Toolkit
  *
@@ -23,33 +23,53 @@
  * Boston, MA 02111-1307, USA.
  */
 
+/**
+ * \file
+ * \brief Definition of constants in namespace CDPL::Chem::FeatureType.
+ */
 
-#include <boost/python.hpp>
-
-#include "CDPL/Chem/PharmFeatureType.hpp"
-
-#include "NamespaceExports.hpp"
+#ifndef CDPL_CHEM_FEATURETYPE_HPP
+#define CDPL_CHEM_FEATURETYPE_HPP
 
 
-namespace 
+namespace CDPL 
 {
 
-    struct PharmFeatureType {};
+    namespace Chem 
+    {
+
+	/**
+	 * \addtogroup CDPL_CHEM_CONSTANTS
+	 * @{
+	 */
+
+	/**
+	 * \brief Provides constants for the specification of the generic type of a pharmacophore feature.
+	 */
+	namespace FeatureType 
+	{
+		
+	    const unsigned int UNKNOWN         = 0x00;
+
+	    const unsigned int HYDROPHOBIC     = 0x01;
+
+	    const unsigned int AROMATIC        = 0x02;
+
+	    const unsigned int NEG_IONIZABLE   = 0x04;
+
+	    const unsigned int POS_IONIZABLE   = 0x08;
+
+	    const unsigned int H_BOND_DONOR    = 0x10;
+
+	    const unsigned int H_BOND_ACCEPTOR = 0x20;
+
+	    const unsigned int X_VOLUME        = 0x40;
+	}
+
+	/**
+	 * @}
+	 */
+    }
 }
 
-
-void CDPLPythonChem::exportPharmFeatureTypes()
-{
-    using namespace boost;
-    using namespace CDPL;
-
-    python::class_<PharmFeatureType, boost::noncopyable>("PharmFeatureType", python::no_init)
-	.def_readonly("UNKNOWN", &Chem::PharmFeatureType::UNKNOWN)
-	.def_readonly("HYDROPHOBIC", &Chem::PharmFeatureType::HYDROPHOBIC)
-	.def_readonly("AROMATIC", &Chem::PharmFeatureType::AROMATIC)
-	.def_readonly("NEG_IONIZABLE", &Chem::PharmFeatureType::NEG_IONIZABLE)
-	.def_readonly("POS_IONIZABLE", &Chem::PharmFeatureType::POS_IONIZABLE)
-	.def_readonly("H_BOND_DONOR", &Chem::PharmFeatureType::H_BOND_DONOR)
-	.def_readonly("H_BOND_ACCEPTOR", &Chem::PharmFeatureType::H_BOND_ACCEPTOR)
-	.def_readonly("X_VOLUME", &Chem::PharmFeatureType::X_VOLUME);
-}
+#endif // CDPL_CHEM_FEATURETYPE_HPP

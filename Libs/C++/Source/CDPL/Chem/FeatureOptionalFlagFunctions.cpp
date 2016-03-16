@@ -1,7 +1,7 @@
 /* -*- mode: c++; c-basic-offset: 4; tab-width: 4; indent-tabs-mode: t -*- */
 
 /* 
- * PharmFeatureSubstructureFunctions.cpp 
+ * FeatureOptionalFlagFunctions.cpp 
  *
  * This file is part of the Chemical Data Processing Toolkit
  *
@@ -26,30 +26,30 @@
 
 #include "StaticInit.hpp"
 
-#include "CDPL/Chem/PharmFeatureFunctions.hpp"
-#include "CDPL/Chem/PharmFeature.hpp"
-#include "CDPL/Chem/PharmFeatureProperty.hpp"
+#include "CDPL/Chem/FeatureFunctions.hpp"
+#include "CDPL/Chem/Feature.hpp"
+#include "CDPL/Chem/FeatureProperty.hpp"
 
 
 using namespace CDPL; 
 
 
-const Chem::Fragment::SharedPointer& Chem::getSubstructure(const PharmFeature& feature)
+bool Chem::getOptionalFlag(const Feature& feature)
 {
-    return feature.getProperty<Fragment::SharedPointer>(PharmFeatureProperty::SUBSTRUCTURE);
+    return feature.getPropertyOrDefault<bool>(FeatureProperty::OPTIONAL_FLAG, false);
 }
 
-void Chem::setSubstructure(PharmFeature& feature, const Fragment::SharedPointer& substruct)
+void Chem::setOptionalFlag(Feature& feature, bool flag)
 {
-    feature.setProperty(PharmFeatureProperty::SUBSTRUCTURE, substruct);
+    feature.setProperty(FeatureProperty::OPTIONAL_FLAG, flag);
 }
 
-void Chem::clearSubstructure(PharmFeature& feature)
+void Chem::clearOptionalFlag(Feature& feature)
 {
-    feature.removeProperty(PharmFeatureProperty::SUBSTRUCTURE);
+    feature.removeProperty(FeatureProperty::OPTIONAL_FLAG);
 }
 
-bool Chem::hasSubstructure(const PharmFeature& feature)
+bool Chem::hasOptionalFlag(const Feature& feature)
 {
-    return feature.isPropertySet(PharmFeatureProperty::SUBSTRUCTURE);
+    return feature.isPropertySet(FeatureProperty::OPTIONAL_FLAG);
 }

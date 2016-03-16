@@ -1,7 +1,7 @@
 /* -*- mode: c++; c-basic-offset: 4; tab-width: 4; indent-tabs-mode: t -*- */
 
 /* 
- * BasicPharmFeature.cpp 
+ * BasicFeatureExport.cpp 
  *
  * This file is part of the Chemical Data Processing Toolkit
  *
@@ -23,47 +23,36 @@
  * Boston, MA 02111-1307, USA.
  */
 
- 
-#include "StaticInit.hpp"
 
-#include "CDPL/Chem/BasicPharmFeature.hpp"
-#include "CDPL/Chem/BasicPharmacophore.hpp"
+#include <boost/python.hpp>
 
+#include "CDPL/Chem/BasicFeature.hpp"
 
-using namespace CDPL;
+#include "ClassExports.hpp"
 
 
-Chem::BasicPharmFeature::BasicPharmFeature(BasicPharmacophore* pharm): pharmacophore(pharm) {}
- 
-Chem::BasicPharmFeature::~BasicPharmFeature() {}
-
-std::size_t Chem::BasicPharmFeature::getIndex() const
+namespace
 {
-    return index;
+
+    CDPL::Chem::BasicFeature& assignBasicFeature(CDPL::Chem::BasicFeature& self, CDPL::Chem::BasicFeature& feature)
+    {
+		return self.operator=(feature);
+    }
+
+    CDPL::Chem::Feature& assignFeature(CDPL::Chem::Feature& self, CDPL::Chem::Feature& feature)
+    {
+		return self.operator=(feature);
+    }
 }
 
-const Chem::Pharmacophore& Chem::BasicPharmFeature::getPharmacophore() const
+
+void CDPLPythonChem::exportBasicFeature()
 {
-    return *pharmacophore;
+    using namespace boost;
+    using namespace CDPL;
+
+    python::class_<Chem::BasicFeature, python::bases<Chem::Feature>, 
+				   boost::noncopyable>("BasicFeature", python::no_init)
+		.def("assign", &assignFeature, (python::arg("self"), python::arg("feature")), python::return_self<>())
+		.def("assign", &assignBasicFeature, (python::arg("self"), python::arg("feature")), python::return_self<>());
 }
-
-Chem::Pharmacophore& Chem::BasicPharmFeature::getPharmacophore()
-{
-    return *pharmacophore;
-}
-
-void Chem::BasicPharmFeature::setIndex(std::size_t idx)
-{
-    index = idx;
-}
-
-Chem::BasicPharmFeature& Chem::BasicPharmFeature::operator=(const BasicPharmFeature& feature) 
-{
-    if (this == &feature)
-	return *this;
-
-    PharmFeature::operator=(feature);
-
-    return *this;
-}
-

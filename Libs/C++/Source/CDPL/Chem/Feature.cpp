@@ -1,7 +1,7 @@
 /* -*- mode: c++; c-basic-offset: 4; tab-width: 4; indent-tabs-mode: t -*- */
 
 /* 
- * FunctionExports.hpp 
+ * Feature.cpp 
  *
  * This file is part of the Chemical Data Processing Toolkit
  *
@@ -23,31 +23,21 @@
  * Boston, MA 02111-1307, USA.
  */
 
+ 
+#include "StaticInit.hpp"
 
-#ifndef CDPL_PYTHON_CHEM_FUNCTIONEXPORTS_HPP
-#define CDPL_PYTHON_CHEM_FUNCTIONEXPORTS_HPP
+#include "CDPL/Chem/Feature.hpp"
 
 
-namespace CDPLPythonChem
+using namespace CDPL;
+
+
+Chem::Feature& Chem::Feature::operator=(const Feature& feature) 
 {
+    if (this == &feature)
+	return *this;
 
-	void exportAtomTypeFunctions();
-	void exportResidueFunctions();
-	void exportUtilityFunctions();
-	void exportControlParameterFunctions();
-	void exportAtomContainerFunctions();
-	void exportBondContainerFunctions();
-	void exportEntity3DContainerFunctions();
-	void exportEntity3DFunctions();
-	void exportAtomFunctions();
-	void exportBondFunctions();
-	void exportMolecularGraphFunctions();
-	void exportMoleculeFunctions();
-	void exportFragmentFunctions();
-	void exportReactionFunctions();
-	void exportPharmacophoreFunctions();
-	void exportFeatureFunctions();
-	void exportSimilarityFunctions();
+    Entity3D::operator=(feature);
+
+    return *this;
 }
-
-#endif // CDPL_PYTHON_CHEM_FUNCTIONEXPORTS_HPP

@@ -1,7 +1,7 @@
 /* -*- mode: c++; c-basic-offset: 4; tab-width: 4; indent-tabs-mode: t -*- */
 
 /* 
- * PharmFeatureTypeFunctions.cpp 
+ * PatternBasedFeatureGenerator.cpp 
  *
  * This file is part of the Chemical Data Processing Toolkit
  *
@@ -26,31 +26,26 @@
 
 #include "StaticInit.hpp"
 
-#include "CDPL/Chem/PharmFeatureFunctions.hpp"
-#include "CDPL/Chem/PharmFeature.hpp"
-#include "CDPL/Chem/PharmFeatureType.hpp"
-#include "CDPL/Chem/PharmFeatureProperty.hpp"
+#include "CDPL/Chem/PatternBasedFeatureGenerator.hpp"
+#include "CDPL/Chem/MolecularGraph.hpp"
+#include "CDPL/Chem/Pharmacophore.hpp"
+#include "CDPL/Chem/Feature.hpp"
+#include "CDPL/Chem/FeatureFunctions.hpp"
 
 
 using namespace CDPL; 
 
 
-unsigned int Chem::getType(const PharmFeature& feature)
+Chem::PatternBasedFeatureGenerator::PatternBasedFeatureGenerator() {}
+
+std::size_t Chem::PatternBasedFeatureGenerator::generate(const MolecularGraph& molgraph, Pharmacophore& pharm)
 {
-    return feature.getPropertyOrDefault<unsigned int>(PharmFeatureProperty::TYPE, PharmFeatureType::UNKNOWN);
+    init(molgraph);
+
+    return 0;
 }
 
-void Chem::setType(PharmFeature& feature, unsigned int type)
+void Chem::PatternBasedFeatureGenerator::init(const MolecularGraph& molgraph)
 {
-    feature.setProperty(PharmFeatureProperty::TYPE, type);
-}
-
-void Chem::clearType(PharmFeature& feature)
-{
-    feature.removeProperty(PharmFeatureProperty::TYPE);
-}
-
-bool Chem::hasType(const PharmFeature& feature)
-{
-    return feature.isPropertySet(PharmFeatureProperty::TYPE);
+    molGraph = &molgraph;
 }

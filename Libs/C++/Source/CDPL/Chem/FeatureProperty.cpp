@@ -1,7 +1,7 @@
 /* -*- mode: c++; c-basic-offset: 4; tab-width: 4; indent-tabs-mode: t -*- */
 
 /* 
- * PharmFeatureToleranceFunctions.cpp 
+ * FeatureProperty.cpp 
  *
  * This file is part of the Chemical Data Processing Toolkit
  *
@@ -9,7 +9,7 @@
  *
  * This library is free software; you can redistribute it and/or
  * modify it under the terms of the GNU Lesser General Public
- * License as published by the Free Software Foundation; either
+ * License as published by the Free Software Foundation; either  
  * version 2 of the License, or (at your option) any later version.
  *
  * This library is distributed in the hope that it will be useful,
@@ -26,30 +26,32 @@
 
 #include "StaticInit.hpp"
 
-#include "CDPL/Chem/PharmFeatureFunctions.hpp"
-#include "CDPL/Chem/PharmFeature.hpp"
-#include "CDPL/Chem/PharmFeatureProperty.hpp"
+#include "CDPL/Chem/FeatureProperty.hpp"
+#include "CDPL/Base/LookupKeyDefinition.hpp"
 
 
-using namespace CDPL; 
-
-
-double Chem::getTolerance(const PharmFeature& feature)
+namespace CDPL 
 {
-    return feature.getPropertyOrDefault<double>(PharmFeatureProperty::TOLERANCE, 1.0);
-}
 
-void Chem::setTolerance(PharmFeature& feature, double tol)
-{
-    feature.setProperty(PharmFeatureProperty::TOLERANCE, tol);
-}
+    namespace Chem
+    {
 
-void Chem::clearTolerance(PharmFeature& feature)
-{
-    feature.removeProperty(PharmFeatureProperty::TOLERANCE);
-}
+		namespace FeatureProperty
+		{
 
-bool Chem::hasTolerance(const PharmFeature& feature)
-{
-    return feature.isPropertySet(PharmFeatureProperty::TOLERANCE);
+			CDPL_DEFINE_LOOKUP_KEY(TYPE);
+
+			CDPL_DEFINE_LOOKUP_KEY(GEOMETRY);
+			CDPL_DEFINE_LOOKUP_KEY(LENGTH);
+			CDPL_DEFINE_LOOKUP_KEY(ORIENTATION);
+			CDPL_DEFINE_LOOKUP_KEY(TOLERANCE);
+
+			CDPL_DEFINE_LOOKUP_KEY(SUBSTRUCTURE);
+
+			CDPL_DEFINE_LOOKUP_KEY(DISABLED_FLAG);
+			CDPL_DEFINE_LOOKUP_KEY(OPTIONAL_FLAG);
+		}
+
+		void initFeatureProperties() {}
+    }
 }

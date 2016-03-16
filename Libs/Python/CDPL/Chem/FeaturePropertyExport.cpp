@@ -1,7 +1,7 @@
 /* -*- mode: c++; c-basic-offset: 4; tab-width: 4; indent-tabs-mode: t -*- */
 
 /* 
- * PharmFeature.cpp 
+ * FeaturePropertyExport.cpp 
  *
  * This file is part of the Chemical Data Processing Toolkit
  *
@@ -23,21 +23,35 @@
  * Boston, MA 02111-1307, USA.
  */
 
- 
-#include "StaticInit.hpp"
 
-#include "CDPL/Chem/PharmFeature.hpp"
+#include <boost/python.hpp>
+
+#include "CDPL/Chem/FeatureProperty.hpp"
+#include "CDPL/Base/LookupKey.hpp"
+
+#include "NamespaceExports.hpp"
 
 
-using namespace CDPL;
-
-
-Chem::PharmFeature& Chem::PharmFeature::operator=(const PharmFeature& feature) 
+namespace 
 {
-    if (this == &feature)
-	return *this;
 
-    Entity3D::operator=(feature);
+	struct FeatureProperty {};
+}
 
-    return *this;
+
+void CDPLPythonChem::exportFeatureProperties()
+{
+	using namespace boost;
+	using namespace CDPL;
+
+	python::class_<FeatureProperty, boost::noncopyable>("FeatureProperty", python::no_init)
+	    .def_readonly("TYPE", &Chem::FeatureProperty::TYPE)
+	    .def_readonly("GEOMETRY", &Chem::FeatureProperty::GEOMETRY)
+	    .def_readonly("LENGTH", &Chem::FeatureProperty::LENGTH)
+	    .def_readonly("ORIENTATION", &Chem::FeatureProperty::ORIENTATION)
+	    .def_readonly("TOLERANCE", &Chem::FeatureProperty::TOLERANCE)
+	    .def_readonly("SUBSTRUCTURE", &Chem::FeatureProperty::SUBSTRUCTURE)
+	    .def_readonly("DISABLED_FLAG", &Chem::FeatureProperty::DISABLED_FLAG)
+	    .def_readonly("OPTIONAL_FLAG", &Chem::FeatureProperty::OPTIONAL_FLAG)
+		;
 }

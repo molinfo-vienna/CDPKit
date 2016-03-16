@@ -1,7 +1,7 @@
 /* -*- mode: c++; c-basic-offset: 4; tab-width: 4; indent-tabs-mode: t -*- */
 
 /* 
- * PharmFeaturePropertyExport.cpp 
+ * FeatureGeometryExport.cpp 
  *
  * This file is part of the Chemical Data Processing Toolkit
  *
@@ -26,8 +26,7 @@
 
 #include <boost/python.hpp>
 
-#include "CDPL/Chem/PharmFeatureProperty.hpp"
-#include "CDPL/Base/LookupKey.hpp"
+#include "CDPL/Chem/FeatureGeometry.hpp"
 
 #include "NamespaceExports.hpp"
 
@@ -35,23 +34,18 @@
 namespace 
 {
 
-	struct PharmFeatureProperty {};
+    struct FeatureGeometry {};
 }
 
 
-void CDPLPythonChem::exportPharmFeatureProperties()
+void CDPLPythonChem::exportFeatureGeometries()
 {
-	using namespace boost;
-	using namespace CDPL;
+    using namespace boost;
+    using namespace CDPL;
 
-	python::class_<PharmFeatureProperty, boost::noncopyable>("PharmFeatureProperty", python::no_init)
-	    .def_readonly("TYPE", &Chem::PharmFeatureProperty::TYPE)
-	    .def_readonly("GEOMETRY", &Chem::PharmFeatureProperty::GEOMETRY)
-	    .def_readonly("LENGTH", &Chem::PharmFeatureProperty::LENGTH)
-	    .def_readonly("ORIENTATION", &Chem::PharmFeatureProperty::ORIENTATION)
-	    .def_readonly("TOLERANCE", &Chem::PharmFeatureProperty::TOLERANCE)
-	    .def_readonly("SUBSTRUCTURE", &Chem::PharmFeatureProperty::SUBSTRUCTURE)
-	    .def_readonly("DISABLED_FLAG", &Chem::PharmFeatureProperty::DISABLED_FLAG)
-	    .def_readonly("OPTIONAL_FLAG", &Chem::PharmFeatureProperty::OPTIONAL_FLAG)
-		;
+    python::class_<FeatureGeometry, boost::noncopyable>("FeatureGeometry", python::no_init)
+	.def_readonly("UNDEF", &Chem::FeatureGeometry::UNDEF)
+	.def_readonly("SPHERE", &Chem::FeatureGeometry::SPHERE)
+	.def_readonly("VECTOR", &Chem::FeatureGeometry::VECTOR)
+	.def_readonly("PLANE", &Chem::FeatureGeometry::PLANE);
 }

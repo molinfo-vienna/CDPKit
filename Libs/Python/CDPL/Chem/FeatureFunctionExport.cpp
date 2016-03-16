@@ -1,7 +1,7 @@
 /* -*- mode: c++; c-basic-offset: 4; tab-width: 4; indent-tabs-mode: t -*- */
 
 /* 
- * PharmFeatureFunctionExport.cpp 
+ * FeatureFunctionExport.cpp 
  *
  * This file is part of the Chemical Data Processing Toolkit
  *
@@ -26,8 +26,8 @@
 
 #include <boost/python.hpp>
 
-#include "CDPL/Chem/PharmFeature.hpp"
-#include "CDPL/Chem/PharmFeatureFunctions.hpp"
+#include "CDPL/Chem/Feature.hpp"
+#include "CDPL/Chem/FeatureFunctions.hpp"
 #include "CDPL/Chem/StereoDescriptor.hpp"
 
 #include "FunctionExports.hpp"
@@ -35,12 +35,12 @@
 
 
 #define MAKE_FEATURE_FUNC_WRAPPERS(TYPE, FUNC_SUFFIX)               \
-TYPE get##FUNC_SUFFIX##Wrapper(CDPL::Chem::PharmFeature& feature)   \
+TYPE get##FUNC_SUFFIX##Wrapper(CDPL::Chem::Feature& feature)   \
 {                                                                   \
 	return get##FUNC_SUFFIX(feature);                               \
 }                                                                   \
                                                                     \
-bool has##FUNC_SUFFIX##Wrapper(CDPL::Chem::PharmFeature& feature)   \
+bool has##FUNC_SUFFIX##Wrapper(CDPL::Chem::Feature& feature)   \
 {                                                                   \
 	return has##FUNC_SUFFIX(feature);                               \
 }
@@ -82,7 +82,7 @@ namespace
 }
 
 
-void CDPLPythonChem::exportPharmFeatureFunctions()
+void CDPLPythonChem::exportFeatureFunctions()
 {
     using namespace boost;
     using namespace CDPL;

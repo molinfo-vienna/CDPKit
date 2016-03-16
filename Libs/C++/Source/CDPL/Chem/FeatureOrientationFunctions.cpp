@@ -1,7 +1,7 @@
 /* -*- mode: c++; c-basic-offset: 4; tab-width: 4; indent-tabs-mode: t -*- */
 
 /* 
- * PharmFeatureProperty.cpp 
+ * FeatureOrientationFunctions.cpp 
  *
  * This file is part of the Chemical Data Processing Toolkit
  *
@@ -9,7 +9,7 @@
  *
  * This library is free software; you can redistribute it and/or
  * modify it under the terms of the GNU Lesser General Public
- * License as published by the Free Software Foundation; either  
+ * License as published by the Free Software Foundation; either
  * version 2 of the License, or (at your option) any later version.
  *
  * This library is distributed in the hope that it will be useful,
@@ -26,32 +26,30 @@
 
 #include "StaticInit.hpp"
 
-#include "CDPL/Chem/PharmFeatureProperty.hpp"
-#include "CDPL/Base/LookupKeyDefinition.hpp"
+#include "CDPL/Chem/FeatureFunctions.hpp"
+#include "CDPL/Chem/Feature.hpp"
+#include "CDPL/Chem/FeatureProperty.hpp"
 
 
-namespace CDPL 
+using namespace CDPL; 
+
+
+const Math::Vector3D& Chem::getOrientation(const Feature& feature)
 {
+    return feature.getProperty<Math::Vector3D>(FeatureProperty::ORIENTATION);
+}
 
-    namespace Chem
-    {
+void Chem::setOrientation(Feature& feature, const Math::Vector3D& orient)
+{
+    feature.setProperty(FeatureProperty::ORIENTATION, orient);
+}
 
-	namespace PharmFeatureProperty
-	{
+void Chem::clearOrientation(Feature& feature)
+{
+    feature.removeProperty(FeatureProperty::ORIENTATION);
+}
 
-	    CDPL_DEFINE_LOOKUP_KEY(TYPE);
-
-	    CDPL_DEFINE_LOOKUP_KEY(GEOMETRY);
-	    CDPL_DEFINE_LOOKUP_KEY(LENGTH);
-	    CDPL_DEFINE_LOOKUP_KEY(ORIENTATION);
-	    CDPL_DEFINE_LOOKUP_KEY(TOLERANCE);
-
-	    CDPL_DEFINE_LOOKUP_KEY(SUBSTRUCTURE);
-
-	    CDPL_DEFINE_LOOKUP_KEY(DISABLED_FLAG);
-	    CDPL_DEFINE_LOOKUP_KEY(OPTIONAL_FLAG);
-	}
-
-	void initPharmFeatureProperties() {}
-    }
+bool Chem::hasOrientation(const Feature& feature)
+{
+    return feature.isPropertySet(FeatureProperty::ORIENTATION);
 }

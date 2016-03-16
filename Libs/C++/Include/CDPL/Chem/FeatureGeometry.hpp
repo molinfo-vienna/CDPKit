@@ -1,7 +1,7 @@
 /* -*- mode: c++; c-basic-offset: 4; tab-width: 4; indent-tabs-mode: t -*- */
 
 /* 
- * PharmFeatureGeometryExport.cpp 
+ * FeatureGeometry.hpp 
  *
  * This file is part of the Chemical Data Processing Toolkit
  *
@@ -23,29 +23,45 @@
  * Boston, MA 02111-1307, USA.
  */
 
+/**
+ * \file
+ * \brief Definition of constants in namespace CDPL::Chem::FeatureGeometry.
+ */
 
-#include <boost/python.hpp>
-
-#include "CDPL/Chem/PharmFeatureGeometry.hpp"
-
-#include "NamespaceExports.hpp"
+#ifndef CDPL_CHEM_FEATUREGEOMETRY_HPP
+#define CDPL_CHEM_FEATUREGEOMETRY_HPP
 
 
-namespace 
+namespace CDPL 
 {
 
-    struct PharmFeatureGeometry {};
+    namespace Chem 
+    {
+
+	/**
+	 * \addtogroup CDPL_CHEM_CONSTANTS
+	 * @{
+	 */
+
+	/**
+	 * \brief Provides constants for the specification of the generic geometry of a pharmacophore feature.
+	 */
+	namespace FeatureGeometry 
+	{
+		
+	    const unsigned int UNDEF    = 0;
+
+	    const unsigned int SPHERE   = 1;
+
+	    const unsigned int VECTOR   = 2;
+
+	    const unsigned int PLANE    = 3;
+	}
+
+	/**
+	 * @}
+	 */
+    }
 }
 
-
-void CDPLPythonChem::exportPharmFeatureGeometries()
-{
-    using namespace boost;
-    using namespace CDPL;
-
-    python::class_<PharmFeatureGeometry, boost::noncopyable>("PharmFeatureGeometry", python::no_init)
-	.def_readonly("UNDEF", &Chem::PharmFeatureGeometry::UNDEF)
-	.def_readonly("SPHERE", &Chem::PharmFeatureGeometry::SPHERE)
-	.def_readonly("VECTOR", &Chem::PharmFeatureGeometry::VECTOR)
-	.def_readonly("PLANE", &Chem::PharmFeatureGeometry::PLANE);
-}
+#endif // CDPL_CHEM_FEATUREGEOMETRY_HPP

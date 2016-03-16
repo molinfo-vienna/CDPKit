@@ -1,7 +1,7 @@
 /* -*- mode: c++; c-basic-offset: 4; tab-width: 4; indent-tabs-mode: t -*- */
 
 /* 
- * PharmFeature.hpp
+ * BasicFeature.hpp
  *
  * This file is part of the Chemical Data Processing Toolkit
  *
@@ -25,14 +25,14 @@
 
 /**
  * \file
- * \brief Definition of the class CDPL::Chem::PharmFeature.
+ * \brief Definition of the class CDPL::Chem::BasicFeature.
  */
 
-#ifndef CDPL_CHEM_PHARMFEATURE_HPP
-#define CDPL_CHEM_PHARMFEATURE_HPP
+#ifndef CDPL_CHEM_BASICFEATURE_HPP
+#define CDPL_CHEM_BASICFEATURE_HPP
 
 #include "CDPL/Chem/APIPrefix.hpp"
-#include "CDPL/Chem/Entity3D.hpp"
+#include "CDPL/Chem/Feature.hpp"
 
 
 namespace CDPL 
@@ -41,50 +41,48 @@ namespace CDPL
     namespace Chem 
     {
 
-	class Pharmacophore;
+	class BasicPharmacophore;
 
 	/**
-	 * \addtogroup CDPL_CHEM_PHARMACOPHORE_INTERFACES
+	 * \addtogroup CDPL_CHEM_PHARMACOPHORE_IMPLEMENTATIONS
 	 * @{
 	 */
 
 	/**
-	 * \brief PharmFeature.
+	 * \brief BasicFeature.
 	 */
-	class CDPL_CHEM_API PharmFeature : public Entity3D
+	class CDPL_CHEM_API BasicFeature : public Feature
 	{
 
-	  public:
-	    /**
-	     * \brief Returns a \c const reference to the parent pharmacophore.
-	     * \return A \c const reference to the parent pharmacophore.
-	     */
-	    virtual const Pharmacophore& getPharmacophore() const = 0;
+	    friend class BasicPharmacophore;
 
-	    /**
-	     * \brief Returns a non-\c const reference to the parent pharmacophore.
-	     * \return A non-\c const reference to the parent pharmacophore.
-	     */
-	    virtual Pharmacophore& getPharmacophore() = 0;
+	  public:
+	    const Pharmacophore& getPharmacophore() const;
+
+	    Pharmacophore& getPharmacophore();
 	
-	    /**
-	     * \brief Returns the index of the feature in its parent pharmacophore.
-	     * \return The zero-based index of the feature.
-	     */
-	    virtual std::size_t getIndex() const = 0;
+	    std::size_t getIndex() const;
 		
 	    /**
 	     * \brief Assignment operator that replaces the current set of properties with the properties of \a feature;
 	     * \param feature The feature whose properties get copied.
 	     * \return A reference to itself.
 	     */
-	    PharmFeature& operator=(const PharmFeature& feature);
+	    BasicFeature& operator=(const BasicFeature& feature);
 
-	  protected:
-	    /**
-	     * \brief Virtual destructor.
-	     */
-	    virtual ~PharmFeature() {}
+	    using Feature::operator=;
+
+	  private:
+	    BasicFeature(BasicPharmacophore* pharm);
+	    
+	    BasicFeature(const BasicFeature& feature);
+
+	    ~BasicFeature();
+
+	    void setIndex(std::size_t idx);
+
+	    BasicPharmacophore* pharmacophore;
+	    std::size_t         index;
 	};
 
 	/**
@@ -93,4 +91,4 @@ namespace CDPL
     }
 }
 
-#endif // CDPL_CHEM_PHARMFEATURE_HPP
+#endif // CDPL_CHEM_BASICFEATURE_HPP
