@@ -102,7 +102,7 @@ BOOST_AUTO_TEST_CASE(BasicPharmacophoreTest)
 
 //-----	
 
-	BasicPharmacophoreFeature& pharm1_feature1 = pharm1.addFeature();
+	BasicPharmFeature& pharm1_feature1 = pharm1.addFeature();
 
 	pharm1_feature1.setProperty(prop_key2, std::string("C"));
 
@@ -130,15 +130,15 @@ BOOST_AUTO_TEST_CASE(BasicPharmacophoreTest)
 
 //-----	
 
-	BasicPharmacophoreFeature& pharm1_feature2 = pharm1.addFeature();
+	BasicPharmFeature& pharm1_feature2 = pharm1.addFeature();
 	pharm1_feature2.setProperty(prop_key2, std::string("H"));
 
-	BasicPharmacophoreFeature& pharm1_feature3 = (pharm1.addFeature() = pharm1_feature2);
+	BasicPharmFeature& pharm1_feature3 = (pharm1.addFeature() = pharm1_feature2);
 
-	BasicPharmacophoreFeature& pharm1_feature4 = pharm1.addFeature();
+	BasicPharmFeature& pharm1_feature4 = pharm1.addFeature();
 	pharm1_feature4.setProperty(prop_key2, std::string("O"));
 
-	BasicPharmacophoreFeature& pharm1_feature5 = (pharm1.addFeature() = pharm1_feature3);
+	BasicPharmFeature& pharm1_feature5 = (pharm1.addFeature() = pharm1_feature3);
 
 	BOOST_CHECK(pharm1.getNumFeatures() == 5);
 
@@ -1297,11 +1297,11 @@ BOOST_AUTO_TEST_CASE(BasicPharmacophoreTest)
 
 //-----
 
-	BasicPharmacophoreFeature& pharm2_feature1 = pharm2.getFeature(0);
-	BasicPharmacophoreFeature& pharm2_feature2 = pharm2.getFeature(1);
-	BasicPharmacophoreFeature& pharm2_feature3 = pharm2.getFeature(2);
-	BasicPharmacophoreFeature& pharm2_feature4 = pharm2.getFeature(3);
-	BasicPharmacophoreFeature& pharm2_feature5 = pharm2.getFeature(4);
+	BasicPharmFeature& pharm2_feature1 = pharm2.getFeature(0);
+	BasicPharmFeature& pharm2_feature2 = pharm2.getFeature(1);
+	BasicPharmFeature& pharm2_feature3 = pharm2.getFeature(2);
+	BasicPharmFeature& pharm2_feature4 = pharm2.getFeature(3);
+	BasicPharmFeature& pharm2_feature5 = pharm2.getFeature(4);
 
 	BOOST_CHECK(pharm2.getNumFeatures() == 5);
 

@@ -38,7 +38,7 @@
 
 #include "CDPL/Chem/APIPrefix.hpp"
 #include "CDPL/Chem/Pharmacophore.hpp"
-#include "CDPL/Chem/BasicPharmacophoreFeature.hpp"
+#include "CDPL/Chem/BasicPharmFeature.hpp"
 
 
 namespace CDPL 
@@ -58,7 +58,7 @@ namespace CDPL
 	class CDPL_CHEM_API BasicPharmacophore : public Pharmacophore
 	{
 
-	    typedef std::vector<BasicPharmacophoreFeature*> FeaturePtrList;
+	    typedef std::vector<BasicPharmFeature*> FeaturePtrList;
 
 	  public:
 	    /**	
@@ -66,8 +66,8 @@ namespace CDPL
 	     */
 	    typedef boost::shared_ptr<BasicPharmacophore> SharedPointer;
 		
-	    typedef boost::indirect_iterator<FeaturePtrList::iterator, BasicPharmacophoreFeature> FeatureIterator;
-	    typedef boost::indirect_iterator<FeaturePtrList::const_iterator, const BasicPharmacophoreFeature> ConstFeatureIterator;
+	    typedef boost::indirect_iterator<FeaturePtrList::iterator, BasicPharmFeature> FeatureIterator;
+	    typedef boost::indirect_iterator<FeaturePtrList::const_iterator, const BasicPharmFeature> ConstFeatureIterator;
 		
 	    /**
 	     * \brief Constructs an empty \c %BasicPharmacophore instance.
@@ -121,11 +121,11 @@ namespace CDPL
 	     */
 	    FeatureIterator getFeaturesEnd();
 
-	    const BasicPharmacophoreFeature& getFeature(std::size_t idx) const;
+	    const BasicPharmFeature& getFeature(std::size_t idx) const;
 
-	    BasicPharmacophoreFeature& getFeature(std::size_t idx);
+	    BasicPharmFeature& getFeature(std::size_t idx);
 
-	    BasicPharmacophoreFeature& addFeature();
+	    BasicPharmFeature& addFeature();
 		
 	    void removeFeature(std::size_t idx);
 		
@@ -138,9 +138,9 @@ namespace CDPL
 	     */
 	    FeatureIterator removeFeature(const FeatureIterator& it);
 				
-	    bool containsFeature(const PharmacophoreFeature& feature) const;
+	    bool containsFeature(const PharmFeature& feature) const;
 				
-	    std::size_t getFeatureIndex(const PharmacophoreFeature& feature) const;
+	    std::size_t getFeatureIndex(const PharmFeature& feature) const;
 
 	    /**
 	     * \brief Replaces the current set of features by a copy of the
@@ -200,12 +200,12 @@ namespace CDPL
 
 	    void renumberFeatures(std::size_t idx);
 
-	    BasicPharmacophoreFeature* allocFeature();
-	    void freeFeature(BasicPharmacophoreFeature* feature);
+	    BasicPharmFeature* allocFeature();
+	    void freeFeature(BasicPharmFeature* feature);
 
-	    static void destroyFeature(BasicPharmacophoreFeature* feature);
+	    static void destroyFeature(BasicPharmFeature* feature);
 		
-	    typedef boost::shared_ptr<BasicPharmacophoreFeature> SharedFeaturePointer;
+	    typedef boost::shared_ptr<BasicPharmFeature> SharedFeaturePointer;
 
 	    typedef std::vector<SharedFeaturePointer> AllocFeatureList;
 

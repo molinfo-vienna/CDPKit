@@ -1,7 +1,7 @@
 /* -*- mode: c++; c-basic-offset: 4; tab-width: 4; indent-tabs-mode: t -*- */
 
 /* 
- * BasicPharmacophoreFeatureTest.cpp 
+ * PharmFeatureTest.cpp 
  *
  * This file is part of the Chemical Data Processing Toolkit
  *
@@ -31,13 +31,14 @@
 #include "CDPL/Base/LookupKey.hpp"
 
 
-BOOST_AUTO_TEST_CASE(BasicPharmacophoreFeatureTest)
+BOOST_AUTO_TEST_CASE(PharmFeatureTest)
 {
 	using namespace CDPL;
 	using namespace Chem;
 	using namespace Base;
 
-	BasicPharmacophore pharm;
+	Pharmacophore::SharedPointer pharm_ptr(new BasicPharmacophore());
+	Pharmacophore& pharm = *pharm_ptr;
 
 	pharm.addFeature();
 	pharm.addFeature();
@@ -47,13 +48,13 @@ BOOST_AUTO_TEST_CASE(BasicPharmacophoreFeatureTest)
 	for (std::size_t i = 0; i < pharm.getNumFeatures(); i++)
 		BOOST_CHECK(pharm.getFeature(i).getIndex() == i);
 
-	BOOST_CHECK(&const_cast<const BasicPharmacophoreFeature&>(pharm.getFeature(0)).getPharmacophore() == &pharm);
-	BOOST_CHECK(&const_cast<BasicPharmacophoreFeature&>(pharm.getFeature(0)).getPharmacophore() == &pharm);
+	BOOST_CHECK(&const_cast<const PharmFeature&>(pharm.getFeature(0)).getPharmacophore() == &pharm);
+	BOOST_CHECK(&const_cast<PharmFeature&>(pharm.getFeature(0)).getPharmacophore() == &pharm);
 
 	//-----
 
-	BOOST_CHECK(&const_cast<const BasicPharmacophoreFeature&>(pharm.getFeature(1)).getPharmacophore() == &pharm);
-	BOOST_CHECK(&const_cast<BasicPharmacophoreFeature&>(pharm.getFeature(1)).getPharmacophore() == &pharm);
+	BOOST_CHECK(&const_cast<const PharmFeature&>(pharm.getFeature(1)).getPharmacophore() == &pharm);
+	BOOST_CHECK(&const_cast<PharmFeature&>(pharm.getFeature(1)).getPharmacophore() == &pharm);
 
 	//-----
 

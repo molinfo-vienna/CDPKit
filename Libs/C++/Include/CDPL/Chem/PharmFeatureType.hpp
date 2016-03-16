@@ -1,7 +1,7 @@
 /* -*- mode: c++; c-basic-offset: 4; tab-width: 4; indent-tabs-mode: t -*- */
 
 /* 
- * PharmacophoreFeatureGeometry.hpp 
+ * PharmFeatureType.hpp 
  *
  * This file is part of the Chemical Data Processing Toolkit
  *
@@ -25,11 +25,11 @@
 
 /**
  * \file
- * \brief Definition of constants in namespace CDPL::Chem::PharmacophoreFeatureGeometry.
+ * \brief Definition of constants in namespace CDPL::Chem::PharmFeatureType.
  */
 
-#ifndef CDPL_CHEM_PHARMACOPHOREFEATUREGEOMETRY_HPP
-#define CDPL_CHEM_PHARMACOPHOREFEATUREGEOMETRY_HPP
+#ifndef CDPL_CHEM_PHARMFEATURETYPE_HPP
+#define CDPL_CHEM_PHARMFEATURETYPE_HPP
 
 
 namespace CDPL 
@@ -44,18 +44,26 @@ namespace CDPL
 	 */
 
 	/**
-	 * \brief Provides constants for the specification of the generic geometry of a pharmacophore feature.
+	 * \brief Provides constants for the specification of the generic type of a pharmacophore feature.
 	 */
-	namespace PharmacophoreFeatureGeometry 
+	namespace PharmFeatureType 
 	{
 		
-	    const unsigned int UNDEF    = 0;
+	    const unsigned int UNKNOWN         = 0x00;
 
-	    const unsigned int SPHERE   = 1;
+	    const unsigned int HYDROPHOBIC     = 0x01;
 
-	    const unsigned int VECTOR   = 2;
+	    const unsigned int AROMATIC        = 0x02;
 
-	    const unsigned int PLANE    = 3;
+	    const unsigned int NEG_IONIZABLE   = 0x04;
+
+	    const unsigned int POS_IONIZABLE   = 0x08;
+
+	    const unsigned int H_BOND_DONOR    = 0x10;
+
+	    const unsigned int H_BOND_ACCEPTOR = 0x20;
+
+	    const unsigned int X_VOLUME        = 0x40;
 	}
 
 	/**
@@ -64,4 +72,4 @@ namespace CDPL
     }
 }
 
-#endif // CDPL_CHEM_PHARMACOPHOREFEATUREGEOMETRY_HPP
+#endif // CDPL_CHEM_PHARMFEATURETYPE_HPP

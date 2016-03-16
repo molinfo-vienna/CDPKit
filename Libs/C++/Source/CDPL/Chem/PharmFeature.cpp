@@ -1,7 +1,7 @@
 /* -*- mode: c++; c-basic-offset: 4; tab-width: 4; indent-tabs-mode: t -*- */
 
 /* 
- * PharmacophoreFeatureTypeExport.cpp 
+ * PharmFeature.cpp 
  *
  * This file is part of the Chemical Data Processing Toolkit
  *
@@ -23,32 +23,21 @@
  * Boston, MA 02111-1307, USA.
  */
 
+ 
+#include "StaticInit.hpp"
 
-#include <boost/python.hpp>
-
-#include "CDPL/Chem/PharmacophoreFeatureType.hpp"
-
-#include "NamespaceExports.hpp"
+#include "CDPL/Chem/PharmFeature.hpp"
 
 
-namespace 
+using namespace CDPL;
+
+
+Chem::PharmFeature& Chem::PharmFeature::operator=(const PharmFeature& feature) 
 {
+    if (this == &feature)
+	return *this;
 
-    struct PharmacophoreFeatureType {};
-}
+    Entity3D::operator=(feature);
 
-
-void CDPLPythonChem::exportPharmacophoreFeatureTypes()
-{
-    using namespace boost;
-    using namespace CDPL;
-
-    python::class_<PharmacophoreFeatureType, boost::noncopyable>("PharmacophoreFeatureType", python::no_init)
-	.def_readonly("UNKNOWN", &Chem::PharmacophoreFeatureType::UNKNOWN)
-	.def_readonly("LIPOPHILIC", &Chem::PharmacophoreFeatureType::LIPOPHILIC)
-	.def_readonly("AROMATIC", &Chem::PharmacophoreFeatureType::AROMATIC)
-	.def_readonly("NEG_IONIZABLE", &Chem::PharmacophoreFeatureType::NEG_IONIZABLE)
-	.def_readonly("POS_IONIZABLE", &Chem::PharmacophoreFeatureType::POS_IONIZABLE)
-	.def_readonly("H_BOND_DONOR", &Chem::PharmacophoreFeatureType::H_BOND_DONOR)
-	.def_readonly("H_BOND_ACCEPTOR", &Chem::PharmacophoreFeatureType::H_BOND_ACCEPTOR);
+    return *this;
 }

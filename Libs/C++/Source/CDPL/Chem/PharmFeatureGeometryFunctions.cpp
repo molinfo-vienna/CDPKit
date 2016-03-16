@@ -1,7 +1,7 @@
 /* -*- mode: c++; c-basic-offset: 4; tab-width: 4; indent-tabs-mode: t -*- */
 
 /* 
- * PharmacophoreFeatureToleranceFunctions.cpp 
+ * PharmFeatureGeometryFunctions.cpp 
  *
  * This file is part of the Chemical Data Processing Toolkit
  *
@@ -26,30 +26,31 @@
 
 #include "StaticInit.hpp"
 
-#include "CDPL/Chem/PharmacophoreFeatureFunctions.hpp"
-#include "CDPL/Chem/PharmacophoreFeature.hpp"
-#include "CDPL/Chem/PharmacophoreFeatureProperty.hpp"
+#include "CDPL/Chem/PharmFeatureFunctions.hpp"
+#include "CDPL/Chem/PharmFeature.hpp"
+#include "CDPL/Chem/PharmFeatureGeometry.hpp"
+#include "CDPL/Chem/PharmFeatureProperty.hpp"
 
 
 using namespace CDPL; 
 
 
-double Chem::getTolerance(const PharmacophoreFeature& feature)
+unsigned int Chem::getGeometry(const PharmFeature& feature)
 {
-    return feature.getProperty<double>(PharmacophoreFeatureProperty::TOLERANCE);
+    return feature.getPropertyOrDefault<unsigned int>(PharmFeatureProperty::GEOMETRY, PharmFeatureGeometry::UNDEF);
 }
 
-void Chem::setTolerance(PharmacophoreFeature& feature, double tol)
+void Chem::setGeometry(PharmFeature& feature, unsigned int geom)
 {
-    feature.setProperty(PharmacophoreFeatureProperty::TOLERANCE, tol);
+    feature.setProperty(PharmFeatureProperty::GEOMETRY, geom);
 }
 
-void Chem::clearTolerance(PharmacophoreFeature& feature)
+void Chem::clearGeometry(PharmFeature& feature)
 {
-    feature.removeProperty(PharmacophoreFeatureProperty::TOLERANCE);
+    feature.removeProperty(PharmFeatureProperty::GEOMETRY);
 }
 
-bool Chem::hasTolerance(const PharmacophoreFeature& feature)
+bool Chem::hasGeometry(const PharmFeature& feature)
 {
-    return feature.isPropertySet(PharmacophoreFeatureProperty::TOLERANCE);
+    return feature.isPropertySet(PharmFeatureProperty::GEOMETRY);
 }

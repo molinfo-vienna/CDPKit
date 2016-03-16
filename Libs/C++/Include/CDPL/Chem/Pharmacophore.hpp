@@ -46,7 +46,7 @@ namespace CDPL
     namespace Chem
     {
 
-		class PharmacophoreFeature;
+		class PharmFeature;
 
 		/**
 		 * \addtogroup CDPL_CHEM_PHARMACOPHORE_INTERFACES
@@ -69,14 +69,14 @@ namespace CDPL
 			typedef boost::shared_ptr<Pharmacophore> SharedPointer;
 
 			/**
-			 * \brief A constant random access iterator used to iterate over the stored \c const Chem::PharmacophoreFeature objects.
+			 * \brief A constant random access iterator used to iterate over the stored \c const Chem::PharmFeature objects.
 			 */
-			typedef Util::IndexedElementIterator<const PharmacophoreFeature, ConstFeatureAccessor> ConstFeatureIterator;
+			typedef Util::IndexedElementIterator<const PharmFeature, ConstFeatureAccessor> ConstFeatureIterator;
 
 			/**
-			 * \brief A mutable random access iterator used to iterate over the stored Chem::PharmacophoreFeature objects.
+			 * \brief A mutable random access iterator used to iterate over the stored Chem::PharmFeature objects.
 			 */
-			typedef Util::IndexedElementIterator<PharmacophoreFeature, FeatureAccessor> FeatureIterator;
+			typedef Util::IndexedElementIterator<PharmFeature, FeatureAccessor> FeatureIterator;
 
 			/**
 			 * \brief Virtual destructor.
@@ -100,7 +100,7 @@ namespace CDPL
 			 * \return A \c const reference to the feature at the specified index.
 			 * \throw Base::IndexError if the number of pharmacophore feature is zero or \a idx is not in the range [0, getNumFeatures() - 1].
 			 */
-			virtual const PharmacophoreFeature& getFeature(std::size_t idx) const = 0;
+			virtual const PharmFeature& getFeature(std::size_t idx) const = 0;
 
 			/**
 			 * \brief Returns a non-\c const reference to the pharmacophore feature at index \a idx.
@@ -108,13 +108,13 @@ namespace CDPL
 			 * \return A non-\c const reference to the feature at the specified index.
 			 * \throw Base::IndexError if the number of features is zero or \a idx is not in the range [0, getNumFeatures() - 1].
 			 */
-			virtual PharmacophoreFeature& getFeature(std::size_t idx) = 0;
+			virtual PharmFeature& getFeature(std::size_t idx) = 0;
 
 			/**
 			 * \brief Creates a new pharmacophore feature and adds it to the pharmacophore.
 			 * \return A reference to the newly created feature.
 			 */
-			virtual PharmacophoreFeature& addFeature() = 0;
+			virtual PharmFeature& addFeature() = 0;
 	
 			/**
 			 * \brief Removes the pharmacophore feature at the specified index.
@@ -138,36 +138,36 @@ namespace CDPL
 			 * \return The zero-based index of the specified feature instance.
 			 * \throw Base::ItemNotFound if the specified feature instance could not be found.
 			 */
-			virtual std::size_t getFeatureIndex(const PharmacophoreFeature& feature) const = 0;
+			virtual std::size_t getFeatureIndex(const PharmFeature& feature) const = 0;
 
 			/**
 			 * \brief Tells whether the specified feature instance is stored in this pharmacophore.
 			 * \param feature The feature to look for.
 			 * \return \c true if \a feature is stored in the pharmacophore, and \c false otherwise.
 			 */
-			virtual bool containsFeature(const PharmacophoreFeature& feature) const = 0;
+			virtual bool containsFeature(const PharmFeature& feature) const = 0;
 
 			/**
-			 * \brief Returns a constant iterator pointing to the beginning of the stored \c const Chem::PharmacophoreFeature objects.
-			 * \return A constant iterator pointing to the beginning of the stored \c const Chem::PharmacophoreFeature objects.
+			 * \brief Returns a constant iterator pointing to the beginning of the stored \c const Chem::PharmFeature objects.
+			 * \return A constant iterator pointing to the beginning of the stored \c const Chem::PharmFeature objects.
 			 */
 			ConstFeatureIterator getFeaturesBegin() const;
 
 			/**
-			 * \brief Returns a constant iterator pointing to the end of the stored \c const Chem::PharmacophoreFeature objects.
-			 * \return A constant iterator pointing to the end of the stored \c const Chem::PharmacophoreFeature objects.
+			 * \brief Returns a constant iterator pointing to the end of the stored \c const Chem::PharmFeature objects.
+			 * \return A constant iterator pointing to the end of the stored \c const Chem::PharmFeature objects.
 			 */
 			ConstFeatureIterator getFeaturesEnd() const;
 
 			/**
-			 * \brief Returns a mutable iterator pointing to the beginning of the stored Chem::PharmacophoreFeature objects.
-			 * \return A mutable iterator pointing to the beginning of the stored Chem::PharmacophoreFeature objects.
+			 * \brief Returns a mutable iterator pointing to the beginning of the stored Chem::PharmFeature objects.
+			 * \return A mutable iterator pointing to the beginning of the stored Chem::PharmFeature objects.
 			 */
 			FeatureIterator getFeaturesBegin();
 
 			/**
-			 * \brief Returns a mutable iterator pointing to the end of the stored Chem::PharmacophoreFeature objects.
-			 * \return A mutable iterator pointing to the end of the stored Chem::PharmacophoreFeature objects.
+			 * \brief Returns a mutable iterator pointing to the end of the stored Chem::PharmFeature objects.
+			 * \return A mutable iterator pointing to the end of the stored Chem::PharmFeature objects.
 			 */
 			FeatureIterator getFeaturesEnd();
 
@@ -229,7 +229,7 @@ namespace CDPL
 
 				ConstFeatureAccessor(const Pharmacophore& cntnr): container(cntnr) {}
 
-				const PharmacophoreFeature& operator()(std::size_t idx) const;
+				const PharmFeature& operator()(std::size_t idx) const;
 
 				bool operator==(const ConstFeatureAccessor& accessor) const;
 
@@ -247,7 +247,7 @@ namespace CDPL
 			  public:
 				FeatureAccessor(Pharmacophore& cntnr): container(cntnr) {}
 
-				PharmacophoreFeature& operator()(std::size_t idx) const;
+				PharmFeature& operator()(std::size_t idx) const;
 
 				bool operator==(const FeatureAccessor& accessor) const;
 

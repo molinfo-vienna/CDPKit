@@ -1,7 +1,7 @@
 /* -*- mode: c++; c-basic-offset: 4; tab-width: 4; indent-tabs-mode: t -*- */
 
 /* 
- * PharmacophoreFeatureTypeFunctions.cpp 
+ * PharmFeatureToleranceFunctions.cpp 
  *
  * This file is part of the Chemical Data Processing Toolkit
  *
@@ -26,31 +26,30 @@
 
 #include "StaticInit.hpp"
 
-#include "CDPL/Chem/PharmacophoreFeatureFunctions.hpp"
-#include "CDPL/Chem/PharmacophoreFeature.hpp"
-#include "CDPL/Chem/PharmacophoreFeatureType.hpp"
-#include "CDPL/Chem/PharmacophoreFeatureProperty.hpp"
+#include "CDPL/Chem/PharmFeatureFunctions.hpp"
+#include "CDPL/Chem/PharmFeature.hpp"
+#include "CDPL/Chem/PharmFeatureProperty.hpp"
 
 
 using namespace CDPL; 
 
 
-unsigned int Chem::getType(const PharmacophoreFeature& feature)
+double Chem::getTolerance(const PharmFeature& feature)
 {
-    return feature.getPropertyOrDefault<unsigned int>(PharmacophoreFeatureProperty::TYPE, PharmacophoreFeatureType::UNKNOWN);
+    return feature.getPropertyOrDefault<double>(PharmFeatureProperty::TOLERANCE, 1.0);
 }
 
-void Chem::setType(PharmacophoreFeature& feature, unsigned int type)
+void Chem::setTolerance(PharmFeature& feature, double tol)
 {
-    feature.setProperty(PharmacophoreFeatureProperty::TYPE, type);
+    feature.setProperty(PharmFeatureProperty::TOLERANCE, tol);
 }
 
-void Chem::clearType(PharmacophoreFeature& feature)
+void Chem::clearTolerance(PharmFeature& feature)
 {
-    feature.removeProperty(PharmacophoreFeatureProperty::TYPE);
+    feature.removeProperty(PharmFeatureProperty::TOLERANCE);
 }
 
-bool Chem::hasType(const PharmacophoreFeature& feature)
+bool Chem::hasTolerance(const PharmFeature& feature)
 {
-    return feature.isPropertySet(PharmacophoreFeatureProperty::TYPE);
+    return feature.isPropertySet(PharmFeatureProperty::TOLERANCE);
 }

@@ -1,7 +1,7 @@
 /* -*- mode: c++; c-basic-offset: 4; tab-width: 4; indent-tabs-mode: t -*- */
 
 /* 
- * BasicPharmacophoreFeature.cpp 
+ * PharmFeatureGeometryExport.cpp 
  *
  * This file is part of the Chemical Data Processing Toolkit
  *
@@ -23,47 +23,29 @@
  * Boston, MA 02111-1307, USA.
  */
 
- 
-#include "StaticInit.hpp"
 
-#include "CDPL/Chem/BasicPharmacophoreFeature.hpp"
-#include "CDPL/Chem/BasicPharmacophore.hpp"
+#include <boost/python.hpp>
 
+#include "CDPL/Chem/PharmFeatureGeometry.hpp"
 
-using namespace CDPL;
+#include "NamespaceExports.hpp"
 
 
-Chem::BasicPharmacophoreFeature::BasicPharmacophoreFeature(BasicPharmacophore* pharm): pharmacophore(pharm) {}
- 
-Chem::BasicPharmacophoreFeature::~BasicPharmacophoreFeature() {}
-
-std::size_t Chem::BasicPharmacophoreFeature::getIndex() const
+namespace 
 {
-    return index;
+
+    struct PharmFeatureGeometry {};
 }
 
-const Chem::Pharmacophore& Chem::BasicPharmacophoreFeature::getPharmacophore() const
+
+void CDPLPythonChem::exportPharmFeatureGeometries()
 {
-    return *pharmacophore;
+    using namespace boost;
+    using namespace CDPL;
+
+    python::class_<PharmFeatureGeometry, boost::noncopyable>("PharmFeatureGeometry", python::no_init)
+	.def_readonly("UNDEF", &Chem::PharmFeatureGeometry::UNDEF)
+	.def_readonly("SPHERE", &Chem::PharmFeatureGeometry::SPHERE)
+	.def_readonly("VECTOR", &Chem::PharmFeatureGeometry::VECTOR)
+	.def_readonly("PLANE", &Chem::PharmFeatureGeometry::PLANE);
 }
-
-Chem::Pharmacophore& Chem::BasicPharmacophoreFeature::getPharmacophore()
-{
-    return *pharmacophore;
-}
-
-void Chem::BasicPharmacophoreFeature::setIndex(std::size_t idx)
-{
-    index = idx;
-}
-
-Chem::BasicPharmacophoreFeature& Chem::BasicPharmacophoreFeature::operator=(const BasicPharmacophoreFeature& feature) 
-{
-    if (this == &feature)
-	return *this;
-
-    PharmacophoreFeature::operator=(feature);
-
-    return *this;
-}
-

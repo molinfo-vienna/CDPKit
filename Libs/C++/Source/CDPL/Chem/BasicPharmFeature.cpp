@@ -1,7 +1,7 @@
 /* -*- mode: c++; c-basic-offset: 4; tab-width: 4; indent-tabs-mode: t -*- */
 
 /* 
- * PharmacophoreFeature.cpp 
+ * BasicPharmFeature.cpp 
  *
  * This file is part of the Chemical Data Processing Toolkit
  *
@@ -26,18 +26,44 @@
  
 #include "StaticInit.hpp"
 
-#include "CDPL/Chem/PharmacophoreFeature.hpp"
+#include "CDPL/Chem/BasicPharmFeature.hpp"
+#include "CDPL/Chem/BasicPharmacophore.hpp"
 
 
 using namespace CDPL;
 
 
-Chem::PharmacophoreFeature& Chem::PharmacophoreFeature::operator=(const PharmacophoreFeature& feature) 
+Chem::BasicPharmFeature::BasicPharmFeature(BasicPharmacophore* pharm): pharmacophore(pharm) {}
+ 
+Chem::BasicPharmFeature::~BasicPharmFeature() {}
+
+std::size_t Chem::BasicPharmFeature::getIndex() const
+{
+    return index;
+}
+
+const Chem::Pharmacophore& Chem::BasicPharmFeature::getPharmacophore() const
+{
+    return *pharmacophore;
+}
+
+Chem::Pharmacophore& Chem::BasicPharmFeature::getPharmacophore()
+{
+    return *pharmacophore;
+}
+
+void Chem::BasicPharmFeature::setIndex(std::size_t idx)
+{
+    index = idx;
+}
+
+Chem::BasicPharmFeature& Chem::BasicPharmFeature::operator=(const BasicPharmFeature& feature) 
 {
     if (this == &feature)
 	return *this;
 
-    Entity3D::operator=(feature);
+    PharmFeature::operator=(feature);
 
     return *this;
 }
+

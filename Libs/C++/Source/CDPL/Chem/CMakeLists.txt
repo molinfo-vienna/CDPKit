@@ -15,9 +15,9 @@ SET(cdpl-chem_LIB_SRCS
     BasicAtom.cpp
     BasicBond.cpp
     Pharmacophore.cpp
-    PharmacophoreFeature.cpp
+    PharmFeature.cpp
     BasicPharmacophore.cpp
-    BasicPharmacophoreFeature.cpp
+    BasicPharmFeature.cpp
     Fragment.cpp
     AtomBondMapping.cpp
 
@@ -27,7 +27,7 @@ SET(cdpl-chem_LIB_SRCS
     ReactionProperty.cpp
     Entity3DProperty.cpp
     PharmacophoreProperty.cpp
-    PharmacophoreFeatureProperty.cpp
+    PharmFeatureProperty.cpp
     ControlParameter.cpp
     ControlParameterDefault.cpp
     DataFormat.cpp
@@ -138,14 +138,14 @@ SET(cdpl-chem_LIB_SRCS
 
     Entity3DCoordinatesFunctions.cpp
 
-    PharmacophoreFeatureTypeFunctions.cpp
-    PharmacophoreFeatureGeometryFunctions.cpp
-    PharmacophoreFeatureOrientationFunctions.cpp
-    PharmacophoreFeatureLengthFunctions.cpp
-    PharmacophoreFeatureToleranceFunctions.cpp
-    PharmacophoreFeatureSubstructureFunctions.cpp
-    PharmacophoreFeatureDisabledFlagFunctions.cpp
-    PharmacophoreFeatureOptionalFlagFunctions.cpp
+    PharmFeatureTypeFunctions.cpp
+    PharmFeatureGeometryFunctions.cpp
+    PharmFeatureOrientationFunctions.cpp
+    PharmFeatureLengthFunctions.cpp
+    PharmFeatureToleranceFunctions.cpp
+    PharmFeatureSubstructureFunctions.cpp
+    PharmFeatureDisabledFlagFunctions.cpp
+    PharmFeatureOptionalFlagFunctions.cpp
 
     Entity3DContainerCoordinatesFunctions.cpp
     Entity3DContainerGeometricalDistanceMatrixFunction.cpp

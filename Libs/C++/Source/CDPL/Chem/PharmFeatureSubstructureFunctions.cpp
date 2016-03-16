@@ -1,7 +1,7 @@
 /* -*- mode: c++; c-basic-offset: 4; tab-width: 4; indent-tabs-mode: t -*- */
 
 /* 
- * PharmacophoreFeatureDisabledFlagFunctions.cpp 
+ * PharmFeatureSubstructureFunctions.cpp 
  *
  * This file is part of the Chemical Data Processing Toolkit
  *
@@ -26,30 +26,30 @@
 
 #include "StaticInit.hpp"
 
-#include "CDPL/Chem/PharmacophoreFeatureFunctions.hpp"
-#include "CDPL/Chem/PharmacophoreFeature.hpp"
-#include "CDPL/Chem/PharmacophoreFeatureProperty.hpp"
+#include "CDPL/Chem/PharmFeatureFunctions.hpp"
+#include "CDPL/Chem/PharmFeature.hpp"
+#include "CDPL/Chem/PharmFeatureProperty.hpp"
 
 
 using namespace CDPL; 
 
 
-bool Chem::getDisabledFlag(const PharmacophoreFeature& feature)
+const Chem::Fragment::SharedPointer& Chem::getSubstructure(const PharmFeature& feature)
 {
-    return feature.getPropertyOrDefault<bool>(PharmacophoreFeatureProperty::DISABLED_FLAG, false);
+    return feature.getProperty<Fragment::SharedPointer>(PharmFeatureProperty::SUBSTRUCTURE);
 }
 
-void Chem::setDisabledFlag(PharmacophoreFeature& feature, bool flag)
+void Chem::setSubstructure(PharmFeature& feature, const Fragment::SharedPointer& substruct)
 {
-    feature.setProperty(PharmacophoreFeatureProperty::DISABLED_FLAG, flag);
+    feature.setProperty(PharmFeatureProperty::SUBSTRUCTURE, substruct);
 }
 
-void Chem::clearDisabledFlag(PharmacophoreFeature& feature)
+void Chem::clearSubstructure(PharmFeature& feature)
 {
-    feature.removeProperty(PharmacophoreFeatureProperty::DISABLED_FLAG);
+    feature.removeProperty(PharmFeatureProperty::SUBSTRUCTURE);
 }
 
-bool Chem::hasDisabledFlag(const PharmacophoreFeature& feature)
+bool Chem::hasSubstructure(const PharmFeature& feature)
 {
-    return feature.isPropertySet(PharmacophoreFeatureProperty::DISABLED_FLAG);
+    return feature.isPropertySet(PharmFeatureProperty::SUBSTRUCTURE);
 }

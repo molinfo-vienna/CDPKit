@@ -1,7 +1,7 @@
 /* -*- mode: c++; c-basic-offset: 4; tab-width: 4; indent-tabs-mode: t -*- */
 
 /* 
- * PharmacophoreFeatureOptionalFlagFunctions.cpp 
+ * PharmFeatureOptionalFlagFunctions.cpp 
  *
  * This file is part of the Chemical Data Processing Toolkit
  *
@@ -26,30 +26,30 @@
 
 #include "StaticInit.hpp"
 
-#include "CDPL/Chem/PharmacophoreFeatureFunctions.hpp"
-#include "CDPL/Chem/PharmacophoreFeature.hpp"
-#include "CDPL/Chem/PharmacophoreFeatureProperty.hpp"
+#include "CDPL/Chem/PharmFeatureFunctions.hpp"
+#include "CDPL/Chem/PharmFeature.hpp"
+#include "CDPL/Chem/PharmFeatureProperty.hpp"
 
 
 using namespace CDPL; 
 
 
-bool Chem::getOptionalFlag(const PharmacophoreFeature& feature)
+bool Chem::getOptionalFlag(const PharmFeature& feature)
 {
-    return feature.getPropertyOrDefault<bool>(PharmacophoreFeatureProperty::OPTIONAL_FLAG, false);
+    return feature.getPropertyOrDefault<bool>(PharmFeatureProperty::OPTIONAL_FLAG, false);
 }
 
-void Chem::setOptionalFlag(PharmacophoreFeature& feature, bool flag)
+void Chem::setOptionalFlag(PharmFeature& feature, bool flag)
 {
-    feature.setProperty(PharmacophoreFeatureProperty::OPTIONAL_FLAG, flag);
+    feature.setProperty(PharmFeatureProperty::OPTIONAL_FLAG, flag);
 }
 
-void Chem::clearOptionalFlag(PharmacophoreFeature& feature)
+void Chem::clearOptionalFlag(PharmFeature& feature)
 {
-    feature.removeProperty(PharmacophoreFeatureProperty::OPTIONAL_FLAG);
+    feature.removeProperty(PharmFeatureProperty::OPTIONAL_FLAG);
 }
 
-bool Chem::hasOptionalFlag(const PharmacophoreFeature& feature)
+bool Chem::hasOptionalFlag(const PharmFeature& feature)
 {
-    return feature.isPropertySet(PharmacophoreFeatureProperty::OPTIONAL_FLAG);
+    return feature.isPropertySet(PharmFeatureProperty::OPTIONAL_FLAG);
 }

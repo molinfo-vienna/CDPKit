@@ -50,9 +50,9 @@ BOOST_PYTHON_MODULE(_chem)
 	exportBasicMolecule();
 	exportBasicReaction();
 	exportPharmacophore();
-	exportPharmacophoreFeature();
+	exportPharmFeature();
 	exportBasicPharmacophore();
-	exportBasicPharmacophoreFeature();
+	exportBasicPharmFeature();
 	exportFragment();
 	exportAtomMapping();
 	exportBondMapping();
@@ -191,7 +191,7 @@ BOOST_PYTHON_MODULE(_chem)
 	exportBondProperties();
 	exportReactionProperties();
 	exportPharmacophoreProperties();
-	exportPharmacophoreFeatureProperties();
+	exportPharmFeatureProperties();
 
 	exportControlParameters();
 	exportControlParameterDefaults();
@@ -210,8 +210,8 @@ BOOST_PYTHON_MODULE(_chem)
 	exportReactionCenterStates();
 	exportBondDirections();
 	exportRadicalTypes();
-	exportPharmacophoreFeatureTypes();
-	exportPharmacophoreFeatureGeometries();
+	exportPharmFeatureTypes();
+	exportPharmFeatureGeometries();
 	exportAtomMatchConstraints();
 	exportBondMatchConstraints();
 	exportMolecularGraphMatchConstraints();
@@ -233,7 +233,7 @@ BOOST_PYTHON_MODULE(_chem)
 	exportFragmentFunctions();
 	exportReactionFunctions();
 	exportPharmacophoreFunctions();
-	exportPharmacophoreFeatureFunctions();
+	exportPharmFeatureFunctions();
 	exportSimilarityFunctions();
 	exportAtomTypeFunctions();
 	exportResidueFunctions();

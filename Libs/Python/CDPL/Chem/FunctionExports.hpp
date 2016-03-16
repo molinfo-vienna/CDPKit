@@ -46,7 +46,7 @@ namespace CDPLPythonChem
 	void exportFragmentFunctions();
 	void exportReactionFunctions();
 	void exportPharmacophoreFunctions();
-	void exportPharmacophoreFeatureFunctions();
+	void exportPharmFeatureFunctions();
 	void exportSimilarityFunctions();
 }
 

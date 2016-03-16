@@ -27,7 +27,7 @@
 #include "StaticInit.hpp"
 
 #include "CDPL/Chem/Pharmacophore.hpp"
-#include "CDPL/Chem/PharmacophoreFeature.hpp"
+#include "CDPL/Chem/PharmFeature.hpp"
 #include "CDPL/Base/Exceptions.hpp"
 
 
@@ -97,7 +97,7 @@ Chem::Entity3D& Chem::Pharmacophore::getEntity(std::size_t idx)
 }
 
 
-const Chem::PharmacophoreFeature& Chem::Pharmacophore::ConstFeatureAccessor::operator()(std::size_t idx) const
+const Chem::PharmFeature& Chem::Pharmacophore::ConstFeatureAccessor::operator()(std::size_t idx) const
 {
     return container.get().getFeature(idx);
 }
@@ -114,7 +114,7 @@ Chem::Pharmacophore::ConstFeatureAccessor& Chem::Pharmacophore::ConstFeatureAcce
 }
 
 
-Chem::PharmacophoreFeature& Chem::Pharmacophore::FeatureAccessor::operator()(std::size_t idx) const
+Chem::PharmFeature& Chem::Pharmacophore::FeatureAccessor::operator()(std::size_t idx) const
 {
     return container.get().getFeature(idx);
 }

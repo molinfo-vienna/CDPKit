@@ -1,7 +1,7 @@
 /* -*- mode: c++; c-basic-offset: 4; tab-width: 4; indent-tabs-mode: t -*- */
 
 /* 
- * BasicPharmacophoreFeatureExport.cpp 
+ * BasicPharmFeatureExport.cpp 
  *
  * This file is part of the Chemical Data Processing Toolkit
  *
@@ -26,7 +26,7 @@
 
 #include <boost/python.hpp>
 
-#include "CDPL/Chem/BasicPharmacophoreFeature.hpp"
+#include "CDPL/Chem/BasicPharmFeature.hpp"
 
 #include "ClassExports.hpp"
 
@@ -34,25 +34,25 @@
 namespace
 {
 
-    CDPL::Chem::BasicPharmacophoreFeature& assignBasicFeature(CDPL::Chem::BasicPharmacophoreFeature& self, CDPL::Chem::BasicPharmacophoreFeature& feature)
+    CDPL::Chem::BasicPharmFeature& assignBasicFeature(CDPL::Chem::BasicPharmFeature& self, CDPL::Chem::BasicPharmFeature& feature)
     {
-	return self.operator=(feature);
+		return self.operator=(feature);
     }
 
-    CDPL::Chem::PharmacophoreFeature& assignFeature(CDPL::Chem::PharmacophoreFeature& self, CDPL::Chem::PharmacophoreFeature& feature)
+    CDPL::Chem::PharmFeature& assignFeature(CDPL::Chem::PharmFeature& self, CDPL::Chem::PharmFeature& feature)
     {
-	return self.operator=(feature);
+		return self.operator=(feature);
     }
 }
 
 
-void CDPLPythonChem::exportBasicPharmacophoreFeature()
+void CDPLPythonChem::exportBasicPharmFeature()
 {
     using namespace boost;
     using namespace CDPL;
 
-    python::class_<Chem::BasicPharmacophoreFeature, python::bases<Chem::PharmacophoreFeature>, 
-		   boost::noncopyable>("BasicPharmacophoreFeature", python::no_init)
-	.def("assign", &assignFeature, (python::arg("self"), python::arg("feature")), python::return_self<>())
-	.def("assign", &assignBasicFeature, (python::arg("self"), python::arg("feature")), python::return_self<>());
+    python::class_<Chem::BasicPharmFeature, python::bases<Chem::PharmFeature>, 
+				   boost::noncopyable>("BasicPharmFeature", python::no_init)
+		.def("assign", &assignFeature, (python::arg("self"), python::arg("feature")), python::return_self<>())
+		.def("assign", &assignBasicFeature, (python::arg("self"), python::arg("feature")), python::return_self<>());
 }

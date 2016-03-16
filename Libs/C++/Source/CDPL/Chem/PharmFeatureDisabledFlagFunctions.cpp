@@ -1,7 +1,7 @@
 /* -*- mode: c++; c-basic-offset: 4; tab-width: 4; indent-tabs-mode: t -*- */
 
 /* 
- * PharmacophoreFeatureGeometryFunctions.cpp 
+ * PharmFeatureDisabledFlagFunctions.cpp 
  *
  * This file is part of the Chemical Data Processing Toolkit
  *
@@ -26,31 +26,30 @@
 
 #include "StaticInit.hpp"
 
-#include "CDPL/Chem/PharmacophoreFeatureFunctions.hpp"
-#include "CDPL/Chem/PharmacophoreFeature.hpp"
-#include "CDPL/Chem/PharmacophoreFeatureGeometry.hpp"
-#include "CDPL/Chem/PharmacophoreFeatureProperty.hpp"
+#include "CDPL/Chem/PharmFeatureFunctions.hpp"
+#include "CDPL/Chem/PharmFeature.hpp"
+#include "CDPL/Chem/PharmFeatureProperty.hpp"
 
 
 using namespace CDPL; 
 
 
-unsigned int Chem::getGeometry(const PharmacophoreFeature& feature)
+bool Chem::getDisabledFlag(const PharmFeature& feature)
 {
-    return feature.getPropertyOrDefault<unsigned int>(PharmacophoreFeatureProperty::GEOMETRY, PharmacophoreFeatureGeometry::UNDEF);
+    return feature.getPropertyOrDefault<bool>(PharmFeatureProperty::DISABLED_FLAG, false);
 }
 
-void Chem::setGeometry(PharmacophoreFeature& feature, unsigned int geom)
+void Chem::setDisabledFlag(PharmFeature& feature, bool flag)
 {
-    feature.setProperty(PharmacophoreFeatureProperty::GEOMETRY, geom);
+    feature.setProperty(PharmFeatureProperty::DISABLED_FLAG, flag);
 }
 
-void Chem::clearGeometry(PharmacophoreFeature& feature)
+void Chem::clearDisabledFlag(PharmFeature& feature)
 {
-    feature.removeProperty(PharmacophoreFeatureProperty::GEOMETRY);
+    feature.removeProperty(PharmFeatureProperty::DISABLED_FLAG);
 }
 
-bool Chem::hasGeometry(const PharmacophoreFeature& feature)
+bool Chem::hasDisabledFlag(const PharmFeature& feature)
 {
-    return feature.isPropertySet(PharmacophoreFeatureProperty::GEOMETRY);
+    return feature.isPropertySet(PharmFeatureProperty::DISABLED_FLAG);
 }

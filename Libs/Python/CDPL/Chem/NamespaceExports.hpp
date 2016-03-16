@@ -43,8 +43,8 @@ namespace CDPLPythonChem
 	void exportReactionCenterStates();
 	void exportBondDirections();
 	void exportRadicalTypes();
-	void exportPharmacophoreFeatureTypes();
-	void exportPharmacophoreFeatureGeometries();
+	void exportPharmFeatureTypes();
+	void exportPharmFeatureGeometries();
 	void exportINCHIReturnCodes();
 	void exportAtomMatchConstraints();
 	void exportBondMatchConstraints();
@@ -59,7 +59,7 @@ namespace CDPLPythonChem
 	void exportBondProperties();
 	void exportReactionProperties();
 	void exportPharmacophoreProperties();
-	void exportPharmacophoreFeatureProperties();
+	void exportPharmFeatureProperties();
 
 	void exportControlParameters();
 	void exportControlParameterDefaults();

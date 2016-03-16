@@ -200,7 +200,7 @@
 \defgroup CDPL_CHEM_REACTION_PROPERTIES Reaction Properties
 \ingroup CDPL_CHEM_PROPERTIES
 
-\defgroup CDPL_CHEM_PHARMACOPHOREFEATURE_PROPERTIES Pharmacophore Feature Properties
+\defgroup CDPL_CHEM_PHARMFEATURE_PROPERTIES Pharmacophore Feature Properties
 \ingroup CDPL_CHEM_PROPERTIES
 
 \defgroup CDPL_CHEM_PHARMACOPHORE_PROPERTIES Pharmacophore Properties
@@ -254,7 +254,7 @@
 \defgroup CDPL_CHEM_REACTION_FUNCTIONS Reaction Functions
 \ingroup CDPL_CHEM_FUNCTIONS
 
-\defgroup CDPL_CHEM_PHARMACOPHOREFEATURE_FUNCTIONS Pharmacophore Feature Functions
+\defgroup CDPL_CHEM_PHARMFEATURE_FUNCTIONS Pharmacophore Feature Functions
 \ingroup CDPL_CHEM_FUNCTIONS
 
 \defgroup CDPL_CHEM_PHARMACOPHORE_FUNCTIONS Pharmacophore Functions

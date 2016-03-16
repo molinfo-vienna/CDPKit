@@ -28,7 +28,7 @@
 #include <boost/shared_ptr.hpp>
 
 #include "CDPL/Chem/Pharmacophore.hpp"
-#include "CDPL/Chem/PharmacophoreFeature.hpp"
+#include "CDPL/Chem/PharmFeature.hpp"
 
 #include "Chem/Entity3DContainerVisitor.hpp"
 #include "Base/PropertyContainerVisitor.hpp"
@@ -50,7 +50,7 @@ namespace
 			this->get_override("clear")();
 		}
 
-		CDPL::Chem::PharmacophoreFeature& addFeature() {
+		CDPL::Chem::PharmFeature& addFeature() {
 			return this->get_override("addFeature")();
 		}
 
@@ -74,19 +74,19 @@ namespace
 			return this->get_override("getNumFeatures")();                  
 		}                                                                
 		
-		const CDPL::Chem::PharmacophoreFeature& getFeature(std::size_t idx) const {         
+		const CDPL::Chem::PharmFeature& getFeature(std::size_t idx) const {         
 			return this->get_override("getFeature")(idx);                   
 		}                                                                
                                                                                           
-		CDPL::Chem::PharmacophoreFeature& getFeature(std::size_t idx)  {                    
+		CDPL::Chem::PharmFeature& getFeature(std::size_t idx)  {                    
 			return this->get_override("getFeature")(idx);                   
 		}
                                          
-		bool containsFeature(const CDPL::Chem::PharmacophoreFeature& feature) const {          
+		bool containsFeature(const CDPL::Chem::PharmFeature& feature) const {          
 			return this->get_override("containsFeature")(boost::ref(feature)); 
 		}                                                                
                                                                      
-		std::size_t getFeatureIndex(const CDPL::Chem::PharmacophoreFeature& feature) const {   
+		std::size_t getFeatureIndex(const CDPL::Chem::PharmFeature& feature) const {   
 			return this->get_override("getFeatureIndex")(boost::ref(feature)); 
 		}                
 
@@ -120,11 +120,11 @@ namespace
 		}                                              
 	};
 
-	bool containsFeature(CDPL::Chem::Pharmacophore& pharm, CDPL::Chem::PharmacophoreFeature& feature) {
+	bool containsFeature(CDPL::Chem::Pharmacophore& pharm, CDPL::Chem::PharmFeature& feature) {
 		return pharm.containsFeature(feature);
 	}
 
-	std::size_t getFeatureIndex(CDPL::Chem::Pharmacophore& pharm, CDPL::Chem::PharmacophoreFeature& feature) {
+	std::size_t getFeatureIndex(CDPL::Chem::Pharmacophore& pharm, CDPL::Chem::PharmFeature& feature) {
 		return pharm.getFeatureIndex(feature);
 	}
 }
@@ -136,7 +136,7 @@ void CDPLPythonChem::exportPharmacophore()
 	using namespace CDPL;
 
 	void (Chem::Pharmacophore::*removeFeatureFunc)(std::size_t) = &Chem::Pharmacophore::removeFeature;
-	Chem::PharmacophoreFeature& (Chem::Pharmacophore::*getFeatureFunc)(std::size_t) = &Chem::Pharmacophore::getFeature;
+	Chem::PharmFeature& (Chem::Pharmacophore::*getFeatureFunc)(std::size_t) = &Chem::Pharmacophore::getFeature;
 
 	python::scope scope = python::class_<PharmacophoreWrapper, PharmacophoreWrapper::SharedPointer, 
 										 python::bases<Chem::Entity3DContainer, Base::PropertyContainer>,

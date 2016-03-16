@@ -1,7 +1,7 @@
 /* -*- mode: c++; c-basic-offset: 4; tab-width: 4; indent-tabs-mode: t -*- */
 
 /* 
- * PharmacophoreFeatureProperty.hpp 
+ * PharmFeatureProperty.hpp 
  *
  * This file is part of the Chemical Data Processing Toolkit
  *
@@ -25,11 +25,11 @@
 
 /**
  * \file
- * \brief Definition of constants in namespace CDPL::Chem::PharmacophoreFeatureProperty.
+ * \brief Definition of constants in namespace CDPL::Chem::PharmFeatureProperty.
  */
 
-#ifndef CDPL_CHEM_PHARMACOPHOREFEATUREPROPERTY_HPP
-#define CDPL_CHEM_PHARMACOPHOREFEATUREPROPERTY_HPP
+#ifndef CDPL_CHEM_PHARMFEATUREPROPERTY_HPP
+#define CDPL_CHEM_PHARMFEATUREPROPERTY_HPP
 
 #include "CDPL/Chem/APIPrefix.hpp"
 
@@ -47,14 +47,14 @@ namespace CDPL
     {
 
 		/**
-		 * \addtogroup CDPL_CHEM_PHARMACOPHOREFEATURE_PROPERTIES
+		 * \addtogroup CDPL_CHEM_PHARMFEATURE_PROPERTIES
 		 * @{
 		 */
 
 		/**
-		 * \brief Provides keys for built-in Chem::PharmacophoreFeature properties.
+		 * \brief Provides keys for built-in Chem::PharmFeature properties.
 		 */
-		namespace PharmacophoreFeatureProperty
+		namespace PharmFeatureProperty
 		{
 
 			extern CDPL_CHEM_API const Base::LookupKey TYPE; 
@@ -76,4 +76,4 @@ namespace CDPL
     }
 }
 
-#endif // CDPL_CHEM_PHARMACOPHOREFEATUREPROPERTY_HPP
+#endif // CDPL_CHEM_PHARMFEATUREPROPERTY_HPP

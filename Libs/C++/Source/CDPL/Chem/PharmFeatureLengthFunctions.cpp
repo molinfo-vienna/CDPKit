@@ -1,7 +1,7 @@
 /* -*- mode: c++; c-basic-offset: 4; tab-width: 4; indent-tabs-mode: t -*- */
 
 /* 
- * PharmacophoreFeatureOrientationFunctions.cpp 
+ * PharmFeatureLengthFunctions.cpp 
  *
  * This file is part of the Chemical Data Processing Toolkit
  *
@@ -26,30 +26,30 @@
 
 #include "StaticInit.hpp"
 
-#include "CDPL/Chem/PharmacophoreFeatureFunctions.hpp"
-#include "CDPL/Chem/PharmacophoreFeature.hpp"
-#include "CDPL/Chem/PharmacophoreFeatureProperty.hpp"
+#include "CDPL/Chem/PharmFeatureFunctions.hpp"
+#include "CDPL/Chem/PharmFeature.hpp"
+#include "CDPL/Chem/PharmFeatureProperty.hpp"
 
 
 using namespace CDPL; 
 
 
-const Math::Vector3D& Chem::getOrientation(const PharmacophoreFeature& feature)
+double Chem::getLength(const PharmFeature& feature)
 {
-    return feature.getProperty<Math::Vector3D>(PharmacophoreFeatureProperty::ORIENTATION);
+    return feature.getPropertyOrDefault<double>(PharmFeatureProperty::LENGTH, 1.0);
 }
 
-void Chem::setOrientation(PharmacophoreFeature& feature, const Math::Vector3D& orient)
+void Chem::setLength(PharmFeature& feature, double length)
 {
-    feature.setProperty(PharmacophoreFeatureProperty::ORIENTATION, orient);
+    feature.setProperty(PharmFeatureProperty::LENGTH, length);
 }
 
-void Chem::clearOrientation(PharmacophoreFeature& feature)
+void Chem::clearLength(PharmFeature& feature)
 {
-    feature.removeProperty(PharmacophoreFeatureProperty::ORIENTATION);
+    feature.removeProperty(PharmFeatureProperty::LENGTH);
 }
 
-bool Chem::hasOrientation(const PharmacophoreFeature& feature)
+bool Chem::hasLength(const PharmFeature& feature)
 {
-    return feature.isPropertySet(PharmacophoreFeatureProperty::ORIENTATION);
+    return feature.isPropertySet(PharmFeatureProperty::LENGTH);
 }

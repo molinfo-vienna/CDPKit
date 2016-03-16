@@ -46,9 +46,9 @@
 #include "CDPL/Chem/BasicBond.hpp"
 #include "CDPL/Chem/Fragment.hpp"
 #include "CDPL/Chem/Pharmacophore.hpp"
-#include "CDPL/Chem/PharmacophoreFeature.hpp"
+#include "CDPL/Chem/PharmFeature.hpp"
 #include "CDPL/Chem/BasicPharmacophore.hpp"
-#include "CDPL/Chem/BasicPharmacophoreFeature.hpp"
+#include "CDPL/Chem/BasicPharmFeature.hpp"
 
 #include "CDPL/Chem/FragmentList.hpp"
 #include "CDPL/Chem/AtomMapping.hpp"
@@ -87,7 +87,7 @@
 #include "CDPL/Chem/MolecularGraphProperty.hpp"
 #include "CDPL/Chem/ReactionProperty.hpp"
 #include "CDPL/Chem/PharmacophoreProperty.hpp"
-#include "CDPL/Chem/PharmacophoreFeatureProperty.hpp"
+#include "CDPL/Chem/PharmFeatureProperty.hpp"
 #include "CDPL/Chem/AtomPropertyFlag.hpp"
 #include "CDPL/Chem/BondPropertyFlag.hpp"
 #include "CDPL/Chem/ControlParameter.hpp"
@@ -107,8 +107,8 @@
 #include "CDPL/Chem/RadicalType.hpp"
 #include "CDPL/Chem/INCHIReturnCode.hpp"
 #include "CDPL/Chem/MDLDataFormatVersion.hpp"
-#include "CDPL/Chem/PharmacophoreFeatureType.hpp"
-#include "CDPL/Chem/PharmacophoreFeatureGeometry.hpp"
+#include "CDPL/Chem/PharmFeatureType.hpp"
+#include "CDPL/Chem/PharmFeatureGeometry.hpp"
 #include "CDPL/Chem/DataFormat.hpp"
 
 #include "CDPL/Chem/AtomMatchConstraint.hpp"
@@ -202,6 +202,7 @@
 #include "CDPL/Chem/AutoCorrelationVectorCalculator.hpp"
 #include "CDPL/Chem/BurdenMatrixGenerator.hpp"
 #include "CDPL/Chem/BCUTDescriptorCalculator.hpp"
+#include "CDPL/Chem/PatternBasedPharmFeatureGenerator.hpp"
 
 #include "CDPL/Chem/SimilarityFunctions.hpp"
 #include "CDPL/Chem/UtilityFunctions.hpp"
@@ -218,6 +219,6 @@
 #include "CDPL/Chem/FragmentFunctions.hpp"
 #include "CDPL/Chem/ReactionFunctions.hpp"
 #include "CDPL/Chem/PharmacophoreFunctions.hpp"
-#include "CDPL/Chem/PharmacophoreFeatureFunctions.hpp"
+#include "CDPL/Chem/PharmFeatureFunctions.hpp"
 
 #endif // CDPL_CHEM_HPP

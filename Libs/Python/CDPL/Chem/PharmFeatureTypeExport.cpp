@@ -1,7 +1,7 @@
 /* -*- mode: c++; c-basic-offset: 4; tab-width: 4; indent-tabs-mode: t -*- */
 
 /* 
- * PharmacophoreFeaturePropertyExport.cpp 
+ * PharmFeatureTypeExport.cpp 
  *
  * This file is part of the Chemical Data Processing Toolkit
  *
@@ -26,8 +26,7 @@
 
 #include <boost/python.hpp>
 
-#include "CDPL/Chem/PharmacophoreFeatureProperty.hpp"
-#include "CDPL/Base/LookupKey.hpp"
+#include "CDPL/Chem/PharmFeatureType.hpp"
 
 #include "NamespaceExports.hpp"
 
@@ -35,23 +34,22 @@
 namespace 
 {
 
-	struct PharmacophoreFeatureProperty {};
+    struct PharmFeatureType {};
 }
 
 
-void CDPLPythonChem::exportPharmacophoreFeatureProperties()
+void CDPLPythonChem::exportPharmFeatureTypes()
 {
-	using namespace boost;
-	using namespace CDPL;
+    using namespace boost;
+    using namespace CDPL;
 
-	python::class_<PharmacophoreFeatureProperty, boost::noncopyable>("PharmacophoreFeatureProperty", python::no_init)
-	    .def_readonly("TYPE", &Chem::PharmacophoreFeatureProperty::TYPE)
-	    .def_readonly("GEOMETRY", &Chem::PharmacophoreFeatureProperty::GEOMETRY)
-	    .def_readonly("LENGTH", &Chem::PharmacophoreFeatureProperty::LENGTH)
-	    .def_readonly("ORIENTATION", &Chem::PharmacophoreFeatureProperty::ORIENTATION)
-	    .def_readonly("TOLERANCE", &Chem::PharmacophoreFeatureProperty::TOLERANCE)
-	    .def_readonly("SUBSTRUCTURE", &Chem::PharmacophoreFeatureProperty::SUBSTRUCTURE)
-	    .def_readonly("DISABLED_FLAG", &Chem::PharmacophoreFeatureProperty::DISABLED_FLAG)
-	    .def_readonly("OPTIONAL_FLAG", &Chem::PharmacophoreFeatureProperty::OPTIONAL_FLAG)
-		;
+    python::class_<PharmFeatureType, boost::noncopyable>("PharmFeatureType", python::no_init)
+	.def_readonly("UNKNOWN", &Chem::PharmFeatureType::UNKNOWN)
+	.def_readonly("HYDROPHOBIC", &Chem::PharmFeatureType::HYDROPHOBIC)
+	.def_readonly("AROMATIC", &Chem::PharmFeatureType::AROMATIC)
+	.def_readonly("NEG_IONIZABLE", &Chem::PharmFeatureType::NEG_IONIZABLE)
+	.def_readonly("POS_IONIZABLE", &Chem::PharmFeatureType::POS_IONIZABLE)
+	.def_readonly("H_BOND_DONOR", &Chem::PharmFeatureType::H_BOND_DONOR)
+	.def_readonly("H_BOND_ACCEPTOR", &Chem::PharmFeatureType::H_BOND_ACCEPTOR)
+	.def_readonly("X_VOLUME", &Chem::PharmFeatureType::X_VOLUME);
 }

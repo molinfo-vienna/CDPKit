@@ -1,7 +1,7 @@
 /* -*- mode: c++; c-basic-offset: 4; tab-width: 4; indent-tabs-mode: t -*- */
 
 /* 
- * PharmacophoreFeatureSubstructureFunctions.cpp 
+ * PharmFeatureTypeFunctions.cpp 
  *
  * This file is part of the Chemical Data Processing Toolkit
  *
@@ -26,30 +26,31 @@
 
 #include "StaticInit.hpp"
 
-#include "CDPL/Chem/PharmacophoreFeatureFunctions.hpp"
-#include "CDPL/Chem/PharmacophoreFeature.hpp"
-#include "CDPL/Chem/PharmacophoreFeatureProperty.hpp"
+#include "CDPL/Chem/PharmFeatureFunctions.hpp"
+#include "CDPL/Chem/PharmFeature.hpp"
+#include "CDPL/Chem/PharmFeatureType.hpp"
+#include "CDPL/Chem/PharmFeatureProperty.hpp"
 
 
 using namespace CDPL; 
 
 
-const Chem::Fragment::SharedPointer& Chem::getSubstructure(const PharmacophoreFeature& feature)
+unsigned int Chem::getType(const PharmFeature& feature)
 {
-    return feature.getProperty<Fragment::SharedPointer>(PharmacophoreFeatureProperty::SUBSTRUCTURE);
+    return feature.getPropertyOrDefault<unsigned int>(PharmFeatureProperty::TYPE, PharmFeatureType::UNKNOWN);
 }
 
-void Chem::setSubstructure(PharmacophoreFeature& feature, const Fragment::SharedPointer& substruct)
+void Chem::setType(PharmFeature& feature, unsigned int type)
 {
-    feature.setProperty(PharmacophoreFeatureProperty::SUBSTRUCTURE, substruct);
+    feature.setProperty(PharmFeatureProperty::TYPE, type);
 }
 
-void Chem::clearSubstructure(PharmacophoreFeature& feature)
+void Chem::clearType(PharmFeature& feature)
 {
-    feature.removeProperty(PharmacophoreFeatureProperty::SUBSTRUCTURE);
+    feature.removeProperty(PharmFeatureProperty::TYPE);
 }
 
-bool Chem::hasSubstructure(const PharmacophoreFeature& feature)
+bool Chem::hasType(const PharmFeature& feature)
 {
-    return feature.isPropertySet(PharmacophoreFeatureProperty::SUBSTRUCTURE);
+    return feature.isPropertySet(PharmFeatureProperty::TYPE);
 }

@@ -1,7 +1,7 @@
 /* -*- mode: c++; c-basic-offset: 4; tab-width: 4; indent-tabs-mode: t -*- */
 
 /* 
- * PharmacophoreFeatureFunctionExport.cpp 
+ * PharmFeatureFunctionExport.cpp 
  *
  * This file is part of the Chemical Data Processing Toolkit
  *
@@ -26,23 +26,23 @@
 
 #include <boost/python.hpp>
 
-#include "CDPL/Chem/PharmacophoreFeature.hpp"
-#include "CDPL/Chem/PharmacophoreFeatureFunctions.hpp"
+#include "CDPL/Chem/PharmFeature.hpp"
+#include "CDPL/Chem/PharmFeatureFunctions.hpp"
 #include "CDPL/Chem/StereoDescriptor.hpp"
 
 #include "FunctionExports.hpp"
 #include "FunctionWrapper.hpp"
 
 
-#define MAKE_FEATURE_FUNC_WRAPPERS(TYPE, FUNC_SUFFIX)                       \
-TYPE get##FUNC_SUFFIX##Wrapper(CDPL::Chem::PharmacophoreFeature& feature)   \
-{                                                                           \
-	return get##FUNC_SUFFIX(feature);                                       \
-}                                                                           \
-                                                                            \
-bool has##FUNC_SUFFIX##Wrapper(CDPL::Chem::PharmacophoreFeature& feature)   \
-{                                                                           \
-	return has##FUNC_SUFFIX(feature);                                       \
+#define MAKE_FEATURE_FUNC_WRAPPERS(TYPE, FUNC_SUFFIX)               \
+TYPE get##FUNC_SUFFIX##Wrapper(CDPL::Chem::PharmFeature& feature)   \
+{                                                                   \
+	return get##FUNC_SUFFIX(feature);                               \
+}                                                                   \
+                                                                    \
+bool has##FUNC_SUFFIX##Wrapper(CDPL::Chem::PharmFeature& feature)   \
+{                                                                   \
+	return has##FUNC_SUFFIX(feature);                               \
 }
 
 #define EXPORT_FEATURE_FUNCS(FUNC_SUFFIX, ARG_NAME)                                                           \
@@ -82,7 +82,7 @@ namespace
 }
 
 
-void CDPLPythonChem::exportPharmacophoreFeatureFunctions()
+void CDPLPythonChem::exportPharmFeatureFunctions()
 {
     using namespace boost;
     using namespace CDPL;
