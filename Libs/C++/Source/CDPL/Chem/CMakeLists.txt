@@ -108,6 +108,7 @@ SET(cdpl-chem_LIB_SRCS
 
     CompleteRingSet.cpp
     AromaticRingSet.cpp
+    AromaticSSSRSubset.cpp
     SmallestSetOfSmallestRings.cpp
     AromaticSubstructure.cpp
     CyclicSubstructure.cpp
@@ -136,6 +137,9 @@ SET(cdpl-chem_LIB_SRCS
     BurdenMatrixGenerator.cpp
     BCUTDescriptorCalculator.cpp
     PatternBasedFeatureGenerator.cpp
+    HydrophobicFeatureGenerator.cpp
+    AromaticFeatureGenerator.cpp
+    PharmacophoreGenerator.cpp
 
     Entity3DCoordinatesFunctions.cpp
 
@@ -160,6 +164,7 @@ SET(cdpl-chem_LIB_SRCS
     AtomContainerMaxReactionAtomMappingIDFunction.cpp
     AtomContainerMaxComponentGroupIDFunction.cpp
     AtomContainerConformationFunctions.cpp
+    AtomContainerAtomTypeMaskFunction.cpp
 
     BondContainerBondCountFunctions.cpp
  
@@ -245,7 +250,6 @@ SET(cdpl-chem_LIB_SRCS
     MolecularGraphIncidenceMatrixFunction.cpp
     MolecularGraphBondMatrixFunction.cpp
     MolecularGraphBondElectronMatrixFunction.cpp
-    MolecularGraphAtomTypeMaskFunction.cpp
     MolecularGraphKierShapeFunctions.cpp
     MolecularGraphZagrebIndexFunctions.cpp
     MolecularGraphRingComplexityFunction.cpp

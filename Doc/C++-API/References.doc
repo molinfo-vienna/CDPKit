@@ -92,6 +92,14 @@ Cairo 2D Graphics Library homepage: http://www.cairographics.org/
 </tr>
 
 <tr>
+<td valign="top">\anchor CATA<i>[CATA]</i></td>
+<td valign="top">
+J. Greene et al., Chemical Function Queries for 3D Database Search, 
+<i>J. Chem. INf. COmput. Sci.</i> <b>1994</b>, 34, 1297-1308
+</td>
+</tr>
+
+<tr>
 <td valign="top">\anchor CTFILE<i>[CTFILE]</i></td>
 <td valign="top">
 MDL CTFile Formats Specification download page: http://www.mdli.com/downloads/public/ctfile/ctfile.jsp

@@ -37,4 +37,6 @@ void CDPLPythonChem::exportUtilityFunctions()
 	using namespace CDPL;
 
 	python::def("foldBitSet", &Chem::foldBitSet, (python::arg("bs"), python::arg("num_times")));
+	python::def("parseSMARTS", &Chem::parseSMARTS, (python::arg("smarts"), python::arg("init_qry") = true));
+	python::def("parseSMILES", &Chem::parseSMILES, python::arg("smiles"));
 }

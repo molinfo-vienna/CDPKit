@@ -36,7 +36,9 @@ using namespace CDPL;
 
 bool Chem::getOptionalFlag(const Feature& feature)
 {
-    return feature.getPropertyOrDefault<bool>(FeatureProperty::OPTIONAL_FLAG, false);
+	static const bool DEF_FLAG = false;
+
+    return feature.getPropertyOrDefault<bool>(FeatureProperty::OPTIONAL_FLAG, DEF_FLAG);
 }
 
 void Chem::setOptionalFlag(Feature& feature, bool flag)

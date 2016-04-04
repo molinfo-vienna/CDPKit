@@ -27,32 +27,12 @@
 #include "StaticInit.hpp"
 
 #include "CDPL/Chem/MolecularGraphFunctions.hpp"
-#include "CDPL/Chem/MolecularGraphProperty.hpp"
 #include "CDPL/Chem/AromaticRingSet.hpp"
+#include "CDPL/Chem/AromaticSSSRSubset.hpp"
 
 
 using namespace CDPL; 
 
-
-const Chem::FragmentList::SharedPointer& Chem::getAromaticRings(const MolecularGraph& molgraph)
-{
-   return molgraph.getProperty<FragmentList::SharedPointer>(MolecularGraphProperty::AROMATIC_RINGS);
-}
-
-void Chem::setAromaticRings(MolecularGraph& molgraph, const FragmentList::SharedPointer& rings)
-{
-	molgraph.setProperty(MolecularGraphProperty::AROMATIC_RINGS, rings);
-}
-
-void Chem::clearAromaticRings(MolecularGraph& molgraph)
-{
-	molgraph.removeProperty(MolecularGraphProperty::AROMATIC_RINGS);
-}
-
-bool Chem::hasAromaticRings(const MolecularGraph& molgraph)
-{
-	return molgraph.isPropertySet(MolecularGraphProperty::AROMATIC_RINGS);
-}
 
 Chem::FragmentList::SharedPointer Chem::perceiveAromaticRings(const MolecularGraph& molgraph)
 {
@@ -61,18 +41,9 @@ Chem::FragmentList::SharedPointer Chem::perceiveAromaticRings(const MolecularGra
 	return rings_ptr;
 }
 
-Chem::FragmentList::SharedPointer Chem::perceiveAromaticRings(MolecularGraph& molgraph, bool overwrite)
+Chem::FragmentList::SharedPointer Chem::extractAromaticSSSRSubset(const MolecularGraph& molgraph)
 {
-	if (!overwrite) {
-		Base::Variant prev_rings = molgraph.getProperty(MolecularGraphProperty::AROMATIC_RINGS, false);
-	
-		if (!prev_rings.isEmpty())
-			return prev_rings.getData<FragmentList::SharedPointer>();
-	}
-
-	FragmentList::SharedPointer rings_ptr(new AromaticRingSet(molgraph));
-
-	molgraph.setProperty(MolecularGraphProperty::AROMATIC_RINGS, rings_ptr);
+	FragmentList::SharedPointer rings_ptr(new AromaticSSSRSubset(molgraph));
 
 	return rings_ptr;
 }

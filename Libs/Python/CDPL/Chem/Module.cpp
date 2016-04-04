@@ -87,10 +87,17 @@ BOOST_PYTHON_MODULE(_chem)
 	exportCommonConnectedSubstructureSearch();
 	exportMaxCommonAtomSubstructureSearch();
 	exportMaxCommonBondSubstructureSearch();
+
 	exportReactor();
+
+	exportPharmacophoreGenerator();
+	exportPatternBasedFeatureGenerator();
+	exportAromaticFeatureGenerator();
+	exportHydrophobicFeatureGenerator();
 
 	exportCompleteRingSet();
 	exportAromaticRingSet();
+	exportAromaticSSSRSubset();
 	exportSmallestSetOfSmallestRings();
 	exportAromaticSubstructure();
 	exportCyclicSubstructure();

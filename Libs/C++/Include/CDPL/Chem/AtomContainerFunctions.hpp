@@ -39,6 +39,7 @@
 #include "CDPL/Chem/ElementHistogram.hpp"
 #include "CDPL/Math/Matrix.hpp"
 #include "CDPL/Math/VectorArray.hpp"
+#include "CDPL/Util/BitSet.hpp"
 
 
 namespace CDPL 
@@ -99,6 +100,9 @@ namespace CDPL
 		CDPL_CHEM_API std::size_t getMaxComponentGroupID(const AtomContainer& cntnr);
 
 		CDPL_CHEM_API std::size_t getMaxReactionAtomMappingID(const AtomContainer& cntnr);
+
+
+		CDPL_CHEM_API std::size_t buildAtomTypeMask(const AtomContainer& cntnr, Util::BitSet& mask, unsigned int type);
 
 		/**
 		 * @}

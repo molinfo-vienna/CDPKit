@@ -1,7 +1,7 @@
 /* -*- mode: c++; c-basic-offset: 4; tab-width: 4; indent-tabs-mode: t -*- */
 
 /* 
- * MolecularGraphAtomTypeMaskFunction.cpp 
+ * AtomContainerAtomTypeMaskFunction.cpp 
  *
  * This file is part of the Chemical Data Processing Toolkit
  *
@@ -26,16 +26,16 @@
 
 #include "StaticInit.hpp"
 
-#include "CDPL/Chem/MolecularGraphFunctions.hpp"
+#include "CDPL/Chem/AtomContainerFunctions.hpp"
 #include "CDPL/Chem/AtomFunctions.hpp"
 
 
 using namespace CDPL; 
 
 
-std::size_t Chem::buildAtomTypeMask(const Chem::MolecularGraph& molgraph, Util::BitSet& mask, unsigned int atom_type)
+std::size_t Chem::buildAtomTypeMask(const Chem::AtomContainer& cntnr, Util::BitSet& mask, unsigned int type)
 {
-	std::size_t num_atoms = molgraph.getNumAtoms();
+	std::size_t num_atoms = cntnr.getNumAtoms();
 
 	if (mask.size() < num_atoms)
 		mask.resize(num_atoms);
@@ -43,9 +43,9 @@ std::size_t Chem::buildAtomTypeMask(const Chem::MolecularGraph& molgraph, Util::
 	std::size_t num_bits = 0;
 
 	for (std::size_t i = 0; i < num_atoms; i++) {
-		const Atom& atom = molgraph.getAtom(i);
+		const Atom& atom = cntnr.getAtom(i);
 		
-		if (getType(atom) == atom_type) {
+		if (getType(atom) == type) {
 			mask.set(i);
 			num_bits++;
 		}

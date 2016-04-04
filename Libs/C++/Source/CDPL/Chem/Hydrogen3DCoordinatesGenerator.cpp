@@ -520,10 +520,7 @@ void Chem::Hydrogen3DCoordinatesGenerator::assignTemplateCoords(
 	if (num_def_atoms == 1) {
 		Math::Vector3D ref_vec;	getRotationReferenceVector(atom, atom_idx, conctdAtoms[0], num_def_atoms, ref_vec, coords);
 		Math::Vector3D bond_vec = coords[conctdAtoms[0]] - coords[atom_idx];
-
-		ref_vec /= length(ref_vec);
-		bond_vec /= length(bond_vec);
-		
+	
 		Math::Matrix3D ctr_atom_basis; buildOrthogonalBasis(bond_vec, ref_vec, ctr_atom_basis, false);
 		Math::Matrix3D tmplt_basis; buildOrthogonalBasis(tmplt[0], tmplt[1], tmplt_basis, true);
 		Math::Matrix3D tmplt_xform = prod(ctr_atom_basis, tmplt_basis);
@@ -727,15 +724,17 @@ void Chem::Hydrogen3DCoordinatesGenerator::buildOrthogonalBasis(
 	const Math::Vector3D& v1, const Math::Vector3D& v2, Math::Matrix3D& basis, bool transp) const
 {
 	if (transp) {
-		row(basis, 0) = v1;
+		row(basis, 0) = v1 / length(v1);
 		row(basis, 2) = crossProd(v1, v2);
-		row(basis, 1) = crossProd(row(basis, 2), v1);
+		row(basis, 2) /= length(row(basis, 2));
+		row(basis, 1) = crossProd(row(basis, 2), row(basis, 0));
 		return;
 	}
 
-	column(basis, 0) = v1;
+	column(basis, 0) = v1 / length(v1);
 	column(basis, 2) = crossProd(v1, v2);
-	column(basis, 1) = crossProd(column(basis, 2), v1);
+	column(basis, 2) /= length(column(basis, 2));
+	column(basis, 1) = crossProd(column(basis, 2), column(basis, 0));
 }
 
 void Chem::Hydrogen3DCoordinatesGenerator::getRotationReferenceVector(

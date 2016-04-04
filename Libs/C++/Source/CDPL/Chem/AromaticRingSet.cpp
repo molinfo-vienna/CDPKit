@@ -31,7 +31,7 @@
 #include <boost/bind.hpp>
 
 #include "CDPL/Chem/AromaticRingSet.hpp"
-#include "CDPL/Chem/Molecule.hpp"
+#include "CDPL/Chem/MolecularGraph.hpp"
 #include "CDPL/Chem/Bond.hpp"
 #include "CDPL/Chem/MolecularGraphFunctions.hpp"
 

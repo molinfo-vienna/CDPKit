@@ -49,7 +49,6 @@
 #include "CDPL/Chem/ControlParameterDefault.hpp"
 #include "CDPL/Math/Matrix.hpp"
 #include "CDPL/Base/IntegerTypes.hpp"
-#include "CDPL/Util/BitSet.hpp"
 
 
 namespace CDPL 
@@ -444,17 +443,9 @@ namespace CDPL
 		CDPL_CHEM_API void buildElementHistogram(const MolecularGraph& molgraph, ElementHistogram& hist);
 
 	
-		CDPL_CHEM_API const FragmentList::SharedPointer& getAromaticRings(const MolecularGraph& molgraph);
-
-		CDPL_CHEM_API void setAromaticRings(MolecularGraph& molgraph, const FragmentList::SharedPointer& rings);
-
-		CDPL_CHEM_API void clearAromaticRings(MolecularGraph& molgraph);
-
-		CDPL_CHEM_API bool hasAromaticRings(const MolecularGraph& molgraph);
-
 		CDPL_CHEM_API FragmentList::SharedPointer perceiveAromaticRings(const MolecularGraph& molgraph);
 
-		CDPL_CHEM_API FragmentList::SharedPointer perceiveAromaticRings(MolecularGraph& molgraph, bool overwrite);
+		CDPL_CHEM_API FragmentList::SharedPointer extractAromaticSSSRSubset(const MolecularGraph& molgraph);
 
 
 		CDPL_CHEM_API const Fragment::SharedPointer& getAromaticSubstructure(const MolecularGraph& molgraph);
@@ -468,9 +459,6 @@ namespace CDPL
 		CDPL_CHEM_API Fragment::SharedPointer perceiveAromaticSubstructure(const MolecularGraph& molgraph);
 
 		CDPL_CHEM_API Fragment::SharedPointer perceiveAromaticSubstructure(MolecularGraph& molgraph, bool overwrite);
-
-
-		CDPL_CHEM_API std::size_t buildAtomTypeMask(const MolecularGraph& molgraph, Util::BitSet& mask, unsigned int atom_type);
 
 
 		CDPL_CHEM_API bool generateSMILES(const MolecularGraph& molgraph, std::string& smiles, bool canonical = false, 

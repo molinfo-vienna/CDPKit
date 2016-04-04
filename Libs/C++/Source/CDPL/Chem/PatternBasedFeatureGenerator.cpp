@@ -26,11 +26,22 @@
 
 #include "StaticInit.hpp"
 
+#include <algorithm>
+
+#include <boost/bind.hpp>
+
 #include "CDPL/Chem/PatternBasedFeatureGenerator.hpp"
-#include "CDPL/Chem/MolecularGraph.hpp"
+#include "CDPL/Chem/Fragment.hpp"
+#include "CDPL/Chem/Atom.hpp"
+#include "CDPL/Chem/Bond.hpp"
 #include "CDPL/Chem/Pharmacophore.hpp"
 #include "CDPL/Chem/Feature.hpp"
 #include "CDPL/Chem/FeatureFunctions.hpp"
+#include "CDPL/Chem/FeatureGeometry.hpp"
+#include "CDPL/Chem/AtomFunctions.hpp"
+#include "CDPL/Chem/Entity3DFunctions.hpp"
+#include "CDPL/Chem/SubstructureSearch.hpp"
+#include "CDPL/Math/SVDecomposition.hpp"
 
 
 using namespace CDPL; 
@@ -38,14 +49,323 @@ using namespace CDPL;
 
 Chem::PatternBasedFeatureGenerator::PatternBasedFeatureGenerator() {}
 
-std::size_t Chem::PatternBasedFeatureGenerator::generate(const MolecularGraph& molgraph, Pharmacophore& pharm)
+Chem::PatternBasedFeatureGenerator::PatternBasedFeatureGenerator(const MolecularGraph& molgraph, Pharmacophore& pharm) 
 {
-    init(molgraph);
+	generate(molgraph, pharm);
+}
 
-    return 0;
+Chem::PatternBasedFeatureGenerator::PatternBasedFeatureGenerator(const PatternBasedFeatureGenerator& gen):
+	includePatterns(gen.includePatterns), excludePatterns(gen.excludePatterns) {}
+
+Chem::PatternBasedFeatureGenerator::~PatternBasedFeatureGenerator() {}
+
+void Chem::PatternBasedFeatureGenerator::addIncludePattern(const MolecularGraph::SharedPointer& substruct, 
+														   unsigned int ftr_type, double tol, unsigned int ftr_geom,
+														   double length)
+{
+	includePatterns.push_back(FeaturePattern(substruct, ftr_type, tol, ftr_geom, length));
+}
+
+void Chem::PatternBasedFeatureGenerator::addExcludePattern(const MolecularGraph::SharedPointer& substruct)
+{
+	excludePatterns.push_back(substruct);
+}
+		
+void Chem::PatternBasedFeatureGenerator::clearIncludePatterns()
+{
+	includePatterns.clear();
+}
+
+void Chem::PatternBasedFeatureGenerator::clearExcludePatterns()
+{
+	excludePatterns.clear();
+}
+
+void Chem::PatternBasedFeatureGenerator::generate(const MolecularGraph& molgraph, Pharmacophore& pharm)
+{
+	init(molgraph);
+
+	getExcludeMatches();
+
+	Util::BitSet* atom_mask = 0;
+	SubstructureSearch& subsearch = getSubstructureSearch();
+
+	for (FeaturePatternList::const_iterator p_it = includePatterns.begin(), p_end = includePatterns.end(); p_it != p_end; ++p_it) {
+		const FeaturePattern& ptn = *p_it;
+
+		subsearch.setQuery(*ptn.substructQry);		
+		subsearch.findMappings(molgraph);
+
+		std::size_t old_num_inc_matches = includeMatches.size();
+
+		for (SubstructureSearch::ConstMappingIterator m_it = subsearch.getMappingsBegin(),
+				 m_end = subsearch.getMappingsEnd(); m_it != m_end; ++m_it) {
+
+			const AtomBondMapping& mapping = *m_it;
+
+			if (!atom_mask)
+				atom_mask = allocBitSet();
+
+			createMatchedAtomMask(mapping.getAtomMapping(), *atom_mask, true);
+
+			if (isContainedInList(*atom_mask, excludeMatches, excludeMatches.size()))
+				continue;
+
+			if (isContainedInList(*atom_mask, includeMatches, old_num_inc_matches))
+				continue;
+	
+			addFeature(mapping, ptn, pharm);
+
+			includeMatches.push_back(atom_mask);
+			atom_mask = 0;
+		}
+	}
+
+	if (atom_mask)
+		freeBitSet(atom_mask);
+
+	addNonPatternFeatures(molgraph, pharm);
+}
+
+Chem::PatternBasedFeatureGenerator& Chem::PatternBasedFeatureGenerator::operator=(const PatternBasedFeatureGenerator& gen)
+{
+	if (this == &gen)
+		return *this;
+
+	includePatterns = gen.includePatterns;
+	excludePatterns = gen.excludePatterns;
+
+	return *this;
+}
+
+Chem::SubstructureSearch& Chem::PatternBasedFeatureGenerator::getSubstructureSearch()
+{
+	if (!substructSearch) {
+		substructSearch.reset(new SubstructureSearch());
+		substructSearch->uniqueMappingsOnly(true);
+	}
+	
+	return *substructSearch;
+}
+
+void Chem::PatternBasedFeatureGenerator::addFeature(const AtomBondMapping& mapping, const FeaturePattern& ftr_ptn, 
+													Pharmacophore& pharm)
+{
+	Feature& feature = pharm.addFeature();
+
+	setType(feature, ftr_ptn.featureType);
+	setTolerance(feature, ftr_ptn.featureTol);
+
+	Fragment::SharedPointer substruct_ptr(new Fragment());
+	
+	posRefAtomList.clear();
+	geomRefAtom1List.clear();
+	geomRefAtom2List.clear();
+
+	for (AtomMapping::ConstEntryIterator it = mapping.getAtomMapping().getEntriesBegin(), 
+			 end = mapping.getAtomMapping().getEntriesEnd(); it != end; ++it) {
+
+		const Atom& ptn_atom = *it->first;
+		const Atom& mpd_atom = *it->second;
+
+		std::size_t label = getReactionAtomMappingID(ptn_atom);
+
+		if (label & FEATURE_ATOM_FLAG)
+			substruct_ptr->addAtom(mpd_atom);
+		
+		if (label & POS_REF_ATOM_FLAG)
+			posRefAtomList.push_back(&mpd_atom);
+
+		if (label & GEOM_REF_ATOM1_FLAG)
+			geomRefAtom1List.push_back(&mpd_atom);
+
+		if (label & GEOM_REF_ATOM2_FLAG)
+			geomRefAtom2List.push_back(&mpd_atom);
+	}
+
+	for (BondMapping::ConstEntryIterator it = mapping.getBondMapping().getEntriesBegin(), 
+			 end = mapping.getBondMapping().getEntriesEnd(); it != end; ++it) {
+
+		const Bond& mpd_bond = *it->second;
+
+		if (substruct_ptr->containsAtom(mpd_bond.getBegin()) && substruct_ptr->containsAtom(mpd_bond.getEnd()))
+			substruct_ptr->addBond(mpd_bond);
+	}
+
+	setSubstructure(feature, substruct_ptr);
+
+	Math::Vector3D pos;
+
+	if (calcCentroid(posRefAtomList, pos))
+		set3DCoordinates(feature, pos);
+
+	switch (ftr_ptn.featureGeom) {
+
+		case FeatureGeometry::VECTOR: 
+			setLength(feature, ftr_ptn.vectorLength);
+
+		case FeatureGeometry::PLANE: {
+			Math::Vector3D orient, tmp;
+
+			if (ftr_ptn.featureGeom == FeatureGeometry::VECTOR ? 
+				calcVecFeatureOrientation(geomRefAtom1List, geomRefAtom2List, orient) : 
+				calcPlaneFeatureOrientation(geomRefAtom1List, orient, tmp))
+
+				setOrientation(feature, orient);
+		}
+
+		default:
+			break;
+	}
+
+	setGeometry(feature, ftr_ptn.featureGeom);
+}
+
+bool Chem::PatternBasedFeatureGenerator::calcVecFeatureOrientation(const AtomList& alist1, const AtomList& alist2, Math::Vector3D& orient) const
+{
+	Math::Vector3D org;
+
+	if (!calcCentroid(alist1, org))
+		return false;
+ 
+	if (!calcCentroid(alist2, orient))
+		return false;
+ 
+	orient.minusAssign(org);
+	orient /= length(orient);
+
+	return true;
+}
+
+bool Chem::PatternBasedFeatureGenerator::calcPlaneFeatureOrientation(const AtomList& alist, Math::Vector3D& orient, Math::Vector3D& centroid)
+{
+	if (!calcCentroid(alist, centroid))
+		return false;
+
+	std::size_t num_points = alist.size();
+
+	svdU.resize(3, num_points, false);
+	svdV.resize(num_points, num_points, false);
+	svdW.resize(num_points, false);
+	
+	for (std::size_t i = 0; i < num_points; i++)
+		column(svdU, i) = get3DCoordinates(*alist[i]) - centroid;
+
+	if (!svDecompose(svdU, svdW, svdV))
+		return false;
+
+	orient = column(svdU, 2);
+	orient /= length(orient);
+
+	return true;
+}
+
+bool Chem::PatternBasedFeatureGenerator::calcCentroid(const AtomList& alist, Math::Vector3D& centroid) const
+{
+	for (AtomList::const_iterator it = alist.begin(), end = alist.end(); it != end; ++it) {
+		const Atom& atom = **it;
+
+		if (!has3DCoordinates(atom))
+			return false;
+
+		centroid.plusAssign(get3DCoordinates(atom));
+	}
+
+	if (alist.size() == 0)
+		return false;
+
+	centroid /= double(alist.size());
+	return true;
+}
+
+void Chem::PatternBasedFeatureGenerator::getExcludeMatches()
+{
+	SubstructureSearch& subsearch = getSubstructureSearch();
+
+	for (SubstructPatternList::const_iterator p_it = excludePatterns.begin(), p_end = excludePatterns.end(); p_it != p_end; ++p_it) {
+		subsearch.setQuery(*p_it->get());		
+		subsearch.findMappings(*molGraph);
+
+		for (SubstructureSearch::ConstMappingIterator m_it = subsearch.getMappingsBegin(), 
+				 m_end = subsearch.getMappingsEnd(); m_it != m_end; ++m_it) {
+
+			Util::BitSet* atom_mask = allocBitSet();
+
+			createMatchedAtomMask(m_it->getAtomMapping(), *atom_mask);
+
+			excludeMatches.push_back(atom_mask);
+		}
+	}
+}
+
+bool Chem::PatternBasedFeatureGenerator::isContainedInList(const Util::BitSet& atom_mask, const BitSetList& bset_list, std::size_t count) const
+{
+	for (std::size_t i = 0; i < count; i++)
+		if (atom_mask.is_subset_of(*bset_list[i]))
+			return true;
+
+	return false;
+}
+
+bool Chem::PatternBasedFeatureGenerator::isContainedInIncMatchList(const Util::BitSet& atom_mask) const 
+{
+	return isContainedInList(atom_mask, includeMatches, includeMatches.size());
+}
+
+bool Chem::PatternBasedFeatureGenerator::isContainedInExMatchList(const Util::BitSet& atom_mask) const
+{
+	return isContainedInList(atom_mask, excludeMatches, excludeMatches.size());
+}
+
+void Chem::PatternBasedFeatureGenerator::createMatchedAtomMask(const AtomMapping& mapping, Util::BitSet& atom_mask, bool check_label) const
+{
+	atom_mask.resize(molGraph->getNumAtoms());
+	atom_mask.reset();
+
+	for (AtomMapping::ConstEntryIterator it = mapping.getEntriesBegin(), end = mapping.getEntriesEnd(); it != end; ++it) {
+		if (check_label) {
+			std::size_t label = getReactionAtomMappingID(*it->first);
+
+			if (!(label & FEATURE_ATOM_FLAG))
+				continue;
+		}
+
+		atom_mask.set(molGraph->getAtomIndex(*it->second));
+	}
 }
 
 void Chem::PatternBasedFeatureGenerator::init(const MolecularGraph& molgraph)
 {
     molGraph = &molgraph;
+
+	std::for_each(includeMatches.begin(), includeMatches.end(), 
+				  boost::bind(&PatternBasedFeatureGenerator::freeBitSet, this, _1));
+
+	std::for_each(excludeMatches.begin(), excludeMatches.end(), 
+				  boost::bind(&PatternBasedFeatureGenerator::freeBitSet, this, _1));
+
+	includeMatches.clear();
+	excludeMatches.clear();
+}
+
+void Chem::PatternBasedFeatureGenerator::freeBitSet(Util::BitSet* bset)
+{
+	freeBitSets.push_back(bset);
+}
+
+Util::BitSet* Chem::PatternBasedFeatureGenerator::allocBitSet()
+{
+	if (freeBitSets.empty()) {
+		BitSetPtr bset_ptr(new Util::BitSet());
+	
+		allocBitSets.push_back(bset_ptr);
+
+		return bset_ptr.get();
+	}
+
+	Util::BitSet* bset = freeBitSets.back();
+
+	freeBitSets.pop_back();
+
+	return bset;	
 }

@@ -36,7 +36,9 @@ using namespace CDPL;
 
 double Chem::getLength(const Feature& feature)
 {
-    return feature.getPropertyOrDefault<double>(FeatureProperty::LENGTH, 1.0);
+	static const double DEF_LENGTH = 1.0;
+
+    return feature.getPropertyOrDefault<double>(FeatureProperty::LENGTH, DEF_LENGTH);
 }
 
 void Chem::setLength(Feature& feature, double length)

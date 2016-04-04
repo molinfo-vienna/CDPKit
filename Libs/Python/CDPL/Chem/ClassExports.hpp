@@ -86,8 +86,14 @@ namespace CDPLPythonChem
 
 	void exportReactor();
 
+	void exportPharmacophoreGenerator();
+	void exportPatternBasedFeatureGenerator();
+	void exportAromaticFeatureGenerator();
+	void exportHydrophobicFeatureGenerator();
+
 	void exportCompleteRingSet();
 	void exportAromaticRingSet();
+	void exportAromaticSSSRSubset();
 	void exportSmallestSetOfSmallestRings();
 	void exportAromaticSubstructure();
 	void exportCyclicSubstructure();

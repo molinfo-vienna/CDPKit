@@ -26,7 +26,13 @@
 
 #include "StaticInit.hpp"
 
+#include <sstream>
+
 #include "CDPL/Chem/UtilityFunctions.hpp"
+#include "CDPL/Chem/MolecularGraphFunctions.hpp"
+#include "CDPL/Chem/BasicMolecule.hpp"
+#include "CDPL/Chem/SMARTSMoleculeReader.hpp"
+#include "CDPL/Chem/SMILESMoleculeReader.hpp"
 
 
 using namespace CDPL; 
@@ -44,3 +50,27 @@ void Chem::foldBitSet(Util::BitSet& bs, std::size_t num_times)
 		bs.resize(new_num_bits);
 	}
 }
+
+Chem::Molecule::SharedPointer Chem::parseSMARTS(const std::string& smarts, bool init_qry)
+{
+	Molecule::SharedPointer mol_ptr(new BasicMolecule());
+	std::istringstream iss(smarts);
+
+	SMARTSMoleculeReader(iss).read(*mol_ptr);
+
+	if (init_qry)
+		initSubstructureSearchQuery(*mol_ptr, true);
+
+	return mol_ptr;
+}
+
+Chem::Molecule::SharedPointer Chem::parseSMILES(const std::string& smiles)
+{
+	Molecule::SharedPointer mol_ptr(new BasicMolecule());
+	std::istringstream iss(smiles);
+
+	SMILESMoleculeReader(iss).read(*mol_ptr);
+
+	return mol_ptr;
+}
+

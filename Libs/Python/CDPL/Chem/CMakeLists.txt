@@ -64,8 +64,14 @@ SET(chem_MOD_SRCS
 
     ReactorExport.cpp 
   
+    PharmacophoreGeneratorExport.cpp
+    PatternBasedFeatureGeneratorExport.cpp
+    AromaticFeatureGeneratorExport.cpp
+    HydrophobicFeatureGeneratorExport.cpp
+
     CompleteRingSetExport.cpp 
     AromaticRingSetExport.cpp 
+    AromaticSSSRSubsetExport.cpp 
     SmallestSetOfSmallestRingsExport.cpp 
     AromaticSubstructureExport.cpp 
     CyclicSubstructureExport.cpp 

@@ -36,7 +36,9 @@ using namespace CDPL;
 
 double Chem::getTolerance(const Feature& feature)
 {
-    return feature.getPropertyOrDefault<double>(FeatureProperty::TOLERANCE, 1.0);
+	static const double DEF_TOL = 1.0;
+
+    return feature.getPropertyOrDefault<double>(FeatureProperty::TOLERANCE, DEF_TOL);
 }
 
 void Chem::setTolerance(Feature& feature, double tol)

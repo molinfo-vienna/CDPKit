@@ -90,7 +90,6 @@ namespace
 	MAKE_MOLGRAPH_FUNC_WRAPPERS(const CDPL::Chem::FragmentList::SharedPointer&, Components)
 	MAKE_MOLGRAPH_FUNC_WRAPPERS(const CDPL::Chem::FragmentList::SharedPointer&, Rings)
 	MAKE_MOLGRAPH_FUNC_WRAPPERS(const CDPL::Chem::FragmentList::SharedPointer&, SSSR)
-	MAKE_MOLGRAPH_FUNC_WRAPPERS(const CDPL::Chem::FragmentList::SharedPointer&, AromaticRings)
 	MAKE_MOLGRAPH_FUNC_WRAPPERS(const CDPL::Chem::Fragment::SharedPointer&, CyclicSubstructure)
 	MAKE_MOLGRAPH_FUNC_WRAPPERS(const CDPL::Chem::Fragment::SharedPointer&, AromaticSubstructure)
 	MAKE_MOLGRAPH_FUNC_WRAPPERS(const CDPL::Math::ULMatrix::SharedPointer&, TopologicalDistanceMatrix)
@@ -111,6 +110,7 @@ namespace
 	MAKE_FUNCTION_WRAPPER1(CDPL::Chem::FragmentList::SharedPointer, perceiveRings, CDPL::Chem::MolecularGraph&)
 	MAKE_FUNCTION_WRAPPER1(CDPL::Chem::FragmentList::SharedPointer, perceiveSSSR, CDPL::Chem::MolecularGraph&)
 	MAKE_FUNCTION_WRAPPER1(CDPL::Chem::FragmentList::SharedPointer, perceiveAromaticRings, CDPL::Chem::MolecularGraph&)
+	MAKE_FUNCTION_WRAPPER1(CDPL::Chem::FragmentList::SharedPointer, extractAromaticSSSRSubset, CDPL::Chem::MolecularGraph&)
 	MAKE_FUNCTION_WRAPPER1(CDPL::Chem::Fragment::SharedPointer, perceiveCyclicSubstructure, CDPL::Chem::MolecularGraph&)
 	MAKE_FUNCTION_WRAPPER1(CDPL::Chem::Fragment::SharedPointer, perceiveAromaticSubstructure, CDPL::Chem::MolecularGraph&)
 	MAKE_FUNCTION_WRAPPER1(std::size_t, calcTopologicalRadius, CDPL::Chem::MolecularGraph&);
@@ -154,8 +154,6 @@ namespace
 	MAKE_FUNCTION_WRAPPER2(std::size_t, getOrdinaryHydrogenCount, CDPL::Chem::MolecularGraph&, unsigned int);
 	MAKE_FUNCTION_WRAPPER2(std::size_t, getExplicitOrdinaryHydrogenCount, CDPL::Chem::MolecularGraph&, unsigned int);
 	MAKE_FUNCTION_WRAPPER2(std::size_t, getBondCount, CDPL::Chem::MolecularGraph&, std::size_t);
-
-	MAKE_FUNCTION_WRAPPER3(std::size_t, buildAtomTypeMask, CDPL::Chem::MolecularGraph&, CDPL::Util::BitSet&, unsigned int)
 
 	MAKE_FUNCTION_WRAPPER5(CDPL::Base::uint64, calcHashCode, CDPL::Chem::MolecularGraph&,
 	 					   unsigned int, unsigned int, bool, bool)
@@ -295,6 +293,8 @@ void CDPLPythonChem::exportMolecularGraphFunctions()
 	 			python::arg("molgraph"), python::with_custodian_and_ward_postcall<0, 1>());
 	python::def("perceiveAromaticRings", &perceiveAromaticRingsWrapper1,
 	 			python::arg("molgraph"), python::with_custodian_and_ward_postcall<0, 1>());
+	python::def("extractAromaticSSSRSubset", &extractAromaticSSSRSubsetWrapper1,
+	 			python::arg("molgraph"), python::with_custodian_and_ward_postcall<0, 1>());
 	python::def("perceiveSSSR", &perceiveSSSRWrapper1,
 	 			python::arg("molgraph"), python::with_custodian_and_ward_postcall<0, 1>());
 	python::def("perceiveCyclicSubstructure", &perceiveCyclicSubstructureWrapper1,
@@ -313,9 +313,6 @@ void CDPLPythonChem::exportMolecularGraphFunctions()
 	 			(python::arg("molgraph"), python::arg("overwrite")), python::with_custodian_and_ward_postcall<0, 1>());
     python::def("perceiveRings", 
 				static_cast<Chem::FragmentList::SharedPointer (*)(Chem::MolecularGraph&, bool)>(&Chem::perceiveRings),
-	 			(python::arg("molgraph"), python::arg("overwrite")), python::with_custodian_and_ward_postcall<0, 1>());
-    python::def("perceiveAromaticRings", 
-				static_cast<Chem::FragmentList::SharedPointer (*)(Chem::MolecularGraph&, bool)>(&Chem::perceiveAromaticRings),
 	 			(python::arg("molgraph"), python::arg("overwrite")), python::with_custodian_and_ward_postcall<0, 1>());
     python::def("perceiveSSSR",
 				static_cast<Chem::FragmentList::SharedPointer (*)(Chem::MolecularGraph&, bool)>(&Chem::perceiveSSSR),
@@ -343,9 +340,7 @@ void CDPLPythonChem::exportMolecularGraphFunctions()
 				(python::arg("molgraph"), python::arg("mtx")));
     python::def("calcTopologicalDistanceMatrix",  &calcTopologicalDistanceMatrixWrapper2, 
 				(python::arg("molgraph"), python::arg("mtx")));
-    python::def("buildAtomTypeMask",  &buildAtomTypeMaskWrapper3, 
-				(python::arg("molgraph"), python::arg("mask"), python::arg("atom_type")));
-	python::def("calcTopologicalRadius", &calcTopologicalRadiusWrapper1, python::arg("molgraph"));
+ 	python::def("calcTopologicalRadius", &calcTopologicalRadiusWrapper1, python::arg("molgraph"));
 	python::def("calcTopologicalDiameter", &calcTopologicalDiameterWrapper1, python::arg("molgraph"));
 	python::def("calcRingComplexity", &calcRingComplexityWrapper1, python::arg("molgraph"));
 	python::def("calcKierShape1", &calcKierShape1Wrapper1, python::arg("molgraph"));
@@ -410,7 +405,6 @@ void CDPLPythonChem::exportMolecularGraphFunctions()
 	EXPORT_MOLGRAPH_FUNCS_COPY_REF_CW(AromaticSubstructure, substruct)
 	EXPORT_MOLGRAPH_FUNCS_COPY_REF_CW(CyclicSubstructure, substruct)
 	EXPORT_MOLGRAPH_FUNCS_COPY_REF_CW(SSSR, sssr)
-	EXPORT_MOLGRAPH_FUNCS_COPY_REF_CW(AromaticRings, rings)
 	EXPORT_MOLGRAPH_FUNCS_COPY_REF_CW(Rings, rings)
     EXPORT_MOLGRAPH_FUNCS_COPY_REF_CW(MatchExpression, expr)
 	EXPORT_MOLGRAPH_FUNCS_COPY_REF_CW(ComponentGroups, comp_groups)

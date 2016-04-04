@@ -36,7 +36,9 @@ using namespace CDPL;
 
 bool Chem::getDisabledFlag(const Feature& feature)
 {
-    return feature.getPropertyOrDefault<bool>(FeatureProperty::DISABLED_FLAG, false);
+	static const bool DEF_FLAG = false;
+
+    return feature.getPropertyOrDefault<bool>(FeatureProperty::DISABLED_FLAG, DEF_FLAG);
 }
 
 void Chem::setDisabledFlag(Feature& feature, bool flag)

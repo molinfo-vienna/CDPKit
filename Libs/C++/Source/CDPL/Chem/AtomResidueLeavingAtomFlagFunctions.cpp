@@ -36,7 +36,9 @@ using namespace CDPL;
 
 bool Chem::getResidueLeavingAtomFlag(const Atom& atom)
 {
-    return atom.getPropertyOrDefault<bool>(AtomProperty::RESIDUE_LEAVING_ATOM_FLAG, false);
+	static const bool DEF_FLAG = false;
+
+    return atom.getPropertyOrDefault<bool>(AtomProperty::RESIDUE_LEAVING_ATOM_FLAG, DEF_FLAG);
 }
 
 void Chem::setResidueLeavingAtomFlag(Atom& atom, bool leaving)

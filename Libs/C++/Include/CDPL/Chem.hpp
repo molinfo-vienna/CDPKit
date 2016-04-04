@@ -168,6 +168,7 @@
 
 #include "CDPL/Chem/CompleteRingSet.hpp"
 #include "CDPL/Chem/AromaticRingSet.hpp"
+#include "CDPL/Chem/AromaticSSSRSubset.hpp"
 #include "CDPL/Chem/SmallestSetOfSmallestRings.hpp"
 #include "CDPL/Chem/AromaticSubstructure.hpp"
 #include "CDPL/Chem/CyclicSubstructure.hpp"
@@ -203,6 +204,9 @@
 #include "CDPL/Chem/BurdenMatrixGenerator.hpp"
 #include "CDPL/Chem/BCUTDescriptorCalculator.hpp"
 #include "CDPL/Chem/PatternBasedFeatureGenerator.hpp"
+#include "CDPL/Chem/AromaticFeatureGenerator.hpp"
+#include "CDPL/Chem/HydrophobicFeatureGenerator.hpp"
+#include "CDPL/Chem/PharmacophoreGenerator.hpp"
 
 #include "CDPL/Chem/SimilarityFunctions.hpp"
 #include "CDPL/Chem/UtilityFunctions.hpp"

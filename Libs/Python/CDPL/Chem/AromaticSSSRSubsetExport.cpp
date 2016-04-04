@@ -1,7 +1,7 @@
 /* -*- mode: c++; c-basic-offset: 4; tab-width: 4; indent-tabs-mode: t -*- */
 
 /* 
- * FeatureType.hpp 
+ * AromaticSSSRSubsetExport.cpp 
  *
  * This file is part of the Chemical Data Processing Toolkit
  *
@@ -23,53 +23,25 @@
  * Boston, MA 02111-1307, USA.
  */
 
-/**
- * \file
- * \brief Definition of constants in namespace CDPL::Chem::FeatureType.
- */
 
-#ifndef CDPL_CHEM_FEATURETYPE_HPP
-#define CDPL_CHEM_FEATURETYPE_HPP
+#include <boost/python.hpp>
+
+#include "CDPL/Chem/AromaticSSSRSubset.hpp"
+#include "CDPL/Chem/MolecularGraph.hpp"
+
+#include "ClassExports.hpp"
 
 
-namespace CDPL 
+void CDPLPythonChem::exportAromaticSSSRSubset()
 {
+	using namespace boost;
+	using namespace CDPL;
 
-    namespace Chem 
-    {
-
-	/**
-	 * \addtogroup CDPL_CHEM_CONSTANTS
-	 * @{
-	 */
-
-	/**
-	 * \brief Provides constants for the specification of the generic type of a pharmacophore feature.
-	 */
-	namespace FeatureType 
-	{
-		
-	    const unsigned int UNKNOWN         = 0;
-
-	    const unsigned int HYDROPHOBIC     = 1;
-
-	    const unsigned int AROMATIC        = 2;
-
-	    const unsigned int NEG_IONIZABLE   = 3;
-
-	    const unsigned int POS_IONIZABLE   = 4;
-
-	    const unsigned int H_BOND_DONOR    = 5;
-
-	    const unsigned int H_BOND_ACCEPTOR = 6;
-
-	    const unsigned int X_VOLUME        = 7;
-	}
-
-	/**
-	 * @}
-	 */
-    }
+	python::class_<Chem::AromaticSSSRSubset, Chem::AromaticSSSRSubset::SharedPointer,
+				   python::bases<Chem::FragmentList>, boost::noncopyable>("AromaticSSSRSubset", python::no_init)
+		.def(python::init<>(python::arg("self")))
+		.def(python::init<const Chem::MolecularGraph&>((python::arg("self"), python::arg("molgraph")))
+			 [python::with_custodian_and_ward<1, 2>()])
+		.def("extract", &Chem::AromaticSSSRSubset::extract, (python::arg("self"), python::arg("molgraph")), 
+			 python::with_custodian_and_ward<1, 2>());
 }
-
-#endif // CDPL_CHEM_FEATURETYPE_HPP

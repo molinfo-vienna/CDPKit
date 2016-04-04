@@ -32,8 +32,10 @@
 #define CDPL_CHEM_UTILITYFUNCTIONS_HPP
 
 #include <cstddef>
+#include <string>
 
 #include "CDPL/Chem/APIPrefix.hpp"
+#include "CDPL/Chem/Molecule.hpp"
 #include "CDPL/Util/BitSet.hpp"
 
 
@@ -59,6 +61,10 @@ namespace CDPL
 		 * \param num_times The number of times the bitset has to be folded.
 		 */
 		CDPL_CHEM_API void foldBitSet(Util::BitSet& bs, std::size_t num_times);
+
+		CDPL_CHEM_API Molecule::SharedPointer parseSMARTS(const std::string& smarts, bool init_qry = true);
+
+		CDPL_CHEM_API Molecule::SharedPointer parseSMILES(const std::string& smiles);
 
 		/**
 		 * @}

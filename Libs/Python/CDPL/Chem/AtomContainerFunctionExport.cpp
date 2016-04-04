@@ -29,6 +29,7 @@
 #include "CDPL/Chem/AtomContainer.hpp"
 #include "CDPL/Chem/AtomContainerFunctions.hpp"
 #include "CDPL/Math/VectorArray.hpp"
+#include "CDPL/Util/BitSet.hpp"
 
 #include "FunctionExports.hpp"
 #include "FunctionWrapper.hpp"
@@ -55,6 +56,7 @@ namespace
 	MAKE_FUNCTION_WRAPPER2(void, get2DCoordinates, CDPL::Chem::AtomContainer&, CDPL::Math::Vector2DArray&);
 
 	MAKE_FUNCTION_WRAPPER3(void, getConformationData, CDPL::Chem::AtomContainer&, std::size_t, CDPL::Math::Vector3DArray&);
+	MAKE_FUNCTION_WRAPPER3(std::size_t, buildAtomTypeMask, CDPL::Chem::AtomContainer&, CDPL::Util::BitSet&, unsigned int)
 
 	std::string buildExplicitMassCompositionStringWrapper(CDPL::Chem::AtomContainer& cntnr)
 	{
@@ -100,4 +102,6 @@ void CDPLPythonChem::exportAtomContainerFunctions()
 	python::def("getConformationData", &getConformationDataWrapper3, (python::arg("cntnr"), python::arg("conf_idx"),python::arg("coords")));
 	python::def("addConformationData", &Chem::addConformationData, (python::arg("cntnr"), python::arg("coords")));
 	python::def("getNumConformations", &getNumConformationsWrapper1, python::arg("cntnr"));
+	python::def("buildAtomTypeMask",  &buildAtomTypeMaskWrapper3, 
+				(python::arg("cntnr"), python::arg("mask"), python::arg("type")));
 }

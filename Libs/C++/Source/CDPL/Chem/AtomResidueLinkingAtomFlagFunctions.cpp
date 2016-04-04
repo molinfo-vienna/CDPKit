@@ -36,7 +36,9 @@ using namespace CDPL;
 
 bool Chem::getResidueLinkingAtomFlag(const Atom& atom)
 {
-    return atom.getPropertyOrDefault<bool>(AtomProperty::RESIDUE_LINKING_ATOM_FLAG, false);
+	static const bool DEF_FLAG = false;
+
+    return atom.getPropertyOrDefault<bool>(AtomProperty::RESIDUE_LINKING_ATOM_FLAG, DEF_FLAG);
 }
 
 void Chem::setResidueLinkingAtomFlag(Atom& atom, bool linking)
