@@ -51,6 +51,11 @@ Chem::AromaticFeatureGenerator::AromaticFeatureGenerator():
 	featureType(FeatureType::AROMATIC), featureGeom(FeatureGeometry::PLANE), featureTol(0.9) 
 {}
 
+Chem::AromaticFeatureGenerator::AromaticFeatureGenerator(const AromaticFeatureGenerator& gen):
+	PatternBasedFeatureGenerator(gen), featureType(gen.featureType), featureGeom(gen.featureGeom),
+	featureTol(gen.featureTol)
+{}
+
 Chem::AromaticFeatureGenerator::AromaticFeatureGenerator(const MolecularGraph& molgraph, Pharmacophore& pharm):
 	featureType(FeatureType::AROMATIC), featureGeom(FeatureGeometry::PLANE), featureTol(0.9) 
 {
@@ -87,6 +92,19 @@ void Chem::AromaticFeatureGenerator::setFeatureTolerance(double tol)
 double Chem::AromaticFeatureGenerator::getFeatureTolerance() const
 {
 	return featureTol;
+}
+
+Chem::AromaticFeatureGenerator& Chem::AromaticFeatureGenerator::operator=(const AromaticFeatureGenerator& gen)
+{
+	if (this == &gen)
+		return *this;
+
+	PatternBasedFeatureGenerator::operator=(gen);
+	featureType = gen.featureType;
+	featureGeom = gen.featureGeom;
+	featureTol = gen.featureTol; 
+
+	return *this;
 }
 
 void Chem::AromaticFeatureGenerator::addNonPatternFeatures(const MolecularGraph& molgraph, Pharmacophore& pharm)
@@ -128,3 +146,4 @@ void Chem::AromaticFeatureGenerator::addNonPatternFeatures(const MolecularGraph&
 		}
 	} 
 }
+

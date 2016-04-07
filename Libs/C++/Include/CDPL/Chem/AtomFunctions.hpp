@@ -593,6 +593,12 @@ namespace CDPL
 		CDPL_CHEM_API bool hasBFactor(const Atom& atom);
 
 
+		CDPL_CHEM_API bool areInSameResidue(const Atom& atom1, const Atom& atom2, unsigned int flags = AtomPropertyFlag::DEFAULT);
+
+		CDPL_CHEM_API void extractResidueSubstructure(const Atom& atom, const MolecularGraph& molgraph, Fragment& res_substruct, 
+													  bool cnctd_only = false, unsigned int flags = AtomPropertyFlag::DEFAULT);
+
+
 		template <typename AtomType, typename OutputIterator>
 		std::size_t getConnectedAtoms(AtomType& atom, const MolecularGraph& molgraph, OutputIterator it)
 		{

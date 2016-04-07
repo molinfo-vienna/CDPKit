@@ -65,9 +65,14 @@ SET(chem_MOD_SRCS
     ReactorExport.cpp 
   
     PharmacophoreGeneratorExport.cpp
+    DefaultPharmacophoreGeneratorExport.cpp
     PatternBasedFeatureGeneratorExport.cpp
     AromaticFeatureGeneratorExport.cpp
     HydrophobicFeatureGeneratorExport.cpp
+    HBondAcceptorFeatureGeneratorExport.cpp
+    HBondDonorFeatureGeneratorExport.cpp
+    PosIonizableFeatureGeneratorExport.cpp
+    NegIonizableFeatureGeneratorExport.cpp
 
     CompleteRingSetExport.cpp 
     AromaticRingSetExport.cpp 

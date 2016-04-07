@@ -568,6 +568,11 @@ namespace CDPL
 
 		CDPL_CHEM_API void setAtomSymbolsFromTypes(MolecularGraph& molgraph, bool overwrite);
 
+		
+		CDPL_CHEM_API void extractEnvironmentResidues(const MolecularGraph& core, const MolecularGraph& macromol, Fragment& env_residues, double max_dist = 7.0);
+
+		CDPL_CHEM_API void setHydrogenResidueSequenceInfo(MolecularGraph& molgraph, bool overwrite, unsigned int flags = AtomPropertyFlag::DEFAULT);
+
 		/**
 		 * @}
 		 */

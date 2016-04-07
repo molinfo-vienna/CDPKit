@@ -155,6 +155,8 @@ namespace
 	MAKE_FUNCTION_WRAPPER2(std::size_t, getExplicitOrdinaryHydrogenCount, CDPL::Chem::MolecularGraph&, unsigned int);
 	MAKE_FUNCTION_WRAPPER2(std::size_t, getBondCount, CDPL::Chem::MolecularGraph&, std::size_t);
 
+	MAKE_FUNCTION_WRAPPER4(void, extractEnvironmentResidues, CDPL::Chem::MolecularGraph&, CDPL::Chem::MolecularGraph&, CDPL::Chem::Fragment&, double);
+
 	MAKE_FUNCTION_WRAPPER5(CDPL::Base::uint64, calcHashCode, CDPL::Chem::MolecularGraph&,
 	 					   unsigned int, unsigned int, bool, bool)
 
@@ -282,6 +284,8 @@ void CDPLPythonChem::exportMolecularGraphFunctions()
 				(python::arg("molgraph"), python::arg("overwrite")));
 	python::def("setAtomSymbolsFromTypes", &Chem::setAtomSymbolsFromTypes,
 				(python::arg("molgraph"), python::arg("overwrite")));
+	python::def("setHydrogenResidueSequenceInfo", &Chem::setHydrogenResidueSequenceInfo, 
+				(python::arg("molgraph"), python::arg("overwrite"), python::arg("flags") = Chem::AtomPropertyFlag::DEFAULT));
 
 	python::def("buildMatchExpression", &buildMatchExpressionWrapper1,
 	 			python::arg("molgraph"), python::with_custodian_and_ward_postcall<0, 1>());
@@ -378,6 +382,10 @@ void CDPLPythonChem::exportMolecularGraphFunctions()
 	python::def("calcRuleOfFiveScore", &calcRuleOfFiveScoreWrapper1, python::arg("molgraph"));
 	python::def("calcMeanPolarizability", &calcMeanPolarizabilityWrapper1, python::arg("molgraph"));
 	python::def("calcMolecularComplexity", &calcMolecularComplexityWrapper1, python::arg("molgraph"));
+
+	python::def("extractEnvironmentResidues", &extractEnvironmentResiduesWrapper4, 
+				(python::arg("core"), python::arg("macromol"), python::arg("env_residues"),
+				 python::arg("max_dist") = 7.0));
 
 	python::def("generateINCHI", &generateINCHIWrapper, 
 				(python::arg("molgraph"), python::arg("options") = Chem::ControlParameterDefault::INCHI_OUTPUT_OPTIONS,

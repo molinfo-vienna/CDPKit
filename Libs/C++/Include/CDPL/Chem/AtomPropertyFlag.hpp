@@ -102,12 +102,22 @@ namespace CDPL
 			/**
 			 * \brief Specifies the configuration of a stereogenic atom.
 			 */
-			const unsigned int CONFIGURATION      = 0x100;
+			const unsigned int CONFIGURATION     = 0x100;
 
 			/**
 			 * \brief Specifies the atom-mapping ID an atom in a reaction.
 			 */
-			const unsigned int ATOM_MAPPING_ID    = 0x200;
+			const unsigned int ATOM_MAPPING_ID   = 0x200;
+
+			const unsigned int RESIDUE_CODE      = 0x400;
+
+			const unsigned int RESIDUE_SEQ_NO    = 0x800;
+
+			const unsigned int RESIDUE_INS_CODE  = 0x1000;
+
+			const unsigned int CHAIN_ID          = 0x2000;
+
+			const unsigned int MODEL_NUMBER      = 0x4000;
 		}
 
 		/**

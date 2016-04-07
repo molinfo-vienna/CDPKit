@@ -42,14 +42,12 @@ void CDPLPythonChem::exportPatternBasedFeatureGenerator()
 
     python::class_<Chem::PatternBasedFeatureGenerator, boost::noncopyable>("PatternBasedFeatureGenerator", python::no_init)
 	.def(python::init<>(python::arg("self")))
-	.def(python::init<const Chem::MolecularGraph&, Chem::Pharmacophore&>(
-		 (python::arg("self"), python::arg("molgraph"), python::arg("pharm"))))
 	.def(python::init<const Chem::PatternBasedFeatureGenerator&>(
 		 (python::arg("self"), python::arg("gen"))))
 	.def(CDPLPythonBase::ObjectIdentityCheckVisitor<Chem::PatternBasedFeatureGenerator>())	
 	.def("addIncludePattern", &Chem::PatternBasedFeatureGenerator::addIncludePattern, 
-	     (python::arg("self"), python::arg("substruct"), python::arg("ftr_type"), python::arg("tol") = 1.0,
-	      python::arg("ftr_geom") = Chem::FeatureGeometry::SPHERE, python::arg("length") = 1.0))
+	     (python::arg("self"), python::arg("substruct"), python::arg("type"), python::arg("tol") = 1.0,
+	      python::arg("geom") = Chem::FeatureGeometry::SPHERE, python::arg("length") = 1.0))
 	.def("addExcludePattern", &Chem::PatternBasedFeatureGenerator::addExcludePattern, 
 	     (python::arg("self"), python::arg("substruct")))
 	.def("clearIncludePatterns", &Chem::PatternBasedFeatureGenerator::clearIncludePatterns, 

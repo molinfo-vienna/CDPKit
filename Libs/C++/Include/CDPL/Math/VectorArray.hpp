@@ -88,19 +88,27 @@ namespace CDPL
 			typedef boost::shared_ptr<VectorArray> SharedPointer;
 
 			/**
-			 * \brief Transforms each \f$ N \f$-dimenional vector in the array with the \f$ N \f$-dimensional square matrix \a xform.
+			 * \brief Transforms each \f$ N \f$-dimensional vector in the array with the \f$ N \f$-dimensional square matrix \a xform.
 			 * \param xform The transformation matrix.
 			 */
 			template <typename T1>
 			void transform(const CMatrix<T1, Dim, Dim>& xform);
 
 			/**
-			 * \brief Transforms each \f$ N \f$-dimenional vector in the array with the \f$ N+1 \f$-dimensional square matrix \a xform.
+			 * \brief Transforms each \f$ N \f$-dimensional vector in the array with the \f$ N+1 \f$-dimensional square matrix \a xform.
 			 * \param xform The transformation matrix.
 			 * \note The missing vector element is taken to be \c 1.0.
 			 */
 			template <typename T1>
 			void transform(const CMatrix<T1, Dim + 1, Dim + 1>& xform);
+
+			/**
+			 * \brief Calculates the centroid of the array elements.
+			 * \param ctr Stores the calculated centroid.
+			 * \return \c true if the array is not empty, and \c false otherwise.
+			 */
+			template <typename T1>
+			bool calcCentroid(CVector<T1, Dim>& ctr);
 
 		private:
 			CDPL_MATH_INLINE const char* getClassName() const {
@@ -182,6 +190,24 @@ namespace CDPL
 				for (std::size_t i = 0; i < Dim; i++)
 					vec(i) = tmp2(i);
 			}
+		}
+
+		template <typename T, std::size_t Dim>
+		template <typename T1>
+		CDPL_MATH_INLINE
+		bool VectorArray<CVector<T, Dim> >::calcCentroid(CVector<T1, Dim>& ctr)
+		{
+			if (this->isEmpty())
+				return false;
+
+			ctr.clear();
+
+			for (typename VectorArray::ElementIterator it = this->getElementsBegin(), end = this->getElementsEnd(); it != end; ++it) 
+				ctr.plusAssign(*it);
+
+			ctr /= this->getSize();
+
+			return true;
 		}
 
 		/**

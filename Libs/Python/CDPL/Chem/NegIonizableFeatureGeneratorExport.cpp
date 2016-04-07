@@ -1,7 +1,7 @@
 /* -*- mode: c++; c-basic-offset: 4; tab-width: 4; indent-tabs-mode: t -*- */
 
 /* 
- * PharmacophoreFunctionExport.cpp 
+ * NegIonizableFeatureGeneratorExport.cpp 
  *
  * This file is part of the Chemical Data Processing Toolkit
  *
@@ -26,26 +26,25 @@
 
 #include <boost/python.hpp>
 
-#include "CDPL/Chem/PharmacophoreFunctions.hpp"
+#include "CDPL/Chem/NegIonizableFeatureGenerator.hpp"
+#include "CDPL/Chem/MolecularGraph.hpp"
 #include "CDPL/Chem/Pharmacophore.hpp"
 
-#include "FunctionExports.hpp"
-#include "FunctionWrapper.hpp"
+#include "ClassExports.hpp"
 
 
-namespace
-{
-
-	MAKE_FUNCTION_WRAPPER1(std::size_t, getFeatureCount, CDPL::Chem::Pharmacophore&)
-	MAKE_FUNCTION_WRAPPER2(std::size_t, getFeatureCount, CDPL::Chem::Pharmacophore&, unsigned int)
-}
-
-
-void CDPLPythonChem::exportPharmacophoreFunctions()
+void CDPLPythonChem::exportNegIonizableFeatureGenerator()
 {
     using namespace boost;
     using namespace CDPL;
-	
-	python::def("getFeatureCount", &getFeatureCountWrapper1, python::arg("pharm"));
-	python::def("getFeatureCount", &getFeatureCountWrapper2, (python::arg("pharm"), python::arg("type")));
+
+    python::class_<Chem::NegIonizableFeatureGenerator, python::bases<Chem::PatternBasedFeatureGenerator>,
+		   boost::noncopyable>("NegIonizableFeatureGenerator", python::no_init)
+	.def(python::init<>(python::arg("self")))
+	.def(python::init<const Chem::NegIonizableFeatureGenerator&>(
+		 (python::arg("self"), python::arg("gen"))))
+	.def(python::init<const Chem::MolecularGraph&, Chem::Pharmacophore&>(
+		 (python::arg("self"), python::arg("molgraph"), python::arg("pharm"))))
+	.def("assign", &Chem::NegIonizableFeatureGenerator::operator=, 
+	     (python::arg("self"), python::arg("gen")), python::return_self<>());
 }

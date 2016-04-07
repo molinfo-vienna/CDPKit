@@ -40,6 +40,7 @@
 
 using namespace CDPL;
 
+
 Chem::SubstructureSearch::SubstructureSearch(): 
 	query(0), queryChanged(true), initQueryData(true), uniqueMatches(false), 
 	numMappedAtoms(0), maxNumMappings(0), atomMappingConstrMatrixSize(0),
@@ -245,6 +246,7 @@ void Chem::SubstructureSearch::initMatchExpressions()
 
 	for (MolecularGraph::ConstAtomIterator it = query->getAtomsBegin(); it != atoms_end; ++it) {
 		const Atom* atom = &*it;
+
 		const MatchExpression<Atom, MolecularGraph>::SharedPointer& expr = getMatchExpression(*atom);
 
 		if (expr->requiresAtomBondMapping())

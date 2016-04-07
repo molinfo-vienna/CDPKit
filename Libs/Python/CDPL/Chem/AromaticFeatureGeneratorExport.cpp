@@ -38,24 +38,28 @@ void CDPLPythonChem::exportAromaticFeatureGenerator()
     using namespace boost;
     using namespace CDPL;
 
-    python::class_<Chem::AromaticFeatureGenerator, python::bases<Chem::PatternBasedFeatureGenerator>,
-		   boost::noncopyable>("AromaticFeatureGenerator", python::no_init)
-	.def(python::init<>(python::arg("self")))
-	.def(python::init<const Chem::MolecularGraph&, Chem::Pharmacophore&>(
-		 (python::arg("self"), python::arg("molgraph"), python::arg("pharm"))))
-	.def("setFeatureType", &Chem::AromaticFeatureGenerator::setFeatureType, 
-	     (python::arg("self"), python::arg("type")))
-	.def("setFeatureGeometry", &Chem::AromaticFeatureGenerator::setFeatureGeometry, 
-	     (python::arg("self"), python::arg("geom")))
-	.def("setFeatureTolerance", &Chem::AromaticFeatureGenerator::setFeatureTolerance, 
-	     (python::arg("self"), python::arg("tol")))
-	.def("getFeatureType", &Chem::AromaticFeatureGenerator::getFeatureType, python::arg("self"))
-	.def("getFeatureGeometry", &Chem::AromaticFeatureGenerator::getFeatureGeometry, python::arg("self"))
-	.def("getFeatureTolerance", &Chem::AromaticFeatureGenerator::getFeatureTolerance, python::arg("self"))
-	.add_property("featureType", &Chem::AromaticFeatureGenerator::getFeatureType,
-		      &Chem::AromaticFeatureGenerator::setFeatureType)
-	.add_property("featureGeometry", &Chem::AromaticFeatureGenerator::getFeatureGeometry,
-		      &Chem::AromaticFeatureGenerator::setFeatureGeometry)
-	.add_property("featureTolerance", &Chem::AromaticFeatureGenerator::getFeatureTolerance,
-		      &Chem::AromaticFeatureGenerator::setFeatureTolerance);
+    python::class_<Chem::AromaticFeatureGenerator, python::bases<Chem::PatternBasedFeatureGenerator>, 
+				   boost::noncopyable>("AromaticFeatureGenerator", python::no_init)
+		.def(python::init<>(python::arg("self")))
+		.def(python::init<const Chem::AromaticFeatureGenerator&>(
+				 (python::arg("self"), python::arg("gen"))))
+		.def(python::init<const Chem::MolecularGraph&, Chem::Pharmacophore&>(
+				 (python::arg("self"), python::arg("molgraph"), python::arg("pharm"))))
+		.def("setFeatureType", &Chem::AromaticFeatureGenerator::setFeatureType, 
+			 (python::arg("self"), python::arg("type")))
+		.def("setFeatureGeometry", &Chem::AromaticFeatureGenerator::setFeatureGeometry, 
+			 (python::arg("self"), python::arg("geom")))
+		.def("setFeatureTolerance", &Chem::AromaticFeatureGenerator::setFeatureTolerance, 
+			 (python::arg("self"), python::arg("tol")))
+		.def("getFeatureType", &Chem::AromaticFeatureGenerator::getFeatureType, python::arg("self"))
+		.def("getFeatureGeometry", &Chem::AromaticFeatureGenerator::getFeatureGeometry, python::arg("self"))
+		.def("getFeatureTolerance", &Chem::AromaticFeatureGenerator::getFeatureTolerance, python::arg("self"))
+		.def("assign", &Chem::AromaticFeatureGenerator::operator=, 
+			 (python::arg("self"), python::arg("gen")), python::return_self<>())
+		.add_property("featureType", &Chem::AromaticFeatureGenerator::getFeatureType,
+					  &Chem::AromaticFeatureGenerator::setFeatureType)
+		.add_property("featureGeometry", &Chem::AromaticFeatureGenerator::getFeatureGeometry,
+					  &Chem::AromaticFeatureGenerator::setFeatureGeometry)
+		.add_property("featureTolerance", &Chem::AromaticFeatureGenerator::getFeatureTolerance,
+					  &Chem::AromaticFeatureGenerator::setFeatureTolerance);
 }

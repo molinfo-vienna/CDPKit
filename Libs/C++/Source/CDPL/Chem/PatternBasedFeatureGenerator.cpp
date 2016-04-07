@@ -49,21 +49,16 @@ using namespace CDPL;
 
 Chem::PatternBasedFeatureGenerator::PatternBasedFeatureGenerator() {}
 
-Chem::PatternBasedFeatureGenerator::PatternBasedFeatureGenerator(const MolecularGraph& molgraph, Pharmacophore& pharm) 
-{
-	generate(molgraph, pharm);
-}
-
 Chem::PatternBasedFeatureGenerator::PatternBasedFeatureGenerator(const PatternBasedFeatureGenerator& gen):
 	includePatterns(gen.includePatterns), excludePatterns(gen.excludePatterns) {}
 
 Chem::PatternBasedFeatureGenerator::~PatternBasedFeatureGenerator() {}
 
 void Chem::PatternBasedFeatureGenerator::addIncludePattern(const MolecularGraph::SharedPointer& substruct, 
-														   unsigned int ftr_type, double tol, unsigned int ftr_geom,
+														   unsigned int type, double tol, unsigned int geom,
 														   double length)
 {
-	includePatterns.push_back(FeaturePattern(substruct, ftr_type, tol, ftr_geom, length));
+	includePatterns.push_back(FeaturePattern(substruct, type, tol, geom, length));
 }
 
 void Chem::PatternBasedFeatureGenerator::addExcludePattern(const MolecularGraph::SharedPointer& substruct)
@@ -96,8 +91,6 @@ void Chem::PatternBasedFeatureGenerator::generate(const MolecularGraph& molgraph
 		subsearch.setQuery(*ptn.substructQry);		
 		subsearch.findMappings(molgraph);
 
-		std::size_t old_num_inc_matches = includeMatches.size();
-
 		for (SubstructureSearch::ConstMappingIterator m_it = subsearch.getMappingsBegin(),
 				 m_end = subsearch.getMappingsEnd(); m_it != m_end; ++m_it) {
 
@@ -108,10 +101,10 @@ void Chem::PatternBasedFeatureGenerator::generate(const MolecularGraph& molgraph
 
 			createMatchedAtomMask(mapping.getAtomMapping(), *atom_mask, true);
 
-			if (isContainedInList(*atom_mask, excludeMatches, excludeMatches.size()))
+			if (isContainedInList(*atom_mask, excludeMatches))
 				continue;
 
-			if (isContainedInList(*atom_mask, includeMatches, old_num_inc_matches))
+			if (isContainedInList(*atom_mask, includeMatches))
 				continue;
 	
 			addFeature(mapping, ptn, pharm);
@@ -298,10 +291,10 @@ void Chem::PatternBasedFeatureGenerator::getExcludeMatches()
 	}
 }
 
-bool Chem::PatternBasedFeatureGenerator::isContainedInList(const Util::BitSet& atom_mask, const BitSetList& bset_list, std::size_t count) const
+bool Chem::PatternBasedFeatureGenerator::isContainedInList(const Util::BitSet& atom_mask, const BitSetList& bset_list) const
 {
-	for (std::size_t i = 0; i < count; i++)
-		if (atom_mask.is_subset_of(*bset_list[i]))
+	for (BitSetList::const_iterator it = bset_list.begin(), end = bset_list.end(); it != end; ++it)
+		if (atom_mask.is_subset_of(**it))
 			return true;
 
 	return false;
@@ -309,12 +302,12 @@ bool Chem::PatternBasedFeatureGenerator::isContainedInList(const Util::BitSet& a
 
 bool Chem::PatternBasedFeatureGenerator::isContainedInIncMatchList(const Util::BitSet& atom_mask) const 
 {
-	return isContainedInList(atom_mask, includeMatches, includeMatches.size());
+	return isContainedInList(atom_mask, includeMatches);
 }
 
 bool Chem::PatternBasedFeatureGenerator::isContainedInExMatchList(const Util::BitSet& atom_mask) const
 {
-	return isContainedInList(atom_mask, excludeMatches, excludeMatches.size());
+	return isContainedInList(atom_mask, excludeMatches);
 }
 
 void Chem::PatternBasedFeatureGenerator::createMatchedAtomMask(const AtomMapping& mapping, Util::BitSet& atom_mask, bool check_label) const

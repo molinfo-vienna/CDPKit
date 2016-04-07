@@ -31,12 +31,10 @@
 #ifndef CDPL_CHEM_PHARMACOPHOREGENERATOR_HPP
 #define CDPL_CHEM_PHARMACOPHOREGENERATOR_HPP
 
-#include <cstddef>
 #include <set>
 #include <map>
 
 #include <boost/function.hpp>
-#include <boost/shared_ptr.hpp>
 
 #include "CDPL/Chem/APIPrefix.hpp"
 
@@ -49,7 +47,6 @@ namespace CDPL
 
 		class Pharmacophore;
 		class MolecularGraph;
-		class PatternBasedFeatureGenerator;
 
 		/**
 		 * \addtogroup CDPL_CHEM_PHARMACOPHORE_PERCEPTION
@@ -63,35 +60,57 @@ namespace CDPL
 		{
 
 		  public:
+			/**
+			 * \brief A generic wrapper class used to store feature generator functions.
+			 */
 			typedef boost::function2<void, const MolecularGraph&, Pharmacophore&> FeatureFunction;
 
 			/**
 			 * \brief Constructs the \c %PharmacophoreGenerator instance.
 			 */
-			PharmacophoreGenerator();
+			PharmacophoreGenerator() {}
 
 			/**
-			 * \brief Perceives all enabled pharmacophore features of the molecular graph a\ molgraph
-			 *        and adds them to the pharmacophore \a pharm.
-			 * \param molgraph The molecular graph for which to perceive the features.
-			 * \param pharm The output pharmacophore where to add the generated features.
+			 * \brief Virtual destructor.
 			 */
-			PharmacophoreGenerator(const MolecularGraph& molgraph, Pharmacophore& pharm);
+			virtual ~PharmacophoreGenerator() {}
 
 			/**
-			 * \brief Destructor.
+			 * \brief Enables or disables the generation of features of the specified type.
+			 * \param type An identifier for the type of the features to enable/disable.
+			 * \param enable \c true if the generation of the given type of features should be enabled, 
+			 *               and \c false if disabled.
 			 */
-			~PharmacophoreGenerator();
+			void enableFeature(unsigned int type, bool enable);
 
-			void enableFeature(unsigned int ftr_type, bool enable);
+			/**
+			 * \brief Tells whether the generation of features of the specified type is currently enabled or disabled.
+			 * \param type An identifier for the type of the features.
+			 * \return \c true if the generation of the given type of features is enabled, 
+			 *         and \c false otherwise.
+			 */
+			bool isFeatureEnabled(unsigned int type) const;
 
-			bool isFeatureEnabled(unsigned int ftr_type) const;
-
+			/**
+			 * \brief Disables the generation of all types features.
+			 *
+			 *  After calling this method, generate() will not produce any new features!
+			 */
 			void clearEnabledFeatures();
 
-			void setFeatureFunction(unsigned int ftr_type, const FeatureFunction& func);
+			/**
+			 * \brief Specifies a function that gets used for the generation of the specified type of features.
+			 * \param type An identifier for the type of features the generator function is specified for.
+			 * \param func The wrapped generator function.
+			 */
+			void setFeatureFunction(unsigned int type, const FeatureFunction& func);
 
-			const FeatureFunction& getFeatureFunction(unsigned int ftr_type) const;
+			/**
+			 * \brief Returns the function that gets used for the generation of the specified type of features.
+			 * \param type An identifier for the type of features of interest.
+			 * \return The used generator function for the features of type \a type.
+			 */
+			const FeatureFunction& getFeatureFunction(unsigned int type) const;
 
 			/**
 			 * \brief Perceives the enabled pharmacophore features of the molecular graph a\ molgraph 
@@ -106,21 +125,14 @@ namespace CDPL
 	
 			typedef std::set<unsigned int> EnabledFeatureSet;
 			typedef std::map<unsigned int, FeatureFunction> FeatureFunctionMap;
-			typedef boost::shared_ptr<PatternBasedFeatureGenerator>  PatternFeatureGenPtr;
-	
+		
 			PharmacophoreGenerator(const PharmacophoreGenerator&);
 
 			PharmacophoreGenerator& operator=(const PharmacophoreGenerator&);
 
-			FeatureFunctionMap       featureFuncMap;
-			EnabledFeatureSet        enabledFeatures;
-			PatternFeatureGenPtr     hbaFeatureGenerator;
-			PatternFeatureGenPtr     hbdFeatureGenerator;
-			PatternFeatureGenPtr     piFeatureGenerator;
-			PatternFeatureGenPtr     niFeatureGenerator;
-			PatternFeatureGenPtr     arFeatureGenerator;
-			PatternFeatureGenPtr     hydFeatureGenerator;
-
+			FeatureFunctionMap  featureFuncMap;
+			EnabledFeatureSet   enabledFeatures;
+	
 			/** \endcond */
 		};
 
@@ -131,4 +143,3 @@ namespace CDPL
 }
 
 #endif // CDPL_CHEM_PHARMACOPHOREGENERATOR_HPP
- 

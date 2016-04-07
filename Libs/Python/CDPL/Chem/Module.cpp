@@ -91,9 +91,14 @@ BOOST_PYTHON_MODULE(_chem)
 	exportReactor();
 
 	exportPharmacophoreGenerator();
+	exportDefaultPharmacophoreGenerator();
 	exportPatternBasedFeatureGenerator();
 	exportAromaticFeatureGenerator();
 	exportHydrophobicFeatureGenerator();
+	exportHBondAcceptorFeatureGenerator();
+	exportHBondDonorFeatureGenerator();
+	exportPosIonizableFeatureGenerator();
+	exportNegIonizableFeatureGenerator();
 
 	exportCompleteRingSet();
 	exportAromaticRingSet();

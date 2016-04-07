@@ -139,7 +139,12 @@ SET(cdpl-chem_LIB_SRCS
     PatternBasedFeatureGenerator.cpp
     HydrophobicFeatureGenerator.cpp
     AromaticFeatureGenerator.cpp
+    HBondAcceptorFeatureGenerator.cpp
+    HBondDonorFeatureGenerator.cpp
+    PosIonizableFeatureGenerator.cpp
+    NegIonizableFeatureGenerator.cpp
     PharmacophoreGenerator.cpp
+    DefaultPharmacophoreGenerator.cpp
 
     Entity3DCoordinatesFunctions.cpp
 
@@ -155,6 +160,9 @@ SET(cdpl-chem_LIB_SRCS
     Entity3DContainerCoordinatesFunctions.cpp
     Entity3DContainerGeometricalDistanceMatrixFunction.cpp
     Entity3DContainerGeometricalDistanceFunctions.cpp
+    Entity3DContainerCentroidFunction.cpp
+
+    PharmacophoreFeatureCountFunctions.cpp
 
     AtomContainerAtomCountFunctions.cpp
     AtomContainerFormalChargeFunction.cpp
@@ -212,6 +220,7 @@ SET(cdpl-chem_LIB_SRCS
     AtomResidueCodeFunctions.cpp
     AtomResidueSequenceNumberFunctions.cpp
     AtomResidueInsertionCodeFunctions.cpp
+    AtomResidueUtilityFunctions.cpp
     AtomHeteroAtomFlagFunctions.cpp
     AtomChainIDFunctions.cpp
     AtomAltLocationIDFunctions.cpp
@@ -316,6 +325,7 @@ SET(cdpl-chem_LIB_SRCS
     MolecularGraphAtomSymbolsFromTypeFunction.cpp
     MolecularGraph2DCoordinatesFunction.cpp
     MolecularGraph3DCoordinatesFunctions.cpp
+    MolecularGraphResidueUtilityFunctions.cpp
 
     ReactionNameFunctions.cpp
     ReactionMatchConstraintsFunctions.cpp

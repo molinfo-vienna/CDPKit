@@ -60,6 +60,9 @@ namespace CDPL
 
 		CDPL_CHEM_API void set3DCoordinates(Entity3DContainer& cntnr, const Math::Vector3DArray& coords);	
 
+		
+		CDPL_CHEM_API bool calcCentroid(const Entity3DContainer& cntnr, Math::Vector3D& ctr);	
+
 		/**
 		 * @}
 		 */

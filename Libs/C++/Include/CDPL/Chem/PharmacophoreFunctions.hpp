@@ -42,20 +42,21 @@ namespace CDPL
     namespace Chem 
     {
 	
-	class Pharmacophore;
+		class Pharmacophore;
 	
-	/**
-	 * \addtogroup CDPL_CHEM_PHARMACOPHORE_FUNCTIONS
-	 * @{
-	 */
+		/**
+		 * \addtogroup CDPL_CHEM_PHARMACOPHORE_FUNCTIONS
+		 * @{
+		 */
 	
-	CDPL_CHEM_API std::size_t getFeatureCount(const Pharmacophore& pharm, unsigned int type);
+		CDPL_CHEM_API std::size_t getFeatureCount(const Pharmacophore& pharm);
 
-	/**
-	 * @}
-	 */
+		CDPL_CHEM_API std::size_t getFeatureCount(const Pharmacophore& pharm, unsigned int type);
+
+		/**
+		 * @}
+		 */
     }
 }
 
 #endif // CDPL_CHEM_PHARMACOPHOREFUNCTIONS_HPP
- 

@@ -60,9 +60,15 @@ namespace CDPL
 			 * \brief Constructs the \c %AromaticFeatureGenerator instance.
 			 */
 			AromaticFeatureGenerator();
-		
+
 			/**
-			 * \brief Perceives pharmacophore features according to the specified include/exclude patterns and adds 
+			 * \brief Constructs a copy of the \c %AromaticFeatureGenerator instance \a gen.
+			 * \param gen The \c %AromaticFeatureGenerator instance to copy.
+			 */
+			AromaticFeatureGenerator(const AromaticFeatureGenerator& gen);
+	
+			/**
+			 * \brief Perceives aromatic ring features of the molecular graph a\ molgraph and adds 
 			 *        them to the pharmacophore \a pharm.
 			 * \param molgraph The molecular graph for which to perceive the features.
 			 * \param pharm The output pharmacophore where to add the generated features.
@@ -73,18 +79,59 @@ namespace CDPL
 			 * Destructor.
 			 */
 			~AromaticFeatureGenerator();
-			
+
+			/**
+			 * \brief Specifies the value of the feature type property that has to be set on newly generated features.
+			 * \param type The value of the feature type property.
+			 * \note The default type is FeatureType::AROMATIC.
+			 * \see FeatureProperty::TYPE
+			 */			
 			void setFeatureType(unsigned int type);
 
+			/**
+			 * \brief Returns the value of the feature type property that gets set on newly generated features.
+			 * \return The used value of the feature type property.
+			 * \see FeatureProperty::TYPE
+			 */
 			unsigned int getFeatureType() const;
 
+			/**
+			 * \brief Specifies the value of the feature geometry property that has to be set on newly generated features.
+			 * \param type The value of the feature geometry property.
+			 * \note The default type is FeatureGeometry::SPHERE.
+			 * \see FeatureProperty::GEOMETRY
+			 */
 			void setFeatureGeometry(unsigned int geom);
 
+			/**
+			 * \brief Returns the value of the feature geometry property that gets set on newly generated features.
+			 * \return The used value of the feature geometry property.
+			 * \see FeatureProperty::GEOMETRY
+			 */
 			unsigned int getFeatureGeometry() const;
 
+			/**
+			 * \brief Specifies the value of the feature tolerance property that has to be set on newly generated features.
+			 * \param type The value of the feature tolerance property.
+			 * \note The default value is \a 0.9
+			 * \see FeatureProperty::TOLERANCE
+			 */
 			void setFeatureTolerance(double tol);
 
+			/**
+			 * \brief Returns the value of the feature tolerance property that gets set on newly generated features.
+			 * \return The value of the feature tolerance property.
+			 * \see FeatureProperty::TOLERANCE
+			 */
 			double getFeatureTolerance() const;
+			
+			/**
+			 * \brief Replaces the current set include/exclude patterns and attributes by a copy of the
+			 *        \c %AromaticFeatureGenerator instance \a gen.
+			 * \param gen The \c %AromaticFeatureGenerator instance to copy.
+			 * \return A reference to itself.
+			 */
+			AromaticFeatureGenerator& operator=(const AromaticFeatureGenerator& gen);
 
 		  private:
 			/** \cond CDPL_PRIVATE_SECTION_DOC */

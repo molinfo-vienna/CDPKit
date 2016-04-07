@@ -27,6 +27,7 @@
 #include "StaticInit.hpp"
 
 #include <algorithm>
+#include <cmath>
 
 #include <boost/bind.hpp>
 
@@ -565,7 +566,7 @@ Chem::Feature& Chem::HydrophobicFeatureGenerator::emitFeature(const AtomList& al
 }
 
 bool Chem::HydrophobicFeatureGenerator::isHydrophobicRing(const Fragment& ring)
-{
+{ 
 	std::size_t num_atoms = ring.getNumAtoms();
 
 	if (num_atoms > RING_SIZE_LIMIT)
@@ -585,7 +586,7 @@ bool Chem::HydrophobicFeatureGenerator::isHydrophobicRing(const Fragment& ring)
 
 	// check min. summed hydrophobicity
 
-	if (calcSummedHydrophobicity(featureAtoms) < hydThreshRing)
+	if (calcSummedHydrophobicity(featureAtoms) < hydThreshRing) 
 		return false;
 
 	// check at least 2 neighboring atoms with h>0 and no substituent of more than 2 atoms 
@@ -616,16 +617,17 @@ bool Chem::HydrophobicFeatureGenerator::isHydrophobicRing(const Fragment& ring)
 
 	// check if all substituents are on one side of the plane of the ring
 
-	Math::Vector3D plane_dir, centroid;
+	Math::Vector3D plane_dir, tmp;
 
-	if (!calcPlaneFeatureOrientation(featureAtoms, plane_dir, centroid))
+	if (!calcPlaneFeatureOrientation(featureAtoms, plane_dir, tmp))
 		return true;
 
 	int subst_side = 0;
+	const double subst_ang_thresh = std::cos(82.5 / 180.0 * M_PI); // plane angle threshold for substituents lying in the ring plane
 
 	for (Fragment::ConstAtomIterator it = ring.getAtomsBegin(), end = ring.getAtomsEnd(); it != end; ++it) {
 		const Atom& atom = *it;
-
+		const Math::Vector3D& atom_pos = get3DCoordinates(atom);
 		Atom::ConstAtomIterator a_it = atom.getAtomsBegin();
 
 		for (Atom::ConstBondIterator b_it = atom.getBondsBegin(), b_end = atom.getBondsEnd(); b_it != b_end; ++b_it, ++a_it) {
@@ -646,7 +648,14 @@ bool Chem::HydrophobicFeatureGenerator::isHydrophobicRing(const Fragment& ring)
 			if (!has3DCoordinates(nbr_atom))
 				continue;
 
-			double inner_prod = innerProd(get3DCoordinates(nbr_atom) - centroid, plane_dir);
+			tmp.assign(get3DCoordinates(nbr_atom) - atom_pos);
+			tmp /= length(tmp);
+
+			double inner_prod = innerProd(tmp, plane_dir);
+
+			if (std::abs(inner_prod) <= subst_ang_thresh)
+				continue;
+
 			int sign = (inner_prod < 0.0 ? -1 : 1);
 
 			if (subst_side == 0)
@@ -755,8 +764,7 @@ void Chem::HydrophobicFeatureGenerator::calcAtomHydrophobicities()
 		if (atomHydTable[i] == 0.0)
 			continue;
 
-		double factor = calcAccessibleSurfaceFactor(molGraph->getAtom(i));
-		atomHydTable[i] *= factor;
+		atomHydTable[i] *= calcAccessibleSurfaceFactor(molGraph->getAtom(i));
 	}
 }
 

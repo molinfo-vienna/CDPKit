@@ -38,10 +38,12 @@
 namespace
 {
 
-	MAKE_FUNCTION_WRAPPER2(void, calcGeometricalDistanceMatrix, CDPL::Chem::Entity3DContainer&, CDPL::Math::DMatrix&);
 	MAKE_FUNCTION_WRAPPER1(double, calcGeometricalRadius, CDPL::Chem::Entity3DContainer&);
 	MAKE_FUNCTION_WRAPPER1(double, calcGeometricalDiameter, CDPL::Chem::Entity3DContainer&);
+
+	MAKE_FUNCTION_WRAPPER2(bool, calcCentroid, CDPL::Chem::Entity3DContainer&, CDPL::Math::Vector3D&);
 	MAKE_FUNCTION_WRAPPER2(void, get3DCoordinates, CDPL::Chem::Entity3DContainer&, CDPL::Math::Vector3DArray&);
+	MAKE_FUNCTION_WRAPPER2(void, calcGeometricalDistanceMatrix, CDPL::Chem::Entity3DContainer&, CDPL::Math::DMatrix&);
 }
 
 
@@ -56,4 +58,6 @@ void CDPLPythonChem::exportEntity3DContainerFunctions()
 
 	python::def("get3DCoordinates", &get3DCoordinatesWrapper2, (python::arg("cntnr"),  python::arg("coords")));
 	python::def("set3DCoordinates", &Chem::set3DCoordinates, (python::arg("cntnr"), python::arg("coords")));
+
+	python::def("calcCentroid", &calcCentroidWrapper2, (python::arg("cntnr"), python::arg("ctr")));
 }

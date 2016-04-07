@@ -204,9 +204,13 @@ namespace
 	MAKE_FUNCTION_WRAPPER3(bool, isInFragmentOfSize, CDPL::Chem::Atom&, CDPL::Chem::FragmentList&, std::size_t);
 	MAKE_FUNCTION_WRAPPER3(void, getContainingFragments, CDPL::Chem::Atom&, CDPL::Chem::FragmentList&, CDPL::Chem::FragmentList&);
 	MAKE_FUNCTION_WRAPPER3(double, calcEffectivePolarizability, CDPL::Chem::Atom&, CDPL::Chem::MolecularGraph&, double);
+	MAKE_FUNCTION_WRAPPER3(bool, areInSameResidue, CDPL::Chem::Atom&, CDPL::Chem::Atom&, unsigned int);
 
 	MAKE_FUNCTION_WRAPPER4(std::size_t, getExplicitBondCount, CDPL::Chem::Atom&, CDPL::Chem::MolecularGraph&, std::size_t, unsigned int);
 	MAKE_FUNCTION_WRAPPER4(std::size_t, getBondCount, CDPL::Chem::Atom&, CDPL::Chem::MolecularGraph&, std::size_t, unsigned int);
+
+	MAKE_FUNCTION_WRAPPER5(void, extractResidueSubstructure, CDPL::Chem::Atom&, CDPL::Chem::MolecularGraph&, CDPL::Chem::Fragment&, bool, unsigned int);
+
 
 	std::string buildMatchExpressionStringWrapper(CDPL::Chem::Atom& atom, CDPL::Chem::MolecularGraph& molgraph)
 	{
@@ -366,11 +370,17 @@ void CDPLPythonChem::exportAtomFunctions()
 				python::with_custodian_and_ward<3, 2>());
 	python::def("calcEffectivePolarizability", &calcEffectivePolarizabilityWrapper3, 
 				(python::arg("atom"), python::arg("molgraph"), python::arg("damping") = 0.75));
+	python::def("areInSameResidue", &areInSameResidueWrapper3, 
+				(python::arg("atom1"), python::arg("atom2"), python::arg("flags") = Chem::AtomPropertyFlag::DEFAULT));
 
 	python::def("getExplicitBondCount", &getExplicitBondCountWrapper4,
 				(python::arg("atom"), python::arg("molgraph"), python::arg("order"), python::arg("type")));
 	python::def("getBondCount", &getBondCountWrapper4,
 				(python::arg("atom"), python::arg("molgraph"), python::arg("order"), python::arg("type")));
+
+	python::def("extractResidueSubstructure", &extractResidueSubstructureWrapper5,
+				(python::arg("atom"), python::arg("molgraph"), python::arg("res_substruct"), 
+				 python::arg("cnctd_only") = false, python::arg("flags") = Chem::AtomPropertyFlag::DEFAULT));
 
 	python::def("buildMatchExpressionString", &buildMatchExpressionStringWrapper,
 				(python::arg("atom"), python::arg("molgraph")));

@@ -1911,6 +1911,8 @@ Chem::Molecule::SharedPointer Chem::SMARTSDataReader::parseSMARTS(const std::str
 	smartsParser->addBondConfigurationConstraints(mol);
 	smartsParser->setMoleculeMatchConstraints(mol);
 
+	initSubstructureSearchQuery(mol, true);
+
 	return mol_ptr;
 }
 

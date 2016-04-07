@@ -206,6 +206,10 @@
 #include "CDPL/Chem/PatternBasedFeatureGenerator.hpp"
 #include "CDPL/Chem/AromaticFeatureGenerator.hpp"
 #include "CDPL/Chem/HydrophobicFeatureGenerator.hpp"
+#include "CDPL/Chem/HBondAcceptorFeatureGenerator.hpp"
+#include "CDPL/Chem/HBondDonorFeatureGenerator.hpp"
+#include "CDPL/Chem/PosIonizableFeatureGenerator.hpp"
+#include "CDPL/Chem/NegIonizableFeatureGenerator.hpp"
 #include "CDPL/Chem/PharmacophoreGenerator.hpp"
 
 #include "CDPL/Chem/SimilarityFunctions.hpp"

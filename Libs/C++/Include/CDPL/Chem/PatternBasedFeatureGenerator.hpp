@@ -31,7 +31,6 @@
 #ifndef CDPL_CHEM_PATTERNBASEDFEATUREGENERATOR_HPP
 #define CDPL_CHEM_PATTERNBASEDFEATUREGENERATOR_HPP
 
-#include <cstddef>
 #include <vector>
 
 #include <boost/shared_ptr.hpp>
@@ -79,29 +78,43 @@ namespace CDPL
 			 * \brief Constructs the \c %PatternBasedFeatureGenerator instance.
 			 */
 			PatternBasedFeatureGenerator();
-		
+			
+			/**
+			 * \brief Constructs a copy of the \c %PatternBasedFeatureGenerator instance \a gen.
+			 * \param gen The \c %PatternBasedFeatureGenerator instance to copy.
+			 */
 			PatternBasedFeatureGenerator(const PatternBasedFeatureGenerator& gen);
 
 			/**
-			 * \brief Perceives pharmacophore features according to the specified include/exclude patterns and adds 
-			 *        them to the pharmacophore \a pharm.
-			 * \param molgraph The molecular graph for which to perceive the features.
-			 * \param pharm The output pharmacophore where to add the generated features.
-			 */
-			PatternBasedFeatureGenerator(const MolecularGraph& molgraph, Pharmacophore& pharm);
-
-			/**
-			 * Destructor.
+			 * \brief Virtual destructor.
 			 */
 			virtual ~PatternBasedFeatureGenerator();
 
-			void addIncludePattern(const MolecularGraph::SharedPointer& substruct, unsigned int ftr_type, 
-								   double tol = 1.0, unsigned int ftr_geom = FeatureGeometry::SPHERE, double length = 1.0);
+			/**
+			 * \brief Appends a new feature include pattern to the current set of patterns.
+			 * \param substruct The substructure search pattern of the feature.
+			 * \param type The value of the type property of the feature.
+			 * \param tol The value of the tolerance property of the feature.
+			 * \param geom The value of the geometry property of the feature.
+			 * \param length The value of the length property of vector features.
+			 */
+			void addIncludePattern(const MolecularGraph::SharedPointer& substruct, unsigned int type, 
+								   double tol = 1.0, unsigned int geom = FeatureGeometry::SPHERE, double length = 1.0);
 
+			/**
+			 * \brief Appends a new feature include pattern to the current set of patterns.
+			 * \param substruct The substructure search pattern of the feature.
+			 */
 			void addExcludePattern(const MolecularGraph::SharedPointer& substruct);
 		
+			/**
+			 * \brief Clears the current set of include patterns.
+			 */
 			void clearIncludePatterns();
-
+		
+			/**
+			 * \brief Clears the current set of exclude patterns.
+			 */
 			void clearExcludePatterns();
 
 			/**
@@ -112,6 +125,12 @@ namespace CDPL
 			 */
 			void generate(const MolecularGraph& molgraph, Pharmacophore& pharm);
 
+			/**
+			 * \brief Replaces the current set include/exclude patterns by the patterns in the
+			 *        \c %PatternBasedFeatureGenerator instance \a gen.
+			 * \param gen The \c %PatternBasedFeatureGenerator instance providing the new patterns to use.
+			 * \return A reference to itself.
+			 */
 			PatternBasedFeatureGenerator& operator=(const PatternBasedFeatureGenerator& gen);
 
 		  protected:
@@ -135,9 +154,9 @@ namespace CDPL
 			struct FeaturePattern
 			{
 
-				FeaturePattern(const MolecularGraph::SharedPointer& substruct, unsigned int ftr_type, 
-							   double tol, unsigned int ftr_geom, double length): 
-					substructQry(substruct), featureType(ftr_type), featureTol(tol), featureGeom(ftr_geom),
+				FeaturePattern(const MolecularGraph::SharedPointer& substruct, unsigned int type, 
+							   double tol, unsigned int geom, double length): 
+					substructQry(substruct), featureType(type), featureTol(tol), featureGeom(geom),
 					vectorLength(length) {}
 
 				MolecularGraph::SharedPointer substructQry;
@@ -160,7 +179,7 @@ namespace CDPL
 			void addFeature(const AtomBondMapping&, const FeaturePattern&, Pharmacophore&);
 		
 			void createMatchedAtomMask(const AtomMapping&, Util::BitSet&, bool = false) const;
-			bool isContainedInList(const Util::BitSet&, const BitSetList&, std::size_t) const;
+			bool isContainedInList(const Util::BitSet&, const BitSetList&) const;
 
 			void freeBitSet(Util::BitSet*);
 			Util::BitSet* allocBitSet();

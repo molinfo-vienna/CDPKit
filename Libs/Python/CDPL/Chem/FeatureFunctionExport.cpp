@@ -28,7 +28,6 @@
 
 #include "CDPL/Chem/Feature.hpp"
 #include "CDPL/Chem/FeatureFunctions.hpp"
-#include "CDPL/Chem/StereoDescriptor.hpp"
 
 #include "FunctionExports.hpp"
 #include "FunctionWrapper.hpp"
