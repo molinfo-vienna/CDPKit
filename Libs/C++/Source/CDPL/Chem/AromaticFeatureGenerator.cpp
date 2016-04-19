@@ -38,8 +38,6 @@
 #include "CDPL/Chem/Atom.hpp"
 #include "CDPL/Chem/Entity3DFunctions.hpp"
 #include "CDPL/Chem/FeatureFunctions.hpp"
-#include "CDPL/Chem/FeatureType.hpp"
-#include "CDPL/Chem/FeatureGeometry.hpp"
 #include "CDPL/Math/Vector.hpp"
 #include "CDPL/Util/AddressOf.hpp"
 
@@ -47,8 +45,13 @@
 using namespace CDPL; 
 
 
+const double       Chem::AromaticFeatureGenerator::DEF_FEATURE_TOL;
+const unsigned int Chem::AromaticFeatureGenerator::DEF_FEATURE_TYPE;
+const unsigned int Chem::AromaticFeatureGenerator::DEF_FEATURE_GEOM;
+
+
 Chem::AromaticFeatureGenerator::AromaticFeatureGenerator(): 
-	featureType(FeatureType::AROMATIC), featureGeom(FeatureGeometry::PLANE), featureTol(0.9) 
+	featureType(DEF_FEATURE_TYPE), featureGeom(DEF_FEATURE_GEOM), featureTol(DEF_FEATURE_TOL) 
 {}
 
 Chem::AromaticFeatureGenerator::AromaticFeatureGenerator(const AromaticFeatureGenerator& gen):
@@ -57,7 +60,7 @@ Chem::AromaticFeatureGenerator::AromaticFeatureGenerator(const AromaticFeatureGe
 {}
 
 Chem::AromaticFeatureGenerator::AromaticFeatureGenerator(const MolecularGraph& molgraph, Pharmacophore& pharm):
-	featureType(FeatureType::AROMATIC), featureGeom(FeatureGeometry::PLANE), featureTol(0.9) 
+	featureType(DEF_FEATURE_TYPE), featureGeom(DEF_FEATURE_GEOM), featureTol(DEF_FEATURE_TOL) 
 {
     generate(molgraph, pharm);
 }

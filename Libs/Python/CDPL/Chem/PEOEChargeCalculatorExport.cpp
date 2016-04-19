@@ -52,6 +52,8 @@ void CDPLPythonChem::exportPEOEChargeCalculator()
 			 (python::arg("self"), python::arg("molgraph"), python::arg("charges")))
 		.def("getElectronegativities", &Chem::PEOEChargeCalculator::getElectronegativities, 
 			 (python::arg("self"), python::arg("elnegs")))
+		.def_readonly("DEF_NUM_ITERATIONS", Chem::PEOEChargeCalculator::DEF_NUM_ITERATIONS)
+		.def_readonly("DEF_DAMPING_FACTOR", Chem::PEOEChargeCalculator::DEF_DAMPING_FACTOR)
 		.add_property("numIterations", &Chem::PEOEChargeCalculator::getNumIterations, 
 					  &Chem::PEOEChargeCalculator::setNumIterations)
 		.add_property("dampingFactor", &Chem::PEOEChargeCalculator::getDampingFactor,

@@ -49,8 +49,11 @@ Chem::HBondAcceptorFeatureGenerator::HBondAcceptorFeatureGenerator(const Molecul
 
 void Chem::HBondAcceptorFeatureGenerator::init()
 {
-   addIncludePattern(parseSMARTS("[#7,#8,S;X1,X2;!$(O(C)C(=O)):3]"), FeatureType::H_BOND_ACCEPTOR, 1.5, FeatureGeometry::SPHERE);
-   addIncludePattern(parseSMARTS("[F:3]"), FeatureType::H_BOND_ACCEPTOR, 1.5, FeatureGeometry::SPHERE);
+	addIncludePattern(parseSMARTS("[*:8]~[#7,#8,S;X2;!$(O(C)C(=O)):7]~[*:8]"), FeatureType::H_BOND_ACCEPTOR, 1.5, FeatureGeometry::VECTOR, 1.0);
+	addIncludePattern(parseSMARTS("[*:8]~[#7,#8,S;X2;!$(O(C)C(=O)):7]-[#1]"), FeatureType::H_BOND_ACCEPTOR, 1.5, FeatureGeometry::VECTOR, 1.0);
+	addIncludePattern(parseSMARTS("[*:8]~[N,O,S;X1:7]"), FeatureType::H_BOND_ACCEPTOR, 1.5, FeatureGeometry::VECTOR, 1.0);
+	addIncludePattern(parseSMARTS("[#7,#8,S;X1,X2;!$(O(C)C(=O)):3]"), FeatureType::H_BOND_ACCEPTOR, 1.5, FeatureGeometry::SPHERE, 1.0);
+	addIncludePattern(parseSMARTS("[*:8]-[F:7]"), FeatureType::H_BOND_ACCEPTOR, 1.5, FeatureGeometry::VECTOR, 1.0);
    
    addExcludePattern(parseSMARTS("[#8](c)c"));
 }

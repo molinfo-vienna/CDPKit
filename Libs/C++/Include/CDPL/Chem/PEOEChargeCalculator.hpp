@@ -67,6 +67,9 @@ namespace CDPL
 		public:
 			typedef boost::shared_ptr<PEOEChargeCalculator> SharedPointer;
 
+			static const std::size_t DEF_NUM_ITERATIONS = 6;
+			static const double      DEF_DAMPING_FACTOR = 0.5;
+
 			/**
 			 * \brief Constructs the \c %PEOEChargeCalculator instance.
 			 */
@@ -85,7 +88,7 @@ namespace CDPL
 			/**
 			 * \brief Allows to specify the number of charge shifting iterations that have to be performed.
 			 * \param num_iter The number of iterations to perform.
-			 * \note By default, \e 6 iterations are performed.
+			 * \note By default, PEOEChargeCalculator::DEF_NUM_ITERATIONS iterations are performed.
 			 */
 			void setNumIterations(std::size_t num_iter);
 
@@ -98,7 +101,7 @@ namespace CDPL
 			/**
 			 * \brief Allows to specify the applied damping factor.
 			 * \param factor The damping factor to apply.
-			 * \note The default damping factor is <em>0.5</em>.
+			 * \note The default damping factor is specified by the constant PEOEChargeCalculator::DEF_DAMPING_FACTOR.
 			 */
 			void setDampingFactor(double factor);
 

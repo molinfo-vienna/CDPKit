@@ -83,17 +83,8 @@ void Chem::CompleteRingSet::init(const MolecularGraph& molgraph)
 		const Atom& atom1 = bond.getBegin();
 		const Atom& atom2 = bond.getEnd();
 
-		if (!molgraph.containsAtom(atom1) || !molgraph.containsAtom(atom2))
-			continue;
-
-		std::size_t atom1_idx = molgraph.getAtomIndex(atom1);
-		std::size_t atom2_idx = molgraph.getAtomIndex(atom2);
-
-		if (atom1_idx == atom2_idx)
-			continue;
-
-		Node* node1 = &nodes[atom1_idx];
-		Node* node2 = &nodes[atom2_idx];
+		Node* node1 = &nodes[molgraph.getAtomIndex(atom1)];
+		Node* node2 = &nodes[molgraph.getAtomIndex(atom2)];
 		
 		allocEdge(bond, node1, node2);
 	}	

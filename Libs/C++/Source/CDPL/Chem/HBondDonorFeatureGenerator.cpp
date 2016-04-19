@@ -48,12 +48,14 @@ Chem::HBondDonorFeatureGenerator::HBondDonorFeatureGenerator(const MolecularGrap
 
 void Chem::HBondDonorFeatureGenerator::init()
 {
-    addIncludePattern(parseSMARTS("[O:3][#1]"), FeatureType::H_BOND_DONOR, 1.5, FeatureGeometry::SPHERE);
-    addIncludePattern(parseSMARTS("[CX2,SX2:3][#1]"), FeatureType::H_BOND_DONOR, 1.5, FeatureGeometry::SPHERE);
-    addIncludePattern(parseSMARTS("[*:4](=,:*)-,:[#7:11](-,:[*:4])[#1]"), FeatureType::H_BOND_DONOR, 1.5, FeatureGeometry::VECTOR, 3.0);
+    addIncludePattern(parseSMARTS("[SX2:3][#1]"), FeatureType::H_BOND_DONOR, 1.5, FeatureGeometry::SPHERE);
+    addIncludePattern(parseSMARTS("[CX2:7][#1:9]"), FeatureType::H_BOND_DONOR, 1.5, FeatureGeometry::VECTOR, -1.0);
+    addIncludePattern(parseSMARTS("[*](=,:[a,O,S,N])-,:[#7:7](-,:[*,#1])[#1:9]"), FeatureType::H_BOND_DONOR, 1.5, FeatureGeometry::VECTOR, -1.0);
+    addIncludePattern(parseSMARTS("[*]=,:[#7:7][#1:9]"), FeatureType::H_BOND_DONOR, 1.5, FeatureGeometry::VECTOR, -1.0);
     addIncludePattern(parseSMARTS("[#7:3][#1]"), FeatureType::H_BOND_DONOR, 1.5, FeatureGeometry::SPHERE);
+    addIncludePattern(parseSMARTS("[O:3][#1]"), FeatureType::H_BOND_DONOR, 1.5, FeatureGeometry::SPHERE);
 
-    addExcludePattern(parseSMARTS("c1nnnn1"));
+    addExcludePattern(parseSMARTS("O-[C,P,S]=O"));
+	addExcludePattern(parseSMARTS("c1nnnn1"));
     addExcludePattern(parseSMARTS("N-[SX4](=O)(=O)[CX4](F)(F)F"));
-    addExcludePattern(parseSMARTS("[C,P,S](=O)O"));
 }

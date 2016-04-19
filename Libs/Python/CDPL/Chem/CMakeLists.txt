@@ -30,6 +30,7 @@ SET(chem_MOD_SRCS
     AtomMappingExport.cpp 
     BondMappingExport.cpp 
     AtomBondMappingExport.cpp 
+    FeatureMappingExport.cpp 
     FragmentListExport.cpp 
     MDLDataBlockExport.cpp
     PDBDataExport.cpp
@@ -73,6 +74,8 @@ SET(chem_MOD_SRCS
     HBondDonorFeatureGeneratorExport.cpp
     PosIonizableFeatureGeneratorExport.cpp
     NegIonizableFeatureGeneratorExport.cpp
+    FeatureInteractionAnalyzerExport.cpp
+    DefaultFeatureInteractionAnalyzerExport.cpp
 
     CompleteRingSetExport.cpp 
     AromaticRingSetExport.cpp 

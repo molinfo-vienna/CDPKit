@@ -60,6 +60,11 @@ void Chem::PharmacophoreGenerator::setFeatureFunction(unsigned int type, const F
 		it->second = func;
 }
 
+void Chem::PharmacophoreGenerator::removeFeatureFunction(unsigned int type)
+{
+	featureFuncMap.erase(type);
+}
+
 const Chem::PharmacophoreGenerator::FeatureFunction& 
 Chem::PharmacophoreGenerator::getFeatureFunction(unsigned int type) const
 {

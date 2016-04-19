@@ -40,14 +40,14 @@ void CDPLPythonChem::exportPatternBasedFeatureGenerator()
     using namespace boost;
     using namespace CDPL;
 
-    python::class_<Chem::PatternBasedFeatureGenerator, boost::noncopyable>("PatternBasedFeatureGenerator", python::no_init)
+    python::scope scope = python::class_<Chem::PatternBasedFeatureGenerator, boost::noncopyable>("PatternBasedFeatureGenerator", python::no_init)
 	.def(python::init<>(python::arg("self")))
 	.def(python::init<const Chem::PatternBasedFeatureGenerator&>(
 		 (python::arg("self"), python::arg("gen"))))
 	.def(CDPLPythonBase::ObjectIdentityCheckVisitor<Chem::PatternBasedFeatureGenerator>())	
 	.def("addIncludePattern", &Chem::PatternBasedFeatureGenerator::addIncludePattern, 
-	     (python::arg("self"), python::arg("substruct"), python::arg("type"), python::arg("tol") = 1.0,
-	      python::arg("geom") = Chem::FeatureGeometry::SPHERE, python::arg("length") = 1.0))
+	     (python::arg("self"), python::arg("substruct"), python::arg("type"), python::arg("tol"),
+	      python::arg("geom"), python::arg("length") = 1.0))
 	.def("addExcludePattern", &Chem::PatternBasedFeatureGenerator::addExcludePattern, 
 	     (python::arg("self"), python::arg("substruct")))
 	.def("clearIncludePatterns", &Chem::PatternBasedFeatureGenerator::clearIncludePatterns, 
@@ -57,5 +57,14 @@ void CDPLPythonChem::exportPatternBasedFeatureGenerator()
 	.def("assign", &Chem::PatternBasedFeatureGenerator::operator=, 
 	     (python::arg("self"), python::arg("gen")), python::return_self<>())
 	.def("generate", &Chem::PatternBasedFeatureGenerator::generate,
+	     (python::arg("self"), python::arg("molgraph"), python::arg("pharm")))
+	.def("__call__", &Chem::PatternBasedFeatureGenerator::generate,
 	     (python::arg("self"), python::arg("molgraph"), python::arg("pharm")));
+
+	python::enum_<Chem::PatternBasedFeatureGenerator::PatternAtomLabelFlag>("PatternAtomLabelFlag")
+		.value("FEATURE_ATOM_FLAG", Chem::PatternBasedFeatureGenerator::FEATURE_ATOM_FLAG)
+		.value("POS_REF_ATOM_FLAG", Chem::PatternBasedFeatureGenerator::POS_REF_ATOM_FLAG)
+		.value("GEOM_REF_ATOM1_FLAG", Chem::PatternBasedFeatureGenerator::GEOM_REF_ATOM1_FLAG)
+		.value("GEOM_REF_ATOM2_FLAG", Chem::PatternBasedFeatureGenerator::GEOM_REF_ATOM2_FLAG)
+		.export_values();
 }

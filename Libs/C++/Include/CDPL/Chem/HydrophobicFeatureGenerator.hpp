@@ -37,6 +37,8 @@
 #include "CDPL/Chem/APIPrefix.hpp"
 #include "CDPL/Chem/PatternBasedFeatureGenerator.hpp"
 #include "CDPL/Chem/Fragment.hpp"
+#include "CDPL/Chem/FeatureType.hpp"
+#include "CDPL/Chem/FeatureGeometry.hpp"
 #include "CDPL/Math/Vector.hpp"
 #include "CDPL/Util/BitSet.hpp"
 
@@ -62,6 +64,13 @@ namespace CDPL
 		{
 
 		  public:
+            static const double       DEF_HYD_THRESHOLD_RING  = 1.5;
+			static const double       DEF_HYD_THRESHOLD_CHAIN = 1.5;
+			static const double       DEF_HYD_THRESHOLD_GROUP = 1.5;
+		
+            static const double       DEF_FEATURE_TOL         = 1.5;
+			static const unsigned int DEF_FEATURE_TYPE        = FeatureType::HYDROPHOBIC;
+			static const unsigned int DEF_FEATURE_GEOM        = FeatureGeometry::SPHERE;
 
 			/**
 			 * \brief Constructs the \c %HydrophobicFeatureGenerator instance.
@@ -84,7 +93,7 @@ namespace CDPL
 			/**
 			 * \brief Specifies the value of the feature type property that has to be set on newly generated features.
 			 * \param type The value of the feature type property.
-			 * \note The default type is FeatureType::HYDROPHOBIC.
+			 * \note The default type is specified by the constant HydrophobicFeatureGenerator::DEF_FEATURE_TYPE.
 			 * \see FeatureProperty::TYPE
 			 */
 			void setFeatureType(unsigned int type);
@@ -99,7 +108,7 @@ namespace CDPL
 			/**
 			 * \brief Specifies the value of the feature tolerance property that has to be set on newly generated features.
 			 * \param type The value of the feature tolerance property.
-			 * \note The default value is \a 1.5
+			 * \note The default value is specified by the constant HydrophobicFeatureGenerator::DEF_FEATURE_TOL.
 			 * \see FeatureProperty::TOLERANCE
 			 */
 			void setFeatureTolerance(double tol);
@@ -114,7 +123,7 @@ namespace CDPL
 			/**
 			 * \brief Specifies the value of the feature geometry property that has to be set on newly generated features.
 			 * \param type The value of the feature geometry property.
-			 * \note The default type is FeatureGeometry::SPHERE.
+			 * \note The default type is specified by the constant HydrophobicFeatureGenerator::DEF_FEATURE_GEOM.
 			 * \see FeatureProperty::GEOMETRY
 			 */
 			void setFeatureGeometry(unsigned int geom);
@@ -130,7 +139,7 @@ namespace CDPL
 			 * \brief Specifies the minimum summed hydrophobicity of the atoms in small rings that is required for the
 			 *        generation of a new feature.
 			 * \param thresh The minimum total atom hydrophobicity.
-			 * \note The default value is \a 1.0
+			 * \note The default value is specified by the constant HydrophobicFeatureGenerator::DEF_HYD_THRESHOLD_RING.
 			 */
 			void setRingHydrophobicityThreshold(double thresh);
 
@@ -145,7 +154,7 @@ namespace CDPL
 			 * \brief Specifies the minimum summed hydrophobicity of the atoms in chain fragments that is required for the
 			 *        generation of a new feature.
 			 * \param thresh The minimum total atom hydrophobicity.
-			 * \note The default value is \a 1.0
+			 * \note The default value is specified by the constant HydrophobicFeatureGenerator::DEF_HYD_THRESHOLD_CHAIN.
 			 */
 			void setChainHydrophobicityThreshold(double thresh);
 
@@ -160,7 +169,7 @@ namespace CDPL
 			 * \brief Specifies the minimum summed hydrophobicity of the atoms in group fragments that is required for the
 			 *        generation of a new feature.
 			 * \param thresh The minimum total atom hydrophobicity.
-			 * \note The default value is \a 1.0
+			 * \note The default value is specified by the constant HydrophobicFeatureGenerator::DEF_HYD_THRESHOLD_GROUP.
 			 */
 			void setGroupHydrophobicityThreshold(double thresh);
 

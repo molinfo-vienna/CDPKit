@@ -145,6 +145,13 @@ SET(cdpl-chem_LIB_SRCS
     NegIonizableFeatureGenerator.cpp
     PharmacophoreGenerator.cpp
     DefaultPharmacophoreGenerator.cpp
+    FeatureInteractionAnalyzer.cpp
+    DefaultFeatureInteractionAnalyzer.cpp
+    FeatureDistanceConstraint.cpp
+    HydrophobicInteractionConstraint.cpp
+    IonicInteractionConstraint.cpp
+    HBondingInteractionConstraint.cpp
+    CationPiInteractionConstraint.cpp
 
     Entity3DCoordinatesFunctions.cpp
 

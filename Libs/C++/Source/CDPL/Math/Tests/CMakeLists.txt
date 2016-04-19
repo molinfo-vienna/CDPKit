@@ -5,6 +5,7 @@ SET(test-suite_SRCS
     SpecialFunctionsTest.cpp
     PrimeNumberTableTest.cpp
     VectorArrayTest.cpp                    # TODO
+    VectorArrayFunctionsTest.cpp           # TODO
     JacobiDiagonalizationTest.cpp
     MLRModelTest.cpp
     RangeTest.cpp

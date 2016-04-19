@@ -52,6 +52,7 @@ namespace CDPLPythonChem
 	void exportAtomMapping();
 	void exportBondMapping();
 	void exportAtomBondMapping();
+	void exportFeatureMapping();
 	void exportFragmentList();
 	void exportMDLDataBlock();
 	void exportPDBData();
@@ -95,6 +96,8 @@ namespace CDPLPythonChem
 	void exportHBondDonorFeatureGenerator();
 	void exportPosIonizableFeatureGenerator();
 	void exportNegIonizableFeatureGenerator();
+	void exportFeatureInteractionAnalyzer();
+	void exportDefaultFeatureInteractionAnalyzer();
 
 	void exportCompleteRingSet();
 	void exportAromaticRingSet();

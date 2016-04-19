@@ -31,12 +31,9 @@
 #ifndef CDPL_MATH_VECTORARRAY_HPP
 #define CDPL_MATH_VECTORARRAY_HPP
 
-#include <cstddef>
-
 #include <boost/shared_ptr.hpp>
 
 #include "CDPL/Math/Vector.hpp"
-#include "CDPL/Math/Matrix.hpp"
 #include "CDPL/Util/Array.hpp"
 
 
@@ -59,7 +56,7 @@ namespace CDPL
 		{
 
 		public:
-			typedef VectorContainer<V> ValueType;
+			typedef V ValueType;
 
 			/**
 			 * \brief A reference-counted smart pointer [\ref BSHPTR] for dynamically allocated \c %VectorArray instances.
@@ -68,51 +65,7 @@ namespace CDPL
 
 		private:
 			CDPL_MATH_INLINE const char* getClassName() const {
-				return "VectorArray<T>";
-			}
-		};
-
-		/**
-		 * \brief A partial Math::VectorArray template specialization for storing Math::CVector objects.
-		 */
-		template <typename T, std::size_t Dim>
-		class VectorArray<CVector<T, Dim> > : public Util::Array<CVector<T, Dim> >
-		{
-
-		public:
-			typedef CVector<T, Dim> ValueType;
-
-			/**
-			 * \brief A reference-counted smart pointer [\ref BSHPTR] for dynamically allocated \c %VectorArray instances.
-			 */
-			typedef boost::shared_ptr<VectorArray> SharedPointer;
-
-			/**
-			 * \brief Transforms each \f$ N \f$-dimensional vector in the array with the \f$ N \f$-dimensional square matrix \a xform.
-			 * \param xform The transformation matrix.
-			 */
-			template <typename T1>
-			void transform(const CMatrix<T1, Dim, Dim>& xform);
-
-			/**
-			 * \brief Transforms each \f$ N \f$-dimensional vector in the array with the \f$ N+1 \f$-dimensional square matrix \a xform.
-			 * \param xform The transformation matrix.
-			 * \note The missing vector element is taken to be \c 1.0.
-			 */
-			template <typename T1>
-			void transform(const CMatrix<T1, Dim + 1, Dim + 1>& xform);
-
-			/**
-			 * \brief Calculates the centroid of the array elements.
-			 * \param ctr Stores the calculated centroid.
-			 * \return \c true if the array is not empty, and \c false otherwise.
-			 */
-			template <typename T1>
-			bool calcCentroid(CVector<T1, Dim>& ctr);
-
-		private:
-			CDPL_MATH_INLINE const char* getClassName() const {
-				return "CVectorArray";
+				return "VectorArray";
 			}
 		};
 
@@ -155,60 +108,6 @@ namespace CDPL
 		 * \brief An array of Math::Vector3UL objects.
 		 */
 		typedef VectorArray<Vector3UL> Vector3ULArray;
-
-
-		// Implementation
-
-		template <typename T, std::size_t Dim>
-		template <typename T1>
-		CDPL_MATH_INLINE
-		void VectorArray<CVector<T, Dim> >::transform(const CMatrix<T1, Dim, Dim>& xform)
-		{
-			for (typename VectorArray::ElementIterator it = this->getElementsBegin(), end = this->getElementsEnd(); it != end; ++it) {
-				ValueType& vec = *it;
-
-				vec = prod(xform, vec);  
-			}
-		}
-
-		template <typename T, std::size_t Dim>
-		template <typename T1>
-		CDPL_MATH_INLINE
-		void VectorArray<CVector<T, Dim> >::transform(const CMatrix<T1, Dim + 1, Dim + 1>& xform)
-		{
-			CVector<T, Dim + 1> tmp1(1.0);
-			CVector<T, Dim + 1> tmp2;
-
-			for (typename VectorArray::ElementIterator it = this->getElementsBegin(), end = this->getElementsEnd(); it != end; ++it) {
-				ValueType& vec = *it;
-		
-				for (std::size_t i = 0; i < Dim; i++)
-					tmp1(i) = vec(i);
-
-				prod(xform, tmp1, tmp2);
-	
-				for (std::size_t i = 0; i < Dim; i++)
-					vec(i) = tmp2(i);
-			}
-		}
-
-		template <typename T, std::size_t Dim>
-		template <typename T1>
-		CDPL_MATH_INLINE
-		bool VectorArray<CVector<T, Dim> >::calcCentroid(CVector<T1, Dim>& ctr)
-		{
-			if (this->isEmpty())
-				return false;
-
-			ctr.clear();
-
-			for (typename VectorArray::ElementIterator it = this->getElementsBegin(), end = this->getElementsEnd(); it != end; ++it) 
-				ctr.plusAssign(*it);
-
-			ctr /= this->getSize();
-
-			return true;
-		}
 
 		/**
 		 * @}

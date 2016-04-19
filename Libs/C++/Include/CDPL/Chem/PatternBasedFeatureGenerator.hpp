@@ -37,7 +37,6 @@
 
 #include "CDPL/Chem/APIPrefix.hpp"
 #include "CDPL/Chem/MolecularGraph.hpp"
-#include "CDPL/Chem/FeatureGeometry.hpp"
 #include "CDPL/Chem/AtomBondMapping.hpp"
 #include "CDPL/Util/BitSet.hpp"
 #include "CDPL/Math/Vector.hpp"
@@ -99,7 +98,7 @@ namespace CDPL
 			 * \param length The value of the length property of vector features.
 			 */
 			void addIncludePattern(const MolecularGraph::SharedPointer& substruct, unsigned int type, 
-								   double tol = 1.0, unsigned int geom = FeatureGeometry::SPHERE, double length = 1.0);
+								   double tol, unsigned int geom, double length = 1.0);
 
 			/**
 			 * \brief Appends a new feature include pattern to the current set of patterns.
@@ -139,7 +138,7 @@ namespace CDPL
 			typedef std::vector<const Atom*> AtomList;
 			typedef boost::shared_ptr<SubstructureSearch> SubstructSearchPtr;
 
-			bool calcVecFeatureOrientation(const AtomList&, const AtomList&, Math::Vector3D&) const;
+			double calcVecFeatureOrientation(const AtomList&, const AtomList&, Math::Vector3D&) const;
 			bool calcPlaneFeatureOrientation(const AtomList&, Math::Vector3D&, Math::Vector3D&);
 			bool calcCentroid(const AtomList&, Math::Vector3D&) const;
 

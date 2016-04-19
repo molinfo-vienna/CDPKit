@@ -34,6 +34,8 @@
 #include "CDPL/Chem/APIPrefix.hpp"
 #include "CDPL/Chem/PatternBasedFeatureGenerator.hpp"
 #include "CDPL/Chem/AromaticSSSRSubset.hpp"
+#include "CDPL/Chem/FeatureType.hpp"
+#include "CDPL/Chem/FeatureGeometry.hpp"
 #include "CDPL/Util/BitSet.hpp"
 
 
@@ -55,6 +57,9 @@ namespace CDPL
 		{
 
 		  public:
+			static const double       DEF_FEATURE_TOL   = 0.9;
+			static const unsigned int DEF_FEATURE_TYPE  = FeatureType::AROMATIC;
+			static const unsigned int DEF_FEATURE_GEOM  = FeatureGeometry::PLANE;
 
 			/**
 			 * \brief Constructs the \c %AromaticFeatureGenerator instance.
@@ -83,7 +88,7 @@ namespace CDPL
 			/**
 			 * \brief Specifies the value of the feature type property that has to be set on newly generated features.
 			 * \param type The value of the feature type property.
-			 * \note The default type is FeatureType::AROMATIC.
+			 * \note The default type is specified by the constant AromaticFeatureGenerator::DEF_FEATURE_TYPE.
 			 * \see FeatureProperty::TYPE
 			 */			
 			void setFeatureType(unsigned int type);
@@ -98,7 +103,7 @@ namespace CDPL
 			/**
 			 * \brief Specifies the value of the feature geometry property that has to be set on newly generated features.
 			 * \param type The value of the feature geometry property.
-			 * \note The default type is FeatureGeometry::SPHERE.
+			 * \note The default type is specified by the constant AromaticFeatureGenerator::DEF_FEATURE_GEOM.
 			 * \see FeatureProperty::GEOMETRY
 			 */
 			void setFeatureGeometry(unsigned int geom);
@@ -113,7 +118,7 @@ namespace CDPL
 			/**
 			 * \brief Specifies the value of the feature tolerance property that has to be set on newly generated features.
 			 * \param type The value of the feature tolerance property.
-			 * \note The default value is \a 0.9
+			 * \note The default value is specified by the constant AromaticFeatureGenerator::DEF_FEATURE_TOL.
 			 * \see FeatureProperty::TOLERANCE
 			 */
 			void setFeatureTolerance(double tol);

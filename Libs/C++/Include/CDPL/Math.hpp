@@ -63,6 +63,7 @@
 #include "CDPL/Math/TypeTraits.hpp"
 #include "CDPL/Math/VectorAdapter.hpp"
 #include "CDPL/Math/VectorArray.hpp"
+#include "CDPL/Math/VectorArrayFunctions.hpp"
 #include "CDPL/Math/VectorAssignment.hpp"
 #include "CDPL/Math/VectorExpression.hpp"
 #include "CDPL/Math/Vector.hpp"

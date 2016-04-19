@@ -55,8 +55,6 @@ Chem::Entity3DContainer::EntityIterator Chem::Entity3DContainer::getEntitiesEnd(
 
 Chem::Entity3DContainer& Chem::Entity3DContainer::operator=(const Entity3DContainer& cntnr) 
 {
-	Entity3DContainer::operator=(cntnr);
-
 	return *this;
 }
 

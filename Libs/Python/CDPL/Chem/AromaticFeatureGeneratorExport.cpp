@@ -56,6 +56,9 @@ void CDPLPythonChem::exportAromaticFeatureGenerator()
 		.def("getFeatureTolerance", &Chem::AromaticFeatureGenerator::getFeatureTolerance, python::arg("self"))
 		.def("assign", &Chem::AromaticFeatureGenerator::operator=, 
 			 (python::arg("self"), python::arg("gen")), python::return_self<>())
+		.def_readonly("DEF_FEATURE_TOL", Chem::AromaticFeatureGenerator::DEF_FEATURE_TOL)
+		.def_readonly("DEF_FEATURE_TYPE", Chem::AromaticFeatureGenerator::DEF_FEATURE_TYPE)
+		.def_readonly("DEF_FEATURE_GEOM", Chem::AromaticFeatureGenerator::DEF_FEATURE_GEOM)
 		.add_property("featureType", &Chem::AromaticFeatureGenerator::getFeatureType,
 					  &Chem::AromaticFeatureGenerator::setFeatureType)
 		.add_property("featureGeometry", &Chem::AromaticFeatureGenerator::getFeatureGeometry,

@@ -57,6 +57,7 @@ BOOST_PYTHON_MODULE(_chem)
 	exportAtomMapping();
 	exportBondMapping();
 	exportAtomBondMapping();
+	exportFeatureMapping();
 	exportFragmentList();
 	exportMDLDataBlock();
 	exportMassComposition();
@@ -99,6 +100,8 @@ BOOST_PYTHON_MODULE(_chem)
 	exportHBondDonorFeatureGenerator();
 	exportPosIonizableFeatureGenerator();
 	exportNegIonizableFeatureGenerator();
+	exportFeatureInteractionAnalyzer();
+	exportDefaultFeatureInteractionAnalyzer();
 
 	exportCompleteRingSet();
 	exportAromaticRingSet();

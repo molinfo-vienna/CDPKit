@@ -103,6 +103,8 @@ namespace CDPL
 			SmallestSetOfSmallestRings& operator=(const SmallestSetOfSmallestRings&);
 
 			void init(const MolecularGraph&);
+			bool stripTermAtoms(const Atom&, std::size_t, const Atom* = 0);
+
 			void findSSSR();
 			void createRingFragments();
 
@@ -129,6 +131,8 @@ namespace CDPL
 				void freeMessages(Controller*);
 
 				std::size_t getIndex() const;
+
+				bool stripped() const;
 
 				static void connect(Controller*, TNode*, TNode*, std::size_t, std::size_t);
 
@@ -205,6 +209,8 @@ namespace CDPL
 
 			const MolecularGraph*    molGraph;
 			NodeArray                nodes;
+			Util::BitSet             strippedAtomMask;
+			Util::BitSet             visAtomMask;
 			AllocMessageList         allocMessages;
 			MessageList              freeMessages;
 			ProcRingSet              procRings;

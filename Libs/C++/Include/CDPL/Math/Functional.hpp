@@ -29,6 +29,8 @@
 #ifndef CDPL_MATH_FUNCTIONAL_HPP
 #define CDPL_MATH_FUNCTIONAL_HPP
 
+#include <boost/algorithm/clamp.hpp>
+
 #include "CDPL/Math/Config.hpp"
 #include "CDPL/Math/Check.hpp"
 #include "CDPL/Math/CommonType.hpp"
@@ -268,6 +270,22 @@ namespace CDPL
 					res += e1()(i) * e2()(i);
 
 				return res;
+			}
+		};
+
+		template <typename V1, typename V2, typename T>
+		struct VectorAngleCosine : public VectorScalarBinaryFunctor<V1, V2>
+		{
+
+			typedef typename CommonType<typename VectorInnerProduct<V1, V2>::ResultType, T>::Type ResultType;
+
+			static CDPL_MATH_INLINE ResultType apply(const VectorExpression<V1>& e1, const VectorExpression<V2>& e2, const T& sd, bool clamp) {
+				ResultType res = VectorInnerProduct<V1, V2>::apply(e1, e2) / sd;
+				
+				if (!clamp)
+					return res;
+
+				return boost::algorithm::clamp(res, ResultType(-1), ResultType(1));
 			}
 		};
 

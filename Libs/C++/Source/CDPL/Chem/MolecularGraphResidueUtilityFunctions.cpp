@@ -35,6 +35,7 @@
 #include "CDPL/Chem/Entity3DFunctions.hpp"
 #include "CDPL/Chem/AtomFunctions.hpp"
 #include "CDPL/Chem/AtomType.hpp"
+#include "CDPL/Math/VectorArrayFunctions.hpp"
 
 
 using namespace CDPL; 
@@ -45,8 +46,12 @@ void Chem::extractEnvironmentResidues(const MolecularGraph& core, const Molecula
     if (core.getNumAtoms() == 0)
 		return;
 
-	Math::Vector3DArray core_coords; get3DCoordinates(core, core_coords);
-	Math::Vector3D core_ctr; core_coords.calcCentroid(core_ctr);
+	Math::Vector3DArray core_coords; 
+	get3DCoordinates(core, core_coords);
+	
+	Math::Vector3D core_ctr; 
+	calcCentroid(core_coords, core_ctr);
+	
 	double bsphere_rad = 0.0;
 
 	for (Math::Vector3DArray::ConstElementIterator it = core_coords.getElementsBegin(), end = core_coords.getElementsEnd(); it != end; ++it) 
@@ -92,6 +97,9 @@ void Chem::setHydrogenResidueSequenceInfo(MolecularGraph& molgraph, bool overwri
 			continue;
 
 		const Atom& prnt_atom = atom.getAtom(0);
+
+		if (getType(prnt_atom) == AtomType::H) 
+			overwrite = false;
 
 		if (overwrite) {
 			if (flags & AtomPropertyFlag::RESIDUE_CODE)

@@ -66,6 +66,12 @@ void CDPLPythonChem::exportHydrophobicFeatureGenerator()
 		.def("getGroupHydrophobicityThreshold", &Chem::HydrophobicFeatureGenerator::getGroupHydrophobicityThreshold, python::arg("self"))
 		.def("assign", &Chem::HydrophobicFeatureGenerator::operator=, 
 			 (python::arg("self"), python::arg("gen")), python::return_self<>())
+		.def_readonly("DEF_FEATURE_TOL", Chem::HydrophobicFeatureGenerator::DEF_FEATURE_TOL)
+		.def_readonly("DEF_FEATURE_TYPE", Chem::HydrophobicFeatureGenerator::DEF_FEATURE_TYPE)
+		.def_readonly("DEF_FEATURE_GEOM", Chem::HydrophobicFeatureGenerator::DEF_FEATURE_GEOM)
+		.def_readonly("DEF_HYD_THRESHOLD_RING", Chem::HydrophobicFeatureGenerator::DEF_HYD_THRESHOLD_RING)
+		.def_readonly("DEF_HYD_THRESHOLD_CHAIN", Chem::HydrophobicFeatureGenerator::DEF_HYD_THRESHOLD_CHAIN)
+		.def_readonly("DEF_HYD_THRESHOLD_GROUP", Chem::HydrophobicFeatureGenerator::DEF_HYD_THRESHOLD_GROUP)
 		.add_property("featureType", &Chem::HydrophobicFeatureGenerator::getFeatureType,
 					  &Chem::HydrophobicFeatureGenerator::setFeatureType)
 		.add_property("featureGeometry", &Chem::HydrophobicFeatureGenerator::getFeatureGeometry,

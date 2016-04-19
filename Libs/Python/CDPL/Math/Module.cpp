@@ -62,6 +62,7 @@ BOOST_PYTHON_MODULE(_math)
 	exportMatrixFunctions();
 	exportQuaternionFunctions();
 	exportSpecialFunctions();
+	exportVectorArrayFunctions();
 
 	registerToPythonConverters();
 	registerFromPythonConverters();

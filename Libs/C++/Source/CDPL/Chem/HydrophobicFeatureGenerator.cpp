@@ -42,8 +42,6 @@
 #include "CDPL/Chem/FeatureFunctions.hpp"
 #include "CDPL/Chem/Entity3DFunctions.hpp"
 #include "CDPL/Chem/UtilityFunctions.hpp"
-#include "CDPL/Chem/FeatureType.hpp"
-#include "CDPL/Chem/FeatureGeometry.hpp"
 #include "CDPL/Chem/AtomType.hpp"
 #include "CDPL/Chem/AtomTypeFunctions.hpp"
 #include "CDPL/Chem/SubstructureSearch.hpp"
@@ -184,12 +182,12 @@ namespace
 			atomHydCategoryPatterns.push_back(parseSMARTS("[*:3]~[!+0]"));
 			atomHydCategoryPatterns.push_back(parseSMARTS("[!+0:3]"));
 			
-			atomHydCategoryPatterns.push_back(parseSMARTS("[*:4]~*~[O,N;!H0]"));
-			atomHydCategoryPatterns.push_back(parseSMARTS("[*:4]~[O,N;!H0]"));
-			atomHydCategoryPatterns.push_back(parseSMARTS("[O,N;!H0:4]"));
+			atomHydCategoryPatterns.push_back(parseSMARTS("[*:4]~*~[O,N;!H0;!$(*-*=,:*)]"));
+			atomHydCategoryPatterns.push_back(parseSMARTS("[*:4]~[O,N;!H0;!$(*-*=,:*)]"));
+			atomHydCategoryPatterns.push_back(parseSMARTS("[O,N;!H0;!$(*-*=,:*):4]"));
 			
-			atomHydCategoryPatterns.push_back(parseSMARTS("[*:5]~[S;!H0]"));
-			atomHydCategoryPatterns.push_back(parseSMARTS("[S;!H0:5]"));
+			atomHydCategoryPatterns.push_back(parseSMARTS("[*:5]~[S;!H0;!$(*-*=,:*)]"));
+			atomHydCategoryPatterns.push_back(parseSMARTS("[S;!H0;!$(*-*=,:*):5]"));
 			
 			atomHydCategoryPatterns.push_back(parseSMARTS("[*:6]~*=[O]"));
 			atomHydCategoryPatterns.push_back(parseSMARTS("[*:6]=[O]"));
@@ -213,32 +211,34 @@ namespace
 			atomHydCategoryPatterns.push_back(parseSMARTS("[#16;v3,v4,v5,v6]~*~[*:12]~[#16;$(*=*)]"));
 			atomHydCategoryPatterns.push_back(parseSMARTS("[#16;$(*=*)]~[*:12]~[#16;$(*=*)]"));
 
-			atomHydCategoryPatterns.push_back(parseSMARTS("[*:13]~[N,O]"));
+			atomHydCategoryPatterns.push_back(parseSMARTS("[*:13]~[N,O;!$(*-*=,:*)]"));
 
-			atomHydCategoryPatterns.push_back(parseSMARTS("[N,O]~[*:14]~[N,O]"));
+			atomHydCategoryPatterns.push_back(parseSMARTS("[N,O;!$(*-*=,:*)]~[*:14]~[N,O;!$(*-*=,:*)]"));
 		}
 
 	} init;
-
-
-	const double DEF_TOLERANCE             = 1.5;
-	const double DEF_HYD_THRESHOLD_RING    = 1.0;
-	const double DEF_HYD_THRESHOLD_CHAIN   = 1.0;
-	const double DEF_HYD_THRESHOLD_GROUP   = 1.0;
 
 	const std::size_t RING_SIZE_LIMIT      = 7;
 	double MAX_CHAIN_HYD_FACTOR            = 2.0;
 }
 
 
+const double       Chem::HydrophobicFeatureGenerator::DEF_FEATURE_TOL;
+const double       Chem::HydrophobicFeatureGenerator::DEF_HYD_THRESHOLD_RING;
+const double       Chem::HydrophobicFeatureGenerator::DEF_HYD_THRESHOLD_CHAIN;
+const double       Chem::HydrophobicFeatureGenerator::DEF_HYD_THRESHOLD_GROUP;
+const unsigned int Chem::HydrophobicFeatureGenerator::DEF_FEATURE_TYPE;
+const unsigned int Chem::HydrophobicFeatureGenerator::DEF_FEATURE_GEOM;
+
+
 Chem::HydrophobicFeatureGenerator::HydrophobicFeatureGenerator():
-	featureType(FeatureType::HYDROPHOBIC),  featureTol(DEF_TOLERANCE), featureGeom(FeatureGeometry::SPHERE),
+	featureType(DEF_FEATURE_TYPE),  featureTol(DEF_FEATURE_TOL), featureGeom(DEF_FEATURE_GEOM),
 	hydThreshRing(DEF_HYD_THRESHOLD_RING), hydThreshChain(DEF_HYD_THRESHOLD_CHAIN), 
 	hydThreshGroup(DEF_HYD_THRESHOLD_GROUP)
 {}
 
 Chem::HydrophobicFeatureGenerator::HydrophobicFeatureGenerator(const MolecularGraph& molgraph, Pharmacophore& pharm):
-	featureType(FeatureType::HYDROPHOBIC),  featureTol(DEF_TOLERANCE), featureGeom(FeatureGeometry::SPHERE),
+	featureType(DEF_FEATURE_TYPE),  featureTol(DEF_FEATURE_TOL), featureGeom(DEF_FEATURE_GEOM),
 	hydThreshRing(DEF_HYD_THRESHOLD_RING), hydThreshChain(DEF_HYD_THRESHOLD_CHAIN), 
 	hydThreshGroup(DEF_HYD_THRESHOLD_GROUP)
 {

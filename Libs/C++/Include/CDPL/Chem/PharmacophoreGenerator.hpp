@@ -106,17 +106,23 @@ namespace CDPL
 			void setFeatureFunction(unsigned int type, const FeatureFunction& func);
 
 			/**
-			 * \brief Returns the function that gets used for the generation of the specified type of features.
+			 * \brief Removes the feature generation function for the specified type of features.
+			 * \param type An identifier for the type of features for which the generator function has to be removed.
+			 */
+			void removeFeatureFunction(unsigned int type);
+
+			/**
+			 * \brief Returns the function that was registered for the generation of the specified type of features.
 			 * \param type An identifier for the type of features of interest.
-			 * \return The used generator function for the features of type \a type.
+			 * \return The registered generator function for features of type \a type.
 			 */
 			const FeatureFunction& getFeatureFunction(unsigned int type) const;
 
 			/**
 			 * \brief Perceives the enabled pharmacophore features of the molecular graph a\ molgraph 
-			 *        and adds them to the pharmacophore \a pharm.
+			 *        and appends them to the pharmacophore \a pharm.
 			 * \param molgraph The molecular graph for which to perceive the features.
-			 * \param pharm The output pharmacophore where to add the generated features.
+			 * \param pharm The pharmacophore where to add the generated output features.
 			 */
 			void generate(const MolecularGraph& molgraph, Pharmacophore& pharm);
 
@@ -126,10 +132,6 @@ namespace CDPL
 			typedef std::set<unsigned int> EnabledFeatureSet;
 			typedef std::map<unsigned int, FeatureFunction> FeatureFunctionMap;
 		
-			PharmacophoreGenerator(const PharmacophoreGenerator&);
-
-			PharmacophoreGenerator& operator=(const PharmacophoreGenerator&);
-
 			FeatureFunctionMap  featureFuncMap;
 			EnabledFeatureSet   enabledFeatures;
 	

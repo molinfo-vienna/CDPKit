@@ -81,6 +81,16 @@ void Chem::SmallestSetOfSmallestRings::init(const MolecularGraph& molgraph)
 	std::size_t num_atoms = molgraph.getNumAtoms();
 	std::size_t num_bonds = molgraph.getNumBonds();
 
+	strippedAtomMask.resize(num_atoms);
+	strippedAtomMask.reset();
+
+	visAtomMask.resize(num_atoms);
+	visAtomMask.reset();
+
+	for (std::size_t i = 0; i < num_atoms; i++)
+		if (!visAtomMask.test(i))
+			stripTermAtoms(molGraph->getAtom(i), i);
+
 	nodes.clear();
 	nodes.reserve(num_atoms);
 
@@ -91,20 +101,16 @@ void Chem::SmallestSetOfSmallestRings::init(const MolecularGraph& molgraph)
 	for (MolecularGraph::ConstBondIterator it = molgraph.getBondsBegin(); it != bonds_end; ++it) {
 		const Bond& bond = *it;
 		const Atom& atom1 = bond.getBegin();
-		const Atom& atom2 = bond.getEnd();
-
-		if (!molgraph.containsAtom(atom1) || !molgraph.containsAtom(atom2)) {
-			nullity--;
-			continue;
-		}
-
 		std::size_t atom1_idx = molgraph.getAtomIndex(atom1);
+
+		if (strippedAtomMask.test(atom1_idx))
+			continue;
+
+		const Atom& atom2 = bond.getEnd();
 		std::size_t atom2_idx = molgraph.getAtomIndex(atom2);
 
-		if (atom1_idx == atom2_idx) {
-			nullity--;
+		if (strippedAtomMask.test(atom2_idx))
 			continue;
-		}
 
 		TNode::connect(this, &nodes[atom1_idx], &nodes[atom2_idx], molgraph.getBondIndex(bond), num_bonds);
 	}
@@ -114,17 +120,53 @@ void Chem::SmallestSetOfSmallestRings::init(const MolecularGraph& molgraph)
 	sssrSize = std::size_t(nullity);
 }
 
+bool Chem::SmallestSetOfSmallestRings::stripTermAtoms(const Atom& atom, std::size_t atom_idx, const Atom* from_atom)
+{
+	visAtomMask.set(atom_idx);
+
+	Atom::ConstBondIterator b_it = atom.getBondsBegin();
+	bool only_term_nbrs = true;
+
+	for (Atom::ConstAtomIterator a_it = atom.getAtomsBegin(), a_end = atom.getAtomsEnd(); a_it != a_end; ++a_it, ++b_it) {
+		const Atom& nbr_atom = *a_it;
+
+		if (&nbr_atom == from_atom)
+			continue;
+
+		if (!molGraph->containsAtom(nbr_atom))
+			continue;
+
+		if (!molGraph->containsBond(*b_it))
+			continue;
+
+		std::size_t nbr_atom_idx = molGraph->getAtomIndex(nbr_atom);
+	
+		if (visAtomMask.test(nbr_atom_idx)) {
+			only_term_nbrs = false;
+			continue;
+		}
+
+		if (!stripTermAtoms(nbr_atom, nbr_atom_idx, &atom))
+			only_term_nbrs = false;
+	}
+
+	if (only_term_nbrs)
+		strippedAtomMask.set(atom_idx);
+
+	return only_term_nbrs;
+}
+
 void Chem::SmallestSetOfSmallestRings::findSSSR()
 {
-	MolecularGraph::ConstAtomIterator atoms_beg = molGraph->getAtomsBegin();
-	MolecularGraph::ConstAtomIterator atoms_end = molGraph->getAtomsEnd();
+	std::size_t num_nodes = nodes.size();
 
 	while (!sssrComplete()) {
-		for (MolecularGraph::ConstAtomIterator a_it = atoms_beg; a_it != atoms_end; ++a_it)
-			nodes[molGraph->getAtomIndex(*a_it)].send(this);
+		for (std::size_t i = 0; i < num_nodes; i++)
+			if (!nodes[i].stripped())
+				nodes[i].send(this);
 
-		for (MolecularGraph::ConstAtomIterator a_it = atoms_beg; a_it != atoms_end; ++a_it)
-			if (nodes[molGraph->getAtomIndex(*a_it)].receive(this))
+		for (std::size_t i = 0; i < num_nodes; i++)
+			if (!nodes[i].stripped() && nodes[i].receive(this))
 				return;
 
 		processEvenRings();
@@ -354,6 +396,11 @@ bool Chem::SmallestSetOfSmallestRings::TNode::receive(Controller* controller)
 std::size_t Chem::SmallestSetOfSmallestRings::TNode::getIndex() const
 {
 	return index;
+}
+
+bool Chem::SmallestSetOfSmallestRings::TNode::stripped() const
+{
+	return nbrNodes.empty();
 }
 
 void Chem::SmallestSetOfSmallestRings::TNode::connect(Controller* controller, TNode* node1, TNode* node2, 

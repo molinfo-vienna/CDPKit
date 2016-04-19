@@ -1,7 +1,7 @@
 /* -*- mode: c++; c-basic-offset: 4; tab-width: 4; indent-tabs-mode: t -*- */
 
 /* 
- * DefaultPharmacophoreGeneratorExport.cpp 
+ * FeatureMappingExport.cpp 
  *
  * This file is part of the Chemical Data Processing Toolkit
  *
@@ -26,24 +26,25 @@
 
 #include <boost/python.hpp>
 
-#include "CDPL/Chem/DefaultPharmacophoreGenerator.hpp"
-#include "CDPL/Chem/MolecularGraph.hpp"
-#include "CDPL/Chem/Pharmacophore.hpp"
+#include "CDPL/Chem/FeatureMapping.hpp"
+#include "CDPL/Chem/Feature.hpp"
+
+#include "Util/MapVisitor.hpp"
 
 #include "ClassExports.hpp"
 
 
-void CDPLPythonChem::exportDefaultPharmacophoreGenerator()
+void CDPLPythonChem::exportFeatureMapping()
 {
     using namespace boost;
     using namespace CDPL;
 
-    python::class_<Chem::DefaultPharmacophoreGenerator, python::bases<Chem::PharmacophoreGenerator>,
-				   boost::noncopyable>("DefaultPharmacophoreGenerator", python::no_init)
-		.def(python::init<>(python::arg("self")))
-		.def(python::init<const Chem::MolecularGraph&, Chem::Pharmacophore&>(
-				 (python::arg("self"), python::arg("molgraph"), python::arg("pharm"))))
-		.def(python::init<Chem::DefaultPharmacophoreGenerator>((python::arg("self"), python::arg("gen"))))
-		.def("assign", &Chem::DefaultPharmacophoreGenerator::operator=, 
-			 (python::arg("self"), python::arg("gen")), python::return_self<>());
+    python::class_<Chem::FeatureMapping, Chem::FeatureMapping::SharedPointer>("FeatureMapping", python::no_init)
+	.def(python::init<>(python::arg("self")))
+	.def(python::init<const Chem::FeatureMapping&>((python::arg("self"), python::arg("mapping")))
+	     [python::with_custodian_and_ward<1, 2>()])
+	.def(CDPLPythonUtil::MultiMapVisitor<Chem::FeatureMapping,
+	     python::return_internal_reference<>, python::with_custodian_and_ward<1, 2>,
+	     python::with_custodian_and_ward<1, 2, python::with_custodian_and_ward<1, 3> >,
+	     python::return_internal_reference<1, python::with_custodian_and_ward_postcall<0, 3> >, true>());
 }

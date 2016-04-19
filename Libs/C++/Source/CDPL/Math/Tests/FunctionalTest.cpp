@@ -57,6 +57,27 @@ namespace
 		BOOST_CHECK_EQUAL((VectorInnerProduct<V2, V1>::apply(v2, v1)), exp_val);
 	}
 
+	template <typename V1, typename V2, typename T>
+	void checkVectorAngleCosine(const V1& v1, const V2& v2, const T& sf, bool clamp)
+	{
+		using namespace CDPL;
+		using namespace Math;
+
+		typedef VectorInnerProduct<V1, V2> VIP;
+		typedef VectorAngleCosine<V1, V2, T> VAC;
+		typedef typename VAC::ResultType ResultType;
+
+		ResultType exp_val = VIP::apply(v1, v2) / sf;
+
+		if (clamp)
+			exp_val = boost::algorithm::clamp(exp_val, ResultType(-1.0), ResultType(1.0));
+
+		ResultType res = VAC::apply(v1, v2, sf, clamp);
+
+		BOOST_CHECK_EQUAL(res, exp_val);
+		BOOST_CHECK_EQUAL((VectorAngleCosine<V2, V1, T>::apply(v2, v1, sf, clamp)), exp_val);
+	}
+
 	template <typename V1, typename V2, typename V3>
 	void checkVectorCrossProduct(const V1& v1, const V2& v2, const V3& exp_res)
 	{
@@ -922,6 +943,38 @@ BOOST_AUTO_TEST_CASE(VectorInnerProductTest)
 	BOOST_CHECK_THROW(checkVectorInnerProduct(CVector<double, 4>(), CVector<int, 0>()), Base::SizeError);
 	BOOST_CHECK_THROW(checkVectorInnerProduct(CVector<double, 3>(), CVector<int, 2>()), Base::SizeError);
 	BOOST_CHECK_THROW(checkVectorInnerProduct(CVector<double, 2>(), CVector<int, 3>()), Base::SizeError);
+}
+
+BOOST_AUTO_TEST_CASE(VectorAngleCosineTest)
+{
+	using namespace CDPL;
+	using namespace Math;
+
+	CVector<double, 4> v1 = vec(1.0, -2.0, 3.12, 4.14);
+	CVector<int, 4> v2 = vec(int(15), int(17), int(-12), int(21));
+
+	checkVectorAngleCosine(v1, v2, 2.0f, true);
+
+	// ----------
+
+	CVector<float, 4> v3 = vec(17.f, -12.2f, 12.2f, 11.12f);
+
+	checkVectorAngleCosine(v1, v3, 1.0, false);
+
+	// ----------
+
+	checkVectorAngleCosine(CVector<double, 0>(), CVector<int, 0>(), 3.2, true);
+
+	// ----------
+
+	checkVectorAngleCosine(CVector<float, 0>(), CVector<double, 0>(), 0.1, false);
+	
+	// ----------
+
+	BOOST_CHECK_THROW(checkVectorAngleCosine(CVector<double, 0>(), CVector<int, 4>(), 0, true), Base::SizeError);
+	BOOST_CHECK_THROW(checkVectorAngleCosine(CVector<double, 4>(), CVector<int, 0>(), 1.1, false), Base::SizeError);
+	BOOST_CHECK_THROW(checkVectorAngleCosine(CVector<double, 3>(), CVector<int, 2>(), -1.2f, true), Base::SizeError);
+	BOOST_CHECK_THROW(checkVectorAngleCosine(CVector<double, 2>(), CVector<int, 3>(), 100, false), Base::SizeError);
 }
 
 BOOST_AUTO_TEST_CASE(VectorEqualityTest)

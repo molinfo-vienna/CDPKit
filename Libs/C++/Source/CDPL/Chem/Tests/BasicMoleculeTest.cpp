@@ -184,9 +184,12 @@ BOOST_AUTO_TEST_CASE(BasicMoleculeTest)
 //-----	
 
 	BasicAtom& mol1_atom2 = mol1.addAtom();
+
 	mol1_atom2.setProperty(prop_key2, std::string("H"));
 
-	BasicAtom& mol1_atom3 = (mol1.addAtom() = mol1_atom2);
+	BasicAtom& mol1_atom3 = mol1.addAtom();	
+
+	mol1_atom3 = mol1_atom2;
 
 	BasicAtom& mol1_atom4 = mol1.addAtom();
 	mol1_atom4.setProperty(prop_key2, std::string("O"));

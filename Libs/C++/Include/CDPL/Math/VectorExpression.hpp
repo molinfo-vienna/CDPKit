@@ -503,6 +503,14 @@ namespace CDPL
 		{
 			return VectorInnerProduct<E1, E2>::apply(e1, e2);
 		}
+
+		template <typename E1, typename E2, typename T>
+		CDPL_MATH_INLINE
+		typename VectorAngleCosine<E1, E2, T>::ResultType
+		angleCos(const VectorExpression<E1>& e1, const VectorExpression<E2>& e2, const T& sd, bool clamp = true)
+		{
+			return VectorAngleCosine<E1, E2, T>::apply(e1, e2, sd, clamp);
+		}
 	
 		template <typename E>
 		CDPL_MATH_INLINE

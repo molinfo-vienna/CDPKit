@@ -85,6 +85,8 @@ void Chem::PatternBasedFeatureGenerator::generate(const MolecularGraph& molgraph
 	Util::BitSet* atom_mask = 0;
 	SubstructureSearch& subsearch = getSubstructureSearch();
 
+	subsearch.uniqueMappingsOnly(false);
+
 	for (FeaturePatternList::const_iterator p_it = includePatterns.begin(), p_end = includePatterns.end(); p_it != p_end; ++p_it) {
 		const FeaturePattern& ptn = *p_it;
 
@@ -133,10 +135,8 @@ Chem::PatternBasedFeatureGenerator& Chem::PatternBasedFeatureGenerator::operator
 
 Chem::SubstructureSearch& Chem::PatternBasedFeatureGenerator::getSubstructureSearch()
 {
-	if (!substructSearch) {
+	if (!substructSearch) 
 		substructSearch.reset(new SubstructureSearch());
-		substructSearch->uniqueMappingsOnly(true);
-	}
 	
 	return *substructSearch;
 }
@@ -194,16 +194,22 @@ void Chem::PatternBasedFeatureGenerator::addFeature(const AtomBondMapping& mappi
 
 	switch (ftr_ptn.featureGeom) {
 
-		case FeatureGeometry::VECTOR: 
-			setLength(feature, ftr_ptn.vectorLength);
+		case FeatureGeometry::VECTOR: {
+			Math::Vector3D orient;
+			double length = calcVecFeatureOrientation(geomRefAtom1List, geomRefAtom2List, orient);
+
+			if (length >= 0.0) {
+				setOrientation(feature, orient);
+				setLength(feature, ftr_ptn.vectorLength < 0.0 ? length : ftr_ptn.vectorLength);
+			}
+
+			break;
+		}
 
 		case FeatureGeometry::PLANE: {
 			Math::Vector3D orient, tmp;
 
-			if (ftr_ptn.featureGeom == FeatureGeometry::VECTOR ? 
-				calcVecFeatureOrientation(geomRefAtom1List, geomRefAtom2List, orient) : 
-				calcPlaneFeatureOrientation(geomRefAtom1List, orient, tmp))
-
+			if (calcPlaneFeatureOrientation(geomRefAtom1List, orient, tmp))
 				setOrientation(feature, orient);
 		}
 
@@ -214,20 +220,23 @@ void Chem::PatternBasedFeatureGenerator::addFeature(const AtomBondMapping& mappi
 	setGeometry(feature, ftr_ptn.featureGeom);
 }
 
-bool Chem::PatternBasedFeatureGenerator::calcVecFeatureOrientation(const AtomList& alist1, const AtomList& alist2, Math::Vector3D& orient) const
+double Chem::PatternBasedFeatureGenerator::calcVecFeatureOrientation(const AtomList& alist1, const AtomList& alist2, Math::Vector3D& orient) const
 {
 	Math::Vector3D org;
 
 	if (!calcCentroid(alist1, org))
-		return false;
+		return -1.0;
  
 	if (!calcCentroid(alist2, orient))
-		return false;
+		return -1.0;
  
 	orient.minusAssign(org);
-	orient /= length(orient);
 
-	return true;
+	double len = length(orient);
+
+	orient /= len;
+
+	return len;
 }
 
 bool Chem::PatternBasedFeatureGenerator::calcPlaneFeatureOrientation(const AtomList& alist, Math::Vector3D& orient, Math::Vector3D& centroid)
@@ -274,6 +283,8 @@ bool Chem::PatternBasedFeatureGenerator::calcCentroid(const AtomList& alist, Mat
 void Chem::PatternBasedFeatureGenerator::getExcludeMatches()
 {
 	SubstructureSearch& subsearch = getSubstructureSearch();
+
+	subsearch.uniqueMappingsOnly(true);
 
 	for (SubstructPatternList::const_iterator p_it = excludePatterns.begin(), p_end = excludePatterns.end(); p_it != p_end; ++p_it) {
 		subsearch.setQuery(*p_it->get());		

@@ -44,20 +44,12 @@ namespace
 			using namespace boost;
 			using namespace CDPL;
 
-			typedef typename ArrayType::ValueType::ValueType VectorValueType;
-
 			python::class_<ArrayType, typename ArrayType::SharedPointer>(name, python::no_init)
 				.def(python::init<>(python::arg("self")))
 				.def(python::init<const ArrayType&>((python::arg("self"), python::arg("array"))))
 				.def(CDPLPythonUtil::ArrayVisitor<ArrayType, 
 					 python::return_internal_reference<>, python::default_call_policies, 
 					 python::default_call_policies, python::default_call_policies>())
-				.def("transform", static_cast<void (ArrayType::*)(const Math::CMatrix<VectorValueType, Dim, Dim>&)>(&ArrayType::transform),
-					 (python::arg("self"), python::arg("xform")))
-				.def("transform", static_cast<void (ArrayType::*)(const Math::CMatrix<VectorValueType, Dim + 1, Dim + 1>&)>(&ArrayType::transform),
-					 (python::arg("self"), python::arg("xform")))
-				.def("calcCentroid", static_cast<bool (ArrayType::*)(Math::CVector<VectorValueType, Dim>&)>(&ArrayType::calcCentroid),
-					 (python::arg("self"), python::arg("ctr")))
 				.def("__eq__", &ArrayType::operator==, (python::arg("self"), python::arg("array")))
 				.def("__ne__", &ArrayType::operator!=, (python::arg("self"), python::arg("array")));
 		}

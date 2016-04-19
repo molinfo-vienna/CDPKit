@@ -155,14 +155,14 @@ def cleanStructures():
         stats.read += 1;
 
         if stats.read % 10000 == 0:
-            print 'Processed ' + str(stats.read) + ' Molecules...'
+            print 'Processed ' + str(stats.read - offset) + ' Molecules...'
 
-        if count > 0 and stats.read - offset >= count:
+        if count > 0 and (stats.read - offset) >= count:
             break
 
     print ''
     print '-- Summary --'
-    print 'Molecules processed: ' + str(stats.read)
+    print 'Molecules processed: ' + str(stats.read - offset)
     print 'Molecules dropped: ' + str(stats.dropped)
     print 'Molecules modified: ' + str(stats.modified)
 

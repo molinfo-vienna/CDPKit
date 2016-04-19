@@ -27,6 +27,7 @@ SET(math_MOD_SRCS
     SpecialFunctionExport.cpp
     QuaternionFunctionExport.cpp
     VectorArrayExport.cpp
+    VectorArrayFunctionExport.cpp
     MLRModelExport.cpp
     BFGSMinimizerExport.cpp
     KabschAlgorithmExport.cpp

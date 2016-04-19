@@ -44,10 +44,12 @@ using namespace CDPL;
 namespace
 {
 
-	const std::size_t DEF_NUM_ITERATIONS      = 6;
-	const double      DEF_DAMPING_FACTOR      = 0.5;
 	const double      HYDROGEN_ENEGATIVITY_P1 = 20.02;
 }
+
+
+const std::size_t Chem::PEOEChargeCalculator::DEF_NUM_ITERATIONS;
+const double      Chem::PEOEChargeCalculator::DEF_DAMPING_FACTOR;
 
 
 Chem::PEOEChargeCalculator::PEOEChargeCalculator():

@@ -1,7 +1,7 @@
 /* -*- mode: c++; c-basic-offset: 4; tab-width: 4; indent-tabs-mode: t -*- */
 
 /* 
- * DefaultPharmacophoreGeneratorExport.cpp 
+ * DefaultFeatureInteractionAnalyzerExport.cpp 
  *
  * This file is part of the Chemical Data Processing Toolkit
  *
@@ -26,24 +26,23 @@
 
 #include <boost/python.hpp>
 
-#include "CDPL/Chem/DefaultPharmacophoreGenerator.hpp"
-#include "CDPL/Chem/MolecularGraph.hpp"
+#include "CDPL/Chem/DefaultFeatureInteractionAnalyzer.hpp"
 #include "CDPL/Chem/Pharmacophore.hpp"
 
 #include "ClassExports.hpp"
 
 
-void CDPLPythonChem::exportDefaultPharmacophoreGenerator()
+void CDPLPythonChem::exportDefaultFeatureInteractionAnalyzer()
 {
     using namespace boost;
     using namespace CDPL;
 
-    python::class_<Chem::DefaultPharmacophoreGenerator, python::bases<Chem::PharmacophoreGenerator>,
-				   boost::noncopyable>("DefaultPharmacophoreGenerator", python::no_init)
+    python::class_<Chem::DefaultFeatureInteractionAnalyzer, python::bases<Chem::FeatureInteractionAnalyzer>,
+				   boost::noncopyable>("DefaultFeatureInteractionAnalyzer", python::no_init)
 		.def(python::init<>(python::arg("self")))
-		.def(python::init<const Chem::MolecularGraph&, Chem::Pharmacophore&>(
+		.def(python::init<const Chem::Pharmacophore&, const Chem::Pharmacophore&, Chem::FeatureMapping&>(
 				 (python::arg("self"), python::arg("molgraph"), python::arg("pharm"))))
-		.def(python::init<Chem::DefaultPharmacophoreGenerator>((python::arg("self"), python::arg("gen"))))
-		.def("assign", &Chem::DefaultPharmacophoreGenerator::operator=, 
-			 (python::arg("self"), python::arg("gen")), python::return_self<>());
+		.def(python::init<Chem::DefaultFeatureInteractionAnalyzer>((python::arg("self"), python::arg("analyzer"))))
+		.def("assign", &Chem::DefaultFeatureInteractionAnalyzer::operator=, 
+			 (python::arg("self"), python::arg("analyzer")), python::return_self<>());
 }
