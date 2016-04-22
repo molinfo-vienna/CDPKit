@@ -98,6 +98,14 @@ namespace CDPLPythonChem
 	void exportNegIonizableFeatureGenerator();
 	void exportFeatureInteractionAnalyzer();
 	void exportDefaultFeatureInteractionAnalyzer();
+	void exportFeatureInteractionConstraintConnector();
+	void exportFeatureDistanceConstraint();
+	void exportHydrophobicInteractionConstraint();
+	void exportIonicInteractionConstraint();
+	void exportOrthogonalPiPiInteractionConstraint();
+	void exportParallelPiPiInteractionConstraint();
+	void exportCationPiInteractionConstraint();
+	void exportHBondingInteractionConstraint();
 
 	void exportCompleteRingSet();
 	void exportAromaticRingSet();

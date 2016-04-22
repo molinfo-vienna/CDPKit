@@ -53,7 +53,7 @@ namespace CDPL
 		{
 
 		  public:
-			static const double DEF_MIN_DISTANCE = 1.0;
+			static const double DEF_MIN_DISTANCE = 2.0;
 			static const double DEF_MAX_DISTANCE = 6.0;
 
 			/**

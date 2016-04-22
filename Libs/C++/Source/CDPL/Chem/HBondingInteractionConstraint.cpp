@@ -66,7 +66,7 @@ double Chem::HBondingInteractionConstraint::getMaxAcceptorAngle() const
 
 bool Chem::HBondingInteractionConstraint::operator()(const Feature& ftr1, const Feature& ftr2) const
 {
-	if (!has3DCoordinates(ftr1) || !has3DCoordinates(ftr1))
+	if (!has3DCoordinates(ftr1) || !has3DCoordinates(ftr2))
 		return false;
 
 	const Feature& don_ftr = (donAccOrder ? ftr1 : ftr2);

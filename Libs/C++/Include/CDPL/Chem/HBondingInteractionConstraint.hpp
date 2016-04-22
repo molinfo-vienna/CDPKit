@@ -71,8 +71,8 @@ namespace CDPL
 			 * \param max_acc_axis_angle The maximum allowed angle between the H-bond direction and the acceptor-feature vector.
 			 */
 			HBondingInteractionConstraint(bool don_acc, double min_len = DEF_MIN_HB_LENGTH, double max_len = DEF_MAX_HB_LENGTH,
-										  double min_ahd_ang = DEF_MIN_AHD_ANGLE, double max_acc_angle = DEF_MAX_ACC_ANGLE): 
-				donAccOrder(don_acc), minLength(min_len), maxLength(max_len), minAHDAngle(min_ahd_ang), maxAccAngle(max_acc_angle) {}
+										  double min_ahd_ang = DEF_MIN_AHD_ANGLE, double max_acc_ang = DEF_MAX_ACC_ANGLE): 
+				donAccOrder(don_acc), minLength(min_len), maxLength(max_len), minAHDAngle(min_ahd_ang), maxAccAngle(max_acc_ang) {}
 
 			double getMinLength() const;
 

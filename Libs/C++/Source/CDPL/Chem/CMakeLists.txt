@@ -136,6 +136,7 @@ SET(cdpl-chem_LIB_SRCS
     RDFCodeCalculator.cpp
     BurdenMatrixGenerator.cpp
     BCUTDescriptorCalculator.cpp
+
     PatternBasedFeatureGenerator.cpp
     HydrophobicFeatureGenerator.cpp
     AromaticFeatureGenerator.cpp
@@ -147,11 +148,14 @@ SET(cdpl-chem_LIB_SRCS
     DefaultPharmacophoreGenerator.cpp
     FeatureInteractionAnalyzer.cpp
     DefaultFeatureInteractionAnalyzer.cpp
+    FeatureInteractionConstraintConnector.cpp
     FeatureDistanceConstraint.cpp
     HydrophobicInteractionConstraint.cpp
     IonicInteractionConstraint.cpp
     HBondingInteractionConstraint.cpp
     CationPiInteractionConstraint.cpp
+    OrthogonalPiPiInteractionConstraint.cpp
+    ParallelPiPiInteractionConstraint.cpp
 
     Entity3DCoordinatesFunctions.cpp
 
@@ -379,6 +383,7 @@ SET(cdpl-chem_LIB_SRCS
     AromaticityPerception.cpp
     StringUtilities.cpp
     StringDataIOUtilities.cpp
+    PiPiInteractionUtilities.cpp
    )
 
 ADD_LIBRARY(cdpl-chem-static STATIC ${cdpl-chem_LIB_SRCS})

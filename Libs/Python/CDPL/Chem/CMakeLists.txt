@@ -76,6 +76,14 @@ SET(chem_MOD_SRCS
     NegIonizableFeatureGeneratorExport.cpp
     FeatureInteractionAnalyzerExport.cpp
     DefaultFeatureInteractionAnalyzerExport.cpp
+    FeatureInteractionConstraintConnectorExport.cpp
+    FeatureDistanceConstraintExport.cpp
+    HydrophobicInteractionConstraintExport.cpp
+    IonicInteractionConstraintExport.cpp
+    OrthogonalPiPiInteractionConstraintExport.cpp
+    ParallelPiPiInteractionConstraintExport.cpp
+    CationPiInteractionConstraintExport.cpp
+    HBondingInteractionConstraintExport.cpp
 
     CompleteRingSetExport.cpp 
     AromaticRingSetExport.cpp 

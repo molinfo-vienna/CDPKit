@@ -1,7 +1,7 @@
 /* -*- mode: c++; c-basic-offset: 4; tab-width: 4; indent-tabs-mode: t -*- */
 
 /* 
- * FeatureDistanceConstraint.cpp 
+ * PiPiInteractionUtilities.cpp
  *
  * This file is part of the Chemical Data Processing Toolkit
  *
@@ -26,30 +26,24 @@
 
 #include "StaticInit.hpp"
 
-#include "CDPL/Chem/FeatureDistanceConstraint.hpp"
-#include "CDPL/Chem/Feature.hpp"
-#include "CDPL/Chem/Entity3DFunctions.hpp"
+#include <cmath>
+
+#include "PiPiInteractionUtilities.hpp"
 
 
-using namespace CDPL; 
+using namespace CDPL;
 
 
-double Chem::FeatureDistanceConstraint::getMinDistance() const
+double Chem::calcVPlaneDistance(const Math::Vector3D& plane_ov, const Math::Vector3D& pt_vec)
 {
-	return minDist;
+    return std::abs(innerProd(plane_ov, pt_vec));
 }
 
-double Chem::FeatureDistanceConstraint::getMaxDistance() const
+double Chem::calcHPlaneDistance(const Math::Vector3D& plane_ov, const Math::Vector3D& pt_vec)
 {
-	return maxDist;
+    double v_dist = calcVPlaneDistance(plane_ov, pt_vec);
+    double pt_dist = length(pt_vec);
+
+    return std::sqrt(pt_dist * pt_dist - v_dist * v_dist);
 }
 
-bool Chem::FeatureDistanceConstraint::operator()(const Feature& ftr1, const Feature& ftr2) const
-{
-	if (!has3DCoordinates(ftr1) || !has3DCoordinates(ftr2))
-		return false;
-
-	double dist = length(get3DCoordinates(ftr2) - get3DCoordinates(ftr1));
-
-	return (dist >= minDist && dist <= maxDist);
-}

@@ -45,6 +45,7 @@
 #include "CDPL/Chem/BasicAtom.hpp"
 #include "CDPL/Chem/BasicBond.hpp"
 #include "CDPL/Chem/Fragment.hpp"
+
 #include "CDPL/Chem/Pharmacophore.hpp"
 #include "CDPL/Chem/Feature.hpp"
 #include "CDPL/Chem/BasicPharmacophore.hpp"
@@ -204,6 +205,7 @@
 #include "CDPL/Chem/AutoCorrelationVectorCalculator.hpp"
 #include "CDPL/Chem/BurdenMatrixGenerator.hpp"
 #include "CDPL/Chem/BCUTDescriptorCalculator.hpp"
+
 #include "CDPL/Chem/PatternBasedFeatureGenerator.hpp"
 #include "CDPL/Chem/AromaticFeatureGenerator.hpp"
 #include "CDPL/Chem/HydrophobicFeatureGenerator.hpp"
@@ -215,10 +217,12 @@
 #include "CDPL/Chem/InteractionPharmacophoreGenerator.hpp"
 #include "CDPL/Chem/FeatureInteractionAnalyzer.hpp"
 #include "CDPL/Chem/DefaultFeatureInteractionAnalyzer.hpp"
+#include "CDPL/Chem/FeatureInteractionConstraintConnector.hpp"
 #include "CDPL/Chem/FeatureDistanceConstraint.hpp"
 #include "CDPL/Chem/HydrophobicInteractionConstraint.hpp"
 #include "CDPL/Chem/IonicInteractionConstraint.hpp"
-#include "CDPL/Chem/PiStackingInteractionConstraint.hpp"
+#include "CDPL/Chem/OrthogonalPiPiInteractionConstraint.hpp"
+#include "CDPL/Chem/ParallelPiPiInteractionConstraint.hpp"
 #include "CDPL/Chem/CationPiInteractionConstraint.hpp"
 #include "CDPL/Chem/HBondingInteractionConstraint.hpp"
 

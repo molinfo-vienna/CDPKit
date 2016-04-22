@@ -31,6 +31,9 @@
 #include "CDPL/Chem/HydrophobicInteractionConstraint.hpp"
 #include "CDPL/Chem/HBondingInteractionConstraint.hpp"
 #include "CDPL/Chem/CationPiInteractionConstraint.hpp"
+#include "CDPL/Chem/OrthogonalPiPiInteractionConstraint.hpp"
+#include "CDPL/Chem/ParallelPiPiInteractionConstraint.hpp"
+#include "CDPL/Chem/FeatureInteractionConstraintConnector.hpp"
 #include "CDPL/Chem/FeatureType.hpp"
 
 
@@ -60,4 +63,9 @@ void Chem::DefaultFeatureInteractionAnalyzer::init()
 
 	setConstraintFunction(FeatureType::AROMATIC, FeatureType::POS_IONIZABLE, CationPiInteractionConstraint(true));
 	setConstraintFunction(FeatureType::POS_IONIZABLE, FeatureType::AROMATIC, CationPiInteractionConstraint(false));
+
+	setConstraintFunction(FeatureType::AROMATIC, FeatureType::AROMATIC, 
+						  FeatureInteractionConstraintConnector(false, 
+																OrthogonalPiPiInteractionConstraint(), 
+																ParallelPiPiInteractionConstraint()));
 }

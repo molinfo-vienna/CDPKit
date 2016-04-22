@@ -60,7 +60,7 @@ double Chem::CationPiInteractionConstraint::getMaxAngle() const
 
 bool Chem::CationPiInteractionConstraint::operator()(const Feature& ftr1, const Feature& ftr2) const
 {
-    if (!has3DCoordinates(ftr1) || !has3DCoordinates(ftr1))
+    if (!has3DCoordinates(ftr1) || !has3DCoordinates(ftr2))
 		return false;
 
     const Feature& aro_ftr = (aroCatOrder ? ftr1 : ftr2);

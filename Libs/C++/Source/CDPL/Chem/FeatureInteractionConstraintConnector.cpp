@@ -1,7 +1,7 @@
 /* -*- mode: c++; c-basic-offset: 4; tab-width: 4; indent-tabs-mode: t -*- */
 
 /* 
- * FeatureDistanceConstraint.cpp 
+ * FeatureInteractionConstraintConnector.cpp 
  *
  * This file is part of the Chemical Data Processing Toolkit
  *
@@ -26,30 +26,16 @@
 
 #include "StaticInit.hpp"
 
-#include "CDPL/Chem/FeatureDistanceConstraint.hpp"
-#include "CDPL/Chem/Feature.hpp"
-#include "CDPL/Chem/Entity3DFunctions.hpp"
+#include "CDPL/Chem/FeatureInteractionConstraintConnector.hpp"
 
 
 using namespace CDPL; 
 
 
-double Chem::FeatureDistanceConstraint::getMinDistance() const
+bool Chem::FeatureInteractionConstraintConnector::operator()(const Feature& ftr1, const Feature& ftr2) const
 {
-	return minDist;
-}
+    if (andExpr)
+	return (function1(ftr1, ftr2) && function2(ftr1, ftr2));
 
-double Chem::FeatureDistanceConstraint::getMaxDistance() const
-{
-	return maxDist;
-}
-
-bool Chem::FeatureDistanceConstraint::operator()(const Feature& ftr1, const Feature& ftr2) const
-{
-	if (!has3DCoordinates(ftr1) || !has3DCoordinates(ftr2))
-		return false;
-
-	double dist = length(get3DCoordinates(ftr2) - get3DCoordinates(ftr1));
-
-	return (dist >= minDist && dist <= maxDist);
+    return (function1(ftr1, ftr2) || function2(ftr1, ftr2));
 }

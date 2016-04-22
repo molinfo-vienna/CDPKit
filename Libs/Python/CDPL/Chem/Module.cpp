@@ -102,6 +102,14 @@ BOOST_PYTHON_MODULE(_chem)
 	exportNegIonizableFeatureGenerator();
 	exportFeatureInteractionAnalyzer();
 	exportDefaultFeatureInteractionAnalyzer();
+	exportFeatureInteractionConstraintConnector();
+	exportFeatureDistanceConstraint();
+	exportHydrophobicInteractionConstraint();
+	exportIonicInteractionConstraint();
+	exportOrthogonalPiPiInteractionConstraint();
+	exportParallelPiPiInteractionConstraint();
+	exportCationPiInteractionConstraint();
+	exportHBondingInteractionConstraint();
 
 	exportCompleteRingSet();
 	exportAromaticRingSet();
