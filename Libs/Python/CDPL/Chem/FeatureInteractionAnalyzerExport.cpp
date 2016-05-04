@@ -79,7 +79,7 @@ void CDPLPythonChem::exportFeatureInteractionAnalyzer()
 		.def("assign", &Chem::FeatureInteractionAnalyzer::operator=, 
 			 (python::arg("self"), python::arg("analyzer")), python::return_self<>())
 		.def("analyze", &Chem::FeatureInteractionAnalyzer::analyze,
-			 (python::arg("self"), python::arg("pharm1"), python::arg("pharm2"), python::arg("interactions")));
+			 (python::arg("self"), python::arg("pharm1"), python::arg("pharm2"), python::arg("iactions")));
 
     python::class_<Chem::FeatureInteractionAnalyzer::ConstraintFunction>("ConstraintFunction", python::no_init)
 		.def("__call__", &constrFuncCall, 

@@ -215,6 +215,7 @@
 #include "CDPL/Chem/NegIonizableFeatureGenerator.hpp"
 #include "CDPL/Chem/PharmacophoreGenerator.hpp"
 #include "CDPL/Chem/InteractionPharmacophoreGenerator.hpp"
+#include "CDPL/Chem/SurfaceXVolumeCoatGenerator.hpp"
 #include "CDPL/Chem/FeatureInteractionAnalyzer.hpp"
 #include "CDPL/Chem/DefaultFeatureInteractionAnalyzer.hpp"
 #include "CDPL/Chem/FeatureInteractionConstraintConnector.hpp"

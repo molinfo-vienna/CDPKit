@@ -74,6 +74,7 @@ SET(chem_MOD_SRCS
     HBondDonorFeatureGeneratorExport.cpp
     PosIonizableFeatureGeneratorExport.cpp
     NegIonizableFeatureGeneratorExport.cpp
+    SurfaceXVolumeCoatGeneratorExport.cpp
     FeatureInteractionAnalyzerExport.cpp
     DefaultFeatureInteractionAnalyzerExport.cpp
     FeatureInteractionConstraintConnectorExport.cpp

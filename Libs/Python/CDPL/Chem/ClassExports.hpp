@@ -96,6 +96,7 @@ namespace CDPLPythonChem
 	void exportHBondDonorFeatureGenerator();
 	void exportPosIonizableFeatureGenerator();
 	void exportNegIonizableFeatureGenerator();
+	void exportSurfaceXVolumeCoatGenerator();
 	void exportFeatureInteractionAnalyzer();
 	void exportDefaultFeatureInteractionAnalyzer();
 	void exportFeatureInteractionConstraintConnector();

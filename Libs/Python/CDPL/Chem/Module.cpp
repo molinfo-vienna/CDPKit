@@ -100,6 +100,7 @@ BOOST_PYTHON_MODULE(_chem)
 	exportHBondDonorFeatureGenerator();
 	exportPosIonizableFeatureGenerator();
 	exportNegIonizableFeatureGenerator();
+	exportSurfaceXVolumeCoatGenerator();
 	exportFeatureInteractionAnalyzer();
 	exportDefaultFeatureInteractionAnalyzer();
 	exportFeatureInteractionConstraintConnector();

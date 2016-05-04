@@ -41,6 +41,43 @@
 using namespace CDPL; 
 
 
+void Chem::extractProximalAtoms(const MolecularGraph& core, const MolecularGraph& macromol, Fragment& env_atoms, double max_dist)
+{
+	if (core.getNumAtoms() == 0)
+		return;
+
+	Math::Vector3DArray core_coords; 
+	get3DCoordinates(core, core_coords);
+	
+	Math::Vector3D core_ctr; 
+	calcCentroid(core_coords, core_ctr);
+	
+	double bsphere_rad = 0.0;
+
+	for (Math::Vector3DArray::ConstElementIterator it = core_coords.getElementsBegin(), end = core_coords.getElementsEnd(); it != end; ++it) 
+		bsphere_rad = std::max(bsphere_rad, length(*it - core_ctr));
+
+	bsphere_rad += max_dist;
+	
+	for (MolecularGraph::ConstAtomIterator it = macromol.getAtomsBegin(), end = macromol.getAtomsEnd(); it != end; ++it) {
+		const Atom& atom = *it;
+		const Math::Vector3D& atom_pos = get3DCoordinates(atom);
+
+		if (length(atom_pos - core_ctr) > bsphere_rad)
+			continue;
+
+		if (core.containsAtom(atom) || env_atoms.containsAtom(atom))
+			continue;
+
+		for (Math::Vector3DArray::ConstElementIterator c_it = core_coords.getElementsBegin(), c_end = core_coords.getElementsEnd(); c_it != c_end; ++c_it) {
+			if (length(atom_pos - *c_it) <= max_dist) {
+				env_atoms.addAtom(atom);
+				break;
+			}
+		}
+	} 
+}
+
 void Chem::extractEnvironmentResidues(const MolecularGraph& core, const MolecularGraph& macromol, Fragment& env_residues, double max_dist)
 {
     if (core.getNumAtoms() == 0)

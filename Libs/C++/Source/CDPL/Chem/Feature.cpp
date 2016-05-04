@@ -35,7 +35,7 @@ using namespace CDPL;
 Chem::Feature& Chem::Feature::operator=(const Feature& feature) 
 {
     if (this == &feature)
-	return *this;
+		return *this;
 
     Entity3D::operator=(feature);
 

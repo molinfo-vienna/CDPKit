@@ -30,15 +30,6 @@
 #include "CDPL/Chem/Pharmacophore.hpp"
 
 #include "FunctionExports.hpp"
-#include "FunctionWrapper.hpp"
-
-
-namespace
-{
-
-	MAKE_FUNCTION_WRAPPER1(std::size_t, getFeatureCount, CDPL::Chem::Pharmacophore&)
-	MAKE_FUNCTION_WRAPPER2(std::size_t, getFeatureCount, CDPL::Chem::Pharmacophore&, unsigned int)
-}
 
 
 void CDPLPythonChem::exportPharmacophoreFunctions()
@@ -46,6 +37,10 @@ void CDPLPythonChem::exportPharmacophoreFunctions()
     using namespace boost;
     using namespace CDPL;
 	
-	python::def("getFeatureCount", &getFeatureCountWrapper1, python::arg("pharm"));
-	python::def("getFeatureCount", &getFeatureCountWrapper2, (python::arg("pharm"), python::arg("type")));
+	python::def("getFeatureCount", static_cast<std::size_t (*)(const Chem::Pharmacophore&)>(&Chem::getFeatureCount), 
+				python::arg("pharm"));
+	python::def("getFeatureCount", static_cast<std::size_t (*)(const Chem::Pharmacophore&, unsigned int)>(&Chem::getFeatureCount), 
+				(python::arg("pharm"), python::arg("type")));
+	python::def("buildInteractionPharmacophore", Chem::buildInteractionPharmacophore, 
+				(python::arg("pharm"), python::arg("iactions")));
 }

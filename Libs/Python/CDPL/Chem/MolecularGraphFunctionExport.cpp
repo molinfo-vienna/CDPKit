@@ -156,6 +156,7 @@ namespace
 	MAKE_FUNCTION_WRAPPER2(std::size_t, getBondCount, CDPL::Chem::MolecularGraph&, std::size_t);
 
 	MAKE_FUNCTION_WRAPPER4(void, extractEnvironmentResidues, CDPL::Chem::MolecularGraph&, CDPL::Chem::MolecularGraph&, CDPL::Chem::Fragment&, double);
+	MAKE_FUNCTION_WRAPPER4(void, extractProximalAtoms, CDPL::Chem::MolecularGraph&, CDPL::Chem::MolecularGraph&, CDPL::Chem::Fragment&, double);
 
 	MAKE_FUNCTION_WRAPPER5(CDPL::Base::uint64, calcHashCode, CDPL::Chem::MolecularGraph&,
 	 					   unsigned int, unsigned int, bool, bool)
@@ -385,7 +386,10 @@ void CDPLPythonChem::exportMolecularGraphFunctions()
 
 	python::def("extractEnvironmentResidues", &extractEnvironmentResiduesWrapper4, 
 				(python::arg("core"), python::arg("macromol"), python::arg("env_residues"),
-				 python::arg("max_dist") = 7.0));
+				 python::arg("max_dist")));
+	python::def("extractProximalAtoms", &extractProximalAtomsWrapper4, 
+				(python::arg("core"), python::arg("macromol"), python::arg("env_atoms"),
+				 python::arg("max_dist")));
 
 	python::def("generateINCHI", &generateINCHIWrapper, 
 				(python::arg("molgraph"), python::arg("options") = Chem::ControlParameterDefault::INCHI_OUTPUT_OPTIONS,

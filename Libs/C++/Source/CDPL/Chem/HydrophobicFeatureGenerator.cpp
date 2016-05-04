@@ -773,7 +773,7 @@ void Chem::HydrophobicFeatureGenerator::calcAtomHydrophobicities()
 
 double Chem::HydrophobicFeatureGenerator::calcAccessibleSurfaceFactor(const Atom& atom)
 {
-	double vdw_radius = getVdWRadius(getType(atom));
+	double vdw_radius = getVdWRadius(atom);
 
 	if (!has3DCoordinates(atom))
 		return vdw_radius * vdw_radius;
@@ -798,7 +798,7 @@ double Chem::HydrophobicFeatureGenerator::calcAccessibleSurfaceFactor(const Atom
 			continue;
 
 		nbrAtomPositions.push_back(get3DCoordinates(nbr_atom));
-		nbrAtomVdWRadii.push_back(getVdWRadius(getType(nbr_atom)));
+		nbrAtomVdWRadii.push_back(getVdWRadius(nbr_atom));
 	}
 
 	std::size_t num_nbrs = nbrAtomPositions.size();

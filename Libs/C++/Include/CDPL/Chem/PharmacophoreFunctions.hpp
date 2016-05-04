@@ -34,6 +34,7 @@
 #include <cstddef>
 
 #include "CDPL/Chem/APIPrefix.hpp"
+#include "CDPL/Chem/FeatureMapping.hpp"
 
 
 namespace CDPL 
@@ -52,6 +53,9 @@ namespace CDPL
 		CDPL_CHEM_API std::size_t getFeatureCount(const Pharmacophore& pharm);
 
 		CDPL_CHEM_API std::size_t getFeatureCount(const Pharmacophore& pharm, unsigned int type);
+
+
+		CDPL_CHEM_API void buildInteractionPharmacophore(Pharmacophore& pharm, const FeatureMapping& iactions);
 
 		/**
 		 * @}

@@ -246,17 +246,15 @@ bool Chem::PatternBasedFeatureGenerator::calcPlaneFeatureOrientation(const AtomL
 
 	std::size_t num_points = alist.size();
 
-	svdU.resize(3, num_points, false);
-	svdV.resize(num_points, num_points, false);
-	svdW.resize(num_points, false);
+	svdU.resize(num_points, 3, false);
 	
 	for (std::size_t i = 0; i < num_points; i++)
-		column(svdU, i) = get3DCoordinates(*alist[i]) - centroid;
+		row(svdU, i) = get3DCoordinates(*alist[i]) - centroid;
 
 	if (!svDecompose(svdU, svdW, svdV))
 		return false;
 
-	orient = column(svdU, 2);
+	orient = column(svdV, 2);
 	orient /= length(orient);
 
 	return true;
@@ -294,8 +292,12 @@ void Chem::PatternBasedFeatureGenerator::getExcludeMatches()
 				 m_end = subsearch.getMappingsEnd(); m_it != m_end; ++m_it) {
 
 			Util::BitSet* atom_mask = allocBitSet();
+			const AtomMapping& atom_mapping = m_it->getAtomMapping();
 
-			createMatchedAtomMask(m_it->getAtomMapping(), *atom_mask);
+			createMatchedAtomMask(atom_mapping, *atom_mask, true);
+
+			if (!atom_mask->any())
+				createMatchedAtomMask(atom_mapping, *atom_mask, false);
 
 			excludeMatches.push_back(atom_mask);
 		}

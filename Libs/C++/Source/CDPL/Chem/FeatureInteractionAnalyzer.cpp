@@ -60,7 +60,7 @@ Chem::FeatureInteractionAnalyzer::getConstraintFunction(unsigned int type1, unsi
     return (it == constraintFuncMap.end() ? DEF_FUNC : it->second);
 }
 
-void Chem::FeatureInteractionAnalyzer::analyze(const Pharmacophore& pharm1, const Pharmacophore& pharm2, FeatureMapping& interactions) const
+void Chem::FeatureInteractionAnalyzer::analyze(const Pharmacophore& pharm1, const Pharmacophore& pharm2, FeatureMapping& iactions) const
 {
 	ConstraintFunctionMap::const_iterator cf_map_end = constraintFuncMap.end();
 	std::pair<unsigned int, unsigned int> type_pair;
@@ -79,7 +79,7 @@ void Chem::FeatureInteractionAnalyzer::analyze(const Pharmacophore& pharm1, cons
 				continue;
 
 			if (cf_it->second(ftr1, ftr2))
-				interactions.insertEntry(&ftr1, &ftr2);
+				iactions.insertEntry(&ftr1, &ftr2);
 		}
 	}
 }

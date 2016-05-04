@@ -177,7 +177,7 @@ namespace CDPL
 
 			void addFeature(const AtomBondMapping&, const FeaturePattern&, Pharmacophore&);
 		
-			void createMatchedAtomMask(const AtomMapping&, Util::BitSet&, bool = false) const;
+			void createMatchedAtomMask(const AtomMapping&, Util::BitSet&, bool) const;
 			bool isContainedInList(const Util::BitSet&, const BitSetList&) const;
 
 			void freeBitSet(Util::BitSet*);
@@ -195,8 +195,8 @@ namespace CDPL
 			AllocBitSetList       allocBitSets;
 			BitSetList            freeBitSets;
 			Math::Matrix<double>  svdU;
-			Math::Matrix<double>  svdV;
-			Math::Vector<double>  svdW;
+			Math::Matrix3D        svdV;
+			Math::Vector3D        svdW;
 
 			/** \endcond */
 		};

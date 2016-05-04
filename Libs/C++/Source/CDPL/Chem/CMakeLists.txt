@@ -144,6 +144,7 @@ SET(cdpl-chem_LIB_SRCS
     HBondDonorFeatureGenerator.cpp
     PosIonizableFeatureGenerator.cpp
     NegIonizableFeatureGenerator.cpp
+    SurfaceXVolumeCoatGenerator.cpp
     PharmacophoreGenerator.cpp
     DefaultPharmacophoreGenerator.cpp
     FeatureInteractionAnalyzer.cpp
@@ -174,6 +175,7 @@ SET(cdpl-chem_LIB_SRCS
     Entity3DContainerCentroidFunction.cpp
 
     PharmacophoreFeatureCountFunctions.cpp
+    InteractionPharmacophoreFunction.cpp
 
     AtomContainerAtomCountFunctions.cpp
     AtomContainerFormalChargeFunction.cpp

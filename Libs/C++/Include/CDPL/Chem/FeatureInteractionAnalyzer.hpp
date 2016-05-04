@@ -111,15 +111,15 @@ namespace CDPL
 			 * <tt>[typeA, typeB]</tt> does not automatically get called for the reverse pair <tt>[typeB, typeA]</tt>! If, however, a function
 			 * was found, it gets called with the current feature instance of the first pharmacophore as the first argument and the feature
 			 * instance of the second pharmacophore as the second argument. If the constraint function evaluates to \c true, a corresponding
-			 * mapping of the first to the second feature object is inserted in the specified output map \a interactions (be aware that a mapping
+			 * mapping of the first to the second feature object is inserted in the specified output map \a iactions (be aware that a mapping
 			 * of the second to the first feature is not added automatically!).
 			 *
 			 * \param pharm1 The first pharmacophore.
 			 * \param pharm2 The second pharmacophore.
-			 * \param interactions An output map that contains features of \a pharm1 as keys and interacting features of \a pharm2
+			 * \param iactions An output map that contains features of \a pharm1 as keys and interacting features of \a pharm2
 			 *                     as values.
 			 */
-			void analyze(const Pharmacophore& pharm1, const Pharmacophore& pharm2, FeatureMapping& interactions) const;
+			void analyze(const Pharmacophore& pharm1, const Pharmacophore& pharm2, FeatureMapping& iactions) const;
 
 		  private:
 			/** \cond CDPL_PRIVATE_SECTION_DOC */
