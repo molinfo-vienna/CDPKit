@@ -55,19 +55,23 @@ namespace CDPL
 	  public:
 	    /**
 	     * \brief Constructs the \c %HBondDonorFeatureGenerator instance.
+		 * \param fuzzy \c false if hydrogens on donor atoms connected via rotatable bonds should be 
+		 *              considered as static and modeled as vectors, and \c true otherwise.
 	     */
-	    HBondDonorFeatureGenerator();
+	    HBondDonorFeatureGenerator(bool fuzzy);
 				
 	    /**
 	     * \brief Perceives the hydrogen bond donor features of the molecular graph a\ molgraph and adds 
 	     *        them to the pharmacophore \a pharm.
 	     * \param molgraph The molecular graph for which to perceive the features.
 	     * \param pharm The output pharmacophore where to add the generated features.
+		 * \param fuzzy \c false if hydrogens on donor atoms connected via rotatable bonds should be 
+		 *              considered as static and modeled as vectors, and \c true otherwise.
 	     */
-	    HBondDonorFeatureGenerator(const MolecularGraph& molgraph, Pharmacophore& pharm);
+	    HBondDonorFeatureGenerator(const MolecularGraph& molgraph, Pharmacophore& pharm, bool fuzzy);
 	    
 	  private:
-	    void init();
+	    void init(bool);
 	};
 
 	/**

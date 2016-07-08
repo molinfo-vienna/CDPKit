@@ -39,12 +39,12 @@ void CDPLPythonChem::exportHBondDonorFeatureGenerator()
     using namespace CDPL;
 
     python::class_<Chem::HBondDonorFeatureGenerator, python::bases<Chem::PatternBasedFeatureGenerator>,
-		   boost::noncopyable>("HBondDonorFeatureGenerator", python::no_init)
-	.def(python::init<>(python::arg("self")))
-	.def(python::init<const Chem::HBondDonorFeatureGenerator&>(
-		 (python::arg("self"), python::arg("gen"))))
-	.def(python::init<const Chem::MolecularGraph&, Chem::Pharmacophore&>(
-		 (python::arg("self"), python::arg("molgraph"), python::arg("pharm"))))
-	.def("assign", &Chem::HBondDonorFeatureGenerator::operator=, 
-	     (python::arg("self"), python::arg("gen")), python::return_self<>());
+				   boost::noncopyable>("HBondDonorFeatureGenerator", python::no_init)
+		.def(python::init<bool>((python::arg("self"), python::arg("fuzzy"))))
+		.def(python::init<const Chem::HBondDonorFeatureGenerator&>(
+				 (python::arg("self"), python::arg("gen"))))
+		.def(python::init<const Chem::MolecularGraph&, Chem::Pharmacophore&, bool>(
+				 (python::arg("self"), python::arg("molgraph"), python::arg("pharm"), python::arg("fuzzy"))))
+		.def("assign", &Chem::HBondDonorFeatureGenerator::operator=, 
+			 (python::arg("self"), python::arg("gen")), python::return_self<>());
 }

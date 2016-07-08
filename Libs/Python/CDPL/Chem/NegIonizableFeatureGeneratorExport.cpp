@@ -40,11 +40,11 @@ void CDPLPythonChem::exportNegIonizableFeatureGenerator()
 
     python::class_<Chem::NegIonizableFeatureGenerator, python::bases<Chem::PatternBasedFeatureGenerator>,
 		   boost::noncopyable>("NegIonizableFeatureGenerator", python::no_init)
-	.def(python::init<>(python::arg("self")))
-	.def(python::init<const Chem::NegIonizableFeatureGenerator&>(
-		 (python::arg("self"), python::arg("gen"))))
-	.def(python::init<const Chem::MolecularGraph&, Chem::Pharmacophore&>(
-		 (python::arg("self"), python::arg("molgraph"), python::arg("pharm"))))
-	.def("assign", &Chem::NegIonizableFeatureGenerator::operator=, 
-	     (python::arg("self"), python::arg("gen")), python::return_self<>());
+		.def(python::init<bool>((python::arg("self"), python::arg("fuzzy"))))
+		.def(python::init<const Chem::NegIonizableFeatureGenerator&>(
+				 (python::arg("self"), python::arg("gen"))))
+		.def(python::init<const Chem::MolecularGraph&, Chem::Pharmacophore&, bool>(
+				 (python::arg("self"), python::arg("molgraph"), python::arg("pharm"), python::arg("fuzzy"))))
+		.def("assign", &Chem::NegIonizableFeatureGenerator::operator=, 
+			 (python::arg("self"), python::arg("gen")), python::return_self<>());
 }

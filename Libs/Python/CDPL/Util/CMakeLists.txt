@@ -11,6 +11,7 @@ SET(util_MOD_SRCS
     Module.cpp
     BitSetExport.cpp
     ArrayExport.cpp
+    BronKerboschAlgorithmExport.cpp
     ToPythonConverterRegistration.cpp
     FromPythonConverterRegistration.cpp
    )

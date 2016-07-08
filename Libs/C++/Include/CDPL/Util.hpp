@@ -45,5 +45,6 @@
 #include "CDPL/Util/PropertyValueProduct.hpp"
 #include "CDPL/Util/IndexedElementIterator.hpp"
 #include "CDPL/Util/StreamDataReader.hpp"
+#include "CDPL/Util/BronKerboschAlgorithm.hpp"
 
 #endif // CDPL_UTIL_HPP

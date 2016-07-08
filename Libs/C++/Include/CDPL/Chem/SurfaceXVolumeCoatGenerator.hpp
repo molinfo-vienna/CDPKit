@@ -68,10 +68,11 @@ namespace CDPL
 		  public:
 			static const unsigned int DEF_FEATURE_TYPE    = FeatureType::X_VOLUME;
 			static const unsigned int DEF_FEATURE_GEOM    = FeatureGeometry::SPHERE;
-			static const double       DEF_PROBE_RADIUS    = 1.1;
+			static const double       DEF_PROBE_RADIUS    = 1.2;
 			static const double       DEF_GRID_OVERSIZE   = 5.0;
 			static const double       DEF_GRID_STEP_SIZE  = 0.75;
-			static const std::size_t  DEF_NUM_TEST_POINTS = 200;
+			static const double       DEF_MIN_SURFACE_ACC = 0.01;
+			static const std::size_t  DEF_NUM_TEST_POINTS = 250;
 
 			/**
 			 * \brief Constructs the \c %SurfaceXVolumeCoatGenerator instance.
@@ -159,6 +160,16 @@ namespace CDPL
 			double getGridOversize() const;
 
 			/**
+			 * \brief Specifies the minimum percentage of test points that have to be accessible by the probe sphere 
+			 *        to consider an atom as a surface atom.
+			 * \param min_acc The minimum required percentage of accessible test points.
+			 * \note The default value is specified by the constant SurfaceXVolumeCoatGenerator::DEF_MIN_SURFACE_ACC.
+			 */
+			void setMinSurfaceAccessibility(double min_acc);
+
+			double getMinSurfaceAccessibility() const;
+
+			/**
 			 * \brief Specifies the number of points on the atom surface at which a test for surface accessibility is carried out.
 			 * \param num_points The number of test points.
 			 * \note The default value is specified by the constant SurfaceXVolumeCoatGenerator::DEF_NUM_TEST_POINTS.
@@ -203,6 +214,7 @@ namespace CDPL
 			double                probeRadius;
 			double                gridOversize;
 			double                gridStepSize;
+			double                minSurfAcc;
 			std::size_t           numTestPoints;
 			const AtomContainer*  atomContainer;
 			const MolecularGraph* parentMolGraph;

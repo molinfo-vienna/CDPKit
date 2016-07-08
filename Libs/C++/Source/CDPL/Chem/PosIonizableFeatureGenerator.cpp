@@ -35,25 +35,26 @@
 using namespace CDPL; 
 
 
-Chem::PosIonizableFeatureGenerator::PosIonizableFeatureGenerator()
+Chem::PosIonizableFeatureGenerator::PosIonizableFeatureGenerator(bool fuzzy)
 {
-    init();
+    init(fuzzy);
 }
 
-Chem::PosIonizableFeatureGenerator::PosIonizableFeatureGenerator(const MolecularGraph& molgraph, Pharmacophore& pharm)
+Chem::PosIonizableFeatureGenerator::PosIonizableFeatureGenerator(const MolecularGraph& molgraph, Pharmacophore& pharm, bool fuzzy)
 {
-    init();
+    init(fuzzy);
     generate(molgraph, pharm);
 }
 
-void Chem::PosIonizableFeatureGenerator::init()
+void Chem::PosIonizableFeatureGenerator::init(bool fuzzy)
 {
-    addIncludePattern(parseSMARTS("[N;!$(NC(=[O,N]));!$(Nc);!$(N[#7,#8,#16]):3]1[C:3][C:3][N;!$(NC(=[O,N]));!$(Nc);!$(N[#7,#8,#16]):3][C:3][C:3]1"), FeatureType::POS_IONIZABLE, 2.0, FeatureGeometry::SPHERE);
-    addIncludePattern(parseSMARTS("[NX3:3]([CX4])([CX4,#1])[CX4,#1]"), FeatureType::POS_IONIZABLE, 1.5, FeatureGeometry::SPHERE);
-    addIncludePattern(parseSMARTS("[N:3]=[CX3:3]([NH0])[!N]"), FeatureType::POS_IONIZABLE, 1.5, FeatureGeometry::SPHERE);
-    addIncludePattern(parseSMARTS("[N:3]=[CX3:3]([N;H1,H2:3])[!N]"), FeatureType::POS_IONIZABLE, 1.5, FeatureGeometry::SPHERE);
-    addIncludePattern(parseSMARTS("[N:3]=[CX3:3]([N:3])[N:3]"), FeatureType::POS_IONIZABLE, 1.5, FeatureGeometry::SPHERE);
-    addIncludePattern(parseSMARTS("[+,+2,+3,+4,+5,+6,+7;!$(*[-,-2,-3,-4,-5,-6,-7]):3]"), FeatureType::POS_IONIZABLE, 1.5, FeatureGeometry::SPHERE);
+	if (fuzzy) {
+		addIncludePattern(parseSMARTS("[NX3:3]([CX4])([CX4,#1])[CX4,#1]"), FeatureType::POS_IONIZABLE, 1.5, FeatureGeometry::SPHERE);
+		addIncludePattern(parseSMARTS("[N:3]=[CX3:3]([N:3])[!N]"), FeatureType::POS_IONIZABLE, 1.5, FeatureGeometry::SPHERE);
+		addIncludePattern(parseSMARTS("[N:3]=[CX3:3]([N:3])[N:3]"), FeatureType::POS_IONIZABLE, 1.5, FeatureGeometry::SPHERE);
+	}
 
-    addExcludePattern(parseSMARTS("N([R])([R])[C,S,P](=O)"));
+    addIncludePattern(parseSMARTS("[+,+2,+3,+4,+5,+6,+7;!$(*~[-,-2,-3,-4,-5,-6,-7]):3]"), FeatureType::POS_IONIZABLE, 1.5, FeatureGeometry::SPHERE);
+
+    addExcludePattern(parseSMARTS("[N:1]-[C,S,P]=O"));
 }

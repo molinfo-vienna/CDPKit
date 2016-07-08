@@ -60,55 +60,55 @@ BOOST_AUTO_TEST_CASE(KabschAlgorithmTest)
     
     // ---------
 
-    BOOST_CHECK_THROW(algo.calcTransform(points_mtx, ScalarMatrix<double>(2, 3, 1.0), ScalarVector<double>(8, 1.0)), Base::SizeError);
-    BOOST_CHECK_THROW(algo.calcTransform(points_mtx, ScalarMatrix<double>(3, 5, 1.0), ScalarVector<double>(8, 1.0)), Base::SizeError);
-    BOOST_CHECK_THROW(algo.calcTransform(points_mtx, ScalarMatrix<double>(3, 9, 1.0), ScalarVector<double>(8, 1.0)), Base::SizeError);
-    BOOST_CHECK_THROW(algo.calcTransform(points_mtx, ScalarMatrix<double>(3, 8, 1.0), ScalarVector<double>(7, 1.0)), Base::SizeError);
-    BOOST_CHECK_THROW(algo.calcTransform(points_mtx, ScalarMatrix<double>(3, 8, 1.0), ScalarVector<double>(9, 1.0)), Base::SizeError);
+    BOOST_CHECK_THROW(algo.align(points_mtx, ScalarMatrix<double>(2, 3, 1.0), ScalarVector<double>(8, 1.0)), Base::SizeError);
+    BOOST_CHECK_THROW(algo.align(points_mtx, ScalarMatrix<double>(3, 5, 1.0), ScalarVector<double>(8, 1.0)), Base::SizeError);
+    BOOST_CHECK_THROW(algo.align(points_mtx, ScalarMatrix<double>(3, 9, 1.0), ScalarVector<double>(8, 1.0)), Base::SizeError);
+    BOOST_CHECK_THROW(algo.align(points_mtx, ScalarMatrix<double>(3, 8, 1.0), ScalarVector<double>(7, 1.0)), Base::SizeError);
+    BOOST_CHECK_THROW(algo.align(points_mtx, ScalarMatrix<double>(3, 8, 1.0), ScalarVector<double>(9, 1.0)), Base::SizeError);
 
-    BOOST_CHECK_THROW(algo.calcTransform(points_mtx, ScalarMatrix<double>(3, 8, 1.0), ScalarVector<double>(8, 0.0)), Base::ValueError);
-    BOOST_CHECK_THROW(algo.calcTransform(points_mtx, ScalarMatrix<double>(3, 8, 1.0), ScalarVector<double>(8, -1.0)), Base::ValueError);
+    BOOST_CHECK_THROW(algo.align(points_mtx, ScalarMatrix<double>(3, 8, 1.0), ScalarVector<double>(8, 0.0)), Base::ValueError);
+    BOOST_CHECK_THROW(algo.align(points_mtx, ScalarMatrix<double>(3, 8, 1.0), ScalarVector<double>(8, -1.0)), Base::ValueError);
  
    // ---------
 
-    BOOST_CHECK_THROW(algo.calcTransform(points_mtx, ScalarMatrix<double>(2, 3, 1.0)), Base::SizeError);
-    BOOST_CHECK_THROW(algo.calcTransform(points_mtx, ScalarMatrix<double>(3, 5, 1.0)), Base::SizeError);
-    BOOST_CHECK_THROW(algo.calcTransform(points_mtx, ScalarMatrix<double>(3, 9, 1.0)), Base::SizeError);
+    BOOST_CHECK_THROW(algo.align(points_mtx, ScalarMatrix<double>(2, 3, 1.0)), Base::SizeError);
+    BOOST_CHECK_THROW(algo.align(points_mtx, ScalarMatrix<double>(3, 5, 1.0)), Base::SizeError);
+    BOOST_CHECK_THROW(algo.align(points_mtx, ScalarMatrix<double>(3, 9, 1.0)), Base::SizeError);
 
     // ---------
 
     ref_points_mtx = points_mtx;
 
-    BOOST_CHECK(algo.calcTransform(points_mtx, ref_points_mtx, ScalarVector<double>(8, 1.0)));
+    BOOST_CHECK(algo.align(points_mtx, ref_points_mtx, ScalarVector<double>(8, 1.0)));
     BOOST_CHECK(equals(algo.getTransform(), IdentityMatrix<double>(4, 4), 1.0e-13));
  
     // ---------
 
-    BOOST_CHECK(algo.calcTransform(points_mtx, ref_points_mtx));
+    BOOST_CHECK(algo.align(points_mtx, ref_points_mtx));
     BOOST_CHECK(equals(algo.getTransform(), IdentityMatrix<double>(4, 4), 1.0e-13));
 
     // ---------
 
     ref_points_mtx += outerProd(vec(4.0, 5.0, 6.0), ScalarVector<double>(8, 1.0)); 
 
-    BOOST_CHECK(algo.calcTransform(points_mtx, ref_points_mtx, ScalarVector<double>(8, 0.4)));
+    BOOST_CHECK(algo.align(points_mtx, ref_points_mtx, ScalarVector<double>(8, 0.4)));
     BOOST_CHECK(equals(algo.getTransform(), TranslationMatrix<double>(4, 4.0, 5.0, 6.0), 1.0e-13));
   
     // ---------
 
-    BOOST_CHECK(algo.calcTransform(points_mtx, ref_points_mtx));
+    BOOST_CHECK(algo.align(points_mtx, ref_points_mtx));
     BOOST_CHECK(equals(algo.getTransform(), TranslationMatrix<double>(4, 4.0, 5.0, 6.0), 1.0e-13));
 
     // ---------
 
     points_mtx += outerProd(vec(3.0, 2.0, 1.0), ScalarVector<double>(8, 1.0)); 
 
-    BOOST_CHECK(algo.calcTransform(points_mtx, ref_points_mtx, ScalarVector<double>(8, 1.4)));
+    BOOST_CHECK(algo.align(points_mtx, ref_points_mtx, ScalarVector<double>(8, 1.4)));
     BOOST_CHECK(equals(algo.getTransform(), TranslationMatrix<double>(4, 1.0, 3.0, 5.0), 1.0e-13));
 
     // ---------
 
-    BOOST_CHECK(algo.calcTransform(points_mtx, ref_points_mtx));
+    BOOST_CHECK(algo.align(points_mtx, ref_points_mtx));
     BOOST_CHECK(equals(algo.getTransform(), TranslationMatrix<double>(4, 1.0, 3.0, 5.0), 1.0e-13));
 
     // ---------
@@ -117,7 +117,7 @@ BOOST_AUTO_TEST_CASE(KabschAlgorithmTest)
     ref_points_mtx = prod(RotationMatrix<double>(3, 13.2 * M_PI / 180.0, 0.0, 1.0, 0.0), ref_points_mtx);
     ref_points_mtx += outerProd(vec(-13.2, 3.4, -5.6), ScalarVector<double>(8, 1.0));
 
-    BOOST_CHECK(algo.calcTransform(points_mtx, ref_points_mtx, ScalarVector<double>(8, 1.0)));
+    BOOST_CHECK(algo.align(points_mtx, ref_points_mtx, ScalarVector<double>(8, 1.0)));
 
     Vector4D vec1 = vec(0, 0, 0, 1.0), vec2 = vec(0, 0, 0, 1.0);
 
@@ -129,7 +129,7 @@ BOOST_AUTO_TEST_CASE(KabschAlgorithmTest)
 
     // ---------
   
-    BOOST_CHECK(algo.calcTransform(points_mtx, ref_points_mtx));
+    BOOST_CHECK(algo.align(points_mtx, ref_points_mtx));
 
     for (std::size_t i = 0; i < 8; i++) {
 	range(vec1, 0, 3) = column(points_mtx, i);
@@ -144,11 +144,11 @@ BOOST_AUTO_TEST_CASE(KabschAlgorithmTest)
 
     ref_points_mtx = prod(orig_xform, points_mtx);
 
-    BOOST_CHECK(algo.calcTransform(points_mtx, ref_points_mtx, ScalarVector<double>(8, 1.0), true));
+    BOOST_CHECK(algo.align(points_mtx, ref_points_mtx, ScalarVector<double>(8, 1.0), true));
 
     Matrix<double> xform = algo.getTransform();
 
-    BOOST_CHECK(algo.calcTransform(points_mtx, ref_points_mtx, ScalarVector<double>(8, 1.0), false));
+    BOOST_CHECK(algo.align(points_mtx, ref_points_mtx, ScalarVector<double>(8, 1.0), false));
 
     BOOST_CHECK(equals(xform, algo.getTransform(), 1.0e-13));
     BOOST_CHECK(equals(vec(0, 0, 0, 1.0), column(xform, 3), 1.0e-13));
@@ -157,13 +157,13 @@ BOOST_AUTO_TEST_CASE(KabschAlgorithmTest)
   
     // ---------
   
-    BOOST_CHECK(algo.calcTransform(points_mtx, ref_points_mtx, false));
+    BOOST_CHECK(algo.align(points_mtx, ref_points_mtx, false));
 
     BOOST_CHECK(equals(xform, algo.getTransform(), 1.0e-13));
 
     // ---------
   
-    BOOST_CHECK(algo.calcTransform(points_mtx, ref_points_mtx, true));
+    BOOST_CHECK(algo.align(points_mtx, ref_points_mtx, true));
 
     BOOST_CHECK(equals(xform, algo.getTransform(), 1.0e-13));
 }

@@ -49,7 +49,7 @@ namespace CDPL
 	{
 
 		/**
-		 * \brief Implementation of the Kabsch Algorithm [\ref KABA].
+		 * \brief Implementation of the Kabsch algorithm [\ref KABA].
 		 *
 		 * Finds the least Root Mean Square Distance between two sets of \f$ N \f$ points in \f$ D \f$ dimensions
 		 * and the rigid transformation (i.e. translation and rotation) to employ in order to bring one set that close
@@ -86,7 +86,7 @@ namespace CDPL
 			 * \throw Base::SizeError or Base::ValueError if preconditions got violated.
 			 */
 			template <typename M1, typename M2, typename V>
-			bool calcTransform(const MatrixExpression<M1>& points, const MatrixExpression<M2>& ref_points, const VectorExpression<V>& weights, 
+			bool align(const MatrixExpression<M1>& points, const MatrixExpression<M2>& ref_points, const VectorExpression<V>& weights, 
 							   bool do_center = true, std::size_t max_svd_iter = 0) {
 
 				typedef typename CommonType<typename CommonType<typename M1::SizeType, typename M2::SizeType>::Type,
@@ -143,7 +143,7 @@ namespace CDPL
 				else
 					prod(tmpPoints, trans(ref_points), covarMatrix);
 
-				return calcTransform(dim, do_center, max_svd_iter);
+				return align(dim, do_center, max_svd_iter);
 			}
 
 			/**
@@ -160,7 +160,7 @@ namespace CDPL
 			 * \throw Base::SizeError if preconditions got violated.
 			 */
 			template <typename M1, typename M2>
-			bool calcTransform(const MatrixExpression<M1>& points, const MatrixExpression<M2>& ref_points, 
+			bool align(const MatrixExpression<M1>& points, const MatrixExpression<M2>& ref_points, 
 							   bool do_center = true, std::size_t max_svd_iter = 0) {
 
 				typedef typename CommonType<typename M1::SizeType, typename M2::SizeType>::Type SizeType;
@@ -194,7 +194,7 @@ namespace CDPL
 				else
 					prod(points, trans(ref_points), covarMatrix);
 
-				return calcTransform(dim, do_center, max_svd_iter);
+				return align(dim, do_center, max_svd_iter);
 			}
 
 			const MatrixType& getTransform() const {
@@ -203,7 +203,7 @@ namespace CDPL
 
 		private:
 			template <typename SizeType>
-			bool calcTransform(SizeType dim, bool do_center, std::size_t max_svd_iter) {
+			bool align(SizeType dim, bool do_center, std::size_t max_svd_iter) {
 				svdW.resize(dim);
 				svdV.resize(dim, dim, false);
 

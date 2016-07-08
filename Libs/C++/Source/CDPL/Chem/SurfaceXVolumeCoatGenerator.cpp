@@ -52,18 +52,21 @@ const unsigned int Chem::SurfaceXVolumeCoatGenerator::DEF_FEATURE_GEOM;
 const double       Chem::SurfaceXVolumeCoatGenerator::DEF_PROBE_RADIUS;
 const double       Chem::SurfaceXVolumeCoatGenerator::DEF_GRID_OVERSIZE;
 const double       Chem::SurfaceXVolumeCoatGenerator::DEF_GRID_STEP_SIZE;
+const double       Chem::SurfaceXVolumeCoatGenerator::DEF_MIN_SURFACE_ACC;
 const std::size_t  Chem::SurfaceXVolumeCoatGenerator::DEF_NUM_TEST_POINTS;
 
 
 Chem::SurfaceXVolumeCoatGenerator::SurfaceXVolumeCoatGenerator(): 
     featureType(DEF_FEATURE_TYPE), featureGeom(DEF_FEATURE_GEOM), probeRadius(DEF_PROBE_RADIUS),
-	gridOversize(DEF_GRID_OVERSIZE), gridStepSize(DEF_GRID_STEP_SIZE), numTestPoints(DEF_NUM_TEST_POINTS)
+	gridOversize(DEF_GRID_OVERSIZE), gridStepSize(DEF_GRID_STEP_SIZE), minSurfAcc(DEF_MIN_SURFACE_ACC),
+	numTestPoints(DEF_NUM_TEST_POINTS)
 {}
 
 Chem::SurfaceXVolumeCoatGenerator::SurfaceXVolumeCoatGenerator(
 	const AtomContainer& cntnr, const MolecularGraph& parent_molgraph, Pharmacophore& pharm):
     featureType(DEF_FEATURE_TYPE), featureGeom(DEF_FEATURE_GEOM), probeRadius(DEF_PROBE_RADIUS),
-	gridOversize(DEF_GRID_OVERSIZE), gridStepSize(DEF_GRID_STEP_SIZE), numTestPoints(DEF_NUM_TEST_POINTS) 
+	gridOversize(DEF_GRID_OVERSIZE), gridStepSize(DEF_GRID_STEP_SIZE), minSurfAcc(DEF_MIN_SURFACE_ACC),
+	numTestPoints(DEF_NUM_TEST_POINTS) 
 {
     generate(cntnr, parent_molgraph, pharm);
 }
@@ -116,6 +119,16 @@ void Chem::SurfaceXVolumeCoatGenerator::setGridOversize(double size)
 double Chem::SurfaceXVolumeCoatGenerator::getGridOversize() const
 {
 	return gridOversize;
+}
+
+void Chem::SurfaceXVolumeCoatGenerator::setMinSurfaceAccessibility(double min_acc)
+{
+	minSurfAcc = min_acc;
+}
+
+double Chem::SurfaceXVolumeCoatGenerator::getMinSurfaceAccessibility() const
+{
+	return minSurfAcc;
 }
 
 void Chem::SurfaceXVolumeCoatGenerator::setNumTestPoints(std::size_t num_points)
@@ -334,6 +347,8 @@ void Chem::SurfaceXVolumeCoatGenerator::extractSurfaceAtoms()
 		double radius = atomRadii[atom_idx];
 		const Math::Vector3D& coords = atomCoords[atom_idx];
 
+		std::size_t num_acc_pts = 0; //
+
 		for (std::size_t i = 0; i < numTestPoints; i++) {
 			test_pos.assign(coords + testPoints[i] * radius);
 
@@ -344,15 +359,17 @@ void Chem::SurfaceXVolumeCoatGenerator::extractSurfaceAtoms()
 			AtomIndexListPtr& alist_ptr = gridAtomLookup[z_idx * gridXSize * gridYSize + y_idx * gridXSize + x_idx];
 
 			if (!alist_ptr) {
-				surfaceAtoms.push_back(atom_idx);
-				surfAtomMask.set(atom_idx);
-				break;
+				num_acc_pts++;
+				continue;
 			}
 
 			bool found_coll = false;
 
 			for (AtomIndexList::const_iterator al_it = alist_ptr->begin(), al_end = alist_ptr->end(); al_it != al_end; ++al_it) {
 				std::size_t nbr_atom_idx = *al_it;
+
+				if (nbr_atom_idx == atom_idx)
+					continue;
 
 				tmp.assign(atomCoords[nbr_atom_idx] - test_pos);
 
@@ -362,11 +379,13 @@ void Chem::SurfaceXVolumeCoatGenerator::extractSurfaceAtoms()
 				}
 			} 
 
-			if (!found_coll) {
-				surfaceAtoms.push_back(atom_idx);
-				surfAtomMask.set(atom_idx);
-				break;
-			}
+			if (!found_coll) 
+				num_acc_pts++;
+		}
+
+		if ((double(num_acc_pts) / numTestPoints) >= minSurfAcc) {
+			surfaceAtoms.push_back(atom_idx);
+			surfAtomMask.set(atom_idx);
 		}
 	}
 }
@@ -449,54 +468,6 @@ void Chem::SurfaceXVolumeCoatGenerator::generateXVolumes(Pharmacophore& pharm)
 			atomRadii[atom_idx] -= probeRadius;
 	}
 
-	Math::Vector3D tmp;
-	bool repeat;
-
-	do {
-		repeat = false;
-
-		for (std::size_t i = 0; i < new_num_surf_atoms; i++) {
-			std::size_t atom1_idx = surfaceAtoms[i];
-		
-			if (!surfAtomMask.test(atom1_idx))
-				continue;
-
-			double rad1 = atomRadii[atom1_idx];
-			double merge_idx = new_num_surf_atoms;
-
-			for (std::size_t j = 0; j < new_num_surf_atoms; j++) {
-				if (i == j)
-					continue;
-			
-				std::size_t atom2_idx = surfaceAtoms[j];
-		
-				if (!surfAtomMask.test(atom2_idx))
-					continue;
-
-				tmp.assign(atomCoords[atom1_idx] - atomCoords[atom2_idx]);
-
-				double dist = length(tmp);
-			
-				if (dist <= rad1) {
-					if (merge_idx != new_num_surf_atoms) {
-						merge_idx = new_num_surf_atoms;
-						break;
-					}
-
-					merge_idx = atom2_idx;
-				}
-			}
-
-			if (merge_idx != new_num_surf_atoms) {
-				atomRadii[atom1_idx] = (atomRadii[merge_idx] + rad1) * 0.5;
-				atomCoords[atom1_idx] = (atomCoords[atom1_idx] + atomCoords[merge_idx]) * 0.5;
-				surfAtomMask.reset(merge_idx);
-				repeat = true;
-			}
-		}
-
-	} while (repeat);
-	
 	for (std::size_t i = 0; i < new_num_surf_atoms; i++) {
 		std::size_t atom_idx = surfaceAtoms[i];
 		
@@ -508,6 +479,6 @@ void Chem::SurfaceXVolumeCoatGenerator::generateXVolumes(Pharmacophore& pharm)
 		setType(xvol, featureType);
 		setGeometry(xvol, featureGeom);
 		set3DCoordinates(xvol, atomCoords[atom_idx]);
-		setTolerance(xvol, atomRadii[atom_idx]);			
+		setTolerance(xvol, atomRadii[atom_idx]);	
 	}
 }

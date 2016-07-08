@@ -19,6 +19,14 @@ G. Moreau, P. Broto, Autocorrelation of Molecular Structures, Application to SAR
 </tr>
 
 <tr>
+<td valign="top">\anchor BKA<i>[BKA]</i></td>
+<td valign="top">
+C. Bron, J. Kerbosch, Algorithm 457: finding all cliques of an undirected graph, 
+<i>Commun. ACMA</i> <b>1973</b>, 16, 575-577
+</td>
+</tr>
+
+<tr>
 <td valign="top">\anchor BOOST<i>[BOOST]</i></td>
 <td valign="top">
 Boost C++ Libraries homepage: http://www.boost.org/

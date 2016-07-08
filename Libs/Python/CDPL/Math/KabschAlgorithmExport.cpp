@@ -56,16 +56,16 @@ namespace
 					 python::return_self<>())
 				.def("getTransform", &AlgoType::getTransform, python::arg("self"), 
 					 python::return_internal_reference<>())
-				.def("calcTransform", &calcTransform<float>, 
+				.def("align", &align<float>, 
 					 (python::arg("self"), python::arg("points"), python::arg("ref_points"), 
 					  python::arg("do_center") = true, python::arg("max_svd_iter") = 0))
-				.def("calcTransform", &calcTransform<double>, 
+				.def("align", &align<double>, 
 					 (python::arg("self"), python::arg("points"), python::arg("ref_points"), 
 					  python::arg("do_center") = true, python::arg("max_svd_iter") = 0))
-				.def("calcTransform", &calcWeightedTransform<float>, 
+				.def("align", &calcWeightedTransform<float>, 
 					 (python::arg("self"), python::arg("points"), python::arg("ref_points"), python::arg("weights"), 
 					  python::arg("do_center") = true, python::arg("max_svd_iter") = 0))
-				.def("calcTransform", &calcWeightedTransform<double>, 
+				.def("align", &calcWeightedTransform<double>, 
 					 (python::arg("self"), python::arg("points"), python::arg("ref_points"), python::arg("weights"), 
 					  python::arg("do_center") = true, python::arg("max_svd_iter") = 0))
 				.add_property("transform", python::make_function(&AlgoType::getTransform, 
@@ -73,12 +73,12 @@ namespace
 		}
 
 		template <typename T1>
-		static bool calcTransform(AlgoType& algo,  
+		static bool align(AlgoType& algo,  
 								  const typename CDPLPythonMath::ConstMatrixExpression<T1>::SharedPointer& points,
 								  const typename CDPLPythonMath::ConstMatrixExpression<T1>::SharedPointer& ref_points,
 								  bool do_center, std::size_t max_svd_iter) {
 
-			return algo.calcTransform(*points, *ref_points, do_center, max_svd_iter);
+			return algo.align(*points, *ref_points, do_center, max_svd_iter);
 		}
 	
 		template <typename T1>
@@ -88,7 +88,7 @@ namespace
 										  const typename CDPLPythonMath::ConstVectorExpression<T1>::SharedPointer& weights,
 										  bool do_center, std::size_t max_svd_iter) {
 
-			return algo.calcTransform(*points, *ref_points, *weights, do_center, max_svd_iter);
+			return algo.align(*points, *ref_points, *weights, do_center, max_svd_iter);
 		}
 	};
 }

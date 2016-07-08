@@ -1,9 +1,9 @@
 /* -*- mode: c++; c-basic-offset: 4; tab-width: 4; indent-tabs-mode: t -*- */
 
 /* 
- * DefaultPharmacophoreGeneratorExport.cpp 
+ * BronKerboschAlgorithmExport.cpp 
  *
- * This file is part of the Chemical Data Processing Toolkit
+ * This file is part of the Utilical Data Processing Toolkit
  *
  * Copyright (C) 2003-2010 Thomas A. Seidel <thomas.seidel@univie.ac.at>
  *
@@ -26,24 +26,26 @@
 
 #include <boost/python.hpp>
 
-#include "CDPL/Chem/DefaultPharmacophoreGenerator.hpp"
-#include "CDPL/Chem/MolecularGraph.hpp"
-#include "CDPL/Chem/Pharmacophore.hpp"
+#include "CDPL/Util/BronKerboschAlgorithm.hpp"
+
+#include "Base/ObjectIdentityCheckVisitor.hpp"
 
 #include "ClassExports.hpp"
 
 
-void CDPLPythonChem::exportDefaultPharmacophoreGenerator()
+void CDPLPythonUtil::exportBronKerboschAlgorithm()
 {
     using namespace boost;
     using namespace CDPL;
 
-    python::class_<Chem::DefaultPharmacophoreGenerator, python::bases<Chem::PharmacophoreGenerator>,
-				   boost::noncopyable>("DefaultPharmacophoreGenerator", python::no_init)
-		.def(python::init<bool>((python::arg("self"), python::arg("fuzzy"))))
-		.def(python::init<const Chem::MolecularGraph&, Chem::Pharmacophore&, bool>(
-				 (python::arg("self"), python::arg("molgraph"), python::arg("pharm"), python::arg("fuzzy"))))
-		.def(python::init<Chem::DefaultPharmacophoreGenerator>((python::arg("self"), python::arg("gen"))))
-		.def("assign", &Chem::DefaultPharmacophoreGenerator::operator=, 
-			 (python::arg("self"), python::arg("gen")), python::return_self<>());
+    python::class_<Util::BronKerboschAlgorithm>("BronKerboschAlgorithm", python::no_init)
+	.def(python::init<>(python::arg("self")))
+	.def(python::init<const Util::BronKerboschAlgorithm&>((python::arg("self"), python::arg("bka"))))
+	.def(python::init<const Util::BitSetArray&>((python::arg("self"), python::arg("adj_mtx"))))
+	.def(CDPLPythonBase::ObjectIdentityCheckVisitor<Util::BronKerboschAlgorithm>())	
+	.def("init", &Util::BronKerboschAlgorithm::init, (python::arg("self"), python::arg("adj_mtx")))
+	.def("nextClique", &Util::BronKerboschAlgorithm::nextClique, 
+	     (python::arg("self"), python::arg("clique")))
+	.def("assign", &Util::BronKerboschAlgorithm::operator=, 
+	     (python::arg("self"), python::arg("bka")), python::return_self<>());
 }

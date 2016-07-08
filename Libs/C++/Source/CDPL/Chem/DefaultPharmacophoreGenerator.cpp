@@ -42,18 +42,18 @@
 using namespace CDPL; 
 
 
-Chem::DefaultPharmacophoreGenerator::DefaultPharmacophoreGenerator()
+Chem::DefaultPharmacophoreGenerator::DefaultPharmacophoreGenerator(bool fuzzy)
 {
-    init();
+    init(fuzzy);
 }
 
-Chem::DefaultPharmacophoreGenerator::DefaultPharmacophoreGenerator(const MolecularGraph& molgraph, Pharmacophore& pharm)
+Chem::DefaultPharmacophoreGenerator::DefaultPharmacophoreGenerator(const MolecularGraph& molgraph, Pharmacophore& pharm, bool fuzzy)
 {
-    init();
+    init(fuzzy);
     generate(molgraph, pharm);
 }
 
-void Chem::DefaultPharmacophoreGenerator::init()
+void Chem::DefaultPharmacophoreGenerator::init(bool fuzzy)
 {
     typedef boost::shared_ptr<PatternBasedFeatureGenerator>  FeatureGenPtr;
 
@@ -62,11 +62,11 @@ void Chem::DefaultPharmacophoreGenerator::init()
     setFeatureFunction(FeatureType::AROMATIC, boost::bind(&AromaticFeatureGenerator::generate, 
 							  FeatureGenPtr(new AromaticFeatureGenerator()), _1, _2));
     setFeatureFunction(FeatureType::NEG_IONIZABLE, boost::bind(&PatternBasedFeatureGenerator::generate, 
-							       FeatureGenPtr(new NegIonizableFeatureGenerator()), _1, _2));
+							       FeatureGenPtr(new NegIonizableFeatureGenerator(fuzzy)), _1, _2));
     setFeatureFunction(FeatureType::POS_IONIZABLE, boost::bind(&PatternBasedFeatureGenerator::generate, 
-							       FeatureGenPtr(new PosIonizableFeatureGenerator()), _1, _2));
+							       FeatureGenPtr(new PosIonizableFeatureGenerator(fuzzy)), _1, _2));
     setFeatureFunction(FeatureType::H_BOND_DONOR, boost::bind(&PatternBasedFeatureGenerator::generate, 
-							      FeatureGenPtr(new HBondDonorFeatureGenerator()), _1, _2));
+							      FeatureGenPtr(new HBondDonorFeatureGenerator(fuzzy)), _1, _2));
     setFeatureFunction(FeatureType::H_BOND_ACCEPTOR, boost::bind(&PatternBasedFeatureGenerator::generate, 
 								 FeatureGenPtr(new HBondAcceptorFeatureGenerator()), _1, _2));
 

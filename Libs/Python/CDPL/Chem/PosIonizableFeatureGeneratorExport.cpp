@@ -39,12 +39,12 @@ void CDPLPythonChem::exportPosIonizableFeatureGenerator()
     using namespace CDPL;
 
     python::class_<Chem::PosIonizableFeatureGenerator, python::bases<Chem::PatternBasedFeatureGenerator>,
-		   boost::noncopyable>("PosIonizableFeatureGenerator", python::no_init)
-	.def(python::init<>(python::arg("self")))
-	.def(python::init<const Chem::PosIonizableFeatureGenerator&>(
-		 (python::arg("self"), python::arg("gen"))))
-	.def(python::init<const Chem::MolecularGraph&, Chem::Pharmacophore&>(
-		 (python::arg("self"), python::arg("molgraph"), python::arg("pharm"))))
-	.def("assign", &Chem::PosIonizableFeatureGenerator::operator=, 
-	     (python::arg("self"), python::arg("gen")), python::return_self<>());
+				   boost::noncopyable>("PosIonizableFeatureGenerator", python::no_init)
+		.def(python::init<bool>((python::arg("self"), python::arg("fuzzy"))))
+		.def(python::init<const Chem::PosIonizableFeatureGenerator&>(
+				 (python::arg("self"), python::arg("gen"))))
+		.def(python::init<const Chem::MolecularGraph&, Chem::Pharmacophore&, bool>(
+				 (python::arg("self"), python::arg("molgraph"), python::arg("pharm"), python::arg("fuzzy"))))
+		.def("assign", &Chem::PosIonizableFeatureGenerator::operator=, 
+			 (python::arg("self"), python::arg("gen")), python::return_self<>());
 }

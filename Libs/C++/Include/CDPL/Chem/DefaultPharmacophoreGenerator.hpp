@@ -56,7 +56,7 @@ namespace CDPL
 			/**
 			 * \brief Constructs the \c %DefaultPharmacophoreGenerator instance.
 			 */
-			DefaultPharmacophoreGenerator();
+			DefaultPharmacophoreGenerator(bool fuzzy);
 
 			/**
 			 * \brief Perceives all pharmacophore features of the molecular graph a\ molgraph
@@ -64,12 +64,12 @@ namespace CDPL
 			 * \param molgraph The molecular graph for which to perceive the features.
 			 * \param pharm The output pharmacophore where to add the generated features.
 			 */
-			DefaultPharmacophoreGenerator(const MolecularGraph& molgraph, Pharmacophore& pharm);
+			DefaultPharmacophoreGenerator(const MolecularGraph& molgraph, Pharmacophore& pharm, bool fuzzy);
 
 		  private:
 			/** \cond CDPL_PRIVATE_SECTION_DOC */
 	
-			void init();
+			void init(bool);
 	
 			/** \endcond */
 		};

@@ -33,6 +33,7 @@ namespace CDPLPythonUtil
 
 	void exportBitSet();
 	void exportArrays();
+	void exportBronKerboschAlgorithm();
 }
 
 #endif // CDPL_PYTHON_UTIL_CLASSEXPORTS_HPP

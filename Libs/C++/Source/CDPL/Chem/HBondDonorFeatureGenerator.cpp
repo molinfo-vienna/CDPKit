@@ -35,27 +35,35 @@
 using namespace CDPL; 
 
 
-Chem::HBondDonorFeatureGenerator::HBondDonorFeatureGenerator()
+Chem::HBondDonorFeatureGenerator::HBondDonorFeatureGenerator(bool fuzzy)
 {
-    init();
+    init(fuzzy);
 }
 
-Chem::HBondDonorFeatureGenerator::HBondDonorFeatureGenerator(const MolecularGraph& molgraph, Pharmacophore& pharm) 
+Chem::HBondDonorFeatureGenerator::HBondDonorFeatureGenerator(const MolecularGraph& molgraph, Pharmacophore& pharm, bool fuzzy) 
 {
-    init();
+    init(fuzzy);
     generate(molgraph, pharm);
 }
 
-void Chem::HBondDonorFeatureGenerator::init()
+void Chem::HBondDonorFeatureGenerator::init(bool fuzzy)
 {
-    addIncludePattern(parseSMARTS("[SX2:3][#1]"), FeatureType::H_BOND_DONOR, 1.5, FeatureGeometry::SPHERE);
     addIncludePattern(parseSMARTS("[CX2:7][#1:9]"), FeatureType::H_BOND_DONOR, 1.5, FeatureGeometry::VECTOR, -1.0);
-    addIncludePattern(parseSMARTS("[*](=,:[a,O,S,N])-,:[#7:7](-,:[*,#1])[#1:9]"), FeatureType::H_BOND_DONOR, 1.5, FeatureGeometry::VECTOR, -1.0);
-    addIncludePattern(parseSMARTS("[*]=,:[#7:7][#1:9]"), FeatureType::H_BOND_DONOR, 1.5, FeatureGeometry::VECTOR, -1.0);
-    addIncludePattern(parseSMARTS("[#7:3][#1]"), FeatureType::H_BOND_DONOR, 1.5, FeatureGeometry::SPHERE);
-    addIncludePattern(parseSMARTS("[O:3][#1]"), FeatureType::H_BOND_DONOR, 1.5, FeatureGeometry::SPHERE);
 
-    addExcludePattern(parseSMARTS("O-[C,P,S]=O"));
-	addExcludePattern(parseSMARTS("c1nnnn1"));
-    addExcludePattern(parseSMARTS("N-[SX4](=O)(=O)[CX4](F)(F)F"));
+	if (fuzzy) {
+		addIncludePattern(parseSMARTS("[*](=,:[a,O,S,N])-,:[#7:7](-,:[*,#1])[#1:9]"), FeatureType::H_BOND_DONOR, 1.5, FeatureGeometry::VECTOR, -1.0);
+		addIncludePattern(parseSMARTS("[*]=,:[#7:7][#1:9]"), FeatureType::H_BOND_DONOR, 1.5, FeatureGeometry::VECTOR, -1.0);
+		addIncludePattern(parseSMARTS("[#7:3][#1]"), FeatureType::H_BOND_DONOR, 1.5, FeatureGeometry::SPHERE);
+		addIncludePattern(parseSMARTS("[OX2:3][#1]"), FeatureType::H_BOND_DONOR, 1.5, FeatureGeometry::SPHERE);
+		addIncludePattern(parseSMARTS("[SX2:3][#1]"), FeatureType::H_BOND_DONOR, 1.5, FeatureGeometry::SPHERE);
+
+	} else {
+		addIncludePattern(parseSMARTS("[#7:7][#1:9]"), FeatureType::H_BOND_DONOR, 1.5, FeatureGeometry::VECTOR, -1.0);
+		addIncludePattern(parseSMARTS("[OX2:7][#1:9]"), FeatureType::H_BOND_DONOR, 1.5, FeatureGeometry::VECTOR, -1.0);
+		addIncludePattern(parseSMARTS("[SX2:7][#1:9]"), FeatureType::H_BOND_DONOR, 1.5, FeatureGeometry::VECTOR, -1.0);
+	}
+
+    addExcludePattern(parseSMARTS("[O:1]-[C,P,S]=O"));
+	addExcludePattern(parseSMARTS("c1[n:1][n:1][n:1][n:1]1"));
+    addExcludePattern(parseSMARTS("[N:1]-[SX4](=O)(=O)[CX4](F)(F)F"));
 }

@@ -89,4 +89,17 @@ void CDPLPythonUtil::exportArrays()
 		.def("__ge__", &Util::SArray::operator>=, (python::arg("self"), python::arg("array")))
 		.def("__lt__", &Util::SArray::operator<, (python::arg("self"), python::arg("array")))
 		.def("__gt__", &Util::SArray::operator>, (python::arg("self"), python::arg("array")));
+
+	python::class_<Util::BitSetArray, Util::BitSetArray::SharedPointer>("BitSetArray", python::no_init)
+		.def(python::init<>(python::arg("self")))
+		.def(python::init<const Util::BitSetArray&>((python::arg("self"), python::arg("array"))))
+		.def(ArrayVisitor<Util::BitSetArray, 
+			 python::return_value_policy<python::return_by_value>, python::default_call_policies,
+			 python::default_call_policies, python::default_call_policies>())
+		.def("__eq__", &Util::BitSetArray::operator==, (python::arg("self"), python::arg("array")))
+		.def("__ne__", &Util::BitSetArray::operator!=, (python::arg("self"), python::arg("array")))
+		.def("__le__", &Util::BitSetArray::operator<=, (python::arg("self"), python::arg("array")))
+		.def("__ge__", &Util::BitSetArray::operator>=, (python::arg("self"), python::arg("array")))
+		.def("__lt__", &Util::BitSetArray::operator<, (python::arg("self"), python::arg("array")))
+		.def("__gt__", &Util::BitSetArray::operator>, (python::arg("self"), python::arg("array")));
 }

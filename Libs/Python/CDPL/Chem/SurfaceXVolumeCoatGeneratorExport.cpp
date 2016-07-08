@@ -73,6 +73,8 @@ void CDPLPythonChem::exportSurfaceXVolumeCoatGenerator()
 			 (python::arg("self"), python::arg("size")))
 		.def("setGridOversize", &Chem::SurfaceXVolumeCoatGenerator::setGridOversize, 
 			 (python::arg("self"), python::arg("size")))
+		.def("setMinSurfaceAccessibility", &Chem::SurfaceXVolumeCoatGenerator::setMinSurfaceAccessibility,
+			 (python::arg("self"), python::arg("min_acc")))
 		.def("setNumTestPoints", &Chem::SurfaceXVolumeCoatGenerator::setNumTestPoints, 
 			 (python::arg("self"), python::arg("num_points")))
 		.def("getFeatureType", &Chem::SurfaceXVolumeCoatGenerator::getFeatureType, python::arg("self"))
@@ -80,6 +82,7 @@ void CDPLPythonChem::exportSurfaceXVolumeCoatGenerator()
 		.def("getProbeRadius", &Chem::SurfaceXVolumeCoatGenerator::getProbeRadius, python::arg("self"))
 		.def("getGridStepSize", &Chem::SurfaceXVolumeCoatGenerator::getGridStepSize, python::arg("self"))
 		.def("getGridOversize", &Chem::SurfaceXVolumeCoatGenerator::getGridOversize, python::arg("self"))
+		.def("getMinSurfaceAccessibility", &Chem::SurfaceXVolumeCoatGenerator::getMinSurfaceAccessibility, python::arg("self"))
 		.def("getNumTestPoints", &Chem::SurfaceXVolumeCoatGenerator::getNumTestPoints, python::arg("self"))
 		.def("generate", &generate,
 			 (python::arg("self"), python::arg("cntr"), python::arg("parent_molgraph"), python::arg("pharm")))
@@ -88,6 +91,7 @@ void CDPLPythonChem::exportSurfaceXVolumeCoatGenerator()
 		.def_readonly("DEF_PROBE_RADIUS", Chem::SurfaceXVolumeCoatGenerator::DEF_PROBE_RADIUS)
 		.def_readonly("DEF_GRID_OVERSIZE", Chem::SurfaceXVolumeCoatGenerator::DEF_GRID_OVERSIZE)
 		.def_readonly("DEF_GRID_STEP_SIZE", Chem::SurfaceXVolumeCoatGenerator::DEF_GRID_STEP_SIZE)
+		.def_readonly("DEF_MIN_SURFACE_ACC", Chem::SurfaceXVolumeCoatGenerator::DEF_MIN_SURFACE_ACC)
 		.def_readonly("DEF_FEATURE_TYPE", Chem::SurfaceXVolumeCoatGenerator::DEF_FEATURE_TYPE)
 		.def_readonly("DEF_FEATURE_GEOM", Chem::SurfaceXVolumeCoatGenerator::DEF_FEATURE_GEOM)
 		.add_property("featureType", &Chem::SurfaceXVolumeCoatGenerator::getFeatureType,
@@ -102,5 +106,6 @@ void CDPLPythonChem::exportSurfaceXVolumeCoatGenerator()
 					  &Chem::SurfaceXVolumeCoatGenerator::setGridOversize)
 		.add_property("numTestPoints", &Chem::SurfaceXVolumeCoatGenerator::getNumTestPoints,
 					  &Chem::SurfaceXVolumeCoatGenerator::setNumTestPoints)
-		;
+		.add_property("minSurfaceAccessibility", &Chem::SurfaceXVolumeCoatGenerator::getMinSurfaceAccessibility,
+					  &Chem::SurfaceXVolumeCoatGenerator::setMinSurfaceAccessibility);
 }

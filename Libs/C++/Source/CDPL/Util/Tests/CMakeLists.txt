@@ -15,6 +15,7 @@ SET(test-suite_SRCS
     PropertyValueProductTest.cpp
     AddressOfTest.cpp
     SHA1Test.cpp
+    BronKerboschAlgorithmTest.cpp
    )
 
 ADD_DEFINITIONS(-DBOOST_TEST_DYN_LINK)

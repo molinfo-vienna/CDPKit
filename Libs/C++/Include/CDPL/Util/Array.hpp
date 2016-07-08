@@ -38,6 +38,7 @@
 #include <boost/shared_ptr.hpp>
 
 #include "CDPL/Base/Exceptions.hpp"
+#include "CDPL/Util/BitSet.hpp"
 
 
 namespace CDPL
@@ -602,6 +603,11 @@ namespace CDPL
 		 * \brief An array of <tt>std::string</tt> objects.
 		 */
 		typedef Array<std::string> SArray;
+
+		/**
+		 * \brief An array of <tt>Util::BitSet</tt> objects.
+		 */
+		typedef Array<BitSet> BitSetArray;
 
 		/**
 		 * @}

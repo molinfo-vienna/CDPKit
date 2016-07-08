@@ -36,6 +36,7 @@ BOOST_PYTHON_MODULE(_util)
 
 	exportBitSet();
 	exportArrays();
+	exportBronKerboschAlgorithm();
 
 	registerToPythonConverters();
 	registerFromPythonConverters();

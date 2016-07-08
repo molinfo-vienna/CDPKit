@@ -2,6 +2,7 @@ INCLUDE_DIRECTORIES("${CMAKE_CURRENT_SOURCE_DIR}")
 
 SET(cdpl-util_LIB_SRCS
     SHA1.cpp
+    BronKerboschAlgorithm.cpp
    )
 
 ADD_LIBRARY(cdpl-util-static STATIC ${cdpl-util_LIB_SRCS})

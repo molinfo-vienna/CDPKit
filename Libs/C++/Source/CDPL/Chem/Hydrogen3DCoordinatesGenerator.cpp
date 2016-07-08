@@ -451,7 +451,7 @@ void Chem::Hydrogen3DCoordinatesGenerator::assignEvenlyDistributedCoords(
 	column(tmpltPoints, 1) = genPoints[0];
 	column(tmpltPoints, 2) = genPoints[best_align_pos_idx];
 
-	if (!kabschAlgo.calcTransform(tmpltPoints, refPoints, false)) 
+	if (!kabschAlgo.align(tmpltPoints, refPoints, false)) 
 		return;
 
 	usedPosMask.resize(num_points);
@@ -566,7 +566,7 @@ void Chem::Hydrogen3DCoordinatesGenerator::assignTemplateCoords(
 				for (std::size_t k = 0; k < num_def_atoms; k++)
 					column(tmpltPoints, k + 1).assign(tmplt[curr_tmplt_perm[k]]);
 
-				if (kabschAlgo.calcTransform(tmpltPoints, refPoints, false)) {
+				if (kabschAlgo.align(tmpltPoints, refPoints, false)) {
 					Math::Matrix3D tmplt_xform = range(kabschAlgo.getTransform(), 0, 3, 0, 3);
 					double rmsd = 0.0;
 					
@@ -604,7 +604,7 @@ void Chem::Hydrogen3DCoordinatesGenerator::assignTemplateCoords(
 			column(tmpltPoints, i + 1).assign(tmplt[i]);
 		}
 
-		if (kabschAlgo.calcTransform(tmpltPoints, refPoints, false)) {
+		if (kabschAlgo.align(tmpltPoints, refPoints, false)) {
 			Math::Matrix3D tmplt_xform = range(kabschAlgo.getTransform(), 0, 3, 0, 3);
 
 			for (std::size_t i = num_def_atoms; i < num_cnctd_atoms; i++) {
