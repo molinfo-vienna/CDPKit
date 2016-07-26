@@ -45,6 +45,11 @@ namespace CDPL
     {
 
 		/**
+		 * \addtogroup CDPL_UTIL_ALGORITHMS
+		 * @{
+		 */
+
+		/**
 		 * \brief Implementation of the Bron-Kerbosch clique-detection algorithm [\ref BKA].
 		 */
 		class BronKerboschAlgorithm
@@ -92,6 +97,10 @@ namespace CDPL
 			StateStack         states;
 			BitSet             pivotCandSet;
 		};
+
+		/**
+		 * @}
+		 */
     }
 }
 

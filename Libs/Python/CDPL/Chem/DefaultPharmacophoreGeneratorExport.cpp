@@ -43,7 +43,7 @@ void CDPLPythonChem::exportDefaultPharmacophoreGenerator()
 		.def(python::init<bool>((python::arg("self"), python::arg("fuzzy"))))
 		.def(python::init<const Chem::MolecularGraph&, Chem::Pharmacophore&, bool>(
 				 (python::arg("self"), python::arg("molgraph"), python::arg("pharm"), python::arg("fuzzy"))))
-		.def(python::init<Chem::DefaultPharmacophoreGenerator>((python::arg("self"), python::arg("gen"))))
+		.def(python::init<const Chem::DefaultPharmacophoreGenerator&>((python::arg("self"), python::arg("gen"))))
 		.def("assign", &Chem::DefaultPharmacophoreGenerator::operator=, 
 			 (python::arg("self"), python::arg("gen")), python::return_self<>());
 }

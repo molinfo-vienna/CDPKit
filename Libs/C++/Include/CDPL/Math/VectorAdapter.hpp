@@ -36,6 +36,7 @@
 #include "CDPL/Math/Config.hpp"
 #include "CDPL/Math/Expression.hpp"
 #include "CDPL/Math/QuaternionAssignment.hpp"
+#include "CDPL/Math/VectorAssignment.hpp"
 #include "CDPL/Math/TypeTraits.hpp"
 #include "CDPL/Math/Functional.hpp"
 
@@ -46,6 +47,142 @@ namespace CDPL
 
 	namespace Math
 	{
+
+		template <typename V>
+		class HomogenousCoordsAdapter : public VectorExpression<HomogenousCoordsAdapter<V> >
+		{
+
+			typedef HomogenousCoordsAdapter<V> SelfType;
+
+		public:
+			typedef V VectorType;
+			typedef typename V::SizeType SizeType;
+			typedef typename V::DifferenceType DifferenceType;
+			typedef typename V::ValueType ValueType;
+			typedef typename V::ConstReference ConstReference;
+			typedef typename boost::mpl::if_<boost::is_const<V>,
+											 typename V::ConstReference,
+											 typename V::Reference>::type Reference;
+			typedef typename boost::mpl::if_<boost::is_const<V>,
+											 typename V::ConstClosureType,
+											 typename V::ClosureType>::type VectorClosureType;
+			typedef const SelfType ConstClosureType;
+			typedef SelfType ClosureType;
+			
+			CDPL_MATH_INLINE HomogenousCoordsAdapter(VectorType& v): data(v), extElem(1) {}
+
+			CDPL_MATH_INLINE Reference operator()(SizeType i) {
+				if (i == data.getSize())
+					return extElem;
+
+				return data(i);
+			}
+
+			CDPL_MATH_INLINE ConstReference operator()(SizeType i) const {
+				if (i == data.getSize())
+					return extElem;
+
+				return data(i);
+			}
+	
+			CDPL_MATH_INLINE Reference operator[](SizeType i) {
+				if (i == data.getSize())
+					return extElem;
+
+				return data[i];
+			}
+
+			CDPL_MATH_INLINE ConstReference operator[](SizeType i) const {
+				if (i == data.getSize())
+					return extElem;
+
+				return data[i];
+			}
+
+			CDPL_MATH_INLINE SizeType getSize() const {
+				return (data.getSize() + SizeType(1));
+			}
+
+			CDPL_MATH_INLINE bool isEmpty() const {
+				return false;
+			}
+
+			CDPL_MATH_INLINE VectorClosureType& getData() {
+				return data;
+			}
+
+			CDPL_MATH_INLINE const VectorClosureType& getData() const {
+				return data;
+			}
+
+			CDPL_MATH_INLINE HomogenousCoordsAdapter& operator=(const HomogenousCoordsAdapter& va) {
+				vectorAssignVector<ScalarAssignment>(*this, typename VectorTemporaryTraits<V>::Type(va));
+				return *this;
+			}
+
+			template <typename E>
+			CDPL_MATH_INLINE HomogenousCoordsAdapter& operator=(const VectorExpression<E>& e) {
+				vectorAssignVector<ScalarAssignment>(*this, typename VectorTemporaryTraits<V>::Type(e));
+				return *this;
+			}
+
+			template <typename E>
+			CDPL_MATH_INLINE HomogenousCoordsAdapter& operator+=(const VectorExpression<E>& e) {
+				vectorAssignVector<ScalarAssignment>(*this, typename VectorTemporaryTraits<V>::Type(*this + e));
+				return *this;
+			}	
+
+			template <typename E>
+			CDPL_MATH_INLINE HomogenousCoordsAdapter& operator-=(const VectorExpression<E>& e) {
+				vectorAssignVector<ScalarAssignment>(*this, typename VectorTemporaryTraits<V>::Type(*this - e));
+				return *this;
+			}
+
+			template <typename T>
+			CDPL_MATH_INLINE 
+			typename boost::enable_if<IsScalar<T>, HomogenousCoordsAdapter>::type& operator*=(const T& t) {
+				vectorAssignScalar<ScalarMultiplicationAssignment>(*this, t);
+				return *this;
+			}
+	
+			template <typename T>
+			CDPL_MATH_INLINE 
+			typename boost::enable_if<IsScalar<T>, HomogenousCoordsAdapter>::type& operator/=(const T& t) {
+				vectorAssignScalar<ScalarDivisionAssignment>(*this, t);
+				return *this;
+			}
+			
+			template <typename E>
+			CDPL_MATH_INLINE HomogenousCoordsAdapter& assign(const VectorExpression<E>& e) {
+				vectorAssignVector<ScalarAssignment>(*this, e);
+				return *this;
+			}
+
+			template <typename E>
+			CDPL_MATH_INLINE HomogenousCoordsAdapter& plusAssign(const VectorExpression<E>& e) {
+				vectorAssignVector<ScalarAdditionAssignment>(*this, e);
+				return *this;
+			}
+
+			template <typename E>
+			CDPL_MATH_INLINE HomogenousCoordsAdapter& minusAssign(const VectorExpression<E>& e) {
+				vectorAssignVector<ScalarSubtractionAssignment>(*this, e);
+				return *this;
+			}
+	
+			CDPL_MATH_INLINE void swap(HomogenousCoordsAdapter& va) {
+				if (this != &va)
+					vectorSwap(*this, va);
+			}
+	
+			CDPL_MATH_INLINE friend void swap(HomogenousCoordsAdapter& va1, HomogenousCoordsAdapter& va2) {
+				va1.swap(va2);
+			}
+
+		private:
+			VectorClosureType data;
+			ValueType         extElem;
+		};
 
 		template <typename V>
 		class VectorQuaternionAdapter : public QuaternionExpression<VectorQuaternionAdapter<V> >
@@ -241,6 +378,12 @@ namespace CDPL
 			typedef Quaternion<typename V::ValueType> Type;
 		}; 
 
+		template <typename V>
+		struct VectorTemporaryTraits<HomogenousCoordsAdapter<V> > : public VectorTemporaryTraits<V> {};
+
+		template <typename V>
+		struct VectorTemporaryTraits<const HomogenousCoordsAdapter<V> > : public VectorTemporaryTraits<V> {};
+	
 		template <typename E>
 		CDPL_MATH_INLINE
 		VectorQuaternionAdapter<E> 
@@ -255,6 +398,22 @@ namespace CDPL
 		quat(const VectorExpression<E>& e)
 		{
 			return VectorQuaternionAdapter<const E>(e());
+		}
+
+		template <typename E>
+		CDPL_MATH_INLINE
+		HomogenousCoordsAdapter<E> 
+		homog(VectorExpression<E>& e)
+		{
+			return HomogenousCoordsAdapter<E>(e());
+		}
+
+		template <typename E>
+		CDPL_MATH_INLINE
+		HomogenousCoordsAdapter<const E> 
+		homog(const VectorExpression<E>& e)
+		{
+			return HomogenousCoordsAdapter<const E>(e());
 		}
 	}
 }

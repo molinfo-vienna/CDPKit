@@ -27,6 +27,7 @@ SET(chem_MOD_SRCS
     BasicPharmacophoreExport.cpp
     BasicFeatureExport.cpp
     FragmentExport.cpp 
+    Entity3DMappingExport.cpp 
     AtomMappingExport.cpp 
     BondMappingExport.cpp 
     AtomBondMappingExport.cpp 
@@ -85,6 +86,17 @@ SET(chem_MOD_SRCS
     ParallelPiPiInteractionConstraintExport.cpp
     CationPiInteractionConstraintExport.cpp
     HBondingInteractionConstraintExport.cpp
+
+    TopologicalEntityAlignmentExport.cpp	
+    FeatureTypeMatchFunctorExport.cpp
+    FeaturePairDistanceMatchFunctorExport.cpp
+    GeometricalEntityAlignmentExport.cpp
+    PharmacophoreAlignmentExport.cpp
+    TopologicalQueryPharmAlignmentFilterExport.cpp
+    GeometricalQueryPharmAlignmentFilterExport.cpp
+    GeometricalFeatureMappingExtractorExport.cpp
+    FeaturePositionMatchFunctorExport.cpp
+    FeatureGeometryMatchFunctorExport.cpp
 
     CompleteRingSetExport.cpp 
     AromaticRingSetExport.cpp 

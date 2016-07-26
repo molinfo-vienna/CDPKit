@@ -68,7 +68,7 @@ namespace CDPL
 			 * \param min_len The minimum allowed length of the H-bond (distance between the hydrogen-atom and acceptor-feature).
 			 * \param max_len The maximum allowed length of the H-bond (distance between the hydrogen-atom and acceptor-feature).
 			 * \param min_ahd_ang The minimum allowed angle between the acceptor-feature, hydrogen-atom and donor-feature.
-			 * \param max_acc_axis_angle The maximum allowed angle between the H-bond direction and the acceptor-feature vector.
+			 * \param max_acc_ang The maximum allowed angle between the H-bond direction and the acceptor-feature vector.
 			 */
 			HBondingInteractionConstraint(bool don_acc, double min_len = DEF_MIN_HB_LENGTH, double max_len = DEF_MAX_HB_LENGTH,
 										  double min_ahd_ang = DEF_MIN_AHD_ANGLE, double max_acc_ang = DEF_MAX_ACC_ANGLE): 

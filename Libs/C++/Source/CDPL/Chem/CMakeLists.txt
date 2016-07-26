@@ -158,6 +158,15 @@ SET(cdpl-chem_LIB_SRCS
     OrthogonalPiPiInteractionConstraint.cpp
     ParallelPiPiInteractionConstraint.cpp
 
+    FeatureTypeMatchFunctor.cpp
+    FeaturePairDistanceMatchFunctor.cpp
+    FeaturePositionMatchFunctor.cpp
+    FeatureGeometryMatchFunctor.cpp
+    TopologicalQueryPharmAlignmentFilter.cpp
+    GeometricalQueryPharmAlignmentFilter.cpp
+    GeometricalFeatureMappingExtractor.cpp
+    PharmacophoreAlignment.cpp
+
     Entity3DCoordinatesFunctions.cpp
 
     FeatureTypeFunctions.cpp
@@ -176,6 +185,7 @@ SET(cdpl-chem_LIB_SRCS
 
     PharmacophoreFeatureCountFunctions.cpp
     InteractionPharmacophoreFunction.cpp
+    ExclusionVolumeClashTestFunction.cpp
 
     AtomContainerAtomCountFunctions.cpp
     AtomContainerFormalChargeFunction.cpp

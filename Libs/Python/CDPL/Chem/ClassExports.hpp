@@ -49,6 +49,7 @@ namespace CDPLPythonChem
 	void exportBasicPharmacophore();
 	void exportBasicFeature();
 	void exportFragment();
+	void exportEntity3DMapping();
 	void exportAtomMapping();
 	void exportBondMapping();
 	void exportAtomBondMapping();
@@ -107,6 +108,17 @@ namespace CDPLPythonChem
 	void exportParallelPiPiInteractionConstraint();
 	void exportCationPiInteractionConstraint();
 	void exportHBondingInteractionConstraint();
+
+	void exportFeatureTypeMatchFunctor();
+	void exportFeaturePairDistanceMatchFunctor();
+	void exportFeaturePositionMatchFunctor();
+	void exportFeatureGeometryMatchFunctor();
+	void exportTopologicalEntityAlignments();
+	void exportGeometricalEntityAlignments();
+	void exportPharmacophoreAlignment();
+	void exportTopologicalQueryPharmAlignmentFilter();
+    void exportGeometricalQueryPharmAlignmentFilter();
+    void exportGeometricalFeatureMappingExtractor();
 
 	void exportCompleteRingSet();
 	void exportAromaticRingSet();

@@ -367,7 +367,7 @@ namespace CDPL
 			typedef const T* ConstPointer;
 			typedef VectorReference<SelfType> ClosureType;
 			typedef const VectorReference<const SelfType> ConstClosureType;
-			typedef SelfType VectorTemporaryType;
+			typedef BoundedVector<T, N + 1> VectorTemporaryType;
 			typedef boost::shared_ptr<SelfType> SharedPointer;
 
 			static const SizeType MaxSize = N;
@@ -561,7 +561,7 @@ namespace CDPL
 			typedef const T* ConstPointer;
 			typedef VectorReference<SelfType> ClosureType;
 			typedef const VectorReference<const SelfType> ConstClosureType;
-			typedef BoundedVector<T, N> VectorTemporaryType;
+			typedef BoundedVector<T, N + 1> VectorTemporaryType;
 			typedef boost::shared_ptr<SelfType> SharedPointer;
 
 			static const SizeType Size = N;

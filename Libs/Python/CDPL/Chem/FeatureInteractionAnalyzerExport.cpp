@@ -52,9 +52,9 @@ namespace
 		return func(ftr1, ftr2);
     }
 
-    void constrFuncNonZero(CDPL::Chem::FeatureInteractionAnalyzer::ConstraintFunction& func)
+    bool constrFuncNonZero(CDPL::Chem::FeatureInteractionAnalyzer::ConstraintFunction& func)
     {
-		!func.empty();
+		return !func.empty();
     }
 }
 

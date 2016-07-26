@@ -52,9 +52,9 @@ namespace
 		func(molgraph, pharm);
     }
 
-	void featureFuncNonZero(CDPL::Chem::PharmacophoreGenerator::FeatureFunction& func)
+	bool featureFuncNonZero(CDPL::Chem::PharmacophoreGenerator::FeatureFunction& func)
     {
-		!func.empty();
+		return !func.empty();
     }
 }
 

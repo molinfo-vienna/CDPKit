@@ -1,7 +1,7 @@
 /* -*- mode: c++; c-basic-offset: 4; tab-width: 4; indent-tabs-mode: t -*- */
 
 /* 
- * PharmacophoreFunctions.hpp 
+ * Entity3DMapping.hpp 
  *
  * This file is part of the Chemical Data Processing Toolkit
  *
@@ -25,46 +25,43 @@
 
 /**
  * \file
- * \brief Declaration of functions that operate on Chem::Pharmacophore instances.
+ * \brief Definition of the type CDPL::Chem::Entity3DMapping.
  */
 
-#ifndef CDPL_CHEM_PHARMACOPHOREFUNCTIONS_HPP
-#define CDPL_CHEM_PHARMACOPHOREFUNCTIONS_HPP
+#ifndef CDPL_CHEM_ENTITY3DMAPPING_HPP
+#define CDPL_CHEM_ENTITY3DMAPPING_HPP
 
-#include <cstddef>
-
-#include "CDPL/Chem/APIPrefix.hpp"
-#include "CDPL/Chem/FeatureMapping.hpp"
-#include "CDPL/Math/Matrix.hpp"
+#include "CDPL/Util/MultiMap.hpp"
 
 
 namespace CDPL 
 {
 
-    namespace Chem 
+    namespace Chem
     {
-	
-		class Pharmacophore;
-		class AtomContainer;
-	
-		/**
-		 * \addtogroup CDPL_CHEM_PHARMACOPHORE_FUNCTIONS
-		 * @{
-		 */
-	
-		CDPL_CHEM_API std::size_t getFeatureCount(const Pharmacophore& pharm);
 
-		CDPL_CHEM_API std::size_t getFeatureCount(const Pharmacophore& pharm, unsigned int type);
+	class Entity3D;
 
+	/**
+	 * \addtogroup CDPL_CHEM_DATA_STRUCTURES
+	 * @{
+	 */
 
-		CDPL_CHEM_API void buildInteractionPharmacophore(Pharmacophore& pharm, const FeatureMapping& iactions);
+	/**
+	 * \brief A data type for the storage and lookup of arbitrary entity to entity mappings.
+	 *
+	 * Entity3Ds mappings are stored as pairs of pointers to the mapped \c const Chem::Entity3D objects.
+	 * Mappings do not have to be unique and multiple mappings of a given entity to other entities are possible.
+	 * If a mapping entry for a particular entity does not exist, the methods Entity3DMapping::getValue()
+	 * and Entity3DMapping::operator[]() return a \e null pointer to indicate that the lookup of the 
+	 * mapped entity has failed.
+	 */
+	typedef Util::MultiMap<const Entity3D*, const Entity3D*, true> Entity3DMapping;
 
-		CDPL_CHEM_API bool checkExclusionVolumeClash(const Pharmacophore& pharm, const AtomContainer& cntnr, const Math::Matrix4D& xform, bool vdw = true);
-
-		/**
-		 * @}
-		 */
+	/**
+	 * @}
+	 */
     }
 }
 
-#endif // CDPL_CHEM_PHARMACOPHOREFUNCTIONS_HPP
+#endif // CDPL_CHEM_ENTITY3DMAPPING_HPP

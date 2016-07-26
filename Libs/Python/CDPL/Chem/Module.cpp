@@ -54,6 +54,7 @@ BOOST_PYTHON_MODULE(_chem)
 	exportBasicPharmacophore();
 	exportBasicFeature();
 	exportFragment();
+	exportEntity3DMapping();
 	exportAtomMapping();
 	exportBondMapping();
 	exportAtomBondMapping();
@@ -111,6 +112,17 @@ BOOST_PYTHON_MODULE(_chem)
 	exportParallelPiPiInteractionConstraint();
 	exportCationPiInteractionConstraint();
 	exportHBondingInteractionConstraint();
+
+	exportTopologicalEntityAlignments();
+	exportFeatureTypeMatchFunctor();
+	exportFeaturePairDistanceMatchFunctor();
+	exportGeometricalEntityAlignments();
+	exportPharmacophoreAlignment();
+	exportTopologicalQueryPharmAlignmentFilter();
+    exportGeometricalQueryPharmAlignmentFilter();
+    exportGeometricalFeatureMappingExtractor();
+	exportFeaturePositionMatchFunctor();
+	exportFeatureGeometryMatchFunctor();
 
 	exportCompleteRingSet();
 	exportAromaticRingSet();

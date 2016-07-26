@@ -152,6 +152,9 @@
 \defgroup CDPL_CHEM_PHARMACOPHORE_PERCEPTION Pharmacophore Perception 
 \ingroup CDPL_CHEM
 
+\defgroup CDPL_CHEM_ALIGNMENT Chemical Entity Alignment 
+\ingroup CDPL_CHEM
+
 \defgroup CDPL_CHEM_DATA_IO Data I/O
 \ingroup CDPL_CHEM
 

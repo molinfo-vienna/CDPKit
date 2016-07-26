@@ -1,7 +1,7 @@
 /* -*- mode: c++; c-basic-offset: 4; tab-width: 4; indent-tabs-mode: t -*- */
 
 /* 
- * DefaultPharmacophoreGenerator.hpp 
+ * TopologicalQueryPharmAlignmentFilter.hpp 
  *
  * This file is part of the Chemical Data Processing Toolkit
  *
@@ -25,14 +25,18 @@
 
 /**
  * \file
- * \brief Definition of the class CDPL::Chem::DefaultPharmacophoreGenerator.
+ * \brief Definition of the class CDPL::Chem::TopologicalQueryPharmAlignmentFilter.
  */
 
-#ifndef CDPL_CHEM_DEFAULTPHARMACOPHOREGENERATOR_HPP
-#define CDPL_CHEM_DEFAULTPHARMACOPHOREGENERATOR_HPP
+#ifndef CDPL_CHEM_TOPOLOGICALQUERYPHARMALIGNMENTFILTER_HPP
+#define CDPL_CHEM_TOPOLOGICALQUERYPHARMALIGNMENTFILTER_HPP
+
+#include <cstddef>
+#include <functional>
+#include <vector>
 
 #include "CDPL/Chem/APIPrefix.hpp"
-#include "CDPL/Chem/PharmacophoreGenerator.hpp"
+#include "CDPL/Chem/FeatureMapping.hpp"
 
 
 namespace CDPL 
@@ -41,38 +45,39 @@ namespace CDPL
     namespace Chem
     {
 
+		class Pharmacophore;
+
 		/**
-		 * \addtogroup CDPL_CHEM_PHARMACOPHORE_PERCEPTION
+		 * \addtogroup CDPL_CHEM_ALIGNMENT
 		 * @{
 		 */
 
 		/**
-		 * \brief DefaultPharmacophoreGenerator.
+		 * \brief TopologicalQueryPharmAlignmentFilter.
 		 */
-		class CDPL_CHEM_API DefaultPharmacophoreGenerator : public PharmacophoreGenerator
+		class CDPL_CHEM_API TopologicalQueryPharmAlignmentFilter : public std::unary_function<FeatureMapping, bool>
 		{
 
 		  public:
-			/**
-			 * \brief Constructs the \c %DefaultPharmacophoreGenerator instance.
-			 */
-			DefaultPharmacophoreGenerator(bool fuzzy);
+			TopologicalQueryPharmAlignmentFilter(const Pharmacophore& query, std::size_t max_omtd_ftrs);
 
 			/**
-			 * \brief Perceives all pharmacophore features of the molecular graph a\ molgraph
-			 *        and adds them to the pharmacophore \a pharm.
-			 * \param molgraph The molecular graph for which to perceive the features.
-			 * \param pharm The output pharmacophore where to add the generated features.
-			 * \param fuzzy \c true if some uncertainties in the presence or absence of features and interaction
-			 *                 directions should be handled less strictly.
+			 * \brief Checks if the provided feature mapping fulfills the filters of the pharmacophore query.
+			 * \param mapping The feature mapping to evaluate.
+			 * \return \c true if the feature mapping fulfills the query filters, and \c false otherwise.
 			 */
-			DefaultPharmacophoreGenerator(const MolecularGraph& molgraph, Pharmacophore& pharm, bool fuzzy);
+			bool operator()(const FeatureMapping& mapping) const;
 
 		  private:
 			/** \cond CDPL_PRIVATE_SECTION_DOC */
-	
-			void init(bool);
-	
+
+			typedef std::vector<const Feature*> FeatureArray;
+			typedef std::vector<std::size_t> IndexArray;
+
+			std::size_t  maxOmtdFeatures;
+			FeatureArray checkedFeatures;
+			IndexArray   ftrGroupLimits;
+
 			/** \endcond */
 		};
 
@@ -82,4 +87,4 @@ namespace CDPL
     }
 }
 
-#endif // CDPL_CHEM_DEFAULTPHARMACOPHOREGENERATOR_HPP
+#endif // CDPL_CHEM_TOPOLOGICALQUERYPHARMALIGNMENTFILTER_HPP

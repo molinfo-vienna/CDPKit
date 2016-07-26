@@ -50,6 +50,7 @@ namespace CDPL
 		
 		/**
 		 * \brief Transforms each \f$ N \f$-dimensional vector in the array with the \f$ N \f$-dimensional square matrix \a xform.
+		 * \param va The vectors to transform.
 		 * \param xform The transformation matrix.
 		 */
 		template <typename T, std::size_t Dim, typename T1>
@@ -68,6 +69,7 @@ namespace CDPL
 
 		/**
 		 * \brief Transforms each \f$ N \f$-dimensional vector in the array with the \f$ N+1 \f$-dimensional square matrix \a xform.
+		 * \param va The vectors to transform.
 		 * \param xform The transformation matrix.
 		 * \note The missing vector element is taken to be \c 1.0.
 		 */
@@ -96,6 +98,7 @@ namespace CDPL
 
 		/**
 		 * \brief Calculates the centroid of the array elements.
+		 * \param va The vectors for which to calculate the centroid.
 		 * \param ctr Stores the calculated centroid.
 		 * \return \c true if the array is not empty, and \c false otherwise.
 		 */

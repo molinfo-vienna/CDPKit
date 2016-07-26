@@ -79,9 +79,10 @@ void Util::BronKerboschAlgorithm::init(const BitSetArray& adj_mtx)
 				   std::back_inserter(nodeDegrees), boost::bind(&BitSet::count, _1));
 	
 	freeAllStates();
+	states.clear();
 
-	State* init_state = allocState();
 	std::size_t num_nodes = adj_mtx.getSize();
+	State* init_state = allocState();
 
 	init_state->curr.resize(num_nodes);
 	init_state->curr.reset();
@@ -91,7 +92,6 @@ void Util::BronKerboschAlgorithm::init(const BitSetArray& adj_mtx)
 	init_state->pool.set();
 	init_state->v = 0;
 
-	states.clear();
 	states.push_back(init_state);
 }
 

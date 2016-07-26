@@ -105,7 +105,7 @@ namespace CDPL
 
 			/**
 			 * \brief Specifies the value of the feature geometry property that has to be set on newly generated excluded volumes.
-			 * \param type The value of the feature geometry property.
+			 * \param geom The value of the feature geometry property.
 			 * \note The default type is specified by the constant SurfaceXVolumeCoatGenerator::DEF_FEATURE_GEOM.
 			 * \see FeatureProperty::GEOMETRY
 			 */

@@ -36,6 +36,7 @@
 #include "VectorExpression.hpp"
 #include "QuaternionExpression.hpp"
 #include "QuaternionVisitor.hpp"
+#include "VectorVisitor.hpp"
 #include "AssignFunctionGeneratorVisitor.hpp"
 #include "WrappedDataVisitor.hpp"
 #include "ClassExports.hpp"
@@ -102,6 +103,66 @@ namespace
 			return WrapperPointerType(new VectorAdapterWrapper(e));
 		}
 	};
+
+	template <typename ExpressionType>
+	struct ConstHomogenousCoordsAdapterExport
+	{
+	
+		typedef CDPL::Math::HomogenousCoordsAdapter<const ExpressionType> HomogenousCoordsAdapterType;
+		typedef CDPLPythonMath::ExpressionAdapterWrapper<ExpressionType, HomogenousCoordsAdapterType> HomogenousCoordsAdapterWrapper;
+		typedef typename HomogenousCoordsAdapterWrapper::ExpressionPointerType ExpressionPointerType;
+		typedef typename HomogenousCoordsAdapterWrapper::SharedPointer WrapperPointerType;
+
+		ConstHomogenousCoordsAdapterExport(const char* name) {
+			using namespace boost;
+			using namespace CDPLPythonMath;
+		
+			python::class_<HomogenousCoordsAdapterWrapper, WrapperPointerType, boost::noncopyable>(name, python::no_init)
+				.def(python::init<const HomogenousCoordsAdapterWrapper&>((python::arg("self"), python::arg("a"))))
+				.def(python::init<const ExpressionPointerType&>((python::arg("self"), python::arg("e"))))
+				.def(CDPLPythonBase::ObjectIdentityCheckVisitor<HomogenousCoordsAdapterType>())
+				.def(ConstVectorVisitor<HomogenousCoordsAdapterType>("a"))
+				.def(WrappedDataVisitor<HomogenousCoordsAdapterWrapper>());
+
+			python::def("homog", &homog, python::arg("e"));
+		}
+
+		static WrapperPointerType homog(const ExpressionPointerType& e) {
+			return WrapperPointerType(new HomogenousCoordsAdapterWrapper(e));
+		}
+	};
+
+	template <typename ExpressionType>
+	struct HomogenousCoordsAdapterExport
+	{
+	
+		typedef CDPL::Math::HomogenousCoordsAdapter<ExpressionType> HomogenousCoordsAdapterType;
+		typedef CDPLPythonMath::ExpressionAdapterWrapper<ExpressionType, HomogenousCoordsAdapterType> HomogenousCoordsAdapterWrapper;
+		typedef typename HomogenousCoordsAdapterWrapper::ExpressionPointerType ExpressionPointerType;
+		typedef typename HomogenousCoordsAdapterWrapper::SharedPointer WrapperPointerType;
+
+		HomogenousCoordsAdapterExport(const char* name) {
+			using namespace boost;
+			using namespace CDPLPythonMath;
+
+			python::class_<HomogenousCoordsAdapterWrapper, WrapperPointerType, boost::noncopyable>(name, python::no_init)
+				.def(python::init<const HomogenousCoordsAdapterWrapper&>((python::arg("self"), python::arg("a"))))
+				.def(python::init<const ExpressionPointerType&>((python::arg("self"), python::arg("e"))))
+				.def(CDPLPythonBase::ObjectIdentityCheckVisitor<HomogenousCoordsAdapterType>())
+				.def(AssignFunctionGeneratorVisitor<HomogenousCoordsAdapterType, ConstVectorExpression>("e"))
+				.def(ConstVectorVisitor<HomogenousCoordsAdapterType>("r"))
+				.def(VectorAssignAndSwapVisitor<HomogenousCoordsAdapterType>("r"))
+				.def(VectorVisitor<HomogenousCoordsAdapterType>("a"))
+				.def(WrappedDataVisitor<HomogenousCoordsAdapterWrapper>());
+
+			python::def("homog", &homog, python::arg("e"));
+		}
+
+		static WrapperPointerType homog(const ExpressionPointerType& e) {
+			return WrapperPointerType(new HomogenousCoordsAdapterWrapper(e));
+		}
+	};
+
 }
 
 
@@ -116,4 +177,14 @@ void CDPLPythonMath::exportVectorAdapters()
 	VectorQuaternionAdapterExport<VectorExpression<double> >("DVectorQuaternionAdapter");
 	VectorQuaternionAdapterExport<VectorExpression<long> >("LVectorQuaternionAdapter");
 	VectorQuaternionAdapterExport<VectorExpression<unsigned long> >("ULVectorQuaternionAdapter");
+
+	ConstHomogenousCoordsAdapterExport<ConstVectorExpression<float> >("ConstFHomogenousCoordsAdapter");
+	ConstHomogenousCoordsAdapterExport<ConstVectorExpression<double> >("ConstDHomogenousCoordsAdapter");
+	ConstHomogenousCoordsAdapterExport<ConstVectorExpression<long> >("ConstLHomogenousCoordsAdapter");
+	ConstHomogenousCoordsAdapterExport<ConstVectorExpression<unsigned long> >("ConstULHomogenousCoordsAdapter");
+
+	HomogenousCoordsAdapterExport<VectorExpression<float> >("FHomogenousCoordsAdapter");
+	HomogenousCoordsAdapterExport<VectorExpression<double> >("DHomogenousCoordsAdapter");
+	HomogenousCoordsAdapterExport<VectorExpression<long> >("LHomogenousCoordsAdapter");
+	HomogenousCoordsAdapterExport<VectorExpression<unsigned long> >("ULHomogenousCoordsAdapter");
 }

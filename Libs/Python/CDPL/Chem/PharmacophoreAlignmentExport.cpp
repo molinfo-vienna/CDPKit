@@ -1,7 +1,7 @@
-/* -*- mode: c++; c-basic-offset: 4; tab-width: 4; indent-tabs-mode: t -*- */
+ /* -*- mode: c++; c-basic-offset: 4; tab-width: 4; indent-tabs-mode: t -*- */
 
 /* 
- * DefaultFeatureInteractionAnalyzerExport.cpp 
+ * PharmacophoreAlignmentExport.cpp 
  *
  * This file is part of the Chemical Data Processing Toolkit
  *
@@ -26,23 +26,34 @@
 
 #include <boost/python.hpp>
 
-#include "CDPL/Chem/DefaultFeatureInteractionAnalyzer.hpp"
+#include "CDPL/Chem/PharmacophoreAlignment.hpp"
 #include "CDPL/Chem/Pharmacophore.hpp"
+#include "CDPL/Chem/Feature.hpp"
 
 #include "ClassExports.hpp"
 
 
-void CDPLPythonChem::exportDefaultFeatureInteractionAnalyzer()
+namespace
+{
+
+    void addPharmacophore(CDPL::Chem::PharmacophoreAlignment& align, CDPL::Chem::Pharmacophore& pharm, bool first_set)
+    {
+	align.addPharmacophore(pharm, first_set);
+    }
+}
+
+
+void CDPLPythonChem::exportPharmacophoreAlignment()
 {
     using namespace boost;
     using namespace CDPL;
 
-    python::class_<Chem::DefaultFeatureInteractionAnalyzer, python::bases<Chem::FeatureInteractionAnalyzer>,
-				   boost::noncopyable>("DefaultFeatureInteractionAnalyzer", python::no_init)
-		.def(python::init<>(python::arg("self")))
-		.def(python::init<const Chem::Pharmacophore&, const Chem::Pharmacophore&, Chem::FeatureMapping&>(
-				 (python::arg("self"), python::arg("molgraph"), python::arg("pharm"))))
-		.def(python::init<const Chem::DefaultFeatureInteractionAnalyzer&>((python::arg("self"), python::arg("analyzer"))))
-		.def("assign", &Chem::DefaultFeatureInteractionAnalyzer::operator=, 
-			 (python::arg("self"), python::arg("analyzer")), python::return_self<>());
+    python::class_<Chem::PharmacophoreAlignment, python::bases<Chem::GeometricalEntityAlignment<Chem::Feature> >,
+		   boost::noncopyable>("PharmacophoreAlignment", python::no_init)
+	.def(python::init<bool>((python::arg("self"), python::arg("query_mode"))))
+	.def(python::init<const Chem::PharmacophoreAlignment&>((python::arg("self"), python::arg("alignment"))))
+	.def("addPharmacophore", &addPharmacophore, (python::arg("self"), python::arg("pharm"), python::arg("first_set")))
+	.def("assign", &Chem::PharmacophoreAlignment::operator=, 
+	     (python::arg("self"), python::arg("alignment")), python::return_self<>());
 }
+

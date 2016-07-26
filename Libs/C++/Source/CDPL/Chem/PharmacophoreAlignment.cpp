@@ -1,7 +1,7 @@
 /* -*- mode: c++; c-basic-offset: 4; tab-width: 4; indent-tabs-mode: t -*- */
 
 /* 
- * DefaultFeatureInteractionAnalyzerExport.cpp 
+ * PharmacophoreAlignment.cpp 
  *
  * This file is part of the Chemical Data Processing Toolkit
  *
@@ -23,26 +23,30 @@
  * Boston, MA 02111-1307, USA.
  */
 
+ 
+#include "StaticInit.hpp"
 
-#include <boost/python.hpp>
-
-#include "CDPL/Chem/DefaultFeatureInteractionAnalyzer.hpp"
+#include "CDPL/Chem/PharmacophoreAlignment.hpp"
 #include "CDPL/Chem/Pharmacophore.hpp"
+#include "CDPL/Chem/Feature.hpp"
+#include "CDPL/Chem/FeatureFunctions.hpp"
+#include "CDPL/Chem/Entity3DFunctions.hpp"
+#include "CDPL/Chem/FeatureTypeMatchFunctor.hpp"
+#include "CDPL/Chem/FeaturePairDistanceMatchFunctor.hpp"
 
-#include "ClassExports.hpp"
+using namespace CDPL;
 
 
-void CDPLPythonChem::exportDefaultFeatureInteractionAnalyzer()
+Chem::PharmacophoreAlignment::PharmacophoreAlignment(bool query_mode)
 {
-    using namespace boost;
-    using namespace CDPL;
+	setEntity3DCoordinatesFunction(&get3DCoordinates);
+	setEntityMatchFunction(FeatureTypeMatchFunctor());
+	setEntityPairMatchFunction(FeaturePairDistanceMatchFunctor(query_mode));
+}
 
-    python::class_<Chem::DefaultFeatureInteractionAnalyzer, python::bases<Chem::FeatureInteractionAnalyzer>,
-				   boost::noncopyable>("DefaultFeatureInteractionAnalyzer", python::no_init)
-		.def(python::init<>(python::arg("self")))
-		.def(python::init<const Chem::Pharmacophore&, const Chem::Pharmacophore&, Chem::FeatureMapping&>(
-				 (python::arg("self"), python::arg("molgraph"), python::arg("pharm"))))
-		.def(python::init<const Chem::DefaultFeatureInteractionAnalyzer&>((python::arg("self"), python::arg("analyzer"))))
-		.def("assign", &Chem::DefaultFeatureInteractionAnalyzer::operator=, 
-			 (python::arg("self"), python::arg("analyzer")), python::return_self<>());
+void Chem::PharmacophoreAlignment::addPharmacophore(const Pharmacophore& pharm, bool first_set)
+{
+	for (Pharmacophore::ConstFeatureIterator it = pharm.getFeaturesBegin(), end = pharm.getFeaturesEnd(); it != end; ++it)
+		if (!getDisabledFlag(*it))
+			addEntity(*it, first_set);
 }

@@ -1,7 +1,7 @@
 /* -*- mode: c++; c-basic-offset: 4; tab-width: 4; indent-tabs-mode: t -*- */
 
 /* 
- * PharmacophoreFunctionExport.cpp 
+ * FeatureTypeMatchFunctorExport.cpp 
  *
  * This file is part of the Chemical Data Processing Toolkit
  *
@@ -26,33 +26,35 @@
 
 #include <boost/python.hpp>
 
-#include "CDPL/Chem/PharmacophoreFunctions.hpp"
-#include "CDPL/Chem/Pharmacophore.hpp"
-#include "CDPL/Chem/AtomContainer.hpp"
+#include "CDPL/Chem/FeatureTypeMatchFunctor.hpp"
+#include "CDPL/Chem/Feature.hpp"
 
-#include "FunctionExports.hpp"
-#include "FunctionWrapper.hpp"
+#include "Base/ObjectIdentityCheckVisitor.hpp"
+
+#include "ClassExports.hpp"
 
 
 namespace
 {
 
-	MAKE_FUNCTION_WRAPPER4(bool, checkExclusionVolumeClash, const CDPL::Chem::Pharmacophore&, CDPL::Chem::AtomContainer&,
-						   const CDPL::Math::Matrix4D&, bool);
+    bool callOperator(CDPL::Chem::FeatureTypeMatchFunctor& func, 
+					  CDPL::Chem::Feature& ftr1, CDPL::Chem::Feature& ftr2)
+    {
+		return func(ftr1, ftr2);
+    }
 }
 
 
-void CDPLPythonChem::exportPharmacophoreFunctions()
+void CDPLPythonChem::exportFeatureTypeMatchFunctor()
 {
     using namespace boost;
     using namespace CDPL;
-	
-	python::def("getFeatureCount", static_cast<std::size_t (*)(const Chem::Pharmacophore&)>(&Chem::getFeatureCount), 
-				python::arg("pharm"));
-	python::def("getFeatureCount", static_cast<std::size_t (*)(const Chem::Pharmacophore&, unsigned int)>(&Chem::getFeatureCount), 
-				(python::arg("pharm"), python::arg("type")));
-	python::def("buildInteractionPharmacophore", &Chem::buildInteractionPharmacophore, 
-				(python::arg("pharm"), python::arg("iactions")));
-	python::def("checkExclusionVolumeClash", &checkExclusionVolumeClashWrapper4, 
-				(python::arg("pharm"), python::arg("cntnr"), python::arg("xform"), python::arg("vdw") = true));
+
+    python::class_<Chem::FeatureTypeMatchFunctor, boost::noncopyable>("FeatureTypeMatchFunctor", python::no_init)
+		.def(python::init<const Chem::FeatureTypeMatchFunctor&>((python::arg("self"), python::arg("func"))))
+		.def(python::init<>(python::arg("self")))
+		.def(CDPLPythonBase::ObjectIdentityCheckVisitor<Chem::FeatureTypeMatchFunctor>())
+		.def("assign", &Chem::FeatureTypeMatchFunctor::operator=, 
+			 (python::arg("self"), python::arg("func")), python::return_self<>())
+		.def("__call__", &callOperator, (python::arg("self"), python::arg("ftr1"), python::arg("ftr2")));
 }

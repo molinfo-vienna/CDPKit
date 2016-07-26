@@ -1,7 +1,7 @@
 /* -*- mode: c++; c-basic-offset: 4; tab-width: 4; indent-tabs-mode: t -*- */
 
 /* 
- * DefaultFeatureInteractionAnalyzerExport.cpp 
+ * FeatureTypeMatchFunctor.hpp 
  *
  * This file is part of the Chemical Data Processing Toolkit
  *
@@ -23,26 +23,53 @@
  * Boston, MA 02111-1307, USA.
  */
 
+/**
+ * \file
+ * \brief Definition of the class CDPL::Chem::FeatureTypeMatchFunctor.
+ */
 
-#include <boost/python.hpp>
+#ifndef CDPL_CHEM_FEATURETYPEMATCHFUNCTOR_HPP
+#define CDPL_CHEM_FEATURETYPEMATCHFUNCTOR_HPP
 
-#include "CDPL/Chem/DefaultFeatureInteractionAnalyzer.hpp"
-#include "CDPL/Chem/Pharmacophore.hpp"
+#include <functional>
 
-#include "ClassExports.hpp"
+#include "CDPL/Chem/APIPrefix.hpp"
 
 
-void CDPLPythonChem::exportDefaultFeatureInteractionAnalyzer()
+namespace CDPL 
 {
-    using namespace boost;
-    using namespace CDPL;
 
-    python::class_<Chem::DefaultFeatureInteractionAnalyzer, python::bases<Chem::FeatureInteractionAnalyzer>,
-				   boost::noncopyable>("DefaultFeatureInteractionAnalyzer", python::no_init)
-		.def(python::init<>(python::arg("self")))
-		.def(python::init<const Chem::Pharmacophore&, const Chem::Pharmacophore&, Chem::FeatureMapping&>(
-				 (python::arg("self"), python::arg("molgraph"), python::arg("pharm"))))
-		.def(python::init<const Chem::DefaultFeatureInteractionAnalyzer&>((python::arg("self"), python::arg("analyzer"))))
-		.def("assign", &Chem::DefaultFeatureInteractionAnalyzer::operator=, 
-			 (python::arg("self"), python::arg("analyzer")), python::return_self<>());
+    namespace Chem
+    {
+
+		class Feature;
+
+		/**
+		 * \addtogroup CDPL_CHEM_ALIGNMENT
+		 * @{
+		 */
+
+		/**
+		 * \brief FeatureTypeMatchFunctor.
+		 */
+		class CDPL_CHEM_API FeatureTypeMatchFunctor : public std::binary_function<Feature, Feature, bool>
+		{
+
+		  public:
+			/**
+			 * \brief Checks if \a ftr1 and \a ftr2 have the same feature type.
+			 * \param ftr1 The first feature.
+			 * \param ftr2 The second feature.
+			 * \return \c true if the feature types are equal, and \c false otherwise.
+			 * \see Chem::getType(const Feature&)
+			 */
+			bool operator()(const Feature& ftr1, const Feature& ftr2) const;
+		};
+
+		/**
+		 * @}
+		 */
+    }
 }
+
+#endif // CDPL_CHEM_FEATURETYPEMATCHFUNCTOR_HPP

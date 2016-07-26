@@ -1,7 +1,7 @@
 /* -*- mode: c++; c-basic-offset: 4; tab-width: 4; indent-tabs-mode: t -*- */
 
 /* 
- * PharmacophoreFunctionExport.cpp 
+ * GeometricalQueryPharmAlignmentFilterExport.cpp 
  *
  * This file is part of the Chemical Data Processing Toolkit
  *
@@ -26,33 +26,28 @@
 
 #include <boost/python.hpp>
 
-#include "CDPL/Chem/PharmacophoreFunctions.hpp"
+#include "CDPL/Chem/GeometricalQueryPharmAlignmentFilter.hpp"
 #include "CDPL/Chem/Pharmacophore.hpp"
-#include "CDPL/Chem/AtomContainer.hpp"
 
-#include "FunctionExports.hpp"
-#include "FunctionWrapper.hpp"
+#include "Base/ObjectIdentityCheckVisitor.hpp"
 
-
-namespace
-{
-
-	MAKE_FUNCTION_WRAPPER4(bool, checkExclusionVolumeClash, const CDPL::Chem::Pharmacophore&, CDPL::Chem::AtomContainer&,
-						   const CDPL::Math::Matrix4D&, bool);
-}
+#include "ClassExports.hpp"
 
 
-void CDPLPythonChem::exportPharmacophoreFunctions()
+void CDPLPythonChem::exportGeometricalQueryPharmAlignmentFilter()
 {
     using namespace boost;
     using namespace CDPL;
-	
-	python::def("getFeatureCount", static_cast<std::size_t (*)(const Chem::Pharmacophore&)>(&Chem::getFeatureCount), 
-				python::arg("pharm"));
-	python::def("getFeatureCount", static_cast<std::size_t (*)(const Chem::Pharmacophore&, unsigned int)>(&Chem::getFeatureCount), 
-				(python::arg("pharm"), python::arg("type")));
-	python::def("buildInteractionPharmacophore", &Chem::buildInteractionPharmacophore, 
-				(python::arg("pharm"), python::arg("iactions")));
-	python::def("checkExclusionVolumeClash", &checkExclusionVolumeClashWrapper4, 
-				(python::arg("pharm"), python::arg("cntnr"), python::arg("xform"), python::arg("vdw") = true));
+
+    python::class_<Chem::GeometricalQueryPharmAlignmentFilter, 
+		   boost::noncopyable>("GeometricalQueryPharmAlignmentFilter", python::no_init)
+	.def(python::init<const Chem::GeometricalQueryPharmAlignmentFilter&>(
+		 (python::arg("self"), python::arg("filter"))))
+	.def(python::init<const Chem::Pharmacophore&, std::size_t>(
+		 (python::arg("self"), python::arg("query"), python::arg("max_omtd_ftrs"))))
+	.def(CDPLPythonBase::ObjectIdentityCheckVisitor<Chem::GeometricalQueryPharmAlignmentFilter>())
+	.def("assign", &Chem::GeometricalQueryPharmAlignmentFilter::operator=, 
+	     (python::arg("self"), python::arg("filter")), python::return_self<>())
+	.def("__call__", &Chem::GeometricalQueryPharmAlignmentFilter::operator(),
+	     (python::arg("self"), python::arg("mapping")));
 }

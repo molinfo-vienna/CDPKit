@@ -1,7 +1,7 @@
 /* -*- mode: c++; c-basic-offset: 4; tab-width: 4; indent-tabs-mode: t -*- */
 
 /* 
- * DefaultFeatureInteractionAnalyzerExport.cpp 
+ * Entity3DMappingExport.cpp 
  *
  * This file is part of the Chemical Data Processing Toolkit
  *
@@ -26,23 +26,25 @@
 
 #include <boost/python.hpp>
 
-#include "CDPL/Chem/DefaultFeatureInteractionAnalyzer.hpp"
-#include "CDPL/Chem/Pharmacophore.hpp"
+#include "CDPL/Chem/Entity3DMapping.hpp"
+#include "CDPL/Chem/Entity3D.hpp"
+
+#include "Util/MapVisitor.hpp"
 
 #include "ClassExports.hpp"
 
 
-void CDPLPythonChem::exportDefaultFeatureInteractionAnalyzer()
+void CDPLPythonChem::exportEntity3DMapping()
 {
-    using namespace boost;
-    using namespace CDPL;
+	using namespace boost;
+	using namespace CDPL;
 
-    python::class_<Chem::DefaultFeatureInteractionAnalyzer, python::bases<Chem::FeatureInteractionAnalyzer>,
-				   boost::noncopyable>("DefaultFeatureInteractionAnalyzer", python::no_init)
+	python::class_<Chem::Entity3DMapping, Chem::Entity3DMapping::SharedPointer>("Entity3DMapping", python::no_init)
 		.def(python::init<>(python::arg("self")))
-		.def(python::init<const Chem::Pharmacophore&, const Chem::Pharmacophore&, Chem::FeatureMapping&>(
-				 (python::arg("self"), python::arg("molgraph"), python::arg("pharm"))))
-		.def(python::init<const Chem::DefaultFeatureInteractionAnalyzer&>((python::arg("self"), python::arg("analyzer"))))
-		.def("assign", &Chem::DefaultFeatureInteractionAnalyzer::operator=, 
-			 (python::arg("self"), python::arg("analyzer")), python::return_self<>());
+		.def(python::init<const Chem::Entity3DMapping&>((python::arg("self"), python::arg("mapping")))
+			 [python::with_custodian_and_ward<1, 2>()])
+		.def(CDPLPythonUtil::MultiMapVisitor<Chem::Entity3DMapping,
+			 python::return_internal_reference<>, python::with_custodian_and_ward<1, 2>,
+			 python::with_custodian_and_ward<1, 2, python::with_custodian_and_ward<1, 3> >,
+			 python::return_internal_reference<1, python::with_custodian_and_ward_postcall<0, 3> >, true>());
 }

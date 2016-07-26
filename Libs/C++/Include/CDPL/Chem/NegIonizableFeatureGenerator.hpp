@@ -63,7 +63,8 @@ namespace CDPL
 	     *        them to the pharmacophore \a pharm.
 	     * \param molgraph The molecular graph for which to perceive the features.
 	     * \param pharm The output pharmacophore where to add the generated features.
-	     */
+	     * \param fuzzy \c false if features shall be generated only for charged groups.
+		 */
 	    NegIonizableFeatureGenerator(const MolecularGraph& molgraph, Pharmacophore& pharm, bool fuzzy);
 	    
 	  private:

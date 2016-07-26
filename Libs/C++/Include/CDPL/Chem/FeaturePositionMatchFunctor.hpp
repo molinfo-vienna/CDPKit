@@ -1,7 +1,7 @@
 /* -*- mode: c++; c-basic-offset: 4; tab-width: 4; indent-tabs-mode: t -*- */
 
 /* 
- * PharmacophoreFunctions.hpp 
+ * FeaturePositionMatchFunctor.hpp 
  *
  * This file is part of the Chemical Data Processing Toolkit
  *
@@ -25,41 +25,54 @@
 
 /**
  * \file
- * \brief Declaration of functions that operate on Chem::Pharmacophore instances.
+ * \brief Definition of the class CDPL::Chem::FeaturePositionMatchFunctor.
  */
 
-#ifndef CDPL_CHEM_PHARMACOPHOREFUNCTIONS_HPP
-#define CDPL_CHEM_PHARMACOPHOREFUNCTIONS_HPP
-
-#include <cstddef>
+#ifndef CDPL_CHEM_FEATUREPOSITIONMATCHFUNCTOR_HPP
+#define CDPL_CHEM_FEATUREPOSITIONMATCHFUNCTOR_HPP
 
 #include "CDPL/Chem/APIPrefix.hpp"
-#include "CDPL/Chem/FeatureMapping.hpp"
+
 #include "CDPL/Math/Matrix.hpp"
 
 
 namespace CDPL 
 {
 
-    namespace Chem 
+    namespace Chem
     {
-	
-		class Pharmacophore;
-		class AtomContainer;
-	
+
+		class Feature;
+
 		/**
-		 * \addtogroup CDPL_CHEM_PHARMACOPHORE_FUNCTIONS
+		 * \addtogroup CDPL_CHEM_ALIGNMENT
 		 * @{
 		 */
-	
-		CDPL_CHEM_API std::size_t getFeatureCount(const Pharmacophore& pharm);
 
-		CDPL_CHEM_API std::size_t getFeatureCount(const Pharmacophore& pharm, unsigned int type);
+		/**
+		 * \brief FeaturePositionMatchFunctor.
+		 */
+		class CDPL_CHEM_API FeaturePositionMatchFunctor
+		{
 
+		  public:
+			FeaturePositionMatchFunctor(bool query_mode): qryMode(query_mode) {}
 
-		CDPL_CHEM_API void buildInteractionPharmacophore(Pharmacophore& pharm, const FeatureMapping& iactions);
+			bool queryMode() const;
 
-		CDPL_CHEM_API bool checkExclusionVolumeClash(const Pharmacophore& pharm, const AtomContainer& cntnr, const Math::Matrix4D& xform, bool vdw = true);
+			/**
+			 * \brief Checks if both \a ftr1 and \a ftr2 have a feature position within the respective tolerances.
+			 * \param ftr1 The first feature.
+			 * \param ftr2 The second feature.
+			 * \param xform The transformation to apply to the position of the second feature.
+			 * \return \c true if the feature positions are equivalent, and \c false otherwise.
+			 * \see Chem::getPosition(const Feature&),  Chem::getTolerance(const Feature&)
+			 */
+			bool operator()(const Feature& ftr1, const Feature& ftr2, const Math::Matrix4D& xform) const;
+
+		  private:
+			bool qryMode;
+		};
 
 		/**
 		 * @}
@@ -67,4 +80,4 @@ namespace CDPL
     }
 }
 
-#endif // CDPL_CHEM_PHARMACOPHOREFUNCTIONS_HPP
+#endif // CDPL_CHEM_FEATUREPOSITIONMATCHFUNCTOR_HPP
