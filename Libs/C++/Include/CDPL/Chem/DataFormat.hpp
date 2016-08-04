@@ -52,7 +52,7 @@ namespace CDPL
 		 */
 		
 		/**
-		 * \brief Provides preinitialized Base::DataFormat objects for all supported chemical data format.
+		 * \brief Provides preinitialized Base::DataFormat objects for all supported chemical data formats.
 		 */
 		namespace DataFormat
 		{
@@ -98,12 +98,6 @@ namespace CDPL
 			 *        [\ref INCHI] format.
 			 */
 			extern CDPL_CHEM_API const Base::DataFormat INCHI;
-
-			/**
-			 * \brief Provides meta-information about the <em>Brookhaven Protein Data Bank Format</em>
-			 *        [\ref PDB] format.
-			 */
-			extern CDPL_CHEM_API const Base::DataFormat PDB;
 		}
 
 		/**

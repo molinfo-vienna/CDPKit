@@ -64,11 +64,11 @@
 #include "CDPL/Chem/MDLDataFormatVersion.hpp"
 #include "CDPL/Base/Exceptions.hpp"
 #include "CDPL/Base/DataIOBase.hpp"
+#include "CDPL/Internal/StringUtilities.hpp"
+#include "CDPL/Internal/StringDataIOUtilities.hpp"
 
 #include "MDLDataWriter.hpp"
 #include "MDLFormatData.hpp"
-#include "StringUtilities.hpp"
-#include "StringDataIOUtilities.hpp"
 
 
 using namespace CDPL;
@@ -79,14 +79,14 @@ namespace
 
 	inline void writeMDLEOL(std::ostream& os)
 	{
-		Chem::writeEOL(os, Chem::MDL::END_OF_LINE);
+		Internal::writeEOL(os, Chem::MDL::END_OF_LINE);
 	}
 
 	inline void writeMDLLine(std::ostream& os, const std::string& line, const std::string& err_msg, 
 							 bool check_llen = true, bool trim = true, bool trunc = false, 
 							 std::size_t max_llen = Chem::MDL::MAX_LINE_LENGTH)
 	{
-		Chem::writeLine(os, line, err_msg, check_llen, trim, trunc, max_llen, Chem::MDL::END_OF_LINE);
+		Internal::writeLine(os, line, err_msg, check_llen, trim, trunc, max_llen, Chem::MDL::END_OF_LINE);
 	}
 
 	std::size_t calcHydrogenCount(const Chem::Atom& atom, const Chem::MolecularGraph& molgraph)
@@ -313,6 +313,7 @@ void Chem::MDLDataWriter::getAtomCoordsDim(const MolecularGraph& molgraph)
 
 void Chem::MDLDataWriter::writeMOLHeaderBlock(std::ostream& os, const MolecularGraph& molgraph) const
 {
+	using namespace Internal;
 	using namespace MDL::MOLFile;
 
 	// Header line 1
@@ -456,6 +457,7 @@ void Chem::MDLDataWriter::setupCTabCountsLine(const MolecularGraph& molgraph)
 
 void Chem::MDLDataWriter::writeCTabCountsLine(std::ostream& os) const
 {
+	using namespace Internal;
 	using namespace MDL::MOLFile;
 
 	writeIntegerNumber(os, 3, atomCount, "MDLDataWriter: error while writing number of atoms to counts-line");
@@ -511,7 +513,7 @@ void Chem::MDLDataWriter::writeCTabV2000Atom(std::ostream& os, const MolecularGr
 {
 	writeCTabV2000AtomCoords(os, molgraph, atom);
 
-	writeWhitespace(os, 1);
+	Internal::writeWhitespace(os, 1);
 
 	writeCTabV2000AtomSymbol(os, atom);
 	writeCTabV2000AtomMass(os, atom);
@@ -521,7 +523,7 @@ void Chem::MDLDataWriter::writeCTabV2000Atom(std::ostream& os, const MolecularGr
 	writeCTabV2000AtomStereoBoxFlag(os, molgraph, atom);
 	writeCTabV2000AtomValence(os, molgraph, atom);
 
-	writeWhitespace(os, 9);
+	Internal::writeWhitespace(os, 9);
 
 	writeCTabV2000AtomRxnInfo(os, atom);
 
@@ -530,6 +532,8 @@ void Chem::MDLDataWriter::writeCTabV2000Atom(std::ostream& os, const MolecularGr
 
 void Chem::MDLDataWriter::writeCTabV2000AtomCoords(std::ostream& os, const MolecularGraph& molgraph, const Atom& atom) const
 {
+	using namespace Internal;
+
 	if (coordsDim == 3) {
 		const Math::Vector3D& coords = (multiConfExport ? confCoordinates[molgraph.getAtomIndex(atom)] : get3DCoordinates(atom));
 
@@ -554,8 +558,8 @@ void Chem::MDLDataWriter::writeCTabV2000AtomCoords(std::ostream& os, const Molec
 
 void Chem::MDLDataWriter::writeCTabV2000AtomSymbol(std::ostream& os, const Atom& atom) const
 {
-	writeString(os, 3, getSymbol(atom), "MDLDataWriter: error while writing atom symbol",
-				trimStrings, truncateStrings);
+	Internal::writeString(os, 3, getSymbol(atom), "MDLDataWriter: error while writing atom symbol",
+						  trimStrings, truncateStrings);
 }
 
 void Chem::MDLDataWriter::writeCTabV2000AtomMass(std::ostream& os, const Atom& atom) const
@@ -576,7 +580,7 @@ void Chem::MDLDataWriter::writeCTabV2000AtomMass(std::ostream& os, const Atom& a
 		}
 	}
 
-	writeIntegerNumber(os, 2, mass_diff, "MDLDataWriter: error while writing atom isotope mass difference value");
+	Internal::writeIntegerNumber(os, 2, mass_diff, "MDLDataWriter: error while writing atom isotope mass difference value");
 }
 
 void Chem::MDLDataWriter::writeCTabV2000AtomCharge(std::ostream& os, const Atom& atom) const
@@ -619,7 +623,7 @@ void Chem::MDLDataWriter::writeCTabV2000AtomCharge(std::ostream& os, const Atom&
 			break;
 	}
 
-	writeIntegerNumber(os, 3, charge, "MDLDataWriter: error while writing atom charge specification");
+	Internal::writeIntegerNumber(os, 3, charge, "MDLDataWriter: error while writing atom charge specification");
 }
 
 void Chem::MDLDataWriter::writeCTabV2000AtomParity(std::ostream& os, const MolecularGraph& molgraph, const Atom& atom) const
@@ -652,11 +656,12 @@ void Chem::MDLDataWriter::writeCTabV2000AtomParity(std::ostream& os, const Molec
 		}
 	}
 
-	writeIntegerNumber(os, 3, parity, "MDLDataWriter: error while writing atom stereo parity specification");
+	Internal::writeIntegerNumber(os, 3, parity, "MDLDataWriter: error while writing atom stereo parity specification");
 }
 
 void Chem::MDLDataWriter::writeCTabV2000AtomQueryHCount(std::ostream& os, const MolecularGraph& molgraph, const Atom& atom) const
 {
+	using namespace Internal;
 	using namespace MDL::MOLFile::CTab::V2000;
 
 	const MatchConstraintList& constr_list = *getMatchConstraints(atom);
@@ -743,7 +748,7 @@ void Chem::MDLDataWriter::writeCTabV2000AtomStereoBoxFlag(std::ostream& os, cons
 		}
 	}
 
-	writeIntegerNumber(os, 3, db_stereo_box_flag, "MDLDataWriter: error while writing stereo box flag for atom");
+	Internal::writeIntegerNumber(os, 3, db_stereo_box_flag, "MDLDataWriter: error while writing stereo box flag for atom");
 }
 
 void Chem::MDLDataWriter::writeCTabV2000AtomValence(std::ostream& os, const MolecularGraph& molgraph, const Atom& atom) const
@@ -759,11 +764,12 @@ void Chem::MDLDataWriter::writeCTabV2000AtomValence(std::ostream& os, const Mole
 	else if (valence_val <= AtomBlock::VALENCE_MAX)
 		valence = valence_val;
 
-	writeIntegerNumber(os, 3, valence, "MDLDataWriter: error while writing atom valence specification");
+	Internal::writeIntegerNumber(os, 3, valence, "MDLDataWriter: error while writing atom valence specification");
 }
 
 void Chem::MDLDataWriter::writeCTabV2000AtomRxnInfo(std::ostream& os, const Atom& atom) const
 {
+	using namespace Internal;
 	using namespace MDL::MOLFile::CTab::V2000;
 
 	std::size_t rxn_aam_no = getReactionAtomMappingID(atom); 
@@ -810,7 +816,7 @@ void Chem::MDLDataWriter::writeCTabV2000Bond(std::ostream& os, const MolecularGr
 	writeCTabV2000BondType(os, order, constr_list);
 	writeCTabV2000BondStereo(os, bond_stereo, order);
 
-	writeWhitespace(os, 3);
+	Internal::writeWhitespace(os, 3);
 
 	writeCTabV2000BondQueryTopology(os, molgraph, bond, constr_list);
 	writeCTabV2000BondRxnCenterStatus(os, bond);
@@ -821,6 +827,8 @@ void Chem::MDLDataWriter::writeCTabV2000Bond(std::ostream& os, const MolecularGr
 void Chem::MDLDataWriter::writeCTabV2000BondAtomIndices(std::ostream& os, const MolecularGraph& molgraph, 
 														const Bond& bond, bool swap_atoms) const
 {
+	using namespace Internal;
+
 	std::size_t atom1_idx = molgraph.getAtomIndex(bond.getBegin()) + 1;
 	std::size_t atom2_idx = molgraph.getAtomIndex(bond.getEnd()) + 1;
 
@@ -836,6 +844,7 @@ void Chem::MDLDataWriter::writeCTabV2000BondAtomIndices(std::ostream& os, const 
 
 void Chem::MDLDataWriter::writeCTabV2000BondType(std::ostream& os, std::size_t order, const MatchConstraintList& constr_list) const
 {
+	using namespace Internal;
 	using namespace MDL::MOLFile::CTab::V2000;
 
 	if (constr_list.getSize() != 0) {
@@ -942,12 +951,13 @@ void Chem::MDLDataWriter::writeCTabV2000BondStereo(std::ostream& os, unsigned in
 				throw Base::IOError("MDLDataWriter: invalid stereo bond type");
 	}
 
-	writeIntegerNumber(os, 3, stereo_flag, "MDLDataWriter: error while writing bond stereo specification");
+	Internal::writeIntegerNumber(os, 3, stereo_flag, "MDLDataWriter: error while writing bond stereo specification");
 }
 
 void Chem::MDLDataWriter::writeCTabV2000BondQueryTopology(std::ostream& os, const MolecularGraph& molgraph, const Bond& bond, 
 														  const MatchConstraintList& constr_list) const
 {
+	using namespace Internal;
 	using namespace MDL::MOLFile::CTab::V2000;
 
 	if (constr_list.getSize() != 0) {
@@ -1035,11 +1045,12 @@ void Chem::MDLDataWriter::writeCTabV2000BondRxnCenterStatus(std::ostream& os, co
 			break;
 	}
 
-	writeIntegerNumber(os, 3, rxn_center_status, "MDLDataWriter: error while writing bond reacting center status");
+	Internal::writeIntegerNumber(os, 3, rxn_center_status, "MDLDataWriter: error while writing bond reacting center status");
 }
 
 void Chem::MDLDataWriter::writeCTabV2000ChargeProperties(std::ostream& os, const MolecularGraph& molgraph) const
 {
+	using namespace Internal;
 	using namespace MDL::MOLFile::CTab::V2000;
 
 	typedef std::pair<std::size_t, long> ChargeEntry;
@@ -1084,6 +1095,7 @@ void Chem::MDLDataWriter::writeCTabV2000ChargeProperties(std::ostream& os, const
 
 void Chem::MDLDataWriter::writeCTabV2000RadicalProperties(std::ostream& os, const MolecularGraph& molgraph) const
 {
+	using namespace Internal;
 	using namespace MDL::MOLFile::CTab::V2000;
 
 	typedef std::pair<std::size_t, unsigned int> RadicalEntry;
@@ -1147,6 +1159,7 @@ void Chem::MDLDataWriter::writeCTabV2000RadicalProperties(std::ostream& os, cons
 
 void Chem::MDLDataWriter::writeCTabV2000IsotopeProperties(std::ostream& os, const MolecularGraph& molgraph) const
 {
+	using namespace Internal;
 	using namespace MDL::MOLFile::CTab::V2000;
 
 	typedef std::pair<std::size_t, std::size_t> IsotopeEntry;
@@ -1188,6 +1201,7 @@ void Chem::MDLDataWriter::writeCTabV2000IsotopeProperties(std::ostream& os, cons
 
 void Chem::MDLDataWriter::writeCTabV2000RingBndCountProperties(std::ostream& os, const MolecularGraph& molgraph) const
 {
+	using namespace Internal;
 	using namespace MDL::MOLFile::CTab::V2000;
 
 	typedef std::pair<std::size_t, int> RBCEntry;
@@ -1264,6 +1278,7 @@ void Chem::MDLDataWriter::writeCTabV2000RingBndCountProperties(std::ostream& os,
 
 void Chem::MDLDataWriter::writeCTabV2000SubstCountProperties(std::ostream& os, const MolecularGraph& molgraph) const
 {
+	using namespace Internal;
 	using namespace MDL::MOLFile::CTab::V2000;
 
 	typedef std::pair<std::size_t, int> SCEntry;
@@ -1361,6 +1376,7 @@ void Chem::MDLDataWriter::writeCTabV2000SubstCountProperties(std::ostream& os, c
 
 void Chem::MDLDataWriter::writeCTabV2000UnsaturationProperties(std::ostream& os, const MolecularGraph& molgraph) const
 {
+	using namespace Internal;
 	using namespace MDL::MOLFile::CTab::V2000;
 
 	std::vector<std::size_t> entries;
@@ -1478,6 +1494,7 @@ void Chem::MDLDataWriter::writeCTabV2000AtomListProperties(std::ostream& os, con
 void Chem::MDLDataWriter::writeCTabV2000AtomList(std::ostream& os, const MolecularGraph& molgraph, const Atom& atom, 
 												 const MatchConstraintList& constr_list, bool not_list) const
 {
+	using namespace Internal;
 	using namespace MDL::MOLFile::CTab::V2000;
 
 	if (constr_list.getSize() == 0)
@@ -1532,6 +1549,7 @@ void Chem::MDLDataWriter::writeCTabV2000AtomList(std::ostream& os, const Molecul
 
 void Chem::MDLDataWriter::writeCTabV2000RegistryNumberProperty(std::ostream& os, const MolecularGraph& molgraph) const
 {
+	using namespace Internal;
 	using namespace MDL::MOLFile::CTab::V2000;
 
 	if (!hasMDLRegistryNumber(molgraph))
@@ -1558,6 +1576,7 @@ void Chem::MDLDataWriter::writeCTabV2000RegistryNumberProperty(std::ostream& os,
 
 void Chem::MDLDataWriter::writeSDFData(std::ostream& os, const MolecularGraph& molgraph) const
 {   
+	using namespace Internal;
 	using namespace MDL;
 
 	static const char line_sep[] = { MDL::END_OF_LINE, 0 };
@@ -1646,6 +1665,7 @@ void Chem::MDLDataWriter::setRXNFileVersion(const Reaction& rxn)
 
 void Chem::MDLDataWriter::writeRXNHeaderBlock(std::ostream& os, const Reaction& rxn) const
 {	
+	using namespace Internal;
 	using namespace MDL;
 
 	// Header line 1
@@ -1741,6 +1761,8 @@ void Chem::MDLDataWriter::writeRXNV2000Reaction(std::ostream& os, const Reaction
 
 void Chem::MDLDataWriter::writeRXNV2000CountsLine(std::ostream& os, const Reaction& rxn) const
 {
+	using namespace Internal;
+
 	writeIntegerNumber(os, 3, rxn.getNumComponents(ReactionRole::REACTANT), "MDLDataWriter: error while writing number of reactants");
 	writeIntegerNumber(os, 3, rxn.getNumComponents(ReactionRole::PRODUCT), "MDLDataWriter: error while writing number of products");
 
@@ -1761,6 +1783,7 @@ void Chem::MDLDataWriter::writeRXNV2000ReactionComponent(std::ostream& os, const
 
 void Chem::MDLDataWriter::writeRDFHeaderBlock(std::ostream& os)
 {
+	using namespace Internal;
 	using namespace MDL;
 
 	if (rdfHeaderWritten)
@@ -1900,6 +1923,7 @@ void Chem::MDLDataWriter::writeRDFReaction(std::ostream& os, const Reaction& rxn
 
 void Chem::MDLDataWriter::writeRDFData(std::ostream& os, const Reaction& rxn) const
 {   
+	using namespace Internal;
 	using namespace MDL;
 
 	if (!hasMDLReactionData(rxn))
@@ -2066,7 +2090,7 @@ void Chem::MDLDataWriter::writeCTabV3000AtomType(std::ostream& os, const Atom& a
 		return;
 
 	if (trimStrings) 
-		writeCTabV3000PropertyStringValue(os, trimStringCopy(getSymbol(atom)));
+		writeCTabV3000PropertyStringValue(os, Internal::trimStringCopy(getSymbol(atom)));
 	else
 		writeCTabV3000PropertyStringValue(os, getSymbol(atom));
 }
@@ -2773,7 +2797,7 @@ void Chem::MDLDataWriter::writeCTabV3000PropertyStringValue(std::ostream& os, co
 	if (!str.empty() 
 		&& str[0] != V3000::VALUE_LIST_START_DELIM 
 		&& str[0] != V3000::STRING_QUOTE_CHAR 
-		&& std::find_if(str_beg, str_end, boost::bind(IsWhitespace(), _1)) == str_end) {
+		&& std::find_if(str_beg, str_end, boost::bind(Internal::IsWhitespace(), _1)) == str_end) {
 		
 		os << str;
 		return;
@@ -2854,6 +2878,7 @@ void Chem::MDLDataWriter::writeV3000BlockEnd(std::ostream& os, const std::string
 
 void Chem::MDLDataWriter::writeV3000DataLine(std::ostream& os, const std::string& data_line) const
 {   
+	using namespace Internal;
 	using namespace MDL;
 
 	static const std::size_t MAX_V3000_LINE_LENGTH = MDL::MAX_LINE_LENGTH - V3000::LINE_PREFIX.length();

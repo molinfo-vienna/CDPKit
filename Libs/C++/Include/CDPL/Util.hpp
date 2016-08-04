@@ -31,20 +31,18 @@
 #ifndef CDPL_UTIL_HPP
 #define CDPL_UTIL_HPP
 
-#include "CDPL/Util/SHA1.hpp"
-#include "CDPL/Util/Permutation.hpp"
-#include "CDPL/Util/BitSet.hpp"
 #include "CDPL/Util/Array.hpp"
+#include "CDPL/Util/BitSet.hpp"
+#include "CDPL/Util/BronKerboschAlgorithm.hpp"
+#include "CDPL/Util/Dereferencer.hpp"
+#include "CDPL/Util/IndexedElementIterator.hpp"
 #include "CDPL/Util/IndirectArray.hpp"
 #include "CDPL/Util/Map.hpp"
 #include "CDPL/Util/MultiMap.hpp"
-#include "CDPL/Util/Dereferencer.hpp"
-#include "CDPL/Util/RangeGenerator.hpp"
-#include "CDPL/Util/BinaryConstantFunction.hpp"
+#include "CDPL/Util/Permutation.hpp"
 #include "CDPL/Util/PropertyValue.hpp"
 #include "CDPL/Util/PropertyValueProduct.hpp"
-#include "CDPL/Util/IndexedElementIterator.hpp"
+#include "CDPL/Util/RangeGenerator.hpp"
 #include "CDPL/Util/StreamDataReader.hpp"
-#include "CDPL/Util/BronKerboschAlgorithm.hpp"
 
 #endif // CDPL_UTIL_HPP

@@ -56,9 +56,9 @@
 #include "CDPL/Chem/BondConfiguration.hpp"
 #include "CDPL/Chem/BondDirectionGenerator.hpp"
 #include "CDPL/Chem/CanonicalNumberingGenerator.hpp"
-#include "CDPL/Util/AddressOf.hpp"
 #include "CDPL/Base/Exceptions.hpp"
 #include "CDPL/Base/DataIOBase.hpp"
+#include "CDPL/Internal/AddressOf.hpp"
 
 #include "SMILESDataWriter.hpp"
 #include "SMILESData.hpp"
@@ -571,7 +571,7 @@ void Chem::SMILESDataWriter::buildCanonMolGraph(const MolecularGraph& molgraph)
 	canonAtomList.clear();
 
 	std::transform(molgraph.getAtomsBegin(), molgraph.getAtomsEnd(), std::back_inserter(canonAtomList),
-				   boost::bind(Util::AddressOf<const Atom>(), _1));
+				   boost::bind(Internal::AddressOf<const Atom>(), _1));
 
 	std::sort(canonAtomList.begin(), canonAtomList.end(), CanonAtomCmpFunc(*this, molgraph));
 

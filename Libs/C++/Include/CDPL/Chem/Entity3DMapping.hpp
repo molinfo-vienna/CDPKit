@@ -40,27 +40,27 @@ namespace CDPL
     namespace Chem
     {
 
-	class Entity3D;
+		class Entity3D;
 
-	/**
-	 * \addtogroup CDPL_CHEM_DATA_STRUCTURES
-	 * @{
-	 */
+		/**
+		 * \addtogroup CDPL_CHEM_DATA_STRUCTURES
+		 * @{
+		 */
 
-	/**
-	 * \brief A data type for the storage and lookup of arbitrary entity to entity mappings.
-	 *
-	 * Entity3Ds mappings are stored as pairs of pointers to the mapped \c const Chem::Entity3D objects.
-	 * Mappings do not have to be unique and multiple mappings of a given entity to other entities are possible.
-	 * If a mapping entry for a particular entity does not exist, the methods Entity3DMapping::getValue()
-	 * and Entity3DMapping::operator[]() return a \e null pointer to indicate that the lookup of the 
-	 * mapped entity has failed.
-	 */
-	typedef Util::MultiMap<const Entity3D*, const Entity3D*, true> Entity3DMapping;
+		/**
+		 * \brief A data type for the storage and lookup of arbitrary entity to entity mappings.
+		 *
+		 * Entity3Ds mappings are stored as pairs of pointers to the mapped \c const Chem::Entity3D objects.
+		 * Mappings do not have to be unique and multiple mappings of a given entity to other entities are possible.
+		 * If a mapping entry for a particular entity does not exist, the methods Entity3DMapping::getValue()
+		 * and Entity3DMapping::operator[]() return a \e null pointer to indicate that the lookup of the 
+		 * mapped entity has failed.
+		 */
+		typedef Util::MultiMap<const Entity3D*, const Entity3D*, true> Entity3DMapping;
 
-	/**
-	 * @}
-	 */
+		/**
+		 * @}
+		 */
     }
 }
 

@@ -18,6 +18,12 @@
 \namespace CDPL::Vis
 \brief Contains classes and functions related to data visualization.
 
+\namespace CDPL::Pharm
+\brief Contains classes and functions related to pharmacophore perception and pharmacophore applications.
+
+\namespace CDPL::Biomol
+\brief Contains classes and functions related to biological macromolecules.
+
 \namespace CDPL::Vis::QtBackend
 \brief Contains classes related to the implementation of CDPL::Vis interfaces on top of the <em>Qt Toolkit</em> [\ref QTDOC].
 

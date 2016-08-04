@@ -40,8 +40,8 @@
 #include "CDPL/Chem/BondFunctions.hpp"
 #include "CDPL/Chem/ReactionFunctions.hpp"
 #include "CDPL/Chem/ReactionRole.hpp"
-#include "CDPL/Util/AddressOf.hpp"
 #include "CDPL/Base/Exceptions.hpp"
+#include "CDPL/Internal/AddressOf.hpp"
 
 
 using namespace CDPL;
@@ -220,10 +220,10 @@ void Chem::ReactionSubstructureSearch::initQueryData()
 		queryABIndexOffsets.push_back(IndexOffsetPair(numQueryAtoms, numQueryBonds));
 
 		std::transform(query_comp.getAtomsBegin(), query_comp.getAtomsEnd(), std::back_inserter(queryAtoms),
-					   boost::bind(Util::AddressOf<const Atom>(), _1));
+					   boost::bind(Internal::AddressOf<const Atom>(), _1));
 
 		std::transform(query_comp.getBondsBegin(), query_comp.getBondsEnd(), std::back_inserter(queryBonds),
-					   boost::bind(Util::AddressOf<const Bond>(), _1));
+					   boost::bind(Internal::AddressOf<const Bond>(), _1));
 
 		numQueryAtoms += query_comp.getNumAtoms();
 		numQueryBonds += query_comp.getNumBonds();
@@ -279,10 +279,10 @@ void Chem::ReactionSubstructureSearch::initTargetData()
 		targetABIndexOffsets.push_back(IndexOffsetPair(numTargetAtoms, numTargetBonds));
 
 		std::transform(target_comp.getAtomsBegin(), target_comp.getAtomsEnd(), std::back_inserter(targetAtoms),
-					   boost::bind(Util::AddressOf<const Atom>(), _1));
+					   boost::bind(Internal::AddressOf<const Atom>(), _1));
 
 		std::transform(target_comp.getBondsBegin(), target_comp.getBondsEnd(), std::back_inserter(targetBonds),
-					   boost::bind(Util::AddressOf<const Bond>(), _1));
+					   boost::bind(Internal::AddressOf<const Bond>(), _1));
 
 		numTargetAtoms += target_comp.getNumAtoms();
 		numTargetBonds += target_comp.getNumBonds();

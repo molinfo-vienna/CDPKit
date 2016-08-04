@@ -1,4 +1,4 @@
-INCLUDE_DIRECTORIES("${CMAKE_CURRENT_SOURCE_DIR}" "${CDPKIT_EXTERNAL_DIR}")
+INCLUDE_DIRECTORIES("${CMAKE_CURRENT_SOURCE_DIR}" "${CDPL_SOURCE_DIR}" "${CDPKIT_EXTERNAL_DIR}")
 
 SET(cdpl-chem_LIB_SRCS
     Entity3D.cpp
@@ -14,10 +14,6 @@ SET(cdpl-chem_LIB_SRCS
     BasicMolecule.cpp
     BasicAtom.cpp
     BasicBond.cpp
-    Pharmacophore.cpp
-    Feature.cpp
-    BasicPharmacophore.cpp
-    BasicFeature.cpp
     Fragment.cpp
     AtomBondMapping.cpp
 
@@ -26,15 +22,12 @@ SET(cdpl-chem_LIB_SRCS
     MolecularGraphProperty.cpp
     ReactionProperty.cpp
     Entity3DProperty.cpp
-    PharmacophoreProperty.cpp
-    FeatureProperty.cpp
     ControlParameter.cpp
     ControlParameterDefault.cpp
     DataFormat.cpp
     INCHIReturnCode.cpp
 
     MDLDataBlock.cpp
-    PDBData.cpp
     StereoDescriptor.cpp
 
     DefaultMultiConfMoleculeInputProcessor.cpp
@@ -45,8 +38,6 @@ SET(cdpl-chem_LIB_SRCS
     JMEReactionInputHandler.cpp
     JMEMolecularGraphOutputHandler.cpp
     JMEReactionOutputHandler.cpp
-    PDBMoleculeInputHandler.cpp
-    PDBMolecularGraphOutputHandler.cpp
     MOLMoleculeInputHandler.cpp
     MOLMolecularGraphOutputHandler.cpp
     SDFMoleculeInputHandler.cpp
@@ -72,8 +63,6 @@ SET(cdpl-chem_LIB_SRCS
     JMEMolecularGraphWriter.cpp
     JMEReactionReader.cpp
     JMEReactionWriter.cpp
-    PDBMoleculeReader.cpp
-    PDBMolecularGraphWriter.cpp
     SMILESDataReader.cpp
     SMILESDataWriter.cpp
     SMILESMoleculeReader.cpp
@@ -96,9 +85,7 @@ SET(cdpl-chem_LIB_SRCS
     RXNReactionWriter.cpp
     RDFReactionReader.cpp
     RDFReactionWriter.cpp
-    PDBDataReader.cpp
-    PDBDataWriter.cpp
-
+ 
     SubstructureSearch.cpp
     ReactionSubstructureSearch.cpp
     CommonConnectedSubstructureSearch.cpp
@@ -137,55 +124,12 @@ SET(cdpl-chem_LIB_SRCS
     BurdenMatrixGenerator.cpp
     BCUTDescriptorCalculator.cpp
 
-    PatternBasedFeatureGenerator.cpp
-    HydrophobicFeatureGenerator.cpp
-    AromaticFeatureGenerator.cpp
-    HBondAcceptorFeatureGenerator.cpp
-    HBondDonorFeatureGenerator.cpp
-    PosIonizableFeatureGenerator.cpp
-    NegIonizableFeatureGenerator.cpp
-    SurfaceXVolumeCoatGenerator.cpp
-    PharmacophoreGenerator.cpp
-    DefaultPharmacophoreGenerator.cpp
-    FeatureInteractionAnalyzer.cpp
-    DefaultFeatureInteractionAnalyzer.cpp
-    FeatureInteractionConstraintConnector.cpp
-    FeatureDistanceConstraint.cpp
-    HydrophobicInteractionConstraint.cpp
-    IonicInteractionConstraint.cpp
-    HBondingInteractionConstraint.cpp
-    CationPiInteractionConstraint.cpp
-    OrthogonalPiPiInteractionConstraint.cpp
-    ParallelPiPiInteractionConstraint.cpp
-
-    FeatureTypeMatchFunctor.cpp
-    FeaturePairDistanceMatchFunctor.cpp
-    FeaturePositionMatchFunctor.cpp
-    FeatureGeometryMatchFunctor.cpp
-    TopologicalQueryPharmAlignmentFilter.cpp
-    GeometricalQueryPharmAlignmentFilter.cpp
-    GeometricalFeatureMappingExtractor.cpp
-    PharmacophoreAlignment.cpp
-
     Entity3DCoordinatesFunctions.cpp
-
-    FeatureTypeFunctions.cpp
-    FeatureGeometryFunctions.cpp
-    FeatureOrientationFunctions.cpp
-    FeatureLengthFunctions.cpp
-    FeatureToleranceFunctions.cpp
-    FeatureSubstructureFunctions.cpp
-    FeatureDisabledFlagFunctions.cpp
-    FeatureOptionalFlagFunctions.cpp
 
     Entity3DContainerCoordinatesFunctions.cpp
     Entity3DContainerGeometricalDistanceMatrixFunction.cpp
     Entity3DContainerGeometricalDistanceFunctions.cpp
     Entity3DContainerCentroidFunction.cpp
-
-    PharmacophoreFeatureCountFunctions.cpp
-    InteractionPharmacophoreFunction.cpp
-    ExclusionVolumeClashTestFunction.cpp
 
     AtomContainerAtomCountFunctions.cpp
     AtomContainerFormalChargeFunction.cpp
@@ -236,22 +180,7 @@ SET(cdpl-chem_LIB_SRCS
     AtomMatchConstraintsFunctions.cpp
     AtomMatchExpressionStringFunctions.cpp
     AtomMatchExpressionFunctions.cpp
-    AtomResidueAtomNameFunctions.cpp
-    AtomResidueAltAtomNameFunctions.cpp
-    AtomResidueLeavingAtomFlagFunctions.cpp
-    AtomResidueLinkingAtomFlagFunctions.cpp
-    AtomResidueCodeFunctions.cpp
-    AtomResidueSequenceNumberFunctions.cpp
-    AtomResidueInsertionCodeFunctions.cpp
-    AtomResidueUtilityFunctions.cpp
-    AtomHeteroAtomFlagFunctions.cpp
-    AtomChainIDFunctions.cpp
-    AtomAltLocationIDFunctions.cpp
-    AtomModelNumberFunctions.cpp
-    AtomSerialNumberFunctions.cpp
-    AtomOccupancyFunctions.cpp
-    AtomBFactorFunctions.cpp
-
+ 
     BondOrderFunctions.cpp
     BondRingFlagFunctions.cpp
     BondRingMembershipFunctions.cpp
@@ -293,12 +222,6 @@ SET(cdpl-chem_LIB_SRCS
     MolecularGraphExtractReactionCenterFunction.cpp
     MolecularGraphStoichiometricNumberFunctions.cpp
     MolecularGraphConformationIndexFunctions.cpp
-    MolecularGraphResidueCodeFunctions.cpp
-    MolecularGraphResidueSequenceNumberFunctions.cpp
-    MolecularGraphResidueInsertionCodeFunctions.cpp
-    MolecularGraphChainIDFunctions.cpp
-    MolecularGraphModelNumberFunctions.cpp
-    MolecularGraphPDBDataFunctions.cpp
     MolecularGraphMDLUserInitialsFunctions.cpp
     MolecularGraphMDLProgramNameFunctions.cpp
     MolecularGraphMDLTimestampFunctions.cpp
@@ -348,7 +271,6 @@ SET(cdpl-chem_LIB_SRCS
     MolecularGraphAtomSymbolsFromTypeFunction.cpp
     MolecularGraph2DCoordinatesFunction.cpp
     MolecularGraph3DCoordinatesFunctions.cpp
-    MolecularGraphResidueUtilityFunctions.cpp
 
     ReactionNameFunctions.cpp
     ReactionMatchConstraintsFunctions.cpp
@@ -378,7 +300,6 @@ SET(cdpl-chem_LIB_SRCS
     UtilityFunctions.cpp
     FragmentHydrogenManipulationFunctions.cpp
     AtomTypeFunctions.cpp
-    ResidueFunctions.cpp
   
     MatchConstraintList.cpp
     AtomTypeMatchExpression.cpp
@@ -393,9 +314,6 @@ SET(cdpl-chem_LIB_SRCS
     ReactionComponentGroupingMatchExpression.cpp
 
     AromaticityPerception.cpp
-    StringUtilities.cpp
-    StringDataIOUtilities.cpp
-    PiPiInteractionUtilities.cpp
    )
 
 ADD_LIBRARY(cdpl-chem-static STATIC ${cdpl-chem_LIB_SRCS})
@@ -406,7 +324,7 @@ SET_TARGET_PROPERTIES(cdpl-chem-static PROPERTIES
                       COMPILE_DEFINITIONS "CDPL_CHEM_STATIC_LINK;CDPL_MATH_STATIC_LINK;CDPL_UTIL_STATIC_LINK;CDPL_BASE_STATIC_LINK"
                      )
 
-TARGET_LINK_LIBRARIES(cdpl-chem-static cdpl-math-static cdpl-util-static cdpl-base-static inchi ${Boost_DATE_TIME_LIBRARY})
+TARGET_LINK_LIBRARIES(cdpl-chem-static cdpl-math-static cdpl-util-static cdpl-base-static cdpl-internal-static inchi-static ${Boost_DATE_TIME_LIBRARY})
 
 INSTALL(TARGETS cdpl-chem-static
         DESTINATION "${CDPKIT_LIBRARY_INSTALL_DIR}" COMPONENT CDPLStaticLibraries
@@ -414,7 +332,7 @@ INSTALL(TARGETS cdpl-chem-static
 
 ADD_LIBRARY(cdpl-chem-shared SHARED ${cdpl-chem_LIB_SRCS})
 
-TARGET_LINK_LIBRARIES(cdpl-chem-shared cdpl-base-shared cdpl-math-shared cdpl-util-shared inchi ${Boost_DATE_TIME_LIBRARY})
+TARGET_LINK_LIBRARIES(cdpl-chem-shared cdpl-base-shared cdpl-math-shared cdpl-util-shared cdpl-internal-static inchi-static ${Boost_DATE_TIME_LIBRARY})
 
 IF(APPLE)
   SET_TARGET_PROPERTIES(cdpl-chem-shared PROPERTIES VERSION "${CDPL_SO_VERSION}"

@@ -43,7 +43,7 @@
 #include "CDPL/Math/PrimeNumberTable.hpp"
 #include "CDPL/Math/SpecialFunctions.hpp"
 #include "CDPL/Util/Array.hpp"
-#include "CDPL/Util/SHA1.hpp"
+#include "CDPL/Internal/SHA1.hpp"
 
 
 using namespace CDPL; 
@@ -276,7 +276,7 @@ Base::uint64 Chem::HashCodeCalculator::getResult() const
 {
 	Base::uint64 hash_code = 0;
 
-	for (std::size_t i = 0; i < Util::SHA1::HASH_SIZE; i++) 
+	for (std::size_t i = 0; i < Internal::SHA1::HASH_SIZE; i++) 
 		hash_code = hash_code ^ (Base::uint64(shaHashCode[i]) << ((i % 8) * 8));
 
 	return hash_code;
@@ -723,7 +723,7 @@ void Chem::HashCodeCalculator::sortSHAInput()
 
 void Chem::HashCodeCalculator::calcSHAHashCode()
 {
-	Util::SHA1 sha;
+	Internal::SHA1 sha;
 
 	sha.input(shaInput.begin(), shaInput.end());
 	sha.getResult(&shaHashCode[0]);

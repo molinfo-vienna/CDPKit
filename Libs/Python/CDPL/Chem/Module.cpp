@@ -49,16 +49,11 @@ BOOST_PYTHON_MODULE(_chem)
 	exportBasicBond();
 	exportBasicMolecule();
 	exportBasicReaction();
-	exportPharmacophore();
-	exportFeature();
-	exportBasicPharmacophore();
-	exportBasicFeature();
 	exportFragment();
 	exportEntity3DMapping();
 	exportAtomMapping();
 	exportBondMapping();
 	exportAtomBondMapping();
-	exportFeatureMapping();
 	exportFragmentList();
 	exportMDLDataBlock();
 	exportMassComposition();
@@ -66,6 +61,8 @@ BOOST_PYTHON_MODULE(_chem)
 	exportStereoDescriptor();
 	exportMultiConfMoleculeInputProcessor();
 	exportDefaultMultiConfMoleculeInputProcessor();
+
+	exportBoostFunctionWrappers();
 
 	exportMatchConstraintList();
 	exportMatchExpressions();
@@ -92,37 +89,8 @@ BOOST_PYTHON_MODULE(_chem)
 
 	exportReactor();
 
-	exportPharmacophoreGenerator();
-	exportDefaultPharmacophoreGenerator();
-	exportPatternBasedFeatureGenerator();
-	exportAromaticFeatureGenerator();
-	exportHydrophobicFeatureGenerator();
-	exportHBondAcceptorFeatureGenerator();
-	exportHBondDonorFeatureGenerator();
-	exportPosIonizableFeatureGenerator();
-	exportNegIonizableFeatureGenerator();
-	exportSurfaceXVolumeCoatGenerator();
-	exportFeatureInteractionAnalyzer();
-	exportDefaultFeatureInteractionAnalyzer();
-	exportFeatureInteractionConstraintConnector();
-	exportFeatureDistanceConstraint();
-	exportHydrophobicInteractionConstraint();
-	exportIonicInteractionConstraint();
-	exportOrthogonalPiPiInteractionConstraint();
-	exportParallelPiPiInteractionConstraint();
-	exportCationPiInteractionConstraint();
-	exportHBondingInteractionConstraint();
-
 	exportTopologicalEntityAlignments();
-	exportFeatureTypeMatchFunctor();
-	exportFeaturePairDistanceMatchFunctor();
 	exportGeometricalEntityAlignments();
-	exportPharmacophoreAlignment();
-	exportTopologicalQueryPharmAlignmentFilter();
-    exportGeometricalQueryPharmAlignmentFilter();
-    exportGeometricalFeatureMappingExtractor();
-	exportFeaturePositionMatchFunctor();
-	exportFeatureGeometryMatchFunctor();
 
 	exportCompleteRingSet();
 	exportAromaticRingSet();
@@ -167,8 +135,6 @@ BOOST_PYTHON_MODULE(_chem)
 	exportJMEMolecularGraphWriter();
 	exportJMEReactionReader();
 	exportJMEReactionWriter();
-	exportPDBMoleculeReader();
-	exportPDBMolecularGraphWriter();
 	exportSMILESMoleculeReader();
 	exportSMILESReactionReader();
 	exportSMILESMolecularGraphWriter();
@@ -202,8 +168,6 @@ BOOST_PYTHON_MODULE(_chem)
 	exportJMEReactionInputHandler();
 	exportJMEMolecularGraphOutputHandler();
 	exportJMEReactionOutputHandler();
-	exportPDBMoleculeInputHandler();
-	exportPDBMolecularGraphOutputHandler();
 	exportMOLMoleculeInputHandler();
 	exportMOLMolecularGraphOutputHandler();
 	exportSDFMoleculeInputHandler();
@@ -226,8 +190,6 @@ BOOST_PYTHON_MODULE(_chem)
 	exportAtomProperties();
 	exportBondProperties();
 	exportReactionProperties();
-	exportPharmacophoreProperties();
-	exportFeatureProperties();
 
 	exportControlParameters();
 	exportControlParameterDefaults();
@@ -238,7 +200,6 @@ BOOST_PYTHON_MODULE(_chem)
 	exportBondPropertyFlags();
 	exportReactionRoles();
 	exportAtomTypes();
-	exportResidueTypes();
 	exportAtomConfigurations();
 	exportBondConfigurations();
 	exportBondStereoFlags();
@@ -246,8 +207,6 @@ BOOST_PYTHON_MODULE(_chem)
 	exportReactionCenterStates();
 	exportBondDirections();
 	exportRadicalTypes();
-	exportFeatureTypes();
-	exportFeatureGeometries();
 	exportAtomMatchConstraints();
 	exportBondMatchConstraints();
 	exportMolecularGraphMatchConstraints();
@@ -268,11 +227,8 @@ BOOST_PYTHON_MODULE(_chem)
 	exportMoleculeFunctions();
 	exportFragmentFunctions();
 	exportReactionFunctions();
-	exportPharmacophoreFunctions();
-	exportFeatureFunctions();
 	exportSimilarityFunctions();
 	exportAtomTypeFunctions();
-	exportResidueFunctions();
 
 	registerToPythonConverters();
 	registerFromPythonConverters();

@@ -51,8 +51,6 @@
 #include "CDPL/Chem/SMARTSReactionOutputHandler.hpp"
 #include "CDPL/Chem/INCHIMoleculeInputHandler.hpp"
 #include "CDPL/Chem/INCHIMolecularGraphOutputHandler.hpp"
-#include "CDPL/Chem/PDBMoleculeInputHandler.hpp"
-#include "CDPL/Chem/PDBMolecularGraphOutputHandler.hpp"
 
 
 namespace
@@ -66,7 +64,6 @@ namespace
 	const char* smilesFileExtensions[] = { "smi" };
 	const char* smartsFileExtensions[] = { "sma" };
 	const char* inchiFileExtensions[]  = { "inchi", "ichi" };
-	const char* pdbFileExtensions[]    = { "pdb", "ent" };
 }
 
 
@@ -89,8 +86,6 @@ const Base::DataFormat Chem::DataFormat::SMARTS("SMARTS", "Daylight SMARTS Strin
 												smartsFileExtensions, smartsFileExtensions + 1, true);
 const Base::DataFormat Chem::DataFormat::INCHI("INCHI", "IUPAC International Chemical Identifier", "chemical/x-inchi", 
 											   inchiFileExtensions, inchiFileExtensions + 2, true);
-const Base::DataFormat Chem::DataFormat::PDB("PDB", "Brookhaven Protein Data Bank Entry", "chemical/x-pdb", 
-											 pdbFileExtensions, pdbFileExtensions + 2, false);
 
 namespace CDPL
 {
@@ -119,7 +114,6 @@ namespace
 			static const SMILESMoleculeInputHandler        smilesMolInputHandler;
 			static const SMARTSMoleculeInputHandler        smartsMolInputHandler;
 			static const INCHIMoleculeInputHandler         inchiMolInputHandler;
-			static const PDBMoleculeInputHandler           pdbMolInputHandler;
 
 			static const JMEMolecularGraphOutputHandler    jmeMolGraphOutputHandler;
 			static const MOLMolecularGraphOutputHandler    molMolGraphOutputHandler;
@@ -127,7 +121,6 @@ namespace
 			static const SMILESMolecularGraphOutputHandler smilesMolGraphOutputHandler;
 			static const SMARTSMolecularGraphOutputHandler smartsMolGraphOutputHandler;
 			static const INCHIMolecularGraphOutputHandler  inchiMolGraphOutputHandler;
-			static const PDBMolecularGraphOutputHandler    pdbMolGraphOutputHandler;
 
 			static const JMEReactionInputHandler           jmeRxnInputHandler;
 			static const RXNReactionInputHandler           rxnRxnInputHandler;
@@ -147,7 +140,6 @@ namespace
 			DataIOManager<Molecule>::registerInputHandler(smilesMolInputHandler);
 			DataIOManager<Molecule>::registerInputHandler(smartsMolInputHandler);
 			DataIOManager<Molecule>::registerInputHandler(inchiMolInputHandler);
-			DataIOManager<Molecule>::registerInputHandler(pdbMolInputHandler);
 
 			DataIOManager<MolecularGraph>::registerOutputHandler(jmeMolGraphOutputHandler);
 			DataIOManager<MolecularGraph>::registerOutputHandler(sdfMolGraphOutputHandler);
@@ -155,7 +147,6 @@ namespace
 			DataIOManager<MolecularGraph>::registerOutputHandler(smilesMolGraphOutputHandler);
 			DataIOManager<MolecularGraph>::registerOutputHandler(smartsMolGraphOutputHandler);
 			DataIOManager<MolecularGraph>::registerOutputHandler(inchiMolGraphOutputHandler);
-			DataIOManager<MolecularGraph>::registerOutputHandler(pdbMolGraphOutputHandler);
 
 			DataIOManager<Reaction>::registerInputHandler(jmeRxnInputHandler);
 			DataIOManager<Reaction>::registerInputHandler(rxnRxnInputHandler);

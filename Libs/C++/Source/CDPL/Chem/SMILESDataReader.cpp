@@ -54,10 +54,10 @@
 #include "CDPL/Chem/AtomType.hpp"
 #include "CDPL/Base/Exceptions.hpp"
 #include "CDPL/Base/DataIOBase.hpp"
+#include "CDPL/Internal/StringUtilities.hpp"
 
 #include "SMILESDataReader.hpp"
 #include "SMILESData.hpp"
-#include "StringUtilities.hpp"
 
 
 using namespace CDPL;
@@ -241,7 +241,7 @@ inline void Chem::SMILESDataReader::readName(std::istream& is, T& obj, std::stri
 		if (!is)
 			throw Base::IOError(error_msg);
 
-		trimString(str);
+		Internal::trimString(str);
 
 	} else if (recordFormat == "S$") {
 		if (is.eof())

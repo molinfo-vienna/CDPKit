@@ -44,24 +44,20 @@ namespace CDPLPythonChem
 	void exportBasicBond();
 	void exportBasicMolecule();
 	void exportBasicReaction();
-	void exportPharmacophore();
-	void exportFeature();
-	void exportBasicPharmacophore();
-	void exportBasicFeature();
 	void exportFragment();
 	void exportEntity3DMapping();
 	void exportAtomMapping();
 	void exportBondMapping();
 	void exportAtomBondMapping();
-	void exportFeatureMapping();
 	void exportFragmentList();
 	void exportMDLDataBlock();
-	void exportPDBData();
 	void exportMassComposition();
 	void exportElementHistogram();
 	void exportStereoDescriptor();
 	void exportMultiConfMoleculeInputProcessor();
 	void exportDefaultMultiConfMoleculeInputProcessor();
+
+	void exportBoostFunctionWrappers();
 
 	void exportMatchConstraintList();
 	void exportMatchExpressions();
@@ -88,38 +84,9 @@ namespace CDPLPythonChem
 
 	void exportReactor();
 
-	void exportPharmacophoreGenerator();
-	void exportDefaultPharmacophoreGenerator();
-	void exportPatternBasedFeatureGenerator();
-	void exportAromaticFeatureGenerator();
-	void exportHydrophobicFeatureGenerator();
-	void exportHBondAcceptorFeatureGenerator();
-	void exportHBondDonorFeatureGenerator();
-	void exportPosIonizableFeatureGenerator();
-	void exportNegIonizableFeatureGenerator();
-	void exportSurfaceXVolumeCoatGenerator();
-	void exportFeatureInteractionAnalyzer();
-	void exportDefaultFeatureInteractionAnalyzer();
-	void exportFeatureInteractionConstraintConnector();
-	void exportFeatureDistanceConstraint();
-	void exportHydrophobicInteractionConstraint();
-	void exportIonicInteractionConstraint();
-	void exportOrthogonalPiPiInteractionConstraint();
-	void exportParallelPiPiInteractionConstraint();
-	void exportCationPiInteractionConstraint();
-	void exportHBondingInteractionConstraint();
-
-	void exportFeatureTypeMatchFunctor();
-	void exportFeaturePairDistanceMatchFunctor();
-	void exportFeaturePositionMatchFunctor();
-	void exportFeatureGeometryMatchFunctor();
 	void exportTopologicalEntityAlignments();
 	void exportGeometricalEntityAlignments();
-	void exportPharmacophoreAlignment();
-	void exportTopologicalQueryPharmAlignmentFilter();
-    void exportGeometricalQueryPharmAlignmentFilter();
-    void exportGeometricalFeatureMappingExtractor();
-
+	
 	void exportCompleteRingSet();
 	void exportAromaticRingSet();
 	void exportAromaticSSSRSubset();
@@ -171,8 +138,6 @@ namespace CDPLPythonChem
 	void exportSMARTSReactionReader();
 	void exportSMARTSMolecularGraphWriter();
 	void exportSMARTSReactionWriter();
-	void exportPDBMoleculeReader();
-	void exportPDBMolecularGraphWriter();
 	void exportMOLMoleculeReader();
 	void exportMOLMolecularGraphWriter();
 	void exportSDFMoleculeReader();
@@ -198,8 +163,6 @@ namespace CDPLPythonChem
 	void exportJMEReactionInputHandler();
 	void exportJMEMolecularGraphOutputHandler();
 	void exportJMEReactionOutputHandler();
-	void exportPDBMoleculeInputHandler();
-	void exportPDBMolecularGraphOutputHandler();
 	void exportMOLMoleculeInputHandler();
 	void exportMOLMolecularGraphOutputHandler();
 	void exportSDFMoleculeInputHandler();

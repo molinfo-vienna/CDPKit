@@ -64,11 +64,11 @@
 #include "CDPL/Chem/MultiConfMoleculeInputProcessor.hpp"
 #include "CDPL/Base/Exceptions.hpp"
 #include "CDPL/Base/DataIOBase.hpp"
+#include "CDPL/Internal/StringUtilities.hpp"
+#include "CDPL/Internal/StringDataIOUtilities.hpp"
 
 #include "MDLDataReader.hpp"
 #include "MDLFormatData.hpp"
-#include "StringUtilities.hpp"
-#include "StringDataIOUtilities.hpp"
 
 
 using namespace CDPL;
@@ -79,31 +79,31 @@ namespace
 
 	inline void skipMDLChars(std::istream& is, std::size_t count, const std::string& err_msg)
 	{
-		Chem::skipChars(is, count, err_msg, Chem::MDL::END_OF_LINE);
+		Internal::skipChars(is, count, err_msg, Chem::MDL::END_OF_LINE);
 	}
 
 	inline void skipMDLLines(std::istream& is, std::size_t count, const std::string& err_msg)
 	{
-		Chem::skipLines(is, count, err_msg, Chem::MDL::END_OF_LINE);
+		Internal::skipLines(is, count, err_msg, Chem::MDL::END_OF_LINE);
 	}
 		
 	inline std::string& readMDLLine(std::istream& is, std::string& line, const std::string& err_msg, bool trim = false, 
 									bool check_ll = false, std::size_t max_llen = Chem::MDL::MAX_LINE_LENGTH)
 	{
-		return Chem::readLine(is, line, err_msg, trim, check_ll, max_llen, Chem::MDL::END_OF_LINE);
+		return Internal::readLine(is, line, err_msg, trim, check_ll, max_llen, Chem::MDL::END_OF_LINE);
 	}
 
 	inline std::string& readMDLString(std::istream& is, std::size_t field_size, std::string& str, bool clear,
 									  const std::string& err_msg, bool trim = true)
 	{
-		return Chem::readString(is, field_size, str, clear, err_msg, trim, Chem::MDL::END_OF_LINE);
+		return Internal::readString(is, field_size, str, clear, err_msg, trim, Chem::MDL::END_OF_LINE);
 	}
 
 	template <typename T, std::size_t FieldSize>
 	inline T readMDLNumber(std::istream& is, const std::string& err_msg, bool throw_ex = true, 
 						   const T empty_def_val = T(0), const T err_def_val = T(0))
 	{
-		return Chem::readNumber<T, FieldSize>(is, err_msg, throw_ex, empty_def_val, err_def_val, Chem::MDL::END_OF_LINE);
+		return Internal::readNumber<T, FieldSize>(is, err_msg, throw_ex, empty_def_val, err_def_val, Chem::MDL::END_OF_LINE);
 	}
 }
 
@@ -1753,7 +1753,7 @@ void Chem::MDLDataReader::readRXNHeaderBlock(std::istream& is, Reaction& rxn)
 	readMDLString(is, RXN_FILE_ID_LENGTH, tmpString, true, 
 				  "MDLDataReader: error while reading rxn-file identifier from reaction header block", false);
  
-	trimString(tmpString, false, true);
+	Internal::trimString(tmpString, false, true);
 
 	if (tmpString != RXNFile::RXN_FILE_IDENTIFIER && strictErrorChecking)
 		throw Base::IOError("MDLDataReader: missing rxn-file identifier in reaction header block");
@@ -1843,7 +1843,7 @@ void Chem::MDLDataReader::skipRXNHeaderBlock(std::istream& is)
 	readMDLString(is, RXN_FILE_ID_LENGTH, tmpString, true, 
 				  "MDLDataReader: error while reading rxn-file identifier from reaction header block", false);
  
-	trimString(tmpString, false, true);
+	Internal::trimString(tmpString, false, true);
 
 	if (tmpString != RXNFile::RXN_FILE_IDENTIFIER && strictErrorChecking)
 		throw Base::IOError("MDLDataReader: missing rxn-file identifier in reaction header block");
@@ -1949,7 +1949,7 @@ void Chem::MDLDataReader::readRDFHeaderBlock(std::istream& is)
 	readMDLString(is, RDFile::RD_FILE_IDENTIFIER.length() + 1, tmpString, true, 
 				  "MDLDataReader: error while trying to read rd-file header block", false);
  
-	trimString(tmpString, false, true);
+	Internal::trimString(tmpString, false, true);
 
 	if (tmpString != RDFile::RD_FILE_IDENTIFIER) {
 		is.seekg(last_pos);
@@ -1971,7 +1971,7 @@ void Chem::MDLDataReader::readRDFHeaderBlock(std::istream& is)
 		readMDLString(is, RDFile::DATE_TIME_KEYWORD.length() + 1, tmpString, true, 
 					  "MDLDataReader: error while reading rd-file header block", false);
  
-		trimString(tmpString, false, true);
+		Internal::trimString(tmpString, false, true);
 
 		if (tmpString != RDFile::DATE_TIME_KEYWORD)
 			throw Base::IOError("MDLDataReader: expected date/timestamp keyword at beginning of second rd-file header line");		
@@ -1991,7 +1991,7 @@ void Chem::MDLDataReader::skipRDFHeaderBlock(std::istream& is)
 	readMDLString(is, RDFile::RD_FILE_IDENTIFIER.length() + 1, tmpString, true, 
 				  "MDLDataReader: error while trying to skip rd-file header block", false);
  
-	trimString(tmpString, false, true);
+	Internal::trimString(tmpString, false, true);
 
 	if (tmpString != RDFile::RD_FILE_IDENTIFIER) {
 		is.seekg(last_pos);
@@ -2611,7 +2611,7 @@ void Chem::MDLDataReader::readCTabV3000AtomType(std::istream& is, Atom& atom, Ma
 
 	std::string::const_iterator type_str_beg = tmpString.begin();
 	std::string::const_iterator type_str_end = tmpString.end();
-	std::string::const_iterator first_non_ws_pos = std::find_if(type_str_beg, type_str_end, boost::bind(IsNonWhitespace(), _1));
+	std::string::const_iterator first_non_ws_pos = std::find_if(type_str_beg, type_str_end, boost::bind(Internal::IsNonWhitespace(), _1));
 
 	if (first_non_ws_pos == type_str_end) {
 		setCTabV3000AtomSymbol(tmpString, atom, constr_list);
@@ -2624,7 +2624,7 @@ void Chem::MDLDataReader::readCTabV3000AtomType(std::istream& is, Atom& atom, Ma
 		== std::string::size_type(first_non_ws_pos - type_str_beg)) {
 
 		first_non_ws_pos = std::find_if(first_non_ws_pos + AtomBlock::NOT_ATOM_LIST_TAG.length(), type_str_end, 
-										boost::bind(IsNonWhitespace(), _1));
+										boost::bind(Internal::IsNonWhitespace(), _1));
 
 		if (first_non_ws_pos == type_str_end) {
 			setCTabV3000AtomSymbol(tmpString, atom, constr_list);
@@ -2640,7 +2640,7 @@ void Chem::MDLDataReader::readCTabV3000AtomType(std::istream& is, Atom& atom, Ma
 	}
 
 	std::string::const_iterator last_non_ws_pos = --std::find_if(tmpString.rbegin(), tmpString.rend(), 
-																 boost::bind(IsNonWhitespace(), _1)).base();
+																 boost::bind(Internal::IsNonWhitespace(), _1)).base();
 
 	if (*last_non_ws_pos != AtomBlock::ATOM_LIST_END_DELIMITER) {
 		setCTabV3000AtomSymbol(tmpString, atom, constr_list);
@@ -2659,7 +2659,7 @@ void Chem::MDLDataReader::readCTabV3000AtomType(std::istream& is, Atom& atom, Ma
 	alist_constr_ptr->setType(not_list ? MatchConstraintList::NOT_OR_LIST : MatchConstraintList::OR_LIST);
 
 	for (AListTokenizer::iterator it = tokenizer.begin(); it != tokenizer.end(); ++it) {
-		unsigned int atom_type = getAtomType(!trimStrings ? *it : trimStringCopy(*it));
+		unsigned int atom_type = getAtomType(!trimStrings ? *it : Internal::trimStringCopy(*it));
 
 		if (atom_type != AtomType::UNKNOWN)
 			alist_constr_ptr->addElement(AtomMatchConstraint::TYPE,
@@ -2676,7 +2676,7 @@ void Chem::MDLDataReader::readCTabV3000AtomType(std::istream& is, Atom& atom, Ma
 void Chem::MDLDataReader::setCTabV3000AtomSymbol(std::string& symbol, Atom& atom, MatchConstraintList& constr_list) const
 {
 	if (trimStrings)
-		trimString(symbol);
+		Internal::trimString(symbol);
 
 	setSymbol(atom, symbol);
 	
@@ -3394,7 +3394,7 @@ bool Chem::MDLDataReader::readCTabV3000PropertyKeyword(std::istream& is, std::st
 		return false;
 	}
 
-	trimString(keyword, false, true);
+	Internal::trimString(keyword, false, true);
 
 	if (keyword.empty())
 		throw Base::IOError("MDLDataReader: missing ctab V3000 property keyword");		

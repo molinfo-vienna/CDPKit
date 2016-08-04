@@ -52,6 +52,5 @@ void CDPLPythonChem::exportDataFormats()
 		.def_readonly("SDF", &Chem::DataFormat::SDF)
 		.def_readonly("SMARTS", &Chem::DataFormat::SMARTS)
 		.def_readonly("SMILES", &Chem::DataFormat::SMILES)
-		.def_readonly("PDB", &Chem::DataFormat::PDB)
 		.def_readonly("INCHI", &Chem::DataFormat::INCHI);
 }

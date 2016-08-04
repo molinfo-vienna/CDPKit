@@ -29,6 +29,7 @@
 
 #ifdef CDPL_VIS_STATIC_LINK
 
+
 namespace CDPL
 {
 

@@ -1,0 +1,1 @@
+ADD_TEST("CDPL.Biomol" "${RUN_PYTHON_TESTS}" "${CMAKE_CURRENT_SOURCE_DIR}/TestSuite.py")

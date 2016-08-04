@@ -2,6 +2,7 @@ INCLUDE_DIRECTORIES("${CMAKE_CURRENT_SOURCE_DIR}")
 
 SET(test-suite_SRCS
     Main.cpp
+    ConvenienceHeaderTest.cpp
     FontTest.cpp
     BrushTest.cpp
     PenTest.cpp

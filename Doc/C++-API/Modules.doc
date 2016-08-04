@@ -32,15 +32,6 @@
 \defgroup CDPL_CHEM_STRUCTURE_IMPLEMENTATIONS Implementations
 \ingroup CDPL_CHEM_STRUCTURES
 
-\defgroup CDPL_CHEM_PHARMACOPHORES Representation of Pharmacophores 
-\ingroup CDPL_CHEM_CORE_CLASSES
-
-\defgroup CDPL_CHEM_PHARMACOPHORE_INTERFACES Interfaces
-\ingroup CDPL_CHEM_PHARMACOPHORES
-
-\defgroup CDPL_CHEM_PHARMACOPHORE_IMPLEMENTATIONS Implementations
-\ingroup CDPL_CHEM_PHARMACOPHORES
-
 \defgroup CDPL_CHEM_REACTIONS Representation of Chemical Reactions
 \ingroup CDPL_CHEM_CORE_CLASSES
 
@@ -149,9 +140,6 @@
 \defgroup CDPL_CHEM_REACTION_SUBSTRUCTURE_SEARCH Reaction Substructure Search
 \ingroup CDPL_CHEM_SUBSTRUCTURE_SEARCH
 
-\defgroup CDPL_CHEM_PHARMACOPHORE_PERCEPTION Pharmacophore Perception 
-\ingroup CDPL_CHEM
-
 \defgroup CDPL_CHEM_ALIGNMENT Chemical Entity Alignment 
 \ingroup CDPL_CHEM
 
@@ -206,12 +194,6 @@
 \defgroup CDPL_CHEM_REACTION_PROPERTIES Reaction Properties
 \ingroup CDPL_CHEM_PROPERTIES
 
-\defgroup CDPL_CHEM_FEATURE_PROPERTIES Pharmacophore Feature Properties
-\ingroup CDPL_CHEM_PROPERTIES
-
-\defgroup CDPL_CHEM_PHARMACOPHORE_PROPERTIES Pharmacophore Properties
-\ingroup CDPL_CHEM_PROPERTIES
-
 \defgroup CDPL_CHEM_CONTROL_PARAMETERS Control-Parameter Keys
 \ingroup CDPL_CHEM
 
@@ -222,9 +204,6 @@
 \ingroup CDPL_CHEM
 
 \defgroup CDPL_CHEM_ATOM_TYPE_FUNCTIONS Atom Type related Functions
-\ingroup CDPL_CHEM_FUNCTIONS
-
-\defgroup CDPL_CHEM_RESIDUE_FUNCTIONS Biopolymer Residue related Functions
 \ingroup CDPL_CHEM_FUNCTIONS
 
 \defgroup CDPL_CHEM_CONTROL_PARAMTER_FUNCTIONS Control-Parameter Functions
@@ -260,17 +239,98 @@
 \defgroup CDPL_CHEM_REACTION_FUNCTIONS Reaction Functions
 \ingroup CDPL_CHEM_FUNCTIONS
 
-\defgroup CDPL_CHEM_FEATURE_FUNCTIONS Pharmacophore Feature Functions
-\ingroup CDPL_CHEM_FUNCTIONS
-
-\defgroup CDPL_CHEM_PHARMACOPHORE_FUNCTIONS Pharmacophore Functions
-\ingroup CDPL_CHEM_FUNCTIONS
-
 \defgroup CDPL_CHEM_SIMILARITY_FUNCTIONS Similarity Functions
 \ingroup CDPL_CHEM_FUNCTIONS
 
 \defgroup CDPL_CHEM_UTILITY_FUNCTIONS Utility Functions
 \ingroup CDPL_CHEM_FUNCTIONS
+
+
+\defgroup CDPL_BIOMOL Biological Macromolecule Handling
+
+\defgroup CDPL_BIOMOL_DATA_STRUCTURES Auxiliary Data Structures
+\ingroup CDPL_BIOMOL
+
+\defgroup CDPL_BIOMOL_PROPERTIES Property Keys
+\ingroup CDPL_BIOMOL
+
+\defgroup CDPL_BIOMOL_ATOM_PROPERTIES Atom Properties
+\ingroup CDPL_BIOMOL_PROPERTIES
+
+\defgroup CDPL_BIOMOL_MOLECULAR_GRAPH_PROPERTIES Molecular Graph Properties
+\ingroup CDPL_BIOMOL_PROPERTIES
+
+\defgroup CDPL_BIOMOL_DATA_IO Data I/O
+\ingroup CDPL_BIOMOL
+
+\defgroup CDPL_BIOMOL_DATA_FORMATS Data Format Descriptors
+\ingroup CDPL_BIOMOL_DATA_IO
+
+\defgroup CDPL_BIOMOL_PDB_IO Brookhaven Protein Databank (PDB) File I/O 
+\ingroup CDPL_BIOMOL_DATA_IO
+
+\defgroup CDPL_BIOMOL_CONSTANTS Flags and Constants
+\ingroup CDPL_BIOMOL
+
+\defgroup CDPL_BIOMOL_FUNCTIONS Free Functions
+\ingroup CDPL_BIOMOL
+
+\defgroup CDPL_BIOMOL_ATOM_FUNCTIONS Atom Functions
+\ingroup CDPL_BIOMOL_FUNCTIONS
+
+\defgroup CDPL_BIOMOL_MOLECULAR_GRAPH_FUNCTIONS MolecularGraph Functions
+\ingroup CDPL_BIOMOL_FUNCTIONS
+
+\defgroup CDPL_BIOMOL_RESIDUE_FUNCTIONS Residue Database Functions
+\ingroup CDPL_BIOMOL_FUNCTIONS
+
+
+\defgroup CDPL_PHARM Pharmacophore Perception and Applications
+
+\defgroup CDPL_PHARM_PHARMACOPHORES Representation of Pharmacophores 
+\ingroup CDPL_PHARM
+
+\defgroup CDPL_PHARM_PHARMACOPHORE_INTERFACES Interfaces
+\ingroup CDPL_PHARM_PHARMACOPHORES
+
+\defgroup CDPL_PHARM_PHARMACOPHORE_IMPLEMENTATIONS Implementations
+\ingroup CDPL_PHARM_PHARMACOPHORES
+
+\defgroup CDPL_PHARM_DATA_STRUCTURES Auxiliary Data Structures
+\ingroup CDPL_PHARM
+
+\defgroup CDPL_PHARM_DATA_IO Data I/O
+\ingroup CDPL_PHARM
+
+\defgroup CDPL_PHARM_DATA_FORMATS Data Format Descriptors
+\ingroup CDPL_PHARM_DATA_IO
+
+\defgroup CDPL_PHARM_PHARMACOPHORE_PERCEPTION Pharmacophore Perception 
+\ingroup CDPL_PHARM
+
+\defgroup CDPL_PHARM_ALIGNMENT Pharmacophore Alignment 
+\ingroup CDPL_PHARM
+
+\defgroup CDPL_PHARM_PROPERTIES Property Keys
+\ingroup CDPL_PHARM
+
+\defgroup CDPL_PHARM_FEATURE_PROPERTIES Pharmacophore Feature Properties
+\ingroup CDPL_PHARM_PROPERTIES
+
+\defgroup CDPL_PHARM_PHARMACOPHORE_PROPERTIES Pharmacophore Properties
+\ingroup CDPL_PHARM_PROPERTIES
+
+\defgroup CDPL_PHARM_CONSTANTS Flags and Constants
+\ingroup CDPL_PHARM
+
+\defgroup CDPL_PHARM_FUNCTIONS Free Functions
+\ingroup CDPL_PHARM
+
+\defgroup CDPL_PHARM_FEATURE_FUNCTIONS Pharmacophore Feature Functions
+\ingroup CDPL_PHARM_FUNCTIONS
+
+\defgroup CDPL_PHARM_PHARMACOPHORE_FUNCTIONS Pharmacophore Functions
+\ingroup CDPL_PHARM_FUNCTIONS
 
 
 \defgroup CDPL_MATH Mathematics

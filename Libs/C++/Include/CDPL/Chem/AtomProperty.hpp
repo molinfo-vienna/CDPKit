@@ -97,22 +97,6 @@ namespace CDPL
 			extern CDPL_CHEM_API const Base::LookupKey MATCH_EXPRESSION_STRING;
 		
 			extern CDPL_CHEM_API const Base::LookupKey COMPONENT_GROUP_ID;
-
-			extern CDPL_CHEM_API const Base::LookupKey RESIDUE_ATOM_NAME;
-			extern CDPL_CHEM_API const Base::LookupKey RESIDUE_ALT_ATOM_NAME;
-			extern CDPL_CHEM_API const Base::LookupKey RESIDUE_LEAVING_ATOM_FLAG;
-			extern CDPL_CHEM_API const Base::LookupKey RESIDUE_LINKING_ATOM_FLAG;
-			extern CDPL_CHEM_API const Base::LookupKey RESIDUE_CODE;
-			extern CDPL_CHEM_API const Base::LookupKey RESIDUE_SEQUENCE_NUMBER;
-			extern CDPL_CHEM_API const Base::LookupKey RESIDUE_INSERTION_CODE;
-
-			extern CDPL_CHEM_API const Base::LookupKey HETERO_ATOM_FLAG;
-			extern CDPL_CHEM_API const Base::LookupKey SERIAL_NUMBER;
-			extern CDPL_CHEM_API const Base::LookupKey CHAIN_ID;
-			extern CDPL_CHEM_API const Base::LookupKey ALT_LOCATION_ID;
-			extern CDPL_CHEM_API const Base::LookupKey MODEL_NUMBER;
-			extern CDPL_CHEM_API const Base::LookupKey OCCUPANCY;
-			extern CDPL_CHEM_API const Base::LookupKey B_FACTOR;
 		}
 
 		/**

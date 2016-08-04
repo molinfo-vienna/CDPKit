@@ -85,6 +85,8 @@ def cleanModuleName(name):
 	name = name.replace('._base', '')
 	name = name.replace('._math', '')
 	name = name.replace('._util', '')
+	name = name.replace('._pharm', '')
+	name = name.replace('._biomol', '')
 	name = name.replace('.Exceptions', '')
 	name = name.replace('__builtin__', '')
 
@@ -468,7 +470,7 @@ def genPythonAPIDocFiles():
 	functions = []
 	variables = []
 	
-	ignored_names = [ '__builtins__', '__doc__', '__file__', '__name__', '__path__', '_chem', '_base', '_math', '_util', '_vis', '__package__' ]
+	ignored_names = [ '__builtins__', '__doc__', '__file__', '__name__', '__path__', '_chem', '_pharm', '_biomol', '_base', '_math', '_util', '_vis', '__package__' ]
 	exported_names = []
 
 	if hasattr(module, '__all__'):

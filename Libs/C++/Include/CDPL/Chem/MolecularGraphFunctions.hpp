@@ -41,7 +41,6 @@
 #include "CDPL/Chem/MatchConstraintList.hpp"
 #include "CDPL/Chem/MatchExpression.hpp"
 #include "CDPL/Chem/MDLDataBlock.hpp"
-#include "CDPL/Chem/PDBData.hpp"
 #include "CDPL/Chem/MassComposition.hpp"
 #include "CDPL/Chem/ElementHistogram.hpp"
 #include "CDPL/Chem/AtomPropertyFlag.hpp"
@@ -182,61 +181,7 @@ namespace CDPL
 
 		CDPL_CHEM_API bool hasStoichiometricNumber(const MolecularGraph& molgraph);
 
-
-		CDPL_CHEM_API const std::string& getResidueCode(const MolecularGraph& molgraph);
-
-		CDPL_CHEM_API void setResidueCode(MolecularGraph& molgraph, const std::string& code);
-
-		CDPL_CHEM_API void clearResidueCode(MolecularGraph& molgraph);
-
-		CDPL_CHEM_API bool hasResidueCode(const MolecularGraph& molgraph);
-
-
-		CDPL_CHEM_API std::size_t getResidueSequenceNumber(const MolecularGraph& molgraph);
-
-		CDPL_CHEM_API void setResidueSequenceNumber(MolecularGraph& molgraph, std::size_t seq_no);
-
-		CDPL_CHEM_API void clearResidueSequenceNumber(MolecularGraph& molgraph);
-
-		CDPL_CHEM_API bool hasResidueSequenceNumber(const MolecularGraph& molgraph);
-
-
-		CDPL_CHEM_API char getResidueInsertionCode(const MolecularGraph& molgraph);
-
-		CDPL_CHEM_API void setResidueInsertionCode(MolecularGraph& molgraph, char code);
-
-		CDPL_CHEM_API void clearResidueInsertionCode(MolecularGraph& molgraph);
-
-		CDPL_CHEM_API bool hasResidueInsertionCode(const MolecularGraph& molgraph);
-
-
-		CDPL_CHEM_API char getChainID(const MolecularGraph& molgraph);
-
-		CDPL_CHEM_API void setChainID(MolecularGraph& molgraph, char id);
-
-		CDPL_CHEM_API void clearChainID(MolecularGraph& molgraph);
-
-		CDPL_CHEM_API bool hasChainID(const MolecularGraph& molgraph);
-
-
-		CDPL_CHEM_API std::size_t getModelNumber(const MolecularGraph& molgraph);
-
-		CDPL_CHEM_API void setModelNumber(MolecularGraph& molgraph, std::size_t model_no);
-
-		CDPL_CHEM_API void clearModelNumber(MolecularGraph& molgraph);
-
-		CDPL_CHEM_API bool hasModelNumber(const MolecularGraph& molgraph);
 	
-
-		CDPL_CHEM_API const PDBData::SharedPointer& getPDBData(const MolecularGraph& molgraph);
-
-		CDPL_CHEM_API void setPDBData(MolecularGraph& molgraph, const PDBData::SharedPointer& data);
-
-		CDPL_CHEM_API void clearPDBData(MolecularGraph& molgraph);
-	
-		CDPL_CHEM_API bool hasPDBData(const MolecularGraph& molgraph);
-
-
 		CDPL_CHEM_API const std::string& getMDLUserInitials(const MolecularGraph& molgraph);
 
 		CDPL_CHEM_API void setMDLUserInitials(MolecularGraph& molgraph, const std::string& initials);
@@ -567,14 +512,7 @@ namespace CDPL
 		CDPL_CHEM_API void setAtomTypesFromSymbols(MolecularGraph& molgraph, bool overwrite);
 
 		CDPL_CHEM_API void setAtomSymbolsFromTypes(MolecularGraph& molgraph, bool overwrite);
-
 		
-		CDPL_CHEM_API void extractProximalAtoms(const MolecularGraph& core, const MolecularGraph& macromol, Fragment& env_atoms, double max_dist);
-
-		CDPL_CHEM_API void extractEnvironmentResidues(const MolecularGraph& core, const MolecularGraph& macromol, Fragment& env_residues, double max_dist);
-
-		CDPL_CHEM_API void setHydrogenResidueSequenceInfo(MolecularGraph& molgraph, bool overwrite, unsigned int flags = AtomPropertyFlag::DEFAULT);
-
 		/**
 		 * @}
 		 */

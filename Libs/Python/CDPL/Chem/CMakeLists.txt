@@ -22,19 +22,13 @@ SET(chem_MOD_SRCS
     BasicBondExport.cpp
     BasicMoleculeExport.cpp
     BasicReactionExport.cpp
-    PharmacophoreExport.cpp
-    FeatureExport.cpp
-    BasicPharmacophoreExport.cpp
-    BasicFeatureExport.cpp
     FragmentExport.cpp 
     Entity3DMappingExport.cpp 
     AtomMappingExport.cpp 
     BondMappingExport.cpp 
     AtomBondMappingExport.cpp 
-    FeatureMappingExport.cpp 
     FragmentListExport.cpp 
     MDLDataBlockExport.cpp
-    PDBDataExport.cpp
     ElementHistogramExport.cpp
     MassCompositionExport.cpp
     StereoDescriptorExport.cpp
@@ -66,38 +60,9 @@ SET(chem_MOD_SRCS
 
     ReactorExport.cpp 
   
-    PharmacophoreGeneratorExport.cpp
-    DefaultPharmacophoreGeneratorExport.cpp
-    PatternBasedFeatureGeneratorExport.cpp
-    AromaticFeatureGeneratorExport.cpp
-    HydrophobicFeatureGeneratorExport.cpp
-    HBondAcceptorFeatureGeneratorExport.cpp
-    HBondDonorFeatureGeneratorExport.cpp
-    PosIonizableFeatureGeneratorExport.cpp
-    NegIonizableFeatureGeneratorExport.cpp
-    SurfaceXVolumeCoatGeneratorExport.cpp
-    FeatureInteractionAnalyzerExport.cpp
-    DefaultFeatureInteractionAnalyzerExport.cpp
-    FeatureInteractionConstraintConnectorExport.cpp
-    FeatureDistanceConstraintExport.cpp
-    HydrophobicInteractionConstraintExport.cpp
-    IonicInteractionConstraintExport.cpp
-    OrthogonalPiPiInteractionConstraintExport.cpp
-    ParallelPiPiInteractionConstraintExport.cpp
-    CationPiInteractionConstraintExport.cpp
-    HBondingInteractionConstraintExport.cpp
-
     TopologicalEntityAlignmentExport.cpp	
-    FeatureTypeMatchFunctorExport.cpp
-    FeaturePairDistanceMatchFunctorExport.cpp
     GeometricalEntityAlignmentExport.cpp
-    PharmacophoreAlignmentExport.cpp
-    TopologicalQueryPharmAlignmentFilterExport.cpp
-    GeometricalQueryPharmAlignmentFilterExport.cpp
-    GeometricalFeatureMappingExtractorExport.cpp
-    FeaturePositionMatchFunctorExport.cpp
-    FeatureGeometryMatchFunctorExport.cpp
-
+   
     CompleteRingSetExport.cpp 
     AromaticRingSetExport.cpp 
     AromaticSSSRSubsetExport.cpp 
@@ -144,8 +109,6 @@ SET(chem_MOD_SRCS
     JMEReactionInputHandlerExport.cpp 
     JMEMolecularGraphOutputHandlerExport.cpp 
     JMEReactionOutputHandlerExport.cpp 
-    PDBMoleculeInputHandlerExport.cpp 
-    PDBMolecularGraphOutputHandlerExport.cpp 
     MOLMoleculeInputHandlerExport.cpp 
     MOLMolecularGraphOutputHandlerExport.cpp 
     SDFMoleculeInputHandlerExport.cpp 
@@ -175,8 +138,6 @@ SET(chem_MOD_SRCS
     JMEMolecularGraphWriterExport.cpp 
     JMEReactionReaderExport.cpp 
     JMEReactionWriterExport.cpp 
-    PDBMoleculeReaderExport.cpp 
-    PDBMolecularGraphWriterExport.cpp 
     SMILESMoleculeReaderExport.cpp 
     SMILESReactionReaderExport.cpp 
     SMILESMolecularGraphWriterExport.cpp 
@@ -199,8 +160,6 @@ SET(chem_MOD_SRCS
     AtomPropertyExport.cpp 
     BondPropertyExport.cpp 
     ReactionPropertyExport.cpp 
-    PharmacophorePropertyExport.cpp 
-    FeaturePropertyExport.cpp 
     ControlParameterExport.cpp 
     ControlParameterDefaultExport.cpp 
     DataFormatExport.cpp 
@@ -208,9 +167,6 @@ SET(chem_MOD_SRCS
     BondPropertyFlagExport.cpp 
     ReactionRoleExport.cpp 
     AtomTypeExport.cpp 
-    FeatureTypeExport.cpp 
-    FeatureGeometryExport.cpp 
-    ResidueTypeExport.cpp 
     AtomConfigurationExport.cpp 
     BondConfigurationExport.cpp 
     BondStereoFlagExport.cpp 
@@ -238,11 +194,10 @@ SET(chem_MOD_SRCS
     MoleculeFunctionExport.cpp 
     FragmentFunctionExport.cpp 
     ReactionFunctionExport.cpp 
-    PharmacophoreFunctionExport.cpp 
-    FeatureFunctionExport.cpp 
     SimilarityFunctionExport.cpp 
     AtomTypeFunctionExport.cpp 
-    ResidueFunctionExport.cpp 
+
+    BoostFunctionWrapperExport.cpp
 
     ToPythonConverterRegistration.cpp 
     FromPythonConverterRegistration.cpp 

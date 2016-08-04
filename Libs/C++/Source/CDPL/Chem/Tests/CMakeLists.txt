@@ -2,6 +2,7 @@ INCLUDE_DIRECTORIES("${CMAKE_CURRENT_SOURCE_DIR}")
 
 SET(test-suite_SRCS
     Main.cpp
+    ConvenienceHeaderTest.cpp
     BasicReactionTest.cpp
     BasicMoleculeTest.cpp
     BasicAtomTest.cpp
@@ -10,10 +11,6 @@ SET(test-suite_SRCS
     MoleculeTest.cpp
     AtomTest.cpp
     BondTest.cpp
-    FeatureTest.cpp
-    BasicFeatureTest.cpp
-    PharmacophoreTest.cpp
-    BasicPharmacophoreTest.cpp
     #AtomContainerTest.cpp
     #BondContainerTest.cpp
     FragmentTest.cpp

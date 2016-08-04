@@ -76,14 +76,6 @@ namespace CDPL
 
 			extern CDPL_CHEM_API const Base::LookupKey CONFORMATION_INDEX;
 
-			extern CDPL_CHEM_API const Base::LookupKey RESIDUE_CODE;
-			extern CDPL_CHEM_API const Base::LookupKey RESIDUE_SEQUENCE_NUMBER;
-			extern CDPL_CHEM_API const Base::LookupKey RESIDUE_INSERTION_CODE;
-
-			extern CDPL_CHEM_API const Base::LookupKey CHAIN_ID;
-			extern CDPL_CHEM_API const Base::LookupKey MODEL_NUMBER;
-			extern CDPL_CHEM_API const Base::LookupKey PDB_DATA;
-
 			extern CDPL_CHEM_API const Base::LookupKey MDL_USER_INITIALS;
 			extern CDPL_CHEM_API const Base::LookupKey MDL_PROGRAM_NAME;
 			extern CDPL_CHEM_API const Base::LookupKey MDL_TIMESTAMP;

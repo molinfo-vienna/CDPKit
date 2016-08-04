@@ -31,7 +31,9 @@
 
 #include <algorithm>
 #include <cmath>
+#include <limits>
 #include <cstddef>
+#include <vector>
 
 #include <boost/swap.hpp>
 

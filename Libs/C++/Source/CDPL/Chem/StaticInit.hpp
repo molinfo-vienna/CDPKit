@@ -29,6 +29,7 @@
 
 #ifdef CDPL_CHEM_STATIC_LINK
 
+
 namespace CDPL
 {
 
@@ -40,8 +41,6 @@ namespace CDPL
 		void initMolecularGraphProperties();
 		void initReactionProperties();
 		void initEntity3DProperties();
-		void initPharmacophoreProperties();
-		void initPharmacophoreFeatureProperties();
 		void initControlParameters();
 		void initControlParameterDefaults();
 		void initDataFormats();
@@ -60,8 +59,6 @@ namespace
 			CDPL::Chem::initMolecularGraphProperties();
 			CDPL::Chem::initReactionProperties();
 			CDPL::Chem::initEntity3DProperties();
-			CDPL::Chem::initPharmacophoreProperties();
-			CDPL::Chem::initPharmacophoreFeatureProperties();
 			CDPL::Chem::initControlParameters();
 			CDPL::Chem::initControlParameterDefaults();
 			CDPL::Chem::initDataFormats();

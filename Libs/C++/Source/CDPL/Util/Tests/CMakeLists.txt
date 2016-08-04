@@ -2,6 +2,7 @@ INCLUDE_DIRECTORIES("${CMAKE_CURRENT_SOURCE_DIR}")
 
 SET(test-suite_SRCS
     Main.cpp
+    ConvenienceHeaderTest.cpp
     MapTest.cpp                     # TODO
     MultiMapTest.cpp                # TODO
     ArrayTest.cpp                   # TODO
@@ -13,8 +14,6 @@ SET(test-suite_SRCS
     StreamDataReaderTest.cpp
     PropertyValueTest.cpp
     PropertyValueProductTest.cpp
-    AddressOfTest.cpp
-    SHA1Test.cpp
     BronKerboschAlgorithmTest.cpp
    )
 

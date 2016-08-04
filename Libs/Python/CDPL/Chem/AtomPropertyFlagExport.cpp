@@ -55,10 +55,5 @@ void CDPLPythonChem::exportAtomPropertyFlags()
 		.def_readonly("ISOTOPE", &Chem::AtomPropertyFlag::ISOTOPE)
 		.def_readonly("SYMBOL", &Chem::AtomPropertyFlag::SYMBOL)
 		.def_readonly("TOPOLOGY", &Chem::AtomPropertyFlag::TOPOLOGY)
-		.def_readonly("ATOM_MAPPING_ID", &Chem::AtomPropertyFlag::TOPOLOGY)
-		.def_readonly("RESIDUE_CODE", &Chem::AtomPropertyFlag::RESIDUE_CODE)
-		.def_readonly("RESIDUE_SEQ_NO", &Chem::AtomPropertyFlag::RESIDUE_SEQ_NO)
-		.def_readonly("RESIDUE_INS_CODE", &Chem::AtomPropertyFlag::RESIDUE_INS_CODE)
-		.def_readonly("CHAIN_ID", &Chem::AtomPropertyFlag::CHAIN_ID)
-		.def_readonly("MODEL_NUMBER", &Chem::AtomPropertyFlag::MODEL_NUMBER);
+		.def_readonly("ATOM_MAPPING_ID", &Chem::AtomPropertyFlag::TOPOLOGY);
 }

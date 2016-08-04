@@ -95,12 +95,6 @@ namespace
 	MAKE_MOLGRAPH_FUNC_WRAPPERS(const CDPL::Math::ULMatrix::SharedPointer&, TopologicalDistanceMatrix)
 	MAKE_MOLGRAPH_FUNC_WRAPPERS(const CDPL::Math::DMatrix::SharedPointer&, GeometricalDistanceMatrix)
 	MAKE_MOLGRAPH_FUNC_WRAPPERS(std::size_t, ConformationIndex)
-	MAKE_MOLGRAPH_FUNC_WRAPPERS(const std::string&, ResidueCode)
-	MAKE_MOLGRAPH_FUNC_WRAPPERS(std::size_t, ResidueSequenceNumber)
-	MAKE_MOLGRAPH_FUNC_WRAPPERS(char, ResidueInsertionCode)
-	MAKE_MOLGRAPH_FUNC_WRAPPERS(char, ChainID)
-	MAKE_MOLGRAPH_FUNC_WRAPPERS(std::size_t, ModelNumber)
-	MAKE_MOLGRAPH_FUNC_WRAPPERS(const CDPL::Chem::PDBData::SharedPointer&, PDBData)
 
 	MAKE_FUNCTION_WRAPPER1(const CDPL::Chem::MatchConstraintList::SharedPointer&, getMatchConstraints, CDPL::Chem::MolecularGraph&)
 	MAKE_FUNCTION_WRAPPER1(bool, hasMatchConstraints, CDPL::Chem::MolecularGraph&)
@@ -154,9 +148,6 @@ namespace
 	MAKE_FUNCTION_WRAPPER2(std::size_t, getOrdinaryHydrogenCount, CDPL::Chem::MolecularGraph&, unsigned int);
 	MAKE_FUNCTION_WRAPPER2(std::size_t, getExplicitOrdinaryHydrogenCount, CDPL::Chem::MolecularGraph&, unsigned int);
 	MAKE_FUNCTION_WRAPPER2(std::size_t, getBondCount, CDPL::Chem::MolecularGraph&, std::size_t);
-
-	MAKE_FUNCTION_WRAPPER4(void, extractEnvironmentResidues, CDPL::Chem::MolecularGraph&, CDPL::Chem::MolecularGraph&, CDPL::Chem::Fragment&, double);
-	MAKE_FUNCTION_WRAPPER4(void, extractProximalAtoms, CDPL::Chem::MolecularGraph&, CDPL::Chem::MolecularGraph&, CDPL::Chem::Fragment&, double);
 
 	MAKE_FUNCTION_WRAPPER5(CDPL::Base::uint64, calcHashCode, CDPL::Chem::MolecularGraph&,
 	 					   unsigned int, unsigned int, bool, bool)
@@ -285,8 +276,6 @@ void CDPLPythonChem::exportMolecularGraphFunctions()
 				(python::arg("molgraph"), python::arg("overwrite")));
 	python::def("setAtomSymbolsFromTypes", &Chem::setAtomSymbolsFromTypes,
 				(python::arg("molgraph"), python::arg("overwrite")));
-	python::def("setHydrogenResidueSequenceInfo", &Chem::setHydrogenResidueSequenceInfo, 
-				(python::arg("molgraph"), python::arg("overwrite"), python::arg("flags") = Chem::AtomPropertyFlag::DEFAULT));
 
 	python::def("buildMatchExpression", &buildMatchExpressionWrapper1,
 	 			python::arg("molgraph"), python::with_custodian_and_ward_postcall<0, 1>());
@@ -384,13 +373,6 @@ void CDPLPythonChem::exportMolecularGraphFunctions()
 	python::def("calcMeanPolarizability", &calcMeanPolarizabilityWrapper1, python::arg("molgraph"));
 	python::def("calcMolecularComplexity", &calcMolecularComplexityWrapper1, python::arg("molgraph"));
 
-	python::def("extractEnvironmentResidues", &extractEnvironmentResiduesWrapper4, 
-				(python::arg("core"), python::arg("macromol"), python::arg("env_residues"),
-				 python::arg("max_dist")));
-	python::def("extractProximalAtoms", &extractProximalAtomsWrapper4, 
-				(python::arg("core"), python::arg("macromol"), python::arg("env_atoms"),
-				 python::arg("max_dist")));
-
 	python::def("generateINCHI", &generateINCHIWrapper, 
 				(python::arg("molgraph"), python::arg("options") = Chem::ControlParameterDefault::INCHI_OUTPUT_OPTIONS,
 				 python::arg("dim") = 0));
@@ -433,12 +415,6 @@ void CDPLPythonChem::exportMolecularGraphFunctions()
 	EXPORT_MOLGRAPH_FUNCS(MDLChiralFlag, flag)
 	EXPORT_MOLGRAPH_FUNCS(StoichiometricNumber, num)
 	EXPORT_MOLGRAPH_FUNCS(ConformationIndex, index)
-	EXPORT_MOLGRAPH_FUNCS_COPY_REF(ResidueCode, code)
-	EXPORT_MOLGRAPH_FUNCS(ResidueSequenceNumber, seq_no)
-	EXPORT_MOLGRAPH_FUNCS(ResidueInsertionCode, code)
-	EXPORT_MOLGRAPH_FUNCS(ChainID, id)
-	EXPORT_MOLGRAPH_FUNCS(ModelNumber, model_no)
-	EXPORT_MOLGRAPH_FUNCS_COPY_REF(PDBData, data)
 	EXPORT_MOLGRAPH_FUNCS_COPY_REF(MDLComment, comment)
 	EXPORT_MOLGRAPH_FUNCS_COPY_REF(MDLStructureData, data)
 	EXPORT_MOLGRAPH_FUNCS_COPY_REF(TopologicalDistanceMatrix, mtx)

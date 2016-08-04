@@ -18,6 +18,12 @@
 \namespace CDPL::Vis
 \brief Contains classes and functions related to data visualization.
 
+\namespace CDPL::Pharm
+\brief Contains classes and functions related to pharmacophore perception and pharmacophore applications.
+
+\namespace CDPL::Biomol
+\brief Contains classes and functions related to biological macromolecules.
+
 \namespace boost
 \brief The namespace of the Boost C++ Libraries (see [\ref BOOST] for details).
 

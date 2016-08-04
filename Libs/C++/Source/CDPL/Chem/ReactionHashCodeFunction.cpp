@@ -34,7 +34,7 @@
 #include "CDPL/Chem/FragmentFunctions.hpp"
 #include "CDPL/Chem/Reaction.hpp"
 #include "CDPL/Chem/HashCodeCalculator.hpp"
-#include "CDPL/Util/SHA1.hpp"
+#include "CDPL/Internal/SHA1.hpp"
 
 
 using namespace CDPL; 
@@ -98,11 +98,11 @@ Base::uint64 Chem::calcHashCode(const Reaction& rxn, unsigned int role_mask,
 		hash_offs = comp_hashes.size();
 	}
 
-	Util::SHA1 sha;
+	Internal::SHA1 sha;
 
 	sha.input(comp_hashes.begin(), comp_hashes.end());
 
-	unsigned char sha_hash[Util::SHA1::HASH_SIZE];
+	unsigned char sha_hash[Internal::SHA1::HASH_SIZE];
 
 	sha.getResult(sha_hash);
 

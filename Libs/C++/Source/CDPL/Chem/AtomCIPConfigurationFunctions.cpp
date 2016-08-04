@@ -39,8 +39,8 @@
 #include "CDPL/Chem/AtomConfiguration.hpp"
 #include "CDPL/Chem/HybridizationState.hpp"
 #include "CDPL/Chem/AtomPropertyFlag.hpp"
-#include "CDPL/Util/AddressOf.hpp"
 #include "CDPL/Util/Dereferencer.hpp"
+#include "CDPL/Internal/AddressOf.hpp"
 
 
 using namespace CDPL; 

@@ -32,7 +32,6 @@ namespace CDPLPythonChem
 {
 
 	void exportAtomTypeFunctions();
-	void exportResidueFunctions();
 	void exportUtilityFunctions();
 	void exportControlParameterFunctions();
 	void exportAtomContainerFunctions();
@@ -45,8 +44,6 @@ namespace CDPLPythonChem
 	void exportMoleculeFunctions();
 	void exportFragmentFunctions();
 	void exportReactionFunctions();
-	void exportPharmacophoreFunctions();
-	void exportFeatureFunctions();
 	void exportSimilarityFunctions();
 }
 

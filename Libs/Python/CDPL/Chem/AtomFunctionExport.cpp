@@ -121,20 +121,6 @@ namespace
 	MAKE_ATOM_FUNC_WRAPPERS(MatchExpressionPtrRef, MatchExpression)
 	MAKE_ATOM_FUNC_WRAPPERS(const std::string&, MatchExpressionString)
 	MAKE_ATOM_FUNC_WRAPPERS(const CDPL::Chem::StereoDescriptor&, StereoDescriptor)
-	MAKE_ATOM_FUNC_WRAPPERS(bool, ResidueLeavingAtomFlag)
-	MAKE_ATOM_FUNC_WRAPPERS(bool, ResidueLinkingAtomFlag)
-	MAKE_ATOM_FUNC_WRAPPERS(const std::string&, ResidueAtomName)
-	MAKE_ATOM_FUNC_WRAPPERS(const std::string&, ResidueAltAtomName)
-	MAKE_ATOM_FUNC_WRAPPERS(const std::string&, ResidueCode)
-	MAKE_ATOM_FUNC_WRAPPERS(bool, HeteroAtomFlag)
-	MAKE_ATOM_FUNC_WRAPPERS(std::size_t, ResidueSequenceNumber)
-	MAKE_ATOM_FUNC_WRAPPERS(char, ResidueInsertionCode)
-	MAKE_ATOM_FUNC_WRAPPERS(char, ChainID)
-	MAKE_ATOM_FUNC_WRAPPERS(char, AltLocationID)
-	MAKE_ATOM_FUNC_WRAPPERS(std::size_t, ModelNumber)
-	MAKE_ATOM_FUNC_WRAPPERS(std::size_t, SerialNumber)
-	MAKE_ATOM_FUNC_WRAPPERS(double, Occupancy)
-	MAKE_ATOM_FUNC_WRAPPERS(double, BFactor)
 
 	MAKE_FUNCTION_WRAPPER1(const CDPL::Chem::MatchConstraintList::SharedPointer&, getMatchConstraints, CDPL::Chem::Atom&)
 	MAKE_FUNCTION_WRAPPER1(bool, hasMatchConstraints, CDPL::Chem::Atom&)
@@ -204,13 +190,9 @@ namespace
 	MAKE_FUNCTION_WRAPPER3(bool, isInFragmentOfSize, CDPL::Chem::Atom&, CDPL::Chem::FragmentList&, std::size_t);
 	MAKE_FUNCTION_WRAPPER3(void, getContainingFragments, CDPL::Chem::Atom&, CDPL::Chem::FragmentList&, CDPL::Chem::FragmentList&);
 	MAKE_FUNCTION_WRAPPER3(double, calcEffectivePolarizability, CDPL::Chem::Atom&, CDPL::Chem::MolecularGraph&, double);
-	MAKE_FUNCTION_WRAPPER3(bool, areInSameResidue, CDPL::Chem::Atom&, CDPL::Chem::Atom&, unsigned int);
 
 	MAKE_FUNCTION_WRAPPER4(std::size_t, getExplicitBondCount, CDPL::Chem::Atom&, CDPL::Chem::MolecularGraph&, std::size_t, unsigned int);
 	MAKE_FUNCTION_WRAPPER4(std::size_t, getBondCount, CDPL::Chem::Atom&, CDPL::Chem::MolecularGraph&, std::size_t, unsigned int);
-
-	MAKE_FUNCTION_WRAPPER5(void, extractResidueSubstructure, CDPL::Chem::Atom&, CDPL::Chem::MolecularGraph&, CDPL::Chem::Fragment&, bool, unsigned int);
-
 
 	std::string buildMatchExpressionStringWrapper(CDPL::Chem::Atom& atom, CDPL::Chem::MolecularGraph& molgraph)
 	{
@@ -370,17 +352,11 @@ void CDPLPythonChem::exportAtomFunctions()
 				python::with_custodian_and_ward<3, 2>());
 	python::def("calcEffectivePolarizability", &calcEffectivePolarizabilityWrapper3, 
 				(python::arg("atom"), python::arg("molgraph"), python::arg("damping") = 0.75));
-	python::def("areInSameResidue", &areInSameResidueWrapper3, 
-				(python::arg("atom1"), python::arg("atom2"), python::arg("flags") = Chem::AtomPropertyFlag::DEFAULT));
 
 	python::def("getExplicitBondCount", &getExplicitBondCountWrapper4,
 				(python::arg("atom"), python::arg("molgraph"), python::arg("order"), python::arg("type")));
 	python::def("getBondCount", &getBondCountWrapper4,
 				(python::arg("atom"), python::arg("molgraph"), python::arg("order"), python::arg("type")));
-
-	python::def("extractResidueSubstructure", &extractResidueSubstructureWrapper5,
-				(python::arg("atom"), python::arg("molgraph"), python::arg("res_substruct"), 
-				 python::arg("cnctd_only") = false, python::arg("flags") = Chem::AtomPropertyFlag::DEFAULT));
 
 	python::def("buildMatchExpressionString", &buildMatchExpressionStringWrapper,
 				(python::arg("atom"), python::arg("molgraph")));
@@ -427,18 +403,4 @@ void CDPLPythonChem::exportAtomFunctions()
     EXPORT_ATOM_FUNCS_COPY_REF_CW(MatchExpression, expr)
 	EXPORT_ATOM_FUNCS_COPY_REF(MatchExpressionString, expr_str)
     EXPORT_ATOM_FUNCS_INT_REF_CW(StereoDescriptor, descr)
-	EXPORT_ATOM_FUNCS(ResidueLinkingAtomFlag, linking)
-	EXPORT_ATOM_FUNCS(ResidueLeavingAtomFlag, leaving)
-	EXPORT_ATOM_FUNCS_COPY_REF(ResidueAtomName, name)
-	EXPORT_ATOM_FUNCS_COPY_REF(ResidueAltAtomName, name)
-	EXPORT_ATOM_FUNCS_COPY_REF(ResidueCode, code)
-	EXPORT_ATOM_FUNCS(ResidueSequenceNumber, seq_no)
-	EXPORT_ATOM_FUNCS(ResidueInsertionCode, code)
-	EXPORT_ATOM_FUNCS(HeteroAtomFlag, is_het)
-	EXPORT_ATOM_FUNCS(ChainID, id)
-	EXPORT_ATOM_FUNCS(AltLocationID, id)
-	EXPORT_ATOM_FUNCS(ModelNumber, model_no)
-	EXPORT_ATOM_FUNCS(SerialNumber, serial_no)
-	EXPORT_ATOM_FUNCS(Occupancy, occupancy)
-	EXPORT_ATOM_FUNCS(BFactor, factor)
 }

@@ -89,7 +89,7 @@ def genResidueDictionaryData():
     output.append('\n\n')
 
     root_and_ext = os.path.splitext(os.path.basename(sys.argv[2]))
-    inc_guard = 'CDPL_CHEM_' + string.upper(root_and_ext[0]) + '_' + string.upper(string.lstrip(root_and_ext[1], '.'))
+    inc_guard = 'CDPL_BIOMOL_' + string.upper(root_and_ext[0]) + '_' + string.upper(string.lstrip(root_and_ext[1], '.'))
 
     output.append('#ifndef ' + inc_guard + '\n')
     output.append('#define ' + inc_guard + '\n')
@@ -467,7 +467,7 @@ def genResidueDictionaryData():
 
         comp_name = comp_name.replace('"', '\\"')
 
-        output.append('\t\t{ "' + code + '", "' + replaces_code + '", "' + replaced_by_code + '", CDPL::Chem::ResidueType::' + comp_type + ', ' + obsolete + ', ' + \
+        output.append('\t\t{ "' + code + '", "' + replaces_code + '", "' + replaced_by_code + '", CDPL::Biomol::ResidueType::' + comp_type + ', ' + obsolete + ', ' + \
                       str(atom_count) + ', atomNames + ' + str(atom_names_offset)+ ', ' + \
                       str(len(lvg_atoms) - lvg_atoms_offset) + ', leavingAtoms + ' + str(lvg_atoms_offset) + \
                       ', "' + comp_name + '", "' + jme_string + '" },\n')
