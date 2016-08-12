@@ -43,7 +43,7 @@
 #include "CDPL/Chem/AtomFunctions.hpp"
 #include "CDPL/Chem/BondFunctions.hpp"
 #include "CDPL/Chem/MolecularGraphFunctions.hpp"
-#include "CDPL/Chem/AtomTypeFunctions.hpp"
+#include "CDPL/Chem/AtomDictionary.hpp"
 #include "CDPL/Chem/AtomType.hpp"
 #include "CDPL/Biomol/MolecularGraphFunctions.hpp"
 #include "CDPL/Biomol/AtomFunctions.hpp"
@@ -674,7 +674,7 @@ void Biomol::PDBDataReader::readATOMRecord(std::istream& is, Chem::Molecule& mol
 
 		setSymbol(*atom, stringData);
 
-		unsigned int atom_type = Chem::getAtomType(stringData);
+		unsigned int atom_type = Chem::AtomDictionary::getType(stringData);
 
 		if (strictErrorChecking && atom_type == Chem::AtomType::UNKNOWN)
 			throw Base::IOError("PDBDataReader: unknown chemical element specified in " + rec_name + " record: " + stringData);

@@ -111,8 +111,6 @@ namespace CDPL
 			const Math::DVector& getFeatureVector() const;
 
 		private:
-			/** \cond CDPL_PRIVATE_SECTION_DOC */
-
 			LogSCalculator(const LogSCalculator&);
 
 			LogSCalculator& operator=(const LogSCalculator&);
@@ -211,8 +209,6 @@ namespace CDPL
 			Math::DVector            featureVector;
 			std::size_t              numAtoms;
 			double                   logS;
-
-			/** \endcond CDPL_PRIVATE_SECTION_DOC */
 		};
 
 		/**

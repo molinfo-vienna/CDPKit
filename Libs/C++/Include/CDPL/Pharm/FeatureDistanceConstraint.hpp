@@ -72,12 +72,8 @@ namespace CDPL
 			bool operator()(const Feature& ftr1, const Feature& ftr2) const;
 
 		  private:
-			/** \cond CDPL_PRIVATE_SECTION_DOC */
-		
 			double minDist;
 			double maxDist;
-
-			/** \endcond */
 		};
 
 		/**

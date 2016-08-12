@@ -261,8 +261,6 @@ namespace CDPL
 			void clearBondMappingConstraints();
 
 		private:
-			/** \cond CDPL_PRIVATE_SECTION_DOC */
-
 			SubstructureSearch(const SubstructureSearch&);
 
 			SubstructureSearch& operator=(const SubstructureSearch&);
@@ -366,8 +364,6 @@ namespace CDPL
 			std::size_t              freeMappingIdx;
 			std::size_t              atomMappingConstrMatrixSize;
 			std::size_t              bondMappingConstrMatrixSize;
-
-			/** \endcond */
 		};
 
 		/**

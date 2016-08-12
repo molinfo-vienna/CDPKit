@@ -47,7 +47,7 @@
 #include "CDPL/Chem/AtomMatchConstraint.hpp"
 #include "CDPL/Chem/BondMatchConstraint.hpp"
 #include "CDPL/Chem/StereoDescriptor.hpp"
-#include "CDPL/Chem/AtomTypeFunctions.hpp"
+#include "CDPL/Chem/AtomDictionary.hpp"
 #include "CDPL/Chem/AtomType.hpp"
 #include "CDPL/Chem/ReactionRole.hpp"
 #include "CDPL/Chem/AtomConfiguration.hpp"
@@ -1019,7 +1019,7 @@ void Chem::SMARTSDataWriter::DFSTreeNode::writeAtomTypeExpression(const MatchCon
 
 		default:
 			if (!write_arom_sym) {
-				const std::string& symbol = getAtomTypeSymbol(atom_type);
+				const std::string& symbol = AtomDictionary::getSymbol(atom_type);
 
 				assert(!symbol.empty());
 
@@ -1178,7 +1178,7 @@ bool Chem::SMARTSDataWriter::DFSTreeNode::writeAtomTypeExpression(const MatchCon
 				if (write_not_prefix)
 					expr_str.push_back(NOT_OPERATOR);
 
-				const std::string& symbol = getAtomTypeSymbol(atom_type);
+				const std::string& symbol = AtomDictionary::getSymbol(atom_type);
 
 				assert(!symbol.empty());
 

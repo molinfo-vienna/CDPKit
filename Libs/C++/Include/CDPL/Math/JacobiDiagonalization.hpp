@@ -79,7 +79,6 @@ namespace CDPL
 	}
 }
 
-/** \cond CDPL_PRIVATE_SECTION_DOC */
 
 // Implementation 
 
@@ -200,8 +199,6 @@ bool CDPL::Math::jacobiDiagonalize(MatrixExpression<M1>& a, VectorExpression<V>&
 
 	return false;
 }
-
-/** \endcond */
 
 #endif // CDPL_MATH_JACOBIDIAGONALIZATION_HPP
 

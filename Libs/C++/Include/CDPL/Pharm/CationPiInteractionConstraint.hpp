@@ -81,14 +81,10 @@ namespace CDPL
 			bool operator()(const Feature& ftr1, const Feature& ftr2) const;
 
 		  private:
-			/** \cond CDPL_PRIVATE_SECTION_DOC */
-		
 			bool   aroCatOrder;
 			double minDist;
 			double maxDist;
 			double maxAngle;
-
-			/** \endcond */			
 		};
 
 		/**

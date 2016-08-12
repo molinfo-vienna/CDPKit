@@ -75,13 +75,9 @@ namespace CDPL
 			bool operator()(const Feature& ftr1, const Feature& ftr2) const;
 
 		  private:
-			/** \cond CDPL_PRIVATE_SECTION_DOC */
-		
 			bool               andExpr;
 			ConstraintFunction function1;
 			ConstraintFunction function2;
-
-			/** \endcond */
 		};
 
 		/**

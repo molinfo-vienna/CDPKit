@@ -43,7 +43,7 @@
 #include "CDPL/Chem/Entity3DFunctions.hpp"
 #include "CDPL/Chem/UtilityFunctions.hpp"
 #include "CDPL/Chem/AtomType.hpp"
-#include "CDPL/Chem/AtomTypeFunctions.hpp"
+#include "CDPL/Chem/AtomDictionary.hpp"
 #include "CDPL/Chem/SubstructureSearch.hpp"
 #include "CDPL/Chem/AtomBondMapping.hpp"
 #include "CDPL/Math/Matrix.hpp"

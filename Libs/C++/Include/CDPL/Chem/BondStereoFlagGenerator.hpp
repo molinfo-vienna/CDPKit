@@ -120,8 +120,6 @@ namespace CDPL
 			void generate(const MolecularGraph& molgraph, const Math::Vector2DArray& coords, Util::UIArray& flags);
 
 		private:
-			/** \cond CDPL_PRIVATE_SECTION_DOC */
-
 			class StereoAtomInfo;
 
 			BondStereoFlagGenerator(const BondStereoFlagGenerator&);
@@ -192,8 +190,6 @@ namespace CDPL
 			Util::BitSet               singleBondMask;
 			std::size_t                numMismatchingCtrs;
 			std::size_t                minNumMismatchingCtrs;
-
-			/** \endcond */
 		};
 
 		/**

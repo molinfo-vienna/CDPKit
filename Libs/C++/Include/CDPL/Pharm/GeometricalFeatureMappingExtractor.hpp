@@ -119,13 +119,9 @@ namespace CDPL
 			void getMapping(const Pharmacophore& ref_pharm, const Pharmacophore& pharm, Math::Matrix4D& xform, FeatureMapping& mapping) const;
 
 		  private:
-			/** \cond CDPL_PRIVATE_SECTION_DOC */
-
 			FeatureTypeMatchFunction     typeMatchFunc;
 			FeaturePositionMatchFunction posMatchFunc;
 			FeatureGeometryMatchFunction geomMatchFunc;
-
-			/** \endcond */
 		};
 
 		/**

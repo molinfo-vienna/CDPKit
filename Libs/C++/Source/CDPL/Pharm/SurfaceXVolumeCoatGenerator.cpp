@@ -40,7 +40,7 @@
 #include "CDPL/Chem/Entity3DFunctions.hpp"
 #include "CDPL/Chem/Entity3DContainerFunctions.hpp"
 #include "CDPL/Chem/AtomType.hpp"
-#include "CDPL/Chem/AtomTypeFunctions.hpp"
+#include "CDPL/Chem/AtomDictionary.hpp"
 #include "CDPL/Math/SVDecomposition.hpp"
 
 
@@ -453,8 +453,8 @@ void Pharm::SurfaceXVolumeCoatGenerator::generateXVolumes(Pharmacophore& pharm)
 	}
 
 	std::size_t new_num_surf_atoms = surfaceAtoms.size();
-	double h_cov_rad = getCovalentRadius(AtomType::H, 1);
-	double h_vdw_rad = getVdWRadius(AtomType::H);
+	double h_cov_rad = AtomDictionary::getCovalentRadius(AtomType::H, 1);
+	double h_vdw_rad = AtomDictionary::getVdWRadius(AtomType::H);
 
 	for (std::size_t i = 0; i < new_num_surf_atoms; i++) {
 		std::size_t atom_idx = surfaceAtoms[i];

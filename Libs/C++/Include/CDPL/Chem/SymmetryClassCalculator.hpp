@@ -166,8 +166,6 @@ namespace CDPL
 			void calculate(const MolecularGraph& molgraph, Util::STArray& class_ids);
 
 		private:
-			/** \cond CDPL_PRIVATE_SECTION_DOC */
-
 			SymmetryClassCalculator(const SymmetryClassCalculator&);
 
 			SymmetryClassCalculator& operator=(const SymmetryClassCalculator&);
@@ -235,8 +233,6 @@ namespace CDPL
 			AllocNodeList  allocAtomNodes;
 			AllocNodeList  allocImplHNodes;
 			NodeList       sortedAtomNodes;
-
-			/** \endcond */
 		};
 
 		/**

@@ -69,11 +69,7 @@ namespace CDPL
 			DefaultPharmacophoreGenerator(const Chem::MolecularGraph& molgraph, Pharmacophore& pharm, bool fuzzy);
 
 		  private:
-			/** \cond CDPL_PRIVATE_SECTION_DOC */
-	
 			void init(bool);
-	
-			/** \endcond */
 		};
 
 		/**

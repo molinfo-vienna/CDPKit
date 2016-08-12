@@ -29,6 +29,7 @@
 #include <algorithm>
 
 #include <boost/bind.hpp>
+#include <boost/math/special_functions/prime.hpp>
 
 #include "CDPL/Chem/HashCodeCalculator.hpp"
 #include "CDPL/Chem/Atom.hpp"
@@ -40,7 +41,6 @@
 #include "CDPL/Chem/AtomConfiguration.hpp"
 #include "CDPL/Chem/BondConfiguration.hpp"
 #include "CDPL/Chem/StereoDescriptor.hpp"
-#include "CDPL/Math/PrimeNumberTable.hpp"
 #include "CDPL/Math/SpecialFunctions.hpp"
 #include "CDPL/Util/Array.hpp"
 #include "CDPL/Internal/SHA1.hpp"
@@ -126,18 +126,18 @@ Base::uint64 Chem::HashCodeCalculator::DefAtomHashSeedFunctor::operator()(const 
 
 Base::uint64 Chem::HashCodeCalculator::DefAtomHashSeedFunctor::getAtomTypeHashSeed(const Atom& atom) const
 {
-	return Math::PrimeNumberTable::getPrimeNumber(ATOM_TYPE_IDX + (getType(atom) % ATOM_TYPE_RANGE));
+	return boost::math::prime(ATOM_TYPE_IDX + (getType(atom) % ATOM_TYPE_RANGE));
 }
 
 Base::uint64 Chem::HashCodeCalculator::DefAtomHashSeedFunctor::getAtomIsotopeHashSeed(const Atom& atom) const
 {
-	return Math::PrimeNumberTable::getPrimeNumber(ATOM_ISOTOPE_IDX + (getIsotope(atom) % ATOM_ISOTOPE_RANGE));
+	return boost::math::prime(ATOM_ISOTOPE_IDX + (getIsotope(atom) % ATOM_ISOTOPE_RANGE));
 }
 
 Base::uint64 Chem::HashCodeCalculator::DefAtomHashSeedFunctor::getAtomAromaticityHashSeed(const Atom& atom) const
 {
 	if (getAromaticityFlag(atom))
-		return Math::PrimeNumberTable::getPrimeNumber(ATOM_AROMATICITY_IDX);
+		return boost::math::prime(ATOM_AROMATICITY_IDX);
 
 	return 1;
 }
@@ -147,14 +147,14 @@ Base::uint64 Chem::HashCodeCalculator::DefAtomHashSeedFunctor::getAtomChargeHash
 	const long charge = getFormalCharge(atom);
 
 	if (charge < 0)
-		return Math::PrimeNumberTable::getPrimeNumber(ATOM_NEG_CHARGE_IDX + ((-charge - 1) % ATOM_NEG_CHARGE_RANGE));
+		return boost::math::prime(ATOM_NEG_CHARGE_IDX + ((-charge - 1) % ATOM_NEG_CHARGE_RANGE));
 	
-	return Math::PrimeNumberTable::getPrimeNumber(ATOM_POS_CHARGE_IDX + (charge % ATOM_POS_CHARGE_RANGE));
+	return boost::math::prime(ATOM_POS_CHARGE_IDX + (charge % ATOM_POS_CHARGE_RANGE));
 }
 
 Base::uint64 Chem::HashCodeCalculator::DefAtomHashSeedFunctor::getAtomHCountHashSeed(const Atom& atom) const
 {
-	return Math::PrimeNumberTable::getPrimeNumber(ATOM_H_COUNT_IDX + (getBondCount(atom, *calculator.molGraph, 1, AtomType::H) % ATOM_H_COUNT_RANGE));
+	return boost::math::prime(ATOM_H_COUNT_IDX + (getBondCount(atom, *calculator.molGraph, 1, AtomType::H) % ATOM_H_COUNT_RANGE));
 }
 
 Base::uint64 Chem::HashCodeCalculator::DefAtomHashSeedFunctor::getAtomConfigHashSeed(const Atom& atom) const
@@ -164,10 +164,10 @@ Base::uint64 Chem::HashCodeCalculator::DefAtomHashSeedFunctor::getAtomConfigHash
 	switch (config) {
 
 	case AtomConfiguration::R: 
-		return Math::PrimeNumberTable::getPrimeNumber(ATOM_CONFIG_R_IDX);
+		return boost::math::prime(ATOM_CONFIG_R_IDX);
 
 	case AtomConfiguration::S: 
-		return Math::PrimeNumberTable::getPrimeNumber(ATOM_CONFIG_S_IDX);
+		return boost::math::prime(ATOM_CONFIG_S_IDX);
 
 	default: 
 		return 1;
@@ -195,7 +195,7 @@ Base::uint64 Chem::HashCodeCalculator::DefBondHashSeedFunctor::operator()(const 
 Base::uint64 Chem::HashCodeCalculator::DefBondHashSeedFunctor::getBondTopologyHashSeed(const Bond& bond) const
 {
 	if (getRingFlag(bond))
-		return Math::PrimeNumberTable::getPrimeNumber(BOND_RING_FLAG_IDX);
+		return boost::math::prime(BOND_RING_FLAG_IDX);
 
 	return 1;
 }
@@ -203,10 +203,10 @@ Base::uint64 Chem::HashCodeCalculator::DefBondHashSeedFunctor::getBondTopologyHa
 Base::uint64 Chem::HashCodeCalculator::DefBondHashSeedFunctor::getBondTypeHashSeed(const Bond& bond) const
 {
 	if ((flags & BondPropertyFlag::AROMATICITY) && getAromaticityFlag(bond))
-		return Math::PrimeNumberTable::getPrimeNumber(BOND_AROM_FLAG_IDX);
+		return boost::math::prime(BOND_AROM_FLAG_IDX);
 
 	if (flags & BondPropertyFlag::ORDER) 
-		return Math::PrimeNumberTable::getPrimeNumber(BOND_ORDER_IDX + (getOrder(bond) % BOND_ORDER_RANGE));
+		return boost::math::prime(BOND_ORDER_IDX + (getOrder(bond) % BOND_ORDER_RANGE));
 	return 1;
 }
 
@@ -217,10 +217,10 @@ Base::uint64 Chem::HashCodeCalculator::DefBondHashSeedFunctor::getBondConfigHash
 	switch (config) {
 
 	case BondConfiguration::E:
-		return Math::PrimeNumberTable::getPrimeNumber(BOND_CONFIG_E_IDX);
+		return boost::math::prime(BOND_CONFIG_E_IDX);
 
 	case BondConfiguration::Z:
-		return Math::PrimeNumberTable::getPrimeNumber(BOND_CONFIG_Z_IDX);
+		return boost::math::prime(BOND_CONFIG_Z_IDX);
 
 	default:
 		return 1;
@@ -334,7 +334,7 @@ void Chem::HashCodeCalculator::calcAtomHashCodes()
 		IndexList::const_iterator global_stereo_atoms_end = globalStereoAtoms.end();
 
 		for (IndexList::const_iterator it = globalStereoAtoms.begin(); it != global_stereo_atoms_end; ++it)
-			atomHashCodes[*it] *= Math::PrimeNumberTable::getPrimeNumber(ATOM_GLOBAL_STEREO_FLAG_IDX);
+			atomHashCodes[*it] *= boost::math::prime(ATOM_GLOBAL_STEREO_FLAG_IDX);
 	}
 
 	MolecularGraph::ConstAtomIterator atoms_beg = molGraph->getAtomsBegin();
@@ -387,7 +387,7 @@ void Chem::HashCodeCalculator::calcBondHashCodes()
 		IndexList::const_iterator global_stereo_bonds_end = globalStereoBonds.end();
 
 		for (IndexList::const_iterator it = globalStereoBonds.begin(); it != global_stereo_bonds_end; ++it)
-			bondHashCodes[*it] *= Math::PrimeNumberTable::getPrimeNumber(BOND_GLOBAL_STEREO_FLAG_IDX);
+			bondHashCodes[*it] *= boost::math::prime(BOND_GLOBAL_STEREO_FLAG_IDX);
 
 		IndexList::const_iterator ref_atoms_end = globalStereoReferenceAtoms.end();
 		IndexList::const_iterator a_it = globalStereoReferenceAtoms.begin();

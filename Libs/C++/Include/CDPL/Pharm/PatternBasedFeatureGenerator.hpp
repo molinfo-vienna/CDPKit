@@ -138,8 +138,6 @@ namespace CDPL
 			PatternBasedFeatureGenerator& operator=(const PatternBasedFeatureGenerator& gen);
 
 		  protected:
-			/** \cond CDPL_PRIVATE_SECTION_DOC */
-
 			typedef std::vector<const Chem::Atom*> AtomList;
 			typedef boost::shared_ptr<Chem::SubstructureSearch> SubstructSearchPtr;
 
@@ -202,8 +200,6 @@ namespace CDPL
 			Math::Matrix<double>        svdU;
 			Math::Matrix3D              svdV;
 			Math::Vector3D              svdW;
-
-			/** \endcond */
 		};
 
 		/**

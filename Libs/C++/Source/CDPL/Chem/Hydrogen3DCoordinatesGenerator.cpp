@@ -36,7 +36,7 @@
 #include "CDPL/Chem/Bond.hpp"
 #include "CDPL/Chem/Entity3DFunctions.hpp"
 #include "CDPL/Chem/AtomFunctions.hpp"
-#include "CDPL/Chem/AtomTypeFunctions.hpp"
+#include "CDPL/Chem/AtomDictionary.hpp"
 #include "CDPL/Chem/AtomType.hpp"
 #include "CDPL/Chem/HybridizationState.hpp"
 #include "CDPL/Math/Vector.hpp"
@@ -677,9 +677,9 @@ bool Chem::Hydrogen3DCoordinatesGenerator::getConnectedAtomWithCoords(
 
 double Chem::Hydrogen3DCoordinatesGenerator::getHydrogenBondLength(const Atom& atom) const
 {
-	static const double h_cov_rad = getCovalentRadius(AtomType::H, 1);
+	static const double h_cov_rad = AtomDictionary::getCovalentRadius(AtomType::H, 1);
 
-	double atom_cov_rad = getCovalentRadius(getType(atom), 1);
+	double atom_cov_rad = AtomDictionary::getCovalentRadius(getType(atom), 1);
 
 	if (atom_cov_rad == 0.0)
 		return 1.0;

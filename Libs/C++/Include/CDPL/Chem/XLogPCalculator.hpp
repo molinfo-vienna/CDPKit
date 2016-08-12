@@ -112,8 +112,6 @@ namespace CDPL
 			const Math::DVector& getFeatureVector() const;
 
 		private:
-			/** \cond CDPL_PRIVATE_SECTION_DOC */
-
 			XLogPCalculator(const XLogPCalculator&);
 			
 			XLogPCalculator& operator=(const XLogPCalculator&);
@@ -235,8 +233,6 @@ namespace CDPL
 			std::size_t                numAtoms;
 			double                     logP;
 			SubstructureSearch         substructSearch;
-
-			/** \endcond CDPL_PRIVATE_SECTION_DOC */
 		};
 
 		/**

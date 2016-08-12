@@ -30,7 +30,7 @@
 #include "CDPL/Chem/Atom.hpp"
 #include "CDPL/Chem/AtomProperty.hpp"
 #include "CDPL/Chem/AtomType.hpp"
-#include "CDPL/Chem/AtomTypeFunctions.hpp"
+#include "CDPL/Chem/AtomDictionary.hpp"
 
 
 using namespace CDPL; 
@@ -38,7 +38,7 @@ using namespace CDPL;
 
 const std::string& Chem::getSymbol(const Atom& atom)
 {
-	static const std::string DEF_SYMBOL = getAtomTypeSymbol(AtomType::UNKNOWN);
+	static const std::string DEF_SYMBOL = AtomDictionary::getSymbol(AtomType::UNKNOWN);
 
 	return atom.getPropertyOrDefault<std::string>(AtomProperty::SYMBOL, DEF_SYMBOL);
 }
@@ -60,6 +60,6 @@ bool Chem::hasSymbol(const Atom& atom)
 
 const std::string& Chem::getSymbolForType(const Atom& atom)
 {
-	return getAtomTypeSymbol(getType(atom), getIsotope(atom));
+	return AtomDictionary::getSymbol(getType(atom), getIsotope(atom));
 }
 

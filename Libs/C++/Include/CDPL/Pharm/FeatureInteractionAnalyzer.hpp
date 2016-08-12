@@ -122,13 +122,9 @@ namespace CDPL
 			void analyze(const Pharmacophore& pharm1, const Pharmacophore& pharm2, FeatureMapping& iactions) const;
 
 		  private:
-			/** \cond CDPL_PRIVATE_SECTION_DOC */
-		
 			typedef boost::unordered_multimap<std::pair<unsigned int, unsigned int>, ConstraintFunction> ConstraintFunctionMap;
 		
 			ConstraintFunctionMap constraintFuncMap;
-
-			/** \endcond */
 		};
 
 		/**

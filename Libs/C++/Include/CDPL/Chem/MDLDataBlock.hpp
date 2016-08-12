@@ -52,21 +52,21 @@ namespace CDPL
 		 * \brief Represents a data item in the structure or reaction data block of a
 		 *        <em>MDL SD-</em> or \e RD-File data record (see [\ref CTFILE]).
 		 */
-		class CDPL_CHEM_API MDLDataBlockItem
+		class MDLDataBlockEntry
 		{
 
 		public:
 			/**
-			 * \brief Constructs a \c %MDLDataBlockItem object with an empty data header and content.
+			 * \brief Constructs a \c %MDLDataBlockEntry object with an empty data header and content.
 			 */
-			MDLDataBlockItem() {}
+			MDLDataBlockEntry() {}
 
 			/**
-			 * \brief Constructs a \c %MDLDataBlockItem object with the specified data header and content.
+			 * \brief Constructs a \c %MDLDataBlockEntry object with the specified data header and content.
 			 * \param header The data header.
 			 * \param data The data content.
 			 */
-			MDLDataBlockItem(const std::string& header, const std::string& data): header(header), data(data) {}
+			MDLDataBlockEntry(const std::string& header, const std::string& data): header(header), data(data) {}
 
 			/**
 			 * \brief Returns the data header.
@@ -94,21 +94,21 @@ namespace CDPL
 		
 			/**
 			 * \brief Equality comparison operator.
-			 * \param item The other \c %MDLDataBlockItem object to be compared with.
-			 * \return \c true if the data item headers and values compare equal, and \c false otherwise. 
+			 * \param entry The other \c %MDLDataBlockEntry object to be compared with.
+			 * \return \c true if the data entry headers and values compare equal, and \c false otherwise. 
 			 */
-			bool operator==(const MDLDataBlockItem& item) const;
+			bool operator==(const MDLDataBlockEntry& entry) const;
 
 			/**
 			 * \brief Inequality comparison operator.
 			 *
-			 * The result is equivalent to <tt>!(*this == item)</tt>.
+			 * The result is equivalent to <tt>!(*this == entry)</tt>.
 			 *
-			 * \param item The other \c %MDLDataBlockItem object to be compared with.
+			 * \param entry The other \c %MDLDataBlockEntry object to be compared with.
 			 * \return \c true if the data headers and/or values compare non-equal, and \c false otherwise. 
 			 * \see operator==()
 			 */
-			bool operator!=(const MDLDataBlockItem& item) const;
+			bool operator!=(const MDLDataBlockEntry& entry) const;
 
 		private:
 			std::string header;
@@ -116,10 +116,10 @@ namespace CDPL
 		};
 
 		/**
-		 * \brief An array of Chem::MDLDataBlockItem objects used to store the structure or reaction
+		 * \brief An array of Chem::MDLDataBlockEntry objects used to store the structure or reaction
 		 *        data block of a <em>MDL SD-</em> or \e RD-File data record (see [\ref CTFILE]).
 		 */
-		typedef Util::Array<MDLDataBlockItem> MDLDataBlock;
+		typedef Util::Array<MDLDataBlockEntry> MDLDataBlock;
 
 		/**
 		 * @}

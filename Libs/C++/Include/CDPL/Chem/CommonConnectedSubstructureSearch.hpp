@@ -255,8 +255,6 @@ namespace CDPL
 			std::size_t getMinSubstructureSize() const;
 
 		private:
-			/** \cond CDPL_PRIVATE_SECTION_DOC */
-
 			CommonConnectedSubstructureSearch(const CommonConnectedSubstructureSearch&);
 
 			CommonConnectedSubstructureSearch& operator=(const CommonConnectedSubstructureSearch&);
@@ -369,8 +367,6 @@ namespace CDPL
 			std::size_t            maxNumMappings;
 			std::size_t            minSubstructureSize;
 			std::size_t            freeMappingIdx;
-
-			/** \endcond */
 		};
 
 		/**

@@ -51,7 +51,6 @@
 #include "CDPL/Math/Matrix.hpp"
 #include "CDPL/Math/MatrixProxy.hpp"
 #include "CDPL/Math/MLRModel.hpp"
-#include "CDPL/Math/PrimeNumberTable.hpp"
 #include "CDPL/Math/QuaternionAdapter.hpp"
 #include "CDPL/Math/QuaternionAssignment.hpp"
 #include "CDPL/Math/QuaternionExpression.hpp"

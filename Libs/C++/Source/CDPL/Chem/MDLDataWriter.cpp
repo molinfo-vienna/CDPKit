@@ -59,7 +59,7 @@
 #include "CDPL/Chem/BondMatchConstraint.hpp"
 #include "CDPL/Chem/ReactionRole.hpp"
 #include "CDPL/Chem/RadicalType.hpp"
-#include "CDPL/Chem/AtomTypeFunctions.hpp"
+#include "CDPL/Chem/AtomDictionary.hpp"
 #include "CDPL/Chem/AtomType.hpp"
 #include "CDPL/Chem/MDLDataFormatVersion.hpp"
 #include "CDPL/Base/Exceptions.hpp"
@@ -570,7 +570,7 @@ void Chem::MDLDataWriter::writeCTabV2000AtomMass(std::ostream& os, const Atom& a
 	long isotope = getIsotope(atom);
 
 	if (isotope > 0) {
-		long mab_isotope = getMostAbundantIsotope(getType(atom));
+		long mab_isotope = AtomDictionary::getMostAbundantIsotope(getType(atom));
 
 		if (mab_isotope > 0) {
 			mass_diff = isotope - mab_isotope;
@@ -1519,7 +1519,7 @@ void Chem::MDLDataWriter::writeCTabV2000AtomList(std::ostream& os, const Molecul
 		if (atom_type == AtomType::UNKNOWN || atom_type > AtomType::MAX_TYPE)
 			continue;
 
-		const std::string& symbol = getAtomTypeSymbol(atom_type);
+		const std::string& symbol = AtomDictionary::getSymbol(atom_type);
 
 		assert(!symbol.empty());
 
@@ -1589,12 +1589,12 @@ void Chem::MDLDataWriter::writeSDFData(std::ostream& os, const MolecularGraph& m
 	const MDLDataBlock& data = *getMDLStructureData(molgraph);
 	std::string trimmed_line;
 
-	MDLDataBlock::ConstElementIterator items_end = data.getElementsEnd();
+	MDLDataBlock::ConstElementIterator entries_end = data.getElementsEnd();
 
-	for (MDLDataBlock::ConstElementIterator it = data.getElementsBegin(); it != items_end; ++it) {
-		const MDLDataBlockItem& item = *it;
+	for (MDLDataBlock::ConstElementIterator it = data.getElementsBegin(); it != entries_end; ++it) {
+		const MDLDataBlockEntry& entry = *it;
 
-		const std::string& header = item.getHeader();
+		const std::string& header = entry.getHeader();
 		std::size_t prefix_length = SDFile::DATA_HEADER_PREFIX.length();
 
 		if (!header.empty() && !std::isspace(header[0], std::locale::classic()))
@@ -1608,17 +1608,17 @@ void Chem::MDLDataWriter::writeSDFData(std::ostream& os, const MolecularGraph& m
 
 		typedef boost::tokenizer<boost::char_separator<char> > Tokenizer;
 		
-		Tokenizer lines(item.getData(), boost::char_separator<char>(line_sep, "", boost::keep_empty_tokens));
+		Tokenizer lines(entry.getData(), boost::char_separator<char>(line_sep, "", boost::keep_empty_tokens));
 
 		for (Tokenizer::iterator l_it = lines.begin(); l_it != lines.end(); ++l_it) {
 			const std::string& line = *l_it;
 
 			if (line.empty()) {
 				if (strictErrorChecking)
-					throw Base::IOError("MDLDataWriter: empty data line for for structure data item");
+					throw Base::IOError("MDLDataWriter: empty data line for for structure data entry");
 
 			} else
-				writeMDLLine(os, line, "MDLDataWriter: error while writing data line for structure data item", 
+				writeMDLLine(os, line, "MDLDataWriter: error while writing data line for structure data entry", 
 							 checkLineLength, false, truncateLines, MAX_DATA_LINE_LENGTH);		
 		}
 
@@ -1934,10 +1934,10 @@ void Chem::MDLDataWriter::writeRDFData(std::ostream& os, const Reaction& rxn) co
 	MDLDataBlock::ConstElementIterator items_end = data.getElementsEnd();
 
 	for (MDLDataBlock::ConstElementIterator it = data.getElementsBegin(); it != items_end; ++it) {
-		const MDLDataBlockItem& item = *it;
+		const MDLDataBlockEntry& entry = *it;
 
 		std::size_t data_field_id_pfx_length = RDFile::DATA_FIELD_IDENTIFIER.length();
-		const std::string& data_field_id = item.getHeader();
+		const std::string& data_field_id = entry.getHeader();
 
 		if (!data_field_id.empty() && !std::isspace(data_field_id[0], std::locale::classic()))
 			data_field_id_pfx_length++;
@@ -1948,7 +1948,7 @@ void Chem::MDLDataWriter::writeRDFData(std::ostream& os, const Reaction& rxn) co
 		writeRDFLine(os, data_field_id, data_field_id_pfx_length, false);
 
 		std::size_t data_field_pfx_length = RDFile::DATA_FIELD_PREFIX.length();
-		const std::string& data = item.getData();
+		const std::string& data = entry.getData();
 
 		if (!data.empty() && !std::isspace(data[0], std::locale::classic()))
 			data_field_pfx_length++;
@@ -2184,7 +2184,7 @@ bool Chem::MDLDataWriter::writeCTabV3000AtomList(std::ostream& os, const Atom& a
 		if (atom_type == AtomType::UNKNOWN || atom_type > AtomType::MAX_TYPE)
 			continue;
 
-		const std::string& symbol = getAtomTypeSymbol(atom_type);
+		const std::string& symbol = AtomDictionary::getSymbol(atom_type);
 
 		assert(!symbol.empty());
 

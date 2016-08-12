@@ -31,7 +31,7 @@
 #include <QMouseEvent>
 #include <QContextMenuEvent>
 
-#include "CDPL/Chem/AtomTypeFunctions.hpp"
+#include "CDPL/Chem/AtomDictionary.hpp"
 #include "CDPL/Vis/QtObjectFactory.hpp"
 
 #include "AtomColorButton.hpp"
@@ -104,11 +104,11 @@ void AtomColorButton::contextMenuEvent(QContextMenuEvent* e)
 
 void AtomColorButton::init()
 {
-	setText(QString::fromStdString(CDPL::Chem::getAtomTypeSymbol(atomType)));
+	setText(QString::fromStdString(CDPL::Chem::AtomDictionary::getSymbol(atomType)));
 	setFrameStyle(Panel | Raised);
 	setAlignment(Qt::AlignCenter);
 
-	setToolTip(QString::fromStdString(CDPL::Chem::getElementName(atomType)));
+	setToolTip(QString::fromStdString(CDPL::Chem::AtomDictionary::getName(atomType)));
 
 	contextMenu = new QMenu(this);
 

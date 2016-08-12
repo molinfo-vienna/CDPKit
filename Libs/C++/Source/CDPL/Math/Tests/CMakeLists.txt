@@ -4,7 +4,6 @@ SET(test-suite_SRCS
     Main.cpp
     ConvenienceHeaderTest.cpp
     SpecialFunctionsTest.cpp
-    PrimeNumberTableTest.cpp
     VectorArrayTest.cpp                    # TODO
     VectorArrayFunctionsTest.cpp           # TODO
     JacobiDiagonalizationTest.cpp

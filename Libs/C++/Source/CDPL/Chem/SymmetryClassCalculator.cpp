@@ -30,6 +30,7 @@
 #include <numeric>
 
 #include <boost/bind.hpp>
+#include <boost/math/special_functions/prime.hpp>
 
 #include "CDPL/Chem/SymmetryClassCalculator.hpp"
 #include "CDPL/Chem/Atom.hpp"
@@ -37,7 +38,6 @@
 #include "CDPL/Chem/AtomFunctions.hpp"
 #include "CDPL/Chem/BondFunctions.hpp"
 #include "CDPL/Chem/AtomType.hpp"
-#include "CDPL/Math/PrimeNumberTable.hpp"
 
 
 using namespace CDPL;
@@ -102,9 +102,9 @@ void Chem::SymmetryClassCalculator::init(const MolecularGraph& molgraph, Util::S
 	const std::size_t AROMATICITY_PRIME_TAB_IDX = CHARGE_PRIME_TAB_IDX + 20; 
 
 	const Base::uint64 IMPL_H_INIT_SYM_CLASS_ID = 1 
-		* (atomPropertyFlags & AtomPropertyFlag::TYPE ? Math::PrimeNumberTable::getPrimeNumber(ATOMIC_NO_PRIME_TAB_IDX + 1) : 1)
-		* (atomPropertyFlags & AtomPropertyFlag::ISOTOPE ? Math::PrimeNumberTable::getPrimeNumber(ISO_PRIME_TAB_IDX) : 1)
-		* (atomPropertyFlags & AtomPropertyFlag::FORMAL_CHARGE ? Math::PrimeNumberTable::getPrimeNumber(CHARGE_PRIME_TAB_IDX + 10) : 1);
+		* (atomPropertyFlags & AtomPropertyFlag::TYPE ? boost::math::prime(ATOMIC_NO_PRIME_TAB_IDX + 1) : 1)
+		* (atomPropertyFlags & AtomPropertyFlag::ISOTOPE ? boost::math::prime(ISO_PRIME_TAB_IDX) : 1)
+		* (atomPropertyFlags & AtomPropertyFlag::FORMAL_CHARGE ? boost::math::prime(CHARGE_PRIME_TAB_IDX + 10) : 1);
 
 	std::size_t num_atoms = molgraph.getNumAtoms();
 
@@ -130,27 +130,27 @@ void Chem::SymmetryClassCalculator::init(const MolecularGraph& molgraph, Util::S
 		if (atomPropertyFlags & AtomPropertyFlag::TYPE) {
 			unsigned int atom_type = getType(atom) % (AtomType::MAX_TYPE + 1);
 
-			init_sym_class_id = Math::PrimeNumberTable::getPrimeNumber(atom_type);
+			init_sym_class_id = boost::math::prime(atom_type);
 		}
 
 		if (atomPropertyFlags & AtomPropertyFlag::ISOTOPE) {
 			std::size_t isotope = getIsotope(atom) % (AtomType::MAX_TYPE * 3);
 			
-			init_sym_class_id *= Math::PrimeNumberTable::getPrimeNumber(ISO_PRIME_TAB_IDX + isotope);
+			init_sym_class_id *= boost::math::prime(ISO_PRIME_TAB_IDX + isotope);
 		}
 
 		if (atomPropertyFlags & AtomPropertyFlag::FORMAL_CHARGE) {
 			long charge = getFormalCharge(atom);
 			
 			if (charge < 0)
-				init_sym_class_id *= Math::PrimeNumberTable::getPrimeNumber(CHARGE_PRIME_TAB_IDX + 10 - std::size_t(-charge % 10));
+				init_sym_class_id *= boost::math::prime(CHARGE_PRIME_TAB_IDX + 10 - std::size_t(-charge % 10));
 			else
-				init_sym_class_id *= Math::PrimeNumberTable::getPrimeNumber(CHARGE_PRIME_TAB_IDX + 10 + std::size_t(charge % 10));
+				init_sym_class_id *= boost::math::prime(CHARGE_PRIME_TAB_IDX + 10 + std::size_t(charge % 10));
 		}
 	
 		if (atomPropertyFlags & AtomPropertyFlag::AROMATICITY) {
 			if (getAromaticityFlag(atom))
-				init_sym_class_id *= Math::PrimeNumberTable::getPrimeNumber(AROMATICITY_PRIME_TAB_IDX);
+				init_sym_class_id *= boost::math::prime(AROMATICITY_PRIME_TAB_IDX);
 		}
 
 		AtomNode::SharedPointer atom_node_ptr(new AtomNode(init_sym_class_id));
@@ -264,7 +264,7 @@ void Chem::SymmetryClassCalculator::perceiveSymClasses(const MolecularGraph& mol
 			NodeList::iterator ub = std::upper_bound(it, sorted_nodes_end, *it, cmp_func);
 
 			std::for_each(it, ub, std::bind2nd(std::mem_fun(&AtomNode::setNextSymClassID), 
-											   Math::PrimeNumberTable::getPrimeNumber(num_classes)));
+											   boost::math::prime(num_classes)));
 			it = ub;
 		}
 

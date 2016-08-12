@@ -50,7 +50,7 @@
 #include "CDPL/Chem/AtomConfiguration.hpp"
 #include "CDPL/Chem/BondConfiguration.hpp"
 #include "CDPL/Chem/ReactionRole.hpp"
-#include "CDPL/Chem/AtomTypeFunctions.hpp"
+#include "CDPL/Chem/AtomDictionary.hpp"
 #include "CDPL/Chem/AtomType.hpp"
 #include "CDPL/Base/Exceptions.hpp"
 #include "CDPL/Base/DataIOBase.hpp"
@@ -511,7 +511,7 @@ const Chem::Atom* Chem::SMILESDataReader::parseOrgSubsetAtom(Molecule& mol)
 	std::string symbol_str(symbol);
 
 	setSymbol(atom, symbol_str);
-	setType(atom, getAtomType(symbol_str));
+	setType(atom, AtomDictionary::getType(symbol_str));
 
 	if (aromatic)
 		setAtomAromaticityFlag(mol.getAtomIndex(atom));
@@ -550,7 +550,7 @@ const Chem::Atom* Chem::SMILESDataReader::parseSpecialAtom(Molecule& mol)
 	std::string symbol_str(symbol);
 
 	setSymbol(atom, symbol_str);
-	setType(atom, getAtomType(symbol_str));
+	setType(atom, AtomDictionary::getType(symbol_str));
 
 	if (iso_spec)
 		setIsotope(atom, isotope);
@@ -639,7 +639,7 @@ bool Chem::SMILESDataReader::parseElementSymbol(char symbol[3], bool org_subset)
 
 	if (getChar(symbol[1], true) && std::islower(symbol[1], std::locale::classic())) {
 		if (!org_subset) {
-			if (strictErrorChecking && !isChemicalElement(getAtomType(symbol)))
+			if (strictErrorChecking && !AtomDictionary::isChemicalElement(AtomDictionary::getType(symbol)))
 				throw Base::IOError("SMILESDataReader: invalid element symbol");
 
 			return false;
@@ -667,7 +667,7 @@ bool Chem::SMILESDataReader::parseElementSymbol(char symbol[3], bool org_subset)
 	ungetChar();
 	symbol[1] = 0;
 
-	if (strictErrorChecking && !isChemicalElement(getAtomType(symbol)))
+	if (strictErrorChecking && !AtomDictionary::isChemicalElement(AtomDictionary::getType(symbol)))
 		throw Base::IOError("SMILESDataReader: invalid element symbol");
 
 	return false;

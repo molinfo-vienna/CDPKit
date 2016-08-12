@@ -94,8 +94,6 @@ namespace CDPL
 			double getResult() const;
 
 		private:
-			/** \cond CDPL_PRIVATE_SECTION_DOC */
-
 			MolecularComplexityCalculator(const MolecularComplexityCalculator&);
 
 			MolecularComplexityCalculator& operator=(const MolecularComplexityCalculator&);
@@ -160,8 +158,6 @@ namespace CDPL
 			double                   atmTypeComplexity;
 			double                   structComplexity;
 			double                   complexity;
-
-			/** \endcond CDPL_PRIVATE_SECTION_DOC */
 		};
 
 		/**

@@ -239,8 +239,6 @@ namespace CDPL
 			std::size_t getMinSubstructureSize() const;
 
 		private:
-			/** \cond CDPL_PRIVATE_SECTION_DOC */
-
 			class AGNode;
 
 			MaxCommonBondSubstructureSearch(const MaxCommonBondSubstructureSearch&);
@@ -430,8 +428,6 @@ namespace CDPL
 			std::size_t                   freeAGEdgeIdx;
 			std::size_t                   freeAGNodeIdx;
 			std::size_t                   freeMappingIdx;
-
-			/** \endcond */
 		};
 
 		/**

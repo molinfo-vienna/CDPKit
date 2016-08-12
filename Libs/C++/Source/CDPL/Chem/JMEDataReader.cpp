@@ -46,7 +46,7 @@
 #include "CDPL/Chem/AtomType.hpp"
 #include "CDPL/Chem/ReactionRole.hpp"
 #include "CDPL/Chem/AtomMatchConstraint.hpp"
-#include "CDPL/Chem/AtomTypeFunctions.hpp"
+#include "CDPL/Chem/AtomDictionary.hpp"
 #include "CDPL/Base/Exceptions.hpp"
 #include "CDPL/Base/DataIOBase.hpp"
 
@@ -595,7 +595,7 @@ Chem::JMEDataReader::readAtomSymbol(Atom* atom, std::string::const_iterator it,
 				(symbol[0] == 'c' || symbol[0] == 'n' || symbol[0] == 'o' || symbol[0] == 's' || symbol[0] == 'p')) {
 				symbol[0] = std::toupper(symbol[0], std::locale::classic());
 
-				unsigned int atom_type = getAtomType(symbol);
+				unsigned int atom_type = AtomDictionary::getType(symbol);
 
 				if (atom)
 					setType(*atom, atom_type);
@@ -607,7 +607,7 @@ Chem::JMEDataReader::readAtomSymbol(Atom* atom, std::string::const_iterator it,
 											MatchConstraint::EQUAL, 
 											true);
 			} else if (has_query_flags) {
-				unsigned int atom_type = getAtomType(symbol);
+				unsigned int atom_type = AtomDictionary::getType(symbol);
 
 				if (atom_type != AtomType::UNKNOWN && atom_type <= AtomType::MAX_ATOMIC_NO) {
 					if (atom)

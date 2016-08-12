@@ -241,8 +241,6 @@ namespace CDPL
 			unsigned int getEnabledReactionRoles() const;
 		
 		private:
-			/** \cond CDPL_PRIVATE_SECTION_DOC */
-
 			typedef std::pair<std::size_t, std::size_t> IndexOffsetPair;
 
 			ReactionSubstructureSearch(const ReactionSubstructureSearch&);
@@ -351,8 +349,6 @@ namespace CDPL
 			std::size_t                    numTargetBonds;
 			std::size_t                    maxNumMappings;
 			std::size_t                    freeMappingIdx;
-
-			/** \endcond */
 		};
 
 		/**

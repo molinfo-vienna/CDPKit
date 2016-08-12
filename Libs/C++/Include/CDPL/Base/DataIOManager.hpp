@@ -329,8 +329,6 @@ namespace CDPL
 		 * @}
 		 */
 
-		/** \cond CDPL_PRIVATE_SECTION_DOC */
-
 		extern template
 		class CDPL_BASE_API DataIOManager<Chem::Molecule>;
 		
@@ -339,8 +337,6 @@ namespace CDPL
 		
 		extern template
 		class CDPL_BASE_API DataIOManager<Chem::Reaction>;
-
-		/** \endcond */
 	}
 }
 

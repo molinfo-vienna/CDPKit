@@ -1,7 +1,7 @@
 INCLUDE_DIRECTORIES("${CMAKE_CURRENT_SOURCE_DIR}")
 
 SET(cdpl-math_LIB_SRCS
-    PrimeNumberTable.cpp
+    Math.cpp
    )
 
 ADD_LIBRARY(cdpl-math-static STATIC ${cdpl-math_LIB_SRCS})

@@ -44,7 +44,7 @@
 #include "CDPL/Chem/BondFunctions.hpp"
 #include "CDPL/Chem/ControlParameterFunctions.hpp"
 #include "CDPL/Chem/StereoDescriptor.hpp"
-#include "CDPL/Chem/AtomTypeFunctions.hpp"
+#include "CDPL/Chem/AtomDictionary.hpp"
 #include "CDPL/Chem/RadicalType.hpp"
 #include "CDPL/Chem/BondStereoFlag.hpp"
 #include "CDPL/Chem/AtomConfiguration.hpp"
@@ -335,7 +335,7 @@ void Chem::INCHIMoleculeReader::buildMolecule(Molecule& mol, const inchi_Atom* i
 void Chem::INCHIMoleculeReader::setElement(Atom& atom, const inchi_Atom& inchi_atom) const
 {
 	setSymbol(atom, inchi_atom.elname);
-	setType(atom, getAtomType(inchi_atom.elname));
+	setType(atom, AtomDictionary::getType(inchi_atom.elname));
 }
 
 void Chem::INCHIMoleculeReader::setIsotope(Atom& atom, const inchi_Atom& inchi_atom) const
@@ -351,7 +351,7 @@ void Chem::INCHIMoleculeReader::setIsotope(Atom& atom, const inchi_Atom& inchi_a
 	}
 
 	if (inchi_atom.isotopic_mass >= ISOTOPIC_SHIFT_FLAG - ISOTOPIC_SHIFT_MAX) {
-		long isotope = long(getMostAbundantIsotope(getType(atom))) + 
+		long isotope = long(AtomDictionary::getMostAbundantIsotope(getType(atom))) + 
 			inchi_atom.isotopic_mass - ISOTOPIC_SHIFT_FLAG;
 
 		if (isotope > 0)

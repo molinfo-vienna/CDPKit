@@ -34,7 +34,7 @@
 #include "CDPL/Chem/AtomFunctions.hpp"
 #include "CDPL/Chem/AtomContainer.hpp"
 #include "CDPL/Chem/Atom.hpp"
-#include "CDPL/Chem/AtomTypeFunctions.hpp"
+#include "CDPL/Chem/AtomDictionary.hpp"
 #include "CDPL/Chem/AtomType.hpp"
 
 
@@ -88,7 +88,7 @@ void Chem::buildExplicitMassCompositionString(const AtomContainer& cntnr, std::s
 
 	for (MassComposition::ConstEntryIterator it = mass_comp.getEntriesBegin(); it != entries_end; ) {
 		const std::string& symbol = (it->first == AtomType::UNKNOWN ? unknown_type_sym : 
-									 getAtomTypeSymbol(it->first));
+									 AtomDictionary::getSymbol(it->first));
 
 		comp_str_os << symbol << ": " << std::fixed << std::showpoint << std::setprecision(3) << std::right 
 					<< (it->second * 100) << '%';

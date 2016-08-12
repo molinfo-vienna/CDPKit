@@ -36,7 +36,7 @@
 #include "CDPL/Chem/AtomContainer.hpp"
 #include "CDPL/Chem/Atom.hpp"
 #include "CDPL/Chem/AtomType.hpp"
-#include "CDPL/Chem/AtomTypeFunctions.hpp"
+#include "CDPL/Chem/AtomDictionary.hpp"
 
 
 using namespace CDPL; 
@@ -57,7 +57,7 @@ void Chem::buildExplicitMolecularFormula(const AtomContainer& cntnr, std::string
 		if (atom_type == AtomType::UNKNOWN || atom_type > AtomType::MAX_ATOMIC_NO)
 			unknown_count++;
 		else
-			elem_counts[getAtomTypeSymbol(atom_type)]++;
+			elem_counts[AtomDictionary::getSymbol(atom_type)]++;
 	}
 
 	std::ostringstream formula_os;

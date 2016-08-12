@@ -29,6 +29,7 @@ SET(cdpl-chem_LIB_SRCS
 
     MDLDataBlock.cpp
     StereoDescriptor.cpp
+    AtomDictionary.cpp
 
     DefaultMultiConfMoleculeInputProcessor.cpp
 
@@ -299,7 +300,6 @@ SET(cdpl-chem_LIB_SRCS
     SimilarityFunctions.cpp
     UtilityFunctions.cpp
     FragmentHydrogenManipulationFunctions.cpp
-    AtomTypeFunctions.cpp
   
     MatchConstraintList.cpp
     AtomTypeMatchExpression.cpp

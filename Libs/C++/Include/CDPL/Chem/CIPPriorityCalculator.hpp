@@ -87,8 +87,6 @@ namespace CDPL
 			void calculate(const MolecularGraph& molgraph, Util::STArray& priorities);
 
 		private:
-			/** \cond CDPL_PRIVATE_SECTION_DOC */
-
 			CIPPriorityCalculator(const CIPPriorityCalculator&);
 
 			CIPPriorityCalculator& operator=(const CIPPriorityCalculator&);
@@ -146,8 +144,6 @@ namespace CDPL
 			AllocNodeList allocAtomNodes;
 			AllocNodeList allocImplHNodes;
 			NodeList      atomNodes;
-
-			/** \endcond */
 		};
 
 		/**

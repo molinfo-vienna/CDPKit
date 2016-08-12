@@ -29,7 +29,7 @@
 #include "CDPL/Chem/AtomFunctions.hpp"
 #include "CDPL/Chem/Atom.hpp"
 #include "CDPL/Chem/AtomProperty.hpp"
-#include "CDPL/Chem/AtomTypeFunctions.hpp"
+#include "CDPL/Chem/AtomDictionary.hpp"
 #include "CDPL/Chem/AtomType.hpp"
 
 
@@ -58,7 +58,7 @@ bool Chem::hasType(const Atom& atom)
 
 unsigned int Chem::getTypeForSymbol(const Atom& atom)
 {
-    return getAtomType(getSymbol(atom));
+    return AtomDictionary::getType(getSymbol(atom));
 }
 
 unsigned int Chem::getGenericType(const Atom& atom)
@@ -71,10 +71,10 @@ unsigned int Chem::getGenericType(const Atom& atom)
     if (atom_type > AtomType::MAX_TYPE)
 		return AtomType::UNKNOWN; 
 
-    if (isHalogen(atom_type))
+    if (AtomDictionary::isHalogen(atom_type))
 		return AtomType::X;
 
-    if (isMetal(atom_type))
+    if (AtomDictionary::isMetal(atom_type))
 		return AtomType::M;
 
     if (atom_type == AtomType::C)

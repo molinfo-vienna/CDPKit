@@ -181,8 +181,6 @@ namespace CDPL
 			void performReaction(const ReactionSite& rxn_site);
 	
 		private:
-			/** \cond CDPL_PRIVATE_SECTION_DOC */
-
 			Reactor(const Reactor&);
 
 			Reactor& operator=(const Reactor&);
@@ -243,8 +241,6 @@ namespace CDPL
 			AtomMap                    tgtAtomMapping;
 			BondMap                    tgtBondMapping;
 			Util::BitSet               mappedAtomMask;
-
-			/** \endcond */
 		};
 
 		/**

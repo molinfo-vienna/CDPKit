@@ -44,7 +44,7 @@
 #include "CDPL/Chem/AtomProperty.hpp"
 #include "CDPL/Chem/AtomConfiguration.hpp"
 #include "CDPL/Chem/AtomType.hpp"
-#include "CDPL/Chem/AtomTypeFunctions.hpp"
+#include "CDPL/Chem/AtomDictionary.hpp"
 
 
 using namespace CDPL; 
@@ -258,7 +258,7 @@ namespace
 					writeAtomicNumber(atom_type, type_constraint->getRelation() == MatchConstraint::NOT_EQUAL, expr_str);
 
 				} else {
-					const std::string& symbol = getAtomTypeSymbol(atom_type);
+					const std::string& symbol = AtomDictionary::getSymbol(atom_type);
 
 					assert(!symbol.empty());
 
@@ -295,7 +295,7 @@ namespace
 				expr_str.append(write_arom_sym ? AROMATICITY_FLAG_SYMBOL : NOT_OPERATOR + AROMATICITY_FLAG_SYMBOL);
 
 			} else {
-				const std::string& symbol = getAtomTypeSymbol(atom_type);
+				const std::string& symbol = AtomDictionary::getSymbol(atom_type);
 
 				assert(!symbol.empty());
 
@@ -307,7 +307,7 @@ namespace
 			return;
 		}
 
-		const std::string& symbol = getAtomTypeSymbol(atom_type);
+		const std::string& symbol = AtomDictionary::getSymbol(atom_type);
 
 		assert(!symbol.empty());
 	
@@ -414,7 +414,7 @@ namespace
 			expr_str.append(NOT_OPERATOR);
 		}
 	
-		const std::string& symbol = getAtomTypeSymbol(atom_type);
+		const std::string& symbol = AtomDictionary::getSymbol(atom_type);
 
 		assert(!symbol.empty());
 	

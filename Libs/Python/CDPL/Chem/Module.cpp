@@ -61,6 +61,7 @@ BOOST_PYTHON_MODULE(_chem)
 	exportStereoDescriptor();
 	exportMultiConfMoleculeInputProcessor();
 	exportDefaultMultiConfMoleculeInputProcessor();
+	exportAtomDictionary();
 
 	exportBoostFunctionWrappers();
 
@@ -228,7 +229,6 @@ BOOST_PYTHON_MODULE(_chem)
 	exportFragmentFunctions();
 	exportReactionFunctions();
 	exportSimilarityFunctions();
-	exportAtomTypeFunctions();
 
 	registerToPythonConverters();
 	registerFromPythonConverters();

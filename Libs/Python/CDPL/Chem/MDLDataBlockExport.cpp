@@ -38,27 +38,27 @@ void CDPLPythonChem::exportMDLDataBlock()
 	using namespace boost;
 	using namespace CDPL;
 
-	python::class_<Chem::MDLDataBlockItem>("MDLDataBlockItem", python::no_init)
+	python::class_<Chem::MDLDataBlockEntry>("MDLDataBlockEntry", python::no_init)
 		.def(python::init<>(python::arg("self")))
-		.def(python::init<const Chem::MDLDataBlockItem&>((python::arg("self"), python::arg("item"))))
+		.def(python::init<const Chem::MDLDataBlockEntry&>((python::arg("self"), python::arg("entry"))))
 		.def(python::init<const std::string&, const std::string&>((python::arg("self"), python::arg("header"),
 																   python::arg("data"))))
-		.def("assign", &Chem::MDLDataBlockItem::operator=, (python::arg("self"), python::arg("item")),
+		.def("assign", &Chem::MDLDataBlockEntry::operator=, (python::arg("self"), python::arg("entry")),
 			 python::return_self<>())
-		.def("getHeader", &Chem::MDLDataBlockItem::getHeader, python::arg("self"),  
+		.def("getHeader", &Chem::MDLDataBlockEntry::getHeader, python::arg("self"),  
 			 python::return_value_policy<python::copy_const_reference>())
-		.def("setHeader", &Chem::MDLDataBlockItem::setHeader, (python::arg("self"), python::arg("header")))
-		.def("getData", &Chem::MDLDataBlockItem::getData, python::arg("self"), 
+		.def("setHeader", &Chem::MDLDataBlockEntry::setHeader, (python::arg("self"), python::arg("header")))
+		.def("getData", &Chem::MDLDataBlockEntry::getData, python::arg("self"), 
 			 python::return_value_policy<python::copy_const_reference>())
-		.def("setData", &Chem::MDLDataBlockItem::setData, (python::arg("self"), python::arg("data")))
-		.def("__eq__", &Chem::MDLDataBlockItem::operator==, (python::arg("self"), python::arg("item")))
-		.def("__ne__", &Chem::MDLDataBlockItem::operator!=, (python::arg("self"), python::arg("item")))
-		.add_property("header", python::make_function(&Chem::MDLDataBlockItem::getHeader, 
+		.def("setData", &Chem::MDLDataBlockEntry::setData, (python::arg("self"), python::arg("data")))
+		.def("__eq__", &Chem::MDLDataBlockEntry::operator==, (python::arg("self"), python::arg("entry")))
+		.def("__ne__", &Chem::MDLDataBlockEntry::operator!=, (python::arg("self"), python::arg("entry")))
+		.add_property("header", python::make_function(&Chem::MDLDataBlockEntry::getHeader, 
 													  python::return_value_policy<python::copy_const_reference>()),
-					  &Chem::MDLDataBlockItem::setHeader)
-		.add_property("data", python::make_function(&Chem::MDLDataBlockItem::getData, 
+					  &Chem::MDLDataBlockEntry::setHeader)
+		.add_property("data", python::make_function(&Chem::MDLDataBlockEntry::getData, 
 													  python::return_value_policy<python::copy_const_reference>()),
-					  &Chem::MDLDataBlockItem::setData);
+					  &Chem::MDLDataBlockEntry::setData);
 
 	python::class_<Chem::MDLDataBlock, Chem::MDLDataBlock::SharedPointer>("MDLDataBlock", python::no_init)
 		.def(python::init<>(python::arg("self")))

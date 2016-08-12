@@ -157,14 +157,10 @@ inline CDPL::Base::DataWriter<T>& CDPL::Base::DataWriter<T>::operator=(const Dat
 	return *this;
 }
 
-/** \cond CDPL_PRIVATE_SECTION_DOC */
-
 template <typename T>
 inline CDPL::Base::DataWriter<T>& CDPL::Base::operator<<(DataWriter<T>& writer, const T& obj)
 {
 	return writer.write(obj);
 }
-
-/** \endcond */
 
 #endif // CDPL_BASE_DATAWRITER_HPP

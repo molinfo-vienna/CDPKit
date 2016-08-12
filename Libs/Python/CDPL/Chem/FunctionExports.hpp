@@ -31,7 +31,6 @@
 namespace CDPLPythonChem
 {
 
-	void exportAtomTypeFunctions();
 	void exportUtilityFunctions();
 	void exportControlParameterFunctions();
 	void exportAtomContainerFunctions();

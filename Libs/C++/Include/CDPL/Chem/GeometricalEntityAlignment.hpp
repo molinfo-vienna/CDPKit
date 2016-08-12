@@ -226,8 +226,6 @@ namespace CDPL
 			const Math::Matrix4D& getTransform() const;
 
 		private:
-			/** \cond CDPL_PRIVATE_SECTION_DOC */
-
 			TopologicalAlignment                   topAlignment;
 			EntityMapping                          topEntityMapping;
 			TopologicalAlignmentConstraintFunction topAlignConstrFunc;
@@ -237,8 +235,6 @@ namespace CDPL
 			Math::DMatrix                          alignedPoints;
 			Math::Matrix4D                         transform;
 			std::size_t                            minTopMappingSize;
-
-			/** \endcond */
 		};
 
 		/**

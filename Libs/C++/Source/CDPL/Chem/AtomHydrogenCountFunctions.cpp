@@ -31,22 +31,8 @@
 #include "CDPL/Chem/Bond.hpp"
 #include "CDPL/Chem/AtomProperty.hpp"
 #include "CDPL/Chem/AtomType.hpp"
-#include "CDPL/Chem/AtomTypeFunctions.hpp"
+#include "CDPL/Chem/AtomDictionary.hpp"
 
-
-
-/*
-  const unsigned int SP      = 1;
-  const unsigned int SP2     = 2;
-  const unsigned int SP3     = 3;
-  const unsigned int DP      = 4;
-  const unsigned int SD3     = 5;
-  const unsigned int SP2D    = 6;
-  const unsigned int SP3D    = 7;
-  const unsigned int SP3D2   = 8;
-  const unsigned int SP3D3   = 9;
-
- */
 
 using namespace CDPL; 
 
@@ -79,7 +65,7 @@ std::size_t Chem::calcImplicitHydrogenCount(const Atom& atom, const MolecularGra
 		return std::size_t(0);
 
     long explicit_val = calcExplicitValence(atom, molgraph);
-    long iupac_group = getIUPACGroup(atom_type);
+    long iupac_group = AtomDictionary::getIUPACGroup(atom_type);
     long num_val_elecs = iupac_group - 10;
 
     switch (iupac_group) {

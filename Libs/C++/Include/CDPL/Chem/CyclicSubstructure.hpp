@@ -83,8 +83,6 @@ namespace CDPL
 			void perceive(const MolecularGraph& molgraph);
 
 		private:
-			/** \cond CDPL_PRIVATE_SECTION_DOC */
-
 			CyclicSubstructure(const CyclicSubstructure&);
 
 			CyclicSubstructure& operator=(const CyclicSubstructure&);
@@ -102,8 +100,6 @@ namespace CDPL
 			AtomStack             atomStack;
 			BondStack             bondStack;
 			const MolecularGraph* molGraph;
-		
-			/** \endcond */
 		};
 
 		/**

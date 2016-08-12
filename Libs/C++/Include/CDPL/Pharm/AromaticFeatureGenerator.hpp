@@ -139,8 +139,6 @@ namespace CDPL
 			AromaticFeatureGenerator& operator=(const AromaticFeatureGenerator& gen);
 
 		  private:
-			/** \cond CDPL_PRIVATE_SECTION_DOC */
-
 			void addNonPatternFeatures(const Chem::MolecularGraph&, Pharmacophore&);
 
 			Chem::AromaticSSSRSubset aromSSSRSubset;
@@ -149,8 +147,6 @@ namespace CDPL
 			unsigned int             featureGeom;
 			double                   featureTol;
 			AtomList                 featureAtoms;
-
-			/** \endcond */
 		};
 
 		/**

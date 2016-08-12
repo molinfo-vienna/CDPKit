@@ -99,7 +99,6 @@ namespace CDPL
 	}
 }
 
-/** \cond CDPL_PRIVATE_SECTION_DOC */
 
 // Implementation 
 
@@ -255,8 +254,6 @@ CDPL_MATH_INLINE T CDPL::Math::gammaQ(const T& a, const T& x)
 	
 	return gammaQContFrac(a, x);
 }
-
-/** \endcond */
 
 #endif // CDPL_MATH_SPECIALFUNCTIONS_HPP
 

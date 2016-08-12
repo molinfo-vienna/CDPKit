@@ -85,8 +85,6 @@ namespace CDPL
 			void perceive(const MolecularGraph& molgraph);
 
 		private:
-			/** \cond CDPL_PRIVATE_SECTION_DOC */
-
 			class RingDescriptor 
 			{
 
@@ -137,8 +135,6 @@ namespace CDPL
 			RingDescriptorListTable    ringDescrListTable;
 			BondMaskSet                uniqueRingSet;
 			bool                       finished;
-
-			/** \endcond */
 		};
 
 		/**

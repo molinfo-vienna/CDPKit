@@ -69,16 +69,12 @@ namespace CDPL
 			bool operator()(const FeatureMapping& mapping) const;
 
 		  private:
-			/** \cond CDPL_PRIVATE_SECTION_DOC */
-
 			typedef std::vector<const Feature*> FeatureArray;
 			typedef std::vector<std::size_t> IndexArray;
 
 			std::size_t  maxOmtdFeatures;
 			FeatureArray checkedFeatures;
 			IndexArray   ftrGroupLimits;
-
-			/** \endcond */
 		};
 
 		/**

@@ -27,7 +27,7 @@
 #include "StaticInit.hpp"
 
 #include "CDPL/Chem/AtomFunctions.hpp"
-#include "CDPL/Chem/AtomTypeFunctions.hpp"
+#include "CDPL/Chem/AtomDictionary.hpp"
 
 
 using namespace CDPL; 
@@ -35,76 +35,76 @@ using namespace CDPL;
 
 double Chem::getAtomicWeight(const Atom& atom)
 {
-    return getAtomicWeight(getType(atom), getIsotope(atom));
+    return AtomDictionary::getAtomicWeight(getType(atom), getIsotope(atom));
 }
 
 std::size_t Chem::getIUPACGroup(const Atom& atom)
 {
-    return getIUPACGroup(getType(atom));
+    return AtomDictionary::getIUPACGroup(getType(atom));
 }
 
 double Chem::getVdWRadius(const Atom& atom)
 {
-    return getVdWRadius(getType(atom));
+    return AtomDictionary::getVdWRadius(getType(atom));
 }
 
 double Chem::getCovalentRadius(const Atom& atom, std::size_t order)
 {
-    return getCovalentRadius(getType(atom), order);
+    return AtomDictionary::getCovalentRadius(getType(atom), order);
 }
 
 double Chem::getAllredRochowElectronegativity(const Atom& atom)
 {
-    return getAllredRochowElectronegativity(getType(atom));
+    return AtomDictionary::getAllredRochowElectronegativity(getType(atom));
 }
 
 std::size_t Chem::getElementValenceElectronCount(const Atom& atom)
 {
-	return getNumValenceElectrons(getType(atom));
+	return AtomDictionary::getNumValenceElectrons(getType(atom));
 }
 
 const std::string& Chem::getElementName(const Atom& atom)
 {
-    return getElementName(getType(atom), getIsotope(atom));
+    return AtomDictionary::getName(getType(atom), getIsotope(atom));
 }
 
 bool Chem::isChemicalElement(const Atom& atom)
 {
-    return isChemicalElement(getType(atom));
+    return AtomDictionary::isChemicalElement(getType(atom));
 }
 
 bool Chem::isMainGroupElement(const Atom& atom)
 {
-    return isMainGroupElement(getType(atom));
+    return AtomDictionary::isMainGroupElement(getType(atom));
 }
 
 bool Chem::isMetal(const Atom& atom)
 {
-    return isMetal(getType(atom));
+    return AtomDictionary::isMetal(getType(atom));
 }
 
 bool Chem::isTransitionMetal(const Atom& atom)
 {
-    return isTransitionMetal(getType(atom));
+    return AtomDictionary::isTransitionMetal(getType(atom));
 }
 
 bool Chem::isNonMetal(const Atom& atom)
 {
-    return isNonMetal(getType(atom));
+    return AtomDictionary::isNonMetal(getType(atom));
 }
 
 bool Chem::isSemiMetal(const Atom& atom)
 {
-    return isSemiMetal(getType(atom));
+    return AtomDictionary::isSemiMetal(getType(atom));
 }
 
 bool Chem::isHalogen(const Atom& atom)
 {
-    return isHalogen(getType(atom));
+    return AtomDictionary::isHalogen(getType(atom));
 }
 
 bool Chem::isNobleGas(const Atom& atom)
 {
-    return isNobleGas(getType(atom));
+    return AtomDictionary::isNobleGas(getType(atom));
 }
 

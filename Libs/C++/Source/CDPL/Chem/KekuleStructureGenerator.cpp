@@ -39,7 +39,7 @@
 #include "CDPL/Chem/AtomFunctions.hpp"
 #include "CDPL/Chem/BondFunctions.hpp"
 #include "CDPL/Chem/AtomType.hpp"
-#include "CDPL/Chem/AtomTypeFunctions.hpp"
+#include "CDPL/Chem/AtomDictionary.hpp"
 
 
 using namespace CDPL; 
@@ -85,9 +85,9 @@ void Chem::KekuleStructureGenerator::generate(const MolecularGraph& molgraph, Ut
 		const Atom& atom = molgraph.getAtom(i);
 		
 		unsigned int atom_type = getType(atom);
-		const int* valence_states = getValenceStates(atom_type);		
+		const Util::STArray& valence_states = AtomDictionary::getValenceStates(atom_type);		
 
-		if (valence_states[0] < 0) {
+		if (valence_states.getSize() == 0) {
 			defineNbrBondOrders(atom);
 			continue;
 		}

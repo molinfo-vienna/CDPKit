@@ -495,8 +495,6 @@ namespace CDPL
 #undef CDPL_MAKE_CONVERSION_FUNC_BODY
 
 		private:
-			/** \cond CDPL_PRIVATE_SECTION_DOC */
-
 			class Data 
 			{
 
@@ -613,8 +611,6 @@ namespace CDPL
 		 * @}
 		 */
 
-		/** \cond CDPL_PRIVATE_SECTION_DOC */
-		
 		template <>
 		struct Variant::DataGetter<Variant>
 		{ 
@@ -936,7 +932,6 @@ namespace CDPL
 #undef CDPL_CONVERSION_FUNC_INT64
 #undef CDPL_MAKE_DATA_HOLDER
 
-		/** \endcond */
 	}
 }
 

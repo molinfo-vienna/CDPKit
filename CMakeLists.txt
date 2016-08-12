@@ -132,7 +132,7 @@ ELSE(WIN32)
 ENDIF(WIN32)
 
 SET(Boost_USE_STATIC_LIBS OFF)
-FIND_PACKAGE(Boost 1.36.0 COMPONENTS date_time python unit_test_framework)
+FIND_PACKAGE(Boost 1.52.0 COMPONENTS date_time python unit_test_framework)
 
 FIND_PACKAGE(Cairo)
 FIND_PACKAGE(Doxygen)

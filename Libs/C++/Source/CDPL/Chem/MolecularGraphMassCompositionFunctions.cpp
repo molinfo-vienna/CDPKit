@@ -33,7 +33,7 @@
 #include "CDPL/Chem/MolecularGraphFunctions.hpp"
 #include "CDPL/Chem/AtomFunctions.hpp"
 #include "CDPL/Chem/Atom.hpp"
-#include "CDPL/Chem/AtomTypeFunctions.hpp"
+#include "CDPL/Chem/AtomDictionary.hpp"
 #include "CDPL/Chem/AtomType.hpp"
 
 
@@ -52,7 +52,7 @@ double Chem::calcMass(const MolecularGraph& molgraph)
 		imp_h_count += getImplicitHydrogenCount(atom);
 	}
 
-	mass += getAtomicWeight(AtomType::H, 0) * imp_h_count;
+	mass += AtomDictionary::getAtomicWeight(AtomType::H, 0) * imp_h_count;
 
 	return mass;
 }
@@ -78,7 +78,7 @@ void Chem::calcMassComposition(const MolecularGraph& molgraph, MassComposition& 
 		imp_h_count += getImplicitHydrogenCount(atom);
 	}
 
-	double imp_h_mass = getAtomicWeight(AtomType::H, 0) * imp_h_count;
+	double imp_h_mass = AtomDictionary::getAtomicWeight(AtomType::H, 0) * imp_h_count;
 
 	comp[AtomType::H] += imp_h_mass;
 	mass += imp_h_mass;
@@ -101,7 +101,7 @@ void Chem::buildMassCompositionString(const MolecularGraph& molgraph, std::strin
 
 	for (MassComposition::ConstEntryIterator it = mass_comp.getEntriesBegin(); it != entries_end; ) {
 		const std::string& symbol = (it->first == AtomType::UNKNOWN ? unknown_type_sym : 
-									 getAtomTypeSymbol(it->first));
+									 AtomDictionary::getSymbol(it->first));
 
 		comp_str_os << symbol << ": " << std::fixed << std::showpoint << std::setprecision(3) << std::right 
 					<< (it->second * 100) << '%';

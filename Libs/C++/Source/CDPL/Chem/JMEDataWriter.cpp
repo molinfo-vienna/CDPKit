@@ -41,7 +41,7 @@
 #include "CDPL/Chem/Atom.hpp"
 #include "CDPL/Chem/Bond.hpp"
 #include "CDPL/Chem/MatchConstraintList.hpp"
-#include "CDPL/Chem/AtomTypeFunctions.hpp"
+#include "CDPL/Chem/AtomDictionary.hpp"
 #include "CDPL/Chem/AtomType.hpp"
 #include "CDPL/Chem/MolecularGraphFunctions.hpp"
 #include "CDPL/Chem/Entity3DFunctions.hpp"
@@ -709,7 +709,7 @@ bool Chem::JMEDataWriter::writeAtomType(std::ostream& os, unsigned int atom_type
 			}
 
 			if (aromaticity && !is_aromatic) {
-				symbol.append(getAtomTypeSymbol(atom_type));
+				symbol.append(AtomDictionary::getSymbol(atom_type));
 				break;
 			}
 

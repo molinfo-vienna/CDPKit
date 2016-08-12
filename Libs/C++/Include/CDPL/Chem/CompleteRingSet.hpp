@@ -97,8 +97,6 @@ namespace CDPL
 			void perceive(const MolecularGraph& molgraph);
 
 		private:
-			/** \cond CDPL_PRIVATE_SECTION_DOC */
-
 			CompleteRingSet(const CompleteRingSet&);
 
 			CompleteRingSet& operator=(const CompleteRingSet&);
@@ -180,8 +178,6 @@ namespace CDPL
 			NodeQueue                nodeQueue;
 			AllocEdgeList            allocEdges;
 			EdgeList                 freeEdges;
-
-			/** \endcond */
 		};
 
 		/**

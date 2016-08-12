@@ -71,11 +71,6 @@ namespace CDPL
 			 * \param first_set If \c true, the features are added to the first feature set, if \c false to the second one.
 			 */
 			void addPharmacophore(const Pharmacophore& pharm, bool first_set);
-	  
-		  private:
-			/** \cond CDPL_PRIVATE_SECTION_DOC */
-
-			/** \endcond */
 		};
 
 		/**

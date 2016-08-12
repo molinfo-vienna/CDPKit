@@ -34,6 +34,7 @@ SET(chem_MOD_SRCS
     StereoDescriptorExport.cpp
     MultiConfMoleculeInputProcessorExport.cpp
     DefaultMultiConfMoleculeInputProcessorExport.cpp
+    AtomDictionaryExport.cpp
 
     MatchConstraintListExport.cpp 
     MatchExpressionExport.cpp 
@@ -195,7 +196,6 @@ SET(chem_MOD_SRCS
     FragmentFunctionExport.cpp 
     ReactionFunctionExport.cpp 
     SimilarityFunctionExport.cpp 
-    AtomTypeFunctionExport.cpp 
 
     BoostFunctionWrapperExport.cpp
 

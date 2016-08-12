@@ -50,7 +50,7 @@
 #include "CDPL/Chem/AtomPropertyFlag.hpp"
 #include "CDPL/Chem/BondPropertyFlag.hpp"
 #include "CDPL/Chem/StereoDescriptor.hpp"
-#include "CDPL/Chem/AtomTypeFunctions.hpp"
+#include "CDPL/Chem/AtomDictionary.hpp"
 #include "CDPL/Chem/AtomType.hpp"
 #include "CDPL/Chem/AtomConfiguration.hpp"
 #include "CDPL/Chem/BondConfiguration.hpp"
@@ -1090,7 +1090,7 @@ void Chem::SMILESDataWriter::DFSTreeNode::writeAtomSymbol(std::ostream& os, unsi
 		return;
 	}
 
-	const std::string& symbol = getAtomTypeSymbol(atom_type);
+	const std::string& symbol = AtomDictionary::getSymbol(atom_type);
 
 	if (writer.ctrlParameters.writeKekuleForm) {
 		os << symbol;

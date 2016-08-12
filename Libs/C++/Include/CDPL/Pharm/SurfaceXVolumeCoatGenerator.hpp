@@ -197,8 +197,6 @@ namespace CDPL
 			void generate(const Chem::AtomContainer& cntnr, const Chem::MolecularGraph& parent_molgraph, Pharmacophore& pharm);
 
 		  private:
-			/** \cond CDPL_PRIVATE_SECTION_DOC */
-
 			typedef std::vector<double> AtomRadiusTable;
 			typedef std::vector<std::size_t> AtomIndexList;
 			typedef boost::shared_ptr<AtomIndexList> AtomIndexListPtr;
@@ -236,8 +234,6 @@ namespace CDPL
 			GridAtomLookupTable         gridAtomLookup;
 			AtomIndexList               surfaceAtoms;
 			Util::BitSet                surfAtomMask;
-
-			/** \endcond */
 		};
 
 		/**

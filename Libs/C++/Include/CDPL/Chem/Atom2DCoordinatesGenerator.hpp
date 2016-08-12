@@ -96,8 +96,6 @@ namespace CDPL
 			void generate(const MolecularGraph& molgraph, Math::Vector2DArray& coords);
 
 		private:
-			/** \cond CDPL_PRIVATE_SECTION_DOC */
-
 			class RingInfo
 			{
 
@@ -545,8 +543,6 @@ namespace CDPL
 			std::size_t           numLayoutCollisions;
 			std::size_t           maxNumLayoutCollisions;
 			std::size_t           backtrackingCount;
-
-			/** \endcond */
 		};
 
 		/**

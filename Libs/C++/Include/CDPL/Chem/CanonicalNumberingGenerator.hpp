@@ -165,8 +165,6 @@ namespace CDPL
 			void generate(const MolecularGraph& molgraph, Util::STArray& numbering);
 
 		private:
-			/** \cond CDPL_PRIVATE_SECTION_DOC */
-
 			CanonicalNumberingGenerator(const CanonicalNumberingGenerator&);
 
 			CanonicalNumberingGenerator& operator=(const CanonicalNumberingGenerator&);
@@ -341,8 +339,6 @@ namespace CDPL
 			NodeList               minNodeList;
 			CanonComponentList     canonComponentList;
 			Util::BitSet           visitedEdgeMask;
-
-			/** \endcond */
 		};
 
 		/**

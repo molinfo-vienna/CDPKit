@@ -56,6 +56,7 @@ namespace CDPLPythonChem
 	void exportStereoDescriptor();
 	void exportMultiConfMoleculeInputProcessor();
 	void exportDefaultMultiConfMoleculeInputProcessor();
+	void exportAtomDictionary();
 
 	void exportBoostFunctionWrappers();
 

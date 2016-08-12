@@ -203,9 +203,6 @@
 \defgroup CDPL_CHEM_FUNCTIONS Free Functions
 \ingroup CDPL_CHEM
 
-\defgroup CDPL_CHEM_ATOM_TYPE_FUNCTIONS Atom Type related Functions
-\ingroup CDPL_CHEM_FUNCTIONS
-
 \defgroup CDPL_CHEM_CONTROL_PARAMTER_FUNCTIONS Control-Parameter Functions
 \ingroup CDPL_CHEM_FUNCTIONS
 

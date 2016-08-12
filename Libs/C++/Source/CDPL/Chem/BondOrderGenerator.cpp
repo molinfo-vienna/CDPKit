@@ -50,7 +50,7 @@
 #include "CDPL/Chem/AtomFunctions.hpp"
 #include "CDPL/Chem/BondFunctions.hpp"
 #include "CDPL/Chem/MolecularGraphFunctions.hpp"
-#include "CDPL/Chem/AtomTypeFunctions.hpp"
+#include "CDPL/Chem/AtomDictionary.hpp"
 #include "CDPL/Chem/AtomType.hpp"
 #include "CDPL/Chem/SMILESMoleculeReader.hpp"
 #include "CDPL/Chem/SubstructureSearch.hpp"
@@ -63,9 +63,9 @@ using namespace CDPL;
 namespace
 {
 
-	const int chalcogenideValStatesBCGE4[] = { 6, -1 }; 
+	Util::STArray CHALCOGENIDE_VAL_STATES_BCGE4;
 
-    std::string funcGroupPatternStrings[] = { 
+    std::string FUNC_GROUP_PATTERN_STRINGS[] = { 
 	    "N-C(-*)=O",
 	    "*:N-C(-*)=O",
 
@@ -94,7 +94,7 @@ namespace
 	
 	typedef std::vector<Chem::Molecule::SharedPointer> MoleculeTable;
 
-	MoleculeTable funcGroupPatternMols;
+	MoleculeTable FUNC_GROUP_PATTERN_MOLS;
 
 	void initFunctionalGroupPatterns() 
 	{
@@ -105,16 +105,18 @@ namespace
 
 		initialized = true;
 
-		for (std::size_t i = 0; i < sizeof(funcGroupPatternStrings) / sizeof(std::string); i++) {
+		for (std::size_t i = 0; i < sizeof(FUNC_GROUP_PATTERN_STRINGS) / sizeof(std::string); i++) {
 			using namespace Chem;
 
-			std::istringstream iss(funcGroupPatternStrings[i]);
+			std::istringstream iss(FUNC_GROUP_PATTERN_STRINGS[i]);
 			SMILESMoleculeReader smi_reader(iss);
 			Molecule::SharedPointer mol_ptr(new BasicMolecule());
 
 			if (smi_reader.read(*mol_ptr)) 
-				funcGroupPatternMols.push_back(mol_ptr);
+				FUNC_GROUP_PATTERN_MOLS.push_back(mol_ptr);
 		}
+
+		CHALCOGENIDE_VAL_STATES_BCGE4.addElement(6);
 	}
 
 	void genMappedBondMask(const Chem::AtomBondMapping& mapping, Util::BitSet& mask, const Chem::MolecularGraph& molgraph)
@@ -323,10 +325,10 @@ void Chem::BondOrderGenerator::init(const MolecularGraph& molgraph, Util::STArra
 	MatchExpression<Atom, MolecularGraph>::SharedPointer atom_expr(new AtomMatchExpression());
 	MatchExpression<Bond, MolecularGraph>::SharedPointer bond_expr(new BondMatchExpression(*this, orders));
 
-	std::size_t num_patterns = funcGroupPatternMols.size();
+	std::size_t num_patterns = FUNC_GROUP_PATTERN_MOLS.size();
 
 	for (std::size_t i = 0; i < num_patterns; i++) {
-		Molecule::SharedPointer ptn_copy = funcGroupPatternMols[i]->clone();
+		Molecule::SharedPointer ptn_copy = FUNC_GROUP_PATTERN_MOLS[i]->clone();
 
 		std::for_each(ptn_copy->getAtomsBegin(), ptn_copy->getAtomsEnd(), 
 					  boost::bind(static_cast<void (*)(Atom&, const MatchExpression<Atom,
@@ -382,22 +384,22 @@ void Chem::BondOrderGenerator::calcFreeAtomValences(Util::STArray& orders)
 		if (atom_type == AtomType::C)
 			charge = std::min(charge, -charge);
 
-		const int* valence_states;
+		const Util::STArray* valence_states;
 
-		if (getIUPACGroup(atom_type) == 16 && atom_type > AtomType::O && getExplicitBondCount(atom, *molGraph) >= 4)
-		 	valence_states = chalcogenideValStatesBCGE4;			
+		if (AtomDictionary::getIUPACGroup(atom_type) == 16 && atom_type > AtomType::O && getExplicitBondCount(atom, *molGraph) >= 4)
+		 	valence_states = &CHALCOGENIDE_VAL_STATES_BCGE4;			
 		else
-			valence_states = getValenceStates(atom_type);		
+			valence_states = &AtomDictionary::getValenceStates(atom_type);		
 
 		bool def_nbr_bonds = false;
 
 		for (std::size_t j = 0; true; j++) {
-			if (valence_states[j] < 0) {
+			if (j == valence_states->getSize()) {
 				def_nbr_bonds = true;
 				break;
 			}
 
-			long free_valence = valence_states[j] + charge - valence;
+			long free_valence = valence_states->getElement(j) + charge - valence;
 
 			if (free_valence > num_undef_nbr_bonds) {
 				freeAtomValences.push_back(std::size_t(free_valence));
@@ -626,7 +628,7 @@ double Chem::BondOrderGenerator::calcMappingScore(const AtomBondMapping& mapping
 		const Atom& atom2 = mpd_bond.getEnd();
 
 		double bond_length = length(get3DCoordinates(atom1) - get3DCoordinates(atom2));
-		double cov_rad_bond_length = getCovalentRadius(getType(atom1), order) + getCovalentRadius(getType(atom2), order);
+		double cov_rad_bond_length = AtomDictionary::getCovalentRadius(getType(atom1), order) + AtomDictionary::getCovalentRadius(getType(atom2), order);
 		double bond_length_diff = std::abs(bond_length - cov_rad_bond_length);
 
 		score -= bond_length_diff;
@@ -863,12 +865,12 @@ void Chem::BondOrderGenerator::assignRemainingBondOrders(Util::STArray& orders)
 			double min_bl_diff = std::numeric_limits<double>::max();
 			
 			for (std::size_t i = 1; i <= 3; i++) {
-				double cov_rad_atom1 = getCovalentRadius(atom1_type, i);
+				double cov_rad_atom1 = AtomDictionary::getCovalentRadius(atom1_type, i);
 				
 				if (cov_rad_atom1 <= 0.0)
 					continue;
 
-				double cov_rad_atom2 = getCovalentRadius(atom2_type, i);
+				double cov_rad_atom2 = AtomDictionary::getCovalentRadius(atom2_type, i);
 				
 				if (cov_rad_atom2 <= 0.0)
 					continue;
@@ -966,7 +968,8 @@ void Chem::BondOrderGenerator::assignFragBondOrders(std::size_t depth, Util::STA
 			break;
 	}
 
-	double elneg_score = std::abs(getAllredRochowElectronegativity(atom1_type) - getAllredRochowElectronegativity(atom2_type)) * 0.5;
+	double elneg_score = std::abs(AtomDictionary::getAllredRochowElectronegativity(atom1_type) - 
+								  AtomDictionary::getAllredRochowElectronegativity(atom2_type)) * 0.5;
 	std::size_t max_order = std::min(max_atom1_order, max_atom2_order);
 
 	double saved_score = currOrderAssmentScore;
@@ -978,7 +981,8 @@ void Chem::BondOrderGenerator::assignFragBondOrders(std::size_t depth, Util::STA
 
 	for (std::size_t order = 1; order <= max_order; order++) {
 		double score_contrib = 1.0;
-		double cov_rad_bond_length = getCovalentRadius(atom1_type, order) + getCovalentRadius(atom2_type, order);
+		double cov_rad_bond_length = AtomDictionary::getCovalentRadius(atom1_type, order) + 
+			AtomDictionary::getCovalentRadius(atom2_type, order);
 		double bond_length_dev = std::abs(bond_length - cov_rad_bond_length);
 
 		score_contrib -= bond_length_dev;

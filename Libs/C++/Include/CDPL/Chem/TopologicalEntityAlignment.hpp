@@ -177,8 +177,6 @@ namespace CDPL
 			bool nextAlignment(EntityMapping& mapping);
 
 		private:
-			/** \cond CDPL_PRIVATE_SECTION_DOC */
-
 			typedef std::pair<const EntityType*, const EntityType*> EntityPair;
 			typedef std::vector<EntityPair> EntityPairArray;
 
@@ -191,8 +189,6 @@ namespace CDPL
 			EntitySet                   firstEntities;
 			EntitySet                   secondEntities;
 			bool                        changes;
-
-			/** \endcond */
 		};
 
 		/**

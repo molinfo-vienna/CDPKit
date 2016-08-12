@@ -35,7 +35,7 @@
 #include "CDPL/Chem/AtomFunctions.hpp"
 #include "CDPL/Chem/Atom.hpp"
 #include "CDPL/Chem/AtomType.hpp"
-#include "CDPL/Chem/AtomTypeFunctions.hpp"
+#include "CDPL/Chem/AtomDictionary.hpp"
 
 
 using namespace CDPL; 
@@ -58,7 +58,7 @@ void Chem::buildMolecularFormula(const MolecularGraph& molgraph, std::string& fo
 		if (atom_type == AtomType::UNKNOWN || atom_type > AtomType::MAX_ATOMIC_NO)
 			unknown_count++;
 		else
-			elem_counts[getAtomTypeSymbol(atom_type)]++;
+			elem_counts[AtomDictionary::getSymbol(atom_type)]++;
 
 		imp_h_count += getImplicitHydrogenCount(atom);
 	}

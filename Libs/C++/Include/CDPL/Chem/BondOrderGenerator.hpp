@@ -108,8 +108,6 @@ namespace CDPL
 			void generate(const MolecularGraph& molgraph, Util::STArray& orders);
 
 		private:
-			/** \cond CDPL_PRIVATE_SECTION_DOC */
-
 			enum Geometry {
 			
 			  UNDEF,
@@ -193,8 +191,6 @@ namespace CDPL
 			Util::BitSet           bondMappingMask1;
 			Util::BitSet           bondMappingMask2;
 			Util::BitSet           conjRingBondMask;
-
-			/** \endcond */
 		};
 
 		/**

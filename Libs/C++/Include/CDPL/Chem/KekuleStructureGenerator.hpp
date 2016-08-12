@@ -86,8 +86,6 @@ namespace CDPL
 			void generate(const MolecularGraph& molgraph, Util::STArray& orders);
 
 		private:
-			/** \cond CDPL_PRIVATE_SECTION_DOC */
-		
 			void init(const MolecularGraph& molgraph, Util::STArray& orders);
 
 			void defineNbrBondOrders(const Atom& atom);
@@ -99,8 +97,6 @@ namespace CDPL
 			std::size_t            startAtomIdx;
 			Util::BitSet           defOrderMask;
 			BondList               conctdUndefBonds;
-
-			/** \endcond */
 		};
 
 		/**

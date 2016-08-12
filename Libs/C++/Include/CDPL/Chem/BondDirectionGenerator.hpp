@@ -126,8 +126,6 @@ namespace CDPL
 			void generate(const MolecularGraph& molgraph, Util::UIArray& dirs);
 
 		private:
-			/** \cond CDPL_PRIVATE_SECTION_DOC */
-
 			class StereoBond;
 
 			class StereoBondOrderingFunction : public std::binary_function<const StereoBond*, const StereoBond*, bool>
@@ -199,8 +197,6 @@ namespace CDPL
 			std::size_t            minNumMismatches;
 			std::size_t            numDirBonds;
 			std::size_t            minNumDirBonds;
-
-			/** \endcond */
 		};
 
 		/**

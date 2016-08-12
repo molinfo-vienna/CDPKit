@@ -78,7 +78,6 @@ namespace CDPL
 	}
 }
 
-/** \cond CDPL_PRIVATE_SECTION_DOC */
 
 // Implementation
 
@@ -102,8 +101,6 @@ inline void CDPL::Math::svBackSubstitution(const M1& u, const V1& w, const M2& v
 
 	x = prod(v, tmp);
 }
-
-/** \endcond */
 
 #endif // CDPL_MATH_SVBACKSUBSTITUTION_HPP
 

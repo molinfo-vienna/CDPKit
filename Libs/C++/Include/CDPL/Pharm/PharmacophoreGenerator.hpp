@@ -132,15 +132,11 @@ namespace CDPL
 			void generate(const Chem::MolecularGraph& molgraph, Pharmacophore& pharm);
 
 		  private:
-			/** \cond CDPL_PRIVATE_SECTION_DOC */
-	
 			typedef std::set<unsigned int> EnabledFeatureSet;
 			typedef std::map<unsigned int, FeatureFunction> FeatureFunctionMap;
 		
 			FeatureFunctionMap  featureFuncMap;
 			EnabledFeatureSet   enabledFeatures;
-	
-			/** \endcond */
 		};
 
 		/**

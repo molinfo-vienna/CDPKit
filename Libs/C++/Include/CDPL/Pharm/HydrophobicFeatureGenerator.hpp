@@ -181,8 +181,6 @@ namespace CDPL
 			double getGroupHydrophobicityThreshold() const;
 
 		  private:
-			/** \cond CDPL_PRIVATE_SECTION_DOC */
-
 			typedef std::vector<double> DoubleArray;
 			typedef std::vector<Math::Vector3D> CoordsArray;
 
@@ -230,8 +228,6 @@ namespace CDPL
 			CoordsArray                 nbrAtomPositions;
 			AtomList                    featureAtoms;
 			AtomList                    chainAtoms;
-
-			/** \endcond */
 		};
 
 		/**

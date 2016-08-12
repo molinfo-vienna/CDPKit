@@ -46,6 +46,7 @@
 #include "CDPL/Chem/BasicBond.hpp"
 #include "CDPL/Chem/Fragment.hpp"
 
+#include "CDPL/Chem/AtomDictionary.hpp"
 #include "CDPL/Chem/FragmentList.hpp"
 #include "CDPL/Chem/Entity3DMapping.hpp"
 #include "CDPL/Chem/AtomMapping.hpp"
@@ -196,7 +197,6 @@
 
 #include "CDPL/Chem/SimilarityFunctions.hpp"
 #include "CDPL/Chem/UtilityFunctions.hpp"
-#include "CDPL/Chem/AtomTypeFunctions.hpp"
 #include "CDPL/Chem/AtomContainerFunctions.hpp"
 #include "CDPL/Chem/BondContainerFunctions.hpp"
 #include "CDPL/Chem/AtomContainerFunctions.hpp"

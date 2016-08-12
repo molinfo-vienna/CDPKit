@@ -91,8 +91,6 @@ namespace CDPL
 			void perceive(const MolecularGraph& molgraph);
 
 		private:
-			/** \cond CDPL_PRIVATE_SECTION_DOC */
-
 			typedef SmallestSetOfSmallestRings Controller;
 
 			class TNode;
@@ -220,8 +218,6 @@ namespace CDPL
 			MessageList              linDepTestMtx;
 			MessageList              sssr;
 			std::size_t              sssrSize;
-
-			/** \endcond */
 		};
 
 		/**

@@ -83,14 +83,10 @@ namespace CDPL
 			bool operator()(const Feature& ftr1, const Feature& ftr2) const;
 
 		  private:
-			/** \cond CDPL_PRIVATE_SECTION_DOC */
-		
 			double minVDist;
 			double maxVDist;
 			double maxHDist;
 			double angleTol;
-
-			/** \endcond */			
 		};
 
 		/**

@@ -31,7 +31,7 @@
 #include "CDPL/Chem/AtomFunctions.hpp"
 #include "CDPL/Chem/Atom.hpp"
 #include "CDPL/Chem/AtomProperty.hpp"
-#include "CDPL/Chem/AtomTypeFunctions.hpp"
+#include "CDPL/Chem/AtomDictionary.hpp"
 
 
 using namespace CDPL; 
@@ -64,17 +64,17 @@ long Chem::calcFormalCharge(const Atom& atom, const MolecularGraph& molgraph)
 	unsigned int atom_type = getType(atom);
 	long valence = calcValence(atom, molgraph) + getUnpairedElectronCount(atom);
 
-	const int* val_states = getValenceStates(atom_type);
-	int nearest_val_state = -1;
+	const Util::STArray& val_states = AtomDictionary::getValenceStates(atom_type);
+	long nearest_val_state = -1;
 
-	for (int i = 0; val_states[i] >= 0; i++)
+	for (std::size_t i = 0; i < val_states.getSize(); i++)
 		if (std::abs(val_states[i] - valence) < std::abs(nearest_val_state - valence))
 			nearest_val_state = val_states[i];
 
 	if (nearest_val_state == -1)
 		return 0;
 
-	switch (getIUPACGroup(atom_type)) {
+	switch (AtomDictionary::getIUPACGroup(atom_type)) {
 		
 		case 1: 
 		case 2:

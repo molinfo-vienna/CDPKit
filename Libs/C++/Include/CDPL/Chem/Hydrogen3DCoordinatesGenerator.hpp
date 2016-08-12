@@ -106,8 +106,6 @@ namespace CDPL
 			void generate(const MolecularGraph& molgraph, Math::Vector3DArray& coords);
 
 		private:
-			/** \cond CDPL_PRIVATE_SECTION_DOC */
-
 			typedef std::vector<std::size_t> AtomIndexList;
 				
 			void init(const MolecularGraph&, Math::Vector3DArray&);
@@ -152,8 +150,6 @@ namespace CDPL
 			DynamicPointArray             genPoints;
 			Math::KabschAlgorithm<double> kabschAlgo;
 			Util::BitSet                  usedPosMask;
-
-			/** \endcond */
 		};
 
 		/**

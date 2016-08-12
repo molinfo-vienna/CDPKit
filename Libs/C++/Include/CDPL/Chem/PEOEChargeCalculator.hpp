@@ -131,8 +131,6 @@ namespace CDPL
 			void getElectronegativities(Util::DArray& elnegs) const;
 
 		private:
-			/** \cond CDPL_PRIVATE_SECTION_DOC */
-
 			PEOEChargeCalculator(const PEOEChargeCalculator&);
 
 			PEOEChargeCalculator& operator=(const PEOEChargeCalculator&);
@@ -175,8 +173,6 @@ namespace CDPL
 			double             dampingFactor;
 			PEOEAtomStateList  atomStates;
 			PEOEAtomStateList  implHStates;
-
-			/** \endcond */
 		};
 
 		/**

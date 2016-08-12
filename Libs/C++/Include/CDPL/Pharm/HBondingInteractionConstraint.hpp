@@ -85,15 +85,11 @@ namespace CDPL
 			bool operator()(const Feature& ftr1, const Feature& ftr2) const;
 
 		  private:
-			/** \cond CDPL_PRIVATE_SECTION_DOC */
-		
 			bool   donAccOrder;
 			double minLength;
 			double maxLength;
 			double minAHDAngle;
 			double maxAccAngle;
-
-			/** \endcond */			
 		};
 
 		/**

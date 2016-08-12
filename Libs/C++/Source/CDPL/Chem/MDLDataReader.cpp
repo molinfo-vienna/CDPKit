@@ -51,7 +51,7 @@
 #include "CDPL/Chem/BondFunctions.hpp"
 #include "CDPL/Chem/ControlParameterFunctions.hpp"
 #include "CDPL/Chem/StereoDescriptor.hpp"
-#include "CDPL/Chem/AtomTypeFunctions.hpp"
+#include "CDPL/Chem/AtomDictionary.hpp"
 #include "CDPL/Chem/AtomType.hpp"
 #include "CDPL/Chem/BondStereoFlag.hpp"
 #include "CDPL/Chem/ReactionCenterStatus.hpp"
@@ -726,7 +726,7 @@ void Chem::MDLDataReader::readCTabV2000AtomSymbol(std::istream& is, Atom& atom)
 
 	setSymbol(atom, tmpString);
 
-	unsigned int atom_type = getAtomType(tmpString);
+	unsigned int atom_type = AtomDictionary::getType(tmpString);
 
 	setType(atom, atom_type);
 
@@ -759,7 +759,7 @@ void Chem::MDLDataReader::readCTabV2000AtomMass(std::istream& is, Atom& atom) co
 		throw Base::IOError("MDLDataReader: atom isotope mass difference value out of allowed range");
 
 	if (mass_diff != 0) {
-		long iso = getMostAbundantIsotope(getType(atom)) + mass_diff;
+		long iso = AtomDictionary::getMostAbundantIsotope(getType(atom)) + mass_diff;
 
 		if (iso > 0)
 			setIsotope(atom, iso);
@@ -1630,7 +1630,7 @@ void Chem::MDLDataReader::readCTabV2000AtomListProperties(std::istream& is, Mole
 		readMDLString(is, 4, tmpString, true, "MDLDataReader: error while reading atom symbol item from atom list property line", 
 					  trimStrings);
 
-		unsigned int atom_type = getAtomType(tmpString);
+		unsigned int atom_type = AtomDictionary::getType(tmpString);
 
 		if (atom_type != AtomType::UNKNOWN)
 			alist_constr_ptr->addElement(AtomMatchConstraint::TYPE, MatchConstraint::EQUAL,
@@ -1668,7 +1668,7 @@ void Chem::MDLDataReader::readSDFData(std::istream& is, Molecule& mol)
 	using namespace MDL;
 
 	MDLDataBlock::SharedPointer sd_ptr(new MDLDataBlock());
-	MDLDataBlockItem data_item;
+	MDLDataBlockEntry data_entry;
 
 	while (true) {
 		readMDLLine(is, line, "MDLDataReader: error while reading structure data block", false, checkLineLength);
@@ -1692,7 +1692,7 @@ void Chem::MDLDataReader::readSDFData(std::istream& is, Molecule& mol)
 
 		line.erase(0, SDFile::DATA_HEADER_PREFIX.length());
 
-		data_item.setHeader(line);
+		data_entry.setHeader(line);
 
 		tmpString.clear();
 
@@ -1709,9 +1709,9 @@ void Chem::MDLDataReader::readSDFData(std::istream& is, Molecule& mol)
 			tmpString.append(line);
 		}
 	
-		data_item.setData(tmpString);
+		data_entry.setData(tmpString);
 
-		sd_ptr->addElement(data_item);
+		sd_ptr->addElement(data_entry);
 	}
 
 	setMDLStructureData(mol, sd_ptr);
@@ -2188,7 +2188,7 @@ void Chem::MDLDataReader::readRDFData(std::istream& is, Reaction& rxn)
 	using namespace MDL;
 	
 	MDLDataBlock::SharedPointer rd_ptr(new MDLDataBlock());
-	MDLDataBlockItem data_item;
+	MDLDataBlockEntry data_entry;
 
 	std::istringstream iss;
 	std::string keyword;
@@ -2244,7 +2244,7 @@ void Chem::MDLDataReader::readRDFData(std::istream& is, Reaction& rxn)
 			line.append(tmpString);
 		}
 
-		data_item.setHeader(line);
+		data_entry.setHeader(line);
 
 		tmpString.erase(0, RDFile::DATA_FIELD_PREFIX.length());
 
@@ -2275,9 +2275,9 @@ void Chem::MDLDataReader::readRDFData(std::istream& is, Reaction& rxn)
 			tmpString.append(line);
 		}
 
-		data_item.setData(tmpString);
+		data_entry.setData(tmpString);
 
-		rd_ptr->addElement(data_item);
+		rd_ptr->addElement(data_entry);
 	}
 
 	setMDLReactionData(rxn, rd_ptr);
@@ -2659,7 +2659,7 @@ void Chem::MDLDataReader::readCTabV3000AtomType(std::istream& is, Atom& atom, Ma
 	alist_constr_ptr->setType(not_list ? MatchConstraintList::NOT_OR_LIST : MatchConstraintList::OR_LIST);
 
 	for (AListTokenizer::iterator it = tokenizer.begin(); it != tokenizer.end(); ++it) {
-		unsigned int atom_type = getAtomType(!trimStrings ? *it : Internal::trimStringCopy(*it));
+		unsigned int atom_type = AtomDictionary::getType(!trimStrings ? *it : Internal::trimStringCopy(*it));
 
 		if (atom_type != AtomType::UNKNOWN)
 			alist_constr_ptr->addElement(AtomMatchConstraint::TYPE,
@@ -2680,7 +2680,7 @@ void Chem::MDLDataReader::setCTabV3000AtomSymbol(std::string& symbol, Atom& atom
 
 	setSymbol(atom, symbol);
 	
-	unsigned int atom_type = getAtomType(symbol);
+	unsigned int atom_type = AtomDictionary::getType(symbol);
 
 	setType(atom, atom_type);
 

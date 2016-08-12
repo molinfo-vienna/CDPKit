@@ -68,7 +68,6 @@ namespace CDPL
 	}
 }
 
-/** \cond CDPL_PRIVATE_SECTION_DOC */
 
 // Implementation
 
@@ -107,7 +106,5 @@ typename std::iterator_traits<BidirIter>::difference_type CDPL::Util::nextPermut
 	    }
 	}
 }
-
-/** \endcond */
 
 #endif // CDPL_UTIL_PERMUTATION_HPP

@@ -61,11 +61,7 @@ namespace CDPL
 			DefaultFeatureInteractionAnalyzer(const Pharmacophore& pharm1, const Pharmacophore& pharm2, FeatureMapping& interactions);
 
 		  private:
-			/** \cond CDPL_PRIVATE_SECTION_DOC */
-	
 			void init();
-	
-			/** \endcond */
 		};
 
 		/**

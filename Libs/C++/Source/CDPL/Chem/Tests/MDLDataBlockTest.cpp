@@ -56,55 +56,55 @@ BOOST_AUTO_TEST_CASE(MDLDataBlockTest)
 
 //-----
 
-	MDLDataBlockItem item1("header", "data");
+	MDLDataBlockEntry entry1("header", "data");
 
-	BOOST_CHECK(item1.getHeader() == "header");
-	BOOST_CHECK(item1.getData() == "data");
+	BOOST_CHECK(entry1.getHeader() == "header");
+	BOOST_CHECK(entry1.getData() == "data");
 
-	item1.setHeader("header1");
+	entry1.setHeader("header1");
 
-	BOOST_CHECK(item1.getHeader() == "header1");
-	BOOST_CHECK(item1.getData() == "data");
+	BOOST_CHECK(entry1.getHeader() == "header1");
+	BOOST_CHECK(entry1.getData() == "data");
 
-	item1.setData("data1");
+	entry1.setData("data1");
 
-	BOOST_CHECK(item1.getHeader() == "header1");
-	BOOST_CHECK(item1.getData() == "data1");
+	BOOST_CHECK(entry1.getHeader() == "header1");
+	BOOST_CHECK(entry1.getData() == "data1");
 
-	MDLDataBlockItem item2;
+	MDLDataBlockEntry entry2;
 
-	BOOST_CHECK(item2.getHeader() == "");
-	BOOST_CHECK(item2.getData() == "");
+	BOOST_CHECK(entry2.getHeader() == "");
+	BOOST_CHECK(entry2.getData() == "");
 
-	item2.setData("data2");
+	entry2.setData("data2");
 
-	BOOST_CHECK(item2.getHeader() == "");
-	BOOST_CHECK(item2.getData() == "data2");
+	BOOST_CHECK(entry2.getHeader() == "");
+	BOOST_CHECK(entry2.getData() == "data2");
 
-	item2.setHeader("header2");
+	entry2.setHeader("header2");
 
-	BOOST_CHECK(item2.getHeader() == "header2");
-	BOOST_CHECK(item2.getData() == "data2");
+	BOOST_CHECK(entry2.getHeader() == "header2");
+	BOOST_CHECK(entry2.getData() == "data2");
 
-	BOOST_CHECK(!(item1 == item2));
-	BOOST_CHECK(!(item1 == MDLDataBlockItem()));
-	BOOST_CHECK(!(item1 == MDLDataBlockItem("header1", "")));
-	BOOST_CHECK(!(item1 == MDLDataBlockItem("", "data1")));
-	BOOST_CHECK(!(item1 == MDLDataBlockItem("header", "data")));
-	BOOST_CHECK(item1 == MDLDataBlockItem("header1", "data1"));
+	BOOST_CHECK(!(entry1 == entry2));
+	BOOST_CHECK(!(entry1 == MDLDataBlockEntry()));
+	BOOST_CHECK(!(entry1 == MDLDataBlockEntry("header1", "")));
+	BOOST_CHECK(!(entry1 == MDLDataBlockEntry("", "data1")));
+	BOOST_CHECK(!(entry1 == MDLDataBlockEntry("header", "data")));
+	BOOST_CHECK(entry1 == MDLDataBlockEntry("header1", "data1"));
 
 //-----
 
-	db1.addElement(item1);
+	db1.addElement(entry1);
 
 	BOOST_CHECK(db1.getSize() == 1);
 
-	BOOST_CHECK(const_cast<const MDLDataBlock&>(db1).getElement(0) == item1);
+	BOOST_CHECK(const_cast<const MDLDataBlock&>(db1).getElement(0) == entry1);
 
 	BOOST_CHECK_THROW(const_cast<const MDLDataBlock&>(db1).getElement(1), IndexError);
 	BOOST_CHECK_THROW(const_cast<const MDLDataBlock&>(db1).getElement(2), IndexError);
 
-	BOOST_CHECK(const_cast<MDLDataBlock&>(db1).getElement(0) == item1);
+	BOOST_CHECK(const_cast<MDLDataBlock&>(db1).getElement(0) == entry1);
 
 	BOOST_CHECK_THROW(const_cast<MDLDataBlock&>(db1).getElement(1), IndexError);
 	BOOST_CHECK_THROW(const_cast<MDLDataBlock&>(db1).getElement(2), IndexError);
@@ -122,17 +122,17 @@ BOOST_AUTO_TEST_CASE(MDLDataBlockTest)
 
 //-----
 
-	db1.addElement(item2);
+	db1.addElement(entry2);
 
 	BOOST_CHECK(db1.getSize() == 2);
 
-	BOOST_CHECK(const_cast<const MDLDataBlock&>(db1).getElement(0) == item1);
-	BOOST_CHECK(const_cast<const MDLDataBlock&>(db1).getElement(1) == item2);
+	BOOST_CHECK(const_cast<const MDLDataBlock&>(db1).getElement(0) == entry1);
+	BOOST_CHECK(const_cast<const MDLDataBlock&>(db1).getElement(1) == entry2);
 
 	BOOST_CHECK_THROW(const_cast<const MDLDataBlock&>(db1).getElement(2), IndexError);
 
-	BOOST_CHECK(const_cast<MDLDataBlock&>(db1).getElement(0) == item1);
-	BOOST_CHECK(const_cast<MDLDataBlock&>(db1).getElement(1) == item2);
+	BOOST_CHECK(const_cast<MDLDataBlock&>(db1).getElement(0) == entry1);
+	BOOST_CHECK(const_cast<MDLDataBlock&>(db1).getElement(1) == entry2);
 
 	BOOST_CHECK_THROW(const_cast<MDLDataBlock&>(db1).getElement(2), IndexError);
 
@@ -151,38 +151,38 @@ BOOST_AUTO_TEST_CASE(MDLDataBlockTest)
 
 //-----
 
-	db1.addElement(MDLDataBlockItem());
+	db1.addElement(MDLDataBlockEntry());
 
-	MDLDataBlockItem& item3 = db1.getLastElement();
+	MDLDataBlockEntry& entry3 = db1.getLastElement();
 
-	BOOST_CHECK(item1.getHeader() == "header1");
-	BOOST_CHECK(item1.getData() == "data1");
+	BOOST_CHECK(entry1.getHeader() == "header1");
+	BOOST_CHECK(entry1.getData() == "data1");
 
-	BOOST_CHECK(item2.getHeader() == "header2");
-	BOOST_CHECK(item2.getData() == "data2");
+	BOOST_CHECK(entry2.getHeader() == "header2");
+	BOOST_CHECK(entry2.getData() == "data2");
 
-	BOOST_CHECK(item3.getHeader() == "");
-	BOOST_CHECK(item3.getData() == "");
+	BOOST_CHECK(entry3.getHeader() == "");
+	BOOST_CHECK(entry3.getData() == "");
 
 	BOOST_CHECK(db1.getSize() == 3);
 
-	BOOST_CHECK(const_cast<const MDLDataBlock&>(db1).getElement(0) == item1);
-	BOOST_CHECK(const_cast<const MDLDataBlock&>(db1).getElement(1) == item2);
-	BOOST_CHECK(const_cast<const MDLDataBlock&>(db1).getElement(2) == item3);
+	BOOST_CHECK(const_cast<const MDLDataBlock&>(db1).getElement(0) == entry1);
+	BOOST_CHECK(const_cast<const MDLDataBlock&>(db1).getElement(1) == entry2);
+	BOOST_CHECK(const_cast<const MDLDataBlock&>(db1).getElement(2) == entry3);
 
-	BOOST_CHECK(&const_cast<const MDLDataBlock&>(db1).getElement(0) != &item1);
-	BOOST_CHECK(&const_cast<const MDLDataBlock&>(db1).getElement(1) != &item2);
-	BOOST_CHECK(&const_cast<const MDLDataBlock&>(db1).getElement(2) == &item3);
+	BOOST_CHECK(&const_cast<const MDLDataBlock&>(db1).getElement(0) != &entry1);
+	BOOST_CHECK(&const_cast<const MDLDataBlock&>(db1).getElement(1) != &entry2);
+	BOOST_CHECK(&const_cast<const MDLDataBlock&>(db1).getElement(2) == &entry3);
 
 	BOOST_CHECK_THROW(const_cast<const MDLDataBlock&>(db1).getElement(3), IndexError);
 
-	BOOST_CHECK(const_cast<MDLDataBlock&>(db1).getElement(0) == item1);
-	BOOST_CHECK(const_cast<MDLDataBlock&>(db1).getElement(1) == item2);
-	BOOST_CHECK(const_cast<MDLDataBlock&>(db1).getElement(2) == item3);
+	BOOST_CHECK(const_cast<MDLDataBlock&>(db1).getElement(0) == entry1);
+	BOOST_CHECK(const_cast<MDLDataBlock&>(db1).getElement(1) == entry2);
+	BOOST_CHECK(const_cast<MDLDataBlock&>(db1).getElement(2) == entry3);
 
-	BOOST_CHECK(&const_cast<MDLDataBlock&>(db1).getElement(0) != &item1);
-	BOOST_CHECK(&const_cast<MDLDataBlock&>(db1).getElement(1) != &item2);
-	BOOST_CHECK(&const_cast<MDLDataBlock&>(db1).getElement(2) == &item3);
+	BOOST_CHECK(&const_cast<MDLDataBlock&>(db1).getElement(0) != &entry1);
+	BOOST_CHECK(&const_cast<MDLDataBlock&>(db1).getElement(1) != &entry2);
+	BOOST_CHECK(&const_cast<MDLDataBlock&>(db1).getElement(2) == &entry3);
 
 	BOOST_CHECK_THROW(const_cast<MDLDataBlock&>(db1).getElement(3), IndexError);
 
@@ -204,29 +204,29 @@ BOOST_AUTO_TEST_CASE(MDLDataBlockTest)
 
 //-----
 
-	db1.addElement(MDLDataBlockItem("header4", "data4"));
+	db1.addElement(MDLDataBlockEntry("header4", "data4"));
 
 	BOOST_CHECK(db1.getSize() == 4);
 
-	BOOST_CHECK(const_cast<const MDLDataBlock&>(db1).getElement(0) == item1);
-	BOOST_CHECK(const_cast<const MDLDataBlock&>(db1).getElement(1) == item2);
-	BOOST_CHECK(const_cast<const MDLDataBlock&>(db1).getElement(2) == item3);
-	BOOST_CHECK(const_cast<const MDLDataBlock&>(db1).getElement(3) == MDLDataBlockItem("header4", "data4"));
+	BOOST_CHECK(const_cast<const MDLDataBlock&>(db1).getElement(0) == entry1);
+	BOOST_CHECK(const_cast<const MDLDataBlock&>(db1).getElement(1) == entry2);
+	BOOST_CHECK(const_cast<const MDLDataBlock&>(db1).getElement(2) == entry3);
+	BOOST_CHECK(const_cast<const MDLDataBlock&>(db1).getElement(3) == MDLDataBlockEntry("header4", "data4"));
 
-	BOOST_CHECK(&const_cast<const MDLDataBlock&>(db1).getElement(0) != &item1);
-	BOOST_CHECK(&const_cast<const MDLDataBlock&>(db1).getElement(1) != &item2);
-	BOOST_CHECK(&const_cast<const MDLDataBlock&>(db1).getElement(2) == &item3);
+	BOOST_CHECK(&const_cast<const MDLDataBlock&>(db1).getElement(0) != &entry1);
+	BOOST_CHECK(&const_cast<const MDLDataBlock&>(db1).getElement(1) != &entry2);
+	BOOST_CHECK(&const_cast<const MDLDataBlock&>(db1).getElement(2) == &entry3);
 
 	BOOST_CHECK_THROW(const_cast<const MDLDataBlock&>(db1).getElement(4), IndexError);
 
-	BOOST_CHECK(const_cast<MDLDataBlock&>(db1).getElement(0) == item1);
-	BOOST_CHECK(const_cast<MDLDataBlock&>(db1).getElement(1) == item2);
-	BOOST_CHECK(const_cast<MDLDataBlock&>(db1).getElement(2) == item3);
-	BOOST_CHECK(const_cast<MDLDataBlock&>(db1).getElement(3) == MDLDataBlockItem("header4", "data4"));
+	BOOST_CHECK(const_cast<MDLDataBlock&>(db1).getElement(0) == entry1);
+	BOOST_CHECK(const_cast<MDLDataBlock&>(db1).getElement(1) == entry2);
+	BOOST_CHECK(const_cast<MDLDataBlock&>(db1).getElement(2) == entry3);
+	BOOST_CHECK(const_cast<MDLDataBlock&>(db1).getElement(3) == MDLDataBlockEntry("header4", "data4"));
 
-	BOOST_CHECK(&const_cast<MDLDataBlock&>(db1).getElement(0) != &item1);
-	BOOST_CHECK(&const_cast<MDLDataBlock&>(db1).getElement(1) != &item2);
-	BOOST_CHECK(&const_cast<MDLDataBlock&>(db1).getElement(2) == &item3);
+	BOOST_CHECK(&const_cast<MDLDataBlock&>(db1).getElement(0) != &entry1);
+	BOOST_CHECK(&const_cast<MDLDataBlock&>(db1).getElement(1) != &entry2);
+	BOOST_CHECK(&const_cast<MDLDataBlock&>(db1).getElement(2) == &entry3);
 
 	BOOST_CHECK_THROW(const_cast<MDLDataBlock&>(db1).getElement(4), IndexError);
 
@@ -255,25 +255,25 @@ BOOST_AUTO_TEST_CASE(MDLDataBlockTest)
 
 	BOOST_CHECK(db2.getSize() == 4);
 
-	BOOST_CHECK(const_cast<const MDLDataBlock&>(db2).getElement(0) == item1);
-	BOOST_CHECK(const_cast<const MDLDataBlock&>(db2).getElement(1) == item2);
-	BOOST_CHECK(const_cast<const MDLDataBlock&>(db2).getElement(2) == item3);
-	BOOST_CHECK(const_cast<const MDLDataBlock&>(db2).getElement(3) == MDLDataBlockItem("header4", "data4"));
+	BOOST_CHECK(const_cast<const MDLDataBlock&>(db2).getElement(0) == entry1);
+	BOOST_CHECK(const_cast<const MDLDataBlock&>(db2).getElement(1) == entry2);
+	BOOST_CHECK(const_cast<const MDLDataBlock&>(db2).getElement(2) == entry3);
+	BOOST_CHECK(const_cast<const MDLDataBlock&>(db2).getElement(3) == MDLDataBlockEntry("header4", "data4"));
 
-	BOOST_CHECK(&const_cast<const MDLDataBlock&>(db2).getElement(0) != &item1);
-	BOOST_CHECK(&const_cast<const MDLDataBlock&>(db2).getElement(1) != &item2);
-	BOOST_CHECK(&const_cast<const MDLDataBlock&>(db2).getElement(2) != &item3);
+	BOOST_CHECK(&const_cast<const MDLDataBlock&>(db2).getElement(0) != &entry1);
+	BOOST_CHECK(&const_cast<const MDLDataBlock&>(db2).getElement(1) != &entry2);
+	BOOST_CHECK(&const_cast<const MDLDataBlock&>(db2).getElement(2) != &entry3);
 
 	BOOST_CHECK_THROW(const_cast<const MDLDataBlock&>(db2).getElement(4), IndexError);
 
-	BOOST_CHECK(const_cast<MDLDataBlock&>(db2).getElement(0) == item1);
-	BOOST_CHECK(const_cast<MDLDataBlock&>(db2).getElement(1) == item2);
-	BOOST_CHECK(const_cast<MDLDataBlock&>(db2).getElement(2) == item3);
-	BOOST_CHECK(const_cast<MDLDataBlock&>(db2).getElement(3) == MDLDataBlockItem("header4", "data4"));
+	BOOST_CHECK(const_cast<MDLDataBlock&>(db2).getElement(0) == entry1);
+	BOOST_CHECK(const_cast<MDLDataBlock&>(db2).getElement(1) == entry2);
+	BOOST_CHECK(const_cast<MDLDataBlock&>(db2).getElement(2) == entry3);
+	BOOST_CHECK(const_cast<MDLDataBlock&>(db2).getElement(3) == MDLDataBlockEntry("header4", "data4"));
 
-	BOOST_CHECK(&const_cast<MDLDataBlock&>(db2).getElement(0) != &item1);
-	BOOST_CHECK(&const_cast<MDLDataBlock&>(db2).getElement(1) != &item2);
-	BOOST_CHECK(&const_cast<MDLDataBlock&>(db2).getElement(2) != &item3);
+	BOOST_CHECK(&const_cast<MDLDataBlock&>(db2).getElement(0) != &entry1);
+	BOOST_CHECK(&const_cast<MDLDataBlock&>(db2).getElement(1) != &entry2);
+	BOOST_CHECK(&const_cast<MDLDataBlock&>(db2).getElement(2) != &entry3);
 
 	BOOST_CHECK_THROW(const_cast<MDLDataBlock&>(db2).getElement(4), IndexError);
 
@@ -322,15 +322,15 @@ BOOST_AUTO_TEST_CASE(MDLDataBlockTest)
 
 	BOOST_CHECK(db1.getSize() == 3);
 
-	BOOST_CHECK(const_cast<const MDLDataBlock&>(db1).getElement(0) == item2);
-	BOOST_CHECK(const_cast<const MDLDataBlock&>(db1).getElement(1) == MDLDataBlockItem("", ""));
-	BOOST_CHECK(const_cast<const MDLDataBlock&>(db1).getElement(2) == MDLDataBlockItem("header4", "data4"));
+	BOOST_CHECK(const_cast<const MDLDataBlock&>(db1).getElement(0) == entry2);
+	BOOST_CHECK(const_cast<const MDLDataBlock&>(db1).getElement(1) == MDLDataBlockEntry("", ""));
+	BOOST_CHECK(const_cast<const MDLDataBlock&>(db1).getElement(2) == MDLDataBlockEntry("header4", "data4"));
 
 	BOOST_CHECK_THROW(const_cast<const MDLDataBlock&>(db1).getElement(4), IndexError);
 
-	BOOST_CHECK(const_cast<MDLDataBlock&>(db1).getElement(0) == item2);
-	BOOST_CHECK(const_cast<MDLDataBlock&>(db1).getElement(1) == MDLDataBlockItem("", ""));
-	BOOST_CHECK(const_cast<MDLDataBlock&>(db1).getElement(2) == MDLDataBlockItem("header4", "data4"));
+	BOOST_CHECK(const_cast<MDLDataBlock&>(db1).getElement(0) == entry2);
+	BOOST_CHECK(const_cast<MDLDataBlock&>(db1).getElement(1) == MDLDataBlockEntry("", ""));
+	BOOST_CHECK(const_cast<MDLDataBlock&>(db1).getElement(2) == MDLDataBlockEntry("header4", "data4"));
 
 	BOOST_CHECK_THROW(const_cast<MDLDataBlock&>(db1).getElement(3), IndexError);
 
@@ -358,13 +358,13 @@ BOOST_AUTO_TEST_CASE(MDLDataBlockTest)
 
 	BOOST_CHECK(db1.getSize() == 2);
 
-	BOOST_CHECK(const_cast<const MDLDataBlock&>(db1).getElement(0) == item2);
-	BOOST_CHECK(const_cast<const MDLDataBlock&>(db1).getElement(1) == MDLDataBlockItem("", ""));
+	BOOST_CHECK(const_cast<const MDLDataBlock&>(db1).getElement(0) == entry2);
+	BOOST_CHECK(const_cast<const MDLDataBlock&>(db1).getElement(1) == MDLDataBlockEntry("", ""));
 
 	BOOST_CHECK_THROW(const_cast<const MDLDataBlock&>(db1).getElement(2), IndexError);
 
-	BOOST_CHECK(const_cast<MDLDataBlock&>(db1).getElement(0) == item2);
-	BOOST_CHECK(const_cast<MDLDataBlock&>(db1).getElement(1) == MDLDataBlockItem("", ""));
+	BOOST_CHECK(const_cast<MDLDataBlock&>(db1).getElement(0) == entry2);
+	BOOST_CHECK(const_cast<MDLDataBlock&>(db1).getElement(1) == MDLDataBlockEntry("", ""));
 
 	BOOST_CHECK_THROW(const_cast<MDLDataBlock&>(db1).getElement(2), IndexError);
 
@@ -387,11 +387,11 @@ BOOST_AUTO_TEST_CASE(MDLDataBlockTest)
 
 	BOOST_CHECK(db1.getSize() == 1);
 
-	BOOST_CHECK(const_cast<const MDLDataBlock&>(db1).getElement(0) == item2);
+	BOOST_CHECK(const_cast<const MDLDataBlock&>(db1).getElement(0) == entry2);
 
 	BOOST_CHECK_THROW(const_cast<const MDLDataBlock&>(db1).getElement(1), IndexError);
 
-	BOOST_CHECK(const_cast<MDLDataBlock&>(db1).getElement(0) == item2);
+	BOOST_CHECK(const_cast<MDLDataBlock&>(db1).getElement(0) == entry2);
 
 	BOOST_CHECK_THROW(const_cast<MDLDataBlock&>(db1).getElement(1), IndexError);
 

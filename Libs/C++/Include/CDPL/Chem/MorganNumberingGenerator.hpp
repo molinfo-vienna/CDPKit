@@ -90,8 +90,6 @@ namespace CDPL
 			void generate(const MolecularGraph& molgraph, Util::STArray& numbering);
 
 		private:
-			/** \cond CDPL_PRIVATE_SECTION_DOC */
-
 			MorganNumberingGenerator(const MorganNumberingGenerator&);
 
 			MorganNumberingGenerator& operator=(const MorganNumberingGenerator&);
@@ -158,8 +156,6 @@ namespace CDPL
 			STArray        atomIsotopes;
 			Math::ULMatrix bondMatrix;
 			NumberingState numbering;
-
-			/** \endcond */
 		};
 
 		/**
