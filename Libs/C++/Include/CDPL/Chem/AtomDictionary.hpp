@@ -25,8 +25,7 @@
 
 /**
  * \file
- * \brief A global dictionary for the lookup of meta-data associated with the atom
- *        types defined in namespace Chem::AtomType.
+ * \brief Definition of the class CDPL::Chem::AtomDictionary.
  */
 
 #ifndef CDPL_CHEM_ATOMDICTIONARY_HPP
@@ -58,7 +57,8 @@ namespace CDPL
 		 */
 
 		/**
-		 * \brief AtomDictionary.
+		 * \brief A global dictionary for the lookup of meta-data associated with the atom
+		 *        types defined in namespace Chem::AtomType
 		 */ 
 		class CDPL_CHEM_API AtomDictionary
 		{

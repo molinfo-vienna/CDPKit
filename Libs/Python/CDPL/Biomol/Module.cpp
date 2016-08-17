@@ -36,6 +36,9 @@ BOOST_PYTHON_MODULE(_biomol)
 {
 	using namespace CDPLPythonBiomol;
 
+	exportPDBData();
+	exportResidueDictionary();
+
 	exportPDBMoleculeReader();
 	exportPDBMolecularGraphWriter();
 
@@ -52,7 +55,6 @@ BOOST_PYTHON_MODULE(_biomol)
 
 	exportAtomFunctions();
 	exportMolecularGraphFunctions();
-	exportResidueFunctions();
 
 	registerToPythonConverters();
 	registerFromPythonConverters();

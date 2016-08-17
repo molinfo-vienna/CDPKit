@@ -32,6 +32,7 @@ namespace CDPLPythonBiomol
 {
 
 	void exportPDBData();
+	void exportResidueDictionary();
 
 	void exportPDBMoleculeReader();
 	void exportPDBMolecularGraphWriter();

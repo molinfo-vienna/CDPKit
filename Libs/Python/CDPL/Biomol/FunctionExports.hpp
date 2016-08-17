@@ -31,7 +31,6 @@
 namespace CDPLPythonBiomol
 {
 
-	void exportResidueFunctions();
 	void exportAtomFunctions();
 	void exportMolecularGraphFunctions();
 }

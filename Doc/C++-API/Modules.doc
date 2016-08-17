@@ -248,6 +248,9 @@
 \defgroup CDPL_BIOMOL_DATA_STRUCTURES Auxiliary Data Structures
 \ingroup CDPL_BIOMOL
 
+\defgroup CDPL_BIOMOL_RESIDUE_DICTIONARY Residue Database
+\ingroup CDPL_BIOMOL_DATA_STRUCTURES
+
 \defgroup CDPL_BIOMOL_PROPERTIES Property Keys
 \ingroup CDPL_BIOMOL
 
@@ -276,9 +279,6 @@
 \ingroup CDPL_BIOMOL_FUNCTIONS
 
 \defgroup CDPL_BIOMOL_MOLECULAR_GRAPH_FUNCTIONS MolecularGraph Functions
-\ingroup CDPL_BIOMOL_FUNCTIONS
-
-\defgroup CDPL_BIOMOL_RESIDUE_FUNCTIONS Residue Database Functions
 \ingroup CDPL_BIOMOL_FUNCTIONS
 
 

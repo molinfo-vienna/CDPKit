@@ -11,6 +11,7 @@ SET(biomol_MOD_SRCS
     Module.cpp
 
     PDBDataExport.cpp
+    ResidueDictionaryExport.cpp
  
     PDBMoleculeReaderExport.cpp
     PDBMolecularGraphWriterExport.cpp
@@ -25,7 +26,6 @@ SET(biomol_MOD_SRCS
 
     AtomFunctionExport.cpp
     MolecularGraphFunctionExport.cpp
-    ResidueFunctionExport.cpp
 
     ToPythonConverterRegistration.cpp
     FromPythonConverterRegistration.cpp

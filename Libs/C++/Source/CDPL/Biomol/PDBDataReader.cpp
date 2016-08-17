@@ -47,7 +47,7 @@
 #include "CDPL/Chem/AtomType.hpp"
 #include "CDPL/Biomol/MolecularGraphFunctions.hpp"
 #include "CDPL/Biomol/AtomFunctions.hpp"
-#include "CDPL/Biomol/ResidueFunctions.hpp"
+#include "CDPL/Biomol/ResidueDictionary.hpp"
 #include "CDPL/Biomol/PDBData.hpp"
 #include "CDPL/Base/DataIOBase.hpp"
 #include "CDPL/Base/Exceptions.hpp"
@@ -867,7 +867,7 @@ void Biomol::PDBDataReader::processAtomSequence(Chem::Molecule& mol, bool chain_
 			set3DCoordinatesArray(*atom, coords);
 		}
 
-		const MolecularGraph* res_tmplt = getResidueStructure(res_code);
+		const MolecularGraph::SharedPointer res_tmplt = ResidueDictionary::getStructure(res_code);
 
 		if (res_tmplt) {
 			//std::cerr << "Using residue dictionary template for " << res_code << std::endl;

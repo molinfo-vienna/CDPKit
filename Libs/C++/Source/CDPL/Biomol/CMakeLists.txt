@@ -5,6 +5,7 @@ SET(cdpl-biomol_LIB_SRCS
     MolecularGraphProperty.cpp
     DataFormat.cpp
     PDBData.cpp
+    ResidueDictionary.cpp
 
     PDBMoleculeInputHandler.cpp
     PDBMolecularGraphOutputHandler.cpp
@@ -36,8 +37,6 @@ SET(cdpl-biomol_LIB_SRCS
     MolecularGraphModelNumberFunctions.cpp
     MolecularGraphPDBDataFunctions.cpp
     MolecularGraphResidueUtilityFunctions.cpp
-
-    ResidueFunctions.cpp
    )
 
 ADD_LIBRARY(cdpl-biomol-static STATIC ${cdpl-biomol_LIB_SRCS})

@@ -41,7 +41,7 @@
 #include "CDPL/Biomol/PDBMolecularGraphOutputHandler.hpp"
 #include "CDPL/Biomol/PDBMoleculeReader.hpp"
 #include "CDPL/Biomol/PDBMolecularGraphWriter.hpp"
-#include "CDPL/Biomol/ResidueFunctions.hpp"
+#include "CDPL/Biomol/ResidueDictionary.hpp"
 #include "CDPL/Biomol/AtomFunctions.hpp"
 #include "CDPL/Biomol/MolecularGraphFunctions.hpp"
 
