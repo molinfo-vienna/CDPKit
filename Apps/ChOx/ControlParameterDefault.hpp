@@ -218,6 +218,8 @@ namespace ChOx
 		extern const bool                                 PDB_INPUT_STRICT_ERROR_CHECKING;
 		extern const bool                                 PDB_INPUT_CHECK_LINE_LENGTH;
 
+		extern const bool                                 CDF_OUTPUT_WRITE_SINGLE_RECORD_FILES;
+
 		extern const bool                                 IMG_OUTPUT_ERASE_BACKGROUND;
 		extern const CDPL::Vis::Color                     IMG_OUTPUT_BACKGROUND_COLOR;
 	}

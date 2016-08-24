@@ -206,6 +206,8 @@ namespace ChOx
 		const bool                                 PDB_INPUT_STRICT_ERROR_CHECKING         = true;
 		const bool                                 PDB_INPUT_CHECK_LINE_LENGTH             = true;
 
+		const bool                                 CDF_OUTPUT_WRITE_SINGLE_RECORD_FILES    = false;
+
 		const bool                                 IMG_OUTPUT_ERASE_BACKGROUND             = false;
 		const CDPL::Vis::Color                     IMG_OUTPUT_BACKGROUND_COLOR             = CDPL::Vis::Color::WHITE;
 	}

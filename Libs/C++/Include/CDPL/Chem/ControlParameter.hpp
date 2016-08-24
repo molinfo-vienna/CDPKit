@@ -464,6 +464,8 @@ namespace CDPL
 			 * \valuetype \c Chem::MultiConfMoleculeInputProcessor::SharedPointer
 			 */
 			extern CDPL_CHEM_API const Base::LookupKey MULTI_CONF_INPUT_PROCESSOR;
+
+			extern CDPL_CHEM_API const Base::LookupKey CDF_WRITE_SINGLE_PRECISION_FLOATS;
 		}
 
 		/**

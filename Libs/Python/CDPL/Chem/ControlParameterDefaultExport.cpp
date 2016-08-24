@@ -76,5 +76,6 @@ void CDPLPythonChem::exportControlParameterDefaults()
 		.def_readonly("SMILES_NO_ORGANIC_SUBSET", &Chem::ControlParameterDefault::SMILES_NO_ORGANIC_SUBSET)
 		.def_readonly("MULTI_CONF_IMPORT", &Chem::ControlParameterDefault::MULTI_CONF_IMPORT)
 		.def_readonly("MULTI_CONF_EXPORT", &Chem::ControlParameterDefault::MULTI_CONF_EXPORT)
-		.def_readonly("MULTI_CONF_INPUT_PROCESSOR", &Chem::ControlParameterDefault::MULTI_CONF_INPUT_PROCESSOR);
+		.def_readonly("MULTI_CONF_INPUT_PROCESSOR", &Chem::ControlParameterDefault::MULTI_CONF_INPUT_PROCESSOR)
+		.def_readonly("CDF_WRITE_SINGLE_PRECISION_FLOATS", &Chem::ControlParameterDefault::CDF_WRITE_SINGLE_PRECISION_FLOATS);
 }

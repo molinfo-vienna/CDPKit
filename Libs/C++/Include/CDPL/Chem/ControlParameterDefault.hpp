@@ -222,6 +222,8 @@ namespace CDPL
 			 *        Chem::ControlParameter::MULTI_CONF_INPUT_PROCESSOR.
 			 */
 			extern CDPL_CHEM_API const MultiConfMoleculeInputProcessor::SharedPointer MULTI_CONF_INPUT_PROCESSOR;
+
+			extern CDPL_CHEM_API const bool CDF_WRITE_SINGLE_PRECISION_FLOATS;
 		}
 
 		/**

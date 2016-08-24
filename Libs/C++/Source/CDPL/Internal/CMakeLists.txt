@@ -5,8 +5,11 @@ IF(CMAKE_COMPILER_IS_GNUCC AND UNIX)
 ENDIF(CMAKE_COMPILER_IS_GNUCC AND UNIX)
 
 SET(cdpl-internal_LIB_SRCS
+    CDFDataReaderBase.cpp
+    CDFDataWriterBase.cpp
     StringUtilities.cpp
     StringDataIOUtilities.cpp
+    ByteBuffer.cpp
     SHA1.cpp
    )
 

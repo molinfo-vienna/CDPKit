@@ -1,7 +1,7 @@
 /* -*- mode: c++; c-basic-offset: 4; tab-width: 4; indent-tabs-mode: t -*- */
 
 /* 
- * DataFormatExport.cpp 
+ * CDFDataReader.hpp 
  *
  * This file is part of the Chemical Data Processing Toolkit
  *
@@ -24,34 +24,54 @@
  */
 
 
-#include <boost/python.hpp>
+#ifndef CDPL_CHEM_CDFDATAREADER_HPP
+#define CDPL_CHEM_CDFDATAREADER_HPP
 
-#include "CDPL/Chem/DataFormat.hpp"
-#include "CDPL/Base/DataFormat.hpp"
+#include <cstddef>
+#include <iosfwd>
 
-#include "NamespaceExports.hpp"
+#include "CDPL/Internal/CDFDataReaderBase.hpp"
+#include "CDPL/Internal/ByteBuffer.hpp"
 
 
-namespace 
+namespace CDPL 
 {
 
-	struct DataFormat {};
+	namespace Base
+	{
+
+		class DataIOBase;
+	}
+
+	namespace Chem
+	{
+
+		class Molecule;
+
+		class CDFDataReader : private Internal::CDFDataReaderBase
+		{
+
+		public:
+			CDFDataReader(const Base::DataIOBase& io_base): ioBase(io_base) {}
+
+			bool readMolecule(std::istream& is, Molecule& mol);
+
+			bool skipMolecule(std::istream& is);
+
+			bool hasMoreData(std::istream& is);
+
+		private:
+			void init();
+
+			void readAtoms(Molecule& mol, std::size_t num_atoms);
+			void readBonds(Molecule& mol, std::size_t num_atoms, std::size_t num_bonds);
+			void readMoleculeProperties(Molecule& mol);
+
+			const Base::DataIOBase& ioBase;	
+			Internal::ByteBuffer    dataBuffer;
+			std::size_t             startAtomIdx;
+		};
+	}
 }
 
-
-void CDPLPythonChem::exportDataFormats()
-{
-	using namespace boost;
-	using namespace CDPL;
-
-	python::class_<DataFormat, boost::noncopyable>("DataFormat", python::no_init)
-		.def_readonly("JME", &Chem::DataFormat::JME)
-		.def_readonly("CDF", &Chem::DataFormat::CDF)
-		.def_readonly("MOL", &Chem::DataFormat::MOL)
-		.def_readonly("RDF", &Chem::DataFormat::RDF)
-		.def_readonly("RXN", &Chem::DataFormat::RXN)
-		.def_readonly("SDF", &Chem::DataFormat::SDF)
-		.def_readonly("SMARTS", &Chem::DataFormat::SMARTS)
-		.def_readonly("SMILES", &Chem::DataFormat::SMILES)
-		.def_readonly("INCHI", &Chem::DataFormat::INCHI);
-}
+#endif // CDPL_CHEM_CDFDATAREADER_HPP

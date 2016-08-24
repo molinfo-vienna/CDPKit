@@ -1,7 +1,7 @@
 /* -*- mode: c++; c-basic-offset: 4; tab-width: 4; indent-tabs-mode: t -*- */
 
 /* 
- * DataFormatExport.cpp 
+ * CDFFormatData.hpp
  *
  * This file is part of the Chemical Data Processing Toolkit
  *
@@ -24,34 +24,43 @@
  */
 
 
-#include <boost/python.hpp>
+#ifndef CDPL_INTERNAL_CDFFORMATDATA_HPP
+#define CDPL_INTERNAL_CDFFORMATDATA_HPP
 
-#include "CDPL/Chem/DataFormat.hpp"
-#include "CDPL/Base/DataFormat.hpp"
+#include <cstddef>
 
-#include "NamespaceExports.hpp"
+#include "CDPL/Base/IntTypes.hpp"
 
 
-namespace 
+namespace CDPL
 {
 
-	struct DataFormat {};
+    namespace Internal
+    {
+
+		namespace CDF
+		{
+			
+			typedef Base::uint32 SizeType;
+			typedef Base::uint8  PropertySpec;
+
+			struct Header
+			{
+
+				Base::uint32 formatID;
+				Base::uint8  recordTypeID;
+				Base::uint8  recordFormatVersion;
+				SizeType     recordDataLength;
+			};
+
+			const std::size_t  HEADER_SIZE          = 10;
+
+			const Base::uint32 FORMAT_ID            = 0x4c504443;
+
+			const std::size_t  NUM_PROP_VALUE_LENGTH_BITS = 3; 
+			const PropertySpec PROP_VALUE_LENGTH_MASK     = 0x7; 
+		}
+    }
 }
 
-
-void CDPLPythonChem::exportDataFormats()
-{
-	using namespace boost;
-	using namespace CDPL;
-
-	python::class_<DataFormat, boost::noncopyable>("DataFormat", python::no_init)
-		.def_readonly("JME", &Chem::DataFormat::JME)
-		.def_readonly("CDF", &Chem::DataFormat::CDF)
-		.def_readonly("MOL", &Chem::DataFormat::MOL)
-		.def_readonly("RDF", &Chem::DataFormat::RDF)
-		.def_readonly("RXN", &Chem::DataFormat::RXN)
-		.def_readonly("SDF", &Chem::DataFormat::SDF)
-		.def_readonly("SMARTS", &Chem::DataFormat::SMARTS)
-		.def_readonly("SMILES", &Chem::DataFormat::SMILES)
-		.def_readonly("INCHI", &Chem::DataFormat::INCHI);
-}
+#endif // CDPL_INTERNAL_CDFFORMATDATA_HPP

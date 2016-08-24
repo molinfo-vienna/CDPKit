@@ -179,6 +179,9 @@
 \defgroup CDPL_CHEM_JME_IO JME Molecular Editor Strings
 \ingroup CDPL_CHEM_DATA_IO
 
+\defgroup CDPL_CHEM_CDF_IO The Native CDPL Format
+\ingroup CDPL_CHEM_DATA_IO
+
 \defgroup CDPL_CHEM_PROPERTIES Property Keys
 \ingroup CDPL_CHEM
 

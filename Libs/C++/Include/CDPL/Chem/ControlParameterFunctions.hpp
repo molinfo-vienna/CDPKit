@@ -352,6 +352,15 @@ namespace CDPL
 
 		CDPL_CHEM_API void clearMultiConfInputProcessorParameter(Base::ControlParameterContainer& cntnr);
 
+
+		CDPL_CHEM_API bool getCDFWriteSinglePrecisionFloatsParameter(const Base::ControlParameterContainer& cntnr);
+
+		CDPL_CHEM_API void setCDFWriteSinglePrecisionFloatsParameter(Base::ControlParameterContainer& cntnr, bool single_prec);
+
+		CDPL_CHEM_API bool hasCDFWriteSinglePrecisionFloatsParameter(const Base::ControlParameterContainer& cntnr);
+	
+		CDPL_CHEM_API void clearCDFWriteSinglePrecisionFloatsParameter(Base::ControlParameterContainer& cntnr);
+
 		/**
 		 * @}
 		 */

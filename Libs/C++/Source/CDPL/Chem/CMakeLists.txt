@@ -55,6 +55,8 @@ SET(cdpl-chem_LIB_SRCS
     SMARTSReactionInputHandler.cpp
     SMARTSMolecularGraphOutputHandler.cpp
     SMARTSReactionOutputHandler.cpp
+    CDFMoleculeInputHandler.cpp
+    CDFMolecularGraphOutputHandler.cpp
 
     INCHIMoleculeReader.cpp
     INCHIMolecularGraphWriter.cpp
@@ -86,7 +88,11 @@ SET(cdpl-chem_LIB_SRCS
     RXNReactionWriter.cpp
     RDFReactionReader.cpp
     RDFReactionWriter.cpp
- 
+    CDFDataReader.cpp
+    CDFDataWriter.cpp
+    CDFMoleculeReader.cpp
+    CDFMolecularGraphWriter.cpp
+
     SubstructureSearch.cpp
     ReactionSubstructureSearch.cpp
     CommonConnectedSubstructureSearch.cpp

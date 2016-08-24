@@ -165,6 +165,10 @@ BOOST_PYTHON_MODULE(_chem)
 	exportReactionOutputHandler();
 	exportINCHIMoleculeInputHandler();
 	exportINCHIMolecularGraphOutputHandler();
+	exportCDFMoleculeInputHandler();
+	exportCDFMolecularGraphOutputHandler();
+	exportCDFMoleculeInputHandler();
+	exportCDFMolecularGraphOutputHandler();
 	exportJMEMoleculeInputHandler();
 	exportJMEReactionInputHandler();
 	exportJMEMolecularGraphOutputHandler();

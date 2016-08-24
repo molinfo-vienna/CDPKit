@@ -1,7 +1,7 @@
 /* -*- mode: c++; c-basic-offset: 4; tab-width: 4; indent-tabs-mode: t -*- */
 
 /* 
- * DataFormatExport.cpp 
+ * CDFMoleculeReaderExport.cpp 
  *
  * This file is part of the Chemical Data Processing Toolkit
  *
@@ -26,32 +26,18 @@
 
 #include <boost/python.hpp>
 
-#include "CDPL/Chem/DataFormat.hpp"
-#include "CDPL/Base/DataFormat.hpp"
+#include "CDPL/Chem/CDFMoleculeReader.hpp"
 
-#include "NamespaceExports.hpp"
-
-
-namespace 
-{
-
-	struct DataFormat {};
-}
+#include "ClassExports.hpp"
 
 
-void CDPLPythonChem::exportDataFormats()
+void CDPLPythonChem::exportCDFMoleculeReader()
 {
 	using namespace boost;
 	using namespace CDPL;
 
-	python::class_<DataFormat, boost::noncopyable>("DataFormat", python::no_init)
-		.def_readonly("JME", &Chem::DataFormat::JME)
-		.def_readonly("CDF", &Chem::DataFormat::CDF)
-		.def_readonly("MOL", &Chem::DataFormat::MOL)
-		.def_readonly("RDF", &Chem::DataFormat::RDF)
-		.def_readonly("RXN", &Chem::DataFormat::RXN)
-		.def_readonly("SDF", &Chem::DataFormat::SDF)
-		.def_readonly("SMARTS", &Chem::DataFormat::SMARTS)
-		.def_readonly("SMILES", &Chem::DataFormat::SMILES)
-		.def_readonly("INCHI", &Chem::DataFormat::INCHI);
+	python::class_<Chem::CDFMoleculeReader, python::bases<Base::DataReader<Chem::Molecule> >, 
+		boost::noncopyable>("CDFMoleculeReader", python::no_init)
+		.def(python::init<std::istream&>((python::arg("self"), python::arg("is")))
+			 [python::with_custodian_and_ward<1, 2>()]);
 }

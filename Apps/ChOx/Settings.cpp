@@ -509,6 +509,28 @@ void Settings::load()
 
 	settings.endGroup();
 
+	// ------
+
+	settings.beginGroup("Input/CDF");
+
+	SettingsContainer& cdf_rparams = readerControlParams["cdf"];
+
+	cdf_rparams.setParent(this);
+
+	settings.endGroup();
+
+	// +++
+
+	settings.beginGroup("Output/CDF");
+
+	SettingsContainer& cdf_wparams = writerControlParams["cdf"];
+
+	cdf_wparams.setParent(this);
+
+	readParameter<bool>(cdf_wparams, settings, ControlParameter::WRITE_SINGLE_RECORD_FILES, ControlParameterDefault::CDF_OUTPUT_WRITE_SINGLE_RECORD_FILES);
+
+	settings.endGroup();
+
 	// +++
 
 	// ------
@@ -920,8 +942,23 @@ void Settings::save() const
 
 	settings.endGroup();
 
+	// ------
+
+	settings.beginGroup("Input/CDF");
+
+	const SettingsContainer& cdf_rparams = getReaderControlParameters("cdf");
+
+	settings.endGroup();
+
 	// +++
 
+	settings.beginGroup("Output/CDF");
+
+	const SettingsContainer& cdf_wparams = getWriterControlParameters("cdf");
+
+	writeParameter<bool>(cdf_wparams, settings, ControlParameter::WRITE_SINGLE_RECORD_FILES);
+
+	settings.endGroup();
 
 	// ------
 

@@ -130,6 +130,8 @@
 #include "CDPL/Chem/SMARTSReactionOutputHandler.hpp"
 #include "CDPL/Chem/INCHIMoleculeInputHandler.hpp"
 #include "CDPL/Chem/INCHIMolecularGraphOutputHandler.hpp"
+#include "CDPL/Chem/CDFMoleculeInputHandler.hpp"
+#include "CDPL/Chem/CDFMolecularGraphOutputHandler.hpp"
 
 #include "CDPL/Chem/JMEMoleculeReader.hpp"
 #include "CDPL/Chem/JMEReactionReader.hpp"
@@ -153,6 +155,8 @@
 #include "CDPL/Chem/RDFReactionWriter.hpp"
 #include "CDPL/Chem/INCHIMoleculeReader.hpp"
 #include "CDPL/Chem/INCHIMolecularGraphWriter.hpp"
+#include "CDPL/Chem/CDFMoleculeReader.hpp"
+#include "CDPL/Chem/CDFMolecularGraphWriter.hpp"
 
 #include "CDPL/Chem/CompleteRingSet.hpp"
 #include "CDPL/Chem/AromaticRingSet.hpp"

@@ -1,7 +1,7 @@
 /* -*- mode: c++; c-basic-offset: 4; tab-width: 4; indent-tabs-mode: t -*- */
 
 /* 
- * DataFormatExport.cpp 
+ * CDFMolecularGraphOutputHandler.hpp 
  *
  * This file is part of the Chemical Data Processing Toolkit
  *
@@ -23,35 +23,49 @@
  * Boston, MA 02111-1307, USA.
  */
 
+/**
+ * \file
+ * \brief Definition of the class CDPL::Chem::CDFMolecularGraphOutputHandler.
+ */
 
-#include <boost/python.hpp>
+#ifndef CDPL_CHEM_CDFMOLECULARGRAPHOUTPUTHANDLER_HPP
+#define CDPL_CHEM_CDFMOLECULARGRAPHOUTPUTHANDLER_HPP
 
-#include "CDPL/Chem/DataFormat.hpp"
-#include "CDPL/Base/DataFormat.hpp"
-
-#include "NamespaceExports.hpp"
+#include "CDPL/Chem/APIPrefix.hpp"
+#include "CDPL/Base/DataOutputHandler.hpp"
 
 
-namespace 
+namespace CDPL 
 {
 
-	struct DataFormat {};
+	namespace Chem
+	{
+
+		class MolecularGraph;
+
+		/**
+		 * \addtogroup CDPL_CHEM_CDF_IO
+		 * @{
+		 */
+
+		/**
+		 * \brief A handler for the output of molecular graph data in the native I/O format of the <em>CDPL</em>.
+		 */
+		class CDPL_CHEM_API CDFMolecularGraphOutputHandler : public Base::DataOutputHandler<MolecularGraph>
+		{
+
+		public:
+			CDFMolecularGraphOutputHandler() {}
+
+			const Base::DataFormat& getDataFormat() const;
+
+			Base::DataWriter<MolecularGraph>::SharedPointer createWriter(std::ostream& os) const;
+		};
+
+		/**
+		 * @}
+		 */
+	}
 }
 
-
-void CDPLPythonChem::exportDataFormats()
-{
-	using namespace boost;
-	using namespace CDPL;
-
-	python::class_<DataFormat, boost::noncopyable>("DataFormat", python::no_init)
-		.def_readonly("JME", &Chem::DataFormat::JME)
-		.def_readonly("CDF", &Chem::DataFormat::CDF)
-		.def_readonly("MOL", &Chem::DataFormat::MOL)
-		.def_readonly("RDF", &Chem::DataFormat::RDF)
-		.def_readonly("RXN", &Chem::DataFormat::RXN)
-		.def_readonly("SDF", &Chem::DataFormat::SDF)
-		.def_readonly("SMARTS", &Chem::DataFormat::SMARTS)
-		.def_readonly("SMILES", &Chem::DataFormat::SMILES)
-		.def_readonly("INCHI", &Chem::DataFormat::INCHI);
-}
+#endif // CDPL_CHEM_CDFMOLECULARGRAPHOUTPUTHANDLER_HPP

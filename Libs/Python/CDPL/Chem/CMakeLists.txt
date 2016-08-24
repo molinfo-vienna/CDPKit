@@ -106,6 +106,8 @@ SET(chem_MOD_SRCS
     ReactionOutputHandlerExport.cpp 
     INCHIMoleculeInputHandlerExport.cpp 
     INCHIMolecularGraphOutputHandlerExport.cpp 
+    CDFMoleculeInputHandlerExport.cpp 
+    CDFMolecularGraphOutputHandlerExport.cpp 
     JMEMoleculeInputHandlerExport.cpp 
     JMEReactionInputHandlerExport.cpp 
     JMEMolecularGraphOutputHandlerExport.cpp 
@@ -135,6 +137,8 @@ SET(chem_MOD_SRCS
     ReactionWriterExport.cpp 
     INCHIMoleculeReaderExport.cpp 
     INCHIMolecularGraphWriterExport.cpp 
+    CDFMoleculeReaderExport.cpp 
+    CDFMolecularGraphWriterExport.cpp
     JMEMoleculeReaderExport.cpp 
     JMEMolecularGraphWriterExport.cpp 
     JMEReactionReaderExport.cpp 
