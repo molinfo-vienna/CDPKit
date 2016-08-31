@@ -1,7 +1,7 @@
 /* -*- mode: c++; c-basic-offset: 4; tab-width: 4; indent-tabs-mode: t -*- */
 
 /* 
- * StaticInit.hpp 
+ * ControlParameterExport.cpp 
  *
  * This file is part of the Chemical Data Processing Toolkit
  *
@@ -24,43 +24,27 @@
  */
 
 
-#ifndef CDPL_PHARM_STATICINIT_HPP
-#define CDPL_PHARM_STATICINIT_HPP
+#include <boost/python.hpp>
 
-#ifdef CDPL_PHARM_STATIC_LINK
+#include "CDPL/Pharm/ControlParameter.hpp"
+#include "CDPL/Base/LookupKey.hpp"
+
+#include "NamespaceExports.hpp"
 
 
-namespace CDPL
+namespace 
 {
 
-	namespace Pharm
-	{
-
-		void initPharmacophoreProperties();
-		void initFeatureProperties();
-		void initDataFormats();
-		void initControlParameters();
-		void initControlParameterDefaults();
-	}
+	struct ControlParameter {};
 }
 
-namespace
+
+void CDPLPythonPharm::exportControlParameters()
 {
+	using namespace boost;
+	using namespace CDPL;
 
-	struct CDPLPharmInit
-	{
-
-		CDPLPharmInit() {
-			CDPL::Pharm::initPharmacophoreProperties();
-			CDPL::Pharm::initFeatureProperties();
-			CDPL::Pharm::initDataFormats();
-			CDPL::Pharm::initControlParameters();
-			CDPL::Pharm::initControlParameterDefaults();
-		}
-
-	} cdplPharmInit;
+	python::class_<ControlParameter, boost::noncopyable>("ControlParameter", python::no_init)
+		.def_readonly("STRICT_ERROR_CHECKING", &Pharm::ControlParameter::STRICT_ERROR_CHECKING)
+		.def_readonly("CDF_WRITE_SINGLE_PRECISION_FLOATS", &Pharm::ControlParameter::CDF_WRITE_SINGLE_PRECISION_FLOATS);
 }
-
-#endif // CDPL_PHARM_STATIC_LINK
-
-#endif // CDPL_PHARM_STATICINIT_HPP

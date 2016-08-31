@@ -1,7 +1,7 @@
 /* -*- mode: c++; c-basic-offset: 4; tab-width: 4; indent-tabs-mode: t -*- */
 
 /* 
- * DataFormat.cpp 
+ * CDFPharmacophoreInputHandler.cpp 
  *
  * This file is part of the Chemical Data Processing Toolkit
  *
@@ -26,53 +26,21 @@
 
 #include "StaticInit.hpp"
 
-#include "CDPL/Base/DataIOManager.hpp"
-#include "CDPL/Base/DataFormat.hpp"
-#include "CDPL/Pharm/DataFormat.hpp"
 #include "CDPL/Pharm/CDFPharmacophoreInputHandler.hpp"
-#include "CDPL/Pharm/CDFPharmacophoreOutputHandler.hpp"
+#include "CDPL/Pharm/DataFormat.hpp"
+#include "CDPL/Pharm/CDFPharmacophoreReader.hpp"
 
 
-namespace
+using namespace CDPL; 
+
+
+const Base::DataFormat& Pharm::CDFPharmacophoreInputHandler::getDataFormat() const
 {
-
-	const char* cdfFileExtensions[]    = { "cdf" };
+	return DataFormat::CDF;
 }
 
-
-using namespace CDPL;
-
-
-const Base::DataFormat Pharm::DataFormat::CDF("CDF", "Native CDPL-Format", "", 
-											  cdfFileExtensions, cdfFileExtensions + 1, true);
-
-namespace CDPL
+Base::DataReader<Pharm::Pharmacophore>::SharedPointer
+Pharm::CDFPharmacophoreInputHandler::createReader(std::istream& is) const
 {
-
-	namespace Pharm
-	{
-
-		void initDataFormats() {}
-	}
-}
-
-
-namespace
-{
-
-	struct Init 
-	{
-
-		Init() {
-			using namespace Base;
-			using namespace Pharm;
-
-			static const CDFPharmacophoreInputHandler  cdfPharmInputHandler;
-			static const CDFPharmacophoreOutputHandler cdfPharmOutputHandler;
-
-			DataIOManager<Pharmacophore>::registerInputHandler(cdfPharmInputHandler);
-			DataIOManager<Pharmacophore>::registerOutputHandler(cdfPharmOutputHandler);
-		}
-
-	} init;
+	return Base::DataReader<Pharm::Pharmacophore>::SharedPointer(new CDFPharmacophoreReader(is));
 }

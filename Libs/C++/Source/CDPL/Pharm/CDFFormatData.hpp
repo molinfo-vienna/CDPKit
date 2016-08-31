@@ -1,7 +1,7 @@
 /* -*- mode: c++; c-basic-offset: 4; tab-width: 4; indent-tabs-mode: t -*- */
 
 /* 
- * StaticInit.hpp 
+ * CDFFormatData.hpp
  *
  * This file is part of the Chemical Data Processing Toolkit
  *
@@ -24,43 +24,46 @@
  */
 
 
-#ifndef CDPL_PHARM_STATICINIT_HPP
-#define CDPL_PHARM_STATICINIT_HPP
+#ifndef CDPL_PHARM_CDFFORMATDATA_HPP
+#define CDPL_PHARM_CDFFORMATDATA_HPP
 
-#ifdef CDPL_PHARM_STATIC_LINK
+#include "CDPL/Base/IntTypes.hpp"
+#include "CDPL/Internal/CDFFormatData.hpp"
 
 
 namespace CDPL
 {
 
-	namespace Pharm
-	{
+    namespace Pharm
+    {
 
-		void initPharmacophoreProperties();
-		void initFeatureProperties();
-		void initDataFormats();
-		void initControlParameters();
-		void initControlParameterDefaults();
-	}
-}
+		namespace CDF
+		{
+			
+			using namespace Internal::CDF;
 
-namespace
-{
+			typedef Base::uint32 UIntType;
+			typedef Base::int32  LongType;
+			typedef Base::uint8  BoolType;
 
-	struct CDPLPharmInit
-	{
+			const Base::uint8 PHARMACOPHORE_RECORD_ID  = 3;
+			const Base::uint8 CURR_FORMAT_VERSION      = 1;
 
-		CDPLPharmInit() {
-			CDPL::Pharm::initPharmacophoreProperties();
-			CDPL::Pharm::initFeatureProperties();
-			CDPL::Pharm::initDataFormats();
-			CDPL::Pharm::initControlParameters();
-			CDPL::Pharm::initControlParameterDefaults();
+			namespace FeatureProperty
+			{
+
+
+				const unsigned int COORDINATES_3D           = 13;
+		
+			}
+		
+			namespace PharmacophoreProperty
+			{
+				
+				const unsigned int NAME                     = 1; 
+			}
 		}
-
-	} cdplPharmInit;
+    }
 }
 
-#endif // CDPL_PHARM_STATIC_LINK
-
-#endif // CDPL_PHARM_STATICINIT_HPP
+#endif // CDPL_PHARM_CDFFORMATDATA_HPP

@@ -1,7 +1,7 @@
 /* -*- mode: c++; c-basic-offset: 4; tab-width: 4; indent-tabs-mode: t -*- */
 
 /* 
- * StaticInit.hpp 
+ * CDFPharmacophoreInputHandler.hpp 
  *
  * This file is part of the Chemical Data Processing Toolkit
  *
@@ -23,44 +23,49 @@
  * Boston, MA 02111-1307, USA.
  */
 
+/**
+ * \file
+ * \brief Definition of the class CDPL::Pharm::CDFPharmacophoreInputHandler.
+ */
 
-#ifndef CDPL_PHARM_STATICINIT_HPP
-#define CDPL_PHARM_STATICINIT_HPP
+#ifndef CDPL_PHARM_CDFPHARMACOPHOREINPUTHANDLER_HPP
+#define CDPL_PHARM_CDFPHARMACOPHOREINPUTHANDLER_HPP
 
-#ifdef CDPL_PHARM_STATIC_LINK
+#include "CDPL/Pharm/APIPrefix.hpp"
+#include "CDPL/Base/DataInputHandler.hpp"
 
 
-namespace CDPL
+namespace CDPL 
 {
 
 	namespace Pharm
 	{
 
-		void initPharmacophoreProperties();
-		void initFeatureProperties();
-		void initDataFormats();
-		void initControlParameters();
-		void initControlParameterDefaults();
+		class Pharmacophore;
+
+		/**
+		 * \addtogroup CDPL_PHARM_CDF_IO
+		 * @{
+		 */
+
+		/**
+		 * \brief A handler for the input of pharmacophore data in the native I/O format of the <em>CDPL</em>.
+		 */
+		class CDPL_PHARM_API CDFPharmacophoreInputHandler : public Base::DataInputHandler<Pharmacophore>
+		{
+
+		public:
+			CDFPharmacophoreInputHandler() {}
+
+			const Base::DataFormat& getDataFormat() const;
+
+			Base::DataReader<Pharmacophore>::SharedPointer createReader(std::istream& is) const;
+		};
+
+		/**
+		 * @}
+		 */
 	}
 }
 
-namespace
-{
-
-	struct CDPLPharmInit
-	{
-
-		CDPLPharmInit() {
-			CDPL::Pharm::initPharmacophoreProperties();
-			CDPL::Pharm::initFeatureProperties();
-			CDPL::Pharm::initDataFormats();
-			CDPL::Pharm::initControlParameters();
-			CDPL::Pharm::initControlParameterDefaults();
-		}
-
-	} cdplPharmInit;
-}
-
-#endif // CDPL_PHARM_STATIC_LINK
-
-#endif // CDPL_PHARM_STATICINIT_HPP
+#endif // CDPL_PHARM_CDFPHARMACOPHOREINPUTHANDLER_HPP

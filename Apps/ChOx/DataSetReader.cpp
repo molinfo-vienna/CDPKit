@@ -212,7 +212,7 @@ bool DataSetReader::appendRecords(const IStreamPointer& is_ptr, bool use_file_ex
 			reader_ptr->read(data);
 
 		} catch (const Exception& e) {
-			//std::cerr << "Reader  (using file ext.): " << e.what() << std::endl;
+			std::cerr << "Reader  (using file ext.): " << e.what() << std::endl;
 			return false;
 		}
 
@@ -238,7 +238,7 @@ bool DataSetReader::appendRecords(const IStreamPointer& is_ptr, bool use_file_ex
 				found_reader = true;
 
 			} catch (const Exception& e) {
-				//std::cerr << "Reader : " << e.what() << std::endl;
+				std::cerr << "Reader : " << e.what() << std::endl;
 			}
 		}
 

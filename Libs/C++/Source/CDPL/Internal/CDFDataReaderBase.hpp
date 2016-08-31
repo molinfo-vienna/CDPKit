@@ -31,7 +31,9 @@
 #include <cstddef>
 #include <string>
 
+#include "CDPL/Math/VectorArray.hpp"
 #include "CDPL/Base/Exceptions.hpp"
+
 #include "CDPL/Internal/CDFFormatData.hpp"
 #include "CDPL/Internal/ByteBuffer.hpp"
 
@@ -72,6 +74,9 @@ namespace CDPL
 
 			template <typename Vec>
 			void getVectorProperty(CDF::PropertySpec prop_spec, Vec& vec, ByteBuffer& bbuf) const;
+
+			template <typename Vec>
+			void getVectorArrayProperty(CDF::PropertySpec prop_spec, Math::VectorArray<Vec>& vec_array, ByteBuffer& bbuf) const;
 
 			bool strictErrorChecking() const;
 
@@ -115,8 +120,18 @@ void CDPL::Internal::CDFDataReaderBase::getFloatProperty(CDF::PropertySpec prop_
 {
 	std::size_t len = extractPropertyValueLength(prop_spec);
 
-	if (len != sizeof(T))
+	if (len != sizeof(T)) {
+		if (len == sizeof(float)) {
+			float tmp;
+
+			bbuf.getFloat(tmp);
+
+			value = tmp;
+			return;
+		}
+
 		throw Base::IOError("CDFDataReaderBase: float property read error, output type size mismatch");
+	}
 
 	bbuf.getFloat(value);
 }
@@ -127,11 +142,54 @@ void CDPL::Internal::CDFDataReaderBase::getVectorProperty(CDF::PropertySpec prop
 {
 	std::size_t len = extractPropertyValueLength(prop_spec);
 
-	if (len != sizeof(typename Vec::ValueType))
-		throw Base::IOError("CDFDataReaderBase: vector property read error, output element type size mismatch");
+	if (len != sizeof(typename Vec::ValueType)) {
+		if (len == sizeof(float)) {
+			float tmp;
+
+			for (std::size_t i = 0; i < vec.getSize(); i++) {
+				bbuf.getFloat(tmp);
+				vec[i] = tmp;
+			}
+
+			return;
+		}
+
+		throw Base::IOError("CDFDataReaderBase: float property read error, output type size mismatch");
+	}
 
 	for (std::size_t i = 0; i < vec.getSize(); i++)
 		bbuf.getFloat(vec[i]);
+}
+
+template <typename Vec>
+void CDPL::Internal::CDFDataReaderBase::getVectorArrayProperty(CDF::PropertySpec prop_spec, Math::VectorArray<Vec>& vec_array, ByteBuffer& bbuf) const
+{
+	std::size_t len = extractPropertyValueLength(prop_spec);
+	CDF::SizeType arr_size;
+
+	bbuf.getInt(arr_size);
+	vec_array.resize(arr_size);
+
+	if (len != sizeof(typename Vec::ValueType)) {
+		if (len == sizeof(float)) {
+			float tmp;
+
+			for (CDF::SizeType i = 0; i < arr_size; i++) {
+				for (std::size_t j = 0; j < Vec::Size; j++) {
+					bbuf.getFloat(tmp);
+					vec_array[i][j] = tmp;
+				}
+			}
+
+			return;
+		}
+
+		throw Base::IOError("CDFDataReaderBase: vector array property read error, vector element type size mismatch");
+	}
+
+	for (CDF::SizeType i = 0; i < arr_size; i++)
+		for (std::size_t j = 0; j < Vec::Size; j++)
+			bbuf.getFloat(vec_array[i][j]);
 }
 
 #endif // CDPL_INTERNAL_CDFDATAREADERBASE_HPP

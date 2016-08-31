@@ -40,6 +40,8 @@
 
 #include "CDPL/Pharm/PharmacophoreProperty.hpp"  
 #include "CDPL/Pharm/FeatureProperty.hpp"  
+#include "CDPL/Pharm/ControlParameter.hpp"  
+#include "CDPL/Pharm/ControlParameterDefault.hpp"  
 #include "CDPL/Pharm/DataFormat.hpp"
 
 #include "CDPL/Pharm/FeatureType.hpp"  
@@ -75,7 +77,14 @@
 #include "CDPL/Pharm/TopologicalQueryPharmAlignmentFilter.hpp"  
 #include "CDPL/Pharm/GeometricalQueryPharmAlignmentFilter.hpp"  
 
+#include "CDPL/Pharm/CDFPharmacophoreInputHandler.hpp"
+#include "CDPL/Pharm/CDFPharmacophoreOutputHandler.hpp"
+
+#include "CDPL/Pharm/CDFPharmacophoreReader.hpp"
+#include "CDPL/Pharm/CDFPharmacophoreWriter.hpp"
+
 #include "CDPL/Pharm/PharmacophoreFunctions.hpp"  
 #include "CDPL/Pharm/FeatureFunctions.hpp"
+#include "CDPL/Pharm/ControlParameterFunctions.hpp"
 
 #endif // CDPL_PHARM_HPP

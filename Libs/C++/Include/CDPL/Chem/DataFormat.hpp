@@ -100,7 +100,7 @@ namespace CDPL
 			extern CDPL_CHEM_API const Base::DataFormat INCHI;
 	
 			/**
-			 * \brief Provides meta-information about the <em>CDPL</em> format.
+			 * \brief Provides meta-information about the native <em>CDPL</em> format.
 			 */
 			extern CDPL_CHEM_API const Base::DataFormat CDF;
 		}

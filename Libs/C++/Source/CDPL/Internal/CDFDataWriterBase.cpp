@@ -26,8 +26,6 @@
 
 #include <ostream>
 
-#include <boost/numeric/conversion/cast.hpp>
-
 #include "CDFDataWriterBase.hpp"
 
 
@@ -62,11 +60,7 @@ void Internal::CDFDataWriterBase::putStringProperty(unsigned int prop_id, const 
 
 Internal::CDF::PropertySpec Internal::CDFDataWriterBase::composePropertySpec(unsigned int prop_id, std::size_t length) const
 {
-	CDF::PropertySpec prop_byte = (prop_id << CDF::NUM_PROP_VALUE_LENGTH_BITS);
-
-	prop_byte += length - 1;
-
-	return prop_byte;
+	return ((prop_id << CDF::NUM_PROP_VALUE_LENGTH_BITS) + length - 1);
 }
 
 bool Internal::CDFDataWriterBase::strictErrorChecking() const
@@ -77,4 +71,14 @@ bool Internal::CDFDataWriterBase::strictErrorChecking() const
 void Internal::CDFDataWriterBase::strictErrorChecking(bool strict)
 {
 	strictErrorChecks = strict;
+}
+
+bool Internal::CDFDataWriterBase::singlePrecisionFloats() const
+{
+	return singlePrecFloats;
+}
+
+void Internal::CDFDataWriterBase::singlePrecisionFloats(bool spf)
+{
+	singlePrecFloats = spf;
 }

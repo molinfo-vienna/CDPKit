@@ -30,6 +30,7 @@
 #include <iosfwd>
 
 #include "CDPL/Chem/CDFFormatData.hpp"
+
 #include "CDPL/Internal/CDFDataWriterBase.hpp"
 #include "CDPL/Internal/ByteBuffer.hpp"
 
@@ -47,12 +48,17 @@ namespace CDPL
 	{
 
 		class MolecularGraph;
+		class Atom;
+		class Bond;
+		class StereoDescriptor;
 
 		class CDFDataWriter : private Internal::CDFDataWriterBase
 		{
 
 		public:
 			CDFDataWriter(const Base::DataIOBase& io_base): ioBase(io_base) {}
+
+			virtual ~CDFDataWriter() {}
 
 			bool writeMolGraph(std::ostream& os, const MolecularGraph& molgraph);
 
@@ -63,6 +69,15 @@ namespace CDPL
 			void outputAtoms(const MolecularGraph& molgraph);
 			void outputBonds(const MolecularGraph& molgraph);
 			void outputMolGraphProperties(const MolecularGraph& molgraph);
+
+			virtual void outputExternalProperties(const Atom& atom, Internal::ByteBuffer& data);
+
+			virtual void outputExternalProperties(const Bond& bond, Internal::ByteBuffer& data);
+
+			virtual void outputExternalProperties(const MolecularGraph& molgraph, Internal::ByteBuffer& data);
+
+			void putStereoDescriptor(const MolecularGraph& molgraph, 
+									 unsigned int prop_id, const StereoDescriptor& descr);
 
 			bool writeRecordData(std::ostream& os);
 

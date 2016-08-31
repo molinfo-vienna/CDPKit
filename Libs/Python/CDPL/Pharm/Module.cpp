@@ -50,6 +50,11 @@ BOOST_PYTHON_MODULE(_pharm)
 	exportPharmacophoreInputHandler();
 	exportPharmacophoreOutputHandler();
 
+	exportCDFPharmacophoreInputHandler();
+	exportCDFPharmacophoreOutputHandler();
+	exportCDFPharmacophoreReader();
+	exportCDFPharmacophoreWriter();
+
 	exportPharmacophoreGenerator();
 	exportDefaultPharmacophoreGenerator();
 	exportPatternBasedFeatureGenerator();
@@ -85,12 +90,16 @@ BOOST_PYTHON_MODULE(_pharm)
 	exportPharmacophoreProperties();
 	exportFeatureProperties();
 
+	exportControlParameters();
+	exportControlParameterDefaults();
+
 	exportDataFormats();
 	exportFeatureTypes();
 	exportFeatureGeometries();
 
 	exportPharmacophoreFunctions();
 	exportFeatureFunctions();
+	exportControlParameterFunctions();
 
 	registerToPythonConverters();
 	registerFromPythonConverters();

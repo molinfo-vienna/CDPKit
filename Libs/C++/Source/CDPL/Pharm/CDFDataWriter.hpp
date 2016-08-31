@@ -1,7 +1,7 @@
 /* -*- mode: c++; c-basic-offset: 4; tab-width: 4; indent-tabs-mode: t -*- */
 
 /* 
- * StaticInit.hpp 
+ * CDFDataWriter.hpp 
  *
  * This file is part of the Chemical Data Processing Toolkit
  *
@@ -24,43 +24,56 @@
  */
 
 
-#ifndef CDPL_PHARM_STATICINIT_HPP
-#define CDPL_PHARM_STATICINIT_HPP
+#ifndef CDPL_PHARM_CDFDATAWRITER_HPP
+#define CDPL_PHARM_CDFDATAWRITER_HPP
 
-#ifdef CDPL_PHARM_STATIC_LINK
+#include <iosfwd>
+
+#include "CDPL/Pharm/CDFFormatData.hpp"
+
+#include "CDPL/Internal/CDFDataWriterBase.hpp"
+#include "CDPL/Internal/ByteBuffer.hpp"
 
 
-namespace CDPL
+namespace CDPL 
 {
+
+	namespace Base
+	{
+
+		class DataIOBase;
+	}
 
 	namespace Pharm
 	{
 
-		void initPharmacophoreProperties();
-		void initFeatureProperties();
-		void initDataFormats();
-		void initControlParameters();
-		void initControlParameterDefaults();
+		class Pharmacophore;
+		class Atom;
+
+		class CDFDataWriter : private Internal::CDFDataWriterBase
+		{
+
+		public:
+			CDFDataWriter(const Base::DataIOBase& io_base): ioBase(io_base) {}
+
+			virtual ~CDFDataWriter() {}
+
+			bool writePharmacophore(std::ostream& os, const Pharmacophore& pharm);
+
+		private:
+			void init();
+
+			void outputPharmHeader(const Pharmacophore& pharm);
+			void outputFeatures(const Pharmacophore& pharm);
+			void outputPharmProperties(const Pharmacophore& pharm);
+
+			bool writeRecordData(std::ostream& os);
+
+			const Base::DataIOBase& ioBase;	
+			Internal::ByteBuffer    dataBuffer;
+			CDF::Header             cdfHeader;
+		};
 	}
 }
 
-namespace
-{
-
-	struct CDPLPharmInit
-	{
-
-		CDPLPharmInit() {
-			CDPL::Pharm::initPharmacophoreProperties();
-			CDPL::Pharm::initFeatureProperties();
-			CDPL::Pharm::initDataFormats();
-			CDPL::Pharm::initControlParameters();
-			CDPL::Pharm::initControlParameterDefaults();
-		}
-
-	} cdplPharmInit;
-}
-
-#endif // CDPL_PHARM_STATIC_LINK
-
-#endif // CDPL_PHARM_STATICINIT_HPP
+#endif // CDPL_PHARM_CDFDATAWRITER_HPP

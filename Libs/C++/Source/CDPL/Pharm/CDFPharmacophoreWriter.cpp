@@ -1,7 +1,7 @@
 /* -*- mode: c++; c-basic-offset: 4; tab-width: 4; indent-tabs-mode: t -*- */
 
 /* 
- * DataFormat.cpp 
+ * CDFPharmacophoreWriter.cpp 
  *
  * This file is part of the Chemical Data Processing Toolkit
  *
@@ -26,53 +26,44 @@
 
 #include "StaticInit.hpp"
 
-#include "CDPL/Base/DataIOManager.hpp"
-#include "CDPL/Base/DataFormat.hpp"
-#include "CDPL/Pharm/DataFormat.hpp"
-#include "CDPL/Pharm/CDFPharmacophoreInputHandler.hpp"
-#include "CDPL/Pharm/CDFPharmacophoreOutputHandler.hpp"
+#include <ostream>
 
+#include "CDPL/Pharm/CDFPharmacophoreWriter.hpp"
+#include "CDPL/Base/Exceptions.hpp"
 
-namespace
-{
-
-	const char* cdfFileExtensions[]    = { "cdf" };
-}
+#include "CDFDataWriter.hpp"
 
 
 using namespace CDPL;
 
 
-const Base::DataFormat Pharm::DataFormat::CDF("CDF", "Native CDPL-Format", "", 
-											  cdfFileExtensions, cdfFileExtensions + 1, true);
+Pharm::CDFPharmacophoreWriter::CDFPharmacophoreWriter(std::ostream& os): 
+	output(os), state(os.good()), writer(new CDFDataWriter(*this)) {}
 
-namespace CDPL
+Pharm::CDFPharmacophoreWriter::~CDFPharmacophoreWriter() {}
+
+Base::DataWriter<Pharm::Pharmacophore>& Pharm::CDFPharmacophoreWriter::write(const Pharmacophore& pharm)
 {
+	state = false;
 
-	namespace Pharm
-	{
+	try {
+		state = writer->writePharmacophore(output, pharm);
 
-		void initDataFormats() {}
+	} catch (const Base::Exception& e) {
+		throw Base::IOError("CDFPharmacophoreWriter: " + std::string(e.what()));
 	}
+
+	invokeIOCallbacks();
+
+	return *this;
 }
 
-
-namespace
+Pharm::CDFPharmacophoreWriter::operator const void*() const
 {
+	return (state ? this : 0);
+}
 
-	struct Init 
-	{
-
-		Init() {
-			using namespace Base;
-			using namespace Pharm;
-
-			static const CDFPharmacophoreInputHandler  cdfPharmInputHandler;
-			static const CDFPharmacophoreOutputHandler cdfPharmOutputHandler;
-
-			DataIOManager<Pharmacophore>::registerInputHandler(cdfPharmInputHandler);
-			DataIOManager<Pharmacophore>::registerOutputHandler(cdfPharmOutputHandler);
-		}
-
-	} init;
+bool Pharm::CDFPharmacophoreWriter::operator!() const
+{
+	return !state;
 }

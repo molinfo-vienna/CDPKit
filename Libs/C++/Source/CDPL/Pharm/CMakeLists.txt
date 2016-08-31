@@ -9,7 +9,9 @@ SET(cdpl-pharm_LIB_SRCS
     PharmacophoreProperty.cpp
     FeatureProperty.cpp
     DataFormat.cpp
-    
+    ControlParameter.cpp
+    ControlParameterDefault.cpp
+  
     PatternBasedFeatureGenerator.cpp
     HydrophobicFeatureGenerator.cpp
     AromaticFeatureGenerator.cpp
@@ -40,6 +42,14 @@ SET(cdpl-pharm_LIB_SRCS
     GeometricalFeatureMappingExtractor.cpp
     PharmacophoreAlignment.cpp
 
+    CDFPharmacophoreInputHandler.cpp
+    CDFPharmacophoreOutputHandler.cpp
+
+    CDFDataReader.cpp
+    CDFDataWriter.cpp
+    CDFPharmacophoreReader.cpp
+    CDFPharmacophoreWriter.cpp
+
     FeatureTypeFunctions.cpp
     FeatureGeometryFunctions.cpp
     FeatureOrientationFunctions.cpp
@@ -52,7 +62,9 @@ SET(cdpl-pharm_LIB_SRCS
     PharmacophoreFeatureCountFunctions.cpp
     InteractionPharmacophoreFunction.cpp
     ExclusionVolumeClashTestFunction.cpp
-    
+
+    ControlParameterFunctions.cpp
+
     PiPiInteractionUtilities.cpp
    )
 

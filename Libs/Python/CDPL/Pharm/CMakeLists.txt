@@ -21,6 +21,11 @@ SET(pharm_MOD_SRCS
     PharmacophoreInputHandlerExport.cpp 
     PharmacophoreOutputHandlerExport.cpp 
 
+    CDFPharmacophoreInputHandlerExport.cpp 
+    CDFPharmacophoreOutputHandlerExport.cpp 
+    CDFPharmacophoreReaderExport.cpp 
+    CDFPharmacophoreWriterExport.cpp
+
     BoostFunctionWrapperExport.cpp
 
     PharmacophoreGeneratorExport.cpp
@@ -60,9 +65,12 @@ SET(pharm_MOD_SRCS
     DataFormatExport.cpp 
     FeatureTypeExport.cpp 
     FeatureGeometryExport.cpp 
+    ControlParameterExport.cpp 
+    ControlParameterDefaultExport.cpp 
 
     PharmacophoreFunctionExport.cpp 
     FeatureFunctionExport.cpp 
+    ControlParameterFunctionExport.cpp 
 
     ToPythonConverterRegistration.cpp
     FromPythonConverterRegistration.cpp

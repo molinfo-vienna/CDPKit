@@ -34,12 +34,13 @@
 #include "CDPL/Chem/AtomFunctions.hpp"
 #include "CDPL/Chem/BondFunctions.hpp"
 #include "CDPL/Chem/MolecularGraphFunctions.hpp"
+#include "CDPL/Chem/StereoDescriptor.hpp"
 #include "CDPL/Base/DataIOBase.hpp"
 #include "CDPL/Base/Exceptions.hpp"
 #include "CDPL/Math/Vector.hpp"
+#include "CDPL/Math/VectorArray.hpp"
 
 #include "CDFDataReader.hpp"
-#include "CDFFormatData.hpp"
 
 
 using namespace CDPL;
@@ -66,6 +67,8 @@ bool Chem::CDFDataReader::readMolecule(std::istream& is, Molecule& mol)
 	readData(is, header.recordDataLength, dataBuffer);
 
 	dataBuffer.setIOPointer(0);
+	atomStereoDescrs.clear();
+	bondStereoDescrs.clear();
 
 	CDF::SizeType num_atoms, num_bonds;
 
@@ -77,6 +80,7 @@ bool Chem::CDFDataReader::readMolecule(std::istream& is, Molecule& mol)
 	readAtoms(mol, num_atoms);
 	readBonds(mol, num_atoms, num_bonds);
 	readMoleculeProperties(mol);
+	setStereoDescriptors(mol);
 
 	return true;
 }
@@ -106,10 +110,12 @@ void Chem::CDFDataReader::readAtoms(Molecule& mol, std::size_t num_atoms)
 
 	for (std::size_t i = 0; i < num_atoms; i++) {
 		Atom& atom = mol.addAtom();
-		bool props_end = false;
 
-		while (!props_end) {
+		while (true) {
 			dataBuffer.getInt(prop_spec);
+
+			if (prop_spec == CDF::PROP_LIST_END)
+				break;
 
 			switch (extractPropertyID(prop_spec)) {
 
@@ -178,22 +184,51 @@ void Chem::CDFDataReader::readAtoms(Molecule& mol, std::size_t num_atoms)
 					set3DCoordinates(atom, coords_3d_val);
 					continue;
 
-				case CDF::AtomProperty::COORDINATES_3D_ARRAY:
-				case CDF::AtomProperty::STEREO_DESCRIPTOR:
-				case CDF::AtomProperty::STEREO_CENTER_FLAG:
-				case CDF::AtomProperty::CIP_CONFIGURATION:
-				case CDF::AtomProperty::REACTION_CENTER_STATUS:
-				case CDF::AtomProperty::REACTION_ATOM_MAPPING_ID:
-				case CDF::AtomProperty::MATCH_CONSTRAINTS:
-				case CDF::AtomProperty::COMPONENT_GROUP_ID:
-					throw Base::IOError("CDFDataReader: unsupported atom property");
+				case CDF::AtomProperty::COORDINATES_3D_ARRAY: {
+					Math::Vector3DArray::SharedPointer va_ptr(new Math::Vector3DArray());
 
-				case CDF::PROP_LIST_END:
-					props_end = true;
+					getVectorArrayProperty(prop_spec, *va_ptr, dataBuffer);
+					set3DCoordinatesArray(atom, va_ptr);
+					continue;
+				}
+
+				case CDF::AtomProperty::CIP_CONFIGURATION:
+					getIntProperty(prop_spec, uint_val, dataBuffer);
+					setCIPConfiguration(atom, uint_val);
 					continue;
 
+				case CDF::AtomProperty::STEREO_CENTER_FLAG:
+					getIntProperty(prop_spec, bool_val, dataBuffer);
+					setStereoCenterFlag(atom, bool_val);
+					continue;
+
+				case CDF::AtomProperty::COMPONENT_GROUP_ID:
+					getIntProperty(prop_spec, size_val, dataBuffer);
+					setComponentGroupID(atom, size_val);
+					continue;
+
+				case CDF::AtomProperty::REACTION_CENTER_STATUS:
+					getIntProperty(prop_spec, uint_val, dataBuffer);
+					setReactionCenterStatus(atom, uint_val);
+					continue;
+
+				case CDF::AtomProperty::REACTION_ATOM_MAPPING_ID:
+					getIntProperty(prop_spec, size_val, dataBuffer);
+					setReactionAtomMappingID(atom, size_val);
+					continue;
+
+				case CDF::AtomProperty::STEREO_DESCRIPTOR: {
+					CDFStereoDescr descr(i);
+
+					readStereoDescriptor(prop_spec, descr);
+					atomStereoDescrs.push_back(descr);
+					continue;
+				}
+					
+				case CDF::AtomProperty::MATCH_CONSTRAINTS:
+
 				default:
-					throw Base::IOError("CDFDataReader: unsupported atom property");
+					handleUnknownProperty(prop_spec, atom, dataBuffer);
 			}
 		}
 	}
@@ -227,10 +262,12 @@ void Chem::CDFDataReader::readBonds(Molecule& mol, std::size_t num_atoms, std::s
 			throw Base::IOError("CDFDataReader: bond end atom index range error");
 
 		Bond& bond = mol.addBond(atom1_idx + startAtomIdx, atom2_idx + startAtomIdx);
-		bool props_end = false;
 
-		while (!props_end) {
+		while (true) {
 			dataBuffer.getInt(prop_spec);
+
+			if (prop_spec == CDF::PROP_LIST_END)
+				break;
 
 			switch (extractPropertyID(prop_spec)) {
 
@@ -259,19 +296,33 @@ void Chem::CDFDataReader::readBonds(Molecule& mol, std::size_t num_atoms, std::s
 					set2DStereoFlag(bond, uint_val);
 					continue;
 
-				case CDF::BondProperty::STEREO_DESCRIPTOR:
-				case CDF::BondProperty::CIP_CONFIGURATION:
-				case CDF::BondProperty::DIRECTION:
-				case CDF::BondProperty::REACTION_CENTER_STATUS:
-				case CDF::BondProperty::MATCH_CONSTRAINTS:
-					throw Base::IOError("CDFDataReader: unsupported bond property");
-
-				case CDF::PROP_LIST_END:
-					props_end = true;
+				case CDF::AtomProperty::CIP_CONFIGURATION:
+					getIntProperty(prop_spec, uint_val, dataBuffer);
+					setCIPConfiguration(bond, uint_val);
 					continue;
 
+				case CDF::BondProperty::DIRECTION:
+					getIntProperty(prop_spec, uint_val, dataBuffer);
+					setDirection(bond, uint_val);
+					continue;
+
+				case CDF::BondProperty::REACTION_CENTER_STATUS:
+					getIntProperty(prop_spec, uint_val, dataBuffer);
+					setReactionCenterStatus(bond, uint_val);
+					continue;
+
+				case CDF::BondProperty::STEREO_DESCRIPTOR: {
+					CDFStereoDescr descr(i);
+
+					readStereoDescriptor(prop_spec, descr);
+					bondStereoDescrs.push_back(descr);
+					continue;
+				}
+
+				case CDF::BondProperty::MATCH_CONSTRAINTS:
+		
 				default:
-					throw Base::IOError("CDFDataReader: unsupported bond property");
+					handleUnknownProperty(prop_spec, bond, dataBuffer);
 			}
 		}
 	}
@@ -283,10 +334,12 @@ void Chem::CDFDataReader::readMoleculeProperties(Molecule& mol)
 	CDF::SizeType size_val;
 	std::string str_val;
 	double double_val;
-	bool props_end = false;
 
-	while (!props_end) {
+	while (true) {
 		dataBuffer.getInt(prop_spec);
+
+		if (prop_spec == CDF::PROP_LIST_END)
+			break;
 
 		switch (extractPropertyID(prop_spec)) {
 
@@ -306,14 +359,76 @@ void Chem::CDFDataReader::readMoleculeProperties(Molecule& mol)
 				continue;
 
 			case CDF::MolecularGraphProperty::MATCH_CONSTRAINTS:
-				throw Base::IOError("CDFDataReader: unsupported molecule property");
-
-			case CDF::PROP_LIST_END:
-				props_end = true;
-				continue;
 
 			default:
-				throw Base::IOError("CDFDataReader: unsupported molecule property");
+				handleUnknownProperty(prop_spec, mol, dataBuffer);
 		}
+	}
+}
+
+void Chem::CDFDataReader::handleUnknownProperty(CDF::PropertySpec prop_spec, Atom& atom, Internal::ByteBuffer& data)
+{
+	throw Base::IOError("CDFDataReader: unsupported atom property");
+}
+
+void Chem::CDFDataReader::handleUnknownProperty(CDF::PropertySpec prop_spec, Bond& bond, Internal::ByteBuffer& data)
+{
+	throw Base::IOError("CDFDataReader: unsupported bond property");
+}
+
+void Chem::CDFDataReader::handleUnknownProperty(CDF::PropertySpec prop_spec, Molecule& mol, Internal::ByteBuffer& data)
+{
+	throw Base::IOError("CDFDataReader: unsupported molecule property");
+}
+
+void Chem::CDFDataReader::setStereoDescriptors(Molecule& mol) const
+{
+	for (StereoDescrList::const_iterator it = atomStereoDescrs.begin(), end = atomStereoDescrs.end(); it != end; ++it)
+		setStereoDescriptor(mol.getAtom(it->objIndex), mol, *it);
+
+	for (StereoDescrList::const_iterator it = bondStereoDescrs.begin(), end = bondStereoDescrs.end(); it != end; ++it)
+		setStereoDescriptor(mol.getBond(it->objIndex), mol, *it);
+}
+
+template <typename T>
+void Chem::CDFDataReader::setStereoDescriptor(T& obj, const Molecule& mol, const CDFStereoDescr& descr) const
+{
+	switch (descr.numRefAtoms) {
+
+		case 0:
+			Chem::setStereoDescriptor(obj, StereoDescriptor(descr.config));
+			return;
+
+		case 3:
+			Chem::setStereoDescriptor(obj, StereoDescriptor(descr.config,
+															mol.getAtom(descr.refAtomInds[0] + startAtomIdx),
+															mol.getAtom(descr.refAtomInds[1] + startAtomIdx),
+															mol.getAtom(descr.refAtomInds[2] + startAtomIdx)));
+			return;
+
+		case 4:
+			Chem::setStereoDescriptor(obj, StereoDescriptor(descr.config,
+															mol.getAtom(descr.refAtomInds[0] + startAtomIdx),
+															mol.getAtom(descr.refAtomInds[1] + startAtomIdx),
+															mol.getAtom(descr.refAtomInds[2] + startAtomIdx),
+															mol.getAtom(descr.refAtomInds[3] + startAtomIdx)));
+			return;
+
+		default:
+			throw Base::IOError("CDFDataReader: invalid number of stereo reference atoms");
+	}
+}
+
+void Chem::CDFDataReader::readStereoDescriptor(CDF::PropertySpec prop_spec, CDFStereoDescr& descr)
+{
+	getIntProperty(prop_spec, descr.config, dataBuffer);
+	dataBuffer.getInt(descr.numRefAtoms, 1);
+
+	if (descr.numRefAtoms > 4)
+		throw Base::IOError("CDFDataReader: more than four stereo reference atoms");
+
+	for (std::size_t i = 0, len; i < descr.numRefAtoms; i++) {
+		dataBuffer.getInt(len, 1);
+		dataBuffer.getInt(descr.refAtomInds[i], len);
 	}
 }

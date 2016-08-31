@@ -1,7 +1,7 @@
 /* -*- mode: c++; c-basic-offset: 4; tab-width: 4; indent-tabs-mode: t -*- */
 
 /* 
- * StaticInit.hpp 
+ * ControlParameterDefault.hpp 
  *
  * This file is part of the Chemical Data Processing Toolkit
  *
@@ -23,44 +23,46 @@
  * Boston, MA 02111-1307, USA.
  */
 
+/**
+ * \file
+ * \brief Definition of constants in namespace CDPL::Pharm::ControlParameterDefault.
+ */
 
-#ifndef CDPL_PHARM_STATICINIT_HPP
-#define CDPL_PHARM_STATICINIT_HPP
+#ifndef CDPL_PHARM_CONTROLPARAMETERDEFAULT_HPP
+#define CDPL_PHARM_CONTROLPARAMETERDEFAULT_HPP
 
-#ifdef CDPL_PHARM_STATIC_LINK
+#include "CDPL/Pharm/APIPrefix.hpp"
 
 
-namespace CDPL
+namespace CDPL 
 {
 
 	namespace Pharm
 	{
 
-		void initPharmacophoreProperties();
-		void initFeatureProperties();
-		void initDataFormats();
-		void initControlParameters();
-		void initControlParameterDefaults();
+		/**
+		 * \addtogroup CDPL_PHARM_CONTROL_PARAMETERS
+		 * @{
+		 */
+
+		/**
+		 * \brief Provides default values for built-in control-parameters.
+		 */
+		namespace ControlParameterDefault
+		{
+
+			/**
+			 * \brief Default setting (= \c false) for the control-parameter Pharm::ControlParameter::STRICT_ERROR_CHECKING.
+			 */
+			extern CDPL_PHARM_API const bool STRICT_ERROR_CHECKING;
+
+			extern CDPL_PHARM_API const bool CDF_WRITE_SINGLE_PRECISION_FLOATS;
+		}
+
+		/**
+		 * @}
+		 */
 	}
 }
 
-namespace
-{
-
-	struct CDPLPharmInit
-	{
-
-		CDPLPharmInit() {
-			CDPL::Pharm::initPharmacophoreProperties();
-			CDPL::Pharm::initFeatureProperties();
-			CDPL::Pharm::initDataFormats();
-			CDPL::Pharm::initControlParameters();
-			CDPL::Pharm::initControlParameterDefaults();
-		}
-
-	} cdplPharmInit;
-}
-
-#endif // CDPL_PHARM_STATIC_LINK
-
-#endif // CDPL_PHARM_STATICINIT_HPP
+#endif // CDPL_PHARM_CONTROLPARAMETERDEFAULT_HPP

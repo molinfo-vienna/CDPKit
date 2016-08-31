@@ -1,7 +1,7 @@
 /* -*- mode: c++; c-basic-offset: 4; tab-width: 4; indent-tabs-mode: t -*- */
 
 /* 
- * StaticInit.hpp 
+ * CDFPharmacophoreWriterExport.cpp 
  *
  * This file is part of the Chemical Data Processing Toolkit
  *
@@ -24,43 +24,20 @@
  */
 
 
-#ifndef CDPL_PHARM_STATICINIT_HPP
-#define CDPL_PHARM_STATICINIT_HPP
+#include <boost/python.hpp>
 
-#ifdef CDPL_PHARM_STATIC_LINK
+#include "CDPL/Pharm/CDFPharmacophoreWriter.hpp"
+
+#include "ClassExports.hpp"
 
 
-namespace CDPL
+void CDPLPythonPharm::exportCDFPharmacophoreWriter()
 {
+	using namespace boost;
+	using namespace CDPL;
 
-	namespace Pharm
-	{
-
-		void initPharmacophoreProperties();
-		void initFeatureProperties();
-		void initDataFormats();
-		void initControlParameters();
-		void initControlParameterDefaults();
-	}
+	python::class_<Pharm::CDFPharmacophoreWriter, python::bases<Base::DataWriter<Pharm::Pharmacophore> >, 
+		boost::noncopyable>("CDFPharmacophoreWriter", python::no_init)
+		.def(python::init<std::ostream&>((python::arg("self"), python::arg("os")))
+			 [python::with_custodian_and_ward<1, 2>()]);
 }
-
-namespace
-{
-
-	struct CDPLPharmInit
-	{
-
-		CDPLPharmInit() {
-			CDPL::Pharm::initPharmacophoreProperties();
-			CDPL::Pharm::initFeatureProperties();
-			CDPL::Pharm::initDataFormats();
-			CDPL::Pharm::initControlParameters();
-			CDPL::Pharm::initControlParameterDefaults();
-		}
-
-	} cdplPharmInit;
-}
-
-#endif // CDPL_PHARM_STATIC_LINK
-
-#endif // CDPL_PHARM_STATICINIT_HPP

@@ -1,7 +1,7 @@
 /* -*- mode: c++; c-basic-offset: 4; tab-width: 4; indent-tabs-mode: t -*- */
 
 /* 
- * DataFormat.hpp 
+ * ControlParameter.hpp 
  *
  * This file is part of the Chemical Data Processing Toolkit
  *
@@ -25,42 +25,51 @@
 
 /**
  * \file
- * \brief Provides the contents of namespace CDPL::Pharm::DataFormat.
+ * \brief Definition of constants in namespace CDPL::Pharm::ControlParameter.
  */
 
-#ifndef CDPL_PHARM_DATAFORMAT_HPP
-#define CDPL_PHARM_DATAFORMAT_HPP
+#ifndef CDPL_PHARM_CONTROLPARAMETER_HPP
+#define CDPL_PHARM_CONTROLPARAMETER_HPP
 
 #include "CDPL/Pharm/APIPrefix.hpp"
 
 
-namespace CDPL
+namespace CDPL 
 {
 
 	namespace Base
 	{
 
-		class DataFormat;
+		class LookupKey;
 	}
 
 	namespace Pharm
 	{
 
 		/**
-		 * \addtogroup CDPL_PHARM_DATA_FORMATS
+		 * \addtogroup CDPL_PHARM_CONTROL_PARAMETERS
 		 * @{
 		 */
-		
+
 		/**
-		 * \brief Provides preinitialized Base::DataFormat objects for all supported data formats.
+		 * \brief Provides keys for built-in control-parameters.
 		 */
-		namespace DataFormat
+		namespace ControlParameter
 		{
-	
+
 			/**
-			 * \brief Provides meta-information about the native  <em>CDPL</em> format.
+			 * \brief Specifies whether non-fatal recoverable I/O errors should be ignored or cause an I/O operation to fail.
+			 *
+			 * If the control-parameter is set to \c true, not only severe errors cause an I/O operation to fail, but also
+			 * non-fatal errors from which a recovery would be possible. 
+			 * If the control-parameter is set to \c false, I/O operations will proceed even if a non-fatal error has been
+			 * detected.
+			 *
+			 * \valuetype \c bool
 			 */
-			extern CDPL_PHARM_API const Base::DataFormat CDF;
+			extern CDPL_PHARM_API const Base::LookupKey STRICT_ERROR_CHECKING;
+
+			extern CDPL_PHARM_API const Base::LookupKey CDF_WRITE_SINGLE_PRECISION_FLOATS;
 		}
 
 		/**
@@ -69,4 +78,4 @@ namespace CDPL
 	}
 }
 
-#endif // CDPL_PHARM_DATAFORMAT_HPP
+#endif // CDPL_PHARM_CONTROLPARAMETER_HPP

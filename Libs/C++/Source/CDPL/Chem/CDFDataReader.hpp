@@ -29,6 +29,9 @@
 
 #include <cstddef>
 #include <iosfwd>
+#include <vector>
+
+#include "CDPL/Chem/CDFFormatData.hpp"
 
 #include "CDPL/Internal/CDFDataReaderBase.hpp"
 #include "CDPL/Internal/ByteBuffer.hpp"
@@ -47,12 +50,16 @@ namespace CDPL
 	{
 
 		class Molecule;
+		class Atom;
+		class Bond;
 
 		class CDFDataReader : private Internal::CDFDataReaderBase
 		{
 
 		public:
 			CDFDataReader(const Base::DataIOBase& io_base): ioBase(io_base) {}
+
+			virtual ~CDFDataReader() {}
 
 			bool readMolecule(std::istream& is, Molecule& mol);
 
@@ -61,15 +68,45 @@ namespace CDPL
 			bool hasMoreData(std::istream& is);
 
 		private:
+			struct CDFStereoDescr
+			{
+
+				CDFStereoDescr(std::size_t obj_idx): objIndex(obj_idx) {}
+
+				std::size_t  objIndex;
+				unsigned int config;
+				std::size_t  numRefAtoms;
+				std::size_t  refAtomInds[4];
+			};
+
 			void init();
 
 			void readAtoms(Molecule& mol, std::size_t num_atoms);
 			void readBonds(Molecule& mol, std::size_t num_atoms, std::size_t num_bonds);
 			void readMoleculeProperties(Molecule& mol);
 
+			virtual void handleUnknownProperty(CDF::PropertySpec prop_spec, Atom& atom, 
+											   Internal::ByteBuffer& data);
+
+			virtual void handleUnknownProperty(CDF::PropertySpec prop_spec, Bond& bond, 
+											   Internal::ByteBuffer& data);
+
+			virtual void handleUnknownProperty(CDF::PropertySpec prop_spec, Molecule& mol, 
+											   Internal::ByteBuffer& data);
+
+			void readStereoDescriptor(CDF::PropertySpec prop_spec, CDFStereoDescr& descr);
+			void setStereoDescriptors(Molecule& mol) const;
+
+			template <typename T>
+			void setStereoDescriptor(T& obj, const Molecule& mol, const CDFStereoDescr& descr) const;
+
+			typedef std::vector<CDFStereoDescr> StereoDescrList;
+
 			const Base::DataIOBase& ioBase;	
 			Internal::ByteBuffer    dataBuffer;
 			std::size_t             startAtomIdx;
+			StereoDescrList         atomStereoDescrs;
+			StereoDescrList         bondStereoDescrs;
 		};
 	}
 }

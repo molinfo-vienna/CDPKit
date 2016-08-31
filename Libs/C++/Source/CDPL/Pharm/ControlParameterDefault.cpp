@@ -1,7 +1,7 @@
 /* -*- mode: c++; c-basic-offset: 4; tab-width: 4; indent-tabs-mode: t -*- */
 
 /* 
- * StaticInit.hpp 
+ * ControlParameterDefault.cpp 
  *
  * This file is part of the Chemical Data Processing Toolkit
  *
@@ -24,10 +24,9 @@
  */
 
 
-#ifndef CDPL_PHARM_STATICINIT_HPP
-#define CDPL_PHARM_STATICINIT_HPP
+#include "StaticInit.hpp"
 
-#ifdef CDPL_PHARM_STATIC_LINK
+#include "CDPL/Pharm/ControlParameterDefault.hpp"
 
 
 namespace CDPL
@@ -36,31 +35,14 @@ namespace CDPL
 	namespace Pharm
 	{
 
-		void initPharmacophoreProperties();
-		void initFeatureProperties();
-		void initDataFormats();
-		void initControlParameters();
-		void initControlParameterDefaults();
-	}
-}
+		namespace ControlParameterDefault
+		{
 
-namespace
-{
-
-	struct CDPLPharmInit
-	{
-
-		CDPLPharmInit() {
-			CDPL::Pharm::initPharmacophoreProperties();
-			CDPL::Pharm::initFeatureProperties();
-			CDPL::Pharm::initDataFormats();
-			CDPL::Pharm::initControlParameters();
-			CDPL::Pharm::initControlParameterDefaults();
+			const bool STRICT_ERROR_CHECKING                                                = false;
+			
+			const bool CDF_WRITE_SINGLE_PRECISION_FLOATS                                    = true;
 		}
 
-	} cdplPharmInit;
+		void initControlParameterDefaults() {}
+	}
 }
-
-#endif // CDPL_PHARM_STATIC_LINK
-
-#endif // CDPL_PHARM_STATICINIT_HPP

@@ -45,6 +45,11 @@ namespace CDPLPythonPharm
 	void exportPharmacophoreInputHandler();
 	void exportPharmacophoreOutputHandler();
 
+	void exportCDFPharmacophoreInputHandler();
+	void exportCDFPharmacophoreOutputHandler();
+	void exportCDFPharmacophoreReader();
+	void exportCDFPharmacophoreWriter();
+
 	void exportPharmacophoreGenerator();
 	void exportDefaultPharmacophoreGenerator();
 	void exportPatternBasedFeatureGenerator();

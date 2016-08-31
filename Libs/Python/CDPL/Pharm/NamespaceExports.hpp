@@ -37,6 +37,9 @@ namespace CDPLPythonPharm
 	void exportPharmacophoreProperties();
 	void exportFeatureProperties();
 
+	void exportControlParameters();
+	void exportControlParameterDefaults();
+
 	void exportDataFormats();
 }
 

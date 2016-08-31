@@ -53,12 +53,12 @@ namespace CDPL
 				SizeType     recordDataLength;
 			};
 
-			const std::size_t  HEADER_SIZE          = 10;
-
-			const Base::uint32 FORMAT_ID            = 0x4c504443;
+			const std::size_t  HEADER_SIZE = 10;
+			const Base::uint32 FORMAT_ID   = 0x4c504443;
 
 			const std::size_t  NUM_PROP_VALUE_LENGTH_BITS = 3; 
 			const PropertySpec PROP_VALUE_LENGTH_MASK     = 0x7; 
+			const PropertySpec PROP_LIST_END              = 0;
 		}
     }
 }
