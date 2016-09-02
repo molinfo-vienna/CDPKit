@@ -1,7 +1,7 @@
 /* -*- mode: c++; c-basic-offset: 4; tab-width: 4; indent-tabs-mode: t -*- */
 
 /* 
- * StaticInit.hpp 
+ * ControlParameterDefault.cpp 
  *
  * This file is part of the Chemical Data Processing Toolkit
  *
@@ -24,10 +24,9 @@
  */
 
 
-#ifndef CDPL_BIOMOL_STATICINIT_HPP
-#define CDPL_BIOMOL_STATICINIT_HPP
+#include "StaticInit.hpp"
 
-#ifdef CDPL_BIOMOL_STATIC_LINK
+#include "CDPL/Biomol/ControlParameterDefault.hpp"
 
 
 namespace CDPL
@@ -36,31 +35,14 @@ namespace CDPL
 	namespace Biomol
 	{
 
-		void initAtomProperties();
-		void initMolecularGraphProperties();
-		void initControlParameters();
-		void initControlParameterDefaults();
-		void initDataFormats();
-	}
-}
+		namespace ControlParameterDefault
+		{
 
-namespace
-{
-
-	struct CDPLBiomolInit
-	{
-
-		CDPLBiomolInit() {
-			CDPL::Biomol::initAtomProperties();
-			CDPL::Biomol::initMolecularGraphProperties();
-			CDPL::Biomol::initControlParameters();
-			CDPL::Biomol::initControlParameterDefaults();
-			CDPL::Biomol::initDataFormats();
+			const bool STRICT_ERROR_CHECKING             = false;
+			const bool CHECK_LINE_LENGTH                 = false;
+			const bool CDF_WRITE_SINGLE_PRECISION_FLOATS = true;
 		}
 
-	} cdplBiomolInit;
+		void initControlParameterDefaults() {}
+	}
 }
-
-#endif // CDPL_BIOMOL_STATIC_LINK
-
-#endif // CDPL_BIOMOL_STATICINIT_HPP

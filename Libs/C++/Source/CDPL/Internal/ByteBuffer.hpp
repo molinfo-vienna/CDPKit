@@ -75,6 +75,8 @@ namespace CDPL
 
 			void putBytes(const char* bytes, std::size_t num_bytes);
 	
+			void putBytes(const ByteBuffer& buffer);
+	
 			void getBytes(char* bytes, std::size_t num_bytes);
 
 			std::size_t readBuffer(std::istream& is, std::size_t num_bytes);

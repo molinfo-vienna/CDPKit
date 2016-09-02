@@ -28,9 +28,12 @@
 
 #include "CDPL/Base/DataIOManager.hpp"
 #include "CDPL/Base/DataFormat.hpp"
+#include "CDPL/Chem/DataFormat.hpp"
 #include "CDPL/Biomol/DataFormat.hpp"
 #include "CDPL/Biomol/PDBMoleculeInputHandler.hpp"
 #include "CDPL/Biomol/PDBMolecularGraphOutputHandler.hpp"
+#include "CDPL/Biomol/CDFMoleculeInputHandler.hpp"
+#include "CDPL/Biomol/CDFMolecularGraphOutputHandler.hpp"
 
 
 namespace
@@ -45,6 +48,8 @@ using namespace CDPL;
 		
 const Base::DataFormat Biomol::DataFormat::PDB("PDB", "Brookhaven Protein Data Bank Entry", "chemical/x-pdb", 
 											   pdbFileExtensions, pdbFileExtensions + 2, false);
+const Base::DataFormat Biomol::DataFormat::CDF(Chem::DataFormat::CDF);
+
 
 namespace CDPL
 {
@@ -69,10 +74,20 @@ namespace
 			using namespace Chem;
 
 			static const PDBMoleculeInputHandler           pdbMolInputHandler;
+			static const CDFMoleculeInputHandler           cdfMolInputHandler;
+
 			static const PDBMolecularGraphOutputHandler    pdbMolGraphOutputHandler;
+			static const CDFMolecularGraphOutputHandler    cdfMolGraphOutputHandler;
 
 			DataIOManager<Molecule>::registerInputHandler(pdbMolInputHandler);
+
+			DataIOManager<Molecule>::unregisterInputHandler(Chem::DataFormat::CDF);
+			DataIOManager<Molecule>::registerInputHandler(cdfMolInputHandler);
+
 			DataIOManager<MolecularGraph>::registerOutputHandler(pdbMolGraphOutputHandler);
+
+			DataIOManager<Molecule>::unregisterOutputHandler(Chem::DataFormat::CDF);
+			DataIOManager<MolecularGraph>::registerOutputHandler(cdfMolGraphOutputHandler);
 		}
 
 	} init;

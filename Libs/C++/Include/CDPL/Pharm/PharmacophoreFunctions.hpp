@@ -32,6 +32,7 @@
 #define CDPL_PHARM_PHARMACOPHOREFUNCTIONS_HPP
 
 #include <cstddef>
+#include <string>
 
 #include "CDPL/Pharm/APIPrefix.hpp"
 #include "CDPL/Pharm/FeatureMapping.hpp"
@@ -56,6 +57,15 @@ namespace CDPL
 		 * \addtogroup CDPL_PHARM_PHARMACOPHORE_FUNCTIONS
 		 * @{
 		 */
+
+		CDPL_PHARM_API const std::string& getName(const Pharmacophore& pharm);
+
+		CDPL_PHARM_API void setName(Pharmacophore& pharm, const std::string& name);
+
+		CDPL_PHARM_API void clearName(Pharmacophore& pharm);
+
+		CDPL_PHARM_API bool hasName(const Pharmacophore& pharm);
+
 	
 		CDPL_PHARM_API std::size_t getFeatureCount(const Pharmacophore& pharm);
 

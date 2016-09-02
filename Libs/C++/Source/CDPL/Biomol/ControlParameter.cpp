@@ -1,7 +1,7 @@
 /* -*- mode: c++; c-basic-offset: 4; tab-width: 4; indent-tabs-mode: t -*- */
 
 /* 
- * StaticInit.hpp 
+ * ControlParameter.cpp 
  *
  * This file is part of the Chemical Data Processing Toolkit
  *
@@ -9,7 +9,7 @@
  *
  * This library is free software; you can redistribute it and/or
  * modify it under the terms of the GNU Lesser General Public
- * License as published by the Free Software Foundation; either
+ * License as published by the Free Software Foundation; either  
  * version 2 of the License, or (at your option) any later version.
  *
  * This library is distributed in the hope that it will be useful,
@@ -24,43 +24,27 @@
  */
 
 
-#ifndef CDPL_BIOMOL_STATICINIT_HPP
-#define CDPL_BIOMOL_STATICINIT_HPP
+#include "StaticInit.hpp"
 
-#ifdef CDPL_BIOMOL_STATIC_LINK
+#include "CDPL/Base/LookupKeyDefinition.hpp"
+#include "CDPL/Biomol/ControlParameter.hpp"
+#include "CDPL/Chem/ControlParameter.hpp"
 
 
-namespace CDPL
+namespace CDPL 
 {
 
 	namespace Biomol
 	{
 
-		void initAtomProperties();
-		void initMolecularGraphProperties();
-		void initControlParameters();
-		void initControlParameterDefaults();
-		void initDataFormats();
-	}
-}
-
-namespace
-{
-
-	struct CDPLBiomolInit
-	{
-
-		CDPLBiomolInit() {
-			CDPL::Biomol::initAtomProperties();
-			CDPL::Biomol::initMolecularGraphProperties();
-			CDPL::Biomol::initControlParameters();
-			CDPL::Biomol::initControlParameterDefaults();
-			CDPL::Biomol::initDataFormats();
+		namespace ControlParameter
+		{
+		
+			const Base::LookupKey STRICT_ERROR_CHECKING             = Chem::ControlParameter::STRICT_ERROR_CHECKING;
+			const Base::LookupKey CHECK_LINE_LENGTH                 = Chem::ControlParameter::CHECK_LINE_LENGTH;
+			const Base::LookupKey CDF_WRITE_SINGLE_PRECISION_FLOATS = Chem::ControlParameter::CDF_WRITE_SINGLE_PRECISION_FLOATS;
 		}
 
-	} cdplBiomolInit;
+		void initControlParameters() {}
+	}
 }
-
-#endif // CDPL_BIOMOL_STATIC_LINK
-
-#endif // CDPL_BIOMOL_STATICINIT_HPP

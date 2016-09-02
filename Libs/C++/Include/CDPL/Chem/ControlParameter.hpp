@@ -221,7 +221,7 @@ namespace CDPL
 
 			/**
 			 * \brief Specifies whether to check if data lines exceed the maximum allowed line length when reading or writing data
-			 *        in <a em>MDL/em> [\ref CTFILE] or <em>PDB</em> [\ref PDB] format.
+			 *        in a <em>MDL/em> [\ref CTFILE] format.
 			 *
 			 * If the control-parameter is set to \c true, the length of data lines that were read from or have to
 			 * be written to data encoded in one of the above mentioned formats will be checked against the maximum

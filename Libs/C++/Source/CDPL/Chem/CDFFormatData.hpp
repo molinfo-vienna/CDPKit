@@ -74,12 +74,13 @@ namespace CDPL
 				const unsigned int COORDINATES_3D           = 13;
 				const unsigned int COORDINATES_3D_ARRAY     = 14;
 				const unsigned int STEREO_DESCRIPTOR        = 15;
-				const unsigned int STEREO_CENTER_FLAG       = 16;
-				const unsigned int CIP_CONFIGURATION        = 17;
-				const unsigned int REACTION_CENTER_STATUS   = 18;
-				const unsigned int REACTION_ATOM_MAPPING_ID = 19;
-				const unsigned int MATCH_CONSTRAINTS        = 20;
-				const unsigned int COMPONENT_GROUP_ID       = 21;
+				const unsigned int CIP_CONFIGURATION        = 16;
+				const unsigned int REACTION_CENTER_STATUS   = 17;
+				const unsigned int REACTION_ATOM_MAPPING_ID = 18;
+				const unsigned int MATCH_CONSTRAINTS        = 19;
+				const unsigned int COMPONENT_GROUP_ID       = 20;
+
+				const unsigned int MAX_ID                   = 20;
 			}
 
 			namespace BondProperty
@@ -89,12 +90,13 @@ namespace CDPL
 				const unsigned int RING_FLAG                = 2;
 				const unsigned int AROMATICITY_FLAG         = 3;
 				const unsigned int STEREO_DESCRIPTOR        = 4;
-				const unsigned int STEREO_CENTER_FLAG       = 5;
-				const unsigned int CIP_CONFIGURATION        = 6;
-				const unsigned int DIRECTION                = 7;
-				const unsigned int STEREO_2D_FLAG           = 8;
-				const unsigned int REACTION_CENTER_STATUS   = 9;
-				const unsigned int MATCH_CONSTRAINTS        = 10;
+				const unsigned int CIP_CONFIGURATION        = 5;
+				const unsigned int DIRECTION                = 6;
+				const unsigned int STEREO_2D_FLAG           = 7;
+				const unsigned int REACTION_CENTER_STATUS   = 8;
+				const unsigned int MATCH_CONSTRAINTS        = 9;
+
+				const unsigned int MAX_ID                   = 9;
 			}
 
 			namespace MolecularGraphProperty
@@ -104,6 +106,8 @@ namespace CDPL
 				const unsigned int MATCH_CONSTRAINTS        = 2;
 				const unsigned int STOICHIOMETRIC_NUMBER    = 3;
 				const unsigned int CONFORMATION_INDEX       = 4;
+
+				const unsigned int MAX_ID                   = 4;
 			}
 		}
     }

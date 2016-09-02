@@ -1,7 +1,7 @@
 /* -*- mode: c++; c-basic-offset: 4; tab-width: 4; indent-tabs-mode: t -*- */
 
 /* 
- * StaticInit.hpp 
+ * CDFDataWriter.hpp 
  *
  * This file is part of the Chemical Data Processing Toolkit
  *
@@ -24,43 +24,38 @@
  */
 
 
-#ifndef CDPL_BIOMOL_STATICINIT_HPP
-#define CDPL_BIOMOL_STATICINIT_HPP
+#ifndef CDPL_BIOMOL_CDFDATAWRITER_HPP
+#define CDPL_BIOMOL_CDFDATAWRITER_HPP
 
-#ifdef CDPL_BIOMOL_STATIC_LINK
+#include "CDPL/Chem/CDFDataWriter.hpp"
+
+#include "CDPL/Internal/ByteBuffer.hpp"
 
 
-namespace CDPL
+namespace CDPL 
 {
 
 	namespace Biomol
 	{
 
-		void initAtomProperties();
-		void initMolecularGraphProperties();
-		void initControlParameters();
-		void initControlParameterDefaults();
-		void initDataFormats();
+		class CDFDataWriter : public Chem::CDFDataWriter
+		{
+
+		public:
+			CDFDataWriter(const Base::DataIOBase& io_base): Chem::CDFDataWriter(io_base) {}
+
+		private:
+			void init();
+
+			void outputExternalProperties(const Chem::Atom& atom, Internal::ByteBuffer& data);
+
+			void outputExternalProperties(const Chem::Bond& bond, Internal::ByteBuffer& data);
+
+			void outputExternalProperties(const Chem::MolecularGraph& molgraph, Internal::ByteBuffer& data);
+
+			Internal::ByteBuffer dataBuffer;
+		};
 	}
 }
 
-namespace
-{
-
-	struct CDPLBiomolInit
-	{
-
-		CDPLBiomolInit() {
-			CDPL::Biomol::initAtomProperties();
-			CDPL::Biomol::initMolecularGraphProperties();
-			CDPL::Biomol::initControlParameters();
-			CDPL::Biomol::initControlParameterDefaults();
-			CDPL::Biomol::initDataFormats();
-		}
-
-	} cdplBiomolInit;
-}
-
-#endif // CDPL_BIOMOL_STATIC_LINK
-
-#endif // CDPL_BIOMOL_STATICINIT_HPP
+#endif // CDPL_BIOMOL_CDFDATAWRITER_HPP

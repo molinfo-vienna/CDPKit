@@ -1,7 +1,7 @@
 /* -*- mode: c++; c-basic-offset: 4; tab-width: 4; indent-tabs-mode: t -*- */
 
 /* 
- * StaticInit.hpp 
+ * CDFMolecularGraphWriterExport.cpp 
  *
  * This file is part of the Chemical Data Processing Toolkit
  *
@@ -24,43 +24,20 @@
  */
 
 
-#ifndef CDPL_BIOMOL_STATICINIT_HPP
-#define CDPL_BIOMOL_STATICINIT_HPP
+#include <boost/python.hpp>
 
-#ifdef CDPL_BIOMOL_STATIC_LINK
+#include "CDPL/Biomol/CDFMolecularGraphWriter.hpp"
+
+#include "ClassExports.hpp"
 
 
-namespace CDPL
+void CDPLPythonBiomol::exportCDFMolecularGraphWriter()
 {
+	using namespace boost;
+	using namespace CDPL;
 
-	namespace Biomol
-	{
-
-		void initAtomProperties();
-		void initMolecularGraphProperties();
-		void initControlParameters();
-		void initControlParameterDefaults();
-		void initDataFormats();
-	}
+	python::class_<Biomol::CDFMolecularGraphWriter, python::bases<Base::DataWriter<Chem::MolecularGraph> >, 
+		boost::noncopyable>("CDFMolecularGraphWriter", python::no_init)
+		.def(python::init<std::ostream&>((python::arg("self"), python::arg("os")))
+			 [python::with_custodian_and_ward<1, 2>()]);
 }
-
-namespace
-{
-
-	struct CDPLBiomolInit
-	{
-
-		CDPLBiomolInit() {
-			CDPL::Biomol::initAtomProperties();
-			CDPL::Biomol::initMolecularGraphProperties();
-			CDPL::Biomol::initControlParameters();
-			CDPL::Biomol::initControlParameterDefaults();
-			CDPL::Biomol::initDataFormats();
-		}
-
-	} cdplBiomolInit;
-}
-
-#endif // CDPL_BIOMOL_STATIC_LINK
-
-#endif // CDPL_BIOMOL_STATICINIT_HPP

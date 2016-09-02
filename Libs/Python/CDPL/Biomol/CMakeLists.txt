@@ -15,17 +15,25 @@ SET(biomol_MOD_SRCS
  
     PDBMoleculeReaderExport.cpp
     PDBMolecularGraphWriterExport.cpp
+    CDFMoleculeReaderExport.cpp
+    CDFMolecularGraphWriterExport.cpp
+
     PDBMoleculeInputHandlerExport.cpp
     PDBMolecularGraphOutputHandlerExport.cpp
+    CDFMoleculeInputHandlerExport.cpp
+    CDFMolecularGraphOutputHandlerExport.cpp
 
     AtomPropertyExport.cpp
     MolecularGraphPropertyExport.cpp
+    ControlParameterExport.cpp 
+    ControlParameterDefaultExport.cpp 
     AtomPropertyFlagExport.cpp
     ResidueTypeExport.cpp
     DataFormatExport.cpp
 
     AtomFunctionExport.cpp
     MolecularGraphFunctionExport.cpp
+    ControlParameterFunctionExport.cpp 
 
     ToPythonConverterRegistration.cpp
     FromPythonConverterRegistration.cpp

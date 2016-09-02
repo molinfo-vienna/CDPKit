@@ -73,7 +73,6 @@ namespace CDPL
 
 			const Base::DataIOBase& ioBase;	
 			Internal::ByteBuffer    dataBuffer;
-			std::size_t             startFeatureIdx;
 		};
 	}
 }

@@ -78,6 +78,8 @@ namespace CDPL
 
 			void singlePrecisionFloats(bool spf);
 
+			void putPropertyListMarker(unsigned int prop_id, ByteBuffer& bbuf) const;
+
 		private:
             CDF::PropertySpec composePropertySpec(unsigned int prop_id, std::size_t length) const;
 

@@ -45,5 +45,5 @@ void CDPLPythonPharm::exportPharmacophoreProperties()
 	using namespace CDPL;
 
 	python::class_<PharmacophoreProperty, boost::noncopyable>("PharmacophoreProperty", python::no_init)
-	    ;
+		.def_readonly("NAME", &Pharm::PharmacophoreProperty::NAME);
 }

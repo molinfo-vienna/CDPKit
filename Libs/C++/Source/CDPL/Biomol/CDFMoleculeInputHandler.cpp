@@ -1,7 +1,7 @@
 /* -*- mode: c++; c-basic-offset: 4; tab-width: 4; indent-tabs-mode: t -*- */
 
 /* 
- * PharmacophoreProperty.cpp 
+ * CDFMoleculeInputHandler.cpp 
  *
  * This file is part of the Chemical Data Processing Toolkit
  *
@@ -9,7 +9,7 @@
  *
  * This library is free software; you can redistribute it and/or
  * modify it under the terms of the GNU Lesser General Public
- * License as published by the Free Software Foundation; either  
+ * License as published by the Free Software Foundation; either
  * version 2 of the License, or (at your option) any later version.
  *
  * This library is distributed in the hope that it will be useful,
@@ -26,22 +26,21 @@
 
 #include "StaticInit.hpp"
 
-#include "CDPL/Pharm/PharmacophoreProperty.hpp"
-#include "CDPL/Base/LookupKeyDefinition.hpp"
+#include "CDPL/Biomol/CDFMoleculeInputHandler.hpp"
+#include "CDPL/Biomol/DataFormat.hpp"
+#include "CDPL/Biomol/CDFMoleculeReader.hpp"
 
 
-namespace CDPL 
+using namespace CDPL; 
+
+
+const Base::DataFormat& Biomol::CDFMoleculeInputHandler::getDataFormat() const
 {
+	return DataFormat::CDF;
+}
 
-    namespace Pharm
-    {
-
-		namespace PharmacophoreProperty
-		{
-
-			CDPL_DEFINE_LOOKUP_KEY(NAME);
-		}
-
-		void initPharmacophoreProperties() {}
-    }
+Base::DataReader<Chem::Molecule>::SharedPointer
+Biomol::CDFMoleculeInputHandler::createReader(std::istream& is) const
+{
+	return Base::DataReader<Chem::Molecule>::SharedPointer(new CDFMoleculeReader(is));
 }

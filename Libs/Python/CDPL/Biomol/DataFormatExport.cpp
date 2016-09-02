@@ -45,5 +45,6 @@ void CDPLPythonBiomol::exportDataFormats()
 	using namespace CDPL;
 
 	python::class_<DataFormat, boost::noncopyable>("DataFormat", python::no_init)
-		.def_readonly("PDB", &Biomol::DataFormat::PDB);
+		.def_readonly("PDB", &Biomol::DataFormat::PDB)
+		.def_readonly("CDF", &Biomol::DataFormat::CDF);
 }

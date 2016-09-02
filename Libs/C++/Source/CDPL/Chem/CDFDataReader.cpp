@@ -97,6 +97,11 @@ void Chem::CDFDataReader::init()
 	strictErrorChecking(getStrictErrorCheckingParameter(ioBase)); 
 }
 
+const Base::DataIOBase& Chem::CDFDataReader::getIOBase() const
+{
+    return ioBase;
+}
+
 void Chem::CDFDataReader::readAtoms(Molecule& mol, std::size_t num_atoms)
 {
 	CDF::PropertySpec prop_spec;
@@ -114,10 +119,12 @@ void Chem::CDFDataReader::readAtoms(Molecule& mol, std::size_t num_atoms)
 		while (true) {
 			dataBuffer.getInt(prop_spec);
 
-			if (prop_spec == CDF::PROP_LIST_END)
+			unsigned int prop_id = extractPropertyID(prop_spec);
+
+			if (prop_id == CDF::PROP_LIST_END)
 				break;
 
-			switch (extractPropertyID(prop_spec)) {
+			switch (prop_id) {
 
 				case CDF::AtomProperty::TYPE:
 					getIntProperty(prop_spec, uint_val, dataBuffer);
@@ -197,11 +204,6 @@ void Chem::CDFDataReader::readAtoms(Molecule& mol, std::size_t num_atoms)
 					setCIPConfiguration(atom, uint_val);
 					continue;
 
-				case CDF::AtomProperty::STEREO_CENTER_FLAG:
-					getIntProperty(prop_spec, bool_val, dataBuffer);
-					setStereoCenterFlag(atom, bool_val);
-					continue;
-
 				case CDF::AtomProperty::COMPONENT_GROUP_ID:
 					getIntProperty(prop_spec, size_val, dataBuffer);
 					setComponentGroupID(atom, size_val);
@@ -266,10 +268,12 @@ void Chem::CDFDataReader::readBonds(Molecule& mol, std::size_t num_atoms, std::s
 		while (true) {
 			dataBuffer.getInt(prop_spec);
 
-			if (prop_spec == CDF::PROP_LIST_END)
+			unsigned int prop_id = extractPropertyID(prop_spec);
+
+			if (prop_id == CDF::PROP_LIST_END)
 				break;
 
-			switch (extractPropertyID(prop_spec)) {
+			switch (prop_id) {
 
 				case CDF::BondProperty::ORDER:
 					getIntProperty(prop_spec, size_val, dataBuffer);
@@ -284,11 +288,6 @@ void Chem::CDFDataReader::readBonds(Molecule& mol, std::size_t num_atoms, std::s
 				case CDF::BondProperty::AROMATICITY_FLAG:
 					getIntProperty(prop_spec, bool_val, dataBuffer);
 					setAromaticityFlag(bond, bool_val);
-					continue;
-
-				case CDF::BondProperty::STEREO_CENTER_FLAG:
-					getIntProperty(prop_spec, bool_val, dataBuffer);
-					setStereoCenterFlag(bond, bool_val);
 					continue;
 
 				case CDF::BondProperty::STEREO_2D_FLAG:
@@ -338,10 +337,12 @@ void Chem::CDFDataReader::readMoleculeProperties(Molecule& mol)
 	while (true) {
 		dataBuffer.getInt(prop_spec);
 
-		if (prop_spec == CDF::PROP_LIST_END)
+		unsigned int prop_id = extractPropertyID(prop_spec);
+
+		if (prop_id == CDF::PROP_LIST_END)
 			break;
 
-		switch (extractPropertyID(prop_spec)) {
+		switch (prop_id) {
 
 			case CDF::MolecularGraphProperty::NAME:
 				getStringProperty(prop_spec, str_val, dataBuffer);

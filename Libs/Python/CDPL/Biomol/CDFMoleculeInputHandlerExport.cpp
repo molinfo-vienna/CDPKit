@@ -1,7 +1,7 @@
 /* -*- mode: c++; c-basic-offset: 4; tab-width: 4; indent-tabs-mode: t -*- */
 
 /* 
- * StaticInit.hpp 
+ * CDFMoleculeInputHandlerExport.cpp 
  *
  * This file is part of the Chemical Data Processing Toolkit
  *
@@ -24,43 +24,19 @@
  */
 
 
-#ifndef CDPL_BIOMOL_STATICINIT_HPP
-#define CDPL_BIOMOL_STATICINIT_HPP
+#include <boost/python.hpp>
 
-#ifdef CDPL_BIOMOL_STATIC_LINK
+#include "CDPL/Biomol/CDFMoleculeInputHandler.hpp"
+
+#include "ClassExports.hpp"
 
 
-namespace CDPL
+void CDPLPythonBiomol::exportCDFMoleculeInputHandler()
 {
+	using namespace boost;
+	using namespace CDPL;
 
-	namespace Biomol
-	{
-
-		void initAtomProperties();
-		void initMolecularGraphProperties();
-		void initControlParameters();
-		void initControlParameterDefaults();
-		void initDataFormats();
-	}
+	python::class_<Biomol::CDFMoleculeInputHandler, 
+		python::bases<Base::DataInputHandler<Chem::Molecule> > >("CDFMoleculeInputHandler", python::no_init)
+		.def(python::init<>(python::arg("self")));
 }
-
-namespace
-{
-
-	struct CDPLBiomolInit
-	{
-
-		CDPLBiomolInit() {
-			CDPL::Biomol::initAtomProperties();
-			CDPL::Biomol::initMolecularGraphProperties();
-			CDPL::Biomol::initControlParameters();
-			CDPL::Biomol::initControlParameterDefaults();
-			CDPL::Biomol::initDataFormats();
-		}
-
-	} cdplBiomolInit;
-}
-
-#endif // CDPL_BIOMOL_STATIC_LINK
-
-#endif // CDPL_BIOMOL_STATICINIT_HPP

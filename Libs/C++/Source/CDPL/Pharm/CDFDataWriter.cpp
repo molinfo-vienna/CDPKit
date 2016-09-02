@@ -77,14 +77,38 @@ void Pharm::CDFDataWriter::outputFeatures(const Pharmacophore& pharm)
 		 it != end; ++it) {
 
 		const Feature& feature = *it;
+	
+		if (hasType(feature))
+			putIntProperty(CDF::FeatureProperty::TYPE, boost::numeric_cast<CDF::UIntType>(getType(feature)), dataBuffer);
 
-		dataBuffer.putInt(CDF::PROP_LIST_END, false);
+		if (has3DCoordinates(feature))
+			putVectorProperty(CDF::FeatureProperty::COORDINATES_3D, get3DCoordinates(feature), dataBuffer);
+
+		if (hasGeometry(feature))
+			putIntProperty(CDF::FeatureProperty::GEOMETRY, boost::numeric_cast<CDF::UIntType>(getGeometry(feature)), dataBuffer);
+
+		if (hasLength(feature))
+			putFloatProperty(CDF::FeatureProperty::LENGTH, getLength(feature), dataBuffer);
+
+		if (hasTolerance(feature))
+			putFloatProperty(CDF::FeatureProperty::TOLERANCE, getTolerance(feature), dataBuffer);
+
+		if (hasDisabledFlag(feature))
+			putIntProperty(CDF::FeatureProperty::DISABLED_FLAG, CDF::BoolType(getDisabledFlag(feature)), dataBuffer);
+
+		if (hasOptionalFlag(feature))
+			putIntProperty(CDF::FeatureProperty::OPTIONAL_FLAG, CDF::BoolType(getOptionalFlag(feature)), dataBuffer);
+
+		putPropertyListMarker(CDF::PROP_LIST_END, dataBuffer);
 	}
 }
 
 void Pharm::CDFDataWriter::outputPharmProperties(const Pharmacophore& pharm)
 {
-	dataBuffer.putInt(CDF::PROP_LIST_END, false);
+	if (hasName(pharm))
+		putStringProperty(CDF::PharmacophoreProperty::NAME, getName(pharm), dataBuffer);
+
+	putPropertyListMarker(CDF::PROP_LIST_END, dataBuffer);
 }
 
 bool Pharm::CDFDataWriter::writeRecordData(std::ostream& os)

@@ -1,7 +1,7 @@
 /* -*- mode: c++; c-basic-offset: 4; tab-width: 4; indent-tabs-mode: t -*- */
 
 /* 
- * PharmacophoreProperty.cpp 
+ * PharmacophoreNameFunctions.cpp 
  *
  * This file is part of the Chemical Data Processing Toolkit
  *
@@ -9,7 +9,7 @@
  *
  * This library is free software; you can redistribute it and/or
  * modify it under the terms of the GNU Lesser General Public
- * License as published by the Free Software Foundation; either  
+ * License as published by the Free Software Foundation; either
  * version 2 of the License, or (at your option) any later version.
  *
  * This library is distributed in the hope that it will be useful,
@@ -26,22 +26,32 @@
 
 #include "StaticInit.hpp"
 
+#include "CDPL/Pharm/Pharmacophore.hpp"
+#include "CDPL/Pharm/PharmacophoreFunctions.hpp"
 #include "CDPL/Pharm/PharmacophoreProperty.hpp"
-#include "CDPL/Base/LookupKeyDefinition.hpp"
 
 
-namespace CDPL 
+using namespace CDPL; 
+
+
+const std::string& Pharm::getName(const Pharmacophore& pharm)
 {
+    static std::string DEF_NAME = "";
+    
+    return pharm.getPropertyOrDefault<std::string>(PharmacophoreProperty::NAME, DEF_NAME);
+}
 
-    namespace Pharm
-    {
+void Pharm::setName(Pharmacophore& pharm, const std::string& name)
+{
+	pharm.setProperty(PharmacophoreProperty::NAME, name);
+}
 
-		namespace PharmacophoreProperty
-		{
+void Pharm::clearName(Pharmacophore& pharm)
+{
+	pharm.removeProperty(PharmacophoreProperty::NAME);
+}
 
-			CDPL_DEFINE_LOOKUP_KEY(NAME);
-		}
-
-		void initPharmacophoreProperties() {}
-    }
+bool Pharm::hasName(const Pharmacophore& pharm)
+{
+	return pharm.isPropertySet(PharmacophoreProperty::NAME);
 }

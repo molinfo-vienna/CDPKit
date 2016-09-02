@@ -1,7 +1,7 @@
 /* -*- mode: c++; c-basic-offset: 4; tab-width: 4; indent-tabs-mode: t -*- */
 
 /* 
- * PharmacophoreProperty.hpp 
+ * ControlParameterDefault.hpp 
  *
  * This file is part of the Chemical Data Processing Toolkit
  *
@@ -25,45 +25,52 @@
 
 /**
  * \file
- * \brief Definition of constants in namespace CDPL::Pharm::PharmacophoreProperty.
+ * \brief Definition of constants in namespace CDPL::Biomol::ControlParameterDefault.
  */
 
-#ifndef CDPL_PHARM_PHARMACOPHOREPROPERTY_HPP
-#define CDPL_PHARM_PHARMACOPHOREPROPERTY_HPP
+#ifndef CDPL_BIOMOL_CONTROLPARAMETERDEFAULT_HPP
+#define CDPL_BIOMOL_CONTROLPARAMETERDEFAULT_HPP
 
-#include "CDPL/Pharm/APIPrefix.hpp"
+#include <string>
+#include <cstddef>
+
+#include "CDPL/Biomol/APIPrefix.hpp"
 
 
 namespace CDPL 
 {
 
-    namespace Base
-    {
-
-		class LookupKey;
-    }
-
-    namespace Pharm
-    {
+	namespace Biomol
+	{
 
 		/**
-		 * \addtogroup CDPL_PHARM_PHARMACOPHORE_PROPERTIES
+		 * \addtogroup CDPL_BIOMOL_CONTROL_PARAMETERS
 		 * @{
 		 */
 
 		/**
-		 * \brief Provides keys for built-in Pharm::Pharmacophore properties.
+		 * \brief Provides default values for built-in control-parameters.
 		 */
-		namespace PharmacophoreProperty
+		namespace ControlParameterDefault
 		{
 
-			extern CDPL_PHARM_API const Base::LookupKey NAME; 
+			/**
+			 * \brief Default setting (= \c false) for the control-parameter Biomol::ControlParameter::STRICT_ERROR_CHECKING.
+			 */
+			extern CDPL_BIOMOL_API const bool STRICT_ERROR_CHECKING;
+
+			/**
+			 * \brief Default setting (= \c false) for the control-parameter Biomol::ControlParameter::CHECK_LINE_LENGTH.
+			 */
+			extern CDPL_BIOMOL_API const bool CHECK_LINE_LENGTH;
+
+			extern CDPL_BIOMOL_API const bool CDF_WRITE_SINGLE_PRECISION_FLOATS;
 		}
 
 		/**
 		 * @}
 		 */
-    }
+	}
 }
 
-#endif // CDPL_PHARM_PHARMACOPHOREPROPERTY_HPP
+#endif // CDPL_BIOMOL_CONTROLPARAMETERDEFAULT_HPP

@@ -41,12 +41,19 @@ BOOST_PYTHON_MODULE(_biomol)
 
 	exportPDBMoleculeReader();
 	exportPDBMolecularGraphWriter();
+	exportCDFMoleculeReader();
+	exportCDFMolecularGraphWriter();
 
 	exportPDBMoleculeInputHandler();
 	exportPDBMolecularGraphOutputHandler();
+	exportCDFMoleculeInputHandler();
+	exportCDFMolecularGraphOutputHandler();
 
 	exportMolecularGraphProperties();
 	exportAtomProperties();
+
+	exportControlParameters();
+	exportControlParameterDefaults();
 
 	exportDataFormats();
 
@@ -55,6 +62,7 @@ BOOST_PYTHON_MODULE(_biomol)
 
 	exportAtomFunctions();
 	exportMolecularGraphFunctions();
+	exportControlParameterFunctions();
 
 	registerToPythonConverters();
 	registerFromPythonConverters();

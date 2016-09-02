@@ -1,7 +1,7 @@
 /* -*- mode: c++; c-basic-offset: 4; tab-width: 4; indent-tabs-mode: t -*- */
 
 /* 
- * StaticInit.hpp 
+ * CDFDataReader.hpp 
  *
  * This file is part of the Chemical Data Processing Toolkit
  *
@@ -24,43 +24,42 @@
  */
 
 
-#ifndef CDPL_BIOMOL_STATICINIT_HPP
-#define CDPL_BIOMOL_STATICINIT_HPP
+#ifndef CDPL_BIOMOL_CDFDATAREADER_HPP
+#define CDPL_BIOMOL_CDFDATAREADER_HPP
 
-#ifdef CDPL_BIOMOL_STATIC_LINK
+#include <string>
+
+#include "CDPL/Chem/CDFDataReader.hpp"
+#include "CDPL/Biomol/CDFFormatData.hpp"
 
 
-namespace CDPL
+namespace CDPL 
 {
 
 	namespace Biomol
 	{
 
-		void initAtomProperties();
-		void initMolecularGraphProperties();
-		void initControlParameters();
-		void initControlParameterDefaults();
-		void initDataFormats();
+		class CDFDataReader : public Chem::CDFDataReader
+		{
+
+		public:
+			CDFDataReader(const Base::DataIOBase& io_base): Chem::CDFDataReader(io_base) {}
+
+		private:
+			void init();
+
+			void handleUnknownProperty(CDF::PropertySpec prop_spec, Chem::Atom& atom, 
+									   Internal::ByteBuffer& data);
+
+			void handleUnknownProperty(CDF::PropertySpec prop_spec, Chem::Bond& bond, 
+									   Internal::ByteBuffer& data);
+
+			void handleUnknownProperty(CDF::PropertySpec prop_spec, Chem::Molecule& mol, 
+									   Internal::ByteBuffer& data);
+
+			std::string stringVal;
+		};
 	}
 }
 
-namespace
-{
-
-	struct CDPLBiomolInit
-	{
-
-		CDPLBiomolInit() {
-			CDPL::Biomol::initAtomProperties();
-			CDPL::Biomol::initMolecularGraphProperties();
-			CDPL::Biomol::initControlParameters();
-			CDPL::Biomol::initControlParameterDefaults();
-			CDPL::Biomol::initDataFormats();
-		}
-
-	} cdplBiomolInit;
-}
-
-#endif // CDPL_BIOMOL_STATIC_LINK
-
-#endif // CDPL_BIOMOL_STATICINIT_HPP
+#endif // CDPL_BIOMOL_CDFDATAREADER_HPP

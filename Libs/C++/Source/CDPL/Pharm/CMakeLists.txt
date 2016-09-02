@@ -59,6 +59,7 @@ SET(cdpl-pharm_LIB_SRCS
     FeatureDisabledFlagFunctions.cpp
     FeatureOptionalFlagFunctions.cpp
 
+    PharmacophoreNameFunctions.cpp
     PharmacophoreFeatureCountFunctions.cpp
     InteractionPharmacophoreFunction.cpp
     ExclusionVolumeClashTestFunction.cpp

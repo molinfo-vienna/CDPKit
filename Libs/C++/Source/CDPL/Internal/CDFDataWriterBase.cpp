@@ -58,6 +58,11 @@ void Internal::CDFDataWriterBase::putStringProperty(unsigned int prop_id, const 
 	bbuf.putBytes(str.c_str(), str.length());
 }
 
+void Internal::CDFDataWriterBase::putPropertyListMarker(unsigned int prop_id, ByteBuffer& bbuf) const
+{
+	bbuf.putInt(composePropertySpec(prop_id, 1), false);
+}
+
 Internal::CDF::PropertySpec Internal::CDFDataWriterBase::composePropertySpec(unsigned int prop_id, std::size_t length) const
 {
 	return ((prop_id << CDF::NUM_PROP_VALUE_LENGTH_BITS) + length - 1);

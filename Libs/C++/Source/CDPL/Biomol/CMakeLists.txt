@@ -1,18 +1,28 @@
 INCLUDE_DIRECTORIES("${CMAKE_CURRENT_SOURCE_DIR}" "${CDPL_SOURCE_DIR}")
 
 SET(cdpl-biomol_LIB_SRCS
-    AtomProperty.cpp
-    MolecularGraphProperty.cpp
-    DataFormat.cpp
     PDBData.cpp
     ResidueDictionary.cpp
 
+    AtomProperty.cpp
+    MolecularGraphProperty.cpp
+    DataFormat.cpp
+    ControlParameter.cpp
+    ControlParameterDefault.cpp
+
     PDBMoleculeInputHandler.cpp
     PDBMolecularGraphOutputHandler.cpp
+    CDFMoleculeInputHandler.cpp
+    CDFMolecularGraphOutputHandler.cpp
+
     PDBDataReader.cpp
     PDBDataWriter.cpp
     PDBMoleculeReader.cpp
     PDBMolecularGraphWriter.cpp
+    CDFDataReader.cpp
+    CDFDataWriter.cpp
+    CDFMoleculeReader.cpp
+    CDFMolecularGraphWriter.cpp
 
     AtomResidueAtomNameFunctions.cpp
     AtomResidueAltAtomNameFunctions.cpp
@@ -37,6 +47,8 @@ SET(cdpl-biomol_LIB_SRCS
     MolecularGraphModelNumberFunctions.cpp
     MolecularGraphPDBDataFunctions.cpp
     MolecularGraphResidueUtilityFunctions.cpp
+
+    ControlParameterFunctions.cpp
    )
 
 ADD_LIBRARY(cdpl-biomol-static STATIC ${cdpl-biomol_LIB_SRCS})

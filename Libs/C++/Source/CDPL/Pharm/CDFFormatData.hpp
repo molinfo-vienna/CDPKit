@@ -43,7 +43,6 @@ namespace CDPL
 			using namespace Internal::CDF;
 
 			typedef Base::uint32 UIntType;
-			typedef Base::int32  LongType;
 			typedef Base::uint8  BoolType;
 
 			const Base::uint8 PHARMACOPHORE_RECORD_ID  = 3;
@@ -52,15 +51,20 @@ namespace CDPL
 			namespace FeatureProperty
 			{
 
-
-				const unsigned int COORDINATES_3D           = 13;
-		
+				const unsigned int TYPE            = 1; 
+				const unsigned int COORDINATES_3D  = 2;
+				const unsigned int GEOMETRY        = 3; 
+				const unsigned int LENGTH          = 4; 
+				const unsigned int ORIENTATION     = 5; 
+				const unsigned int TOLERANCE       = 6; 
+				const unsigned int DISABLED_FLAG   = 7; 
+				const unsigned int OPTIONAL_FLAG   = 8; 		
 			}
 		
 			namespace PharmacophoreProperty
 			{
 				
-				const unsigned int NAME                     = 1; 
+				const unsigned int NAME            = 1; 
 			}
 		}
     }

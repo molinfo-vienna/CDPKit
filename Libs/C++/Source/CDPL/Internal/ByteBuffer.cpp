@@ -76,6 +76,11 @@ void Internal::ByteBuffer::putBytes(const char* bytes, std::size_t num_bytes)
 	ioPointer += num_bytes;
 }
 
+void Internal::ByteBuffer::putBytes(const ByteBuffer& buffer)
+{
+	putBytes(&buffer.data[0], buffer.getSize());
+}
+
 void Internal::ByteBuffer::getBytes(char* bytes, std::size_t num_bytes)
 {
 	checkReadSpace(num_bytes);

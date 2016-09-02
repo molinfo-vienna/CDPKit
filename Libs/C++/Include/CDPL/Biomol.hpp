@@ -32,16 +32,28 @@
 #define CDPL_BIOMOL_HPP
 
 #include "CDPL/Biomol/PDBData.hpp"
+
 #include "CDPL/Biomol/AtomProperty.hpp"
 #include "CDPL/Biomol/MolecularGraphProperty.hpp"
 #include "CDPL/Biomol/AtomPropertyFlag.hpp"
 #include "CDPL/Biomol/ResidueType.hpp"
 #include "CDPL/Biomol/DataFormat.hpp"
+#include "CDPL/Biomol/ControlParameter.hpp"
+#include "CDPL/Biomol/ControlParameterDefault.hpp"
+#include "CDPL/Biomol/ControlParameterFunctions.hpp"
+
 #include "CDPL/Biomol/PDBMoleculeInputHandler.hpp"
 #include "CDPL/Biomol/PDBMolecularGraphOutputHandler.hpp"
+#include "CDPL/Biomol/CDFMoleculeInputHandler.hpp"
+#include "CDPL/Biomol/CDFMolecularGraphOutputHandler.hpp"
+
 #include "CDPL/Biomol/PDBMoleculeReader.hpp"
 #include "CDPL/Biomol/PDBMolecularGraphWriter.hpp"
+#include "CDPL/Biomol/CDFMoleculeReader.hpp"
+#include "CDPL/Biomol/CDFMolecularGraphWriter.hpp"
+
 #include "CDPL/Biomol/ResidueDictionary.hpp"
+
 #include "CDPL/Biomol/AtomFunctions.hpp"
 #include "CDPL/Biomol/MolecularGraphFunctions.hpp"
 

@@ -68,8 +68,6 @@ bool Pharm::CDFDataReader::readPharmacophore(std::istream& is, Pharmacophore& ph
 
 	dataBuffer.getInt(num_ftrs);
 
-	startFeatureIdx = pharm.getNumFeatures();
-
 	readFeatures(pharm, num_ftrs);
 	readPharmProperties(pharm);
 
@@ -92,10 +90,9 @@ void Pharm::CDFDataReader::readFeatures(Pharmacophore& pharm, std::size_t num_ft
 {
 	CDF::PropertySpec prop_spec;
 	CDF::UIntType uint_val;
-	CDF::LongType long_val;
-	CDF::SizeType size_val;
 	CDF::BoolType bool_val;
 	std::string str_val;
+	double double_val;
 	Math::Vector3D coords_3d_val;
 
 	for (std::size_t i = 0; i < num_ftrs; i++) {
@@ -104,10 +101,52 @@ void Pharm::CDFDataReader::readFeatures(Pharmacophore& pharm, std::size_t num_ft
 		while (true) {
 			dataBuffer.getInt(prop_spec);
 
-			if (prop_spec == CDF::PROP_LIST_END)
+			unsigned int prop_id = extractPropertyID(prop_spec);
+
+			if (prop_id == CDF::PROP_LIST_END)
 				break;
 
-			switch (extractPropertyID(prop_spec)) {
+			switch (prop_id) {
+
+				case CDF::FeatureProperty::TYPE:
+					getIntProperty(prop_spec, uint_val, dataBuffer);
+					setType(feature, uint_val);
+					continue;
+
+				case CDF::FeatureProperty::COORDINATES_3D:
+					getVectorProperty(prop_spec, coords_3d_val, dataBuffer);
+					set3DCoordinates(feature, coords_3d_val);
+					continue;
+
+				case CDF::FeatureProperty::GEOMETRY:
+					getIntProperty(prop_spec, uint_val, dataBuffer);
+					setGeometry(feature, uint_val);
+					continue;
+
+				case CDF::FeatureProperty::LENGTH:
+					getFloatProperty(prop_spec, double_val, dataBuffer);
+					setLength(feature, double_val);
+					continue;
+
+				case CDF::FeatureProperty::ORIENTATION:
+					getVectorProperty(prop_spec, coords_3d_val, dataBuffer);
+					setOrientation(feature, coords_3d_val);
+					continue;
+
+				case CDF::FeatureProperty::TOLERANCE:
+					getFloatProperty(prop_spec, double_val, dataBuffer);
+					setTolerance(feature, double_val);
+					continue;
+
+				case CDF::FeatureProperty::DISABLED_FLAG:
+					getIntProperty(prop_spec, bool_val, dataBuffer);
+					setDisabledFlag(feature, bool_val);
+					continue;
+
+				case CDF::FeatureProperty::OPTIONAL_FLAG:
+					getIntProperty(prop_spec, bool_val, dataBuffer);
+					setOptionalFlag(feature, bool_val);
+					continue;
 
 				default:
 					throw Base::IOError("CDFDataReader: unsupported feature property");
@@ -119,18 +158,23 @@ void Pharm::CDFDataReader::readFeatures(Pharmacophore& pharm, std::size_t num_ft
 void Pharm::CDFDataReader::readPharmProperties(Pharmacophore& pharm)
 {
 	CDF::PropertySpec prop_spec;
-	CDF::SizeType size_val;
 	std::string str_val;
-	double double_val;
 
 	while (true) {
 		dataBuffer.getInt(prop_spec);
 
-		if (prop_spec == CDF::PROP_LIST_END)
-			break;
+		unsigned int prop_id = extractPropertyID(prop_spec);
 
-		switch (extractPropertyID(prop_spec)) {
-	
+		if (prop_id == CDF::PROP_LIST_END)
+				break;
+
+		switch (prop_id) {
+
+			case CDF::PharmacophoreProperty::NAME:
+				getStringProperty(prop_spec, str_val, dataBuffer);
+				setName(pharm, str_val);
+				continue;
+
 			default:
 				throw Base::IOError("CDFDataReader: unsupported pharmacophore property");
 		}

@@ -53,7 +53,7 @@ namespace CDPL
 		class Atom;
 		class Bond;
 
-		class CDFDataReader : private Internal::CDFDataReaderBase
+		class CDFDataReader : protected Internal::CDFDataReaderBase
 		{
 
 		public:
@@ -67,6 +67,11 @@ namespace CDPL
 
 			bool hasMoreData(std::istream& is);
 
+		protected:
+			virtual void init();
+
+			const Base::DataIOBase& getIOBase() const;
+
 		private:
 			struct CDFStereoDescr
 			{
@@ -78,8 +83,6 @@ namespace CDPL
 				std::size_t  numRefAtoms;
 				std::size_t  refAtomInds[4];
 			};
-
-			void init();
 
 			void readAtoms(Molecule& mol, std::size_t num_atoms);
 			void readBonds(Molecule& mol, std::size_t num_atoms, std::size_t num_bonds);

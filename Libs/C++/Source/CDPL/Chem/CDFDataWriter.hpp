@@ -29,6 +29,7 @@
 
 #include <iosfwd>
 
+#include "CDPL/Chem/APIPrefix.hpp"
 #include "CDPL/Chem/CDFFormatData.hpp"
 
 #include "CDPL/Internal/CDFDataWriterBase.hpp"
@@ -52,19 +53,22 @@ namespace CDPL
 		class Bond;
 		class StereoDescriptor;
 
-		class CDFDataWriter : private Internal::CDFDataWriterBase
+		class CDPL_CHEM_API CDFDataWriter : protected Internal::CDFDataWriterBase
 		{
 
-		public:
+		  public:
 			CDFDataWriter(const Base::DataIOBase& io_base): ioBase(io_base) {}
 
 			virtual ~CDFDataWriter() {}
 
 			bool writeMolGraph(std::ostream& os, const MolecularGraph& molgraph);
 
-		private:
-			void init();
+		  protected:
+			virtual void init();
 
+			const Base::DataIOBase& getIOBase() const;
+
+		  private:
 			void outputMolGraphHeader(const MolecularGraph& molgraph);
 			void outputAtoms(const MolecularGraph& molgraph);
 			void outputBonds(const MolecularGraph& molgraph);

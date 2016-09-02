@@ -38,13 +38,13 @@
 #include "CDPL/Chem/Molecule.hpp"
 #include "CDPL/Chem/Bond.hpp"
 #include "CDPL/Chem/Atom.hpp"
-#include "CDPL/Chem/ControlParameterFunctions.hpp"
 #include "CDPL/Chem/Entity3DFunctions.hpp"
 #include "CDPL/Chem/AtomFunctions.hpp"
 #include "CDPL/Chem/BondFunctions.hpp"
 #include "CDPL/Chem/MolecularGraphFunctions.hpp"
 #include "CDPL/Chem/AtomDictionary.hpp"
 #include "CDPL/Chem/AtomType.hpp"
+#include "CDPL/Biomol/ControlParameterFunctions.hpp"
 #include "CDPL/Biomol/MolecularGraphFunctions.hpp"
 #include "CDPL/Biomol/AtomFunctions.hpp"
 #include "CDPL/Biomol/ResidueDictionary.hpp"
@@ -359,8 +359,8 @@ bool Biomol::PDBDataReader::hasMoreData(std::istream& is) const
 
 void Biomol::PDBDataReader::init(std::istream& is)
 {
-	strictErrorChecking = false;//getStrictErrorCheckingParameter(ioBase); // FIX ME
-	checkLineLength     = Chem::getCheckLineLengthParameter(ioBase); 
+	strictErrorChecking = getStrictErrorCheckingParameter(ioBase);
+	checkLineLength     = getCheckLineLengthParameter(ioBase); 
 
 	is.imbue(std::locale::classic());
 }

@@ -1,7 +1,7 @@
 /* -*- mode: c++; c-basic-offset: 4; tab-width: 4; indent-tabs-mode: t -*- */
 
 /* 
- * StaticInit.hpp 
+ * CDFMoleculeInputHandler.hpp 
  *
  * This file is part of the Chemical Data Processing Toolkit
  *
@@ -23,44 +23,53 @@
  * Boston, MA 02111-1307, USA.
  */
 
+/**
+ * \file
+ * \brief Definition of the class CDPL::Biomol::CDFMoleculeInputHandler.
+ */
 
-#ifndef CDPL_BIOMOL_STATICINIT_HPP
-#define CDPL_BIOMOL_STATICINIT_HPP
+#ifndef CDPL_BIOMOL_CDFMOLECULEINPUTHANDLER_HPP
+#define CDPL_BIOMOL_CDFMOLECULEINPUTHANDLER_HPP
 
-#ifdef CDPL_BIOMOL_STATIC_LINK
+#include "CDPL/Biomol/APIPrefix.hpp"
+#include "CDPL/Base/DataInputHandler.hpp"
 
 
-namespace CDPL
+namespace CDPL 
 {
+
+	namespace Chem
+	{
+
+		class Molecule;
+	}
 
 	namespace Biomol
 	{
 
-		void initAtomProperties();
-		void initMolecularGraphProperties();
-		void initControlParameters();
-		void initControlParameterDefaults();
-		void initDataFormats();
+		/**
+		 * \addtogroup CDPL_BIOMOL_CDF_IO
+		 * @{
+		 */
+
+		/**
+		 * \brief A handler for the input of molecule data in the native I/O format of the <em>CDPL</em>.
+		 */
+		class CDPL_BIOMOL_API CDFMoleculeInputHandler : public Base::DataInputHandler<Chem::Molecule>
+		{
+
+		public:
+			CDFMoleculeInputHandler() {}
+
+			const Base::DataFormat& getDataFormat() const;
+
+			Base::DataReader<Chem::Molecule>::SharedPointer createReader(std::istream& is) const;
+		};
+
+		/**
+		 * @}
+		 */
 	}
 }
 
-namespace
-{
-
-	struct CDPLBiomolInit
-	{
-
-		CDPLBiomolInit() {
-			CDPL::Biomol::initAtomProperties();
-			CDPL::Biomol::initMolecularGraphProperties();
-			CDPL::Biomol::initControlParameters();
-			CDPL::Biomol::initControlParameterDefaults();
-			CDPL::Biomol::initDataFormats();
-		}
-
-	} cdplBiomolInit;
-}
-
-#endif // CDPL_BIOMOL_STATIC_LINK
-
-#endif // CDPL_BIOMOL_STATICINIT_HPP
+#endif // CDPL_BIOMOL_CDFMOLECULEINPUTHANDLER_HPP

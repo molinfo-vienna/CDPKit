@@ -68,6 +68,11 @@ void Chem::CDFDataWriter::init()
 	dataBuffer.setIOPointer(0);
 }
 
+const Base::DataIOBase& Chem::CDFDataWriter::getIOBase() const
+{
+    return ioBase;
+}
+
 void Chem::CDFDataWriter::outputMolGraphHeader(const MolecularGraph& molgraph)
 {
 	cdfHeader.recordTypeID = CDF::MOLECULE_RECORD_ID;
@@ -129,9 +134,6 @@ void Chem::CDFDataWriter::outputAtoms(const MolecularGraph& molgraph)
 		if (hasCIPConfiguration(atom))
 			putIntProperty(CDF::AtomProperty::CIP_CONFIGURATION, boost::numeric_cast<CDF::UIntType>(getCIPConfiguration(atom)), dataBuffer);
 
-		if (hasStereoCenterFlag(atom))
-			putIntProperty(CDF::AtomProperty::STEREO_CENTER_FLAG, CDF::BoolType(getStereoCenterFlag(atom)), dataBuffer);
-
 		if (hasComponentGroupID(atom))
 			putIntProperty(CDF::AtomProperty::COMPONENT_GROUP_ID, boost::numeric_cast<CDF::SizeType>(getComponentGroupID(atom)), dataBuffer);
 
@@ -148,7 +150,7 @@ void Chem::CDFDataWriter::outputAtoms(const MolecularGraph& molgraph)
 
 		outputExternalProperties(atom, dataBuffer);
 
-		dataBuffer.putInt(CDF::PROP_LIST_END, false);
+		putPropertyListMarker(CDF::PROP_LIST_END, dataBuffer);
 	}
 }
 
@@ -184,9 +186,6 @@ void Chem::CDFDataWriter::outputBonds(const MolecularGraph& molgraph)
 		if (hasAromaticityFlag(bond))
 			putIntProperty(CDF::BondProperty::AROMATICITY_FLAG, CDF::BoolType(getAromaticityFlag(bond)), dataBuffer);
 
-		if (hasStereoCenterFlag(bond))
-			putIntProperty(CDF::BondProperty::STEREO_CENTER_FLAG, CDF::BoolType(getStereoCenterFlag(bond)), dataBuffer);
-
 		if (has2DStereoFlag(bond))
 			putIntProperty(CDF::BondProperty::STEREO_2D_FLAG, boost::numeric_cast<CDF::UIntType>(get2DStereoFlag(bond)), dataBuffer);
 
@@ -206,7 +205,7 @@ void Chem::CDFDataWriter::outputBonds(const MolecularGraph& molgraph)
 
 		outputExternalProperties(bond, dataBuffer);
 
-		dataBuffer.putInt(CDF::PROP_LIST_END, false);
+		putPropertyListMarker(CDF::PROP_LIST_END, dataBuffer);
 	}
 }
 
@@ -225,7 +224,7 @@ void Chem::CDFDataWriter::outputMolGraphProperties(const MolecularGraph& molgrap
 
 	outputExternalProperties(molgraph, dataBuffer);
 
-	dataBuffer.putInt(CDF::PROP_LIST_END, false);
+	putPropertyListMarker(CDF::PROP_LIST_END, dataBuffer);
 }
 
 void Chem::CDFDataWriter::outputExternalProperties(const Atom& atom, Internal::ByteBuffer& data) 
