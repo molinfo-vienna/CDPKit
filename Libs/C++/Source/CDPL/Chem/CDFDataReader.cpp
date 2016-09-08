@@ -117,14 +117,16 @@ void Chem::CDFDataReader::readAtoms(Molecule& mol, std::size_t num_atoms)
 		Atom& atom = mol.addAtom();
 
 		while (true) {
-			dataBuffer.getInt(prop_spec);
-
-			unsigned int prop_id = extractPropertyID(prop_spec);
+			unsigned int prop_id = getPropertySpec(prop_spec, dataBuffer);
 
 			if (prop_id == CDF::PROP_LIST_END)
 				break;
 
 			switch (prop_id) {
+
+				case CDF::EXTENDED_PROP_LIST:
+					handleExtendedProperties(prop_spec, atom);
+					continue;
 
 				case CDF::AtomProperty::TYPE:
 					getIntProperty(prop_spec, uint_val, dataBuffer);
@@ -230,7 +232,7 @@ void Chem::CDFDataReader::readAtoms(Molecule& mol, std::size_t num_atoms)
 				case CDF::AtomProperty::MATCH_CONSTRAINTS:
 
 				default:
-					handleUnknownProperty(prop_spec, atom, dataBuffer);
+					throw Base::IOError("CDFDataReader: unsupported atom property");
 			}
 		}
 	}
@@ -266,14 +268,16 @@ void Chem::CDFDataReader::readBonds(Molecule& mol, std::size_t num_atoms, std::s
 		Bond& bond = mol.addBond(atom1_idx + startAtomIdx, atom2_idx + startAtomIdx);
 
 		while (true) {
-			dataBuffer.getInt(prop_spec);
-
-			unsigned int prop_id = extractPropertyID(prop_spec);
+			unsigned int prop_id = getPropertySpec(prop_spec, dataBuffer);
 
 			if (prop_id == CDF::PROP_LIST_END)
 				break;
 
 			switch (prop_id) {
+
+				case CDF::EXTENDED_PROP_LIST:
+					handleExtendedProperties(prop_spec, bond);
+					continue;
 
 				case CDF::BondProperty::ORDER:
 					getIntProperty(prop_spec, size_val, dataBuffer);
@@ -321,7 +325,7 @@ void Chem::CDFDataReader::readBonds(Molecule& mol, std::size_t num_atoms, std::s
 				case CDF::BondProperty::MATCH_CONSTRAINTS:
 		
 				default:
-					handleUnknownProperty(prop_spec, bond, dataBuffer);
+					throw Base::IOError("CDFDataReader: unsupported bond property");
 			}
 		}
 	}
@@ -335,14 +339,16 @@ void Chem::CDFDataReader::readMoleculeProperties(Molecule& mol)
 	double double_val;
 
 	while (true) {
-		dataBuffer.getInt(prop_spec);
-
-		unsigned int prop_id = extractPropertyID(prop_spec);
+		unsigned int prop_id = getPropertySpec(prop_spec, dataBuffer);
 
 		if (prop_id == CDF::PROP_LIST_END)
 			break;
 
 		switch (prop_id) {
+
+			case CDF::EXTENDED_PROP_LIST:
+				handleExtendedProperties(prop_spec, mol);
+				continue;
 
 			case CDF::MolecularGraphProperty::NAME:
 				getStringProperty(prop_spec, str_val, dataBuffer);
@@ -362,24 +368,35 @@ void Chem::CDFDataReader::readMoleculeProperties(Molecule& mol)
 			case CDF::MolecularGraphProperty::MATCH_CONSTRAINTS:
 
 			default:
-				handleUnknownProperty(prop_spec, mol, dataBuffer);
+				throw Base::IOError("CDFDataReader: unsupported molecule property");
 		}
 	}
 }
 
-void Chem::CDFDataReader::handleUnknownProperty(CDF::PropertySpec prop_spec, Atom& atom, Internal::ByteBuffer& data)
+template <typename T>
+void Chem::CDFDataReader::handleExtendedProperties(CDF::PropertySpec prop_spec, T& obj)
 {
-	throw Base::IOError("CDFDataReader: unsupported atom property");
+	CDF::SizeType size_val;
+
+	getIntProperty(prop_spec, size_val, dataBuffer);
+
+	if (!handleExtendedProperties(obj, dataBuffer))
+		dataBuffer.setIOPointer(dataBuffer.getIOPointer() + size_val);
 }
 
-void Chem::CDFDataReader::handleUnknownProperty(CDF::PropertySpec prop_spec, Bond& bond, Internal::ByteBuffer& data)
+bool Chem::CDFDataReader::handleExtendedProperties(Atom& atom, Internal::ByteBuffer& data)
 {
-	throw Base::IOError("CDFDataReader: unsupported bond property");
+	return false;
 }
 
-void Chem::CDFDataReader::handleUnknownProperty(CDF::PropertySpec prop_spec, Molecule& mol, Internal::ByteBuffer& data)
+bool Chem::CDFDataReader::handleExtendedProperties(Bond& bond, Internal::ByteBuffer& data)
 {
-	throw Base::IOError("CDFDataReader: unsupported molecule property");
+	return false;
+}
+
+bool Chem::CDFDataReader::handleExtendedProperties(Molecule& mol, Internal::ByteBuffer& data)
+{
+	return false;
 }
 
 void Chem::CDFDataReader::setStereoDescriptors(Molecule& mol) const

@@ -28,11 +28,15 @@ import sys
 import os
 import string
 
+from CDPL.Chem import *
+from CDPL.Biomol import *
+from CDPL.Base import *
+
 
 def genResidueDictionaryData():
     
     if len(sys.argv) < 3:
-        print >> sys.stderr, 'Usage:', sys.argv[0], '[PDB Component Directory mmCIF innput file] [data output header file]'
+        print >> sys.stderr, 'Usage:', sys.argv[0], '[PDB Component Directory mmCIF input file] [data output header file]'
         sys.exit(2)
 
     comp_type_map = { 'other' : 'OTHER', \
@@ -104,26 +108,18 @@ def genResidueDictionaryData():
     output.append('\t\tconst char*  replacedByCode;\n')
     output.append('\t\tunsigned int type;\n')
     output.append('\t\tbool         obsolete;\n')
-    output.append('\t\tstd::size_t  numAtoms;\n')
-    output.append('\t\tconst char** atomNames;\n')
-    output.append('\t\tstd::size_t  numLeavingAtoms;\n')
-    output.append('\t\tstd::size_t* leavingAtoms;\n')
     output.append('\t\tconst char*  name;\n')
-    output.append('\t\tconst char*  jmeString;\n')
+    output.append('\t\tstd::size_t  molIndex;\n')
     output.append('\t};\n\n')
-
-    output.append('\textern const char* atomNames[];\n')
-    output.append('\textern std::size_t leavingAtoms[];\n\n')
 
     output.append('\tResidueDataEntry residueData[] = {\n')
   
     cif_file = file(sys.argv[1], 'r')
 
-    atom_names_offset = 0
-    lvg_atoms_offset = 0
-
-    atom_names = []
-    lvg_atoms = []
+    struct_os = StringIOStream('', 'wb');
+    struct_wtr = CDFMolecularGraphWriter(struct_os)
+    struct = BasicMolecule()
+    struct_idx = 0
 
     while True:
         line = skipToLine('data_', cif_file)
@@ -209,7 +205,8 @@ def genResidueDictionaryData():
 
         ########## ATOMS
 
-        jme_string = ''
+        struct.clear()
+
         atom_count = 0
         bond_count = 0
         name_to_index = {}
@@ -271,23 +268,22 @@ def genResidueDictionaryData():
 
                 lvg_atom = line[len('_chem_comp_atom.pdbx_leaving_atom_flag'):].strip()
 
-                atom_names.append(atom_id)
-                atom_names.append(alt_atom_id)
-
                 if charge == '?':
                     charge = '0'
 
-                if int(charge) > 0:
-                    charge = '+' + charge
-                elif charge == '0':
-                    charge = ''
+                atom = struct.addAtom()
 
-                jme_string += ' ' + symbol + charge + ' 0 0 0'
+                setSymbol(atom, symbol)
+                setResidueAtomName(atom, atom_id)
+                setResidueAltAtomName(atom, alt_atom_id)
+
+                if charge != '0':
+                    setFormalCharge(atom, int(charge))
+
+                set3DCoordinates(atom, (0.0, 0.0, 0.0))
 
                 if lvg_atom == 'Y':
-                    lvg_atoms.append(0)
-
-                atom_count = 1
+                    setResidueLeavingAtomFlag(atom, True)
 
                 line = skipToLine('#', cif_file)
 
@@ -334,19 +330,10 @@ def genResidueDictionaryData():
                         line = line.replace('"3H ', '"3H@')
 
                     fields = line.split();
-
-                    atom_names.append(fields[1])
-                    atom_names.append(fields[2].replace('@', ' '))
-
                     charge = fields[4]
 
                     if charge == '?':
                         charge = '0'
-
-                    if int(charge) > 0:
-                        charge = '+' + charge
-                    elif charge == '0':
-                        charge = ''
 
                     symbol = fields[3].capitalize()
 
@@ -354,10 +341,19 @@ def genResidueDictionaryData():
                     y = fields[13].replace('?', '0')
                     z = fields[14].replace('?', '0')
 
-                    jme_string += ' ' + symbol + charge + ' ' + x + ' ' + y + ' ' + z
+                    atom = struct.addAtom()
+
+                    setSymbol(atom, symbol)
+                    setResidueAtomName(atom, fields[1])
+                    setResidueAltAtomName(atom, fields[2].replace('@', ' '))
+
+                    if charge != '0':
+                        setFormalCharge(atom, int(charge))
+
+                    set3DCoordinates(atom, (float(x), float(y), float(z)))
 
                     if fields[7] == 'Y':
-                        lvg_atoms.append(atom_count)
+                        setResidueLeavingAtomFlag(atom, True)
 
                     name_to_index[fields[1]] = atom_count
                     atom_count += 1
@@ -419,7 +415,10 @@ def genResidueDictionaryData():
                     elif value_order != 'SING':
                         print 'found bond with order ' + value_order
 
-                    jme_string += ' ' + str(name_to_index[atom_id_1] + 1) + ' ' + str(name_to_index[atom_id_2] + 1) + ' ' + order
+                    bond = struct.addBond(name_to_index[atom_id_1], name_to_index[atom_id_2])
+
+                    setOrder(bond, int(order))
+
                     bond_count = 1
 
                 else: # MULTIPLE BONDS
@@ -439,8 +438,8 @@ def genResidueDictionaryData():
 
                         fields = line.split()
 
-                        atom1_idx = name_to_index[fields[1]] + 1
-                        atom2_idx = name_to_index[fields[2]] + 1
+                        atom1_idx = name_to_index[fields[1]]
+                        atom2_idx = name_to_index[fields[2]]
 
                         order = '1'
 
@@ -451,7 +450,10 @@ def genResidueDictionaryData():
                         elif fields[3] != 'SING':
                             print 'found bond with order ' + fields[3]
 
-                        jme_string += ' ' + str(atom1_idx) + ' ' + str(atom2_idx) + ' ' + order
+                        bond = struct.addBond(atom1_idx, atom2_idx)
+
+                        setOrder(bond, int(order))
+
                         bond_count += 1
 
                     if not line:
@@ -463,72 +465,33 @@ def genResidueDictionaryData():
         #if not have_bonds:
         #    print 'Entry with NO bonds: ' + code
 
-        jme_string = str(atom_count) + ' ' + str(bond_count) + jme_string
-
         comp_name = comp_name.replace('"', '\\"')
 
-        output.append('\t\t{ "' + code + '", "' + replaces_code + '", "' + replaced_by_code + '", CDPL::Biomol::ResidueType::' + comp_type + ', ' + obsolete + ', ' + \
-                      str(atom_count) + ', atomNames + ' + str(atom_names_offset)+ ', ' + \
-                      str(len(lvg_atoms) - lvg_atoms_offset) + ', leavingAtoms + ' + str(lvg_atoms_offset) + \
-                      ', "' + comp_name + '", "' + jme_string + '" },\n')
+        struct_wtr.write(struct)
 
-        atom_names_offset = len(atom_names)
-        lvg_atoms_offset = len(lvg_atoms)
+        output.append('\t\t{ "' + code + '", "' + replaces_code + '", "' + replaced_by_code + '", CDPL::Biomol::ResidueType::' + comp_type + ', ' + obsolete + ', "' + comp_name + '", ' + str(struct_idx) + ' },\n')
+
+        struct_idx += 1
 
         #break ###### 
 
     output.append('\t};\n\n')
+    output.append('\tconst char residueStructureData[] = {\n\t\t"')
 
-    lvg_atom_array = ''
-    count = 0
+    struct_data = struct_os.getvalue()
+    char_cnt = 0
 
-    for lvg_atom in lvg_atoms:
-        if not lvg_atom_array:
-            lvg_atom_array = '\tstd::size_t leavingAtoms[] = {\n\t\t'
-        else:
-            lvg_atom_array += ', '
+    for c in struct_data:
+        output.append('\\x{0:02x}'.format(ord(c)))
+        char_cnt += 1
 
-        if count == 15:
-            count = 0
-            lvg_atom_array += '\n\t\t'
+        if char_cnt % 20 == 0:
+            output.append('"\n\t\t"')
+    
+    output.append('"\n')
+    output.append('\t};\n')
 
-        count += 1
-        lvg_atom_array += str(lvg_atom)
-
-    if not lvg_atom_array:
-        lvg_atom_array = '};\n'
-    else:
-        lvg_atom_array += '\n\t};\n'
-
-    atom_name_array = ''
-    count = 0
-
-    for name in atom_names:
-        if name[0] == "'" and name[-1] == "'":
-            name = name[1:-1]
-        elif name[0] == '"' and name[-1] == '"':
-            name = name[1:-1]
-
-        if name.find('"') != -1:
-            name = name.replace('"', '\\"')
-
-        if not atom_name_array:
-            atom_name_array = '\tconst char* atomNames[] = {\n\t\t'
-        else:
-            atom_name_array += ', '
-
-        if count == 15:
-            count = 0
-            atom_name_array += '\n\t\t'
-
-        count += 1
-        atom_name_array += '"' + name + '"'
-
-    atom_name_array += '\n\t};\n\n'
-            
-    output.append(atom_name_array)
-    output.append(lvg_atom_array)
-
+    output.append('\n\tstd::size_t RESIDUE_STRUCTURE_DATA_LEN = ' + str(char_cnt) + ';\n')
     output.append('}\n\n')
     output.append('#endif // ' + inc_guard + '\n')
 

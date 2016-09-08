@@ -78,6 +78,8 @@ namespace CDPL
 			template <typename Vec>
 			void getVectorArrayProperty(CDF::PropertySpec prop_spec, Math::VectorArray<Vec>& vec_array, ByteBuffer& bbuf) const;
 
+			unsigned int getPropertySpec(CDF::PropertySpec& prop_spec, ByteBuffer& bbuf) const;
+
 			bool strictErrorChecking() const;
 
 			void strictErrorChecking(bool strict);

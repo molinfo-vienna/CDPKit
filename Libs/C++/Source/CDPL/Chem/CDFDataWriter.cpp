@@ -148,7 +148,7 @@ void Chem::CDFDataWriter::outputAtoms(const MolecularGraph& molgraph)
 
 		// CDF::AtomProperty::MATCH_CONSTRAINTS // TODO
 
-		outputExternalProperties(atom, dataBuffer);
+		outputExtendedProperties(atom);
 
 		putPropertyListMarker(CDF::PROP_LIST_END, dataBuffer);
 	}
@@ -203,7 +203,7 @@ void Chem::CDFDataWriter::outputBonds(const MolecularGraph& molgraph)
 
 		// CDF::BondProperty::MATCH_CONSTRAINTS // TODO
 
-		outputExternalProperties(bond, dataBuffer);
+		outputExtendedProperties(bond);
 
 		putPropertyListMarker(CDF::PROP_LIST_END, dataBuffer);
 	}
@@ -222,18 +222,39 @@ void Chem::CDFDataWriter::outputMolGraphProperties(const MolecularGraph& molgrap
 
 	// CDF::MolecularGraphProperty::MATCH_CONSTRAINTS // TODO
 
-	outputExternalProperties(molgraph, dataBuffer);
+	outputExtendedProperties(molgraph);
 
 	putPropertyListMarker(CDF::PROP_LIST_END, dataBuffer);
 }
 
-void Chem::CDFDataWriter::outputExternalProperties(const Atom& atom, Internal::ByteBuffer& data) 
+template <typename T>
+void Chem::CDFDataWriter::outputExtendedProperties(const T& obj)
+{
+	extDataBuffer.setIOPointer(0);
+
+	outputExtendedProperties(obj, extDataBuffer);
+
+	if (extDataBuffer.getIOPointer() == 0)
+		return;
+
+	putPropertyListMarker(CDF::PROP_LIST_END, extDataBuffer);
+
+	std::size_t ext_data_len = extDataBuffer.getIOPointer();
+
+	extDataBuffer.resize(ext_data_len);
+
+	putIntProperty(CDF::EXTENDED_PROP_LIST, boost::numeric_cast<CDF::SizeType>(ext_data_len), dataBuffer);
+
+	dataBuffer.putBytes(extDataBuffer);
+}
+
+void Chem::CDFDataWriter::outputExtendedProperties(const Atom& atom, Internal::ByteBuffer& data) 
 {}
 
-void Chem::CDFDataWriter::outputExternalProperties(const Bond& bond, Internal::ByteBuffer& data) 
+void Chem::CDFDataWriter::outputExtendedProperties(const Bond& bond, Internal::ByteBuffer& data) 
 {}
 
-void Chem::CDFDataWriter::outputExternalProperties(const MolecularGraph& molgraph, Internal::ByteBuffer& data) 
+void Chem::CDFDataWriter::outputExtendedProperties(const MolecularGraph& molgraph, Internal::ByteBuffer& data) 
 {}
 
 void Chem::CDFDataWriter::putStereoDescriptor(const MolecularGraph& molgraph, unsigned int prop_id, const StereoDescriptor& descr)

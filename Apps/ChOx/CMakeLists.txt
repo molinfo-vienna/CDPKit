@@ -138,7 +138,7 @@ IF(APPLE)
           COMPONENT Applications
          )
 
-  TARGET_LINK_LIBRARIES(chox cdpl-vis-static cdpl-biomol-shared ${QT_LIBRARIES})
+  TARGET_LINK_LIBRARIES(chox cdpl-vis-static cdpl-biomol-static ${QT_LIBRARIES})
 ELSE(APPLE)
   IF(WIN32)
     IF(MINGW) # resource compilation for mingw
@@ -177,7 +177,8 @@ ELSE(APPLE)
     INSTALL(SCRIPT "${CMAKE_CURRENT_BINARY_DIR}/InstallExternalRuntimeDependencies.cmake")
   ENDIF(WIN32)
 
-  TARGET_LINK_LIBRARIES(chox cdpl-vis-shared cdpl-biomol-shared ${QT_LIBRARIES})
+#  TARGET_LINK_LIBRARIES(chox cdpl-vis-shared cdpl-biomol-shared ${QT_LIBRARIES})
+  TARGET_LINK_LIBRARIES(chox cdpl-vis-shared ${QT_LIBRARIES})
 ENDIF(APPLE)
 
 INSTALL(TARGETS chox DESTINATION "${CDPKIT_EXECUTABLE_INSTALL_DIR}" COMPONENT Applications)

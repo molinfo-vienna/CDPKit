@@ -128,6 +128,13 @@ void Internal::CDFDataReaderBase::getStringProperty(CDF::PropertySpec prop_spec,
 	bbuf.getBytes(&str[0], str_len);
 }
 
+unsigned int Internal::CDFDataReaderBase::getPropertySpec(CDF::PropertySpec& prop_spec, ByteBuffer& bbuf) const
+{
+	bbuf.getInt(prop_spec);
+
+	return extractPropertyID(prop_spec);
+}
+
 bool Internal::CDFDataReaderBase::strictErrorChecking() const
 {
 	return strictErrorChecks;

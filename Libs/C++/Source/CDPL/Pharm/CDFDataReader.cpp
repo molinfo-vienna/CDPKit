@@ -99,9 +99,7 @@ void Pharm::CDFDataReader::readFeatures(Pharmacophore& pharm, std::size_t num_ft
 		Feature& feature = pharm.addFeature();
 
 		while (true) {
-			dataBuffer.getInt(prop_spec);
-
-			unsigned int prop_id = extractPropertyID(prop_spec);
+			unsigned int prop_id = getPropertySpec(prop_spec, dataBuffer);
 
 			if (prop_id == CDF::PROP_LIST_END)
 				break;
@@ -161,12 +159,10 @@ void Pharm::CDFDataReader::readPharmProperties(Pharmacophore& pharm)
 	std::string str_val;
 
 	while (true) {
-		dataBuffer.getInt(prop_spec);
-
-		unsigned int prop_id = extractPropertyID(prop_spec);
+		unsigned int prop_id = getPropertySpec(prop_spec, dataBuffer);
 
 		if (prop_id == CDF::PROP_LIST_END)
-				break;
+			break;
 
 		switch (prop_id) {
 

@@ -56,6 +56,8 @@ namespace CDPL
 			const std::size_t              NUM_BOND_ATOM_INDEX_LENGTH_BITS = 4; 
 			const BondAtomIndexLengthTuple BOND_ATOM_INDEX_LENGTH_MASK     = 0xf; 
 
+			const unsigned int     EXTENDED_PROP_LIST       = 31;
+
 			namespace AtomProperty
 			{
 
@@ -79,8 +81,6 @@ namespace CDPL
 				const unsigned int REACTION_ATOM_MAPPING_ID = 18;
 				const unsigned int MATCH_CONSTRAINTS        = 19;
 				const unsigned int COMPONENT_GROUP_ID       = 20;
-
-				const unsigned int MAX_ID                   = 20;
 			}
 
 			namespace BondProperty
@@ -95,8 +95,6 @@ namespace CDPL
 				const unsigned int STEREO_2D_FLAG           = 7;
 				const unsigned int REACTION_CENTER_STATUS   = 8;
 				const unsigned int MATCH_CONSTRAINTS        = 9;
-
-				const unsigned int MAX_ID                   = 9;
 			}
 
 			namespace MolecularGraphProperty
@@ -106,8 +104,6 @@ namespace CDPL
 				const unsigned int MATCH_CONSTRAINTS        = 2;
 				const unsigned int STOICHIOMETRIC_NUMBER    = 3;
 				const unsigned int CONFORMATION_INDEX       = 4;
-
-				const unsigned int MAX_ID                   = 4;
 			}
 		}
     }

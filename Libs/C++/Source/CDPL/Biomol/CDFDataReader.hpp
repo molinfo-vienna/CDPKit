@@ -48,14 +48,8 @@ namespace CDPL
 		private:
 			void init();
 
-			void handleUnknownProperty(CDF::PropertySpec prop_spec, Chem::Atom& atom, 
-									   Internal::ByteBuffer& data);
-
-			void handleUnknownProperty(CDF::PropertySpec prop_spec, Chem::Bond& bond, 
-									   Internal::ByteBuffer& data);
-
-			void handleUnknownProperty(CDF::PropertySpec prop_spec, Chem::Molecule& mol, 
-									   Internal::ByteBuffer& data);
+			bool handleExtendedProperties(Chem::Atom& atom, Internal::ByteBuffer& data);
+			bool handleExtendedProperties(Chem::Molecule& mol, Internal::ByteBuffer& data);
 
 			std::string stringVal;
 		};

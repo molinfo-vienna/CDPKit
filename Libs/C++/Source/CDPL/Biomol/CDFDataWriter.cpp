@@ -40,87 +40,58 @@
 using namespace CDPL;
 
 
-void Biomol::CDFDataWriter::outputExternalProperties(const Chem::Atom& atom, Internal::ByteBuffer& data) 
+void Biomol::CDFDataWriter::outputExtendedProperties(const Chem::Atom& atom, Internal::ByteBuffer& data) 
 {
-	dataBuffer.setIOPointer(0);
-
 	if (hasResidueAtomName(atom))
-		putStringProperty(CDF::AtomProperty::RESIDUE_ATOM_NAME, getResidueAtomName(atom), dataBuffer);
+		putStringProperty(CDF::AtomProperty::RESIDUE_ATOM_NAME, getResidueAtomName(atom), data);
 
 	if (hasResidueAltAtomName(atom))
-		putStringProperty(CDF::AtomProperty::RESIDUE_ALT_ATOM_NAME, getResidueAtomName(atom), dataBuffer);
+		putStringProperty(CDF::AtomProperty::RESIDUE_ALT_ATOM_NAME, getResidueAtomName(atom), data);
 
 	if (hasResidueLeavingAtomFlag(atom))
-		putIntProperty(CDF::AtomProperty::RESIDUE_LEAVING_ATOM_FLAG, CDF::BoolType(getResidueLeavingAtomFlag(atom)), dataBuffer);
+		putIntProperty(CDF::AtomProperty::RESIDUE_LEAVING_ATOM_FLAG, CDF::BoolType(getResidueLeavingAtomFlag(atom)), data);
 
 	if (hasResidueLinkingAtomFlag(atom))
-		putIntProperty(CDF::AtomProperty::RESIDUE_LINKING_ATOM_FLAG, CDF::BoolType(getResidueLinkingAtomFlag(atom)), dataBuffer);
+		putIntProperty(CDF::AtomProperty::RESIDUE_LINKING_ATOM_FLAG, CDF::BoolType(getResidueLinkingAtomFlag(atom)), data);
 
 	if (hasResidueCode(atom))
-		putStringProperty(CDF::AtomProperty::RESIDUE_CODE, getResidueCode(atom), dataBuffer);
+		putStringProperty(CDF::AtomProperty::RESIDUE_CODE, getResidueCode(atom), data);
 
 	if (hasResidueSequenceNumber(atom))
-		putIntProperty(CDF::AtomProperty::RESIDUE_SEQUENCE_NUMBER, boost::numeric_cast<CDF::SizeType>(getResidueSequenceNumber(atom)), dataBuffer);
+		putIntProperty(CDF::AtomProperty::RESIDUE_SEQUENCE_NUMBER, boost::numeric_cast<CDF::SizeType>(getResidueSequenceNumber(atom)), data);
 
 	if (hasResidueInsertionCode(atom))
-		putIntProperty(CDF::AtomProperty::RESIDUE_INSERTION_CODE, boost::numeric_cast<CDF::CharType>(getResidueInsertionCode(atom)), dataBuffer);
+		putIntProperty(CDF::AtomProperty::RESIDUE_INSERTION_CODE, boost::numeric_cast<CDF::CharType>(getResidueInsertionCode(atom)), data);
 
 	if (hasChainID(atom))
-		putIntProperty(CDF::AtomProperty::CHAIN_ID, boost::numeric_cast<CDF::CharType>(getChainID(atom)), dataBuffer);
+		putIntProperty(CDF::AtomProperty::CHAIN_ID, boost::numeric_cast<CDF::CharType>(getChainID(atom)), data);
 
 	if (hasModelNumber(atom))
-		putIntProperty(CDF::AtomProperty::MODEL_NUMBER, boost::numeric_cast<CDF::SizeType>(getModelNumber(atom)), dataBuffer);
+		putIntProperty(CDF::AtomProperty::MODEL_NUMBER, boost::numeric_cast<CDF::SizeType>(getModelNumber(atom)), data);
 
 	if (hasSerialNumber(atom))
-		putIntProperty(CDF::AtomProperty::SERIAL_NUMBER, boost::numeric_cast<CDF::SizeType>(getSerialNumber(atom)), dataBuffer);
+		putIntProperty(CDF::AtomProperty::SERIAL_NUMBER, boost::numeric_cast<CDF::SizeType>(getSerialNumber(atom)), data);
 
 	if (hasHeteroAtomFlag(atom))
-		putIntProperty(CDF::AtomProperty::HETERO_ATOM_FLAG, CDF::BoolType(getHeteroAtomFlag(atom)), dataBuffer);
-
-	if (dataBuffer.getIOPointer() == 0)
-		return;
-
-	dataBuffer.resize(dataBuffer.getIOPointer());
-
-	putPropertyListMarker(CDF::AtomProperty::BIOMOL_PROP_LIST, data);
-
-	data.putBytes(dataBuffer);
-
-	putPropertyListMarker(CDF::PROP_LIST_END, data);
+		putIntProperty(CDF::AtomProperty::HETERO_ATOM_FLAG, CDF::BoolType(getHeteroAtomFlag(atom)), data);
 }
 
-void Biomol::CDFDataWriter::outputExternalProperties(const Chem::Bond& bond, Internal::ByteBuffer& data) 
-{}
-
-void Biomol::CDFDataWriter::outputExternalProperties(const Chem::MolecularGraph& molgraph, Internal::ByteBuffer& data) 
+void Biomol::CDFDataWriter::outputExtendedProperties(const Chem::MolecularGraph& molgraph, Internal::ByteBuffer& data) 
 {
-	dataBuffer.setIOPointer(0);
-
 	if (hasResidueCode(molgraph))
-		putStringProperty(CDF::MolecularGraphProperty::RESIDUE_CODE, getResidueCode(molgraph), dataBuffer);
+		putStringProperty(CDF::MolecularGraphProperty::RESIDUE_CODE, getResidueCode(molgraph), data);
 
 	if (hasResidueSequenceNumber(molgraph))
-		putIntProperty(CDF::MolecularGraphProperty::RESIDUE_SEQUENCE_NUMBER, boost::numeric_cast<CDF::SizeType>(getResidueSequenceNumber(molgraph)), dataBuffer);
+		putIntProperty(CDF::MolecularGraphProperty::RESIDUE_SEQUENCE_NUMBER, boost::numeric_cast<CDF::SizeType>(getResidueSequenceNumber(molgraph)), data);
 
 	if (hasResidueInsertionCode(molgraph))
-		putIntProperty(CDF::MolecularGraphProperty::RESIDUE_INSERTION_CODE, boost::numeric_cast<CDF::CharType>(getResidueInsertionCode(molgraph)), dataBuffer);
+		putIntProperty(CDF::MolecularGraphProperty::RESIDUE_INSERTION_CODE, boost::numeric_cast<CDF::CharType>(getResidueInsertionCode(molgraph)), data);
 
 	if (hasChainID(molgraph))
-		putIntProperty(CDF::MolecularGraphProperty::CHAIN_ID, boost::numeric_cast<CDF::CharType>(getChainID(molgraph)), dataBuffer);
+		putIntProperty(CDF::MolecularGraphProperty::CHAIN_ID, boost::numeric_cast<CDF::CharType>(getChainID(molgraph)), data);
 
 	if (hasModelNumber(molgraph))
-		putIntProperty(CDF::MolecularGraphProperty::MODEL_NUMBER, boost::numeric_cast<CDF::SizeType>(getModelNumber(molgraph)), dataBuffer);
-
-	if (dataBuffer.getIOPointer() == 0)
-		return;
-
-	dataBuffer.resize(dataBuffer.getIOPointer());
-
-	putPropertyListMarker(CDF::MolecularGraphProperty::BIOMOL_PROP_LIST, data);
-
-	data.putBytes(dataBuffer);
-
-	putPropertyListMarker(CDF::PROP_LIST_END, data);
+		putIntProperty(CDF::MolecularGraphProperty::MODEL_NUMBER, boost::numeric_cast<CDF::SizeType>(getModelNumber(molgraph)), data);
 }
 
 void Biomol::CDFDataWriter::init()

@@ -74,11 +74,12 @@ namespace CDPL
 			void outputBonds(const MolecularGraph& molgraph);
 			void outputMolGraphProperties(const MolecularGraph& molgraph);
 
-			virtual void outputExternalProperties(const Atom& atom, Internal::ByteBuffer& data);
+			template <typename T>
+			void outputExtendedProperties(const T& obj);
 
-			virtual void outputExternalProperties(const Bond& bond, Internal::ByteBuffer& data);
-
-			virtual void outputExternalProperties(const MolecularGraph& molgraph, Internal::ByteBuffer& data);
+			virtual void outputExtendedProperties(const Atom& atom, Internal::ByteBuffer& data);
+			virtual void outputExtendedProperties(const Bond& bond, Internal::ByteBuffer& data);
+			virtual void outputExtendedProperties(const MolecularGraph& molgraph, Internal::ByteBuffer& data);
 
 			void putStereoDescriptor(const MolecularGraph& molgraph, 
 									 unsigned int prop_id, const StereoDescriptor& descr);
@@ -87,6 +88,7 @@ namespace CDPL
 
 			const Base::DataIOBase& ioBase;	
 			Internal::ByteBuffer    dataBuffer;
+			Internal::ByteBuffer    extDataBuffer;
 			CDF::Header             cdfHeader;
 		};
 	}
