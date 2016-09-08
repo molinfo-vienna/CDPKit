@@ -86,7 +86,7 @@ namespace
 
 			DataIOManager<MolecularGraph>::registerOutputHandler(pdbMolGraphOutputHandler);
 
-			DataIOManager<Molecule>::unregisterOutputHandler(Chem::DataFormat::CDF);
+			DataIOManager<MolecularGraph>::unregisterOutputHandler(Chem::DataFormat::CDF);
 			DataIOManager<MolecularGraph>::registerOutputHandler(cdfMolGraphOutputHandler);
 		}
 

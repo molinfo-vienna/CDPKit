@@ -39,22 +39,18 @@
 using namespace CDPL;
 
 
-void Biomol::CDFDataReader::handleUnknownProperty(CDF::PropertySpec prop_spec, Chem::Atom& atom, Internal::ByteBuffer& data)
+bool Biomol::CDFDataReader::handleExtendedProperties(Chem::Atom& atom, Internal::ByteBuffer& data)
 {
+	CDF::PropertySpec prop_spec;
 	CDF::CharType char_val;
 	CDF::SizeType size_val;
 	CDF::BoolType bool_val;
 
-	if (extractPropertyID(prop_spec) != CDF::AtomProperty::BIOMOL_PROP_LIST)
-		throw Base::IOError("CDFDataReader: unsupported atom property");
-
 	while (true) {
-		data.getInt(prop_spec);
-
-		unsigned int prop_id = extractPropertyID(prop_spec);
+		unsigned int prop_id = getPropertySpec(prop_spec, data);
 
 		if (prop_id == CDF::PROP_LIST_END)
-			break;
+			return true;
 
 		switch (prop_id) {
 
@@ -119,26 +115,17 @@ void Biomol::CDFDataReader::handleUnknownProperty(CDF::PropertySpec prop_spec, C
 	}
 }
 
-void Biomol::CDFDataReader::handleUnknownProperty(CDF::PropertySpec prop_spec, Chem::Bond& bond, Internal::ByteBuffer& data)
+bool Biomol::CDFDataReader::handleExtendedProperties(Chem::Molecule& mol, Internal::ByteBuffer& data)
 {
-	throw Base::IOError("CDFDataReader: unsupported bond property");
-}
-
-void Biomol::CDFDataReader::handleUnknownProperty(CDF::PropertySpec prop_spec, Chem::Molecule& mol, Internal::ByteBuffer& data)
-{
+	CDF::PropertySpec prop_spec;
 	CDF::CharType char_val;
 	CDF::SizeType size_val;
 
-	if (extractPropertyID(prop_spec) != CDF::MolecularGraphProperty::BIOMOL_PROP_LIST)
-		throw Base::IOError("CDFDataReader: unsupported molecule property");
-
 	while (true) {
-		data.getInt(prop_spec);
-
-		unsigned int prop_id = extractPropertyID(prop_spec);
+		unsigned int prop_id = getPropertySpec(prop_spec, data);
 
 		if (prop_id == CDF::PROP_LIST_END)
-			break;
+			return true;
 
 		switch (prop_id) {
 

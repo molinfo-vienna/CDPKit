@@ -88,14 +88,12 @@ namespace CDPL
 			void readBonds(Molecule& mol, std::size_t num_atoms, std::size_t num_bonds);
 			void readMoleculeProperties(Molecule& mol);
 
-			virtual void handleUnknownProperty(CDF::PropertySpec prop_spec, Atom& atom, 
-											   Internal::ByteBuffer& data);
+			template <typename T>
+			void handleExtendedProperties(CDF::PropertySpec prop_spec, T& obj);
 
-			virtual void handleUnknownProperty(CDF::PropertySpec prop_spec, Bond& bond, 
-											   Internal::ByteBuffer& data);
-
-			virtual void handleUnknownProperty(CDF::PropertySpec prop_spec, Molecule& mol, 
-											   Internal::ByteBuffer& data);
+			virtual bool handleExtendedProperties(Atom& atom, Internal::ByteBuffer& data);
+			virtual bool handleExtendedProperties(Bond& bond, Internal::ByteBuffer& data);
+			virtual bool handleExtendedProperties(Molecule& mol, Internal::ByteBuffer& data);
 
 			void readStereoDescriptor(CDF::PropertySpec prop_spec, CDFStereoDescr& descr);
 			void setStereoDescriptors(Molecule& mol) const;

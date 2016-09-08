@@ -47,11 +47,8 @@ namespace CDPL
 		private:
 			void init();
 
-			void outputExternalProperties(const Chem::Atom& atom, Internal::ByteBuffer& data);
-
-			void outputExternalProperties(const Chem::Bond& bond, Internal::ByteBuffer& data);
-
-			void outputExternalProperties(const Chem::MolecularGraph& molgraph, Internal::ByteBuffer& data);
+			void outputExtendedProperties(const Chem::Atom& atom, Internal::ByteBuffer& data);
+			void outputExtendedProperties(const Chem::MolecularGraph& molgraph, Internal::ByteBuffer& data);
 
 			Internal::ByteBuffer dataBuffer;
 		};

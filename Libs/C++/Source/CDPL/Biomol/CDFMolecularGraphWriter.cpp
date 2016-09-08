@@ -38,7 +38,8 @@ using namespace CDPL;
 
 
 Biomol::CDFMolecularGraphWriter::CDFMolecularGraphWriter(std::ostream& os): 
-	output(os), state(os.good()), writer(new CDFDataWriter(*this)) {}
+	output(os), state(os.good()), writer(new CDFDataWriter(*this)) 
+{}
 
 Biomol::CDFMolecularGraphWriter::~CDFMolecularGraphWriter() {}
 
