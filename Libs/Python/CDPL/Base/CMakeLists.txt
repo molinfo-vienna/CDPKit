@@ -12,6 +12,7 @@ SET(base_MOD_SRCS
     PropertyContainerExport.cpp
     LookupKeyExport.cpp
     ControlParameterContainerExport.cpp
+    ControlParameterListExport.cpp
     DataFormatExport.cpp
     DataIOBaseExport.cpp
     IOStreamExport.cpp

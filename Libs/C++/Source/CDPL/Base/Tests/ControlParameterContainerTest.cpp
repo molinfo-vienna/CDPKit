@@ -43,6 +43,7 @@ using namespace CDPL;
 
 namespace
 {
+
 	struct TestControlParameterContainer : public Base::ControlParameterContainer 
 	{
 
@@ -50,6 +51,7 @@ namespace
 
 	};
 }
+
 
 BOOST_AUTO_TEST_CASE(ControlParameterContainerTest)
 {

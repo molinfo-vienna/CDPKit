@@ -30,7 +30,6 @@
 #include <iosfwd>
 
 #include "CDPL/Chem/APIPrefix.hpp"
-#include "CDPL/Chem/CDFFormatData.hpp"
 
 #include "CDPL/Internal/CDFDataWriterBase.hpp"
 #include "CDPL/Internal/ByteBuffer.hpp"
@@ -42,7 +41,7 @@ namespace CDPL
 	namespace Base
 	{
 
-		class DataIOBase;
+		class ControlParameterContainer;
 	}
 
 	namespace Chem
@@ -57,39 +56,40 @@ namespace CDPL
 		{
 
 		  public:
-			CDFDataWriter(const Base::DataIOBase& io_base): ioBase(io_base) {}
+			CDFDataWriter(const Base::ControlParameterContainer& ctrl_params): ctrlParams(ctrl_params) {}
 
 			virtual ~CDFDataWriter() {}
 
 			bool writeMolGraph(std::ostream& os, const MolecularGraph& molgraph);
 
+			void writeMolGraph(const MolecularGraph& molgraph, Internal::ByteBuffer& bbuf);
+
 		  protected:
 			virtual void init();
 
-			const Base::DataIOBase& getIOBase() const;
+			const Base::ControlParameterContainer& getCtrlParameters() const;
 
 		  private:
-			void outputMolGraphHeader(const MolecularGraph& molgraph);
-			void outputAtoms(const MolecularGraph& molgraph);
-			void outputBonds(const MolecularGraph& molgraph);
-			void outputMolGraphProperties(const MolecularGraph& molgraph);
+			void outputMolGraphHeader(const MolecularGraph& molgraph, Internal::ByteBuffer& bbuf) const;
+			void outputAtoms(const MolecularGraph& molgraph, Internal::ByteBuffer& bbuf);
+			void outputBonds(const MolecularGraph& molgraph, Internal::ByteBuffer& bbuf);
+			void outputMolGraphProperties(const MolecularGraph& molgraph, Internal::ByteBuffer& bbuf);
 
 			template <typename T>
-			void outputExtendedProperties(const T& obj);
+			void outputExtendedProperties(const T& obj, Internal::ByteBuffer& bbuf);
 
-			virtual void outputExtendedProperties(const Atom& atom, Internal::ByteBuffer& data);
-			virtual void outputExtendedProperties(const Bond& bond, Internal::ByteBuffer& data);
-			virtual void outputExtendedProperties(const MolecularGraph& molgraph, Internal::ByteBuffer& data);
+			virtual void outputExtendedProperties(const Atom& atom, Internal::ByteBuffer& bbuf);
+			virtual void outputExtendedProperties(const Bond& bond, Internal::ByteBuffer& bbuf);
+			virtual void outputExtendedProperties(const MolecularGraph& molgraph, Internal::ByteBuffer& bbuf);
 
 			void putStereoDescriptor(const MolecularGraph& molgraph, 
-									 unsigned int prop_id, const StereoDescriptor& descr);
+									 unsigned int prop_id, const StereoDescriptor& descr, Internal::ByteBuffer& bbuf) const;
 
 			bool writeRecordData(std::ostream& os);
 
-			const Base::DataIOBase& ioBase;	
-			Internal::ByteBuffer    dataBuffer;
-			Internal::ByteBuffer    extDataBuffer;
-			CDF::Header             cdfHeader;
+			const Base::ControlParameterContainer& ctrlParams;	
+			Internal::ByteBuffer                   dataBuffer;
+			Internal::ByteBuffer                   extDataBuffer;
 		};
 	}
 }

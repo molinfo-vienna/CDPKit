@@ -37,6 +37,7 @@
 #include "CDPL/Base/LookupKey.hpp"
 #include "CDPL/Base/LookupKeyDefinition.hpp"
 #include "CDPL/Base/ControlParameterContainer.hpp"
+#include "CDPL/Base/ControlParameterList.hpp"
 #include "CDPL/Base/PropertyContainer.hpp"
 #include "CDPL/Base/DataIOBase.hpp"
 #include "CDPL/Base/DataReader.hpp"

@@ -324,6 +324,9 @@
 \defgroup CDPL_PHARM_ALIGNMENT Pharmacophore Alignment 
 \ingroup CDPL_PHARM
 
+\defgroup CDPL_PHARM_SCREENING Pharmacophore Screening
+\ingroup CDPL_PHARM
+
 \defgroup CDPL_PHARM_PROPERTIES Property Keys
 \ingroup CDPL_PHARM
 

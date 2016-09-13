@@ -28,7 +28,6 @@
 #define CDPL_INTERNAL_CDFDATAWRITERBASE_HPP
 
 #include <cstddef>
-#include <iosfwd>
 #include <string>
 
 #include <boost/static_assert.hpp>
@@ -54,7 +53,7 @@ namespace CDPL
 
 			virtual ~CDFDataWriterBase() {}
 
-			bool writeHeader(std::ostream& os, const CDF::Header& header);
+			void putHeader(const CDF::Header& header, ByteBuffer& bbuf) const;
 
 			template <typename T>
 			void putIntProperty(unsigned int prop_id, const T& value, ByteBuffer& bbuf, bool compress = true) const;
@@ -85,7 +84,6 @@ namespace CDPL
 
 			bool       strictErrorChecks;
 			bool       singlePrecFloats;
-			ByteBuffer hdrBuffer;
 		};
 	}
 }

@@ -76,6 +76,13 @@ SET(pharm_MOD_SRCS
     FromPythonConverterRegistration.cpp
    )
 
+IF(SQLITE3_FOUND)
+  SET(pharm_MOD_SRCS
+      ${pharm_MOD_SRCS}
+      SQLiteScreeningDBCreatorExport.cpp
+     )	
+ENDIF(SQLITE3_FOUND)
+
 ADD_LIBRARY(_pharm MODULE ${pharm_MOD_SRCS})
 
 TARGET_LINK_LIBRARIES(_pharm cdpl-pharm-shared ${Boost_PYTHON_LIBRARY} ${PYTHON_LIBRARIES})

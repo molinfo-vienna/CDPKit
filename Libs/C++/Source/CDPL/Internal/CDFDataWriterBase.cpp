@@ -24,24 +24,18 @@
  */
 
 
-#include <ostream>
-
 #include "CDFDataWriterBase.hpp"
 
 
 using namespace CDPL;
 
 
-bool Internal::CDFDataWriterBase::writeHeader(std::ostream& os, const CDF::Header& header)
+void Internal::CDFDataWriterBase::putHeader(const CDF::Header& header, ByteBuffer& bbuf) const
 {
-	hdrBuffer.setIOPointer(0);
-	hdrBuffer.putInt(CDF::FORMAT_ID, false);
-	hdrBuffer.putInt(header.recordTypeID, false);
-	hdrBuffer.putInt(header.recordFormatVersion, false);
-	hdrBuffer.putInt(header.recordDataLength, false);
-	hdrBuffer.writeBuffer(os);
-
-	return os.good();
+	bbuf.putInt(CDF::FORMAT_ID, false);
+	bbuf.putInt(header.recordTypeID, false);
+	bbuf.putInt(header.recordFormatVersion, false);
+	bbuf.putInt(header.recordDataLength, false);
 }
 
 void Internal::CDFDataWriterBase::putStringProperty(unsigned int prop_id, const std::string& str, ByteBuffer& bbuf) const

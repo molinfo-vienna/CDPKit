@@ -32,7 +32,7 @@
 using namespace CDPL; 
 
 
-bool Internal::CDFDataReaderBase::skipToRecord(std::istream& is, CDF::Header& header, Base::uint8 rec_type, bool seek_beg)
+bool Internal::CDFDataReaderBase::skipToRecord(std::istream& is, CDF::Header& header, Base::uint8 rec_type, bool seek_beg, ByteBuffer& bbuf) const
 {
     while (true) {
 		std::istream::pos_type last_spos = is.tellg();
@@ -40,7 +40,7 @@ bool Internal::CDFDataReaderBase::skipToRecord(std::istream& is, CDF::Header& he
 		if (std::istream::traits_type::eq_int_type(is.peek(), std::istream::traits_type::eof())) 
 			break;
 
-		if (!readHeader(is, header))
+		if (!readHeader(is, header, bbuf))
 			return false;
 
 		if (header.recordTypeID == rec_type) {
@@ -56,7 +56,7 @@ bool Internal::CDFDataReaderBase::skipToRecord(std::istream& is, CDF::Header& he
 	return false;
 }
 
-bool Internal::CDFDataReaderBase::skipNextRecord(std::istream& is, Base::uint8 rec_type)
+bool Internal::CDFDataReaderBase::skipNextRecord(std::istream& is, Base::uint8 rec_type, ByteBuffer& bbuf) const
 {
 	CDF::Header header;
 
@@ -66,7 +66,7 @@ bool Internal::CDFDataReaderBase::skipNextRecord(std::istream& is, Base::uint8 r
 		if (std::istream::traits_type::eq_int_type(is.peek(), std::istream::traits_type::eof()))
 			break;
 
-		if (!readHeader(is, header))
+		if (!readHeader(is, header, bbuf))
 			return false;
 
 		is.seekg(last_spos + std::istream::pos_type(header.recordDataLength) + std::istream::pos_type(CDF::HEADER_SIZE));
@@ -78,9 +78,9 @@ bool Internal::CDFDataReaderBase::skipNextRecord(std::istream& is, Base::uint8 r
 	return false;
 }
 
-bool Internal::CDFDataReaderBase::readHeader(std::istream& is, CDF::Header& header)
+bool Internal::CDFDataReaderBase::readHeader(std::istream& is, CDF::Header& header, ByteBuffer& bbuf) const
 {	
-	std::size_t num_read = hdrBuffer.readBuffer(is, CDF::HEADER_SIZE);
+	std::size_t num_read = bbuf.readBuffer(is, CDF::HEADER_SIZE);
 
 	if (!is.good())
 		throw Base::IOError("CDFDataReaderBase: could not read CDF-header, input stream read error");
@@ -92,11 +92,17 @@ bool Internal::CDFDataReaderBase::readHeader(std::istream& is, CDF::Header& head
 		return false;
 	}
 
-	hdrBuffer.setIOPointer(0);
-	hdrBuffer.getInt(header.formatID);
-	hdrBuffer.getInt(header.recordTypeID);
-	hdrBuffer.getInt(header.recordFormatVersion);
-	hdrBuffer.getInt(header.recordDataLength);
+	bbuf.setIOPointer(0);
+
+	return getHeader(header, bbuf);
+}
+
+bool Internal::CDFDataReaderBase::getHeader(CDF::Header& header, ByteBuffer& bbuf) const
+{	
+	bbuf.getInt(header.formatID);
+	bbuf.getInt(header.recordTypeID);
+	bbuf.getInt(header.recordFormatVersion);
+	bbuf.getInt(header.recordDataLength);
 
 	if (header.formatID == CDF::FORMAT_ID)
 		return true;

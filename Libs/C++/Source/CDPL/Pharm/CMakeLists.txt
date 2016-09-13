@@ -69,6 +69,16 @@ SET(cdpl-pharm_LIB_SRCS
     PiPiInteractionUtilities.cpp
    )
 
+IF(SQLITE3_FOUND)
+  SET(cdpl-pharm_LIB_SRCS
+      ${cdpl-pharm_LIB_SRCS}
+      SQLiteScreeningDBCreator.cpp
+     )	
+
+  LINK_LIBRARIES(${SQLITE3_LIBRARY})
+  INCLUDE_DIRECTORIES("${SQLITE3_INCLUDE_DIR}")
+ENDIF(SQLITE3_FOUND)
+
 ADD_LIBRARY(cdpl-pharm-static STATIC ${cdpl-pharm_LIB_SRCS})
 
 SET_TARGET_PROPERTIES(cdpl-pharm-static PROPERTIES 

@@ -72,4 +72,11 @@ void CDPLPython::exportConfigInfo()
 #else
 	module.attr("HAVE_CAIRO_SVG_SUPPORT") = false;
 #endif
+
+#ifdef HAVE_SQLITE3
+    module.attr("HAVE_SQLITE3") = true;
+#else
+    module.attr("HAVE_SQLITE3") = false;
+#endif
+
 }

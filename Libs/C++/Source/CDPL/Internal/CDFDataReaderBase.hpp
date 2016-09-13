@@ -52,17 +52,19 @@ namespace CDPL
 
 			virtual ~CDFDataReaderBase() {}
 
-			bool skipToRecord(std::istream& is, CDF::Header& header, Base::uint8 rec_type, bool seek_beg);
+			bool skipToRecord(std::istream& is, CDF::Header& header, Base::uint8 rec_type, bool seek_beg, ByteBuffer& bbuf) const;
 
-			bool skipNextRecord(std::istream& is, Base::uint8 rec_type);
+			bool skipNextRecord(std::istream& is, Base::uint8 rec_type, ByteBuffer& bbuf) const;
 
-			bool readHeader(std::istream& is, CDF::Header& header);
-	    
+			bool readHeader(std::istream& is, CDF::Header& header, ByteBuffer& bbuf) const;
+
 			void readData(std::istream& is,	std::size_t length, ByteBuffer& bbuf) const;
 
 			unsigned int extractPropertyID(CDF::PropertySpec prop_spec) const;
 
 			std::size_t extractPropertyValueLength(CDF::PropertySpec prop_spec) const;
+
+			bool getHeader(CDF::Header& header, ByteBuffer& bbuf) const;
 
 			template <typename T>
 			void getIntProperty(CDF::PropertySpec prop_spec, T& value, ByteBuffer& bbuf) const;
@@ -86,7 +88,6 @@ namespace CDPL
 			
 		private:
 			bool       strictErrorChecks;
-			ByteBuffer hdrBuffer;		
 		};
     }
 }

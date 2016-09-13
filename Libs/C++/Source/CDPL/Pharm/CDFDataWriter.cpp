@@ -36,9 +36,9 @@
 #include "CDPL/Pharm/FeatureFunctions.hpp"
 #include "CDPL/Pharm/ControlParameterFunctions.hpp"
 #include "CDPL/Chem/Entity3DFunctions.hpp"
-#include "CDPL/Base/DataIOBase.hpp"
 
 #include "CDFDataWriter.hpp"
+#include "CDFFormatData.hpp"
 
 
 using namespace CDPL;
@@ -46,80 +46,88 @@ using namespace CDPL;
 
 bool Pharm::CDFDataWriter::writePharmacophore(std::ostream& os, const Pharmacophore& pharm)
 {
-	init();
-
-	outputPharmHeader(pharm);
-	outputFeatures(pharm);
-	outputPharmProperties(pharm);
+	writePharmacophore(pharm, dataBuffer);
 
 	return writeRecordData(os);
 }
 
+void Pharm::CDFDataWriter::writePharmacophore(const Pharmacophore& pharm, Internal::ByteBuffer& bbuf)
+{
+	init();
+
+	bbuf.setIOPointer(CDF::HEADER_SIZE);
+
+	outputFeatures(pharm, bbuf);
+	outputPharmProperties(pharm, bbuf);
+
+	bbuf.resize(bbuf.getIOPointer());
+
+	outputPharmHeader(pharm, bbuf);
+}
+
 void Pharm::CDFDataWriter::init()
 {
-	strictErrorChecking(getStrictErrorCheckingParameter(ioBase)); 
-	singlePrecisionFloats(getCDFWriteSinglePrecisionFloatsParameter(ioBase));
-
-	dataBuffer.setIOPointer(0);
+	strictErrorChecking(getStrictErrorCheckingParameter(ctrlParams)); 
+	singlePrecisionFloats(getCDFWriteSinglePrecisionFloatsParameter(ctrlParams));
 }
 
-void Pharm::CDFDataWriter::outputPharmHeader(const Pharmacophore& pharm)
+void Pharm::CDFDataWriter::outputPharmHeader(const Pharmacophore& pharm, Internal::ByteBuffer& bbuf) const
 {
-	cdfHeader.recordTypeID = CDF::PHARMACOPHORE_RECORD_ID;
-	cdfHeader.recordFormatVersion = CDF::CURR_FORMAT_VERSION;
+	CDF::Header cdf_header;
 
-	dataBuffer.putInt(boost::numeric_cast<CDF::SizeType>(pharm.getNumFeatures()), false);
+	cdf_header.recordDataLength = boost::numeric_cast<CDF::SizeType>(bbuf.getSize() - CDF::HEADER_SIZE);
+	cdf_header.recordTypeID = CDF::PHARMACOPHORE_RECORD_ID;
+	cdf_header.recordFormatVersion = CDF::CURR_FORMAT_VERSION;
+
+	bbuf.setIOPointer(0);
+
+	putHeader(cdf_header, bbuf);
 }
 
-void Pharm::CDFDataWriter::outputFeatures(const Pharmacophore& pharm)
+void Pharm::CDFDataWriter::outputFeatures(const Pharmacophore& pharm, Internal::ByteBuffer& bbuf) const
 {
+	bbuf.putInt(boost::numeric_cast<CDF::SizeType>(pharm.getNumFeatures()), false);
+
 	for (Pharmacophore::ConstFeatureIterator it = pharm.getFeaturesBegin(), end = pharm.getFeaturesEnd(); 
 		 it != end; ++it) {
 
 		const Feature& feature = *it;
 	
 		if (hasType(feature))
-			putIntProperty(CDF::FeatureProperty::TYPE, boost::numeric_cast<CDF::UIntType>(getType(feature)), dataBuffer);
+			putIntProperty(CDF::FeatureProperty::TYPE, boost::numeric_cast<CDF::UIntType>(getType(feature)), bbuf);
 
 		if (has3DCoordinates(feature))
-			putVectorProperty(CDF::FeatureProperty::COORDINATES_3D, get3DCoordinates(feature), dataBuffer);
+			putVectorProperty(CDF::FeatureProperty::COORDINATES_3D, get3DCoordinates(feature), bbuf);
 
 		if (hasGeometry(feature))
-			putIntProperty(CDF::FeatureProperty::GEOMETRY, boost::numeric_cast<CDF::UIntType>(getGeometry(feature)), dataBuffer);
+			putIntProperty(CDF::FeatureProperty::GEOMETRY, boost::numeric_cast<CDF::UIntType>(getGeometry(feature)), bbuf);
 
 		if (hasLength(feature))
-			putFloatProperty(CDF::FeatureProperty::LENGTH, getLength(feature), dataBuffer);
+			putFloatProperty(CDF::FeatureProperty::LENGTH, getLength(feature), bbuf);
 
 		if (hasTolerance(feature))
-			putFloatProperty(CDF::FeatureProperty::TOLERANCE, getTolerance(feature), dataBuffer);
+			putFloatProperty(CDF::FeatureProperty::TOLERANCE, getTolerance(feature), bbuf);
 
 		if (hasDisabledFlag(feature))
-			putIntProperty(CDF::FeatureProperty::DISABLED_FLAG, CDF::BoolType(getDisabledFlag(feature)), dataBuffer);
+			putIntProperty(CDF::FeatureProperty::DISABLED_FLAG, CDF::BoolType(getDisabledFlag(feature)), bbuf);
 
 		if (hasOptionalFlag(feature))
-			putIntProperty(CDF::FeatureProperty::OPTIONAL_FLAG, CDF::BoolType(getOptionalFlag(feature)), dataBuffer);
+			putIntProperty(CDF::FeatureProperty::OPTIONAL_FLAG, CDF::BoolType(getOptionalFlag(feature)), bbuf);
 
-		putPropertyListMarker(CDF::PROP_LIST_END, dataBuffer);
+		putPropertyListMarker(CDF::PROP_LIST_END, bbuf);
 	}
 }
 
-void Pharm::CDFDataWriter::outputPharmProperties(const Pharmacophore& pharm)
+void Pharm::CDFDataWriter::outputPharmProperties(const Pharmacophore& pharm, Internal::ByteBuffer& bbuf) const
 {
 	if (hasName(pharm))
-		putStringProperty(CDF::PharmacophoreProperty::NAME, getName(pharm), dataBuffer);
+		putStringProperty(CDF::PharmacophoreProperty::NAME, getName(pharm), bbuf);
 
-	putPropertyListMarker(CDF::PROP_LIST_END, dataBuffer);
+	putPropertyListMarker(CDF::PROP_LIST_END, bbuf);
 }
 
-bool Pharm::CDFDataWriter::writeRecordData(std::ostream& os)
+bool Pharm::CDFDataWriter::writeRecordData(std::ostream& os) const
 {
-	dataBuffer.resize(dataBuffer.getIOPointer());
-
-	cdfHeader.recordDataLength = boost::numeric_cast<CDF::SizeType>(dataBuffer.getSize());
-
-	if (!writeHeader(os, cdfHeader))
-		return false;
-
 	dataBuffer.writeBuffer(os);
 
 	return os.good();

@@ -43,7 +43,7 @@ namespace CDPL
 	namespace Base
 	{
 
-		class DataIOBase;
+		class ControlParameterContainer;
 	}
 
 	namespace Chem
@@ -57,11 +57,13 @@ namespace CDPL
 		{
 
 		public:
-			CDFDataReader(const Base::DataIOBase& io_base): ioBase(io_base) {}
+			CDFDataReader(const Base::ControlParameterContainer& ctrl_params): ctrlParams(ctrl_params) {}
 
 			virtual ~CDFDataReader() {}
 
 			bool readMolecule(std::istream& is, Molecule& mol);
+
+			bool readMolecule(Molecule& mol, Internal::ByteBuffer& bbuf);
 
 			bool skipMolecule(std::istream& is);
 
@@ -70,7 +72,7 @@ namespace CDPL
 		protected:
 			virtual void init();
 
-			const Base::DataIOBase& getIOBase() const;
+			const Base::ControlParameterContainer& getCtrlParameters() const;
 
 		private:
 			struct CDFStereoDescr
@@ -84,18 +86,18 @@ namespace CDPL
 				std::size_t  refAtomInds[4];
 			};
 
-			void readAtoms(Molecule& mol, std::size_t num_atoms);
-			void readBonds(Molecule& mol, std::size_t num_atoms, std::size_t num_bonds);
-			void readMoleculeProperties(Molecule& mol);
+			std::size_t readAtoms(Molecule& mol, Internal::ByteBuffer& bbuf);
+			void readBonds(Molecule& mol, Internal::ByteBuffer& bbuf, std::size_t num_atoms);
+			void readMoleculeProperties(Molecule& mol, Internal::ByteBuffer& bbuf);
 
 			template <typename T>
-			void handleExtendedProperties(CDF::PropertySpec prop_spec, T& obj);
+			void handleExtendedProperties(CDF::PropertySpec prop_spec, T& obj, Internal::ByteBuffer& data);
 
 			virtual bool handleExtendedProperties(Atom& atom, Internal::ByteBuffer& data);
 			virtual bool handleExtendedProperties(Bond& bond, Internal::ByteBuffer& data);
 			virtual bool handleExtendedProperties(Molecule& mol, Internal::ByteBuffer& data);
 
-			void readStereoDescriptor(CDF::PropertySpec prop_spec, CDFStereoDescr& descr);
+			void readStereoDescriptor(CDF::PropertySpec prop_spec, CDFStereoDescr& descr, Internal::ByteBuffer& data) const;
 			void setStereoDescriptors(Molecule& mol) const;
 
 			template <typename T>
@@ -103,11 +105,11 @@ namespace CDPL
 
 			typedef std::vector<CDFStereoDescr> StereoDescrList;
 
-			const Base::DataIOBase& ioBase;	
-			Internal::ByteBuffer    dataBuffer;
-			std::size_t             startAtomIdx;
-			StereoDescrList         atomStereoDescrs;
-			StereoDescrList         bondStereoDescrs;
+			const Base::ControlParameterContainer& ctrlParams;	
+			Internal::ByteBuffer                   dataBuffer;		
+			std::size_t                            startAtomIdx;
+			StereoDescrList                        atomStereoDescrs;
+			StereoDescrList                        bondStereoDescrs;
 		};
 	}
 }

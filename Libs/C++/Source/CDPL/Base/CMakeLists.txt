@@ -3,6 +3,7 @@ INCLUDE_DIRECTORIES("${CMAKE_CURRENT_SOURCE_DIR}")
 SET(cdpl-base_LIB_SRCS
     PropertyContainer.cpp
     ControlParameterContainer.cpp
+    ControlParameterList.cpp
     LookupKey.cpp
     DataIOManager.cpp
     DataIOBase.cpp

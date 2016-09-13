@@ -34,6 +34,7 @@ namespace CDPLPythonBase
 	void exportLookupKey();
 	void exportPropertyContainer();
 	void exportControlParameterContainer();
+	void exportControlParameterList();
 	void exportDataFormat();
 	void exportDataIOBase();
 	void exportIOStreams();

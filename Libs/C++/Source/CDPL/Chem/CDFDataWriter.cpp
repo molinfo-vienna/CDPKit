@@ -40,9 +40,9 @@
 #include "CDPL/Chem/BondFunctions.hpp"
 #include "CDPL/Chem/ControlParameterFunctions.hpp"
 #include "CDPL/Chem/StereoDescriptor.hpp"
-#include "CDPL/Base/DataIOBase.hpp"
 
 #include "CDFDataWriter.hpp"
+#include "CDFFormatData.hpp"
 
 
 using namespace CDPL;
@@ -50,185 +50,201 @@ using namespace CDPL;
 
 bool Chem::CDFDataWriter::writeMolGraph(std::ostream& os, const MolecularGraph& molgraph)
 {
-	init();
-
-	outputMolGraphHeader(molgraph);
-	outputAtoms(molgraph);
-	outputBonds(molgraph);
-	outputMolGraphProperties(molgraph);
+	writeMolGraph(molgraph, dataBuffer);
 
 	return writeRecordData(os);
 }
 
+void Chem::CDFDataWriter::writeMolGraph(const MolecularGraph& molgraph, Internal::ByteBuffer& bbuf)
+{
+	init();
+
+	bbuf.setIOPointer(CDF::HEADER_SIZE);
+
+	outputAtoms(molgraph, bbuf);
+	outputBonds(molgraph, bbuf);
+	outputMolGraphProperties(molgraph, bbuf);
+
+	bbuf.resize(bbuf.getIOPointer());
+
+	outputMolGraphHeader(molgraph, bbuf);
+}
+
 void Chem::CDFDataWriter::init()
 {
-	strictErrorChecking(getStrictErrorCheckingParameter(ioBase)); 
-	singlePrecisionFloats(getCDFWriteSinglePrecisionFloatsParameter(ioBase));
-
-	dataBuffer.setIOPointer(0);
+	strictErrorChecking(getStrictErrorCheckingParameter(ctrlParams)); 
+	singlePrecisionFloats(getCDFWriteSinglePrecisionFloatsParameter(ctrlParams));
 }
 
-const Base::DataIOBase& Chem::CDFDataWriter::getIOBase() const
+const Base::ControlParameterContainer& Chem::CDFDataWriter::getCtrlParameters() const
 {
-    return ioBase;
+    return ctrlParams;
 }
 
-void Chem::CDFDataWriter::outputMolGraphHeader(const MolecularGraph& molgraph)
+void Chem::CDFDataWriter::outputMolGraphHeader(const MolecularGraph& molgraph, Internal::ByteBuffer& bbuf) const
 {
-	cdfHeader.recordTypeID = CDF::MOLECULE_RECORD_ID;
-	cdfHeader.recordFormatVersion = CDF::CURR_FORMAT_VERSION;
+	CDF::Header cdf_header;
 
-	dataBuffer.putInt(boost::numeric_cast<CDF::SizeType>(molgraph.getNumAtoms()), false);
-	dataBuffer.putInt(boost::numeric_cast<CDF::SizeType>(molgraph.getNumBonds()), false);
+	cdf_header.recordDataLength = boost::numeric_cast<CDF::SizeType>(bbuf.getSize() - CDF::HEADER_SIZE);
+	cdf_header.recordTypeID = CDF::MOLECULE_RECORD_ID;
+	cdf_header.recordFormatVersion = CDF::CURR_FORMAT_VERSION;
+
+	bbuf.setIOPointer(0);
+
+	putHeader(cdf_header, bbuf);
 }
 
-void Chem::CDFDataWriter::outputAtoms(const MolecularGraph& molgraph)
+void Chem::CDFDataWriter::outputAtoms(const MolecularGraph& molgraph, Internal::ByteBuffer& bbuf)
 {
+	bbuf.putInt(boost::numeric_cast<CDF::SizeType>(molgraph.getNumAtoms()), false);
+
 	for (MolecularGraph::ConstAtomIterator it = molgraph.getAtomsBegin(), end = molgraph.getAtomsEnd(); 
 		 it != end; ++it) {
 
 		const Atom& atom = *it;
 
 		if (hasType(atom))
-			putIntProperty(CDF::AtomProperty::TYPE, boost::numeric_cast<CDF::UIntType>(getType(atom)), dataBuffer);
+			putIntProperty(CDF::AtomProperty::TYPE, boost::numeric_cast<CDF::UIntType>(getType(atom)), bbuf);
 
 		if (hasFormalCharge(atom))
-			putIntProperty(CDF::AtomProperty::FORMAL_CHARGE, boost::numeric_cast<CDF::LongType>(getFormalCharge(atom)), dataBuffer);
+			putIntProperty(CDF::AtomProperty::FORMAL_CHARGE, boost::numeric_cast<CDF::LongType>(getFormalCharge(atom)), bbuf);
 
 		if (hasSymbol(atom))
-			putStringProperty(CDF::AtomProperty::SYMBOL, getSymbol(atom), dataBuffer);
+			putStringProperty(CDF::AtomProperty::SYMBOL, getSymbol(atom), bbuf);
 
 		if (hasName(atom))
-			putStringProperty(CDF::AtomProperty::NAME, getName(atom), dataBuffer);
+			putStringProperty(CDF::AtomProperty::NAME, getName(atom), bbuf);
 	
 		if (hasIsotope(atom))
-			putIntProperty(CDF::AtomProperty::ISOTOPE, boost::numeric_cast<CDF::SizeType>(getIsotope(atom)), dataBuffer);
+			putIntProperty(CDF::AtomProperty::ISOTOPE, boost::numeric_cast<CDF::SizeType>(getIsotope(atom)), bbuf);
 
 		if (hasRingFlag(atom))
-			putIntProperty(CDF::AtomProperty::RING_FLAG, CDF::BoolType(getRingFlag(atom)), dataBuffer);
+			putIntProperty(CDF::AtomProperty::RING_FLAG, CDF::BoolType(getRingFlag(atom)), bbuf);
 
 		if (hasAromaticityFlag(atom))
-			putIntProperty(CDF::AtomProperty::AROMATICITY_FLAG, CDF::BoolType(getAromaticityFlag(atom)), dataBuffer);
+			putIntProperty(CDF::AtomProperty::AROMATICITY_FLAG, CDF::BoolType(getAromaticityFlag(atom)), bbuf);
 
 		if (hasRadicalType(atom))
-			putIntProperty(CDF::AtomProperty::RADICAL_TYPE, boost::numeric_cast<CDF::UIntType>(getRadicalType(atom)), dataBuffer);
+			putIntProperty(CDF::AtomProperty::RADICAL_TYPE, boost::numeric_cast<CDF::UIntType>(getRadicalType(atom)), bbuf);
 
 		if (hasHybridizationState(atom))
-			putIntProperty(CDF::AtomProperty::HYBRIDIZATION, boost::numeric_cast<CDF::UIntType>(getHybridizationState(atom)), dataBuffer);
+			putIntProperty(CDF::AtomProperty::HYBRIDIZATION, boost::numeric_cast<CDF::UIntType>(getHybridizationState(atom)), bbuf);
 
 		if (hasUnpairedElectronCount(atom))
-			putIntProperty(CDF::AtomProperty::UNPAIRED_ELECTRON_COUNT, boost::numeric_cast<CDF::SizeType>(getUnpairedElectronCount(atom)), dataBuffer);
+			putIntProperty(CDF::AtomProperty::UNPAIRED_ELECTRON_COUNT, boost::numeric_cast<CDF::SizeType>(getUnpairedElectronCount(atom)), bbuf);
 	
 		if (hasImplicitHydrogenCount(atom))
-			putIntProperty(CDF::AtomProperty::IMPLICIT_HYDROGEN_COUNT, boost::numeric_cast<CDF::SizeType>(getImplicitHydrogenCount(atom)), dataBuffer);
+			putIntProperty(CDF::AtomProperty::IMPLICIT_HYDROGEN_COUNT, boost::numeric_cast<CDF::SizeType>(getImplicitHydrogenCount(atom)), bbuf);
 
 		if (has2DCoordinates(atom))
-			putVectorProperty(CDF::AtomProperty::COORDINATES_2D, get2DCoordinates(atom), dataBuffer);
+			putVectorProperty(CDF::AtomProperty::COORDINATES_2D, get2DCoordinates(atom), bbuf);
 
 		if (has3DCoordinates(atom))
-			putVectorProperty(CDF::AtomProperty::COORDINATES_3D, get3DCoordinates(atom), dataBuffer);
+			putVectorProperty(CDF::AtomProperty::COORDINATES_3D, get3DCoordinates(atom), bbuf);
 
 		if (has3DCoordinatesArray(atom))
-			putVectorArrayProperty(CDF::AtomProperty::COORDINATES_3D_ARRAY, *get3DCoordinatesArray(atom), dataBuffer);
+			putVectorArrayProperty(CDF::AtomProperty::COORDINATES_3D_ARRAY, *get3DCoordinatesArray(atom), bbuf);
 
 		if (hasCIPConfiguration(atom))
-			putIntProperty(CDF::AtomProperty::CIP_CONFIGURATION, boost::numeric_cast<CDF::UIntType>(getCIPConfiguration(atom)), dataBuffer);
+			putIntProperty(CDF::AtomProperty::CIP_CONFIGURATION, boost::numeric_cast<CDF::UIntType>(getCIPConfiguration(atom)), bbuf);
 
 		if (hasComponentGroupID(atom))
-			putIntProperty(CDF::AtomProperty::COMPONENT_GROUP_ID, boost::numeric_cast<CDF::SizeType>(getComponentGroupID(atom)), dataBuffer);
+			putIntProperty(CDF::AtomProperty::COMPONENT_GROUP_ID, boost::numeric_cast<CDF::SizeType>(getComponentGroupID(atom)), bbuf);
 
 		if (hasReactionCenterStatus(atom))
-			putIntProperty(CDF::AtomProperty::REACTION_CENTER_STATUS, boost::numeric_cast<CDF::UIntType>(getReactionCenterStatus(atom)), dataBuffer);
+			putIntProperty(CDF::AtomProperty::REACTION_CENTER_STATUS, boost::numeric_cast<CDF::UIntType>(getReactionCenterStatus(atom)), bbuf);
 
 		if (hasReactionAtomMappingID(atom))
-			putIntProperty(CDF::AtomProperty::REACTION_ATOM_MAPPING_ID, boost::numeric_cast<CDF::SizeType>(getReactionAtomMappingID(atom)), dataBuffer);
+			putIntProperty(CDF::AtomProperty::REACTION_ATOM_MAPPING_ID, boost::numeric_cast<CDF::SizeType>(getReactionAtomMappingID(atom)), bbuf);
 
 		if (hasStereoDescriptor(atom))
-			putStereoDescriptor(molgraph, CDF::AtomProperty::STEREO_DESCRIPTOR, getStereoDescriptor(atom));
+			putStereoDescriptor(molgraph, CDF::AtomProperty::STEREO_DESCRIPTOR, getStereoDescriptor(atom), bbuf);
 
 		// CDF::AtomProperty::MATCH_CONSTRAINTS // TODO
 
-		outputExtendedProperties(atom);
+		outputExtendedProperties(atom, bbuf);
 
-		putPropertyListMarker(CDF::PROP_LIST_END, dataBuffer);
+		putPropertyListMarker(CDF::PROP_LIST_END, bbuf);
 	}
 }
 
-void Chem::CDFDataWriter::outputBonds(const MolecularGraph& molgraph)
+void Chem::CDFDataWriter::outputBonds(const MolecularGraph& molgraph, Internal::ByteBuffer& bbuf)
 {
+	bbuf.putInt(boost::numeric_cast<CDF::SizeType>(molgraph.getNumBonds()), false);
+
 	for (MolecularGraph::ConstBondIterator it = molgraph.getBondsBegin(), end = molgraph.getBondsEnd(); 
 		 it != end; ++it) {
 
 		const Bond& bond = *it;
-		std::size_t old_io_ptr = dataBuffer.getIOPointer();
+		std::size_t old_io_ptr = bbuf.getIOPointer();
 
-		dataBuffer.setIOPointer(old_io_ptr + sizeof(CDF::BondAtomIndexLengthTuple));
+		bbuf.setIOPointer(old_io_ptr + sizeof(CDF::BondAtomIndexLengthTuple));
 
-		std::size_t num_idx1_bytes = dataBuffer.putInt(boost::numeric_cast<CDF::SizeType>(molgraph.getAtomIndex(bond.getBegin())), true);
-		std::size_t num_idx2_bytes = dataBuffer.putInt(boost::numeric_cast<CDF::SizeType>(molgraph.getAtomIndex(bond.getEnd())), true);
-		std::size_t new_io_ptr = dataBuffer.getIOPointer();
+		std::size_t num_idx1_bytes = bbuf.putInt(boost::numeric_cast<CDF::SizeType>(molgraph.getAtomIndex(bond.getBegin())), true);
+		std::size_t num_idx2_bytes = bbuf.putInt(boost::numeric_cast<CDF::SizeType>(molgraph.getAtomIndex(bond.getEnd())), true);
+		std::size_t new_io_ptr = bbuf.getIOPointer();
 
 		assert(num_idx1_bytes < (1 << CDF::NUM_BOND_ATOM_INDEX_LENGTH_BITS));
 		assert(num_idx2_bytes < (1 << CDF::NUM_BOND_ATOM_INDEX_LENGTH_BITS));
 
 		CDF::BondAtomIndexLengthTuple idx_lengths = ((num_idx1_bytes << CDF::NUM_BOND_ATOM_INDEX_LENGTH_BITS) + num_idx2_bytes);
 
-		dataBuffer.setIOPointer(old_io_ptr);
-		dataBuffer.putInt(idx_lengths, false);
-		dataBuffer.setIOPointer(new_io_ptr);
+		bbuf.setIOPointer(old_io_ptr);
+		bbuf.putInt(idx_lengths, false);
+		bbuf.setIOPointer(new_io_ptr);
 
 		if (hasOrder(bond))
-			putIntProperty(CDF::BondProperty::ORDER, boost::numeric_cast<CDF::SizeType>(getOrder(bond)), dataBuffer);
+			putIntProperty(CDF::BondProperty::ORDER, boost::numeric_cast<CDF::SizeType>(getOrder(bond)), bbuf);
 
 		if (hasRingFlag(bond))
-			putIntProperty(CDF::BondProperty::RING_FLAG, CDF::BoolType(getRingFlag(bond)), dataBuffer);
+			putIntProperty(CDF::BondProperty::RING_FLAG, CDF::BoolType(getRingFlag(bond)), bbuf);
 
 		if (hasAromaticityFlag(bond))
-			putIntProperty(CDF::BondProperty::AROMATICITY_FLAG, CDF::BoolType(getAromaticityFlag(bond)), dataBuffer);
+			putIntProperty(CDF::BondProperty::AROMATICITY_FLAG, CDF::BoolType(getAromaticityFlag(bond)), bbuf);
 
 		if (has2DStereoFlag(bond))
-			putIntProperty(CDF::BondProperty::STEREO_2D_FLAG, boost::numeric_cast<CDF::UIntType>(get2DStereoFlag(bond)), dataBuffer);
+			putIntProperty(CDF::BondProperty::STEREO_2D_FLAG, boost::numeric_cast<CDF::UIntType>(get2DStereoFlag(bond)), bbuf);
 
 		if (hasCIPConfiguration(bond))
-			putIntProperty(CDF::BondProperty::CIP_CONFIGURATION, boost::numeric_cast<CDF::UIntType>(getCIPConfiguration(bond)), dataBuffer);
+			putIntProperty(CDF::BondProperty::CIP_CONFIGURATION, boost::numeric_cast<CDF::UIntType>(getCIPConfiguration(bond)), bbuf);
 
 		if (hasDirection(bond))
-			putIntProperty(CDF::BondProperty::DIRECTION, boost::numeric_cast<CDF::UIntType>(getDirection(bond)), dataBuffer);
+			putIntProperty(CDF::BondProperty::DIRECTION, boost::numeric_cast<CDF::UIntType>(getDirection(bond)), bbuf);
 
 		if (hasReactionCenterStatus(bond))
-			putIntProperty(CDF::BondProperty::REACTION_CENTER_STATUS, boost::numeric_cast<CDF::UIntType>(getReactionCenterStatus(bond)), dataBuffer);
+			putIntProperty(CDF::BondProperty::REACTION_CENTER_STATUS, boost::numeric_cast<CDF::UIntType>(getReactionCenterStatus(bond)), bbuf);
 
 		if (hasStereoDescriptor(bond))
-			putStereoDescriptor(molgraph, CDF::BondProperty::STEREO_DESCRIPTOR, getStereoDescriptor(bond));
+			putStereoDescriptor(molgraph, CDF::BondProperty::STEREO_DESCRIPTOR, getStereoDescriptor(bond), bbuf);
 
 		// CDF::BondProperty::MATCH_CONSTRAINTS // TODO
 
-		outputExtendedProperties(bond);
+		outputExtendedProperties(bond, bbuf);
 
-		putPropertyListMarker(CDF::PROP_LIST_END, dataBuffer);
+		putPropertyListMarker(CDF::PROP_LIST_END, bbuf);
 	}
 }
 
-void Chem::CDFDataWriter::outputMolGraphProperties(const MolecularGraph& molgraph)
+void Chem::CDFDataWriter::outputMolGraphProperties(const MolecularGraph& molgraph, Internal::ByteBuffer& bbuf)
 {
 	if (hasName(molgraph))
-		putStringProperty(CDF::MolecularGraphProperty::NAME, getName(molgraph), dataBuffer);
+		putStringProperty(CDF::MolecularGraphProperty::NAME, getName(molgraph), bbuf);
 
 	if (hasStoichiometricNumber(molgraph))
-		putFloatProperty(CDF::MolecularGraphProperty::STOICHIOMETRIC_NUMBER, getStoichiometricNumber(molgraph), dataBuffer);
+		putFloatProperty(CDF::MolecularGraphProperty::STOICHIOMETRIC_NUMBER, getStoichiometricNumber(molgraph), bbuf);
 
 	if (hasConformationIndex(molgraph))
-		putIntProperty(CDF::MolecularGraphProperty::CONFORMATION_INDEX, boost::numeric_cast<CDF::SizeType>(getConformationIndex(molgraph)), dataBuffer);
+		putIntProperty(CDF::MolecularGraphProperty::CONFORMATION_INDEX, boost::numeric_cast<CDF::SizeType>(getConformationIndex(molgraph)), bbuf);
 
 	// CDF::MolecularGraphProperty::MATCH_CONSTRAINTS // TODO
 
-	outputExtendedProperties(molgraph);
+	outputExtendedProperties(molgraph, bbuf);
 
-	putPropertyListMarker(CDF::PROP_LIST_END, dataBuffer);
+	putPropertyListMarker(CDF::PROP_LIST_END, bbuf);
 }
 
 template <typename T>
-void Chem::CDFDataWriter::outputExtendedProperties(const T& obj)
+void Chem::CDFDataWriter::outputExtendedProperties(const T& obj, Internal::ByteBuffer& bbuf)
 {
 	extDataBuffer.setIOPointer(0);
 
@@ -243,51 +259,45 @@ void Chem::CDFDataWriter::outputExtendedProperties(const T& obj)
 
 	extDataBuffer.resize(ext_data_len);
 
-	putIntProperty(CDF::EXTENDED_PROP_LIST, boost::numeric_cast<CDF::SizeType>(ext_data_len), dataBuffer);
+	putIntProperty(CDF::EXTENDED_PROP_LIST, boost::numeric_cast<CDF::SizeType>(ext_data_len), bbuf);
 
-	dataBuffer.putBytes(extDataBuffer);
+	bbuf.putBytes(extDataBuffer);
 }
 
-void Chem::CDFDataWriter::outputExtendedProperties(const Atom& atom, Internal::ByteBuffer& data) 
+void Chem::CDFDataWriter::outputExtendedProperties(const Atom& atom, Internal::ByteBuffer& bbuf) 
 {}
 
-void Chem::CDFDataWriter::outputExtendedProperties(const Bond& bond, Internal::ByteBuffer& data) 
+void Chem::CDFDataWriter::outputExtendedProperties(const Bond& bond, Internal::ByteBuffer& bbuf) 
 {}
 
-void Chem::CDFDataWriter::outputExtendedProperties(const MolecularGraph& molgraph, Internal::ByteBuffer& data) 
+void Chem::CDFDataWriter::outputExtendedProperties(const MolecularGraph& molgraph, Internal::ByteBuffer& bbuf) 
 {}
 
-void Chem::CDFDataWriter::putStereoDescriptor(const MolecularGraph& molgraph, unsigned int prop_id, const StereoDescriptor& descr)
+void Chem::CDFDataWriter::putStereoDescriptor(const MolecularGraph& molgraph, unsigned int prop_id, 
+											  const StereoDescriptor& descr, Internal::ByteBuffer& bbuf) const
 {
-	putIntProperty(prop_id, boost::numeric_cast<CDF::UIntType>(descr.getConfiguration()), dataBuffer);
+	putIntProperty(prop_id, boost::numeric_cast<CDF::UIntType>(descr.getConfiguration()), bbuf);
 
 	std::size_t num_ref_atoms = descr.getNumReferenceAtoms();
 
-	dataBuffer.putInt(boost::numeric_cast<Base::uint8>(num_ref_atoms), false);
+	bbuf.putInt(boost::numeric_cast<Base::uint8>(num_ref_atoms), false);
 
 	for (std::size_t i = 0; i < num_ref_atoms; i++) {
-		std::size_t old_io_pos = dataBuffer.getIOPointer();
+		std::size_t old_io_pos = bbuf.getIOPointer();
 
-		dataBuffer.setIOPointer(old_io_pos + 1);
+		bbuf.setIOPointer(old_io_pos + 1);
 
-		std::size_t num_bytes = dataBuffer.putInt(boost::numeric_cast<CDF::SizeType>(molgraph.getAtomIndex(*descr.getReferenceAtoms()[i])), true);
-		std::size_t new_io_pos = dataBuffer.getIOPointer();
+		std::size_t num_bytes = bbuf.putInt(boost::numeric_cast<CDF::SizeType>(molgraph.getAtomIndex(*descr.getReferenceAtoms()[i])), true);
+		std::size_t new_io_pos = bbuf.getIOPointer();
 
-		dataBuffer.setIOPointer(old_io_pos);
-		dataBuffer.putInt(boost::numeric_cast<Base::uint8>(num_bytes), false);
-		dataBuffer.setIOPointer(new_io_pos);
+		bbuf.setIOPointer(old_io_pos);
+		bbuf.putInt(boost::numeric_cast<Base::uint8>(num_bytes), false);
+		bbuf.setIOPointer(new_io_pos);
 	}
 }
 
 bool Chem::CDFDataWriter::writeRecordData(std::ostream& os)
 {
-	dataBuffer.resize(dataBuffer.getIOPointer());
-
-	cdfHeader.recordDataLength = boost::numeric_cast<CDF::SizeType>(dataBuffer.getSize());
-
-	if (!writeHeader(os, cdfHeader))
-		return false;
-
 	dataBuffer.writeBuffer(os);
 
 	return os.good();

@@ -29,8 +29,6 @@
 
 #include <iosfwd>
 
-#include "CDPL/Pharm/CDFFormatData.hpp"
-
 #include "CDPL/Internal/CDFDataWriterBase.hpp"
 #include "CDPL/Internal/ByteBuffer.hpp"
 
@@ -41,7 +39,7 @@ namespace CDPL
 	namespace Base
 	{
 
-		class DataIOBase;
+		class ControlParameterContainer;
 	}
 
 	namespace Pharm
@@ -54,24 +52,25 @@ namespace CDPL
 		{
 
 		public:
-			CDFDataWriter(const Base::DataIOBase& io_base): ioBase(io_base) {}
+			CDFDataWriter(const Base::ControlParameterContainer& ctrl_params): ctrlParams(ctrl_params) {}
 
 			virtual ~CDFDataWriter() {}
 
 			bool writePharmacophore(std::ostream& os, const Pharmacophore& pharm);
 
+			void writePharmacophore( const Pharmacophore& pharm, Internal::ByteBuffer& bbuf);
+
 		private:
 			void init();
 
-			void outputPharmHeader(const Pharmacophore& pharm);
-			void outputFeatures(const Pharmacophore& pharm);
-			void outputPharmProperties(const Pharmacophore& pharm);
+			void outputPharmHeader(const Pharmacophore& pharm, Internal::ByteBuffer& bbuf) const;
+			void outputFeatures(const Pharmacophore& pharm, Internal::ByteBuffer& bbuf) const;
+			void outputPharmProperties(const Pharmacophore& pharm, Internal::ByteBuffer& bbuf) const;
 
-			bool writeRecordData(std::ostream& os);
+			bool writeRecordData(std::ostream& os) const;
 
-			const Base::DataIOBase& ioBase;	
-			Internal::ByteBuffer    dataBuffer;
-			CDF::Header             cdfHeader;
+			const Base::ControlParameterContainer& ctrlParams;	
+			Internal::ByteBuffer                   dataBuffer;
 		};
 	}
 }

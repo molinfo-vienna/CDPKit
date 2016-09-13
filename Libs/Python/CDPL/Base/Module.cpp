@@ -38,6 +38,7 @@ BOOST_PYTHON_MODULE(_base)
 	exportLookupKey();
 	exportPropertyContainer();
 	exportControlParameterContainer();
+	exportControlParameterList();
 	exportDataFormat();
 	exportDataIOBase();
 	exportIOStreams();

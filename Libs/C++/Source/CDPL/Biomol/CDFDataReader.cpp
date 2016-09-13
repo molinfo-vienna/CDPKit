@@ -164,5 +164,5 @@ void Biomol::CDFDataReader::init()
 {
     Chem::CDFDataReader::init();
 
-    strictErrorChecking(getStrictErrorCheckingParameter(getIOBase())); 
+    strictErrorChecking(getStrictErrorCheckingParameter(getCtrlParameters())); 
 }

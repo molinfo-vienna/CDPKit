@@ -39,8 +39,8 @@ BOOST_AUTO_TEST_CASE(AtomDictionaryTest) // TODO
 	BOOST_CHECK(AtomDictionary::getSymbol(AtomType::H, 1) == "H");
 	BOOST_CHECK(AtomDictionary::getSymbol(AtomType::H, 2) == "D");
 	BOOST_CHECK(AtomDictionary::getSymbol(AtomType::H, 3) == "T");
-	BOOST_CHECK(AtomDictionary::getSymbol(AtomType::H, 4) == "H");
-	BOOST_CHECK(AtomDictionary::getSymbol(AtomType::Cl, 4) == "Cl");
+	BOOST_CHECK(AtomDictionary::getSymbol(AtomType::H, 4) == "");
+	BOOST_CHECK(AtomDictionary::getSymbol(AtomType::Cl, 4) == "");
 	BOOST_CHECK(AtomDictionary::getSymbol(AtomType::MAX_TYPE + 1, 0) == "");
 	BOOST_CHECK(AtomDictionary::getSymbol(AtomType::MAX_TYPE + 1, 300) == "");
 	BOOST_CHECK(AtomDictionary::getSymbol(AtomType::UNKNOWN, 0) == "");
@@ -53,9 +53,9 @@ BOOST_AUTO_TEST_CASE(AtomDictionaryTest) // TODO
 	BOOST_CHECK(AtomDictionary::getName(AtomType::H, 1) == "Hydrogen");
 	BOOST_CHECK(AtomDictionary::getName(AtomType::H, 2) == "Deuterium");
 	BOOST_CHECK(AtomDictionary::getName(AtomType::H, 3) == "Tritium");
-	BOOST_CHECK(AtomDictionary::getName(AtomType::H, 4) == "Hydrogen");
-	BOOST_CHECK(AtomDictionary::getName(AtomType::Cl, 4) == "Chlorine");
-	BOOST_CHECK(AtomDictionary::getName(AtomType::Fe, 4) == "Iron");
+	BOOST_CHECK(AtomDictionary::getName(AtomType::H, 4) == "");
+	BOOST_CHECK(AtomDictionary::getName(AtomType::Cl, 4) == "");
+	BOOST_CHECK(AtomDictionary::getName(AtomType::Fe, 4) == "");
 	BOOST_CHECK(AtomDictionary::getName(AtomType::MAX_TYPE + 1, 0) == "");
 	BOOST_CHECK(AtomDictionary::getName(AtomType::MAX_TYPE + 1, 1) == "");
 	BOOST_CHECK(AtomDictionary::getName(AtomType::UNKNOWN, 1) == "");

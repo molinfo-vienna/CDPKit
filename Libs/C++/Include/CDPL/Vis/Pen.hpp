@@ -59,7 +59,7 @@ namespace CDPL
 		class CDPL_VIS_API Pen
 		{
 
-		public:
+		  public:
 			/**
 			 *\brief Defines constants for supported line styles.
 			 */
@@ -248,7 +248,7 @@ namespace CDPL
 			 */			
 			bool operator!=(const Pen& pen) const;
 
-		private:
+		  private:
 			Color     color;
 			LineStyle lineStyle;
 			CapStyle  capStyle;

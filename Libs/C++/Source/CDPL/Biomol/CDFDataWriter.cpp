@@ -98,6 +98,6 @@ void Biomol::CDFDataWriter::init()
 {
     Chem::CDFDataWriter::init();
 
-    strictErrorChecking(getStrictErrorCheckingParameter(getIOBase())); 
-    singlePrecisionFloats(getCDFWriteSinglePrecisionFloatsParameter(getIOBase()));
+    strictErrorChecking(getStrictErrorCheckingParameter(getCtrlParameters())); 
+    singlePrecisionFloats(getCDFWriteSinglePrecisionFloatsParameter(getCtrlParameters()));
 }

@@ -59,6 +59,11 @@
  */
 #define HAVE_QT
 
+/**	
+ * \brief Defined if the \e SQLite3 library is available.
+ */
+#define HAVE_SQLITE3
+
 /**
  * \brief The size of <tt>long int</tt>.
  */

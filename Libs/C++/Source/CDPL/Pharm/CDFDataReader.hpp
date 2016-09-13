@@ -27,10 +27,7 @@
 #ifndef CDPL_PHARM_CDFDATAREADER_HPP
 #define CDPL_PHARM_CDFDATAREADER_HPP
 
-#include <cstddef>
 #include <iosfwd>
-
-#include "CDPL/Pharm/CDFFormatData.hpp"
 
 #include "CDPL/Internal/CDFDataReaderBase.hpp"
 #include "CDPL/Internal/ByteBuffer.hpp"
@@ -42,7 +39,7 @@ namespace CDPL
 	namespace Base
 	{
 
-		class DataIOBase;
+		class ControlParameterContainer;
 	}
 
 	namespace Pharm
@@ -55,24 +52,26 @@ namespace CDPL
 		{
 
 		public:
-			CDFDataReader(const Base::DataIOBase& io_base): ioBase(io_base) {}
+			CDFDataReader(const Base::ControlParameterContainer& ctrl_params): ctrlParams(ctrl_params) {}
 
 			virtual ~CDFDataReader() {}
 
 			bool readPharmacophore(std::istream& is, Pharmacophore& pharm);
+
+			bool readPharmacophore(Pharmacophore& pharm, Internal::ByteBuffer& bbuf);
 
 			bool skipPharmacophore(std::istream& is);
 
 			bool hasMoreData(std::istream& is);
 
 		private:
-			void init();
+			void init(); 
 
-			void readFeatures(Pharmacophore& pharm, std::size_t num_ftrs);
-			void readPharmProperties(Pharmacophore& pharm);
+			void readFeatures(Pharmacophore& pharm, Internal::ByteBuffer& bbuf) const;
+			void readPharmProperties(Pharmacophore& pharm, Internal::ByteBuffer& bbuf) const;
 
-			const Base::DataIOBase& ioBase;	
-			Internal::ByteBuffer    dataBuffer;
+			const Base::ControlParameterContainer& ctrlParams;	
+			Internal::ByteBuffer                   dataBuffer;
 		};
 	}
 }

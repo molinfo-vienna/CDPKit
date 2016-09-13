@@ -55,6 +55,12 @@ BOOST_PYTHON_MODULE(_pharm)
 	exportCDFPharmacophoreReader();
 	exportCDFPharmacophoreWriter();
 
+#ifdef HAVE_SQLITE3
+
+	exportSQLiteScreeningDBCreator();
+
+#endif // HAVE_SQLITE3
+
 	exportPharmacophoreGenerator();
 	exportDefaultPharmacophoreGenerator();
 	exportPatternBasedFeatureGenerator();

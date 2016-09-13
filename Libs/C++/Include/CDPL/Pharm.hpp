@@ -31,6 +31,8 @@
 #ifndef CDPL_PHARM_HPP
 #define CDPL_PHARM_HPP
 
+#include "CDPL/Config.hpp"      
+
 #include "CDPL/Pharm/Pharmacophore.hpp"      
 #include "CDPL/Pharm/Feature.hpp"  
 #include "CDPL/Pharm/BasicPharmacophore.hpp"  
@@ -82,6 +84,12 @@
 
 #include "CDPL/Pharm/CDFPharmacophoreReader.hpp"
 #include "CDPL/Pharm/CDFPharmacophoreWriter.hpp"
+
+#ifdef HAVE_SQLITE3
+
+#include "CDPL/Pharm/SQLiteScreeningDBCreator.hpp"
+
+#endif // HAVE_SQLITE3
 
 #include "CDPL/Pharm/PharmacophoreFunctions.hpp"  
 #include "CDPL/Pharm/FeatureFunctions.hpp"

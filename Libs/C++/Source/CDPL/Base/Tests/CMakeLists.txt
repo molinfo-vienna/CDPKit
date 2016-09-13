@@ -6,6 +6,7 @@ SET(test-suite_SRCS
     VariantTest.cpp
     LookupKeyTest.cpp
     ControlParameterContainerTest.cpp
+    ControlParameterListTest.cpp
     LookupKeyDefinitionTest.cpp
     PropertyContainerTest.cpp
     DataIOBaseTest.cpp

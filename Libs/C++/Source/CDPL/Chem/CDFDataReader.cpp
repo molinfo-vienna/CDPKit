@@ -35,7 +35,6 @@
 #include "CDPL/Chem/BondFunctions.hpp"
 #include "CDPL/Chem/MolecularGraphFunctions.hpp"
 #include "CDPL/Chem/StereoDescriptor.hpp"
-#include "CDPL/Base/DataIOBase.hpp"
 #include "CDPL/Base/Exceptions.hpp"
 #include "CDPL/Math/Vector.hpp"
 #include "CDPL/Math/VectorArray.hpp"
@@ -52,7 +51,7 @@ bool Chem::CDFDataReader::hasMoreData(std::istream& is)
 
 	CDF::Header header;
 
-	return CDFDataReaderBase::skipToRecord(is, header, CDF::MOLECULE_RECORD_ID, true);
+	return CDFDataReaderBase::skipToRecord(is, header, CDF::MOLECULE_RECORD_ID, true, dataBuffer);
 }
 
 bool Chem::CDFDataReader::readMolecule(std::istream& is, Molecule& mol)
@@ -61,7 +60,7 @@ bool Chem::CDFDataReader::readMolecule(std::istream& is, Molecule& mol)
 
 	CDF::Header header;
 
-	if (!skipToRecord(is, header, CDF::MOLECULE_RECORD_ID, false))
+	if (!skipToRecord(is, header, CDF::MOLECULE_RECORD_ID, false, dataBuffer))
 		return false;
 
 	readData(is, header.recordDataLength, dataBuffer);
@@ -70,16 +69,12 @@ bool Chem::CDFDataReader::readMolecule(std::istream& is, Molecule& mol)
 	atomStereoDescrs.clear();
 	bondStereoDescrs.clear();
 
-	CDF::SizeType num_atoms, num_bonds;
-
-	dataBuffer.getInt(num_atoms);
-	dataBuffer.getInt(num_bonds);
-
 	startAtomIdx = mol.getNumAtoms();
 
-	readAtoms(mol, num_atoms);
-	readBonds(mol, num_atoms, num_bonds);
-	readMoleculeProperties(mol);
+	std::size_t num_atoms = readAtoms(mol, dataBuffer);
+
+	readBonds(mol, dataBuffer, num_atoms);
+	readMoleculeProperties(mol, dataBuffer);
 	setStereoDescriptors(mol);
 
 	return true;
@@ -89,20 +84,52 @@ bool Chem::CDFDataReader::skipMolecule(std::istream& is)
 {
 	init();
 
-	return skipNextRecord(is, CDF::MOLECULE_RECORD_ID);
+	return skipNextRecord(is, CDF::MOLECULE_RECORD_ID, dataBuffer);
+}
+
+bool Chem::CDFDataReader::readMolecule(Molecule& mol, Internal::ByteBuffer& bbuf)
+{
+	init();
+
+	bbuf.setIOPointer(0);
+
+	CDF::Header header;
+
+	if (!getHeader(header, bbuf))
+		return false;
+
+	if (header.recordTypeID != CDF::MOLECULE_RECORD_ID) {
+		if (strictErrorChecking())
+			throw Base::IOError("CDFDataReader: trying to read a non-molecule record");
+
+		return false;
+	}
+
+	atomStereoDescrs.clear();
+	bondStereoDescrs.clear();
+
+	startAtomIdx = mol.getNumAtoms();
+
+	std::size_t num_atoms = readAtoms(mol, bbuf);
+
+	readBonds(mol, bbuf, num_atoms);
+	readMoleculeProperties(mol, bbuf);
+	setStereoDescriptors(mol);
+
+	return true;
 }
 
 void Chem::CDFDataReader::init()
 {
-	strictErrorChecking(getStrictErrorCheckingParameter(ioBase)); 
+	strictErrorChecking(getStrictErrorCheckingParameter(ctrlParams)); 
 }
 
-const Base::DataIOBase& Chem::CDFDataReader::getIOBase() const
+const Base::ControlParameterContainer& Chem::CDFDataReader::getCtrlParameters() const
 {
-    return ioBase;
+    return ctrlParams;
 }
 
-void Chem::CDFDataReader::readAtoms(Molecule& mol, std::size_t num_atoms)
+std::size_t Chem::CDFDataReader::readAtoms(Molecule& mol, Internal::ByteBuffer& bbuf)
 {
 	CDF::PropertySpec prop_spec;
 	CDF::UIntType uint_val;
@@ -112,12 +139,15 @@ void Chem::CDFDataReader::readAtoms(Molecule& mol, std::size_t num_atoms)
 	std::string str_val;
 	Math::Vector2D coords_2d_val;
 	Math::Vector3D coords_3d_val;
+	CDF::SizeType num_atoms;
+
+	dataBuffer.getInt(num_atoms);
 
 	for (std::size_t i = 0; i < num_atoms; i++) {
 		Atom& atom = mol.addAtom();
 
 		while (true) {
-			unsigned int prop_id = getPropertySpec(prop_spec, dataBuffer);
+			unsigned int prop_id = getPropertySpec(prop_spec, bbuf);
 
 			if (prop_id == CDF::PROP_LIST_END)
 				break;
@@ -125,106 +155,106 @@ void Chem::CDFDataReader::readAtoms(Molecule& mol, std::size_t num_atoms)
 			switch (prop_id) {
 
 				case CDF::EXTENDED_PROP_LIST:
-					handleExtendedProperties(prop_spec, atom);
+					handleExtendedProperties(prop_spec, atom, bbuf);
 					continue;
 
 				case CDF::AtomProperty::TYPE:
-					getIntProperty(prop_spec, uint_val, dataBuffer);
+					getIntProperty(prop_spec, uint_val, bbuf);
 					setType(atom, uint_val);
 					continue;
 					
 				case CDF::AtomProperty::FORMAL_CHARGE:
-					getIntProperty(prop_spec, long_val, dataBuffer);
+					getIntProperty(prop_spec, long_val, bbuf);
 					setFormalCharge(atom, long_val);
 					continue;
 
 				case CDF::AtomProperty::SYMBOL:
-					getStringProperty(prop_spec, str_val, dataBuffer);
+					getStringProperty(prop_spec, str_val, bbuf);
 					setSymbol(atom, str_val);
 					continue;
 
 				case CDF::AtomProperty::NAME:
-					getStringProperty(prop_spec, str_val, dataBuffer);
+					getStringProperty(prop_spec, str_val, bbuf);
 					setName(atom, str_val);
 					continue;
 
 				case CDF::AtomProperty::ISOTOPE:
-					getIntProperty(prop_spec, size_val, dataBuffer);
+					getIntProperty(prop_spec, size_val, bbuf);
 					setIsotope(atom, size_val);
 					continue;
 
 				case CDF::AtomProperty::RING_FLAG:
-					getIntProperty(prop_spec, bool_val, dataBuffer);
+					getIntProperty(prop_spec, bool_val, bbuf);
 					setRingFlag(atom, bool_val);
 					continue;
 
 				case CDF::AtomProperty::AROMATICITY_FLAG:
-					getIntProperty(prop_spec, bool_val, dataBuffer);
+					getIntProperty(prop_spec, bool_val, bbuf);
 					setAromaticityFlag(atom, bool_val);
 					continue;
 
 				case CDF::AtomProperty::RADICAL_TYPE:
-					getIntProperty(prop_spec, uint_val, dataBuffer);
+					getIntProperty(prop_spec, uint_val, bbuf);
 					setRadicalType(atom, uint_val);
 					continue;
 
 				case CDF::AtomProperty::HYBRIDIZATION:
-					getIntProperty(prop_spec, uint_val, dataBuffer);
+					getIntProperty(prop_spec, uint_val, bbuf);
 					setHybridizationState(atom, uint_val);
 					continue;
 
 				case CDF::AtomProperty::UNPAIRED_ELECTRON_COUNT:
-					getIntProperty(prop_spec, size_val, dataBuffer);
+					getIntProperty(prop_spec, size_val, bbuf);
 					setUnpairedElectronCount(atom, size_val);
 					continue;
 
 				case CDF::AtomProperty::IMPLICIT_HYDROGEN_COUNT:
-					getIntProperty(prop_spec, size_val, dataBuffer);
+					getIntProperty(prop_spec, size_val, bbuf);
 					setImplicitHydrogenCount(atom, size_val);
 					continue;
 
 				case CDF::AtomProperty::COORDINATES_2D:
-					getVectorProperty(prop_spec, coords_2d_val, dataBuffer);
+					getVectorProperty(prop_spec, coords_2d_val, bbuf);
 					set2DCoordinates(atom, coords_2d_val);
 					continue;
 
 				case CDF::AtomProperty::COORDINATES_3D:
-					getVectorProperty(prop_spec, coords_3d_val, dataBuffer);
+					getVectorProperty(prop_spec, coords_3d_val, bbuf);
 					set3DCoordinates(atom, coords_3d_val);
 					continue;
 
 				case CDF::AtomProperty::COORDINATES_3D_ARRAY: {
 					Math::Vector3DArray::SharedPointer va_ptr(new Math::Vector3DArray());
 
-					getVectorArrayProperty(prop_spec, *va_ptr, dataBuffer);
+					getVectorArrayProperty(prop_spec, *va_ptr, bbuf);
 					set3DCoordinatesArray(atom, va_ptr);
 					continue;
 				}
 
 				case CDF::AtomProperty::CIP_CONFIGURATION:
-					getIntProperty(prop_spec, uint_val, dataBuffer);
+					getIntProperty(prop_spec, uint_val, bbuf);
 					setCIPConfiguration(atom, uint_val);
 					continue;
 
 				case CDF::AtomProperty::COMPONENT_GROUP_ID:
-					getIntProperty(prop_spec, size_val, dataBuffer);
+					getIntProperty(prop_spec, size_val, bbuf);
 					setComponentGroupID(atom, size_val);
 					continue;
 
 				case CDF::AtomProperty::REACTION_CENTER_STATUS:
-					getIntProperty(prop_spec, uint_val, dataBuffer);
+					getIntProperty(prop_spec, uint_val, bbuf);
 					setReactionCenterStatus(atom, uint_val);
 					continue;
 
 				case CDF::AtomProperty::REACTION_ATOM_MAPPING_ID:
-					getIntProperty(prop_spec, size_val, dataBuffer);
+					getIntProperty(prop_spec, size_val, bbuf);
 					setReactionAtomMappingID(atom, size_val);
 					continue;
 
 				case CDF::AtomProperty::STEREO_DESCRIPTOR: {
 					CDFStereoDescr descr(i);
 
-					readStereoDescriptor(prop_spec, descr);
+					readStereoDescriptor(prop_spec, descr, bbuf);
 					atomStereoDescrs.push_back(descr);
 					continue;
 				}
@@ -236,9 +266,11 @@ void Chem::CDFDataReader::readAtoms(Molecule& mol, std::size_t num_atoms)
 			}
 		}
 	}
+
+	return num_atoms;
 }
 
-void Chem::CDFDataReader::readBonds(Molecule& mol, std::size_t num_atoms, std::size_t num_bonds)
+void Chem::CDFDataReader::readBonds(Molecule& mol, Internal::ByteBuffer& bbuf, std::size_t num_atoms)
 {
 	CDF::PropertySpec prop_spec;
 	CDF::SizeType size_val;
@@ -246,9 +278,12 @@ void Chem::CDFDataReader::readBonds(Molecule& mol, std::size_t num_atoms, std::s
 	CDF::BoolType bool_val;
 	CDF::SizeType atom1_idx, atom2_idx;
 	CDF::BondAtomIndexLengthTuple idx_lengths;
+	CDF::SizeType num_bonds;
+
+	dataBuffer.getInt(num_bonds);
 
 	for (std::size_t i = 0; i < num_bonds; i++) {
-		dataBuffer.getInt(idx_lengths);
+		bbuf.getInt(idx_lengths);
 
 		std::size_t idx1_length = (idx_lengths >> CDF::NUM_BOND_ATOM_INDEX_LENGTH_BITS);
 		std::size_t idx2_length = (idx_lengths & CDF::BOND_ATOM_INDEX_LENGTH_MASK);
@@ -256,8 +291,8 @@ void Chem::CDFDataReader::readBonds(Molecule& mol, std::size_t num_atoms, std::s
 		if (idx1_length > sizeof(CDF::SizeType) || idx2_length > sizeof(CDF::SizeType))
 			throw Base::IOError("CDFDataReader: invalid bond atom index byte size specification");
 
-		dataBuffer.getInt(atom1_idx, idx1_length);
-		dataBuffer.getInt(atom2_idx, idx2_length);
+		bbuf.getInt(atom1_idx, idx1_length);
+		bbuf.getInt(atom2_idx, idx2_length);
 
 		if (atom1_idx >= num_atoms)
 			throw Base::IOError("CDFDataReader: bond start atom index range error");
@@ -268,7 +303,7 @@ void Chem::CDFDataReader::readBonds(Molecule& mol, std::size_t num_atoms, std::s
 		Bond& bond = mol.addBond(atom1_idx + startAtomIdx, atom2_idx + startAtomIdx);
 
 		while (true) {
-			unsigned int prop_id = getPropertySpec(prop_spec, dataBuffer);
+			unsigned int prop_id = getPropertySpec(prop_spec, bbuf);
 
 			if (prop_id == CDF::PROP_LIST_END)
 				break;
@@ -276,48 +311,48 @@ void Chem::CDFDataReader::readBonds(Molecule& mol, std::size_t num_atoms, std::s
 			switch (prop_id) {
 
 				case CDF::EXTENDED_PROP_LIST:
-					handleExtendedProperties(prop_spec, bond);
+					handleExtendedProperties(prop_spec, bond, bbuf);
 					continue;
 
 				case CDF::BondProperty::ORDER:
-					getIntProperty(prop_spec, size_val, dataBuffer);
+					getIntProperty(prop_spec, size_val, bbuf);
 					setOrder(bond, size_val);
 					continue;
 
 				case CDF::BondProperty::RING_FLAG:
-					getIntProperty(prop_spec, bool_val, dataBuffer);
+					getIntProperty(prop_spec, bool_val, bbuf);
 					setRingFlag(bond, bool_val);
 					continue;
 
 				case CDF::BondProperty::AROMATICITY_FLAG:
-					getIntProperty(prop_spec, bool_val, dataBuffer);
+					getIntProperty(prop_spec, bool_val, bbuf);
 					setAromaticityFlag(bond, bool_val);
 					continue;
 
 				case CDF::BondProperty::STEREO_2D_FLAG:
-					getIntProperty(prop_spec, uint_val, dataBuffer);
+					getIntProperty(prop_spec, uint_val, bbuf);
 					set2DStereoFlag(bond, uint_val);
 					continue;
 
 				case CDF::AtomProperty::CIP_CONFIGURATION:
-					getIntProperty(prop_spec, uint_val, dataBuffer);
+					getIntProperty(prop_spec, uint_val, bbuf);
 					setCIPConfiguration(bond, uint_val);
 					continue;
 
 				case CDF::BondProperty::DIRECTION:
-					getIntProperty(prop_spec, uint_val, dataBuffer);
+					getIntProperty(prop_spec, uint_val, bbuf);
 					setDirection(bond, uint_val);
 					continue;
 
 				case CDF::BondProperty::REACTION_CENTER_STATUS:
-					getIntProperty(prop_spec, uint_val, dataBuffer);
+					getIntProperty(prop_spec, uint_val, bbuf);
 					setReactionCenterStatus(bond, uint_val);
 					continue;
 
 				case CDF::BondProperty::STEREO_DESCRIPTOR: {
 					CDFStereoDescr descr(i);
 
-					readStereoDescriptor(prop_spec, descr);
+					readStereoDescriptor(prop_spec, descr, bbuf);
 					bondStereoDescrs.push_back(descr);
 					continue;
 				}
@@ -331,7 +366,7 @@ void Chem::CDFDataReader::readBonds(Molecule& mol, std::size_t num_atoms, std::s
 	}
 }
 
-void Chem::CDFDataReader::readMoleculeProperties(Molecule& mol)
+void Chem::CDFDataReader::readMoleculeProperties(Molecule& mol, Internal::ByteBuffer& bbuf)
 {
 	CDF::PropertySpec prop_spec;
 	CDF::SizeType size_val;
@@ -339,7 +374,7 @@ void Chem::CDFDataReader::readMoleculeProperties(Molecule& mol)
 	double double_val;
 
 	while (true) {
-		unsigned int prop_id = getPropertySpec(prop_spec, dataBuffer);
+		unsigned int prop_id = getPropertySpec(prop_spec, bbuf);
 
 		if (prop_id == CDF::PROP_LIST_END)
 			break;
@@ -347,21 +382,21 @@ void Chem::CDFDataReader::readMoleculeProperties(Molecule& mol)
 		switch (prop_id) {
 
 			case CDF::EXTENDED_PROP_LIST:
-				handleExtendedProperties(prop_spec, mol);
+				handleExtendedProperties(prop_spec, mol, bbuf);
 				continue;
 
 			case CDF::MolecularGraphProperty::NAME:
-				getStringProperty(prop_spec, str_val, dataBuffer);
+				getStringProperty(prop_spec, str_val, bbuf);
 				setName(mol, str_val);
 				continue;
 
 			case CDF::MolecularGraphProperty::STOICHIOMETRIC_NUMBER:
-				getFloatProperty(prop_spec, double_val, dataBuffer);
+				getFloatProperty(prop_spec, double_val, bbuf);
 				setStoichiometricNumber(mol, double_val);
 				continue;
 
 			case CDF::MolecularGraphProperty::CONFORMATION_INDEX:
-				getIntProperty(prop_spec, size_val, dataBuffer);
+				getIntProperty(prop_spec, size_val, bbuf);
 				setConformationIndex(mol, size_val);
 				continue;
 
@@ -374,27 +409,27 @@ void Chem::CDFDataReader::readMoleculeProperties(Molecule& mol)
 }
 
 template <typename T>
-void Chem::CDFDataReader::handleExtendedProperties(CDF::PropertySpec prop_spec, T& obj)
+void Chem::CDFDataReader::handleExtendedProperties(CDF::PropertySpec prop_spec, T& obj, Internal::ByteBuffer& bbuf)
 {
 	CDF::SizeType size_val;
 
-	getIntProperty(prop_spec, size_val, dataBuffer);
+	getIntProperty(prop_spec, size_val, bbuf);
 
-	if (!handleExtendedProperties(obj, dataBuffer))
-		dataBuffer.setIOPointer(dataBuffer.getIOPointer() + size_val);
+	if (!handleExtendedProperties(obj, bbuf))
+		bbuf.setIOPointer(bbuf.getIOPointer() + size_val);
 }
 
-bool Chem::CDFDataReader::handleExtendedProperties(Atom& atom, Internal::ByteBuffer& data)
+bool Chem::CDFDataReader::handleExtendedProperties(Atom& atom, Internal::ByteBuffer& bbuf)
 {
 	return false;
 }
 
-bool Chem::CDFDataReader::handleExtendedProperties(Bond& bond, Internal::ByteBuffer& data)
+bool Chem::CDFDataReader::handleExtendedProperties(Bond& bond, Internal::ByteBuffer& bbuf)
 {
 	return false;
 }
 
-bool Chem::CDFDataReader::handleExtendedProperties(Molecule& mol, Internal::ByteBuffer& data)
+bool Chem::CDFDataReader::handleExtendedProperties(Molecule& mol, Internal::ByteBuffer& bbuf)
 {
 	return false;
 }
@@ -437,16 +472,16 @@ void Chem::CDFDataReader::setStereoDescriptor(T& obj, const Molecule& mol, const
 	}
 }
 
-void Chem::CDFDataReader::readStereoDescriptor(CDF::PropertySpec prop_spec, CDFStereoDescr& descr)
+void Chem::CDFDataReader::readStereoDescriptor(CDF::PropertySpec prop_spec, CDFStereoDescr& descr, Internal::ByteBuffer& bbuf) const
 {
-	getIntProperty(prop_spec, descr.config, dataBuffer);
-	dataBuffer.getInt(descr.numRefAtoms, 1);
+	getIntProperty(prop_spec, descr.config, bbuf);
+	bbuf.getInt(descr.numRefAtoms, 1);
 
 	if (descr.numRefAtoms > 4)
 		throw Base::IOError("CDFDataReader: more than four stereo reference atoms");
 
 	for (std::size_t i = 0, len; i < descr.numRefAtoms; i++) {
-		dataBuffer.getInt(len, 1);
-		dataBuffer.getInt(descr.refAtomInds[i], len);
+		bbuf.getInt(len, 1);
+		bbuf.getInt(descr.refAtomInds[i], len);
 	}
 }

@@ -946,7 +946,7 @@ void Settings::save() const
 
 	settings.beginGroup("Input/CDF");
 
-	const SettingsContainer& cdf_rparams = getReaderControlParameters("cdf");
+	//const SettingsContainer& cdf_rparams = getReaderControlParameters("cdf");
 
 	settings.endGroup();
 

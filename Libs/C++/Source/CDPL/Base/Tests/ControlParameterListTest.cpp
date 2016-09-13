@@ -30,7 +30,7 @@
 #include <boost/bind.hpp>
 
 #include "CDPL/Base/ControlParameterList.hpp"
-#include "CDPL/Base/ValueKey.hpp"
+#include "CDPL/Base/LookupKey.hpp"
 #include "CDPL/Base/Variant.hpp"
 #include "CDPL/Base/Exceptions.hpp"
 
@@ -46,9 +46,9 @@ BOOST_AUTO_TEST_CASE(ControlParameterListTest)
 	
 	ControlParameterList::SharedPointer cpl2_ptr(new ControlParameterList());
 
-	ValueKey key1 = ValueKey::create("key1");
-	ValueKey key2 = ValueKey::create("key2");
-	ValueKey key3 = ValueKey::create("key3");
+	LookupKey key1 = LookupKey::create("key1");
+	LookupKey key2 = LookupKey::create("key2");
+	LookupKey key3 = LookupKey::create("key3");
 
 	TestChangeListener cl1;
 	TestChangeListener cl2;
@@ -76,7 +76,7 @@ BOOST_AUTO_TEST_CASE(ControlParameterListTest)
 
 //-----
 
-	BOOST_CHECK(cpl1.getSize() == 0);
+	BOOST_CHECK(cpl1.getNumParameters() == 0);
 
 	BOOST_CHECK(cpl1.getParametersBegin() == cpl1.getParametersEnd());
 
@@ -100,7 +100,7 @@ BOOST_AUTO_TEST_CASE(ControlParameterListTest)
 
 	cpl1.setParameter(key1, std::string("param1"));
 
-	BOOST_CHECK(cpl1.getSize() == 1);
+	BOOST_CHECK(cpl1.getNumParameters() == 1);
 
 	BOOST_CHECK(cpl1.getParametersBegin() != cpl1.getParametersEnd());
 	BOOST_CHECK(cpl1.getParametersBegin()->first == key1);
@@ -149,7 +149,7 @@ BOOST_AUTO_TEST_CASE(ControlParameterListTest)
 
 	cpl1.setParameter(key2, std::string("param2"));
 
-	BOOST_CHECK(cpl1.getSize() == 2);
+	BOOST_CHECK(cpl1.getNumParameters() == 2);
 
 	BOOST_CHECK(cpl1.getParametersBegin() != cpl1.getParametersEnd());
 
@@ -196,7 +196,7 @@ BOOST_AUTO_TEST_CASE(ControlParameterListTest)
 
 	cpl1.setParameter(key1, std::string("param11"));
 
-	BOOST_CHECK(cpl1.getSize() == 2);
+	BOOST_CHECK(cpl1.getNumParameters() == 2);
 
 	BOOST_CHECK(cpl1.getParametersBegin() != cpl1.getParametersEnd());
 
@@ -243,7 +243,7 @@ BOOST_AUTO_TEST_CASE(ControlParameterListTest)
 
 	BOOST_CHECK(cpl1.removeParameter(key1));
 
-	BOOST_CHECK(cpl1.getSize() == 1);
+	BOOST_CHECK(cpl1.getNumParameters() == 1);
 
 	BOOST_CHECK(cpl1.getParametersBegin() != cpl1.getParametersEnd());
 
@@ -293,7 +293,7 @@ BOOST_AUTO_TEST_CASE(ControlParameterListTest)
 
 	cpl1.setParameter(key2, Variant());
 
-	BOOST_CHECK(cpl1.getSize() == 0);
+	BOOST_CHECK(cpl1.getNumParameters() == 0);
 
 	BOOST_CHECK(cpl1.getParametersBegin() == cpl1.getParametersEnd());
 
@@ -340,7 +340,7 @@ BOOST_AUTO_TEST_CASE(ControlParameterListTest)
 
 	cpl1.setParameter(key2, std::string("param21"));
 
-	BOOST_CHECK(cpl1.getSize() == 1);
+	BOOST_CHECK(cpl1.getNumParameters() == 1);
 
 	BOOST_CHECK(cpl1.getParametersBegin() != cpl1.getParametersEnd());
 
@@ -388,9 +388,9 @@ BOOST_AUTO_TEST_CASE(ControlParameterListTest)
 
 	cl1.reset();
 
-	cpl1.clear();
+	cpl1.clearParameters();
 
-	BOOST_CHECK(cpl1.getSize() == 0);
+	BOOST_CHECK(cpl1.getNumParameters() == 0);
 
 	BOOST_CHECK(cpl1.getParametersBegin() == cpl1.getParametersEnd());
 
@@ -474,7 +474,7 @@ BOOST_AUTO_TEST_CASE(ControlParameterListTest)
 	BOOST_CHECK(cl2.removedParamKey == RESET_KEY);
 	BOOST_CHECK(cl2.changedParamValue.getData<std::string>() == "param3");
 
-	BOOST_CHECK(cpl1.getSize() == 2);
+	BOOST_CHECK(cpl1.getNumParameters() == 2);
 
 	BOOST_CHECK(cpl1.getParametersBegin() != cpl1.getParametersEnd());
 
@@ -524,7 +524,7 @@ BOOST_AUTO_TEST_CASE(ControlParameterListTest)
 	BOOST_CHECK(cpl1.getParameterOrDefault<std::string>(key3, "default", false) == "param3");
 
 
-	BOOST_CHECK(cpl2_ptr->getSize() == 1);
+	BOOST_CHECK(cpl2_ptr->getNumParameters() == 1);
 
 	BOOST_CHECK(cpl2_ptr->getParametersBegin() != cpl2_ptr->getParametersEnd());
 	BOOST_CHECK(cpl2_ptr->getParametersBegin()->first == key3);
@@ -567,7 +567,7 @@ BOOST_AUTO_TEST_CASE(ControlParameterListTest)
 	BOOST_CHECK(cl2.removedParamKey == RESET_KEY);
 	BOOST_CHECK(cl2.changedParamValue.getData<std::string>() == "param11");
 
-	BOOST_CHECK(cpl1.getSize() == 2);
+	BOOST_CHECK(cpl1.getNumParameters() == 2);
 
 	BOOST_CHECK(cpl1.getParametersBegin() != cpl1.getParametersEnd());
 
@@ -617,7 +617,7 @@ BOOST_AUTO_TEST_CASE(ControlParameterListTest)
 	BOOST_CHECK(cpl1.getParameterOrDefault<std::string>(key3, "default", false) == "param3");
 
 
-	BOOST_CHECK(cpl2_ptr->getSize() == 2);
+	BOOST_CHECK(cpl2_ptr->getNumParameters() == 2);
 
 	BOOST_CHECK(cpl2_ptr->getParametersBegin() != cpl2_ptr->getParametersEnd());
 
@@ -673,7 +673,7 @@ BOOST_AUTO_TEST_CASE(ControlParameterListTest)
 	BOOST_CHECK(cl2.removedParamKey == key3);
 	BOOST_CHECK(cl2.changedParamValue.isEmpty());
 
-	BOOST_CHECK(cpl1.getSize() == 2);
+	BOOST_CHECK(cpl1.getNumParameters() == 2);
 
 	BOOST_CHECK(cpl1.getParametersBegin() != cpl1.getParametersEnd());
 
@@ -723,7 +723,7 @@ BOOST_AUTO_TEST_CASE(ControlParameterListTest)
 	BOOST_CHECK(cpl1.getParameterOrDefault<std::string>(key3, "default", false) == "default");
 
 
-	BOOST_CHECK(cpl2_ptr->getSize() == 1);
+	BOOST_CHECK(cpl2_ptr->getNumParameters() == 1);
 
 	BOOST_CHECK(cpl2_ptr->getParametersBegin() != cpl2_ptr->getParametersEnd());
 
@@ -778,7 +778,7 @@ BOOST_AUTO_TEST_CASE(ControlParameterListTest)
 	BOOST_CHECK(cl2.removedParamKey == key1);
 	BOOST_CHECK(cl2.changedParamValue.isEmpty());
 
-	BOOST_CHECK(cpl1.getSize() == 2);
+	BOOST_CHECK(cpl1.getNumParameters() == 2);
 
 	BOOST_CHECK(cpl1.getParametersBegin() != cpl1.getParametersEnd());
 
@@ -828,7 +828,7 @@ BOOST_AUTO_TEST_CASE(ControlParameterListTest)
 	BOOST_CHECK(cpl1.getParameterOrDefault<std::string>(key3, "default", false) == "default");
 
 
-	BOOST_CHECK(cpl2_ptr->getSize() == 0);
+	BOOST_CHECK(cpl2_ptr->getNumParameters() == 0);
 
 	BOOST_CHECK(cpl2_ptr->getParametersBegin() == cpl2_ptr->getParametersEnd());
 
@@ -885,7 +885,7 @@ BOOST_AUTO_TEST_CASE(ControlParameterListTest)
 	BOOST_CHECK(cl2.removedParamKey == RESET_KEY);
 	BOOST_CHECK(cl2.changedParamValue.getData<std::string>() == "param3");
 
-	BOOST_CHECK(cpl1.getSize() == 2);
+	BOOST_CHECK(cpl1.getNumParameters() == 2);
 
 	BOOST_CHECK(cpl1.getParametersBegin() != cpl1.getParametersEnd());
 
@@ -935,7 +935,7 @@ BOOST_AUTO_TEST_CASE(ControlParameterListTest)
 	BOOST_CHECK(cpl1.getParameterOrDefault<std::string>(key3, "default", false) == "default");
 
 
-	BOOST_CHECK(cpl2_ptr->getSize() == 1);
+	BOOST_CHECK(cpl2_ptr->getNumParameters() == 1);
 
 	BOOST_CHECK(cpl2_ptr->getParametersBegin() != cpl2_ptr->getParametersEnd());
 	BOOST_CHECK(cpl2_ptr->getParametersBegin()->first == key3);
@@ -978,7 +978,7 @@ BOOST_AUTO_TEST_CASE(ControlParameterListTest)
 	BOOST_CHECK(cl2.removedParamKey == RESET_KEY);
 	BOOST_CHECK(cl2.changedParamValue.getData<std::string>() == "param11");
 
-	BOOST_CHECK(cpl1.getSize() == 2);
+	BOOST_CHECK(cpl1.getNumParameters() == 2);
 
 	BOOST_CHECK(cpl1.getParametersBegin() != cpl1.getParametersEnd());
 
@@ -1022,7 +1022,7 @@ BOOST_AUTO_TEST_CASE(ControlParameterListTest)
 	BOOST_CHECK(cpl1.getParameter(key3, false, false).isEmpty());
 
 
-	BOOST_CHECK(cpl2_ptr->getSize() == 2);
+	BOOST_CHECK(cpl2_ptr->getNumParameters() == 2);
 
 	BOOST_CHECK(cpl2_ptr->getParametersBegin() != cpl2_ptr->getParametersEnd());
 
@@ -1077,7 +1077,7 @@ BOOST_AUTO_TEST_CASE(ControlParameterListTest)
 	BOOST_CHECK(cl2.removedParamKey == RESET_KEY);
 	BOOST_CHECK(cl2.changedParamValue.isEmpty());
 
-	BOOST_CHECK(cpl1.getSize() == 2);
+	BOOST_CHECK(cpl1.getNumParameters() == 2);
 
 	BOOST_CHECK(cpl1.getParametersBegin() != cpl1.getParametersEnd());
 
@@ -1127,7 +1127,7 @@ BOOST_AUTO_TEST_CASE(ControlParameterListTest)
 	BOOST_CHECK(cpl1.getParameterOrDefault<std::string>(key3, "default", false) == "param3");
 
 
-	BOOST_CHECK(cpl2_ptr->getSize() == 2);
+	BOOST_CHECK(cpl2_ptr->getNumParameters() == 2);
 
 	BOOST_CHECK(cpl2_ptr->getParametersBegin() != cpl2_ptr->getParametersEnd());
 
@@ -1166,7 +1166,7 @@ BOOST_AUTO_TEST_CASE(ControlParameterListTest)
 	cl1.reset();
 	cl2.reset();
 	
-	cpl2_ptr->clear();
+	cpl2_ptr->clearParameters();
 
 	BOOST_CHECK(cl1.numParamChangedCalls == 0);
 	BOOST_CHECK(cl1.numParamRemovedCalls == 1);
@@ -1181,7 +1181,7 @@ BOOST_AUTO_TEST_CASE(ControlParameterListTest)
 	BOOST_CHECK(cl2.changedParamKey == RESET_KEY);
 	BOOST_CHECK(cl2.changedParamValue.isEmpty());
 
-	BOOST_CHECK(cpl1.getSize() == 2);
+	BOOST_CHECK(cpl1.getNumParameters() == 2);
 
 	BOOST_CHECK(cpl1.getParametersBegin() != cpl1.getParametersEnd());
 
@@ -1231,7 +1231,7 @@ BOOST_AUTO_TEST_CASE(ControlParameterListTest)
 	BOOST_CHECK(cpl1.getParameterOrDefault<std::string>(key3, "default", false) == "default");
 
 
-	BOOST_CHECK(cpl2_ptr->getSize() == 0);
+	BOOST_CHECK(cpl2_ptr->getNumParameters() == 0);
 
 	BOOST_CHECK(cpl2_ptr->getParametersBegin() == cpl2_ptr->getParametersEnd());
 
@@ -1279,7 +1279,7 @@ BOOST_AUTO_TEST_CASE(ControlParameterListTest)
 	BOOST_CHECK(cl1.removedParamKey == RESET_KEY);
 	BOOST_CHECK(cl1.changedParamValue.isEmpty());
 
-	BOOST_CHECK(cpl1.getSize() == 2);
+	BOOST_CHECK(cpl1.getNumParameters() == 2);
 
 	BOOST_CHECK(cpl1.getParametersBegin() != cpl1.getParametersEnd());
 
@@ -1328,7 +1328,7 @@ BOOST_AUTO_TEST_CASE(ControlParameterListTest)
 
 	cpl3 = cpl1;
 
-	BOOST_CHECK(cpl3.getSize() == 2);
+	BOOST_CHECK(cpl3.getNumParameters() == 2);
 
 	BOOST_CHECK(cpl3.getParametersBegin() != cpl3.getParametersEnd());
 
@@ -1366,7 +1366,7 @@ BOOST_AUTO_TEST_CASE(ControlParameterListTest)
 
 	ControlParameterList cpl4(cpl3);
 
-	BOOST_CHECK(cpl4.getSize() == 2);
+	BOOST_CHECK(cpl4.getNumParameters() == 2);
 
 	BOOST_CHECK(cpl4.getParametersBegin() != cpl4.getParametersEnd());
 
@@ -1417,7 +1417,7 @@ BOOST_AUTO_TEST_CASE(ControlParameterListTest)
 	BOOST_CHECK(cl1.removedParamKey == RESET_KEY);
 	BOOST_CHECK(cl1.changedParamValue.isEmpty());
 
-	BOOST_CHECK(cpl1.getSize() == 1);
+	BOOST_CHECK(cpl1.getNumParameters() == 1);
 
 	BOOST_CHECK(cpl1.getParametersBegin() != cpl1.getParametersEnd());
 	BOOST_CHECK(cpl1.getParametersBegin()->first == key2);
