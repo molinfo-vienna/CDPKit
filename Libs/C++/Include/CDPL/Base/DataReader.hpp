@@ -222,10 +222,14 @@ inline CDPL::Base::DataReader<T>& CDPL::Base::DataReader<T>::operator=(const Dat
 	return *this;
 }
 
+// \cond UNHIDE_DETAILS
+
 template <typename T>
 inline CDPL::Base::DataReader<T>& CDPL::Base::operator>>(DataReader<T>& reader, T& obj)
 {
 	return reader.read(obj);
 }
+
+// \endcond
 
 #endif // CDPL_BASE_DATAREADER_HPP

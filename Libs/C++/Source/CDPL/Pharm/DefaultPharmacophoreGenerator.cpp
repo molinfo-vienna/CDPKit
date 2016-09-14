@@ -26,9 +26,6 @@
 
 #include "StaticInit.hpp"
 
-#include <boost/bind.hpp>
-#include <boost/shared_ptr.hpp>
-
 #include "CDPL/Pharm/DefaultPharmacophoreGenerator.hpp"
 #include "CDPL/Pharm/AromaticFeatureGenerator.hpp"
 #include "CDPL/Pharm/HydrophobicFeatureGenerator.hpp"
@@ -55,20 +52,19 @@ Pharm::DefaultPharmacophoreGenerator::DefaultPharmacophoreGenerator(const Chem::
 
 void Pharm::DefaultPharmacophoreGenerator::init(bool fuzzy)
 {
-    typedef boost::shared_ptr<PatternBasedFeatureGenerator>  FeatureGenPtr;
+    ftrGenerators.push_back(FeatureGenPtr(new HydrophobicFeatureGenerator()));
+    ftrGenerators.push_back(FeatureGenPtr(new AromaticFeatureGenerator()));
+    ftrGenerators.push_back(FeatureGenPtr(new NegIonizableFeatureGenerator(fuzzy)));
+    ftrGenerators.push_back(FeatureGenPtr(new PosIonizableFeatureGenerator(fuzzy)));
+    ftrGenerators.push_back(FeatureGenPtr(new HBondDonorFeatureGenerator(fuzzy)));
+    ftrGenerators.push_back(FeatureGenPtr(new HBondAcceptorFeatureGenerator()));
 
-    setFeatureFunction(FeatureType::HYDROPHOBIC, boost::bind(&HydrophobicFeatureGenerator::generate, 
-							     FeatureGenPtr(new HydrophobicFeatureGenerator()), _1, _2));
-    setFeatureFunction(FeatureType::AROMATIC, boost::bind(&AromaticFeatureGenerator::generate, 
-							  FeatureGenPtr(new AromaticFeatureGenerator()), _1, _2));
-    setFeatureFunction(FeatureType::NEG_IONIZABLE, boost::bind(&PatternBasedFeatureGenerator::generate, 
-							       FeatureGenPtr(new NegIonizableFeatureGenerator(fuzzy)), _1, _2));
-    setFeatureFunction(FeatureType::POS_IONIZABLE, boost::bind(&PatternBasedFeatureGenerator::generate, 
-							       FeatureGenPtr(new PosIonizableFeatureGenerator(fuzzy)), _1, _2));
-    setFeatureFunction(FeatureType::H_BOND_DONOR, boost::bind(&PatternBasedFeatureGenerator::generate, 
-							      FeatureGenPtr(new HBondDonorFeatureGenerator(fuzzy)), _1, _2));
-    setFeatureFunction(FeatureType::H_BOND_ACCEPTOR, boost::bind(&PatternBasedFeatureGenerator::generate, 
-								 FeatureGenPtr(new HBondAcceptorFeatureGenerator()), _1, _2));
+    setFeatureGenerator(FeatureType::HYDROPHOBIC, *ftrGenerators[0]);
+    setFeatureGenerator(FeatureType::AROMATIC, *ftrGenerators[1]);
+    setFeatureGenerator(FeatureType::NEG_IONIZABLE, *ftrGenerators[2]);
+    setFeatureGenerator(FeatureType::POS_IONIZABLE, *ftrGenerators[3]);
+    setFeatureGenerator(FeatureType::H_BOND_DONOR, *ftrGenerators[4]);
+    setFeatureGenerator(FeatureType::H_BOND_ACCEPTOR, *ftrGenerators[5]);
 
     enableFeature(FeatureType::HYDROPHOBIC, true);
     enableFeature(FeatureType::AROMATIC, true);

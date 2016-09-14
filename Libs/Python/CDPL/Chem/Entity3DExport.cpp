@@ -39,7 +39,7 @@ namespace
     struct Entity3DWrapper : CDPL::Chem::Entity3D, boost::python::wrapper<CDPL::Chem::Entity3D> 
     {
 
-	PROPERTYCONTAINER_IMPL(Entity3DWrapper) 
+		PROPERTYCONTAINER_IMPL(Entity3DWrapper) 
     };
 }
 

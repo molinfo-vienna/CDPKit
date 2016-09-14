@@ -38,7 +38,6 @@
 #include "CDPL/Chem/Atom.hpp"
 #include "CDPL/Chem/AtomFunctions.hpp"
 #include "CDPL/Chem/Entity3DFunctions.hpp"
-#include "CDPL/Chem/Entity3DContainerFunctions.hpp"
 #include "CDPL/Chem/AtomType.hpp"
 #include "CDPL/Chem/AtomDictionary.hpp"
 #include "CDPL/Math/SVDecomposition.hpp"
@@ -59,14 +58,14 @@ const std::size_t  Pharm::SurfaceXVolumeCoatGenerator::DEF_NUM_TEST_POINTS;
 Pharm::SurfaceXVolumeCoatGenerator::SurfaceXVolumeCoatGenerator(): 
     featureType(DEF_FEATURE_TYPE), featureGeom(DEF_FEATURE_GEOM), probeRadius(DEF_PROBE_RADIUS),
 	gridOversize(DEF_GRID_OVERSIZE), gridStepSize(DEF_GRID_STEP_SIZE), minSurfAcc(DEF_MIN_SURFACE_ACC),
-	numTestPoints(DEF_NUM_TEST_POINTS)
+	numTestPoints(DEF_NUM_TEST_POINTS), coordsFunc(Chem::get3DCoordinates)
 {}
 
 Pharm::SurfaceXVolumeCoatGenerator::SurfaceXVolumeCoatGenerator(
 	const Chem::AtomContainer& cntnr, const Chem::MolecularGraph& parent_molgraph, Pharmacophore& pharm):
     featureType(DEF_FEATURE_TYPE), featureGeom(DEF_FEATURE_GEOM), probeRadius(DEF_PROBE_RADIUS),
 	gridOversize(DEF_GRID_OVERSIZE), gridStepSize(DEF_GRID_STEP_SIZE), minSurfAcc(DEF_MIN_SURFACE_ACC),
-	numTestPoints(DEF_NUM_TEST_POINTS) 
+	numTestPoints(DEF_NUM_TEST_POINTS), coordsFunc(Chem::get3DCoordinates)
 {
     generate(cntnr, parent_molgraph, pharm);
 }
@@ -141,6 +140,18 @@ std::size_t Pharm::SurfaceXVolumeCoatGenerator::getNumTestPoints() const
 	return numTestPoints;
 }
 
+
+void Pharm::SurfaceXVolumeCoatGenerator::setAtom3DCoordinatesFunction(const Atom3DCoordinatesFunction& func)
+{
+	coordsFunc = func;
+}
+
+const Pharm::SurfaceXVolumeCoatGenerator::Atom3DCoordinatesFunction& 
+Pharm::SurfaceXVolumeCoatGenerator::getAtom3DCoordinatesFunction() const
+{
+	return coordsFunc;
+}
+
 void Pharm::SurfaceXVolumeCoatGenerator::generate(const Chem::AtomContainer& cntnr, const Chem::MolecularGraph& parent_molgraph, Pharmacophore& pharm)
 {
 	if (!init(cntnr, parent_molgraph))
@@ -169,13 +180,13 @@ bool Pharm::SurfaceXVolumeCoatGenerator::init(const Chem::AtomContainer& cntnr, 
 	atomRadii.clear();
 	atomRadii.reserve(num_prnt_atoms);
 
-	for (MolecularGraph::ConstAtomIterator it = parent_molgraph.getAtomsBegin(), end = parent_molgraph.getAtomsEnd(); it != end; ++it)
-		atomRadii.push_back(getVdWRadius(*it) + probeRadius);
-
 	atomCoords.clear();	
 	atomCoords.reserve(num_prnt_atoms);	
 
-	get3DCoordinates(parent_molgraph, atomCoords);
+	for (MolecularGraph::ConstAtomIterator it = parent_molgraph.getAtomsBegin(), end = parent_molgraph.getAtomsEnd(); it != end; ++it) {
+		atomRadii.push_back(getVdWRadius(*it) + probeRadius);
+		atomCoords.push_back(coordsFunc(*it));
+	}
 
 	atomIndices.clear();
 	atomIndices.reserve(num_atoms);
@@ -394,7 +405,7 @@ void Pharm::SurfaceXVolumeCoatGenerator::extractSurfaceAtoms()
 
 void Pharm::SurfaceXVolumeCoatGenerator::initTestPoints()
 {
-	if (testPoints.getSize() == numTestPoints)
+	if (testPoints.size() == numTestPoints)
 		return;
 
 	testPoints.resize(numTestPoints);
@@ -464,7 +475,7 @@ void Pharm::SurfaceXVolumeCoatGenerator::generateXVolumes(Pharmacophore& pharm)
 		
 		const Atom& atom = parentMolGraph->getAtom(atom_idx);
 
-		atomCoords[atom_idx].assign(get3DCoordinates(atom));
+		atomCoords[atom_idx].assign(coordsFunc(atom));
 
 		if (i >= num_surf_atoms) 
 			atomRadii[atom_idx] = getCovalentRadius(atom, 1) + h_cov_rad + h_vdw_rad * 0.75;

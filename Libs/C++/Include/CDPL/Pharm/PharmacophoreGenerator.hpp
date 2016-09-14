@@ -34,9 +34,8 @@
 #include <set>
 #include <map>
 
-#include <boost/function.hpp>
-
 #include "CDPL/Pharm/APIPrefix.hpp"
+#include "CDPL/Pharm/FeatureGenerator.hpp"
 
 
 namespace CDPL 
@@ -52,6 +51,7 @@ namespace CDPL
     {
 
 		class Pharmacophore;
+		class FeatureGenerator;
 
 		/**
 		 * \addtogroup CDPL_PHARM_PHARMACOPHORE_PERCEPTION
@@ -61,15 +61,10 @@ namespace CDPL
 		/**
 		 * \brief PharmacophoreGenerator.
 		 */
-		class CDPL_PHARM_API PharmacophoreGenerator 
+		class CDPL_PHARM_API PharmacophoreGenerator : public FeatureGenerator
 		{
 
 		  public:
-			/**
-			 * \brief A generic wrapper class used to store feature generator functions.
-			 */
-			typedef boost::function2<void, const Chem::MolecularGraph&, Pharmacophore&> FeatureFunction;
-
 			/**
 			 * \brief Constructs the \c %PharmacophoreGenerator instance.
 			 */
@@ -104,38 +99,44 @@ namespace CDPL
 			void clearEnabledFeatures();
 
 			/**
-			 * \brief Specifies a function that gets used for the generation of the specified type of features.
-			 * \param type An identifier for the type of features the generator function is specified for.
-			 * \param func The wrapped generator function.
+			 * \brief Specifies a Pharm::FeatureGenerator instance that gets used for the generation of the specified type of features.
+			 * \param type An identifier for the type of features the generator instance gets used for.
+			 * \param ftr_gen The generator instance.
 			 */
-			void setFeatureFunction(unsigned int type, const FeatureFunction& func);
+			void setFeatureGenerator(unsigned int type, FeatureGenerator& ftr_gen);
 
 			/**
-			 * \brief Removes the feature generation function for the specified type of features.
-			 * \param type An identifier for the type of features for which the generator function has to be removed.
+			 * \brief Removes the Pharm::FeatureGenerator instance for the specified type of features.
+			 * \param type An identifier for the type of features for which the generator instance has to be removed.
 			 */
-			void removeFeatureFunction(unsigned int type);
+			void removeFeatureGenerator(unsigned int type);
 
 			/**
-			 * \brief Returns the function that was registered for the generation of the specified type of features.
+			 * \brief Returns the Pharm::FeatureGenerator instance that was registered for the generation of the specified type of features.
 			 * \param type An identifier for the type of features of interest.
-			 * \return The registered generator function for features of type \a type.
+			 * \return The registered generator instance.
 			 */
-			const FeatureFunction& getFeatureFunction(unsigned int type) const;
+			FeatureGenerator* getFeatureGenerator(unsigned int type) const;
 
 			/**
 			 * \brief Perceives the enabled pharmacophore features of the molecular graph a\ molgraph 
 			 *        and appends them to the pharmacophore \a pharm.
 			 * \param molgraph The molecular graph for which to perceive the features.
-			 * \param pharm The pharmacophore where to add the generated output features.
+			 * \param pharm The pharmacophore instance where the generated output features get appended.
 			 */
 			void generate(const Chem::MolecularGraph& molgraph, Pharmacophore& pharm);
 
+			/**
+			 * \brief Specifies a function for the retrieval of atom 3D coordinates for feature generation.
+			 * \param func The atom 3D coordinates function.
+			 */
+			void setAtom3DCoordinatesFunction(const Atom3DCoordinatesFunction& func);
+
 		  private:
 			typedef std::set<unsigned int> EnabledFeatureSet;
-			typedef std::map<unsigned int, FeatureFunction> FeatureFunctionMap;
+			typedef std::map<unsigned int, FeatureGenerator*> FeatureGeneratorMap;
 		
-			FeatureFunctionMap  featureFuncMap;
+			FeatureGeneratorMap featureGeneratorMap;
 			EnabledFeatureSet   enabledFeatures;
 		};
 

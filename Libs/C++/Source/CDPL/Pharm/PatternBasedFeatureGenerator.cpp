@@ -49,8 +49,8 @@ using namespace CDPL;
 
 Pharm::PatternBasedFeatureGenerator::PatternBasedFeatureGenerator() {}
 
-Pharm::PatternBasedFeatureGenerator::PatternBasedFeatureGenerator(const PatternBasedFeatureGenerator& gen):
-	includePatterns(gen.includePatterns), excludePatterns(gen.excludePatterns) {}
+Pharm::PatternBasedFeatureGenerator::PatternBasedFeatureGenerator(const PatternBasedFeatureGenerator& gen): 
+	FeatureGenerator(gen), includePatterns(gen.includePatterns), excludePatterns(gen.excludePatterns) {}
 
 Pharm::PatternBasedFeatureGenerator::~PatternBasedFeatureGenerator() {}
 
@@ -128,6 +128,8 @@ Pharm::PatternBasedFeatureGenerator& Pharm::PatternBasedFeatureGenerator::operat
 {
 	if (this == &gen)
 		return *this;
+
+	FeatureGenerator::operator=(gen);
 
 	includePatterns = gen.includePatterns;
 	excludePatterns = gen.excludePatterns;
@@ -249,11 +251,12 @@ bool Pharm::PatternBasedFeatureGenerator::calcPlaneFeatureOrientation(const Atom
 		return false;
 
 	std::size_t num_points = alist.size();
+	const Atom3DCoordinatesFunction& coords_func = getAtom3DCoordinatesFunction();
 
 	svdU.resize(num_points, 3, false);
 	
 	for (std::size_t i = 0; i < num_points; i++)
-		row(svdU, i) = get3DCoordinates(*alist[i]) - centroid;
+		row(svdU, i) = coords_func(*alist[i]) - centroid;
 
 	if (!svDecompose(svdU, svdW, svdV))
 		return false;
@@ -268,13 +271,15 @@ bool Pharm::PatternBasedFeatureGenerator::calcCentroid(const AtomList& alist, Ma
 {
 	using namespace Chem;
 
+	const Atom3DCoordinatesFunction& coords_func = getAtom3DCoordinatesFunction();
+
+	if (coords_func.empty())
+		return false;
+
 	for (AtomList::const_iterator it = alist.begin(), end = alist.end(); it != end; ++it) {
 		const Atom& atom = **it;
 
-		if (!has3DCoordinates(atom))
-			return false;
-
-		centroid.plusAssign(get3DCoordinates(atom));
+		centroid.plusAssign(coords_func(atom));
 	}
 
 	if (alist.size() == 0)

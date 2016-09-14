@@ -87,13 +87,13 @@ void CDPLPythonPharm::exportGeometricalFeatureMappingExtractor()
 		.def("setFeatureTypeMatchFunction", &setConstraintFunc1, 
 			 (python::arg("self"), python::arg("func")))
 		.def("getFeatureTypeMatchFunction", &Pharm::GeometricalFeatureMappingExtractor::getFeatureTypeMatchFunction, 
-			 python::arg("self"), python::return_value_policy<python::copy_const_reference>())
+			 python::arg("self"), python::return_internal_reference<>())
 		.def("setFeaturePositionMatchFunction", &setConstraintFunc2, 
 			 (python::arg("self"), python::arg("func")))
 		.def("getFeaturePositionMatchFunction", &Pharm::GeometricalFeatureMappingExtractor::getFeaturePositionMatchFunction, 
-			 python::arg("self"), python::return_value_policy<python::copy_const_reference>())
+			 python::arg("self"), python::return_internal_reference<>())
 		.def("setFeatureGeometryMatchFunction", &setConstraintFunc3, 
 			 (python::arg("self"), python::arg("func")))
 		.def("getFeatureGeometryMatchFunction", &Pharm::GeometricalFeatureMappingExtractor::getFeatureGeometryMatchFunction, 
-			 python::arg("self"), python::return_value_policy<python::copy_const_reference>());
+			 python::arg("self"), python::return_internal_reference<>());
 }

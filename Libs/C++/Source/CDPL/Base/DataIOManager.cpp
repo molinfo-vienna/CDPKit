@@ -40,3 +40,6 @@ class Base::DataIOManager<Chem::MolecularGraph>;
 		
 template
 class Base::DataIOManager<Chem::Reaction>;
+
+template
+class Base::DataIOManager<Pharm::Pharmacophore>;

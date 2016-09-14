@@ -26,11 +26,9 @@
 
 #include <boost/function.hpp>
 
-
 #include "CDPL/Pharm/Feature.hpp"
-#include "CDPL/Pharm/Pharmacophore.hpp"
 #include "CDPL/Pharm/FeatureMapping.hpp"
-#include "CDPL/Chem/MolecularGraph.hpp"
+#include "CDPL/Chem/Atom.hpp"
 #include "CDPL/Math/Vector.hpp"
 #include "CDPL/Math/Matrix.hpp"
 
@@ -45,15 +43,16 @@ void CDPLPythonPharm::exportBoostFunctionWrappers()
     using namespace Pharm;
 
     CDPLPythonBase::BoostFunction1Export<boost::function1<bool, const FeatureMapping&> >("BoolFeatureMappingFunctor");
-    CDPLPythonBase::BoostFunction1Export<boost::function1<Math::Vector3D&, const Feature&>, Feature&, 
-					 boost::python::return_internal_reference<2> >("Vector3DFeatureFunctor");
+    CDPLPythonBase::BoostFunction1Export<boost::function1<const Math::Vector3D&, const Feature&>, Feature&, 
+										 boost::python::return_internal_reference<2> >("Vector3DFeatureFunctor");
+	CDPLPythonBase::BoostFunction1Export<boost::function1<const Math::Vector3D&, const Chem::Atom&>, Chem::Atom&, 
+										 boost::python::return_internal_reference<2> >("Vector3DAtomFunctor");
     
-    CDPLPythonBase::BoostFunction2Export<boost::function2<bool, const Chem::MolecularGraph&, Pharmacophore&> >("VoidMolGraphPharmacophoreFunctor");
     CDPLPythonBase::BoostFunction2Export<boost::function2<bool, const Feature&, const Feature&>, Feature&, Feature&>("BoolFeature2Functor");
  
     CDPLPythonBase::BoostFunction3Export<boost::function3<bool, const Feature&, const Feature&, const Math::Matrix4D&>,
-					 Feature&, Feature&>("BoolFeature2Matrix4DFunctor");
+										 Feature&, Feature&>("BoolFeature2Matrix4DFunctor");
 
     CDPLPythonBase::BoostFunction4Export<boost::function4<bool, const Feature&, const Feature&, const Feature&, const Feature&>,
-					 Feature&, Feature&, Feature&, Feature&>("BoolFeature4Functor");
+										 Feature&, Feature&, Feature&, Feature&>("BoolFeature4Functor");
 }

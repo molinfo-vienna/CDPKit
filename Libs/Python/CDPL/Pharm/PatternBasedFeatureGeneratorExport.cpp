@@ -30,8 +30,6 @@
 #include "CDPL/Chem/MolecularGraph.hpp"
 #include "CDPL/Pharm/Pharmacophore.hpp"
 
-#include "Base/ObjectIdentityCheckVisitor.hpp"
-
 #include "ClassExports.hpp"
 
 
@@ -40,11 +38,11 @@ void CDPLPythonPharm::exportPatternBasedFeatureGenerator()
     using namespace boost;
     using namespace CDPL;
 
-    python::scope scope = python::class_<Pharm::PatternBasedFeatureGenerator, boost::noncopyable>("PatternBasedFeatureGenerator", python::no_init)
+    python::scope scope = python::class_<Pharm::PatternBasedFeatureGenerator, python::bases<Pharm::FeatureGenerator>, 
+										 boost::noncopyable>("PatternBasedFeatureGenerator", python::no_init)
 	.def(python::init<>(python::arg("self")))
 	.def(python::init<const Pharm::PatternBasedFeatureGenerator&>(
 		 (python::arg("self"), python::arg("gen"))))
-	.def(CDPLPythonBase::ObjectIdentityCheckVisitor<Pharm::PatternBasedFeatureGenerator>())	
 	.def("addIncludePattern", &Pharm::PatternBasedFeatureGenerator::addIncludePattern, 
 	     (python::arg("self"), python::arg("substruct"), python::arg("type"), python::arg("tol"),
 	      python::arg("geom"), python::arg("length") = 1.0))

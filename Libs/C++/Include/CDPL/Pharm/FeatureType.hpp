@@ -38,37 +38,37 @@ namespace CDPL
     namespace Pharm 
     {
 
-	/**
-	 * \addtogroup CDPL_PHARM_CONSTANTS
-	 * @{
-	 */
+		/**
+		 * \addtogroup CDPL_PHARM_CONSTANTS
+		 * @{
+		 */
 
-	/**
-	 * \brief Provides constants for the specification of the generic type of a pharmacophore feature.
-	 */
-	namespace FeatureType 
-	{
+		/**
+		 * \brief Provides constants for the specification of the generic type of a pharmacophore feature.
+		 */
+		namespace FeatureType 
+		{
 		
-	    const unsigned int UNKNOWN         = 0;
+			const unsigned int UNKNOWN         = 0;
 
-	    const unsigned int HYDROPHOBIC     = 1;
+			const unsigned int HYDROPHOBIC     = 1;
 
-	    const unsigned int AROMATIC        = 2;
+			const unsigned int AROMATIC        = 2;
 
-	    const unsigned int NEG_IONIZABLE   = 3;
+			const unsigned int NEG_IONIZABLE   = 3;
 
-	    const unsigned int POS_IONIZABLE   = 4;
+			const unsigned int POS_IONIZABLE   = 4;
 
-	    const unsigned int H_BOND_DONOR    = 5;
+			const unsigned int H_BOND_DONOR    = 5;
 
-	    const unsigned int H_BOND_ACCEPTOR = 6;
+			const unsigned int H_BOND_ACCEPTOR = 6;
 
-	    const unsigned int X_VOLUME        = 7;
-	}
+			const unsigned int X_VOLUME        = 7;
+		}
 
-	/**
-	 * @}
-	 */
+		/**
+		 * @}
+		 */
     }
 }
 

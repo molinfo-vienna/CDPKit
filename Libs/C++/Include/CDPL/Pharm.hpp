@@ -49,6 +49,7 @@
 #include "CDPL/Pharm/FeatureType.hpp"  
 #include "CDPL/Pharm/FeatureGeometry.hpp"  
 
+#include "CDPL/Pharm/FeatureGenerator.hpp"  
 #include "CDPL/Pharm/PatternBasedFeatureGenerator.hpp"  
 #include "CDPL/Pharm/AromaticFeatureGenerator.hpp"  
 #include "CDPL/Pharm/HydrophobicFeatureGenerator.hpp"  

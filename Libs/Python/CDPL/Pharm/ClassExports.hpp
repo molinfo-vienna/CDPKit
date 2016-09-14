@@ -58,6 +58,7 @@ namespace CDPLPythonPharm
 
 #endif // HAVE_SQLITE3
 
+	void exportFeatureGenerator();
 	void exportPharmacophoreGenerator();
 	void exportDefaultPharmacophoreGenerator();
 	void exportPatternBasedFeatureGenerator();

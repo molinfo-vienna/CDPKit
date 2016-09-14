@@ -151,4 +151,3 @@ void Pharm::AromaticFeatureGenerator::addNonPatternFeatures(const Chem::Molecula
 		}
 	} 
 }
-

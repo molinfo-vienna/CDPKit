@@ -35,12 +35,13 @@
 #include <cstddef>
 
 #include <boost/shared_ptr.hpp>
+#include <boost/function.hpp>
 
 #include "CDPL/Pharm/APIPrefix.hpp"
 #include "CDPL/Pharm/FeatureType.hpp"
 #include "CDPL/Pharm/FeatureGeometry.hpp"
 #include "CDPL/Math/Matrix.hpp"
-#include "CDPL/Math/VectorArray.hpp"
+#include "CDPL/Math/Vector.hpp"
 #include "CDPL/Util/BitSet.hpp"
 
 
@@ -52,6 +53,7 @@ namespace CDPL
 
 		class MolecularGraph;
 		class AtomContainer;
+		class Atom;
 	}
 
     namespace Pharm
@@ -71,6 +73,11 @@ namespace CDPL
 		{
 
 		  public:
+			/**
+			 * \brief A generic wrapper class used to store a user-defined atom 3D coordinates function.
+			 */
+			typedef boost::function1<const Math::Vector3D&, const Chem::Atom&> Atom3DCoordinatesFunction;
+
 			static const unsigned int DEF_FEATURE_TYPE    = FeatureType::X_VOLUME;
 			static const unsigned int DEF_FEATURE_GEOM    = FeatureGeometry::SPHERE;
 			static const double       DEF_PROBE_RADIUS    = 1.2;
@@ -188,6 +195,18 @@ namespace CDPL
 			std::size_t getNumTestPoints() const;
 
 			/**
+			 * \brief Specifies a function for the retrieval of atom 3D coordinates.
+			 * \param func The atom 3D coordinates function.
+			 */
+			virtual void setAtom3DCoordinatesFunction(const Atom3DCoordinatesFunction& func);
+
+			/**
+			 * \brief Returns the function that was registered for the retrieval of atom 3D coordinates.
+			 * \return The registered atom 3D coordinates function.
+			 */
+			const Atom3DCoordinatesFunction& getAtom3DCoordinatesFunction() const;
+
+			/**
 			 * \brief Generates an excluded volume coat representing the accessible surface of \a cntnr and adds 
 			 *        them to the pharmacophore \a pharm.
 			 * \param cntnr The set of atoms for which to generate the excluded volume coat.
@@ -201,6 +220,7 @@ namespace CDPL
 			typedef std::vector<std::size_t> AtomIndexList;
 			typedef boost::shared_ptr<AtomIndexList> AtomIndexListPtr;
 			typedef std::vector<AtomIndexListPtr> GridAtomLookupTable;
+			typedef std::vector<Math::Vector3D> Vector3DArray;
 
 			bool init(const Chem::AtomContainer& cntnr, const Chem::MolecularGraph& parent_molgraph);
 
@@ -219,13 +239,14 @@ namespace CDPL
 			double                      gridStepSize;
 			double                      minSurfAcc;
 			std::size_t                 numTestPoints;
+			Atom3DCoordinatesFunction   coordsFunc;
 			const Chem::AtomContainer*  atomContainer;
 			const Chem::MolecularGraph* parentMolGraph;
 			AtomRadiusTable             atomRadii; 
 			AtomIndexList               atomIndices; 
 			Math::Matrix<double>        svdU;
-			Math::Vector3DArray         atomCoords;
-			Math::Vector3DArray         testPoints;
+			Vector3DArray               atomCoords;
+			Vector3DArray               testPoints;
 			Math::Vector3D              bBoxMin;
 			Math::Vector3D              bBoxMax;
 			std::size_t                 gridXSize;

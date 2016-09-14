@@ -178,6 +178,8 @@ namespace
 	}
 }
 
+// \cond UNHIDE_DETAILS
+
 template <typename T>
 CDPL_MATH_INLINE T CDPL::Math::factorial(unsigned int n) 
 {
@@ -254,6 +256,8 @@ CDPL_MATH_INLINE T CDPL::Math::gammaQ(const T& a, const T& x)
 	
 	return gammaQContFrac(a, x);
 }
+
+// \endcond
 
 #endif // CDPL_MATH_SPECIALFUNCTIONS_HPP
 

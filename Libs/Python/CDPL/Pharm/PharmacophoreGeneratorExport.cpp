@@ -27,25 +27,8 @@
 #include <boost/python.hpp>
 
 #include "CDPL/Pharm/PharmacophoreGenerator.hpp"
-#include "CDPL/Chem/MolecularGraph.hpp"
-#include "CDPL/Pharm/Pharmacophore.hpp"
-
-#include "Base/CallableObjectAdapter.hpp"
-#include "Base/ObjectIdentityCheckVisitor.hpp"
 
 #include "ClassExports.hpp"
-
-
-namespace
-{
-
-    void setFeatureFunction(CDPL::Pharm::PharmacophoreGenerator& generator, unsigned int type, 
-							const boost::python::object& callable)
-    {
-		generator.setFeatureFunction(type, CDPLPythonBase::BinaryFunctionAdapter<void, 
-									 CDPL::Chem::MolecularGraph, CDPL::Pharm::Pharmacophore>(callable)); 
-    }
-}
 
 
 void CDPLPythonPharm::exportPharmacophoreGenerator()
@@ -53,24 +36,21 @@ void CDPLPythonPharm::exportPharmacophoreGenerator()
     using namespace boost;
     using namespace CDPL;
 
-	python::class_<Pharm::PharmacophoreGenerator, boost::noncopyable>("PharmacophoreGenerator", python::no_init)
+	python::class_<Pharm::PharmacophoreGenerator, python::bases<Pharm::FeatureGenerator>, boost::noncopyable>
+		("PharmacophoreGenerator", python::no_init)
 		.def(python::init<>(python::arg("self")))
 		.def(python::init<Pharm::PharmacophoreGenerator>((python::arg("self"), python::arg("gen"))))
-		.def(CDPLPythonBase::ObjectIdentityCheckVisitor<Pharm::PharmacophoreGenerator>())	
-		.def("setFeatureFunction", &setFeatureFunction, 
-			 (python::arg("self"), python::arg("type"), python::arg("func")))
-		.def("removeFeatureFunction", &Pharm::PharmacophoreGenerator::removeFeatureFunction, 
+		.def("setFeatureGenerator", &Pharm::PharmacophoreGenerator::setFeatureGenerator, 
+			 (python::arg("self"), python::arg("type"), python::arg("ftr_gen")))
+		.def("removeFeatureGenerator", &Pharm::PharmacophoreGenerator::removeFeatureGenerator, 
 			 (python::arg("self"), python::arg("type")))
-		.def("getFeatureFunction", &Pharm::PharmacophoreGenerator::getFeatureFunction, 
-			 (python::arg("self"), python::arg("type")),
-			 python::return_value_policy<python::copy_const_reference>())
+		.def("getFeatureGenerator", &Pharm::PharmacophoreGenerator::getFeatureGenerator, 
+			 (python::arg("self"), python::arg("type")), python::return_internal_reference<>())
 		.def("enableFeature", &Pharm::PharmacophoreGenerator::enableFeature, 
 			 (python::arg("self"), python::arg("type"), python::arg("enable")))
 		.def("isFeatureEnabled", &Pharm::PharmacophoreGenerator::isFeatureEnabled, 
 			 (python::arg("self"), python::arg("ft_type")))
 		.def("clearEnabledFeatures", &Pharm::PharmacophoreGenerator::isFeatureEnabled, python::arg("self"))
 		.def("assign", &Pharm::PharmacophoreGenerator::operator=, 
-			 (python::arg("self"), python::arg("gen")), python::return_self<>())
-		.def("generate", &Pharm::PharmacophoreGenerator::generate,
-			 (python::arg("self"), python::arg("molgraph"), python::arg("pharm")));
+			 (python::arg("self"), python::arg("gen")), python::return_self<>());
 }

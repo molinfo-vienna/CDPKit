@@ -12,6 +12,7 @@ SET(cdpl-pharm_LIB_SRCS
     ControlParameter.cpp
     ControlParameterDefault.cpp
   
+    FeatureGenerator.cpp
     PatternBasedFeatureGenerator.cpp
     HydrophobicFeatureGenerator.cpp
     AromaticFeatureGenerator.cpp

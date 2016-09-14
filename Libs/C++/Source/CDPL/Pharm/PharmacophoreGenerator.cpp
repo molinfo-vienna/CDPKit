@@ -50,34 +50,40 @@ void Pharm::PharmacophoreGenerator::clearEnabledFeatures()
 	enabledFeatures.clear();
 }
 
-void Pharm::PharmacophoreGenerator::setFeatureFunction(unsigned int type, const FeatureFunction& func)
+void Pharm::PharmacophoreGenerator::setFeatureGenerator(unsigned int type, FeatureGenerator& ftr_gen)
 {
-	FeatureFunctionMap::iterator it = featureFuncMap.find(type);
+	FeatureGeneratorMap::iterator it = featureGeneratorMap.find(type);
 
-	if (it == featureFuncMap.end())
-		featureFuncMap.insert(FeatureFunctionMap::value_type(type, func));
+	if (it == featureGeneratorMap.end())
+		featureGeneratorMap.insert(FeatureGeneratorMap::value_type(type, &ftr_gen));
 	else
-		it->second = func;
+		it->second = &ftr_gen;
 }
 
-void Pharm::PharmacophoreGenerator::removeFeatureFunction(unsigned int type)
+void Pharm::PharmacophoreGenerator::removeFeatureGenerator(unsigned int type)
 {
-	featureFuncMap.erase(type);
+	featureGeneratorMap.erase(type);
 }
 
-const Pharm::PharmacophoreGenerator::FeatureFunction& 
-Pharm::PharmacophoreGenerator::getFeatureFunction(unsigned int type) const
+Pharm::PharmacophoreGenerator::FeatureGenerator*
+Pharm::PharmacophoreGenerator::getFeatureGenerator(unsigned int type) const
 {
-	static const FeatureFunction DEF_FUNC;
+	FeatureGeneratorMap::const_iterator it = featureGeneratorMap.find(type);
 
-	FeatureFunctionMap::const_iterator it = featureFuncMap.find(type);
-
-	return (it == featureFuncMap.end() ? DEF_FUNC : it->second);
+	return (it == featureGeneratorMap.end() ? static_cast<FeatureGenerator*>(0) : it->second);
 }
 
 void Pharm::PharmacophoreGenerator::generate(const Chem::MolecularGraph& molgraph, Pharmacophore& pharm)
 {
-	for (FeatureFunctionMap::const_iterator it = featureFuncMap.begin(), end = featureFuncMap.end(); it != end; ++it)
+	for (FeatureGeneratorMap::const_iterator it = featureGeneratorMap.begin(), end = featureGeneratorMap.end(); it != end; ++it)
 		if (isFeatureEnabled(it->first))
-			it->second(molgraph, pharm);
+			it->second->generate(molgraph, pharm);
+}
+
+void Pharm::PharmacophoreGenerator::setAtom3DCoordinatesFunction(const Atom3DCoordinatesFunction& func)
+{
+	FeatureGenerator::setAtom3DCoordinatesFunction(func);
+
+	for (FeatureGeneratorMap::const_iterator it = featureGeneratorMap.begin(), end = featureGeneratorMap.end(); it != end; ++it)
+		it->second->setAtom3DCoordinatesFunction(func);
 }

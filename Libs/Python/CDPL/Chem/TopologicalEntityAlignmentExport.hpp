@@ -56,11 +56,11 @@ namespace CDPLPythonChem
 				.def("setEntityMatchFunction", &setConstraintFunc1, 
 					 (python::arg("self"), python::arg("func")))
 				.def("getEntityMatchFunction", &AlignmentType::getEntityMatchFunction, 
-					 python::arg("self"), python::return_value_policy<python::copy_const_reference>())
+					 python::arg("self"), python::return_internal_reference<>())
 				.def("setEntityPairMatchFunction", &setConstraintFunc2, 
 					 (python::arg("self"), python::arg("func")))
 				.def("getEntityPairMatchFunction", &AlignmentType::getEntityPairMatchFunction, 
-					 python::arg("self"), python::return_value_policy<python::copy_const_reference>())
+					 python::arg("self"), python::return_internal_reference<>())
 				.def("addEntity", &addEntityFunc, (python::arg("self"), python::arg("entity"), python::arg("first_set")))
 				.def("clearEntities", &AlignmentType::clearEntities, 
 					 (python::arg("self"), python::arg("first_set")))

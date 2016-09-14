@@ -61,6 +61,7 @@ BOOST_PYTHON_MODULE(_pharm)
 
 #endif // HAVE_SQLITE3
 
+	exportFeatureGenerator();
 	exportPharmacophoreGenerator();
 	exportDefaultPharmacophoreGenerator();
 	exportPatternBasedFeatureGenerator();

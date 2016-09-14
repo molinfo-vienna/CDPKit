@@ -44,9 +44,9 @@ void CDPLPythonChem::exportBoostFunctionWrappers()
 
     CDPLPythonBase::BoostFunction1Export<boost::function1<bool, const Entity3DMapping&> >("BoolEntity3DMappingFunctor");
     CDPLPythonBase::BoostFunction1Export<boost::function1<bool, const AtomMapping&> >("BoolAtomMappingFunctor");
-    CDPLPythonBase::BoostFunction1Export<boost::function1<Math::Vector3D&, const Entity3D&>, Entity3D&, 
+    CDPLPythonBase::BoostFunction1Export<boost::function1<const Math::Vector3D&, const Entity3D&>, Entity3D&, 
 										 boost::python::return_internal_reference<2> >("Vector3DEntity3DFunctor");
-    CDPLPythonBase::BoostFunction1Export<boost::function1<Math::Vector3D&, const Atom&>, Atom&, 
+    CDPLPythonBase::BoostFunction1Export<boost::function1<const Math::Vector3D&, const Atom&>, Atom&, 
 										 boost::python::return_internal_reference<2> >("Vector3DAtomFunctor");
 
     CDPLPythonBase::BoostFunction2Export<boost::function2<bool, const Entity3D&, const Entity3D&>, Entity3D&, Entity3D&>("BoolEntity3D2Functor");

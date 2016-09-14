@@ -28,6 +28,7 @@ SET(pharm_MOD_SRCS
 
     BoostFunctionWrapperExport.cpp
 
+    FeatureGeneratorExport.cpp
     PharmacophoreGeneratorExport.cpp
     DefaultPharmacophoreGeneratorExport.cpp
     PatternBasedFeatureGeneratorExport.cpp

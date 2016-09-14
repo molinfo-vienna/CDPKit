@@ -527,22 +527,23 @@ void Pharm::HydrophobicFeatureGenerator::processChain(Pharmacophore& pharm)
 			continue;
 
 		Feature& feature = emitFeature(featureAtoms, pharm, makeFragment(featureAtoms), false);
+		const Atom3DCoordinatesFunction& coords_func = getAtom3DCoordinatesFunction();
+
+		if (coords_func.empty())
+			return;
 
 		if (featureAtoms.size() == 1) {
-			if (has3DCoordinates(*featureAtoms.front()))
-				set3DCoordinates(feature, get3DCoordinates(*featureAtoms[0]));
+			set3DCoordinates(feature, coords_func(*featureAtoms[0]));
 
 		} else {
 			bool term_atom1 = (getHeavyAtomCount(*featureAtoms.front(), *molGraph) == 1);
 			bool term_atom2 = (getHeavyAtomCount(*featureAtoms.back(), *molGraph) == 1);
 
 			if (term_atom1 && !term_atom2) {
-				if (has3DCoordinates(*featureAtoms.front()))
-					set3DCoordinates(feature, get3DCoordinates(*featureAtoms.front()));
+				set3DCoordinates(feature, coords_func(*featureAtoms.front()));
 
 			} else if (term_atom2 && !term_atom1) { 
-				if (has3DCoordinates(*featureAtoms.back()))
-					set3DCoordinates(feature, get3DCoordinates(*featureAtoms.back()));
+				set3DCoordinates(feature, coords_func(*featureAtoms.back()));
 
 			} else {
 				Math::Vector3D pos;
@@ -625,6 +626,11 @@ bool Pharm::HydrophobicFeatureGenerator::isHydrophobicRing(const Chem::Fragment&
 	    return true;
 	}
 
+	const Atom3DCoordinatesFunction& coords_func = getAtom3DCoordinatesFunction();
+
+	if (coords_func.empty())
+		return true;
+
 	// check if all substituents are on one side of the plane of the ring
 
 	Math::Vector3D plane_dir, tmp;
@@ -637,7 +643,7 @@ bool Pharm::HydrophobicFeatureGenerator::isHydrophobicRing(const Chem::Fragment&
 
 	for (Fragment::ConstAtomIterator it = ring.getAtomsBegin(), end = ring.getAtomsEnd(); it != end; ++it) {
 		const Atom& atom = *it;
-		const Math::Vector3D& atom_pos = get3DCoordinates(atom);
+		const Math::Vector3D& atom_pos = coords_func(atom);
 		Atom::ConstAtomIterator a_it = atom.getAtomsBegin();
 
 		for (Atom::ConstBondIterator b_it = atom.getBondsBegin(), b_end = atom.getBondsEnd(); b_it != b_end; ++b_it, ++a_it) {
@@ -655,10 +661,7 @@ bool Pharm::HydrophobicFeatureGenerator::isHydrophobicRing(const Chem::Fragment&
 			if (hAtomMask.test(molGraph->getAtomIndex(nbr_atom)))
 				continue;
 
-			if (!has3DCoordinates(nbr_atom))
-				continue;
-
-			tmp.assign(get3DCoordinates(nbr_atom) - atom_pos);
+			tmp.assign(coords_func(nbr_atom) - atom_pos);
 			tmp /= length(tmp);
 
 			double inner_prod = innerProd(tmp, plane_dir);
@@ -720,17 +723,18 @@ bool Pharm::HydrophobicFeatureGenerator::hasSubstWithMoreThan2Atoms(const Chem::
 
 bool Pharm::HydrophobicFeatureGenerator::calcHydWeightedCentroid(const AtomList& alist, Math::Vector3D& centroid) const
 {
+	const Atom3DCoordinatesFunction& coords_func = getAtom3DCoordinatesFunction();
+
+	if (coords_func.empty())
+		return false;
+
 	double total_hyd = 0.0;
 
 	for (AtomList::const_iterator it = alist.begin(), end = alist.end(); it != end; ++it) {
 		const Chem::Atom& atom = **it;
-
-		if (!has3DCoordinates(atom))
-			return false;
-
 		double atom_hyd = atomHydTable[molGraph->getAtomIndex(atom)];
 
-		centroid.plusAssign(get3DCoordinates(atom) * atom_hyd);
+		centroid.plusAssign(coords_func(atom) * atom_hyd);
 		total_hyd += atom_hyd;
 	}
 
@@ -790,11 +794,12 @@ double Pharm::HydrophobicFeatureGenerator::calcAccessibleSurfaceFactor(const Che
 	using namespace Chem;
 
 	double vdw_radius = getVdWRadius(atom);
+	const Atom3DCoordinatesFunction& coords_func = getAtom3DCoordinatesFunction();
 
-	if (!has3DCoordinates(atom))
+	if (coords_func.empty())
 		return vdw_radius * vdw_radius;
 
-	const Math::Vector3D& atom_pos = get3DCoordinates(atom);
+	const Math::Vector3D& atom_pos = coords_func(atom);
 
 	nbrAtomVdWRadii.clear();
 	nbrAtomPositions.clear();
@@ -810,10 +815,7 @@ double Pharm::HydrophobicFeatureGenerator::calcAccessibleSurfaceFactor(const Che
 		if (!molGraph->containsAtom(nbr_atom))
 			continue;
 
-		if (!has3DCoordinates(nbr_atom))
-			continue;
-
-		nbrAtomPositions.push_back(get3DCoordinates(nbr_atom));
+		nbrAtomPositions.push_back(coords_func(nbr_atom));
 		nbrAtomVdWRadii.push_back(getVdWRadius(nbr_atom));
 	}
 

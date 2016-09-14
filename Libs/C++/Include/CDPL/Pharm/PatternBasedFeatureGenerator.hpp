@@ -36,6 +36,7 @@
 #include <boost/shared_ptr.hpp>
 
 #include "CDPL/Pharm/APIPrefix.hpp"
+#include "CDPL/Pharm/FeatureGenerator.hpp"
 #include "CDPL/Chem/MolecularGraph.hpp"
 #include "CDPL/Chem/AtomBondMapping.hpp"
 #include "CDPL/Util/BitSet.hpp"
@@ -65,7 +66,7 @@ namespace CDPL
 		/**
 		 * \brief PatternBasedFeatureGenerator.
 		 */
-		class CDPL_PHARM_API PatternBasedFeatureGenerator 
+		class CDPL_PHARM_API PatternBasedFeatureGenerator : public FeatureGenerator
 		{
 
 		  public:

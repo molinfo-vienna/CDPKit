@@ -58,6 +58,12 @@ namespace CDPL
 		class Reaction;
 	}
 
+	namespace Pharm
+	{
+
+		class Pharmacophore;
+	}
+
 	namespace Base
 	{
 
@@ -329,6 +335,8 @@ namespace CDPL
 		 * @}
 		 */
 
+		// \cond UNHIDE_DETAILS
+
 		extern template
 		class CDPL_BASE_API DataIOManager<Chem::Molecule>;
 		
@@ -337,6 +345,11 @@ namespace CDPL
 		
 		extern template
 		class CDPL_BASE_API DataIOManager<Chem::Reaction>;
+
+		extern template
+		class CDPL_BASE_API DataIOManager<Pharm::Pharmacophore>;
+
+		// \endcond
 	}
 }
 
