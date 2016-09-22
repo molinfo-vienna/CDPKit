@@ -48,109 +48,109 @@ namespace CDPL
     namespace Biomol 
     {
 
-	/**
-	 * \addtogroup CDPL_BIOMOL_RESIDUE_DICTIONARY
-	 * @{
-	 */
+		/**
+		 * \addtogroup CDPL_BIOMOL_RESIDUE_DICTIONARY
+		 * @{
+		 */
 
-	/**
-	 * \brief A global dictionary for the lookup of meta-data associated with the residues
-	 *        in biological macromolecules.
-	 */ 
-	class CDPL_BIOMOL_API ResidueDictionary
-	{
+		/**
+		 * \brief A global dictionary for the lookup of meta-data associated with the residues
+		 *        in biological macromolecules.
+		 */ 
+		class CDPL_BIOMOL_API ResidueDictionary
+		{
 
-	  public:
-	    class Entry;
+		  public:
+			class Entry;
 
-	  private:
-	    typedef boost::unordered_map<std::string, Entry> EntryLookupTable;
+		  private:
+			typedef boost::unordered_map<std::string, Entry> EntryLookupTable;
 
-	  public:
-	    typedef boost::shared_ptr<ResidueDictionary> SharedPointer;
+		  public:
+			typedef boost::shared_ptr<ResidueDictionary> SharedPointer;
 
-	    typedef boost::transform_iterator<boost::function1<const Entry&, const EntryLookupTable::value_type&>, 
-					      EntryLookupTable::const_iterator> ConstEntryIterator;
+			typedef boost::transform_iterator<boost::function1<const Entry&, const EntryLookupTable::value_type&>, 
+											  EntryLookupTable::const_iterator> ConstEntryIterator;
 	
-	    class CDPL_BIOMOL_API Entry
-	    {
+			class CDPL_BIOMOL_API Entry
+			{
 
-	      public:
-		typedef boost::function1<Chem::MolecularGraph::SharedPointer, const std::string&> StructureRetrievalFunction;
+			  public:
+				typedef boost::function1<Chem::MolecularGraph::SharedPointer, const std::string&> StructureRetrievalFunction;
 
-		Entry(const std::string& code, const std::string& rep_code, const std::string& rep_by_code, bool obsolete,
-		      const std::string& name, unsigned int type, const StructureRetrievalFunction& struc_ret_func);
+				Entry(const std::string& code, const std::string& rep_code, const std::string& rep_by_code, bool obsolete,
+					  const std::string& name, unsigned int type, const StructureRetrievalFunction& struc_ret_func);
 
-		Entry();
+				Entry();
 
-		const std::string& getCode() const;
+				const std::string& getCode() const;
 
-		const std::string& getReplacedCode() const;
+				const std::string& getReplacedCode() const;
 
-		const std::string& getReplacedByCode() const;
+				const std::string& getReplacedByCode() const;
 
-		bool isObsolete() const;
+				bool isObsolete() const;
 
-		const std::string& getName() const;
+				const std::string& getName() const;
 
-		unsigned int getType() const;
+				unsigned int getType() const;
 
-		Chem::MolecularGraph::SharedPointer getStructure() const;
+				Chem::MolecularGraph::SharedPointer getStructure() const;
 				
-	      private:
-		std::string                code;
-		std::string                replacesCode;
-		std::string                replacedByCode;
-		bool                       obsolete;
-		std::string                name;
-		unsigned int               type;
-		StructureRetrievalFunction structRetrievalFunc;
-	    };
+			  private:
+				std::string                code;
+				std::string                replacesCode;
+				std::string                replacedByCode;
+				bool                       obsolete;
+				std::string                name;
+				unsigned int               type;
+				StructureRetrievalFunction structRetrievalFunc;
+			};
 			
-	    void addEntry(const Entry& entry);
+			void addEntry(const Entry& entry);
 
-	    bool containsEntry(const std::string& code) const;
+			bool containsEntry(const std::string& code) const;
 
-	    void removeEntry(const std::string& code);
+			void removeEntry(const std::string& code);
 			
-	    const Entry& getEntry(const std::string& code) const;
+			const Entry& getEntry(const std::string& code) const;
 
-	    void clear();
+			void clear();
 
-	    std::size_t getNumEntries() const;
+			std::size_t getNumEntries() const;
 			
-	    ConstEntryIterator getEntriesBegin() const;
+			ConstEntryIterator getEntriesBegin() const;
 
-	    ConstEntryIterator getEntriesEnd() const;
+			ConstEntryIterator getEntriesEnd() const;
 			
-	    void loadDefaultEntries();
+			void loadDefaultEntries();
 
-	    static void set(const ResidueDictionary* dict);
+			static void set(const ResidueDictionary* dict);
 
-	    static const ResidueDictionary& get();
+			static const ResidueDictionary& get();
 
-	    static const std::string& getReplacedCode(const std::string& code);
+			static const std::string& getReplacedCode(const std::string& code);
 
-	    static const std::string& getReplacedByCode(const std::string& code);
+			static const std::string& getReplacedByCode(const std::string& code);
 
-	    static bool isObsolete(const std::string& code);
+			static bool isObsolete(const std::string& code);
 
-	    static const std::string& getName(const std::string& code);
+			static const std::string& getName(const std::string& code);
 
-	    static bool isStdResidue(const std::string& code);
+			static bool isStdResidue(const std::string& code);
 
-	    static unsigned int getType(const std::string& code);
+			static unsigned int getType(const std::string& code);
 
-	    static Chem::MolecularGraph::SharedPointer getStructure(const std::string& code);
+			static Chem::MolecularGraph::SharedPointer getStructure(const std::string& code);
 
-	  private:
-	    static const ResidueDictionary* dictionary;
-	    EntryLookupTable                entries;
-	};
+		  private:
+			static const ResidueDictionary* dictionary;
+			EntryLookupTable                entries;
+		};
 
-	/**
-	 * @}
-	 */
+		/**
+		 * @}
+		 */
     }
 }
 

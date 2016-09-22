@@ -28,7 +28,6 @@
 
 #include "CDPL/Biomol/ResidueDictionary.hpp"
 
-#include "Base/CallableObjectAdapter.hpp"
 #include "Base/ObjectIdentityCheckVisitor.hpp"
 
 #include "ClassExports.hpp"
@@ -36,17 +35,6 @@
 
 namespace
 {
-
-	CDPL::Biomol::ResidueDictionary::Entry* makeEntry(const std::string& code, const std::string& rep_code, const std::string& rep_by_code, bool obsolete,
-													  const std::string& name, unsigned int type, boost::python::object struc_ret_func)
-	{
-		using namespace CDPL;
-		using namespace Biomol;
-
-		return new ResidueDictionary::Entry(code, rep_code, rep_by_code, obsolete, name, type, 
-											CDPLPythonBase::UnaryFunctionAdapter<Chem::MolecularGraph::SharedPointer, 
-											const std::string&>(struc_ret_func));
-	}
 
 	boost::python::list getEntries(const CDPL::Biomol::ResidueDictionary& dict)
 	{
@@ -126,10 +114,11 @@ void CDPLPythonBiomol::exportResidueDictionary()
 	python::class_<Biomol::ResidueDictionary::Entry>("Entry", python::no_init)
 		.def(python::init<>(python::arg("self")))
 		.def(python::init<const Biomol::ResidueDictionary::Entry&>((python::arg("self"), python::arg("entry"))))
-		.def("__init__", python::make_constructor(&makeEntry, python::default_call_policies(),
-												  (python::arg("code"), python::arg("rep_code"), python::arg("rep_by_code"),
-												   python::arg("obsolete"), python::arg("name"), python::arg("type"),
-												   python::arg("struc_ret_func"))))
+		.def(python::init<const std::string&, const std::string&, const std::string&, bool,
+			 const std::string&, unsigned int, const Biomol::ResidueDictionary::Entry::StructureRetrievalFunction&>(
+				 (python::arg("self"), python::arg("code"), python::arg("rep_code"), python::arg("rep_by_code"),
+				  python::arg("obsolete"), python::arg("name"), python::arg("type"),
+				  python::arg("struc_ret_func"))))
 		.def(CDPLPythonBase::ObjectIdentityCheckVisitor<Biomol::ResidueDictionary::Entry>())	
 		.def("assign", &Biomol::ResidueDictionary::Entry::operator=, (python::arg("self"), python::arg("entry")), python::return_self<>())
 		.def("getCode", &Biomol::ResidueDictionary::Entry::getCode, python::arg("self"),

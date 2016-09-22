@@ -36,6 +36,7 @@
 
 #include "CDPL/Pharm/APIPrefix.hpp"
 #include "CDPL/Pharm/FeatureMapping.hpp"
+#include "CDPL/Pharm/FeatureTypeHistogram.hpp"
 #include "CDPL/Math/Matrix.hpp"
 
 
@@ -70,6 +71,8 @@ namespace CDPL
 		CDPL_PHARM_API std::size_t getFeatureCount(const Pharmacophore& pharm);
 
 		CDPL_PHARM_API std::size_t getFeatureCount(const Pharmacophore& pharm, unsigned int type);
+
+		CDPL_PHARM_API void buildFeatureTypeHistogram(const Pharmacophore& pharm, FeatureTypeHistogram& hist);
 
 
 		CDPL_PHARM_API void buildInteractionPharmacophore(Pharmacophore& pharm, const FeatureMapping& iactions);

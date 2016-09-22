@@ -35,7 +35,7 @@
 namespace CDPLPythonBase
 {
 
-	template <typename T>
+	template <typename SourceType>
 	struct GenericVariantFromPythonConverter 
 	{
 
@@ -51,7 +51,7 @@ namespace CDPLPythonBase
 			if (!obj_ptr)
 				return 0;
 
-			if (!python::extract<T>(obj_ptr).check())
+			if (!python::extract<SourceType>(obj_ptr).check())
 				return 0;
 
 			return obj_ptr;
@@ -63,7 +63,7 @@ namespace CDPLPythonBase
 
 			void* storage = ((python::converter::rvalue_from_python_storage<Base::Variant>*)data)->storage.bytes;
 
-			new (storage) Base::Variant(python::extract<T>(obj_ptr)());
+			new (storage) Base::Variant(python::extract<SourceType>(obj_ptr)());
 
 			data->convertible = storage;
 		}

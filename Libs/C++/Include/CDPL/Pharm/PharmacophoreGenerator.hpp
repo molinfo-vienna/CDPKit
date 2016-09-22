@@ -65,6 +65,8 @@ namespace CDPL
 		{
 
 		  public:
+			typedef boost::shared_ptr<PharmacophoreGenerator> SharedPointer;
+
 			/**
 			 * \brief Constructs the \c %PharmacophoreGenerator instance.
 			 */
@@ -103,7 +105,7 @@ namespace CDPL
 			 * \param type An identifier for the type of features the generator instance gets used for.
 			 * \param ftr_gen The generator instance.
 			 */
-			void setFeatureGenerator(unsigned int type, FeatureGenerator& ftr_gen);
+			void setFeatureGenerator(unsigned int type, const FeatureGenerator::SharedPointer& ftr_gen);
 
 			/**
 			 * \brief Removes the Pharm::FeatureGenerator instance for the specified type of features.
@@ -116,7 +118,7 @@ namespace CDPL
 			 * \param type An identifier for the type of features of interest.
 			 * \return The registered generator instance.
 			 */
-			FeatureGenerator* getFeatureGenerator(unsigned int type) const;
+			FeatureGenerator::SharedPointer getFeatureGenerator(unsigned int type) const;
 
 			/**
 			 * \brief Perceives the enabled pharmacophore features of the molecular graph a\ molgraph 
@@ -134,7 +136,7 @@ namespace CDPL
 
 		  private:
 			typedef std::set<unsigned int> EnabledFeatureSet;
-			typedef std::map<unsigned int, FeatureGenerator*> FeatureGeneratorMap;
+			typedef std::map<unsigned int, FeatureGenerator::SharedPointer> FeatureGeneratorMap;
 		
 			FeatureGeneratorMap featureGeneratorMap;
 			EnabledFeatureSet   enabledFeatures;

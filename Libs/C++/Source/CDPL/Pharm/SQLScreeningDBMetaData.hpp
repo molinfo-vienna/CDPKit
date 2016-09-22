@@ -37,29 +37,24 @@ namespace CDPL
 		namespace SQLScreeningDB
 		{
 
-			const char* MOL_TABLE_NAME               = "molecules";
-			const char* PHARM_TABLE_NAME             = "pharmacophores";
-			const char* FTR_COUNT_TABLE_NAME         = "ftr_counts";
-			const char* TWO_POINT_PHARM_TABLE_NAME   = "two_pt_pharms";
-			const char* THREE_POINT_PHARM_TABLE_NAME = "three_pt_pharms";
+			const char* MOL_TABLE_NAME                      = "molecules";
+			const char* PHARM_TABLE_NAME                    = "pharmacophores";
+			const char* FTR_COUNT_TABLE_NAME                = "ftr_counts";
+			const char* TWO_POINT_PHARM_TABLE_NAME          = "two_pt_pharms";
+			const char* THREE_POINT_PHARM_TABLE_NAME        = "three_pt_pharms";
 	
-			const char* MOL_ID_COLUMN_NAME           = "mol_id";
-			const char* MOL_HASH_COLUMN_NAME         = "mol_hash";
-			const char* MOL_DATA_COLUMN_NAME         = "mol_data";
-			const char* MOL_CONF_IDX_COLUMN_NAME     = "mol_conf_idx";
+			const char* MOL_ID_COLUMN_NAME                  = "mol_id";
+			const char* MOL_HASH_COLUMN_NAME                = "mol_hash";
+			const char* MOL_DATA_COLUMN_NAME                = "mol_data";
+			const char* MOL_CONF_IDX_COLUMN_NAME            = "mol_conf_idx";
 
-			const char* PHARM_DATA_COLUMN_NAME       = "pharm_data";
+			const char* PHARM_DATA_COLUMN_NAME              = "pharm_data";
 
-			const char* FTR_TYPE_COLUMN_NAME         = "ftr_type";
-			const char* FTR_COUNT_COLUMN_NAME        = "ftr_count";
+			const char* FTR_TYPE_COLUMN_NAME                = "ftr_type";
+			const char* FTR_COUNT_COLUMN_NAME               = "ftr_count";
 
-			const char* FTR1_TYPE_COLUMN_NAME        = "ftr1_type";
-			const char* FTR2_TYPE_COLUMN_NAME        = "ftr2_type";
-			const char* FTR3_TYPE_COLUMN_NAME        = "ftr3_type";
-	    
-			const char* FTR12_DIST_COLUMN_NAME       = "ftr12_dist";
-			const char* FTR23_DIST_COLUMN_NAME       = "ftr23_dist";
-			const char* FTR31_DIST_COLUMN_NAME       = "ftr31_dist";
+			const char* TWO_POINT_PHARM_DATA_COLUMN_NAME    = "two_pt_pharm_data";
+			const char* THREE_POINT_PHARM_DATA_COLUMN_NAME  = "three_pt_pharm_data";
 		}
     }
 }

@@ -40,9 +40,9 @@ BOOST_PYTHON_MODULE(_pharm)
 	exportFeature();
 	exportBasicPharmacophore();
 	exportBasicFeature();
-	exportFeatureMapping();
 
-	exportBoostFunctionWrappers();
+	exportFeatureMapping();
+	exportFeatureTypeHistogram();
 
 	exportPharmacophoreIOManager();
 	exportPharmacophoreReader();
@@ -107,6 +107,8 @@ BOOST_PYTHON_MODULE(_pharm)
 	exportPharmacophoreFunctions();
 	exportFeatureFunctions();
 	exportControlParameterFunctions();
+
+	exportBoostFunctionWrappers();
 
 	registerToPythonConverters();
 	registerFromPythonConverters();

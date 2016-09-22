@@ -39,6 +39,7 @@
 #include "CDPL/Pharm/BasicFeature.hpp"  
 
 #include "CDPL/Pharm/FeatureMapping.hpp"  
+#include "CDPL/Pharm/FeatureTypeHistogram.hpp"  
 
 #include "CDPL/Pharm/PharmacophoreProperty.hpp"  
 #include "CDPL/Pharm/FeatureProperty.hpp"  

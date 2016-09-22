@@ -31,7 +31,6 @@
 #include "CDPL/Chem/Atom.hpp"
 #include "CDPL/Chem/Bond.hpp"
 
-#include "Base/CallableObjectAdapter.hpp"
 #include "Base/ObjectIdentityCheckVisitor.hpp"
 
 #include "ClassExports.hpp"
@@ -51,18 +50,6 @@ namespace
 	{
 		return func(bond);
 	}
-
-	void setAtomHashSeedFunction(CDPL::Chem::HashCodeCalculator& calculator, 
-								 const boost::python::object& callable)
-	{
-		calculator.setAtomHashSeedFunction(CDPLPythonBase::UnaryFunctionAdapter<CDPL::Base::uint64, CDPL::Chem::Atom>(callable)); 
-	}
-
-	void setBondHashSeedFunction(CDPL::Chem::HashCodeCalculator& calculator, 
-								 const boost::python::object& callable)
-	{
-		calculator.setBondHashSeedFunction(CDPLPythonBase::UnaryFunctionAdapter<CDPL::Base::uint64, CDPL::Chem::Bond>(callable)); 
-	}
 }
 
 
@@ -75,8 +62,10 @@ void CDPLPythonChem::exportHashCodeCalculator()
 		.def(python::init<>(python::arg("self")))
 		.def(python::init<const Chem::MolecularGraph&>((python::arg("self"), python::arg("molgraph"))))
 		.def(CDPLPythonBase::ObjectIdentityCheckVisitor<Chem::HashCodeCalculator>())	
-		.def("setAtomHashSeedFunction", &setAtomHashSeedFunction, (python::arg("self"), python::arg("func")))
-		.def("setBondHashSeedFunction", &setBondHashSeedFunction, (python::arg("self"), python::arg("func")))
+		.def("setAtomHashSeedFunction", &Chem::HashCodeCalculator::setAtomHashSeedFunction, 
+			 (python::arg("self"), python::arg("func")))
+		.def("setBondHashSeedFunction", &Chem::HashCodeCalculator::setBondHashSeedFunction,
+			 (python::arg("self"), python::arg("func")))
 		.def("includeGlobalStereoFeatures", &Chem::HashCodeCalculator::includeGlobalStereoFeatures, 
 			 (python::arg("self"), python::arg("include")))
 		.def("globalStereoFeaturesIncluded", &Chem::HashCodeCalculator::globalStereoFeaturesIncluded, python::arg("self"))

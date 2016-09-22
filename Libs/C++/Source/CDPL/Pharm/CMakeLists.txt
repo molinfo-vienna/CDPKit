@@ -62,12 +62,15 @@ SET(cdpl-pharm_LIB_SRCS
 
     PharmacophoreNameFunctions.cpp
     PharmacophoreFeatureCountFunctions.cpp
+    PharmacophoreFeatureTypeHistogramFunction.cpp
     InteractionPharmacophoreFunction.cpp
     ExclusionVolumeClashTestFunction.cpp
 
     ControlParameterFunctions.cpp
 
     PiPiInteractionUtilities.cpp
+    TwoPointPharmacophore.cpp
+    ThreePointPharmacophore.cpp
    )
 
 IF(SQLITE3_FOUND)

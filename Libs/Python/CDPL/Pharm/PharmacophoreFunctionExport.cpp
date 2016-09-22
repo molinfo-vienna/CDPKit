@@ -71,6 +71,8 @@ void CDPLPythonPharm::exportPharmacophoreFunctions()
 				python::arg("pharm"));
 	python::def("getFeatureCount", static_cast<std::size_t (*)(const Pharm::Pharmacophore&, unsigned int)>(&Pharm::getFeatureCount), 
 				(python::arg("pharm"), python::arg("type")));
+	python::def("buildFeatureTypeHistogram", &Pharm::buildFeatureTypeHistogram, 
+				(python::arg("pharm"), python::arg("hist")));
 	python::def("buildInteractionPharmacophore", &Pharm::buildInteractionPharmacophore, 
 				(python::arg("pharm"), python::arg("iactions")));
 	python::def("checkExclusionVolumeClash", &checkExclusionVolumeClashWrapper4, 

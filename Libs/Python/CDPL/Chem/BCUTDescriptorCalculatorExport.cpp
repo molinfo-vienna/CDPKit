@@ -30,20 +30,9 @@
 #include "CDPL/Chem/MolecularGraph.hpp"
 #include "CDPL/Chem/Atom.hpp"
 
-#include "Base/CallableObjectAdapter.hpp"
 #include "Base/ObjectIdentityCheckVisitor.hpp"
 
 #include "ClassExports.hpp"
-
-
-namespace
-{
-
-	void setAtomWeightFunction(CDPL::Chem::BCUTDescriptorCalculator& calculator, const boost::python::object& callable)
-	{
-		calculator.setAtomWeightFunction(CDPLPythonBase::UnaryFunctionAdapter<double, CDPL::Chem::Atom>(callable)); 
-	}
-}
 
 
 void CDPLPythonChem::exportBCUTDescriptorCalculator()
@@ -56,7 +45,8 @@ void CDPLPythonChem::exportBCUTDescriptorCalculator()
 		.def(python::init<const Chem::MolecularGraph&, Math::DVector&>(
 				 (python::arg("self"), python::arg("molgraph"), python::arg("descr"))))
 		.def(CDPLPythonBase::ObjectIdentityCheckVisitor<Chem::BCUTDescriptorCalculator>())	
-		.def("setAtomWeightFunction", &setAtomWeightFunction, (python::arg("self"), python::arg("func")))
+		.def("setAtomWeightFunction", &Chem::BCUTDescriptorCalculator::setAtomWeightFunction, 
+			 (python::arg("self"), python::arg("func")))
 		.def("calculate", &Chem::BCUTDescriptorCalculator::calculate, 
 			 (python::arg("self"), python::arg("molgraph"), python::arg("descr")));
 }

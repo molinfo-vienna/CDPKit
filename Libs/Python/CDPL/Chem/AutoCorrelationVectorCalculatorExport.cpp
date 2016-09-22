@@ -30,21 +30,9 @@
 #include "CDPL/Chem/MolecularGraph.hpp"
 #include "CDPL/Chem/Atom.hpp"
 
-#include "Base/CallableObjectAdapter.hpp"
 #include "Base/ObjectIdentityCheckVisitor.hpp"
 
 #include "ClassExports.hpp"
-
-
-namespace
-{
-
-	void setAtomPairWeightFunction(CDPL::Chem::AutoCorrelationVectorCalculator& calculator, 
-								   const boost::python::object& callable)
-	{
-		calculator.setAtomPairWeightFunction(CDPLPythonBase::BinaryFunctionAdapter<double, CDPL::Chem::Atom, CDPL::Chem::Atom>(callable)); 
-	}
-}
 
 
 void CDPLPythonChem::exportAutoCorrelationVectorCalculator()
@@ -57,7 +45,8 @@ void CDPLPythonChem::exportAutoCorrelationVectorCalculator()
 		.def(python::init<const Chem::MolecularGraph&, Math::DVector&>(
 				 (python::arg("self"), python::arg("molgraph"), python::arg("corr_vec"))))
 		.def(CDPLPythonBase::ObjectIdentityCheckVisitor<Chem::AutoCorrelationVectorCalculator>())	
-		.def("setAtomPairWeightFunction", &setAtomPairWeightFunction, (python::arg("self"), python::arg("func")))
+		.def("setAtomPairWeightFunction", &Chem::AutoCorrelationVectorCalculator::setAtomPairWeightFunction,
+			 (python::arg("self"), python::arg("func")))
 		.def("calculate", &Chem::AutoCorrelationVectorCalculator::calculate, 
 			 (python::arg("self"), python::arg("molgraph"), python::arg("corr_vec")));
 }

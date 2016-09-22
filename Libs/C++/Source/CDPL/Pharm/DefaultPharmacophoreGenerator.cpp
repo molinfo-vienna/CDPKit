@@ -52,19 +52,12 @@ Pharm::DefaultPharmacophoreGenerator::DefaultPharmacophoreGenerator(const Chem::
 
 void Pharm::DefaultPharmacophoreGenerator::init(bool fuzzy)
 {
-    ftrGenerators.push_back(FeatureGenPtr(new HydrophobicFeatureGenerator()));
-    ftrGenerators.push_back(FeatureGenPtr(new AromaticFeatureGenerator()));
-    ftrGenerators.push_back(FeatureGenPtr(new NegIonizableFeatureGenerator(fuzzy)));
-    ftrGenerators.push_back(FeatureGenPtr(new PosIonizableFeatureGenerator(fuzzy)));
-    ftrGenerators.push_back(FeatureGenPtr(new HBondDonorFeatureGenerator(fuzzy)));
-    ftrGenerators.push_back(FeatureGenPtr(new HBondAcceptorFeatureGenerator()));
-
-    setFeatureGenerator(FeatureType::HYDROPHOBIC, *ftrGenerators[0]);
-    setFeatureGenerator(FeatureType::AROMATIC, *ftrGenerators[1]);
-    setFeatureGenerator(FeatureType::NEG_IONIZABLE, *ftrGenerators[2]);
-    setFeatureGenerator(FeatureType::POS_IONIZABLE, *ftrGenerators[3]);
-    setFeatureGenerator(FeatureType::H_BOND_DONOR, *ftrGenerators[4]);
-    setFeatureGenerator(FeatureType::H_BOND_ACCEPTOR, *ftrGenerators[5]);
+	setFeatureGenerator(FeatureType::HYDROPHOBIC, FeatureGenerator::SharedPointer(new HydrophobicFeatureGenerator()));
+	setFeatureGenerator(FeatureType::AROMATIC, FeatureGenerator::SharedPointer(new AromaticFeatureGenerator()));
+	setFeatureGenerator(FeatureType::NEG_IONIZABLE, FeatureGenerator::SharedPointer(new NegIonizableFeatureGenerator(fuzzy)));
+	setFeatureGenerator(FeatureType::POS_IONIZABLE, FeatureGenerator::SharedPointer(new PosIonizableFeatureGenerator(fuzzy)));
+	setFeatureGenerator(FeatureType::H_BOND_DONOR, FeatureGenerator::SharedPointer(new HBondDonorFeatureGenerator(fuzzy)));
+    setFeatureGenerator(FeatureType::H_BOND_ACCEPTOR, FeatureGenerator::SharedPointer(new HBondAcceptorFeatureGenerator()));
 
     enableFeature(FeatureType::HYDROPHOBIC, true);
     enableFeature(FeatureType::AROMATIC, true);

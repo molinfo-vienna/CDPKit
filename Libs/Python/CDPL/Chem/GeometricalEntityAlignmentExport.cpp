@@ -28,9 +28,6 @@
 
 #include "CDPL/Chem/Atom.hpp"
 
-#include "Base/CallableObjectAdapter.hpp"
-#include "Base/ObjectIdentityCheckVisitor.hpp"
-
 #include "GeometricalEntityAlignmentExport.hpp"
 #include "ClassExports.hpp"
 

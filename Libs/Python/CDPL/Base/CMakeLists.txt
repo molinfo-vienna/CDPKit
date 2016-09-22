@@ -16,6 +16,7 @@ SET(base_MOD_SRCS
     DataFormatExport.cpp
     DataIOBaseExport.cpp
     IOStreamExport.cpp
+    BoostFunctionWrapperExport.cpp
     ToPythonConverterRegistration.cpp
     FromPythonConverterRegistration.cpp
     ExceptionTranslatorRegistration.cpp

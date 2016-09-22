@@ -26,11 +26,7 @@
 
 #include <boost/python.hpp>
 
-#include "CDPL/Chem/Entity3D.hpp"
 #include "CDPL/Chem/Atom.hpp"
-
-#include "Base/CallableObjectAdapter.hpp"
-#include "Base/ObjectIdentityCheckVisitor.hpp"
 
 #include "TopologicalEntityAlignmentExport.hpp"
 #include "ClassExports.hpp"

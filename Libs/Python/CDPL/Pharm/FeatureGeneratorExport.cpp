@@ -31,7 +31,6 @@
 #include "CDPL/Chem/MolecularGraph.hpp"
 #include "CDPL/Chem/Atom.hpp"
 
-#include "Base/CallableObjectAdapter.hpp"
 #include "Base/ObjectIdentityCheckVisitor.hpp"
 
 #include "ClassExports.hpp"
@@ -43,18 +42,12 @@ namespace
 	struct FeatureGeneratorWrapper : CDPL::Pharm::FeatureGenerator, boost::python::wrapper<CDPL::Pharm::FeatureGenerator> 
 	{
 
+		typedef boost::shared_ptr<FeatureGeneratorWrapper> SharedPointer;
+
 		void generate(const CDPL::Chem::MolecularGraph& molgraph, CDPL::Pharm::Pharmacophore& pharm) {	
 			this->get_override("generate")(boost::ref(molgraph), boost::ref(pharm));
 		}      
 	};
-
-    void set3DCoordsFunc(CDPL::Pharm::FeatureGenerator& gen, const boost::python::object& callable)
-    {
-		if (callable.ptr() == Py_None)
-			gen.setAtom3DCoordinatesFunction(CDPL::Pharm::FeatureGenerator::Atom3DCoordinatesFunction());
-		else
-			gen.setAtom3DCoordinatesFunction(CDPLPythonBase::UnaryFunctionAdapter<const CDPL::Math::Vector3D&, CDPL::Chem::Atom>(callable)); 
-    }
 }
 
 
@@ -63,10 +56,10 @@ void CDPLPythonPharm::exportFeatureGenerator()
     using namespace boost;
     using namespace CDPL;
 
-    python::class_<FeatureGeneratorWrapper, boost::noncopyable>("FeatureGenerator", python::no_init)
+    python::class_<FeatureGeneratorWrapper, FeatureGeneratorWrapper::SharedPointer, boost::noncopyable>("FeatureGenerator", python::no_init)
 		.def(python::init<>(python::arg("self")))
 		.def(CDPLPythonBase::ObjectIdentityCheckVisitor<Pharm::FeatureGenerator>())	
-		.def("setAtom3DCoordinatesFunction", &set3DCoordsFunc, 
+		.def("setAtom3DCoordinatesFunction", &Pharm::FeatureGenerator::setAtom3DCoordinatesFunction, 
 			 (python::arg("self"), python::arg("func")))
 		.def("getAtom3DCoordinatesFunction", &Pharm::FeatureGenerator::getAtom3DCoordinatesFunction, 
 			 python::arg("self"), python::return_internal_reference<>())

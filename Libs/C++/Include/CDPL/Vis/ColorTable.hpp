@@ -31,6 +31,7 @@
 #ifndef CDPL_VIS_COLORTABLE_HPP
 #define CDPL_VIS_COLORTABLE_HPP
 
+#include "CDPL/Vis/APIPrefix.hpp"
 #include "CDPL/Vis/Color.hpp"
 #include "CDPL/Util/Map.hpp"
 
@@ -50,7 +51,22 @@ namespace CDPL
 		 * \brief A container for the storage and lookup of Vis::Color objects that are associated with a
 		 *        numeric identifier.
 		 */
-		typedef Util::Map<std::size_t, Color> ColorTable;
+		class CDPL_VIS_API ColorTable : public Util::Map<std::size_t, Color>
+		{
+	 
+		  public:
+			typedef boost::shared_ptr<ColorTable> SharedPointer;
+
+			ColorTable(): Map<std::size_t, Color>() {}
+
+			template <typename Iter>
+			ColorTable(const Iter& beg, const Iter& end): Map<std::size_t, Color>(beg, end) {}
+
+		  private:
+			const char* getClassName() const {
+				return "ColorTable";
+			}
+		};
 
 		/**
 		 * @}

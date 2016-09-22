@@ -53,19 +53,19 @@ namespace CDPLPythonChem
 				.def(python::init<const AlignmentType&>(
 						 (python::arg("self"), python::arg("alignment"))))
 				.def(CDPLPythonBase::ObjectIdentityCheckVisitor<AlignmentType >())	
-				.def("setEntityMatchFunction", &setConstraintFunc1, 
+				.def("setEntityMatchFunction", &AlignmentType::setEntityMatchFunction, 
 					 (python::arg("self"), python::arg("func")))
 				.def("getEntityMatchFunction", &AlignmentType::getEntityMatchFunction, 
 					 python::arg("self"), python::return_internal_reference<>())
-				.def("setEntityPairMatchFunction", &setConstraintFunc2, 
+				.def("setEntityPairMatchFunction", &AlignmentType::setEntityPairMatchFunction, 
 					 (python::arg("self"), python::arg("func")))
 				.def("getEntityPairMatchFunction", &AlignmentType::getEntityPairMatchFunction, 
 					 python::arg("self"), python::return_internal_reference<>())
-				.def("setTopAlignmentConstraintFunction", &setConstraintFunc3, 
+				.def("setTopAlignmentConstraintFunction", &AlignmentType::setTopAlignmentConstraintFunction, 
 					 (python::arg("self"), python::arg("func")))
 				.def("getTopAlignmentConstraintFunction", &AlignmentType::getTopAlignmentConstraintFunction, 
 					 python::arg("self"), python::return_internal_reference<>())
-				.def("setEntity3DCoordinatesFunction", &setCoordinatesFunc, 
+				.def("setEntity3DCoordinatesFunction", &AlignmentType::setEntity3DCoordinatesFunction, 
 					 (python::arg("self"), python::arg("func")))
 				.def("getEntity3DCoordinatesFunction", &AlignmentType::getEntity3DCoordinatesFunction, 
 					 python::arg("self"), python::return_internal_reference<>())
@@ -104,32 +104,6 @@ namespace CDPLPythonChem
 
 		static void addEntityFunc(AlignmentType& alignment, T& ent, bool first_set) {
 			alignment.addEntity(ent, first_set);
-		}
-
-		static void setConstraintFunc1(AlignmentType& alignment, const boost::python::object& callable) {
-			if (callable.ptr() == Py_None)
-				alignment.setEntityMatchFunction(typename AlignmentType::EntityMatchFunction());
-			else
-				alignment.setEntityMatchFunction(CDPLPythonBase::BinaryFunctionAdapter<bool, T, T>(callable)); 
-		}
-	
-		static void setConstraintFunc2(AlignmentType& alignment, const boost::python::object& callable) {
-			if (callable.ptr() == Py_None)
-				alignment.setEntityPairMatchFunction(typename AlignmentType::EntityPairMatchFunction());
-			else
-				alignment.setEntityPairMatchFunction(CDPLPythonBase::QuarternaryFunctionAdapter<bool, T, T, T, T>(callable)); 
-		}
-
-		static void setConstraintFunc3(AlignmentType& alignment, const boost::python::object& callable) {
-			if (callable.ptr() == Py_None)
-				alignment.setTopAlignmentConstraintFunction(typename AlignmentType::TopologicalAlignmentConstraintFunction());
-			else
-				alignment.setTopAlignmentConstraintFunction(CDPLPythonBase::UnaryFunctionAdapter<bool, 
-															typename AlignmentType::EntityMapping>(callable)); 
-		}
-
-		static void setCoordinatesFunc(AlignmentType& alignment, const boost::python::object& callable) {
-			alignment.setEntity3DCoordinatesFunction(CDPLPythonBase::UnaryFunctionAdapter<const CDPL::Math::Vector3D&, T>(callable)); 
 		}
     };
 }

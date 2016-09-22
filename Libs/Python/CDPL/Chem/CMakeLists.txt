@@ -202,6 +202,8 @@ SET(chem_MOD_SRCS
     SimilarityFunctionExport.cpp 
 
     BoostFunctionWrapperExport.cpp
+    Atom3DCoordinatesFunctorExport.cpp
+    AtomConformer3DCoordinatesFunctorExport.cpp
 
     ToPythonConverterRegistration.cpp 
     FromPythonConverterRegistration.cpp 

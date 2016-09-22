@@ -36,7 +36,8 @@ void CDPLPythonPharm::exportPharmacophoreGenerator()
     using namespace boost;
     using namespace CDPL;
 
-	python::class_<Pharm::PharmacophoreGenerator, python::bases<Pharm::FeatureGenerator>, boost::noncopyable>
+	python::class_<Pharm::PharmacophoreGenerator, Pharm::PharmacophoreGenerator::SharedPointer,
+				   python::bases<Pharm::FeatureGenerator>, boost::noncopyable>
 		("PharmacophoreGenerator", python::no_init)
 		.def(python::init<>(python::arg("self")))
 		.def(python::init<Pharm::PharmacophoreGenerator>((python::arg("self"), python::arg("gen"))))
@@ -45,7 +46,7 @@ void CDPLPythonPharm::exportPharmacophoreGenerator()
 		.def("removeFeatureGenerator", &Pharm::PharmacophoreGenerator::removeFeatureGenerator, 
 			 (python::arg("self"), python::arg("type")))
 		.def("getFeatureGenerator", &Pharm::PharmacophoreGenerator::getFeatureGenerator, 
-			 (python::arg("self"), python::arg("type")), python::return_internal_reference<>())
+			 (python::arg("self"), python::arg("type")))
 		.def("enableFeature", &Pharm::PharmacophoreGenerator::enableFeature, 
 			 (python::arg("self"), python::arg("type"), python::arg("enable")))
 		.def("isFeatureEnabled", &Pharm::PharmacophoreGenerator::isFeatureEnabled, 

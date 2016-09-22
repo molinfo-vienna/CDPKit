@@ -177,3 +177,13 @@ void Internal::ByteBuffer::getValueBytes(char* bytes, std::size_t type_size, std
 # error "ByteBuffer: BOOST_LITTLE_ENDIAN or BOOST_BIG_ENDIAN needs to be defined"
 #endif
 }
+
+const char* Internal::ByteBuffer::getData() const
+{
+	return &data[0];
+}
+
+char* Internal::ByteBuffer::getData()
+{
+	return &data[0];
+}

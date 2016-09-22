@@ -31,6 +31,7 @@
 #ifndef CDPL_CHEM_ELEMENTHISTOGRAM_HPP
 #define CDPL_CHEM_ELEMENTHISTOGRAM_HPP
 
+#include "CDPL/Chem/APIPrefix.hpp"
 #include "CDPL/Util/Map.hpp"
 
 
@@ -52,8 +53,17 @@ namespace CDPL
 		 * (defined in namespace Chem::AtomType) of the chemical elements and the mapped integer values
 		 * correspond to the element frequencies.
 		 */
-		typedef Util::Map<unsigned int, std::size_t, true> ElementHistogram;
+		class CDPL_CHEM_API ElementHistogram : public Util::Map<unsigned int, std::size_t, true>
+		{
 
+		  public:
+			typedef boost::shared_ptr<ElementHistogram> SharedPointer;
+
+		  private:
+			const char* getClassName() const {
+				return "ElementHistogram";
+			}
+		};
 		/**
 		 * @}
 		 */

@@ -31,7 +31,6 @@
 #include "CDPL/Math/VectorArray.hpp"
 
 #include "Base/ObjectIdentityCheckVisitor.hpp"
-#include "Base/CallableObjectAdapter.hpp"
 
 #include "ClassExports.hpp"
 
@@ -62,8 +61,8 @@ namespace
 				.export_values();
 			
 			cl
-				.def("__init__", python::make_constructor(&construct, python::default_call_policies(),
-														  (python::arg("func"), python::arg("grad_func"))))
+				.def(python::init<const typename MinimizerType::ObjectiveFunction&, const typename MinimizerType::GradientFunction&>(
+						 (python::arg("self"), python::arg("func"), python::arg("grad_func"))))
 				.def(CDPLPythonBase::ObjectIdentityCheckVisitor<MinimizerType>())
 				.def("getGradientNorm", &MinimizerType::getGradientNorm, python::arg("self"))
 				.def("getFunctionDelta", &MinimizerType::getFunctionDelta, python::arg("self"))
@@ -80,11 +79,6 @@ namespace
 				.add_property("functionDelta", &MinimizerType::getFunctionDelta)
 				.add_property("numIterations", &MinimizerType::getNumIterations)
 				.add_property("status", &MinimizerType::getStatus);
-		}
-
-		static MinimizerType* construct(const boost::python::object& func, const boost::python::object& grad_func) {
-			return new MinimizerType(CDPLPythonBase::UnaryFunctionAdapter<FuncValueType, ArrayType>(func),
-									 CDPLPythonBase::BinaryFunctionAdapter<FuncValueType, ArrayType, ArrayType>(grad_func));
 		}
 
 		static typename MinimizerType::Status minimize(MinimizerType& minimizer, ArrayType& x, ArrayType& g, 

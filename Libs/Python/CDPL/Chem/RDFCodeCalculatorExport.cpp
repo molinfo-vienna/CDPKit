@@ -30,20 +30,9 @@
 #include "CDPL/Chem/MolecularGraph.hpp"
 #include "CDPL/Chem/Atom.hpp"
 
-#include "Base/CallableObjectAdapter.hpp"
 #include "Base/ObjectIdentityCheckVisitor.hpp"
 
 #include "ClassExports.hpp"
-
-
-namespace
-{
-
-	void setAtomPairWeightFunction(CDPL::Chem::RDFCodeCalculator& calculator, const boost::python::object& callable)
-	{
-		calculator.setAtomPairWeightFunction(CDPLPythonBase::BinaryFunctionAdapter<double, CDPL::Chem::Atom, CDPL::Chem::Atom>(callable)); 
-	}
-}
 
 
 void CDPLPythonChem::exportRDFCodeCalculator()
@@ -56,7 +45,7 @@ void CDPLPythonChem::exportRDFCodeCalculator()
 		.def(python::init<Chem::MolecularGraph&, Math::DVector&>(
 				 (python::arg("self"), python::arg("molgraph"), python::arg("rdf_code"))))
 		.def(CDPLPythonBase::ObjectIdentityCheckVisitor<Chem::RDFCodeCalculator>())	
-		.def("setAtomPairWeightFunction", &setAtomPairWeightFunction, 
+		.def("setAtomPairWeightFunction", &Chem::RDFCodeCalculator::setAtomPairWeightFunction, 
 			 (python::arg("self"), python::arg("func")))
 		.def("setNumSteps", &Chem::RDFCodeCalculator::setNumSteps, 
 			 (python::arg("self"), python::arg("num_steps")))

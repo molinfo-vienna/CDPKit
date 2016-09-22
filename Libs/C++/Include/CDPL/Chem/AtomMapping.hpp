@@ -31,6 +31,7 @@
 #ifndef CDPL_CHEM_ATOMMAPPING_HPP
 #define CDPL_CHEM_ATOMMAPPING_HPP
 
+#include "CDPL/Chem/APIPrefix.hpp"
 #include "CDPL/Util/MultiMap.hpp"
 
 
@@ -56,7 +57,17 @@ namespace CDPL
 		 * and AtomMapping::operator[]() return a \e null pointer to indicate that the lookup of the 
 		 * mapped atom has failed.
 		 */
-		typedef Util::MultiMap<const Atom*, const Atom*, true> AtomMapping;
+		class CDPL_CHEM_API AtomMapping : public Util::MultiMap<const Atom*, const Atom*, true>
+		{
+
+		  public:
+			typedef boost::shared_ptr<AtomMapping> SharedPointer;
+
+		  private:
+			const char* getClassName() const {
+				return "AtomMapping";
+			}
+		};
 
 		/**
 		 * @}

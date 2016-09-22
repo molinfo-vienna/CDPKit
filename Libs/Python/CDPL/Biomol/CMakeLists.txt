@@ -35,6 +35,8 @@ SET(biomol_MOD_SRCS
     MolecularGraphFunctionExport.cpp
     ControlParameterFunctionExport.cpp 
 
+    BoostFunctionWrapperExport.cpp
+
     ToPythonConverterRegistration.cpp
     FromPythonConverterRegistration.cpp
    )

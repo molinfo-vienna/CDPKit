@@ -63,7 +63,8 @@ BOOST_PYTHON_MODULE(_chem)
 	exportDefaultMultiConfMoleculeInputProcessor();
 	exportAtomDictionary();
 
-	exportBoostFunctionWrappers();
+	exportAtom3DCoordinatesFunctor();
+	exportAtomConformer3DCoordinatesFunctor();
 
 	exportMatchConstraintList();
 	exportMatchExpressions();
@@ -233,6 +234,8 @@ BOOST_PYTHON_MODULE(_chem)
 	exportFragmentFunctions();
 	exportReactionFunctions();
 	exportSimilarityFunctions();
+
+	exportBoostFunctionWrappers();
 
 	registerToPythonConverters();
 	registerFromPythonConverters();

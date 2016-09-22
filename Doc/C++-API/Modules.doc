@@ -204,6 +204,9 @@
 \defgroup CDPL_CHEM_CONTROL_PARAMETERS Control-Parameter Keys
 \ingroup CDPL_CHEM_CONSTANTS
 
+\defgroup CDPL_CHEM_FUNCTORS Functor Classes
+\ingroup CDPL_CHEM
+
 \defgroup CDPL_CHEM_FUNCTIONS Free Functions
 \ingroup CDPL_CHEM
 

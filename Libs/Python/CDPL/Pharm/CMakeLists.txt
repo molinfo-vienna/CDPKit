@@ -13,7 +13,9 @@ SET(pharm_MOD_SRCS
     FeatureExport.cpp
     BasicPharmacophoreExport.cpp
     BasicFeatureExport.cpp
+
     FeatureMappingExport.cpp 
+    FeatureTypeHistogramExport.cpp 
 
     PharmacophoreIOManagerExport.cpp 
     PharmacophoreReaderExport.cpp 

@@ -31,7 +31,6 @@
 #include "CDPL/Chem/Atom.hpp"
 #include "CDPL/Pharm/Pharmacophore.hpp"
 
-#include "Base/CallableObjectAdapter.hpp"
 #include "Base/ObjectIdentityCheckVisitor.hpp"
 
 #include "ClassExports.hpp"
@@ -51,11 +50,6 @@ namespace
 	{
 		gen.generate(cntnr, prnt_molgraph, pharm);
 	}
-
-	void set3DCoordsFunc(CDPL::Pharm::SurfaceXVolumeCoatGenerator& gen, const boost::python::object& callable)
-    {
-		gen.setAtom3DCoordinatesFunction(CDPLPythonBase::UnaryFunctionAdapter<const CDPL::Math::Vector3D&, CDPL::Chem::Atom>(callable)); 
-    }
 }
 
 
@@ -69,11 +63,10 @@ void CDPLPythonPharm::exportSurfaceXVolumeCoatGenerator()
 		.def(python::init<>(python::arg("self")))
 		.def(python::init<const Pharm::SurfaceXVolumeCoatGenerator&>(
 				 (python::arg("self"), python::arg("gen"))))
-		.def("__init__", python::make_constructor(&construct, python::default_call_policies(),
-												  (python::arg("cntnr"), python::arg("parent_molgraph"),
-												   python::arg("pharm"))))
+		.def(python::init<CDPL::Chem::AtomContainer&, CDPL::Chem::MolecularGraph&, CDPL::Pharm::Pharmacophore&>(
+				 (python::arg("self"), python::arg("cntnr"), python::arg("parent_molgraph"), python::arg("pharm"))))
 		.def(CDPLPythonBase::ObjectIdentityCheckVisitor<Pharm::SurfaceXVolumeCoatGenerator>())	
-		.def("setAtom3DCoordinatesFunction", &set3DCoordsFunc, 
+		.def("setAtom3DCoordinatesFunction", &Pharm::SurfaceXVolumeCoatGenerator::setAtom3DCoordinatesFunction,
 			 (python::arg("self"), python::arg("func")))
 		.def("getAtom3DCoordinatesFunction", &Pharm::SurfaceXVolumeCoatGenerator::getAtom3DCoordinatesFunction, 
 			 python::arg("self"), python::return_internal_reference<>())

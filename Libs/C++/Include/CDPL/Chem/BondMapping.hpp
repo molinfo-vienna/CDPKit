@@ -31,6 +31,7 @@
 #ifndef CDPL_CHEM_BONDMAPPING_HPP
 #define CDPL_CHEM_BONDMAPPING_HPP
 
+#include "CDPL/Chem/APIPrefix.hpp"
 #include "CDPL/Util/MultiMap.hpp"
 
 
@@ -56,7 +57,17 @@ namespace CDPL
 		 * and BondMapping::operator[]() return a \e null pointer to indicate that the lookup of the
 		 * mapped bond has failed.
 		 */	
-		typedef Util::MultiMap<const Bond*, const Bond*, true> BondMapping;
+		class CDPL_CHEM_API BondMapping : public Util::MultiMap<const Bond*, const Bond*, true>
+		{
+
+		  public:
+			typedef boost::shared_ptr<BondMapping> SharedPointer;
+
+		  private:
+			const char* getClassName() const {
+				return "BondMapping";
+			}
+		};
 
 		/**
 		 * @}

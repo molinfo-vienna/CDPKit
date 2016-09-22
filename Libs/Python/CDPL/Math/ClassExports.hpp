@@ -54,6 +54,8 @@ namespace CDPLPythonMath
 	void exportKabschAlgorithms();
 
 	void exportVectorArrays();
+
+	void exportBoostFunctionWrappers();
 }
 
 #endif // CDPL_PYTHON_MATH_CLASSEXPORTS_HPP

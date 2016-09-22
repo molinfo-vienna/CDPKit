@@ -33,8 +33,6 @@
 
 #include <vector>
 
-#include <boost/shared_ptr.hpp>
-
 #include "CDPL/Pharm/APIPrefix.hpp"
 #include "CDPL/Pharm/PharmacophoreGenerator.hpp"
 
@@ -74,11 +72,6 @@ namespace CDPL
 
 		  private:
 			void init(bool);
-
-			typedef boost::shared_ptr<FeatureGenerator>  FeatureGenPtr;
-			typedef std::vector<FeatureGenPtr> FeatureGenList;
-
-			FeatureGenList ftrGenerators;
 		};
 
 		/**

@@ -31,6 +31,7 @@
 #ifndef CDPL_PHARM_FEATUREMAPPING_HPP
 #define CDPL_PHARM_FEATUREMAPPING_HPP
 
+#include "CDPL/Pharm/APIPrefix.hpp"
 #include "CDPL/Util/MultiMap.hpp"
 
 
@@ -56,7 +57,17 @@ namespace CDPL
 		 * and FeatureMapping::operator[]() return a \e null pointer to indicate that the lookup of the 
 		 * mapped feature has failed.
 		 */
-		typedef Util::MultiMap<const Feature*, const Feature*, true> FeatureMapping;
+		class CDPL_PHARM_API FeatureMapping : public Util::MultiMap<const Feature*, const Feature*, true>
+		{
+
+		  public:
+			typedef boost::shared_ptr<FeatureMapping> SharedPointer;
+
+		  private:
+			const char* getClassName() const {
+				return "FeatureMapping";
+			}
+		};
 
 		/**
 		 * @}

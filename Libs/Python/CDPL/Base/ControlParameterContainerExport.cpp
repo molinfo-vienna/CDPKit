@@ -31,7 +31,6 @@
 
 #include "CDPL/Base/ControlParameterContainer.hpp"
 
-#include "CallableObjectAdapter.hpp"
 #include "ObjectIdentityCheckVisitor.hpp"
 #include "ClassExports.hpp"
 
@@ -97,23 +96,6 @@ namespace
 		return params;
 	}
 
-	std::size_t registerParameterChangedCallback(CDPL::Base::ControlParameterContainer& cntnr, const boost::python::object& callable)
-	{
-		return cntnr.registerParameterChangedCallback(CDPLPythonBase::BinaryFunctionAdapter<void, CDPL::Base::LookupKey, 
-													CDPL::Base::Variant, true>(callable));
-	}
-
-	std::size_t registerParameterRemovedCallback(CDPL::Base::ControlParameterContainer& cntnr, const boost::python::object& callable)
-	{
-		return cntnr.registerParameterRemovedCallback(CDPLPythonBase::UnaryFunctionAdapter<void, CDPL::Base::LookupKey> 
-													(callable));
-	}
-	
-	std::size_t registerParentChangedCallback(CDPL::Base::ControlParameterContainer& cntnr, const boost::python::object& callable)
-	{
-		return cntnr.registerParentChangedCallback(CDPLPythonBase::NoArgFunctionAdapter<void>(callable));
-	}
-
 	void addParameters(CDPL::Base::ControlParameterContainer& cntnr, CDPL::Base::ControlParameterContainer& other)
 	{
 		cntnr.addParameters(other);
@@ -156,13 +138,16 @@ void CDPLPythonBase::exportControlParameterContainer()
 		.def("addParameters", &addParameters, (python::arg("self"), python::arg("cntnr")))
 		.def("copyParameters", &copyParameters, (python::arg("self"), python::arg("cntnr")))
 		.def("getNumParameters", &Base::ControlParameterContainer::getNumParameters, python::arg("self"))
-		.def("registerParameterChangedCallback", &registerParameterChangedCallback, (python::arg("self"), python::arg("func")))
+		.def("registerParameterChangedCallback", &Base::ControlParameterContainer::registerParameterChangedCallback, 
+			 (python::arg("self"), python::arg("func")))
 		.def("unregisterParameterChangedCallback", &Base::ControlParameterContainer::unregisterParameterChangedCallback, 
 			 (python::arg("self"), python::arg("id")))
-		.def("registerParameterRemovedCallback", &registerParameterRemovedCallback, (python::arg("self"), python::arg("func")))
+		.def("registerParameterRemovedCallback", &Base::ControlParameterContainer::registerParameterRemovedCallback, 
+			 (python::arg("self"), python::arg("func")))
 		.def("unregisterParameterRemovedCallback", &Base::ControlParameterContainer::unregisterParameterRemovedCallback, 
 			 (python::arg("self"), python::arg("id")))
-		.def("registerParentChangedCallback", &registerParentChangedCallback, (python::arg("self"), python::arg("func")))
+		.def("registerParentChangedCallback", &Base::ControlParameterContainer::registerParentChangedCallback, 
+			 (python::arg("self"), python::arg("func")))
 		.def("unregisterParentChangedCallback", &Base::ControlParameterContainer::unregisterParentChangedCallback, 
 			 (python::arg("self"), python::arg("id")))
 		.def("getParent", &Base::ControlParameterContainer::getParent, python::arg("self"), python::return_internal_reference<1>())

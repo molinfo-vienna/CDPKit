@@ -31,6 +31,7 @@
 #ifndef CDPL_CHEM_ENTITY3DMAPPING_HPP
 #define CDPL_CHEM_ENTITY3DMAPPING_HPP
 
+#include "CDPL/Chem/APIPrefix.hpp"
 #include "CDPL/Util/MultiMap.hpp"
 
 
@@ -56,8 +57,17 @@ namespace CDPL
 		 * and Entity3DMapping::operator[]() return a \e null pointer to indicate that the lookup of the 
 		 * mapped entity has failed.
 		 */
-		typedef Util::MultiMap<const Entity3D*, const Entity3D*, true> Entity3DMapping;
+		class CDPL_CHEM_API Entity3DMapping : public Util::MultiMap<const Entity3D*, const Entity3D*, true>
+		{
 
+		  public:
+			typedef boost::shared_ptr<Entity3DMapping> SharedPointer;
+
+		  private:
+			const char* getClassName() const {
+				return "Entity3DMapping";
+			}
+		};
 		/**
 		 * @}
 		 */

@@ -24,9 +24,59 @@
  */
 
 
+#include <boost/function.hpp>
+
+#include "CDPL/Pharm/FeaturePairDistanceMatchFunctor.hpp"
+#include "CDPL/Pharm/FeaturePositionMatchFunctor.hpp"
+#include "CDPL/Pharm/FeatureGeometryMatchFunctor.hpp"
+#include "CDPL/Pharm/HBondingInteractionConstraint.hpp"
+#include "CDPL/Pharm/OrthogonalPiPiInteractionConstraint.hpp"
+#include "CDPL/Pharm/CationPiInteractionConstraint.hpp"
+#include "CDPL/Pharm/FeatureTypeMatchFunctor.hpp"
+#include "CDPL/Pharm/ParallelPiPiInteractionConstraint.hpp"
+#include "CDPL/Pharm/FeatureDistanceConstraint.hpp"
+#include "CDPL/Pharm/FeatureInteractionConstraintConnector.hpp"
+#include "CDPL/Pharm/TopologicalQueryPharmAlignmentFilter.hpp"
+#include "CDPL/Pharm/GeometricalQueryPharmAlignmentFilter.hpp"
+
+#include "Base/GenericFromPythonConverter.hpp"
+
 #include "ConverterRegistration.hpp"
 
 
 void CDPLPythonPharm::registerFromPythonConverters()
 {
+	using namespace CDPL;
+
+	CDPLPythonBase::GenericFromPythonConverter<Pharm::FeaturePairDistanceMatchFunctor,
+											   boost::function4<bool, const Pharm::Feature&, const Pharm::Feature&, 
+																const Pharm::Feature&, const Pharm::Feature&> >();
+
+	CDPLPythonBase::GenericFromPythonConverter<Pharm::FeaturePositionMatchFunctor, 
+											   boost::function3<bool, const Pharm::Feature&, 
+																const Pharm::Feature&, const Math::Matrix4D&> >();
+	CDPLPythonBase::GenericFromPythonConverter<Pharm::FeatureGeometryMatchFunctor, 
+											   boost::function3<bool, const Pharm::Feature&, 
+																const Pharm::Feature&, const Math::Matrix4D&> >();
+
+	CDPLPythonBase::GenericFromPythonConverter<Pharm::HBondingInteractionConstraint, 
+											   boost::function2<bool, const Pharm::Feature&, const Pharm::Feature&> >();
+	CDPLPythonBase::GenericFromPythonConverter<Pharm::OrthogonalPiPiInteractionConstraint, 
+											   boost::function2<bool, const Pharm::Feature&, const Pharm::Feature&> >();
+	CDPLPythonBase::GenericFromPythonConverter<Pharm::CationPiInteractionConstraint, 
+											   boost::function2<bool, const Pharm::Feature&, const Pharm::Feature&> >();
+	CDPLPythonBase::GenericFromPythonConverter<Pharm::FeatureTypeMatchFunctor, 
+											   boost::function2<bool, const Pharm::Feature&, const Pharm::Feature&> >();
+	CDPLPythonBase::GenericFromPythonConverter<Pharm::ParallelPiPiInteractionConstraint, 
+											   boost::function2<bool, const Pharm::Feature&, const Pharm::Feature&> >();
+	CDPLPythonBase::GenericFromPythonConverter<Pharm::FeatureDistanceConstraint, 
+											   boost::function2<bool, const Pharm::Feature&, const Pharm::Feature&> >();
+
+	CDPLPythonBase::GenericFromPythonConverter<Pharm::FeatureInteractionConstraintConnector, 
+											   Pharm::FeatureInteractionConstraintConnector::ConstraintFunction>();
+
+	CDPLPythonBase::GenericFromPythonConverter<Pharm::TopologicalQueryPharmAlignmentFilter, 
+											   boost::function1<bool, const Pharm::FeatureMapping&> >();
+	CDPLPythonBase::GenericFromPythonConverter<Pharm::GeometricalQueryPharmAlignmentFilter, 
+											   boost::function1<bool, const Pharm::FeatureMapping&> >();
 }

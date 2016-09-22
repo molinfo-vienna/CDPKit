@@ -31,6 +31,7 @@
 #ifndef CDPL_CHEM_FRAGMENTLIST_HPP
 #define CDPL_CHEM_FRAGMENTLIST_HPP
 
+#include "CDPL/Chem/APIPrefix.hpp"
 #include "CDPL/Chem/Fragment.hpp"
 #include "CDPL/Util/IndirectArray.hpp"
 
@@ -49,7 +50,17 @@ namespace CDPL
 		/**
 		 * \brief A data type for the storage of Chem::Fragment objects.
 		 */
-		typedef Util::IndirectArray<Fragment> FragmentList;
+		class CDPL_CHEM_API FragmentList : public Util::IndirectArray<Fragment>
+		{
+
+		  public:
+			typedef boost::shared_ptr<FragmentList> SharedPointer;
+
+		  private:
+			const char* getClassName() const {
+				return "FragmentList";
+			}
+		};
 
 		/**
 		 * @}

@@ -43,6 +43,8 @@ namespace CDPLPythonBiomol
 	void exportPDBMolecularGraphOutputHandler();
 	void exportCDFMoleculeInputHandler();
 	void exportCDFMolecularGraphOutputHandler();
+
+	void exportBoostFunctionWrappers();
 }
 
 #endif // CDPL_PYTHON_BIOMOL_CLASSEXPORTS_HPP

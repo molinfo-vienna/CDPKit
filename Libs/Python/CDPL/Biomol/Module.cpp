@@ -64,6 +64,8 @@ BOOST_PYTHON_MODULE(_biomol)
 	exportMolecularGraphFunctions();
 	exportControlParameterFunctions();
 
+	exportBoostFunctionWrappers();
+
 	registerToPythonConverters();
 	registerFromPythonConverters();
 }

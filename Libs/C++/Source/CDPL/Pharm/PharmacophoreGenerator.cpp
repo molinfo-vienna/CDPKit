@@ -50,14 +50,14 @@ void Pharm::PharmacophoreGenerator::clearEnabledFeatures()
 	enabledFeatures.clear();
 }
 
-void Pharm::PharmacophoreGenerator::setFeatureGenerator(unsigned int type, FeatureGenerator& ftr_gen)
+void Pharm::PharmacophoreGenerator::setFeatureGenerator(unsigned int type, const FeatureGenerator::SharedPointer& ftr_gen)
 {
 	FeatureGeneratorMap::iterator it = featureGeneratorMap.find(type);
 
 	if (it == featureGeneratorMap.end())
-		featureGeneratorMap.insert(FeatureGeneratorMap::value_type(type, &ftr_gen));
+		featureGeneratorMap.insert(FeatureGeneratorMap::value_type(type, ftr_gen));
 	else
-		it->second = &ftr_gen;
+		it->second = ftr_gen;
 }
 
 void Pharm::PharmacophoreGenerator::removeFeatureGenerator(unsigned int type)
@@ -65,12 +65,12 @@ void Pharm::PharmacophoreGenerator::removeFeatureGenerator(unsigned int type)
 	featureGeneratorMap.erase(type);
 }
 
-Pharm::PharmacophoreGenerator::FeatureGenerator*
+Pharm::PharmacophoreGenerator::FeatureGenerator::SharedPointer
 Pharm::PharmacophoreGenerator::getFeatureGenerator(unsigned int type) const
 {
 	FeatureGeneratorMap::const_iterator it = featureGeneratorMap.find(type);
 
-	return (it == featureGeneratorMap.end() ? static_cast<FeatureGenerator*>(0) : it->second);
+	return (it == featureGeneratorMap.end() ? FeatureGenerator::SharedPointer() : it->second);
 }
 
 void Pharm::PharmacophoreGenerator::generate(const Chem::MolecularGraph& molgraph, Pharmacophore& pharm)

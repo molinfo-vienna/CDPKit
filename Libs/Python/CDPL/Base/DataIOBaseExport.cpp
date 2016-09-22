@@ -27,17 +27,11 @@
 
 #include "CDPL/Base/DataIOBase.hpp"
 
-#include "CallableObjectAdapter.hpp"
 #include "ClassExports.hpp"
 
 
 namespace
 {
-
-	std::size_t registerIOCallback(CDPL::Base::DataIOBase& io_base, const boost::python::object& callable)
-	{
-		return io_base.registerIOCallback(CDPLPythonBase::UnaryFunctionAdapter<void, CDPL::Base::DataIOBase>(callable));
-	}
 
 	struct DataIOBaseWrapper : CDPL::Base::DataIOBase, boost::python::wrapper<CDPL::Base::DataIOBase> 
 	{
@@ -52,7 +46,8 @@ void CDPLPythonBase::exportDataIOBase()
 
 	python::class_<DataIOBaseWrapper, python::bases<Base::ControlParameterContainer>, boost::noncopyable>("DataIOBase", python::no_init)
 		.def(python::init<>(python::arg("self")))
-		.def("registerIOCallback", &registerIOCallback, python::arg("func"))
-		.def("unregisterIOCallback", &Base::DataIOBase::unregisterIOCallback, (python::arg("self"), python::arg("id")))
+		.def("registerIOCallback", &Base::DataIOBase::registerIOCallback, python::arg("func"))
+		.def("unregisterIOCallback", &Base::DataIOBase::unregisterIOCallback, 
+			 (python::arg("self"), python::arg("id")))
 		.def("invokeIOCallbacks", &Base::DataIOBase::invokeIOCallbacks, python::arg("self"));
 }

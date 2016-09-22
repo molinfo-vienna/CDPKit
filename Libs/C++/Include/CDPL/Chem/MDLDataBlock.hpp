@@ -34,6 +34,7 @@
 #include <string>
 
 #include "CDPL/Chem/APIPrefix.hpp"
+#include "CDPL/Chem/APIPrefix.hpp"
 #include "CDPL/Util/Array.hpp"
 
 
@@ -119,7 +120,17 @@ namespace CDPL
 		 * \brief An array of Chem::MDLDataBlockEntry objects used to store the structure or reaction
 		 *        data block of a <em>MDL SD-</em> or \e RD-File data record (see [\ref CTFILE]).
 		 */
-		typedef Util::Array<MDLDataBlockEntry> MDLDataBlock;
+		class CDPL_CHEM_API MDLDataBlock : public Util::Array<MDLDataBlockEntry>
+		{
+
+		  public:
+			typedef boost::shared_ptr<MDLDataBlock> SharedPointer;
+
+		  private:
+			const char* getClassName() const {
+				return "MDLDataBlock";
+			}
+		};
 
 		/**
 		 * @}

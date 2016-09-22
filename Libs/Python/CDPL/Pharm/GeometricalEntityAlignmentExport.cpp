@@ -28,8 +28,6 @@
 
 #include "CDPL/Pharm/Feature.hpp"
 
-#include "Base/CallableObjectAdapter.hpp"
-#include "Base/ObjectIdentityCheckVisitor.hpp"
 #include "Chem/GeometricalEntityAlignmentExport.hpp"
 
 #include "ClassExports.hpp"

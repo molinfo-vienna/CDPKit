@@ -30,45 +30,9 @@
 #include "CDPL/Pharm/Pharmacophore.hpp"
 #include "CDPL/Pharm/Feature.hpp"
 
-#include "Base/CallableObjectAdapter.hpp"
 #include "Base/ObjectIdentityCheckVisitor.hpp"
 
 #include "ClassExports.hpp"
-
-
-namespace
-{
-	
-	static void setConstraintFunc1(CDPL::Pharm::GeometricalFeatureMappingExtractor& xtor, 
-								   const boost::python::object& callable) 
-	{
-		if (callable.ptr() == Py_None)
-			xtor.setFeatureTypeMatchFunction(CDPL::Pharm::GeometricalFeatureMappingExtractor::FeatureTypeMatchFunction());
-		else
-			xtor.setFeatureTypeMatchFunction(CDPLPythonBase::BinaryFunctionAdapter<bool, CDPL::Pharm::Feature, 
-											 CDPL::Pharm::Feature>(callable)); 
-	}
-
-	static void setConstraintFunc2(CDPL::Pharm::GeometricalFeatureMappingExtractor& xtor, 
-								   const boost::python::object& callable) 
-	{
-		if (callable.ptr() == Py_None)
-			xtor.setFeaturePositionMatchFunction(CDPL::Pharm::GeometricalFeatureMappingExtractor::FeaturePositionMatchFunction());
-		else
-			xtor.setFeaturePositionMatchFunction(CDPLPythonBase::TernaryFunctionAdapter<bool, CDPL::Pharm::Feature, 
-												 CDPL::Pharm::Feature, CDPL::Math::Matrix4D>(callable)); 
-	}
-
-	static void setConstraintFunc3(CDPL::Pharm::GeometricalFeatureMappingExtractor& xtor, 
-								   const boost::python::object& callable) 
-	{
-		if (callable.ptr() == Py_None)
-			xtor.setFeatureGeometryMatchFunction(CDPL::Pharm::GeometricalFeatureMappingExtractor::FeatureGeometryMatchFunction());
-		else
-			xtor.setFeatureGeometryMatchFunction(CDPLPythonBase::TernaryFunctionAdapter<bool, CDPL::Pharm::Feature, 
-												 CDPL::Pharm::Feature, CDPL::Math::Matrix4D>(callable)); 
-	}
-}
 
 
 void CDPLPythonPharm::exportGeometricalFeatureMappingExtractor()
@@ -84,15 +48,15 @@ void CDPLPythonPharm::exportGeometricalFeatureMappingExtractor()
 			 (python::arg("self"), python::arg("extor")), python::return_self<>())
 		.def("getMapping", &Pharm::GeometricalFeatureMappingExtractor::getMapping, 
 			 (python::arg("self"), python::arg("mpd_pharm"), python::arg("ref_pharm"), python::arg("xform"), python::arg("mapping")))
-		.def("setFeatureTypeMatchFunction", &setConstraintFunc1, 
+		.def("setFeatureTypeMatchFunction", &Pharm::GeometricalFeatureMappingExtractor::setFeatureTypeMatchFunction, 
 			 (python::arg("self"), python::arg("func")))
 		.def("getFeatureTypeMatchFunction", &Pharm::GeometricalFeatureMappingExtractor::getFeatureTypeMatchFunction, 
 			 python::arg("self"), python::return_internal_reference<>())
-		.def("setFeaturePositionMatchFunction", &setConstraintFunc2, 
+		.def("setFeaturePositionMatchFunction", &Pharm::GeometricalFeatureMappingExtractor::setFeaturePositionMatchFunction,
 			 (python::arg("self"), python::arg("func")))
 		.def("getFeaturePositionMatchFunction", &Pharm::GeometricalFeatureMappingExtractor::getFeaturePositionMatchFunction, 
 			 python::arg("self"), python::return_internal_reference<>())
-		.def("setFeatureGeometryMatchFunction", &setConstraintFunc3, 
+		.def("setFeatureGeometryMatchFunction", &Pharm::GeometricalFeatureMappingExtractor::setFeatureGeometryMatchFunction,
 			 (python::arg("self"), python::arg("func")))
 		.def("getFeatureGeometryMatchFunction", &Pharm::GeometricalFeatureMappingExtractor::getFeatureGeometryMatchFunction, 
 			 python::arg("self"), python::return_internal_reference<>());

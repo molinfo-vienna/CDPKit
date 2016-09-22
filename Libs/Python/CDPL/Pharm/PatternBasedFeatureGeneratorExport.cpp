@@ -38,7 +38,9 @@ void CDPLPythonPharm::exportPatternBasedFeatureGenerator()
     using namespace boost;
     using namespace CDPL;
 
-    python::scope scope = python::class_<Pharm::PatternBasedFeatureGenerator, python::bases<Pharm::FeatureGenerator>, 
+    python::scope scope = python::class_<Pharm::PatternBasedFeatureGenerator,
+										 Pharm::PatternBasedFeatureGenerator::SharedPointer,
+										 python::bases<Pharm::FeatureGenerator>, 
 										 boost::noncopyable>("PatternBasedFeatureGenerator", python::no_init)
 	.def(python::init<>(python::arg("self")))
 	.def(python::init<const Pharm::PatternBasedFeatureGenerator&>(

@@ -30,22 +30,9 @@
 #include "CDPL/Pharm/Pharmacophore.hpp"
 #include "CDPL/Pharm/Feature.hpp"
 
-#include "Base/CallableObjectAdapter.hpp"
 #include "Base/ObjectIdentityCheckVisitor.hpp"
 
 #include "ClassExports.hpp"
-
-
-namespace
-{
-
-    void setConstraintFunction(CDPL::Pharm::FeatureInteractionAnalyzer& analyzer, unsigned int type1, unsigned int type2, 
-							   const boost::python::object& callable)
-    {
-		analyzer.setConstraintFunction(type1, type2, CDPLPythonBase::BinaryFunctionAdapter<bool, 
-									   CDPL::Pharm::Feature, CDPL::Pharm::Feature>(callable)); 
-    }
-}
 
 
 void CDPLPythonPharm::exportFeatureInteractionAnalyzer()
@@ -58,7 +45,7 @@ void CDPLPythonPharm::exportFeatureInteractionAnalyzer()
 		.def(python::init<const Pharm::FeatureInteractionAnalyzer&>(
 				 (python::arg("self"), python::arg("analyzer"))))
 		.def(CDPLPythonBase::ObjectIdentityCheckVisitor<Pharm::FeatureInteractionAnalyzer>())	
-		.def("setConstraintFunction", &setConstraintFunction, 
+		.def("setConstraintFunction", &Pharm::FeatureInteractionAnalyzer::setConstraintFunction, 
 			 (python::arg("self"), python::arg("type1"), python::arg("type2"), python::arg("func")))
 		.def("removeConstraintFunction", &Pharm::FeatureInteractionAnalyzer::removeConstraintFunction, 
 			 (python::arg("self"), python::arg("type1"), python::arg("type2")))

@@ -31,6 +31,7 @@ SET(math_MOD_SRCS
     MLRModelExport.cpp
     BFGSMinimizerExport.cpp
     KabschAlgorithmExport.cpp
+    BoostFunctionWrapperExport.cpp
     ToPythonConverterRegistration.cpp
     FromPythonConverterRegistration.cpp
    )

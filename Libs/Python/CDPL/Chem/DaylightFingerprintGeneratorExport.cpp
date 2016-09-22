@@ -31,7 +31,6 @@
 #include "CDPL/Chem/Atom.hpp"
 #include "CDPL/Chem/Bond.hpp"
 
-#include "Base/CallableObjectAdapter.hpp"
 #include "Base/ObjectIdentityCheckVisitor.hpp"
 
 #include "ClassExports.hpp"
@@ -51,18 +50,6 @@ namespace
 	{
 		return func(bond);
 	}
-
-	void setAtomDescriptorFunction(CDPL::Chem::DaylightFingerprintGenerator& generator, 
-								   const boost::python::object& callable)
-	{
-		generator.setAtomDescriptorFunction(CDPLPythonBase::UnaryFunctionAdapter<CDPL::Base::uint64, CDPL::Chem::Atom>(callable)); 
-	}
-
-	void setBondDescriptorFunction(CDPL::Chem::DaylightFingerprintGenerator& generator, 
-								   const boost::python::object& callable)
-	{
-		generator.setBondDescriptorFunction(CDPLPythonBase::UnaryFunctionAdapter<CDPL::Base::uint64, CDPL::Chem::Bond>(callable)); 
-	}
 }
 
 
@@ -77,9 +64,9 @@ void CDPLPythonChem::exportDaylightFingerprintGenerator()
 		.def(python::init<const Chem::MolecularGraph&, Util::BitSet&>(
 				 (python::arg("self"), python::arg("molgraph"), python::arg("fprint"))))
 		.def(CDPLPythonBase::ObjectIdentityCheckVisitor<Chem::DaylightFingerprintGenerator>())	
-		.def("setAtomDescriptorFunction", &setAtomDescriptorFunction, 
+		.def("setAtomDescriptorFunction", &Chem::DaylightFingerprintGenerator::setAtomDescriptorFunction, 
 			 (python::arg("self"), python::arg("func")))
-		.def("setBondDescriptorFunction", &setBondDescriptorFunction, 
+		.def("setBondDescriptorFunction", &Chem::DaylightFingerprintGenerator::setBondDescriptorFunction, 
 			 (python::arg("self"), python::arg("func")))
 		.def("setMinPathLength", &Chem::DaylightFingerprintGenerator::setMinPathLength, 
 			 (python::arg("self"), python::arg("min_length")))

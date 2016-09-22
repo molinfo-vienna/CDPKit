@@ -74,3 +74,8 @@ bool Chem::has3DCoordinatesArray(const Atom& atom)
     return atom.isPropertySet(AtomProperty::COORDINATES_3D_ARRAY);
 }
 
+const Math::Vector3D& Chem::getConformer3DCoordinates(const Atom& atom, std::size_t conf_idx)
+{
+	return get3DCoordinatesArray(atom)->getElement(conf_idx);
+}
+

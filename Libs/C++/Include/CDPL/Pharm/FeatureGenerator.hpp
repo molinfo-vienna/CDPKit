@@ -32,6 +32,7 @@
 #define CDPL_PHARM_FEATUREGENERATOR_HPP
 
 #include <boost/function.hpp>
+#include <boost/shared_ptr.hpp>
 
 #include "CDPL/Pharm/APIPrefix.hpp"
 #include "CDPL/Math/Vector.hpp"
@@ -64,6 +65,8 @@ namespace CDPL
 		{
 
 		  public:
+			typedef boost::shared_ptr<FeatureGenerator> SharedPointer;
+
 			/**
 			 * \brief A generic wrapper class used to store a user-defined atom 3D coordinates function.
 			 */

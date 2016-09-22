@@ -30,7 +30,9 @@
 #include "CDPL/Chem/AtomMapping.hpp"
 #include "CDPL/Chem/Entity3D.hpp"
 #include "CDPL/Chem/Atom.hpp"
+#include "CDPL/Chem/Bond.hpp"
 #include "CDPL/Math/Vector.hpp"
+#include "CDPL/Base/IntTypes.hpp"
 
 #include "Base/BoostFunctionWrapperExport.hpp"
 
@@ -42,15 +44,19 @@ void CDPLPythonChem::exportBoostFunctionWrappers()
     using namespace CDPL;
     using namespace Chem;
 
+    CDPLPythonBase::BoostFunction1Export<boost::function1<Base::uint64, const Atom&>, Atom& >("UInt64AtomFunctor");
+    CDPLPythonBase::BoostFunction1Export<boost::function1<Base::uint64, const Bond&>, Bond& >("UInt64BondFunctor");
     CDPLPythonBase::BoostFunction1Export<boost::function1<bool, const Entity3DMapping&> >("BoolEntity3DMappingFunctor");
     CDPLPythonBase::BoostFunction1Export<boost::function1<bool, const AtomMapping&> >("BoolAtomMappingFunctor");
     CDPLPythonBase::BoostFunction1Export<boost::function1<const Math::Vector3D&, const Entity3D&>, Entity3D&, 
 										 boost::python::return_internal_reference<2> >("Vector3DEntity3DFunctor");
     CDPLPythonBase::BoostFunction1Export<boost::function1<const Math::Vector3D&, const Atom&>, Atom&, 
 										 boost::python::return_internal_reference<2> >("Vector3DAtomFunctor");
+    CDPLPythonBase::BoostFunction1Export<boost::function1<double, const Atom&>, Atom&>("DoubleAtomFunctor");
 
     CDPLPythonBase::BoostFunction2Export<boost::function2<bool, const Entity3D&, const Entity3D&>, Entity3D&, Entity3D&>("BoolEntity3D2Functor");
     CDPLPythonBase::BoostFunction2Export<boost::function2<bool, const Atom&, const Atom&>, Atom&, Atom&>("BoolAtom2Functor");
+    CDPLPythonBase::BoostFunction2Export<boost::function2<double, const Atom&, const Atom&>, Atom&, Atom&>("DoubleAtom2Functor");
 
     CDPLPythonBase::BoostFunction4Export<boost::function4<bool, const Entity3D&, const Entity3D&, const Entity3D&, const Entity3D&>,
 										 Entity3D&, Entity3D&, Entity3D&, Entity3D&>("BoolEntity3D4Functor");

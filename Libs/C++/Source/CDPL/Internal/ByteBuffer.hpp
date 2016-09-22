@@ -83,6 +83,10 @@ namespace CDPL
 
 			void writeBuffer(std::ostream& os) const;
 
+			const char* getData() const;
+
+			char* getData();
+
 		private:
 			void reserveWriteSpace(std::size_t num_bytes);
 			void checkReadSpace(std::size_t num_bytes) const;

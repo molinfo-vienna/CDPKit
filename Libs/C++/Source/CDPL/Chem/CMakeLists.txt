@@ -301,6 +301,9 @@ SET(cdpl-chem_LIB_SRCS
     MoleculeHydrogenManipulationFunctions.cpp
     MoleculeReplaceStereoRefAtomsFunctions.cpp  
 
+    Atom3DCoordinatesFunctor.cpp
+    AtomConformer3DCoordinatesFunctor.cpp
+
     ControlParameterFunctions.cpp
 
     SimilarityFunctions.cpp

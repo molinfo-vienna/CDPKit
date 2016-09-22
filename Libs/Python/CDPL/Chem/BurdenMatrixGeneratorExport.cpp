@@ -30,20 +30,9 @@
 #include "CDPL/Chem/MolecularGraph.hpp"
 #include "CDPL/Chem/Atom.hpp"
 
-#include "Base/CallableObjectAdapter.hpp"
 #include "Base/ObjectIdentityCheckVisitor.hpp"
 
 #include "ClassExports.hpp"
-
-
-namespace
-{
-
-	void setAtomWeightFunction(CDPL::Chem::BurdenMatrixGenerator& generator, const boost::python::object& callable)
-	{
-		generator.setAtomWeightFunction(CDPLPythonBase::UnaryFunctionAdapter<double, CDPL::Chem::Atom>(callable)); 
-	}
-}
 
 
 void CDPLPythonChem::exportBurdenMatrixGenerator()
@@ -56,7 +45,8 @@ void CDPLPythonChem::exportBurdenMatrixGenerator()
 		.def(python::init<const Chem::MolecularGraph&, Math::DMatrix&>(
 				 (python::arg("self"), python::arg("molgraph"), python::arg("mtx"))))
 		.def(CDPLPythonBase::ObjectIdentityCheckVisitor<Chem::BurdenMatrixGenerator>())	
-		.def("setAtomWeightFunction", &setAtomWeightFunction, (python::arg("self"), python::arg("func")))
+		.def("setAtomWeightFunction", &Chem::BurdenMatrixGenerator::setAtomWeightFunction,
+			 (python::arg("self"), python::arg("func")))
 		.def("generate", &Chem::BurdenMatrixGenerator::generate, 
 			 (python::arg("self"), python::arg("molgraph"), python::arg("mtx")));
 }

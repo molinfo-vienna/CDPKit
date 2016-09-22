@@ -37,7 +37,9 @@ namespace CDPLPythonPharm
 	void exportFeature();
 	void exportBasicPharmacophore();
 	void exportBasicFeature();
+
 	void exportFeatureMapping();
+	void exportFeatureTypeHistogram();
 
 	void exportBoostFunctionWrappers();
 

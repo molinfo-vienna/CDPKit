@@ -70,6 +70,8 @@ namespace CDPL
 		{
 
 		  public:
+			typedef boost::shared_ptr<PatternBasedFeatureGenerator> SharedPointer;
+
 			enum PatternAtomLabelFlag 
 			{
 			

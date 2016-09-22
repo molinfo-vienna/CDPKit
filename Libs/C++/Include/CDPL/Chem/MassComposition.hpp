@@ -31,6 +31,7 @@
 #ifndef CDPL_CHEM_MASSCOMPOSITION_HPP
 #define CDPL_CHEM_MASSCOMPOSITION_HPP
 
+#include "CDPL/Chem/APIPrefix.hpp"
 #include "CDPL/Util/Map.hpp"
 
 
@@ -53,7 +54,17 @@ namespace CDPL
 		 * values correspond to the percentage contribution of the elements to the total
 		 * mass of the compound.
 		 */
-		typedef Util::Map<unsigned int, double, true> MassComposition;
+		class CDPL_CHEM_API MassComposition : public Util::Map<unsigned int, double, true>
+		{
+
+		  public:
+			typedef boost::shared_ptr<MassComposition> SharedPointer;
+
+		  private:
+			const char* getClassName() const {
+				return "MassComposition";
+			}
+		};
 
 		/**
 		 * @}

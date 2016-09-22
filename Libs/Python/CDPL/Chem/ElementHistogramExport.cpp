@@ -40,14 +40,14 @@ void CDPLPythonChem::exportElementHistogram()
 
 	python::class_<Chem::ElementHistogram, Chem::ElementHistogram::SharedPointer>("ElementHistogram", python::no_init)
 		.def(python::init<>(python::arg("self")))
-		.def(python::init<const Chem::ElementHistogram&>((python::arg("self"), python::arg("elem_histo"))))
+		.def(python::init<const Chem::ElementHistogram&>((python::arg("self"), python::arg("elem_hist"))))
 		.def(CDPLPythonUtil::MapVisitor<Chem::ElementHistogram, 
 			 python::return_value_policy<python::copy_non_const_reference>, 
 			 python::default_call_policies, python::default_call_policies, python::default_call_policies, false>())
-		.def("__eq__", &Chem::ElementHistogram::operator==, (python::arg("self"), python::arg("elem_histo")))
-		.def("__ne__", &Chem::ElementHistogram::operator!=, (python::arg("self"), python::arg("elem_histo")))
-		.def("__le__", &Chem::ElementHistogram::operator<=, (python::arg("self"), python::arg("elem_histo")))
-		.def("__ge__", &Chem::ElementHistogram::operator>=, (python::arg("self"), python::arg("elem_histo")))
-		.def("__lt__", &Chem::ElementHistogram::operator<, (python::arg("self"), python::arg("elem_histo")))
-		.def("__gt__", &Chem::ElementHistogram::operator>, (python::arg("self"), python::arg("elem_histo")));
+		.def("__eq__", &Chem::ElementHistogram::operator==, (python::arg("self"), python::arg("elem_hist")))
+		.def("__ne__", &Chem::ElementHistogram::operator!=, (python::arg("self"), python::arg("elem_hist")))
+		.def("__le__", &Chem::ElementHistogram::operator<=, (python::arg("self"), python::arg("elem_hist")))
+		.def("__ge__", &Chem::ElementHistogram::operator>=, (python::arg("self"), python::arg("elem_hist")))
+		.def("__lt__", &Chem::ElementHistogram::operator<, (python::arg("self"), python::arg("elem_hist")))
+		.def("__gt__", &Chem::ElementHistogram::operator>, (python::arg("self"), python::arg("elem_hist")));
 }

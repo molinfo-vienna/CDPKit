@@ -29,7 +29,6 @@
 #include "CDPL/Pharm/FeatureInteractionConstraintConnector.hpp"
 #include "CDPL/Pharm/Feature.hpp"
 
-#include "Base/CallableObjectAdapter.hpp"
 #include "Base/ObjectIdentityCheckVisitor.hpp"
 
 #include "ClassExports.hpp"
@@ -37,15 +36,6 @@
 
 namespace
 {
-
-	CDPL::Pharm::FeatureInteractionConstraintConnector*
-	construct(bool and_expr, const boost::python::object& func1, const boost::python::object& func2)
-    {
-		return new CDPL::Pharm::FeatureInteractionConstraintConnector(
-			and_expr, 
-			CDPLPythonBase::BinaryFunctionAdapter<bool, CDPL::Pharm::Feature, CDPL::Pharm::Feature>(func1),
-			CDPLPythonBase::BinaryFunctionAdapter<bool, CDPL::Pharm::Feature, CDPL::Pharm::Feature>(func2)); 
-    }
 
     bool callOperator(CDPL::Pharm::FeatureInteractionConstraintConnector& con, 
 					  CDPL::Pharm::Feature& ftr1, CDPL::Pharm::Feature& ftr2)
@@ -64,8 +54,9 @@ void CDPLPythonPharm::exportFeatureInteractionConstraintConnector()
 				   boost::noncopyable>("FeatureInteractionConstraintConnector", python::no_init)
 		.def(python::init<const Pharm::FeatureInteractionConstraintConnector&>(
 				 (python::arg("self"), python::arg("con"))))
-		.def("__init__", python::make_constructor(&construct, python::default_call_policies(),
-												  (python::arg("and_expr"), python::arg("func2"), python::arg("func1"))))
+		.def(python::init<bool, const Pharm::FeatureInteractionConstraintConnector::ConstraintFunction&, 
+			 const Pharm::FeatureInteractionConstraintConnector::ConstraintFunction&>(
+				 (python::arg("self"), python::arg("and_expr"), python::arg("func2"), python::arg("func1"))))
 		.def(CDPLPythonBase::ObjectIdentityCheckVisitor<Pharm::FeatureInteractionConstraintConnector>())
 		.def("assign", &Pharm::FeatureInteractionConstraintConnector::operator=, 
 			 (python::arg("self"), python::arg("con")), python::return_self<>())

@@ -24,6 +24,8 @@
  */
 
 
+#include <boost/function.hpp>
+
 #include "CDPL/Chem/Molecule.hpp"
 #include "CDPL/Chem/Reaction.hpp"
 #include "CDPL/Chem/AtomMapping.hpp"
@@ -33,8 +35,13 @@
 #include "CDPL/Chem/MatchExpression.hpp"
 #include "CDPL/Chem/MassComposition.hpp"
 #include "CDPL/Chem/ElementHistogram.hpp"
+#include "CDPL/Chem/DaylightFingerprintGenerator.hpp"
+#include "CDPL/Chem/HashCodeCalculator.hpp"
+#include "CDPL/Chem/Atom3DCoordinatesFunctor.hpp"
+#include "CDPL/Chem/AtomConformer3DCoordinatesFunctor.hpp"
 
 #include "Base/GenericVariantFromPythonConverter.hpp"
+#include "Base/GenericFromPythonConverter.hpp"
 
 #include "ConverterRegistration.hpp"
 
@@ -63,4 +70,19 @@ void CDPLPythonChem::registerFromPythonConverters()
 
 	CDPLPythonBase::GenericVariantFromPythonConverter<Chem::MassComposition::SharedPointer>();
 	CDPLPythonBase::GenericVariantFromPythonConverter<Chem::ElementHistogram::SharedPointer>();
+
+	CDPLPythonBase::GenericFromPythonConverter<Chem::DaylightFingerprintGenerator::DefAtomDescriptorFunctor,
+											   Chem::DaylightFingerprintGenerator::AtomDescriptorFunction>();
+	CDPLPythonBase::GenericFromPythonConverter<Chem::DaylightFingerprintGenerator::DefBondDescriptorFunctor,
+											   Chem::DaylightFingerprintGenerator::BondDescriptorFunction>();
+
+	CDPLPythonBase::GenericFromPythonConverter<Chem::Atom3DCoordinatesFunctor, 
+											   boost::function1<const Math::Vector3D&, const Chem::Atom&> >();
+	CDPLPythonBase::GenericFromPythonConverter<Chem::AtomConformer3DCoordinatesFunctor, 
+											   boost::function1<const Math::Vector3D&, const Chem::Atom&> >();
+
+	CDPLPythonBase::GenericFromPythonConverter<Chem::HashCodeCalculator::DefAtomHashSeedFunctor,
+											   Chem::HashCodeCalculator::AtomHashSeedFunction>();
+	CDPLPythonBase::GenericFromPythonConverter<Chem::HashCodeCalculator::DefBondHashSeedFunctor,
+											   Chem::HashCodeCalculator::BondHashSeedFunction>();
 }
