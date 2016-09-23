@@ -26,8 +26,6 @@
 
 #include "StaticInit.hpp"
 
-#include <algorithm>
-
 #include "CDPL/Pharm/Feature.hpp"
 #include "CDPL/Pharm/FeatureFunctions.hpp"
 #include "CDPL/Chem/Entity3DFunctions.hpp"
@@ -41,22 +39,4 @@ using namespace CDPL;
 
 Pharm::TwoPointPharmacophore::TwoPointPharmacophore(const Feature& ftr1, const Feature& ftr2): 
 	ftr1Type(getType(ftr1)), ftr2Type(getType(ftr2)), ftrDistance(length(get3DCoordinates(ftr2) - get3DCoordinates(ftr1)))
-{
-	if (ftr2Type < ftr1Type)
-		std::swap(ftr1Type, ftr2Type);
-}
-
-unsigned int Pharm::TwoPointPharmacophore::getFeature1Type() const
-{
-    return ftr1Type;
-}
-
-unsigned int Pharm::TwoPointPharmacophore::getFeature2Type() const
-{
-    return ftr2Type;
-}
-
-double Pharm::TwoPointPharmacophore::getFeatureDistance() const
-{
-    return ftrDistance;
-}
+{}

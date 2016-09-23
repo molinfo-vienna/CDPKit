@@ -1,7 +1,7 @@
 /* -*- mode: c++; c-basic-offset: 4; tab-width: 4; indent-tabs-mode: t -*- */
 
 /* 
- * TwoPointPharmacophore.hpp 
+ * QueryThreePointPharmacophore.hpp 
  *
  * This file is part of the Pharmical Data Processing Toolkit
  *
@@ -24,8 +24,10 @@
  */
 
 
-#ifndef CDPL_PHARM_TWOPOINTPHARMACOPHORE_HPP
-#define CDPL_PHARM_TWOPOINTPHARMACOPHORE_HPP
+#ifndef CDPL_PHARM_QUERYTHREEPOINTPHARMACOPHORE_HPP
+#define CDPL_PHARM_QUERYTHREEPOINTPHARMACOPHORE_HPP
+
+#include "CDPL/Pharm/ThreePointPharmacophore.hpp"
 
 
 namespace CDPL 
@@ -34,35 +36,30 @@ namespace CDPL
     namespace Pharm
     {
 
-		class Feature;
+	class QueryThreePointPharmacophore : public ThreePointPharmacophore
+	{
 
-		class TwoPointPharmacophore
-		{
+	public:
+	    QueryThreePointPharmacophore(const Feature& ftr1, const Feature& ftr2, const Feature& ftr3);
 
-		public:
-			TwoPointPharmacophore(const Feature& ftr1, const Feature& ftr2);
+	    inline double getFeature1Tolerance() const {
+		return ftr1Tol;
+	    }
 
-			inline TwoPointPharmacophore(unsigned int ftr1_type, unsigned int ftr2_type, double ftr_dist):
-				ftr1Type(ftr1_type), ftr2Type(ftr2_type), ftrDistance(ftr_dist) {}
+	    inline double getFeature2Tolerance() const {
+		return ftr2Tol;
+	    }
+  
+	    inline double getFeature3Tolerance() const {
+		return ftr3Tol;
+	    }
 
-			inline unsigned int getFeature1Type() const {
-				return ftr1Type;
-			}
-
-			inline unsigned int getFeature2Type() const {
-				return ftr2Type;
-			}
-
-			inline double getFeatureDistance() const {
-				return ftrDistance;
-			}
-
-		private:
-			unsigned int ftr1Type;
-			unsigned int ftr2Type;
-			double       ftrDistance;
-		};
+	private:
+	    double ftr1Tol;
+	    double ftr2Tol;
+	    double ftr3Tol;
+	};
     }
 }
 
-#endif // CDPL_PHARM_TWOPOINTPHARMACOPHORE_HPP
+#endif // CDPL_PHARM_QUERYTHREEPOINTPHARMACOPHORE_HPP

@@ -70,7 +70,9 @@ SET(cdpl-pharm_LIB_SRCS
 
     PiPiInteractionUtilities.cpp
     TwoPointPharmacophore.cpp
+    QueryTwoPointPharmacophore.cpp
     ThreePointPharmacophore.cpp
+    QueryThreePointPharmacophore.cpp
    )
 
 IF(SQLITE3_FOUND)

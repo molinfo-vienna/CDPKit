@@ -1,7 +1,7 @@
 /* -*- mode: c++; c-basic-offset: 4; tab-width: 4; indent-tabs-mode: t -*- */
 
 /* 
- * ThreePointPharmacophore.cpp 
+ * TwoPointPharmacophore.cpp 
  *
  * This file is part of the Chemical Data Processing Toolkit
  *
@@ -26,25 +26,14 @@
 
 #include "StaticInit.hpp"
 
-#include "CDPL/Pharm/Feature.hpp"
 #include "CDPL/Pharm/FeatureFunctions.hpp"
-#include "CDPL/Chem/Entity3DFunctions.hpp"
-#include "CDPL/Math/Vector.hpp"
 
-#include "ThreePointPharmacophore.hpp"
+#include "QueryTwoPointPharmacophore.hpp"
 
 
 using namespace CDPL; 
 
 
-Pharm::ThreePointPharmacophore::ThreePointPharmacophore(const Feature& ftr1, const Feature& ftr2, const Feature& ftr3):
-	ftr1Type(getType(ftr1)), ftr2Type(getType(ftr2)), ftr3Type(getType(ftr3)) 
-{
-	const Math::Vector3D& pos1 = get3DCoordinates(ftr1);
-    const Math::Vector3D& pos2 = get3DCoordinates(ftr2);
-    const Math::Vector3D& pos3 = get3DCoordinates(ftr3);
-
-    ftr12Distance = length(pos2 - pos1);
-    ftr23Distance = length(pos3 - pos2);
-    ftr13Distance = length(pos3 - pos1);
-}
+Pharm::QueryTwoPointPharmacophore::QueryTwoPointPharmacophore(const Feature& ftr1, const Feature& ftr2): 
+	TwoPointPharmacophore(ftr1, ftr2), ftr1Tol(getTolerance(ftr1)), ftr2Tol(getTolerance(ftr2))
+{}

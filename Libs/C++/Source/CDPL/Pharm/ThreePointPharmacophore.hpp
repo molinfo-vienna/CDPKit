@@ -34,35 +34,51 @@ namespace CDPL
     namespace Pharm
     {
 
-	class Feature;
+		class Feature;
 
-	class ThreePointPharmacophore
-	{
+		class ThreePointPharmacophore
+		{
 
-	public:
-	    ThreePointPharmacophore(const Feature& ftr1, const Feature& ftr2, const Feature& ftr3);
+		public:
+			ThreePointPharmacophore(const Feature& ftr1, const Feature& ftr2, const Feature& ftr3);
 
-	    ThreePointPharmacophore(unsigned int ftr1_type, unsigned int ftr2_type, unsigned int ftr3_type,
-				    double ftr12_dist, double ftr23_dist, double ftr13_dist):
-		ftr1Type(ftr1_type), ftr2Type(ftr2_type), ftr3Type(ftr3_type), 
-		ftr12Distance(ftr12_dist), ftr23Distance(ftr23_dist), ftr13Distance(ftr13_dist) {}
+			inline ThreePointPharmacophore(unsigned int ftr1_type, unsigned int ftr2_type, unsigned int ftr3_type,
+										   double ftr12_dist, double ftr23_dist, double ftr13_dist):
+				ftr1Type(ftr1_type), ftr2Type(ftr2_type), ftr3Type(ftr3_type), 
+				ftr12Distance(ftr12_dist), ftr23Distance(ftr23_dist), ftr13Distance(ftr13_dist) {}
 
-	    unsigned int getFeature1Type() const;
-	    unsigned int getFeature2Type() const;
-	    unsigned int getFeature3Type() const;
+			inline unsigned int getFeature1Type() const {
+				return ftr1Type;
+			}
 
-	    double getFeature12Distance() const;
-	    double getFeature23Distance() const;
-	    double getFeature13Distance() const;
+			inline unsigned int getFeature2Type() const {
+				return ftr2Type;
+			}
 
-	private:
-	    unsigned int ftr1Type;
-	    unsigned int ftr2Type;
-	    unsigned int ftr3Type;
-	    double       ftr12Distance;
-	    double       ftr23Distance;
-	    double       ftr13Distance;
-	};
+			inline unsigned int getFeature3Type() const {
+				return ftr3Type;
+			}
+
+			inline double getFeature12Distance() const {
+				return ftr12Distance;
+			}
+
+			inline double getFeature23Distance() const {
+				return ftr23Distance;
+			}
+
+			inline double getFeature13Distance() const {
+				return ftr13Distance;
+			}
+
+		private:
+			unsigned int ftr1Type;
+			unsigned int ftr2Type;
+			unsigned int ftr3Type;
+			double       ftr12Distance;
+			double       ftr23Distance;
+			double       ftr13Distance;
+		};
     }
 }
 
