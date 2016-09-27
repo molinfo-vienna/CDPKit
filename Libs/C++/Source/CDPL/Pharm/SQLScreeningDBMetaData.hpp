@@ -27,6 +27,8 @@
 #ifndef CDPL_PHARM_SQLSCREENINGDBMETADATA_HPP
 #define CDPL_PHARM_SQLSCREENINGDBMETADATA_HPP
 
+#include <string>
+
 
 namespace CDPL
 {
@@ -37,24 +39,19 @@ namespace CDPL
 		namespace SQLScreeningDB
 		{
 
-			const char* MOL_TABLE_NAME                      = "molecules";
-			const char* PHARM_TABLE_NAME                    = "pharmacophores";
-			const char* FTR_COUNT_TABLE_NAME                = "ftr_counts";
-			const char* TWO_POINT_PHARM_TABLE_NAME          = "two_pt_pharms";
-			const char* THREE_POINT_PHARM_TABLE_NAME        = "three_pt_pharms";
-	
-			const char* MOL_ID_COLUMN_NAME                  = "mol_id";
-			const char* MOL_HASH_COLUMN_NAME                = "mol_hash";
-			const char* MOL_DATA_COLUMN_NAME                = "mol_data";
-			const char* MOL_CONF_IDX_COLUMN_NAME            = "mol_conf_idx";
+			const std::string MOL_TABLE_NAME              = "molecules";
+			const std::string PHARM_TABLE_NAME            = "pharmacophores";
+			const std::string FTR_COUNT_TABLE_NAME        = "ftr_counts";
+		
+			const std::string MOL_ID_COLUMN_NAME          = "mol_id";
+			const std::string MOL_HASH_COLUMN_NAME        = "mol_hash";
+			const std::string MOL_DATA_COLUMN_NAME        = "mol_data";
+			const std::string MOL_CONF_IDX_COLUMN_NAME    = "mol_conf_idx";
 
-			const char* PHARM_DATA_COLUMN_NAME              = "pharm_data";
+			const std::string PHARM_DATA_COLUMN_NAME      = "pharm_data";
 
-			const char* FTR_TYPE_COLUMN_NAME                = "ftr_type";
-			const char* FTR_COUNT_COLUMN_NAME               = "ftr_count";
-
-			const char* TWO_POINT_PHARM_DATA_COLUMN_NAME    = "two_pt_pharm_data";
-			const char* THREE_POINT_PHARM_DATA_COLUMN_NAME  = "three_pt_pharm_data";
+			const std::string FTR_TYPE_COLUMN_NAME        = "ftr_type";
+			const std::string FTR_COUNT_COLUMN_NAME       = "ftr_count";
 		}
     }
 }

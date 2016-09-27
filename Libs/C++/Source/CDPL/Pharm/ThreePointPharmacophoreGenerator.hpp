@@ -44,8 +44,8 @@ namespace CDPL
 
 		public:
 			
-			template <typename Iter, typename OutputList> 
-			void generate(const Iter& beg, const Iter& end, OutputList& out_list, bool gen_perms);
+			template <typename Iter, typename OutIter> 
+			void generate(const Iter& beg, const Iter& end, OutIter out, bool gen_perms);
 		};
     }
 }
@@ -54,9 +54,9 @@ namespace CDPL
 // Implementation
 
 template <typename PharmType>
-template <typename Iter, typename OutputList> 
+template <typename Iter, typename OutIter> 
 void CDPL::Pharm::ThreePointPharmacophoreGenerator<PharmType>::generate(const Iter& beg, const Iter& end, 
-																		OutputList& out_list, bool gen_perms)
+																		OutIter out, bool gen_perms)
 {
 	const FeatureAndTypeArray& canon_ftrs = getCanonOrderedFeatures(beg, end);
 	std::size_t num_ftrs = canon_ftrs.size();
@@ -72,7 +72,7 @@ void CDPL::Pharm::ThreePointPharmacophoreGenerator<PharmType>::generate(const It
 			for (std::size_t k = j + 1; k < num_ftrs; k++) {
 				const Feature& ftr3 = *canon_ftrs[k].first;
 
-				out_list.insert(PharmType(ftr1, ftr2, ftr3));
+				*out = PharmType(ftr1, ftr2, ftr3); ++out;
 
 				if (!gen_perms)
 					continue;
@@ -81,17 +81,19 @@ void CDPL::Pharm::ThreePointPharmacophoreGenerator<PharmType>::generate(const It
 
 				if (ftr1_type == ftr2_type) {
 					if (ftr2_type == ftr3_type) {
-						out_list.insert(PharmType(ftr1, ftr3, ftr2));
-						out_list.insert(PharmType(ftr2, ftr1, ftr3));
-						out_list.insert(PharmType(ftr2, ftr3, ftr1));
-						out_list.insert(PharmType(ftr3, ftr2, ftr1));
-						out_list.insert(PharmType(ftr3, ftr1, ftr2));
+						*out = PharmType(ftr1, ftr3, ftr2); ++out;
+						*out = PharmType(ftr2, ftr1, ftr3); ++out;
+						*out = PharmType(ftr2, ftr3, ftr1); ++out;
+						*out = PharmType(ftr3, ftr2, ftr1); ++out;
+						*out = PharmType(ftr3, ftr1, ftr2); ++out;
 
-					} else 
-						out_list.insert(PharmType(ftr2, ftr1, ftr3));
+					} else {
+						*out = PharmType(ftr2, ftr1, ftr3); ++out;
+					}
 
-				} else if (ftr2_type == ftr3_type)
-					out_list.insert(PharmType(ftr1, ftr3, ftr2));
+				} else if (ftr2_type == ftr3_type) {
+					*out = PharmType(ftr1, ftr3, ftr2); ++out;
+				}
 			}
 		}
 	}

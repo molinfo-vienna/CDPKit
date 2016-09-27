@@ -45,7 +45,7 @@ namespace CDPL
 
 		public:
 			typedef std::pair<const Feature*, unsigned int> FeatureAndType;
-			typedef std::vector<FeatureAndTypePair> FeatureAndTypeArray;
+			typedef std::vector<FeatureAndType> FeatureAndTypeArray;
 
 			template <typename Iter> 
 			const FeatureAndTypeArray& getCanonOrderedFeatures(const Iter& beg, const Iter& end);

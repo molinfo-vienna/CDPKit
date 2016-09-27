@@ -56,7 +56,7 @@ namespace CDPL
 		 */
 
 		/**
-		 * \brief A creator for molecular graph data in the native I/O format of the <em>CDPL</em>.
+		 * \brief A class for the creation of optimized pharmacophore screening databases.
 		 */
 		class CDPL_PHARM_API SQLiteScreeningDBCreator
 		{

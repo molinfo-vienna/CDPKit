@@ -44,8 +44,8 @@ namespace CDPL
 
 		public:
 			
-			template <typename Iter, typename OutputList> 
-			void generate(const Iter& beg, const Iter& end, OutputList& out_list);
+			template <typename Iter, typename OutIter> 
+			void generate(const Iter& beg, const Iter& end, OutIter out);
 		};
     }
 }
@@ -54,8 +54,8 @@ namespace CDPL
 // Implementation
 
 template <typename PharmType>
-template <typename Iter, typename OutputList> 
-void CDPL::Pharm::TwoPointPharmacophoreGenerator<PharmType>::generate(const Iter& beg, const Iter& end, OutputList& out_list)
+template <typename Iter, typename OutIter> 
+void CDPL::Pharm::TwoPointPharmacophoreGenerator<PharmType>::generate(const Iter& beg, const Iter& end, OutIter out)
 {
 	const FeatureAndTypeArray& canon_ftrs = getCanonOrderedFeatures(beg, end);
 	std::size_t num_ftrs = canon_ftrs.size();
@@ -63,8 +63,9 @@ void CDPL::Pharm::TwoPointPharmacophoreGenerator<PharmType>::generate(const Iter
 	for (std::size_t i = 0; i < num_ftrs; i++) {
 		const Feature& ftr1 = *canon_ftrs[i].first;
 
-		for (std::size_t j = i + 1; j < num_ftrs; j++) 
-			out_list.insert(PharmType(ftr1, *canon_ftrs[j].first));
+		for (std::size_t j = i + 1; j < num_ftrs; j++) {
+			*out = PharmType(ftr1, *canon_ftrs[j].first); ++out;
+		}
 	}
 }
 

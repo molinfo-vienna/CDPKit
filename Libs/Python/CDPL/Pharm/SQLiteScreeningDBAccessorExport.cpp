@@ -1,9 +1,9 @@
 /* -*- mode: c++; c-basic-offset: 4; tab-width: 4; indent-tabs-mode: t -*- */
 
 /* 
- * QueryThreePointPharmacophoreList.hpp 
+ * SQLiteScreeningDBAccessorExport.cpp 
  *
- * This file is part of the Pharmical Data Processing Toolkit
+ * This file is part of the Chemical Data Processing Toolkit
  *
  * Copyright (C) 2003-2010 Thomas A. Seidel <thomas.seidel@univie.ac.at>
  *
@@ -24,23 +24,21 @@
  */
 
 
-#ifndef CDPL_PHARM_QUERYTHREEPOINTPHARMACOPHORELIST_HPP
-#define CDPL_PHARM_QUERYTHREEPOINTPHARMACOPHORELIST_HPP
+#include <boost/python.hpp>
 
-#include <boost/unordered_set.hpp>
+#include "CDPL/Pharm/SQLiteScreeningDBAccessor.hpp"
 
-#include "CDPL/Pharm/ThreePointPharmacophoreList.hpp"
-#include "CDPL/Pharm/QueryThreePointPharmacophore.hpp"
+#include "ClassExports.hpp"
 
 
-namespace CDPL 
+void CDPLPythonPharm::exportSQLiteScreeningDBAccessor()
 {
+    using namespace boost;
+    using namespace CDPL;
 
-    namespace Pharm
-    {
-
-        typedef boost::unordered_multiset<QueryThreePointPharmacophore, ThreePointPharmHashFunc, ThreePointPharmEqCmpFunc> QueryThreePointPharmacophoreList;
-    }
+    python::class_<Pharm::SQLiteScreeningDBAccessor, Pharm::SQLiteScreeningDBAccessor::SharedPointer,
+		   python::bases<Pharm::ScreeningDBAccessor>,
+		   boost::noncopyable>("SQLiteScreeningDBAccessor", python::no_init)
+	.def(python::init<>(python::arg("self")))
+	.def(python::init<const std::string&>((python::arg("self"), python::arg("name"))));
 }
-
-#endif // CDPL_PHARM_QUERYTHREEPOINTPHARMACOPHORELIST_HPP

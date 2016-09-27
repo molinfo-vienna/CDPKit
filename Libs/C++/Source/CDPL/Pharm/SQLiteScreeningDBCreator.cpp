@@ -26,15 +26,11 @@
 
 #include "StaticInit.hpp"
 
-#include <sqlite3.h>
-
 #include <boost/numeric/conversion/cast.hpp>
-#include <boost/shared_ptr.hpp>
 #include <boost/unordered_map.hpp>
 #include <boost/unordered_set.hpp>
 
 #include "CDPL/Pharm/SQLiteScreeningDBCreator.hpp"
-#include "CDPL/Pharm/CDFDataWriter.hpp"
 #include "CDPL/Pharm/ControlParameterFunctions.hpp"
 #include "CDPL/Pharm/PharmacophoreFunctions.hpp"
 #include "CDPL/Pharm/BasicPharmacophore.hpp"
@@ -53,6 +49,8 @@
 #include "CDPL/Internal/ByteBuffer.hpp"
 
 #include "SQLScreeningDBMetaData.hpp"
+#include "CDFDataWriter.hpp"
+#include "SQLiteIOImplementationBase.hpp"
 
 
 using namespace CDPL;
@@ -61,16 +59,16 @@ using namespace CDPL;
 namespace
 {
 
-	const std::string CREATE_MOL_TABLE_SQL = std::string("CREATE TABLE IF NOT EXISTS ") + 
+	const std::string CREATE_MOL_TABLE_SQL = "CREATE TABLE IF NOT EXISTS " + 
 		Pharm::SQLScreeningDB::MOL_TABLE_NAME + "(" + 
 		Pharm::SQLScreeningDB::MOL_ID_COLUMN_NAME + " INTEGER PRIMARY KEY, " + 
 		Pharm::SQLScreeningDB::MOL_HASH_COLUMN_NAME + " INTEGER, " + 
 		Pharm::SQLScreeningDB::MOL_DATA_COLUMN_NAME + " BLOB);";
 
-	const std::string DROP_MOL_TABLE_SQL = std::string("DROP TABLE IF EXISTS ") + 
+	const std::string DROP_MOL_TABLE_SQL = "DROP TABLE IF EXISTS " + 
 		Pharm::SQLScreeningDB::MOL_TABLE_NAME + ";";
 
-	const std::string CREATE_PHARM_TABLE_SQL = std::string("CREATE TABLE IF NOT EXISTS ") + 
+	const std::string CREATE_PHARM_TABLE_SQL = "CREATE TABLE IF NOT EXISTS " + 
 		Pharm::SQLScreeningDB::PHARM_TABLE_NAME + "(" + 
 		Pharm::SQLScreeningDB::MOL_ID_COLUMN_NAME + " INTEGER, " + 
 		Pharm::SQLScreeningDB::MOL_CONF_IDX_COLUMN_NAME + " INTEGER, " + 
@@ -78,92 +76,58 @@ namespace
 		Pharm::SQLScreeningDB::MOL_ID_COLUMN_NAME + ", " +
 		Pharm::SQLScreeningDB::MOL_CONF_IDX_COLUMN_NAME + "));";
  
-	const std::string DROP_PHARM_TABLE_SQL = std::string("DROP TABLE IF EXISTS ") + 
+	const std::string DROP_PHARM_TABLE_SQL = "DROP TABLE IF EXISTS " + 
 		Pharm::SQLScreeningDB::PHARM_TABLE_NAME + ";";
 
-	const std::string CREATE_FTR_COUNT_TABLE_SQL = std::string("CREATE TABLE IF NOT EXISTS ") + 
+	const std::string CREATE_FTR_COUNT_TABLE_SQL = "CREATE TABLE IF NOT EXISTS " + 
 		Pharm::SQLScreeningDB::FTR_COUNT_TABLE_NAME + "(" + 
 		Pharm::SQLScreeningDB::MOL_ID_COLUMN_NAME + " INTEGER, " + 
 		Pharm::SQLScreeningDB::MOL_CONF_IDX_COLUMN_NAME + " INTEGER, " + 
 		Pharm::SQLScreeningDB::FTR_TYPE_COLUMN_NAME + " INTEGER, " + 
 		Pharm::SQLScreeningDB::FTR_COUNT_COLUMN_NAME + " INTEGER);";
 	
-	const std::string DROP_FTR_COUNT_TABLE_SQL = std::string("DROP TABLE IF EXISTS ") + 
+	const std::string DROP_FTR_COUNT_TABLE_SQL = "DROP TABLE IF EXISTS " + 
 		Pharm::SQLScreeningDB::FTR_COUNT_TABLE_NAME + ";";
 
-	const std::string CREATE_TWO_POINT_PHARM_TABLE_SQL = std::string("CREATE TABLE IF NOT EXISTS ") + 
-		Pharm::SQLScreeningDB::TWO_POINT_PHARM_TABLE_NAME + "(" + 
-		Pharm::SQLScreeningDB::MOL_ID_COLUMN_NAME + " INTEGER, " + 
-		Pharm::SQLScreeningDB::MOL_CONF_IDX_COLUMN_NAME + " INTEGER, " + 
-		Pharm::SQLScreeningDB::TWO_POINT_PHARM_DATA_COLUMN_NAME + " BLOB, PRIMARY KEY(" +
-		Pharm::SQLScreeningDB::MOL_ID_COLUMN_NAME + ", " +
-		Pharm::SQLScreeningDB::MOL_CONF_IDX_COLUMN_NAME + "));";
-	
-	const std::string DROP_TWO_POINT_PHARM_TABLE_SQL = std::string("DROP TABLE IF EXISTS ") + 
-		Pharm::SQLScreeningDB::TWO_POINT_PHARM_TABLE_NAME + ";";
-
-	const std::string CREATE_THREE_POINT_PHARM_TABLE_SQL = std::string("CREATE TABLE IF NOT EXISTS ") + 
-		Pharm::SQLScreeningDB::THREE_POINT_PHARM_TABLE_NAME + "(" + 
-		Pharm::SQLScreeningDB::MOL_ID_COLUMN_NAME + " INTEGER, " + 
-		Pharm::SQLScreeningDB::MOL_CONF_IDX_COLUMN_NAME + " INTEGER, " + 
-		Pharm::SQLScreeningDB::THREE_POINT_PHARM_DATA_COLUMN_NAME + " BLOB, PRIMARY KEY(" +
-		Pharm::SQLScreeningDB::MOL_ID_COLUMN_NAME + ", " +
-		Pharm::SQLScreeningDB::MOL_CONF_IDX_COLUMN_NAME + "));";
-	
-	const std::string DROP_THREE_POINT_PHARM_TABLE_SQL = std::string("DROP TABLE IF EXISTS ") + 
-		Pharm::SQLScreeningDB::THREE_POINT_PHARM_TABLE_NAME + ";";
-		
 	const std::string CREATE_TABLES_SQL = 
 		CREATE_MOL_TABLE_SQL +
 		CREATE_PHARM_TABLE_SQL +
-		CREATE_FTR_COUNT_TABLE_SQL +
-		CREATE_TWO_POINT_PHARM_TABLE_SQL +
-		CREATE_THREE_POINT_PHARM_TABLE_SQL;
+		CREATE_FTR_COUNT_TABLE_SQL;
 	
 	const std::string DROP_TABLES_SQL = 
 		DROP_MOL_TABLE_SQL +
 		DROP_PHARM_TABLE_SQL +
-		DROP_FTR_COUNT_TABLE_SQL +
-		DROP_TWO_POINT_PHARM_TABLE_SQL +
-		DROP_THREE_POINT_PHARM_TABLE_SQL;
+		DROP_FTR_COUNT_TABLE_SQL;
 
-	const std::string MOL_ID_AND_HASH_QUERY_SQL = std::string("SELECT ") +
+	const std::string MOL_ID_AND_HASH_QUERY_SQL = "SELECT " +
 		Pharm::SQLScreeningDB::MOL_HASH_COLUMN_NAME + ", " +
 		Pharm::SQLScreeningDB::MOL_ID_COLUMN_NAME + " FROM " +
 		Pharm::SQLScreeningDB::MOL_TABLE_NAME;
 
-	const std::string DELETE_MOL_WITH_MOL_ID_SQL = std::string("DELETE FROM ") +
+	const std::string DELETE_MOL_WITH_MOL_ID_SQL = "DELETE FROM " +
 		Pharm::SQLScreeningDB::MOL_TABLE_NAME + " WHERE " +
 		Pharm::SQLScreeningDB::MOL_ID_COLUMN_NAME + " = ?1;";
 
-	const std::string DELETE_PHARMS_WITH_MOL_ID_SQL = std::string("DELETE FROM ") +
+	const std::string DELETE_PHARMS_WITH_MOL_ID_SQL = "DELETE FROM " +
 		Pharm::SQLScreeningDB::PHARM_TABLE_NAME + " WHERE " +
 		Pharm::SQLScreeningDB::MOL_ID_COLUMN_NAME + " = ?1;";
 
-	const std::string DELETE_FTR_COUNTS_WITH_MOL_ID_SQL = std::string("DELETE FROM ") +
+	const std::string DELETE_FTR_COUNTS_WITH_MOL_ID_SQL = "DELETE FROM " +
 		Pharm::SQLScreeningDB::FTR_COUNT_TABLE_NAME + " WHERE " +
 		Pharm::SQLScreeningDB::MOL_ID_COLUMN_NAME + " = ?1;";
 
-	const std::string DELETE_TWO_POINT_PHARMS_WITH_MOL_ID_SQL = std::string("DELETE FROM ") +
-		Pharm::SQLScreeningDB::TWO_POINT_PHARM_TABLE_NAME + " WHERE " +
-		Pharm::SQLScreeningDB::MOL_ID_COLUMN_NAME + " = ?1;";
-
-	const std::string DELETE_THREE_POINT_PHARMS_WITH_MOL_ID_SQL = std::string("DELETE FROM ") +
-		Pharm::SQLScreeningDB::THREE_POINT_PHARM_TABLE_NAME + " WHERE " +
-		Pharm::SQLScreeningDB::MOL_ID_COLUMN_NAME + " = ?1;";
-
-	const std::string INSERT_MOL_DATA_SQL = std::string("INSERT INTO ") +
+	const std::string INSERT_MOL_DATA_SQL = "INSERT INTO " +
 		Pharm::SQLScreeningDB::MOL_TABLE_NAME + "(" +
 		Pharm::SQLScreeningDB::MOL_HASH_COLUMN_NAME + ", " +
 		Pharm::SQLScreeningDB::MOL_DATA_COLUMN_NAME + ") VALUES (?1, ?2);";
 
-	const std::string INSERT_PHARM_DATA_SQL = std::string("INSERT INTO ") +
+	const std::string INSERT_PHARM_DATA_SQL = "INSERT INTO " +
 		Pharm::SQLScreeningDB::PHARM_TABLE_NAME + "(" +
 		Pharm::SQLScreeningDB::MOL_ID_COLUMN_NAME + ", " +
 		Pharm::SQLScreeningDB::MOL_CONF_IDX_COLUMN_NAME + ", " +
 		Pharm::SQLScreeningDB::PHARM_DATA_COLUMN_NAME + ") VALUES (?1, ?2, ?3);";
 
-	const std::string INSERT_FTR_COUNT_SQL = std::string("INSERT INTO ") +
+	const std::string INSERT_FTR_COUNT_SQL = "INSERT INTO " +
 		Pharm::SQLScreeningDB::FTR_COUNT_TABLE_NAME + "(" +
 		Pharm::SQLScreeningDB::MOL_ID_COLUMN_NAME + ", " +
 		Pharm::SQLScreeningDB::MOL_CONF_IDX_COLUMN_NAME + ", " +
@@ -196,25 +160,23 @@ namespace
 }
 
 
-class Pharm::SQLiteScreeningDBCreator::Implementation
+class Pharm::SQLiteScreeningDBCreator::Implementation : private Pharm::SQLiteIOImplementationBase
 {
 
 public:
 	Implementation();
 
-	~Implementation();
-
 	void open(const std::string& name, Mode mode = CREATE, bool allow_dup_entries = true);
 
 	void close();
+
+	const std::string& getDatabaseName() const;
 
 	Mode getMode() const;
 
 	bool allowDuplicateEntries() const;
 
 	bool process(const Chem::MolecularGraph& molgraph);
-
-	const std::string& getDatabaseName() const;
 
 	std::size_t getNumProcessed() const;
 
@@ -225,11 +187,10 @@ public:
 	std::size_t getNumInserted() const;
 
 private:
-	typedef boost::shared_ptr<sqlite3_stmt> SQLite3StmtPointer;
-
 	void initControlParams();
 
-	void openDBConnection(const std::string& name);
+	void closeDBConnection();
+
 	void setupTables();
 
 	void loadMolHashToIDMap();
@@ -250,54 +211,37 @@ private:
 
 	void beginTransaction();
 	void commitTransaction();
-	void rollbackTransaction() const;
 
-	void setupStatement(SQLite3StmtPointer& stmt_ptr, const std::string& sql_stmt, bool clr_bindings) const;
-
-	sqlite3_stmt* prepareStatement(const std::string& sql_stmt) const;
-		
-	int evalStatement(const SQLite3StmtPointer& stmt_ptr) const;
-	void execStatements(const std::string& sql_stmts) const;
-
-	void resetStatement(const SQLite3StmtPointer& stmt_ptr, bool clr_bindings) const;
-
-	void composeExMessage(std::string& ex_msg, const char* msg_prefix, const char* err_msg) const;
-
-	void throwSQLiteIOError(const char* msg_prefix) const;
-
-	typedef boost::shared_ptr<sqlite3> SQLite3DBPointer;
 	typedef boost::unordered_multimap<Base::uint64, Base::int64> MolHashToIDMap;
 	typedef boost::unordered_set<Base::uint64> MolHashSet;
 	typedef std::auto_ptr<Chem::CDFDataWriter> CDFMolWriterPointer;
 
-	SQLite3DBPointer              database;
-	std::string                   databaseName;
-	SQLite3StmtPointer            beginTransStmt;
-	SQLite3StmtPointer            commitTransStmt;
-	SQLite3StmtPointer            insMoleculeStmt;
-	SQLite3StmtPointer            insPharmStmt;
-	SQLite3StmtPointer            insFtrCountStmt;
-	SQLite3StmtPointer            delMolWithMolIDStmt;
-	SQLite3StmtPointer            delPharmsWithMolIDStmt;
-	SQLite3StmtPointer            delFeatureCountsWithMolIDStmt;
-	SQLite3StmtPointer            delTwoPointPharmsWithMolIDStmt;
-	SQLite3StmtPointer            delThreePointPharmsWithMolIDStmt;
-	MolHashToIDMap                molHashToIDMap;
-	MolHashSet                    procMolecules;
-	Chem::HashCodeCalculator      hashCalculator;
-	Internal::ByteBuffer          byteBuffer;
-	Base::ControlParameterList    controlParams;
-	CDFDataWriter                 pharmWriter;
-	Chem::CDFDataWriter           molWriter;
-	BasicPharmacophore            pharmacophore;
-	DefaultPharmacophoreGenerator pharmGenerator;
-	FeatureTypeHistogram          featureCounts;
-	Mode                          mode;
-	bool                          allowDupEntries;
-	std::size_t                   numProcessed;
-	std::size_t                   numRejected;
-	std::size_t                   numDeleted;
-	std::size_t                   numInserted;
+	SQLite3StmtPointer               beginTransStmt;
+	SQLite3StmtPointer               commitTransStmt;
+	SQLite3StmtPointer               insMoleculeStmt;
+	SQLite3StmtPointer               insPharmStmt;
+	SQLite3StmtPointer               insFtrCountStmt;
+	SQLite3StmtPointer               delMolWithMolIDStmt;
+	SQLite3StmtPointer               delPharmsWithMolIDStmt;
+	SQLite3StmtPointer               delFeatureCountsWithMolIDStmt;
+	SQLite3StmtPointer               delTwoPointPharmsWithMolIDStmt;
+	SQLite3StmtPointer               delThreePointPharmsWithMolIDStmt;
+	MolHashToIDMap                   molHashToIDMap;
+	MolHashSet                       procMolecules;
+	Chem::HashCodeCalculator         hashCalculator;
+	Internal::ByteBuffer             byteBuffer;
+	Base::ControlParameterList       controlParams;
+	CDFDataWriter                    pharmWriter;
+	Chem::CDFDataWriter              molWriter;
+	BasicPharmacophore               pharmacophore;
+	DefaultPharmacophoreGenerator    pharmGenerator;
+	FeatureTypeHistogram             featureCounts;
+	Mode                             mode;
+	bool                             allowDupEntries;
+	std::size_t                      numProcessed;
+	std::size_t                      numRejected;
+	std::size_t                      numDeleted;
+	std::size_t                      numInserted;
 };
 
 
@@ -366,21 +310,16 @@ std::size_t Pharm::SQLiteScreeningDBCreator::getNumInserted() const
 
 // Implementation
 
-Pharm::SQLiteScreeningDBCreator::Implementation::Implementation(): 
+Pharm::SQLiteScreeningDBCreator::Implementation::Implementation():
 	pharmWriter(controlParams),	molWriter(controlParams), pharmGenerator(true), mode(CREATE),
 	allowDupEntries(true), numProcessed(0), numRejected(0), numDeleted(0), numInserted(0)
 {
 	initControlParams();
 }
 
-Pharm::SQLiteScreeningDBCreator::Implementation::~Implementation() 
-{
-	close();
-}
-
 void Pharm::SQLiteScreeningDBCreator::Implementation::open(const std::string& name, Mode mode, bool allow_dup_entries)
 {
-	openDBConnection(name);
+	openDBConnection(name, SQLITE_OPEN_READWRITE | SQLITE_OPEN_CREATE);
 
 	this->mode = mode;
 	allowDupEntries = allow_dup_entries;
@@ -391,9 +330,16 @@ void Pharm::SQLiteScreeningDBCreator::Implementation::open(const std::string& na
 
 void Pharm::SQLiteScreeningDBCreator::Implementation::close()
 {
-	if (!database)
-		return;
+	closeDBConnection();
+}
 
+const std::string& Pharm::SQLiteScreeningDBCreator::Implementation::getDatabaseName() const
+{
+	return getDBName();
+}
+
+void Pharm::SQLiteScreeningDBCreator::Implementation::closeDBConnection()
+{
 	beginTransStmt.reset();
 	commitTransStmt.reset();
 	insMoleculeStmt.reset();
@@ -405,8 +351,7 @@ void Pharm::SQLiteScreeningDBCreator::Implementation::close()
 	delTwoPointPharmsWithMolIDStmt.reset();
 	delThreePointPharmsWithMolIDStmt.reset();
 
-	database.reset();
-	databaseName.clear();
+	SQLiteIOImplementationBase::closeDBConnection();
 
 	numProcessed = 0;
 	numRejected = 0;
@@ -422,11 +367,6 @@ Pharm::SQLiteScreeningDBCreator::Mode Pharm::SQLiteScreeningDBCreator::Implement
 bool Pharm::SQLiteScreeningDBCreator::Implementation::allowDuplicateEntries() const
 {
 	return allowDupEntries;
-}
-
-const std::string& Pharm::SQLiteScreeningDBCreator::Implementation::getDatabaseName() const
-{
-	return databaseName;
 }
 
 std::size_t Pharm::SQLiteScreeningDBCreator::Implementation::getNumProcessed() const
@@ -451,7 +391,7 @@ std::size_t Pharm::SQLiteScreeningDBCreator::Implementation::getNumInserted() co
 
 bool Pharm::SQLiteScreeningDBCreator::Implementation::process(const Chem::MolecularGraph& molgraph)
 {
-	if (!database)
+	if (!getDBConnection())
 		throw Base::IOError("SQLiteScreeningDBCreator: no open database connection");
 
 	numProcessed++;
@@ -471,7 +411,7 @@ bool Pharm::SQLiteScreeningDBCreator::Implementation::process(const Chem::Molecu
 
 	beginTransaction();
 
-	TransactionRollback trb(database.get());
+	TransactionRollback trb(getDBConnection().get());
 	std::size_t num_del = 0;
 
 	if (mode == UPDATE)
@@ -503,27 +443,10 @@ void Pharm::SQLiteScreeningDBCreator::Implementation::initControlParams()
 	Chem::setCDFWriteSinglePrecisionFloatsParameter(controlParams, true);
 }
 
-void Pharm::SQLiteScreeningDBCreator::Implementation::openDBConnection(const std::string& name)
-{
-	sqlite3* new_db = 0;
-	int res = sqlite3_open_v2(name.c_str(), &new_db, SQLITE_OPEN_READWRITE | SQLITE_OPEN_CREATE, NULL);
-	SQLite3DBPointer new_db_ptr(new_db, sqlite3_close);
-
-	if (res != SQLITE_OK)
-		throwSQLiteIOError(("SQLiteScreeningDBCreator: could not open database '" + name + "'").c_str());
-
-	databaseName.reserve(name.length());
-
-	close();
-
-	databaseName = name;
-	database = new_db_ptr;
-}
-
 void Pharm::SQLiteScreeningDBCreator::Implementation::setupTables()
 {
 	beginTransaction();
-	TransactionRollback trb(database.get());
+	TransactionRollback trb(getDBConnection().get());
 
 	if (mode == CREATE)
 		execStatements(DROP_TABLES_SQL);
@@ -573,8 +496,6 @@ std::size_t Pharm::SQLiteScreeningDBCreator::Implementation::deleteEntries(Base:
 		deleteRowsWithMolID(delMolWithMolIDStmt, DELETE_MOL_WITH_MOL_ID_SQL, mol_id);
 		deleteRowsWithMolID(delPharmsWithMolIDStmt, DELETE_PHARMS_WITH_MOL_ID_SQL, mol_id);
 		deleteRowsWithMolID(delFeatureCountsWithMolIDStmt, DELETE_FTR_COUNTS_WITH_MOL_ID_SQL, mol_id);
-		deleteRowsWithMolID(delTwoPointPharmsWithMolIDStmt, DELETE_TWO_POINT_PHARMS_WITH_MOL_ID_SQL, mol_id);
-		deleteRowsWithMolID(delThreePointPharmsWithMolIDStmt, DELETE_THREE_POINT_PHARMS_WITH_MOL_ID_SQL, mol_id);
 	}
 
 	return num_del;
@@ -595,7 +516,7 @@ Base::int64 Pharm::SQLiteScreeningDBCreator::Implementation::insertMolecule(cons
 
 	evalStatement(insMoleculeStmt);
 
-	return sqlite3_last_insert_rowid(database.get());
+	return sqlite3_last_insert_rowid(getDBConnection().get());
 }
 
 void Pharm::SQLiteScreeningDBCreator::Implementation::genAndInsertPharmData(const Chem::MolecularGraph& molgraph, Base::int64 mol_id)
@@ -683,21 +604,6 @@ void Pharm::SQLiteScreeningDBCreator::Implementation::deleteRowsWithMolID(SQLite
 	evalStatement(stmt_ptr);
 }
 
-void Pharm::SQLiteScreeningDBCreator::Implementation::execStatements(const std::string& sql_stmts) const
-{
-	char* err_msg = 0;
-	int res = sqlite3_exec(database.get(), sql_stmts.c_str(), NULL, NULL, &err_msg);
-	boost::shared_ptr<char> err_msg_ptr(err_msg, sqlite3_free);
-
-	if (res != SQLITE_OK && res != SQLITE_DONE && res != SQLITE_ROW) {
-		std::string ex_msg;
-
-		composeExMessage(ex_msg, "SQLiteScreeningDBCreator: error while SQL execution", err_msg);
-
-		throw Base::IOError(ex_msg);
-	}
-}
-
 void Pharm::SQLiteScreeningDBCreator::Implementation::beginTransaction()
 {
 	setupStatement(beginTransStmt, BEGIN_TRANSACTION_SQL, false);
@@ -708,60 +614,4 @@ void Pharm::SQLiteScreeningDBCreator::Implementation::commitTransaction()
 {
 	setupStatement(commitTransStmt, COMMIT_TRANSACTION_SQL, false);
 	evalStatement(commitTransStmt);
-}
-
-void Pharm::SQLiteScreeningDBCreator::Implementation::setupStatement(SQLite3StmtPointer& stmt_ptr, const std::string& sql_stmt, bool clr_bindings) const
-{	
-	if (!stmt_ptr)
-		stmt_ptr.reset(prepareStatement(sql_stmt), sqlite3_finalize);
-	else
-		resetStatement(stmt_ptr, clr_bindings);
-}
-
-sqlite3_stmt* Pharm::SQLiteScreeningDBCreator::Implementation::prepareStatement(const std::string& sql_stmt) const
-{
-	sqlite3_stmt* stmt = 0;
-	
-	if (sqlite3_prepare(database.get(), sql_stmt.c_str(), -1, &stmt, NULL) != SQLITE_OK)
-		throwSQLiteIOError("SQLiteScreeningDBCreator: creation of prepared statement failed");
-
-	return stmt;
-}
-
-int Pharm::SQLiteScreeningDBCreator::Implementation::evalStatement(const SQLite3StmtPointer& stmt_ptr) const
-{
-	int res = sqlite3_step(stmt_ptr.get());
-
-	if (res != SQLITE_DONE && res != SQLITE_ROW && res != SQLITE_OK) {
-		throwSQLiteIOError("SQLiteScreeningDBCreator: evaluation of prepared statement failed");
-	}
-
-	return res;
-}
-
-void Pharm::SQLiteScreeningDBCreator::Implementation::resetStatement(const SQLite3StmtPointer& stmt_ptr, bool clr_bindings) const
-{
-	sqlite3_reset(stmt_ptr.get());
-
-	if (clr_bindings &&	sqlite3_clear_bindings(stmt_ptr.get()) != SQLITE_OK)
-		throwSQLiteIOError("SQLiteScreeningDBCreator: clearing of prepared statement bindings failes");
-}
-
-void Pharm::SQLiteScreeningDBCreator::Implementation::composeExMessage(std::string& ex_msg, const char* msg_prefix, const char* err_msg) const
-{
-	ex_msg.append(msg_prefix);
-
-	if (err_msg) {
-		ex_msg.append(": ");
-		ex_msg.append(err_msg);
-	}
-}
-
-void Pharm::SQLiteScreeningDBCreator::Implementation::throwSQLiteIOError(const char* msg_prefix) const
-{
-	std::string ex_msg;
-
-	composeExMessage(ex_msg, msg_prefix, sqlite3_errmsg(database.get()));
-
-	throw Base::IOError(ex_msg);
 }

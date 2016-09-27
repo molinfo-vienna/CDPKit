@@ -28,6 +28,8 @@ SET(pharm_MOD_SRCS
     CDFPharmacophoreReaderExport.cpp 
     CDFPharmacophoreWriterExport.cpp
 
+    ScreeningDBAccessorExport.cpp
+
     BoostFunctionWrapperExport.cpp
 
     FeatureGeneratorExport.cpp
@@ -83,6 +85,7 @@ IF(SQLITE3_FOUND)
   SET(pharm_MOD_SRCS
       ${pharm_MOD_SRCS}
       SQLiteScreeningDBCreatorExport.cpp
+      SQLiteScreeningDBAccessorExport.cpp
      )	
 ENDIF(SQLITE3_FOUND)
 
