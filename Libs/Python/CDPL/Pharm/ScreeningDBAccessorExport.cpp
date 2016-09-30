@@ -28,6 +28,7 @@
 
 #include "CDPL/Pharm/ScreeningDBAccessor.hpp"
 #include "CDPL/Pharm/Pharmacophore.hpp"
+#include "CDPL/Pharm/FeatureTypeHistogram.hpp"
 #include "CDPL/Chem/Molecule.hpp"
 
 #include "Base/ObjectIdentityCheckVisitor.hpp"
@@ -63,32 +64,28 @@ namespace
 			return this->get_override("getNumPharmacophores")();
 		}
 
-		void getMolecule(std::size_t idx, CDPL::Chem::Molecule& mol) const {
-			this->get_override("getMolecule")(idx, boost::ref(mol));
+		void getMolecule(std::size_t mol_idx, CDPL::Chem::Molecule& mol) const {
+			this->get_override("getMolecule")(mol_idx, boost::ref(mol));
 		} 
 
-		void getPharmacophore(std::size_t idx, CDPL::Pharm::Pharmacophore& pharm) const {
-			this->get_override("getPharmacophore")(idx, boost::ref(pharm));
+		void getPharmacophore(std::size_t pharm_idx, CDPL::Pharm::Pharmacophore& pharm) const {
+			this->get_override("getPharmacophore")(pharm_idx, boost::ref(pharm));
 		} 
 
 		void getPharmacophore(std::size_t mol_idx, std::size_t conf_idx, CDPL::Pharm::Pharmacophore& pharm) const {
 			this->get_override("getPharmacophore")(mol_idx, conf_idx, boost::ref(pharm));
 		} 
 
-		std::size_t findMatchingEntries(const CDPL::Pharm::Pharmacophore& pharm) {
-			return this->get_override("findMatchingEntries")(boost::ref(pharm));
+		std::size_t getMoleculeIndex(std::size_t pharm_idx) const {
+			return this->get_override("getMoleculeIndex")(pharm_idx);
 		}
 
-		std::size_t getNumMatchingEntries() {
-			return this->get_override("getNumMatchingEntries")();
+		std::size_t getConformationIndex(std::size_t pharm_idx) const {
+			return this->get_override("getConformationIndex")(pharm_idx);
 		}
 
-		std::size_t getMatchingEntryMolIndex(std::size_t idx) const {
-			return this->get_override("getMatchingEntryMolIndex")(idx);
-		}
-
-		std::size_t getMatchingEntryConfIndex(std::size_t idx) const {
-			return this->get_override("getMatchingEntryConfIndex")(idx);
+		const CDPL::Pharm::FeatureTypeHistogram& getFeatureCounts(std::size_t pharm_idx) const {
+			return this->get_override("getFeatureCounts")(pharm_idx);
 		}
 	};
 }
@@ -114,25 +111,24 @@ void CDPLPythonPharm::exportScreeningDBAccessor()
 		.def("getNumPharmacophores", python::pure_virtual(&Pharm::ScreeningDBAccessor::getNumPharmacophores),
 			 python::arg("self"))
 		.def("getMolecule", python::pure_virtual(&Pharm::ScreeningDBAccessor::getMolecule),
-			 (python::arg("self"), python::arg("idx"), python::arg("mol")))
+			 (python::arg("self"), python::arg("mol_idx"), python::arg("mol")))
 		.def("getPharmacophore", 
 			 python::pure_virtual(
 				 static_cast<void (Pharm::ScreeningDBAccessor::*)(std::size_t, Pharm::Pharmacophore&) const>(
 					 &Pharm::ScreeningDBAccessor::getPharmacophore)),
-			 (python::arg("self"), python::arg("idx"), python::arg("pharm")))
+			 (python::arg("self"), python::arg("pharm_idx"), python::arg("pharm")))
 		.def("getPharmacophore", 
 			 python::pure_virtual(
 				 static_cast<void (Pharm::ScreeningDBAccessor::*)(std::size_t, std::size_t, Pharm::Pharmacophore&) const>(
 					 &Pharm::ScreeningDBAccessor::getPharmacophore)),
 			 (python::arg("self"), python::arg("mol_idx"), python::arg("conf_idx"), python::arg("pharm")))
-		.def("findMatchingEntries", python::pure_virtual(&Pharm::ScreeningDBAccessor::findMatchingEntries),
-			 (python::arg("self"), python::arg("pharm")))
-		.def("getNumMatchingEntries", python::pure_virtual(&Pharm::ScreeningDBAccessor::getNumMatchingEntries),
-			 python::arg("self"))
-		.def("getMatchingEntryMolIndex", python::pure_virtual(&Pharm::ScreeningDBAccessor::getMatchingEntryMolIndex),
-			 (python::arg("self"), python::arg("idx")))
-		.def("getMatchingEntryConfIndex", python::pure_virtual(&Pharm::ScreeningDBAccessor::getMatchingEntryConfIndex),
-			 (python::arg("self"), python::arg("idx")))
+		.def("getMoleculeIndex", python::pure_virtual(&Pharm::ScreeningDBAccessor::getMoleculeIndex),
+			 (python::arg("self"), python::arg("pharm_idx")))
+		.def("getConformationIndex", python::pure_virtual(&Pharm::ScreeningDBAccessor::getConformationIndex),
+			 (python::arg("self"), python::arg("pharm_idx")))
+		.def("getFeatureCounts", python::pure_virtual(&Pharm::ScreeningDBAccessor::getFeatureCounts),
+			 (python::arg("self"), python::arg("pharm_idx")),
+			 python::return_internal_reference<>())
 		.add_property("databaseName", python::make_function(&Pharm::ScreeningDBAccessor::getDatabaseName,											
 															python::return_value_policy<python::copy_const_reference>()))
 		.add_property("numMolecules", &Pharm::ScreeningDBAccessor::getNumMolecules)

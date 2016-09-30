@@ -52,6 +52,7 @@ namespace CDPL
     {
 	
 		class Pharmacophore;
+		class FeatureTypeHistogram;
 
 		/**
 		 * \addtogroup CDPL_PHARM_SCREENING
@@ -68,7 +69,7 @@ namespace CDPL
 			typedef boost::shared_ptr<ScreeningDBAccessor> SharedPointer;
 
 			/**
-			 * \brief Destructor.
+			 * \brief Virtual destructor.
 			 */
 			virtual ~ScreeningDBAccessor() {}
 
@@ -82,19 +83,17 @@ namespace CDPL
 
 			virtual std::size_t getNumPharmacophores() const = 0;
 
-			virtual void getMolecule(std::size_t idx, Chem::Molecule& mol) const = 0; 
+			virtual void getMolecule(std::size_t mol_idx, Chem::Molecule& mol) const = 0; 
 
-			virtual void getPharmacophore(std::size_t idx, Pharmacophore& pharm) const = 0; 
+			virtual void getPharmacophore(std::size_t pharm_idx, Pharmacophore& pharm) const = 0; 
 
 			virtual void getPharmacophore(std::size_t mol_idx, std::size_t conf_idx, Pharmacophore& pharm) const = 0; 
 
-			virtual std::size_t findMatchingEntries(const Pharmacophore& pharm) = 0;
+			virtual std::size_t getMoleculeIndex(std::size_t pharm_idx) const = 0;
 
-			virtual std::size_t getNumMatchingEntries() = 0;
+			virtual std::size_t getConformationIndex(std::size_t pharm_idx) const = 0;
 
-			virtual std::size_t getMatchingEntryMolIndex(std::size_t idx) const = 0;
-
-			virtual std::size_t getMatchingEntryConfIndex(std::size_t idx) const = 0;
+			virtual const FeatureTypeHistogram& getFeatureCounts(std::size_t pharm_idx) const = 0;
 
 		  protected:
 			ScreeningDBAccessor& operator=(const ScreeningDBAccessor&) {

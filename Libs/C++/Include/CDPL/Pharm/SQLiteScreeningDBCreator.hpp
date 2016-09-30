@@ -31,21 +31,14 @@
 #ifndef CDPL_PHARM_SQLITESCREENINGDBCREATOR_HPP
 #define CDPL_PHARM_SQLITESCREENINGDBCREATOR_HPP
 
-#include <string>
-#include <cstddef>
 #include <memory>
 
 #include "CDPL/Pharm/APIPrefix.hpp"
+#include "CDPL/Pharm/ScreeningDBCreator.hpp"
 
 
 namespace CDPL 
 {
-
-	namespace Chem
-	{
-		
-		class MolecularGraph;
-	}
 
     namespace Pharm
     {
@@ -58,17 +51,11 @@ namespace CDPL
 		/**
 		 * \brief A class for the creation of optimized pharmacophore screening databases.
 		 */
-		class CDPL_PHARM_API SQLiteScreeningDBCreator
+        class CDPL_PHARM_API SQLiteScreeningDBCreator : public ScreeningDBCreator
 		{
 
 		  public:
-			enum Mode
-			{
-
-			  CREATE,
-			  UPDATE,
-			  APPEND
-			};
+			typedef boost::shared_ptr<SQLiteScreeningDBCreator> SharedPointer;
 
 			SQLiteScreeningDBCreator();
 

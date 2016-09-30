@@ -81,19 +81,17 @@ namespace CDPL
 
 		std::size_t getNumPharmacophores() const;
 
-		void getMolecule(std::size_t idx, Chem::Molecule& mol) const; 
+		void getMolecule(std::size_t mol_idx, Chem::Molecule& mol) const; 
 
-		void getPharmacophore(std::size_t idx, Pharmacophore& pharm) const; 
+		void getPharmacophore(std::size_t pharm_idx, Pharmacophore& pharm) const; 
 
 		void getPharmacophore(std::size_t mol_idx, std::size_t conf_idx, Pharmacophore& pharm) const; 
 
-		std::size_t findMatchingEntries(const Pharmacophore& pharm);
+		std::size_t getMoleculeIndex(std::size_t pharm_idx) const;
 
-		std::size_t getNumMatchingEntries();
+		std::size_t getConformationIndex(std::size_t pharm_idx) const;
 
-		std::size_t getMatchingEntryMolIndex(std::size_t idx) const;
-
-		std::size_t getMatchingEntryConfIndex(std::size_t idx) const;
+		const FeatureTypeHistogram& getFeatureCounts(std::size_t pharm_idx) const;
 
 	  private:
 	    class Implementation;

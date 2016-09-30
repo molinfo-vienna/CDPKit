@@ -137,7 +137,18 @@ namespace
 	const std::string BEGIN_TRANSACTION_SQL    = "BEGIN TRANSACTION;";
 	const std::string COMMIT_TRANSACTION_SQL   = "COMMIT TRANSACTION;";
 	const std::string ROLLBACK_TRANSACTION_SQL = "ROLLBACK TRANSACTION;";
-
+	
+	const std::string SQLITE_OPEN_PRAGMAS = 
+		"PRAGMA page_size = 4096;" 
+		"PRAGMA cache_size = 10000;"  
+		"PRAGMA locking_mode = EXCLUSIVE;" 
+		"PRAGMA synchronous = NORMAL;" 
+//		"PRAGMA journal_mode = WAL;" 
+		"PRAGMA temp_store = MEMORY;";
+/*
+	const std::string SQLITE_CLOSE_PRAGMAS = 
+		"PRAGMA journal_mode = DELETE;" 
+*/
 	class TransactionRollback
 	{
 		
@@ -340,6 +351,8 @@ const std::string& Pharm::SQLiteScreeningDBCreator::Implementation::getDatabaseN
 
 void Pharm::SQLiteScreeningDBCreator::Implementation::closeDBConnection()
 {
+	//execStatements(SQLITE_CLOSE_PRAGMAS);
+
 	beginTransStmt.reset();
 	commitTransStmt.reset();
 	insMoleculeStmt.reset();
@@ -445,6 +458,8 @@ void Pharm::SQLiteScreeningDBCreator::Implementation::initControlParams()
 
 void Pharm::SQLiteScreeningDBCreator::Implementation::setupTables()
 {
+	execStatements(SQLITE_OPEN_PRAGMAS);
+
 	beginTransaction();
 	TransactionRollback trb(getDBConnection().get());
 

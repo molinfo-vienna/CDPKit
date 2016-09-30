@@ -460,7 +460,7 @@ def extendByModuleName(type_name):
 
 def genPythonAPIDocFiles():
 	if len(sys.argv) < 3:
-		print >> sys.stderr, 'Usage:', sys.argv[0], 'package output-dir'
+		print >> sys.stderr, 'Usage:', sys.argv[0], 'package'
 		sys.exit(2)
 
 	__import__(sys.argv[1])

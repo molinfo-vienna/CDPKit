@@ -87,6 +87,7 @@
 #include "CDPL/Pharm/CDFPharmacophoreReader.hpp"
 #include "CDPL/Pharm/CDFPharmacophoreWriter.hpp"
 
+#include "CDPL/Pharm/ScreeningDBCreator.hpp"
 #include "CDPL/Pharm/ScreeningDBAccessor.hpp"
 
 #ifdef HAVE_SQLITE3

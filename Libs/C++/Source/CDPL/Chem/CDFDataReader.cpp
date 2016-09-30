@@ -141,7 +141,7 @@ std::size_t Chem::CDFDataReader::readAtoms(Molecule& mol, Internal::ByteBuffer& 
 	Math::Vector3D coords_3d_val;
 	CDF::SizeType num_atoms;
 
-	dataBuffer.getInt(num_atoms);
+	bbuf.getInt(num_atoms);
 
 	for (std::size_t i = 0; i < num_atoms; i++) {
 		Atom& atom = mol.addAtom();
@@ -280,7 +280,7 @@ void Chem::CDFDataReader::readBonds(Molecule& mol, Internal::ByteBuffer& bbuf, s
 	CDF::BondAtomIndexLengthTuple idx_lengths;
 	CDF::SizeType num_bonds;
 
-	dataBuffer.getInt(num_bonds);
+	bbuf.getInt(num_bonds);
 
 	for (std::size_t i = 0; i < num_bonds; i++) {
 		bbuf.getInt(idx_lengths);
@@ -334,7 +334,7 @@ void Chem::CDFDataReader::readBonds(Molecule& mol, Internal::ByteBuffer& bbuf, s
 					set2DStereoFlag(bond, uint_val);
 					continue;
 
-				case CDF::AtomProperty::CIP_CONFIGURATION:
+				case CDF::BondProperty::CIP_CONFIGURATION:
 					getIntProperty(prop_spec, uint_val, bbuf);
 					setCIPConfiguration(bond, uint_val);
 					continue;
