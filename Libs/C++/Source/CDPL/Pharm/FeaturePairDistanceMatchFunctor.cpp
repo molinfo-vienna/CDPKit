@@ -43,11 +43,7 @@ bool Pharm::FeaturePairDistanceMatchFunctor::queryMode() const
 bool Pharm::FeaturePairDistanceMatchFunctor::operator()(const Feature& p1_ftr1, const Feature& p1_ftr2,
 														const Feature& p2_ftr1, const Feature& p2_ftr2) const
 {
-    if (!has3DCoordinates(p1_ftr1) || has3DCoordinates(p1_ftr2) ||
-		has3DCoordinates(p2_ftr1) || has3DCoordinates(p2_ftr2))
-		return false;
-
-    double dist1 = length(get3DCoordinates(p1_ftr2) - get3DCoordinates(p1_ftr1));
+	double dist1 = length(get3DCoordinates(p1_ftr2) - get3DCoordinates(p1_ftr1));
     double dist2 = length(get3DCoordinates(p2_ftr2) - get3DCoordinates(p2_ftr1));
 
     double p1_tol1 = getTolerance(p1_ftr1);

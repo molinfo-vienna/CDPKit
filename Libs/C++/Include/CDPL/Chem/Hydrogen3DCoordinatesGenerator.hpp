@@ -68,13 +68,13 @@ namespace CDPL
 			Hydrogen3DCoordinatesGenerator();
 
 			/**
-			 * \brief Constructs the \c %Hydrogen3DCoordinatesGenerator instance and generates 3D coordinates for
+			 * \brief Constructs the \c %Hydrogen3DCoordinatesGenerator instance and generates 3D-coordinates for
 			 *        the hydrogen atoms of the molecular graph \a molgraph.
 			 *
 			 * The generated coordinates can be retrieved by a call to getResult().
 			 *
-			 * \param molgraph The molecular graph for which to generate 3D coordinates.
-			 * \param coords An array containing the heavy atom and generated hydrogen 3D coordinates. The coordinates
+			 * \param molgraph The molecular graph for which to generate 3D-coordinates.
+			 * \param coords An array containing the heavy atom and generated hydrogen 3D-coordinates. The coordinates
 			 *         are stored in the same order as the atoms appear in the atom list of
 			 *         the molecular graph (i.e. the coordinates of an atom are accessible via
 			 *         its index).
@@ -96,9 +96,9 @@ namespace CDPL
 			bool undefinedOnly() const;
 
 			/**
-			 * \brief Generates 3D coordinates for the hydrogen atoms of the molecular graph \a molgraph.
-			 * \param molgraph The molecular graph for which to generate 3D coordinates.
-			 * \param coords An array containing the heavy atom and generated hydrogen 3D coordinates. The coordinates
+			 * \brief Generates 3D-coordinates for the hydrogen atoms of the molecular graph \a molgraph.
+			 * \param molgraph The molecular graph for which to generate 3D-coordinates.
+			 * \param coords An array containing the heavy atom and generated hydrogen 3D-coordinates. The coordinates
 			 *         are stored in the same order as the atoms appear in the atom list of
 			 *         the molecular graph (i.e. the coordinates of an atom are accessible via
 			 *         its index).

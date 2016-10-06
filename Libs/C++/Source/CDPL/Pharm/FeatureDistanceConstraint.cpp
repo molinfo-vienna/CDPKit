@@ -46,9 +46,6 @@ double Pharm::FeatureDistanceConstraint::getMaxDistance() const
 
 bool Pharm::FeatureDistanceConstraint::operator()(const Feature& ftr1, const Feature& ftr2) const
 {
-	if (!has3DCoordinates(ftr1) || !has3DCoordinates(ftr2))
-		return false;
-
 	double dist = length(get3DCoordinates(ftr2) - get3DCoordinates(ftr1));
 
 	return (dist >= minDist && dist <= maxDist);

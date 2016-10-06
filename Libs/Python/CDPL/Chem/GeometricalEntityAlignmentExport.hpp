@@ -38,11 +38,11 @@
 namespace CDPLPythonChem
 {
 
-    template <typename T>
+    template <typename T, typename EM>
     struct GeometricalEntityAlignmentExport
     {
 
-		typedef CDPL::Chem::GeometricalEntityAlignment<T> AlignmentType;
+		typedef CDPL::Chem::GeometricalEntityAlignment<T, EM> AlignmentType;
 
 		GeometricalEntityAlignmentExport(const char* name) {
 			using namespace boost;

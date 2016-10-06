@@ -27,6 +27,7 @@
 #include <boost/python.hpp>
 
 #include "CDPL/Pharm/Feature.hpp"
+#include "CDPL/Pharm/FeatureMapping.hpp"
 
 #include "Chem/GeometricalEntityAlignmentExport.hpp"
 
@@ -38,5 +39,5 @@ void CDPLPythonPharm::exportGeometricalEntityAlignment()
 	using namespace CDPL;
 	using namespace Pharm;
 
-	CDPLPythonChem::GeometricalEntityAlignmentExport<Feature>("GeometricalFeatureAlignment");
+	CDPLPythonChem::GeometricalEntityAlignmentExport<Feature, FeatureMapping>("GeometricalFeatureAlignment");
 }

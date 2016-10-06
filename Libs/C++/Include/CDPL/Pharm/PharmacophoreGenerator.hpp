@@ -129,10 +129,10 @@ namespace CDPL
 			void generate(const Chem::MolecularGraph& molgraph, Pharmacophore& pharm);
 
 			/**
-			 * \brief Specifies a function for the retrieval of atom 3D coordinates for feature generation.
-			 * \param func The atom 3D coordinates function.
+			 * \brief Specifies a function for the retrieval of atom 3D-coordinates for feature generation.
+			 * \param func The atom 3D-coordinates function.
 			 */
-			void setAtom3DCoordinatesFunction(const Atom3DCoordinatesFunction& func);
+			void setAtom3DCoordinatesFunction(const Chem::Atom3DCoordinatesFunction& func);
 
 		  private:
 			typedef std::set<unsigned int> EnabledFeatureSet;

@@ -197,7 +197,6 @@
 \defgroup CDPL_CHEM_REACTION_PROPERTIES Reaction Properties
 \ingroup CDPL_CHEM_PROPERTIES
 
-
 \defgroup CDPL_CHEM_CONSTANTS Flags and Constants
 \ingroup CDPL_CHEM
 
@@ -344,6 +343,9 @@
 
 \defgroup CDPL_PHARM_CONTROL_PARAMETERS Control-Parameter Keys
 \ingroup CDPL_PHARM_CONSTANTS
+
+\defgroup CDPL_PHARM_FUNCTORS Functor Classes
+\ingroup CDPL_PHARM
 
 \defgroup CDPL_PHARM_FUNCTIONS Free Functions
 \ingroup CDPL_PHARM

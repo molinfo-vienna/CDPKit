@@ -27,6 +27,8 @@
 #include <boost/python.hpp>
 
 #include "CDPL/Chem/Atom.hpp"
+#include "CDPL/Chem/AtomMapping.hpp"
+#include "CDPL/Chem/Entity3DMapping.hpp"
 
 #include "GeometricalEntityAlignmentExport.hpp"
 #include "ClassExports.hpp"
@@ -37,6 +39,6 @@ void CDPLPythonChem::exportGeometricalEntityAlignments()
     using namespace CDPL;
     using namespace Chem;
 
-    GeometricalEntityAlignmentExport<Entity3D>("GeometricalEntity3DAlignment");
-    GeometricalEntityAlignmentExport<Atom>("GeometricalAtomAlignment");
+    GeometricalEntityAlignmentExport<Entity3D, Entity3DMapping>("GeometricalEntity3DAlignment");
+    GeometricalEntityAlignmentExport<Atom, AtomMapping>("GeometricalAtomAlignment");
 }

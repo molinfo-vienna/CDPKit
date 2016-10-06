@@ -1,7 +1,7 @@
 /* -*- mode: c++; c-basic-offset: 4; tab-width: 4; indent-tabs-mode: t -*- */
 
 /* 
- * FeatureDistanceConstraint.hpp 
+ * AtomArray3DCoordinatesFunctor.hpp 
  *
  * This file is part of the Chemical Data Processing Toolkit
  *
@@ -25,55 +25,53 @@
 
 /**
  * \file
- * \brief Definition of the class CDPL::Pharm::FeatureDistanceConstraint.
+ * \brief Definition of the class CDPL::Chem::AtomArray3DCoordinatesFunctor.
  */
 
-#ifndef CDPL_PHARM_FEATUREDISTANCECONSTRAINT_HPP
-#define CDPL_PHARM_FEATUREDISTANCECONSTRAINT_HPP
+#ifndef CDPL_CHEM_ATOMARRAY3DCOORDINATESFUNCTOR_HPP
+#define CDPL_CHEM_ATOMARRAY3DCOORDINATESFUNCTOR_HPP
 
 #include <functional>
+#include <cstddef>
 
-#include "CDPL/Pharm/APIPrefix.hpp"
+#include "CDPL/Chem/APIPrefix.hpp"
+#include "CDPL/Math/VectorArray.hpp"
 
 
 namespace CDPL 
 {
 
-    namespace Pharm
+    namespace Chem
     {
 
-		class Feature;
+		class Atom;
+		class MolecularGraph;
 
 		/**
-		 * \addtogroup CDPL_PHARM_FUNCTORS
+		 * \addtogroup CDPL_CHEM_FUNCTORS
 		 * @{
 		 */
 
 		/**
-		 * \brief FeatureDistanceConstraint.
+		 * \brief AtomArray3DCoordinatesFunctor.
 		 */
-		class CDPL_PHARM_API FeatureDistanceConstraint : public std::binary_function<Feature, Feature, bool>
+		class CDPL_CHEM_API AtomArray3DCoordinatesFunctor : public std::unary_function<Atom, const Math::Vector3D&>
 		{
 
 		  public:
+			AtomArray3DCoordinatesFunctor(const Math::Vector3DArray& coords, const MolecularGraph& molgraph): 
+				coordinates(&coords), molGraph(&molgraph) {}
+
 			/**
-			 * \brief Constructs a \c %FeatureDistanceConstraint functor with a 
-			 *        minimum feature distance of \a min_dist and maximum distance of \a max_dist.
-			 * \param min_dist The minimum feature pair distance.
-			 * \param max_dist The maximum feature pair distance.
+			 * \brief Returns the 3D-coordinates of the argument atom.
+			 * \param atom The atom.
+			 * \return The 3D-coordinates of the atom.
 			 */
-			FeatureDistanceConstraint(double min_dist, double max_dist): 
-				minDist(min_dist), maxDist(max_dist) {}
-
-			double getMinDistance() const;
-
-			double getMaxDistance() const;
-
-			bool operator()(const Feature& ftr1, const Feature& ftr2) const;
+			const Math::Vector3D& operator()(const Atom& atom) const;
 
 		  private:
-			double minDist;
-			double maxDist;
+			const Math::Vector3DArray* coordinates;
+			const MolecularGraph*      molGraph;
 		};
 
 		/**
@@ -82,4 +80,4 @@ namespace CDPL
     }
 }
 
-#endif // CDPL_PHARM_FEATUREDISTANCECONSTRAINT_HPP
+#endif // CDPL_CHEM_ATOMARRAY3DCOORDINATESFUNCTOR_HPP

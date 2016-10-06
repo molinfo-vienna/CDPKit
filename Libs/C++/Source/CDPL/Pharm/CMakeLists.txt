@@ -38,10 +38,10 @@ SET(cdpl-pharm_LIB_SRCS
     FeaturePairDistanceMatchFunctor.cpp
     FeaturePositionMatchFunctor.cpp
     FeatureGeometryMatchFunctor.cpp
-    TopologicalQueryPharmAlignmentFilter.cpp
-    GeometricalQueryPharmAlignmentFilter.cpp
     GeometricalFeatureMappingExtractor.cpp
     PharmacophoreAlignment.cpp
+
+    ScreeningDBProcessor.cpp
 
     CDFPharmacophoreInputHandler.cpp
     CDFPharmacophoreOutputHandler.cpp

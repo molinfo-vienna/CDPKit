@@ -96,13 +96,13 @@ namespace CDPL
 	  private:
 	    class Implementation;
 
-	    typedef std::auto_ptr<Implementation> ImplementationPointer;
+	    typedef std::auto_ptr<Implementation> ImplPointer;
 
 	    SQLiteScreeningDBAccessor(const SQLiteScreeningDBAccessor&);
 
 	    SQLiteScreeningDBAccessor& operator=(const SQLiteScreeningDBAccessor&);
 		
-	    ImplementationPointer impl;
+	    ImplPointer impl;
 	};
 
 	/**

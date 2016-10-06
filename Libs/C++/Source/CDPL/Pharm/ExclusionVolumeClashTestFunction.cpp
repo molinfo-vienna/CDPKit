@@ -37,32 +37,31 @@
 #include "CDPL/Pharm/FeatureType.hpp"
 #include "CDPL/Pharm/FeatureFunctions.hpp"
 #include "CDPL/Pharm/Pharmacophore.hpp"
-#include "CDPL/Chem/AtomContainer.hpp"
 #include "CDPL/Chem/Atom.hpp"
+#include "CDPL/Chem/AtomContainer.hpp"
 #include "CDPL/Chem/AtomFunctions.hpp"
 #include "CDPL/Chem/Entity3DFunctions.hpp"
-#include "CDPL/Chem/Entity3DContainerFunctions.hpp"
 #include "CDPL/Math/VectorAdapter.hpp"
 
 
 using namespace CDPL; 
 
 
-bool Pharm::checkExclusionVolumeClash(const Pharmacophore& pharm, const Chem::AtomContainer& cntnr, const Math::Matrix4D& xform, bool vdw)
+bool Pharm::checkExclusionVolumeClash(const Pharmacophore& pharm, const Chem::AtomContainer& cntnr, 
+									  const Chem::Atom3DCoordinatesFunction& coords_func, 
+									  const Math::Matrix4D& xform, bool vdw)
 {
-	Math::Vector3DArray atom_coords;
 	Math::Vector3D tmp;
 	std::vector<double> vdw_radii;
+	std::vector<Math::Vector3D> atom_coords;
 	std::size_t num_atoms = cntnr.getNumAtoms();
 
 	atom_coords.reserve(num_atoms);
 	vdw_radii.reserve(num_atoms);
 
-	get3DCoordinates(cntnr, atom_coords);
-
-	for (std::size_t i = 0; i < num_atoms; i++) {
-		tmp.assign(range(prod(xform, homog(atom_coords[i])), 0, 3));
-		atom_coords[i].assign(tmp);
+	for (Chem::AtomContainer::ConstAtomIterator it = cntnr.getAtomsBegin(), end = cntnr.getAtomsEnd(); it != end; ++it) {
+		tmp.assign(range(prod(xform, homog(coords_func(*it))), 0, 3));
+		atom_coords.push_back(tmp);
 	}
 
 	if (vdw) 

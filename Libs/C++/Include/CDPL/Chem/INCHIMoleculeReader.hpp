@@ -81,12 +81,12 @@ namespace CDPL
 		 *  <tr>
 		 *   <td>Chem::AtomProperty::COORDINATES_2D</td>
 		 *   <td>Specifies the 2D position of the atom</td>
-		 *   <td>Only set if auxiliary information with 2D coordinates is available</td>
+		 *   <td>Only set if auxiliary information with 2D-coordinates is available</td>
 		 *  </tr>
 		 *  <tr>
 		 *   <td>Chem::AtomProperty::COORDINATES_3D</td>
-		 *   <td>Specifies the 3D coordinates of the atom</td>
-		 *   <td>Only set if auxiliary information with 3D coordinates is available</td>
+		 *   <td>Specifies the 3D-coordinates of the atom</td>
+		 *   <td>Only set if auxiliary information with 3D-coordinates is available</td>
 		 *  </tr>
 		 *  <tr>
 		 *   <td>Chem::AtomProperty::SYMBOL</td>

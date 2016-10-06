@@ -74,7 +74,7 @@ namespace CDPL
 			/**
 			 * \brief Specifies the dimension of atom coordinates.
 			 *
-			 * A control-parameter value of \e 2 specifies 2D coordinates and a value of \e 3 3D coordinates. 
+			 * A control-parameter value of \e 2 specifies 2D-coordinates and a value of \e 3 3D-coordinates. 
 			 * Other values trigger the selection of an implementation defined default dimension.
 			 *
 			 * \valuetype \c std::size_t

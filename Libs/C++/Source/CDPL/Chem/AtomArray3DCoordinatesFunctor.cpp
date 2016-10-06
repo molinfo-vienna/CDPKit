@@ -1,7 +1,7 @@
 /* -*- mode: c++; c-basic-offset: 4; tab-width: 4; indent-tabs-mode: t -*- */
 
 /* 
- * GeometricalQueryPharmAlignmentFilter.cpp 
+ * AtomArray3DCoordinatesFunctor.cpp 
  *
  * This file is part of the Chemical Data Processing Toolkit
  *
@@ -26,38 +26,14 @@
 
 #include "StaticInit.hpp"
 
-#include "CDPL/Pharm/GeometricalQueryPharmAlignmentFilter.hpp"
-#include "CDPL/Pharm/Pharmacophore.hpp"
-#include "CDPL/Pharm/Feature.hpp"
-#include "CDPL/Pharm/FeatureFunctions.hpp"
+#include "CDPL/Chem/AtomArray3DCoordinatesFunctor.hpp"
+#include "CDPL/Chem/MolecularGraph.hpp"
 
 
 using namespace CDPL; 
 
 
-Pharm::GeometricalQueryPharmAlignmentFilter::GeometricalQueryPharmAlignmentFilter(const Pharmacophore& query, std::size_t max_omtd_ftrs):
-    maxOmtdFeatures(max_omtd_ftrs)
+const Math::Vector3D& Chem::AtomArray3DCoordinatesFunctor::operator()(const Atom& atom) const
 {
-	for (Pharmacophore::ConstFeatureIterator it = query.getFeaturesBegin(), end = query.getFeaturesEnd(); it != end; ++it) {
-		const Feature& ftr = *it;
-
-		if (getDisabledFlag(ftr) || getOptionalFlag(ftr))
-			continue;
-
-		checkedFeatures.push_back(&ftr);
-    }
-}
-
-bool Pharm::GeometricalQueryPharmAlignmentFilter::operator()(const FeatureMapping& mapping) const
-{
-	std::size_t num_omitted = 0;
-
-	for (FeatureArray::const_iterator it = checkedFeatures.begin(), end = checkedFeatures.end();
-		 it != end && num_omitted <= maxOmtdFeatures; ++it) {
-
-		if (!mapping.getValue(*it, 0))
-			num_omitted++;
-	}
-
-	return (num_omitted <= maxOmtdFeatures);
+    return coordinates->getElement(molGraph->getAtomIndex(atom));
 }

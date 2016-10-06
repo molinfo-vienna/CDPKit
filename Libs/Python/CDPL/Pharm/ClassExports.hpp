@@ -56,6 +56,7 @@ namespace CDPLPythonPharm
 
 	void exportScreeningDBCreator();
 	void exportScreeningDBAccessor();
+	void exportScreeningDBProcessor();
 
 #ifdef HAVE_SQLITE3
 
@@ -93,9 +94,7 @@ namespace CDPLPythonPharm
 	void exportTopologicalEntityAlignment();
 	void exportGeometricalEntityAlignment();
 	void exportPharmacophoreAlignment();
-	void exportTopologicalQueryPharmAlignmentFilter();
-    void exportGeometricalQueryPharmAlignmentFilter();
-    void exportGeometricalFeatureMappingExtractor();
+	void exportGeometricalFeatureMappingExtractor();
 }
 
 #endif // CDPL_PYTHON_PHARM_CLASSEXPORTS_HPP

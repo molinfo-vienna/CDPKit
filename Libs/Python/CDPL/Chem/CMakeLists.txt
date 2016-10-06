@@ -204,6 +204,7 @@ SET(chem_MOD_SRCS
     BoostFunctionWrapperExport.cpp
     Atom3DCoordinatesFunctorExport.cpp
     AtomConformer3DCoordinatesFunctorExport.cpp
+    AtomArray3DCoordinatesFunctorExport.cpp
 
     ToPythonConverterRegistration.cpp 
     FromPythonConverterRegistration.cpp 

@@ -30,6 +30,7 @@ SET(pharm_MOD_SRCS
 
     ScreeningDBCreatorExport.cpp
     ScreeningDBAccessorExport.cpp
+    ScreeningDBProcessorExport.cpp
 
     BoostFunctionWrapperExport.cpp
 
@@ -60,8 +61,6 @@ SET(pharm_MOD_SRCS
     TopologicalEntityAlignmentExport.cpp	
     GeometricalEntityAlignmentExport.cpp
     PharmacophoreAlignmentExport.cpp
-    TopologicalQueryPharmAlignmentFilterExport.cpp
-    GeometricalQueryPharmAlignmentFilterExport.cpp
     GeometricalFeatureMappingExtractorExport.cpp
     FeaturePositionMatchFunctorExport.cpp
     FeatureGeometryMatchFunctorExport.cpp

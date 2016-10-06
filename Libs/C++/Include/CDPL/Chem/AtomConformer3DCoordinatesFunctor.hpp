@@ -44,37 +44,37 @@ namespace CDPL
     namespace Chem
     {
 
-	class Atom;
+		class Atom;
 
-	/**
-	 * \addtogroup CDPL_CHEM_FUNCTORS
-	 * @{
-	 */
+		/**
+		 * \addtogroup CDPL_CHEM_FUNCTORS
+		 * @{
+		 */
 
-	/**
-	 * \brief AtomConformer3DCoordinatesFunctor.
-	 */
-	class CDPL_CHEM_API AtomConformer3DCoordinatesFunctor : public std::unary_function<Atom, const Math::Vector3D&>
-	{
+		/**
+		 * \brief AtomConformer3DCoordinatesFunctor.
+		 */
+		class CDPL_CHEM_API AtomConformer3DCoordinatesFunctor : public std::unary_function<Atom, const Math::Vector3D&>
+		{
 
-	  public:
-	    AtomConformer3DCoordinatesFunctor(std::size_t conf_idx): confIndex(conf_idx) {}
+		  public:
+			AtomConformer3DCoordinatesFunctor(std::size_t conf_idx): confIndex(conf_idx) {}
 
-	    /**
-	     * \brief Returns the 3D coordinates of the argument atom.
-	     * \param atom The atom.
-	     * \return The 3D coordinates of the atom.
-	     * \see Chem::get3DCoordinates(const Atom&)
-	     */
-	    const Math::Vector3D& operator()(const Atom& atom) const;
+			/**
+			 * \brief Returns the 3D-coordinates of the argument atom.
+			 * \param atom The atom.
+			 * \return The 3D-coordinates of the atom.
+			 * \see Chem::getConformer3DCoordinates(const Atom&, std::size_t)
+			 */
+			const Math::Vector3D& operator()(const Atom& atom) const;
 
-	  private:
-	    std::size_t confIndex;
-	};
+		  private:
+			std::size_t confIndex;
+		};
 
-	/**
-	 * @}
-	 */
+		/**
+		 * @}
+		 */
     }
 }
 

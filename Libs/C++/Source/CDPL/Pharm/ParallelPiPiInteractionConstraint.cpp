@@ -69,11 +69,8 @@ double Pharm::ParallelPiPiInteractionConstraint::getAngleTolerance() const
 
 bool Pharm::ParallelPiPiInteractionConstraint::operator()(const Feature& ftr1, const Feature& ftr2) const
 {
-    if (!has3DCoordinates(ftr1) || !has3DCoordinates(ftr2))
-	return false;
-
     if (!hasOrientation(ftr1) || !hasOrientation(ftr2))
-	return false;
+		return false;
 
     const Math::Vector3D& orient1 = getOrientation(ftr1);
     const Math::Vector3D& orient2 = getOrientation(ftr2);
@@ -82,7 +79,7 @@ bool Pharm::ParallelPiPiInteractionConstraint::operator()(const Feature& ftr1, c
     double ang = std::acos(ang_cos) * 180.0 / M_PI;
 
     if (ang > angleTol)
-	return false;
+		return false;
 
     Math::Vector3D ftr1_ftr2_vec(get3DCoordinates(ftr2) - get3DCoordinates(ftr1));
     
@@ -90,16 +87,16 @@ bool Pharm::ParallelPiPiInteractionConstraint::operator()(const Feature& ftr1, c
     double v_dist2 = calcVPlaneDistance(orient2, ftr1_ftr2_vec);
 
     if (std::min(v_dist1, v_dist2) < minVDist)
-	return false;
+		return false;
   
     if (std::max(v_dist1, v_dist2) > maxVDist)
-	return false;
+		return false;
     
     double h_dist1 = calcHPlaneDistance(orient1, ftr1_ftr2_vec);
     double h_dist2 = calcHPlaneDistance(orient2, ftr1_ftr2_vec);
   
     if (std::max(h_dist1, h_dist2) > maxHDist)
-	return false;
+		return false;
    
     return true;
 }

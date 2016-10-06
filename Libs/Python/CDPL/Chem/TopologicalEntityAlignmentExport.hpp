@@ -37,11 +37,11 @@
 namespace CDPLPythonChem
 {
 
-	template <typename T>
+	template <typename T, typename EM>
     struct TopologicalEntityAlignmentExport
     {
 
-		typedef CDPL::Chem::TopologicalEntityAlignment<T> AlignmentType;
+		typedef CDPL::Chem::TopologicalEntityAlignment<T, EM> AlignmentType;
 
 		TopologicalEntityAlignmentExport(const char* name) {
 			using namespace boost;

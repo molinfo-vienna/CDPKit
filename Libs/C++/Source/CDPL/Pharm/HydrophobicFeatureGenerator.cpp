@@ -44,7 +44,6 @@
 #include "CDPL/Chem/UtilityFunctions.hpp"
 #include "CDPL/Chem/AtomType.hpp"
 #include "CDPL/Chem/AtomDictionary.hpp"
-#include "CDPL/Chem/SubstructureSearch.hpp"
 #include "CDPL/Chem/AtomBondMapping.hpp"
 #include "CDPL/Math/Matrix.hpp"
 #include "CDPL/Internal/AddressOf.hpp"
@@ -237,6 +236,12 @@ Pharm::HydrophobicFeatureGenerator::HydrophobicFeatureGenerator():
 	hydThreshGroup(DEF_HYD_THRESHOLD_GROUP)
 {}
 
+Pharm::HydrophobicFeatureGenerator::HydrophobicFeatureGenerator(const HydrophobicFeatureGenerator& gen):
+	PatternBasedFeatureGenerator(gen), featureType(gen.featureType), featureTol(gen.featureTol), 
+	featureGeom(gen.featureGeom), hydThreshRing(gen.hydThreshRing), hydThreshChain(gen.hydThreshChain), 
+	hydThreshGroup(gen.hydThreshGroup)
+{}
+
 Pharm::HydrophobicFeatureGenerator::HydrophobicFeatureGenerator(const Chem::MolecularGraph& molgraph, Pharmacophore& pharm):
 	featureType(DEF_FEATURE_TYPE),  featureTol(DEF_FEATURE_TOL), featureGeom(DEF_FEATURE_GEOM),
 	hydThreshRing(DEF_HYD_THRESHOLD_RING), hydThreshChain(DEF_HYD_THRESHOLD_CHAIN), 
@@ -307,6 +312,23 @@ double Pharm::HydrophobicFeatureGenerator::getGroupHydrophobicityThreshold() con
 	return hydThreshGroup;
 }
 
+Pharm::HydrophobicFeatureGenerator& Pharm::HydrophobicFeatureGenerator::operator=(const HydrophobicFeatureGenerator& gen)
+{
+	if (this == &gen)
+		return *this;
+
+	PatternBasedFeatureGenerator::operator=(gen);
+
+	featureType = gen.featureType; 
+	featureTol = gen.featureTol; 
+	featureGeom = gen.featureGeom;
+	hydThreshRing = gen.hydThreshRing;
+	hydThreshChain = gen.hydThreshChain; 
+	hydThreshGroup = gen.hydThreshGroup;
+
+	return *this;
+}
+
 void Pharm::HydrophobicFeatureGenerator::addNonPatternFeatures(const Chem::MolecularGraph& molgraph, Pharmacophore& pharm)
 {
 	init(molgraph);
@@ -333,6 +355,15 @@ void Pharm::HydrophobicFeatureGenerator::init(const Chem::MolecularGraph& molgra
 	tmpAtomMask.resize(num_atoms);
 
 	buildAtomTypeMask(molgraph, hAtomMask, Chem::AtomType::H);
+
+	if (hydSubSearchTable.empty()) {
+		for (PatternTable::const_iterator p_it = atomHydCategoryPatterns.begin(), p_end = atomHydCategoryPatterns.end(); p_it != p_end; ++p_it) {
+			const Chem::MolecularGraph& ptn = **p_it;
+			Chem::SubstructureSearch::SharedPointer ss_ptr(new Chem::SubstructureSearch(ptn));
+
+			hydSubSearchTable.push_back(ss_ptr);
+		}
+	}
 }
 
 void Pharm::HydrophobicFeatureGenerator::genRingFeatures(Pharmacophore& pharm)
@@ -527,7 +558,7 @@ void Pharm::HydrophobicFeatureGenerator::processChain(Pharmacophore& pharm)
 			continue;
 
 		Feature& feature = emitFeature(featureAtoms, pharm, makeFragment(featureAtoms), false);
-		const Atom3DCoordinatesFunction& coords_func = getAtom3DCoordinatesFunction();
+		const Chem::Atom3DCoordinatesFunction& coords_func = getAtom3DCoordinatesFunction();
 
 		if (coords_func.empty())
 			return;
@@ -723,7 +754,7 @@ bool Pharm::HydrophobicFeatureGenerator::hasSubstWithMoreThan2Atoms(const Chem::
 
 bool Pharm::HydrophobicFeatureGenerator::calcHydWeightedCentroid(const AtomList& alist, Math::Vector3D& centroid) const
 {
-	const Atom3DCoordinatesFunction& coords_func = getAtom3DCoordinatesFunction();
+	const Chem::Atom3DCoordinatesFunction& coords_func = getAtom3DCoordinatesFunction();
 
 	if (coords_func.empty())
 		return false;
@@ -754,16 +785,15 @@ void Pharm::HydrophobicFeatureGenerator::calcAtomHydrophobicities()
 
 	atomHydTable.assign(num_atoms, 1.0);
 
-	SubstructureSearch& subsearch = getSubstructureSearch();
+	for (HydPatternSubSearchTable::const_iterator ss_it = hydSubSearchTable.begin(), ss_end = hydSubSearchTable.end(); 
+		 ss_it != ss_end; ++ss_it) {
 
-	for (PatternTable::const_iterator p_it = atomHydCategoryPatterns.begin(), p_end = atomHydCategoryPatterns.end(); p_it != p_end; ++p_it) {
-		const MolecularGraph& ptn = **p_it;
+		SubstructureSearch& sub_search = **ss_it;
 
-		subsearch.setQuery(ptn);		
-		subsearch.findMappings(*molGraph);
+		sub_search.findMappings(*molGraph);
 
-		for (SubstructureSearch::ConstMappingIterator m_it = subsearch.getMappingsBegin(),
-				 m_end = subsearch.getMappingsEnd(); m_it != m_end; ++m_it) {
+		for (SubstructureSearch::ConstMappingIterator m_it = sub_search.getMappingsBegin(),
+				 m_end = sub_search.getMappingsEnd(); m_it != m_end; ++m_it) {
 
 			const AtomMapping& mapping = m_it->getAtomMapping();
 

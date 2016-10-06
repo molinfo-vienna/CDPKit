@@ -57,6 +57,7 @@ BOOST_PYTHON_MODULE(_pharm)
 
 	exportScreeningDBCreator();
 	exportScreeningDBAccessor();
+	exportScreeningDBProcessor();
 
 #ifdef HAVE_SQLITE3
 
@@ -93,8 +94,6 @@ BOOST_PYTHON_MODULE(_pharm)
     exportGeometricalFeatureMappingExtractor();
 	exportFeatureTypeMatchFunctor();
 	exportFeaturePairDistanceMatchFunctor();
-	exportTopologicalQueryPharmAlignmentFilter();
-    exportGeometricalQueryPharmAlignmentFilter();
 	exportFeaturePositionMatchFunctor();
 	exportFeatureGeometryMatchFunctor();
 

@@ -80,7 +80,7 @@ void Pharm::PharmacophoreGenerator::generate(const Chem::MolecularGraph& molgrap
 			it->second->generate(molgraph, pharm);
 }
 
-void Pharm::PharmacophoreGenerator::setAtom3DCoordinatesFunction(const Atom3DCoordinatesFunction& func)
+void Pharm::PharmacophoreGenerator::setAtom3DCoordinatesFunction(const Chem::Atom3DCoordinatesFunction& func)
 {
 	FeatureGenerator::setAtom3DCoordinatesFunction(func);
 

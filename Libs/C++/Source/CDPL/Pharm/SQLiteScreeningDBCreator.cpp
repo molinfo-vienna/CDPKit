@@ -39,9 +39,9 @@
 #include "CDPL/Chem/MolecularGraph.hpp"
 #include "CDPL/Chem/CDFDataWriter.hpp"
 #include "CDPL/Chem/ControlParameterFunctions.hpp"
+#include "CDPL/Chem/Entity3DContainerFunctions.hpp"
 #include "CDPL/Chem/AtomContainerFunctions.hpp"
-#include "CDPL/Chem/Atom3DCoordinatesFunctor.hpp"
-#include "CDPL/Chem/AtomConformer3DCoordinatesFunctor.hpp"
+#include "CDPL/Chem/AtomArray3DCoordinatesFunctor.hpp"
 #include "CDPL/Chem/HashCodeCalculator.hpp"
 #include "CDPL/Base/ControlParameterList.hpp"
 #include "CDPL/Base/IntTypes.hpp"
@@ -247,6 +247,7 @@ private:
 	BasicPharmacophore               pharmacophore;
 	DefaultPharmacophoreGenerator    pharmGenerator;
 	FeatureTypeHistogram             featureCounts;
+	Math::Vector3DArray              coordinates;
 	Mode                             mode;
 	bool                             allowDupEntries;
 	std::size_t                      numProcessed;
@@ -540,7 +541,10 @@ void Pharm::SQLiteScreeningDBCreator::Implementation::genAndInsertPharmData(cons
 
 	if (num_confs == 0) {
 		if (hasCoordinates(molgraph, 3)) {
-			pharmGenerator.setAtom3DCoordinatesFunction(Chem::Atom3DCoordinatesFunctor());
+			coordinates.clear();
+			get3DCoordinates(molgraph, coordinates);
+
+			pharmGenerator.setAtom3DCoordinatesFunction(Chem::AtomArray3DCoordinatesFunctor(coordinates, molgraph));
 			genAndInsertPharmData(molgraph, mol_id, 0);
 		}
 
@@ -548,7 +552,10 @@ void Pharm::SQLiteScreeningDBCreator::Implementation::genAndInsertPharmData(cons
 	}
 
 	for (std::size_t i = 0; i < num_confs; i++) {
-		pharmGenerator.setAtom3DCoordinatesFunction(Chem::AtomConformer3DCoordinatesFunctor(i));
+		coordinates.clear();
+		getConformationData(molgraph, i, coordinates);
+
+		pharmGenerator.setAtom3DCoordinatesFunction(Chem::AtomArray3DCoordinatesFunctor(coordinates, molgraph));
 		genAndInsertPharmData(molgraph, mol_id, i);
 	}
 }

@@ -1,7 +1,7 @@
 /* -*- mode: c++; c-basic-offset: 4; tab-width: 4; indent-tabs-mode: t -*- */
 
 /* 
- * GeometricalQueryPharmAlignmentFilterExport.cpp 
+ * AtomArray3DCoordinatesFunctorExport.cpp 
  *
  * This file is part of the Chemical Data Processing Toolkit
  *
@@ -26,28 +26,36 @@
 
 #include <boost/python.hpp>
 
-#include "CDPL/Pharm/GeometricalQueryPharmAlignmentFilter.hpp"
-#include "CDPL/Pharm/Pharmacophore.hpp"
+#include "CDPL/Chem/AtomArray3DCoordinatesFunctor.hpp"
+#include "CDPL/Chem/Atom.hpp"
+#include "CDPL/Chem/MolecularGraph.hpp"
 
 #include "Base/ObjectIdentityCheckVisitor.hpp"
 
 #include "ClassExports.hpp"
 
 
-void CDPLPythonPharm::exportGeometricalQueryPharmAlignmentFilter()
+namespace
+{
+
+    const CDPL::Math::Vector3D& callOperator(CDPL::Chem::AtomArray3DCoordinatesFunctor& func, CDPL::Chem::Atom& atom)
+    {
+		return func(atom);
+    }
+}
+
+
+void CDPLPythonChem::exportAtomArray3DCoordinatesFunctor()
 {
     using namespace boost;
     using namespace CDPL;
 
-    python::class_<Pharm::GeometricalQueryPharmAlignmentFilter, 
-		   boost::noncopyable>("GeometricalQueryPharmAlignmentFilter", python::no_init)
-	.def(python::init<const Pharm::GeometricalQueryPharmAlignmentFilter&>(
-		 (python::arg("self"), python::arg("filter"))))
-	.def(python::init<const Pharm::Pharmacophore&, std::size_t>(
-		 (python::arg("self"), python::arg("query"), python::arg("max_omtd_ftrs"))))
-	.def(CDPLPythonBase::ObjectIdentityCheckVisitor<Pharm::GeometricalQueryPharmAlignmentFilter>())
-	.def("assign", &Pharm::GeometricalQueryPharmAlignmentFilter::operator=, 
-	     (python::arg("self"), python::arg("filter")), python::return_self<>())
-	.def("__call__", &Pharm::GeometricalQueryPharmAlignmentFilter::operator(),
-	     (python::arg("self"), python::arg("mapping")));
+    python::class_<Chem::AtomArray3DCoordinatesFunctor, boost::noncopyable>("AtomArray3DCoordinatesFunctor", python::no_init)
+		.def(python::init<const Chem::AtomArray3DCoordinatesFunctor&>((python::arg("self"), python::arg("func"))))
+		.def(python::init<const Math::Vector3DArray&, const Chem::MolecularGraph&>((python::arg("self"), python::arg("coords"), python::arg("molgraph"))))
+		.def(CDPLPythonBase::ObjectIdentityCheckVisitor<Chem::AtomArray3DCoordinatesFunctor>())
+		.def("assign", &Chem::AtomArray3DCoordinatesFunctor::operator=, 
+			 (python::arg("self"), python::arg("func")), python::return_self<>())
+		.def("__call__", &callOperator, (python::arg("self"), python::arg("atom")),
+			 boost::python::return_internal_reference<2>());
 }

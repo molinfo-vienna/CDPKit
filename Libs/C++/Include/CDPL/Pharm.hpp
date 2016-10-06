@@ -40,6 +40,7 @@
 
 #include "CDPL/Pharm/FeatureMapping.hpp"  
 #include "CDPL/Pharm/FeatureTypeHistogram.hpp"  
+#include "CDPL/Pharm/Feature3DCoordinatesFunction.hpp"  
 
 #include "CDPL/Pharm/PharmacophoreProperty.hpp"  
 #include "CDPL/Pharm/FeatureProperty.hpp"  
@@ -78,8 +79,6 @@
 #include "CDPL/Pharm/FeaturePairDistanceMatchFunctor.hpp"  
 #include "CDPL/Pharm/FeaturePositionMatchFunctor.hpp"  
 #include "CDPL/Pharm/FeatureGeometryMatchFunctor.hpp"  
-#include "CDPL/Pharm/TopologicalQueryPharmAlignmentFilter.hpp"  
-#include "CDPL/Pharm/GeometricalQueryPharmAlignmentFilter.hpp"  
 
 #include "CDPL/Pharm/CDFPharmacophoreInputHandler.hpp"
 #include "CDPL/Pharm/CDFPharmacophoreOutputHandler.hpp"
@@ -89,6 +88,7 @@
 
 #include "CDPL/Pharm/ScreeningDBCreator.hpp"
 #include "CDPL/Pharm/ScreeningDBAccessor.hpp"
+#include "CDPL/Pharm/ScreeningDBProcessor.hpp"
 
 #ifdef HAVE_SQLITE3
 

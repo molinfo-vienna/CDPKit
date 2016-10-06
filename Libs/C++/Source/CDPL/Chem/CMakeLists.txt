@@ -303,6 +303,7 @@ SET(cdpl-chem_LIB_SRCS
 
     Atom3DCoordinatesFunctor.cpp
     AtomConformer3DCoordinatesFunctor.cpp
+    AtomArray3DCoordinatesFunctor.cpp
 
     ControlParameterFunctions.cpp
 

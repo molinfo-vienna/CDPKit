@@ -58,9 +58,9 @@ namespace CDPL
 
 		  public:
 			/**
-			 * \brief Returns the 3D coordinates of the argument atom.
+			 * \brief Returns the 3D-coordinates of the argument atom.
 			 * \param atom The atom.
-			 * \return The 3D coordinates of the atom.
+			 * \return The 3D-coordinates of the atom.
 			 * \see Chem::get3DCoordinates(const Atom&)
 			 */
 			const Math::Vector3D& operator()(const Atom& atom) const;

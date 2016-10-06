@@ -141,13 +141,12 @@ std::size_t Pharm::SurfaceXVolumeCoatGenerator::getNumTestPoints() const
 }
 
 
-void Pharm::SurfaceXVolumeCoatGenerator::setAtom3DCoordinatesFunction(const Atom3DCoordinatesFunction& func)
+void Pharm::SurfaceXVolumeCoatGenerator::setAtom3DCoordinatesFunction(const Chem::Atom3DCoordinatesFunction& func)
 {
 	coordsFunc = func;
 }
 
-const Pharm::SurfaceXVolumeCoatGenerator::Atom3DCoordinatesFunction& 
-Pharm::SurfaceXVolumeCoatGenerator::getAtom3DCoordinatesFunction() const
+const Chem::Atom3DCoordinatesFunction& Pharm::SurfaceXVolumeCoatGenerator::getAtom3DCoordinatesFunction() const
 {
 	return coordsFunc;
 }

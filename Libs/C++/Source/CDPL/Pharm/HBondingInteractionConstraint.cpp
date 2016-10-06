@@ -66,9 +66,6 @@ double Pharm::HBondingInteractionConstraint::getMaxAcceptorAngle() const
 
 bool Pharm::HBondingInteractionConstraint::operator()(const Feature& ftr1, const Feature& ftr2) const
 {
-	if (!has3DCoordinates(ftr1) || !has3DCoordinates(ftr2))
-		return false;
-
 	const Feature& don_ftr = (donAccOrder ? ftr1 : ftr2);
 	const Feature& acc_ftr = (donAccOrder ? ftr2 : ftr1);
 	const Math::Vector3D& don_pos = get3DCoordinates(don_ftr);

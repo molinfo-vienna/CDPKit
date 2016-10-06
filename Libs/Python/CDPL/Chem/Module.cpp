@@ -65,6 +65,7 @@ BOOST_PYTHON_MODULE(_chem)
 
 	exportAtom3DCoordinatesFunctor();
 	exportAtomConformer3DCoordinatesFunctor();
+	exportAtomArray3DCoordinatesFunctor();
 
 	exportMatchConstraintList();
 	exportMatchExpressions();

@@ -39,6 +39,7 @@
 #include "CDPL/Pharm/FeatureGenerator.hpp"
 #include "CDPL/Chem/MolecularGraph.hpp"
 #include "CDPL/Chem/AtomBondMapping.hpp"
+#include "CDPL/Chem/SubstructureSearch.hpp"
 #include "CDPL/Util/BitSet.hpp"
 #include "CDPL/Math/Vector.hpp"
 #include "CDPL/Math/Matrix.hpp"
@@ -46,12 +47,6 @@
 
 namespace CDPL 
 {
-
-	namespace Chem
-	{
-
-		class SubstructureSearch;
-	}
 
     namespace Pharm
     {
@@ -142,7 +137,6 @@ namespace CDPL
 
 		  protected:
 			typedef std::vector<const Chem::Atom*> AtomList;
-			typedef boost::shared_ptr<Chem::SubstructureSearch> SubstructSearchPtr;
 
 			double calcVecFeatureOrientation(const AtomList&, const AtomList&, Math::Vector3D&) const;
 			bool calcPlaneFeatureOrientation(const AtomList&, Math::Vector3D&, Math::Vector3D&);
@@ -153,26 +147,41 @@ namespace CDPL
 			bool isContainedInIncMatchList(const Util::BitSet&) const;
 			bool isContainedInExMatchList(const Util::BitSet&) const;
 
-			Chem::SubstructureSearch& getSubstructureSearch();
-
 		  private:
-			struct FeaturePattern
+			struct IncludePattern
 			{
 
-				FeaturePattern(const Chem::MolecularGraph::SharedPointer& substruct, unsigned int type, 
+				IncludePattern(const Chem::MolecularGraph::SharedPointer& substruct, unsigned int type, 
 							   double tol, unsigned int geom, double length): 
-					substructQry(substruct), featureType(type), featureTol(tol), featureGeom(geom),
-					vectorLength(length) {}
+					subQuery(substruct), subSearch(new Chem::SubstructureSearch(*substruct)), featureType(type),
+					featureTol(tol), featureGeom(geom), vectorLength(length) {
 
-				Chem::MolecularGraph::SharedPointer substructQry;
-				unsigned int                        featureType;
-				double                              featureTol;
-				unsigned int                        featureGeom;
-				double                              vectorLength;
+					subSearch->uniqueMappingsOnly(false);
+				}
+
+				Chem::MolecularGraph::SharedPointer     subQuery;
+				Chem::SubstructureSearch::SharedPointer subSearch;
+				unsigned int                            featureType;
+				double                                  featureTol;
+				unsigned int                            featureGeom;
+				double                                  vectorLength;
 			};
 
-			typedef std::vector<FeaturePattern> FeaturePatternList;
-			typedef std::vector<Chem::MolecularGraph::SharedPointer> SubstructPatternList;
+			struct ExcludePattern
+			{
+
+				ExcludePattern(const Chem::MolecularGraph::SharedPointer& substruct): 
+					subQuery(substruct), subSearch(new Chem::SubstructureSearch(*substruct)) {
+
+					subSearch->uniqueMappingsOnly(true);
+				}
+
+				Chem::MolecularGraph::SharedPointer     subQuery;
+				Chem::SubstructureSearch::SharedPointer subSearch;
+			};
+
+			typedef std::vector<IncludePattern> IncludePatternList;
+			typedef std::vector<ExcludePattern> ExcludePatternList;
 			typedef std::vector<Util::BitSet*> BitSetList;
 			typedef boost::shared_ptr<Util::BitSet> BitSetPtr;
 			typedef std::vector<BitSetPtr> AllocBitSetList;
@@ -181,7 +190,7 @@ namespace CDPL
 
 			void getExcludeMatches();
 
-			void addFeature(const Chem::AtomBondMapping&, const FeaturePattern&, Pharmacophore&);
+			void addFeature(const Chem::AtomBondMapping&, const IncludePattern&, Pharmacophore&);
 		
 			void createMatchedAtomMask(const Chem::AtomMapping&, Util::BitSet&, bool) const;
 			bool isContainedInList(const Util::BitSet&, const BitSetList&) const;
@@ -190,9 +199,8 @@ namespace CDPL
 			Util::BitSet* allocBitSet();
 
 			const Chem::MolecularGraph* molGraph;
-			SubstructSearchPtr          substructSearch;
-			FeaturePatternList          includePatterns;
-			SubstructPatternList        excludePatterns;
+			IncludePatternList          includePatterns;
+			ExcludePatternList          excludePatterns;
 			BitSetList                  includeMatches;
 			BitSetList                  excludeMatches;
 			AtomList                    posRefAtomList;

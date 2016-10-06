@@ -57,8 +57,8 @@ namespace
 {
 
 	MAKE_PHARM_FUNC_WRAPPERS(const std::string&, Name)
-	MAKE_FUNCTION_WRAPPER4(bool, checkExclusionVolumeClash, const CDPL::Pharm::Pharmacophore&, CDPL::Chem::AtomContainer&,
-						   const CDPL::Math::Matrix4D&, bool);
+	MAKE_FUNCTION_WRAPPER5(bool, checkExclusionVolumeClash, const CDPL::Pharm::Pharmacophore&, CDPL::Chem::AtomContainer&,
+						   const CDPL::Chem::Atom3DCoordinatesFunction&, const CDPL::Math::Matrix4D&, bool);
 }
 
 
@@ -75,8 +75,8 @@ void CDPLPythonPharm::exportPharmacophoreFunctions()
 				(python::arg("pharm"), python::arg("hist")));
 	python::def("buildInteractionPharmacophore", &Pharm::buildInteractionPharmacophore, 
 				(python::arg("pharm"), python::arg("iactions")));
-	python::def("checkExclusionVolumeClash", &checkExclusionVolumeClashWrapper4, 
-				(python::arg("pharm"), python::arg("cntnr"), python::arg("xform"), python::arg("vdw") = true));
+	python::def("checkExclusionVolumeClash", &checkExclusionVolumeClashWrapper5, 
+				(python::arg("pharm"), python::arg("cntnr"), python::arg("coords_func"), python::arg("xform"), python::arg("vdw") = true));
 
 	EXPORT_PHARM_FUNCS_COPY_REF(Name, name)
 }

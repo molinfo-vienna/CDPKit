@@ -59,6 +59,7 @@
 #include "CDPL/Chem/StereoDescriptor.hpp"
 #include "CDPL/Chem/MultiConfMoleculeInputProcessor.hpp"
 #include "CDPL/Chem/DefaultMultiConfMoleculeInputProcessor.hpp"
+#include "CDPL/Chem/Atom3DCoordinatesFunction.hpp"
 
 #include "CDPL/Chem/MatchExpression.hpp"
 #include "CDPL/Chem/MatchExpressionList.hpp"
@@ -201,6 +202,7 @@
 
 #include "CDPL/Chem/Atom3DCoordinatesFunctor.hpp"
 #include "CDPL/Chem/AtomConformer3DCoordinatesFunctor.hpp"
+#include "CDPL/Chem/AtomArray3DCoordinatesFunctor.hpp"
 
 #include "CDPL/Chem/SimilarityFunctions.hpp"
 #include "CDPL/Chem/UtilityFunctions.hpp"

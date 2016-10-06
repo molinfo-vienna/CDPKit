@@ -31,10 +31,10 @@
 #ifndef CDPL_PHARM_FEATUREGENERATOR_HPP
 #define CDPL_PHARM_FEATUREGENERATOR_HPP
 
-#include <boost/function.hpp>
 #include <boost/shared_ptr.hpp>
 
 #include "CDPL/Pharm/APIPrefix.hpp"
+#include "CDPL/Chem/Atom3DCoordinatesFunction.hpp"
 #include "CDPL/Math/Vector.hpp"
 
 
@@ -44,7 +44,6 @@ namespace CDPL
     namespace Chem
     {
 
-		class Atom;
 		class MolecularGraph;
     };
 
@@ -68,11 +67,6 @@ namespace CDPL
 			typedef boost::shared_ptr<FeatureGenerator> SharedPointer;
 
 			/**
-			 * \brief A generic wrapper class used to store a user-defined atom 3D coordinates function.
-			 */
-			typedef boost::function1<const Math::Vector3D&, const Chem::Atom&> Atom3DCoordinatesFunction;
-
-			/**
 			 * \brief Constructs the \c %FeatureGenerator instance.
 			 */
 			FeatureGenerator();
@@ -83,16 +77,16 @@ namespace CDPL
 			virtual ~FeatureGenerator() {}
 
 			/**
-			 * \brief Specifies a function for the retrieval of atom 3D coordinates.
-			 * \param func The atom 3D coordinates function.
+			 * \brief Specifies a function for the retrieval of atom 3D-coordinates.
+			 * \param func The atom 3D-coordinates function.
 			 */
-			virtual void setAtom3DCoordinatesFunction(const Atom3DCoordinatesFunction& func);
+			virtual void setAtom3DCoordinatesFunction(const Chem::Atom3DCoordinatesFunction& func);
 
 			/**
-			 * \brief Returns the function that was registered for the retrieval of atom 3D coordinates.
-			 * \return The registered atom 3D coordinates function.
+			 * \brief Returns the function that was registered for the retrieval of atom 3D-coordinates.
+			 * \return The registered atom 3D-coordinates function.
 			 */
-			const Atom3DCoordinatesFunction& getAtom3DCoordinatesFunction() const;
+			const Chem::Atom3DCoordinatesFunction& getAtom3DCoordinatesFunction() const;
 
 			/**
 			 * \brief Perceives pharmacophore features and adds them to the pharmacophore \a pharm.
@@ -111,7 +105,7 @@ namespace CDPL
 			FeatureGenerator& operator=(const FeatureGenerator& gen);
 
 		  private:
-			Atom3DCoordinatesFunction coordsFunc;
+			Chem::Atom3DCoordinatesFunction coordsFunc;
 		};
 
 		/**

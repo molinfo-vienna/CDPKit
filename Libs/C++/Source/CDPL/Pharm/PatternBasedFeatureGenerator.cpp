@@ -40,7 +40,6 @@
 #include "CDPL/Chem/Bond.hpp"
 #include "CDPL/Chem/AtomFunctions.hpp"
 #include "CDPL/Chem/Entity3DFunctions.hpp"
-#include "CDPL/Chem/SubstructureSearch.hpp"
 #include "CDPL/Math/SVDecomposition.hpp"
 
 
@@ -50,7 +49,14 @@ using namespace CDPL;
 Pharm::PatternBasedFeatureGenerator::PatternBasedFeatureGenerator() {}
 
 Pharm::PatternBasedFeatureGenerator::PatternBasedFeatureGenerator(const PatternBasedFeatureGenerator& gen): 
-	FeatureGenerator(gen), includePatterns(gen.includePatterns), excludePatterns(gen.excludePatterns) {}
+	FeatureGenerator(gen)
+{
+	for (IncludePatternList::const_iterator it = gen.includePatterns.begin(), end = gen.includePatterns.end(); it != end; ++it)
+		includePatterns.push_back(IncludePattern(it->subQuery, it->featureType, it->featureTol, it->featureGeom, it->vectorLength));
+
+	for (ExcludePatternList::const_iterator it = gen.excludePatterns.begin(), end = gen.excludePatterns.end(); it != end; ++it)
+		excludePatterns.push_back(ExcludePattern(it->subQuery));
+}
 
 Pharm::PatternBasedFeatureGenerator::~PatternBasedFeatureGenerator() {}
 
@@ -58,12 +64,12 @@ Pharm::PatternBasedFeatureGenerator::~PatternBasedFeatureGenerator() {}
 															unsigned int type, double tol, unsigned int geom,
 															double length)
 {
-	includePatterns.push_back(FeaturePattern(substruct, type, tol, geom, length));
+	includePatterns.push_back(IncludePattern(substruct, type, tol, geom, length));
 }
 
 void Pharm::PatternBasedFeatureGenerator::addExcludePattern(const Chem::MolecularGraph::SharedPointer& substruct)
 {
-	excludePatterns.push_back(substruct);
+	excludePatterns.push_back(ExcludePattern(substruct));
 }
 		
 void Pharm::PatternBasedFeatureGenerator::clearIncludePatterns()
@@ -85,18 +91,14 @@ void Pharm::PatternBasedFeatureGenerator::generate(const Chem:: MolecularGraph& 
 	getExcludeMatches();
 
 	Util::BitSet* atom_mask = 0;
-	SubstructureSearch& subsearch = getSubstructureSearch();
 
-	subsearch.uniqueMappingsOnly(false);
+	for (IncludePatternList::const_iterator p_it = includePatterns.begin(), p_end = includePatterns.end(); p_it != p_end; ++p_it) {
+		const IncludePattern& ptn = *p_it;
 
-	for (FeaturePatternList::const_iterator p_it = includePatterns.begin(), p_end = includePatterns.end(); p_it != p_end; ++p_it) {
-		const FeaturePattern& ptn = *p_it;
+		ptn.subSearch->findMappings(molgraph);
 
-		subsearch.setQuery(*ptn.substructQry);		
-		subsearch.findMappings(molgraph);
-
-		for (SubstructureSearch::ConstMappingIterator m_it = subsearch.getMappingsBegin(),
-				 m_end = subsearch.getMappingsEnd(); m_it != m_end; ++m_it) {
+		for (SubstructureSearch::ConstMappingIterator m_it = ptn.subSearch->getMappingsBegin(),
+				 m_end = ptn.subSearch->getMappingsEnd(); m_it != m_end; ++m_it) {
 
 			const AtomBondMapping& mapping = *m_it;
 
@@ -131,21 +133,20 @@ Pharm::PatternBasedFeatureGenerator& Pharm::PatternBasedFeatureGenerator::operat
 
 	FeatureGenerator::operator=(gen);
 
-	includePatterns = gen.includePatterns;
-	excludePatterns = gen.excludePatterns;
+	includePatterns.clear();
+
+	for (IncludePatternList::const_iterator it = gen.includePatterns.begin(), end = gen.includePatterns.end(); it != end; ++it)
+		includePatterns.push_back(IncludePattern(it->subQuery, it->featureType, it->featureTol, it->featureGeom, it->vectorLength));
+
+	excludePatterns.clear();
+
+	for (ExcludePatternList::const_iterator it = gen.excludePatterns.begin(), end = gen.excludePatterns.end(); it != end; ++it)
+		excludePatterns.push_back(ExcludePattern(it->subQuery));
 
 	return *this;
 }
 
-Chem::SubstructureSearch& Pharm::PatternBasedFeatureGenerator::getSubstructureSearch()
-{
-	if (!substructSearch) 
-		substructSearch.reset(new Chem::SubstructureSearch());
-	
-	return *substructSearch;
-}
-
-void Pharm::PatternBasedFeatureGenerator::addFeature(const Chem::AtomBondMapping& mapping, const FeaturePattern& ftr_ptn, 
+void Pharm::PatternBasedFeatureGenerator::addFeature(const Chem::AtomBondMapping& mapping, const IncludePattern& ftr_ptn, 
 													 Pharmacophore& pharm)
 {
 	using namespace Chem;
@@ -251,7 +252,7 @@ bool Pharm::PatternBasedFeatureGenerator::calcPlaneFeatureOrientation(const Atom
 		return false;
 
 	std::size_t num_points = alist.size();
-	const Atom3DCoordinatesFunction& coords_func = getAtom3DCoordinatesFunction();
+	const Chem::Atom3DCoordinatesFunction& coords_func = getAtom3DCoordinatesFunction();
 
 	svdU.resize(num_points, 3, false);
 	
@@ -293,16 +294,13 @@ void Pharm::PatternBasedFeatureGenerator::getExcludeMatches()
 {
 	using namespace Chem;
 
-	SubstructureSearch& subsearch = getSubstructureSearch();
+	for (ExcludePatternList::const_iterator p_it = excludePatterns.begin(), p_end = excludePatterns.end(); p_it != p_end; ++p_it) {
+		const ExcludePattern& x_ptn = *p_it;
 
-	subsearch.uniqueMappingsOnly(true);
+		x_ptn.subSearch->findMappings(*molGraph);
 
-	for (SubstructPatternList::const_iterator p_it = excludePatterns.begin(), p_end = excludePatterns.end(); p_it != p_end; ++p_it) {
-		subsearch.setQuery(*p_it->get());		
-		subsearch.findMappings(*molGraph);
-
-		for (SubstructureSearch::ConstMappingIterator m_it = subsearch.getMappingsBegin(), 
-				 m_end = subsearch.getMappingsEnd(); m_it != m_end; ++m_it) {
+		for (SubstructureSearch::ConstMappingIterator m_it = x_ptn.subSearch->getMappingsBegin(), 
+				 m_end = x_ptn.subSearch->getMappingsEnd(); m_it != m_end; ++m_it) {
 
 			Util::BitSet* atom_mask = allocBitSet();
 			const AtomMapping& atom_mapping = m_it->getAtomMapping();

@@ -43,7 +43,7 @@ namespace CDPL
 		class Feature;
 
 		/**
-		 * \addtogroup CDPL_PHARM_ALIGNMENT
+		 * \addtogroup CDPL_PHARM_FUNCTORS
 		 * @{
 		 */
 

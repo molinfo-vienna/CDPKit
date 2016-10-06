@@ -36,8 +36,6 @@
 #include "CDPL/Pharm/ParallelPiPiInteractionConstraint.hpp"
 #include "CDPL/Pharm/FeatureDistanceConstraint.hpp"
 #include "CDPL/Pharm/FeatureInteractionConstraintConnector.hpp"
-#include "CDPL/Pharm/TopologicalQueryPharmAlignmentFilter.hpp"
-#include "CDPL/Pharm/GeometricalQueryPharmAlignmentFilter.hpp"
 
 #include "Base/GenericFromPythonConverter.hpp"
 
@@ -74,9 +72,4 @@ void CDPLPythonPharm::registerFromPythonConverters()
 
 	CDPLPythonBase::GenericFromPythonConverter<Pharm::FeatureInteractionConstraintConnector, 
 											   Pharm::FeatureInteractionConstraintConnector::ConstraintFunction>();
-
-	CDPLPythonBase::GenericFromPythonConverter<Pharm::TopologicalQueryPharmAlignmentFilter, 
-											   boost::function1<bool, const Pharm::FeatureMapping&> >();
-	CDPLPythonBase::GenericFromPythonConverter<Pharm::GeometricalQueryPharmAlignmentFilter, 
-											   boost::function1<bool, const Pharm::FeatureMapping&> >();
 }

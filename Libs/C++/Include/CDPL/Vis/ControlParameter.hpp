@@ -392,7 +392,7 @@ namespace CDPL
 			 *
 			 * If the control-parameter is set to \c false and assigned 2D atom
 			 * coordinates are available, then the assigned coordinates will be used. If the parameter is \c true or no assigned
-			 * 2D coordinates are available, the atom coordinates will be calculated. If the control-parameter is left unspecified,
+			 * 2D-coordinates are available, the atom coordinates will be calculated. If the control-parameter is left unspecified,
 			 * the default setting Vis::ControlParameterDefault::USE_CALCULATED_ATOM_COORDINATES will be used.
 			 *
 			 * \valuetype \c bool

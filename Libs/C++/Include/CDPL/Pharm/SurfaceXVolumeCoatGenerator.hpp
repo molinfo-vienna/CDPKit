@@ -35,11 +35,11 @@
 #include <cstddef>
 
 #include <boost/shared_ptr.hpp>
-#include <boost/function.hpp>
 
 #include "CDPL/Pharm/APIPrefix.hpp"
 #include "CDPL/Pharm/FeatureType.hpp"
 #include "CDPL/Pharm/FeatureGeometry.hpp"
+#include "CDPL/Chem/Atom3DCoordinatesFunction.hpp"
 #include "CDPL/Math/Matrix.hpp"
 #include "CDPL/Math/Vector.hpp"
 #include "CDPL/Util/BitSet.hpp"
@@ -53,7 +53,6 @@ namespace CDPL
 
 		class MolecularGraph;
 		class AtomContainer;
-		class Atom;
 	}
 
     namespace Pharm
@@ -73,11 +72,6 @@ namespace CDPL
 		{
 
 		  public:
-			/**
-			 * \brief A generic wrapper class used to store a user-defined atom 3D coordinates function.
-			 */
-			typedef boost::function1<const Math::Vector3D&, const Chem::Atom&> Atom3DCoordinatesFunction;
-
 			static const unsigned int DEF_FEATURE_TYPE    = FeatureType::X_VOLUME;
 			static const unsigned int DEF_FEATURE_GEOM    = FeatureGeometry::SPHERE;
 			static const double       DEF_PROBE_RADIUS    = 1.2;
@@ -195,16 +189,16 @@ namespace CDPL
 			std::size_t getNumTestPoints() const;
 
 			/**
-			 * \brief Specifies a function for the retrieval of atom 3D coordinates.
-			 * \param func The atom 3D coordinates function.
+			 * \brief Specifies a function for the retrieval of atom 3D-coordinates.
+			 * \param func The atom 3D-coordinates function.
 			 */
-			virtual void setAtom3DCoordinatesFunction(const Atom3DCoordinatesFunction& func);
+			virtual void setAtom3DCoordinatesFunction(const Chem::Atom3DCoordinatesFunction& func);
 
 			/**
-			 * \brief Returns the function that was registered for the retrieval of atom 3D coordinates.
-			 * \return The registered atom 3D coordinates function.
+			 * \brief Returns the function that was registered for the retrieval of atom 3D-coordinates.
+			 * \return The registered atom 3D-coordinates function.
 			 */
-			const Atom3DCoordinatesFunction& getAtom3DCoordinatesFunction() const;
+			const Chem::Atom3DCoordinatesFunction& getAtom3DCoordinatesFunction() const;
 
 			/**
 			 * \brief Generates an excluded volume coat representing the accessible surface of \a cntnr and adds 
@@ -232,29 +226,29 @@ namespace CDPL
 
 			void initTestPoints();
 
-			unsigned int                featureType;
-			unsigned int                featureGeom;
-			double                      probeRadius;
-			double                      gridOversize;
-			double                      gridStepSize;
-			double                      minSurfAcc;
-			std::size_t                 numTestPoints;
-			Atom3DCoordinatesFunction   coordsFunc;
-			const Chem::AtomContainer*  atomContainer;
-			const Chem::MolecularGraph* parentMolGraph;
-			AtomRadiusTable             atomRadii; 
-			AtomIndexList               atomIndices; 
-			Math::Matrix<double>        svdU;
-			Vector3DArray               atomCoords;
-			Vector3DArray               testPoints;
-			Math::Vector3D              bBoxMin;
-			Math::Vector3D              bBoxMax;
-			std::size_t                 gridXSize;
-			std::size_t                 gridYSize;
-			std::size_t                 gridZSize;
-			GridAtomLookupTable         gridAtomLookup;
-			AtomIndexList               surfaceAtoms;
-			Util::BitSet                surfAtomMask;
+			unsigned int                    featureType;
+			unsigned int                    featureGeom;
+			double                          probeRadius;
+			double                          gridOversize;
+			double                          gridStepSize;
+			double                          minSurfAcc;
+			std::size_t                     numTestPoints;
+			Chem::Atom3DCoordinatesFunction coordsFunc;
+			const Chem::AtomContainer*      atomContainer;
+			const Chem::MolecularGraph*     parentMolGraph;
+			AtomRadiusTable                 atomRadii; 
+			AtomIndexList                   atomIndices; 
+			Math::Matrix<double>            svdU;
+			Vector3DArray                   atomCoords;
+			Vector3DArray                   testPoints;
+			Math::Vector3D                  bBoxMin;
+			Math::Vector3D                  bBoxMax;
+			std::size_t                     gridXSize;
+			std::size_t                     gridYSize;
+			std::size_t                     gridZSize;
+			GridAtomLookupTable             gridAtomLookup;
+			AtomIndexList                   surfaceAtoms;
+			Util::BitSet                    surfAtomMask;
 		};
 
 		/**

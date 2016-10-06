@@ -40,7 +40,7 @@ using namespace CDPL;
 
 Pharm::PharmacophoreAlignment::PharmacophoreAlignment(bool query_mode)
 {
-setEntity3DCoordinatesFunction(&Chem::get3DCoordinates);
+	setEntity3DCoordinatesFunction(&Chem::get3DCoordinates);
 	setEntityMatchFunction(FeatureTypeMatchFunctor());
 	setEntityPairMatchFunction(FeaturePairDistanceMatchFunctor(query_mode));
 }

@@ -45,68 +45,68 @@ namespace CDPL
     namespace Chem
     {
 		
-	class MolecularGraph;
+		class MolecularGraph;
     }
 
     namespace Pharm
     {
 	
-	/**
-	 * \addtogroup CDPL_PHARM_SCREENING
-	 * @{
-	 */
+		/**
+		 * \addtogroup CDPL_PHARM_SCREENING
+		 * @{
+		 */
 
-	/**
-	 * \brief A class for the creation of optimized pharmacophore screening databases.
-	 */
-	class CDPL_PHARM_API ScreeningDBCreator
-	{
+		/**
+		 * \brief A class for the creation of optimized pharmacophore screening databases.
+		 */
+		class CDPL_PHARM_API ScreeningDBCreator
+		{
 
-	  public:
-	    typedef boost::shared_ptr<ScreeningDBCreator> SharedPointer;
+		  public:
+			typedef boost::shared_ptr<ScreeningDBCreator> SharedPointer;
 	    
-	    enum Mode
-	    {
+			enum Mode
+			{
 
-	      CREATE,
-	      UPDATE,
-	      APPEND
-	    };
+			  CREATE,
+			  UPDATE,
+			  APPEND
+			};
 
-	    /**
-	     * \brief Virtual destructor.
-	     */
-	    virtual ~ScreeningDBCreator() {}
+			/**
+			 * \brief Virtual destructor.
+			 */
+			virtual ~ScreeningDBCreator() {}
 
-	    virtual void open(const std::string& name, Mode mode = CREATE, bool allow_dup_entries = true) = 0;
+			virtual void open(const std::string& name, Mode mode = CREATE, bool allow_dup_entries = true) = 0;
 
-	    virtual void close() = 0;
+			virtual void close() = 0;
 
-	    virtual Mode getMode() const = 0;
+			virtual Mode getMode() const = 0;
 
-	    virtual bool allowDuplicateEntries() const = 0;
+			virtual bool allowDuplicateEntries() const = 0;
 
-	    virtual bool process(const Chem::MolecularGraph& molgraph) = 0;
+			virtual bool process(const Chem::MolecularGraph& molgraph) = 0;
 
-	    virtual const std::string& getDatabaseName() const = 0;
+			virtual const std::string& getDatabaseName() const = 0;
 
-	    virtual std::size_t getNumProcessed() const = 0;
+			virtual std::size_t getNumProcessed() const = 0;
 
-	    virtual std::size_t getNumRejected() const = 0;
+			virtual std::size_t getNumRejected() const = 0;
 
-	    virtual std::size_t getNumDeleted() const = 0;
+			virtual std::size_t getNumDeleted() const = 0;
 
-	    virtual std::size_t getNumInserted() const = 0;
+			virtual std::size_t getNumInserted() const = 0;
 
-	  protected:
-	    ScreeningDBCreator& operator=(const ScreeningDBCreator&) {
-		return *this;
-	    }
-	};
+		  protected:
+			ScreeningDBCreator& operator=(const ScreeningDBCreator&) {
+				return *this;
+			}
+		};
 
-	/**
-	 * @}
-	 */
+		/**
+		 * @}
+		 */
     }
 }
 

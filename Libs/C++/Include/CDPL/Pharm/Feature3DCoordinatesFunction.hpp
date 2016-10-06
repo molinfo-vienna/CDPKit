@@ -1,7 +1,7 @@
 /* -*- mode: c++; c-basic-offset: 4; tab-width: 4; indent-tabs-mode: t -*- */
 
 /* 
- * TopologicalEntityAlignmentExport.cpp 
+ * Feature3DCoordinatesFunction.hpp 
  *
  * This file is part of the Chemical Data Processing Toolkit
  *
@@ -23,21 +23,41 @@
  * Boston, MA 02111-1307, USA.
  */
 
+/**
+ * \file
+ * \brief Type definition of a generic wrapper class for storing user-defined Pharm::Feature 3D-coordinates functions.
+ */
 
-#include <boost/python.hpp>
+#ifndef CDPL_PHARM_FEATURE3DCOORDINATESFUNCTION_HPP
+#define CDPL_PHARM_FEATURE3DCOORDINATESFUNCTION_HPP
 
-#include "CDPL/Pharm/Feature.hpp"
-#include "CDPL/Pharm/FeatureMapping.hpp"
+#include <boost/function.hpp>
 
-#include "Chem/TopologicalEntityAlignmentExport.hpp"
-
-#include "ClassExports.hpp"
+#include "CDPL/Math/Vector.hpp"
 
 
-void CDPLPythonPharm::exportTopologicalEntityAlignment()
+namespace CDPL 
 {
-	using namespace CDPL;
-	using namespace Pharm;
 
-	CDPLPythonChem::TopologicalEntityAlignmentExport<Feature, FeatureMapping>("TopologicalFeatureAlignment");
+    namespace Pharm
+    {
+
+	class Feature;
+
+	/**
+	 * \addtogroup CDPL_PHARM_DATA_STRUCTURES
+	 * @{
+	 */
+
+	/**
+	 * \brief A generic wrapper class used to store a user-defined Pharm::Feature 3D-coordinates function.
+	 */
+	typedef boost::function1<const Math::Vector3D&, const Pharm::Feature&> Feature3DCoordinatesFunction;
+
+	/**
+	 * @}
+	 */
+    }
 }
+
+#endif // CDPL_PHARM_FEATURE3DCOORDINATESFUNCTION_HPP

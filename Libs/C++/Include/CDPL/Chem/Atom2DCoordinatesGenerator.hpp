@@ -75,10 +75,10 @@ namespace CDPL
 			Atom2DCoordinatesGenerator() {}
 
 			/**
-			 * \brief Constructs the \c %Atom2DCoordinatesGenerator instance and generates 2D coordinates for
+			 * \brief Constructs the \c %Atom2DCoordinatesGenerator instance and generates 2D-coordinates for
 			 *        the atoms of the molecular graph \a molgraph.
-			 * \param molgraph The molecular graph for which to generate 2D coordinates.
-			 * \param coords An array containing the generated 2D coordinates. The coordinates
+			 * \param molgraph The molecular graph for which to generate 2D-coordinates.
+			 * \param coords An array containing the generated 2D-coordinates. The coordinates
 			 *         are stored in the same order as the atoms appear in the atom list of
 			 *         the molecular graph (i.e. the coordinates of an atom are accessible via
 			 *         its index).
@@ -86,9 +86,9 @@ namespace CDPL
 			Atom2DCoordinatesGenerator(const MolecularGraph& molgraph, Math::Vector2DArray& coords);
 
 			/**
-			 * \brief Generates 2D coordinates for the atoms of the molecular graph \a molgraph.
-			 * \param molgraph The molecular graph for which to generate 2D coordinates.
-			 * \param coords An array containing the generated 2D coordinates. The coordinates
+			 * \brief Generates 2D-coordinates for the atoms of the molecular graph \a molgraph.
+			 * \param molgraph The molecular graph for which to generate 2D-coordinates.
+			 * \param coords An array containing the generated 2D-coordinates. The coordinates
 			 *         are stored in the same order as the atoms appear in the atom list of
 			 *         the molecular graph (i.e. the coordinates of an atom are accessible via
 			 *         its index).

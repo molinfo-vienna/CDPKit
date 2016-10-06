@@ -87,6 +87,7 @@ namespace CDPLPythonChem
 
 	void exportAtom3DCoordinatesFunctor();
 	void exportAtomConformer3DCoordinatesFunctor();
+	void exportAtomArray3DCoordinatesFunctor();
 
 	void exportTopologicalEntityAlignments();
 	void exportGeometricalEntityAlignments();

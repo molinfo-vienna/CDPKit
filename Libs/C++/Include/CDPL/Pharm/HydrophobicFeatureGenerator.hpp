@@ -39,6 +39,7 @@
 #include "CDPL/Pharm/FeatureType.hpp"
 #include "CDPL/Pharm/FeatureGeometry.hpp"
 #include "CDPL/Chem/Fragment.hpp"
+#include "CDPL/Chem/SubstructureSearch.hpp"
 #include "CDPL/Math/Vector.hpp"
 #include "CDPL/Util/BitSet.hpp"
 
@@ -76,6 +77,12 @@ namespace CDPL
 			 * \brief Constructs the \c %HydrophobicFeatureGenerator instance.
 			 */
 			HydrophobicFeatureGenerator();
+		
+			/**
+			 * \brief Constructs a copy of the \c %HydrophobicFeatureGenerator instance \a gen.
+			 * \param gen The \c %HydrophobicFeatureGenerator to copy.
+			 */
+			HydrophobicFeatureGenerator(const HydrophobicFeatureGenerator& gen);
 		
 			/**
 			 * \brief Perceives hydrophobic group features of the molecular graph a\ molgraph and adds 
@@ -180,9 +187,17 @@ namespace CDPL
 			 */
 			double getGroupHydrophobicityThreshold() const;
 
+			/**
+			 * \brief Constructs a copy of the \c %HydrophobicFeatureGenerator instance \a gen.
+			 * \param gen The \c %HydrophobicFeatureGenerator to copy.
+			 * \return A reference to itself.
+			 */
+			HydrophobicFeatureGenerator& operator=(const HydrophobicFeatureGenerator& gen);
+
 		  private:
 			typedef std::vector<double> DoubleArray;
 			typedef std::vector<Math::Vector3D> CoordsArray;
+			typedef std::vector<Chem::SubstructureSearch::SharedPointer> HydPatternSubSearchTable;
 
 			void addNonPatternFeatures(const Chem::MolecularGraph&, Pharmacophore&);
 
@@ -214,6 +229,7 @@ namespace CDPL
 			bool isChainEndAtom(const Chem::Atom&) const;
 
 			const Chem::MolecularGraph* molGraph;
+			HydPatternSubSearchTable    hydSubSearchTable;
 			Util::BitSet                procAtomMask;
 			Util::BitSet                hAtomMask;
 			Util::BitSet                tmpAtomMask;

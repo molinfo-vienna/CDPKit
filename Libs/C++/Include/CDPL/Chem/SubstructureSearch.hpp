@@ -37,6 +37,7 @@
 #include <cstddef>
 
 #include <boost/iterator/indirect_iterator.hpp>
+#include <boost/shared_ptr.hpp>
 
 #include "CDPL/Chem/APIPrefix.hpp"
 #include "CDPL/Chem/AtomBondMapping.hpp"
@@ -69,6 +70,8 @@ namespace CDPL
 			typedef std::vector<AtomBondMapping*> ABMappingList;
 
 		public:
+			typedef boost::shared_ptr<SubstructureSearch> SharedPointer;
+
 			/**
 			 * \brief A mutable random access iterator used to iterate over the stored atom/bond mapping objects.
 			 */

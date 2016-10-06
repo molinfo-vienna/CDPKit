@@ -68,9 +68,6 @@ double Pharm::OrthogonalPiPiInteractionConstraint::getAngleTolerance() const
 
 bool Pharm::OrthogonalPiPiInteractionConstraint::operator()(const Feature& ftr1, const Feature& ftr2) const
 {
-	if (!has3DCoordinates(ftr1) || !has3DCoordinates(ftr2))
-		return false;
-
     if (!hasOrientation(ftr1) || !hasOrientation(ftr2))
 		return false;
 

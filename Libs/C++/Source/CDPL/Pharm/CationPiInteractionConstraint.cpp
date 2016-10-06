@@ -60,10 +60,7 @@ double Pharm::CationPiInteractionConstraint::getMaxAngle() const
 
 bool Pharm::CationPiInteractionConstraint::operator()(const Feature& ftr1, const Feature& ftr2) const
 {
-    if (!has3DCoordinates(ftr1) || !has3DCoordinates(ftr2))
-		return false;
-
-    const Feature& aro_ftr = (aroCatOrder ? ftr1 : ftr2);
+	const Feature& aro_ftr = (aroCatOrder ? ftr1 : ftr2);
     const Feature& cat_ftr = (aroCatOrder ? ftr2 : ftr1);
     const Math::Vector3D& aro_pos = get3DCoordinates(aro_ftr);
     const Math::Vector3D& cat_pos = get3DCoordinates(cat_ftr);

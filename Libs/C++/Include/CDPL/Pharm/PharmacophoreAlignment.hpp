@@ -18,7 +18,7 @@
  * Lesser General Public License for more details.
  *
  * You should have received a copy of the GNU Lesser General Public License
- * along with this library; see the file COPYING. If not, write to
+* along with this library; see the file COPYING. If not, write to
  * the Free Software Foundation, Inc., 59 Temple Place - Suite 330,
  * Boston, MA 02111-1307, USA.
  */
@@ -33,6 +33,7 @@
 
 #include "CDPL/Pharm/APIPrefix.hpp"
 #include "CDPL/Chem/GeometricalEntityAlignment.hpp"
+#include "CDPL/Pharm/FeatureMapping.hpp"
 
 
 namespace CDPL 
@@ -42,6 +43,7 @@ namespace CDPL
     {
 
 		class Feature;
+		class FeatureMapping;
 		class Pharmacophore;
 
 		/**
@@ -52,7 +54,7 @@ namespace CDPL
 		/**
 		 * \brief PharmacophoreAlignment.
 		 */
-		class CDPL_PHARM_API PharmacophoreAlignment : public Chem::GeometricalEntityAlignment<Feature>
+		class CDPL_PHARM_API PharmacophoreAlignment : public Chem::GeometricalEntityAlignment<Feature, FeatureMapping>
 		{
 
 		  public:

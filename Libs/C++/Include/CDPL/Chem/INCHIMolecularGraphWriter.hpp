@@ -82,7 +82,7 @@ namespace CDPL
 		 *  </tr>
 		 *  <tr>
 		 *   <td>Chem::AtomProperty::COORDINATES_3D</td>
-		 *   <td>Specifies the 3D coordinates of the atom</td>
+		 *   <td>Specifies the 3D-coordinates of the atom</td>
 		 *   <td>Only required if 3D atom coordinates are written</td>
 		 *  </tr>
 		 *  <tr>
@@ -143,7 +143,7 @@ namespace CDPL
 		 *   <td>Chem::ControlParameter::COORDINATES_DIMENSION</td>
 		 *   <td align="center">\c 1</td>
 		 *   <td>Specifies the dimension of the atom coordinates (a value of \e 2 specifies 2D, a value of \e 3 specifies 3D,
-		 *       a value of zero specifies that no atom coordinates shall be written; any other value specifies that 3D coordinates
+		 *       a value of zero specifies that no atom coordinates shall be written; any other value specifies that 3D-coordinates
 		 *       shall be written if they are available, and no coordinates otherwise)</td>
 		 *  </tr>
 		 *  <tr>

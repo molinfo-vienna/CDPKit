@@ -39,8 +39,6 @@
 #include <boost/function.hpp>
 #include <boost/iterator/indirect_iterator.hpp>
 
-#include "CDPL/Util/Array.hpp"
-#include "CDPL/Util/MultiMap.hpp"
 #include "CDPL/Util/BronKerboschAlgorithm.hpp"
 
 
@@ -58,7 +56,7 @@ namespace CDPL
 		/**
 		 * \brief TopologicalEntityAlignment.
 		 */
-		template <typename T>
+		template <typename T, typename EM>
 		class TopologicalEntityAlignment 
 		{
 
@@ -76,7 +74,7 @@ namespace CDPL
 			/**
 			 * \brief The container storing the entity-mapping of a found alignment solution.
 			 */
-			typedef Util::MultiMap<const EntityType*, const EntityType*, true> EntityMapping;
+			typedef EM EntityMapping;
 
 			/**
 			 * \brief A constant iterator over the stored entities.
@@ -164,7 +162,7 @@ namespace CDPL
 
 			/*
 			 * \brief Resets the internal state and prepares for a new search for entity alignments.
-			 * \note If addEntity() or clearEntity() was called before calling nextMapping(), init() gets invoked automatically.
+			 * \note If addEntity() or clearEntities() was called before calling nextAlignment(), init() gets invoked automatically.
 			 */
 			void init();
 
@@ -200,80 +198,87 @@ namespace CDPL
 
 // Implementation
 
-template <typename T>
-inline void CDPL::Chem::TopologicalEntityAlignment<T>::setEntityMatchFunction(const EntityMatchFunction& func)
+template <typename T, typename EM>
+inline void CDPL::Chem::TopologicalEntityAlignment<T, EM>::setEntityMatchFunction(const EntityMatchFunction& func)
 {
 	entityMatchFunc = func;
 }
 
-template <typename T>
-inline const typename CDPL::Chem::TopologicalEntityAlignment<T>::EntityMatchFunction& 
-CDPL::Chem::TopologicalEntityAlignment<T>::getEntityMatchFunction() const
+template <typename T, typename EM>
+inline const typename CDPL::Chem::TopologicalEntityAlignment<T, EM>::EntityMatchFunction& 
+CDPL::Chem::TopologicalEntityAlignment<T, EM>::getEntityMatchFunction() const
 {
 	return entityMatchFunc; 
 }
 
-template <typename T>
-inline void CDPL::Chem::TopologicalEntityAlignment<T>::setEntityPairMatchFunction(const EntityPairMatchFunction& func)
+template <typename T, typename EM>
+inline void CDPL::Chem::TopologicalEntityAlignment<T, EM>::setEntityPairMatchFunction(const EntityPairMatchFunction& func)
 {
 	entityPairMatchFunc = func;
 }
 
-template <typename T>
-inline const typename CDPL::Chem::TopologicalEntityAlignment<T>::EntityPairMatchFunction& 
-CDPL::Chem::TopologicalEntityAlignment<T>::getEntityPairMatchFunction() const
+template <typename T, typename EM>
+inline const typename CDPL::Chem::TopologicalEntityAlignment<T, EM>::EntityPairMatchFunction& 
+CDPL::Chem::TopologicalEntityAlignment<T, EM>::getEntityPairMatchFunction() const
 {
 	return entityPairMatchFunc; 
 }
 
-template <typename T>
-inline std::size_t CDPL::Chem::TopologicalEntityAlignment<T>::getNumEntities(bool first_set) const  
+template <typename T, typename EM>
+inline std::size_t CDPL::Chem::TopologicalEntityAlignment<T, EM>::getNumEntities(bool first_set) const  
 {
 	return (first_set ? firstEntities : secondEntities).size();
 }
 
-template <typename T>
-inline void CDPL::Chem::TopologicalEntityAlignment<T>::addEntity(const EntityType& entity, bool first_set)
+template <typename T, typename EM>
+inline void CDPL::Chem::TopologicalEntityAlignment<T, EM>::addEntity(const EntityType& entity, bool first_set)
 {
 	(first_set ? firstEntities : secondEntities).insert(&entity);
 	changes = true;
 }
 
-template <typename T>
-inline void CDPL::Chem::TopologicalEntityAlignment<T>::clearEntities(bool first_set)  
+template <typename T, typename EM>
+inline void CDPL::Chem::TopologicalEntityAlignment<T, EM>::clearEntities(bool first_set)  
 {
 	(first_set ? firstEntities : secondEntities).clear();
 	changes = true;
 }
 
-template <typename T>
-inline typename CDPL::Chem::TopologicalEntityAlignment<T>::ConstEntityIterator 
-CDPL::Chem::TopologicalEntityAlignment<T>::getEntitiesBegin(bool first_set) const
+template <typename T, typename EM>
+inline typename CDPL::Chem::TopologicalEntityAlignment<T, EM>::ConstEntityIterator 
+CDPL::Chem::TopologicalEntityAlignment<T, EM>::getEntitiesBegin(bool first_set) const
 {
 	return (first_set ? firstEntities : secondEntities).begin();
 }
 
-template <typename T>
-inline typename CDPL::Chem::TopologicalEntityAlignment<T>::ConstEntityIterator 
-CDPL::Chem::TopologicalEntityAlignment<T>::getEntitiesEnd(bool first_set) const
+template <typename T, typename EM>
+inline typename CDPL::Chem::TopologicalEntityAlignment<T, EM>::ConstEntityIterator 
+CDPL::Chem::TopologicalEntityAlignment<T, EM>::getEntitiesEnd(bool first_set) const
 {
 	return (first_set ? firstEntities : secondEntities).end();
 }
 
-template <typename T>
-inline void CDPL::Chem::TopologicalEntityAlignment<T>::init()
+template <typename T, typename EM>
+inline void CDPL::Chem::TopologicalEntityAlignment<T, EM>::init()
 {
 	compatGraphNodes.clear();
 
 	if (entityMatchFunc) {
-		for (typename EntitySet::const_iterator it1 = firstEntities.begin(), end1 = firstEntities.end(); it1 != end1; ++it1)
+		for (typename EntitySet::const_iterator it1 = firstEntities.begin(), end1 = firstEntities.end(); it1 != end1; ++it1) {
+			const EntityType* ent1 = *it1;
+
 			for (typename EntitySet::const_iterator it2 = secondEntities.begin(), end2 = secondEntities.end(); it2 != end2; ++it2)
-				if (entityMatchFunc(**it1, **it2))
-					compatGraphNodes.push_back(std::make_pair(*it1, *it2));
+				if (entityMatchFunc(*ent1, **it2))
+					compatGraphNodes.push_back(std::make_pair(ent1, *it2));
+		}
+
 	} else {
-		for (typename EntitySet::const_iterator it1 = firstEntities.begin(), end1 = firstEntities.end(); it1 != end1; ++it1)
+		for (typename EntitySet::const_iterator it1 = firstEntities.begin(), end1 = firstEntities.end(); it1 != end1; ++it1) {
+			const EntityType* ent1 = *it1;
+
 			for (typename EntitySet::const_iterator it2 = secondEntities.begin(), end2 = secondEntities.end(); it2 != end2; ++it2)
-				compatGraphNodes.push_back(std::make_pair(*it1, *it2));
+				compatGraphNodes.push_back(std::make_pair(ent1, *it2));
+		}
 	}
 
 	std::size_t num_nodes = compatGraphNodes.size();
@@ -297,7 +302,7 @@ inline void CDPL::Chem::TopologicalEntityAlignment<T>::init()
 			if (p1.second == p2.second)
 				continue;
 
-			if (!entityPairMatchFunc || entityPairMatchFunc(*p1.first, *p1.second, *p2.first, *p2.second)) {
+			if (!entityPairMatchFunc || entityPairMatchFunc(*p1.first, *p2.first, *p1.second, *p2.second)) {
 				adjMatrix[i].set(j);
 				adjMatrix[j].set(i);
 			}
@@ -309,13 +314,13 @@ inline void CDPL::Chem::TopologicalEntityAlignment<T>::init()
 	changes = false;
 }
 
-template <typename T>
-inline bool CDPL::Chem::TopologicalEntityAlignment<T>::nextAlignment(EntityMapping& mapping)
+template <typename T, typename EM>
+inline bool CDPL::Chem::TopologicalEntityAlignment<T, EM>::nextAlignment(EntityMapping& mapping)
 {
 	if (changes)
 		init();
 
-	if (!bkAlgorithm.nextClique(clique))
+	if (!bkAlgorithm.nextClique(clique)) 
 		return false;
 
 	mapping.clear();
