@@ -31,6 +31,8 @@
 #include "CDPL/Pharm/Pharmacophore.hpp"
 #include "CDPL/Chem/Molecule.hpp"
 
+#include "Base/ObjectIdentityCheckVisitor.hpp"
+
 #include "ClassExports.hpp"
 
 
@@ -59,6 +61,9 @@ void CDPLPythonPharm::exportScreeningDBProcessor()
 			  python::with_custodian_and_ward<1, 5, python::with_custodian_and_ward<1, 5> > > > >()])
 		.def(python::init<const Pharm::ScreeningDBProcessor::SearchHit&>((python::arg("self"), python::arg("hit")))
 			 [python::with_custodian_and_ward<1, 2>()])
+		.def(CDPLPythonBase::ObjectIdentityCheckVisitor<Pharm::ScreeningDBProcessor::SearchHit>())	
+		.def("assign", &Pharm::ScreeningDBProcessor::SearchHit::operator=, (python::arg("self"), python::arg("hit")),
+			 python::return_self<python::with_custodian_and_ward<1, 2> >())
 		.def("getDBProcessor", &Pharm::ScreeningDBProcessor::SearchHit::getDBProcessor, python::arg("self"),
 			 python::return_internal_reference<>())
 		.def("getQueryPharmacophore", &Pharm::ScreeningDBProcessor::SearchHit::getQueryPharmacophore, python::arg("self"),
@@ -97,6 +102,7 @@ void CDPLPythonPharm::exportScreeningDBProcessor()
 	cl
 		.def(python::init<Pharm::ScreeningDBAccessor&>((python::arg("self"), python::arg("db_acc")))
 			 [python::with_custodian_and_ward<1, 2>()])
+		.def(CDPLPythonBase::ObjectIdentityCheckVisitor<Pharm::ScreeningDBProcessor>())	
 		.def("setDBAccessor", &Pharm::ScreeningDBProcessor::setDBAccessor, 
 			 (python::arg("self"), python::arg("db_acc")), python::with_custodian_and_ward<1, 2>())
 		.def("getDBAccessor", &Pharm::ScreeningDBProcessor::getDBAccessor, python::arg("self"),

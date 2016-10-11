@@ -102,11 +102,11 @@ namespace CDPL
 				std::size_t getHitConformationIndex() const;
 
 			private:
-				const ScreeningDBProcessor& dbProcessor;
-				const Pharmacophore&        qryPharm;
-				const Pharmacophore&        hitPharm;
-				const Chem::Molecule&       molecule;
-				const Math::Matrix4D&       almntXForm;
+				const ScreeningDBProcessor* dbProcessor;
+				const Pharmacophore*        qryPharm;
+				const Pharmacophore*        hitPharm;
+				const Chem::Molecule*       molecule;
+				const Math::Matrix4D*       almntTransform;
 				std::size_t                 pharmIndex;
 				std::size_t                 molIndex;
 				std::size_t                 confIndex;

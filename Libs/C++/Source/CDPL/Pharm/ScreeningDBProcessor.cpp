@@ -28,9 +28,13 @@
 
 #include <vector>
 #include <iterator>
+#include <utility>
+#include <algorithm>
+#include <limits>
+#include <cmath>
 
-#include <boost/iterator/indirect_iterator.hpp>
 #include <boost/bind.hpp>
+#include <boost/iterator/indirect_iterator.hpp>
 
 #include "CDPL/Pharm/ScreeningDBProcessor.hpp"
 #include "CDPL/Pharm/ScreeningDBAccessor.hpp"
@@ -41,20 +45,33 @@
 #include "CDPL/Pharm/PharmacophoreFunctions.hpp"
 #include "CDPL/Pharm/FeatureFunctions.hpp"
 #include "CDPL/Pharm/FeatureType.hpp"
+#include "CDPL/Chem/BasicMolecule.hpp"
+#include "CDPL/Chem/Entity3DFunctions.hpp"
+#include "CDPL/Math/Vector.hpp"
+#include "CDPL/Math/VectorAdapter.hpp"
+#include "CDPL/Math/VectorProxy.hpp"
+#include "CDPL/Util/BitSet.hpp"
 
 #include "QueryTwoPointPharmacophore.hpp"
 #include "TwoPointPharmacophoreGenerator.hpp"
 #include "TwoPointPharmacophoreSet.hpp"
 
-#include <iostream>
+
 using namespace CDPL;
+
+
+namespace
+{
+
+    const double NAN_SCORE = std::numeric_limits<double>::quiet_NaN();
+}
 
 
 class Pharm::ScreeningDBProcessor::Implementation
 {
 
 public:
-    Implementation(ScreeningDBAccessor& db_acc);
+    Implementation(ScreeningDBProcessor& db_proc, ScreeningDBAccessor& db_acc);
 
 	void setDBAccessor(ScreeningDBAccessor& db_acc);
 
@@ -93,20 +110,46 @@ public:
 private:
 	typedef std::vector<QueryTwoPointPharmacophore> TwoPointPharmacophoreList;
 	typedef std::vector<const Feature*> FeatureList;
+	typedef std::vector<FeatureList> FeatureMatrix;
+	typedef std::pair<std::size_t, std::size_t> IndexPair;
+	typedef std::vector<IndexPair> IndexPairList;
 
 	typedef TwoPointPharmacophoreGenerator<TwoPointPharmacophore> DB2PointPharmGenerator;
 	typedef TwoPointPharmacophoreGenerator<QueryTwoPointPharmacophore> Query2PointPharmGenerator;
 
 	typedef boost::indirect_iterator<FeatureList::const_iterator, const Feature> FeatureListIterator;
 
+	struct IndexPair2ndCmpFunc
+	{
+
+		bool operator()(const IndexPair& p1, const IndexPair& p2) const {
+			return (p1.second < p2.second);
+		}
+	};
+
+	void prepareDBSearch(const Pharmacophore& query, std::size_t mol_start_idx, std::size_t mol_end_idx);
+
     void initQueryData(const Pharmacophore& query);
+	void initPharmIndexList(std::size_t mol_start_idx, std::size_t mol_end_idx);
+
+	bool insertFeature(const Feature& ftr, FeatureMatrix& ftr_mtx) const;
 
 	bool checkFeatureCounts(std::size_t pharm_idx) const;
-	bool check2PointPharmacophores();
-	bool performAlignment();
+	bool check2PointPharmacophores(std::size_t pharm_idx);
+	bool performAlignment(const Pharmacophore& query, std::size_t pharm_idx, std::size_t mol_idx);
+
+	bool checkGeomAlignment() const;
+	bool checkXVolumeClashes(std::size_t mol_idx, std::size_t conf_idx) const;
 
 	bool checkTopologicalMapping(const FeatureMapping& mapping) const;
 
+	void loadPharmacophore(std::size_t pharm_idx);
+	void loadMolecule(std::size_t mol_idx);
+
+	bool processHit(const SearchHit& hit, double score);
+	bool reportHit(const SearchHit& hit, double score);
+
+	ScreeningDBProcessor*            dbProcessor;
 	ScreeningDBAccessor*             dbAccessor;
 	HitReportMode                    reportMode;
 	std::size_t                      maxOmittedFeatures;
@@ -116,6 +159,7 @@ private:
 	ProgressCallbackFunction         progressCallback;
 	ScoringFunction                  scoringFunction;
 	BasicPharmacophore               dbPharmacophore;
+	Chem::BasicMolecule              dbMolecule;
     PharmacophoreAlignment           pharmAlignment;
 	Query2PointPharmGenerator        query2PointPharmGen;
 	DB2PointPharmGenerator           db2PointPharmGen;
@@ -123,10 +167,22 @@ private:
 	TwoPointPharmacophoreList        query2PointPharmList;
 	TwoPointPharmacophoreSet         db2PointPharmSet;
 	std::size_t                      minNum2PointPharmMatches;
-	FeatureList                      mandFeatures;
-	FeatureList                      mandAndOptFeatures;
+	FeatureMatrix                    mandFeatures;
+	FeatureMatrix                    optFeatures;
 	FeatureList                      xVolumes;
+	FeatureList                      alignedMandFeatures;
+	FeatureList                      alignedOptFeatures;
+	IndexPairList                    pharmIndices;  
+	Util::BitSet                     molHitSet;
 	std::size_t                      numHits;
+	std::size_t                      loadedPharmIndex;
+	std::size_t                      loadedMolIndex;
+	Math::Matrix4D                   bestAlmntTransform;
+	Math::Matrix4D                   bestConfAlmntTransform;
+	std::size_t                      bestConfAlmntMolIdx;
+	std::size_t                      bestConfAlmntConfIdx;
+	std::size_t                      bestConfAlmntPharmIdx;
+	double                           bestConfAlmntScore;
 };
 
 
@@ -136,32 +192,32 @@ Pharm::ScreeningDBProcessor::SearchHit::SearchHit(const ScreeningDBProcessor& db
 												  const Pharmacophore& hit_pharm, const Chem::Molecule& mol, 
 												  const Math::Matrix4D& xform, std::size_t pharm_idx, 
 												  std::size_t mol_idx, std::size_t conf_idx):
-	dbProcessor(db_proc), qryPharm(qry_pharm), hitPharm(hit_pharm), molecule(mol),
-	almntXForm(xform), pharmIndex(pharm_idx), molIndex(mol_idx), confIndex(conf_idx) {}
+	dbProcessor(&db_proc), qryPharm(&qry_pharm), hitPharm(&hit_pharm), molecule(&mol),
+	almntTransform(&xform), pharmIndex(pharm_idx), molIndex(mol_idx), confIndex(conf_idx) {}
 
 const Pharm::ScreeningDBProcessor& Pharm::ScreeningDBProcessor::SearchHit::getDBProcessor() const
 {
-	return dbProcessor;
+	return *dbProcessor;
 }
 
 const Pharm::Pharmacophore& Pharm::ScreeningDBProcessor::SearchHit::getQueryPharmacophore() const
 {
-	return qryPharm;
+	return *qryPharm;
 }
 
 const Pharm::Pharmacophore& Pharm::ScreeningDBProcessor::SearchHit::getHitPharmacophore() const
 {
-	return hitPharm;
+	return *hitPharm;
 }
 				
 const Chem::Molecule& Pharm::ScreeningDBProcessor::SearchHit::getHitMolecule() const
 {
-	return molecule;
+	return *molecule;
 }
 				
 const Math::Matrix4D& Pharm::ScreeningDBProcessor::SearchHit::getHitAlignmentTransform() const
 {
-	return almntXForm;
+	return *almntTransform;
 } 
 
 std::size_t Pharm::ScreeningDBProcessor::SearchHit::getHitPharmacophoreIndex() const
@@ -183,7 +239,7 @@ std::size_t Pharm::ScreeningDBProcessor::SearchHit::getHitConformationIndex() co
 // ScreeningDBProcessor
 
 Pharm::ScreeningDBProcessor::ScreeningDBProcessor(ScreeningDBAccessor& db_acc): 
-    impl(new Implementation(db_acc))
+    impl(new Implementation(*this, db_acc))
 {}
 	
 Pharm::ScreeningDBProcessor::~ScreeningDBProcessor() {}
@@ -276,8 +332,8 @@ std::size_t Pharm::ScreeningDBProcessor::searchDB(const Pharmacophore& query, st
 
 // Implementation
 
-Pharm::ScreeningDBProcessor::Implementation::Implementation(ScreeningDBAccessor& db_acc): 
-	dbAccessor(&db_acc), reportMode(FIRST_MATCHING_CONF), maxOmittedFeatures(0),
+Pharm::ScreeningDBProcessor::Implementation::Implementation(ScreeningDBProcessor& db_proc, ScreeningDBAccessor& db_acc): 
+	dbProcessor(&db_proc), dbAccessor(&db_acc), reportMode(FIRST_MATCHING_CONF), maxOmittedFeatures(0),
 	checkXVolumes(true), bestAlignments(false), hitCallback(), progressCallback(), 
 	scoringFunction(), pharmAlignment(true)
 {
@@ -366,46 +422,71 @@ const Pharm::ScreeningDBProcessor::ScoringFunction& Pharm::ScreeningDBProcessor:
 
 std::size_t Pharm::ScreeningDBProcessor::Implementation::searchDB(const Pharmacophore& query, std::size_t mol_start_idx, std::size_t mol_end_idx)
 {
-	initQueryData(query);
-	numHits = 0;
+	prepareDBSearch(query, mol_start_idx, mol_end_idx);
 
-	if (mol_end_idx == 0)
-		mol_end_idx = dbAccessor->getNumMolecules();
+	std::size_t num_pharm_entries = pharmIndices.size();
 
-	std::size_t num_pharm_entries = dbAccessor->getNumPharmacophores();
+	for (std::size_t i = 0; i <= num_pharm_entries; i++) {
+		if (reportMode == BEST_MATCHING_CONF && !std::isnan(bestConfAlmntScore) &&
+			(i == num_pharm_entries || pharmIndices[i].second != bestConfAlmntMolIdx)) {
 
-	for (std::size_t i = 0; i < num_pharm_entries; i++) {
+				loadMolecule(bestConfAlmntMolIdx);
+				loadPharmacophore(bestConfAlmntPharmIdx);
+
+				reportHit(SearchHit(*dbProcessor, query, dbPharmacophore, dbMolecule, bestConfAlmntTransform,
+									bestConfAlmntPharmIdx, bestConfAlmntMolIdx, bestConfAlmntConfIdx),
+						  bestConfAlmntScore);
+			}
+
 		if (progressCallback && !progressCallback(i, num_pharm_entries))
 			return numHits;
 
-		std::size_t mol_idx = dbAccessor->getMoleculeIndex(i);
-		
-		if (mol_idx < mol_start_idx || mol_idx >= mol_end_idx)
+		if (i == num_pharm_entries)
 			continue;
 
-		if (!checkFeatureCounts(i))
+		std::size_t mol_idx = pharmIndices[i].second;
+
+		if (reportMode == FIRST_MATCHING_CONF && molHitSet.test(mol_idx))
 			continue;
 
-		dbPharmacophore.clear();
-		dbAccessor->getPharmacophore(i, dbPharmacophore);
+		std::size_t pharm_idx = pharmIndices[i].first;
 
-		if (!check2PointPharmacophores())
+		if (!checkFeatureCounts(pharm_idx))
 			continue;
 
-		if (!performAlignment())
+		if (!check2PointPharmacophores(pharm_idx))
+			continue;
+
+		if (!performAlignment(query, pharm_idx, mol_idx))
 			return numHits;
 	}
 
-	if (progressCallback)
-		progressCallback(num_pharm_entries, num_pharm_entries);
-
 	return numHits;
+}
+
+void Pharm::ScreeningDBProcessor::Implementation::prepareDBSearch(const Pharmacophore& query, std::size_t mol_start_idx, std::size_t mol_end_idx)
+{
+	initQueryData(query);
+
+	numHits = 0;
+	loadedPharmIndex = dbAccessor->getNumPharmacophores();
+	loadedMolIndex = dbAccessor->getNumMolecules();
+
+	if (reportMode == FIRST_MATCHING_CONF) {
+		molHitSet.resize(loadedMolIndex);
+		molHitSet.reset();
+
+	} else if (reportMode == BEST_MATCHING_CONF)
+		bestConfAlmntScore = NAN_SCORE;
+
+	initPharmIndexList(mol_start_idx, mol_end_idx);
 }
 
 void Pharm::ScreeningDBProcessor::Implementation::initQueryData(const Pharmacophore& query)
 {
 	mandFeatures.clear();
-	mandAndOptFeatures.clear();
+	optFeatures.clear();
+	alignedMandFeatures.clear();
 	xVolumes.clear();
 	queryFeatureCounts.clear();
 	pharmAlignment.clearEntities(true);
@@ -426,20 +507,25 @@ void Pharm::ScreeningDBProcessor::Implementation::initQueryData(const Pharmacoph
 			continue;
 		}
 
-		mandAndOptFeatures.push_back(&ftr);
-		pharmAlignment.addEntity(ftr, true);
-
-		if (getOptionalFlag(ftr))
+		if (getOptionalFlag(ftr)) {
+			if (insertFeature(ftr, optFeatures)) {
+				pharmAlignment.addEntity(ftr, true);
+				alignedOptFeatures.push_back(&ftr);
+			}
 			continue;
+		}
 
-		mandFeatures.push_back(&ftr);
-		queryFeatureCounts[type]++;
+		if (insertFeature(ftr, mandFeatures)) {
+			pharmAlignment.addEntity(ftr, true);
+			alignedMandFeatures.push_back(&ftr);
+			queryFeatureCounts[type]++;
+		}
 	}
 
 	query2PointPharmList.clear();
 
-	query2PointPharmGen.generate(FeatureListIterator(mandFeatures.begin()),
-								 FeatureListIterator(mandFeatures.end()),
+	query2PointPharmGen.generate(FeatureListIterator(alignedMandFeatures.begin()),
+								 FeatureListIterator(alignedMandFeatures.end()),
 								 std::back_inserter(query2PointPharmList));
 
 	std::size_t min_num_ftrs = (mandFeatures.size() > maxOmittedFeatures ? 
@@ -448,6 +534,51 @@ void Pharm::ScreeningDBProcessor::Implementation::initQueryData(const Pharmacoph
 	minNum2PointPharmMatches = (min_num_ftrs < 2 ? std::size_t(0) : (min_num_ftrs * (min_num_ftrs - 1)) / 2);
 
 	pharmAlignment.setMinTopologicalMappingSize(min_num_ftrs);
+}
+
+bool Pharm::ScreeningDBProcessor::Implementation::insertFeature(const Feature& ftr, FeatureMatrix& ftr_mtx) const
+{
+	unsigned int ftr_type = getType(ftr);
+	const Math::Vector3D& ftr_pos = get3DCoordinates(ftr);
+
+	for (FeatureMatrix::iterator it = ftr_mtx.begin(), end = ftr_mtx.end(); it != end; ++it) {
+		FeatureList& ftr_list = *it;
+		const Feature& first_ftr = *ftr_list.front();
+
+		if (getType(first_ftr) != ftr_type)
+			continue;
+
+		if (ftr_pos == get3DCoordinates(first_ftr)) {
+			ftr_list.push_back(&ftr);
+			return false;
+		}
+	}
+
+	ftr_mtx.resize(ftr_mtx.size() + 1);
+	ftr_mtx.back().push_back(&ftr);
+
+	return true;
+}
+
+void Pharm::ScreeningDBProcessor::Implementation::initPharmIndexList(std::size_t mol_start_idx, std::size_t mol_end_idx)
+{
+	if (mol_end_idx == 0)
+		mol_end_idx = dbAccessor->getNumMolecules();
+
+	pharmIndices.clear();
+
+	std::size_t num_pharm_entries = dbAccessor->getNumPharmacophores();
+
+	for (std::size_t i = 0; i < num_pharm_entries; i++) {
+		std::size_t mol_idx = dbAccessor->getMoleculeIndex(i);
+		
+		if (mol_idx < mol_start_idx || mol_idx >= mol_end_idx)
+			continue;
+
+		pharmIndices.push_back(IndexPair(i, mol_idx));
+	}
+
+	std::sort(pharmIndices.begin(), pharmIndices.end(), IndexPair2ndCmpFunc());
 }
 
 bool Pharm::ScreeningDBProcessor::Implementation::checkFeatureCounts(std::size_t pharm_idx) const
@@ -474,13 +605,14 @@ bool Pharm::ScreeningDBProcessor::Implementation::checkFeatureCounts(std::size_t
 	return true;
 }
 
-bool Pharm::ScreeningDBProcessor::Implementation::check2PointPharmacophores()
+bool Pharm::ScreeningDBProcessor::Implementation::check2PointPharmacophores(std::size_t pharm_idx)
 {
 	if (minNum2PointPharmMatches == 0)
 		return true;
 
-	db2PointPharmSet.clear();
+	loadPharmacophore(pharm_idx);
 
+	db2PointPharmSet.clear();
 	db2PointPharmGen.generate(dbPharmacophore.getFeaturesBegin(),
 							  dbPharmacophore.getFeaturesEnd(),
 							  std::inserter(db2PointPharmSet, db2PointPharmSet.begin()));
@@ -527,33 +659,168 @@ bool Pharm::ScreeningDBProcessor::Implementation::check2PointPharmacophores()
 	return false;
 }
 
-bool Pharm::ScreeningDBProcessor::Implementation::performAlignment()
+bool Pharm::ScreeningDBProcessor::Implementation::performAlignment(const Pharmacophore& query, std::size_t pharm_idx, std::size_t mol_idx)
 {
+	loadPharmacophore(pharm_idx);
+
 	pharmAlignment.clearEntities(false);
 	pharmAlignment.addPharmacophore(dbPharmacophore, false);
 
-	if (pharmAlignment.nextAlignment())
-		numHits++;
+	double best_score = NAN_SCORE;
+	std::size_t conf_idx = dbAccessor->getConformationIndex(pharm_idx);
+
+	while (pharmAlignment.nextAlignment()) {
+		if (!checkGeomAlignment())
+			continue;
+
+		loadMolecule(mol_idx);
+
+		if (!checkXVolumeClashes(mol_idx, conf_idx))
+			continue;
+
+		SearchHit hit(*dbProcessor, query, dbPharmacophore, dbMolecule, 
+					  pharmAlignment.getTransform(), pharm_idx, mol_idx, conf_idx);
+		double score = (scoringFunction ? scoringFunction(hit) : 1.0);
+
+		if (!bestAlignments)
+			return processHit(hit, score);
+
+		if (std::isnan(best_score) || score > best_score) {
+			best_score = score;
+			bestAlmntTransform = pharmAlignment.getTransform();
+		}
+	}
+
+	if (!std::isnan(best_score))
+		return processHit(SearchHit(*dbProcessor, query, dbPharmacophore, dbMolecule, 
+									bestAlmntTransform, pharm_idx, mol_idx, conf_idx), best_score);
+
+	return true;
+}
+
+bool Pharm::ScreeningDBProcessor::Implementation::checkGeomAlignment() const
+{
+	std::size_t num_missing = 0;
+
+	Math::Vector3D trans_pos2;
+	const Math::Matrix4D& xform = pharmAlignment.getTransform();
+
+	for (FeatureList::const_iterator qry_it = alignedMandFeatures.begin(), qry_end = alignedMandFeatures.end(); qry_it != qry_end; ++qry_it) {
+		const Feature& qry_ftr = **qry_it;
+		unsigned int qry_type = getType(qry_ftr);
+		const Math::Vector3D& qry_pos = get3DCoordinates(qry_ftr);
+		double qry_tol = getTolerance(qry_ftr);
+
+		bool match = false;
+
+		for (BasicPharmacophore::ConstFeatureIterator al_it = dbPharmacophore.getFeaturesBegin(), al_end = dbPharmacophore.getFeaturesEnd(); al_it != al_end; ++al_it) {
+			const Feature& al_ftr = *al_it;
+
+			if (qry_type != getType(al_ftr))
+				continue;
+
+			trans_pos2.assign(range(prod(xform, homog(get3DCoordinates(al_ftr))), 0, 3));
+			trans_pos2.minusAssign(qry_pos);
+
+			if (length(trans_pos2) > qry_tol)
+				continue;
+/*
+
+			if (geomMatchFunc && !geomMatchFunc(ref_ftr, mpd_ftr, xform))
+				continue;
+*/
+			match = true;
+			break;
+		}
+
+		if (!match) {
+			num_missing++;
+
+			if (num_missing > maxOmittedFeatures)
+				return false;
+		}
+	}
+
+	return true;
+}
+
+bool Pharm::ScreeningDBProcessor::Implementation::checkXVolumeClashes(std::size_t mol_idx, std::size_t conf_idx) const
+{
+	if (!checkXVolumes)
+		return true;
 
 	return true;
 }
 
 bool Pharm::ScreeningDBProcessor::Implementation::checkTopologicalMapping(const FeatureMapping& mapping) const
 {
-	if (mandFeatures.size() == mandAndOptFeatures.size())
+	if (alignedOptFeatures.size())
 		return true;
 
-	std::size_t min_num_mand_mappings = (mandFeatures.size() > maxOmittedFeatures ? 
-										 std::size_t(mandFeatures.size() - maxOmittedFeatures) : std::size_t(0));
+	std::size_t num_missing = 0;
 
-	if (min_num_mand_mappings == 0)
-		return true;
+	for (FeatureList::const_iterator it = alignedMandFeatures.begin(), end = alignedMandFeatures.end(); it != end; ++it)
+		if (!mapping[*it]) {
+			num_missing++;
 
-	std::size_t num_mand_mappings = 0;
+			if (num_missing > maxOmittedFeatures)
+				return false;
+		}
 
-	for (FeatureList::const_iterator it = mandFeatures.begin(), end = mandFeatures.end(); it != end; ++it)
-		if (mapping[*it]) 
-			num_mand_mappings++;
+	return true;
+}
+
+void Pharm::ScreeningDBProcessor::Implementation::loadMolecule(std::size_t mol_idx)
+{
+	if (mol_idx == loadedMolIndex)
+		return;
+
+	dbMolecule.clear();
+	dbAccessor->getMolecule(mol_idx, dbMolecule);
+
+	loadedMolIndex = mol_idx;
+}
+
+void Pharm::ScreeningDBProcessor::Implementation::loadPharmacophore(std::size_t pharm_idx)
+{
+	if (pharm_idx == loadedPharmIndex)
+		return;
+
+	dbPharmacophore.clear();
+	dbAccessor->getPharmacophore(pharm_idx, dbPharmacophore);
+
+	loadedPharmIndex = pharm_idx;
+}
+
+bool Pharm::ScreeningDBProcessor::Implementation::processHit(const SearchHit& hit, double score)
+{
+	if (reportMode == BEST_MATCHING_CONF) {
+		if (!std::isnan(bestConfAlmntScore) && score <= bestConfAlmntScore)
+			return true;
+
+		bestConfAlmntScore = score;
+		bestConfAlmntTransform = hit.getHitAlignmentTransform();
+		bestConfAlmntMolIdx = hit.getHitMoleculeIndex();
+		bestConfAlmntConfIdx = hit.getHitConformationIndex();
+		bestConfAlmntPharmIdx = hit.getHitPharmacophoreIndex();
 		
-	return (num_mand_mappings >= min_num_mand_mappings);
+		return true;
+	} 
+
+	return reportHit(hit, score);
+}
+
+bool Pharm::ScreeningDBProcessor::Implementation::reportHit(const SearchHit& hit, double score)
+{
+	numHits++;
+
+	if (reportMode == FIRST_MATCHING_CONF) 
+		molHitSet.set(hit.getHitMoleculeIndex());
+	else if (reportMode == BEST_MATCHING_CONF) 
+		bestConfAlmntScore = NAN_SCORE;
+
+	if (!hitCallback)
+		return true;
+
+	return hitCallback(hit, score);
 }

@@ -79,10 +79,22 @@ namespace CDPLPythonBase
 		BinaryFunctionAdapter(const boost::python::object& callable): callable(callable) {}
 
 		ResType operator()(const Arg1Type& arg1, const Arg2Type& arg2) const {
-			if (Copy)
-				return boost::python::call<ResType>(callable.ptr(), arg1, arg2);
-
 			return boost::python::call<ResType>(callable.ptr(), boost::ref(arg1), boost::ref(arg2));
+		}
+
+	private:
+		boost::python::object callable;
+	};
+
+	template <typename ResType, typename Arg1Type, typename Arg2Type>
+	class BinaryFunctionAdapter<ResType, Arg1Type, Arg2Type, true> : public std::binary_function<Arg1Type, Arg2Type, ResType>
+	{
+
+	public:
+		BinaryFunctionAdapter(const boost::python::object& callable): callable(callable) {}
+
+		ResType operator()(const Arg1Type& arg1, const Arg2Type& arg2) const {
+			return boost::python::call<ResType>(callable.ptr(), arg1, arg2);
 		}
 
 	private:
