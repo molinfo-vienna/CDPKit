@@ -70,7 +70,14 @@ namespace CDPLPythonChem
 				.def("nextAlignment", &AlignmentType::nextAlignment, 
 					 (python::arg("self"), python::arg("mapping")))
 				.def("assign", &AlignmentType::operator=, 
-					 (python::arg("self"), python::arg("alignment")), python::return_self<>());
+					 (python::arg("self"), python::arg("alignment")), python::return_self<>())
+				.add_property("entityMatchFunction", 
+							  python::make_function(&AlignmentType::getEntityMatchFunction, python::return_internal_reference<>()),
+							  &AlignmentType::setEntityMatchFunction)
+				.add_property("entityPairMatchFunction", 
+							  python::make_function(&AlignmentType::getEntityPairMatchFunction, python::return_internal_reference<>()),
+							  &AlignmentType::setEntityPairMatchFunction);
+
 		}
 
 		static boost::python::object getEntitiesFunc(AlignmentType& alignment, bool first_set) {

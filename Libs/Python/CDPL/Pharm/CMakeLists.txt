@@ -28,9 +28,13 @@ SET(pharm_MOD_SRCS
     CDFPharmacophoreReaderExport.cpp 
     CDFPharmacophoreWriterExport.cpp
 
+    PharmacophoreFitScoreExport.cpp
+
     ScreeningDBCreatorExport.cpp
     ScreeningDBAccessorExport.cpp
     ScreeningDBProcessorExport.cpp
+    PharmacophoreFitScreeningScoreExport.cpp
+    FileScreeningHitCollectorExport.cpp
 
     BoostFunctionWrapperExport.cpp
 

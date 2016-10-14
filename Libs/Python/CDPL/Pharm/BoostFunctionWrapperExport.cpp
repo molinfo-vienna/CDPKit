@@ -47,15 +47,16 @@ void CDPLPythonPharm::exportBoostFunctionWrappers()
     CDPLPythonBase::BoostFunction1Export<boost::function1<bool, const FeatureMapping&> >("BoolFeatureMappingFunctor");
     CDPLPythonBase::BoostFunction1Export<Feature3DCoordinatesFunction, Feature&, 
 										 boost::python::return_internal_reference<2> >("Feature3DCoordinatesFunction");
-	CDPLPythonBase::BoostFunction1Export<ScreeningDBProcessor::ScoringFunction>("DoubleSearchHitFunctor");
+	CDPLPythonBase::BoostFunction1Export<boost::function1<double, const ScreeningDBProcessor::SearchHit&> >("DoubleSearchHitFunctor");
+    CDPLPythonBase::BoostFunction1Export<boost::function1<double, const Feature&>, Feature&>("DoubleFeatureFunctor");
 
     CDPLPythonBase::BoostFunction2Export<boost::function2<bool, const Feature&, const Feature&>, Feature&, Feature&>("BoolFeature2Functor");
-	CDPLPythonBase::BoostFunction2Export<ScreeningDBProcessor::HitCallbackFunction, const ScreeningDBProcessor::SearchHit&, double, 
-										 boost::python::return_value_policy<boost::python::return_by_value>,
-										 true>("BoolSearchHitDoubleFunctor");
-	CDPLPythonBase::BoostFunction2Export<ScreeningDBProcessor::ProgressCallbackFunction, std::size_t, std::size_t,
-										 boost::python::return_value_policy<boost::python::return_by_value>,
-										 true>("BoolSizeType2Functor");
+	CDPLPythonBase::BoostFunction2Export<boost::function2<bool, const ScreeningDBProcessor::SearchHit&, double>, 
+										 const ScreeningDBProcessor::SearchHit&, double, 
+										 boost::python::return_value_policy<boost::python::return_by_value>, true>("BoolSearchHitDoubleFunctor");
+	CDPLPythonBase::BoostFunction2Export<boost::function2<bool, std::size_t, std::size_t>, 
+										 std::size_t, std::size_t,
+										 boost::python::return_value_policy<boost::python::return_by_value>, true>("BoolSizeType2Functor");
 
     CDPLPythonBase::BoostFunction3Export<boost::function3<bool, const Feature&, const Feature&, const Math::Matrix4D&>,
 										 Feature&, Feature&>("BoolFeature2Matrix4DFunctor");

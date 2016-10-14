@@ -60,13 +60,34 @@ double Pharm::FeatureGeometryMatchFunctor::getAromPlaneAngleTolerance() const
 	return arPlaneAngleTol;
 }
 
-bool Pharm::FeatureGeometryMatchFunctor::queryMode() const
+bool Pharm::FeatureGeometryMatchFunctor::strictGeometryMatch() const
 {
-	return qryMode;
+	return strictMode;
 }
 
 bool Pharm::FeatureGeometryMatchFunctor::operator()(const Feature& ftr1, const Feature& ftr2, const Math::Matrix4D& xform) const
 {
+	unsigned int ftr1_geom = getGeometry(ftr1);
+	unsigned int ftr2_geom = getGeometry(ftr2);
+
+	if (strictMode && ftr1_geom != ftr2_geom)
+		return false;
+
+	if (ftr1_geom != FeatureGeometry::VECTOR && ftr1_geom != FeatureGeometry::PLANE)
+		return true;
+
+	if (ftr2_geom != FeatureGeometry::VECTOR && ftr2_geom != FeatureGeometry::PLANE)
+		return true;
+
+	if (ftr1_geom != ftr2_geom)
+		return false;
+
+	if (!hasOrientation(ftr1))
+		return (strictMode ? false : true);
+
+	if (!hasOrientation(ftr2))
+		return (strictMode ? false : true);
+
 	double ang_tol = 0.0;
 	unsigned int ftr1_type = getType(ftr1);
 
@@ -88,30 +109,6 @@ bool Pharm::FeatureGeometryMatchFunctor::operator()(const Feature& ftr1, const F
 			return true;
 	}
 
-	if (ftr1_type != getType(ftr2))
-		return true;
-
-	unsigned int ftr1_geom = getGeometry(ftr1);
-	unsigned int ftr2_geom = getGeometry(ftr2);
-
-	if (qryMode && ftr1_geom != ftr2_geom)
-		return false;
-
-	if (ftr1_geom != FeatureGeometry::VECTOR && ftr1_geom != FeatureGeometry::PLANE)
-		return true;
-
-	if (ftr2_geom != FeatureGeometry::VECTOR && ftr2_geom != FeatureGeometry::PLANE)
-		return true;
-
-	if (ftr1_geom != ftr2_geom)
-		return false;
-
-	if (!hasOrientation(ftr1))
-		return false;
-
-	if (!hasOrientation(ftr2))
-		return false;
-
 	const Math::Vector3D orient2 = getOrientation(ftr2);
 	Math::Vector3D trans_or2;
 
@@ -120,5 +117,11 @@ bool Pharm::FeatureGeometryMatchFunctor::operator()(const Feature& ftr1, const F
 
 	double ang = std::acos(angleCos(getOrientation(ftr1), range(trans_or2, 0, 3), 1.0)) / M_PI * 180.0;
 
-	return (ang <= ang_tol);
+	if (ftr1_geom == FeatureGeometry::VECTOR)
+		return (ang <= ang_tol);
+
+	if (ang <= 90.0)
+		return (ang <= ang_tol);
+
+	return ((180.0 - ang) <= ang_tol);
 }

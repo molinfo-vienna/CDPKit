@@ -104,7 +104,7 @@ namespace CDPL
 				ValueType w_sum = ValueType();
 
 				for (SizeType i = 0; i < num_pts; i++) {
-					CDPL_MATH_CHECK(ValueType(weights()(i)) >= ValueType(), "KabschAlgorithm: weights must non-negative entries", Base::ValueError); 
+					CDPL_MATH_CHECK(ValueType(weights()(i)) >= ValueType(), "KabschAlgorithm: weights must be non-negative entries", Base::ValueError); 
 					w_sum += weights()(i);
 				}
 

@@ -32,6 +32,7 @@
 #define CDPL_CHEM_GEOMETRICALENTITYALIGNMENT_HPP
 
 #include <cstddef>
+#include <algorithm>
 
 #include <boost/function.hpp>
 
@@ -86,6 +87,11 @@ namespace CDPL
 			 * \brief A generic wrapper class used to store a user-defined entity 3D-coordinates function.
 			 */
 			typedef boost::function1<const Math::Vector3D&, const EntityType&> Entity3DCoordinatesFunction;
+	
+			/**
+			 * \brief A generic wrapper class used to store a user-defined entity alignment weight function.
+			 */
+			typedef boost::function1<double, const EntityType&> EntityWeightFunction;
 
 			/**
 			 * \brief A generic wrapper class used to store a user-defined topological entity match constraint function.
@@ -132,6 +138,18 @@ namespace CDPL
 			 * \return The registered entity 3D-coordinates function.
 			 */
 			const Entity3DCoordinatesFunction& getEntity3DCoordinatesFunction() const;
+ 
+			/**
+			 * \brief Specifies a function for the retrieval of entity weights for geometrical alignment.
+			 * \param func The entity weight function.
+			 */
+			void setEntityWeightFunction(const EntityWeightFunction& func);
+
+			/**
+			 * \brief Returns the function that was registered for the retrieval of entity weights for geometrical alignment.
+			 * \return The registered entity weight function.
+			 */
+			const EntityWeightFunction& getEntityWeightFunction() const;
  
 			/**
 			 * \brief Specifies a function for restricting allowed topological entity alignments.
@@ -230,9 +248,11 @@ namespace CDPL
 			EntityMapping                          topEntityMapping;
 			TopologicalAlignmentConstraintFunction topAlignConstrFunc;
 			Entity3DCoordinatesFunction            coordsFunc;
+			EntityWeightFunction                   weightFunc;
 			Math::KabschAlgorithm<double>          kabschAlgorithm;
 			Math::DMatrix                          refPoints;
 			Math::DMatrix                          alignedPoints;
+			Math::DVector                          almntWeights;
 			Math::Matrix4D                         transform;
 			std::size_t                            minTopMappingSize;
 		};
@@ -269,6 +289,19 @@ inline const typename CDPL::Chem::GeometricalEntityAlignment<T, EM>::Entity3DCoo
 CDPL::Chem::GeometricalEntityAlignment<T, EM>::getEntity3DCoordinatesFunction() const
 {
 	return coordsFunc; 
+}
+
+template <typename T, typename EM>
+inline void CDPL::Chem::GeometricalEntityAlignment<T, EM>::setEntityWeightFunction(const EntityWeightFunction& func)
+{
+	weightFunc = func;
+}
+
+template <typename T, typename EM>
+inline const typename CDPL::Chem::GeometricalEntityAlignment<T, EM>::EntityWeightFunction& 
+CDPL::Chem::GeometricalEntityAlignment<T, EM>::getEntityWeightFunction() const
+{
+	return weightFunc; 
 }
 
 template <typename T, typename EM>
@@ -365,6 +398,10 @@ inline bool CDPL::Chem::GeometricalEntityAlignment<T, EM>::nextAlignment()
 
 		refPoints.resize(3, num_points, false);
 		alignedPoints.resize(3, num_points, false);
+
+		if (weightFunc)
+			almntWeights.resize(num_points, 1.0);
+
 		std::size_t i = 0;
 
 		for (typename EntityMapping::ConstEntryIterator it = topEntityMapping.getEntriesBegin(), end = topEntityMapping.getEntriesEnd();
@@ -372,9 +409,16 @@ inline bool CDPL::Chem::GeometricalEntityAlignment<T, EM>::nextAlignment()
 
 			column(refPoints, i) = coordsFunc(*it->first);
 			column(alignedPoints, i) = coordsFunc(*it->second);
+
+			if (weightFunc)
+				almntWeights(i) = std::max(weightFunc(*it->first), weightFunc(*it->second));
 		}
 
-		if (!kabschAlgorithm.align(alignedPoints, refPoints))
+		if (!weightFunc) {
+			if (!kabschAlgorithm.align(alignedPoints, refPoints))
+				continue;
+
+		} else if (!kabschAlgorithm.align(alignedPoints, refPoints, almntWeights))
 			continue;
 
 		transform.assign(kabschAlgorithm.getTransform());

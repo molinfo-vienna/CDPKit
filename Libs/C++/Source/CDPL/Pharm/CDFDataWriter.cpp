@@ -99,6 +99,9 @@ void Pharm::CDFDataWriter::outputFeatures(const Pharmacophore& pharm, Internal::
 		if (has3DCoordinates(feature))
 			putVectorProperty(CDF::FeatureProperty::COORDINATES_3D, get3DCoordinates(feature), bbuf);
 
+		if (hasOrientation(feature))
+			putVectorProperty(CDF::FeatureProperty::ORIENTATION, getOrientation(feature), bbuf);
+
 		if (hasGeometry(feature))
 			putIntProperty(CDF::FeatureProperty::GEOMETRY, boost::numeric_cast<CDF::UIntType>(getGeometry(feature)), bbuf);
 

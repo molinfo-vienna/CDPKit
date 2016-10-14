@@ -69,6 +69,10 @@ namespace CDPLPythonChem
 					 (python::arg("self"), python::arg("func")))
 				.def("getEntity3DCoordinatesFunction", &AlignmentType::getEntity3DCoordinatesFunction, 
 					 python::arg("self"), python::return_internal_reference<>())
+				.def("setEntityWeightFunction", &AlignmentType::setEntityWeightFunction, 
+					 (python::arg("self"), python::arg("func")))
+				.def("getEntityWeightFunction", &AlignmentType::getEntityWeightFunction, 
+					 python::arg("self"), python::return_internal_reference<>())
 				.def("addEntity", &addEntityFunc, (python::arg("self"), python::arg("entity"), python::arg("first_set")))
 				.def("clearEntities", &AlignmentType::clearEntities, 
 					 (python::arg("self"), python::arg("first_set")))
@@ -87,7 +91,22 @@ namespace CDPLPythonChem
 				.def("assign", &AlignmentType::operator=, 
 					 (python::arg("self"), python::arg("alignment")), python::return_self<>())
 				.add_property("minTopologicalMappingSize", &AlignmentType::getMinTopologicalMappingSize,
-					  &AlignmentType::setMinTopologicalMappingSize);
+					  &AlignmentType::setMinTopologicalMappingSize)
+				.add_property("entityMatchFunction", 
+							  python::make_function(&AlignmentType::getEntityMatchFunction, python::return_internal_reference<>()),
+							  &AlignmentType::setEntityMatchFunction)
+				.add_property("entityPairMatchFunction", 
+							  python::make_function(&AlignmentType::getEntityPairMatchFunction, python::return_internal_reference<>()),
+							  &AlignmentType::setEntityPairMatchFunction)
+				.add_property("topAlignmentConstraintFunction", 
+							  python::make_function(&AlignmentType::getTopAlignmentConstraintFunction, python::return_internal_reference<>()),
+							  &AlignmentType::setTopAlignmentConstraintFunction)
+				.add_property("entity3DCoordinatesFunction", 
+							  python::make_function(&AlignmentType::setEntity3DCoordinatesFunction, python::return_internal_reference<>()),
+							  &AlignmentType::setEntity3DCoordinatesFunction)
+				.add_property("entityWeightFunction", 
+							  python::make_function(&AlignmentType::setEntityWeightFunction, python::return_internal_reference<>()),
+							  &AlignmentType::setEntityWeightFunction);
 		}
 
 		static boost::python::object getEntitiesFunc(AlignmentType& alignment, bool first_set) {

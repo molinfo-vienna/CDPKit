@@ -53,7 +53,8 @@ namespace CDPLPythonBase
 			  typename Arg2Type = typename FunctionType::arg2_type, 
 			  typename Arg3Type = typename FunctionType::arg3_type, 
 			  typename Arg4Type = typename FunctionType::arg4_type,
-			  typename RetValPolicy = boost::python::return_value_policy<boost::python::return_by_value> >
+			  typename RetValPolicy = boost::python::return_value_policy<boost::python::return_by_value>,
+			  bool Copy = false>
     struct BoostFunction4Export : private BoostFunctionExportBase<FunctionType>
     {
 
@@ -97,7 +98,8 @@ namespace CDPLPythonBase
 			else
 				new (storage) FunctionType(QuarternaryFunctionAdapter<typename FunctionType::result_type, 
 										   typename FunctionType::arg1_type, typename FunctionType::arg2_type, 
-										   typename FunctionType::arg3_type, typename FunctionType::arg4_type>(python::object(python::handle<>(obj_ptr))));
+										   typename FunctionType::arg3_type, typename FunctionType::arg4_type,
+										   Copy>(python::object(python::handle<>(boost::python::borrowed(obj_ptr)))));
 
 			data->convertible = storage;
 		}
@@ -107,7 +109,8 @@ namespace CDPLPythonBase
 			  typename Arg1Type = typename FunctionType::arg1_type, 
 			  typename Arg2Type = typename FunctionType::arg2_type, 
 			  typename Arg3Type = typename FunctionType::arg3_type,
-			  typename RetValPolicy = boost::python::return_value_policy<boost::python::return_by_value> > 
+			  typename RetValPolicy = boost::python::return_value_policy<boost::python::return_by_value>,
+			  bool Copy = false> 
     struct BoostFunction3Export : private BoostFunctionExportBase<FunctionType>
     {
 
@@ -137,7 +140,7 @@ namespace CDPLPythonBase
 
 			return new FunctionType(TernaryFunctionAdapter<typename FunctionType::result_type, 
 									typename FunctionType::arg1_type, typename FunctionType::arg2_type, 
-									typename FunctionType::arg3_type>(callable));
+									typename FunctionType::arg3_type, Copy>(callable));
 		}
 
 		static void convConstruct(PyObject* obj_ptr, boost::python::converter::rvalue_from_python_stage1_data* data) {
@@ -151,7 +154,7 @@ namespace CDPLPythonBase
 			else
 				new (storage) FunctionType(TernaryFunctionAdapter<typename FunctionType::result_type, 
 										   typename FunctionType::arg1_type, typename FunctionType::arg2_type, 
-										   typename FunctionType::arg3_type>(python::object(python::handle<>(obj_ptr))));
+										   typename FunctionType::arg3_type>(python::object(python::handle<>(boost::python::borrowed(obj_ptr)))));
 
 			data->convertible = storage;
 		}
@@ -205,7 +208,7 @@ namespace CDPLPythonBase
 			else
 				new (storage) FunctionType(BinaryFunctionAdapter<typename FunctionType::result_type, 
 										   typename FunctionType::arg1_type, typename FunctionType::arg2_type,
-										   Copy>(python::object(python::handle<>(obj_ptr))));
+										   Copy>(python::object(python::handle<>(boost::python::borrowed(obj_ptr)))));
 
 			data->convertible = storage;
 		}
@@ -253,7 +256,7 @@ namespace CDPLPythonBase
 				new (storage) FunctionType();
 			else
 				new (storage) FunctionType(UnaryFunctionAdapter<typename FunctionType::result_type, 
-										   typename FunctionType::arg1_type>(python::object(python::handle<>(obj_ptr))));
+										   typename FunctionType::arg1_type>(python::object(python::handle<>(boost::python::borrowed(obj_ptr)))));
 
 			data->convertible = storage;
 		}
@@ -298,7 +301,7 @@ namespace CDPLPythonBase
 			if (obj_ptr == Py_None)
 				new (storage) FunctionType();
 			else
-				new (storage) FunctionType(NoArgFunctionAdapter<typename FunctionType::result_type>(python::object(python::handle<>(obj_ptr))));
+				new (storage) FunctionType(NoArgFunctionAdapter<typename FunctionType::result_type>(python::object(python::handle<>(boost::python::borrowed(obj_ptr)))));
 			
 			data->convertible = storage;
 		}

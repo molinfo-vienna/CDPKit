@@ -43,10 +43,22 @@ namespace CDPLPythonBase
 		QuarternaryFunctionAdapter(const boost::python::object& callable): callable(callable) {}
 
 		ResType operator()(const Arg1Type& arg1, const Arg2Type& arg2, const Arg3Type& arg3, const Arg4Type& arg4) const {
-			if (Copy)
-				return boost::python::call<ResType>(callable.ptr(), arg1, arg2, arg3, arg4);
-
 			return boost::python::call<ResType>(callable.ptr(), boost::ref(arg1), boost::ref(arg2), boost::ref(arg3), boost::ref(arg4));
+		}
+
+	private:
+		boost::python::object callable;
+	};
+
+	template <typename ResType, typename Arg1Type, typename Arg2Type, typename Arg3Type, typename Arg4Type>
+	class QuarternaryFunctionAdapter<ResType, Arg1Type, Arg2Type, Arg3Type, Arg4Type, true>
+	{
+
+	public:
+		QuarternaryFunctionAdapter(const boost::python::object& callable): callable(callable) {}
+
+		ResType operator()(const Arg1Type& arg1, const Arg2Type& arg2, const Arg3Type& arg3, const Arg4Type& arg4) const {
+			return boost::python::call<ResType>(callable.ptr(), arg1, arg2, arg3, arg4);
 		}
 
 	private:
@@ -61,10 +73,22 @@ namespace CDPLPythonBase
 		TernaryFunctionAdapter(const boost::python::object& callable): callable(callable) {}
 
 		ResType operator()(const Arg1Type& arg1, const Arg2Type& arg2, const Arg3Type& arg3) const {
-			if (Copy)
-				return boost::python::call<ResType>(callable.ptr(), arg1, arg2, arg3);
-
 			return boost::python::call<ResType>(callable.ptr(), boost::ref(arg1), boost::ref(arg2), boost::ref(arg3));
+		}
+
+	private:
+		boost::python::object callable;
+	};
+
+	template <typename ResType, typename Arg1Type, typename Arg2Type, typename Arg3Type>
+	class TernaryFunctionAdapter<ResType, Arg1Type, Arg2Type, Arg3Type, true>
+	{
+
+	public:
+		TernaryFunctionAdapter(const boost::python::object& callable): callable(callable) {}
+
+		ResType operator()(const Arg1Type& arg1, const Arg2Type& arg2, const Arg3Type& arg3) const {
+			return boost::python::call<ResType>(callable.ptr(), arg1, arg2, arg3);
 		}
 
 	private:

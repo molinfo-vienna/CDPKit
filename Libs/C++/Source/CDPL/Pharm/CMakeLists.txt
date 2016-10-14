@@ -41,7 +41,11 @@ SET(cdpl-pharm_LIB_SRCS
     GeometricalFeatureMappingExtractor.cpp
     PharmacophoreAlignment.cpp
 
+    PharmacophoreFitScore.cpp
+
     ScreeningDBProcessor.cpp
+    FileScreeningHitCollector.cpp
+    PharmacophoreFitScreeningScore.cpp
 
     CDFPharmacophoreInputHandler.cpp
     CDFPharmacophoreOutputHandler.cpp

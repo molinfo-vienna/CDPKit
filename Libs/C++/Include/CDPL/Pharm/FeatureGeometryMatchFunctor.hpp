@@ -60,10 +60,10 @@ namespace CDPL
 			static const double DEF_HBD_ANGLE_TOLERANCE      = 80.0;
 			static const double DEF_AR_PLANE_ANGLE_TOLERANCE = 30.0;
 
-			FeatureGeometryMatchFunctor(bool query_mode, double hba_ang_tol = DEF_HBA_ANGLE_TOLERANCE, 
+			FeatureGeometryMatchFunctor(bool strict_geom_mode, double hba_ang_tol = DEF_HBA_ANGLE_TOLERANCE, 
 										double hbd_ang_tol = DEF_HBD_ANGLE_TOLERANCE,
 										double ar_ang_tol = DEF_AR_PLANE_ANGLE_TOLERANCE):
-				qryMode(query_mode), hbaVecAngleTol(hba_ang_tol), 
+				strictMode(strict_geom_mode), hbaVecAngleTol(hba_ang_tol), 
 				hbdVecAngleTol(hbd_ang_tol), arPlaneAngleTol(ar_ang_tol) {}
 
 			double getHBondAcceptorAngleTolerance() const;
@@ -72,7 +72,7 @@ namespace CDPL
 
 			double getAromPlaneAngleTolerance() const;
 
-			bool queryMode() const;
+			bool strictGeometryMatch() const;
 
 			/**
 			 * \brief Checks if both \a ftr1 and \a ftr2 have the same  feature geometry within the respective tolerances.
@@ -84,7 +84,7 @@ namespace CDPL
 			bool operator()(const Feature& ftr1, const Feature& ftr2, const Math::Matrix4D& xform) const;
 
 		  private:
-			bool   qryMode;
+			bool   strictMode;
 			double hbaVecAngleTol;
 			double hbdVecAngleTol;
 			double arPlaneAngleTol;

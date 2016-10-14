@@ -65,13 +65,13 @@ void CDPLPythonPharm::exportFeatureGeometryMatchFunctor()
 			 python::arg("self"))
 		.def("getAromPlaneAngleTolerance", &Pharm::FeatureGeometryMatchFunctor::getAromPlaneAngleTolerance,
 			 python::arg("self"))
-		.def("queryMode", &Pharm::FeatureGeometryMatchFunctor::queryMode,
+		.def("strictGeometryMatch", &Pharm::FeatureGeometryMatchFunctor::strictGeometryMatch,
 			 python::arg("self"))
 		.def("__call__", &callOperator, (python::arg("self"), python::arg("ftr1"), python::arg("ftr2"), python::arg("xform")))
 		.add_property("hBondAcceptorAngleTolerance", &Pharm::FeatureGeometryMatchFunctor::getHBondAcceptorAngleTolerance)
 		.add_property("hBondDonorAngleTolerance", &Pharm::FeatureGeometryMatchFunctor::getHBondDonorAngleTolerance)
 		.add_property("aromPlaneAngleTolerance", &Pharm::FeatureGeometryMatchFunctor::getAromPlaneAngleTolerance)
-		.add_property("qryMode", &Pharm::FeatureGeometryMatchFunctor::queryMode)
+		.add_property("strictGeomMatch", &Pharm::FeatureGeometryMatchFunctor::strictGeometryMatch)
 		.def_readonly("DEF_HBA_ANGLE_TOLERANCE", &Pharm::FeatureGeometryMatchFunctor::DEF_HBA_ANGLE_TOLERANCE)
 		.def_readonly("DEF_HBD_ANGLE_TOLERANCE", &Pharm::FeatureGeometryMatchFunctor::DEF_HBD_ANGLE_TOLERANCE)
 		.def_readonly("DEF_AR_PLANE_ANGLE_TOLERANCE", &Pharm::FeatureGeometryMatchFunctor::DEF_AR_PLANE_ANGLE_TOLERANCE);

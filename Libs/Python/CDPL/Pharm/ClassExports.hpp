@@ -54,9 +54,13 @@ namespace CDPLPythonPharm
 	void exportCDFPharmacophoreReader();
 	void exportCDFPharmacophoreWriter();
 
+	void exportPharmacophoreFitScore();
+
 	void exportScreeningDBCreator();
 	void exportScreeningDBAccessor();
 	void exportScreeningDBProcessor();
+	void exportPharmacophoreFitScreeningScore();
+	void exportFileScreeningHitCollector();
 
 #ifdef HAVE_SQLITE3
 

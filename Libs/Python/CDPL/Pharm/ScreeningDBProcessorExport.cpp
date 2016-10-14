@@ -52,7 +52,7 @@ void CDPLPythonPharm::exportScreeningDBProcessor()
 		.value("ALL_MATCHING_CONFS", Pharm::ScreeningDBProcessor::ALL_MATCHING_CONFS)
 		.export_values();
 
-	python::class_<Pharm::ScreeningDBProcessor::SearchHit, boost::noncopyable>("SearchHit", python::no_init)
+	python::class_<Pharm::ScreeningDBProcessor::SearchHit/*, boost::noncopyable*/>("SearchHit", python::no_init)
 		.def(python::init<const Pharm::ScreeningDBProcessor&, const Pharm::Pharmacophore&, const Pharm::Pharmacophore&, const Chem::Molecule&, 
 			 const Math::Matrix4D&, std::size_t, std::size_t, std::size_t>(
 				 (python::arg("self"), python::arg("db_proc"), python::arg("qry_pharm"), python::arg("hit_pharm"), python::arg("mol"), 
@@ -139,10 +139,10 @@ void CDPLPythonPharm::exportScreeningDBProcessor()
 														   python::return_internal_reference<>()),
 					  &Pharm::ScreeningDBProcessor::setDBAccessor)
 		.add_property("hitCallbackFunction", python::make_function(&Pharm::ScreeningDBProcessor::getHitCallbackFunction,
-														   python::return_internal_reference<>()),
+																   python::return_internal_reference<>()),
 					  &Pharm::ScreeningDBProcessor::setHitCallbackFunction)
 		.add_property("progressCallbackFunction", python::make_function(&Pharm::ScreeningDBProcessor::getProgressCallbackFunction,
-																python::return_internal_reference<>()),
+																		python::return_internal_reference<>()),
 					  &Pharm::ScreeningDBProcessor::setProgressCallbackFunction)
 		.add_property("scoringFunction", python::make_function(&Pharm::ScreeningDBProcessor::getScoringFunction,
 															   python::return_internal_reference<>()),
