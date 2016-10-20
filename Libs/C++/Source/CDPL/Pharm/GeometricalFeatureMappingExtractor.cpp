@@ -42,42 +42,65 @@ Pharm::GeometricalFeatureMappingExtractor::GeometricalFeatureMappingExtractor(bo
 	geomMatchFunc(FeatureGeometryMatchFunctor(query_mode))
 {}
 	
-void Pharm::GeometricalFeatureMappingExtractor::setFeatureTypeMatchFunction(const FeatureTypeMatchFunction& func)
+void Pharm::GeometricalFeatureMappingExtractor::setTypeMatchFunction(const TypeMatchFunction& func)
 {
 	typeMatchFunc = func;
 }
 
-const Pharm::GeometricalFeatureMappingExtractor::FeatureTypeMatchFunction& 
-Pharm::GeometricalFeatureMappingExtractor::getFeatureTypeMatchFunction() const
+const Pharm::GeometricalFeatureMappingExtractor::TypeMatchFunction& 
+Pharm::GeometricalFeatureMappingExtractor::getTypeMatchFunction() const
 {
 	return typeMatchFunc;
 }
 
-void Pharm::GeometricalFeatureMappingExtractor::setFeaturePositionMatchFunction(const FeaturePositionMatchFunction& func)
+void Pharm::GeometricalFeatureMappingExtractor::setPositionMatchFunction(const PositionMatchFunction& func)
 {
 	posMatchFunc = func;
 }
 
-const Pharm::GeometricalFeatureMappingExtractor::FeaturePositionMatchFunction& 
-Pharm::GeometricalFeatureMappingExtractor::getFeaturePositionMatchFunction() const
+const Pharm::GeometricalFeatureMappingExtractor::PositionMatchFunction& 
+Pharm::GeometricalFeatureMappingExtractor::getPositionMatchFunction() const
 {
 	return posMatchFunc;
 }
 
-void Pharm::GeometricalFeatureMappingExtractor::setFeatureGeometryMatchFunction(const FeatureGeometryMatchFunction& func)
+void Pharm::GeometricalFeatureMappingExtractor::setGeometryMatchFunction(const GeometryMatchFunction& func)
 {
 	geomMatchFunc = func;
 }
 
-const Pharm::GeometricalFeatureMappingExtractor::FeatureGeometryMatchFunction& 
-Pharm::GeometricalFeatureMappingExtractor::getFeatureGeometryMatchFunction() const
+const Pharm::GeometricalFeatureMappingExtractor::GeometryMatchFunction& 
+Pharm::GeometricalFeatureMappingExtractor::getGeometryMatchFunction() const
 {
 	return geomMatchFunc;
 }
 
-void Pharm::GeometricalFeatureMappingExtractor::getMapping(const Pharmacophore& ref_pharm, const Pharmacophore& pharm, Math::Matrix4D& xform, FeatureMapping& mapping) const
+double Pharm::GeometricalFeatureMappingExtractor::getPositionMatchScore(const Feature& ftr1, const Feature& ftr2) const
+{
+	FeaturePairToScoreMap::const_iterator it = posMatchScores.find(FeaturePair(&ftr1, &ftr2));
+
+	if (it == posMatchScores.end())
+		return 0.0;
+
+	return it->second;
+}
+
+double Pharm::GeometricalFeatureMappingExtractor::getGeometryMatchScore(const Feature& ftr1, const Feature& ftr2) const
+{
+	FeaturePairToScoreMap::const_iterator it = geomMatchScores.find(FeaturePair(&ftr1, &ftr2));
+
+	if (it == geomMatchScores.end())
+		return 0.0;
+
+	return it->second;
+}
+
+void Pharm::GeometricalFeatureMappingExtractor::getMapping(const Pharmacophore& ref_pharm, const Pharmacophore& pharm, const Math::Matrix4D& xform, FeatureMapping& mapping)
 {
 	mapping.clear();
+
+	posMatchScores.clear();
+	geomMatchScores.clear();
 
     Pharmacophore::ConstFeatureIterator mpd_fts_beg = pharm.getFeaturesBegin(); 
     Pharmacophore::ConstFeatureIterator mpd_fts_end = pharm.getFeaturesEnd();
@@ -91,11 +114,29 @@ void Pharm::GeometricalFeatureMappingExtractor::getMapping(const Pharmacophore& 
 			if (typeMatchFunc && !typeMatchFunc(ref_ftr, mpd_ftr))
 				continue;
 
-			if (posMatchFunc && !posMatchFunc(ref_ftr, mpd_ftr, xform))
-				continue;
+			double pos_score = 0.0;
 
-			if (geomMatchFunc && !geomMatchFunc(ref_ftr, mpd_ftr, xform))
-				continue;
+			if (posMatchFunc) {
+				pos_score = posMatchFunc(ref_ftr, mpd_ftr, xform);
+
+				if (pos_score <= 0.0) 
+					continue;
+			}
+
+			double geom_score = 0.0;
+
+			if (geomMatchFunc) {
+				geom_score = geomMatchFunc(ref_ftr, mpd_ftr, xform);
+
+				if (geom_score <= 0.0) 
+					continue;
+			}
+
+			if (pos_score > 0.0)
+				posMatchScores[FeaturePair(&ref_ftr, &mpd_ftr)] = pos_score;				
+
+			if (geom_score > 0.0)
+				geomMatchScores[FeaturePair(&ref_ftr, &mpd_ftr)] = geom_score;		
 
 			mapping.insertEntry(&ref_ftr, &mpd_ftr);
 		}

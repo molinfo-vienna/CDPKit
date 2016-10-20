@@ -1,7 +1,7 @@
 /* -*- mode: c++; c-basic-offset: 4; tab-width: 4; indent-tabs-mode: t -*- */
 
 /* 
- * SQLiteScreeningDBCreator.hpp 
+ * PSDScreeningDBCreator.hpp 
  *
  * This file is part of the Chemical Data Processing Toolkit
  *
@@ -25,11 +25,11 @@
 
 /**
  * \file
- * \brief Definition of the class CDPL::Pharm::SQLiteScreeningDBCreator.
+ * \brief Definition of the class CDPL::Pharm::PSDScreeningDBCreator.
  */
 
-#ifndef CDPL_PHARM_SQLITESCREENINGDBCREATOR_HPP
-#define CDPL_PHARM_SQLITESCREENINGDBCREATOR_HPP
+#ifndef CDPL_PHARM_PSDSCREENINGDBCREATOR_HPP
+#define CDPL_PHARM_PSDSCREENINGDBCREATOR_HPP
 
 #include <memory>
 
@@ -51,28 +51,28 @@ namespace CDPL
 		/**
 		 * \brief A class for the creation of optimized pharmacophore screening databases.
 		 */
-        class CDPL_PHARM_API SQLiteScreeningDBCreator : public ScreeningDBCreator
+        class CDPL_PHARM_API PSDScreeningDBCreator : public ScreeningDBCreator
 		{
 
 		  public:
-			typedef boost::shared_ptr<SQLiteScreeningDBCreator> SharedPointer;
+			typedef boost::shared_ptr<PSDScreeningDBCreator> SharedPointer;
 
-			SQLiteScreeningDBCreator();
+			PSDScreeningDBCreator();
 
 			/**
-			 * \brief Constructs a \c %SQLiteScreeningDBCreator instance that will write data to the 
+			 * \brief Constructs a \c %PSDScreeningDBCreator instance that will write data to the 
 			 *        database-file specified by \a name in the given insert mode.
 			 * \param name The name of the database-file.
 			 * \param mode Specifies whether to (re)create the database or to update/append to existing records.
 			 * \param allow_dup_entries Specifies whether input molecules that are duplicates of already
 			 *                          stored molecules should be discarded. 
 			 */
-			SQLiteScreeningDBCreator(const std::string& name, Mode mode = CREATE, bool allow_dup_entries = true);
+			PSDScreeningDBCreator(const std::string& name, Mode mode = CREATE, bool allow_dup_entries = true);
 
 			/**
 			 * \brief Destructor.
 			 */
-			~SQLiteScreeningDBCreator();
+			~PSDScreeningDBCreator();
 
 			void open(const std::string& name, Mode mode = CREATE, bool allow_dup_entries = true);
 
@@ -99,9 +99,9 @@ namespace CDPL
 
 			typedef std::auto_ptr<Implementation> ImplPointer;
 
-			SQLiteScreeningDBCreator(const SQLiteScreeningDBCreator&);
+			PSDScreeningDBCreator(const PSDScreeningDBCreator&);
 
-			SQLiteScreeningDBCreator& operator=(const SQLiteScreeningDBCreator&);
+			PSDScreeningDBCreator& operator=(const PSDScreeningDBCreator&);
 		
 			ImplPointer impl;
 		};
@@ -112,4 +112,4 @@ namespace CDPL
     }
 }
 
-#endif // CDPL_PHARM_SQLITESCREENINGDBCREATOR_HPP
+#endif // CDPL_PHARM_PSDSCREENINGDBCREATOR_HPP

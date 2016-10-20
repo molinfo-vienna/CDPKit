@@ -1,7 +1,7 @@
 /* -*- mode: c++; c-basic-offset: 4; tab-width: 4; indent-tabs-mode: t -*- */
 
 /* 
- * CDFMoleculeInputHandlerExport.cpp 
+ * PSDScreeningDBCreatorExport.cpp 
  *
  * This file is part of the Chemical Data Processing Toolkit
  *
@@ -26,17 +26,21 @@
 
 #include <boost/python.hpp>
 
-#include "CDPL/Biomol/CDFMoleculeInputHandler.hpp"
+#include "CDPL/Pharm/PSDScreeningDBCreator.hpp"
 
 #include "ClassExports.hpp"
 
 
-void CDPLPythonBiomol::exportCDFMoleculeInputHandler()
+void CDPLPythonPharm::exportPSDScreeningDBCreator()
 {
-	using namespace boost;
-	using namespace CDPL;
+    using namespace boost;
+    using namespace CDPL;
 
-	python::class_<Biomol::CDFMoleculeInputHandler, 
-		python::bases<Base::DataInputHandler<Chem::Molecule> > >("CDFMoleculeInputHandler", python::no_init)
-		.def(python::init<>(python::arg("self")));
+    python::class_<Pharm::PSDScreeningDBCreator, Pharm::PSDScreeningDBCreator::SharedPointer, 
+				   python::bases<Pharm::ScreeningDBCreator>, 
+				   boost::noncopyable>("PSDScreeningDBCreator", python::no_init)
+		.def(python::init<>(python::arg("self")))
+		.def(python::init<const std::string&, Pharm::ScreeningDBCreator::Mode, bool>
+			 ((python::arg("self"), python::arg("name"), python::arg("mode") = Pharm::ScreeningDBCreator::CREATE, 
+			   python::arg("allow_dup_entries") = true)));
 }

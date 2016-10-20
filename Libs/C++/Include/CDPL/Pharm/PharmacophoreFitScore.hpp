@@ -32,7 +32,8 @@
 #define CDPL_PHARM_PHARMACOPHOREFITSCORE_HPP
 
 #include "CDPL/Pharm/APIPrefix.hpp"
-#include "CDPL/Math/Matrix.hpp"
+#include "CDPL/Pharm/FeatureMapping.hpp"
+#include "CDPL/Pharm/GeometricalFeatureMappingExtractor.hpp"
 
 
 namespace CDPL 
@@ -79,9 +80,13 @@ namespace CDPL
 							  const Math::Matrix4D& xform);
 
 		  private:
-			double ftrMatchCntFactor;
-			double ftrPosMatchFactor;
-			double ftrGeomMatchFactor;
+			typedef std::vector<const Feature*> FeatureList;
+
+			FeatureMapping                     geomFtrMapping;
+			GeometricalFeatureMappingExtractor geomFtrMappingExtractor;
+			double                             ftrMatchCntFactor;
+			double                             ftrPosMatchFactor;
+			double                             ftrGeomMatchFactor;
 		};
 
 		/**

@@ -60,33 +60,33 @@ double Pharm::FeatureGeometryMatchFunctor::getAromPlaneAngleTolerance() const
 	return arPlaneAngleTol;
 }
 
-bool Pharm::FeatureGeometryMatchFunctor::strictGeometryMatch() const
+bool Pharm::FeatureGeometryMatchFunctor::strictGeometryMatching() const
 {
 	return strictMode;
 }
 
-bool Pharm::FeatureGeometryMatchFunctor::operator()(const Feature& ftr1, const Feature& ftr2, const Math::Matrix4D& xform) const
+double Pharm::FeatureGeometryMatchFunctor::operator()(const Feature& ftr1, const Feature& ftr2, const Math::Matrix4D& xform) const
 {
 	unsigned int ftr1_geom = getGeometry(ftr1);
 	unsigned int ftr2_geom = getGeometry(ftr2);
 
 	if (strictMode && ftr1_geom != ftr2_geom)
-		return false;
+		return 0.0;
 
 	if (ftr1_geom != FeatureGeometry::VECTOR && ftr1_geom != FeatureGeometry::PLANE)
-		return true;
+		return 1.0;
 
 	if (ftr2_geom != FeatureGeometry::VECTOR && ftr2_geom != FeatureGeometry::PLANE)
-		return true;
+		return 1.0;
 
 	if (ftr1_geom != ftr2_geom)
-		return false;
+		return 0.0;
 
 	if (!hasOrientation(ftr1))
-		return (strictMode ? false : true);
+		return (strictMode ? 0.0 : 1.0);
 
 	if (!hasOrientation(ftr2))
-		return (strictMode ? false : true);
+		return (strictMode ? 0.0 : 1.0);
 
 	double ang_tol = 0.0;
 	unsigned int ftr1_type = getType(ftr1);
@@ -106,7 +106,7 @@ bool Pharm::FeatureGeometryMatchFunctor::operator()(const Feature& ftr1, const F
 			break;
 
 		default:
-			return true;
+			return 1.0;
 	}
 
 	const Math::Vector3D orient2 = getOrientation(ftr2);
@@ -117,11 +117,10 @@ bool Pharm::FeatureGeometryMatchFunctor::operator()(const Feature& ftr1, const F
 
 	double ang = std::acos(angleCos(getOrientation(ftr1), range(trans_or2, 0, 3), 1.0)) / M_PI * 180.0;
 
-	if (ftr1_geom == FeatureGeometry::VECTOR)
-		return (ang <= ang_tol);
+	if (ftr1_geom == FeatureGeometry::PLANE && ang > 90.0) 
+		ang = 180.0 - ang;
 
-	if (ang <= 90.0)
-		return (ang <= ang_tol);
+	double score = 1.0 - (ang / ang_tol);
 
-	return ((180.0 - ang) <= ang_tol);
+	return (score < 0.0 ? 0.0 : score);
 }

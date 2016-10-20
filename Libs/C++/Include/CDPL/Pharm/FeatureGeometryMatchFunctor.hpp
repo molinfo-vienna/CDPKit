@@ -72,16 +72,17 @@ namespace CDPL
 
 			double getAromPlaneAngleTolerance() const;
 
-			bool strictGeometryMatch() const;
+			bool strictGeometryMatching() const;
 
 			/**
 			 * \brief Checks if both \a ftr1 and \a ftr2 have the same  feature geometry within the respective tolerances.
 			 * \param ftr1 The first feature.
 			 * \param ftr2 The second feature.
 			 * \param xform The transformation to apply to geometrical properties of the second feature.
-			 * \return \c true if the geometry of the features is equivalent, and \c false otherwise.
+			 * \return A score between \e 0 (outside allowed ranges) and \e 1 (optimum match) describing the 
+			 *         mutual match of the feature geometries.
 			 */
-			bool operator()(const Feature& ftr1, const Feature& ftr2, const Math::Matrix4D& xform) const;
+			double operator()(const Feature& ftr1, const Feature& ftr2, const Math::Matrix4D& xform) const;
 
 		  private:
 			bool   strictMode;

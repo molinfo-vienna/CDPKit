@@ -40,7 +40,6 @@ namespace CDPL
 
 			const bool STRICT_ERROR_CHECKING             = false;
 			const bool CHECK_LINE_LENGTH                 = false;
-			const bool CDF_WRITE_SINGLE_PRECISION_FLOATS = true;
 		}
 
 		void initControlParameterDefaults() {}

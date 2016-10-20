@@ -31,6 +31,8 @@
 #include <iosfwd>
 #include <vector>
 
+#include <boost/function.hpp>
+
 #include "CDPL/Chem/CDFFormatData.hpp"
 
 #include "CDPL/Internal/CDFDataReaderBase.hpp"
@@ -53,10 +55,14 @@ namespace CDPL
 		class Atom;
 		class Bond;
 
-		class CDFDataReader : protected Internal::CDFDataReaderBase
+		class CDFDataReader : public Internal::CDFDataReaderBase
 		{
 
 		public:
+			typedef boost::function4<bool, unsigned int, CDFDataReader&, Atom&, Internal::ByteBuffer&> AtomPropertyHandler;
+			typedef boost::function4<bool, unsigned int, CDFDataReader&, Bond&, Internal::ByteBuffer&> BondPropertyHandler;
+			typedef boost::function4<bool, unsigned int, CDFDataReader&, Molecule&, Internal::ByteBuffer&> MoleculePropertyHandler;
+
 			CDFDataReader(const Base::ControlParameterContainer& ctrl_params): ctrlParams(ctrl_params) {}
 
 			virtual ~CDFDataReader() {}
@@ -69,8 +75,9 @@ namespace CDPL
 
 			bool hasMoreData(std::istream& is);
 
-		protected:
-			virtual void init();
+			static void registerExternalAtomPropertyHandler(const AtomPropertyHandler& handler);
+			static void registerExternalBondPropertyHandler(const BondPropertyHandler& handler);
+			static void registerExternalMoleculePropertyHandler(const MoleculePropertyHandler& handler);
 
 			const Base::ControlParameterContainer& getCtrlParameters() const;
 
@@ -86,16 +93,18 @@ namespace CDPL
 				std::size_t  refAtomInds[4];
 			};
 
+			void init();
+
 			std::size_t readAtoms(Molecule& mol, Internal::ByteBuffer& bbuf);
 			void readBonds(Molecule& mol, Internal::ByteBuffer& bbuf, std::size_t num_atoms);
 			void readMoleculeProperties(Molecule& mol, Internal::ByteBuffer& bbuf);
 
 			template <typename T>
-			void handleExtendedProperties(CDF::PropertySpec prop_spec, T& obj, Internal::ByteBuffer& data);
+			void readExternalProperties(CDF::PropertySpec prop_spec, T& obj, Internal::ByteBuffer& data);
 
-			virtual bool handleExtendedProperties(Atom& atom, Internal::ByteBuffer& data);
-			virtual bool handleExtendedProperties(Bond& bond, Internal::ByteBuffer& data);
-			virtual bool handleExtendedProperties(Molecule& mol, Internal::ByteBuffer& data);
+			bool readExternalProperties(unsigned int handler_id, Atom& atom, Internal::ByteBuffer& data);
+			bool readExternalProperties(unsigned int handler_id, Bond& bond, Internal::ByteBuffer& data);
+			bool readExternalProperties(unsigned int handler_id, Molecule& mol, Internal::ByteBuffer& data);
 
 			void readStereoDescriptor(CDF::PropertySpec prop_spec, CDFStereoDescr& descr, Internal::ByteBuffer& data) const;
 			void setStereoDescriptors(Molecule& mol) const;
@@ -104,12 +113,18 @@ namespace CDPL
 			void setStereoDescriptor(T& obj, const Molecule& mol, const CDFStereoDescr& descr) const;
 
 			typedef std::vector<CDFStereoDescr> StereoDescrList;
+			typedef std::vector<AtomPropertyHandler> AtomPropertyHandlerList;
+			typedef std::vector<BondPropertyHandler> BondPropertyHandlerList;
+			typedef std::vector<MoleculePropertyHandler> MoleculePropertyHandlerList;
 
 			const Base::ControlParameterContainer& ctrlParams;	
 			Internal::ByteBuffer                   dataBuffer;		
 			std::size_t                            startAtomIdx;
 			StereoDescrList                        atomStereoDescrs;
 			StereoDescrList                        bondStereoDescrs;
+			static AtomPropertyHandlerList         extAtomPropertyHandlers;
+			static BondPropertyHandlerList         extBondPropertyHandlers;
+			static MoleculePropertyHandlerList     extMoleculePropertyHandlers;
 		};
 	}
 }

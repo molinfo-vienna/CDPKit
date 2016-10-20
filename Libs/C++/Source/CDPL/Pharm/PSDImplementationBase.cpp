@@ -1,7 +1,7 @@
 /* -*- mode: c++; c-basic-offset: 4; tab-width: 4; indent-tabs-mode: t -*- */
 
 /* 
- * SQLiteIOImplementationBase.cpp 
+ * PSDImplementationBase.cpp 
  *
  * This file is part of the Chemical Data Processing Toolkit
  *
@@ -28,30 +28,30 @@
 
 #include "CDPL/Base/Exceptions.hpp"
 
-#include "SQLiteIOImplementationBase.hpp"
+#include "PSDImplementationBase.hpp"
 
 
 using namespace CDPL;
 
 
-Pharm::SQLiteIOImplementationBase::~SQLiteIOImplementationBase()
+Pharm::PSDImplementationBase::~PSDImplementationBase()
 {
 	closeDBConnection();
 }
 
-const Pharm::SQLiteIOImplementationBase::SQLite3DBPointer& Pharm::SQLiteIOImplementationBase::getDBConnection() const
+const Pharm::PSDImplementationBase::SQLite3DBPointer& Pharm::PSDImplementationBase::getDBConnection() const
 {
 	return database;
 }
 
-void Pharm::SQLiteIOImplementationBase::openDBConnection(const std::string& name, int mode)
+void Pharm::PSDImplementationBase::openDBConnection(const std::string& name, int mode)
 {
 	sqlite3* new_db = 0;
 	int res = sqlite3_open_v2(name.c_str(), &new_db, mode, NULL);
 	SQLite3DBPointer new_db_ptr(new_db, sqlite3_close);
 
 	if (res != SQLITE_OK)
-		throwSQLiteIOError(("SQLiteIOImplementationBase: could not open database '" + name + "'").c_str());
+		throwSQLiteIOError(("PSDImplementationBase: could not open database '" + name + "'").c_str());
 
 	databaseName.reserve(name.length());
 
@@ -61,18 +61,18 @@ void Pharm::SQLiteIOImplementationBase::openDBConnection(const std::string& name
 	database = new_db_ptr;
 }
 
-void Pharm::SQLiteIOImplementationBase::closeDBConnection()
+void Pharm::PSDImplementationBase::closeDBConnection()
 {
 	database.reset();
 	databaseName.clear();
 }
 
-const std::string& Pharm::SQLiteIOImplementationBase::getDBName() const
+const std::string& Pharm::PSDImplementationBase::getDBName() const
 {
 	return databaseName;
 }
 
-void Pharm::SQLiteIOImplementationBase::execStatements(const std::string& sql_stmts) const
+void Pharm::PSDImplementationBase::execStatements(const std::string& sql_stmts) const
 {
 	char* err_msg = 0;
 	int res = sqlite3_exec(database.get(), sql_stmts.c_str(), NULL, NULL, &err_msg);
@@ -81,13 +81,13 @@ void Pharm::SQLiteIOImplementationBase::execStatements(const std::string& sql_st
 	if (res != SQLITE_OK && res != SQLITE_DONE && res != SQLITE_ROW) {
 		std::string ex_msg;
 
-		composeExMessage(ex_msg, "SQLiteIOImplementationBase: error while SQL execution", err_msg);
+		composeExMessage(ex_msg, "PSDImplementationBase: error while SQL execution", err_msg);
 
 		throw Base::IOError(ex_msg);
 	}
 }
 
-void Pharm::SQLiteIOImplementationBase::setupStatement(SQLite3StmtPointer& stmt_ptr, const std::string& sql_stmt, bool clr_bindings) const
+void Pharm::PSDImplementationBase::setupStatement(SQLite3StmtPointer& stmt_ptr, const std::string& sql_stmt, bool clr_bindings) const
 {	
 	if (!stmt_ptr)
 		stmt_ptr.reset(prepareStatement(sql_stmt), sqlite3_finalize);
@@ -95,36 +95,36 @@ void Pharm::SQLiteIOImplementationBase::setupStatement(SQLite3StmtPointer& stmt_
 		resetStatement(stmt_ptr, clr_bindings);
 }
 
-sqlite3_stmt* Pharm::SQLiteIOImplementationBase::prepareStatement(const std::string& sql_stmt) const
+sqlite3_stmt* Pharm::PSDImplementationBase::prepareStatement(const std::string& sql_stmt) const
 {
 	sqlite3_stmt* stmt = 0;
 	
 	if (sqlite3_prepare(database.get(), sql_stmt.c_str(), -1, &stmt, NULL) != SQLITE_OK)
-		throwSQLiteIOError("SQLiteIOImplementationBase: creation of prepared statement failed");
+		throwSQLiteIOError("PSDImplementationBase: creation of prepared statement failed");
 
 	return stmt;
 }
 
-int Pharm::SQLiteIOImplementationBase::evalStatement(const SQLite3StmtPointer& stmt_ptr) const
+int Pharm::PSDImplementationBase::evalStatement(const SQLite3StmtPointer& stmt_ptr) const
 {
 	int res = sqlite3_step(stmt_ptr.get());
 
 	if (res != SQLITE_DONE && res != SQLITE_ROW && res != SQLITE_OK) {
-		throwSQLiteIOError("SQLiteIOImplementationBase: evaluation of prepared statement failed");
+		throwSQLiteIOError("PSDImplementationBase: evaluation of prepared statement failed");
 	}
 
 	return res;
 }
 
-void Pharm::SQLiteIOImplementationBase::resetStatement(const SQLite3StmtPointer& stmt_ptr, bool clr_bindings) const
+void Pharm::PSDImplementationBase::resetStatement(const SQLite3StmtPointer& stmt_ptr, bool clr_bindings) const
 {
 	sqlite3_reset(stmt_ptr.get());
 
 	if (clr_bindings &&	sqlite3_clear_bindings(stmt_ptr.get()) != SQLITE_OK)
-		throwSQLiteIOError("SQLiteIOImplementationBase: clearing of prepared statement bindings failes");
+		throwSQLiteIOError("PSDImplementationBase: clearing of prepared statement bindings failes");
 }
 
-void Pharm::SQLiteIOImplementationBase::composeExMessage(std::string& ex_msg, const char* msg_prefix, const char* err_msg) const
+void Pharm::PSDImplementationBase::composeExMessage(std::string& ex_msg, const char* msg_prefix, const char* err_msg) const
 {
 	ex_msg.append(msg_prefix);
 
@@ -134,7 +134,7 @@ void Pharm::SQLiteIOImplementationBase::composeExMessage(std::string& ex_msg, co
 	}
 }
 
-void Pharm::SQLiteIOImplementationBase::throwSQLiteIOError(const char* msg_prefix) const
+void Pharm::PSDImplementationBase::throwSQLiteIOError(const char* msg_prefix) const
 {
 	std::string ex_msg;
 

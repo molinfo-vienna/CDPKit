@@ -55,7 +55,6 @@ namespace
 
 	MAKE_CONTROL_PARAM_FUNC_WRAPPERS(bool, StrictErrorChecking)
 	MAKE_CONTROL_PARAM_FUNC_WRAPPERS(bool, CheckLineLength)
-	MAKE_CONTROL_PARAM_FUNC_WRAPPERS(bool, CDFWriteSinglePrecisionFloats)
 }
 
 
@@ -66,5 +65,4 @@ void CDPLPythonBiomol::exportControlParameterFunctions()
 
 	EXPORT_CONTROL_PARAM_FUNCS(StrictErrorChecking, strict)
 	EXPORT_CONTROL_PARAM_FUNCS(CheckLineLength, check)
-	EXPORT_CONTROL_PARAM_FUNCS(CDFWriteSinglePrecisionFloats, single_prec)
 }

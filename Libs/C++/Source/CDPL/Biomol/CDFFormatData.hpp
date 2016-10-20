@@ -46,6 +46,8 @@ namespace CDPL
 			namespace AtomProperty
 			{
 
+				const unsigned int PROPERTY_HANDLER_ID       = 1;
+
 				const unsigned int RESIDUE_ATOM_NAME         = 1;
 				const unsigned int RESIDUE_ALT_ATOM_NAME     = 2;
 				const unsigned int RESIDUE_LEAVING_ATOM_FLAG = 3;
@@ -62,6 +64,8 @@ namespace CDPL
 			namespace MolecularGraphProperty
 			{
 				
+				const unsigned int PROPERTY_HANDLER_ID       = 1;
+
 				const unsigned int RESIDUE_CODE              = 1;
 				const unsigned int RESIDUE_SEQUENCE_NUMBER   = 2;
 				const unsigned int RESIDUE_INSERTION_CODE    = 3;

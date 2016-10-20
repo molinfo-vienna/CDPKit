@@ -42,7 +42,6 @@ namespace CDPL
 		
 			const Base::LookupKey STRICT_ERROR_CHECKING             = Chem::ControlParameter::STRICT_ERROR_CHECKING;
 			const Base::LookupKey CHECK_LINE_LENGTH                 = Chem::ControlParameter::CHECK_LINE_LENGTH;
-			const Base::LookupKey CDF_WRITE_SINGLE_PRECISION_FLOATS = Chem::ControlParameter::CDF_WRITE_SINGLE_PRECISION_FLOATS;
 		}
 
 		void initControlParameters() {}

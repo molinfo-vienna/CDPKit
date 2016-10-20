@@ -35,6 +35,23 @@
 #include "ClassExports.hpp"
 
 
+namespace
+{
+
+	double getPositionMatchScore(CDPL::Pharm::GeometricalFeatureMappingExtractor& xtractor,
+								 CDPL::Pharm::Feature& ftr1, CDPL::Pharm::Feature& ftr2)
+	{
+		return xtractor.getPositionMatchScore(ftr1, ftr2);
+	}
+
+	double getGeometryMatchScore(CDPL::Pharm::GeometricalFeatureMappingExtractor& xtractor,
+								 CDPL::Pharm::Feature& ftr1, CDPL::Pharm::Feature& ftr2)
+	{
+		return xtractor.getGeometryMatchScore(ftr1, ftr2);
+	}
+}
+
+
 void CDPLPythonPharm::exportGeometricalFeatureMappingExtractor()
 {
     using namespace boost;
@@ -48,16 +65,27 @@ void CDPLPythonPharm::exportGeometricalFeatureMappingExtractor()
 			 (python::arg("self"), python::arg("extor")), python::return_self<>())
 		.def("getMapping", &Pharm::GeometricalFeatureMappingExtractor::getMapping, 
 			 (python::arg("self"), python::arg("mpd_pharm"), python::arg("ref_pharm"), python::arg("xform"), python::arg("mapping")))
-		.def("setFeatureTypeMatchFunction", &Pharm::GeometricalFeatureMappingExtractor::setFeatureTypeMatchFunction, 
+		.def("setTypeMatchFunction", &Pharm::GeometricalFeatureMappingExtractor::setTypeMatchFunction, 
 			 (python::arg("self"), python::arg("func")))
-		.def("getFeatureTypeMatchFunction", &Pharm::GeometricalFeatureMappingExtractor::getFeatureTypeMatchFunction, 
+		.def("getTypeMatchFunction", &Pharm::GeometricalFeatureMappingExtractor::getTypeMatchFunction, 
 			 python::arg("self"), python::return_internal_reference<>())
-		.def("setFeaturePositionMatchFunction", &Pharm::GeometricalFeatureMappingExtractor::setFeaturePositionMatchFunction,
+		.def("setPositionMatchFunction", &Pharm::GeometricalFeatureMappingExtractor::setPositionMatchFunction,
 			 (python::arg("self"), python::arg("func")))
-		.def("getFeaturePositionMatchFunction", &Pharm::GeometricalFeatureMappingExtractor::getFeaturePositionMatchFunction, 
+		.def("getPositionMatchFunction", &Pharm::GeometricalFeatureMappingExtractor::getPositionMatchFunction, 
 			 python::arg("self"), python::return_internal_reference<>())
-		.def("setFeatureGeometryMatchFunction", &Pharm::GeometricalFeatureMappingExtractor::setFeatureGeometryMatchFunction,
+		.def("setGeometryMatchFunction", &Pharm::GeometricalFeatureMappingExtractor::setGeometryMatchFunction,
 			 (python::arg("self"), python::arg("func")))
-		.def("getFeatureGeometryMatchFunction", &Pharm::GeometricalFeatureMappingExtractor::getFeatureGeometryMatchFunction, 
-			 python::arg("self"), python::return_internal_reference<>());
+		.def("getGeometryMatchFunction", &Pharm::GeometricalFeatureMappingExtractor::getGeometryMatchFunction, 
+			 python::arg("self"), python::return_internal_reference<>())
+		.def("getPositionMatchScore", &getPositionMatchScore, (python::arg("self"), python::arg("ftr1"), python::arg("ftr2")))
+		.def("getGeometryMatchScore", &getGeometryMatchScore, (python::arg("self"), python::arg("ftr1"), python::arg("ftr2")))
+		.add_property("typeMatchFunction", python::make_function(&Pharm::GeometricalFeatureMappingExtractor::getTypeMatchFunction,
+																 python::return_internal_reference<>()), 
+					  &Pharm::GeometricalFeatureMappingExtractor::setTypeMatchFunction)
+		.add_property("positionMatchFunction", python::make_function(&Pharm::GeometricalFeatureMappingExtractor::getPositionMatchFunction,
+																 python::return_internal_reference<>()), 
+					  &Pharm::GeometricalFeatureMappingExtractor::setPositionMatchFunction)
+		.add_property("geometryMatchFunction", python::make_function(&Pharm::GeometricalFeatureMappingExtractor::getGeometryMatchFunction,
+																 python::return_internal_reference<>()), 
+					  &Pharm::GeometricalFeatureMappingExtractor::setGeometryMatchFunction);
 }

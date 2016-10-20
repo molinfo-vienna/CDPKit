@@ -15,13 +15,9 @@ SET(biomol_MOD_SRCS
  
     PDBMoleculeReaderExport.cpp
     PDBMolecularGraphWriterExport.cpp
-    CDFMoleculeReaderExport.cpp
-    CDFMolecularGraphWriterExport.cpp
 
     PDBMoleculeInputHandlerExport.cpp
     PDBMolecularGraphOutputHandlerExport.cpp
-    CDFMoleculeInputHandlerExport.cpp
-    CDFMolecularGraphOutputHandlerExport.cpp
 
     AtomPropertyExport.cpp
     MolecularGraphPropertyExport.cpp

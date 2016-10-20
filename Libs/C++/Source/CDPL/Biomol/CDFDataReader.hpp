@@ -27,31 +27,39 @@
 #ifndef CDPL_BIOMOL_CDFDATAREADER_HPP
 #define CDPL_BIOMOL_CDFDATAREADER_HPP
 
-#include <string>
-
-#include "CDPL/Chem/CDFDataReader.hpp"
-#include "CDPL/Biomol/CDFFormatData.hpp"
-
 
 namespace CDPL 
 {
 
+	namespace Internal
+	{
+
+		class ByteBuffer;
+	}
+
+	namespace Chem
+	{
+
+		class CDFDataReader;
+		class Atom;
+		class Molecule;
+	}
+	
 	namespace Biomol
 	{
 
-		class CDFDataReader : public Chem::CDFDataReader
+		class CDFDataReader
 		{
 
 		public:
-			CDFDataReader(const Base::DataIOBase& io_base): Chem::CDFDataReader(io_base) {}
+			static void registerExternalPropertyHandlers();
 
 		private:
-			void init();
+			static bool readAtomProperties(unsigned int handler_id, const Chem::CDFDataReader& reader, 
+										   Chem::Atom& atom, Internal::ByteBuffer& data);
 
-			bool handleExtendedProperties(Chem::Atom& atom, Internal::ByteBuffer& data);
-			bool handleExtendedProperties(Chem::Molecule& mol, Internal::ByteBuffer& data);
-
-			std::string stringVal;
+			static bool readMoleculeProperties(unsigned int handler_id, const Chem::CDFDataReader& reader, 
+											   Chem::Molecule& mol, Internal::ByteBuffer& data);
 		};
 	}
 }

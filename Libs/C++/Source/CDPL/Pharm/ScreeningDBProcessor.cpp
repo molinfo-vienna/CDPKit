@@ -63,7 +63,7 @@
 #include "TwoPointPharmacophoreGenerator.hpp"
 #include "TwoPointPharmacophoreSet.hpp"
 
-#include "CDPL/Math/AffineTransform.hpp"
+
 using namespace CDPL;
 
 
@@ -94,11 +94,11 @@ public:
 
 	void checkXVolumeClashes(bool check);
 
-	bool checkXVolumeClashes() const;
+	bool xVolumeClashesChecked() const;
 
 	void seekBestAlignments(bool seek_best);
 
-	bool seekBestAlignments() const;
+	bool bestAlignmentsSeeked() const;
 
 	void setHitCallbackFunction(const HitCallbackFunction& func);
 
@@ -300,9 +300,9 @@ void Pharm::ScreeningDBProcessor::checkXVolumeClashes(bool check)
 	impl->checkXVolumeClashes(check);
 }
 
-bool Pharm::ScreeningDBProcessor::checkXVolumeClashes() const
+bool Pharm::ScreeningDBProcessor::xVolumeClashesChecked() const
 {
-	return impl->checkXVolumeClashes();
+	return impl->xVolumeClashesChecked();
 }
 
 void Pharm::ScreeningDBProcessor::seekBestAlignments(bool seek_best)
@@ -310,9 +310,9 @@ void Pharm::ScreeningDBProcessor::seekBestAlignments(bool seek_best)
 	impl->seekBestAlignments(seek_best);
 }
 
-bool Pharm::ScreeningDBProcessor::seekBestAlignments() const
+bool Pharm::ScreeningDBProcessor::bestAlignmentsSeeked() const
 {
-	return impl->seekBestAlignments();
+	return impl->bestAlignmentsSeeked();
 }
 
 void Pharm::ScreeningDBProcessor::setHitCallbackFunction(const HitCallbackFunction& func)
@@ -396,7 +396,7 @@ void Pharm::ScreeningDBProcessor::Implementation::checkXVolumeClashes(bool check
 	checkXVolumes = check;
 }
 
-bool Pharm::ScreeningDBProcessor::Implementation::checkXVolumeClashes() const
+bool Pharm::ScreeningDBProcessor::Implementation::xVolumeClashesChecked() const
 {
 	return checkXVolumes;
 }
@@ -406,7 +406,7 @@ void Pharm::ScreeningDBProcessor::Implementation::seekBestAlignments(bool seek_b
 	bestAlignments = seek_best;
 }
 
-bool Pharm::ScreeningDBProcessor::Implementation::seekBestAlignments() const
+bool Pharm::ScreeningDBProcessor::Implementation::bestAlignmentsSeeked() const
 {
 	return bestAlignments;
 }

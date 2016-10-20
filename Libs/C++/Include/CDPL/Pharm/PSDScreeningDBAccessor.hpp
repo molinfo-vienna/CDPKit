@@ -1,7 +1,7 @@
 /* -*- mode: c++; c-basic-offset: 4; tab-width: 4; indent-tabs-mode: t -*- */
 
 /* 
- * SQLiteScreeningDBAccessor.hpp 
+ * PSDScreeningDBAccessor.hpp 
  *
  * This file is part of the Chemical Data Processing Toolkit
  *
@@ -25,11 +25,11 @@
 
 /**
  * \file
- * \brief Definition of the class CDPL::Pharm::SQLiteScreeningDBAccessor.
+ * \brief Definition of the class CDPL::Pharm::PSDScreeningDBAccessor.
  */
 
-#ifndef CDPL_PHARM_SQLITESCREENINGDBACCESSOR_HPP
-#define CDPL_PHARM_SQLITESCREENINGDBACCESSOR_HPP
+#ifndef CDPL_PHARM_PSDSCREENINGDBACCESSOR_HPP
+#define CDPL_PHARM_PSDSCREENINGDBACCESSOR_HPP
 
 #include <memory>
 
@@ -51,25 +51,25 @@ namespace CDPL
 	/**
 	 * \brief A class for accessing pharmacophore screening databases in the built-in optimized format.
 	 */
-	class CDPL_PHARM_API SQLiteScreeningDBAccessor : public ScreeningDBAccessor
+	class CDPL_PHARM_API PSDScreeningDBAccessor : public ScreeningDBAccessor
 	{
 
 	  public:
-		typedef boost::shared_ptr<SQLiteScreeningDBAccessor> SharedPointer;
+		typedef boost::shared_ptr<PSDScreeningDBAccessor> SharedPointer;
 
-	    SQLiteScreeningDBAccessor();
+	    PSDScreeningDBAccessor();
 
 	    /**
 	     * \brief Constructs a \c %ScreeningDBAccessor instance that will read data from the 
 	     *        database-file specified by \a name.
 	     * \param name The name of the database-file.
 	     */
-	    SQLiteScreeningDBAccessor(const std::string& name);
+	    PSDScreeningDBAccessor(const std::string& name);
 
 	    /**
 	     * \brief Destructor.
 	     */
-	    ~SQLiteScreeningDBAccessor();
+	    ~PSDScreeningDBAccessor();
 
 		void open(const std::string& name);
 
@@ -98,9 +98,9 @@ namespace CDPL
 
 	    typedef std::auto_ptr<Implementation> ImplPointer;
 
-	    SQLiteScreeningDBAccessor(const SQLiteScreeningDBAccessor&);
+	    PSDScreeningDBAccessor(const PSDScreeningDBAccessor&);
 
-	    SQLiteScreeningDBAccessor& operator=(const SQLiteScreeningDBAccessor&);
+	    PSDScreeningDBAccessor& operator=(const PSDScreeningDBAccessor&);
 		
 	    ImplPointer impl;
 	};
@@ -111,4 +111,4 @@ namespace CDPL
     }
 }
 
-#endif // CDPL_PHARM_SQLITESCREENINGDBACCESSOR_HPP
+#endif // CDPL_PHARM_PSDSCREENINGDBACCESSOR_HPP

@@ -28,8 +28,10 @@
 
 #include <ostream>
 #include <cassert>
+#include <algorithm>
 
 #include <boost/numeric/conversion/cast.hpp>
+#include <boost/bind.hpp>
 
 #include "CDPL/Chem/MolecularGraph.hpp"
 #include "CDPL/Chem/Atom.hpp"
@@ -46,6 +48,11 @@
 
 
 using namespace CDPL;
+
+
+Chem::CDFDataWriter::AtomPropertyHandlerList      Chem::CDFDataWriter::extAtomPropertyHandlers;
+Chem::CDFDataWriter::BondPropertyHandlerList      Chem::CDFDataWriter::extBondPropertyHandlers;
+Chem::CDFDataWriter::MolGraphPropertyHandlerList  Chem::CDFDataWriter::extMolGraphPropertyHandlers;
 
 
 bool Chem::CDFDataWriter::writeMolGraph(std::ostream& os, const MolecularGraph& molgraph)
@@ -68,6 +75,21 @@ void Chem::CDFDataWriter::writeMolGraph(const MolecularGraph& molgraph, Internal
 	bbuf.resize(bbuf.getIOPointer());
 
 	outputMolGraphHeader(molgraph, bbuf);
+}
+
+void Chem::CDFDataWriter::registerExternalAtomPropertyHandler(const AtomPropertyHandler& handler)
+{
+	extAtomPropertyHandlers.push_back(handler);
+}
+
+void Chem::CDFDataWriter::registerExternalBondPropertyHandler(const BondPropertyHandler& handler)
+{
+	extBondPropertyHandlers.push_back(handler);
+}
+
+void Chem::CDFDataWriter::registerExternalMolGraphPropertyHandler(const MolGraphPropertyHandler& handler)
+{
+	extMolGraphPropertyHandlers.push_back(handler);
 }
 
 void Chem::CDFDataWriter::init()
@@ -162,7 +184,7 @@ void Chem::CDFDataWriter::outputAtoms(const MolecularGraph& molgraph, Internal::
 
 		// CDF::AtomProperty::MATCH_CONSTRAINTS // TODO
 
-		outputExtendedProperties(atom, bbuf);
+		outputExternalProperties(atom, bbuf);
 
 		putPropertyListMarker(CDF::PROP_LIST_END, bbuf);
 	}
@@ -219,7 +241,7 @@ void Chem::CDFDataWriter::outputBonds(const MolecularGraph& molgraph, Internal::
 
 		// CDF::BondProperty::MATCH_CONSTRAINTS // TODO
 
-		outputExtendedProperties(bond, bbuf);
+		outputExternalProperties(bond, bbuf);
 
 		putPropertyListMarker(CDF::PROP_LIST_END, bbuf);
 	}
@@ -238,17 +260,17 @@ void Chem::CDFDataWriter::outputMolGraphProperties(const MolecularGraph& molgrap
 
 	// CDF::MolecularGraphProperty::MATCH_CONSTRAINTS // TODO
 
-	outputExtendedProperties(molgraph, bbuf);
+	outputExternalProperties(molgraph, bbuf);
 
 	putPropertyListMarker(CDF::PROP_LIST_END, bbuf);
 }
 
-template <typename T>
-void Chem::CDFDataWriter::outputExtendedProperties(const T& obj, Internal::ByteBuffer& bbuf)
+template <typename H, typename T>
+void Chem::CDFDataWriter::outputExternalProperties(const H& handler, const T& obj, Internal::ByteBuffer& bbuf)
 {
 	extDataBuffer.setIOPointer(0);
 
-	outputExtendedProperties(obj, extDataBuffer);
+	unsigned int handler_id = handler(*this, obj, extDataBuffer);
 
 	if (extDataBuffer.getIOPointer() == 0)
 		return;
@@ -260,18 +282,31 @@ void Chem::CDFDataWriter::outputExtendedProperties(const T& obj, Internal::ByteB
 	extDataBuffer.resize(ext_data_len);
 
 	putIntProperty(CDF::EXTENDED_PROP_LIST, boost::numeric_cast<CDF::SizeType>(ext_data_len), bbuf);
+	putPropertyListMarker(handler_id, bbuf);
 
 	bbuf.putBytes(extDataBuffer);
 }
 
-void Chem::CDFDataWriter::outputExtendedProperties(const Atom& atom, Internal::ByteBuffer& bbuf) 
-{}
+void Chem::CDFDataWriter::outputExternalProperties(const Atom& atom, Internal::ByteBuffer& bbuf) 
+{
+	std::for_each(extAtomPropertyHandlers.begin(), extAtomPropertyHandlers.end(),
+				  boost::bind(&CDFDataWriter::outputExternalProperties<AtomPropertyHandler, Atom>, 
+							  this, _1, boost::ref(atom), boost::ref(bbuf)));
+}
 
-void Chem::CDFDataWriter::outputExtendedProperties(const Bond& bond, Internal::ByteBuffer& bbuf) 
-{}
+void Chem::CDFDataWriter::outputExternalProperties(const Bond& bond, Internal::ByteBuffer& bbuf) 
+{
+	std::for_each(extBondPropertyHandlers.begin(), extBondPropertyHandlers.end(),
+				  boost::bind(&CDFDataWriter::outputExternalProperties<BondPropertyHandler, Bond>, 
+							  this, _1, boost::ref(bond), boost::ref(bbuf)));
+}
 
-void Chem::CDFDataWriter::outputExtendedProperties(const MolecularGraph& molgraph, Internal::ByteBuffer& bbuf) 
-{}
+void Chem::CDFDataWriter::outputExternalProperties(const MolecularGraph& molgraph, Internal::ByteBuffer& bbuf) 
+{
+	std::for_each(extMolGraphPropertyHandlers.begin(), extMolGraphPropertyHandlers.end(),
+				  boost::bind(&CDFDataWriter::outputExternalProperties<MolGraphPropertyHandler, MolecularGraph>, 
+							  this, _1, boost::ref(molgraph), boost::ref(bbuf)));
+}
 
 void Chem::CDFDataWriter::putStereoDescriptor(const MolecularGraph& molgraph, unsigned int prop_id, 
 											  const StereoDescriptor& descr, Internal::ByteBuffer& bbuf) const

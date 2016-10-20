@@ -88,8 +88,8 @@ SET(pharm_MOD_SRCS
 IF(SQLITE3_FOUND)
   SET(pharm_MOD_SRCS
       ${pharm_MOD_SRCS}
-      SQLiteScreeningDBCreatorExport.cpp
-      SQLiteScreeningDBAccessorExport.cpp
+      PSDScreeningDBCreatorExport.cpp
+      PSDScreeningDBAccessorExport.cpp
      )	
 ENDIF(SQLITE3_FOUND)
 

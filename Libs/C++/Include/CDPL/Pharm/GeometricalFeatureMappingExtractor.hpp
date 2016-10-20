@@ -31,7 +31,10 @@
 #ifndef CDPL_PHARM_GEOMETRICALFEATUREMAPPINGEXTRACTOR_HPP
 #define CDPL_PHARM_GEOMETRICALFEATUREMAPPINGEXTRACTOR_HPP
 
+#include <utility>
+
 #include <boost/function.hpp>
+#include <boost/unordered_map.hpp>
 
 #include "CDPL/Pharm/APIPrefix.hpp"
 #include "CDPL/Pharm/FeatureMapping.hpp"
@@ -61,17 +64,17 @@ namespace CDPL
 			/**
 			 * \brief A generic wrapper class used to store a user-defined feature type match function.
 			 */
-			typedef boost::function2<bool, const Feature&, const Feature&> FeatureTypeMatchFunction;
+			typedef boost::function2<bool, const Feature&, const Feature&> TypeMatchFunction;
 
 			/**
 			 * \brief A generic wrapper class used to store a user-defined feature position match function.
 			 */
-			typedef boost::function3<bool, const Feature&, const Feature&, Math::Matrix4D&> FeaturePositionMatchFunction;
+			typedef boost::function3<double, const Feature&, const Feature&, const Math::Matrix4D&> PositionMatchFunction;
 
 			/**
 			 * \brief A generic wrapper class used to store a user-defined feature geometry match function.
 			 */
-			typedef boost::function3<bool, const Feature&, const Feature&, Math::Matrix4D&> FeatureGeometryMatchFunction;
+			typedef boost::function3<double, const Feature&, const Feature&, const Math::Matrix4D&> GeometryMatchFunction;
 
 			/**
 			 * \brief Constructs a \c %GeometricalFeatureMappingExtractor instance.
@@ -84,44 +87,53 @@ namespace CDPL
 			 * \brief Specifies a function for testing the type compatibility of features.
 			 * \param func The type compatibility test function.
 			 */
-			void setFeatureTypeMatchFunction(const FeatureTypeMatchFunction& func);
+			void setTypeMatchFunction(const TypeMatchFunction& func);
 
 			/**
 			 * \brief Returns the function that was registered for testing the type compatibility of the features.
 			 * \return The registered type compatibility test function.
 			 */
-			const FeatureTypeMatchFunction& getFeatureTypeMatchFunction() const;
+			const TypeMatchFunction& getTypeMatchFunction() const;
 
 			/**
-			 * \brief Specifies a function for checking the acceptance of mapped feature position deviations.
-			 * \param func The position deviation acceptance test function.
+			 * \brief Specifies a function for checking the proximity of mapped feature positions.
+			 * \param func The position proximity test function.
 			 */
-			void setFeaturePositionMatchFunction(const FeaturePositionMatchFunction& func);
+			void setPositionMatchFunction(const PositionMatchFunction& func);
 
 			/**
-			 * \brief Returns the function that was registered for checking the acceptance of mapped feature position deviations.
-			 * \return The registered position deviation acceptance test function.
+			 * \brief Returns the function that was registered for checking the proximity of mapped feature positions.
+			 * \return The registered position proximity test function.
 			 */
-			const FeaturePositionMatchFunction& getFeaturePositionMatchFunction() const;
+			const PositionMatchFunction& getPositionMatchFunction() const;
 
 			/**
-			 * \brief Specifies a function for checking allowed geometrical deviation constraints on the mapped features.
-			 * \param func The geometrical deviation constraint test function.
+			 * \brief Specifies a function for checking the match of mapped feature geometries.
+			 * \param func The feature geometry match test function.
 			 */
-			void setFeatureGeometryMatchFunction(const FeatureGeometryMatchFunction& func);
+			void setGeometryMatchFunction(const GeometryMatchFunction& func);
 
 			/**
-			 * \brief Returns the function that was registered for checking allowed geometrical deviation constraints on the mapped features.
-			 * \return The registered geometrical deviation constraint test function.
+			 * \brief Returns the function that was registered for checking the match of mapped feature geometries.
+			 * \return The registered geometry match test function.
 			 */
-			const FeatureGeometryMatchFunction& getFeatureGeometryMatchFunction() const;
+			const GeometryMatchFunction& getGeometryMatchFunction() const;
 
-			void getMapping(const Pharmacophore& ref_pharm, const Pharmacophore& pharm, Math::Matrix4D& xform, FeatureMapping& mapping) const;
+			double getPositionMatchScore(const Feature& ftr1, const Feature& ftr2) const;
+
+			double getGeometryMatchScore(const Feature& ftr1, const Feature& ftr2) const;
+
+			void getMapping(const Pharmacophore& ref_pharm, const Pharmacophore& pharm, const Math::Matrix4D& xform, FeatureMapping& mapping);
 
 		  private:
-			FeatureTypeMatchFunction     typeMatchFunc;
-			FeaturePositionMatchFunction posMatchFunc;
-			FeatureGeometryMatchFunction geomMatchFunc;
+            typedef std::pair<const Feature*, const Feature*> FeaturePair;
+            typedef boost::unordered_map<FeaturePair, double> FeaturePairToScoreMap;
+
+			TypeMatchFunction     typeMatchFunc;
+			PositionMatchFunction posMatchFunc;
+			GeometryMatchFunction geomMatchFunc;
+			FeaturePairToScoreMap posMatchScores;
+			FeaturePairToScoreMap geomMatchScores;
 		};
 
 		/**

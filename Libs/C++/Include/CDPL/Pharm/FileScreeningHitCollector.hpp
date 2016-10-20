@@ -33,16 +33,12 @@
 
 #include "CDPL/Pharm/APIPrefix.hpp"
 #include "CDPL/Pharm/ScreeningDBProcessor.hpp"
+#include "CDPL/Chem/BasicMolecule.hpp"
+#include "CDPL/Math/VectorArray.hpp"
 
 
 namespace CDPL 
 {
-
-	namespace Chem
-	{
-
-		class MolecularGraph;
-	}
 
 	namespace Base
 	{
@@ -69,12 +65,41 @@ namespace CDPL
 
 			FileScreeningHitCollector(MolecularGraphWriter& writer);
 
+			void setDataWriter(MolecularGraphWriter& writer);
+
 			MolecularGraphWriter& getDataWriter() const;
+
+			void alignHitMolecule(bool align);
+
+			bool isHitMoleculeAligned() const;
+
+			void writeScoreProperty(bool write);
+
+			bool isScorePropertyWritten() const;
+
+			void writeDBNameProperty(bool write);
+
+			bool isDBNamePropertyWritten() const;
+
+			void writeDBMoleculeIndexProperty(bool write);
+
+			bool isDBMoleculeIndexPropertyWritten() const;
+	
+			void writeMoleculeConfIndexProperty(bool write);
+
+			bool isMoleculeConfIndexPropertyWritten() const;
 
 			bool operator()(const ScreeningDBProcessor::SearchHit& hit, double score);
 
 		  private:
-			MolecularGraphWriter& dataWriter;
+			MolecularGraphWriter* dataWriter;
+			bool                  alignMolecule;
+			bool                  outputScore;
+			bool                  outputDBName;
+			bool                  outputMolIndex;
+			bool                  outputConfIndex;
+			Math::Vector3DArray   alignedCoords;
+			Chem::BasicMolecule   molecule;
 		};
 
 		/**

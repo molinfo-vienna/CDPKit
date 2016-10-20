@@ -46,6 +46,5 @@ void CDPLPythonBiomol::exportControlParameters()
 
 	python::class_<ControlParameter, boost::noncopyable>("ControlParameter", python::no_init)
 		.def_readonly("STRICT_ERROR_CHECKING", &Biomol::ControlParameter::STRICT_ERROR_CHECKING)
-		.def_readonly("CHECK_LINE_LENGTH", &Biomol::ControlParameter::CHECK_LINE_LENGTH)
-		.def_readonly("CDF_WRITE_SINGLE_PRECISION_FLOATS", &Biomol::ControlParameter::CDF_WRITE_SINGLE_PRECISION_FLOATS);
+		.def_readonly("CHECK_LINE_LENGTH", &Biomol::ControlParameter::CHECK_LINE_LENGTH);
 }

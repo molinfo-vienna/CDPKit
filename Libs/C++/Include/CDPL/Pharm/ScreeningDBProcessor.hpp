@@ -144,11 +144,11 @@ namespace CDPL
 
 			void checkXVolumeClashes(bool check);
 
-			bool checkXVolumeClashes() const;
+			bool xVolumeClashesChecked() const;
 
 			void seekBestAlignments(bool seek_best);
 
-			bool seekBestAlignments() const;
+			bool bestAlignmentsSeeked() const;
 
 			void setHitCallbackFunction(const HitCallbackFunction& func);
 

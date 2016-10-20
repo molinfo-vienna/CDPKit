@@ -56,7 +56,7 @@ namespace CDPL
 			const std::size_t              NUM_BOND_ATOM_INDEX_LENGTH_BITS = 4; 
 			const BondAtomIndexLengthTuple BOND_ATOM_INDEX_LENGTH_MASK     = 0xf; 
 
-			const unsigned int     EXTENDED_PROP_LIST       = 31;
+			const unsigned int  EXTENDED_PROP_LIST = 31;
 
 			namespace AtomProperty
 			{

@@ -26,6 +26,10 @@
 
 #include "StaticInit.hpp"
 
+#include <algorithm>
+
+#include <boost/bind.hpp>
+
 #include "CDPL/Chem/Molecule.hpp"
 #include "CDPL/Chem/Atom.hpp"
 #include "CDPL/Chem/Bond.hpp"
@@ -43,6 +47,11 @@
 
 
 using namespace CDPL;
+
+
+Chem::CDFDataReader::AtomPropertyHandlerList      Chem::CDFDataReader::extAtomPropertyHandlers;
+Chem::CDFDataReader::BondPropertyHandlerList      Chem::CDFDataReader::extBondPropertyHandlers;
+Chem::CDFDataReader::MoleculePropertyHandlerList  Chem::CDFDataReader::extMoleculePropertyHandlers;
 
 
 bool Chem::CDFDataReader::hasMoreData(std::istream& is)
@@ -119,6 +128,21 @@ bool Chem::CDFDataReader::readMolecule(Molecule& mol, Internal::ByteBuffer& bbuf
 	return true;
 }
 
+void Chem::CDFDataReader::registerExternalAtomPropertyHandler(const AtomPropertyHandler& handler)
+{
+	extAtomPropertyHandlers.push_back(handler);
+}
+
+void Chem::CDFDataReader::registerExternalBondPropertyHandler(const BondPropertyHandler& handler)
+{
+	extBondPropertyHandlers.push_back(handler);
+}
+
+void Chem::CDFDataReader::registerExternalMoleculePropertyHandler(const MoleculePropertyHandler& handler)
+{
+	extMoleculePropertyHandlers.push_back(handler);
+}
+
 void Chem::CDFDataReader::init()
 {
 	strictErrorChecking(getStrictErrorCheckingParameter(ctrlParams)); 
@@ -155,7 +179,7 @@ std::size_t Chem::CDFDataReader::readAtoms(Molecule& mol, Internal::ByteBuffer& 
 			switch (prop_id) {
 
 				case CDF::EXTENDED_PROP_LIST:
-					handleExtendedProperties(prop_spec, atom, bbuf);
+					readExternalProperties(prop_spec, atom, bbuf);
 					continue;
 
 				case CDF::AtomProperty::TYPE:
@@ -311,7 +335,7 @@ void Chem::CDFDataReader::readBonds(Molecule& mol, Internal::ByteBuffer& bbuf, s
 			switch (prop_id) {
 
 				case CDF::EXTENDED_PROP_LIST:
-					handleExtendedProperties(prop_spec, bond, bbuf);
+					readExternalProperties(prop_spec, bond, bbuf);
 					continue;
 
 				case CDF::BondProperty::ORDER:
@@ -382,7 +406,7 @@ void Chem::CDFDataReader::readMoleculeProperties(Molecule& mol, Internal::ByteBu
 		switch (prop_id) {
 
 			case CDF::EXTENDED_PROP_LIST:
-				handleExtendedProperties(prop_spec, mol, bbuf);
+				readExternalProperties(prop_spec, mol, bbuf);
 				continue;
 
 			case CDF::MolecularGraphProperty::NAME:
@@ -409,29 +433,37 @@ void Chem::CDFDataReader::readMoleculeProperties(Molecule& mol, Internal::ByteBu
 }
 
 template <typename T>
-void Chem::CDFDataReader::handleExtendedProperties(CDF::PropertySpec prop_spec, T& obj, Internal::ByteBuffer& bbuf)
+void Chem::CDFDataReader::readExternalProperties(CDF::PropertySpec prop_spec, T& obj, Internal::ByteBuffer& bbuf)
 {
 	CDF::SizeType size_val;
 
 	getIntProperty(prop_spec, size_val, bbuf);
+	
+	unsigned int handler_id = getPropertySpec(prop_spec, bbuf);
 
-	if (!handleExtendedProperties(obj, bbuf))
+	if (!readExternalProperties(handler_id, obj, bbuf))
 		bbuf.setIOPointer(bbuf.getIOPointer() + size_val);
 }
 
-bool Chem::CDFDataReader::handleExtendedProperties(Atom& atom, Internal::ByteBuffer& bbuf)
+bool Chem::CDFDataReader::readExternalProperties(unsigned int handler_id, Atom& atom, Internal::ByteBuffer& bbuf)
 {
-	return false;
+	return (std::find_if(extAtomPropertyHandlers.begin(), extAtomPropertyHandlers.end(),
+						 boost::bind(&AtomPropertyHandler::operator(), _1, handler_id, boost::ref(*this), boost::ref(atom), boost::ref(bbuf)))
+			!= extAtomPropertyHandlers.end());
 }
 
-bool Chem::CDFDataReader::handleExtendedProperties(Bond& bond, Internal::ByteBuffer& bbuf)
+bool Chem::CDFDataReader::readExternalProperties(unsigned int handler_id, Bond& bond, Internal::ByteBuffer& bbuf)
 {
-	return false;
+	return (std::find_if(extBondPropertyHandlers.begin(), extBondPropertyHandlers.end(),
+						 boost::bind(&BondPropertyHandler::operator(), _1, handler_id, boost::ref(*this), boost::ref(bond), boost::ref(bbuf)))
+			!= extBondPropertyHandlers.end());
 }
 
-bool Chem::CDFDataReader::handleExtendedProperties(Molecule& mol, Internal::ByteBuffer& bbuf)
+bool Chem::CDFDataReader::readExternalProperties(unsigned int handler_id, Molecule& mol, Internal::ByteBuffer& bbuf)
 {
-	return false;
+	return (std::find_if(extMoleculePropertyHandlers.begin(), extMoleculePropertyHandlers.end(),
+						 boost::bind(&MoleculePropertyHandler::operator(), _1, handler_id, boost::ref(*this), boost::ref(mol), boost::ref(bbuf)))
+			!= extMoleculePropertyHandlers.end());
 }
 
 void Chem::CDFDataReader::setStereoDescriptors(Molecule& mol) const

@@ -27,30 +27,39 @@
 #ifndef CDPL_BIOMOL_CDFDATAWRITER_HPP
 #define CDPL_BIOMOL_CDFDATAWRITER_HPP
 
-#include "CDPL/Chem/CDFDataWriter.hpp"
-
-#include "CDPL/Internal/ByteBuffer.hpp"
-
 
 namespace CDPL 
 {
 
+	namespace Internal
+	{
+
+		class ByteBuffer;
+	}
+
+	namespace Chem
+	{
+
+		class CDFDataWriter;
+		class Atom;
+		class MolecularGraph;
+	}
+	
 	namespace Biomol
 	{
 
-		class CDFDataWriter : public Chem::CDFDataWriter
+		class CDFDataWriter
 		{
 
 		public:
-			CDFDataWriter(const Base::DataIOBase& io_base): Chem::CDFDataWriter(io_base) {}
+			static void registerExternalPropertyHandlers();
 
 		private:
-			void init();
+			static unsigned int outputAtomProperties(const Chem::CDFDataWriter& writer, const Chem::Atom& atom, 
+													 Internal::ByteBuffer& data);
 
-			void outputExtendedProperties(const Chem::Atom& atom, Internal::ByteBuffer& data);
-			void outputExtendedProperties(const Chem::MolecularGraph& molgraph, Internal::ByteBuffer& data);
-
-			Internal::ByteBuffer dataBuffer;
+			static unsigned int outputMolGraphProperties(const Chem::CDFDataWriter& writer, const Chem::MolecularGraph& molgraph, 
+														 Internal::ByteBuffer& data);
 		};
 	}
 }

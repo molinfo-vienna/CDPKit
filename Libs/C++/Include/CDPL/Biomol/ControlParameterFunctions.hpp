@@ -68,15 +68,6 @@ namespace CDPL
 
 		CDPL_BIOMOL_API void clearCheckLineLengthParameter(Base::ControlParameterContainer& cntnr);
 
-
-		CDPL_BIOMOL_API bool getCDFWriteSinglePrecisionFloatsParameter(const Base::ControlParameterContainer& cntnr);
-
-		CDPL_BIOMOL_API void setCDFWriteSinglePrecisionFloatsParameter(Base::ControlParameterContainer& cntnr, bool single_prec);
-
-		CDPL_BIOMOL_API bool hasCDFWriteSinglePrecisionFloatsParameter(const Base::ControlParameterContainer& cntnr);
-	
-		CDPL_BIOMOL_API void clearCDFWriteSinglePrecisionFloatsParameter(Base::ControlParameterContainer& cntnr);
-
 		/**
 		 * @}
 		 */

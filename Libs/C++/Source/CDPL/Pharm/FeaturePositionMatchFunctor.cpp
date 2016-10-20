@@ -26,6 +26,8 @@
 
 #include "StaticInit.hpp"
 
+#include <algorithm>
+
 #include "CDPL/Pharm/FeaturePositionMatchFunctor.hpp"
 #include "CDPL/Pharm/Feature.hpp"
 #include "CDPL/Pharm/FeatureFunctions.hpp"
@@ -42,7 +44,7 @@ bool Pharm::FeaturePositionMatchFunctor::queryMode() const
 	return qryMode;
 }
 
-bool Pharm::FeaturePositionMatchFunctor::operator()(const Feature& ftr1, const Feature& ftr2, const Math::Matrix4D& xform) const
+double Pharm::FeaturePositionMatchFunctor::operator()(const Feature& ftr1, const Feature& ftr2, const Math::Matrix4D& xform) const
 {
 	const Math::Vector3D& pos1 = get3DCoordinates(ftr1);
 	const Math::Vector3D& pos2 = get3DCoordinates(ftr2);
@@ -53,12 +55,8 @@ bool Pharm::FeaturePositionMatchFunctor::operator()(const Feature& ftr1, const F
 	trans_pos2.minusAssign(pos1);
  
 	double dist = length(trans_pos2);
+	double tol = (qryMode ? getTolerance(ftr1) : std::max(getTolerance(ftr1), getTolerance(ftr2)));
+	double score = 1.0 - (dist / tol);
 
-	if (dist <= getTolerance(ftr1))
-		return true;
-
-	if (!qryMode && dist <= getTolerance(ftr2))
-		return true;
-
-	return false;
+	return (dist < 0.0 ? 0.0 : score);
 }

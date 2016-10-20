@@ -82,9 +82,9 @@ SET(cdpl-pharm_LIB_SRCS
 IF(SQLITE3_FOUND)
   SET(cdpl-pharm_LIB_SRCS
       ${cdpl-pharm_LIB_SRCS}
-      SQLiteIOImplementationBase.cpp
-      SQLiteScreeningDBCreator.cpp
-      SQLiteScreeningDBAccessor.cpp
+      PSDImplementationBase.cpp
+      PSDScreeningDBCreator.cpp
+      PSDScreeningDBAccessor.cpp
      )	
 
   LINK_LIBRARIES(${SQLITE3_LIBRARY})

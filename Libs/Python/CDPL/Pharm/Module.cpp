@@ -65,8 +65,8 @@ BOOST_PYTHON_MODULE(_pharm)
 
 #ifdef HAVE_SQLITE3
 
-	exportSQLiteScreeningDBCreator();
-	exportSQLiteScreeningDBAccessor();
+	exportPSDScreeningDBCreator();
+	exportPSDScreeningDBAccessor();
 
 #endif // HAVE_SQLITE3
 

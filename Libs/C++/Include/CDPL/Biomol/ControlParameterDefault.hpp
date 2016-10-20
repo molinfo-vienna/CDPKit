@@ -63,8 +63,6 @@ namespace CDPL
 			 * \brief Default setting (= \c false) for the control-parameter Biomol::ControlParameter::CHECK_LINE_LENGTH.
 			 */
 			extern CDPL_BIOMOL_API const bool CHECK_LINE_LENGTH;
-
-			extern CDPL_BIOMOL_API const bool CDF_WRITE_SINGLE_PRECISION_FLOATS;
 		}
 
 		/**

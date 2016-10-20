@@ -1,7 +1,7 @@
 /* -*- mode: c++; c-basic-offset: 4; tab-width: 4; indent-tabs-mode: t -*- */
 
 /* 
- * CDFMoleculeReaderExport.cpp 
+ * PSDScreeningDBAccessorExport.cpp 
  *
  * This file is part of the Chemical Data Processing Toolkit
  *
@@ -26,18 +26,19 @@
 
 #include <boost/python.hpp>
 
-#include "CDPL/Biomol/CDFMoleculeReader.hpp"
+#include "CDPL/Pharm/PSDScreeningDBAccessor.hpp"
 
 #include "ClassExports.hpp"
 
 
-void CDPLPythonBiomol::exportCDFMoleculeReader()
+void CDPLPythonPharm::exportPSDScreeningDBAccessor()
 {
-	using namespace boost;
-	using namespace CDPL;
+    using namespace boost;
+    using namespace CDPL;
 
-	python::class_<Biomol::CDFMoleculeReader, python::bases<Base::DataReader<Chem::Molecule> >, 
-		boost::noncopyable>("CDFMoleculeReader", python::no_init)
-		.def(python::init<std::istream&>((python::arg("self"), python::arg("is")))
-			 [python::with_custodian_and_ward<1, 2>()]);
+    python::class_<Pharm::PSDScreeningDBAccessor, Pharm::PSDScreeningDBAccessor::SharedPointer,
+		   python::bases<Pharm::ScreeningDBAccessor>,
+		   boost::noncopyable>("PSDScreeningDBAccessor", python::no_init)
+	.def(python::init<>(python::arg("self")))
+	.def(python::init<const std::string&>((python::arg("self"), python::arg("name"))));
 }

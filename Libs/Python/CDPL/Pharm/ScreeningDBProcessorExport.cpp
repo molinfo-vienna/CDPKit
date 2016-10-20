@@ -96,9 +96,6 @@ void CDPLPythonPharm::exportScreeningDBProcessor()
 		.add_property("hitMoleculeIndex", &Pharm::ScreeningDBProcessor::SearchHit::getHitMoleculeIndex)
 		.add_property("hitConformationIndex", &Pharm::ScreeningDBProcessor::SearchHit::getHitConformationIndex);
 
-	typedef void (Pharm::ScreeningDBProcessor::*BoolSetterFunc)(bool);
-	typedef bool (Pharm::ScreeningDBProcessor::*BoolGetterFunc)() const;
-
 	cl
 		.def(python::init<Pharm::ScreeningDBAccessor&>((python::arg("self"), python::arg("db_acc")))
 			 [python::with_custodian_and_ward<1, 2>()])
@@ -113,13 +110,13 @@ void CDPLPythonPharm::exportScreeningDBProcessor()
 		.def("setMaxNumOmittedFeatures", &Pharm::ScreeningDBProcessor::setMaxNumOmittedFeatures, 
 			 (python::arg("self"), python::arg("max_num")))
 		.def("getMaxNumOmittedFeatures", &Pharm::ScreeningDBProcessor::getMaxNumOmittedFeatures, python::arg("self"))
-		.def("checkXVolumeClashes", BoolSetterFunc(&Pharm::ScreeningDBProcessor::checkXVolumeClashes), 
+		.def("checkXVolumeClashes", &Pharm::ScreeningDBProcessor::checkXVolumeClashes, 
 			 (python::arg("self"), python::arg("check")))
-		.def("checkXVolumeClashes", BoolGetterFunc(&Pharm::ScreeningDBProcessor::checkXVolumeClashes),
+		.def("xVolumeClashesChecked", &Pharm::ScreeningDBProcessor::xVolumeClashesChecked,
 			 python::arg("self"))
-		.def("seekBestAlignments", BoolSetterFunc(&Pharm::ScreeningDBProcessor::seekBestAlignments), 
+		.def("seekBestAlignments", &Pharm::ScreeningDBProcessor::seekBestAlignments, 
 			 (python::arg("self"), python::arg("seek_best")))
-		.def("seekBestAlignments", BoolGetterFunc(&Pharm::ScreeningDBProcessor::seekBestAlignments), 
+		.def("bestAlignmentsSeeked", &Pharm::ScreeningDBProcessor::bestAlignmentsSeeked, 
 			 python::arg("self"))
 		.def("setHitCallbackFunction", &Pharm::ScreeningDBProcessor::setHitCallbackFunction, 
 			 (python::arg("self"), python::arg("func")))
@@ -137,7 +134,8 @@ void CDPLPythonPharm::exportScreeningDBProcessor()
 			 (python::arg("self"), python::arg("pharm"), python::arg("mol_start_idx") = 0, python::arg("mol_end_idx") = 0))
 		.add_property("dbAcccessor", python::make_function(&Pharm::ScreeningDBProcessor::getDBAccessor,
 														   python::return_internal_reference<>()),
-					  &Pharm::ScreeningDBProcessor::setDBAccessor)
+					  python::make_function(&Pharm::ScreeningDBProcessor::setDBAccessor, 
+											python::with_custodian_and_ward<1, 2>()))
 		.add_property("hitCallbackFunction", python::make_function(&Pharm::ScreeningDBProcessor::getHitCallbackFunction,
 																   python::return_internal_reference<>()),
 					  &Pharm::ScreeningDBProcessor::setHitCallbackFunction)
@@ -151,8 +149,8 @@ void CDPLPythonPharm::exportScreeningDBProcessor()
 					  &Pharm::ScreeningDBProcessor::setHitReportMode)
 		.add_property("maxNumOmittedFeatures", &Pharm::ScreeningDBProcessor::getMaxNumOmittedFeatures,
 					  &Pharm::ScreeningDBProcessor::setMaxNumOmittedFeatures)
-		.add_property("checkXVolumes", BoolGetterFunc(&Pharm::ScreeningDBProcessor::checkXVolumeClashes),
-					  BoolSetterFunc(&Pharm::ScreeningDBProcessor::checkXVolumeClashes))
-		.add_property("bestAlignments", BoolGetterFunc(&Pharm::ScreeningDBProcessor::seekBestAlignments),
-					  BoolSetterFunc(&Pharm::ScreeningDBProcessor::seekBestAlignments));
+		.add_property("checkXVolumes", &Pharm::ScreeningDBProcessor::xVolumeClashesChecked,
+					  &Pharm::ScreeningDBProcessor::checkXVolumeClashes)
+		.add_property("bestAlignments", &Pharm::ScreeningDBProcessor::bestAlignmentsSeeked,
+					  &Pharm::ScreeningDBProcessor::seekBestAlignments);
 }

@@ -65,8 +65,7 @@ namespace CDPL
 			 * \param ftr1 The first feature.
 			 * \param ftr2 The second feature.
 			 * \param xform The transformation to apply to the position of the second feature.
-			 * \return A score between \e 0 (outside tolerance spheres) and \e 1 (exact position match) that specifies the
-			 *         proximity of the feature positions.
+			 * \return A score between \e 0 (outside tolerance spheres) and \e 1 (exact position match) that specifies the proximity of the feature positions.
 			 * \see Pharm::getPosition(const Feature&), Pharm::getTolerance(const Feature&)
 			 */
 			double operator()(const Feature& ftr1, const Feature& ftr2, const Math::Matrix4D& xform) const;

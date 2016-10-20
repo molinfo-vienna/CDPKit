@@ -28,6 +28,9 @@
 #define CDPL_CHEM_CDFDATAWRITER_HPP
 
 #include <iosfwd>
+#include <vector>
+
+#include <boost/function.hpp>
 
 #include "CDPL/Chem/APIPrefix.hpp"
 
@@ -52,44 +55,56 @@ namespace CDPL
 		class Bond;
 		class StereoDescriptor;
 
-		class CDPL_CHEM_API CDFDataWriter : protected Internal::CDFDataWriterBase
+		class CDPL_CHEM_API CDFDataWriter : public Internal::CDFDataWriterBase
 		{
 
 		  public:
-			CDFDataWriter(const Base::ControlParameterContainer& ctrl_params): ctrlParams(ctrl_params) {}
+			typedef boost::function3<unsigned int, CDFDataWriter&, const Atom&, Internal::ByteBuffer&> AtomPropertyHandler;
+			typedef boost::function3<unsigned int, CDFDataWriter&, const Bond&, Internal::ByteBuffer&> BondPropertyHandler;
+			typedef boost::function3<unsigned int, CDFDataWriter&, const MolecularGraph&, Internal::ByteBuffer&> MolGraphPropertyHandler;
 
-			virtual ~CDFDataWriter() {}
+			CDFDataWriter(const Base::ControlParameterContainer& ctrl_params): ctrlParams(ctrl_params) {}
 
 			bool writeMolGraph(std::ostream& os, const MolecularGraph& molgraph);
 
 			void writeMolGraph(const MolecularGraph& molgraph, Internal::ByteBuffer& bbuf);
 
-		  protected:
-			virtual void init();
+			static void registerExternalAtomPropertyHandler(const AtomPropertyHandler& handler);
+			static void registerExternalBondPropertyHandler(const BondPropertyHandler& handler);
+			static void registerExternalMolGraphPropertyHandler(const MolGraphPropertyHandler& handler);
 
 			const Base::ControlParameterContainer& getCtrlParameters() const;
 
 		  private:
+			void init();
+
 			void outputMolGraphHeader(const MolecularGraph& molgraph, Internal::ByteBuffer& bbuf) const;
 			void outputAtoms(const MolecularGraph& molgraph, Internal::ByteBuffer& bbuf);
 			void outputBonds(const MolecularGraph& molgraph, Internal::ByteBuffer& bbuf);
 			void outputMolGraphProperties(const MolecularGraph& molgraph, Internal::ByteBuffer& bbuf);
 
-			template <typename T>
-			void outputExtendedProperties(const T& obj, Internal::ByteBuffer& bbuf);
+			template <typename H, typename T>
+			void outputExternalProperties(const H& handler, const T& obj, Internal::ByteBuffer& bbuf);
 
-			virtual void outputExtendedProperties(const Atom& atom, Internal::ByteBuffer& bbuf);
-			virtual void outputExtendedProperties(const Bond& bond, Internal::ByteBuffer& bbuf);
-			virtual void outputExtendedProperties(const MolecularGraph& molgraph, Internal::ByteBuffer& bbuf);
+			void outputExternalProperties(const Atom& atom, Internal::ByteBuffer& bbuf);
+			void outputExternalProperties(const Bond& bond, Internal::ByteBuffer& bbuf);
+			void outputExternalProperties(const MolecularGraph& molgraph, Internal::ByteBuffer& bbuf);
 
 			void putStereoDescriptor(const MolecularGraph& molgraph, 
 									 unsigned int prop_id, const StereoDescriptor& descr, Internal::ByteBuffer& bbuf) const;
 
 			bool writeRecordData(std::ostream& os);
 
+			typedef std::vector<AtomPropertyHandler> AtomPropertyHandlerList;
+			typedef std::vector<BondPropertyHandler> BondPropertyHandlerList;
+			typedef std::vector<MolGraphPropertyHandler> MolGraphPropertyHandlerList;
+
 			const Base::ControlParameterContainer& ctrlParams;	
 			Internal::ByteBuffer                   dataBuffer;
 			Internal::ByteBuffer                   extDataBuffer;
+			static AtomPropertyHandlerList         extAtomPropertyHandlers;
+			static BondPropertyHandlerList         extBondPropertyHandlers;
+			static MolGraphPropertyHandlerList     extMolGraphPropertyHandlers;
 		};
 	}
 }

@@ -64,8 +64,8 @@ namespace CDPLPythonPharm
 
 #ifdef HAVE_SQLITE3
 
-	void exportSQLiteScreeningDBCreator();
-	void exportSQLiteScreeningDBAccessor();
+	void exportPSDScreeningDBCreator();
+	void exportPSDScreeningDBAccessor();
 
 #endif // HAVE_SQLITE3
 

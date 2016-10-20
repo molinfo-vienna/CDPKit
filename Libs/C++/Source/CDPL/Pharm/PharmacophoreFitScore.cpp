@@ -27,6 +27,10 @@
 #include "StaticInit.hpp"
 
 #include "CDPL/Pharm/PharmacophoreFitScore.hpp"
+#include "CDPL/Pharm/Pharmacophore.hpp"
+#include "CDPL/Pharm/Feature.hpp"
+#include "CDPL/Pharm/FeatureFunctions.hpp"
+#include "CDPL/Pharm/FeatureType.hpp"
 
 
 using namespace CDPL;
@@ -75,5 +79,41 @@ void Pharm::PharmacophoreFitScore::setFeatureGeometryMatchFactor(double factor)
 double Pharm::PharmacophoreFitScore::operator()(const Pharmacophore& ref_pharm, const Pharmacophore& algnd_pharm, 
 						const Math::Matrix4D& xform)
 {
-    return 1.0;
+	geomFtrMappingExtractor.getMapping(ref_pharm, algnd_pharm, xform, geomFtrMapping);
+
+	double cnt_score = 0.0;
+	double pos_score = 0.0;
+	double geom_score = 0.0;
+	double num_ftrs = 0;
+
+	for (Pharmacophore::ConstFeatureIterator f_it = ref_pharm.getFeaturesBegin(), f_end = ref_pharm.getFeaturesEnd(); f_it != f_end; ++f_it) {
+		const Feature& ref_ftr = *f_it;
+ 
+		if (getDisabledFlag(ref_ftr))
+			continue;
+
+		if (getType(ref_ftr) == FeatureType::X_VOLUME)
+			continue;
+
+		num_ftrs++;
+
+		const Feature* algnd_ftr = geomFtrMapping[&ref_ftr];
+
+		if (!algnd_ftr)
+			continue;
+
+		if (ftrMatchCntFactor != 0.0)
+			cnt_score += 1.0;
+		
+		if (ftrPosMatchFactor != 0.0)
+			pos_score += geomFtrMappingExtractor.getPositionMatchScore(ref_ftr, *algnd_ftr);
+
+		if (ftrPosMatchFactor != 0.0)
+			geom_score += geomFtrMappingExtractor.getGeometryMatchScore(ref_ftr, *algnd_ftr);
+	}
+
+	if (num_ftrs == 0)
+		return 0.0;
+
+	return ((cnt_score * ftrMatchCntFactor + pos_score * ftrPosMatchFactor + geom_score * ftrGeomMatchFactor) / num_ftrs);
 }

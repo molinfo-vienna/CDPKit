@@ -62,11 +62,6 @@ namespace CDPL
 			 *        [\ref PDB] format.
 			 */
 			extern CDPL_BIOMOL_API const Base::DataFormat PDB;
-
-			/**
-			 * \brief Provides meta-information about the native <em>CDPL</em> format.
-			 */
-			extern CDPL_BIOMOL_API const Base::DataFormat CDF;
 		}
 
 		/**

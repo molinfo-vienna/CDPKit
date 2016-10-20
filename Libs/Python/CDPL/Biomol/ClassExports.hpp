@@ -36,13 +36,9 @@ namespace CDPLPythonBiomol
 
 	void exportPDBMoleculeReader();
 	void exportPDBMolecularGraphWriter();
-	void exportCDFMoleculeReader();
-	void exportCDFMolecularGraphWriter();
 
 	void exportPDBMoleculeInputHandler();
 	void exportPDBMolecularGraphOutputHandler();
-	void exportCDFMoleculeInputHandler();
-	void exportCDFMolecularGraphOutputHandler();
 
 	void exportBoostFunctionWrappers();
 }

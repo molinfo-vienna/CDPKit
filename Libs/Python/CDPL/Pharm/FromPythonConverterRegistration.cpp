@@ -36,6 +36,8 @@
 #include "CDPL/Pharm/ParallelPiPiInteractionConstraint.hpp"
 #include "CDPL/Pharm/FeatureDistanceConstraint.hpp"
 #include "CDPL/Pharm/FeatureInteractionConstraintConnector.hpp"
+#include "CDPL/Pharm/PharmacophoreFitScreeningScore.hpp"
+#include "CDPL/Pharm/FileScreeningHitCollector.hpp"
 
 #include "Base/GenericFromPythonConverter.hpp"
 
@@ -46,15 +48,23 @@ void CDPLPythonPharm::registerFromPythonConverters()
 {
 	using namespace CDPL;
 
+	CDPLPythonBase::GenericFromPythonConverter<Pharm::PharmacophoreFitScore,
+											   boost::function3<double, const Pharm::Pharmacophore&, const Pharm::Pharmacophore&, 
+																const Math::Matrix4D&> >();
+	CDPLPythonBase::GenericFromPythonConverter<Pharm::PharmacophoreFitScreeningScore,
+											   boost::function1<double, const Pharm::ScreeningDBProcessor::SearchHit&> >();
+	CDPLPythonBase::GenericFromPythonConverter<Pharm::FileScreeningHitCollector,
+											   boost::function2<bool, const Pharm::ScreeningDBProcessor::SearchHit&, double> >();
+
 	CDPLPythonBase::GenericFromPythonConverter<Pharm::FeaturePairDistanceMatchFunctor,
 											   boost::function4<bool, const Pharm::Feature&, const Pharm::Feature&, 
 																const Pharm::Feature&, const Pharm::Feature&> >();
 
 	CDPLPythonBase::GenericFromPythonConverter<Pharm::FeaturePositionMatchFunctor, 
-											   boost::function3<bool, const Pharm::Feature&, 
+											   boost::function3<double, const Pharm::Feature&, 
 																const Pharm::Feature&, const Math::Matrix4D&> >();
 	CDPLPythonBase::GenericFromPythonConverter<Pharm::FeatureGeometryMatchFunctor, 
-											   boost::function3<bool, const Pharm::Feature&, 
+											   boost::function3<double, const Pharm::Feature&, 
 																const Pharm::Feature&, const Math::Matrix4D&> >();
 
 	CDPLPythonBase::GenericFromPythonConverter<Pharm::HBondingInteractionConstraint, 

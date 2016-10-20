@@ -12,8 +12,6 @@ SET(cdpl-biomol_LIB_SRCS
 
     PDBMoleculeInputHandler.cpp
     PDBMolecularGraphOutputHandler.cpp
-    CDFMoleculeInputHandler.cpp
-    CDFMolecularGraphOutputHandler.cpp
 
     PDBDataReader.cpp
     PDBDataWriter.cpp
@@ -21,8 +19,6 @@ SET(cdpl-biomol_LIB_SRCS
     PDBMolecularGraphWriter.cpp
     CDFDataReader.cpp
     CDFDataWriter.cpp
-    CDFMoleculeReader.cpp
-    CDFMolecularGraphWriter.cpp
 
     AtomResidueAtomNameFunctions.cpp
     AtomResidueAltAtomNameFunctions.cpp

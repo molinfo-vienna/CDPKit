@@ -82,8 +82,6 @@ namespace CDPL
 			 * \valuetype \c bool
 			 */
 			extern CDPL_BIOMOL_API const Base::LookupKey CHECK_LINE_LENGTH;
-
-			extern CDPL_BIOMOL_API const Base::LookupKey CDF_WRITE_SINGLE_PRECISION_FLOATS;
 		}
 
 		/**

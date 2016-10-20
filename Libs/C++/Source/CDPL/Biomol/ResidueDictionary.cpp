@@ -35,7 +35,7 @@
 #include "CDPL/Biomol/ResidueType.hpp"
 #include "CDPL/Biomol/AtomFunctions.hpp"
 #include "CDPL/Biomol/MolecularGraphFunctions.hpp"
-#include "CDPL/Biomol/CDFMoleculeReader.hpp"
+#include "CDPL/Chem/CDFMoleculeReader.hpp"
 #include "CDPL/Chem/BasicMolecule.hpp"
 #include "CDPL/Chem/MolecularGraphFunctions.hpp"
 #include "CDPL/Base/Exceptions.hpp"
@@ -59,7 +59,7 @@ namespace
 	Biomol::ResidueDictionary builtinDictionary;
 
     boost::iostreams::stream<boost::iostreams::array_source> resStructureIStream(residueStructureData, RESIDUE_STRUCTURE_DATA_LEN);
-    Biomol::CDFMoleculeReader resStructureReader(resStructureIStream);
+    Chem::CDFMoleculeReader resStructureReader(resStructureIStream);
 
 	const char* stdResidueList[] = {
         "UNK", "ALA", "ARG", "ASN", "ASP", "CYS", "GLN", "GLU", "GLY", "HIS", "ILE", "LEU", "LYS", "MET",

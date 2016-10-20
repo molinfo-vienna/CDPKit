@@ -96,8 +96,8 @@
 
 #ifdef HAVE_SQLITE3
 
-#include "CDPL/Pharm/SQLiteScreeningDBCreator.hpp"
-#include "CDPL/Pharm/SQLiteScreeningDBAccessor.hpp"
+#include "CDPL/Pharm/PSDScreeningDBCreator.hpp"
+#include "CDPL/Pharm/PSDScreeningDBAccessor.hpp"
 
 #endif // HAVE_SQLITE3
 
