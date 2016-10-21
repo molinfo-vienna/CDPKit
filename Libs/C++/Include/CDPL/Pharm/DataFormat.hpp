@@ -58,9 +58,14 @@ namespace CDPL
 		{
 	
 			/**
-			 * \brief Provides meta-information about the native  <em>CDPL</em> format.
+			 * \brief Provides meta-information about the native pharmacophore <em>CDPL</em> format.
 			 */
 			extern CDPL_PHARM_API const Base::DataFormat CDF;
+
+			/**
+			 * \brief Provides meta-information about the native pharmacophore <em>LigandScout</em> format.
+			 */
+			extern CDPL_PHARM_API const Base::DataFormat PML;
 		}
 
 		/**

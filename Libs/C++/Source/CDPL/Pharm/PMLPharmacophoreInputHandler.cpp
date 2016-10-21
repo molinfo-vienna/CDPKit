@@ -1,7 +1,7 @@
 /* -*- mode: c++; c-basic-offset: 4; tab-width: 4; indent-tabs-mode: t -*- */
 
 /* 
- * PharmacophoreFitScreeningScore.cpp 
+ * PMLPharmacophoreInputHandler.cpp 
  *
  * This file is part of the Chemical Data Processing Toolkit
  *
@@ -23,22 +23,24 @@
  * Boston, MA 02111-1307, USA.
  */
 
- 
+
 #include "StaticInit.hpp"
 
-#include "CDPL/Pharm/PharmacophoreFitScreeningScore.hpp"
+#include "CDPL/Pharm/PMLPharmacophoreInputHandler.hpp"
+#include "CDPL/Pharm/DataFormat.hpp"
+#include "CDPL/Pharm/PMLPharmacophoreReader.hpp"
 
 
-using namespace CDPL;
+using namespace CDPL; 
 
 
-Pharm::PharmacophoreFitScreeningScore::PharmacophoreFitScreeningScore(double match_cnt_factor, double pos_match_factor, 
-																	  double geom_match_factor):
-    PharmacophoreFitScore(match_cnt_factor, pos_match_factor, geom_match_factor)
-{}
-
-double Pharm::PharmacophoreFitScreeningScore::operator()(const ScreeningProcessor::SearchHit& hit)
+const Base::DataFormat& Pharm::PMLPharmacophoreInputHandler::getDataFormat() const
 {
-    return PharmacophoreFitScore::operator()(hit.getQueryPharmacophore(), hit.getHitPharmacophore(), 
-											 hit.getHitAlignmentTransform());
+	return DataFormat::PML;
+}
+
+Base::DataReader<Pharm::Pharmacophore>::SharedPointer
+Pharm::PMLPharmacophoreInputHandler::createReader(std::istream& is) const
+{
+	return Base::DataReader<Pharm::Pharmacophore>::SharedPointer(new PMLPharmacophoreReader(is));
 }

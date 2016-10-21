@@ -43,71 +43,71 @@ namespace CDPL
     namespace Pharm
     {
 	
-	/**
-	 * \addtogroup CDPL_PHARM_SCREENING
-	 * @{
-	 */
+	    class PSDAccessorImplementation;
 
-	/**
-	 * \brief A class for accessing pharmacophore screening databases in the built-in optimized format.
-	 */
-	class CDPL_PHARM_API PSDScreeningDBAccessor : public ScreeningDBAccessor
-	{
+		/**
+		 * \addtogroup CDPL_PHARM_SCREENING
+		 * @{
+		 */
 
-	  public:
-		typedef boost::shared_ptr<PSDScreeningDBAccessor> SharedPointer;
+		/**
+		 * \brief A class for accessing pharmacophore screening databases in the built-in optimized format.
+		 */
+		class CDPL_PHARM_API PSDScreeningDBAccessor : public ScreeningDBAccessor
+		{
 
-	    PSDScreeningDBAccessor();
+		  public:
+			typedef boost::shared_ptr<PSDScreeningDBAccessor> SharedPointer;
 
-	    /**
-	     * \brief Constructs a \c %ScreeningDBAccessor instance that will read data from the 
-	     *        database-file specified by \a name.
-	     * \param name The name of the database-file.
-	     */
-	    PSDScreeningDBAccessor(const std::string& name);
+			PSDScreeningDBAccessor();
 
-	    /**
-	     * \brief Destructor.
-	     */
-	    ~PSDScreeningDBAccessor();
+			/**
+			 * \brief Constructs a \c %ScreeningDBAccessor instance that will read data from the 
+			 *        database-file specified by \a name.
+			 * \param name The name of the database-file.
+			 */
+			PSDScreeningDBAccessor(const std::string& name);
 
-		void open(const std::string& name);
+			/**
+			 * \brief Destructor.
+			 */
+			~PSDScreeningDBAccessor();
 
-		void close();
+			void open(const std::string& name);
 
-		const std::string& getDatabaseName() const;
+			void close();
 
-		std::size_t getNumMolecules() const;
+			const std::string& getDatabaseName() const;
 
-		std::size_t getNumPharmacophores() const;
+			std::size_t getNumMolecules() const;
 
-		void getMolecule(std::size_t mol_idx, Chem::Molecule& mol) const; 
+			std::size_t getNumPharmacophores() const;
 
-		void getPharmacophore(std::size_t pharm_idx, Pharmacophore& pharm) const; 
+			void getMolecule(std::size_t mol_idx, Chem::Molecule& mol) const; 
 
-		void getPharmacophore(std::size_t mol_idx, std::size_t conf_idx, Pharmacophore& pharm) const; 
+			void getPharmacophore(std::size_t pharm_idx, Pharmacophore& pharm) const; 
 
-		std::size_t getMoleculeIndex(std::size_t pharm_idx) const;
+			void getPharmacophore(std::size_t mol_idx, std::size_t conf_idx, Pharmacophore& pharm) const; 
 
-		std::size_t getConformationIndex(std::size_t pharm_idx) const;
+			std::size_t getMoleculeIndex(std::size_t pharm_idx) const;
 
-		const FeatureTypeHistogram& getFeatureCounts(std::size_t pharm_idx) const;
+			std::size_t getConformationIndex(std::size_t pharm_idx) const;
 
-	  private:
-	    class Implementation;
+			const FeatureTypeHistogram& getFeatureCounts(std::size_t pharm_idx) const;
 
-	    typedef std::auto_ptr<Implementation> ImplPointer;
+		  private:
+			typedef std::auto_ptr<PSDAccessorImplementation> ImplementationPointer;
 
-	    PSDScreeningDBAccessor(const PSDScreeningDBAccessor&);
+			PSDScreeningDBAccessor(const PSDScreeningDBAccessor&);
 
-	    PSDScreeningDBAccessor& operator=(const PSDScreeningDBAccessor&);
+			PSDScreeningDBAccessor& operator=(const PSDScreeningDBAccessor&);
 		
-	    ImplPointer impl;
-	};
+			ImplementationPointer impl;
+		};
 
-	/**
-	 * @}
-	 */
+		/**
+		 * @}
+		 */
     }
 }
 

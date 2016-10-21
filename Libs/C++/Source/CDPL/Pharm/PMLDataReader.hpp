@@ -1,7 +1,7 @@
 /* -*- mode: c++; c-basic-offset: 4; tab-width: 4; indent-tabs-mode: t -*- */
 
 /* 
- * CDFDataReader.hpp 
+ * PMLDataReader.hpp 
  *
  * This file is part of the Pharmical Data Processing Toolkit
  *
@@ -24,13 +24,10 @@
  */
 
 
-#ifndef CDPL_PHARM_CDFDATAREADER_HPP
-#define CDPL_PHARM_CDFDATAREADER_HPP
+#ifndef CDPL_PHARM_PMLDATAREADER_HPP
+#define CDPL_PHARM_PMLDATAREADER_HPP
 
 #include <iosfwd>
-
-#include "CDPL/Internal/CDFDataReaderBase.hpp"
-#include "CDPL/Internal/ByteBuffer.hpp"
 
 
 namespace CDPL 
@@ -46,16 +43,17 @@ namespace CDPL
 	{
 
 		class Pharmacophore;
+		class Feature;
 
-		class CDFDataReader : private Internal::CDFDataReaderBase
+		class PMLDataReader
 		{
 
 		public:
-			CDFDataReader(const Base::ControlParameterContainer& ctrl_params): ctrlParams(ctrl_params) {}
+			PMLDataReader(const Base::ControlParameterContainer& ctrl_params): ctrlParams(ctrl_params) {}
+
+			virtual ~PMLDataReader() {}
 
 			bool readPharmacophore(std::istream& is, Pharmacophore& pharm);
-
-			bool readPharmacophore(Pharmacophore& pharm, Internal::ByteBuffer& bbuf);
 
 			bool skipPharmacophore(std::istream& is);
 
@@ -64,13 +62,9 @@ namespace CDPL
 		private:
 			void init(); 
 
-			void readFeatures(Pharmacophore& pharm, Internal::ByteBuffer& bbuf) const;
-			void readPharmProperties(Pharmacophore& pharm, Internal::ByteBuffer& bbuf) const;
-
 			const Base::ControlParameterContainer& ctrlParams;	
-			Internal::ByteBuffer                   dataBuffer;
 		};
 	}
 }
 
-#endif // CDPL_PHARM_CDFDATAREADER_HPP
+#endif // CDPL_PHARM_PMLDATAREADER_HPP

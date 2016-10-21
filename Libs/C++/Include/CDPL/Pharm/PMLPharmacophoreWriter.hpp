@@ -1,7 +1,7 @@
 /* -*- mode: c++; c-basic-offset: 4; tab-width: 4; indent-tabs-mode: t -*- */
 
 /* 
- * CDFPharmacophoreWriter.hpp 
+ * PMLPharmacophoreWriter.hpp 
  *
  * This file is part of the Chemical Data Processing Toolkit
  *
@@ -25,11 +25,11 @@
 
 /**
  * \file
- * \brief Definition of the class CDPL::Pharm::CDFPharmacophoreWriter.
+ * \brief Definition of the class CDPL::Pharm::PMLPharmacophoreWriter.
  */
 
-#ifndef CDPL_PHARM_CDFPHARMACOPHOREWRITER_HPP
-#define CDPL_PHARM_CDFPHARMACOPHOREWRITER_HPP
+#ifndef CDPL_PHARM_PMLPHARMACOPHOREWRITER_HPP
+#define CDPL_PHARM_PMLPHARMACOPHOREWRITER_HPP
 
 #include <memory>
 
@@ -43,32 +43,32 @@ namespace CDPL
 	namespace Pharm
 	{
 
-		class CDFDataWriter;
+		class PMLDataWriter;
 		class Pharmacophore;
 
 		/**
-		 * \addtogroup CDPL_PHARM_CDF_IO
+		 * \addtogroup CDPL_PHARM_PML_IO
 		 * @{
 		 */
 
 		/**
-		 * \brief A writer for pharmacophore data in the native I/O format of the <em>CDPL</em>.
+		 * \brief A writer for pharmacophore data in the native I/O format of <em>LigandScout</em>.
 		 */
-		class CDPL_PHARM_API CDFPharmacophoreWriter : public Base::DataWriter<Pharmacophore>
+		class CDPL_PHARM_API PMLPharmacophoreWriter : public Base::DataWriter<Pharmacophore>
 		{
 
 		public:
 			/**
-			 * \brief Constructs a \c %CDFPharmacophoreWriter instance that will write data of pharmacophores to the output
+			 * \brief Constructs a \c %PMLPharmacophoreWriter instance that will write data of pharmacophores to the output
 			 *        stream \a os.
 			 * \param os The output stream to write to.
 			 */
-			CDFPharmacophoreWriter(std::ostream& os);
+			PMLPharmacophoreWriter(std::ostream& os);
 
 			/**
 			 * \brief Destructor.
 			 */
-			~CDFPharmacophoreWriter();
+			~PMLPharmacophoreWriter();
 
 			/**
 			 * \brief Writes data of the pharmacophore \a pharm to the output stream specified in the constructor.
@@ -81,13 +81,13 @@ namespace CDPL
 			bool operator!() const;
 
 		private:
-			typedef std::auto_ptr<CDFDataWriter> CDFDataWriterPtr;
+			typedef std::auto_ptr<PMLDataWriter> PMLDataWriterPtr;
 
-			CDFPharmacophoreWriter(const CDFPharmacophoreWriter&);
+			PMLPharmacophoreWriter(const PMLPharmacophoreWriter&);
 
 			std::ostream&    output;
 			bool             state;
-			CDFDataWriterPtr writer;
+			PMLDataWriterPtr writer;
 		};
 
 		/**
@@ -96,4 +96,4 @@ namespace CDPL
 	}
 }
 
-#endif // CDPL_PHARM_CDFPHARMACOPHOREWRITER_HPP
+#endif // CDPL_PHARM_PMLPHARMACOPHOREWRITER_HPP

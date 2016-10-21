@@ -1,7 +1,7 @@
 /* -*- mode: c++; c-basic-offset: 4; tab-width: 4; indent-tabs-mode: t -*- */
 
 /* 
- * ScreeningDBProcessor.hpp 
+ * ScreeningProcessor.hpp 
  *
  * This file is part of the Chemical Data Processing Toolkit
  *
@@ -25,11 +25,11 @@
 
 /**
  * \file
- * \brief Definition of the class CDPL::Pharm::ScreeningDBProcessor.
+ * \brief Definition of the class CDPL::Pharm::ScreeningProcessor.
  */
 
-#ifndef CDPL_PHARM_SCREENINGDBPROCESSOR_HPP
-#define CDPL_PHARM_SCREENINGDBPROCESSOR_HPP
+#ifndef CDPL_PHARM_SCREENINGPROCESSOR_HPP
+#define CDPL_PHARM_SCREENINGPROCESSOR_HPP
 
 #include <memory>
 #include <cstddef>
@@ -55,6 +55,7 @@ namespace CDPL
 
 		class Pharmacophore;
 		class ScreeningDBAccessor;
+		class ScreeningProcImplementation;
 
 		/**
 		 * \addtogroup CDPL_PHARM_PHARMACOPHORE_PERCEPTION
@@ -62,9 +63,9 @@ namespace CDPL
 		 */
 
 		/**
-		 * \brief ScreeningDBProcessor.
+		 * \brief ScreeningProcessor.
 		 */
-		class CDPL_PHARM_API ScreeningDBProcessor
+		class CDPL_PHARM_API ScreeningProcessor
 		{
 
 		  public:
@@ -80,12 +81,12 @@ namespace CDPL
 			{
 
 			public:
-				SearchHit(const ScreeningDBProcessor& db_proc, const Pharmacophore& qry_pharm,
+				SearchHit(const ScreeningProcessor& hit_prov, const Pharmacophore& qry_pharm,
 						  const Pharmacophore& hit_pharm, const Chem::Molecule& mol, 
 						  const Math::Matrix4D& xform, std::size_t pharm_idx, 
 						  std::size_t mol_idx, std::size_t conf_idx);
 
-				const ScreeningDBProcessor& getDBProcessor() const;
+				const ScreeningProcessor& getHitProvider() const;
 
 				const Pharmacophore& getQueryPharmacophore() const;
 
@@ -102,33 +103,33 @@ namespace CDPL
 				std::size_t getHitConformationIndex() const;
 
 			private:
-				const ScreeningDBProcessor* dbProcessor;
-				const Pharmacophore*        qryPharm;
-				const Pharmacophore*        hitPharm;
-				const Chem::Molecule*       molecule;
-				const Math::Matrix4D*       almntTransform;
-				std::size_t                 pharmIndex;
-				std::size_t                 molIndex;
-				std::size_t                 confIndex;
+				const ScreeningProcessor*     provider;
+				const Pharmacophore*          qryPharm;
+				const Pharmacophore*          hitPharm;
+				const Chem::Molecule*         molecule;
+				const Math::Matrix4D*         almntTransform;
+				std::size_t                   pharmIndex;
+				std::size_t                   molIndex;
+				std::size_t                   confIndex;
 			};
 
-			typedef boost::shared_ptr<ScreeningDBProcessor> SharedPointer;
+			typedef boost::shared_ptr<ScreeningProcessor> SharedPointer;
 
 			typedef boost::function2<bool, const SearchHit&, double> HitCallbackFunction;
 			typedef boost::function1<double, const SearchHit&> ScoringFunction;
 			typedef boost::function2<bool, std::size_t, std::size_t> ProgressCallbackFunction;
 
 			/**
-			 * \brief Constructs the \c %ScreeningDBProcessor instance for the given
+			 * \brief Constructs the \c %ScreeningProcessor instance for the given
 			 *        screening database accessor \a db_acc.
 			 * \param db_acc An accessor for the database to screen.
 			 */
-			ScreeningDBProcessor(ScreeningDBAccessor& db_acc);
+			ScreeningProcessor(ScreeningDBAccessor& db_acc);
 
 			/**
 			 * Destructor.
 			 */
-			~ScreeningDBProcessor();
+			~ScreeningProcessor();
 
 			void setDBAccessor(ScreeningDBAccessor& db_acc);
 
@@ -165,15 +166,13 @@ namespace CDPL
 			std::size_t searchDB(const Pharmacophore& query, std::size_t mol_start_idx = 0, std::size_t mol_end_idx = 0);
 
 		  private:
-			class Implementation;
+			typedef std::auto_ptr<ScreeningProcImplementation> ImplementationPointer;
 
-			typedef std::auto_ptr<Implementation> ImplPointer;
-
-			ScreeningDBProcessor(const ScreeningDBProcessor& proc);
+			ScreeningProcessor(const ScreeningProcessor& proc);
 	
-			ScreeningDBProcessor& operator=(const ScreeningDBProcessor& proc);
+			ScreeningProcessor& operator=(const ScreeningProcessor& proc);
 
-			ImplPointer impl;
+			ImplementationPointer impl;
 		};
 
 		/**
@@ -182,4 +181,4 @@ namespace CDPL
     }
 }
 
-#endif // CDPL_PHARM_SCREENINGDBPROCESSOR_HPP
+#endif // CDPL_PHARM_SCREENINGPROCESSOR_HPP

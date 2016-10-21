@@ -32,7 +32,7 @@
 #define CDPL_PHARM_FILESCREENINGHITCOLLECTOR_HPP
 
 #include "CDPL/Pharm/APIPrefix.hpp"
-#include "CDPL/Pharm/ScreeningDBProcessor.hpp"
+#include "CDPL/Pharm/ScreeningProcessor.hpp"
 #include "CDPL/Chem/BasicMolecule.hpp"
 #include "CDPL/Math/VectorArray.hpp"
 
@@ -89,7 +89,7 @@ namespace CDPL
 
 			bool isMoleculeConfIndexPropertyWritten() const;
 
-			bool operator()(const ScreeningDBProcessor::SearchHit& hit, double score);
+			bool operator()(const ScreeningProcessor::SearchHit& hit, double score);
 
 		  private:
 			MolecularGraphWriter* dataWriter;

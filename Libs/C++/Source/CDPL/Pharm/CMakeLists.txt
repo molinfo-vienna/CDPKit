@@ -43,17 +43,26 @@ SET(cdpl-pharm_LIB_SRCS
 
     PharmacophoreFitScore.cpp
 
-    ScreeningDBProcessor.cpp
+    ScreeningProcessor.cpp
+    ScreeningProcImplementation.cpp
     FileScreeningHitCollector.cpp
     PharmacophoreFitScreeningScore.cpp
 
     CDFPharmacophoreInputHandler.cpp
     CDFPharmacophoreOutputHandler.cpp
+ 
+    PMLPharmacophoreInputHandler.cpp
+    PMLPharmacophoreOutputHandler.cpp
 
     CDFDataReader.cpp
     CDFDataWriter.cpp
     CDFPharmacophoreReader.cpp
     CDFPharmacophoreWriter.cpp
+ 
+    PMLDataReader.cpp
+    PMLDataWriter.cpp
+    PMLPharmacophoreReader.cpp
+    PMLPharmacophoreWriter.cpp
 
     FeatureTypeFunctions.cpp
     FeatureGeometryFunctions.cpp
@@ -82,9 +91,12 @@ SET(cdpl-pharm_LIB_SRCS
 IF(SQLITE3_FOUND)
   SET(cdpl-pharm_LIB_SRCS
       ${cdpl-pharm_LIB_SRCS}
-      PSDImplementationBase.cpp
       PSDScreeningDBCreator.cpp
       PSDScreeningDBAccessor.cpp
+
+      SQLiteDataIOBase.cpp
+      PSDCreatorImplementation.cpp
+      PSDAccessorImplementation.cpp
      )	
 
   LINK_LIBRARIES(${SQLITE3_LIBRARY})

@@ -59,7 +59,7 @@ BOOST_PYTHON_MODULE(_pharm)
 
 	exportScreeningDBCreator();
 	exportScreeningDBAccessor();
-	exportScreeningDBProcessor();
+	exportScreeningProcessor();
 	exportPharmacophoreFitScreeningScore();
 	exportFileScreeningHitCollector();
 

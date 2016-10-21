@@ -1,7 +1,7 @@
 /* -*- mode: c++; c-basic-offset: 4; tab-width: 4; indent-tabs-mode: t -*- */
 
 /* 
- * CDFPharmacophoreOutputHandler.hpp 
+ * PMLPharmacophoreInputHandler.hpp 
  *
  * This file is part of the Chemical Data Processing Toolkit
  *
@@ -25,14 +25,14 @@
 
 /**
  * \file
- * \brief Definition of the class CDPL::Pharm::CDFPharmacophoreOutputHandler.
+ * \brief Definition of the class CDPL::Pharm::PMLPharmacophoreInputHandler.
  */
 
-#ifndef CDPL_PHARM_CDFPHARMACOPHOREOUTPUTHANDLER_HPP
-#define CDPL_PHARM_CDFPHARMACOPHOREOUTPUTHANDLER_HPP
+#ifndef CDPL_PHARM_PMLPHARMACOPHOREINPUTHANDLER_HPP
+#define CDPL_PHARM_PMLPHARMACOPHOREINPUTHANDLER_HPP
 
 #include "CDPL/Pharm/APIPrefix.hpp"
-#include "CDPL/Base/DataOutputHandler.hpp"
+#include "CDPL/Base/DataInputHandler.hpp"
 
 
 namespace CDPL 
@@ -44,22 +44,22 @@ namespace CDPL
 		class Pharmacophore;
 
 		/**
-		 * \addtogroup CDPL_PHARM_CDF_IO
+		 * \addtogroup CDPL_PHARM_PML_IO
 		 * @{
 		 */
 
 		/**
-		 * \brief A handler for the output of pharmacophore data in the native I/O format of the <em>CDPL</em>.
+		 * \brief A handler for the input of pharmacophore data in the native I/O format of <em>LigandScout</em>.
 		 */
-		class CDPL_PHARM_API CDFPharmacophoreOutputHandler : public Base::DataOutputHandler<Pharmacophore>
+		class CDPL_PHARM_API PMLPharmacophoreInputHandler : public Base::DataInputHandler<Pharmacophore>
 		{
 
 		public:
-			CDFPharmacophoreOutputHandler() {}
+			PMLPharmacophoreInputHandler() {}
 
 			const Base::DataFormat& getDataFormat() const;
 
-			Base::DataWriter<Pharmacophore>::SharedPointer createWriter(std::ostream& os) const;
+			Base::DataReader<Pharmacophore>::SharedPointer createReader(std::istream& is) const;
 		};
 
 		/**
@@ -68,4 +68,4 @@ namespace CDPL
 	}
 }
 
-#endif // CDPL_PHARM_CDFPHARMACOPHOREOUTPUTHANDLER_HPP
+#endif // CDPL_PHARM_PMLPHARMACOPHOREINPUTHANDLER_HPP

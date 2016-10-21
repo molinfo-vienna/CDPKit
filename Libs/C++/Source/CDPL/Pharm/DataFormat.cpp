@@ -31,12 +31,15 @@
 #include "CDPL/Pharm/DataFormat.hpp"
 #include "CDPL/Pharm/CDFPharmacophoreInputHandler.hpp"
 #include "CDPL/Pharm/CDFPharmacophoreOutputHandler.hpp"
+#include "CDPL/Pharm/PMLPharmacophoreInputHandler.hpp"
+#include "CDPL/Pharm/PMLPharmacophoreOutputHandler.hpp"
 
 
 namespace
 {
 
 	const char* cdfFileExtensions[]    = { "cdf" };
+	const char* pmlFileExtensions[]    = { "pml" };
 }
 
 
@@ -45,6 +48,8 @@ using namespace CDPL;
 
 const Base::DataFormat Pharm::DataFormat::CDF("CDF", "Native CDPL-Format", "", 
 											  cdfFileExtensions, cdfFileExtensions + 1, true);
+const Base::DataFormat Pharm::DataFormat::PML("PML", "Native LigandScout PML-Format", "", 
+											  pmlFileExtensions, pmlFileExtensions + 1, true);
 
 namespace CDPL
 {
@@ -68,10 +73,16 @@ namespace
 			using namespace Pharm;
 
 			static const CDFPharmacophoreInputHandler  cdfPharmInputHandler;
+			static const PMLPharmacophoreInputHandler  pmlPharmInputHandler;
+
 			static const CDFPharmacophoreOutputHandler cdfPharmOutputHandler;
+			static const PMLPharmacophoreOutputHandler pmlPharmOutputHandler;
 
 			DataIOManager<Pharmacophore>::registerInputHandler(cdfPharmInputHandler);
+			DataIOManager<Pharmacophore>::registerInputHandler(pmlPharmInputHandler);
+
 			DataIOManager<Pharmacophore>::registerOutputHandler(cdfPharmOutputHandler);
+			DataIOManager<Pharmacophore>::registerOutputHandler(pmlPharmOutputHandler);
 		}
 
 	} init;

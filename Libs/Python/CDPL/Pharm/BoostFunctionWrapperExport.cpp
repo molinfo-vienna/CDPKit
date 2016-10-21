@@ -29,7 +29,7 @@
 #include "CDPL/Pharm/Feature.hpp"
 #include "CDPL/Pharm/FeatureMapping.hpp"
 #include "CDPL/Pharm/Feature3DCoordinatesFunction.hpp"
-#include "CDPL/Pharm/ScreeningDBProcessor.hpp"
+#include "CDPL/Pharm/ScreeningProcessor.hpp"
 #include "CDPL/Chem/Atom.hpp"
 #include "CDPL/Math/Vector.hpp"
 #include "CDPL/Math/Matrix.hpp"
@@ -47,13 +47,13 @@ void CDPLPythonPharm::exportBoostFunctionWrappers()
 	CDPLPythonBase::BoostFunction1Export<Feature3DCoordinatesFunction, Feature&, 
 										 boost::python::return_internal_reference<2> >("Feature3DCoordinatesFunction");
     CDPLPythonBase::BoostFunction1Export<boost::function1<bool, const FeatureMapping&> >("BoolFeatureMappingFunctor");
-   	CDPLPythonBase::BoostFunction1Export<boost::function1<double, const ScreeningDBProcessor::SearchHit&> >("DoubleSearchHitFunctor");
+   	CDPLPythonBase::BoostFunction1Export<boost::function1<double, const ScreeningProcessor::SearchHit&> >("DoubleSearchHitFunctor");
     CDPLPythonBase::BoostFunction1Export<boost::function1<double, const Feature&>, Feature&>("DoubleFeatureFunctor");
 
     CDPLPythonBase::BoostFunction2Export<boost::function2<bool, const Feature&, const Feature&>, Feature&, Feature&>("BoolFeature2Functor");
     CDPLPythonBase::BoostFunction2Export<boost::function2<double, const Feature&, const Feature&>, Feature&, Feature&>("DoubleFeature2Functor");
-	CDPLPythonBase::BoostFunction2Export<boost::function2<bool, const ScreeningDBProcessor::SearchHit&, double>, 
-										 const ScreeningDBProcessor::SearchHit&, double, 
+	CDPLPythonBase::BoostFunction2Export<boost::function2<bool, const ScreeningProcessor::SearchHit&, double>, 
+										 const ScreeningProcessor::SearchHit&, double, 
 										 boost::python::return_value_policy<boost::python::return_by_value>, true>("BoolSearchHitDoubleFunctor");
 	CDPLPythonBase::BoostFunction2Export<boost::function2<bool, std::size_t, std::size_t>, 
 										 std::size_t, std::size_t,

@@ -46,7 +46,6 @@ namespace CDPL
 	{
 
 		class Pharmacophore;
-		class Atom;
 
 		class CDFDataWriter : private Internal::CDFDataWriterBase
 		{
@@ -54,11 +53,9 @@ namespace CDPL
 		public:
 			CDFDataWriter(const Base::ControlParameterContainer& ctrl_params): ctrlParams(ctrl_params) {}
 
-			virtual ~CDFDataWriter() {}
-
 			bool writePharmacophore(std::ostream& os, const Pharmacophore& pharm);
 
-			void writePharmacophore( const Pharmacophore& pharm, Internal::ByteBuffer& bbuf);
+			void writePharmacophore(const Pharmacophore& pharm, Internal::ByteBuffer& bbuf);
 
 		private:
 			void init();

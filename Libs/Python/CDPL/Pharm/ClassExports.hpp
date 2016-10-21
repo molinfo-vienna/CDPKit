@@ -58,7 +58,7 @@ namespace CDPLPythonPharm
 
 	void exportScreeningDBCreator();
 	void exportScreeningDBAccessor();
-	void exportScreeningDBProcessor();
+	void exportScreeningProcessor();
 	void exportPharmacophoreFitScreeningScore();
 	void exportFileScreeningHitCollector();
 

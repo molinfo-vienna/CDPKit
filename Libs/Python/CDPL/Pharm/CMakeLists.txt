@@ -32,7 +32,7 @@ SET(pharm_MOD_SRCS
 
     ScreeningDBCreatorExport.cpp
     ScreeningDBAccessorExport.cpp
-    ScreeningDBProcessorExport.cpp
+    ScreeningProcessorExport.cpp
     PharmacophoreFitScreeningScoreExport.cpp
     FileScreeningHitCollectorExport.cpp
 

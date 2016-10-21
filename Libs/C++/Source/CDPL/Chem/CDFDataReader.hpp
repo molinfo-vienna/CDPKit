@@ -65,8 +65,6 @@ namespace CDPL
 
 			CDFDataReader(const Base::ControlParameterContainer& ctrl_params): ctrlParams(ctrl_params) {}
 
-			virtual ~CDFDataReader() {}
-
 			bool readMolecule(std::istream& is, Molecule& mol);
 
 			bool readMolecule(Molecule& mol, Internal::ByteBuffer& bbuf);

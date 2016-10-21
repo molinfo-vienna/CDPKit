@@ -83,14 +83,20 @@
 #include "CDPL/Pharm/PharmacophoreFitScore.hpp"
 
 #include "CDPL/Pharm/CDFPharmacophoreInputHandler.hpp"
+#include "CDPL/Pharm/PMLPharmacophoreInputHandler.hpp"
+
 #include "CDPL/Pharm/CDFPharmacophoreOutputHandler.hpp"
+#include "CDPL/Pharm/PMLPharmacophoreOutputHandler.hpp"
 
 #include "CDPL/Pharm/CDFPharmacophoreReader.hpp"
+#include "CDPL/Pharm/PMLPharmacophoreReader.hpp"
+
 #include "CDPL/Pharm/CDFPharmacophoreWriter.hpp"
+#include "CDPL/Pharm/PMLPharmacophoreWriter.hpp"
 
 #include "CDPL/Pharm/ScreeningDBCreator.hpp"
 #include "CDPL/Pharm/ScreeningDBAccessor.hpp"
-#include "CDPL/Pharm/ScreeningDBProcessor.hpp"
+#include "CDPL/Pharm/ScreeningProcessor.hpp"
 #include "CDPL/Pharm/PharmacophoreFitScreeningScore.hpp"
 #include "CDPL/Pharm/FileScreeningHitCollector.hpp"
 

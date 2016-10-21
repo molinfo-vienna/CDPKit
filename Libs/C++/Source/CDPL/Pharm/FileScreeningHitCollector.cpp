@@ -120,7 +120,7 @@ bool Pharm::FileScreeningHitCollector::isMoleculeConfIndexPropertyWritten() cons
 	return outputConfIndex;
 }
 
-bool Pharm::FileScreeningHitCollector::operator()(const ScreeningDBProcessor::SearchHit& hit, double score)
+bool Pharm::FileScreeningHitCollector::operator()(const ScreeningProcessor::SearchHit& hit, double score)
 {
 	molecule.copy(hit.getHitMolecule());
 
@@ -155,7 +155,7 @@ bool Pharm::FileScreeningHitCollector::operator()(const ScreeningDBProcessor::Se
 
 	if (outputDBName)
 		mdl_data->addElement(Chem::MDLDataBlockEntry(DB_NAME_PROPERTY_NAME, 
-													 hit.getDBProcessor().getDBAccessor().getDatabaseName()));
+													 hit.getHitProvider().getDBAccessor().getDatabaseName()));
 
 	if (outputMolIndex)
 		mdl_data->addElement(Chem::MDLDataBlockEntry(MOL_INDEX_PROPERTY_NAME, 

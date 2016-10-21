@@ -52,9 +52,9 @@ void CDPLPythonPharm::registerFromPythonConverters()
 											   boost::function3<double, const Pharm::Pharmacophore&, const Pharm::Pharmacophore&, 
 																const Math::Matrix4D&> >();
 	CDPLPythonBase::GenericFromPythonConverter<Pharm::PharmacophoreFitScreeningScore,
-											   boost::function1<double, const Pharm::ScreeningDBProcessor::SearchHit&> >();
+											   boost::function1<double, const Pharm::ScreeningProcessor::SearchHit&> >();
 	CDPLPythonBase::GenericFromPythonConverter<Pharm::FileScreeningHitCollector,
-											   boost::function2<bool, const Pharm::ScreeningDBProcessor::SearchHit&, double> >();
+											   boost::function2<bool, const Pharm::ScreeningProcessor::SearchHit&, double> >();
 
 	CDPLPythonBase::GenericFromPythonConverter<Pharm::FeaturePairDistanceMatchFunctor,
 											   boost::function4<bool, const Pharm::Feature&, const Pharm::Feature&, 

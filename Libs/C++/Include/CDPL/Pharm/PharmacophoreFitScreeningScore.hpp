@@ -32,7 +32,7 @@
 #define CDPL_PHARM_PHARMACOPHOREFITSCREENINGSCORE_HPP
 
 #include "CDPL/Pharm/APIPrefix.hpp"
-#include "CDPL/Pharm/ScreeningDBProcessor.hpp"
+#include "CDPL/Pharm/ScreeningProcessor.hpp"
 #include "CDPL/Pharm/PharmacophoreFitScore.hpp"
 
 
@@ -58,7 +58,7 @@ namespace CDPL
 										   double ftr_pos_match_factor = DEF_FTR_POS_MATCH_FACTOR,
 										   double ftr_geom_match_factor = DEF_FTR_GEOM_MATCH_FACTOR);
 
-			double operator()(const ScreeningDBProcessor::SearchHit& hit);
+			double operator()(const ScreeningProcessor::SearchHit& hit);
 		};
 
 		/**

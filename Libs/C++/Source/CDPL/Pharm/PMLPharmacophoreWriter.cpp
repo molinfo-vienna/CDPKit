@@ -1,7 +1,7 @@
 /* -*- mode: c++; c-basic-offset: 4; tab-width: 4; indent-tabs-mode: t -*- */
 
 /* 
- * PharmacophoreFitScreeningScore.cpp 
+ * PMLPharmacophoreWriter.cpp 
  *
  * This file is part of the Chemical Data Processing Toolkit
  *
@@ -23,22 +23,47 @@
  * Boston, MA 02111-1307, USA.
  */
 
- 
+
 #include "StaticInit.hpp"
 
-#include "CDPL/Pharm/PharmacophoreFitScreeningScore.hpp"
+#include <ostream>
+
+#include "CDPL/Pharm/PMLPharmacophoreWriter.hpp"
+#include "CDPL/Base/Exceptions.hpp"
+
+#include "PMLDataWriter.hpp"
 
 
 using namespace CDPL;
 
 
-Pharm::PharmacophoreFitScreeningScore::PharmacophoreFitScreeningScore(double match_cnt_factor, double pos_match_factor, 
-																	  double geom_match_factor):
-    PharmacophoreFitScore(match_cnt_factor, pos_match_factor, geom_match_factor)
-{}
+Pharm::PMLPharmacophoreWriter::PMLPharmacophoreWriter(std::ostream& os): 
+	output(os), state(os.good()), writer(new PMLDataWriter(*this)) {}
 
-double Pharm::PharmacophoreFitScreeningScore::operator()(const ScreeningProcessor::SearchHit& hit)
+Pharm::PMLPharmacophoreWriter::~PMLPharmacophoreWriter() {}
+
+Base::DataWriter<Pharm::Pharmacophore>& Pharm::PMLPharmacophoreWriter::write(const Pharmacophore& pharm)
 {
-    return PharmacophoreFitScore::operator()(hit.getQueryPharmacophore(), hit.getHitPharmacophore(), 
-											 hit.getHitAlignmentTransform());
+	state = false;
+
+	try {
+		state = writer->writePharmacophore(output, pharm);
+
+	} catch (const Base::Exception& e) {
+		throw Base::IOError("PMLPharmacophoreWriter: " + std::string(e.what()));
+	}
+
+	invokeIOCallbacks();
+
+	return *this;
+}
+
+Pharm::PMLPharmacophoreWriter::operator const void*() const
+{
+	return (state ? this : 0);
+}
+
+bool Pharm::PMLPharmacophoreWriter::operator!() const
+{
+	return !state;
 }

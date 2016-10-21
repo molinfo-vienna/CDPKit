@@ -43,6 +43,8 @@ namespace CDPL
     namespace Pharm
     {
 	
+		class PSDCreatorImplementation;
+
 		/**
 		 * \addtogroup CDPL_PHARM_SCREENING
 		 * @{
@@ -95,15 +97,13 @@ namespace CDPL
 			std::size_t getNumInserted() const;
 
 		  private:
-			class Implementation;
-
-			typedef std::auto_ptr<Implementation> ImplPointer;
+			typedef std::auto_ptr<PSDCreatorImplementation> ImplementationPointer;
 
 			PSDScreeningDBCreator(const PSDScreeningDBCreator&);
 
 			PSDScreeningDBCreator& operator=(const PSDScreeningDBCreator&);
 		
-			ImplPointer impl;
+			ImplementationPointer impl;
 		};
 
 		/**

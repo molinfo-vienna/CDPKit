@@ -1,7 +1,7 @@
 /* -*- mode: c++; c-basic-offset: 4; tab-width: 4; indent-tabs-mode: t -*- */
 
 /* 
- * PSDImplementationBase.hpp 
+ * SQLiteDataIOBase.hpp 
  *
  * This file is part of the Chemical Data Processing Toolkit
  *
@@ -24,8 +24,8 @@
  */
 
 
-#ifndef CDPL_PHARM_PSDIMPLEMENTATIONBASE_HPP
-#define CDPL_PHARM_PSDIMPLEMENTATIONBASE_HPP
+#ifndef CDPL_PHARM_SQLiteDATAIOBASE_HPP
+#define CDPL_PHARM_SQLiteDATAIOBASE_HPP
 
 #include <string>
 
@@ -40,16 +40,16 @@ namespace CDPL
     namespace Pharm
     {
 	
-		class PSDImplementationBase
+		class SQLiteDataIOBase
 		{
 
 		public:
 			typedef boost::shared_ptr<sqlite3> SQLite3DBPointer;
 			typedef boost::shared_ptr<sqlite3_stmt> SQLite3StmtPointer;
 
-			PSDImplementationBase() {}
+			SQLiteDataIOBase() {}
 
-			~PSDImplementationBase();
+			~SQLiteDataIOBase();
 
 			void openDBConnection(const std::string& name, int mode);
 
@@ -73,9 +73,9 @@ namespace CDPL
 		private:
 			void composeExMessage(std::string& ex_msg, const char* msg_prefix, const char* err_msg) const;
 
-			PSDImplementationBase(const PSDImplementationBase&);
+			SQLiteDataIOBase(const SQLiteDataIOBase&);
 
-			PSDImplementationBase& operator=(const PSDImplementationBase&);
+			SQLiteDataIOBase& operator=(const SQLiteDataIOBase&);
 
 			SQLite3DBPointer database;
 			std::string      databaseName;
@@ -83,4 +83,4 @@ namespace CDPL
     }
 }
 
-#endif // CDPL_PHARM_PSDIMPLEMENTATIONBASE_HPP
+#endif // CDPL_PHARM_SQLiteDATAIOBASE_HPP
