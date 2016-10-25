@@ -47,7 +47,7 @@ namespace CDPL
 	{
 
 		/**
-		 * \addtogroup CDPL_CHEM_MOLECULARGRAPH_PROPERTIES
+		 * \addtogroup CDPL_CHEM_MOLECULAR_GRAPH_PROPERTIES
 		 * @{
 		 */
 

@@ -130,7 +130,7 @@ namespace CDPL
 	    void initQueryData(const Pharmacophore& query);
 	    void initPharmIndexList(std::size_t mol_start_idx, std::size_t mol_end_idx);
 
-	    bool insertFeature(const Feature& ftr, FeatureMatrix& ftr_mtx) const;
+	    void insertFeature(const Feature& ftr, FeatureMatrix& ftr_mtx) const;
 
 	    bool checkFeatureCounts(std::size_t pharm_idx) const;
 	    bool check2PointPharmacophores(std::size_t pharm_idx);

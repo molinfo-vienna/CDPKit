@@ -26,6 +26,8 @@
  
 #include "StaticInit.hpp"
 
+#include <algorithm>
+
 #include "CDPL/Pharm/PharmacophoreFitScore.hpp"
 #include "CDPL/Pharm/Pharmacophore.hpp"
 #include "CDPL/Pharm/Feature.hpp"
@@ -77,7 +79,7 @@ void Pharm::PharmacophoreFitScore::setFeatureGeometryMatchFactor(double factor)
 }
 
 double Pharm::PharmacophoreFitScore::operator()(const Pharmacophore& ref_pharm, const Pharmacophore& algnd_pharm, 
-						const Math::Matrix4D& xform)
+												const Math::Matrix4D& xform)
 {
 	geomFtrMappingExtractor.getMapping(ref_pharm, algnd_pharm, xform, geomFtrMapping);
 
@@ -97,19 +99,31 @@ double Pharm::PharmacophoreFitScore::operator()(const Pharmacophore& ref_pharm, 
 
 		num_ftrs++;
 
-		const Feature* algnd_ftr = geomFtrMapping[&ref_ftr];
+		FeatureMapping::ConstEntryIteratorRange algnd_ftrs = geomFtrMapping.getEntries(&ref_ftr);
 
-		if (!algnd_ftr)
+		if (algnd_ftrs.first == algnd_ftrs.second)
 			continue;
 
 		if (ftrMatchCntFactor != 0.0)
 			cnt_score += 1.0;
 		
-		if (ftrPosMatchFactor != 0.0)
-			pos_score += geomFtrMappingExtractor.getPositionMatchScore(ref_ftr, *algnd_ftr);
+		if (ftrPosMatchFactor != 0.0) {
+			double max_score = 0.0;
 
-		if (ftrPosMatchFactor != 0.0)
-			geom_score += geomFtrMappingExtractor.getGeometryMatchScore(ref_ftr, *algnd_ftr);
+			for (FeatureMapping::ConstEntryIterator af_it = algnd_ftrs.first; af_it != algnd_ftrs.second; ++af_it)
+				max_score = std::max(max_score, geomFtrMappingExtractor.getPositionMatchScore(ref_ftr, *af_it->second));
+
+			pos_score += max_score;
+		}
+
+		if (ftrGeomMatchFactor != 0.0) {
+			double max_score = 0.0;
+
+			for (FeatureMapping::ConstEntryIterator af_it = algnd_ftrs.first; af_it != algnd_ftrs.second; ++af_it)
+				max_score = std::max(max_score, geomFtrMappingExtractor.getGeometryMatchScore(ref_ftr, *af_it->second));
+
+			geom_score += max_score;
+		}
 	}
 
 	if (num_ftrs == 0)

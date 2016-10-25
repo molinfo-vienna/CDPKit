@@ -47,7 +47,7 @@ namespace CDPL
     {
 
 	/**
-	 * \addtogroup CDPL_CHEM_PHARMACOPHOREFEATURE_PROPERTIES
+	 * \addtogroup CDPL_CHEM_ENTITY3D_PROPERTIES
 	 * @{
 	 */
 

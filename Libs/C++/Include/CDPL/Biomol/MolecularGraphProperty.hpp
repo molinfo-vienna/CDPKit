@@ -47,7 +47,7 @@ namespace CDPL
 	{
 
 		/**
-		 * \addtogroup CDPL_BIOMOL_MOLECULARGRAPH_PROPERTIES
+		 * \addtogroup CDPL_BIOMOL_MOLECULAR_GRAPH_PROPERTIES 
 		 * @{
 		 */
 

@@ -27,9 +27,11 @@
 #include "StaticInit.hpp"
 
 #include <algorithm>
+#include <functional>
 #include <limits>
 #include <cmath>
 #include <iterator>
+#include <cassert>
 
 #include <boost/bind.hpp>
 
@@ -57,6 +59,14 @@ namespace
 {
 
     const double NAN_SCORE = std::numeric_limits<double>::quiet_NaN();
+
+	struct FeatureTolCmpFunc : public std::binary_function<const Pharm::Feature*, const Pharm::Feature*, bool> 
+	{
+
+		bool operator()(const Pharm::Feature* ftr1, const Pharm::Feature* ftr2) const {
+			return (getTolerance(*ftr1) < getTolerance(*ftr2));
+		}
+	};
 }
 
 
@@ -240,22 +250,30 @@ void Pharm::ScreeningProcImplementation::initQueryData(const Pharmacophore& quer
 			continue;
 		}
 
-		if (getOptionalFlag(ftr)) {
-			if (insertFeature(ftr, optFeatures)) {
-				pharmAlignment.addEntity(ftr, true);
-				alignedOptFeatures.push_back(&ftr);
-			}
+		if (getOptionalFlag(ftr))
+			insertFeature(ftr, optFeatures);
+		else
+			insertFeature(ftr, mandFeatures);
+	}
 
-			continue;
-		}
+	for (FeatureMatrix::iterator it = mandFeatures.begin(), end = mandFeatures.end(); it != end; ++it) {
+		FeatureList& ftr_list = *it; assert(!ftr_list.empty());		
+		const Feature& max_tol_ftr = **std::max_element(ftr_list.begin(), ftr_list.end(), FeatureTolCmpFunc());
+		unsigned int type = getType(max_tol_ftr);
 
-		if (insertFeature(ftr, mandFeatures)) {
-			pharmAlignment.addEntity(ftr, true);
-			alignedMandFeatures.push_back(&ftr);
-			mandFtrPosAndRadii.push_back(PosAndRadiusPair(get3DCoordinates(ftr), getTolerance(ftr)));
-			mandFeatureTypes.push_back(getType(ftr));
-			queryFeatureCounts[type]++;
-		}
+		pharmAlignment.addEntity(max_tol_ftr, true);
+		alignedMandFeatures.push_back(&max_tol_ftr);
+		mandFtrPosAndRadii.push_back(PosAndRadiusPair(get3DCoordinates(max_tol_ftr), getTolerance(max_tol_ftr)));
+		mandFeatureTypes.push_back(type);
+		queryFeatureCounts[type]++;
+	}
+
+	for (FeatureMatrix::iterator it = optFeatures.begin(), end = optFeatures.end(); it != end; ++it) {
+		FeatureList& ftr_list = *it; assert(!ftr_list.empty());		
+		const Feature& max_tol_ftr = **std::max_element(ftr_list.begin(), ftr_list.end(), FeatureTolCmpFunc());
+		
+		pharmAlignment.addEntity(max_tol_ftr, true);
+		alignedOptFeatures.push_back(&max_tol_ftr);
 	}
 
 	query2PointPharmList.clear();
@@ -272,7 +290,7 @@ void Pharm::ScreeningProcImplementation::initQueryData(const Pharmacophore& quer
 	pharmAlignment.setMinTopologicalMappingSize(min_num_ftrs);
 }
 
-bool Pharm::ScreeningProcImplementation::insertFeature(const Feature& ftr, FeatureMatrix& ftr_mtx) const
+void Pharm::ScreeningProcImplementation::insertFeature(const Feature& ftr, FeatureMatrix& ftr_mtx) const
 {
 	unsigned int ftr_type = getType(ftr);
 	const Math::Vector3D& ftr_pos = get3DCoordinates(ftr);
@@ -286,14 +304,12 @@ bool Pharm::ScreeningProcImplementation::insertFeature(const Feature& ftr, Featu
 
 		if (ftr_pos == get3DCoordinates(first_ftr)) {
 			ftr_list.push_back(&ftr);
-			return false;
+			return;
 		}
 	}
 
 	ftr_mtx.resize(ftr_mtx.size() + 1);
 	ftr_mtx.back().push_back(&ftr);
-
-	return true;
 }
 
 void Pharm::ScreeningProcImplementation::initPharmIndexList(std::size_t mol_start_idx, std::size_t mol_end_idx)

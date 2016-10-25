@@ -125,7 +125,7 @@
 \defgroup CDPL_CHEM_BOND_MATCH_EXPRESSIONS Bond Match Expressions
 \ingroup CDPL_CHEM_SUBSTRUCTURE_SEARCH
 
-\defgroup CDPL_CHEM_MOLECULE_MATCH_EXPRESSIONS Molecule Match Expressions
+\defgroup CDPL_CHEM_MOLECULAR_GRAPH_MATCH_EXPRESSIONS MolecularGraph Match Expressions
 \ingroup CDPL_CHEM_SUBSTRUCTURE_SEARCH
 
 \defgroup CDPL_CHEM_REACTION_MATCH_EXPRESSIONS Reaction Match Expressions
@@ -185,6 +185,9 @@
 \defgroup CDPL_CHEM_PROPERTIES Property Keys
 \ingroup CDPL_CHEM
 
+\defgroup CDPL_CHEM_ENTITY3D_PROPERTIES Entity3D Properties
+\ingroup CDPL_CHEM_PROPERTIES
+
 \defgroup CDPL_CHEM_ATOM_PROPERTIES Atom Properties
 \ingroup CDPL_CHEM_PROPERTIES
 
@@ -209,7 +212,7 @@
 \defgroup CDPL_CHEM_FUNCTIONS Free Functions
 \ingroup CDPL_CHEM
 
-\defgroup CDPL_CHEM_CONTROL_PARAMTER_FUNCTIONS Control-Parameter Functions
+\defgroup CDPL_CHEM_CONTROL_PARAMETER_FUNCTIONS Control-Parameter Functions
 \ingroup CDPL_CHEM_FUNCTIONS
 
 \defgroup CDPL_CHEM_ENTITY3D_CONTAINER_FUNCTIONS Entity3DContainer Functions
@@ -287,7 +290,7 @@
 \defgroup CDPL_BIOMOL_FUNCTIONS Free Functions
 \ingroup CDPL_BIOMOL
 
-\defgroup CDPL_BIOMOL_CONTROL_PARAMTER_FUNCTIONS Control-Parameter Functions
+\defgroup CDPL_BIOMOL_CONTROL_PARAMETER_FUNCTIONS Control-Parameter Functions
 \ingroup CDPL_BIOMOL_FUNCTIONS
 
 \defgroup CDPL_BIOMOL_ATOM_FUNCTIONS Atom Functions
@@ -317,7 +320,10 @@
 \defgroup CDPL_PHARM_DATA_FORMATS Data Format Descriptors
 \ingroup CDPL_PHARM_DATA_IO
 
-\defgroup CDPL_PHARM_CDF_IO The Native CDPL Format
+\defgroup CDPL_PHARM_CDF_IO The Native CDPL Pharmacophore Format
+\ingroup CDPL_PHARM_DATA_IO
+
+\defgroup CDPL_PHARM_PML_IO The Native LigandScout Pharmacophore Format
 \ingroup CDPL_PHARM_DATA_IO
 
 \defgroup CDPL_PHARM_PHARMACOPHORE_PERCEPTION Pharmacophore Perception 
@@ -350,7 +356,7 @@
 \defgroup CDPL_PHARM_FUNCTIONS Free Functions
 \ingroup CDPL_PHARM
 
-\defgroup CDPL_PHARM_CONTROL_PARAMTER_FUNCTIONS Control-Parameter Functions
+\defgroup CDPL_PHARM_CONTROL_PARAMETER_FUNCTIONS Control-Parameter Functions
 \ingroup CDPL_PHARM_FUNCTIONS
 
 \defgroup CDPL_PHARM_FEATURE_FUNCTIONS Pharmacophore Feature Functions
@@ -452,7 +458,7 @@
 \defgroup CDPL_VIS_FUNCTIONS Free Functions
 \ingroup CDPL_VIS
 
-\defgroup CDPL_VIS_CONTROL_PARAMTER_FUNCTIONS Control-Parameter Functions
+\defgroup CDPL_VIS_CONTROL_PARAMETER_FUNCTIONS Control-Parameter Functions
 \ingroup CDPL_VIS_FUNCTIONS
 
 \defgroup CDPL_VIS_ATOM_FUNCTIONS Atom Functions

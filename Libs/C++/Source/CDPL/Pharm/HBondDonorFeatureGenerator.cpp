@@ -53,16 +53,13 @@ void Pharm::HBondDonorFeatureGenerator::init(bool fuzzy)
     addIncludePattern(parseSMARTS("[CX2:7][#1:9]"), FeatureType::H_BOND_DONOR, 1.5, FeatureGeometry::VECTOR, -1.0);
 
 	if (fuzzy) {
-		addIncludePattern(parseSMARTS("[*](=,:[a,O,S,N])-,:[#7:7](-,:[*,#1])[#1:9]"), FeatureType::H_BOND_DONOR, 1.5, FeatureGeometry::VECTOR, -1.0);
+		addIncludePattern(parseSMARTS("[*](=,:[a,O,S,N])-,:[#7:7][#1:9]"), FeatureType::H_BOND_DONOR, 1.5, FeatureGeometry::VECTOR, -1.0);
 		addIncludePattern(parseSMARTS("[*]=,:[#7:7][#1:9]"), FeatureType::H_BOND_DONOR, 1.5, FeatureGeometry::VECTOR, -1.0);
-		addIncludePattern(parseSMARTS("[#7:3][#1]"), FeatureType::H_BOND_DONOR, 1.5, FeatureGeometry::SPHERE);
-		addIncludePattern(parseSMARTS("[OX2:3][#1]"), FeatureType::H_BOND_DONOR, 1.5, FeatureGeometry::SPHERE);
-		addIncludePattern(parseSMARTS("[SX2:3][#1]"), FeatureType::H_BOND_DONOR, 1.5, FeatureGeometry::SPHERE);
+		addIncludePattern(parseSMARTS("[#7:7][*][*][#1:9]"), FeatureType::H_BOND_DONOR, 1.5, FeatureGeometry::VECTOR, -1.0);
+		addIncludePattern(parseSMARTS("[#7,O,S:3][#1]"), FeatureType::H_BOND_DONOR, 1.5, FeatureGeometry::SPHERE);
 
 	} else {
-		addIncludePattern(parseSMARTS("[#7:7][#1:9]"), FeatureType::H_BOND_DONOR, 1.5, FeatureGeometry::VECTOR, -1.0);
-		addIncludePattern(parseSMARTS("[OX2:7][#1:9]"), FeatureType::H_BOND_DONOR, 1.5, FeatureGeometry::VECTOR, -1.0);
-		addIncludePattern(parseSMARTS("[SX2:7][#1:9]"), FeatureType::H_BOND_DONOR, 1.5, FeatureGeometry::VECTOR, -1.0);
+		addIncludePattern(parseSMARTS("[#7,O,S:7][#1:9]"), FeatureType::H_BOND_DONOR, 1.5, FeatureGeometry::VECTOR, -1.0);
 	}
 
     addExcludePattern(parseSMARTS("[O:1]-[C,P,S]=O"));

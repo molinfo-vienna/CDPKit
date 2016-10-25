@@ -50,7 +50,7 @@ namespace CDPL
 	{
 		
 		/**
-		 * \addtogroup CDPL_BASE_CONTROL_PARAMETERS
+		 * \addtogroup CDPL_BASE_CONTROL_PARAMETERS_AND_PROPERTIES
 		 * @{
 		 */
 
