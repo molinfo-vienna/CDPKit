@@ -289,7 +289,11 @@ namespace CDPL
 			/**
 			 * \brief Returns a \c const reference to the first value associated with the specified key.
 			 *
-			 * The method is equivalent to getValue(const Key&) const.
+			 * If the map contains the specified entry, a reference to the associated value is
+			 * returned. If the map does not contain the entry and default values are enabled 
+			 * (that is, the template parameter \a AllowDefValues is \c true), a \c const
+			 * reference to a default constructed value object is returned. Otherwise, 
+			 * Base::ItemNotFound is thrown to indicate the error.
 			 *
 			 * \param key The key associated with the requested value.
 			 * \return A \c const reference to the requested value.

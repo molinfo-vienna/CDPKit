@@ -78,7 +78,7 @@ namespace
 	MAKE_MOLGRAPH_FUNC_WRAPPERS(const CDPL::Biomol::PDBData::SharedPointer&, PDBData)
 
 	MAKE_FUNCTION_WRAPPER4(void, extractEnvironmentResidues, CDPL::Chem::MolecularGraph&, CDPL::Chem::MolecularGraph&, CDPL::Chem::Fragment&, double);
-	MAKE_FUNCTION_WRAPPER4(void, extractProximalAtoms, CDPL::Chem::MolecularGraph&, CDPL::Chem::MolecularGraph&, CDPL::Chem::Fragment&, double);
+	MAKE_FUNCTION_WRAPPER5(void, extractProximalAtoms, CDPL::Chem::MolecularGraph&, CDPL::Chem::MolecularGraph&, CDPL::Chem::Fragment&, double, bool);
 }
 
 
@@ -93,9 +93,9 @@ void CDPLPythonBiomol::exportMolecularGraphFunctions()
 	python::def("extractEnvironmentResidues", &extractEnvironmentResiduesWrapper4, 
 				(python::arg("core"), python::arg("macromol"), python::arg("env_residues"),
 				 python::arg("max_dist")));
-	python::def("extractProximalAtoms", &extractProximalAtomsWrapper4, 
+	python::def("extractProximalAtoms", &extractProximalAtomsWrapper5, 
 				(python::arg("core"), python::arg("macromol"), python::arg("env_atoms"),
-				 python::arg("max_dist")));
+				 python::arg("max_dist"), python::arg("inc_core_atoms") = false));
 
 	EXPORT_MOLGRAPH_FUNCS_COPY_REF(ResidueCode, code)
 	EXPORT_MOLGRAPH_FUNCS(ResidueSequenceNumber, seq_no)

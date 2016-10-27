@@ -46,8 +46,8 @@
 #include "CDPL/Chem/Entity3DContainerFunctions.hpp"
 #include "CDPL/Chem/AtomContainerFunctions.hpp"
 #include "CDPL/Chem/AtomDictionary.hpp"
-#include "CDPL/Math/VectorAdapter.hpp"
 #include "CDPL/Math/VectorArrayFunctions.hpp"
+#include "CDPL/Math/VectorAdapter.hpp"
 
 #include "ScreeningProcImplementation.hpp"
 
@@ -73,10 +73,12 @@ namespace
 Pharm::ScreeningProcImplementation::ScreeningProcImplementation(ScreeningProcessor& parent, ScreeningDBAccessor& db_acc): 
 	parent(&parent), dbAccessor(&db_acc), reportMode(ScreeningProcessor::FIRST_MATCHING_CONF), maxOmittedFeatures(0),
 	checkXVolumes(true), bestAlignments(false), hitCallback(), progressCallback(), 
-	scoringFunction(PharmacophoreFitScreeningScore()), ftrGeomMatchFunction(false), pharmAlignment(true)
+	scoringFunction(PharmacophoreFitScreeningScore()), featureGeomMatchFunction(false), pharmAlignment(true)
 {
 	pharmAlignment.setTopAlignmentConstraintFunction(
 		boost::bind(&ScreeningProcImplementation::checkTopologicalMapping, this, _1));
+	pharmAlignment.setEntity3DCoordinatesFunction(
+		boost::bind(&ScreeningProcImplementation::getFeatureCoordinates, this, _1));
 }
 
 void Pharm::ScreeningProcImplementation::setDBAccessor(ScreeningDBAccessor& db_acc)
@@ -225,65 +227,66 @@ void Pharm::ScreeningProcImplementation::initQueryData(const Pharmacophore& quer
 {
 	queryPharmacophore = &query;
 
-	mandFeatures.clear();
-	mandFtrPosAndRadii.clear();
-	mandFeatureTypes.clear();
-	optFeatures.clear();
-	alignedMandFeatures.clear();
-	xVolumePosAndRadii.clear();
+	queryMandFeatures.clear();
+	queryMandFeatureTypes.clear();
+	queryOptFeatures.clear();
+	alignedQueryMandFeatures.clear();
 	queryFeatureCounts.clear();
+	queryFeatureTolerances.clear();
+	queryFeaturePositions.clear();
 	pharmAlignment.clearEntities(true);
+	xVolumeIndices.clear();
 
 	for (Pharmacophore::ConstFeatureIterator it = query.getFeaturesBegin(), end = query.getFeaturesEnd(); it != end; ++it) {
 		const Feature& ftr = *it;
 
+		queryFeatureTolerances.push_back(getTolerance(ftr));
+		queryFeaturePositions.addElement(get3DCoordinates(ftr));
+
 		if (getDisabledFlag(ftr))
 			continue;
 
-		unsigned int type = getType(ftr);
-
-		if (type == FeatureType::X_VOLUME) {
+		if (getType(ftr) == FeatureType::X_VOLUME) {
 			if (getOptionalFlag(ftr))
 				continue;
 
-			xVolumePosAndRadii.push_back(PosAndRadiusPair(get3DCoordinates(ftr), getTolerance(ftr)));
+			xVolumeIndices.push_back(ftr.getIndex());
 			continue;
 		}
 
 		if (getOptionalFlag(ftr))
-			insertFeature(ftr, optFeatures);
+			insertFeature(ftr, queryOptFeatures);
 		else
-			insertFeature(ftr, mandFeatures);
+			insertFeature(ftr, queryMandFeatures);
 	}
 
-	for (FeatureMatrix::iterator it = mandFeatures.begin(), end = mandFeatures.end(); it != end; ++it) {
+	for (FeatureMatrix::iterator it = queryMandFeatures.begin(), end = queryMandFeatures.end(); it != end; ++it) {
 		FeatureList& ftr_list = *it; assert(!ftr_list.empty());		
 		const Feature& max_tol_ftr = **std::max_element(ftr_list.begin(), ftr_list.end(), FeatureTolCmpFunc());
 		unsigned int type = getType(max_tol_ftr);
 
 		pharmAlignment.addEntity(max_tol_ftr, true);
-		alignedMandFeatures.push_back(&max_tol_ftr);
-		mandFtrPosAndRadii.push_back(PosAndRadiusPair(get3DCoordinates(max_tol_ftr), getTolerance(max_tol_ftr)));
-		mandFeatureTypes.push_back(type);
+		alignedQueryMandFeatures.push_back(&max_tol_ftr);
+		queryMandFeatureTypes.push_back(type);
 		queryFeatureCounts[type]++;
 	}
 
-	for (FeatureMatrix::iterator it = optFeatures.begin(), end = optFeatures.end(); it != end; ++it) {
+	for (FeatureMatrix::iterator it = queryOptFeatures.begin(), end = queryOptFeatures.end(); it != end; ++it) {
 		FeatureList& ftr_list = *it; assert(!ftr_list.empty());		
 		const Feature& max_tol_ftr = **std::max_element(ftr_list.begin(), ftr_list.end(), FeatureTolCmpFunc());
 		
 		pharmAlignment.addEntity(max_tol_ftr, true);
-		alignedOptFeatures.push_back(&max_tol_ftr);
+		alignedQueryOptFeatures.push_back(&max_tol_ftr);
 	}
 
 	query2PointPharmList.clear();
 
-	query2PointPharmGen.generate(FeatureListIterator(alignedMandFeatures.begin()),
-								 FeatureListIterator(alignedMandFeatures.end()),
+	query2PointPharmGen.generate(FeatureListIterator(alignedQueryMandFeatures.begin()),
+								 FeatureListIterator(alignedQueryMandFeatures.end()),
 								 std::back_inserter(query2PointPharmList));
 
-	std::size_t min_num_ftrs = (mandFeatures.size() > maxOmittedFeatures ? 
-								std::size_t(mandFeatures.size() - maxOmittedFeatures) : std::size_t(0));
+	std::size_t min_num_ftrs = (queryMandFeatures.size() > maxOmittedFeatures ? 
+								std::size_t(queryMandFeatures.size() - maxOmittedFeatures) : std::size_t(0));
 
 	minNum2PointPharmMatches = (min_num_ftrs < 2 ? std::size_t(0) : (min_num_ftrs * (min_num_ftrs - 1)) / 2);
 
@@ -342,7 +345,7 @@ bool Pharm::ScreeningProcImplementation::checkFeatureCounts(std::size_t pharm_id
 			 end = db_ftr_cnts.getEntriesEnd(); it != end; ++it)
 		num_db_ftrs += it->second;
 	
-	if ((num_db_ftrs + maxOmittedFeatures) < mandFeatures.size())
+	if ((num_db_ftrs + maxOmittedFeatures) < queryMandFeatures.size())
 		return false;
 
 	for (FeatureTypeHistogram::ConstEntryIterator it = queryFeatureCounts.getEntriesBegin(), 
@@ -371,22 +374,22 @@ bool Pharm::ScreeningProcImplementation::check2PointPharmacophores(std::size_t p
 
 	typedef std::pair<TwoPointPharmacophoreSet::const_iterator, TwoPointPharmacophoreSet::const_iterator> IterPair;
 
-	std::size_t num_qry_2pt_pharms = query2PointPharmList.size();
-	std::size_t max_num_mismatches = num_qry_2pt_pharms - minNum2PointPharmMatches;
+	std::size_t num_query_2pt_pharms = query2PointPharmList.size();
+	std::size_t max_num_mismatches = num_query_2pt_pharms - minNum2PointPharmMatches;
 
-	for (std::size_t i = 0, num_matches = 0, num_mismatches = 0; i < num_qry_2pt_pharms; i++) {
-		const QueryTwoPointPharmacophore& qry_2pt_pharm = query2PointPharmList[i];
+	for (std::size_t i = 0, num_matches = 0, num_mismatches = 0; i < num_query_2pt_pharms; i++) {
+		const QueryTwoPointPharmacophore& query_2pt_pharm = query2PointPharmList[i];
 
-		double min_dist = qry_2pt_pharm.getFeatureDistance() - qry_2pt_pharm.getFeature1Tolerance() 
-			- qry_2pt_pharm.getFeature2Tolerance();
-		double max_dist = qry_2pt_pharm.getFeatureDistance() + qry_2pt_pharm.getFeature1Tolerance() 
-			+ qry_2pt_pharm.getFeature2Tolerance();
+		double min_dist = query_2pt_pharm.getFeatureDistance() - query_2pt_pharm.getFeature1Tolerance() 
+			- query_2pt_pharm.getFeature2Tolerance();
+		double max_dist = query_2pt_pharm.getFeatureDistance() + query_2pt_pharm.getFeature1Tolerance() 
+			+ query_2pt_pharm.getFeature2Tolerance();
 
-		IterPair eq_range = db2PointPharmSet.equal_range(qry_2pt_pharm);
+		IterPair eq_range = db2PointPharmSet.equal_range(query_2pt_pharm);
 		bool match = false;
 
 		for ( ; eq_range.first != eq_range.second; ++eq_range.first) {
-			if (!TwoPointPharmEqCmpFunc()(qry_2pt_pharm, *eq_range.first))
+			if (!TwoPointPharmEqCmpFunc()(query_2pt_pharm, *eq_range.first))
 				continue;
 
 			double dist = eq_range.first->getFeatureDistance();
@@ -452,53 +455,54 @@ bool Pharm::ScreeningProcImplementation::performAlignment(std::size_t pharm_idx,
 
 bool Pharm::ScreeningProcImplementation::checkGeomAlignment()
 {
-	std::size_t num_missing = 0;
-	std::size_t num_matches = 0;
-	std::size_t min_num_matches = (alignedMandFeatures.size() > maxOmittedFeatures ? 
-								   std::size_t(alignedMandFeatures.size() - maxOmittedFeatures) : std::size_t(0));
+	std::size_t num_al_mand_ftrs = alignedQueryMandFeatures.size();
+	std::size_t min_num_matches = (num_al_mand_ftrs > maxOmittedFeatures ? 
+								   std::size_t(num_al_mand_ftrs - maxOmittedFeatures) : std::size_t(0));
+
+	if (initDBFeaturesByType) {
+		for (TypeToFeatureListMap::iterator it = dbFeaturesByType.begin(), end = dbFeaturesByType.end(); it != end; ++it)
+			it->second.clear();
+
+		for (BasicPharmacophore::ConstFeatureIterator it = dbPharmacophore.getFeaturesBegin(), end = dbPharmacophore.getFeaturesEnd(); it != end; ++it) {
+			const Feature& ftr = *it;
+			dbFeaturesByType[getType(ftr)].push_back(&ftr);
+		}
+
+		initDBFeaturesByType = false;
+	}
 
 	const Math::Matrix4D& xform = pharmAlignment.getTransform();
 	Math::Vector3D tmp;
-
-	if (dbPharmFtrTypes.empty())
-		for (BasicPharmacophore::ConstFeatureIterator it = dbPharmacophore.getFeaturesBegin(), 
-				 end = dbPharmacophore.getFeaturesEnd(); it != end; ++it) 
-			dbPharmFtrTypes.push_back(getType(*it));
 	
-	dbPharmFtrPositions.clear();
+	alignedDBFeaturePositions = dbFeaturePositions;
+	transform(alignedDBFeaturePositions, xform);
 
-	get3DCoordinates(dbPharmacophore, dbPharmFtrPositions);
-	transform(dbPharmFtrPositions, xform);
+	std::size_t num_missing = 0;
+	std::size_t num_matches = 0;
 
-	std::size_t i = 0;
-	std::size_t num_db_ftrs = dbPharmFtrTypes.size();
+	for (std::size_t i = 0; i < num_al_mand_ftrs; i++) {
+		std::size_t query_ftr_idx = alignedQueryMandFeatures[i]->getIndex();
 
-	for (FeatureMatrix::const_iterator qry_flst_it = mandFeatures.begin(), qry_flst_end = mandFeatures.end(); 
-		 qry_flst_it != qry_flst_end; ++qry_flst_it, i++) {
+		const Math::Vector3D& query_pos = queryFeaturePositions[query_ftr_idx];
+		double query_tol = queryFeatureTolerances[query_ftr_idx];
 
-		const FeatureList& qry_ftr_list = *qry_flst_it;
-
-		unsigned int qry_type = mandFeatureTypes[i];
-		const Math::Vector3D& qry_pos = mandFtrPosAndRadii[i].first;
-		double qry_tol = mandFtrPosAndRadii[i].second;
-
+		const FeatureList& db_ftr_list = dbFeaturesByType[queryMandFeatureTypes[i]];
 		bool match = false;
 
-		for (std::size_t j = 0; j < num_db_ftrs && !match; j++) {
-			if (qry_type != dbPharmFtrTypes[j])
+		for (FeatureList::const_iterator db_ftr_it = db_ftr_list.begin(), db_ftr_end = db_ftr_list.end(); db_ftr_it != db_ftr_end && !match; ++db_ftr_it) {
+			const Feature& db_ftr = **db_ftr_it;
+			std::size_t db_ftr_idx = db_ftr.getIndex();
+
+			tmp.assign(alignedDBFeaturePositions[db_ftr_idx]);
+			tmp.minusAssign(query_pos);
+
+			if (length(tmp) > query_tol)
 				continue;
 
-			tmp.assign(dbPharmFtrPositions[j] - qry_pos);
+			const FeatureList& query_ftr_list = queryMandFeatures[i];
 
-			if (length(tmp) > qry_tol)
-				continue;
-
-			const Feature& al_ftr = dbPharmacophore.getFeature(j);
-
-			for (FeatureList::const_iterator ftr_it = qry_ftr_list.begin(), ftr_end = qry_ftr_list.end(); 
-				 ftr_it != ftr_end; ++ftr_it) {
-
-				if (ftrGeomMatchFunction(**ftr_it, al_ftr, xform)) {
+			for (FeatureList::const_iterator ftr_it = query_ftr_list.begin(), ftr_end = query_ftr_list.end(); ftr_it != ftr_end; ++ftr_it) {
+				if (featureGeomMatchFunction(**ftr_it, db_ftr, xform)) {
 					match = true;
 					break;
 				}
@@ -524,7 +528,7 @@ bool Pharm::ScreeningProcImplementation::checkGeomAlignment()
 
 bool Pharm::ScreeningProcImplementation::checkXVolumeClashes(std::size_t mol_idx, std::size_t conf_idx)
 {
-	if (!checkXVolumes || xVolumePosAndRadii.empty())
+	if (!checkXVolumes || xVolumeIndices.empty())
 		return true;
 
 	loadMolecule(mol_idx);
@@ -542,15 +546,15 @@ bool Pharm::ScreeningProcImplementation::checkXVolumeClashes(std::size_t mol_idx
 	Math::Vector3D tmp;
 
 	std::size_t num_atoms = atomCoordinates.getSize();
-	std::size_t num_x_vols = xVolumePosAndRadii.size();
+	std::size_t num_x_vols = xVolumeIndices.size();
 
 	for (std::size_t i = 0; i < num_atoms; i++) {
 		al_pos.assign(range(prod(xform, homog(atomCoordinates[i])), 0, 3));
 
 		for (std::size_t j = 0; j < num_x_vols; j++) {
-			tmp.assign(al_pos - xVolumePosAndRadii[j].first);
+			tmp.assign(al_pos - queryFeaturePositions[xVolumeIndices[j]]);
 
-			if (length(tmp) < (xVolumePosAndRadii[j].second + atomVdWRadii[i]))
+			if (length(tmp) < (queryFeatureTolerances[xVolumeIndices[j]] + atomVdWRadii[i]))
 				return false;
 		}
 	}
@@ -570,14 +574,13 @@ double Pharm::ScreeningProcImplementation::calcScore(const SearchHit& hit)
 
 bool Pharm::ScreeningProcImplementation::checkTopologicalMapping(const FeatureMapping& mapping) const
 {
-	if (alignedOptFeatures.empty())
+	if (alignedQueryOptFeatures.empty())
 		return true;
 
 	std::size_t num_missing = 0;
 
-	for (FeatureList::const_iterator it = alignedMandFeatures.begin(), 
-			 end = alignedMandFeatures.end(); it != end; ++it)
-		if (!mapping[*it]) {
+	for (FeatureList::const_iterator it = alignedQueryMandFeatures.begin(), end = alignedQueryMandFeatures.end(); it != end; ++it)
+		if (!mapping.getValue(*it)) {
 			num_missing++;
 
 			if (num_missing > maxOmittedFeatures)
@@ -607,7 +610,8 @@ void Pharm::ScreeningProcImplementation::loadPharmacophore(std::size_t pharm_idx
 
 	atomCoordinates.clear();
 	dbPharmacophore.clear();
-	dbPharmFtrTypes.clear();
+	dbFeaturePositions.clear();
+	initDBFeaturesByType = true;
 
 	dbAccessor->getPharmacophore(pharm_idx, dbPharmacophore);
 
@@ -648,4 +652,15 @@ bool Pharm::ScreeningProcImplementation::reportHit(const SearchHit& hit, double 
 	loadPharmacophore(hit.getHitPharmacophoreIndex());
 
 	return hitCallback(hit, score);
+}
+
+const Math::Vector3D& Pharm::ScreeningProcImplementation::getFeatureCoordinates(const Feature& ftr)
+{
+	if (&ftr.getPharmacophore() == queryPharmacophore)
+		return queryFeaturePositions[ftr.getIndex()];
+
+	if (dbFeaturePositions.isEmpty())
+		get3DCoordinates(dbPharmacophore, dbFeaturePositions);
+
+	return dbFeaturePositions[ftr.getIndex()];
 }

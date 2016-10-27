@@ -75,6 +75,10 @@ void CDPLPythonPharm::exportPharmacophoreFunctions()
 				(python::arg("pharm"), python::arg("hist")));
 	python::def("buildInteractionPharmacophore", &Pharm::buildInteractionPharmacophore, 
 				(python::arg("pharm"), python::arg("iactions")));
+	python::def("removeFeaturesWithoutInteractions", &Pharm::removeFeaturesWithoutInteractions, 
+				(python::arg("pharm"), python::arg("iactions")));
+	python::def("copyFeaturesWithInteractions", &Pharm::copyFeaturesWithInteractions, 
+				(python::arg("pharm"), python::arg("iactions")));
 	python::def("checkExclusionVolumeClash", &checkExclusionVolumeClashWrapper5, 
 				(python::arg("pharm"), python::arg("cntnr"), python::arg("coords_func"), python::arg("xform"), python::arg("vdw") = true));
 

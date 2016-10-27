@@ -1,3 +1,4 @@
+
 /* -*- mode: c++; c-basic-offset: 4; tab-width: 4; indent-tabs-mode: t -*- */
 
 /* 
@@ -43,7 +44,7 @@ using namespace CDPL;
 
 
 void Biomol::extractProximalAtoms(const Chem::MolecularGraph& core, const Chem::MolecularGraph& macromol, 
-								  Chem::Fragment& env_atoms, double max_dist)
+								  Chem::Fragment& env_atoms, double max_dist, bool inc_core_atoms)
 {
 	using namespace Chem;
 
@@ -70,7 +71,10 @@ void Biomol::extractProximalAtoms(const Chem::MolecularGraph& core, const Chem::
 		if (length(atom_pos - core_ctr) > bsphere_rad)
 			continue;
 
-		if (core.containsAtom(atom) || env_atoms.containsAtom(atom))
+		if (!inc_core_atoms && core.containsAtom(atom))
+			continue;
+
+		if (env_atoms.containsAtom(atom))
 			continue;
 
 		for (Math::Vector3DArray::ConstElementIterator c_it = core_coords.getElementsBegin(), c_end = core_coords.getElementsEnd(); c_it != c_end; ++c_it) {

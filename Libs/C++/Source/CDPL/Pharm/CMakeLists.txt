@@ -76,7 +76,7 @@ SET(cdpl-pharm_LIB_SRCS
     PharmacophoreNameFunctions.cpp
     PharmacophoreFeatureCountFunctions.cpp
     PharmacophoreFeatureTypeHistogramFunction.cpp
-    InteractionPharmacophoreFunction.cpp
+    InteractionPharmacophoreFunctions.cpp
     ExclusionVolumeClashTestFunction.cpp
 
     ControlParameterFunctions.cpp

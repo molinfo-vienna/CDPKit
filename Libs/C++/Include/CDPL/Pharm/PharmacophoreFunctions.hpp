@@ -78,6 +78,10 @@ namespace CDPL
 
 		CDPL_PHARM_API void buildInteractionPharmacophore(Pharmacophore& pharm, const FeatureMapping& iactions);
 
+		CDPL_PHARM_API void removeFeaturesWithoutInteractions(Pharmacophore& pharm, const FeatureMapping& iactions);
+
+		CDPL_PHARM_API void copyFeaturesWithInteractions(Pharmacophore& pharm, const FeatureMapping& iactions);
+
 		CDPL_PHARM_API bool checkExclusionVolumeClash(const Pharmacophore& pharm, const Chem::AtomContainer& cntnr, 
 													  const Chem::Atom3DCoordinatesFunction& coords_func,
 													  const Math::Matrix4D& xform, bool vdw = true);
