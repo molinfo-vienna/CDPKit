@@ -89,6 +89,12 @@ namespace CDPL
 			virtual DataWriter& write(const DataType& obj) = 0;
 
 			/**
+			 * \brief Writes format dependent data (if required) to mark the end of output.
+			 * \throw Base::IOError if an I/O error occurred.
+			 */
+			virtual void close() {}
+
+			/**
 			 * \brief Returns a pointer whose value indicates the error state of the writer.
 			 *
 			 * The operator allows to write expressions like:

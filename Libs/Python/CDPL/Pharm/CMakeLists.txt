@@ -27,6 +27,10 @@ SET(pharm_MOD_SRCS
     CDFPharmacophoreOutputHandlerExport.cpp 
     CDFPharmacophoreReaderExport.cpp 
     CDFPharmacophoreWriterExport.cpp
+    PMLPharmacophoreInputHandlerExport.cpp 
+    PMLPharmacophoreOutputHandlerExport.cpp 
+    PMLPharmacophoreReaderExport.cpp 
+    PMLPharmacophoreWriterExport.cpp
 
     PharmacophoreFitScoreExport.cpp
 

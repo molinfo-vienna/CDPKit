@@ -65,8 +65,9 @@ namespace CDPL
 			 *        and adds them to the pharmacophore \a pharm.
 			 * \param molgraph The molecular graph for which to perceive the features.
 			 * \param pharm The output pharmacophore where to add the generated features.
-			 * \param fuzzy \c true if some uncertainties in the presence or absence of features and interaction
-			 *                 directions should be handled less strictly.
+			 * \param fuzzy if \c false, ionic feature generation is done only for actually charged
+			 *              atoms/groups and H-donor feature vectors strictly represent the direction
+			 *              of the donor-hydrogens.
 			 */
 			DefaultPharmacophoreGenerator(const Chem::MolecularGraph& molgraph, Pharmacophore& pharm, bool fuzzy);
 

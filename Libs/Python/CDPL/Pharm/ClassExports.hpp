@@ -53,6 +53,10 @@ namespace CDPLPythonPharm
 	void exportCDFPharmacophoreOutputHandler();
 	void exportCDFPharmacophoreReader();
 	void exportCDFPharmacophoreWriter();
+	void exportPMLPharmacophoreInputHandler();
+	void exportPMLPharmacophoreOutputHandler();
+	void exportPMLPharmacophoreReader();
+	void exportPMLPharmacophoreWriter();
 
 	void exportPharmacophoreFitScore();
 

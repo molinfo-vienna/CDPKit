@@ -1,9 +1,9 @@
 /* -*- mode: c++; c-basic-offset: 4; tab-width: 4; indent-tabs-mode: t -*- */
 
 /* 
- * PMLDataReader.hpp 
+ * PMLPharmacophoreOutputHandlerExport.cpp 
  *
- * This file is part of the Pharmical Data Processing Toolkit
+ * This file is part of the Chemical Data Processing Toolkit
  *
  * Copyright (C) 2003-2010 Thomas A. Seidel <thomas.seidel@univie.ac.at>
  *
@@ -24,47 +24,19 @@
  */
 
 
-#ifndef CDPL_PHARM_PMLDATAREADER_HPP
-#define CDPL_PHARM_PMLDATAREADER_HPP
+#include <boost/python.hpp>
 
-#include <iosfwd>
+#include "CDPL/Pharm/PMLPharmacophoreOutputHandler.hpp"
+
+#include "ClassExports.hpp"
 
 
-namespace CDPL 
+void CDPLPythonPharm::exportPMLPharmacophoreOutputHandler()
 {
+	using namespace boost;
+	using namespace CDPL;
 
-	namespace Base
-	{
-
-		class DataIOBase;
-	}
-
-	namespace Pharm
-	{
-
-		class Pharmacophore;
-		class Feature;
-
-		class PMLDataReader
-		{
-
-		public:
-			PMLDataReader(const Base::DataIOBase& io_base): ioBase(io_base) {}
-
-			virtual ~PMLDataReader() {}
-
-			bool readPharmacophore(std::istream& is, Pharmacophore& pharm);
-
-			bool skipPharmacophore(std::istream& is);
-
-			bool hasMoreData(std::istream& is);
-
-		private:
-			void init(); 
-
-			const Base::DataIOBase& ioBase;	
-		};
-	}
+	python::class_<Pharm::PMLPharmacophoreOutputHandler, 
+				   python::bases<Base::DataOutputHandler<Pharm::Pharmacophore> > >("PMLPharmacophoreOutputHandler", python::no_init)
+		.def(python::init<>(python::arg("self")));
 }
-
-#endif // CDPL_PHARM_PMLDATAREADER_HPP

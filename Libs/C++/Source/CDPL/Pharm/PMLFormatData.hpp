@@ -27,6 +27,8 @@
 #ifndef CDPL_PHARM_PMLFORMATDATA_HPP
 #define CDPL_PHARM_PMLFORMATDATA_HPP
 
+#include <string>
+
 
 namespace CDPL
 {
@@ -36,8 +38,48 @@ namespace CDPL
 
 		namespace PML
 		{
-			
-		
+
+			const std::string ELEM_CONTAINER_HEADER  = "<ElementContainer activeResult=\"-1\"><ContainerPharmacophores>";
+			const std::string ELEM_CONTAINER_FOOTER  = "</ContainerPharmacophores></ElementContainer>";
+
+			const std::string ALIGNMENT_ELEM_TAG = "alignmentElement";
+			const std::string PHARMACOPHORE_TAG  = "pharmacophore";
+			const std::string POINT_FEATURE_TAG  = "point";
+			const std::string PLANE_FEATURE_TAG  = "plane";
+			const std::string VECTOR_FEATURE_TAG = "vector";
+			const std::string VOLUME_FEATURE_TAG = "volume";
+
+			const std::string FEATURE_POSITION_TAG = "position";
+			const std::string FEATURE_NORMAL_TAG   = "normal";
+			const std::string FEATURE_ORIGIN_TAG   = "origin";
+			const std::string FEATURE_TARGET_TAG   = "target";
+
+			const std::string NAME_ATTRIBUTE             = "name";
+			const std::string FLAG_CODE_ATTRIBUTE        = "flagCode";
+			const std::string ID_ATTRIBUTE               = "id";
+			const std::string FEATURE_ID_ATTRIBUTE       = "featureId";
+			const std::string OPTIONAL_ATTRIBUTE         = "optional";
+			const std::string DISABLED_ATTRIBUTE         = "disabled";
+			const std::string WEIGHT_ATTRIBUTE           = "weight";
+			const std::string POINTS_TO_LIGAND_ATTRIBUTE = "pointsToLigand";
+			const std::string PROJECTED_POINT_ATTRIBUTE  = "hasSyntheticProjectedPoint";
+			const std::string TYPE_ATTRIBUTE             = "type";
+			const std::string TOLERANCE_ATTRIBUTE        = "tolerance";
+			const std::string COORDS_X_ATTRIBUTE         = "x3";
+			const std::string COORDS_Y_ATTRIBUTE         = "y3";
+			const std::string COORDS_Z_ATTRIBUTE         = "z3";
+			const std::string PHARM_TYPE_ATTRIBUTE       = "pharmacophoreType";
+
+			const std::string DEFAULT_FLAG_CODE          = "111000000";
+			const std::string PHARM_TYPE_LIGAND_SCOUT    = "LIGAND_SCOUT";
+			const std::string VOLUME_TYPE_EXCLUSION      = "exclusion";
+
+			const std::string HYDROPHOBIC_FEATURE_NAME     = "H";
+			const std::string AROMATIC_FEATURE_NAME        = "AR";
+			const std::string NEG_IONIZABLE_FEATURE_NAME   = "NI";
+			const std::string POS_IONIZABLE_FEATURE_NAME   = "PI";
+			const std::string H_BOND_DONOR_FEATURE_NAME    = "HBD";
+			const std::string H_BOND_ACCEPTOR_FEATURE_NAME = "HBA";
 		}
     }
 }

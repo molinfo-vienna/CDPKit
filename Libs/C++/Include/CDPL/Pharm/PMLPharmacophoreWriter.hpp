@@ -77,7 +77,10 @@ namespace CDPL
 			 */
 			Base::DataWriter<Pharmacophore>& write(const Pharmacophore& pharm);
 
+			void close();
+
 			operator const void*() const;
+
 			bool operator!() const;
 
 		private:

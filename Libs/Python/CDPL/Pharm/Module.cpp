@@ -54,6 +54,10 @@ BOOST_PYTHON_MODULE(_pharm)
 	exportCDFPharmacophoreOutputHandler();
 	exportCDFPharmacophoreReader();
 	exportCDFPharmacophoreWriter();
+	exportPMLPharmacophoreInputHandler();
+	exportPMLPharmacophoreOutputHandler();
+	exportPMLPharmacophoreReader();
+	exportPMLPharmacophoreWriter();
 
 	exportPharmacophoreFitScore();
 

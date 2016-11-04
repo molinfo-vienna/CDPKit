@@ -28,6 +28,8 @@
 #define CDPL_PHARM_PMLDATAWRITER_HPP
 
 #include <iosfwd>
+#include <string>
+#include <cstddef>
 
 
 namespace CDPL 
@@ -36,26 +38,60 @@ namespace CDPL
 	namespace Base
 	{
 
-		class ControlParameterContainer;
+		class DataIOBase;
 	}
 
 	namespace Pharm
 	{
 
 		class Pharmacophore;
+		class Feature;
 
 		class PMLDataWriter
 		{
 
 		public:
-			PMLDataWriter(const Base::ControlParameterContainer& ctrl_params): ctrlParams(ctrl_params) {}
+			PMLDataWriter(const Base::DataIOBase& io_base);
 
 			bool writePharmacophore(std::ostream& os, const Pharmacophore& pharm);
 
-		private:
-			void init();
+			void close(std::ostream& os);
 
-			const Base::ControlParameterContainer& ctrlParams;	
+		private:
+			void init(std::ostream& os);
+
+			void writeElemContainerHeader(std::ostream& os) const;
+			void writeElemContainerFooter(std::ostream& os) const;
+
+			void startAlignmentElement(std::ostream& os, const Pharmacophore& pharm);
+			void endAlignmentElement(std::ostream& os) const;
+
+			void startPharmacophore(std::ostream& os, const Pharmacophore& pharm) const;
+			void endPharmacophore(std::ostream& os) const;
+
+			void writeFeatures(std::ostream& os, const Pharmacophore& pharm);
+
+			void writeXVolume(std::ostream& os, const Feature& ftr, std::size_t id);
+			void writePointFeature(std::ostream& os, const Feature& ftr, const std::string& name, std::size_t id);
+			void writeVectorFeature(std::ostream& os, const Feature& ftr, const std::string& name, std::size_t id, bool points_to_lig);
+			void writePlaneFeature(std::ostream& os, const Feature& ftr, const std::string& name, std::size_t id);
+
+			void writeDefaultFeatureAttributes(std::ostream& os, const Feature& ftr, const std::string& name, std::size_t id, bool close);
+
+			template <typename VE>
+			void writePositionAndTolerance(std::ostream& os, const std::string& tag, const VE& pos, double tol) const;
+
+			void writeStartTag(std::ostream& os, const std::string& tag, bool close) const;
+			void writeEndTag(std::ostream& os, const std::string& tag) const;
+
+			template <typename T>
+			void writeAttribute(std::ostream& os, const std::string& name, const T& value, bool close, bool empty = false) const;
+
+			const Base::DataIOBase& ioBase;
+			bool                    writeHeader;
+			bool                    strictErrorChecking;
+			std::size_t             alignElemID;
+			std::size_t             featureID;
 		};
 	}
 }

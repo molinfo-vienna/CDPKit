@@ -58,6 +58,19 @@ namespace CDPLPythonBase
 		bool operator!() const {
 			return !this->get_override("__nonzero__")();
 		}
+
+		void close() {
+			if (boost::python::override f = this->get_override("close")) {
+				f();                                                      
+				return;                                                   
+			}                                                             
+                              
+			CDPL::Base::DataWriter<T>::close();
+		}
+
+		void closeDef() {
+			CDPL::Base::DataWriter<T>::close();
+		}
 	};
 
 	template <typename T>
@@ -75,6 +88,7 @@ namespace CDPLPythonBase
 				.def(python::init<>(python::arg("self")))
 				.def("write", python::pure_virtual(&WriterType::write), 
 					 (python::arg("self"), python::arg(obj_arg_name)), python::return_self<>())
+				.def("close", &WriterType::close, &DataWriterWrapper<T>::closeDef, python::arg("self"))
 				.def("__nonzero__", python::pure_virtual(&nonZero), python::arg("self"));
 
 			python::register_ptr_to_python<typename Base::DataWriter<T>::SharedPointer>();

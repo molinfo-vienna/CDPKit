@@ -40,7 +40,10 @@ using namespace CDPL;
 Pharm::PMLPharmacophoreWriter::PMLPharmacophoreWriter(std::ostream& os): 
 	output(os), state(os.good()), writer(new PMLDataWriter(*this)) {}
 
-Pharm::PMLPharmacophoreWriter::~PMLPharmacophoreWriter() {}
+Pharm::PMLPharmacophoreWriter::~PMLPharmacophoreWriter() 
+{
+	close();
+}
 
 Base::DataWriter<Pharm::Pharmacophore>& Pharm::PMLPharmacophoreWriter::write(const Pharmacophore& pharm)
 {
@@ -66,4 +69,9 @@ Pharm::PMLPharmacophoreWriter::operator const void*() const
 bool Pharm::PMLPharmacophoreWriter::operator!() const
 {
 	return !state;
+}
+
+void Pharm::PMLPharmacophoreWriter::close()
+{
+	writer->close(output);
 }
