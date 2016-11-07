@@ -47,7 +47,7 @@ bool Pharm::PMLPharmacophoreReader::readData(std::istream& is, Pharmacophore& ph
 	try {
 		return reader->readPharmacophore(is, pharm);
 
-	} catch (Base::Exception& e) {
+	} catch (const Base::Exception& e) {
 		throw Base::IOError("PMLPharmacophoreReader: while reading record " + boost::lexical_cast<std::string>(getRecordIndex()) + 
 							": " + e.what());
 	}
@@ -58,7 +58,7 @@ bool Pharm::PMLPharmacophoreReader::skipData(std::istream& is)
 	try {
 		return reader->skipPharmacophore(is);
 
-	} catch (Base::Exception& e) {
+	} catch (const Base::Exception& e) {
 		throw Base::IOError("PMLPharmacophoreReader: while skipping record " + boost::lexical_cast<std::string>(getRecordIndex()) + 
 							": " + e.what());
 	}

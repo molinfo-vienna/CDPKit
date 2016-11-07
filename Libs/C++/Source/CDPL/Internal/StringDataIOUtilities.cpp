@@ -24,6 +24,8 @@
  */
 
 
+#include <algorithm>
+
 #include "StringDataIOUtilities.hpp"
 #include "StringUtilities.hpp"
 
@@ -42,6 +44,75 @@ void Internal::skipChars(std::istream& is, std::size_t count, const std::string&
 	if (c == eol_char)
 		is.putback(eol_char);
 }
+
+bool Internal::skipToString(std::istream& is, const std::string& str, const std::string& err_msg, bool pos_after)
+{
+	std::size_t str_len = str.length();
+
+	while (true) {
+		std::istream::pos_type last_spos = is.tellg();
+		std::size_t i = 0;
+
+		for ( ; i < str_len; i++) {
+			char c;
+
+			if (!is.get(c)) {
+				if (is.bad() || !is.eof())
+					throw Base::IOError(err_msg + ": stream read error");
+
+				return false;
+			}
+
+			if (c != str[i]) {
+				is.seekg(last_spos + std::istream::pos_type(1));
+				break;
+			}
+		}
+	
+		if (i == str_len) {
+			if (!pos_after)
+				is.seekg(last_spos);
+			
+			return true;
+		}
+	}
+
+	return false;
+}
+
+bool Internal::readToString(std::istream& is, const std::string& str, std::string& data, const std::string& err_msg, bool inc_str)
+{
+	std::size_t str_len = str.length();
+
+	while (true) {
+		char c;
+
+		if (!is.get(c)) {
+			if (is.bad() || !is.eof())
+				throw Base::IOError(err_msg + ": stream read error");
+			
+			return false;
+		}
+
+		data.push_back(c);
+
+		std::size_t data_len = data.length();
+
+		if (data_len < str_len)
+			continue;
+
+		std::size_t cmp_pos = data_len - str_len;
+
+		if (std::equal(data.begin() + cmp_pos, data.end(), str.begin())) {
+			if (!inc_str)
+				data.resize(cmp_pos);
+
+			return true;
+		}
+	}
+
+	return false;
+} 
 
 void Internal::skipLines(std::istream& is, std::size_t count, const std::string& err_msg, char eol_char)
 {

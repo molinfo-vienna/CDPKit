@@ -28,6 +28,9 @@
 #define CDPL_PHARM_PMLDATAREADER_HPP
 
 #include <iosfwd>
+#include <string>
+
+#include "RapidXML/rapidxml.hpp"
 
 
 namespace CDPL 
@@ -49,7 +52,7 @@ namespace CDPL
 		{
 
 		public:
-			PMLDataReader(const Base::DataIOBase& io_base): ioBase(io_base) {}
+			PMLDataReader(const Base::DataIOBase& io_base);
 
 			virtual ~PMLDataReader() {}
 
@@ -62,7 +65,10 @@ namespace CDPL
 		private:
 			void init(); 
 
-			const Base::DataIOBase& ioBase;	
+			const Base::DataIOBase&      ioBase;	
+			bool                         strictErrorChecking;
+			std::string                  pharmData;
+			rapidxml::xml_document<char> pharmDocument;
 		};
 	}
 }

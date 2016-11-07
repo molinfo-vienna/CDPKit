@@ -47,7 +47,7 @@ bool Chem::CDFMoleculeReader::readData(std::istream& is, Molecule& mol)
 	try {
 		return reader->readMolecule(is, mol);
 
-	} catch (Base::Exception& e) {
+	} catch (const Base::Exception& e) {
 		throw Base::IOError("CDFMoleculeReader: while reading record " + boost::lexical_cast<std::string>(getRecordIndex()) + 
 							": " + e.what());
 	}
@@ -58,7 +58,7 @@ bool Chem::CDFMoleculeReader::skipData(std::istream& is)
 	try {
 		return reader->skipMolecule(is);
 
-	} catch (Base::Exception& e) {
+	} catch (const Base::Exception& e) {
 		throw Base::IOError("CDFMoleculeReader: while skipping record " + boost::lexical_cast<std::string>(getRecordIndex()) + 
 							": " + e.what());
 	}

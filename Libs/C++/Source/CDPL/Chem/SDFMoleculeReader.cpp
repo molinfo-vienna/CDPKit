@@ -47,7 +47,7 @@ bool Chem::SDFMoleculeReader::readData(std::istream& is, Molecule& mol)
 	try {
 		return reader->readSDFileRecord(is, mol);
 
-	} catch (Base::Exception& e) {
+	} catch (const Base::Exception& e) {
 		throw Base::IOError("SDFMoleculeReader: while reading record " + boost::lexical_cast<std::string>(getRecordIndex()) + 
 							": " + e.what());
 	}
@@ -58,7 +58,7 @@ bool Chem::SDFMoleculeReader::skipData(std::istream& is)
 	try {
 		return reader->skipSDFileRecord(is);
 
-	} catch (Base::Exception& e) {
+	} catch (const Base::Exception& e) {
 		throw Base::IOError("SDFMoleculeReader: while skipping record " + boost::lexical_cast<std::string>(getRecordIndex()) + 
 							": " + e.what());
 	}

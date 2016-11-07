@@ -47,7 +47,7 @@ bool Chem::MOLMoleculeReader::readData(std::istream& is, Molecule& mol)
 	try {
 		return reader->readMOLFile(is, mol);
 
-	} catch (Base::Exception& e) {
+	} catch (const Base::Exception& e) {
 		throw Base::IOError("MOLMoleculeReader: while reading record " + boost::lexical_cast<std::string>(getRecordIndex()) + 
 							": " + e.what());
 	}
@@ -58,7 +58,7 @@ bool Chem::MOLMoleculeReader::skipData(std::istream& is)
 	try {
 		return reader->skipMOLFile(is);
 
-	} catch (Base::Exception& e) {
+	} catch (const Base::Exception& e) {
 		throw Base::IOError("MOLMoleculeReader: while skipping record " + boost::lexical_cast<std::string>(getRecordIndex()) + 
 							": " + e.what());
 	}

@@ -65,6 +65,10 @@ namespace CDPL
 		std::string& readString(std::istream& is, std::size_t field_size, std::string& str, bool clear = true,
 								const std::string& err_msg = "Error", bool trim = true, char eol_char = '\n');
 	
+		bool skipToString(std::istream& is, const std::string& str, const std::string& err_msg = "Error", bool pos_after = false); 
+
+		bool readToString(std::istream& is, const std::string& str, std::string& data, const std::string& err_msg = "Error", bool inc_str = false); 
+
 		template <typename T, std::size_t FieldSize>
 		T readNumber(std::istream& is, const std::string& err_msg = "Error", bool throw_ex = true, 
 					 const T empty_def_val = T(0), const T err_def_val = T(0), char eol_char = '\n')

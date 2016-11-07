@@ -82,7 +82,7 @@ bool Internal::CDFDataReaderBase::readHeader(std::istream& is, CDF::Header& head
 {	
 	std::size_t num_read = bbuf.readBuffer(is, CDF::HEADER_SIZE);
 
-	if (!is.good())
+	if (is.bad() || (is.fail() && !is.eof()))
 		throw Base::IOError("CDFDataReaderBase: could not read CDF-header, input stream read error");
 
 	if (num_read != CDF::HEADER_SIZE) {
