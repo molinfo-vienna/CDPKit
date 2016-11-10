@@ -54,7 +54,7 @@ namespace CDPL
 		class FeatureGenerator;
 
 		/**
-		 * \addtogroup CDPL_PHARM_PHARMACOPHORE_PERCEPTION
+		 * \addtogroup CDPL_PHARM_PERCEPTION
 		 * @{
 		 */
 

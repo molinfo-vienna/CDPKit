@@ -196,6 +196,7 @@
 #include "CDPL/Chem/AutoCorrelationVectorCalculator.hpp"
 #include "CDPL/Chem/BurdenMatrixGenerator.hpp"
 #include "CDPL/Chem/BCUTDescriptorCalculator.hpp"
+#include "CDPL/Chem/SurfaceAtomExtractor.hpp"
 
 #include "CDPL/Chem/TopologicalEntityAlignment.hpp"
 #include "CDPL/Chem/GeometricalEntityAlignment.hpp"

@@ -49,7 +49,7 @@ Base::DataWriter<Chem::MolecularGraph>& Chem::SMILESMolecularGraphWriter::write(
 	try {
 		state = writer->writeMolGraph(output, molgraph);
 
-	} catch (const Base::Exception& e) {
+	} catch (const std::exception& e) {
 		throw Base::IOError("SMILESMolecularGraphWriter: " + std::string(e.what()));
 	}
 

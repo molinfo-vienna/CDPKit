@@ -49,7 +49,7 @@ Base::DataWriter<Chem::MolecularGraph>& Biomol::PDBMolecularGraphWriter::write(c
 	try {
 		state = writer->writePDBFileRecord(output, molgraph);
 
-	} catch (const Base::Exception& e) {
+	} catch (const std::exception& e) {
 		throw Base::IOError("PDBMolecularGraphWriter: " + std::string(e.what()));
 	}
 

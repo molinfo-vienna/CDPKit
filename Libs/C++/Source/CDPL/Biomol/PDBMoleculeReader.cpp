@@ -47,7 +47,7 @@ bool Biomol::PDBMoleculeReader::readData(std::istream& is, Chem::Molecule& mol)
 	try {
 		return reader->readPDBFile(is, mol);
 
-	} catch (const Base::Exception& e) {
+	} catch (const std::exception& e) {
 		throw Base::IOError("PDBMoleculeReader: while reading entry " + boost::lexical_cast<std::string>(getRecordIndex()) + 
 							": " + e.what());
 	}
@@ -58,7 +58,7 @@ bool Biomol::PDBMoleculeReader::skipData(std::istream& is)
 	try {
 		return reader->skipPDBFile(is);
 
-	} catch (const Base::Exception& e) {
+	} catch (const std::exception& e) {
 		throw Base::IOError("PDBMoleculeReader: while skipping entry " + boost::lexical_cast<std::string>(getRecordIndex()) + 
 							": " + e.what());
 	}

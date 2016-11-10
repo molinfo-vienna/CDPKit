@@ -47,7 +47,7 @@ bool Chem::RXNReactionReader::readData(std::istream& is, Reaction& rxn)
 	try {
 		return reader->readRXNFile(is, rxn);
 
-	} catch (const Base::Exception& e) {
+	} catch (const std::exception& e) {
 		throw Base::IOError("RXNReactionReader: while reading record " + boost::lexical_cast<std::string>(getRecordIndex()) + 
 							": " + e.what());
 	}
@@ -58,7 +58,7 @@ bool Chem::RXNReactionReader::skipData(std::istream& is)
 	try {
 		return reader->skipRXNFile(is);
 
-	} catch (const Base::Exception& e) {
+	} catch (const std::exception& e) {
 		throw Base::IOError("RXNReactionReader: while skipping record " + boost::lexical_cast<std::string>(getRecordIndex()) + 
 							": " + e.what());
 	}

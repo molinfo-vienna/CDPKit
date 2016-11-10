@@ -47,7 +47,7 @@ bool Chem::RDFReactionReader::readData(std::istream& is, Reaction& rxn)
 	try {
 		return reader->readRDFileRecord(is, rxn);
 
-	} catch (const Base::Exception& e) {
+	} catch (const std::exception& e) {
 		throw Base::IOError("RDFReactionReader: while reading record " + boost::lexical_cast<std::string>(getRecordIndex()) + 
 							": " + e.what());
 	}
@@ -58,7 +58,7 @@ bool Chem::RDFReactionReader::skipData(std::istream& is)
 	try {
 		return reader->skipRDFileRecord(is);
 
-	} catch (const Base::Exception& e) {
+	} catch (const std::exception& e) {
 		throw Base::IOError("RDFReactionReader: while skipping record " + boost::lexical_cast<std::string>(getRecordIndex()) + 
 							": " + e.what());
 	}

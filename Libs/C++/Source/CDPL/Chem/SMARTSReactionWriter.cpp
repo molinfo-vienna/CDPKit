@@ -49,7 +49,7 @@ Base::DataWriter<Chem::Reaction>& Chem::SMARTSReactionWriter::write(const Reacti
 	try {
 		state = writer->writeReaction(output, rxn);
 
-	} catch (const Base::Exception& e) {
+	} catch (const std::exception& e) {
 		throw Base::IOError("SMARTSReactionWriter: " + std::string(e.what()));
 	}
 

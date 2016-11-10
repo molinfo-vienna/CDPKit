@@ -53,7 +53,7 @@ namespace CDPL
 		class Pharmacophore;
 
 		/**
-		 * \addtogroup CDPL_PHARM_PHARMACOPHORE_PERCEPTION
+		 * \addtogroup CDPL_PHARM_PERCEPTION
 		 * @{
 		 */
 

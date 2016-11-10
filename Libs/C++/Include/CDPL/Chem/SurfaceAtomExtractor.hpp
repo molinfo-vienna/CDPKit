@@ -1,7 +1,7 @@
 /* -*- mode: c++; c-basic-offset: 4; tab-width: 4; indent-tabs-mode: t -*- */
 
 /* 
- * SurfaceXVolumeCoatGenerator.hpp 
+ * SurfaceAtomExtractor.hpp 
  *
  * This file is part of the Chemical Data Processing Toolkit
  *
@@ -25,55 +25,45 @@
 
 /**
  * \file
- * \brief Definition of the class CDPL::Pharm::SurfaceXVolumeCoatGenerator.
+ * \brief Definition of the class CDPL::Chem::SurfaceAtomExtractor.
  */
 
-#ifndef CDPL_PHARM_SURFACEXVOLUMECOATGENERATOR_HPP
-#define CDPL_PHARM_SURFACEXVOLUMECOATGENERATOR_HPP
+#ifndef CDPL_CHEM_SURFACEATOMEXTRACTOR_HPP
+#define CDPL_CHEM_SURFACEATOMEXTRACTOR_HPP
 
 #include <vector>
 #include <cstddef>
 
 #include <boost/shared_ptr.hpp>
 
-#include "CDPL/Pharm/APIPrefix.hpp"
-#include "CDPL/Pharm/FeatureType.hpp"
-#include "CDPL/Pharm/FeatureGeometry.hpp"
+#include "CDPL/Chem/APIPrefix.hpp"
 #include "CDPL/Chem/Atom3DCoordinatesFunction.hpp"
 #include "CDPL/Math/Matrix.hpp"
 #include "CDPL/Math/Vector.hpp"
-#include "CDPL/Util/BitSet.hpp"
 
 
 namespace CDPL 
 {
 
-	namespace Chem
-	{
-
-		class MolecularGraph;
-		class AtomContainer;
-	}
-
-    namespace Pharm
+    namespace Chem
     {
 
 		/**
-		 * \addtogroup CDPL_PHARM_PERCEPTION
+		 * \addtogroup CDPL_CHEM_SURFACE_ATOM_PERCEPTION
 		 * @{
 		 */
 
-		class Pharmacophore;
+		class MolecularGraph;
+		class AtomContainer;
+		class Fragment;
 
 		/**
-		 * \brief SurfaceXVolumeCoatGenerator.
+		 * \brief SurfaceAtomExtractor.
 		 */
-		class CDPL_PHARM_API SurfaceXVolumeCoatGenerator
+		class CDPL_CHEM_API SurfaceAtomExtractor
 		{
 
 		  public:
-			static const unsigned int DEF_FEATURE_TYPE    = FeatureType::X_VOLUME;
-			static const unsigned int DEF_FEATURE_GEOM    = FeatureGeometry::SPHERE;
 			static const double       DEF_PROBE_RADIUS    = 1.2;
 			static const double       DEF_GRID_OVERSIZE   = 5.0;
 			static const double       DEF_GRID_STEP_SIZE  = 0.75;
@@ -81,53 +71,22 @@ namespace CDPL
 			static const std::size_t  DEF_NUM_TEST_POINTS = 250;
 
 			/**
-			 * \brief Constructs the \c %SurfaceXVolumeCoatGenerator instance.
+			 * \brief Constructs the \c %SurfaceAtomExtractor instance.
 			 */
-			SurfaceXVolumeCoatGenerator();
+			SurfaceAtomExtractor();
 
 			/**
-			 * \brief Generates an excluded volume coat representing the accessible surface of \a cntnr and adds 
-			 *        them to the pharmacophore \a pharm.
-			 * \param cntnr The set of atoms for which to generate the excluded volume coat.
-			 * \param parent_molgraph The parent molecular graph which contains the atoms in \a cntnr.
-			 * \param pharm The output pharmacophore where to add the generated excluded volumes.
+			 * \brief Perceives the surface accessible atoms of \a cntnr and adds them to the fragment \a frag.
+			 * \param cntnr The set of atoms for which to perceive the surface accessibility.
+			 * \param parent_molgraph The parent molecular graph which embeds the atoms in \a cntnr.
+			 * \param frag The output fragment where to store the perceived surface atoms.
 			 */
-			SurfaceXVolumeCoatGenerator(const Chem::AtomContainer& cntnr, const Chem::MolecularGraph& parent_molgraph, Pharmacophore& pharm);
-
-			/**
-			 * \brief Specifies the value of the feature type property that has to be set on newly generated excluded volumes.
-			 * \param type The value of the feature type property.
-			 * \note The default type is specified by the constant SurfaceXVolumeCoatGenerator::DEF_FEATURE_TYPE.
-			 * \see FeatureProperty::TYPE
-			 */			
-			void setFeatureType(unsigned int type);
-
-			/**
-			 * \brief Returns the value of the feature type property that gets set on newly generated excluded volumes.
-			 * \return The used value of the feature type property.
-			 * \see FeatureProperty::TYPE
-			 */
-			unsigned int getFeatureType() const;
-
-			/**
-			 * \brief Specifies the value of the feature geometry property that has to be set on newly generated excluded volumes.
-			 * \param geom The value of the feature geometry property.
-			 * \note The default type is specified by the constant SurfaceXVolumeCoatGenerator::DEF_FEATURE_GEOM.
-			 * \see FeatureProperty::GEOMETRY
-			 */
-			void setFeatureGeometry(unsigned int geom);
-
-			/**
-			 * \brief Returns the value of the feature geometry property that gets set on newly generated excluded volumes.
-			 * \return The used value of the feature geometry property.
-			 * \see FeatureProperty::GEOMETRY
-			 */
-			unsigned int getFeatureGeometry() const;
+			SurfaceAtomExtractor(const AtomContainer& cntnr, const MolecularGraph& parent_molgraph, Fragment& frag);
 
 			/**
 			 * \brief Specifies the radius of the probe sphere that determines the accessibility of the surface atoms.
 			 * \param radius The radius of the probe sphere.
-			 * \note The default value is specified by the constant SurfaceXVolumeCoatGenerator::DEF_PROBE_RADIUS.
+			 * \note The default value is specified by the constant SurfaceAtomExtractor::DEF_PROBE_RADIUS.
 			 */
 			void setProbeRadius(double radius);
 
@@ -140,7 +99,7 @@ namespace CDPL
 			/**
 			 * \brief Specifies the distance between the grid-points in space which store lists of atoms with proximal positions.
 			 * \param size The distance between the grid-points along each axis.
-			 * \note The default value is specified by the constant SurfaceXVolumeCoatGenerator::DEF_GRID_STEP_SIZE.
+			 * \note The default value is specified by the constant SurfaceAtomExtractor::DEF_GRID_STEP_SIZE.
 			 */
 			void setGridStepSize(double size);
 
@@ -154,7 +113,7 @@ namespace CDPL
 			 * \brief Specifies the margin that gets added to each side of the molecular graph's bounding-box for the calculation
 			 *        of the final atom-lookup grid dimensions.
 			 * \param size The margin that gets added to the molecular graph's bounding-box.
-			 * \note The default value is specified by the constant SurfaceXVolumeCoatGenerator::DEF_GRID_OVERSIZE.
+			 * \note The default value is specified by the constant SurfaceAtomExtractor::DEF_GRID_OVERSIZE.
 			 */
 			void setGridOversize(double size);
 
@@ -166,19 +125,24 @@ namespace CDPL
 			double getGridOversize() const;
 
 			/**
-			 * \brief Specifies the minimum percentage of test points that have to be accessible by the probe sphere 
+			 * \brief Specifies the minimum fraction of test points that have to be accessible by the probe sphere 
 			 *        to consider an atom as a surface atom.
-			 * \param min_acc The minimum required percentage of accessible test points.
-			 * \note The default value is specified by the constant SurfaceXVolumeCoatGenerator::DEF_MIN_SURFACE_ACC.
+			 * \param min_acc The minimum required fraction of accessible test points.
+			 * \note The default value is specified by the constant SurfaceAtomExtractor::DEF_MIN_SURFACE_ACC.
 			 */
 			void setMinSurfaceAccessibility(double min_acc);
 
+			/**
+			 * \brief Returns the minimum fraction of test points that have to be accessible by the probe sphere 
+			 *        to consider an atom as a surface atom.
+			 * \return The minimum required fraction of accessible test points.
+			 */
 			double getMinSurfaceAccessibility() const;
 
 			/**
 			 * \brief Specifies the number of points on the atom surface at which a test for surface accessibility is carried out.
 			 * \param num_points The number of test points.
-			 * \note The default value is specified by the constant SurfaceXVolumeCoatGenerator::DEF_NUM_TEST_POINTS.
+			 * \note The default value is specified by the constant SurfaceAtomExtractor::DEF_NUM_TEST_POINTS.
 			 */
 			void setNumTestPoints(std::size_t num_points);
 
@@ -192,22 +156,22 @@ namespace CDPL
 			 * \brief Specifies a function for the retrieval of atom 3D-coordinates.
 			 * \param func The atom 3D-coordinates function.
 			 */
-			virtual void setAtom3DCoordinatesFunction(const Chem::Atom3DCoordinatesFunction& func);
+			virtual void setAtom3DCoordinatesFunction(const Atom3DCoordinatesFunction& func);
 
 			/**
 			 * \brief Returns the function that was registered for the retrieval of atom 3D-coordinates.
 			 * \return The registered atom 3D-coordinates function.
 			 */
-			const Chem::Atom3DCoordinatesFunction& getAtom3DCoordinatesFunction() const;
+			const Atom3DCoordinatesFunction& getAtom3DCoordinatesFunction() const;
 
 			/**
-			 * \brief Generates an excluded volume coat representing the accessible surface of \a cntnr and adds 
-			 *        them to the pharmacophore \a pharm.
-			 * \param cntnr The set of atoms for which to generate the excluded volume coat.
-			 * \param parent_molgraph The parent molecular graph which contains the atoms in \a cntnr.
-			 * \param pharm The output pharmacophore where to add the generated excluded volumes.
+			 * \brief Perceives the surface accessible atoms of \a cntnr that are part of \a molgraph and adds 
+			 *        them to the fragment \a frag.
+			 * \param cntnr The set of atoms for which to perceive the surface accessibility.
+			 * \param parent_molgraph The parent molecular graph which embeds the atoms in \a cntnr.
+			 * \param frag The output fragment where to store the perceived surface atoms.
 			 */
-			void generate(const Chem::AtomContainer& cntnr, const Chem::MolecularGraph& parent_molgraph, Pharmacophore& pharm);
+			void extract(const AtomContainer& cntnr, const MolecularGraph& parent_molgraph, Fragment& frag);
 
 		  private:
 			typedef std::vector<double> AtomRadiusTable;
@@ -216,26 +180,23 @@ namespace CDPL
 			typedef std::vector<AtomIndexListPtr> GridAtomLookupTable;
 			typedef std::vector<Math::Vector3D> Vector3DArray;
 
-			bool init(const Chem::AtomContainer& cntnr, const Chem::MolecularGraph& parent_molgraph);
+			bool init(const AtomContainer& cntnr, const MolecularGraph& parent_molgraph);
 
-			void xformCoordinates();
+			void transformCoordinates();
 			void calcBoundingBox();
 			void initGridAtomLookupTable();
-			void extractSurfaceAtoms();
-			void generateXVolumes(Pharmacophore&);
+			void extractSurfaceAtoms(Fragment& frag);
 
 			void initTestPoints();
 
-			unsigned int                    featureType;
-			unsigned int                    featureGeom;
 			double                          probeRadius;
 			double                          gridOversize;
 			double                          gridStepSize;
 			double                          minSurfAcc;
 			std::size_t                     numTestPoints;
-			Chem::Atom3DCoordinatesFunction coordsFunc;
-			const Chem::AtomContainer*      atomContainer;
-			const Chem::MolecularGraph*     parentMolGraph;
+			Atom3DCoordinatesFunction       coordsFunc;
+			const AtomContainer*            atomContainer;
+			const MolecularGraph*           parentMolGraph;
 			AtomRadiusTable                 atomRadii; 
 			AtomIndexList                   atomIndices; 
 			Math::Matrix<double>            svdU;
@@ -247,8 +208,6 @@ namespace CDPL
 			std::size_t                     gridYSize;
 			std::size_t                     gridZSize;
 			GridAtomLookupTable             gridAtomLookup;
-			AtomIndexList                   surfaceAtoms;
-			Util::BitSet                    surfAtomMask;
 		};
 
 		/**
@@ -257,4 +216,4 @@ namespace CDPL
     }
 }
 
-#endif // CDPL_PHARM_SURFACEXVOLUMECOATGENERATOR_HPP
+#endif // CDPL_CHEM_SURFACEATOMEXTRACTOR_HPP

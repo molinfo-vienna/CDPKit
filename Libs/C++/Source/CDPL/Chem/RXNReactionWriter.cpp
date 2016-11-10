@@ -49,7 +49,7 @@ Base::DataWriter<Chem::Reaction>& Chem::RXNReactionWriter::write(const Reaction&
 	try {
 		state = writer->writeRXNFile(output, rxn);
 
-	} catch (const Base::Exception& e) {
+	} catch (const std::exception& e) {
 		throw Base::IOError("RXNReactionWriter: " + std::string(e.what()));
 	}
 

@@ -49,7 +49,7 @@ Base::DataWriter<Chem::MolecularGraph>& Chem::CDFMolecularGraphWriter::write(con
 	try {
 		state = writer->writeMolGraph(output, molgraph);
 
-	} catch (const Base::Exception& e) {
+	} catch (const std::exception& e) {
 		throw Base::IOError("CDFMolecularGraphWriter: " + std::string(e.what()));
 	}
 

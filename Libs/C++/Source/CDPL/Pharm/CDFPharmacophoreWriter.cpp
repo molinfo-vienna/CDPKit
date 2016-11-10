@@ -49,7 +49,7 @@ Base::DataWriter<Pharm::Pharmacophore>& Pharm::CDFPharmacophoreWriter::write(con
 	try {
 		state = writer->writePharmacophore(output, pharm);
 
-	} catch (const Base::Exception& e) {
+	} catch (const std::exception& e) {
 		throw Base::IOError("CDFPharmacophoreWriter: " + std::string(e.what()));
 	}
 

@@ -52,7 +52,7 @@ Base::DataWriter<Pharm::Pharmacophore>& Pharm::PMLPharmacophoreWriter::write(con
 	try {
 		state = writer->writePharmacophore(output, pharm);
 
-	} catch (const Base::Exception& e) {
+	} catch (const std::exception& e) {
 		throw Base::IOError("PMLPharmacophoreWriter: " + std::string(e.what()));
 	}
 

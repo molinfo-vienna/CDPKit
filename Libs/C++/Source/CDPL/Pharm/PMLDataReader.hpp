@@ -32,6 +32,8 @@
 
 #include "RapidXML/rapidxml.hpp"
 
+#include "CDPL/Math/Vector.hpp"
+
 
 namespace CDPL 
 {
@@ -64,6 +66,22 @@ namespace CDPL
 
 		private:
 			void init(); 
+
+			void getPharmacophoreProperties(const rapidxml::xml_node<char>* pharm_node, Pharmacophore& pharm) const;
+
+			void extractFeatures(const rapidxml::xml_node<char>* pharm_node, Pharmacophore& pharm) const;
+
+			void addPointFeature(const rapidxml::xml_node<char>* ftr_node, Pharmacophore& pharm) const;
+			void addPlaneFeature(const rapidxml::xml_node<char>* ftr_node, Pharmacophore& pharm) const;
+			void addVectorFeature(const rapidxml::xml_node<char>* ftr_node, Pharmacophore& pharm) const;
+			void addVolumeFeature(const rapidxml::xml_node<char>* ftr_node, Pharmacophore& pharm) const;
+
+			Feature* createFeature(const rapidxml::xml_node<char>* ftr_node, Pharmacophore& pharm) const;
+
+			void getDefaultFeatureProperties(const rapidxml::xml_node<char>* ftr_node, Feature& ftr) const;
+
+			bool getPosition(const rapidxml::xml_node<char>* ftr_node, const std::string& tag, Math::Vector3D& vec) const; 
+			bool getTolerance(const rapidxml::xml_node<char>* ftr_node, const std::string& tag, double& tol) const; 
 
 			const Base::DataIOBase&      ioBase;	
 			bool                         strictErrorChecking;

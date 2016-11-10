@@ -47,7 +47,7 @@ bool Chem::SMILESMoleculeReader::readData(std::istream& is, Molecule& mol)
 	try {
 		return reader->readMolecule(is, mol);
 
-	} catch (const Base::Exception& e) {
+	} catch (const std::exception& e) {
 		throw Base::IOError("SMILESMoleculeReader: while reading record " + boost::lexical_cast<std::string>(getRecordIndex()) + 
 							": " + e.what());
 	}
@@ -58,7 +58,7 @@ bool Chem::SMILESMoleculeReader::skipData(std::istream& is)
 	try {
 		return reader->skipMolecule(is);
 
-	} catch (const Base::Exception& e) {
+	} catch (const std::exception& e) {
 		throw Base::IOError("SMILESMoleculeReader: while skipping record " + boost::lexical_cast<std::string>(getRecordIndex()) + 
 							": " + e.what());
 	}

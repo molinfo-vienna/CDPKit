@@ -49,7 +49,7 @@ Base::DataWriter<Chem::Reaction>& Chem::SMILESReactionWriter::write(const Reacti
 	try {
 		state = writer->writeReaction(output, rxn);
 
-	} catch (const Base::Exception& e) {
+	} catch (const std::exception& e) {
 		throw Base::IOError("SMILESReactionWriter: " + std::string(e.what()));
 	}
 

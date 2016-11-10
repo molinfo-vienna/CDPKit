@@ -130,6 +130,7 @@ SET(cdpl-chem_LIB_SRCS
     RDFCodeCalculator.cpp
     BurdenMatrixGenerator.cpp
     BCUTDescriptorCalculator.cpp
+    SurfaceAtomExtractor.cpp
 
     Entity3DCoordinatesFunctions.cpp
 

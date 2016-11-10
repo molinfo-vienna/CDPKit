@@ -47,7 +47,7 @@ bool Chem::SMILESReactionReader::readData(std::istream& is, Reaction& rxn)
 	try {
 		return reader->readReaction(is, rxn);
 
-	} catch (const Base::Exception& e) {
+	} catch (const std::exception& e) {
 		throw Base::IOError("SMILESReactionReader: while reading record " + boost::lexical_cast<std::string>(getRecordIndex()) + 
 							": " + e.what());
 	}
@@ -58,7 +58,7 @@ bool Chem::SMILESReactionReader::skipData(std::istream& is)
 	try {
 		return reader->skipReaction(is);
 
-	} catch (const Base::Exception& e) {
+	} catch (const std::exception& e) {
 		throw Base::IOError("SMILESReactionReader: while skipping record " + boost::lexical_cast<std::string>(getRecordIndex()) + 
 							": " + e.what());
 	}

@@ -49,7 +49,7 @@ Base::DataWriter<Chem::Reaction>& Chem::RDFReactionWriter::write(const Reaction&
 	try {
 		state = writer->writeRDFileRecord(output, rxn);
 
-	} catch (const Base::Exception& e) {
+	} catch (const std::exception& e) {
 		throw Base::IOError("RDFReactionWriter: " + std::string(e.what()));
 	}
 

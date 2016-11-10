@@ -94,6 +94,7 @@ SET(chem_MOD_SRCS
     RDFCodeCalculatorExport.cpp 
     BurdenMatrixGeneratorExport.cpp 
     BCUTDescriptorCalculatorExport.cpp 
+    SurfaceAtomExtractorExport.cpp 
      
     MoleculeIOManagerExport.cpp 
     MolecularGraphIOManagerExport.cpp 

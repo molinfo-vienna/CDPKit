@@ -58,7 +58,7 @@ namespace CDPL
 		class ScreeningProcImplementation;
 
 		/**
-		 * \addtogroup CDPL_PHARM_PHARMACOPHORE_PERCEPTION
+		 * \addtogroup CDPL_PHARM_SCREENING
 		 * @{
 		 */
 

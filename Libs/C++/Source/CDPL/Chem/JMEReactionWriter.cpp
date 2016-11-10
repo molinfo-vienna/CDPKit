@@ -49,7 +49,7 @@ Base::DataWriter<Chem::Reaction>& Chem::JMEReactionWriter::write(const Reaction&
 	try {
 		state = writer->writeReaction(output, rxn);
 
-	} catch (const Base::Exception& e) {
+	} catch (const std::exception& e) {
 		throw Base::IOError("JMEReactionWriter: " + std::string(e.what()));
 	}
 

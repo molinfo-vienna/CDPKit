@@ -44,7 +44,7 @@ namespace CDPL
     {
 
 		/**
-		 * \addtogroup CDPL_PHARM_PHARMACOPHORE_PERCEPTION
+		 * \addtogroup CDPL_PHARM_PERCEPTION
 		 * @{
 		 */
 
