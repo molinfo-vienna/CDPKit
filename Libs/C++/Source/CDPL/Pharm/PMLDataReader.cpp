@@ -34,7 +34,7 @@
 #include "CDPL/Pharm/Pharmacophore.hpp"
 #include "CDPL/Pharm/Feature.hpp"
 #include "CDPL/Pharm/ControlParameterFunctions.hpp"
-#include "CDPL/Pharm/PharmacophoreFunctions.hpp"
+#include "CDPL/Pharm/FeatureContainerFunctions.hpp"
 #include "CDPL/Pharm/FeatureFunctions.hpp"
 #include "CDPL/Pharm/FeatureType.hpp"
 #include "CDPL/Pharm/FeatureGeometry.hpp"

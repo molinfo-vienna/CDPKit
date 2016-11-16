@@ -38,6 +38,7 @@
 #include "CDPL/Pharm/FeatureMapping.hpp"
 #include "CDPL/Pharm/FeatureTypeHistogram.hpp"
 #include "CDPL/Chem/Atom3DCoordinatesFunction.hpp"
+#include "CDPL/Chem/Fragment.hpp"
 #include "CDPL/Math/Matrix.hpp"
 
 
@@ -48,6 +49,7 @@ namespace CDPL
 	{
 
 		class AtomContainer;
+		class Fragment;
 	}
 
     namespace Pharm 
@@ -59,33 +61,13 @@ namespace CDPL
 		 * \addtogroup CDPL_PHARM_PHARMACOPHORE_FUNCTIONS
 		 * @{
 		 */
-
-		CDPL_PHARM_API const std::string& getName(const Pharmacophore& pharm);
-
-		CDPL_PHARM_API void setName(Pharmacophore& pharm, const std::string& name);
-
-		CDPL_PHARM_API void clearName(Pharmacophore& pharm);
-
-		CDPL_PHARM_API bool hasName(const Pharmacophore& pharm);
-
 	
-		CDPL_PHARM_API std::size_t getFeatureCount(const Pharmacophore& pharm);
-
-		CDPL_PHARM_API std::size_t getFeatureCount(const Pharmacophore& pharm, unsigned int type);
-
-		CDPL_PHARM_API void buildFeatureTypeHistogram(const Pharmacophore& pharm, FeatureTypeHistogram& hist);
-
-
 		CDPL_PHARM_API void buildInteractionPharmacophore(Pharmacophore& pharm, const FeatureMapping& iactions);
-
-		CDPL_PHARM_API void removeFeaturesWithoutInteractions(Pharmacophore& pharm, const FeatureMapping& iactions);
-
-		CDPL_PHARM_API void copyFeaturesWithInteractions(Pharmacophore& pharm, const FeatureMapping& iactions);
-
-		CDPL_PHARM_API bool checkExclusionVolumeClash(const Pharmacophore& pharm, const Chem::AtomContainer& cntnr, 
-													  const Chem::Atom3DCoordinatesFunction& coords_func,
-													  const Math::Matrix4D& xform, bool vdw = true);
-
+			
+		CDPL_PHARM_API bool createExclusionVolumes(Pharmacophore& pharm, const Chem::AtomContainer& cntnr, 
+												   const Chem::Atom3DCoordinatesFunction& coords_func, 
+												   double tol, double min_dist, bool rel_dist);
+	
 		/**
 		 * @}
 		 */

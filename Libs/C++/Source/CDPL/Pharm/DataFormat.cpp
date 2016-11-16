@@ -30,9 +30,9 @@
 #include "CDPL/Base/DataFormat.hpp"
 #include "CDPL/Pharm/DataFormat.hpp"
 #include "CDPL/Pharm/CDFPharmacophoreInputHandler.hpp"
-#include "CDPL/Pharm/CDFPharmacophoreOutputHandler.hpp"
+#include "CDPL/Pharm/CDFFeatureContainerOutputHandler.hpp"
 #include "CDPL/Pharm/PMLPharmacophoreInputHandler.hpp"
-#include "CDPL/Pharm/PMLPharmacophoreOutputHandler.hpp"
+#include "CDPL/Pharm/PMLFeatureContainerOutputHandler.hpp"
 
 
 namespace
@@ -75,14 +75,14 @@ namespace
 			static const CDFPharmacophoreInputHandler  cdfPharmInputHandler;
 			static const PMLPharmacophoreInputHandler  pmlPharmInputHandler;
 
-			static const CDFPharmacophoreOutputHandler cdfPharmOutputHandler;
-			static const PMLPharmacophoreOutputHandler pmlPharmOutputHandler;
+			static const CDFFeatureContainerOutputHandler cdfFtrContOutputHandler;
+			static const PMLFeatureContainerOutputHandler pmlFtrContOutputHandler;
 
 			DataIOManager<Pharmacophore>::registerInputHandler(cdfPharmInputHandler);
 			DataIOManager<Pharmacophore>::registerInputHandler(pmlPharmInputHandler);
 
-			DataIOManager<Pharmacophore>::registerOutputHandler(cdfPharmOutputHandler);
-			DataIOManager<Pharmacophore>::registerOutputHandler(pmlPharmOutputHandler);
+			DataIOManager<FeatureContainer>::registerOutputHandler(cdfFtrContOutputHandler);
+			DataIOManager<FeatureContainer>::registerOutputHandler(pmlFtrContOutputHandler);
 		}
 
 	} init;

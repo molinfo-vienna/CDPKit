@@ -32,12 +32,9 @@
 #define CDPL_PHARM_PHARMACOPHORE_HPP
 
 #include <boost/shared_ptr.hpp>
-#include <boost/ref.hpp>
 
 #include "CDPL/Pharm/APIPrefix.hpp"
-#include "CDPL/Chem/Entity3DContainer.hpp"
-#include "CDPL/Util/IndexedElementIterator.hpp"
-#include "CDPL/Base/PropertyContainer.hpp"
+#include "CDPL/Pharm/FeatureContainer.hpp"
 
 
 namespace CDPL 
@@ -45,8 +42,6 @@ namespace CDPL
 
     namespace Pharm
     {
-
-		class Feature;
 
 		/**
 		 * \addtogroup CDPL_PHARM_PHARMACOPHORE_INTERFACES
@@ -56,11 +51,8 @@ namespace CDPL
 		/**
 		 * \brief Pharmacophore.
 		 */
-		class CDPL_PHARM_API Pharmacophore : public Chem::Entity3DContainer, public Base::PropertyContainer
+		class CDPL_PHARM_API Pharmacophore : public FeatureContainer
 		{
-
-			class ConstFeatureAccessor;
-			class FeatureAccessor;
 
 		  public:
 			/**	
@@ -71,26 +63,29 @@ namespace CDPL
 			/**
 			 * \brief A constant random access iterator used to iterate over the stored \c const Pharm::Feature objects.
 			 */
-			typedef Util::IndexedElementIterator<const Feature, ConstFeatureAccessor> ConstFeatureIterator;
+			typedef FeatureContainer::ConstFeatureIterator ConstFeatureIterator;
 
 			/**
 			 * \brief A mutable random access iterator used to iterate over the stored Pharm::Feature objects.
 			 */
-			typedef Util::IndexedElementIterator<Feature, FeatureAccessor> FeatureIterator;
+			typedef FeatureContainer::FeatureIterator FeatureIterator;
 
 			/**
 			 * \brief Virtual destructor.
 			 */
 			virtual ~Pharmacophore() {}
-		
+
+			using FeatureContainer::getFeaturesBegin;
+			using FeatureContainer::getFeaturesEnd;
+
 			/**
-			 * \brief Removes all feature and clears all properties of the pharmacophore.
+			 * \brief Removes all features and clears all properties of the pharmacophore.
 			 */
 			virtual void clear() = 0;
 		
 			/**
 			 * \brief Returns the number of pharmacophore features.
-			 * \return The number of feature.
+			 * \return The number of features.
 			 */
 			virtual std::size_t getNumFeatures() const = 0;
 
@@ -98,7 +93,7 @@ namespace CDPL
 			 * \brief Returns a \c const reference to the pharmacophore feature at index \a idx.
 			 * \param idx The zero-based index of the feature to return.
 			 * \return A \c const reference to the feature at the specified index.
-			 * \throw Base::IndexError if the number of pharmacophore feature is zero or \a idx is not in the range [0, getNumFeatures() - 1].
+			 * \throw Base::IndexError if the number of pharmacophore features is zero or \a idx is not in the range [0, getNumFeatures() - 1].
 			 */
 			virtual const Feature& getFeature(std::size_t idx) const = 0;
 
@@ -106,13 +101,13 @@ namespace CDPL
 			 * \brief Returns a non-\c const reference to the pharmacophore feature at index \a idx.
 			 * \param idx The zero-based index of the feature to return.
 			 * \return A non-\c const reference to the feature at the specified index.
-			 * \throw Base::IndexError if the number of features is zero or \a idx is not in the range [0, getNumFeatures() - 1].
+			 * \throw Base::IndexError if the number of featuress is zero or \a idx is not in the range [0, getNumFeatures() - 1].
 			 */
 			virtual Feature& getFeature(std::size_t idx) = 0;
 
 			/**
 			 * \brief Creates a new pharmacophore feature and adds it to the pharmacophore.
-			 * \return A reference to the newly created feature.
+			 * \return A reference to the newly created features.
 			 */
 			virtual Feature& addFeature() = 0;
 	
@@ -148,35 +143,18 @@ namespace CDPL
 			virtual bool containsFeature(const Feature& feature) const = 0;
 
 			/**
-			 * \brief Returns a constant iterator pointing to the beginning of the stored \c const Pharm::Feature objects.
-			 * \return A constant iterator pointing to the beginning of the stored \c const Pharm::Feature objects.
-			 */
-			ConstFeatureIterator getFeaturesBegin() const;
-
-			/**
-			 * \brief Returns a constant iterator pointing to the end of the stored \c const Pharm::Feature objects.
-			 * \return A constant iterator pointing to the end of the stored \c const Pharm::Feature objects.
-			 */
-			ConstFeatureIterator getFeaturesEnd() const;
-
-			/**
-			 * \brief Returns a mutable iterator pointing to the beginning of the stored Pharm::Feature objects.
-			 * \return A mutable iterator pointing to the beginning of the stored Pharm::Feature objects.
-			 */
-			FeatureIterator getFeaturesBegin();
-
-			/**
-			 * \brief Returns a mutable iterator pointing to the end of the stored Pharm::Feature objects.
-			 * \return A mutable iterator pointing to the end of the stored Pharm::Feature objects.
-			 */
-			FeatureIterator getFeaturesEnd();
-
-			/**
 			 * \brief Replaces the current set of pharmacophore features and properties by a copy of the
 			 *        features and properties of the pharmacophore \a pharm.
 			 * \param pharm The pharmacophore to copy.
 			 */
 			virtual void copy(const Pharmacophore& pharm) = 0;
+
+			/**
+			 * \brief Replaces the current set of pharmacophore features and properties by a copy of the
+			 *        features and properties of the feature container \a cntnr.
+			 * \param cntnr The Pharm::FeatureContainer instance providing the features and properties to copy.
+			 */
+			virtual void copy(const FeatureContainer& cntnr) = 0;
 		
 			/**
 			 * \brief Extends the current set of pharmacophore features by a copy of the features in the
@@ -185,6 +163,14 @@ namespace CDPL
 			 * \note Does not affect any properties.
 			 */
 			virtual void append(const Pharmacophore& pharm) = 0;
+
+			/**
+			 * \brief Extends the current set of pharmacophore features by a copy of the features in the
+			 *        feature container \a cntnr.
+			 * \param cntnr The pharmacophore providing the features to append.
+			 * \note Does not affect any properties.
+			 */
+			virtual void append(const FeatureContainer& cntnr) = 0;
 
 			/**
 			 * \brief Creates a copy of the current pharmacophore state.
@@ -204,6 +190,17 @@ namespace CDPL
 			Pharmacophore& operator=(const Pharmacophore& pharm);
 
 			/**
+			 * \brief Replaces the current set of pharmacophore features and properties by a copy of the
+			 *        features and properties of the feature container \a cntnr.
+			 *
+			 * Internally calls copy() to perform the actual work.
+			 *
+			 * \param cntnr The Pharm::FeatureContainer instance providing the features and properties to copy.
+			 * \return A reference to itself.
+			 */
+			Pharmacophore& operator=(const FeatureContainer& cntnr);
+
+			/**
 			 * \brief Extends the current set of pharmacophore features by a copy of the features in the
 			 *        pharmacophore \a pharm.
 			 *
@@ -214,46 +211,16 @@ namespace CDPL
 			 */
 			Pharmacophore& operator+=(const Pharmacophore& pharm);
 
-			virtual std::size_t getNumEntities() const;
-
-			virtual const Chem::Entity3D& getEntity(std::size_t idx) const;
-
-			virtual Chem::Entity3D& getEntity(std::size_t idx);
-
-		  private:
-			class CDPL_PHARM_API ConstFeatureAccessor
-			{
-			
-			  public:
-				ConstFeatureAccessor(const FeatureAccessor& accessor): container(accessor.container) {}
-
-				ConstFeatureAccessor(const Pharmacophore& cntnr): container(cntnr) {}
-
-				const Feature& operator()(std::size_t idx) const;
-
-				bool operator==(const ConstFeatureAccessor& accessor) const;
-
-				ConstFeatureAccessor& operator=(const FeatureAccessor& accessor);
-
-			  private:
-				boost::reference_wrapper<const Pharmacophore> container;
-			};
-
-			class CDPL_PHARM_API FeatureAccessor
-			{
-			
-				friend class ConstFeatureAccessor;
-
-			  public:
-				FeatureAccessor(Pharmacophore& cntnr): container(cntnr) {}
-
-				Feature& operator()(std::size_t idx) const;
-
-				bool operator==(const FeatureAccessor& accessor) const;
-
-			  private:
-				boost::reference_wrapper<Pharmacophore> container;
-			};
+			/**
+			 * \brief Extends the current set of pharmacophore features by a copy of the features in the
+			 *        feature container \a cntnr.
+			 *
+			 * Internally calls append() to perform the actual work.
+			 *
+			 * \param The Pharm::FeatureContainer instance providing the features to append.
+			 * \return A reference to itself.
+			 */
+			Pharmacophore& operator+=(const FeatureContainer& cntnr);
 		};
 
 		/**

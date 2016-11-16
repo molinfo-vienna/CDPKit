@@ -37,28 +37,37 @@ void CDPLPythonPharm::exportBasicPharmacophore()
     using namespace CDPL;
 
     void (Pharm::BasicPharmacophore::*copyBasicPharmFunc)(const Pharm::BasicPharmacophore&) = &Pharm::BasicPharmacophore::copy;
-    void (Pharm::BasicPharmacophore::*copyPharmFunc)(const Pharm::Pharmacophore&) = &Pharm::BasicPharmacophore::copy;
+    void (Pharm::BasicPharmacophore::*copyPharmFunc)(const Pharm::Pharmacophore&) = &Pharm::Pharmacophore::copy;
+    void (Pharm::BasicPharmacophore::*copyFtrContainerFunc)(const Pharm::FeatureContainer&) = &Pharm::Pharmacophore::copy;
 
     void (Pharm::BasicPharmacophore::*appendBasicPharmFunc)(const Pharm::BasicPharmacophore&) = &Pharm::BasicPharmacophore::append;
-    void (Pharm::BasicPharmacophore::*appendPharmFunc)(const Pharm::Pharmacophore&) = &Pharm::BasicPharmacophore::append;
+    void (Pharm::BasicPharmacophore::*appendPharmFunc)(const Pharm::Pharmacophore&) = &Pharm::Pharmacophore::append;
+    void (Pharm::BasicPharmacophore::*appendFtrContainerFunc)(const Pharm::FeatureContainer&) = &Pharm::Pharmacophore::append;
 
     Pharm::BasicPharmacophore& (Pharm::BasicPharmacophore::*assignBasicPharmFunc)(const Pharm::BasicPharmacophore&) = &Pharm::BasicPharmacophore::operator=;
     Pharm::Pharmacophore& (Pharm::Pharmacophore::*assignPharmFunc)(const Pharm::Pharmacophore&) = &Pharm::Pharmacophore::operator=;
+    Pharm::Pharmacophore& (Pharm::Pharmacophore::*assignFtrContainerFunc)(const Pharm::FeatureContainer&) = &Pharm::Pharmacophore::operator=;
 
     Pharm::BasicPharmacophore& (Pharm::BasicPharmacophore::*addBasicPharmFunc)(const Pharm::BasicPharmacophore&) = &Pharm::BasicPharmacophore::operator+=;
     Pharm::Pharmacophore& (Pharm::Pharmacophore::*addPharmFunc)(const Pharm::Pharmacophore&) = &Pharm::Pharmacophore::operator+=;
+    Pharm::Pharmacophore& (Pharm::Pharmacophore::*addFtrContainerFunc)(const Pharm::FeatureContainer&) = &Pharm::Pharmacophore::operator+=;
 
     python::class_<Pharm::BasicPharmacophore, Pharm::BasicPharmacophore::SharedPointer, 
 		   python::bases<Pharm::Pharmacophore> >("BasicPharmacophore", python::no_init)
 	.def(python::init<>(python::arg("self")))
 	.def(python::init<const Pharm::BasicPharmacophore&>((python::arg("self"), python::arg("pharm"))))
 	.def(python::init<const Pharm::Pharmacophore&>((python::arg("self"), python::arg("pharm"))))
+	.def(python::init<const Pharm::FeatureContainer&>((python::arg("self"), python::arg("cntnr"))))
 	.def("copy", copyBasicPharmFunc, (python::arg("self"), python::arg("pharm")))
 	.def("copy", copyPharmFunc, (python::arg("self"), python::arg("pharm")))
+	.def("copy", copyFtrContainerFunc, (python::arg("self"), python::arg("cntnr")))
 	.def("append", appendBasicPharmFunc, (python::arg("self"), python::arg("pharm")))
 	.def("append", appendPharmFunc, (python::arg("self"), python::arg("pharm")))
+	.def("append", appendFtrContainerFunc, (python::arg("self"), python::arg("cntnr")))
 	.def("assign", assignBasicPharmFunc, (python::arg("self"), python::arg("pharm")), python::return_self<>())
 	.def("assign", assignPharmFunc, (python::arg("self"), python::arg("pharm")), python::return_self<>())
+	.def("assign", assignFtrContainerFunc, (python::arg("self"), python::arg("cntnr")), python::return_self<>())
 	.def("__iadd__", addBasicPharmFunc, (python::arg("self"), python::arg("pharm")), python::return_self<>())
-	.def("__iadd__", addPharmFunc, (python::arg("self"), python::arg("pharm")), python::return_self<>());
+	.def("__iadd__", addPharmFunc, (python::arg("self"), python::arg("pharm")), python::return_self<>())
+	.def("__iadd__", addFtrContainerFunc, (python::arg("self"), python::arg("cntnr")), python::return_self<>());
 }

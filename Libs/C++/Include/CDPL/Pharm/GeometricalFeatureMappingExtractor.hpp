@@ -47,7 +47,7 @@ namespace CDPL
     namespace Pharm
     {
 
-		class Pharmacophore;
+		class FeatureContainer;
 
 		/**
 		 * \addtogroup CDPL_PHARM_ALIGNMENT
@@ -78,7 +78,7 @@ namespace CDPL
 
 			/**
 			 * \brief Constructs a \c %GeometricalFeatureMappingExtractor instance.
-			 * \param query_mode If \c true, the reference pharmacophore is interpreted as a query pharmacophore and some of the
+			 * \param query_mode If \c true, the reference feature container is interpreted as a query feature container and some of the
 			 *                   set default functions will operate in a special query mode.
 			 */
 			GeometricalFeatureMappingExtractor(bool query_mode = false);
@@ -123,7 +123,7 @@ namespace CDPL
 
 			double getGeometryMatchScore(const Feature& ftr1, const Feature& ftr2) const;
 
-			void getMapping(const Pharmacophore& ref_pharm, const Pharmacophore& pharm, const Math::Matrix4D& xform, FeatureMapping& mapping);
+			void getMapping(const FeatureContainer& ref_cntnr, const FeatureContainer& cntnr, const Math::Matrix4D& xform, FeatureMapping& mapping);
 
 		  private:
             typedef std::pair<const Feature*, const Feature*> FeaturePair;

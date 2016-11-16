@@ -27,7 +27,7 @@
 #include <boost/python.hpp>
 
 #include "CDPL/Pharm/PharmacophoreFitScore.hpp"
-#include "CDPL/Pharm/Pharmacophore.hpp"
+#include "CDPL/Pharm/FeatureContainer.hpp"
 
 #include "Base/ObjectIdentityCheckVisitor.hpp"
 
@@ -48,7 +48,7 @@ void CDPLPythonPharm::exportPharmacophoreFitScore()
 		.def(CDPLPythonBase::ObjectIdentityCheckVisitor<Pharm::PharmacophoreFitScore>())
 		.def("assign", &Pharm::PharmacophoreFitScore::operator=, 
 			 (python::arg("self"), python::arg("score")), python::return_self<>())
-		.def("__call__", &Pharm::PharmacophoreFitScore::operator(), (python::arg("self"), python::arg("ref_pharm"), python::arg("algnd_pharm"), python::arg("xform")))
+		.def("__call__", &Pharm::PharmacophoreFitScore::operator(), (python::arg("self"), python::arg("ref_cntnr"), python::arg("algnd_cntnr"), python::arg("xform")))
 		.add_property("featureMatchCountFactor", &Pharm::PharmacophoreFitScore::getFeatureMatchCountFactor, 
 					  &Pharm::PharmacophoreFitScore::setFeatureMatchCountFactor)
 		.add_property("featurePositionMatchFactor", &Pharm::PharmacophoreFitScore::getFeaturePositionMatchFactor, 

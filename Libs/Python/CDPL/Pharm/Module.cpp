@@ -36,28 +36,31 @@ BOOST_PYTHON_MODULE(_pharm)
 {
 	using namespace CDPLPythonPharm;
 
-	exportPharmacophore();
 	exportFeature();
-	exportBasicPharmacophore();
 	exportBasicFeature();
+	exportFeatureContainer();
+	exportFeatureSet();
+	exportPharmacophore();
+	exportBasicPharmacophore();
 
 	exportFeatureMapping();
 	exportFeatureTypeHistogram();
 
 	exportPharmacophoreIOManager();
+	exportFeatureContainerIOManager();
 	exportPharmacophoreReader();
-	exportPharmacophoreWriter();
+	exportFeatureContainerWriter();
 	exportPharmacophoreInputHandler();
-	exportPharmacophoreOutputHandler();
+	exportFeatureContainerOutputHandler();
 
 	exportCDFPharmacophoreInputHandler();
-	exportCDFPharmacophoreOutputHandler();
+	exportCDFFeatureContainerOutputHandler();
 	exportCDFPharmacophoreReader();
-	exportCDFPharmacophoreWriter();
+	exportCDFFeatureContainerWriter();
 	exportPMLPharmacophoreInputHandler();
-	exportPMLPharmacophoreOutputHandler();
+	exportPMLFeatureContainerOutputHandler();
 	exportPMLPharmacophoreReader();
-	exportPMLPharmacophoreWriter();
+	exportPMLFeatureContainerWriter();
 
 	exportPharmacophoreFitScore();
 
@@ -84,10 +87,9 @@ BOOST_PYTHON_MODULE(_pharm)
 	exportHBondDonorFeatureGenerator();
 	exportPosIonizableFeatureGenerator();
 	exportNegIonizableFeatureGenerator();
-	exportSurfaceXVolumeCoatGenerator();
-	exportFeatureInteractionAnalyzer();
-	exportDefaultFeatureInteractionAnalyzer();
-	exportFeatureInteractionConstraintConnector();
+	exportInteractionAnalyzer();
+	exportDefaultInteractionAnalyzer();
+	exportInteractionConstraintConnector();
 	exportFeatureDistanceConstraint();
 	exportHydrophobicInteractionConstraint();
 	exportIonicInteractionConstraint();
@@ -105,7 +107,7 @@ BOOST_PYTHON_MODULE(_pharm)
 	exportFeaturePositionMatchFunctor();
 	exportFeatureGeometryMatchFunctor();
 
-	exportPharmacophoreProperties();
+	exportFeatureContainerProperties();
 	exportFeatureProperties();
 
 	exportControlParameters();
@@ -117,6 +119,8 @@ BOOST_PYTHON_MODULE(_pharm)
 
 	exportPharmacophoreFunctions();
 	exportFeatureFunctions();
+	exportFeatureContainerFunctions();
+	exportFeatureSetFunctions();
 	exportControlParameterFunctions();
 
 	exportBoostFunctionWrappers();

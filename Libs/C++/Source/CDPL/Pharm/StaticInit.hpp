@@ -36,7 +36,7 @@ namespace CDPL
 	namespace Pharm
 	{
 
-		void initPharmacophoreProperties();
+		void initFeatureContainerProperties();
 		void initFeatureProperties();
 		void initDataFormats();
 		void initControlParameters();
@@ -51,7 +51,7 @@ namespace
 	{
 
 		CDPLPharmInit() {
-			CDPL::Pharm::initPharmacophoreProperties();
+			CDPL::Pharm::initFeatureContainerProperties();
 			CDPL::Pharm::initFeatureProperties();
 			CDPL::Pharm::initDataFormats();
 			CDPL::Pharm::initControlParameters();

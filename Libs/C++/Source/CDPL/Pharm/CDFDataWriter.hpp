@@ -45,7 +45,7 @@ namespace CDPL
 	namespace Pharm
 	{
 
-		class Pharmacophore;
+		class FeatureContainer;
 
 		class CDFDataWriter : private Internal::CDFDataWriterBase
 		{
@@ -53,16 +53,16 @@ namespace CDPL
 		public:
 			CDFDataWriter(const Base::ControlParameterContainer& ctrl_params): ctrlParams(ctrl_params) {}
 
-			bool writePharmacophore(std::ostream& os, const Pharmacophore& pharm);
+			bool writeFeatureContainer(std::ostream& os, const FeatureContainer& cntnr);
 
-			void writePharmacophore(const Pharmacophore& pharm, Internal::ByteBuffer& bbuf);
+			void writeFeatureContainer(const FeatureContainer& cntnr, Internal::ByteBuffer& bbuf);
 
 		private:
 			void init();
 
-			void outputPharmHeader(const Pharmacophore& pharm, Internal::ByteBuffer& bbuf) const;
-			void outputFeatures(const Pharmacophore& pharm, Internal::ByteBuffer& bbuf) const;
-			void outputPharmProperties(const Pharmacophore& pharm, Internal::ByteBuffer& bbuf) const;
+			void outputFtrContainerHeader(const FeatureContainer& cntnr, Internal::ByteBuffer& bbuf) const;
+			void outputFeatures(const FeatureContainer& cntnr, Internal::ByteBuffer& bbuf) const;
+			void outputFtrContainerProperties(const FeatureContainer& cntnr, Internal::ByteBuffer& bbuf) const;
 
 			bool writeRecordData(std::ostream& os) const;
 

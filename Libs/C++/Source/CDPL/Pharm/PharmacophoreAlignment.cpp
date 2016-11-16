@@ -27,7 +27,7 @@
 #include "StaticInit.hpp"
 
 #include "CDPL/Pharm/PharmacophoreAlignment.hpp"
-#include "CDPL/Pharm/Pharmacophore.hpp"
+#include "CDPL/Pharm/FeatureContainer.hpp"
 #include "CDPL/Pharm/Feature.hpp"
 #include "CDPL/Pharm/FeatureFunctions.hpp"
 #include "CDPL/Pharm/FeatureTypeMatchFunctor.hpp"
@@ -45,9 +45,9 @@ Pharm::PharmacophoreAlignment::PharmacophoreAlignment(bool query_mode)
 	setEntityPairMatchFunction(FeaturePairDistanceMatchFunctor(query_mode));
 }
 
-void Pharm::PharmacophoreAlignment::addPharmacophore(const Pharmacophore& pharm, bool first_set)
+void Pharm::PharmacophoreAlignment::addFeatures(const FeatureContainer& cntnr, bool first_set)
 {
-	for (Pharmacophore::ConstFeatureIterator it = pharm.getFeaturesBegin(), end = pharm.getFeaturesEnd(); it != end; ++it)
+	for (FeatureContainer::ConstFeatureIterator it = cntnr.getFeaturesBegin(), end = cntnr.getFeaturesEnd(); it != end; ++it)
 		if (!getDisabledFlag(*it))
 			addEntity(*it, first_set);
 }

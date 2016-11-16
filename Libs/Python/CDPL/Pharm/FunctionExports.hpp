@@ -33,6 +33,8 @@ namespace CDPLPythonPharm
 
 	void exportPharmacophoreFunctions();
 	void exportFeatureFunctions();
+	void exportFeatureContainerFunctions();
+	void exportFeatureSetFunctions();
 	void exportControlParameterFunctions();
 }
 

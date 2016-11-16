@@ -100,7 +100,7 @@ namespace CDPL
 
 			const ScoringFunction& getScoringFunction() const;
 
-			std::size_t searchDB(const Pharmacophore& query, std::size_t mol_start_idx, std::size_t mol_end_idx);
+			std::size_t searchDB(const FeatureContainer& query, std::size_t mol_start_idx, std::size_t mol_end_idx);
 
 		private:
 			typedef std::vector<QueryTwoPointPharmacophore> TwoPointPharmacophoreList;
@@ -126,9 +126,9 @@ namespace CDPL
 				}
 			};
 		
-			void prepareDBSearch(const Pharmacophore& query, std::size_t mol_start_idx, std::size_t mol_end_idx);
+			void prepareDBSearch(const FeatureContainer& query, std::size_t mol_start_idx, std::size_t mol_end_idx);
 
-			void initQueryData(const Pharmacophore& query);
+			void initQueryData(const FeatureContainer& query);
 			void initPharmIndexList(std::size_t mol_start_idx, std::size_t mol_end_idx);
 
 			void insertFeature(const Feature& ftr, FeatureMatrix& ftr_mtx) const;
@@ -162,7 +162,7 @@ namespace CDPL
 			ProgressCallbackFunction              progressCallback;
 			ScoringFunction                       scoringFunction;
 			FeatureGeometryMatchFunctor           featureGeomMatchFunction;
-			const Pharmacophore*                  queryPharmacophore;
+			const FeatureContainer*               queryPharmacophore;
 			BasicPharmacophore                    dbPharmacophore;
 			Chem::BasicMolecule                   dbMolecule;
 			PharmacophoreAlignment                pharmAlignment;

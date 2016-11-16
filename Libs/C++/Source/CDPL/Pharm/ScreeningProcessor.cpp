@@ -36,8 +36,8 @@ using namespace CDPL;
 
 // SearchHit
 
-Pharm::ScreeningProcessor::SearchHit::SearchHit(const ScreeningProcessor& hit_prov, const Pharmacophore& qry_pharm,
-												const Pharmacophore& hit_pharm, const Chem::Molecule& mol, 
+Pharm::ScreeningProcessor::SearchHit::SearchHit(const ScreeningProcessor& hit_prov, const FeatureContainer& qry_pharm,
+												const FeatureContainer& hit_pharm, const Chem::Molecule& mol, 
 												const Math::Matrix4D& xform, std::size_t pharm_idx, 
 												std::size_t mol_idx, std::size_t conf_idx):
 	provider(&hit_prov), qryPharm(&qry_pharm), hitPharm(&hit_pharm), molecule(&mol),
@@ -48,12 +48,12 @@ const Pharm::ScreeningProcessor& Pharm::ScreeningProcessor::SearchHit::getHitPro
 	return *provider;
 }
 
-const Pharm::Pharmacophore& Pharm::ScreeningProcessor::SearchHit::getQueryPharmacophore() const
+const Pharm::FeatureContainer& Pharm::ScreeningProcessor::SearchHit::getQueryPharmacophore() const
 {
 	return *qryPharm;
 }
 
-const Pharm::Pharmacophore& Pharm::ScreeningProcessor::SearchHit::getHitPharmacophore() const
+const Pharm::FeatureContainer& Pharm::ScreeningProcessor::SearchHit::getHitPharmacophore() const
 {
 	return *hitPharm;
 }
@@ -172,7 +172,7 @@ const Pharm::ScreeningProcessor::ScoringFunction& Pharm::ScreeningProcessor::get
 	return impl->getScoringFunction();
 }
 
-std::size_t Pharm::ScreeningProcessor::searchDB(const Pharmacophore& query, std::size_t mol_start_idx, std::size_t mol_end_idx)
+std::size_t Pharm::ScreeningProcessor::searchDB(const FeatureContainer& query, std::size_t mol_start_idx, std::size_t mol_end_idx)
 {
 	return impl->searchDB(query, mol_start_idx, mol_end_idx);
 }

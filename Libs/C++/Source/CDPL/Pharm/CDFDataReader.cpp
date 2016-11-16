@@ -32,7 +32,7 @@
 #include "CDPL/Pharm/Feature.hpp"
 #include "CDPL/Pharm/ControlParameterFunctions.hpp"
 #include "CDPL/Pharm/FeatureFunctions.hpp"
-#include "CDPL/Pharm/PharmacophoreFunctions.hpp"
+#include "CDPL/Pharm/FeatureContainerFunctions.hpp"
 #include "CDPL/Chem/Entity3DFunctions.hpp"
 #include "CDPL/Base/Exceptions.hpp"
 #include "CDPL/Math/Vector.hpp"

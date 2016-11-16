@@ -1,12 +1,14 @@
 INCLUDE_DIRECTORIES("${CMAKE_CURRENT_SOURCE_DIR}" "${CDPL_SOURCE_DIR}" "${CDPKIT_EXTERNAL_DIR}")
 
 SET(cdpl-pharm_LIB_SRCS
-    Pharmacophore.cpp
     Feature.cpp
-    BasicPharmacophore.cpp
     BasicFeature.cpp
+    FeatureContainer.cpp
+    FeatureSet.cpp
+    Pharmacophore.cpp
+    BasicPharmacophore.cpp
   
-    PharmacophoreProperty.cpp
+    FeatureContainerProperty.cpp
     FeatureProperty.cpp
     DataFormat.cpp
     ControlParameter.cpp
@@ -20,12 +22,11 @@ SET(cdpl-pharm_LIB_SRCS
     HBondDonorFeatureGenerator.cpp
     PosIonizableFeatureGenerator.cpp
     NegIonizableFeatureGenerator.cpp
-    SurfaceXVolumeCoatGenerator.cpp
     PharmacophoreGenerator.cpp
     DefaultPharmacophoreGenerator.cpp
-    FeatureInteractionAnalyzer.cpp
-    DefaultFeatureInteractionAnalyzer.cpp
-    FeatureInteractionConstraintConnector.cpp
+    InteractionAnalyzer.cpp
+    DefaultInteractionAnalyzer.cpp
+    InteractionConstraintConnector.cpp
     FeatureDistanceConstraint.cpp
     HydrophobicInteractionConstraint.cpp
     IonicInteractionConstraint.cpp
@@ -49,20 +50,20 @@ SET(cdpl-pharm_LIB_SRCS
     PharmacophoreFitScreeningScore.cpp
 
     CDFPharmacophoreInputHandler.cpp
-    CDFPharmacophoreOutputHandler.cpp
+    CDFFeatureContainerOutputHandler.cpp
  
     PMLPharmacophoreInputHandler.cpp
-    PMLPharmacophoreOutputHandler.cpp
+    PMLFeatureContainerOutputHandler.cpp
 
     CDFDataReader.cpp
     CDFDataWriter.cpp
     CDFPharmacophoreReader.cpp
-    CDFPharmacophoreWriter.cpp
+    CDFFeatureContainerWriter.cpp
  
     PMLDataReader.cpp
     PMLDataWriter.cpp
     PMLPharmacophoreReader.cpp
-    PMLPharmacophoreWriter.cpp
+    PMLFeatureContainerWriter.cpp
 
     FeatureTypeFunctions.cpp
     FeatureGeometryFunctions.cpp
@@ -73,11 +74,12 @@ SET(cdpl-pharm_LIB_SRCS
     FeatureDisabledFlagFunctions.cpp
     FeatureOptionalFlagFunctions.cpp
 
-    PharmacophoreNameFunctions.cpp
-    PharmacophoreFeatureCountFunctions.cpp
-    PharmacophoreFeatureTypeHistogramFunction.cpp
-    InteractionPharmacophoreFunctions.cpp
-    ExclusionVolumeClashTestFunction.cpp
+    FeatureContainerNameFunctions.cpp
+    FeatureContainerFeatureCountFunctions.cpp
+    FeatureContainerFeatureTypeHistogramFunction.cpp
+    FeatureContainerXVolumeClashTestFunction.cpp
+
+    InteractionPharmacophoreFunction.cpp
 
     ControlParameterFunctions.cpp
 

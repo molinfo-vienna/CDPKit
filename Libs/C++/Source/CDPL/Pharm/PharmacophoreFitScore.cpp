@@ -29,7 +29,7 @@
 #include <algorithm>
 
 #include "CDPL/Pharm/PharmacophoreFitScore.hpp"
-#include "CDPL/Pharm/Pharmacophore.hpp"
+#include "CDPL/Pharm/FeatureContainer.hpp"
 #include "CDPL/Pharm/Feature.hpp"
 #include "CDPL/Pharm/FeatureFunctions.hpp"
 #include "CDPL/Pharm/FeatureType.hpp"
@@ -78,17 +78,17 @@ void Pharm::PharmacophoreFitScore::setFeatureGeometryMatchFactor(double factor)
     ftrGeomMatchFactor = factor;
 }
 
-double Pharm::PharmacophoreFitScore::operator()(const Pharmacophore& ref_pharm, const Pharmacophore& algnd_pharm, 
+double Pharm::PharmacophoreFitScore::operator()(const FeatureContainer& ref_cntnr, const FeatureContainer& algnd_cntnr, 
 												const Math::Matrix4D& xform)
 {
-	geomFtrMappingExtractor.getMapping(ref_pharm, algnd_pharm, xform, geomFtrMapping);
+	geomFtrMappingExtractor.getMapping(ref_cntnr, algnd_cntnr, xform, geomFtrMapping);
 
 	double cnt_score = 0.0;
 	double pos_score = 0.0;
 	double geom_score = 0.0;
 	double num_ftrs = 0;
 
-	for (Pharmacophore::ConstFeatureIterator f_it = ref_pharm.getFeaturesBegin(), f_end = ref_pharm.getFeaturesEnd(); f_it != f_end; ++f_it) {
+	for (FeatureContainer::ConstFeatureIterator f_it = ref_cntnr.getFeaturesBegin(), f_end = ref_cntnr.getFeaturesEnd(); f_it != f_end; ++f_it) {
 		const Feature& ref_ftr = *f_it;
  
 		if (getDisabledFlag(ref_ftr))

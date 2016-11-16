@@ -62,6 +62,7 @@ namespace CDPL
 	{
 
 		class Pharmacophore;
+		class FeatureContainer;
 	}
 
 	namespace Base

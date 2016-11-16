@@ -30,9 +30,9 @@
 
 #include <boost/numeric/conversion/cast.hpp>
 
-#include "CDPL/Pharm/Pharmacophore.hpp"
+#include "CDPL/Pharm/FeatureContainer.hpp"
 #include "CDPL/Pharm/Feature.hpp"
-#include "CDPL/Pharm/PharmacophoreFunctions.hpp"
+#include "CDPL/Pharm/FeatureContainerFunctions.hpp"
 #include "CDPL/Pharm/FeatureFunctions.hpp"
 #include "CDPL/Pharm/ControlParameterFunctions.hpp"
 #include "CDPL/Chem/Entity3DFunctions.hpp"
@@ -44,25 +44,25 @@
 using namespace CDPL;
 
 
-bool Pharm::CDFDataWriter::writePharmacophore(std::ostream& os, const Pharmacophore& pharm)
+bool Pharm::CDFDataWriter::writeFeatureContainer(std::ostream& os, const FeatureContainer& cntnr)
 {
-	writePharmacophore(pharm, dataBuffer);
+	writeFeatureContainer(cntnr, dataBuffer);
 
 	return writeRecordData(os);
 }
 
-void Pharm::CDFDataWriter::writePharmacophore(const Pharmacophore& pharm, Internal::ByteBuffer& bbuf)
+void Pharm::CDFDataWriter::writeFeatureContainer(const FeatureContainer& cntnr, Internal::ByteBuffer& bbuf)
 {
 	init();
 
 	bbuf.setIOPointer(CDF::HEADER_SIZE);
 
-	outputFeatures(pharm, bbuf);
-	outputPharmProperties(pharm, bbuf);
+	outputFeatures(cntnr, bbuf);
+	outputFtrContainerProperties(cntnr, bbuf);
 
 	bbuf.resize(bbuf.getIOPointer());
 
-	outputPharmHeader(pharm, bbuf);
+	outputFtrContainerHeader(cntnr, bbuf);
 }
 
 void Pharm::CDFDataWriter::init()
@@ -71,7 +71,7 @@ void Pharm::CDFDataWriter::init()
 	singlePrecisionFloats(getCDFWriteSinglePrecisionFloatsParameter(ctrlParams));
 }
 
-void Pharm::CDFDataWriter::outputPharmHeader(const Pharmacophore& pharm, Internal::ByteBuffer& bbuf) const
+void Pharm::CDFDataWriter::outputFtrContainerHeader(const FeatureContainer& cntnr, Internal::ByteBuffer& bbuf) const
 {
 	CDF::Header cdf_header;
 
@@ -84,11 +84,11 @@ void Pharm::CDFDataWriter::outputPharmHeader(const Pharmacophore& pharm, Interna
 	putHeader(cdf_header, bbuf);
 }
 
-void Pharm::CDFDataWriter::outputFeatures(const Pharmacophore& pharm, Internal::ByteBuffer& bbuf) const
+void Pharm::CDFDataWriter::outputFeatures(const FeatureContainer& cntnr, Internal::ByteBuffer& bbuf) const
 {
-	bbuf.putInt(boost::numeric_cast<CDF::SizeType>(pharm.getNumFeatures()), false);
+	bbuf.putInt(boost::numeric_cast<CDF::SizeType>(cntnr.getNumFeatures()), false);
 
-	for (Pharmacophore::ConstFeatureIterator it = pharm.getFeaturesBegin(), end = pharm.getFeaturesEnd(); 
+	for (FeatureContainer::ConstFeatureIterator it = cntnr.getFeaturesBegin(), end = cntnr.getFeaturesEnd(); 
 		 it != end; ++it) {
 
 		const Feature& feature = *it;
@@ -121,10 +121,10 @@ void Pharm::CDFDataWriter::outputFeatures(const Pharmacophore& pharm, Internal::
 	}
 }
 
-void Pharm::CDFDataWriter::outputPharmProperties(const Pharmacophore& pharm, Internal::ByteBuffer& bbuf) const
+void Pharm::CDFDataWriter::outputFtrContainerProperties(const FeatureContainer& cntnr, Internal::ByteBuffer& bbuf) const
 {
-	if (hasName(pharm))
-		putStringProperty(CDF::PharmacophoreProperty::NAME, getName(pharm), bbuf);
+	if (hasName(cntnr))
+		putStringProperty(CDF::PharmacophoreProperty::NAME, getName(cntnr), bbuf);
 
 	putPropertyListMarker(CDF::PROP_LIST_END, bbuf);
 }

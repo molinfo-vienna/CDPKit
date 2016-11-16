@@ -27,7 +27,7 @@
 #include <boost/python.hpp>
 
 #include "CDPL/Pharm/GeometricalFeatureMappingExtractor.hpp"
-#include "CDPL/Pharm/Pharmacophore.hpp"
+#include "CDPL/Pharm/FeatureContainer.hpp"
 #include "CDPL/Pharm/Feature.hpp"
 
 #include "Base/ObjectIdentityCheckVisitor.hpp"
@@ -64,7 +64,7 @@ void CDPLPythonPharm::exportGeometricalFeatureMappingExtractor()
 		.def("assign", &Pharm::GeometricalFeatureMappingExtractor::operator=, 
 			 (python::arg("self"), python::arg("extor")), python::return_self<>())
 		.def("getMapping", &Pharm::GeometricalFeatureMappingExtractor::getMapping, 
-			 (python::arg("self"), python::arg("mpd_pharm"), python::arg("ref_pharm"), python::arg("xform"), python::arg("mapping")))
+			 (python::arg("self"), python::arg("ref_cntnr"), python::arg("cntnr"), python::arg("xform"), python::arg("mapping")))
 		.def("setTypeMatchFunction", &Pharm::GeometricalFeatureMappingExtractor::setTypeMatchFunction, 
 			 (python::arg("self"), python::arg("func")))
 		.def("getTypeMatchFunction", &Pharm::GeometricalFeatureMappingExtractor::getTypeMatchFunction, 

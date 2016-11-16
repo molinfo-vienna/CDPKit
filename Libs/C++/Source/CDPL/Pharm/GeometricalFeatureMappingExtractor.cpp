@@ -27,7 +27,7 @@
 #include "StaticInit.hpp"
 
 #include "CDPL/Pharm/GeometricalFeatureMappingExtractor.hpp"
-#include "CDPL/Pharm/Pharmacophore.hpp"
+#include "CDPL/Pharm/FeatureContainer.hpp"
 #include "CDPL/Pharm/Feature.hpp"
 #include "CDPL/Pharm/FeatureTypeMatchFunctor.hpp"
 #include "CDPL/Pharm/FeaturePositionMatchFunctor.hpp"
@@ -95,20 +95,20 @@ double Pharm::GeometricalFeatureMappingExtractor::getGeometryMatchScore(const Fe
 	return it->second;
 }
 
-void Pharm::GeometricalFeatureMappingExtractor::getMapping(const Pharmacophore& ref_pharm, const Pharmacophore& pharm, const Math::Matrix4D& xform, FeatureMapping& mapping)
+void Pharm::GeometricalFeatureMappingExtractor::getMapping(const FeatureContainer& ref_cntnr, const FeatureContainer& cntnr, const Math::Matrix4D& xform, FeatureMapping& mapping)
 {
 	mapping.clear();
 
 	posMatchScores.clear();
 	geomMatchScores.clear();
 
-    Pharmacophore::ConstFeatureIterator mpd_fts_beg = pharm.getFeaturesBegin(); 
-    Pharmacophore::ConstFeatureIterator mpd_fts_end = pharm.getFeaturesEnd();
+    FeatureContainer::ConstFeatureIterator mpd_fts_beg = cntnr.getFeaturesBegin(); 
+    FeatureContainer::ConstFeatureIterator mpd_fts_end = cntnr.getFeaturesEnd();
 
-    for (Pharmacophore::ConstFeatureIterator ref_it = ref_pharm.getFeaturesBegin(), ref_end = ref_pharm.getFeaturesEnd(); ref_it != ref_end; ++ref_it) {
+    for (FeatureContainer::ConstFeatureIterator ref_it = ref_cntnr.getFeaturesBegin(), ref_end = ref_cntnr.getFeaturesEnd(); ref_it != ref_end; ++ref_it) {
 		const Feature& ref_ftr = *ref_it;
 
-		for (Pharmacophore::ConstFeatureIterator mpd_it = mpd_fts_beg, mpd_end = mpd_fts_end; mpd_it != mpd_end; ++mpd_it) {
+		for (FeatureContainer::ConstFeatureIterator mpd_it = mpd_fts_beg, mpd_end = mpd_fts_end; mpd_it != mpd_end; ++mpd_it) {
 			const Feature& mpd_ftr = *mpd_it;
 
 			if (typeMatchFunc && !typeMatchFunc(ref_ftr, mpd_ftr))

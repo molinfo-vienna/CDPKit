@@ -161,8 +161,8 @@ const Pharm::ScreeningProcessor::ScoringFunction& Pharm::ScreeningProcImplementa
 	return scoringFunction;
 }
 
-std::size_t Pharm::ScreeningProcImplementation::searchDB(const Pharmacophore& query, std::size_t mol_start_idx, 
-													 std::size_t mol_end_idx)
+std::size_t Pharm::ScreeningProcImplementation::searchDB(const FeatureContainer& query, std::size_t mol_start_idx, 
+														 std::size_t mol_end_idx)
 {
 	prepareDBSearch(query, mol_start_idx, mol_end_idx);
 
@@ -204,8 +204,8 @@ std::size_t Pharm::ScreeningProcImplementation::searchDB(const Pharmacophore& qu
 	return numHits;
 }
 
-void Pharm::ScreeningProcImplementation::prepareDBSearch(const Pharmacophore& query, std::size_t mol_start_idx, 
-													 std::size_t mol_end_idx)
+void Pharm::ScreeningProcImplementation::prepareDBSearch(const FeatureContainer& query, std::size_t mol_start_idx, 
+														 std::size_t mol_end_idx)
 {
 	initQueryData(query);
 
@@ -223,7 +223,7 @@ void Pharm::ScreeningProcImplementation::prepareDBSearch(const Pharmacophore& qu
 	initPharmIndexList(mol_start_idx, mol_end_idx);
 }
 
-void Pharm::ScreeningProcImplementation::initQueryData(const Pharmacophore& query)
+void Pharm::ScreeningProcImplementation::initQueryData(const FeatureContainer& query)
 {
 	queryPharmacophore = &query;
 
@@ -237,7 +237,7 @@ void Pharm::ScreeningProcImplementation::initQueryData(const Pharmacophore& quer
 	pharmAlignment.clearEntities(true);
 	xVolumeIndices.clear();
 
-	for (Pharmacophore::ConstFeatureIterator it = query.getFeaturesBegin(), end = query.getFeaturesEnd(); it != end; ++it) {
+	for (FeatureContainer::ConstFeatureIterator it = query.getFeaturesBegin(), end = query.getFeaturesEnd(); it != end; ++it) {
 		const Feature& ftr = *it;
 
 		queryFeatureTolerances.push_back(getTolerance(ftr));
@@ -421,7 +421,7 @@ bool Pharm::ScreeningProcImplementation::performAlignment(std::size_t pharm_idx,
 	loadPharmacophore(pharm_idx);
 
 	pharmAlignment.clearEntities(false);
-	pharmAlignment.addPharmacophore(dbPharmacophore, false);
+	pharmAlignment.addFeatures(dbPharmacophore, false);
 
 	double best_score = NAN_SCORE;
 	std::size_t conf_idx = dbAccessor->getConformationIndex(pharm_idx);

@@ -344,7 +344,7 @@
 \defgroup CDPL_PHARM_FEATURE_PROPERTIES Pharmacophore Feature Properties
 \ingroup CDPL_PHARM_PROPERTIES
 
-\defgroup CDPL_PHARM_PHARMACOPHORE_PROPERTIES Pharmacophore Properties
+\defgroup CDPL_PHARM_FEATURE_CONTAINER_PROPERTIES FeatureContainer Properties
 \ingroup CDPL_PHARM_PROPERTIES
 
 \defgroup CDPL_PHARM_CONSTANTS Flags and Constants
@@ -363,6 +363,12 @@
 \ingroup CDPL_PHARM_FUNCTIONS
 
 \defgroup CDPL_PHARM_FEATURE_FUNCTIONS Pharmacophore Feature Functions
+\ingroup CDPL_PHARM_FUNCTIONS
+
+\defgroup CDPL_PHARM_FEATURE_CONTAINER_FUNCTIONS FeatureContainer Functions
+\ingroup CDPL_PHARM_FUNCTIONS
+
+\defgroup CDPL_PHARM_FEATURE_SET_FUNCTIONS FeatureSet Functions
 \ingroup CDPL_PHARM_FUNCTIONS
 
 \defgroup CDPL_PHARM_PHARMACOPHORE_FUNCTIONS Pharmacophore Functions

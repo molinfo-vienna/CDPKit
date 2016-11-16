@@ -33,16 +33,18 @@
 
 #include "CDPL/Config.hpp"      
 
-#include "CDPL/Pharm/Pharmacophore.hpp"      
 #include "CDPL/Pharm/Feature.hpp"  
-#include "CDPL/Pharm/BasicPharmacophore.hpp"  
 #include "CDPL/Pharm/BasicFeature.hpp"  
+#include "CDPL/Pharm/FeatureContainer.hpp"  
+#include "CDPL/Pharm/FeatureSet.hpp"  
+#include "CDPL/Pharm/Pharmacophore.hpp"      
+#include "CDPL/Pharm/BasicPharmacophore.hpp"  
 
 #include "CDPL/Pharm/FeatureMapping.hpp"  
 #include "CDPL/Pharm/FeatureTypeHistogram.hpp"  
 #include "CDPL/Pharm/Feature3DCoordinatesFunction.hpp"  
 
-#include "CDPL/Pharm/PharmacophoreProperty.hpp"  
+#include "CDPL/Pharm/FeatureContainerProperty.hpp"  
 #include "CDPL/Pharm/FeatureProperty.hpp"  
 #include "CDPL/Pharm/ControlParameter.hpp"  
 #include "CDPL/Pharm/ControlParameterDefault.hpp"  
@@ -61,10 +63,9 @@
 #include "CDPL/Pharm/NegIonizableFeatureGenerator.hpp"  
 #include "CDPL/Pharm/PharmacophoreGenerator.hpp"  
 #include "CDPL/Pharm/DefaultPharmacophoreGenerator.hpp"  
-#include "CDPL/Pharm/SurfaceXVolumeCoatGenerator.hpp"  
-#include "CDPL/Pharm/FeatureInteractionAnalyzer.hpp"  
-#include "CDPL/Pharm/DefaultFeatureInteractionAnalyzer.hpp"  
-#include "CDPL/Pharm/FeatureInteractionConstraintConnector.hpp"  
+#include "CDPL/Pharm/InteractionAnalyzer.hpp"  
+#include "CDPL/Pharm/DefaultInteractionAnalyzer.hpp"  
+#include "CDPL/Pharm/InteractionConstraintConnector.hpp"  
 #include "CDPL/Pharm/FeatureDistanceConstraint.hpp"  
 #include "CDPL/Pharm/HydrophobicInteractionConstraint.hpp"  
 #include "CDPL/Pharm/IonicInteractionConstraint.hpp"  
@@ -85,14 +86,14 @@
 #include "CDPL/Pharm/CDFPharmacophoreInputHandler.hpp"
 #include "CDPL/Pharm/PMLPharmacophoreInputHandler.hpp"
 
-#include "CDPL/Pharm/CDFPharmacophoreOutputHandler.hpp"
-#include "CDPL/Pharm/PMLPharmacophoreOutputHandler.hpp"
+#include "CDPL/Pharm/CDFFeatureContainerOutputHandler.hpp"
+#include "CDPL/Pharm/PMLFeatureContainerOutputHandler.hpp"
 
 #include "CDPL/Pharm/CDFPharmacophoreReader.hpp"
 #include "CDPL/Pharm/PMLPharmacophoreReader.hpp"
 
-#include "CDPL/Pharm/CDFPharmacophoreWriter.hpp"
-#include "CDPL/Pharm/PMLPharmacophoreWriter.hpp"
+#include "CDPL/Pharm/CDFFeatureContainerWriter.hpp"
+#include "CDPL/Pharm/PMLFeatureContainerWriter.hpp"
 
 #include "CDPL/Pharm/ScreeningDBCreator.hpp"
 #include "CDPL/Pharm/ScreeningDBAccessor.hpp"
@@ -109,6 +110,8 @@
 
 #include "CDPL/Pharm/PharmacophoreFunctions.hpp"  
 #include "CDPL/Pharm/FeatureFunctions.hpp"
+#include "CDPL/Pharm/FeatureContainerFunctions.hpp"
+#include "CDPL/Pharm/FeatureSetFunctions.hpp"
 #include "CDPL/Pharm/ControlParameterFunctions.hpp"
 
 #endif // CDPL_PHARM_HPP

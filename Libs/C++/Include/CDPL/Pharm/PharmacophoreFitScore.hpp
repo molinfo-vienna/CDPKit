@@ -42,7 +42,7 @@ namespace CDPL
     namespace Pharm
     {
 
-		class Pharmacophore;
+		class FeatureContainer;
 
 		/**
 		 * \addtogroup CDPL_PHARM_FUNCTORS
@@ -76,7 +76,7 @@ namespace CDPL
 
 			void setFeatureGeometryMatchFactor(double factor);
 
-			double operator()(const Pharmacophore& ref_pharm, const Pharmacophore& algnd_pharm, 
+			double operator()(const FeatureContainer& ref_cntnr, const FeatureContainer& algnd_cntnr, 
 							  const Math::Matrix4D& xform);
 
 		  private:

@@ -29,7 +29,7 @@
 #include <boost/numeric/conversion/cast.hpp>
 
 #include "CDPL/Pharm/ControlParameterFunctions.hpp"
-#include "CDPL/Pharm/PharmacophoreFunctions.hpp"
+#include "CDPL/Pharm/FeatureContainerFunctions.hpp"
 #include "CDPL/Chem/MolecularGraph.hpp"
 #include "CDPL/Chem/ControlParameterFunctions.hpp"
 #include "CDPL/Chem/Entity3DContainerFunctions.hpp"
@@ -409,7 +409,7 @@ void Pharm::PSDCreatorImplementation::genAndInsertPharmData(const Chem::Molecula
 
 void Pharm::PSDCreatorImplementation::insertPharmacophore(Base::int64 mol_id, std::size_t conf_idx)
 {
-	pharmWriter.writePharmacophore(pharmacophore, byteBuffer);
+	pharmWriter.writeFeatureContainer(pharmacophore, byteBuffer);
 
 	setupStatement(insPharmStmt, INSERT_PHARM_DATA_SQL, true);
 

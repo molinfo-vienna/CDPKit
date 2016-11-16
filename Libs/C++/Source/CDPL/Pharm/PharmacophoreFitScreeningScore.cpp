@@ -27,6 +27,7 @@
 #include "StaticInit.hpp"
 
 #include "CDPL/Pharm/PharmacophoreFitScreeningScore.hpp"
+#include "CDPL/Pharm/Pharmacophore.hpp"
 
 
 using namespace CDPL;

@@ -31,9 +31,9 @@
 
 #include <boost/lexical_cast.hpp>
 
-#include "CDPL/Pharm/Pharmacophore.hpp"
+#include "CDPL/Pharm/FeatureContainer.hpp"
 #include "CDPL/Pharm/Feature.hpp"
-#include "CDPL/Pharm/PharmacophoreFunctions.hpp"
+#include "CDPL/Pharm/FeatureContainerFunctions.hpp"
 #include "CDPL/Pharm/FeatureFunctions.hpp"
 #include "CDPL/Pharm/ControlParameterFunctions.hpp"
 #include "CDPL/Pharm/FeatureType.hpp"
@@ -91,7 +91,7 @@ Pharm::PMLDataWriter::PMLDataWriter(const Base::DataIOBase& io_base):
 	ioBase(io_base), writeHeader(true), strictErrorChecking(true)
 {}
 
-bool Pharm::PMLDataWriter::writePharmacophore(std::ostream& os, const Pharmacophore& pharm)
+bool Pharm::PMLDataWriter::writeFeatureContainer(std::ostream& os, const FeatureContainer& cntnr)
 {
 	init(os);
 
@@ -103,9 +103,9 @@ bool Pharm::PMLDataWriter::writePharmacophore(std::ostream& os, const Pharmacoph
 		featureID = 1;
 	}
 
-	startAlignmentElement(os, pharm);
-	startPharmacophore(os, pharm);
-    writeFeatures(os, pharm);
+	startAlignmentElement(os, cntnr);
+	startPharmacophore(os, cntnr);
+    writeFeatures(os, cntnr);
 	endPharmacophore(os);
 	endAlignmentElement(os);
 
@@ -138,11 +138,11 @@ void Pharm::PMLDataWriter::writeElemContainerFooter(std::ostream& os) const
 	os << PML::ELEM_CONTAINER_FOOTER << '\n';
 }
 
-void Pharm::PMLDataWriter::startAlignmentElement(std::ostream& os, const Pharmacophore& pharm)
+void Pharm::PMLDataWriter::startAlignmentElement(std::ostream& os, const FeatureContainer& cntnr)
 {
 	writeStartTag(os, PML::ALIGNMENT_ELEM_TAG, false);
 
-	writeAttribute(os, PML::NAME_ATTRIBUTE, getName(pharm), false);
+	writeAttribute(os, PML::NAME_ATTRIBUTE, getName(cntnr), false);
 	writeAttribute(os, PML::ID_ATTRIBUTE, PML::ALIGNMENT_ELEM_TAG + boost::lexical_cast<std::string>(alignElemID++), false);
 	writeAttribute(os, PML::FLAG_CODE_ATTRIBUTE, PML::DEFAULT_FLAG_CODE, true);
 }
@@ -152,11 +152,11 @@ void Pharm::PMLDataWriter::endAlignmentElement(std::ostream& os) const
 	writeEndTag(os, PML::ALIGNMENT_ELEM_TAG);
 }
 
-void Pharm::PMLDataWriter::startPharmacophore(std::ostream& os, const Pharmacophore& pharm) const
+void Pharm::PMLDataWriter::startPharmacophore(std::ostream& os, const FeatureContainer& cntnr) const
 {
 	writeStartTag(os, PML::PHARMACOPHORE_TAG, false);
 
-	writeAttribute(os, PML::NAME_ATTRIBUTE, getName(pharm), false);
+	writeAttribute(os, PML::NAME_ATTRIBUTE, getName(cntnr), false);
 	writeAttribute(os, PML::ID_ATTRIBUTE, PML::PHARMACOPHORE_TAG + '0', false);
 	writeAttribute(os, PML::PHARM_TYPE_ATTRIBUTE, PML::PHARM_TYPE_LIGAND_SCOUT, true);
 }
@@ -166,11 +166,11 @@ void Pharm::PMLDataWriter::endPharmacophore(std::ostream& os) const
 	writeEndTag(os, PML::PHARMACOPHORE_TAG);
 }
 
-void Pharm::PMLDataWriter::writeFeatures(std::ostream& os, const Pharmacophore& pharm)
+void Pharm::PMLDataWriter::writeFeatures(std::ostream& os, const FeatureContainer& cntnr)
 {
 	std::size_t id = 0;
 
-	for (Pharmacophore::ConstFeatureIterator it = pharm.getFeaturesBegin(), end = pharm.getFeaturesEnd(); it != end; ++it) {
+	for (FeatureContainer::ConstFeatureIterator it = cntnr.getFeaturesBegin(), end = cntnr.getFeaturesEnd(); it != end; ++it) {
 		const Feature& ftr = *it;
 		unsigned int ftr_type = getType(ftr);
 

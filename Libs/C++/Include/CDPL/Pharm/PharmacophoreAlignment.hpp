@@ -44,7 +44,7 @@ namespace CDPL
 
 		class Feature;
 		class FeatureMapping;
-		class Pharmacophore;
+		class FeatureContainer;
 
 		/**
 		 * \addtogroup CDPL_PHARM_ALIGNMENT
@@ -68,11 +68,11 @@ namespace CDPL
 			PharmacophoreAlignment(bool query_mode);
 
 			/**
-			 * \brief Adds the features of the pharmacophore \a pharm to the specified alignment feature set.
-			 * \param pharm The pharmacophore containing features to add.
+			 * \brief Adds the features of the feature container \a cntnr to the specified alignment feature set.
+			 * \param cntnr The feature container containing features to add.
 			 * \param first_set If \c true, the features are added to the first feature set, if \c false to the second one.
 			 */
-			void addPharmacophore(const Pharmacophore& pharm, bool first_set);
+			void addFeatures(const FeatureContainer& cntnr, bool first_set);
 		};
 
 		/**

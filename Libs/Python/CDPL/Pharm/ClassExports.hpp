@@ -33,10 +33,12 @@
 namespace CDPLPythonPharm
 {
 
-	void exportPharmacophore();
 	void exportFeature();
-	void exportBasicPharmacophore();
 	void exportBasicFeature();
+	void exportFeatureContainer();
+	void exportFeatureSet();
+	void exportPharmacophore();
+	void exportBasicPharmacophore();
 
 	void exportFeatureMapping();
 	void exportFeatureTypeHistogram();
@@ -44,19 +46,20 @@ namespace CDPLPythonPharm
 	void exportBoostFunctionWrappers();
 
 	void exportPharmacophoreIOManager();
+	void exportFeatureContainerIOManager();
 	void exportPharmacophoreReader();
-	void exportPharmacophoreWriter();
+	void exportFeatureContainerWriter();
 	void exportPharmacophoreInputHandler();
-	void exportPharmacophoreOutputHandler();
+	void exportFeatureContainerOutputHandler();
 
 	void exportCDFPharmacophoreInputHandler();
-	void exportCDFPharmacophoreOutputHandler();
+	void exportCDFFeatureContainerOutputHandler();
 	void exportCDFPharmacophoreReader();
-	void exportCDFPharmacophoreWriter();
+	void exportCDFFeatureContainerWriter();
 	void exportPMLPharmacophoreInputHandler();
-	void exportPMLPharmacophoreOutputHandler();
+	void exportPMLFeatureContainerOutputHandler();
 	void exportPMLPharmacophoreReader();
-	void exportPMLPharmacophoreWriter();
+	void exportPMLFeatureContainerWriter();
 
 	void exportPharmacophoreFitScore();
 
@@ -83,10 +86,9 @@ namespace CDPLPythonPharm
 	void exportHBondDonorFeatureGenerator();
 	void exportPosIonizableFeatureGenerator();
 	void exportNegIonizableFeatureGenerator();
-	void exportSurfaceXVolumeCoatGenerator();
-	void exportFeatureInteractionAnalyzer();
-	void exportDefaultFeatureInteractionAnalyzer();
-	void exportFeatureInteractionConstraintConnector();
+	void exportInteractionAnalyzer();
+	void exportDefaultInteractionAnalyzer();
+	void exportInteractionConstraintConnector();
 	void exportFeatureDistanceConstraint();
 	void exportHydrophobicInteractionConstraint();
 	void exportIonicInteractionConstraint();

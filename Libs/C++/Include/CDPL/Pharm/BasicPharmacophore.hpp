@@ -85,6 +85,13 @@ namespace CDPL
 	     * \param pharm The other Pharm::Pharmacophore instance to copy.
 	     */
 	    BasicPharmacophore(const Pharmacophore& pharm);
+ 
+		/**
+	     * \brief Constructs a %BasicPharmacophore instance with copies of the features 
+		 *        in the Pharm::FeatureContainer instance \a cntnr.
+	     * \param pharm The Pharm::FeatureContainer instance with the features to copy.
+	     */
+	    explicit BasicPharmacophore(const FeatureContainer& cntnr);
 		
 	    /**
 	     * \brief Destructor.
@@ -178,6 +185,8 @@ namespace CDPL
 	    void copy(const BasicPharmacophore& pharm);
 	
 	    void copy(const Pharmacophore& pharm);
+
+	    void copy(const FeatureContainer& cntnr);
 				
 	    /**
 	     * \brief Extends the current set of features by a copy of the features in the
@@ -188,6 +197,8 @@ namespace CDPL
 	    void append(const BasicPharmacophore& pharm);
 
 	    void append(const Pharmacophore& pharm);
+
+	    void append(const FeatureContainer& cntnr);
 	
 	  private:
 	    template <typename T>

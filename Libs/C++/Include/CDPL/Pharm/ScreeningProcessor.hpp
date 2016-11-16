@@ -53,7 +53,7 @@ namespace CDPL
     namespace Pharm
     {
 
-		class Pharmacophore;
+		class FeatureContainer;
 		class ScreeningDBAccessor;
 		class ScreeningProcImplementation;
 
@@ -81,16 +81,16 @@ namespace CDPL
 			{
 
 			public:
-				SearchHit(const ScreeningProcessor& hit_prov, const Pharmacophore& qry_pharm,
-						  const Pharmacophore& hit_pharm, const Chem::Molecule& mol, 
+				SearchHit(const ScreeningProcessor& hit_prov, const FeatureContainer& qry_pharm,
+						  const FeatureContainer& hit_pharm, const Chem::Molecule& mol, 
 						  const Math::Matrix4D& xform, std::size_t pharm_idx, 
 						  std::size_t mol_idx, std::size_t conf_idx);
 
 				const ScreeningProcessor& getHitProvider() const;
 
-				const Pharmacophore& getQueryPharmacophore() const;
+				const FeatureContainer& getQueryPharmacophore() const;
 
-				const Pharmacophore& getHitPharmacophore() const;
+				const FeatureContainer& getHitPharmacophore() const;
 				
 				const Chem::Molecule& getHitMolecule() const;
 				
@@ -104,8 +104,8 @@ namespace CDPL
 
 			private:
 				const ScreeningProcessor*     provider;
-				const Pharmacophore*          qryPharm;
-				const Pharmacophore*          hitPharm;
+				const FeatureContainer*       qryPharm;
+				const FeatureContainer*       hitPharm;
 				const Chem::Molecule*         molecule;
 				const Math::Matrix4D*         almntTransform;
 				std::size_t                   pharmIndex;
@@ -163,7 +163,7 @@ namespace CDPL
 
 			const ScoringFunction& getScoringFunction() const;
 
-			std::size_t searchDB(const Pharmacophore& query, std::size_t mol_start_idx = 0, std::size_t mol_end_idx = 0);
+			std::size_t searchDB(const FeatureContainer& query, std::size_t mol_start_idx = 0, std::size_t mol_end_idx = 0);
 
 		  private:
 			typedef std::auto_ptr<ScreeningProcImplementation> ImplementationPointer;

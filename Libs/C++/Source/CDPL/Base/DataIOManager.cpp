@@ -43,3 +43,6 @@ class Base::DataIOManager<Chem::Reaction>;
 
 template
 class Base::DataIOManager<Pharm::Pharmacophore>;
+
+template
+class Base::DataIOManager<Pharm::FeatureContainer>;

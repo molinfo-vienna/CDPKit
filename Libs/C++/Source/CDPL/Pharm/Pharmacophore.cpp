@@ -34,26 +34,6 @@
 using namespace CDPL;
 
 
-Pharm::Pharmacophore::ConstFeatureIterator Pharm::Pharmacophore::getFeaturesBegin() const
-{
-    return ConstFeatureIterator(*this, 0);
-}
-
-Pharm::Pharmacophore::ConstFeatureIterator Pharm::Pharmacophore::getFeaturesEnd() const
-{
-    return ConstFeatureIterator(*this, getNumFeatures());
-}
-
-Pharm::Pharmacophore::FeatureIterator Pharm::Pharmacophore::getFeaturesBegin()
-{
-    return FeatureIterator(*this, 0);
-}
-
-Pharm::Pharmacophore::FeatureIterator Pharm::Pharmacophore::getFeaturesEnd()
-{
-    return FeatureIterator(*this, getNumFeatures());
-}
-
 Pharm::Pharmacophore::FeatureIterator Pharm::Pharmacophore::removeFeature(const FeatureIterator& it)
 {
     if (it.getIndex() >= getNumFeatures())
@@ -81,45 +61,19 @@ Pharm::Pharmacophore& Pharm::Pharmacophore::operator+=(const Pharmacophore& phar
     return *this;
 }
 
-std::size_t Pharm::Pharmacophore::getNumEntities() const
+Pharm::Pharmacophore& Pharm::Pharmacophore::operator=(const FeatureContainer& cntnr) 
 {
-	return getNumFeatures();
-}
+    if (this == &cntnr)
+		return *this;
 
-const Chem::Entity3D& Pharm::Pharmacophore::getEntity(std::size_t idx) const
-{
-	return getFeature(idx);
-}
+    copy(cntnr);
 
-Chem::Entity3D& Pharm::Pharmacophore::getEntity(std::size_t idx)
-{
-	return getFeature(idx);
-}
-
-
-const Pharm::Feature& Pharm::Pharmacophore::ConstFeatureAccessor::operator()(std::size_t idx) const
-{
-    return container.get().getFeature(idx);
-}
-
-bool Pharm::Pharmacophore::ConstFeatureAccessor::operator==(const ConstFeatureAccessor& accessor) const 
-{
-    return (container.get_pointer() == accessor.container.get_pointer());
-}
-
-Pharm::Pharmacophore::ConstFeatureAccessor& Pharm::Pharmacophore::ConstFeatureAccessor::operator=(const FeatureAccessor& accessor) 
-{
-    container = boost::reference_wrapper<const Pharmacophore>(accessor.container);
     return *this;
 }
 
-
-Pharm::Feature& Pharm::Pharmacophore::FeatureAccessor::operator()(std::size_t idx) const
+Pharm::Pharmacophore& Pharm::Pharmacophore::operator+=(const FeatureContainer& cntnr) 
 {
-    return container.get().getFeature(idx);
-}
+    append(cntnr);
 
-bool Pharm::Pharmacophore::FeatureAccessor::operator==(const FeatureAccessor& accessor) const 
-{
-    return (container.get_pointer() == accessor.container.get_pointer());
+    return *this;
 }

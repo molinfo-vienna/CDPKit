@@ -27,20 +27,10 @@
 #include <boost/python.hpp>
 
 #include "CDPL/Pharm/PharmacophoreAlignment.hpp"
-#include "CDPL/Pharm/Pharmacophore.hpp"
+#include "CDPL/Pharm/FeatureContainer.hpp"
 #include "CDPL/Pharm/Feature.hpp"
 
 #include "ClassExports.hpp"
-
-
-namespace
-{
-
-    void addPharmacophore(CDPL::Pharm::PharmacophoreAlignment& align, CDPL::Pharm::Pharmacophore& pharm, bool first_set)
-    {
-		align.addPharmacophore(pharm, first_set);
-    }
-}
 
 
 void CDPLPythonPharm::exportPharmacophoreAlignment()
@@ -52,7 +42,7 @@ void CDPLPythonPharm::exportPharmacophoreAlignment()
 				   boost::noncopyable>("PharmacophoreAlignment", python::no_init)
 		.def(python::init<bool>((python::arg("self"), python::arg("query_mode"))))
 		.def(python::init<const Pharm::PharmacophoreAlignment&>((python::arg("self"), python::arg("alignment"))))
-		.def("addPharmacophore", &addPharmacophore, (python::arg("self"), python::arg("pharm"), python::arg("first_set")))
+		.def("addFeatures", &Pharm::PharmacophoreAlignment::addFeatures, (python::arg("self"), python::arg("cntnr"), python::arg("first_set")))
 		.def("assign", &Pharm::PharmacophoreAlignment::operator=, 
 			 (python::arg("self"), python::arg("alignment")), python::return_self<>());
 }

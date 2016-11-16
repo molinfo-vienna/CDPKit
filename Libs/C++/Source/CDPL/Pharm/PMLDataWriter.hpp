@@ -44,7 +44,7 @@ namespace CDPL
 	namespace Pharm
 	{
 
-		class Pharmacophore;
+		class FeatureContainer;
 		class Feature;
 
 		class PMLDataWriter
@@ -53,7 +53,7 @@ namespace CDPL
 		public:
 			PMLDataWriter(const Base::DataIOBase& io_base);
 
-			bool writePharmacophore(std::ostream& os, const Pharmacophore& pharm);
+			bool writeFeatureContainer(std::ostream& os, const FeatureContainer& pharm);
 
 			void close(std::ostream& os);
 
@@ -63,13 +63,13 @@ namespace CDPL
 			void writeElemContainerHeader(std::ostream& os) const;
 			void writeElemContainerFooter(std::ostream& os) const;
 
-			void startAlignmentElement(std::ostream& os, const Pharmacophore& pharm);
+			void startAlignmentElement(std::ostream& os, const FeatureContainer& cntnr);
 			void endAlignmentElement(std::ostream& os) const;
 
-			void startPharmacophore(std::ostream& os, const Pharmacophore& pharm) const;
+			void startPharmacophore(std::ostream& os, const FeatureContainer& cntnr) const;
 			void endPharmacophore(std::ostream& os) const;
 
-			void writeFeatures(std::ostream& os, const Pharmacophore& pharm);
+			void writeFeatures(std::ostream& os, const FeatureContainer& cntnr);
 
 			void writeXVolume(std::ostream& os, const Feature& ftr, std::size_t id);
 			void writePointFeature(std::ostream& os, const Feature& ftr, const std::string& name, std::size_t id);

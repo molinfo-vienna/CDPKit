@@ -9,28 +9,31 @@ ENDFOREACH(PYTHON_FILE)
 
 SET(pharm_MOD_SRCS
     Module.cpp
-    PharmacophoreExport.cpp
     FeatureExport.cpp
-    BasicPharmacophoreExport.cpp
     BasicFeatureExport.cpp
+    FeatureContainerExport.cpp
+    FeatureSetExport.cpp
+    PharmacophoreExport.cpp
+    BasicPharmacophoreExport.cpp
 
     FeatureMappingExport.cpp 
     FeatureTypeHistogramExport.cpp 
 
+    FeatureContainerIOManagerExport.cpp 
     PharmacophoreIOManagerExport.cpp 
     PharmacophoreReaderExport.cpp 
-    PharmacophoreWriterExport.cpp 
+    FeatureContainerWriterExport.cpp 
     PharmacophoreInputHandlerExport.cpp 
-    PharmacophoreOutputHandlerExport.cpp 
+    FeatureContainerOutputHandlerExport.cpp 
 
     CDFPharmacophoreInputHandlerExport.cpp 
-    CDFPharmacophoreOutputHandlerExport.cpp 
+    CDFFeatureContainerOutputHandlerExport.cpp 
     CDFPharmacophoreReaderExport.cpp 
-    CDFPharmacophoreWriterExport.cpp
+    CDFFeatureContainerWriterExport.cpp
     PMLPharmacophoreInputHandlerExport.cpp 
-    PMLPharmacophoreOutputHandlerExport.cpp 
+    PMLFeatureContainerOutputHandlerExport.cpp 
     PMLPharmacophoreReaderExport.cpp 
-    PMLPharmacophoreWriterExport.cpp
+    PMLFeatureContainerWriterExport.cpp
 
     PharmacophoreFitScoreExport.cpp
 
@@ -52,10 +55,9 @@ SET(pharm_MOD_SRCS
     HBondDonorFeatureGeneratorExport.cpp
     PosIonizableFeatureGeneratorExport.cpp
     NegIonizableFeatureGeneratorExport.cpp
-    SurfaceXVolumeCoatGeneratorExport.cpp
-    FeatureInteractionAnalyzerExport.cpp
-    DefaultFeatureInteractionAnalyzerExport.cpp
-    FeatureInteractionConstraintConnectorExport.cpp
+    InteractionAnalyzerExport.cpp
+    DefaultInteractionAnalyzerExport.cpp
+    InteractionConstraintConnectorExport.cpp
     FeatureDistanceConstraintExport.cpp
     HydrophobicInteractionConstraintExport.cpp
     IonicInteractionConstraintExport.cpp
@@ -73,7 +75,7 @@ SET(pharm_MOD_SRCS
     FeaturePositionMatchFunctorExport.cpp
     FeatureGeometryMatchFunctorExport.cpp
 
-    PharmacophorePropertyExport.cpp 
+    FeatureContainerPropertyExport.cpp 
     FeaturePropertyExport.cpp 
     DataFormatExport.cpp 
     FeatureTypeExport.cpp 
@@ -83,6 +85,8 @@ SET(pharm_MOD_SRCS
 
     PharmacophoreFunctionExport.cpp 
     FeatureFunctionExport.cpp 
+    FeatureContainerFunctionExport.cpp 
+    FeatureSetFunctionExport.cpp 
     ControlParameterFunctionExport.cpp 
 
     ToPythonConverterRegistration.cpp

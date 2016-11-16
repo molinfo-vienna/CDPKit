@@ -28,7 +28,7 @@
 
 #include "CDPL/Pharm/ScreeningProcessor.hpp"
 #include "CDPL/Pharm/ScreeningDBAccessor.hpp"
-#include "CDPL/Pharm/Pharmacophore.hpp"
+#include "CDPL/Pharm/FeatureContainer.hpp"
 #include "CDPL/Chem/Molecule.hpp"
 
 #include "Base/ObjectIdentityCheckVisitor.hpp"
@@ -53,7 +53,7 @@ void CDPLPythonPharm::exportScreeningProcessor()
 		.export_values();
 
 	python::class_<Pharm::ScreeningProcessor::SearchHit/*, boost::noncopyable*/>("SearchHit", python::no_init)
-		.def(python::init<const Pharm::ScreeningProcessor&, const Pharm::Pharmacophore&, const Pharm::Pharmacophore&, const Chem::Molecule&, 
+		.def(python::init<const Pharm::ScreeningProcessor&, const Pharm::FeatureContainer&, const Pharm::FeatureContainer&, const Chem::Molecule&, 
 			 const Math::Matrix4D&, std::size_t, std::size_t, std::size_t>(
 				 (python::arg("self"), python::arg("hit_prov"), python::arg("qry_pharm"), python::arg("hit_pharm"), python::arg("mol"), 
 				  python::arg("xform"), python::arg("pharm_idx"), python::arg("mol_idx"), python::arg("conf_idx")))
@@ -131,7 +131,7 @@ void CDPLPythonPharm::exportScreeningProcessor()
 		.def("getScoringFunction", &Pharm::ScreeningProcessor::getScoringFunction, 
 			 python::arg("self"), python::return_internal_reference<>())
 		.def("searchDB", &Pharm::ScreeningProcessor::searchDB, 
-			 (python::arg("self"), python::arg("pharm"), python::arg("mol_start_idx") = 0, python::arg("mol_end_idx") = 0))
+			 (python::arg("self"), python::arg("query"), python::arg("mol_start_idx") = 0, python::arg("mol_end_idx") = 0))
 		.add_property("dbAcccessor", python::make_function(&Pharm::ScreeningProcessor::getDBAccessor,
 														   python::return_internal_reference<>()),
 					  python::make_function(&Pharm::ScreeningProcessor::setDBAccessor, 

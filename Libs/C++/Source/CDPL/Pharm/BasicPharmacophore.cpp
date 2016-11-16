@@ -49,6 +49,12 @@ Pharm::BasicPharmacophore::BasicPharmacophore(const Pharmacophore& pharm): Pharm
     append(pharm);
 }
 
+Pharm::BasicPharmacophore::BasicPharmacophore(const FeatureContainer& cntnr)
+{
+    append(cntnr);
+	copyProperties(cntnr);
+}
+
 Pharm::BasicPharmacophore::~BasicPharmacophore() {}
 
 void Pharm::BasicPharmacophore::clear()
@@ -218,6 +224,15 @@ void Pharm::BasicPharmacophore::copy(const Pharmacophore& pharm)
     copyProperties(pharm);
 }
 
+void Pharm::BasicPharmacophore::copy(const FeatureContainer& cntnr)
+{   
+    if (this == &cntnr)
+		return;
+
+    doCopy(cntnr);
+    copyProperties(cntnr);
+}
+
 template <typename T>
 void Pharm::BasicPharmacophore::doCopy(const T& pharm)
 {   
@@ -262,6 +277,11 @@ void Pharm::BasicPharmacophore::append(const BasicPharmacophore& pharm)
 void Pharm::BasicPharmacophore::append(const Pharmacophore& pharm)
 {   
     doAppend(pharm);
+}
+
+void Pharm::BasicPharmacophore::append(const FeatureContainer& cntnr)
+{   
+    doAppend(cntnr);
 }
 
 template <typename T>
