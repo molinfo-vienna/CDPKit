@@ -51,6 +51,7 @@
 #include "CDPL/Biomol/ResidueDictionary.hpp"
 
 #include "CDPL/Biomol/AtomFunctions.hpp"
+#include "CDPL/Biomol/AtomContainerFunctions.hpp"
 #include "CDPL/Biomol/MolecularGraphFunctions.hpp"
 
 #endif // CDPL_BIOMOL_HPP

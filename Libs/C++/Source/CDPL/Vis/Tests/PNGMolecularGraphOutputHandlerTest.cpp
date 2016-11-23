@@ -57,7 +57,7 @@ BOOST_AUTO_TEST_CASE(PNGMolecularGraphOutputHandlerTest)
 	BOOST_CHECK(DataIOManager<MolecularGraph>::getOutputHandlerByMimeType("image/png") == handler);
 	BOOST_CHECK(DataIOManager<MolecularGraph>::getOutputHandlerByFileExtension("png") == handler);
 
-	std::ofstream os("PNGMolecularGraphOutputHandlerTest.png",
+	std::fstream os("PNGMolecularGraphOutputHandlerTest.png",
 					 std::ios_base::binary | std::ios_base::out | std::ios_base::trunc);
 
 	BOOST_CHECK(os);

@@ -44,12 +44,18 @@ namespace CDPLPythonBase
 		CDPL::Base::DataInputHandler<T>, boost::python::wrapper<CDPL::Base::DataInputHandler<T> >
 	{
 
+		typedef typename CDPL::Base::DataInputHandler<T>::ReaderType ReaderType;
+
 		const CDPL::Base::DataFormat& getDataFormat() const {
 			return this->get_override("getDataFormat")();
 		}
 
-		typename CDPL::Base::DataReader<T>::SharedPointer createReader(std::istream& is) const {
+		typename ReaderType::SharedPointer createReader(std::istream& is) const {
 			return this->get_override("createReader")(boost::ref(is));
+		}
+
+		typename ReaderType::SharedPointer createReader(const std::string& file_name, std::ios_base::openmode mode) const {
+			return this->get_override("createReader")(file_name, mode);
 		}
 	};
 
@@ -63,13 +69,18 @@ namespace CDPLPythonBase
 
 			typedef Base::DataInputHandler<T> HandlerType;
 
+			typename HandlerType::ReaderType::SharedPointer (HandlerType::*createReaderFunc1)(std::istream&) const;
+			typename HandlerType::ReaderType::SharedPointer (HandlerType::*createReaderFunc2)(const std::string&, std::ios_base::openmode) const;
+
 			python::class_<DataInputHandlerWrapper<T>, boost::noncopyable>(name, python::no_init)
 				.def(python::init<>(python::arg("self")))
 				.def(ObjectIdentityCheckVisitor<HandlerType>())
 				.def("getDataFormat", python::pure_virtual(&HandlerType::getDataFormat), 
 					 python::arg("self"), python::return_internal_reference<1>())
-				.def("createReader", python::pure_virtual(&HandlerType::createReader), 
-					 (python::arg("self"), python::arg("is")), python::with_custodian_and_ward_postcall<0, 2>());
+				.def("createReader", python::pure_virtual(createReaderFunc1), 
+					 (python::arg("self"), python::arg("is")), python::with_custodian_and_ward_postcall<0, 2>())
+				.def("createReader", python::pure_virtual(createReaderFunc2), 
+					 (python::arg("self"), python::arg("file_name"), python::arg("mode") = std::ios_base::in | std::ios_base::binary));
 		}
 	};
 }

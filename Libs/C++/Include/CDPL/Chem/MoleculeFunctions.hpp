@@ -34,6 +34,7 @@
 #include <cstddef>
 
 #include "CDPL/Chem/APIPrefix.hpp"
+#include "CDPL/Chem/AtomPredicate.hpp"
 
 
 namespace CDPL 
@@ -75,6 +76,10 @@ namespace CDPL
 		 * \param mol The molecule that has to be made hydrogen complete.
 		 */
 		CDPL_CHEM_API void makeHydrogenComplete(Molecule& mol);
+
+		CDPL_CHEM_API void removeAtomsIf(Molecule& mol, const AtomPredicate& pred);
+
+		CDPL_CHEM_API void removeAtomsIfNot(Molecule& mol, const AtomPredicate& pred);
 
 		/**
 		 * @}

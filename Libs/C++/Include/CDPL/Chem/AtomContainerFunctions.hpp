@@ -37,6 +37,7 @@
 #include "CDPL/Chem/APIPrefix.hpp"
 #include "CDPL/Chem/MassComposition.hpp"
 #include "CDPL/Chem/ElementHistogram.hpp"
+#include "CDPL/Chem/AtomPredicate.hpp"
 #include "CDPL/Math/Matrix.hpp"
 #include "CDPL/Math/VectorArray.hpp"
 #include "CDPL/Util/BitSet.hpp"
@@ -49,6 +50,8 @@ namespace CDPL
 	{
 	
 		class AtomContainer;
+		class Fragment;
+		class Molecule;
 
 		/**
 		 * \addtogroup CDPL_CHEM_ATOM_CONTAINER_FUNCTIONS
@@ -103,6 +106,15 @@ namespace CDPL
 
 
 		CDPL_CHEM_API std::size_t buildAtomTypeMask(const AtomContainer& cntnr, Util::BitSet& mask, unsigned int type);
+
+
+		CDPL_CHEM_API void copyAtomsIf(const AtomContainer& cntnr, Molecule& mol, const AtomPredicate& pred);
+
+		CDPL_CHEM_API void copyAtomsIf(const AtomContainer& cntnr, Fragment& frag, const AtomPredicate& pred);
+
+		CDPL_CHEM_API void copyAtomsIfNot(const AtomContainer& cntnr, Molecule& mol, const AtomPredicate& pred);
+
+		CDPL_CHEM_API void copyAtomsIfNot(const AtomContainer& cntnr, Fragment& frag, const AtomPredicate& pred);
 
 		/**
 		 * @}

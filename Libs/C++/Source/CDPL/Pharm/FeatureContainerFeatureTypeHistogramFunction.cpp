@@ -29,6 +29,7 @@
 #include "CDPL/Pharm/FeatureContainer.hpp"
 #include "CDPL/Pharm/FeatureContainerFunctions.hpp"
 #include "CDPL/Pharm/FeatureFunctions.hpp"
+#include "CDPL/Pharm/FeatureTypeHistogram.hpp"
 #include "CDPL/Pharm/Feature.hpp"
 
 

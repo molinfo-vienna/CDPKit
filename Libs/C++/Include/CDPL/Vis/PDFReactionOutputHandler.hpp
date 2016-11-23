@@ -31,18 +31,13 @@
 #ifndef CDPL_VIS_PDFREACTIONOUTPUTHANDLER_HPP
 #define CDPL_VIS_PDFREACTIONOUTPUTHANDLER_HPP
 
-#include "CDPL/Vis/APIPrefix.hpp"
-#include "CDPL/Base/DataOutputHandler.hpp"
+#include "CDPL/Vis/DataFormat.hpp"
+#include "CDPL/Vis/PDFReactionWriter.hpp"
+#include "CDPL/Util/DefaultDataOutputHandler.hpp"
 
 
 namespace CDPL 
 {
-
-	namespace Chem
-	{
-
-		class Reaction;
-	}
 
 	namespace Vis
 	{
@@ -56,17 +51,8 @@ namespace CDPL
 		 * \brief A handler for the output of 2D depictions of chemical reactions in the <em>Portable
 		 *        Document Format (PDF)</em> [\ref WPDF].
 		 */
-		class CDPL_VIS_API PDFReactionOutputHandler : public Base::DataOutputHandler<Chem::Reaction>
-		{
-
-		public:
-			PDFReactionOutputHandler() {}
-
-			const Base::DataFormat& getDataFormat() const;
-
-			Base::DataWriter<Chem::Reaction>::SharedPointer createWriter(std::ostream& os) const;
-		};
-
+		typedef Util::DefaultDataOutputHandler<PDFReactionWriter, DataFormat::PDF> PDFReactionOutputHandler;	
+	
 		/**
 		 * @}
 		 */

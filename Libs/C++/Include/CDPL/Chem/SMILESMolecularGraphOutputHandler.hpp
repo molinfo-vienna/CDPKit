@@ -31,8 +31,9 @@
 #ifndef CDPL_CHEM_SMILESMOLECULARGRAPHOUTPUTHANDLER_HPP
 #define CDPL_CHEM_SMILESMOLECULARGRAPHOUTPUTHANDLER_HPP
 
-#include "CDPL/Chem/APIPrefix.hpp"
-#include "CDPL/Base/DataOutputHandler.hpp"
+#include "CDPL/Chem/DataFormat.hpp"
+#include "CDPL/Chem/SMILESMolecularGraphWriter.hpp"
+#include "CDPL/Util/DefaultDataOutputHandler.hpp"
 
 
 namespace CDPL 
@@ -40,8 +41,6 @@ namespace CDPL
 
 	namespace Chem
 	{
-
-		class MolecularGraph;
 
 		/**
 		 * \addtogroup CDPL_CHEM_SMILES_IO
@@ -51,16 +50,7 @@ namespace CDPL
 		/**
 		 * \brief A handler for the output of molecular graph data in the <em>Daylight SMILES</em> [\ref SMILES] format.
 		 */
-		class CDPL_CHEM_API SMILESMolecularGraphOutputHandler : public Base::DataOutputHandler<MolecularGraph>
-		{
-
-		public:
-			SMILESMolecularGraphOutputHandler() {}
-
-			const Base::DataFormat& getDataFormat() const;
-
-			Base::DataWriter<MolecularGraph>::SharedPointer createWriter(std::ostream& os) const;
-		};
+		typedef Util::DefaultDataOutputHandler<SMILESMolecularGraphWriter, DataFormat::SMILES> SMILESMolecularGraphOutputHandler;
 
 		/**
 		 * @}

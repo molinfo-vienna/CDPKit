@@ -10,9 +10,6 @@ SET(cdpl-biomol_LIB_SRCS
     ControlParameter.cpp
     ControlParameterDefault.cpp
 
-    PDBMoleculeInputHandler.cpp
-    PDBMolecularGraphOutputHandler.cpp
-
     PDBDataReader.cpp
     PDBDataWriter.cpp
     PDBMoleculeReader.cpp
@@ -35,6 +32,9 @@ SET(cdpl-biomol_LIB_SRCS
     AtomSerialNumberFunctions.cpp
     AtomOccupancyFunctions.cpp
     AtomBFactorFunctions.cpp
+    AtomPDBBackboneFunction.cpp
+
+    AtomContainerResidueUtilityFunctions.cpp
 
     MolecularGraphResidueCodeFunctions.cpp
     MolecularGraphResidueSequenceNumberFunctions.cpp

@@ -31,18 +31,13 @@
 #ifndef CDPL_VIS_PSMOLECULARGRAPHOUTPUTHANDLER_HPP
 #define CDPL_VIS_PSMOLECULARGRAPHOUTPUTHANDLER_HPP
 
-#include "CDPL/Vis/APIPrefix.hpp"
-#include "CDPL/Base/DataOutputHandler.hpp"
+#include "CDPL/Vis/DataFormat.hpp"
+#include "CDPL/Vis/PSMolecularGraphWriter.hpp"
+#include "CDPL/Util/DefaultDataOutputHandler.hpp"
 
 
 namespace CDPL 
 {
-
-	namespace Chem
-	{
-
-		class MolecularGraph;
-	}
 
 	namespace Vis
 	{
@@ -56,16 +51,7 @@ namespace CDPL
 		 * \brief A handler for the output of 2D depictions of chemical structures in the <em>PostScript (PS)</em> [\ref WPS]
 		 *        format.
 		 */
-		class CDPL_VIS_API PSMolecularGraphOutputHandler : public Base::DataOutputHandler<Chem::MolecularGraph>
-		{
-
-		public:
-			PSMolecularGraphOutputHandler() {}
-
-			const Base::DataFormat& getDataFormat() const;
-
-			Base::DataWriter<Chem::MolecularGraph>::SharedPointer createWriter(std::ostream& os) const;
-		};
+		typedef Util::DefaultDataOutputHandler<PSMolecularGraphWriter, DataFormat::PS> PSMolecularGraphOutputHandler;	
 
 		/**
 		 * @}

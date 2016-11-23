@@ -57,6 +57,7 @@ BOOST_PYTHON_MODULE(_biomol)
 	exportResidueTypes();
 
 	exportAtomFunctions();
+	exportAtomContainerFunctions();
 	exportMolecularGraphFunctions();
 	exportControlParameterFunctions();
 

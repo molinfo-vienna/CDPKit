@@ -57,7 +57,7 @@ BOOST_AUTO_TEST_CASE(PDFReactionOutputHandlerTest)
 	BOOST_CHECK(DataIOManager<Reaction>::getOutputHandlerByMimeType("application/pdf") == handler);
 	BOOST_CHECK(DataIOManager<Reaction>::getOutputHandlerByFileExtension("pdf") == handler);
 
-	std::ofstream os("PDFReactionOutputHandlerTest.pdf",
+	std::fstream os("PDFReactionOutputHandlerTest.pdf",
 					 std::ios_base::binary | std::ios_base::out | std::ios_base::trunc);
 
 	BOOST_CHECK(os);

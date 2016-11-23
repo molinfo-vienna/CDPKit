@@ -31,8 +31,9 @@
 #ifndef CDPL_CHEM_JMEREACTIONINPUTHANDLER_HPP
 #define CDPL_CHEM_JMEREACTIONINPUTHANDLER_HPP
 
-#include "CDPL/Chem/APIPrefix.hpp"
-#include "CDPL/Base/DataInputHandler.hpp"
+#include "CDPL/Chem/DataFormat.hpp"
+#include "CDPL/Chem/JMEReactionReader.hpp"
+#include "CDPL/Util/DefaultDataInputHandler.hpp"
 
 
 namespace CDPL 
@@ -40,8 +41,6 @@ namespace CDPL
 
 	namespace Chem
 	{
-
-		class Reaction;
 
 		/**
 		 * \addtogroup CDPL_CHEM_JME_IO
@@ -52,16 +51,7 @@ namespace CDPL
 		 * \brief A handler for the input of reaction data in the native I/O format of the <em>JME Molecular Editor</em>
 		 *        [\ref JME] java applet.
 		 */
-		class CDPL_CHEM_API JMEReactionInputHandler : public Base::DataInputHandler<Reaction>
-		{
-
-		public:
-			JMEReactionInputHandler() {}
-
-			const Base::DataFormat& getDataFormat() const;
-
-			Base::DataReader<Reaction>::SharedPointer createReader(std::istream& is) const;
-		};
+		typedef Util::DefaultDataInputHandler<JMEReactionReader, DataFormat::JME> JMEReactionInputHandler;
 
 		/**
 		 * @}

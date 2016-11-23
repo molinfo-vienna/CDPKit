@@ -1,7 +1,7 @@
 /* -*- mode: c++; c-basic-offset: 4; tab-width: 4; indent-tabs-mode: t -*- */
 
 /* 
- * InteractionPharmacophoreFunction.cpp 
+ * PharmacophoreBuildInteractionPharmFunction.cpp 
  *
  * This file is part of the Chemical Data Processing Toolkit
  *
@@ -32,6 +32,7 @@
 #include "CDPL/Pharm/Feature.hpp"
 #include "CDPL/Pharm/FeatureType.hpp"
 #include "CDPL/Pharm/FeatureGeometry.hpp"
+#include "CDPL/Pharm/FeatureMapping.hpp"
 #include "CDPL/Chem/Entity3DFunctions.hpp"
 
 
@@ -43,7 +44,7 @@ void Pharm::buildInteractionPharmacophore(Pharmacophore& pharm, const FeatureMap
 	for (FeatureMapping::ConstEntryIterator it = iactions.getEntriesBegin(), end = iactions.getEntriesEnd(); it != end; ) {
 		const Feature& ftr1 = *it->first;
 
-		if (hasGeometry(ftr1) && getGeometry(ftr1) == FeatureGeometry::VECTOR && has3DCoordinates(ftr1)) {
+		if (has3DCoordinates(ftr1)) {
 			double dir_factor = 0.0;
 
 			switch (getType(ftr1)) {

@@ -1,7 +1,7 @@
 /* -*- mode: c++; c-basic-offset: 4; tab-width: 4; indent-tabs-mode: t -*- */
 
 /* 
- * INCHIMolecularGraphOutputHandler.cpp 
+ * AtomContainerResidueUtilityFunctions.cpp 
  *
  * This file is part of the Chemical Data Processing Toolkit
  *
@@ -26,21 +26,23 @@
 
 #include "StaticInit.hpp"
 
-#include "CDPL/Chem/INCHIMolecularGraphOutputHandler.hpp"
-#include "CDPL/Chem/DataFormat.hpp"
-#include "CDPL/Chem/INCHIMolecularGraphWriter.hpp"
+#include <algorithm>
+
+#include <boost/bind.hpp>
+
+#include "CDPL/Biomol/AtomContainerFunctions.hpp"
+#include "CDPL/Biomol/AtomFunctions.hpp"
+#include "CDPL/Chem/AtomContainer.hpp"
+#include "CDPL/Chem/Atom.hpp"
 
 
 using namespace CDPL; 
 
 
-const Base::DataFormat& Chem::INCHIMolecularGraphOutputHandler::getDataFormat() const
+void Biomol::extractResidueSubstructures(const Chem::AtomContainer& cntnr, const Chem::MolecularGraph& molgraph, 
+					 Chem::Fragment& res_substructs, bool cnctd_only, unsigned int flags)
 {
-	return DataFormat::INCHI;
-}
-
-Base::DataWriter<Chem::MolecularGraph>::SharedPointer
-Chem::INCHIMolecularGraphOutputHandler::createWriter(std::ostream& os) const
-{
-	return Base::DataWriter<Chem::MolecularGraph>::SharedPointer(new INCHIMolecularGraphWriter(os));
+    std::for_each(cntnr.getAtomsBegin(), cntnr.getAtomsEnd(), 
+		  boost::bind(&extractResidueSubstructure, _1, boost::ref(molgraph), boost::ref(res_substructs),
+			      cnctd_only, flags));
 }

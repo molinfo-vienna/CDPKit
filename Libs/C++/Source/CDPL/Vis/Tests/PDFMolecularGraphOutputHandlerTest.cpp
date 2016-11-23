@@ -57,7 +57,7 @@ BOOST_AUTO_TEST_CASE(PDFMolecularGraphOutputHandlerTest)
 	BOOST_CHECK(DataIOManager<MolecularGraph>::getOutputHandlerByMimeType("application/pdf") == handler);
 	BOOST_CHECK(DataIOManager<MolecularGraph>::getOutputHandlerByFileExtension("pdf") == handler);
 
-	std::ofstream os("PDFMolecularGraphOutputHandlerTest.pdf", 
+	std::fstream os("PDFMolecularGraphOutputHandlerTest.pdf", 
 					 std::ios_base::binary | std::ios_base::out | std::ios_base::trunc);
 
 	BOOST_CHECK(os);

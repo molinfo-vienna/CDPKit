@@ -35,9 +35,7 @@
 #include <string>
 
 #include "CDPL/Pharm/APIPrefix.hpp"
-#include "CDPL/Pharm/FeatureTypeHistogram.hpp"
 #include "CDPL/Chem/Atom3DCoordinatesFunction.hpp"
-#include "CDPL/Chem/Fragment.hpp"
 #include "CDPL/Math/Matrix.hpp"
 
 
@@ -47,45 +45,46 @@ namespace CDPL
     namespace Chem
     {
 
-	class AtomContainer;
-	class Fragment;
+		class AtomContainer;
+		class Fragment;
     }
 
     namespace Pharm 
     {
 	
-	class FeatureContainer;
+		class FeatureContainer;
+		class FeatureTypeHistogram;
 	
-	/**
-	 * \addtogroup CDPL_PHARM_FEATURE_CONTAINER_FUNCTIONS
-	 * @{
-	 */
+		/**
+		 * \addtogroup CDPL_PHARM_FEATURE_CONTAINER_FUNCTIONS
+		 * @{
+		 */
 
-	CDPL_PHARM_API const std::string& getName(const FeatureContainer& cntnr);
+		CDPL_PHARM_API const std::string& getName(const FeatureContainer& cntnr);
 
-	CDPL_PHARM_API void setName(FeatureContainer& cntnr, const std::string& name);
+		CDPL_PHARM_API void setName(FeatureContainer& cntnr, const std::string& name);
 
-	CDPL_PHARM_API void clearName(FeatureContainer& cntnr);
+		CDPL_PHARM_API void clearName(FeatureContainer& cntnr);
 
-	CDPL_PHARM_API bool hasName(const FeatureContainer& cntnr);
+		CDPL_PHARM_API bool hasName(const FeatureContainer& cntnr);
 
 	
-	CDPL_PHARM_API std::size_t getFeatureCount(const FeatureContainer& cntnr);
+		CDPL_PHARM_API std::size_t getFeatureCount(const FeatureContainer& cntnr);
 
-	CDPL_PHARM_API std::size_t getFeatureCount(const FeatureContainer& cntnr, unsigned int type);
+		CDPL_PHARM_API std::size_t getFeatureCount(const FeatureContainer& cntnr, unsigned int type);
 
-	CDPL_PHARM_API void buildFeatureTypeHistogram(const FeatureContainer& cntnr, FeatureTypeHistogram& hist);
+		CDPL_PHARM_API void buildFeatureTypeHistogram(const FeatureContainer& cntnr, FeatureTypeHistogram& hist);
 
 
-	CDPL_PHARM_API bool checkExclusionVolumeClash(const FeatureContainer& ftr_cntnr, const Chem::AtomContainer& atom_cntnr, 
-						      const Chem::Atom3DCoordinatesFunction& coords_func,
-						      const Math::Matrix4D& xform, bool vdw = true);
+		CDPL_PHARM_API bool checkExclusionVolumeClash(const FeatureContainer& ftr_cntnr, const Chem::AtomContainer& atom_cntnr, 
+													  const Chem::Atom3DCoordinatesFunction& coords_func,
+													  const Math::Matrix4D& xform, bool vdw = true);
 
-	CDPL_PHARM_API void getFeatureAtoms(const FeatureContainer& cntnr, Chem::Fragment& atoms);
+		CDPL_PHARM_API void getFeatureAtoms(const FeatureContainer& cntnr, Chem::Fragment& atoms);
 
-	/**
-	 * @}
-	 */
+		/**
+		 * @}
+		 */
     }
 }
 

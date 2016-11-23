@@ -57,7 +57,7 @@ BOOST_AUTO_TEST_CASE(SVGMolecularGraphOutputHandlerTest)
 	BOOST_CHECK(DataIOManager<MolecularGraph>::getOutputHandlerByMimeType("image/svg+xml") == handler);
 	BOOST_CHECK(DataIOManager<MolecularGraph>::getOutputHandlerByFileExtension("svg") == handler);
 
-	std::ofstream os("SVGMolecularGraphOutputHandlerTest.svg", 
+	std::fstream os("SVGMolecularGraphOutputHandlerTest.svg", 
 					 std::ios_base::binary | std::ios_base::out | std::ios_base::trunc);
 
 	BOOST_CHECK(os);

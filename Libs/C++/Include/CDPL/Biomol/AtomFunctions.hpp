@@ -182,6 +182,9 @@ namespace CDPL
 
 		CDPL_BIOMOL_API bool hasBFactor(const Chem::Atom& atom);
 
+		
+		CDPL_BIOMOL_API bool isPDBBackboneAtom(const Chem::Atom& atom);
+
 
 		CDPL_BIOMOL_API bool areInSameResidue(const Chem::Atom& atom1, const Chem::Atom& atom2, unsigned int flags = AtomPropertyFlag::DEFAULT);
 

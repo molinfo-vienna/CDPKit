@@ -31,8 +31,9 @@
 #ifndef CDPL_CHEM_SMARTSREACTIONINPUTHANDLER_HPP
 #define CDPL_CHEM_SMARTSREACTIONINPUTHANDLER_HPP
 
-#include "CDPL/Chem/APIPrefix.hpp"
-#include "CDPL/Base/DataInputHandler.hpp"
+#include "CDPL/Chem/DataFormat.hpp"
+#include "CDPL/Chem/SMARTSReactionReader.hpp"
+#include "CDPL/Util/DefaultDataInputHandler.hpp"
 
 
 namespace CDPL 
@@ -40,8 +41,6 @@ namespace CDPL
 
 	namespace Chem
 	{
-
-		class Reaction;
 
 		/**
 		 * \addtogroup CDPL_CHEM_SMARTS_IO
@@ -51,16 +50,7 @@ namespace CDPL
 		/**
 		 * \brief A handler for the input of reaction data in the <em>Daylight SMARTS</em> [\ref SMARTS] format.
 		 */
-		class CDPL_CHEM_API SMARTSReactionInputHandler : public Base::DataInputHandler<Reaction>
-		{
-
-		public:
-			SMARTSReactionInputHandler() {}
-
-			const Base::DataFormat& getDataFormat() const;
-
-			Base::DataReader<Reaction>::SharedPointer createReader(std::istream& is) const;
-		};
+		typedef Util::DefaultDataInputHandler<SMARTSReactionReader, DataFormat::SMARTS> SMARTSReactionInputHandler;
 
 		/**
 		 * @}

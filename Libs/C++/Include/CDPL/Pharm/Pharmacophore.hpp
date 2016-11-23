@@ -217,7 +217,7 @@ namespace CDPL
 			 *
 			 * Internally calls append() to perform the actual work.
 			 *
-			 * \param The Pharm::FeatureContainer instance providing the features to append.
+			 * \param cntnr The Pharm::FeatureContainer instance providing the features to append.
 			 * \return A reference to itself.
 			 */
 			Pharmacophore& operator+=(const FeatureContainer& cntnr);

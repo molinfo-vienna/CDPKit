@@ -31,8 +31,9 @@
 #ifndef CDPL_CHEM_RXNREACTIONOUTPUTHANDLER_HPP
 #define CDPL_CHEM_RXNREACTIONOUTPUTHANDLER_HPP
 
-#include "CDPL/Chem/APIPrefix.hpp"
-#include "CDPL/Base/DataOutputHandler.hpp"
+#include "CDPL/Chem/DataFormat.hpp"
+#include "CDPL/Chem/RXNReactionWriter.hpp"
+#include "CDPL/Util/DefaultDataOutputHandler.hpp"
 
 
 namespace CDPL 
@@ -40,8 +41,6 @@ namespace CDPL
 
 	namespace Chem
 	{
-
-		class Reaction;
 
 		/**
 		 * \addtogroup CDPL_CHEM_RXN_IO
@@ -51,16 +50,7 @@ namespace CDPL
 		/**
 		 * \brief A handler for the output of reaction data in the <em>MDL Rxn-File</em> [\ref CTFILE] format.
 		 */
-		class CDPL_CHEM_API RXNReactionOutputHandler : public Base::DataOutputHandler<Reaction>
-		{
-
-		public:
-			RXNReactionOutputHandler() {}
-
-			const Base::DataFormat& getDataFormat() const;
-
-			Base::DataWriter<Reaction>::SharedPointer createWriter(std::ostream& os) const;
-		};
+		typedef Util::DefaultDataOutputHandler<RXNReactionWriter, DataFormat::RXN> RXNReactionOutputHandler;	
 
 		/**
 		 * @}

@@ -37,5 +37,7 @@ void CDPLPythonPharm::exportFeatureSetFunctions()
     using namespace boost;
 	using namespace CDPL;
 	
+	python::def("getFeatures", &Pharm::getFeatures, 
+				(python::arg("ftr_set"), python::arg("mapping"), python::arg("first")));
 
 }

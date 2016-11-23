@@ -31,15 +31,8 @@
 #ifndef CDPL_PHARM_PHARMACOPHOREFUNCTIONS_HPP
 #define CDPL_PHARM_PHARMACOPHOREFUNCTIONS_HPP
 
-#include <cstddef>
-#include <string>
-
 #include "CDPL/Pharm/APIPrefix.hpp"
-#include "CDPL/Pharm/FeatureMapping.hpp"
-#include "CDPL/Pharm/FeatureTypeHistogram.hpp"
 #include "CDPL/Chem/Atom3DCoordinatesFunction.hpp"
-#include "CDPL/Chem/Fragment.hpp"
-#include "CDPL/Math/Matrix.hpp"
 
 
 namespace CDPL 
@@ -49,13 +42,14 @@ namespace CDPL
 	{
 
 		class AtomContainer;
-		class Fragment;
 	}
 
     namespace Pharm 
     {
 	
 		class Pharmacophore;
+		class FeatureMapping;
+		class FeatureContainer;
 	
 		/**
 		 * \addtogroup CDPL_PHARM_PHARMACOPHORE_FUNCTIONS
@@ -64,9 +58,12 @@ namespace CDPL
 	
 		CDPL_PHARM_API void buildInteractionPharmacophore(Pharmacophore& pharm, const FeatureMapping& iactions);
 			
-		CDPL_PHARM_API bool createExclusionVolumes(Pharmacophore& pharm, const Chem::AtomContainer& cntnr, 
+		CDPL_PHARM_API void createExclusionVolumes(Pharmacophore& pharm, const Chem::AtomContainer& cntnr, 
 												   const Chem::Atom3DCoordinatesFunction& coords_func, 
-												   double tol, double min_dist, bool rel_dist);
+												   double tol = 0.0, double min_dist = 0.0, bool rel_dist = true);
+
+		CDPL_PHARM_API void createExclusionVolumes(Pharmacophore& pharm, const FeatureContainer& cntnr, 
+												   double tol = 0.0, double min_dist = 0.0, bool rel_dist = true);
 	
 		/**
 		 * @}

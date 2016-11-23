@@ -37,6 +37,7 @@ namespace
 {
 
 	MAKE_FUNCTION_WRAPPER3(void, replaceAtomStereoReferenceAtoms, CDPL::Chem::Molecule&, CDPL::Chem::MolecularGraph&, std::size_t)
+
 	MAKE_FUNCTION_WRAPPER4(void, replaceBondStereoReferenceAtoms, CDPL::Chem::Molecule&, CDPL::Chem::MolecularGraph&, std::size_t, std::size_t)
 }
 
@@ -55,4 +56,6 @@ void CDPLPythonChem::exportMoleculeFunctions()
 	python::def("makeOrdinaryHydrogenDeplete", &Chem::makeOrdinaryHydrogenDeplete, 
 				(python::arg("mol"), python::arg("flags")));
 	python::def("makeHydrogenComplete", &Chem::makeHydrogenComplete, python::arg("mol"));
+	python::def("removeAtomsIf", &Chem::removeAtomsIf, (python::arg("mol"), python::arg("pred")));
+	python::def("removeAtomsIfNot", &Chem::removeAtomsIfNot, (python::arg("mol"), python::arg("pred")));
 }

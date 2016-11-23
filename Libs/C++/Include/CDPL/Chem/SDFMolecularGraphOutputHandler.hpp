@@ -31,8 +31,9 @@
 #ifndef CDPL_CHEM_SDFMOLECULARGRAPHOUTPUTHANDLER_HPP
 #define CDPL_CHEM_SDFMOLECULARGRAPHOUTPUTHANDLER_HPP
 
-#include "CDPL/Chem/APIPrefix.hpp"
-#include "CDPL/Base/DataOutputHandler.hpp"
+#include "CDPL/Chem/DataFormat.hpp"
+#include "CDPL/Chem/SDFMolecularGraphWriter.hpp"
+#include "CDPL/Util/DefaultDataOutputHandler.hpp"
 
 
 namespace CDPL 
@@ -40,8 +41,6 @@ namespace CDPL
 
 	namespace Chem
 	{
-
-		class MolecularGraph;
 
 		/**
 		 * \addtogroup CDPL_CHEM_SDF_IO
@@ -51,16 +50,7 @@ namespace CDPL
 		/**
 		 * \brief A handler for the output of molecular graph data in the <em>MDL SD-File</em> [\ref CTFILE] format.
 		 */
-		class CDPL_CHEM_API SDFMolecularGraphOutputHandler : public Base::DataOutputHandler<MolecularGraph>
-		{
-
-		public:
-			SDFMolecularGraphOutputHandler() {}
-
-			const Base::DataFormat& getDataFormat() const;
-
-			Base::DataWriter<MolecularGraph>::SharedPointer createWriter(std::ostream& os) const;
-		};
+		typedef Util::DefaultDataOutputHandler<SDFMolecularGraphWriter, DataFormat::SDF> SDFMolecularGraphOutputHandler;
 
 		/**
 		 * @}

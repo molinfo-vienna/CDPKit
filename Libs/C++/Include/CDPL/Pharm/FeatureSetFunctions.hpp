@@ -32,6 +32,7 @@
 #define CDPL_PHARM_FEATURESETFUNCTIONS_HPP
 
 #include "CDPL/Pharm/APIPrefix.hpp"
+#include "CDPL/Pharm/FeatureMapping.hpp"
 
 
 namespace CDPL 
@@ -40,16 +41,19 @@ namespace CDPL
     namespace Pharm 
     {
 	
-	class FeatureSet;
+		class FeatureSet;
+		class FeatureMapping;
 	
-	/**
-	 * \addtogroup CDPL_PHARM_FEATURE_SET_FUNCTIONS
-	 * @{
-	 */
+		/**
+		 * \addtogroup CDPL_PHARM_FEATURE_SET_FUNCTIONS
+		 * @{
+		 */
 
-	/**
-	 * @}
-	 */
+		CDPL_PHARM_API void getFeatures(FeatureSet& ftr_set, const FeatureMapping& mapping, bool first);
+	
+		/**
+		 * @}
+		 */
     }
 }
 

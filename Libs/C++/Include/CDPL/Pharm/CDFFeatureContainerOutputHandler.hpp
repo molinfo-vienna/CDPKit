@@ -31,8 +31,9 @@
 #ifndef CDPL_PHARM_CDFFEATURECONTAINEROUTPUTHANDLER_HPP
 #define CDPL_PHARM_CDFFEATURECONTAINEROUTPUTHANDLER_HPP
 
-#include "CDPL/Pharm/APIPrefix.hpp"
-#include "CDPL/Base/DataOutputHandler.hpp"
+#include "CDPL/Pharm/DataFormat.hpp"
+#include "CDPL/Pharm/CDFFeatureContainerWriter.hpp"
+#include "CDPL/Util/DefaultDataOutputHandler.hpp"
 
 
 namespace CDPL 
@@ -40,8 +41,6 @@ namespace CDPL
 
 	namespace Pharm
 	{
-
-		class FeatureContainer;
 
 		/**
 		 * \addtogroup CDPL_PHARM_CDF_IO
@@ -51,16 +50,7 @@ namespace CDPL
 		/**
 		 * \brief A handler for the output of feature container data in the native I/O format of the <em>CDPL</em>.
 		 */
-		class CDPL_PHARM_API CDFFeatureContainerOutputHandler : public Base::DataOutputHandler<FeatureContainer>
-		{
-
-		public:
-			CDFFeatureContainerOutputHandler() {}
-
-			const Base::DataFormat& getDataFormat() const;
-
-			Base::DataWriter<FeatureContainer>::SharedPointer createWriter(std::ostream& os) const;
-		};
+		typedef Util::DefaultDataOutputHandler<CDFFeatureContainerWriter, DataFormat::CDF> CDFFeatureContainerOutputHandler;
 
 		/**
 		 * @}

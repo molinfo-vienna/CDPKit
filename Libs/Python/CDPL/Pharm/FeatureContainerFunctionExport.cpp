@@ -28,7 +28,8 @@
 
 #include "CDPL/Pharm/FeatureContainerFunctions.hpp"
 #include "CDPL/Pharm/FeatureContainer.hpp"
-#include "CDPL/Chem/AtomContainer.hpp"
+#include "CDPL/Pharm/FeatureTypeHistogram.hpp"
+#include "CDPL/Chem/Fragment.hpp"
 
 #include "FunctionExports.hpp"
 #include "FunctionWrapper.hpp"
@@ -74,7 +75,9 @@ void CDPLPythonPharm::exportFeatureContainerFunctions()
 	python::def("buildFeatureTypeHistogram", &Pharm::buildFeatureTypeHistogram, 
 				(python::arg("cntnr"), python::arg("hist")));
 	python::def("checkExclusionVolumeClash", &checkExclusionVolumeClashWrapper5, 
-				(python::arg("ftr_cntnr"), python::arg("atom_cntnr"), python::arg("coords_func"), python::arg("xform"), python::arg("vdw") = true));
+				(python::arg("ftr_cntnr"), python::arg("atom_cntnr"), python::arg("coords_func"), 
+				 python::arg("xform"), python::arg("vdw") = true));
+	python::def("getFeatureAtoms", &Pharm::getFeatureAtoms, (python::arg("cntnr"), python::arg("atoms")));
 
 	EXPORT_FTRCONTAINER_FUNCS_COPY_REF(Name, name)
 }

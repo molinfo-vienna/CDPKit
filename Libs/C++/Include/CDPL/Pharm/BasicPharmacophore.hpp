@@ -89,7 +89,7 @@ namespace CDPL
 		/**
 	     * \brief Constructs a %BasicPharmacophore instance with copies of the features 
 		 *        in the Pharm::FeatureContainer instance \a cntnr.
-	     * \param pharm The Pharm::FeatureContainer instance with the features to copy.
+	     * \param cntnr The Pharm::FeatureContainer instance with the features to copy.
 	     */
 	    explicit BasicPharmacophore(const FeatureContainer& cntnr);
 		

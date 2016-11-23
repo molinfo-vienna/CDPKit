@@ -31,8 +31,9 @@
 #ifndef CDPL_CHEM_JMEREACTIONOUTPUTHANDLER_HPP
 #define CDPL_CHEM_JMEREACTIONOUTPUTHANDLER_HPP
 
-#include "CDPL/Chem/APIPrefix.hpp"
-#include "CDPL/Base/DataOutputHandler.hpp"
+#include "CDPL/Chem/DataFormat.hpp"
+#include "CDPL/Chem/JMEReactionWriter.hpp"
+#include "CDPL/Util/DefaultDataOutputHandler.hpp"
 
 
 namespace CDPL 
@@ -40,8 +41,6 @@ namespace CDPL
 
 	namespace Chem
 	{
-
-		class Reaction;
 
 		/**
 		 * \addtogroup CDPL_CHEM_JME_IO
@@ -52,16 +51,7 @@ namespace CDPL
 		 * \brief A handler for the output of reaction data in the native I/O format of the <em>JME Molecular Editor</em>
 		 *        [\ref JME] java applet.
 		 */
-		class CDPL_CHEM_API JMEReactionOutputHandler : public Base::DataOutputHandler<Reaction>
-		{
-
-		public:
-			JMEReactionOutputHandler() {}
-
-			const Base::DataFormat& getDataFormat() const;
-
-			Base::DataWriter<Reaction>::SharedPointer createWriter(std::ostream& os) const;
-		};
+		typedef Util::DefaultDataOutputHandler<JMEReactionWriter, DataFormat::JME> JMEReactionOutputHandler;	
 
 		/**
 		 * @}

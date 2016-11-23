@@ -31,8 +31,9 @@
 #ifndef CDPL_CHEM_INCHIMOLECULARGRAPHOUTPUTHANDLER_HPP
 #define CDPL_CHEM_INCHIMOLECULARGRAPHOUTPUTHANDLER_HPP
 
-#include "CDPL/Chem/APIPrefix.hpp"
-#include "CDPL/Base/DataOutputHandler.hpp"
+#include "CDPL/Chem/DataFormat.hpp"
+#include "CDPL/Chem/INCHIMolecularGraphWriter.hpp"
+#include "CDPL/Util/DefaultDataOutputHandler.hpp"
 
 
 namespace CDPL 
@@ -40,8 +41,6 @@ namespace CDPL
 
 	namespace Chem
 	{
-
-		class MolecularGraph;
 
 		/**
 		 * \addtogroup CDPL_CHEM_INCHI_IO
@@ -52,17 +51,8 @@ namespace CDPL
 		 * \brief A handler for the output of molecular graph data in the <em>IUPAC International Chemical Identifier (InChI)</em>
 		 *        [\ref INCHI] format.
 		 */
-		class CDPL_CHEM_API INCHIMolecularGraphOutputHandler : public Base::DataOutputHandler<MolecularGraph>
-		{
-
-		public:
-			INCHIMolecularGraphOutputHandler() {}
-
-			const Base::DataFormat& getDataFormat() const;
-
-			Base::DataWriter<MolecularGraph>::SharedPointer createWriter(std::ostream& os) const;
-		};
-
+		typedef Util::DefaultDataOutputHandler<INCHIMolecularGraphWriter, DataFormat::INCHI> INCHIMolecularGraphOutputHandler;
+	
 		/**
 		 * @}
 		 */

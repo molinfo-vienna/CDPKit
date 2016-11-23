@@ -31,8 +31,9 @@
 #ifndef CDPL_PHARM_PMLPHARMACOPHOREINPUTHANDLER_HPP
 #define CDPL_PHARM_PMLPHARMACOPHOREINPUTHANDLER_HPP
 
-#include "CDPL/Pharm/APIPrefix.hpp"
-#include "CDPL/Base/DataInputHandler.hpp"
+#include "CDPL/Pharm/DataFormat.hpp"
+#include "CDPL/Pharm/PMLPharmacophoreReader.hpp"
+#include "CDPL/Util/DefaultDataInputHandler.hpp"
 
 
 namespace CDPL 
@@ -40,8 +41,6 @@ namespace CDPL
 
 	namespace Pharm
 	{
-
-		class Pharmacophore;
 
 		/**
 		 * \addtogroup CDPL_PHARM_PML_IO
@@ -51,16 +50,7 @@ namespace CDPL
 		/**
 		 * \brief A handler for the input of pharmacophore data in the native I/O format of <em>LigandScout</em>.
 		 */
-		class CDPL_PHARM_API PMLPharmacophoreInputHandler : public Base::DataInputHandler<Pharmacophore>
-		{
-
-		public:
-			PMLPharmacophoreInputHandler() {}
-
-			const Base::DataFormat& getDataFormat() const;
-
-			Base::DataReader<Pharmacophore>::SharedPointer createReader(std::istream& is) const;
-		};
+		typedef Util::DefaultDataInputHandler<PMLPharmacophoreReader, DataFormat::PML> PMLPharmacophoreInputHandler;
 
 		/**
 		 * @}

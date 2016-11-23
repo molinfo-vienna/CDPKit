@@ -49,12 +49,6 @@ SET(cdpl-pharm_LIB_SRCS
     FileScreeningHitCollector.cpp
     PharmacophoreFitScreeningScore.cpp
 
-    CDFPharmacophoreInputHandler.cpp
-    CDFFeatureContainerOutputHandler.cpp
- 
-    PMLPharmacophoreInputHandler.cpp
-    PMLFeatureContainerOutputHandler.cpp
-
     CDFDataReader.cpp
     CDFDataWriter.cpp
     CDFPharmacophoreReader.cpp
@@ -78,8 +72,12 @@ SET(cdpl-pharm_LIB_SRCS
     FeatureContainerFeatureCountFunctions.cpp
     FeatureContainerFeatureTypeHistogramFunction.cpp
     FeatureContainerXVolumeClashTestFunction.cpp
+    FeatureContainerGetFeatureAtomsFunction.cpp
 
-    InteractionPharmacophoreFunction.cpp
+    FeatureSetGetFeaturesFunction.cpp
+
+    PharmacophoreBuildInteractionPharmFunction.cpp
+    PharmacophoreCreateXVolumesFunctions.cpp
 
     ControlParameterFunctions.cpp
 

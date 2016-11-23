@@ -200,7 +200,7 @@ void DataSetWriter::writeRecords(const std::string& def_format)
 
 		if (!single_rec_files) {
 			QString fileName = base_name + "." + file_ext;
-			std::ofstream ofs(fileName.toStdString().c_str(), std::ios_base::binary | std::ios_base::out | std::ios_base::trunc);
+			std::fstream ofs(fileName.toStdString().c_str(), std::ios_base::binary | std::ios_base::out | std::ios_base::trunc);
 
 			if (!ofs) {
 				emit errorMessage(tr("Error while opening file '%1'!").arg(QFileInfo(fileName).fileName()));
@@ -255,7 +255,7 @@ void DataSetWriter::writeRecords(const std::string& def_format)
 					continue;
 
 				QString fileName = QString("%1_%2.%3").arg(base_name).arg(i + 1).arg(file_ext);
-				std::ofstream ofs(fileName.toStdString().c_str(), std::ios_base::binary | std::ios_base::out | std::ios_base::trunc);
+				std::fstream ofs(fileName.toStdString().c_str(), std::ios_base::binary | std::ios_base::out | std::ios_base::trunc);
 
 				if (!ofs) {
 					emit errorMessage(tr("Error while opening file '%1'!").arg(QFileInfo(fileName).fileName()));
@@ -291,7 +291,7 @@ void DataSetWriter::writeRecords(const std::string& def_format)
 
 		if (!single_rec_files) {
 			QString fileName = base_name + "." + file_ext;
-			std::ofstream ofs(fileName.toStdString().c_str(), std::ios_base::binary | std::ios_base::out | std::ios_base::trunc);
+			std::fstream ofs(fileName.toStdString().c_str(), std::ios_base::binary | std::ios_base::out | std::ios_base::trunc);
 
 			if (!ofs) {
 				emit errorMessage(tr("Error while opening file '%1'!").arg(QFileInfo(fileName).fileName()));
@@ -338,7 +338,7 @@ void DataSetWriter::writeRecords(const std::string& def_format)
 				}
 
 				QString fileName = QString("%1_%2.%3").arg(base_name).arg(i + 1).arg(file_ext);
-				std::ofstream ofs(fileName.toStdString().c_str(), std::ios_base::binary | std::ios_base::out | std::ios_base::trunc);
+				std::fstream ofs(fileName.toStdString().c_str(), std::ios_base::binary | std::ios_base::out | std::ios_base::trunc);
 
 				if (!ofs) {
 					emit errorMessage(tr("Error while opening file '%1'!").arg(QFileInfo(fileName).fileName()));

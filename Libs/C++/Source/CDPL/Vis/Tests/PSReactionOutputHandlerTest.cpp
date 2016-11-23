@@ -57,7 +57,7 @@ BOOST_AUTO_TEST_CASE(PSReactionOutputHandlerTest)
 	BOOST_CHECK(DataIOManager<Reaction>::getOutputHandlerByMimeType("application/postscript") == handler);
 	BOOST_CHECK(DataIOManager<Reaction>::getOutputHandlerByFileExtension("ps") == handler);
 
-	std::ofstream os("PSReactionOutputHandlerTest.ps", 
+	std::fstream os("PSReactionOutputHandlerTest.ps", 
 					 std::ios_base::binary | std::ios_base::out | std::ios_base::trunc);
 
 	BOOST_CHECK(os);

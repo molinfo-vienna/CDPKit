@@ -31,8 +31,9 @@
 #ifndef CDPL_CHEM_CDFMOLECULEINPUTHANDLER_HPP
 #define CDPL_CHEM_CDFMOLECULEINPUTHANDLER_HPP
 
-#include "CDPL/Chem/APIPrefix.hpp"
-#include "CDPL/Base/DataInputHandler.hpp"
+#include "CDPL/Chem/DataFormat.hpp"
+#include "CDPL/Chem/CDFMoleculeReader.hpp"
+#include "CDPL/Util/DefaultDataInputHandler.hpp"
 
 
 namespace CDPL 
@@ -40,8 +41,6 @@ namespace CDPL
 
 	namespace Chem
 	{
-
-		class Molecule;
 
 		/**
 		 * \addtogroup CDPL_CHEM_CDF_IO
@@ -51,16 +50,7 @@ namespace CDPL
 		/**
 		 * \brief A handler for the input of molecule data in the native I/O format of the <em>CDPL</em>.
 		 */
-		class CDPL_CHEM_API CDFMoleculeInputHandler : public Base::DataInputHandler<Molecule>
-		{
-
-		public:
-			CDFMoleculeInputHandler() {}
-
-			const Base::DataFormat& getDataFormat() const;
-
-			Base::DataReader<Molecule>::SharedPointer createReader(std::istream& is) const;
-		};
+		typedef Util::DefaultDataInputHandler<CDFMoleculeReader, DataFormat::CDF> CDFMoleculeInputHandler;
 
 		/**
 		 * @}

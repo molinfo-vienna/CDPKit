@@ -60,6 +60,8 @@
 #include "CDPL/Chem/MultiConfMoleculeInputProcessor.hpp"
 #include "CDPL/Chem/DefaultMultiConfMoleculeInputProcessor.hpp"
 #include "CDPL/Chem/Atom3DCoordinatesFunction.hpp"
+#include "CDPL/Chem/AtomPredicate.hpp"
+#include "CDPL/Chem/BondPredicate.hpp"
 
 #include "CDPL/Chem/MatchExpression.hpp"
 #include "CDPL/Chem/MatchExpressionList.hpp"

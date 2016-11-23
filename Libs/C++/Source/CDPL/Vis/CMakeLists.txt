@@ -62,8 +62,6 @@ IF(CAIRO_FOUND)
         ${cdpl-vis_LIB_SRCS}
         PNGMolecularGraphWriter.cpp
         PNGReactionWriter.cpp
-        PNGMolecularGraphOutputHandler.cpp
-        PNGReactionOutputHandler.cpp
        )	
   ENDIF(HAVE_CAIRO_PNG_SUPPORT)
 
@@ -72,8 +70,6 @@ IF(CAIRO_FOUND)
         ${cdpl-vis_LIB_SRCS}
         PDFMolecularGraphWriter.cpp
         PDFReactionWriter.cpp
-        PDFMolecularGraphOutputHandler.cpp
-        PDFReactionOutputHandler.cpp
        )	
   ENDIF(HAVE_CAIRO_PDF_SUPPORT)
 
@@ -82,8 +78,6 @@ IF(CAIRO_FOUND)
         ${cdpl-vis_LIB_SRCS}
         PSMolecularGraphWriter.cpp
         PSReactionWriter.cpp
-        PSMolecularGraphOutputHandler.cpp
-        PSReactionOutputHandler.cpp
        )	
   ENDIF(HAVE_CAIRO_PS_SUPPORT)
 
@@ -92,8 +86,6 @@ IF(CAIRO_FOUND)
         ${cdpl-vis_LIB_SRCS}
         SVGMolecularGraphWriter.cpp
         SVGReactionWriter.cpp
-        SVGMolecularGraphOutputHandler.cpp
-        SVGReactionOutputHandler.cpp
        )	
   ENDIF(HAVE_CAIRO_SVG_SUPPORT)
 

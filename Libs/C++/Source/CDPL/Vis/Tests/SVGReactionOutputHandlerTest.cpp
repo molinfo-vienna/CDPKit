@@ -57,7 +57,7 @@ BOOST_AUTO_TEST_CASE(SVGReactionOutputHandlerTest)
 	BOOST_CHECK(DataIOManager<Reaction>::getOutputHandlerByMimeType("image/svg+xml") == handler);
 	BOOST_CHECK(DataIOManager<Reaction>::getOutputHandlerByFileExtension("svg") == handler);
 
-	std::ofstream os("SVGReactionOutputHandlerTest.svg",
+	std::fstream os("SVGReactionOutputHandlerTest.svg",
 					 std::ios_base::binary | std::ios_base::out | std::ios_base::trunc);
 
 	BOOST_CHECK(os);

@@ -101,6 +101,8 @@ namespace
 	MAKE_ATOM_FUNC_WRAPPERS(double, Occupancy)
 	MAKE_ATOM_FUNC_WRAPPERS(double, BFactor)
 
+	MAKE_FUNCTION_WRAPPER1(bool, isPDBBackboneAtom, CDPL::Chem::Atom&);
+
 	MAKE_FUNCTION_WRAPPER3(bool, areInSameResidue, CDPL::Chem::Atom&, CDPL::Chem::Atom&, unsigned int);
 
 	MAKE_FUNCTION_WRAPPER5(void, extractResidueSubstructure, CDPL::Chem::Atom&, CDPL::Chem::MolecularGraph&, CDPL::Chem::Fragment&, bool, unsigned int);
@@ -111,6 +113,8 @@ void CDPLPythonBiomol::exportAtomFunctions()
 {
 	using namespace boost;
 	using namespace CDPL;
+	
+	python::def("isPDBBackboneAtom", &isPDBBackboneAtomWrapper1, python::arg("atom"));
 
 	python::def("areInSameResidue", &areInSameResidueWrapper3, 
 				(python::arg("atom1"), python::arg("atom2"), python::arg("flags") = Biomol::AtomPropertyFlag::DEFAULT));

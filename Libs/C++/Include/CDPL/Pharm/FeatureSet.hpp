@@ -108,14 +108,14 @@ namespace CDPL
 
 	    /**
 	     * \brief Tells whether the specified feature is part of this feature set.
-	     * \param feature The feature to look for.
+	     * \param ftr The feature to look for.
 	     * \return \c true if \a feature is part of this feature set, and \c false otherwise.
 	     */
 	    bool containsFeature(const Feature& ftr) const;
 
 	    /**
 	     * \brief Returns the index of the specified feature.
-	     * \param feature The feature for which to return the index.
+	     * \param ftr The feature for which to return the index.
 	     * \return The zero-based index of the specified feature.
 	     * \throw Base::ItemNotFound if the specified feature is not part of the feature set.
 	     */
@@ -163,7 +163,7 @@ namespace CDPL
 
 	    /**
 	     * \brief Extends the feature set by the specified feature.
-	     * \param feature The feature to add.
+	     * \param ftr The feature to add.
 	     * \return \c true if the feature was not already a part of the feature set, and \c false otherwise.
 	     */
 	    bool addFeature(const Feature& ftr);
@@ -186,7 +186,7 @@ namespace CDPL
 
 	    /**
 	     * \brief Removes the specified feature.
-	     * \param feature The feature to remove.
+	     * \param ftr The feature to remove.
 	     * \return \c true if the feature was part of the feature set and has been removed, and \c false otherwise.
 	     */
 	    bool removeFeature(const Feature& ftr);

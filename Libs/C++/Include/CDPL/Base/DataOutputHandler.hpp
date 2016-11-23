@@ -59,6 +59,8 @@ namespace CDPL
 		{
 
 		public:
+			typedef DataWriter<T> WriterType;
+
 			/**
 			 * \brief Virtual destructor.
 			 */
@@ -71,12 +73,21 @@ namespace CDPL
 			virtual const DataFormat& getDataFormat() const = 0;
 
 			/**
-			 * \brief Creates a Base::DataWriter instance that will write the data to the output stream \a os.
-			 * \param os The output stream to write to.
-			 * \return A pointer to the created Base::DataWriter instance.
-			 * \note The created Base::DataWriter instance has to be managed by the caller.
+			 * \brief Creates a Base::DataWriter instance that will write the data to the I/O stream \a ios.
+			 * \param ios The I/O stream to write to.
+			 * \return A shared pointer to the created Base::DataWriter instance.
 			 */
-			virtual typename DataWriter<T>::SharedPointer createWriter(std::ostream& os) const = 0;
+			virtual typename WriterType::SharedPointer createWriter(std::iostream& ios) const = 0;
+
+			/**
+			 * \brief Creates a Base::DataWriter instance that will write the data to the I/O stream \a ios.
+			 * \param file_name The name of the file to write to.
+			 * \param mode Flags specifying the file open-mode.
+			 * \return A shared pointer to the created Base::DataWriter instance.
+			 */
+			virtual typename WriterType::SharedPointer createWriter(const std::string& file_name, 
+																	std::ios_base::openmode mode = 
+																	std::ios_base::in | std::ios_base::out | std::ios_base::trunc | std::ios_base::binary) const = 0;
 		};
 
 		/**

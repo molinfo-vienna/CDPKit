@@ -31,18 +31,13 @@
 #ifndef CDPL_VIS_PNGREACTIONOUTPUTHANDLER_HPP
 #define CDPL_VIS_PNGREACTIONOUTPUTHANDLER_HPP
 
-#include "CDPL/Vis/APIPrefix.hpp"
-#include "CDPL/Base/DataOutputHandler.hpp"
+#include "CDPL/Vis/DataFormat.hpp"
+#include "CDPL/Vis/PNGReactionWriter.hpp"
+#include "CDPL/Util/DefaultDataOutputHandler.hpp"
 
 
 namespace CDPL 
 {
-
-	namespace Chem
-	{
-
-		class Reaction;
-	}
 
 	namespace Vis
 	{
@@ -56,16 +51,7 @@ namespace CDPL
 		 * \brief A handler for the output of 2D depictions of chemical reactions in the <em>Portable
 		 *        Network Graphics (PNG)</em> [\ref WPNG] format.
 		 */
-		class CDPL_VIS_API PNGReactionOutputHandler : public Base::DataOutputHandler<Chem::Reaction>
-		{
-
-		public:
-			PNGReactionOutputHandler() {}
-
-			const Base::DataFormat& getDataFormat() const;
-
-			Base::DataWriter<Chem::Reaction>::SharedPointer createWriter(std::ostream& os) const;
-		};
+		typedef Util::DefaultDataOutputHandler<PNGReactionWriter, DataFormat::PNG> PNGReactionOutputHandler;	
 
 		/**
 		 * @}

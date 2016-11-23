@@ -31,8 +31,9 @@
 #ifndef CDPL_PHARM_PMLFEATURECONTAINEROUTPUTHANDLER_HPP
 #define CDPL_PHARM_PMLFEATURECONTAINEROUTPUTHANDLER_HPP
 
-#include "CDPL/Pharm/APIPrefix.hpp"
-#include "CDPL/Base/DataOutputHandler.hpp"
+#include "CDPL/Pharm/DataFormat.hpp"
+#include "CDPL/Pharm/PMLFeatureContainerWriter.hpp"
+#include "CDPL/Util/DefaultDataOutputHandler.hpp"
 
 
 namespace CDPL 
@@ -41,26 +42,15 @@ namespace CDPL
 	namespace Pharm
 	{
 
-		class FeatureContainer;
-
 		/**
 		 * \addtogroup CDPL_PHARM_PML_IO
 		 * @{
 		 */
 
 		/**
-		 * \brief A handler for the output of feature container data in the native I/O format of <em>LigandScout</em>.
+		 * \brief A handler for the output of pharmacophore data in the native I/O format of <em>LigandScout</em>.
 		 */
-		class CDPL_PHARM_API PMLFeatureContainerOutputHandler : public Base::DataOutputHandler<FeatureContainer>
-		{
-
-		public:
-			PMLFeatureContainerOutputHandler() {}
-
-			const Base::DataFormat& getDataFormat() const;
-
-			Base::DataWriter<FeatureContainer>::SharedPointer createWriter(std::ostream& os) const;
-		};
+		typedef Util::DefaultDataOutputHandler<PMLFeatureContainerWriter, DataFormat::PML> PMLFeatureContainerOutputHandler;
 
 		/**
 		 * @}

@@ -31,18 +31,13 @@
 #ifndef CDPL_VIS_PSREACTIONOUTPUTHANDLER_HPP
 #define CDPL_VIS_PSREACTIONOUTPUTHANDLER_HPP
 
-#include "CDPL/Vis/APIPrefix.hpp"
-#include "CDPL/Base/DataOutputHandler.hpp"
+#include "CDPL/Vis/DataFormat.hpp"
+#include "CDPL/Vis/PSReactionWriter.hpp"
+#include "CDPL/Util/DefaultDataOutputHandler.hpp"
 
 
 namespace CDPL 
 {
-
-	namespace Chem
-	{
-
-		class Reaction;
-	}
 
 	namespace Vis
 	{
@@ -56,16 +51,7 @@ namespace CDPL
 		 * \brief A handler for the output of 2D depictions of chemical reactions in the <em>PostScript (PS)</em> [\ref WPS]
 		 *        format.
 		 */
-		class CDPL_VIS_API PSReactionOutputHandler : public Base::DataOutputHandler<Chem::Reaction>
-		{
-
-		public:
-			PSReactionOutputHandler() {}
-
-			const Base::DataFormat& getDataFormat() const;
-
-			Base::DataWriter<Chem::Reaction>::SharedPointer createWriter(std::ostream& os) const;
-		};
+		typedef Util::DefaultDataOutputHandler<PSReactionWriter, DataFormat::PS> PSReactionOutputHandler;	
 
 		/**
 		 * @}

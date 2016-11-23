@@ -31,18 +31,13 @@
 #ifndef CDPL_VIS_SVGMOLECULARGRAPHOUTPUTHANDLER_HPP
 #define CDPL_VIS_SVGMOLECULARGRAPHOUTPUTHANDLER_HPP
 
-#include "CDPL/Vis/APIPrefix.hpp"
-#include "CDPL/Base/DataOutputHandler.hpp"
+#include "CDPL/Vis/DataFormat.hpp"
+#include "CDPL/Vis/SVGMolecularGraphWriter.hpp"
+#include "CDPL/Util/DefaultDataOutputHandler.hpp"
 
 
 namespace CDPL 
 {
-
-	namespace Chem
-	{
-
-		class MolecularGraph;
-	}
 
 	namespace Vis
 	{
@@ -56,16 +51,7 @@ namespace CDPL
 		 * \brief A handler for the output of 2D depictions of chemical structures in the <em>Scalable Vector Graphics (SVG)</em>
 		 *        [\ref WSVG] format.
 		 */
-		class CDPL_VIS_API SVGMolecularGraphOutputHandler : public Base::DataOutputHandler<Chem::MolecularGraph>
-		{
-
-		public:
-			SVGMolecularGraphOutputHandler() {}
-
-			const Base::DataFormat& getDataFormat() const;
-
-			Base::DataWriter<Chem::MolecularGraph>::SharedPointer createWriter(std::ostream& os) const;
-		};
+		typedef Util::DefaultDataOutputHandler<SVGMolecularGraphWriter, DataFormat::SVG> SVGMolecularGraphOutputHandler;	
 
 		/**
 		 * @}

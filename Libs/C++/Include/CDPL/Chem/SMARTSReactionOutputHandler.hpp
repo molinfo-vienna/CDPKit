@@ -31,8 +31,9 @@
 #ifndef CDPL_CHEM_SMARTSREACTIONOUTPUTHANDLER_HPP
 #define CDPL_CHEM_SMARTSREACTIONOUTPUTHANDLER_HPP
 
-#include "CDPL/Chem/APIPrefix.hpp"
-#include "CDPL/Base/DataOutputHandler.hpp"
+#include "CDPL/Chem/DataFormat.hpp"
+#include "CDPL/Chem/SMARTSReactionWriter.hpp"
+#include "CDPL/Util/DefaultDataOutputHandler.hpp"
 
 
 namespace CDPL 
@@ -40,8 +41,6 @@ namespace CDPL
 
 	namespace Chem
 	{
-
-		class Reaction;
 
 		/**
 		 * \addtogroup CDPL_CHEM_SMARTS_IO
@@ -51,16 +50,7 @@ namespace CDPL
 		/**
 		 * \brief A handler for the output of reaction data in the <em>Daylight SMARTS</em> [\ref SMARTS] format.
 		 */
-		class CDPL_CHEM_API SMARTSReactionOutputHandler : public Base::DataOutputHandler<Reaction>
-		{
-
-		public:
-			SMARTSReactionOutputHandler() {}
-
-			const Base::DataFormat& getDataFormat() const;
-
-			Base::DataWriter<Reaction>::SharedPointer createWriter(std::ostream& os) const;
-		};
+		typedef Util::DefaultDataOutputHandler<SMARTSReactionWriter, DataFormat::SMARTS> SMARTSReactionOutputHandler;	
 
 		/**
 		 * @}

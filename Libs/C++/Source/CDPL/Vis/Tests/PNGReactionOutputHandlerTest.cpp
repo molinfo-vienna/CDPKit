@@ -57,7 +57,7 @@ BOOST_AUTO_TEST_CASE(PNGReactionOutputHandlerTest)
 	BOOST_CHECK(DataIOManager<Reaction>::getOutputHandlerByMimeType("image/png") == handler);
 	BOOST_CHECK(DataIOManager<Reaction>::getOutputHandlerByFileExtension("png") == handler);
 
-	std::ofstream os("PNGReactionOutputHandlerTest.png", 
+	std::fstream os("PNGReactionOutputHandlerTest.png", 
 					 std::ios_base::binary | std::ios_base::out | std::ios_base::trunc);
 
 	BOOST_CHECK(os);

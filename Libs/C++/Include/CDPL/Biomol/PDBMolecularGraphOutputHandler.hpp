@@ -31,18 +31,13 @@
 #ifndef CDPL_BIOMOL_PDBMOLECULARGRAPHOUTPUTHANDLER_HPP
 #define CDPL_BIOMOL_PDBMOLECULARGRAPHOUTPUTHANDLER_HPP
 
-#include "CDPL/Biomol/APIPrefix.hpp"
-#include "CDPL/Base/DataOutputHandler.hpp"
+#include "CDPL/Biomol/DataFormat.hpp"
+#include "CDPL/Biomol/PDBMolecularGraphWriter.hpp"
+#include "CDPL/Util/DefaultDataOutputHandler.hpp"
 
 
 namespace CDPL 
 {
-
-	namespace Chem
-	{
-
-		class MolecularGraph;
-	}
 
 	namespace Biomol
 	{
@@ -56,17 +51,8 @@ namespace CDPL
 		 * \brief A handler for the output of molecular graph data in the <em>Brookhaven Protein Data Bank</em>
 		 *        [\ref PDB] format.
 		 */
-		class CDPL_BIOMOL_API PDBMolecularGraphOutputHandler : public Base::DataOutputHandler<Chem::MolecularGraph>
-		{
-
-		public:
-			PDBMolecularGraphOutputHandler() {}
-
-			const Base::DataFormat& getDataFormat() const;
-
-			Base::DataWriter<Chem::MolecularGraph>::SharedPointer createWriter(std::ostream& os) const;
-		};
-
+		typedef Util::DefaultDataOutputHandler<PDBMolecularGraphWriter, DataFormat::PDB> PDBMolecularGraphOutputHandler;
+	
 		/**
 		 * @}
 		 */

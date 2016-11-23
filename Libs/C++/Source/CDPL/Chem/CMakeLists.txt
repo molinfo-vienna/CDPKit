@@ -33,31 +33,6 @@ SET(cdpl-chem_LIB_SRCS
 
     DefaultMultiConfMoleculeInputProcessor.cpp
 
-    INCHIMoleculeInputHandler.cpp
-    INCHIMolecularGraphOutputHandler.cpp
-    JMEMoleculeInputHandler.cpp
-    JMEReactionInputHandler.cpp
-    JMEMolecularGraphOutputHandler.cpp
-    JMEReactionOutputHandler.cpp
-    MOLMoleculeInputHandler.cpp
-    MOLMolecularGraphOutputHandler.cpp
-    SDFMoleculeInputHandler.cpp
-    SDFMolecularGraphOutputHandler.cpp
-    RXNReactionInputHandler.cpp
-    RXNReactionOutputHandler.cpp
-    RDFReactionInputHandler.cpp
-    RDFReactionOutputHandler.cpp
-    SMILESMoleculeInputHandler.cpp
-    SMILESReactionInputHandler.cpp
-    SMILESMolecularGraphOutputHandler.cpp
-    SMILESReactionOutputHandler.cpp
-    SMARTSMoleculeInputHandler.cpp
-    SMARTSReactionInputHandler.cpp
-    SMARTSMolecularGraphOutputHandler.cpp
-    SMARTSReactionOutputHandler.cpp
-    CDFMoleculeInputHandler.cpp
-    CDFMolecularGraphOutputHandler.cpp
-
     INCHIMoleculeReader.cpp
     INCHIMolecularGraphWriter.cpp
     JMEDataReader.cpp
@@ -148,6 +123,7 @@ SET(cdpl-chem_LIB_SRCS
     AtomContainerMaxComponentGroupIDFunction.cpp
     AtomContainerConformationFunctions.cpp
     AtomContainerAtomTypeMaskFunction.cpp
+    AtomContainerCopyAtomsFunctions.cpp
 
     BondContainerBondCountFunctions.cpp
  
@@ -301,6 +277,10 @@ SET(cdpl-chem_LIB_SRCS
 
     MoleculeHydrogenManipulationFunctions.cpp
     MoleculeReplaceStereoRefAtomsFunctions.cpp  
+    MoleculeRemoveAtomsFunctions.cpp
+
+    FragmentHydrogenManipulationFunctions.cpp
+    FragmentRemoveAtomsFunctions.cpp
 
     Atom3DCoordinatesFunctor.cpp
     AtomConformer3DCoordinatesFunctor.cpp
@@ -310,8 +290,7 @@ SET(cdpl-chem_LIB_SRCS
 
     SimilarityFunctions.cpp
     UtilityFunctions.cpp
-    FragmentHydrogenManipulationFunctions.cpp
-  
+
     MatchConstraintList.cpp
     AtomTypeMatchExpression.cpp
     AtomEnvironmentMatchExpression.cpp

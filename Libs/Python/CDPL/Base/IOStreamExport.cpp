@@ -46,13 +46,13 @@ namespace
 	{
 
 	public:
-		IOStream(const char* file_name, const std::string& mode_str, std::ios_base::openmode mode_flags):        // constructor for std::fstream 
-			IOStreamImpl(file_name, mode_flags), closed(false), softSpace(false), 
-			openModeString(mode_str), openModeFlags(mode_flags) {}
+		IOStream(const char* file_name, const std::string& mode_str, std::ios_base::openmode mode):        // constructor for std::fstream 
+			IOStreamImpl(file_name, mode), closed(false), softSpace(false), 
+			openModeString(mode_str), openModeFlags(mode) {}
 
-		IOStream(const std::string& init_str, const std::string& mode_str, std::ios_base::openmode mode_flags):  // constructor for std::stringstream 
-			IOStreamImpl(init_str, mode_flags), closed(false), softSpace(false),
-			openModeString(mode_str), openModeFlags(mode_flags) {}
+		IOStream(const std::string& init_str, const std::string& mode_str, std::ios_base::openmode mode):  // constructor for std::stringstream 
+			IOStreamImpl(init_str, mode), closed(false), softSpace(false),
+			openModeString(mode_str), openModeFlags(mode) {}
 
 		IOStream& getIterator() {
 			return *this;
@@ -222,6 +222,10 @@ namespace
 			return openModeString;
 		}
 
+		std::ios_base::openmode getOpenModeFlags() const {
+			return openModeFlags;
+		}
+
 		bool getSoftSpace() const {
 			return softSpace;
 		}
@@ -277,10 +281,6 @@ namespace
 		}
 
 	protected:
-		std::ios_base::openmode getOpenModeFlags() const {
-			return openModeFlags;
-		}
-
 		void checkIfClosed() const {
 			if (!closed)
 				return;
@@ -400,6 +400,15 @@ namespace
 			throw CDPL::Base::IOError("FileIOStream: could not open file");
 		}
 
+		FileIOStream(const char* file_name, std::ios_base::openmode mode): 
+			IOStream<std::fstream>(file_name, "", mode), fileName(file_name) {
+			
+			if (good())
+				return;
+
+			throw CDPL::Base::IOError("FileIOStream: could not open file");
+		}
+
 		void closeFile() {
 			close();
 			closeStream();
@@ -450,6 +459,9 @@ namespace
 		StringIOStream(const std::string& init_str, const std::string& mode_str): 
 			IOStream<std::stringstream>(init_str, mode_str, parseOpenModeFlags(mode_str)) {}
 
+		StringIOStream(const std::string& init_str, std::ios_base::openmode mode): 
+			IOStream<std::stringstream>(init_str, "", mode) {}
+
 		bool isATTY() const {
 			checkIfClosed();
 
@@ -493,10 +505,17 @@ void CDPLPythonBase::exportIOStreams()
 	python::class_<std::ostream, boost::noncopyable>("OStream", python::no_init);
 
 	python::class_<std::iostream, python::bases<std::istream, std::ostream>, boost::noncopyable>("IOStream", python::no_init)
-		.def(ObjectIdentityCheckVisitor<std::iostream>());
+		.def(ObjectIdentityCheckVisitor<std::iostream>())
+		.def_readonly("IN", std::ios_base::in)
+		.def_readonly("OUT", std::ios_base::out)
+		.def_readonly("TRUNC", std::ios_base::trunc)
+		.def_readonly("APP", std::ios_base::app)
+		.def_readonly("ATE", std::ios_base::ate)
+		.def_readonly("BIN", std::ios_base::binary);
 
 	python::class_<FileIOStream, python::bases<std::iostream>, boost::noncopyable>("FileIOStream", python::no_init)
 		.def(python::init<const char*, const std::string&>((python::arg("self"), python::arg("file_name"), python::arg("mode") = "r")))
+		.def(python::init<const char*, std::ios_base::openmode>((python::arg("self"), python::arg("file_name"), python::arg("mode") = std::ios_base::in)))
 		.def("flush", &FileIOStream::flushStream, python::arg("self"))
 		.def("close", &FileIOStream::closeFile, python::arg("self"))
 		.def("readline", &FileIOStream::readLine, (python::arg("self"), python::arg("size") = -1), 
@@ -522,10 +541,12 @@ void CDPLPythonBase::exportIOStreams()
 													python::return_value_policy<python::copy_const_reference>()))
 		.add_property("mode", python::make_function(&FileIOStream::getOpenModeString, 
 													python::return_value_policy<python::copy_const_reference>()))
+		.add_property("modeFlags", &FileIOStream::getOpenModeFlags)
 		.def("__iter__", &FileIOStream::getIterator, python::arg("self"), python::return_self<>());
 
 	python::class_<StringIOStream, python::bases<std::iostream>, boost::noncopyable>("StringIOStream", python::no_init)
 		.def(python::init<const std::string&, const std::string&>((python::arg("self"), python::arg("string") = "", python::arg("mode") = "r+")))
+		.def(python::init<const std::string&, std::ios_base::openmode>((python::arg("self"), python::arg("string") = "", python::arg("mode") = std::ios_base::in | std::ios_base::out)))
 		.def("flush", &StringIOStream::flushStream, python::arg("self"))
 		.def("close", &StringIOStream::closeStream, python::arg("self"))
 		.def("readline", &StringIOStream::readLine, (python::arg("self"), python::arg("size") = -1), 
@@ -550,5 +571,6 @@ void CDPLPythonBase::exportIOStreams()
 		.add_property("closed", &StringIOStream::isClosed)
 		.add_property("mode", python::make_function(&StringIOStream::getOpenModeString, 
 													python::return_value_policy<python::copy_const_reference>()))
+		.add_property("modeFlags", &StringIOStream::getOpenModeFlags)
 		.def("__iter__", &StringIOStream::getIterator, python::arg("self"), python::return_self<>());
 }

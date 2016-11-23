@@ -32,6 +32,7 @@
 #define CDPL_CHEM_FRAGMENTFUNCTIONS_HPP
 
 #include "CDPL/Chem/APIPrefix.hpp"
+#include "CDPL/Chem/AtomPredicate.hpp"
 
 
 namespace CDPL 
@@ -60,6 +61,10 @@ namespace CDPL
 		 * \see Chem::isOrdinaryHydrogen
 		 */
 		CDPL_CHEM_API void makeOrdinaryHydrogenDeplete(Fragment& frag, unsigned int flags);
+
+		CDPL_CHEM_API void removeAtomsIf(Fragment& frag, const AtomPredicate& pred);
+
+		CDPL_CHEM_API void removeAtomsIfNot(Fragment& frag, const AtomPredicate& pred);
 
 		/**
 		 * @}

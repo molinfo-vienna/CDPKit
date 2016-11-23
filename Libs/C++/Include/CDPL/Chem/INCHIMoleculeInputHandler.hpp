@@ -31,8 +31,9 @@
 #ifndef CDPL_CHEM_INCHIMOLECULEINPUTHANDLER_HPP
 #define CDPL_CHEM_INCHIMOLECULEINPUTHANDLER_HPP
 
-#include "CDPL/Chem/APIPrefix.hpp"
-#include "CDPL/Base/DataInputHandler.hpp"
+#include "CDPL/Chem/DataFormat.hpp"
+#include "CDPL/Chem/INCHIMoleculeReader.hpp"
+#include "CDPL/Util/DefaultDataInputHandler.hpp"
 
 
 namespace CDPL 
@@ -40,8 +41,6 @@ namespace CDPL
 
 	namespace Chem
 	{
-
-		class Molecule;
 
 		/**
 		 * \addtogroup CDPL_CHEM_INCHI_IO
@@ -52,16 +51,7 @@ namespace CDPL
 		 * \brief A handler for the input of molecule data in the <em>IUPAC International Chemical Identifier (InChI)</em>
 		 *        [\ref INCHI] format.
 		 */
-		class CDPL_CHEM_API INCHIMoleculeInputHandler : public Base::DataInputHandler<Molecule>
-		{
-
-		public:
-			INCHIMoleculeInputHandler() {}
-
-			const Base::DataFormat& getDataFormat() const;
-
-			Base::DataReader<Molecule>::SharedPointer createReader(std::istream& is) const;
-		};
+		typedef Util::DefaultDataInputHandler<INCHIMoleculeReader, DataFormat::INCHI> INCHIMoleculeInputHandler;
 
 		/**
 		 * @}

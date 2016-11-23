@@ -31,8 +31,9 @@
 #ifndef CDPL_PHARM_CDFPHARMACOPHOREINPUTHANDLER_HPP
 #define CDPL_PHARM_CDFPHARMACOPHOREINPUTHANDLER_HPP
 
-#include "CDPL/Pharm/APIPrefix.hpp"
-#include "CDPL/Base/DataInputHandler.hpp"
+#include "CDPL/Pharm/DataFormat.hpp"
+#include "CDPL/Pharm/CDFPharmacophoreReader.hpp"
+#include "CDPL/Util/DefaultDataInputHandler.hpp"
 
 
 namespace CDPL 
@@ -40,8 +41,6 @@ namespace CDPL
 
 	namespace Pharm
 	{
-
-		class Pharmacophore;
 
 		/**
 		 * \addtogroup CDPL_PHARM_CDF_IO
@@ -51,16 +50,7 @@ namespace CDPL
 		/**
 		 * \brief A handler for the input of pharmacophore data in the native I/O format of the <em>CDPL</em>.
 		 */
-		class CDPL_PHARM_API CDFPharmacophoreInputHandler : public Base::DataInputHandler<Pharmacophore>
-		{
-
-		public:
-			CDFPharmacophoreInputHandler() {}
-
-			const Base::DataFormat& getDataFormat() const;
-
-			Base::DataReader<Pharmacophore>::SharedPointer createReader(std::istream& is) const;
-		};
+		typedef Util::DefaultDataInputHandler<CDFPharmacophoreReader, DataFormat::CDF> CDFPharmacophoreInputHandler;
 
 		/**
 		 * @}

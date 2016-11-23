@@ -31,8 +31,9 @@
 #ifndef CDPL_CHEM_JMEMOLECULARGRAPHOUTPUTHANDLER_HPP
 #define CDPL_CHEM_JMEMOLECULARGRAPHOUTPUTHANDLER_HPP
 
-#include "CDPL/Chem/APIPrefix.hpp"
-#include "CDPL/Base/DataOutputHandler.hpp"
+#include "CDPL/Chem/DataFormat.hpp"
+#include "CDPL/Chem/JMEMolecularGraphWriter.hpp"
+#include "CDPL/Util/DefaultDataOutputHandler.hpp"
 
 
 namespace CDPL 
@@ -40,8 +41,6 @@ namespace CDPL
 
 	namespace Chem
 	{
-
-		class MolecularGraph;
 
 		/**
 		 * \addtogroup CDPL_CHEM_JME_IO
@@ -52,16 +51,7 @@ namespace CDPL
 		 * \brief A handler for the output of molecular graph data in the native I/O format of the <em>JME Molecular Editor</em>
 		 *        [\ref JME] java applet.
 		 */
-		class CDPL_CHEM_API JMEMolecularGraphOutputHandler : public Base::DataOutputHandler<MolecularGraph>
-		{
-
-		public:
-			JMEMolecularGraphOutputHandler() {}
-
-			const Base::DataFormat& getDataFormat() const;
-
-			Base::DataWriter<MolecularGraph>::SharedPointer createWriter(std::ostream& os) const;
-		};
+		typedef Util::DefaultDataOutputHandler<JMEMolecularGraphWriter, DataFormat::JME> JMEMolecularGraphOutputHandler;
 
 		/**
 		 * @}

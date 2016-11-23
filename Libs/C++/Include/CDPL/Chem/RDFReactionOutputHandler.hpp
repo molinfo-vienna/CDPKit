@@ -31,8 +31,9 @@
 #ifndef CDPL_CHEM_RDFREACTIONOUTPUTHANDLER_HPP
 #define CDPL_CHEM_RDFREACTIONOUTPUTHANDLER_HPP
 
-#include "CDPL/Chem/APIPrefix.hpp"
-#include "CDPL/Base/DataOutputHandler.hpp"
+#include "CDPL/Chem/DataFormat.hpp"
+#include "CDPL/Chem/RDFReactionWriter.hpp"
+#include "CDPL/Util/DefaultDataOutputHandler.hpp"
 
 
 namespace CDPL 
@@ -40,8 +41,6 @@ namespace CDPL
 
 	namespace Chem
 	{
-
-		class Reaction;
 
 		/**
 		 * \addtogroup CDPL_CHEM_RDF_IO
@@ -51,16 +50,7 @@ namespace CDPL
 		/**
 		 * \brief A handler for the output of reaction data in the <em>MDL RD-File</em> [\ref CTFILE] format.
 		 */
-		class CDPL_CHEM_API RDFReactionOutputHandler : public Base::DataOutputHandler<Reaction>
-		{
-
-		public:
-			RDFReactionOutputHandler() {}
-
-			const Base::DataFormat& getDataFormat() const;
-
-			Base::DataWriter<Reaction>::SharedPointer createWriter(std::ostream& os) const;
-		};
+		typedef Util::DefaultDataOutputHandler<RDFReactionWriter, DataFormat::RDF> RDFReactionOutputHandler;	
 
 		/**
 		 * @}

@@ -31,18 +31,13 @@
 #ifndef CDPL_VIS_PDFMOLECULARGRAPHOUTPUTHANDLER_HPP
 #define CDPL_VIS_PDFMOLECULARGRAPHOUTPUTHANDLER_HPP
 
-#include "CDPL/Vis/APIPrefix.hpp"
-#include "CDPL/Base/DataOutputHandler.hpp"
+#include "CDPL/Vis/DataFormat.hpp"
+#include "CDPL/Vis/PDFMolecularGraphWriter.hpp"
+#include "CDPL/Util/DefaultDataOutputHandler.hpp"
 
 
 namespace CDPL 
 {
-
-	namespace Chem
-	{
-
-		class MolecularGraph;
-	}
 
 	namespace Vis
 	{
@@ -56,16 +51,7 @@ namespace CDPL
 		 * \brief A handler for the output of 2D depictions of chemical structures in the <em>Portable
 		 *        Document Format (PDF)</em> [\ref WPDF].
 		 */
-		class CDPL_VIS_API PDFMolecularGraphOutputHandler : public Base::DataOutputHandler<Chem::MolecularGraph>
-		{
-
-		public:
-			PDFMolecularGraphOutputHandler() {}
-
-			const Base::DataFormat& getDataFormat() const;
-
-			Base::DataWriter<Chem::MolecularGraph>::SharedPointer createWriter(std::ostream& os) const;
-		};
+		typedef Util::DefaultDataOutputHandler<PDFMolecularGraphWriter, DataFormat::PDF> PDFMolecularGraphOutputHandler;	
 
 		/**
 		 * @}

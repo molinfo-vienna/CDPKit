@@ -62,7 +62,7 @@ void CDPLPythonPharm::exportFeatureContainer()
 		.def(python::init<>(python::arg("self")))
 		.def(FeatureContainerVirtualFunctionsVisitor<FeatureContainerWrapper>())
 		.def(CDPLPythonBase::PropertyContainerVirtualFunctionsVisitor<FeatureContainerWrapper>())
-		.def(FeatureContainerSpecialFunctionsVisitor(true))
+		.def(FeatureContainerSpecialFunctionsVisitor(false))
 		.def(CDPLPythonBase::PropertyContainerSpecialFunctionsVisitor())
 		.add_property("numFeatures", &Pharm::FeatureContainer::getNumFeatures);
 

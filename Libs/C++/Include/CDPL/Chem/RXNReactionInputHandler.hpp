@@ -31,8 +31,9 @@
 #ifndef CDPL_CHEM_RXNREACTIONINPUTHANDLER_HPP
 #define CDPL_CHEM_RXNREACTIONINPUTHANDLER_HPP
 
-#include "CDPL/Chem/APIPrefix.hpp"
-#include "CDPL/Base/DataInputHandler.hpp"
+#include "CDPL/Chem/DataFormat.hpp"
+#include "CDPL/Chem/RXNReactionReader.hpp"
+#include "CDPL/Util/DefaultDataInputHandler.hpp"
 
 
 namespace CDPL 
@@ -40,8 +41,6 @@ namespace CDPL
 
 	namespace Chem
 	{
-
-		class Reaction;
 
 		/**
 		 * \addtogroup CDPL_CHEM_RXN_IO
@@ -51,16 +50,7 @@ namespace CDPL
 		/**
 		 * \brief A handler for the input of reaction data in the <em>MDL Rxn-File</em> [\ref CTFILE] format.
 		 */
-		class CDPL_CHEM_API RXNReactionInputHandler : public Base::DataInputHandler<Reaction>
-		{
-
-		public:
-			RXNReactionInputHandler() {}
-
-			const Base::DataFormat& getDataFormat() const;
-
-			Base::DataReader<Reaction>::SharedPointer createReader(std::istream& is) const;
-		};
+		typedef Util::DefaultDataInputHandler<RXNReactionReader, DataFormat::RXN> RXNReactionInputHandler;
 
 		/**
 		 * @}

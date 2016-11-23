@@ -31,8 +31,9 @@
 #ifndef CDPL_CHEM_SMARTSMOLECULEINPUTHANDLER_HPP
 #define CDPL_CHEM_SMARTSMOLECULEINPUTHANDLER_HPP
 
-#include "CDPL/Chem/APIPrefix.hpp"
-#include "CDPL/Base/DataInputHandler.hpp"
+#include "CDPL/Chem/DataFormat.hpp"
+#include "CDPL/Chem/SMARTSMoleculeReader.hpp"
+#include "CDPL/Util/DefaultDataInputHandler.hpp"
 
 
 namespace CDPL 
@@ -40,8 +41,6 @@ namespace CDPL
 
 	namespace Chem
 	{
-
-		class Molecule;
 
 		/**
 		 * \addtogroup CDPL_CHEM_SMARTS_IO
@@ -51,16 +50,7 @@ namespace CDPL
 		/**
 		 * \brief A handler for the input of molecule data in the <em>Daylight SMARTS</em> [\ref SMARTS] format.
 		 */
-		class CDPL_CHEM_API SMARTSMoleculeInputHandler : public Base::DataInputHandler<Molecule>
-		{
-
-		public:
-			SMARTSMoleculeInputHandler() {}
-
-			const Base::DataFormat& getDataFormat() const;
-
-			Base::DataReader<Molecule>::SharedPointer createReader(std::istream& is) const;
-		};
+		typedef Util::DefaultDataInputHandler<SMARTSMoleculeReader, DataFormat::SMARTS> SMARTSMoleculeInputHandler;
 
 		/**
 		 * @}

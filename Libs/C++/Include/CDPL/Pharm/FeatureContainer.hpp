@@ -154,7 +154,7 @@ namespace CDPL
 		/**
 	     * \brief Replaces the current set of pharmacophore features and properties by a copy of the
 	     *        features and properties of the container \a cntnr.
-	     * \param pharm The container to copy.
+	     * \param cntnr The container to copy.
 	     * \return A reference to itself.
 	     */
 	    FeatureContainer& operator=(const FeatureContainer& cntnr);

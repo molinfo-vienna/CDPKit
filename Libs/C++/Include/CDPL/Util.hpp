@@ -44,5 +44,8 @@
 #include "CDPL/Util/PropertyValueProduct.hpp"
 #include "CDPL/Util/RangeGenerator.hpp"
 #include "CDPL/Util/StreamDataReader.hpp"
+#include "CDPL/Util/FileDataReader.hpp"
+#include "CDPL/Util/FileDataWriter.hpp"
+#include "CDPL/Util/DefaultDataInputHandler.hpp"
 
 #endif // CDPL_UTIL_HPP

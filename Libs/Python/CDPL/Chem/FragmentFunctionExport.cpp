@@ -40,4 +40,6 @@ void CDPLPythonChem::exportFragmentFunctions()
 	python::def("makeHydrogenDeplete", &Chem::makeHydrogenDeplete, python::arg("frag"));
 	python::def("makeOrdinaryHydrogenDeplete", &Chem::makeOrdinaryHydrogenDeplete, 
 				(python::arg("frag"), python::arg("flags")));
+	python::def("removeAtomsIf", &Chem::removeAtomsIf, (python::arg("frag"), python::arg("pred")));
+	python::def("removeAtomsIfNot", &Chem::removeAtomsIfNot, (python::arg("frag"), python::arg("pred")));
 }

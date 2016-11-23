@@ -31,18 +31,13 @@
 #ifndef CDPL_BIOMOL_PDBMOLECULEINPUTHANDLER_HPP
 #define CDPL_BIOMOL_PDBMOLECULEINPUTHANDLER_HPP
 
-#include "CDPL/Biomol/APIPrefix.hpp"
-#include "CDPL/Base/DataInputHandler.hpp"
+#include "CDPL/Biomol/DataFormat.hpp"
+#include "CDPL/Biomol/PDBMoleculeReader.hpp"
+#include "CDPL/Util/DefaultDataInputHandler.hpp"
 
 
 namespace CDPL 
 {
-
-	namespace Chem
-	{
-
-		class Molecule;
-	}
 
 	namespace Biomol
 	{
@@ -56,16 +51,7 @@ namespace CDPL
 		 * \brief A handler for the input of molecule data in the <em>Brookhaven Protein Data Bank (PDB)</em>
 		 *        [\ref PDB] format.
 		 */
-		class CDPL_BIOMOL_API PDBMoleculeInputHandler : public Base::DataInputHandler<Chem::Molecule>
-		{
-
-		public:
-			PDBMoleculeInputHandler() {}
-
-			const Base::DataFormat& getDataFormat() const;
-
-			Base::DataReader<Chem::Molecule>::SharedPointer createReader(std::istream& is) const;
-		};
+		typedef Util::DefaultDataInputHandler<PDBMoleculeReader, DataFormat::PDB> PDBMoleculeInputHandler;
 
 		/**
 		 * @}

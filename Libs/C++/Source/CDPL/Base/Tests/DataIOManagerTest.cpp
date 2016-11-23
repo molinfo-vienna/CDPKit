@@ -58,6 +58,10 @@ namespace
 			return CDPL::Base::DataReader<int>::SharedPointer();
 		}
 
+		virtual CDPL::Base::DataReader<int>::SharedPointer createReader(const std::string&, std::ios_base::openmode) const {
+			return CDPL::Base::DataReader<int>::SharedPointer();
+		}
+
 	private:
 		const CDPL::Base::DataFormat& format;
 	};
@@ -72,7 +76,11 @@ namespace
 			return format;
 		}
 
-		virtual CDPL::Base::DataWriter<int>::SharedPointer createWriter(std::ostream&) const {
+		virtual CDPL::Base::DataWriter<int>::SharedPointer createWriter(std::iostream&) const {
+			return CDPL::Base::DataWriter<int>::SharedPointer();
+		}
+
+		virtual CDPL::Base::DataWriter<int>::SharedPointer createWriter(const std::string&, std::ios_base::openmode) const {
 			return CDPL::Base::DataWriter<int>::SharedPointer();
 		}
 

@@ -32,6 +32,7 @@
 #define CDPL_BASE_DATAINPUTHANDLER_HPP
 
 #include <iosfwd>
+#include <string>
 
 #include "CDPL/Base/DataReader.hpp"
 
@@ -59,6 +60,8 @@ namespace CDPL
 		{
 
 		public:
+			typedef DataReader<T> ReaderType;
+
 			/**
 			 * \brief Virtual destructor.
 			 */
@@ -73,10 +76,18 @@ namespace CDPL
 			/**
 			 * \brief Creates a Base::DataReader instance that will read the data from the input stream \a is.
 			 * \param is The input stream to read from.
-			 * \return A pointer to the created Base::DataReader instance.
-			 * \note The created Base::DataReader instance has to be managed by the caller.
+			 * \return A shared pointer to the created Base::DataReader instance.
 			 */
-			virtual typename DataReader<T>::SharedPointer createReader(std::istream& is) const = 0;
+			virtual typename ReaderType::SharedPointer createReader(std::istream& is) const = 0;
+
+			/**
+			 * \brief Creates a Base::DataReader instance that will read the data from the file \a file_name.
+			 * \param file_name The name of the file to read from.
+			 * \param mode Flags specifying the file open-mode.
+			 * \return A shared pointer to the created Base::DataReader instance.
+			 */
+			virtual typename ReaderType::SharedPointer createReader(const std::string& file_name, 
+																	std::ios_base::openmode mode = std::ios_base::in | std::ios_base::binary) const = 0;
 		};
 
 		/**
