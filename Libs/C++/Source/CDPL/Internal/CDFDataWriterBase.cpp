@@ -52,6 +52,20 @@ void Internal::CDFDataWriterBase::putStringProperty(unsigned int prop_id, const 
 	bbuf.putBytes(str.c_str(), str.length());
 }
 
+void Internal::CDFDataWriterBase::putString(const std::string& str, ByteBuffer& bbuf) const
+{
+	std::size_t last_pos = bbuf.getIOPointer();
+
+	bbuf.setIOPointer(last_pos + 1);
+
+	Base::uint8 num_bytes = bbuf.putInt(boost::numeric_cast<CDF::SizeType>(str.length()), true);
+
+	bbuf.setIOPointer(last_pos);
+	bbuf.putInt(num_bytes, false);
+	bbuf.setIOPointer(last_pos + 1 + num_bytes);
+	bbuf.putBytes(str.c_str(), str.length());
+}
+
 void Internal::CDFDataWriterBase::putPropertyListMarker(unsigned int prop_id, ByteBuffer& bbuf) const
 {
 	bbuf.putInt(composePropertySpec(prop_id, 1), false);

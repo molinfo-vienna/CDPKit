@@ -40,7 +40,7 @@
 #include "CDPL/Chem/FragmentList.hpp"
 #include "CDPL/Chem/MatchConstraintList.hpp"
 #include "CDPL/Chem/MatchExpression.hpp"
-#include "CDPL/Chem/MDLDataBlock.hpp"
+#include "CDPL/Chem/StringDataBlock.hpp"
 #include "CDPL/Chem/MassComposition.hpp"
 #include "CDPL/Chem/ElementHistogram.hpp"
 #include "CDPL/Chem/AtomPropertyFlag.hpp"
@@ -236,13 +236,13 @@ namespace CDPL
 		CDPL_CHEM_API bool hasMDLCTABVersion(const MolecularGraph& molgraph);
 
 
-		CDPL_CHEM_API const MDLDataBlock::SharedPointer& getMDLStructureData(const MolecularGraph& molgraph);
+		CDPL_CHEM_API const StringDataBlock::SharedPointer& getStructureData(const MolecularGraph& molgraph);
 
-		CDPL_CHEM_API void setMDLStructureData(MolecularGraph& molgraph, const MDLDataBlock::SharedPointer& data);
+		CDPL_CHEM_API void setStructureData(MolecularGraph& molgraph, const StringDataBlock::SharedPointer& data);
 
-		CDPL_CHEM_API void clearMDLStructureData(MolecularGraph& molgraph);
+		CDPL_CHEM_API void clearStructureData(MolecularGraph& molgraph);
 	
-		CDPL_CHEM_API bool hasMDLStructureData(const MolecularGraph& molgraph);
+		CDPL_CHEM_API bool hasStructureData(const MolecularGraph& molgraph);
 
 
 		CDPL_CHEM_API std::size_t getMDLDimensionality(const MolecularGraph& molgraph);

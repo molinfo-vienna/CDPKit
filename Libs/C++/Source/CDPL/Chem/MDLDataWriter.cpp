@@ -234,9 +234,6 @@ bool Chem::MDLDataWriter::writeMolecularGraph(std::ostream& os, const MolecularG
 
 			if (write_data)
 				writeSDFData(os, molgraph);
-
-			if (i < (num_confs - 1))
-				ioBase.invokeIOCallbacks();
 		}
 	}
 
@@ -1581,18 +1578,18 @@ void Chem::MDLDataWriter::writeSDFData(std::ostream& os, const MolecularGraph& m
 
 	static const char line_sep[] = { MDL::END_OF_LINE, 0 };
 
-	if (!hasMDLStructureData(molgraph)) {
+	if (!hasStructureData(molgraph)) {
 		writeMDLLine(os, SDFile::RECORD_DELIMITER, "MDLDataWriter: error while writing sd-file record delimiter", false, false);
 		return;
 	}
  
-	const MDLDataBlock& data = *getMDLStructureData(molgraph);
+	const StringDataBlock& data = *getStructureData(molgraph);
 	std::string trimmed_line;
 
-	MDLDataBlock::ConstElementIterator entries_end = data.getElementsEnd();
+	StringDataBlock::ConstElementIterator entries_end = data.getElementsEnd();
 
-	for (MDLDataBlock::ConstElementIterator it = data.getElementsBegin(); it != entries_end; ++it) {
-		const MDLDataBlockEntry& entry = *it;
+	for (StringDataBlock::ConstElementIterator it = data.getElementsBegin(); it != entries_end; ++it) {
+		const StringDataBlockEntry& entry = *it;
 
 		const std::string& header = entry.getHeader();
 		std::size_t prefix_length = SDFile::DATA_HEADER_PREFIX.length();
@@ -1926,15 +1923,15 @@ void Chem::MDLDataWriter::writeRDFData(std::ostream& os, const Reaction& rxn) co
 	using namespace Internal;
 	using namespace MDL;
 
-	if (!hasMDLReactionData(rxn))
+	if (!hasReactionData(rxn))
 		return;
 
-	const MDLDataBlock& data = *getMDLReactionData(rxn);
+	const StringDataBlock& data = *getReactionData(rxn);
 
-	MDLDataBlock::ConstElementIterator items_end = data.getElementsEnd();
+	StringDataBlock::ConstElementIterator items_end = data.getElementsEnd();
 
-	for (MDLDataBlock::ConstElementIterator it = data.getElementsBegin(); it != items_end; ++it) {
-		const MDLDataBlockEntry& entry = *it;
+	for (StringDataBlock::ConstElementIterator it = data.getElementsBegin(); it != items_end; ++it) {
+		const StringDataBlockEntry& entry = *it;
 
 		std::size_t data_field_id_pfx_length = RDFile::DATA_FIELD_IDENTIFIER.length();
 		const std::string& data_field_id = entry.getHeader();

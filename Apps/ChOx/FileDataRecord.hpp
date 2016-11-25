@@ -28,7 +28,6 @@
 #define CHOX_FILEDATARECORD_HPP
 
 #include <cstddef>
-#include <istream>
 
 #include "CDPL/Base/DataReader.hpp"
 
@@ -39,8 +38,6 @@
 namespace ChOx
 {
 
-	typedef boost::shared_ptr<std::istream> IStreamPointer;
-
 	template <typename T, typename ImplT>
 	class FileDataRecord : public ConcreteDataRecord<T>
 	{
@@ -48,8 +45,8 @@ namespace ChOx
 	public:
 		typedef typename CDPL::Base::DataReader<T>::SharedPointer ReaderPointer;
 
-		FileDataRecord(const IStreamPointer& is, const ReaderPointer& reader, std::size_t rec_idx):
-			istream(is), reader(reader), recordIndex(rec_idx) {}
+		FileDataRecord(const ReaderPointer& reader, std::size_t rec_idx):
+			reader(reader), recordIndex(rec_idx) {}
 
 		typename T::SharedPointer getData() const {
 			typename T::SharedPointer data_ptr(new ImplT());
@@ -62,7 +59,6 @@ namespace ChOx
 		}
 
 	private:
-		IStreamPointer  istream;
 		ReaderPointer   reader;
 		std::size_t     recordIndex;
 	};

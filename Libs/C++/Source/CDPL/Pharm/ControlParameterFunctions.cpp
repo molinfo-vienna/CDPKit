@@ -61,3 +61,6 @@ void Pharm::clear##FUNC_INFIX##Parameter(Base::ControlParameterContainer& cntnr)
 MAKE_CONTROL_PARAM_FUNCTIONS(STRICT_ERROR_CHECKING, bool, StrictErrorChecking)
 
 MAKE_CONTROL_PARAM_FUNCTIONS(CDF_WRITE_SINGLE_PRECISION_FLOATS, bool, CDFWriteSinglePrecisionFloats)
+
+MAKE_CONTROL_PARAM_FUNCTIONS(PSD_CREATION_MODE, Pharm::ScreeningDBCreator::Mode, PSDCreationMode)
+MAKE_CONTROL_PARAM_FUNCTIONS(PSD_ALLOW_DUPLICATES, bool, PSDAllowDuplicates)

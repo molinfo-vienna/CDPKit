@@ -101,6 +101,20 @@ IF(SQLITE3_FOUND)
 
   LINK_LIBRARIES(${SQLITE3_LIBRARY})
   INCLUDE_DIRECTORIES("${SQLITE3_INCLUDE_DIR}")
+
+  IF(Boost_SYSTEM_FOUND AND Boost_FILESYSTEM_FOUND AND Boost_IOSTREAMS_FOUND)
+    SET(cdpl-pharm_LIB_SRCS
+         ${cdpl-pharm_LIB_SRCS}
+         PSDPharmacophoreInputHandler.cpp
+         PSDMoleculeInputHandler.cpp
+         PSDMolecularGraphOutputHandler.cpp
+         PSDPharmacophoreReader.cpp
+         PSDMoleculeReader.cpp
+         PSDMolecularGraphWriter.cpp
+        )	
+
+    LINK_LIBRARIES(${Boost_SYSTEM_LIBRARY} ${Boost_FILESYSTEM_LIBRARY} ${Boost_IOSTREAMS_LIBRARY})
+  ENDIF(Boost_SYSTEM_FOUND AND Boost_FILESYSTEM_FOUND AND Boost_IOSTREAMS_FOUND)
 ENDIF(SQLITE3_FOUND)
 
 ADD_LIBRARY(cdpl-pharm-static STATIC ${cdpl-pharm_LIB_SRCS})

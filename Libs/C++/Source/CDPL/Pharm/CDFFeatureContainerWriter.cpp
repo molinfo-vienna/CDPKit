@@ -53,7 +53,7 @@ Base::DataWriter<Pharm::FeatureContainer>& Pharm::CDFFeatureContainerWriter::wri
 		throw Base::IOError("CDFFeatureContainerWriter: " + std::string(e.what()));
 	}
 
-	invokeIOCallbacks();
+	invokeIOCallbacks(1.0);
 
 	return *this;
 }

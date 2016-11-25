@@ -46,5 +46,7 @@ void CDPLPythonPharm::exportControlParameters()
 
 	python::class_<ControlParameter, boost::noncopyable>("ControlParameter", python::no_init)
 		.def_readonly("STRICT_ERROR_CHECKING", &Pharm::ControlParameter::STRICT_ERROR_CHECKING)
-		.def_readonly("CDF_WRITE_SINGLE_PRECISION_FLOATS", &Pharm::ControlParameter::CDF_WRITE_SINGLE_PRECISION_FLOATS);
+		.def_readonly("CDF_WRITE_SINGLE_PRECISION_FLOATS", &Pharm::ControlParameter::CDF_WRITE_SINGLE_PRECISION_FLOATS)
+		.def_readonly("PSD_CREATION_MODE", &Pharm::ControlParameter::PSD_CREATION_MODE)
+		.def_readonly("PSD_ALLOW_DUPLICATES", &Pharm::ControlParameter::PSD_ALLOW_DUPLICATES);
 }

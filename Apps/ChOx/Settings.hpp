@@ -32,6 +32,7 @@
 #include <QObject>
 
 #include "CDPL/Vis/Pen.hpp"
+#include "CDPL/Pharm/ScreeningDBCreator.hpp"
 
 #include "SettingsContainer.hpp"
 #include "CDPLFwd.hpp"
@@ -72,6 +73,8 @@ namespace ChOx
 
 		void writeAtomColorTableParam(QSettings&) const;
 
+		void writeDBCreationModeParameter(const SettingsContainer&, QSettings&, const CDPL::Base::LookupKey&) const;
+
 		template <typename T>
 		void writeParameter(const SettingsContainer&, QSettings&, const CDPL::Base::LookupKey&) const;
 
@@ -81,6 +84,8 @@ namespace ChOx
 		void readSizeSpecParameter(SettingsContainer&, QSettings&, const CDPL::Base::LookupKey&, const CDPL::Vis::SizeSpecification&);
 
 		void readAtomColorTableParam(QSettings&);
+
+		void readDBCreationModeParameter(SettingsContainer&, QSettings&, const CDPL::Base::LookupKey&, CDPL::Pharm::ScreeningDBCreator::Mode) const;
 
 		template <typename T>
 		void readParameter(SettingsContainer&, QSettings&, const CDPL::Base::LookupKey&, const T&);

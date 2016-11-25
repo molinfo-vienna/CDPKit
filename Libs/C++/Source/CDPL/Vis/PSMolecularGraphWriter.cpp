@@ -51,7 +51,7 @@ Base::DataWriter<Chem::MolecularGraph>& Vis::PSMolecularGraphWriter::write(const
 
 	state = surf.get();
 
-	invokeIOCallbacks();
+	invokeIOCallbacks(1.0);
 
 	return *this;
 }

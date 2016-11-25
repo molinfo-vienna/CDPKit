@@ -41,7 +41,7 @@
 #include "CDPL/Chem/MatchConstraintList.hpp"
 #include "CDPL/Chem/FragmentList.hpp"
 #include "CDPL/Chem/AtomMapping.hpp"
-#include "CDPL/Chem/MDLDataBlock.hpp"
+#include "CDPL/Chem/StringDataBlock.hpp"
 #include "CDPL/Chem/ReactionRole.hpp"
 #include "CDPL/Chem/AtomPropertyFlag.hpp"
 #include "CDPL/Chem/BondPropertyFlag.hpp"
@@ -173,13 +173,13 @@ namespace CDPL
 		CDPL_CHEM_API bool hasMDLComment(const Reaction& rxn);
 
 
-		CDPL_CHEM_API const MDLDataBlock::SharedPointer& getMDLReactionData(const Reaction& rxn);
+		CDPL_CHEM_API const StringDataBlock::SharedPointer& getReactionData(const Reaction& rxn);
 
-		CDPL_CHEM_API void setMDLReactionData(Reaction& rxn, const MDLDataBlock::SharedPointer& data);
+		CDPL_CHEM_API void setReactionData(Reaction& rxn, const StringDataBlock::SharedPointer& data);
 
-		CDPL_CHEM_API void clearMDLReactionData(Reaction& rxn);
+		CDPL_CHEM_API void clearReactionData(Reaction& rxn);
 	
-		CDPL_CHEM_API bool hasMDLReactionData(const Reaction& rxn);
+		CDPL_CHEM_API bool hasReactionData(const Reaction& rxn);
 
 
 		CDPL_CHEM_API const Molecule::SharedPointer& getMDLMoleculeRecord(const Reaction& rxn);

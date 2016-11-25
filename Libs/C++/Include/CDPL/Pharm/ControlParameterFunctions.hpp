@@ -32,6 +32,7 @@
 #define CDPL_PHARM_CONTROLPARAMETERFUNCTIONS_HPP
 
 #include "CDPL/Pharm/APIPrefix.hpp"
+#include "CDPL/Pharm/ScreeningDBCreator.hpp"
 
 
 namespace CDPL 
@@ -67,6 +68,24 @@ namespace CDPL
 		CDPL_PHARM_API bool hasCDFWriteSinglePrecisionFloatsParameter(const Base::ControlParameterContainer& cntnr);
 	
 		CDPL_PHARM_API void clearCDFWriteSinglePrecisionFloatsParameter(Base::ControlParameterContainer& cntnr);
+
+
+		CDPL_PHARM_API ScreeningDBCreator::Mode getPSDCreationModeParameter(const Base::ControlParameterContainer& cntnr);
+
+		CDPL_PHARM_API void setPSDCreationModeParameter(Base::ControlParameterContainer& cntnr, ScreeningDBCreator::Mode mode);
+
+		CDPL_PHARM_API bool hasPSDCreationModeParameter(const Base::ControlParameterContainer& cntnr);
+	
+		CDPL_PHARM_API void clearPSDCreationModeParameter(Base::ControlParameterContainer& cntnr);
+
+
+		CDPL_PHARM_API bool getPSDAllowDuplicatesParameter(const Base::ControlParameterContainer& cntnr);
+
+		CDPL_PHARM_API void setPSDAllowDuplicatesParameter(Base::ControlParameterContainer& cntnr, bool allow);
+
+		CDPL_PHARM_API bool hasPSDAllowDuplicatesParameter(const Base::ControlParameterContainer& cntnr);
+	
+		CDPL_PHARM_API void clearPSDAllowDuplicatesParameter(Base::ControlParameterContainer& cntnr);
 
 		/**
 		 * @}

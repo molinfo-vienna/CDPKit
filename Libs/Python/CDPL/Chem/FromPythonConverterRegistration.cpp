@@ -30,7 +30,7 @@
 #include "CDPL/Chem/Reaction.hpp"
 #include "CDPL/Chem/AtomMapping.hpp"
 #include "CDPL/Chem/FragmentList.hpp"
-#include "CDPL/Chem/MDLDataBlock.hpp"
+#include "CDPL/Chem/StringDataBlock.hpp"
 #include "CDPL/Chem/MatchConstraintList.hpp"
 #include "CDPL/Chem/MatchExpression.hpp"
 #include "CDPL/Chem/MassComposition.hpp"
@@ -68,7 +68,7 @@ void CDPLPythonChem::registerFromPythonConverters()
 	CDPLPythonBase::GenericVariantFromPythonConverter<Chem::MatchExpression<Chem::Molecule>::SharedPointer>();
 	CDPLPythonBase::GenericVariantFromPythonConverter<Chem::MatchExpression<Chem::Reaction>::SharedPointer>();
 	
-	CDPLPythonBase::GenericVariantFromPythonConverter<Chem::MDLDataBlock::SharedPointer>();
+	CDPLPythonBase::GenericVariantFromPythonConverter<Chem::StringDataBlock::SharedPointer>();
 
 	CDPLPythonBase::GenericVariantFromPythonConverter<Chem::MassComposition::SharedPointer>();
 	CDPLPythonBase::GenericVariantFromPythonConverter<Chem::ElementHistogram::SharedPointer>();

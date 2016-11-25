@@ -70,6 +70,10 @@ namespace CDPL
 			extern CDPL_PHARM_API const Base::LookupKey STRICT_ERROR_CHECKING;
 
 			extern CDPL_PHARM_API const Base::LookupKey CDF_WRITE_SINGLE_PRECISION_FLOATS;
+
+			extern CDPL_PHARM_API const Base::LookupKey PSD_CREATION_MODE;
+
+			extern CDPL_PHARM_API const Base::LookupKey PSD_ALLOW_DUPLICATES;
 		}
 
 		/**

@@ -64,6 +64,21 @@
  */
 #define HAVE_SQLITE3
 
+/**	
+ * \brief Defined if the \e Boost filesystem library is available.
+ */
+#define HAVE_BOOST_FILESYSTEM
+
+/**	
+ * \brief Defined if the \e Boost system library is available.
+ */
+#define HAVE_BOOST_SYSTEM
+
+/**	
+ * \brief Defined if the \e Boost iostreams library is available.
+ */
+#define HAVE_BOOST_IOSTREAMS
+
 /**
  * \brief The size of <tt>long int</tt>.
  */

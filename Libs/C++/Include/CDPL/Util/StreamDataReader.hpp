@@ -137,7 +137,7 @@ CDPL::Util::StreamDataReader<DataType, ReaderImpl>::read(DataType& obj)
 
 	if ((state = static_cast<ReaderImpl*>(this)->readData(input, obj))) {
 		recordIndex++;
-		this->invokeIOCallbacks();
+		this->invokeIOCallbacks(1.0);
 	}
 
 	return *this;
@@ -160,7 +160,7 @@ CDPL::Util::StreamDataReader<DataType, ReaderImpl>::skip()
 
 	if ((state = static_cast<ReaderImpl*>(this)->skipData(input))) {
 		recordIndex++;
-		this->invokeIOCallbacks();
+		this->invokeIOCallbacks(1.0);
 	}
 
 	return *this;
@@ -225,6 +225,10 @@ void CDPL::Util::StreamDataReader<DataType, ReaderImpl>::scanDataStream()
 	recordIndex = 0;
 
 	input.clear();
+	input.seekg(0, std::ios_base::end);
+
+	std::istream::pos_type end_pos = input.tellg();
+
 	input.seekg(initStreamPos);
 
 	while (hasMoreData()) {
@@ -237,7 +241,7 @@ void CDPL::Util::StreamDataReader<DataType, ReaderImpl>::scanDataStream()
 		recordPositions.push_back(record_pos);
 		recordIndex++;
 
-		this->invokeIOCallbacks();
+		this->invokeIOCallbacks(record_pos / double(end_pos));
 	}
 
 	if (saved_rec_index < recordPositions.size()) {

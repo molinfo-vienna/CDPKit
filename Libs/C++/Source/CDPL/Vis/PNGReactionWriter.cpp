@@ -55,7 +55,7 @@ Base::DataWriter<Chem::Reaction>& Vis::PNGReactionWriter::write(const Chem::Reac
 		state = (cairo_surface_status(surf.get()) == CAIRO_STATUS_SUCCESS); 
 	}
 
-	invokeIOCallbacks();
+	invokeIOCallbacks(1.0);
 
 	return *this;
 }

@@ -1,7 +1,7 @@
 /* -*- mode: c++; c-basic-offset: 4; tab-width: 4; indent-tabs-mode: t -*- */
 
 /* 
- * MDLDataBlock.cpp 
+ * MolecularGraphStructureDataFunctions.cpp 
  *
  * This file is part of the Chemical Data Processing Toolkit
  *
@@ -26,40 +26,29 @@
 
 #include "StaticInit.hpp"
 
-#include "CDPL/Chem/MDLDataBlock.hpp"
-#include "CDPL/Base/Exceptions.hpp"
+#include "CDPL/Chem/MolecularGraphFunctions.hpp"
+#include "CDPL/Chem/MolecularGraphProperty.hpp"
 
 
-using namespace CDPL;
+using namespace CDPL; 
 
 
-const std::string& Chem::MDLDataBlockEntry::getHeader() const
+const Chem::StringDataBlock::SharedPointer& Chem::getStructureData(const MolecularGraph& molgraph)
 {
-	return header;
+	return molgraph.getProperty<StringDataBlock::SharedPointer>(MolecularGraphProperty::STRUCTURE_DATA);
 }
 
-void Chem::MDLDataBlockEntry::setHeader(const std::string& header)
+void Chem::setStructureData(MolecularGraph& molgraph, const StringDataBlock::SharedPointer& data)
 {
-	this->header = header;
+	molgraph.setProperty(MolecularGraphProperty::STRUCTURE_DATA, data);
 }
 
-const std::string& Chem::MDLDataBlockEntry::getData() const
+void Chem::clearStructureData(MolecularGraph& molgraph)
 {
-	return data;
+	molgraph.removeProperty(MolecularGraphProperty::STRUCTURE_DATA);
 }
 
-void Chem::MDLDataBlockEntry::setData(const std::string& data)
+bool Chem::hasStructureData(const MolecularGraph& molgraph)
 {
-	this->data = data;
+	return molgraph.isPropertySet(MolecularGraphProperty::STRUCTURE_DATA);
 }
-
-bool Chem::MDLDataBlockEntry::operator==(const MDLDataBlockEntry& entry) const
-{
-	return (data == entry.data && header == entry.header);
-}
-
-bool Chem::MDLDataBlockEntry::operator!=(const MDLDataBlockEntry& entry) const
-{
-	return !this->operator==(entry);
-}
-

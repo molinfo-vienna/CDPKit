@@ -31,7 +31,7 @@
 #ifndef CDPL_BASE_DATAOUTPUTHANDLER_HPP
 #define CDPL_BASE_DATAOUTPUTHANDLER_HPP
 
-#include <iosfwd>
+#include <ios>
 
 #include "CDPL/Base/DataWriter.hpp"
 

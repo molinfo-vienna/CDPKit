@@ -51,7 +51,7 @@ Base::DataWriter<Chem::Reaction>& Vis::PDFReactionWriter::write(const Chem::Reac
 
 	state = surf.get();
 
-	invokeIOCallbacks();
+	invokeIOCallbacks(1.0);
 
 	return *this;
 }

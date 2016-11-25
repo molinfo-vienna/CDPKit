@@ -27,7 +27,7 @@ SET(cdpl-chem_LIB_SRCS
     DataFormat.cpp
     INCHIReturnCode.cpp
 
-    MDLDataBlock.cpp
+    StringDataBlock.cpp
     StereoDescriptor.cpp
     AtomDictionary.cpp
 
@@ -206,13 +206,13 @@ SET(cdpl-chem_LIB_SRCS
     MolecularGraphExtractReactionCenterFunction.cpp
     MolecularGraphStoichiometricNumberFunctions.cpp
     MolecularGraphConformationIndexFunctions.cpp
+    MolecularGraphStructureDataFunctions.cpp
     MolecularGraphMDLUserInitialsFunctions.cpp
     MolecularGraphMDLProgramNameFunctions.cpp
     MolecularGraphMDLTimestampFunctions.cpp
     MolecularGraphMDLRegistryNumberFunctions.cpp
     MolecularGraphMDLCommentFunctions.cpp
     MolecularGraphMDLCTABVersionFunctions.cpp
-    MolecularGraphMDLStructureDataFunctions.cpp
     MolecularGraphMDLDimensionalityFunctions.cpp
     MolecularGraphMDLScalingFactorFunctions.cpp
     MolecularGraphMDLEnergyFunctions.cpp
@@ -263,12 +263,12 @@ SET(cdpl-chem_LIB_SRCS
     ReactionAtomMappingFunctions.cpp
     ReactionHashCodeFunction.cpp
     ReactionSMILESFunction.cpp
+    ReactionReactionDataFunctions.cpp
     ReactionMDLUserInitialsFunctions.cpp
     ReactionMDLProgramNameFunctions.cpp
     ReactionMDLTimestampFunctions.cpp
     ReactionMDLRegistryNumberFunctions.cpp
     ReactionMDLCommentFunctions.cpp
-    ReactionMDLReactionDataFunctions.cpp
     ReactionMDLMoleculeRecordFunctions.cpp
     ReactionMDLRXNFileVersionFunctions.cpp
     ReactionSubstructSearchInitializationFunctions.cpp

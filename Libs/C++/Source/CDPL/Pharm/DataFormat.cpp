@@ -26,6 +26,7 @@
 
 #include "StaticInit.hpp"
 
+#include "CDPL/Config.hpp"
 #include "CDPL/Base/DataIOManager.hpp"
 #include "CDPL/Base/DataFormat.hpp"
 #include "CDPL/Pharm/DataFormat.hpp"
@@ -34,12 +35,21 @@
 #include "CDPL/Pharm/PMLPharmacophoreInputHandler.hpp"
 #include "CDPL/Pharm/PMLFeatureContainerOutputHandler.hpp"
 
+#if defined(HAVE_SQLITE3) && defined(HAVE_BOOST_SYSTEM) && defined(HAVE_BOOST_FILESYSTEM) && defined(HAVE_BOOST_IOSTREAMS)
+
+#include "CDPL/Pharm/PSDPharmacophoreInputHandler.hpp"
+#include "CDPL/Pharm/PSDMoleculeInputHandler.hpp"
+#include "CDPL/Pharm/PSDMolecularGraphOutputHandler.hpp"
+
+#endif // defined(HAVE_SQLITE3) && defined(HAVE_BOOST_SYSTEM) && defined(HAVE_BOOST_FILESYSTEM) && defined(HAVE_BOOST_IOSTREAMS)
+
 
 namespace
 {
 
 	const char* cdfFileExtensions[]    = { "cdf" };
 	const char* pmlFileExtensions[]    = { "pml" };
+	const char* psdFileExtensions[]    = { "psd" };
 }
 
 
@@ -48,8 +58,10 @@ using namespace CDPL;
 
 const Base::DataFormat Pharm::DataFormat::CDF("CDF", "Native CDPL-Format", "", 
 											  cdfFileExtensions, cdfFileExtensions + 1, true);
-const Base::DataFormat Pharm::DataFormat::PML("PML", "Native LigandScout PML-Format", "", 
+const Base::DataFormat Pharm::DataFormat::PML("PML", "LigandScout Pharmaceutical Markup Language", "", 
 											  pmlFileExtensions, pmlFileExtensions + 1, true);
+const Base::DataFormat Pharm::DataFormat::PSD("PSD", "Pharmacophore Screening Database", "", 
+											  psdFileExtensions, psdFileExtensions + 1, true);
 
 namespace CDPL
 {
@@ -71,18 +83,31 @@ namespace
 		Init() {
 			using namespace Base;
 			using namespace Pharm;
+			using namespace Chem;
 
-			static const CDFPharmacophoreInputHandler  cdfPharmInputHandler;
-			static const PMLPharmacophoreInputHandler  pmlPharmInputHandler;
+			static const CDFPharmacophoreInputHandler     cdfPharmInputHandler;
+			static const PMLPharmacophoreInputHandler     pmlPharmInputHandler;
 
 			static const CDFFeatureContainerOutputHandler cdfFtrContOutputHandler;
 			static const PMLFeatureContainerOutputHandler pmlFtrContOutputHandler;
-
+	
 			DataIOManager<Pharmacophore>::registerInputHandler(cdfPharmInputHandler);
 			DataIOManager<Pharmacophore>::registerInputHandler(pmlPharmInputHandler);
 
 			DataIOManager<FeatureContainer>::registerOutputHandler(cdfFtrContOutputHandler);
 			DataIOManager<FeatureContainer>::registerOutputHandler(pmlFtrContOutputHandler);
+
+#if defined(HAVE_SQLITE3) && defined(HAVE_BOOST_SYSTEM) && defined(HAVE_BOOST_FILESYSTEM) && defined(HAVE_BOOST_IOSTREAMS)HAVE_SQLITE3
+
+			static const PSDPharmacophoreInputHandler     psdPharmInputHandler;
+			static const PSDMoleculeInputHandler          psdMolInputHandler;
+			static const PSDMolecularGraphOutputHandler   psdMolGraphOutputHandler;
+
+			DataIOManager<Pharmacophore>::registerInputHandler(psdPharmInputHandler);
+			DataIOManager<Molecule>::registerInputHandler(psdMolInputHandler);
+			DataIOManager<MolecularGraph>::registerOutputHandler(psdMolGraphOutputHandler);
+
+#endif // defined(HAVE_SQLITE3) && defined(HAVE_BOOST_SYSTEM) && defined(HAVE_BOOST_FILESYSTEM) && defined(HAVE_BOOST_IOSTREAMS)
 		}
 
 	} init;

@@ -28,7 +28,7 @@ SET(chem_MOD_SRCS
     BondMappingExport.cpp 
     AtomBondMappingExport.cpp 
     FragmentListExport.cpp 
-    MDLDataBlockExport.cpp
+    StringDataBlockExport.cpp
     ElementHistogramExport.cpp
     MassCompositionExport.cpp
     StereoDescriptorExport.cpp

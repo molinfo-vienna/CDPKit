@@ -72,6 +72,13 @@ BOOST_PYTHON_MODULE(_pharm)
 
 #ifdef HAVE_SQLITE3
 
+	exportPSDPharmacophoreInputHandler();
+	exportPSDMoleculeInputHandler();
+	exportPSDMolecularGraphOutputHandler();
+	exportPSDPharmacophoreReader();
+	exportPSDMoleculeReader();
+	exportPSDMolecularGraphWriter();
+
 	exportPSDScreeningDBCreator();
 	exportPSDScreeningDBAccessor();
 

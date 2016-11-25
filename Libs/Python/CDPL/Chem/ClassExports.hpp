@@ -50,7 +50,7 @@ namespace CDPLPythonChem
 	void exportBondMapping();
 	void exportAtomBondMapping();
 	void exportFragmentList();
-	void exportMDLDataBlock();
+	void exportStringDataBlock();
 	void exportMassComposition();
 	void exportElementHistogram();
 	void exportStereoDescriptor();

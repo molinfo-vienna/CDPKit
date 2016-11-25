@@ -69,6 +69,8 @@ namespace CDPL
             template <typename Vec>
 			void putVectorArrayProperty(unsigned int prop_id, const Math::VectorArray<Vec>& vey_array, ByteBuffer& bbuf) const;
 
+			void putString(const std::string& str, ByteBuffer& bbuf) const;
+
 			bool strictErrorChecking() const;
 
 			void strictErrorChecking(bool strict);

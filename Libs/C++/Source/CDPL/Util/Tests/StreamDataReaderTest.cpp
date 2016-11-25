@@ -70,7 +70,7 @@ struct TestProgressCallback
 
 	TestProgressCallback(): calls(0) {}
 
-	void operator()(const CDPL::Base::DataIOBase&) {
+	void operator()(const CDPL::Base::DataIOBase&, double) {
 		calls++;
 	}
 

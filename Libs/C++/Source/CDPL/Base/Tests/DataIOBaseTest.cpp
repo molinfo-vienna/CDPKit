@@ -44,7 +44,7 @@ namespace
 
 		TestCallback(const CDPL::Base::DataIOBase& iob): ioBase(iob), calls(0) {}
  
-		void operator()(const CDPL::Base::DataIOBase& iob) {
+		void operator()(const CDPL::Base::DataIOBase& iob, double) {
 			if (&ioBase == &iob)
 				calls++;
 		}
@@ -77,12 +77,12 @@ BOOST_AUTO_TEST_CASE(DataIOBaseTest)
 
 	BOOST_CHECK(test_iob.registerIOCallback(boost::ref(test_cb1)) == 0);
 
-	test_iob.invokeIOCallbacks();
+	test_iob.invokeIOCallbacks(1.0);
 
 	BOOST_CHECK(test_cb1.calls == 1);
 	BOOST_CHECK(test_cb2.calls == 0);
 
-	test_iob.invokeIOCallbacks();
+	test_iob.invokeIOCallbacks(1.0);
 
 	BOOST_CHECK(test_cb1.calls == 2);
 	BOOST_CHECK(test_cb2.calls == 0);
@@ -92,18 +92,18 @@ BOOST_AUTO_TEST_CASE(DataIOBaseTest)
 	BOOST_CHECK(test_cb1.calls == 2);
 	BOOST_CHECK(test_cb2.calls == 0);
 
-	test_iob.invokeIOCallbacks();
+	test_iob.invokeIOCallbacks(1.0);
 
 	BOOST_CHECK(test_cb1.calls == 3);
 	BOOST_CHECK(test_cb2.calls == 1);
 
-	test_iob.invokeIOCallbacks();
+	test_iob.invokeIOCallbacks(1.0);
 
 	BOOST_CHECK(test_cb1.calls == 4);
 	BOOST_CHECK(test_cb2.calls == 2);
 
 	test_iob.unregisterIOCallback(0);	
-	test_iob.invokeIOCallbacks();
+	test_iob.invokeIOCallbacks(1.0);
 
 	BOOST_CHECK(test_cb1.calls == 4);
 	BOOST_CHECK(test_cb2.calls == 3);

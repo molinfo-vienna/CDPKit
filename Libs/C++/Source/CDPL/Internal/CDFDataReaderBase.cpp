@@ -131,6 +131,20 @@ void Internal::CDFDataReaderBase::getStringProperty(CDF::PropertySpec prop_spec,
 	getIntProperty(prop_spec, str_len, bbuf);
 
 	str.resize(str_len);
+
+	bbuf.getBytes(&str[0], str_len);
+}
+
+void Internal::CDFDataReaderBase::getString(std::string& str, ByteBuffer& bbuf) const
+{
+	std::size_t size_len;
+	std::size_t str_len;
+
+	bbuf.getInt(size_len, 1);
+	bbuf.getInt(str_len, size_len); 
+
+	str.resize(str_len);
+
 	bbuf.getBytes(&str[0], str_len);
 }
 

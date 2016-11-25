@@ -53,7 +53,7 @@ Base::DataWriter<Chem::Reaction>& Chem::RDFReactionWriter::write(const Reaction&
 		throw Base::IOError("RDFReactionWriter: " + std::string(e.what()));
 	}
 
-	invokeIOCallbacks();
+	invokeIOCallbacks(1.0);
 
 	return *this;
 }

@@ -424,6 +424,10 @@ void Chem::CDFDataReader::readMoleculeProperties(Molecule& mol, Internal::ByteBu
 				setConformationIndex(mol, size_val);
 				continue;
 
+			case CDF::MolecularGraphProperty::STRUCTURE_DATA:
+				getStructureData(prop_spec, mol, bbuf);
+				continue;
+
 			case CDF::MolecularGraphProperty::MATCH_CONSTRAINTS:
 
 			default:
@@ -502,6 +506,25 @@ void Chem::CDFDataReader::setStereoDescriptor(T& obj, const Molecule& mol, const
 		default:
 			throw Base::IOError("CDFDataReader: invalid number of stereo reference atoms");
 	}
+}
+
+void Chem::CDFDataReader::getStructureData(CDF::PropertySpec prop_spec, Molecule& mol, Internal::ByteBuffer& bbuf) const
+{
+	StringDataBlock::SharedPointer sdata(new StringDataBlock());
+	std::size_t num_entries;
+
+	getIntProperty(prop_spec, num_entries, bbuf);
+
+	std::string header, data;
+
+	for (std::size_t i = 0; i < num_entries; i++) {
+		getString(header, bbuf);
+		getString(data, bbuf);
+
+		sdata->addElement(StringDataBlockEntry(header, data));
+	}
+
+	setStructureData(mol, sdata);
 }
 
 void Chem::CDFDataReader::readStereoDescriptor(CDF::PropertySpec prop_spec, CDFStereoDescr& descr, Internal::ByteBuffer& bbuf) const

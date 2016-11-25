@@ -1,7 +1,7 @@
- /* -*- mode: c++; c-basic-offset: 4; tab-width: 4; indent-tabs-mode: t -*- */
+/* -*- mode: c++; c-basic-offset: 4; tab-width: 4; indent-tabs-mode: t -*- */
 
 /* 
- * ReactionMDLReactionDataFunctions.cpp 
+ * StringDataBlock.cpp 
  *
  * This file is part of the Chemical Data Processing Toolkit
  *
@@ -26,30 +26,40 @@
 
 #include "StaticInit.hpp"
 
-#include "CDPL/Chem/ReactionFunctions.hpp"
-#include "CDPL/Chem/Reaction.hpp"
-#include "CDPL/Chem/ReactionProperty.hpp"
+#include "CDPL/Chem/StringDataBlock.hpp"
+#include "CDPL/Base/Exceptions.hpp"
 
 
-using namespace CDPL; 
+using namespace CDPL;
 
 
-const Chem::MDLDataBlock::SharedPointer& Chem::getMDLReactionData(const Reaction& rxn)
+const std::string& Chem::StringDataBlockEntry::getHeader() const
 {
-	return rxn.getProperty<MDLDataBlock::SharedPointer>(ReactionProperty::MDL_REACTION_DATA);
+	return header;
 }
 
-void Chem::setMDLReactionData(Reaction& rxn, const MDLDataBlock::SharedPointer& data)
+void Chem::StringDataBlockEntry::setHeader(const std::string& header)
 {
-	rxn.setProperty(ReactionProperty::MDL_REACTION_DATA, data);
+	this->header = header;
 }
 
-void Chem::clearMDLReactionData(Reaction& rxn)
+const std::string& Chem::StringDataBlockEntry::getData() const
 {
-	rxn.removeProperty(ReactionProperty::MDL_REACTION_DATA);
+	return data;
 }
 
-bool Chem::hasMDLReactionData(const Reaction& rxn)
+void Chem::StringDataBlockEntry::setData(const std::string& data)
 {
-	return rxn.isPropertySet(ReactionProperty::MDL_REACTION_DATA);
+	this->data = data;
 }
+
+bool Chem::StringDataBlockEntry::operator==(const StringDataBlockEntry& entry) const
+{
+	return (data == entry.data && header == entry.header);
+}
+
+bool Chem::StringDataBlockEntry::operator!=(const StringDataBlockEntry& entry) const
+{
+	return !this->operator==(entry);
+}
+

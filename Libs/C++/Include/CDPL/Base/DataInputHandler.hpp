@@ -31,7 +31,7 @@
 #ifndef CDPL_BASE_DATAINPUTHANDLER_HPP
 #define CDPL_BASE_DATAINPUTHANDLER_HPP
 
-#include <iosfwd>
+#include <ios>
 #include <string>
 
 #include "CDPL/Base/DataReader.hpp"

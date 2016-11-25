@@ -104,6 +104,7 @@ namespace CDPL
 			bool readExternalProperties(unsigned int handler_id, Bond& bond, Internal::ByteBuffer& data);
 			bool readExternalProperties(unsigned int handler_id, Molecule& mol, Internal::ByteBuffer& data);
 
+			void getStructureData(CDF::PropertySpec prop_spec, Molecule& mol, Internal::ByteBuffer& bbuf) const;
 			void readStereoDescriptor(CDF::PropertySpec prop_spec, CDFStereoDescr& descr, Internal::ByteBuffer& data) const;
 			void setStereoDescriptors(Molecule& mol) const;
 

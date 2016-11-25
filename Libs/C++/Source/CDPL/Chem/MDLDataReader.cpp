@@ -158,8 +158,6 @@ bool Chem::MDLDataReader::readMolecule(std::istream& is, Molecule& mol, bool rea
 			confTestMolecule.reset(new BasicMolecule());
 
 		while (hasMoreData(is)) {
-			ioBase.invokeIOCallbacks();
-
 			std::istream::pos_type last_spos = is.tellg();
 			confTestMolecule->clear();
 
@@ -271,8 +269,6 @@ bool Chem::MDLDataReader::skipMolecule(std::istream& is, bool skip_data)
 		confTestMolecule.reset(new BasicMolecule());
 
 	while (hasMoreData(is)) {
-		ioBase.invokeIOCallbacks();
-
 		std::istream::pos_type last_spos = is.tellg();
 		confTestMolecule->clear();
 
@@ -1667,8 +1663,8 @@ void Chem::MDLDataReader::readSDFData(std::istream& is, Molecule& mol)
 {   
 	using namespace MDL;
 
-	MDLDataBlock::SharedPointer sd_ptr(new MDLDataBlock());
-	MDLDataBlockEntry data_entry;
+	StringDataBlock::SharedPointer sd_ptr(new StringDataBlock());
+	StringDataBlockEntry data_entry;
 
 	while (true) {
 		readMDLLine(is, line, "MDLDataReader: error while reading structure data block", false, checkLineLength);
@@ -1714,7 +1710,7 @@ void Chem::MDLDataReader::readSDFData(std::istream& is, Molecule& mol)
 		sd_ptr->addElement(data_entry);
 	}
 
-	setMDLStructureData(mol, sd_ptr);
+	setStructureData(mol, sd_ptr);
 }
 
 void Chem::MDLDataReader::skipSDFData(std::istream& is)
@@ -2187,8 +2183,8 @@ void Chem::MDLDataReader::readRDFData(std::istream& is, Reaction& rxn)
 {
 	using namespace MDL;
 	
-	MDLDataBlock::SharedPointer rd_ptr(new MDLDataBlock());
-	MDLDataBlockEntry data_entry;
+	StringDataBlock::SharedPointer rd_ptr(new StringDataBlock());
+	StringDataBlockEntry data_entry;
 
 	std::istringstream iss;
 	std::string keyword;
@@ -2280,7 +2276,7 @@ void Chem::MDLDataReader::readRDFData(std::istream& is, Reaction& rxn)
 		rd_ptr->addElement(data_entry);
 	}
 
-	setMDLReactionData(rxn, rd_ptr);
+	setReactionData(rxn, rd_ptr);
 }
 
 void Chem::MDLDataReader::skipRDFData(std::istream& is)

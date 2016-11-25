@@ -83,7 +83,7 @@ Base::DataWriter<Chem::MolecularGraph>& Chem::INCHIMolecularGraphWriter::write(c
 	state = false;
 
 	writeMolGraph(molgraph);
-	invokeIOCallbacks();
+	invokeIOCallbacks(1.0);
 
 	return *this;
 }

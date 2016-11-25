@@ -1,7 +1,7 @@
-/* -*- mode: c++; c-basic-offset: 4; tab-width: 4; indent-tabs-mode: t -*- */
+ /* -*- mode: c++; c-basic-offset: 4; tab-width: 4; indent-tabs-mode: t -*- */
 
 /* 
- * MolecularGraphMDLStructureDataFunctions.cpp 
+ * ReactionReactionDataFunctions.cpp 
  *
  * This file is part of the Chemical Data Processing Toolkit
  *
@@ -26,29 +26,30 @@
 
 #include "StaticInit.hpp"
 
-#include "CDPL/Chem/MolecularGraphFunctions.hpp"
-#include "CDPL/Chem/MolecularGraphProperty.hpp"
+#include "CDPL/Chem/ReactionFunctions.hpp"
+#include "CDPL/Chem/Reaction.hpp"
+#include "CDPL/Chem/ReactionProperty.hpp"
 
 
 using namespace CDPL; 
 
 
-const Chem::MDLDataBlock::SharedPointer& Chem::getMDLStructureData(const MolecularGraph& molgraph)
+const Chem::StringDataBlock::SharedPointer& Chem::getReactionData(const Reaction& rxn)
 {
-	return molgraph.getProperty<MDLDataBlock::SharedPointer>(MolecularGraphProperty::MDL_STRUCTURE_DATA);
+	return rxn.getProperty<StringDataBlock::SharedPointer>(ReactionProperty::REACTION_DATA);
 }
 
-void Chem::setMDLStructureData(MolecularGraph& molgraph, const MDLDataBlock::SharedPointer& data)
+void Chem::setReactionData(Reaction& rxn, const StringDataBlock::SharedPointer& data)
 {
-	molgraph.setProperty(MolecularGraphProperty::MDL_STRUCTURE_DATA, data);
+	rxn.setProperty(ReactionProperty::REACTION_DATA, data);
 }
 
-void Chem::clearMDLStructureData(MolecularGraph& molgraph)
+void Chem::clearReactionData(Reaction& rxn)
 {
-	molgraph.removeProperty(MolecularGraphProperty::MDL_STRUCTURE_DATA);
+	rxn.removeProperty(ReactionProperty::REACTION_DATA);
 }
 
-bool Chem::hasMDLStructureData(const MolecularGraph& molgraph)
+bool Chem::hasReactionData(const Reaction& rxn)
 {
-	return molgraph.isPropertySet(MolecularGraphProperty::MDL_STRUCTURE_DATA);
+	return rxn.isPropertySet(ReactionProperty::REACTION_DATA);
 }

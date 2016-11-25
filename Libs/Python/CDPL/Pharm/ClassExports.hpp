@@ -71,6 +71,13 @@ namespace CDPLPythonPharm
 
 #ifdef HAVE_SQLITE3
 
+	void exportPSDPharmacophoreInputHandler();
+	void exportPSDMoleculeInputHandler();
+	void exportPSDMolecularGraphOutputHandler();
+	void exportPSDPharmacophoreReader();
+	void exportPSDMoleculeReader();
+	void exportPSDMolecularGraphWriter();
+
 	void exportPSDScreeningDBCreator();
 	void exportPSDScreeningDBAccessor();
 

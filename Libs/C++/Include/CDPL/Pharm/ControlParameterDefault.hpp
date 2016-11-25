@@ -32,6 +32,7 @@
 #define CDPL_PHARM_CONTROLPARAMETERDEFAULT_HPP
 
 #include "CDPL/Pharm/APIPrefix.hpp"
+#include "CDPL/Pharm/ScreeningDBCreator.hpp"
 
 
 namespace CDPL 
@@ -57,6 +58,10 @@ namespace CDPL
 			extern CDPL_PHARM_API const bool STRICT_ERROR_CHECKING;
 
 			extern CDPL_PHARM_API const bool CDF_WRITE_SINGLE_PRECISION_FLOATS;
+
+			extern CDPL_PHARM_API const ScreeningDBCreator::Mode PSD_CREATION_MODE;
+
+			extern CDPL_PHARM_API const bool PSD_ALLOW_DUPLICATES;
 		}
 
 		/**

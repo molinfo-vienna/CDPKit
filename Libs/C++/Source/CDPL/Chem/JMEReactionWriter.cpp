@@ -53,7 +53,7 @@ Base::DataWriter<Chem::Reaction>& Chem::JMEReactionWriter::write(const Reaction&
 		throw Base::IOError("JMEReactionWriter: " + std::string(e.what()));
 	}
 
-	invokeIOCallbacks();
+	invokeIOCallbacks(1.0);
 
 	return *this;
 }

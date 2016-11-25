@@ -65,7 +65,7 @@ namespace ChOx
 		void visit(const ConcreteDataRecord<CDPL::Chem::Molecule>&);
 
 		template <typename T, typename ImplT>
-		bool appendRecords(const IStreamPointer& is_ptr, bool use_file_ext);
+		bool appendRecords(bool use_file_ext);
 		
 		DataSet&        dataSet;
 		const Settings& settings;

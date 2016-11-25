@@ -99,6 +99,18 @@ IF(SQLITE3_FOUND)
       PSDScreeningDBCreatorExport.cpp
       PSDScreeningDBAccessorExport.cpp
      )	
+  IF(Boost_SYSTEM_FOUND AND Boost_FILESYSTEM_FOUND AND Boost_IOSTREAMS_FOUND)
+    SET(pharm_MOD_SRCS
+        ${pharm_MOD_SRCS}
+        PSDPharmacophoreInputHandlerExport.cpp 
+        PSDMoleculeInputHandlerExport.cpp 
+        PSDMolecularGraphOutputHandlerExport.cpp 
+
+        PSDPharmacophoreReaderExport.cpp 
+        PSDMoleculeReaderExport.cpp 
+        PSDMolecularGraphWriterExport.cpp
+       )	
+  ENDIF(Boost_SYSTEM_FOUND AND Boost_FILESYSTEM_FOUND AND Boost_IOSTREAMS_FOUND)
 ENDIF(SQLITE3_FOUND)
 
 ADD_LIBRARY(_pharm MODULE ${pharm_MOD_SRCS})

@@ -71,10 +71,10 @@ namespace CDPL
 			 * \brief A functor class used to wrap I/O callback target functions.
 			 *
 			 * \c %IOCallbackFunction allows to wrap any function pointer or function object compatible with a return type
-			 * of \c void and a single argument of type <tt>const %DataIOBase&</tt>. For details refer to the <em>Boost.Function</em>
+			 * of \c void and two arguments of type <tt>const %DataIOBase&</tt> and <tt>double<tt>. For details refer to the <em>Boost.Function</em>
 			 * documentation [\ref BFUN]. 
 			 */
-			typedef boost::function1<void, const DataIOBase&> IOCallbackFunction;
+			typedef boost::function2<void, const DataIOBase&, double> IOCallbackFunction;
 	
 			/**
 			 * \brief Registers an I/O callback target function.
@@ -94,8 +94,9 @@ namespace CDPL
 
 			/**
 			 * \brief Invokes all registered I/O callback functions with the argument \c *this.
+			 * \param progress An indicator for the progress of the current I/O operation in the range [0, 1].
 			 */
-			void invokeIOCallbacks() const;
+			void invokeIOCallbacks(double progress) const;
 
 		protected:
 			/**

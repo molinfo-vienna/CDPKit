@@ -76,13 +76,14 @@ namespace CDPL
 
 			extern CDPL_CHEM_API const Base::LookupKey CONFORMATION_INDEX;
 
+			extern CDPL_CHEM_API const Base::LookupKey STRUCTURE_DATA;
+
 			extern CDPL_CHEM_API const Base::LookupKey MDL_USER_INITIALS;
 			extern CDPL_CHEM_API const Base::LookupKey MDL_PROGRAM_NAME;
 			extern CDPL_CHEM_API const Base::LookupKey MDL_TIMESTAMP;
 			extern CDPL_CHEM_API const Base::LookupKey MDL_REGISTRY_NUMBER;
 			extern CDPL_CHEM_API const Base::LookupKey MDL_COMMENT;
 			extern CDPL_CHEM_API const Base::LookupKey MDL_CTAB_VERSION;
-			extern CDPL_CHEM_API const Base::LookupKey MDL_STRUCTURE_DATA;
 			extern CDPL_CHEM_API const Base::LookupKey MDL_DIMENSIONALITY; 
 			extern CDPL_CHEM_API const Base::LookupKey MDL_SCALING_FACTOR1;
 			extern CDPL_CHEM_API const Base::LookupKey MDL_SCALING_FACTOR2;

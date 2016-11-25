@@ -53,7 +53,7 @@ Base::DataWriter<Chem::Reaction>& Chem::SMARTSReactionWriter::write(const Reacti
 		throw Base::IOError("SMARTSReactionWriter: " + std::string(e.what()));
 	}
 
-	invokeIOCallbacks();
+	invokeIOCallbacks(1.0);
 
 	return *this;
 }

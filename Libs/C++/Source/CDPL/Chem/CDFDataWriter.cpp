@@ -258,6 +258,9 @@ void Chem::CDFDataWriter::outputMolGraphProperties(const MolecularGraph& molgrap
 	if (hasConformationIndex(molgraph))
 		putIntProperty(CDF::MolecularGraphProperty::CONFORMATION_INDEX, boost::numeric_cast<CDF::SizeType>(getConformationIndex(molgraph)), bbuf);
 
+	if (hasStructureData(molgraph))
+		putStructureData(molgraph, bbuf);
+
 	// CDF::MolecularGraphProperty::MATCH_CONSTRAINTS // TODO
 
 	outputExternalProperties(molgraph, bbuf);
@@ -328,6 +331,21 @@ void Chem::CDFDataWriter::putStereoDescriptor(const MolecularGraph& molgraph, un
 		bbuf.setIOPointer(old_io_pos);
 		bbuf.putInt(boost::numeric_cast<Base::uint8>(num_bytes), false);
 		bbuf.setIOPointer(new_io_pos);
+	}
+}
+
+void Chem::CDFDataWriter::putStructureData(const MolecularGraph& molgraph, Internal::ByteBuffer& bbuf) const
+{
+	const StringDataBlock::SharedPointer& sdata = getStructureData(molgraph);
+	std::size_t num_entries = sdata->getSize();
+
+	putIntProperty(CDF::MolecularGraphProperty::STRUCTURE_DATA, boost::numeric_cast<CDF::SizeType>(num_entries), bbuf);
+
+	for (StringDataBlock::ConstElementIterator it = sdata->getElementsBegin(), end = sdata->getElementsEnd(); it != end; ++it) {
+		const StringDataBlockEntry& entry = *it;
+
+		putString(entry.getHeader(), bbuf);
+		putString(entry.getData(), bbuf);
 	}
 }
 

@@ -32,6 +32,7 @@
 
 #include "CDPL/Vis/ColorTable.hpp"
 #include "CDPL/Vis/Pen.hpp"
+#include "CDPL/Pharm/ScreeningDBCreator.hpp"
 	
 
 namespace CDPL
@@ -219,6 +220,12 @@ namespace ChOx
 		extern const bool                                 PDB_INPUT_CHECK_LINE_LENGTH;
 
 		extern const bool                                 CDF_OUTPUT_WRITE_SINGLE_RECORD_FILES;
+		extern const bool                                 CDF_OUTPUT_WRITE_SINGLE_PRECISION_FLOATS;
+		
+		extern const bool                                  PSD_OUTPUT_WRITE_SINGLE_RECORD_FILES;
+		extern const bool                                  PSD_OUTPUT_WRITE_SINGLE_PRECISION_FLOATS;
+		extern const bool                                  PSD_OUTPUT_ALLOW_DUPLICATES;
+		extern const CDPL::Pharm::ScreeningDBCreator::Mode PSD_CREATION_MODE;
 
 		extern const bool                                 IMG_OUTPUT_ERASE_BACKGROUND;
 		extern const CDPL::Vis::Color                     IMG_OUTPUT_BACKGROUND_COLOR;

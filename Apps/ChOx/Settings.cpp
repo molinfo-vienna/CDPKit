@@ -35,6 +35,7 @@
 #include <QString>
 
 #include "CDPL/Chem/ControlParameter.hpp"
+#include "CDPL/Pharm/ControlParameter.hpp"
 #include "CDPL/Vis/ControlParameter.hpp"
 #include "CDPL/Vis/ControlParameterDefault.hpp"
 #include "CDPL/Vis/ControlParameterFunctions.hpp"
@@ -498,6 +499,32 @@ void Settings::load()
 
 	// ------
 
+	settings.beginGroup("Input/PSD");
+
+	SettingsContainer& psd_rparams = readerControlParams["psd"];
+
+	psd_rparams.setParent(this);
+
+	settings.endGroup();
+
+	// +++
+
+	settings.beginGroup("Output/PSD");
+
+	SettingsContainer& psd_wparams = writerControlParams["psd"];
+
+	psd_wparams.setParent(this);
+
+	readParameter<bool>(psd_wparams, settings, ControlParameter::WRITE_SINGLE_RECORD_FILES, ControlParameterDefault::PSD_OUTPUT_WRITE_SINGLE_RECORD_FILES);
+	readParameter<bool>(psd_wparams, settings, Chem::ControlParameter::CDF_WRITE_SINGLE_PRECISION_FLOATS, ControlParameterDefault::PSD_OUTPUT_WRITE_SINGLE_PRECISION_FLOATS);
+	readParameter<bool>(psd_wparams, settings, Pharm::ControlParameter::CDF_WRITE_SINGLE_PRECISION_FLOATS, ControlParameterDefault::PSD_OUTPUT_WRITE_SINGLE_PRECISION_FLOATS);
+	readParameter<bool>(psd_wparams, settings, Pharm::ControlParameter::PSD_ALLOW_DUPLICATES, ControlParameterDefault::PSD_OUTPUT_ALLOW_DUPLICATES);
+	readDBCreationModeParameter(psd_wparams, settings, Pharm::ControlParameter::PSD_CREATION_MODE, ControlParameterDefault::PSD_CREATION_MODE);
+
+	settings.endGroup();
+
+	// ------
+
 	settings.beginGroup("Input/PDB");
 
 	SettingsContainer& pdb_rparams = readerControlParams["pdb"];
@@ -528,6 +555,7 @@ void Settings::load()
 	cdf_wparams.setParent(this);
 
 	readParameter<bool>(cdf_wparams, settings, ControlParameter::WRITE_SINGLE_RECORD_FILES, ControlParameterDefault::CDF_OUTPUT_WRITE_SINGLE_RECORD_FILES);
+	readParameter<bool>(psd_wparams, settings, Chem::ControlParameter::CDF_WRITE_SINGLE_PRECISION_FLOATS, ControlParameterDefault::CDF_OUTPUT_WRITE_SINGLE_PRECISION_FLOATS);
 
 	settings.endGroup();
 
@@ -944,6 +972,27 @@ void Settings::save() const
 
 	// ------
 
+	settings.beginGroup("Input/PSD");
+
+	//const SettingsContainer& psd_rparams = getReaderControlParameters("psd");
+
+	settings.endGroup();
+
+	// +++
+
+	settings.beginGroup("Output/PSD");
+
+	const SettingsContainer& psd_wparams = getWriterControlParameters("psd");
+
+	writeParameter<bool>(psd_wparams, settings, ControlParameter::WRITE_SINGLE_RECORD_FILES);
+	writeParameter<bool>(psd_wparams, settings, Chem::ControlParameter::CDF_WRITE_SINGLE_PRECISION_FLOATS);
+	writeParameter<bool>(psd_wparams, settings, Pharm::ControlParameter::PSD_ALLOW_DUPLICATES);
+	writeDBCreationModeParameter(psd_wparams, settings, Pharm::ControlParameter::PSD_CREATION_MODE);
+
+	settings.endGroup();
+
+	// ------
+
 	settings.beginGroup("Input/CDF");
 
 	//const SettingsContainer& cdf_rparams = getReaderControlParameters("cdf");
@@ -957,6 +1006,7 @@ void Settings::save() const
 	const SettingsContainer& cdf_wparams = getWriterControlParameters("cdf");
 
 	writeParameter<bool>(cdf_wparams, settings, ControlParameter::WRITE_SINGLE_RECORD_FILES);
+	writeParameter<bool>(cdf_wparams, settings, Chem::ControlParameter::CDF_WRITE_SINGLE_PRECISION_FLOATS);
 
 	settings.endGroup();
 
@@ -1142,6 +1192,10 @@ void Settings::writeAtomColorTableParam(QSettings& settings) const
 	settings.setValue("ATOM_COLOR_TABLE/entries", atom_type_list);
 }
 
+void Settings::writeDBCreationModeParameter(const SettingsContainer&, QSettings& settings, const CDPL::Base::LookupKey& key) const
+{
+}
+
 template <typename T>
 void Settings::writeParameter(const SettingsContainer& params, QSettings& settings, 
 							  const CDPL::Base::LookupKey& key) const
@@ -1301,6 +1355,12 @@ void Settings::readAtomColorTableParam(QSettings& settings)
 	ChOx::setAtomColorTableParameter(*this, color_tab_ptr);
 }
 
+void Settings::readDBCreationModeParameter(SettingsContainer& params, QSettings& settings, 
+										   const CDPL::Base::LookupKey& key, 
+										   CDPL::Pharm::ScreeningDBCreator::Mode def_value) const
+{
+}
+
 template <typename T>
 void Settings::readParameter(SettingsContainer& params, QSettings& settings, 
 							 const CDPL::Base::LookupKey& key, const T& def_value)
@@ -1326,3 +1386,4 @@ void Settings::readParameter(SettingsContainer& params, QSettings& settings,
 		params.setParameter(key, def_value);
 	}
 }
+

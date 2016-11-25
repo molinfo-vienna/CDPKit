@@ -53,7 +53,7 @@ Base::DataWriter<Chem::MolecularGraph>& Chem::SMILESMolecularGraphWriter::write(
 		throw Base::IOError("SMILESMolecularGraphWriter: " + std::string(e.what()));
 	}
 
-	invokeIOCallbacks();
+	invokeIOCallbacks(1.0);
 
 	return *this;
 }

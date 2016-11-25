@@ -504,14 +504,18 @@ void CDPLPythonBase::exportIOStreams()
 	python::class_<std::istream, boost::noncopyable>("IStream", python::no_init);
 	python::class_<std::ostream, boost::noncopyable>("OStream", python::no_init);
 
-	python::class_<std::iostream, python::bases<std::istream, std::ostream>, boost::noncopyable>("IOStream", python::no_init)
-		.def(ObjectIdentityCheckVisitor<std::iostream>())
-		.def_readonly("IN", std::ios_base::in)
-		.def_readonly("OUT", std::ios_base::out)
-		.def_readonly("TRUNC", std::ios_base::trunc)
-		.def_readonly("APP", std::ios_base::app)
-		.def_readonly("ATE", std::ios_base::ate)
-		.def_readonly("BIN", std::ios_base::binary);
+	{
+		python::scope scope = python::class_<std::iostream, python::bases<std::istream, std::ostream>, boost::noncopyable>("IOStream", python::no_init);
+
+		python::enum_<std::ios_base::openmode>("OpenMode")
+			.value("IN", std::ios_base::in)
+			.value("OUT", std::ios_base::out)
+			.value("TRUNC", std::ios_base::trunc)
+			.value("APP", std::ios_base::app)
+			.value("ATE", std::ios_base::ate)
+			.value("BIN", std::ios_base::binary)
+			.export_values();
+	}
 
 	python::class_<FileIOStream, python::bases<std::iostream>, boost::noncopyable>("FileIOStream", python::no_init)
 		.def(python::init<const char*, const std::string&>((python::arg("self"), python::arg("file_name"), python::arg("mode") = "r")))

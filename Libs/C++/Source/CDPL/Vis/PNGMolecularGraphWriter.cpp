@@ -55,7 +55,7 @@ Base::DataWriter<Chem::MolecularGraph>& Vis::PNGMolecularGraphWriter::write(cons
 		state = (cairo_surface_status(surf.get()) == CAIRO_STATUS_SUCCESS); 
 	}
 
-	invokeIOCallbacks();
+	invokeIOCallbacks(1.0);
 
 	return *this;
 }

@@ -37,7 +37,6 @@
 #include "CDPL/Chem/AtomContainerFunctions.hpp"
 #include "CDPL/Chem/MolecularGraphFunctions.hpp"
 #include "CDPL/Chem/Entity3DContainerFunctions.hpp"
-#include "CDPL/Chem/MDLDataBlock.hpp"
 #include "CDPL/Math/VectorArrayFunctions.hpp"
 #include "CDPL/Base/DataWriter.hpp"
 
@@ -142,30 +141,30 @@ bool Pharm::FileScreeningHitCollector::operator()(const ScreeningProcessor::Sear
 	calcAtomStereoDescriptors(molecule, true, 3);
 	calcBondStereoDescriptors(molecule, true, 3);
 
-	Chem::MDLDataBlock::SharedPointer mdl_data;
+	Chem::StringDataBlock::SharedPointer mdl_data;
 
-	if (hasMDLStructureData(molecule)) 
-		mdl_data.reset(new Chem::MDLDataBlock(*getMDLStructureData(molecule)));
+	if (hasStructureData(molecule)) 
+		mdl_data.reset(new Chem::StringDataBlock(*getStructureData(molecule)));
 	else
-		mdl_data.reset(new Chem::MDLDataBlock());
+		mdl_data.reset(new Chem::StringDataBlock());
 
 	if (outputScore)
-		mdl_data->addElement(Chem::MDLDataBlockEntry(SCORE_PROPERTY_NAME, 
-													 boost::lexical_cast<std::string>(score)));
+		mdl_data->addElement(Chem::StringDataBlockEntry(SCORE_PROPERTY_NAME, 
+														boost::lexical_cast<std::string>(score)));
 
 	if (outputDBName)
-		mdl_data->addElement(Chem::MDLDataBlockEntry(DB_NAME_PROPERTY_NAME, 
-													 hit.getHitProvider().getDBAccessor().getDatabaseName()));
+		mdl_data->addElement(Chem::StringDataBlockEntry(DB_NAME_PROPERTY_NAME, 
+														hit.getHitProvider().getDBAccessor().getDatabaseName()));
 
 	if (outputMolIndex)
-		mdl_data->addElement(Chem::MDLDataBlockEntry(MOL_INDEX_PROPERTY_NAME, 
-													 boost::lexical_cast<std::string>(hit.getHitMoleculeIndex())));
+		mdl_data->addElement(Chem::StringDataBlockEntry(MOL_INDEX_PROPERTY_NAME, 
+														boost::lexical_cast<std::string>(hit.getHitMoleculeIndex())));
 
 	if (outputConfIndex)
-		mdl_data->addElement(Chem::MDLDataBlockEntry(CONF_INDEX_PROPERTY_NAME, 
-													 boost::lexical_cast<std::string>(hit.getHitConformationIndex())));
+		mdl_data->addElement(Chem::StringDataBlockEntry(CONF_INDEX_PROPERTY_NAME, 
+														boost::lexical_cast<std::string>(hit.getHitConformationIndex())));
 
-	setMDLStructureData(molecule, mdl_data);
+	setStructureData(molecule, mdl_data);
 
 	dataWriter->write(molecule);
 

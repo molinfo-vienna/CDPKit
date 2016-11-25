@@ -56,7 +56,7 @@ Base::DataWriter<Pharm::FeatureContainer>& Pharm::PMLFeatureContainerWriter::wri
 		throw Base::IOError("PMLFeatureContainerWriter: " + std::string(e.what()));
 	}
 
-	invokeIOCallbacks();
+	invokeIOCallbacks(1.0);
 
 	return *this;
 }

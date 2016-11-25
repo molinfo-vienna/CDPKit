@@ -55,7 +55,7 @@ BOOST_PYTHON_MODULE(_chem)
 	exportBondMapping();
 	exportAtomBondMapping();
 	exportFragmentList();
-	exportMDLDataBlock();
+	exportStringDataBlock();
 	exportMassComposition();
 	exportElementHistogram();
 	exportStereoDescriptor();

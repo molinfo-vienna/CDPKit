@@ -63,13 +63,14 @@ namespace CDPL
 			extern CDPL_CHEM_API const Base::LookupKey MATCH_CONSTRAINTS;
 			extern CDPL_CHEM_API const Base::LookupKey COMPONENT_GROUPS;
 			extern CDPL_CHEM_API const Base::LookupKey ATOM_MAPPING;
+
+			extern CDPL_CHEM_API const Base::LookupKey REACTION_DATA;
 		
 			extern CDPL_CHEM_API const Base::LookupKey MDL_USER_INITIALS;
 			extern CDPL_CHEM_API const Base::LookupKey MDL_PROGRAM_NAME;
 			extern CDPL_CHEM_API const Base::LookupKey MDL_TIMESTAMP;
 			extern CDPL_CHEM_API const Base::LookupKey MDL_REGISTRY_NUMBER;
 			extern CDPL_CHEM_API const Base::LookupKey MDL_COMMENT;
-			extern CDPL_CHEM_API const Base::LookupKey MDL_REACTION_DATA;
 			extern CDPL_CHEM_API const Base::LookupKey MDL_MOLECULE_RECORD;
 			extern CDPL_CHEM_API const Base::LookupKey MDL_INTERNAL_REGISTRY_NUMBER;
 			extern CDPL_CHEM_API const Base::LookupKey MDL_EXTERNAL_REGISTRY_NUMBER;

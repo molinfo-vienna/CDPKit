@@ -78,7 +78,7 @@ namespace
 				writerPointer->write(*mol_ptr);
 
 			} catch (const CDPL::Base::Exception& e) {
-				//std::cerr << " while writing: " << e.what() << std::endl;
+				std::cerr << " while writing: " << e.what() << std::endl;
 			}
 		}
 
@@ -109,7 +109,7 @@ namespace
 				writerPointer->write(*rxn_ptr);
 
 			} catch (const CDPL::Base::Exception& e) {
-				// std::cerr << " while writing: " << e.what() << std::endl;
+				 std::cerr << " while writing: " << e.what() << std::endl;
 			}
 		}
 

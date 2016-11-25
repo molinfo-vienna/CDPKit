@@ -45,5 +45,7 @@ void CDPLPythonPharm::exportDataFormats()
 	using namespace CDPL;
 
 	python::class_<DataFormat, boost::noncopyable>("DataFormat", python::no_init)
-		.def_readonly("CDF", &Pharm::DataFormat::CDF);
+		.def_readonly("CDF", &Pharm::DataFormat::CDF)
+		.def_readonly("PML", &Pharm::DataFormat::PML)
+		.def_readonly("PSD", &Pharm::DataFormat::PSD);
 }

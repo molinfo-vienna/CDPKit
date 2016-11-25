@@ -52,7 +52,7 @@
 #include "CDPL/Chem/AtomMapping.hpp"
 #include "CDPL/Chem/BondMapping.hpp"
 #include "CDPL/Chem/AtomBondMapping.hpp"
-#include "CDPL/Chem/MDLDataBlock.hpp"
+#include "CDPL/Chem/StringDataBlock.hpp"
 #include "CDPL/Chem/ElementHistogram.hpp"
 #include "CDPL/Chem/MassComposition.hpp"
 #include "CDPL/Chem/MatchConstraintList.hpp"

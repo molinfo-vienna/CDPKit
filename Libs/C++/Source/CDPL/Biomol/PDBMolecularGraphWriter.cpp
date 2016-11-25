@@ -53,7 +53,7 @@ Base::DataWriter<Chem::MolecularGraph>& Biomol::PDBMolecularGraphWriter::write(c
 		throw Base::IOError("PDBMolecularGraphWriter: " + std::string(e.what()));
 	}
 
-	invokeIOCallbacks();
+	invokeIOCallbacks(1.0);
 
 	return *this;
 }

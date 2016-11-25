@@ -133,7 +133,7 @@ ENDIF(WIN32)
 
 
 SET(Boost_USE_STATIC_LIBS OFF)
-FIND_PACKAGE(Boost 1.52.0 COMPONENTS date_time python unit_test_framework)
+FIND_PACKAGE(Boost 1.52.0 COMPONENTS date_time python unit_test_framework filesystem system iostreams)
 
 FIND_PACKAGE(Qt4)
 FIND_PACKAGE(Cairo)
@@ -144,6 +144,9 @@ FIND_PACKAGE(PythonLibs)
 SET(HAVE_QT ${QT4_FOUND})
 SET(HAVE_CAIRO ${CAIRO_FOUND})
 SET(HAVE_SQLITE3 ${SQLITE3_FOUND})
+SET(HAVE_BOOST_FILESYSTEM ${Boost_FILESYSTEM_FOUND})
+SET(HAVE_BOOST_SYSTEM ${Boost_SYSTEM_FOUND})
+SET(HAVE_BOOST_IOSTREAMS ${Boost_IOSTREAMS_FOUND})
 
 IF(NOT SQLITE3_FOUND)
   MESSAGE("!! Warning: SQLite3 library not found -> can't build pharmacophore screening components.")
@@ -152,6 +155,18 @@ ENDIF(NOT SQLITE3_FOUND)
 IF(NOT Boost_DATE_TIME_FOUND)
   MESSAGE(FATAL_ERROR "Boost date_time library not found.")
 ENDIF(NOT Boost_DATE_TIME_FOUND)
+
+IF(NOT Boost_FILESYSTEM_FOUND)
+  MESSAGE("!! Warning: Boost filesystem library not found -> dependent components won't be built.")
+ENDIF(NOT Boost_FILESYSTEM_FOUND)
+
+IF(NOT Boost_SYSTEM_FOUND)
+  MESSAGE("!! Warning: Boost system library not found -> dependent components won't be built.")
+ENDIF(NOT Boost_SYSTEM_FOUND)
+
+IF(NOT Boost_IOSTREAMS_FOUND)
+  MESSAGE("!! Warning: Boost iostreams library not found -> dependent components won't be built.")
+ENDIF(NOT Boost_IOSTREAMS_FOUND)
 
 IF(NOT Boost_UNIT_TEST_FRAMEWORK_FOUND)
   MESSAGE("!! Warning: Boost unit_test_framework not found -> can't build and run C++ unit test cases.")

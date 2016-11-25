@@ -16,7 +16,7 @@ SET(test-suite_SRCS
     FragmentTest.cpp
     AtomBondMappingTest.cpp
     #DataFormatsTest.cpp
-    MDLDataBlockTest.cpp
+    StringDataBlockTest.cpp
     AtomDictionaryTest.cpp
 
     #IsHydrogenTest.cpp

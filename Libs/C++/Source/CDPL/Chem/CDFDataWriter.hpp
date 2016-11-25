@@ -93,6 +93,8 @@ namespace CDPL
 			void putStereoDescriptor(const MolecularGraph& molgraph, 
 									 unsigned int prop_id, const StereoDescriptor& descr, Internal::ByteBuffer& bbuf) const;
 
+			void putStructureData(const MolecularGraph& molgraph, Internal::ByteBuffer& bbuf) const;
+
 			bool writeRecordData(std::ostream& os);
 
 			typedef std::vector<AtomPropertyHandler> AtomPropertyHandlerList;

@@ -51,7 +51,7 @@ Base::DataWriter<Chem::Reaction>& Vis::PSReactionWriter::write(const Chem::React
 
 	state = surf.get();
 
-	invokeIOCallbacks();
+	invokeIOCallbacks(1.0);
 
 	return *this;
 }

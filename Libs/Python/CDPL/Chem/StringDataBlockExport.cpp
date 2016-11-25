@@ -1,7 +1,7 @@
 /* -*- mode: c++; c-basic-offset: 4; tab-width: 4; indent-tabs-mode: t -*- */
 
 /* 
- * MDLDataBlockExport.cpp 
+ * StringDataBlockExport.cpp 
  *
  * This file is part of the Chemical Data Processing Toolkit
  *
@@ -26,46 +26,46 @@
 
 #include <boost/python.hpp>
 
-#include "CDPL/Chem/MDLDataBlock.hpp"
+#include "CDPL/Chem/StringDataBlock.hpp"
 
 #include "Util/ArrayVisitor.hpp"
 
 #include "ClassExports.hpp"
 
 
-void CDPLPythonChem::exportMDLDataBlock()
+void CDPLPythonChem::exportStringDataBlock()
 {
 	using namespace boost;
 	using namespace CDPL;
 
-	python::class_<Chem::MDLDataBlockEntry>("MDLDataBlockEntry", python::no_init)
+	python::class_<Chem::StringDataBlockEntry>("StringDataBlockEntry", python::no_init)
 		.def(python::init<>(python::arg("self")))
-		.def(python::init<const Chem::MDLDataBlockEntry&>((python::arg("self"), python::arg("entry"))))
+		.def(python::init<const Chem::StringDataBlockEntry&>((python::arg("self"), python::arg("entry"))))
 		.def(python::init<const std::string&, const std::string&>((python::arg("self"), python::arg("header"),
 																   python::arg("data"))))
-		.def("assign", &Chem::MDLDataBlockEntry::operator=, (python::arg("self"), python::arg("entry")),
+		.def("assign", &Chem::StringDataBlockEntry::operator=, (python::arg("self"), python::arg("entry")),
 			 python::return_self<>())
-		.def("getHeader", &Chem::MDLDataBlockEntry::getHeader, python::arg("self"),  
+		.def("getHeader", &Chem::StringDataBlockEntry::getHeader, python::arg("self"),  
 			 python::return_value_policy<python::copy_const_reference>())
-		.def("setHeader", &Chem::MDLDataBlockEntry::setHeader, (python::arg("self"), python::arg("header")))
-		.def("getData", &Chem::MDLDataBlockEntry::getData, python::arg("self"), 
+		.def("setHeader", &Chem::StringDataBlockEntry::setHeader, (python::arg("self"), python::arg("header")))
+		.def("getData", &Chem::StringDataBlockEntry::getData, python::arg("self"), 
 			 python::return_value_policy<python::copy_const_reference>())
-		.def("setData", &Chem::MDLDataBlockEntry::setData, (python::arg("self"), python::arg("data")))
-		.def("__eq__", &Chem::MDLDataBlockEntry::operator==, (python::arg("self"), python::arg("entry")))
-		.def("__ne__", &Chem::MDLDataBlockEntry::operator!=, (python::arg("self"), python::arg("entry")))
-		.add_property("header", python::make_function(&Chem::MDLDataBlockEntry::getHeader, 
+		.def("setData", &Chem::StringDataBlockEntry::setData, (python::arg("self"), python::arg("data")))
+		.def("__eq__", &Chem::StringDataBlockEntry::operator==, (python::arg("self"), python::arg("entry")))
+		.def("__ne__", &Chem::StringDataBlockEntry::operator!=, (python::arg("self"), python::arg("entry")))
+		.add_property("header", python::make_function(&Chem::StringDataBlockEntry::getHeader, 
 													  python::return_value_policy<python::copy_const_reference>()),
-					  &Chem::MDLDataBlockEntry::setHeader)
-		.add_property("data", python::make_function(&Chem::MDLDataBlockEntry::getData, 
+					  &Chem::StringDataBlockEntry::setHeader)
+		.add_property("data", python::make_function(&Chem::StringDataBlockEntry::getData, 
 													  python::return_value_policy<python::copy_const_reference>()),
-					  &Chem::MDLDataBlockEntry::setData);
+					  &Chem::StringDataBlockEntry::setData);
 
-	python::class_<Chem::MDLDataBlock, Chem::MDLDataBlock::SharedPointer>("MDLDataBlock", python::no_init)
+	python::class_<Chem::StringDataBlock, Chem::StringDataBlock::SharedPointer>("StringDataBlock", python::no_init)
 		.def(python::init<>(python::arg("self")))
-		.def(python::init<const Chem::MDLDataBlock&>((python::arg("self"), python::arg("data_block"))))
-		.def(CDPLPythonUtil::ArrayVisitor<Chem::MDLDataBlock, 
+		.def(python::init<const Chem::StringDataBlock&>((python::arg("self"), python::arg("data_block"))))
+		.def(CDPLPythonUtil::ArrayVisitor<Chem::StringDataBlock, 
 			 python::return_internal_reference<>, python::default_call_policies,
 			 python::default_call_policies, python::default_call_policies>())
-		.def("__eq__", &Chem::MDLDataBlock::operator==, (python::arg("self"), python::arg("data_block")))
-		.def("__ne__", &Chem::MDLDataBlock::operator!=, (python::arg("self"), python::arg("data_block")));
+		.def("__eq__", &Chem::StringDataBlock::operator==, (python::arg("self"), python::arg("data_block")))
+		.def("__ne__", &Chem::StringDataBlock::operator!=, (python::arg("self"), python::arg("data_block")));
 }

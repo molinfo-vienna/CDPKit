@@ -62,6 +62,8 @@ namespace
 
 	MAKE_CONTROL_PARAM_FUNC_WRAPPERS(bool, StrictErrorChecking)
 	MAKE_CONTROL_PARAM_FUNC_WRAPPERS(bool, CDFWriteSinglePrecisionFloats)
+	MAKE_CONTROL_PARAM_FUNC_WRAPPERS(CDPL::Pharm::ScreeningDBCreator::Mode, PSDCreationMode)
+	MAKE_CONTROL_PARAM_FUNC_WRAPPERS(bool, PSDAllowDuplicates)
 }
 
 
@@ -72,4 +74,6 @@ void CDPLPythonPharm::exportControlParameterFunctions()
 
 	EXPORT_CONTROL_PARAM_FUNCS(StrictErrorChecking, strict)
 	EXPORT_CONTROL_PARAM_FUNCS(CDFWriteSinglePrecisionFloats, single_prec)
+	EXPORT_CONTROL_PARAM_FUNCS(PSDCreationMode, mode)
+	EXPORT_CONTROL_PARAM_FUNCS(PSDAllowDuplicates, allow)
 }
