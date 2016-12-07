@@ -107,7 +107,7 @@ void Chem::CDFDataWriter::outputMolGraphHeader(const MolecularGraph& molgraph, I
 {
 	CDF::Header cdf_header;
 
-	cdf_header.recordDataLength = boost::numeric_cast<CDF::SizeType>(bbuf.getSize() - CDF::HEADER_SIZE);
+	cdf_header.recordDataLength = boost::numeric_cast<Base::uint64>(bbuf.getSize() - CDF::HEADER_SIZE);
 	cdf_header.recordTypeID = CDF::MOLECULE_RECORD_ID;
 	cdf_header.recordFormatVersion = CDF::CURR_FORMAT_VERSION;
 

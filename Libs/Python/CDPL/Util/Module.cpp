@@ -38,6 +38,12 @@ BOOST_PYTHON_MODULE(_util)
 	exportArrays();
 	exportBronKerboschAlgorithm();
 
+#if defined(HAVE_BOOST_SYSTEM) && defined(HAVE_BOOST_FILESYSTEM) && defined(HAVE_BOOST_IOSTREAMS)
+
+	exportCompressionStreams();
+
+#endif // defined(HAVE_BOOST_SYSTEM) && defined(HAVE_BOOST_FILESYSTEM) && defined(HAVE_BOOST_IOSTREAMS)
+
 	registerToPythonConverters();
 	registerFromPythonConverters();
 }

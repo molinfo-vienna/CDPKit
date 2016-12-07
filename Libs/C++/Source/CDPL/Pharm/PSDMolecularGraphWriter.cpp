@@ -40,7 +40,7 @@ using namespace CDPL;
 
 
 Pharm::PSDMolecularGraphWriter::PSDMolecularGraphWriter(std::iostream& ios): 
-	output(&ios), outputPos(ios.tellg()), dbOpen(false), state(true)
+	output(&ios), outputPos(ios.tellp()), dbOpen(false), state(true)
 {
 	try {
 		boost::filesystem::path tmp_file = boost::filesystem::temp_directory_path() / boost::filesystem::unique_path();
@@ -56,6 +56,7 @@ Pharm::PSDMolecularGraphWriter::PSDMolecularGraphWriter(std::iostream& ios):
 			throw Base::IOError("copying input data failed");
 
 	} catch (const std::exception& e) {
+		removeTmpFile();
 		throw Base::IOError(std::string("PSDMolecularGraphWriter: could not create temporary database file: ") + e.what());
 	}
 }
@@ -67,11 +68,7 @@ Pharm::PSDMolecularGraphWriter::PSDMolecularGraphWriter(const std::string& file_
 Pharm::PSDMolecularGraphWriter::~PSDMolecularGraphWriter() 
 {
 	try { close(); } catch (...) {}
-
-	if (!tmpFile.empty()) {
-		boost::system::error_code ec;
-		boost::filesystem::remove(tmpFile, ec);
-	}
+	removeTmpFile();
 }
 
 Pharm::PSDMolecularGraphWriter& Pharm::PSDMolecularGraphWriter::write(const Chem::MolecularGraph& molgraph)
@@ -138,4 +135,12 @@ Pharm::PSDMolecularGraphWriter::operator const void*() const
 bool Pharm::PSDMolecularGraphWriter::operator!() const
 {
     return !state;
+}
+
+void Pharm::PSDMolecularGraphWriter::removeTmpFile()
+{
+	try {
+		if (!tmpFile.empty())
+			boost::filesystem::remove(tmpFile);
+	} catch (...) {}
 }

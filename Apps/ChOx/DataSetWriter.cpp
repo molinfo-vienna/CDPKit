@@ -78,7 +78,7 @@ namespace
 				writerPointer->write(*mol_ptr);
 
 			} catch (const CDPL::Base::Exception& e) {
-				std::cerr << " while writing: " << e.what() << std::endl;
+				std::cerr << "Error while writing: " << e.what() << std::endl;
 			}
 		}
 
@@ -152,7 +152,7 @@ void DataSetWriter::writeRecords(const std::string& def_format)
 	using namespace Vis;
 
 	QFileInfo file_info(fileName);
-	QString file_ext = file_info.suffix();
+	QString file_ext = file_info.completeSuffix();
 	QString base_name;
 
 	const DataOutputHandler<T>* handler = 0;
@@ -183,7 +183,7 @@ void DataSetWriter::writeRecords(const std::string& def_format)
 		base_name = file_info.absolutePath() + QDir::separator() + file_info.baseName();	
 
 	const DataFormat& fmt_descr = handler->getDataFormat();
-	const SettingsContainer& params = settings.getWriterControlParameters(QString::fromStdString(fmt_descr.getName()));
+	const SettingsContainer& params = settings.getWriterControlParameters(fmt_descr.getName());
 	bool single_rec_files = getWriteSingleRecordFilesParameter(params) || !fmt_descr.isMultiRecordFormat();
 
 	QProgressDialog progress_dlg(tr("Please wait ..."), tr("Abort"), 0, 100, parent);
@@ -200,16 +200,10 @@ void DataSetWriter::writeRecords(const std::string& def_format)
 
 		if (!single_rec_files) {
 			QString fileName = base_name + "." + file_ext;
-			std::fstream ofs(fileName.toStdString().c_str(), std::ios_base::binary | std::ios_base::out | std::ios_base::trunc);
-
-			if (!ofs) {
-				emit errorMessage(tr("Error while opening file '%1'!").arg(QFileInfo(fileName).fileName()));
-				return;
-			}
-
+		
 			emit statusMessage(tr("Writing data to file '%1', please wait ...").arg(QFileInfo(fileName).fileName()));
 
-			typename RecordWriter<T>::WriterPointer writer_ptr(handler->createWriter(ofs));
+			typename RecordWriter<T>::WriterPointer writer_ptr(handler->createWriter(fileName.toStdString()));
 
 			RecordWriter<T> record_writer(writer_ptr, handler->getDataFormat());
 
@@ -255,14 +249,8 @@ void DataSetWriter::writeRecords(const std::string& def_format)
 					continue;
 
 				QString fileName = QString("%1_%2.%3").arg(base_name).arg(i + 1).arg(file_ext);
-				std::fstream ofs(fileName.toStdString().c_str(), std::ios_base::binary | std::ios_base::out | std::ios_base::trunc);
-
-				if (!ofs) {
-					emit errorMessage(tr("Error while opening file '%1'!").arg(QFileInfo(fileName).fileName()));
-					return;
-				}
-
-				typename RecordWriter<T>::WriterPointer writer_ptr(handler->createWriter(ofs));
+		
+				typename RecordWriter<T>::WriterPointer writer_ptr(handler->createWriter(fileName.toStdString()));
 				RecordWriter<T> record_writer(writer_ptr, handler->getDataFormat());
 
 				writer_ptr->setParent(&params);
@@ -291,15 +279,9 @@ void DataSetWriter::writeRecords(const std::string& def_format)
 
 		if (!single_rec_files) {
 			QString fileName = base_name + "." + file_ext;
-			std::fstream ofs(fileName.toStdString().c_str(), std::ios_base::binary | std::ios_base::out | std::ios_base::trunc);
-
-			if (!ofs) {
-				emit errorMessage(tr("Error while opening file '%1'!").arg(QFileInfo(fileName).fileName()));
-				return;
-			}
 
 			emit statusMessage(tr("Writing data to file '%1', please wait ...").arg(QFileInfo(fileName).fileName()));
-			typename RecordWriter<T>::WriterPointer writer_ptr(handler->createWriter(ofs));
+			typename RecordWriter<T>::WriterPointer writer_ptr(handler->createWriter(fileName.toStdString()));
 
 			RecordWriter<T> record_writer(writer_ptr, handler->getDataFormat());
 			
@@ -338,14 +320,8 @@ void DataSetWriter::writeRecords(const std::string& def_format)
 				}
 
 				QString fileName = QString("%1_%2.%3").arg(base_name).arg(i + 1).arg(file_ext);
-				std::fstream ofs(fileName.toStdString().c_str(), std::ios_base::binary | std::ios_base::out | std::ios_base::trunc);
-
-				if (!ofs) {
-					emit errorMessage(tr("Error while opening file '%1'!").arg(QFileInfo(fileName).fileName()));
-					return;
-				}
-
-				typename RecordWriter<T>::WriterPointer writer_ptr(handler->createWriter(ofs));
+		
+				typename RecordWriter<T>::WriterPointer writer_ptr(handler->createWriter(fileName.toStdString()));
 
 				RecordWriter<T> record_writer(writer_ptr, handler->getDataFormat());
 

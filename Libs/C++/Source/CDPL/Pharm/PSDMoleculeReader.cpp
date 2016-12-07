@@ -54,6 +54,7 @@ Pharm::PSDMoleculeReader::PSDMoleculeReader(std::istream& is):
 			throw Base::IOError("copying input data failed");
 
 	} catch (const std::exception& e) {
+		removeTmpFile();
 		throw Base::IOError(std::string("PSDMoleculeReader: could not create temporary database file: ") + e.what());
 	}
 
@@ -64,6 +65,7 @@ Pharm::PSDMoleculeReader::PSDMoleculeReader(std::istream& is):
 		state = true;
 
 	} catch (const std::exception& e) {
+		removeTmpFile();
 		throw Base::IOError(std::string("PSDMoleculeReader: could not open database: ") + e.what());
 	}
 }
@@ -84,12 +86,8 @@ Pharm::PSDMoleculeReader::PSDMoleculeReader(const std::string& file_name):
 
 Pharm::PSDMoleculeReader::~PSDMoleculeReader() 
 {
-	if (!tmpFile.empty()) {
-		try { accessor.close(); } catch (...) {}
-
-		boost::system::error_code ec;
-		boost::filesystem::remove(tmpFile, ec);
-	}
+	try { accessor.close(); } catch (...) {}
+	removeTmpFile();
 }
 
 Pharm::PSDMoleculeReader& Pharm::PSDMoleculeReader::read(Chem::Molecule& mol)
@@ -168,4 +166,12 @@ Pharm::PSDMoleculeReader::operator const void*() const
 bool Pharm::PSDMoleculeReader::operator!() const
 {
     return !state;
+}
+
+void Pharm::PSDMoleculeReader::removeTmpFile()
+{
+	try {
+		if (!tmpFile.empty())
+			boost::filesystem::remove(tmpFile);
+	} catch (...) {}
 }

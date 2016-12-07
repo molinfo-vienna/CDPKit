@@ -96,6 +96,8 @@ namespace CDPL
 			bool operator!() const;
 
 		  private:
+			void removeTmpFile();
+
 			PSDScreeningDBAccessor accessor;
 			std::string            tmpFile;
 			std::size_t            recordIndex;

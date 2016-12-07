@@ -28,6 +28,7 @@
 #define CHOX_SETTINGS_HPP
 
 #include <map>
+#include <string>
 
 #include <QObject>
 
@@ -52,11 +53,11 @@ namespace ChOx
 	public:
 		Settings(QObject* parent = 0);
 
-		const SettingsContainer& getReaderControlParameters(const QString&) const;
-		const SettingsContainer& getWriterControlParameters(const QString&) const;
+		const SettingsContainer& getReaderControlParameters(const std::string&) const;
+		const SettingsContainer& getWriterControlParameters(const std::string&) const;
 
-		SettingsContainer& getReaderControlParameters(const QString&);
-		SettingsContainer& getWriterControlParameters(const QString&);
+		SettingsContainer& getReaderControlParameters(const std::string&);
+		SettingsContainer& getWriterControlParameters(const std::string&);
 
 	public slots:
 		void load();
@@ -92,7 +93,7 @@ namespace ChOx
 
 		void parameterChanged(const CDPL::Base::LookupKey&, const CDPL::Base::Variant&);
 
-		typedef std::map<QString, SettingsContainer> IOControlParamMap;
+		typedef std::map<std::string, SettingsContainer> IOControlParamMap;
 
 		IOControlParamMap readerControlParams;
 		IOControlParamMap writerControlParams;

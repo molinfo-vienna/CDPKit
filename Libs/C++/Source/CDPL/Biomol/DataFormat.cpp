@@ -26,6 +26,7 @@
 
 #include "StaticInit.hpp"
 
+#include "CDPL/Config.hpp"
 #include "CDPL/Base/DataIOManager.hpp"
 #include "CDPL/Base/DataFormat.hpp"
 #include "CDPL/Biomol/DataFormat.hpp"
@@ -34,11 +35,22 @@
 #include "CDPL/Biomol/CDFDataReader.hpp"
 #include "CDPL/Biomol/CDFDataWriter.hpp"
 
+#if defined(HAVE_BOOST_SYSTEM) && defined(HAVE_BOOST_FILESYSTEM) && defined(HAVE_BOOST_IOSTREAMS)
+
+#include "CDPL/Biomol/PDBGZMoleculeInputHandler.hpp"
+#include "CDPL/Biomol/PDBGZMolecularGraphOutputHandler.hpp"
+#include "CDPL/Biomol/PDBBZ2MoleculeInputHandler.hpp"
+#include "CDPL/Biomol/PDBBZ2MolecularGraphOutputHandler.hpp"
+
+#endif // defined(HAVE_BOOST_SYSTEM) && defined(HAVE_BOOST_FILESYSTEM) && defined(HAVE_BOOST_IOSTREAMS)
+
 
 namespace
 {
 
 	const char* pdbFileExtensions[]    = { "pdb", "ent" };
+	const char* pdbgzFileExtensions[]  = { "pdb.gz", "ent.gz" };
+	const char* pdbbz2FileExtensions[] = { "pdb.bz2", "ent.bz2" };
 }
 
 
@@ -47,6 +59,10 @@ using namespace CDPL;
 		
 const Base::DataFormat Biomol::DataFormat::PDB("PDB", "Brookhaven Protein Data Bank Entry", "chemical/x-pdb", 
 											   pdbFileExtensions, pdbFileExtensions + 2, false);
+const Base::DataFormat Biomol::DataFormat::PDB_GZ("PDB_GZ", "GZip-Compressed Brookhaven Protein Data Bank Entry", "chemical/x-pdb", 
+											   pdbgzFileExtensions, pdbgzFileExtensions + 2, false);
+const Base::DataFormat Biomol::DataFormat::PDB_BZ2("PDB_BZ2", "BZip2-Compressed Brookhaven Protein Data Bank Entry", "chemical/x-pdb", 
+											   pdbbz2FileExtensions, pdbbz2FileExtensions + 2, false);
 
 
 namespace CDPL
@@ -79,6 +95,22 @@ namespace
 
 			Biomol::CDFDataReader::registerExternalPropertyHandlers();
 			Biomol::CDFDataWriter::registerExternalPropertyHandlers();
+
+#if defined(HAVE_BOOST_SYSTEM) && defined(HAVE_BOOST_FILESYSTEM) && defined(HAVE_BOOST_IOSTREAMS)
+
+			static const PDBGZMoleculeInputHandler           pdbgzMolInputHandler;
+			static const PDBBZ2MoleculeInputHandler          pdbbz2MolInputHandler;
+
+			static const PDBGZMolecularGraphOutputHandler    pdbgzMolGraphOutputHandler;
+			static const PDBBZ2MolecularGraphOutputHandler   pdbbz2MolGraphOutputHandler;
+
+			DataIOManager<Molecule>::registerInputHandler(pdbgzMolInputHandler);
+			DataIOManager<Molecule>::registerInputHandler(pdbbz2MolInputHandler);
+
+			DataIOManager<MolecularGraph>::registerOutputHandler(pdbgzMolGraphOutputHandler);
+			DataIOManager<MolecularGraph>::registerOutputHandler(pdbbz2MolGraphOutputHandler);
+
+#endif // defined(HAVE_BOOST_SYSTEM) && defined(HAVE_BOOST_FILESYSTEM) && defined(HAVE_BOOST_IOSTREAMS)
 		}
 
 	} init;

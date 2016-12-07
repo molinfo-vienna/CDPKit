@@ -84,7 +84,6 @@ BOOST_AUTO_TEST_CASE(StreamDataReaderTest)
 	using namespace Util;
 
 	std::string record;
-
 	std::istringstream is1("Record#1 Record#2 \nRecord#3 Record#4   ");
 
 	TestStringReader reader1(is1);

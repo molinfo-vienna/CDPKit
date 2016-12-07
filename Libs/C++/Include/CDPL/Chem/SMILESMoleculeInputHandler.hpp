@@ -48,7 +48,7 @@ namespace CDPL
 		 */
 
 		/**
-		 * \brief A handler for the input of molecule data in <em>Daylight SMILES</em> [\ref SMILES] format.
+		 * \brief A handler for the input of molecule data in the <em>Daylight SMILES</em> [\ref SMILES] format.
 		 */
 		typedef Util::DefaultDataInputHandler<SMILESMoleculeReader, DataFormat::SMILES> SMILESMoleculeInputHandler;
 

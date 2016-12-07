@@ -63,6 +63,16 @@ namespace CDPL
 			extern CDPL_PHARM_API const Base::DataFormat CDF;
 
 			/**
+			 * \brief Provides meta-information about the gzip-compressed native pharmacophore <em>CDPL</em> format.
+			 */
+			extern CDPL_PHARM_API const Base::DataFormat CDF_GZ;
+
+			/**
+			 * \brief Provides meta-information about the bzip2-compressed native pharmacophore <em>CDPL</em> format.
+			 */
+			extern CDPL_PHARM_API const Base::DataFormat CDF_BZ2;
+
+			/**
 			 * \brief Provides meta-information about the native pharmacophore <em>LigandScout</em> format.
 			 */
 			extern CDPL_PHARM_API const Base::DataFormat PML;

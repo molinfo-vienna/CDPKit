@@ -180,21 +180,26 @@ bool DataSetReader::appendRecords(bool use_file_ext)
 
 	if (use_file_ext) {
 		const DataInputHandler<T>* handler =
-			DataIOManager<T>::getInputHandlerByFileExtension(file_info.suffix().toStdString().c_str());
+			DataIOManager<T>::getInputHandlerByFileExtension(file_info.completeSuffix().toStdString().c_str());
 
-		if (!handler)
-			return false;
+		if (!handler) {
+			handler =
+				DataIOManager<T>::getInputHandlerByFileExtension(file_info.suffix().toStdString().c_str());
+
+			if (!handler)
+				return false;
+		}
 
 		try {
 			ImplT data;
 
 			reader_ptr = handler->createReader(fileName.toStdString().c_str(), std::ios_base::binary | std::ios_base::in);
 
-			reader_ptr->setParent(&settings.getReaderControlParameters(QString::fromStdString(handler->getDataFormat().getName())));
+			reader_ptr->setParent(&settings.getReaderControlParameters(handler->getDataFormat().getName()));
 			reader_ptr->read(data);
 
 		} catch (const Exception& e) {
-			std::cerr << "Reader  (using file ext.): " << e.what() << std::endl;
+			std::cerr << "Reader (using file ext.): " << e.what() << std::endl;
 			return false;
 		}
 
@@ -211,13 +216,13 @@ bool DataSetReader::appendRecords(bool use_file_ext)
 
 				reader_ptr = h_it->createReader(fileName.toStdString().c_str(), std::ios_base::binary | std::ios_base::in);
 
-				reader_ptr->setParent(&settings.getReaderControlParameters(QString::fromStdString(h_it->getDataFormat().getName())));
+				reader_ptr->setParent(&settings.getReaderControlParameters(h_it->getDataFormat().getName()));
 				reader_ptr->read(data);
 
 				found_reader = true;
 
 			} catch (const Exception& e) {
-				std::cerr << "Reader : " << e.what() << std::endl;
+				std::cerr << "Reader: " << e.what() << std::endl;
 			}
 		}
 

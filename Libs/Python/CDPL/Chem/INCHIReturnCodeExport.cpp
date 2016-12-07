@@ -45,7 +45,7 @@ void CDPLPythonChem::exportINCHIReturnCodes()
 
 	python::class_<INCHIReturnCode, boost::noncopyable>("INCHIReturnCode", python::no_init)
 		.def_readonly("SKIP", &Chem::INCHIReturnCode::SKIP)
-		.def_readonly("EOF", &Chem::INCHIReturnCode::EOF)
+		.def_readonly("EOF_", &Chem::INCHIReturnCode::EOF_)
 		.def_readonly("OKAY", &Chem::INCHIReturnCode::OKAY)
 		.def_readonly("WARNING", &Chem::INCHIReturnCode::WARNING)
 		.def_readonly("ERROR", &Chem::INCHIReturnCode::ERROR)

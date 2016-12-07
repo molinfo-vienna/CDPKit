@@ -35,19 +35,29 @@
 #include "CDPL/Pharm/PMLPharmacophoreInputHandler.hpp"
 #include "CDPL/Pharm/PMLFeatureContainerOutputHandler.hpp"
 
-#if defined(HAVE_SQLITE3) && defined(HAVE_BOOST_SYSTEM) && defined(HAVE_BOOST_FILESYSTEM) && defined(HAVE_BOOST_IOSTREAMS)
+#if defined(HAVE_BOOST_SYSTEM) && defined(HAVE_BOOST_FILESYSTEM) && defined(HAVE_BOOST_IOSTREAMS)
+#ifdef HAVE_SQLITE3
 
 #include "CDPL/Pharm/PSDPharmacophoreInputHandler.hpp"
 #include "CDPL/Pharm/PSDMoleculeInputHandler.hpp"
 #include "CDPL/Pharm/PSDMolecularGraphOutputHandler.hpp"
 
-#endif // defined(HAVE_SQLITE3) && defined(HAVE_BOOST_SYSTEM) && defined(HAVE_BOOST_FILESYSTEM) && defined(HAVE_BOOST_IOSTREAMS)
+#endif // HAVE_SQLITE3
+
+#include "CDPL/Pharm/CDFGZPharmacophoreInputHandler.hpp"
+#include "CDPL/Pharm/CDFGZFeatureContainerOutputHandler.hpp"
+#include "CDPL/Pharm/CDFBZ2PharmacophoreInputHandler.hpp"
+#include "CDPL/Pharm/CDFBZ2FeatureContainerOutputHandler.hpp"
+
+#endif // defined(HAVE_BOOST_SYSTEM) && defined(HAVE_BOOST_FILESYSTEM) && defined(HAVE_BOOST_IOSTREAMS)
 
 
 namespace
 {
 
 	const char* cdfFileExtensions[]    = { "cdf" };
+	const char* cdfgzFileExtensions[]  = { "cdf.gz" };
+	const char* cdfbz2FileExtensions[] = { "cdf.bz2" };
 	const char* pmlFileExtensions[]    = { "pml" };
 	const char* psdFileExtensions[]    = { "psd" };
 }
@@ -58,6 +68,10 @@ using namespace CDPL;
 
 const Base::DataFormat Pharm::DataFormat::CDF("CDF", "Native CDPL-Format", "", 
 											  cdfFileExtensions, cdfFileExtensions + 1, true);
+const Base::DataFormat Pharm::DataFormat::CDF_GZ("CDF_GZ", "GZip-Compressed Native CDPL-Format", "", 
+											  cdfgzFileExtensions, cdfgzFileExtensions + 1, true);
+const Base::DataFormat Pharm::DataFormat::CDF_BZ2("CDF_BZ2", "BZip2-Compressed Native CDPL-Format", "", 
+											  cdfbz2FileExtensions, cdfbz2FileExtensions + 1, true);
 const Base::DataFormat Pharm::DataFormat::PML("PML", "LigandScout Pharmaceutical Markup Language", "", 
 											  pmlFileExtensions, pmlFileExtensions + 1, true);
 const Base::DataFormat Pharm::DataFormat::PSD("PSD", "Pharmacophore Screening Database", "", 
@@ -97,7 +111,8 @@ namespace
 			DataIOManager<FeatureContainer>::registerOutputHandler(cdfFtrContOutputHandler);
 			DataIOManager<FeatureContainer>::registerOutputHandler(pmlFtrContOutputHandler);
 
-#if defined(HAVE_SQLITE3) && defined(HAVE_BOOST_SYSTEM) && defined(HAVE_BOOST_FILESYSTEM) && defined(HAVE_BOOST_IOSTREAMS)HAVE_SQLITE3
+#if defined(HAVE_BOOST_SYSTEM) && defined(HAVE_BOOST_FILESYSTEM) && defined(HAVE_BOOST_IOSTREAMS)
+#ifdef HAVE_SQLITE3
 
 			static const PSDPharmacophoreInputHandler     psdPharmInputHandler;
 			static const PSDMoleculeInputHandler          psdMolInputHandler;
@@ -107,7 +122,21 @@ namespace
 			DataIOManager<Molecule>::registerInputHandler(psdMolInputHandler);
 			DataIOManager<MolecularGraph>::registerOutputHandler(psdMolGraphOutputHandler);
 
-#endif // defined(HAVE_SQLITE3) && defined(HAVE_BOOST_SYSTEM) && defined(HAVE_BOOST_FILESYSTEM) && defined(HAVE_BOOST_IOSTREAMS)
+#endif // HAVE_SQLITE3
+
+			static const CDFGZPharmacophoreInputHandler   cdfgzPharmInputHandler;
+			static const CDFBZ2PharmacophoreInputHandler  cdfbz2PharmInputHandler;
+
+			static const CDFGZFeatureContainerOutputHandler  cdfgzFtrContOutputHandler;
+			static const CDFBZ2FeatureContainerOutputHandler cdfbz2FtrContOutputHandler;
+
+			DataIOManager<Pharmacophore>::registerInputHandler(cdfgzPharmInputHandler);
+			DataIOManager<Pharmacophore>::registerInputHandler(cdfbz2PharmInputHandler);
+
+			DataIOManager<FeatureContainer>::registerOutputHandler(cdfgzFtrContOutputHandler);
+			DataIOManager<FeatureContainer>::registerOutputHandler(cdfbz2FtrContOutputHandler);
+
+#endif // defined(HAVE_BOOST_SYSTEM) && defined(HAVE_BOOST_FILESYSTEM) && defined(HAVE_BOOST_IOSTREAMS)
 		}
 
 	} init;

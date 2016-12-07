@@ -16,6 +16,13 @@ SET(util_MOD_SRCS
     FromPythonConverterRegistration.cpp
    )
 
+IF(Boost_SYSTEM_FOUND AND Boost_FILESYSTEM_FOUND AND Boost_IOSTREAMS_FOUND)
+  SET(util_MOD_SRCS
+      ${util_MOD_SRCS}
+      CompressionStreamExport.cpp 
+     )	
+ENDIF(Boost_SYSTEM_FOUND AND Boost_FILESYSTEM_FOUND AND Boost_IOSTREAMS_FOUND)
+
 ADD_LIBRARY(_util MODULE ${util_MOD_SRCS})
 
 TARGET_LINK_LIBRARIES(_util cdpl-util-shared ${Boost_PYTHON_LIBRARY} ${PYTHON_LIBRARIES})

@@ -71,6 +71,7 @@ BOOST_PYTHON_MODULE(_pharm)
 	exportFileScreeningHitCollector();
 
 #ifdef HAVE_SQLITE3
+# if defined(HAVE_BOOST_SYSTEM) && defined(HAVE_BOOST_FILESYSTEM) && defined(HAVE_BOOST_IOSTREAMS)
 
 	exportPSDPharmacophoreInputHandler();
 	exportPSDMoleculeInputHandler();
@@ -78,6 +79,8 @@ BOOST_PYTHON_MODULE(_pharm)
 	exportPSDPharmacophoreReader();
 	exportPSDMoleculeReader();
 	exportPSDMolecularGraphWriter();
+
+#endif // defined(HAVE_BOOST_SYSTEM) && defined(HAVE_BOOST_FILESYSTEM) && defined(HAVE_BOOST_IOSTREAMS)
 
 	exportPSDScreeningDBCreator();
 	exportPSDScreeningDBAccessor();

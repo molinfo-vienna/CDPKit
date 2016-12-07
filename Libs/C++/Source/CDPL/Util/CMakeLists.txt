@@ -4,6 +4,10 @@ SET(cdpl-util_LIB_SRCS
     BronKerboschAlgorithm.cpp
    )
 
+IF(Boost_SYSTEM_FOUND AND Boost_FILESYSTEM_FOUND AND Boost_IOSTREAMS_FOUND)
+   LINK_LIBRARIES(${Boost_SYSTEM_LIBRARY} ${Boost_FILESYSTEM_LIBRARY} ${Boost_IOSTREAMS_LIBRARY})
+ENDIF(Boost_SYSTEM_FOUND AND Boost_FILESYSTEM_FOUND AND Boost_IOSTREAMS_FOUND)
+
 ADD_LIBRARY(cdpl-util-static STATIC ${cdpl-util_LIB_SRCS})
 
 TARGET_LINK_LIBRARIES(cdpl-util-static cdpl-base-static)

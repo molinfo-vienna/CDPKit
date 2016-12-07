@@ -74,6 +74,16 @@ namespace CDPL
 			extern CDPL_CHEM_API const Base::DataFormat SDF;
 
 			/**
+			 * \brief Provides meta-information about the gzip-compressed <em>MDL SD-File</em> [\ref CTFILE] format.
+			 */
+			extern CDPL_CHEM_API const Base::DataFormat SDF_GZ;
+
+			/**
+			 * \brief Provides meta-information about the bzip2-compressed <em>MDL SD-File</em> [\ref CTFILE] format.
+			 */
+			extern CDPL_CHEM_API const Base::DataFormat SDF_BZ2;
+
+			/**
 			 * \brief Provides meta-information about the <em>MDL Rxn-File</em> [\ref CTFILE] format.
 			 */
 			extern CDPL_CHEM_API const Base::DataFormat RXN;
@@ -84,9 +94,29 @@ namespace CDPL
 			extern CDPL_CHEM_API const Base::DataFormat RDF;
 
 			/**
+			 * \brief Provides meta-information about the gzip-compressed <em>MDL RD-File</em> [\ref CTFILE] format.
+			 */
+			extern CDPL_CHEM_API const Base::DataFormat RDF_GZ;
+
+			/**
+			 * \brief Provides meta-information about the bzip2-compressed <em>MDL RD-File</em> [\ref CTFILE] format.
+			 */
+			extern CDPL_CHEM_API const Base::DataFormat RDF_BZ2;
+
+			/**
 			 * \brief Provides meta-information about the <em>Daylight SMILES</em> [\ref SMILES] format.
 			 */
 			extern CDPL_CHEM_API const Base::DataFormat SMILES;
+
+			/**
+			 * \brief Provides meta-information about the gzip-compressed <em>Daylight SMILES</em> [\ref SMILES] format.
+			 */
+			extern CDPL_CHEM_API const Base::DataFormat SMILES_GZ;
+
+			/**
+			 * \brief Provides meta-information about the bzip2-compressed <em>Daylight SMILES</em> [\ref SMILES] format.
+			 */
+			extern CDPL_CHEM_API const Base::DataFormat SMILES_BZ2;
 
 			/**
 			 * \brief Provides meta-information about the <em>Daylight SMARTS</em> [\ref SMARTS] format.
@@ -103,6 +133,16 @@ namespace CDPL
 			 * \brief Provides meta-information about the native <em>CDPL</em> format.
 			 */
 			extern CDPL_CHEM_API const Base::DataFormat CDF;
+
+			/**
+			 * \brief Provides meta-information about the gzip-compressed native <em>CDPL</em> format.
+			 */
+			extern CDPL_CHEM_API const Base::DataFormat CDF_GZ;
+
+			/**
+			 * \brief Provides meta-information about the bzip2-compressed native <em>CDPL</em> format.
+			 */
+			extern CDPL_CHEM_API const Base::DataFormat CDF_BZ2;
 		}
 
 		/**

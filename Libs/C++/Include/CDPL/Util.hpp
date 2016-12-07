@@ -31,6 +31,8 @@
 #ifndef CDPL_UTIL_HPP
 #define CDPL_UTIL_HPP
 
+#include "CDPL/Config.hpp"
+
 #include "CDPL/Util/Array.hpp"
 #include "CDPL/Util/BitSet.hpp"
 #include "CDPL/Util/BronKerboschAlgorithm.hpp"
@@ -48,4 +50,11 @@
 #include "CDPL/Util/FileDataWriter.hpp"
 #include "CDPL/Util/DefaultDataInputHandler.hpp"
 
+#if defined(HAVE_BOOST_SYSTEM) && defined(HAVE_BOOST_FILESYSTEM) && defined(HAVE_BOOST_IOSTREAMS)
+
+#include "CDPL/Util/CompressionStreams.hpp"
+#include "CDPL/Util/CompressedDataReader.hpp"
+#include "CDPL/Util/CompressedDataWriter.hpp"
+
+#endif // defined(HAVE_BOOST_SYSTEM) && defined(HAVE_BOOST_FILESYSTEM) && defined(HAVE_BOOST_IOSTREAMS)
 #endif // CDPL_UTIL_HPP

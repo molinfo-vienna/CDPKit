@@ -31,8 +31,6 @@
 #ifndef CDPL_CHEM_INCHIRETURNCODE_HPP
 #define CDPL_CHEM_INCHIRETURNCODE_HPP
 
-#undef EOF
-
 
 namespace CDPL 
 {
@@ -62,7 +60,7 @@ namespace CDPL
 			/**
 			 * \brief Specifies that no structural data were provided for the \e %InChI generation (e.g. empty structure).
 			 */
-			extern const int EOF; 
+			extern const int EOF_; 
 
 			/**
 			 * \brief Specifies that the operation was successful and no warnings have been issued.

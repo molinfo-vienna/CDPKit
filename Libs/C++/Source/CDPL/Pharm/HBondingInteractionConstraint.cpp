@@ -38,6 +38,13 @@
 using namespace CDPL;
 
 
+namespace
+{
+
+	const double H_BOND_LENGTH = 1.05;
+}
+
+
 const double Pharm::HBondingInteractionConstraint::DEF_MIN_HB_LENGTH;
 const double Pharm::HBondingInteractionConstraint::DEF_MAX_HB_LENGTH;
 const double Pharm::HBondingInteractionConstraint::DEF_MIN_AHD_ANGLE;
@@ -74,7 +81,7 @@ bool Pharm::HBondingInteractionConstraint::operator()(const Feature& ftr1, const
 
 	if (getGeometry(don_ftr) == FeatureGeometry::VECTOR && hasOrientation(don_ftr)) {
 		const Math::Vector3D& orient = getOrientation(don_ftr);
-		Math::Vector3D don_h_vec(orient * getLength(don_ftr));
+		Math::Vector3D don_h_vec(orient * H_BOND_LENGTH /*getLength(don_ftr)*/);
 		
 		h_acc_vec.assign(acc_pos - (don_pos + don_h_vec));
 
@@ -94,7 +101,7 @@ bool Pharm::HBondingInteractionConstraint::operator()(const Feature& ftr1, const
 		h_acc_vec.assign(acc_pos - don_pos);
 
 		double don_acc_vec_len = length(h_acc_vec);
-		double hb_len = don_acc_vec_len - 1.0;
+		double hb_len = don_acc_vec_len - H_BOND_LENGTH;
 
 		if (hb_len < minLength || hb_len > maxLength)
 			return false;

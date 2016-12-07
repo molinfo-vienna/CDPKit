@@ -70,6 +70,7 @@ namespace CDPLPythonPharm
 	void exportFileScreeningHitCollector();
 
 #ifdef HAVE_SQLITE3
+# if defined(HAVE_BOOST_SYSTEM) && defined(HAVE_BOOST_FILESYSTEM) && defined(HAVE_BOOST_IOSTREAMS)
 
 	void exportPSDPharmacophoreInputHandler();
 	void exportPSDMoleculeInputHandler();
@@ -77,6 +78,8 @@ namespace CDPLPythonPharm
 	void exportPSDPharmacophoreReader();
 	void exportPSDMoleculeReader();
 	void exportPSDMolecularGraphWriter();
+
+#endif // defined(HAVE_BOOST_SYSTEM) && defined(HAVE_BOOST_FILESYSTEM) && defined(HAVE_BOOST_IOSTREAMS)
 
 	void exportPSDScreeningDBCreator();
 	void exportPSDScreeningDBAccessor();

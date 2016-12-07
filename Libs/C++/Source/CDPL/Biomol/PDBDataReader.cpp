@@ -891,6 +891,7 @@ void Biomol::PDBDataReader::processAtomSequence(Chem::Molecule& mol, bool chain_
 
 			for (MolecularGraph::ConstBondIterator b_it = res_tmplt->getBondsBegin(), b_end = res_tmplt->getBondsEnd(); b_it != b_end; ++b_it) {
 				const Bond& bond = *b_it;
+
 				Atom* res_atom1 = currResidueAtoms[getResidueAtomName(bond.getBegin())];
 
 				if (!res_atom1)
@@ -902,7 +903,7 @@ void Biomol::PDBDataReader::processAtomSequence(Chem::Molecule& mol, bool chain_
 				Atom* res_atom2 = currResidueAtoms[getResidueAtomName(bond.getEnd())];
 
 				if (!res_atom2)
-					res_atom2 = currResidueAtoms[getResidueAltAtomName(bond.getEnd())];;
+					res_atom2 = currResidueAtoms[getResidueAltAtomName(bond.getEnd())];
 
 				if (!res_atom2)
 					continue;

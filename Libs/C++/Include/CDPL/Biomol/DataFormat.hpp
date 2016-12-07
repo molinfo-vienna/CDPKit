@@ -62,6 +62,18 @@ namespace CDPL
 			 *        [\ref PDB] format.
 			 */
 			extern CDPL_BIOMOL_API const Base::DataFormat PDB;
+
+			/**
+			 * \brief Provides meta-information about the gzip-compressed <em>Brookhaven Protein Data Bank Format</em>
+			 *        [\ref PDB] format.
+			 */
+			extern CDPL_BIOMOL_API const Base::DataFormat PDB_GZ;
+
+			/**
+			 * \brief Provides meta-information about the bzip2-compressed <em>Brookhaven Protein Data Bank Format</em>
+			 *        [\ref PDB] format.
+			 */
+			extern CDPL_BIOMOL_API const Base::DataFormat PDB_BZ2;
 		}
 
 		/**

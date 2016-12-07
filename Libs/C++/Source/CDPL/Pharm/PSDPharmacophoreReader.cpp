@@ -54,6 +54,7 @@ Pharm::PSDPharmacophoreReader::PSDPharmacophoreReader(std::istream& is):
 			throw Base::IOError("copying input data failed");
 
 	} catch (const std::exception& e) {
+		removeTmpFile();
 		throw Base::IOError(std::string("PSDPharmacophoreReader: could not create temporary database file: ") + e.what());
 	}
 
@@ -64,6 +65,7 @@ Pharm::PSDPharmacophoreReader::PSDPharmacophoreReader(std::istream& is):
 		state = true;
 
 	} catch (const std::exception& e) {
+		removeTmpFile();
 		throw Base::IOError(std::string("PSDPharmacophoreReader: could not open database: ") + e.what());
 	}
 }
@@ -85,11 +87,7 @@ Pharm::PSDPharmacophoreReader::PSDPharmacophoreReader(const std::string& file_na
 Pharm::PSDPharmacophoreReader::~PSDPharmacophoreReader() 
 {
 	try { accessor.close(); } catch (...) {}
-
-	if (!tmpFile.empty()) {
-		boost::system::error_code ec;
-		boost::filesystem::remove(tmpFile, ec);
-	}
+	removeTmpFile();
 }
 
 Pharm::PSDPharmacophoreReader& Pharm::PSDPharmacophoreReader::read(Pharmacophore& pharm)
@@ -168,4 +166,12 @@ Pharm::PSDPharmacophoreReader::operator const void*() const
 bool Pharm::PSDPharmacophoreReader::operator!() const
 {
     return !state;
+}
+
+void Pharm::PSDPharmacophoreReader::removeTmpFile()
+{
+	try {
+		if (!tmpFile.empty())
+			boost::filesystem::remove(tmpFile);
+	} catch (...) {}
 }

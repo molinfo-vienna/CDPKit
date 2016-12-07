@@ -24,7 +24,6 @@
  */
 
 
-#include <string>
 #include <cstddef>
 
 #include <boost/lexical_cast.hpp>
@@ -34,14 +33,20 @@
 #include <QStringList>
 #include <QString>
 
+#include "CDPL/Base/DataFormat.hpp"
 #include "CDPL/Chem/ControlParameter.hpp"
+#include "CDPL/Chem/DataFormat.hpp"
 #include "CDPL/Pharm/ControlParameter.hpp"
+#include "CDPL/Pharm/DataFormat.hpp"
+#include "CDPL/Biomol/ControlParameter.hpp"
+#include "CDPL/Biomol/DataFormat.hpp"
 #include "CDPL/Vis/ControlParameter.hpp"
 #include "CDPL/Vis/ControlParameterDefault.hpp"
 #include "CDPL/Vis/ControlParameterFunctions.hpp"
 #include "CDPL/Vis/Font.hpp"
 #include "CDPL/Vis/Color.hpp"
 #include "CDPL/Vis/SizeSpecification.hpp"
+#include "CDPL/Vis/DataFormat.hpp"
 
 #include "Settings.hpp"
 #include "ControlParameter.hpp"
@@ -54,33 +59,64 @@ using namespace ChOx;
 
 Settings::Settings(QObject* parent): QObject(parent) 
 {
+	using namespace CDPL;
+
 	registerParameterChangedCallback(boost::bind(&Settings::parameterChanged, this, _1, _2));
+
+	readerControlParams[Chem::DataFormat::CDF_GZ.getName()].setParent(&readerControlParams[Chem::DataFormat::CDF.getName()]);
+	readerControlParams[Chem::DataFormat::CDF_BZ2.getName()].setParent(&readerControlParams[Chem::DataFormat::CDF.getName()]);
+	readerControlParams[Chem::DataFormat::SMILES_GZ.getName()].setParent(&readerControlParams[Chem::DataFormat::SMILES.getName()]);
+	readerControlParams[Chem::DataFormat::SMILES_BZ2.getName()].setParent(&readerControlParams[Chem::DataFormat::SMILES.getName()]);
+	readerControlParams[Chem::DataFormat::SDF_GZ.getName()].setParent(&readerControlParams[Chem::DataFormat::SDF.getName()]);
+	readerControlParams[Chem::DataFormat::SDF_BZ2.getName()].setParent(&readerControlParams[Chem::DataFormat::SDF.getName()]);
+	readerControlParams[Chem::DataFormat::RDF_GZ.getName()].setParent(&readerControlParams[Chem::DataFormat::RDF.getName()]);
+	readerControlParams[Chem::DataFormat::RDF_BZ2.getName()].setParent(&readerControlParams[Chem::DataFormat::RDF.getName()]);
+	readerControlParams[Biomol::DataFormat::PDB_GZ.getName()].setParent(&readerControlParams[Biomol::DataFormat::PDB.getName()]);
+	readerControlParams[Biomol::DataFormat::PDB_BZ2.getName()].setParent(&readerControlParams[Biomol::DataFormat::PDB.getName()]);
+
+	writerControlParams[Chem::DataFormat::CDF_GZ.getName()].setParent(&writerControlParams[Chem::DataFormat::CDF.getName()]);
+	writerControlParams[Chem::DataFormat::CDF_BZ2.getName()].setParent(&writerControlParams[Chem::DataFormat::CDF.getName()]);
+	writerControlParams[Chem::DataFormat::SMILES_GZ.getName()].setParent(&writerControlParams[Chem::DataFormat::SMILES.getName()]);
+	writerControlParams[Chem::DataFormat::SMILES_BZ2.getName()].setParent(&writerControlParams[Chem::DataFormat::SMILES.getName()]);
+	writerControlParams[Chem::DataFormat::SDF_GZ.getName()].setParent(&writerControlParams[Chem::DataFormat::SDF.getName()]);
+	writerControlParams[Chem::DataFormat::SDF_BZ2.getName()].setParent(&writerControlParams[Chem::DataFormat::SDF.getName()]);
+	writerControlParams[Chem::DataFormat::RDF_GZ.getName()].setParent(&writerControlParams[Chem::DataFormat::RDF.getName()]);
+	writerControlParams[Chem::DataFormat::RDF_BZ2.getName()].setParent(&writerControlParams[Chem::DataFormat::RDF.getName()]);
+	writerControlParams[Biomol::DataFormat::PDB_GZ.getName()].setParent(&writerControlParams[Biomol::DataFormat::PDB.getName()]);
+	writerControlParams[Biomol::DataFormat::PDB_BZ2.getName()].setParent(&writerControlParams[Biomol::DataFormat::PDB.getName()]);
+
+	SettingsContainer& img_params = writerControlParams["img"];
+
+	writerControlParams[Vis::DataFormat::PNG.getName()].setParent(&img_params);
+	writerControlParams[Vis::DataFormat::PDF.getName()].setParent(&img_params);
+	writerControlParams[Vis::DataFormat::SVG.getName()].setParent(&img_params);
+	writerControlParams[Vis::DataFormat::PS.getName()].setParent(&img_params);
 }
 
-const SettingsContainer& Settings::getReaderControlParameters(const QString& format) const
+const SettingsContainer& Settings::getReaderControlParameters(const std::string& format) const
 {
-	IOControlParamMap::const_iterator it = readerControlParams.find(format.toLower());
+	IOControlParamMap::const_iterator it = readerControlParams.find(format);
 
 	return (it == readerControlParams.end() ? *this : it->second);
 }
 
-const SettingsContainer& Settings::getWriterControlParameters(const QString& format) const
+const SettingsContainer& Settings::getWriterControlParameters(const std::string& format) const
 {
-	IOControlParamMap::const_iterator it = writerControlParams.find(format.toLower());
+	IOControlParamMap::const_iterator it = writerControlParams.find(format);
 
 	return (it == writerControlParams.end() ? *this : it->second);
 }
 
-SettingsContainer& Settings::getReaderControlParameters(const QString& format)
+SettingsContainer& Settings::getReaderControlParameters(const std::string& format)
 {
-	IOControlParamMap::iterator it = readerControlParams.find(format.toLower());
+	IOControlParamMap::iterator it = readerControlParams.find(format);
 
 	return (it == readerControlParams.end() ? *this : it->second);
 }
 
-SettingsContainer& Settings::getWriterControlParameters(const QString& format)
+SettingsContainer& Settings::getWriterControlParameters(const std::string& format)
 {
-	IOControlParamMap::iterator it = writerControlParams.find(format.toLower());
+	IOControlParamMap::iterator it = writerControlParams.find(format);
 
 	return (it == writerControlParams.end() ? *this : it->second);
 }
@@ -91,8 +127,11 @@ void Settings::load()
 
 	using namespace CDPL;
 
-	readerControlParams.clear();
-	writerControlParams.clear();
+	for (IOControlParamMap::iterator it = readerControlParams.begin(), end = readerControlParams.end(); it != end; ++it)
+		it->second.clearParameters();
+
+	for (IOControlParamMap::iterator it = writerControlParams.begin(), end = writerControlParams.end(); it != end; ++it)
+		it->second.clearParameters();
 
 	settings.beginGroup("View");
 
@@ -224,9 +263,9 @@ void Settings::load()
 
 	// ------
 
-	settings.beginGroup("Input/JME");
+	settings.beginGroup(QString::fromStdString("Input/" + Chem::DataFormat::JME.getName()));
 
-	SettingsContainer& jme_rparams = readerControlParams["jme"];
+	SettingsContainer& jme_rparams = readerControlParams[Chem::DataFormat::JME.getName()];
 
 	jme_rparams.setParent(this);
 
@@ -236,9 +275,9 @@ void Settings::load()
 
 	// +++
 
-	settings.beginGroup("Output/JME");
+	settings.beginGroup(QString::fromStdString("Output/" + Chem::DataFormat::JME.getName()));
 
-	SettingsContainer& jme_wparams = writerControlParams["jme"];
+	SettingsContainer& jme_wparams = writerControlParams[Chem::DataFormat::JME.getName()];
 
 	jme_wparams.setParent(this);
 
@@ -251,9 +290,9 @@ void Settings::load()
 
 	// ------
 
-	settings.beginGroup("Input/SMILES");
+	settings.beginGroup(QString::fromStdString("Input/" + Chem::DataFormat::SMILES.getName()));
 
-	SettingsContainer& smiles_rparams = readerControlParams["smiles"];
+	SettingsContainer& smiles_rparams = readerControlParams[Chem::DataFormat::SMILES.getName()];
 
 	smiles_rparams.setParent(this);
 
@@ -264,9 +303,9 @@ void Settings::load()
 
 	// +++
 
-	settings.beginGroup("Output/SMILES");
+	settings.beginGroup(QString::fromStdString("Output/" + Chem::DataFormat::SMILES.getName()));
 
-	SettingsContainer& smiles_wparams = writerControlParams["smiles"];
+	SettingsContainer& smiles_wparams = writerControlParams[Chem::DataFormat::SMILES.getName()];
 
 	smiles_wparams.setParent(this);
 
@@ -291,9 +330,9 @@ void Settings::load()
 
 	// ------
 
-	settings.beginGroup("Input/SMARTS");
+	settings.beginGroup(QString::fromStdString("Input/" + Chem::DataFormat::SMARTS.getName()));
 
-	SettingsContainer& smarts_rparams = readerControlParams["smarts"];
+	SettingsContainer& smarts_rparams = readerControlParams[Chem::DataFormat::SMARTS.getName()];
 
 	smarts_rparams.setParent(this);
 
@@ -303,9 +342,9 @@ void Settings::load()
 
 	// +++
 
-	settings.beginGroup("Output/SMARTS");
+	settings.beginGroup(QString::fromStdString("Output/" + Chem::DataFormat::SMARTS.getName()));
 
-	SettingsContainer& smarts_wparams = writerControlParams["smarts"];
+	SettingsContainer& smarts_wparams = writerControlParams[Chem::DataFormat::SMARTS.getName()];
 
 	smarts_wparams.setParent(this);
 
@@ -317,9 +356,9 @@ void Settings::load()
 
 	// ------
 
-	settings.beginGroup("Input/INCHI");
+	settings.beginGroup(QString::fromStdString("Input/" + Chem::DataFormat::INCHI.getName()));
 
-	SettingsContainer& inchi_rparams = readerControlParams["inchi"];
+	SettingsContainer& inchi_rparams = readerControlParams[Chem::DataFormat::INCHI.getName()];
 
 	inchi_rparams.setParent(this);
 
@@ -330,9 +369,9 @@ void Settings::load()
 
 	// +++
 
-	settings.beginGroup("Output/INCHI");
+	settings.beginGroup(QString::fromStdString("Output/" + Chem::DataFormat::INCHI.getName()));
 
-	SettingsContainer& inchi_wparams = writerControlParams["inchi"];
+	SettingsContainer& inchi_wparams = writerControlParams[Chem::DataFormat::INCHI.getName()];
 
 	inchi_wparams.setParent(this);
 
@@ -345,9 +384,9 @@ void Settings::load()
 
 	// ------
 
-	settings.beginGroup("Input/MOL");
+	settings.beginGroup(QString::fromStdString("Input/" + Chem::DataFormat::MOL.getName()));
 
-	SettingsContainer& mol_rparams = readerControlParams["mol"];
+	SettingsContainer& mol_rparams = readerControlParams[Chem::DataFormat::MOL.getName()];
 
 	mol_rparams.setParent(this);
 
@@ -362,9 +401,9 @@ void Settings::load()
 
 	// +++
 
-	settings.beginGroup("Output/MOL");
+	settings.beginGroup(QString::fromStdString("Output/" + Chem::DataFormat::MOL.getName()));
 
-	SettingsContainer& mol_wparams = writerControlParams["mol"];
+	SettingsContainer& mol_wparams = writerControlParams[Chem::DataFormat::MOL.getName()];
 
 	mol_wparams.setParent(this);
 
@@ -384,9 +423,9 @@ void Settings::load()
 
 	// ------
 
-	settings.beginGroup("Input/SDF");
+	settings.beginGroup(QString::fromStdString("Input/" + Chem::DataFormat::SDF.getName()));
 
-	SettingsContainer& sdf_rparams = readerControlParams["sdf"];
+	SettingsContainer& sdf_rparams = readerControlParams[Chem::DataFormat::SDF.getName()];
 
 	sdf_rparams.setParent(this);
 
@@ -401,9 +440,9 @@ void Settings::load()
 
 	// +++
 
-	settings.beginGroup("Output/SDF");
+	settings.beginGroup(QString::fromStdString("Output/" + Chem::DataFormat::SDF.getName()));
 
-	SettingsContainer& sdf_wparams = writerControlParams["sdf"];
+	SettingsContainer& sdf_wparams = writerControlParams[Chem::DataFormat::SDF.getName()];
 
 	sdf_wparams.setParent(this);
 
@@ -423,9 +462,9 @@ void Settings::load()
 
 	// ------
 
-	settings.beginGroup("Input/RXN");
+	settings.beginGroup(QString::fromStdString("Input/" + Chem::DataFormat::RXN.getName()));
 
-	SettingsContainer& rxn_rparams = readerControlParams["rxn"];
+	SettingsContainer& rxn_rparams = readerControlParams[Chem::DataFormat::RXN.getName()];
 
 	rxn_rparams.setParent(this);
 
@@ -439,9 +478,9 @@ void Settings::load()
 
 	// +++
 
-	settings.beginGroup("Output/RXN");
+	settings.beginGroup(QString::fromStdString("Output/" + Chem::DataFormat::RXN.getName()));
 
-	SettingsContainer& rxn_wparams = writerControlParams["rxn"];
+	SettingsContainer& rxn_wparams = writerControlParams[Chem::DataFormat::RXN.getName()];
 
 	rxn_wparams.setParent(this);
 
@@ -461,9 +500,9 @@ void Settings::load()
 
 	// ------
 
-	settings.beginGroup("Input/RDF");
+	settings.beginGroup(QString::fromStdString("Input/" + Chem::DataFormat::RDF.getName()));
 
-	SettingsContainer& rdf_rparams = readerControlParams["rdf"];
+	SettingsContainer& rdf_rparams = readerControlParams[Chem::DataFormat::RDF.getName()];
 
 	rdf_rparams.setParent(this);
 
@@ -477,9 +516,9 @@ void Settings::load()
 
 	// +++
 
-	settings.beginGroup("Output/RDF");
+	settings.beginGroup(QString::fromStdString("Output/" + Chem::DataFormat::RDF.getName()));
 
-	SettingsContainer& rdf_wparams = writerControlParams["rdf"];
+	SettingsContainer& rdf_wparams = writerControlParams[Chem::DataFormat::RDF.getName()];
 
 	rdf_wparams.setParent(this);
 
@@ -499,9 +538,9 @@ void Settings::load()
 
 	// ------
 
-	settings.beginGroup("Input/PSD");
+	settings.beginGroup(QString::fromStdString("Input/" + Pharm::DataFormat::PSD.getName()));
 
-	SettingsContainer& psd_rparams = readerControlParams["psd"];
+	SettingsContainer& psd_rparams = readerControlParams[Pharm::DataFormat::PSD.getName()];
 
 	psd_rparams.setParent(this);
 
@@ -509,9 +548,9 @@ void Settings::load()
 
 	// +++
 
-	settings.beginGroup("Output/PSD");
+	settings.beginGroup(QString::fromStdString("Output/" + Pharm::DataFormat::PSD.getName()));
 
-	SettingsContainer& psd_wparams = writerControlParams["psd"];
+	SettingsContainer& psd_wparams = writerControlParams[Pharm::DataFormat::PSD.getName()];
 
 	psd_wparams.setParent(this);
 
@@ -525,22 +564,22 @@ void Settings::load()
 
 	// ------
 
-	settings.beginGroup("Input/PDB");
+	settings.beginGroup(QString::fromStdString("Input/" + Biomol::DataFormat::PDB.getName()));
 
-	SettingsContainer& pdb_rparams = readerControlParams["pdb"];
+	SettingsContainer& pdb_rparams = readerControlParams[Biomol::DataFormat::PDB.getName()];
 
 	pdb_rparams.setParent(this);
 
-	readParameter<bool>(pdb_rparams, settings, Chem::ControlParameter::STRICT_ERROR_CHECKING, ControlParameterDefault::PDB_INPUT_STRICT_ERROR_CHECKING);
-	readParameter<bool>(pdb_rparams, settings, Chem::ControlParameter::CHECK_LINE_LENGTH, ControlParameterDefault::PDB_INPUT_CHECK_LINE_LENGTH);
+	readParameter<bool>(pdb_rparams, settings, Biomol::ControlParameter::STRICT_ERROR_CHECKING, ControlParameterDefault::PDB_INPUT_STRICT_ERROR_CHECKING);
+	readParameter<bool>(pdb_rparams, settings, Biomol::ControlParameter::CHECK_LINE_LENGTH, ControlParameterDefault::PDB_INPUT_CHECK_LINE_LENGTH);
 
 	settings.endGroup();
 
 	// ------
 
-	settings.beginGroup("Input/CDF");
+	settings.beginGroup(QString::fromStdString("Input/" + Chem::DataFormat::CDF.getName()));
 
-	SettingsContainer& cdf_rparams = readerControlParams["cdf"];
+	SettingsContainer& cdf_rparams = readerControlParams[Chem::DataFormat::CDF.getName()];
 
 	cdf_rparams.setParent(this);
 
@@ -548,9 +587,9 @@ void Settings::load()
 
 	// +++
 
-	settings.beginGroup("Output/CDF");
+	settings.beginGroup(QString::fromStdString("Output/" + Chem::DataFormat::CDF.getName()));
 
-	SettingsContainer& cdf_wparams = writerControlParams["cdf"];
+	SettingsContainer& cdf_wparams = writerControlParams[Chem::DataFormat::CDF.getName()];
 
 	cdf_wparams.setParent(this);
 
@@ -574,17 +613,14 @@ void Settings::load()
 
 	settings.endGroup();
 
-	writerControlParams["png"].setParent(&img_params);
-	writerControlParams["pdf"].setParent(&img_params);
-	writerControlParams["svg"].setParent(&img_params);
-	writerControlParams["ps"].setParent(&img_params);
-
 	// ------
 
 	if (getUseAtomColorTableParameter(*this))
 		Vis::setAtomColorTableParameter(*this, ChOx::getAtomColorTableParameter(*this));
 	else
 		Vis::clearAtomColorTableParameter(*this);
+
+	// ------
 }
 
 void Settings::save() const
@@ -718,9 +754,9 @@ void Settings::save() const
 
 	// ------
 
-	settings.beginGroup("Input/JME");
+	settings.beginGroup(QString::fromStdString("Input/" + Chem::DataFormat::JME.getName()));
 
-	const SettingsContainer& jme_rparams = getReaderControlParameters("jme");
+	const SettingsContainer& jme_rparams = getReaderControlParameters(Chem::DataFormat::JME.getName());
 
 	writeParameter<bool>(jme_rparams, settings, Chem::ControlParameter::STRICT_ERROR_CHECKING);
 
@@ -728,9 +764,9 @@ void Settings::save() const
 
 	// +++
 
-	settings.beginGroup("Output/JME");
+	settings.beginGroup(QString::fromStdString("Output/" + Chem::DataFormat::JME.getName()));
 
-	const SettingsContainer& jme_wparams = getWriterControlParameters("jme");
+	const SettingsContainer& jme_wparams = getWriterControlParameters(Chem::DataFormat::JME.getName());
 
 	writeParameter<bool>(jme_wparams, settings, Chem::ControlParameter::STRICT_ERROR_CHECKING);
 	writeParameter<bool>(jme_wparams, settings, Chem::ControlParameter::JME_SEPARATE_COMPONENTS);
@@ -741,9 +777,9 @@ void Settings::save() const
 
 	// ------
 
-	settings.beginGroup("Input/SMILES");
+	settings.beginGroup(QString::fromStdString("Input/" + Chem::DataFormat::SMILES.getName()));
 
-	const SettingsContainer& smiles_rparams = getReaderControlParameters("smiles");
+	const SettingsContainer& smiles_rparams = getReaderControlParameters(Chem::DataFormat::SMILES.getName());
 
 	writeParameter<bool>(smiles_rparams, settings, Chem::ControlParameter::STRICT_ERROR_CHECKING);
 	writeParameter<std::string>(smiles_rparams, settings, Chem::ControlParameter::SMILES_RECORD_FORMAT);
@@ -752,9 +788,9 @@ void Settings::save() const
 
 	// +++
 
-	settings.beginGroup("Output/SMILES");
+	settings.beginGroup(QString::fromStdString("Output/" + Chem::DataFormat::SMILES.getName()));
 
-	const SettingsContainer& smiles_wparams = getWriterControlParameters("smiles");
+	const SettingsContainer& smiles_wparams = getWriterControlParameters(Chem::DataFormat::SMILES.getName());
 
 	writeParameter<bool>(smiles_wparams, settings, Chem::ControlParameter::STRICT_ERROR_CHECKING);
 	writeParameter<bool>(smiles_wparams, settings, Chem::ControlParameter::ORDINARY_HYDROGEN_DEPLETE);
@@ -777,9 +813,9 @@ void Settings::save() const
 
 	// ------
 
-	settings.beginGroup("Input/SMARTS");
+	settings.beginGroup(QString::fromStdString("Input/" + Chem::DataFormat::SMARTS.getName()));
 
-	const SettingsContainer& smarts_rparams = getReaderControlParameters("smarts");
+	const SettingsContainer& smarts_rparams = getReaderControlParameters(Chem::DataFormat::SMARTS.getName());
 
 	writeParameter<bool>(smarts_rparams, settings, Chem::ControlParameter::STRICT_ERROR_CHECKING);
 
@@ -787,9 +823,9 @@ void Settings::save() const
 
 	// +++
 
-	settings.beginGroup("Output/SMARTS");
+	settings.beginGroup(QString::fromStdString("Output/" + Chem::DataFormat::SMARTS.getName()));
 
-	const SettingsContainer& smarts_wparams = getWriterControlParameters("smarts");
+	const SettingsContainer& smarts_wparams = getWriterControlParameters(Chem::DataFormat::SMARTS.getName());
 
 	writeParameter<bool>(smarts_wparams, settings, Chem::ControlParameter::STRICT_ERROR_CHECKING);
 	writeParameter<bool>(smarts_wparams, settings, ControlParameter::WRITE_SINGLE_RECORD_FILES);
@@ -799,9 +835,9 @@ void Settings::save() const
 
 	// ------
 
-	settings.beginGroup("Input/INCHI");
+	settings.beginGroup(QString::fromStdString("Input/" + Chem::DataFormat::INCHI.getName()));
 
-	const SettingsContainer& inchi_rparams = getReaderControlParameters("inchi");
+	const SettingsContainer& inchi_rparams = getReaderControlParameters(Chem::DataFormat::INCHI.getName());
 
 	writeParameter<bool>(inchi_rparams, settings, Chem::ControlParameter::STRICT_ERROR_CHECKING);
 	writeParameter<std::string>(inchi_rparams, settings, Chem::ControlParameter::INCHI_INPUT_OPTIONS);
@@ -810,9 +846,9 @@ void Settings::save() const
 
 	// +++
 
-	settings.beginGroup("Output/INCHI");
+	settings.beginGroup(QString::fromStdString("Output/" + Chem::DataFormat::INCHI.getName()));
 
-	const SettingsContainer& inchi_wparams = getWriterControlParameters("inchi");
+	const SettingsContainer& inchi_wparams = getWriterControlParameters(Chem::DataFormat::INCHI.getName());
 
 	writeParameter<bool>(inchi_wparams, settings, Chem::ControlParameter::STRICT_ERROR_CHECKING);
 	writeParameter<std::string>(inchi_wparams, settings, Chem::ControlParameter::RECORD_SEPARATOR);
@@ -823,9 +859,9 @@ void Settings::save() const
 
 	// ------
 
-	settings.beginGroup("Input/MOL");
+	settings.beginGroup(QString::fromStdString("Input/" + Chem::DataFormat::MOL.getName()));
 
-	const SettingsContainer& mol_rparams = getReaderControlParameters("mol");
+	const SettingsContainer& mol_rparams = getReaderControlParameters(Chem::DataFormat::MOL.getName());
 
 	writeParameter<bool>(mol_rparams, settings, Chem::ControlParameter::STRICT_ERROR_CHECKING);
 	writeParameter<bool>(mol_rparams, settings, Chem::ControlParameter::MDL_IGNORE_PARITY);
@@ -838,9 +874,9 @@ void Settings::save() const
 
 	// +++
 
-	settings.beginGroup("Output/MOL");
+	settings.beginGroup(QString::fromStdString("Output/" + Chem::DataFormat::MOL.getName()));
 
-	const SettingsContainer& mol_wparams = getWriterControlParameters("mol");
+	const SettingsContainer& mol_wparams = getWriterControlParameters(Chem::DataFormat::MOL.getName());
 
 	writeParameter<bool>(mol_wparams, settings, Chem::ControlParameter::STRICT_ERROR_CHECKING);
 	writeParameter<unsigned int>(mol_wparams, settings, Chem::ControlParameter::MDL_CTAB_VERSION);
@@ -858,9 +894,9 @@ void Settings::save() const
 
 	// ------
 
-	settings.beginGroup("Input/SDF");
+	settings.beginGroup(QString::fromStdString("Input/" + Chem::DataFormat::SDF.getName()));
 
-	const SettingsContainer& sdf_rparams = getReaderControlParameters("sdf");
+	const SettingsContainer& sdf_rparams = getReaderControlParameters(Chem::DataFormat::SDF.getName());
 
 	writeParameter<bool>(sdf_rparams, settings, Chem::ControlParameter::STRICT_ERROR_CHECKING);
 	writeParameter<bool>(sdf_rparams, settings, Chem::ControlParameter::MDL_IGNORE_PARITY);
@@ -873,9 +909,9 @@ void Settings::save() const
 
 	// +++
 
-	settings.beginGroup("Output/SDF");
+	settings.beginGroup(QString::fromStdString("Output/" + Chem::DataFormat::SDF.getName()));
 
-	const SettingsContainer& sdf_wparams = getWriterControlParameters("sdf");
+	const SettingsContainer& sdf_wparams = getWriterControlParameters(Chem::DataFormat::SDF.getName());
 
 	writeParameter<bool>(sdf_wparams, settings, Chem::ControlParameter::STRICT_ERROR_CHECKING);
 	writeParameter<unsigned int>(sdf_wparams, settings, Chem::ControlParameter::MDL_CTAB_VERSION);
@@ -893,9 +929,9 @@ void Settings::save() const
 
 	// ------
 
-	settings.beginGroup("Input/RXN");
+	settings.beginGroup(QString::fromStdString("Input/" + Chem::DataFormat::RXN.getName()));
 
-	const SettingsContainer& rxn_rparams = getReaderControlParameters("rxn");
+	const SettingsContainer& rxn_rparams = getReaderControlParameters(Chem::DataFormat::RXN.getName());
 
 	writeParameter<bool>(rxn_rparams, settings, Chem::ControlParameter::STRICT_ERROR_CHECKING);
 	writeParameter<bool>(rxn_rparams, settings, Chem::ControlParameter::MDL_IGNORE_PARITY);
@@ -907,9 +943,9 @@ void Settings::save() const
 
 	// +++
 
-	settings.beginGroup("Output/RXN");
+	settings.beginGroup(QString::fromStdString("Output/" + Chem::DataFormat::RXN.getName()));
 
-	const SettingsContainer& rxn_wparams = getWriterControlParameters("rxn");
+	const SettingsContainer& rxn_wparams = getWriterControlParameters(Chem::DataFormat::RXN.getName());
 
 	writeParameter<bool>(rxn_wparams, settings, Chem::ControlParameter::STRICT_ERROR_CHECKING);
 	writeParameter<unsigned int>(rxn_wparams, settings, Chem::ControlParameter::MDL_CTAB_VERSION);
@@ -927,9 +963,9 @@ void Settings::save() const
 
 	// ------
 
-	settings.beginGroup("Input/RDF");
+	settings.beginGroup(QString::fromStdString("Input/" + Chem::DataFormat::RDF.getName()));
 
-	const SettingsContainer& rdf_rparams = getReaderControlParameters("rdf");
+	const SettingsContainer& rdf_rparams = getReaderControlParameters(Chem::DataFormat::RDF.getName());
 
 	writeParameter<bool>(rdf_rparams, settings, Chem::ControlParameter::STRICT_ERROR_CHECKING);
 	writeParameter<bool>(rdf_rparams, settings, Chem::ControlParameter::MDL_IGNORE_PARITY);
@@ -941,9 +977,9 @@ void Settings::save() const
 
 	// +++
 
-	settings.beginGroup("Output/RDF");
+	settings.beginGroup(QString::fromStdString("Output/" + Chem::DataFormat::RDF.getName()));
 
-	const SettingsContainer& rdf_wparams = getWriterControlParameters("rdf");
+	const SettingsContainer& rdf_wparams = getWriterControlParameters(Chem::DataFormat::RDF.getName());
 
 	writeParameter<bool>(rdf_wparams, settings, Chem::ControlParameter::STRICT_ERROR_CHECKING);
 	writeParameter<unsigned int>(rdf_wparams, settings, Chem::ControlParameter::MDL_CTAB_VERSION);
@@ -961,28 +997,28 @@ void Settings::save() const
 
 	// ------
 
-	settings.beginGroup("Input/PDB");
+	settings.beginGroup(QString::fromStdString("Input/" + Biomol::DataFormat::PDB.getName()));
 
-	const SettingsContainer& pdb_rparams = getReaderControlParameters("pdb");
+	const SettingsContainer& pdb_rparams = getReaderControlParameters(Biomol::DataFormat::PDB.getName());
 
-	writeParameter<bool>(pdb_rparams, settings, Chem::ControlParameter::STRICT_ERROR_CHECKING);
-	writeParameter<bool>(pdb_rparams, settings, Chem::ControlParameter::CHECK_LINE_LENGTH);
+	writeParameter<bool>(pdb_rparams, settings, Biomol::ControlParameter::STRICT_ERROR_CHECKING);
+	writeParameter<bool>(pdb_rparams, settings, Biomol::ControlParameter::CHECK_LINE_LENGTH);
 
 	settings.endGroup();
 
 	// ------
 
-	settings.beginGroup("Input/PSD");
+	settings.beginGroup(QString::fromStdString("Input/" + Pharm::DataFormat::PSD.getName()));
 
-	//const SettingsContainer& psd_rparams = getReaderControlParameters("psd");
+	//const SettingsContainer& psd_rparams = getReaderControlParameters(Pharm::DataFormat::PSD.getName());
 
 	settings.endGroup();
 
 	// +++
 
-	settings.beginGroup("Output/PSD");
+	settings.beginGroup(QString::fromStdString("Output/" + Pharm::DataFormat::PSD.getName()));
 
-	const SettingsContainer& psd_wparams = getWriterControlParameters("psd");
+	const SettingsContainer& psd_wparams = getWriterControlParameters(Pharm::DataFormat::PSD.getName());
 
 	writeParameter<bool>(psd_wparams, settings, ControlParameter::WRITE_SINGLE_RECORD_FILES);
 	writeParameter<bool>(psd_wparams, settings, Chem::ControlParameter::CDF_WRITE_SINGLE_PRECISION_FLOATS);
@@ -993,17 +1029,17 @@ void Settings::save() const
 
 	// ------
 
-	settings.beginGroup("Input/CDF");
+	settings.beginGroup(QString::fromStdString("Input/" + Chem::DataFormat::CDF.getName()));
 
-	//const SettingsContainer& cdf_rparams = getReaderControlParameters("cdf");
+	//const SettingsContainer& cdf_rparams = getReaderControlParameters(Chem::DataFormat::CDF.getName());
 
 	settings.endGroup();
 
 	// +++
 
-	settings.beginGroup("Output/CDF");
+	settings.beginGroup(QString::fromStdString("Output/" + Chem::DataFormat::CDF.getName()));
 
-	const SettingsContainer& cdf_wparams = getWriterControlParameters("cdf");
+	const SettingsContainer& cdf_wparams = getWriterControlParameters(Chem::DataFormat::CDF.getName());
 
 	writeParameter<bool>(cdf_wparams, settings, ControlParameter::WRITE_SINGLE_RECORD_FILES);
 	writeParameter<bool>(cdf_wparams, settings, Chem::ControlParameter::CDF_WRITE_SINGLE_PRECISION_FLOATS);

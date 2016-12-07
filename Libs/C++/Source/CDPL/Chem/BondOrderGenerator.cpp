@@ -1123,6 +1123,8 @@ void Chem::BondOrderGenerator::assignNbrBondOrders(const Atom& atom, Util::STArr
 	Atom::ConstBondIterator bonds_end = atom.getBondsEnd();
 	Atom::ConstAtomIterator a_it = atom.getAtomsBegin();
 
+	std::size_t atom_idx = molGraph->getAtomIndex(atom);
+
 	for (Atom::ConstBondIterator b_it = atom.getBondsBegin(); b_it != bonds_end; ++b_it, ++a_it) {
 		const Bond& bond = *b_it;
 		const Atom& nbr_atom = *a_it;
@@ -1131,11 +1133,17 @@ void Chem::BondOrderGenerator::assignNbrBondOrders(const Atom& atom, Util::STArr
 			continue;
 
 		std::size_t bond_idx = molGraph->getBondIndex(bond);
+
+		if (defOrderMask.test(bond_idx))
+			continue;
+
 		std::size_t nbr_atom_idx = molGraph->getAtomIndex(nbr_atom);
 
 		defOrderMask.set(bond_idx);
-		freeAtomValences[nbr_atom_idx]--;
-		orders[bond_idx] = 1; // REMOVE ME
+		orders[bond_idx] = 1;
+
+		if (nbr_atom_idx < atom_idx)
+			freeAtomValences[nbr_atom_idx]--;
 	}
 }
 

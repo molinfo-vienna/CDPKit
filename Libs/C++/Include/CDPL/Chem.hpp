@@ -31,6 +31,8 @@
 #ifndef CDPL_CHEM_HPP
 #define CDPL_CHEM_HPP
 
+#include "CDPL/Config.hpp"
+
 #include "CDPL/Chem/Entity3D.hpp"
 #include "CDPL/Chem/Entity3DContainer.hpp"
 #include "CDPL/Chem/AtomContainer.hpp"
@@ -111,6 +113,8 @@
 #include "CDPL/Chem/MolecularGraphMatchConstraint.hpp"
 #include "CDPL/Chem/ReactionMatchConstraint.hpp"
 
+#include "CDPL/Chem/INCHIMoleculeInputHandler.hpp"
+#include "CDPL/Chem/INCHIMolecularGraphOutputHandler.hpp"
 #include "CDPL/Chem/JMEMoleculeInputHandler.hpp"
 #include "CDPL/Chem/JMEReactionInputHandler.hpp"
 #include "CDPL/Chem/JMEMolecularGraphOutputHandler.hpp"
@@ -131,10 +135,54 @@
 #include "CDPL/Chem/SMARTSReactionInputHandler.hpp"
 #include "CDPL/Chem/SMARTSMolecularGraphOutputHandler.hpp"
 #include "CDPL/Chem/SMARTSReactionOutputHandler.hpp"
-#include "CDPL/Chem/INCHIMoleculeInputHandler.hpp"
-#include "CDPL/Chem/INCHIMolecularGraphOutputHandler.hpp"
 #include "CDPL/Chem/CDFMoleculeInputHandler.hpp"
 #include "CDPL/Chem/CDFMolecularGraphOutputHandler.hpp"
+
+#if defined(HAVE_BOOST_SYSTEM) && defined(HAVE_BOOST_FILESYSTEM) && defined(HAVE_BOOST_IOSTREAMS)
+
+#include "CDPL/Chem/SDFGZMoleculeInputHandler.hpp"
+#include "CDPL/Chem/SDFGZMolecularGraphOutputHandler.hpp"
+#include "CDPL/Chem/SDFBZ2MoleculeInputHandler.hpp"
+#include "CDPL/Chem/SDFBZ2MolecularGraphOutputHandler.hpp"
+#include "CDPL/Chem/SMILESGZMoleculeInputHandler.hpp"
+#include "CDPL/Chem/SMILESGZReactionInputHandler.hpp"
+#include "CDPL/Chem/SMILESGZMolecularGraphOutputHandler.hpp"
+#include "CDPL/Chem/SMILESGZReactionOutputHandler.hpp"
+#include "CDPL/Chem/SMILESBZ2MoleculeInputHandler.hpp"
+#include "CDPL/Chem/SMILESBZ2ReactionInputHandler.hpp"
+#include "CDPL/Chem/SMILESBZ2MolecularGraphOutputHandler.hpp"
+#include "CDPL/Chem/SMILESBZ2ReactionOutputHandler.hpp"
+#include "CDPL/Chem/RDFGZReactionInputHandler.hpp"
+#include "CDPL/Chem/RDFGZReactionOutputHandler.hpp"
+#include "CDPL/Chem/RDFBZ2ReactionInputHandler.hpp"
+#include "CDPL/Chem/RDFBZ2ReactionOutputHandler.hpp"
+#include "CDPL/Chem/CDFGZMoleculeInputHandler.hpp"
+#include "CDPL/Chem/CDFGZMolecularGraphOutputHandler.hpp"
+#include "CDPL/Chem/CDFBZ2MoleculeInputHandler.hpp"
+#include "CDPL/Chem/CDFBZ2MolecularGraphOutputHandler.hpp"
+
+#include "CDPL/Chem/SDFGZMoleculeReader.hpp"
+#include "CDPL/Chem/SDFGZMolecularGraphWriter.hpp"
+#include "CDPL/Chem/SDFBZ2MoleculeReader.hpp"
+#include "CDPL/Chem/SDFBZ2MolecularGraphWriter.hpp"
+#include "CDPL/Chem/RDFGZReactionReader.hpp"
+#include "CDPL/Chem/RDFGZReactionWriter.hpp"
+#include "CDPL/Chem/RDFBZ2ReactionReader.hpp"
+#include "CDPL/Chem/RDFBZ2ReactionWriter.hpp"
+#include "CDPL/Chem/SMILESGZMoleculeReader.hpp"
+#include "CDPL/Chem/SMILESGZMolecularGraphWriter.hpp"
+#include "CDPL/Chem/SMILESBZ2MoleculeReader.hpp"
+#include "CDPL/Chem/SMILESBZ2MolecularGraphWriter.hpp"
+#include "CDPL/Chem/SMILESGZReactionReader.hpp"
+#include "CDPL/Chem/SMILESGZReactionWriter.hpp"
+#include "CDPL/Chem/SMILESBZ2ReactionReader.hpp"
+#include "CDPL/Chem/SMILESBZ2ReactionWriter.hpp"
+#include "CDPL/Chem/CDFGZMoleculeReader.hpp"
+#include "CDPL/Chem/CDFGZMolecularGraphWriter.hpp"
+#include "CDPL/Chem/CDFBZ2MoleculeReader.hpp"
+#include "CDPL/Chem/CDFBZ2MolecularGraphWriter.hpp"
+
+#endif // defined(HAVE_BOOST_SYSTEM) && defined(HAVE_BOOST_FILESYSTEM) && defined(HAVE_BOOST_IOSTREAMS)
 
 #include "CDPL/Chem/JMEMoleculeReader.hpp"
 #include "CDPL/Chem/JMEReactionReader.hpp"

@@ -42,6 +42,11 @@ using namespace CDPL;
 void Pharm::buildInteractionPharmacophore(Pharmacophore& pharm, const FeatureMapping& iactions)
 {
 	for (FeatureMapping::ConstEntryIterator it = iactions.getEntriesBegin(), end = iactions.getEntriesEnd(); it != end; ) {
+		if (!it->first || !it->second) {
+			++it;
+			continue;
+		}
+
 		const Feature& ftr1 = *it->first;
 
 		if (has3DCoordinates(ftr1)) {
@@ -65,6 +70,9 @@ void Pharm::buildInteractionPharmacophore(Pharmacophore& pharm, const FeatureMap
 				const Math::Vector3D& ftr1_pos = get3DCoordinates(ftr1);
 
 				for ( ; it != end && &ftr1 == it->first; ++it) {
+					if (!it->second)
+						continue;
+
 					const Feature& ftr2 = *it->second;
 
 					if (!has3DCoordinates(ftr2))
@@ -80,6 +88,7 @@ void Pharm::buildInteractionPharmacophore(Pharmacophore& pharm, const FeatureMap
 					orient *= dir_factor / len; 
 
 					setOrientation(new_ftr, orient);
+					setGeometry(new_ftr, FeatureGeometry::VECTOR);
 					setLength(new_ftr, len);
 
 					created_ftrs = true;

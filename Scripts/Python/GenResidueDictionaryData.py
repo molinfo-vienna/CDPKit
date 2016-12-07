@@ -274,7 +274,15 @@ def genResidueDictionaryData():
                 atom = struct.addAtom()
 
                 setSymbol(atom, symbol)
+
+                if atom_id.startswith('"') and atom_id.endswith('"'):
+                    atomid = atomid[1:-1]
+
                 setResidueAtomName(atom, atom_id)
+
+                if alt_atom_id.startswith('"') and alt_atom_id.endswith('"'):
+                    alt_atomid = alt_atomid[1:-1]
+
                 setResidueAltAtomName(atom, alt_atom_id)
 
                 if charge != '0':
@@ -344,9 +352,19 @@ def genResidueDictionaryData():
                     atom = struct.addAtom()
 
                     setSymbol(atom, symbol)
-                    setResidueAtomName(atom, fields[1])
-                    setResidueAltAtomName(atom, fields[2].replace('@', ' '))
 
+                    name_to_index[fields[1]] = atom_count
+
+                    if fields[1].startswith('"') and fields[1].endswith('"'):
+                        fields[1] = fields[1][1:-1]
+
+                    setResidueAtomName(atom, fields[1])
+
+                    if fields[2].startswith('"') and fields[2].endswith('"'):
+                        fields[2] = fields[2][1:-1]
+
+                    setResidueAltAtomName(atom, fields[2].replace('@', ' '))
+                  
                     if charge != '0':
                         setFormalCharge(atom, int(charge))
 
@@ -355,7 +373,6 @@ def genResidueDictionaryData():
                     if fields[7] == 'Y':
                         setResidueLeavingAtomFlag(atom, True)
 
-                    name_to_index[fields[1]] = atom_count
                     atom_count += 1
 
                 if not line:

@@ -101,6 +101,26 @@
 #include "CDPL/Pharm/PharmacophoreFitScreeningScore.hpp"
 #include "CDPL/Pharm/FileScreeningHitCollector.hpp"
 
+#include "CDPL/Pharm/PharmacophoreFunctions.hpp"  
+#include "CDPL/Pharm/FeatureFunctions.hpp"
+#include "CDPL/Pharm/FeatureContainerFunctions.hpp"
+#include "CDPL/Pharm/FeatureSetFunctions.hpp"
+#include "CDPL/Pharm/ControlParameterFunctions.hpp"
+
+#if defined(HAVE_BOOST_SYSTEM) && defined(HAVE_BOOST_FILESYSTEM) && defined(HAVE_BOOST_IOSTREAMS)
+
+#include "CDPL/Pharm/CDFGZPharmacophoreInputHandler.hpp"
+#include "CDPL/Pharm/CDFBZ2PharmacophoreInputHandler.hpp"
+#include "CDPL/Pharm/CDFGZFeatureContainerOutputHandler.hpp"
+#include "CDPL/Pharm/CDFBZ2FeatureContainerOutputHandler.hpp"
+
+#include "CDPL/Pharm/CDFGZPharmacophoreReader.hpp"
+#include "CDPL/Pharm/CDFBZ2PharmacophoreReader.hpp"
+#include "CDPL/Pharm/CDFGZFeatureContainerWriter.hpp"
+#include "CDPL/Pharm/CDFBZ2FeatureContainerWriter.hpp"
+
+#endif // defined(HAVE_BOOST_SYSTEM) && defined(HAVE_BOOST_FILESYSTEM) && defined(HAVE_BOOST_IOSTREAMS)
+
 #ifdef HAVE_SQLITE3
 # if defined(HAVE_BOOST_SYSTEM) && defined(HAVE_BOOST_FILESYSTEM) && defined(HAVE_BOOST_IOSTREAMS)
 
@@ -118,11 +138,4 @@
 #include "CDPL/Pharm/PSDScreeningDBAccessor.hpp"
 
 #endif // HAVE_SQLITE3
-
-#include "CDPL/Pharm/PharmacophoreFunctions.hpp"  
-#include "CDPL/Pharm/FeatureFunctions.hpp"
-#include "CDPL/Pharm/FeatureContainerFunctions.hpp"
-#include "CDPL/Pharm/FeatureSetFunctions.hpp"
-#include "CDPL/Pharm/ControlParameterFunctions.hpp"
-
 #endif // CDPL_PHARM_HPP
