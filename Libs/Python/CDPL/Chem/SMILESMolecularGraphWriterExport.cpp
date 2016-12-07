@@ -26,7 +26,17 @@
 
 #include <boost/python.hpp>
 
+#include "CDPL/Config.hpp"
 #include "CDPL/Chem/SMILESMolecularGraphWriter.hpp"
+
+#if defined(HAVE_BOOST_SYSTEM) && defined(HAVE_BOOST_FILESYSTEM) && defined(HAVE_BOOST_IOSTREAMS)
+
+#include "CDPL/Chem/SMILESGZMolecularGraphWriter.hpp"
+#include "CDPL/Chem/SMILESBZ2MolecularGraphWriter.hpp"
+
+#endif // defined(HAVE_BOOST_SYSTEM) && defined(HAVE_BOOST_FILESYSTEM) && defined(HAVE_BOOST_IOSTREAMS)
+
+#include "CDPL/Util/FileDataWriter.hpp"
 
 #include "ClassExports.hpp"
 
@@ -36,8 +46,40 @@ void CDPLPythonChem::exportSMILESMolecularGraphWriter()
 	using namespace boost;
 	using namespace CDPL;
 
-	python::class_<Chem::SMILESMolecularGraphWriter, python::bases<Base::DataWriter<Chem::MolecularGraph> >, 
+	python::class_<Chem::SMILESMolecularGraphWriter, python::bases<Base::DataWriter<Chem::MolecularGraph> >,
 		boost::noncopyable>("SMILESMolecularGraphWriter", python::no_init)
 		.def(python::init<std::ostream&>((python::arg("self"), python::arg("os")))
 			 [python::with_custodian_and_ward<1, 2>()]);
+
+	python::class_<Util::FileDataWriter<Chem::SMILESMolecularGraphWriter>, python::bases<Base::DataWriter<Chem::MolecularGraph> >, 
+		boost::noncopyable>("FileSMILESMolecularGraphWriter", python::no_init)
+		.def(python::init<const std::string&, std::ios_base::openmode>(
+				 (python::arg("self"), python::arg("file_name"), python::arg("mode") = 
+				  std::ios_base::in | std::ios_base::out | std::ios_base::trunc | std::ios_base::binary)));
+
+#if defined(HAVE_BOOST_SYSTEM) && defined(HAVE_BOOST_FILESYSTEM) && defined(HAVE_BOOST_IOSTREAMS)
+
+	python::class_<Chem::SMILESGZMolecularGraphWriter, python::bases<Base::DataWriter<Chem::MolecularGraph> >, 
+		boost::noncopyable>("SMILESGZMolecularGraphWriter", python::no_init)
+		.def(python::init<std::iostream&>((python::arg("self"), python::arg("ios")))
+			 [python::with_custodian_and_ward<1, 2>()]);
+
+	python::class_<Util::FileDataWriter<Chem::SMILESGZMolecularGraphWriter>, python::bases<Base::DataWriter<Chem::MolecularGraph> >, 
+		boost::noncopyable>("FileSMILESGZMolecularGraphWriter", python::no_init)
+		.def(python::init<const std::string&, std::ios_base::openmode>(
+				 (python::arg("self"), python::arg("file_name"), python::arg("mode") = 
+				  std::ios_base::in | std::ios_base::out | std::ios_base::trunc | std::ios_base::binary)));
+
+	python::class_<Chem::SMILESBZ2MolecularGraphWriter, python::bases<Base::DataWriter<Chem::MolecularGraph> >, 
+		boost::noncopyable>("SMILESBZ2MolecularGraphWriter", python::no_init)
+		.def(python::init<std::iostream&>((python::arg("self"), python::arg("ios")))
+			 [python::with_custodian_and_ward<1, 2>()]);
+
+	python::class_<Util::FileDataWriter<Chem::SMILESBZ2MolecularGraphWriter>, python::bases<Base::DataWriter<Chem::MolecularGraph> >, 
+		boost::noncopyable>("FileSMILESBZ2MolecularGraphWriter", python::no_init)
+		.def(python::init<const std::string&, std::ios_base::openmode>(
+				 (python::arg("self"), python::arg("file_name"), python::arg("mode") = 
+				  std::ios_base::in | std::ios_base::out | std::ios_base::trunc | std::ios_base::binary)));
+
+#endif // defined(HAVE_BOOST_SYSTEM) && defined(HAVE_BOOST_FILESYSTEM) && defined(HAVE_BOOST_IOSTREAMS)
 }

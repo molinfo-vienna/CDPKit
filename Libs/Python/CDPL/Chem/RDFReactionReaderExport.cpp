@@ -26,7 +26,17 @@
 
 #include <boost/python.hpp>
 
+#include "CDPL/Config.hpp"
 #include "CDPL/Chem/RDFReactionReader.hpp"
+
+#if defined(HAVE_BOOST_SYSTEM) && defined(HAVE_BOOST_FILESYSTEM) && defined(HAVE_BOOST_IOSTREAMS)
+
+#include "CDPL/Chem/RDFGZReactionReader.hpp"
+#include "CDPL/Chem/RDFBZ2ReactionReader.hpp"
+
+#endif // defined(HAVE_BOOST_SYSTEM) && defined(HAVE_BOOST_FILESYSTEM) && defined(HAVE_BOOST_IOSTREAMS)
+
+#include "CDPL/Util/FileDataReader.hpp"
 
 #include "ClassExports.hpp"
 
@@ -40,4 +50,33 @@ void CDPLPythonChem::exportRDFReactionReader()
 		boost::noncopyable>("RDFReactionReader", python::no_init)
 		.def(python::init<std::istream&>((python::arg("self"), python::arg("is")))
 			 [python::with_custodian_and_ward<1, 2>()]);
+
+	python::class_<Util::FileDataReader<Chem::RDFReactionReader>, python::bases<Base::DataReader<Chem::Reaction> >, 
+		boost::noncopyable>("FileRDFReactionReader", python::no_init)
+		.def(python::init<const std::string&, std::ios_base::openmode>(
+				 (python::arg("self"), python::arg("file_name"), python::arg("mode") = std::ios_base::in | std::ios_base::binary)));
+
+#if defined(HAVE_BOOST_SYSTEM) && defined(HAVE_BOOST_FILESYSTEM) && defined(HAVE_BOOST_IOSTREAMS)
+
+	python::class_<Chem::RDFGZReactionReader, python::bases<Base::DataReader<Chem::Reaction> >, 
+		boost::noncopyable>("RDFGZReactionReader", python::no_init)
+		.def(python::init<std::istream&>((python::arg("self"), python::arg("is")))
+			 [python::with_custodian_and_ward<1, 2>()]);
+
+	python::class_<Util::FileDataReader<Chem::RDFGZReactionReader>, python::bases<Base::DataReader<Chem::Reaction> >, 
+		boost::noncopyable>("FileRDFGZReactionReader", python::no_init)
+		.def(python::init<const std::string&, std::ios_base::openmode>(
+				 (python::arg("self"), python::arg("file_name"), python::arg("mode") = std::ios_base::in | std::ios_base::binary)));
+
+	python::class_<Chem::RDFBZ2ReactionReader, python::bases<Base::DataReader<Chem::Reaction> >, 
+		boost::noncopyable>("RDFBZ2ReactionReader", python::no_init)
+		.def(python::init<std::istream&>((python::arg("self"), python::arg("is")))
+			 [python::with_custodian_and_ward<1, 2>()]);
+
+	python::class_<Util::FileDataReader<Chem::RDFBZ2ReactionReader>, python::bases<Base::DataReader<Chem::Reaction> >, 
+		boost::noncopyable>("FileRDFBZ2ReactionReader", python::no_init)
+		.def(python::init<const std::string&, std::ios_base::openmode>(
+				 (python::arg("self"), python::arg("file_name"), python::arg("mode") = std::ios_base::in | std::ios_base::binary)));
+
+#endif // defined(HAVE_BOOST_SYSTEM) && defined(HAVE_BOOST_FILESYSTEM) && defined(HAVE_BOOST_IOSTREAMS)
 }

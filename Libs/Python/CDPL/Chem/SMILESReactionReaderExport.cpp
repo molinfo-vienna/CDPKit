@@ -26,7 +26,17 @@
 
 #include <boost/python.hpp>
 
+#include "CDPL/Config.hpp"
 #include "CDPL/Chem/SMILESReactionReader.hpp"
+
+#if defined(HAVE_BOOST_SYSTEM) && defined(HAVE_BOOST_FILESYSTEM) && defined(HAVE_BOOST_IOSTREAMS)
+
+#include "CDPL/Chem/SMILESGZReactionReader.hpp"
+#include "CDPL/Chem/SMILESBZ2ReactionReader.hpp"
+
+#endif // defined(HAVE_BOOST_SYSTEM) && defined(HAVE_BOOST_FILESYSTEM) && defined(HAVE_BOOST_IOSTREAMS)
+
+#include "CDPL/Util/FileDataReader.hpp"
 
 #include "ClassExports.hpp"
 
@@ -40,4 +50,33 @@ void CDPLPythonChem::exportSMILESReactionReader()
 		boost::noncopyable>("SMILESReactionReader", python::no_init)
 		.def(python::init<std::istream&>((python::arg("self"), python::arg("is")))
 			 [python::with_custodian_and_ward<1, 2>()]);
+
+	python::class_<Util::FileDataReader<Chem::SMILESReactionReader>, python::bases<Base::DataReader<Chem::Reaction> >, 
+		boost::noncopyable>("FileSMILESReactionReader", python::no_init)
+		.def(python::init<const std::string&, std::ios_base::openmode>(
+				 (python::arg("self"), python::arg("file_name"), python::arg("mode") = std::ios_base::in | std::ios_base::binary)));
+
+#if defined(HAVE_BOOST_SYSTEM) && defined(HAVE_BOOST_FILESYSTEM) && defined(HAVE_BOOST_IOSTREAMS)
+
+	python::class_<Chem::SMILESGZReactionReader, python::bases<Base::DataReader<Chem::Reaction> >, 
+		boost::noncopyable>("SMILESGZReactionReader", python::no_init)
+		.def(python::init<std::istream&>((python::arg("self"), python::arg("is")))
+			 [python::with_custodian_and_ward<1, 2>()]);
+
+	python::class_<Util::FileDataReader<Chem::SMILESGZReactionReader>, python::bases<Base::DataReader<Chem::Reaction> >, 
+		boost::noncopyable>("FileSMILESGZReactionReader", python::no_init)
+		.def(python::init<const std::string&, std::ios_base::openmode>(
+				 (python::arg("self"), python::arg("file_name"), python::arg("mode") = std::ios_base::in | std::ios_base::binary)));
+
+	python::class_<Chem::SMILESBZ2ReactionReader, python::bases<Base::DataReader<Chem::Reaction> >, 
+		boost::noncopyable>("SMILESBZ2ReactionReader", python::no_init)
+		.def(python::init<std::istream&>((python::arg("self"), python::arg("is")))
+			 [python::with_custodian_and_ward<1, 2>()]);
+
+	python::class_<Util::FileDataReader<Chem::SMILESBZ2ReactionReader>, python::bases<Base::DataReader<Chem::Reaction> >, 
+		boost::noncopyable>("FileSMILESBZ2ReactionReader", python::no_init)
+		.def(python::init<const std::string&, std::ios_base::openmode>(
+				 (python::arg("self"), python::arg("file_name"), python::arg("mode") = std::ios_base::in | std::ios_base::binary)));
+
+#endif // defined(HAVE_BOOST_SYSTEM) && defined(HAVE_BOOST_FILESYSTEM) && defined(HAVE_BOOST_IOSTREAMS)
 }

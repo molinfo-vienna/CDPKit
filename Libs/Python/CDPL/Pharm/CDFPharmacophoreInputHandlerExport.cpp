@@ -26,7 +26,15 @@
 
 #include <boost/python.hpp>
 
+#include "CDPL/Config.hpp"
 #include "CDPL/Pharm/CDFPharmacophoreInputHandler.hpp"
+
+#if defined(HAVE_BOOST_SYSTEM) && defined(HAVE_BOOST_FILESYSTEM) && defined(HAVE_BOOST_IOSTREAMS)
+
+#include "CDPL/Pharm/CDFGZPharmacophoreInputHandler.hpp"
+#include "CDPL/Pharm/CDFBZ2PharmacophoreInputHandler.hpp"
+
+#endif // defined(HAVE_BOOST_SYSTEM) && defined(HAVE_BOOST_FILESYSTEM) && defined(HAVE_BOOST_IOSTREAMS)
 
 #include "ClassExports.hpp"
 
@@ -39,4 +47,16 @@ void CDPLPythonPharm::exportCDFPharmacophoreInputHandler()
 	python::class_<Pharm::CDFPharmacophoreInputHandler, 
 		python::bases<Base::DataInputHandler<Pharm::Pharmacophore> > >("CDFPharmacophoreInputHandler", python::no_init)
 		.def(python::init<>(python::arg("self")));
+
+#if defined(HAVE_BOOST_SYSTEM) && defined(HAVE_BOOST_FILESYSTEM) && defined(HAVE_BOOST_IOSTREAMS)
+
+	python::class_<Pharm::CDFGZPharmacophoreInputHandler, 
+		python::bases<Base::DataInputHandler<Pharm::Pharmacophore> > >("CDFGZPharmacophoreInputHandler", python::no_init)
+		.def(python::init<>(python::arg("self")));
+
+	python::class_<Pharm::CDFBZ2PharmacophoreInputHandler, 
+		python::bases<Base::DataInputHandler<Pharm::Pharmacophore> > >("CDFBZ2PharmacophoreInputHandler", python::no_init)
+		.def(python::init<>(python::arg("self")));
+
+#endif // defined(HAVE_BOOST_SYSTEM) && defined(HAVE_BOOST_FILESYSTEM) && defined(HAVE_BOOST_IOSTREAMS)
 }

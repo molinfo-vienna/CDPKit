@@ -26,7 +26,17 @@
 
 #include <boost/python.hpp>
 
+#include "CDPL/Config.hpp"
 #include "CDPL/Biomol/PDBMolecularGraphWriter.hpp"
+
+#if defined(HAVE_BOOST_SYSTEM) && defined(HAVE_BOOST_FILESYSTEM) && defined(HAVE_BOOST_IOSTREAMS)
+
+#include "CDPL/Biomol/PDBGZMolecularGraphWriter.hpp"
+#include "CDPL/Biomol/PDBBZ2MolecularGraphWriter.hpp"
+
+#endif // defined(HAVE_BOOST_SYSTEM) && defined(HAVE_BOOST_FILESYSTEM) && defined(HAVE_BOOST_IOSTREAMS)
+
+#include "CDPL/Util/FileDataWriter.hpp"
 
 #include "ClassExports.hpp"
 
@@ -40,4 +50,36 @@ void CDPLPythonBiomol::exportPDBMolecularGraphWriter()
 		boost::noncopyable>("PDBMolecularGraphWriter", python::no_init)
 		.def(python::init<std::ostream&>((python::arg("self"), python::arg("os")))
 			 [python::with_custodian_and_ward<1, 2>()]);
+
+	python::class_<Util::FileDataWriter<Biomol::PDBMolecularGraphWriter>, python::bases<Base::DataWriter<Chem::MolecularGraph> >, 
+		boost::noncopyable>("FilePDBMolecularGraphWriter", python::no_init)
+		.def(python::init<const std::string&, std::ios_base::openmode>(
+				 (python::arg("self"), python::arg("file_name"), python::arg("mode") = 
+				  std::ios_base::in | std::ios_base::out | std::ios_base::trunc | std::ios_base::binary)));
+
+#if defined(HAVE_BOOST_SYSTEM) && defined(HAVE_BOOST_FILESYSTEM) && defined(HAVE_BOOST_IOSTREAMS)
+
+	python::class_<Biomol::PDBGZMolecularGraphWriter, python::bases<Base::DataWriter<Chem::MolecularGraph> >, 
+		boost::noncopyable>("PDBGZMolecularGraphWriter", python::no_init)
+		.def(python::init<std::iostream&>((python::arg("self"), python::arg("ios")))
+			 [python::with_custodian_and_ward<1, 2>()]);
+
+	python::class_<Util::FileDataWriter<Biomol::PDBGZMolecularGraphWriter>, python::bases<Base::DataWriter<Chem::MolecularGraph> >, 
+		boost::noncopyable>("FilePDBGZMolecularGraphWriter", python::no_init)
+		.def(python::init<const std::string&, std::ios_base::openmode>(
+				 (python::arg("self"), python::arg("file_name"), python::arg("mode") = 
+				  std::ios_base::in | std::ios_base::out | std::ios_base::trunc | std::ios_base::binary)));
+
+	python::class_<Biomol::PDBBZ2MolecularGraphWriter, python::bases<Base::DataWriter<Chem::MolecularGraph> >, 
+		boost::noncopyable>("PDBBZ2MolecularGraphWriter", python::no_init)
+		.def(python::init<std::iostream&>((python::arg("self"), python::arg("ios")))
+			 [python::with_custodian_and_ward<1, 2>()]);
+
+	python::class_<Util::FileDataWriter<Biomol::PDBBZ2MolecularGraphWriter>, python::bases<Base::DataWriter<Chem::MolecularGraph> >, 
+		boost::noncopyable>("FilePDBBZ2MolecularGraphWriter", python::no_init)
+		.def(python::init<const std::string&, std::ios_base::openmode>(
+				 (python::arg("self"), python::arg("file_name"), python::arg("mode") = 
+				  std::ios_base::in | std::ios_base::out | std::ios_base::trunc | std::ios_base::binary)));
+
+#endif // defined(HAVE_BOOST_SYSTEM) && defined(HAVE_BOOST_FILESYSTEM) && defined(HAVE_BOOST_IOSTREAMS)
 }

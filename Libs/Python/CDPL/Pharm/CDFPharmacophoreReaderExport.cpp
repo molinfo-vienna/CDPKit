@@ -1,7 +1,7 @@
 /* -*- mode: c++; c-basic-offset: 4; tab-width: 4; indent-tabs-mode: t -*- */
 
 /* 
- * CDFPharmacophoreReaderExport.cpp 
+ * CDFMoleculeReaderExport.cpp 
  *
  * This file is part of the Chemical Data Processing Toolkit
  *
@@ -26,7 +26,17 @@
 
 #include <boost/python.hpp>
 
+#include "CDPL/Config.hpp"
 #include "CDPL/Pharm/CDFPharmacophoreReader.hpp"
+
+#if defined(HAVE_BOOST_SYSTEM) && defined(HAVE_BOOST_FILESYSTEM) && defined(HAVE_BOOST_IOSTREAMS)
+
+#include "CDPL/Pharm/CDFGZPharmacophoreReader.hpp"
+#include "CDPL/Pharm/CDFBZ2PharmacophoreReader.hpp"
+
+#endif // defined(HAVE_BOOST_SYSTEM) && defined(HAVE_BOOST_FILESYSTEM) && defined(HAVE_BOOST_IOSTREAMS)
+
+#include "CDPL/Util/FileDataReader.hpp"
 
 #include "ClassExports.hpp"
 
@@ -40,4 +50,33 @@ void CDPLPythonPharm::exportCDFPharmacophoreReader()
 		boost::noncopyable>("CDFPharmacophoreReader", python::no_init)
 		.def(python::init<std::istream&>((python::arg("self"), python::arg("is")))
 			 [python::with_custodian_and_ward<1, 2>()]);
+
+	python::class_<Util::FileDataReader<Pharm::CDFPharmacophoreReader>, python::bases<Base::DataReader<Pharm::Pharmacophore> >, 
+		boost::noncopyable>("FileCDFPharmacophoreReader", python::no_init)
+		.def(python::init<const std::string&, std::ios_base::openmode>(
+				 (python::arg("self"), python::arg("file_name"), python::arg("mode") = std::ios_base::in | std::ios_base::binary)));
+
+#if defined(HAVE_BOOST_SYSTEM) && defined(HAVE_BOOST_FILESYSTEM) && defined(HAVE_BOOST_IOSTREAMS)
+
+	python::class_<Pharm::CDFGZPharmacophoreReader, python::bases<Base::DataReader<Pharm::Pharmacophore> >, 
+		boost::noncopyable>("CDFGZPharmacophoreReader", python::no_init)
+		.def(python::init<std::istream&>((python::arg("self"), python::arg("is")))
+			 [python::with_custodian_and_ward<1, 2>()]);
+
+	python::class_<Util::FileDataReader<Pharm::CDFGZPharmacophoreReader>, python::bases<Base::DataReader<Pharm::Pharmacophore> >, 
+		boost::noncopyable>("FileCDFGZPharmacophoreReader", python::no_init)
+		.def(python::init<const std::string&, std::ios_base::openmode>(
+				 (python::arg("self"), python::arg("file_name"), python::arg("mode") = std::ios_base::in | std::ios_base::binary)));
+
+	python::class_<Pharm::CDFBZ2PharmacophoreReader, python::bases<Base::DataReader<Pharm::Pharmacophore> >, 
+		boost::noncopyable>("CDFBZ2PharmacophoreReader", python::no_init)
+		.def(python::init<std::istream&>((python::arg("self"), python::arg("is")))
+			 [python::with_custodian_and_ward<1, 2>()]);
+
+	python::class_<Util::FileDataReader<Pharm::CDFBZ2PharmacophoreReader>, python::bases<Base::DataReader<Pharm::Pharmacophore> >, 
+		boost::noncopyable>("FileCDFBZ2PharmacophoreReader", python::no_init)
+		.def(python::init<const std::string&, std::ios_base::openmode>(
+				 (python::arg("self"), python::arg("file_name"), python::arg("mode") = std::ios_base::in | std::ios_base::binary)));
+
+#endif // defined(HAVE_BOOST_SYSTEM) && defined(HAVE_BOOST_FILESYSTEM) && defined(HAVE_BOOST_IOSTREAMS)
 }

@@ -26,7 +26,15 @@
 
 #include <boost/python.hpp>
 
+#include "CDPL/Config.hpp"
 #include "CDPL/Chem/SDFMolecularGraphOutputHandler.hpp"
+
+#if defined(HAVE_BOOST_SYSTEM) && defined(HAVE_BOOST_FILESYSTEM) && defined(HAVE_BOOST_IOSTREAMS)
+
+#include "CDPL/Chem/SDFGZMolecularGraphOutputHandler.hpp"
+#include "CDPL/Chem/SDFBZ2MolecularGraphOutputHandler.hpp"
+
+#endif // defined(HAVE_BOOST_SYSTEM) && defined(HAVE_BOOST_FILESYSTEM) && defined(HAVE_BOOST_IOSTREAMS)
 
 #include "ClassExports.hpp"
 
@@ -39,4 +47,16 @@ void CDPLPythonChem::exportSDFMolecularGraphOutputHandler()
 	python::class_<Chem::SDFMolecularGraphOutputHandler, 
 		python::bases<Base::DataOutputHandler<Chem::MolecularGraph> > >("SDFMolecularGraphOutputHandler", python::no_init)
 		.def(python::init<>(python::arg("self")));
+
+#if defined(HAVE_BOOST_SYSTEM) && defined(HAVE_BOOST_FILESYSTEM) && defined(HAVE_BOOST_IOSTREAMS)
+
+	python::class_<Chem::SDFGZMolecularGraphOutputHandler, 
+		python::bases<Base::DataOutputHandler<Chem::MolecularGraph> > >("SDFGZMolecularGraphOutputHandler", python::no_init)
+		.def(python::init<>(python::arg("self")));
+
+	python::class_<Chem::SDFBZ2MolecularGraphOutputHandler, 
+		python::bases<Base::DataOutputHandler<Chem::MolecularGraph> > >("SDFBZ2MolecularGraphOutputHandler", python::no_init)
+		.def(python::init<>(python::arg("self")));
+
+#endif // defined(HAVE_BOOST_SYSTEM) && defined(HAVE_BOOST_FILESYSTEM) && defined(HAVE_BOOST_IOSTREAMS)
 }

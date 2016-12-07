@@ -26,7 +26,15 @@
 
 #include <boost/python.hpp>
 
+#include "CDPL/Config.hpp"
 #include "CDPL/Chem/RDFReactionInputHandler.hpp"
+
+#if defined(HAVE_BOOST_SYSTEM) && defined(HAVE_BOOST_FILESYSTEM) && defined(HAVE_BOOST_IOSTREAMS)
+
+#include "CDPL/Chem/RDFGZReactionInputHandler.hpp"
+#include "CDPL/Chem/RDFBZ2ReactionInputHandler.hpp"
+
+#endif // defined(HAVE_BOOST_SYSTEM) && defined(HAVE_BOOST_FILESYSTEM) && defined(HAVE_BOOST_IOSTREAMS)
 
 #include "ClassExports.hpp"
 
@@ -39,4 +47,16 @@ void CDPLPythonChem::exportRDFReactionInputHandler()
 	python::class_<Chem::RDFReactionInputHandler, 
 		python::bases<Base::DataInputHandler<Chem::Reaction> > >("RDFReactionInputHandler", python::no_init)
 		.def(python::init<>(python::arg("self")));
+
+#if defined(HAVE_BOOST_SYSTEM) && defined(HAVE_BOOST_FILESYSTEM) && defined(HAVE_BOOST_IOSTREAMS)
+
+	python::class_<Chem::RDFGZReactionInputHandler, 
+		python::bases<Base::DataInputHandler<Chem::Reaction> > >("RDFGZReactionInputHandler", python::no_init)
+		.def(python::init<>(python::arg("self")));
+
+	python::class_<Chem::RDFBZ2ReactionInputHandler, 
+		python::bases<Base::DataInputHandler<Chem::Reaction> > >("RDFBZ2ReactionInputHandler", python::no_init)
+		.def(python::init<>(python::arg("self")));
+
+#endif // defined(HAVE_BOOST_SYSTEM) && defined(HAVE_BOOST_FILESYSTEM) && defined(HAVE_BOOST_IOSTREAMS)
 }

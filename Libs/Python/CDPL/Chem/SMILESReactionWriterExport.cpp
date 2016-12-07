@@ -26,7 +26,17 @@
 
 #include <boost/python.hpp>
 
+#include "CDPL/Config.hpp"
 #include "CDPL/Chem/SMILESReactionWriter.hpp"
+
+#if defined(HAVE_BOOST_SYSTEM) && defined(HAVE_BOOST_FILESYSTEM) && defined(HAVE_BOOST_IOSTREAMS)
+
+#include "CDPL/Chem/SMILESGZReactionWriter.hpp"
+#include "CDPL/Chem/SMILESBZ2ReactionWriter.hpp"
+
+#endif // defined(HAVE_BOOST_SYSTEM) && defined(HAVE_BOOST_FILESYSTEM) && defined(HAVE_BOOST_IOSTREAMS)
+
+#include "CDPL/Util/FileDataWriter.hpp"
 
 #include "ClassExports.hpp"
 
@@ -36,8 +46,40 @@ void CDPLPythonChem::exportSMILESReactionWriter()
 	using namespace boost;
 	using namespace CDPL;
 
-	python::class_<Chem::SMILESReactionWriter, python::bases<Base::DataWriter<Chem::Reaction> >, 
+	python::class_<Chem::SMILESReactionWriter, python::bases<Base::DataWriter<Chem::Reaction> >,
 		boost::noncopyable>("SMILESReactionWriter", python::no_init)
 		.def(python::init<std::ostream&>((python::arg("self"), python::arg("os")))
 			 [python::with_custodian_and_ward<1, 2>()]);
+
+	python::class_<Util::FileDataWriter<Chem::SMILESReactionWriter>, python::bases<Base::DataWriter<Chem::Reaction> >, 
+		boost::noncopyable>("FileSMILESReactionWriter", python::no_init)
+		.def(python::init<const std::string&, std::ios_base::openmode>(
+				 (python::arg("self"), python::arg("file_name"), python::arg("mode") = 
+				  std::ios_base::in | std::ios_base::out | std::ios_base::trunc | std::ios_base::binary)));
+
+#if defined(HAVE_BOOST_SYSTEM) && defined(HAVE_BOOST_FILESYSTEM) && defined(HAVE_BOOST_IOSTREAMS)
+
+	python::class_<Chem::SMILESGZReactionWriter, python::bases<Base::DataWriter<Chem::Reaction> >, 
+		boost::noncopyable>("SMILESGZReactionWriter", python::no_init)
+		.def(python::init<std::iostream&>((python::arg("self"), python::arg("ios")))
+			 [python::with_custodian_and_ward<1, 2>()]);
+
+	python::class_<Util::FileDataWriter<Chem::SMILESGZReactionWriter>, python::bases<Base::DataWriter<Chem::Reaction> >, 
+		boost::noncopyable>("FileSMILESGZReactionWriter", python::no_init)
+		.def(python::init<const std::string&, std::ios_base::openmode>(
+				 (python::arg("self"), python::arg("file_name"), python::arg("mode") = 
+				  std::ios_base::in | std::ios_base::out | std::ios_base::trunc | std::ios_base::binary)));
+
+	python::class_<Chem::SMILESBZ2ReactionWriter, python::bases<Base::DataWriter<Chem::Reaction> >, 
+		boost::noncopyable>("SMILESBZ2ReactionWriter", python::no_init)
+		.def(python::init<std::iostream&>((python::arg("self"), python::arg("ios")))
+			 [python::with_custodian_and_ward<1, 2>()]);
+
+	python::class_<Util::FileDataWriter<Chem::SMILESBZ2ReactionWriter>, python::bases<Base::DataWriter<Chem::Reaction> >, 
+		boost::noncopyable>("FileSMILESBZ2ReactionWriter", python::no_init)
+		.def(python::init<const std::string&, std::ios_base::openmode>(
+				 (python::arg("self"), python::arg("file_name"), python::arg("mode") = 
+				  std::ios_base::in | std::ios_base::out | std::ios_base::trunc | std::ios_base::binary)));
+
+#endif // defined(HAVE_BOOST_SYSTEM) && defined(HAVE_BOOST_FILESYSTEM) && defined(HAVE_BOOST_IOSTREAMS)
 }

@@ -26,7 +26,15 @@
 
 #include <boost/python.hpp>
 
+#include "CDPL/Config.hpp"
 #include "CDPL/Chem/RDFReactionOutputHandler.hpp"
+
+#if defined(HAVE_BOOST_SYSTEM) && defined(HAVE_BOOST_FILESYSTEM) && defined(HAVE_BOOST_IOSTREAMS)
+
+#include "CDPL/Chem/RDFGZReactionOutputHandler.hpp"
+#include "CDPL/Chem/RDFBZ2ReactionOutputHandler.hpp"
+
+#endif // defined(HAVE_BOOST_SYSTEM) && defined(HAVE_BOOST_FILESYSTEM) && defined(HAVE_BOOST_IOSTREAMS)
 
 #include "ClassExports.hpp"
 
@@ -39,4 +47,16 @@ void CDPLPythonChem::exportRDFReactionOutputHandler()
 	python::class_<Chem::RDFReactionOutputHandler, 
 		python::bases<Base::DataOutputHandler<Chem::Reaction> > >("RDFReactionOutputHandler", python::no_init)
 		.def(python::init<>(python::arg("self")));
+
+#if defined(HAVE_BOOST_SYSTEM) && defined(HAVE_BOOST_FILESYSTEM) && defined(HAVE_BOOST_IOSTREAMS)
+
+	python::class_<Chem::RDFGZReactionOutputHandler, 
+		python::bases<Base::DataOutputHandler<Chem::Reaction> > >("RDFGZReactionOutputHandler", python::no_init)
+		.def(python::init<>(python::arg("self")));
+
+	python::class_<Chem::RDFBZ2ReactionOutputHandler, 
+		python::bases<Base::DataOutputHandler<Chem::Reaction> > >("RDFBZ2ReactionOutputHandler", python::no_init)
+		.def(python::init<>(python::arg("self")));
+
+#endif // defined(HAVE_BOOST_SYSTEM) && defined(HAVE_BOOST_FILESYSTEM) && defined(HAVE_BOOST_IOSTREAMS)
 }

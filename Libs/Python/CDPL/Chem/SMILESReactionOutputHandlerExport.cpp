@@ -26,7 +26,15 @@
 
 #include <boost/python.hpp>
 
+#include "CDPL/Config.hpp"
 #include "CDPL/Chem/SMILESReactionOutputHandler.hpp"
+
+#if defined(HAVE_BOOST_SYSTEM) && defined(HAVE_BOOST_FILESYSTEM) && defined(HAVE_BOOST_IOSTREAMS)
+
+#include "CDPL/Chem/SMILESGZReactionOutputHandler.hpp"
+#include "CDPL/Chem/SMILESBZ2ReactionOutputHandler.hpp"
+
+#endif // defined(HAVE_BOOST_SYSTEM) && defined(HAVE_BOOST_FILESYSTEM) && defined(HAVE_BOOST_IOSTREAMS)
 
 #include "ClassExports.hpp"
 
@@ -39,4 +47,16 @@ void CDPLPythonChem::exportSMILESReactionOutputHandler()
 	python::class_<Chem::SMILESReactionOutputHandler, 
 		python::bases<Base::DataOutputHandler<Chem::Reaction> > >("SMILESReactionOutputHandler", python::no_init)
 		.def(python::init<>(python::arg("self")));
+
+#if defined(HAVE_BOOST_SYSTEM) && defined(HAVE_BOOST_FILESYSTEM) && defined(HAVE_BOOST_IOSTREAMS)
+
+	python::class_<Chem::SMILESGZReactionOutputHandler, 
+		python::bases<Base::DataOutputHandler<Chem::Reaction> > >("SMILESGZReactionOutputHandler", python::no_init)
+		.def(python::init<>(python::arg("self")));
+
+	python::class_<Chem::SMILESBZ2ReactionOutputHandler, 
+		python::bases<Base::DataOutputHandler<Chem::Reaction> > >("SMILESBZ2ReactionOutputHandler", python::no_init)
+		.def(python::init<>(python::arg("self")));
+
+#endif // defined(HAVE_BOOST_SYSTEM) && defined(HAVE_BOOST_FILESYSTEM) && defined(HAVE_BOOST_IOSTREAMS)
 }

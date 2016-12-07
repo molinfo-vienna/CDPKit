@@ -26,7 +26,17 @@
 
 #include <boost/python.hpp>
 
+#include "CDPL/Config.hpp"
 #include "CDPL/Biomol/PDBMoleculeReader.hpp"
+
+#if defined(HAVE_BOOST_SYSTEM) && defined(HAVE_BOOST_FILESYSTEM) && defined(HAVE_BOOST_IOSTREAMS)
+
+#include "CDPL/Biomol/PDBGZMoleculeReader.hpp"
+#include "CDPL/Biomol/PDBBZ2MoleculeReader.hpp"
+
+#endif // defined(HAVE_BOOST_SYSTEM) && defined(HAVE_BOOST_FILESYSTEM) && defined(HAVE_BOOST_IOSTREAMS)
+
+#include "CDPL/Util/FileDataReader.hpp"
 
 #include "ClassExports.hpp"
 
@@ -40,4 +50,33 @@ void CDPLPythonBiomol::exportPDBMoleculeReader()
 		boost::noncopyable>("PDBMoleculeReader", python::no_init)
 		.def(python::init<std::istream&>((python::arg("self"), python::arg("is")))
 			 [python::with_custodian_and_ward<1, 2>()]);
+
+	python::class_<Util::FileDataReader<Biomol::PDBMoleculeReader>, python::bases<Base::DataReader<Chem::Molecule> >, 
+		boost::noncopyable>("FilePDBMoleculeReader", python::no_init)
+		.def(python::init<const std::string&, std::ios_base::openmode>(
+				 (python::arg("self"), python::arg("file_name"), python::arg("mode") = std::ios_base::in | std::ios_base::binary)));
+
+#if defined(HAVE_BOOST_SYSTEM) && defined(HAVE_BOOST_FILESYSTEM) && defined(HAVE_BOOST_IOSTREAMS)
+
+	python::class_<Biomol::PDBGZMoleculeReader, python::bases<Base::DataReader<Chem::Molecule> >, 
+		boost::noncopyable>("PDBGZMoleculeReader", python::no_init)
+		.def(python::init<std::istream&>((python::arg("self"), python::arg("is")))
+			 [python::with_custodian_and_ward<1, 2>()]);
+
+	python::class_<Util::FileDataReader<Biomol::PDBGZMoleculeReader>, python::bases<Base::DataReader<Chem::Molecule> >, 
+		boost::noncopyable>("FilePDBGZMoleculeReader", python::no_init)
+		.def(python::init<const std::string&, std::ios_base::openmode>(
+				 (python::arg("self"), python::arg("file_name"), python::arg("mode") = std::ios_base::in | std::ios_base::binary)));
+
+	python::class_<Biomol::PDBBZ2MoleculeReader, python::bases<Base::DataReader<Chem::Molecule> >, 
+		boost::noncopyable>("PDBBZ2MoleculeReader", python::no_init)
+		.def(python::init<std::istream&>((python::arg("self"), python::arg("is")))
+			 [python::with_custodian_and_ward<1, 2>()]);
+
+	python::class_<Util::FileDataReader<Biomol::PDBBZ2MoleculeReader>, python::bases<Base::DataReader<Chem::Molecule> >, 
+		boost::noncopyable>("FilePDBBZ2MoleculeReader", python::no_init)
+		.def(python::init<const std::string&, std::ios_base::openmode>(
+				 (python::arg("self"), python::arg("file_name"), python::arg("mode") = std::ios_base::in | std::ios_base::binary)));
+
+#endif // defined(HAVE_BOOST_SYSTEM) && defined(HAVE_BOOST_FILESYSTEM) && defined(HAVE_BOOST_IOSTREAMS)
 }
