@@ -33,6 +33,8 @@
 
 #include <iosfwd>
 
+#include <boost/bind.hpp>
+
 #include "CDPL/Base/DataReader.hpp"
 #include "CDPL/Util/CompressionStreams.hpp"
 
@@ -92,6 +94,7 @@ CDPL::Util::CompressedDataReader<ReaderImpl, DecompStream, DataType>::Compressed
     stream(is), reader(stream) 
 {
     reader.setParent(this);
+	reader.registerIOCallback(boost::bind(&Base::DataIOBase::invokeIOCallbacks, this, _2));
 }
 
 template <typename ReaderImpl, typename DecompStream, typename DataType>

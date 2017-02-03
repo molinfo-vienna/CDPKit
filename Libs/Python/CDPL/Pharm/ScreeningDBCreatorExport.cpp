@@ -27,6 +27,7 @@
 #include <boost/python.hpp>
 
 #include "CDPL/Pharm/ScreeningDBCreator.hpp"
+#include "CDPL/Pharm/ScreeningDBAccessor.hpp"
 #include "CDPL/Chem/MolecularGraph.hpp"
 
 #include "Base/ObjectIdentityCheckVisitor.hpp"
@@ -50,7 +51,7 @@ namespace
 			this->get_override("close")();
 		}
 
-		CDPL::Pharm::ScreeningDBCreator::Mode getMode() const {
+		Mode getMode() const {
 			return this->get_override("getMode")();
 		}
 
@@ -60,6 +61,10 @@ namespace
 
 		bool process(const CDPL::Chem::MolecularGraph& molgraph) {
 			return this->get_override("process")(boost::ref(molgraph));
+		}
+
+		bool merge(const CDPL::Pharm::ScreeningDBAccessor& db_acc, const ProgressCallbackFunction& func) {
+			return this->get_override("merge")(boost::ref(db_acc), boost::ref(func));
 		}
 
 		const std::string& getDatabaseName() const {
@@ -110,6 +115,7 @@ void CDPLPythonPharm::exportScreeningDBCreator()
 		.def("getMode", python::pure_virtual(&Pharm::ScreeningDBCreator::getMode), python::arg("self"))
 		.def("allowDuplicateEntries", python::pure_virtual(&Pharm::ScreeningDBCreator::allowDuplicateEntries), python::arg("self"))
 		.def("process", python::pure_virtual(&Pharm::ScreeningDBCreator::process), (python::arg("self"), python::arg("molgraph")))
+		.def("merge", python::pure_virtual(&Pharm::ScreeningDBCreator::merge), (python::arg("self"), python::arg("db_acc"), python::arg("func")))
 		.def("getNumProcessed", python::pure_virtual(&Pharm::ScreeningDBCreator::getNumProcessed), python::arg("self"))
 		.def("getNumRejected", python::pure_virtual(&Pharm::ScreeningDBCreator::getNumRejected), python::arg("self"))
 		.def("getNumDeleted", python::pure_virtual(&Pharm::ScreeningDBCreator::getNumDeleted), python::arg("self"))

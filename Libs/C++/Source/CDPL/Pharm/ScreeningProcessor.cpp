@@ -28,7 +28,7 @@
 
 #include "CDPL/Pharm/ScreeningProcessor.hpp"
 
-#include "ScreeningProcImplementation.hpp"
+#include "ScreeningProcessorImpl.hpp"
 
 
 using namespace CDPL;
@@ -87,7 +87,7 @@ std::size_t Pharm::ScreeningProcessor::SearchHit::getHitConformationIndex() cons
 // ScreeningProcessor
 
 Pharm::ScreeningProcessor::ScreeningProcessor(ScreeningDBAccessor& db_acc): 
-    impl(new ScreeningProcImplementation(*this, db_acc))
+    impl(new ScreeningProcessorImpl(*this, db_acc))
 {}
 	
 Pharm::ScreeningProcessor::~ScreeningProcessor() {}

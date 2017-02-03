@@ -32,6 +32,7 @@
 #include <string>
 
 #include <boost/bind.hpp>
+#include <boost/thread.hpp>
 
 #include "CDPL/Chem/XLogPCalculator.hpp"
 #include "CDPL/Chem/BasicMolecule.hpp"
@@ -41,8 +42,11 @@
 #include "CDPL/Chem/AtomFunctions.hpp"
 #include "CDPL/Chem/BondFunctions.hpp"
 #include "CDPL/Chem/AtomType.hpp"
-#include "CDPL/Chem/SMARTSMoleculeReader.hpp"
+#include "CDPL/Chem/UtilityFunctions.hpp"
 #include "CDPL/Math/VectorIterator.hpp"
+
+
+using namespace CDPL;
 
 
 namespace
@@ -69,6 +73,27 @@ namespace
 	const std::string ALPHA_AMINO_ACID_SMARTS      = "[CX4](-N)-C(=O)-O";
 	const std::string SALICYLIC_ACID_SMARTS        = "c1:c(-C(=O)-O):c(-O):c:c:c:1";
 	const std::string P_AMINO_SULFONIC_ACID_SMARTS = "S(=O)(=O)-c1:c:c:c:c:c:1-N";
+
+	boost::once_flag initSSSPatternsFlag = BOOST_ONCE_INIT;
+
+	Chem::Molecule::SharedPointer aromaticN14PairQuery;
+	Chem::Molecule::SharedPointer orthoSP3OPairQuery;
+	Chem::Molecule::SharedPointer paraDonorPairQuery;
+	Chem::Molecule::SharedPointer sp2O15PairQuery;
+	Chem::Molecule::SharedPointer alphaAminoAcidQuery;
+	Chem::Molecule::SharedPointer salicylicAcid;
+	Chem::Molecule::SharedPointer pAminoSulfonicAcidQuery;
+
+	void initSSSPatterns()
+	{
+		aromaticN14PairQuery = Chem::parseSMARTS(AROMATIC_N_14_PAIR_SMARTS);
+		orthoSP3OPairQuery = Chem::parseSMARTS(ORTHO_SP3_O_PAIR_SMARTS);
+		paraDonorPairQuery = Chem::parseSMARTS(PARA_DONOR_PAIR_SMARTS);
+		sp2O15PairQuery = Chem::parseSMARTS(SP2_O_15_PAIR_SMARTS);
+		alphaAminoAcidQuery = Chem::parseSMARTS(ALPHA_AMINO_ACID_SMARTS);
+		salicylicAcid = Chem::parseSMARTS(SALICYLIC_ACID_SMARTS);
+		pAminoSulfonicAcidQuery = Chem::parseSMARTS(P_AMINO_SULFONIC_ACID_SMARTS);
+	}
 
 	const double REGRESSION_COEFFS[] = {
 		0.545219,
@@ -172,26 +197,7 @@ namespace
 		0.45759,
 		-0.204342
 	};
-
-	void initQuery(CDPL::Chem::Molecule& query, const std::string& smarts, bool& initialized)
-	{
-		using namespace CDPL;
-
-		if (initialized)
-			return;
-
-		initialized = true;
-
-		std::istringstream iss(smarts);
-
-		Chem::SMARTSMoleculeReader(iss).read(query);
-
-		initSubstructureSearchQuery(query, true);
-	}
 }
-
-
-using namespace CDPL;
 
 
 Chem::XLogPCalculator::XLogPCalculator(): featureVector(FEATURE_VECTOR_SIZE), logP(0.0) 
@@ -377,12 +383,9 @@ void Chem::XLogPCalculator::countHalogen13Pairs()
 
 void Chem::XLogPCalculator::countAromaticNitrogen14Pairs()
 {	
-	static bool init = false;
-	static BasicMolecule query;
+	boost::call_once(&initSSSPatterns, initSSSPatternsFlag);
 
-	initQuery(query, AROMATIC_N_14_PAIR_SMARTS, init);
-
-	substructSearch.setQuery(query);
+	substructSearch.setQuery(*aromaticN14PairQuery);
 	substructSearch.findMappings(*molGraph);
 
 	featureVector[AROMATIC_N_14_PAIR_INDEX] = substructSearch.getNumMappings();
@@ -390,12 +393,9 @@ void Chem::XLogPCalculator::countAromaticNitrogen14Pairs()
 
 void Chem::XLogPCalculator::countOrthoSP3OxygenPairs()
 {
-	static bool init = false;
-	static BasicMolecule query;
+	boost::call_once(&initSSSPatterns, initSSSPatternsFlag);
 
-	initQuery(query, ORTHO_SP3_O_PAIR_SMARTS, init);
-
-	substructSearch.setQuery(query);
+	substructSearch.setQuery(*orthoSP3OPairQuery);
 	substructSearch.findMappings(*molGraph);
 
 	SubstructureSearch::ConstMappingIterator mappings_end = substructSearch.getMappingsEnd();
@@ -403,8 +403,8 @@ void Chem::XLogPCalculator::countOrthoSP3OxygenPairs()
 	for (SubstructureSearch::ConstMappingIterator it = substructSearch.getMappingsBegin(); it != mappings_end; ++it) {
 		const AtomMapping& mapping = it->getAtomMapping();
 
-		const AtomInfo& atom_info1 = atomInfos[molGraph->getAtomIndex(*mapping[&query.getAtom(0)])];
-		const AtomInfo& atom_info2 = atomInfos[molGraph->getAtomIndex(*mapping[&query.getAtom(3)])];
+		const AtomInfo& atom_info1 = atomInfos[molGraph->getAtomIndex(*mapping[&orthoSP3OPairQuery->getAtom(0)])];
+		const AtomInfo& atom_info2 = atomInfos[molGraph->getAtomIndex(*mapping[&orthoSP3OPairQuery->getAtom(3)])];
 
 		assert(atom_info1.getAtomicNo() == AtomType::O);
 		assert(atom_info2.getAtomicNo() ==  AtomType::O);
@@ -416,12 +416,9 @@ void Chem::XLogPCalculator::countOrthoSP3OxygenPairs()
 
 void Chem::XLogPCalculator::countParaDonorPairs()
 {
-	static bool init = false;
-	static BasicMolecule query;
+	boost::call_once(&initSSSPatterns, initSSSPatternsFlag);
 
-	initQuery(query, PARA_DONOR_PAIR_SMARTS, init);
-
-	substructSearch.setQuery(query);
+	substructSearch.setQuery(*paraDonorPairQuery);
 	substructSearch.findMappings(*molGraph);
 
 	SubstructureSearch::ConstMappingIterator mappings_end = substructSearch.getMappingsEnd();
@@ -429,8 +426,8 @@ void Chem::XLogPCalculator::countParaDonorPairs()
 	for (SubstructureSearch::ConstMappingIterator it = substructSearch.getMappingsBegin(); it != mappings_end; ++it) {
 		const AtomMapping& mapping = it->getAtomMapping();
 	
-		const AtomInfo& atom_info1 = atomInfos[molGraph->getAtomIndex(*mapping[&query.getAtom(1)])];
-		const AtomInfo& atom_info2 = atomInfos[molGraph->getAtomIndex(*mapping[&query.getAtom(5)])];
+		const AtomInfo& atom_info1 = atomInfos[molGraph->getAtomIndex(*mapping[&paraDonorPairQuery->getAtom(1)])];
+		const AtomInfo& atom_info2 = atomInfos[molGraph->getAtomIndex(*mapping[&paraDonorPairQuery->getAtom(5)])];
 
 		assert(atom_info1.getAtomicNo() == AtomType::N || atom_info1.getAtomicNo() == AtomType::O);
 		assert(atom_info2.getAtomicNo() == AtomType::N || atom_info2.getAtomicNo() == AtomType::O);
@@ -442,12 +439,9 @@ void Chem::XLogPCalculator::countParaDonorPairs()
 
 void Chem::XLogPCalculator::countSP2Oxygen15Pairs()
 {
-	static bool init = false;
-	static BasicMolecule query;
+	boost::call_once(&initSSSPatterns, initSSSPatternsFlag);
 
-	initQuery(query, SP2_O_15_PAIR_SMARTS, init);
-
-	substructSearch.setQuery(query);
+	substructSearch.setQuery(*sp2O15PairQuery);
 	substructSearch.findMappings(*molGraph);
 
 	SubstructureSearch::ConstMappingIterator mappings_end = substructSearch.getMappingsEnd();
@@ -455,9 +449,9 @@ void Chem::XLogPCalculator::countSP2Oxygen15Pairs()
 	for (SubstructureSearch::ConstMappingIterator it = substructSearch.getMappingsBegin(); it != mappings_end; ++it) {
 		const AtomMapping& mapping = it->getAtomMapping();
 
-		const AtomInfo& atom_info1 = atomInfos[molGraph->getAtomIndex(*mapping[&query.getAtom(1)])];
-		const AtomInfo& atom_info2 = atomInfos[molGraph->getAtomIndex(*mapping[&query.getAtom(2)])];
-		const AtomInfo& atom_info3 = atomInfos[molGraph->getAtomIndex(*mapping[&query.getAtom(3)])];
+		const AtomInfo& atom_info1 = atomInfos[molGraph->getAtomIndex(*mapping[&sp2O15PairQuery->getAtom(1)])];
+		const AtomInfo& atom_info2 = atomInfos[molGraph->getAtomIndex(*mapping[&sp2O15PairQuery->getAtom(2)])];
+		const AtomInfo& atom_info3 = atomInfos[molGraph->getAtomIndex(*mapping[&sp2O15PairQuery->getAtom(3)])];
 
 		assert(atom_info1.getAtomicNo() == AtomType::C);
 		assert(atom_info3.getAtomicNo() == AtomType::C);
@@ -471,19 +465,16 @@ void Chem::XLogPCalculator::countSP2Oxygen15Pairs()
 
 void Chem::XLogPCalculator::countAlphaAminoAcidGroups()
 {
-	static bool init = false;
-	static BasicMolecule query;
+	boost::call_once(&initSSSPatterns, initSSSPatternsFlag);
 
-	initQuery(query, ALPHA_AMINO_ACID_SMARTS, init);
-
-	substructSearch.setQuery(query);
+	substructSearch.setQuery(*alphaAminoAcidQuery);
 	substructSearch.findMappings(*molGraph);
 
 	SubstructureSearch::ConstMappingIterator mappings_end = substructSearch.getMappingsEnd();
 
 	for (SubstructureSearch::ConstMappingIterator it = substructSearch.getMappingsBegin(); it != mappings_end; ++it) {
 		const AtomMapping& mapping = it->getAtomMapping();
-		const AtomInfo& atom_info = atomInfos[molGraph->getAtomIndex(*mapping[&query.getAtom(1)])];
+		const AtomInfo& atom_info = atomInfos[molGraph->getAtomIndex(*mapping[&alphaAminoAcidQuery->getAtom(1)])];
 
 		assert(atom_info.getAtomicNo() == AtomType::N);
 
@@ -503,12 +494,9 @@ void Chem::XLogPCalculator::countAlphaAminoAcidGroups()
 
 void Chem::XLogPCalculator::countSalicylicAcidGroups()
 {
-	static bool init = false;
-	static BasicMolecule query;
+	boost::call_once(&initSSSPatterns, initSSSPatternsFlag);
 
-	initQuery(query, SALICYLIC_ACID_SMARTS, init);
-
-	substructSearch.setQuery(query);
+	substructSearch.setQuery(*salicylicAcid);
 	substructSearch.findMappings(*molGraph);
 
 	featureVector[SALICYLIC_ACID_INDEX] = substructSearch.getNumMappings();
@@ -516,12 +504,9 @@ void Chem::XLogPCalculator::countSalicylicAcidGroups()
 
 void Chem::XLogPCalculator::countParaAminoSulfonicAcidGroups()
 {
-	static bool init = false;
-	static BasicMolecule query;
+	boost::call_once(&initSSSPatterns, initSSSPatternsFlag);
 
-	initQuery(query, P_AMINO_SULFONIC_ACID_SMARTS, init);
-
-	substructSearch.setQuery(query);
+	substructSearch.setQuery(*pAminoSulfonicAcidQuery);
 	substructSearch.findMappings(*molGraph);
 
 	featureVector[P_AMINO_SULFONIC_ACID_INDEX] = substructSearch.getNumMappings();

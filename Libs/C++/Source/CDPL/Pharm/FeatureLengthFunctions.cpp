@@ -34,10 +34,15 @@
 using namespace CDPL; 
 
 
+namespace
+{
+
+	const double DEF_LENGTH = 1.0;	
+}
+
+
 double Pharm::getLength(const Feature& feature)
 {
-	static const double DEF_LENGTH = 1.0;
-
     return feature.getPropertyOrDefault<double>(FeatureProperty::LENGTH, DEF_LENGTH);
 }
 

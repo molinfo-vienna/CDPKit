@@ -549,7 +549,8 @@ namespace
     { Chem::AtomType::ANY,0, "*",  "",             0,   0,          0,  false, false, { -1 },                      0,    { 0,    0,    0 },    0,    0          }
     };
 
-    Chem::AtomDictionary builtinDictionary;
+    Chem::AtomDictionary              builtinDictionary;
+	const Chem::AtomDictionary::Entry DEF_ENTRY;
 
 	struct Init
 	{
@@ -715,8 +716,6 @@ const Chem::AtomDictionary::Entry& Chem::AtomDictionary::getEntry(unsigned int t
 
 	if (it != entries.end())
 		return it->second;
-
-	static const Entry DEF_ENTRY;
 
 	return DEF_ENTRY;
 }

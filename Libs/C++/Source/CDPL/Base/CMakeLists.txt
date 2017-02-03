@@ -11,6 +11,12 @@ SET(cdpl-base_LIB_SRCS
     Exceptions.cpp
    )
 
+LINK_LIBRARIES(${Boost_THREAD_LIBRARY})
+
+IF(Boost_ATOMIC_FOUND)
+  LINK_LIBRARIES(${Boost_ATOMIC_LIBRARY})
+ENDIF(Boost_ATOMIC_FOUND)
+
 ADD_LIBRARY(cdpl-base-static STATIC ${cdpl-base_LIB_SRCS})
 
 SET_TARGET_PROPERTIES(cdpl-base-static PROPERTIES 

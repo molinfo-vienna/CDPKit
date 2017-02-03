@@ -64,6 +64,13 @@
 using namespace CDPL;
 
 
+namespace
+{
+
+	const Chem::SMARTSDataReader::BondList NO_BONDS;
+}
+
+
 bool Chem::SMARTSDataReader::readReaction(std::istream& is, Reaction& rxn)
 {
 	if (!hasMoreData(is))
@@ -80,8 +87,8 @@ bool Chem::SMARTSDataReader::readReaction(std::istream& is, Reaction& rxn)
 
 	typedef boost::tokenizer<boost::char_separator<char> > Tokenizer;
 
-	static const char role_sep[] = { SMARTS::REACTION_ROLE_SEPARATOR, 0 };
-	static const char comp_sep[] = { SMARTS::COMPONENT_SEPARATOR, 0 };
+	const char role_sep[] = { SMARTS::REACTION_ROLE_SEPARATOR, 0 };
+	const char comp_sep[] = { SMARTS::COMPONENT_SEPARATOR, 0 };
 
 	unsigned int rxn_role = ReactionRole::REACTANT;
 
@@ -2029,12 +2036,9 @@ const Chem::SMARTSDataReader::BondList& Chem::SMARTSDataReader::getBondList(std:
 
 	std::size_t tab_index = atom_idx - startAtomIndex;
 
-	if (tab_index >= nbrBondListTable.size()) {
-		static const BondList nil;
-
-		return nil;
-	}
-
+	if (tab_index >= nbrBondListTable.size())
+		return NO_BONDS;
+   
 	return nbrBondListTable[tab_index];
 }
 

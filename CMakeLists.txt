@@ -65,6 +65,9 @@ SET(CMAKE_BUILD_WITH_INSTALL_RPATH FALSE)
 # which point to directories outside the build tree to the install RPATH
 SET(CMAKE_INSTALL_RPATH_USE_LINK_PATH TRUE)
 
+SET(CDPKIT_COMPILER_ID ${CMAKE_CXX_COMPILER_ID})
+SET(CDPKIT_BUILD_SYSTEM ${CMAKE_SYSTEM})
+
 # the RPATH to be used when installing
 
 IF(APPLE)
@@ -87,6 +90,7 @@ SET(CDPL_PATCH_VERSION "${CDPKIT_PATCH_VERSION}")
 SET(CDPL_VERSION "${CDPKIT_VERSION}")
 SET(CDPL_SO_VERSION "${CDPL_MAJOR_VERSION}.${CDPL_MINOR_VERSION}")
 
+SET(APPS_SOURCE_DIR "${CMAKE_CURRENT_SOURCE_DIR}/Apps")
 SET(CDPL_SOURCE_DIR "${CMAKE_CURRENT_SOURCE_DIR}/Libs/C++/Source")
 SET(CDPL_INCLUDE_DIR "${CMAKE_CURRENT_SOURCE_DIR}/Libs/C++/Include")
 SET(CDPL_PYTHON_DIR "${CMAKE_CURRENT_BINARY_DIR}/Libs/Python")
@@ -133,7 +137,8 @@ ENDIF(WIN32)
 
 
 SET(Boost_USE_STATIC_LIBS OFF)
-FIND_PACKAGE(Boost 1.52.0 COMPONENTS date_time python unit_test_framework filesystem system iostreams)
+FIND_PACKAGE(Boost 1.52.0 COMPONENTS date_time-mt python-mt unit_test_framework-mt filesystem-mt system-mt
+	     iostreams-mt program_options-mt thread-mt atomic-mt chrono-mt)
 
 FIND_PACKAGE(Qt4)
 FIND_PACKAGE(Cairo)
@@ -148,13 +153,17 @@ SET(HAVE_BOOST_FILESYSTEM ${Boost_FILESYSTEM_FOUND})
 SET(HAVE_BOOST_SYSTEM ${Boost_SYSTEM_FOUND})
 SET(HAVE_BOOST_IOSTREAMS ${Boost_IOSTREAMS_FOUND})
 
-IF(NOT SQLITE3_FOUND)
-  MESSAGE("!! Warning: SQLite3 library not found -> can't build pharmacophore screening components.")
-ENDIF(NOT SQLITE3_FOUND)
-
 IF(NOT Boost_DATE_TIME_FOUND)
   MESSAGE(FATAL_ERROR "Boost date_time library not found.")
 ENDIF(NOT Boost_DATE_TIME_FOUND)
+
+IF(NOT Boost_THREAD_FOUND)
+  MESSAGE(FATAL_ERROR "Boost thread library not found.")
+ENDIF(NOT Boost_THREAD_FOUND)
+
+IF(NOT SQLITE3_FOUND)
+  MESSAGE("!! Warning: SQLite3 library not found -> can't build pharmacophore screening components.")
+ENDIF(NOT SQLITE3_FOUND)
 
 IF(NOT Boost_FILESYSTEM_FOUND)
   MESSAGE("!! Warning: Boost filesystem library not found -> dependent components won't be built.")
@@ -167,6 +176,14 @@ ENDIF(NOT Boost_SYSTEM_FOUND)
 IF(NOT Boost_IOSTREAMS_FOUND)
   MESSAGE("!! Warning: Boost iostreams library not found -> dependent components won't be built.")
 ENDIF(NOT Boost_IOSTREAMS_FOUND)
+
+IF(NOT Boost_PROGRAM_OPTIONS_FOUND)
+  MESSAGE("!! Warning: Boost program_options library not found -> commandline applications won't be built.")
+ENDIF(NOT Boost_PROGRAM_OPTIONS_FOUND)
+
+IF(NOT Boost_CHRONO_FOUND)
+  MESSAGE("!! Warning: Boost chrono library not found -> commandline applications won't be built.")
+ENDIF(NOT Boost_CHRONO_FOUND)
 
 IF(NOT Boost_UNIT_TEST_FRAMEWORK_FOUND)
   MESSAGE("!! Warning: Boost unit_test_framework not found -> can't build and run C++ unit test cases.")

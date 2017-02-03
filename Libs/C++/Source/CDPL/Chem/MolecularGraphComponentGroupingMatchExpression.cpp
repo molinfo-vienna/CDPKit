@@ -44,6 +44,9 @@ using namespace CDPL;
 Chem::MolecularGraphComponentGroupingMatchExpression::MolecularGraphComponentGroupingMatchExpression(const FragmentList::SharedPointer& comp_grouping): 
 	compGrouping(comp_grouping) {} 
 
+Chem::MolecularGraphComponentGroupingMatchExpression::MolecularGraphComponentGroupingMatchExpression(const MolecularGraphComponentGroupingMatchExpression& rhs):
+	compGrouping(rhs.compGrouping) {}
+
 bool Chem::MolecularGraphComponentGroupingMatchExpression::operator()(const MolecularGraph&, const MolecularGraph& target_molgraph, 
 																	  const AtomBondMapping& mapping, const Base::Variant&) const
 {
@@ -51,6 +54,8 @@ bool Chem::MolecularGraphComponentGroupingMatchExpression::operator()(const Mole
 		return true;
 
 	const FragmentList& target_comps = *getComponents(target_molgraph);
+
+	boost::lock_guard<boost::mutex> lock(mutex);
 
 	compList.clear();
 	compList.reserve(target_comps.getSize());
@@ -113,4 +118,15 @@ bool Chem::MolecularGraphComponentGroupingMatchExpression::operator()(const Mole
 bool Chem::MolecularGraphComponentGroupingMatchExpression::requiresAtomBondMapping() const
 {
 	return true;
+}
+
+Chem::MolecularGraphComponentGroupingMatchExpression& 
+Chem::MolecularGraphComponentGroupingMatchExpression::operator=(const MolecularGraphComponentGroupingMatchExpression& rhs)
+{
+	if (this == &rhs)
+		return *this;
+
+	compGrouping = rhs.compGrouping;
+
+	return *this;
 }

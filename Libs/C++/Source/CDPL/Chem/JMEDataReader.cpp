@@ -494,7 +494,7 @@ Chem::JMEDataReader::readAtomList(std::string::const_iterator it, std::string::c
 
 	typedef boost::tokenizer<boost::char_separator<char> > Tokenizer;
 
-	static const char alist_sep[] = { AtomString::ATOM_LIST_SEPARATOR, 0 };
+	const char alist_sep[] = { AtomString::ATOM_LIST_SEPARATOR, 0 };
 
 	boost::char_separator<char> tokenizer_func(alist_sep, "", boost::keep_empty_tokens);
 	Tokenizer tokenizer(it, end, tokenizer_func);
@@ -693,7 +693,7 @@ Chem::JMEDataReader::readQueryFlags(std::string::const_iterator it, std::string:
 
 	typedef boost::tokenizer<boost::char_separator<char> > Tokenizer;
 
-	static const char query_flags_sep[] = { AtomString::QUERY_FLAGS_SEPARATOR, 0 };
+	const char query_flags_sep[] = { AtomString::QUERY_FLAGS_SEPARATOR, 0 };
 
 	boost::char_separator<char> tokenizer_func(query_flags_sep);
 	Tokenizer tokenizer(it, end, tokenizer_func);

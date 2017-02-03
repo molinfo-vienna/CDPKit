@@ -39,10 +39,15 @@
 using namespace CDPL; 
 
 
+namespace
+{
+
+    const Chem::MatchConstraintList::SharedPointer DEF_CONSTRAINTS(new Chem::MatchConstraintList());	
+}
+
+
 const Chem::MatchConstraintList::SharedPointer& Chem::getMatchConstraints(const Reaction& rxn)
 {
-    static const MatchConstraintList::SharedPointer DEF_CONSTRAINTS(new MatchConstraintList());
-
     return rxn.getPropertyOrDefault<MatchConstraintList::SharedPointer>(ReactionProperty::MATCH_CONSTRAINTS,
 																		DEF_CONSTRAINTS);
 }

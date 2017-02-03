@@ -33,10 +33,15 @@
 using namespace CDPL; 
 
 
+namespace
+{
+
+    const bool DEF_FLAG = false;
+}
+
+
 bool Chem::getMDLChiralFlag(const MolecularGraph& molgraph)
 {
-    static bool DEF_FLAG = false;
-    
     return molgraph.getPropertyOrDefault<bool>(MolecularGraphProperty::MDL_CHIRAL_FLAG, DEF_FLAG);
 }
 

@@ -125,7 +125,7 @@ namespace CDPLPythonBase
 		boost::python::object callable;
 	};
 
-	template <typename ResType, typename ArgType>
+	template <typename ResType, typename ArgType, bool Copy = false>
 	class UnaryFunctionAdapter : public std::unary_function<ArgType, ResType>
 	{
 
@@ -134,6 +134,21 @@ namespace CDPLPythonBase
 
 		ResType operator()(const ArgType& arg) const {
 			return boost::python::call<ResType>(callable.ptr(), boost::ref(arg));
+		}
+
+	private:
+		boost::python::object callable;
+	};
+
+	template <typename ResType, typename ArgType>
+	class UnaryFunctionAdapter<ResType, ArgType, true>  : public std::unary_function<ArgType, ResType>
+	{
+
+	public:
+		UnaryFunctionAdapter(const boost::python::object& callable): callable(callable) {}
+
+		ResType operator()(const ArgType& arg) const {
+			return boost::python::call<ResType>(callable.ptr(), arg);
 		}
 
 	private:

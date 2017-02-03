@@ -41,14 +41,8 @@ using namespace CDPL;
 
 void Biomol::CDFDataReader::registerExternalPropertyHandlers()
 {
-	static bool registered = false;
-
-	if (!registered) {
-		Chem::CDFDataReader::registerExternalAtomPropertyHandler(&CDFDataReader::readAtomProperties);
-		Chem::CDFDataReader::registerExternalMoleculePropertyHandler(&CDFDataReader::readMoleculeProperties);
-
-		registered = true;
-	}
+	Chem::CDFDataReader::registerExternalAtomPropertyHandler(&readAtomProperties);
+	Chem::CDFDataReader::registerExternalMoleculePropertyHandler(&readMoleculeProperties);
 }
 
 bool Biomol::CDFDataReader::readAtomProperties(unsigned int handler_id, const Chem::CDFDataReader& reader, 

@@ -64,6 +64,10 @@ namespace
 			return this->get_override("getNumPharmacophores")();
 		}
 
+		std::size_t getNumPharmacophores(std::size_t mol_idx) const {
+			return this->get_override("getNumPharmacophores")(mol_idx);
+		}
+
 		void getMolecule(std::size_t mol_idx, CDPL::Chem::Molecule& mol) const {
 			this->get_override("getMolecule")(mol_idx, boost::ref(mol));
 		} 
@@ -72,8 +76,8 @@ namespace
 			this->get_override("getPharmacophore")(pharm_idx, boost::ref(pharm));
 		} 
 
-		void getPharmacophore(std::size_t mol_idx, std::size_t conf_idx, CDPL::Pharm::Pharmacophore& pharm) const {
-			this->get_override("getPharmacophore")(mol_idx, conf_idx, boost::ref(pharm));
+		void getPharmacophore(std::size_t mol_idx, std::size_t mol_conf_idx, CDPL::Pharm::Pharmacophore& pharm) const {
+			this->get_override("getPharmacophore")(mol_idx, mol_conf_idx, boost::ref(pharm));
 		} 
 
 		std::size_t getMoleculeIndex(std::size_t pharm_idx) const {
@@ -86,6 +90,10 @@ namespace
 
 		const CDPL::Pharm::FeatureTypeHistogram& getFeatureCounts(std::size_t pharm_idx) const {
 			return this->get_override("getFeatureCounts")(pharm_idx);
+		}
+
+		const CDPL::Pharm::FeatureTypeHistogram& getFeatureCounts(std::size_t mol_idx, std::size_t mol_conf_idx) const {
+			return this->get_override("getFeatureCounts")(mol_idx, mol_conf_idx);
 		}
 	};
 }
@@ -108,8 +116,12 @@ void CDPLPythonPharm::exportScreeningDBAccessor()
 			 python::arg("self"), python::return_value_policy<python::copy_const_reference>())
 		.def("getNumMolecules", python::pure_virtual(&Pharm::ScreeningDBAccessor::getNumMolecules),
 			 python::arg("self"))
-		.def("getNumPharmacophores", python::pure_virtual(&Pharm::ScreeningDBAccessor::getNumPharmacophores),
+		.def("getNumPharmacophores", python::pure_virtual(
+				 static_cast<std::size_t (Pharm::ScreeningDBAccessor::*)() const>(&Pharm::ScreeningDBAccessor::getNumPharmacophores)),
 			 python::arg("self"))
+		.def("getNumPharmacophores", python::pure_virtual(
+				 static_cast<std::size_t (Pharm::ScreeningDBAccessor::*)(std::size_t) const>(&Pharm::ScreeningDBAccessor::getNumPharmacophores)),
+			 (python::arg("self"), python::arg("mol_idx")))
 		.def("getMolecule", python::pure_virtual(&Pharm::ScreeningDBAccessor::getMolecule),
 			 (python::arg("self"), python::arg("mol_idx"), python::arg("mol")))
 		.def("getPharmacophore", 
@@ -121,18 +133,22 @@ void CDPLPythonPharm::exportScreeningDBAccessor()
 			 python::pure_virtual(
 				 static_cast<void (Pharm::ScreeningDBAccessor::*)(std::size_t, std::size_t, Pharm::Pharmacophore&) const>(
 					 &Pharm::ScreeningDBAccessor::getPharmacophore)),
-			 (python::arg("self"), python::arg("mol_idx"), python::arg("conf_idx"), python::arg("pharm")))
+			 (python::arg("self"), python::arg("mol_idx"), python::arg("mol_conf_idx"), python::arg("pharm")))
 		.def("getMoleculeIndex", python::pure_virtual(&Pharm::ScreeningDBAccessor::getMoleculeIndex),
 			 (python::arg("self"), python::arg("pharm_idx")))
 		.def("getConformationIndex", python::pure_virtual(&Pharm::ScreeningDBAccessor::getConformationIndex),
 			 (python::arg("self"), python::arg("pharm_idx")))
-		.def("getFeatureCounts", python::pure_virtual(&Pharm::ScreeningDBAccessor::getFeatureCounts),
-			 (python::arg("self"), python::arg("pharm_idx")),
-			 python::return_internal_reference<>())
+		.def("getFeatureCounts", python::pure_virtual(
+				 static_cast<const Pharm::FeatureTypeHistogram& (Pharm::ScreeningDBAccessor::*)(std::size_t) const>(&Pharm::ScreeningDBAccessor::getFeatureCounts)),
+			 (python::arg("self"), python::arg("pharm_idx")), python::return_internal_reference<>())
+		.def("getFeatureCounts", python::pure_virtual(
+				 static_cast<const Pharm::FeatureTypeHistogram& (Pharm::ScreeningDBAccessor::*)(std::size_t, std::size_t) const>(&Pharm::ScreeningDBAccessor::getFeatureCounts)),
+			 (python::arg("self"), python::arg("mol_idx"), python::arg("mol_conf_idx")), python::return_internal_reference<>())
 		.add_property("databaseName", python::make_function(&Pharm::ScreeningDBAccessor::getDatabaseName,											
 															python::return_value_policy<python::copy_const_reference>()))
 		.add_property("numMolecules", &Pharm::ScreeningDBAccessor::getNumMolecules)
-		.add_property("numPharmacophores", &Pharm::ScreeningDBAccessor::getNumPharmacophores);
+		.add_property("numPharmacophores", 
+					  static_cast<std::size_t (Pharm::ScreeningDBAccessor::*)() const>(&Pharm::ScreeningDBAccessor::getNumPharmacophores));
 
 	python::register_ptr_to_python<Pharm::ScreeningDBAccessor::SharedPointer>();
 }

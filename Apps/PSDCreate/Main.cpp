@@ -1,7 +1,7 @@
 /* -*- mode: c++; c-basic-offset: 4; tab-width: 4; indent-tabs-mode: t -*- */
 
 /* 
- * ValueKeyDefinition.hpp 
+ * Main.cpp
  *
  * This file is part of the Chemical Data Processing Toolkit
  *
@@ -23,34 +23,11 @@
  * Boston, MA 02111-1307, USA.
  */
 
-/**
- * \file
- * \brief Definition of the preprocessor macro \ref CDPL_DEFINE_VALUE_KEY.
- */
 
-#ifndef CDPL_BASE_VALUEKEYDEFINITION_HPP
-#define CDPL_BASE_VALUEKEYDEFINITION_HPP
+#include "PSDCreateImpl.hpp"
 
-#include "CDPL/Base/ValueKey.hpp"
 
-/**
- * \addtogroup CDPL_BASE_CONTROL_PARAMETERS_AND_PROPERTIES
- * @{
- */
-
-/**
- * \brief Defines a constant CDPL::Base::ValueKey variable with the specified name.
- *
- * The variable is initialized with a new unique CDPL::Base::ValueKey instance
- * created by a call to CDPL::Base::ValueKey::create(const std::string& name).
- *
- * \param name The name of the variable to define.
- */
-#define CDPL_DEFINE_VALUE_KEY(name) \
-const CDPL::Base::ValueKey name = CDPL::Base::ValueKey::create(#name);
-
-/**
- * @}
- */
-
-#endif // CDPL_BASE_VALUEKEYDEFINITION_HPP
+int main(int argc, char* argv[])
+{
+    return PSDCreate::PSDCreateImpl().run(argc, argv);
+}

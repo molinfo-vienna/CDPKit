@@ -30,6 +30,7 @@
 #include <cmath>
 
 #include <boost/bind.hpp>
+#include <boost/thread.hpp>
 
 #include "CDPL/Pharm/HydrophobicFeatureGenerator.hpp"
 #include "CDPL/Pharm/Feature.hpp"
@@ -167,55 +168,53 @@ namespace
 	typedef std::vector<Chem::MolecularGraph::SharedPointer> PatternTable;
 	PatternTable atomHydCategoryPatterns;
 
-	struct Init 
+	boost::once_flag initHydCategoryPatternsFlag = BOOST_ONCE_INIT;
+
+	void initHydCategoryPatterns() 
 	{
-
-		Init() {
-			using namespace Chem;
+		using namespace Chem;
 			
-			atomHydCategoryPatterns.push_back(parseSMARTS("[#1,#7,#8:1]"));
+		atomHydCategoryPatterns.push_back(parseSMARTS("[#1,#7,#8:1]"));
 			
-			atomHydCategoryPatterns.push_back(parseSMARTS("[S;!H0:2]"));
+		atomHydCategoryPatterns.push_back(parseSMARTS("[S;!H0:2]"));
 			
-			atomHydCategoryPatterns.push_back(parseSMARTS("[*:3]~*~[!+0]"));
-			atomHydCategoryPatterns.push_back(parseSMARTS("[*:3]~[!+0]"));
-			atomHydCategoryPatterns.push_back(parseSMARTS("[!+0:3]"));
+		atomHydCategoryPatterns.push_back(parseSMARTS("[*:3]~*~[!+0]"));
+		atomHydCategoryPatterns.push_back(parseSMARTS("[*:3]~[!+0]"));
+		atomHydCategoryPatterns.push_back(parseSMARTS("[!+0:3]"));
 			
-			atomHydCategoryPatterns.push_back(parseSMARTS("[*:4]~*~[O,N;!H0;!$(*-*=,:*)]"));
-			atomHydCategoryPatterns.push_back(parseSMARTS("[*:4]~[O,N;!H0;!$(*-*=,:*)]"));
-			atomHydCategoryPatterns.push_back(parseSMARTS("[O,N;!H0;!$(*-*=,:*):4]"));
+		atomHydCategoryPatterns.push_back(parseSMARTS("[*:4]~*~[O,N;!H0;!$(*-*=,:*)]"));
+		atomHydCategoryPatterns.push_back(parseSMARTS("[*:4]~[O,N;!H0;!$(*-*=,:*)]"));
+		atomHydCategoryPatterns.push_back(parseSMARTS("[O,N;!H0;!$(*-*=,:*):4]"));
 			
-			atomHydCategoryPatterns.push_back(parseSMARTS("[*:5]~[S;!H0;!$(*-*=,:*)]"));
-			atomHydCategoryPatterns.push_back(parseSMARTS("[S;!H0;!$(*-*=,:*):5]"));
+		atomHydCategoryPatterns.push_back(parseSMARTS("[*:5]~[S;!H0;!$(*-*=,:*)]"));
+		atomHydCategoryPatterns.push_back(parseSMARTS("[S;!H0;!$(*-*=,:*):5]"));
 			
-			atomHydCategoryPatterns.push_back(parseSMARTS("[*:6]~*=[O]"));
-			atomHydCategoryPatterns.push_back(parseSMARTS("[*:6]=[O]"));
-			atomHydCategoryPatterns.push_back(parseSMARTS("[O:6]=*"));
+		atomHydCategoryPatterns.push_back(parseSMARTS("[*:6]~*=[O]"));
+		atomHydCategoryPatterns.push_back(parseSMARTS("[*:6]=[O]"));
+		atomHydCategoryPatterns.push_back(parseSMARTS("[O:6]=*"));
 			
-			atomHydCategoryPatterns.push_back(parseSMARTS("[*:7]~[#16;v3,v4,v5,v6]"));
-			atomHydCategoryPatterns.push_back(parseSMARTS("[#16;v3,v4,v5,v6:7]"));
+		atomHydCategoryPatterns.push_back(parseSMARTS("[*:7]~[#16;v3,v4,v5,v6]"));
+		atomHydCategoryPatterns.push_back(parseSMARTS("[#16;v3,v4,v5,v6:7]"));
 			
-			atomHydCategoryPatterns.push_back(parseSMARTS("[#16:8]=*"));
+		atomHydCategoryPatterns.push_back(parseSMARTS("[#16:8]=*"));
 
-			atomHydCategoryPatterns.push_back(parseSMARTS("[*:9]~*~*=[O]"));
+		atomHydCategoryPatterns.push_back(parseSMARTS("[*:9]~*~*=[O]"));
 
-			atomHydCategoryPatterns.push_back(parseSMARTS("[*:10]~*~[#16;v3,v4,v5,v6]"));
+		atomHydCategoryPatterns.push_back(parseSMARTS("[*:10]~*~[#16;v3,v4,v5,v6]"));
 
-			atomHydCategoryPatterns.push_back(parseSMARTS("[*:11]~[#16;$(*=*)]"));
+		atomHydCategoryPatterns.push_back(parseSMARTS("[*:11]~[#16;$(*=*)]"));
 
-			atomHydCategoryPatterns.push_back(parseSMARTS("[O]=*~*~[*:12]~*~*=[O]"));
-			atomHydCategoryPatterns.push_back(parseSMARTS("[O]=*~*~[*:12]~*~[#16;v3,v4,v5,v6]"));
-			atomHydCategoryPatterns.push_back(parseSMARTS("[O]=*~*~[*:12]~[#16;$(*=*)]"));
-			atomHydCategoryPatterns.push_back(parseSMARTS("[#16;v3,v4,v5,v6]~*~[*:12]~*~[#16;v3,v4,v5,v6]"));
-			atomHydCategoryPatterns.push_back(parseSMARTS("[#16;v3,v4,v5,v6]~*~[*:12]~[#16;$(*=*)]"));
-			atomHydCategoryPatterns.push_back(parseSMARTS("[#16;$(*=*)]~[*:12]~[#16;$(*=*)]"));
+		atomHydCategoryPatterns.push_back(parseSMARTS("[O]=*~*~[*:12]~*~*=[O]"));
+		atomHydCategoryPatterns.push_back(parseSMARTS("[O]=*~*~[*:12]~*~[#16;v3,v4,v5,v6]"));
+		atomHydCategoryPatterns.push_back(parseSMARTS("[O]=*~*~[*:12]~[#16;$(*=*)]"));
+		atomHydCategoryPatterns.push_back(parseSMARTS("[#16;v3,v4,v5,v6]~*~[*:12]~*~[#16;v3,v4,v5,v6]"));
+		atomHydCategoryPatterns.push_back(parseSMARTS("[#16;v3,v4,v5,v6]~*~[*:12]~[#16;$(*=*)]"));
+		atomHydCategoryPatterns.push_back(parseSMARTS("[#16;$(*=*)]~[*:12]~[#16;$(*=*)]"));
 
-			atomHydCategoryPatterns.push_back(parseSMARTS("[*:13]~[N,O;!$(*-*=,:*)]"));
+		atomHydCategoryPatterns.push_back(parseSMARTS("[*:13]~[N,O;!$(*-*=,:*)]"));
 
-			atomHydCategoryPatterns.push_back(parseSMARTS("[N,O;!$(*-*=,:*)]~[*:14]~[N,O;!$(*-*=,:*)]"));
-		}
-
-	} init;
+		atomHydCategoryPatterns.push_back(parseSMARTS("[N,O;!$(*-*=,:*)]~[*:14]~[N,O;!$(*-*=,:*)]"));
+	}
 
 	const std::size_t RING_SIZE_LIMIT      = 7;
 	double MAX_CHAIN_HYD_FACTOR            = 2.0;
@@ -355,6 +354,8 @@ void Pharm::HydrophobicFeatureGenerator::init(const Chem::MolecularGraph& molgra
 	tmpAtomMask.resize(num_atoms);
 
 	buildAtomTypeMask(molgraph, hAtomMask, Chem::AtomType::H);
+
+	boost::call_once(&initHydCategoryPatterns, initHydCategoryPatternsFlag);
 
 	if (hydSubSearchTable.empty()) {
 		for (PatternTable::const_iterator p_it = atomHydCategoryPatterns.begin(), p_end = atomHydCategoryPatterns.end(); p_it != p_end; ++p_it) {

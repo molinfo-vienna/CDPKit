@@ -1,7 +1,7 @@
 /* -*- mode: c++; c-basic-offset: 4; tab-width: 4; indent-tabs-mode: t -*- */
 
 /* 
- * ScreeningProcImplementation.hpp 
+ * ScreeningProcessorImpl.hpp 
  *
  * This file is part of the Chemical Data Processing Toolkit
  *
@@ -24,8 +24,8 @@
  */
 
 
-#ifndef CDPL_PHARM_SCREENINGPROCIMPLEMENTATION_HPP
-#define CDPL_PHARM_SCREENINGPROCIMPLEMENTATION_HPP
+#ifndef CDPL_PHARM_SCREENINGPROCESSORIMPL_HPP
+#define CDPL_PHARM_SCREENINGPROCESSORIMPL_HPP
 
 #include <vector>
 #include <utility>
@@ -57,7 +57,7 @@ namespace CDPL
 		class ScreeningDBAccessor;
 		class FeatureMapping;
 
-		class ScreeningProcImplementation
+		class ScreeningProcessorImpl
 		{
 
 			typedef ScreeningProcessor::HitCallbackFunction HitCallbackFunction;
@@ -66,7 +66,7 @@ namespace CDPL
 			typedef ScreeningProcessor::SearchHit SearchHit;
 
 		public:
-			ScreeningProcImplementation(ScreeningProcessor& parent, ScreeningDBAccessor& db_acc);
+			ScreeningProcessorImpl(ScreeningProcessor& parent, ScreeningDBAccessor& db_acc);
 
 			void setDBAccessor(ScreeningDBAccessor& db_acc);
 
@@ -201,4 +201,4 @@ namespace CDPL
     }
 }
 
-#endif // CDPL_PHARM_SCREENINGPROCIMPLEMENTATION_HPP
+#endif // CDPL_PHARM_SCREENINGPROCESSORIMPL_HPP

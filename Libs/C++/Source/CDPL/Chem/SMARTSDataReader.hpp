@@ -72,9 +72,9 @@ namespace CDPL
 
 			bool hasMoreData(std::istream&) const;
 
-		private:
 			typedef std::vector<std::size_t> BondList;
 
+		private:
 			void init(const Molecule&);
 
 			void setMoleculeMatchConstraints(Molecule&) const;

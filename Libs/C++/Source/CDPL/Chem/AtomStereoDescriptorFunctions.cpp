@@ -68,13 +68,13 @@ namespace
 
 		return Chem::StereoDescriptor(config);
     }
+
+	const Chem::StereoDescriptor DEF_DESCRIPTOR = Chem::StereoDescriptor(Chem::AtomConfiguration::UNDEF);
 }
 
 
 const Chem::StereoDescriptor& Chem::getStereoDescriptor(const Atom& atom)
 {
-	static const StereoDescriptor DEF_DESCRIPTOR = StereoDescriptor(AtomConfiguration::UNDEF);
-
     return atom.getPropertyOrDefault<StereoDescriptor>(AtomProperty::STEREO_DESCRIPTOR, DEF_DESCRIPTOR);
 }
 

@@ -34,10 +34,15 @@
 using namespace CDPL; 
 
 
+namespace
+{
+
+    const std::string DEF_NAME = "";
+}
+
+
 const std::string& Pharm::getName(const FeatureContainer& cntnr)
 {
-    static std::string DEF_NAME = "";
-    
     return cntnr.getPropertyOrDefault<std::string>(FeatureContainerProperty::NAME, DEF_NAME);
 }
 

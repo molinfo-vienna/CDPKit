@@ -27,6 +27,7 @@
 #include <boost/python.hpp>
 
 #include "CDPL/Chem/INCHIMolecularGraphWriter.hpp"
+#include "CDPL/Util/FileDataWriter.hpp"
 
 #include "ClassExports.hpp"
 
@@ -52,4 +53,10 @@ void CDPLPythonChem::exportINCHIMolecularGraphWriter()
 		.add_property("logOutput", 
 					  python::make_function(&Chem::INCHIMolecularGraphWriter::getLogOutput, 
 											python::return_value_policy<python::copy_const_reference>()));
+
+	python::class_<Util::FileDataWriter<Chem::INCHIMolecularGraphWriter>, python::bases<Base::DataWriter<Chem::MolecularGraph> >, 
+		boost::noncopyable>("FileINCHIMolecularGraphWriter", python::no_init)
+		.def(python::init<const std::string&, std::ios_base::openmode>(
+				 (python::arg("self"), python::arg("file_name"), python::arg("mode") = 
+				  std::ios_base::in | std::ios_base::out | std::ios_base::trunc | std::ios_base::binary)));
 }

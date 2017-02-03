@@ -55,7 +55,7 @@ namespace CDPL
 
 		class FeatureContainer;
 		class ScreeningDBAccessor;
-		class ScreeningProcImplementation;
+		class ScreeningProcessorImpl;
 
 		/**
 		 * \addtogroup CDPL_PHARM_SCREENING
@@ -166,7 +166,7 @@ namespace CDPL
 			std::size_t searchDB(const FeatureContainer& query, std::size_t mol_start_idx = 0, std::size_t mol_end_idx = 0);
 
 		  private:
-			typedef std::auto_ptr<ScreeningProcImplementation> ImplementationPointer;
+			typedef std::auto_ptr<ScreeningProcessorImpl> ImplementationPointer;
 
 			ScreeningProcessor(const ScreeningProcessor& proc);
 	

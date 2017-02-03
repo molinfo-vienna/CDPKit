@@ -27,6 +27,7 @@
 #include <boost/python.hpp>
 
 #include "CDPL/Chem/MOLMoleculeReader.hpp"
+#include "CDPL/Util/FileDataReader.hpp"
 
 #include "ClassExports.hpp"
 
@@ -40,4 +41,9 @@ void CDPLPythonChem::exportMOLMoleculeReader()
 		boost::noncopyable>("MOLMoleculeReader", python::no_init)
 		.def(python::init<std::istream&>((python::arg("self"), python::arg("is")))
 			 [python::with_custodian_and_ward<1, 2>()]);
+
+	python::class_<Util::FileDataReader<Chem::MOLMoleculeReader>, python::bases<Base::DataReader<Chem::Molecule> >, 
+		boost::noncopyable>("FileMOLMoleculeReader", python::no_init)
+		.def(python::init<const std::string&, std::ios_base::openmode>(
+				 (python::arg("self"), python::arg("file_name"), python::arg("mode") = std::ios_base::in | std::ios_base::binary)));
 }

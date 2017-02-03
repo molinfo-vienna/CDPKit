@@ -83,17 +83,21 @@ namespace CDPL
 
 			virtual std::size_t getNumPharmacophores() const = 0;
 
+			virtual std::size_t getNumPharmacophores(std::size_t mol_idx) const = 0;
+
 			virtual void getMolecule(std::size_t mol_idx, Chem::Molecule& mol) const = 0; 
 
 			virtual void getPharmacophore(std::size_t pharm_idx, Pharmacophore& pharm) const = 0; 
 
-			virtual void getPharmacophore(std::size_t mol_idx, std::size_t conf_idx, Pharmacophore& pharm) const = 0; 
+			virtual void getPharmacophore(std::size_t mol_idx, std::size_t mol_conf_idx, Pharmacophore& pharm) const = 0; 
 
 			virtual std::size_t getMoleculeIndex(std::size_t pharm_idx) const = 0;
 
 			virtual std::size_t getConformationIndex(std::size_t pharm_idx) const = 0;
 
 			virtual const FeatureTypeHistogram& getFeatureCounts(std::size_t pharm_idx) const = 0;
+
+			virtual const FeatureTypeHistogram& getFeatureCounts(std::size_t mol_idx, std::size_t mol_conf_idx) const = 0; 
 
 		  protected:
 			ScreeningDBAccessor& operator=(const ScreeningDBAccessor&) {

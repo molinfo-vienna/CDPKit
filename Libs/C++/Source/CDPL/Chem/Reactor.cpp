@@ -29,6 +29,8 @@
 #include <algorithm>
 #include <cassert>
 
+#include <boost/thread.hpp>
+
 #include "CDPL/Chem/Reactor.hpp"
 #include "CDPL/Chem/Molecule.hpp"
 #include "CDPL/Chem/Atom.hpp"
@@ -58,15 +60,10 @@ namespace
 
 	PropertyToConstraintIDMap propertyToConstraintIDMap;
 
-	void initPropertyToConstraintIDMap()
+	boost::once_flag initPropertyConstraintIDMapFlag = BOOST_ONCE_INIT;
+
+	void initPropertyConstraintIDMap() 
 	{
-		static bool initialized = false;
-
-		if (initialized)
-			return;
-
-		initialized = true;
-
 		using namespace Chem;
 
 		propertyToConstraintIDMap[AtomProperty::STEREO_DESCRIPTOR] = AtomMatchConstraint::CONFIGURATION;
@@ -198,7 +195,7 @@ Chem::Reactor::ConstReactionSiteIterator Chem::Reactor::getReactionSitesEnd() co
 
 void Chem::Reactor::init()
 {
-	initPropertyToConstraintIDMap();
+	boost::call_once(&initPropertyConstraintIDMap, initPropertyConstraintIDMapFlag);
 
 	reacAtomsToDelete.clear();
 	reacBondsToDelete.clear();

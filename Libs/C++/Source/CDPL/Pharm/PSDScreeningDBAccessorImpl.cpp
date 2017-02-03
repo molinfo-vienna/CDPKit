@@ -1,7 +1,7 @@
 /* -*- mode: c++; c-basic-offset: 4; tab-width: 4; indent-tabs-mode: t -*- */
 
 /* 
- * PSDScreeningDBAccessor.cpp 
+ * PSDScreeningDBAccessorImpl.cpp 
  *
  * This file is part of the Chemical Data Processing Toolkit
  *
@@ -30,7 +30,7 @@
 
 #include "CDPL/Chem/ControlParameterFunctions.hpp"
 
-#include "PSDAccessorImplementation.hpp"
+#include "PSDScreeningDBAccessorImpl.hpp"
 #include "SQLScreeningDBMetaData.hpp"
 
 
@@ -69,28 +69,28 @@ namespace
 }
 
 
-Pharm::PSDAccessorImplementation::PSDAccessorImplementation():
+Pharm::PSDScreeningDBAccessorImpl::PSDScreeningDBAccessorImpl():
 	pharmReader(controlParams), molReader(controlParams)
 {
 	initControlParams();
 }
 
-void Pharm::PSDAccessorImplementation::open(const std::string& name)
+void Pharm::PSDScreeningDBAccessorImpl::open(const std::string& name)
 {
 	openDBConnection(name, SQLITE_OPEN_READONLY);
 }
 
-void Pharm::PSDAccessorImplementation::close()
+void Pharm::PSDScreeningDBAccessorImpl::close()
 {
 	closeDBConnection();
 }
 
-const std::string& Pharm::PSDAccessorImplementation::getDatabaseName() const
+const std::string& Pharm::PSDScreeningDBAccessorImpl::getDatabaseName() const
 {
 	return getDBName();
 }
 
-std::size_t Pharm::PSDAccessorImplementation::getNumMolecules()
+std::size_t Pharm::PSDScreeningDBAccessorImpl::getNumMolecules()
 {
 	if (!getDBConnection())
 		return 0;
@@ -100,7 +100,7 @@ std::size_t Pharm::PSDAccessorImplementation::getNumMolecules()
 	return molIdxToIDMap.size();
 }
 
-std::size_t Pharm::PSDAccessorImplementation::getNumPharmacophores()
+std::size_t Pharm::PSDScreeningDBAccessorImpl::getNumPharmacophores()
 {
 	if (!getDBConnection())
 		return 0;
@@ -110,28 +110,42 @@ std::size_t Pharm::PSDAccessorImplementation::getNumPharmacophores()
 	return pharmIdxToMolIDConfIdxMap.size();
 }
 
-void Pharm::PSDAccessorImplementation::getMolecule(std::size_t mol_idx, Chem::Molecule& mol)
+std::size_t Pharm::PSDScreeningDBAccessorImpl::getNumPharmacophores(std::size_t mol_idx)
 {
 	if (!getDBConnection())
-		throw Base::IOError("PSDAccessorImplementation: no open database connection");
+		return 0;
+
+	initMolIdxIDMappings();
+	initPharmIdxMolIDConfIdxMappings();
+
+	if (mol_idx >= molIdxToIDMap.size())
+		throw Base::IndexError("PSDScreeningDBAccessorImpl: molecule index out of bounds");
+
+	return molIDConfCountMap[molIdxToIDMap[mol_idx]];
+}
+
+void Pharm::PSDScreeningDBAccessorImpl::getMolecule(std::size_t mol_idx, Chem::Molecule& mol)
+{
+	if (!getDBConnection())
+		throw Base::IOError("PSDScreeningDBAccessorImpl: no open database connection");
 
 	initMolIdxIDMappings();
 
 	if (mol_idx >= molIdxToIDMap.size())
-		throw Base::IndexError("PSDAccessorImplementation: molecule index out of bounds");
+		throw Base::IndexError("PSDScreeningDBAccessorImpl: molecule index out of bounds");
 
 	setupStatement(selMolDataStmt, MOL_DATA_QUERY_SQL, true);
 
 	if (sqlite3_bind_int64(selMolDataStmt.get(), 1, molIdxToIDMap[mol_idx]) != SQLITE_OK)
-		throwSQLiteIOError("PSDAccessorImplementation: error while binding molecule id to prepared statement");
+		throwSQLiteIOError("PSDScreeningDBAccessorImpl: error while binding molecule id to prepared statement");
 
 	int res = sqlite3_step(selMolDataStmt.get());
 
 	if (res != SQLITE_ROW && res != SQLITE_DONE)
-		throwSQLiteIOError("PSDAccessorImplementation: error while loading requested molecule");
+		throwSQLiteIOError("PSDScreeningDBAccessorImpl: error while loading requested molecule");
 
 	if (res != SQLITE_ROW)
-		throw Base::IOError("PSDAccessorImplementation: requested molecule not found");
+		throw Base::IOError("PSDScreeningDBAccessorImpl: requested molecule not found");
 
 	const void* blob = sqlite3_column_blob(selMolDataStmt.get(), 0);
 	std::size_t num_bytes = sqlite3_column_bytes(selMolDataStmt.get(), 0);
@@ -142,94 +156,119 @@ void Pharm::PSDAccessorImplementation::getMolecule(std::size_t mol_idx, Chem::Mo
 	molReader.readMolecule(mol, byteBuffer);
 }
 
-void Pharm::PSDAccessorImplementation::getPharmacophore(std::size_t pharm_idx, Pharmacophore& pharm)
+void Pharm::PSDScreeningDBAccessorImpl::getPharmacophore(std::size_t pharm_idx, Pharmacophore& pharm)
 {
 	if (!getDBConnection())
-		throw Base::IOError("PSDAccessorImplementation: no open database connection");
+		throw Base::IOError("PSDScreeningDBAccessorImpl: no open database connection");
 
 	initPharmIdxMolIDConfIdxMappings();
 
 	if (pharm_idx >= pharmIdxToMolIDConfIdxMap.size())
-		throw Base::IndexError("PSDAccessorImplementation: pharmacophore index out of bounds");
+		throw Base::IndexError("PSDScreeningDBAccessorImpl: pharmacophore index out of bounds");
 
 	loadPharmacophore(pharmIdxToMolIDConfIdxMap[pharm_idx].first, pharmIdxToMolIDConfIdxMap[pharm_idx].second, pharm);
 } 
 
-void Pharm::PSDAccessorImplementation::getPharmacophore(std::size_t mol_idx, std::size_t conf_idx, Pharmacophore& pharm)
+void Pharm::PSDScreeningDBAccessorImpl::getPharmacophore(std::size_t mol_idx, std::size_t mol_conf_idx, Pharmacophore& pharm)
 {
 	if (!getDBConnection())
-		throw Base::IOError("PSDAccessorImplementation: no open database connection");
+		throw Base::IOError("PSDScreeningDBAccessorImpl: no open database connection");
 
 	initMolIdxIDMappings();
 
 	if (mol_idx >= molIdxToIDMap.size())
-		throw Base::IndexError("PSDAccessorImplementation: pharmacophore molecule index out of bounds");
+		throw Base::IndexError("PSDScreeningDBAccessorImpl: pharmacophore molecule index out of bounds");
 
-	loadPharmacophore(molIdxToIDMap[mol_idx], conf_idx, pharm);
+	loadPharmacophore(molIdxToIDMap[mol_idx], mol_conf_idx, pharm);
 } 
 
-std::size_t Pharm::PSDAccessorImplementation::getMoleculeIndex(std::size_t pharm_idx)
+std::size_t Pharm::PSDScreeningDBAccessorImpl::getMoleculeIndex(std::size_t pharm_idx)
 {
 	if (!getDBConnection())
-		throw Base::IOError("PSDAccessorImplementation: no open database connection");
+		throw Base::IOError("PSDScreeningDBAccessorImpl: no open database connection");
 
 	initPharmIdxMolIDConfIdxMappings();
 	initMolIdxIDMappings();
 
 	if (pharm_idx >= pharmIdxToMolIDConfIdxMap.size())
-		throw Base::IndexError("PSDAccessorImplementation: pharmacophore index out of bounds");
+		throw Base::IndexError("PSDScreeningDBAccessorImpl: pharmacophore index out of bounds");
 
-	MolIDToIdxMap::const_iterator it = molIDToIdxMap.find(pharmIdxToMolIDConfIdxMap[pharm_idx].first);
+	MolIDToUIntMap::const_iterator it = molIDToIdxMap.find(pharmIdxToMolIDConfIdxMap[pharm_idx].first);
 
 	if (it == molIDToIdxMap.end())
-		throw Base::IOError("PSDAccessorImplementation: requested molecule index for pharmacophore not found");
+		throw Base::IOError("PSDScreeningDBAccessorImpl: requested molecule index for pharmacophore not found");
 
 	return it->second;
 }
 
-std::size_t Pharm::PSDAccessorImplementation::getConformationIndex(std::size_t pharm_idx)
+std::size_t Pharm::PSDScreeningDBAccessorImpl::getConformationIndex(std::size_t pharm_idx)
 {
 	if (!getDBConnection())
-		throw Base::IOError("PSDAccessorImplementation: no open database connection");
+		throw Base::IOError("PSDScreeningDBAccessorImpl: no open database connection");
 
 	initPharmIdxMolIDConfIdxMappings();
 
 	if (pharm_idx >= pharmIdxToMolIDConfIdxMap.size())
-		throw Base::IndexError("PSDAccessorImplementation: pharmacophore index out of bounds");
+		throw Base::IndexError("PSDScreeningDBAccessorImpl: pharmacophore index out of bounds");
 
 	return pharmIdxToMolIDConfIdxMap[pharm_idx].second;
 }
 
-const Pharm::FeatureTypeHistogram& Pharm::PSDAccessorImplementation::getFeatureCounts(std::size_t pharm_idx)
+const Pharm::FeatureTypeHistogram& Pharm::PSDScreeningDBAccessorImpl::getFeatureCounts(std::size_t pharm_idx)
 {
 	if (!getDBConnection())
-		throw Base::IOError("PSDAccessorImplementation: no open database connection");
+		throw Base::IOError("PSDScreeningDBAccessorImpl: no open database connection");
 
 	loadFeatureCounts();
 
 	if (pharm_idx >= featureCounts.size())
-		throw Base::IndexError("PSDAccessorImplementation: pharmacophore index out of bounds");
+		throw Base::IndexError("PSDScreeningDBAccessorImpl: pharmacophore index out of bounds");
 
 	return featureCounts[pharm_idx];
 }
 
-void Pharm::PSDAccessorImplementation::loadPharmacophore(Base::int64 mol_id, int conf_idx, Pharmacophore& pharm)
+const Pharm::FeatureTypeHistogram& Pharm::PSDScreeningDBAccessorImpl::getFeatureCounts(std::size_t mol_idx, std::size_t mol_conf_idx)
+{
+	if (!getDBConnection())
+		throw Base::IOError("PSDScreeningDBAccessorImpl: no open database connection");
+
+	loadFeatureCounts();
+	initMolIdxIDMappings();
+
+	if (mol_idx >= molIdxToIDMap.size())
+		throw Base::IndexError("PSDScreeningDBAccessorImpl: molecule index out of bounds");
+
+	MolIDConfIdxPair mol_id_conf_idx(molIdxToIDMap[mol_idx], mol_conf_idx);
+	MolIDConfIdxToPharmIdxMap::const_iterator it = molIDConfIdxToPharmIdxMap.find(mol_id_conf_idx);
+
+	if (it == molIDConfIdxToPharmIdxMap.end())
+		throw Base::IOError("PSDScreeningDBAccessorImpl: pharmacophore index for molecule index/conf. index pair not found");
+
+	std::size_t pharm_idx = it->second;
+
+	if (pharm_idx >= featureCounts.size())
+		throw Base::IndexError("PSDScreeningDBAccessorImpl: pharmacophore index out of bounds");
+
+	return featureCounts[pharm_idx];
+}
+
+void Pharm::PSDScreeningDBAccessorImpl::loadPharmacophore(Base::int64 mol_id, int mol_conf_idx, Pharmacophore& pharm)
 {
 	setupStatement(selPharmDataStmt, PHARM_DATA_QUERY_SQL, true);
 
 	if (sqlite3_bind_int64(selPharmDataStmt.get(), 1, mol_id) != SQLITE_OK)
-		throwSQLiteIOError("PSDAccessorImplementation: error while binding pharmacophore molecule id to prepared statement");
+		throwSQLiteIOError("PSDScreeningDBAccessorImpl: error while binding pharmacophore molecule id to prepared statement");
 
-	if (sqlite3_bind_int(selPharmDataStmt.get(), 2, conf_idx) != SQLITE_OK)
-		throwSQLiteIOError("PSDAccessorImplementation: error while binding pharmacophore molecule conformation index to prepared statement");
+	if (sqlite3_bind_int(selPharmDataStmt.get(), 2, mol_conf_idx) != SQLITE_OK)
+		throwSQLiteIOError("PSDScreeningDBAccessorImpl: error while binding pharmacophore molecule conformation index to prepared statement");
 
 	int res = sqlite3_step(selPharmDataStmt.get());
 
 	if (res != SQLITE_ROW && res != SQLITE_DONE)
-		throwSQLiteIOError("PSDAccessorImplementation: error while loading requested pharmacophore");
+		throwSQLiteIOError("PSDScreeningDBAccessorImpl: error while loading requested pharmacophore");
 
 	if (res != SQLITE_ROW)
-		throw Base::IOError("PSDAccessorImplementation: requested pharmacophore not found");
+		throw Base::IOError("PSDScreeningDBAccessorImpl: requested pharmacophore not found");
 
 	const void* blob = sqlite3_column_blob(selPharmDataStmt.get(), 0);
 	std::size_t num_bytes = sqlite3_column_bytes(selPharmDataStmt.get(), 0);
@@ -240,13 +279,13 @@ void Pharm::PSDAccessorImplementation::loadPharmacophore(Base::int64 mol_id, int
 	pharmReader.readPharmacophore(pharm, byteBuffer);
 } 
 
-void Pharm::PSDAccessorImplementation::initControlParams()
+void Pharm::PSDScreeningDBAccessorImpl::initControlParams()
 {
 	Pharm::setStrictErrorCheckingParameter(controlParams, true);
 	Chem::setStrictErrorCheckingParameter(controlParams, true);
 }
 
-void Pharm::PSDAccessorImplementation::closeDBConnection()
+void Pharm::PSDScreeningDBAccessorImpl::closeDBConnection()
 {
 	selMolDataStmt.reset();
 	selPharmDataStmt.reset();
@@ -259,11 +298,12 @@ void Pharm::PSDAccessorImplementation::closeDBConnection()
 	featureCounts.clear();
 	molIdxToIDMap.clear();
 	molIDToIdxMap.clear();
+	molIDConfCountMap.clear();
 	pharmIdxToMolIDConfIdxMap.clear();
     molIDConfIdxToPharmIdxMap.clear();
 }
 
-void Pharm::PSDAccessorImplementation::initMolIdxIDMappings()
+void Pharm::PSDScreeningDBAccessorImpl::initMolIdxIDMappings()
 {
 	if (!molIdxToIDMap.empty())
 		return;
@@ -276,14 +316,14 @@ void Pharm::PSDAccessorImplementation::initMolIdxIDMappings()
 		sqlite3_int64 mol_id = sqlite3_column_int64(selMolIDStmt.get(), 0);
 
 		molIdxToIDMap.push_back(mol_id);
-		molIDToIdxMap.insert(MolIDToIdxMap::value_type(mol_id, i));
+		molIDToIdxMap.insert(MolIDToUIntMap::value_type(mol_id, i));
 	}
 
 	if (res != SQLITE_DONE)
-		throwSQLiteIOError("PSDAccessorImplementation: error while loading molecule IDs");
+		throwSQLiteIOError("PSDScreeningDBAccessorImpl: error while loading molecule IDs");
 }
 
-void Pharm::PSDAccessorImplementation::initPharmIdxMolIDConfIdxMappings()
+void Pharm::PSDScreeningDBAccessorImpl::initPharmIdxMolIDConfIdxMappings()
 {
 	if (!pharmIdxToMolIDConfIdxMap.empty())
 		return;
@@ -300,13 +340,14 @@ void Pharm::PSDAccessorImplementation::initPharmIdxMolIDConfIdxMappings()
 
 		pharmIdxToMolIDConfIdxMap.push_back(mol_id_conf_idx);
 		molIDConfIdxToPharmIdxMap.insert(MolIDConfIdxToPharmIdxMap::value_type(mol_id_conf_idx, i));
+		molIDConfCountMap[mol_id]++;
 	}
 
 	if (res != SQLITE_DONE)
-		throwSQLiteIOError("PSDAccessorImplementation: error while loading pharmacophore molecule IDs and conformer indices");
+		throwSQLiteIOError("PSDScreeningDBAccessorImpl: error while loading pharmacophore molecule IDs and conformer indices");
 }
 
-void Pharm::PSDAccessorImplementation::loadFeatureCounts()
+void Pharm::PSDScreeningDBAccessorImpl::loadFeatureCounts()
 {
 	if (!featureCounts.empty())
 		return;
@@ -327,16 +368,16 @@ void Pharm::PSDAccessorImplementation::loadFeatureCounts()
 		MolIDConfIdxToPharmIdxMap::const_iterator it = molIDConfIdxToPharmIdxMap.find(mol_id_conf_idx);
 
 		if (it == molIDConfIdxToPharmIdxMap.end())
-			throw Base::IOError("PSDAccessorImplementation: error while loading feature counts: pharmacophore index for molecule-ID/conf. index pair not found");
+			throw Base::IOError("PSDScreeningDBAccessorImpl: error while loading feature counts: pharmacophore index for molecule-ID/conf. index pair not found");
 
 		std::size_t pharm_idx = it->second;
 
 		if (pharm_idx >= featureCounts.size())
-			throw Base::IndexError("PSDAccessorImplementation: error while loading feature counts: pharmacophore index out of bounds");
+			throw Base::IndexError("PSDScreeningDBAccessorImpl: error while loading feature counts: pharmacophore index out of bounds");
 
 		featureCounts[pharm_idx].insertEntry(FeatureTypeHistogram::Entry(ftr_type, ftr_count));
 	}
 
 	if (res != SQLITE_DONE)
-		throwSQLiteIOError("PSDAccessorImplementation: error while loading feature counts");
+		throwSQLiteIOError("PSDScreeningDBAccessorImpl: error while loading feature counts");
 }

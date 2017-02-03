@@ -30,7 +30,6 @@
 #include <functional>
 #include <iterator>
 #include <string>
-#include <sstream>
 #include <cmath>
 #include <cassert>
 #include <limits>
@@ -38,6 +37,7 @@
 #include <boost/bind.hpp>
 #include <boost/graph/adjacency_list.hpp>
 #include <boost/graph/max_cardinality_matching.hpp>
+#include <boost/thread.hpp>
 
 #include "CDPL/Chem/BondOrderGenerator.hpp"
 #include "CDPL/Chem/Atom.hpp"
@@ -52,8 +52,8 @@
 #include "CDPL/Chem/MolecularGraphFunctions.hpp"
 #include "CDPL/Chem/AtomDictionary.hpp"
 #include "CDPL/Chem/AtomType.hpp"
-#include "CDPL/Chem/SMILESMoleculeReader.hpp"
 #include "CDPL/Chem/SubstructureSearch.hpp"
+#include "CDPL/Chem/UtilityFunctions.hpp"
 #include "CDPL/Math/Vector.hpp"
 
 
@@ -63,9 +63,9 @@ using namespace CDPL;
 namespace
 {
 
-	Util::STArray CHALCOGENIDE_VAL_STATES_BCGE4;
+	Util::STArray chalcogenideValStatesBCGE4;
 
-    std::string FUNC_GROUP_PATTERN_STRINGS[] = { 
+    std::string funcGroupPatternStrings[] = { 
 	    "N-C(-*)=O",
 	    "*:N-C(-*)=O",
 
@@ -94,29 +94,15 @@ namespace
 	
 	typedef std::vector<Chem::Molecule::SharedPointer> MoleculeTable;
 
-	MoleculeTable FUNC_GROUP_PATTERN_MOLS;
+	MoleculeTable funcGroupPatternMols;
+	boost::once_flag initFunctionalGroupPatternsFlag = BOOST_ONCE_INIT;
 
 	void initFunctionalGroupPatterns() 
 	{
-		static bool initialized = false;
+		for (std::size_t i = 0; i < sizeof(funcGroupPatternStrings) / sizeof(std::string); i++)
+			funcGroupPatternMols.push_back(Chem::parseSMILES(funcGroupPatternStrings[i]));
 
-		if (initialized)
-			return;
-
-		initialized = true;
-
-		for (std::size_t i = 0; i < sizeof(FUNC_GROUP_PATTERN_STRINGS) / sizeof(std::string); i++) {
-			using namespace Chem;
-
-			std::istringstream iss(FUNC_GROUP_PATTERN_STRINGS[i]);
-			SMILESMoleculeReader smi_reader(iss);
-			Molecule::SharedPointer mol_ptr(new BasicMolecule());
-
-			if (smi_reader.read(*mol_ptr)) 
-				FUNC_GROUP_PATTERN_MOLS.push_back(mol_ptr);
-		}
-
-		CHALCOGENIDE_VAL_STATES_BCGE4.addElement(6);
+		chalcogenideValStatesBCGE4.addElement(6);
 	}
 
 	void genMappedBondMask(const Chem::AtomBondMapping& mapping, Util::BitSet& mask, const Chem::MolecularGraph& molgraph)
@@ -320,15 +306,15 @@ void Chem::BondOrderGenerator::init(const MolecularGraph& molgraph, Util::STArra
 	if (!funcGroupPatterns.empty())
 		return;
 
-	initFunctionalGroupPatterns();
+	boost::call_once(&initFunctionalGroupPatterns, initFunctionalGroupPatternsFlag);
 
 	MatchExpression<Atom, MolecularGraph>::SharedPointer atom_expr(new AtomMatchExpression());
 	MatchExpression<Bond, MolecularGraph>::SharedPointer bond_expr(new BondMatchExpression(*this, orders));
 
-	std::size_t num_patterns = FUNC_GROUP_PATTERN_MOLS.size();
+	std::size_t num_patterns = funcGroupPatternMols.size();
 
 	for (std::size_t i = 0; i < num_patterns; i++) {
-		Molecule::SharedPointer ptn_copy = FUNC_GROUP_PATTERN_MOLS[i]->clone();
+		Molecule::SharedPointer ptn_copy = funcGroupPatternMols[i]->clone();
 
 		std::for_each(ptn_copy->getAtomsBegin(), ptn_copy->getAtomsEnd(), 
 					  boost::bind(static_cast<void (*)(Atom&, const MatchExpression<Atom,
@@ -387,7 +373,7 @@ void Chem::BondOrderGenerator::calcFreeAtomValences(Util::STArray& orders)
 		const Util::STArray* valence_states;
 
 		if (AtomDictionary::getIUPACGroup(atom_type) == 16 && atom_type > AtomType::O && getExplicitBondCount(atom, *molGraph) >= 4)
-		 	valence_states = &CHALCOGENIDE_VAL_STATES_BCGE4;			
+		 	valence_states = &chalcogenideValStatesBCGE4;			
 		else
 			valence_states = &AtomDictionary::getValenceStates(atom_type);		
 

@@ -154,6 +154,8 @@ namespace CDPLPythonChem
 	void exportRDFReactionWriter();
 	void exportCDFMoleculeReader();
 	void exportCDFMolecularGraphWriter();
+	void exportCDFReactionReader();
+	void exportCDFReactionWriter();
 
 	void exportMoleculeIOManager();
 	void exportMolecularGraphIOManager();
@@ -169,6 +171,8 @@ namespace CDPLPythonChem
 	void exportINCHIMolecularGraphOutputHandler();
 	void exportCDFMoleculeInputHandler();
 	void exportCDFMolecularGraphOutputHandler();
+	void exportCDFReactionInputHandler();
+	void exportCDFReactionOutputHandler();
 	void exportJMEMoleculeInputHandler();
 	void exportJMEReactionInputHandler();
 	void exportJMEMolecularGraphOutputHandler();

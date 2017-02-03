@@ -204,7 +204,7 @@ BOOST_AUTO_TEST_CASE(StringDataBlockTest)
 
 //-----
 
-	db1.addElement(StringDataBlockEntry("header4", "data4"));
+	db1.addEntry("header4", "data4");
 
 	BOOST_CHECK(db1.getSize() == 4);
 

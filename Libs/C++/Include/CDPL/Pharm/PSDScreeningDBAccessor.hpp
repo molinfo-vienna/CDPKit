@@ -43,7 +43,7 @@ namespace CDPL
     namespace Pharm
     {
 	
-	    class PSDAccessorImplementation;
+	    class PSDScreeningDBAccessorImpl;
 
 		/**
 		 * \addtogroup CDPL_PHARM_SCREENING
@@ -83,11 +83,13 @@ namespace CDPL
 
 			std::size_t getNumPharmacophores() const;
 
+			std::size_t getNumPharmacophores(std::size_t mol_idx) const;
+
 			void getMolecule(std::size_t mol_idx, Chem::Molecule& mol) const; 
 
 			void getPharmacophore(std::size_t pharm_idx, Pharmacophore& pharm) const; 
 
-			void getPharmacophore(std::size_t mol_idx, std::size_t conf_idx, Pharmacophore& pharm) const; 
+			void getPharmacophore(std::size_t mol_idx, std::size_t mol_conf_idx, Pharmacophore& pharm) const; 
 
 			std::size_t getMoleculeIndex(std::size_t pharm_idx) const;
 
@@ -95,8 +97,10 @@ namespace CDPL
 
 			const FeatureTypeHistogram& getFeatureCounts(std::size_t pharm_idx) const;
 
+			const FeatureTypeHistogram& getFeatureCounts(std::size_t mol_idx, std::size_t mol_conf_idx) const; 
+
 		  private:
-			typedef std::auto_ptr<PSDAccessorImplementation> ImplementationPointer;
+			typedef std::auto_ptr<PSDScreeningDBAccessorImpl> ImplementationPointer;
 
 			PSDScreeningDBAccessor(const PSDScreeningDBAccessor&);
 

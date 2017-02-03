@@ -149,20 +149,20 @@ bool Pharm::FileScreeningHitCollector::operator()(const ScreeningProcessor::Sear
 		mdl_data.reset(new Chem::StringDataBlock());
 
 	if (outputScore)
-		mdl_data->addElement(Chem::StringDataBlockEntry(SCORE_PROPERTY_NAME, 
-														boost::lexical_cast<std::string>(score)));
+		mdl_data->addEntry(SCORE_PROPERTY_NAME, 
+						   boost::lexical_cast<std::string>(score));
 
 	if (outputDBName)
-		mdl_data->addElement(Chem::StringDataBlockEntry(DB_NAME_PROPERTY_NAME, 
-														hit.getHitProvider().getDBAccessor().getDatabaseName()));
+		mdl_data->addEntry(DB_NAME_PROPERTY_NAME, 
+						   hit.getHitProvider().getDBAccessor().getDatabaseName());
 
 	if (outputMolIndex)
-		mdl_data->addElement(Chem::StringDataBlockEntry(MOL_INDEX_PROPERTY_NAME, 
-														boost::lexical_cast<std::string>(hit.getHitMoleculeIndex())));
+		mdl_data->addEntry(MOL_INDEX_PROPERTY_NAME, 
+						   boost::lexical_cast<std::string>(hit.getHitMoleculeIndex()));
 
 	if (outputConfIndex)
-		mdl_data->addElement(Chem::StringDataBlockEntry(CONF_INDEX_PROPERTY_NAME, 
-														boost::lexical_cast<std::string>(hit.getHitConformationIndex())));
+		mdl_data->addEntry(CONF_INDEX_PROPERTY_NAME, 
+						   boost::lexical_cast<std::string>(hit.getHitConformationIndex()));
 
 	setStructureData(molecule, mdl_data);
 

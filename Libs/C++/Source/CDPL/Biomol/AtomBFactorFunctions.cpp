@@ -34,10 +34,15 @@
 using namespace CDPL; 
 
 
+namespace
+{
+
+	const double DEF_B_FACTOR = 0.0;
+}
+
+
 double Biomol::getBFactor(const Chem::Atom& atom)
 {
-	static const double DEF_B_FACTOR = 0.0;
-
     return atom.getPropertyOrDefault<double>(AtomProperty::B_FACTOR, DEF_B_FACTOR);
 }
 

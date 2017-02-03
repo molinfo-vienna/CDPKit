@@ -37,10 +37,15 @@
 using namespace CDPL; 
 
 
+namespace
+{
+
+	const long DEF_CHARGE = 0;
+}
+
+
 long Chem::getFormalCharge(const Atom& atom)
 {
-	static long DEF_CHARGE = 0;
-
     return atom.getPropertyOrDefault<long>(AtomProperty::FORMAL_CHARGE, DEF_CHARGE);
 }
 

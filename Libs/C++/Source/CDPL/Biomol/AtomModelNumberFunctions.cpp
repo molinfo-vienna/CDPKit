@@ -34,10 +34,15 @@
 using namespace CDPL; 
 
 
+namespace
+{
+
+	const std::size_t DEF_MODEL_NUMBER = 0;
+}
+
+
 std::size_t Biomol::getModelNumber(const Chem::Atom& atom)
 {
-	static const std::size_t DEF_MODEL_NUMBER = 0;
-
     return atom.getPropertyOrDefault<std::size_t>(AtomProperty::MODEL_NUMBER, DEF_MODEL_NUMBER);
 }
 

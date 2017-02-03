@@ -34,10 +34,15 @@
 using namespace CDPL; 
 
 
+namespace
+{
+
+	const bool DEF_FLAG = false;
+}
+
+
 bool Chem::getMDLStereoCareFlag(const Atom& atom)
 {
-	static const bool DEF_FLAG = false;
-
     return atom.getPropertyOrDefault<bool>(AtomProperty::MDL_DB_STEREO_CARE_FLAG, DEF_FLAG);
 }
 

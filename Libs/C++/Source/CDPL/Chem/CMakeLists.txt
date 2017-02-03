@@ -67,6 +67,8 @@ SET(cdpl-chem_LIB_SRCS
     CDFDataWriter.cpp
     CDFMoleculeReader.cpp
     CDFMolecularGraphWriter.cpp
+    CDFReactionReader.cpp
+    CDFReactionWriter.cpp
 
     SubstructureSearch.cpp
     ReactionSubstructureSearch.cpp
@@ -306,6 +308,8 @@ SET(cdpl-chem_LIB_SRCS
     AromaticityPerception.cpp
    )
 
+LINK_LIBRARIES(${Boost_THREAD_LIBRARY} ${Boost_DATE_TIME_LIBRARY})
+
 ADD_LIBRARY(cdpl-chem-static STATIC ${cdpl-chem_LIB_SRCS})
 
 SET_TARGET_PROPERTIES(cdpl-chem-static PROPERTIES 
@@ -314,7 +318,7 @@ SET_TARGET_PROPERTIES(cdpl-chem-static PROPERTIES
                       COMPILE_DEFINITIONS "CDPL_CHEM_STATIC_LINK;CDPL_MATH_STATIC_LINK;CDPL_UTIL_STATIC_LINK;CDPL_BASE_STATIC_LINK"
                      )
 
-TARGET_LINK_LIBRARIES(cdpl-chem-static cdpl-math-static cdpl-util-static cdpl-base-static cdpl-internal-static inchi-static ${Boost_DATE_TIME_LIBRARY})
+TARGET_LINK_LIBRARIES(cdpl-chem-static cdpl-math-static cdpl-util-static cdpl-base-static cdpl-internal-static inchi-static)
 
 INSTALL(TARGETS cdpl-chem-static
         DESTINATION "${CDPKIT_LIBRARY_INSTALL_DIR}" COMPONENT CDPLStaticLibraries
@@ -322,7 +326,7 @@ INSTALL(TARGETS cdpl-chem-static
 
 ADD_LIBRARY(cdpl-chem-shared SHARED ${cdpl-chem_LIB_SRCS})
 
-TARGET_LINK_LIBRARIES(cdpl-chem-shared cdpl-base-shared cdpl-math-shared cdpl-util-shared cdpl-internal-static inchi-static ${Boost_DATE_TIME_LIBRARY})
+TARGET_LINK_LIBRARIES(cdpl-chem-shared cdpl-base-shared cdpl-math-shared cdpl-util-shared cdpl-internal-static inchi-static)
 
 IF(APPLE)
   SET_TARGET_PROPERTIES(cdpl-chem-shared PROPERTIES VERSION "${CDPL_SO_VERSION}"

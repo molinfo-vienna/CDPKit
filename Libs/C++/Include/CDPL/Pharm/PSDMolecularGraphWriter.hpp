@@ -87,15 +87,11 @@ namespace CDPL
 			bool operator!() const;
 
 		  private:
-			void removeTmpFile();
-
 			PSDScreeningDBCreator  creator;
 			std::iostream*         output;
 			std::streampos         outputPos;
-			std::string            tmpFile;
-			std::string            dbFile;
-			bool                   dbOpen;
 			bool                   state;
+			bool                   closed;
 		};
 
 		/**

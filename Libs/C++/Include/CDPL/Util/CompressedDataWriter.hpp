@@ -33,6 +33,8 @@
 
 #include <iosfwd>
 
+#include <boost/bind.hpp>
+
 #include "CDPL/Base/DataWriter.hpp"
 #include "CDPL/Util/CompressionStreams.hpp"
 
@@ -85,6 +87,7 @@ CDPL::Util::CompressedDataWriter<WriterImpl, DecompStream, DataType>::Compressed
     stream(ios), writer(stream) 
 {
     writer.setParent(this);
+	writer.registerIOCallback(boost::bind(&Base::DataIOBase::invokeIOCallbacks, this, _2));
 }
 
 template <typename WriterImpl, typename DecompStream, typename DataType>

@@ -34,10 +34,15 @@
 using namespace CDPL; 
 
 
+namespace
+{
+
+	const std::size_t DEF_ISOTOPE = 0;
+}
+
+
 std::size_t Chem::getIsotope(const Atom& atom)
 {
-	static const std::size_t DEF_ISOTOPE = 0;
-
     return atom.getPropertyOrDefault<std::size_t>(AtomProperty::ISOTOPE, DEF_ISOTOPE);
 }
 

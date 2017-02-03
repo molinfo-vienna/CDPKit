@@ -47,6 +47,8 @@ bool Chem::AtomEnvironmentMatchExpression::operator()(const Atom&, const Molecul
 	if (!envPattern || envPattern->getNumAtoms() == 0)
 		return true;
 
+	boost::lock_guard<boost::mutex> lock(mutex);
+
 	substructSearch.clearAtomMappingConstraints();
 	substructSearch.addAtomMappingConstraint(0, target_molgraph.getAtomIndex(target_atom));
 

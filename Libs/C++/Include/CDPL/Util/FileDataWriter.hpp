@@ -32,8 +32,12 @@
 #define CDPL_UTIL_FILEDATAWRITER_HPP
 
 #include <fstream>
+#include <string>
+
+#include <boost/bind.hpp>
 
 #include "CDPL/Base/DataWriter.hpp"
+#include "CDPL/Base/Exceptions.hpp"
 
 
 namespace CDPL 
@@ -68,6 +72,7 @@ namespace CDPL
 
 		private:
 			std::fstream  stream;
+			std::string   fileName;
 			WriterImpl    writer;
 		};
 
@@ -82,16 +87,22 @@ namespace CDPL
 
 template <typename WriterImpl, typename DataType>
 CDPL::Util::FileDataWriter<WriterImpl, DataType>::FileDataWriter(const std::string& file_name, std::ios_base::openmode mode): 
-    stream(file_name.c_str(), mode), writer(stream) 
+    stream(file_name.c_str(), mode), fileName(file_name), writer(stream) 
 {
     writer.setParent(this);
+	writer.registerIOCallback(boost::bind(&Base::DataIOBase::invokeIOCallbacks, this, _2));
 }
 
 template <typename WriterImpl, typename DataType>
 CDPL::Util::FileDataWriter<WriterImpl, DataType>&
 CDPL::Util::FileDataWriter<WriterImpl, DataType>::write(const DataType& obj)
 {
-    writer.write(obj);
+	try {
+		writer.write(obj);
+
+	} catch (const std::exception& e) {
+		throw Base::IOError("FileDataWriter: while writing file '" + fileName + "': " + e.what());
+	}
 
     return *this;
 }

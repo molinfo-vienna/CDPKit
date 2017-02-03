@@ -34,10 +34,15 @@
 using namespace CDPL; 
 
 
+namespace
+{
+
+	const std::size_t DEF_MODEL_NUMBER = 0;
+}
+
+
 std::size_t Biomol::getModelNumber(const Chem::MolecularGraph& molgraph)
 {
-	static const std::size_t DEF_MODEL_NUMBER = 0;
-
     return molgraph.getPropertyOrDefault<std::size_t>(MolecularGraphProperty::MODEL_NUMBER, DEF_MODEL_NUMBER);
 }
 

@@ -524,6 +524,9 @@
 \defgroup CDPL_UTIL_PREDICATES Predicates
 \ingroup CDPL_UTIL
 
+\defgroup CDPL_UTIL_FUNCTIONS Free Functions
+\ingroup CDPL_UTIL
+
 \defgroup CDPL_UTIL_MISCELLANEOUS Miscellaneous 
 \ingroup CDPL_UTIL
 

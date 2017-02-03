@@ -33,10 +33,15 @@
 using namespace CDPL; 
 
 
+namespace
+{
+
+	const double DEF_NUMBER = 1.0;
+}
+
+
 double Chem::getStoichiometricNumber(const MolecularGraph& molgraph)
 {
-	static double DEF_NUMBER = 1.0;
-
 	return molgraph.getPropertyOrDefault<double>(MolecularGraphProperty::STOICHIOMETRIC_NUMBER, DEF_NUMBER);
 }
 

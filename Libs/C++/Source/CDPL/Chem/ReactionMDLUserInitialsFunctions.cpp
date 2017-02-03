@@ -34,10 +34,15 @@
 using namespace CDPL; 
 
 
+namespace
+{
+
+    const std::string DEF_INITIALS = "";
+}
+
+
 const std::string& Chem::getMDLUserInitials(const Reaction& rxn)
 {
-    static std::string DEF_INITIALS = "";
-    
     return rxn.getPropertyOrDefault<std::string>(ReactionProperty::MDL_USER_INITIALS, DEF_INITIALS);
 }
 

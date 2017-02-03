@@ -34,10 +34,15 @@
 using namespace CDPL; 
 
 
+namespace
+{
+
+	const bool DEF_FLAG = false;
+}
+
+
 bool Pharm::getOptionalFlag(const Feature& feature)
 {
-	static const bool DEF_FLAG = false;
-
     return feature.getPropertyOrDefault<bool>(FeatureProperty::OPTIONAL_FLAG, DEF_FLAG);
 }
 

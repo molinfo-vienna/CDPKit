@@ -36,10 +36,15 @@
 using namespace CDPL; 
 
 
+namespace
+{
+	
+	const std::string DEF_SYMBOL = "";
+}
+
+
 const std::string& Chem::getSymbol(const Atom& atom)
 {
-	static const std::string DEF_SYMBOL = AtomDictionary::getSymbol(AtomType::UNKNOWN);
-
 	return atom.getPropertyOrDefault<std::string>(AtomProperty::SYMBOL, DEF_SYMBOL);
 }
 

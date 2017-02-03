@@ -35,6 +35,13 @@
 using namespace CDPL; 
 
 
+namespace
+{
+
+    const Pharm::InteractionAnalyzer::ConstraintFunction DEF_FUNC;
+}
+
+
 void Pharm::InteractionAnalyzer::setConstraintFunction(unsigned int type1, unsigned int type2, const ConstraintFunction& func)
 {
     ConstraintFunctionMap::iterator it = constraintFuncMap.find(std::make_pair(type1, type2));
@@ -53,8 +60,6 @@ void Pharm::InteractionAnalyzer::removeConstraintFunction(unsigned int type1, un
 const Pharm::InteractionAnalyzer::ConstraintFunction& 
 Pharm::InteractionAnalyzer::getConstraintFunction(unsigned int type1, unsigned int type2) const
 {
-    static const ConstraintFunction DEF_FUNC;
-
     ConstraintFunctionMap::const_iterator it = constraintFuncMap.find(std::make_pair(type1, type2));
 
     return (it == constraintFuncMap.end() ? DEF_FUNC : it->second);

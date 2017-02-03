@@ -41,10 +41,15 @@
 using namespace CDPL; 
 
 
+namespace
+{
+
+    const Chem::MatchConstraintList::SharedPointer DEF_CONSTRAINTS(new Chem::MatchConstraintList());
+}
+
+
 const Chem::MatchConstraintList::SharedPointer& Chem::getMatchConstraints(const MolecularGraph& molgraph)
 {
-    static const MatchConstraintList::SharedPointer DEF_CONSTRAINTS(new MatchConstraintList());
-
     return molgraph.getPropertyOrDefault<MatchConstraintList::SharedPointer>(MolecularGraphProperty::MATCH_CONSTRAINTS,
 																			 DEF_CONSTRAINTS);
 }

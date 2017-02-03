@@ -34,10 +34,15 @@
 using namespace CDPL; 
 
 
+namespace
+{
+
+	const std::size_t DEF_MAPPING_ID = 0;	
+}
+
+
 std::size_t Chem::getReactionAtomMappingID(const Atom& atom)
 {
-	static std::size_t DEF_MAPPING_ID = 0;
-
     return atom.getPropertyOrDefault<std::size_t>(AtomProperty::REACTION_ATOM_MAPPING_ID, DEF_MAPPING_ID);
 }
 

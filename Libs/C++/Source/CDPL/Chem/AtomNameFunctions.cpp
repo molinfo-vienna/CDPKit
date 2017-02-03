@@ -34,10 +34,15 @@
 using namespace CDPL; 
 
 
+namespace
+{
+
+    const std::string DEF_NAME = "";
+}
+
+
 const std::string& Chem::getName(const Atom& atom)
 {
-    static std::string DEF_NAME = "";
-    
     return atom.getPropertyOrDefault<std::string>(AtomProperty::NAME, DEF_NAME);
 }
 

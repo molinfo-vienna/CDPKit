@@ -59,6 +59,11 @@ void Base::DataIOBase::unregisterIOCallback(std::size_t id)
 					callbacks.end());
 }
 
+void Base::DataIOBase::clearIOCallbacks()
+{
+	callbacks.clear();
+}
+
 void Base::DataIOBase::invokeIOCallbacks(double progress) const
 {
 	std::for_each(callbacks.begin(), callbacks.end(), boost::bind(&IOCallbackFunction::operator(),

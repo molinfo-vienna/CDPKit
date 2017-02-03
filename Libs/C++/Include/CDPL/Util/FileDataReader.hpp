@@ -32,8 +32,12 @@
 #define CDPL_UTIL_FILEDATAREADER_HPP
 
 #include <fstream>
+#include <string>
+
+#include <boost/bind.hpp>
 
 #include "CDPL/Base/DataReader.hpp"
+#include "CDPL/Base/Exceptions.hpp"
 
 
 namespace CDPL 
@@ -75,6 +79,7 @@ namespace CDPL
 
 		private:
 			std::ifstream stream;
+			std::string   fileName;
 			ReaderImpl    reader;
 		};
 
@@ -89,16 +94,22 @@ namespace CDPL
 
 template <typename ReaderImpl, typename DataType>
 CDPL::Util::FileDataReader<ReaderImpl, DataType>::FileDataReader(const std::string& file_name, std::ios_base::openmode mode): 
-    stream(file_name.c_str(), mode), reader(stream) 
+    stream(file_name.c_str(), mode), fileName(file_name), reader(stream) 
 {
     reader.setParent(this);
+	reader.registerIOCallback(boost::bind(&Base::DataIOBase::invokeIOCallbacks, this, _2));
 }
 
 template <typename ReaderImpl, typename DataType>
 CDPL::Util::FileDataReader<ReaderImpl, DataType>&
 CDPL::Util::FileDataReader<ReaderImpl, DataType>::read(DataType& obj)
 {
-    reader.read(obj);
+	try {
+		reader.read(obj);
+
+	} catch (const std::exception& e) {
+		throw Base::IOError("FileDataReader: while reading file '" + fileName + "': " + e.what());
+	}
 
     return *this;
 }
@@ -107,7 +118,12 @@ template <typename ReaderImpl, typename DataType>
 CDPL::Util::FileDataReader<ReaderImpl, DataType>&
 CDPL::Util::FileDataReader<ReaderImpl, DataType>::read(std::size_t idx, DataType& obj)
 {
-    reader.read(idx, obj);
+	try {
+		reader.read(idx, obj);
+
+	} catch (const std::exception& e) {
+		throw Base::IOError("FileDataReader: while reading file '" + fileName + "': " + e.what());
+	}
 
     return *this;
 }
@@ -116,7 +132,12 @@ template <typename ReaderImpl, typename DataType>
 CDPL::Util::FileDataReader<ReaderImpl, DataType>&
 CDPL::Util::FileDataReader<ReaderImpl, DataType>::skip()
 {
-    reader.skip();
+	try {
+		reader.skip();
+
+	} catch (const std::exception& e) {
+		throw Base::IOError("FileDataReader: while reading file '" + fileName + "': " + e.what());
+	}
 
     return *this;
 }

@@ -33,10 +33,15 @@
 using namespace CDPL; 
 
 
+namespace
+{
+
+	const std::size_t DEF_DIM = 0;
+}
+
+
 std::size_t Chem::getMDLDimensionality(const MolecularGraph& molgraph)
 {
-	static std::size_t DEF_DIM = 0;
-
 	return molgraph.getPropertyOrDefault<std::size_t>(MolecularGraphProperty::MDL_DIMENSIONALITY, DEF_DIM);
 }
 

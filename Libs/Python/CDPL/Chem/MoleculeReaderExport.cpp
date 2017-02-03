@@ -27,6 +27,7 @@
 #include "CDPL/Chem/Molecule.hpp"
 
 #include "Base/DataReaderExport.hpp"
+#include "Util/CompoundDataReaderExport.hpp"
 
 #include "ClassExports.hpp"
 
@@ -34,4 +35,5 @@
 void CDPLPythonChem::exportMoleculeReader()
 {
 	CDPLPythonBase::DataReaderExport<CDPL::Chem::Molecule>("MoleculeReader", "mol");
+	CDPLPythonUtil::CompoundDataReaderExport<CDPL::Chem::Molecule>("CompoundMoleculeReader");
 }

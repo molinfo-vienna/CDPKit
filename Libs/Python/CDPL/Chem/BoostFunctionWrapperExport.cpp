@@ -44,6 +44,7 @@
 
 void CDPLPythonChem::exportBoostFunctionWrappers()
 {
+	using namespace boost;
     using namespace CDPL;
     using namespace Chem;
 
@@ -52,9 +53,9 @@ void CDPLPythonChem::exportBoostFunctionWrappers()
     CDPLPythonBase::BoostFunction1Export<boost::function1<bool, const Entity3DMapping&> >("BoolEntity3DMappingFunctor");
     CDPLPythonBase::BoostFunction1Export<boost::function1<bool, const AtomMapping&> >("BoolAtomMappingFunctor");
     CDPLPythonBase::BoostFunction1Export<boost::function1<const Math::Vector3D&, const Entity3D&>, Entity3D&, 
-										 boost::python::return_internal_reference<2> >("Vector3DEntity3DFunctor");
+										 python::return_internal_reference<2> >("Vector3DEntity3DFunctor");
     CDPLPythonBase::BoostFunction1Export<Atom3DCoordinatesFunction, Atom&, 
-										 boost::python::return_internal_reference<2> >("Atom3DCoordinatesFunction");
+										 python::return_internal_reference<2> >("Atom3DCoordinatesFunction");
     CDPLPythonBase::BoostFunction1Export<boost::function1<double, const Atom&>, Atom&>("DoubleAtomFunctor");
 	CDPLPythonBase::BoostFunction1Export<boost::function1<double, const Entity3D&>, Entity3D&>("DoubleEntity3DFunctor");
 	CDPLPythonBase::BoostFunction1Export<AtomPredicate, Atom&>("AtomPredicate");

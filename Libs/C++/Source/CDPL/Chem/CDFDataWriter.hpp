@@ -33,6 +33,7 @@
 #include <boost/function.hpp>
 
 #include "CDPL/Chem/APIPrefix.hpp"
+#include "CDPL/Chem/StringDataBlock.hpp"
 
 #include "CDPL/Internal/CDFDataWriterBase.hpp"
 #include "CDPL/Internal/ByteBuffer.hpp"
@@ -50,6 +51,7 @@ namespace CDPL
 	namespace Chem
 	{
 
+		class Reaction;
 		class MolecularGraph;
 		class Atom;
 		class Bond;
@@ -66,8 +68,10 @@ namespace CDPL
 			CDFDataWriter(const Base::ControlParameterContainer& ctrl_params): ctrlParams(ctrl_params) {}
 
 			bool writeMolGraph(std::ostream& os, const MolecularGraph& molgraph);
-
 			void writeMolGraph(const MolecularGraph& molgraph, Internal::ByteBuffer& bbuf);
+
+			bool writeReaction(std::ostream& os, const Reaction& rxn);
+			void writeReaction(const Reaction& rxn, Internal::ByteBuffer& bbuf);
 
 			static void registerExternalAtomPropertyHandler(const AtomPropertyHandler& handler);
 			static void registerExternalBondPropertyHandler(const BondPropertyHandler& handler);
@@ -78,10 +82,14 @@ namespace CDPL
 		  private:
 			void init();
 
-			void outputMolGraphHeader(const MolecularGraph& molgraph, Internal::ByteBuffer& bbuf) const;
+			void outputHeader(Base::uint8 type_id, Internal::ByteBuffer& bbuf) const;
+
+			void writeConnectionTable(const MolecularGraph& molgraph, Internal::ByteBuffer& bbuf);
+
 			void outputAtoms(const MolecularGraph& molgraph, Internal::ByteBuffer& bbuf);
 			void outputBonds(const MolecularGraph& molgraph, Internal::ByteBuffer& bbuf);
 			void outputMolGraphProperties(const MolecularGraph& molgraph, Internal::ByteBuffer& bbuf);
+			void outputReactionProperties(const Reaction& rxn, Internal::ByteBuffer& bbuf);
 
 			template <typename H, typename T>
 			void outputExternalProperties(const H& handler, const T& obj, Internal::ByteBuffer& bbuf);
@@ -93,7 +101,7 @@ namespace CDPL
 			void putStereoDescriptor(const MolecularGraph& molgraph, 
 									 unsigned int prop_id, const StereoDescriptor& descr, Internal::ByteBuffer& bbuf) const;
 
-			void putStructureData(const MolecularGraph& molgraph, Internal::ByteBuffer& bbuf) const;
+			void putStringData(unsigned int prop_id, const StringDataBlock::SharedPointer& sdata, Internal::ByteBuffer& bbuf) const;
 
 			bool writeRecordData(std::ostream& os);
 

@@ -34,6 +34,7 @@
 #include <boost/function.hpp>
 
 #include "CDPL/Chem/CDFFormatData.hpp"
+#include "CDPL/Chem/StringDataBlock.hpp"
 
 #include "CDPL/Internal/CDFDataReaderBase.hpp"
 #include "CDPL/Internal/ByteBuffer.hpp"
@@ -51,6 +52,7 @@ namespace CDPL
 	namespace Chem
 	{
 
+		class Reaction;
 		class Molecule;
 		class Atom;
 		class Bond;
@@ -66,12 +68,16 @@ namespace CDPL
 			CDFDataReader(const Base::ControlParameterContainer& ctrl_params): ctrlParams(ctrl_params) {}
 
 			bool readMolecule(std::istream& is, Molecule& mol);
+			bool readReaction(std::istream& is, Reaction& rxn);
 
 			bool readMolecule(Molecule& mol, Internal::ByteBuffer& bbuf);
+			bool readReaction(Reaction& rxn, Internal::ByteBuffer& bbuf);
 
 			bool skipMolecule(std::istream& is);
+			bool skipReaction(std::istream& is);
 
-			bool hasMoreData(std::istream& is);
+			bool hasMoreMoleculeData(std::istream& is);
+			bool hasMoreReactionData(std::istream& is);
 
 			static void registerExternalAtomPropertyHandler(const AtomPropertyHandler& handler);
 			static void registerExternalBondPropertyHandler(const BondPropertyHandler& handler);
@@ -93,9 +99,14 @@ namespace CDPL
 
 			void init();
 
+			void readReactionComponents(Reaction& rxn, Internal::ByteBuffer& bbuf);
+			void readConnectionTable(Molecule& mol, Internal::ByteBuffer& bbuf);
+
 			std::size_t readAtoms(Molecule& mol, Internal::ByteBuffer& bbuf);
 			void readBonds(Molecule& mol, Internal::ByteBuffer& bbuf, std::size_t num_atoms);
 			void readMoleculeProperties(Molecule& mol, Internal::ByteBuffer& bbuf);
+
+			void readReactionProperties(Reaction& rxn, Internal::ByteBuffer& bbuf);
 
 			template <typename T>
 			void readExternalProperties(CDF::PropertySpec prop_spec, T& obj, Internal::ByteBuffer& data);
@@ -104,7 +115,8 @@ namespace CDPL
 			bool readExternalProperties(unsigned int handler_id, Bond& bond, Internal::ByteBuffer& data);
 			bool readExternalProperties(unsigned int handler_id, Molecule& mol, Internal::ByteBuffer& data);
 
-			void getStructureData(CDF::PropertySpec prop_spec, Molecule& mol, Internal::ByteBuffer& bbuf) const;
+			StringDataBlock::SharedPointer readStringData(CDF::PropertySpec prop_spec, Internal::ByteBuffer& bbuf) const;
+
 			void readStereoDescriptor(CDF::PropertySpec prop_spec, CDFStereoDescr& descr, Internal::ByteBuffer& data) const;
 			void setStereoDescriptors(Molecule& mol) const;
 

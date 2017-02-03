@@ -35,6 +35,7 @@
 #include <cstddef>
 
 #include <boost/shared_ptr.hpp>
+#include <boost/function.hpp>
 
 #include "CDPL/Pharm/APIPrefix.hpp"
 
@@ -51,6 +52,8 @@ namespace CDPL
     namespace Pharm
     {
 	
+		class ScreeningDBAccessor;
+
 		/**
 		 * \addtogroup CDPL_PHARM_SCREENING
 		 * @{
@@ -64,7 +67,9 @@ namespace CDPL
 
 		  public:
 			typedef boost::shared_ptr<ScreeningDBCreator> SharedPointer;
-	    
+
+			typedef boost::function1<void, double> ProgressCallbackFunction;
+
 			enum Mode
 			{
 
@@ -87,6 +92,8 @@ namespace CDPL
 			virtual bool allowDuplicateEntries() const = 0;
 
 			virtual bool process(const Chem::MolecularGraph& molgraph) = 0;
+
+			virtual bool merge(const ScreeningDBAccessor& db_acc, const ProgressCallbackFunction& func) = 0;
 
 			virtual const std::string& getDatabaseName() const = 0;
 

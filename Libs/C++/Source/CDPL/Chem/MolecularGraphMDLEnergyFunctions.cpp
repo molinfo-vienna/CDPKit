@@ -34,10 +34,15 @@
 using namespace CDPL; 
 
 
+namespace
+{
+
+	const double DEF_ENERGY = 0.0;
+}
+
+
 double Chem::getMDLEnergy(const MolecularGraph& molgraph)
 {
-	static double DEF_ENERGY = 0.0;
-
 	return molgraph.getPropertyOrDefault<double>(MolecularGraphProperty::MDL_ENERGY, DEF_ENERGY);
 }
 

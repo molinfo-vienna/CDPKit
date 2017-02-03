@@ -27,6 +27,7 @@
 #include <boost/python.hpp>
 
 #include "CDPL/Chem/INCHIMoleculeReader.hpp"
+#include "CDPL/Util/FileDataReader.hpp"
 
 #include "ClassExports.hpp"
 
@@ -52,4 +53,9 @@ void CDPLPythonChem::exportINCHIMoleculeReader()
 		.add_property("logOutput", 
 					  python::make_function(&Chem::INCHIMoleculeReader::getLogOutput, 
 											python::return_value_policy<python::copy_const_reference>()));
+
+	python::class_<Util::FileDataReader<Chem::INCHIMoleculeReader>, python::bases<Base::DataReader<Chem::Molecule> >, 
+		boost::noncopyable>("FileINCHIMoleculeReader", python::no_init)
+		.def(python::init<const std::string&, std::ios_base::openmode>(
+				 (python::arg("self"), python::arg("file_name"), python::arg("mode") = std::ios_base::in | std::ios_base::binary)));
 }

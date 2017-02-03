@@ -27,6 +27,7 @@
 #include <boost/python.hpp>
 
 #include "CDPL/Chem/RXNReactionWriter.hpp"
+#include "CDPL/Util/FileDataWriter.hpp"
 
 #include "ClassExports.hpp"
 
@@ -40,4 +41,10 @@ void CDPLPythonChem::exportRXNReactionWriter()
 		boost::noncopyable>("RXNReactionWriter", python::no_init)
 		.def(python::init<std::ostream&>((python::arg("self"), python::arg("os")))
 			 [python::with_custodian_and_ward<1, 2>()]);
+
+	python::class_<Util::FileDataWriter<Chem::RXNReactionWriter>, python::bases<Base::DataWriter<Chem::Reaction> >, 
+		boost::noncopyable>("FileRXNReactionWriter", python::no_init)
+		.def(python::init<const std::string&, std::ios_base::openmode>(
+				 (python::arg("self"), python::arg("file_name"), python::arg("mode") = 
+				  std::ios_base::in | std::ios_base::out | std::ios_base::trunc | std::ios_base::binary)));
 }

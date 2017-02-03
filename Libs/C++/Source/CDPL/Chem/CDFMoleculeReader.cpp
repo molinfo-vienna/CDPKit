@@ -66,5 +66,5 @@ bool Chem::CDFMoleculeReader::skipData(std::istream& is)
 
 bool Chem::CDFMoleculeReader::moreData(std::istream& is)
 {
-	return reader->hasMoreData(is);
+	return reader->hasMoreMoleculeData(is);
 }

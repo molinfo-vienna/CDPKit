@@ -33,10 +33,15 @@
 using namespace CDPL; 
 
 
+namespace
+{
+
+    const std::string DEF_NAME = "";
+}
+
+
 const std::string& Chem::getName(const MolecularGraph& molgraph)
 {
-    static std::string DEF_NAME = "";
-    
     return molgraph.getPropertyOrDefault<std::string>(MolecularGraphProperty::NAME, DEF_NAME);
 }
 

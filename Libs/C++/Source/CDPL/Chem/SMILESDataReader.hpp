@@ -67,6 +67,8 @@ namespace CDPL
 
 			bool hasMoreData(std::istream&) const;
 
+			typedef std::vector<std::size_t> STArray;
+
 		private:
 			struct BondParameters
 			{
@@ -78,8 +80,6 @@ namespace CDPL
 
 				void combineWith(const BondParameters&, bool);
 			};
-
-			typedef std::vector<std::size_t> STArray;
 
 			void getParameters();
 

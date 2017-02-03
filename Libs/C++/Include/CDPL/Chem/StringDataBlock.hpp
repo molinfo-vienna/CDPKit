@@ -126,6 +126,10 @@ namespace CDPL
 		  public:
 			typedef boost::shared_ptr<StringDataBlock> SharedPointer;
 
+			void addEntry(const std::string& header, const std::string& data) {
+				addElement(StringDataBlockEntry(header, data));
+			}
+
 		  private:
 			const char* getClassName() const {
 				return "StringDataBlock";

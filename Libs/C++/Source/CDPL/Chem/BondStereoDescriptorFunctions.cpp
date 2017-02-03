@@ -70,13 +70,13 @@ namespace
 
 		return StereoDescriptor(config, *ref_atoms[0], bond.getBegin(), bond.getEnd(), *ref_atoms[1]);
 	}
+
+    const Chem::StereoDescriptor DEF_DESCRIPTOR = Chem::StereoDescriptor(Chem::BondConfiguration::UNDEF);
 }
 
 
 const Chem::StereoDescriptor& Chem::getStereoDescriptor(const Bond& bond)
 {
-    static const StereoDescriptor DEF_DESCRIPTOR = StereoDescriptor(BondConfiguration::UNDEF);
-
     return bond.getPropertyOrDefault<StereoDescriptor>(BondProperty::STEREO_DESCRIPTOR, DEF_DESCRIPTOR);
 }
 

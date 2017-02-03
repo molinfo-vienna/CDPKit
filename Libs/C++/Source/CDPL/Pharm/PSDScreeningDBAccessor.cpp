@@ -28,18 +28,18 @@
 
 #include "CDPL/Pharm/PSDScreeningDBAccessor.hpp"
 
-#include "PSDAccessorImplementation.hpp"
+#include "PSDScreeningDBAccessorImpl.hpp"
 
 
 using namespace CDPL;
 
 
 Pharm::PSDScreeningDBAccessor::PSDScreeningDBAccessor():
-	impl(new PSDAccessorImplementation())
+	impl(new PSDScreeningDBAccessorImpl())
 {}
 
 Pharm::PSDScreeningDBAccessor::PSDScreeningDBAccessor(const std::string& name):
-	impl(new PSDAccessorImplementation())
+	impl(new PSDScreeningDBAccessorImpl())
 {
 	impl->open(name);
 }
@@ -71,6 +71,11 @@ std::size_t Pharm::PSDScreeningDBAccessor::getNumPharmacophores() const
 	return impl->getNumPharmacophores();
 }
 
+std::size_t Pharm::PSDScreeningDBAccessor::getNumPharmacophores(std::size_t mol_idx) const
+{
+	return impl->getNumPharmacophores(mol_idx);
+}
+
 void Pharm::PSDScreeningDBAccessor::getMolecule(std::size_t mol_idx, Chem::Molecule& mol) const
 {
 	impl->getMolecule(mol_idx, mol);
@@ -81,9 +86,9 @@ void Pharm::PSDScreeningDBAccessor::getPharmacophore(std::size_t pharm_idx, Phar
 	impl->getPharmacophore(pharm_idx, pharm);
 }
 
-void Pharm::PSDScreeningDBAccessor::getPharmacophore(std::size_t mol_idx, std::size_t conf_idx, Pharmacophore& pharm) const
+void Pharm::PSDScreeningDBAccessor::getPharmacophore(std::size_t mol_idx, std::size_t mol_conf_idx, Pharmacophore& pharm) const
 {
-	impl->getPharmacophore(mol_idx, conf_idx, pharm);
+	impl->getPharmacophore(mol_idx, mol_conf_idx, pharm);
 }
 
 std::size_t Pharm::PSDScreeningDBAccessor::getMoleculeIndex(std::size_t pharm_idx) const
@@ -99,4 +104,9 @@ std::size_t Pharm::PSDScreeningDBAccessor::getConformationIndex(std::size_t phar
 const Pharm::FeatureTypeHistogram& Pharm::PSDScreeningDBAccessor::getFeatureCounts(std::size_t pharm_idx) const
 {
 	return impl->getFeatureCounts(pharm_idx);
+}
+
+const Pharm::FeatureTypeHistogram& Pharm::PSDScreeningDBAccessor::getFeatureCounts(std::size_t mol_idx, std::size_t mol_conf_idx) const
+{
+	return impl->getFeatureCounts(mol_idx, mol_conf_idx);
 }

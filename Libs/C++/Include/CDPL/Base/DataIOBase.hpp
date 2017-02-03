@@ -98,6 +98,11 @@ namespace CDPL
 			 */
 			void invokeIOCallbacks(double progress) const;
 
+			/**
+			 * \brief Clears all registered I/O callback functions.
+			 */
+			void clearIOCallbacks();
+
 		protected:
 			/**
 			 * \brief Default constructor.

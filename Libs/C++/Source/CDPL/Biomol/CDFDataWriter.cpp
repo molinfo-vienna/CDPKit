@@ -41,14 +41,8 @@ using namespace CDPL;
 
 void Biomol::CDFDataWriter::registerExternalPropertyHandlers()
 {
-	static bool registered = false;
-
-	if (!registered) {
-		Chem::CDFDataWriter::registerExternalAtomPropertyHandler(&outputAtomProperties);
-		Chem::CDFDataWriter::registerExternalMolGraphPropertyHandler(&outputMolGraphProperties);
-
-		registered = true;
-	}
+	Chem::CDFDataWriter::registerExternalAtomPropertyHandler(&outputAtomProperties);
+	Chem::CDFDataWriter::registerExternalMolGraphPropertyHandler(&outputMolGraphProperties);
 }
 
 unsigned int Biomol::CDFDataWriter::outputAtomProperties(const Chem::CDFDataWriter& writer, const Chem::Atom& atom, Internal::ByteBuffer& data) 

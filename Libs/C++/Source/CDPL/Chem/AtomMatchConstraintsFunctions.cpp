@@ -34,10 +34,15 @@
 using namespace CDPL; 
 
 
+namespace
+{
+
+    const Chem::MatchConstraintList::SharedPointer DEF_CONSTRAINTS(new Chem::MatchConstraintList());
+}
+
+
 const Chem::MatchConstraintList::SharedPointer& Chem::getMatchConstraints(const Atom& atom)
 {
-    static const MatchConstraintList::SharedPointer DEF_CONSTRAINTS(new MatchConstraintList());
-
     return atom.getPropertyOrDefault<MatchConstraintList::SharedPointer>(AtomProperty::MATCH_CONSTRAINTS,
 																		 DEF_CONSTRAINTS);
 }

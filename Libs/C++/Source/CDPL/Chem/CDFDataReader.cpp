@@ -30,6 +30,7 @@
 
 #include <boost/bind.hpp>
 
+#include "CDPL/Chem/Reaction.hpp"
 #include "CDPL/Chem/Molecule.hpp"
 #include "CDPL/Chem/Atom.hpp"
 #include "CDPL/Chem/Bond.hpp"
@@ -37,8 +38,10 @@
 #include "CDPL/Chem/Entity3DFunctions.hpp"
 #include "CDPL/Chem/AtomFunctions.hpp"
 #include "CDPL/Chem/BondFunctions.hpp"
+#include "CDPL/Chem/ReactionFunctions.hpp"
 #include "CDPL/Chem/MolecularGraphFunctions.hpp"
 #include "CDPL/Chem/StereoDescriptor.hpp"
+#include "CDPL/Chem/ReactionRole.hpp"
 #include "CDPL/Base/Exceptions.hpp"
 #include "CDPL/Math/Vector.hpp"
 #include "CDPL/Math/VectorArray.hpp"
@@ -54,13 +57,22 @@ Chem::CDFDataReader::BondPropertyHandlerList      Chem::CDFDataReader::extBondPr
 Chem::CDFDataReader::MoleculePropertyHandlerList  Chem::CDFDataReader::extMoleculePropertyHandlers;
 
 
-bool Chem::CDFDataReader::hasMoreData(std::istream& is)
+bool Chem::CDFDataReader::hasMoreMoleculeData(std::istream& is)
 {
 	init();
 
 	CDF::Header header;
 
 	return CDFDataReaderBase::skipToRecord(is, header, CDF::MOLECULE_RECORD_ID, true, dataBuffer);
+}
+
+bool Chem::CDFDataReader::hasMoreReactionData(std::istream& is)
+{
+	init();
+
+	CDF::Header header;
+
+	return CDFDataReaderBase::skipToRecord(is, header, CDF::REACTION_RECORD_ID, true, dataBuffer);
 }
 
 bool Chem::CDFDataReader::readMolecule(std::istream& is, Molecule& mol)
@@ -75,16 +87,24 @@ bool Chem::CDFDataReader::readMolecule(std::istream& is, Molecule& mol)
 	readData(is, header.recordDataLength, dataBuffer);
 
 	dataBuffer.setIOPointer(0);
-	atomStereoDescrs.clear();
-	bondStereoDescrs.clear();
+	readConnectionTable(mol, dataBuffer);
 
-	startAtomIdx = mol.getNumAtoms();
+	return true;
+}
 
-	std::size_t num_atoms = readAtoms(mol, dataBuffer);
+bool Chem::CDFDataReader::readReaction(std::istream& is, Reaction& rxn)
+{
+	init();
 
-	readBonds(mol, dataBuffer, num_atoms);
-	readMoleculeProperties(mol, dataBuffer);
-	setStereoDescriptors(mol);
+	CDF::Header header;
+
+	if (!skipToRecord(is, header, CDF::REACTION_RECORD_ID, false, dataBuffer))
+		return false;
+
+	readData(is, header.recordDataLength, dataBuffer);
+
+	dataBuffer.setIOPointer(0);
+	readReactionComponents(rxn, dataBuffer);
 
 	return true;
 }
@@ -94,6 +114,13 @@ bool Chem::CDFDataReader::skipMolecule(std::istream& is)
 	init();
 
 	return skipNextRecord(is, CDF::MOLECULE_RECORD_ID, dataBuffer);
+}
+
+bool Chem::CDFDataReader::skipReaction(std::istream& is)
+{
+	init();
+
+	return skipNextRecord(is, CDF::REACTION_RECORD_ID, dataBuffer);
 }
 
 bool Chem::CDFDataReader::readMolecule(Molecule& mol, Internal::ByteBuffer& bbuf)
@@ -114,16 +141,30 @@ bool Chem::CDFDataReader::readMolecule(Molecule& mol, Internal::ByteBuffer& bbuf
 		return false;
 	}
 
-	atomStereoDescrs.clear();
-	bondStereoDescrs.clear();
+	readConnectionTable(mol, bbuf);
 
-	startAtomIdx = mol.getNumAtoms();
+	return true;
+}
 
-	std::size_t num_atoms = readAtoms(mol, bbuf);
+bool Chem::CDFDataReader::readReaction(Reaction& rxn, Internal::ByteBuffer& bbuf)
+{
+	init();
 
-	readBonds(mol, bbuf, num_atoms);
-	readMoleculeProperties(mol, bbuf);
-	setStereoDescriptors(mol);
+	bbuf.setIOPointer(0);
+
+	CDF::Header header;
+
+	if (!getHeader(header, bbuf))
+		return false;
+
+	if (header.recordTypeID != CDF::REACTION_RECORD_ID) {
+		if (strictErrorChecking())
+			throw Base::IOError("CDFDataReader: trying to read a non-reaction record");
+
+		return false;
+	}
+
+	readReactionComponents(rxn, bbuf);
 
 	return true;
 }
@@ -151,6 +192,37 @@ void Chem::CDFDataReader::init()
 const Base::ControlParameterContainer& Chem::CDFDataReader::getCtrlParameters() const
 {
     return ctrlParams;
+}
+
+void Chem::CDFDataReader::readReactionComponents(Reaction& rxn, Internal::ByteBuffer& bbuf)
+{
+	unsigned int rxn_roles[] = { ReactionRole::REACTANT, ReactionRole::AGENT, ReactionRole::PRODUCT };
+
+	for (std::size_t i = 0; i < 3; i++) {
+		CDF::SizeType num_comps; bbuf.getInt(num_comps);
+
+		for (std::size_t j = 0; j < num_comps; j++) {
+			Molecule& mol = rxn.addComponent(rxn_roles[i]);
+
+			readConnectionTable(mol, bbuf);
+		}
+	}
+
+	readReactionProperties(rxn, bbuf);
+}
+
+void Chem::CDFDataReader::readConnectionTable(Molecule& mol, Internal::ByteBuffer& bbuf)
+{
+	atomStereoDescrs.clear();
+	bondStereoDescrs.clear();
+
+	startAtomIdx = mol.getNumAtoms();
+
+	std::size_t num_atoms = readAtoms(mol, bbuf);
+
+	readBonds(mol, bbuf, num_atoms);
+	readMoleculeProperties(mol, bbuf);
+	setStereoDescriptors(mol);
 }
 
 std::size_t Chem::CDFDataReader::readAtoms(Molecule& mol, Internal::ByteBuffer& bbuf)
@@ -425,13 +497,43 @@ void Chem::CDFDataReader::readMoleculeProperties(Molecule& mol, Internal::ByteBu
 				continue;
 
 			case CDF::MolecularGraphProperty::STRUCTURE_DATA:
-				getStructureData(prop_spec, mol, bbuf);
+				setStructureData(mol, readStringData(prop_spec, bbuf));
 				continue;
 
 			case CDF::MolecularGraphProperty::MATCH_CONSTRAINTS:
 
 			default:
 				throw Base::IOError("CDFDataReader: unsupported molecule property");
+		}
+	}
+}
+
+void Chem::CDFDataReader::readReactionProperties(Reaction& rxn, Internal::ByteBuffer& bbuf)
+{
+	CDF::PropertySpec prop_spec;
+	std::string str_val;
+
+	while (true) {
+		unsigned int prop_id = getPropertySpec(prop_spec, bbuf);
+
+		if (prop_id == CDF::PROP_LIST_END)
+			break;
+
+		switch (prop_id) {
+
+			case CDF::ReactionProperty::NAME:
+				getStringProperty(prop_spec, str_val, bbuf);
+				setName(rxn, str_val);
+				continue;
+			
+			case CDF::ReactionProperty::REACTION_DATA:
+				setReactionData(rxn, readStringData(prop_spec, bbuf));
+				continue;
+
+			case CDF::ReactionProperty::MATCH_CONSTRAINTS:
+
+			default:
+				throw Base::IOError("CDFDataReader: unsupported reaction property");
 		}
 	}
 }
@@ -508,7 +610,7 @@ void Chem::CDFDataReader::setStereoDescriptor(T& obj, const Molecule& mol, const
 	}
 }
 
-void Chem::CDFDataReader::getStructureData(CDF::PropertySpec prop_spec, Molecule& mol, Internal::ByteBuffer& bbuf) const
+Chem::StringDataBlock::SharedPointer Chem::CDFDataReader::readStringData(CDF::PropertySpec prop_spec, Internal::ByteBuffer& bbuf) const
 {
 	StringDataBlock::SharedPointer sdata(new StringDataBlock());
 	std::size_t num_entries;
@@ -521,10 +623,10 @@ void Chem::CDFDataReader::getStructureData(CDF::PropertySpec prop_spec, Molecule
 		getString(header, bbuf);
 		getString(data, bbuf);
 
-		sdata->addElement(StringDataBlockEntry(header, data));
+		sdata->addEntry(header, data);
 	}
 
-	setStructureData(mol, sdata);
+	return sdata;
 }
 
 void Chem::CDFDataReader::readStereoDescriptor(CDF::PropertySpec prop_spec, CDFStereoDescr& descr, Internal::ByteBuffer& bbuf) const

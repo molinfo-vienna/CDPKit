@@ -34,10 +34,15 @@
 using namespace CDPL; 
 
 
+namespace
+{
+
+	const std::size_t DEF_ORDER = 0;
+}
+
+
 std::size_t Chem::getOrder(const Bond& bond)
 {
-	static const std::size_t DEF_ORDER = 0;
-
     return bond.getPropertyOrDefault<std::size_t>(BondProperty::ORDER, DEF_ORDER);
 }
 

@@ -34,10 +34,15 @@
 using namespace CDPL; 
 
 
+namespace
+{
+
+	const bool DEF_FLAG = false;
+}
+
+
 bool Biomol::getResidueLeavingAtomFlag(const Chem::Atom& atom)
 {
-	static const bool DEF_FLAG = false;
-
     return atom.getPropertyOrDefault<bool>(AtomProperty::RESIDUE_LEAVING_ATOM_FLAG, DEF_FLAG);
 }
 

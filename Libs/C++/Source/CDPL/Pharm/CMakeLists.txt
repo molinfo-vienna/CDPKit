@@ -45,7 +45,7 @@ SET(cdpl-pharm_LIB_SRCS
     PharmacophoreFitScore.cpp
 
     ScreeningProcessor.cpp
-    ScreeningProcImplementation.cpp
+    ScreeningProcessorImpl.cpp
     FileScreeningHitCollector.cpp
     PharmacophoreFitScreeningScore.cpp
 
@@ -95,8 +95,8 @@ IF(SQLITE3_FOUND)
       PSDScreeningDBAccessor.cpp
 
       SQLiteDataIOBase.cpp
-      PSDCreatorImplementation.cpp
-      PSDAccessorImplementation.cpp
+      PSDScreeningDBCreatorImpl.cpp
+      PSDScreeningDBAccessorImpl.cpp
      )	
 
   LINK_LIBRARIES(${SQLITE3_LIBRARY})
@@ -116,6 +116,8 @@ IF(SQLITE3_FOUND)
     LINK_LIBRARIES(${Boost_SYSTEM_LIBRARY} ${Boost_FILESYSTEM_LIBRARY} ${Boost_IOSTREAMS_LIBRARY})
   ENDIF(Boost_SYSTEM_FOUND AND Boost_FILESYSTEM_FOUND AND Boost_IOSTREAMS_FOUND)
 ENDIF(SQLITE3_FOUND)
+
+LINK_LIBRARIES(${Boost_THREAD_LIBRARY})
 
 ADD_LIBRARY(cdpl-pharm-static STATIC ${cdpl-pharm_LIB_SRCS})
 

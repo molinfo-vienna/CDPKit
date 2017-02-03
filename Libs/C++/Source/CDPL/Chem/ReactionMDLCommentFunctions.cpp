@@ -34,10 +34,15 @@
 using namespace CDPL; 
 
 
+namespace
+{
+
+    const std::string DEF_COMMENT = "";
+}
+
+
 const std::string& Chem::getMDLComment(const Reaction& rxn)
 {
-    static std::string DEF_COMMENT = "";
-    
     return rxn.getPropertyOrDefault<std::string>(ReactionProperty::MDL_COMMENT, DEF_COMMENT);
 }
 

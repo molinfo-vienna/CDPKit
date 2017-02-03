@@ -34,10 +34,15 @@
 using namespace CDPL; 
 
 
+namespace
+{
+
+	const std::size_t DEF_ID = 0;
+}
+
+
 std::size_t Chem::getComponentGroupID(const Atom& atom)
 {
-	static std::size_t DEF_ID = 0;
-
     return atom.getPropertyOrDefault<std::size_t>(AtomProperty::COMPONENT_GROUP_ID, DEF_ID);
 }
 

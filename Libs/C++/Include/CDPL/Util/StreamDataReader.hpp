@@ -244,6 +244,8 @@ void CDPL::Util::StreamDataReader<DataType, ReaderImpl>::scanDataStream()
 		this->invokeIOCallbacks(record_pos / double(end_pos));
 	}
 
+	this->invokeIOCallbacks(1.0);
+
 	if (saved_rec_index < recordPositions.size()) {
 		recordIndex = saved_rec_index;
 

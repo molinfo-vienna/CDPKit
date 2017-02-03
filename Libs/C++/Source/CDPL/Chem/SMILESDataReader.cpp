@@ -63,6 +63,13 @@
 using namespace CDPL;
 
 
+namespace
+{
+
+	const Chem::SMILESDataReader::STArray NO_BONDS;
+}
+
+
 bool Chem::SMILESDataReader::readReaction(std::istream& is, Reaction& rxn)
 {
 	if (!hasMoreData(is))
@@ -77,8 +84,8 @@ bool Chem::SMILESDataReader::readReaction(std::istream& is, Reaction& rxn)
 
 	typedef boost::tokenizer<boost::char_separator<char> > Tokenizer;
 
-	static const char role_sep[] = { SMILES::REACTION_ROLE_SEPARATOR, 0 };
-	static const char comp_sep[] = { SMILES::COMPONENT_SEPARATOR, 0 };
+	const char role_sep[] = { SMILES::REACTION_ROLE_SEPARATOR, 0 };
+	const char comp_sep[] = { SMILES::COMPONENT_SEPARATOR, 0 };
 
 	unsigned int rxn_role = ReactionRole::REACTANT;
 	Tokenizer rxn_tokenizer(rxnSMILESString, boost::char_separator<char>(role_sep, "", boost::keep_empty_tokens));
@@ -930,12 +937,9 @@ const Chem::SMILESDataReader::STArray& Chem::SMILESDataReader::getBondList(std::
 
 	std::size_t tab_index = atom_idx - startAtomIndex;
 
-	if (tab_index >= nbrBondListTable.size()) {
-		static const STArray nil;
-
-		return nil;
-	}
-
+	if (tab_index >= nbrBondListTable.size())
+		return NO_BONDS;
+	
 	return nbrBondListTable[tab_index];
 }
 

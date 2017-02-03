@@ -113,7 +113,8 @@ namespace CDPLPythonBase
 				.def("getRecordIndex", python::pure_virtual(&ReaderType::getRecordIndex), python::arg("self"))
 				.def("setRecordIndex", python::pure_virtual(&ReaderType::setRecordIndex), (python::arg("self"), python::arg("idx")))
 				.def("getNumRecords", python::pure_virtual(&ReaderType::getNumRecords), python::arg("self"))
-				.def("__nonzero__", python::pure_virtual(&nonZero), python::arg("self"));
+				.def("__nonzero__", python::pure_virtual(&nonZero), python::arg("self"))
+				.add_property("numRecords", &ReaderType::getNumRecords);
 
 			python::register_ptr_to_python<typename Base::DataReader<T>::SharedPointer>();
 		}

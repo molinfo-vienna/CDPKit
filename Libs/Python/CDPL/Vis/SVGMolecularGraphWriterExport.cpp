@@ -27,6 +27,7 @@
 #include <boost/python.hpp>
 
 #include "CDPL/Vis/SVGMolecularGraphWriter.hpp"
+#include "CDPL/Util/FileDataWriter.hpp"
 
 #include "ClassExports.hpp"
 
@@ -40,4 +41,10 @@ void CDPLPythonVis::exportSVGMolecularGraphWriter()
 		boost::noncopyable>("SVGMolecularGraphWriter", python::no_init)
 		.def(python::init<std::ostream&>((python::arg("self"), python::arg("os")))
 			 [python::with_custodian_and_ward<1, 2>()]);
+
+	python::class_<Util::FileDataWriter<Vis::SVGMolecularGraphWriter>, python::bases<Base::DataWriter<Chem::MolecularGraph> >, 
+		boost::noncopyable>("FileSVGMolecularGraphWriter", python::no_init)
+		.def(python::init<const std::string&, std::ios_base::openmode>(
+				 (python::arg("self"), python::arg("file_name"), python::arg("mode") = 
+				  std::ios_base::in | std::ios_base::out | std::ios_base::trunc | std::ios_base::binary)));
 }

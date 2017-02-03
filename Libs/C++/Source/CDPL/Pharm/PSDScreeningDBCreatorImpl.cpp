@@ -1,7 +1,7 @@
 /* -*- mode: c++; c-basic-offset: 4; tab-width: 4; indent-tabs-mode: t -*- */
 
 /* 
- * PSDCreatorImplementation.cpp 
+ * PSDScreeningDBCreatorImpl.cpp 
  *
  * This file is part of the Chemical Data Processing Toolkit
  *
@@ -30,14 +30,16 @@
 
 #include "CDPL/Pharm/ControlParameterFunctions.hpp"
 #include "CDPL/Pharm/FeatureContainerFunctions.hpp"
-#include "CDPL/Chem/MolecularGraph.hpp"
+#include "CDPL/Pharm/ScreeningDBAccessor.hpp"
+#include "CDPL/Chem/BasicMolecule.hpp"
 #include "CDPL/Chem/ControlParameterFunctions.hpp"
 #include "CDPL/Chem/Entity3DContainerFunctions.hpp"
+#include "CDPL/Chem/MolecularGraphFunctions.hpp"
 #include "CDPL/Chem/AtomContainerFunctions.hpp"
 #include "CDPL/Chem/AtomArray3DCoordinatesFunctor.hpp"
 #include "CDPL/Base/Exceptions.hpp"
 
-#include "PSDCreatorImplementation.hpp"
+#include "PSDScreeningDBCreatorImpl.hpp"
 #include "SQLScreeningDBMetaData.hpp"
 
 
@@ -160,14 +162,14 @@ namespace
 }
 
 
-Pharm::PSDCreatorImplementation::PSDCreatorImplementation():
+Pharm::PSDScreeningDBCreatorImpl::PSDScreeningDBCreatorImpl():
 	pharmWriter(controlParams),	molWriter(controlParams), pharmGenerator(true), mode(ScreeningDBCreator::CREATE),
 	allowDupEntries(true), numProcessed(0), numRejected(0), numDeleted(0), numInserted(0)
 {
 	initControlParams();
 }
 
-void Pharm::PSDCreatorImplementation::open(const std::string& name, ScreeningDBCreator::Mode mode, bool allow_dup_entries)
+void Pharm::PSDScreeningDBCreatorImpl::open(const std::string& name, ScreeningDBCreator::Mode mode, bool allow_dup_entries)
 {
 	openDBConnection(name, SQLITE_OPEN_READWRITE | SQLITE_OPEN_CREATE);
 
@@ -178,17 +180,17 @@ void Pharm::PSDCreatorImplementation::open(const std::string& name, ScreeningDBC
 	loadMolHashToIDMap();
 }
 
-void Pharm::PSDCreatorImplementation::close()
+void Pharm::PSDScreeningDBCreatorImpl::close()
 {
 	closeDBConnection();
 }
 
-const std::string& Pharm::PSDCreatorImplementation::getDatabaseName() const
+const std::string& Pharm::PSDScreeningDBCreatorImpl::getDatabaseName() const
 {
 	return getDBName();
 }
 
-void Pharm::PSDCreatorImplementation::closeDBConnection()
+void Pharm::PSDScreeningDBCreatorImpl::closeDBConnection()
 {
 	//execStatements(SQLITE_CLOSE_PRAGMAS);
 
@@ -211,40 +213,40 @@ void Pharm::PSDCreatorImplementation::closeDBConnection()
 	numInserted = 0;
 }
 
-Pharm::ScreeningDBCreator::Mode Pharm::PSDCreatorImplementation::getMode() const
+Pharm::ScreeningDBCreator::Mode Pharm::PSDScreeningDBCreatorImpl::getMode() const
 {
 	return mode;
 }
 
-bool Pharm::PSDCreatorImplementation::allowDuplicateEntries() const
+bool Pharm::PSDScreeningDBCreatorImpl::allowDuplicateEntries() const
 {
 	return allowDupEntries;
 }
 
-std::size_t Pharm::PSDCreatorImplementation::getNumProcessed() const
+std::size_t Pharm::PSDScreeningDBCreatorImpl::getNumProcessed() const
 {
 	return numProcessed;
 }
 
-std::size_t Pharm::PSDCreatorImplementation::getNumRejected() const
+std::size_t Pharm::PSDScreeningDBCreatorImpl::getNumRejected() const
 {
 	return numRejected;
 }
 
-std::size_t Pharm::PSDCreatorImplementation::getNumDeleted() const
+std::size_t Pharm::PSDScreeningDBCreatorImpl::getNumDeleted() const
 {
 	return numDeleted;
 }
 
-std::size_t Pharm::PSDCreatorImplementation::getNumInserted() const
+std::size_t Pharm::PSDScreeningDBCreatorImpl::getNumInserted() const
 {
 	return numInserted;
 }
 
-bool Pharm::PSDCreatorImplementation::process(const Chem::MolecularGraph& molgraph)
+bool Pharm::PSDScreeningDBCreatorImpl::process(const Chem::MolecularGraph& molgraph)
 {
 	if (!getDBConnection())
-		throw Base::IOError("PSDCreatorImplementation: no open database connection");
+		throw Base::IOError("PSDScreeningDBCreatorImpl: no open database connection");
 
 	numProcessed++;
 	Base::uint64 mol_hash = hashCalculator.calculate(molgraph);
@@ -286,7 +288,80 @@ bool Pharm::PSDCreatorImplementation::process(const Chem::MolecularGraph& molgra
 	return true;
 }
 
-void Pharm::PSDCreatorImplementation::initControlParams()
+bool  Pharm::PSDScreeningDBCreatorImpl::merge(const ScreeningDBAccessor& db_acc, const ScreeningDBCreator::ProgressCallbackFunction& func)
+{
+	if (!getDBConnection())
+		throw Base::IOError("PSDScreeningDBCreatorImpl: no open database connection");
+
+	Chem::BasicMolecule mol;
+	std::size_t num_mols = db_acc.getNumMolecules();
+	std::size_t old_num_ins = numInserted;
+
+	for (std::size_t i = 0; i < num_mols; i++) {
+		if (func)
+			func(double(i) / num_mols);
+
+		mol.clear();
+		db_acc.getMolecule(i, mol);
+
+		calcCIPPriorities(mol, false);
+		numProcessed++;
+
+		Base::uint64 mol_hash = hashCalculator.calculate(mol);
+	
+		if (!allowDupEntries) {
+			if (procMolecules.find(mol_hash) != procMolecules.end()) {
+				numRejected++;
+				continue;
+			}
+
+			if (mode == ScreeningDBCreator::APPEND && molHashToIDMap.find(mol_hash) != molHashToIDMap.end()) {
+				numRejected++;
+				continue;
+			}
+		}
+
+		beginTransaction();
+
+		TransactionRollback trb(getDBConnection().get());
+		std::size_t num_del = 0;
+
+		if (mode == ScreeningDBCreator::UPDATE)
+			num_del = deleteEntries(mol_hash);
+
+		Base::int64 mol_id = insertMolecule(mol, mol_hash);
+		std::size_t num_pharms = db_acc.getNumPharmacophores(i);
+
+		for (std::size_t j = 0; j < num_pharms; j++) {
+			pharmacophore.clear();
+			db_acc.getPharmacophore(i, j, pharmacophore);
+
+			featureCounts = db_acc.getFeatureCounts(i, j);
+
+			insertPharmacophore(mol_id, j);
+			insertFtrCounts(mol_id, j);
+		}
+
+		commitTransaction();
+		trb.disable();
+
+		numDeleted += num_del;
+		numInserted++;
+
+		if (mode == ScreeningDBCreator::UPDATE)
+			molHashToIDMap.erase(mol_hash);
+
+		if (!allowDupEntries)
+			procMolecules.insert(mol_hash);
+	}
+
+	if (func)
+		func(1.0);
+
+	return (numInserted > old_num_ins);
+}
+
+void Pharm::PSDScreeningDBCreatorImpl::initControlParams()
 {
 	Pharm::setStrictErrorCheckingParameter(controlParams, true);
 	Chem::setStrictErrorCheckingParameter(controlParams, true);
@@ -295,7 +370,7 @@ void Pharm::PSDCreatorImplementation::initControlParams()
 	Chem::setCDFWriteSinglePrecisionFloatsParameter(controlParams, true);
 }
 
-void Pharm::PSDCreatorImplementation::setupTables()
+void Pharm::PSDScreeningDBCreatorImpl::setupTables()
 {
 	execStatements(SQLITE_OPEN_PRAGMAS);
 
@@ -315,7 +390,7 @@ void Pharm::PSDCreatorImplementation::setupTables()
 	beginTransStmt.reset(); 
 }
 
-void Pharm::PSDCreatorImplementation::loadMolHashToIDMap()
+void Pharm::PSDScreeningDBCreatorImpl::loadMolHashToIDMap()
 {
 	procMolecules.clear();
 	molHashToIDMap.clear();
@@ -336,10 +411,10 @@ void Pharm::PSDCreatorImplementation::loadMolHashToIDMap()
 	}
 
 	if (res != SQLITE_DONE)
-		throwSQLiteIOError("PSDCreatorImplementation: error while loading existing molecule IDs and hashes");
+		throwSQLiteIOError("PSDScreeningDBCreatorImpl: error while loading existing molecule IDs and hashes");
 }
 
-std::size_t Pharm::PSDCreatorImplementation::deleteEntries(Base::uint64 mol_hash)
+std::size_t Pharm::PSDScreeningDBCreatorImpl::deleteEntries(Base::uint64 mol_hash)
 {
 	std::size_t num_del = 0;
 	std::pair<MolHashToIDMap::iterator, MolHashToIDMap::iterator> mols_with_hash = molHashToIDMap.equal_range(mol_hash);
@@ -355,25 +430,25 @@ std::size_t Pharm::PSDCreatorImplementation::deleteEntries(Base::uint64 mol_hash
 	return num_del;
 }
 
-Base::int64 Pharm::PSDCreatorImplementation::insertMolecule(const Chem::MolecularGraph& molgraph, Base::uint64 mol_hash)
+Base::int64 Pharm::PSDScreeningDBCreatorImpl::insertMolecule(const Chem::MolecularGraph& molgraph, Base::uint64 mol_hash)
 {
 	molWriter.writeMolGraph(molgraph, byteBuffer);
 
 	setupStatement(insMoleculeStmt, INSERT_MOL_DATA_SQL, true);
 
 	if (sqlite3_bind_int64(insMoleculeStmt.get(), 1, mol_hash) != SQLITE_OK)
-		throwSQLiteIOError("PSDCreatorImplementation: error while binding molecule hashcode to prepared statement");
+		throwSQLiteIOError("PSDScreeningDBCreatorImpl: error while binding molecule hashcode to prepared statement");
 
 	if (sqlite3_bind_blob(insMoleculeStmt.get(), 2, byteBuffer.getData(), boost::numeric_cast<int>(byteBuffer.getSize()),
 						  SQLITE_TRANSIENT) != SQLITE_OK)
-		throwSQLiteIOError("PSDCreatorImplementation: error while binding molecule data BLOB to prepared statement");
+		throwSQLiteIOError("PSDScreeningDBCreatorImpl: error while binding molecule data BLOB to prepared statement");
 
 	evalStatement(insMoleculeStmt);
 
 	return sqlite3_last_insert_rowid(getDBConnection().get());
 }
 
-void Pharm::PSDCreatorImplementation::genAndInsertPharmData(const Chem::MolecularGraph& molgraph, Base::int64 mol_id)
+void Pharm::PSDScreeningDBCreatorImpl::genAndInsertPharmData(const Chem::MolecularGraph& molgraph, Base::int64 mol_id)
 {
 	std::size_t num_confs = getNumConformations(molgraph);
 
@@ -398,79 +473,83 @@ void Pharm::PSDCreatorImplementation::genAndInsertPharmData(const Chem::Molecula
 	}
 }
 
-void Pharm::PSDCreatorImplementation::genAndInsertPharmData(const Chem::MolecularGraph& molgraph, Base::int64 mol_id, std::size_t conf_idx)
+void Pharm::PSDScreeningDBCreatorImpl::genAndInsertPharmData(const Chem::MolecularGraph& molgraph, Base::int64 mol_id, std::size_t conf_idx)
 {
 	pharmacophore.clear();
 	pharmGenerator.generate(molgraph, pharmacophore);
 
 	insertPharmacophore(mol_id, conf_idx);
+	genFtrCounts();
 	insertFtrCounts(mol_id, conf_idx);
 }
 
-void Pharm::PSDCreatorImplementation::insertPharmacophore(Base::int64 mol_id, std::size_t conf_idx)
+void Pharm::PSDScreeningDBCreatorImpl::insertPharmacophore(Base::int64 mol_id, std::size_t conf_idx)
 {
 	pharmWriter.writeFeatureContainer(pharmacophore, byteBuffer);
 
 	setupStatement(insPharmStmt, INSERT_PHARM_DATA_SQL, true);
 
 	if (sqlite3_bind_int64(insPharmStmt.get(), 1, mol_id) != SQLITE_OK)
-		throwSQLiteIOError("PSDCreatorImplementation: error while binding pharmacophore molecule ID to prepared statement");
+		throwSQLiteIOError("PSDScreeningDBCreatorImpl: error while binding pharmacophore molecule ID to prepared statement");
 
 	if (sqlite3_bind_int(insPharmStmt.get(), 2, boost::numeric_cast<int>(conf_idx)) != SQLITE_OK)
-		throwSQLiteIOError("PSDCreatorImplementation: error while binding pharmacophore conf. index to prepared statement");
+		throwSQLiteIOError("PSDScreeningDBCreatorImpl: error while binding pharmacophore conf. index to prepared statement");
 
 	if (sqlite3_bind_blob(insPharmStmt.get(), 3, byteBuffer.getData(), boost::numeric_cast<int>(byteBuffer.getSize()),
 						  SQLITE_TRANSIENT) != SQLITE_OK)
-		throwSQLiteIOError("PSDCreatorImplementation: error while binding pharmacophore data BLOB to prepared statement");
+		throwSQLiteIOError("PSDScreeningDBCreatorImpl: error while binding pharmacophore data BLOB to prepared statement");
 
 	evalStatement(insPharmStmt);
 }
 
-void Pharm::PSDCreatorImplementation::insertFtrCounts(Base::int64 mol_id, std::size_t conf_idx)
+void Pharm::PSDScreeningDBCreatorImpl::genFtrCounts()
 {
 	featureCounts.clear();
 	buildFeatureTypeHistogram(pharmacophore, featureCounts);
+}
 
+void Pharm::PSDScreeningDBCreatorImpl::insertFtrCounts(Base::int64 mol_id, std::size_t conf_idx)
+{
 	for (FeatureTypeHistogram::ConstEntryIterator it = featureCounts.getEntriesBegin(), end = featureCounts.getEntriesEnd(); it != end; ++it)
 		insertFtrCount(mol_id, conf_idx, it->first, it->second);
 }
 
-void Pharm::PSDCreatorImplementation::insertFtrCount(Base::int64 mol_id, std::size_t conf_idx, unsigned int ftr_type, std::size_t ftr_count)
+void Pharm::PSDScreeningDBCreatorImpl::insertFtrCount(Base::int64 mol_id, std::size_t conf_idx, unsigned int ftr_type, std::size_t ftr_count)
 {
 	setupStatement(insFtrCountStmt, INSERT_FTR_COUNT_SQL, true);
 
 	if (sqlite3_bind_int64(insFtrCountStmt.get(), 1, mol_id) != SQLITE_OK)
-		throwSQLiteIOError("PSDCreatorImplementation: error while binding feature count molecule ID to prepared statement");
+		throwSQLiteIOError("PSDScreeningDBCreatorImpl: error while binding feature count molecule ID to prepared statement");
 
 	if (sqlite3_bind_int(insFtrCountStmt.get(), 2, boost::numeric_cast<int>(conf_idx)) != SQLITE_OK)
-		throwSQLiteIOError("PSDCreatorImplementation: error while binding feature count conf. index to prepared statement");
+		throwSQLiteIOError("PSDScreeningDBCreatorImpl: error while binding feature count conf. index to prepared statement");
 
 	if (sqlite3_bind_int(insFtrCountStmt.get(), 3, ftr_type) != SQLITE_OK)
-		throwSQLiteIOError("PSDCreatorImplementation: error while binding feature type to prepared statement");
+		throwSQLiteIOError("PSDScreeningDBCreatorImpl: error while binding feature type to prepared statement");
 
 	if (sqlite3_bind_int(insFtrCountStmt.get(), 4, boost::numeric_cast<int>(ftr_count)) != SQLITE_OK)
-		throwSQLiteIOError("PSDCreatorImplementation: error while binding feature count to prepared statement");
+		throwSQLiteIOError("PSDScreeningDBCreatorImpl: error while binding feature count to prepared statement");
 
 	evalStatement(insFtrCountStmt);
 }
 
-void Pharm::PSDCreatorImplementation::deleteRowsWithMolID(SQLite3StmtPointer& stmt_ptr, const std::string& sql_stmt, Base::int64 mol_id) const
+void Pharm::PSDScreeningDBCreatorImpl::deleteRowsWithMolID(SQLite3StmtPointer& stmt_ptr, const std::string& sql_stmt, Base::int64 mol_id) const
 {
 	setupStatement(stmt_ptr, sql_stmt, true);
 
 	if (sqlite3_bind_int64(stmt_ptr.get(), 1, mol_id) != SQLITE_OK)
-		throwSQLiteIOError("PSDCreatorImplementation: error while binding molecule ID to prepared statement");
+		throwSQLiteIOError("PSDScreeningDBCreatorImpl: error while binding molecule ID to prepared statement");
 
 	evalStatement(stmt_ptr);
 }
 
-void Pharm::PSDCreatorImplementation::beginTransaction()
+void Pharm::PSDScreeningDBCreatorImpl::beginTransaction()
 {
 	setupStatement(beginTransStmt, BEGIN_TRANSACTION_SQL, false);
 	evalStatement(beginTransStmt);
 }
 
-void Pharm::PSDCreatorImplementation::commitTransaction()
+void Pharm::PSDScreeningDBCreatorImpl::commitTransaction()
 {
 	setupStatement(commitTransStmt, COMMIT_TRANSACTION_SQL, false);
 	evalStatement(commitTransStmt);

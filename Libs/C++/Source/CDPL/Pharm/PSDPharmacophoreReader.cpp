@@ -29,10 +29,11 @@
 #include <fstream>
 
 #include <boost/lexical_cast.hpp>
-#include <boost/filesystem.hpp>
 #include <boost/iostreams/copy.hpp>
 
 #include "CDPL/Pharm/PSDPharmacophoreReader.hpp"
+#include "CDPL/Util/FileFunctions.hpp"
+#include "CDPL/Util/FileRemover.hpp"
 #include "CDPL/Base/Exceptions.hpp"
 
 
@@ -42,11 +43,10 @@ using namespace CDPL;
 Pharm::PSDPharmacophoreReader::PSDPharmacophoreReader(std::istream& is): 
 	recordIndex(0), state(false)
 {
-	try {
-		boost::filesystem::path tmp_file = boost::filesystem::temp_directory_path() / boost::filesystem::unique_path();
-		tmpFile = tmp_file.native();
+	Util::FileRemover tmp_file_rem(Util::genCheckedTempFilePath());
 
-		std::ofstream tmp_fs(tmpFile.c_str());
+	try {
+		std::ofstream tmp_fs(tmp_file_rem.getPath().c_str());
 
 		boost::iostreams::copy(is, tmp_fs);
 
@@ -54,18 +54,16 @@ Pharm::PSDPharmacophoreReader::PSDPharmacophoreReader(std::istream& is):
 			throw Base::IOError("copying input data failed");
 
 	} catch (const std::exception& e) {
-		removeTmpFile();
 		throw Base::IOError(std::string("PSDPharmacophoreReader: could not create temporary database file: ") + e.what());
 	}
 
 	try {
-		accessor.open(tmpFile);
+		accessor.open(tmp_file_rem.getPath());
 
 		numRecords = accessor.getNumPharmacophores();
 		state = true;
 
 	} catch (const std::exception& e) {
-		removeTmpFile();
 		throw Base::IOError(std::string("PSDPharmacophoreReader: could not open database: ") + e.what());
 	}
 }
@@ -87,7 +85,6 @@ Pharm::PSDPharmacophoreReader::PSDPharmacophoreReader(const std::string& file_na
 Pharm::PSDPharmacophoreReader::~PSDPharmacophoreReader() 
 {
 	try { accessor.close(); } catch (...) {}
-	removeTmpFile();
 }
 
 Pharm::PSDPharmacophoreReader& Pharm::PSDPharmacophoreReader::read(Pharmacophore& pharm)
@@ -155,6 +152,7 @@ void Pharm::PSDPharmacophoreReader::setRecordIndex(std::size_t idx)
 
 std::size_t Pharm::PSDPharmacophoreReader::getNumRecords()
 {
+	invokeIOCallbacks(1.0);
     return numRecords;
 }
 
@@ -166,12 +164,4 @@ Pharm::PSDPharmacophoreReader::operator const void*() const
 bool Pharm::PSDPharmacophoreReader::operator!() const
 {
     return !state;
-}
-
-void Pharm::PSDPharmacophoreReader::removeTmpFile()
-{
-	try {
-		if (!tmpFile.empty())
-			boost::filesystem::remove(tmpFile);
-	} catch (...) {}
 }

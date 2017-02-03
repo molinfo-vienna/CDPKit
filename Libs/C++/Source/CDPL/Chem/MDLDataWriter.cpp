@@ -200,6 +200,8 @@ namespace
 			return !constraint.hasValue();
 		}
 	};
+
+	const std::size_t MAX_V3000_LINE_LENGTH = Chem::MDL::MAX_LINE_LENGTH - Chem::MDL::V3000::LINE_PREFIX.length();
 }
 
 
@@ -1576,7 +1578,7 @@ void Chem::MDLDataWriter::writeSDFData(std::ostream& os, const MolecularGraph& m
 	using namespace Internal;
 	using namespace MDL;
 
-	static const char line_sep[] = { MDL::END_OF_LINE, 0 };
+	const char line_sep[] = { MDL::END_OF_LINE, 0 };
 
 	if (!hasStructureData(molgraph)) {
 		writeMDLLine(os, SDFile::RECORD_DELIMITER, "MDLDataWriter: error while writing sd-file record delimiter", false, false);
@@ -2877,8 +2879,6 @@ void Chem::MDLDataWriter::writeV3000DataLine(std::ostream& os, const std::string
 {   
 	using namespace Internal;
 	using namespace MDL;
-
-	static const std::size_t MAX_V3000_LINE_LENGTH = MDL::MAX_LINE_LENGTH - V3000::LINE_PREFIX.length();
 
 	std::size_t phys_line_start = 0;
 	std::size_t data_line_len = data_line.length();

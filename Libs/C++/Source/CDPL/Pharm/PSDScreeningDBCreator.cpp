@@ -28,18 +28,18 @@
 
 #include "CDPL/Pharm/PSDScreeningDBCreator.hpp"
 
-#include "PSDCreatorImplementation.hpp"
+#include "PSDScreeningDBCreatorImpl.hpp"
 
 
 using namespace CDPL;
 
 
 Pharm::PSDScreeningDBCreator::PSDScreeningDBCreator():
-	impl(new PSDCreatorImplementation())
+	impl(new PSDScreeningDBCreatorImpl())
 {}
 
 Pharm::PSDScreeningDBCreator::PSDScreeningDBCreator(const std::string& name, Mode mode, bool allow_dup_entries):
-	impl(new PSDCreatorImplementation())
+	impl(new PSDScreeningDBCreatorImpl())
 {
     impl->open(name, mode, allow_dup_entries);
 }
@@ -69,6 +69,11 @@ bool Pharm::PSDScreeningDBCreator::allowDuplicateEntries() const
 bool Pharm::PSDScreeningDBCreator::process(const Chem::MolecularGraph& molgraph)
 {
 	return impl->process(molgraph);
+}
+
+bool Pharm::PSDScreeningDBCreator::merge(const ScreeningDBAccessor& db_acc, const ProgressCallbackFunction& func)
+{
+	return impl->merge(db_acc, func);
 }
 
 const std::string& Pharm::PSDScreeningDBCreator::getDatabaseName() const

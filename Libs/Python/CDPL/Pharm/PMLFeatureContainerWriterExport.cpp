@@ -27,6 +27,7 @@
 #include <boost/python.hpp>
 
 #include "CDPL/Pharm/PMLFeatureContainerWriter.hpp"
+#include "CDPL/Util/FileDataWriter.hpp"
 
 #include "ClassExports.hpp"
 
@@ -40,4 +41,10 @@ void CDPLPythonPharm::exportPMLFeatureContainerWriter()
 				   boost::noncopyable>("PMLFeatureContainerWriter", python::no_init)
 		.def(python::init<std::ostream&>((python::arg("self"), python::arg("os")))
 			 [python::with_custodian_and_ward<1, 2>()]);
+
+	python::class_<Util::FileDataWriter<Pharm::PMLFeatureContainerWriter>, python::bases<Base::DataWriter<Pharm::FeatureContainer> >, 
+		boost::noncopyable>("FilePMLFeatureContainerWriter", python::no_init)
+		.def(python::init<const std::string&, std::ios_base::openmode>(
+				 (python::arg("self"), python::arg("file_name"), python::arg("mode") = 
+				  std::ios_base::in | std::ios_base::out | std::ios_base::trunc | std::ios_base::binary)));
 }

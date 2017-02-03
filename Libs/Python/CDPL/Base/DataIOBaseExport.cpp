@@ -46,8 +46,9 @@ void CDPLPythonBase::exportDataIOBase()
 
 	python::class_<DataIOBaseWrapper, python::bases<Base::ControlParameterContainer>, boost::noncopyable>("DataIOBase", python::no_init)
 		.def(python::init<>(python::arg("self")))
-		.def("registerIOCallback", &Base::DataIOBase::registerIOCallback, python::arg("func"))
+		.def("registerIOCallback", &Base::DataIOBase::registerIOCallback, (python::arg("self"), python::arg("func")))
 		.def("unregisterIOCallback", &Base::DataIOBase::unregisterIOCallback, 
 			 (python::arg("self"), python::arg("id")))
-		.def("invokeIOCallbacks", &Base::DataIOBase::invokeIOCallbacks, python::arg("self"));
+		.def("invokeIOCallbacks", &Base::DataIOBase::invokeIOCallbacks, (python::arg("self"), python::arg("progress")))
+		.def("clearIOCallbacks", &Base::DataIOBase::clearIOCallbacks, python::arg("self"));
 }

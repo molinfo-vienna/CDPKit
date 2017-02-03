@@ -30,6 +30,7 @@
 #include <boost/bind.hpp>
 #include <boost/iostreams/device/array.hpp>
 #include <boost/iostreams/stream.hpp>
+#include <boost/thread.hpp>
 
 #include "CDPL/Biomol/ResidueDictionary.hpp"
 #include "CDPL/Biomol/ResidueType.hpp"
@@ -53,13 +54,16 @@ namespace
     typedef boost::unordered_map<std::string, const ResidueDataEntry*> ResCodeToDataEntryMap;
     typedef boost::unordered_map<std::string, Chem::MolecularGraph::SharedPointer> StructureCache;
 
-	StdResidueSet stdResidueSet;
-    ResCodeToDataEntryMap resCodeToDataEntryMap;
-	StructureCache resStructureCache;
+	StdResidueSet             stdResidueSet;
+    ResCodeToDataEntryMap     resCodeToDataEntryMap;
+	StructureCache            resStructureCache;
 	Biomol::ResidueDictionary builtinDictionary;
+	boost::mutex              loadStructureMutex;
+
+	const Biomol::ResidueDictionary::Entry DEF_ENTRY;
 
     boost::iostreams::stream<boost::iostreams::array_source> resStructureIStream(residueStructureData, RESIDUE_STRUCTURE_DATA_LEN);
-    Chem::CDFMoleculeReader resStructureReader(resStructureIStream);
+    Chem::CDFMoleculeReader                                  resStructureReader(resStructureIStream);
 
 	const char* stdResidueList[] = {
         "UNK", "ALA", "ARG", "ASN", "ASP", "CYS", "GLN", "GLU", "GLY", "HIS", "ILE", "LEU", "LYS", "MET",
@@ -87,6 +91,8 @@ namespace
 	{
 		using namespace Chem;
 		using namespace Biomol;
+
+		boost::lock_guard<boost::mutex> lock(loadStructureMutex);
 
 		StructureCache::const_iterator rsc_it = resStructureCache.find(code);
 
@@ -225,8 +231,6 @@ const Biomol::ResidueDictionary::Entry& Biomol::ResidueDictionary::getEntry(cons
 
 	if (it != entries.end())
 		return it->second;
-
-	static const Entry DEF_ENTRY;
 
 	return DEF_ENTRY;
 }

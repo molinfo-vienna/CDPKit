@@ -34,10 +34,15 @@
 using namespace CDPL; 
 
 
+namespace
+{
+
+	const char DEF_INSERTION_CODE = ' ';
+}
+
+
 char Biomol::getResidueInsertionCode(const Chem::Atom& atom)
 {
-	static const char DEF_INSERTION_CODE = ' ';
-
     return atom.getPropertyOrDefault<char>(AtomProperty::RESIDUE_INSERTION_CODE, DEF_INSERTION_CODE);
 }
 

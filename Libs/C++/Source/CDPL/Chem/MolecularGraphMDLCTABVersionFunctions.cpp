@@ -34,10 +34,15 @@
 using namespace CDPL; 
 
 
+namespace
+{
+
+	const unsigned int DEF_VERSION = Chem::MDLDataFormatVersion::UNDEF;
+}
+
+
 unsigned int Chem::getMDLCTABVersion(const MolecularGraph& molgraph)
 {
-	static unsigned int DEF_VERSION = MDLDataFormatVersion::UNDEF;
-
 	return molgraph.getPropertyOrDefault<unsigned int>(MolecularGraphProperty::MDL_CTAB_VERSION, DEF_VERSION);
 }
 

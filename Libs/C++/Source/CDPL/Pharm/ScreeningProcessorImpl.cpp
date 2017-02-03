@@ -1,7 +1,7 @@
 /* -*- mode: c++; c-basic-offset: 4; tab-width: 4; indent-tabs-mode: t -*- */
 
 /* 
- * ScreeningProcImplementation.cpp 
+ * ScreeningProcessorImpl.cpp 
  *
  * This file is part of the Chemical Data Processing Toolkit
  *
@@ -49,7 +49,7 @@
 #include "CDPL/Math/VectorArrayFunctions.hpp"
 #include "CDPL/Math/VectorAdapter.hpp"
 
-#include "ScreeningProcImplementation.hpp"
+#include "ScreeningProcessorImpl.hpp"
 
 
 using namespace CDPL;
@@ -70,98 +70,98 @@ namespace
 }
 
 
-Pharm::ScreeningProcImplementation::ScreeningProcImplementation(ScreeningProcessor& parent, ScreeningDBAccessor& db_acc): 
+Pharm::ScreeningProcessorImpl::ScreeningProcessorImpl(ScreeningProcessor& parent, ScreeningDBAccessor& db_acc): 
 	parent(&parent), dbAccessor(&db_acc), reportMode(ScreeningProcessor::FIRST_MATCHING_CONF), maxOmittedFeatures(0),
 	checkXVolumes(true), bestAlignments(false), hitCallback(), progressCallback(), 
 	scoringFunction(PharmacophoreFitScreeningScore()), featureGeomMatchFunction(false), pharmAlignment(true)
 {
 	pharmAlignment.setTopAlignmentConstraintFunction(
-		boost::bind(&ScreeningProcImplementation::checkTopologicalMapping, this, _1));
+		boost::bind(&ScreeningProcessorImpl::checkTopologicalMapping, this, _1));
 	pharmAlignment.setEntity3DCoordinatesFunction(
-		boost::bind(&ScreeningProcImplementation::getFeatureCoordinates, this, _1));
+		boost::bind(&ScreeningProcessorImpl::getFeatureCoordinates, this, _1));
 }
 
-void Pharm::ScreeningProcImplementation::setDBAccessor(ScreeningDBAccessor& db_acc)
+void Pharm::ScreeningProcessorImpl::setDBAccessor(ScreeningDBAccessor& db_acc)
 {
 	dbAccessor = &db_acc;
 }
 
-Pharm::ScreeningDBAccessor& Pharm::ScreeningProcImplementation::getDBAccessor() const
+Pharm::ScreeningDBAccessor& Pharm::ScreeningProcessorImpl::getDBAccessor() const
 {
 	return *dbAccessor;
 }
 
-void Pharm::ScreeningProcImplementation::setHitReportMode(ScreeningProcessor::HitReportMode mode)
+void Pharm::ScreeningProcessorImpl::setHitReportMode(ScreeningProcessor::HitReportMode mode)
 {
 	reportMode = mode;
 }
 
-Pharm::ScreeningProcessor::HitReportMode Pharm::ScreeningProcImplementation::getHitReportMode() const
+Pharm::ScreeningProcessor::HitReportMode Pharm::ScreeningProcessorImpl::getHitReportMode() const
 {
 	return reportMode;
 }
 
-void Pharm::ScreeningProcImplementation::setMaxNumOmittedFeatures(std::size_t max_num)
+void Pharm::ScreeningProcessorImpl::setMaxNumOmittedFeatures(std::size_t max_num)
 {
 	maxOmittedFeatures = max_num;
 }
 
-std::size_t Pharm::ScreeningProcImplementation::getMaxNumOmittedFeatures() const
+std::size_t Pharm::ScreeningProcessorImpl::getMaxNumOmittedFeatures() const
 {
 	return maxOmittedFeatures;
 }
 
-void Pharm::ScreeningProcImplementation::checkXVolumeClashes(bool check)
+void Pharm::ScreeningProcessorImpl::checkXVolumeClashes(bool check)
 {
 	checkXVolumes = check;
 }
 
-bool Pharm::ScreeningProcImplementation::xVolumeClashesChecked() const
+bool Pharm::ScreeningProcessorImpl::xVolumeClashesChecked() const
 {
 	return checkXVolumes;
 }
 
-void Pharm::ScreeningProcImplementation::seekBestAlignments(bool seek_best)
+void Pharm::ScreeningProcessorImpl::seekBestAlignments(bool seek_best)
 {
 	bestAlignments = seek_best;
 }
 
-bool Pharm::ScreeningProcImplementation::bestAlignmentsSeeked() const
+bool Pharm::ScreeningProcessorImpl::bestAlignmentsSeeked() const
 {
 	return bestAlignments;
 }
 
-void Pharm::ScreeningProcImplementation::setHitCallbackFunction(const HitCallbackFunction& func)
+void Pharm::ScreeningProcessorImpl::setHitCallbackFunction(const HitCallbackFunction& func)
 {
 	hitCallback = func;
 }
 
-const Pharm::ScreeningProcessor::HitCallbackFunction& Pharm::ScreeningProcImplementation::getHitCallbackFunction() const
+const Pharm::ScreeningProcessor::HitCallbackFunction& Pharm::ScreeningProcessorImpl::getHitCallbackFunction() const
 {
 	return hitCallback;
 }
 
-void Pharm::ScreeningProcImplementation::setProgressCallbackFunction(const ProgressCallbackFunction& func)
+void Pharm::ScreeningProcessorImpl::setProgressCallbackFunction(const ProgressCallbackFunction& func)
 {
 	progressCallback = func;
 }
 
-const Pharm::ScreeningProcessor::ProgressCallbackFunction& Pharm::ScreeningProcImplementation::getProgressCallbackFunction() const
+const Pharm::ScreeningProcessor::ProgressCallbackFunction& Pharm::ScreeningProcessorImpl::getProgressCallbackFunction() const
 {
 	return progressCallback;
 }
 
-void Pharm::ScreeningProcImplementation::setScoringFunction(const ScoringFunction& func)
+void Pharm::ScreeningProcessorImpl::setScoringFunction(const ScoringFunction& func)
 {
 	scoringFunction = func;
 }
 
-const Pharm::ScreeningProcessor::ScoringFunction& Pharm::ScreeningProcImplementation::getScoringFunction() const
+const Pharm::ScreeningProcessor::ScoringFunction& Pharm::ScreeningProcessorImpl::getScoringFunction() const
 {
 	return scoringFunction;
 }
 
-std::size_t Pharm::ScreeningProcImplementation::searchDB(const FeatureContainer& query, std::size_t mol_start_idx, 
+std::size_t Pharm::ScreeningProcessorImpl::searchDB(const FeatureContainer& query, std::size_t mol_start_idx, 
 														 std::size_t mol_end_idx)
 {
 	prepareDBSearch(query, mol_start_idx, mol_end_idx);
@@ -204,7 +204,7 @@ std::size_t Pharm::ScreeningProcImplementation::searchDB(const FeatureContainer&
 	return numHits;
 }
 
-void Pharm::ScreeningProcImplementation::prepareDBSearch(const FeatureContainer& query, std::size_t mol_start_idx, 
+void Pharm::ScreeningProcessorImpl::prepareDBSearch(const FeatureContainer& query, std::size_t mol_start_idx, 
 														 std::size_t mol_end_idx)
 {
 	initQueryData(query);
@@ -223,7 +223,7 @@ void Pharm::ScreeningProcImplementation::prepareDBSearch(const FeatureContainer&
 	initPharmIndexList(mol_start_idx, mol_end_idx);
 }
 
-void Pharm::ScreeningProcImplementation::initQueryData(const FeatureContainer& query)
+void Pharm::ScreeningProcessorImpl::initQueryData(const FeatureContainer& query)
 {
 	queryPharmacophore = &query;
 
@@ -293,7 +293,7 @@ void Pharm::ScreeningProcImplementation::initQueryData(const FeatureContainer& q
 	pharmAlignment.setMinTopologicalMappingSize(min_num_ftrs);
 }
 
-void Pharm::ScreeningProcImplementation::insertFeature(const Feature& ftr, FeatureMatrix& ftr_mtx) const
+void Pharm::ScreeningProcessorImpl::insertFeature(const Feature& ftr, FeatureMatrix& ftr_mtx) const
 {
 	unsigned int ftr_type = getType(ftr);
 	const Math::Vector3D& ftr_pos = get3DCoordinates(ftr);
@@ -315,7 +315,7 @@ void Pharm::ScreeningProcImplementation::insertFeature(const Feature& ftr, Featu
 	ftr_mtx.back().push_back(&ftr);
 }
 
-void Pharm::ScreeningProcImplementation::initPharmIndexList(std::size_t mol_start_idx, std::size_t mol_end_idx)
+void Pharm::ScreeningProcessorImpl::initPharmIndexList(std::size_t mol_start_idx, std::size_t mol_end_idx)
 {
 	if (mol_end_idx == 0)
 		mol_end_idx = dbAccessor->getNumMolecules();
@@ -336,7 +336,7 @@ void Pharm::ScreeningProcImplementation::initPharmIndexList(std::size_t mol_star
 	std::sort(pharmIndices.begin(), pharmIndices.end(), IndexPair2ndCmpFunc());
 }
 
-bool Pharm::ScreeningProcImplementation::checkFeatureCounts(std::size_t pharm_idx) const
+bool Pharm::ScreeningProcessorImpl::checkFeatureCounts(std::size_t pharm_idx) const
 {
 	const FeatureTypeHistogram& db_ftr_cnts = dbAccessor->getFeatureCounts(pharm_idx);
 	std::size_t num_db_ftrs = 0;
@@ -360,7 +360,7 @@ bool Pharm::ScreeningProcImplementation::checkFeatureCounts(std::size_t pharm_id
 	return true;
 }
 
-bool Pharm::ScreeningProcImplementation::check2PointPharmacophores(std::size_t pharm_idx)
+bool Pharm::ScreeningProcessorImpl::check2PointPharmacophores(std::size_t pharm_idx)
 {
 	if (minNum2PointPharmMatches == 0)
 		return true;
@@ -416,7 +416,7 @@ bool Pharm::ScreeningProcImplementation::check2PointPharmacophores(std::size_t p
 	return false;
 }
 
-bool Pharm::ScreeningProcImplementation::performAlignment(std::size_t pharm_idx, std::size_t mol_idx)
+bool Pharm::ScreeningProcessorImpl::performAlignment(std::size_t pharm_idx, std::size_t mol_idx)
 {
 	loadPharmacophore(pharm_idx);
 
@@ -453,7 +453,7 @@ bool Pharm::ScreeningProcImplementation::performAlignment(std::size_t pharm_idx,
 	return true;
 }
 
-bool Pharm::ScreeningProcImplementation::checkGeomAlignment()
+bool Pharm::ScreeningProcessorImpl::checkGeomAlignment()
 {
 	std::size_t num_al_mand_ftrs = alignedQueryMandFeatures.size();
 	std::size_t min_num_matches = (num_al_mand_ftrs > maxOmittedFeatures ? 
@@ -526,7 +526,7 @@ bool Pharm::ScreeningProcImplementation::checkGeomAlignment()
 	return true;
 }
 
-bool Pharm::ScreeningProcImplementation::checkXVolumeClashes(std::size_t mol_idx, std::size_t conf_idx)
+bool Pharm::ScreeningProcessorImpl::checkXVolumeClashes(std::size_t mol_idx, std::size_t conf_idx)
 {
 	if (!checkXVolumes || xVolumeIndices.empty())
 		return true;
@@ -562,7 +562,7 @@ bool Pharm::ScreeningProcImplementation::checkXVolumeClashes(std::size_t mol_idx
 	return true;
 }
 
-double Pharm::ScreeningProcImplementation::calcScore(const SearchHit& hit)
+double Pharm::ScreeningProcessorImpl::calcScore(const SearchHit& hit)
 {
 	if (!scoringFunction)
 		return 0.0;
@@ -572,7 +572,7 @@ double Pharm::ScreeningProcImplementation::calcScore(const SearchHit& hit)
 	return scoringFunction(hit);
 }
 
-bool Pharm::ScreeningProcImplementation::checkTopologicalMapping(const FeatureMapping& mapping) const
+bool Pharm::ScreeningProcessorImpl::checkTopologicalMapping(const FeatureMapping& mapping) const
 {
 	if (alignedQueryOptFeatures.empty())
 		return true;
@@ -590,7 +590,7 @@ bool Pharm::ScreeningProcImplementation::checkTopologicalMapping(const FeatureMa
 	return true;
 }
 
-void Pharm::ScreeningProcImplementation::loadMolecule(std::size_t mol_idx)
+void Pharm::ScreeningProcessorImpl::loadMolecule(std::size_t mol_idx)
 {
 	if (mol_idx == loadedMolIndex)
 		return;
@@ -603,7 +603,7 @@ void Pharm::ScreeningProcImplementation::loadMolecule(std::size_t mol_idx)
 	loadedMolIndex = mol_idx;
 }
 
-void Pharm::ScreeningProcImplementation::loadPharmacophore(std::size_t pharm_idx)
+void Pharm::ScreeningProcessorImpl::loadPharmacophore(std::size_t pharm_idx)
 {
 	if (pharm_idx == loadedPharmIndex)
 		return;
@@ -618,7 +618,7 @@ void Pharm::ScreeningProcImplementation::loadPharmacophore(std::size_t pharm_idx
 	loadedPharmIndex = pharm_idx;
 }
 
-bool Pharm::ScreeningProcImplementation::processHit(const SearchHit& hit, double score)
+bool Pharm::ScreeningProcessorImpl::processHit(const SearchHit& hit, double score)
 {
 	if (reportMode == ScreeningProcessor::BEST_MATCHING_CONF) {
 		if (!std::isnan(bestConfAlmntScore) && score <= bestConfAlmntScore)
@@ -636,7 +636,7 @@ bool Pharm::ScreeningProcImplementation::processHit(const SearchHit& hit, double
 	return reportHit(hit, score);
 }
 
-bool Pharm::ScreeningProcImplementation::reportHit(const SearchHit& hit, double score)
+bool Pharm::ScreeningProcessorImpl::reportHit(const SearchHit& hit, double score)
 {
 	numHits++;
 
@@ -654,7 +654,7 @@ bool Pharm::ScreeningProcImplementation::reportHit(const SearchHit& hit, double 
 	return hitCallback(hit, score);
 }
 
-const Math::Vector3D& Pharm::ScreeningProcImplementation::getFeatureCoordinates(const Feature& ftr)
+const Math::Vector3D& Pharm::ScreeningProcessorImpl::getFeatureCoordinates(const Feature& ftr)
 {
 	if (&ftr.getPharmacophore() == queryPharmacophore)
 		return queryFeaturePositions[ftr.getIndex()];

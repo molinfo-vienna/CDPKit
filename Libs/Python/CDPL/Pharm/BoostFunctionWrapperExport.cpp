@@ -30,6 +30,7 @@
 #include "CDPL/Pharm/FeatureMapping.hpp"
 #include "CDPL/Pharm/Feature3DCoordinatesFunction.hpp"
 #include "CDPL/Pharm/ScreeningProcessor.hpp"
+#include "CDPL/Pharm/ScreeningDBCreator.hpp"
 #include "CDPL/Chem/Atom.hpp"
 #include "CDPL/Math/Vector.hpp"
 #include "CDPL/Math/Matrix.hpp"
@@ -41,23 +42,26 @@
 
 void CDPLPythonPharm::exportBoostFunctionWrappers()
 {
+	using namespace boost;
     using namespace CDPL;
     using namespace Pharm;
 
 	CDPLPythonBase::BoostFunction1Export<Feature3DCoordinatesFunction, Feature&, 
-										 boost::python::return_internal_reference<2> >("Feature3DCoordinatesFunction");
+										 python::return_internal_reference<2> >("Feature3DCoordinatesFunction");
     CDPLPythonBase::BoostFunction1Export<boost::function1<bool, const FeatureMapping&> >("BoolFeatureMappingFunctor");
    	CDPLPythonBase::BoostFunction1Export<boost::function1<double, const ScreeningProcessor::SearchHit&> >("DoubleSearchHitFunctor");
     CDPLPythonBase::BoostFunction1Export<boost::function1<double, const Feature&>, Feature&>("DoubleFeatureFunctor");
+	CDPLPythonBase::BoostFunction1Export<boost::function1<void, double>, double, 
+										 python::return_value_policy<python::return_by_value>, true>("VoidDoubleFunctor"); 
 
     CDPLPythonBase::BoostFunction2Export<boost::function2<bool, const Feature&, const Feature&>, Feature&, Feature&>("BoolFeature2Functor");
     CDPLPythonBase::BoostFunction2Export<boost::function2<double, const Feature&, const Feature&>, Feature&, Feature&>("DoubleFeature2Functor");
 	CDPLPythonBase::BoostFunction2Export<boost::function2<bool, const ScreeningProcessor::SearchHit&, double>, 
 										 const ScreeningProcessor::SearchHit&, double, 
-										 boost::python::return_value_policy<boost::python::return_by_value>, true>("BoolSearchHitDoubleFunctor");
+										 python::return_value_policy<python::return_by_value>, true>("BoolSearchHitDoubleFunctor");
 	CDPLPythonBase::BoostFunction2Export<boost::function2<bool, std::size_t, std::size_t>, 
 										 std::size_t, std::size_t,
-										 boost::python::return_value_policy<boost::python::return_by_value>, true>("BoolSizeType2Functor");
+										 python::return_value_policy<python::return_by_value>, true>("BoolSizeType2Functor");
 
     CDPLPythonBase::BoostFunction3Export<boost::function3<bool, const Feature&, const Feature&, const Math::Matrix4D&>,
 										 Feature&, Feature&>("BoolFeature2Matrix4DFunctor");

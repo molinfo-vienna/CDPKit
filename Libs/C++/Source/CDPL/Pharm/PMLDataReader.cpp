@@ -56,6 +56,8 @@ namespace
 
 	const std::string PHARMACOPHORE_START_TAG = '<' + Pharm::PML::PHARMACOPHORE_TAG;
 	const std::string PHARMACOPHORE_END_TAG   = "</" + Pharm::PML::PHARMACOPHORE_TAG + '>';
+	const std::string FALSE                   = "false";
+	const std::string ZERO                    = "0";
 
 	typedef std::map<std::string, unsigned int> FeatureNameToTypeMap;
 
@@ -86,8 +88,6 @@ namespace
 
 	bool getBoolValue(const char* value)
 	{
-		static const std::string FALSE = "false";
-		static const std::string ZERO = "0";
 
         std::string val_lc = value;
 		boost::algorithm::to_lower(val_lc);

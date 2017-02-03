@@ -27,6 +27,7 @@
 #include "CDPL/Chem/Reaction.hpp"
 
 #include "Base/DataReaderExport.hpp"
+#include "Util/CompoundDataReaderExport.hpp"
 
 #include "ClassExports.hpp"
 
@@ -34,4 +35,5 @@
 void CDPLPythonChem::exportReactionReader()
 {
 	CDPLPythonBase::DataReaderExport<CDPL::Chem::Reaction>("ReactionReader", "rxn");
+	CDPLPythonUtil::CompoundDataReaderExport<CDPL::Chem::Reaction>("CompoundReactionReader");
 }

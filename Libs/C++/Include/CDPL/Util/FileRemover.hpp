@@ -1,7 +1,7 @@
 /* -*- mode: c++; c-basic-offset: 4; tab-width: 4; indent-tabs-mode: t -*- */
 
 /* 
- * ValueKey.cpp 
+ * FileRemover.hpp 
  *
  * This file is part of the Chemical Data Processing Toolkit
  *
@@ -23,72 +23,54 @@
  * Boston, MA 02111-1307, USA.
  */
 
+/**
+ * \file
+ * \brief Definition of the class CDPL::Util::FileRemover
+ */
 
-#include "StaticInit.hpp"
+#ifndef CDPL_UTIL_FILEREMOVER_HPP
+#define CDPL_UTIL_FILEREMOVER_HPP
 
-#include <boost/unordered_map.hpp>
-
-#include "CDPL/Base/ValueKey.hpp"
-#include "CDPL/Base/Exceptions.hpp"
+#include <string>
 
 
 namespace CDPL
 {
 
-	namespace Base
+    namespace Util
+    {
+
+	/**
+	 * \addtogroup CDPL_UTIL_FUNCTIONS
+	 * @{
+	 */
+
+	class FileRemover
 	{
 
-		void initValueKey() {}
-	}
+	public:
+	    FileRemover(const std::string& path): path(path) {}
+
+	    ~FileRemover();
+
+	    const std::string& getPath() const;
+
+	    void reset(const std::string& new_path);
+
+	    void release();
+
+	    FileRemover& operator=(FileRemover& rhs);
+
+	private:
+	    void removeFile();
+
+	    std::string path;
+	};
+
+	/**
+	 * @}
+	 */
+    }
 }
 
-
-namespace
-{
-
-	typedef boost::unordered_map<std::size_t, std::string> KeyNameMap;
-
-	KeyNameMap& getNameMap()
-	{
-		static KeyNameMap name_map;
-
-		return name_map;
-	}
-}
-
-
-using namespace CDPL; 
-
-
-const Base::ValueKey Base::ValueKey::NONE = Base::ValueKey::create("NONE"); 
-
-Base::ValueKey Base::ValueKey::create(const std::string& name)
-{
-	static std::size_t next_id = 0;
-
-	ValueKey key(next_id++);
-
-	key.setName(name);
-
-	return key;
-}
-
-void Base::ValueKey::setName(const std::string& name) const
-{
-	KeyNameMap& names = getNameMap();
-
-	names[numericID] = name;
-}
-
-const std::string& Base::ValueKey::getName() const
-{
-	KeyNameMap& names = getNameMap();
-
-	KeyNameMap::const_iterator it = names.find(numericID);
-
-	if (it != names.end())
-		return it->second;
-
-	throw ItemNotFound("ValueKey: name of key not found");
-}
-
+#endif // CDPL_UTIL_FILEREMOVER_HPP

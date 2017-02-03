@@ -677,12 +677,12 @@ bool Chem::Hydrogen3DCoordinatesGenerator::getConnectedAtomWithCoords(
 
 double Chem::Hydrogen3DCoordinatesGenerator::getHydrogenBondLength(const Atom& atom) const
 {
-	static const double h_cov_rad = AtomDictionary::getCovalentRadius(AtomType::H, 1);
-
 	double atom_cov_rad = AtomDictionary::getCovalentRadius(getType(atom), 1);
 
 	if (atom_cov_rad == 0.0)
 		return 1.0;
+
+	const double h_cov_rad = AtomDictionary::getCovalentRadius(AtomType::H, 1);
 
 	return (h_cov_rad + atom_cov_rad);
 }

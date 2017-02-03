@@ -215,7 +215,8 @@ namespace CDPLPythonBase
     };
 
     template <typename FunctionType, typename Arg1Type = typename FunctionType::arg1_type,
-			  typename RetValPolicy = boost::python::return_value_policy<boost::python::return_by_value> > 
+			  typename RetValPolicy = boost::python::return_value_policy<boost::python::return_by_value>,
+			  bool Copy = false> 
     struct BoostFunction1Export : private BoostFunctionExportBase<FunctionType>
     {
 
@@ -243,7 +244,7 @@ namespace CDPLPythonBase
 				return new FunctionType();
 
 			return new FunctionType(UnaryFunctionAdapter<typename FunctionType::result_type, 
-									typename FunctionType::arg1_type>(callable));
+									typename FunctionType::arg1_type, Copy>(callable));
 		}
 
 		static void convConstruct(PyObject* obj_ptr, boost::python::converter::rvalue_from_python_stage1_data* data) {
@@ -256,7 +257,7 @@ namespace CDPLPythonBase
 				new (storage) FunctionType();
 			else
 				new (storage) FunctionType(UnaryFunctionAdapter<typename FunctionType::result_type, 
-										   typename FunctionType::arg1_type>(python::object(python::handle<>(boost::python::borrowed(obj_ptr)))));
+										   typename FunctionType::arg1_type, Copy>(python::object(python::handle<>(boost::python::borrowed(obj_ptr)))));
 
 			data->convertible = storage;
 		}

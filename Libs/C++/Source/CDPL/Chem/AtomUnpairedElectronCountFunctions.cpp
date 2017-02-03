@@ -34,10 +34,15 @@
 using namespace CDPL; 
 
 
+namespace
+{
+
+	const std::size_t DEF_COUNT = 0;
+}
+
+
 std::size_t Chem::getUnpairedElectronCount(const Atom& atom)
 {
-	static const std::size_t DEF_COUNT = 0;
-
     return atom.getPropertyOrDefault<std::size_t>(AtomProperty::UNPAIRED_ELECTRON_COUNT, DEF_COUNT);
 }
 

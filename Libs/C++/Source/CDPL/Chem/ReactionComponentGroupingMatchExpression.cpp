@@ -46,11 +46,16 @@ using namespace CDPL;
 Chem::ReactionComponentGroupingMatchExpression::ReactionComponentGroupingMatchExpression(const FragmentList::SharedPointer& comp_grouping):
 	compGrouping(comp_grouping) {}
 
+Chem::ReactionComponentGroupingMatchExpression::ReactionComponentGroupingMatchExpression(const ReactionComponentGroupingMatchExpression& rhs):
+	compGrouping(rhs.compGrouping) {}
+
 bool Chem::ReactionComponentGroupingMatchExpression::operator()(const Reaction&, const Reaction& target_rxn, 
 																const AtomBondMapping& mapping, const Base::Variant&) const
 {
 	if (!compGrouping || compGrouping->getSize() == 0)
 		return true;
+
+	boost::lock_guard<boost::mutex> lock(mutex);
 
 	compList.clear();
 
@@ -118,4 +123,15 @@ bool Chem::ReactionComponentGroupingMatchExpression::operator()(const Reaction&,
 bool Chem::ReactionComponentGroupingMatchExpression::requiresAtomBondMapping() const
 {
 	return true;
+}
+
+Chem::ReactionComponentGroupingMatchExpression& 
+Chem::ReactionComponentGroupingMatchExpression::operator=(const ReactionComponentGroupingMatchExpression& rhs)
+{
+	if (this == &rhs)
+		return *this;
+
+	compGrouping = rhs.compGrouping;
+
+	return *this;
 }

@@ -39,6 +39,9 @@
 #include <boost/iostreams/filter/gzip.hpp>
 #include <boost/iostreams/filter/bzip2.hpp>
 
+#include "CDPL/Util/FileRemover.hpp"
+#include "CDPL/Util/FileFunctions.hpp"
+
 
 namespace CDPL 
 {
@@ -92,7 +95,7 @@ namespace CDPL
 			CompressionStreamBase();
 
 		protected:
-			virtual ~CompressionStreamBase();
+			virtual ~CompressionStreamBase() {}
 
 			void closeTmpFile();
 			void openTmpFile();
@@ -103,8 +106,7 @@ namespace CDPL
 		private:
 			typedef std::basic_filebuf<char_type, traits_type> FileBufType;
 
-			FileBufType  tmpFileBuf;
-			std::string  tmpFileName;
+			FileBufType tmpFileBuf;
 		};
 
 		template <CompressionAlgo CompAlgo, typename CharT = char, typename TraitsT = std::char_traits<CharT> >
@@ -190,19 +192,9 @@ namespace CDPL
 // CompressionStreamBase Implementation
 
 template <CDPL::Util::CompressionAlgo CompAlgo, typename StreamType>
-CDPL::Util::CompressionStreamBase<CompAlgo, StreamType>::CompressionStreamBase(): StreamType(&tmpFileBuf)
-{
-	boost::filesystem::path tmp_file = boost::filesystem::temp_directory_path() / 
-		boost::filesystem::unique_path();
-
-	tmpFileName = tmp_file.native();
-}
-
-template <CDPL::Util::CompressionAlgo CompAlgo, typename StreamType>
-CDPL::Util::CompressionStreamBase<CompAlgo, StreamType>::~CompressionStreamBase() 
-{
-	try { boost::filesystem::remove(tmpFileName); } catch (...) {}
-}
+CDPL::Util::CompressionStreamBase<CompAlgo, StreamType>::CompressionStreamBase(): 
+	StreamType(&tmpFileBuf)
+{}
 
 template <CDPL::Util::CompressionAlgo CompAlgo, typename StreamType>
 void CDPL::Util::CompressionStreamBase<CompAlgo, StreamType>::closeTmpFile() 
@@ -216,7 +208,9 @@ void CDPL::Util::CompressionStreamBase<CompAlgo, StreamType>::closeTmpFile()
 template <CDPL::Util::CompressionAlgo CompAlgo, typename StreamType>
 void CDPL::Util::CompressionStreamBase<CompAlgo, StreamType>::openTmpFile() 
 {
-	if (!tmpFileBuf.open(tmpFileName.c_str(), 
+	FileRemover tmp_file_rem(genCheckedTempFilePath());
+
+	if (!tmpFileBuf.open(tmp_file_rem.getPath().c_str(), 
 						 std::ios_base::in | std::ios_base::out | 
 						 std::ios_base::trunc | std::ios_base::binary))
 		this->setstate(std::ios_base::failbit);

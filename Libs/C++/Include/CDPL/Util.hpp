@@ -46,15 +46,22 @@
 #include "CDPL/Util/PropertyValueProduct.hpp"
 #include "CDPL/Util/RangeGenerator.hpp"
 #include "CDPL/Util/StreamDataReader.hpp"
+#include "CDPL/Util/CompoundDataReader.hpp"
 #include "CDPL/Util/FileDataReader.hpp"
 #include "CDPL/Util/FileDataWriter.hpp"
 #include "CDPL/Util/DefaultDataInputHandler.hpp"
 
-#if defined(HAVE_BOOST_SYSTEM) && defined(HAVE_BOOST_FILESYSTEM) && defined(HAVE_BOOST_IOSTREAMS)
+#if defined(HAVE_BOOST_SYSTEM) && defined(HAVE_BOOST_FILESYSTEM)
+
+#include "CDPL/Util/FileRemover.hpp"
+#include "CDPL/Util/FileFunctions.hpp"
+
+#if defined(HAVE_BOOST_IOSTREAMS)
 
 #include "CDPL/Util/CompressionStreams.hpp"
 #include "CDPL/Util/CompressedDataReader.hpp"
 #include "CDPL/Util/CompressedDataWriter.hpp"
 
-#endif // defined(HAVE_BOOST_SYSTEM) && defined(HAVE_BOOST_FILESYSTEM) && defined(HAVE_BOOST_IOSTREAMS)
+#endif // defined(HAVE_BOOST_IOSTREAMS)
+#endif // defined(HAVE_BOOST_SYSTEM) && defined(HAVE_BOOST_FILESYSTEM)
 #endif // CDPL_UTIL_HPP

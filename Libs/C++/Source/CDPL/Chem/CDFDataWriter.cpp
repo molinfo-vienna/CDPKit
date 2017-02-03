@@ -33,9 +33,11 @@
 #include <boost/numeric/conversion/cast.hpp>
 #include <boost/bind.hpp>
 
+#include "CDPL/Chem/Reaction.hpp"
 #include "CDPL/Chem/MolecularGraph.hpp"
 #include "CDPL/Chem/Atom.hpp"
 #include "CDPL/Chem/Bond.hpp"
+#include "CDPL/Chem/ReactionFunctions.hpp"
 #include "CDPL/Chem/MolecularGraphFunctions.hpp"
 #include "CDPL/Chem/Entity3DFunctions.hpp"
 #include "CDPL/Chem/AtomFunctions.hpp"
@@ -67,14 +69,37 @@ void Chem::CDFDataWriter::writeMolGraph(const MolecularGraph& molgraph, Internal
 	init();
 
 	bbuf.setIOPointer(CDF::HEADER_SIZE);
+	writeConnectionTable(molgraph, bbuf);
+	bbuf.resize(bbuf.getIOPointer());
 
-	outputAtoms(molgraph, bbuf);
-	outputBonds(molgraph, bbuf);
-	outputMolGraphProperties(molgraph, bbuf);
+	outputHeader(CDF::MOLECULE_RECORD_ID, bbuf);
+}
+
+bool Chem::CDFDataWriter::writeReaction(std::ostream& os, const Reaction& rxn)
+{
+	writeReaction(rxn, dataBuffer);
+
+	return writeRecordData(os);
+}
+
+void Chem::CDFDataWriter::writeReaction(const Reaction& rxn, Internal::ByteBuffer& bbuf)
+{
+	init();
+
+	bbuf.setIOPointer(CDF::HEADER_SIZE);
+
+	unsigned int rxn_roles[] = { ReactionRole::REACTANT, ReactionRole::AGENT, ReactionRole::PRODUCT };
+
+	for (std::size_t i = 0; i < 3; i++) {
+		bbuf.putInt(boost::numeric_cast<CDF::SizeType>(rxn.getNumComponents(rxn_roles[i])), false);
+
+		for (Reaction::ConstComponentIterator it = rxn.getComponentsBegin(rxn_roles[i]), end = rxn.getComponentsEnd(rxn_roles[i]); it != end; ++it)
+			writeConnectionTable(*it, bbuf);
+	}
 
 	bbuf.resize(bbuf.getIOPointer());
 
-	outputMolGraphHeader(molgraph, bbuf);
+	outputHeader(CDF::REACTION_RECORD_ID, bbuf);
 }
 
 void Chem::CDFDataWriter::registerExternalAtomPropertyHandler(const AtomPropertyHandler& handler)
@@ -103,17 +128,24 @@ const Base::ControlParameterContainer& Chem::CDFDataWriter::getCtrlParameters() 
     return ctrlParams;
 }
 
-void Chem::CDFDataWriter::outputMolGraphHeader(const MolecularGraph& molgraph, Internal::ByteBuffer& bbuf) const
+void Chem::CDFDataWriter::outputHeader(Base::uint8 type_id, Internal::ByteBuffer& bbuf) const
 {
 	CDF::Header cdf_header;
 
 	cdf_header.recordDataLength = boost::numeric_cast<Base::uint64>(bbuf.getSize() - CDF::HEADER_SIZE);
-	cdf_header.recordTypeID = CDF::MOLECULE_RECORD_ID;
+	cdf_header.recordTypeID = type_id;
 	cdf_header.recordFormatVersion = CDF::CURR_FORMAT_VERSION;
 
 	bbuf.setIOPointer(0);
 
 	putHeader(cdf_header, bbuf);
+}
+
+void Chem::CDFDataWriter::writeConnectionTable(const MolecularGraph& molgraph, Internal::ByteBuffer& bbuf)
+{
+	outputAtoms(molgraph, bbuf);
+	outputBonds(molgraph, bbuf);
+	outputMolGraphProperties(molgraph, bbuf);
 }
 
 void Chem::CDFDataWriter::outputAtoms(const MolecularGraph& molgraph, Internal::ByteBuffer& bbuf)
@@ -259,11 +291,24 @@ void Chem::CDFDataWriter::outputMolGraphProperties(const MolecularGraph& molgrap
 		putIntProperty(CDF::MolecularGraphProperty::CONFORMATION_INDEX, boost::numeric_cast<CDF::SizeType>(getConformationIndex(molgraph)), bbuf);
 
 	if (hasStructureData(molgraph))
-		putStructureData(molgraph, bbuf);
+		putStringData(CDF::MolecularGraphProperty::STRUCTURE_DATA, getStructureData(molgraph), bbuf);
 
 	// CDF::MolecularGraphProperty::MATCH_CONSTRAINTS // TODO
 
 	outputExternalProperties(molgraph, bbuf);
+
+	putPropertyListMarker(CDF::PROP_LIST_END, bbuf);
+}
+
+void Chem::CDFDataWriter::outputReactionProperties(const Reaction& rxn, Internal::ByteBuffer& bbuf)
+{
+	if (hasName(rxn))
+		putStringProperty(CDF::ReactionProperty::NAME, getName(rxn), bbuf);
+
+	if (hasReactionData(rxn))
+		putStringData(CDF::ReactionProperty::REACTION_DATA, getReactionData(rxn), bbuf);
+
+	// CDF::ReactionProperty::MATCH_CONSTRAINTS // TODO
 
 	putPropertyListMarker(CDF::PROP_LIST_END, bbuf);
 }
@@ -334,12 +379,11 @@ void Chem::CDFDataWriter::putStereoDescriptor(const MolecularGraph& molgraph, un
 	}
 }
 
-void Chem::CDFDataWriter::putStructureData(const MolecularGraph& molgraph, Internal::ByteBuffer& bbuf) const
+void Chem::CDFDataWriter::putStringData(unsigned int prop_id, const StringDataBlock::SharedPointer& sdata, Internal::ByteBuffer& bbuf) const
 {
-	const StringDataBlock::SharedPointer& sdata = getStructureData(molgraph);
 	std::size_t num_entries = sdata->getSize();
 
-	putIntProperty(CDF::MolecularGraphProperty::STRUCTURE_DATA, boost::numeric_cast<CDF::SizeType>(num_entries), bbuf);
+	putIntProperty(prop_id, boost::numeric_cast<CDF::SizeType>(num_entries), bbuf);
 
 	for (StringDataBlock::ConstElementIterator it = sdata->getElementsBegin(), end = sdata->getElementsEnd(); it != end; ++it) {
 		const StringDataBlockEntry& entry = *it;

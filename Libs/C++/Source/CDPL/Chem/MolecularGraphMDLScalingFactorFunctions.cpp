@@ -34,10 +34,15 @@
 using namespace CDPL; 
 
 
+namespace
+{
+
+	const long DEF_FACTOR = 1;
+}
+
+
 long Chem::getMDLScalingFactor1(const MolecularGraph& molgraph)
 {
-	static long DEF_FACTOR = 1;
-
 	return molgraph.getPropertyOrDefault<long>(MolecularGraphProperty::MDL_SCALING_FACTOR1, DEF_FACTOR);
 }
 
@@ -59,8 +64,6 @@ bool Chem::hasMDLScalingFactor1(const MolecularGraph& molgraph)
 
 double Chem::getMDLScalingFactor2(const MolecularGraph& molgraph)
 {
-	static double DEF_FACTOR = 1;
-
 	return molgraph.getPropertyOrDefault<double>(MolecularGraphProperty::MDL_SCALING_FACTOR2, DEF_FACTOR);
 }
 

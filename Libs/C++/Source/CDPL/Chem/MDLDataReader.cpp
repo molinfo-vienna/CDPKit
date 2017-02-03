@@ -105,6 +105,8 @@ namespace
 	{
 		return Internal::readNumber<T, FieldSize>(is, err_msg, throw_ex, empty_def_val, err_def_val, Chem::MDL::END_OF_LINE);
 	}
+
+	const unsigned int RXN_FILE_ID_LENGTH = Chem::MDL::RXNFile::RXN_FILE_IDENTIFIER.length() + 1;
 }
 
 
@@ -1744,8 +1746,6 @@ void Chem::MDLDataReader::readRXNHeaderBlock(std::istream& is, Reaction& rxn)
 
 	// Header line 1
 
-	static const unsigned int RXN_FILE_ID_LENGTH = RXNFile::RXN_FILE_IDENTIFIER.length() + 1;
-
 	readMDLString(is, RXN_FILE_ID_LENGTH, tmpString, true, 
 				  "MDLDataReader: error while reading rxn-file identifier from reaction header block", false);
  
@@ -1833,8 +1833,6 @@ void Chem::MDLDataReader::skipRXNHeaderBlock(std::istream& is)
 	using namespace MDL;
 
 	// Header line 1
-
-	static const unsigned int RXN_FILE_ID_LENGTH = RXNFile::RXN_FILE_IDENTIFIER.length() + 1;
 
 	readMDLString(is, RXN_FILE_ID_LENGTH, tmpString, true, 
 				  "MDLDataReader: error while reading rxn-file identifier from reaction header block", false);
@@ -2643,7 +2641,7 @@ void Chem::MDLDataReader::readCTabV3000AtomType(std::istream& is, Atom& atom, Ma
 		return;
 	}
 
-	static const char alist_sep[] = { AtomBlock::ATOM_LIST_SEPARATOR, 0 };
+	const char alist_sep[] = { AtomBlock::ATOM_LIST_SEPARATOR, 0 };
 
 	typedef boost::tokenizer<boost::char_separator<char> > AListTokenizer;
 
@@ -3564,7 +3562,7 @@ void Chem::MDLDataReader::readV3000DataLine(std::istream& is)
 {
 	using namespace MDL;
 
-	static const std::size_t V3000_LINE_PREFIX_LENGTH = V3000::LINE_PREFIX.length();
+	const std::size_t V3000_LINE_PREFIX_LENGTH = V3000::LINE_PREFIX.length();
 
 	line.clear();
 

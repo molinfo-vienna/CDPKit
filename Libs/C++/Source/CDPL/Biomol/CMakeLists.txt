@@ -47,6 +47,8 @@ SET(cdpl-biomol_LIB_SRCS
     ControlParameterFunctions.cpp
    )
 
+LINK_LIBRARIES(${Boost_THREAD_LIBRARY})
+
 ADD_LIBRARY(cdpl-biomol-static STATIC ${cdpl-biomol_LIB_SRCS})
 
 SET_TARGET_PROPERTIES(cdpl-biomol-static PROPERTIES 

@@ -43,7 +43,7 @@ namespace CDPL
     namespace Pharm
     {
 	
-		class PSDCreatorImplementation;
+		class PSDScreeningDBCreatorImpl;
 
 		/**
 		 * \addtogroup CDPL_PHARM_SCREENING
@@ -86,6 +86,8 @@ namespace CDPL
 
 			bool process(const Chem::MolecularGraph& molgraph);
 
+			bool merge(const ScreeningDBAccessor& db_acc, const ProgressCallbackFunction& func);
+
 			const std::string& getDatabaseName() const;
 
 			std::size_t getNumProcessed() const;
@@ -97,7 +99,7 @@ namespace CDPL
 			std::size_t getNumInserted() const;
 
 		  private:
-			typedef std::auto_ptr<PSDCreatorImplementation> ImplementationPointer;
+			typedef std::auto_ptr<PSDScreeningDBCreatorImpl> ImplementationPointer;
 
 			PSDScreeningDBCreator(const PSDScreeningDBCreator&);
 

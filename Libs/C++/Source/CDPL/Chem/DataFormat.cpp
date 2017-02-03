@@ -54,6 +54,8 @@
 #include "CDPL/Chem/INCHIMolecularGraphOutputHandler.hpp"
 #include "CDPL/Chem/CDFMoleculeInputHandler.hpp"
 #include "CDPL/Chem/CDFMolecularGraphOutputHandler.hpp"
+#include "CDPL/Chem/CDFReactionInputHandler.hpp"
+#include "CDPL/Chem/CDFReactionOutputHandler.hpp"
 
 #if defined(HAVE_BOOST_SYSTEM) && defined(HAVE_BOOST_FILESYSTEM) && defined(HAVE_BOOST_IOSTREAMS)
 
@@ -69,6 +71,10 @@
 #include "CDPL/Chem/CDFGZMolecularGraphOutputHandler.hpp"
 #include "CDPL/Chem/CDFBZ2MoleculeInputHandler.hpp"
 #include "CDPL/Chem/CDFBZ2MolecularGraphOutputHandler.hpp"
+#include "CDPL/Chem/CDFGZReactionInputHandler.hpp"
+#include "CDPL/Chem/CDFGZReactionOutputHandler.hpp"
+#include "CDPL/Chem/CDFBZ2ReactionInputHandler.hpp"
+#include "CDPL/Chem/CDFBZ2ReactionOutputHandler.hpp"
 #include "CDPL/Chem/SMILESGZMoleculeInputHandler.hpp"
 #include "CDPL/Chem/SMILESGZMolecularGraphOutputHandler.hpp"
 #include "CDPL/Chem/SMILESBZ2MoleculeInputHandler.hpp"
@@ -184,12 +190,14 @@ namespace
 			static const RDFReactionInputHandler           rdfRxnInputHandler;
 			static const SMILESReactionInputHandler        smilesRxnInputHandler;
 			static const SMARTSReactionInputHandler        smartsRxnInputHandler;
+			static const CDFReactionInputHandler           cdfRxnInputHandler;
 
 			static const JMEReactionOutputHandler          jmeRxnOutputHandler;
 			static const RXNReactionOutputHandler          rxnRxnOutputHandler;
 			static const RDFReactionOutputHandler          rdfRxnOutputHandler;
 			static const SMILESReactionOutputHandler       smilesRxnOutputHandler;
 			static const SMARTSReactionOutputHandler       smartsRxnOutputHandler;
+			static const CDFReactionOutputHandler          cdfRxnOutputHandler;
 
 			DataIOManager<Molecule>::registerInputHandler(jmeMolInputHandler);
 			DataIOManager<Molecule>::registerInputHandler(sdfMolInputHandler);
@@ -212,12 +220,14 @@ namespace
 			DataIOManager<Reaction>::registerInputHandler(rdfRxnInputHandler);
 			DataIOManager<Reaction>::registerInputHandler(smilesRxnInputHandler);
 			DataIOManager<Reaction>::registerInputHandler(smartsRxnInputHandler);
+			DataIOManager<Reaction>::registerInputHandler(cdfRxnInputHandler);
 
 			DataIOManager<Reaction>::registerOutputHandler(jmeRxnOutputHandler);
 			DataIOManager<Reaction>::registerOutputHandler(rxnRxnOutputHandler);
 			DataIOManager<Reaction>::registerOutputHandler(rdfRxnOutputHandler);
 			DataIOManager<Reaction>::registerOutputHandler(smilesRxnOutputHandler);
 			DataIOManager<Reaction>::registerOutputHandler(smartsRxnOutputHandler);
+			DataIOManager<Reaction>::registerOutputHandler(cdfRxnOutputHandler);
 
 #if defined(HAVE_BOOST_SYSTEM) && defined(HAVE_BOOST_FILESYSTEM) && defined(HAVE_BOOST_IOSTREAMS)
 
@@ -239,11 +249,15 @@ namespace
 			static const RDFBZ2ReactionInputHandler        rdfbz2RxnInputHandler;
 			static const SMILESGZReactionInputHandler      smilesgzRxnInputHandler;
 			static const SMILESBZ2ReactionInputHandler     smilesbz2RxnInputHandler;
+			static const CDFGZReactionInputHandler         cdfgzRxnInputHandler;
+			static const CDFBZ2ReactionInputHandler        cdfbz2RxnInputHandler;
 
 			static const RDFGZReactionOutputHandler        rdfgzRxnOutputHandler;
 			static const RDFBZ2ReactionOutputHandler       rdfbz2RxnOutputHandler;
 			static const SMILESGZReactionOutputHandler     smilesgzRxnOutputHandler;
 			static const SMILESBZ2ReactionOutputHandler    smilesbz2RxnOutputHandler;
+			static const CDFGZReactionOutputHandler        cdfgzRxnOutputHandler;
+			static const CDFBZ2ReactionOutputHandler       cdfbz2RxnOutputHandler;
 
 			DataIOManager<Molecule>::registerInputHandler(sdfgzMolInputHandler);
 			DataIOManager<Molecule>::registerInputHandler(sdfbz2MolInputHandler);
@@ -263,11 +277,15 @@ namespace
 			DataIOManager<Reaction>::registerInputHandler(rdfbz2RxnInputHandler);
 			DataIOManager<Reaction>::registerInputHandler(smilesgzRxnInputHandler);
 			DataIOManager<Reaction>::registerInputHandler(smilesbz2RxnInputHandler);
+			DataIOManager<Reaction>::registerInputHandler(cdfgzRxnInputHandler);
+			DataIOManager<Reaction>::registerInputHandler(cdfbz2RxnInputHandler);
 
 			DataIOManager<Reaction>::registerOutputHandler(rdfgzRxnOutputHandler);
 			DataIOManager<Reaction>::registerOutputHandler(rdfbz2RxnOutputHandler);
 			DataIOManager<Reaction>::registerOutputHandler(smilesgzRxnOutputHandler);
 			DataIOManager<Reaction>::registerOutputHandler(smilesbz2RxnOutputHandler);
+			DataIOManager<Reaction>::registerOutputHandler(cdfgzRxnOutputHandler);
+			DataIOManager<Reaction>::registerOutputHandler(cdfbz2RxnOutputHandler);
 
 #endif // defined(HAVE_BOOST_SYSTEM) && defined(HAVE_BOOST_FILESYSTEM) && defined(HAVE_BOOST_IOSTREAMS)
 		}

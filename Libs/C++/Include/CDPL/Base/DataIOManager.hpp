@@ -39,6 +39,7 @@
 
 #include <boost/bind.hpp>
 #include <boost/iterator/indirect_iterator.hpp>
+#include <boost/thread.hpp>
 
 #include "CDPL/Base/APIPrefix.hpp"
 #include "CDPL/Base/DataInputHandler.hpp"
@@ -327,16 +328,26 @@ namespace CDPL
 			~DataIOManager() {}
 
 			static DataIOManager& getInstance();
+			static void createInstance();
+
+			static DataIOManager*   instance;
+			static boost::once_flag onceFlag;
 
 			InputHandlerList  inputHandlers;
 			OutputHandlerList outputHandlers;
 		};
-	
+
 		/**
 		 * @}
 		 */
 
 		// \cond UNHIDE_DETAILS
+
+		template <typename T>
+		DataIOManager<T>* DataIOManager<T>::instance = 0;
+
+		template <typename T>
+		boost::once_flag DataIOManager<T>::onceFlag = BOOST_ONCE_INIT;
 
 		extern template
 		class CDPL_BASE_API DataIOManager<Chem::Molecule>;
@@ -358,11 +369,17 @@ namespace CDPL
 // Implementation
 
 template <typename T>
+void CDPL::Base::DataIOManager<T>::createInstance() 
+{
+	instance = new DataIOManager();
+}
+
+template <typename T>
 CDPL::Base::DataIOManager<T>& CDPL::Base::DataIOManager<T>::getInstance() 
 {
-	static DataIOManager<T> instance;
-	
-	return instance;
+	boost::call_once(&createInstance, onceFlag);
+
+    return *instance;
 }
 
 template <typename T>

@@ -33,10 +33,15 @@
 using namespace CDPL; 
 
 
+namespace
+{
+
+    const std::string DEF_COMMENT = "";
+}
+
+
 const std::string& Chem::getMDLComment(const MolecularGraph& molgraph)
 {
-    static std::string DEF_COMMENT = "";
-    
     return molgraph.getPropertyOrDefault<std::string>(MolecularGraphProperty::MDL_COMMENT, DEF_COMMENT);
 }
 

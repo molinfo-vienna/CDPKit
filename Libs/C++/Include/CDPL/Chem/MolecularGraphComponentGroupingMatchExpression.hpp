@@ -34,6 +34,7 @@
 #include <vector>
 
 #include <boost/shared_ptr.hpp>
+#include <boost/thread.hpp>
 
 #include "CDPL/Chem/APIPrefix.hpp"
 #include "CDPL/Chem/MatchExpression.hpp"
@@ -71,6 +72,8 @@ namespace CDPL
 			 */
 			MolecularGraphComponentGroupingMatchExpression(const FragmentList::SharedPointer& comp_grouping);
 
+			MolecularGraphComponentGroupingMatchExpression(const MolecularGraphComponentGroupingMatchExpression& rhs);
+
 			/**
 			 * \brief Checks whether the provided query to target atom/bond mapping candidate statisfies the component-level grouping constraints
 			 *        specified in the constructor.
@@ -101,11 +104,14 @@ namespace CDPL
 			 */
 			bool requiresAtomBondMapping() const;
 
+			MolecularGraphComponentGroupingMatchExpression& operator=(const MolecularGraphComponentGroupingMatchExpression& rhs);
+
 		private:
 			typedef std::vector<const Fragment*> ComponentList;
 
 			FragmentList::SharedPointer compGrouping;
 			mutable ComponentList       compList;
+			mutable boost::mutex        mutex;
 		};
 
 		/**

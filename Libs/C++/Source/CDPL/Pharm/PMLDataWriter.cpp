@@ -55,6 +55,7 @@ namespace
 	const double DEF_FEATURE_WEIGHT               = 1.0;
 	const double PLANE_FEATURE_SECOND_TOL_FACTOR  = 0.5;
 	const double VECTOR_FEATURE_TARGET_TOL_FACTOR = 1.5;
+	const std::string NOT_FOUND;
 
 	typedef std::map<unsigned int, std::string> FeatureTypeToNameMap;
 
@@ -75,8 +76,6 @@ namespace
 
 	const std::string& getLS4FeatureName(unsigned int type)
 	{
-		static const std::string NOT_FOUND;
-
 		FeatureTypeToNameMap::const_iterator it = ls4FeatureNames.find(type);
 
 		if (it == ls4FeatureNames.end())

@@ -27,6 +27,8 @@
 #include "StaticInit.hpp"
 
 #include <boost/unordered_map.hpp>
+#include <boost/atomic.hpp>
+#include <boost/thread.hpp>
 
 #include "CDPL/Base/LookupKey.hpp"
 #include "CDPL/Base/Exceptions.hpp"
@@ -50,9 +52,9 @@ namespace
 
 	KeyNameMap& getNameMap()
 	{
-		static KeyNameMap name_map;
+		static KeyNameMap map;
 
-		return name_map;
+		return map;
 	}
 }
 
@@ -62,11 +64,12 @@ using namespace CDPL;
 
 const Base::LookupKey Base::LookupKey::NONE = Base::LookupKey::create("NONE"); 
 
+
 Base::LookupKey Base::LookupKey::create(const std::string& name)
 {
-	static std::size_t next_id = 0;
+	static boost::atomic<std::size_t> next_id(0);
 
-	LookupKey key(next_id++);
+	LookupKey key(next_id.fetch_add(1, boost::memory_order_relaxed));
 
 	key.setName(name);
 
@@ -75,18 +78,20 @@ Base::LookupKey Base::LookupKey::create(const std::string& name)
 
 void Base::LookupKey::setName(const std::string& name) const
 {
-	KeyNameMap& names = getNameMap();
+	static boost::mutex mutex;
 
-	names[numericID] = name;
+	boost::lock_guard<boost::mutex> lock(mutex);
+
+	getNameMap()[numericID] = name;
 }
 
 const std::string& Base::LookupKey::getName() const
 {
-	KeyNameMap& names = getNameMap();
+	KeyNameMap& name_map = getNameMap();
 
-	KeyNameMap::const_iterator it = names.find(numericID);
+	KeyNameMap::const_iterator it = name_map.find(numericID);
 
-	if (it != names.end())
+	if (it != name_map.end())
 		return it->second;
 
 	throw ItemNotFound("LookupKey: name of key not found");

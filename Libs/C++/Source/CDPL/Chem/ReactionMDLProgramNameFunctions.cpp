@@ -34,10 +34,15 @@
 using namespace CDPL; 
 
 
+namespace
+{
+
+    const std::string DEF_NAME = "CDPL";
+}
+
+
 const std::string& Chem::getMDLProgramName(const Reaction& rxn)
 {
-    static std::string DEF_NAME = "CDPL";
-    
     return rxn.getPropertyOrDefault<std::string>(ReactionProperty::MDL_PROGRAM_NAME, DEF_NAME);
 }
 

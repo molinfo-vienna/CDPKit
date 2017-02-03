@@ -33,10 +33,15 @@
 using namespace CDPL; 
 
 
+namespace
+{
+
+    const std::string DEF_INITIALS = "";
+}
+
+
 const std::string& Chem::getMDLUserInitials(const MolecularGraph& molgraph)
 {
-    static std::string DEF_INITIALS = "";
-    
     return molgraph.getPropertyOrDefault<std::string>(MolecularGraphProperty::MDL_USER_INITIALS, DEF_INITIALS);
 }
 

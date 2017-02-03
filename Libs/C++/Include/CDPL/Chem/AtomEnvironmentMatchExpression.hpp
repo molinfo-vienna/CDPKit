@@ -32,6 +32,7 @@
 #define CDPL_CHEM_ATOMENVIRONMENTMATCHEXPRESSION_HPP
 
 #include <boost/shared_ptr.hpp>
+#include <boost/thread.hpp>
 
 #include "CDPL/Chem/APIPrefix.hpp"
 #include "CDPL/Chem/MatchExpression.hpp"
@@ -92,6 +93,7 @@ namespace CDPL
 		private:
 			MolecularGraph::SharedPointer envPattern;
 			mutable SubstructureSearch    substructSearch;
+			mutable boost::mutex          mutex;
 			bool                          notMatch;
 		};
 

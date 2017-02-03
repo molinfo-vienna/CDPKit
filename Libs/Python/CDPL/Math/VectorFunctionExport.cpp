@@ -175,6 +175,13 @@ namespace
 	}
 
 	template <typename T>
+	T angleCos(const typename CDPLPythonMath::ConstVectorExpression<T>::SharedPointer& e1,
+			   const typename CDPLPythonMath::ConstVectorExpression<T>::SharedPointer& e2, const T& sd, bool clamp)
+	{
+		return CDPL::Math::angleCos(*e1, *e2, sd, clamp);
+	}
+
+	template <typename T>
 	T sum(const typename CDPLPythonMath::ConstVectorExpression<T>::SharedPointer& e)
 	{
 		return CDPL::Math::sum(*e);
@@ -269,6 +276,11 @@ void CDPLPythonMath::exportVectorFunctions()
 	python::def("innerProd", &innerProd<double>, (python::arg("e1"), python::arg("e2")));
 	python::def("innerProd", &innerProd<long>, (python::arg("e1"), python::arg("e2")));
 	python::def("innerProd", &innerProd<unsigned long>, (python::arg("e1"), python::arg("e2")));
+
+	python::def("angleCos", &angleCos<float>, (python::arg("e1"), python::arg("e2"), python::arg("sd"), python::arg("clamp") = true));
+	python::def("angleCos", &angleCos<double>, (python::arg("e1"), python::arg("e2"), python::arg("sd"), python::arg("clamp") = true));
+	python::def("angleCos", &angleCos<long>, (python::arg("e1"), python::arg("e2"), python::arg("sd"), python::arg("clamp") = true));
+	python::def("angleCos", &angleCos<unsigned long>, (python::arg("e1"), python::arg("e2"), python::arg("sd"), python::arg("clamp") = true));
 
 	python::def("real", &real<float>, python::arg("e"));
 	python::def("real", &real<double>, python::arg("e"));

@@ -34,10 +34,15 @@
 using namespace CDPL; 
 
 
+namespace
+{
+
+	const double DEF_OCCUPANCY = 1.0;
+}
+
+
 double Biomol::getOccupancy(const Chem::Atom& atom)
 {
-	static const double DEF_OCCUPANCY = 1.0;
-
     return atom.getPropertyOrDefault<double>(AtomProperty::OCCUPANCY, DEF_OCCUPANCY);
 }
 

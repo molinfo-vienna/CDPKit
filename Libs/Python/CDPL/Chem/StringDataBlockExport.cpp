@@ -66,6 +66,8 @@ void CDPLPythonChem::exportStringDataBlock()
 		.def(CDPLPythonUtil::ArrayVisitor<Chem::StringDataBlock, 
 			 python::return_internal_reference<>, python::default_call_policies,
 			 python::default_call_policies, python::default_call_policies>())
+		.def("addEntry", &Chem::StringDataBlock::addEntry, 
+			 (python::arg("self"), python::arg("header"), python::arg("data")))
 		.def("__eq__", &Chem::StringDataBlock::operator==, (python::arg("self"), python::arg("data_block")))
 		.def("__ne__", &Chem::StringDataBlock::operator!=, (python::arg("self"), python::arg("data_block")));
 }

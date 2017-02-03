@@ -106,6 +106,14 @@ namespace CDPL
 				const unsigned int CONFORMATION_INDEX       = 4;
 				const unsigned int STRUCTURE_DATA           = 5;
 			}
+
+			namespace ReactionProperty
+			{
+				
+				const unsigned int NAME                     = 1; 
+				const unsigned int MATCH_CONSTRAINTS        = 2;
+				const unsigned int REACTION_DATA            = 3;
+			}
 		}
     }
 }

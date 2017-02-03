@@ -35,10 +35,15 @@
 using namespace CDPL; 
 
 
+namespace
+{
+
+	const unsigned int DEF_VERSION = Chem::MDLDataFormatVersion::UNDEF;
+}
+
+
 unsigned int Chem::getMDLRXNFileVersion(const Reaction& rxn)
 {
-	static unsigned int DEF_VERSION = MDLDataFormatVersion::UNDEF;
-
 	return rxn.getPropertyOrDefault<unsigned int>(ReactionProperty::MDL_RXN_FILE_VERSION, DEF_VERSION);
 }
 

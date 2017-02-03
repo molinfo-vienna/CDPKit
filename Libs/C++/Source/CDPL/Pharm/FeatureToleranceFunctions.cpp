@@ -34,10 +34,15 @@
 using namespace CDPL; 
 
 
+namespace
+{
+
+	const double DEF_TOL = 1.0;
+}
+
+
 double Pharm::getTolerance(const Feature& feature)
 {
-	static const double DEF_TOL = 1.0;
-
     return feature.getPropertyOrDefault<double>(FeatureProperty::TOLERANCE, DEF_TOL);
 }
 
