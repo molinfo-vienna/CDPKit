@@ -2262,6 +2262,7 @@ void Vis::StructureView2D::prepareStructureData()
 			continue;
 
 		bool check_stereo_flag = false;
+		bool remove_one_h = false;
 		std::size_t exp_bond_count = getExplicitBondCount(atom, *structure);
 
 		try {
@@ -2310,11 +2311,34 @@ void Vis::StructureView2D::prepareStructureData()
 				if (stereo_desc.isValid(atom) 
 					&& (config == AtomConfiguration::R || config == AtomConfiguration::S || config == AtomConfiguration::EITHER)) {
 
-					if (exp_bond_count < 4)
-						continue;
+					if (calc_atom_coords) {
+						if (config != AtomConfiguration::EITHER && (!hasStereoCenterFlag(atom) || getStereoCenterFlag(atom))) {
+							if (exp_bond_count < 4)
+								continue;
 
-					if (!calc_atom_coords)
-						check_stereo_flag = true;
+							remove_one_h = true;
+						}
+
+					} else {
+						bool has_flagged_bnd = false;
+
+						for (Atom::ConstBondIterator it = atom.getBondsBegin(), end = atom.getBondsEnd(); it != end; ++it)
+							if (get2DStereoFlag(*it) != BondStereoFlag::PLAIN) {
+								has_flagged_bnd = true;
+								break;
+							}
+
+						if (has_flagged_bnd) {
+							check_stereo_flag = true;
+
+							if (config != AtomConfiguration::EITHER)  {
+								if (exp_bond_count < 4)
+									continue;
+
+								remove_one_h = true;
+							}
+						}
+					}
 				}
 			}
 
@@ -2363,6 +2387,9 @@ void Vis::StructureView2D::prepareStructureData()
 			hDepleteStructure->removeAtom(nbr_atom_idx);
 			modified = true;
 			num_atoms--;
+
+			if (remove_one_h)
+				break;
 		}
 	}
 
@@ -2379,7 +2406,7 @@ void Vis::StructureView2D::initInputAtomPosTable()
 		get2DCoordinates(*structure, inputAtomCoords);
 
 	} else {
-		if (structureChanged || parameters->explicitHVisibilityChanged() || 
+		if (structureChanged || parameters->explicitHVisibilityChanged() || parameters->propertyVisibilityChanged() ||
 			calcInputAtomCoords.isEmpty() || calcBondStereoFlags.isEmpty()) {
 
 			Chem::Atom2DCoordinatesGenerator(*structure, calcInputAtomCoords);

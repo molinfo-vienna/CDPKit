@@ -45,5 +45,18 @@ void CDPLPythonBiomol::exportControlParameterDefaults()
 
 	python::class_<ControlParameterDefault, boost::noncopyable>("ControlParameterDefault", python::no_init)
 		.def_readonly("STRICT_ERROR_CHECKING", &Biomol::ControlParameterDefault::STRICT_ERROR_CHECKING)
-		.def_readonly("CHECK_LINE_LENGTH", &Biomol::ControlParameterDefault::CHECK_LINE_LENGTH);
+		.def_readonly("CHECK_LINE_LENGTH", &Biomol::ControlParameterDefault::CHECK_LINE_LENGTH)
+		.def_readonly("PDB_RESIDUE_DICTIONARY", &Biomol::ControlParameterDefault::PDB_RESIDUE_DICTIONARY)
+		.def_readonly("PDB_USE_DICT_FOR_NON_STD_RESIDUES", &Biomol::ControlParameterDefault::PDB_USE_DICT_FOR_NON_STD_RESIDUES)
+		.def_readonly("PDB_USE_DICT_FOR_STD_RESIDUES", &Biomol::ControlParameterDefault::PDB_USE_DICT_FOR_STD_RESIDUES)
+		.def_readonly("PDB_APPLY_DICT_ATOM_BONDING_TO_NON_STD_RESIDUES", &Biomol::ControlParameterDefault::PDB_APPLY_DICT_ATOM_BONDING_TO_NON_STD_RESIDUES)
+		.def_readonly("PDB_APPLY_DICT_ATOM_BONDING_TO_STD_RESIDUES", &Biomol::ControlParameterDefault::PDB_APPLY_DICT_ATOM_BONDING_TO_STD_RESIDUES)
+		.def_readonly("PDB_APPLY_DICT_BOND_ORDERS_TO_NON_STD_RESIDUES", &Biomol::ControlParameterDefault::PDB_APPLY_DICT_BOND_ORDERS_TO_NON_STD_RESIDUES)
+		.def_readonly("PDB_IGNORE_CONECT_RECORDS", &Biomol::ControlParameterDefault::PDB_IGNORE_CONECT_RECORDS)
+		.def_readonly("PDB_DEDUCE_BOND_ORDERS_FROM_CONECT_RECORDS", &Biomol::ControlParameterDefault::PDB_DEDUCE_BOND_ORDERS_FROM_CONECT_RECORDS)
+		.def_readonly("PDB_IGNORE_FORMAL_CHARGE_FIELD", &Biomol::ControlParameterDefault::PDB_IGNORE_FORMAL_CHARGE_FIELD)
+		.def_readonly("PDB_APPLY_DICT_FORMAL_ATOM_CHARGES", &Biomol::ControlParameterDefault::PDB_APPLY_DICT_FORMAL_ATOM_CHARGES)
+		.def_readonly("PDB_CALC_FORMAL_CHARGES", &Biomol::ControlParameterDefault::PDB_CALC_FORMAL_CHARGES)
+		.def_readonly("PDB_PERCEIVE_BOND_ORDERS", &Biomol::ControlParameterDefault::PDB_PERCEIVE_BOND_ORDERS)
+		.def_readonly("PDB_EVALUATE_MASTER_RECORD", &Biomol::ControlParameterDefault::PDB_EVALUATE_MASTER_RECORD);
 }

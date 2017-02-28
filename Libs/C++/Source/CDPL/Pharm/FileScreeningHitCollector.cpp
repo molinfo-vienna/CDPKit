@@ -30,6 +30,7 @@
 #include <algorithm>
 
 #include <boost/lexical_cast.hpp>
+#include <boost/filesystem.hpp>
 
 #include "CDPL/Pharm/FileScreeningHitCollector.hpp"
 #include "CDPL/Pharm/ScreeningDBAccessor.hpp"
@@ -141,31 +142,31 @@ bool Pharm::FileScreeningHitCollector::operator()(const ScreeningProcessor::Sear
 	calcAtomStereoDescriptors(molecule, true, 3);
 	calcBondStereoDescriptors(molecule, true, 3);
 
-	Chem::StringDataBlock::SharedPointer mdl_data;
+	Chem::StringDataBlock::SharedPointer struc_data;
 
-	if (hasStructureData(molecule)) 
-		mdl_data.reset(new Chem::StringDataBlock(*getStructureData(molecule)));
+	if (hasStructureData(molecule))  
+		struc_data.reset(new Chem::StringDataBlock(*getStructureData(molecule)));
 	else
-		mdl_data.reset(new Chem::StringDataBlock());
+		struc_data.reset(new Chem::StringDataBlock());
 
 	if (outputScore)
-		mdl_data->addEntry(SCORE_PROPERTY_NAME, 
-						   boost::lexical_cast<std::string>(score));
+		struc_data->addEntry(SCORE_PROPERTY_NAME, 
+							 boost::lexical_cast<std::string>(score));
 
 	if (outputDBName)
-		mdl_data->addEntry(DB_NAME_PROPERTY_NAME, 
-						   hit.getHitProvider().getDBAccessor().getDatabaseName());
+		struc_data->addEntry(DB_NAME_PROPERTY_NAME, 
+							 boost::filesystem::path(hit.getHitProvider().getDBAccessor().getDatabaseName()).filename().native());
 
-	if (outputMolIndex)
-		mdl_data->addEntry(MOL_INDEX_PROPERTY_NAME, 
-						   boost::lexical_cast<std::string>(hit.getHitMoleculeIndex()));
+	if (outputMolIndex) {
+		struc_data->addEntry(MOL_INDEX_PROPERTY_NAME, 
+							 boost::lexical_cast<std::string>(hit.getHitMoleculeIndex()));
+	}
 
 	if (outputConfIndex)
-		mdl_data->addEntry(CONF_INDEX_PROPERTY_NAME, 
-						   boost::lexical_cast<std::string>(hit.getHitConformationIndex()));
+		struc_data->addEntry(CONF_INDEX_PROPERTY_NAME, 
+							 boost::lexical_cast<std::string>(hit.getHitConformationIndex()));
 
-	setStructureData(molecule, mdl_data);
-
+	setStructureData(molecule, struc_data);
 	dataWriter->write(molecule);
 
     return true;

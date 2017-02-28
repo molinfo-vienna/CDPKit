@@ -67,7 +67,7 @@ namespace CDPL
 			 *
 			 * \valuetype \c bool
 			 */
-			extern CDPL_BIOMOL_API const Base::LookupKey STRICT_ERROR_CHECKING;
+			extern CDPL_BIOMOL_API const Base::LookupKey& STRICT_ERROR_CHECKING;
 
 			/**
 			 * \brief Specifies whether to check if data lines exceed the maximum allowed line length when reading or writing data
@@ -81,7 +81,35 @@ namespace CDPL
 			 *
 			 * \valuetype \c bool
 			 */
-			extern CDPL_BIOMOL_API const Base::LookupKey CHECK_LINE_LENGTH;
+			extern CDPL_BIOMOL_API const Base::LookupKey& CHECK_LINE_LENGTH;
+
+			extern CDPL_BIOMOL_API const Base::LookupKey PDB_RESIDUE_DICTIONARY;
+
+			extern CDPL_BIOMOL_API const Base::LookupKey PDB_USE_DICT_FOR_NON_STD_RESIDUES;
+
+			extern CDPL_BIOMOL_API const Base::LookupKey PDB_USE_DICT_FOR_STD_RESIDUES;
+
+			extern CDPL_BIOMOL_API const Base::LookupKey PDB_APPLY_DICT_ATOM_BONDING_TO_NON_STD_RESIDUES;
+
+			extern CDPL_BIOMOL_API const Base::LookupKey PDB_APPLY_DICT_ATOM_BONDING_TO_STD_RESIDUES;
+	
+			extern CDPL_BIOMOL_API const Base::LookupKey PDB_APPLY_DICT_BOND_ORDERS_TO_NON_STD_RESIDUES;
+
+			extern CDPL_BIOMOL_API const Base::LookupKey PDB_APPLY_DICT_BOND_ORDERS_TO_STD_RESIDUES;
+
+			extern CDPL_BIOMOL_API const Base::LookupKey PDB_IGNORE_CONECT_RECORDS;
+
+			extern CDPL_BIOMOL_API const Base::LookupKey PDB_DEDUCE_BOND_ORDERS_FROM_CONECT_RECORDS;
+
+			extern CDPL_BIOMOL_API const Base::LookupKey PDB_IGNORE_FORMAL_CHARGE_FIELD;
+
+			extern CDPL_BIOMOL_API const Base::LookupKey PDB_APPLY_DICT_FORMAL_ATOM_CHARGES;
+
+			extern CDPL_BIOMOL_API const Base::LookupKey PDB_CALC_FORMAL_CHARGES;
+
+			extern CDPL_BIOMOL_API const Base::LookupKey PDB_PERCEIVE_BOND_ORDERS;
+
+			extern CDPL_BIOMOL_API const Base::LookupKey PDB_EVALUATE_MASTER_RECORD;
 		}
 
 		/**

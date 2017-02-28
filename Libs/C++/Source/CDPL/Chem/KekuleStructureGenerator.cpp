@@ -45,26 +45,6 @@
 using namespace CDPL; 
 
 
-namespace
-{
-
-	struct BondAtomTypeCmpFunc : public std::binary_function<const Chem::Bond*, const Chem::Bond*, bool>
-	{
-
-		BondAtomTypeCmpFunc(std::size_t atom_idx): atomIdx(atom_idx) {}
-
-		bool operator()(const Chem::Bond* bond1, const Chem::Bond* bond2) const {
-			using namespace Chem;
-			
-			return ((getType(bond1->getAtom(atomIdx)) == AtomType::C) && 
-					!(getType(bond2->getAtom(atomIdx)) == AtomType::C));
-		}
-
-		const std::size_t atomIdx;
-	};
-}
-
-
 Chem::KekuleStructureGenerator::KekuleStructureGenerator() {}
 
 Chem::KekuleStructureGenerator::KekuleStructureGenerator(const MolecularGraph& molgraph, Util::STArray& orders) 
@@ -158,34 +138,11 @@ void Chem::KekuleStructureGenerator::generate(const MolecularGraph& molgraph, Ut
 							bond_graph);
 		}
 
-		std::sort(bonds_beg, bonds_end, BondAtomTypeCmpFunc(1));
-		std::stable_sort(bonds_beg, bonds_end, BondAtomTypeCmpFunc(0));
-
 		max_match.assign(num_verts, boost::graph_traits<BondGraph>::null_vertex());
 
-		for (BondList::iterator it = bonds_beg; it != bonds_end; ++it) {
-			const Bond* bond = *it;
-			VertexDescriptor u = boost::vertex(molGraph->getAtomIndex(bond->getBegin()) - startAtomIdx, bond_graph);
-			VertexDescriptor v = boost::vertex(molGraph->getAtomIndex(bond->getEnd()) - startAtomIdx, bond_graph);
+		boost::edmonds_maximum_cardinality_matching(bond_graph, &max_match[0]);
 
-			if (boost::get(&max_match[0], u) == get(&max_match[0], v)) {
-				put(&max_match[0], u, v);
-				put(&max_match[0], v, u);
-			}
-		}    
-		
-		boost::edmonds_augmenting_path_finder<BondGraph, boost::graph_traits<BondGraph>::vertex_descriptor*, AtomIndexMap> 
-			augmentor(bond_graph, &max_match[0], boost::get(boost::vertex_index, bond_graph));
-
-		bool not_maximum_yet = true;
-
-		while(not_maximum_yet)
-			not_maximum_yet = augmentor.augment_matching();
-
-		augmentor.get_current_matching(&max_match[0]);
-		
 		AtomIndexMap atom_index_map = boost::get(boost::vertex_index, bond_graph);
-
 		boost::graph_traits<BondGraph>::vertex_iterator vi, vi_end;
   
 		for (boost::tie(vi, vi_end) = boost::vertices(bond_graph); vi != vi_end; ++vi) {

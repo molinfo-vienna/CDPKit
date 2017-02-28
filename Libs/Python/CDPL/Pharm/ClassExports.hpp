@@ -67,7 +67,12 @@ namespace CDPLPythonPharm
 	void exportScreeningDBAccessor();
 	void exportScreeningProcessor();
 	void exportPharmacophoreFitScreeningScore();
+
+#if defined(HAVE_BOOST_SYSTEM) && defined(HAVE_BOOST_FILESYSTEM)
+
 	void exportFileScreeningHitCollector();
+
+#endif // defined(HAVE_BOOST_SYSTEM) && defined(HAVE_BOOST_FILESYSTEM)
 
 #ifdef HAVE_SQLITE3
 # if defined(HAVE_BOOST_SYSTEM) && defined(HAVE_BOOST_FILESYSTEM) && defined(HAVE_BOOST_IOSTREAMS)

@@ -41,7 +41,6 @@ SET(pharm_MOD_SRCS
     ScreeningDBAccessorExport.cpp
     ScreeningProcessorExport.cpp
     PharmacophoreFitScreeningScoreExport.cpp
-    FileScreeningHitCollectorExport.cpp
 
     BoostFunctionWrapperExport.cpp
 
@@ -92,6 +91,13 @@ SET(pharm_MOD_SRCS
     ToPythonConverterRegistration.cpp
     FromPythonConverterRegistration.cpp
    )
+
+IF(Boost_SYSTEM_FOUND AND Boost_FILESYSTEM_FOUND)
+  SET(pharm_MOD_SRCS
+      ${pharm_MOD_SRCS}
+      FileScreeningHitCollectorExport.cpp
+     )	
+ENDIF(Boost_SYSTEM_FOUND AND Boost_FILESYSTEM_FOUND)
 
 IF(SQLITE3_FOUND)
   SET(pharm_MOD_SRCS

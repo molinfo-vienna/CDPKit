@@ -121,7 +121,7 @@ void Chem::BondStereoFlagGenerator::init(const MolecularGraph& molgraph, const M
 		const Atom& atom = *it;
 		std::size_t num_bonds = atom.getNumBonds();
 
-		if (num_bonds < 3 || num_bonds > 4) {
+		if (num_bonds < 3 || num_bonds > 4 || (hasStereoCenterFlag(atom) && !getStereoCenterFlag(atom))) {
 			stereoAtomTable.push_back(StereoAtomInfo::SharedPointer());
 			continue;
 		}

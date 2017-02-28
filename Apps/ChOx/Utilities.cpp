@@ -119,6 +119,7 @@ void ChOx::initData(CDPL::Chem::Molecule& mol)
 	calcCIPPriorities(mol, false);
 	calcAtomCIPConfigurations(mol, false);
 	calcBondCIPConfigurations(mol, false);
+	perceiveAtomStereoCenters(mol, false);
 
 	buildMatchExpressionStrings(mol, false);
 }

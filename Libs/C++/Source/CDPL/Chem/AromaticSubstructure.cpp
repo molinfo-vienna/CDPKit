@@ -41,6 +41,13 @@
 using namespace CDPL;
 
 
+namespace
+{
+
+	const std::size_t MAX_NUM_UNIQUE_RING_SYSTEMS = 300000;
+}
+
+
 Chem::AromaticSubstructure::AromaticSubstructure(const MolecularGraph& molgraph)
 {
 	perceive(molgraph);
@@ -86,12 +93,10 @@ void Chem::AromaticSubstructure::init(const MolecularGraph& molgraph)
 	ringDescrListTable.push_back(RingDescriptorListTable::value_type(RingDescriptorList(), 0));
 
 	RingDescriptorList& first_rdlist = ringDescrListTable.front().first;
-
 	FragmentList::BaseType::ConstElementIterator sssr_end = sssr.getElementsEnd();
 
 	for (FragmentList::BaseType::ConstElementIterator it = sssr.getElementsBegin(); it != sssr_end; ++it) {
 		const Fragment::SharedPointer& ring_ptr = *it;
-
 		std::size_t num_ring_bonds = ring_ptr->getNumBonds();
 
 		if (num_ring_bonds == 0 || num_ring_bonds != ring_ptr->getNumAtoms()) // sanity check
@@ -101,7 +106,6 @@ void Chem::AromaticSubstructure::init(const MolecularGraph& molgraph)
 			continue;
 
 		RingDescriptor::SharedPointer ring_descr_ptr(new RingDescriptor(ring_ptr, molgraph));
-
 		const Util::BitSet& bond_mask = ring_descr_ptr->getBondMask();
 
 		if (!uniqueRingSet.insert(bond_mask).second) // already seen this ring (should never happen)? 
@@ -133,8 +137,12 @@ void Chem::AromaticSubstructure::findAromaticSubstructure()
 				break;
 		}
 
-		if (!finished)
+		if (!finished) {
 			fuseRings();
+			
+			if (uniqueRingSet.size() > MAX_NUM_UNIQUE_RING_SYSTEMS) 
+				break;
+		}
 
 	} while (!finished);
 

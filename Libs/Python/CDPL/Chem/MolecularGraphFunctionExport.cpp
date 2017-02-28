@@ -249,7 +249,7 @@ void CDPLPythonChem::exportMolecularGraphFunctions()
 	python::def("kekulizeBonds", &Chem::kekulizeBonds, 
 				python::arg("molgraph"));
 	python::def("perceiveBondOrders", &Chem::perceiveBondOrders, 
-				(python::arg("molgraph"), python::arg("undef_only") = true));
+				(python::arg("molgraph"), python::arg("overwrite")));
 	python::def("perceiveAtomStereoCenters", &Chem::perceiveAtomStereoCenters, 
 				(python::arg("molgraph"), python::arg("overwrite")));
 	python::def("perceiveBondStereoCenters", &Chem::perceiveBondStereoCenters,

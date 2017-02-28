@@ -31,7 +31,6 @@
 #include <boost/algorithm/string.hpp>
 #include <boost/bind.hpp>
 #include <boost/lexical_cast.hpp>
-#include <boost/chrono/chrono.hpp>
 
 #include "CDPL/Chem/BasicMolecule.hpp"
 #include "CDPL/Chem/MolecularGraphFunctions.hpp"
@@ -75,11 +74,12 @@ struct PSDCreateImpl::MergeDBsProgressCallback
 	MergeDBsProgressCallback(PSDCreateImpl* parent, double offset, double scale): 
 		parent(parent), offset(offset), scale(scale) {}
 
-	void operator()(double progress) const {
+	bool operator()(double progress) const {
 		if (PSDCreateImpl::termSignalCaught())
-			return;
+			return false;
 
 		parent->printProgress(INFO, "Merging Temporary Databases... ", offset + scale * progress);
+		return true;
 	}
 
 	PSDCreateImpl* parent;
@@ -129,27 +129,27 @@ struct PSDCreateImpl::DBCreationWorker
 
 
 PSDCreateImpl::PSDCreateImpl(): 
-	dropDuplicates(false), multiThreading(false), maxNumThreads(boost::thread::hardware_concurrency()), 
+	dropDuplicates(false), multiThreading(false), numThreads(boost::thread::hardware_concurrency()), 
 	creationMode(CDPL::Pharm::ScreeningDBCreator::CREATE), inputHandler(0), addSourceFileProp(false)
 {
 	addOption("input,i", "Input file(s).", 
 			  value<StringList>(&inputFiles)->multitoken()->required());
-	addOption("output,o", "Output database *.psd file.", 
+	addOption("output,o", "Output database file.", 
 			  value<std::string>(&outputDatabase)->required());
 	addOption("mode,m", "Database creation mode (CREATE, APPEND, UPDATE, default: CREATE).", 
 			  value<std::string>()->notifier(boost::bind(&PSDCreateImpl::setCreationMode, this, _1)));
-	addOption("drop-duplicates,d", "Drop duplicate molecules.", 
-			  boolSwitch(&dropDuplicates));
-	addOption("multi-threading,t", "Enable multi-threaded processing.", 
-			  boolSwitch(&multiThreading));
-	addOption("num-threads,n", "Max. number of parallel threads (default: " + boost::lexical_cast<std::string>(maxNumThreads) + " threads, must be > 0).", 
+	addOption("drop-duplicates,d", "Drop duplicate molecules (default: false).", 
+			  value<bool>(&dropDuplicates)->implicit_value(true));
+	addOption("multi-threading,t", "Enable multi-threaded processing (default: false).", 
+			  value<bool>(&multiThreading)->implicit_value(true));
+	addOption("num-threads,n", "Number of parallel threads (default: " + boost::lexical_cast<std::string>(numThreads) + " threads, must be > 0).", 
 			  value<unsigned int>()->notifier(boost::bind(&PSDCreateImpl::setMaxNumThreads, this, _1)));
-	addOption("input-format,f", "Input file format (default: auto-detect from file extension).", 
+	addOption("input-format,I", "Input file format (default: auto-detect from file extension).", 
 			  value<std::string>()->notifier(boost::bind(&PSDCreateImpl::setInputFormat, this, _1)));
-	addOption("tmp-file-dir,p", "Temporary file directory (default: '" + boost::filesystem::temp_directory_path().native() + "')", 
+	addOption("tmp-file-dir,T", "Temporary file directory (default: '" + boost::filesystem::temp_directory_path().native() + "')", 
 			  value<std::string>()->notifier(boost::bind(&PSDCreateImpl::setTmpFileDirectory, this, _1)));
-	addOption("add-src-file-prop,s", "Add a source-file property to output molecules.", 
-			  boolSwitch(&addSourceFileProp));
+	addOption("add-src-file-prop,s", "Add a source-file property to output molecules (default: false).", 
+			  value<bool>(&addSourceFileProp)->implicit_value(true));
 
 	addOptionLongDescriptions();
 	setMultiConfImportParameter(inputReader, true);
@@ -229,12 +229,12 @@ void PSDCreateImpl::setMaxNumThreads(unsigned int num_threads)
 	if (num_threads < 1)
 		throwValidationError("num-threads");
 
-	maxNumThreads = num_threads;
+	numThreads = num_threads;
 }
 
 void PSDCreateImpl::setTmpFileDirectory(const std::string& dir_path)
 {
-	namespace bfs = boost::filesystem ;
+	namespace bfs = boost::filesystem;
 
 	if (!bfs::exists(dir_path) || !bfs::is_directory(dir_path))
 		throwValidationError("tmp-file-dir");
@@ -254,6 +254,8 @@ void PSDCreateImpl::setTmpFileDirectory(const std::string& dir_path)
 
 int PSDCreateImpl::process()
 {
+	startTime = Clock::now();
+
 	printMessage(INFO, getProgTitleString());
 	printMessage(INFO, "");
 
@@ -276,16 +278,15 @@ int PSDCreateImpl::process()
 		return EXIT_FAILURE;
 	}
 
+	if (termSignalCaught())
+		return EXIT_FAILURE;
+
 	return EXIT_SUCCESS;
 }
 
 void PSDCreateImpl::processSingleThreaded()
 {
 	using namespace CDPL;
-
-	typedef boost::chrono::system_clock Clock;
-
-	Clock::time_point start_time = Clock::now();
 
 	Pharm::ScreeningDBCreator::SharedPointer db_creator(
 		new Pharm::PSDScreeningDBCreator(outputDatabase, creationMode, !dropDuplicates));
@@ -302,7 +303,7 @@ void PSDCreateImpl::processSingleThreaded()
 
 	printStatistics(db_creator->getNumProcessed(), db_creator->getNumRejected(),
 					db_creator->getNumDeleted(), db_creator->getNumInserted(),
-					boost::chrono::duration_cast<boost::chrono::duration<std::size_t> >(Clock::now() - start_time).count());
+					boost::chrono::duration_cast<boost::chrono::duration<std::size_t> >(Clock::now() - startTime).count());
 }
 
 void PSDCreateImpl::processMultiThreaded()
@@ -312,19 +313,17 @@ void PSDCreateImpl::processMultiThreaded()
 	typedef Pharm::ScreeningDBCreator::SharedPointer DBCreatorPtr;
 	typedef std::vector<Util::FileRemover> DBFileList;
 	typedef std::vector<DBCreatorPtr> DBCreatorList;
-	typedef boost::chrono::system_clock Clock;
 
-	Clock::time_point start_time = Clock::now();
 	boost::thread_group thread_grp;
 	DBCreatorList tmp_db_creators;
-	DBFileList tmp_db_files(maxNumThreads - 1, Util::FileRemover(""));
+	DBFileList tmp_db_files(numThreads - 1, Util::FileRemover(""));
 
 	DBCreatorPtr main_db_creator(new Pharm::PSDScreeningDBCreator(outputDatabase, creationMode, !dropDuplicates));
 	
 	try {
 		thread_grp.create_thread(DBCreationWorker(this, main_db_creator));
 
-		for (std::size_t i = 0; i < maxNumThreads - 1; i++) {
+		for (std::size_t i = 0; i < numThreads - 1; i++) {
 			if (termSignalCaught())
 				break;
 
@@ -368,7 +367,7 @@ void PSDCreateImpl::processMultiThreaded()
 
 	initProgress();
 
-	for (std::size_t i = 0; i < maxNumThreads - 1; i++) {
+	for (std::size_t i = 0; i < numThreads - 1; i++) {
 		if (termSignalCaught())
 			return;
 
@@ -379,7 +378,7 @@ void PSDCreateImpl::processMultiThreaded()
 
 		Pharm::PSDScreeningDBAccessor db_acc(tmp_db_files[i].getPath());
 
-		main_db_creator->merge(db_acc, MergeDBsProgressCallback(this, i * 1.0 / (maxNumThreads - 1), 1.0 / (maxNumThreads - 1)));
+		main_db_creator->merge(db_acc, MergeDBsProgressCallback(this, i * 1.0 / (numThreads - 1), 1.0 / (numThreads - 1)));
 	}
 
 	printMessage(INFO, "");
@@ -393,7 +392,7 @@ void PSDCreateImpl::processMultiThreaded()
 	num_rej += main_db_creator->getNumRejected();
 
 	printStatistics(num_proc, num_rej, num_del, num_ins,
-					boost::chrono::duration_cast<boost::chrono::duration<std::size_t> >(Clock::now() - start_time).count());
+					boost::chrono::duration_cast<boost::chrono::duration<std::size_t> >(Clock::now() - startTime).count());
 }
 
 void PSDCreateImpl::setErrorMessage(const std::string& msg)
@@ -421,8 +420,8 @@ bool PSDCreateImpl::haveErrorMessage()
 }
 
 void PSDCreateImpl::printStatistics(std::size_t num_proc, std::size_t num_rej, 
-						   std::size_t num_del, std::size_t num_ins,
-						   std::size_t proc_time) const
+									std::size_t num_del, std::size_t num_ins,
+									std::size_t proc_time) const
 {
 	printMessage(INFO, "");
 	printMessage(INFO, "Statistics:");
@@ -435,6 +434,9 @@ void PSDCreateImpl::printStatistics(std::size_t num_proc, std::size_t num_rej,
 
 bool PSDCreateImpl::readNextMolecule(CDPL::Chem::Molecule& mol)
 {
+	if (termSignalCaught())
+		return false;
+
 	if (multiThreading) {
 		boost::lock_guard<boost::mutex> lock(mutex);
 
@@ -446,13 +448,10 @@ bool PSDCreateImpl::readNextMolecule(CDPL::Chem::Molecule& mol)
 
 bool PSDCreateImpl::doReadNextMolecule(CDPL::Chem::Molecule& mol)
 {
-	if (termSignalCaught())
+	if (!errorMessage.empty())
 		return false;
 
 	try {
-		if (!errorMessage.empty())
-			return false;
-
 		if (inputReader.getRecordIndex() >= inputReader.getNumRecords()) 
 			return false;
 
@@ -517,10 +516,10 @@ void PSDCreateImpl::printOptionSummary() const
 		printMessage(VERBOSE, std::string(27, ' ') + *it);
 
 	printMessage(VERBOSE, " Output Database:          " + outputDatabase);
- 	printMessage(VERBOSE, " Creation Mode:            " + getModeString());
+ 	printMessage(VERBOSE, " Creation Mode:            " + getCreationModeString());
  	printMessage(VERBOSE, " Drop Duplicates:          " + std::string(dropDuplicates ? "Yes" : "No"));
 	printMessage(VERBOSE, " Multi-threading:          " + std::string(multiThreading ? "Yes" : "No"));
-	printMessage(VERBOSE, " Max. Num. Threads:        " + boost::lexical_cast<std::string>(maxNumThreads));
+	printMessage(VERBOSE, " Number of Threads:        " + boost::lexical_cast<std::string>(numThreads));
 	printMessage(VERBOSE, " Input File Format:        " + (inputHandler ? inputHandler->getDataFormat().getName() : std::string("Auto-detect")));
  	printMessage(VERBOSE, " Add Source-File Property: " + std::string(addSourceFileProp ? "Yes" : "No"));
 
@@ -536,7 +535,6 @@ void PSDCreateImpl::initInputReader()
 
 	std::size_t num_in_files = inputFiles.size();
 
-	inputReader.clear();
 	initProgress();
 
 	for (std::size_t i = 0; i < num_in_files; i++) {
@@ -572,7 +570,7 @@ const PSDCreateImpl::InputHandler* PSDCreateImpl::getInputHandler(const std::str
 	return AppUtils::getInputHandler<CDPL::Chem::Molecule>(file_path);
 }
 
-std::string PSDCreateImpl::getModeString() const
+std::string PSDCreateImpl::getCreationModeString() const
 {
 	using namespace CDPL;
 

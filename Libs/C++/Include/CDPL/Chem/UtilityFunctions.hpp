@@ -45,6 +45,8 @@ namespace CDPL
 	namespace Chem 
 	{
 
+		class Molecule;
+
 		/**
 		 * \addtogroup CDPL_CHEM_UTILITY_FUNCTIONS
 		 * @{
@@ -64,7 +66,11 @@ namespace CDPL
 
 		CDPL_CHEM_API Molecule::SharedPointer parseSMARTS(const std::string& smarts, bool init_qry = true);
 
+		CDPL_CHEM_API bool parseSMARTS(const std::string& smarts, Molecule& mol, bool init_qry = true);
+
 		CDPL_CHEM_API Molecule::SharedPointer parseSMILES(const std::string& smiles);
+
+		CDPL_CHEM_API bool parseSMILES(const std::string& smiles, Molecule& mol);
 
 		/**
 		 * @}

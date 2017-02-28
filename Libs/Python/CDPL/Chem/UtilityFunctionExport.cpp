@@ -37,6 +37,12 @@ void CDPLPythonChem::exportUtilityFunctions()
 	using namespace CDPL;
 
 	python::def("foldBitSet", &Chem::foldBitSet, (python::arg("bs"), python::arg("num_times")));
-	python::def("parseSMARTS", &Chem::parseSMARTS, (python::arg("smarts"), python::arg("init_qry") = true));
-	python::def("parseSMILES", &Chem::parseSMILES, python::arg("smiles"));
+	python::def("parseSMARTS", static_cast<Chem::Molecule::SharedPointer (*)(const std::string&, bool)>(&Chem::parseSMARTS), 
+				(python::arg("smarts"), python::arg("init_qry") = true));
+	python::def("parseSMARTS", static_cast<bool (*)(const std::string&, Chem::Molecule&, bool)>(&Chem::parseSMARTS), 
+				(python::arg("smarts"), python::arg("mol"), python::arg("init_qry") = true));
+	python::def("parseSMILES", static_cast<Chem::Molecule::SharedPointer (*)(const std::string&)>(&Chem::parseSMILES), 
+				python::arg("smiles"));
+	python::def("parseSMILES", static_cast<bool (*)(const std::string&, Chem::Molecule&)>(&Chem::parseSMILES), 
+				(python::arg("smiles"), python::arg("mol")));
 }

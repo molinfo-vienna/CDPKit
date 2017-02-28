@@ -139,7 +139,7 @@ namespace CDPL
 
 			void assignTetrahedralAtomBondOrders(Util::STArray& orders);
 			void assignFunctionalGroupBondOrders(Util::STArray& orders);
-			void assignConjRingBondOrders(Util::STArray& orders);
+			void assignConjPiSystemBondOrders(Util::STArray& orders);
 			void assignRemainingBondOrders(Util::STArray& orders);
 
 			void assignFragBondOrders(std::size_t depth, Util::STArray& orders);
@@ -147,7 +147,7 @@ namespace CDPL
 			double calcHybridizationMatchScore();
 			double calcMappingScore(const AtomBondMapping& mapping) const;
 
-			void markConjRingBonds(Util::STArray& orders);
+			void markPlanarPiBonds(Util::STArray& orders);
 
 			Geometry perceiveInitialGeometry(const Atom& atom);
 			void fixRingAtomGeometries(const Fragment& ring);
@@ -167,8 +167,8 @@ namespace CDPL
 									 const Math::Vector3D& atom3_pos, const Math::Vector3D& atom4_pos) const;
 			double calcAvgTorsionAngle(const Fragment& ring) const;
 
-			bool isConjRingBond(const Bond& bond) const;
-	
+			bool isPlanarPiBond(const Bond& bond) const;
+		
 			const MolecularGraph*  molGraph;
 			bool                   undefOnly;
 			Util::BitSet           defOrderMask;
@@ -190,7 +190,7 @@ namespace CDPL
 			Util::BitSet           procMappingMask;
 			Util::BitSet           bondMappingMask1;
 			Util::BitSet           bondMappingMask2;
-			Util::BitSet           conjRingBondMask;
+			Util::BitSet           planarPiBondMask;
 		};
 
 		/**

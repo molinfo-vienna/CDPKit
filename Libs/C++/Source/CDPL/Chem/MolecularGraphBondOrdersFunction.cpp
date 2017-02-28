@@ -34,11 +34,10 @@
 using namespace CDPL; 
 
 
-void Chem::perceiveBondOrders(MolecularGraph& molgraph, bool undef_only)
+void Chem::perceiveBondOrders(MolecularGraph& molgraph, bool overwrite)
 {
 	Util::STArray orders;
-	BondOrderGenerator generator(molgraph, orders, undef_only);
-
+	BondOrderGenerator generator(molgraph, orders, !overwrite);
 	std::size_t num_bonds = molgraph.getNumBonds();
 
 	for (std::size_t i = 0; i < num_bonds; i++) 

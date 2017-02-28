@@ -59,7 +59,7 @@ namespace
 
 	MAKE_FTRCONTAINER_FUNC_WRAPPERS(const std::string&, Name)
 	MAKE_FUNCTION_WRAPPER5(bool, checkExclusionVolumeClash, const CDPL::Pharm::FeatureContainer&, CDPL::Chem::AtomContainer&,
-						   const CDPL::Chem::Atom3DCoordinatesFunction&, const CDPL::Math::Matrix4D&, bool);
+						   const CDPL::Chem::Atom3DCoordinatesFunction&, const CDPL::Math::Matrix4D&, double);
 }
 
 
@@ -76,7 +76,7 @@ void CDPLPythonPharm::exportFeatureContainerFunctions()
 				(python::arg("cntnr"), python::arg("hist")));
 	python::def("checkExclusionVolumeClash", &checkExclusionVolumeClashWrapper5, 
 				(python::arg("ftr_cntnr"), python::arg("atom_cntnr"), python::arg("coords_func"), 
-				 python::arg("xform"), python::arg("vdw") = true));
+				 python::arg("xform"), python::arg("vdw_factor") = 1.0));
 	python::def("getFeatureAtoms", &Pharm::getFeatureAtoms, (python::arg("cntnr"), python::arg("atoms")));
 
 	EXPORT_FTRCONTAINER_FUNCS_COPY_REF(Name, name)

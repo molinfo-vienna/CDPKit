@@ -119,7 +119,7 @@ namespace
 	const double      H_BOND_LENGTH                 = DEF_BOND_LENGTH * 0.7;
 	const double      BOND_LENGTH_DELTA             = DEF_BOND_LENGTH * 0.26;
 	const double      ANGLE_BENDING_DELTA           = 20.0 * M_PI / 180.0;
-	const double      ATOM_COLLISION_TEST_DIST      = DEF_BOND_LENGTH * 0.25;
+	const double      ATOM_COLLISION_TEST_DIST      = DEF_BOND_LENGTH * 0.3;
 	const double      ATOM_BOND_COLLISION_TEST_DIST = DEF_BOND_LENGTH * 0.2;
 	const double      COMPONENT_X_SPACING           = DEF_BOND_LENGTH;
 	const double      COMPONENT_Y_SPACING           = DEF_BOND_LENGTH;

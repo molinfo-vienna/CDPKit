@@ -27,7 +27,6 @@
 #include "StaticInit.hpp"
 
 #include <algorithm>
-#include <functional>
 #include <iterator>
 #include <string>
 #include <cmath>
@@ -123,21 +122,6 @@ namespace
 		bool operator()(const Chem::Bond&) const {
 			return true;
 		}
-	};
-
-	struct BondAtomTypeCmpFunc : public std::binary_function<const Chem::Bond*, const Chem::Bond*, bool>
-	{
-
-		BondAtomTypeCmpFunc(std::size_t atom_idx): atomIdx(atom_idx) {}
-
-		bool operator()(const Chem::Bond* bond1, const Chem::Bond* bond2) const {
-			using namespace Chem;
-			
-			return ((getType(bond1->getAtom(atomIdx)) == AtomType::C) && 
-					!(getType(bond2->getAtom(atomIdx)) == AtomType::C));
-		}
-
-		const std::size_t atomIdx;
 	};
 }
 
@@ -265,8 +249,8 @@ void Chem::BondOrderGenerator::init(const MolecularGraph& molgraph, Util::STArra
 	defOrderMask.resize(num_bonds);
 	defOrderMask.set();
 
-	conjRingBondMask.resize(num_bonds);
-	conjRingBondMask.reset();
+	planarPiBondMask.resize(num_bonds);
+	planarPiBondMask.reset();
 
 	bondMappingMask1.resize(num_bonds);
 	bondMappingMask2.resize(num_bonds);
@@ -424,7 +408,8 @@ void Chem::BondOrderGenerator::assignBondOrders(Util::STArray& orders)
 {
 	assignTetrahedralAtomBondOrders(orders);
 	assignFunctionalGroupBondOrders(orders);
-	assignConjRingBondOrders(orders);
+	markPlanarPiBonds(orders);
+	assignConjPiSystemBondOrders(orders);
 	assignRemainingBondOrders(orders);
 }
 
@@ -623,10 +608,8 @@ double Chem::BondOrderGenerator::calcMappingScore(const AtomBondMapping& mapping
 	return score;
 }
 
-void Chem::BondOrderGenerator::assignConjRingBondOrders(Util::STArray& orders)
+void Chem::BondOrderGenerator::assignConjPiSystemBondOrders(Util::STArray& orders)
 {
-	markConjRingBonds(orders);
-
 	typedef boost::adjacency_list<boost::vecS, boost::vecS, boost::undirectedS> BondGraph; 
 	typedef boost::property_map<BondGraph, boost::vertex_index_t>::type AtomIndexMap;
 	typedef boost::graph_traits<BondGraph>::vertex_descriptor VertexDescriptor;
@@ -648,11 +631,11 @@ void Chem::BondOrderGenerator::assignConjRingBondOrders(Util::STArray& orders)
 		fragBondList.clear();
 
 		getUndefBondFragment(bond->getBegin(), false, 
-							 boost::bind(&BondOrderGenerator::isConjRingBond, this, _1));
+							 boost::bind(&BondOrderGenerator::isPlanarPiBond, this, _1));
 
-		if (fragBondList.empty())
+		if (fragBondList.size() < 3)
 			continue;
-
+		
 		bond_graph.clear();
 
 		BondList::iterator undef_bonds_beg = fragBondList.begin();
@@ -677,34 +660,11 @@ void Chem::BondOrderGenerator::assignConjRingBondOrders(Util::STArray& orders)
 			boost::add_edge(atom1_idx, atom2_idx, bond_graph);
 		}
 
-		std::sort(undef_bonds_beg, undef_bonds_end, BondAtomTypeCmpFunc(1));
-		std::stable_sort(undef_bonds_beg, undef_bonds_end, BondAtomTypeCmpFunc(0));
-
 		max_match.assign(num_verts, boost::graph_traits<BondGraph>::null_vertex());
 
-		for (BondList::iterator it = undef_bonds_beg; it != undef_bonds_end; ++it) {
-			const Bond* bond = *it;
-			VertexDescriptor u = boost::vertex(molGraph->getAtomIndex(bond->getBegin()), bond_graph);
-			VertexDescriptor v = boost::vertex(molGraph->getAtomIndex(bond->getEnd()), bond_graph);
+		boost::edmonds_maximum_cardinality_matching(bond_graph, &max_match[0]);
 
-			if (boost::get(&max_match[0], u) == get(&max_match[0], v)) {
-				put(&max_match[0], u, v);
-				put(&max_match[0], v, u);
-			}
-		}    
-		
-		boost::edmonds_augmenting_path_finder<BondGraph, boost::graph_traits<BondGraph>::vertex_descriptor*, AtomIndexMap> 
-			augmentor(bond_graph, &max_match[0], boost::get(boost::vertex_index, bond_graph));
-
-		bool not_maximum_yet = true;
-
-		while(not_maximum_yet)
-			not_maximum_yet = augmentor.augment_matching();
-
-		augmentor.get_current_matching(&max_match[0]);
-		
 		AtomIndexMap atom_index_map = boost::get(boost::vertex_index, bond_graph);
-
 		boost::graph_traits<BondGraph>::vertex_iterator vi, vi_end;
 
 		for (boost::tie(vi, vi_end) = boost::vertices(bond_graph); vi != vi_end; ++vi) {
@@ -716,8 +676,6 @@ void Chem::BondOrderGenerator::assignConjRingBondOrders(Util::STArray& orders)
 				const Atom& atom2 = molGraph->getAtom(atom2_idx);
 
 				std::size_t bond_idx = molGraph->getBondIndex(atom1.getBondToAtom(atom2));
-
-				bondMappingMask1.set(bond_idx);
 				
 				orders[bond_idx] = 2;
 
@@ -731,7 +689,7 @@ void Chem::BondOrderGenerator::assignConjRingBondOrders(Util::STArray& orders)
 	}
 }
 
-void Chem::BondOrderGenerator::assignRemainingBondOrders(Util::STArray& orders)
+void Chem::BondOrderGenerator::markPlanarPiBonds(Util::STArray& orders)
 {
 	for (BondList::const_iterator it = undefBonds.begin(), end = undefBonds.end(); it != end; ++it) {
 		const Bond* bond = *it;
@@ -746,9 +704,19 @@ void Chem::BondOrderGenerator::assignRemainingBondOrders(Util::STArray& orders)
 		std::size_t atom1_idx = molGraph->getAtomIndex(atom1);
 		std::size_t atom2_idx = molGraph->getAtomIndex(atom2);
 
+		if ((atomGeometries[atom1_idx] == TERMINAL && atomGeometries[atom2_idx] == TRIG_PLANAR) ||
+			(atomGeometries[atom1_idx] == TRIG_PLANAR && atomGeometries[atom2_idx] == TERMINAL)) {
+
+			if (freeAtomValences[atom1_idx] > 1 && freeAtomValences[atom2_idx] > 1
+				/* && getType(atom1) == AtomType::C && getType(atom2) == AtomType::C*/)
+				planarPiBondMask.set(bond_idx);
+
+			continue;
+		}
+
 		if (atomGeometries[atom1_idx] != TRIG_PLANAR || atomGeometries[atom2_idx] != TRIG_PLANAR)
 			continue;
-
+		
 		getNeighborAtoms(atom1, nbrAtomList1, &atom2);
 		getNeighborAtoms(atom2, nbrAtomList2, &atom1);
 
@@ -790,9 +758,15 @@ void Chem::BondOrderGenerator::assignRemainingBondOrders(Util::STArray& orders)
 
 			assert(freeAtomValences[atom2_idx] > 0);
 			freeAtomValences[atom2_idx]--;
-		}
-	}
 
+		} else if (freeAtomValences[atom1_idx] > 1 && freeAtomValences[atom2_idx] > 1
+				   /* && getType(atom1) == AtomType::C && getType(atom2) == AtomType::C*/)
+			planarPiBondMask.set(bond_idx);
+	}
+}
+
+void Chem::BondOrderGenerator::assignRemainingBondOrders(Util::STArray& orders)
+{
 	workingBondOrders.assign(orders.getElementsBegin(), orders.getElementsEnd());
 
 	for (BondList::const_iterator it = undefBonds.begin(), end = undefBonds.end(); it != end; ++it) {
@@ -1046,64 +1020,6 @@ double Chem::BondOrderGenerator::calcHybridizationMatchScore()
 	return score;
 }
 
-void Chem::BondOrderGenerator::markConjRingBonds(Util::STArray& orders) 
-{
-	FragmentList::SharedPointer sssr = getSSSR(*molGraph);
-
-	for (FragmentList::ConstElementIterator it = sssr->getElementsBegin(), end = sssr->getElementsEnd(); it != end; ++it) {
-		const Fragment& ring = *it;
-		std::size_t size = ring.getNumAtoms();
-
-		if (size != 5 && size != 6)
-			continue;
-
-		bool skip = false;
-
-		for (std::size_t i = 0; i < size && !skip; i++) {
-			const Atom& atom = ring.getAtom(i);
-			const Bond& bond = ring.getBond(i);
-
-			std::size_t atom_idx = molGraph->getAtomIndex(atom);
-
-			if (atomGeometries[atom_idx] != TRIG_PLANAR) {
-				skip = true;
-				break;
-			}
-
-			switch (getType(atom)) {
-
-				case AtomType::C: {
-					std::size_t bond_idx = molGraph->getBondIndex(bond);
-					std::size_t prev_bond_idx = molGraph->getBondIndex(ring.getBond((i + size - 1) % size));
-
-					if (defOrderMask.test(bond_idx) && orders[bond_idx] == 1 && 
-						defOrderMask.test(prev_bond_idx) && orders[prev_bond_idx] == 1) {
-						skip = true;
-					}
-
-					continue;		
-				}
-
-				case AtomType::N:
-				case AtomType::O:
-				case AtomType::S:
-				case AtomType::Se:
-					continue;
-
-				default:
-					skip = true;
-					continue;		
-			}
-		}
-
-		if (skip)
-			continue;
-
-		for (Fragment::ConstBondIterator it = ring.getBondsBegin(), end = ring.getBondsEnd(); it != end; ++it)
-			conjRingBondMask.set(molGraph->getBondIndex(*it), true);
-	}
-}
-
 void Chem::BondOrderGenerator::assignNbrBondOrders(const Atom& atom, Util::STArray& orders)
 {
 	Atom::ConstBondIterator bonds_end = atom.getBondsEnd();
@@ -1196,7 +1112,7 @@ void Chem::BondOrderGenerator::fixRingAtomGeometries(const Fragment& ring)
 
 	double avg_tor_angle = calcAvgTorsionAngle(ring);
 
-	if ((rsize == 5 && avg_tor_angle < 7.5) || (rsize == 6 && avg_tor_angle < 12.0)) {
+	if ((rsize == 5 && avg_tor_angle < 10.0) || (rsize == 6 && avg_tor_angle < 12.0)) {
 		for (Fragment::ConstAtomIterator it = ring.getAtomsBegin(), end = ring.getAtomsEnd(); it != end; ++it) {
 			const Atom& atom = *it;
 
@@ -1404,7 +1320,7 @@ double Chem::BondOrderGenerator::calcAvgTorsionAngle(const Fragment& ring) const
 	return (angle_sum * 180.0 / (rsize * M_PI));
 }
 
-bool Chem::BondOrderGenerator::isConjRingBond(const Bond& bond) const
+bool Chem::BondOrderGenerator::isPlanarPiBond(const Bond& bond) const
 {
-	return conjRingBondMask.test(molGraph->getBondIndex(bond));
+	return planarPiBondMask.test(molGraph->getBondIndex(bond));
 }

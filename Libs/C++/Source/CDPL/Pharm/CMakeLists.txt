@@ -46,7 +46,6 @@ SET(cdpl-pharm_LIB_SRCS
 
     ScreeningProcessor.cpp
     ScreeningProcessorImpl.cpp
-    FileScreeningHitCollector.cpp
     PharmacophoreFitScreeningScore.cpp
 
     CDFDataReader.cpp
@@ -88,6 +87,15 @@ SET(cdpl-pharm_LIB_SRCS
     QueryThreePointPharmacophore.cpp
    )
 
+IF(Boost_SYSTEM_FOUND AND Boost_FILESYSTEM_FOUND)
+  SET(cdpl-pharm_LIB_SRCS
+      ${cdpl-pharm_LIB_SRCS}	
+      FileScreeningHitCollector.cpp
+     )
+
+  LINK_LIBRARIES(${Boost_SYSTEM_LIBRARY} ${Boost_FILESYSTEM_LIBRARY})
+ENDIF(Boost_SYSTEM_FOUND AND Boost_FILESYSTEM_FOUND)
+
 IF(SQLITE3_FOUND)
   SET(cdpl-pharm_LIB_SRCS
       ${cdpl-pharm_LIB_SRCS}
@@ -104,16 +112,16 @@ IF(SQLITE3_FOUND)
 
   IF(Boost_SYSTEM_FOUND AND Boost_FILESYSTEM_FOUND AND Boost_IOSTREAMS_FOUND)
     SET(cdpl-pharm_LIB_SRCS
-         ${cdpl-pharm_LIB_SRCS}
-         PSDPharmacophoreInputHandler.cpp
-         PSDMoleculeInputHandler.cpp
-         PSDMolecularGraphOutputHandler.cpp
-         PSDPharmacophoreReader.cpp
-         PSDMoleculeReader.cpp
-         PSDMolecularGraphWriter.cpp
-        )	
+        ${cdpl-pharm_LIB_SRCS}
+        PSDPharmacophoreInputHandler.cpp
+        PSDMoleculeInputHandler.cpp
+        PSDMolecularGraphOutputHandler.cpp
+        PSDPharmacophoreReader.cpp
+        PSDMoleculeReader.cpp
+        PSDMolecularGraphWriter.cpp
+       )	
 
-    LINK_LIBRARIES(${Boost_SYSTEM_LIBRARY} ${Boost_FILESYSTEM_LIBRARY} ${Boost_IOSTREAMS_LIBRARY})
+    LINK_LIBRARIES(${Boost_IOSTREAMS_LIBRARY})
   ENDIF(Boost_SYSTEM_FOUND AND Boost_FILESYSTEM_FOUND AND Boost_IOSTREAMS_FOUND)
 ENDIF(SQLITE3_FOUND)
 

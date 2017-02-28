@@ -68,7 +68,12 @@ BOOST_PYTHON_MODULE(_pharm)
 	exportScreeningDBAccessor();
 	exportScreeningProcessor();
 	exportPharmacophoreFitScreeningScore();
+
+#if defined(HAVE_BOOST_SYSTEM) && defined(HAVE_BOOST_FILESYSTEM)
+
 	exportFileScreeningHitCollector();
+
+#endif // defined(HAVE_BOOST_SYSTEM) && defined(HAVE_BOOST_FILESYSTEM)
 
 #ifdef HAVE_SQLITE3
 # if defined(HAVE_BOOST_SYSTEM) && defined(HAVE_BOOST_FILESYSTEM) && defined(HAVE_BOOST_IOSTREAMS)

@@ -49,12 +49,33 @@ python::def("has"#FUNC_INFIX"Parameter", &has##FUNC_INFIX##ParameterWrapper, pyt
 python::def("clear"#FUNC_INFIX"Parameter", &Biomol::clear##FUNC_INFIX##Parameter, python::arg("cntnr"));                          \
 python::def("set"#FUNC_INFIX"Parameter", &Biomol::set##FUNC_INFIX##Parameter, (python::arg("cntnr"), python::arg(#ARG_NAME))); 
 
+#define EXPORT_CONTROL_PARAM_FUNCS_INT_REF(FUNC_INFIX, ARG_NAME)                                                                  \
+python::def("get"#FUNC_INFIX"Parameter", &get##FUNC_INFIX##ParameterWrapper, python::arg("cntnr"),                                \
+            python::return_internal_reference<1>());                                                                              \
+python::def("has"#FUNC_INFIX"Parameter", &has##FUNC_INFIX##ParameterWrapper, python::arg("cntnr"));                               \
+python::def("clear"#FUNC_INFIX"Parameter", &Biomol::clear##FUNC_INFIX##Parameter, python::arg("cntnr"));                          \
+python::def("set"#FUNC_INFIX"Parameter", &Biomol::set##FUNC_INFIX##Parameter, (python::arg("cntnr"), python::arg(#ARG_NAME))); 
+
 
 namespace
 {
 
 	MAKE_CONTROL_PARAM_FUNC_WRAPPERS(bool, StrictErrorChecking)
 	MAKE_CONTROL_PARAM_FUNC_WRAPPERS(bool, CheckLineLength)
+	MAKE_CONTROL_PARAM_FUNC_WRAPPERS(const CDPL::Biomol::ResidueDictionary::SharedPointer&, PDBResidueDictionary)
+	MAKE_CONTROL_PARAM_FUNC_WRAPPERS(bool, PDBUseDictForNonStdResidues)
+	MAKE_CONTROL_PARAM_FUNC_WRAPPERS(bool, PDBUseDictForStdResidues)
+	MAKE_CONTROL_PARAM_FUNC_WRAPPERS(bool, PDBApplyDictAtomBondingToNonStdResidues)
+	MAKE_CONTROL_PARAM_FUNC_WRAPPERS(bool, PDBApplyDictAtomBondingToStdResidues)
+	MAKE_CONTROL_PARAM_FUNC_WRAPPERS(bool, PDBApplyDictBondOrdersToNonStdResidues)
+	MAKE_CONTROL_PARAM_FUNC_WRAPPERS(bool, PDBApplyDictBondOrdersToStdResidues)
+	MAKE_CONTROL_PARAM_FUNC_WRAPPERS(bool, PDBIgnoreConectRecords)
+	MAKE_CONTROL_PARAM_FUNC_WRAPPERS(bool, PDBDeduceBondOrdersFromCONECTRecords)
+	MAKE_CONTROL_PARAM_FUNC_WRAPPERS(bool, PDBIgnoreFormalChargeField)
+	MAKE_CONTROL_PARAM_FUNC_WRAPPERS(bool, PDBApplyDictFormalAtomCharges)
+	MAKE_CONTROL_PARAM_FUNC_WRAPPERS(bool, PDBCalcFormalCharges)
+	MAKE_CONTROL_PARAM_FUNC_WRAPPERS(bool, PDBPerceiveBondOrders)
+	MAKE_CONTROL_PARAM_FUNC_WRAPPERS(bool, PDBEvaluateMASTERRecord)
 }
 
 
@@ -65,4 +86,18 @@ void CDPLPythonBiomol::exportControlParameterFunctions()
 
 	EXPORT_CONTROL_PARAM_FUNCS(StrictErrorChecking, strict)
 	EXPORT_CONTROL_PARAM_FUNCS(CheckLineLength, check)
+	EXPORT_CONTROL_PARAM_FUNCS_INT_REF(PDBResidueDictionary, dict)
+	EXPORT_CONTROL_PARAM_FUNCS(PDBUseDictForNonStdResidues, use)
+	EXPORT_CONTROL_PARAM_FUNCS(PDBUseDictForStdResidues, use)
+	EXPORT_CONTROL_PARAM_FUNCS(PDBApplyDictAtomBondingToNonStdResidues, apply)
+	EXPORT_CONTROL_PARAM_FUNCS(PDBApplyDictAtomBondingToStdResidues, apply)
+	EXPORT_CONTROL_PARAM_FUNCS(PDBApplyDictBondOrdersToNonStdResidues, apply)
+	EXPORT_CONTROL_PARAM_FUNCS(PDBApplyDictBondOrdersToStdResidues, apply)
+	EXPORT_CONTROL_PARAM_FUNCS(PDBIgnoreConectRecords, ignore)
+	EXPORT_CONTROL_PARAM_FUNCS(PDBDeduceBondOrdersFromCONECTRecords, deduce)
+	EXPORT_CONTROL_PARAM_FUNCS(PDBIgnoreFormalChargeField, ignore)
+	EXPORT_CONTROL_PARAM_FUNCS(PDBApplyDictFormalAtomCharges, apply)
+	EXPORT_CONTROL_PARAM_FUNCS(PDBCalcFormalCharges, calc)
+	EXPORT_CONTROL_PARAM_FUNCS(PDBPerceiveBondOrders, perceive)
+	EXPORT_CONTROL_PARAM_FUNCS(PDBEvaluateMASTERRecord, evaluate)
 }

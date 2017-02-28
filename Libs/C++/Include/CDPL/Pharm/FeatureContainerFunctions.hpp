@@ -78,7 +78,7 @@ namespace CDPL
 
 		CDPL_PHARM_API bool checkExclusionVolumeClash(const FeatureContainer& ftr_cntnr, const Chem::AtomContainer& atom_cntnr, 
 													  const Chem::Atom3DCoordinatesFunction& coords_func,
-													  const Math::Matrix4D& xform, bool vdw = true);
+													  const Math::Matrix4D& xform, double vdw_factor = 1.0);
 
 		CDPL_PHARM_API void getFeatureAtoms(const FeatureContainer& cntnr, Chem::Fragment& atoms);
 

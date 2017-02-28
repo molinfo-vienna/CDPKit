@@ -54,6 +54,13 @@ void Pharm::PosIonizableFeatureGenerator::init(bool fuzzy)
 		addIncludePattern(parseSMARTS("[NX3:3]([CX4])([CX4,#1])[CX4,#1]"), FeatureType::POS_IONIZABLE, 1.5, FeatureGeometry::SPHERE);
 		addIncludePattern(parseSMARTS("[N:3]=[CX3:3]([N:3])[!N]"), FeatureType::POS_IONIZABLE, 1.5, FeatureGeometry::SPHERE);
 		addIncludePattern(parseSMARTS("[N:3]=[CX3:3]([N:3])[N:3]"), FeatureType::POS_IONIZABLE, 1.5, FeatureGeometry::SPHERE);
+
+	} else {
+		addIncludePattern(parseSMARTS("[N+1:3]=[CX3:3]([N:3])[!N]"), FeatureType::POS_IONIZABLE, 1.5, FeatureGeometry::SPHERE);
+		addIncludePattern(parseSMARTS("[N:3]=[CX3:3]([N+1:3])[!N]"), FeatureType::POS_IONIZABLE, 1.5, FeatureGeometry::SPHERE);
+		addIncludePattern(parseSMARTS("[N+1:3]=[CX3:3]([N:3])[N:3]"), FeatureType::POS_IONIZABLE, 1.5, FeatureGeometry::SPHERE);
+		addIncludePattern(parseSMARTS("[N:3]=[CX3:3]([N+1:3])[N:3]"), FeatureType::POS_IONIZABLE, 1.5, FeatureGeometry::SPHERE);
+		addIncludePattern(parseSMARTS("[N:3]=[CX3:3]([N:3])[N+1:3]"), FeatureType::POS_IONIZABLE, 1.5, FeatureGeometry::SPHERE);
 	}
 
     addIncludePattern(parseSMARTS("[+,+2,+3,+4,+5,+6,+7;!$(*~[-,-2,-3,-4,-5,-6,-7]):3]"), FeatureType::POS_IONIZABLE, 1.5, FeatureGeometry::SPHERE);

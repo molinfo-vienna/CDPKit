@@ -124,9 +124,9 @@ int CmdLineBase::run(int argc, char* argv[])
 		openLogFile();
 
 	} catch (const std::exception& e) {
-		std::cerr << "Error while processing command line: " << e.what() << std::endl << std::endl;
-		
-		printHelp(argv[0], "short");
+		std::cerr << "Error while processing command line: " << e.what() << std::endl;
+		std::cerr << "Try '" << boost::filesystem::path(argv[0]).filename().native()
+				  <<  " -h' for more information." << std::endl;
 		return EXIT_FAILURE;
 	}
 
@@ -461,6 +461,9 @@ void CmdLineBase::printUsage(const char* bin_path) const
 		if (opt_options[i]->semantic()->min_tokens() > 0)
 			std::cerr << " arg";
 
+		if (opt_options[i]->semantic()->max_tokens() > 1)
+			std::cerr << " [arg]...";
+
 		std::cerr << ']';
 	}
 
@@ -476,6 +479,9 @@ void CmdLineBase::printUsage(const char* bin_path) const
 
 		if (mand_options[i]->semantic()->min_tokens() > 0)
 			std::cerr << " arg";
+
+		if (mand_options[i]->semantic()->max_tokens() > 1)
+			std::cerr << " [arg]...";
 	}
 
 	std::cerr << std::endl;

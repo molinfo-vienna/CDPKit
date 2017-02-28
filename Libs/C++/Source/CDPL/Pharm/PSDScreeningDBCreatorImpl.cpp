@@ -298,8 +298,8 @@ bool  Pharm::PSDScreeningDBCreatorImpl::merge(const ScreeningDBAccessor& db_acc,
 	std::size_t old_num_ins = numInserted;
 
 	for (std::size_t i = 0; i < num_mols; i++) {
-		if (func)
-			func(double(i) / num_mols);
+		if (func && !func(double(i) / num_mols))
+			return (numInserted > old_num_ins);
 
 		mol.clear();
 		db_acc.getMolecule(i, mol);

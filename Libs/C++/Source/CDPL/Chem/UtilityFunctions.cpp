@@ -54,23 +54,41 @@ void Chem::foldBitSet(Util::BitSet& bs, std::size_t num_times)
 Chem::Molecule::SharedPointer Chem::parseSMARTS(const std::string& smarts, bool init_qry)
 {
 	Molecule::SharedPointer mol_ptr(new BasicMolecule());
+
+	parseSMARTS(smarts, *mol_ptr, init_qry);
+	
+	return mol_ptr;
+}
+
+bool Chem::parseSMARTS(const std::string& smarts, Molecule& mol, bool init_qry)
+{
 	std::istringstream iss(smarts);
 
-	SMARTSMoleculeReader(iss).read(*mol_ptr);
+	if (SMARTSMoleculeReader(iss).read(mol)) {
+		if (init_qry)
+			initSubstructureSearchQuery(mol, true);
+		return true;
+	}
 
-	if (init_qry)
-		initSubstructureSearchQuery(*mol_ptr, true);
-
-	return mol_ptr;
+	return false;
 }
 
 Chem::Molecule::SharedPointer Chem::parseSMILES(const std::string& smiles)
 {
 	Molecule::SharedPointer mol_ptr(new BasicMolecule());
-	std::istringstream iss(smiles);
 
-	SMILESMoleculeReader(iss).read(*mol_ptr);
+	parseSMILES(smiles, *mol_ptr);
 
 	return mol_ptr;
+}
+
+bool Chem::parseSMILES(const std::string& smiles, Molecule& mol)
+{
+	std::istringstream iss(smiles);
+
+	if (SMILESMoleculeReader(iss).read(mol))
+		return true;
+
+	return false;
 }
 

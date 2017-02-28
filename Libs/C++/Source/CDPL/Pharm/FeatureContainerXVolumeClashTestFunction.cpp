@@ -29,6 +29,7 @@
 #include <vector>
 #include <algorithm>
 #include <iterator>
+#include <functional>
 
 #include <boost/bind.hpp>
 
@@ -49,7 +50,7 @@ using namespace CDPL;
 
 bool Pharm::checkExclusionVolumeClash(const FeatureContainer& ftr_cntnr, const Chem::AtomContainer& atom_cntnr, 
 									  const Chem::Atom3DCoordinatesFunction& coords_func, 
-									  const Math::Matrix4D& xform, bool vdw)
+									  const Math::Matrix4D& xform, double vdw_factor)
 {
 	Math::Vector3D tmp;
 	std::vector<double> vdw_radii;
@@ -64,9 +65,9 @@ bool Pharm::checkExclusionVolumeClash(const FeatureContainer& ftr_cntnr, const C
 		atom_coords.push_back(tmp);
 	}
 
-	if (vdw) 
+	if (vdw_factor > 0.0) 
 		std::transform(atom_cntnr.getAtomsBegin(), atom_cntnr.getAtomsEnd(), std::back_inserter(vdw_radii), 
-					   boost::bind(&Chem::getVdWRadius, _1));
+					   boost::bind(std::multiplies<double>(), boost::bind(&Chem::getVdWRadius, _1), vdw_factor));
 	else
 		vdw_radii.resize(num_atoms, 0.0);
 

@@ -73,7 +73,7 @@ long Chem::calcFormalCharge(const Atom& atom, const MolecularGraph& molgraph)
 	long nearest_val_state = -1;
 
 	for (std::size_t i = 0; i < val_states.getSize(); i++)
-		if (std::abs(val_states[i] - valence) < std::abs(nearest_val_state - valence))
+		if (i == 0 || (std::abs(long(val_states[i]) - valence) < std::abs(nearest_val_state - valence)))
 			nearest_val_state = val_states[i];
 
 	if (nearest_val_state == -1)

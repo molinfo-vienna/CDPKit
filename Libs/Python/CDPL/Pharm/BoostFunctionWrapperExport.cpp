@@ -51,8 +51,8 @@ void CDPLPythonPharm::exportBoostFunctionWrappers()
     CDPLPythonBase::BoostFunction1Export<boost::function1<bool, const FeatureMapping&> >("BoolFeatureMappingFunctor");
    	CDPLPythonBase::BoostFunction1Export<boost::function1<double, const ScreeningProcessor::SearchHit&> >("DoubleSearchHitFunctor");
     CDPLPythonBase::BoostFunction1Export<boost::function1<double, const Feature&>, Feature&>("DoubleFeatureFunctor");
-	CDPLPythonBase::BoostFunction1Export<boost::function1<void, double>, double, 
-										 python::return_value_policy<python::return_by_value>, true>("VoidDoubleFunctor"); 
+	CDPLPythonBase::BoostFunction1Export<boost::function1<bool, double>, double, 
+										 python::return_value_policy<python::return_by_value>, true>("BoolDoubleFunctor"); 
 
     CDPLPythonBase::BoostFunction2Export<boost::function2<bool, const Feature&, const Feature&>, Feature&, Feature&>("BoolFeature2Functor");
     CDPLPythonBase::BoostFunction2Export<boost::function2<double, const Feature&, const Feature&>, Feature&, Feature&>("DoubleFeature2Functor");

@@ -60,11 +60,20 @@ void Pharm::NegIonizableFeatureGenerator::init(bool fuzzy)
 		addIncludePattern(parseSMARTS("[C:3][O:3](=[N:3][OH1,O-:3])"), FeatureType::NEG_IONIZABLE, 2.0, FeatureGeometry::SPHERE);
 		addIncludePattern(parseSMARTS("[S,C,P:3](~[O:3])[OH1,O-:3]"), FeatureType::NEG_IONIZABLE, 1.5, FeatureGeometry::SPHERE);
 		addIncludePattern(parseSMARTS("[N:3]-[SX4](=O)(=O)[CX4](F)(F)F"), FeatureType::NEG_IONIZABLE, 1.5, FeatureGeometry::SPHERE);
+	} else {
+
+		addIncludePattern(parseSMARTS("[P,S:3](~[O:3])(~[O:3])[OH0-:3]"), FeatureType::NEG_IONIZABLE, 2.0, FeatureGeometry::SPHERE);
+		addIncludePattern(parseSMARTS("[NR;H0-:3](-C(=O))-[SX4](=O)(=O)"), FeatureType::NEG_IONIZABLE, 1.5, FeatureGeometry::SPHERE);
+		addIncludePattern(parseSMARTS("[C:3](=[O:3])[N:3][OH0-:3]"), FeatureType::NEG_IONIZABLE, 2.0, FeatureGeometry::SPHERE);
+		addIncludePattern(parseSMARTS("[C:3]([O:3])[N:3][OH0-:3]"), FeatureType::NEG_IONIZABLE, 2.0, FeatureGeometry::SPHERE);
+		addIncludePattern(parseSMARTS("[C:3][O:3](=[N:3][OH0-:3])"), FeatureType::NEG_IONIZABLE, 2.0, FeatureGeometry::SPHERE);
+		addIncludePattern(parseSMARTS("[S,C,P:3](~[O:3])[OH0-:3]"), FeatureType::NEG_IONIZABLE, 1.5, FeatureGeometry::SPHERE);
+		addIncludePattern(parseSMARTS("[N-:3]-[SX4](=O)(=O)[CX4](F)(F)F"), FeatureType::NEG_IONIZABLE, 1.5, FeatureGeometry::SPHERE);
 	}
 
     addIncludePattern(parseSMARTS("[-,-2,-3,-4,-5,-6,-7;!$(*~[+,+2,+3,+4,+5,+6,+7]):3]"), FeatureType::NEG_IONIZABLE, 1.5, FeatureGeometry::SPHERE);
 
-    addExcludePattern(parseSMARTS("C(=O)OC"));
+    addExcludePattern(parseSMARTS("C(=O)[OH0+0]"));
     addExcludePattern(parseSMARTS("C(O)O"));
     addExcludePattern(parseSMARTS("[P,S](~O)(~O)(~O)N"));
 }

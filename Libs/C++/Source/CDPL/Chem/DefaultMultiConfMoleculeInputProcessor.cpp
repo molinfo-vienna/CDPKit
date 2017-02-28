@@ -35,7 +35,6 @@
 #include "CDPL/Chem/AtomFunctions.hpp"
 #include "CDPL/Chem/Entity3DFunctions.hpp"
 #include "CDPL/Chem/BondFunctions.hpp"
-#include "CDPL/Chem/StereoDescriptor.hpp"
 
 
 using namespace CDPL;
@@ -60,6 +59,19 @@ bool Chem::DefaultMultiConfMoleculeInputProcessor::init(MolecularGraph& tgt_molg
 		calcImplicitHydrogenCounts(tgt_molgraph, true);
 		perceiveHybridizationStates(tgt_molgraph, true);
 		setAromaticityFlags(tgt_molgraph, true);
+		calcCIPPriorities(tgt_molgraph, true);
+
+		if (atomFlags & AtomPropertyFlag::CONFIGURATION) {
+			perceiveAtomStereoCenters(tgt_molgraph, true);
+			calcAtomStereoDescriptors(tgt_molgraph, true); 
+			calcAtomCIPConfigurations(tgt_molgraph, true);
+		}
+
+		if (bondFlags & BondPropertyFlag::CONFIGURATION) {
+			perceiveBondStereoCenters(tgt_molgraph, true);
+			calcBondStereoDescriptors(tgt_molgraph, true); 
+			calcBondCIPConfigurations(tgt_molgraph, true);
+		}
 	}
 
 	for (MolecularGraph::AtomIterator it = tgt_molgraph.getAtomsBegin(), end = tgt_molgraph.getAtomsEnd(); it != end; ++it) {
@@ -69,17 +81,6 @@ bool Chem::DefaultMultiConfMoleculeInputProcessor::init(MolecularGraph& tgt_molg
 		set3DCoordinatesArray(atom, coords_array);
 		
 		coords_array->addElement(get3DCoordinates(atom));
-		
-		if (atomFlags & AtomPropertyFlag::CONFIGURATION)
-			setStereoDescriptor(atom, calcStereoDescriptor(atom, tgt_molgraph));
-	}
-
-	if (bondFlags & BondPropertyFlag::CONFIGURATION) {
-		for (MolecularGraph::BondIterator it = tgt_molgraph.getBondsBegin(), end = tgt_molgraph.getBondsEnd(); it != end; ++it) {
-			Bond& bond = *it;
-		
-			setStereoDescriptor(bond, calcStereoDescriptor(bond, tgt_molgraph));
-		}
 	}
 
 	return true;
@@ -94,7 +95,7 @@ bool Chem::DefaultMultiConfMoleculeInputProcessor::isConformation(MolecularGraph
 	if (tgt_molgraph.getNumBonds() != conf_molgraph.getNumBonds())
 		return false;
 
-	if (compareNames && (getName(tgt_molgraph) == getName(conf_molgraph)))
+	if (compareNames && (getName(tgt_molgraph) != getName(conf_molgraph)))
 		return false;
 
 	if (!hasCoordinates(conf_molgraph, 3))
@@ -107,48 +108,48 @@ bool Chem::DefaultMultiConfMoleculeInputProcessor::isConformation(MolecularGraph
 		calcImplicitHydrogenCounts(conf_molgraph, true);
 		perceiveHybridizationStates(conf_molgraph, true);
 		setAromaticityFlags(conf_molgraph, true);
+		calcCIPPriorities(conf_molgraph, true);
+	
+		if (atomFlags & AtomPropertyFlag::CONFIGURATION) {
+			perceiveAtomStereoCenters(conf_molgraph, true);
+			calcAtomStereoDescriptors(conf_molgraph, true); 
+			calcAtomCIPConfigurations(conf_molgraph, true);
+		}
+
+		if (bondFlags & BondPropertyFlag::CONFIGURATION) {
+			perceiveBondStereoCenters(conf_molgraph, true);
+			calcBondStereoDescriptors(conf_molgraph, true);
+			calcBondCIPConfigurations(conf_molgraph, true);
+		} 
 	}
 
-	for (MolecularGraph::AtomIterator tgt_it = tgt_molgraph.getAtomsBegin(), 
+	for (MolecularGraph::ConstAtomIterator tgt_it = tgt_molgraph.getAtomsBegin(), 
 			 conf_it = conf_molgraph.getAtomsBegin(), tgt_end = tgt_molgraph.getAtomsEnd();
 		 tgt_it != tgt_end; ++tgt_it, ++conf_it) {
 
 		const Atom& tgt_atom = *tgt_it;
-		Atom& conf_atom = *conf_it;
+		const Atom& conf_atom = *conf_it;
 
 		if ((atomFlags & AtomPropertyFlag::TYPE) && getType(tgt_atom) != getType(conf_atom))
 			return false;
-	
+
 		if ((atomFlags & AtomPropertyFlag::FORMAL_CHARGE) && getFormalCharge(tgt_atom) != getFormalCharge(conf_atom))
 			return false;
 
 		if ((atomFlags & AtomPropertyFlag::ISOTOPE) && getIsotope(tgt_atom) != getIsotope(conf_atom))
 			return false;
 
-		if (atomFlags & AtomPropertyFlag::CONFIGURATION) {
-			const StereoDescriptor& tgt_sto_desc = getStereoDescriptor(tgt_atom);
-			StereoDescriptor conf_sto_desc = calcStereoDescriptor(conf_atom, conf_molgraph);
-
-			std::size_t num_tgt_ref_atoms = tgt_sto_desc.getNumReferenceAtoms();
-			
-			if (num_tgt_ref_atoms != tgt_sto_desc.getNumReferenceAtoms())
-				return false;
-
-			if (tgt_sto_desc.getConfiguration() != tgt_sto_desc.getConfiguration())
-				return false;
-			
-			for (std::size_t i = 0; i < num_tgt_ref_atoms; i++)
-				if (&conf_molgraph.getAtom(tgt_molgraph.getAtomIndex(*tgt_sto_desc.getReferenceAtoms()[i])) != conf_sto_desc.getReferenceAtoms()[i])
-					return false;
-		}
+		if ((atomFlags & AtomPropertyFlag::CONFIGURATION) && getStereoCenterFlag(tgt_atom) &&
+			(getCIPConfiguration(tgt_atom) != getCIPConfiguration(conf_atom)))
+			return false;
 	}
 
-	for (MolecularGraph::BondIterator tgt_it = tgt_molgraph.getBondsBegin(), 
+	for (MolecularGraph::ConstBondIterator tgt_it = tgt_molgraph.getBondsBegin(), 
 			 conf_it = conf_molgraph.getBondsBegin(), tgt_end = tgt_molgraph.getBondsEnd();
 		 tgt_it != tgt_end; ++tgt_it, ++conf_it) {
 		
-		Bond& tgt_bond = *tgt_it;
-		Bond& conf_bond = *conf_it;
+		const Bond& tgt_bond = *tgt_it;
+		const Bond& conf_bond = *conf_it;
 
 		if (tgt_molgraph.getAtomIndex(tgt_bond.getBegin()) != conf_molgraph.getAtomIndex(conf_bond.getBegin()))
 			return false;
@@ -158,23 +159,10 @@ bool Chem::DefaultMultiConfMoleculeInputProcessor::isConformation(MolecularGraph
 
 		if ((bondFlags & BondPropertyFlag::ORDER) && getOrder(tgt_bond) != getOrder(conf_bond))
 			return false;
-
-		if (bondFlags & BondPropertyFlag::CONFIGURATION) {
-			const StereoDescriptor& tgt_sto_desc = getStereoDescriptor(tgt_bond);
-			StereoDescriptor conf_sto_desc = calcStereoDescriptor(conf_bond, conf_molgraph);
-
-			std::size_t num_tgt_ref_atoms = tgt_sto_desc.getNumReferenceAtoms();
-
-			if (num_tgt_ref_atoms != tgt_sto_desc.getNumReferenceAtoms())
-				return false;
-
-			if (tgt_sto_desc.getConfiguration() != tgt_sto_desc.getConfiguration())
-				return false;
-
-			for (std::size_t i = 0; i < num_tgt_ref_atoms; i++)
-				if (&conf_molgraph.getAtom(tgt_molgraph.getAtomIndex(*tgt_sto_desc.getReferenceAtoms()[i])) != conf_sto_desc.getReferenceAtoms()[i])
-					return false;
-		}
+		
+		if ((bondFlags & BondPropertyFlag::CONFIGURATION) && getStereoCenterFlag(tgt_bond) && 
+			(getCIPConfiguration(tgt_bond) != getCIPConfiguration(conf_bond)))
+			return false;
 	}
 
     return true;

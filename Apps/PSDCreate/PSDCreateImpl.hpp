@@ -32,6 +32,7 @@
 #include <string>
 
 #include <boost/thread.hpp>
+#include <boost/chrono/chrono.hpp>
 
 #include "CDPL/Pharm/ScreeningDBCreator.hpp"
 #include "CDPL/Util/CompoundDataReader.hpp"
@@ -86,7 +87,6 @@ namespace PSDCreate
 		bool doReadNextMolecule(CDPL::Chem::Molecule& mol);
 
 		void setErrorMessage(const std::string& msg);
-
 		bool haveErrorMessage();
 
 		void printStatistics(std::size_t num_proc, std::size_t num_rej, 
@@ -97,7 +97,7 @@ namespace PSDCreate
 		void printOptionSummary() const;
 		void initInputReader();
 
-		std::string getModeString() const;
+		std::string getCreationModeString() const;
 
 		const InputHandler* getInputHandler(const std::string& file_path) const;
 
@@ -111,18 +111,20 @@ namespace PSDCreate
 		typedef CDPL::Pharm::ScreeningDBCreator::Mode CreationMode;
 		typedef CDPL::Base::DataReader<CDPL::Chem::Molecule> MoleculeReader;
 		typedef CDPL::Util::CompoundDataReader<CDPL::Chem::Molecule> CompMoleculeReader;
+		typedef boost::chrono::system_clock Clock;
 
 		StringList             inputFiles;
 		std::string            outputDatabase;
 		bool                   dropDuplicates;
 		bool                   multiThreading;
-		std::size_t            maxNumThreads;
+		std::size_t            numThreads;
 		CreationMode           creationMode;
 		const InputHandler*    inputHandler;
 		CompMoleculeReader     inputReader;   
 		boost::mutex           mutex;
 		std::string            errorMessage;
 		bool                   addSourceFileProp;
+		Clock::time_point      startTime;
     };
 }
 

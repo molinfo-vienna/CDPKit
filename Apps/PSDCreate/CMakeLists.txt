@@ -19,7 +19,7 @@ CONFIGURE_FILE("${CDPKIT_CMAKE_SCRIPTS_DIR}/InstallExternalRuntimeDependencies.c
 
 INSTALL(SCRIPT "${CMAKE_CURRENT_BINARY_DIR}/InstallExternalRuntimeDependencies.cmake")
 
-TARGET_LINK_LIBRARIES(psd-create app-utils-static cdpl-util-shared cdpl-chem-shared 
+TARGET_LINK_LIBRARIES(psd-create app-utils-static cdpl-util-shared cdpl-base-shared cdpl-chem-shared 
 		      cdpl-pharm-shared cdpl-biomol-shared)
 
 INSTALL(TARGETS psd-create DESTINATION "${CDPKIT_EXECUTABLE_INSTALL_DIR}" COMPONENT Applications)

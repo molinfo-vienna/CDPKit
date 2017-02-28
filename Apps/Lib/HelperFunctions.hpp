@@ -116,6 +116,25 @@ namespace AppUtils
 		return 0;
 	}
 
+	template <typename T>
+	const CDPL::Base::DataOutputHandler<T>* getOutputHandler(const std::string& path)
+	{
+		using namespace CDPL;
+
+		std::string file_name = boost::filesystem::path(path).filename().native();
+
+		for (std::size_t pos = file_name.find('.'); pos != std::string::npos; pos = file_name.find('.', pos + 1)) {
+			std::string file_ext = file_name.substr(pos + 1);
+			
+			const Base::DataOutputHandler<T>* handler = Base::DataIOManager<T>::getOutputHandlerByFileExtension(file_ext);
+
+			if (handler)
+				return handler;
+		}
+
+		return 0;
+	}
+
 	std::string formatTimeDuration(std::size_t secs);
 }
 

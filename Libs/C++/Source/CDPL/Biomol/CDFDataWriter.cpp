@@ -51,7 +51,7 @@ unsigned int Biomol::CDFDataWriter::outputAtomProperties(const Chem::CDFDataWrit
 		writer.putStringProperty(CDF::AtomProperty::RESIDUE_ATOM_NAME, getResidueAtomName(atom), data);
 
 	if (hasResidueAltAtomName(atom))
-		writer.putStringProperty(CDF::AtomProperty::RESIDUE_ALT_ATOM_NAME, getResidueAtomName(atom), data);
+		writer.putStringProperty(CDF::AtomProperty::RESIDUE_ALT_ATOM_NAME, getResidueAltAtomName(atom), data);
 
 	if (hasResidueLeavingAtomFlag(atom))
 		writer.putIntProperty(CDF::AtomProperty::RESIDUE_LEAVING_ATOM_FLAG, CDF::BoolType(getResidueLeavingAtomFlag(atom)), data);

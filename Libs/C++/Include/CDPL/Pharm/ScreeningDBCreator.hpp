@@ -68,7 +68,7 @@ namespace CDPL
 		  public:
 			typedef boost::shared_ptr<ScreeningDBCreator> SharedPointer;
 
-			typedef boost::function1<void, double> ProgressCallbackFunction;
+			typedef boost::function1<bool, double> ProgressCallbackFunction;
 
 			enum Mode
 			{

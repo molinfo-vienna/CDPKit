@@ -71,11 +71,21 @@ bool Chem::isStereoCenter(const Atom& atom, const MolecularGraph& molgraph)
 	if ((num_bonds + getImplicitHydrogenCount(atom)) > 4)
 		return false;
 
-    if (num_bonds == 3 && getType(atom) == AtomType::N && getRingBondCount(atom, molgraph) != 3)
-		return false;
-
     if (getHybridizationState(atom) != HybridizationState::SP3)
 		return false;
+
+	if (getType(atom) == AtomType::N && num_bonds == 3) {
+		if (getRingBondCount(atom, molgraph) != 3)
+			return false;
+
+		Atom::ConstAtomIterator atoms_end = atom.getAtomsEnd();
+		Atom::ConstBondIterator b_it = atom.getBondsBegin();
+
+		for (Atom::ConstAtomIterator a_it = atom.getAtomsBegin(); a_it != atoms_end; ++a_it, ++b_it) {
+			if (molgraph.containsAtom(*a_it) && molgraph.containsBond(*b_it) && isUnsaturated(*a_it, molgraph))
+				return false;
+		}
+	}
 
 	if (getOrdinaryHydrogenCount(atom, molgraph, AtomPropertyFlag::ISOTOPE | AtomPropertyFlag::FORMAL_CHARGE | AtomPropertyFlag::H_COUNT) > 1)
 	    return false;

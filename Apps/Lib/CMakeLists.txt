@@ -20,4 +20,4 @@ SET_TARGET_PROPERTIES(app-utils-static PROPERTIES
                       CLEAN_DIRECT_OUTPUT 1
                      )
 
-TARGET_LINK_LIBRARIES(app-utils-static cdpl-util-shared)
+TARGET_LINK_LIBRARIES(app-utils-static cdpl-util-shared cdpl-base-shared)

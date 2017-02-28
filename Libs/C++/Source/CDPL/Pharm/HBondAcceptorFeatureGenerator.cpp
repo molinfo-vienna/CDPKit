@@ -51,14 +51,14 @@ void Pharm::HBondAcceptorFeatureGenerator::init()
 {
     using namespace Chem;
 
-	addIncludePattern(parseSMARTS("[*:8]~[#8,#7,S;X2:7]~[*:8]"), FeatureType::H_BOND_ACCEPTOR, 1.5, FeatureGeometry::VECTOR, 1.0);
-	addIncludePattern(parseSMARTS("[*:8]=[N;X2:7]-[#1]"), FeatureType::H_BOND_ACCEPTOR, 1.5, FeatureGeometry::VECTOR, 1.0);
-	addIncludePattern(parseSMARTS("[*:8]#[N;X1:7]"), FeatureType::H_BOND_ACCEPTOR, 1.5, FeatureGeometry::VECTOR, 1.0);
-	addIncludePattern(parseSMARTS("[*:8]-[O,S;X2:7]-[#1]"), FeatureType::H_BOND_ACCEPTOR, 1.5, FeatureGeometry::VECTOR, 1.0);
-	addIncludePattern(parseSMARTS("[*:8]-,=[O,S;X1:7]"), FeatureType::H_BOND_ACCEPTOR, 1.5, FeatureGeometry::VECTOR, 1.0);
+	addIncludePattern(parseSMARTS("[*:8]~[#8,#7,S;X2:7]~[*:8]"), FeatureType::H_BOND_ACCEPTOR, 1.5, FeatureGeometry::VECTOR, 2.0);
+	addIncludePattern(parseSMARTS("[*:8]=[N;X2:7]-[#1]"), FeatureType::H_BOND_ACCEPTOR, 1.5, FeatureGeometry::VECTOR, 2.0);
+	addIncludePattern(parseSMARTS("[*:8]#[N;X1:7]"), FeatureType::H_BOND_ACCEPTOR, 1.5, FeatureGeometry::VECTOR, 2.0);
+	addIncludePattern(parseSMARTS("[*:8]-[O,S;X2:7]-[#1]"), FeatureType::H_BOND_ACCEPTOR, 1.5, FeatureGeometry::VECTOR, 2.0);
+	addIncludePattern(parseSMARTS("[*:8]-,=[O,S;X1:7]"), FeatureType::H_BOND_ACCEPTOR, 1.5, FeatureGeometry::VECTOR, 2.0);
 	addIncludePattern(parseSMARTS("[O,S;X2:3]"), FeatureType::H_BOND_ACCEPTOR, 1.5, FeatureGeometry::SPHERE, 1.0);
 	addIncludePattern(parseSMARTS("[#7;X3:3]"), FeatureType::H_BOND_ACCEPTOR, 1.5, FeatureGeometry::SPHERE, 1.0);
-	addIncludePattern(parseSMARTS("[*:8]-[F:7]"), FeatureType::H_BOND_ACCEPTOR, 1.5, FeatureGeometry::VECTOR, 1.0);
+	addIncludePattern(parseSMARTS("[*:8]-[F:7]"), FeatureType::H_BOND_ACCEPTOR, 1.5, FeatureGeometry::VECTOR, 2.0);
    
 	addExcludePattern(parseSMARTS("[O,N,S:1]-[a]"));
 	addExcludePattern(parseSMARTS("[O,S:1](-C)-C=O"));

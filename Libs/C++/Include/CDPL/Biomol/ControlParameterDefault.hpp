@@ -31,10 +31,10 @@
 #ifndef CDPL_BIOMOL_CONTROLPARAMETERDEFAULT_HPP
 #define CDPL_BIOMOL_CONTROLPARAMETERDEFAULT_HPP
 
-#include <string>
 #include <cstddef>
 
 #include "CDPL/Biomol/APIPrefix.hpp"
+#include "CDPL/Biomol/ResidueDictionary.hpp"
 
 
 namespace CDPL 
@@ -63,6 +63,34 @@ namespace CDPL
 			 * \brief Default setting (= \c false) for the control-parameter Biomol::ControlParameter::CHECK_LINE_LENGTH.
 			 */
 			extern CDPL_BIOMOL_API const bool CHECK_LINE_LENGTH;
+
+			extern CDPL_BIOMOL_API const ResidueDictionary::SharedPointer PDB_RESIDUE_DICTIONARY;
+
+			extern CDPL_BIOMOL_API const bool PDB_USE_DICT_FOR_NON_STD_RESIDUES;
+
+			extern CDPL_BIOMOL_API const bool PDB_USE_DICT_FOR_STD_RESIDUES;
+
+			extern CDPL_BIOMOL_API const bool PDB_APPLY_DICT_ATOM_BONDING_TO_NON_STD_RESIDUES;
+
+			extern CDPL_BIOMOL_API const bool PDB_APPLY_DICT_ATOM_BONDING_TO_STD_RESIDUES;
+	
+			extern CDPL_BIOMOL_API const bool PDB_APPLY_DICT_BOND_ORDERS_TO_NON_STD_RESIDUES;
+
+			extern CDPL_BIOMOL_API const bool PDB_APPLY_DICT_BOND_ORDERS_TO_STD_RESIDUES;
+
+			extern CDPL_BIOMOL_API const bool PDB_IGNORE_CONECT_RECORDS;
+
+			extern CDPL_BIOMOL_API const bool PDB_DEDUCE_BOND_ORDERS_FROM_CONECT_RECORDS;
+
+			extern CDPL_BIOMOL_API const bool PDB_IGNORE_FORMAL_CHARGE_FIELD;
+
+			extern CDPL_BIOMOL_API const bool PDB_APPLY_DICT_FORMAL_ATOM_CHARGES;
+
+			extern CDPL_BIOMOL_API const bool PDB_CALC_FORMAL_CHARGES;
+
+			extern CDPL_BIOMOL_API const bool PDB_PERCEIVE_BOND_ORDERS;
+
+			extern CDPL_BIOMOL_API const bool PDB_EVALUATE_MASTER_RECORD;
 		}
 
 		/**

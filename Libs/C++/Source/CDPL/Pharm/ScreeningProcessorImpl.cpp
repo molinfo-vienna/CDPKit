@@ -58,7 +58,8 @@ using namespace CDPL;
 namespace
 {
 
-    const double NAN_SCORE = std::numeric_limits<double>::quiet_NaN();
+    const double NAN_SCORE         = std::numeric_limits<double>::quiet_NaN();
+    const double VDW_RADIUS_FACTOR = 0.5;
 
 	struct FeatureTolCmpFunc : public std::binary_function<const Pharm::Feature*, const Pharm::Feature*, bool> 
 	{
@@ -162,7 +163,7 @@ const Pharm::ScreeningProcessor::ScoringFunction& Pharm::ScreeningProcessorImpl:
 }
 
 std::size_t Pharm::ScreeningProcessorImpl::searchDB(const FeatureContainer& query, std::size_t mol_start_idx, 
-														 std::size_t mol_end_idx)
+													std::size_t mol_end_idx)
 {
 	prepareDBSearch(query, mol_start_idx, mol_end_idx);
 
@@ -186,7 +187,7 @@ std::size_t Pharm::ScreeningProcessorImpl::searchDB(const FeatureContainer& quer
 
 		std::size_t mol_idx = pharmIndices[i].second;
 
-		if (reportMode == ScreeningProcessor::FIRST_MATCHING_CONF && molHitSet.test(mol_idx))
+		if (reportMode == ScreeningProcessor::FIRST_MATCHING_CONF && molHitSet.test(mol_idx)) 
 			continue;
 
 		std::size_t pharm_idx = pharmIndices[i].first;
@@ -205,7 +206,7 @@ std::size_t Pharm::ScreeningProcessorImpl::searchDB(const FeatureContainer& quer
 }
 
 void Pharm::ScreeningProcessorImpl::prepareDBSearch(const FeatureContainer& query, std::size_t mol_start_idx, 
-														 std::size_t mol_end_idx)
+													std::size_t mol_end_idx)
 {
 	initQueryData(query);
 
@@ -536,7 +537,7 @@ bool Pharm::ScreeningProcessorImpl::checkXVolumeClashes(std::size_t mol_idx, std
 	if (atomVdWRadii.empty())
 		for (Chem::BasicMolecule::ConstAtomIterator it = dbMolecule.getAtomsBegin(), 
 				 end = dbMolecule.getAtomsEnd(); it != end; ++it)
-			atomVdWRadii.push_back(Chem::AtomDictionary::getVdWRadius(getType(*it)));
+			atomVdWRadii.push_back(Chem::AtomDictionary::getVdWRadius(getType(*it)) * VDW_RADIUS_FACTOR);
 
 	if (atomCoordinates.isEmpty())
 		getConformationData(dbMolecule, conf_idx, atomCoordinates);
@@ -640,9 +641,10 @@ bool Pharm::ScreeningProcessorImpl::reportHit(const SearchHit& hit, double score
 {
 	numHits++;
 
-	if (reportMode == ScreeningProcessor::FIRST_MATCHING_CONF) 
+	if (reportMode == ScreeningProcessor::FIRST_MATCHING_CONF) {
 		molHitSet.set(hit.getHitMoleculeIndex());
-	else if (reportMode == ScreeningProcessor::BEST_MATCHING_CONF) 
+
+	} else if (reportMode == ScreeningProcessor::BEST_MATCHING_CONF) 
 		bestConfAlmntScore = NAN_SCORE;
 
 	if (!hitCallback)

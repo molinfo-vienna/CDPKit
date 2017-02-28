@@ -37,6 +37,8 @@
 
 #include "CDPL/Chem/Fragment.hpp"
 #include "CDPL/Biomol/PDBData.hpp"
+#include "CDPL/Biomol/ResidueDictionary.hpp"
+#include "CDPL/Util/BitSet.hpp"
 
 
 namespace CDPL 
@@ -83,7 +85,7 @@ namespace CDPL
 			std::size_t readTERRecord(std::istream&, Chem::Molecule&);
 			std::size_t readHETATMRecord(std::istream&, Chem::Molecule&);
 			std::size_t readENDMDLRecord();
-			std::size_t readCONECTRecord(std::istream&, Chem::Molecule&) const;
+			std::size_t readCONECTRecord(std::istream&, Chem::Molecule&);
 			std::size_t readMASTERRecord(std::istream&);
 
 			void readATOMRecord(std::istream&, Chem::Molecule&, const std::string&, bool);
@@ -97,20 +99,40 @@ namespace CDPL
 			void processAtomSequence(Chem::Molecule&, bool);
 
 			void perceiveBondOrders(Chem::Molecule&);
+			void calcAtomCharges(Chem::Molecule&);
 			
+			void setDictBondOrderFlag(std::size_t bond_idx, bool flags = true);
+			bool getDictBondOrderFlag(std::size_t bond_idx) const;
+
 			typedef std::vector<Chem::Atom*> AtomList;
 			typedef boost::unordered_map<std::string, std::size_t> RecordHistogram;
 			typedef boost::unordered_map<std::size_t, Chem::Atom*> SerialToAtomMap;
 			typedef boost::unordered_map<std::string, Chem::Atom*> NameToAtomMap;
+			typedef ResidueDictionary::SharedPointer ResDictPointer;
 
 			const Base::DataIOBase& ioBase;
 			std::string             stringData;
 			bool                    strictErrorChecking;
 			bool                    checkLineLength;
+			ResDictPointer          resDictionary;
+			bool                    useDictForStdResidues;
+			bool                    useDictForNonStdResidues;
+			bool                    applyDictAtomBondingToStdResidues;
+			bool                    applyDictOrderToStdResidues;
+			bool                    applyDictAtomBondingToNonStdResidues;
+			bool                    applyDictOrderToNonStdResidues;
+			bool                    ignoreConectRecords;
+			bool                    setOrdersFromCONECTRecords;
+			bool                    ignoreChargeField;
+			bool                    applyDictAtomCharges;
+			bool                    calcCharges;
+			bool                    perceiveOrders;
+			bool                    evalMASTERRecord;
 			PDBData::SharedPointer  pdbData;
 			RecordHistogram         recordHistogram;
 			std::size_t             currModelID;
 			std::size_t             lastModelID;
+			std::size_t             startAtomCount;
 			std::size_t             startBondCount;
 			std::size_t             numCoordRecords;
 			SerialToAtomMap         serialToAtomMap;
@@ -120,6 +142,7 @@ namespace CDPL
 			AtomList                currResidueLinkAtoms;
 			AtomList                prevResidueLinkAtoms;
 			Chem::Fragment          readMolGraph;
+			Util::BitSet            dictBondOrderMask;
 		};
     }
 }

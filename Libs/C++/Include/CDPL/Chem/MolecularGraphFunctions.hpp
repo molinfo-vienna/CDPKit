@@ -468,7 +468,7 @@ namespace CDPL
 	
 		CDPL_CHEM_API void perceiveHybridizationStates(MolecularGraph& molgraph, bool overwrite);
 
-		CDPL_CHEM_API void perceiveBondOrders(MolecularGraph& molgraph, bool undef_only = true);
+		CDPL_CHEM_API void perceiveBondOrders(MolecularGraph& molgraph, bool overwrite);
 
 		CDPL_CHEM_API void kekulizeBonds(MolecularGraph& molgraph);
 
