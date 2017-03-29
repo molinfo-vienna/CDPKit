@@ -67,7 +67,7 @@ namespace
 
 	const char* stdResidueList[] = {
         "UNK", "ALA", "ARG", "ASN", "ASP", "CYS", "GLN", "GLU", "GLY", "HIS", "ILE", "LEU", "LYS", "MET",
-		"PHE", "PRO", "SER", "THR", "TRP", "TYR", "VAL", "CSE", "PYL", "ASX", "GLX",
+		"PHE", "PRO", "SER", "THR", "TRP", "TYR", "VAL", "CSE", "SEC", "PYL", "ASX", "GLX",
 		"N", "DA", "DC", "DG", "DI", "DU", "DT", "A", "C", "G", "I", "U"
     };
 

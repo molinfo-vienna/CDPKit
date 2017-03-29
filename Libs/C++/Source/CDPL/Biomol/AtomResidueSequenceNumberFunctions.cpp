@@ -34,12 +34,12 @@
 using namespace CDPL; 
 
 
-std::size_t Biomol::getResidueSequenceNumber(const Chem::Atom& atom)
+long Biomol::getResidueSequenceNumber(const Chem::Atom& atom)
 {
-    return atom.getProperty<std::size_t>(AtomProperty::RESIDUE_SEQUENCE_NUMBER);
+    return atom.getProperty<long>(AtomProperty::RESIDUE_SEQUENCE_NUMBER);
 }
 
-void Biomol::setResidueSequenceNumber(Chem::Atom& atom, std::size_t seq_no)
+void Biomol::setResidueSequenceNumber(Chem::Atom& atom, long seq_no)
 {
     atom.setProperty(AtomProperty::RESIDUE_SEQUENCE_NUMBER, seq_no);
 }

@@ -79,24 +79,6 @@ namespace CDPL
 		CDPL_BIOMOL_API void clearPDBResidueDictionaryParameter(Base::ControlParameterContainer& cntnr);
 
 
-		CDPL_BIOMOL_API bool getPDBUseDictForNonStdResiduesParameter(const Base::ControlParameterContainer& cntnr);
-
-		CDPL_BIOMOL_API void setPDBUseDictForNonStdResiduesParameter(Base::ControlParameterContainer& cntnr, bool use);
-
-		CDPL_BIOMOL_API bool hasPDBUseDictForNonStdResiduesParameter(const Base::ControlParameterContainer& cntnr);
-
-		CDPL_BIOMOL_API void clearPDBUseDictForNonStdResiduesParameter(Base::ControlParameterContainer& cntnr);
-
-
-		CDPL_BIOMOL_API bool getPDBUseDictForStdResiduesParameter(const Base::ControlParameterContainer& cntnr);
-
-		CDPL_BIOMOL_API void setPDBUseDictForStdResiduesParameter(Base::ControlParameterContainer& cntnr, bool use);
-
-		CDPL_BIOMOL_API bool hasPDBUseDictForStdResiduesParameter(const Base::ControlParameterContainer& cntnr);
-
-		CDPL_BIOMOL_API void clearPDBUseDictForStdResiduesParameter(Base::ControlParameterContainer& cntnr);
-
-
 		CDPL_BIOMOL_API bool getPDBApplyDictAtomBondingToStdResiduesParameter(const Base::ControlParameterContainer& cntnr);
 
 		CDPL_BIOMOL_API void setPDBApplyDictAtomBondingToStdResiduesParameter(Base::ControlParameterContainer& cntnr, bool apply);
@@ -169,22 +151,31 @@ namespace CDPL
 		CDPL_BIOMOL_API void clearPDBApplyDictFormalAtomChargesParameter(Base::ControlParameterContainer& cntnr);
 
 
-		CDPL_BIOMOL_API bool getPDBCalcFormalChargesParameter(const Base::ControlParameterContainer& cntnr);
+		CDPL_BIOMOL_API bool getPDBApplyDictAtomTypesParameter(const Base::ControlParameterContainer& cntnr);
 
-		CDPL_BIOMOL_API void setPDBCalcFormalChargesParameter(Base::ControlParameterContainer& cntnr, bool calc);
+		CDPL_BIOMOL_API void setPDBApplyDictAtomTypesParameter(Base::ControlParameterContainer& cntnr, bool apply);
 
-		CDPL_BIOMOL_API bool hasPDBCalcFormalChargesParameter(const Base::ControlParameterContainer& cntnr);
+		CDPL_BIOMOL_API bool hasPDBApplyDictAtomTypesParameter(const Base::ControlParameterContainer& cntnr);
 
-		CDPL_BIOMOL_API void clearPDBCalcFormalChargesParameter(Base::ControlParameterContainer& cntnr);
+		CDPL_BIOMOL_API void clearPDBApplyDictAtomTypesParameter(Base::ControlParameterContainer& cntnr);
 
 
-		CDPL_BIOMOL_API bool getPDBPerceiveBondOrdersParameter(const Base::ControlParameterContainer& cntnr);
+		CDPL_BIOMOL_API bool getPDBCalcMissingFormalChargesParameter(const Base::ControlParameterContainer& cntnr);
 
-		CDPL_BIOMOL_API void setPDBPerceiveBondOrdersParameter(Base::ControlParameterContainer& cntnr, bool perceive);
+		CDPL_BIOMOL_API void setPDBCalcMissingFormalChargesParameter(Base::ControlParameterContainer& cntnr, bool calc);
 
-		CDPL_BIOMOL_API bool hasPDBPerceiveBondOrdersParameter(const Base::ControlParameterContainer& cntnr);
+		CDPL_BIOMOL_API bool hasPDBCalcMissingFormalChargesParameter(const Base::ControlParameterContainer& cntnr);
 
-		CDPL_BIOMOL_API void clearPDBPerceiveBondOrdersParameter(Base::ControlParameterContainer& cntnr);
+		CDPL_BIOMOL_API void clearPDBCalcMissingFormalChargesParameter(Base::ControlParameterContainer& cntnr);
+
+
+		CDPL_BIOMOL_API bool getPDBPerceiveMissingBondOrdersParameter(const Base::ControlParameterContainer& cntnr);
+
+		CDPL_BIOMOL_API void setPDBPerceiveMissingBondOrdersParameter(Base::ControlParameterContainer& cntnr, bool perceive);
+
+		CDPL_BIOMOL_API bool hasPDBPerceiveMissingBondOrdersParameter(const Base::ControlParameterContainer& cntnr);
+
+		CDPL_BIOMOL_API void clearPDBPerceiveMissingBondOrdersParameter(Base::ControlParameterContainer& cntnr);
 
 
 		CDPL_BIOMOL_API bool getPDBEvaluateMASTERRecordParameter(const Base::ControlParameterContainer& cntnr);
@@ -194,6 +185,51 @@ namespace CDPL
 		CDPL_BIOMOL_API bool hasPDBEvaluateMASTERRecordParameter(const Base::ControlParameterContainer& cntnr);
 
 		CDPL_BIOMOL_API void clearPDBEvaluateMASTERRecordParameter(Base::ControlParameterContainer& cntnr);
+
+
+		CDPL_BIOMOL_API bool getPDBTruncateLinesParameter(const Base::ControlParameterContainer& cntnr);
+
+		CDPL_BIOMOL_API void setPDBTruncateLinesParameter(Base::ControlParameterContainer& cntnr, bool trunc);
+
+		CDPL_BIOMOL_API bool hasPDBTruncateLinesParameter(const Base::ControlParameterContainer& cntnr);
+
+		CDPL_BIOMOL_API void clearPDBTruncateLinesParameter(Base::ControlParameterContainer& cntnr);
+
+
+		CDPL_BIOMOL_API bool getPDBWriteFormalChargesParameter(const Base::ControlParameterContainer& cntnr);
+
+		CDPL_BIOMOL_API void setPDBWriteFormalChargesParameter(Base::ControlParameterContainer& cntnr, bool write);
+
+		CDPL_BIOMOL_API bool hasPDBWriteFormalChargesParameter(const Base::ControlParameterContainer& cntnr);
+
+		CDPL_BIOMOL_API void clearPDBWriteFormalChargesParameter(Base::ControlParameterContainer& cntnr);
+
+
+		CDPL_BIOMOL_API bool getPDBWriteCONECTRecordsParameter(const Base::ControlParameterContainer& cntnr);
+
+		CDPL_BIOMOL_API void setPDBWriteCONECTRecordsParameter(Base::ControlParameterContainer& cntnr, bool write);
+
+		CDPL_BIOMOL_API bool hasPDBWriteCONECTRecordsParameter(const Base::ControlParameterContainer& cntnr);
+
+		CDPL_BIOMOL_API void clearPDBWriteCONECTRecordsParameter(Base::ControlParameterContainer& cntnr);
+
+
+		CDPL_BIOMOL_API bool getPDBWriteCONECTRecordsForAllBondsParameter(const Base::ControlParameterContainer& cntnr);
+
+		CDPL_BIOMOL_API void setPDBWriteCONECTRecordsForAllBondsParameter(Base::ControlParameterContainer& cntnr, bool write);
+
+		CDPL_BIOMOL_API bool hasPDBWriteCONECTRecordsForAllBondsParameter(const Base::ControlParameterContainer& cntnr);
+
+		CDPL_BIOMOL_API void clearPDBWriteCONECTRecordsForAllBondsParameter(Base::ControlParameterContainer& cntnr);
+
+
+		CDPL_BIOMOL_API bool getPDBWriteCONECTRecordsReflectingBondOrderParameter(const Base::ControlParameterContainer& cntnr);
+
+		CDPL_BIOMOL_API void setPDBWriteCONECTRecordsReflectingBondOrderParameter(Base::ControlParameterContainer& cntnr, bool write);
+
+		CDPL_BIOMOL_API bool hasPDBWriteCONECTRecordsReflectingBondOrderParameter(const Base::ControlParameterContainer& cntnr);
+
+		CDPL_BIOMOL_API void clearPDBWriteCONECTRecordsReflectingBondOrderParameter(Base::ControlParameterContainer& cntnr);
 
 		/**
 		 * @}

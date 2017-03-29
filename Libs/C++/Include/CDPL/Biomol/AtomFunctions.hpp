@@ -102,9 +102,9 @@ namespace CDPL
 		CDPL_BIOMOL_API bool hasResidueCode(const Chem::Atom& atom);
 
 
-		CDPL_BIOMOL_API std::size_t getResidueSequenceNumber(const Chem::Atom& atom);
+		CDPL_BIOMOL_API long getResidueSequenceNumber(const Chem::Atom& atom);
 
-		CDPL_BIOMOL_API void setResidueSequenceNumber(Chem::Atom& atom, std::size_t seq_no);
+		CDPL_BIOMOL_API void setResidueSequenceNumber(Chem::Atom& atom, long seq_no);
 
 		CDPL_BIOMOL_API void clearResidueSequenceNumber(Chem::Atom& atom);
 

@@ -62,18 +62,18 @@ def processMolecule(mol, stats):
         if Chem.hasName(mol):
             Chem.setName(largest_comp, Chem.getName(mol))
 
-        if Chem.hasMDLStructureData(mol):
-            Chem.setMDLStructureData(largest_comp, Chem.getMDLStructureData(mol))
+        if Chem.hasStructureData(mol):
+            Chem.setStructureData(largest_comp, Chem.getStructureData(mol))
 
         mol = largest_comp
 
     if Chem.getHeavyAtomCount(mol) < 5:
         return None
 
-    if Chem.getAtomCount(mol, Chem.AtomType.F) > 9:
-        return None
+    #if Chem.getAtomCount(mol, Chem.AtomType.F) > 9:
+    #    return None
 
-    valid_atom_types = [Chem.AtomType.H, Chem.AtomType.C, Chem.AtomType.F, Chem.AtomType.Cl, Chem.AtomType.Br, Chem.AtomType.I, Chem.AtomType.N, Chem.AtomType.O, Chem.AtomType.S, Chem.AtomType.Se, Chem.AtomType.P, Chem.AtomType.Pt, Chem.AtomType.As]    
+    valid_atom_types = [Chem.AtomType.H, Chem.AtomType.C, Chem.AtomType.F, Chem.AtomType.Cl, Chem.AtomType.Br, Chem.AtomType.I, Chem.AtomType.N, Chem.AtomType.O, Chem.AtomType.S, Chem.AtomType.Se, Chem.AtomType.P, Chem.AtomType.Pt, Chem.AtomType.As, Chem.AtomType.Si]    
 
     carbon_seen = False
     hs_to_remove = list()

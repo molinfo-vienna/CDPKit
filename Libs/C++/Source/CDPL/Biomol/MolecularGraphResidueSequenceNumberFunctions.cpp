@@ -34,12 +34,12 @@
 using namespace CDPL; 
 
 
-std::size_t Biomol::getResidueSequenceNumber(const Chem::MolecularGraph& molgraph)
+long Biomol::getResidueSequenceNumber(const Chem::MolecularGraph& molgraph)
 {
-    return molgraph.getProperty<std::size_t>(MolecularGraphProperty::RESIDUE_SEQUENCE_NUMBER);
+    return molgraph.getProperty<long>(MolecularGraphProperty::RESIDUE_SEQUENCE_NUMBER);
 }
 
-void Biomol::setResidueSequenceNumber(Chem::MolecularGraph& molgraph, std::size_t seq_no)
+void Biomol::setResidueSequenceNumber(Chem::MolecularGraph& molgraph, long seq_no)
 {
     molgraph.setProperty(MolecularGraphProperty::RESIDUE_SEQUENCE_NUMBER, seq_no);
 }

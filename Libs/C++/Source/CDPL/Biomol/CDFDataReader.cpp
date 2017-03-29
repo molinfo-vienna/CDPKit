@@ -54,6 +54,7 @@ bool Biomol::CDFDataReader::readAtomProperties(unsigned int handler_id, const Ch
 	CDF::PropertySpec prop_spec;
 	CDF::CharType char_val;
 	CDF::SizeType size_val;
+	CDF::LongType long_val;
 	CDF::BoolType bool_val;
 	std::string string_val;
 
@@ -91,8 +92,8 @@ bool Biomol::CDFDataReader::readAtomProperties(unsigned int handler_id, const Ch
 				continue;
 
 			case CDF::AtomProperty::RESIDUE_SEQUENCE_NUMBER:
-				reader.getIntProperty(prop_spec, size_val, data);
-				setResidueSequenceNumber(atom, size_val);
+				reader.getIntProperty(prop_spec, long_val, data);
+				setResidueSequenceNumber(atom, long_val);
 				continue;
 
 			case CDF::AtomProperty::RESIDUE_INSERTION_CODE:
@@ -135,6 +136,7 @@ bool Biomol::CDFDataReader::readMoleculeProperties(unsigned int handler_id, cons
 	CDF::PropertySpec prop_spec;
 	CDF::CharType char_val;
 	CDF::SizeType size_val;
+	CDF::LongType long_val;
 	std::string string_val;
 
 	while (true) {
@@ -151,8 +153,8 @@ bool Biomol::CDFDataReader::readMoleculeProperties(unsigned int handler_id, cons
 				continue;
 
 			case CDF::MolecularGraphProperty::RESIDUE_SEQUENCE_NUMBER:
-				reader.getIntProperty(prop_spec, size_val, data);
-				setResidueSequenceNumber(mol, size_val);
+				reader.getIntProperty(prop_spec, long_val, data);
+				setResidueSequenceNumber(mol, long_val);
 				continue;
 
 			case CDF::MolecularGraphProperty::RESIDUE_INSERTION_CODE:

@@ -63,7 +63,7 @@ unsigned int Biomol::CDFDataWriter::outputAtomProperties(const Chem::CDFDataWrit
 		writer.putStringProperty(CDF::AtomProperty::RESIDUE_CODE, getResidueCode(atom), data);
 
 	if (hasResidueSequenceNumber(atom))
-		writer.putIntProperty(CDF::AtomProperty::RESIDUE_SEQUENCE_NUMBER, boost::numeric_cast<CDF::SizeType>(getResidueSequenceNumber(atom)), data);
+		writer.putIntProperty(CDF::AtomProperty::RESIDUE_SEQUENCE_NUMBER, boost::numeric_cast<CDF::LongType>(getResidueSequenceNumber(atom)), data);
 
 	if (hasResidueInsertionCode(atom))
 		writer.putIntProperty(CDF::AtomProperty::RESIDUE_INSERTION_CODE, boost::numeric_cast<CDF::CharType>(getResidueInsertionCode(atom)), data);
@@ -89,7 +89,7 @@ unsigned int Biomol::CDFDataWriter::outputMolGraphProperties(const Chem::CDFData
 		writer.putStringProperty(CDF::MolecularGraphProperty::RESIDUE_CODE, getResidueCode(molgraph), data);
 
 	if (hasResidueSequenceNumber(molgraph))
-		writer.putIntProperty(CDF::MolecularGraphProperty::RESIDUE_SEQUENCE_NUMBER, boost::numeric_cast<CDF::SizeType>(getResidueSequenceNumber(molgraph)), data);
+		writer.putIntProperty(CDF::MolecularGraphProperty::RESIDUE_SEQUENCE_NUMBER, boost::numeric_cast<CDF::LongType>(getResidueSequenceNumber(molgraph)), data);
 
 	if (hasResidueInsertionCode(molgraph))
 		writer.putIntProperty(CDF::MolecularGraphProperty::RESIDUE_INSERTION_CODE, boost::numeric_cast<CDF::CharType>(getResidueInsertionCode(molgraph)), data);

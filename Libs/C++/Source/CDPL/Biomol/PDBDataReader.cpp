@@ -101,10 +101,13 @@ namespace
 		bool operator()(const Chem::Atom* atom1, const Chem::Atom* atom2) const {
 			using namespace Biomol;
 
-			if (getResidueAtomName(*atom1) == getResidueAtomName(*atom2))
+			const std::string& res_atom_name1 = getResidueAtomName(*atom1);
+			const std::string& res_atom_name2 = getResidueAtomName(*atom2);
+
+			if (res_atom_name1 == res_atom_name2)
 				return (getAltLocationID(*atom1) < getAltLocationID(*atom2));
 	
-			return (getSerialNumber(*atom1) < getSerialNumber(*atom2));
+			return (res_atom_name1 < res_atom_name2);
 		}
 	};
 
@@ -174,7 +177,7 @@ bool Biomol::PDBDataReader::readPDBFile(std::istream& is, Chem::Molecule& mol)
 			rem_llen -= readGenericDataRecord(is, PDB::KEYWDS_DATA_LENGTH, PDBData::KEYWDS, rec_name);
 
 		else if (rec_name == PDB::EXPDTA_PREFIX)
-			rem_llen -= readGenericDataRecord(is, PDB::EXPDTA_DATA_LENGTH, PDBData::KEYWDS, rec_name);
+			rem_llen -= readGenericDataRecord(is, PDB::EXPDTA_DATA_LENGTH, PDBData::EXPDTA, rec_name);
 
 		else if (rec_name == PDB::NUMMDL_PREFIX)
 			rem_llen -= skipRecordData(is, PDB::NUMMDL_DATA_LENGTH, rec_name);
@@ -225,7 +228,7 @@ bool Biomol::PDBDataReader::readPDBFile(std::istream& is, Chem::Molecule& mol)
 			rem_llen -= readGenericDataRecord(is, PDB::HETNAM_DATA_LENGTH, PDBData::HETNAM, rec_name);
 
 		else if (rec_name == PDB::HETSYN_PREFIX)
-			rem_llen -= skipRecordData(is, PDB::HETSYN_DATA_LENGTH, rec_name);
+			rem_llen -= readGenericDataRecord(is, PDB::HETSYN_DATA_LENGTH, PDBData::HETSYN, rec_name);
 
 		else if (rec_name == PDB::HELIX_PREFIX)
 			rem_llen -= readGenericDataRecord(is, PDB::HELIX_DATA_LENGTH, PDBData::HELIX, rec_name);
@@ -233,7 +236,7 @@ bool Biomol::PDBDataReader::readPDBFile(std::istream& is, Chem::Molecule& mol)
 		else if (rec_name == PDB::SHEET_PREFIX)
 			rem_llen -= readGenericDataRecord(is, PDB::SHEET_DATA_LENGTH, PDBData::SHEET, rec_name);
 
-		else if (rec_name == PDB::TURN_PREFIX) 
+		else if (rec_name == PDB::TURN_PREFIX) // obsolete
 			rem_llen -= readGenericDataRecord(is, PDB::TURN_DATA_LENGTH, PDBData::TURN, rec_name);
 
 		else if (rec_name == PDB::SSBOND_PREFIX)
@@ -243,7 +246,7 @@ bool Biomol::PDBDataReader::readPDBFile(std::istream& is, Chem::Molecule& mol)
 			rem_llen -= readGenericDataRecord(is, PDB::LINK_DATA_LENGTH, PDBData::LINK, rec_name);
 
 		else if (rec_name == PDB::CISPEP_PREFIX)
-			rem_llen -= skipRecordData(is, PDB::CISPEP_DATA_LENGTH, rec_name);
+			rem_llen -= readGenericDataRecord(is, PDB::CISPEP_DATA_LENGTH, PDBData::CISPEP, rec_name);
 
 		else if (rec_name == PDB::SITE_PREFIX)
 			rem_llen -= readGenericDataRecord(is, PDB::SITE_DATA_LENGTH, PDBData::SITE, rec_name);
@@ -294,7 +297,7 @@ bool Biomol::PDBDataReader::readPDBFile(std::istream& is, Chem::Molecule& mol)
 			rem_llen -= readHETATMRecord(is, mol); 
 
 		else if (rec_name == PDB::ENDMDL_PREFIX) 
-			rem_llen -= readENDMDLRecord();
+			rem_llen -= readENDMDLRecord(mol);
 
 		else if (rec_name == PDB::CONECT_PREFIX)
 			rem_llen -= readCONECTRecord(is, mol); 
@@ -320,6 +323,7 @@ bool Biomol::PDBDataReader::readPDBFile(std::istream& is, Chem::Molecule& mol)
 	checkMandatoryRecords();
 
 	processAtomSequence(mol, false);
+	setBondOrdersFromResTemplates(mol);
 	perceiveBondOrders(mol);
 	calcAtomCharges(mol);
 
@@ -370,8 +374,6 @@ void Biomol::PDBDataReader::init(std::istream& is, Chem::Molecule& mol)
 	init(is);
 
 	resDictionary                        = getPDBResidueDictionaryParameter(ioBase);
-	useDictForStdResidues                = getPDBUseDictForStdResiduesParameter(ioBase);
-	useDictForNonStdResidues             = getPDBUseDictForNonStdResiduesParameter(ioBase);
 	applyDictAtomBondingToStdResidues    = getPDBApplyDictAtomBondingToStdResiduesParameter(ioBase);
 	applyDictOrderToStdResidues          = getPDBApplyDictBondOrdersToStdResiduesParameter(ioBase);
 	applyDictAtomBondingToNonStdResidues = getPDBApplyDictAtomBondingToNonStdResiduesParameter(ioBase);
@@ -380,8 +382,9 @@ void Biomol::PDBDataReader::init(std::istream& is, Chem::Molecule& mol)
 	setOrdersFromCONECTRecords           = getPDBDeduceBondOrdersFromCONECTRecordsParameter(ioBase);
 	ignoreChargeField                    = getPDBIgnoreFormalChargeFieldParameter(ioBase);
 	applyDictAtomCharges                 = getPDBApplyDictFormalAtomChargesParameter(ioBase);
-	calcCharges                          = getPDBCalcFormalChargesParameter(ioBase);
-	perceiveOrders                       = getPDBPerceiveBondOrdersParameter(ioBase);
+	applyDictAtomTypes                   = getPDBApplyDictAtomTypesParameter(ioBase);
+	calcCharges                          = getPDBCalcMissingFormalChargesParameter(ioBase);
+	perceiveOrders                       = getPDBPerceiveMissingBondOrdersParameter(ioBase);
 	evalMASTERRecord                     = getPDBEvaluateMASTERRecordParameter(ioBase);
 
 	pdbData = PDBData::SharedPointer(new PDBData());
@@ -394,7 +397,7 @@ void Biomol::PDBDataReader::init(std::istream& is, Chem::Molecule& mol)
 	recordHistogram.clear();
 	serialToAtomMap.clear();
 	atomSequence.clear();
-	dictBondOrderMask.reset();
+	bondOrderCache.clear();
 }
 
 std::size_t Biomol::PDBDataReader::readGenericDataRecord(std::istream& is, std::size_t data_len, PDBData::RecordType rec_type, const std::string& rec_name)
@@ -440,9 +443,9 @@ std::size_t Biomol::PDBDataReader::readTERRecord(std::istream& is, Chem::Molecul
 	if (strictErrorChecking) {
 		std::size_t serial = readPDBNumber<std::size_t, 5>(is, "PDBDataReader: error while reading serial number from TER record", true);
 
-		SerialToAtomMap::const_iterator term_atom_it = serialToAtomMap.find(serial - 1);
+		SerialToAtomMap::mapped_type::const_iterator term_atom_it = serialToAtomMap[currModelID].find(serial - 1);
 
-		if (term_atom_it == serialToAtomMap.end())
+		if (term_atom_it == serialToAtomMap[currModelID].end())
 			throw Base::IOError("PDBDataReader: error while processing TER record: no preceeding terminal atom with serial number " + 
 								boost::lexical_cast<std::string>(serial - 1) + " found");
  
@@ -467,7 +470,7 @@ std::size_t Biomol::PDBDataReader::readTERRecord(std::istream& is, Chem::Molecul
 		if (getChainID(term_atom) != stringData[0])
 			throw Base::IOError("PDBDataReader: chain ID in TER record does not match chain ID of terminal atom");
 
-		std::size_t res_seq_num = readPDBNumber<std::size_t, 4>(is, "PDBDataReader: error while reading residue sequence number from TER record", true);
+		long res_seq_num = readPDBNumber<long, 4>(is, "PDBDataReader: error while reading residue sequence number from TER record", true);
 
 		if (getResidueSequenceNumber(term_atom) != res_seq_num)
 			throw Base::IOError("PDBDataReader: residue sequence number in TER record does not match residue sequence number of terminal atom");
@@ -495,10 +498,12 @@ std::size_t Biomol::PDBDataReader::readHETATMRecord(std::istream& is, Chem::Mole
 	return PDB::HETATM_DATA_LENGTH;
 }
 
-std::size_t Biomol::PDBDataReader::readENDMDLRecord()
+std::size_t Biomol::PDBDataReader::readENDMDLRecord(Chem::Molecule& mol)
 {
 	if (strictErrorChecking && currModelID == 0)
 		throw Base::IOError("PDBDataReader: read ENDMDL record without foregoing MODEL record");
+
+	processAtomSequence(mol, false);
 
 	lastModelID = currModelID;
 	currModelID = 0;
@@ -513,9 +518,8 @@ std::size_t Biomol::PDBDataReader::readCONECTRecord(std::istream& is, Chem::Mole
 		return PDB::CONECT_DATA_LENGTH;
 	}
 
-	Chem::Atom* atoms[5];
+	std::size_t serials[5];
 	std::size_t num_atoms = 0;
-	SerialToAtomMap::const_iterator s2a_end_it = serialToAtomMap.end();
 	std::size_t chars_read = 0;
 
 	for (std::size_t i = 0; i < 5; i++) {
@@ -525,17 +529,7 @@ std::size_t Biomol::PDBDataReader::readCONECTRecord(std::istream& is, Chem::Mole
 			break;
 
 		chars_read += 5;
-		SerialToAtomMap::const_iterator it = serialToAtomMap.find(serial);
-
-		if (it == s2a_end_it) { 
-			if (strictErrorChecking || num_atoms == 0)
-				throw Base::IOError("PDBDataReader: error while reading CONECT record: atom with serial number " + 
-									boost::lexical_cast<std::string>(serial) + " not found");
-
-			continue;
-		}
-
-		atoms[num_atoms++] = it->second;
+		serials[num_atoms++] = serial;
 	}
 
 	if (num_atoms <= 1) {
@@ -548,32 +542,48 @@ std::size_t Biomol::PDBDataReader::readCONECTRecord(std::istream& is, Chem::Mole
 	if (ignoreConectRecords)
 		return chars_read;
 
-	std::size_t first_atm_idx = mol.getAtomIndex(*atoms[0]);
+	for (SerialToAtomMap::const_iterator map_it = serialToAtomMap.begin(), maps_end = serialToAtomMap.end(); map_it != maps_end; ++ map_it) { 
+		Chem::Atom* atoms[5] = { 0, 0, 0, 0, 0 };
 
-	for (std::size_t i = 1; i < num_atoms; i++) {
-		if (setOrdersFromCONECTRecords) {
-			Chem::Bond* bond = atoms[0]->findBondToAtom(*atoms[i]);
+		for (std::size_t i = 0; i < num_atoms; i++) {
+			SerialToAtomMap::mapped_type::const_iterator a_it = map_it->second.find(serials[i]);
 
-			if (bond) {
-				std::size_t bond_idx = mol.getBondIndex(*bond);
+			if (a_it == map_it->second.end()) {
+				if (strictErrorChecking || i == 0)
+					throw Base::IOError("PDBDataReader: error while reading CONECT record: atom with serial number " + 
+										boost::lexical_cast<std::string>(serials[i]) + " not found");
 
-				if (getDictBondOrderFlag(bond_idx))
-					continue;
+				continue;
+			}
 
-				if (&bond->getBegin() == atoms[0]) {
-					if (!hasOrder(*bond))
-						setOrder(*bond, 1);
-					else
-						setOrder(*bond, getOrder(*bond) + 1);
-				}
-
-			} else 
-				setOrder(mol.addBond(first_atm_idx, mol.getAtomIndex(*atoms[i])), 1);
-			
-			continue;
+			atoms[i] = a_it->second;
 		}
 
-		mol.addBond(first_atm_idx, mol.getAtomIndex(*atoms[i]));
+		std::size_t first_atm_idx = mol.getAtomIndex(*atoms[0]);
+
+		for (std::size_t i = 1; i < num_atoms; i++) {
+			if (!atoms[i])
+				continue;
+
+			if (setOrdersFromCONECTRecords) {
+				Chem::Bond* bond = atoms[0]->findBondToAtom(*atoms[i]);
+
+				if (bond) {
+					if (&bond->getBegin() == atoms[0]) {
+						if (!hasOrder(*bond))
+							setOrder(*bond, 1);
+						else
+							setOrder(*bond, getOrder(*bond) + 1);
+					}
+
+				} else 
+					setOrder(mol.addBond(first_atm_idx, mol.getAtomIndex(*atoms[i])), 1);
+			
+				continue;
+			}
+
+			mol.addBond(first_atm_idx, mol.getAtomIndex(*atoms[i]));
+		}
 	}
 
 	return chars_read;
@@ -607,7 +617,9 @@ std::size_t Biomol::PDBDataReader::readMASTERRecord(std::istream& is)
 		recordHistogram[PDB::SHEET_PREFIX])
 		throw Base::IOError("PDBDataReader: number of read SHEET records does not match count in MASTER record");
 
-	readPDBNumber<std::size_t, 5>(is, "PDBDataReader: error while reading number of TURN records from MASTER record", true); // deprecated, so just check number format
+	if (readPDBNumber<std::size_t, 5>(is, "PDBDataReader: error while reading number of TURN records from MASTER record", true) != // deprecated
+		recordHistogram[PDB::TURN_PREFIX])
+		throw Base::IOError("PDBDataReader: number of read TURN records does not match count in MASTER record");
 
 	if (readPDBNumber<std::size_t, 5>(is, "PDBDataReader: error while reading number of SITE records from MASTER record", true) != 
 		recordHistogram[PDB::SITE_PREFIX])
@@ -619,7 +631,7 @@ std::size_t Biomol::PDBDataReader::readMASTERRecord(std::istream& is)
 		 recordHistogram[PDB::MTRIX1_PREFIX] + recordHistogram[PDB::MTRIX2_PREFIX] + recordHistogram[PDB::MTRIX3_PREFIX]))
 		throw Base::IOError("PDBDataReader: number of read coordinate transformation records does not match count in MASTER record");
 
-	readPDBNumber<std::size_t, 5>(is, "PDBDataReader: error while reading number of atomic coordinate records from MASTER record", true); // is wrong most of the time -> just check number format
+	readPDBNumber<std::size_t, 5>(is, "PDBDataReader: error while reading number of atomic coordinate records from MASTER record", true); // is wrong most of the time -> so just check number format
 
 	// if (readPDBNumber<std::size_t, 5>(is, "PDBDataReader: error while reading number of atomic coordinate records from MASTER record", true) != 
 	// 	numCoordRecords)                            
@@ -643,10 +655,9 @@ std::size_t Biomol::PDBDataReader::readMASTERRecord(std::istream& is)
 void Biomol::PDBDataReader::readATOMRecord(std::istream& is, Chem::Molecule& mol, const std::string& rec_name, bool het_atom)
 {
 	std::size_t serial = readPDBNumber<std::size_t, 5>(is, "PDBDataReader: error while reading serial number from " + rec_name + " record", true);
-
 	Chem::Atom* atom = &mol.addAtom();
 
-	serialToAtomMap[serial] = atom;		
+	serialToAtomMap[currModelID][serial] = atom;		
 
 	setHeteroAtomFlag(*atom, het_atom);
 	setModelNumber(*atom, currModelID);
@@ -673,7 +684,7 @@ void Biomol::PDBDataReader::readATOMRecord(std::istream& is, Chem::Molecule& mol
 
 	setResidueCode(*atom, stringData);
 
-	if (het_atom && stringData != "HOH")
+	if (het_atom && stringData != PDB::WATER_RES_NAME)
 		recordHistogram[PDB::HETGRP_PREFIX] = 1;
 
 	skipPDBChars(is, 1, "PDBDataReader: error while skipping characters in " + rec_name + " record");
@@ -684,8 +695,9 @@ void Biomol::PDBDataReader::readATOMRecord(std::istream& is, Chem::Molecule& mol
 
 	setChainID(*atom, stringData[0]);
 
-	std::size_t res_seq_num = readPDBNumber<std::size_t, 4>(is, "PDBDataReader: error while reading residue sequence number from " + 
-															rec_name + " record", true);
+	long res_seq_num = readPDBNumber<long, 4>(is, "PDBDataReader: error while reading residue sequence number from " + 
+											  rec_name + " record", true);
+
 	setResidueSequenceNumber(*atom, res_seq_num);
 
 	readPDBString(is, 1, stringData, true, "PDBDataReader: error while reading residue insertion code from " + rec_name + " record", false);
@@ -756,7 +768,10 @@ void Biomol::PDBDataReader::readATOMRecord(std::istream& is, Chem::Molecule& mol
 			throw Base::IOError("PDBDataReader: invalid formal charge specification format in " + rec_name + " record");
 	}
 
-	if (currModelID < 2)
+	if (stringData.empty() && !ignoreChargeField)
+		setFormalCharge(*atom, 0);
+
+	//if (currModelID < 2)
 		numCoordRecords++;
 }
 
@@ -862,7 +877,9 @@ void Biomol::PDBDataReader::processAtomSequence(Chem::Molecule& mol, bool chain_
 
 	prevResidueAtoms.clear();
 	prevResidueLinkAtoms.clear();
-	
+
+	const ResidueDictionary& res_dict = (resDictionary ? *resDictionary : ResidueDictionary::get());
+
 	for (AtomList::iterator as_it = atomSequence.begin(), as_end = atomSequence.end(); as_it != as_end; ) {
 		Atom* first_atom = *as_it;
 		std::size_t res_id = (getResidueSequenceNumber(*first_atom) << (sizeof(char) * 8)) + getResidueInsertionCode(*first_atom);
@@ -908,28 +925,20 @@ void Biomol::PDBDataReader::processAtomSequence(Chem::Molecule& mol, bool chain_
 
 				coords->addElement(get3DCoordinates(*next_atom));
 
-				serialToAtomMap[getSerialNumber(*next_atom)] = atom;
+				serialToAtomMap[currModelID][getSerialNumber(*next_atom)] = atom;
 				mol.removeAtom(next_atom->getIndex());
 			}
 
 			set3DCoordinatesArray(*atom, coords);
 		}
 
-		MolecularGraph::SharedPointer res_tmplt;
-		bool is_std_res = false;
-
-		if (resDictionary) {
-			res_tmplt = resDictionary->getStructure(res_code);
-			is_std_res = resDictionary->isStdResidue(res_code);
-		} else {
-			res_tmplt = ResidueDictionary::getStructure(res_code);
-			is_std_res = ResidueDictionary::isStdResidue(res_code);
-		}
+		MolecularGraph::SharedPointer res_tmplt = res_dict.getStructure(res_code);
+		bool is_std_res = res_dict.isStdResidue(res_code);
 
 		if (res_tmplt) {
 			//std::cerr << "Using residue dictionary template for " << res_code << std::endl;
 
-			if ((is_std_res && useDictForStdResidues) || (!is_std_res && useDictForNonStdResidues)) {
+			if (applyDictAtomTypes || applyDictAtomCharges) {
 				for (MolecularGraph::ConstAtomIterator a_it = res_tmplt->getAtomsBegin(), a_end = res_tmplt->getAtomsEnd(); a_it != a_end; ++a_it) {
 					const Atom& atom = *a_it;
 					Atom* res_atom = currResidueAtoms[getResidueAtomName(atom)];
@@ -940,41 +949,36 @@ void Biomol::PDBDataReader::processAtomSequence(Chem::Molecule& mol, bool chain_
 					if (!res_atom)
 						continue;
 				
-					if (!hasType(*res_atom) || getType(*res_atom) == AtomType::UNKNOWN) // fix unknown/missing element spec. in (HET)ATOM record
+					if (applyDictAtomTypes && (!hasType(*res_atom) || getType(*res_atom) == AtomType::UNKNOWN)) // fix unknown/missing element spec. in (HET)ATOM record
 						setType(*res_atom, getType(atom));
 
 					if (applyDictAtomCharges && !hasFormalCharge(*res_atom) && hasFormalCharge(atom))           // fix maybe missing charge spec. in (HET)ATOM record
 						setFormalCharge(*res_atom, getFormalCharge(atom));
 				} 
-			
-				if ((is_std_res && applyDictAtomBondingToStdResidues) || (!is_std_res && applyDictAtomBondingToNonStdResidues)) {
-					for (MolecularGraph::ConstBondIterator b_it = res_tmplt->getBondsBegin(), b_end = res_tmplt->getBondsEnd(); b_it != b_end; ++b_it) {
-						const Bond& bond = *b_it;
+			}
 
-						Atom* res_atom1 = currResidueAtoms[getResidueAtomName(bond.getBegin())];
+			if ((is_std_res && applyDictAtomBondingToStdResidues) || (!is_std_res && applyDictAtomBondingToNonStdResidues)) {
+				for (MolecularGraph::ConstBondIterator b_it = res_tmplt->getBondsBegin(), b_end = res_tmplt->getBondsEnd(); b_it != b_end; ++b_it) {
+					const Bond& bond = *b_it;
 
-						if (!res_atom1) 
-							res_atom1 = currResidueAtoms[getResidueAltAtomName(bond.getBegin())];
+					Atom* res_atom1 = currResidueAtoms[getResidueAtomName(bond.getBegin())];
+
+					if (!res_atom1) 
+						res_atom1 = currResidueAtoms[getResidueAltAtomName(bond.getBegin())];
 	
-						if (!res_atom1)
-							continue;
+					if (!res_atom1)
+						continue;
 
-						Atom* res_atom2 = currResidueAtoms[getResidueAtomName(bond.getEnd())];
+					Atom* res_atom2 = currResidueAtoms[getResidueAtomName(bond.getEnd())];
 
-						if (!res_atom2)
-							res_atom2 = currResidueAtoms[getResidueAltAtomName(bond.getEnd())];
+					if (!res_atom2)
+						res_atom2 = currResidueAtoms[getResidueAltAtomName(bond.getEnd())];
 
-						if (!res_atom2) 
-							continue;
+					if (!res_atom2) 
+						continue;
 
-						Bond& new_bnd = mol.addBond(mol.getAtomIndex(*res_atom1), mol.getAtomIndex(*res_atom2));
-			
-						if ((is_std_res && applyDictOrderToStdResidues) || (!is_std_res && applyDictOrderToNonStdResidues)) {
-							setDictBondOrderFlag(mol.getBondIndex(new_bnd));
-							setOrder(new_bnd, getOrder(bond));
-						}
-					}
-				} 
+					mol.addBond(mol.getAtomIndex(*res_atom1), mol.getAtomIndex(*res_atom2));
+				}
 			}
 		}
 
@@ -998,10 +1002,8 @@ void Biomol::PDBDataReader::processAtomSequence(Chem::Molecule& mol, bool chain_
 						setResidueLeavingAtomFlag(*res_atom, true);
 				} 
 
-			} else {
-				currResidueLinkAtoms.clear();
+			} else 
 				currResidueLinkAtoms.insert(res_as_start_it, as_it, currResidueLinkAtoms.end());
-			}
 
 			bool exit = false;
 
@@ -1035,6 +1037,107 @@ void Biomol::PDBDataReader::processAtomSequence(Chem::Molecule& mol, bool chain_
 	}
 
 	atomSequence.clear();
+}
+
+void Biomol::PDBDataReader::setBondOrdersFromResTemplates(Chem::Molecule& mol)
+{
+	using namespace Chem;
+
+	if (!applyDictOrderToStdResidues && !applyDictOrderToNonStdResidues)
+		return;
+
+	std::string bo_cache_key;
+	const ResidueDictionary& res_dict = (resDictionary ? *resDictionary : ResidueDictionary::get());
+
+	for (Molecule::BondIterator it = mol.getBondsBegin() + startBondCount, end = mol.getBondsEnd(); it != end; ++it) {
+		Bond& bond = *it;
+
+		if (hasOrder(bond))
+			continue;
+
+		const Atom& atom1 = bond.getBegin();
+		const Atom& atom2 = bond.getEnd();
+
+		if (getResidueSequenceNumber(atom1) != getResidueSequenceNumber(atom2))
+			continue;
+
+		const std::string& res_code1 = getResidueCode(atom1);
+		const std::string& res_code2 = getResidueCode(atom2);
+
+		if (res_code1 != res_code2)
+			continue;
+
+		bool is_std_res = res_dict.isStdResidue(res_code1);	
+
+		if ((is_std_res && !applyDictOrderToStdResidues) || (!is_std_res && !applyDictOrderToNonStdResidues))
+			continue;
+
+		const std::string& atom_name1 = getResidueAtomName(atom1);
+		const std::string& atom_name2 = getResidueAtomName(atom2);
+
+		bo_cache_key = res_code1;
+		bo_cache_key.push_back('-');
+		bo_cache_key.append(atom_name1);
+		bo_cache_key.push_back('-');
+		bo_cache_key.append(atom_name2);
+
+		BondOrderCache::const_iterator boc_it = bondOrderCache.find(bo_cache_key);
+
+		if (boc_it != bondOrderCache.end()) {
+			setOrder(bond, boc_it->second); 
+			continue;
+		}
+
+		MolecularGraph::SharedPointer res_tmplt = res_dict.getStructure(res_code1);
+
+		if (!res_tmplt)
+			continue;
+
+		const Atom* tmplt_atom1 = getResTemplateAtom(*res_tmplt, atom_name1);
+
+		if (!tmplt_atom1)
+			continue;
+
+		const Atom* tmplt_atom2 = getResTemplateAtom(*res_tmplt, atom_name2);
+
+		if (!tmplt_atom2)
+			continue;
+
+		const Bond* tmplt_bond = tmplt_atom1->findBondToAtom(*tmplt_atom2);
+
+		if (tmplt_bond) {
+			std::size_t order = getOrder(*tmplt_bond);
+
+			bondOrderCache[bo_cache_key] = order;
+
+			bo_cache_key = res_code1;
+			bo_cache_key.push_back('-');
+			bo_cache_key.append(atom_name2);
+			bo_cache_key.push_back('-');
+			bo_cache_key.append(atom_name1);
+
+			bondOrderCache[bo_cache_key] = order;
+
+			setOrder(bond, order);
+		}
+	}
+}
+
+const Chem::Atom* Biomol::PDBDataReader::getResTemplateAtom(const Chem::MolecularGraph& tmplt, const std::string& atom_name) const
+{
+	using namespace Chem;
+
+	for (MolecularGraph::ConstAtomIterator it = tmplt.getAtomsBegin(), end = tmplt.getAtomsEnd(); it != end; ++it) {
+		const Atom& atom = *it;
+
+		if (getResidueAtomName(atom) == atom_name)
+			return &atom;
+
+		if (getResidueAltAtomName(atom) == atom_name)
+			return &atom;
+	}
+
+	return 0;
 }
 
 void Biomol::PDBDataReader::perceiveBondOrders(Chem::Molecule& mol)
@@ -1091,6 +1194,9 @@ void Biomol::PDBDataReader::calcAtomCharges(Chem::Molecule& mol)
 		if (hasImplicitHydrogenCount(atom))
 			continue;
 
+		if (hasFormalCharge(atom))
+			continue;
+
 		setImplicitHydrogenCount(atom, 0);
 	}
 
@@ -1098,24 +1204,4 @@ void Biomol::PDBDataReader::calcAtomCharges(Chem::Molecule& mol)
 		Chem::calcFormalCharges(readMolGraph, false);
 	else
 		Chem::calcFormalCharges(mol, false);
-}
-	
-void Biomol::PDBDataReader::setDictBondOrderFlag(std::size_t bond_idx, bool flag)
-{
-	std::size_t idx = bond_idx - startBondCount;
-
-	if (idx >= dictBondOrderMask.size())
-		dictBondOrderMask.resize(idx + 1);
-
-	dictBondOrderMask.set(idx, flag);
-}
-
-bool Biomol::PDBDataReader::getDictBondOrderFlag(std::size_t bond_idx) const
-{
-	std::size_t idx = bond_idx - startBondCount;
-
-	if (idx >= dictBondOrderMask.size())
-		return false;
-
-	return dictBondOrderMask.test(idx);
 }

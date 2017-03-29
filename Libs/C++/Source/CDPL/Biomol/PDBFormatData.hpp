@@ -44,6 +44,8 @@ namespace CDPL
 			const std::size_t RECORD_NAME_LENGTH   = 6;
 			const char        END_OF_LINE          = '\n';
 
+			const std::string WATER_RES_NAME       = "HOH";
+
 			// Title Section
 			const std::string  HEADER_PREFIX       = "HEADER";
 			const std::string  OBSLTE_PREFIX       = "OBSLTE";

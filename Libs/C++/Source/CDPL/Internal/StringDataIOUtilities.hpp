@@ -183,7 +183,6 @@ namespace CDPL
 			if (val_str.size() > field_size)
 				throw Base::IOError(err_msg + ": number exceeds limit of " 
 									+ boost::lexical_cast<std::string>(field_size) + " allowed characters"); 
-
 			os << val_str; 
 		}
 	}

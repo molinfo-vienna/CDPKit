@@ -41,9 +41,7 @@ namespace CDPL
 			const bool STRICT_ERROR_CHECKING                               = false;
 			const bool CHECK_LINE_LENGTH                                   = false;
 			const ResidueDictionary::SharedPointer PDB_RESIDUE_DICTIONARY  = ResidueDictionary::SharedPointer();
-			const bool PDB_USE_DICT_FOR_NON_STD_RESIDUES                   = true;
-			const bool PDB_USE_DICT_FOR_STD_RESIDUES                       = true;
-			const bool PDB_APPLY_DICT_ATOM_BONDING_TO_NON_STD_RESIDUES     = true;
+			const bool PDB_APPLY_DICT_ATOM_BONDING_TO_NON_STD_RESIDUES     = false;
 			const bool PDB_APPLY_DICT_ATOM_BONDING_TO_STD_RESIDUES         = true;
 			const bool PDB_APPLY_DICT_BOND_ORDERS_TO_NON_STD_RESIDUES      = true;
 			const bool PDB_APPLY_DICT_BOND_ORDERS_TO_STD_RESIDUES          = true;
@@ -51,9 +49,15 @@ namespace CDPL
 			const bool PDB_DEDUCE_BOND_ORDERS_FROM_CONECT_RECORDS          = false;
 			const bool PDB_IGNORE_FORMAL_CHARGE_FIELD                      = false;
 			const bool PDB_APPLY_DICT_FORMAL_ATOM_CHARGES                  = false;
-			const bool PDB_CALC_FORMAL_CHARGES                             = false;
-			const bool PDB_PERCEIVE_BOND_ORDERS                            = true;
+			const bool PDB_APPLY_DICT_ATOM_TYPES                           = true;
+			const bool PDB_CALC_MISSING_FORMAL_CHARGES                     = false;
+			const bool PDB_PERCEIVE_MISSING_BOND_ORDERS                    = true;
 			const bool PDB_EVALUATE_MASTER_RECORD                          = false;
+			const bool PDB_TRUNCATE_LINES                                  = false;
+			const bool PDB_WRITE_FORMAL_CHARGES                            = true;
+			const bool PDB_WRITE_CONECT_RECORDS                            = true;
+			const bool PDB_WRITE_CONECT_RECORDS_FOR_ALL_BONDS              = false;
+			const bool PDB_WRITE_CONECT_RECORDS_REFLECTING_BOND_ORDER      = false;
 		}
 
 		void initControlParameterDefaults() {}

@@ -71,7 +71,7 @@ namespace
 {
 
 	MAKE_MOLGRAPH_FUNC_WRAPPERS(const std::string&, ResidueCode)
-	MAKE_MOLGRAPH_FUNC_WRAPPERS(std::size_t, ResidueSequenceNumber)
+	MAKE_MOLGRAPH_FUNC_WRAPPERS(long, ResidueSequenceNumber)
 	MAKE_MOLGRAPH_FUNC_WRAPPERS(char, ResidueInsertionCode)
 	MAKE_MOLGRAPH_FUNC_WRAPPERS(char, ChainID)
 	MAKE_MOLGRAPH_FUNC_WRAPPERS(std::size_t, ModelNumber)

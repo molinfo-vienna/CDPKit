@@ -84,11 +84,7 @@ namespace CDPL
 			extern CDPL_BIOMOL_API const Base::LookupKey& CHECK_LINE_LENGTH;
 
 			extern CDPL_BIOMOL_API const Base::LookupKey PDB_RESIDUE_DICTIONARY;
-
-			extern CDPL_BIOMOL_API const Base::LookupKey PDB_USE_DICT_FOR_NON_STD_RESIDUES;
-
-			extern CDPL_BIOMOL_API const Base::LookupKey PDB_USE_DICT_FOR_STD_RESIDUES;
-
+		
 			extern CDPL_BIOMOL_API const Base::LookupKey PDB_APPLY_DICT_ATOM_BONDING_TO_NON_STD_RESIDUES;
 
 			extern CDPL_BIOMOL_API const Base::LookupKey PDB_APPLY_DICT_ATOM_BONDING_TO_STD_RESIDUES;
@@ -105,11 +101,23 @@ namespace CDPL
 
 			extern CDPL_BIOMOL_API const Base::LookupKey PDB_APPLY_DICT_FORMAL_ATOM_CHARGES;
 
-			extern CDPL_BIOMOL_API const Base::LookupKey PDB_CALC_FORMAL_CHARGES;
+			extern CDPL_BIOMOL_API const Base::LookupKey PDB_APPLY_DICT_ATOM_TYPES;
 
-			extern CDPL_BIOMOL_API const Base::LookupKey PDB_PERCEIVE_BOND_ORDERS;
+			extern CDPL_BIOMOL_API const Base::LookupKey PDB_CALC_MISSING_FORMAL_CHARGES;
+
+			extern CDPL_BIOMOL_API const Base::LookupKey PDB_PERCEIVE_MISSING_BOND_ORDERS;
 
 			extern CDPL_BIOMOL_API const Base::LookupKey PDB_EVALUATE_MASTER_RECORD;
+
+			extern CDPL_BIOMOL_API const Base::LookupKey PDB_TRUNCATE_LINES;
+
+			extern CDPL_BIOMOL_API const Base::LookupKey PDB_WRITE_FORMAL_CHARGES;
+
+			extern CDPL_BIOMOL_API const Base::LookupKey PDB_WRITE_CONECT_RECORDS;
+
+			extern CDPL_BIOMOL_API const Base::LookupKey PDB_WRITE_CONECT_RECORDS_FOR_ALL_BONDS;
+
+			extern CDPL_BIOMOL_API const Base::LookupKey PDB_WRITE_CONECT_RECORDS_REFLECTING_BOND_ORDER;
 		}
 
 		/**

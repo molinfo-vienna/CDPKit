@@ -28,6 +28,16 @@
 #define CDPL_BIOMOL_PDBDATAWRITER_HPP
 
 #include <iosfwd>
+#include <string>
+#include <vector>
+#include <cstddef>
+#include <utility>
+
+#include <boost/unordered_map.hpp>
+#include <boost/unordered_set.hpp>
+
+#include "CDPL/Biomol/ResidueDictionary.hpp"
+#include "CDPL/Biomol/PDBData.hpp"
 
 
 namespace CDPL 
@@ -43,12 +53,12 @@ namespace CDPL
     {
 
 		class MolecularGraph;
+		class Atom;
+		class Bond;
 	}
 
     namespace Biomol
     {
-
-		class MolecularGraph;
 
 		class PDBDataWriter
 		{
@@ -56,10 +66,79 @@ namespace CDPL
 		public:
 			PDBDataWriter(const Base::DataIOBase& io_base): ioBase(io_base) {}
 		
-			bool writePDBFileRecord(std::ostream&, const Chem::MolecularGraph&);
+			bool writePDBFileRecord(std::ostream& os, const Chem::MolecularGraph& molgraph);
 		
 		private:
+			void init(std::ostream& os);
+
+			void processAtomSequence(const Chem::MolecularGraph& molgraph);
+			void perceiveCONECTRecordBonds(const Chem::MolecularGraph& molgraph);
+
+			void writeTitleSection(std::ostream& os, const Chem::MolecularGraph& molgraph);
+			void writePrimaryStructureSection(std::ostream& os, const Chem::MolecularGraph& molgraph);
+			void writeHeterogenSection(std::ostream& os, const Chem::MolecularGraph& molgraph);
+			void writeSecondaryStructureSection(std::ostream& os, const Chem::MolecularGraph& molgraph);
+			void writeConnAnnotationSection(std::ostream& os, const Chem::MolecularGraph& molgraph);
+			void writeMiscSection(std::ostream& os, const Chem::MolecularGraph& molgraph);
+			void writeCrystAndCoordTransformSection(std::ostream& os, const Chem::MolecularGraph& molgraph);
+			void writeCoordinateSection(std::ostream& os);
+			void writeConnectivitySection(std::ostream& os, const Chem::MolecularGraph& molgraph);
+			void writeBookkeepingSection(std::ostream& os);
+
+			bool writeGenericDataRecord(std::ostream& os, PDBData::RecordType type, const Chem::MolecularGraph& molgraph, 
+										const std::string& prefix, std::size_t max_llen);
+
+			std::size_t writeATOMRecord(std::ostream& os, std::size_t serial, const Chem::Atom& atom);
+			void writeTERRecord(std::ostream& os, std::size_t serial, const Chem::Atom& atom) const;
+
+			void writeNUMMDLRecord(std::ostream& os) const;
+			void writeMODELRecord(std::ostream& os, std::size_t model_id) const;
+			void writeENDMDLRecord(std::ostream& os) const;
+
+			bool isStandardBond(const Chem::Bond& bond, const Chem::MolecularGraph& tmplt) const;
+			bool isLinkingAtom(const Chem::Atom& atom, const Chem::MolecularGraph& tmplt) const;
+
+			const Chem::Atom* getResTemplateAtom(const Chem::Atom& atom, const Chem::MolecularGraph& tmplt) const;
+
+			bool atomOrderingFunc(const Chem::Atom* atom1, const Chem::Atom* atom2) const;
+/*
+			std::size_t getSerialNumber(const Chem::Atom& atom) const;
+			long getResidueSequenceNumber(const Chem::Atom& atom) const;
+			char getResidueInsertionCode(const Chem::Atom& atom) const;
+			char getChainID(const Chem::Atom& atom) const;
+			bool getHeteroAtomFlag(const Chem::Atom& atom) const;
+			const std::string& getResidueCode(const Chem::Atom& atom) const;
+			const std::string& getResidueAtomName(const Chem::Atom& atom) const;
+*/
+			typedef std::vector<const Chem::Atom*> AtomList;
+			typedef std::vector<std::size_t> AtomSerialList;
+			typedef boost::unordered_map<std::string, std::size_t> RecordHistogram;
+			typedef boost::unordered_map<const Chem::Atom*, std::size_t> AtomToSerialMap;
+			typedef std::pair<std::size_t, std::size_t> SerialPair;
+			typedef boost::unordered_set<SerialPair> SerialPairSet;
+			typedef boost::unordered_set<const Chem::Bond*> BondSet;
+
+			typedef ResidueDictionary::SharedPointer ResDictPointer;
+
 			const Base::DataIOBase& ioBase;
+			bool                    strictErrorChecking;
+			bool                    checkLineLength;
+			bool                    truncLines;
+			bool                    writeFormCharges;
+			bool                    writeConectRecords;
+			bool                    writeConectRecsForAllBonds;
+			bool                    writeConectRecsRefBondOrders;
+			ResDictPointer          resDictionary;
+			AtomList                atomSequence;
+			RecordHistogram         recordHistogram;
+			AtomSerialList          nbrAtomSerials;
+			AtomToSerialMap         atomToSerialMap;
+			AtomToSerialMap         atomToResidueSerialMap;
+			SerialPairSet           writtenConectAtomPairs;
+			SerialPairSet           connectedResidueLookup;
+			BondSet                 conectRecordBonds;
+			std::size_t             numModels;
+			//std::size_t             numWrittenModels;
 		};
     }
 }

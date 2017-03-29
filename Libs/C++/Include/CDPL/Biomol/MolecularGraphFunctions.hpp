@@ -66,9 +66,9 @@ namespace CDPL
 		CDPL_BIOMOL_API bool hasResidueCode(const Chem::MolecularGraph& molgraph);
 
 
-		CDPL_BIOMOL_API std::size_t getResidueSequenceNumber(const Chem::MolecularGraph& molgraph);
+		CDPL_BIOMOL_API long getResidueSequenceNumber(const Chem::MolecularGraph& molgraph);
 
-		CDPL_BIOMOL_API void setResidueSequenceNumber(Chem::MolecularGraph& molgraph, std::size_t seq_no);
+		CDPL_BIOMOL_API void setResidueSequenceNumber(Chem::MolecularGraph& molgraph, long seq_no);
 
 		CDPL_BIOMOL_API void clearResidueSequenceNumber(Chem::MolecularGraph& molgraph);
 

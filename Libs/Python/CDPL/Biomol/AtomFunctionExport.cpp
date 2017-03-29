@@ -92,7 +92,7 @@ namespace
 	MAKE_ATOM_FUNC_WRAPPERS(const std::string&, ResidueAltAtomName)
 	MAKE_ATOM_FUNC_WRAPPERS(const std::string&, ResidueCode)
 	MAKE_ATOM_FUNC_WRAPPERS(bool, HeteroAtomFlag)
-	MAKE_ATOM_FUNC_WRAPPERS(std::size_t, ResidueSequenceNumber)
+	MAKE_ATOM_FUNC_WRAPPERS(long, ResidueSequenceNumber)
 	MAKE_ATOM_FUNC_WRAPPERS(char, ResidueInsertionCode)
 	MAKE_ATOM_FUNC_WRAPPERS(char, ChainID)
 	MAKE_ATOM_FUNC_WRAPPERS(char, AltLocationID)
