@@ -170,6 +170,9 @@
 \defgroup CDPL_CHEM_SDF_IO MDL SD-Files
 \ingroup CDPL_CHEM_DATA_IO
 
+\defgroup CDPL_CHEM_MOL2_IO Sybyl Mol2-Files
+\ingroup CDPL_CHEM_DATA_IO
+
 \defgroup CDPL_CHEM_RXN_IO MDL Rxn-Files
 \ingroup CDPL_CHEM_DATA_IO
 

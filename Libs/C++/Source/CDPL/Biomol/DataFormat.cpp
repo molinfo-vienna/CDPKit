@@ -49,8 +49,8 @@ namespace
 {
 
 	const char* pdbFileExtensions[]    = { "pdb", "ent" };
-	const char* pdbgzFileExtensions[]  = { "pdb.gz", "ent.gz" };
-	const char* pdbbz2FileExtensions[] = { "pdb.bz2", "ent.bz2" };
+	const char* pdbGzFileExtensions[]  = { "pdb.gz", "ent.gz" };
+	const char* pdbBz2FileExtensions[] = { "pdb.bz2", "ent.bz2" };
 }
 
 
@@ -60,9 +60,9 @@ using namespace CDPL;
 const Base::DataFormat Biomol::DataFormat::PDB("PDB", "Brookhaven Protein Data Bank Entry", "chemical/x-pdb", 
 											   pdbFileExtensions, pdbFileExtensions + 2, false);
 const Base::DataFormat Biomol::DataFormat::PDB_GZ("PDB_GZ", "GZip-Compressed Brookhaven Protein Data Bank Entry", "chemical/x-pdb", 
-											   pdbgzFileExtensions, pdbgzFileExtensions + 2, false);
+											   pdbGzFileExtensions, pdbGzFileExtensions + 2, false);
 const Base::DataFormat Biomol::DataFormat::PDB_BZ2("PDB_BZ2", "BZip2-Compressed Brookhaven Protein Data Bank Entry", "chemical/x-pdb", 
-											   pdbbz2FileExtensions, pdbbz2FileExtensions + 2, false);
+											   pdbBz2FileExtensions, pdbBz2FileExtensions + 2, false);
 
 
 namespace CDPL
@@ -98,17 +98,17 @@ namespace
 
 #if defined(HAVE_BOOST_SYSTEM) && defined(HAVE_BOOST_FILESYSTEM) && defined(HAVE_BOOST_IOSTREAMS)
 
-			static const PDBGZMoleculeInputHandler           pdbgzMolInputHandler;
-			static const PDBBZ2MoleculeInputHandler          pdbbz2MolInputHandler;
+			static const PDBGZMoleculeInputHandler           pdbGzMolInputHandler;
+			static const PDBBZ2MoleculeInputHandler          pdbBz2MolInputHandler;
 
-			static const PDBGZMolecularGraphOutputHandler    pdbgzMolGraphOutputHandler;
-			static const PDBBZ2MolecularGraphOutputHandler   pdbbz2MolGraphOutputHandler;
+			static const PDBGZMolecularGraphOutputHandler    pdbGzMolGraphOutputHandler;
+			static const PDBBZ2MolecularGraphOutputHandler   pdbBz2MolGraphOutputHandler;
 
-			DataIOManager<Molecule>::registerInputHandler(pdbgzMolInputHandler);
-			DataIOManager<Molecule>::registerInputHandler(pdbbz2MolInputHandler);
+			DataIOManager<Molecule>::registerInputHandler(pdbGzMolInputHandler);
+			DataIOManager<Molecule>::registerInputHandler(pdbBz2MolInputHandler);
 
-			DataIOManager<MolecularGraph>::registerOutputHandler(pdbgzMolGraphOutputHandler);
-			DataIOManager<MolecularGraph>::registerOutputHandler(pdbbz2MolGraphOutputHandler);
+			DataIOManager<MolecularGraph>::registerOutputHandler(pdbGzMolGraphOutputHandler);
+			DataIOManager<MolecularGraph>::registerOutputHandler(pdbBz2MolGraphOutputHandler);
 
 #endif // defined(HAVE_BOOST_SYSTEM) && defined(HAVE_BOOST_FILESYSTEM) && defined(HAVE_BOOST_IOSTREAMS)
 		}

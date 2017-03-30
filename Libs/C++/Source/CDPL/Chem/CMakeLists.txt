@@ -69,6 +69,10 @@ SET(cdpl-chem_LIB_SRCS
     CDFMolecularGraphWriter.cpp
     CDFReactionReader.cpp
     CDFReactionWriter.cpp
+    MOL2DataReader.cpp
+    MOL2DataWriter.cpp
+    MOL2MoleculeReader.cpp
+    MOL2MolecularGraphWriter.cpp
 
     SubstructureSearch.cpp
     ReactionSubstructureSearch.cpp

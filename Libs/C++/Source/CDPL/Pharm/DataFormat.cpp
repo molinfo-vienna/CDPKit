@@ -56,8 +56,8 @@ namespace
 {
 
 	const char* cdfFileExtensions[]    = { "cdf" };
-	const char* cdfgzFileExtensions[]  = { "cdf.gz" };
-	const char* cdfbz2FileExtensions[] = { "cdf.bz2" };
+	const char* cdfGzFileExtensions[]  = { "cdf.gz" };
+	const char* cdfBz2FileExtensions[] = { "cdf.bz2" };
 	const char* pmlFileExtensions[]    = { "pml" };
 	const char* psdFileExtensions[]    = { "psd" };
 }
@@ -69,9 +69,9 @@ using namespace CDPL;
 const Base::DataFormat Pharm::DataFormat::CDF("CDF", "Native CDPL-Format", "", 
 											  cdfFileExtensions, cdfFileExtensions + 1, true);
 const Base::DataFormat Pharm::DataFormat::CDF_GZ("CDF_GZ", "GZip-Compressed Native CDPL-Format", "", 
-											  cdfgzFileExtensions, cdfgzFileExtensions + 1, true);
+											  cdfGzFileExtensions, cdfGzFileExtensions + 1, true);
 const Base::DataFormat Pharm::DataFormat::CDF_BZ2("CDF_BZ2", "BZip2-Compressed Native CDPL-Format", "", 
-											  cdfbz2FileExtensions, cdfbz2FileExtensions + 1, true);
+											  cdfBz2FileExtensions, cdfBz2FileExtensions + 1, true);
 const Base::DataFormat Pharm::DataFormat::PML("PML", "LigandScout Pharmaceutical Markup Language", "", 
 											  pmlFileExtensions, pmlFileExtensions + 1, true);
 const Base::DataFormat Pharm::DataFormat::PSD("PSD", "Pharmacophore Screening Database", "", 
@@ -124,17 +124,17 @@ namespace
 
 #endif // HAVE_SQLITE3
 
-			static const CDFGZPharmacophoreInputHandler   cdfgzPharmInputHandler;
-			static const CDFBZ2PharmacophoreInputHandler  cdfbz2PharmInputHandler;
+			static const CDFGZPharmacophoreInputHandler   cdfGzPharmInputHandler;
+			static const CDFBZ2PharmacophoreInputHandler  cdfBz2PharmInputHandler;
 
-			static const CDFGZFeatureContainerOutputHandler  cdfgzFtrContOutputHandler;
-			static const CDFBZ2FeatureContainerOutputHandler cdfbz2FtrContOutputHandler;
+			static const CDFGZFeatureContainerOutputHandler  cdfGzFtrContOutputHandler;
+			static const CDFBZ2FeatureContainerOutputHandler cdfBz2FtrContOutputHandler;
 
-			DataIOManager<Pharmacophore>::registerInputHandler(cdfgzPharmInputHandler);
-			DataIOManager<Pharmacophore>::registerInputHandler(cdfbz2PharmInputHandler);
+			DataIOManager<Pharmacophore>::registerInputHandler(cdfGzPharmInputHandler);
+			DataIOManager<Pharmacophore>::registerInputHandler(cdfBz2PharmInputHandler);
 
-			DataIOManager<FeatureContainer>::registerOutputHandler(cdfgzFtrContOutputHandler);
-			DataIOManager<FeatureContainer>::registerOutputHandler(cdfbz2FtrContOutputHandler);
+			DataIOManager<FeatureContainer>::registerOutputHandler(cdfGzFtrContOutputHandler);
+			DataIOManager<FeatureContainer>::registerOutputHandler(cdfBz2FtrContOutputHandler);
 
 #endif // defined(HAVE_BOOST_SYSTEM) && defined(HAVE_BOOST_FILESYSTEM) && defined(HAVE_BOOST_IOSTREAMS)
 		}

@@ -139,6 +139,8 @@
 #include "CDPL/Chem/CDFMolecularGraphOutputHandler.hpp"
 #include "CDPL/Chem/CDFReactionInputHandler.hpp"
 #include "CDPL/Chem/CDFReactionOutputHandler.hpp"
+#include "CDPL/Chem/MOL2MoleculeInputHandler.hpp"
+#include "CDPL/Chem/MOL2MolecularGraphOutputHandler.hpp"
 
 #if defined(HAVE_BOOST_SYSTEM) && defined(HAVE_BOOST_FILESYSTEM) && defined(HAVE_BOOST_IOSTREAMS)
 
@@ -166,6 +168,10 @@
 #include "CDPL/Chem/CDFGZReactionOutputHandler.hpp"
 #include "CDPL/Chem/CDFBZ2ReactionInputHandler.hpp"
 #include "CDPL/Chem/CDFBZ2ReactionOutputHandler.hpp"
+#include "CDPL/Chem/MOL2GZMoleculeInputHandler.hpp"
+#include "CDPL/Chem/MOL2GZMolecularGraphOutputHandler.hpp"
+#include "CDPL/Chem/MOL2BZ2MoleculeInputHandler.hpp"
+#include "CDPL/Chem/MOL2BZ2MolecularGraphOutputHandler.hpp"
 
 #include "CDPL/Chem/SDFGZMoleculeReader.hpp"
 #include "CDPL/Chem/SDFGZMolecularGraphWriter.hpp"
@@ -191,6 +197,10 @@
 #include "CDPL/Chem/CDFGZReactionWriter.hpp"
 #include "CDPL/Chem/CDFBZ2ReactionReader.hpp"
 #include "CDPL/Chem/CDFBZ2ReactionWriter.hpp"
+#include "CDPL/Chem/MOL2GZMoleculeReader.hpp"
+#include "CDPL/Chem/MOL2GZMolecularGraphWriter.hpp"
+#include "CDPL/Chem/MOL2BZ2MoleculeReader.hpp"
+#include "CDPL/Chem/MOL2BZ2MolecularGraphWriter.hpp"
 
 #endif // defined(HAVE_BOOST_SYSTEM) && defined(HAVE_BOOST_FILESYSTEM) && defined(HAVE_BOOST_IOSTREAMS)
 
@@ -220,6 +230,8 @@
 #include "CDPL/Chem/CDFMolecularGraphWriter.hpp"
 #include "CDPL/Chem/CDFReactionReader.hpp"
 #include "CDPL/Chem/CDFReactionWriter.hpp"
+#include "CDPL/Chem/MOL2MoleculeReader.hpp"
+#include "CDPL/Chem/MOL2MolecularGraphWriter.hpp"
 
 #include "CDPL/Chem/CompleteRingSet.hpp"
 #include "CDPL/Chem/AromaticRingSet.hpp"

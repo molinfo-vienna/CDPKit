@@ -61,5 +61,8 @@ void CDPLPythonChem::exportDataFormats()
 		.def_readonly("SMILES", &Chem::DataFormat::SMILES)
 		.def_readonly("SMILES_GZ", &Chem::DataFormat::SMILES_GZ)
 		.def_readonly("SMILES_BZ2", &Chem::DataFormat::SMILES_BZ2)
-		.def_readonly("INCHI", &Chem::DataFormat::INCHI);
+		.def_readonly("INCHI", &Chem::DataFormat::INCHI)
+		.def_readonly("MOL2", &Chem::DataFormat::MOL2)
+		.def_readonly("MOL2_GZ", &Chem::DataFormat::MOL2_GZ)
+		.def_readonly("MOL2_BZ2", &Chem::DataFormat::MOL2_BZ2);
 }

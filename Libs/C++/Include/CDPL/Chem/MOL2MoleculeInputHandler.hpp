@@ -1,9 +1,11 @@
+/* -*- mode: c++; c-basic-offset: 4; tab-width: 4; indent-tabs-mode: t -*- */
+
 /* 
- * Version.hpp 
+ * MOL2MoleculeInputHandler.hpp 
  *
  * This file is part of the Chemical Data Processing Toolkit
  *
- * Copyright (C) 2003-2008 Thomas A. Seidel <thomas.seidel@chemit.at>
+ * Copyright (C) 2003-2010 Thomas A. Seidel <thomas.seidel@univie.ac.at>
  *
  * This library is free software; you can redistribute it and/or
  * modify it under the terms of the GNU Lesser General Public
@@ -23,41 +25,37 @@
 
 /**
  * \file
- * \brief The header to include for \e %CDPL version and build time information.
+ * \brief Definition of the class CDPL::Chem::MOL2MoleculeInputHandler.
  */
 
-#ifndef CDPL_VERSION_HPP
-#define CDPL_VERSION_HPP
+#ifndef CDPL_CHEM_MOL2MOLECULEINPUTHANDLER_HPP
+#define CDPL_CHEM_MOL2MOLECULEINPUTHANDLER_HPP
 
-/**
- * \brief The \e %CDPL major version number. 
- */
-#define CDPL_MAJOR_VERSION 1
-
-/**
- * \brief The \e %CDPL minor version number. 
- */
-#define CDPL_MINOR_VERSION 0
-
-/**
- * \brief The \e %CDPL patch-level. 
- */
-#define CDPL_PATCH_VERSION 0
-
-/**
- * \brief The \e %CDPL version as a string. 
- */
-#define CDPL_VERSION_STRING "1.0.0"
-
-/**
- * \brief The \e %CDPL build date in the format \e YYYYMMDD. 
- */
-#define CDPL_BUILD_DATE 20170329
+#include "CDPL/Chem/DataFormat.hpp"
+#include "CDPL/Chem/MOL2MoleculeReader.hpp"
+#include "CDPL/Util/DefaultDataInputHandler.hpp"
 
 
-/** 
- * \brief The full \e %CDPL version number. 
- */
-#define CDPL_VERSION (CDPL_MAJOR_VERSION * 10000 + CDPL_MINOR_VERSION * 100 + CDPL_PATCH_VERSION)
+namespace CDPL 
+{
 
-#endif // CDPL_VERSION_HPP
+	namespace Chem
+	{
+
+		/**
+		 * \addtogroup CDPL_CHEM_MOL2_IO
+		 * @{
+		 */
+
+		/**
+		 * \brief A handler for the input of molecule data in the <em>Sybyl MOL2</em> format.
+		 */
+		typedef Util::DefaultDataInputHandler<MOL2MoleculeReader, DataFormat::MOL2> MOL2MoleculeInputHandler;
+
+		/**
+		 * @}
+		 */
+	}
+}
+
+#endif // CDPL_CHEM_MOL2MOLECULEINPUTHANDLER_HPP

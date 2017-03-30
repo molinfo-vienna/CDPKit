@@ -56,6 +56,8 @@
 #include "CDPL/Chem/CDFMolecularGraphOutputHandler.hpp"
 #include "CDPL/Chem/CDFReactionInputHandler.hpp"
 #include "CDPL/Chem/CDFReactionOutputHandler.hpp"
+#include "CDPL/Chem/MOL2MoleculeInputHandler.hpp"
+#include "CDPL/Chem/MOL2MolecularGraphOutputHandler.hpp"
 
 #if defined(HAVE_BOOST_SYSTEM) && defined(HAVE_BOOST_FILESYSTEM) && defined(HAVE_BOOST_IOSTREAMS)
 
@@ -83,6 +85,10 @@
 #include "CDPL/Chem/SMILESGZReactionOutputHandler.hpp"
 #include "CDPL/Chem/SMILESBZ2ReactionInputHandler.hpp"
 #include "CDPL/Chem/SMILESBZ2ReactionOutputHandler.hpp"
+#include "CDPL/Chem/MOL2GZMoleculeInputHandler.hpp"
+#include "CDPL/Chem/MOL2GZMolecularGraphOutputHandler.hpp"
+#include "CDPL/Chem/MOL2BZ2MoleculeInputHandler.hpp"
+#include "CDPL/Chem/MOL2BZ2MolecularGraphOutputHandler.hpp"
 
 #endif // defined(HAVE_BOOST_SYSTEM) && defined(HAVE_BOOST_FILESYSTEM) && defined(HAVE_BOOST_IOSTREAMS)
 
@@ -93,20 +99,23 @@ namespace
 	const char* jmeFileExtensions[]       = { "jme" };
 	const char* molFileExtensions[]       = { "mol" };
 	const char* sdfFileExtensions[]       = { "sdf", "sd" };
-	const char* sdfgzFileExtensions[]     = { "sdf.gz", "sd.gz", "sdz" };
-	const char* sdfbz2FileExtensions[]    = { "sdf.bz2", "sd.bz2" };
+	const char* sdfGzFileExtensions[]     = { "sdf.gz", "sd.gz", "sdz" };
+	const char* sdfBz2FileExtensions[]    = { "sdf.bz2", "sd.bz2" };
 	const char* rxnFileExtensions[]       = { "rxn" };
 	const char* rdfFileExtensions[]       = { "rdf", "rd" };
-	const char* rdfgzFileExtensions[]     = { "rdf.gz", "rd.gz", "rdz" };
-	const char* rdfbz2FileExtensions[]    = { "rdf.bz2", "rd.bz2" };
+	const char* rdfGzFileExtensions[]     = { "rdf.gz", "rd.gz", "rdz" };
+	const char* rdfBz2FileExtensions[]    = { "rdf.bz2", "rd.bz2" };
 	const char* smilesFileExtensions[]    = { "smi" };
-	const char* smilesgzFileExtensions[]  = { "smi.gz" };
-	const char* smilesbz2FileExtensions[] = { "smi.bz2" };
+	const char* smilesGzFileExtensions[]  = { "smi.gz" };
+	const char* smilesBz2FileExtensions[] = { "smi.bz2" };
 	const char* smartsFileExtensions[]    = { "sma" };
 	const char* inchiFileExtensions[]     = { "inchi", "ichi" };
 	const char* cdfFileExtensions[]       = { "cdf" };
-	const char* cdfgzFileExtensions[]     = { "cdf.gz" };
-	const char* cdfbz2FileExtensions[]    = { "cdf.bz2" };
+	const char* cdfGzFileExtensions[]     = { "cdf.gz" };
+	const char* cdfBz2FileExtensions[]    = { "cdf.bz2" };
+	const char* mol2FileExtensions[]      = { "mol2" };
+	const char* mol2GzFileExtensions[]    = { "mol2.gz" };
+	const char* mol2Bz2FileExtensions[]   = { "mol2.bz2" };
 }
 
 
@@ -120,23 +129,23 @@ const Base::DataFormat Chem::DataFormat::MOL("MOL", "MDL Molfile", "chemical/x-m
 const Base::DataFormat Chem::DataFormat::SDF("SDF", "MDL Structure-Data File", "chemical/x-mdl-sdfile", 
 											 sdfFileExtensions, sdfFileExtensions + 2, true);
 const Base::DataFormat Chem::DataFormat::SDF_GZ("SDF_GZ", "GZip-Compressed MDL Structure-Data File", "chemical/x-mdl-sdfile", 
-											 sdfgzFileExtensions, sdfgzFileExtensions + 3, true);
+											 sdfGzFileExtensions, sdfGzFileExtensions + 3, true);
 const Base::DataFormat Chem::DataFormat::SDF_BZ2("SDF_BZ2", "BZip2-Compressed MDL Structure-Data File", "chemical/x-mdl-sdfile", 
-											 sdfbz2FileExtensions, sdfbz2FileExtensions + 2, true);
+											 sdfBz2FileExtensions, sdfBz2FileExtensions + 2, true);
 const Base::DataFormat Chem::DataFormat::RXN("RXN", "MDL Reaction File", "chemical/x-mdl-rxnfile", 
 											 rxnFileExtensions, rxnFileExtensions + 1, true);
 const Base::DataFormat Chem::DataFormat::RDF("RDF", "MDL Reaction-Data File", "chemical/x-mdl-rdfile", 
 											 rdfFileExtensions, rdfFileExtensions + 2, true);
 const Base::DataFormat Chem::DataFormat::RDF_GZ("RDF_GZ", "GZip-Compressed MDL Reaction-Data File", "chemical/x-mdl-rdfile", 
-											 rdfgzFileExtensions, rdfgzFileExtensions + 3, true);
+											 rdfGzFileExtensions, rdfGzFileExtensions + 3, true);
 const Base::DataFormat Chem::DataFormat::RDF_BZ2("RDF_BZ2", "BZip2-Compressed MDL Reaction-Data File", "chemical/x-mdl-rdfile", 
-											 rdfbz2FileExtensions, rdfbz2FileExtensions + 2, true);
+											 rdfBz2FileExtensions, rdfBz2FileExtensions + 2, true);
 const Base::DataFormat Chem::DataFormat::SMILES("SMILES", "Daylight SMILES String", "chemical/x-daylight-smiles", 
 												smilesFileExtensions, smilesFileExtensions + 1, true);
 const Base::DataFormat Chem::DataFormat::SMILES_GZ("SMILES_GZ", "GZip-Compressed Daylight SMILES String", "chemical/x-daylight-smiles", 
-												smilesgzFileExtensions, smilesgzFileExtensions + 1, true);
+												smilesGzFileExtensions, smilesGzFileExtensions + 1, true);
 const Base::DataFormat Chem::DataFormat::SMILES_BZ2("SMILES_BZ2", "BZip2-Compressed Daylight SMILES String", "chemical/x-daylight-smiles", 
-												smilesbz2FileExtensions, smilesbz2FileExtensions + 1, true);
+												smilesBz2FileExtensions, smilesBz2FileExtensions + 1, true);
 const Base::DataFormat Chem::DataFormat::SMARTS("SMARTS", "Daylight SMARTS String", "", 
 												smartsFileExtensions, smartsFileExtensions + 1, true);
 const Base::DataFormat Chem::DataFormat::INCHI("INCHI", "IUPAC International Chemical Identifier", "chemical/x-inchi", 
@@ -144,9 +153,15 @@ const Base::DataFormat Chem::DataFormat::INCHI("INCHI", "IUPAC International Che
 const Base::DataFormat Chem::DataFormat::CDF("CDF", "Native CDPL-Format", "", 
 											 cdfFileExtensions, cdfFileExtensions + 1, true);
 const Base::DataFormat Chem::DataFormat::CDF_GZ("CDF_GZ", "GZip-Compressed Native CDPL-Format", "", 
-											 cdfgzFileExtensions, cdfgzFileExtensions + 1, true);
+											 cdfGzFileExtensions, cdfGzFileExtensions + 1, true);
 const Base::DataFormat Chem::DataFormat::CDF_BZ2("CDF_BZ2", "BZip2-Compressed Native CDPL-Format", "", 
-											 cdfbz2FileExtensions, cdfbz2FileExtensions + 1, true);
+											 cdfBz2FileExtensions, cdfBz2FileExtensions + 1, true);
+const Base::DataFormat Chem::DataFormat::MOL2("MOL2", "Native CDPL-Format", "", 
+											 mol2FileExtensions, mol2FileExtensions + 1, true);
+const Base::DataFormat Chem::DataFormat::MOL2_GZ("MOL2_GZ", "GZip-Compressed Native CDPL-Format", "", 
+											 mol2GzFileExtensions, mol2GzFileExtensions + 1, true);
+const Base::DataFormat Chem::DataFormat::MOL2_BZ2("MOL2_BZ2", "BZip2-Compressed Native CDPL-Format", "", 
+											 mol2Bz2FileExtensions, mol2Bz2FileExtensions + 1, true);
 
 namespace CDPL
 {
@@ -176,6 +191,7 @@ namespace
 			static const SMARTSMoleculeInputHandler        smartsMolInputHandler;
 			static const INCHIMoleculeInputHandler         inchiMolInputHandler;
 			static const CDFMoleculeInputHandler           cdfMolInputHandler;
+			static const MOL2MoleculeInputHandler          mol2MolInputHandler;
 
 			static const JMEMolecularGraphOutputHandler    jmeMolGraphOutputHandler;
 			static const MOLMolecularGraphOutputHandler    molMolGraphOutputHandler;
@@ -184,6 +200,7 @@ namespace
 			static const SMARTSMolecularGraphOutputHandler smartsMolGraphOutputHandler;
 			static const INCHIMolecularGraphOutputHandler  inchiMolGraphOutputHandler;
 			static const CDFMolecularGraphOutputHandler    cdfMolGraphOutputHandler;
+			static const MOL2MolecularGraphOutputHandler   mol2MolGraphOutputHandler;
 
 			static const JMEReactionInputHandler           jmeRxnInputHandler;
 			static const RXNReactionInputHandler           rxnRxnInputHandler;
@@ -231,61 +248,69 @@ namespace
 
 #if defined(HAVE_BOOST_SYSTEM) && defined(HAVE_BOOST_FILESYSTEM) && defined(HAVE_BOOST_IOSTREAMS)
 
-			static const SDFGZMoleculeInputHandler         sdfgzMolInputHandler;
-			static const SDFBZ2MoleculeInputHandler        sdfbz2MolInputHandler;
-			static const CDFGZMoleculeInputHandler         cdfgzMolInputHandler;
-			static const CDFBZ2MoleculeInputHandler        cdfbz2MolInputHandler;
-			static const SMILESGZMoleculeInputHandler      smilesgzMolInputHandler;
-			static const SMILESBZ2MoleculeInputHandler     smilesbz2MolInputHandler;
+			static const SDFGZMoleculeInputHandler         sdfGzMolInputHandler;
+			static const SDFBZ2MoleculeInputHandler        sdfBz2MolInputHandler;
+			static const CDFGZMoleculeInputHandler         cdfGzMolInputHandler;
+			static const CDFBZ2MoleculeInputHandler        cdfBz2MolInputHandler;
+			static const SMILESGZMoleculeInputHandler      smilesGzMolInputHandler;
+			static const SMILESBZ2MoleculeInputHandler     smilesBz2MolInputHandler;
+			static const MOL2GZMoleculeInputHandler        mol2GzMolInputHandler;
+			static const MOL2BZ2MoleculeInputHandler       mol2Bz2MolInputHandler;
 
-			static const SDFGZMolecularGraphOutputHandler     sdfgzMolGraphOutputHandler;
-			static const SDFBZ2MolecularGraphOutputHandler    sdfbz2MolGraphOutputHandler;
-			static const CDFGZMolecularGraphOutputHandler     cdfgzMolGraphOutputHandler;
-			static const CDFBZ2MolecularGraphOutputHandler    cdfbz2MolGraphOutputHandler;
-			static const SMILESGZMolecularGraphOutputHandler  smilesgzMolGraphOutputHandler;
-			static const SMILESBZ2MolecularGraphOutputHandler smilesbz2MolGraphOutputHandler;
+			static const SDFGZMolecularGraphOutputHandler     sdfGzMolGraphOutputHandler;
+			static const SDFBZ2MolecularGraphOutputHandler    sdfBz2MolGraphOutputHandler;
+			static const CDFGZMolecularGraphOutputHandler     cdfGzMolGraphOutputHandler;
+			static const CDFBZ2MolecularGraphOutputHandler    cdfBz2MolGraphOutputHandler;
+			static const SMILESGZMolecularGraphOutputHandler  smilesGzMolGraphOutputHandler;
+			static const SMILESBZ2MolecularGraphOutputHandler smilesBz2MolGraphOutputHandler;
+			static const MOL2GZMolecularGraphOutputHandler    mol2GzMolGraphOutputHandler;
+			static const MOL2BZ2MolecularGraphOutputHandler   mol2Bz2MolGraphOutputHandler;
 
-			static const RDFGZReactionInputHandler         rdfgzRxnInputHandler;
-			static const RDFBZ2ReactionInputHandler        rdfbz2RxnInputHandler;
-			static const SMILESGZReactionInputHandler      smilesgzRxnInputHandler;
-			static const SMILESBZ2ReactionInputHandler     smilesbz2RxnInputHandler;
-			static const CDFGZReactionInputHandler         cdfgzRxnInputHandler;
-			static const CDFBZ2ReactionInputHandler        cdfbz2RxnInputHandler;
+			static const RDFGZReactionInputHandler         rdfGzRxnInputHandler;
+			static const RDFBZ2ReactionInputHandler        rdfBz2RxnInputHandler;
+			static const SMILESGZReactionInputHandler      smilesGzRxnInputHandler;
+			static const SMILESBZ2ReactionInputHandler     smilesBz2RxnInputHandler;
+			static const CDFGZReactionInputHandler         cdfGzRxnInputHandler;
+			static const CDFBZ2ReactionInputHandler        cdfBz2RxnInputHandler;
 
-			static const RDFGZReactionOutputHandler        rdfgzRxnOutputHandler;
-			static const RDFBZ2ReactionOutputHandler       rdfbz2RxnOutputHandler;
-			static const SMILESGZReactionOutputHandler     smilesgzRxnOutputHandler;
-			static const SMILESBZ2ReactionOutputHandler    smilesbz2RxnOutputHandler;
-			static const CDFGZReactionOutputHandler        cdfgzRxnOutputHandler;
-			static const CDFBZ2ReactionOutputHandler       cdfbz2RxnOutputHandler;
+			static const RDFGZReactionOutputHandler        rdfGzRxnOutputHandler;
+			static const RDFBZ2ReactionOutputHandler       rdfBz2RxnOutputHandler;
+			static const SMILESGZReactionOutputHandler     smilesGzRxnOutputHandler;
+			static const SMILESBZ2ReactionOutputHandler    smilesBz2RxnOutputHandler;
+			static const CDFGZReactionOutputHandler        cdfGzRxnOutputHandler;
+			static const CDFBZ2ReactionOutputHandler       cdfBz2RxnOutputHandler;
 
-			DataIOManager<Molecule>::registerInputHandler(sdfgzMolInputHandler);
-			DataIOManager<Molecule>::registerInputHandler(sdfbz2MolInputHandler);
-			DataIOManager<Molecule>::registerInputHandler(cdfgzMolInputHandler);
-			DataIOManager<Molecule>::registerInputHandler(cdfbz2MolInputHandler);
-			DataIOManager<Molecule>::registerInputHandler(smilesgzMolInputHandler);
-			DataIOManager<Molecule>::registerInputHandler(smilesbz2MolInputHandler);
+			DataIOManager<Molecule>::registerInputHandler(sdfGzMolInputHandler);
+			DataIOManager<Molecule>::registerInputHandler(sdfBz2MolInputHandler);
+			DataIOManager<Molecule>::registerInputHandler(cdfGzMolInputHandler);
+			DataIOManager<Molecule>::registerInputHandler(cdfBz2MolInputHandler);
+			DataIOManager<Molecule>::registerInputHandler(smilesGzMolInputHandler);
+			DataIOManager<Molecule>::registerInputHandler(smilesBz2MolInputHandler);
+			DataIOManager<Molecule>::registerInputHandler(mol2GzMolInputHandler);
+			DataIOManager<Molecule>::registerInputHandler(mol2Bz2MolInputHandler);
 
-			DataIOManager<MolecularGraph>::registerOutputHandler(sdfgzMolGraphOutputHandler);
-			DataIOManager<MolecularGraph>::registerOutputHandler(sdfbz2MolGraphOutputHandler);
-			DataIOManager<MolecularGraph>::registerOutputHandler(cdfgzMolGraphOutputHandler);
-			DataIOManager<MolecularGraph>::registerOutputHandler(cdfbz2MolGraphOutputHandler);
-			DataIOManager<MolecularGraph>::registerOutputHandler(smilesgzMolGraphOutputHandler);
-			DataIOManager<MolecularGraph>::registerOutputHandler(smilesbz2MolGraphOutputHandler);
+			DataIOManager<MolecularGraph>::registerOutputHandler(sdfGzMolGraphOutputHandler);
+			DataIOManager<MolecularGraph>::registerOutputHandler(sdfBz2MolGraphOutputHandler);
+			DataIOManager<MolecularGraph>::registerOutputHandler(cdfGzMolGraphOutputHandler);
+			DataIOManager<MolecularGraph>::registerOutputHandler(cdfBz2MolGraphOutputHandler);
+			DataIOManager<MolecularGraph>::registerOutputHandler(smilesGzMolGraphOutputHandler);
+			DataIOManager<MolecularGraph>::registerOutputHandler(smilesBz2MolGraphOutputHandler);
+			DataIOManager<MolecularGraph>::registerOutputHandler(mol2GzMolGraphOutputHandler);
+			DataIOManager<MolecularGraph>::registerOutputHandler(mol2Bz2MolGraphOutputHandler);
 
-			DataIOManager<Reaction>::registerInputHandler(rdfgzRxnInputHandler);
-			DataIOManager<Reaction>::registerInputHandler(rdfbz2RxnInputHandler);
-			DataIOManager<Reaction>::registerInputHandler(smilesgzRxnInputHandler);
-			DataIOManager<Reaction>::registerInputHandler(smilesbz2RxnInputHandler);
-			DataIOManager<Reaction>::registerInputHandler(cdfgzRxnInputHandler);
-			DataIOManager<Reaction>::registerInputHandler(cdfbz2RxnInputHandler);
+			DataIOManager<Reaction>::registerInputHandler(rdfGzRxnInputHandler);
+			DataIOManager<Reaction>::registerInputHandler(rdfBz2RxnInputHandler);
+			DataIOManager<Reaction>::registerInputHandler(smilesGzRxnInputHandler);
+			DataIOManager<Reaction>::registerInputHandler(smilesBz2RxnInputHandler);
+			DataIOManager<Reaction>::registerInputHandler(cdfGzRxnInputHandler);
+			DataIOManager<Reaction>::registerInputHandler(cdfBz2RxnInputHandler);
 
-			DataIOManager<Reaction>::registerOutputHandler(rdfgzRxnOutputHandler);
-			DataIOManager<Reaction>::registerOutputHandler(rdfbz2RxnOutputHandler);
-			DataIOManager<Reaction>::registerOutputHandler(smilesgzRxnOutputHandler);
-			DataIOManager<Reaction>::registerOutputHandler(smilesbz2RxnOutputHandler);
-			DataIOManager<Reaction>::registerOutputHandler(cdfgzRxnOutputHandler);
-			DataIOManager<Reaction>::registerOutputHandler(cdfbz2RxnOutputHandler);
+			DataIOManager<Reaction>::registerOutputHandler(rdfGzRxnOutputHandler);
+			DataIOManager<Reaction>::registerOutputHandler(rdfBz2RxnOutputHandler);
+			DataIOManager<Reaction>::registerOutputHandler(smilesGzRxnOutputHandler);
+			DataIOManager<Reaction>::registerOutputHandler(smilesBz2RxnOutputHandler);
+			DataIOManager<Reaction>::registerOutputHandler(cdfGzRxnOutputHandler);
+			DataIOManager<Reaction>::registerOutputHandler(cdfBz2RxnOutputHandler);
 
 #endif // defined(HAVE_BOOST_SYSTEM) && defined(HAVE_BOOST_FILESYSTEM) && defined(HAVE_BOOST_IOSTREAMS)
 		}
