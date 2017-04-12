@@ -30,8 +30,14 @@
 
 namespace CDPLPythonMath
 {
-	
-	void registerFromPythonConverters();
+
+	void registerFromPythonToVectorConverters();
+	void registerFromPythonToCVectorConverters();
+	void registerFromPythonToMatrixConverters();
+	void registerFromPythonToCMatrixConverters();
+	void registerFromPythonToExpressionPointerConverters();
+	void registerFromPythonToVariantConverters();
+
 	void registerToPythonConverters();
 }
 

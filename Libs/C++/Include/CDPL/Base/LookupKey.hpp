@@ -58,7 +58,7 @@ namespace CDPL
 		 * \c std::size_t does not overflow), i.e. the created instance is <em>not a copy</em> of an existing key and does not compare equal
 		 * to any instance created before or afterwards.		 
 		 */
-		class LookupKey 
+		class CDPL_BASE_API LookupKey 
 		{
 
 		public:

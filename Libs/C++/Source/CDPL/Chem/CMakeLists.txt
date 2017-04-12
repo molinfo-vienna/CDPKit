@@ -15,6 +15,7 @@ SET(cdpl-chem_LIB_SRCS
     BasicAtom.cpp
     BasicBond.cpp
     Fragment.cpp
+    Entity3DMapping.cpp	
     AtomBondMapping.cpp
 
     AtomProperty.cpp
@@ -312,7 +313,7 @@ SET(cdpl-chem_LIB_SRCS
     AromaticityPerception.cpp
    )
 
-LINK_LIBRARIES(${Boost_THREAD_LIBRARY} ${Boost_DATE_TIME_LIBRARY})
+LINK_LIBRARIES(${Boost_THREAD_LIBRARY} ${Boost_SYSTEM_LIBRARY} ${Boost_DATE_TIME_LIBRARY})
 
 ADD_LIBRARY(cdpl-chem-static STATIC ${cdpl-chem_LIB_SRCS})
 

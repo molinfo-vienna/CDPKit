@@ -29,12 +29,12 @@
 #include "CDPL/Config.hpp"
 #include "CDPL/Chem/CDFMoleculeInputHandler.hpp"
 
-#if defined(HAVE_BOOST_SYSTEM) && defined(HAVE_BOOST_FILESYSTEM) && defined(HAVE_BOOST_IOSTREAMS)
+#if defined(HAVE_BOOST_FILESYSTEM) && defined(HAVE_BOOST_IOSTREAMS)
 
 #include "CDPL/Chem/CDFGZMoleculeInputHandler.hpp"
 #include "CDPL/Chem/CDFBZ2MoleculeInputHandler.hpp"
 
-#endif // defined(HAVE_BOOST_SYSTEM) && defined(HAVE_BOOST_FILESYSTEM) && defined(HAVE_BOOST_IOSTREAMS)
+#endif // defined(HAVE_BOOST_FILESYSTEM) && defined(HAVE_BOOST_IOSTREAMS)
 
 #include "ClassExports.hpp"
 
@@ -48,7 +48,7 @@ void CDPLPythonChem::exportCDFMoleculeInputHandler()
 		python::bases<Base::DataInputHandler<Chem::Molecule> > >("CDFMoleculeInputHandler", python::no_init)
 		.def(python::init<>(python::arg("self")));
 
-#if defined(HAVE_BOOST_SYSTEM) && defined(HAVE_BOOST_FILESYSTEM) && defined(HAVE_BOOST_IOSTREAMS)
+#if defined(HAVE_BOOST_FILESYSTEM) && defined(HAVE_BOOST_IOSTREAMS)
 
 	python::class_<Chem::CDFGZMoleculeInputHandler, 
 		python::bases<Base::DataInputHandler<Chem::Molecule> > >("CDFGZMoleculeInputHandler", python::no_init)
@@ -58,5 +58,5 @@ void CDPLPythonChem::exportCDFMoleculeInputHandler()
 		python::bases<Base::DataInputHandler<Chem::Molecule> > >("CDFBZ2MoleculeInputHandler", python::no_init)
 		.def(python::init<>(python::arg("self")));
 
-#endif // defined(HAVE_BOOST_SYSTEM) && defined(HAVE_BOOST_FILESYSTEM) && defined(HAVE_BOOST_IOSTREAMS)
+#endif // defined(HAVE_BOOST_FILESYSTEM) && defined(HAVE_BOOST_IOSTREAMS)
 }

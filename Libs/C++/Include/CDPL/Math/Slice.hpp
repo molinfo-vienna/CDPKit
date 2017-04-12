@@ -110,15 +110,11 @@ namespace CDPL
 			SizeType       size;
 		};
 
-		namespace 
+		inline
+		Slice<std::size_t, std::ptrdiff_t> 
+		slice(std::size_t start, std::ptrdiff_t stride, std::size_t size)
 		{
-
-			CDPL_MATH_INLINE 
-			Slice<std::size_t, std::ptrdiff_t> 
-			slice(std::size_t start, std::ptrdiff_t stride, std::size_t size)
-			{
-				return Slice<std::size_t, std::ptrdiff_t>(start, stride, size);
-			}
+			return Slice<std::size_t, std::ptrdiff_t>(start, stride, size);
 		}
 	}
 }

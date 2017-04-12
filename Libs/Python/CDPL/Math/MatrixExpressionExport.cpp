@@ -84,7 +84,7 @@ namespace
 }
 
 
-void CDPLPythonMath::exportMatrixExpressions()
+void CDPLPythonMath::exportMatrixExpressionTypes()
 {
 	ConstMatrixExpressionExport<float>("ConstFMatrixExpression");
 	MatrixExpressionExport<float>("FMatrixExpression");

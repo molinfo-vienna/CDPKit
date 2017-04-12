@@ -30,6 +30,7 @@
 #include "CDPL/Pharm/Feature.hpp"
 
 #include "Base/ObjectIdentityCheckVisitor.hpp"
+#include "Base/CopyAssOp.hpp"
 
 #include "ClassExports.hpp"
 
@@ -62,7 +63,7 @@ void CDPLPythonPharm::exportParallelPiPiInteractionConstraint()
 		.def("getMaxVDistance", &Pharm::ParallelPiPiInteractionConstraint::getMaxVDistance, python::arg("self"))
 		.def("getMaxHDistance", &Pharm::ParallelPiPiInteractionConstraint::getMaxHDistance, python::arg("self"))
 		.def("getAngleTolerance", &Pharm::ParallelPiPiInteractionConstraint::getAngleTolerance, python::arg("self"))
-		.def("assign", &Pharm::ParallelPiPiInteractionConstraint::operator=, 
+		.def("assign", CDPLPythonBase::copyAssOp(&Pharm::ParallelPiPiInteractionConstraint::operator=), 
 			 (python::arg("self"), python::arg("constr")), python::return_self<>())
 		.def("__call__", &callOperator, (python::arg("self"), python::arg("ftr1"), python::arg("ftr2")))
 		.add_property("minVDistance", &Pharm::ParallelPiPiInteractionConstraint::getMinVDistance)

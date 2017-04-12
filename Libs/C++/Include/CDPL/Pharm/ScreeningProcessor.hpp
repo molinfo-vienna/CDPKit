@@ -77,7 +77,7 @@ namespace CDPL
 			  ALL_MATCHING_CONFS
 			};
 
-			class SearchHit
+			class CDPL_PHARM_API SearchHit
 			{
 
 			public:

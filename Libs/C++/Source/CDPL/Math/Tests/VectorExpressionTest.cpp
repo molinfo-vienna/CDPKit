@@ -1454,7 +1454,7 @@ BOOST_AUTO_TEST_CASE(VectorElemProdFunctionTest)
 	BOOST_CHECK_THROW(elemProd(CVector<double, 3>(), CVector<int, 2>())(2), Base::IndexError);
 	BOOST_CHECK_THROW(elemProd(CVector<double, 2>(), CVector<int, 3>())(2), Base::IndexError);
 
-	BOOST_CHECK_NO_THROW(elemProd(CVector<double, 0>(), CVector<int, 0>()))
+	BOOST_CHECK_NO_THROW(elemProd(CVector<double, 0>(), CVector<int, 0>()));
 	BOOST_CHECK_NO_THROW(elemProd(CVector<double, 3>(), CVector<int, 2>())(1));
 	BOOST_CHECK_NO_THROW(elemProd(CVector<double, 3>(), CVector<int, 2>()));
 }

@@ -31,6 +31,7 @@
 #include "CDPL/Pharm/Feature.hpp"
 
 #include "Base/ObjectIdentityCheckVisitor.hpp"
+#include "Base/CopyAssOp.hpp"
 
 #include "ClassExports.hpp"
 
@@ -61,7 +62,7 @@ void CDPLPythonPharm::exportGeometricalFeatureMappingExtractor()
 		.def(python::init<const Pharm::GeometricalFeatureMappingExtractor&>((python::arg("self"), python::arg("extor"))))
 		.def(python::init<bool>((python::arg("self"), python::arg("query_mode") = false)))
 		.def(CDPLPythonBase::ObjectIdentityCheckVisitor<Pharm::GeometricalFeatureMappingExtractor>())
-		.def("assign", &Pharm::GeometricalFeatureMappingExtractor::operator=, 
+		.def("assign", CDPLPythonBase::copyAssOp(&Pharm::GeometricalFeatureMappingExtractor::operator=), 
 			 (python::arg("self"), python::arg("extor")), python::return_self<>())
 		.def("getMapping", &Pharm::GeometricalFeatureMappingExtractor::getMapping, 
 			 (python::arg("self"), python::arg("ref_cntnr"), python::arg("cntnr"), python::arg("xform"), python::arg("mapping")))

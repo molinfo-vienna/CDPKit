@@ -85,7 +85,7 @@ namespace
 }
 
 
-void CDPLPythonMath::exportVectorExpressions()
+void CDPLPythonMath::exportVectorExpressionTypes()
 {
 	ConstVectorExpressionExport<float>("ConstFVectorExpression");
 	VectorExpressionExport<float>("FVectorExpression");

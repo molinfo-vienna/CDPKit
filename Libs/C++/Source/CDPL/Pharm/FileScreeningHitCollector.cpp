@@ -155,7 +155,7 @@ bool Pharm::FileScreeningHitCollector::operator()(const ScreeningProcessor::Sear
 
 	if (outputDBName)
 		struc_data->addEntry(DB_NAME_PROPERTY_NAME, 
-							 boost::filesystem::path(hit.getHitProvider().getDBAccessor().getDatabaseName()).filename().native());
+							 boost::filesystem::path(hit.getHitProvider().getDBAccessor().getDatabaseName()).filename().string());
 
 	if (outputMolIndex) {
 		struc_data->addEntry(MOL_INDEX_PROPERTY_NAME, 

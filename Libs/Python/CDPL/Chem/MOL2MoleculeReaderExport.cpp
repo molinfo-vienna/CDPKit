@@ -29,12 +29,12 @@
 #include "CDPL/Config.hpp"
 #include "CDPL/Chem/MOL2MoleculeReader.hpp"
 
-#if defined(HAVE_BOOST_SYSTEM) && defined(HAVE_BOOST_FILESYSTEM) && defined(HAVE_BOOST_IOSTREAMS)
+#if defined(HAVE_BOOST_FILESYSTEM) && defined(HAVE_BOOST_IOSTREAMS)
 
 #include "CDPL/Chem/MOL2GZMoleculeReader.hpp"
 #include "CDPL/Chem/MOL2BZ2MoleculeReader.hpp"
 
-#endif // defined(HAVE_BOOST_SYSTEM) && defined(HAVE_BOOST_FILESYSTEM) && defined(HAVE_BOOST_IOSTREAMS)
+#endif // defined(HAVE_BOOST_FILESYSTEM) && defined(HAVE_BOOST_IOSTREAMS)
 
 #include "CDPL/Util/FileDataReader.hpp"
 
@@ -56,7 +56,7 @@ void CDPLPythonChem::exportMOL2MoleculeReader()
 		.def(python::init<const std::string&, std::ios_base::openmode>(
 				 (python::arg("self"), python::arg("file_name"), python::arg("mode") = std::ios_base::in | std::ios_base::binary)));
 
-#if defined(HAVE_BOOST_SYSTEM) && defined(HAVE_BOOST_FILESYSTEM) && defined(HAVE_BOOST_IOSTREAMS)
+#if defined(HAVE_BOOST_FILESYSTEM) && defined(HAVE_BOOST_IOSTREAMS)
 
 	python::class_<Chem::MOL2GZMoleculeReader, python::bases<Base::DataReader<Chem::Molecule> >, 
 		boost::noncopyable>("MOL2GZMoleculeReader", python::no_init)
@@ -78,5 +78,5 @@ void CDPLPythonChem::exportMOL2MoleculeReader()
 		.def(python::init<const std::string&, std::ios_base::openmode>(
 				 (python::arg("self"), python::arg("file_name"), python::arg("mode") = std::ios_base::in | std::ios_base::binary)));
 
-#endif // defined(HAVE_BOOST_SYSTEM) && defined(HAVE_BOOST_FILESYSTEM) && defined(HAVE_BOOST_IOSTREAMS)
+#endif // defined(HAVE_BOOST_FILESYSTEM) && defined(HAVE_BOOST_IOSTREAMS)
 }

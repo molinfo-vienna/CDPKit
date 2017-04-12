@@ -76,7 +76,7 @@ void Biomol::extractResidueSubstructure(const Chem::Atom& atom, const Chem::Mole
 
 	std::string res_code = (flags & AtomPropertyFlag::RESIDUE_CODE) ? getResidueCode(atom) : std::string();
 	std::size_t model_no = (flags & AtomPropertyFlag::MODEL_NUMBER) ? getModelNumber(atom) : std::size_t(0);
-	std::size_t seq_no = (flags & AtomPropertyFlag::RESIDUE_SEQ_NO) ? getResidueSequenceNumber(atom) : std::size_t(0);
+	long seq_no = (flags & AtomPropertyFlag::RESIDUE_SEQ_NO) ? getResidueSequenceNumber(atom) : std::size_t(0);
 	char chain_id = (flags & AtomPropertyFlag::CHAIN_ID) ? getChainID(atom) : ' ';
 	char ins_code = (flags & AtomPropertyFlag::RESIDUE_INS_CODE) ? getResidueInsertionCode(atom) : ' ';
 

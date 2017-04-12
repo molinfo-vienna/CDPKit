@@ -82,7 +82,7 @@ void DataSetPrinter::print(QWidget* caller, QPrinter& printer)
 	if (dataSet.hasSelectedRecords())
 		print_dlg.addEnabledOption(QAbstractPrintDialog::PrintSelection);
 
-	if (!print_dlg.exec() == QDialog::Accepted)
+	if (print_dlg.exec() != QDialog::Accepted)
 		return;
 
 	QPainter painter(&printer);

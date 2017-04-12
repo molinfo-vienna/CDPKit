@@ -106,7 +106,7 @@
 #include "CDPL/Pharm/FeatureSetFunctions.hpp"
 #include "CDPL/Pharm/ControlParameterFunctions.hpp"
 
-#if defined(HAVE_BOOST_SYSTEM) && defined(HAVE_BOOST_FILESYSTEM)
+#if defined(HAVE_BOOST_FILESYSTEM)
 
 #include "CDPL/Pharm/FileScreeningHitCollector.hpp"
 
@@ -123,10 +123,10 @@
 #include "CDPL/Pharm/CDFBZ2FeatureContainerWriter.hpp"
 
 #  endif // defined(HAVE_BOOST_IOSTREAMS)
-#endif // defined(HAVE_BOOST_SYSTEM) && defined(HAVE_BOOST_FILESYSTEM)
+#endif // defined(HAVE_BOOST_FILESYSTEM)
 
 #ifdef HAVE_SQLITE3
-# if defined(HAVE_BOOST_SYSTEM) && defined(HAVE_BOOST_FILESYSTEM) && defined(HAVE_BOOST_IOSTREAMS)
+# if defined(HAVE_BOOST_FILESYSTEM) && defined(HAVE_BOOST_IOSTREAMS)
 
 #include "CDPL/Pharm/PSDPharmacophoreInputHandler.hpp"
 #include "CDPL/Pharm/PSDMoleculeInputHandler.hpp"
@@ -136,7 +136,7 @@
 #include "CDPL/Pharm/PSDMoleculeReader.hpp"
 #include "CDPL/Pharm/PSDMolecularGraphWriter.hpp"
 
-# endif // defined(HAVE_BOOST_SYSTEM) && defined(HAVE_BOOST_FILESYSTEM) && defined(HAVE_BOOST_IOSTREAMS)
+# endif // defined(HAVE_BOOST_FILESYSTEM) && defined(HAVE_BOOST_IOSTREAMS)
 
 #include "CDPL/Pharm/PSDScreeningDBCreator.hpp"
 #include "CDPL/Pharm/PSDScreeningDBAccessor.hpp"

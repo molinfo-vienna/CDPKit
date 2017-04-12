@@ -38,9 +38,9 @@
 using namespace CDPL;
 
 
-const double Pharm::PharmacophoreFitScore::DEF_FTR_MATCH_COUNT_FACTOR;
-const double Pharm::PharmacophoreFitScore::DEF_FTR_POS_MATCH_FACTOR;
-const double Pharm::PharmacophoreFitScore::DEF_FTR_GEOM_MATCH_FACTOR;
+const double Pharm::PharmacophoreFitScore::DEF_FTR_MATCH_COUNT_FACTOR   = 0.8;
+const double Pharm::PharmacophoreFitScore::DEF_FTR_POS_MATCH_FACTOR     = 0.1;
+const double Pharm::PharmacophoreFitScore::DEF_FTR_GEOM_MATCH_FACTOR    = 0.1;
 
 
 Pharm::PharmacophoreFitScore::PharmacophoreFitScore(double match_cnt_factor, double pos_match_factor, 

@@ -30,6 +30,7 @@
 #include "CDPL/Chem/AtomDictionary.hpp"
 
 #include "Base/ObjectIdentityCheckVisitor.hpp"
+#include "Base/CopyAssOp.hpp"
 
 #include "ClassExports.hpp"
 
@@ -145,7 +146,7 @@ void CDPLPythonChem::exportAtomDictionary()
 		.def("getNumEntries", &Chem::AtomDictionary::getNumEntries, python::arg("self")) 
 		.def("getEntries", &getEntries, python::arg("self")) 
 		.def("loadDefaultEntries", &Chem::AtomDictionary::loadDefaultEntries, python::arg("self")) 
-		.def("assign", &Chem::AtomDictionary::operator=, (python::arg("self"), python::arg("dict")), python::return_self<>())
+		.def("assign", CDPLPythonBase::copyAssOp(&Chem::AtomDictionary::operator=), (python::arg("self"), python::arg("dict")), python::return_self<>())
 		.add_property("numEntries", &Chem::AtomDictionary::getNumEntries)
 		.add_property("entries", &getEntries)
 		.def("set", &setDictionary, python::arg("dict"))
@@ -203,7 +204,8 @@ void CDPLPythonChem::exportAtomDictionary()
 												   python::arg("iupac_grp"), python::arg("metal"), python::arg("non_metal"), python::arg("val_states"),
 												   python::arg("vdw_rad"), python::arg("cov_radii"), python::arg("ar_eneg"), python::arg("iso_masses"))))
 		.def(CDPLPythonBase::ObjectIdentityCheckVisitor<Chem::AtomDictionary::Entry>())	
-		.def("assign", &Chem::AtomDictionary::Entry::operator=, (python::arg("self"), python::arg("entry")), python::return_self<>())
+		.def("assign", CDPLPythonBase::copyAssOp(&Chem::AtomDictionary::Entry::operator=),
+			 (python::arg("self"), python::arg("entry")), python::return_self<>())
 		.def("getType", &Chem::AtomDictionary::Entry::getType, python::arg("self"))
 		.def("getIsotope", &Chem::AtomDictionary::Entry::getIsotope, python::arg("self"))
 		.def("getName", &Chem::AtomDictionary::Entry::getName, python::arg("self"),

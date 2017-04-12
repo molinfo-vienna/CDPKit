@@ -30,6 +30,8 @@
 #include "CDPL/Pharm/FeatureContainer.hpp"
 #include "CDPL/Pharm/Feature.hpp"
 
+#include "Base/CopyAssOp.hpp"
+
 #include "ClassExports.hpp"
 
 
@@ -43,7 +45,7 @@ void CDPLPythonPharm::exportPharmacophoreAlignment()
 		.def(python::init<bool>((python::arg("self"), python::arg("query_mode"))))
 		.def(python::init<const Pharm::PharmacophoreAlignment&>((python::arg("self"), python::arg("alignment"))))
 		.def("addFeatures", &Pharm::PharmacophoreAlignment::addFeatures, (python::arg("self"), python::arg("cntnr"), python::arg("first_set")))
-		.def("assign", &Pharm::PharmacophoreAlignment::operator=, 
+		.def("assign", CDPLPythonBase::copyAssOp(&Pharm::PharmacophoreAlignment::operator=), 
 			 (python::arg("self"), python::arg("alignment")), python::return_self<>());
 }
 

@@ -30,6 +30,7 @@
 #include "CDPL/Base/DataWriter.hpp"
 
 #include "Base/ObjectIdentityCheckVisitor.hpp"
+#include "Base/CopyAssOp.hpp"
 
 #include "ClassExports.hpp"
 
@@ -45,7 +46,7 @@ void CDPLPythonPharm::exportFileScreeningHitCollector()
 		.def(python::init<Pharm::FileScreeningHitCollector::MolecularGraphWriter&>((python::arg("self"), python::arg("writer")))
 			 [python::with_custodian_and_ward<1, 2>()])
 		.def(CDPLPythonBase::ObjectIdentityCheckVisitor<Pharm::FileScreeningHitCollector>())
-		.def("assign", &Pharm::FileScreeningHitCollector::operator=, (python::arg("self"), python::arg("collector")),
+		.def("assign", CDPLPythonBase::copyAssOp(&Pharm::FileScreeningHitCollector::operator=), (python::arg("self"), python::arg("collector")),
 			 python::return_self<python::with_custodian_and_ward<1, 2> >())
 		.def("__call__", &Pharm::FileScreeningHitCollector::operator(), 
 			 (python::arg("self"), python::arg("hit"), python::arg("score")))

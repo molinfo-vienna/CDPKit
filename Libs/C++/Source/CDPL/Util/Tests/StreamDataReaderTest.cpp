@@ -46,7 +46,7 @@ private:
 
 	bool readData(std::istream& is, std::string& str) {
 		if (moreData(is))
-			return (is >> str);
+			return bool(is >> str);
 
 		return false;
 	}
@@ -57,11 +57,11 @@ private:
 
 		std::string sink;
 
-		return (is >> sink);
+		return bool(is >> sink);
 	}
 
 	bool moreData(std::istream& is) {
-		return std::istream::sentry(is, false);
+		return bool(std::istream::sentry(is, false));
 	}
 };
 

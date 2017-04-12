@@ -291,7 +291,7 @@ bool Chem::SMILESDataReader::hasMoreData(std::istream& is) const
 {
 	is.imbue(std::locale::classic());
 
-	return std::istream::sentry(is, false);
+	return bool(std::istream::sentry(is, false));
 }
 
 void Chem::SMILESDataReader::init(const Molecule& mol)

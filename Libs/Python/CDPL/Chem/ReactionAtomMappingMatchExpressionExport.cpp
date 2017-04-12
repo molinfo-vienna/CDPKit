@@ -29,6 +29,8 @@
 #include "CDPL/Chem/ReactionAtomMappingMatchExpression.hpp"
 #include "CDPL/Chem/AtomMapping.hpp"
 
+#include "Base/CopyAssOp.hpp"
+
 #include "ClassExports.hpp"
 
 
@@ -43,6 +45,6 @@ void CDPLPythonChem::exportReactionAtomMappingMatchExpression()
 			 [python::with_custodian_and_ward<1, 2>()])
 		.def(python::init<const Chem::AtomMapping::SharedPointer&>((python::arg("self"), python::arg("atom_mapping")))
 			 [python::with_custodian_and_ward<1, 2>()])
-		.def("assign", &Chem::ReactionAtomMappingMatchExpression::operator=, (python::arg("self"), python::arg("expr")), 
+		.def("assign", CDPLPythonBase::copyAssOp(&Chem::ReactionAtomMappingMatchExpression::operator=), (python::arg("self"), python::arg("expr")), 
 			 python::return_self<python::with_custodian_and_ward<1, 2> >());
 }

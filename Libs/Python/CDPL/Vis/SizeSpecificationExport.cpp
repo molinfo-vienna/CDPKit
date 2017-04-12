@@ -29,6 +29,7 @@
 #include "CDPL/Vis/SizeSpecification.hpp"
 
 #include "Base/ObjectIdentityCheckVisitor.hpp"
+#include "Base/CopyAssOp.hpp"
 
 #include "ClassExports.hpp"
 
@@ -44,7 +45,7 @@ void CDPLPythonVis::exportSizeSpecification()
 			 ((python::arg("self"), python::arg("value") = 0.0, python::arg("relative") = false,
 			   python::arg("input_scaling") = false, python::arg("output_scaling") = false)))
 		.def(CDPLPythonBase::ObjectIdentityCheckVisitor<Vis::SizeSpecification>())	
-		.def("assign", &Vis::SizeSpecification::operator=, (python::arg("self"), python::arg("spec")),
+		.def("assign", CDPLPythonBase::copyAssOp(&Vis::SizeSpecification::operator=), (python::arg("self"), python::arg("spec")),
 			 python::return_self<>())
 		.def("followsInputScaling", &Vis::SizeSpecification::followsInputScaling, python::arg("self"))
 		.def("followInputScaling", &Vis::SizeSpecification::followInputScaling, 

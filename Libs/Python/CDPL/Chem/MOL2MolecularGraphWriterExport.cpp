@@ -29,12 +29,12 @@
 #include "CDPL/Config.hpp"
 #include "CDPL/Chem/MOL2MolecularGraphWriter.hpp"
 
-#if defined(HAVE_BOOST_SYSTEM) && defined(HAVE_BOOST_FILESYSTEM) && defined(HAVE_BOOST_IOSTREAMS)
+#if defined(HAVE_BOOST_FILESYSTEM) && defined(HAVE_BOOST_IOSTREAMS)
 
 #include "CDPL/Chem/MOL2GZMolecularGraphWriter.hpp"
 #include "CDPL/Chem/MOL2BZ2MolecularGraphWriter.hpp"
 
-#endif // defined(HAVE_BOOST_SYSTEM) && defined(HAVE_BOOST_FILESYSTEM) && defined(HAVE_BOOST_IOSTREAMS)
+#endif // defined(HAVE_BOOST_FILESYSTEM) && defined(HAVE_BOOST_IOSTREAMS)
 
 #include "CDPL/Util/FileDataWriter.hpp"
 
@@ -57,7 +57,7 @@ void CDPLPythonChem::exportMOL2MolecularGraphWriter()
 				 (python::arg("self"), python::arg("file_name"), python::arg("mode") = 
 				  std::ios_base::in | std::ios_base::out | std::ios_base::trunc | std::ios_base::binary)));
 
-#if defined(HAVE_BOOST_SYSTEM) && defined(HAVE_BOOST_FILESYSTEM) && defined(HAVE_BOOST_IOSTREAMS)
+#if defined(HAVE_BOOST_FILESYSTEM) && defined(HAVE_BOOST_IOSTREAMS)
 
 	python::class_<Chem::MOL2GZMolecularGraphWriter, python::bases<Base::DataWriter<Chem::MolecularGraph> >, 
 		boost::noncopyable>("MOL2GZMolecularGraphWriter", python::no_init)
@@ -81,5 +81,5 @@ void CDPLPythonChem::exportMOL2MolecularGraphWriter()
 				 (python::arg("self"), python::arg("file_name"), python::arg("mode") = 
 				  std::ios_base::in | std::ios_base::out | std::ios_base::trunc | std::ios_base::binary)));
 
-#endif // defined(HAVE_BOOST_SYSTEM) && defined(HAVE_BOOST_FILESYSTEM) && defined(HAVE_BOOST_IOSTREAMS)
+#endif // defined(HAVE_BOOST_FILESYSTEM) && defined(HAVE_BOOST_IOSTREAMS)
 }

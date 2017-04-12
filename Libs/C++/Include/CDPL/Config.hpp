@@ -70,11 +70,6 @@
 #define HAVE_BOOST_FILESYSTEM
 
 /**	
- * \brief Defined if the \e Boost system library is available.
- */
-#define HAVE_BOOST_SYSTEM
-
-/**	
  * \brief Defined if the \e Boost iostreams library is available.
  */
 #define HAVE_BOOST_IOSTREAMS

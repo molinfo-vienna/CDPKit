@@ -59,7 +59,7 @@
 #include "CDPL/Chem/MOL2MoleculeInputHandler.hpp"
 #include "CDPL/Chem/MOL2MolecularGraphOutputHandler.hpp"
 
-#if defined(HAVE_BOOST_SYSTEM) && defined(HAVE_BOOST_FILESYSTEM) && defined(HAVE_BOOST_IOSTREAMS)
+#if defined(HAVE_BOOST_FILESYSTEM) && defined(HAVE_BOOST_IOSTREAMS)
 
 #include "CDPL/Chem/SDFGZMoleculeInputHandler.hpp"
 #include "CDPL/Chem/SDFGZMolecularGraphOutputHandler.hpp"
@@ -90,7 +90,7 @@
 #include "CDPL/Chem/MOL2BZ2MoleculeInputHandler.hpp"
 #include "CDPL/Chem/MOL2BZ2MolecularGraphOutputHandler.hpp"
 
-#endif // defined(HAVE_BOOST_SYSTEM) && defined(HAVE_BOOST_FILESYSTEM) && defined(HAVE_BOOST_IOSTREAMS)
+#endif // defined(HAVE_BOOST_FILESYSTEM) && defined(HAVE_BOOST_IOSTREAMS)
 
 
 namespace
@@ -246,7 +246,7 @@ namespace
 			DataIOManager<Reaction>::registerOutputHandler(smartsRxnOutputHandler);
 			DataIOManager<Reaction>::registerOutputHandler(cdfRxnOutputHandler);
 
-#if defined(HAVE_BOOST_SYSTEM) && defined(HAVE_BOOST_FILESYSTEM) && defined(HAVE_BOOST_IOSTREAMS)
+#if defined(HAVE_BOOST_FILESYSTEM) && defined(HAVE_BOOST_IOSTREAMS)
 
 			static const SDFGZMoleculeInputHandler         sdfGzMolInputHandler;
 			static const SDFBZ2MoleculeInputHandler        sdfBz2MolInputHandler;
@@ -312,7 +312,7 @@ namespace
 			DataIOManager<Reaction>::registerOutputHandler(cdfGzRxnOutputHandler);
 			DataIOManager<Reaction>::registerOutputHandler(cdfBz2RxnOutputHandler);
 
-#endif // defined(HAVE_BOOST_SYSTEM) && defined(HAVE_BOOST_FILESYSTEM) && defined(HAVE_BOOST_IOSTREAMS)
+#endif // defined(HAVE_BOOST_FILESYSTEM) && defined(HAVE_BOOST_IOSTREAMS)
 		}
 
 	} init;

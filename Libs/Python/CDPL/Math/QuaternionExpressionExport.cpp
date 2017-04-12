@@ -84,7 +84,7 @@ namespace
 }
 
 
-void CDPLPythonMath::exportQuaternionExpressions()
+void CDPLPythonMath::exportQuaternionExpressionTypes()
 {
 	ConstQuaternionExpressionExport<float>("ConstFQuaternionExpression");
 	QuaternionExpressionExport<float>("FQuaternionExpression");

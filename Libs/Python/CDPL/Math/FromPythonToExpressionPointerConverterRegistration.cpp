@@ -1,7 +1,7 @@
 /* -*- mode: c++; c-basic-offset: 4; tab-width: 4; indent-tabs-mode: t -*- */
 
 /* 
- * FromPythonConverterRegistration.cpp 
+ * FromPythonToExpressionPointerConverterRegistration.cpp 
  *
  * This file is part of the Chemical Data Processing Toolkit
  *
@@ -32,14 +32,11 @@
 #include "CDPL/Math/Matrix.hpp"
 #include "CDPL/Math/Quaternion.hpp"
 #include "CDPL/Math/AffineTransform.hpp"
-#include "CDPL/Math/VectorArray.hpp"
 #include "CDPL/Math/VectorProxy.hpp"
 #include "CDPL/Math/MatrixProxy.hpp"
 #include "CDPL/Math/MatrixAdapter.hpp"
 #include "CDPL/Math/VectorAdapter.hpp"
 #include "CDPL/Math/QuaternionAdapter.hpp"
-
-#include "Base/GenericVariantFromPythonConverter.hpp"
 
 #include "VectorExpressionAdapter.hpp"
 #include "MatrixExpressionAdapter.hpp"
@@ -49,242 +46,6 @@
 
 namespace
 {
-
-	template <typename VectorType>
-	struct CVectorFromPySequenceConverter 
-	{
-
-		CVectorFromPySequenceConverter() {
-			using namespace boost;
-
-			python::converter::registry::insert(&convertible, &construct, python::type_id<VectorType>());
-		}
-
-		static void* convertible(PyObject* obj_ptr) {
-			using namespace boost;
-
-			if (!obj_ptr)
-				return 0;
-
-			if (!PyList_Check(obj_ptr) && !PyTuple_Check(obj_ptr))
-				return 0;
-
-			python::ssize_t size = PySequence_Size(obj_ptr);
-
-			if (size != python::ssize_t(VectorType::Size))
-				return 0;
-
-			for (python::ssize_t i = 0; i < size; i++)
-				if (!python::extract<typename VectorType::ValueType>(PySequence_GetItem(obj_ptr, i)).check())
-					return 0;
-			
-			return obj_ptr;
-		}
-
-		static void construct(PyObject* obj_ptr, boost::python::converter::rvalue_from_python_stage1_data* data) {
-			using namespace boost;
-
-			void* storage = ((python::converter::rvalue_from_python_storage<VectorType>*)data)->storage.bytes;
-
-			new (storage) VectorType();
-
-			VectorType& vec = *static_cast<VectorType*>(storage);
-
-			python::ssize_t size = PySequence_Size(obj_ptr);
-
-			for (python::ssize_t i = 0; i < size; i++)
-				vec(i) = python::extract<typename VectorType::ValueType>(PySequence_GetItem(obj_ptr, i));
-
-			data->convertible = storage;
-		}
-	};
-
-	template <typename MatrixType>
-	struct CMatrixFromPySequenceConverter 
-	{
-
-		CMatrixFromPySequenceConverter() {
-			using namespace boost;
-
-			python::converter::registry::insert(&convertible, &construct, python::type_id<MatrixType>());
-		}
-
-		static void* convertible(PyObject* obj_ptr) {
-			using namespace boost;
-
-			if (!obj_ptr)
-				return 0;
-
-			if (!PyList_Check(obj_ptr) && !PyTuple_Check(obj_ptr))
-				return 0;
-
-			python::ssize_t num_rows = PySequence_Size(obj_ptr);
-
-			if (num_rows != python::ssize_t(MatrixType::Size1))
-				return 0;
-
-			for (python::ssize_t i = 0; i < num_rows; i++) {
-				PyObject* row_ptr = PySequence_GetItem(obj_ptr, i);
-
-				if (!PySequence_Check(row_ptr))
-					return 0;
-
-				python::ssize_t row_size = PySequence_Size(row_ptr);
-
-				if (row_size > python::ssize_t(MatrixType::Size2))
-					return 0;
-
-				for (python::ssize_t j = 0; j < row_size; j++) 
-					if (!python::extract<typename MatrixType::ValueType>(PySequence_GetItem(row_ptr, j)).check())
-						return 0;
-			}
-
-			return obj_ptr;
-		}
-
-		static void construct(PyObject* obj_ptr, boost::python::converter::rvalue_from_python_stage1_data* data) {
-			using namespace boost;
-
-			void* storage = ((python::converter::rvalue_from_python_storage<MatrixType>*)data)->storage.bytes;
-
-			new (storage) MatrixType();
-
-			MatrixType& mtx = *static_cast<MatrixType*>(storage);
-
-			python::ssize_t num_rows = PySequence_Size(obj_ptr);
-
-			for (python::ssize_t i = 0; i < num_rows; i++) {
-				PyObject* row_ptr = PySequence_GetItem(obj_ptr, i);
-
-				python::ssize_t row_size = PySequence_Size(row_ptr);
-
-				for (python::ssize_t j = 0; j < row_size; j++) 
-					mtx(i, j) = python::extract<typename MatrixType::ValueType>(PySequence_GetItem(row_ptr, j));
-			}
-
-			data->convertible = storage;
-		}
-	};
-
-	template <typename MatrixType>
-	struct MatrixFromPySequenceConverter 
-	{
-
-		MatrixFromPySequenceConverter() {
-			using namespace boost;
-
-			python::converter::registry::insert(&convertible, &construct, python::type_id<MatrixType>());
-		}
-
-		static void* convertible(PyObject* obj_ptr) {
-			using namespace boost;
-
-			if (!obj_ptr)
-				return 0;
-
-			if (!PyList_Check(obj_ptr) && !PyTuple_Check(obj_ptr))
-				return 0;
-
-			python::ssize_t num_rows = PySequence_Size(obj_ptr);
-			python::ssize_t num_cols = 0;
-
-			for (python::ssize_t i = 0; i < num_rows; i++) {
-				PyObject* row_ptr = PySequence_GetItem(obj_ptr, i);
-
-				if (!PySequence_Check(row_ptr))
-					return 0;
-
-				if (i == 0) 
-					num_cols = PySequence_Size(row_ptr);
-
-				else if (num_cols != PySequence_Size(row_ptr))
-					return 0;
-
-				for (python::ssize_t j = 0; j < num_cols; j++) 
-					if (!python::extract<typename MatrixType::ValueType>(PySequence_GetItem(row_ptr, j)).check())
-						return 0;
-			}
-
-			return obj_ptr;
-		}
-
-		static void construct(PyObject* obj_ptr, boost::python::converter::rvalue_from_python_stage1_data* data) {
-			using namespace boost;
-
-			MatrixType mtx;
-
-			python::ssize_t num_rows = PySequence_Size(obj_ptr);
-			python::ssize_t num_cols = 0;
-
-			for (python::ssize_t i = 0; i < num_rows; i++) {
-				PyObject* row_ptr = PySequence_GetItem(obj_ptr, i);
-
-				if (i == 0) {
-					num_cols = PySequence_Size(row_ptr);
-					mtx.resize(num_rows, num_cols);
-				}
-
-				for (python::ssize_t j = 0; j < num_cols; j++)
-					mtx(i, j) = python::extract<typename MatrixType::ValueType>(PySequence_GetItem(row_ptr, j));
-			}
-
-			void* storage = ((python::converter::rvalue_from_python_storage<MatrixType>*)data)->storage.bytes;
-
-			new (storage) MatrixType();
-
-			static_cast<MatrixType*>(storage)->swap(mtx);
-
-			data->convertible = storage;
-		}
-	};
-
-	template <typename VectorType>
-	struct VectorFromPySequenceConverter 
-	{
-
-		VectorFromPySequenceConverter() {
-			using namespace boost;
-
-			python::converter::registry::insert(&convertible, &construct, python::type_id<VectorType>());
-		}
-
-		static void* convertible(PyObject* obj_ptr) {
-			using namespace boost;
-
-			if (!obj_ptr)
-				return 0;
-
-			if (!PyList_Check(obj_ptr) && !PyTuple_Check(obj_ptr))
-				return 0;
-
-			python::ssize_t size = PySequence_Size(obj_ptr);
-
-			for (python::ssize_t i = 0; i < size; i++) 
-				if (!python::extract<typename VectorType::ValueType>(PySequence_GetItem(obj_ptr, i)).check())
-					return 0;
-
-			return obj_ptr;
-		}
-
-		static void construct(PyObject* obj_ptr, boost::python::converter::rvalue_from_python_stage1_data* data) {
-			using namespace boost;
-
-			python::ssize_t size = PySequence_Size(obj_ptr);
-
-			VectorType vec(size);
-
-			for (python::ssize_t i = 0; i < size; i++)
-				vec(i) = python::extract<typename VectorType::ValueType>(PySequence_GetItem(obj_ptr, i));
-
-			void* storage = ((python::converter::rvalue_from_python_storage<VectorType>*)data)->storage.bytes;
-
-			new (storage) VectorType();
-
-			static_cast<VectorType*>(storage)->swap(vec);
-
-			data->convertible = storage;
-		}
-	};
 
 	template <typename HeldDataType, typename AdapterType, typename ExpressionPointerType>
 	struct ExpressionPointerFromPyObjectConverter 
@@ -410,49 +171,9 @@ namespace
 }
 
 
-void CDPLPythonMath::registerFromPythonConverters()
+void CDPLPythonMath::registerFromPythonToExpressionPointerConverters()
 {
 	using namespace CDPL;
-
-	// Vector Types
-
-	CVectorFromPySequenceConverter<Math::Vector2F>();
-	CVectorFromPySequenceConverter<Math::Vector3F>();
-	CVectorFromPySequenceConverter<Math::Vector4F>();
-	CVectorFromPySequenceConverter<Math::Vector2D>();
-	CVectorFromPySequenceConverter<Math::Vector3D>();
-	CVectorFromPySequenceConverter<Math::Vector4D>();
-	CVectorFromPySequenceConverter<Math::Vector2L>();
-	CVectorFromPySequenceConverter<Math::Vector3L>();
-	CVectorFromPySequenceConverter<Math::Vector4L>();
-	CVectorFromPySequenceConverter<Math::Vector2UL>();
-	CVectorFromPySequenceConverter<Math::Vector3UL>();
-	CVectorFromPySequenceConverter<Math::Vector4UL>();
-
-	VectorFromPySequenceConverter<Math::FVector>();
-	VectorFromPySequenceConverter<Math::DVector>();
-	VectorFromPySequenceConverter<Math::LVector>();
-	VectorFromPySequenceConverter<Math::ULVector>();
-
-	// Matrix Types
-
-	CMatrixFromPySequenceConverter<Math::Matrix2F>();
-	CMatrixFromPySequenceConverter<Math::Matrix3F>();
-	CMatrixFromPySequenceConverter<Math::Matrix4F>();
-	CMatrixFromPySequenceConverter<Math::Matrix2D>();
-	CMatrixFromPySequenceConverter<Math::Matrix3D>();
-	CMatrixFromPySequenceConverter<Math::Matrix4D>();
-	CMatrixFromPySequenceConverter<Math::Matrix2L>();
-	CMatrixFromPySequenceConverter<Math::Matrix3L>();
-	CMatrixFromPySequenceConverter<Math::Matrix4L>();
-	CMatrixFromPySequenceConverter<Math::Matrix2UL>();
-	CMatrixFromPySequenceConverter<Math::Matrix3UL>();
-	CMatrixFromPySequenceConverter<Math::Matrix4UL>();
-
-	MatrixFromPySequenceConverter<Math::FMatrix>();
-	MatrixFromPySequenceConverter<Math::DMatrix>();
-	MatrixFromPySequenceConverter<Math::LMatrix>();
-	MatrixFromPySequenceConverter<Math::ULMatrix>();
 
 	// Vector Types
 
@@ -670,17 +391,4 @@ void CDPLPythonMath::registerFromPythonConverters()
 	ConstVectorExpressionPointerFromPyObjectConverter<Math::QuaternionVectorAdapter<const ConstQuaternionExpression<double> > >();
 	ConstVectorExpressionPointerFromPyObjectConverter<Math::QuaternionVectorAdapter<const ConstQuaternionExpression<long> > >();
 	ConstVectorExpressionPointerFromPyObjectConverter<Math::QuaternionVectorAdapter<const ConstQuaternionExpression<unsigned long> > >();
-
-	// Variant Converters
-
-	CDPLPythonBase::GenericVariantFromPythonConverter<Math::DMatrix::SharedPointer>();
-	CDPLPythonBase::GenericVariantFromPythonConverter<Math::LMatrix::SharedPointer>();
-	CDPLPythonBase::GenericVariantFromPythonConverter<Math::ULMatrix::SharedPointer>();
-
-	CDPLPythonBase::GenericVariantFromPythonConverter<Math::DVector::SharedPointer>();
-	CDPLPythonBase::GenericVariantFromPythonConverter<Math::LVector::SharedPointer>();
-	CDPLPythonBase::GenericVariantFromPythonConverter<Math::ULVector::SharedPointer>();
-
-	CDPLPythonBase::GenericVariantFromPythonConverter<Math::Vector2DArray::SharedPointer>();
-	CDPLPythonBase::GenericVariantFromPythonConverter<Math::Vector3DArray::SharedPointer>();
 }

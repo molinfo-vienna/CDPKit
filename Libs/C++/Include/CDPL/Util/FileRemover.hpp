@@ -33,6 +33,8 @@
 
 #include <string>
 
+#include "CDPL/Util/APIPrefix.hpp"
+
 
 namespace CDPL
 {
@@ -45,7 +47,7 @@ namespace CDPL
 	 * @{
 	 */
 
-	class FileRemover
+	class CDPL_UTIL_API FileRemover
 	{
 
 	public:

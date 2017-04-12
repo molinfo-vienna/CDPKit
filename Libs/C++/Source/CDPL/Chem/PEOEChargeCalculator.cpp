@@ -49,7 +49,7 @@ namespace
 
 
 const std::size_t Chem::PEOEChargeCalculator::DEF_NUM_ITERATIONS;
-const double      Chem::PEOEChargeCalculator::DEF_DAMPING_FACTOR;
+const double      Chem::PEOEChargeCalculator::DEF_DAMPING_FACTOR = 0.5;
 
 
 Chem::PEOEChargeCalculator::PEOEChargeCalculator():

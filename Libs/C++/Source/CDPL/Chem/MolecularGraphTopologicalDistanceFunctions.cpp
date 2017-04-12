@@ -54,13 +54,13 @@ std::size_t Chem::calcTopologicalRadius(const MolecularGraph& molgraph)
 			const Atom& atom2 = *it2;
 			std::size_t atom2_idx = molgraph.getAtomIndex(atom2);
 
-			max_atom_dist = std::max(dist_mtx(atom1_idx, atom2_idx), max_atom_dist);
+			max_atom_dist = std::max(std::size_t(dist_mtx(atom1_idx, atom2_idx)), max_atom_dist);
 		}
 
 		radius = std::min(max_atom_dist, radius);
 	}
 
-	return (radius == std::numeric_limits<std::size_t>::max() ? 0.0 : radius);
+	return (radius == std::numeric_limits<std::size_t>::max() ? 0 : radius);
 }
 
 std::size_t Chem::calcTopologicalDiameter(const MolecularGraph& molgraph)
@@ -79,7 +79,7 @@ std::size_t Chem::calcTopologicalDiameter(const MolecularGraph& molgraph)
 			const Atom& atom2 = *it2;
 			std::size_t atom2_idx = molgraph.getAtomIndex(atom2);
 
-			diameter = std::max(dist_mtx(atom1_idx, atom2_idx), diameter);
+			diameter = std::max(std::size_t(dist_mtx(atom1_idx, atom2_idx)), diameter);
 		}
 	}
 

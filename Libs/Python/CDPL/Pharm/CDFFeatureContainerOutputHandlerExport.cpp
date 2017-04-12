@@ -29,12 +29,12 @@
 #include "CDPL/Config.hpp"
 #include "CDPL/Pharm/CDFFeatureContainerOutputHandler.hpp"
 
-#if defined(HAVE_BOOST_SYSTEM) && defined(HAVE_BOOST_FILESYSTEM) && defined(HAVE_BOOST_IOSTREAMS)
+#if defined(HAVE_BOOST_FILESYSTEM) && defined(HAVE_BOOST_IOSTREAMS)
 
 #include "CDPL/Pharm/CDFGZFeatureContainerOutputHandler.hpp"
 #include "CDPL/Pharm/CDFBZ2FeatureContainerOutputHandler.hpp"
 
-#endif // defined(HAVE_BOOST_SYSTEM) && defined(HAVE_BOOST_FILESYSTEM) && defined(HAVE_BOOST_IOSTREAMS)
+#endif // defined(HAVE_BOOST_FILESYSTEM) && defined(HAVE_BOOST_IOSTREAMS)
 
 #include "ClassExports.hpp"
 
@@ -48,7 +48,7 @@ void CDPLPythonPharm::exportCDFFeatureContainerOutputHandler()
 		python::bases<Base::DataOutputHandler<Pharm::FeatureContainer> > >("CDFFeatureContainerOutputHandler", python::no_init)
 		.def(python::init<>(python::arg("self")));
 
-#if defined(HAVE_BOOST_SYSTEM) && defined(HAVE_BOOST_FILESYSTEM) && defined(HAVE_BOOST_IOSTREAMS)
+#if defined(HAVE_BOOST_FILESYSTEM) && defined(HAVE_BOOST_IOSTREAMS)
 
 	python::class_<Pharm::CDFGZFeatureContainerOutputHandler, 
 		python::bases<Base::DataOutputHandler<Pharm::FeatureContainer> > >("CDFGZFeatureContainerOutputHandler", python::no_init)
@@ -58,5 +58,5 @@ void CDPLPythonPharm::exportCDFFeatureContainerOutputHandler()
 		python::bases<Base::DataOutputHandler<Pharm::FeatureContainer> > >("CDFBZ2FeatureContainerOutputHandler", python::no_init)
 		.def(python::init<>(python::arg("self")));
 
-#endif // defined(HAVE_BOOST_SYSTEM) && defined(HAVE_BOOST_FILESYSTEM) && defined(HAVE_BOOST_IOSTREAMS)
+#endif // defined(HAVE_BOOST_FILESYSTEM) && defined(HAVE_BOOST_IOSTREAMS)
 }

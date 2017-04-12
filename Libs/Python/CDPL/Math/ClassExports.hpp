@@ -31,29 +31,69 @@
 namespace CDPLPythonMath
 {
 
-	void exportVectorExpressions();
-	void exportMatrixExpressions();
-	void exportQuaternionExpressions();
+	void exportVectorExpressionTypes();
+	void exportMatrixExpressionTypes();
+	void exportQuaternionExpressionTypes();
 
 	void exportVectorTypes();
+	void exportCVectorTypes1();
+	void exportCVectorTypes2();
+	void exportCVectorTypes3();
+	void exportScalarVectorTypes();
+	void exportZeroVectorTypes();
+	void exportUnitVectorTypes();
+	
 	void exportMatrixTypes();
+	void exportTranslationMatrixTypes();
+	void exportScalingMatrixTypes();
+	void exportRotationMatrixTypes();
+	void exportCMatrixTypes1();
+	void exportCMatrixTypes2();
+	void exportCMatrixTypes3();
+	void exportZeroMatrixTypes();
+	void exportScalarMatrixTypes();
+	void exportIdentityMatrixTypes();
+	
 	void exportQuaternionTypes();
+	void exportRealQuaternionTypes();
 	
 	void exportRange();
 	void exportSlice();
 	
-	void exportVectorProxies();
-	void exportMatrixProxies();
+	void exportVectorSliceTypes();
+	void exportConstVectorSliceTypes();
+	void exportVectorRangeTypes();
+	void exportConstVectorRangeTypes();
 
-	void exportVectorAdapters();
-	void exportMatrixAdapters();
-	void exportQuaternionAdapters();
+	void exportMatrixRangeTypes();
+	void exportConstMatrixRangeTypes();
+	void exportMatrixSliceTypes();
+	void exportConstMatrixSliceTypes();
+	void exportMatrixRowTypes();
+	void exportConstMatrixRowTypes();
+	void exportMatrixColumnTypes();
+	void exportConstMatrixColumnTypes();
 
-	void exportMLRModels();
-	void exportBFGSMinimizers();
-	void exportKabschAlgorithms();
+	void exportVectorQuaternionAdapterTypes();
+	void exportConstVectorQuaternionAdapterTypes();
+	void exportHomogenousCoordsAdapterTypes();
+	void exportConstHomogenousCoordsAdapterTypes();
+		
+	void exportTriangularMatrixTypes();
+	void exportTriangularMatrixAdapterTypes1();
+	void exportTriangularMatrixAdapterTypes2();
+	void exportTriangularMatrixAdapterTypes3();
+	void exportTriangularMatrixAdapterTypes4();
+	void exportMatrixTransposeTypes();
+	void exportConstMatrixTransposeTypes();
+	
+	void exportQuaternionAdapterTypes();
 
-	void exportVectorArrays();
+	void exportMLRModelTypes();
+	void exportBFGSMinimizerTypes();
+	void exportKabschAlgorithmTypes();
+
+	void exportVectorArrayTypes();
 
 	void exportBoostFunctionWrappers();
 }

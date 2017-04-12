@@ -102,7 +102,7 @@ namespace
 }
 
 
-void CDPLPythonMath::exportQuaternionAdapters()
+void CDPLPythonMath::exportQuaternionAdapterTypes()
 {
 	ConstQuaternionVectorAdapterExport<ConstQuaternionExpression<float> >("ConstFQuaternionVectorAdapter");
 	ConstQuaternionVectorAdapterExport<ConstQuaternionExpression<double> >("ConstDQuaternionVectorAdapter");

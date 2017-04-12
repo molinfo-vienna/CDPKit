@@ -241,7 +241,7 @@ bool Chem::SMARTSDataReader::hasMoreData(std::istream& is) const
 {
 	is.imbue(std::locale::classic());
 
-	return std::istream::sentry(is, false);
+	return bool(std::istream::sentry(is, false));
 }
 
 void Chem::SMARTSDataReader::init(const Molecule& mol)

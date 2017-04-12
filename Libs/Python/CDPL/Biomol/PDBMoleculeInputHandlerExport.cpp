@@ -29,12 +29,12 @@
 #include "CDPL/Config.hpp"
 #include "CDPL/Biomol/PDBMoleculeInputHandler.hpp"
 
-#if defined(HAVE_BOOST_SYSTEM) && defined(HAVE_BOOST_FILESYSTEM) && defined(HAVE_BOOST_IOSTREAMS)
+#if defined(HAVE_BOOST_FILESYSTEM) && defined(HAVE_BOOST_IOSTREAMS)
 
 #include "CDPL/Biomol/PDBGZMoleculeInputHandler.hpp"
 #include "CDPL/Biomol/PDBBZ2MoleculeInputHandler.hpp"
 
-#endif // defined(HAVE_BOOST_SYSTEM) && defined(HAVE_BOOST_FILESYSTEM) && defined(HAVE_BOOST_IOSTREAMS)
+#endif // defined(HAVE_BOOST_FILESYSTEM) && defined(HAVE_BOOST_IOSTREAMS)
 
 #include "ClassExports.hpp"
 
@@ -48,7 +48,7 @@ void CDPLPythonBiomol::exportPDBMoleculeInputHandler()
 		python::bases<Base::DataInputHandler<Chem::Molecule> > >("PDBMoleculeInputHandler", python::no_init)
 		.def(python::init<>(python::arg("self")));
 
-#if defined(HAVE_BOOST_SYSTEM) && defined(HAVE_BOOST_FILESYSTEM) && defined(HAVE_BOOST_IOSTREAMS)
+#if defined(HAVE_BOOST_FILESYSTEM) && defined(HAVE_BOOST_IOSTREAMS)
 
 	python::class_<Biomol::PDBGZMoleculeInputHandler, 
 		python::bases<Base::DataInputHandler<Chem::Molecule> > >("PDBGZMoleculeInputHandler", python::no_init)
@@ -58,5 +58,5 @@ void CDPLPythonBiomol::exportPDBMoleculeInputHandler()
 		python::bases<Base::DataInputHandler<Chem::Molecule> > >("PDBBZ2MoleculeInputHandler", python::no_init)
 		.def(python::init<>(python::arg("self")));
 
-#endif // defined(HAVE_BOOST_SYSTEM) && defined(HAVE_BOOST_FILESYSTEM) && defined(HAVE_BOOST_IOSTREAMS)
+#endif // defined(HAVE_BOOST_FILESYSTEM) && defined(HAVE_BOOST_IOSTREAMS)
 }

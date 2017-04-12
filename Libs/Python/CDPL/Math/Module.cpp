@@ -35,28 +35,68 @@ BOOST_PYTHON_MODULE(_math)
 {
 	using namespace CDPLPythonMath;
 
-	exportVectorExpressions();
-	exportMatrixExpressions();
-	exportQuaternionExpressions();
+	exportVectorExpressionTypes();
+	exportMatrixExpressionTypes();
+	exportQuaternionExpressionTypes();
 
 	exportVectorTypes();
+	exportCVectorTypes1();
+	exportCVectorTypes2();
+	exportCVectorTypes3();
+	exportScalarVectorTypes();
+	exportZeroVectorTypes();
+	exportUnitVectorTypes();
+	
 	exportMatrixTypes();
+	exportTranslationMatrixTypes();
+	exportScalingMatrixTypes();
+	exportRotationMatrixTypes();
+	exportCMatrixTypes1();
+	exportCMatrixTypes2();
+	exportCMatrixTypes3();
+	exportZeroMatrixTypes();
+	exportScalarMatrixTypes();
+	exportIdentityMatrixTypes();
+			
 	exportQuaternionTypes();
+	exportRealQuaternionTypes();
 
 	exportRange();
 	exportSlice();
 
-	exportVectorProxies();
-	exportMatrixProxies();
+	exportVectorSliceTypes();
+	exportConstVectorSliceTypes();
+	exportVectorRangeTypes();
+	exportConstVectorRangeTypes();
 
-	exportVectorAdapters();
-	exportMatrixAdapters();
-	exportQuaternionAdapters();
+	exportMatrixRangeTypes();
+	exportConstMatrixRangeTypes();
+	exportMatrixSliceTypes();
+	exportConstMatrixSliceTypes();
+	exportMatrixRowTypes();
+	exportConstMatrixRowTypes();
+	exportMatrixColumnTypes();
+	exportConstMatrixColumnTypes();
 
-	exportVectorArrays();
-	exportMLRModels();
-	exportBFGSMinimizers();
-	exportKabschAlgorithms();
+	exportVectorQuaternionAdapterTypes();
+	exportConstVectorQuaternionAdapterTypes();
+	exportHomogenousCoordsAdapterTypes();
+	exportConstHomogenousCoordsAdapterTypes();
+
+	exportTriangularMatrixTypes();
+	exportTriangularMatrixAdapterTypes1();
+	exportTriangularMatrixAdapterTypes2();
+	exportTriangularMatrixAdapterTypes3();
+	exportTriangularMatrixAdapterTypes4();
+	exportMatrixTransposeTypes();
+	exportConstMatrixTransposeTypes();
+
+	exportQuaternionAdapterTypes();
+
+	exportVectorArrayTypes();
+	exportMLRModelTypes();
+	exportBFGSMinimizerTypes();
+	exportKabschAlgorithmTypes();
 
 	exportVectorFunctions();
 	exportMatrixFunctions();
@@ -67,5 +107,11 @@ BOOST_PYTHON_MODULE(_math)
 	exportBoostFunctionWrappers();
 
 	registerToPythonConverters();
-	registerFromPythonConverters();
+
+	registerFromPythonToCVectorConverters();
+	registerFromPythonToVectorConverters();
+	registerFromPythonToCMatrixConverters();
+	registerFromPythonToMatrixConverters();
+	registerFromPythonToExpressionPointerConverters();
+	registerFromPythonToVariantConverters();
 }

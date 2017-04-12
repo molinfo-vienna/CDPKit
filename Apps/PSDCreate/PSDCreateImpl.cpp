@@ -146,7 +146,7 @@ PSDCreateImpl::PSDCreateImpl():
 			  value<unsigned int>()->notifier(boost::bind(&PSDCreateImpl::setMaxNumThreads, this, _1)));
 	addOption("input-format,I", "Input file format (default: auto-detect from file extension).", 
 			  value<std::string>()->notifier(boost::bind(&PSDCreateImpl::setInputFormat, this, _1)));
-	addOption("tmp-file-dir,T", "Temporary file directory (default: '" + boost::filesystem::temp_directory_path().native() + "')", 
+	addOption("tmp-file-dir,T", "Temporary file directory (default: '" + boost::filesystem::temp_directory_path().string() + "')", 
 			  value<std::string>()->notifier(boost::bind(&PSDCreateImpl::setTmpFileDirectory, this, _1)));
 	addOption("add-src-file-prop,s", "Add a source-file property to output molecules (default: false).", 
 			  value<bool>(&addSourceFileProp)->implicit_value(true));
@@ -240,10 +240,10 @@ void PSDCreateImpl::setTmpFileDirectory(const std::string& dir_path)
 		throwValidationError("tmp-file-dir");
 
 #ifdef _WIN32
-	_putenv_s("TMPDIR", dir_path.c_str(), 1);
-	_putenv_s("TMP", dir_path.c_str(), 1);
-	_putenv_s("TEMP", dir_path.c_str(), 1);
-	_putenv_s("TEMPDIR", dir_path.c_str(), 1);
+	_putenv_s("TMPDIR", dir_path.c_str());
+	_putenv_s("TMP", dir_path.c_str());
+	_putenv_s("TEMP", dir_path.c_str());
+	_putenv_s("TEMPDIR", dir_path.c_str());
 #else
 	setenv("TMPDIR", dir_path.c_str(), 1);
 	setenv("TMP", dir_path.c_str(), 1);
@@ -464,7 +464,7 @@ bool PSDCreateImpl::doReadNextMolecule(CDPL::Chem::Molecule& mol)
 			if (reader_id != 0) {
 				CDPL::Chem::StringDataBlock::SharedPointer sd_ptr = getStructureData(mol);
 
-				sd_ptr->addEntry("<Source File>", boost::filesystem::path(inputFiles[reader_id - 1]).filename().native());
+				sd_ptr->addEntry("<Source File>", boost::filesystem::path(inputFiles[reader_id - 1]).filename().string());
 			}
 		}
 

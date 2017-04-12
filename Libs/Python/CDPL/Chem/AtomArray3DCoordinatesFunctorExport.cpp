@@ -31,6 +31,7 @@
 #include "CDPL/Chem/MolecularGraph.hpp"
 
 #include "Base/ObjectIdentityCheckVisitor.hpp"
+#include "Base/CopyAssOp.hpp"
 
 #include "ClassExports.hpp"
 
@@ -54,7 +55,7 @@ void CDPLPythonChem::exportAtomArray3DCoordinatesFunctor()
 		.def(python::init<const Chem::AtomArray3DCoordinatesFunctor&>((python::arg("self"), python::arg("func"))))
 		.def(python::init<const Math::Vector3DArray&, const Chem::MolecularGraph&>((python::arg("self"), python::arg("coords"), python::arg("molgraph"))))
 		.def(CDPLPythonBase::ObjectIdentityCheckVisitor<Chem::AtomArray3DCoordinatesFunctor>())
-		.def("assign", &Chem::AtomArray3DCoordinatesFunctor::operator=, 
+		.def("assign", CDPLPythonBase::copyAssOp(&Chem::AtomArray3DCoordinatesFunctor::operator=), 
 			 (python::arg("self"), python::arg("func")), python::return_self<>())
 		.def("__call__", &callOperator, (python::arg("self"), python::arg("atom")),
 			 boost::python::return_internal_reference<2>());

@@ -28,6 +28,7 @@
 
 #include "CDPL/Chem/AtomBondMapping.hpp"
 
+#include "Base/CopyAssOp.hpp"
 #include "Base/ObjectIdentityCheckVisitor.hpp"
 
 #include "ClassExports.hpp"
@@ -46,7 +47,7 @@ void CDPLPythonChem::exportAtomBondMapping()
 		.def(python::init<const Chem::AtomBondMapping&>((python::arg("self"), python::arg("mapping")))
 			 [python::with_custodian_and_ward<1, 2>()])
 		.def(CDPLPythonBase::ObjectIdentityCheckVisitor<Chem::AtomBondMapping>())	
-		.def("assign", &Chem::AtomBondMapping::operator=, (python::arg("self"), python::arg("mapping")),
+		.def("assign", CDPLPythonBase::copyAssOp(&Chem::AtomBondMapping::operator=), (python::arg("self"), python::arg("mapping")),
 			 python::return_self<python::with_custodian_and_ward<1, 2> >())
 		.def("getAtomMapping", getAtomMappingFunc, python::arg("self"), python::return_internal_reference<>())
 		.def("getBondMapping", getBondMappingFunc, python::arg("self"), python::return_internal_reference<>())

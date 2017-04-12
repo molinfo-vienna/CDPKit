@@ -29,6 +29,7 @@
 #include "CDPL/Math/MLRModel.hpp"
 
 #include "Base/ObjectIdentityCheckVisitor.hpp"
+#include "Base/CopyAssOp.hpp"
 
 #include "VectorExpression.hpp"
 #include "ClassExports.hpp"
@@ -57,7 +58,7 @@ namespace
 				.def(python::init<>(python::arg("self")))
 				.def(python::init<const ModelType&>((python::arg("self"), python::arg("model"))))
 				.def(CDPLPythonBase::ObjectIdentityCheckVisitor<ModelType >())
-				.def("assign", &ModelType::operator=, (python::arg("self"), python::arg("model")),
+				.def("assign", CDPLPythonBase::copyAssOp(&ModelType::operator=), (python::arg("self"), python::arg("model")),
 					 python::return_self<>())
 				.def("resizeDataSet", &ModelType::resizeDataSet, 
 					 (python::arg("self"), python::arg("num_points"), python::arg("num_vars")))
@@ -134,7 +135,7 @@ namespace
 }
 
 
-void CDPLPythonMath::exportMLRModels()
+void CDPLPythonMath::exportMLRModelTypes()
 {
 	MLRModelExport<float>("FMLRModel");
 	MLRModelExport<double>("DMLRModel");

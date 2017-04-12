@@ -29,12 +29,12 @@
 #include "CDPL/Config.hpp"
 #include "CDPL/Chem/CDFReactionInputHandler.hpp"
 
-#if defined(HAVE_BOOST_SYSTEM) && defined(HAVE_BOOST_FILESYSTEM) && defined(HAVE_BOOST_IOSTREAMS)
+#if defined(HAVE_BOOST_FILESYSTEM) && defined(HAVE_BOOST_IOSTREAMS)
 
 #include "CDPL/Chem/CDFGZReactionInputHandler.hpp"
 #include "CDPL/Chem/CDFBZ2ReactionInputHandler.hpp"
 
-#endif // defined(HAVE_BOOST_SYSTEM) && defined(HAVE_BOOST_FILESYSTEM) && defined(HAVE_BOOST_IOSTREAMS)
+#endif // defined(HAVE_BOOST_FILESYSTEM) && defined(HAVE_BOOST_IOSTREAMS)
 
 #include "ClassExports.hpp"
 
@@ -48,7 +48,7 @@ void CDPLPythonChem::exportCDFReactionInputHandler()
 		python::bases<Base::DataInputHandler<Chem::Reaction> > >("CDFReactionInputHandler", python::no_init)
 		.def(python::init<>(python::arg("self")));
 
-#if defined(HAVE_BOOST_SYSTEM) && defined(HAVE_BOOST_FILESYSTEM) && defined(HAVE_BOOST_IOSTREAMS)
+#if defined(HAVE_BOOST_FILESYSTEM) && defined(HAVE_BOOST_IOSTREAMS)
 
 	python::class_<Chem::CDFGZReactionInputHandler, 
 		python::bases<Base::DataInputHandler<Chem::Reaction> > >("CDFGZReactionInputHandler", python::no_init)
@@ -58,5 +58,5 @@ void CDPLPythonChem::exportCDFReactionInputHandler()
 		python::bases<Base::DataInputHandler<Chem::Reaction> > >("CDFBZ2ReactionInputHandler", python::no_init)
 		.def(python::init<>(python::arg("self")));
 
-#endif // defined(HAVE_BOOST_SYSTEM) && defined(HAVE_BOOST_FILESYSTEM) && defined(HAVE_BOOST_IOSTREAMS)
+#endif // defined(HAVE_BOOST_FILESYSTEM) && defined(HAVE_BOOST_IOSTREAMS)
 }

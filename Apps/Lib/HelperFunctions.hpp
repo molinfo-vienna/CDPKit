@@ -102,7 +102,7 @@ namespace AppUtils
 	{
 		using namespace CDPL;
 
-		std::string file_name = boost::filesystem::path(path).filename().native();
+		std::string file_name = boost::filesystem::path(path).filename().string();
 
 		for (std::size_t pos = file_name.find('.'); pos != std::string::npos; pos = file_name.find('.', pos + 1)) {
 			std::string file_ext = file_name.substr(pos + 1);
@@ -121,7 +121,7 @@ namespace AppUtils
 	{
 		using namespace CDPL;
 
-		std::string file_name = boost::filesystem::path(path).filename().native();
+		std::string file_name = boost::filesystem::path(path).filename().string();
 
 		for (std::size_t pos = file_name.find('.'); pos != std::string::npos; pos = file_name.find('.', pos + 1)) {
 			std::string file_ext = file_name.substr(pos + 1);

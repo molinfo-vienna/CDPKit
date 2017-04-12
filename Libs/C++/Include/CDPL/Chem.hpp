@@ -142,7 +142,7 @@
 #include "CDPL/Chem/MOL2MoleculeInputHandler.hpp"
 #include "CDPL/Chem/MOL2MolecularGraphOutputHandler.hpp"
 
-#if defined(HAVE_BOOST_SYSTEM) && defined(HAVE_BOOST_FILESYSTEM) && defined(HAVE_BOOST_IOSTREAMS)
+#if defined(HAVE_BOOST_FILESYSTEM) && defined(HAVE_BOOST_IOSTREAMS)
 
 #include "CDPL/Chem/SDFGZMoleculeInputHandler.hpp"
 #include "CDPL/Chem/SDFGZMolecularGraphOutputHandler.hpp"
@@ -202,7 +202,7 @@
 #include "CDPL/Chem/MOL2BZ2MoleculeReader.hpp"
 #include "CDPL/Chem/MOL2BZ2MolecularGraphWriter.hpp"
 
-#endif // defined(HAVE_BOOST_SYSTEM) && defined(HAVE_BOOST_FILESYSTEM) && defined(HAVE_BOOST_IOSTREAMS)
+#endif // defined(HAVE_BOOST_FILESYSTEM) && defined(HAVE_BOOST_IOSTREAMS)
 
 #include "CDPL/Chem/JMEMoleculeReader.hpp"
 #include "CDPL/Chem/JMEReactionReader.hpp"

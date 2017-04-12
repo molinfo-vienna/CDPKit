@@ -47,7 +47,7 @@ SET(cdpl-biomol_LIB_SRCS
     ControlParameterFunctions.cpp
    )
 
-LINK_LIBRARIES(${Boost_THREAD_LIBRARY})
+LINK_LIBRARIES(${Boost_THREAD_LIBRARY} ${Boost_SYSTEM_LIBRARY})
 
 ADD_LIBRARY(cdpl-biomol-static STATIC ${cdpl-biomol_LIB_SRCS})
 

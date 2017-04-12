@@ -65,11 +65,11 @@ namespace CDPL
 		{
 
 		  public:
-            static const double       DEF_HYD_THRESHOLD_RING  = 1.2;
-			static const double       DEF_HYD_THRESHOLD_CHAIN = 1.2;
-			static const double       DEF_HYD_THRESHOLD_GROUP = 1.2;
+            static const double       DEF_HYD_THRESHOLD_RING;
+			static const double       DEF_HYD_THRESHOLD_CHAIN;
+			static const double       DEF_HYD_THRESHOLD_GROUP;
 		
-            static const double       DEF_FEATURE_TOL         = 1.5;
+            static const double       DEF_FEATURE_TOL;
 			static const unsigned int DEF_FEATURE_TYPE        = FeatureType::HYDROPHOBIC;
 			static const unsigned int DEF_FEATURE_GEOM        = FeatureGeometry::SPHERE;
 

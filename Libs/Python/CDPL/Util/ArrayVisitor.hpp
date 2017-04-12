@@ -30,6 +30,7 @@
 #include <boost/python.hpp>
 #include <boost/python/def_visitor.hpp>
 
+#include "Base/CopyAssOp.hpp"
 #include "Base/ObjectIdentityCheckVisitor.hpp"
 
 
@@ -69,7 +70,7 @@ namespace CDPLPythonUtil
 					 ElementAdditionPolicy2())
 				.def("reserve", &ArrayType::reserve, (python::arg("self"), python::arg("num_elem")))
 				.def("clear", &ArrayType::clear, python::arg("self"))
-				.def("assign", &ArrayType::operator=, (python::arg("self"), python::arg("array")),
+				.def("assign", CDPLPythonBase::copyAssOp(&ArrayType::operator=), (python::arg("self"), python::arg("array")),
 					 python::return_self<ElementAdditionPolicy1>())
 				.def("assign", assignFunc, (python::arg("self"), python::arg("num_elem"), python::arg("value")),
 					 ElementAdditionPolicy2())

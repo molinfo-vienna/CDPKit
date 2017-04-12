@@ -51,7 +51,7 @@
 #include "CDPL/Util/FileDataWriter.hpp"
 #include "CDPL/Util/DefaultDataInputHandler.hpp"
 
-#if defined(HAVE_BOOST_SYSTEM) && defined(HAVE_BOOST_FILESYSTEM)
+#if defined(HAVE_BOOST_FILESYSTEM)
 
 #include "CDPL/Util/FileRemover.hpp"
 #include "CDPL/Util/FileFunctions.hpp"
@@ -63,5 +63,5 @@
 #include "CDPL/Util/CompressedDataWriter.hpp"
 
 #endif // defined(HAVE_BOOST_IOSTREAMS)
-#endif // defined(HAVE_BOOST_SYSTEM) && defined(HAVE_BOOST_FILESYSTEM)
+#endif // defined(HAVE_BOOST_FILESYSTEM)
 #endif // CDPL_UTIL_HPP

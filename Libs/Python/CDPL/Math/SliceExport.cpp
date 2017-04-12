@@ -24,12 +24,11 @@
  */
 
 
-#include <cstddef>
-
 #include <boost/python.hpp>
 
 #include "CDPL/Math/Slice.hpp"
 
+#include "Base/CopyAssOp.hpp"
 #include "Base/ObjectIdentityCheckVisitor.hpp"
 
 #include "ClassExports.hpp"
@@ -54,7 +53,7 @@ void CDPLPythonMath::exportSlice()
 		.def("getSize", &SliceType::getSize, python::arg("self"))
 		.def("isEmpty", &SliceType::isEmpty, python::arg("self"))
 		.def("getIndex", &SliceType::operator(), (python::arg("self"), python::arg("i")))
-		.def("assign", &SliceType::operator=, (python::arg("self"), python::arg("s")), python::return_self<>())
+		.def("assign", CDPLPythonBase::copyAssOp(&SliceType::operator=), (python::arg("self"), python::arg("s")), python::return_self<>())
 		.def("swap", static_cast<void (SliceType::*)(SliceType&)>(&SliceType::swap), (python::arg("self"), python::arg("s")))
 		.def("__eq__", &SliceType::operator==, (python::arg("self"), python::arg("s")))
 		.def("__ne__", &SliceType::operator!=, (python::arg("self"), python::arg("s")))

@@ -30,6 +30,7 @@
 #include "CDPL/Pharm/Feature.hpp"
 
 #include "Base/ObjectIdentityCheckVisitor.hpp"
+#include "Base/CopyAssOp.hpp"
 
 #include "ClassExports.hpp"
 
@@ -57,7 +58,7 @@ void CDPLPythonPharm::exportFeatureGeometryMatchFunctor()
 														 python::arg("hbd_ang_tol") = Pharm::FeatureGeometryMatchFunctor::DEF_HBD_ANGLE_TOLERANCE,
 														 python::arg("ar_ang_tol") = Pharm::FeatureGeometryMatchFunctor::DEF_AR_PLANE_ANGLE_TOLERANCE)))
 		.def(CDPLPythonBase::ObjectIdentityCheckVisitor<Pharm::FeatureGeometryMatchFunctor>())
-		.def("assign", &Pharm::FeatureGeometryMatchFunctor::operator=, 
+		.def("assign", CDPLPythonBase::copyAssOp(&Pharm::FeatureGeometryMatchFunctor::operator=), 
 			 (python::arg("self"), python::arg("func")), python::return_self<>())
 		.def("getHBondAcceptorAngleTolerance", &Pharm::FeatureGeometryMatchFunctor::getHBondAcceptorAngleTolerance,
 			 python::arg("self"))

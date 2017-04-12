@@ -125,7 +125,7 @@ int CmdLineBase::run(int argc, char* argv[])
 
 	} catch (const std::exception& e) {
 		std::cerr << "Error while processing command line: " << e.what() << std::endl;
-		std::cerr << "Try '" << boost::filesystem::path(argv[0]).filename().native()
+		std::cerr << "Try '" << boost::filesystem::path(argv[0]).filename().string()
 				  <<  " -h' for more information." << std::endl;
 		return EXIT_FAILURE;
 	}
@@ -420,7 +420,7 @@ void CmdLineBase::printUsage(const char* bin_path) const
 	namespace po = boost::program_options;
 
 	std::cerr << "Usage: " << std::endl;
-	std::cerr << "  " << boost::filesystem::path(bin_path).filename().native();
+	std::cerr << "  " << boost::filesystem::path(bin_path).filename().string();
 
 	const std::vector<boost::shared_ptr<po::option_description> >& opt_options = optOptions.options();
 

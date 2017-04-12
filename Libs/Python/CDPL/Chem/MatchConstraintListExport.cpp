@@ -29,6 +29,7 @@
 #include "CDPL/Chem/MatchConstraintList.hpp"
 
 #include "Util/ArrayVisitor.hpp"
+#include "Base/CopyAssOp.hpp"
 
 #include "ClassExports.hpp"
 
@@ -76,7 +77,7 @@ void CDPLPythonChem::exportMatchConstraintList()
 																							 python::arg("id"), 
 																							 python::arg("relation"), 
 																							 python::arg("value"))))
-			.def("assign", &Chem::MatchConstraint::operator=, (python::arg("self"), python::arg("constr")),
+			.def("assign", CDPLPythonBase::copyAssOp(&Chem::MatchConstraint::operator=), (python::arg("self"), python::arg("constr")),
 				 python::return_self<>())
 			.def("getID", &Chem::MatchConstraint::getID, python::arg("self")) 
 			.def("setID", &Chem::MatchConstraint::setID, (python::arg("self"), python::arg("id")))
@@ -111,7 +112,7 @@ void CDPLPythonChem::exportMatchConstraintList()
 		.def(CDPLPythonUtil::ArrayVisitor<Chem::MatchConstraintList, 
 			 python::return_internal_reference<>, python::default_call_policies,
 			 python::default_call_policies, python::default_call_policies>())
-		.def("assign", &Chem::MatchConstraintList::operator=, (python::arg("self"), python::arg("list")),
+		.def("assign", CDPLPythonBase::copyAssOp(&Chem::MatchConstraintList::operator=), (python::arg("self"), python::arg("list")),
 			 python::return_self<>())
 		.def("getType", &Chem::MatchConstraintList::getType, python::arg("self"))
 		.def("setType", &Chem::MatchConstraintList::setType, (python::arg("self"), python::arg("type")))

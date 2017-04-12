@@ -45,7 +45,7 @@
 using namespace CDPL; 
 
 
-const double       Pharm::AromaticFeatureGenerator::DEF_FEATURE_TOL;
+const double       Pharm::AromaticFeatureGenerator::DEF_FEATURE_TOL   = 0.9;
 const unsigned int Pharm::AromaticFeatureGenerator::DEF_FEATURE_TYPE;
 const unsigned int Pharm::AromaticFeatureGenerator::DEF_FEATURE_GEOM;
 

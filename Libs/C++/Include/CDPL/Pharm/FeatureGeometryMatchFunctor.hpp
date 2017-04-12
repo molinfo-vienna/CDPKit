@@ -56,9 +56,9 @@ namespace CDPL
 		{
 
 		  public:
-			static const double DEF_HBA_ANGLE_TOLERANCE      = 80.0;
-			static const double DEF_HBD_ANGLE_TOLERANCE      = 80.0;
-			static const double DEF_AR_PLANE_ANGLE_TOLERANCE = 30.0;
+			static const double DEF_HBA_ANGLE_TOLERANCE;
+			static const double DEF_HBD_ANGLE_TOLERANCE;
+			static const double DEF_AR_PLANE_ANGLE_TOLERANCE;
 
 			FeatureGeometryMatchFunctor(bool strict_geom_mode, double hba_ang_tol = DEF_HBA_ANGLE_TOLERANCE, 
 										double hbd_ang_tol = DEF_HBD_ANGLE_TOLERANCE,

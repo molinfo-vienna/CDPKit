@@ -57,7 +57,7 @@ namespace
 }
 
 
-void CDPLPythonMath::exportVectorArrays()
+void CDPLPythonMath::exportVectorArrayTypes()
 {
 	using namespace CDPL;
 	

@@ -35,14 +35,14 @@
 #include "CDPL/Biomol/CDFDataReader.hpp"
 #include "CDPL/Biomol/CDFDataWriter.hpp"
 
-#if defined(HAVE_BOOST_SYSTEM) && defined(HAVE_BOOST_FILESYSTEM) && defined(HAVE_BOOST_IOSTREAMS)
+#if defined(HAVE_BOOST_FILESYSTEM) && defined(HAVE_BOOST_IOSTREAMS)
 
 #include "CDPL/Biomol/PDBGZMoleculeInputHandler.hpp"
 #include "CDPL/Biomol/PDBGZMolecularGraphOutputHandler.hpp"
 #include "CDPL/Biomol/PDBBZ2MoleculeInputHandler.hpp"
 #include "CDPL/Biomol/PDBBZ2MolecularGraphOutputHandler.hpp"
 
-#endif // defined(HAVE_BOOST_SYSTEM) && defined(HAVE_BOOST_FILESYSTEM) && defined(HAVE_BOOST_IOSTREAMS)
+#endif // defined(HAVE_BOOST_FILESYSTEM) && defined(HAVE_BOOST_IOSTREAMS)
 
 
 namespace
@@ -96,7 +96,7 @@ namespace
 			Biomol::CDFDataReader::registerExternalPropertyHandlers();
 			Biomol::CDFDataWriter::registerExternalPropertyHandlers();
 
-#if defined(HAVE_BOOST_SYSTEM) && defined(HAVE_BOOST_FILESYSTEM) && defined(HAVE_BOOST_IOSTREAMS)
+#if defined(HAVE_BOOST_FILESYSTEM) && defined(HAVE_BOOST_IOSTREAMS)
 
 			static const PDBGZMoleculeInputHandler           pdbGzMolInputHandler;
 			static const PDBBZ2MoleculeInputHandler          pdbBz2MolInputHandler;
@@ -110,7 +110,7 @@ namespace
 			DataIOManager<MolecularGraph>::registerOutputHandler(pdbGzMolGraphOutputHandler);
 			DataIOManager<MolecularGraph>::registerOutputHandler(pdbBz2MolGraphOutputHandler);
 
-#endif // defined(HAVE_BOOST_SYSTEM) && defined(HAVE_BOOST_FILESYSTEM) && defined(HAVE_BOOST_IOSTREAMS)
+#endif // defined(HAVE_BOOST_FILESYSTEM) && defined(HAVE_BOOST_IOSTREAMS)
 		}
 
 	} init;

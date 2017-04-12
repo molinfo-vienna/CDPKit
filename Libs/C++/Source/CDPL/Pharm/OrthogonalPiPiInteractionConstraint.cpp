@@ -40,10 +40,10 @@
 using namespace CDPL;
 
 
-const double Pharm::OrthogonalPiPiInteractionConstraint::DEF_MAX_H_DISTANCE;
-const double Pharm::OrthogonalPiPiInteractionConstraint::DEF_MIN_V_DISTANCE;
-const double Pharm::OrthogonalPiPiInteractionConstraint::DEF_MAX_V_DISTANCE;
-const double Pharm::OrthogonalPiPiInteractionConstraint::DEF_ANGLE_TOLERANCE;
+const double Pharm::OrthogonalPiPiInteractionConstraint::DEF_MAX_H_DISTANCE  = 1.4;
+const double Pharm::OrthogonalPiPiInteractionConstraint::DEF_MIN_V_DISTANCE  = 4.0;
+const double Pharm::OrthogonalPiPiInteractionConstraint::DEF_MAX_V_DISTANCE  = 6.0;
+const double Pharm::OrthogonalPiPiInteractionConstraint::DEF_ANGLE_TOLERANCE = 35.0;
 
 
 double Pharm::OrthogonalPiPiInteractionConstraint::getMinVDistance() const

@@ -30,6 +30,7 @@
 #include "CDPL/Pharm/FeatureContainer.hpp"
 
 #include "Base/ObjectIdentityCheckVisitor.hpp"
+#include "Base/CopyAssOp.hpp"
 
 #include "ClassExports.hpp"
 
@@ -46,7 +47,7 @@ void CDPLPythonPharm::exportPharmacophoreFitScore()
 												   python::arg("pos_match_factor") = Pharm::PharmacophoreFitScore::DEF_FTR_POS_MATCH_FACTOR,
 												   python::arg("geom_match_factor") = Pharm::PharmacophoreFitScore::DEF_FTR_GEOM_MATCH_FACTOR)))
 		.def(CDPLPythonBase::ObjectIdentityCheckVisitor<Pharm::PharmacophoreFitScore>())
-		.def("assign", &Pharm::PharmacophoreFitScore::operator=, 
+		.def("assign", CDPLPythonBase::copyAssOp(&Pharm::PharmacophoreFitScore::operator=), 
 			 (python::arg("self"), python::arg("score")), python::return_self<>())
 		.def("__call__", &Pharm::PharmacophoreFitScore::operator(), (python::arg("self"), python::arg("ref_cntnr"), python::arg("algnd_cntnr"), python::arg("xform")))
 		.add_property("featureMatchCountFactor", &Pharm::PharmacophoreFitScore::getFeatureMatchCountFactor, 

@@ -32,6 +32,6 @@
 using namespace CDPL;
 
 
-const double Pharm::HydrophobicInteractionConstraint::DEF_MIN_DISTANCE;
-const double Pharm::HydrophobicInteractionConstraint::DEF_MAX_DISTANCE;
+const double Pharm::HydrophobicInteractionConstraint::DEF_MIN_DISTANCE = 2.0;
+const double Pharm::HydrophobicInteractionConstraint::DEF_MAX_DISTANCE = 6.0;
 

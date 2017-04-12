@@ -40,9 +40,9 @@
 using namespace CDPL; 
 
 
-const double Pharm::FeatureGeometryMatchFunctor::DEF_HBA_ANGLE_TOLERANCE;
-const double Pharm::FeatureGeometryMatchFunctor::DEF_HBD_ANGLE_TOLERANCE;
-const double Pharm::FeatureGeometryMatchFunctor::DEF_AR_PLANE_ANGLE_TOLERANCE;
+const double Pharm::FeatureGeometryMatchFunctor::DEF_HBA_ANGLE_TOLERANCE      = 80.0;
+const double Pharm::FeatureGeometryMatchFunctor::DEF_HBD_ANGLE_TOLERANCE      = 80.0;
+const double Pharm::FeatureGeometryMatchFunctor::DEF_AR_PLANE_ANGLE_TOLERANCE = 30.0;
 
 
 double Pharm::FeatureGeometryMatchFunctor::getHBondAcceptorAngleTolerance() const

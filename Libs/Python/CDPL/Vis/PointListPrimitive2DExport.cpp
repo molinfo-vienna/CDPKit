@@ -28,6 +28,8 @@
 
 #include "CDPL/Vis/PointListPrimitive2D.hpp"
 
+#include "Base/CopyAssOp.hpp"
+
 #include "ClassExports.hpp"
 
 
@@ -40,7 +42,8 @@ void CDPLPythonVis::exportPointListPrimitive2D()
 		python::bases<Vis::PointArray2D, Vis::GraphicsPrimitive2D> >("PointListPrimitive2D", python::no_init)
 		.def(python::init<>(python::arg("self")))    
 		.def(python::init<const Vis::PointListPrimitive2D&>((python::arg("self"), python::arg("prim"))))
-		.def("assign", &Vis::PointListPrimitive2D::operator=,(python::arg("self"),  python::arg("prim")),
+		.def("assign", CDPLPythonBase::copyAssOp(&Vis::PointListPrimitive2D::operator=),
+			 (python::arg("self"),  python::arg("prim")),
 			 python::return_self<>())
 		.def("setPen", &Vis::PointListPrimitive2D::setPen, (python::arg("self"), python::arg("pen")))
 		.def("getPen", &Vis::PointListPrimitive2D::getPen, python::arg("self"), 

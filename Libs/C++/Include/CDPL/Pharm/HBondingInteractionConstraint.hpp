@@ -56,10 +56,10 @@ namespace CDPL
 		{
 
 		  public:
-			static const double DEF_MIN_HB_LENGTH = 1.2;
-			static const double DEF_MAX_HB_LENGTH = 2.8;
-			static const double DEF_MIN_AHD_ANGLE = 130.0;
-			static const double DEF_MAX_ACC_ANGLE = 85.0;
+			static const double DEF_MIN_HB_LENGTH;
+			static const double DEF_MAX_HB_LENGTH;
+			static const double DEF_MIN_AHD_ANGLE;
+			static const double DEF_MAX_ACC_ANGLE;
 
 			/**
 			 * \brief Constructs a \c %HBondingInteractionConstraint functor with the specified constraints.

@@ -65,45 +65,6 @@ namespace
 				.def(QuaternionVisitor<QuaternionType>());
 		}
 	};
-
-	template <typename QuaternionType>
-	struct RealQuaternionExport
-	{
-
-		RealQuaternionExport(const char* name) {
-			using namespace boost;
-			using namespace CDPLPythonMath;
-
-			typedef typename QuaternionType::ValueType ValueType;
-			typedef QuaternionType& (QuaternionType::* ScalarArgFuncType)(const ValueType&);
-
-			python::class_<QuaternionType>(name, python::no_init)
-				.def(python::init<>(python::arg("self")))
-				.def(python::init<const QuaternionType&>((python::arg("self"), python::arg("q"))))
-				.def(python::init<const ValueType&>((python::arg("self"), python::arg("r"))))
-				.def("set", ScalarArgFuncType(&QuaternionType::template operator=<ValueType>),
-				 	 (python::arg("self"), python::arg("r") = ValueType()), python::return_self<>())
-				.def("__iadd__", ScalarArgFuncType(&QuaternionType::template operator+=<ValueType>), 
-				 	 (python::arg("self"), python::arg("t")), python::return_self<>())
-				.def("__isub__", ScalarArgFuncType(&QuaternionType::template operator-=<ValueType>), 
-				 	 (python::arg("self"), python::arg("t")), python::return_self<>())
-				.def("__iadd__", &QuaternionType::template operator+=<QuaternionType>, 
-				 	 (python::arg("self"), python::arg("q")), python::return_self<>())
-				.def("__isub__", &QuaternionType::template operator-=<QuaternionType>, 
-				 	 (python::arg("self"), python::arg("q")), python::return_self<>())
-				.def("__imul__", ScalarArgFuncType(&QuaternionType::template operator*=<ValueType>), 
-				 	 (python::arg("self"), python::arg("t")), python::return_self<>())
-				.def("__idiv__", ScalarArgFuncType(&QuaternionType::template operator/=<ValueType>), 
-				 	 (python::arg("self"), python::arg("t")), python::return_self<>())
-				.def("__imul__", &QuaternionType::template operator*=<QuaternionType>, 
-				 	 (python::arg("self"), python::arg("q")), python::return_self<>())
-				.def("__idiv__", &QuaternionType::template operator/=<QuaternionType>, 
-					 (python::arg("self"), python::arg("q")), python::return_self<>())
-				.def(CDPLPythonBase::ObjectIdentityCheckVisitor<QuaternionType>())
-				.def(ConstQuaternionVisitor<QuaternionType>())
-				.def(QuaternionAssignAndSwapVisitor<QuaternionType>());
-		}
-	};
 }
 
 
@@ -115,9 +76,4 @@ void CDPLPythonMath::exportQuaternionTypes()
 	QuaternionExport<Math::DQuaternion>("DQuaternion");
 	QuaternionExport<Math::LQuaternion>("LQuaternion");
 	QuaternionExport<Math::ULQuaternion>("ULQuaternion");
-
-	RealQuaternionExport<Math::FRealQuaternion>("FRealQuaternion");
-	RealQuaternionExport<Math::DRealQuaternion>("DRealQuaternion");
-	RealQuaternionExport<Math::LRealQuaternion>("LRealQuaternion");
-	RealQuaternionExport<Math::ULRealQuaternion>("ULRealQuaternion");
 }

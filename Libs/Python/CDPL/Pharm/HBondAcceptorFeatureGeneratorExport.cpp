@@ -30,6 +30,8 @@
 #include "CDPL/Chem/MolecularGraph.hpp"
 #include "CDPL/Pharm/Pharmacophore.hpp"
 
+#include "Base/CopyAssOp.hpp"
+
 #include "ClassExports.hpp"
 
 
@@ -45,6 +47,6 @@ void CDPLPythonPharm::exportHBondAcceptorFeatureGenerator()
 		 (python::arg("self"), python::arg("gen"))))
 	.def(python::init<const Chem::MolecularGraph&, Pharm::Pharmacophore&>(
 		 (python::arg("self"), python::arg("molgraph"), python::arg("pharm"))))
-	.def("assign", &Pharm::HBondAcceptorFeatureGenerator::operator=, 
+		.def("assign", CDPLPythonBase::copyAssOp(&Pharm::HBondAcceptorFeatureGenerator::operator=), 
 	     (python::arg("self"), python::arg("gen")), python::return_self<>());
 }

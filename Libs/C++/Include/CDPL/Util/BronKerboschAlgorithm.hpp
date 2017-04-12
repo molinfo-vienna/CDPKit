@@ -34,6 +34,7 @@
 
 #include <boost/shared_ptr.hpp>
 
+#include "CDPL/Util/APIPrefix.hpp"
 #include "CDPL/Util/BitSet.hpp"
 #include "CDPL/Util/Array.hpp"
 
@@ -52,7 +53,7 @@ namespace CDPL
 		/**
 		 * \brief Implementation of the Bron-Kerbosch clique-detection algorithm [\ref BKA].
 		 */
-		class BronKerboschAlgorithm
+		class CDPL_UTIL_API BronKerboschAlgorithm
 		{
 
 		public:

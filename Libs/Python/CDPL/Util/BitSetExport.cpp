@@ -30,6 +30,7 @@
 #include "CDPL/Util/BitSet.hpp"
 
 #include "Base/ObjectIdentityCheckVisitor.hpp"
+#include "Base/CopyAssOp.hpp"
 
 #include "ClassExports.hpp"
 
@@ -233,7 +234,7 @@ void CDPLPythonUtil::exportBitSet()
 		.def(python::init<const std::string&>((python::arg("self"), python::arg("bit_str"))))
 		.def(CDPLPythonBase::ObjectIdentityCheckVisitor<Util::BitSet>())
 		.def("swap", &Util::BitSet::swap, (python::arg("self"), python::arg("bs")))
-		.def("assign", &Util::BitSet::operator=, (python::arg("self"), python::arg("bs")), python::return_self<>())
+		.def("assign", CDPLPythonBase::copyAssOp(&Util::BitSet::operator=), (python::arg("self"), python::arg("bs")), python::return_self<>())
 		.def("resize", &Util::BitSet::resize, (python::arg("self"), python::arg("num_bits"), python::arg("value") = false))
 		.def("clear", &Util::BitSet::clear, python::arg("self"))
 		.def("append", &Util::BitSet::push_back, (python::arg("self"), python::arg("value")))

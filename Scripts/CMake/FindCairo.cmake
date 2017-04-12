@@ -35,7 +35,7 @@ else(NOT WIN32)
 endif(NOT WIN32)
 
 if(CAIRO_FOUND)
-  set(CAIRO_LIBRARIES ${_pc_cairo_LIBRARIES})
+#  set(CAIRO_LIBRARIES ${_pc_cairo_LIBRARIES})
 #  set(CAIRO_INCLUDE_DIR ${_pc_cairo_INCLUDE_DIRS})
 
   find_path(CAIRO_INCLUDE_DIR cairo.h
@@ -43,6 +43,8 @@ if(CAIRO_FOUND)
             PATH_SUFFIXES cairo
   )
 
+  find_library(CAIRO_LIBRARIES cairo libcairo)
+  
   include(FindPackageHandleStandardArgs)
   find_package_handle_standard_args(Cairo DEFAULT_MSG CAIRO_LIBRARIES CAIRO_INCLUDE_DIR)
 endif(CAIRO_FOUND)

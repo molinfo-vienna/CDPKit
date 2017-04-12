@@ -35,7 +35,7 @@
 #include "CDPL/Pharm/PMLPharmacophoreInputHandler.hpp"
 #include "CDPL/Pharm/PMLFeatureContainerOutputHandler.hpp"
 
-#if defined(HAVE_BOOST_SYSTEM) && defined(HAVE_BOOST_FILESYSTEM) && defined(HAVE_BOOST_IOSTREAMS)
+#if defined(HAVE_BOOST_FILESYSTEM) && defined(HAVE_BOOST_IOSTREAMS)
 #ifdef HAVE_SQLITE3
 
 #include "CDPL/Pharm/PSDPharmacophoreInputHandler.hpp"
@@ -49,7 +49,7 @@
 #include "CDPL/Pharm/CDFBZ2PharmacophoreInputHandler.hpp"
 #include "CDPL/Pharm/CDFBZ2FeatureContainerOutputHandler.hpp"
 
-#endif // defined(HAVE_BOOST_SYSTEM) && defined(HAVE_BOOST_FILESYSTEM) && defined(HAVE_BOOST_IOSTREAMS)
+#endif // defined(HAVE_BOOST_FILESYSTEM) && defined(HAVE_BOOST_IOSTREAMS)
 
 
 namespace
@@ -111,7 +111,7 @@ namespace
 			DataIOManager<FeatureContainer>::registerOutputHandler(cdfFtrContOutputHandler);
 			DataIOManager<FeatureContainer>::registerOutputHandler(pmlFtrContOutputHandler);
 
-#if defined(HAVE_BOOST_SYSTEM) && defined(HAVE_BOOST_FILESYSTEM) && defined(HAVE_BOOST_IOSTREAMS)
+#if defined(HAVE_BOOST_FILESYSTEM) && defined(HAVE_BOOST_IOSTREAMS)
 #ifdef HAVE_SQLITE3
 
 			static const PSDPharmacophoreInputHandler     psdPharmInputHandler;
@@ -136,7 +136,7 @@ namespace
 			DataIOManager<FeatureContainer>::registerOutputHandler(cdfGzFtrContOutputHandler);
 			DataIOManager<FeatureContainer>::registerOutputHandler(cdfBz2FtrContOutputHandler);
 
-#endif // defined(HAVE_BOOST_SYSTEM) && defined(HAVE_BOOST_FILESYSTEM) && defined(HAVE_BOOST_IOSTREAMS)
+#endif // defined(HAVE_BOOST_FILESYSTEM) && defined(HAVE_BOOST_IOSTREAMS)
 		}
 
 	} init;

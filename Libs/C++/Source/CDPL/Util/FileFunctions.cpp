@@ -47,7 +47,7 @@ std::string Util::genCheckedTempFilePath(const std::string& dir, const std::stri
 		tmp_file_path /= bfs::unique_path(ptn);
 
 		if (!bfs::exists(tmp_file_path))
-			return tmp_file_path.native();
+			return tmp_file_path.string();
     }
 }
 

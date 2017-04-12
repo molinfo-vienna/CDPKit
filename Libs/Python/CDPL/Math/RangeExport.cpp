@@ -24,12 +24,11 @@
  */
 
 
-#include <cstddef>
-
 #include <boost/python.hpp>
 
 #include "CDPL/Math/Range.hpp"
 
+#include "Base/CopyAssOp.hpp"
 #include "Base/ObjectIdentityCheckVisitor.hpp"
 
 #include "ClassExports.hpp"
@@ -52,7 +51,7 @@ void CDPLPythonMath::exportRange()
 		.def("getSize", &RangeType::getSize, python::arg("self"))
 		.def("isEmpty", &RangeType::isEmpty, python::arg("self"))
 		.def("getIndex", &RangeType::operator(), (python::arg("self"), python::arg("i")))
-		.def("assign", &RangeType::operator=, (python::arg("self"), python::arg("r")), python::return_self<>())
+		.def("assign", CDPLPythonBase::copyAssOp(&RangeType::operator=), (python::arg("self"), python::arg("r")), python::return_self<>())
 		.def("swap", static_cast<void (RangeType::*)(RangeType&)>(&RangeType::swap), (python::arg("self"), python::arg("r")))
 		.def("__eq__", &RangeType::operator==, (python::arg("self"), python::arg("r")))
 		.def("__ne__", &RangeType::operator!=, (python::arg("self"), python::arg("r")))

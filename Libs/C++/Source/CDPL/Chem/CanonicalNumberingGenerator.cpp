@@ -27,7 +27,6 @@
 #include "StaticInit.hpp"
 
 #include <algorithm>
-#include <iterator>
 #include <cassert>
 
 #include <boost/bind.hpp>
@@ -602,9 +601,8 @@ void Chem::CanonicalNumberingGenerator::saveState()
 {
 	nodeLabelingStack.reserve(nodeLabelingStack.size() + nodeList.size());
 
-	std::transform(nodeList.begin(), nodeList.end(), std::back_inserter(nodeLabelingStack), 
-				   boost::bind(&std::make_pair<AtomNode*, Base::uint64>, _1, 
-							   boost::bind(&AtomNode::getLabel, _1)));
+	for (NodeList::const_iterator it = nodeList.begin(), end = nodeList.end(); it != end; ++it)
+		nodeLabelingStack.push_back(std::make_pair(*it, (*it)->getLabel()));
 }
 
 void Chem::CanonicalNumberingGenerator::restoreState()

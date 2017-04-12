@@ -68,7 +68,7 @@ namespace CDPL
 			typedef boost::shared_ptr<PEOEChargeCalculator> SharedPointer;
 
 			static const std::size_t DEF_NUM_ITERATIONS = 6;
-			static const double      DEF_DAMPING_FACTOR = 0.5;
+			static const double      DEF_DAMPING_FACTOR;
 
 			/**
 			 * \brief Constructs the \c %PEOEChargeCalculator instance.

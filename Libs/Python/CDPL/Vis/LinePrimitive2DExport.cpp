@@ -28,6 +28,8 @@
 
 #include "CDPL/Vis/LinePrimitive2D.hpp"
 
+#include "Base/CopyAssOp.hpp"
+
 #include "ClassExports.hpp"
 
 
@@ -44,7 +46,8 @@ void CDPLPythonVis::exportLinePrimitive2D()
 		.def(python::init<const Math::Vector2D&, const Math::Vector2D&>((python::arg("self"), 
 																		 python::arg("beg"), 
 																		 python::arg("end"))))    
-		.def("assign", &Vis::LinePrimitive2D::operator=, (python::arg("self"), python::arg("prim")), 
+		.def("assign", CDPLPythonBase::copyAssOp(&Vis::LinePrimitive2D::operator=),
+			 (python::arg("self"), python::arg("prim")), 
 			 python::return_self<>())
 		.def("setPen", &Vis::LinePrimitive2D::setPen, (python::arg("self"), python::arg("pen")))
 		.def("getPen", &Vis::LinePrimitive2D::getPen, python::arg("self"), 

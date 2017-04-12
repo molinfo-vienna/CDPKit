@@ -90,7 +90,7 @@ const Chem::Bond& Chem::BasicAtom::getBondToAtom(const Atom& atom) const
 	BondList::const_iterator it = std::find_if(bonds.begin(), bonds.end(),
 											   boost::bind(std::equal_to<const Atom*>(), 
 														   &atom, boost::bind(&boost::addressof<const Atom>,
-																			  boost::bind<const Atom&>(&Bond::getNeighbor, _1, boost::ref(*this)))));
+																			  boost::bind(static_cast<const Atom& (Bond::*)(const Atom&) const>(&Bond::getNeighbor), _1, boost::ref(*this)))));
 	if (it == bonds.end())
 		throw Base::ItemNotFound("BasicAtom: argument atom is not a bonded neighbor");
 
@@ -102,7 +102,7 @@ Chem::Bond& Chem::BasicAtom::getBondToAtom(const Atom& atom)
 	BondList::iterator it = std::find_if(bonds.begin(), bonds.end(),
 											 boost::bind(std::equal_to<const Atom*>(), 
 														 &atom, boost::bind(&boost::addressof<const Atom>,
-																			boost::bind<const Atom&>(&Bond::getNeighbor, _1, boost::ref(*this)))));
+																			boost::bind(static_cast<const Atom& (Bond::*)(const Atom&) const>(&Bond::getNeighbor), _1, boost::ref(*this)))));
 	if (it == bonds.end())
 		throw Base::ItemNotFound("BasicAtom: argument atom is not a bonded neighbor");
 
@@ -114,7 +114,7 @@ const Chem::Bond* Chem::BasicAtom::findBondToAtom(const Atom& atom) const
 	BondList::const_iterator it = std::find_if(bonds.begin(), bonds.end(),
 											   boost::bind(std::equal_to<const Atom*>(), 
 														   &atom, boost::bind(&boost::addressof<const Atom>,
-																			  boost::bind<const Atom&>(&Bond::getNeighbor, _1, boost::ref(*this)))));
+																			  boost::bind(static_cast<const Atom& (Bond::*)(const Atom&) const>(&Bond::getNeighbor), _1, boost::ref(*this)))));
 	return (it == bonds.end() ? 0 : *it);
 }
 
@@ -123,7 +123,7 @@ Chem::Bond* Chem::BasicAtom::findBondToAtom(const Atom& atom)
 	BondList::iterator it = std::find_if(bonds.begin(), bonds.end(),
 											 boost::bind(std::equal_to<const Atom*>(), 
 														 &atom, boost::bind(&boost::addressof<const Atom>,
-																			boost::bind<const Atom&>(&Bond::getNeighbor, _1, boost::ref(*this)))));
+																			boost::bind(static_cast<const Atom& (Bond::*)(const Atom&) const>(&Bond::getNeighbor), _1, boost::ref(*this)))));
 	return (it == bonds.end() ? 0 : *it);
 }
 

@@ -33,6 +33,7 @@
 
 #include <boost/function.hpp>
 
+#include "CDPL/Chem/APIPrefix.hpp"
 #include "CDPL/Chem/CDFFormatData.hpp"
 #include "CDPL/Chem/StringDataBlock.hpp"
 
@@ -57,7 +58,7 @@ namespace CDPL
 		class Atom;
 		class Bond;
 
-		class CDFDataReader : public Internal::CDFDataReaderBase
+		class CDPL_CHEM_API CDFDataReader : public Internal::CDFDataReaderBase
 		{
 
 		public:

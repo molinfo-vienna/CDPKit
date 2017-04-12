@@ -29,6 +29,7 @@
 #include "CDPL/Vis/Pen.hpp"
 
 #include "Base/ObjectIdentityCheckVisitor.hpp"
+#include "Base/CopyAssOp.hpp"
 
 #include "ClassExports.hpp"
 
@@ -72,7 +73,8 @@ void CDPLPythonVis::exportPen()
 				  python::arg("cap_style") = Vis::Pen::ROUND_CAP, 
 				  python::arg("join_style") = Vis::Pen::ROUND_JOIN)))    
 		.def(CDPLPythonBase::ObjectIdentityCheckVisitor<Vis::Pen>())	
-		.def("assign", &Vis::Pen::operator=, (python::arg("self"), python::arg("pen")), python::return_self<>())
+		.def("assign", CDPLPythonBase::copyAssOp(&Vis::Pen::operator=),
+			 (python::arg("self"), python::arg("pen")), python::return_self<>())
         .def("getCapStyle", &Vis::Pen::getCapStyle, python::arg("self"))    
         .def("setCapStyle", &Vis::Pen::setCapStyle, (python::arg("self"), python::arg("cap_style")))    
         .def("getColor", &Vis::Pen::getColor, python::arg("self"), python::return_internal_reference<1>())    

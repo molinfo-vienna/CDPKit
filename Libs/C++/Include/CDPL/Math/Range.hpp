@@ -107,15 +107,11 @@ namespace CDPL
 			SizeType stop;
 		};
 
-		namespace 
+		inline
+		Range<std::size_t> 
+		range(std::size_t start, std::size_t stop)
 		{
-
-			CDPL_MATH_INLINE 
-			Range<std::size_t> 
-			range(std::size_t start, std::size_t stop)
-			{
-				return Range<std::size_t>(start, stop);
-			}
+			return Range<std::size_t>(start, stop);
 		}
 	}
 }

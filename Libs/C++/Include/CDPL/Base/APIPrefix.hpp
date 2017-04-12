@@ -36,11 +36,7 @@
 #else // CDPL_BASE_STATIC_LINK
 #  include "CDPL/APIPrefix.hpp"
 #  ifdef cdpl_base_shared_EXPORTS
-#    ifdef __MINGW32__  // MinGW has a problem with the dllexport of explicit template instantiations 
-#      define CDPL_BASE_API
-#    else
-#      define CDPL_BASE_API CDPL_API_EXPORT
-#    endif // __MINGW32__
+#    define CDPL_BASE_API CDPL_API_EXPORT
 #  else // cdpl_base_shared_EXPORTS
 #    define CDPL_BASE_API CDPL_API_IMPORT
 #  endif // cdpl_base_shared_EXPORTS

@@ -29,6 +29,7 @@
 #include "CDPL/Vis/Brush.hpp"
 
 #include "Base/ObjectIdentityCheckVisitor.hpp"
+#include "Base/CopyAssOp.hpp"
 
 #include "ClassExports.hpp"
 
@@ -66,7 +67,8 @@ void CDPLPythonVis::exportBrush()
         .def(python::init<const Vis::Color&, Vis::Brush::Style>((python::arg("self"), python::arg("color"), 
 																 python::arg("style") = Vis::Brush::SOLID_PATTERN)))
 		.def(CDPLPythonBase::ObjectIdentityCheckVisitor<Vis::Brush>())	
-		.def("assign", &Vis::Brush::operator=, (python::arg("self"), python::arg("brush")), python::return_self<>())
+		.def("assign", CDPLPythonBase::copyAssOp(&Vis::Brush::operator=),
+			 (python::arg("self"), python::arg("brush")), python::return_self<>())
         .def("getColor", &Vis::Brush::getColor, python::arg("self"), python::return_internal_reference<1>())
         .def("setColor", &Vis::Brush::setColor, (python::arg("self"), python::arg("color")))
         .def("getStyle", &Vis::Brush::getStyle, python::arg("self"))    

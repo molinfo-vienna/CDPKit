@@ -29,6 +29,8 @@
 #include "CDPL/Pharm/DefaultInteractionAnalyzer.hpp"
 #include "CDPL/Pharm/Pharmacophore.hpp"
 
+#include "Base/CopyAssOp.hpp"
+
 #include "ClassExports.hpp"
 
 
@@ -43,6 +45,6 @@ void CDPLPythonPharm::exportDefaultInteractionAnalyzer()
 		.def(python::init<const Pharm::Pharmacophore&, const Pharm::Pharmacophore&, Pharm::FeatureMapping&>(
 				 (python::arg("self"), python::arg("pharm"), python::arg("pharm"))))
 		.def(python::init<const Pharm::DefaultInteractionAnalyzer&>((python::arg("self"), python::arg("analyzer"))))
-		.def("assign", &Pharm::DefaultInteractionAnalyzer::operator=, 
+		.def("assign", CDPLPythonBase::copyAssOp(&Pharm::DefaultInteractionAnalyzer::operator=), 
 			 (python::arg("self"), python::arg("analyzer")), python::return_self<>());
 }

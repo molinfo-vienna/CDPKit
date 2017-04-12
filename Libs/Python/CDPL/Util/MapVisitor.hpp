@@ -35,6 +35,7 @@
 #include <boost/bind.hpp>
 
 #include "Base/ObjectIdentityCheckVisitor.hpp"
+#include "Base/CopyAssOp.hpp"
 
 
 namespace CDPLPythonUtil
@@ -103,7 +104,7 @@ namespace CDPLPythonUtil
 				.def("getSize", &MapType::getSize, python::arg("self"))
 				.def("isEmpty", &MapType::isEmpty, python::arg("self"))
 				.def("clear", &MapType::clear, python::arg("self"))
-				.def("assign", &MapType::operator=, (python::arg("self"), python::arg("map")), 
+				.def("assign", CDPLPythonBase::copyAssOp(&MapType::operator=), (python::arg("self"), python::arg("map")), 
 					 python::return_self<EntryAdditionPolicy1>())
 				.def("getValue", getValueFunc, (python::arg("self"), python::arg("key")), ValueReturnPolicy())
 				.def("getValue", &ValueOrDefaultGetter::getValue, (python::arg("self"), python::arg("key"), python::arg("def_value")), 

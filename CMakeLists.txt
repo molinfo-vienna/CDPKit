@@ -1,4 +1,4 @@
-CMAKE_MINIMUM_REQUIRED(VERSION 2.6.0 FATAL_ERROR)
+CMAKE_MINIMUM_REQUIRED(VERSION 2.8.12 FATAL_ERROR)
 
 PROJECT(CDPKit)
 
@@ -12,8 +12,10 @@ IF(COMMAND CMAKE_POLICY)
 ENDIF(COMMAND CMAKE_POLICY)
 
 IF(CMAKE_COMPILER_IS_GNUCXX)
-  SET(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wall")
+  SET(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wall -Wno-deprecated-declarations")
 ENDIF(CMAKE_COMPILER_IS_GNUCXX)
+
+set(CMAKE_CXX_STANDARD 11)
 
 IF(APPLE) 
   IF(CMAKE_INSTALL_PREFIX_INITIALIZED_TO_DEFAULT) 
@@ -136,9 +138,10 @@ ELSE(WIN32)
 ENDIF(WIN32)
 
 
+SET(Boost_USE_MULTITHREAD ON)
 SET(Boost_USE_STATIC_LIBS OFF)
-FIND_PACKAGE(Boost 1.52.0 COMPONENTS date_time-mt python-mt unit_test_framework-mt filesystem-mt system-mt
-	     iostreams-mt program_options-mt thread-mt atomic-mt chrono-mt)
+FIND_PACKAGE(Boost 1.52.0 COMPONENTS date_time python unit_test_framework filesystem system
+	     iostreams program_options thread atomic chrono)
 
 FIND_PACKAGE(Qt4)
 FIND_PACKAGE(Cairo)
@@ -150,7 +153,6 @@ SET(HAVE_QT ${QT4_FOUND})
 SET(HAVE_CAIRO ${CAIRO_FOUND})
 SET(HAVE_SQLITE3 ${SQLITE3_FOUND})
 SET(HAVE_BOOST_FILESYSTEM ${Boost_FILESYSTEM_FOUND})
-SET(HAVE_BOOST_SYSTEM ${Boost_SYSTEM_FOUND})
 SET(HAVE_BOOST_IOSTREAMS ${Boost_IOSTREAMS_FOUND})
 
 IF(NOT Boost_DATE_TIME_FOUND)
@@ -161,6 +163,10 @@ IF(NOT Boost_THREAD_FOUND)
   MESSAGE(FATAL_ERROR "Boost thread library not found.")
 ENDIF(NOT Boost_THREAD_FOUND)
 
+IF(NOT Boost_SYSTEM_FOUND)
+  MESSAGE(FATAL_ERROR "Boost system library not found.")
+ENDIF(NOT Boost_SYSTEM_FOUND)
+
 IF(NOT SQLITE3_FOUND)
   MESSAGE("!! Warning: SQLite3 library not found -> can't build pharmacophore screening components.")
 ENDIF(NOT SQLITE3_FOUND)
@@ -168,10 +174,6 @@ ENDIF(NOT SQLITE3_FOUND)
 IF(NOT Boost_FILESYSTEM_FOUND)
   MESSAGE("!! Warning: Boost filesystem library not found -> dependent components won't be built.")
 ENDIF(NOT Boost_FILESYSTEM_FOUND)
-
-IF(NOT Boost_SYSTEM_FOUND)
-  MESSAGE("!! Warning: Boost system library not found -> dependent components won't be built.")
-ENDIF(NOT Boost_SYSTEM_FOUND)
 
 IF(NOT Boost_IOSTREAMS_FOUND)
   MESSAGE("!! Warning: Boost iostreams library not found -> dependent components won't be built.")
@@ -199,7 +201,7 @@ IF(Boost_PYTHON_FOUND AND PYTHONLIBS_FOUND)
   IF(NOT PYTHONINTERP_FOUND)
     MESSAGE("!! Warning: Python interpreter not found -> can't run Python unit test cases.")
   ELSE(NOT PYTHONINTERP_FOUND)
-    CONFIGURE_FILE("${RUN_PYTHON_TESTS_IN}" "${RUN_PYTHON_TESTS}" $ONLY)
+    CONFIGURE_FILE("${RUN_PYTHON_TESTS_IN}" "${RUN_PYTHON_TESTS}" @ONLY)
   ENDIF(NOT PYTHONINTERP_FOUND)
 ELSE(Boost_PYTHON_FOUND AND PYTHONLIBS_FOUND)
   MESSAGE("!! Warning: Python library and/or Boost python library not found -> can't build CDPL Python bindings.")
@@ -280,7 +282,7 @@ INCLUDE_DIRECTORIES("${CDPL_INCLUDE_DIR}" "${Boost_INCLUDE_DIR}")
 
 # CPack related setup
 
-SET(CPACK_PACKAGE_DESCRIPTION_SUMMARY "CDP-Tk - The Chemical Data Processing Toolkit")
+SET(CPACK_PACKAGE_DESCRIPTION_SUMMARY "CDPKit - The Chemical Data Processing Toolkit")
 SET(CPACK_PACKAGE_VENDOR "CDP-Tk Development Team")
 SET(CPACK_PACKAGE_DESCRIPTION_FILE "${CMAKE_CURRENT_SOURCE_DIR}/Readme.txt")
 SET(CPACK_RESOURCE_FILE_README "${CMAKE_CURRENT_SOURCE_DIR}/Readme.txt")
@@ -357,8 +359,8 @@ IF(WIN32)
 
   INSTALL(DIRECTORY "${CDPKIT_EXTERNAL_RUNTIME_LIBRARY_DIR}/" 
           DESTINATION "${CDPKIT_EXECUTABLE_INSTALL_DIR}"
+	  COMPONENT CDPLSharedLibraries
           FILES_MATCHING PATTERN "*.dll"
-          COMPONENT CDPLSharedLibraries
          )
 ELSE(WIN32)
   IF(APPLE)

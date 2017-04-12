@@ -29,6 +29,7 @@
 #include "CDPL/Vis/Color.hpp"
 
 #include "Base/ObjectIdentityCheckVisitor.hpp"
+#include "Base/CopyAssOp.hpp"
 
 #include "ClassExports.hpp"
 
@@ -45,7 +46,7 @@ void CDPLPythonVis::exportColor()
 				 (python::arg("self"), python::arg("red"), python::arg("green"), 
 				  python::arg("blue"), python::arg("alpha") = 1.0)))   
 		.def(CDPLPythonBase::ObjectIdentityCheckVisitor<Vis::Color>())	
-		.def("assign", &Vis::Color::operator=, (python::arg("self"), python::arg("color")), 
+		.def("assign", CDPLPythonBase::copyAssOp(&Vis::Color::operator=), (python::arg("self"), python::arg("color")), 
 			 python::return_self<>())
         .def("getAlpha", &Vis::Color::getAlpha, python::arg("self"))    
         .def("setAlpha", &Vis::Color::setAlpha, (python::arg("self"), python::arg("alpha")))

@@ -28,6 +28,8 @@
 
 #include "CDPL/Chem/BondDirectionMatchExpression.hpp"
 
+#include "Base/CopyAssOp.hpp"
+
 #include "ClassExports.hpp"
 
 
@@ -40,6 +42,7 @@ void CDPLPythonChem::exportBondDirectionMatchExpression()
 		python::bases<Chem::MatchExpression<Chem::Bond, Chem::MolecularGraph> > >("BondDirectionMatchExpression", python::no_init)
 		.def(python::init<const Chem::BondDirectionMatchExpression&>((python::arg("self"), python::arg("expr"))))
 		.def(python::init<unsigned int, bool>((python::arg("self"), python::arg("dir_flags"), python::arg("not_match"))))
-		.def("assign", &Chem::BondDirectionMatchExpression::operator=, (python::arg("self"), python::arg("expr")),
+		.def("assign", CDPLPythonBase::copyAssOp(&Chem::BondDirectionMatchExpression::operator=),
+			 (python::arg("self"), python::arg("expr")),
 			 python::return_self<>());
 }

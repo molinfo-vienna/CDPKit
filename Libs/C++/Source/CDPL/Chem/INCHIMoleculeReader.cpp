@@ -145,7 +145,7 @@ bool Chem::INCHIMoleculeReader::moreData(std::istream& is)
 {
 	is.imbue(std::locale::classic());
 
-	return std::istream::sentry(is, false);
+	return bool(std::istream::sentry(is, false));
 }
 
 bool Chem::INCHIMoleculeReader::readMolecule(std::istream& is, Molecule& mol)

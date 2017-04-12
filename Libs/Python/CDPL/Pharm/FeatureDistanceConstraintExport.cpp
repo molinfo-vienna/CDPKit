@@ -30,6 +30,7 @@
 #include "CDPL/Pharm/Feature.hpp"
 
 #include "Base/ObjectIdentityCheckVisitor.hpp"
+#include "Base/CopyAssOp.hpp"
 
 #include "ClassExports.hpp"
 
@@ -56,7 +57,7 @@ void CDPLPythonPharm::exportFeatureDistanceConstraint()
 		.def(CDPLPythonBase::ObjectIdentityCheckVisitor<Pharm::FeatureDistanceConstraint>())
 		.def("getMinDistance", &Pharm::FeatureDistanceConstraint::getMinDistance, python::arg("self"))
 		.def("getMaxDistance", &Pharm::FeatureDistanceConstraint::getMaxDistance, python::arg("self"))
-		.def("assign", &Pharm::FeatureDistanceConstraint::operator=, 
+		.def("assign", CDPLPythonBase::copyAssOp(&Pharm::FeatureDistanceConstraint::operator=), 
 			 (python::arg("self"), python::arg("con")), python::return_self<>())
 		.def("__call__", &callOperator, (python::arg("self"), python::arg("ftr1"), python::arg("ftr2")))
 		.add_property("minDistance", &Pharm::FeatureDistanceConstraint::getMinDistance)

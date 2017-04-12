@@ -29,6 +29,7 @@
 #include "CDPL/Math/KabschAlgorithm.hpp"
 
 #include "Base/ObjectIdentityCheckVisitor.hpp"
+#include "Base/CopyAssOp.hpp"
 
 #include "VectorExpression.hpp"
 #include "MatrixExpression.hpp"
@@ -52,7 +53,7 @@ namespace
 				.def(python::init<>(python::arg("self")))
 				.def(python::init<const AlgoType&>((python::arg("self"), python::arg("algo"))))
 				.def(CDPLPythonBase::ObjectIdentityCheckVisitor<AlgoType >())
-				.def("assign", &AlgoType::operator=, (python::arg("self"), python::arg("algo")),
+				.def("assign", CDPLPythonBase::copyAssOp(&AlgoType::operator=), (python::arg("self"), python::arg("algo")),
 					 python::return_self<>())
 				.def("getTransform", &AlgoType::getTransform, python::arg("self"), 
 					 python::return_internal_reference<>())
@@ -94,7 +95,7 @@ namespace
 }
 
 
-void CDPLPythonMath::exportKabschAlgorithms()
+void CDPLPythonMath::exportKabschAlgorithmTypes()
 {
 	KabschAlgorithmExport<float>("FKabschAlgorithm");
 	KabschAlgorithmExport<double>("DKabschAlgorithm");

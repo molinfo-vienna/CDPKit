@@ -28,6 +28,8 @@
 
 #include "CDPL/Vis/LineSegmentListPrimitive2D.hpp"
 
+#include "Base/CopyAssOp.hpp"
+
 #include "ClassExports.hpp"
 
 
@@ -40,7 +42,8 @@ void CDPLPythonVis::exportLineSegmentListPrimitive2D()
 		python::bases<Vis::PointArray2D, Vis::GraphicsPrimitive2D> >("LineSegmentListPrimitive2D", python::no_init)
 		.def(python::init<>(python::arg("self")))    
 		.def(python::init<const Vis::LineSegmentListPrimitive2D&>((python::arg("self"), python::arg("prim"))))
-		.def("assign", &Vis::LineSegmentListPrimitive2D::operator=, (python::arg("self"), python::arg("prim")),
+		.def("assign", CDPLPythonBase::copyAssOp(&Vis::LineSegmentListPrimitive2D::operator=),
+			 (python::arg("self"), python::arg("prim")),
 			 python::return_self<>())
 		.def("setPen", &Vis::LineSegmentListPrimitive2D::setPen, (python::arg("self"), python::arg("pen")))
 		.def("getPen", &Vis::LineSegmentListPrimitive2D::getPen, python::arg("self"), 

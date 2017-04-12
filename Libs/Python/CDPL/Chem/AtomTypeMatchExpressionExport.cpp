@@ -28,6 +28,8 @@
 
 #include "CDPL/Chem/AtomTypeMatchExpression.hpp"
 
+#include "Base/CopyAssOp.hpp"
+
 #include "ClassExports.hpp"
 
 
@@ -40,6 +42,7 @@ void CDPLPythonChem::exportAtomTypeMatchExpression()
 		python::bases<Chem::MatchExpression<Chem::Atom, Chem::MolecularGraph> > >("AtomTypeMatchExpression", python::no_init)
 		.def(python::init<const Chem::AtomTypeMatchExpression&>((python::arg("self"), python::arg("expr"))))
 		.def(python::init<unsigned int, bool>((python::arg("self"), python::arg("atom_type"), python::arg("not_match"))))
-		.def("assign", &Chem::AtomTypeMatchExpression::operator=, (python::arg("self"), python::arg("expr")), 
+		.def("assign", CDPLPythonBase::copyAssOp(&Chem::AtomTypeMatchExpression::operator=),
+			 (python::arg("self"), python::arg("expr")), 
 			 python::return_self<>());
 }

@@ -35,11 +35,11 @@
 #  define CDPL_BIOMOL_API
 #else // CDPL_BIOMOL_STATIC_LINK
 #  include "CDPL/APIPrefix.hpp"
-#  ifdef cdpl_chem_shared_EXPORTS
+#  ifdef cdpl_biomol_shared_EXPORTS
 #    define CDPL_BIOMOL_API CDPL_API_EXPORT
-#  else // cdpl_chem_shared_EXPORTS
+#  else // cdpl_biomol_shared_EXPORTS
 #    define CDPL_BIOMOL_API CDPL_API_IMPORT
-#  endif // cdpl_chem_shared_EXPORTS
+#  endif // cdpl_biomol_shared_EXPORTS
 #endif // CDPL_BIOMOL_STATIC_LINK
 
 /**

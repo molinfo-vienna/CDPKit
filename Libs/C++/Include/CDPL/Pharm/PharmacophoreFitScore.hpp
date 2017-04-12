@@ -56,9 +56,9 @@ namespace CDPL
 		{
 
 		  public:
-			static const double DEF_FTR_MATCH_COUNT_FACTOR   = 0.8;
-			static const double DEF_FTR_POS_MATCH_FACTOR     = 0.1;
-			static const double DEF_FTR_GEOM_MATCH_FACTOR    = 0.1;
+			static const double DEF_FTR_MATCH_COUNT_FACTOR;
+			static const double DEF_FTR_POS_MATCH_FACTOR;
+			static const double DEF_FTR_GEOM_MATCH_FACTOR;
 	  
 			PharmacophoreFitScore(double match_cnt_factor = DEF_FTR_MATCH_COUNT_FACTOR, 
 								  double pos_match_factor = DEF_FTR_POS_MATCH_FACTOR,

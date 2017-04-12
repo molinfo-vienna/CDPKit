@@ -100,7 +100,7 @@ namespace
 }
 
 
-void CDPLPythonMath::exportBFGSMinimizers()
+void CDPLPythonMath::exportBFGSMinimizerTypes()
 {
 	using namespace CDPL;
 

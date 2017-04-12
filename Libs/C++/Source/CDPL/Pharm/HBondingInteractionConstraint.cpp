@@ -45,10 +45,10 @@ namespace
 }
 
 
-const double Pharm::HBondingInteractionConstraint::DEF_MIN_HB_LENGTH;
-const double Pharm::HBondingInteractionConstraint::DEF_MAX_HB_LENGTH;
-const double Pharm::HBondingInteractionConstraint::DEF_MIN_AHD_ANGLE;
-const double Pharm::HBondingInteractionConstraint::DEF_MAX_ACC_ANGLE;
+const double Pharm::HBondingInteractionConstraint::DEF_MIN_HB_LENGTH = 1.2;
+const double Pharm::HBondingInteractionConstraint::DEF_MAX_HB_LENGTH = 2.8;
+const double Pharm::HBondingInteractionConstraint::DEF_MIN_AHD_ANGLE = 130.0;
+const double Pharm::HBondingInteractionConstraint::DEF_MAX_ACC_ANGLE = 85.0;
 
 
 double Pharm::HBondingInteractionConstraint::getMinLength() const

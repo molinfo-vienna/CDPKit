@@ -30,6 +30,7 @@
 #include "CDPL/Pharm/Feature.hpp"
 
 #include "Base/ObjectIdentityCheckVisitor.hpp"
+#include "Base/CopyAssOp.hpp"
 
 #include "ClassExports.hpp"
 
@@ -54,7 +55,7 @@ void CDPLPythonPharm::exportFeaturePositionMatchFunctor()
 		.def(python::init<const Pharm::FeaturePositionMatchFunctor&>((python::arg("self"), python::arg("func"))))
 		.def(python::init<bool>((python::arg("self"), python::arg("query_mode"))))
 		.def(CDPLPythonBase::ObjectIdentityCheckVisitor<Pharm::FeaturePositionMatchFunctor>())
-		.def("assign", &Pharm::FeaturePositionMatchFunctor::operator=, 
+		.def("assign", CDPLPythonBase::copyAssOp(&Pharm::FeaturePositionMatchFunctor::operator=), 
 			 (python::arg("self"), python::arg("func")), python::return_self<>())
 		.def("__call__", &callOperator, (python::arg("self"), python::arg("ftr1"), python::arg("ftr2"), python::arg("xform")))
 		.add_property("qryMode", &Pharm::FeaturePositionMatchFunctor::queryMode);

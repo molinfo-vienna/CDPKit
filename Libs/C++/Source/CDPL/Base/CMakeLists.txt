@@ -11,7 +11,7 @@ SET(cdpl-base_LIB_SRCS
     Exceptions.cpp
    )
 
-LINK_LIBRARIES(${Boost_THREAD_LIBRARY})
+LINK_LIBRARIES(${Boost_THREAD_LIBRARY} ${Boost_SYSTEM_LIBRARY})
 
 IF(Boost_ATOMIC_FOUND)
   LINK_LIBRARIES(${Boost_ATOMIC_LIBRARY})
@@ -54,12 +54,6 @@ ELSE(APPLE)
     INSTALL(SCRIPT "${CMAKE_CURRENT_BINARY_DIR}/InstallExternalRuntimeDependencies.cmake")
   ENDIF(UNIX)
 ENDIF(APPLE)
-
-# MinGW has a problem with the dllexport of explicit template instantiations
-# -> as a workaround, all symbols need to be exported
-IF(CMAKE_COMPILER_IS_GNUCXX AND MINGW)
-  SET_TARGET_PROPERTIES(cdpl-base-shared PROPERTIES LINK_FLAGS --export-all-symbols)
-ENDIF(CMAKE_COMPILER_IS_GNUCXX AND MINGW)
 
 INSTALL(TARGETS cdpl-base-shared
         RUNTIME DESTINATION "${CDPKIT_EXECUTABLE_INSTALL_DIR}" COMPONENT CDPLSharedLibraries

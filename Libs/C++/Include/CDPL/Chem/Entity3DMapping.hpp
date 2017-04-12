@@ -63,11 +63,14 @@ namespace CDPL
 		  public:
 			typedef boost::shared_ptr<Entity3DMapping> SharedPointer;
 
+			Entity3DMapping();
+			
 		  private:
 			const char* getClassName() const {
 				return "Entity3DMapping";
 			}
 		};
+		
 		/**
 		 * @}
 		 */

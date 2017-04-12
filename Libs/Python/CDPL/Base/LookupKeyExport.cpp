@@ -28,6 +28,7 @@
 
 #include "CDPL/Base/LookupKey.hpp"
 
+#include "CopyAssOp.hpp"
 #include "ObjectIdentityCheckVisitor.hpp"
 #include "ClassExports.hpp"
 
@@ -42,7 +43,7 @@ void CDPLPythonBase::exportLookupKey()
 		.def("create", &Base::LookupKey::create, python::arg("name"))
 		.staticmethod("create")
 		.def("getID", &Base::LookupKey::getID, python::arg("self"))    
-		.def("assign", &Base::LookupKey::operator=, (python::arg("self"), python::arg("key")), python::return_self<>())
+		.def("assign", copyAssOp(&Base::LookupKey::operator=), (python::arg("self"), python::arg("key")), python::return_self<>())
 		.def("getName", &Base::LookupKey::getName, python::arg("self"), python::return_value_policy<python::copy_const_reference>())
 		.def("setName", &Base::LookupKey::setName, (python::arg("self"), python::arg("name")))
 		.def(ObjectIdentityCheckVisitor<Base::LookupKey>())

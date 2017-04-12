@@ -57,7 +57,7 @@ namespace CDPL
 		{
 
 		  public:
-			static const double       DEF_FEATURE_TOL   = 0.9;
+			static const double       DEF_FEATURE_TOL;
 			static const unsigned int DEF_FEATURE_TYPE  = FeatureType::AROMATIC;
 			static const unsigned int DEF_FEATURE_GEOM  = FeatureGeometry::PLANE;
 

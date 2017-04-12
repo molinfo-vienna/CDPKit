@@ -30,18 +30,13 @@
 #include "CDPL/Chem/Fragment.hpp"
 
 #include "Base/ObjectIdentityCheckVisitor.hpp"
+#include "Base/CopyAssOp.hpp"
 
 #include "ClassExports.hpp"
 
 
 namespace
 {
-	
-	CDPL::Chem::SurfaceAtomExtractor*
-	construct(CDPL::Chem::AtomContainer& cntnr, CDPL::Chem::MolecularGraph& prnt_molgraph, CDPL::Chem::Fragment& frag)
-    {
-		return new CDPL::Chem::SurfaceAtomExtractor(cntnr, prnt_molgraph, frag);
-    }
 
 	void extract(CDPL::Chem::SurfaceAtomExtractor& xtor, CDPL::Chem::AtomContainer& cntnr, 
 				 CDPL::Chem::MolecularGraph& prnt_molgraph, CDPL::Chem::Fragment& frag)
@@ -85,7 +80,7 @@ void CDPLPythonChem::exportSurfaceAtomExtractor()
 		.def("getNumTestPoints", &Chem::SurfaceAtomExtractor::getNumTestPoints, python::arg("self"))
 		.def("extract", &extract,
 			 (python::arg("self"), python::arg("cntr"), python::arg("parent_molgraph"), python::arg("frag")))
-		.def("assign", &Chem::SurfaceAtomExtractor::operator=, 
+		.def("assign", CDPLPythonBase::copyAssOp(&Chem::SurfaceAtomExtractor::operator=), 
 			 (python::arg("self"), python::arg("extractor")), python::return_self<>())
 		.def_readonly("DEF_PROBE_RADIUS", Chem::SurfaceAtomExtractor::DEF_PROBE_RADIUS)
 		.def_readonly("DEF_GRID_OVERSIZE", Chem::SurfaceAtomExtractor::DEF_GRID_OVERSIZE)
