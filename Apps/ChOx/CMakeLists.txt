@@ -1,6 +1,4 @@
-INCLUDE_DIRECTORIES("${CMAKE_CURRENT_SOURCE_DIR}" "${CMAKE_CURRENT_BINARY_DIR}" ${QT_INCLUDES})
-
-ADD_DEFINITIONS(${QT_DEFINITIONS})
+INCLUDE_DIRECTORIES("${CMAKE_CURRENT_SOURCE_DIR}" "${CMAKE_CURRENT_BINARY_DIR}")
 
 SET(chox_SRCS
     Main.cpp
@@ -111,9 +109,10 @@ SET(chox_MOC_HDRS
     RangeSelectionDialog.hpp 
    )
 
-QT4_WRAP_UI(chox_SRCS ${chox_UI_FILES})
-QT4_WRAP_CPP(chox_SRCS ${chox_MOC_HDRS})
-QT4_ADD_RESOURCES(chox_SRCS ${chox_RESOURCES})
+
+QT5_WRAP_UI(chox_SRCS ${chox_UI_FILES})
+QT5_WRAP_CPP(chox_SRCS ${chox_MOC_HDRS})
+QT5_ADD_RESOURCES(chox_SRCS ${chox_RESOURCES})
 
 IF(APPLE)
   ADD_EXECUTABLE(chox MACOSX_BUNDLE ${chox_SRCS} Icons/chox.icns)
@@ -138,7 +137,7 @@ IF(APPLE)
           COMPONENT Applications
          )
 
-  TARGET_LINK_LIBRARIES(chox cdpl-vis-static cdpl-biomol-static cdpl-pharm-static ${QT_LIBRARIES})
+  TARGET_LINK_LIBRARIES(chox cdpl-vis-static cdpl-biomol-static cdpl-pharm-static Qt5::Gui Qt5::Widgets Qt5::PrintSupport)
 ELSE(APPLE)
   IF(WIN32)
     IF(MINGW) # resource compilation for mingw
@@ -177,7 +176,7 @@ ELSE(APPLE)
     INSTALL(SCRIPT "${CMAKE_CURRENT_BINARY_DIR}/InstallExternalRuntimeDependencies.cmake")
   ENDIF(WIN32)
 
-  TARGET_LINK_LIBRARIES(chox cdpl-vis-shared cdpl-biomol-shared cdpl-pharm-shared ${QT_LIBRARIES})
+  TARGET_LINK_LIBRARIES(chox cdpl-vis-shared cdpl-biomol-shared cdpl-pharm-shared Qt5::Gui Qt5::Widgets Qt5::PrintSupport)
 ENDIF(APPLE)
 
 INSTALL(TARGETS chox DESTINATION "${CDPKIT_EXECUTABLE_INSTALL_DIR}" COMPONENT Applications)

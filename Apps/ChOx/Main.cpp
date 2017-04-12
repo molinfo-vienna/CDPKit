@@ -69,11 +69,11 @@ int main(int argc, char** argv)
 
     main_win->show();
 
-	if (app.argc() > 1) {
+	if (app.arguments().size() > 1) {
 		QStringList file_names;
 
-		for (int i = 1; i < app.argc(); i++)
-			file_names.push_back(app.argv()[i]);
+		for (int i = 1; i < app.arguments().size(); i++)
+			file_names.push_back(app.arguments().at(i));
 
 		main_win->openFiles(file_names);
 	}

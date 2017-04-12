@@ -34,7 +34,7 @@ SET(cdpl-vis_LIB_SRCS
     TextLabelPrimitive2D.cpp
    )
 
-IF(QT4_FOUND)
+IF(Qt5Gui_FOUND)
   SET(cdpl-vis_LIB_SRCS
       ${cdpl-vis_LIB_SRCS}
       QtRenderer2D.cpp
@@ -42,10 +42,8 @@ IF(QT4_FOUND)
       QtObjectFactory.cpp
      )	
 
-  LINK_LIBRARIES(${QT_LIBRARIES})
-  ADD_DEFINITIONS(${QT_DEFINITIONS})
-  INCLUDE_DIRECTORIES(${QT_INCLUDES})
-ENDIF(QT4_FOUND)
+  LINK_LIBRARIES(Qt5::Gui)
+ENDIF(Qt5Gui_FOUND)
 
 IF(CAIRO_FOUND)
   SET(cdpl-vis_LIB_SRCS

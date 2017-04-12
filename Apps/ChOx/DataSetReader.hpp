@@ -30,11 +30,9 @@
 #include <QObject>
 #include <QString>
 
-// Workaround for MOC bug
-#ifndef Q_MOC_RUN
 #include "DataRecordVisitor.hpp"
 #include "FileDataRecord.hpp"
-#endif
+
 
 class QWidget;
 

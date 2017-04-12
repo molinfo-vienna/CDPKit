@@ -30,7 +30,7 @@ SET(test-suite_SRCS
     Utilities.cpp
    )
 
-IF(QT4_FOUND)
+IF(Qt5Gui_FOUND)
   SET(test-suite_SRCS
       ${test-suite_SRCS}
       QtRenderer2DTest.cpp
@@ -38,10 +38,8 @@ IF(QT4_FOUND)
       QtObjectFactoryTest.cpp
      )	
 
-  LINK_LIBRARIES(${QT_LIBRARIES})
-  ADD_DEFINITIONS(${QT_DEFINITIONS})
-  INCLUDE_DIRECTORIES(${QT_INCLUDES})
-ENDIF(QT4_FOUND)
+  LINK_LIBRARIES(Qt5::Gui Qt5::Widgets)
+ENDIF(Qt5Gui_FOUND)
 
 IF(CAIRO_FOUND)
   IF(HAVE_CAIRO_PNG_SUPPORT)

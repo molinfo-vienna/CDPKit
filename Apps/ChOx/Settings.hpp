@@ -32,14 +32,11 @@
 
 #include <QObject>
 
-// Workaround for MOC bug
-#ifndef Q_MOC_RUN
 #include "CDPL/Vis/Pen.hpp"
 #include "CDPL/Pharm/ScreeningDBCreator.hpp"
 
 #include "SettingsContainer.hpp"
 #include "CDPLFwd.hpp"
-#endif
 
 
 class QSettings;

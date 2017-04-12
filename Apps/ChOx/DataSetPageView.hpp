@@ -33,12 +33,10 @@
 #include <QPoint>
 #include <QPainter>
 
-// Workaround for MOC bug
-#ifndef Q_MOC_RUN
 #include "CDPL/Vis/QtFontMetrics.hpp"
 
 #include "DataRecordPainter.hpp"
-#endif 
+
 
 class QMenu;
 

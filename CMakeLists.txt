@@ -16,6 +16,8 @@ IF(CMAKE_COMPILER_IS_GNUCXX)
 ENDIF(CMAKE_COMPILER_IS_GNUCXX)
 
 set(CMAKE_CXX_STANDARD 11)
+set(CMAKE_AUTOMOC OFF)
+
 
 IF(APPLE) 
   IF(CMAKE_INSTALL_PREFIX_INITIALIZED_TO_DEFAULT) 
@@ -143,13 +145,19 @@ SET(Boost_USE_STATIC_LIBS OFF)
 FIND_PACKAGE(Boost 1.52.0 COMPONENTS date_time python unit_test_framework filesystem system
 	     iostreams program_options thread atomic chrono)
 
-FIND_PACKAGE(Qt4)
+FIND_PACKAGE(Qt5Gui)
+FIND_PACKAGE(Qt5Widgets)
+FIND_PACKAGE(Qt5PrintSupport)
 FIND_PACKAGE(Cairo)
 FIND_PACKAGE(SQLite3)
 FIND_PACKAGE(Doxygen)
 FIND_PACKAGE(PythonLibs)
 
-SET(HAVE_QT ${QT4_FOUND})
+IF(NOT Qt5Gui_FOUND)
+  MESSAGE("!! Warning: Qt5 not found -> can't build Qt rendering backend and Qt applications.")
+ENDIF(NOT Qt5Gui_FOUND)
+
+SET(HAVE_QT {Qt5Gui_FOUND})
 SET(HAVE_CAIRO ${CAIRO_FOUND})
 SET(HAVE_SQLITE3 ${SQLITE3_FOUND})
 SET(HAVE_BOOST_FILESYSTEM ${Boost_FILESYSTEM_FOUND})
@@ -207,15 +215,6 @@ ELSE(Boost_PYTHON_FOUND AND PYTHONLIBS_FOUND)
   MESSAGE("!! Warning: Python library and/or Boost python library not found -> can't build CDPL Python bindings.")
   SET(BUILD_PYTHON_MODULES FALSE)
 ENDIF(Boost_PYTHON_FOUND AND PYTHONLIBS_FOUND)
-
-IF(NOT QT4_FOUND)
-  MESSAGE("!! Warning: Qt4 not found -> can't build Qt rendering backend and Qt applications.")
-ELSE(NOT QT4_FOUND)
-  SET(QT_LIBRARIES "${QT_QTCORE_LIBRARY}" "${QT_QTGUI_LIBRARY}")
-  IF(WIN32)
-    SET(QT_LIBRARIES ${QT_LIBRARIES} "${QT_QTMAIN_LIBRARY}")
-  ENDIF(WIN32)
-ENDIF(NOT QT4_FOUND)
 
 IF(NOT CAIRO_FOUND)
   MESSAGE("!! Warning: CAIRO library not found -> can't build Cairo rendering backend.")
