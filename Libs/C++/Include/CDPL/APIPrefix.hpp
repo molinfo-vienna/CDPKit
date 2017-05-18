@@ -35,8 +35,13 @@
 #  define CDPL_API_EXPORT __declspec(dllexport)
 #  define CDPL_API_IMPORT __declspec(dllimport)
 #else
-#  define CDPL_API_EXPORT
-#  define CDPL_API_IMPORT
+#  if __GNUC__ >= 4
+#    define CDPL_API_EXPORT __attribute__ ((visibility ("default")))
+#    define CDPL_API_IMPORT __attribute__ ((visibility ("default")))
+#  else
+#    define CDPL_API_EXPORT
+#    define CDPL_API_IMPORT
+#  endif // __GNUC__ >= 4
 #endif // (defined(_WIN32) || defined(__CYGWIN__))
 
 #ifdef _MSC_VER

@@ -35,7 +35,7 @@
 using namespace CDPL; 
 
 
-std::size_t Chem::getExplicitAtomCount(const Atom& atom, const MolecularGraph& molgraph, unsigned int type)
+std::size_t Chem::getExplicitAtomCount(const Atom& atom, const MolecularGraph& molgraph, unsigned int type, bool strict)
 {
     std::size_t count = 0;
 
@@ -43,15 +43,15 @@ std::size_t Chem::getExplicitAtomCount(const Atom& atom, const MolecularGraph& m
 	Atom::ConstBondIterator b_it = atom.getBondsBegin();
 
 	for (Atom::ConstAtomIterator a_it = atom.getAtomsBegin(); a_it != atoms_end; ++a_it, ++b_it)
-		if (molgraph.containsAtom(*a_it) && molgraph.containsBond(*b_it) && getType(*a_it) == type)
+		if (molgraph.containsAtom(*a_it) && molgraph.containsBond(*b_it) && (strict ? type == getType(*a_it) : atomTypesMatch(type, getType(*a_it))))
 			count++;
 
     return count;
 }
 
-std::size_t Chem::getAtomCount(const Atom& atom, const MolecularGraph& molgraph, unsigned int type)
+std::size_t Chem::getAtomCount(const Atom& atom, const MolecularGraph& molgraph, unsigned int type, bool strict)
 {
-    std::size_t count = getExplicitAtomCount(atom, molgraph, type);
+    std::size_t count = getExplicitAtomCount(atom, molgraph, type, strict);
 
     if (type == AtomType::H)
 		count += getImplicitHydrogenCount(atom);

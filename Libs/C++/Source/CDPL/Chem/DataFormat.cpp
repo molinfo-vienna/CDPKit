@@ -156,11 +156,11 @@ const Base::DataFormat Chem::DataFormat::CDF_GZ("CDF_GZ", "GZip-Compressed Nativ
 											 cdfGzFileExtensions, cdfGzFileExtensions + 1, true);
 const Base::DataFormat Chem::DataFormat::CDF_BZ2("CDF_BZ2", "BZip2-Compressed Native CDPL-Format", "", 
 											 cdfBz2FileExtensions, cdfBz2FileExtensions + 1, true);
-const Base::DataFormat Chem::DataFormat::MOL2("MOL2", "Native CDPL-Format", "", 
+const Base::DataFormat Chem::DataFormat::MOL2("MOL2", "Tripos Sybyl MOL2 File", "", 
 											 mol2FileExtensions, mol2FileExtensions + 1, true);
-const Base::DataFormat Chem::DataFormat::MOL2_GZ("MOL2_GZ", "GZip-Compressed Native CDPL-Format", "", 
+const Base::DataFormat Chem::DataFormat::MOL2_GZ("MOL2_GZ", "GZip-Compressed Tripos Sybyl MOL2 File", "", 
 											 mol2GzFileExtensions, mol2GzFileExtensions + 1, true);
-const Base::DataFormat Chem::DataFormat::MOL2_BZ2("MOL2_BZ2", "BZip2-Compressed Native CDPL-Format", "", 
+const Base::DataFormat Chem::DataFormat::MOL2_BZ2("MOL2_BZ2", "BZip2-Compressed Tripos Sybyl MOL2 File", "", 
 											 mol2Bz2FileExtensions, mol2Bz2FileExtensions + 1, true);
 
 namespace CDPL
@@ -223,6 +223,7 @@ namespace
 			DataIOManager<Molecule>::registerInputHandler(smartsMolInputHandler);
 			DataIOManager<Molecule>::registerInputHandler(inchiMolInputHandler);
 			DataIOManager<Molecule>::registerInputHandler(cdfMolInputHandler);
+			DataIOManager<Molecule>::registerInputHandler(mol2MolInputHandler);
 
 			DataIOManager<MolecularGraph>::registerOutputHandler(jmeMolGraphOutputHandler);
 			DataIOManager<MolecularGraph>::registerOutputHandler(sdfMolGraphOutputHandler);
@@ -231,6 +232,7 @@ namespace
 			DataIOManager<MolecularGraph>::registerOutputHandler(smartsMolGraphOutputHandler);
 			DataIOManager<MolecularGraph>::registerOutputHandler(inchiMolGraphOutputHandler);
 			DataIOManager<MolecularGraph>::registerOutputHandler(cdfMolGraphOutputHandler);
+			DataIOManager<MolecularGraph>::registerOutputHandler(mol2MolGraphOutputHandler);
 
 			DataIOManager<Reaction>::registerInputHandler(jmeRxnInputHandler);
 			DataIOManager<Reaction>::registerInputHandler(rxnRxnInputHandler);

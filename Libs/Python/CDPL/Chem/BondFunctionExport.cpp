@@ -172,7 +172,7 @@ void CDPLPythonChem::exportBondFunctions()
 				python::return_value_policy<python::copy_const_reference, python::with_custodian_and_ward_postcall<0, 1> >());
 	python::def("hasMatchConstraints", &hasMatchConstraintsWrapper1, python::arg("bond"));
 	python::def("setMatchConstraints", &Chem::setMatchConstraints, 
-				(python::arg("bond"), python::arg("constr"), python::arg("overwrite") = true));
+				(python::arg("bond"), python::arg("constr")));
 	python::def("clearMatchConstraints", &Chem::clearMatchConstraints, python::arg("bond"));
 
 	EXPORT_BOND_FUNCS_COPY_REF(MatchExpressionString, expr_str)

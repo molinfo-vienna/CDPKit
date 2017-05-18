@@ -18,11 +18,16 @@ SET(cdpl-chem_LIB_SRCS
     Entity3DMapping.cpp	
     AtomBondMapping.cpp
 
+    Entity3DProperty.cpp
     AtomProperty.cpp
     BondProperty.cpp
     MolecularGraphProperty.cpp
     ReactionProperty.cpp
-    Entity3DProperty.cpp
+    AtomPropertyDefault.cpp
+    BondPropertyDefault.cpp
+    MolecularGraphPropertyDefault.cpp
+    ReactionPropertyDefault.cpp
+
     ControlParameter.cpp
     ControlParameterDefault.cpp
     DataFormat.cpp
@@ -114,7 +119,7 @@ SET(cdpl-chem_LIB_SRCS
     BCUTDescriptorCalculator.cpp
     SurfaceAtomExtractor.cpp
 
-    Entity3DCoordinatesFunctions.cpp
+    Entity3DPropertyFunctions.cpp
 
     Entity3DContainerCoordinatesFunctions.cpp
     Entity3DContainerGeometricalDistanceMatrixFunction.cpp
@@ -134,69 +139,48 @@ SET(cdpl-chem_LIB_SRCS
 
     BondContainerBondCountFunctions.cpp
  
-    AtomNameFunctions.cpp
-    AtomSymbolFunctions.cpp
-    AtomAtomTypeFunctions.cpp
-    AtomFormalChargeFunctions.cpp
-    AtomIsotopeFunctions.cpp
-    AtomRadicalTypeFunctions.cpp
-    AtomHybridizationStateFunctions.cpp
+    AtomPropertyFunctions.cpp
+    AtomTypeFunctions.cpp
+    AtomFormalChargeFunction.cpp
+    AtomHybridizationPerceptionFunction.cpp
     AtomElementPropertyFunctions.cpp
-    AtomRingFlagFunctions.cpp
     AtomRingMembershipFunctions.cpp
     AtomFragmentMembershipFunctions.cpp
-    AtomUnpairedElectronCountFunctions.cpp
-    AtomAromaticityFlagFunctions.cpp
     AtomClassificationFunctions.cpp
     AtomValenceFunctions.cpp
     AtomValenceElectronCountFunctions.cpp
     AtomHydrogenCountFunctions.cpp
     AtomAtomCountFunctions.cpp
     AtomBondCountFunctions.cpp
-    AtomCoordinatesFunctions.cpp
-    AtomMorganNumberFunctions.cpp
-    AtomCanonicalNumberFunctions.cpp
-    AtomCIPPriorityFunctions.cpp
+    AtomConformerCoordinatesFunction.cpp
     AtomStereoDescriptorFunctions.cpp
-    AtomCIPConfigurationFunctions.cpp
-    AtomMDLParityFunctions.cpp
-    AtomSymmetryClassFunctions.cpp
-    AtomStereoCenterFlagFunctions.cpp
-    AtomMDLStereoCareFlagFunctions.cpp
-    AtomPEOEChargeFunctions.cpp
+    AtomCIPConfigurationFunction.cpp
+    AtomMDLParityFunction.cpp
+    AtomStereoCenterFlagFunction.cpp
     AtomPolarizabilityFunctions.cpp
-    AtomReactionCenterStatusFunctions.cpp
-    AtomReactionAtomMappingIDFunctions.cpp
-    AtomComponentGroupIDFunctions.cpp
-    AtomMatchConstraintsFunctions.cpp
-    AtomMatchExpressionStringFunctions.cpp
-    AtomMatchExpressionFunctions.cpp
- 
-    BondOrderFunctions.cpp
-    BondRingFlagFunctions.cpp
+    AtomMatchExpressionStringFunction.cpp
+    AtomMatchExpressionFunction.cpp
+    AtomSybylTypeFunctions.cpp
+
+    BondPropertyFunctions.cpp
     BondRingMembershipFunctions.cpp
     BondFragmentMembershipFunctions.cpp
-    BondAromaticityFlagFunctions.cpp
-    Bond2DStereoFlagFunctions.cpp
-    BondDirectionFunctions.cpp
-    BondReactionCenterStatusFunctions.cpp
-    BondMatchConstraintsFunctions.cpp
-    BondStereoCenterFlagFunctions.cpp
+    BondStereoCenterFlagFunction.cpp
     BondClassificationFunctions.cpp
     BondPolarizabilityFunction.cpp
-    BondStereoDescriptorFunctions.cpp
-    BondCIPConfigurationFunctions.cpp
-    BondMatchExpressionStringFunctions.cpp
-    BondMatchExpressionFunctions.cpp
+    BondStereoDescriptorFunction.cpp
+    BondCIPConfigurationFunction.cpp
+    BondMatchExpressionStringFunction.cpp
+    BondMatchExpressionFunction.cpp
 
-    MolecularGraphNameFunctions.cpp
+    MolecularGraphPropertyFunctions.cpp
     MolecularGraphMatchConstraintsFunctions.cpp
     MolecularGraphComponentFunctions.cpp
     MolecularGraphRingSetFunctions.cpp
     MolecularGraphSSSRFunctions.cpp
     MolecularGraphCyclicSubstructureFunctions.cpp
     MolecularGraphTopologicalDistanceMatrixFunctions.cpp
-    MolecularGraphGeometricalDistanceMatrixFunctions.cpp
+    MolecularGraphGeometricalDistanceMatrixFunction.cpp
     MolecularGraphTopologicalDistanceFunctions.cpp
     MolecularGraphAdjacencyMatrixFunction.cpp
     MolecularGraphIncidenceMatrixFunction.cpp
@@ -211,19 +195,6 @@ SET(cdpl-chem_LIB_SRCS
     MolecularGraphCyclomaticNumberFunction.cpp
     MolecularGraphComponentGroupsFunctions.cpp
     MolecularGraphExtractReactionCenterFunction.cpp
-    MolecularGraphStoichiometricNumberFunctions.cpp
-    MolecularGraphConformationIndexFunctions.cpp
-    MolecularGraphStructureDataFunctions.cpp
-    MolecularGraphMDLUserInitialsFunctions.cpp
-    MolecularGraphMDLProgramNameFunctions.cpp
-    MolecularGraphMDLTimestampFunctions.cpp
-    MolecularGraphMDLRegistryNumberFunctions.cpp
-    MolecularGraphMDLCommentFunctions.cpp
-    MolecularGraphMDLCTABVersionFunctions.cpp
-    MolecularGraphMDLDimensionalityFunctions.cpp
-    MolecularGraphMDLScalingFactorFunctions.cpp
-    MolecularGraphMDLEnergyFunctions.cpp
-    MolecularGraphMDLChiralFlagFunctions.cpp
     MolecularGraphAtomCountFunctions.cpp
     MolecularGraphBondCountFunctions.cpp
     MolecularGraphMassCompositionFunctions.cpp
@@ -262,22 +233,15 @@ SET(cdpl-chem_LIB_SRCS
     MolecularGraphAtomSymbolsFromTypeFunction.cpp
     MolecularGraph2DCoordinatesFunction.cpp
     MolecularGraph3DCoordinatesFunctions.cpp
+    MolecularGraphSybylAtomTypesFunction.cpp
 
-    ReactionNameFunctions.cpp
+    ReactionPropertyFunctions.cpp
     ReactionMatchConstraintsFunctions.cpp
     ReactionMatchExpressionFunctions.cpp
     ReactionComponentGroupsFunctions.cpp
     ReactionAtomMappingFunctions.cpp
     ReactionHashCodeFunction.cpp
     ReactionSMILESFunction.cpp
-    ReactionReactionDataFunctions.cpp
-    ReactionMDLUserInitialsFunctions.cpp
-    ReactionMDLProgramNameFunctions.cpp
-    ReactionMDLTimestampFunctions.cpp
-    ReactionMDLRegistryNumberFunctions.cpp
-    ReactionMDLCommentFunctions.cpp
-    ReactionMDLMoleculeRecordFunctions.cpp
-    ReactionMDLRXNFileVersionFunctions.cpp
     ReactionSubstructSearchInitializationFunctions.cpp
     ReactionMaxReactionAtomMappingIDFunction.cpp
     ReactionMaxComponentGroupIDFunction.cpp

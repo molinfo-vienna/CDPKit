@@ -5,14 +5,22 @@ SET(cdpl-vis_LIB_SRCS
     BondProperty.cpp
     MolecularGraphProperty.cpp
     ReactionProperty.cpp
+    AtomPropertyDefault.cpp
+    BondPropertyDefault.cpp
+    MolecularGraphPropertyDefault.cpp
+    ReactionPropertyDefault.cpp
+
     ControlParameter.cpp
     ControlParameterDefault.cpp
     ControlParameterFunctions.cpp
-    AtomFunctions.cpp
-    BondFunctions.cpp
-    MolecularGraphFunctions.cpp
-    ReactionFunctions.cpp
+
+    AtomPropertyFunctions.cpp
+    BondPropertyFunctions.cpp
+    MolecularGraphPropertyFunctions.cpp
+    ReactionPropertyFunctions.cpp
+
     DataFormat.cpp
+
     StructureView2D.cpp
     ReactionView2D.cpp
     StructureView2DParameters.cpp

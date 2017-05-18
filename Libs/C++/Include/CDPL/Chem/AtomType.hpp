@@ -664,9 +664,14 @@ namespace CDPL
 			const unsigned int ANY           = MAX_ATOMIC_NO + 9;
 
 			/**
+			 * \brief A generic type for heteroatoms (N, O, S or P).
+			 */
+			const unsigned int HET           = MAX_ATOMIC_NO + 10;
+
+			/**
 			 * \brief Marks the end of all supported atom types.
 			 */
-			const unsigned int MAX_TYPE      = ANY;
+			const unsigned int MAX_TYPE      = HET;
 		}
 
 		/**

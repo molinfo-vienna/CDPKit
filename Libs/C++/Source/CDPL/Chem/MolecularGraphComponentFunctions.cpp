@@ -28,9 +28,9 @@
 
 #include "CDPL/Chem/MolecularGraphFunctions.hpp"
 #include "CDPL/Chem/MolecularGraph.hpp"
+#include "CDPL/Chem/MolecularGraphProperty.hpp"
 #include "CDPL/Chem/Atom.hpp"
 #include "CDPL/Chem/Bond.hpp"
-#include "CDPL/Chem/MolecularGraphProperty.hpp"
 #include "CDPL/Chem/ComponentSet.hpp"
 #include "CDPL/Util/BitSet.hpp"
 
@@ -67,26 +67,6 @@ namespace
 	}
 }
 
-
-const Chem::FragmentList::SharedPointer& Chem::getComponents(const MolecularGraph& molgraph)
-{
-   return molgraph.getProperty<FragmentList::SharedPointer>(MolecularGraphProperty::COMPONENTS);
-}
-
-void Chem::setComponents(MolecularGraph& molgraph, const FragmentList::SharedPointer& comps)
-{
-	molgraph.setProperty(MolecularGraphProperty::COMPONENTS, comps);
-}
-
-void Chem::clearComponents(MolecularGraph& molgraph)
-{
-	molgraph.removeProperty(MolecularGraphProperty::COMPONENTS);
-}
-
-bool Chem::hasComponents(const MolecularGraph& molgraph)
-{
-	return molgraph.isPropertySet(MolecularGraphProperty::COMPONENTS);
-}
 
 Chem::FragmentList::SharedPointer Chem::perceiveComponents(const MolecularGraph& molgraph)
 {

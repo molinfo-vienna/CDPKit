@@ -28,8 +28,6 @@
 
 #include "CDPL/Chem/AtomTypeMatchExpression.hpp"
 #include "CDPL/Chem/AtomFunctions.hpp"
-#include "CDPL/Chem/AtomDictionary.hpp"
-#include "CDPL/Chem/AtomType.hpp"
 
 
 using namespace CDPL;
@@ -42,41 +40,5 @@ bool Chem::AtomTypeMatchExpression::operator()(const Atom&, const MolecularGraph
 											   const Atom& target_atom, const MolecularGraph&, 
 											   const Base::Variant&) const
 {
-	unsigned int target_atom_type = getType(target_atom);
-
-	if (atomType != AtomType::UNKNOWN && atomType <= AtomType::MAX_ATOMIC_NO)   
-		return (notMatch ? atomType != target_atom_type : atomType == target_atom_type);
-
-	switch (atomType) {
-
-		case AtomType::ANY:
-		case AtomType::AH:
-			return !notMatch;
-
-		case AtomType::A:
-			return (notMatch ? target_atom_type == AtomType::H : target_atom_type != AtomType::H);
-			
-		case AtomType::Q:
-			return (notMatch ? target_atom_type == AtomType::H || target_atom_type == AtomType::C
-					: target_atom_type != AtomType::H && target_atom_type != AtomType::C);
-
-		case AtomType::QH:
-			return (notMatch ? target_atom_type == AtomType::C : target_atom_type != AtomType::C);
-
-		case AtomType::M:
-			return (notMatch ? !AtomDictionary::isMetal(target_atom_type) : AtomDictionary::isMetal(target_atom_type));
-
-		case AtomType::MH:
-			return (notMatch ? target_atom_type != AtomType::H && !AtomDictionary::isMetal(target_atom_type) 
-					: target_atom_type == AtomType::H || AtomDictionary::isMetal(target_atom_type));
-
-		case AtomType::X:
-			return (notMatch ? !AtomDictionary::isHalogen(target_atom_type) : AtomDictionary::isHalogen(target_atom_type));
-
-		case AtomType::XH:
-			return (notMatch ? target_atom_type != AtomType::H && !AtomDictionary::isHalogen(target_atom_type)
-					: target_atom_type == AtomType::H || AtomDictionary::isHalogen(target_atom_type));
-		default:
-			return true;
-	}
+	return (notMatch ? !atomTypesMatch(atomType, getType(target_atom)) : atomTypesMatch(atomType, getType(target_atom)));
 }

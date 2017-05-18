@@ -40,9 +40,42 @@ namespace CDPL
 		namespace MOL2
 		{
 		
-			const std::size_t MAX_LINE_LENGTH      = 80;
-			const char END_OF_LINE                 = '\n';
+			const char END_OF_LINE          = '\n';
+			const char COMMENT_PREFIX       = '#';
+			const char LINE_CONT_MARKER     = '\\';
 
+			const std::string EMPTY_FIELD   = "****";
+
+			const std::string MOLECULE_RTI  = "@<TRIPOS>MOLECULE";
+			const std::string ATOM_RTI      = "@<TRIPOS>ATOM";
+			const std::string BOND_RTI      = "@<TRIPOS>BOND";
+
+			namespace MoleculeType
+			{
+
+				const std::string SMALL        = "SMALL";
+				const std::string BIOPOLYMER   = "BIOPOLYMER";
+				const std::string PROTEIN      = "PROTEIN";
+				const std::string NUCLEIC_ACID = "NUCLEIC_ACID";
+				const std::string SACCHARIDE   = "SACCHARIDE";
+			}
+
+			namespace ChargeType
+			{
+
+				const std::string NO_CHARGES   = "NO_CHARGES";
+				const std::string DEL_RE       = "DEL_RE";
+				const std::string GASTEIGER    = "GASTEIGER";
+				const std::string GAST_HUCK    = "GAST_HUCK";
+				const std::string HUCKEL       = "HUCKEL";
+				const std::string PULLMAN      = "PULLMAN"; 
+				const std::string GAUSS80      = "GAUSS80_CHARGES"; 
+				const std::string AMPAC        = "AMPAC_CHARGES";
+				const std::string MULLIKEN     = "MULLIKEN_CHARGES"; 
+				const std::string DICT         = "DICT_CHARGES"; 
+				const std::string MMFF94       = "MMFF94_CHARGES";
+				const std::string USER         = "USER_CHARGES";
+			}
 		}
 	}
 }

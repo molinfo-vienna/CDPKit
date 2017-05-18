@@ -38,6 +38,8 @@ namespace CDPL
 
 		void initAtomProperties();
 		void initMolecularGraphProperties();
+		void initAtomPropertyDefaults();
+		void initMolecularGraphPropertyDefaults();
 		void initControlParameters();
 		void initControlParameterDefaults();
 		void initDataFormats();
@@ -52,7 +54,9 @@ namespace
 
 		CDPLBiomolInit() {
 			CDPL::Biomol::initAtomProperties();
+			CDPL::Biomol::initAtomPropertyDefaults();
 			CDPL::Biomol::initMolecularGraphProperties();
+			CDPL::Biomol::initMolecularGraphPropertyDefaults();
 			CDPL::Biomol::initControlParameters();
 			CDPL::Biomol::initControlParameterDefaults();
 			CDPL::Biomol::initDataFormats();

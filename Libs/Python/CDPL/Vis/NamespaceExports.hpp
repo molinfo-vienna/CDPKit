@@ -42,6 +42,10 @@ namespace CDPLPythonVis
 	void exportAtomProperties();
 	void exportBondProperties();
 	void exportReactionProperties();
+	void exportMolecularGraphPropertyDefaults();
+	void exportAtomPropertyDefaults();
+	void exportBondPropertyDefaults();
+	void exportReactionPropertyDefaults();
 
 	void exportControlParameters();
 	void exportControlParameterDefaults();

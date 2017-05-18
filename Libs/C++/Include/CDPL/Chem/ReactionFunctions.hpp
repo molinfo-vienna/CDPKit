@@ -85,7 +85,7 @@ namespace CDPL
 
 		CDPL_CHEM_API const MatchConstraintList::SharedPointer& getMatchConstraints(const Reaction& rxn);
 
-		CDPL_CHEM_API void setMatchConstraints(Reaction& rxn, const MatchConstraintList::SharedPointer& constr, bool overwrite = true);
+		CDPL_CHEM_API void setMatchConstraints(Reaction& rxn, const MatchConstraintList::SharedPointer& constr);
 
 		CDPL_CHEM_API void clearMatchConstraints(Reaction& rxn);
 

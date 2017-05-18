@@ -36,26 +36,6 @@
 using namespace CDPL; 
 
 
-const Chem::Fragment::SharedPointer& Chem::getAromaticSubstructure(const MolecularGraph& molgraph)
-{
-	return molgraph.getProperty<Fragment::SharedPointer>(MolecularGraphProperty::AROMATIC_SUBSTRUCTURE);
-}
-
-void Chem::setAromaticSubstructure(MolecularGraph& molgraph, const Fragment::SharedPointer& substruct)
-{
-	molgraph.setProperty(MolecularGraphProperty::AROMATIC_SUBSTRUCTURE, substruct);
-}
-
-void Chem::clearAromaticSubstructure(MolecularGraph& molgraph)
-{
-	molgraph.removeProperty(MolecularGraphProperty::AROMATIC_SUBSTRUCTURE);
-}
-
-bool Chem::hasAromaticSubstructure(const MolecularGraph& molgraph)
-{
-	return molgraph.isPropertySet(MolecularGraphProperty::AROMATIC_SUBSTRUCTURE);
-}
-
 Chem::Fragment::SharedPointer Chem::perceiveAromaticSubstructure(const MolecularGraph& molgraph)
 {
 	Fragment::SharedPointer substruct_ptr(new AromaticSubstructure(molgraph));

@@ -83,7 +83,7 @@ std::size_t Chem::getBondCount(const Atom& atom, const MolecularGraph& molgraph,
     return count;
 }
 
-std::size_t Chem::getExplicitBondCount(const Atom& atom, const MolecularGraph& molgraph, std::size_t order, unsigned int type)
+std::size_t Chem::getExplicitBondCount(const Atom& atom, const MolecularGraph& molgraph, std::size_t order, unsigned int type, bool strict)
 {
 	std::size_t count = 0;
 
@@ -92,15 +92,15 @@ std::size_t Chem::getExplicitBondCount(const Atom& atom, const MolecularGraph& m
 
 	for (Atom::ConstAtomIterator a_it = atom.getAtomsBegin(); a_it != atoms_end; ++a_it, ++b_it)
 		if (molgraph.containsAtom(*a_it) && molgraph.containsBond(*b_it) &&
-			getOrder(*b_it) == order && getType(*a_it) == type)
+			getOrder(*b_it) == order && (strict ? type == getType(*a_it) : atomTypesMatch(type, getType(*a_it))))
 			count++;
 
     return count;
 }
 
-std::size_t Chem::getBondCount(const Atom& atom, const MolecularGraph& molgraph, std::size_t order, unsigned int type)
+std::size_t Chem::getBondCount(const Atom& atom, const MolecularGraph& molgraph, std::size_t order, unsigned int type, bool strict)
 {
-    std::size_t count = getExplicitBondCount(atom, molgraph, order, type);
+    std::size_t count = getExplicitBondCount(atom, molgraph, order, type, strict);
  
     if (order == 1 && type == AtomType::H)
 		count += getImplicitHydrogenCount(atom);

@@ -37,26 +37,6 @@
 using namespace CDPL; 
 
 
-const Chem::FragmentList::SharedPointer& Chem::getComponentGroups(const MolecularGraph& molgraph)
-{
-	return molgraph.getProperty<FragmentList::SharedPointer>(MolecularGraphProperty::COMPONENT_GROUPS);
-}
-
-void Chem::setComponentGroups(MolecularGraph& molgraph, const FragmentList::SharedPointer& substruct)
-{
-	molgraph.setProperty(MolecularGraphProperty::COMPONENT_GROUPS, substruct);
-}
-
-void Chem::clearComponentGroups(MolecularGraph& molgraph)
-{
-	molgraph.removeProperty(MolecularGraphProperty::COMPONENT_GROUPS);
-}
-
-bool Chem::hasComponentGroups(const MolecularGraph& molgraph)
-{
-	return molgraph.isPropertySet(MolecularGraphProperty::COMPONENT_GROUPS);
-}
-
 Chem::FragmentList::SharedPointer Chem::perceiveComponentGroups(const MolecularGraph& molgraph)
 {
 	typedef std::map<std::size_t, Fragment::SharedPointer> ComponentGroupMap;

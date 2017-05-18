@@ -31,23 +31,31 @@ SET(vis_MOD_SRCS
     LineSegmentListPrimitive2DExport.cpp
     PointListPrimitive2DExport.cpp
     TextLabelPrimitive2DExport.cpp
+
     MolecularGraphFunctionExport.cpp
     AtomFunctionExport.cpp
     BondFunctionExport.cpp
     ReactionFunctionExport.cpp
     ControlParameterFunctionExport.cpp
+
     MolecularGraphPropertyExport.cpp
     AtomPropertyExport.cpp
     BondPropertyExport.cpp
     ReactionPropertyExport.cpp
+    MolecularGraphPropertyDefaultExport.cpp
+    AtomPropertyDefaultExport.cpp
+    BondPropertyDefaultExport.cpp
+    ReactionPropertyDefaultExport.cpp
     ControlParameterExport.cpp
     ControlParameterDefaultExport.cpp
+
     DataFormatExport.cpp
     AlignmentExport.cpp
     ArrowStyleExport.cpp
     LayoutDirectionExport.cpp
     LayoutStyleExport.cpp
     SizeAdjustmentExport.cpp
+
     ToPythonConverterRegistration.cpp
     FromPythonConverterRegistration.cpp
    )

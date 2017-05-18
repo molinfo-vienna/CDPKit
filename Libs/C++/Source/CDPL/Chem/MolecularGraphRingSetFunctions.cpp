@@ -34,26 +34,6 @@
 using namespace CDPL; 
 
 
-const Chem::FragmentList::SharedPointer& Chem::getRings(const MolecularGraph& molgraph)
-{
-   return molgraph.getProperty<FragmentList::SharedPointer>(MolecularGraphProperty::RINGS);
-}
-
-void Chem::setRings(MolecularGraph& molgraph, const FragmentList::SharedPointer& rings)
-{
-	molgraph.setProperty(MolecularGraphProperty::RINGS, rings);
-}
-
-void Chem::clearRings(MolecularGraph& molgraph)
-{
-	molgraph.removeProperty(MolecularGraphProperty::RINGS);
-}
-
-bool Chem::hasRings(const MolecularGraph& molgraph)
-{
-	return molgraph.isPropertySet(MolecularGraphProperty::RINGS);
-}
-
 Chem::FragmentList::SharedPointer Chem::perceiveRings(const MolecularGraph& molgraph)
 {
 	FragmentList::SharedPointer rings_ptr(new CompleteRingSet(molgraph));

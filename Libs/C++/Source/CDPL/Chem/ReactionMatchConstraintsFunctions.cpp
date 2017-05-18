@@ -33,42 +33,10 @@
 #include "CDPL/Chem/ReactionFunctions.hpp"
 #include "CDPL/Chem/MolecularGraphFunctions.hpp"
 #include "CDPL/Chem/Reaction.hpp"
-#include "CDPL/Chem/ReactionProperty.hpp"
 
 
 using namespace CDPL; 
 
-
-namespace
-{
-
-    const Chem::MatchConstraintList::SharedPointer DEF_CONSTRAINTS(new Chem::MatchConstraintList());	
-}
-
-
-const Chem::MatchConstraintList::SharedPointer& Chem::getMatchConstraints(const Reaction& rxn)
-{
-    return rxn.getPropertyOrDefault<MatchConstraintList::SharedPointer>(ReactionProperty::MATCH_CONSTRAINTS,
-																		DEF_CONSTRAINTS);
-}
-
-void Chem::setMatchConstraints(Reaction& rxn, const MatchConstraintList::SharedPointer& constr, bool overwrite)
-{
-	if (!overwrite && hasMatchConstraints(rxn))
-		return;
-
-	rxn.setProperty(ReactionProperty::MATCH_CONSTRAINTS, constr);
-}
-
-void Chem::clearMatchConstraints(Reaction& rxn)
-{
-    rxn.removeProperty(ReactionProperty::MATCH_CONSTRAINTS);
-}
-
-bool Chem::hasMatchConstraints(const Reaction& rxn)
-{
-    return rxn.isPropertySet(ReactionProperty::MATCH_CONSTRAINTS);
-}
 
 void Chem::setAtomMatchConstraints(Reaction& rxn, const MatchConstraintList::SharedPointer& constr, bool overwrite) 
 {
@@ -86,7 +54,12 @@ void Chem::setBondMatchConstraints(Reaction& rxn, const MatchConstraintList::Sha
 
 void Chem::setComponentMatchConstraints(Reaction& rxn, const MatchConstraintList::SharedPointer& constr, bool overwrite)
 {
-	std::for_each(rxn.getComponentsBegin(), rxn.getComponentsEnd(),
-				  boost::bind(static_cast<void (*)(MolecularGraph&, const MatchConstraintList::SharedPointer&,
-												   bool)>(&setMatchConstraints), _1, boost::ref(constr), overwrite));
+	for (Reaction::ComponentIterator it = rxn.getComponentsBegin(), end = rxn.getComponentsEnd(); it != end; ++it) {
+		MolecularGraph& molgraph = *it;
+
+		if (!overwrite && hasMatchConstraints(molgraph))
+			continue;
+
+		setMatchConstraints(molgraph, constr);
+	}
 }

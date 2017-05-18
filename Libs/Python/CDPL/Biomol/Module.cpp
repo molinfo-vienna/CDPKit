@@ -45,8 +45,10 @@ BOOST_PYTHON_MODULE(_biomol)
 	exportPDBMoleculeInputHandler();
 	exportPDBMolecularGraphOutputHandler();
 
-	exportMolecularGraphProperties();
 	exportAtomProperties();
+	exportMolecularGraphProperties();
+	exportAtomPropertyDefaults();
+	exportMolecularGraphPropertyDefaults();
 
 	exportControlParameters();
 	exportControlParameterDefaults();

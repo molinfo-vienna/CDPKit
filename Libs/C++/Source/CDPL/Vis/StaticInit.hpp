@@ -40,6 +40,10 @@ namespace CDPL
 		void initBondProperties();
 		void initMolecularGraphProperties();
 		void initReactionProperties();
+		void initAtomPropertyDefaults();
+		void initBondPropertyDefaults();
+		void initMolecularGraphPropertyDefaults();
+		void initReactionPropertyDefaults();
 		void initControlParameters();
 		void initControlParameterDefaults();
 		void initDataFormats();
@@ -57,6 +61,10 @@ namespace
 			CDPL::Vis::initBondProperties();
 			CDPL::Vis::initMolecularGraphProperties();
 			CDPL::Vis::initReactionProperties();
+			CDPL::Vis::initAtomPropertyDefaults();
+			CDPL::Vis::initBondPropertyDefaults();
+			CDPL::Vis::initMolecularGraphPropertyDefaults();
+			CDPL::Vis::initReactionPropertyDefaults();
 			CDPL::Vis::initControlParameters();
 			CDPL::Vis::initControlParameterDefaults();
 			CDPL::Vis::initDataFormats();

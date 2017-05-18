@@ -49,12 +49,19 @@ namespace CDPLPythonChem
 	void exportReactionMatchConstraints();
 	void exportMDLDataFormatVersions();
 	void exportMDLParities();
+	void exportSybylAtomTypes();
+	void exportMOL2MoleculeTypes();
+	void exportMOL2ChargeTypes();
 
-	void exportMolecularGraphProperties();
 	void exportEntity3DProperties();
 	void exportAtomProperties();
 	void exportBondProperties();
+	void exportMolecularGraphProperties();
 	void exportReactionProperties();
+	void exportAtomPropertyDefaults();
+	void exportBondPropertyDefaults();
+	void exportMolecularGraphPropertyDefaults();
+	void exportReactionPropertyDefaults();
 
 	void exportControlParameters();
 	void exportControlParameterDefaults();

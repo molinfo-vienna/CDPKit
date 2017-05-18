@@ -10,6 +10,8 @@ SET(cdpl-pharm_LIB_SRCS
   
     FeatureContainerProperty.cpp
     FeatureProperty.cpp
+    FeatureContainerPropertyDefault.cpp
+    FeaturePropertyDefault.cpp
     DataFormat.cpp
     ControlParameter.cpp
     ControlParameterDefault.cpp
@@ -58,16 +60,9 @@ SET(cdpl-pharm_LIB_SRCS
     PMLPharmacophoreReader.cpp
     PMLFeatureContainerWriter.cpp
 
-    FeatureTypeFunctions.cpp
-    FeatureGeometryFunctions.cpp
-    FeatureOrientationFunctions.cpp
-    FeatureLengthFunctions.cpp
-    FeatureToleranceFunctions.cpp
-    FeatureSubstructureFunctions.cpp
-    FeatureDisabledFlagFunctions.cpp
-    FeatureOptionalFlagFunctions.cpp
+    FeaturePropertyFunctions.cpp
 
-    FeatureContainerNameFunctions.cpp
+    FeatureContainerPropertyFunctions.cpp
     FeatureContainerFeatureCountFunctions.cpp
     FeatureContainerFeatureTypeHistogramFunction.cpp
     FeatureContainerXVolumeClashTestFunction.cpp

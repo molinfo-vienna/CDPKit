@@ -150,26 +150,6 @@ namespace
 }
 
 
-const Chem::MatchExpression<Chem::Reaction>::SharedPointer& Chem::getMatchExpression(const Reaction& rxn)
-{
-    return rxn.getProperty<MatchExpression<Reaction>::SharedPointer>(ReactionProperty::MATCH_EXPRESSION);
-}
-
-void Chem::setMatchExpression(Reaction& rxn, const MatchExpression<Reaction>::SharedPointer& expr)
-{
-    rxn.setProperty(ReactionProperty::MATCH_EXPRESSION, expr);
-}
-
-void Chem::clearMatchExpression(Reaction& rxn)
-{
-    rxn.removeProperty(ReactionProperty::MATCH_EXPRESSION);
-}
-
-bool Chem::hasMatchExpression(const Reaction& rxn)
-{
-    return rxn.isPropertySet(ReactionProperty::MATCH_EXPRESSION);
-}
-
 Chem::MatchExpression<Chem::Reaction>::SharedPointer Chem::buildMatchExpression(const Reaction& rxn)
 {
 	MatchExpression<Reaction>::SharedPointer expr_ptr = createMatchExpression(rxn, *getMatchConstraints(rxn));

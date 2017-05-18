@@ -36,6 +36,8 @@ namespace CDPLPythonPharm
 
 	void exportFeatureContainerProperties();
 	void exportFeatureProperties();
+	void exportFeatureContainerPropertyDefaults();
+	void exportFeaturePropertyDefaults();
 
 	void exportControlParameters();
 	void exportControlParameterDefaults();

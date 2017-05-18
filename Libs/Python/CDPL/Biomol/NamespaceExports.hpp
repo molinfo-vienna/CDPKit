@@ -34,8 +34,10 @@ namespace CDPLPythonBiomol
 	void exportAtomPropertyFlags();
 	void exportResidueTypes();
 
-	void exportMolecularGraphProperties();
 	void exportAtomProperties();
+	void exportMolecularGraphProperties();
+	void exportAtomPropertyDefaults();
+	void exportMolecularGraphPropertyDefaults();
 
 	void exportControlParameters();
 	void exportControlParameterDefaults();

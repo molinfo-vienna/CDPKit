@@ -38,6 +38,8 @@ namespace CDPL
 
 		void initFeatureContainerProperties();
 		void initFeatureProperties();
+		void initFeatureContainerPropertyDefaults();
+		void initFeaturePropertyDefaults();
 		void initDataFormats();
 		void initControlParameters();
 		void initControlParameterDefaults();
@@ -53,6 +55,8 @@ namespace
 		CDPLPharmInit() {
 			CDPL::Pharm::initFeatureContainerProperties();
 			CDPL::Pharm::initFeatureProperties();
+			CDPL::Pharm::initFeatureContainerPropertyDefaults();
+			CDPL::Pharm::initFeaturePropertyDefaults();
 			CDPL::Pharm::initDataFormats();
 			CDPL::Pharm::initControlParameters();
 			CDPL::Pharm::initControlParameterDefaults();

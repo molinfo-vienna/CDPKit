@@ -38,26 +38,6 @@
 using namespace CDPL; 
 
 
-const Math::ULMatrix::SharedPointer& Chem::getTopologicalDistanceMatrix(const MolecularGraph& molgraph)
-{
-	return molgraph.getProperty<Math::ULMatrix::SharedPointer>(MolecularGraphProperty::TOPOLOGICAL_DISTANCE_MATRIX);
-}
-
-void Chem::setTopologicalDistanceMatrix(MolecularGraph& molgraph, const Math::ULMatrix::SharedPointer& mtx)
-{
-	molgraph.setProperty(MolecularGraphProperty::TOPOLOGICAL_DISTANCE_MATRIX, mtx);
-}
-
-void Chem::clearTopologicalDistanceMatrix(MolecularGraph& molgraph)
-{
-	molgraph.removeProperty(MolecularGraphProperty::TOPOLOGICAL_DISTANCE_MATRIX);
-}
-
-bool Chem::hasTopologicalDistanceMatrix(const MolecularGraph& molgraph)
-{
-	return molgraph.isPropertySet(MolecularGraphProperty::TOPOLOGICAL_DISTANCE_MATRIX);
-}
-
 Math::ULMatrix::SharedPointer Chem::calcTopologicalDistanceMatrix(MolecularGraph& molgraph, bool overwrite)
 {
 	if (!overwrite) {

@@ -87,6 +87,9 @@ namespace CDPL
 			extern CDPL_CHEM_API const Base::LookupKey MDL_PARITY;
 			extern CDPL_CHEM_API const Base::LookupKey MDL_DB_STEREO_CARE_FLAG;
 
+			extern CDPL_CHEM_API const Base::LookupKey SYBYL_TYPE;
+			extern CDPL_CHEM_API const Base::LookupKey MOL2_CHARGE;
+
 			extern CDPL_CHEM_API const Base::LookupKey PEOE_CHARGE;
 	
 			extern CDPL_CHEM_API const Base::LookupKey REACTION_CENTER_STATUS;

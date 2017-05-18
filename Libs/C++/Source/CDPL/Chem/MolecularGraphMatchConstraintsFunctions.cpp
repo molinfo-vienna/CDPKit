@@ -26,10 +26,6 @@
 
 #include "StaticInit.hpp"
 
-#include <algorithm>
-
-#include <boost/bind.hpp>
-
 #include "CDPL/Chem/MolecularGraphFunctions.hpp"
 #include "CDPL/Chem/AtomFunctions.hpp"
 #include "CDPL/Chem/BondFunctions.hpp"
@@ -41,47 +37,28 @@
 using namespace CDPL; 
 
 
-namespace
-{
-
-    const Chem::MatchConstraintList::SharedPointer DEF_CONSTRAINTS(new Chem::MatchConstraintList());
-}
-
-
-const Chem::MatchConstraintList::SharedPointer& Chem::getMatchConstraints(const MolecularGraph& molgraph)
-{
-    return molgraph.getPropertyOrDefault<MatchConstraintList::SharedPointer>(MolecularGraphProperty::MATCH_CONSTRAINTS,
-																			 DEF_CONSTRAINTS);
-}
-
-void Chem::setMatchConstraints(MolecularGraph& molgraph, const MatchConstraintList::SharedPointer& constr, bool overwrite)
-{
-	if (overwrite || !hasMatchConstraints(molgraph))
-		molgraph.setProperty(MolecularGraphProperty::MATCH_CONSTRAINTS, constr);
-}
-
-void Chem::clearMatchConstraints(MolecularGraph& molgraph)
-{
-    molgraph.removeProperty(MolecularGraphProperty::MATCH_CONSTRAINTS);
-}
-
-bool Chem::hasMatchConstraints(const MolecularGraph& molgraph)
-{
-    return molgraph.isPropertySet(MolecularGraphProperty::MATCH_CONSTRAINTS);
-}
-
 void Chem::setAtomMatchConstraints(MolecularGraph& molgraph, const MatchConstraintList::SharedPointer& constr, 
 								   bool overwrite)
 {
-	std::for_each(molgraph.getAtomsBegin(), molgraph.getAtomsEnd(),
-				  boost::bind(static_cast<void (*)(Atom&, const MatchConstraintList::SharedPointer&,
-												   bool)>(&setMatchConstraints), _1, boost::ref(constr), overwrite));
+	for (MolecularGraph::AtomIterator it = molgraph.getAtomsBegin(), end = molgraph.getAtomsEnd(); it != end; ++it) {
+		Atom& atom = *it;
+
+		if (!overwrite && hasMatchConstraints(atom))
+			continue;
+
+		setMatchConstraints(atom, constr);
+	}
 }
 
 void Chem::setBondMatchConstraints(MolecularGraph& molgraph, const MatchConstraintList::SharedPointer& constr, 
 								   bool overwrite)
 {
-	std::for_each(molgraph.getBondsBegin(), molgraph.getBondsEnd(),
-				  boost::bind(static_cast<void (*)(Bond&, const MatchConstraintList::SharedPointer&,
-												   bool)>(&setMatchConstraints), _1, boost::ref(constr), overwrite));
+	for (MolecularGraph::BondIterator it = molgraph.getBondsBegin(), end = molgraph.getBondsEnd(); it != end; ++it) {
+		Bond& bond = *it;
+
+		if (!overwrite && hasMatchConstraints(bond))
+			continue;
+
+		setMatchConstraints(bond, constr);
+	}
 }

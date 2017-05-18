@@ -46,6 +46,8 @@
 
 #include "CDPL/Pharm/FeatureContainerProperty.hpp"  
 #include "CDPL/Pharm/FeatureProperty.hpp"  
+#include "CDPL/Pharm/FeatureContainerPropertyDefault.hpp"  
+#include "CDPL/Pharm/FeaturePropertyDefault.hpp"  
 #include "CDPL/Pharm/ControlParameter.hpp"  
 #include "CDPL/Pharm/ControlParameterDefault.hpp"  
 #include "CDPL/Pharm/DataFormat.hpp"

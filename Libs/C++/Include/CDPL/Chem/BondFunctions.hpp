@@ -163,7 +163,7 @@ namespace CDPL
 
 		CDPL_CHEM_API const MatchConstraintList::SharedPointer& getMatchConstraints(const Bond& bond);
 	
-		CDPL_CHEM_API void setMatchConstraints(Bond& bond, const MatchConstraintList::SharedPointer& constr, bool overwrite = true);
+		CDPL_CHEM_API void setMatchConstraints(Bond& bond, const MatchConstraintList::SharedPointer& constr);
 
 		CDPL_CHEM_API void clearMatchConstraints(Bond& bond);
 

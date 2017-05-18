@@ -206,6 +206,10 @@ BOOST_PYTHON_MODULE(_chem)
 	exportAtomProperties();
 	exportBondProperties();
 	exportReactionProperties();
+	exportAtomPropertyDefaults();
+	exportBondPropertyDefaults();
+	exportMolecularGraphPropertyDefaults();
+	exportReactionPropertyDefaults();
 
 	exportControlParameters();
 	exportControlParameterDefaults();
@@ -230,6 +234,9 @@ BOOST_PYTHON_MODULE(_chem)
 	exportINCHIReturnCodes();
 	exportMDLDataFormatVersions();
 	exportMDLParities();
+	exportSybylAtomTypes();
+	exportMOL2MoleculeTypes();
+	exportMOL2ChargeTypes();
 
 	exportControlParameterFunctions();
 	exportUtilityFunctions();

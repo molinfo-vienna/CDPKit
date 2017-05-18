@@ -89,6 +89,9 @@ namespace CDPL
 			extern CDPL_CHEM_API const Base::LookupKey MDL_SCALING_FACTOR2;
 			extern CDPL_CHEM_API const Base::LookupKey MDL_ENERGY;
 			extern CDPL_CHEM_API const Base::LookupKey MDL_CHIRAL_FLAG;
+
+			extern CDPL_CHEM_API const Base::LookupKey MOL2_CHARGE_TYPE;
+			extern CDPL_CHEM_API const Base::LookupKey MOL2_MOLECULE_TYPE;
 		}
 
 		/**

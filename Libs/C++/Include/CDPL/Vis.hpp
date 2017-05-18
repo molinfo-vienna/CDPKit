@@ -39,6 +39,10 @@
 #include "CDPL/Vis/BondProperty.hpp"
 #include "CDPL/Vis/MolecularGraphProperty.hpp"
 #include "CDPL/Vis/ReactionProperty.hpp"
+#include "CDPL/Vis/AtomPropertyDefault.hpp"
+#include "CDPL/Vis/BondPropertyDefault.hpp"
+#include "CDPL/Vis/MolecularGraphPropertyDefault.hpp"
+#include "CDPL/Vis/ReactionPropertyDefault.hpp"
 #include "CDPL/Vis/DataFormat.hpp"
 
 #include "CDPL/Vis/ControlParameterFunctions.hpp"

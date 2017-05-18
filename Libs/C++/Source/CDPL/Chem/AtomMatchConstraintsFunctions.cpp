@@ -47,7 +47,7 @@ const Chem::MatchConstraintList::SharedPointer& Chem::getMatchConstraints(const 
 																		 DEF_CONSTRAINTS);
 }
 
-void Chem::setMatchConstraints(Atom& atom, const MatchConstraintList::SharedPointer& constr, bool overwrite)
+void Chem::setMatchConstraints(Atom& atom, const MatchConstraintList::SharedPointer& constr)
 {
 	if (!overwrite && hasMatchConstraints(atom))
 		return;

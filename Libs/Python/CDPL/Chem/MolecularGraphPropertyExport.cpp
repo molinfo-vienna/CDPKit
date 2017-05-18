@@ -69,5 +69,7 @@ void CDPLPythonChem::exportMolecularGraphProperties()
 		.def_readonly("MDL_SCALING_FACTOR1", &Chem::MolecularGraphProperty::MDL_SCALING_FACTOR1)
 		.def_readonly("MDL_SCALING_FACTOR2", &Chem::MolecularGraphProperty::MDL_SCALING_FACTOR2)
 		.def_readonly("MDL_ENERGY", &Chem::MolecularGraphProperty::MDL_ENERGY)
-		.def_readonly("MDL_CHIRAL_FLAG", &Chem::MolecularGraphProperty::MDL_CHIRAL_FLAG);
+		.def_readonly("MDL_CHIRAL_FLAG", &Chem::MolecularGraphProperty::MDL_CHIRAL_FLAG)
+		.def_readonly("MOL2_CHARGE_TYPE", &Chem::MolecularGraphProperty::MOL2_CHARGE_TYPE)
+		.def_readonly("MOL2_MOLECULE_TYPE", &Chem::MolecularGraphProperty::MOL2_MOLECULE_TYPE);
 }

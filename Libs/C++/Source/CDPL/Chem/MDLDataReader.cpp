@@ -2359,6 +2359,7 @@ void Chem::MDLDataReader::readCTabV3000(std::istream& is, Molecule& mol)
 
 	atomQueryHCountList.clear();
 	stereoAtoms.clear();
+	atomIndexMap.clear();
 
 	readV3000BlockBegin(is, V3000::BLOCK_TYPE_KEY);
 

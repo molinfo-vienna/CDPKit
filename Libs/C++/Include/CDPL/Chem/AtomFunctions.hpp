@@ -246,9 +246,9 @@ namespace CDPL
 														   unsigned int flags = AtomPropertyFlag::DEFAULT);
 
 
-		CDPL_CHEM_API std::size_t getExplicitAtomCount(const Atom& atom, const MolecularGraph& molgraph, unsigned int type);
+		CDPL_CHEM_API std::size_t getExplicitAtomCount(const Atom& atom, const MolecularGraph& molgraph, unsigned int type, bool strict = true);
 
-		CDPL_CHEM_API std::size_t getAtomCount(const Atom& atom, const MolecularGraph& molgraph, unsigned int type);
+		CDPL_CHEM_API std::size_t getAtomCount(const Atom& atom, const MolecularGraph& molgraph, unsigned int type, bool strict = true);
 
 		CDPL_CHEM_API std::size_t getExplicitChainAtomCount(const Atom& atom, const MolecularGraph& molgraph);
 
@@ -265,13 +265,13 @@ namespace CDPL
 
 		CDPL_CHEM_API std::size_t getExplicitBondCount(const Atom& atom, const MolecularGraph& molgraph, std::size_t order);
 
-		CDPL_CHEM_API std::size_t getExplicitBondCount(const Atom& atom, const MolecularGraph& molgraph, std::size_t order, unsigned int type);
+		CDPL_CHEM_API std::size_t getExplicitBondCount(const Atom& atom, const MolecularGraph& molgraph, std::size_t order, unsigned int type, bool strict = true);
 
 		CDPL_CHEM_API std::size_t getBondCount(const Atom& atom, const MolecularGraph& molgraph);
 
 		CDPL_CHEM_API std::size_t getBondCount(const Atom& atom, const MolecularGraph& molgraph, std::size_t order);
 
-		CDPL_CHEM_API std::size_t getBondCount(const Atom& atom, const MolecularGraph& molgraph, std::size_t order, unsigned int type);
+		CDPL_CHEM_API std::size_t getBondCount(const Atom& atom, const MolecularGraph& molgraph, std::size_t order, unsigned int type, bool strict = true);
 
 		CDPL_CHEM_API std::size_t getExplicitChainBondCount(const Atom& atom, const MolecularGraph& molgraph);
 
@@ -378,6 +378,19 @@ namespace CDPL
 		CDPL_CHEM_API bool isStereoCenter(const Atom& atom, const MolecularGraph& molgraph);
 	
 
+		CDPL_CHEM_API unsigned int getSybylType(const Atom& atom);
+
+		CDPL_CHEM_API void setSybylType(Atom& atom, unsigned int type);
+
+		CDPL_CHEM_API void clearSybylType(Atom& atom);
+	
+		CDPL_CHEM_API bool hasSybylType(const Atom& atom);
+
+		CDPL_CHEM_API unsigned int perceiveSybylType(const Atom& atom, const MolecularGraph& molgraph);
+
+		CDPL_CHEM_API unsigned int sybylToAtomType(unsigned int sybyl_type);
+	
+
 		CDPL_CHEM_API unsigned int getMDLParity(const Atom& atom);
 
 		CDPL_CHEM_API void setMDLParity(Atom& atom, unsigned int parity);
@@ -398,13 +411,22 @@ namespace CDPL
 		CDPL_CHEM_API bool hasMDLStereoCareFlag(const Atom& atom);
 
 
+		CDPL_CHEM_API double getMOL2Charge(const Atom& atom);
+
+		CDPL_CHEM_API void setMOL2Charge(Atom& atom, double charge);
+
+		CDPL_CHEM_API void clearMOL2Charge(Atom& atom);	
+
+		CDPL_CHEM_API bool hasMOL2Charge(const Atom& atom);
+
+
 		CDPL_CHEM_API double getPEOECharge(const Atom& atom);
 
 		CDPL_CHEM_API void setPEOECharge(Atom& atom, double charge);
 
 		CDPL_CHEM_API void clearPEOECharge(Atom& atom);
 	
-		CDPL_CHEM_API double hasPEOECharge(const Atom& atom);
+		CDPL_CHEM_API bool hasPEOECharge(const Atom& atom);
 	
 
 		CDPL_CHEM_API double getHybridPolarizability(const Atom& atom, const MolecularGraph& molgraph);
@@ -441,7 +463,7 @@ namespace CDPL
 
 		CDPL_CHEM_API const MatchConstraintList::SharedPointer& getMatchConstraints(const Atom& atom);
 	
-		CDPL_CHEM_API void setMatchConstraints(Atom& atom, const MatchConstraintList::SharedPointer& constr, bool overwrite = true);
+		CDPL_CHEM_API void setMatchConstraints(Atom& atom, const MatchConstraintList::SharedPointer& constr);
 
 		CDPL_CHEM_API void clearMatchConstraints(Atom& atom);
 
@@ -468,6 +490,9 @@ namespace CDPL
 		CDPL_CHEM_API bool hasMatchExpressionString(const Atom& atom);
 
 		CDPL_CHEM_API void buildMatchExpressionString(const Atom& atom, const MolecularGraph& molgraph, std::string& expr_str);
+
+
+		CDPL_CHEM_API bool atomTypesMatch(unsigned int qry_type, unsigned int tgt_type);
 
 
 		template <typename AtomType, typename OutputIterator>

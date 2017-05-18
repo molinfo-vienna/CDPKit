@@ -36,26 +36,6 @@
 using namespace CDPL; 
 
 
-const Chem::FragmentList::SharedPointer& Chem::getSSSR(const MolecularGraph& molgraph)
-{
-   return molgraph.getProperty<FragmentList::SharedPointer>(MolecularGraphProperty::SSSR);
-}
-
-void Chem::setSSSR(MolecularGraph& molgraph, const FragmentList::SharedPointer& sssr)
-{
-	molgraph.setProperty(MolecularGraphProperty::SSSR, sssr);
-}
-
-void Chem::clearSSSR(MolecularGraph& molgraph)
-{
-	molgraph.removeProperty(MolecularGraphProperty::SSSR);
-}
-
-bool Chem::hasSSSR(const MolecularGraph& molgraph)
-{
-	return molgraph.isPropertySet(MolecularGraphProperty::SSSR);
-}
-
 Chem::FragmentList::SharedPointer Chem::perceiveSSSR(const MolecularGraph& molgraph)
 {
 	FragmentList::SharedPointer sssr_ptr(new SmallestSetOfSmallestRings(molgraph));

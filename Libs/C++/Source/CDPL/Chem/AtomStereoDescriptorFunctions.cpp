@@ -37,7 +37,6 @@
 #include "CDPL/Chem/Atom.hpp"
 #include "CDPL/Chem/Bond.hpp"
 #include "CDPL/Chem/StereoDescriptor.hpp"
-#include "CDPL/Chem/AtomProperty.hpp"
 #include "CDPL/Chem/AtomConfiguration.hpp"
 #include "CDPL/Chem/MDLParity.hpp"
 #include "CDPL/Chem/AtomPropertyFlag.hpp"
@@ -72,26 +71,6 @@ namespace
 	const Chem::StereoDescriptor DEF_DESCRIPTOR = Chem::StereoDescriptor(Chem::AtomConfiguration::UNDEF);
 }
 
-
-const Chem::StereoDescriptor& Chem::getStereoDescriptor(const Atom& atom)
-{
-    return atom.getPropertyOrDefault<StereoDescriptor>(AtomProperty::STEREO_DESCRIPTOR, DEF_DESCRIPTOR);
-}
-
-void Chem::setStereoDescriptor(Atom& atom, const StereoDescriptor& descr)
-{
-    atom.setProperty(AtomProperty::STEREO_DESCRIPTOR, descr);
-}
-
-void Chem::clearStereoDescriptor(Atom& atom)
-{
-    atom.removeProperty(AtomProperty::STEREO_DESCRIPTOR);
-}
-
-bool Chem::hasStereoDescriptor(const Atom& atom)
-{
-    return atom.isPropertySet(AtomProperty::STEREO_DESCRIPTOR);
-}
 
 Chem::StereoDescriptor Chem::calcStereoDescriptor(const Atom& atom, const MolecularGraph& molgraph, std::size_t dim)
 {

@@ -121,6 +121,8 @@ namespace
 	MAKE_ATOM_FUNC_WRAPPERS(MatchExpressionPtrRef, MatchExpression)
 	MAKE_ATOM_FUNC_WRAPPERS(const std::string&, MatchExpressionString)
 	MAKE_ATOM_FUNC_WRAPPERS(const CDPL::Chem::StereoDescriptor&, StereoDescriptor)
+	MAKE_ATOM_FUNC_WRAPPERS(unsigned int, SybylType)
+	MAKE_ATOM_FUNC_WRAPPERS(double, MOL2Charge)
 
 	MAKE_FUNCTION_WRAPPER1(const CDPL::Chem::MatchConstraintList::SharedPointer&, getMatchConstraints, CDPL::Chem::Atom&)
 	MAKE_FUNCTION_WRAPPER1(bool, hasMatchConstraints, CDPL::Chem::Atom&)
@@ -178,6 +180,7 @@ namespace
 	MAKE_FUNCTION_WRAPPER2(std::size_t, getSizeOfSmallestContainingFragment, CDPL::Chem::Atom&, CDPL::Chem::FragmentList&);
 	MAKE_FUNCTION_WRAPPER2(std::size_t, getSizeOfLargestContainingFragment, CDPL::Chem::Atom&, CDPL::Chem::FragmentList&);
 	MAKE_FUNCTION_WRAPPER2(std::size_t, getNumContainingFragments, CDPL::Chem::Atom&, CDPL::Chem::FragmentList&);
+	MAKE_FUNCTION_WRAPPER2(unsigned int, perceiveSybylType, CDPL::Chem::Atom&, CDPL::Chem::MolecularGraph&);
 
 	MAKE_FUNCTION_WRAPPER3(std::size_t, getExplicitBondCount, CDPL::Chem::Atom&, CDPL::Chem::MolecularGraph&, std::size_t);
 	MAKE_FUNCTION_WRAPPER3(bool, isInRingOfSize, CDPL::Chem::Atom&, CDPL::Chem::MolecularGraph&, std::size_t);
@@ -185,14 +188,15 @@ namespace
 	MAKE_FUNCTION_WRAPPER3(CDPL::Chem::StereoDescriptor, calcStereoDescriptor, CDPL::Chem::Atom&, CDPL::Chem::MolecularGraph&, std::size_t);
 	MAKE_FUNCTION_WRAPPER3(bool, isOrdinaryHydrogen, CDPL::Chem::Atom&, CDPL::Chem::MolecularGraph&, unsigned int);
 	MAKE_FUNCTION_WRAPPER3(std::size_t, getOrdinaryHydrogenCount, CDPL::Chem::Atom&, CDPL::Chem::MolecularGraph&, unsigned int);
-	MAKE_FUNCTION_WRAPPER3(std::size_t, getExplicitAtomCount, CDPL::Chem::Atom&, CDPL::Chem::MolecularGraph&, unsigned int);
-	MAKE_FUNCTION_WRAPPER3(std::size_t, getAtomCount, CDPL::Chem::Atom&, CDPL::Chem::MolecularGraph&, unsigned int);
 	MAKE_FUNCTION_WRAPPER3(bool, isInFragmentOfSize, CDPL::Chem::Atom&, CDPL::Chem::FragmentList&, std::size_t);
 	MAKE_FUNCTION_WRAPPER3(void, getContainingFragments, CDPL::Chem::Atom&, CDPL::Chem::FragmentList&, CDPL::Chem::FragmentList&);
 	MAKE_FUNCTION_WRAPPER3(double, calcEffectivePolarizability, CDPL::Chem::Atom&, CDPL::Chem::MolecularGraph&, double);
 
-	MAKE_FUNCTION_WRAPPER4(std::size_t, getExplicitBondCount, CDPL::Chem::Atom&, CDPL::Chem::MolecularGraph&, std::size_t, unsigned int);
-	MAKE_FUNCTION_WRAPPER4(std::size_t, getBondCount, CDPL::Chem::Atom&, CDPL::Chem::MolecularGraph&, std::size_t, unsigned int);
+	MAKE_FUNCTION_WRAPPER4(std::size_t, getExplicitAtomCount, CDPL::Chem::Atom&, CDPL::Chem::MolecularGraph&, unsigned int, bool);
+	MAKE_FUNCTION_WRAPPER4(std::size_t, getAtomCount, CDPL::Chem::Atom&, CDPL::Chem::MolecularGraph&, unsigned int, bool);
+
+	MAKE_FUNCTION_WRAPPER5(std::size_t, getExplicitBondCount, CDPL::Chem::Atom&, CDPL::Chem::MolecularGraph&, std::size_t, unsigned int, bool);
+	MAKE_FUNCTION_WRAPPER5(std::size_t, getBondCount, CDPL::Chem::Atom&, CDPL::Chem::MolecularGraph&, std::size_t, unsigned int, bool);
 
 	std::string buildMatchExpressionStringWrapper(CDPL::Chem::Atom& atom, CDPL::Chem::MolecularGraph& molgraph)
 	{
@@ -327,6 +331,9 @@ void CDPLPythonChem::exportAtomFunctions()
 				(python::arg("atom"), python::arg("frag_list")));
 	python::def("getNumContainingFragments", &getNumContainingFragmentsWrapper2,
 				(python::arg("atom"), python::arg("frag_list")));
+	python::def("perceiveSybylType", &perceiveSybylTypeWrapper2,
+				(python::arg("atom"), python::arg("molgraph")));
+	python::def("sybylToAtomType", &Chem::sybylToAtomType, python::arg("sybyl_type"));
 
 	python::def("getExplicitBondCount", &getExplicitBondCountWrapper3,
 				(python::arg("atom"), python::arg("molgraph"), python::arg("order")));
@@ -341,10 +348,6 @@ void CDPLPythonChem::exportAtomFunctions()
 				(python::arg("atom"), python::arg("molgraph"), python::arg("flags") = Chem::AtomPropertyFlag::DEFAULT));
 	python::def("getOrdinaryHydrogenCount", &getOrdinaryHydrogenCountWrapper3,
 				(python::arg("atom"), python::arg("molgraph"), python::arg("flags") = Chem::AtomPropertyFlag::DEFAULT));
-	python::def("getExplicitAtomCount", &getExplicitAtomCountWrapper3,
-				(python::arg("atom"), python::arg("molgraph"), python::arg("type")));
-	python::def("getAtomCount", &getAtomCountWrapper3,
-				(python::arg("atom"), python::arg("molgraph"), python::arg("type")));
 	python::def("isInFragmentOfSize", &isInFragmentOfSizeWrapper3, 
 				(python::arg("atom"), python::arg("frag_list"), python::arg("size")));
 	python::def("getContainingFragments", &getContainingFragmentsWrapper3,
@@ -353,10 +356,15 @@ void CDPLPythonChem::exportAtomFunctions()
 	python::def("calcEffectivePolarizability", &calcEffectivePolarizabilityWrapper3, 
 				(python::arg("atom"), python::arg("molgraph"), python::arg("damping") = 0.75));
 
-	python::def("getExplicitBondCount", &getExplicitBondCountWrapper4,
-				(python::arg("atom"), python::arg("molgraph"), python::arg("order"), python::arg("type")));
-	python::def("getBondCount", &getBondCountWrapper4,
-				(python::arg("atom"), python::arg("molgraph"), python::arg("order"), python::arg("type")));
+	python::def("getExplicitAtomCount", &getExplicitAtomCountWrapper4,
+				(python::arg("atom"), python::arg("molgraph"), python::arg("type"), (python::arg("strict") = true)));
+	python::def("getAtomCount", &getAtomCountWrapper4,
+				(python::arg("atom"), python::arg("molgraph"), python::arg("type"), (python::arg("strict") = true)));
+
+	python::def("getExplicitBondCount", &getExplicitBondCountWrapper5,
+				(python::arg("atom"), python::arg("molgraph"), python::arg("order"), python::arg("type"), (python::arg("strict") = true)));
+	python::def("getBondCount", &getBondCountWrapper5,
+				(python::arg("atom"), python::arg("molgraph"), python::arg("order"), python::arg("type"), (python::arg("strict") = true)));
 
 	python::def("buildMatchExpressionString", &buildMatchExpressionStringWrapper,
 				(python::arg("atom"), python::arg("molgraph")));
@@ -372,8 +380,10 @@ void CDPLPythonChem::exportAtomFunctions()
 				python::return_value_policy<python::copy_const_reference, python::with_custodian_and_ward_postcall<0, 1> >());
 	python::def("hasMatchConstraints", &hasMatchConstraintsWrapper1, python::arg("atom"));
 	python::def("setMatchConstraints", &Chem::setMatchConstraints, 
-				(python::arg("atom"), python::arg("constr"), python::arg("overwrite") = true));
+				(python::arg("atom"), python::arg("constr")));
 	python::def("clearMatchConstraints", &Chem::clearMatchConstraints, python::arg("atom"));
+
+	python::def("atomTypesMatch", &Chem::atomTypesMatch, (python::arg("qry_type"), python::arg("tgt_type")));
 
 	EXPORT_ATOM_FUNCS_COPY_REF(Name, name)
 	EXPORT_ATOM_FUNCS_COPY_REF(Symbol, symbol)
@@ -403,4 +413,6 @@ void CDPLPythonChem::exportAtomFunctions()
     EXPORT_ATOM_FUNCS_COPY_REF_CW(MatchExpression, expr)
 	EXPORT_ATOM_FUNCS_COPY_REF(MatchExpressionString, expr_str)
     EXPORT_ATOM_FUNCS_INT_REF_CW(StereoDescriptor, descr)
+	EXPORT_ATOM_FUNCS(SybylType, type)
+	EXPORT_ATOM_FUNCS(MOL2Charge, charge)
 }

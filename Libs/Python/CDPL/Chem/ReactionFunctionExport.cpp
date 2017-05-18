@@ -126,7 +126,7 @@ void CDPLPythonChem::exportReactionFunctions()
 	python::def("getMatchConstraints", &getMatchConstraintsWrapper1, python::arg("rxn"), 
 				python::return_value_policy<python::copy_const_reference, python::with_custodian_and_ward_postcall<0, 1> >());
 	python::def("hasMatchConstraints", &hasMatchConstraintsWrapper1, python::arg("rxn"));
-	python::def("setMatchConstraints", &Chem::setMatchConstraints, (python::arg("rxn"), python::arg("constr"), python::arg("overwrite") = true));
+	python::def("setMatchConstraints", &Chem::setMatchConstraints, (python::arg("rxn"), python::arg("constr")));
 	python::def("clearMatchConstraints", &Chem::clearMatchConstraints, python::arg("rxn"));
 
 	python::def("buildMatchExpression", &buildMatchExpressionWrapper1,

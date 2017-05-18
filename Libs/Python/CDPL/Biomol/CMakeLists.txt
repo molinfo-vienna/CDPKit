@@ -21,6 +21,8 @@ SET(biomol_MOD_SRCS
 
     AtomPropertyExport.cpp
     MolecularGraphPropertyExport.cpp
+    AtomPropertyDefaultExport.cpp
+    MolecularGraphPropertyDefaultExport.cpp
     ControlParameterExport.cpp 
     ControlParameterDefaultExport.cpp 
     AtomPropertyFlagExport.cpp

@@ -99,12 +99,13 @@ void DataRecordPainter::drawRecord(int rec_no, double vp_width, double vp_height
 				return;
 				
 			} catch (const std::exception& e) {
-				//error_txt = e.what();
+				//std::cerr << e.what() << std::endl;
 				dataView = DataViewPointer();
 			}
 
-		} else
+		} else 
 			return;
+
 	}
 
 	painter.setPen(Qt::red);
@@ -231,5 +232,7 @@ void DataRecordPainter::visit(const ConcreteDataRecord<CDPL::Chem::Molecule>& mo
 		} else
 			recordName = QString::fromStdString(getName(*mol_ptr));
 
-	} catch (const Base::Exception&) {}
+	} catch (const Base::Exception& e) {
+		//std::cerr << e.what() << std::endl;
+	}
 }

@@ -6,6 +6,8 @@ SET(cdpl-biomol_LIB_SRCS
 
     AtomProperty.cpp
     MolecularGraphProperty.cpp
+    AtomPropertyDefault.cpp
+    MolecularGraphPropertyDefault.cpp
     DataFormat.cpp
     ControlParameter.cpp
     ControlParameterDefault.cpp
@@ -17,31 +19,13 @@ SET(cdpl-biomol_LIB_SRCS
     CDFDataReader.cpp
     CDFDataWriter.cpp
 
-    AtomResidueAtomNameFunctions.cpp
-    AtomResidueAltAtomNameFunctions.cpp
-    AtomResidueLeavingAtomFlagFunctions.cpp
-    AtomResidueLinkingAtomFlagFunctions.cpp
-    AtomResidueCodeFunctions.cpp
-    AtomResidueSequenceNumberFunctions.cpp
-    AtomResidueInsertionCodeFunctions.cpp
+    AtomPropertyFunctions.cpp
     AtomResidueUtilityFunctions.cpp
-    AtomHeteroAtomFlagFunctions.cpp
-    AtomChainIDFunctions.cpp
-    AtomAltLocationIDFunctions.cpp
-    AtomModelNumberFunctions.cpp
-    AtomSerialNumberFunctions.cpp
-    AtomOccupancyFunctions.cpp
-    AtomBFactorFunctions.cpp
     AtomPDBBackboneFunction.cpp
 
     AtomContainerResidueUtilityFunctions.cpp
 
-    MolecularGraphResidueCodeFunctions.cpp
-    MolecularGraphResidueSequenceNumberFunctions.cpp
-    MolecularGraphResidueInsertionCodeFunctions.cpp
-    MolecularGraphChainIDFunctions.cpp
-    MolecularGraphModelNumberFunctions.cpp
-    MolecularGraphPDBDataFunctions.cpp
+    MolecularGraphPropertyFunctions.cpp
     MolecularGraphResidueUtilityFunctions.cpp
 
     ControlParameterFunctions.cpp

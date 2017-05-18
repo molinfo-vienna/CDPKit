@@ -174,6 +174,10 @@ SET(chem_MOD_SRCS
     AtomPropertyExport.cpp 
     BondPropertyExport.cpp 
     ReactionPropertyExport.cpp 
+    AtomPropertyDefaultExport.cpp 
+    BondPropertyDefaultExport.cpp 
+    MolecularGraphPropertyDefaultExport.cpp 
+    ReactionPropertyDefaultExport.cpp 
     ControlParameterExport.cpp 
     ControlParameterDefaultExport.cpp 
     DataFormatExport.cpp 
@@ -195,6 +199,9 @@ SET(chem_MOD_SRCS
     INCHIReturnCodeExport.cpp
     MDLDataFormatVersionExport.cpp 
     MDLParityExport.cpp 
+    SybylAtomTypeExport.cpp 
+    MOL2MoleculeTypeExport.cpp 
+    MOL2ChargeTypeExport.cpp 
 
     ControlParameterFunctionExport.cpp 
     UtilityFunctionExport.cpp 

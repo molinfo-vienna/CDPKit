@@ -41,6 +41,10 @@ namespace CDPL
 		void initMolecularGraphProperties();
 		void initReactionProperties();
 		void initEntity3DProperties();
+		void initAtomPropertyDefaults();
+		void initBondPropertyDefaults();
+		void initMolecularGraphPropertyDefaults();
+		void initReactionPropertyDefaults();
 		void initControlParameters();
 		void initControlParameterDefaults();
 		void initDataFormats();
@@ -59,7 +63,11 @@ namespace
 			CDPL::Chem::initMolecularGraphProperties();
 			CDPL::Chem::initReactionProperties();
 			CDPL::Chem::initEntity3DProperties();
-			CDPL::Chem::initControlParameters();
+			CDPL::Chem::initAtomPropertyDefaults();
+			CDPL::Chem::initBondPropertyDefaults();
+			CDPL::Chem::initMolecularGraphPropertyDefaults();
+			CDPL::Chem::initReactionPropertyDefaults();
+				CDPL::Chem::initControlParameters();
 			CDPL::Chem::initControlParameterDefaults();
 			CDPL::Chem::initDataFormats();
 		}

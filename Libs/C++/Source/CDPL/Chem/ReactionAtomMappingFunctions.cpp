@@ -40,25 +40,6 @@
 using namespace CDPL; 
 
 
-const Chem::AtomMapping::SharedPointer& Chem::getAtomMapping(const Reaction& rxn)
-{
-	return rxn.getProperty<AtomMapping::SharedPointer>(ReactionProperty::ATOM_MAPPING);
-}
-
-void Chem::setAtomMapping(Reaction& rxn, const AtomMapping::SharedPointer& mapping)
-{
-	rxn.setProperty(ReactionProperty::ATOM_MAPPING, mapping);
-}
-
-void Chem::clearAtomMapping(Reaction& rxn)
-{
-	rxn.removeProperty(ReactionProperty::ATOM_MAPPING);
-}
-
-bool Chem::hasAtomMapping(const Reaction& rxn)
-{
-	return rxn.isPropertySet(ReactionProperty::ATOM_MAPPING);
-}
 
 Chem::AtomMapping::SharedPointer Chem::perceiveAtomMapping(const Reaction& rxn)
 {

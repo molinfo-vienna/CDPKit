@@ -124,6 +124,8 @@ BOOST_PYTHON_MODULE(_pharm)
 
 	exportFeatureContainerProperties();
 	exportFeatureProperties();
+	exportFeatureContainerPropertyDefaults();
+	exportFeaturePropertyDefaults();
 
 	exportControlParameters();
 	exportControlParameterDefaults();

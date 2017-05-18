@@ -136,26 +136,6 @@ namespace
 }
 
 
-const Chem::MatchExpression<Chem::MolecularGraph>::SharedPointer& Chem::getMatchExpression(const MolecularGraph& molgraph)
-{
-    return molgraph.getProperty<MatchExpression<MolecularGraph>::SharedPointer>(MolecularGraphProperty::MATCH_EXPRESSION);
-}
-
-void Chem::setMatchExpression(MolecularGraph& molgraph, const MatchExpression<MolecularGraph>::SharedPointer& expr)
-{
-    molgraph.setProperty(MolecularGraphProperty::MATCH_EXPRESSION, expr);
-}
-
-void Chem::clearMatchExpression(MolecularGraph& molgraph)
-{
-    molgraph.removeProperty(MolecularGraphProperty::MATCH_EXPRESSION);
-}
-
-bool Chem::hasMatchExpression(const MolecularGraph& molgraph)
-{
-    return molgraph.isPropertySet(MolecularGraphProperty::MATCH_EXPRESSION);
-}
-
 Chem::MatchExpression<Chem::MolecularGraph>::SharedPointer Chem::buildMatchExpression(const MolecularGraph& molgraph)
 {
 	MatchExpression<MolecularGraph>::SharedPointer expr_ptr = createMatchExpression(molgraph, *getMatchConstraints(molgraph));

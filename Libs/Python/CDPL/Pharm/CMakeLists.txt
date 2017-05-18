@@ -76,6 +76,8 @@ SET(pharm_MOD_SRCS
 
     FeatureContainerPropertyExport.cpp 
     FeaturePropertyExport.cpp 
+    FeatureContainerPropertyDefaultExport.cpp 
+    FeaturePropertyDefaultExport.cpp 
     DataFormatExport.cpp 
     FeatureTypeExport.cpp 
     FeatureGeometryExport.cpp 

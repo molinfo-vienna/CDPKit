@@ -106,6 +106,10 @@ BOOST_PYTHON_MODULE(_vis)
 	exportAtomProperties();
 	exportBondProperties();
 	exportReactionProperties();
+	exportMolecularGraphPropertyDefaults();
+	exportAtomPropertyDefaults();
+	exportBondPropertyDefaults();
+	exportReactionPropertyDefaults();
 
 	exportControlParameters();
 	exportControlParameterDefaults();

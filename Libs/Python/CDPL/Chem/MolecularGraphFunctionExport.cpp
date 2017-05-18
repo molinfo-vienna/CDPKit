@@ -95,6 +95,8 @@ namespace
 	MAKE_MOLGRAPH_FUNC_WRAPPERS(const CDPL::Math::ULMatrix::SharedPointer&, TopologicalDistanceMatrix)
 	MAKE_MOLGRAPH_FUNC_WRAPPERS(const CDPL::Math::DMatrix::SharedPointer&, GeometricalDistanceMatrix)
 	MAKE_MOLGRAPH_FUNC_WRAPPERS(std::size_t, ConformationIndex)
+	MAKE_MOLGRAPH_FUNC_WRAPPERS(unsigned int, MOL2ChargeType)
+	MAKE_MOLGRAPH_FUNC_WRAPPERS(unsigned int, MOL2MoleculeType)
 
 	MAKE_FUNCTION_WRAPPER1(const CDPL::Chem::MatchConstraintList::SharedPointer&, getMatchConstraints, CDPL::Chem::MolecularGraph&)
 	MAKE_FUNCTION_WRAPPER1(bool, hasMatchConstraints, CDPL::Chem::MolecularGraph&)
@@ -276,6 +278,8 @@ void CDPLPythonChem::exportMolecularGraphFunctions()
 				(python::arg("molgraph"), python::arg("overwrite")));
 	python::def("setAtomSymbolsFromTypes", &Chem::setAtomSymbolsFromTypes,
 				(python::arg("molgraph"), python::arg("overwrite")));
+	python::def("perceiveSybylAtomTypes", &Chem::perceiveSybylAtomTypes, 
+				(python::arg("molgraph"), python::arg("overwrite")));
 
 	python::def("buildMatchExpression", &buildMatchExpressionWrapper1,
 	 			python::arg("molgraph"), python::with_custodian_and_ward_postcall<0, 1>());
@@ -390,7 +394,7 @@ void CDPLPythonChem::exportMolecularGraphFunctions()
 
 	python::def("hasMatchConstraints", &hasMatchConstraintsWrapper1, python::arg("molgraph"));
 	python::def("setMatchConstraints", &Chem::setMatchConstraints, 
-				(python::arg("molgraph"), python::arg("constr"), python::arg("overwrite") = true));
+				(python::arg("molgraph"), python::arg("constr")));
 	python::def("clearMatchConstraints", &Chem::clearMatchConstraints, python::arg("molgraph"));
 	python::def("getMatchConstraints", &getMatchConstraintsWrapper1, 
 				python::arg("molgraph"), python::return_value_policy<python::copy_const_reference, 
@@ -420,4 +424,6 @@ void CDPLPythonChem::exportMolecularGraphFunctions()
 	EXPORT_MOLGRAPH_FUNCS_COPY_REF(TopologicalDistanceMatrix, mtx)
 	EXPORT_MOLGRAPH_FUNCS_COPY_REF(GeometricalDistanceMatrix, mtx)
 	EXPORT_MOLGRAPH_FUNCS(MDLCTABVersion, version)
+	EXPORT_MOLGRAPH_FUNCS(MOL2ChargeType, type)
+	EXPORT_MOLGRAPH_FUNCS(MOL2MoleculeType, type)
 }

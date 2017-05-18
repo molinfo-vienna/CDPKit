@@ -187,7 +187,7 @@ bool Chem::SMARTSDataReader::readReaction(std::istream& is, Reaction& rxn)
 				new_list->addElement(ReactionMatchConstraint::CONSTRAINT_LIST, MatchConstraint::EQUAL, old_list);
 		}
 
-		setMatchConstraints(rxn, new_list, true);
+		setMatchConstraints(rxn, new_list);
 	}
 
 	return true;
@@ -278,7 +278,7 @@ void Chem::SMARTSDataReader::setMoleculeMatchConstraints(Molecule& mol) const
 			new_list->addElement(MolecularGraphMatchConstraint::CONSTRAINT_LIST, MatchConstraint::EQUAL, old_list);
 	}
 
-	setMatchConstraints(mol, new_list, true);
+	setMatchConstraints(mol, new_list);
 }
 
 void Chem::SMARTSDataReader::parseSMARTS(Molecule& mol, const Atom* prev_atom)

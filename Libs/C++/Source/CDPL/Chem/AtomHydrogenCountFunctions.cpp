@@ -29,33 +29,12 @@
 #include "CDPL/Chem/AtomFunctions.hpp"
 #include "CDPL/Chem/Atom.hpp"
 #include "CDPL/Chem/Bond.hpp"
-#include "CDPL/Chem/AtomProperty.hpp"
 #include "CDPL/Chem/AtomType.hpp"
 #include "CDPL/Chem/AtomDictionary.hpp"
 
 
 using namespace CDPL; 
 
-
-std::size_t Chem::getImplicitHydrogenCount(const Atom& atom)
-{
-	return atom.getProperty<std::size_t>(AtomProperty::IMPLICIT_HYDROGEN_COUNT);
-}
-
-void Chem::setImplicitHydrogenCount(Atom& atom, std::size_t count)
-{
-	atom.setProperty(AtomProperty::IMPLICIT_HYDROGEN_COUNT, count);
-}
-
-void Chem::clearImplicitHydrogenCount(Atom& atom)
-{
-    atom.removeProperty(AtomProperty::IMPLICIT_HYDROGEN_COUNT);
-}
-
-bool Chem::hasImplicitHydrogenCount(const Atom& atom)
-{
-    return atom.isPropertySet(AtomProperty::IMPLICIT_HYDROGEN_COUNT);
-}
 
 std::size_t Chem::calcImplicitHydrogenCount(const Atom& atom, const MolecularGraph& molgraph)
 {

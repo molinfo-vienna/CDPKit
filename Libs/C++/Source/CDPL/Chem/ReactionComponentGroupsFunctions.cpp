@@ -35,26 +35,6 @@
 using namespace CDPL; 
 
 
-const Chem::FragmentList::SharedPointer& Chem::getComponentGroups(const Reaction& rxn)
-{
-	return rxn.getProperty<FragmentList::SharedPointer>(ReactionProperty::COMPONENT_GROUPS);
-}
-
-void Chem::setComponentGroups(Reaction& rxn, const FragmentList::SharedPointer& comp_groups)
-{
-	rxn.setProperty(ReactionProperty::COMPONENT_GROUPS, comp_groups);
-}
-
-void Chem::clearComponentGroups(Reaction& rxn)
-{
-	rxn.removeProperty(ReactionProperty::COMPONENT_GROUPS);
-}
-
-bool Chem::hasComponentGroups(const Reaction& rxn)
-{
-	return rxn.isPropertySet(ReactionProperty::COMPONENT_GROUPS);
-}
-
 Chem::FragmentList::SharedPointer Chem::perceiveComponentGroups(const Reaction& rxn)
 {
 	FragmentList::SharedPointer comp_grps_ptr(new FragmentList());

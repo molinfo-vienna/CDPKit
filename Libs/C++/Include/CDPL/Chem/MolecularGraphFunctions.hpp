@@ -35,7 +35,7 @@
 #include <cstddef>
 #include <ctime>
 
-#include "CDPL/Chem/APIPrefix.hpp"
+#include "CDPL/Chem/APIPrefix.hpp" 
 #include "CDPL/Chem/Fragment.hpp"
 #include "CDPL/Chem/FragmentList.hpp"
 #include "CDPL/Chem/MatchConstraintList.hpp"
@@ -74,7 +74,7 @@ namespace CDPL
 
 		CDPL_CHEM_API const MatchConstraintList::SharedPointer& getMatchConstraints(const MolecularGraph& molgraph);
 	
-		CDPL_CHEM_API void setMatchConstraints(MolecularGraph& molgraph, const MatchConstraintList::SharedPointer& constr, bool overwrite = true);
+		CDPL_CHEM_API void setMatchConstraints(MolecularGraph& molgraph, const MatchConstraintList::SharedPointer& constr);
 
 		CDPL_CHEM_API void clearMatchConstraints(MolecularGraph& molgraph);
 
@@ -249,7 +249,7 @@ namespace CDPL
 
 		CDPL_CHEM_API void setMDLDimensionality(MolecularGraph& molgraph, std::size_t dim);
 
-		CDPL_CHEM_API void clearMDLDimensionality(MolecularGraph& CDPL);	
+		CDPL_CHEM_API void clearMDLDimensionality(MolecularGraph& molgraph);	
 
 		CDPL_CHEM_API bool hasMDLDimensionality(const MolecularGraph& molgraph);
 
@@ -288,6 +288,24 @@ namespace CDPL
 		CDPL_CHEM_API void clearMDLChiralFlag(MolecularGraph& molgraph);
 	
 		CDPL_CHEM_API bool hasMDLChiralFlag(const MolecularGraph& molgraph);
+
+
+		CDPL_CHEM_API unsigned int getMOL2MoleculeType(const MolecularGraph& molgraph);
+
+		CDPL_CHEM_API void setMOL2MoleculeType(MolecularGraph& molgraph, unsigned int type);
+
+		CDPL_CHEM_API void clearMOL2MoleculeType(MolecularGraph& molgraph);	
+
+		CDPL_CHEM_API bool hasMOL2MoleculeType(const MolecularGraph& molgraph);
+
+
+		CDPL_CHEM_API unsigned int getMOL2ChargeType(const MolecularGraph& molgraph);
+
+		CDPL_CHEM_API void setMOL2ChargeType(MolecularGraph& molgraph, unsigned int type);
+
+		CDPL_CHEM_API void clearMOL2ChargeType(MolecularGraph& molgraph);	
+
+		CDPL_CHEM_API bool hasMOL2ChargeType(const MolecularGraph& molgraph);
 
 
 		CDPL_CHEM_API void buildAdjacencyMatrix(const MolecularGraph& molgraph, Math::ULMatrix& mtx);
@@ -512,6 +530,8 @@ namespace CDPL
 		CDPL_CHEM_API void setAtomTypesFromSymbols(MolecularGraph& molgraph, bool overwrite);
 
 		CDPL_CHEM_API void setAtomSymbolsFromTypes(MolecularGraph& molgraph, bool overwrite);
+
+		CDPL_CHEM_API void perceiveSybylAtomTypes(MolecularGraph& molgraph, bool overwrite);
 		
 		/**
 		 * @}
