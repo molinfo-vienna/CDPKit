@@ -41,12 +41,12 @@ using namespace CDPL;
 
 
 Chem::RDFCodeCalculator::RDFCodeCalculator(): 
-	 smoothingFactor(1.0), scalingFactor(100.0), startRadius(0.0), radiusIncrement(0.1), numSteps(128), 
+	 smoothingFactor(1.0), scalingFactor(100.0), startRadius(0.0), radiusIncrement(0.1), numSteps(99), 
 	 weightFunc(boost::bind(std::multiplies<unsigned int>(),
 							boost::bind(&getType, _1), boost::bind(&getType, _1))) {}
 
 Chem::RDFCodeCalculator::RDFCodeCalculator(const MolecularGraph& molgraph, Math::DVector& rdf_code): 
-	 smoothingFactor(1.0), scalingFactor(100.0), startRadius(0.0), radiusIncrement(0.1), numSteps(128), 
+	 smoothingFactor(1.0), scalingFactor(100.0), startRadius(0.0), radiusIncrement(0.1), numSteps(99), 
 	 weightFunc(boost::bind(std::multiplies<unsigned int>(),
 							boost::bind(&getType, _1), boost::bind(&getType, _1)))
 {

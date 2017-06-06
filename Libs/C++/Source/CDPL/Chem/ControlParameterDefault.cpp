@@ -29,6 +29,8 @@
 #include "CDPL/Chem/ControlParameterDefault.hpp"
 #include "CDPL/Chem/MDLDataFormatVersion.hpp"
 #include "CDPL/Chem/DefaultMultiConfMoleculeInputProcessor.hpp"
+#include "CDPL/Chem/MOL2MoleculeType.hpp"
+#include "CDPL/Chem/MOL2ChargeType.hpp"
 
 
 namespace CDPL
@@ -80,6 +82,12 @@ namespace CDPL
 			const MultiConfMoleculeInputProcessor::SharedPointer MULTI_CONF_INPUT_PROCESSOR = MultiConfMoleculeInputProcessor::SharedPointer(new DefaultMultiConfMoleculeInputProcessor());
 
 			const bool CDF_WRITE_SINGLE_PRECISION_FLOATS                                    = true;
+
+			const bool MOL2_ENABLE_EXTENDED_ATOM_TYPES                                      = false;
+			const bool MOL2_ENABLE_AROMATIC_BOND_TYPES                                      = false;
+			const bool MOL2_CALC_FORMAL_CHARGES                                             = true;
+			const unsigned int MOL2_CHARGE_TYPE                                             = MOL2ChargeType::NO_CHARGES;
+			const unsigned int MOL2_MOLECULE_TYPE                                           = MOL2MoleculeType::SMALL;
 		}
 
 		void initControlParameterDefaults() {}

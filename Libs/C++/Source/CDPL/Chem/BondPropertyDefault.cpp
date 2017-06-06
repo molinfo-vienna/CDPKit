@@ -29,6 +29,7 @@
 #include "CDPL/Chem/BondPropertyDefault.hpp"
 #include "CDPL/Chem/BondConfiguration.hpp"
 #include "CDPL/Chem/BondDirection.hpp"
+#include "CDPL/Chem/SybylBondType.hpp"
 #include "CDPL/Chem/BondStereoFlag.hpp"
 #include "CDPL/Chem/ReactionCenterStatus.hpp"
 
@@ -43,6 +44,7 @@ namespace CDPL
 		{
 
 			const std::size_t ORDER                                      = 0;
+			const unsigned int SYBYL_TYPE                                = SybylBondType::UNKNOWN;
 			const unsigned int DIRECTION                                 = BondDirection::NONE;
             const unsigned int STEREO_2D_FLAG                            = BondStereoFlag::PLAIN;
 			const StereoDescriptor STEREO_DESCRIPTOR                     = StereoDescriptor(BondConfiguration::UNDEF);

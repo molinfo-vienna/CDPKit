@@ -1,4 +1,4 @@
-/* -*- mode: c++; c-basic-offset: 4; tab-width: 4; indent-tabs-mode: t -*- */
+#/* -*- mode: c++; c-basic-offset: 4; tab-width: 4; indent-tabs-mode: t -*- */
 
 /* 
  * ControlParameter.cpp 
@@ -80,6 +80,12 @@ namespace CDPL
 			CDPL_DEFINE_LOOKUP_KEY(MULTI_CONF_INPUT_PROCESSOR);
 
 			CDPL_DEFINE_LOOKUP_KEY(CDF_WRITE_SINGLE_PRECISION_FLOATS);
+
+			CDPL_DEFINE_LOOKUP_KEY(MOL2_ENABLE_EXTENDED_ATOM_TYPES);
+			CDPL_DEFINE_LOOKUP_KEY(MOL2_ENABLE_AROMATIC_BOND_TYPES);
+			CDPL_DEFINE_LOOKUP_KEY(MOL2_CALC_FORMAL_CHARGES);
+			CDPL_DEFINE_LOOKUP_KEY(MOL2_CHARGE_TYPE);
+			CDPL_DEFINE_LOOKUP_KEY(MOL2_MOLECULE_TYPE);
 		}
 
 		void initControlParameters() {}

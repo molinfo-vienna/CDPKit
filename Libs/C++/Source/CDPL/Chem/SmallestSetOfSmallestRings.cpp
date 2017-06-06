@@ -101,12 +101,20 @@ void Chem::SmallestSetOfSmallestRings::init(const MolecularGraph& molgraph)
 	for (MolecularGraph::ConstBondIterator it = molgraph.getBondsBegin(); it != bonds_end; ++it) {
 		const Bond& bond = *it;
 		const Atom& atom1 = bond.getBegin();
+
+		if (!molgraph.containsAtom(atom1))
+			continue;
+
 		std::size_t atom1_idx = molgraph.getAtomIndex(atom1);
 
 		if (strippedAtomMask.test(atom1_idx))
 			continue;
 
 		const Atom& atom2 = bond.getEnd();
+
+		if (!molgraph.containsAtom(atom2))
+			continue;
+
 		std::size_t atom2_idx = molgraph.getAtomIndex(atom2);
 
 		if (strippedAtomMask.test(atom2_idx))

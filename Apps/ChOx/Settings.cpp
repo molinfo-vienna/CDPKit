@@ -384,6 +384,33 @@ void Settings::load()
 
 	// ------
 
+	settings.beginGroup(QString::fromStdString("Input/" + Chem::DataFormat::MOL2.getName()));
+
+	SettingsContainer& mol2_rparams = readerControlParams[Chem::DataFormat::MOL2.getName()];
+
+	mol2_rparams.setParent(this);
+
+	readParameter<bool>(mol2_rparams, settings, Chem::ControlParameter::STRICT_ERROR_CHECKING, ControlParameterDefault::MOL2_INPUT_STRICT_ERROR_CHECKING);
+	readParameter<bool>(mol2_rparams, settings, Chem::ControlParameter::MULTI_CONF_IMPORT, ControlParameterDefault::MOL2_INPUT_MULTI_CONF_IMPORT);
+
+	settings.endGroup();
+
+	// +++
+
+	settings.beginGroup(QString::fromStdString("Output/" + Chem::DataFormat::MOL2.getName()));
+
+	SettingsContainer& mol2_wparams = writerControlParams[Chem::DataFormat::MOL2.getName()];
+
+	mol2_wparams.setParent(this);
+
+	readParameter<bool>(mol2_wparams, settings, Chem::ControlParameter::STRICT_ERROR_CHECKING, ControlParameterDefault::MOL2_OUTPUT_STRICT_ERROR_CHECKING);
+	readParameter<bool>(mol2_wparams, settings, ControlParameter::WRITE_SINGLE_RECORD_FILES, ControlParameterDefault::MOL2_OUTPUT_WRITE_SINGLE_RECORD_FILES);
+	readParameter<bool>(mol2_wparams, settings, Chem::ControlParameter::MULTI_CONF_EXPORT, ControlParameterDefault::MOL2_OUTPUT_MULTI_CONF_EXPORT);
+
+	settings.endGroup();
+
+	// ------
+
 	settings.beginGroup(QString::fromStdString("Input/" + Chem::DataFormat::MOL.getName()));
 
 	SettingsContainer& mol_rparams = readerControlParams[Chem::DataFormat::MOL.getName()];
@@ -854,6 +881,29 @@ void Settings::save() const
 	writeParameter<std::string>(inchi_wparams, settings, Chem::ControlParameter::RECORD_SEPARATOR);
 	writeParameter<bool>(inchi_wparams, settings, ControlParameter::WRITE_SINGLE_RECORD_FILES);
 	writeParameter<std::string>(inchi_wparams, settings, Chem::ControlParameter::INCHI_OUTPUT_OPTIONS);
+
+	settings.endGroup();
+
+	// ------
+
+	settings.beginGroup(QString::fromStdString("Input/" + Chem::DataFormat::MOL2.getName()));
+
+	const SettingsContainer& mol2_rparams = getReaderControlParameters(Chem::DataFormat::MOL2.getName());
+
+	writeParameter<bool>(mol2_rparams, settings, Chem::ControlParameter::STRICT_ERROR_CHECKING);
+	writeParameter<bool>(mol2_rparams, settings, Chem::ControlParameter::MULTI_CONF_IMPORT);
+
+	settings.endGroup();
+
+	// +++
+
+	settings.beginGroup(QString::fromStdString("Output/" + Chem::DataFormat::MOL2.getName()));
+
+	const SettingsContainer& mol2_wparams = getWriterControlParameters(Chem::DataFormat::MOL2.getName());
+
+	writeParameter<bool>(mol2_wparams, settings, Chem::ControlParameter::STRICT_ERROR_CHECKING);
+	writeParameter<bool>(mol2_wparams, settings, ControlParameter::WRITE_SINGLE_RECORD_FILES);
+	writeParameter<bool>(mol2_wparams, settings, Chem::ControlParameter::MULTI_CONF_EXPORT);
 
 	settings.endGroup();
 

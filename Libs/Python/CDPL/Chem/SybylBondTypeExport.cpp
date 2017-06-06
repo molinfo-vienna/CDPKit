@@ -1,7 +1,7 @@
 /* -*- mode: c++; c-basic-offset: 4; tab-width: 4; indent-tabs-mode: t -*- */
 
 /* 
- * BondPropertyDefaultExport.cpp 
+ * SybylBondTypeExport.cpp 
  *
  * This file is part of the Chemical Data Processing Toolkit
  *
@@ -26,7 +26,7 @@
 
 #include <boost/python.hpp>
 
-#include "CDPL/Chem/BondPropertyDefault.hpp"
+#include "CDPL/Chem/SybylBondType.hpp"
 
 #include "NamespaceExports.hpp"
 
@@ -34,21 +34,22 @@
 namespace 
 {
 
-	struct BondPropertyDefault {};
+	struct SybylBondType {};
 }
 
 
-void CDPLPythonChem::exportBondPropertyDefaults()
+void CDPLPythonChem::exportSybylBondTypes()
 {
 	using namespace boost;
 	using namespace CDPL;
 
-	python::class_<BondPropertyDefault, boost::noncopyable>("BondPropertyDefault", python::no_init)
-		.def_readonly("ORDER", &Chem::BondPropertyDefault::ORDER)
-		.def_readonly("SYBYL_TYPE", &Chem::BondPropertyDefault::SYBYL_TYPE)
-		.def_readonly("DIRECTION", &Chem::BondPropertyDefault::DIRECTION)
-		.def_readonly("STEREO_2D_FLAG", &Chem::BondPropertyDefault::STEREO_2D_FLAG)
-		.def_readonly("STEREO_DESCRIPTOR", &Chem::BondPropertyDefault::STEREO_DESCRIPTOR)
-		.def_readonly("REACTION_CENTER_STATUS", &Chem::BondPropertyDefault::REACTION_CENTER_STATUS)
-		.def_readonly("MATCH_CONSTRAINTS", &Chem::BondPropertyDefault::MATCH_CONSTRAINTS);
+	python::class_<SybylBondType, boost::noncopyable>("SybylBondType", python::no_init)
+		.def_readonly("UNKNOWN", &Chem::SybylBondType::UNKNOWN)
+		.def_readonly("SINGLE", &Chem::SybylBondType::SINGLE)
+		.def_readonly("DOUBLE", &Chem::SybylBondType::DOUBLE)
+		.def_readonly("TRIPLE", &Chem::SybylBondType::TRIPLE)
+		.def_readonly("AROMATIC", &Chem::SybylBondType::AROMATIC)
+		.def_readonly("AMIDE", &Chem::SybylBondType::AMIDE)
+		.def_readonly("DUMMY", &Chem::SybylBondType::DUMMY)
+		.def_readonly("NOT_CONNECTED", &Chem::SybylBondType::NOT_CONNECTED);
 }

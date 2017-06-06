@@ -46,6 +46,7 @@ void CDPLPythonChem::exportBondProperties()
 
 	python::class_<BondProperty, boost::noncopyable>("BondProperty", python::no_init)
 		.def_readonly("ORDER", &Chem::BondProperty::ORDER)
+		.def_readonly("SYBYL_TYPE", &Chem::BondProperty::SYBYL_TYPE)
 		.def_readonly("RING_FLAG", &Chem::BondProperty::RING_FLAG)
 		.def_readonly("AROMATICITY_FLAG", &Chem::BondProperty::AROMATICITY_FLAG)
 		.def_readonly("STEREO_DESCRIPTOR", &Chem::BondProperty::STEREO_DESCRIPTOR)

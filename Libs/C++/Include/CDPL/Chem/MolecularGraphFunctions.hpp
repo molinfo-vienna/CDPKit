@@ -384,6 +384,8 @@ namespace CDPL
 		CDPL_CHEM_API std::size_t getHydrogenDonorAtomCount(const MolecularGraph& molgraph);
 
 
+		CDPL_CHEM_API std::size_t getCompleteBondCount(const MolecularGraph& molgraph);
+
 		CDPL_CHEM_API std::size_t getBondCount(const MolecularGraph& molgraph);
 
 		CDPL_CHEM_API std::size_t getBondCount(const MolecularGraph& molgraph, std::size_t order);

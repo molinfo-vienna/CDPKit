@@ -224,12 +224,16 @@ void Chem::CDFDataWriter::outputAtoms(const MolecularGraph& molgraph, Internal::
 
 void Chem::CDFDataWriter::outputBonds(const MolecularGraph& molgraph, Internal::ByteBuffer& bbuf)
 {
-	bbuf.putInt(boost::numeric_cast<CDF::SizeType>(molgraph.getNumBonds()), false);
+	bbuf.putInt(boost::numeric_cast<CDF::SizeType>(getCompleteBondCount(molgraph)), false);
 
 	for (MolecularGraph::ConstBondIterator it = molgraph.getBondsBegin(), end = molgraph.getBondsEnd(); 
 		 it != end; ++it) {
 
 		const Bond& bond = *it;
+
+		if (!molgraph.containsAtom(bond.getBegin()) || !molgraph.containsAtom(bond.getEnd()))
+			continue;
+
 		std::size_t old_io_ptr = bbuf.getIOPointer();
 
 		bbuf.setIOPointer(old_io_ptr + sizeof(CDF::BondAtomIndexLengthTuple));

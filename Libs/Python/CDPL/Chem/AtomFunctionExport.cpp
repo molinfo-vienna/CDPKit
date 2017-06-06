@@ -123,6 +123,7 @@ namespace
 	MAKE_ATOM_FUNC_WRAPPERS(const CDPL::Chem::StereoDescriptor&, StereoDescriptor)
 	MAKE_ATOM_FUNC_WRAPPERS(unsigned int, SybylType)
 	MAKE_ATOM_FUNC_WRAPPERS(double, MOL2Charge)
+	MAKE_ATOM_FUNC_WRAPPERS(const std::string&, MOL2Name)
 
 	MAKE_FUNCTION_WRAPPER1(const CDPL::Chem::MatchConstraintList::SharedPointer&, getMatchConstraints, CDPL::Chem::Atom&)
 	MAKE_FUNCTION_WRAPPER1(bool, hasMatchConstraints, CDPL::Chem::Atom&)
@@ -415,4 +416,5 @@ void CDPLPythonChem::exportAtomFunctions()
     EXPORT_ATOM_FUNCS_INT_REF_CW(StereoDescriptor, descr)
 	EXPORT_ATOM_FUNCS(SybylType, type)
 	EXPORT_ATOM_FUNCS(MOL2Charge, charge)
+	EXPORT_ATOM_FUNCS_COPY_REF(MOL2Name, name)
 }

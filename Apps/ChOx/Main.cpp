@@ -59,8 +59,8 @@ int main(int argc, char** argv)
 {
 	ChOxApplication app(argc, argv);
 
-	QCoreApplication::setOrganizationName("CDP-Tk");
-    QCoreApplication::setOrganizationDomain("cdp-tk.org");
+	QCoreApplication::setOrganizationName("CDPKit");
+    QCoreApplication::setOrganizationDomain("cdpkit.org");
     QCoreApplication::setApplicationName("ChOx");
 
     ChOx::MainWindow* main_win = new ChOx::MainWindow(0);

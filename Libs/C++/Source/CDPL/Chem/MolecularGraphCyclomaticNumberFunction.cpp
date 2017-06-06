@@ -34,5 +34,5 @@ using namespace CDPL;
 
 std::size_t Chem::calcCyclomaticNumber(const MolecularGraph& molgraph)
 {
-	return (molgraph.getNumBonds() - molgraph.getNumAtoms() + getComponentCount(molgraph));
+	return (getCompleteBondCount(molgraph) - molgraph.getNumAtoms() + getComponentCount(molgraph));
 }

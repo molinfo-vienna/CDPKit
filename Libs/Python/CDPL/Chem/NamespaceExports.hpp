@@ -50,6 +50,7 @@ namespace CDPLPythonChem
 	void exportMDLDataFormatVersions();
 	void exportMDLParities();
 	void exportSybylAtomTypes();
+	void exportSybylBondTypes();
 	void exportMOL2MoleculeTypes();
 	void exportMOL2ChargeTypes();
 

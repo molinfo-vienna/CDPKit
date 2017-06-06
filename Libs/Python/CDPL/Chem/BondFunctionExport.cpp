@@ -87,6 +87,7 @@ namespace
 	MAKE_BOND_FUNC_WRAPPERS(bool, AromaticityFlag)
 	MAKE_BOND_FUNC_WRAPPERS(bool, RingFlag)
 	MAKE_BOND_FUNC_WRAPPERS(unsigned int, CIPConfiguration)
+	MAKE_BOND_FUNC_WRAPPERS(unsigned int, SybylType)
 	MAKE_BOND_FUNC_WRAPPERS(bool, StereoCenterFlag)
 	MAKE_BOND_FUNC_WRAPPERS(const CDPL::Chem::StereoDescriptor&, StereoDescriptor)
 	MAKE_BOND_FUNC_WRAPPERS(MatchExpressionPtrRef, MatchExpression)
@@ -106,6 +107,7 @@ namespace
 	MAKE_FUNCTION_WRAPPER2(unsigned int, calcCIPConfiguration, CDPL::Chem::Bond&, CDPL::Chem::MolecularGraph&);
 	MAKE_FUNCTION_WRAPPER2(std::size_t, getNumContainingSSSRRings, CDPL::Chem::Bond&, CDPL::Chem::MolecularGraph&);
 	MAKE_FUNCTION_WRAPPER2(bool, isRotatable, CDPL::Chem::Bond&, CDPL::Chem::MolecularGraph&);
+	MAKE_FUNCTION_WRAPPER2(unsigned int, perceiveSybylType, CDPL::Chem::Bond&, CDPL::Chem::MolecularGraph&);
 
 	MAKE_FUNCTION_WRAPPER3(void, getContainingFragments, CDPL::Chem::Bond&, CDPL::Chem::FragmentList&, CDPL::Chem::FragmentList&);
 	MAKE_FUNCTION_WRAPPER3(double, calcPolarizability, CDPL::Chem::Bond&, CDPL::Chem::MolecularGraph&, double);
@@ -148,6 +150,8 @@ void CDPLPythonChem::exportBondFunctions()
 	python::def("getNumContainingSSSRRings", &getNumContainingSSSRRingsWrapper2, 
 				(python::arg("bond"), python::arg("molgraph")));
 	python::def("isRotatable", &isRotatableWrapper2, (python::arg("bond"), python::arg("molgraph")));
+	python::def("perceiveSybylType", &perceiveSybylTypeWrapper2,
+				(python::arg("bond"), python::arg("molgraph")));
 
 	python::def("getContainingFragments", &getContainingFragmentsWrapper3,
 				(python::arg("bond"), python::arg("frag_list"), python::arg("cont_frag_list")),
@@ -180,6 +184,7 @@ void CDPLPythonChem::exportBondFunctions()
 	EXPORT_BOND_FUNCS(AromaticityFlag, aromatic)
 	EXPORT_BOND_FUNCS(RingFlag, in_ring)
 	EXPORT_BOND_FUNCS(CIPConfiguration, config)
+	EXPORT_BOND_FUNCS(SybylType, type)
 	EXPORT_BOND_FUNCS(StereoCenterFlag, is_center)
 	EXPORT_BOND_FUNCS(Direction, dir)
     EXPORT_BOND_FUNCS_INT_REF_CW(StereoDescriptor, descr)

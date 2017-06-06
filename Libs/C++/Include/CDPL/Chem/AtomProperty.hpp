@@ -89,6 +89,7 @@ namespace CDPL
 
 			extern CDPL_CHEM_API const Base::LookupKey SYBYL_TYPE;
 			extern CDPL_CHEM_API const Base::LookupKey MOL2_CHARGE;
+			extern CDPL_CHEM_API const Base::LookupKey MOL2_NAME;
 
 			extern CDPL_CHEM_API const Base::LookupKey PEOE_CHARGE;
 	

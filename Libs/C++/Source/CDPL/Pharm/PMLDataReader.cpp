@@ -26,10 +26,8 @@
 
 #include "StaticInit.hpp"
 
-#include <map>
-
-#include <boost/lexical_cast.hpp>
 #include <boost/algorithm/string.hpp>
+#include <boost/unordered_map.hpp>
 
 #include "CDPL/Pharm/Pharmacophore.hpp"
 #include "CDPL/Pharm/Feature.hpp"
@@ -59,7 +57,7 @@ namespace
 	const std::string FALSE                   = "false";
 	const std::string ZERO                    = "0";
 
-	typedef std::map<std::string, unsigned int> FeatureNameToTypeMap;
+	typedef boost::unordered_map<std::string, unsigned int> FeatureNameToTypeMap;
 
 	FeatureNameToTypeMap ls4FeatureTypes;
 
@@ -88,7 +86,6 @@ namespace
 
 	bool getBoolValue(const char* value)
 	{
-
         std::string val_lc = value;
 		boost::algorithm::to_lower(val_lc);
 
@@ -346,6 +343,8 @@ void Pharm::PMLDataReader::getDefaultFeatureProperties(const rapidxml::xml_node<
 
 bool Pharm::PMLDataReader::getPosition(const rapidxml::xml_node<char>* ftr_node, const std::string& tag, Math::Vector3D& vec) const 
 {
+	using namespace Internal;
+
 	rapidxml::xml_node<char>* vec_node = ftr_node->first_node(tag.c_str());
 
 	if (!vec_node)
@@ -354,17 +353,17 @@ bool Pharm::PMLDataReader::getPosition(const rapidxml::xml_node<char>* ftr_node,
 	rapidxml::xml_attribute<char>* attr = vec_node->first_attribute(PML::COORDS_X_ATTRIBUTE.c_str());
 
 	if (attr)
-		vec[0] = boost::lexical_cast<double>(attr->value());
+		vec[0] = parseNumber<double>(attr->value(), "PMLDataReader: error while parsing vector x-ccordinate");
 
 	attr = vec_node->first_attribute(PML::COORDS_Y_ATTRIBUTE.c_str());
 
 	if (attr)
-		vec[1] = boost::lexical_cast<double>(attr->value());
+		vec[1] = parseNumber<double>(attr->value(), "PMLDataReader: error while parsing vector y-ccordinate");
 
 	attr = vec_node->first_attribute(PML::COORDS_Z_ATTRIBUTE.c_str());
 
 	if (attr)
-		vec[2] = boost::lexical_cast<double>(attr->value());
+		vec[2] = parseNumber<double>(attr->value(), "PMLDataReader: error while parsing vector z-ccordinate");
 
 	return true;
 }
@@ -381,7 +380,7 @@ bool Pharm::PMLDataReader::getTolerance(const rapidxml::xml_node<char>* ftr_node
 	if (!attr)
 		return false;
 
-	tol = boost::lexical_cast<double>(attr->value());
+	tol = Internal::parseNumber<double>(attr->value(), "PMLDataReader: error while parsing feature tolerance");
 
 	return true;
 }

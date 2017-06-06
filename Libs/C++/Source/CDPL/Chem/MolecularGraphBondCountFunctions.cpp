@@ -35,6 +35,20 @@
 using namespace CDPL; 
 
 
+std::size_t Chem::getCompleteBondCount(const MolecularGraph& molgraph)
+{
+	std::size_t count = 0;
+
+	for (MolecularGraph::ConstBondIterator it = molgraph.getBondsBegin(), end = molgraph.getBondsEnd(); it != end; ++it) {
+		const Bond& bond = *it;
+
+		if (molgraph.containsAtom(bond.getBegin()) && molgraph.containsAtom(bond.getEnd()))
+			count++;
+	}
+
+	return count;
+}
+
 std::size_t Chem::getBondCount(const MolecularGraph& molgraph)
 {
 	return (molgraph.getNumBonds() + getImplicitHydrogenCount(molgraph));

@@ -68,6 +68,8 @@ namespace CDPL
 			extern CDPL_CHEM_API const Base::LookupKey DIRECTION;
 			extern CDPL_CHEM_API const Base::LookupKey STEREO_2D_FLAG;
 
+			extern CDPL_CHEM_API const Base::LookupKey SYBYL_TYPE;
+
 			extern CDPL_CHEM_API const Base::LookupKey REACTION_CENTER_STATUS;
 
 			extern CDPL_CHEM_API const Base::LookupKey MATCH_CONSTRAINTS;

@@ -57,6 +57,7 @@ void CDPLPythonChem::exportAtomPropertyDefaults()
 		.def_readonly("COMPONENT_GROUP_ID", &Chem::AtomPropertyDefault::COMPONENT_GROUP_ID)
 		.def_readonly("REACTION_ATOM_MAPPING_ID", &Chem::AtomPropertyDefault::REACTION_ATOM_MAPPING_ID)
 		.def_readonly("MATCH_CONSTRAINTS", &Chem::AtomPropertyDefault::MATCH_CONSTRAINTS)
+		.def_readonly("MOL2_NAME", &Chem::AtomPropertyDefault::MOL2_NAME)
 		.def_readonly("MOL2_CHARGE", &Chem::AtomPropertyDefault::MOL2_CHARGE)
 		.def_readonly("MDL_DB_STEREO_CARE_FLAG", &Chem::AtomPropertyDefault::MDL_DB_STEREO_CARE_FLAG);
 }

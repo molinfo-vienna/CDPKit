@@ -391,6 +391,15 @@ namespace CDPL
 		CDPL_CHEM_API unsigned int sybylToAtomType(unsigned int sybyl_type);
 	
 
+		CDPL_CHEM_API const std::string& getMOL2Name(const Atom& atom);
+
+		CDPL_CHEM_API void setMOL2Name(Atom& atom, const std::string& name);
+
+		CDPL_CHEM_API void clearMOL2Name(Atom& atom);
+	
+		CDPL_CHEM_API bool hasMOL2Name(const Atom& atom);
+
+
 		CDPL_CHEM_API unsigned int getMDLParity(const Atom& atom);
 
 		CDPL_CHEM_API void setMDLParity(Atom& atom, unsigned int parity);

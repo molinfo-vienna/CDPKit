@@ -57,6 +57,7 @@ namespace CDPL
 			const std::size_t REACTION_ATOM_MAPPING_ID                 = 0;
 			const MatchConstraintList::SharedPointer MATCH_CONSTRAINTS = MatchConstraintList::SharedPointer(new MatchConstraintList());
 			const double MOL2_CHARGE                                   = 0.0;
+			const std::string MOL2_NAME                                = "";
 			const bool MDL_DB_STEREO_CARE_FLAG                         = false;
 		}
 

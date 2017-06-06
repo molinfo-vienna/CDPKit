@@ -94,6 +94,11 @@ namespace
 	MAKE_CONTROL_PARAM_FUNC_WRAPPERS(bool, MultiConfImport)
 	MAKE_CONTROL_PARAM_FUNC_WRAPPERS(bool, MultiConfExport)
 	MAKE_CONTROL_PARAM_FUNC_WRAPPERS(const CDPL::Chem::MultiConfMoleculeInputProcessor::SharedPointer&, MultiConfInputProcessor)
+	MAKE_CONTROL_PARAM_FUNC_WRAPPERS(bool, MOL2EnableExtendedAtomTypes)
+	MAKE_CONTROL_PARAM_FUNC_WRAPPERS(bool, MOL2EnableAromaticBondTypes)
+	MAKE_CONTROL_PARAM_FUNC_WRAPPERS(bool, MOL2CalcFormalCharges)
+	MAKE_CONTROL_PARAM_FUNC_WRAPPERS(unsigned int, MOL2ChargeType)
+	MAKE_CONTROL_PARAM_FUNC_WRAPPERS(unsigned int, MOL2MoleculeType)
 }
 
 
@@ -136,4 +141,9 @@ void CDPLPythonChem::exportControlParameterFunctions()
 	EXPORT_CONTROL_PARAM_FUNCS(MultiConfImport, multi_conf)
 	EXPORT_CONTROL_PARAM_FUNCS(MultiConfExport, multi_conf)
 	EXPORT_CONTROL_PARAM_FUNCS_COPY_REF(MultiConfInputProcessor, proc)
+	EXPORT_CONTROL_PARAM_FUNCS(MOL2EnableExtendedAtomTypes, enable)
+	EXPORT_CONTROL_PARAM_FUNCS(MOL2EnableAromaticBondTypes, enable)
+	EXPORT_CONTROL_PARAM_FUNCS(MOL2CalcFormalCharges, calc)
+	EXPORT_CONTROL_PARAM_FUNCS(MOL2ChargeType, type)
+	EXPORT_CONTROL_PARAM_FUNCS(MOL2MoleculeType, type)
 }

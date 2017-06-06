@@ -172,6 +172,7 @@ SET(cdpl-chem_LIB_SRCS
     BondCIPConfigurationFunction.cpp
     BondMatchExpressionStringFunction.cpp
     BondMatchExpressionFunction.cpp
+    BondSybylTypePerception.cpp
 
     MolecularGraphPropertyFunctions.cpp
     MolecularGraphMatchConstraintsFunctions.cpp

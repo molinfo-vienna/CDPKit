@@ -126,6 +126,7 @@ namespace
 	MAKE_FUNCTION_WRAPPER1(std::size_t, getChainAtomCount, CDPL::Chem::MolecularGraph&);
 	MAKE_FUNCTION_WRAPPER1(std::size_t, getHydrogenAcceptorAtomCount, CDPL::Chem::MolecularGraph&);
 	MAKE_FUNCTION_WRAPPER1(std::size_t, getHydrogenDonorAtomCount, CDPL::Chem::MolecularGraph&);
+	MAKE_FUNCTION_WRAPPER1(std::size_t, getCompleteBondCount, CDPL::Chem::MolecularGraph&);
 	MAKE_FUNCTION_WRAPPER1(std::size_t, getBondCount, CDPL::Chem::MolecularGraph&);
 	MAKE_FUNCTION_WRAPPER1(std::size_t, getHydrogenBondCount, CDPL::Chem::MolecularGraph&);
 	MAKE_FUNCTION_WRAPPER1(std::size_t, getChainBondCount, CDPL::Chem::MolecularGraph&);
@@ -360,6 +361,7 @@ void CDPLPythonChem::exportMolecularGraphFunctions()
 	python::def("getChainAtomCount", &getChainAtomCountWrapper1, python::arg("molgraph"));
 	python::def("getHydrogenAcceptorAtomCount", &getHydrogenAcceptorAtomCountWrapper1, python::arg("molgraph"));
 	python::def("getHydrogenDonorAtomCount", &getHydrogenDonorAtomCountWrapper1, python::arg("molgraph"));
+	python::def("getCompleteBondCount", &getCompleteBondCountWrapper1, python::arg("molgraph"));
 	python::def("getBondCount", &getBondCountWrapper1, python::arg("molgraph"));
 	python::def("getBondCount", &getBondCountWrapper2, (python::arg("molgraph"), python::arg("order")));
 	python::def("getHydrogenBondCount", &getHydrogenBondCountWrapper1, python::arg("molgraph"));

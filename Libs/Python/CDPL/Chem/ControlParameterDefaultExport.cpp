@@ -77,5 +77,10 @@ void CDPLPythonChem::exportControlParameterDefaults()
 		.def_readonly("MULTI_CONF_IMPORT", &Chem::ControlParameterDefault::MULTI_CONF_IMPORT)
 		.def_readonly("MULTI_CONF_EXPORT", &Chem::ControlParameterDefault::MULTI_CONF_EXPORT)
 		.def_readonly("MULTI_CONF_INPUT_PROCESSOR", &Chem::ControlParameterDefault::MULTI_CONF_INPUT_PROCESSOR)
-		.def_readonly("CDF_WRITE_SINGLE_PRECISION_FLOATS", &Chem::ControlParameterDefault::CDF_WRITE_SINGLE_PRECISION_FLOATS);
+		.def_readonly("CDF_WRITE_SINGLE_PRECISION_FLOATS", &Chem::ControlParameterDefault::CDF_WRITE_SINGLE_PRECISION_FLOATS)
+		.def_readonly("MOL2_ENABLE_EXTENDED_ATOM_TYPES", &Chem::ControlParameterDefault::MOL2_ENABLE_EXTENDED_ATOM_TYPES)
+		.def_readonly("MOL2_ENABLE_AROMATIC_BOND_TYPES", &Chem::ControlParameterDefault::MOL2_ENABLE_AROMATIC_BOND_TYPES)
+		.def_readonly("MOL2_CALC_FORMAL_CHARGES", &Chem::ControlParameterDefault::MOL2_CALC_FORMAL_CHARGES)
+		.def_readonly("MOL2_CHARGE_TYPE", &Chem::ControlParameterDefault::MOL2_CHARGE_TYPE)
+		.def_readonly("MOL2_MOLECULE_TYPE", &Chem::ControlParameterDefault::MOL2_MOLECULE_TYPE);
 }

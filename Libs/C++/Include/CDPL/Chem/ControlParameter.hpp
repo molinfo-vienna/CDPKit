@@ -466,6 +466,16 @@ namespace CDPL
 			extern CDPL_CHEM_API const Base::LookupKey MULTI_CONF_INPUT_PROCESSOR;
 
 			extern CDPL_CHEM_API const Base::LookupKey CDF_WRITE_SINGLE_PRECISION_FLOATS;
+
+			extern CDPL_CHEM_API const Base::LookupKey MOL2_ENABLE_EXTENDED_ATOM_TYPES;
+
+			extern CDPL_CHEM_API const Base::LookupKey MOL2_ENABLE_AROMATIC_BOND_TYPES;
+
+			extern CDPL_CHEM_API const Base::LookupKey MOL2_CALC_FORMAL_CHARGES;
+
+			extern CDPL_CHEM_API const Base::LookupKey MOL2_CHARGE_TYPE;
+
+			extern CDPL_CHEM_API const Base::LookupKey MOL2_MOLECULE_TYPE;
 		}
 
 		/**

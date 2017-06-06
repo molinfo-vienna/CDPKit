@@ -361,6 +361,52 @@ namespace CDPL
 	
 		CDPL_CHEM_API void clearCDFWriteSinglePrecisionFloatsParameter(Base::ControlParameterContainer& cntnr);
 
+
+		CDPL_CHEM_API bool getMOL2EnableExtendedAtomTypesParameter(const Base::ControlParameterContainer& cntnr);
+
+		CDPL_CHEM_API void setMOL2EnableExtendedAtomTypesParameter(Base::ControlParameterContainer& cntnr, bool enable);
+
+		CDPL_CHEM_API bool hasMOL2EnableExtendedAtomTypesParameter(const Base::ControlParameterContainer& cntnr);
+	
+		CDPL_CHEM_API void clearMOL2EnableExtendedAtomTypesParameter(Base::ControlParameterContainer& cntnr);
+
+
+		CDPL_CHEM_API bool getMOL2EnableAromaticBondTypesParameter(const Base::ControlParameterContainer& cntnr);
+
+		CDPL_CHEM_API void setMOL2EnableAromaticBondTypesParameter(Base::ControlParameterContainer& cntnr, bool enable);
+
+		CDPL_CHEM_API bool hasMOL2EnableAromaticBondTypesParameter(const Base::ControlParameterContainer& cntnr);
+	
+		CDPL_CHEM_API void clearMOL2EnableAromaticBondTypesParameter(Base::ControlParameterContainer& cntnr);
+
+
+		CDPL_CHEM_API bool getMOL2CalcFormalChargesParameter(const Base::ControlParameterContainer& cntnr);
+
+		CDPL_CHEM_API void setMOL2CalcFormalChargesParameter(Base::ControlParameterContainer& cntnr, bool calc);
+
+		CDPL_CHEM_API bool hasMOL2CalcFormalChargesParameter(const Base::ControlParameterContainer& cntnr);
+	
+		CDPL_CHEM_API void clearMOL2CalcFormalChargesParameter(Base::ControlParameterContainer& cntnr);
+
+
+		CDPL_CHEM_API unsigned int getMOL2ChargeTypeParameter(const Base::ControlParameterContainer& cntnr);
+
+		CDPL_CHEM_API void setMOL2ChargeTypeParameter(Base::ControlParameterContainer& cntnr, unsigned int type);
+
+		CDPL_CHEM_API bool hasMOL2ChargeTypeParameter(const Base::ControlParameterContainer& cntnr);
+	
+		CDPL_CHEM_API void clearMOL2ChargeTypeParameter(Base::ControlParameterContainer& cntnr);
+
+
+		CDPL_CHEM_API unsigned int getMOL2MoleculeTypeParameter(const Base::ControlParameterContainer& cntnr);
+
+		CDPL_CHEM_API void setMOL2MoleculeTypeParameter(Base::ControlParameterContainer& cntnr, unsigned int type);
+
+		CDPL_CHEM_API bool hasMOL2MoleculeTypeParameter(const Base::ControlParameterContainer& cntnr);
+	
+		CDPL_CHEM_API void clearMOL2MoleculeTypeParameter(Base::ControlParameterContainer& cntnr);
+
+
 		/**
 		 * @}
 		 */

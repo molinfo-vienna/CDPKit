@@ -224,6 +224,16 @@ namespace CDPL
 			extern CDPL_CHEM_API const MultiConfMoleculeInputProcessor::SharedPointer MULTI_CONF_INPUT_PROCESSOR;
 
 			extern CDPL_CHEM_API const bool CDF_WRITE_SINGLE_PRECISION_FLOATS;
+
+			extern CDPL_CHEM_API const bool MOL2_ENABLE_EXTENDED_ATOM_TYPES;
+
+			extern CDPL_CHEM_API const bool MOL2_ENABLE_AROMATIC_BOND_TYPES;
+
+			extern CDPL_CHEM_API const bool MOL2_CALC_FORMAL_CHARGES;
+
+			extern CDPL_CHEM_API const unsigned int MOL2_CHARGE_TYPE;
+
+			extern CDPL_CHEM_API const unsigned int MOL2_MOLECULE_TYPE;
 		}
 
 		/**

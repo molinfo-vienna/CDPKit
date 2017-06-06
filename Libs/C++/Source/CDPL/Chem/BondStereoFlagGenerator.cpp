@@ -231,6 +231,9 @@ void Chem::BondStereoFlagGenerator::assignStereoFlags(Util::UIArray& flags)
 		if (stereo_flag == BondStereoFlag::PLAIN)
 			continue;
 
+		if (!molGraph->containsAtom(bond.getBegin()) || !molGraph->containsAtom(bond.getEnd()))
+			continue;
+
 		std::size_t atom1_idx = molGraph->getAtomIndex(bond.getBegin());
 		std::size_t atom2_idx = molGraph->getAtomIndex(bond.getEnd());
 

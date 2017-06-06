@@ -28,6 +28,12 @@
 #define CDPL_CHEM_MOL2DATAWRITER_HPP
 
 #include <iosfwd>
+#include <cstddef>
+#include <string>
+
+#include <boost/unordered_map.hpp>
+
+#include "CDPL/Math/VectorArray.hpp"
 
 
 namespace CDPL 
@@ -43,6 +49,8 @@ namespace CDPL
 	{
 
 		class MolecularGraph;
+		class Atom;
+		class Bond;
 
 		class MOL2DataWriter
 		{
@@ -50,12 +58,38 @@ namespace CDPL
 		public:
 			MOL2DataWriter(const Base::DataIOBase& io_base): ioBase(io_base) {}
 
-			bool writeMolecularGraph(std::ostream&, const MolecularGraph&);
+			bool writeMolecularGraph(std::ostream& os, const MolecularGraph& molgraph);
 		
 		private:
-			void init(std::ostream&);
+			void init(std::ostream& os);
+
+			void getAtomCoordsDim(const MolecularGraph& molgraph);
+
+			void writeMoleculeRecord(std::ostream& os, const MolecularGraph& molgraph);
+			void writeAtomRecords(std::ostream& os, const MolecularGraph& molgraph);
+			void writeBondRecords(std::ostream& os, const MolecularGraph& molgraph) const;
+
+			const std::string& getMoleculeTypeString(const MolecularGraph& molgraph) const; 
+			const std::string& getChargeTypeString(const MolecularGraph& molgraph); 
+
+			std::string getAtomName(const Atom& atom);
+
+			const std::string& getAtomTypeString(const Atom& atom, const MolecularGraph& molgraph) const;
+			const std::string& getBondTypeString(const Bond& bond, const MolecularGraph& molgraph) const;
+			const std::string& getBondOrderString(const Bond& bond) const;
+
+			typedef boost::unordered_map<std::string, std::size_t> StringCountMap;
 
 			const Base::DataIOBase& ioBase;
+			bool                    strictErrorChecking;
+			bool                    multiConfExport;
+			bool                    extendedAtomTypes;
+			bool                    aromaticBondTypes;
+			unsigned int            atomChargeType;
+			unsigned int            moleculeType;
+			std::size_t             coordsDim;
+			Math::Vector3DArray     confCoordinates;
+			StringCountMap          atomSymbolCounts;
 		};
 	}
 }

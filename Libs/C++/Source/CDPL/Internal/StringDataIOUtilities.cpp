@@ -33,7 +33,7 @@
 using namespace CDPL;
 
 
-void Internal::skipChars(std::istream& is, std::size_t count, const std::string& err_msg, char eol_char)
+void Internal::skipChars(std::istream& is, std::size_t count, const char* err_msg, char eol_char)
 {
 	char c = 0;
 	
@@ -45,7 +45,7 @@ void Internal::skipChars(std::istream& is, std::size_t count, const std::string&
 		is.putback(eol_char);
 }
 
-bool Internal::skipToString(std::istream& is, const std::string& str, const std::string& err_msg, bool pos_after)
+bool Internal::skipToString(std::istream& is, const std::string& str, const char* err_msg, bool pos_after)
 {
 	std::size_t str_len = str.length();
 
@@ -58,7 +58,7 @@ bool Internal::skipToString(std::istream& is, const std::string& str, const std:
 
 			if (!is.get(c)) {
 				if (is.bad() || !is.eof())
-					throw Base::IOError(err_msg + ": stream read error");
+					throw Base::IOError(std::string(err_msg) + ": stream read error");
 
 				return false;
 			}
@@ -80,7 +80,7 @@ bool Internal::skipToString(std::istream& is, const std::string& str, const std:
 	return false;
 }
 
-bool Internal::readToString(std::istream& is, const std::string& str, std::string& data, const std::string& err_msg, bool inc_str)
+bool Internal::readToString(std::istream& is, const std::string& str, std::string& data, const char* err_msg, bool inc_str)
 {
 	std::size_t str_len = str.length();
 
@@ -89,7 +89,7 @@ bool Internal::readToString(std::istream& is, const std::string& str, std::strin
 
 		if (!is.get(c)) {
 			if (is.bad() || !is.eof())
-				throw Base::IOError(err_msg + ": stream read error");
+				throw Base::IOError(std::string(err_msg) + ": stream read error");
 			
 			return false;
 		}
@@ -114,7 +114,7 @@ bool Internal::readToString(std::istream& is, const std::string& str, std::strin
 	return false;
 } 
 
-void Internal::skipLines(std::istream& is, std::size_t count, const std::string& err_msg, char eol_char)
+void Internal::skipLines(std::istream& is, std::size_t count, const char* err_msg, char eol_char)
 {
 	for (std::size_t i = 0; i < count && is.good(); i++)
 		is.ignore(std::numeric_limits<std::streamsize>::max(), std::istream::traits_type::to_int_type(eol_char));
@@ -122,7 +122,7 @@ void Internal::skipLines(std::istream& is, std::size_t count, const std::string&
 	checkStreamState(is, err_msg);
 }
 		
-std::string& Internal::readLine(std::istream& is, std::string& line, const std::string& err_msg, bool trim, 
+std::string& Internal::readLine(std::istream& is, std::string& line, const char* err_msg, bool trim, 
 								bool check_ll, std::size_t max_llen, char eol_char)
 {
 	std::getline(is, line, eol_char);
@@ -133,7 +133,7 @@ std::string& Internal::readLine(std::istream& is, std::string& line, const std::
 		line.erase(--line.end());
 
 	if (check_ll && line.size() > max_llen)
-		throw Base::IOError(err_msg + ": max. line length exceeded");
+		throw Base::IOError(std::string(err_msg) + ": max. line length exceeded");
 
 	if (trim)
 		trimString(line);
@@ -142,7 +142,7 @@ std::string& Internal::readLine(std::istream& is, std::string& line, const std::
 }
 
 std::string& Internal::readString(std::istream& is, std::size_t field_size, std::string& str, bool clear,
-								  const std::string& err_msg, bool trim, char eol_char)
+								  const char* err_msg, bool trim, char eol_char)
 {
 	if (clear)
 		str.clear();
@@ -174,7 +174,7 @@ std::string& Internal::readString(std::istream& is, std::size_t field_size, std:
 	return str;
 }
 
-void Internal::writeLine(std::ostream& os, const std::string& line, const std::string& err_msg, 
+void Internal::writeLine(std::ostream& os, const std::string& line, const char* err_msg, 
 						 bool check_llen, bool trim, bool trunc, std::size_t max_llen, char eol_char)
 {
 	if (check_llen && line.size() > max_llen) {
@@ -185,7 +185,7 @@ void Internal::writeLine(std::ostream& os, const std::string& line, const std::s
 
 			if (trimmed_line.size() > max_llen) {
 				if (!trunc)
-					throw Base::IOError(err_msg + ": length of '" + trimmed_line + "' exceeds limit of " 
+					throw Base::IOError(std::string(err_msg) + ": length of '" + trimmed_line + "' exceeds limit of " 
 										+ boost::lexical_cast<std::string>(max_llen) + " allowed characters");
 				else
 					os << trimmed_line.substr(0, max_llen) << eol_char;
@@ -195,7 +195,7 @@ void Internal::writeLine(std::ostream& os, const std::string& line, const std::s
 
 		} else {
 			if (!trunc)
-				throw Base::IOError(err_msg + ": length of '" + line + "' exceeds limit of " 
+				throw Base::IOError(std::string(err_msg) + ": length of '" + line + "' exceeds limit of " 
 									+ boost::lexical_cast<std::string>(max_llen) + " allowed characters");
 			else
 				os << line.substr(0, max_llen) << eol_char;
@@ -206,7 +206,7 @@ void Internal::writeLine(std::ostream& os, const std::string& line, const std::s
 }
 
 void Internal::writeString(std::ostream& os, std::size_t field_size, const std::string& str, 
-						   const std::string& err_msg, bool trim, bool trunc, bool align_right)
+						   const char* err_msg, bool trim, bool trunc, bool align_right)
 {
 	os << std::setw(field_size);
 
@@ -223,7 +223,7 @@ void Internal::writeString(std::ostream& os, std::size_t field_size, const std::
 
 			if (trimmed_str.size() > field_size) {
 				if (!trunc)
-					throw Base::IOError(err_msg + ": length of '" + trimmed_str + "' exceeds limit of " 
+					throw Base::IOError(std::string(err_msg) + ": length of '" + trimmed_str + "' exceeds limit of " 
 										+ boost::lexical_cast<std::string>(field_size) + " allowed characters");
 				else
 					os << trimmed_str.substr(0, field_size);
@@ -233,7 +233,7 @@ void Internal::writeString(std::ostream& os, std::size_t field_size, const std::
 
 		} else {
 			if (!trunc)
-				throw Base::IOError(err_msg + ": length of '" + str + "' exceeds limit of " 
+				throw Base::IOError(std::string(err_msg) + ": length of '" + str + "' exceeds limit of " 
 									+ boost::lexical_cast<std::string>(field_size) + " allowed characters");
 			else
 				os << str.substr(0, field_size);

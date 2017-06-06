@@ -56,7 +56,7 @@ using namespace CDPL;
 namespace
 {
 
-	inline void writePDBLine(std::ostream& os, const std::string& line, const std::string& err_msg, 
+	inline void writePDBLine(std::ostream& os, const std::string& line, const char* err_msg, 
 							 bool check_llen, bool trunc, std::size_t max_llen)
 	{
 		Internal::writeLine(os, line, err_msg, check_llen, false, trunc, max_llen, Biomol::PDB::END_OF_LINE);
@@ -74,7 +74,7 @@ namespace
 
 	inline void writePDBRecordPrefix(std::ostream& os, const std::string& prefix)
 	{
-		Internal::writeString(os, Biomol::PDB::RECORD_NAME_LENGTH, prefix, "error while writing " + prefix + " record", 
+		Internal::writeString(os, Biomol::PDB::RECORD_NAME_LENGTH, prefix, ("error while writing " + prefix + " record").c_str(), 
 							  false, false, false);
 	}
 
@@ -585,7 +585,7 @@ bool Biomol::PDBDataWriter::writeGenericDataRecord(std::ostream& os, PDBData::Re
 
 	for (Tokenizer::iterator it = tokenizer.begin(); it != tokenizer.end(); ++it) {
 		writePDBRecordPrefix(os, prefix);
-		writePDBLine(os, *it, "error while writing " + prefix + " data record", checkLineLength, truncLines, max_llen);
+		writePDBLine(os, *it, ("error while writing " + prefix + " data record").c_str(), checkLineLength, truncLines, max_llen);
 
 		recordHistogram[prefix]++;
 	}
@@ -604,7 +604,7 @@ std::size_t Biomol::PDBDataWriter::writeATOMRecord(std::ostream& os, std::size_t
 	serial = std::max(serial, getSerialNumber(atom));
 	atomToSerialMap[&atom] = serial;
 
-	writeIntegerNumber(os, 5, serial, "PDBDataWriter: error while writing serial number for " + rec_prefix + " record", false);
+	writeIntegerNumber(os, 5, serial, ("PDBDataWriter: error while writing serial number for " + rec_prefix + " record").c_str(), false);
 	
 	std::string symbol = getSymbol(atom);
 	const std::string& name = getResidueAtomName(atom);
@@ -619,43 +619,43 @@ std::size_t Biomol::PDBDataWriter::writeATOMRecord(std::ostream& os, std::size_t
 
 	if (symbol.size() <= 1 && name.size() <= 3) {
 		writeWhitespace(os, 2);
-		writeString(os, 3, name, "PDBDataWriter: error while writing atom name for " + rec_prefix + " record");
+		writeString(os, 3, name, ("PDBDataWriter: error while writing atom name for " + rec_prefix + " record").c_str());
 
 	} else {
 		writeWhitespace(os, 1);
-		writeString(os, 4, name, "PDBDataWriter: error while writing atom name for " + rec_prefix + " record");
+		writeString(os, 4, name, ("PDBDataWriter: error while writing atom name for " + rec_prefix + " record").c_str());
 	}
 
 	writeWhitespace(os, 1); // FIX ME: alternate locations
 
 	const std::string& res_code = getResidueCode(atom);
 
-	writeString(os, 3, res_code, "PDBDataWriter: error while writing residue name for " + rec_prefix + " record");
+	writeString(os, 3, res_code, ("PDBDataWriter: error while writing residue name for " + rec_prefix + " record").c_str());
 	writeWhitespace(os, 1);
 	writeChar(os, getChainID(atom));
-	writeIntegerNumber(os, 4, getResidueSequenceNumber(atom), "PDBDataWriter: error while writing residue sequence number for " + 
-					   rec_prefix + " record", false);
+	writeIntegerNumber(os, 4, getResidueSequenceNumber(atom), ("PDBDataWriter: error while writing residue sequence number for " + 
+					   rec_prefix + " record").c_str(), false);
 	writeChar(os, getResidueInsertionCode(atom));
 	writeWhitespace(os, 3);
 	
 	const Math::Vector3D& coords = get3DCoordinates(atom);
 
-	writeFloatNumber(os, 8, 3, coords(0), "PDBDataWriter: error while writing x-coordinate for " + rec_prefix + " record");
-	writeFloatNumber(os, 8, 3, coords(1), "PDBDataWriter: error while writing y-coordinate for " + rec_prefix + " record");
-	writeFloatNumber(os, 8, 3, coords(2), "PDBDataWriter: error while writing z-coordinate for " + rec_prefix + " record");
-	writeFloatNumber(os, 6, 2, getOccupancy(atom), "PDBDataWriter: error while writing occupancy for " + rec_prefix + " record");
-	writeFloatNumber(os, 6, 2, getBFactor(atom), "PDBDataWriter: error while writing temperature factor for " + rec_prefix + " record");
+	writeFloatNumber(os, 8, 3, coords(0), ("PDBDataWriter: error while writing x-coordinate for " + rec_prefix + " record").c_str());
+	writeFloatNumber(os, 8, 3, coords(1), ("PDBDataWriter: error while writing y-coordinate for " + rec_prefix + " record").c_str());
+	writeFloatNumber(os, 8, 3, coords(2), ("PDBDataWriter: error while writing z-coordinate for " + rec_prefix + " record").c_str());
+	writeFloatNumber(os, 6, 2, getOccupancy(atom), ("PDBDataWriter: error while writing occupancy for " + rec_prefix + " record").c_str());
+	writeFloatNumber(os, 6, 2, getBFactor(atom), ("PDBDataWriter: error while writing temperature factor for " + rec_prefix + " record").c_str());
 	writeWhitespace(os, 10);
 
 	boost::to_upper(symbol);
 
-	writeString(os, 2, symbol, "PDBDataWriter: error while writing element symbol for " + rec_prefix + " record", false, false, true);
+	writeString(os, 2, symbol, ("PDBDataWriter: error while writing element symbol for " + rec_prefix + " record").c_str(), false, false, true);
 
 	if (writeFormCharges) { 
 		long charge = getFormalCharge(atom);
 
 		if (charge != 0) {
-			writeIntegerNumber(os, 1, std::abs(charge), "PDBDataWriter: error while writing formal atom charge for " + rec_prefix + " record");
+			writeIntegerNumber(os, 1, std::abs(charge), ("PDBDataWriter: error while writing formal atom charge for " + rec_prefix + " record").c_str());
 			writeChar(os, charge < 0 ? '-' : '+');
 
 		} else

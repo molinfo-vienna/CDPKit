@@ -63,30 +63,30 @@ using namespace CDPL;
 namespace
 {
 
-	inline void skipPDBChars(std::istream& is, std::size_t count, const std::string& err_msg)
+	inline void skipPDBChars(std::istream& is, std::size_t count, const char* err_msg)
 	{
 		Internal::skipChars(is, count, err_msg, Biomol::PDB::END_OF_LINE);
 	}
 
-	inline void skipPDBLines(std::istream& is, std::size_t count, const std::string& err_msg)
+	inline void skipPDBLines(std::istream& is, std::size_t count, const char* err_msg)
 	{
 		Internal::skipLines(is, count, err_msg, Biomol::PDB::END_OF_LINE);
 	}
 		
-	inline std::string& readPDBLine(std::istream& is, std::string& line, const std::string& err_msg,  
+	inline std::string& readPDBLine(std::istream& is, std::string& line, const char* err_msg,  
 									bool check_ll = false, std::size_t max_llen = Biomol::PDB::MAX_LINE_LENGTH)
 	{
 		return Internal::readLine(is, line, err_msg, false, check_ll, max_llen, Biomol::PDB::END_OF_LINE);
 	}
 
 	inline std::string& readPDBString(std::istream& is, std::size_t field_size, std::string& str, bool clear,
-									  const std::string& err_msg, bool trim = true)
+									  const char* err_msg, bool trim = true)
 	{
 		return Internal::readString(is, field_size, str, clear, err_msg, trim, Biomol::PDB::END_OF_LINE);
 	}
 
 	template <typename T, std::size_t FieldSize>
-	inline T readPDBNumber(std::istream& is, const std::string& err_msg, bool throw_ex = true, 
+	inline T readPDBNumber(std::istream& is, const char* err_msg, bool throw_ex = true, 
 						   const T empty_def_val = T(0), const T err_def_val = T(0))
 	{
 		return Internal::readNumber<T, FieldSize>(is, err_msg, throw_ex, empty_def_val, err_def_val, Biomol::PDB::END_OF_LINE);
@@ -347,7 +347,7 @@ bool Biomol::PDBDataReader::skipPDBFile(std::istream& is)
 
 		Internal::trimString(stringData, false, true);
 
-		skipPDBLines(is, 1, "PDBDataReader: error while skipping input to end of line of record " + stringData); 
+		skipPDBLines(is, 1, ("PDBDataReader: error while skipping input to end of line of record " + stringData).c_str()); 
 
 		if (stringData == PDB::END_PREFIX)
 			break;
@@ -402,7 +402,7 @@ void Biomol::PDBDataReader::init(std::istream& is, Chem::Molecule& mol)
 
 std::size_t Biomol::PDBDataReader::readGenericDataRecord(std::istream& is, std::size_t data_len, PDBData::RecordType rec_type, const std::string& rec_name)
 {
-	readPDBString(is, data_len, stringData, true, "PDBDataReader: error while reading " + rec_name + " record data", false);
+	readPDBString(is, data_len, stringData, true, ("PDBDataReader: error while reading " + rec_name + " record data").c_str(), false);
 
 	appendRecordData(rec_type, stringData);
 
@@ -411,7 +411,7 @@ std::size_t Biomol::PDBDataReader::readGenericDataRecord(std::istream& is, std::
 
 std::size_t Biomol::PDBDataReader::skipRecordData(std::istream& is, std::size_t data_len, const std::string& rec_name) const
 {
-	skipPDBChars(is, data_len, "PDBDataReader: error while skipping data of record " + rec_name);
+	skipPDBChars(is, data_len, ("PDBDataReader: error while skipping data of record " + rec_name).c_str());
 
 	return data_len;
 }
@@ -654,7 +654,7 @@ std::size_t Biomol::PDBDataReader::readMASTERRecord(std::istream& is)
 
 void Biomol::PDBDataReader::readATOMRecord(std::istream& is, Chem::Molecule& mol, const std::string& rec_name, bool het_atom)
 {
-	std::size_t serial = readPDBNumber<std::size_t, 5>(is, "PDBDataReader: error while reading serial number from " + rec_name + " record", true);
+	std::size_t serial = readPDBNumber<std::size_t, 5>(is, ("PDBDataReader: error while reading serial number from " + rec_name + " record").c_str(), true);
 	Chem::Atom* atom = &mol.addAtom();
 
 	serialToAtomMap[currModelID][serial] = atom;		
@@ -663,67 +663,67 @@ void Biomol::PDBDataReader::readATOMRecord(std::istream& is, Chem::Molecule& mol
 	setModelNumber(*atom, currModelID);
 	setSerialNumber(*atom, serial);
 
-	skipPDBChars(is, 1, "PDBDataReader: error while skipping characters in " + rec_name + " record");
-	readPDBString(is, 4, stringData, true, "PDBDataReader: error while reading atom name from " + rec_name + " record");
+	skipPDBChars(is, 1, ("PDBDataReader: error while skipping characters in " + rec_name + " record").c_str());
+	readPDBString(is, 4, stringData, true, ("PDBDataReader: error while reading atom name from " + rec_name + " record").c_str());
 
 	setResidueAtomName(*atom, stringData);
 
-	readPDBString(is, 1, stringData, true, "PDBDataReader: error while reading alternate location indicator from " + rec_name + " record", false);
+	readPDBString(is, 1, stringData, true, ("PDBDataReader: error while reading alternate location indicator from " + rec_name + " record").c_str(), false);
 
 	if (stringData.length() != 1)
-		throw Base::IOError("PDBDataReader: unexpected end of " + rec_name + " record");
+		throw Base::IOError(("PDBDataReader: unexpected end of " + rec_name + " record").c_str());
 
 	char alt_loc = stringData[0];
 
 	setAltLocationID(*atom, alt_loc);
 
-	readPDBString(is, 3, stringData, true, "PDBDataReader: error while reading residue name from " + rec_name + " record");
+	readPDBString(is, 3, stringData, true, ("PDBDataReader: error while reading residue name from " + rec_name + " record").c_str());
 
 	if (stringData.empty())
-		throw Base::IOError("PDBDataReader: unexpected end of " + rec_name + " record");
+		throw Base::IOError(("PDBDataReader: unexpected end of " + rec_name + " record").c_str());
 
 	setResidueCode(*atom, stringData);
 
 	if (het_atom && stringData != PDB::WATER_RES_NAME)
 		recordHistogram[PDB::HETGRP_PREFIX] = 1;
 
-	skipPDBChars(is, 1, "PDBDataReader: error while skipping characters in " + rec_name + " record");
-	readPDBString(is, 1, stringData, true, "PDBDataReader: error while reading chain identifier from " + rec_name + " record", false);
+	skipPDBChars(is, 1, ("PDBDataReader: error while skipping characters in " + rec_name + " record").c_str());
+	readPDBString(is, 1, stringData, true, ("PDBDataReader: error while reading chain identifier from " + rec_name + " record").c_str(), false);
 
 	if (stringData.length() != 1)
-		throw Base::IOError("PDBDataReader: unexpected end of " + rec_name + " record");
+		throw Base::IOError(("PDBDataReader: unexpected end of " + rec_name + " record").c_str());
 
 	setChainID(*atom, stringData[0]);
 
-	long res_seq_num = readPDBNumber<long, 4>(is, "PDBDataReader: error while reading residue sequence number from " + 
-											  rec_name + " record", true);
+	long res_seq_num = readPDBNumber<long, 4>(is, ("PDBDataReader: error while reading residue sequence number from " + 
+											  rec_name + " record").c_str(), true);
 
 	setResidueSequenceNumber(*atom, res_seq_num);
 
-	readPDBString(is, 1, stringData, true, "PDBDataReader: error while reading residue insertion code from " + rec_name + " record", false);
+	readPDBString(is, 1, stringData, true, ("PDBDataReader: error while reading residue insertion code from " + rec_name + " record").c_str(), false);
 
 	if (stringData.length() != 1)
-		throw Base::IOError("PDBDataReader: unexpected end of " + rec_name + " record");
+		throw Base::IOError(("PDBDataReader: unexpected end of " + rec_name + " record").c_str());
 
 	setResidueInsertionCode(*atom, stringData[0]);
 
 	atomSequence.push_back(atom);
 
-	skipPDBChars(is, 3, "PDBDataReader: error while skipping characters in " + rec_name + " record");
+	skipPDBChars(is, 3, ("PDBDataReader: error while skipping characters in " + rec_name + " record").c_str());
 
 	Math::Vector3D coords;
 
-	coords(0) = readPDBNumber<double, 8>(is, "PDBDataReader: error while reading x-coordinate from " + rec_name + " record", true);
-	coords(1) = readPDBNumber<double, 8>(is, "PDBDataReader: error while reading y-coordinate from " + rec_name + " record", true);
-	coords(2) = readPDBNumber<double, 8>(is, "PDBDataReader: error while reading z-coordinate from " + rec_name + " record", true);
+	coords(0) = readPDBNumber<double, 8>(is, ("PDBDataReader: error while reading x-coordinate from " + rec_name + " record").c_str(), true);
+	coords(1) = readPDBNumber<double, 8>(is, ("PDBDataReader: error while reading y-coordinate from " + rec_name + " record").c_str(), true);
+	coords(2) = readPDBNumber<double, 8>(is, ("PDBDataReader: error while reading z-coordinate from " + rec_name + " record").c_str(), true);
 
-	setOccupancy(*atom, readPDBNumber<double, 6>(is, "PDBDataReader: error while reading occupancy from " + rec_name + " record", true));
-	setBFactor(*atom, readPDBNumber<double, 6>(is, "PDBDataReader: error while reading temperature factor from " + rec_name + " record", true));
+	setOccupancy(*atom, readPDBNumber<double, 6>(is, ("PDBDataReader: error while reading occupancy from " + rec_name + " record").c_str(), true));
+	setBFactor(*atom, readPDBNumber<double, 6>(is, ("PDBDataReader: error while reading temperature factor from " + rec_name + " record").c_str(), true));
 	set3DCoordinates(*atom, coords);
 
-	skipPDBChars(is, 10, "PDBDataReader: error while skipping characters in " + rec_name + " record");
+	skipPDBChars(is, 10, ("PDBDataReader: error while skipping characters in " + rec_name + " record").c_str());
 
-	readPDBString(is, 2, stringData, true, "PDBDataReader: error while reading element symbol from " + rec_name + " record", true);
+	readPDBString(is, 2, stringData, true, ("PDBDataReader: error while reading element symbol from " + rec_name + " record").c_str(), true);
 
 	if (!stringData.empty()) {
 		if (stringData.length() == 2)
@@ -734,19 +734,19 @@ void Biomol::PDBDataReader::readATOMRecord(std::istream& is, Chem::Molecule& mol
 		unsigned int atom_type = Chem::AtomDictionary::getType(stringData);
 
 		if (strictErrorChecking && atom_type == Chem::AtomType::UNKNOWN)
-			throw Base::IOError("PDBDataReader: unknown chemical element specified in " + rec_name + " record: " + stringData);
+			throw Base::IOError(("PDBDataReader: unknown chemical element specified in " + rec_name + " record: " + stringData).c_str());
 
 		setType(*atom, atom_type);
 	} 
 //	else 
-//		throw Base::IOError("PDBDataReader: unexpected end of " + rec_name + " record");
+//		throw Base::IOError(("PDBDataReader: unexpected end of " + rec_name + " record").c_str());
 
-	readPDBString(is, 2, stringData, true, "PDBDataReader: error while reading formal charge specification from " + rec_name + " record", true);
+	readPDBString(is, 2, stringData, true, ("PDBDataReader: error while reading formal charge specification from " + rec_name + " record").c_str(), true);
 
 	if (!stringData.empty() && (!ignoreChargeField || strictErrorChecking)) {
 		if (stringData.length() != 2) {
 			if (strictErrorChecking)
-				throw Base::IOError("PDBDataReader: invalid length of formal charge specification in " + rec_name + " record");
+				throw Base::IOError(("PDBDataReader: invalid length of formal charge specification in " + rec_name + " record").c_str());
 
 		} else if (std::isdigit(stringData[0], std::locale::classic())) {
 			long charge = stringData[0] - '0';
@@ -762,10 +762,10 @@ void Biomol::PDBDataReader::readATOMRecord(std::istream& is, Chem::Molecule& mol
 					setFormalCharge(*atom, charge);
 		
 			} else if (strictErrorChecking)
-				throw Base::IOError("PDBDataReader: invalid formal charge specification format in " + rec_name + " record");
+				throw Base::IOError(("PDBDataReader: invalid formal charge specification format in " + rec_name + " record").c_str());
 
 		} else if (strictErrorChecking)
-			throw Base::IOError("PDBDataReader: invalid formal charge specification format in " + rec_name + " record");
+			throw Base::IOError(("PDBDataReader: invalid formal charge specification format in " + rec_name + " record").c_str());
 	}
 
 	if (stringData.empty() && !ignoreChargeField)
@@ -802,14 +802,14 @@ std::size_t Biomol::PDBDataReader::startNextRecord(std::istream& is, std::string
 	bool rec_name_change = (prev_rec_name != rec_name);
 
 	if (strictErrorChecking && !rec_name_change && (multilineRecords.find(rec_name) == multilineRecords.end()))
-		throw Base::IOError("PDBDataReader: record " + rec_name + " spans more than one line");
+		throw Base::IOError(("PDBDataReader: record " + rec_name + " spans more than one line").c_str());
 
 	checkRecordOrder(prev_rec_name, rec_name);
 
 	if (strictErrorChecking && rec_name_change && 
 		(recordHistogram.find(rec_name) != recordHistogram.end()) &&
 		(oneTimeRecords.find(rec_name) != oneTimeRecords.end()))
-		throw Base::IOError("PDBDataReader: invalid multiple occurrences of record " + rec_name);
+		throw Base::IOError(("PDBDataReader: invalid multiple occurrences of record " + rec_name).c_str());
 
 	recordHistogram[rec_name]++;
 
@@ -819,14 +819,14 @@ std::size_t Biomol::PDBDataReader::startNextRecord(std::istream& is, std::string
 void Biomol::PDBDataReader::skipInputToNextLine(std::istream& is, std::size_t rem_llen, const std::string& rec_name)
 {
 	if (checkLineLength || strictErrorChecking) {
-		readPDBLine(is, stringData, "PDBDataReader: error while reading line of record " + rec_name, checkLineLength, 
+		readPDBLine(is, stringData, ("PDBDataReader: error while reading line of record " + rec_name).c_str(), checkLineLength, 
 					rem_llen);
 
 		if (strictErrorChecking && !Internal::trimString(stringData).empty())
-			throw Base::IOError("PDBDataReader: found garbage after data of record " + rec_name);
+			throw Base::IOError(("PDBDataReader: found garbage after data of record " + rec_name).c_str());
 			
 	} else
-		skipPDBLines(is, 1, "PDBDataReader: error while reading skipping to end of line of record " + rec_name); 
+		skipPDBLines(is, 1, ("PDBDataReader: error while reading skipping to end of line of record " + rec_name).c_str()); 
 }
 
 void Biomol::PDBDataReader::checkMandatoryRecords() const
@@ -839,12 +839,12 @@ void Biomol::PDBDataReader::checkMandatoryRecords() const
 	for (std::size_t i = 0; i < sizeof(PDB::MANDATORY_RECORDS) / sizeof(std::string[2]); i++) {
 		if (PDB::MANDATORY_RECORDS[i][1].empty()) {              
 			if (recordHistogram.find(PDB::MANDATORY_RECORDS[i][0]) == rec_histo_end)
-				throw Base::IOError("PDBDataReader: mandatory record " + PDB::MANDATORY_RECORDS[i][0] + " not found");
+				throw Base::IOError(("PDBDataReader: mandatory record " + PDB::MANDATORY_RECORDS[i][0] + " not found").c_str());
 
 		} else if (recordHistogram.find(PDB::MANDATORY_RECORDS[i][1]) != rec_histo_end && 
 				   recordHistogram.find(PDB::MANDATORY_RECORDS[i][0]) == rec_histo_end)
-			throw Base::IOError("PDBDataReader: record " + PDB::MANDATORY_RECORDS[i][0] + " is mandatory if record " +
-								PDB::MANDATORY_RECORDS[i][1] + " exists, but was not found");
+			throw Base::IOError(("PDBDataReader: record " + PDB::MANDATORY_RECORDS[i][0] + " is mandatory if record " +
+								PDB::MANDATORY_RECORDS[i][1] + " exists, but was not found").c_str());
 	}
 }
 
@@ -865,7 +865,7 @@ void Biomol::PDBDataReader::checkRecordOrder(const std::string& prev_rec_name, c
 		if (prev_rec_order_id <= *it)
 			return;
 
-	throw Base::IOError("PDBDataReader: wrong record order: " + cur_rec_name + " must precede " + prev_rec_name);
+	throw Base::IOError(("PDBDataReader: wrong record order: " + cur_rec_name + " must precede " + prev_rec_name).c_str());
 }
 
 void Biomol::PDBDataReader::processAtomSequence(Chem::Molecule& mol, bool chain_term)

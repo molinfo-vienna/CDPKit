@@ -235,6 +235,7 @@ BOOST_PYTHON_MODULE(_chem)
 	exportMDLDataFormatVersions();
 	exportMDLParities();
 	exportSybylAtomTypes();
+	exportSybylBondTypes();
 	exportMOL2MoleculeTypes();
 	exportMOL2ChargeTypes();
 

@@ -48,33 +48,73 @@ namespace CDPL
 	namespace Internal
 	{
 
-		inline void checkStreamState(const std::istream& is, const std::string& err_msg)
+		inline void checkStreamState(const std::istream& is, const char* err_msg)
 		{
 			if (!is.good())
-				throw Base::IOError(err_msg + ": unexpected end of data or unspecified read error");
+				throw Base::IOError(std::string(err_msg) + ": unexpected end of data or unspecified read error");
 		}
 
-		void skipChars(std::istream& is, std::size_t count, const std::string& err_msg = "Error", char eol_char = '\n');
+		void skipChars(std::istream& is, std::size_t count, const char* err_msg = "Error", char eol_char = '\n');
 		
-		void skipLines(std::istream& is, std::size_t count = 1, const std::string& err_msg = "Error", char eol_char = '\n');
+		void skipLines(std::istream& is, std::size_t count = 1, const char* err_msg = "Error", char eol_char = '\n');
 			
-		std::string& readLine(std::istream& is, std::string& line, const std::string& err_msg = "Error", bool trim = false, 
+		std::string& readLine(std::istream& is, std::string& line, const char* err_msg = "Error", bool trim = false, 
 							  bool check_ll = false, std::size_t max_llen = 80, char eol_char = '\n');
 
 
 		std::string& readString(std::istream& is, std::size_t field_size, std::string& str, bool clear = true,
-								const std::string& err_msg = "Error", bool trim = true, char eol_char = '\n');
+								const char* err_msg = "Error", bool trim = true, char eol_char = '\n');
 	
-		bool skipToString(std::istream& is, const std::string& str, const std::string& err_msg = "Error", bool pos_after = false); 
+		bool skipToString(std::istream& is, const std::string& str, const char* err_msg = "Error", bool pos_after = false); 
 
-		bool readToString(std::istream& is, const std::string& str, std::string& data, const std::string& err_msg = "Error", bool inc_str = false); 
+		bool readToString(std::istream& is, const std::string& str, std::string& data, const char* err_msg = "Error", bool inc_str = false); 
+
+		template <typename T>
+		T parseNumber(const char* str_beg, const char* str_end, const char* err_msg = "Error", bool throw_ex = true, 
+					 const T empty_def_val = T(0), const T err_def_val = T(0))
+		{
+			if (str_beg == str_end)
+				return empty_def_val;
+		
+			T val;
+			const char* old_loc = std::setlocale(LC_ALL, "C");
+			char* parse_end;
+
+			if (std::numeric_limits<T>::is_integer) {
+				if (std::numeric_limits<T>::is_signed)
+					val = T(std::strtol(str_beg, &parse_end, 10));
+				else
+					val = T(std::strtoul(str_beg, &parse_end, 10));
+
+			} else 
+				val = T(std::strtod(str_beg, &parse_end)); 
+
+			std::setlocale(LC_ALL, old_loc);
+
+			if (str_end != parse_end) {
+				if (throw_ex)
+					throw Base::IOError(std::string(err_msg) + ": '" + std::string(str_beg) + "' invalid number format");
+
+				return err_def_val;
+			}
+
+			return val;
+		}
+
+		template <typename T>
+		inline T parseNumber(const std::string& str, const char* err_msg = "Error", bool throw_ex = true, 
+							 const T empty_def_val = T(0), const T err_def_val = T(0))
+		{
+			const char* c_str = str.c_str();
+			return parseNumber<T>(c_str, c_str + str.size(), err_msg, throw_ex, empty_def_val, err_def_val);
+		}
 
 		template <typename T, std::size_t FieldSize>
-		T readNumber(std::istream& is, const std::string& err_msg = "Error", bool throw_ex = true, 
+		T readNumber(std::istream& is, const char* err_msg = "Error", bool throw_ex = true, 
 					 const T empty_def_val = T(0), const T err_def_val = T(0), char eol_char = '\n')
 		{
 			char buf[FieldSize + 1];
-			char *buf_end_ptr = buf, *parse_end_ptr;
+			char *buf_end_ptr = buf;
 			char c = 0;
 
 			for (std::size_t i = 0; i < FieldSize && is.get(c) && c != eol_char; i++) {
@@ -89,33 +129,9 @@ namespace CDPL
 			if (c == eol_char)
 				is.putback(eol_char);
 
-			if (buf_end_ptr == buf)
-				return empty_def_val;
-
 			*buf_end_ptr = 0;
-		
-			T val;
-			const char* old_loc = std::setlocale(LC_ALL, "C");
 
-			if (std::numeric_limits<T>::is_integer) {
-				if (std::numeric_limits<T>::is_signed)
-					val = T(std::strtol(buf, &parse_end_ptr, 10));
-				else
-					val = T(std::strtoul(buf, &parse_end_ptr, 10));
-
-			} else 
-				val = T(std::strtod(buf, &parse_end_ptr)); 
-
-			std::setlocale(LC_ALL, old_loc);
-
-			if (buf_end_ptr != parse_end_ptr) {
-				if (throw_ex)
-					throw Base::IOError(err_msg + ": '" + std::string(buf) + "' invalid number format");
-
-				return err_def_val;
-			}
-
-			return val;
+			return parseNumber<T>(buf, buf_end_ptr, err_msg, throw_ex, empty_def_val, err_def_val);
 		}
 
 		inline void writeWhitespace(std::ostream& os, std::size_t width)
@@ -128,16 +144,16 @@ namespace CDPL
 			os << eol_char;
 		}
 
-		void writeLine(std::ostream& os, const std::string& line, const std::string& err_msg, 
+		void writeLine(std::ostream& os, const std::string& line, const char* err_msg, 
 					   bool check_llen, bool trim, bool trunc, std::size_t max_llen = 80, char eol_char = '\n');
 	
 		void writeString(std::ostream& os, std::size_t field_size, const std::string& str, 
-						 const std::string& err_msg = "Error", bool trim = false, bool trunc = false, bool align_right = false);
+						 const char* err_msg = "Error", bool trim = false, bool trunc = false, bool align_right = false);
 
 		void writeSubstring(std::ostream& os, const std::string& str, std::size_t start, std::size_t end);
 
 		template <typename T>
-		void writeIntegerNumber(std::ostream& os, std::size_t field_size, const T value, const std::string& err_msg = "Error", 
+		void writeIntegerNumber(std::ostream& os, std::size_t field_size, const T value, const char* err_msg = "Error", 
 								bool align_left = false)
 		{
 			std::ostringstream oss;
@@ -154,12 +170,12 @@ namespace CDPL
 			oss << value;
 
 			if (!oss.good())
-				throw Base::IOError(err_msg + ": conversion of numeric value to string failed");
+				throw Base::IOError(std::string(err_msg) + ": conversion of numeric value to string failed");
 
 			std::string val_str = oss.str();
 
 			if (val_str.size() > field_size)
-				throw Base::IOError(err_msg + ": number exceeds limit of " 
+				throw Base::IOError(std::string(err_msg )+ ": number exceeds limit of " 
 									+ boost::lexical_cast<std::string>(field_size) + " allowed digits"); 
 
 			os << val_str; 
@@ -167,7 +183,7 @@ namespace CDPL
 
 		template <typename T>
 		void writeFloatNumber(std::ostream& os, std::size_t field_size, std::size_t prec, 
-							  const T value, const std::string& err_msg = "Error")
+							  const T value, const char* err_msg = "Error")
 		{
 			std::ostringstream oss;
 
@@ -176,12 +192,12 @@ namespace CDPL
 			oss << std::fixed << std::setw(field_size) << std::showpoint << std::setprecision(prec) << std::right << value;
 
 			if (!oss.good())
-				throw Base::IOError(err_msg + ": conversion of numeric value to string failed");
+				throw Base::IOError(std::string(err_msg) + ": conversion of numeric value to string failed");
 
 			std::string val_str = oss.str();
 
 			if (val_str.size() > field_size)
-				throw Base::IOError(err_msg + ": number exceeds limit of " 
+				throw Base::IOError(std::string(err_msg) + ": number exceeds limit of " 
 									+ boost::lexical_cast<std::string>(field_size) + " allowed characters"); 
 			os << val_str; 
 		}

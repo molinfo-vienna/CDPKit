@@ -194,28 +194,12 @@ void Chem::JMEDataWriter::init(std::ostream& os)
 
 bool Chem::JMEDataWriter::writeComponent(std::ostream& os, const MolecularGraph& molgraph)
 {
-	std::size_t bond_count = 0;
-
-	MolecularGraph::ConstBondIterator bonds_end = molgraph.getBondsEnd();
-
-	for (MolecularGraph::ConstBondIterator it =  molgraph.getBondsBegin(); it != bonds_end; ++it) {
-		const Bond& bond = *it;
-
-		if (&bond.getMolecule() == &molgraph) {
-			bond_count = molgraph.getNumBonds();
-			break;
-		}
-
-		if (molgraph.containsAtom(bond.getBegin()) && molgraph.containsAtom(bond.getEnd()))
-			bond_count++;
-	}
-
-	os << molgraph.getNumAtoms() << ' ' << bond_count;  
+	os << molgraph.getNumAtoms() << ' ' << getCompleteBondCount(molgraph);  
 
 	std::for_each(molgraph.getAtomsBegin(), molgraph.getAtomsEnd(),
 				  boost::bind(&JMEDataWriter::writeAtom, this, boost::ref(os), boost::ref(molgraph), _1));
 	
-	std::for_each(molgraph.getBondsBegin(), bonds_end,
+	std::for_each(molgraph.getBondsBegin(), molgraph.getBondsEnd(),
 				  boost::bind(&JMEDataWriter::writeBond, this, boost::ref(os), boost::ref(molgraph), _1));
 
 	return os.good();

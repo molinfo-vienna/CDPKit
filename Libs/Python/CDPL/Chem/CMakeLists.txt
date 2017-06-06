@@ -200,6 +200,7 @@ SET(chem_MOD_SRCS
     MDLDataFormatVersionExport.cpp 
     MDLParityExport.cpp 
     SybylAtomTypeExport.cpp 
+    SybylBondTypeExport.cpp 
     MOL2MoleculeTypeExport.cpp 
     MOL2ChargeTypeExport.cpp 
 

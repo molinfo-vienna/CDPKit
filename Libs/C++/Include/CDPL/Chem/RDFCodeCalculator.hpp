@@ -149,7 +149,7 @@ namespace CDPL
 			 * which is equal to the number of steps plus \e 1.
 			 *
 			 * \param num_steps The number of radius incrementation steps.
-			 * \note The default number of steps is \e 128.
+			 * \note The default number of steps is \e 99.
 			 */
 			void setNumSteps(std::size_t num_steps);
 

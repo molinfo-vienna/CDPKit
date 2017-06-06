@@ -82,7 +82,7 @@ namespace
 		Internal::writeEOL(os, Chem::MDL::END_OF_LINE);
 	}
 
-	inline void writeMDLLine(std::ostream& os, const std::string& line, const std::string& err_msg, 
+	inline void writeMDLLine(std::ostream& os, const std::string& line, const char* err_msg, 
 							 bool check_llen = true, bool trim = true, bool trunc = false, 
 							 std::size_t max_llen = Chem::MDL::MAX_LINE_LENGTH)
 	{
@@ -410,7 +410,7 @@ void Chem::MDLDataWriter::setupCTabCountsLine(const MolecularGraph& molgraph)
 {
 	using namespace MDL::MOLFile;
 
-	std::size_t atom_count = molgraph.getNumAtoms(); 
+	std::size_t atom_count = getCompleteBondCount(molgraph); 
 	std::size_t bond_count = molgraph.getNumBonds();
 
 	ctabVersion = getMDLCTABVersionParameter(ioBase);
@@ -2004,7 +2004,7 @@ void Chem::MDLDataWriter::writeCTabV3000CountsLine(std::ostream& os, const Molec
 
 	bool chiral_flag = getMDLChiralFlag(molgraph);
 
-	counts_oss << CountsLine::COUNTS_TAG << ' ' << molgraph.getNumAtoms() << ' ' << molgraph.getNumBonds() << " 0 0 "
+	counts_oss << CountsLine::COUNTS_TAG << ' ' << molgraph.getNumAtoms() << ' ' << getCompleteBondCount(molgraph) << " 0 0 "
 			   << (!chiral_flag ? CountsLine::CHIRAL_FLAG_OFF : CountsLine::CHIRAL_FLAG_ON);
 
 	bool has_reg_no_prop = hasMDLRegistryNumber(molgraph);
@@ -2035,7 +2035,7 @@ void Chem::MDLDataWriter::writeCTabV3000BondBlock(std::ostream& os, const Molecu
 {
 	using namespace MDL::MOLFile::CTab::V3000;
 
-	if (molgraph.getNumBonds() == 0)
+	if (getCompleteBondCount(molgraph) == 0)
 		return;
 
 	writeV3000BlockBegin(os, BondBlock::BLOCK_TYPE_KEY);

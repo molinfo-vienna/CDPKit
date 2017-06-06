@@ -28,6 +28,14 @@
 #define CDPL_CHEM_MOL2DATAREADER_HPP
 
 #include <iosfwd>
+#include <string>
+#include <cstddef>
+
+#include <boost/unordered_map.hpp>
+#include <boost/tokenizer.hpp>
+
+#include "CDPL/Chem/Molecule.hpp"
+#include "CDPL/Chem/Fragment.hpp"
 
 
 namespace CDPL 
@@ -36,29 +44,53 @@ namespace CDPL
     namespace Base
     {
 
-	class DataIOBase;
+		class DataIOBase;
     }
 
     namespace Chem
     {
 
-	class Molecule;
-	
-	class MOL2DataReader
-	{
+		class MOL2DataReader
+		{
 
-	public:
-	    MOL2DataReader(const Base::DataIOBase& io_base): ioBase(io_base) {}
+		public:
+			MOL2DataReader(const Base::DataIOBase& io_base): 
+				ioBase(io_base), lineTokenizer(dataLine, boost::char_separator<char>(" \t")) {}
 
-	    bool hasMoreData(std::istream&) const;
-	    bool readMolecule(std::istream&, Molecule&);
-	    bool skipMolecule(std::istream&);
+			bool hasMoreData(std::istream& is);
+			bool readMolecule(std::istream& is, Molecule& mol);
+			bool skipMolecule(std::istream& is);
 
-	private:
-	    void init(std::istream&);
+		private:
+			void init(std::istream& is);
 
-	    const Base::DataIOBase& ioBase;
-	};
+			void doReadMolecule(std::istream& is, Molecule& mol);
+			void readMoleculeRecord(std::istream& is, Molecule& mol);
+			void readAtomSection(std::istream& is, Molecule& mol);
+			void readBondSection(std::istream& is, Molecule& mol);
+
+			bool readInputLine(std::istream& is);
+			bool readDataLine(std::istream& is);
+
+			bool skipInputToRTI(std::istream& is, const std::string& rti, bool skip_rti);
+
+			typedef boost::unordered_map<std::size_t, std::size_t> AtomIDToIndexMap;
+            typedef boost::tokenizer<boost::char_separator<char> > Tokenizer;
+
+			const Base::DataIOBase& ioBase;
+			bool                    strictErrorChecking;
+			bool                    multiConfImport;
+			bool                    calcFormalCharges;
+			std::size_t             molAtomCount;
+			std::size_t             molBondCount;
+			std::string             inputLine;
+			std::string             dataLine;
+			Tokenizer               lineTokenizer;
+			AtomIDToIndexMap        atomIDsToIndex;
+			Fragment::SharedPointer confTargetFragment;
+			Molecule::SharedPointer confTargetMolecule;
+			Molecule::SharedPointer confTestMolecule;
+		};
     }
 }
 

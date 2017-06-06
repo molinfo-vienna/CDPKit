@@ -102,6 +102,13 @@ namespace ChOx
 
 		extern const std::string                          RECORD_SEPARATOR;
 
+		extern const bool                                 MOL2_INPUT_STRICT_ERROR_CHECKING;
+		extern const bool                                 MOL2_INPUT_MULTI_CONF_IMPORT;
+
+		extern const bool                                 MOL2_OUTPUT_STRICT_ERROR_CHECKING;
+		extern const bool                                 MOL2_OUTPUT_WRITE_SINGLE_RECORD_FILES;
+		extern const bool                                 MOL2_OUTPUT_MULTI_CONF_EXPORT;
+
 		extern const bool                                 MOL_INPUT_STRICT_ERROR_CHECKING;
 		extern const bool                                 MOL_INPUT_IGNORE_PARITY;
 		extern const bool                                 MOL_INPUT_TRIM_STRINGS;

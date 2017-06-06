@@ -70,6 +70,7 @@ namespace CDPL
 			extern CDPL_CHEM_API const std::size_t REACTION_ATOM_MAPPING_ID;
 			extern CDPL_CHEM_API const MatchConstraintList::SharedPointer MATCH_CONSTRAINTS;
 			extern CDPL_CHEM_API const double MOL2_CHARGE;
+			extern CDPL_CHEM_API const std::string MOL2_NAME;
 			extern CDPL_CHEM_API const bool MDL_DB_STEREO_CARE_FLAG;
 		}
 
