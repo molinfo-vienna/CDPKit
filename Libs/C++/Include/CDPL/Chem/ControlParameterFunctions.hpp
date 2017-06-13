@@ -407,6 +407,14 @@ namespace CDPL
 		CDPL_CHEM_API void clearMOL2MoleculeTypeParameter(Base::ControlParameterContainer& cntnr);
 
 
+		CDPL_CHEM_API bool getMOL2OutputSubstructuresParameter(const Base::ControlParameterContainer& cntnr);
+
+		CDPL_CHEM_API void setMOL2OutputSubstructuresParameter(Base::ControlParameterContainer& cntnr, bool output);
+
+		CDPL_CHEM_API bool hasMOL2OutputSubstructuresParameter(const Base::ControlParameterContainer& cntnr);
+	
+		CDPL_CHEM_API void clearMOL2OutputSubstructuresParameter(Base::ControlParameterContainer& cntnr);
+
 		/**
 		 * @}
 		 */

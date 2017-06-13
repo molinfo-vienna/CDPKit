@@ -82,5 +82,6 @@ void CDPLPythonChem::exportControlParameterDefaults()
 		.def_readonly("MOL2_ENABLE_AROMATIC_BOND_TYPES", &Chem::ControlParameterDefault::MOL2_ENABLE_AROMATIC_BOND_TYPES)
 		.def_readonly("MOL2_CALC_FORMAL_CHARGES", &Chem::ControlParameterDefault::MOL2_CALC_FORMAL_CHARGES)
 		.def_readonly("MOL2_CHARGE_TYPE", &Chem::ControlParameterDefault::MOL2_CHARGE_TYPE)
-		.def_readonly("MOL2_MOLECULE_TYPE", &Chem::ControlParameterDefault::MOL2_MOLECULE_TYPE);
+		.def_readonly("MOL2_MOLECULE_TYPE", &Chem::ControlParameterDefault::MOL2_MOLECULE_TYPE)
+		.def_readonly("MOL2_OUTPUT_SUBSTRUCTURES", &Chem::ControlParameterDefault::MOL2_OUTPUT_SUBSTRUCTURES);
 }

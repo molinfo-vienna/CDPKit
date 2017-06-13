@@ -88,6 +88,7 @@ namespace CDPL
 			const bool MOL2_CALC_FORMAL_CHARGES                                             = true;
 			const unsigned int MOL2_CHARGE_TYPE                                             = MOL2ChargeType::NO_CHARGES;
 			const unsigned int MOL2_MOLECULE_TYPE                                           = MOL2MoleculeType::SMALL;
+			const bool MOL2_OUTPUT_SUBSTRUCTURES                                            = true;
 		}
 
 		void initControlParameterDefaults() {}

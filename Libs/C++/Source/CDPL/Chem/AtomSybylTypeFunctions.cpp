@@ -331,8 +331,20 @@ unsigned int Chem::perceiveSybylType(const Atom& atom, const MolecularGraph& mol
 				case HybridizationState::SP1:
 					return SybylAtomType::C_1;
 		
-				default:
-					return SybylAtomType::UNKNOWN;
+				default: {
+					if (getBondCount(atom, molgraph, 3) > 0)
+						return SybylAtomType::C_1;
+
+					std::size_t dbl_bc = getBondCount(atom, molgraph, 2);
+
+					if (dbl_bc > 1)
+						return SybylAtomType::C_1;
+
+					if (dbl_bc > 0)
+						return SybylAtomType::C_2;
+
+					return SybylAtomType::C_3;
+				}
 			}
 
 		case AtomType::N:
@@ -359,8 +371,20 @@ unsigned int Chem::perceiveSybylType(const Atom& atom, const MolecularGraph& mol
 				case HybridizationState::SP1:
 					return SybylAtomType::N_1;
 		
-				default:
-					return SybylAtomType::UNKNOWN;
+				default: {
+					if (getBondCount(atom, molgraph, 3) > 0)
+						return SybylAtomType::N_1;
+
+					std::size_t dbl_bc = getBondCount(atom, molgraph, 2);
+
+					if (dbl_bc > 1)
+						return SybylAtomType::N_1;
+
+					if (dbl_bc > 0)
+						return SybylAtomType::N_2;
+
+					return SybylAtomType::N_3;
+				}
 			}
 
 		case AtomType::O:
@@ -378,8 +402,11 @@ unsigned int Chem::perceiveSybylType(const Atom& atom, const MolecularGraph& mol
 				case HybridizationState::SP2:
 					return SybylAtomType::O_2;
 		
-				default:
-					return SybylAtomType::UNKNOWN;
+				default: 
+					if (getBondCount(atom, molgraph, 2) > 0)
+						return SybylAtomType::O_2;
+
+					return SybylAtomType::O_3;
 			}
 
 		case AtomType::S:
@@ -398,7 +425,10 @@ unsigned int Chem::perceiveSybylType(const Atom& atom, const MolecularGraph& mol
 					return SybylAtomType::S_2;
 		
 				default:
-					return SybylAtomType::UNKNOWN;
+					if (getBondCount(atom, molgraph, 2) > 0)
+						return SybylAtomType::S_2;
+
+					return SybylAtomType::S_3;
 			}
 
 		case AtomType::P:

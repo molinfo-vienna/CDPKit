@@ -44,16 +44,17 @@ namespace CDPL
 		namespace MOL2
 		{
 		
-			const char END_OF_LINE          = '\n';
-			const char COMMENT_PREFIX       = '#';
-			const char RTI_PREFIX           = '@';
-			const char LINE_CONT_MARKER     = '\\';
+			const char END_OF_LINE               = '\n';
+			const char COMMENT_PREFIX            = '#';
+			const char RTI_PREFIX                = '@';
+			const char LINE_CONT_MARKER          = '\\';
 
-			const std::string EMPTY_FIELD   = "****";
+			const std::string EMPTY_STRING_FIELD = "****";
 
-			const std::string MOLECULE_RTI  = "@<TRIPOS>MOLECULE";
-			const std::string ATOM_RTI      = "@<TRIPOS>ATOM";
-			const std::string BOND_RTI      = "@<TRIPOS>BOND";
+			const std::string MOLECULE_RTI       = "@<TRIPOS>MOLECULE";
+			const std::string ATOM_RTI           = "@<TRIPOS>ATOM";
+			const std::string BOND_RTI           = "@<TRIPOS>BOND";
+			const std::string SUBSTRUCTURE_RTI   = "@<TRIPOS>SUBSTRUCTURE";
 
 			struct TypeToString
 			{

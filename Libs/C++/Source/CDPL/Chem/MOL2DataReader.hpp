@@ -68,6 +68,7 @@ namespace CDPL
 			void readMoleculeRecord(std::istream& is, Molecule& mol);
 			void readAtomSection(std::istream& is, Molecule& mol);
 			void readBondSection(std::istream& is, Molecule& mol);
+			void readSubstructSection(std::istream& is, Molecule& mol);
 
 			bool readInputLine(std::istream& is);
 			bool readDataLine(std::istream& is);
@@ -75,6 +76,7 @@ namespace CDPL
 			bool skipInputToRTI(std::istream& is, const std::string& rti, bool skip_rti);
 
 			typedef boost::unordered_map<std::size_t, std::size_t> AtomIDToIndexMap;
+			typedef boost::unordered_multimap<std::size_t, Atom*> SubstructIDToAtomMap;
             typedef boost::tokenizer<boost::char_separator<char> > Tokenizer;
 
 			const Base::DataIOBase& ioBase;
@@ -83,10 +85,12 @@ namespace CDPL
 			bool                    calcFormalCharges;
 			std::size_t             molAtomCount;
 			std::size_t             molBondCount;
+			std::size_t             molSubstructCount;
 			std::string             inputLine;
 			std::string             dataLine;
 			Tokenizer               lineTokenizer;
 			AtomIDToIndexMap        atomIDsToIndex;
+			SubstructIDToAtomMap    substructIDsToAtoms;
 			Fragment::SharedPointer confTargetFragment;
 			Molecule::SharedPointer confTargetMolecule;
 			Molecule::SharedPointer confTestMolecule;

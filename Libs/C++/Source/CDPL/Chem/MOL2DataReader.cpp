@@ -220,6 +220,7 @@ void Chem::MOL2DataReader::doReadMolecule(std::istream& is, Molecule& mol)
 	readMoleculeRecord(is, mol);
 	readAtomSection(is, mol);
 	readBondSection(is, mol);
+	readSubstructSection(is, mol);
 
 	if (!calcFormalCharges)
 		return;
@@ -245,7 +246,7 @@ void Chem::MOL2DataReader::readMoleculeRecord(std::istream& is, Molecule& mol)
 
 	setName(mol, dataLine);
 
-// Atom/Bond counts
+// Atom count
 
 	if (!readDataLine(is))
 		throw Base::IOError("MOL2DataReader: error while reading count line: unexpected end of molecule record");
@@ -259,28 +260,19 @@ void Chem::MOL2DataReader::readMoleculeRecord(std::istream& is, Molecule& mol)
 		throw Base::IOError("MOL2DataReader: missing number of atoms in molecule record");
 
 	molAtomCount = parseNumber<std::size_t>(*t_it, "MOL2DataReader: error while parsing number of molecule atoms");
+	molSubstructCount = 0;
+	molBondCount = 0;
 
-	if (++t_it == t_end)
-		molBondCount = 0;
+// Bond count
 
-	else {
+	if (++t_it != t_end) {
 		molBondCount = parseNumber<std::size_t>(*t_it, "MOL2DataReader: error while parsing number of molecule bonds");
 
-		if (strictErrorChecking) {
-			if (molAtomCount < 2 && molBondCount > 0)
-				throw Base::IOError("MOL2DataReader: number of bonds > 0 while number of atoms < 2");
+		if (strictErrorChecking && molAtomCount < 2 && molBondCount > 0)
+			throw Base::IOError("MOL2DataReader: number of bonds > 0 while number of atoms < 2");
 
-			if (++t_it != t_end) {
-				parseNumber<std::size_t>(*t_it, "MOL2DataReader: error while parsing number of substructures");
-
-				if (++t_it != t_end) {
-					parseNumber<std::size_t>(*t_it, "MOL2DataReader: error while parsing number of features");
-
-					if (++t_it != t_end) 
-						parseNumber<std::size_t>(*t_it, "MOL2DataReader: error while parsing number of sets");
-				}
-			}
-		}
+		if (++t_it != t_end)
+			molSubstructCount = parseNumber<std::size_t>(*t_it, "MOL2DataReader: error while parsing number of substructures");
 	}
 
 // Molecule type
@@ -331,8 +323,10 @@ void Chem::MOL2DataReader::readAtomSection(std::istream& is, Molecule& mol)
 		throw Base::IOError("MOL2DataReader: error while looking for molecule atom section: unexpected end of input");
 
 	atomIDsToIndex.clear();
+	substructIDsToAtoms.clear();
 
-	std::string type_symbol;
+	std::string tmp_string;
+	unsigned int charge_type = getMOL2ChargeType(mol);
 
 	for (std::size_t i = 0; i < molAtomCount; i++) {
 		if (!readDataLine(is))
@@ -350,6 +344,9 @@ void Chem::MOL2DataReader::readAtomSection(std::istream& is, Molecule& mol)
 
 		std::size_t id = parseNumber<std::size_t>(*t_it, "MOL2DataReader: error while parsing atom ID number");
 		
+		if (strictErrorChecking && atomIDsToIndex.find(id) != atomIDsToIndex.end())
+			throw Base::IOError("MOL2DataReader: found multiple atoms with ID " + boost::lexical_cast<std::string>(id));
+
 		atomIDsToIndex.insert(AtomIDToIndexMap::value_type(id, mol.getNumAtoms()));
 
 // Atom name
@@ -359,7 +356,7 @@ void Chem::MOL2DataReader::readAtomSection(std::istream& is, Molecule& mol)
 		if (++t_it == t_end)
 			throw Base::IOError("MOL2DataReader: missing atom name");
 
-		if (*t_it == MOL2::EMPTY_FIELD)
+		if (*t_it == MOL2::EMPTY_STRING_FIELD)
 			setMOL2Name(atom, "");
 		else
 			setMOL2Name(atom, *t_it);
@@ -390,16 +387,16 @@ void Chem::MOL2DataReader::readAtomSection(std::istream& is, Molecule& mol)
 		if (++t_it == t_end)
 			throw Base::IOError("MOL2DataReader: missing Sybyl atom type");
 
-		type_symbol = *t_it;
-		boost::to_lower(type_symbol);
+		tmp_string = *t_it;
+		boost::to_lower(tmp_string);
 
-		StringToTypeMap::const_iterator it = stringToAtomTypeMap.find(type_symbol);
+		StringToTypeMap::const_iterator it = stringToAtomTypeMap.find(tmp_string);
 
 		if (it == stringToAtomTypeMap.end()) {
-			if (!type_symbol.empty())
-				type_symbol[0] = std::toupper(type_symbol[0], std::locale::classic());		
+			if (!tmp_string.empty())
+				tmp_string[0] = std::toupper(tmp_string[0], std::locale::classic());		
 
-			unsigned int atom_type = AtomDictionary::getType(type_symbol);
+			unsigned int atom_type = AtomDictionary::getType(tmp_string);
 
 			if (atom_type == AtomType::UNKNOWN && strictErrorChecking)
 				throw Base::IOError("MOL2DataReader: cannot deduce atom type");
@@ -413,13 +410,33 @@ void Chem::MOL2DataReader::readAtomSection(std::istream& is, Molecule& mol)
 		}
 
 		setSymbol(atom, getSymbolForType(atom));
+		
+		bool have_charge = false;
+
+// Substructure ID
+
+		if (++t_it != t_end) {
+			std::size_t substruct_id = parseNumber<double>(*t_it, "MOL2DataReader: error while parsing atom substructure ID");
+
+// Substructure Name
+
+			if (++t_it != t_end) {
+				if (*t_it != MOL2::EMPTY_STRING_FIELD) {
+					setMOL2SubstructureID(atom, substruct_id);
+					setMOL2SubstructureName(atom, *t_it);
+
+					substructIDsToAtoms.insert(SubstructIDToAtomMap::value_type(substruct_id, &atom));
+				}
 
 // Atom charge
+				if (charge_type != MOL2ChargeType::NO_CHARGES && ++t_it != t_end) {
+					setMOL2Charge(atom, parseNumber<double>(*t_it, "MOL2DataReader: error while parsing atom charge"));
+					have_charge = true;
+				}
+			} 
+		} 
 
-		if (++t_it != t_end && ++t_it != t_end && ++t_it != t_end)
-			setMOL2Charge(atom, parseNumber<double>(*t_it, "MOL2DataReader: error while parsing atom charge", strictErrorChecking));
-
-		else if (strictErrorChecking && getMOL2ChargeType(mol) != MOL2ChargeType::NO_CHARGES)
+		if (strictErrorChecking && !have_charge && charge_type != MOL2ChargeType::NO_CHARGES)
 			throw Base::IOError("MOL2DataReader: missing atom charge");
 	}
 }
@@ -435,7 +452,7 @@ void Chem::MOL2DataReader::readBondSection(std::istream& is, Molecule& mol)
 		throw Base::IOError("MOL2DataReader: error while looking for molecule bond section: unexpected end of input");
 
 	bool kekulize = false;
-	std::string type_symbol;
+	std::string tmp_string;
 
 	for (std::size_t i = 0; i < molBondCount; i++) {
 		if (!readDataLine(is))
@@ -483,11 +500,11 @@ void Chem::MOL2DataReader::readBondSection(std::istream& is, Molecule& mol)
 		if (++t_it == t_end)
 			throw Base::IOError("MOL2DataReader: missing Sybyl bond type");
 
-		type_symbol = *t_it;
-		boost::to_lower(type_symbol);
+		tmp_string = *t_it;
+		boost::to_lower(tmp_string);
 
 		unsigned int bond_type = SybylBondType::UNKNOWN;
-		StringToTypeMap::const_iterator it = stringToBondTypeMap.find(type_symbol);
+		StringToTypeMap::const_iterator it = stringToBondTypeMap.find(tmp_string);
 
 		if (it != stringToBondTypeMap.end())
 			bond_type = it->second;
@@ -523,6 +540,77 @@ void Chem::MOL2DataReader::readBondSection(std::istream& is, Molecule& mol)
 
 	if (kekulize)
 		kekulizeBonds(mol);	
+}
+
+void Chem::MOL2DataReader::readSubstructSection(std::istream& is, Molecule& mol)
+{
+	using namespace Internal;
+
+	if (molSubstructCount == 0)
+		return;
+
+	if (!skipInputToRTI(is, MOL2::SUBSTRUCTURE_RTI, true))
+		throw Base::IOError("MOL2DataReader: error while looking for substructure section: unexpected end of input");
+
+	std::string name;
+	std::string subtype;
+	std::string chain;
+
+	for (std::size_t i = 0; i < molSubstructCount; i++) {
+		if (!readDataLine(is))
+			throw Base::IOError("MOL2DataReader: error while reading substructure data line: unexpected end of input");
+
+		lineTokenizer.assign(dataLine);
+
+		Tokenizer::iterator t_it = lineTokenizer.begin();
+		Tokenizer::iterator t_end = lineTokenizer.end();
+
+// Substructure ID
+
+		if (t_it == t_end)
+			throw Base::IOError("MOL2DataReader: missing substructure ID number");
+
+		std::size_t id = parseNumber<std::size_t>(*t_it, "MOL2DataReader: error while parsing substructure ID number");
+
+// Substructure name
+
+		if (++t_it == t_end)
+			throw Base::IOError("MOL2DataReader: missing substructure name");
+
+		name = *t_it;
+
+// Substructure root atom
+
+		if (++t_it == t_end)
+			throw Base::IOError("MOL2DataReader: missing substructure root atom");
+
+		chain.clear();
+		subtype.clear();
+
+// Substructure chain
+
+		if (++t_it != t_end && ++t_it != t_end && ++t_it != t_end) {
+			chain = *t_it;
+
+// Substructure subtype
+
+			if (++t_it != t_end)
+				subtype= *t_it;
+		}
+
+		std::pair<SubstructIDToAtomMap::const_iterator, SubstructIDToAtomMap::const_iterator> atoms = substructIDsToAtoms.equal_range(id);
+
+		for ( ; atoms.first != atoms.second; ++atoms.first) {
+			if (strictErrorChecking && getMOL2SubstructureName(*atoms.first->second) != name)
+				throw Base::IOError("MOL2DataReader: substructure name in atom section does not match name in substructure section");
+
+			if (!chain.empty())
+				setMOL2SubstructureChain(*atoms.first->second, chain);
+
+			if (!subtype.empty())
+				setMOL2SubstructureSubtype(*atoms.first->second, subtype);
+		}
+	}
 }
 
 bool Chem::MOL2DataReader::readInputLine(std::istream& is)

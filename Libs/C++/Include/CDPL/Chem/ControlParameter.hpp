@@ -476,6 +476,8 @@ namespace CDPL
 			extern CDPL_CHEM_API const Base::LookupKey MOL2_CHARGE_TYPE;
 
 			extern CDPL_CHEM_API const Base::LookupKey MOL2_MOLECULE_TYPE;
+
+			extern CDPL_CHEM_API const Base::LookupKey MOL2_OUTPUT_SUBSTRUCTURES;
 		}
 
 		/**

@@ -95,6 +95,11 @@ namespace
 	{
 		return (std::find_if(str.begin(), str.end(), Internal::IsWhitespace()) != str.end());
 	}
+
+	inline void removeWhitespace(std::string& str)
+	{
+		str.erase(std::remove_if(str.begin(), str.end(), Internal::IsWhitespace()), str.end());
+	}
 }
 
 
@@ -110,8 +115,9 @@ bool Chem::MOL2DataWriter::writeMolecularGraph(std::ostream& os, const Molecular
 		getAtomCoordsDim(molgraph);
 
 		writeMoleculeRecord(os, molgraph);
-		writeAtomRecords(os, molgraph);
-		writeBondRecords(os, molgraph);
+		writeAtomSection(os, molgraph);
+		writeBondSection(os, molgraph);
+		writeSubstructSection(os);
 
 	} else {
 		coordsDim = 3;
@@ -122,8 +128,9 @@ bool Chem::MOL2DataWriter::writeMolecularGraph(std::ostream& os, const Molecular
 			getConformationData(molgraph, i, confCoordinates);
 
 			writeMoleculeRecord(os, molgraph);
-			writeAtomRecords(os, molgraph);
-			writeBondRecords(os, molgraph);
+			writeAtomSection(os, molgraph);
+			writeBondSection(os, molgraph);
+			writeSubstructSection(os);
 		}
 	}
 
@@ -140,6 +147,7 @@ void Chem::MOL2DataWriter::init(std::ostream& os)
 	aromaticBondTypes   = getMOL2EnableAromaticBondTypesParameter(ioBase);
 	atomChargeType      = getMOL2ChargeTypeParameter(ioBase);
 	moleculeType        = getMOL2MoleculeTypeParameter(ioBase);
+	outputSubstructs    = getMOL2OutputSubstructuresParameter(ioBase);
 
 	os << std::fixed << std::showpoint;
 }
@@ -159,8 +167,64 @@ void Chem::MOL2DataWriter::getAtomCoordsDim(const MolecularGraph& molgraph)
 		coordsDim = 0;
 }
 
+void Chem::MOL2DataWriter::initSubstructureData(const MolecularGraph& molgraph)
+{
+	substructData.clear();
+
+	if (!outputSubstructs)
+		return;
+
+	substructNamesToIDs.clear();
+	atomsToSubstructIDs.clear();
+
+	SubstructData data;
+	std::size_t atom_id = 1;
+
+	for (MolecularGraph::ConstAtomIterator a_it = molgraph.getAtomsBegin(), a_end = molgraph.getAtomsEnd(); a_it != a_end; ++a_it, atom_id++) {
+		const Atom& atom = *a_it;
+
+		if (!hasMOL2SubstructureName(atom))
+			continue;
+
+		data.name = getMOL2SubstructureName(atom);
+		removeWhitespace(data.name);
+
+		if (data.name.empty())
+			continue;
+
+		StringToSizeMap::const_iterator s_it = substructNamesToIDs.find(data.name);
+
+		if (s_it != substructNamesToIDs.end()) {
+			atomsToSubstructIDs.insert(AtomToIDMap::value_type(&atom, s_it->second));
+			continue;
+		}
+
+		data.rootAtom = atom_id;
+
+		if (hasMOL2SubstructureSubtype(atom)) {
+			data.subtype = getMOL2SubstructureSubtype(atom);
+			removeWhitespace(data.subtype);
+
+		} else
+			data.subtype.clear();
+
+		if (hasMOL2SubstructureChain(atom)) {
+			data.chain = getMOL2SubstructureChain(atom);
+			removeWhitespace(data.chain);
+
+		} else
+			data.chain.clear();
+
+		substructData.push_back(data);
+		substructNamesToIDs.insert(StringToSizeMap::value_type(data.name, substructData.size()));
+		atomsToSubstructIDs.insert(AtomToIDMap::value_type(&atom, substructData.size()));
+	}  
+}
+
 void Chem::MOL2DataWriter::writeMoleculeRecord(std::ostream& os, const MolecularGraph& molgraph)
 {
+	initSubstructureData(molgraph);
+
 	os << MOL2::MOLECULE_RTI << MOL2::END_OF_LINE;
 
 	const std::string& name_prop = getName(molgraph);
@@ -179,14 +243,14 @@ void Chem::MOL2DataWriter::writeMoleculeRecord(std::ostream& os, const Molecular
 	} else
 		os << MOL2::END_OF_LINE;
 
-	os << molgraph.getNumAtoms() << ' ' << getCompleteBondCount(molgraph) << " 0 0 0" << MOL2::END_OF_LINE;
+	os << molgraph.getNumAtoms() << ' ' << getCompleteBondCount(molgraph) << ' ' << substructData.size() << " 0 0" << MOL2::END_OF_LINE;
 	os << getMoleculeTypeString(molgraph) << MOL2::END_OF_LINE;
 	os << getChargeTypeString(molgraph) << MOL2::END_OF_LINE;
 	os << MOL2::END_OF_LINE;
 	os << MOL2::END_OF_LINE;
 }
 
-void Chem::MOL2DataWriter::writeAtomRecords(std::ostream& os, const MolecularGraph& molgraph)
+void Chem::MOL2DataWriter::writeAtomSection(std::ostream& os, const MolecularGraph& molgraph)
 {
 	atomSymbolCounts.clear();
 
@@ -214,14 +278,28 @@ void Chem::MOL2DataWriter::writeAtomRecords(std::ostream& os, const MolecularGra
 
 		os << '\t' << getAtomTypeString(atom, molgraph);
 
-		if (atomChargeType != MOL2ChargeType::NO_CHARGES)
-			os << "\t0\t" << MOL2::EMPTY_FIELD << '\t' << getMOL2Charge(atom);
+		if (atomChargeType != MOL2ChargeType::NO_CHARGES || outputSubstructs) {
+			if (outputSubstructs) {
+
+				AtomToIDMap::const_iterator it = atomsToSubstructIDs.find(&atom);
+
+				if (it == atomsToSubstructIDs.end())
+					os << "\t0\t" << MOL2::EMPTY_STRING_FIELD;
+				else
+					os << '\t' << it->second << '\t' << substructData[it->second - 1].name;
+
+			} else
+				os << "\t0\t" << MOL2::EMPTY_STRING_FIELD;
+
+			if (atomChargeType != MOL2ChargeType::NO_CHARGES)
+				os << '\t' << getMOL2Charge(atom);
+		}
 
 		os << MOL2::END_OF_LINE;
 	}
 }
 
-void Chem::MOL2DataWriter::writeBondRecords(std::ostream& os, const MolecularGraph& molgraph) const
+void Chem::MOL2DataWriter::writeBondSection(std::ostream& os, const MolecularGraph& molgraph) const
 {
 	os << MOL2::BOND_RTI << MOL2::END_OF_LINE;
 
@@ -241,6 +319,29 @@ void Chem::MOL2DataWriter::writeBondRecords(std::ostream& os, const MolecularGra
 		
 		os << (i + 1) << '\t' << (molgraph.getAtomIndex(atom1) + 1) << '\t' << (molgraph.getAtomIndex(atom2) + 1); 
 		os << '\t' << getBondTypeString(bond, molgraph) << MOL2::END_OF_LINE;
+	}
+}
+
+void Chem::MOL2DataWriter::writeSubstructSection(std::ostream& os) const
+{
+	if (!outputSubstructs || substructData.empty())
+		return;
+
+	os << MOL2::SUBSTRUCTURE_RTI << MOL2::END_OF_LINE;
+
+	std::size_t num_substructs = substructData.size();
+
+	for (std::size_t i = 0; i < num_substructs; i++) {
+		os << (i + 1) << '\t' << substructData[i].name << '\t' << substructData[i].rootAtom;
+
+		if (!substructData[i].subtype.empty() || !substructData[i].chain.empty()) {
+			os << "\tRESIDUE\t1\t" << (!substructData[i].chain.empty() ? substructData[i].chain : MOL2::EMPTY_STRING_FIELD);
+
+			if (!substructData[i].subtype.empty())
+				os << '\t' << substructData[i].subtype;
+		}
+
+		os << MOL2::END_OF_LINE;
 	}
 }
 
@@ -291,13 +392,15 @@ std::string Chem::MOL2DataWriter::getAtomName(const Atom& atom)
 
 	} else {
 		name = getSymbol(atom);
+
+		boost::to_upper(name);
 		name.append(boost::lexical_cast<std::string>(++atomSymbolCounts[name]));
 	}
 
-	name.erase(std::remove_if(name.begin(), name.end(), Internal::IsWhitespace()), name.end());
+	removeWhitespace(name);
 
 	if (name.empty())
-		return MOL2::EMPTY_FIELD;
+		return MOL2::EMPTY_STRING_FIELD;
 
 	return name;
 }

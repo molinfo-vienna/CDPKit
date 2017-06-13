@@ -39,11 +39,13 @@ using namespace CDPL;
 long Chem::calcFormalCharge(const Atom& atom, const MolecularGraph& molgraph)
 {
 	unsigned int atom_type = getType(atom);
-
-	if (atom_type == AtomType::C && getImplicitHydrogenCount(atom) == 0 && getExplicitBondCount(atom, molgraph) == 1 && getExplicitBondCount(atom, molgraph, 3) == 1)
-		return -1;
-
 	long valence = calcValence(atom, molgraph) + getUnpairedElectronCount(atom);
+
+	if ((atom_type == AtomType::C || atom_type == AtomType::N) && getImplicitHydrogenCount(atom) == 0 && getExplicitBondCount(atom, molgraph) == 1) {
+		if ((atom_type == AtomType::C && valence == 3) || (atom_type == AtomType::N && valence == 2))
+			return -1;
+	}
+
 	const Util::STArray& val_states = AtomDictionary::getValenceStates(atom_type);
 	long nearest_val_state = -1;
 

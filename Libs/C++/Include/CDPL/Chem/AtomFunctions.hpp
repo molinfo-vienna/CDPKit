@@ -400,6 +400,51 @@ namespace CDPL
 		CDPL_CHEM_API bool hasMOL2Name(const Atom& atom);
 
 
+		CDPL_CHEM_API double getMOL2Charge(const Atom& atom);
+
+		CDPL_CHEM_API void setMOL2Charge(Atom& atom, double charge);
+
+		CDPL_CHEM_API void clearMOL2Charge(Atom& atom);	
+
+		CDPL_CHEM_API bool hasMOL2Charge(const Atom& atom);
+
+
+		CDPL_CHEM_API std::size_t getMOL2SubstructureID(const Atom& atom);
+
+		CDPL_CHEM_API void setMOL2SubstructureID(Atom& atom, std::size_t id);
+
+		CDPL_CHEM_API void clearMOL2SubstructureID(Atom& atom);
+	
+		CDPL_CHEM_API bool hasMOL2SubstructureID(const Atom& atom);
+	
+
+		CDPL_CHEM_API const std::string& getMOL2SubstructureName(const Atom& atom);
+
+		CDPL_CHEM_API void setMOL2SubstructureName(Atom& atom, const std::string& id);
+
+		CDPL_CHEM_API void clearMOL2SubstructureName(Atom& atom);
+	
+		CDPL_CHEM_API bool hasMOL2SubstructureName(const Atom& atom);
+
+
+		CDPL_CHEM_API const std::string& getMOL2SubstructureSubtype(const Atom& atom);
+
+		CDPL_CHEM_API void setMOL2SubstructureSubtype(Atom& atom, const std::string& subtype);
+
+		CDPL_CHEM_API void clearMOL2SubstructureSubtype(Atom& atom);
+	
+		CDPL_CHEM_API bool hasMOL2SubstructureSubtype(const Atom& atom);
+
+
+		CDPL_CHEM_API const std::string& getMOL2SubstructureChain(const Atom& atom);
+
+		CDPL_CHEM_API void setMOL2SubstructureChain(Atom& atom, const std::string& chain);
+
+		CDPL_CHEM_API void clearMOL2SubstructureChain(Atom& atom);
+	
+		CDPL_CHEM_API bool hasMOL2SubstructureChain(const Atom& atom);
+
+
 		CDPL_CHEM_API unsigned int getMDLParity(const Atom& atom);
 
 		CDPL_CHEM_API void setMDLParity(Atom& atom, unsigned int parity);
@@ -418,15 +463,6 @@ namespace CDPL
 		CDPL_CHEM_API void clearMDLStereoCareFlag(Atom& atom);
 	
 		CDPL_CHEM_API bool hasMDLStereoCareFlag(const Atom& atom);
-
-
-		CDPL_CHEM_API double getMOL2Charge(const Atom& atom);
-
-		CDPL_CHEM_API void setMOL2Charge(Atom& atom, double charge);
-
-		CDPL_CHEM_API void clearMOL2Charge(Atom& atom);	
-
-		CDPL_CHEM_API bool hasMOL2Charge(const Atom& atom);
 
 
 		CDPL_CHEM_API double getPEOECharge(const Atom& atom);

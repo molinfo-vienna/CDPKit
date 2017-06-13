@@ -30,6 +30,7 @@
 #include <iosfwd>
 #include <cstddef>
 #include <string>
+#include <vector>
 
 #include <boost/unordered_map.hpp>
 
@@ -64,10 +65,12 @@ namespace CDPL
 			void init(std::ostream& os);
 
 			void getAtomCoordsDim(const MolecularGraph& molgraph);
+			void initSubstructureData(const MolecularGraph& molgraph);
 
 			void writeMoleculeRecord(std::ostream& os, const MolecularGraph& molgraph);
-			void writeAtomRecords(std::ostream& os, const MolecularGraph& molgraph);
-			void writeBondRecords(std::ostream& os, const MolecularGraph& molgraph) const;
+			void writeAtomSection(std::ostream& os, const MolecularGraph& molgraph);
+			void writeBondSection(std::ostream& os, const MolecularGraph& molgraph) const;
+			void writeSubstructSection(std::ostream& os) const;
 
 			const std::string& getMoleculeTypeString(const MolecularGraph& molgraph) const; 
 			const std::string& getChargeTypeString(const MolecularGraph& molgraph); 
@@ -78,18 +81,33 @@ namespace CDPL
 			const std::string& getBondTypeString(const Bond& bond, const MolecularGraph& molgraph) const;
 			const std::string& getBondOrderString(const Bond& bond) const;
 
-			typedef boost::unordered_map<std::string, std::size_t> StringCountMap;
+			struct SubstructData
+			{
+
+				std::size_t rootAtom;
+				std::string name;
+				std::string subtype;
+				std::string chain;
+			};
+
+			typedef boost::unordered_map<std::string, std::size_t> StringToSizeMap;
+			typedef boost::unordered_map<const Atom*, std::size_t> AtomToIDMap;
+			typedef std::vector<SubstructData> SubstructDataArray;
 
 			const Base::DataIOBase& ioBase;
 			bool                    strictErrorChecking;
 			bool                    multiConfExport;
 			bool                    extendedAtomTypes;
 			bool                    aromaticBondTypes;
+			bool                    outputSubstructs;
 			unsigned int            atomChargeType;
 			unsigned int            moleculeType;
 			std::size_t             coordsDim;
 			Math::Vector3DArray     confCoordinates;
-			StringCountMap          atomSymbolCounts;
+			StringToSizeMap         atomSymbolCounts;
+			StringToSizeMap         substructNamesToIDs;
+			AtomToIDMap             atomsToSubstructIDs;
+			SubstructDataArray      substructData;
 		};
 	}
 }

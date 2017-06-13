@@ -234,6 +234,8 @@ namespace CDPL
 			extern CDPL_CHEM_API const unsigned int MOL2_CHARGE_TYPE;
 
 			extern CDPL_CHEM_API const unsigned int MOL2_MOLECULE_TYPE;
+
+			extern CDPL_CHEM_API const bool MOL2_OUTPUT_SUBSTRUCTURES;
 		}
 
 		/**
