@@ -108,6 +108,16 @@ namespace CDPL
 			 * \brief Specifies the atom-mapping ID an atom in a reaction.
 			 */
 			const unsigned int ATOM_MAPPING_ID   = 0x200;
+
+			/**
+			 * \brief Specifies the heavy bond count of an atom.
+			 */
+			const unsigned int HEAVY_BOND_COUNT  = 0x400;
+
+			/**
+			 * \brief Specifies the valence of an atom.
+			 */
+			const unsigned int VALENCE           = 0x800;
 		}
 
 		/**

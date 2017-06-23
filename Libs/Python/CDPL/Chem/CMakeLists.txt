@@ -89,12 +89,13 @@ SET(chem_MOD_SRCS
     LogSCalculatorExport.cpp 
     MolecularComplexityCalculatorExport.cpp 
     PEOEChargeCalculatorExport.cpp 
-    DaylightFingerprintGeneratorExport.cpp 
     AutoCorrelationVectorCalculatorExport.cpp 
     RDFCodeCalculatorExport.cpp 
     BurdenMatrixGeneratorExport.cpp 
     BCUTDescriptorCalculatorExport.cpp 
     SurfaceAtomExtractorExport.cpp 
+    PathFingerprintGeneratorExport.cpp 
+    CircularFingerprintGeneratorExport.cpp 
      
     MoleculeIOManagerExport.cpp 
     MolecularGraphIOManagerExport.cpp 

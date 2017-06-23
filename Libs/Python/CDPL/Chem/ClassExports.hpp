@@ -117,12 +117,13 @@ namespace CDPLPythonChem
 	void exportLogSCalculator();
 	void exportMolecularComplexityCalculator();
 	void exportPEOEChargeCalculator();
-	void exportDaylightFingerprintGenerator();
 	void exportAutoCorrelationVectorCalculator();
 	void exportRDFCodeCalculator();
 	void exportBurdenMatrixGenerator();
 	void exportBCUTDescriptorCalculator();
 	void exportSurfaceAtomExtractor();
+	void exportPathFingerprintGenerator();
+	void exportCircularFingerprintGenerator();
 
 	void exportMoleculeReader();
 	void exportMoleculeWriter();

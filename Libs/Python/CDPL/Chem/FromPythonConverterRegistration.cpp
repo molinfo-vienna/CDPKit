@@ -35,7 +35,8 @@
 #include "CDPL/Chem/MatchExpression.hpp"
 #include "CDPL/Chem/MassComposition.hpp"
 #include "CDPL/Chem/ElementHistogram.hpp"
-#include "CDPL/Chem/DaylightFingerprintGenerator.hpp"
+#include "CDPL/Chem/PathFingerprintGenerator.hpp"
+#include "CDPL/Chem/CircularFingerprintGenerator.hpp"
 #include "CDPL/Chem/HashCodeCalculator.hpp"
 #include "CDPL/Chem/Atom3DCoordinatesFunctor.hpp"
 #include "CDPL/Chem/AtomConformer3DCoordinatesFunctor.hpp"
@@ -73,10 +74,14 @@ void CDPLPythonChem::registerFromPythonConverters()
 	CDPLPythonBase::GenericVariantFromPythonConverter<Chem::MassComposition::SharedPointer>();
 	CDPLPythonBase::GenericVariantFromPythonConverter<Chem::ElementHistogram::SharedPointer>();
 
-	CDPLPythonBase::GenericFromPythonConverter<Chem::DaylightFingerprintGenerator::DefAtomDescriptorFunctor,
-											   Chem::DaylightFingerprintGenerator::AtomDescriptorFunction>();
-	CDPLPythonBase::GenericFromPythonConverter<Chem::DaylightFingerprintGenerator::DefBondDescriptorFunctor,
-											   Chem::DaylightFingerprintGenerator::BondDescriptorFunction>();
+	CDPLPythonBase::GenericFromPythonConverter<Chem::PathFingerprintGenerator::DefAtomDescriptorFunctor,
+											   Chem::PathFingerprintGenerator::AtomDescriptorFunction>();
+	CDPLPythonBase::GenericFromPythonConverter<Chem::PathFingerprintGenerator::DefBondDescriptorFunctor,
+											   Chem::PathFingerprintGenerator::BondDescriptorFunction>();
+	CDPLPythonBase::GenericFromPythonConverter<Chem::CircularFingerprintGenerator::DefAtomIdentifierFunctor,
+											   Chem::CircularFingerprintGenerator::AtomIdentifierFunction>();
+	CDPLPythonBase::GenericFromPythonConverter<Chem::CircularFingerprintGenerator::DefBondIdentifierFunctor,
+											   Chem::CircularFingerprintGenerator::BondIdentifierFunction>();
 
 	CDPLPythonBase::GenericFromPythonConverter<Chem::Atom3DCoordinatesFunctor,
 											   Chem::Atom3DCoordinatesFunction>();

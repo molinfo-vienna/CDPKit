@@ -1,7 +1,7 @@
 /* -*- mode: c++; c-basic-offset: 4; tab-width: 4; indent-tabs-mode: t -*- */
 
 /* 
- * DaylightFingerprintGenerator.cpp 
+ * PathFingerprintGenerator.cpp 
  *
  * This file is part of the Chemical Data Processing Toolkit
  *
@@ -32,44 +32,24 @@
 
 #include <boost/bind.hpp>
 
-#include "CDPL/Chem/DaylightFingerprintGenerator.hpp"
+#include "CDPL/Chem/PathFingerprintGenerator.hpp"
+#include "CDPL/Chem/MolecularGraph.hpp"
 #include "CDPL/Chem/Atom.hpp"
 #include "CDPL/Chem/Bond.hpp"
 #include "CDPL/Chem/AtomFunctions.hpp"
 #include "CDPL/Chem/BondFunctions.hpp"
+#include "CDPL/Internal/RangeHashCode.hpp"
 
 
 using namespace CDPL;
 
 
-namespace
-{
-
-	//  P. J. Weinberger's hashing function
-
-	Base::uint64 calcPathHashCode(const std::vector<Base::uint64>& path_descr)
-	{
-		Base::uint64 g;
-		Base::uint64 h = 0;
-
-		for (std::vector<Base::uint64>::const_iterator end = path_descr.end(), it = path_descr.begin(); it != end; ++it) {
-			h = (h << 4) + *it;
-
-			if ((g = h & 0xf0000000)) 
-				h = h ^ (g >> 24) ^ g;
-		}
-
-		return h;
-	}
-}
-
-
-const unsigned int Chem::DaylightFingerprintGenerator::DEF_ATOM_PROPERTY_FLAGS;
-const unsigned int Chem::DaylightFingerprintGenerator::DEF_BOND_PROPERTY_FLAGS;
+const unsigned int Chem::PathFingerprintGenerator::DEF_ATOM_PROPERTY_FLAGS;
+const unsigned int Chem::PathFingerprintGenerator::DEF_BOND_PROPERTY_FLAGS;
 
 //-----
 
-Base::uint64 Chem::DaylightFingerprintGenerator::DefAtomDescriptorFunctor::operator()(const Atom& atom) const
+Base::uint64 Chem::PathFingerprintGenerator::DefAtomDescriptorFunctor::operator()(const Atom& atom) const
 {
 	Base::uint64 descr = 0;
 
@@ -77,7 +57,7 @@ Base::uint64 Chem::DaylightFingerprintGenerator::DefAtomDescriptorFunctor::opera
 		descr = getIsotope(atom);
 
 	if (flags & AtomPropertyFlag::TYPE) {
-		descr *= 1024;
+		descr *= 512;
 		descr += getType(atom);
 	}
 
@@ -102,94 +82,96 @@ Base::uint64 Chem::DaylightFingerprintGenerator::DefAtomDescriptorFunctor::opera
 
 //-----
 
-Base::uint64 Chem::DaylightFingerprintGenerator::DefBondDescriptorFunctor::operator()(const Bond& bond) const
+Base::uint64 Chem::PathFingerprintGenerator::DefBondDescriptorFunctor::operator()(const Bond& bond) const
 {
 	Base::uint64 descr = 0;
 
 	if (flags & BondPropertyFlag::TOPOLOGY) {
 		if (getRingFlag(bond))
-			descr = 1;
+			descr = 0x8000000000000000;
 	}
 
 	if (flags & BondPropertyFlag::AROMATICITY) {
-		descr *= 2;
-
-		if (getAromaticityFlag(bond))
-			descr += 1;
+		if (getAromaticityFlag(bond)) {
+			descr |= 0x4000000000000000;
+			return descr;
+		}
 	}
 
-	if (flags & BondPropertyFlag::ORDER) {
-		descr *= 1024;
+	if (flags & BondPropertyFlag::ORDER)
 		descr += getOrder(bond);
-	}
-
+	
 	return descr;
 }
 
 //-----
 
-Chem::DaylightFingerprintGenerator::DaylightFingerprintGenerator():
-	molGraph(0), numBits(256), minPathLength(0), maxPathLength(5),
+Chem::PathFingerprintGenerator::PathFingerprintGenerator():
+	molGraph(0), numBits(1024), minPathLength(0), maxPathLength(5),
 	atomDescriptorFunc(DefAtomDescriptorFunctor()), bondDescriptorFunc(DefBondDescriptorFunctor()) {}
 
-Chem::DaylightFingerprintGenerator::DaylightFingerprintGenerator(const MolecularGraph& molgraph, Util::BitSet& fprint):
-	molGraph(0), numBits(256), minPathLength(0), maxPathLength(5), 
+Chem::PathFingerprintGenerator::PathFingerprintGenerator(const MolecularGraph& molgraph, Util::BitSet& fp):
+	molGraph(0), numBits(1024), minPathLength(0), maxPathLength(5), 
 	atomDescriptorFunc(DefAtomDescriptorFunctor()), bondDescriptorFunc(DefBondDescriptorFunctor())
 {
-	generate(molgraph, fprint);
+	generate(molgraph, fp);
 }
 
-void Chem::DaylightFingerprintGenerator::setMinPathLength(std::size_t min_length)
+void Chem::PathFingerprintGenerator::setMinPathLength(std::size_t min_length)
 {
 	minPathLength = min_length;
 }
 
-void Chem::DaylightFingerprintGenerator::setMaxPathLength(std::size_t max_length)
+void Chem::PathFingerprintGenerator::setMaxPathLength(std::size_t max_length)
 {
 	maxPathLength = max_length;
 }
 
-void Chem::DaylightFingerprintGenerator::setNumBits(std::size_t num_bits)
+void Chem::PathFingerprintGenerator::setNumBits(std::size_t num_bits)
 {
 	numBits = num_bits;
 }
 
-std::size_t Chem::DaylightFingerprintGenerator::getMinPathLength() const
+std::size_t Chem::PathFingerprintGenerator::getMinPathLength() const
 {
 	return minPathLength;
 }
 
-std::size_t Chem::DaylightFingerprintGenerator::getMaxPathLength() const
+std::size_t Chem::PathFingerprintGenerator::getMaxPathLength() const
 {
 	return maxPathLength;
 }
 
-std::size_t Chem::DaylightFingerprintGenerator::getNumBits() const
+std::size_t Chem::PathFingerprintGenerator::getNumBits() const
 {
 	return numBits;
 }
 
-void Chem::DaylightFingerprintGenerator::generate(const MolecularGraph& molgraph, Util::BitSet& fprint)
+void Chem::PathFingerprintGenerator::generate(const MolecularGraph& molgraph, Util::BitSet& fp)
 {
-	calcFingerprint(molgraph, fprint);	
+	calcFingerprint(molgraph, fp);	
 }
 
-void Chem::DaylightFingerprintGenerator::setAtomDescriptorFunction(const AtomDescriptorFunction& func)
+void Chem::PathFingerprintGenerator::setAtomDescriptorFunction(const AtomDescriptorFunction& func)
 {
 	atomDescriptorFunc = func;
 }
 
-void Chem::DaylightFingerprintGenerator::setBondDescriptorFunction(const BondDescriptorFunction& func)
+void Chem::PathFingerprintGenerator::setBondDescriptorFunction(const BondDescriptorFunction& func)
 {
 	bondDescriptorFunc = func;
 }
 
-void Chem::DaylightFingerprintGenerator::calcFingerprint(const MolecularGraph& molgraph, Util::BitSet& fprint)
+void Chem::PathFingerprintGenerator::calcFingerprint(const MolecularGraph& molgraph, Util::BitSet& fp)
 {
-	molGraph = &molgraph;
+	fp.resize(numBits);
 
-	fprint.resize(numBits);
-	fprint.reset();
+	if (numBits == 0)
+		return;
+
+	fp.reset();
+
+	molGraph = &molgraph;
 
 	std::size_t num_atoms = molgraph.getNumAtoms();
 
@@ -232,10 +214,10 @@ void Chem::DaylightFingerprintGenerator::calcFingerprint(const MolecularGraph& m
 	visBondMask.reset();
 
 	std::for_each(molgraph.getAtomsBegin(), molgraph.getAtomsEnd(),
-				  boost::bind(&DaylightFingerprintGenerator::growPath, this, _1, boost::ref(fprint)));
+				  boost::bind(&PathFingerprintGenerator::growPath, this, _1, boost::ref(fp)));
 }
 
-void Chem::DaylightFingerprintGenerator::growPath(const Atom& atom, Util::BitSet& fprint)
+void Chem::PathFingerprintGenerator::growPath(const Atom& atom, Util::BitSet& fp)
 {
 	std::size_t atom_idx = molGraph->getAtomIndex(atom);
 
@@ -244,7 +226,7 @@ void Chem::DaylightFingerprintGenerator::growPath(const Atom& atom, Util::BitSet
 	std::size_t bond_path_len = bondPath.size();
 
 	if (bond_path_len >= minPathLength)
-		fprint.set(calcBitIndex());
+		fp.set(calcBitIndex());
 
 	if (bond_path_len < maxPathLength) {
 		Atom::ConstAtomIterator nbrs_end = atom.getAtomsEnd();
@@ -262,7 +244,7 @@ void Chem::DaylightFingerprintGenerator::growPath(const Atom& atom, Util::BitSet
 			visBondMask.set(bond_idx);
 			bondPath.push_back(bond_idx);
 
-			growPath(*a_it, fprint);
+			growPath(*a_it, fp);
 
 			bondPath.pop_back();
 			visBondMask.reset(bond_idx);
@@ -272,7 +254,7 @@ void Chem::DaylightFingerprintGenerator::growPath(const Atom& atom, Util::BitSet
 	atomPath.pop_back();
 }
 
-std::size_t Chem::DaylightFingerprintGenerator::calcBitIndex()
+std::size_t Chem::PathFingerprintGenerator::calcBitIndex()
 {
 	std::size_t atom_path_len = atomPath.size();
 	std::size_t bond_path_len = bondPath.size();
@@ -290,11 +272,11 @@ std::size_t Chem::DaylightFingerprintGenerator::calcBitIndex()
 
 	std::reverse_copy(fwdPathDescriptor.begin(), fwdPathDescriptor.end(), std::back_inserter(revPathDescriptor));
 
-	Base::uint64 fwd_descr_hash = calcPathHashCode(fwdPathDescriptor);
-	Base::uint64 rev_descr_hash = calcPathHashCode(revPathDescriptor);
+	Base::uint64 fwd_descr_hash = Internal::calcHashCode<Base::uint64>(fwdPathDescriptor.begin(), fwdPathDescriptor.end());
+	Base::uint64 rev_descr_hash = Internal::calcHashCode<Base::uint64>(revPathDescriptor.begin(), revPathDescriptor.end());
 	boost::uint64_t rand_seed = (fwd_descr_hash < rev_descr_hash ? fwd_descr_hash : rev_descr_hash);
 
 	randGenerator.seed(rand_seed);
 
-	return (std::size_t(std::floor(double(randGenerator()) * numBits / randGenerator.max())) % numBits);
+	return std::size_t((double(randGenerator()) / randGenerator.max()) * (numBits - 1));
 }

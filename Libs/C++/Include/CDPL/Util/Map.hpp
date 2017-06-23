@@ -630,7 +630,7 @@ namespace CDPL
 
 			StorageType data;
 		};
-	
+
 		/**
 		 * @}
 		 */

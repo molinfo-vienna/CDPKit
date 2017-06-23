@@ -262,7 +262,6 @@
 #include "CDPL/Chem/HashCodeCalculator.hpp"
 #include "CDPL/Chem/Atom2DCoordinatesGenerator.hpp"
 #include "CDPL/Chem/Hydrogen3DCoordinatesGenerator.hpp"
-#include "CDPL/Chem/DaylightFingerprintGenerator.hpp"
 #include "CDPL/Chem/BondStereoFlagGenerator.hpp"
 #include "CDPL/Chem/BondDirectionGenerator.hpp"
 #include "CDPL/Chem/BondOrderGenerator.hpp"
@@ -278,6 +277,9 @@
 #include "CDPL/Chem/BurdenMatrixGenerator.hpp"
 #include "CDPL/Chem/BCUTDescriptorCalculator.hpp"
 #include "CDPL/Chem/SurfaceAtomExtractor.hpp"
+#include "CDPL/Chem/PatternAtomTyper.hpp"
+#include "CDPL/Chem/PathFingerprintGenerator.hpp"
+#include "CDPL/Chem/CircularFingerprintGenerator.hpp"
 
 #include "CDPL/Chem/TopologicalEntityAlignment.hpp"
 #include "CDPL/Chem/GeometricalEntityAlignment.hpp"

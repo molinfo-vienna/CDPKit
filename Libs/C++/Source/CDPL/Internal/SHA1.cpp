@@ -51,6 +51,9 @@
 using namespace CDPL;
 
 
+const std::size_t Internal::SHA1::HASH_SIZE;
+
+
 Internal::SHA1::SHA1()
 {
 	reset();

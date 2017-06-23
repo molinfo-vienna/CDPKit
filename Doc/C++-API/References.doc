@@ -103,7 +103,7 @@ Cairo 2D Graphics Library homepage: http://www.cairographics.org/
 <td valign="top">\anchor CATA<i>[CATA]</i></td>
 <td valign="top">
 J. Greene et al., Chemical Function Queries for 3D Database Search, 
-<i>J. Chem. INf. COmput. Sci.</i> <b>1994</b>, 34, 1297-1308
+<i>J. Chem. Inf. Comput. Sci.</i> <b>1994</b>, 34, 1297-1308
 </td>
 </tr>
 
@@ -139,6 +139,13 @@ Chemoinformatics - A Textbook; Johann Gasteiger and Thomas Engel (Eds.), WILEY-V
 <td valign="top">\anchor DTPFP<i>[DTPFP]</i></td>
 <td valign="top">
 Daylight Fingerprint Theory website: http://www.daylight.com/dayhtml/doc/theory/theory.finger.html
+</td>
+</tr>
+
+<tr>
+<td valign="top">\anchor GSIM<i>[GSIM]</i></td>
+<td valign="top">
+OpenEye GraphSim TK documentation: https://docs.eyesopen.com/toolkits/cpp/graphsimtk/
 </td>
 </tr>
 
@@ -315,6 +322,14 @@ SMILES. 2. Algorithm for generation of unique SMILES notation,
 </td>
 </tr>
 
+tr>
+<td valign="top">\anchor STECFP<i>[STECFP]</i></td>
+<td valign="top">
+D. Rogers and M. Hahn, Extended-Connectivity Fingerprints, 
+<i>J. Chem. Inf. Model.</i> <b>2010</b>, 50, 742-754
+</td>
+</tr>
+
 <tr>
 <td valign="top">\anchor STLRAI<i>[STLRAI]</i></td>
 <td valign="top">
@@ -358,6 +373,13 @@ http://amalfi.dis.unina.it/graph/db/papers/vf-algorithm.pdf
 <td valign="top">\anchor WHAM<i>[WHAM]</i></td>
 <td valign="top">
 Wikipedia article about the Hamming Distance: http://en.wikipedia.org/wiki/Hamming_distance
+</td>
+</tr>
+
+<tr>
+<td valign="top">\anchor WCOS<i>[WCOS]</i></td>
+<td valign="top">
+Wikipedia article about the Cosine Similarity MEasure: http://en.wikipedia.org/wiki/Cosine_similarity
 </td>
 </tr>
 

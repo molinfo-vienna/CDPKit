@@ -40,28 +40,26 @@ double Chem::calcTanimotoSimilarity(const Util::BitSet& bs1, const Util::BitSet&
 	std::size_t bs2_size = bs2.size();
 
 	if (bs1_size == bs2_size) {
-		std::size_t c = (bs1 & bs2).count();
+		std::size_t bab = (bs1 & bs2).count();
 
-		return (double(c) / (bs1.count() + bs2.count() - c));
+		return (double(bab) / (bs1.count() + bs2.count() - bab));
 	}
 
 	if (bs1_size < bs2_size) {
 		Util::BitSet tmp(bs1);
-
 		tmp.resize(bs2_size);
 
-		std::size_t c = (tmp & bs2).count();
+		std::size_t bab = (tmp & bs2).count();
 
-		return (double(c) / (tmp.count() + bs2.count() - c));
+		return (double(bab) / (bs1.count() + bs2.count() - bab));
 	}
 
 	Util::BitSet tmp(bs2);
-
 	tmp.resize(bs1_size);
   
-	std::size_t c = (bs1 & tmp).count();
+	std::size_t bab = (bs1 & tmp).count();
 
-	return (double(c) / (bs1.count() + tmp.count() - c));
+	return (double(bab) / (bs1.count() + bs2.count() - bab));
 }
 
 std::size_t Chem::calcHammingDistance(const Util::BitSet& bs1, const Util::BitSet& bs2)
@@ -74,14 +72,12 @@ std::size_t Chem::calcHammingDistance(const Util::BitSet& bs1, const Util::BitSe
 
 	if (bs1_size < bs2_size) {
 		Util::BitSet tmp(bs1);
-
 		tmp.resize(bs2_size);
 
 		return (tmp ^ bs2).count();
 	}
 
 	Util::BitSet tmp(bs2);
-
 	tmp.resize(bs1_size);
   
 	return (bs1 ^ tmp).count();
@@ -90,4 +86,172 @@ std::size_t Chem::calcHammingDistance(const Util::BitSet& bs1, const Util::BitSe
 double Chem::calcEuclideanDistance(const Util::BitSet& bs1, const Util::BitSet& bs2)
 {
 	return std::sqrt(double(calcHammingDistance(bs1, bs2)));
+}
+
+double Chem::calcCosineSimilarity(const Util::BitSet& bs1, const Util::BitSet& bs2)
+{
+	std::size_t bs1_size = bs1.size();
+	std::size_t bs2_size = bs2.size();
+
+	if (bs1_size == bs2_size) {
+		std::size_t bab = (bs1 & bs2).count();
+		
+		return (double(bab) / std::sqrt(double(bs1.count() * bs2.count())));
+	}
+
+	if (bs1_size < bs2_size) {
+		Util::BitSet tmp(bs1);
+		tmp.resize(bs2_size);
+
+		std::size_t bab = (tmp & bs2).count();
+		
+		return (double(bab) / std::sqrt(double(bs1.count() * bs2.count())));
+	}
+
+	Util::BitSet tmp(bs2);
+	tmp.resize(bs1_size);
+  	
+	std::size_t bab = (tmp & bs1).count();
+	
+	return (double(bab) / std::sqrt(double(bs1.count() * bs2.count())));
+}
+
+double Chem::calcEuclideanSimilarity(const Util::BitSet& bs1, const Util::BitSet& bs2)
+{
+	std::size_t bs1_size = bs1.size();
+	std::size_t bs2_size = bs2.size();
+	std::size_t a = bs1.count();
+	std::size_t b = bs2.count();
+
+	if (bs1_size == bs2_size) {
+		std::size_t bab = (bs1 & bs2).count();
+		std::size_t oa = a - bab;
+		std::size_t ob = b - bab;
+		std::size_t nab = bs1_size - (bs1 | bs2).count();
+
+		return std::sqrt(double(bab + nab) / double(oa + ob + bab + nab));
+	}
+
+	if (bs1_size < bs2_size) {
+		Util::BitSet tmp(bs1);
+		tmp.resize(bs2_size);
+
+		std::size_t bab = (tmp & bs2).count();
+		std::size_t oa = a - bab;
+		std::size_t ob = b - bab;
+		std::size_t nab = bs2_size - (tmp | bs2).count();
+
+		return std::sqrt(double(bab + nab) / double(oa + ob + bab + nab));
+	}
+
+	Util::BitSet tmp(bs2);
+	tmp.resize(bs1_size);
+  	
+	std::size_t bab = (bs1 & tmp).count();
+	std::size_t oa = a - bab;
+	std::size_t ob = b - bab;
+	std::size_t nab = bs1_size - (bs1 | tmp).count();
+
+	return std::sqrt(double(bab + nab) / double(oa + ob + bab + nab));
+}
+
+double Chem::calcManhattanSimilarity(const Util::BitSet& bs1, const Util::BitSet& bs2)
+{
+	std::size_t bs1_size = bs1.size();
+	std::size_t bs2_size = bs2.size();
+	std::size_t a = bs1.count();
+	std::size_t b = bs2.count();
+
+	if (bs1_size == bs2_size) {
+		std::size_t bab = (bs1 & bs2).count();
+		std::size_t oa = a - bab;
+		std::size_t ob = b - bab;
+		std::size_t nab = bs1_size - (bs1 | bs2).count();
+
+		return (double(oa + ob) / double(oa + ob + bab + nab));
+	}
+
+	if (bs1_size < bs2_size) {
+		Util::BitSet tmp(bs1);
+		tmp.resize(bs2_size);
+
+		std::size_t bab = (tmp & bs2).count();
+		std::size_t oa = a - bab;
+		std::size_t ob = b - bab;
+		std::size_t nab = bs2_size - (bs1 | bs2).count();
+
+		return (double(oa + ob) / double(oa + ob + bab + nab));
+	}
+
+	Util::BitSet tmp(bs2);
+	tmp.resize(bs1_size);
+  	
+	std::size_t bab = (bs1 & tmp).count();
+	std::size_t oa = a - bab;
+	std::size_t ob = b - bab;
+	std::size_t nab = bs1_size - (bs1 | bs2).count();
+
+	return (double(oa + ob) / double(oa + ob + bab + nab));
+}
+
+double Chem::calcDiceSimilarity(const Util::BitSet& bs1, const Util::BitSet& bs2)
+{
+	std::size_t bs1_size = bs1.size();
+	std::size_t bs2_size = bs2.size();
+
+	if (bs1_size == bs2_size) {
+		std::size_t bab = (bs1 & bs2).count();
+		
+		return (double(2 * bab) / double(bs1.count() + bs2.count()));
+	}
+
+	if (bs1_size < bs2_size) {
+		Util::BitSet tmp(bs1);
+		tmp.resize(bs2_size);
+
+		std::size_t bab = (tmp & bs2).count();
+		
+		return (double(2 * bab) / double(bs1.count() + bs2.count()));
+	}
+
+	Util::BitSet tmp(bs2);
+	tmp.resize(bs1_size);
+  	
+	std::size_t bab = (bs1 & tmp).count();
+		
+	return (double(2 * bab) / double(bs1.count() + bs2.count()));
+}
+
+double Chem::calcTverskySimilarity(const Util::BitSet& bs1, const Util::BitSet& bs2, double a, double b)
+{
+	std::size_t bs1_size = bs1.size();
+	std::size_t bs2_size = bs2.size();
+
+	if (bs1_size == bs2_size) {
+		std::size_t bab = (bs1 & bs2).count();
+		std::size_t oa = bs1.count() - bab;
+		std::size_t ob = bs2.count() - bab;
+
+		return (double(bab) / (a * oa + b * ob + bab));
+	}
+
+	if (bs1_size < bs2_size) {
+		Util::BitSet tmp(bs1);
+		tmp.resize(bs2_size);
+
+		std::size_t bab = (tmp & bs2).count();
+		std::size_t oa = bs1.count() - bab;
+		std::size_t ob = bs2.count() - bab;
+
+		return (double(bab) / (a * oa + b * ob + bab));
+	}
+
+	Util::BitSet tmp(bs2);
+	tmp.resize(bs1_size);
+  
+	std::size_t bab = (bs1 & tmp).count();
+	std::size_t oa = bs1.count() - bab;
+	std::size_t ob = bs2.count() - bab;
+
+	return (double(bab) / (a * oa + b * ob + bab));
 }

@@ -112,12 +112,14 @@ SET(cdpl-chem_LIB_SRCS
     LogSCalculator.cpp
     MolecularComplexityCalculator.cpp
     PEOEChargeCalculator.cpp
-    DaylightFingerprintGenerator.cpp
     AutoCorrelationVectorCalculator.cpp
     RDFCodeCalculator.cpp
     BurdenMatrixGenerator.cpp
     BCUTDescriptorCalculator.cpp
     SurfaceAtomExtractor.cpp
+    PathFingerprintGenerator.cpp
+    CircularFingerprintGenerator.cpp
+    PatternAtomTyper.cpp
 
     Entity3DPropertyFunctions.cpp
 

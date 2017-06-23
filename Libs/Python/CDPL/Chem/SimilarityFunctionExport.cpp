@@ -36,7 +36,12 @@ void CDPLPythonChem::exportSimilarityFunctions()
 	using namespace boost;
 	using namespace CDPL;
 
-	python::def("calcTanimotoSimilarity", &Chem::calcTanimotoSimilarity, (python::arg("bs1"), (python::arg("bs2"))));
-	python::def("calcHammingDistance", &Chem::calcHammingDistance, (python::arg("bs1"), (python::arg("bs2"))));
-	python::def("calcEuclideanDistance", &Chem::calcEuclideanDistance, (python::arg("bs1"), (python::arg("bs2"))));
+	python::def("calcTanimotoSimilarity", &Chem::calcTanimotoSimilarity, (python::arg("bs1"), python::arg("bs2")));
+	python::def("calcCosineSimilarity", &Chem::calcCosineSimilarity, (python::arg("bs1"), python::arg("bs2")));
+	python::def("calcEuclideanSimilarity", &Chem::calcEuclideanSimilarity, (python::arg("bs1"), python::arg("bs2")));
+	python::def("calcDiceSimilarity", &Chem::calcDiceSimilarity, (python::arg("bs1"), python::arg("bs2")));
+	python::def("calcManhattanSimilarity", &Chem::calcManhattanSimilarity, (python::arg("bs1"), python::arg("bs2")));
+	python::def("calcTverskySimilarity", &Chem::calcTverskySimilarity, (python::arg("bs1"), python::arg("bs2"), python::arg("a"), (python::arg("b"))));
+	python::def("calcHammingDistance", &Chem::calcHammingDistance, (python::arg("bs1"), python::arg("bs2")));
+	python::def("calcEuclideanDistance", &Chem::calcEuclideanDistance, (python::arg("bs1"), python::arg("bs2")));
 }

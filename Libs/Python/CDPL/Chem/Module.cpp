@@ -120,12 +120,13 @@ BOOST_PYTHON_MODULE(_chem)
 	exportLogSCalculator();
 	exportMolecularComplexityCalculator();
 	exportPEOEChargeCalculator();
-	exportDaylightFingerprintGenerator();
 	exportAutoCorrelationVectorCalculator();
 	exportRDFCodeCalculator();
 	exportBurdenMatrixGenerator();
 	exportBCUTDescriptorCalculator();
 	exportSurfaceAtomExtractor();
+	exportPathFingerprintGenerator();
+	exportCircularFingerprintGenerator();
 
 	exportMoleculeReader();
 	exportMoleculeWriter();
