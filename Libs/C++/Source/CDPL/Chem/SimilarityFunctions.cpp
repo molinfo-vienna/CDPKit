@@ -178,7 +178,7 @@ double Chem::calcManhattanSimilarity(const Util::BitSet& bs1, const Util::BitSet
 		std::size_t bab = (tmp & bs2).count();
 		std::size_t oa = a - bab;
 		std::size_t ob = b - bab;
-		std::size_t nab = bs2_size - (bs1 | bs2).count();
+		std::size_t nab = bs2_size - (tmp | bs2).count();
 
 		return (double(oa + ob) / double(oa + ob + bab + nab));
 	}
@@ -189,7 +189,7 @@ double Chem::calcManhattanSimilarity(const Util::BitSet& bs1, const Util::BitSet
 	std::size_t bab = (bs1 & tmp).count();
 	std::size_t oa = a - bab;
 	std::size_t ob = b - bab;
-	std::size_t nab = bs1_size - (bs1 | bs2).count();
+	std::size_t nab = bs1_size - (bs1 | tmp).count();
 
 	return (double(oa + ob) / double(oa + ob + bab + nab));
 }

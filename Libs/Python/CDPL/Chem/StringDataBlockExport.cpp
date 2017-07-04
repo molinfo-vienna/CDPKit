@@ -30,6 +30,7 @@
 
 #include "Util/ArrayVisitor.hpp"
 #include "Base/CopyAssOp.hpp"
+#include "Base/ObjectIdentityCheckVisitor.hpp"
 
 #include "ClassExports.hpp"
 
@@ -44,6 +45,7 @@ void CDPLPythonChem::exportStringDataBlock()
 		.def(python::init<const Chem::StringDataBlockEntry&>((python::arg("self"), python::arg("entry"))))
 		.def(python::init<const std::string&, const std::string&>((python::arg("self"), python::arg("header"),
 																   python::arg("data"))))
+		.def(CDPLPythonBase::ObjectIdentityCheckVisitor<Chem::StringDataBlockEntry>())	
 		.def("assign", CDPLPythonBase::copyAssOp(&Chem::StringDataBlockEntry::operator=), (python::arg("self"), python::arg("entry")),
 			 python::return_self<>())
 		.def("getHeader", &Chem::StringDataBlockEntry::getHeader, python::arg("self"),  

@@ -4,7 +4,7 @@
  * LogSCalculator.hpp 
  *  
  * Prediction of aqueous solubility by an atom contribution approach
- * (T. J. Hou, K. Xia, W. Zhang, X. J. Xu, J. Chem. Inf. Comput. Sci. 2004, 44, 266-275
+ * (T. J. Hou, K. Xia, W. Zhang, X. J. Xu, J. Chem. Inf. Comput. Sci. 2004, 44, 266-275)
  *
  * This file is part of the Chemical Data Processing Toolkit
  *
@@ -35,11 +35,10 @@
 #define CDPL_CHEM_LOGSCALCULATOR_HPP
 
 #include <cstddef>
-#include <vector>
 
 #include "CDPL/Chem/APIPrefix.hpp"
+#include "CDPL/Chem/PatternAtomTyper.hpp"
 #include "CDPL/Math/Vector.hpp"
-#include "CDPL/Util/BitSet.hpp"
 
 
 namespace CDPL 
@@ -49,7 +48,6 @@ namespace CDPL
 	{
 
 		class MolecularGraph;
-		class Atom;
 
 		/**
 		 * \addtogroup CDPL_CHEM_LOGS
@@ -111,103 +109,12 @@ namespace CDPL
 			const Math::DVector& getFeatureVector() const;
 
 		private:
-			LogSCalculator(const LogSCalculator&);
+			void init(const MolecularGraph& molgraph);
+			void countHydrophicCarbons(const MolecularGraph& molgraph);
+			void calcLogS(const MolecularGraph& molgraph);
 
-			LogSCalculator& operator=(const LogSCalculator&);
-
-			void init(const MolecularGraph&);
-
-			void classifyAtoms();
-
-			void countAtomTypes();
-			void countHydrophicCarbons();
-
-			void calcLogS();
-
-			class AtomInfo;
-
-			typedef std::vector<AtomInfo> AtomInfoTable;
-
-			class AtomInfo
-			{
-
-			public:
-				AtomInfo(const MolecularGraph&, const Atom&, bool, bool);
-
-				void classifyAtom(const AtomInfoTable&);
-				void analyzeAtom(const AtomInfoTable&);				
-
-				unsigned int getAtomType() const;
-				std::size_t getNumBonds() const;
-				unsigned int getAtomicNo() const;
-
-				bool isRingAtom() const;
-				bool isAromaticAtom() const;
-
-			private:
-				unsigned int classifyCAtom(const AtomInfoTable&) const;
-				unsigned int classifyNAtom(const AtomInfoTable&) const;
-				unsigned int classifyOAtom(const AtomInfoTable&) const;
-				unsigned int classifySAtom() const;
-				unsigned int classifyPAtom() const;
-				unsigned int classifyFAtom() const;
-				unsigned int classifyClAtom() const;
-				unsigned int classifyBrAtom() const;
-				unsigned int classifyIAtom() const;
-
-				bool hasCarbonylCNbr(const AtomInfoTable& atom_infos) const;
-				bool has2PropyleneNbr(const AtomInfoTable& atom_infos) const;
-				bool hasBAnyAAnyBAnyAArNNbr(const AtomInfoTable& atom_infos) const;
-				bool hasBSArACX3cHalBDANONbr(const AtomInfoTable& atom_infos) const;
-				bool hasBSArACX4cHalBAnyANONbr(const AtomInfoTable& atom_infos) const;
-				bool hasBSArAAnyCBDANONbr(const AtomInfoTable& atom_infos) const;
-				bool hasBSAOHNH2NHNbr(const AtomInfoTable& atom_infos) const;
-				bool in6Ring() const;
-
-				std::size_t getBSArACX4Count(const AtomInfoTable& atom_infos) const;
-				std::size_t getBAnyACX4HalCount(const AtomInfoTable& atom_infos) const;
-				std::size_t getBSArACX4cHalCount(const AtomInfoTable& atom_infos) const;
-				std::size_t getBSArAAnyCX4cHalCount(const AtomInfoTable& atom_infos) const;			
-
-				const MolecularGraph*    molGraph;
-				const Atom*              atom;
-				unsigned int             atomType;
-				unsigned int             atomicNo;
-				std::size_t              bondCount;
-				std::size_t              hCount;
-				std::size_t              bSArAHalCount;
-				std::size_t              bSArAAnyCount;
-				std::size_t              bSArAArCCount;
-				std::size_t              bSArAAlCCount;
-				std::size_t              bSArAAlOCount;
-				std::size_t              bSArACCount;
-				std::size_t              bSArAAlPCount;
-				std::size_t              bSAAlOX1Count;
-				std::size_t              bDAAlCCount; 
-				std::size_t              bDACCount; 
-				std::size_t              bDAAnyCount; 
-				std::size_t              bDAAlOX1Count; 
-				std::size_t              bDANOCount;
-				std::size_t              bTAAnyCount; 
-				std::size_t              bAnyAAnyCount; 
-				std::size_t              bAnyAAnyNonCCount; 
-				std::size_t              bAnyAArCCount; 
-				std::size_t              bAnyAAlCCount; 
-				std::size_t              bAnyAAnyArNonCCount; 
-				std::size_t              bAnyAArNCount; 
-				std::size_t              bAnyAAlPCount;
-				std::size_t              bAnyAAlSCount;
-				std::size_t              bAnyANOCount;	
-				std::size_t              bAnyANonCNonFNonClCount;
-				bool                     isAromatic;
-				bool                     inRing;
-				bool                     isHalogenAtom;
-			};
-
-			const MolecularGraph*    molGraph;
-			AtomInfoTable            atomInfos;
+			PatternAtomTyper         atomTyper;
 			Math::DVector            featureVector;
-			std::size_t              numAtoms;
 			double                   logS;
 		};
 

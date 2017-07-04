@@ -396,6 +396,11 @@ namespace
 					expr_ptr = createIntegralPropertyMatchExpression<std::size_t>(atom, molgraph, constraint, &calcExplicitValence);
 					break;
 
+				case AtomMatchConstraint::HYBRIDIZATION_STATE:
+					expr_ptr = createIntegralPropertyMatchExpression<unsigned int>(atom, molgraph, constraint, 
+																				   SingleArgPropertyFuncWrapper<unsigned int>(&getHybridizationState));
+					break;
+
 				case AtomMatchConstraint::AROMATICITY:
 					expr_ptr = createBooleanPropertyMatchExpression(atom, molgraph, constraint, SingleArgPropertyFuncWrapper<bool>(&getAromaticityFlag));
 					break;

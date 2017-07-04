@@ -43,6 +43,7 @@
 #include "CDPL/Chem/AtomMatchConstraint.hpp"
 #include "CDPL/Chem/AtomConfiguration.hpp"
 #include "CDPL/Chem/AtomType.hpp"
+#include "CDPL/Chem/HybridizationState.hpp"
 #include "CDPL/Chem/AtomDictionary.hpp"
 
 
@@ -70,6 +71,7 @@ namespace
 	const std::string ATOMIC_NUMBER_PREFIX             = "#";
 	const std::string UNSATURATION_FLAG_SYMBOL         = "u";
 	const std::string AROMATICITY_FLAG_SYMBOL          = "a";
+	const std::string HYBRIDIZATION_STATE_SYMBOL       = "^";
 	const std::string RING_FLAG_SYMBOL                 = "r";
 	const std::string ZERO_CHARGE_SYMBOL               = "+0";
 	const std::string RING_BOND_COUNT_SYMBOL           = "x";
@@ -90,6 +92,15 @@ namespace
 	const std::string EVEN_CONFIGURATION_SYMBOL        = "@";
 	const std::string EITHER_CONFIGURATION_SYMBOL      = "?";
 	const std::string UNKNOWN_ATOM_TYPE_SYMBOL         = "?";
+	const std::string HYB_STATE_SP_SYMBOL              = "sp";
+	const std::string HYB_STATE_SP2_SYMBOL             = "sp2";
+	const std::string HYB_STATE_SP3_SYMBOL             = "sp3";
+	const std::string HYB_STATE_DP_SYMBOL              = "dp";
+	const std::string HYB_STATE_SD3_SYMBOL             = "sd3";
+	const std::string HYB_STATE_SP2D_SYMBOL            = "sp2d";
+	const std::string HYB_STATE_SP3D_SYMBOL            = "sp3d";
+	const std::string HYB_STATE_SP3D2_SYMBOL           = "sp3d2";
+	const std::string HYB_STATE_SP3D3_SYMBOL           = "sp3d3";
 
 
 	const Chem::MatchConstraint* findMatchConstraint(const Chem::MatchConstraintList& constr_list,
@@ -479,6 +490,72 @@ namespace
 		if ((configuration & AtomConfiguration::R) != 0)
 			config_expr_str.append(EVEN_CONFIGURATION_SYMBOL);
 	}
+	
+	void createHybridizationStateExpressionString(const Chem::Atom& atom, const Chem::MatchConstraint& constraint, std::string& expr_str)
+	{
+		using namespace Chem;
+
+		if (constraint.getRelation() != MatchConstraint::EQUAL && 
+			constraint.getRelation() != MatchConstraint::NOT_EQUAL)
+			return;
+
+		unsigned int hyb_state;
+
+		if (!constraint.hasValue()) {
+			hyb_state = getHybridizationState(atom);
+
+		} else
+			hyb_state = constraint.getValue<unsigned int>();
+
+		const char* sym;
+
+		switch (hyb_state) {
+
+			case HybridizationState::SP:
+				sym = HYB_STATE_SP_SYMBOL.c_str();
+				break;
+		
+			case HybridizationState::SP2:
+				sym = HYB_STATE_SP2_SYMBOL.c_str();
+				break;
+
+			case HybridizationState::SP3:
+				sym = HYB_STATE_SP3_SYMBOL.c_str();
+				break;
+
+			case HybridizationState::DP:
+				sym = HYB_STATE_DP_SYMBOL.c_str();
+				break;
+
+			case HybridizationState::SD3:
+				sym = HYB_STATE_SD3_SYMBOL.c_str();
+				break;
+
+			case HybridizationState::SP2D:
+				sym = HYB_STATE_SP2D_SYMBOL.c_str();
+				break;
+
+			case HybridizationState::SP3D:
+				sym = HYB_STATE_SP3D_SYMBOL.c_str();
+				break;
+
+			case HybridizationState::SP3D2:
+				sym = HYB_STATE_SP3D2_SYMBOL.c_str();
+				break;
+
+			case HybridizationState::SP3D3:
+				sym = HYB_STATE_SP3D3_SYMBOL.c_str();
+				break;
+
+			default:
+				return;
+		}
+
+		if (constraint.getRelation() == MatchConstraint::NOT_EQUAL)
+			expr_str.append(NOT_OPERATOR);
+
+		expr_str.append(sym);
+	}
 
 	void createEnvironmentExpressionString(const Chem::MatchConstraint& constraint,
 										   std::string& env_expr_str)
@@ -691,6 +768,10 @@ namespace
 
 				case AtomMatchConstraint::SSSR_RING_SIZE:
 					createSSSRRingSizeExpressionString(constraint, expr_str);
+					break;
+
+				case AtomMatchConstraint::HYBRIDIZATION_STATE:
+					createHybridizationStateExpressionString(atom, constraint, expr_str);
 					break;
 
 				default:

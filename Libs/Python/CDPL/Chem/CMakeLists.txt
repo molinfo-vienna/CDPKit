@@ -96,6 +96,8 @@ SET(chem_MOD_SRCS
     SurfaceAtomExtractorExport.cpp 
     PathFingerprintGeneratorExport.cpp 
     CircularFingerprintGeneratorExport.cpp 
+    PatternAtomTyperExport.cpp 
+    SubstructureHistogramGeneratorExport.cpp 
      
     MoleculeIOManagerExport.cpp 
     MolecularGraphIOManagerExport.cpp 

@@ -26,14 +26,13 @@
 
 #include "StaticInit.hpp"
 
-#include <algorithm>
+#include <vector>
+
+#include <boost/thread.hpp>
 
 #include "CDPL/Chem/TPSACalculator.hpp"
-#include "CDPL/Chem/Atom.hpp"
-#include "CDPL/Chem/Bond.hpp"
-#include "CDPL/Chem/AtomFunctions.hpp"
-#include "CDPL/Chem/BondFunctions.hpp"
-#include "CDPL/Chem/AtomType.hpp"
+#include "CDPL/Chem/MolecularGraph.hpp"
+#include "CDPL/Chem/UtilityFunctions.hpp"
 
 
 using namespace CDPL;
@@ -42,160 +41,109 @@ using namespace CDPL;
 namespace
 {
 
-	double getTPSAIncrement(std::size_t atom_type, std::size_t num_h_bonds, std::size_t num_heavy_bonds, 
-							std::size_t num_arom_bonds, std::size_t num_sgl_bonds, std::size_t num_dbl_bonds, 
-							std::size_t num_tpl_bonds, long charge, bool in_3_ring)
+	typedef std::vector<Chem::MolecularGraph::SharedPointer> PatternTable;
+
+	PatternTable atomTypePatterns;
+
+	boost::once_flag initAtomTypePatternsFlag = BOOST_ONCE_INIT;
+
+	void initAtomTypePatterns() 
 	{
 		using namespace Chem;
 
-		switch (atom_type) {
-
-			case AtomType::N:
-
-				switch (num_heavy_bonds) {
-					
-					case 1:
-						if (num_h_bonds == 0 && num_tpl_bonds == 1 && charge == 0) 
-							return 23.79;      // N#
-
-						if (num_h_bonds == 1 && num_dbl_bonds == 1 && charge == 0) 
-							return 23.85;      // [NH]=
-
-						if (num_h_bonds == 2 && num_sgl_bonds == 1 && charge == 0) 
-							return 26.02;      // [NH2]-
-
-						if (num_h_bonds == 2 && num_dbl_bonds == 1 && charge == 1) 
-							return 25.59;      // [NH2+]=
-
-						if (num_h_bonds == 3 && num_sgl_bonds == 1 && charge == 1) 
-							return 27.64;      // [NH3+]-
-
-						break;
-
-					case 2:
-						if (num_h_bonds == 0 && num_sgl_bonds == 1 && num_dbl_bonds == 1 && charge == 0) 
-							return 12.36;      // =N-
-
-						if (num_h_bonds == 0 && num_tpl_bonds == 1 && num_dbl_bonds == 1 && charge == 0) 
-							return 13.60;      // =N#
-
-						if (num_h_bonds == 0 && num_dbl_bonds == 2 && charge == 1) 
-							return 13.60;      // =[N+]=
-
-						if (num_h_bonds == 1 && num_sgl_bonds == 2 && charge == 0 && !in_3_ring) 
-							return 12.03;      // -[NH]-
-
-						if (num_h_bonds == 1 && num_sgl_bonds == 2 && charge == 0 && in_3_ring) 
-							return 21.94;      // -[NH]-r3
-
-						if (num_h_bonds == 0 && num_tpl_bonds == 1 && num_sgl_bonds == 1 && charge == 1) 
-							return 4.36;       // -[N+]#
-
-						if (num_h_bonds == 1 && num_dbl_bonds == 1 && num_sgl_bonds == 1 && charge == 1) 
-							return 13.97;      // -[NH+]=
-
-						if (num_h_bonds == 2 && num_sgl_bonds == 2 && charge == 1) 
-							return 16.61;      // -[NH2+]-
-
-						if (num_h_bonds == 0 && num_arom_bonds == 2 && charge == 0) 
-							return 12.89;      // :[n]:
-
-						if (num_h_bonds == 1 && num_arom_bonds == 2 && charge == 0) 
-							return 15.79;      // :[nH]:
-
-						if (num_h_bonds == 1 && num_arom_bonds == 2 && charge == 1) 
-							return 14.14;      // :[nH+]:
-
-						break;
-			
-					case 3:
-						if (num_h_bonds == 0 && num_sgl_bonds == 3 && charge == 0 && !in_3_ring) 
-							return 3.24;       // -N(-)-
-
-						if (num_h_bonds == 0 && num_sgl_bonds == 3 && charge == 0 && in_3_ring) 
-							return 3.01;       // -N(-)-r3
-
-						if (num_h_bonds == 0 && num_sgl_bonds == 1 && num_dbl_bonds == 2 && charge == 0) 
-							return 11.68;      // -N(=)=
-
-						if (num_h_bonds == 0 && num_sgl_bonds == 2 && num_dbl_bonds == 1 && charge == 1) 
-							return 11.68;      // -[N+](-)=
-
-						if (num_h_bonds == 0 && num_sgl_bonds == 2 && num_dbl_bonds == 1 && charge == 1) 
-							return 3.01;       // =[N+](-)-
-
-						if (num_h_bonds == 1 && num_sgl_bonds == 3 && charge == 1) 
-							return 4.44;       // -[NH+](-)-
-
-						if (num_h_bonds == 0 && num_arom_bonds == 3 && charge == 0) 
-							return 4.41;       // :[n](:):
-
-						if (num_h_bonds == 0 && num_sgl_bonds == 1 && num_arom_bonds == 2 && charge == 0) 
-							return 4.93;       // -:[n](:):
-
-						if (num_h_bonds == 0 && num_dbl_bonds == 1 && num_arom_bonds == 2 && charge == 0) 
-							return 8.39;       // =:[n](:):
-
-						if (num_h_bonds == 0 && num_arom_bonds == 3 && charge == 1) 
-							return 4.10;       // :[n+](:):
-
-						if (num_h_bonds == 0 && num_sgl_bonds == 1 && num_arom_bonds == 2 && charge == 1) 
-							return 3.88;       // -:[n+](:):
-
-						break;
-
-					case 4:
-						if (num_h_bonds == 0 && num_sgl_bonds == 4 && charge == 1) 
-							return 0.0;       // -[N+](-)(-)-
-
-						break;
-
-					default:
-						break;
-				}
-			   
-				return std::max(30.5 - num_heavy_bonds * 8.2 + num_h_bonds * 1.5, 0.0);       // N with non-standard valency
-
-			case AtomType::O:
-
-				switch (num_heavy_bonds) {
-				
-					case 1:
-						if (num_h_bonds == 0 && num_dbl_bonds == 1 && charge == 0) 
-							return 17.07;      // O=
-
-						if (num_h_bonds == 1 && num_sgl_bonds == 1 && charge == 0) 
-							return 20.23;      // [OH]-
-
-						if (num_h_bonds == 0 && num_sgl_bonds == 1 && charge == -1) 
-							return 23.06;      // [O-]-
-
-						break;
-
-					case 2:
-						if (num_h_bonds == 0 && num_sgl_bonds == 2 && charge == 0 && !in_3_ring) 
-							return 9.23;       // -O-
-
-						if (num_h_bonds == 0 && num_sgl_bonds == 2 && charge == 0 && in_3_ring) 
-							return 12.53;      // -O-r3
-
-						if (num_h_bonds == 0 && num_arom_bonds == 2 && charge == 0) 
-							return 13.14;      // :o:
-
-						break;
-
-					default:
-						break;
-				}
-
-				return std::max(28.5 - num_heavy_bonds * 8.6 + num_h_bonds * 1.5, 0.0);       // O with non-standard valency
-
-			default:
-				return 0.0;
-		}
+		atomTypePatterns.push_back(parseSMARTS("[N:1](-*)(-*)-*"));
+		atomTypePatterns.push_back(parseSMARTS("[N:2](-*)=*"));
+		atomTypePatterns.push_back(parseSMARTS("[N:3]#*"));
+		atomTypePatterns.push_back(parseSMARTS("[N:4](-*)(=*)=*"));
+		atomTypePatterns.push_back(parseSMARTS("[N:5](=*)#*"));
+		atomTypePatterns.push_back(parseSMARTS("[N:6]1(-*)-*-*-1"));
+		atomTypePatterns.push_back(parseSMARTS("[NH:7](-*)-*"));
+		atomTypePatterns.push_back(parseSMARTS("[NH:8]1-*-*-1"));
+		atomTypePatterns.push_back(parseSMARTS("[NH:9]=*"));
+		atomTypePatterns.push_back(parseSMARTS("[NH2:10]-*"));
+		atomTypePatterns.push_back(parseSMARTS("[N+:11](-*)(-*)(-*)-*"));
+		atomTypePatterns.push_back(parseSMARTS("[N+:12](-*)(-*)=*"));
+		atomTypePatterns.push_back(parseSMARTS("[N+:13](-*)#*"));
+		atomTypePatterns.push_back(parseSMARTS("[NH+:14](-*)(-*)-*"));
+		atomTypePatterns.push_back(parseSMARTS("[NH+:15](-*)=*"));
+		atomTypePatterns.push_back(parseSMARTS("[NH2+:16](-*)-*"));
+		atomTypePatterns.push_back(parseSMARTS("[NH2+:17]=*"));
+		atomTypePatterns.push_back(parseSMARTS("[NH3+:18]-*"));
+		atomTypePatterns.push_back(parseSMARTS("[n:19](:*):*"));
+		atomTypePatterns.push_back(parseSMARTS("[n:20](:*)(:*):*"));
+		atomTypePatterns.push_back(parseSMARTS("[n:21](-*)(:*):*"));
+		atomTypePatterns.push_back(parseSMARTS("[n:22](=*)(:*):*"));
+		atomTypePatterns.push_back(parseSMARTS("[nH:23](:*):*"));
+		atomTypePatterns.push_back(parseSMARTS("[n+:24](:*)(:*):*"));
+		atomTypePatterns.push_back(parseSMARTS("[n+:25](-*)(:*):*"));
+		atomTypePatterns.push_back(parseSMARTS("[nH+:26](:*):*"));
+		atomTypePatterns.push_back(parseSMARTS("[O:27](-*)-*"));
+		atomTypePatterns.push_back(parseSMARTS("[O:28]1-*-*-1"));
+		atomTypePatterns.push_back(parseSMARTS("[O:29]=*"));
+		atomTypePatterns.push_back(parseSMARTS("[OH:30]-*"));
+		atomTypePatterns.push_back(parseSMARTS("[O-:31]-*"));
+		atomTypePatterns.push_back(parseSMARTS("[o:32](:*):*"));
+		atomTypePatterns.push_back(parseSMARTS("[S:33](-*)-*"));
+		atomTypePatterns.push_back(parseSMARTS("[S:34]=*"));
+		atomTypePatterns.push_back(parseSMARTS("[S:35](-*)(-*)=*"));
+		atomTypePatterns.push_back(parseSMARTS("[S:36](-*)(-*)(=*)=*"));
+		atomTypePatterns.push_back(parseSMARTS("[SH:37]-*"));
+		atomTypePatterns.push_back(parseSMARTS("[s:38](:*):*"));
+		atomTypePatterns.push_back(parseSMARTS("[s:39](=*)(:*):*"));
+		atomTypePatterns.push_back(parseSMARTS("[P:40](-*)(-*)-*"));
+		atomTypePatterns.push_back(parseSMARTS("[P:41](-*)=*"));
+		atomTypePatterns.push_back(parseSMARTS("[P:42](-*)(-*)(-*)=*"));
+		atomTypePatterns.push_back(parseSMARTS("[PH:43](-*)(-*)=*"));
 	}
+
+	double atomTypeIncrements[] = {
+	    3.24,
+		12.36,
+		23.79,
+		11.68,
+		13.60,
+		3.01,
+		12.03,
+		21.94,
+		23.85,
+		26.02,
+		0.00,
+		3.01,
+		4.36,
+		4.44,
+		13.97,
+		16.61,
+		25.59,
+		27.64,
+		12.89,
+		4.41,
+		4.93,
+		8.39,
+		15.79,
+		4.10,
+		3.88,
+		14.14,
+		9.23,
+		12.53,
+		17.07,
+		20.23,
+		23.06,
+		13.14,
+		25.30,
+		32.09,
+		19.21,
+		8.38,
+		38.80,
+		28.24,
+		21.70,
+		13.59,
+		34.14,
+		9.81,
+		23.47
+ 	};
 }
 
+Chem::TPSACalculator::TPSACalculator(): area(0) {}
 
 Chem::TPSACalculator::TPSACalculator(const MolecularGraph& molgraph)
 {
@@ -204,72 +152,14 @@ Chem::TPSACalculator::TPSACalculator(const MolecularGraph& molgraph)
 
 double Chem::TPSACalculator::calculate(const MolecularGraph& molgraph)
 {
+	init();
+
+	atomTyper.execute(molgraph);
 	area = 0.0;
 
-	MolecularGraph::ConstAtomIterator atoms_end = molgraph.getAtomsEnd();
-
-	for (MolecularGraph::ConstAtomIterator it = molgraph.getAtomsBegin(); it != atoms_end; ++it) {
-		const Atom& atom = *it;
-		std::size_t atom_type = getType(atom);
-
-		if (atom_type != AtomType::N && atom_type != AtomType::O)
-			continue;
-
-		std::size_t num_h_bonds = getImplicitHydrogenCount(atom);
-		std::size_t num_heavy_bonds = 0;
-		std::size_t num_arom_bonds = 0;
-		std::size_t num_sgl_bonds = 0;
-		std::size_t num_dbl_bonds = 0;
-		std::size_t num_tpl_bonds = 0;
-		
-		Atom::ConstBondIterator bonds_end = atom.getBondsEnd();
-		Atom::ConstAtomIterator a_it = atom.getAtomsBegin();
-
-		for (Atom::ConstBondIterator b_it = atom.getBondsBegin(); b_it != bonds_end; ++b_it, ++a_it) {
-			const Bond& bond = *b_it;
-			const Atom& nbr_atom = *a_it;
-
-			if (!molgraph.containsBond(bond) || !molgraph.containsAtom(nbr_atom)) {
-				num_h_bonds += getOrder(bond);
-				continue;
-			}
-
-			if (getType(nbr_atom) == AtomType::H)
-				num_h_bonds++;
-
-			else {
-				num_heavy_bonds++;
-
-				if (getAromaticityFlag(bond))
-					num_arom_bonds++;
-
-				else {
-					switch (getOrder(bond)) {
-
-						case 1:
-							num_sgl_bonds++;
-							break;
-
-						case 2:
-							num_dbl_bonds++;
-							break;
-
-						case 3:
-							num_tpl_bonds++;
-							break;
-
-						default:
-							break;
-					}
-				}
-			}
-		}
-
-		area += getTPSAIncrement(atom_type, num_h_bonds, num_heavy_bonds, num_arom_bonds, 
-								 num_sgl_bonds, num_dbl_bonds, num_tpl_bonds,
-								 getFormalCharge(atom), 
-								 isInRingOfSize(atom, molgraph, 3));
-	}
+	for (std::size_t i = 0, num_atoms = molgraph.getNumAtoms(); i < num_atoms; i++)
+		if (atomTyper.hasAtomLabel(i))
+			area += atomTypeIncrements[atomTyper.getAtomLabel(i) - 1];
 
 	return area;
 }
@@ -277,4 +167,14 @@ double Chem::TPSACalculator::calculate(const MolecularGraph& molgraph)
 double Chem::TPSACalculator::getResult() const
 {
 	return area;
+}
+
+void Chem::TPSACalculator::init()
+{
+	if (atomTyper.getNumPatterns() == 0) {
+		boost::call_once(&initAtomTypePatterns, initAtomTypePatternsFlag);
+	
+		for (PatternTable::const_iterator p_it = atomTypePatterns.begin(), p_end = atomTypePatterns.end(); p_it != p_end; ++p_it)
+			atomTyper.addPattern(*p_it);
+	}
 }

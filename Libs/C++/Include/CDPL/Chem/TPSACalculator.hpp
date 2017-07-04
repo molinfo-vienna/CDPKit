@@ -35,6 +35,7 @@
 #define CDPL_CHEM_TPSACALCULATOR_HPP
 
 #include "CDPL/Chem/APIPrefix.hpp"
+#include "CDPL/Chem/PatternAtomTyper.hpp"
 
 
 namespace CDPL 
@@ -61,7 +62,7 @@ namespace CDPL
 			/**
 			 * \brief Constructs the \c %TPSACalculator instance.
 			 */
-			TPSACalculator(): area(0.0) {}
+			TPSACalculator();
 
 			/**
 			 * \brief Constructs the \c %TPSACalculator instance and calculates the \e TPSA of the molecular
@@ -87,11 +88,10 @@ namespace CDPL
 			double getResult() const;
 
 		private:
-			TPSACalculator(const TPSACalculator&);
+			void init();
 
-			TPSACalculator& operator=(const TPSACalculator&);
-
-			double area;
+			PatternAtomTyper atomTyper;
+			double           area;
 		};
 
 		/**

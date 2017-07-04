@@ -62,6 +62,7 @@ void CDPLPythonChem::exportAtomMatchConstraints()
         .def_readonly("SSSR_RING_SIZE", &Chem::AtomMatchConstraint::SSSR_RING_SIZE)    
         .def_readonly("SSSR_RING_COUNT", &Chem::AtomMatchConstraint::SSSR_RING_COUNT)    
         .def_readonly("TYPE", &Chem::AtomMatchConstraint::TYPE)    
+        .def_readonly("HYBRIDIZATION_STATE", &Chem::AtomMatchConstraint::HYBRIDIZATION_STATE)    
         .def_readonly("UNSATURATION", &Chem::AtomMatchConstraint::UNSATURATION)    
         .def_readonly("VALENCE", &Chem::AtomMatchConstraint::VALENCE);
 }

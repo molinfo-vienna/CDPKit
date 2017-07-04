@@ -124,6 +124,8 @@ namespace CDPLPythonChem
 	void exportSurfaceAtomExtractor();
 	void exportPathFingerprintGenerator();
 	void exportCircularFingerprintGenerator();
+	void exportPatternAtomTyper();
+	void exportSubstructureHistogramGenerator();
 
 	void exportMoleculeReader();
 	void exportMoleculeWriter();

@@ -109,9 +109,9 @@ BOOST_AUTO_TEST_CASE(QtObjectFactoryTest)
 
 //-----
 
-	comparePens(QPen(), QtObjectFactory::createQPen(Pen(Color::BLACK, 0.0, Pen::SOLID_LINE, Pen::SQUARE_CAP, Pen::BEVEL_JOIN)));
-	comparePens(QPen(Qt::DotLine), QtObjectFactory::createQPen(Pen(Color::BLACK, 0.0, Pen::DOT_LINE, Pen::SQUARE_CAP, Pen::BEVEL_JOIN)));
-	comparePens(QPen(Qt::red), QtObjectFactory::createQPen(Pen(Color::RED, 0.0, Pen::SOLID_LINE, Pen::SQUARE_CAP, Pen::BEVEL_JOIN)));
+	comparePens(QPen(), QtObjectFactory::createQPen(Pen(Color::BLACK, 1.0, Pen::SOLID_LINE, Pen::SQUARE_CAP, Pen::BEVEL_JOIN)));
+	comparePens(QPen(Qt::DotLine), QtObjectFactory::createQPen(Pen(Color::BLACK, 1.0, Pen::DOT_LINE, Pen::SQUARE_CAP, Pen::BEVEL_JOIN)));
+	comparePens(QPen(Qt::red), QtObjectFactory::createQPen(Pen(Color::RED, 1.0, Pen::SOLID_LINE, Pen::SQUARE_CAP, Pen::BEVEL_JOIN)));
 	comparePens(QPen(Qt::green, 2), 
 				QtObjectFactory::createQPen(Pen(Color::GREEN, 2.0, Pen::SOLID_LINE, Pen::SQUARE_CAP, Pen::BEVEL_JOIN)));
 	comparePens(QPen(Qt::blue, 3, Qt::DashDotLine), 

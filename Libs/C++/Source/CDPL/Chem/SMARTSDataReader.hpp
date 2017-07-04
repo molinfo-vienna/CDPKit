@@ -110,6 +110,7 @@ namespace CDPL
 			bool addRingSizeConstraint(bool, MatchConstraintList&);
 			bool addRingMembershipConstraint(bool, MatchConstraintList&);
 			bool addValenceConstraint(bool, MatchConstraintList&);
+			bool addUnsaturationConstraint(bool, MatchConstraintList&);
 			bool addExplicitDegreeConstraint(bool, MatchConstraintList&);
 			bool addConnectivityConstraint(bool, MatchConstraintList&);
 			bool addRingConnectivityConstraint(bool, MatchConstraintList&);
@@ -118,6 +119,7 @@ namespace CDPL
 			bool addIsotopeConstraint(char, bool, MatchConstraintList&);
 			bool addAtomTypeConstraint(unsigned int, bool, MatchConstraintList&);
 			bool addAtomTypeConstraint(unsigned int, bool, bool, MatchConstraintList&);
+			bool addHybridizationStateConstraint(bool, MatchConstraintList&);
 
 			void parseReactionAtomMappingID(Atom&);
 

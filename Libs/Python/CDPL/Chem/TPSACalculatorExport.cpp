@@ -30,6 +30,7 @@
 #include "CDPL/Chem/MolecularGraph.hpp"
 
 #include "Base/ObjectIdentityCheckVisitor.hpp"
+#include "Base/CopyAssOp.hpp"
 
 #include "ClassExports.hpp"
 
@@ -41,8 +42,11 @@ void CDPLPythonChem::exportTPSACalculator()
 
 	python::class_<Chem::TPSACalculator, boost::noncopyable>("TPSACalculator", python::no_init)
 		.def(python::init<>(python::arg("self")))
+		.def(python::init<const Chem::TPSACalculator&>((python::arg("self"), python::arg("calculator"))))
 		.def(python::init<const Chem::MolecularGraph&>((python::arg("self"), python::arg("molgraph"))))
 		.def(CDPLPythonBase::ObjectIdentityCheckVisitor<Chem::TPSACalculator>())	
+		.def("assign", CDPLPythonBase::copyAssOp(&Chem::TPSACalculator::operator=), 
+			 (python::arg("self"), python::arg("calculator")), python::return_self<>())
 		.def("calculate", &Chem::TPSACalculator::calculate, (python::arg("self"), python::arg("molgraph")))
 		.def("getResult", &Chem::TPSACalculator::getResult, python::arg("self"))
 		.add_property("result", &Chem::TPSACalculator::getResult);

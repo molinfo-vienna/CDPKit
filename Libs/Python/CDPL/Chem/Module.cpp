@@ -127,6 +127,8 @@ BOOST_PYTHON_MODULE(_chem)
 	exportSurfaceAtomExtractor();
 	exportPathFingerprintGenerator();
 	exportCircularFingerprintGenerator();
+	exportPatternAtomTyper();
+	exportSubstructureHistogramGenerator();
 
 	exportMoleculeReader();
 	exportMoleculeWriter();

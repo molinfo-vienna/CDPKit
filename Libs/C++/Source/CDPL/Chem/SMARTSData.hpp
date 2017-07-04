@@ -80,6 +80,8 @@ namespace CDPL
 
 				const char VALENCE_PREFIX           = 'v';
 
+				const char UNSATURATED_FLAG         = 'u';
+
 				const char CONNECTIVITY_PREFIX      = 'X';
 				const char RING_CONNECTIVITY_PREFIX = 'x';
 
@@ -89,6 +91,8 @@ namespace CDPL
 				const char ATOM_MAPPING_ID_PREFIX   = ':';
 
 				const char CHIRAL_CLASS_PREFIX      = '@';
+
+				const char HYBRIDIZATION_PREFIX     = '^';
 
 				const std::string TETRAHEDRAL_CHIRALITY   = "TH";
 				const std::string ALLENE_TYPE_CHIRALITY   = "AL";

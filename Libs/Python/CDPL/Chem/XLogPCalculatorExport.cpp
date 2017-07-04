@@ -30,6 +30,7 @@
 #include "CDPL/Chem/MolecularGraph.hpp"
 
 #include "Base/ObjectIdentityCheckVisitor.hpp"
+#include "Base/CopyAssOp.hpp"
 
 #include "ClassExports.hpp"
 
@@ -41,11 +42,15 @@ void CDPLPythonChem::exportXLogPCalculator()
 
 	python::class_<Chem::XLogPCalculator, boost::noncopyable>("XLogPCalculator", python::no_init)
 		.def(python::init<>(python::arg("self")))
+		.def(python::init<const Chem::XLogPCalculator&>((python::arg("self"), python::arg("calculator"))))
 		.def(python::init<const Chem::MolecularGraph&>((python::arg("self"), python::arg("molgraph"))))
 		.def(CDPLPythonBase::ObjectIdentityCheckVisitor<Chem::XLogPCalculator>())	
+		.def("assign", CDPLPythonBase::copyAssOp(&Chem::XLogPCalculator::operator=), 
+			 (python::arg("self"), python::arg("calculator")), python::return_self<>())
 		.def("calculate", &Chem::XLogPCalculator::calculate, (python::arg("self"), python::arg("molgraph")))
 		.def("getResult", &Chem::XLogPCalculator::getResult, python::arg("self"))
 		.def("getFeatureVector", &Chem::XLogPCalculator::getFeatureVector, python::arg("self"),
 			 python::return_internal_reference<>())
-		.add_property("result", &Chem::XLogPCalculator::getResult);
+		.add_property("result", &Chem::XLogPCalculator::getResult)
+		.def_readonly("FEATURE_VECTOR_SIZE", &Chem::XLogPCalculator::FEATURE_VECTOR_SIZE);
 }

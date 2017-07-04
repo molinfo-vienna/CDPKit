@@ -110,6 +110,9 @@
 \defgroup CDPL_CHEM_ATOM_CLASSIFICATION Pattern-based Atom Labeling
 \ingroup CDPL_CHEM
 
+\defgroup CDPL_CHEM_SUBSTRUCTURE_HISTOGRAM Substructure Frequency Analysis
+\ingroup CDPL_CHEM
+
 \defgroup CDPL_CHEM_REACTION_TRANSFORMATIONS Reaction Transformations
 \ingroup CDPL_CHEM
 

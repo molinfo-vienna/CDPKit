@@ -43,6 +43,9 @@ def process():
 	mol = Chem.BasicMolecule()
 	xlogp_calc = Chem.XLogPCalculator()
 
+    histo = Math.DVector()
+    histo.resize(Chem.XLogPCalculator.FEATURE_VECTOR_SIZE)
+
     Chem.setMultiConfImportParameter(sdf_reader, False)
 
 	while sdf_reader.read(mol):
@@ -58,6 +61,8 @@ def process():
 
 		xlogp_calc.calculate(mol)
 
+        histo += xlogp_calc.getFeatureVector()
+
 		mlr_model.addXYData(xlogp_calc.getFeatureVector(), exp_logp)
 		mol.clear()
 	
@@ -71,6 +76,11 @@ def process():
 	print ' Goodness of Fit:    ', mlr_model.getGoodnessOfFit()
 	print ' Standard Deviation: ', mlr_model.getStandardDeviation()
 	print ' Chi Square:         ', mlr_model.getChiSquare()
+
+#    i = 0
+#    for v in histo:
+#        print (str(i) + ':'), v
+#        i = i + 1
 
 	for coeff in mlr_model.getCoefficients():
 		coeff_os.write(str(coeff) + ',\n')

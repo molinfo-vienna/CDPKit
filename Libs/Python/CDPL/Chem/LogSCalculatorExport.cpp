@@ -30,6 +30,7 @@
 #include "CDPL/Chem/MolecularGraph.hpp"
 
 #include "Base/ObjectIdentityCheckVisitor.hpp"
+#include "Base/CopyAssOp.hpp"
 
 #include "ClassExports.hpp"
 
@@ -41,11 +42,15 @@ void CDPLPythonChem::exportLogSCalculator()
 
 	python::class_<Chem::LogSCalculator, boost::noncopyable>("LogSCalculator", python::no_init)
 		.def(python::init<>(python::arg("self")))
+		.def(python::init<const Chem::LogSCalculator&>((python::arg("self"), python::arg("calculator"))))
 		.def(python::init<const Chem::MolecularGraph&>((python::arg("self"), python::arg("molgraph"))))
 		.def(CDPLPythonBase::ObjectIdentityCheckVisitor<Chem::LogSCalculator>())
+		.def("assign", CDPLPythonBase::copyAssOp(&Chem::LogSCalculator::operator=), 
+			 (python::arg("self"), python::arg("calculator")), python::return_self<>())
 		.def("calculate", &Chem::LogSCalculator::calculate, (python::arg("self"), python::arg("molgraph")))
 		.def("getResult", &Chem::LogSCalculator::getResult, python::arg("self"))
 		.def("getFeatureVector", &Chem::LogSCalculator::getFeatureVector, python::arg("self"),
 			 python::return_internal_reference<>())
-		.add_property("result", &Chem::LogSCalculator::getResult);
+		.add_property("result", &Chem::LogSCalculator::getResult)
+		.def_readonly("FEATURE_VECTOR_SIZE", &Chem::LogSCalculator::FEATURE_VECTOR_SIZE);
 }

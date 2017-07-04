@@ -185,6 +185,7 @@ namespace CDPL
 				void writeTotalHCountExpression(const MatchConstraint&, std::string&) const;
 				void writeRingSizeExpression(const MatchConstraint&, std::string&) const;
 				void writeRingTopologyExpression(const MatchConstraint&, std::string&) const;
+				void writeUnsaturationFlagExpression(const MatchConstraint&, std::string&) const;
 				void writeRingMembershipExpression(const MatchConstraint&, std::string&) const;
 				void writeValenceExpression(const MatchConstraint&, std::string&) const;
 				void writeExplicitDegreeExpression(const MatchConstraint&, std::string&) const;
@@ -193,6 +194,7 @@ namespace CDPL
 				void writeChargeExpression(const MatchConstraint&, std::string&) const;
 				void writeChiralityExpression(const MatchConstraint&, std::string&) const;
 				void writeIsotopeExpression(const MatchConstraint&, std::string&) const;
+				void writeHybridizationStateExpression(const MatchConstraint&, std::string&) const;
 
 				void writeReactionAtomMappingID(std::ostream&, std::size_t) const;
 

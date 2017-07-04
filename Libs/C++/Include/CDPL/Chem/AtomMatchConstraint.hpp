@@ -149,6 +149,11 @@ namespace CDPL
 			 * \brief Specifies a constraint on the size of the rings (from the SSSR) the target atom is a member of.
 			 */
 			const unsigned int SSSR_RING_SIZE      = 19;
+
+			/**
+			 * \brief Specifies a constraint on the hybridization state of the target atom.
+			 */
+			const unsigned int HYBRIDIZATION_STATE = 20;
 		}
 
 		/**

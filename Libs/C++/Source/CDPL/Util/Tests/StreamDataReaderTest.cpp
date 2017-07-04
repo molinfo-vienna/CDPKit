@@ -93,23 +93,23 @@ BOOST_AUTO_TEST_CASE(StreamDataReaderTest)
 
 	BOOST_CHECK(reader1.getNumRecords() == 4);
 	
-	BOOST_CHECK(callback.calls == 4);
+	BOOST_CHECK(callback.calls == 5);
 
 	BOOST_CHECK(reader1.read(record));
 	BOOST_CHECK(record == "Record#1");
 
-	BOOST_CHECK(callback.calls == 5);
+	BOOST_CHECK(callback.calls == 6);
 
 	BOOST_CHECK(reader1.read(record));
 	BOOST_CHECK(record == "Record#2");
 
-	BOOST_CHECK(callback.calls == 6);
+	BOOST_CHECK(callback.calls == 7);
 
 	BOOST_CHECK(reader1.getRecordIndex() == 2);
 
 	BOOST_CHECK(reader1.skip());
 
-	BOOST_CHECK(callback.calls == 7);
+	BOOST_CHECK(callback.calls == 8);
 
 	BOOST_CHECK(reader1.getRecordIndex() == 3);
 
@@ -118,7 +118,7 @@ BOOST_AUTO_TEST_CASE(StreamDataReaderTest)
 	BOOST_CHECK(reader1.read(record));
 	BOOST_CHECK(record == "Record#4");
 
-	BOOST_CHECK(callback.calls == 8);
+	BOOST_CHECK(callback.calls == 9);
 
 	BOOST_CHECK(reader1.getRecordIndex() == 4);
 

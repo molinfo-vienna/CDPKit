@@ -120,6 +120,7 @@ SET(cdpl-chem_LIB_SRCS
     PathFingerprintGenerator.cpp
     CircularFingerprintGenerator.cpp
     PatternAtomTyper.cpp
+    SubstructureHistogramGenerator.cpp
 
     Entity3DPropertyFunctions.cpp
 

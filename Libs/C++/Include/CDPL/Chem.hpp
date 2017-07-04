@@ -278,6 +278,7 @@
 #include "CDPL/Chem/BCUTDescriptorCalculator.hpp"
 #include "CDPL/Chem/SurfaceAtomExtractor.hpp"
 #include "CDPL/Chem/PatternAtomTyper.hpp"
+#include "CDPL/Chem/SubstructureHistogramGenerator.hpp"
 #include "CDPL/Chem/PathFingerprintGenerator.hpp"
 #include "CDPL/Chem/CircularFingerprintGenerator.hpp"
 

@@ -26,23 +26,17 @@
 
 #include "StaticInit.hpp"
 
-#include <algorithm>
-#include <functional>
 #include <numeric>
-#include <string>
+#include <vector>
 
-#include <boost/bind.hpp>
 #include <boost/thread.hpp>
 
 #include "CDPL/Chem/XLogPCalculator.hpp"
-#include "CDPL/Chem/BasicMolecule.hpp"
-#include "CDPL/Chem/Atom.hpp"
-#include "CDPL/Chem/Bond.hpp"
 #include "CDPL/Chem/MolecularGraphFunctions.hpp"
 #include "CDPL/Chem/AtomFunctions.hpp"
-#include "CDPL/Chem/BondFunctions.hpp"
-#include "CDPL/Chem/AtomType.hpp"
 #include "CDPL/Chem/UtilityFunctions.hpp"
+#include "CDPL/Chem/AtomType.hpp"
+#include "CDPL/Chem/HybridizationState.hpp"
 #include "CDPL/Math/VectorIterator.hpp"
 
 
@@ -52,30 +46,34 @@ using namespace CDPL;
 namespace
 {
 
-	const std::size_t CORRECTION_FACTORS_BEGIN    = 90;
-	const std::size_t HYDROPHOBIC_C_INDEX         = 90;
-	const std::size_t INTERNAL_H_BOND_INDEX       = 91;
-	const std::size_t HALOGEN_13_PAIR_INDEX       = 92;
-	const std::size_t AROMATIC_N_14_PAIR_INDEX    = 93;
-	const std::size_t ORTHO_SP3_O_PAIR_INDEX      = 94;
-	const std::size_t PARA_DONOR_PAIR_INDEX       = 95;
-	const std::size_t SP2_O_15_PAIR_INDEX         = 96;
-	const std::size_t ALPHA_AMINO_ACID_INDEX      = 97;
-	const std::size_t SALICYLIC_ACID_INDEX        = 98;
-	const std::size_t P_AMINO_SULFONIC_ACID_INDEX = 99;
+	const std::size_t LOGP_OFFSET_INDEX           = 0;
+	const std::size_t HYDROPHOBIC_C_INDEX         = 91;
+	const std::size_t INTERNAL_H_BOND_INDEX       = 92;
+	const std::size_t HALOGEN_13_PAIR_INDEX       = 93;
+	const std::size_t AROMATIC_N_14_PAIR_INDEX    = 94;
+	const std::size_t ORTHO_SP3_O_PAIR_INDEX      = 95;
+	const std::size_t PARA_DONOR_PAIR_INDEX       = 96;
+	const std::size_t SP2_O_15_PAIR_INDEX         = 97;
+	const std::size_t ALPHA_AMINO_ACID_INDEX      = 98;
+	const std::size_t SALICYLIC_ACID_INDEX        = 99;
+	const std::size_t P_AMINO_SULFONIC_ACID_INDEX = 100;
 
-	const unsigned int UNKNOWN_ATOM_TYPE          = 100;	
-
+	const std::string INTERNAL_H_BOND_SMARTS1      = "[N,O;!H0]-[R]~[R]-,=[O]";
+	const std::string INTERNAL_H_BOND_SMARTS2      = "[N,O;!H0]-[R]~*~[!R]-,=[O]";
+	const std::string INTERNAL_H_BOND_SMARTS3      = "[N,O;!H0]-[!R]~*~[R]-,=[O]";
+	const std::string HALOGEN_13_PAIR_SMARTS       = "[F,Cl,I,Br]-*-[F,Cl,I,Br]";
 	const std::string AROMATIC_N_14_PAIR_SMARTS    = "n1:a:a:n:a:a1";
-	const std::string ORTHO_SP3_O_PAIR_SMARTS      = "O-c:c-O"; 
-	const std::string PARA_DONOR_PAIR_SMARTS       = "c1(-[#7,#8]):a:a:c(-[#7,#8]):a:a:1";
-	const std::string SP2_O_15_PAIR_SMARTS         = "O=C-*-C=O";
-	const std::string ALPHA_AMINO_ACID_SMARTS      = "[CX4](-N)-C(=O)-O";
-	const std::string SALICYLIC_ACID_SMARTS        = "c1:c(-C(=O)-O):c(-O):c:c:c:1";
+	const std::string ORTHO_SP3_O_PAIR_SMARTS      = "[*;!R]-[O;H0;!R]-c:c-[O;H0;!R]-[*;!R]"; 
+	const std::string PARA_DONOR_PAIR_SMARTS       = "c1(-[#7,#8;!H0]):a:a:c(-[#7,#8;!H0]):a:a:1";
+	const std::string SP2_O_15_PAIR_SMARTS         = "O=[C;!R]-[*;!R]-[C;!R]=O";
+	const std::string ALPHA_AMINO_ACID_SMARTS      = "[CX4](-[NH2])-C(=O)-[OH1]";
+	const std::string SALICYLIC_ACID_SMARTS        = "c1:c(-C(=O)-O):c(-[OH1]):c:c:c:1";
 	const std::string P_AMINO_SULFONIC_ACID_SMARTS = "S(=O)(=O)-c1:c:c:c:c:c:1-N";
 
-	boost::once_flag initSSSPatternsFlag = BOOST_ONCE_INIT;
-
+	Chem::Molecule::SharedPointer internalHBondQuery1;
+	Chem::Molecule::SharedPointer internalHBondQuery2;
+	Chem::Molecule::SharedPointer internalHBondQuery3;
+	Chem::Molecule::SharedPointer halogen13PairQuery;
 	Chem::Molecule::SharedPointer aromaticN14PairQuery;
 	Chem::Molecule::SharedPointer orthoSP3OPairQuery;
 	Chem::Molecule::SharedPointer paraDonorPairQuery;
@@ -84,8 +82,18 @@ namespace
 	Chem::Molecule::SharedPointer salicylicAcid;
 	Chem::Molecule::SharedPointer pAminoSulfonicAcidQuery;
 
+	typedef std::vector<Chem::MolecularGraph::SharedPointer> PatternTable;
+
+	PatternTable atomTypePatterns;
+
+	boost::once_flag initSSSPatternsFlag = BOOST_ONCE_INIT;
+
 	void initSSSPatterns()
 	{
+		internalHBondQuery1 = Chem::parseSMARTS(INTERNAL_H_BOND_SMARTS1);
+		internalHBondQuery2 = Chem::parseSMARTS(INTERNAL_H_BOND_SMARTS2);
+		internalHBondQuery3 = Chem::parseSMARTS(INTERNAL_H_BOND_SMARTS3);
+		halogen13PairQuery = Chem::parseSMARTS(HALOGEN_13_PAIR_SMARTS);
 		aromaticN14PairQuery = Chem::parseSMARTS(AROMATIC_N_14_PAIR_SMARTS);
 		orthoSP3OPairQuery = Chem::parseSMARTS(ORTHO_SP3_O_PAIR_SMARTS);
 		paraDonorPairQuery = Chem::parseSMARTS(PARA_DONOR_PAIR_SMARTS);
@@ -93,117 +101,237 @@ namespace
 		alphaAminoAcidQuery = Chem::parseSMARTS(ALPHA_AMINO_ACID_SMARTS);
 		salicylicAcid = Chem::parseSMARTS(SALICYLIC_ACID_SMARTS);
 		pAminoSulfonicAcidQuery = Chem::parseSMARTS(P_AMINO_SULFONIC_ACID_SMARTS);
+
+		atomTypePatterns.push_back(Chem::parseSMARTS("[CH3:1][!#1;!#7;!#8;!u;!a]")); // (π=0)
+		atomTypePatterns.push_back(Chem::parseSMARTS("[CH3:2][!#1;!#7;!#8;u,a]")); // (π=1)
+		atomTypePatterns.push_back(Chem::parseSMARTS("[CH3:3][#7,#8]"));
+		atomTypePatterns.push_back(Chem::parseSMARTS("[CH2:4]([!#1;!#7;!#8;!u;!a])[!#1;!#7;!#8;!u;!a]")); // (π=0)
+		atomTypePatterns.push_back(Chem::parseSMARTS("[CH2:5]([!#1;!#7;!#8;u,a])[!#1;!#7;!#8;!u;!a]")); // (π=1)
+		atomTypePatterns.push_back(Chem::parseSMARTS("[CH2:6]([!#1;!#7;!#8;u,a])[!#1;!#7;!#8;u,a]")); // (π=2)
+		atomTypePatterns.push_back(Chem::parseSMARTS("[CH2:7]([#7,#8;!u;!a])[#7,#8;!u;!a]")); // (π=0)
+		atomTypePatterns.push_back(Chem::parseSMARTS("[CH2:7]([!#1;!#7;!#8;!u;!a])[#7,#8;!u;!a]")); // (π=0)
+		atomTypePatterns.push_back(Chem::parseSMARTS("[CH2:8]([#7,#8;!u;!a])[#7,#8;u,a]")); // (π=1)
+		atomTypePatterns.push_back(Chem::parseSMARTS("[CH2:8]([!#1;!#7;!#8;u,a])[#7,#8;!u;!a]")); // (π=1)
+		atomTypePatterns.push_back(Chem::parseSMARTS("[CH2:8]([!#1;!#7;!#8;!u;!a])[#7,#8;u,a]")); // (π=1)
+		atomTypePatterns.push_back(Chem::parseSMARTS("[CH2:9]([#7,#8;u,a])[#7,#8;u,a]")); // (π=2)
+		atomTypePatterns.push_back(Chem::parseSMARTS("[CH2:9]([!#1;!#7;!#8;u,a])[#7,#8;u,a]")); // (π=2)
+		atomTypePatterns.push_back(Chem::parseSMARTS("[CH:10]([!#1;!#7;!#8;!u;!a])([!#1;!#7;!#8;!u;!a])[!#1;!#7;!#8;!u;!a]")); // (π=0)
+		atomTypePatterns.push_back(Chem::parseSMARTS("[CH:11]([!#1;!#7;!#8;u,a])([!#1;!#7;!#8;!u;!a])[!#1;!#7;!#8;!u;!a]")); // (π=1)
+		atomTypePatterns.push_back(Chem::parseSMARTS("[CH:12]([!#1;!#7;!#8;u,a])([!#1;!#7;!#8;u,a])[!#1;!#7;!#8]")); // (π≥2)
+		atomTypePatterns.push_back(Chem::parseSMARTS("[CH:13]([!#1;!#7;!#8;!u;!a])([!#1;!#7;!#8;!u;!a])[#7,#8;!u;!a]")); // (π=0)
+		atomTypePatterns.push_back(Chem::parseSMARTS("[CH:13]([!#1;!#7;!#8;!u;!a])([#7,#8;!u;!a])[#7,#8;!u;!a]")); // (π=0)
+		atomTypePatterns.push_back(Chem::parseSMARTS("[CH:13]([#7,#8;!u;!a])([#7,#8;!u;!a])[#7,#8;!u;!a]")); // (π=0)
+		atomTypePatterns.push_back(Chem::parseSMARTS("[CH:14]([!#1;!#7;!#8;!u;!a])([!#1;!#7;!#8;!u;!a])[#7,#8;u,a]")); // (π=1)
+		atomTypePatterns.push_back(Chem::parseSMARTS("[CH:14]([!#1;!#7;!#8;!u;!a])([!#1;!#7;!#8;u,a])[#7,#8;!u;!a]")); // (π=1)
+		atomTypePatterns.push_back(Chem::parseSMARTS("[CH:14]([!#1;!#7;!#8;u,a])([#7,#8;!u;!a])[#7,#8;!u;!a]")); // (π=1)
+		atomTypePatterns.push_back(Chem::parseSMARTS("[CH:14]([!#1;!#7;!#8;!u;!a])([#7,#8;!u;!a])[#7,#8;u,a]")); // (π=1)
+		atomTypePatterns.push_back(Chem::parseSMARTS("[CH:14]([#7,#8;!u;!a])([#7,#8;!u;!a])[#7,#8;u,a]")); // (π=1)
+		atomTypePatterns.push_back(Chem::parseSMARTS("[CH:15]([!#1;!#7;!#8;u,a])([!#1;!#7;!#8;u,a])[#7,#8]")); // (π≥2)
+		atomTypePatterns.push_back(Chem::parseSMARTS("[CH:15]([!#1;!#7;!#8;u,a])([!#1;!#7;!#8])[#7,#8;u,a]")); // (π≥2)
+		atomTypePatterns.push_back(Chem::parseSMARTS("[CH:15]([!#1;!#7;!#8])([#7,#8;u,a])[#7,#8;u,a]")); // (π≥2)
+		atomTypePatterns.push_back(Chem::parseSMARTS("[CH:15]([!#1;!#7;!#8;u,a])([#7,#8;u,a])[#7,#8]")); // (π≥2)
+		atomTypePatterns.push_back(Chem::parseSMARTS("[CH:15]([#7,#8;u,a])([#7,#8;u,a])[#7,#8]")); // (π≥2)
+		atomTypePatterns.push_back(Chem::parseSMARTS("[C:16]([!#1;!#7;!#8;!u;!a])([!#1;!#7;!#8;!u;!a])([!#1;!#7;!#8;!u;!a])[!#1;!#7;!#8;!u;!a]")); // (π=0)
+		atomTypePatterns.push_back(Chem::parseSMARTS("[C:17]([!#1;!#7;!#8;!u;!a])([!#1;!#7;!#8;!u;!a])([!#1;!#7;!#8;!u;!a])[!#1;!#7;!#8;u,a]")); // (π=1)
+		atomTypePatterns.push_back(Chem::parseSMARTS("[C:18]([!#1;!#7;!#8])([!#1;!#7;!#8])([!#1;!#7;!#8;u,a])[!#1;!#7;!#8;u,a]")); // (π≥2)
+		atomTypePatterns.push_back(Chem::parseSMARTS("[C:19]([!#1;!#7;!#8;!u;!a])([!#1;!#7;!#8;!u;!a])([!#1;!#7;!#8;!u;!a])[#7,#8;!u;!a]")); // (π=0)
+		atomTypePatterns.push_back(Chem::parseSMARTS("[C:19]([!#1;!#7;!#8;!u;!a])([!#1;!#7;!#8;!u;!a])([#7,#8;!u;!a])[#7,#8;!u;!a]")); // (π=0)
+		atomTypePatterns.push_back(Chem::parseSMARTS("[C:19]([!#1;!#7;!#8;!u;!a])([#7,#8;!u;!a])([#7,#8;!u;!a])[#7,#8;!u;!a]")); // (π=0)
+		atomTypePatterns.push_back(Chem::parseSMARTS("[C:19]([#7,#8;!u;!a])([#7,#8;!u;!a])([#7,#8;!u;!a])[#7,#8;!u;!a]")); // (π=0)
+		atomTypePatterns.push_back(Chem::parseSMARTS("[C:20]([!#1;!#7;!#8])([!#1;!#7;!#8])([!#1;!#7;!#8])[#7,#8;u,a]")); // (π>0)
+		atomTypePatterns.push_back(Chem::parseSMARTS("[C:20]([!#1;!#7;!#8])([!#1;!#7;!#8])([!#1;!#7;!#8;u,a])[#7,#8]")); // (π>0)
+		atomTypePatterns.push_back(Chem::parseSMARTS("[C:20]([!#1;!#7;!#8])([!#1;!#7;!#8])([#7,#8])[#7,#8;u,a]")); // (π>0)
+		atomTypePatterns.push_back(Chem::parseSMARTS("[C:20]([!#1;!#7;!#8])([!#1;!#7;!#8;u,a])([#7,#8])[#7,#8]")); // (π>0)
+		atomTypePatterns.push_back(Chem::parseSMARTS("[C:20]([!#1;!#7;!#8])([#7,#8])([#7,#8])[#7,#8;u,a]")); // (π>0)
+		atomTypePatterns.push_back(Chem::parseSMARTS("[C:20]([!#1;!#7;!#8;u,a])([#7,#8])([#7,#8])[#7,#8]")); // (π>0)
+		atomTypePatterns.push_back(Chem::parseSMARTS("[C:20]([#7,#8])([#7,#8])([#7,#8])[#7,#8;u,a]")); // (π>0)
+		atomTypePatterns.push_back(Chem::parseSMARTS("*=[CH2:21]"));
+		atomTypePatterns.push_back(Chem::parseSMARTS("*=[CH:22][!#1;!#7;!#8;!u;!a]")); // (π=0)
+		atomTypePatterns.push_back(Chem::parseSMARTS("*=[CH:23][!#1;!#7;!#8;u,a]")); // (π=1)
+		atomTypePatterns.push_back(Chem::parseSMARTS("*=[CH:24][#7,#8;!u;!a]")); // (π=0)
+		atomTypePatterns.push_back(Chem::parseSMARTS("*=[CH:25][#7,#8;u,a]")); // (π=1)
+		atomTypePatterns.push_back(Chem::parseSMARTS("*=[C:26]([!#1;!#7;!#8;!u;!a])[!#1;!#7;!#8;!u;!a]")); // (π=0)
+		atomTypePatterns.push_back(Chem::parseSMARTS("*=[C:27]([!#1;!#7;!#8])[!#1;!#7;!#8;u,a]")); // (π>0)
+		atomTypePatterns.push_back(Chem::parseSMARTS("*=[C:28]([!#1;!#7;!#8;!u;!a])[#7,#8;!u;!a]")); // (π=0)
+		atomTypePatterns.push_back(Chem::parseSMARTS("*=[C:29]([!#1;!#7;!#8;u,a])[#7,#8]")); // (π>0)
+		atomTypePatterns.push_back(Chem::parseSMARTS("*=[C:29]([!#1;!#7;!#8])[#7,#8;u,a]")); // (π>0)
+		atomTypePatterns.push_back(Chem::parseSMARTS("*=[C:30]([#7,#8;!u;!a])[#7,#8;!u;!a]")); // (π=0)
+		atomTypePatterns.push_back(Chem::parseSMARTS("*=[C:31]([#7,#8;u,a])[#7,#8]")); // (π>0)
+		atomTypePatterns.push_back(Chem::parseSMARTS("c:[cH:32]:c")); // arom
+		atomTypePatterns.push_back(Chem::parseSMARTS("*:[cH:33]:n"));
+		atomTypePatterns.push_back(Chem::parseSMARTS("c:[c:34](~[!#1;!#7;!#8]):c"));
+		atomTypePatterns.push_back(Chem::parseSMARTS("c:[c:35](~[#7,#8]):c"));
+		atomTypePatterns.push_back(Chem::parseSMARTS("*:[c:36](~[!#1;!#7;!#8]):n"));
+		atomTypePatterns.push_back(Chem::parseSMARTS("*:[c:37](~[#7,#8]):n"));
+		atomTypePatterns.push_back(Chem::parseSMARTS("[!#1;!#7;!#8]#[CH:38]"));
+		atomTypePatterns.push_back(Chem::parseSMARTS("*#[C:39]*"));
+		atomTypePatterns.push_back(Chem::parseSMARTS("*=[C:40]=*"));
+		atomTypePatterns.push_back(Chem::parseSMARTS("[!#1;!#7;!#8;!u;!a][NH2:41]")); // (π=0)
+		atomTypePatterns.push_back(Chem::parseSMARTS("[!#1;!#7;!#8;u,a][NH2:42]")); // (π=1)
+		atomTypePatterns.push_back(Chem::parseSMARTS("[#7,#8][NH2:43]"));
+		atomTypePatterns.push_back(Chem::parseSMARTS("[!#1;!#7;!#8;!u;!a][NH:44][!#1;!#7;!#8;!u;!a]")); // (π=0)
+		atomTypePatterns.push_back(Chem::parseSMARTS("[!#1;!#7;!#8;u,a][NH:45][!#1;!#7;!#8]")); // (π>0)
+		atomTypePatterns.push_back(Chem::parseSMARTS("[!#1;!#7;!#8;R;u,a][NH;R:46][!#1;!#7;!#8;R;u,a]")); // (ring)c
+		atomTypePatterns.push_back(Chem::parseSMARTS("*-[NH:47]-[#7,#8]"));
+		atomTypePatterns.push_back(Chem::parseSMARTS("*-[NH;R:48]-[#7,#8]")); // (ring)
+		atomTypePatterns.push_back(Chem::parseSMARTS("[N:49]([!#1;!#7;!#8;!u;!a])([!#1;!#7;!#8;!u;!a])[!#1;!#7;!#8;!u;!a]")); // (π=0)
+		atomTypePatterns.push_back(Chem::parseSMARTS("[N:50]([!#1;!#7;!#8])([!#1;!#7;!#8])[!#1;!#7;!#8;u,a]")); // (π>0)
+		atomTypePatterns.push_back(Chem::parseSMARTS("[N;R:51]([!#1;!#7;!#8])([!#1;!#7;!#8])[!#1;!#7;!#8]")); // (ring)
+		atomTypePatterns.push_back(Chem::parseSMARTS("[N:52]([!#1;!#7;!#8])([!#1;!#7;!#8])[#7,#8]"));
+		atomTypePatterns.push_back(Chem::parseSMARTS("[N:52]([!#1;!#7;!#8])([#7,#8])[#7,#8]"));
+		atomTypePatterns.push_back(Chem::parseSMARTS("[N:52]([#7,#8])([#7,#8])[#7,#8]"));
+		atomTypePatterns.push_back(Chem::parseSMARTS("[N;R:53]([!#1;!#7;!#8])([!#1;!#7;!#8])[#7,#8]")); // (ring)
+		atomTypePatterns.push_back(Chem::parseSMARTS("[N;R:53]([!#1;!#7;!#8])([#7,#8])[#7,#8]")); // (ring)
+		atomTypePatterns.push_back(Chem::parseSMARTS("[N;R:53]([#7,#8])([#7,#8])[#7,#8]")); // (ring)
+		atomTypePatterns.push_back(Chem::parseSMARTS("O=C([*,#1])-[NH2:54]"));  // amide
+		atomTypePatterns.push_back(Chem::parseSMARTS("O=C([*,#1])-[NH:55][!#1;!#7;!#8]"));
+		atomTypePatterns.push_back(Chem::parseSMARTS("O=C([*,#1])-[NH:56][#7,#8]"));
+		atomTypePatterns.push_back(Chem::parseSMARTS("O=C([*,#1])-[N:57]([!#1;!#7;!#8])[!#1;!#7;!#8]"));
+		atomTypePatterns.push_back(Chem::parseSMARTS("O=C(-[*,#1])-[N:58]([!#1;!#7;!#8])[#7,#8]"));
+		atomTypePatterns.push_back(Chem::parseSMARTS("C=[N:59]-[!#1;!#7;!#8;!u;!a]")); // (π=0)
+		atomTypePatterns.push_back(Chem::parseSMARTS("C=[N:60]-[!#1;!#7;!#8;u,a]")); // (π=1)
+		atomTypePatterns.push_back(Chem::parseSMARTS("C=[N:61]-[#7,#8;!u;!a]")); // (π=0)
+		atomTypePatterns.push_back(Chem::parseSMARTS("C=[N:62]-[#7,#8;u,a]")); // (π=1)
+		atomTypePatterns.push_back(Chem::parseSMARTS("N=[N:63]-[!#1;!#7;!#8]"));
+		atomTypePatterns.push_back(Chem::parseSMARTS("N=[N:64]-[#7,#8]"));
+		atomTypePatterns.push_back(Chem::parseSMARTS("*-[N:65]=O"));
+		atomTypePatterns.push_back(Chem::parseSMARTS("*-[N:66](=O)O"));
+		atomTypePatterns.push_back(Chem::parseSMARTS("*:[n;r6:67]:*"));
+		atomTypePatterns.push_back(Chem::parseSMARTS("*-C#[N:68]"));
+		atomTypePatterns.push_back(Chem::parseSMARTS("[!#1;!#7;!#8;!u;!a]-[OH:69]")); // (π=0)
+		atomTypePatterns.push_back(Chem::parseSMARTS("[!#1;!#7;!#8;u,a]-[OH:70]")); // (π=1)
+		atomTypePatterns.push_back(Chem::parseSMARTS("[#7,#8]-[OH:71]"));
+		atomTypePatterns.push_back(Chem::parseSMARTS("[!#1;!#7;!#8;!u;!a]-[O:72]-[!#1;!#7;!#8;!u;!a]")); // (π=0)
+		atomTypePatterns.push_back(Chem::parseSMARTS("[!#1;!#7;!#8;u,a]-[O:73]-[!#1;!#7;!#8]")); // (π>0)
+		atomTypePatterns.push_back(Chem::parseSMARTS("[!#1;!#7;!#8]-[O:74]-[#7,#8]"));
+		atomTypePatterns.push_back(Chem::parseSMARTS("*=[O:75]"));
+		atomTypePatterns.push_back(Chem::parseSMARTS("*-[SH:76]"));
+		atomTypePatterns.push_back(Chem::parseSMARTS("*-[S:77]-*"));
+		atomTypePatterns.push_back(Chem::parseSMARTS("*=[S:78]"));
+		atomTypePatterns.push_back(Chem::parseSMARTS("*-[S:79](=O)-*"));
+		atomTypePatterns.push_back(Chem::parseSMARTS("*-[S:80](=O)(=O)-*"));
+		atomTypePatterns.push_back(Chem::parseSMARTS("O=[P:81](-*)(-*)-*"));
+		atomTypePatterns.push_back(Chem::parseSMARTS("S=[P:82](-*)(-*)-*"));
+		atomTypePatterns.push_back(Chem::parseSMARTS("[*;!u;!a]-[F:83]")); // (π=0)
+		atomTypePatterns.push_back(Chem::parseSMARTS("[*;u,a]-[F:84]")); // (π=1)
+		atomTypePatterns.push_back(Chem::parseSMARTS("[*;!u;!a]-[Cl:85]")); // (π=0)
+		atomTypePatterns.push_back(Chem::parseSMARTS("[*;u,a]-[Cl:86]")); // (π=1)
+		atomTypePatterns.push_back(Chem::parseSMARTS("[*;!u;!a]-[Br:87]")); // (π=0)
+		atomTypePatterns.push_back(Chem::parseSMARTS("[*;u,a]-[Br:88]")); // (π=1)
+		atomTypePatterns.push_back(Chem::parseSMARTS("[*;!u;!a]-[I:89]")); // (π=0)
+		atomTypePatterns.push_back(Chem::parseSMARTS("[*;u,a]-[I:90]")); // (π=1)
 	}
 
 	const double REGRESSION_COEFFS[] = {
-		0.545219,
-		0.280277,
-		0.0480369,
-		0.358949,
-		0.0306245,
-		-0.109314,
-		-0.044685,
-		-0.148478,
-		-0.707041,
-		0.117624,
-		-0.200231,
-		-0.425323,
-		-0.158051,
-		-0.0326008,
-		-0.407558,
-		-0.249668,
-		-0.514204,
-		-0.234835,
-		-0.20768,
-		-0.491411,
-		0.435908,
-		0.414843,
-		0.141315,
-		0.0620506,
-		-0.106993,
-		-0.0514413,
-		0.00665378,
-		-0.0241289,
-		0.0256664,
-		0.119525,
-		-0.374676,
-		0.339993,
-		-0.162011,
-		0.276286,
-		-0.0443752,
-		-0.202019,
-		0.180987,
-		0.192405,
-		0.333721,
-		2.17745,
-		-0.595278,
-		-0.457035,
-		-0.753663,
-		-0.297418,
-		-0.107949,
-		0.306394,
-		0.270281,
-		0.587458,
-		-0.203809,
-		0.373824,
-		0.610824,
-		-0.808274,
-		0.042134,
-		-0.710239,
-		-0.267076,
-		-0.274135,
-		-0.158558,
-		-0.162949,
-		-0.0608809,
-		-0.30583,
-		0.859388,
-		0.0848922,
-		0.0970587,
-		-0.46587,
-		0.773001,
-		0.592069,
-		0.0241904,
-		-0.505819,
-		-0.617211,
-		-0.0511091,
-		-0.682031,
-		-0.0172158,
-		0.229049,
-		0.2495,
-		-0.340034,
-		0.474701,
-		0.32913,
-		-0.310581,
-		-1.28721,
-		-0.320445,
-		-0.94932,
-		0.909648,
-		0.339747,
-		0.26695,
-		0.51751,
-		0.690556,
-		0.85767,
-		0.879156,
-		1.0224,
-		1.13127,
-		0.196031,
-		0.194745,
-		0.162908,
-		0.483429,
-		-0.187861,
-		-0.30755,
-		0.366468,
-		-2.36494,
-		0.45759,
-		-0.204342
+	    0.137510724896,
+		0.50247901934,
+		0.211887964842,
+		-0.0485590557979,
+		0.339841940879,
+		0.0112326039648,
+		-0.134686341152,
+		-0.102511201454,
+		-0.225532991148,
+		-0.784789451695,
+		0.134437675015,
+		-0.187707955441,
+		-0.436710837842,
+		-0.138146103865,
+		-0.0625866525676,
+		-0.535469884673,
+		-0.215035748663,
+		-0.516633255611,
+		-0.254077542765,
+		-0.242380202792,
+		-0.546710814968,
+		0.352955379854,
+		0.439628753048,
+		0.131139323445,
+		0.00338546139024,
+		-0.235410050647,
+		-0.0501318027234,
+		0.0280340541,
+		0.0198873504162,
+		0.0307722109136,
+		0.153511312505,
+		-0.261705231262,
+		0.318986713068,
+		-0.0351919322658,
+		0.313193103478,
+		-0.0277230781657,
+		0.0217648313099,
+		0.409912868457,
+		0.139078627226,
+		0.327915105334,
+		2.30142242574,
+		-0.595923013795,
+		-0.517533628108,
+		-0.740331326025,
+		-0.215382726764,
+		-0.0942782453386,
+		0.25089460539,
+		0.530882779306,
+		1.43755283029e-15,
+		0.370574728567,
+		0.550398402697,
+		0.138251573481,
+		-0.821806485874,
+		-0.763276243532,
+		-0.753373679583,
+		-0.254537132819,
+		-0.352576565822,
+		-0.0529495298562,
+		-0.081240917974,
+		-0.0946376639222,
+		-0.461394586119,
+		1.00576102608,
+		0.0888075684303,
+		0.471933438143,
+		-1.15026046069,
+		0.802584504652,
+		0.5987915776,
+		-0.27042274493,
+		-0.513520401177,
+		-0.591257865271,
+		-0.0711214558842,
+		-0.762391343202,
+		0.0420906997366,
+		0.249101482818,
+		0.499786687899,
+		-0.372385120812,
+		0.32816347768,
+		0.262775286932,
+		-0.361411316955,
+		-1.25265319278,
+		-0.258045795453,
+		-0.737304444685,
+		1.05984642097,
+		0.292889829057,
+		0.187298909247,
+		0.470238123807,
+		0.626429798946,
+		0.772164989871,
+		0.792288864121,
+		0.955188203082,
+		1.08037149888,
+		0.206644430773,
+		0.108104710151,
+		0.193434817501,
+		0.570641084099,
+		-0.131685512999,
+		-0.38976907697,
+		0.424609609518,
+		-2.39055523804,
+		0.786266642436,
+		-0.0793728371136
 	};
 }
 
 
-Chem::XLogPCalculator::XLogPCalculator(): featureVector(FEATURE_VECTOR_SIZE), logP(0.0) 
-{
-	substructSearch.uniqueMappingsOnly(true);
-}
+const std::size_t Chem::XLogPCalculator::FEATURE_VECTOR_SIZE;
+
+
+Chem::XLogPCalculator::XLogPCalculator(): featureVector(FEATURE_VECTOR_SIZE), logP(0.0) {}
 
 Chem::XLogPCalculator::XLogPCalculator(const MolecularGraph& molgraph): featureVector(FEATURE_VECTOR_SIZE)
 {
@@ -213,22 +341,7 @@ Chem::XLogPCalculator::XLogPCalculator(const MolecularGraph& molgraph): featureV
 double Chem::XLogPCalculator::calculate(const MolecularGraph& molgraph)
 {
 	init(molgraph);
-
-	classifyAtoms();
-
-	countAtomTypes();
-	countHydrophicCarbons();
-	countInternalHBonds();
-	countHalogen13Pairs();
-	countAromaticNitrogen14Pairs();
-	countOrthoSP3OxygenPairs();
-	countParaDonorPairs();
-	countSP2Oxygen15Pairs();
-	countAlphaAminoAcidGroups();
-	countSalicylicAcidGroups();
-	countParaAminoSulfonicAcidGroups();
-	
-	calcLogP();
+	calcLogP(molgraph);
 
 	return logP;
 }
@@ -245,93 +358,67 @@ const Math::DVector& Chem::XLogPCalculator::getFeatureVector() const
 
 void Chem::XLogPCalculator::init(const MolecularGraph& molgraph)
 {
-	molGraph = &molgraph;
-	numAtoms = molgraph.getNumAtoms();
-
-	atomInfos.clear();
-	atomInfos.reserve(numAtoms);
-
-	MolecularGraph::ConstAtomIterator atoms_end = molgraph.getAtomsEnd();
-
-	for (MolecularGraph::ConstAtomIterator it = molgraph.getAtomsBegin(); it != atoms_end; ++it) {
-		const Atom& atom = *it;
-
-		atomInfos.push_back(AtomInfo(molgraph, *it, getAromaticityFlag(atom), getRingFlag(atom)));
-	}
-
 	featureVector.clear();
+	featureVector[LOGP_OFFSET_INDEX] = 1;
 
-	setUnsaturationFlags();
-}
+	if (corrSubstructHistoGen.getNumPatterns() == 0) {
+		boost::call_once(&initSSSPatterns, initSSSPatternsFlag);
 
-void Chem::XLogPCalculator::setUnsaturationFlags()
-{
-	MolecularGraph::ConstBondIterator bonds_end = molGraph->getBondsEnd();
+		corrSubstructHistoGen.addPattern(internalHBondQuery1, INTERNAL_H_BOND_INDEX);
+		corrSubstructHistoGen.addPattern(internalHBondQuery2, INTERNAL_H_BOND_INDEX);
+		corrSubstructHistoGen.addPattern(internalHBondQuery3, INTERNAL_H_BOND_INDEX);
+		corrSubstructHistoGen.addPattern(halogen13PairQuery, HALOGEN_13_PAIR_INDEX);
+		corrSubstructHistoGen.addPattern(aromaticN14PairQuery, AROMATIC_N_14_PAIR_INDEX);
+		corrSubstructHistoGen.addPattern(orthoSP3OPairQuery, ORTHO_SP3_O_PAIR_INDEX);
+		corrSubstructHistoGen.addPattern(paraDonorPairQuery, PARA_DONOR_PAIR_INDEX);
+		corrSubstructHistoGen.addPattern(sp2O15PairQuery, SP2_O_15_PAIR_INDEX);
+		corrSubstructHistoGen.addPattern(alphaAminoAcidQuery, ALPHA_AMINO_ACID_INDEX, 0, false);
+		corrSubstructHistoGen.addPattern(salicylicAcid, SALICYLIC_ACID_INDEX, 0, false);
+		corrSubstructHistoGen.addPattern(pAminoSulfonicAcidQuery, P_AMINO_SULFONIC_ACID_INDEX, 0, false);
 
-	for (MolecularGraph::ConstBondIterator it = molGraph->getBondsBegin(); it != bonds_end; ++it) {
-		const Bond& bond = *it;
-
-		if (!molGraph->containsAtom(bond.getBegin()) || !molGraph->containsAtom(bond.getEnd()))
-			continue;
-
-		std::size_t bond_order = getOrder(bond);
-
-		if (bond_order == 2 || bond_order == 3) {
-			atomInfos[molGraph->getAtomIndex(bond.getBegin())].setUnsaturationFlag();
-			atomInfos[molGraph->getAtomIndex(bond.getEnd())].setUnsaturationFlag();
-		}
+		for (PatternTable::const_iterator p_it = atomTypePatterns.begin(), p_end = atomTypePatterns.end(); p_it != p_end; ++p_it)
+			atomTyper.addPattern(*p_it);
 	}
 }
 
-void Chem::XLogPCalculator::classifyAtoms()
+void Chem::XLogPCalculator::countHydrophicCarbons(const MolecularGraph& molgraph)
 {
-	std::for_each(atomInfos.begin(), atomInfos.end(),
-				  boost::bind(&AtomInfo::classifyAtom, _1, boost::ref(atomInfos)));
-}
+	const Math::ULMatrix& dist_mtx = *getTopologicalDistanceMatrix(molgraph);
+	
+	for (std::size_t i = 0, num_atoms = molgraph.getNumAtoms(); i < num_atoms; i++) {
+		const Atom& atom = molgraph.getAtom(i);
 
-void Chem::XLogPCalculator::countAtomTypes()
-{
-	AtomInfoTable::const_iterator infos_end = atomInfos.end();
-
-	for (AtomInfoTable::const_iterator it = atomInfos.begin(); it != infos_end; ++it) {
-		unsigned int atom_type = it->getAtomType();
-
-		if (atom_type != UNKNOWN_ATOM_TYPE)
-			featureVector[atom_type]++;	
-	}	
-}
-
-void Chem::XLogPCalculator::countHydrophicCarbons()
-{
-	const Math::ULMatrix& dist_mtx = *getTopologicalDistanceMatrix(*molGraph);
-
-	for (std::size_t i = 0; i < numAtoms; i++) {
-		const AtomInfo& atom_info = atomInfos[i];
-
-		if (atom_info.getAtomicNo() != AtomType::C || atom_info.getAtomType() == UNKNOWN_ATOM_TYPE 
-			|| atom_info.getNumBonds() < 3 || atom_info.isAromaticAtom())
+		if (getType(atom) != AtomType::C || getAromaticityFlag(atom))
 			continue;
+
+		switch (getHybridizationState(atom)) {
+
+			case HybridizationState::SP2:
+				if (getRingFlag(atom))
+					continue;
+					
+			case HybridizationState::SP3:
+				break;
+
+			default:
+				continue;
+		}
 
 		bool hydrophobic = true;
 
-		for (std::size_t j = 0; j < numAtoms && hydrophobic; j++) {
+		for (std::size_t j = 0; j < num_atoms && hydrophobic; j++) {
 			if (i == j)
 				continue;
 
-			switch (atomInfos[j].getAtomicNo()) {
+			switch (getType(molgraph.getAtom(j))) {
 
-				case AtomType::N:
-				case AtomType::O:
-				case AtomType::S:
-				case AtomType::P:
-				case AtomType::F:
-				case AtomType::Cl:
-				case AtomType::Br:
-				case AtomType::I:
-					if (dist_mtx(i, j) < 4)
-						hydrophobic = false;
+				case AtomType::C:
+				case AtomType::H:
+					continue;
 
 				default:
+					if (dist_mtx(i, j) < 4)
+						hydrophobic = false;
 					continue;
 			}
 		}
@@ -341,951 +428,16 @@ void Chem::XLogPCalculator::countHydrophicCarbons()
 	}
 }
 
-void Chem::XLogPCalculator::countInternalHBonds()
-{	
-	const Math::ULMatrix& dist_mtx = *getTopologicalDistanceMatrix(*molGraph);
-
-	for (std::size_t i = 0; i < numAtoms; i++) {
-		const AtomInfo& atom_info1 = atomInfos[i];
-
-		if (!atom_info1.isHBondDonorAtom() || atom_info1.isRingAtom())
-			continue;
-
-		bool has_ring_nbr1 = atom_info1.hasRingNeighbor();
-
-		for (std::size_t j = 0; j < numAtoms; j++) {
-			if (i == j)
-				continue;
-
-			const AtomInfo& atom_info2 = atomInfos[j];
-
-			if (!atom_info2.isHBondAcceptorAtom() || atom_info2.isRingAtom())
-				continue;
-
-			bool has_ring_nbr2 = atom_info2.hasRingNeighbor();
-
-			if (has_ring_nbr1 && has_ring_nbr2) {
-				if (dist_mtx(i, j) == 3)
-					featureVector[INTERNAL_H_BOND_INDEX]++;
-
-			} else if (((!has_ring_nbr1 && has_ring_nbr2) || (has_ring_nbr1 && !has_ring_nbr2)) && dist_mtx(i, j) == 4)
-				featureVector[INTERNAL_H_BOND_INDEX]++;
-		}
-	}
-}
-
-void Chem::XLogPCalculator::countHalogen13Pairs()
+void Chem::XLogPCalculator::calcLogP(const MolecularGraph& molgraph)
 {
-	featureVector[HALOGEN_13_PAIR_INDEX] = std::accumulate(atomInfos.begin(), atomInfos.end(), 0,
-														   boost::bind(std::plus<std::size_t>(), _1, 
-																	   boost::bind(&AtomInfo::getNumHalogenPairs, _2)));
-}
+	corrSubstructHistoGen.generate(molgraph, featureVector);
+	atomTyper.execute(molgraph);
 
-void Chem::XLogPCalculator::countAromaticNitrogen14Pairs()
-{	
-	boost::call_once(&initSSSPatterns, initSSSPatternsFlag);
+	for (std::size_t i = 0, num_atoms = molgraph.getNumAtoms(); i < num_atoms; i++)
+		if (atomTyper.hasAtomLabel(i))
+			featureVector[atomTyper.getAtomLabel(i)]++;
 
-	substructSearch.setQuery(*aromaticN14PairQuery);
-	substructSearch.findMappings(*molGraph);
+	countHydrophicCarbons(molgraph);
 
-	featureVector[AROMATIC_N_14_PAIR_INDEX] = substructSearch.getNumMappings();
-}
-
-void Chem::XLogPCalculator::countOrthoSP3OxygenPairs()
-{
-	boost::call_once(&initSSSPatterns, initSSSPatternsFlag);
-
-	substructSearch.setQuery(*orthoSP3OPairQuery);
-	substructSearch.findMappings(*molGraph);
-
-	SubstructureSearch::ConstMappingIterator mappings_end = substructSearch.getMappingsEnd();
-
-	for (SubstructureSearch::ConstMappingIterator it = substructSearch.getMappingsBegin(); it != mappings_end; ++it) {
-		const AtomMapping& mapping = it->getAtomMapping();
-
-		const AtomInfo& atom_info1 = atomInfos[molGraph->getAtomIndex(*mapping[&orthoSP3OPairQuery->getAtom(0)])];
-		const AtomInfo& atom_info2 = atomInfos[molGraph->getAtomIndex(*mapping[&orthoSP3OPairQuery->getAtom(3)])];
-
-		assert(atom_info1.getAtomicNo() == AtomType::O);
-		assert(atom_info2.getAtomicNo() ==  AtomType::O);
-
-		if (!atom_info1.isHBondDonorAtom() && !atom_info2.isHBondDonorAtom())
-			featureVector[ORTHO_SP3_O_PAIR_INDEX]++;
-	}
-}
-
-void Chem::XLogPCalculator::countParaDonorPairs()
-{
-	boost::call_once(&initSSSPatterns, initSSSPatternsFlag);
-
-	substructSearch.setQuery(*paraDonorPairQuery);
-	substructSearch.findMappings(*molGraph);
-
-	SubstructureSearch::ConstMappingIterator mappings_end = substructSearch.getMappingsEnd();
-
-	for (SubstructureSearch::ConstMappingIterator it = substructSearch.getMappingsBegin(); it != mappings_end; ++it) {
-		const AtomMapping& mapping = it->getAtomMapping();
-	
-		const AtomInfo& atom_info1 = atomInfos[molGraph->getAtomIndex(*mapping[&paraDonorPairQuery->getAtom(1)])];
-		const AtomInfo& atom_info2 = atomInfos[molGraph->getAtomIndex(*mapping[&paraDonorPairQuery->getAtom(5)])];
-
-		assert(atom_info1.getAtomicNo() == AtomType::N || atom_info1.getAtomicNo() == AtomType::O);
-		assert(atom_info2.getAtomicNo() == AtomType::N || atom_info2.getAtomicNo() == AtomType::O);
-
-		if (atom_info1.isHBondDonorAtom() && atom_info2.isHBondDonorAtom())
-			featureVector[PARA_DONOR_PAIR_INDEX]++;
-	}
-}
-
-void Chem::XLogPCalculator::countSP2Oxygen15Pairs()
-{
-	boost::call_once(&initSSSPatterns, initSSSPatternsFlag);
-
-	substructSearch.setQuery(*sp2O15PairQuery);
-	substructSearch.findMappings(*molGraph);
-
-	SubstructureSearch::ConstMappingIterator mappings_end = substructSearch.getMappingsEnd();
-
-	for (SubstructureSearch::ConstMappingIterator it = substructSearch.getMappingsBegin(); it != mappings_end; ++it) {
-		const AtomMapping& mapping = it->getAtomMapping();
-
-		const AtomInfo& atom_info1 = atomInfos[molGraph->getAtomIndex(*mapping[&sp2O15PairQuery->getAtom(1)])];
-		const AtomInfo& atom_info2 = atomInfos[molGraph->getAtomIndex(*mapping[&sp2O15PairQuery->getAtom(2)])];
-		const AtomInfo& atom_info3 = atomInfos[molGraph->getAtomIndex(*mapping[&sp2O15PairQuery->getAtom(3)])];
-
-		assert(atom_info1.getAtomicNo() == AtomType::C);
-		assert(atom_info3.getAtomicNo() == AtomType::C);
-
-		if (atom_info1.isRingAtom() && atom_info2.isRingAtom() && atom_info3.isRingAtom())
-			continue;
-
-		featureVector[SP2_O_15_PAIR_INDEX]++;
-	}
-}
-
-void Chem::XLogPCalculator::countAlphaAminoAcidGroups()
-{
-	boost::call_once(&initSSSPatterns, initSSSPatternsFlag);
-
-	substructSearch.setQuery(*alphaAminoAcidQuery);
-	substructSearch.findMappings(*molGraph);
-
-	SubstructureSearch::ConstMappingIterator mappings_end = substructSearch.getMappingsEnd();
-
-	for (SubstructureSearch::ConstMappingIterator it = substructSearch.getMappingsBegin(); it != mappings_end; ++it) {
-		const AtomMapping& mapping = it->getAtomMapping();
-		const AtomInfo& atom_info = atomInfos[molGraph->getAtomIndex(*mapping[&alphaAminoAcidQuery->getAtom(1)])];
-
-		assert(atom_info.getAtomicNo() == AtomType::N);
-
-		switch (atom_info.getAtomType()) {
-
-			case 40:  // sp3 R-NH2 (pi = 0)
-			case 43:  // sp3 R-NH-R (pi = 0)
-			case 48:  // sp3 NR3 (pi = 0)
-			case 66:  // A...N...A
-				featureVector[ALPHA_AMINO_ACID_INDEX]++;
-
-			default:
-				continue;
-		}
-	}
-}
-
-void Chem::XLogPCalculator::countSalicylicAcidGroups()
-{
-	boost::call_once(&initSSSPatterns, initSSSPatternsFlag);
-
-	substructSearch.setQuery(*salicylicAcid);
-	substructSearch.findMappings(*molGraph);
-
-	featureVector[SALICYLIC_ACID_INDEX] = substructSearch.getNumMappings();
-}
-
-void Chem::XLogPCalculator::countParaAminoSulfonicAcidGroups()
-{
-	boost::call_once(&initSSSPatterns, initSSSPatternsFlag);
-
-	substructSearch.setQuery(*pAminoSulfonicAcidQuery);
-	substructSearch.findMappings(*molGraph);
-
-	featureVector[P_AMINO_SULFONIC_ACID_INDEX] = substructSearch.getNumMappings();
-}
-
-void Chem::XLogPCalculator::calcLogP()
-{
 	logP = std::inner_product(Math::vectorBegin(featureVector), Math::vectorEnd(featureVector), REGRESSION_COEFFS, 0.0);
-}
-
-
-Chem::XLogPCalculator::AtomInfo::AtomInfo(const MolecularGraph& molgraph, const Atom& atm, bool aromatic, bool in_ring): 
-	molGraph(&molgraph), atom(&atm), isAromatic(aromatic), inRing(in_ring), isUnsaturated(false), analyzed(false)
-{
-	atomicNo  = getType(atm);
-
-	isClassAAtom  = (atomicNo != AtomType::UNKNOWN && atomicNo <= AtomType::MAX_ATOMIC_NO 
-					 && atomicNo != AtomType::H);
-	isClassXAtom  = (atomicNo == AtomType::N || atomicNo == AtomType::O);
-	isClassRAtom  = (isClassAAtom && !isClassXAtom);
-	isHalogenAtom = (atomicNo == AtomType::F || atomicNo == AtomType::Cl 
-					 || atomicNo == AtomType::Br || atomicNo == AtomType::I);
-}
-
-void Chem::XLogPCalculator::AtomInfo::classifyAtom(AtomInfoTable& atom_infos)
-{
-	analyzeAtom(atom_infos);
-
-	switch (atomicNo) {
-
-		case AtomType::C:
-			atomType = classifyCAtom();
-			break;
-
-		case AtomType::N:
-			atomType = classifyNAtom();
-			break;
-
-		case AtomType::O:
-			atomType = classifyOAtom();
-			break;
-
-		case AtomType::S:
-			atomType = classifySAtom();
-			break;
-
-		case AtomType::P:
-			atomType = classifyPAtom();
-			break;
-			
-		case AtomType::F:
-			atomType = classifyFAtom();
-			break;
-
-		case AtomType::Cl:
-			atomType = classifyClAtom();
-			break;
-				
-		case AtomType::Br:
-			atomType = classifyBrAtom();
-			break;
-				
-		case AtomType::I:
-			atomType = classifyIAtom();
-			break;
-				
-		default:
-			atomType = UNKNOWN_ATOM_TYPE;
-	}
-}
-
-// Carbon Classification
-
-unsigned int Chem::XLogPCalculator::AtomInfo::classifyCAtom() const
-{
-	switch (bondCount) {
-
-		case 4:
-			if ((singleABondCount + hCount) == 4)
-				return classifySP3CAtom();
-
-			return UNKNOWN_ATOM_TYPE;
-
-		case 3:
-			if (doubleABondCount > 1)              // not more than 1 double bond allowed
-				return UNKNOWN_ATOM_TYPE;
-
-			return classifySP2CAtom();
-
-		case 2:
-			return classifySP1CAtom();
-
-		default:
-			return UNKNOWN_ATOM_TYPE;
-	}
-}
-
-unsigned int Chem::XLogPCalculator::AtomInfo::classifySP3CAtom() const
-{
-	if (hCount == 3) {
-		if (singleRBondCount == 1) {
-			if (piSystemCount == 0)               // CH3R (pi = 0)
-				return 0;
-
-			if (piSystemCount == 1)               // CH3R (pi = 1)
-				return 1;
-
-		} else if (singleXBondCount == 1)         // CH3X
-			return 2;
-
-	} else if (hCount == 2) {
-		if (singleRBondCount == 2) {
-			if (piSystemCount == 0)               // CH2R2 (pi = 0)
-				return 3;
-
-			if (piSystemCount == 1)               // CH2R2 (pi = 1)
-				return 4;
-
-			if (piSystemCount == 2)               // CH2R2 (pi = 2)
-				return 5;
-
-		} else if ((singleRBondCount + singleXBondCount) == 2) {
-			if (piSystemCount == 0)               // CH2RnX2-n (pi = 0)
-				return 6;
-
-			if (piSystemCount == 1)               // CH2RnX2-n (pi = 1)
-				return 7;
-
-			if (piSystemCount == 2)               // CH2RnX2-n (pi = 2)
-				return 8;
-		}
-
-	} else if (hCount == 1) {
-		if (singleRBondCount == 3) {
-			if (piSystemCount == 0)               // CHR3 (pi = 0)
-				return 9;
-
-			if (piSystemCount == 1)               // CHR3 (pi = 1)
-				return 10;
-
-			return 11;                            // CHR3 (pi >= 2)
-		}
-
-		if ((singleRBondCount + singleXBondCount) == 3) {
-			if (piSystemCount == 0)               // CHRnX3-n (pi = 0)
-				return 12;
-
-			if (piSystemCount == 1)               // CHRnX3-n (pi = 1)
-				return 13;
-
-			return 14;                            // CHRnX3-n (pi >= 2)
-		}
-
-	} else if (hCount == 0) {
-		if (singleRBondCount == 4) {
-			if (piSystemCount == 0)               // CR4 (pi = 0)
-				return 15;
-
-			if (piSystemCount == 1)               // CR4 (pi = 1)
-				return 16;
-
-			return 17;                            // CR4 (pi >= 2)
-		}
-
-		if ((singleRBondCount + singleXBondCount) == 4) {
-			if (piSystemCount == 0)               // CRnX4-n (pi = 0)
-				return 18;
-
-			return 19;                            // CRnX4-n (pi > 0)
-		}
-	}
-
-	return UNKNOWN_ATOM_TYPE;
-}
-
-unsigned int Chem::XLogPCalculator::AtomInfo::classifySP2CAtom() const
-{
-	if (aromCBondCount >= 2) {
-		if (hCount == 1)                                                          // C...C(H)...C
-			return 31;
-
-		if ((singleRBondCount + doubleRBondCount) == 3)                           // C...C(R)...C
-			return 33;
-
-		if ((singleXBondCount + doubleXBondCount) == 1)                           // C...C(X)...C
-			return 34;
-
-	} else if (aromNBondCount >= 1) {
-		if (hCount == 1)                                                          // A...C(H)...N
-			return 32;
-
-		if ((aromXBondCount == 2 && (singleRBondCount + doubleRBondCount) == 1 )
-			|| (aromXBondCount == 1 && (singleRBondCount + doubleRBondCount) == 2)) // A...C(R)...N
-			return 35;
-
-		if ((aromXBondCount == 2 && (singleXBondCount + doubleXBondCount) == 3)
-			|| (aromXBondCount == 1 && (singleXBondCount + doubleXBondCount) == 2)) // A...C(X)...N
-			return 36;
-	}
-
-	if (doubleABondCount == 1 && (singleABondCount + hCount) == 2) {
-		if (hCount == 2)                                                          // A=CH2
-			return 20;                            
-
-		if (hCount == 1) {
-			if (singleRBondCount == 1) {
-				if (piSystemCount == 0)                                           // A=CHR (pi = 0)
-					return 21;
-
-				if (piSystemCount == 1)                                           // A=CHR (pi = 1)
-					return 22;
-
-			} else if (singleXBondCount == 1) {
-				if (piSystemCount == 0)                                           // A=CHX (pi = 0)
-					return 23;
-
-				if (piSystemCount == 1)                                           // A=CHX (pi = 1)
-					return 24;
-			}
-
-		} else if (hCount == 0) { 
-			if (singleRBondCount == 2) {
-				if (piSystemCount == 0)                                           // A=CR2 (pi = 0)
-					return 25;
-
-				return 26;                                                        // A=CR2 (pi > 0)
-			}
-
-			if (singleRBondCount == 1 && singleXBondCount == 1) {
-				if (piSystemCount == 0)                                           // A=CRX (pi = 0)
-					return 27;
-
-				return 28;                                                        // A=CRX (pi > 0)
-			}
-
-			if (singleXBondCount == 2) {
-				if (piSystemCount == 0)                                           // A=CX2 (pi = 0)
-					return 29;
-
-				return 30;                                                        // A=CX2 (pi > 0)
-			}
-		}
-	}
-
-	return UNKNOWN_ATOM_TYPE;
-}
-
-unsigned int Chem::XLogPCalculator::AtomInfo::classifySP1CAtom() const
-{
-	if (tripleRBondCount == 1 && hCount == 1)           // R#CH
-		return 37;
-
-	if (tripleABondCount == 1 && singleABondCount == 1) // A#C-A
-		return 38;
-
-	if (doubleABondCount == 2)                          // A=C=A
-		return 39;
-
-	return UNKNOWN_ATOM_TYPE;
-}
-
-// Nitrogen Classification
-
-unsigned int Chem::XLogPCalculator::AtomInfo::classifyNAtom() const
-{
-	switch (bondCount) {
-
-		case 3:
-			if ((singleABondCount + hCount) == 3) {
-				if (hasAmideCNbr)
-					return classifyAmideNAtom();
-
-				return classifySP3NAtom();
-			}
-
-			if ((singleOBondCount >= 1 && doubleOBondCount == 1 && singleABondCount == 2)
-				|| (doubleOBondCount == 2 && singleABondCount == 1))
-				return 65;                 // sp2: -NO2
-
-			return UNKNOWN_ATOM_TYPE;
-
-		case 2:
-			if (aromCBondCount == 2)       // sp2: A...N...A
-				return 66;
-
-			return classifySP2NAtom();
-
-		case 1:
-			if (tripleCBondCount == 1)     // sp1: -C#N
-				return 67;
-
-		default:
-			return UNKNOWN_ATOM_TYPE;
-	}
-}
-
-unsigned int Chem::XLogPCalculator::AtomInfo::classifySP3NAtom() const
-{
-	if (hCount == 2) {
-		if (singleRBondCount == 1) {
-			if (piSystemCount == 0)           // R-NH2 (pi = 0)
-				return 40;
-
-			if (piSystemCount == 1)           // R-NH2 (pi = 1)
-				return 41;
-
-		} else if (singleXBondCount == 1)     // X-NH2
-			return 42;
-
-	} else if (hCount == 1) {
-		if (singleRBondCount == 2) {
-			if (piSystemCount == 0)           // R-NH-R (pi = 0)
-				return 43;
-
-			if (piSystemCount == 2 && inRing) // R-NH-R (conj. ring)
-				return 45;           
-
-			return 44;                        // R-NH-R (pi > 0)
-		}
-
-		if (singleXBondCount >= 1) {
-			if (piSystemCount != 2 || !inRing)
-				return 46;                    // A-NH-X
-
-			return 47;                        // A-NH-X (conj. ring)
-		}
-
-	} else if (hCount == 0) {
-		if (singleRBondCount == 3) {
-			if (piSystemCount == 0)           // NR3 (pi = 0)
-				return 48;
-
-			if (piSystemCount > 1 && inRing)  // NR3 (conj. ring)
-				return 50;            
-
-			return 49;                        // NR3 (pi > 0)
-		}
-
-		if ((singleXBondCount + singleRBondCount) == 3) {
-			if (piSystemCount < 2 || !inRing)
-				return 51;                    // NRnX3-n
-
-			return 52;                        // NRnX3-n (conj. ring)
-		}
-	}
-
-	return UNKNOWN_ATOM_TYPE;
-}
-
-unsigned int Chem::XLogPCalculator::AtomInfo::classifySP2NAtom() const
-{
-	if (hCount > 0 || doubleABondCount != 1)
-		return UNKNOWN_ATOM_TYPE;
-
-	if (doubleCBondCount == 1) {
-		if (singleRBondCount == 1) {
-			if (piSystemCount == 0)                             // C=N-R (pi = 0)
-				return 58;
-
-			if (piSystemCount == 1)                             // C=N-R (pi = 1)
-				return 59;
-
-		} else if (singleXBondCount == 1) {
-			if (piSystemCount == 0)                             // C=N-X (pi = 0)
-				return 60;
-
-			if (piSystemCount == 1)                             // C=N-X (pi = 1)
-				return 61;
-		}
-
-	} else if (doubleNBondCount == 1) {
-		if (singleRBondCount == 1)                              // N=N-R
-			return 62;
-
-		if (singleXBondCount == 1)                              // N=N-X
-			return 63;
-
-	} else if (doubleOBondCount == 1 && singleABondCount == 1)  // A-N=O
-		return 64;
-
-	return UNKNOWN_ATOM_TYPE;
-}
-
-unsigned int Chem::XLogPCalculator::AtomInfo::classifyAmideNAtom() const
-{
-	if (hCount == 2)                                        // -NH2
-		return 53;
-
-	if (hCount == 1) {
-		if (singleRBondCount == 2)                          // -NHR
-			return 54;           
-
-		if (singleRBondCount == 1 && singleXBondCount == 1) // -NHX
-			return 55;
-
-	} else if (hCount == 0) {
-		if (singleRBondCount == 3)                          // -NR2
-			return 56;
-
-		if (singleRBondCount == 2 && singleXBondCount == 1) // -NRX
-			return 57;
-	}
-
-	return UNKNOWN_ATOM_TYPE;
-}
-
-// Oxygen Classification
-
-unsigned int Chem::XLogPCalculator::AtomInfo::classifyOAtom() const
-{
-	if (bondCount == 2) {
-		if ((singleABondCount + hCount) == 2) 
-			return classifySP3OAtom();
-
-	} else if (bondCount == 1 && doubleABondCount == 1)     // sp2: A=O
-		return 74;
-
-	return UNKNOWN_ATOM_TYPE;
-}
-
-unsigned int Chem::XLogPCalculator::AtomInfo::classifySP3OAtom() const
-{
-	if (hCount == 1) {
-		if (singleRBondCount == 1) {
-			if (piSystemCount == 0)                         // R-OH (pi = 0)
-				return 68;
- 
-			if (piSystemCount == 1)                         // R-OH (pi = 1)
-				return 69;
-
-		} else if (singleXBondCount == 1)                   // X-OH
-			return 70;
-
-	} else if (hCount == 0) {
-		if (singleRBondCount == 2) {
-			if (piSystemCount == 0)                         // R-O-R (pi = 0)
-				return 71;
-
-			return 72;                                      // R-O-R (pi > 0)
-		}
-
-		if (singleRBondCount == 1 && singleXBondCount == 1) // R-O-X
-			return 73;
-	}
-
-	return UNKNOWN_ATOM_TYPE;
-}
-
-// Sulfur Classification
-
-unsigned int Chem::XLogPCalculator::AtomInfo::classifySAtom() const
-{
-	switch (bondCount) {
-
-		case 4:
-			if (singleABondCount == 2 && doubleOBondCount == 2)  // A-SO2-A
-				return 79;       
-
-			return UNKNOWN_ATOM_TYPE;
-
-		case 3:
-			if (singleABondCount == 2 && doubleOBondCount == 1)  // A-SO-A
-				return 78;       
-
-			return UNKNOWN_ATOM_TYPE;
-
-		case 2:
-			if ((singleABondCount + hCount) == 2) {
-				if (hCount == 1)                                 // sp3: A-SH
-					return 75;     
-
-				if (hCount == 0)                                 // sp3: A-S-A
-					return 76; 
-			}
-
-			return UNKNOWN_ATOM_TYPE;
-
-		case 1:
-			if (doubleABondCount == 1)                           // sp2: A=S
-				return 77;      
-
-		default:
-			return UNKNOWN_ATOM_TYPE;
-	}
-}
-
-// Phosphorus Classification
-
-unsigned int Chem::XLogPCalculator::AtomInfo::classifyPAtom() const
-{
-	if (bondCount == 4 && singleABondCount == 3) {
-		if (doubleOBondCount == 1)  // O=PA3
-			return 80;
-
-		if (doubleSBondCount == 1)  // S=PA3
-			return 81;
-	}
-
-	return UNKNOWN_ATOM_TYPE;
-}
-
-// Fluorine Classification
-
-unsigned int Chem::XLogPCalculator::AtomInfo::classifyFAtom() const
-{
-	if (bondCount == 1) {
-		if (piSystemCount == 0)   // -F (pi = 0)
-			return 82;
-
-		if (piSystemCount == 1)   // -F (pi = 1)
-			return 83;
-	}
-
-	return UNKNOWN_ATOM_TYPE;
-}
-
-// Chlorine Classification
-
-unsigned int Chem::XLogPCalculator::AtomInfo::classifyClAtom() const
-{
-	if (bondCount == 1) {
-		if (piSystemCount == 0)   // -Cl (pi = 0)
-			return 84;
-
-		if (piSystemCount == 1)   // -Cl (pi = 1)
-			return 85;
-	}
-
-	return UNKNOWN_ATOM_TYPE;
-}
-
-// Bromine Classification
-
-unsigned int Chem::XLogPCalculator::AtomInfo::classifyBrAtom() const
-{
-	if (bondCount == 1) {
-		if (piSystemCount == 0)   // -Br (pi = 0)
-			return 86;
-
-		if (piSystemCount == 1)   // -Br (pi = 1)
-			return 87;
-	}
-
-	return UNKNOWN_ATOM_TYPE;
-}
-
-// Iodine Classification
-
-unsigned int Chem::XLogPCalculator::AtomInfo::classifyIAtom() const
-{
-	if (bondCount == 1) {
-		if (piSystemCount == 0)   // -I (pi = 0)
-			return 88;
-
-		if (piSystemCount == 1)   // -I (pi = 1)
-			return 89;
-	}
-
-	return UNKNOWN_ATOM_TYPE;
-}
-
-void Chem::XLogPCalculator::AtomInfo::analyzeAtom(AtomInfoTable& atom_infos)
-{
-	if (analyzed)
-		return;
-
-	hCount           = getImplicitHydrogenCount(*atom);
-	bondCount        = hCount;
-	halogenCount     = 0;
-	piSystemCount    = 0;
-	singleRBondCount = 0;
-	singleXBondCount = 0;
-	singleOBondCount = 0;
-	doubleRBondCount = 0;
-	doubleXBondCount = 0;
-	doubleCBondCount = 0; 
-	doubleNBondCount = 0; 
-	doubleOBondCount = 0; 
-	doubleSBondCount = 0; 
-	tripleABondCount = 0; 
-	tripleCBondCount = 0; 
-	tripleRBondCount = 0; 
-	aromABondCount   = 0; 
-	aromXBondCount   = 0; 
-	aromCBondCount   = 0; 
-	aromNBondCount   = 0; 
-	hasAmideCNbr     = false;
-	hasRingNbr       = false;
-
-	std::size_t single_c_bnd_cnt = 0;
-	std::size_t single_n_bnd_cnt = 0;
-
-	Atom::ConstAtomIterator atoms_end = atom->getAtomsEnd();
-	Atom::ConstBondIterator b_it = atom->getBondsBegin();
-	
-	for (Atom::ConstAtomIterator a_it = atom->getAtomsBegin(); a_it != atoms_end; ++a_it, ++b_it) {
-		const Bond& bond = *b_it;
-
-		if (!molGraph->containsAtom(*a_it) || !molGraph->containsBond(bond))
-			continue;
-
-		std::size_t nbr_atom_idx = molGraph->getAtomIndex(*a_it);
-		AtomInfo& nbr_atom_info = atom_infos[nbr_atom_idx];
-
-		hasRingNbr |= nbr_atom_info.inRing;
-
-		switch (getOrder(bond)) {
-
-			case 1:
-				if (nbr_atom_info.isClassXAtom) {
-					singleXBondCount++;
-		
-					if (nbr_atom_info.atomicNo == AtomType::O)
-						singleOBondCount++;
-
-					else 
-						single_n_bnd_cnt++;
-
-				} else if (nbr_atom_info.isClassRAtom) {
-					singleRBondCount++;
-
-					if (nbr_atom_info.atomicNo == AtomType::C) {
-						if (atomicNo == AtomType::N)
-							hasAmideCNbr |= nbr_atom_info.isAmideCarbon(atom_infos);
-							
-						single_c_bnd_cnt++;
-
-					} else if (nbr_atom_info.isHalogenAtom) 
-						halogenCount++;
-
-				} else if (nbr_atom_info.atomicNo == AtomType::H)
-					hCount++;
-
-				if (nbr_atom_info.isAromatic || nbr_atom_info.isUnsaturated)
-					piSystemCount++;
-
-				break;
-
-			case 2:
-				if (nbr_atom_info.isClassXAtom) {
-					doubleXBondCount++;
-
-					if (nbr_atom_info.atomicNo == AtomType::O)
-						doubleOBondCount++;
-					
-					else 
-						doubleNBondCount++;
-
-				} else if (nbr_atom_info.isClassRAtom) {
-					doubleRBondCount++;
-
-					if (nbr_atom_info.atomicNo == AtomType::S)
-						doubleSBondCount++;
-
-					else if (nbr_atom_info.atomicNo == AtomType::C)
-						doubleCBondCount++;
-				}
-
-				break;
-
-			case 3:
-				if (nbr_atom_info.isClassRAtom) { 
-					tripleRBondCount++;
-					tripleABondCount++;
-
-					if (nbr_atom_info.atomicNo == AtomType::C)
-						tripleCBondCount++;
-
-				} else if (nbr_atom_info.isClassAAtom)
-					tripleABondCount++;
-				
-				break;
-
-			default:
-				break;
-		}
-
-		if (getAromaticityFlag(bond)) {
-			if (nbr_atom_info.isClassXAtom) {
-				aromXBondCount++;
-				aromABondCount++;
-
-				if (nbr_atom_info.atomicNo == AtomType::N) 
-					aromNBondCount++; 
-
-			} else if (nbr_atom_info.isClassAAtom) {
-				aromABondCount++;
-
-				if (nbr_atom_info.atomicNo == AtomType::C) 
-					aromCBondCount++; 	
-			}
-		}
-
-		bondCount++;
-	}
-
-	singleABondCount = singleRBondCount + singleXBondCount;
-	doubleABondCount = doubleRBondCount + doubleXBondCount;
-
-	isAmideCAtom = (atomicNo == AtomType::C && bondCount == 3 && doubleOBondCount == 1 
-					&& single_n_bnd_cnt >= 1);
-
-	if (atomicNo == AtomType::N) {
-		isDonor = (bondCount == 3 && singleABondCount < 3 && hCount > 0);
-		isAcceptor = (bondCount == 1 && tripleCBondCount == 1);
-
-	} else if (atomicNo == AtomType::O) {
-		isDonor = (bondCount == 2 && singleABondCount == 1 && hCount == 1);
-		isAcceptor = (isDonor || (bondCount == 1 && doubleABondCount == 1));
-
-	} else {
-		isDonor = false;
-		isAcceptor = false;
-	}
-
-	analyzed = true;
-}
-
-unsigned int Chem::XLogPCalculator::AtomInfo::getAtomType() const
-{
-	return atomType;
-}
-
-std::size_t Chem::XLogPCalculator::AtomInfo::getNumBonds() const
-{
-	return bondCount;
-}
-
-std::size_t Chem::XLogPCalculator::AtomInfo::getNumHalogenPairs() const
-{
-	if (halogenCount <= 1 || isUnsaturated)
-		return 0;
-
-	return ((halogenCount * (halogenCount - 1)) / 2);
-}
-
-unsigned int Chem::XLogPCalculator::AtomInfo::getAtomicNo() const
-{
-	return atomicNo;
-}
-
-void Chem::XLogPCalculator::AtomInfo::setUnsaturationFlag()
-{
-	isUnsaturated = true;
-}
-
-bool Chem::XLogPCalculator::AtomInfo::getUnsaturationFlag() const
-{
-	return isUnsaturated;
-}
-
-bool Chem::XLogPCalculator::AtomInfo::isRingAtom() const
-{
-	return inRing;
-}
-
-bool Chem::XLogPCalculator::AtomInfo::isAromaticAtom() const
-{
-	return isAromatic;
-}
-
-bool Chem::XLogPCalculator::AtomInfo::isHBondDonorAtom() const
-{
-	return isDonor;
-}
-
-bool Chem::XLogPCalculator::AtomInfo::isHBondAcceptorAtom() const
-{
-	return isAcceptor;
-}
-
-bool Chem::XLogPCalculator::AtomInfo::hasRingNeighbor() const
-{
-	return hasRingNbr;
-}
-
-bool Chem::XLogPCalculator::AtomInfo::isAmideCarbon(AtomInfoTable& atom_infos)
-{
-	analyzeAtom(atom_infos);
-
-	return isAmideCAtom;
 }

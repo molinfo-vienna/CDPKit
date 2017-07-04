@@ -31,7 +31,7 @@ import CDPL.Math as Math
 
 def process():
     if len(sys.argv) < 4:
-	    print >> sys.stderr, 'Usage:', sys.argv[0], 'training-set.sdf logP-data regression-coeff-file'
+	    print >> sys.stderr, 'Usage:', sys.argv[0], 'training-set.sdf logS-data regression-coeff-file'
         sys.exit(2)
 
 	struct_is = Base.FileIOStream(sys.argv[1], 'r')
@@ -42,6 +42,9 @@ def process():
 	sdf_reader = Chem.SDFMoleculeReader(struct_is)
 	mol = Chem.BasicMolecule()
 	logs_calc = Chem.LogSCalculator()
+
+    histo = Math.DVector()
+    histo.resize(Chem.LogSCalculator.FEATURE_VECTOR_SIZE)
 
     Chem.setMultiConfImportParameter(sdf_reader, False)
 
@@ -58,6 +61,8 @@ def process():
 
 		logs_calc.calculate(mol)
 
+        histo += logs_calc.getFeatureVector()
+
 		mlr_model.addXYData(logs_calc.getFeatureVector(), exp_logs)
 		mol.clear()
 	
@@ -71,6 +76,11 @@ def process():
 	print ' Goodness of Fit:    ', mlr_model.getGoodnessOfFit()
 	print ' Standard Deviation: ', mlr_model.getStandardDeviation()
 	print ' Chi Square:         ', mlr_model.getChiSquare()
+
+#    i = 0
+#    for v in histo:
+#        print (str(i) + ':'), v
+#        i = i + 1
 
 	for coeff in mlr_model.getCoefficients():
 		coeff_os.write(str(coeff) + ',\n')

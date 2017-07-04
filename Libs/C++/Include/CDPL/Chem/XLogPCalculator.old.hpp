@@ -35,11 +35,12 @@
 #define CDPL_CHEM_XLOGPCALCULATOR_HPP
 
 #include <cstddef>
+#include <vector>
 
 #include "CDPL/Chem/APIPrefix.hpp"
 #include "CDPL/Chem/SubstructureHistogramGenerator.hpp"
-#include "CDPL/Chem/PatternAtomTyper.hpp"
 #include "CDPL/Math/Vector.hpp"
+#include "CDPL/Util/BitSet.hpp"
 
 
 namespace CDPL 
@@ -49,6 +50,7 @@ namespace CDPL
 	{
 
 		class MolecularGraph;
+		class Atom;
 
 		/**
 		 * \addtogroup CDPL_CHEM_LOGP
@@ -115,10 +117,103 @@ namespace CDPL
 			void countHydrophicCarbons(const MolecularGraph& molgraph);
 	
 			void calcLogP(const MolecularGraph& molgraph);
-		
+
+			class AtomInfo;
+
+			typedef std::vector<AtomInfo> AtomInfoTable;
+
+			class AtomInfo
+			{
+
+			public:
+				AtomInfo(const MolecularGraph&, const Atom&, bool, bool);
+
+				void classifyAtom(const MolecularGraph& molgraph, AtomInfoTable&);
+
+				unsigned int getAtomType() const;
+				std::size_t getNumBonds() const;
+				std::size_t getNumHalogenPairs() const;
+				unsigned int getAtomicNo() const;
+
+				void setUnsaturationFlag();
+				bool getUnsaturationFlag() const;
+
+				bool isRingAtom() const;
+				bool isAromaticAtom() const;
+				bool isHBondDonorAtom() const;
+				bool isHBondAcceptorAtom() const;
+				bool hasRingNeighbor() const;
+
+			private:
+				unsigned int classifyCAtom() const;
+				unsigned int classifySP3CAtom() const;
+				unsigned int classifySP2CAtom() const;
+				unsigned int classifySP1CAtom() const;
+
+				unsigned int classifyNAtom() const;
+				unsigned int classifySP3NAtom() const;
+				unsigned int classifySP2NAtom() const;
+				unsigned int classifyAmideNAtom() const;
+
+				unsigned int classifyOAtom() const;
+				unsigned int classifySP3OAtom() const;
+
+				unsigned int classifySAtom() const;
+				unsigned int classifyPAtom() const;
+				unsigned int classifyFAtom() const;
+				unsigned int classifyClAtom() const;
+				unsigned int classifyBrAtom() const;
+				unsigned int classifyIAtom() const;
+
+				void analyzeAtom(const MolecularGraph& molgraph, AtomInfoTable& atom_infos);				
+
+				bool isAmideCarbon(const MolecularGraph& molgraph, AtomInfoTable&);
+
+				const MolecularGraph*    molGraph;
+				const Atom*              atom;
+				unsigned int             atomType;
+				unsigned int             atomicNo;
+				std::size_t              bondCount;
+				std::size_t              hCount;
+				std::size_t              halogenCount;
+				std::size_t              piSystemCount;
+				std::size_t              singleABondCount;
+				std::size_t              singleRBondCount;
+				std::size_t              singleXBondCount;
+				std::size_t              singleOBondCount;
+				std::size_t              doubleABondCount; 
+				std::size_t              doubleRBondCount;
+				std::size_t              doubleXBondCount;
+				std::size_t              doubleCBondCount; 
+				std::size_t              doubleNBondCount; 
+				std::size_t              doubleOBondCount; 
+				std::size_t              doubleSBondCount; 
+				std::size_t              tripleABondCount; 
+				std::size_t              tripleCBondCount; 
+				std::size_t              tripleRBondCount; 
+				std::size_t              aromABondCount; 
+				std::size_t              aromXBondCount; 
+				std::size_t              aromCBondCount; 
+				std::size_t              aromNBondCount; 
+				bool                     isAromatic;
+				bool                     inRing;
+				bool                     isClassAAtom;
+				bool                     isClassRAtom;
+				bool                     isClassXAtom;
+				bool                     isHalogenAtom;
+				bool                     isDonor;
+				bool                     isAcceptor;
+				bool                     isUnsaturated;
+				bool                     isAmideCAtom;
+				bool                     hasAmideCNbr;
+				bool                     hasRingNbr;
+				bool                     analyzed;
+			};
+
+			AtomInfoTable                  atomInfos;
 			Math::DVector                  featureVector;
+			std::size_t                    numAtoms;
 			double                         logP;
-			PatternAtomTyper               atomTyper;
 			SubstructureHistogramGenerator corrSubstructHistoGen;
 		};
 

@@ -34,9 +34,12 @@
 #include <cstddef>
 #include <vector>
 
+#include <boost/shared_ptr.hpp>
+
 #include "CDPL/Chem/APIPrefix.hpp"
 #include "CDPL/Chem/MolecularGraph.hpp"
 #include "CDPL/Chem/SubstructureSearch.hpp"
+#include "CDPL/Util/BitSet.hpp"
 
 
 namespace CDPL 
@@ -45,79 +48,115 @@ namespace CDPL
     namespace Chem
     {
 
-	class MolecularGraph;
+		/**
+		 * \addtogroup CDPL_CHEM_ATOM_CLASSIFICATION
+		 * @{
+		 */
 
-	/**
-	 * \addtogroup CDPL_CHEM_ATOM_CLASSIFICATION
-	 * @{
-	 */
+		/**
+		 * \brief PatternAtomTyper.
+		 */
+		class CDPL_CHEM_API PatternAtomTyper
+		{
 
-	/**
-	 * \brief PatternAtomTyper.
-	 */
-	class CDPL_CHEM_API PatternAtomTyper
-	{
+		  public:
+			class Pattern;
 
-	  public:
-	    class Pattern
-	    {
+		  private:
+			typedef std::vector<Pattern> PatternList;
+			typedef std::vector<std::size_t> SizeTypeArray;
 
-	    public:
-		Pattern(const MolecularGraph::SharedPointer& ptn_molgraph, std::size_t priority = 0, std::size_t atom_label = 0, 
-			bool all_matches = true, bool unique_matches = false):
-		    ptnMolGraph(ptn_molgraph), priority(priority), atomLabel(atom_label), allMatches(all_matches), uniqueMatches(unique_matches)
-		    {}
+		  public:
+			typedef boost::shared_ptr<PatternAtomTyper> SharedPointer;
+
+			typedef PatternList::const_iterator ConstPatternIterator;
+			typedef PatternList::iterator PatternIterator;
+
+			class Pattern
+			{
+
+				friend class PatternAtomTyper;
+
+			public:
+				Pattern(const MolecularGraph::SharedPointer& structure, std::size_t atom_label = 0, std::size_t priority = 0, 
+						bool all_matches = true, bool unique_matches = false);
 		    
-		const MolecularGraph::SharedPointer& getStructure() const;
+				const MolecularGraph::SharedPointer& getStructure() const;
 
-		std::size_t getPriority() const;
+				std::size_t getPriority() const;
 
-		std::size_t getAtomLabel() const;
+				std::size_t getAtomLabel() const;
 
-		bool getAllMatches() const;
+				bool processAllMatches() const;
 
-		bool getOnlyUniqueMatches() const;
+				bool processUniqueMatchesOnly() const;
 
-	    private:
-		MolecularGraph::SharedPointer ptnMolGraph;
-		std::size_t                   priority;
-		std::size_t                   atomLabel;
-		bool                          allMatches;
-		bool                          uniqueMatches;
-	    };
+			private:
+				typedef std::pair<const Atom*, std::size_t> AtomLabelPair;
+				typedef std::vector<AtomLabelPair> LabeledAtomList;
 
-	    void addPattern(const MolecularGraph::SharedPointer& ptn_molgraph, std::size_t priority = 0, std::size_t atom_label = 0, 
-			    bool all_matches = true, bool unique_matches = false);
+				const LabeledAtomList& getLabeledAtoms() const;
 
-	    void addPattern(const Pattern& ptn);
+				MolecularGraph::SharedPointer structure;
+				std::size_t                   priority;
+				std::size_t                   atomLabel;
+				bool                          allMatches;
+				bool                          uniqueMatches;
+				LabeledAtomList               labeledAtoms;
+			};
 
-	    const Pattern& getPattern() const;
+			PatternAtomTyper();
 
-	    void removePattern(std::size_t idx);
+			PatternAtomTyper(const PatternAtomTyper& typer);
 
-	    void clear();
+			void addPattern(const MolecularGraph::SharedPointer& structure, std::size_t atom_label = 0, std::size_t priority = 0, 
+							bool all_matches = true, bool unique_matches = false);
 
-	    std::size_t getNumPatterns() const;
+			void addPattern(const Pattern& ptn);
 
-	    std::size_t getAtomLabel(std::size_t idx) const;
+			const Pattern& getPattern(std::size_t idx) const;
 
-	    std::size_t getMatchingPatternID(std::size_t idx) const;
+			void removePattern(std::size_t idx);
 
-	    void execute(const MolecularGraph& molgraph);
+			void removePattern(const PatternIterator& ptn_it);
 
-	  private:
-	    typedef std::vector<Pattern> PatternList;
-	    typedef std::vector<std::size_t> SizeTypeArray;
+			void clear();
 
-	    PatternList        patterns;
-	    SizeTypeArray      atomLabeling;
-	    SizeTypeArray      matchingPatternIDs;
-	    SubstructureSearch substructSearch;
-	};
+			std::size_t getNumPatterns() const;
 
-	/**
-	 * @}
-	 */
+			ConstPatternIterator getPatternsBegin() const;
+			ConstPatternIterator getPatternsEnd() const;
+
+			PatternIterator getPatternsBegin();
+			PatternIterator getPatternsEnd();
+
+			bool hasAtomLabel(std::size_t idx) const;
+
+			std::size_t getAtomLabel(std::size_t idx) const;
+
+			std::size_t getPatternIndex(std::size_t idx) const;
+
+			void execute(const MolecularGraph& molgraph);
+
+			PatternAtomTyper& operator=(const PatternAtomTyper& typer);
+
+		  private:
+			void init(const MolecularGraph& molgraph);
+
+			void processPattern(const Pattern& ptn, std::size_t ptn_idx);
+			bool processMatch(const AtomMapping& mapping, const Pattern& ptn, std::size_t ptn_idx);
+
+			const MolecularGraph* molGraph;
+			PatternList           patterns;
+			SizeTypeArray         atomLabeling;
+			SizeTypeArray         matchingPatternIndices;
+			SubstructureSearch    substructSearch;
+			Util::BitSet          labeledAtomMask;
+		};
+
+		/**
+		 * @}
+		 */
     }
 }
 

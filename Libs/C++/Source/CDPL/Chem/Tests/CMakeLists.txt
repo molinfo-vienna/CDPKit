@@ -128,6 +128,8 @@ SET(test-suite_SRCS
     #ReactionReactantCountTest.cpp
     #ReactionAgentCountTest.cpp
     #ReactionProductCountTest.cpp 
+
+    TPSACalculatorTest.cpp 
    )
 
 ADD_DEFINITIONS(-DBOOST_TEST_DYN_LINK)

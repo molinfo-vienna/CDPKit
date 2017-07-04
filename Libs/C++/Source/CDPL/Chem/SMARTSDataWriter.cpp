@@ -49,6 +49,7 @@
 #include "CDPL/Chem/StereoDescriptor.hpp"
 #include "CDPL/Chem/AtomDictionary.hpp"
 #include "CDPL/Chem/AtomType.hpp"
+#include "CDPL/Chem/HybridizationState.hpp"
 #include "CDPL/Chem/ReactionRole.hpp"
 #include "CDPL/Chem/AtomConfiguration.hpp"
 #include "CDPL/Chem/BondDirection.hpp"
@@ -827,6 +828,10 @@ void Chem::SMARTSDataWriter::DFSTreeNode::writeComplexAtomExpression(const Match
 										expr_str, false);
 				break;
 
+			case AtomMatchConstraint::HYBRIDIZATION_STATE:
+				writeHybridizationStateExpression(constraint, expr_str);
+				break;
+
 			case AtomMatchConstraint::CHARGE:
 				writeChargeExpression(constraint, expr_str);
 				break;
@@ -873,6 +878,10 @@ void Chem::SMARTSDataWriter::DFSTreeNode::writeComplexAtomExpression(const Match
 
 			case AtomMatchConstraint::SSSR_RING_SIZE:
 				writeRingSizeExpression(constraint, expr_str);
+				break;
+
+			case AtomMatchConstraint::UNSATURATION:
+				writeUnsaturationFlagExpression(constraint, expr_str);
 				break;
 
 			default:
@@ -1387,6 +1396,26 @@ void Chem::SMARTSDataWriter::DFSTreeNode::writeRingTopologyExpression(const Matc
 	expr_str.push_back(AtomExpression::RING_MEMBERSHIP_PREFIX);
 }
 
+void Chem::SMARTSDataWriter::DFSTreeNode::writeUnsaturationFlagExpression(const MatchConstraint& constraint,
+																		  std::string& expr_str) const 
+{
+	using namespace SMARTS;
+
+	if (constraint.getRelation() != MatchConstraint::EQUAL && 
+		constraint.getRelation() != MatchConstraint::NOT_EQUAL)
+		return;
+
+	bool unsat = getConstraintValue<bool>(constraint, *atom, *molGraph, &isUnsaturated);
+
+	if (constraint.getRelation() == MatchConstraint::NOT_EQUAL)
+		unsat = !unsat;
+
+	if (!unsat)
+		expr_str.push_back(NOT_OPERATOR);
+
+	expr_str.push_back(AtomExpression::UNSATURATED_FLAG);
+}
+
 void Chem::SMARTSDataWriter::DFSTreeNode::writeRingMembershipExpression(const MatchConstraint& constraint,
 																		std::string& expr_str) const 
 {
@@ -1403,6 +1432,43 @@ void Chem::SMARTSDataWriter::DFSTreeNode::writeRingMembershipExpression(const Ma
 
 	expr_str.push_back(AtomExpression::RING_MEMBERSHIP_PREFIX);
 	expr_str.append(boost::lexical_cast<std::string>(num_sssr_rings));
+}
+
+void Chem::SMARTSDataWriter::DFSTreeNode::writeHybridizationStateExpression(const MatchConstraint& constraint,
+																			std::string& expr_str) const 
+{
+	using namespace SMARTS;
+
+	if (constraint.getRelation() != MatchConstraint::EQUAL && 
+		constraint.getRelation() != MatchConstraint::NOT_EQUAL)
+		return;
+
+	unsigned int hyb_state = getConstraintValue<unsigned int>(constraint, *atom, &getHybridizationState);
+	unsigned int hyb_id;
+
+	switch (hyb_state) {
+
+		case HybridizationState::SP:
+			hyb_id = 1;
+			break;
+
+		case HybridizationState::SP2:
+			hyb_id = 2;
+			break;
+
+		case HybridizationState::SP3:
+			hyb_id = 3;
+			break;
+
+		default:
+			return;
+	}
+
+	if (constraint.getRelation() == MatchConstraint::NOT_EQUAL)
+		expr_str.push_back(NOT_OPERATOR);
+
+	expr_str.push_back(AtomExpression::HYBRIDIZATION_PREFIX);
+	expr_str.append(boost::lexical_cast<std::string>(hyb_id));
 }
 
 void Chem::SMARTSDataWriter::DFSTreeNode::writeValenceExpression(const MatchConstraint& constraint,

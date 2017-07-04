@@ -54,6 +54,7 @@
 #include "CDPL/Chem/BondDirection.hpp"
 #include "CDPL/Chem/ReactionRole.hpp"
 #include "CDPL/Chem/AtomType.hpp"
+#include "CDPL/Chem/HybridizationState.hpp"
 #include "CDPL/Base/Exceptions.hpp"
 #include "CDPL/Base/DataIOBase.hpp"
 
@@ -1004,8 +1005,14 @@ bool Chem::SMARTSDataReader::parseAtomExpressionPrimitive(MatchConstraintList& c
 		case AtomExpression::VALENCE_PREFIX:
 			return addValenceConstraint(has_not_pfx, constr_list);
 
+		case AtomExpression::UNSATURATED_FLAG:
+			return addUnsaturationConstraint(has_not_pfx, constr_list);
+
 		case AtomExpression::RING_CONNECTIVITY_PREFIX:
 			return addRingConnectivityConstraint(has_not_pfx, constr_list);
+
+		case AtomExpression::HYBRIDIZATION_PREFIX:
+			return addHybridizationStateConstraint(has_not_pfx, constr_list);
 
 		case AtomExpression::POSITIVE_CHARGE_PREFIX:
 		case AtomExpression::NEGATIVE_CHARGE_PREFIX:
@@ -1663,6 +1670,47 @@ bool Chem::SMARTSDataReader::addRingMembershipConstraint(bool has_not_pfx, Match
 		constr_list.addElement(AtomMatchConstraint::RING_TOPOLOGY,
 							   has_not_pfx ? MatchConstraint::NOT_EQUAL : MatchConstraint::EQUAL,
 							   true);
+	return true;
+}
+
+bool Chem::SMARTSDataReader::addUnsaturationConstraint(bool has_not_pfx, MatchConstraintList& constr_list)
+{
+	constr_list.addElement(AtomMatchConstraint::UNSATURATION,
+						   has_not_pfx ? MatchConstraint::NOT_EQUAL : MatchConstraint::EQUAL,
+						   true);
+	return true;
+}
+
+bool Chem::SMARTSDataReader::addHybridizationStateConstraint(bool has_not_pfx, MatchConstraintList& constr_list)
+{
+	std::size_t hyb_id;
+
+	if (!parseNumber(hyb_id))
+		throw Base::IOError("SMARTSDataReader: invalid hybridization state specification");
+
+	unsigned int hyb_state;
+
+	switch (hyb_id) {
+		
+		case 1:
+			hyb_state = HybridizationState::SP;
+			break;
+
+		case 2:
+			hyb_state = HybridizationState::SP2;
+			break;
+
+		case 3:
+			hyb_state = HybridizationState::SP3;
+			break;
+		
+		default:
+			throw Base::IOError("SMARTSDataReader: invalid hybridization state specification");
+	}
+
+	constr_list.addElement(AtomMatchConstraint::HYBRIDIZATION_STATE,
+						   has_not_pfx ? MatchConstraint::NOT_EQUAL : MatchConstraint::EQUAL,
+						   hyb_state);
 	return true;
 }
 
