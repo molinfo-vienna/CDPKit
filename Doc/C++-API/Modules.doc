@@ -429,6 +429,9 @@
 \ingroup CDPL_MATH
 
 
+\defgroup CDPL_FORCEFIELD Molecular Forcefields
+
+
 \defgroup CDPL_VIS Data Visualization
 
 \defgroup CDPL_VIS_GEOMETRIC_PRIMITIVES Geometric Primitives

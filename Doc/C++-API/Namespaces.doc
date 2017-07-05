@@ -24,13 +24,10 @@
 \namespace CDPL::Biomol
 \brief Contains classes and functions related to biological macromolecules.
 
+\namespace CDPL::Forcefield
+\brief Contains classes and functions related to molecular forcefields.
+
 \namespace boost
 \brief The namespace of the Boost C++ Libraries (see [\ref BOOST] for details).
-
-\namespace boost::numeric
-\brief The namespace of Boost libraries for mathematics and numerics.
-
-\namespace boost::numeric::ublas
-\brief The namespace of the Boost.uBLAS library (see [\ref BUBLAS] for details).
 
 */
