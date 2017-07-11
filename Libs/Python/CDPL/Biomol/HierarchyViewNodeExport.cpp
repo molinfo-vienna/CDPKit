@@ -1,7 +1,7 @@
 /* -*- mode: c++; c-basic-offset: 4; tab-width: 4; indent-tabs-mode: t -*- */
 
 /* 
- * FunctionExports.hpp 
+ * HierarchyViewNodeExport.cpp 
  *
  * This file is part of the Chemical Data Processing Toolkit
  *
@@ -24,18 +24,21 @@
  */
 
 
-#ifndef CDPL_PYTHON_BIOMOL_FUNCTIONEXPORTS_HPP
-#define CDPL_PYTHON_BIOMOL_FUNCTIONEXPORTS_HPP
+#include <boost/python.hpp>
+
+#include "CDPL/Biomol/HierarchyViewNode.hpp"
+
+#include "ClassExports.hpp"
 
 
-namespace CDPLPythonBiomol
+void CDPLPythonBiomol::exportHierarchyViewNode()
 {
+    using namespace boost;
+    using namespace CDPL;
 
-	void exportAtomFunctions();
-	void exportAtomContainerFunctions();
-	void exportMolecularGraphFunctions();
-	void exportControlParameterFunctions();
-	void exportUtilityFunctions();
+    python::class_<Biomol::HierarchyViewNode, python::bases<Chem::Fragment>, boost::noncopyable>("HierarchyViewNode", python::no_init)
+		.def("getResidues", &Biomol::HierarchyViewNode::getResidues, python::arg("self"),
+			 python::return_internal_reference<>())
+		.add_property("residues", python::make_function(&Biomol::HierarchyViewNode::getResidues, python::return_internal_reference<>()))
+	;
 }
-
-#endif // CDPL_PYTHON_BIOMOL_FUNCTIONEXPORTS_HPP

@@ -26,7 +26,6 @@
 
 #include <boost/python.hpp>
 
-#include "CDPL/Chem/AtomContainer.hpp"
 #include "CDPL/Chem/Fragment.hpp"
 #include "CDPL/Biomol/AtomContainerFunctions.hpp"
 

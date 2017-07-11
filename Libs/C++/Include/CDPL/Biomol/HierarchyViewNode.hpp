@@ -1,7 +1,7 @@
 /* -*- mode: c++; c-basic-offset: 4; tab-width: 4; indent-tabs-mode: t -*- */
 
 /* 
- * FunctionExports.hpp 
+ * HierarchyViewNode.hpp 
  *
  * This file is part of the Chemical Data Processing Toolkit
  *
@@ -23,19 +23,57 @@
  * Boston, MA 02111-1307, USA.
  */
 
+/**
+ * \file
+ * \brief Definition of the class CDPL::Biomol::HierarchyViewNode.
+ */
 
-#ifndef CDPL_PYTHON_BIOMOL_FUNCTIONEXPORTS_HPP
-#define CDPL_PYTHON_BIOMOL_FUNCTIONEXPORTS_HPP
+#ifndef CDPL_BIOMOL_HIERARCHYVIEWNODE_HPP
+#define CDPL_BIOMOL_HIERARCHYVIEWNODE_HPP
+
+#include <boost/thread.hpp>
+
+#include "CDPL/Biomol/APIPrefix.hpp"
+#include "CDPL/Biomol/ResidueList.hpp"
 
 
-namespace CDPLPythonBiomol
+namespace CDPL 
 {
 
-	void exportAtomFunctions();
-	void exportAtomContainerFunctions();
-	void exportMolecularGraphFunctions();
-	void exportControlParameterFunctions();
-	void exportUtilityFunctions();
+    namespace Biomol
+    {
+
+		/**
+		 * \addtogroup CDPL_BIOMOL_PROCESSING
+		 * @{
+		 */
+
+		/**
+		 * \brief HierarchyViewNode.
+		 */
+		class CDPL_BIOMOL_API HierarchyViewNode : public Chem::Fragment
+		{
+
+		  public:
+			const ResidueList& getResidues() const;
+
+		  protected:
+			HierarchyViewNode(): initResidues(true) {}
+
+			~HierarchyViewNode() {}
+
+			boost::mutex& getMutex() const;
+
+		  private:
+			mutable ResidueList  residues;
+			mutable bool         initResidues;
+			mutable boost::mutex initMutex;
+		};
+
+		/**
+		 * @}
+		 */
+    }
 }
 
-#endif // CDPL_PYTHON_BIOMOL_FUNCTIONEXPORTS_HPP
+#endif // CDPL_BIOMOL_HIERARCHYVIEWNODE_HPP

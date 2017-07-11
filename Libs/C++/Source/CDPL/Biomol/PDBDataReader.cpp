@@ -318,6 +318,9 @@ bool Biomol::PDBDataReader::readPDBFile(std::istream& is, Chem::Molecule& mol)
 			throw Base::IOError("PDBDataReader: invalid or unsupported PDB record name: " + rec_name);
 	
 		skipInputToNextLine(is, rem_llen, rec_name);
+
+		if (!exit_loop && !strictErrorChecking && !hasMoreData(is))
+			exit_loop = true;
 	}
 
 	checkMandatoryRecords();
@@ -792,7 +795,7 @@ std::size_t Biomol::PDBDataReader::startNextRecord(std::istream& is, std::string
 	prev_rec_name.swap(rec_name);
 
 	readPDBString(is, PDB::RECORD_NAME_LENGTH, rec_name, true, "PDBDataReader: error while reading record name", false);
-		
+
 	if (strictErrorChecking && rec_name.length() < PDB::RECORD_NAME_LENGTH)
 		throw Base::IOError("PDBDataReader: record name length < " +
 							boost::lexical_cast<std::string>(PDB::RECORD_NAME_LENGTH));

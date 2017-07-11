@@ -106,6 +106,13 @@ namespace
 	MAKE_FUNCTION_WRAPPER3(bool, areInSameResidue, CDPL::Chem::Atom&, CDPL::Chem::Atom&, unsigned int);
 
 	MAKE_FUNCTION_WRAPPER5(void, extractResidueSubstructure, CDPL::Chem::Atom&, CDPL::Chem::MolecularGraph&, CDPL::Chem::Fragment&, bool, unsigned int);
+
+	bool matchesResidueInfoWrapper(CDPL::Chem::Atom& atom, const std::string& res_code, char chain_id, 
+								   long res_seq_no, char ins_code, std::size_t model_no, const std::string& atom_name, std::size_t serial_no) 
+	{
+		return CDPL::Biomol::matchesResidueInfo(atom, (res_code.empty() ? 0 : res_code.c_str()), chain_id, 
+												res_seq_no, ins_code, model_no, (atom_name.empty() ? 0 : atom_name.c_str()), serial_no);
+ 	}
 }
 
 
@@ -115,12 +122,15 @@ void CDPLPythonBiomol::exportAtomFunctions()
 	using namespace CDPL;
 	
 	python::def("isPDBBackboneAtom", &isPDBBackboneAtomWrapper1, python::arg("atom"));
-
 	python::def("areInSameResidue", &areInSameResidueWrapper3, 
 				(python::arg("atom1"), python::arg("atom2"), python::arg("flags") = Biomol::AtomPropertyFlag::DEFAULT));
 	python::def("extractResidueSubstructure", &extractResidueSubstructureWrapper5,
 				(python::arg("atom"), python::arg("molgraph"), python::arg("res_substruct"), 
 				 python::arg("cnctd_only") = false, python::arg("flags") = Biomol::AtomPropertyFlag::DEFAULT));
+	python::def("matchesResidueInfo", &matchesResidueInfoWrapper, 
+				(python::arg("atom"), python::arg("res_code") = "", python::arg("chain_id") = char(0), 
+				 python::arg("res_seq_no") = 0, python::arg("ins_code") = char(0), python::arg("model_no") = 0, 
+				 python::arg("atom_name") = "", python::arg("serial_no") = 0));
 
 	EXPORT_ATOM_FUNCS(ResidueLinkingAtomFlag, linking)
 	EXPORT_ATOM_FUNCS(ResidueLeavingAtomFlag, leaving)

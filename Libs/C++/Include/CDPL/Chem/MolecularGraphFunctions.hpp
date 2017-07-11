@@ -55,8 +55,6 @@ namespace CDPL
 
 	namespace Chem 
 	{
-	
-		class MolecularGraph;
 
 		/**
 		 * \addtogroup CDPL_CHEM_MOLECULAR_GRAPH_FUNCTIONS

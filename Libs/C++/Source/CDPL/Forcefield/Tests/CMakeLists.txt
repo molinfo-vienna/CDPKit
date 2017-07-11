@@ -2,6 +2,7 @@ INCLUDE_DIRECTORIES("${CMAKE_CURRENT_SOURCE_DIR}")
 
 SET(test-suite_SRCS
     Main.cpp
+    ConvenienceHeaderTest.cpp
    )
 
 ADD_DEFINITIONS(-DBOOST_TEST_DYN_LINK)

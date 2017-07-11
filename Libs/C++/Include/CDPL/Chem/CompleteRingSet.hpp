@@ -53,9 +53,6 @@ namespace CDPL
 	namespace Chem
 	{
 
-		class Bond;
-		class MolecularGraph;
-
 		/**
 		 * \addtogroup CDPL_CHEM_MOLECULAR_GRAPH_ALGORITHMS
 		 * @{

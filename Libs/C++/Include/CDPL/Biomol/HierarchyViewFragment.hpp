@@ -1,7 +1,7 @@
 /* -*- mode: c++; c-basic-offset: 4; tab-width: 4; indent-tabs-mode: t -*- */
 
 /* 
- * FunctionExports.hpp 
+ * HierarchyViewFragment.hpp 
  *
  * This file is part of the Chemical Data Processing Toolkit
  *
@@ -23,19 +23,47 @@
  * Boston, MA 02111-1307, USA.
  */
 
+/**
+ * \file
+ * \brief Definition of the class CDPL::Biomol::HierarchyViewFragment.
+ */
 
-#ifndef CDPL_PYTHON_BIOMOL_FUNCTIONEXPORTS_HPP
-#define CDPL_PYTHON_BIOMOL_FUNCTIONEXPORTS_HPP
+#ifndef CDPL_BIOMOL_HIERARCHYVIEWFRAGMENT_HPP
+#define CDPL_BIOMOL_HIERARCHYVIEWFRAGMENT_HPP
+
+#include "CDPL/Biomol/APIPrefix.hpp"
+#include "CDPL/Biomol/HierarchyViewNode.hpp"
 
 
-namespace CDPLPythonBiomol
+namespace CDPL 
 {
 
-	void exportAtomFunctions();
-	void exportAtomContainerFunctions();
-	void exportMolecularGraphFunctions();
-	void exportControlParameterFunctions();
-	void exportUtilityFunctions();
+    namespace Biomol
+    {
+
+	class HierarchyViewChain;
+
+	/**
+	 * \addtogroup CDPL_BIOMOL_PROCESSING
+	 * @{
+	 */
+
+	/**
+	 * \brief HierarchyViewFragment.
+	 */
+	class CDPL_BIOMOL_API HierarchyViewFragment : public HierarchyViewNode
+	{
+
+	    friend class HierarchyViewChain;
+
+	  private:
+	    HierarchyViewFragment() {}
+	};
+
+	/**
+	 * @}
+	 */
+    }
 }
 
-#endif // CDPL_PYTHON_BIOMOL_FUNCTIONEXPORTS_HPP
+#endif // CDPL_BIOMOL_HIERARCHYVIEWFRAGMENT_HPP

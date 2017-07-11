@@ -1,7 +1,7 @@
 /* -*- mode: c++; c-basic-offset: 4; tab-width: 4; indent-tabs-mode: t -*- */
 
 /* 
- * AtomResidueUtilityFunctions.cpp 
+ * AtomUtilityFunctions.cpp 
  *
  * This file is part of the Chemical Data Processing Toolkit
  *
@@ -33,6 +33,23 @@
 
 
 using namespace CDPL; 
+
+
+namespace
+{
+
+	const std::string C_AA_CARBONYL = "C";
+	const std::string C_AA_ALPHA    = "CA";
+	const std::string N_AA_AMIDE    = "N";
+	const std::string O_AA_ACID     = "O";
+	const std::string O_AA_TERMINAL = "OXT";
+	const std::string P_NT          = "P";
+	const std::string O3_NT         = "O3'";
+	const std::string O5_NT         = "O5'";
+	const std::string C5_NT         = "C5'";
+	const std::string C4_NT         = "C4'";
+	const std::string C3_NT         = "C3'";
+}
 
 
 bool Biomol::areInSameResidue(const Chem::Atom& atom1, const Chem::Atom& atom2, unsigned int flags)
@@ -151,4 +168,40 @@ void Biomol::extractResidueSubstructure(const Chem::Atom& atom, const Chem::Mole
 
 		res_substruct.addBond(*b_it);
 	}
+}
+
+bool Biomol::isPDBBackboneAtom(const Chem::Atom& atom)
+{
+	const std::string& label = getResidueAtomName(atom);
+
+	return (label == C_AA_CARBONYL || label == C_AA_ALPHA || label == N_AA_AMIDE || label == O_AA_ACID || label == O_AA_TERMINAL ||
+			label == P_NT || label == O3_NT || label == O5_NT || label == C5_NT || label == C4_NT || label == C3_NT);
+}
+
+
+bool Biomol::matchesResidueInfo(const Chem::Atom& atom, const char* res_code, char chain_id, long res_seq_no,
+								char ins_code, std::size_t model_no, const char* atom_name, std::size_t serial_no)
+{
+    if (res_code != 0 && (getResidueCode(atom) != res_code))
+		return false;
+
+    if (chain_id != 0 && (getChainID(atom) != chain_id))
+		return false;
+
+    if (res_seq_no != 0 && (getResidueSequenceNumber(atom) != res_seq_no))
+		return false;
+
+    if (ins_code != 0 && (getResidueInsertionCode(atom) != ins_code))
+		return false;
+			
+    if (model_no != 0 && (getModelNumber(atom) != model_no))
+		return false;
+ 
+	if (atom_name != 0 && (getResidueAtomName(atom) != atom_name))
+		return false;
+
+	if (serial_no != 0 && (getSerialNumber(atom) != serial_no))
+		return false;
+
+    return true;
 }

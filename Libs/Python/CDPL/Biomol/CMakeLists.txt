@@ -11,6 +11,7 @@ SET(biomol_MOD_SRCS
     Module.cpp
 
     PDBDataExport.cpp
+    ResidueListExport.cpp
     ResidueDictionaryExport.cpp
  
     PDBMoleculeReaderExport.cpp
@@ -18,6 +19,12 @@ SET(biomol_MOD_SRCS
 
     PDBMoleculeInputHandlerExport.cpp
     PDBMolecularGraphOutputHandlerExport.cpp
+
+    HierarchyViewNodeExport.cpp
+    HierarchyViewModelExport.cpp
+    HierarchyViewChainExport.cpp
+    HierarchyViewFragmentExport.cpp
+    HierarchyViewExport.cpp
 
     AtomPropertyExport.cpp
     MolecularGraphPropertyExport.cpp
@@ -33,6 +40,7 @@ SET(biomol_MOD_SRCS
     AtomContainerFunctionExport.cpp
     MolecularGraphFunctionExport.cpp
     ControlParameterFunctionExport.cpp 
+    UtilityFunctionExport.cpp 
 
     BoostFunctionWrapperExport.cpp
 

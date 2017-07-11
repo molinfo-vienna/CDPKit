@@ -1,7 +1,7 @@
 /* -*- mode: c++; c-basic-offset: 4; tab-width: 4; indent-tabs-mode: t -*- */
 
 /* 
- * FunctionExports.hpp 
+ * HierarchyViewChainExport.cpp 
  *
  * This file is part of the Chemical Data Processing Toolkit
  *
@@ -24,18 +24,24 @@
  */
 
 
-#ifndef CDPL_PYTHON_BIOMOL_FUNCTIONEXPORTS_HPP
-#define CDPL_PYTHON_BIOMOL_FUNCTIONEXPORTS_HPP
+#include <boost/python.hpp>
+
+#include "CDPL/Biomol/HierarchyViewChain.hpp"
+
+#include "ClassExports.hpp"
 
 
-namespace CDPLPythonBiomol
+void CDPLPythonBiomol::exportHierarchyViewChain()
 {
+    using namespace boost;
+    using namespace CDPL;
 
-	void exportAtomFunctions();
-	void exportAtomContainerFunctions();
-	void exportMolecularGraphFunctions();
-	void exportControlParameterFunctions();
-	void exportUtilityFunctions();
+    python::class_<Biomol::HierarchyViewChain, python::bases<Biomol::HierarchyViewNode>, boost::noncopyable>("HierarchyViewChain", python::no_init)
+		.def("getNumFragments", &Biomol::HierarchyViewChain::getNumFragments, python::arg("self"))
+		.def("getFragment", &Biomol::HierarchyViewChain::getFragment, (python::arg("self"), python::arg("idx")),
+			 python::return_internal_reference<>())
+		.def("__len__", &Biomol::HierarchyViewChain::getNumFragments, python::arg("self"))
+		.def("__getitem__", &Biomol::HierarchyViewChain::getFragment, (python::arg("self"), python::arg("idx")),
+			 python::return_internal_reference<>())
+		.add_property("numFragments", &Biomol::HierarchyViewChain::getNumFragments);
 }
-
-#endif // CDPL_PYTHON_BIOMOL_FUNCTIONEXPORTS_HPP

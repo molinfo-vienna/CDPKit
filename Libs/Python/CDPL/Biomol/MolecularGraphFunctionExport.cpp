@@ -79,6 +79,13 @@ namespace
 
 	MAKE_FUNCTION_WRAPPER4(void, extractEnvironmentResidues, CDPL::Chem::MolecularGraph&, CDPL::Chem::MolecularGraph&, CDPL::Chem::Fragment&, double);
 	MAKE_FUNCTION_WRAPPER5(void, extractProximalAtoms, CDPL::Chem::MolecularGraph&, CDPL::Chem::MolecularGraph&, CDPL::Chem::Fragment&, double, bool);
+
+	bool matchesResidueInfoWrapper(CDPL::Chem::MolecularGraph& molgraph, const std::string& res_code, char chain_id, 
+								   long res_seq_no, char ins_code, std::size_t model_no) 
+	{
+		return CDPL::Biomol::matchesResidueInfo(molgraph, (res_code.empty() ? 0 : res_code.c_str()), chain_id, 
+												res_seq_no, ins_code, model_no);
+ 	}
 }
 
 
@@ -86,7 +93,6 @@ void CDPLPythonBiomol::exportMolecularGraphFunctions()
 {
 	using namespace boost;
 	using namespace CDPL;
-
 
 	python::def("setHydrogenResidueSequenceInfo", &Biomol::setHydrogenResidueSequenceInfo, 
 				(python::arg("molgraph"), python::arg("overwrite"), python::arg("flags") = Biomol::AtomPropertyFlag::DEFAULT));
@@ -96,6 +102,9 @@ void CDPLPythonBiomol::exportMolecularGraphFunctions()
 	python::def("extractProximalAtoms", &extractProximalAtomsWrapper5, 
 				(python::arg("core"), python::arg("macromol"), python::arg("env_atoms"),
 				 python::arg("max_dist"), python::arg("inc_core_atoms") = false));
+	python::def("matchesResidueInfo", &matchesResidueInfoWrapper, 
+				(python::arg("molgraph"), python::arg("res_code") = "", python::arg("chain_id") = char(0), 
+				 python::arg("res_seq_no") = 0, python::arg("ins_code") = char(0), python::arg("model_no") = 0));
 
 	EXPORT_MOLGRAPH_FUNCS_COPY_REF(ResidueCode, code)
 	EXPORT_MOLGRAPH_FUNCS(ResidueSequenceNumber, seq_no)

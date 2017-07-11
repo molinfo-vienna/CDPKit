@@ -32,6 +32,7 @@ namespace CDPLPythonBiomol
 {
 
 	void exportPDBData();
+	void exportResidueList();
 	void exportResidueDictionary();
 
 	void exportPDBMoleculeReader();
@@ -39,6 +40,12 @@ namespace CDPLPythonBiomol
 
 	void exportPDBMoleculeInputHandler();
 	void exportPDBMolecularGraphOutputHandler();
+
+	void exportHierarchyViewNode();
+	void exportHierarchyViewModel();
+	void exportHierarchyViewChain();
+	void exportHierarchyViewFragment();
+	void exportHierarchyView();
 
 	void exportBoostFunctionWrappers();
 }

@@ -151,6 +151,7 @@ namespace
 	MAKE_FUNCTION_WRAPPER1(unsigned int, getTypeForSymbol, CDPL::Chem::Atom&);
 	MAKE_FUNCTION_WRAPPER1(unsigned int, getGenericType, CDPL::Chem::Atom&);
 
+	MAKE_FUNCTION_WRAPPER2(const CDPL::Math::Vector3D&, getConformer3DCoordinates, CDPL::Chem::Atom&, std::size_t);
 	MAKE_FUNCTION_WRAPPER2(double, getCovalentRadius, CDPL::Chem::Atom&, std::size_t);
 	MAKE_FUNCTION_WRAPPER2(bool, isInRing, CDPL::Chem::Atom&, CDPL::Chem::MolecularGraph&);
 	MAKE_FUNCTION_WRAPPER2(std::size_t, getNumContainingSSSRRings, CDPL::Chem::Atom&, CDPL::Chem::MolecularGraph&);
@@ -287,6 +288,8 @@ void CDPLPythonChem::exportAtomFunctions()
 	python::def("getTypeForSymbol", &getTypeForSymbolWrapper1, python::arg("atom"));
 	python::def("getGenericType", &getGenericTypeWrapper1, python::arg("atom"));
 
+	python::def("getConformer3DCoordinates", &getConformer3DCoordinatesWrapper2, (python::arg("atom"), python::arg("conf_idx")),
+				python::return_internal_reference<>());
 	python::def("getCovalentRadius", &getCovalentRadiusWrapper2, (python::arg("atom"), python::arg("order") = 1));
 	python::def("isInRing", &isInRingWrapper2, (python::arg("atom"), python::arg("molgraph")));
 	python::def("getNumContainingSSSRRings", &getNumContainingSSSRRingsWrapper2, 

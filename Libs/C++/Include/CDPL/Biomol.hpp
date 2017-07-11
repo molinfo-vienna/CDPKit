@@ -52,11 +52,19 @@
 #include "CDPL/Biomol/PDBMoleculeReader.hpp"
 #include "CDPL/Biomol/PDBMolecularGraphWriter.hpp"
 
+#include "CDPL/Biomol/HierarchyViewNode.hpp"
+#include "CDPL/Biomol/HierarchyViewModel.hpp"
+#include "CDPL/Biomol/HierarchyViewChain.hpp"
+#include "CDPL/Biomol/HierarchyViewFragment.hpp"
+#include "CDPL/Biomol/HierarchyView.hpp"
+
+#include "CDPL/Biomol/ResidueList.hpp"
 #include "CDPL/Biomol/ResidueDictionary.hpp"
 
 #include "CDPL/Biomol/AtomFunctions.hpp"
 #include "CDPL/Biomol/AtomContainerFunctions.hpp"
 #include "CDPL/Biomol/MolecularGraphFunctions.hpp"
+#include "CDPL/Biomol/UtilityFunctions.hpp"
 
 #if defined(HAVE_BOOST_FILESYSTEM) && defined(HAVE_BOOST_IOSTREAMS)
 

@@ -3,6 +3,7 @@ INCLUDE_DIRECTORIES("${CMAKE_CURRENT_SOURCE_DIR}" "${CDPL_SOURCE_DIR}")
 SET(cdpl-biomol_LIB_SRCS
     PDBData.cpp
     ResidueDictionary.cpp
+    ResidueList.cpp
 
     AtomProperty.cpp
     MolecularGraphProperty.cpp
@@ -19,16 +20,18 @@ SET(cdpl-biomol_LIB_SRCS
     CDFDataReader.cpp
     CDFDataWriter.cpp
 
+    HierarchyViewNode.cpp
+    HierarchyViewModel.cpp
+    HierarchyViewChain.cpp
+    HierarchyView.cpp
+
     AtomPropertyFunctions.cpp
-    AtomResidueUtilityFunctions.cpp
-    AtomPDBBackboneFunction.cpp
-
-    AtomContainerResidueUtilityFunctions.cpp
-
     MolecularGraphPropertyFunctions.cpp
-    MolecularGraphResidueUtilityFunctions.cpp
-
     ControlParameterFunctions.cpp
+
+    AtomUtilityFunctions.cpp
+    AtomContainerUtilityFunctions.cpp
+    MolecularGraphUtilityFunctions.cpp
    )
 
 LINK_LIBRARIES(${Boost_THREAD_LIBRARY} ${Boost_SYSTEM_LIBRARY})

@@ -1,7 +1,7 @@
 /* -*- mode: c++; c-basic-offset: 4; tab-width: 4; indent-tabs-mode: t -*- */
 
 /* 
- * FunctionExports.hpp 
+ * ResidueListExport.cpp 
  *
  * This file is part of the Chemical Data Processing Toolkit
  *
@@ -24,18 +24,26 @@
  */
 
 
-#ifndef CDPL_PYTHON_BIOMOL_FUNCTIONEXPORTS_HPP
-#define CDPL_PYTHON_BIOMOL_FUNCTIONEXPORTS_HPP
+#include <boost/python.hpp>
+
+#include "CDPL/Biomol/ResidueList.hpp"
+#include "CDPL/Chem/MolecularGraph.hpp"
+
+#include "ClassExports.hpp"
 
 
-namespace CDPLPythonBiomol
+void CDPLPythonBiomol::exportResidueList()
 {
+    using namespace boost;
+    using namespace CDPL;
 
-	void exportAtomFunctions();
-	void exportAtomContainerFunctions();
-	void exportMolecularGraphFunctions();
-	void exportControlParameterFunctions();
-	void exportUtilityFunctions();
+    python::class_<Biomol::ResidueList, Biomol::ResidueList::SharedPointer, 
+		   python::bases<Chem::FragmentList>, boost::noncopyable>("ResidueList", python::no_init)
+	.def(python::init<>(python::arg("self")))
+	.def(python::init<const Chem::MolecularGraph&, unsigned int>((python::arg("self"), python::arg("molgraph"), 
+								      python::arg("flags") = Biomol::AtomPropertyFlag::DEFAULT))
+	     [python::with_custodian_and_ward<1, 2>()])
+	.def("extract", &Biomol::ResidueList::extract, (python::arg("self"), python::arg("molgraph"), 
+							python::arg("flags") = Biomol::AtomPropertyFlag::DEFAULT), 
+	     python::with_custodian_and_ward<1, 2>());
 }
-
-#endif // CDPL_PYTHON_BIOMOL_FUNCTIONEXPORTS_HPP

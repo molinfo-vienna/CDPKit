@@ -25,7 +25,6 @@
 import sys
 import os.path
 import glob
-import CDPL.Base as Base
 import CDPL.Chem as Chem
 import CDPL.Biomol as Biomol
 import CDPL.Math as Math
@@ -38,10 +37,10 @@ def process():
 
     cdf_mol = Chem.BasicMolecule()
     pdb_mol = Chem.BasicMolecule()
-    pdb_files = glob.glob(sys.argv[1] + '/*.pdb') # TODO: Order by increasing frame-number
+    pdb_files = sorted(glob.glob(sys.argv[1] + '/frame*.pdb'))
 
     for pdb_file in pdb_files:
-        pdb_reader = Biomol.PDBMoleculeReader(Base.FileIOStream(pdb_file, 'r'))
+        pdb_reader = Biomol.FilePDBMoleculeReader(pdb_file)
 
         print '- Processing PDB-file:', os.path.basename(pdb_file), '...'
 
@@ -73,9 +72,7 @@ def process():
             Chem.get3DCoordinatesArray(cdf_mol.getAtom(i)).addElement(Chem.get3DCoordinates(pdb_mol.getAtom(i)))
             i += 1
 
-    ofs = Base.FileIOStream(sys.argv[2], 'w')
-    
-    if not Chem.CDFMolecularGraphWriter(ofs).write(cdf_mol):
+    if not Chem.FileCDFMolecularGraphWriter(sys.argv[2]).write(cdf_mol):
         print '!! Could not write output file'
 
 if __name__ == '__main__':

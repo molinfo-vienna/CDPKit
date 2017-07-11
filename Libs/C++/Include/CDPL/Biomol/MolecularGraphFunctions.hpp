@@ -112,12 +112,15 @@ namespace CDPL
 
 
 		CDPL_BIOMOL_API void extractProximalAtoms(const Chem::MolecularGraph& core, const Chem::MolecularGraph& macromol, Chem::Fragment& env_atoms, 
-												double max_dist, bool inc_core_atoms = false);
+												  double max_dist, bool inc_core_atoms = false);
 
 		CDPL_BIOMOL_API void extractEnvironmentResidues(const Chem::MolecularGraph& core, const Chem::MolecularGraph& macromol, Chem::Fragment& env_residues, 
 														double max_dist);
 
 		CDPL_BIOMOL_API void setHydrogenResidueSequenceInfo(Chem::MolecularGraph& molgraph, bool overwrite, unsigned int flags = AtomPropertyFlag::DEFAULT);
+
+		CDPL_BIOMOL_API bool matchesResidueInfo(const Chem::MolecularGraph& molgraph, const char* res_code = 0, char chain_id = 0, long res_seq_no = 0,
+												char ins_code = 0, std::size_t model_no = 0);
 
 		/**
 		 * @}

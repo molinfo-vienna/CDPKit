@@ -46,8 +46,6 @@ namespace CDPL
 	namespace Chem 
 	{
 	
-		class Bond;
-		class MolecularGraph;
 		class StereoDescriptor;
 
 		/**

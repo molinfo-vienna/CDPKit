@@ -165,7 +165,7 @@ std::string& Internal::readString(std::istream& is, std::size_t field_size, std:
 
 	checkStreamState(is, err_msg);
 
-	if (c == eol_char)
+	if (c == eol_char) 
 		is.putback(eol_char);
 
 	if (trim)

@@ -41,25 +41,25 @@ namespace CDPL
     namespace Chem
     {
 	
-	class AtomContainer;
-	class MolecularGraph;
-	class Fragment;
+		class AtomContainer;
+		class MolecularGraph;
+		class Fragment;
     }
 
     namespace Biomol 
     {
 
-	/**
-	 * \addtogroup CDPL_BIOMOL_ATOM_CONTAINER_FUNCTIONS
-	 * @{
-	 */
+		/**
+		 * \addtogroup CDPL_BIOMOL_ATOM_CONTAINER_FUNCTIONS
+		 * @{
+		 */
 
-	CDPL_BIOMOL_API void extractResidueSubstructures(const Chem::AtomContainer& atom, const Chem::MolecularGraph& molgraph, Chem::Fragment& res_substructs, 
-							bool cnctd_only = false, unsigned int flags = AtomPropertyFlag::DEFAULT);
+		CDPL_BIOMOL_API void extractResidueSubstructures(const Chem::AtomContainer& cntnr, const Chem::MolecularGraph& molgraph, Chem::Fragment& res_substructs, 
+														 bool cnctd_only = false, unsigned int flags = AtomPropertyFlag::DEFAULT);
 
-	/**
-	 * @}
-	 */
+		/**
+		 * @}
+		 */
     }
 }
 

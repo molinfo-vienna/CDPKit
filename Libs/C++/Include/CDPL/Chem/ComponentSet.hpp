@@ -44,9 +44,6 @@ namespace CDPL
 	namespace Chem
 	{
 
-		class Atom;
-		class MolecularGraph;
-
 		/**
 		 * \addtogroup CDPL_CHEM_MOLECULAR_GRAPH_ALGORITHMS
 		 * @{
@@ -82,10 +79,6 @@ namespace CDPL
 			void perceive(const MolecularGraph& molgraph);
 
 		private:
-			ComponentSet(const ComponentSet&);
-
-			ComponentSet& operator=(const ComponentSet&);
-
 			void visitAtom(const Atom&, Fragment&);
 
 			const MolecularGraph*    molGraph;

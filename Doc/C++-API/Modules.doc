@@ -275,6 +275,9 @@
 \defgroup CDPL_BIOMOL_PROPERTIES Property Keys
 \ingroup CDPL_BIOMOL
 
+\defgroup CDPL_BIOMOL_PROCESSING Biomolecule Processing
+\ingroup CDPL_BIOMOL
+
 \defgroup CDPL_BIOMOL_ATOM_PROPERTIES Atom Properties
 \ingroup CDPL_BIOMOL_PROPERTIES
 
@@ -312,6 +315,9 @@
 \ingroup CDPL_BIOMOL_FUNCTIONS
 
 \defgroup CDPL_BIOMOL_MOLECULAR_GRAPH_FUNCTIONS MolecularGraph Functions
+\ingroup CDPL_BIOMOL_FUNCTIONS
+
+\defgroup CDPL_BIOMOL_UTILITY_FUNCTIONS Utility Functions
 \ingroup CDPL_BIOMOL_FUNCTIONS
 
 
