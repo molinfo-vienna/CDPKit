@@ -121,7 +121,7 @@ BOOST_PYTHON_MODULE(_chem)
 	exportMolecularComplexityCalculator();
 	exportPEOEChargeCalculator();
 	exportAutoCorrelationVectorCalculator();
-	exportRDFCodeCalculator();
+	exportAtomRDFCodeCalculator();
 	exportBurdenMatrixGenerator();
 	exportBCUTDescriptorCalculator();
 	exportSurfaceAtomExtractor();

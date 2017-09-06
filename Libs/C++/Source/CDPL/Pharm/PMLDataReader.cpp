@@ -353,17 +353,17 @@ bool Pharm::PMLDataReader::getPosition(const rapidxml::xml_node<char>* ftr_node,
 	rapidxml::xml_attribute<char>* attr = vec_node->first_attribute(PML::COORDS_X_ATTRIBUTE.c_str());
 
 	if (attr)
-		vec[0] = parseNumber<double>(attr->value(), "PMLDataReader: error while parsing vector x-ccordinate");
+		vec[0] = parseNumber<double>(std::string(attr->value()), "PMLDataReader: error while parsing vector x-ccordinate");
 
 	attr = vec_node->first_attribute(PML::COORDS_Y_ATTRIBUTE.c_str());
 
 	if (attr)
-		vec[1] = parseNumber<double>(attr->value(), "PMLDataReader: error while parsing vector y-ccordinate");
+		vec[1] = parseNumber<double>(std::string(attr->value()), "PMLDataReader: error while parsing vector y-ccordinate");
 
 	attr = vec_node->first_attribute(PML::COORDS_Z_ATTRIBUTE.c_str());
 
 	if (attr)
-		vec[2] = parseNumber<double>(attr->value(), "PMLDataReader: error while parsing vector z-ccordinate");
+		vec[2] = parseNumber<double>(std::string(attr->value()), "PMLDataReader: error while parsing vector z-ccordinate");
 
 	return true;
 }
@@ -380,7 +380,7 @@ bool Pharm::PMLDataReader::getTolerance(const rapidxml::xml_node<char>* ftr_node
 	if (!attr)
 		return false;
 
-	tol = Internal::parseNumber<double>(attr->value(), "PMLDataReader: error while parsing feature tolerance");
+	tol = Internal::parseNumber<double>(std::string(attr->value()), "PMLDataReader: error while parsing feature tolerance");
 
 	return true;
 }

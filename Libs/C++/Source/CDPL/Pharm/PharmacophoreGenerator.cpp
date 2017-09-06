@@ -52,12 +52,7 @@ void Pharm::PharmacophoreGenerator::clearEnabledFeatures()
 
 void Pharm::PharmacophoreGenerator::setFeatureGenerator(unsigned int type, const FeatureGenerator::SharedPointer& ftr_gen)
 {
-	FeatureGeneratorMap::iterator it = featureGeneratorMap.find(type);
-
-	if (it == featureGeneratorMap.end())
-		featureGeneratorMap.insert(FeatureGeneratorMap::value_type(type, ftr_gen));
-	else
-		it->second = ftr_gen;
+	featureGeneratorMap[type] = ftr_gen;
 }
 
 void Pharm::PharmacophoreGenerator::removeFeatureGenerator(unsigned int type)
@@ -76,7 +71,7 @@ Pharm::PharmacophoreGenerator::getFeatureGenerator(unsigned int type) const
 void Pharm::PharmacophoreGenerator::generate(const Chem::MolecularGraph& molgraph, Pharmacophore& pharm)
 {
 	for (FeatureGeneratorMap::const_iterator it = featureGeneratorMap.begin(), end = featureGeneratorMap.end(); it != end; ++it)
-		if (isFeatureEnabled(it->first))
+		if (isFeatureEnabled(it->first) && it->second)
 			it->second->generate(molgraph, pharm);
 }
 

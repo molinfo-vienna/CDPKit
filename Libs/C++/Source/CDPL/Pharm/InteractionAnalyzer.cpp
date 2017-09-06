@@ -44,23 +44,18 @@ namespace
 
 void Pharm::InteractionAnalyzer::setConstraintFunction(unsigned int type1, unsigned int type2, const ConstraintFunction& func)
 {
-    ConstraintFunctionMap::iterator it = constraintFuncMap.find(std::make_pair(type1, type2));
-
-    if (it == constraintFuncMap.end())
-		constraintFuncMap.insert(ConstraintFunctionMap::value_type(std::make_pair(type1, type2), func));
-    else
-		it->second = func;
+    constraintFuncMap[FeatureTypePair(type1, type2)] = func;
 }
 
 void Pharm::InteractionAnalyzer::removeConstraintFunction(unsigned int type1, unsigned int type2)
 {
-    constraintFuncMap.erase(std::make_pair(type1, type2));
+    constraintFuncMap.erase(FeatureTypePair(type1, type2));
 }
 
 const Pharm::InteractionAnalyzer::ConstraintFunction& 
 Pharm::InteractionAnalyzer::getConstraintFunction(unsigned int type1, unsigned int type2) const
 {
-    ConstraintFunctionMap::const_iterator it = constraintFuncMap.find(std::make_pair(type1, type2));
+    ConstraintFunctionMap::const_iterator it = constraintFuncMap.find(FeatureTypePair(type1, type2));
 
     return (it == constraintFuncMap.end() ? DEF_FUNC : it->second);
 }
@@ -68,7 +63,7 @@ Pharm::InteractionAnalyzer::getConstraintFunction(unsigned int type1, unsigned i
 void Pharm::InteractionAnalyzer::analyze(const FeatureContainer& cntnr1, const FeatureContainer& cntnr2, FeatureMapping& iactions) const
 {
 	ConstraintFunctionMap::const_iterator cf_map_end = constraintFuncMap.end();
-	std::pair<unsigned int, unsigned int> type_pair;
+	FeatureTypePair type_pair;
 
 	for (FeatureContainer::ConstFeatureIterator it1 = cntnr1.getFeaturesBegin(), end1 = cntnr1.getFeaturesEnd(); it1 != end1; ++it1) {
 		const Feature& ftr1 = *it1;
@@ -80,7 +75,7 @@ void Pharm::InteractionAnalyzer::analyze(const FeatureContainer& cntnr1, const F
 
 			ConstraintFunctionMap::const_iterator cf_it = constraintFuncMap.find(type_pair);
 
-			if (cf_it == cf_map_end)
+			if (cf_it == cf_map_end || !cf_it->second)
 				continue;
 
 			if (cf_it->second(ftr1, ftr2))

@@ -35,6 +35,7 @@
 
 #include "CDPL/Math/VectorArray.hpp"
 
+#include "CDPL/Base/IntTypes.hpp"
 #include "CDPL/Internal/CDFFormatData.hpp"
 #include "CDPL/Internal/ByteBuffer.hpp"
 
@@ -64,10 +65,16 @@ namespace CDPL
 			void putStringProperty(unsigned int prop_id, const std::string& str, ByteBuffer& bbuf) const;
 
             template <typename Vec>
-			void putVectorProperty(unsigned int prop_id, const Vec& vec, ByteBuffer& bbuf) const;
+			void putCVectorProperty(unsigned int prop_id, const Vec& vec, ByteBuffer& bbuf) const;
 
             template <typename Vec>
-			void putVectorArrayProperty(unsigned int prop_id, const Math::VectorArray<Vec>& vey_array, ByteBuffer& bbuf) const;
+			void putCVectorArrayProperty(unsigned int prop_id, const Math::VectorArray<Vec>& vey_array, ByteBuffer& bbuf) const;
+ 
+			template <typename Mtx>
+			void putCMatrix(const Mtx& mtx, ByteBuffer& bbuf, bool write_fp_len) const;
+
+			template <typename Grid>
+			void putGrid(const Grid& grid, ByteBuffer& bbuf, bool write_fp_len) const;
 
 			void putString(const std::string& str, ByteBuffer& bbuf) const;
 
@@ -84,8 +91,8 @@ namespace CDPL
 		private:
             CDF::PropertySpec composePropertySpec(unsigned int prop_id, std::size_t length) const;
 
-			bool       strictErrorChecks;
-			bool       singlePrecFloats;
+			bool strictErrorChecks;
+			bool singlePrecFloats;
 		};
 	}
 }
@@ -131,7 +138,7 @@ void CDPL::Internal::CDFDataWriterBase::putFloatProperty(unsigned int prop_id, c
 }
 
 template <typename Vec>
-void CDPL::Internal::CDFDataWriterBase::putVectorProperty(unsigned int prop_id, const Vec& vec, ByteBuffer& bbuf) const
+void CDPL::Internal::CDFDataWriterBase::putCVectorProperty(unsigned int prop_id, const Vec& vec, ByteBuffer& bbuf) const
 {
 	if (singlePrecFloats) {
 		BOOST_STATIC_ASSERT_MSG((sizeof(float) - 1) < (1 << CDF::NUM_PROP_VALUE_LENGTH_BITS), 
@@ -139,7 +146,7 @@ void CDPL::Internal::CDFDataWriterBase::putVectorProperty(unsigned int prop_id, 
 
 		bbuf.putInt(composePropertySpec(prop_id, sizeof(float)), false);
 
-		for (std::size_t i = 0; i < vec.getSize(); i++)
+		for (std::size_t i = 0; i < Vec::Size; i++)
 			bbuf.putFloat(float(vec[i]));
 
 		return;
@@ -152,12 +159,12 @@ void CDPL::Internal::CDFDataWriterBase::putVectorProperty(unsigned int prop_id, 
 
 	bbuf.putInt(composePropertySpec(prop_id, sizeof(T)), false);
 
-	for (std::size_t i = 0; i < vec.getSize(); i++)
+	for (std::size_t i = 0; i < Vec::Size; i++)
 		bbuf.putFloat(vec[i]);
 }
 
 template <typename Vec>
-void CDPL::Internal::CDFDataWriterBase::putVectorArrayProperty(unsigned int prop_id, const Math::VectorArray<Vec>& vec_array, ByteBuffer& bbuf) const
+void CDPL::Internal::CDFDataWriterBase::putCVectorArrayProperty(unsigned int prop_id, const Math::VectorArray<Vec>& vec_array, ByteBuffer& bbuf) const
 {
 	if (singlePrecFloats) {
 		BOOST_STATIC_ASSERT_MSG((sizeof(float) - 1) < (1 << CDF::NUM_PROP_VALUE_LENGTH_BITS), 
@@ -185,5 +192,49 @@ void CDPL::Internal::CDFDataWriterBase::putVectorArrayProperty(unsigned int prop
 		for (std::size_t j = 0; j < Vec::Size; j++)
 			bbuf.putFloat(vec_array[i][j]);
 }
+
+template <typename Mtx>
+void CDPL::Internal::CDFDataWriterBase::putCMatrix(const Mtx& mtx, ByteBuffer& bbuf, bool write_fp_len) const
+{
+	if (write_fp_len)
+		bbuf.putInt(boost::numeric_cast<Base::uint8>(singlePrecFloats ? sizeof(float) : sizeof(typename Mtx::ValueType)), false);
+	
+	if (singlePrecFloats) {
+		for (std::size_t i = 0; i < Mtx::Size1; i++)
+			for (std::size_t j = 0; j < Mtx::Size2; j++)
+				bbuf.putFloat(float(mtx(i, j)));
+		return;
+	}
+  
+	for (std::size_t i = 0; i < Mtx::Size1; i++)
+		for (std::size_t j = 0; j < Mtx::Size2; j++)
+			bbuf.putFloat(mtx(i, j));
+}
+
+template <typename Grid>
+void CDPL::Internal::CDFDataWriterBase::putGrid(const Grid& grid, ByteBuffer& bbuf, bool write_fp_len) const
+{
+	if (write_fp_len)
+		bbuf.putInt(boost::numeric_cast<Base::uint8>(singlePrecFloats ? sizeof(float) : sizeof(typename Grid::ValueType)), false);
+
+	bbuf.putInt(boost::numeric_cast<CDF::SizeType>(grid.getSize1()), false);
+	bbuf.putInt(boost::numeric_cast<CDF::SizeType>(grid.getSize2()), false);
+	bbuf.putInt(boost::numeric_cast<CDF::SizeType>(grid.getSize3()), false);
+
+	if (singlePrecFloats) {
+		for (std::size_t i = 0; i < grid.getSize1(); i++)
+			for (std::size_t j = 0; j < grid.getSize2(); j++)
+				for (std::size_t k = 0; k < grid.getSize3(); k++)
+					bbuf.putFloat(float(grid(i, j, k)));
+
+		return;
+	}
+
+	for (std::size_t i = 0; i < grid.getSize1(); i++)
+		for (std::size_t j = 0; j < grid.getSize2(); j++)
+			for (std::size_t k = 0; k < grid.getSize3(); k++)
+				bbuf.putFloat(grid(i, j, k));
+}
+
 
 #endif // CDPL_INTERNAL_CDFDATAWRITERBASE_HPP

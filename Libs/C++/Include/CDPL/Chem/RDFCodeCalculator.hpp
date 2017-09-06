@@ -32,10 +32,11 @@
 #define CDPL_CHEM_RDFCODECALCULATOR_HPP
 
 #include <cstddef>
+#include <iterator>
+#include <cmath>
 
 #include <boost/function.hpp>
 
-#include "CDPL/Chem/APIPrefix.hpp"
 #include "CDPL/Math/Vector.hpp"
 #include "CDPL/Math/Matrix.hpp"
 
@@ -46,9 +47,6 @@ namespace CDPL
 	namespace Chem
 	{
 
-		class MolecularGraph;
-		class Atom;
-
 		/**
 		 * \addtogroup CDPL_CHEM_RDF_CODES
 		 * @{
@@ -58,19 +56,32 @@ namespace CDPL
 		 * \brief RDFCodeCalculator.
 		 * \see [\ref CITB, \ref HBMD]
 		 */
-		class CDPL_CHEM_API RDFCodeCalculator
+		template <typename T>
+		class RDFCodeCalculator
 		{
 
 		public:
+			typedef T EntityType;
+			
 			/**
-			 * \brief Type of the generic functor class used to store user-defined atom pair weight functions.
+			 * \brief Type of the generic functor class used to store a user-defined entity pair weight function.
 			 *
-			 * The provided atom pair weight function (or function object) is required to take the two atoms (as a
-			 * \c const reference to Chem::Atom) as its arguments and return the weight of the atom pair as
+			 * The specified function (or function object) is required to take the two entitys (as a
+			 * \c const reference to \c EntityType) as its arguments and return the weight of the entity pair as
 			 * a floating-point value of type \c double. For details refer to the <em>Boost.Function</em>
 			 * documentation [\ref BFUN]. 
 			 */
-			typedef boost::function2<double, const Atom&, const Atom&> AtomPairWeightFunction;
+			typedef boost::function2<double, const EntityType&, const EntityType&> EntityPairWeightFunction;
+
+			/**
+			 * \brief Type of the generic functor class used to store a user-defined entity 3D coordinates function.
+			 *
+			 * The provided specified function (or function object) is required to take the entity (as a
+			 * \c const reference to \c EntityType) as its argument and return the coordinates of the entity as
+			 * a \c const reference to Math::Vector3D. For details refer to the <em>Boost.Function</em>
+			 * documentation [\ref BFUN]. 
+			 */
+			typedef boost::function1<const Math::Vector3D&, const EntityType&> Entity3DCoordinatesFunction;
 
 			/**
 			 * \brief Constructs the \c %RDFCodeCalculator instance.
@@ -78,19 +89,8 @@ namespace CDPL
 			RDFCodeCalculator();
 
 			/**
-			 * \brief Constructs the \c %RDFCodeCalculator instance and calculates the \e RDF code of the
-			 *        molecular graph \a molgraph.
-			 *
-			 * The calculated \e RDF code can be retrieved by a call to getResult().
-			 *
-			 * \param molgraph The molecular graph for which to calculate the \e RDF code vector.
-			 * \param rdf_code The calculated \e RDF code vector.
-			 */
-			RDFCodeCalculator(const MolecularGraph& molgraph, Math::DVector& rdf_code);
-
-			/**
 			 * \brief Allows to specify the smoothing factor used in the calculation of
-			 *        atom pair \e RDF contributions.
+			 *        entity pair \e RDF contributions.
 			 * \param factor The smoothing factor.
 			 * \note The default value of the smoothing factor is <em>1.0</em>.
 			 */
@@ -98,7 +98,7 @@ namespace CDPL
 
 			/**
 			 * \brief Returns the smoothing factor used in the calculation of
-			 *        atom pair \e RDF contributions.
+			 *        entity pair \e RDF contributions.
 			 * \return The applied smoothing factor.
 			 */
 			double getSmoothingFactor() const;
@@ -160,15 +160,22 @@ namespace CDPL
 			std::size_t getNumSteps() const;
 
 			/**
-			 * \brief Allows to specify a custom atom pair weight function.
-			 * \param func A RDFCodeCalculator::AtomPairWeightFunction instance that wraps the target function.
-			 * \note The default atom pair weight function returns the value the product of the atom types (see namespace
-			 *       Chem::AtomType).
+			 * \brief Allows to specify a custom entity pair weight function.
+			 * \param func A RDFCodeCalculator::EntityPairWeightFunction instance that wraps the target function.
+			 * \note The default entity pair weight function returns the value \e 1.
 			 */
-			void setAtomPairWeightFunction(const AtomPairWeightFunction& func);
+			void setEntityPairWeightFunction(const EntityPairWeightFunction& func);
 
 			/**
-			 * \brief Calculates the \e RDF code of the molecular graph \a molgraph.
+			 * \brief Allows to specify the entity 3D coordinates function.
+			 * \param func A RDFCodeCalculator::Entity3DCoordinatesFunction instance that wraps the target function.
+			 * \note The coordinates function must be specified before calling calculate(), otherwise a zero distance
+			 *       for each entity pair will be used for the calculation.
+			 */
+			void setEntity3DCoordinatesFunction(const Entity3DCoordinatesFunction& func);
+
+			/**
+			 * \brief Calculates the \e RDF code of an entity sequence.
 			 *
 			 * The elements of the returned \e RDF code vector correspond to the values of the radial distribution function
 			 * at different radii. The first element provides the \e RDF value at the start radius (see setStartRadius())
@@ -176,30 +183,171 @@ namespace CDPL
 			 * element. The total number of calculated \e RDF values (corresponds to the \e RDF code vector's length) is given by
 			 * the specified number of incrementation steps (see setNumSteps()) plus \e 1.
 			 * 
-			 * \param molgraph The molecular graph for which to calculate the \e RDF code.
+			 * \param beg An iterator pointing to the beginning of the entity sequence.
+			 * \param end An iterator pointing one past the end of the entity sequence.
 			 * \param rdf_code The calculated \e RDF code vector.
 			 */
-			void calculate(const MolecularGraph& molgraph, Math::DVector& rdf_code);
+			template <typename Iter>
+			void calculate(Iter beg, Iter end, Math::DVector& rdf_code);
 
 		private:
-			RDFCodeCalculator(const RDFCodeCalculator&);
+			template <typename Iter>
+			void init(Iter beg, Iter end);
 
-			RDFCodeCalculator& operator=(const RDFCodeCalculator&);
-
-			void init(const MolecularGraph&);
-
-			double                 smoothingFactor;
-			double                 scalingFactor;
-			double                 startRadius;
-			double                 radiusIncrement;
-			std::size_t            numSteps;
-			AtomPairWeightFunction weightFunc;
-			Math::DMatrix          weightMatrix;
+			double                    smoothingFactor;
+			double                    scalingFactor;
+			double                    startRadius;
+			double                    radiusIncrement;
+			std::size_t               numSteps;
+			std::size_t               numEntities;
+			EntityPairWeightFunction  weightFunc;
+			Entity3DCoordinatesFunction coordsFunc;
+			Math::DMatrix             weightMatrix;
+			Math::DMatrix             distMatrix;
 		}; 
 
 		/**
 		 * @}
 		 */
+	}
+}
+
+
+// Implementation
+
+template <typename T>
+CDPL::Chem::RDFCodeCalculator<T>::RDFCodeCalculator(): 
+	smoothingFactor(1.0), scalingFactor(100.0), startRadius(0.0), radiusIncrement(0.1), numSteps(99) {}
+
+template <typename T>
+void CDPL::Chem::RDFCodeCalculator<T>::setSmoothingFactor(double factor)
+{
+	smoothingFactor = factor;
+}
+
+template <typename T>
+void CDPL::Chem::RDFCodeCalculator<T>::setScalingFactor(double factor)
+{
+	scalingFactor = factor;
+}
+
+template <typename T>
+void CDPL::Chem::RDFCodeCalculator<T>::setStartRadius(double start_radius)
+{
+	startRadius = start_radius;
+}
+
+template <typename T>
+void CDPL::Chem::RDFCodeCalculator<T>::setRadiusIncrement(double radius_inc)
+{
+	radiusIncrement = radius_inc;
+}
+
+template <typename T>
+void CDPL::Chem::RDFCodeCalculator<T>::setNumSteps(std::size_t num_steps)
+{
+	numSteps = num_steps;
+}
+
+template <typename T>
+double CDPL::Chem::RDFCodeCalculator<T>::getSmoothingFactor() const
+{
+	return smoothingFactor;
+}
+
+template <typename T>
+double CDPL::Chem::RDFCodeCalculator<T>::getScalingFactor() const
+{
+	return scalingFactor;
+}
+
+template <typename T>
+double CDPL::Chem::RDFCodeCalculator<T>::getStartRadius() const
+{
+	return startRadius;
+}
+
+template <typename T>
+double CDPL::Chem::RDFCodeCalculator<T>::getRadiusIncrement() const
+{
+	return radiusIncrement;
+}
+
+template <typename T>
+std::size_t CDPL::Chem::RDFCodeCalculator<T>::getNumSteps() const
+{
+	return numSteps;
+}
+
+template <typename T>
+void CDPL::Chem::RDFCodeCalculator<T>::setEntityPairWeightFunction(const EntityPairWeightFunction& func)
+{
+	weightFunc = func;
+}
+
+template <typename T>
+void CDPL::Chem::RDFCodeCalculator<T>::setEntity3DCoordinatesFunction(const Entity3DCoordinatesFunction& func)
+{
+	coordsFunc = func;
+}
+
+template <typename T>
+template <typename Iter>
+void CDPL::Chem::RDFCodeCalculator<T>::calculate(Iter beg, Iter end, Math::DVector& rdf_code)
+{
+	init(beg, end);
+
+	rdf_code.resize(numSteps + 1, false);
+
+	double r = startRadius;
+
+	for (std::size_t i = 0; i <= numSteps; i++, r += radiusIncrement) {
+		double sum = 0.0;
+
+		for (std::size_t j = 0; j < numEntities; ) {
+			for (std::size_t k = ++j; k < numEntities; k++) {
+				double t = r - distMatrix(j, k);
+
+				sum += weightMatrix(j, k) * std::exp(-smoothingFactor * t * t);
+			}
+		}
+
+		rdf_code(i) = scalingFactor * sum;
+	}
+}
+
+template <typename T>
+template <typename Iter>
+void CDPL::Chem::RDFCodeCalculator<T>::init(Iter beg, Iter end)
+{
+	numEntities = std::distance(beg, end);
+
+	weightMatrix.resize(numEntities, numEntities, false);
+	distMatrix.resize(numEntities, numEntities, false);
+
+	Math::Vector3D entity1_pos;
+
+	for (std::size_t i = 0; beg != end; ) {
+		const EntityType& entity1 = *beg;
+		
+		if (coordsFunc)
+			entity1_pos = coordsFunc(entity1);
+
+		std::size_t j = ++i;
+
+		for (Iter it = ++beg; it != end; ++it, j++) {
+			const EntityType& entity2 = *it;
+
+			if (!weightFunc)
+				weightMatrix(i, j) = 1.0;
+			else
+				weightMatrix(i, j) = weightFunc(entity1, entity2);
+
+			if (coordsFunc)
+				distMatrix(i, j) = length(entity1_pos - coordsFunc(entity2));
+			else
+				distMatrix(i, j) = 0.0;
+		}
 	}
 }
 

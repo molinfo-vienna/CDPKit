@@ -191,13 +191,13 @@ void Chem::CDFDataWriter::outputAtoms(const MolecularGraph& molgraph, Internal::
 			putIntProperty(CDF::AtomProperty::IMPLICIT_HYDROGEN_COUNT, boost::numeric_cast<CDF::SizeType>(getImplicitHydrogenCount(atom)), bbuf);
 
 		if (has2DCoordinates(atom))
-			putVectorProperty(CDF::AtomProperty::COORDINATES_2D, get2DCoordinates(atom), bbuf);
+			putCVectorProperty(CDF::AtomProperty::COORDINATES_2D, get2DCoordinates(atom), bbuf);
 
 		if (has3DCoordinates(atom))
-			putVectorProperty(CDF::AtomProperty::COORDINATES_3D, get3DCoordinates(atom), bbuf);
+			putCVectorProperty(CDF::AtomProperty::COORDINATES_3D, get3DCoordinates(atom), bbuf);
 
 		if (has3DCoordinatesArray(atom))
-			putVectorArrayProperty(CDF::AtomProperty::COORDINATES_3D_ARRAY, *get3DCoordinatesArray(atom), bbuf);
+			putCVectorArrayProperty(CDF::AtomProperty::COORDINATES_3D_ARRAY, *get3DCoordinatesArray(atom), bbuf);
 
 		if (hasCIPConfiguration(atom))
 			putIntProperty(CDF::AtomProperty::CIP_CONFIGURATION, boost::numeric_cast<CDF::UIntType>(getCIPConfiguration(atom)), bbuf);

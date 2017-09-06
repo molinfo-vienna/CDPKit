@@ -35,6 +35,7 @@ namespace CDPLPythonMath
 	void registerFromPythonToCVectorConverters();
 	void registerFromPythonToMatrixConverters();
 	void registerFromPythonToCMatrixConverters();
+	void registerFromPythonToGridConverters();
 	void registerFromPythonToExpressionPointerConverters();
 	void registerFromPythonToVariantConverters();
 

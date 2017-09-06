@@ -310,19 +310,19 @@ std::size_t Chem::CDFDataReader::readAtoms(Molecule& mol, Internal::ByteBuffer& 
 					continue;
 
 				case CDF::AtomProperty::COORDINATES_2D:
-					getVectorProperty(prop_spec, coords_2d_val, bbuf);
+					getCVectorProperty(prop_spec, coords_2d_val, bbuf);
 					set2DCoordinates(atom, coords_2d_val);
 					continue;
 
 				case CDF::AtomProperty::COORDINATES_3D:
-					getVectorProperty(prop_spec, coords_3d_val, bbuf);
+					getCVectorProperty(prop_spec, coords_3d_val, bbuf);
 					set3DCoordinates(atom, coords_3d_val);
 					continue;
 
 				case CDF::AtomProperty::COORDINATES_3D_ARRAY: {
 					Math::Vector3DArray::SharedPointer va_ptr(new Math::Vector3DArray());
 
-					getVectorArrayProperty(prop_spec, *va_ptr, bbuf);
+					getCVectorArrayProperty(prop_spec, *va_ptr, bbuf);
 					set3DCoordinatesArray(atom, va_ptr);
 					continue;
 				}

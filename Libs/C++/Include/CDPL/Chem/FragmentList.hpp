@@ -31,6 +31,8 @@
 #ifndef CDPL_CHEM_FRAGMENTLIST_HPP
 #define CDPL_CHEM_FRAGMENTLIST_HPP
 
+#include <boost/shared_ptr.hpp>
+
 #include "CDPL/Chem/APIPrefix.hpp"
 #include "CDPL/Chem/Fragment.hpp"
 #include "CDPL/Util/IndirectArray.hpp"

@@ -37,8 +37,7 @@ void CDPLPythonPharm::exportPharmacophoreGenerator()
     using namespace CDPL;
 
 	python::class_<Pharm::PharmacophoreGenerator, Pharm::PharmacophoreGenerator::SharedPointer,
-				   python::bases<Pharm::FeatureGenerator>, boost::noncopyable>
-		("PharmacophoreGenerator", python::no_init)
+				   python::bases<Pharm::FeatureGenerator>, boost::noncopyable>("PharmacophoreGenerator", python::no_init)
 		.def(python::init<>(python::arg("self")))
 		.def(python::init<Pharm::PharmacophoreGenerator>((python::arg("self"), python::arg("gen"))))
 		.def("setFeatureGenerator", &Pharm::PharmacophoreGenerator::setFeatureGenerator, 

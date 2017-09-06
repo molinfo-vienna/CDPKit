@@ -32,6 +32,7 @@
 #include "CDPL/Pharm/ScreeningProcessor.hpp"
 #include "CDPL/Pharm/ScreeningDBCreator.hpp"
 #include "CDPL/Chem/Atom.hpp"
+#include "CDPL/Chem/Atom3DCoordinatesFunction.hpp"
 #include "CDPL/Math/Vector.hpp"
 #include "CDPL/Math/Matrix.hpp"
 
@@ -47,12 +48,15 @@ void CDPLPythonPharm::exportBoostFunctionWrappers()
     using namespace Pharm;
 
 	CDPLPythonBase::BoostFunction1Export<Feature3DCoordinatesFunction, Feature&, 
-										 python::return_internal_reference<2> >("Feature3DCoordinatesFunction");
+										 python::return_internal_reference<> >("Feature3DCoordinatesFunction");
     CDPLPythonBase::BoostFunction1Export<boost::function1<bool, const FeatureMapping&> >("BoolFeatureMappingFunctor");
    	CDPLPythonBase::BoostFunction1Export<boost::function1<double, const ScreeningProcessor::SearchHit&> >("DoubleSearchHitFunctor");
     CDPLPythonBase::BoostFunction1Export<boost::function1<double, const Feature&>, Feature&>("DoubleFeatureFunctor");
-	CDPLPythonBase::BoostFunction1Export<boost::function1<bool, double>, double, 
+	CDPLPythonBase::BoostFunction1Export<boost::function1<bool, double>, double,
 										 python::return_value_policy<python::return_by_value>, true>("BoolDoubleFunctor"); 
+	CDPLPythonBase::BoostFunction1Export<boost::function1<double, double>, double,
+										 python::return_value_policy<python::return_by_value>, true>("DoubleDoubleFunctor"); 
+	CDPLPythonBase::BoostFunction1Export<boost::function1<double, const Math::DVector&> >("DoubleDVectorFunctor"); 
 
     CDPLPythonBase::BoostFunction2Export<boost::function2<bool, const Feature&, const Feature&>, Feature&, Feature&>("BoolFeature2Functor");
     CDPLPythonBase::BoostFunction2Export<boost::function2<double, const Feature&, const Feature&>, Feature&, Feature&>("DoubleFeature2Functor");
@@ -62,11 +66,16 @@ void CDPLPythonPharm::exportBoostFunctionWrappers()
 	CDPLPythonBase::BoostFunction2Export<boost::function2<bool, std::size_t, std::size_t>, 
 										 std::size_t, std::size_t,
 										 python::return_value_policy<python::return_by_value>, true>("BoolSizeType2Functor");
+	CDPLPythonBase::BoostFunction2Export<boost::function2<double, double, double>, 
+										 double, double,
+										 python::return_value_policy<python::return_by_value>, true>("DoubleDouble2Functor");
 
     CDPLPythonBase::BoostFunction3Export<boost::function3<bool, const Feature&, const Feature&, const Math::Matrix4D&>,
 										 Feature&, Feature&>("BoolFeature2Matrix4DFunctor");
     CDPLPythonBase::BoostFunction3Export<boost::function3<double, const Feature&, const Feature&, const Math::Matrix4D&>,
 										 Feature&, Feature&>("DoubleFeature2Matrix4DFunctor");
+    CDPLPythonBase::BoostFunction3Export<boost::function3<double, const Math::Vector3D&, const Chem::AtomContainer&, const Chem::Atom3DCoordinatesFunction&>,
+										 const Math::Vector3D&, Chem::AtomContainer&, const Chem::Atom3DCoordinatesFunction&>("DoubleVector3DAtomContainerAtom3DCoordinatesFunctionFunctor");
 	
     CDPLPythonBase::BoostFunction4Export<boost::function4<bool, const Feature&, const Feature&, const Feature&, const Feature&>,
 										 Feature&, Feature&, Feature&, Feature&>("BoolFeature4Functor");

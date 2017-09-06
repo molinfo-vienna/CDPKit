@@ -40,6 +40,8 @@
 #include "CDPL/Pharm/Pharmacophore.hpp"      
 #include "CDPL/Pharm/BasicPharmacophore.hpp"  
 
+#include "CDPL/Pharm/InteractionScoreGrid.hpp"  
+#include "CDPL/Pharm/InteractionScoreGridSet.hpp"  
 #include "CDPL/Pharm/FeatureMapping.hpp"  
 #include "CDPL/Pharm/FeatureTypeHistogram.hpp"  
 #include "CDPL/Pharm/Feature3DCoordinatesFunction.hpp"  
@@ -76,6 +78,19 @@
 #include "CDPL/Pharm/CationPiInteractionConstraint.hpp"  
 #include "CDPL/Pharm/HBondingInteractionConstraint.hpp"  
 
+#include "CDPL/Pharm/GeneralizedBellFunction.hpp"  
+#include "CDPL/Pharm/InteractionScoreCombiner.hpp"  
+#include "CDPL/Pharm/FeatureDistanceScore.hpp"  
+#include "CDPL/Pharm/HydrophobicInteractionScore.hpp"  
+#include "CDPL/Pharm/IonicInteractionScore.hpp"  
+#include "CDPL/Pharm/HBondingInteractionScore.hpp"  
+#include "CDPL/Pharm/OrthogonalPiPiInteractionScore.hpp"  
+#include "CDPL/Pharm/ParallelPiPiInteractionScore.hpp"  
+#include "CDPL/Pharm/CationPiInteractionScore.hpp"  
+#include "CDPL/Pharm/StericAtomClashFactorCalculator.hpp"  
+#include "CDPL/Pharm/InteractionScoreGridCalculator.hpp"  
+#include "CDPL/Pharm/DefaultInteractionScoreGridCalculator.hpp"  
+
 #include "CDPL/Pharm/GeometricalFeatureMappingExtractor.hpp"  
 #include "CDPL/Pharm/PharmacophoreAlignment.hpp"  
 #include "CDPL/Pharm/FeatureTypeMatchFunctor.hpp"  
@@ -87,20 +102,30 @@
 
 #include "CDPL/Pharm/CDFPharmacophoreInputHandler.hpp"
 #include "CDPL/Pharm/PMLPharmacophoreInputHandler.hpp"
+#include "CDPL/Pharm/CDFInteractionScoreGridInputHandler.hpp"
+#include "CDPL/Pharm/CDFInteractionScoreGridSetInputHandler.hpp"
 
 #include "CDPL/Pharm/CDFFeatureContainerOutputHandler.hpp"
 #include "CDPL/Pharm/PMLFeatureContainerOutputHandler.hpp"
+#include "CDPL/Pharm/CDFInteractionScoreGridOutputHandler.hpp"
+#include "CDPL/Pharm/CDFInteractionScoreGridSetOutputHandler.hpp"
 
 #include "CDPL/Pharm/CDFPharmacophoreReader.hpp"
 #include "CDPL/Pharm/PMLPharmacophoreReader.hpp"
+#include "CDPL/Pharm/CDFInteractionScoreGridReader.hpp"
+#include "CDPL/Pharm/CDFInteractionScoreGridSetReader.hpp"
 
 #include "CDPL/Pharm/CDFFeatureContainerWriter.hpp"
 #include "CDPL/Pharm/PMLFeatureContainerWriter.hpp"
+#include "CDPL/Pharm/CDFInteractionScoreGridWriter.hpp"
+#include "CDPL/Pharm/CDFInteractionScoreGridSetWriter.hpp"
 
 #include "CDPL/Pharm/ScreeningDBCreator.hpp"
 #include "CDPL/Pharm/ScreeningDBAccessor.hpp"
 #include "CDPL/Pharm/ScreeningProcessor.hpp"
 #include "CDPL/Pharm/PharmacophoreFitScreeningScore.hpp"
+
+#include "CDPL/Pharm/FeatureRDFCodeCalculator.hpp"
 
 #include "CDPL/Pharm/PharmacophoreFunctions.hpp"  
 #include "CDPL/Pharm/FeatureFunctions.hpp"
@@ -116,13 +141,31 @@
 
 #include "CDPL/Pharm/CDFGZPharmacophoreInputHandler.hpp"
 #include "CDPL/Pharm/CDFBZ2PharmacophoreInputHandler.hpp"
+#include "CDPL/Pharm/CDFGZInteractionScoreGridInputHandler.hpp"
+#include "CDPL/Pharm/CDFBZ2InteractionScoreGridInputHandler.hpp"
+#include "CDPL/Pharm/CDFGZInteractionScoreGridSetInputHandler.hpp"
+#include "CDPL/Pharm/CDFBZ2InteractionScoreGridSetInputHandler.hpp"
+
 #include "CDPL/Pharm/CDFGZFeatureContainerOutputHandler.hpp"
 #include "CDPL/Pharm/CDFBZ2FeatureContainerOutputHandler.hpp"
+#include "CDPL/Pharm/CDFGZInteractionScoreGridOutputHandler.hpp"
+#include "CDPL/Pharm/CDFBZ2InteractionScoreGridOutputHandler.hpp"
+#include "CDPL/Pharm/CDFGZInteractionScoreGridSetOutputHandler.hpp"
+#include "CDPL/Pharm/CDFBZ2InteractionScoreGridSetOutputHandler.hpp"
 
 #include "CDPL/Pharm/CDFGZPharmacophoreReader.hpp"
 #include "CDPL/Pharm/CDFBZ2PharmacophoreReader.hpp"
+#include "CDPL/Pharm/CDFGZInteractionScoreGridReader.hpp"
+#include "CDPL/Pharm/CDFBZ2InteractionScoreGridReader.hpp"
+#include "CDPL/Pharm/CDFGZInteractionScoreGridSetReader.hpp"
+#include "CDPL/Pharm/CDFBZ2InteractionScoreGridSetReader.hpp"
+
 #include "CDPL/Pharm/CDFGZFeatureContainerWriter.hpp"
 #include "CDPL/Pharm/CDFBZ2FeatureContainerWriter.hpp"
+#include "CDPL/Pharm/CDFGZInteractionScoreGridWriter.hpp"
+#include "CDPL/Pharm/CDFBZ2InteractionScoreGridWriter.hpp"
+#include "CDPL/Pharm/CDFGZInteractionScoreGridSetWriter.hpp"
+#include "CDPL/Pharm/CDFBZ2InteractionScoreGridSetWriter.hpp"
 
 #  endif // defined(HAVE_BOOST_IOSTREAMS)
 #endif // defined(HAVE_BOOST_FILESYSTEM)

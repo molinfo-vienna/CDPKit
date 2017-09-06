@@ -356,7 +356,13 @@
 \defgroup CDPL_PHARM_ALIGNMENT Pharmacophore Alignment 
 \ingroup CDPL_PHARM
 
+\defgroup CDPL_PHARM_INTERACTION_SCORE_GRID_CALCULATION Interaction Score Grid Calculation
+\ingroup CDPL_PHARM
+
 \defgroup CDPL_PHARM_SCREENING Pharmacophore Screening
+\ingroup CDPL_PHARM
+
+\defgroup CDPL_PHARM_RDF_CODES Radial Distribution Function (RDF) Codes
 \ingroup CDPL_PHARM
 
 \defgroup CDPL_PHARM_PROPERTIES Property Keys

@@ -106,6 +106,7 @@ namespace CDPL
 							 const T empty_def_val = T(0), const T err_def_val = T(0))
 		{
 			const char* c_str = str.c_str();
+
 			return parseNumber<T>(c_str, c_str + str.size(), err_msg, throw_ex, empty_def_val, err_def_val);
 		}
 

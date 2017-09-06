@@ -41,3 +41,7 @@ template class Base::DataIOManager<Chem::Reaction>;
 template class Base::DataIOManager<Pharm::Pharmacophore>;
 
 template class Base::DataIOManager<Pharm::FeatureContainer>;
+
+template class Base::DataIOManager<Pharm::InteractionScoreGrid>;
+
+template class Base::DataIOManager<Pharm::InteractionScoreGridSet>;

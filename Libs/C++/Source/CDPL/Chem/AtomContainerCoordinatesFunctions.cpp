@@ -65,3 +65,67 @@ void Chem::set2DCoordinates(AtomContainer& cntnr, const Math::Vector2DArray& coo
 	for (std::size_t i = 0; i < num_atoms; i++) 
 		set2DCoordinates(cntnr.getAtom(i), coords[i]);
 }
+
+void Chem::transform2DCoordinates(AtomContainer& cntnr, const Math::Matrix3D& mtx)
+{
+	Math::Vector3D tmp1;
+	Math::Vector3D tmp2;
+	Math::Vector2D tmp3;
+
+	tmp1[2] = 1.0;
+
+	for (AtomContainer::AtomIterator it = cntnr.getAtomsBegin(), end = cntnr.getAtomsEnd(); it != end; ++it) {
+		Atom& atom = *it;
+		const Math::Vector2D& coords = get2DCoordinates(atom);
+
+		tmp1[0] = coords[0];
+		tmp1[1] = coords[1];
+
+		prod(mtx, tmp1, tmp2);
+
+		tmp3[0] = tmp2[0];
+		tmp3[1] = tmp2[1];
+
+		set2DCoordinates(atom, tmp3);
+	}
+}
+
+void Chem::get3DCoordinates(const AtomContainer& cntnr, Math::Vector3DArray& coords)
+{
+	for (AtomContainer::ConstAtomIterator it = cntnr.getAtomsBegin(), end = cntnr.getAtomsEnd(); it != end; ++it)
+		coords.addElement(get3DCoordinates(*it));
+}
+
+void Chem::set3DCoordinates(AtomContainer& cntnr, const Math::Vector3DArray& coords)
+{
+	std::size_t num_atoms = cntnr.getNumAtoms();
+
+	for (std::size_t i = 0; i < num_atoms; i++) 
+		set3DCoordinates(cntnr.getAtom(i), coords[i]);
+}
+
+void Chem::transform3DCoordinates(AtomContainer& cntnr, const Math::Matrix4D& mtx)
+{
+	Math::Vector4D tmp1;
+	Math::Vector4D tmp2;
+	Math::Vector3D tmp3;
+
+	tmp1[3] = 1.0;
+
+	for (AtomContainer::AtomIterator it = cntnr.getAtomsBegin(), end = cntnr.getAtomsEnd(); it != end; ++it) {
+		Atom& atom = *it;
+		const Math::Vector3D& coords = get3DCoordinates(atom);
+
+		tmp1[0] = coords[0];
+		tmp1[1] = coords[1];
+		tmp1[2] = coords[2];
+
+		prod(mtx, tmp1, tmp2);
+
+		tmp3[0] = tmp2[0];
+		tmp3[1] = tmp2[1];
+		tmp3[2] = tmp2[2];
+
+		set3DCoordinates(atom, tmp3);
+	}
+}

@@ -31,14 +31,14 @@
 #include "CDPL/Pharm/CDFFeatureContainerWriter.hpp"
 #include "CDPL/Base/Exceptions.hpp"
 
-#include "CDFDataWriter.hpp"
+#include "CDFPharmacophoreDataWriter.hpp"
 
 
 using namespace CDPL;
 
 
 Pharm::CDFFeatureContainerWriter::CDFFeatureContainerWriter(std::ostream& os): 
-	output(os), state(os.good()), writer(new CDFDataWriter(*this)) {}
+	output(os), state(os.good()), writer(new CDFPharmacophoreDataWriter(*this)) {}
 
 Pharm::CDFFeatureContainerWriter::~CDFFeatureContainerWriter() {}
 

@@ -7,7 +7,10 @@ SET(cdpl-pharm_LIB_SRCS
     FeatureSet.cpp
     Pharmacophore.cpp
     BasicPharmacophore.cpp
-  
+
+    InteractionScoreGrid.cpp
+    InteractionScoreGridSet.cpp  
+
     FeatureContainerProperty.cpp
     FeatureProperty.cpp
     FeatureContainerPropertyDefault.cpp
@@ -37,12 +40,26 @@ SET(cdpl-pharm_LIB_SRCS
     OrthogonalPiPiInteractionConstraint.cpp
     ParallelPiPiInteractionConstraint.cpp
 
+    GeneralizedBellFunction.cpp
+    InteractionScoreCombiner.cpp
+    FeatureDistanceScore.cpp
+    HydrophobicInteractionScore.cpp
+    IonicInteractionScore.cpp
+    HBondingInteractionScore.cpp
+    OrthogonalPiPiInteractionScore.cpp
+    ParallelPiPiInteractionScore.cpp
+    CationPiInteractionScore.cpp
+    StericAtomClashFactorCalculator.cpp
+    InteractionScoreGridCalculator.cpp
+    DefaultInteractionScoreGridCalculator.cpp
+
     FeatureTypeMatchFunctor.cpp
     FeaturePairDistanceMatchFunctor.cpp
     FeaturePositionMatchFunctor.cpp
     FeatureGeometryMatchFunctor.cpp
     GeometricalFeatureMappingExtractor.cpp
     PharmacophoreAlignment.cpp
+    FeatureRDFCodeCalculator.cpp
 
     PharmacophoreFitScore.cpp
 
@@ -50,11 +67,19 @@ SET(cdpl-pharm_LIB_SRCS
     ScreeningProcessorImpl.cpp
     PharmacophoreFitScreeningScore.cpp
 
-    CDFDataReader.cpp
-    CDFDataWriter.cpp
+    CDFPharmacophoreDataReader.cpp
+    CDFPharmacophoreDataWriter.cpp
+    CDFInteractionScoreGridDataReader.cpp
+    CDFInteractionScoreGridDataWriter.cpp
+    CDFInteractionScoreGridSetDataReader.cpp
+    CDFInteractionScoreGridSetDataWriter.cpp
     CDFPharmacophoreReader.cpp
     CDFFeatureContainerWriter.cpp
- 
+    CDFInteractionScoreGridReader.cpp 
+    CDFInteractionScoreGridWriter.cpp 
+    CDFInteractionScoreGridSetReader.cpp 
+    CDFInteractionScoreGridSetWriter.cpp 
+
     PMLDataReader.cpp
     PMLDataWriter.cpp
     PMLPharmacophoreReader.cpp

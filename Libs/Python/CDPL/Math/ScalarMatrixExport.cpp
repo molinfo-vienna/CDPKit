@@ -27,7 +27,6 @@
 #include <boost/python.hpp>
 
 #include "CDPL/Math/Matrix.hpp"
-#include "CDPL/Math/AffineTransform.hpp"
 #include "CDPL/Math/IO.hpp"
 
 #include "Base/ObjectIdentityCheckVisitor.hpp"

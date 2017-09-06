@@ -466,7 +466,7 @@ void Pharm::PSDScreeningDBCreatorImpl::genAndInsertPharmData(const Chem::Molecul
 
 	for (std::size_t i = 0; i < num_confs; i++) {
 		coordinates.clear();
-		getConformationData(molgraph, i, coordinates);
+		getConformation(molgraph, i, coordinates);
 
 		pharmGenerator.setAtom3DCoordinatesFunction(Chem::AtomArray3DCoordinatesFunctor(coordinates, molgraph));
 		genAndInsertPharmData(molgraph, mol_id, i);

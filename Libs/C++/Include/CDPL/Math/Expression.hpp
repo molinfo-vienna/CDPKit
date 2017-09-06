@@ -113,6 +113,26 @@ namespace CDPL
 			CDPL_MATH_INLINE ~QuaternionExpression() {};
 		};
 
+		template <typename E>
+		class GridExpression : public Expression<E>
+		{
+
+		public:
+			typedef E ExpressionType;
+
+			CDPL_MATH_INLINE const ExpressionType& operator()() const {
+				return *static_cast<const ExpressionType*>(this);
+			}
+
+			CDPL_MATH_INLINE ExpressionType& operator()() {
+				return *static_cast<ExpressionType*>(this);
+			}
+
+		protected:
+			CDPL_MATH_INLINE GridExpression() {};
+			CDPL_MATH_INLINE ~GridExpression() {};
+		};
+
 		template <typename C> 
 		class VectorContainer : public VectorExpression<C>
 		{
@@ -171,6 +191,26 @@ namespace CDPL
 		protected:
 			CDPL_MATH_INLINE QuaternionContainer() {};
 			CDPL_MATH_INLINE ~QuaternionContainer() {};
+		};
+
+		template <typename C> 
+		class GridContainer : public GridExpression<C>
+		{
+
+		public:
+			typedef C ContainerType;
+
+			CDPL_MATH_INLINE const ContainerType& operator()() const {
+				return *static_cast<const ContainerType*>(this);
+			}
+
+			CDPL_MATH_INLINE ContainerType& operator()() {
+				return *static_cast<ContainerType*>(this);
+			}
+
+		protected:
+			CDPL_MATH_INLINE GridContainer() {};
+			CDPL_MATH_INLINE ~GridContainer() {};
 		};
 	}
 }

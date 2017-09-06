@@ -237,7 +237,7 @@ namespace CDPL
 			CDPL_MATH_INLINE Quaternion() {}
 
 			CDPL_MATH_INLINE explicit Quaternion(const ValueType& c1, const ValueType& c2 = ValueType(), 
-												const ValueType& c3 = ValueType(), const ValueType& c4 = ValueType()) {
+												 const ValueType& c3 = ValueType(), const ValueType& c4 = ValueType()) {
 				data[0] = c1;
 				data[1] = c2;
 				data[2] = c3;

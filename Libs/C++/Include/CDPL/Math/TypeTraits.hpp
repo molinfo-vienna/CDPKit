@@ -105,8 +105,6 @@ namespace CDPL
 			static CDPL_MATH_INLINE RealType normInf(ConstReference t) {
 				return SelfType::abs(t);
 			}
-
-			
 		};
 
 		template <typename T> struct TypeTraits;
@@ -180,6 +178,13 @@ namespace CDPL
 		{
 
 			typedef typename Q::QuaternionTemporaryType Type;
+		};
+
+		template <typename G>
+		struct GridTemporaryTraits 
+		{
+
+			typedef typename G::GridTemporaryType Type;
 		};
 
 		template <typename T>

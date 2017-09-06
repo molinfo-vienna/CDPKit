@@ -15,6 +15,7 @@ SET(math_impl_MOD_SRCS
     VectorExpressionExport.cpp
     MatrixExpressionExport.cpp
     QuaternionExpressionExport.cpp
+    GridExpressionExport.cpp
 
     VectorExport.cpp
     CVectorExport1.cpp
@@ -36,7 +37,11 @@ SET(math_impl_MOD_SRCS
     ZeroMatrixExport.cpp    
     QuaternionExport.cpp
     RealQuaternionExport.cpp
- 
+    GridExport.cpp
+    ZeroGridExport.cpp
+    ScalarGridExport.cpp
+    UniformSpatialGridExport.cpp
+
     RangeExport.cpp
     SliceExport.cpp
     VectorSliceExport.cpp
@@ -72,6 +77,7 @@ SET(math_impl_MOD_SRCS
     MatrixFunctionExport.cpp
     SpecialFunctionExport.cpp
     QuaternionFunctionExport.cpp
+    GridFunctionExport.cpp
 
     VectorArrayExport.cpp
     VectorArrayFunctionExport.cpp
@@ -88,6 +94,7 @@ SET(math_impl_MOD_SRCS
     FromPythonToCVectorConverterRegistration.cpp
     FromPythonToMatrixConverterRegistration.cpp	
     FromPythonToCMatrixConverterRegistration.cpp	
+    FromPythonToGridConverterRegistration.cpp	
    )
 
 SET(math_MOD_SRCS

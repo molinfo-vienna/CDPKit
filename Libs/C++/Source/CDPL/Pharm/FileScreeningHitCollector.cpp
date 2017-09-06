@@ -127,14 +127,14 @@ bool Pharm::FileScreeningHitCollector::operator()(const ScreeningProcessor::Sear
 	if (alignMolecule) {
 		alignedCoords.clear();
 
-		getConformationData(molecule, hit.getHitConformationIndex(), alignedCoords);
+		getConformation(molecule, hit.getHitConformationIndex(), alignedCoords);
 
 		transform(alignedCoords, hit.getHitAlignmentTransform());
 
 		set3DCoordinates(molecule, alignedCoords);
 	
 	} else
-		setActiveConformation(molecule, hit.getHitConformationIndex());
+		applyConformation(molecule, hit.getHitConformationIndex());
 
 	std::for_each(molecule.getAtomsBegin(), molecule.getAtomsEnd(), &Chem::clear3DCoordinatesArray);
 	

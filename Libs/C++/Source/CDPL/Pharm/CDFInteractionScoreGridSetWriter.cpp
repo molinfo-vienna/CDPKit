@@ -1,0 +1,69 @@
+/* -*- mode: c++; c-basic-offset: 4; tab-width: 4; indent-tabs-mode: t -*- */
+
+/* 
+ * CDFInteractionScoreGridSetWriter.cpp 
+ *
+ * This file is part of the Chemical Data Processing Toolkit
+ *
+ * Copyright (C) 2003-2010 Thomas A. Seidel <thomas.seidel@univie.ac.at>
+ *
+ * This library is free software; you can redistribute it and/or
+ * modify it under the terms of the GNU Lesser General Public
+ * License as published by the Free Software Foundation; either
+ * version 2 of the License, or (at your option) any later version.
+ *
+ * This library is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU
+ * Lesser General Public License for more details.
+ *
+ * You should have received a copy of the GNU Lesser General Public License
+ * along with this library; see the file COPYING. If not, write to
+ * the Free Software Foundation, Inc., 59 Temple Place - Suite 330,
+ * Boston, MA 02111-1307, USA.
+ */
+
+
+#include "StaticInit.hpp"
+
+#include <ostream>
+
+#include "CDPL/Pharm/CDFInteractionScoreGridSetWriter.hpp"
+#include "CDPL/Base/Exceptions.hpp"
+
+#include "CDFInteractionScoreGridSetDataWriter.hpp"
+
+
+using namespace CDPL;
+
+
+Pharm::CDFInteractionScoreGridSetWriter::CDFInteractionScoreGridSetWriter(std::ostream& os): 
+	output(os), state(os.good()), writer(new CDFInteractionScoreGridSetDataWriter(*this)) {}
+
+Pharm::CDFInteractionScoreGridSetWriter::~CDFInteractionScoreGridSetWriter() {}
+
+Base::DataWriter<Pharm::InteractionScoreGridSet>& Pharm::CDFInteractionScoreGridSetWriter::write(const InteractionScoreGridSet& grid_set)
+{
+	state = false;
+
+	try {
+		state = writer->writeGridSet(output, grid_set);
+
+	} catch (const std::exception& e) {
+		throw Base::IOError("CDFInteractionScoreGridSetWriter: " + std::string(e.what()));
+	}
+
+	invokeIOCallbacks(1.0);
+
+	return *this;
+}
+
+Pharm::CDFInteractionScoreGridSetWriter::operator const void*() const
+{
+	return (state ? this : 0);
+}
+
+bool Pharm::CDFInteractionScoreGridSetWriter::operator!() const
+{
+	return !state;
+}

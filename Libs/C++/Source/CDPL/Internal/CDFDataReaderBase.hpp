@@ -75,10 +75,22 @@ namespace CDPL
 			void getStringProperty(CDF::PropertySpec prop_spec, std::string& str, ByteBuffer& bbuf) const;
 
 			template <typename Vec>
-			void getVectorProperty(CDF::PropertySpec prop_spec, Vec& vec, ByteBuffer& bbuf) const;
+			void getCVectorProperty(CDF::PropertySpec prop_spec, Vec& vec, ByteBuffer& bbuf) const;
 
 			template <typename Vec>
-			void getVectorArrayProperty(CDF::PropertySpec prop_spec, Math::VectorArray<Vec>& vec_array, ByteBuffer& bbuf) const;
+			void getCVectorArrayProperty(CDF::PropertySpec prop_spec, Math::VectorArray<Vec>& vec_array, ByteBuffer& bbuf) const;
+
+			template <typename Mtx>
+			void getCMatrix(Mtx& mtx, ByteBuffer& bbuf) const;
+
+			template <typename Mtx>
+			void getCMatrix(Mtx& mtx, ByteBuffer& bbuf, std::size_t fp_len) const;
+
+			template <typename Grid>
+			void getGrid(Grid& grid, ByteBuffer& bbuf) const;
+
+			template <typename Grid>
+			void getGrid(Grid& grid, ByteBuffer& bbuf, std::size_t fp_len) const;
 
 			void getString(std::string& str, ByteBuffer& bbuf) const;
 
@@ -142,8 +154,7 @@ void CDPL::Internal::CDFDataReaderBase::getFloatProperty(CDF::PropertySpec prop_
 }
 
 template <typename Vec>
-inline
-void CDPL::Internal::CDFDataReaderBase::getVectorProperty(CDF::PropertySpec prop_spec, Vec& vec, ByteBuffer& bbuf) const
+void CDPL::Internal::CDFDataReaderBase::getCVectorProperty(CDF::PropertySpec prop_spec, Vec& vec, ByteBuffer& bbuf) const
 {
 	std::size_t len = extractPropertyValueLength(prop_spec);
 
@@ -151,7 +162,7 @@ void CDPL::Internal::CDFDataReaderBase::getVectorProperty(CDF::PropertySpec prop
 		if (len == sizeof(float)) {
 			float tmp;
 
-			for (std::size_t i = 0; i < vec.getSize(); i++) {
+			for (std::size_t i = 0; i < Vec::Size; i++) {
 				bbuf.getFloat(tmp);
 				vec[i] = tmp;
 			}
@@ -162,12 +173,12 @@ void CDPL::Internal::CDFDataReaderBase::getVectorProperty(CDF::PropertySpec prop
 		throw Base::IOError("CDFDataReaderBase: float property read error, output type size mismatch");
 	}
 
-	for (std::size_t i = 0; i < vec.getSize(); i++)
+	for (std::size_t i = 0; i < Vec::Size; i++)
 		bbuf.getFloat(vec[i]);
 }
 
 template <typename Vec>
-void CDPL::Internal::CDFDataReaderBase::getVectorArrayProperty(CDF::PropertySpec prop_spec, Math::VectorArray<Vec>& vec_array, ByteBuffer& bbuf) const
+void CDPL::Internal::CDFDataReaderBase::getCVectorArrayProperty(CDF::PropertySpec prop_spec, Math::VectorArray<Vec>& vec_array, ByteBuffer& bbuf) const
 {
 	std::size_t len = extractPropertyValueLength(prop_spec);
 	CDF::SizeType arr_size;
@@ -195,6 +206,84 @@ void CDPL::Internal::CDFDataReaderBase::getVectorArrayProperty(CDF::PropertySpec
 	for (CDF::SizeType i = 0; i < arr_size; i++)
 		for (std::size_t j = 0; j < Vec::Size; j++)
 			bbuf.getFloat(vec_array[i][j]);
+}
+
+template <typename Mtx>
+void CDPL::Internal::CDFDataReaderBase::getCMatrix(Mtx& mtx, ByteBuffer& bbuf) const
+{
+	Base::uint8 len;
+	bbuf.getInt(len);
+
+	getCMatrix(mtx, bbuf, len);
+}
+
+template <typename Mtx>
+void CDPL::Internal::CDFDataReaderBase::getCMatrix(Mtx& mtx, ByteBuffer& bbuf, std::size_t fp_len) const
+{
+	if (fp_len != sizeof(typename Mtx::ValueType)) {
+		if (fp_len == sizeof(float)) {
+			float tmp;
+
+			for (std::size_t i = 0; i < Mtx::Size1; i++)
+				for (std::size_t j = 0; j < Mtx::Size2; j++) {
+					bbuf.getFloat(tmp);
+					mtx(i, j) = tmp;
+				}
+
+			return;
+		}
+
+		throw Base::IOError("CDFDataReaderBase: matrix read error, matrix element type size mismatch");
+	}
+
+	for (std::size_t i = 0; i < Mtx::Size1; i++)
+		for (std::size_t j = 0; j < Mtx::Size2; j++)
+			bbuf.getFloat(mtx(i, j));
+}
+
+template <typename Grid>
+void CDPL::Internal::CDFDataReaderBase::getGrid(Grid& grid, ByteBuffer& bbuf) const
+{
+	Base::uint8 len;
+	bbuf.getInt(len);
+
+	getGrid(grid, bbuf, len);
+}
+
+template <typename Grid>
+void CDPL::Internal::CDFDataReaderBase::getGrid(Grid& grid, ByteBuffer& bbuf, std::size_t fp_len) const
+{
+	CDF::SizeType size1;
+	CDF::SizeType size2;
+	CDF::SizeType size3;
+
+	bbuf.getInt(size1);
+	bbuf.getInt(size2);
+	bbuf.getInt(size3);
+
+	grid.resize(size1, size2, size3, false);
+
+	if (fp_len != sizeof(typename Grid::ValueType)) {
+		if (fp_len == sizeof(float)) {
+			float tmp;
+
+			for (CDF::SizeType i = 0; i < size1; i++)
+				for (CDF::SizeType j = 0; j < size2; j++)
+					for (CDF::SizeType k = 0; k < size3; k++) {
+						bbuf.getFloat(tmp);
+						grid(i, j, k) = tmp;
+					}
+
+			return;
+		}
+
+		throw Base::IOError("CDFDataReaderBase: grid read error, grid element type size mismatch");
+	}
+
+	for (CDF::SizeType i = 0; i < size1; i++)
+		for (CDF::SizeType j = 0; j < size2; j++)
+			for (CDF::SizeType k = 0; k < size3; k++) 
+				bbuf.getFloat(grid(i, j, k));
 }
 
 #endif // CDPL_INTERNAL_CDFDATAREADERBASE_HPP

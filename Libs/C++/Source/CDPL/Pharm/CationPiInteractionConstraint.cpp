@@ -73,11 +73,7 @@ bool Pharm::CationPiInteractionConstraint::operator()(const Feature& ftr1, const
 
     if (hasOrientation(aro_ftr)) {
 		const Math::Vector3D& orient = getOrientation(aro_ftr);
-		double ang_cos = angleCos(orient, aro_cat_vec, dist);
-
-		if (ang_cos < 0.0)
-			ang_cos *= -1;
-		
+		double ang_cos = std::abs(angleCos(orient, aro_cat_vec, dist));
 		double angle = std::acos(ang_cos) * 180.0 / M_PI;
 
 		if (angle > maxAngle)

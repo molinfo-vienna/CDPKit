@@ -1,9 +1,9 @@
 /* -*- mode: c++; c-basic-offset: 4; tab-width: 4; indent-tabs-mode: t -*- */
 
 /* 
- * CDFDataWriter.hpp 
+ * CDFInteractionScoreGridDataReader.hpp 
  *
- * This file is part of the Chemical Data Processing Toolkit
+ * This file is part of the Pharmical Data Processing Toolkit
  *
  * Copyright (C) 2003-2010 Thomas A. Seidel <thomas.seidel@univie.ac.at>
  *
@@ -24,12 +24,12 @@
  */
 
 
-#ifndef CDPL_PHARM_CDFDATAWRITER_HPP
-#define CDPL_PHARM_CDFDATAWRITER_HPP
+#ifndef CDPL_PHARM_CDFINTERACTIONSCOREGRIDDATAREADER_HPP
+#define CDPL_PHARM_CDFINTERACTIONSCOREGRIDDATAREADER_HPP
 
 #include <iosfwd>
 
-#include "CDPL/Internal/CDFDataWriterBase.hpp"
+#include "CDPL/Internal/CDFDataReaderBase.hpp"
 #include "CDPL/Internal/ByteBuffer.hpp"
 
 
@@ -45,26 +45,28 @@ namespace CDPL
 	namespace Pharm
 	{
 
-		class FeatureContainer;
+		class InteractionScoreGrid;
 
-		class CDFDataWriter : private Internal::CDFDataWriterBase
+		class CDFInteractionScoreGridDataReader : protected Internal::CDFDataReaderBase
 		{
 
 		public:
-			CDFDataWriter(const Base::ControlParameterContainer& ctrl_params): ctrlParams(ctrl_params) {}
+			CDFInteractionScoreGridDataReader(const Base::ControlParameterContainer& ctrl_params): ctrlParams(ctrl_params) {}
 
-			bool writeFeatureContainer(std::ostream& os, const FeatureContainer& cntnr);
+			bool readGrid(std::istream& is, InteractionScoreGrid& grid);
 
-			void writeFeatureContainer(const FeatureContainer& cntnr, Internal::ByteBuffer& bbuf);
+			bool readGrid(InteractionScoreGrid& grid, Internal::ByteBuffer& bbuf);
 
-		private:
-			void init();
+			bool skipGrid(std::istream& is);
 
-			void outputFtrContainerHeader(const FeatureContainer& cntnr, Internal::ByteBuffer& bbuf) const;
-			void outputFeatures(const FeatureContainer& cntnr, Internal::ByteBuffer& bbuf) const;
-			void outputFtrContainerProperties(const FeatureContainer& cntnr, Internal::ByteBuffer& bbuf) const;
+			bool hasMoreData(std::istream& is);
 
-			bool writeRecordData(std::ostream& os) const;
+		protected:
+			bool doReadGrid(InteractionScoreGrid& grid, Internal::ByteBuffer& bbuf) const;
+
+			void readGridData(InteractionScoreGrid& grid, Internal::ByteBuffer& bbuf) const;
+
+			void init(); 
 
 			const Base::ControlParameterContainer& ctrlParams;	
 			Internal::ByteBuffer                   dataBuffer;
@@ -72,4 +74,4 @@ namespace CDPL
 	}
 }
 
-#endif // CDPL_PHARM_CDFDATAWRITER_HPP
+#endif // CDPL_PHARM_CDFINTERACTIONSCOREGRIDDATAREADER_HPP

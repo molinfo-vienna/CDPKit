@@ -38,6 +38,14 @@
 #include "CDPL/Pharm/InteractionConstraintConnector.hpp"
 #include "CDPL/Pharm/PharmacophoreFitScreeningScore.hpp"
 #include "CDPL/Pharm/FileScreeningHitCollector.hpp"
+#include "CDPL/Pharm/HBondingInteractionScore.hpp"
+#include "CDPL/Pharm/OrthogonalPiPiInteractionScore.hpp"
+#include "CDPL/Pharm/CationPiInteractionScore.hpp"
+#include "CDPL/Pharm/ParallelPiPiInteractionScore.hpp"
+#include "CDPL/Pharm/FeatureDistanceScore.hpp"
+#include "CDPL/Pharm/GeneralizedBellFunction.hpp"
+#include "CDPL/Pharm/InteractionScoreCombiner.hpp"
+#include "CDPL/Pharm/StericAtomClashFactorCalculator.hpp"
 
 #include "Base/GenericFromPythonConverter.hpp"
 
@@ -47,6 +55,8 @@
 void CDPLPythonPharm::registerFromPythonConverters()
 {
 	using namespace CDPL;
+
+	CDPLPythonBase::GenericFromPythonConverter<Pharm::GeneralizedBellFunction, boost::function1<double, double> >();
 
 	CDPLPythonBase::GenericFromPythonConverter<Pharm::PharmacophoreFitScore,
 											   boost::function3<double, const Pharm::FeatureContainer&, const Pharm::FeatureContainer&, 
@@ -79,7 +89,22 @@ void CDPLPythonPharm::registerFromPythonConverters()
 											   boost::function2<bool, const Pharm::Feature&, const Pharm::Feature&> >();
 	CDPLPythonBase::GenericFromPythonConverter<Pharm::FeatureDistanceConstraint, 
 											   boost::function2<bool, const Pharm::Feature&, const Pharm::Feature&> >();
-
 	CDPLPythonBase::GenericFromPythonConverter<Pharm::InteractionConstraintConnector, 
-											   Pharm::InteractionConstraintConnector::ConstraintFunction>();
+											   boost::function2<bool, const Pharm::Feature&, const Pharm::Feature&> >();
+
+	CDPLPythonBase::GenericFromPythonConverter<Pharm::HBondingInteractionScore, 
+											   boost::function2<double, const Pharm::Feature&, const Pharm::Feature&> >();
+	CDPLPythonBase::GenericFromPythonConverter<Pharm::OrthogonalPiPiInteractionScore, 
+											   boost::function2<double, const Pharm::Feature&, const Pharm::Feature&> >();
+	CDPLPythonBase::GenericFromPythonConverter<Pharm::CationPiInteractionScore, 
+											   boost::function2<double, const Pharm::Feature&, const Pharm::Feature&> >();
+	CDPLPythonBase::GenericFromPythonConverter<Pharm::ParallelPiPiInteractionScore, 
+											   boost::function2<double, const Pharm::Feature&, const Pharm::Feature&> >();
+	CDPLPythonBase::GenericFromPythonConverter<Pharm::FeatureDistanceScore, 
+											   boost::function2<double, const Pharm::Feature&, const Pharm::Feature&> >();
+	CDPLPythonBase::GenericFromPythonConverter<Pharm::InteractionScoreCombiner, 
+											   boost::function2<double, const Pharm::Feature&, const Pharm::Feature&> >();
+
+	CDPLPythonBase::GenericFromPythonConverter<Pharm::StericAtomClashFactorCalculator, 
+											   boost::function3<double, const Math::Vector3D&, const Chem::AtomContainer&, const Chem::Atom3DCoordinatesFunction&> >();
 }

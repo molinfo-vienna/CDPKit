@@ -273,6 +273,7 @@
 #include "CDPL/Chem/PEOEChargeCalculator.hpp"
 #include "CDPL/Chem/LogSCalculator.hpp"
 #include "CDPL/Chem/RDFCodeCalculator.hpp"
+#include "CDPL/Chem/AtomRDFCodeCalculator.hpp"
 #include "CDPL/Chem/AutoCorrelationVectorCalculator.hpp"
 #include "CDPL/Chem/BurdenMatrixGenerator.hpp"
 #include "CDPL/Chem/BCUTDescriptorCalculator.hpp"

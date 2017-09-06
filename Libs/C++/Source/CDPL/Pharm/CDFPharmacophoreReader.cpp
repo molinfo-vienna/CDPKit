@@ -31,14 +31,14 @@
 #include "CDPL/Pharm/CDFPharmacophoreReader.hpp"
 #include "CDPL/Base/Exceptions.hpp"
 
-#include "CDFDataReader.hpp"
+#include "CDFPharmacophoreDataReader.hpp"
 
 
 using namespace CDPL;
 
 
 Pharm::CDFPharmacophoreReader::CDFPharmacophoreReader(std::istream& is): 
-	Util::StreamDataReader<Pharmacophore, CDFPharmacophoreReader>(is), reader(new CDFDataReader(*this)) {}
+	Util::StreamDataReader<Pharmacophore, CDFPharmacophoreReader>(is), reader(new CDFPharmacophoreDataReader(*this)) {}
 
 Pharm::CDFPharmacophoreReader::~CDFPharmacophoreReader() {}
 

@@ -540,7 +540,7 @@ bool Pharm::ScreeningProcessorImpl::checkXVolumeClashes(std::size_t mol_idx, std
 			atomVdWRadii.push_back(Chem::AtomDictionary::getVdWRadius(getType(*it)) * VDW_RADIUS_FACTOR);
 
 	if (atomCoordinates.isEmpty())
-		getConformationData(dbMolecule, conf_idx, atomCoordinates);
+		getConformation(dbMolecule, conf_idx, atomCoordinates);
 
 	const Math::Matrix4D& xform = pharmAlignment.getTransform();
 	Math::Vector3D al_pos;

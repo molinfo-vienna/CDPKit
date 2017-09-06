@@ -82,13 +82,13 @@ bool Pharm::OrthogonalPiPiInteractionConstraint::operator()(const Feature& ftr1,
 
     Math::Vector3D ftr1_ftr2_vec(get3DCoordinates(ftr2) - get3DCoordinates(ftr1));
     
-	if (checkDistances(orient1, orient2, ftr1_ftr2_vec))
+	if (checkDistances(orient1, ftr1_ftr2_vec))
 		return true;
 
-	return checkDistances(orient2, orient1, ftr1_ftr2_vec);
+	return checkDistances(orient2, ftr1_ftr2_vec);
 }
 
-bool Pharm::OrthogonalPiPiInteractionConstraint::checkDistances(const Math::Vector3D& orient1, const Math::Vector3D& orient2, const Math::Vector3D& ftr1_ftr2_vec) const
+bool Pharm::OrthogonalPiPiInteractionConstraint::checkDistances(const Math::Vector3D& orient1, const Math::Vector3D& ftr1_ftr2_vec) const
 {
 	double v_dist = calcVPlaneDistance(orient1, ftr1_ftr2_vec);
 

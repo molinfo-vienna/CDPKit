@@ -228,7 +228,7 @@ bool Chem::MDLDataWriter::writeMolecularGraph(std::ostream& os, const MolecularG
 
 		for (std::size_t i = 0; i < num_confs; i++) {
 			confCoordinates.clear();
-			getConformationData(molgraph, i, confCoordinates);
+			getConformation(molgraph, i, confCoordinates);
 
 			writeMOLHeaderBlock(os, molgraph);
 			writeMOLCTab(os, molgraph);
@@ -410,8 +410,8 @@ void Chem::MDLDataWriter::setupCTabCountsLine(const MolecularGraph& molgraph)
 {
 	using namespace MDL::MOLFile;
 
-	std::size_t atom_count = getCompleteBondCount(molgraph); 
-	std::size_t bond_count = molgraph.getNumBonds();
+	std::size_t atom_count = molgraph.getNumAtoms(); 
+	std::size_t bond_count = getCompleteBondCount(molgraph); 
 
 	ctabVersion = getMDLCTABVersionParameter(ioBase);
 

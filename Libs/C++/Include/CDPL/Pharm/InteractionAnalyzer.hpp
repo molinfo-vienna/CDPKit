@@ -32,9 +32,9 @@
 #define CDPL_PHARM_INTERACTIONANALYZER_HPP
 
 #include <utility>
+#include <map>
 
 #include <boost/function.hpp>
-#include <boost/unordered_map.hpp>
 
 #include "CDPL/Pharm/APIPrefix.hpp"
 #include "CDPL/Pharm/FeatureMapping.hpp"
@@ -122,7 +122,8 @@ namespace CDPL
 			void analyze(const FeatureContainer& cntnr1, const FeatureContainer& cntnr2, FeatureMapping& iactions) const;
 
 		  private:
-			typedef boost::unordered_multimap<std::pair<unsigned int, unsigned int>, ConstraintFunction> ConstraintFunctionMap;
+			typedef std::pair<unsigned int, unsigned int> FeatureTypePair;
+			typedef std::map<FeatureTypePair, ConstraintFunction> ConstraintFunctionMap;
 		
 			ConstraintFunctionMap constraintFuncMap;
 		};

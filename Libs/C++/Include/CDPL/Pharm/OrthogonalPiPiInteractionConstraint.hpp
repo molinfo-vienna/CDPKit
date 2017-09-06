@@ -84,7 +84,7 @@ namespace CDPL
 			bool operator()(const Feature& ftr1, const Feature& ftr2) const;
 
 		  private:
-			bool checkDistances(const Math::Vector3D&, const Math::Vector3D&, const Math::Vector3D&) const;
+			bool checkDistances(const Math::Vector3D&, const Math::Vector3D&) const;
 
 			double minVDist;
 			double maxVDist;

@@ -70,8 +70,8 @@ def processMolecule(mol, stats):
     if Chem.getHeavyAtomCount(mol) < 5:
         return None
 
-    #if Chem.getAtomCount(mol, Chem.AtomType.F) > 9:
-    #    return None
+    if Chem.getAtomCount(mol, Chem.AtomType.F) > 9:
+        return None
 
     valid_atom_types = [Chem.AtomType.H, Chem.AtomType.C, Chem.AtomType.F, Chem.AtomType.Cl, Chem.AtomType.Br, Chem.AtomType.I, Chem.AtomType.N, Chem.AtomType.O, Chem.AtomType.S, Chem.AtomType.Se, Chem.AtomType.P, Chem.AtomType.Pt, Chem.AtomType.As, Chem.AtomType.Si]    
 
@@ -88,31 +88,46 @@ def processMolecule(mol, stats):
         if atom_type == Chem.AtomType.C:
             carbon_seen = True
 
-        #if atom_type == Chem.AtomType.C and Chem.getFormalCharge(atom) != 0:
         form_charge = Chem.getFormalCharge(atom)
 
         if form_charge != 0:
-            if form_charge > 0:
-                rem_count = 0
+            for nbr_atom in atom.atoms:
+                if Chem.getFormalCharge(nbr_atom) != 0:
+                    form_charge = 0
+                    break
 
-                for nbr_atom in atom.atoms:
+        if form_charge != 0:
+            if form_charge > 0:
+                form_charge -= Chem.getImplicitHydrogenCount(atom)
+
+                if form_charge < 0:
+                    form_charge = 0
+
+                for nbr_atom in atom.atoms: 
+                    if form_charge == 0:
+                        break
+
                     if Chem.getType(nbr_atom) == Chem.AtomType.H:
                         hs_to_remove.append(nbr_atom)
-                        rem_count = rem_count + 1
+                        form_charge -= 1
+                 
+                Chem.setFormalCharge(atom, form_charge)
 
-                        if rem_count == form_charge:
-                            break
+            else:
+                Chem.setFormalCharge(atom, 0)
 
-            Chem.setFormalCharge(atom, 0)
-            Chem.setImplicitHydrogenCount(atom, Chem.calcImplicitHydrogenCount(atom, mol))
-            Chem.setHybridizationState(atom, Chem.perceiveHybridizationState(atom, mol))
             modified = True
-
-    for atom in hs_to_remove:
-        mol.removeAtom(mol.getAtomIndex(atom))
-
+    
     if carbon_seen == False:
         return None
+
+    if len(hs_to_remove) > 0:
+        for atom in hs_to_remove:
+            mol.removeAtom(mol.getAtomIndex(atom))
+ 
+        for atom in mol.atoms:
+            Chem.setImplicitHydrogenCount(atom, Chem.calcImplicitHydrogenCount(atom, mol))
+            Chem.setHybridizationState(atom, Chem.perceiveHybridizationState(atom, mol))
 
     if modified:
         stats.modified += 1

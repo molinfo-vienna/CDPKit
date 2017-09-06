@@ -46,7 +46,7 @@ namespace CDPL
 		 * @{
 		 */
 
-		typedef Util::CompressedDataWriter<CDFFeatureContainerWriter, Util::BZip2OStream> CDFGZFeatureContainerWriter;
+		typedef Util::CompressedDataWriter<CDFFeatureContainerWriter, Util::GZipOStream> CDFGZFeatureContainerWriter;
 
 		/**
 		 * @}

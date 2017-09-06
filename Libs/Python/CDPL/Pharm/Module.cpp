@@ -43,20 +43,42 @@ BOOST_PYTHON_MODULE(_pharm)
 	exportPharmacophore();
 	exportBasicPharmacophore();
 
+	exportInteractionScoreGrid();
+	exportInteractionScoreGridSet();
 	exportFeatureMapping();
 	exportFeatureTypeHistogram();
+	exportFeatureRDFCodeCalculator();
 
+	exportPharmacophoreReader();
+	exportInteractionScoreGridReader();
+	exportInteractionScoreGridSetReader();
+	exportFeatureContainerWriter();
+	exportInteractionScoreGridWriter();
+	exportInteractionScoreGridSetWriter();
+	exportPharmacophoreInputHandler();
+	exportInteractionScoreGridInputHandler();
+	exportInteractionScoreGridSetInputHandler();
+	exportFeatureContainerOutputHandler();
+	exportInteractionScoreGridOutputHandler();
+	exportInteractionScoreGridSetOutputHandler();
 	exportPharmacophoreIOManager();
 	exportFeatureContainerIOManager();
-	exportPharmacophoreReader();
-	exportFeatureContainerWriter();
-	exportPharmacophoreInputHandler();
-	exportFeatureContainerOutputHandler();
+	exportInteractionScoreGridIOManager();
+	exportInteractionScoreGridSetIOManager();
 
 	exportCDFPharmacophoreInputHandler();
 	exportCDFFeatureContainerOutputHandler();
 	exportCDFPharmacophoreReader();
 	exportCDFFeatureContainerWriter();
+	exportCDFInteractionScoreGridInputHandler();
+	exportCDFInteractionScoreGridOutputHandler();
+	exportCDFInteractionScoreGridSetInputHandler();
+	exportCDFInteractionScoreGridSetOutputHandler();
+	exportCDFInteractionScoreGridReader();
+	exportCDFInteractionScoreGridWriter();
+	exportCDFInteractionScoreGridSetReader();
+	exportCDFInteractionScoreGridSetWriter();
+
 	exportPMLPharmacophoreInputHandler();
 	exportPMLFeatureContainerOutputHandler();
 	exportPMLPharmacophoreReader();
@@ -112,6 +134,19 @@ BOOST_PYTHON_MODULE(_pharm)
 	exportParallelPiPiInteractionConstraint();
 	exportCationPiInteractionConstraint();
 	exportHBondingInteractionConstraint();
+
+	exportGeneralizedBellFunction();
+	exportInteractionScoreCombiner();
+	exportFeatureDistanceScore();
+	exportHydrophobicInteractionScore();
+	exportIonicInteractionScore();
+	exportOrthogonalPiPiInteractionScore();
+	exportParallelPiPiInteractionScore();
+	exportCationPiInteractionScore();
+	exportHBondingInteractionScore();
+	exportStericAtomClashFactorCalculator();
+	exportInteractionScoreGridCalculator();
+	exportDefaultInteractionScoreGridCalculator();
 
 	exportTopologicalEntityAlignment();
 	exportGeometricalEntityAlignment();

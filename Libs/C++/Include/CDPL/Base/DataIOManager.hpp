@@ -64,6 +64,8 @@ namespace CDPL
 
 		class Pharmacophore;
 		class FeatureContainer;
+		class InteractionScoreGrid;
+		class InteractionScoreGridSet;
 	}
 
 	namespace Base
@@ -360,6 +362,12 @@ namespace CDPL
 
 		extern template
 		class CDPL_BASE_API DataIOManager<Pharm::Pharmacophore>;
+
+		extern template
+		class CDPL_BASE_API DataIOManager<Pharm::InteractionScoreGrid>;
+
+		extern template
+		class CDPL_BASE_API DataIOManager<Pharm::InteractionScoreGridSet>;
 
 		// \endcond
 	}

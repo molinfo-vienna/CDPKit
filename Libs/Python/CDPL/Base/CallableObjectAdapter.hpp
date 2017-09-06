@@ -43,7 +43,9 @@ namespace CDPLPythonBase
 		QuarternaryFunctionAdapter(const boost::python::object& callable): callable(callable) {}
 
 		ResType operator()(const Arg1Type& arg1, const Arg2Type& arg2, const Arg3Type& arg3, const Arg4Type& arg4) const {
-			return boost::python::call<ResType>(callable.ptr(), boost::ref(arg1), boost::ref(arg2), boost::ref(arg3), boost::ref(arg4));
+			using namespace boost;
+
+			return python::call<ResType>(callable.ptr(), boost::ref(arg1), boost::ref(arg2), boost::ref(arg3), boost::ref(arg4));
 		}
 
 	private:
@@ -58,12 +60,56 @@ namespace CDPLPythonBase
 		QuarternaryFunctionAdapter(const boost::python::object& callable): callable(callable) {}
 
 		ResType operator()(const Arg1Type& arg1, const Arg2Type& arg2, const Arg3Type& arg3, const Arg4Type& arg4) const {
-			return boost::python::call<ResType>(callable.ptr(), arg1, arg2, arg3, arg4);
+			using namespace boost;
+
+			return python::call<ResType>(callable.ptr(), arg1, arg2, arg3, arg4);
 		}
 
 	private:
 		boost::python::object callable;
 	};
+
+	template <typename ResType, typename Arg1Type, typename Arg2Type, typename Arg3Type, typename Arg4Type>
+	class QuarternaryFunctionAdapter<ResType&, Arg1Type, Arg2Type, Arg3Type, Arg4Type, false>
+	{
+
+	public:
+		QuarternaryFunctionAdapter(const boost::python::object& callable): callable(callable) {}
+
+		ResType& operator()(const Arg1Type& arg1, const Arg2Type& arg2, const Arg3Type& arg3, const Arg4Type& arg4) {
+			using namespace boost;
+
+			result = python::call<python::object>(callable.ptr(), boost::ref(arg1), boost::ref(arg2), boost::ref(arg3), boost::ref(arg4));
+
+			return python::extract<ResType&>(result);
+		}
+
+	private:
+		boost::python::object callable;
+		boost::python::object result;
+	};
+
+	template <typename ResType, typename Arg1Type, typename Arg2Type, typename Arg3Type, typename Arg4Type>
+	class QuarternaryFunctionAdapter<ResType&, Arg1Type, Arg2Type, Arg3Type, Arg4Type, true>
+	{
+
+	public:
+		QuarternaryFunctionAdapter(const boost::python::object& callable): callable(callable) {}
+
+		ResType& operator()(const Arg1Type& arg1, const Arg2Type& arg2, const Arg3Type& arg3, const Arg4Type& arg4) {
+			using namespace boost;
+
+			result = python::call<python::object>(callable.ptr(), arg1, arg2, arg3, arg4);
+
+			return python::extract<ResType&>(result);
+		}
+
+	private:
+		boost::python::object callable;
+		boost::python::object result;
+	};
+
+//----------
 
 	template <typename ResType, typename Arg1Type, typename Arg2Type, typename Arg3Type, bool Copy = false>
 	class TernaryFunctionAdapter
@@ -73,7 +119,9 @@ namespace CDPLPythonBase
 		TernaryFunctionAdapter(const boost::python::object& callable): callable(callable) {}
 
 		ResType operator()(const Arg1Type& arg1, const Arg2Type& arg2, const Arg3Type& arg3) const {
-			return boost::python::call<ResType>(callable.ptr(), boost::ref(arg1), boost::ref(arg2), boost::ref(arg3));
+			using namespace boost;
+
+			return python::call<ResType>(callable.ptr(), boost::ref(arg1), boost::ref(arg2), boost::ref(arg3));
 		}
 
 	private:
@@ -88,12 +136,56 @@ namespace CDPLPythonBase
 		TernaryFunctionAdapter(const boost::python::object& callable): callable(callable) {}
 
 		ResType operator()(const Arg1Type& arg1, const Arg2Type& arg2, const Arg3Type& arg3) const {
-			return boost::python::call<ResType>(callable.ptr(), arg1, arg2, arg3);
+			using namespace boost;
+
+			return python::call<ResType>(callable.ptr(), arg1, arg2, arg3);
 		}
 
 	private:
 		boost::python::object callable;
 	};
+
+	template <typename ResType, typename Arg1Type, typename Arg2Type, typename Arg3Type>
+	class TernaryFunctionAdapter<ResType&, Arg1Type, Arg2Type, Arg3Type, false>
+	{
+
+	public:
+		TernaryFunctionAdapter(const boost::python::object& callable): callable(callable) {}
+
+		ResType& operator()(const Arg1Type& arg1, const Arg2Type& arg2, const Arg3Type& arg3) {
+			using namespace boost;
+
+			result = python::call<python::object>(callable.ptr(), boost::ref(arg1), boost::ref(arg2), boost::ref(arg3));
+
+			return python::extract<ResType&>(result);
+		}
+
+	private:
+		boost::python::object callable;
+		boost::python::object result;
+	};
+
+	template <typename ResType, typename Arg1Type, typename Arg2Type, typename Arg3Type>
+	class TernaryFunctionAdapter<ResType&, Arg1Type, Arg2Type, Arg3Type, true>
+	{
+
+	public:
+		TernaryFunctionAdapter(const boost::python::object& callable): callable(callable) {}
+
+		ResType& operator()(const Arg1Type& arg1, const Arg2Type& arg2, const Arg3Type& arg3) {
+			using namespace boost;
+
+			result = python::call<python::object>(callable.ptr(), arg1, arg2, arg3);
+
+			return python::extract<ResType&>(result);
+		}
+
+	private:
+		boost::python::object callable;
+		boost::python::object result;
+	};
+
+//----------
 
 	template <typename ResType, typename Arg1Type, typename Arg2Type, bool Copy = false>
 	class BinaryFunctionAdapter : public std::binary_function<Arg1Type, Arg2Type, ResType>
@@ -103,7 +195,9 @@ namespace CDPLPythonBase
 		BinaryFunctionAdapter(const boost::python::object& callable): callable(callable) {}
 
 		ResType operator()(const Arg1Type& arg1, const Arg2Type& arg2) const {
-			return boost::python::call<ResType>(callable.ptr(), boost::ref(arg1), boost::ref(arg2));
+			using namespace boost;
+
+			return python::call<ResType>(callable.ptr(), boost::ref(arg1), boost::ref(arg2));
 		}
 
 	private:
@@ -118,12 +212,56 @@ namespace CDPLPythonBase
 		BinaryFunctionAdapter(const boost::python::object& callable): callable(callable) {}
 
 		ResType operator()(const Arg1Type& arg1, const Arg2Type& arg2) const {
-			return boost::python::call<ResType>(callable.ptr(), arg1, arg2);
+			using namespace boost;
+
+			return python::call<ResType>(callable.ptr(), arg1, arg2);
 		}
 
 	private:
 		boost::python::object callable;
 	};
+
+	template <typename ResType, typename Arg1Type, typename Arg2Type>
+	class BinaryFunctionAdapter<ResType&, Arg1Type, Arg2Type, false> : public std::binary_function<Arg1Type, Arg2Type, ResType&>
+	{
+
+	public:
+		BinaryFunctionAdapter(const boost::python::object& callable): callable(callable) {}
+
+		ResType& operator()(const Arg1Type& arg1, const Arg2Type& arg2) {
+			using namespace boost;
+
+			result = python::call<python::object>(callable.ptr(), boost::ref(arg1), boost::ref(arg2));
+
+			return python::extract<ResType&>(result);
+		}
+
+	private:
+		boost::python::object callable;
+		boost::python::object result;
+	};
+
+	template <typename ResType, typename Arg1Type, typename Arg2Type>
+	class BinaryFunctionAdapter<ResType&, Arg1Type, Arg2Type, true> : public std::binary_function<Arg1Type, Arg2Type, ResType&>
+	{
+
+	public:
+		BinaryFunctionAdapter(const boost::python::object& callable): callable(callable) {}
+
+		ResType& operator()(const Arg1Type& arg1, const Arg2Type& arg2) {
+			using namespace boost;
+
+			result = python::call<python::object>(callable.ptr(), arg1, arg2);
+
+			return python::extract<ResType&>(result);
+		}
+
+	private:
+		boost::python::object callable;
+		boost::python::object result;
+	};
+
+//----------
 
 	template <typename ResType, typename ArgType, bool Copy = false>
 	class UnaryFunctionAdapter : public std::unary_function<ArgType, ResType>
@@ -133,7 +271,9 @@ namespace CDPLPythonBase
 		UnaryFunctionAdapter(const boost::python::object& callable): callable(callable) {}
 
 		ResType operator()(const ArgType& arg) const {
-			return boost::python::call<ResType>(callable.ptr(), boost::ref(arg));
+			using namespace boost;
+
+			return python::call<ResType>(callable.ptr(), boost::ref(arg));
 		}
 
 	private:
@@ -148,12 +288,56 @@ namespace CDPLPythonBase
 		UnaryFunctionAdapter(const boost::python::object& callable): callable(callable) {}
 
 		ResType operator()(const ArgType& arg) const {
-			return boost::python::call<ResType>(callable.ptr(), arg);
+			using namespace boost;
+
+			return python::call<ResType>(callable.ptr(), arg);
 		}
 
 	private:
 		boost::python::object callable;
 	};
+
+	template <typename ResType, typename ArgType>
+	class UnaryFunctionAdapter<ResType&, ArgType, false>  : public std::unary_function<ArgType, ResType&>
+	{
+
+	public:
+		UnaryFunctionAdapter(const boost::python::object& callable): callable(callable) {}
+
+		ResType& operator()(const ArgType& arg) {
+			using namespace boost;
+
+			result = python::call<python::object>(callable.ptr(), boost::ref(arg));
+
+			return python::extract<ResType&>(result);
+		}
+
+	private:
+		boost::python::object callable;
+		boost::python::object result;
+	};
+
+	template <typename ResType, typename ArgType>
+	class UnaryFunctionAdapter<ResType&, ArgType, true>  : public std::unary_function<ArgType, ResType&>
+	{
+
+	public:
+		UnaryFunctionAdapter(const boost::python::object& callable): callable(callable) {}
+
+		ResType& operator()(const ArgType& arg) {
+			using namespace boost;
+
+			result = python::call<python::object>(callable.ptr(), arg);
+
+			return python::extract<ResType&>(result);
+		}
+
+	private:
+		boost::python::object callable;
+		boost::python::object result;
+	};
+
+//----------
 
 	template <typename ResType>
 	class NoArgFunctionAdapter
@@ -163,11 +347,33 @@ namespace CDPLPythonBase
 		NoArgFunctionAdapter(const boost::python::object& callable): callable(callable) {}
 
 		ResType operator()() const {
-			return boost::python::call<ResType>(callable.ptr());
+			using namespace boost;
+
+			return python::call<ResType>(callable.ptr());
 		}
 
 	private:
 		boost::python::object callable;
+	};
+
+	template <typename ResType>
+	class NoArgFunctionAdapter<ResType&>
+	{
+
+	public:
+		NoArgFunctionAdapter(const boost::python::object& callable): callable(callable) {}
+
+		ResType& operator()() {
+			using namespace boost;
+
+			result = python::call<python::object>(callable.ptr());
+
+			return python::extract<ResType&>(result);
+		}
+
+	private:
+		boost::python::object callable;
+		boost::python::object result;
 	};
 }
 

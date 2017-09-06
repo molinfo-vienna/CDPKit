@@ -140,9 +140,9 @@ read line leftover
 
 case ${line} in
   y* | Y*)
-    cp "${toplevel}/#CDPTK_EXECUTABLE_INSTALL_DIR#/chox.desktop" /usr/share/applications/
-    cp "${toplevel}/#CDPTK_EXECUTABLE_INSTALL_DIR#/chox.png" /usr/share/pixmaps/
-    ln -s "${toplevel}/#CDPTK_EXECUTABLE_INSTALL_DIR#/chox" /usr/bin/chox;;
+    cp "${toplevel}/#CDPKIT_EXECUTABLE_INSTALL_DIR#/chox.desktop" /usr/share/applications/
+    cp "${toplevel}/#CDPKIT_EXECUTABLE_INSTALL_DIR#/chox.png" /usr/share/pixmaps/
+    ln -s "${toplevel}/#CDPKIT_EXECUTABLE_INSTALL_DIR#/chox" /usr/bin/chox;;
 esac
 
 exit 0

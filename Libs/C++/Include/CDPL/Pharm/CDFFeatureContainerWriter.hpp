@@ -43,7 +43,7 @@ namespace CDPL
 	namespace Pharm
 	{
 
-		class CDFDataWriter;
+		class CDFPharmacophoreDataWriter;
 		class FeatureContainer;
 
 		/**
@@ -81,7 +81,7 @@ namespace CDPL
 			bool operator!() const;
 
 		private:
-			typedef std::auto_ptr<CDFDataWriter> CDFDataWriterPtr;
+			typedef std::auto_ptr<CDFPharmacophoreDataWriter> CDFDataWriterPtr;
 
 			CDFFeatureContainerWriter(const CDFFeatureContainerWriter&);
 

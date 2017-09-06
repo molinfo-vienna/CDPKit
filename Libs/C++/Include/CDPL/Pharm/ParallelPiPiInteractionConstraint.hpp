@@ -69,7 +69,7 @@ namespace CDPL
 			 * \param ang_tol The maximum allowed angle deviation from 0° of the two ring-plane orientation vectors.
 			 */
 			ParallelPiPiInteractionConstraint(double min_v_dist = DEF_MIN_V_DISTANCE, double max_v_dist = DEF_MAX_V_DISTANCE,
-											  double max_h_dist = DEF_MAX_H_DISTANCE,double ang_tol = DEF_ANGLE_TOLERANCE):
+											  double max_h_dist = DEF_MAX_H_DISTANCE, double ang_tol = DEF_ANGLE_TOLERANCE):
 				minVDist(min_v_dist), maxVDist(max_v_dist),  maxHDist(max_h_dist), angleTol(ang_tol) {}
 
 			double getMinVDistance() const;

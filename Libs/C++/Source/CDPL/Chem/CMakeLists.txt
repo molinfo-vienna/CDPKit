@@ -113,7 +113,7 @@ SET(cdpl-chem_LIB_SRCS
     MolecularComplexityCalculator.cpp
     PEOEChargeCalculator.cpp
     AutoCorrelationVectorCalculator.cpp
-    RDFCodeCalculator.cpp
+    AtomRDFCodeCalculator.cpp
     BurdenMatrixGenerator.cpp
     BCUTDescriptorCalculator.cpp
     SurfaceAtomExtractor.cpp
@@ -128,6 +128,7 @@ SET(cdpl-chem_LIB_SRCS
     Entity3DContainerGeometricalDistanceMatrixFunction.cpp
     Entity3DContainerGeometricalDistanceFunctions.cpp
     Entity3DContainerCentroidFunction.cpp
+    Entity3DContainerBoundingBoxFunctions.cpp
 
     AtomContainerAtomCountFunctions.cpp
     AtomContainerFormalChargeFunction.cpp
@@ -139,6 +140,7 @@ SET(cdpl-chem_LIB_SRCS
     AtomContainerConformationFunctions.cpp
     AtomContainerAtomTypeMaskFunction.cpp
     AtomContainerCopyAtomsFunctions.cpp
+    AtomContainerBoundingBoxFunctions.cpp
 
     BondContainerBondCountFunctions.cpp
  

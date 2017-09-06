@@ -34,6 +34,7 @@ namespace CDPLPythonMath
 	void exportVectorFunctions();
 	void exportMatrixFunctions();
 	void exportQuaternionFunctions();
+	void exportGridFunctions();
 	void exportSpecialFunctions();
 	void exportVectorArrayFunctions();
 }

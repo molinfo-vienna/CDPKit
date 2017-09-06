@@ -34,6 +34,10 @@
 #include "CDPL/Pharm/CDFFeatureContainerOutputHandler.hpp"
 #include "CDPL/Pharm/PMLPharmacophoreInputHandler.hpp"
 #include "CDPL/Pharm/PMLFeatureContainerOutputHandler.hpp"
+#include "CDPL/Pharm/CDFInteractionScoreGridInputHandler.hpp"
+#include "CDPL/Pharm/CDFInteractionScoreGridOutputHandler.hpp"
+#include "CDPL/Pharm/CDFInteractionScoreGridSetInputHandler.hpp"
+#include "CDPL/Pharm/CDFInteractionScoreGridSetOutputHandler.hpp"
 
 #if defined(HAVE_BOOST_FILESYSTEM) && defined(HAVE_BOOST_IOSTREAMS)
 #ifdef HAVE_SQLITE3
@@ -48,6 +52,14 @@
 #include "CDPL/Pharm/CDFGZFeatureContainerOutputHandler.hpp"
 #include "CDPL/Pharm/CDFBZ2PharmacophoreInputHandler.hpp"
 #include "CDPL/Pharm/CDFBZ2FeatureContainerOutputHandler.hpp"
+#include "CDPL/Pharm/CDFGZInteractionScoreGridInputHandler.hpp"
+#include "CDPL/Pharm/CDFGZInteractionScoreGridOutputHandler.hpp"
+#include "CDPL/Pharm/CDFBZ2InteractionScoreGridInputHandler.hpp"
+#include "CDPL/Pharm/CDFBZ2InteractionScoreGridOutputHandler.hpp"
+#include "CDPL/Pharm/CDFGZInteractionScoreGridSetInputHandler.hpp"
+#include "CDPL/Pharm/CDFGZInteractionScoreGridSetOutputHandler.hpp"
+#include "CDPL/Pharm/CDFBZ2InteractionScoreGridSetInputHandler.hpp"
+#include "CDPL/Pharm/CDFBZ2InteractionScoreGridSetOutputHandler.hpp"
 
 #endif // defined(HAVE_BOOST_FILESYSTEM) && defined(HAVE_BOOST_IOSTREAMS)
 
@@ -99,17 +111,25 @@ namespace
 			using namespace Pharm;
 			using namespace Chem;
 
-			static const CDFPharmacophoreInputHandler     cdfPharmInputHandler;
-			static const PMLPharmacophoreInputHandler     pmlPharmInputHandler;
+			static const CDFPharmacophoreInputHandler           cdfPharmInputHandler;
+			static const PMLPharmacophoreInputHandler           pmlPharmInputHandler;
+			static const CDFInteractionScoreGridInputHandler    cdfIntScoreGridInputHandler;
+			static const CDFInteractionScoreGridSetInputHandler cdfIntScoreGridSetInputHandler;
 
-			static const CDFFeatureContainerOutputHandler cdfFtrContOutputHandler;
-			static const PMLFeatureContainerOutputHandler pmlFtrContOutputHandler;
-	
+			static const CDFFeatureContainerOutputHandler        cdfFtrContOutputHandler;
+			static const PMLFeatureContainerOutputHandler        pmlFtrContOutputHandler;
+			static const CDFInteractionScoreGridOutputHandler    cdfIntScoreGridOutputHandler;
+			static const CDFInteractionScoreGridSetOutputHandler cdfIntScoreGridSetOutputHandler;
+
 			DataIOManager<Pharmacophore>::registerInputHandler(cdfPharmInputHandler);
 			DataIOManager<Pharmacophore>::registerInputHandler(pmlPharmInputHandler);
+			DataIOManager<InteractionScoreGrid>::registerInputHandler(cdfIntScoreGridInputHandler);
+			DataIOManager<InteractionScoreGridSet>::registerInputHandler(cdfIntScoreGridSetInputHandler);
 
 			DataIOManager<FeatureContainer>::registerOutputHandler(cdfFtrContOutputHandler);
 			DataIOManager<FeatureContainer>::registerOutputHandler(pmlFtrContOutputHandler);
+			DataIOManager<InteractionScoreGrid>::registerOutputHandler(cdfIntScoreGridOutputHandler);
+			DataIOManager<InteractionScoreGridSet>::registerOutputHandler(cdfIntScoreGridSetOutputHandler);
 
 #if defined(HAVE_BOOST_FILESYSTEM) && defined(HAVE_BOOST_IOSTREAMS)
 #ifdef HAVE_SQLITE3
@@ -124,17 +144,33 @@ namespace
 
 #endif // HAVE_SQLITE3
 
-			static const CDFGZPharmacophoreInputHandler   cdfGzPharmInputHandler;
-			static const CDFBZ2PharmacophoreInputHandler  cdfBz2PharmInputHandler;
+			static const CDFGZPharmacophoreInputHandler            cdfGzPharmInputHandler;
+			static const CDFBZ2PharmacophoreInputHandler           cdfBz2PharmInputHandler;
+			static const CDFGZInteractionScoreGridInputHandler     cdfGzIntScoreGridInputHandler;
+			static const CDFGZInteractionScoreGridSetInputHandler  cdfGzIntScoreGridSetInputHandler;
+			static const CDFBZ2InteractionScoreGridInputHandler    cdfBz2IntScoreGridInputHandler;
+			static const CDFBZ2InteractionScoreGridSetInputHandler cdfBz2IntScoreGridSetInputHandler;
 
-			static const CDFGZFeatureContainerOutputHandler  cdfGzFtrContOutputHandler;
-			static const CDFBZ2FeatureContainerOutputHandler cdfBz2FtrContOutputHandler;
+			static const CDFGZFeatureContainerOutputHandler         cdfGzFtrContOutputHandler;
+			static const CDFBZ2FeatureContainerOutputHandler        cdfBz2FtrContOutputHandler;
+			static const CDFGZInteractionScoreGridOutputHandler     cdfGzIntScoreGridOutputHandler;
+			static const CDFGZInteractionScoreGridSetOutputHandler  cdfGzIntScoreGridSetOutputHandler;
+			static const CDFBZ2InteractionScoreGridOutputHandler    cdfBz2IntScoreGridOutputHandler;
+			static const CDFBZ2InteractionScoreGridSetOutputHandler cdfBz2IntScoreGridSetOutputHandler;
 
 			DataIOManager<Pharmacophore>::registerInputHandler(cdfGzPharmInputHandler);
 			DataIOManager<Pharmacophore>::registerInputHandler(cdfBz2PharmInputHandler);
+			DataIOManager<InteractionScoreGrid>::registerInputHandler(cdfGzIntScoreGridInputHandler);
+			DataIOManager<InteractionScoreGridSet>::registerInputHandler(cdfGzIntScoreGridSetInputHandler);
+			DataIOManager<InteractionScoreGrid>::registerInputHandler(cdfBz2IntScoreGridInputHandler);
+			DataIOManager<InteractionScoreGridSet>::registerInputHandler(cdfBz2IntScoreGridSetInputHandler);
 
 			DataIOManager<FeatureContainer>::registerOutputHandler(cdfGzFtrContOutputHandler);
 			DataIOManager<FeatureContainer>::registerOutputHandler(cdfBz2FtrContOutputHandler);
+			DataIOManager<InteractionScoreGrid>::registerOutputHandler(cdfGzIntScoreGridOutputHandler);
+			DataIOManager<InteractionScoreGridSet>::registerOutputHandler(cdfGzIntScoreGridSetOutputHandler);
+			DataIOManager<InteractionScoreGrid>::registerOutputHandler(cdfBz2IntScoreGridOutputHandler);
+			DataIOManager<InteractionScoreGridSet>::registerOutputHandler(cdfBz2IntScoreGridSetOutputHandler);
 
 #endif // defined(HAVE_BOOST_FILESYSTEM) && defined(HAVE_BOOST_IOSTREAMS)
 		}

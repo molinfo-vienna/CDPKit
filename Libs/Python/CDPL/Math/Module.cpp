@@ -38,6 +38,7 @@ BOOST_PYTHON_MODULE(_math)
 	exportVectorExpressionTypes();
 	exportMatrixExpressionTypes();
 	exportQuaternionExpressionTypes();
+	exportGridExpressionTypes();
 
 	exportVectorTypes();
 	exportCVectorTypes1();
@@ -60,6 +61,11 @@ BOOST_PYTHON_MODULE(_math)
 			
 	exportQuaternionTypes();
 	exportRealQuaternionTypes();
+
+	exportGridTypes();
+	exportZeroGridTypes();
+	exportScalarGridTypes();
+	exportUniformSpatialGridTypes();
 
 	exportRange();
 	exportSlice();
@@ -101,6 +107,7 @@ BOOST_PYTHON_MODULE(_math)
 	exportVectorFunctions();
 	exportMatrixFunctions();
 	exportQuaternionFunctions();
+	exportGridFunctions();
 	exportSpecialFunctions();
 	exportVectorArrayFunctions();
 
@@ -112,6 +119,7 @@ BOOST_PYTHON_MODULE(_math)
 	registerFromPythonToVectorConverters();
 	registerFromPythonToCMatrixConverters();
 	registerFromPythonToMatrixConverters();
+	registerFromPythonToGridConverters();
 	registerFromPythonToExpressionPointerConverters();
 	registerFromPythonToVariantConverters();
 }

@@ -1,5 +1,5 @@
 SET(BINARY_INPUT_FILE "@BINARY_INPUT_FILE@")
-SET(CDPTK_LIBRARY_INSTALL_DIR "@CDPTK_LIBRARY_INSTALL_DIR@")
+SET(CDPKIT_LIBRARY_INSTALL_DIR "@CDPKIT_LIBRARY_INSTALL_DIR@")
 
 IF(COMMAND CMAKE_POLICY)
   CMAKE_POLICY(SET CMP0011 NEW)
@@ -8,10 +8,22 @@ ENDIF(COMMAND CMAKE_POLICY)
 
 MACRO(INSTALL_LINKED_LIBRARIES BINARY_FILE DID_INSTALL)
   SET(ALLOWED_LIBRARIES
-      "libQtCore"
-      "libQtGui"
+      "libQt5Core"
+      "libQt5Gui"
+      "libQt5PrintSupport"
+      "libQt5Widgets"
       "libboost_date_time"
       "libboost_python"
+      "libboost_thread"
+      "libboost_system"
+      "libboost_atomic"
+      "libboost_filesystem"
+      "libboost_iostreams"
+      "libboost_chrono"
+      "libboost_program_options"
+      "libbz2"
+      "libz"
+      "libsqlite3"
       "libcairo"
       )
 
@@ -36,14 +48,14 @@ MACRO(INSTALL_LINKED_LIBRARIES BINARY_FILE DID_INSTALL)
 
       FOREACH(LIB_PATTERN ${ALLOWED_LIBRARIES})
         IF(LIB_FILE_NAME MATCHES "${LIB_PATTERN}")
-          IF(NOT EXISTS "${CMAKE_INSTALL_PREFIX}/${CDPTK_LIBRARY_INSTALL_DIR}/${LIB_FILE_NAME}")
+          IF(NOT EXISTS "${CMAKE_INSTALL_PREFIX}/${CDPKIT_LIBRARY_INSTALL_DIR}/${LIB_FILE_NAME}")
             MESSAGE("-- Installing External Dependency: ${LIBRARY}")
             CONFIGURE_FILE("${LIBRARY}"
-                           "${CMAKE_INSTALL_PREFIX}/${CDPTK_LIBRARY_INSTALL_DIR}/${LIB_FILE_NAME}"
+                           "${CMAKE_INSTALL_PREFIX}/${CDPKIT_LIBRARY_INSTALL_DIR}/${LIB_FILE_NAME}"
                            COPYONLY
                           )
             SET(${DID_INSTALL} 1)
-          ENDIF(NOT EXISTS "${CMAKE_INSTALL_PREFIX}/${CDPTK_LIBRARY_INSTALL_DIR}/${LIB_FILE_NAME}")
+          ENDIF(NOT EXISTS "${CMAKE_INSTALL_PREFIX}/${CDPKIT_LIBRARY_INSTALL_DIR}/${LIB_FILE_NAME}")
         ENDIF(LIB_FILE_NAME MATCHES "${LIB_PATTERN}")
       ENDFOREACH(LIB_PATTERN)
     ENDFOREACH(LIBRARY)

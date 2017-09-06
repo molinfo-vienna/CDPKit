@@ -34,4 +34,3 @@ using namespace CDPL;
 
 const double Pharm::IonicInteractionConstraint::DEF_MIN_DISTANCE = 1.5;
 const double Pharm::IonicInteractionConstraint::DEF_MAX_DISTANCE = 5.5;
-

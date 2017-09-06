@@ -73,6 +73,7 @@ namespace CDPL
 			/**
 			 * \brief Constructs a \c %ResidueList instance that contains the residues of the molecular graph \a molgraph.
 			 * \param molgraph The molecular graph for which to extract the residues.
+			 * \param flags The set of atom properties uniquely identifying a residue.
 			 */
 			ResidueList(const Chem::MolecularGraph& molgraph, unsigned int flags = AtomPropertyFlag::DEFAULT);
 

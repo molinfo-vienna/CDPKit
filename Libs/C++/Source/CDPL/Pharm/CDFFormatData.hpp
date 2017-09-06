@@ -45,8 +45,11 @@ namespace CDPL
 			typedef Base::uint32 UIntType;
 			typedef Base::uint8  BoolType;
 
-			const Base::uint8 PHARMACOPHORE_RECORD_ID  = 3;
-			const Base::uint8 CURR_FORMAT_VERSION      = 1;
+			const Base::uint8 PHARMACOPHORE_RECORD_ID              = 3;
+			const Base::uint8 INTERACTION_SCORE_GRID_RECORD_ID     = 4;
+			const Base::uint8 INTERACTION_SCORE_GRID_SET_RECORD_ID = 5;
+
+			const Base::uint8 CURR_FORMAT_VERSION  = 1;
 
 			namespace FeatureProperty
 			{

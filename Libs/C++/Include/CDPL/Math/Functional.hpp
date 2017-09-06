@@ -47,6 +47,7 @@ namespace CDPL
 		template <typename E> class VectorExpression;
 		template <typename E> class MatrixExpression;
 		template <typename E> class QuaternionExpression;
+		template <typename E> class GridExpression;
 
 		template <typename T1, typename T2>
 		struct ScalarBinaryAssignmentFunctor
@@ -1451,6 +1452,116 @@ namespace CDPL
 				default:
 					return ResultType();
 				}
+			}
+		};
+	   
+		template <typename G1, typename G2>
+		struct GridBooleanBinaryFunctor
+		{
+
+			typedef bool ResultType;
+			typedef typename CommonType<typename G1::SizeType, typename G2::SizeType>::Type SizeType;
+			typedef typename CommonType<typename G1::ValueType, typename G2::ValueType>::Type ValueType;
+		};
+
+		template <typename G1, typename G2>
+		struct GridEquality : public GridBooleanBinaryFunctor<G1, G2>
+		{
+
+			typedef typename GridBooleanBinaryFunctor<G1, G2>::SizeType SizeType;
+			typedef typename GridBooleanBinaryFunctor<G1, G2>::ValueType ValueType;
+			typedef typename GridBooleanBinaryFunctor<G1, G2>::ResultType ResultType;
+
+			static CDPL_MATH_INLINE ResultType apply(const GridExpression<G1>& e1, const GridExpression<G2>& e2) {
+				if (SizeType(e1().getSize1()) != SizeType(e2().getSize1()))
+					return false;
+
+				if (SizeType(e1().getSize2()) != SizeType(e2().getSize2()))
+					return false;
+
+				if (SizeType(e1().getSize3()) != SizeType(e2().getSize3()))
+					return false;
+
+				for (SizeType i = 0, size1 = e1().getSize1(); i < size1; i++)
+					for (SizeType j = 0, size2 = e1().getSize2(); j < size2; j++)
+						for (SizeType k = 0, size3 = e1().getSize3(); k < size3; k++)
+							if (ValueType(e1()(i, j, k)) != ValueType(e2()(i, j, k)))
+								return false;
+
+				return true;
+			}
+		};
+
+		template <typename G1, typename G2, typename T>
+		struct Scalar3GridBooleanTernaryFunctor
+		{
+
+			typedef bool ResultType;
+			typedef const T& Argument3Type;
+			typedef typename CommonType<typename G1::SizeType, typename G2::SizeType>::Type SizeType;
+			typedef typename CommonType<typename G1::ValueType, typename G2::ValueType>::Type ValueType;
+		};
+
+		template <typename G1, typename G2, typename T>
+		struct GridToleranceEquality : public Scalar3GridBooleanTernaryFunctor<G1, G2, T>
+		{
+
+			typedef typename Scalar3GridBooleanTernaryFunctor<G1, G2, T>::SizeType SizeType;
+			typedef typename Scalar3GridBooleanTernaryFunctor<G1, G2, T>::ValueType ValueType;
+			typedef typename Scalar3GridBooleanTernaryFunctor<G1, G2, T>::ResultType ResultType;
+			typedef typename Scalar3GridBooleanTernaryFunctor<G1, G2, T>::Argument3Type Argument3Type;
+
+			static CDPL_MATH_INLINE ResultType apply(const GridExpression<G1>& e1, const GridExpression<G2>& e2, Argument3Type epsilon) {
+				typedef typename CommonType<typename TypeTraits<ValueType>::RealType, T>::Type ComparisonType;
+
+				if (SizeType(e1().getSize1()) != SizeType(e2().getSize1()))
+					return false;
+
+				if (SizeType(e1().getSize2()) != SizeType(e2().getSize2()))
+					return false;
+
+				if (SizeType(e1().getSize3()) != SizeType(e2().getSize3()))
+					return false;
+
+				ComparisonType norm_inf_max(epsilon);
+
+				for (SizeType i = 0, size1 = e1().getSize1(); i < size1; i++)
+					for (SizeType j = 0, size2 = e1().getSize2(); j < size2; j++)
+						for (SizeType k = 0, size3 = e1().getSize3(); k < size3; k++)
+							if (ComparisonType(TypeTraits<ValueType>::normInf(e2()(i, j, k) - e1()(i, j, k))) > norm_inf_max)
+								return false;
+
+				return true;
+			}
+		};
+
+		template <typename M>
+		struct GridScalarUnaryFunctor
+		{
+
+			typedef typename M::ValueType ResultType;
+		};
+
+		template <typename G>
+		struct GridElementSum : public GridScalarUnaryFunctor<G>
+		{
+			
+			typedef typename GridScalarUnaryFunctor<G>::ResultType ResultType;
+
+			static CDPL_MATH_INLINE ResultType apply(const GridExpression<G>& e) {
+				typedef typename G::SizeType SizeType;
+
+				ResultType res = ResultType();
+				SizeType size1 = e().getSize1();
+				SizeType size2 = e().getSize2();
+				SizeType size3 = e().getSize3();
+
+				for (SizeType i = 0; i < size1; i++) 
+					for (SizeType j = 0; j < size2; j++) 
+						for (SizeType k = 0; k < size3; k++) 
+							res += e()(i, j, k);
+
+				return res;
 			}
 		};
 	}

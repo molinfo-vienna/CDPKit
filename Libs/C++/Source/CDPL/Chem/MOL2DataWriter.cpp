@@ -125,7 +125,7 @@ bool Chem::MOL2DataWriter::writeMolecularGraph(std::ostream& os, const Molecular
 		for (std::size_t i = 0; i < num_confs; i++) {
 			confCoordinates.clear();
 
-			getConformationData(molgraph, i, confCoordinates);
+			getConformation(molgraph, i, confCoordinates);
 
 			writeMoleculeRecord(os, molgraph);
 			writeAtomSection(os, molgraph);

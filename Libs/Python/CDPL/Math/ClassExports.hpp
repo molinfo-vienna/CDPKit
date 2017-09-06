@@ -34,6 +34,7 @@ namespace CDPLPythonMath
 	void exportVectorExpressionTypes();
 	void exportMatrixExpressionTypes();
 	void exportQuaternionExpressionTypes();
+	void exportGridExpressionTypes();
 
 	void exportVectorTypes();
 	void exportCVectorTypes1();
@@ -57,6 +58,11 @@ namespace CDPLPythonMath
 	void exportQuaternionTypes();
 	void exportRealQuaternionTypes();
 	
+	void exportGridTypes();
+	void exportZeroGridTypes();
+	void exportScalarGridTypes();
+	void exportUniformSpatialGridTypes();
+
 	void exportRange();
 	void exportSlice();
 	
