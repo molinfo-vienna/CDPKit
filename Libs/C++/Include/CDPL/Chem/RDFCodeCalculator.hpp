@@ -186,7 +186,7 @@ namespace CDPL
 			 * \param beg An iterator pointing to the beginning of the entity sequence.
 			 * \param end An iterator pointing one past the end of the entity sequence.
 			 * \param rdf_code The calculated \e RDF code vector.
-			 */
+ 			 */
 			template <typename Iter>
 			void calculate(Iter beg, Iter end, Math::DVector& rdf_code);
 
