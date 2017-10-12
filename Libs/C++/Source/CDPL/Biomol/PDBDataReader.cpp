@@ -286,17 +286,17 @@ bool Biomol::PDBDataReader::readPDBFile(std::istream& is, Chem::Molecule& mol)
 
 		else if (rec_name == PDB::ATOM_PREFIX)
 			rem_llen -= readATOMRecord(is, mol); 
-
+		
 		else if (rec_name == PDB::ANISOU_PREFIX)
 			rem_llen -= skipRecordData(is, PDB::ANISOU_DATA_LENGTH, rec_name);
 
-		else if (rec_name == PDB::TER_PREFIX)
+		else if (rec_name == PDB::TER_PREFIX) 
 			rem_llen -= readTERRecord(is, mol); 
 
 		else if (rec_name == PDB::HETATM_PREFIX)
 			rem_llen -= readHETATMRecord(is, mol); 
 
-		else if (rec_name == PDB::ENDMDL_PREFIX) 
+		else if (rec_name == PDB::ENDMDL_PREFIX)
 			rem_llen -= readENDMDLRecord(mol);
 
 		else if (rec_name == PDB::CONECT_PREFIX)
@@ -324,12 +324,10 @@ bool Biomol::PDBDataReader::readPDBFile(std::istream& is, Chem::Molecule& mol)
 	}
 
 	checkMandatoryRecords();
-
 	processAtomSequence(mol, false);
 	setBondOrdersFromResTemplates(mol);
 	perceiveBondOrders(mol);
 	calcAtomCharges(mol);
-
 	setPDBData(mol, pdbData);
 
 	return true;
@@ -1005,8 +1003,8 @@ void Biomol::PDBDataReader::processAtomSequence(Chem::Molecule& mol, bool chain_
 						setResidueLeavingAtomFlag(*res_atom, true);
 				} 
 
-			} else 
-				currResidueLinkAtoms.insert(res_as_start_it, as_it, currResidueLinkAtoms.end());
+			} else
+				currResidueLinkAtoms.insert(currResidueLinkAtoms.end(), res_as_start_it, as_it);
 
 			bool exit = false;
 

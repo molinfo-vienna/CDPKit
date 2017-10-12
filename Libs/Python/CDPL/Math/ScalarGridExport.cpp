@@ -58,6 +58,7 @@ namespace
 				.def("resize", &GridType::resize, (python::arg("self"), python::arg("m"), python::arg("n"), python::arg("o")))
 				.def(CDPLPythonBase::ObjectIdentityCheckVisitor<GridType>())
 				.def(ConstGridVisitor<GridType>())
+				.def(ConstGridContainerVisitor<GridType>())
 				.def(GridAssignAndSwapVisitor<GridType>());
 		}
 	};

@@ -26,9 +26,11 @@
 
 #include "StaticInit.hpp"
 
+#include <boost/bind.hpp>
+
 #include "CDPL/Pharm/FeatureDistanceScore.hpp"
-#include "CDPL/Pharm/GeneralizedBellFunction.hpp"
 #include "CDPL/Pharm/Feature.hpp"
+#include "CDPL/Math/SpecialFunctions.hpp"
 #include "CDPL/Chem/Entity3DFunctions.hpp"
 
 
@@ -36,7 +38,7 @@ using namespace CDPL;
 
 
 Pharm::FeatureDistanceScore::FeatureDistanceScore(double min_dist, double max_dist): 
-    minDist(min_dist), maxDist(max_dist), normFunc(GeneralizedBellFunction(0.5, 10, 0.0)) {}
+    minDist(min_dist), maxDist(max_dist), normFunc(boost::bind(&Math::generalizedBell<double>, _1, 0.5, 10, 0.0)) {}
 
 double Pharm::FeatureDistanceScore::getMinDistance() const
 {
@@ -55,7 +57,12 @@ void Pharm::FeatureDistanceScore::setNormalizationFunction(const NormalizationFu
 
 double Pharm::FeatureDistanceScore::operator()(const Feature& ftr1, const Feature& ftr2) const
 {
-    double dist = length(get3DCoordinates(ftr2) - get3DCoordinates(ftr1));
+    return operator()(get3DCoordinates(ftr1), ftr2);
+}
+
+double Pharm::FeatureDistanceScore::operator()(const Math::Vector3D& ftr1_pos, const Feature& ftr2) const
+{
+    double dist = length(get3DCoordinates(ftr2) - ftr1_pos);
     double ctr_dev = (dist - (maxDist + minDist) * 0.5) / (maxDist - minDist);
 
 	return normFunc(ctr_dev);

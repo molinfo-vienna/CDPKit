@@ -125,7 +125,7 @@ void CDPLPythonChem::exportAtom()
 		.add_property("index", &Chem::Atom::getIndex)
 		.add_property("atoms", python::make_function(&createAtomSequence<Chem::Atom>, 
 													 python::with_custodian_and_ward_postcall<0, 1>()))
-		.add_property("bonds", python::make_function(&createBondSequence<Chem::Bond>, 
+		.add_property("bonds", python::make_function(&createBondSequence<Chem::Atom>, 
 													 python::with_custodian_and_ward_postcall<0, 1>()));
 
 	AtomSequenceExport<Chem::Atom>("AtomSequence");

@@ -59,12 +59,30 @@ namespace CDPLPythonUtil
 		}
 	};
 
+	template <typename MapType>
+	struct KeyLValueGetter
+	{
+
+		static boost::reference_wrapper<const typename MapType::KeyType> getValue(const typename MapType::KeyType& key) {
+			return boost::ref(key);
+		}
+	};
+
+	template <typename MapType>
+	struct KeyRValueGetter
+	{
+
+		static const typename MapType::KeyType getValue(const typename MapType::KeyType& key) {
+			return key;
+		}
+	};
+
 	template <typename MapType, typename ValueReturnPolicy, 
 			  typename EntryAdditionPolicy1, typename EntryAdditionPolicy2, 
-			  typename GetValueOrDefaultPolicy, bool GetValueOrDefaultWithLValue>
+			  typename GetValueOrDefaultPolicy, bool GetValueOrDefaultWithLValue, bool GetKeyWithLValue>
 	class BasicMapVisitor : 
 		public boost::python::def_visitor<BasicMapVisitor<MapType, ValueReturnPolicy, EntryAdditionPolicy1, 
-														  EntryAdditionPolicy2, GetValueOrDefaultPolicy, GetValueOrDefaultWithLValue> >
+														  EntryAdditionPolicy2, GetValueOrDefaultPolicy, GetValueOrDefaultWithLValue, GetKeyWithLValue> >
 	{
 
 		friend class boost::python::def_visitor_access;
@@ -121,6 +139,9 @@ namespace CDPLPythonUtil
 				.def("__setitem__", &setItem, (python::arg("self"), python::arg("key"), python::arg("value")), 
 					 EntryAdditionPolicy2())
 				.def("__delitem__", removeEntryFunc, (python::arg("self"), python::arg("key")))
+				.add_property("keys", &getKeys)
+				.add_property("values", &getValues)
+				.add_property("entries", &getEntries)
 				.add_property("size", &MapType::getSize);
 		}
 
@@ -132,14 +153,15 @@ namespace CDPLPythonUtil
 			map[key] = value;
 		}
 
-		static boost::python::object getKeys(const MapType& map) {
+		static boost::python::object getKeys(MapType& map) {
 			using namespace boost;
 			
 			python::list keys;
 			
-			std::for_each(map.getEntriesBegin(), map.getEntriesEnd(),
-						  boost::bind(&python::list::append<typename MapType::KeyType>, boost::ref(keys),
-									  boost::bind(&MapType::Entry::first, _1)));
+			typename MapType::EntryIterator entries_end = map.getEntriesEnd();
+
+			for (typename MapType::EntryIterator it = map.getEntriesBegin(); it != entries_end; ++it)  
+				keys.append(mpl::if_c<GetKeyWithLValue, KeyLValueGetter<MapType>, KeyRValueGetter<MapType> >::type::getValue((*it).first));
 
 			return keys;
 		}
@@ -167,7 +189,7 @@ namespace CDPLPythonUtil
 			typename MapType::EntryIterator entries_end = map.getEntriesEnd();
 
 			for (typename MapType::EntryIterator it = map.getEntriesBegin(); it != entries_end; ++it)  
-				entries.append(python::make_tuple(it->first, 
+				entries.append(python::make_tuple(mpl::if_c<GetKeyWithLValue, KeyLValueGetter<MapType>, KeyRValueGetter<MapType> >::type::getValue((*it).first), 
 												  mpl::if_c<GetValueOrDefaultWithLValue, 
 												  LValueGetter<MapType>, RValueGetter<MapType> >::type::getValue((*it).second)));
 			return entries;
@@ -176,10 +198,10 @@ namespace CDPLPythonUtil
 
 	template <typename MapType, typename ValueReturnPolicy, 
 			  typename EntryAdditionPolicy1, typename EntryAdditionPolicy2, 
-			  typename GetValueOrDefaultPolicy, bool GetValueOrDefaultWithLValue>
+			  typename GetValueOrDefaultPolicy, bool GetValueOrDefaultWithLValue, bool GetKeyWithLValue = false>
 	class MapVisitor : 
 		public boost::python::def_visitor<MapVisitor<MapType, ValueReturnPolicy, EntryAdditionPolicy1, 
-													 EntryAdditionPolicy2, GetValueOrDefaultPolicy, GetValueOrDefaultWithLValue> >
+													 EntryAdditionPolicy2, GetValueOrDefaultPolicy, GetValueOrDefaultWithLValue, GetKeyWithLValue> >
 	{
 
 		friend class boost::python::def_visitor_access;
@@ -190,7 +212,7 @@ namespace CDPLPythonUtil
 		
 			cl
 				.def(BasicMapVisitor<MapType, ValueReturnPolicy, EntryAdditionPolicy1, EntryAdditionPolicy2, 
-					 GetValueOrDefaultPolicy, GetValueOrDefaultWithLValue>())
+					 GetValueOrDefaultPolicy, GetValueOrDefaultWithLValue, GetKeyWithLValue>())
 				.def("containsEntry", &MapType::containsEntry, (python::arg("self"), python::arg("key")))
 				.def("insertEntry", &insertEntry, (python::arg("self"), python::arg("key"), python::arg("value")), 
 					 EntryAdditionPolicy2())
@@ -204,10 +226,10 @@ namespace CDPLPythonUtil
 
 	template <typename MapType, typename ValueReturnPolicy, 
 			  typename EntryAdditionPolicy1, typename EntryAdditionPolicy2, 
-			  typename GetValueOrDefaultPolicy, bool GetValueOrDefaultWithLValue>
+			  typename GetValueOrDefaultPolicy, bool GetValueOrDefaultWithLValue, bool GetKeyWithLValue = false>
 	class MultiMapVisitor : 
 		public boost::python::def_visitor<MultiMapVisitor<MapType, ValueReturnPolicy, EntryAdditionPolicy1, 
-														  EntryAdditionPolicy2, GetValueOrDefaultPolicy, GetValueOrDefaultWithLValue> >
+														  EntryAdditionPolicy2, GetValueOrDefaultPolicy, GetValueOrDefaultWithLValue, GetKeyWithLValue> >
 	{
 
 		friend class boost::python::def_visitor_access;
@@ -220,7 +242,7 @@ namespace CDPLPythonUtil
 
 			cl
 				.def(BasicMapVisitor<MapType, ValueReturnPolicy, EntryAdditionPolicy1, EntryAdditionPolicy2, 
-					 GetValueOrDefaultPolicy, GetValueOrDefaultWithLValue>())
+					 GetValueOrDefaultPolicy, GetValueOrDefaultWithLValue, GetKeyWithLValue>())
 				.def("getNumEntries", &MapType::getNumEntries, (python::arg("self"), python::arg("key")))
 				.def("removeEntries", removeEntriesFunc, (python::arg("self"), python::arg("key")))
 				.def("insertEntry", &insertEntry, (python::arg("self"), python::arg("key"), python::arg("value")), 

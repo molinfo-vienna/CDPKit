@@ -25,5 +25,6 @@
 
 
 import CDPL.Chem
+import CDPL.Grid
 
 from _pharm import *

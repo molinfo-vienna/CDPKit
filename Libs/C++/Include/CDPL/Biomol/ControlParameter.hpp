@@ -67,7 +67,7 @@ namespace CDPL
 			 *
 			 * \valuetype \c bool
 			 */
-			extern CDPL_BIOMOL_API const Base::LookupKey& STRICT_ERROR_CHECKING;
+			extern CDPL_BIOMOL_API const Base::LookupKey STRICT_ERROR_CHECKING;
 
 			/**
 			 * \brief Specifies whether to check if data lines exceed the maximum allowed line length when reading or writing data
@@ -81,7 +81,7 @@ namespace CDPL
 			 *
 			 * \valuetype \c bool
 			 */
-			extern CDPL_BIOMOL_API const Base::LookupKey& CHECK_LINE_LENGTH;
+			extern CDPL_BIOMOL_API const Base::LookupKey CHECK_LINE_LENGTH;
 
 			extern CDPL_BIOMOL_API const Base::LookupKey PDB_RESIDUE_DICTIONARY;
 		

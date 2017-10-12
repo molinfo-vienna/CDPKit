@@ -75,6 +75,14 @@ namespace CDPL
 
 			CDPL_MATH_INLINE explicit GridReference(GridType& g): data(g) {}
 
+			CDPL_MATH_INLINE Reference operator()(SizeType i) {
+				return data(i);
+			}
+
+			CDPL_MATH_INLINE ConstReference operator()(SizeType i) const {
+				return data(i);
+			}
+	
 			CDPL_MATH_INLINE Reference operator()(SizeType i, SizeType j, SizeType k) {
 				return data(i, j, k);
 			}
@@ -83,6 +91,10 @@ namespace CDPL
 				return data(i, j, k);
 			}
 	
+			CDPL_MATH_INLINE SizeType getSize() const {
+				return data.getSize();
+			}
+
 			CDPL_MATH_INLINE SizeType getSize1() const {
 				return data.getSize1();
 			}
@@ -226,20 +238,34 @@ namespace CDPL
 				gridAssignGrid<ScalarAssignment>(*this, e);
 			}
 
+			CDPL_MATH_INLINE Reference operator()(SizeType i) {
+				CDPL_MATH_CHECK(i < (getSize1() * getSize2() * getSize3()), "Index out of range", Base::IndexError);
+				return data[i];
+			}
+
+			CDPL_MATH_INLINE ConstReference operator()(SizeType i) const {
+				CDPL_MATH_CHECK(i < (getSize1() * getSize2() * getSize3()), "Index out of range", Base::IndexError);
+				return data[i];
+			}
+
 			CDPL_MATH_INLINE Reference operator()(SizeType i, SizeType j, SizeType k) {
 				CDPL_MATH_CHECK(i < getSize1() && j < getSize2() && k < getSize3(), "Index out of range", Base::IndexError);
-				return data[(k * getSize3() + j) * getSize2() + i];
+				return data[(k * getSize2() + j) * getSize1() + i];
 			}
 
 			CDPL_MATH_INLINE ConstReference operator()(SizeType i, SizeType j, SizeType k) const {
 				CDPL_MATH_CHECK(i < getSize1() && j < getSize2() && k < getSize3(), "Index out of range", Base::IndexError);
-				return data[(k * getSize3() + j) * getSize2() + i];
+				return data[(k * getSize2() + j) * getSize1() + i];
 			}
 
 			CDPL_MATH_INLINE bool isEmpty() const {
 				return data.empty();
 			}
-
+	
+			CDPL_MATH_INLINE SizeType getSize() const {
+				return (size1 * size2 * size3);
+			}
+	
 			CDPL_MATH_INLINE SizeType getSize1() const {
 				return size1;
 			}
@@ -418,7 +444,12 @@ namespace CDPL
 			CDPL_MATH_INLINE ZeroGrid(SizeType m, SizeType n, SizeType o): size1(m), size2(n), size3(o) {}
 
 			CDPL_MATH_INLINE ZeroGrid(const ZeroGrid& m): size1(m.size1), size2(m.size2), size3(m.size3) {}
-		
+
+			CDPL_MATH_INLINE ConstReference operator()(SizeType i) const {
+				CDPL_MATH_CHECK(i < (getSize1() * getSize2() * getSize3()), "Index out of range", Base::IndexError);
+				return zero;
+			}
+
 			CDPL_MATH_INLINE ConstReference operator()(SizeType i, SizeType j, SizeType k) const {
 				CDPL_MATH_CHECK(i < getSize1() && j < getSize2() && k < getSize3(), "Index out of range", Base::IndexError);
 				return zero;
@@ -427,7 +458,11 @@ namespace CDPL
 			CDPL_MATH_INLINE bool isEmpty() const {
 				return (size1 == 0 || size2 == 0 || size3 == 0);
 			}
-
+	
+			CDPL_MATH_INLINE SizeType getSize() const {
+				return (size1 * size2 * size3);
+			}
+	
 			CDPL_MATH_INLINE SizeType getSize1() const {
 				return size1;
 			}
@@ -510,7 +545,12 @@ namespace CDPL
 			CDPL_MATH_INLINE ScalarGrid(SizeType m, SizeType n, SizeType o, const ValueType& v = ValueType()): size1(m), size2(n), size3(o), value(v) {}
 
 			CDPL_MATH_INLINE ScalarGrid(const ScalarGrid& m): size1(m.size1), size2(m.size2), size3(m.size3), value(m.value) {}
-		
+
+			CDPL_MATH_INLINE ConstReference operator()(SizeType i) const {
+				CDPL_MATH_CHECK(i < (getSize1() * getSize2() * getSize3()), "Index out of range", Base::IndexError);
+				return value;
+			}
+
 			CDPL_MATH_INLINE ConstReference operator()(SizeType i, SizeType j, SizeType k) const {
 				CDPL_MATH_CHECK(i < getSize1() && j < getSize2() && k < getSize3(), "Index out of range", Base::IndexError);
 				return value;
@@ -519,7 +559,11 @@ namespace CDPL
 			CDPL_MATH_INLINE bool isEmpty() const {
 				return (size1 == 0 || size2 == 0 || size3 == 0);
 			}
-
+	
+			CDPL_MATH_INLINE SizeType getSize() const {
+				return (size1 * size2 * size3);
+			}
+	
 			CDPL_MATH_INLINE SizeType getSize1() const {
 				return size1;
 			}
@@ -594,12 +638,12 @@ namespace CDPL
 		typedef ScalarGrid<double> DScalarGrid;
 
 		/**
-		 * \brief An unbounded dense grid holding floating point values of type <tt>float</tt>..
+		 * \brief An unbounded dense grid holding floating point values of type <tt>float</tt>.
 		 */
 		typedef Grid<float> FGrid;
 
 		/**
-		 * \brief An unbounded dense grid holding floating point values of type <tt>double</tt>..
+		 * \brief An unbounded dense grid holding floating point values of type <tt>double</tt>.
 		 */
 		typedef Grid<double> DGrid;
 	}

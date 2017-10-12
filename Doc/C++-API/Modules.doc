@@ -152,6 +152,9 @@
 \defgroup CDPL_CHEM_ALIGNMENT Chemical Entity Alignment 
 \ingroup CDPL_CHEM
 
+\defgroup CDPL_CHEM_GRID_CALCULATION Grid Calculation
+\ingroup CDPL_CHEM
+
 \defgroup CDPL_CHEM_DATA_IO Data I/O
 \ingroup CDPL_CHEM
 
@@ -374,6 +377,9 @@
 \defgroup CDPL_PHARM_FEATURE_CONTAINER_PROPERTIES FeatureContainer Properties
 \ingroup CDPL_PHARM_PROPERTIES
 
+\defgroup CDPL_PHARM_ATTRIBUTED_GRID_PROPERTIES AttributedGrid Properties
+\ingroup CDPL_PHARM_PROPERTIES
+
 \defgroup CDPL_PHARM_CONSTANTS Flags and Constants
 \ingroup CDPL_PHARM
 
@@ -401,47 +407,47 @@
 \defgroup CDPL_PHARM_PHARMACOPHORE_FUNCTIONS Pharmacophore Functions
 \ingroup CDPL_PHARM_FUNCTIONS
 
-
-\defgroup CDPL_MATH Mathematics
-
-\defgroup CDPL_MATH_VECTORS Vectors
-\ingroup CDPL_MATH
-
-\defgroup CDPL_MATH_VECTOR_TYPES Data Types
-\ingroup CDPL_MATH_VECTORS
-
-\defgroup CDPL_MATH_VECTOR_OPERATIONS Vector Operations
-\ingroup CDPL_MATH_VECTORS
-
-\defgroup CDPL_MATH_MATRICES Matrices
-\ingroup CDPL_MATH
-
-\defgroup CDPL_MATH_MATRIX_TYPES Data Types
-\ingroup CDPL_MATH_MATRICES
-
-\defgroup CDPL_MATH_MATRIX_OPERATIONS Matrix Operations
-\ingroup CDPL_MATH_MATRICES
-
-\defgroup CDPL_MATH_AFFINE_TRANSFORMATIONS Affine Transformations
-\ingroup CDPL_MATH_MATRICES
-
-\defgroup CDPL_MATH_SV_DECOMPOSITION Singular Value Decomposition
-\ingroup CDPL_MATH_MATRICES
-
-\defgroup CDPL_MATH_EIGENVALUES Eigenvalues and Eigenvectors
-\ingroup CDPL_MATH_MATRICES
-
-\defgroup CDPL_MATH_LINEAR_REGRESSION Linear Regression
-\ingroup CDPL_MATH
-
-\defgroup CDPL_MATH_FUNCTIONS Special Functions
-\ingroup CDPL_MATH
-
-\defgroup CDPL_MATH_MISCELLANEOUS Miscellaneous
-\ingroup CDPL_MATH
+\defgroup CDPL_PHARM_ATTRIBUTED_GRID_FUNCTIONS AttributedGrid Functions
+\ingroup CDPL_PHARM_FUNCTIONS
 
 
 \defgroup CDPL_FORCEFIELD Molecular Forcefields
+
+
+\defgroup CDPL_GRID Grid Data Handling
+
+\defgroup CDPL_GRID_DATA_STRUCTURES Data Structures
+\ingroup CDPL_GRID
+
+\defgroup CDPL_GRID_INTERFACES Interfaces
+\ingroup CDPL_GRID_DATA_STRUCTURES
+
+\defgroup CDPL_GRID_IMPLEMENTATIONS Implementations
+\ingroup CDPL_GRID_DATA_STRUCTURES
+
+\defgroup CDPL_GRID_DATA_IO Data I/O
+\ingroup CDPL_GRID
+
+\defgroup CDPL_GRID_DATA_FORMATS Data Format Descriptors
+\ingroup CDPL_GRID_DATA_IO
+
+\defgroup CDPL_GRID_CDF_IO The Native CDPL Grid Format
+\ingroup CDPL_GRID_DATA_IO
+
+\defgroup CDPL_GRID_ATTRIBUTED_GRID_PROPERTIES AttributedGrid Properties
+\ingroup CDPL_GRID
+
+\defgroup CDPL_GRID_CONTROL_PARAMETERS Control-Parameter Keys
+\ingroup CDPL_GRID
+
+\defgroup CDPL_GRID_FUNCTIONS Free Functions
+\ingroup CDPL_GRID
+
+\defgroup CDPL_GRID_CONTROL_PARAMETER_FUNCTIONS Control-Parameter Functions
+\ingroup CDPL_GRID_FUNCTIONS
+
+\defgroup CDPL_GRID_ATTRIBUTED_GRID_FUNCTIONS AttributedGrid Functions
+\ingroup CDPL_GRID_FUNCTIONS
 
 
 \defgroup CDPL_VIS Data Visualization
@@ -532,6 +538,45 @@
 
 \defgroup CDPL_VIS_MISCELLANEOUS Miscellaneous
 \ingroup CDPL_VIS
+
+
+\defgroup CDPL_MATH Mathematics
+
+\defgroup CDPL_MATH_VECTORS Vectors
+\ingroup CDPL_MATH
+
+\defgroup CDPL_MATH_VECTOR_TYPES Data Types
+\ingroup CDPL_MATH_VECTORS
+
+\defgroup CDPL_MATH_VECTOR_OPERATIONS Vector Operations
+\ingroup CDPL_MATH_VECTORS
+
+\defgroup CDPL_MATH_MATRICES Matrices
+\ingroup CDPL_MATH
+
+\defgroup CDPL_MATH_MATRIX_TYPES Data Types
+\ingroup CDPL_MATH_MATRICES
+
+\defgroup CDPL_MATH_MATRIX_OPERATIONS Matrix Operations
+\ingroup CDPL_MATH_MATRICES
+
+\defgroup CDPL_MATH_AFFINE_TRANSFORMATIONS Affine Transformations
+\ingroup CDPL_MATH_MATRICES
+
+\defgroup CDPL_MATH_SV_DECOMPOSITION Singular Value Decomposition
+\ingroup CDPL_MATH_MATRICES
+
+\defgroup CDPL_MATH_EIGENVALUES Eigenvalues and Eigenvectors
+\ingroup CDPL_MATH_MATRICES
+
+\defgroup CDPL_MATH_LINEAR_REGRESSION Linear Regression
+\ingroup CDPL_MATH
+
+\defgroup CDPL_MATH_FUNCTIONS Special Functions
+\ingroup CDPL_MATH
+
+\defgroup CDPL_MATH_MISCELLANEOUS Miscellaneous
+\ingroup CDPL_MATH
 
 
 \defgroup CDPL_UTIL General Utilities

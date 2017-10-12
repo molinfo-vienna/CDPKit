@@ -31,11 +31,10 @@
 #ifndef CDPL_PHARM_CATIONPIINTERACTIONSCORE_HPP
 #define CDPL_PHARM_CATIONPIINTERACTIONSCORE_HPP
 
-#include <functional>
-
 #include <boost/function.hpp>
 
 #include "CDPL/Pharm/APIPrefix.hpp"
+#include "CDPL/Math/Vector.hpp"
 
 
 namespace CDPL 
@@ -54,7 +53,7 @@ namespace CDPL
 		/**
 		 * \brief CationPiInteractionScore.
 		 */
-		class CDPL_PHARM_API CationPiInteractionScore : public std::binary_function<Feature, Feature, double>
+		class CDPL_PHARM_API CationPiInteractionScore
 		{
 
 		  public:
@@ -84,6 +83,8 @@ namespace CDPL
 			void setNormalizationFunction(const NormalizationFunction& func);
 
 			double operator()(const Feature& ftr1, const Feature& ftr2) const;
+
+			double operator()(const Math::Vector3D& ftr1_pos, const Feature& ftr2) const;
 
 		  private:
 			bool                  aroCatOrder;

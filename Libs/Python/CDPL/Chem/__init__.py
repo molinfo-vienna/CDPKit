@@ -27,5 +27,6 @@
 import CDPL.Base
 import CDPL.Math
 import CDPL.Util
+import CDPL.Grid
 
 from _chem import *

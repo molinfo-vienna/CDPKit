@@ -16,44 +16,22 @@ SET(pharm_MOD_SRCS
     PharmacophoreExport.cpp
     BasicPharmacophoreExport.cpp
 
-    InteractionScoreGridExport.cpp
-    InteractionScoreGridSetExport.cpp
     FeatureMappingExport.cpp 
     FeatureTypeHistogramExport.cpp 
     FeatureRDFCodeCalculatorExport.cpp 
 
     FeatureContainerIOManagerExport.cpp 
     PharmacophoreIOManagerExport.cpp 
-    InteractionScoreGridIOManagerExport.cpp 
-    InteractionScoreGridSetIOManagerExport.cpp 
-
     PharmacophoreReaderExport.cpp 
-    InteractionScoreGridReaderExport.cpp 
-    InteractionScoreGridSetReaderExport.cpp 
     FeatureContainerWriterExport.cpp 
-    InteractionScoreGridWriterExport.cpp 
-    InteractionScoreGridSetWriterExport.cpp 
-
     PharmacophoreInputHandlerExport.cpp 
-    InteractionScoreGridInputHandlerExport.cpp 
-    InteractionScoreGridSetInputHandlerExport.cpp 
     FeatureContainerOutputHandlerExport.cpp 
-    InteractionScoreGridOutputHandlerExport.cpp 
-    InteractionScoreGridSetOutputHandlerExport.cpp 
-
+ 
     CDFPharmacophoreInputHandlerExport.cpp 
     CDFFeatureContainerOutputHandlerExport.cpp 
     CDFPharmacophoreReaderExport.cpp 
     CDFFeatureContainerWriterExport.cpp
-    CDFInteractionScoreGridInputHandlerExport.cpp 
-    CDFInteractionScoreGridOutputHandlerExport.cpp 
-    CDFInteractionScoreGridSetInputHandlerExport.cpp 
-    CDFInteractionScoreGridSetOutputHandlerExport.cpp 
-    CDFInteractionScoreGridReaderExport.cpp 
-    CDFInteractionScoreGridWriterExport.cpp 
-    CDFInteractionScoreGridSetReaderExport.cpp 
-    CDFInteractionScoreGridSetWriterExport.cpp 
-
+   
     PMLPharmacophoreInputHandlerExport.cpp 
     PMLFeatureContainerOutputHandlerExport.cpp 
     PMLPharmacophoreReaderExport.cpp 
@@ -89,7 +67,6 @@ SET(pharm_MOD_SRCS
     CationPiInteractionConstraintExport.cpp
     HBondingInteractionConstraintExport.cpp
 
-    GeneralizedBellFunctionExport.cpp
     InteractionScoreCombinerExport.cpp
     FeatureDistanceScoreExport.cpp
     HydrophobicInteractionScoreExport.cpp
@@ -98,9 +75,9 @@ SET(pharm_MOD_SRCS
     ParallelPiPiInteractionScoreExport.cpp
     CationPiInteractionScoreExport.cpp
     HBondingInteractionScoreExport.cpp
-    StericAtomClashFactorCalculatorExport.cpp
     InteractionScoreGridCalculatorExport.cpp
-    DefaultInteractionScoreGridCalculatorExport.cpp
+    InteractionScoreGridSetCalculatorExport.cpp
+    DefaultInteractionScoreGridSetCalculatorExport.cpp
 
     FeatureTypeMatchFunctorExport.cpp
     FeaturePairDistanceMatchFunctorExport.cpp
@@ -111,6 +88,9 @@ SET(pharm_MOD_SRCS
     FeaturePositionMatchFunctorExport.cpp
     FeatureGeometryMatchFunctorExport.cpp
     
+    AttributedGridPropertyExport.cpp 
+    AttributedGridPropertyDefaultExport.cpp 
+
     FeatureContainerPropertyExport.cpp 
     FeaturePropertyExport.cpp 
     FeatureContainerPropertyDefaultExport.cpp 
@@ -125,6 +105,7 @@ SET(pharm_MOD_SRCS
     FeatureFunctionExport.cpp 
     FeatureContainerFunctionExport.cpp 
     FeatureSetFunctionExport.cpp 
+    AttributedGridFunctionExport.cpp 
     ControlParameterFunctionExport.cpp 
 
     ToPythonConverterRegistration.cpp

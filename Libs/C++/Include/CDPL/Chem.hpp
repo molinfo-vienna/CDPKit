@@ -282,6 +282,8 @@
 #include "CDPL/Chem/SubstructureHistogramGenerator.hpp"
 #include "CDPL/Chem/PathFingerprintGenerator.hpp"
 #include "CDPL/Chem/CircularFingerprintGenerator.hpp"
+#include "CDPL/Chem/GeneralizedBellAtomDensity.hpp"  
+#include "CDPL/Chem/AtomDensityGridCalculator.hpp"  
 
 #include "CDPL/Chem/TopologicalEntityAlignment.hpp"
 #include "CDPL/Chem/GeometricalEntityAlignment.hpp"

@@ -31,8 +31,6 @@
 #ifndef CDPL_PHARM_ORTHOGONALPIPIINTERACTIONSCORE_HPP
 #define CDPL_PHARM_ORTHOGONALPIPIINTERACTIONSCORE_HPP
 
-#include <functional>
-
 #include <boost/function.hpp>
 
 #include "CDPL/Pharm/APIPrefix.hpp"
@@ -55,7 +53,7 @@ namespace CDPL
 		/**
 		 * \brief OrthogonalPiPiInteractionScore.
 		 */
-		class CDPL_PHARM_API OrthogonalPiPiInteractionScore : public std::binary_function<Feature, Feature, double>
+		class CDPL_PHARM_API OrthogonalPiPiInteractionScore
 		{
 
 		  public:
@@ -87,6 +85,8 @@ namespace CDPL
 			void setNormalizationFunction(const NormalizationFunction& func);
 
 			double operator()(const Feature& ftr1, const Feature& ftr2) const;
+
+			double operator()(const Math::Vector3D& ftr1_pos, const Feature& ftr2) const;
 
 		  private:
 			double calcDistanceScore(const Math::Vector3D&, const Math::Vector3D&) const;

@@ -40,7 +40,7 @@ SET(math_impl_MOD_SRCS
     GridExport.cpp
     ZeroGridExport.cpp
     ScalarGridExport.cpp
-    UniformSpatialGridExport.cpp
+    RegularSpatialGridExport.cpp
 
     RangeExport.cpp
     SliceExport.cpp

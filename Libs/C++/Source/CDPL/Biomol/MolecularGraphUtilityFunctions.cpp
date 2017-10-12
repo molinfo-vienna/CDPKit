@@ -33,9 +33,10 @@
 #include "CDPL/Biomol/AtomFunctions.hpp"
 #include "CDPL/Chem/MolecularGraph.hpp"
 #include "CDPL/Chem/Atom.hpp"
+#include "CDPL/Chem/Bond.hpp"
 #include "CDPL/Chem/AtomFunctions.hpp"
-#include "CDPL/Chem/Entity3DContainerFunctions.hpp"
 #include "CDPL/Chem/Entity3DFunctions.hpp"
+#include "CDPL/Chem/AtomContainerFunctions.hpp"
 #include "CDPL/Chem/AtomType.hpp"
 #include "CDPL/Math/VectorArrayFunctions.hpp"
 
@@ -46,13 +47,20 @@ using namespace CDPL;
 void Biomol::extractProximalAtoms(const Chem::MolecularGraph& core, const Chem::MolecularGraph& macromol, 
 				  Chem::Fragment& env_atoms, double max_dist, bool inc_core_atoms)
 {
+    extractProximalAtoms(core, macromol, env_atoms, static_cast<const Math::Vector3D& (*)(const Chem::Entity3D&)>(&Chem::get3DCoordinates), max_dist, inc_core_atoms);
+}
+
+void Biomol::extractProximalAtoms(const Chem::MolecularGraph& core, const Chem::MolecularGraph& macromol, 
+				  Chem::Fragment& env_atoms, const Chem::Atom3DCoordinatesFunction& coords_func,
+				  double max_dist, bool inc_core_atoms)
+{
     using namespace Chem;
 
     if (core.getNumAtoms() == 0)
 	return;
 
     Math::Vector3DArray core_coords; 
-    get3DCoordinates(core, core_coords);
+    get3DCoordinates(core, core_coords, coords_func);
 	
     Math::Vector3D core_ctr; 
     calcCentroid(core_coords, core_ctr);
@@ -66,7 +74,7 @@ void Biomol::extractProximalAtoms(const Chem::MolecularGraph& core, const Chem::
 	
     for (MolecularGraph::ConstAtomIterator it = macromol.getAtomsBegin(), end = macromol.getAtomsEnd(); it != end; ++it) {
 	const Atom& atom = *it;
-	const Math::Vector3D& atom_pos = get3DCoordinates(atom);
+	const Math::Vector3D& atom_pos = coords_func(atom);
 
 	if (length(atom_pos - core_ctr) > bsphere_rad)
 	    continue;
@@ -89,13 +97,19 @@ void Biomol::extractProximalAtoms(const Chem::MolecularGraph& core, const Chem::
 void Biomol::extractEnvironmentResidues(const Chem::MolecularGraph& core, const Chem::MolecularGraph& macromol, 
 					Chem::Fragment& env_residues, double max_dist)
 {
+    extractEnvironmentResidues(core, macromol, env_residues, static_cast<const Math::Vector3D& (*)(const Chem::Entity3D&)>(&Chem::get3DCoordinates), max_dist);
+}
+
+void Biomol::extractEnvironmentResidues(const Chem::MolecularGraph& core, const Chem::MolecularGraph& macromol, 
+					Chem::Fragment& env_residues, const Chem::Atom3DCoordinatesFunction& coords_func, double max_dist)
+{
     using namespace Chem;
 
     if (core.getNumAtoms() == 0)
 	return;
 
     Math::Vector3DArray core_coords; 
-    get3DCoordinates(core, core_coords);
+    get3DCoordinates(core, core_coords, coords_func);
 	
     Math::Vector3D core_ctr; 
     calcCentroid(core_coords, core_ctr);
@@ -109,7 +123,7 @@ void Biomol::extractEnvironmentResidues(const Chem::MolecularGraph& core, const 
 	
     for (MolecularGraph::ConstAtomIterator it = macromol.getAtomsBegin(), end = macromol.getAtomsEnd(); it != end; ++it) {
 	const Atom& atom = *it;
-	const Math::Vector3D& atom_pos = get3DCoordinates(atom);
+	const Math::Vector3D& atom_pos = coords_func(atom);
 
 	if (length(atom_pos - core_ctr) > bsphere_rad)
 	    continue;
@@ -124,6 +138,27 @@ void Biomol::extractEnvironmentResidues(const Chem::MolecularGraph& core, const 
 	    }
 	}
     } 
+
+    std::size_t num_atoms = env_residues.getNumAtoms();
+
+    for (std::size_t i = 0; i < num_atoms; i++) {
+	const Atom& env_atom = env_residues.getAtom(i);
+	Atom::ConstBondIterator b_it = env_atom.getBondsBegin();
+	
+	for (Atom::ConstAtomIterator a_it = env_atom.getAtomsBegin(), a_end = env_atom.getAtomsEnd(); a_it != a_end; ++a_it, ++b_it) {
+	    const Atom& nbr_atom = *a_it;
+
+	    if (!env_residues.containsAtom(nbr_atom))
+		continue;
+
+	    const Bond& nbr_bond = *b_it;
+
+	    if (!macromol.containsBond(nbr_bond))
+		continue;
+
+	    env_residues.addBond(nbr_bond);
+	}
+    }
 }
 
 void Biomol::setHydrogenResidueSequenceInfo(Chem::MolecularGraph& molgraph, bool overwrite, unsigned int flags)

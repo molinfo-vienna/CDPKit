@@ -42,6 +42,8 @@
 #include "CDPL/Chem/AtomConformer3DCoordinatesFunctor.hpp"
 #include "CDPL/Chem/AtomArray3DCoordinatesFunctor.hpp"
 #include "CDPL/Chem/Atom3DCoordinatesFunction.hpp"
+#include "CDPL/Chem/GeneralizedBellAtomDensity.hpp"
+#include "CDPL/Chem/AtomDensityGridCalculator.hpp"
 
 #include "Base/GenericVariantFromPythonConverter.hpp"
 #include "Base/GenericFromPythonConverter.hpp"
@@ -94,4 +96,7 @@ void CDPLPythonChem::registerFromPythonConverters()
 											   Chem::HashCodeCalculator::AtomHashSeedFunction>();
 	CDPLPythonBase::GenericFromPythonConverter<Chem::HashCodeCalculator::DefBondHashSeedFunctor,
 											   Chem::HashCodeCalculator::BondHashSeedFunction>();
+
+	CDPLPythonBase::GenericFromPythonConverter<Chem::GeneralizedBellAtomDensity, 
+											   Chem::AtomDensityGridCalculator::DensityFunction>();
 }

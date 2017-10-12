@@ -98,7 +98,9 @@ SET(chem_MOD_SRCS
     CircularFingerprintGeneratorExport.cpp 
     PatternAtomTyperExport.cpp 
     SubstructureHistogramGeneratorExport.cpp 
-     
+    GeneralizedBellAtomDensityExport.cpp
+    AtomDensityGridCalculatorExport.cpp
+
     MoleculeIOManagerExport.cpp 
     MolecularGraphIOManagerExport.cpp 
     ReactionIOManagerExport.cpp 

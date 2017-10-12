@@ -92,8 +92,20 @@ namespace CDPL
 		 */
 		template <typename T>
 		T gammaQ(const T& a, const T& x);
-
+	
 		/**
+		 * \brief Computes the generalized bell function \f$ Bell(x) = \frac{1}{1 + |\frac{x-c}{a}|^{2b}} \f$ at \a x.
+		 * \param x The generalized bell function argument
+		 * \param a Controls the width of the curve at \f$f(x) = 0.5 \f$.
+		 * \param b Controls the slope of the curve at \f$ x = c - a \f$ and \f$ x = c + a \f$.
+		 * \param c Locates the center of the curve.
+		 * \return The generalized bell function value at \a x.
+		 */
+
+		 template <typename T>
+		 T generalizedBell(const T& x, const T& a, const T& b, const T& c);
+
+		 /**
 		 * @}
 		 */
 	}
@@ -255,6 +267,12 @@ CDPL_MATH_INLINE T CDPL::Math::gammaQ(const T& a, const T& x)
 		return (T(1) - gammaPSer(a, x));
 	
 	return gammaQContFrac(a, x);
+}
+
+template <typename T>
+CDPL_MATH_INLINE T CDPL::Math::generalizedBell(const T& x, const T& a, const T& b, const T& c)
+{
+	return (T(1) / (T(1) + std::pow(std::abs((x - c) / a), T(2) * b)));
 }
 
 // \endcond

@@ -42,4 +42,6 @@ void CDPLPythonMath::exportSpecialFunctions()
 	python::def("sign", &Math::sign<double, double>, (python::arg("a"), python::arg("b")));
 	python::def("lnGamma", &Math::lnGamma<double>, python::arg("z"));
 	python::def("gammaQ", &Math::gammaQ<double>, (python::arg("a"), python::arg("x")));
+	python::def("generalizedBell", &Math::generalizedBell<double>, (python::arg("x"), python::arg("a"), 
+																	python::arg("b"), python::arg("c")));
 }

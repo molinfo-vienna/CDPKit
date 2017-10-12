@@ -38,10 +38,16 @@
 namespace
 {
 
-    double callOperator(CDPL::Pharm::FeatureDistanceScore& score, 
+    double callOperator1(CDPL::Pharm::FeatureDistanceScore& score, 
 						CDPL::Pharm::Feature& ftr1, CDPL::Pharm::Feature& ftr2)
     {
 		return score(ftr1, ftr2);
+    }
+
+	double callOperator2(CDPL::Pharm::FeatureDistanceScore& score, 
+						 const CDPL::Math::Vector3D& ftr1_pos, CDPL::Pharm::Feature& ftr2)
+    {
+		return score(ftr1_pos, ftr2);
     }
 }
 
@@ -60,7 +66,8 @@ void CDPLPythonPharm::exportFeatureDistanceScore()
 		.def("getMaxDistance", &Pharm::FeatureDistanceScore::getMaxDistance, python::arg("self"))
 		.def("assign", CDPLPythonBase::copyAssOp(&Pharm::FeatureDistanceScore::operator=), 
 			 (python::arg("self"), python::arg("func")), python::return_self<>())
-		.def("__call__", &callOperator, (python::arg("self"), python::arg("ftr1"), python::arg("ftr2")))
+		.def("__call__", &callOperator1, (python::arg("self"), python::arg("ftr1"), python::arg("ftr2")))
+		.def("__call__", &callOperator2, (python::arg("self"), python::arg("ftr1_pos"), python::arg("ftr2")))
 		.add_property("minDistance", &Pharm::FeatureDistanceScore::getMinDistance)
 		.add_property("maxDistance", &Pharm::FeatureDistanceScore::getMaxDistance);
 }

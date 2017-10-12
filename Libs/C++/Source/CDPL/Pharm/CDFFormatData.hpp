@@ -51,6 +51,15 @@ namespace CDPL
 
 			const Base::uint8 CURR_FORMAT_VERSION  = 1;
 
+			namespace AttributedGridProperty
+			{
+
+				const unsigned int PROPERTY_HANDLER_ID = 1;
+
+				const unsigned int FEATURE_TYPE        = 1;
+				const unsigned int TARGET_FEATURE_TYPE = 2;
+			}
+
 			namespace FeatureProperty
 			{
 

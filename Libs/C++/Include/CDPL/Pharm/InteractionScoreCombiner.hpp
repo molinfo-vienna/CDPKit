@@ -36,6 +36,7 @@
 #include <boost/function.hpp>
 
 #include "CDPL/Pharm/APIPrefix.hpp"
+#include "CDPL/Math/Vector.hpp"
 
 
 namespace CDPL 
@@ -54,14 +55,14 @@ namespace CDPL
 		/**
 		 * \brief InteractionScoreCombiner.
 		 */
-		class CDPL_PHARM_API InteractionScoreCombiner : public std::binary_function<Feature, Feature, double>
+		class CDPL_PHARM_API InteractionScoreCombiner : public std::binary_function<Math::Vector3D, Feature, double>
 		{
 
 		  public:
 			/**
 			 * \brief A generic wrapper class used to store interaction scoring functions.
 			 */
-			typedef boost::function2<double, const Feature&, const Feature&> ScoringFunction;
+			typedef boost::function2<double, const Math::Vector3D&, const Feature&> ScoringFunction;
 
 			typedef boost::function2<double, double, double> CombinationFunction;
 
@@ -75,7 +76,7 @@ namespace CDPL
 
             InteractionScoreCombiner(const ScoringFunction& func1, const ScoringFunction& func2);
 
-			double operator()(const Feature& ftr1, const Feature& ftr2) const;
+			double operator()(const Math::Vector3D& ftr1, const Feature& ftr2) const;
 
 		  private:
 			ScoringFunction     scoringFunc1;

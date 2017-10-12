@@ -31,37 +31,24 @@
 #ifndef CDPL_PHARM_INTERACTIONSCOREGRIDCALCULATOR_HPP
 #define CDPL_PHARM_INTERACTIONSCOREGRIDCALCULATOR_HPP
 
-#include <cstddef>
-#include <map>
-#include <set>
 #include <vector>
-#include <utility>
 
 #include <boost/function.hpp>
+#include <boost/shared_ptr.hpp>
 
 #include "CDPL/Pharm/APIPrefix.hpp"
-#include "CDPL/Pharm/BasicPharmacophore.hpp"
-#include "CDPL/Pharm/DefaultPharmacophoreGenerator.hpp"
-#include "CDPL/Chem/Atom3DCoordinatesFunction.hpp"
-#include "CDPL/Math/Matrix.hpp"
 #include "CDPL/Math/Vector.hpp"
+#include "CDPL/Grid/SpatialGrid.hpp"
 
 
 namespace CDPL 
 {
 
-	namespace Chem
-	{
-
-		class MolecularGraph;
-		class AtomContainer;
-        class Atom;
-	}
-
     namespace Pharm
     {
 
-		class InteractionScoreGridSet;
+		class FeatureContainer;
+		class Feature;
 
 		/**
 		 * \addtogroup CDPL_PHARM_INTERACTION_SCORE_GRID_CALCULATION
@@ -75,100 +62,37 @@ namespace CDPL
 		{
 
 		  public:
-			typedef boost::function2<double, const Feature&, const Feature&> InteractionScoringFunction;
-			typedef boost::function1<double, const Math::DVector&> FinalInteractionScoreFunction;
-			typedef boost::function3<double, const Math::Vector3D&, const Chem::AtomContainer&, const Chem::Atom3DCoordinatesFunction&> StericClashFactorFunction;
+			typedef boost::shared_ptr<InteractionScoreGridCalculator> SharedPointer;
+
+			typedef boost::function1<bool, const Feature&> FeaturePredicate;
+			typedef boost::function2<double, const Math::Vector3D&, const Feature&> ScoringFunction;
+			typedef boost::function1<double, const Math::DVector&> ScoreCombinationFunction;
 
 			InteractionScoreGridCalculator();
 
-			InteractionScoreGridCalculator(double step_size, std::size_t x_size, std::size_t y_size, std::size_t z_size);
+			InteractionScoreGridCalculator(const ScoringFunction& func);
 
-			InteractionScoreGridCalculator(double x_step_size, double y_step_size, double z_step_size, 
-										   std::size_t x_size, std::size_t y_size, std::size_t z_size);
+			InteractionScoreGridCalculator(const ScoringFunction& scoring_func, const ScoreCombinationFunction& comb_func); 
 
-			virtual ~InteractionScoreGridCalculator() {}
+			void setScoringFunction(const ScoringFunction& func);
 
-			const Math::Matrix4D& getCoordinatesTransform() const;
+			const ScoringFunction& getScoringFunction() const;
 
-			template <typename T>
-			void setCoordinatesTransform(const T& xform) {
-				coordsTransform = xform;
-			}
+			void setScoreCombinationFunction(const ScoreCombinationFunction& func);
 
-			double getXStepSize() const;
+			const ScoreCombinationFunction& getScoreCombinationFunction() const;
 
-			void setXStepSize(double size);
-
-			double getYStepSize() const;
-
-			void setYStepSize(double size);
-
-			double getZStepSize() const;
-
-			void setZStepSize(double size);
-
-			std::size_t getGridXSize() const;
-
-			void setGridXSize(std::size_t size);
-
-			std::size_t getGridYSize() const;
-
-			void setGridYSize(std::size_t size);
-
-			std::size_t getGridZSize() const;
-
-			void setGridZSize(std::size_t size);
-
-			void enableInteraction(unsigned int ftr_type, unsigned int tgt_ftr_type, bool enable);
-
-			bool isInteractionEnabled(unsigned int ftr_type, unsigned int tgt_ftr_type) const;
-
-			void clearEnabledInteractions();
-
-			void setInteractionScoringFunction(unsigned int ftr_type, unsigned int tgt_ftr_type, const InteractionScoringFunction& func);
-
-			const InteractionScoringFunction& getInteractionScoringFunction(unsigned int ftr_type, unsigned int tgt_ftr_type) const;
-
-			void removeInteractionScoringFunction(unsigned int ftr_type, unsigned int tgt_ftr_type);
-
-			/**
-			 * \brief Specifies a function for the retrieval of atom 3D-coordinates for feature generation.
-			 * \param func The atom 3D-coordinates function.
-			 */
-			void setAtom3DCoordinatesFunction(const Chem::Atom3DCoordinatesFunction& func);
-
-			void setFinalInteractionScoreFunction(const FinalInteractionScoreFunction& func);
-
-			void setStericClashFactorFunction(const StericClashFactorFunction& func);
-
-			void calculate(const Chem::MolecularGraph& molgraph, InteractionScoreGridSet& grid_set);
-
-			void calculate(const Chem::MolecularGraph& molgraph, const FeatureContainer& features, InteractionScoreGridSet& grid_set);
-
-			void calculate(const FeatureContainer& features, InteractionScoreGridSet& grid_set);
+			void calculate(const FeatureContainer& features, Grid::DSpatialGrid& grid, const FeaturePredicate& tgt_ftr_pred);
+	
+			void calculate(const FeatureContainer& features, Grid::DSpatialGrid& grid);
 
 		  private:
-			typedef std::pair<unsigned int, unsigned int> FeatureTypePair;
-			typedef std::map<FeatureTypePair, InteractionScoringFunction> InteractionScoringFuncMap;
-			typedef std::set<FeatureTypePair> EnabledInteractionsMap;
 			typedef std::vector<const Feature*> FeatureList;
 
-			double                          xStepSize;          
-			double                          yStepSize;          
-			double                          zStepSize;          
-			std::size_t                     gridXSize;
-			std::size_t                     gridYSize;
-			std::size_t                     gridZSize;
-            Math::Matrix4D                  coordsTransform;
-			BasicPharmacophore              gridPharmacophore;			
-			BasicPharmacophore              molPharmacophore;
-			DefaultPharmacophoreGenerator   pharmGenerator;
-			FeatureList                     tgtFeatures;
-			Chem::Atom3DCoordinatesFunction atomCoordsFunc;
-			InteractionScoringFuncMap       scoringFuncMap;
-			EnabledInteractionsMap          enabledInteractions;
-			FinalInteractionScoreFunction   finalScoreFunc;
-			StericClashFactorFunction       stericClashFactorFunc;
+			FeatureList              tgtFeatures;
+			Math::DVector            partialScores;
+			ScoringFunction          scoringFunc;
+			ScoreCombinationFunction scoreCombinationFunc;
 		};
 
 		/**

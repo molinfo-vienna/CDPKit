@@ -46,5 +46,5 @@ void CDPLPythonChem::exportBondMapping()
 		.def(CDPLPythonUtil::MultiMapVisitor<Chem::BondMapping,
 			 python::return_internal_reference<>, python::with_custodian_and_ward<1, 2>,
 			 python::with_custodian_and_ward<1, 2, python::with_custodian_and_ward<1, 3> >,
-			 python::return_internal_reference<1, python::with_custodian_and_ward_postcall<0, 3> >, true>());
+			 python::return_internal_reference<1, python::with_custodian_and_ward_postcall<0, 3> >, true, true>());
 }

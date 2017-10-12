@@ -64,8 +64,13 @@ namespace CDPL
 
 		class Pharmacophore;
 		class FeatureContainer;
-		class InteractionScoreGrid;
-		class InteractionScoreGridSet;
+	}
+
+	namespace Grid
+	{
+
+		template <typename T, typename CVT> class RegularGrid;
+		template <typename T, typename CVT> class RegularGridSet;
 	}
 
 	namespace Base
@@ -364,10 +369,10 @@ namespace CDPL
 		class CDPL_BASE_API DataIOManager<Pharm::Pharmacophore>;
 
 		extern template
-		class CDPL_BASE_API DataIOManager<Pharm::InteractionScoreGrid>;
+		class CDPL_BASE_API DataIOManager<Grid::RegularGrid<double, double> >;
 
 		extern template
-		class CDPL_BASE_API DataIOManager<Pharm::InteractionScoreGridSet>;
+		class CDPL_BASE_API DataIOManager<Grid::RegularGridSet<double, double> >;
 
 		// \endcond
 	}

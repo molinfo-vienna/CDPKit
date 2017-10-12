@@ -64,7 +64,7 @@ namespace CDPLPythonMath
 		virtual SizeType getSize3() const = 0;
 
 		virtual bool isEmpty() const {
-			return (getSize1() == 0 || getSize2() == 0);
+			return (getSize1() == 0 || getSize2() == 0 || getSize3() == 0);
 		}
 
 	protected:

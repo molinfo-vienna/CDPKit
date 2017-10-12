@@ -56,10 +56,11 @@ void CDPLPythonPharm::exportBoostFunctionWrappers()
 										 python::return_value_policy<python::return_by_value>, true>("BoolDoubleFunctor"); 
 	CDPLPythonBase::BoostFunction1Export<boost::function1<double, double>, double,
 										 python::return_value_policy<python::return_by_value>, true>("DoubleDoubleFunctor"); 
-	CDPLPythonBase::BoostFunction1Export<boost::function1<double, const Math::DVector&> >("DoubleDVectorFunctor"); 
+    CDPLPythonBase::BoostFunction1Export<boost::function1<bool, const Feature&>, Feature&>("BoolFeatureFunctor");
 
     CDPLPythonBase::BoostFunction2Export<boost::function2<bool, const Feature&, const Feature&>, Feature&, Feature&>("BoolFeature2Functor");
     CDPLPythonBase::BoostFunction2Export<boost::function2<double, const Feature&, const Feature&>, Feature&, Feature&>("DoubleFeature2Functor");
+    CDPLPythonBase::BoostFunction2Export<boost::function2<double, const Math::Vector3D&, const Feature&>, const Math::Vector3D&, Feature&>("DoubleVector3DFeatureFunctor");
 	CDPLPythonBase::BoostFunction2Export<boost::function2<bool, const ScreeningProcessor::SearchHit&, double>, 
 										 const ScreeningProcessor::SearchHit&, double, 
 										 python::return_value_policy<python::return_by_value>, true>("BoolSearchHitDoubleFunctor");
@@ -74,9 +75,7 @@ void CDPLPythonPharm::exportBoostFunctionWrappers()
 										 Feature&, Feature&>("BoolFeature2Matrix4DFunctor");
     CDPLPythonBase::BoostFunction3Export<boost::function3<double, const Feature&, const Feature&, const Math::Matrix4D&>,
 										 Feature&, Feature&>("DoubleFeature2Matrix4DFunctor");
-    CDPLPythonBase::BoostFunction3Export<boost::function3<double, const Math::Vector3D&, const Chem::AtomContainer&, const Chem::Atom3DCoordinatesFunction&>,
-										 const Math::Vector3D&, Chem::AtomContainer&, const Chem::Atom3DCoordinatesFunction&>("DoubleVector3DAtomContainerAtom3DCoordinatesFunctionFunctor");
-	
+ 	
     CDPLPythonBase::BoostFunction4Export<boost::function4<bool, const Feature&, const Feature&, const Feature&, const Feature&>,
 										 Feature&, Feature&, Feature&, Feature&>("BoolFeature4Functor");
 }

@@ -26,14 +26,9 @@
  
 #include "StaticInit.hpp"
 
-#include <algorithm>
-
 #include "CDPL/Pharm/InteractionScoreGridCalculator.hpp"
-#include "CDPL/Pharm/InteractionScoreGridSet.hpp"
-#include "CDPL/Pharm/FeatureFunctions.hpp"  
-#include "CDPL/Chem/MolecularGraph.hpp"
-#include "CDPL/Chem/Atom.hpp"
-#include "CDPL/Chem/Entity3DFunctions.hpp"
+#include "CDPL/Pharm/FeatureContainer.hpp"  
+#include "CDPL/Pharm/Feature.hpp"  
 
 
 using namespace CDPL;
@@ -42,8 +37,6 @@ using namespace CDPL;
 namespace
 {
 
-    Pharm::InteractionScoreGridCalculator::InteractionScoringFunction DEF_FUNC;
-
     double maxElement(const Math::DVector& vec)
     {
 		return normInf(vec);
@@ -51,239 +44,67 @@ namespace
 }
  
 
-Pharm::InteractionScoreGridCalculator::InteractionScoreGridCalculator(): 
-    xStepSize(0.0), yStepSize(0.0), zStepSize(0.0),
-    gridXSize(0), gridYSize(0), gridZSize(0), 
-    coordsTransform(Math::IdentityMatrix<double>(4, 4)),
-    pharmGenerator(false), atomCoordsFunc(&Chem::get3DCoordinates), 
-    finalScoreFunc(&maxElement)
+Pharm::InteractionScoreGridCalculator::InteractionScoreGridCalculator(): scoreCombinationFunc(&maxElement)
 {}
 
-Pharm::InteractionScoreGridCalculator::InteractionScoreGridCalculator(double step_size, std::size_t x_size, std::size_t y_size, std::size_t z_size): 
-    xStepSize(step_size), yStepSize(step_size), zStepSize(step_size),
-    gridXSize(x_size), gridYSize(y_size), gridZSize(z_size), 
-    coordsTransform(Math::IdentityMatrix<double>(4, 4)),
-    pharmGenerator(false), atomCoordsFunc(&Chem::get3DCoordinates), 
-    finalScoreFunc(&maxElement)
+Pharm::InteractionScoreGridCalculator::InteractionScoreGridCalculator(const ScoringFunction& func): 
+	scoringFunc(func), scoreCombinationFunc(&maxElement)
 {}
 
-Pharm::InteractionScoreGridCalculator::InteractionScoreGridCalculator(double x_step_size, double y_step_size, double z_step_size, 
-																	  std::size_t x_size, std::size_t y_size, std::size_t z_size): 
-    xStepSize(x_step_size), yStepSize(y_step_size), zStepSize(z_step_size),
-    gridXSize(x_size), gridYSize(y_size), gridZSize(z_size), 
-    coordsTransform(Math::IdentityMatrix<double>(4, 4)),
-    pharmGenerator(false), atomCoordsFunc(&Chem::get3DCoordinates), 
-    finalScoreFunc(&maxElement)
+Pharm::InteractionScoreGridCalculator::InteractionScoreGridCalculator(const ScoringFunction& scoring_func, const ScoreCombinationFunction& comb_func): 
+	scoringFunc(scoring_func), scoreCombinationFunc(comb_func)
 {}
 
-const Math::Matrix4D& Pharm::InteractionScoreGridCalculator::getCoordinatesTransform() const
+void Pharm::InteractionScoreGridCalculator::setScoringFunction(const ScoringFunction& func)
 {
-    return coordsTransform;
+    scoringFunc = func;
 }
 
-double Pharm::InteractionScoreGridCalculator::getXStepSize() const
+const Pharm::InteractionScoreGridCalculator::ScoringFunction& Pharm::InteractionScoreGridCalculator::getScoringFunction() const
 {
-    return xStepSize;
+    return scoringFunc;
 }
 
-void Pharm::InteractionScoreGridCalculator::setXStepSize(double size)
+void Pharm::InteractionScoreGridCalculator::setScoreCombinationFunction(const ScoreCombinationFunction& func)
 {
-    xStepSize = size;
+    scoreCombinationFunc = func;
 }
 
-double Pharm::InteractionScoreGridCalculator::getYStepSize() const
+const Pharm::InteractionScoreGridCalculator::ScoreCombinationFunction& Pharm::InteractionScoreGridCalculator::getScoreCombinationFunction() const
 {
-    return yStepSize;
+    return scoreCombinationFunc;
 }
 
-void Pharm::InteractionScoreGridCalculator::setYStepSize(double size)
+void Pharm::InteractionScoreGridCalculator::calculate(const FeatureContainer& features, Grid::DSpatialGrid& grid)
 {
-    yStepSize = size;
+	calculate(features, grid, FeaturePredicate());
 }
 
-double Pharm::InteractionScoreGridCalculator::getZStepSize() const
+void Pharm::InteractionScoreGridCalculator::calculate(const FeatureContainer& features, Grid::DSpatialGrid& grid, const FeaturePredicate& tgt_ftr_pred)
 {
-    return zStepSize;
-}
+	tgtFeatures.clear();
 
-void Pharm::InteractionScoreGridCalculator::setZStepSize(double size)
-{
-    zStepSize = size;
-}
+	for (FeatureContainer::ConstFeatureIterator it = features.getFeaturesBegin(), end = features.getFeaturesEnd(); it != end; ++it) {
+		const Feature& ftr = *it;
 
-std::size_t Pharm::InteractionScoreGridCalculator::getGridXSize() const
-{
-    return gridXSize;
-}
+		if (!tgt_ftr_pred || tgt_ftr_pred(ftr))
+			tgtFeatures.push_back(&ftr);
+	}
 
-void Pharm::InteractionScoreGridCalculator::setGridXSize(std::size_t size)
-{
-    gridXSize = size;
-}
+	partialScores.resize(tgtFeatures.size(), false);
 
-std::size_t Pharm::InteractionScoreGridCalculator::getGridYSize() const
-{
-    return gridYSize;
-}
-
-void Pharm::InteractionScoreGridCalculator::setGridYSize(std::size_t size)
-{
-    gridYSize = size;
-}
-
-std::size_t Pharm::InteractionScoreGridCalculator::getGridZSize() const
-{
-    return gridZSize;
-}
-
-void Pharm::InteractionScoreGridCalculator::setGridZSize(std::size_t size)
-{
-    gridZSize = size;
-}
-
-void Pharm::InteractionScoreGridCalculator::enableInteraction(unsigned int ftr_type, unsigned int tgt_ftr_type, bool enable)
-{
-    if (enable)
-		enabledInteractions.insert(FeatureTypePair(ftr_type, tgt_ftr_type));
-    else
-		enabledInteractions.erase(FeatureTypePair(ftr_type, tgt_ftr_type));
-}
-
-bool Pharm::InteractionScoreGridCalculator::isInteractionEnabled(unsigned int ftr_type, unsigned int tgt_ftr_type) const
-{
-    return (enabledInteractions.find(FeatureTypePair(ftr_type, tgt_ftr_type)) != enabledInteractions.end());
-}
-
-void Pharm::InteractionScoreGridCalculator::clearEnabledInteractions()
-{
-    enabledInteractions.clear();
-}
-
-void Pharm::InteractionScoreGridCalculator::setInteractionScoringFunction(unsigned int ftr_type, unsigned int tgt_ftr_type, const InteractionScoringFunction& func)
-{
-    scoringFuncMap[FeatureTypePair(ftr_type, tgt_ftr_type)] = func;
-}
-
-const Pharm::InteractionScoreGridCalculator::InteractionScoringFunction& 
-Pharm::InteractionScoreGridCalculator::getInteractionScoringFunction(unsigned int ftr_type, unsigned int tgt_ftr_type) const
-{
-    InteractionScoringFuncMap::const_iterator it = scoringFuncMap.find(FeatureTypePair(ftr_type, tgt_ftr_type));
-
-    return (it == scoringFuncMap.end() ? DEF_FUNC : it->second);
-}
-
-void Pharm::InteractionScoreGridCalculator::removeInteractionScoringFunction(unsigned int ftr_type, unsigned int tgt_ftr_type)
-{
-    scoringFuncMap.erase(FeatureTypePair(ftr_type, tgt_ftr_type));
-}
-
-void Pharm::InteractionScoreGridCalculator::setAtom3DCoordinatesFunction(const Chem::Atom3DCoordinatesFunction& func)
-{
-    atomCoordsFunc = func;
-    pharmGenerator.setAtom3DCoordinatesFunction(func);
-}
-
-void Pharm::InteractionScoreGridCalculator::setFinalInteractionScoreFunction(const FinalInteractionScoreFunction& func)
-{
-    finalScoreFunc = func;
-}
-
-void Pharm::InteractionScoreGridCalculator::setStericClashFactorFunction(const StericClashFactorFunction& func)
-{
-    stericClashFactorFunc = func;
-}
-	
-void Pharm::InteractionScoreGridCalculator::calculate(const Chem::MolecularGraph& molgraph, InteractionScoreGridSet& grid_set)
-{
-    molPharmacophore.clear();
-    pharmGenerator.generate(molgraph, molPharmacophore);
-
-    calculate(molgraph, molPharmacophore, grid_set);
-}
-
-void Pharm::InteractionScoreGridCalculator::calculate(const Chem::MolecularGraph& molgraph, const FeatureContainer& features, InteractionScoreGridSet& grid_set)
-{
-    std::size_t old_num_grids = grid_set.getSize();
-
-    calculate(features, grid_set);
-
-    std::size_t num_grids = grid_set.getSize();
-
-    if (stericClashFactorFunc && (old_num_grids < num_grids)) {
-		Math::Vector3D grid_pos;
-
-		for (std::size_t i = 0; i < gridXSize; i++) {
-			for (std::size_t j = 0; j < gridYSize; j++) {
-				for (std::size_t k = 0; k < gridZSize; k++) {
-					grid_set[old_num_grids].getCoordinates(i, j, k, grid_pos);
-
-					double clash_factor = stericClashFactorFunc(grid_pos, molgraph, atomCoordsFunc);
-
-					for (std::size_t l = old_num_grids; l < num_grids; l++)
-						grid_set[l](i, j, k) *= clash_factor;
-				}
-			}
-		}
-    }
-}
-
-void Pharm::InteractionScoreGridCalculator::calculate(const FeatureContainer& features, InteractionScoreGridSet& grid_set)
-{
+	std::size_t num_pts = grid.getNumElements();
     Math::Vector3D grid_pos;
-    Math::DVector part_scores;
-  
-    Feature& grid_ftr = (gridPharmacophore.getNumFeatures() == 0 ? gridPharmacophore.addFeature() : gridPharmacophore.getFeature(0));
 
-    for (InteractionScoringFuncMap::const_iterator it = scoringFuncMap.begin(), end = scoringFuncMap.end(); it != end; ++it) {
-		if (!it->second)
-			continue;
+	for (std::size_t i = 0, l = 0; i < num_pts; i++, l = 0) {
+		grid.getCoordinates(i, grid_pos);
 
-		if (enabledInteractions.find(it->first) == enabledInteractions.end())
-			continue;
+		for (FeatureList::const_iterator it = tgtFeatures.begin(), end = tgtFeatures.end(); it != end; ++it)
+			partialScores[l++] = scoringFunc(grid_pos, **it);
 
-		unsigned int ftr_type = it->first.first;
-		unsigned int tgt_ftr_type = it->first.second;
-
-		InteractionScoreGrid::SharedPointer grid_ptr(new InteractionScoreGrid(ftr_type, tgt_ftr_type));
-	
-		grid_ptr->resize(gridXSize, gridYSize, gridZSize, false);
-		grid_ptr->setXStepSize(xStepSize);
-		grid_ptr->setYStepSize(yStepSize);
-		grid_ptr->setZStepSize(zStepSize);
-
-		grid_ptr->setCoordinatesTransform(coordsTransform);
-
-		tgtFeatures.clear();
-
-		for (FeatureContainer::ConstFeatureIterator ftr_it = features.getFeaturesBegin(), ftr_end = features.getFeaturesEnd(); ftr_it != ftr_end; ++ftr_it) {
-			const Feature& tgt_ftr = *ftr_it;
-
-			if (getType(tgt_ftr) == tgt_ftr_type)
-				tgtFeatures.push_back(&tgt_ftr);
-		}
-
-		part_scores.resize(tgtFeatures.size(), false);
-
-		for (std::size_t i = 0; i < gridXSize; i++) {
-			for (std::size_t j = 0; j < gridYSize; j++) {
-				for (std::size_t k = 0, l = 0; k < gridZSize; k++) {
-
-					grid_ptr->getCoordinates(i, j, k, grid_pos);
-					set3DCoordinates(grid_ftr, grid_pos);
-
-					for (FeatureList::const_iterator ftr_it = tgtFeatures.begin(), ftr_end = tgtFeatures.end(); ftr_it != ftr_end; ++ftr_it)
-						part_scores[l++] = it->second(grid_ftr, **ftr_it);
-
-					if (l == 0)
-						(*grid_ptr)(i, j, k) = 0.0;
-					else
-						(*grid_ptr)(i, j, k) = finalScoreFunc(part_scores);
-
-					l = 0;
-				}
-			}
-		}
-
-		grid_set.addElement(grid_ptr);
-    }
+		if (l == 0)
+			grid(i) = 0.0;
+		else
+			grid(i) = scoreCombinationFunc(partialScores);
+	}
 }

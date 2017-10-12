@@ -27,8 +27,8 @@
 #include <boost/python.hpp>
 
 #include "CDPL/Pharm/InteractionScoreGridCalculator.hpp"
-#include "CDPL/Pharm/InteractionScoreGridSet.hpp"
-#include "CDPL/Chem/MolecularGraph.hpp"
+#include "CDPL/Pharm/FeatureContainer.hpp"
+#include "CDPL/Grid/RegularGrid.hpp"
 
 #include "Base/CopyAssOp.hpp"
 #include "Base/ObjectIdentityCheckVisitor.hpp"
@@ -41,73 +41,37 @@ void CDPLPythonPharm::exportInteractionScoreGridCalculator()
     using namespace boost;
 	using namespace CDPL;
 
-	python::class_<Pharm::InteractionScoreGridCalculator, boost::noncopyable>("InteractionScoreGridCalculator", python::no_init)
+	python::class_<Pharm::InteractionScoreGridCalculator, Pharm::InteractionScoreGridCalculator::SharedPointer, boost::noncopyable>("InteractionScoreGridCalculator", python::no_init)
 		.def(python::init<>(python::arg("self")))
-		.def(python::init<double, std::size_t, std::size_t, std::size_t>(
-				 (python::arg("self"), python::arg("step_size"), python::arg("x_size"), python::arg("y_size"), python::arg("z_size"))))
-		.def(python::init<double, double, double, std::size_t, std::size_t, std::size_t>(
-				 (python::arg("self"), python::arg("x_step_size"), python::arg("y_step_size"), python::arg("z_step_size"), 
-				  python::arg("x_size"), python::arg("y_size"), python::arg("z_size"))))
+		.def(python::init<const Pharm::InteractionScoreGridCalculator::ScoringFunction&>(
+				 (python::arg("self"), python::arg("func"))))
+		.def(python::init<const Pharm::InteractionScoreGridCalculator::ScoringFunction&, const Pharm::InteractionScoreGridCalculator::ScoreCombinationFunction&>(
+				 (python::arg("self"), python::arg("scoring_func"), python::arg("comb_func"))))
 		.def(python::init<const Pharm::InteractionScoreGridCalculator&>((python::arg("self"), python::arg("calculator"))))
 		.def(CDPLPythonBase::ObjectIdentityCheckVisitor<Pharm::InteractionScoreGridCalculator>())	
 		.def("assign", CDPLPythonBase::copyAssOp(&Pharm::InteractionScoreGridCalculator::operator=), 
 			 (python::arg("self"), python::arg("calculator")), python::return_self<>())
-		.def("getXStepSize", &Pharm::InteractionScoreGridCalculator::getXStepSize, python::arg("self"))
-		.def("setXStepSize", &Pharm::InteractionScoreGridCalculator::setXStepSize, (python::arg("self"), python::arg("size")))
-		.def("getYStepSize", &Pharm::InteractionScoreGridCalculator::getYStepSize, python::arg("self"))
-		.def("setYStepSize", &Pharm::InteractionScoreGridCalculator::setYStepSize, (python::arg("self"), python::arg("size")))
-		.def("getZStepSize", &Pharm::InteractionScoreGridCalculator::getZStepSize, python::arg("self"))
-		.def("setZStepSize", &Pharm::InteractionScoreGridCalculator::setZStepSize, (python::arg("self"), python::arg("size")))
-		.def("getGridXSize", &Pharm::InteractionScoreGridCalculator::getGridXSize, python::arg("self"))
-		.def("setGridXSize", &Pharm::InteractionScoreGridCalculator::setGridXSize, (python::arg("self"), python::arg("size")))
-		.def("getGridYSize", &Pharm::InteractionScoreGridCalculator::getGridYSize, python::arg("self"))
-		.def("setGridYSize", &Pharm::InteractionScoreGridCalculator::setGridYSize, (python::arg("self"), python::arg("size")))
-		.def("getGridZSize", &Pharm::InteractionScoreGridCalculator::getGridZSize, python::arg("self"))
-		.def("setGridZSize", &Pharm::InteractionScoreGridCalculator::setGridZSize, (python::arg("self"), python::arg("size")))
-		.def("getCoordinatesTransform", &Pharm::InteractionScoreGridCalculator::getCoordinatesTransform, python::arg("self"),
-			 python::return_internal_reference<>())
-		.def("setCoordinatesTransform", &Pharm::InteractionScoreGridCalculator::setCoordinatesTransform<Math::Matrix4D>, 
-			 (python::arg("self"), python::arg("xform")))
-		.def("setAtom3DCoordinatesFunction", &Pharm::InteractionScoreGridCalculator::setAtom3DCoordinatesFunction,
+		.def("setScoringFunction", &Pharm::InteractionScoreGridCalculator::setScoringFunction,
 			 (python::arg("self"), python::arg("func")))
-		.def("setFinalInteractionScoreFunction", &Pharm::InteractionScoreGridCalculator::setFinalInteractionScoreFunction,
+		.def("getScoringFunction", &Pharm::InteractionScoreGridCalculator::getScoringFunction,
+			 python::arg("self"), python::return_internal_reference<>())
+		.def("setScoreCombinationFunction", &Pharm::InteractionScoreGridCalculator::setScoreCombinationFunction,
 			 (python::arg("self"), python::arg("func")))
-		.def("setStericClashFactorFunction", &Pharm::InteractionScoreGridCalculator::setStericClashFactorFunction,
-			 (python::arg("self"), python::arg("func")))
-		.def("setInteractionScoringFunction", &Pharm::InteractionScoreGridCalculator::setInteractionScoringFunction, 
-			 (python::arg("self"), python::arg("ftr_type"), python::arg("tgt_ftr_type"), python::arg("func")))
-		.def("removeInteractionScoringFunction", &Pharm::InteractionScoreGridCalculator::removeInteractionScoringFunction, 
-			 (python::arg("self"), python::arg("ftr_type"), python::arg("tgt_ftr_type")))
-		.def("getInteractionScoringFunction", &Pharm::InteractionScoreGridCalculator::getInteractionScoringFunction, 
-			 (python::arg("self"), python::arg("ftr_type"), python::arg("tgt_ftr_type")),
-			 python::return_internal_reference<>())
-		.def("enableInteraction", &Pharm::InteractionScoreGridCalculator::enableInteraction, 
-			 (python::arg("self"), python::arg("ftr_type"), python::arg("tgt_ftr_type"), python::arg("enable")))
-		.def("isInteractionEnabled", &Pharm::InteractionScoreGridCalculator::isInteractionEnabled, 
-			 (python::arg("self"), python::arg("ftr_type"), python::arg("tgt_ftr_type")))
-		.def("clearEnabledInteractions", &Pharm::InteractionScoreGridCalculator::isInteractionEnabled, python::arg("self"))
+		.def("getScoreCombinationFunction", &Pharm::InteractionScoreGridCalculator::getScoreCombinationFunction,
+			 python::arg("self"), python::return_internal_reference<>())
 		.def("calculate", 
-			 static_cast<void (Pharm::InteractionScoreGridCalculator::*)(const Chem::MolecularGraph& molgraph, Pharm::InteractionScoreGridSet& grid_set)>
+			 static_cast<void (Pharm::InteractionScoreGridCalculator::*)(const Pharm::FeatureContainer&, Grid::DSpatialGrid& grid)>
 			 (&Pharm::InteractionScoreGridCalculator::calculate),
-			 (python::arg("self"), python::arg("molgraph"), python::arg("grid_set")))
+			 (python::arg("self"), python::arg("features"), python::arg("grid")))
 		.def("calculate", 
-			 static_cast<void (Pharm::InteractionScoreGridCalculator::*)(const Chem::MolecularGraph& molgraph, const Pharm::FeatureContainer&, Pharm::InteractionScoreGridSet& grid_set)>
+			 static_cast<void (Pharm::InteractionScoreGridCalculator::*)(const Pharm::FeatureContainer&, Grid::DSpatialGrid& grid, const Pharm::InteractionScoreGridCalculator::FeaturePredicate&)>
 			 (&Pharm::InteractionScoreGridCalculator::calculate),
-			 (python::arg("self"), python::arg("molgraph"), python::arg("features"), python::arg("grid_set")))
-		.def("calculate", 
-			 static_cast<void (Pharm::InteractionScoreGridCalculator::*)(const Pharm::FeatureContainer&, Pharm::InteractionScoreGridSet& grid_set)>
-			 (&Pharm::InteractionScoreGridCalculator::calculate),
-			 (python::arg("self"), python::arg("features"), python::arg("grid_set")))
-		.add_property("xStepSize", &Pharm::InteractionScoreGridCalculator::getXStepSize, &Pharm::InteractionScoreGridCalculator::setXStepSize)
-		.add_property("yStepSize", &Pharm::InteractionScoreGridCalculator::getYStepSize, &Pharm::InteractionScoreGridCalculator::setYStepSize)
-		.add_property("zStepSize", &Pharm::InteractionScoreGridCalculator::getZStepSize, &Pharm::InteractionScoreGridCalculator::setZStepSize)
-		.add_property("gridXSize", &Pharm::InteractionScoreGridCalculator::getGridXSize, &Pharm::InteractionScoreGridCalculator::setGridXSize)
-		.add_property("gridYSize", &Pharm::InteractionScoreGridCalculator::getGridYSize, &Pharm::InteractionScoreGridCalculator::setGridYSize)
-		.add_property("gridZSize", &Pharm::InteractionScoreGridCalculator::getGridZSize, &Pharm::InteractionScoreGridCalculator::setGridZSize)
-		.add_property("coordinatesTransform", 
-					  python::make_function(&Pharm::InteractionScoreGridCalculator::getCoordinatesTransform, python::return_internal_reference<>()),
-					  &Pharm::InteractionScoreGridCalculator::setCoordinatesTransform<Math::Matrix4D>)
-		.add_property("atom3DCoordinatesFunction", &Pharm::InteractionScoreGridCalculator::setAtom3DCoordinatesFunction)
-		.add_property("finalInteractionScoreFunction", &Pharm::InteractionScoreGridCalculator::setFinalInteractionScoreFunction)
-		.add_property("stericClashFactorFunction", &Pharm::InteractionScoreGridCalculator::setStericClashFactorFunction);
+			 (python::arg("self"), python::arg("features"), python::arg("grid"), python::arg("tgt_ftr_pred")))
+		.add_property("scoringFunction", 
+					  python::make_function(&Pharm::InteractionScoreGridCalculator::getScoringFunction, python::return_internal_reference<>()),
+					  &Pharm::InteractionScoreGridCalculator::setScoringFunction)
+		.add_property("scoreCombinationFunction", 
+					  python::make_function(&Pharm::InteractionScoreGridCalculator::getScoreCombinationFunction, python::return_internal_reference<>()),
+					  &Pharm::InteractionScoreGridCalculator::setScoreCombinationFunction);
+
 }

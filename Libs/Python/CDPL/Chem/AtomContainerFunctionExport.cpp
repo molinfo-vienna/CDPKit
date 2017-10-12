@@ -58,6 +58,7 @@ namespace
 	MAKE_FUNCTION_WRAPPER2(void, get3DCoordinates, CDPL::Chem::AtomContainer&, CDPL::Math::Vector3DArray&);
 
 	MAKE_FUNCTION_WRAPPER3(void, getConformation, CDPL::Chem::AtomContainer&, std::size_t, CDPL::Math::Vector3DArray&);
+	MAKE_FUNCTION_WRAPPER3(void, get3DCoordinates, CDPL::Chem::AtomContainer&, CDPL::Math::Vector3DArray&, const CDPL::Chem::Atom3DCoordinatesFunction&);
 	MAKE_FUNCTION_WRAPPER3(std::size_t, buildAtomTypeMask, CDPL::Chem::AtomContainer&, CDPL::Util::BitSet&, unsigned int);
 	MAKE_FUNCTION_WRAPPER3(void, copyAtomsIf, CDPL::Chem::AtomContainer&, CDPL::Chem::Molecule&, const CDPL::Chem::AtomPredicate&);
 	MAKE_FUNCTION_WRAPPER3(void, copyAtomsIf, CDPL::Chem::AtomContainer&, CDPL::Chem::Fragment&, const CDPL::Chem::AtomPredicate&);
@@ -108,10 +109,11 @@ void CDPLPythonChem::exportAtomContainerFunctions()
 	python::def("buildExplicitMolecularFormula", &buildExplicitMolecularFormulaWrapper, python::arg("cntnr"));
 	python::def("buildExplicitElementHistogram", &buildExplicitElementHistogramWrapper2, (python::arg("cntnr"), python::arg("hist")));
 	python::def("hasCoordinates", &hasCoordinatesWrapper2, (python::arg("cntnr"), python::arg("dim")));
-	python::def("get2DCoordinates", &get2DCoordinatesWrapper2, (python::arg("cntnr"),  python::arg("coords")));
+	python::def("get2DCoordinates", &get2DCoordinatesWrapper2, (python::arg("cntnr"), python::arg("coords")));
 	python::def("set2DCoordinates", &Chem::set2DCoordinates, (python::arg("cntnr"), python::arg("coords")));
 	python::def("transform2DCoordinates", &Chem::transform2DCoordinates, (python::arg("cntnr"), python::arg("mtx")));
-	python::def("get3DCoordinates", &get3DCoordinatesWrapper2, (python::arg("cntnr"),  python::arg("coords")));
+	python::def("get3DCoordinates", &get3DCoordinatesWrapper2, (python::arg("cntnr"), python::arg("coords")));
+	python::def("get3DCoordinates", &get3DCoordinatesWrapper3, (python::arg("cntnr"), python::arg("coords"), python::arg("coords_func")));
 	python::def("set3DCoordinates", &Chem::set3DCoordinates, (python::arg("cntnr"), python::arg("coords")));
 	python::def("transform3DCoordinates", &Chem::transform3DCoordinates, (python::arg("cntnr"), python::arg("mtx")));
 	python::def("applyConformation", &Chem::applyConformation, (python::arg("cntnr"), python::arg("conf_idx")));

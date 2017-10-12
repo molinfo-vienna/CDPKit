@@ -43,41 +43,21 @@ BOOST_PYTHON_MODULE(_pharm)
 	exportPharmacophore();
 	exportBasicPharmacophore();
 
-	exportInteractionScoreGrid();
-	exportInteractionScoreGridSet();
 	exportFeatureMapping();
 	exportFeatureTypeHistogram();
 	exportFeatureRDFCodeCalculator();
 
 	exportPharmacophoreReader();
-	exportInteractionScoreGridReader();
-	exportInteractionScoreGridSetReader();
 	exportFeatureContainerWriter();
-	exportInteractionScoreGridWriter();
-	exportInteractionScoreGridSetWriter();
 	exportPharmacophoreInputHandler();
-	exportInteractionScoreGridInputHandler();
-	exportInteractionScoreGridSetInputHandler();
 	exportFeatureContainerOutputHandler();
-	exportInteractionScoreGridOutputHandler();
-	exportInteractionScoreGridSetOutputHandler();
 	exportPharmacophoreIOManager();
 	exportFeatureContainerIOManager();
-	exportInteractionScoreGridIOManager();
-	exportInteractionScoreGridSetIOManager();
 
 	exportCDFPharmacophoreInputHandler();
 	exportCDFFeatureContainerOutputHandler();
 	exportCDFPharmacophoreReader();
 	exportCDFFeatureContainerWriter();
-	exportCDFInteractionScoreGridInputHandler();
-	exportCDFInteractionScoreGridOutputHandler();
-	exportCDFInteractionScoreGridSetInputHandler();
-	exportCDFInteractionScoreGridSetOutputHandler();
-	exportCDFInteractionScoreGridReader();
-	exportCDFInteractionScoreGridWriter();
-	exportCDFInteractionScoreGridSetReader();
-	exportCDFInteractionScoreGridSetWriter();
 
 	exportPMLPharmacophoreInputHandler();
 	exportPMLFeatureContainerOutputHandler();
@@ -135,7 +115,6 @@ BOOST_PYTHON_MODULE(_pharm)
 	exportCationPiInteractionConstraint();
 	exportHBondingInteractionConstraint();
 
-	exportGeneralizedBellFunction();
 	exportInteractionScoreCombiner();
 	exportFeatureDistanceScore();
 	exportHydrophobicInteractionScore();
@@ -144,9 +123,9 @@ BOOST_PYTHON_MODULE(_pharm)
 	exportParallelPiPiInteractionScore();
 	exportCationPiInteractionScore();
 	exportHBondingInteractionScore();
-	exportStericAtomClashFactorCalculator();
 	exportInteractionScoreGridCalculator();
-	exportDefaultInteractionScoreGridCalculator();
+	exportInteractionScoreGridSetCalculator();
+	exportDefaultInteractionScoreGridSetCalculator();
 
 	exportTopologicalEntityAlignment();
 	exportGeometricalEntityAlignment();
@@ -159,8 +138,10 @@ BOOST_PYTHON_MODULE(_pharm)
 
 	exportFeatureContainerProperties();
 	exportFeatureProperties();
+	exportAttributedGridProperties();
 	exportFeatureContainerPropertyDefaults();
 	exportFeaturePropertyDefaults();
+	exportAttributedGridPropertyDefaults();
 
 	exportControlParameters();
 	exportControlParameterDefaults();
@@ -173,6 +154,7 @@ BOOST_PYTHON_MODULE(_pharm)
 	exportFeatureFunctions();
 	exportFeatureContainerFunctions();
 	exportFeatureSetFunctions();
+	exportAttributedGridFunctions();
 	exportControlParameterFunctions();
 
 	exportBoostFunctionWrappers();

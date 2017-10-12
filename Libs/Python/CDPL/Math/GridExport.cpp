@@ -67,8 +67,10 @@ namespace
 				.def(InitFunctionGeneratorVisitor<GridType, ConstGridExpression>("e"))
 				.def(AssignFunctionGeneratorVisitor<GridType, ConstGridExpression>("e"))
 				.def(ConstGridVisitor<GridType>())
+				.def(ConstGridContainerVisitor<GridType>())
 				.def(GridAssignAndSwapVisitor<GridType>())
-				.def(GridVisitor<GridType>());
+				.def(GridVisitor<GridType>())
+				.def(GridContainerVisitor<GridType>());
 		}
 	};
 }       

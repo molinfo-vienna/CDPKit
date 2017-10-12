@@ -28,11 +28,13 @@
 
 #include <cmath>
 
+#include <boost/bind.hpp>
+
 #include "CDPL/Pharm/HBondingInteractionScore.hpp"
 #include "CDPL/Pharm/Feature.hpp"
 #include "CDPL/Pharm/FeatureFunctions.hpp"
 #include "CDPL/Pharm/FeatureGeometry.hpp"
-#include "CDPL/Pharm/GeneralizedBellFunction.hpp"
+#include "CDPL/Math/SpecialFunctions.hpp"
 #include "CDPL/Chem/Entity3DFunctions.hpp"
 
 
@@ -54,7 +56,7 @@ const double Pharm::HBondingInteractionScore::DEF_MAX_ACC_ANGLE = 85.0;
 
 Pharm::HBondingInteractionScore::HBondingInteractionScore(bool don_acc, double min_len, double max_len, double min_ahd_ang, double max_acc_ang): 
 	donAccOrder(don_acc), minLength(min_len), maxLength(max_len), minAHDAngle(min_ahd_ang), 
-	maxAccAngle(max_acc_ang), normFunc(GeneralizedBellFunction(0.5, 10, 0.0)) {}
+	maxAccAngle(max_acc_ang), normFunc(boost::bind(&Math::generalizedBell<double>, _1, 0.5, 10, 0.0)) {}
 
 double Pharm::HBondingInteractionScore::getMinLength() const
 {
@@ -120,7 +122,7 @@ double Pharm::HBondingInteractionScore::operator()(const Feature& ftr1, const Fe
 		h_acc_vec /= don_acc_vec_len;
 	}
 
-	if (getGeometry(acc_ftr) == FeatureGeometry::VECTOR && hasOrientation(acc_ftr) && normFunc) {
+	if (getGeometry(acc_ftr) == FeatureGeometry::VECTOR && hasOrientation(acc_ftr)) {
 		const Math::Vector3D& acc_vec = getOrientation(acc_ftr);
 		double acc_ang = std::acos(angleCos(h_acc_vec, acc_vec, 1)) * 180.0 / M_PI;
 		double opt_ang_dev = acc_ang * 0.5 / maxAccAngle; 
@@ -130,3 +132,52 @@ double Pharm::HBondingInteractionScore::operator()(const Feature& ftr1, const Fe
 
 	return score;
 }
+
+double Pharm::HBondingInteractionScore::operator()(const Math::Vector3D& ftr1_pos, const Feature& ftr2) const
+{
+	if (donAccOrder) {
+		Math::Vector3D h_acc_vec(get3DCoordinates(ftr2) - ftr1_pos);
+
+		double don_acc_vec_len = length(h_acc_vec);
+		double hb_len = don_acc_vec_len - H_BOND_LENGTH;
+		double ctr_dev = (hb_len - (maxLength + minLength) * 0.5) / (maxLength - minLength);
+		double score = normFunc(ctr_dev);
+
+		h_acc_vec /= don_acc_vec_len;
+
+		if (getGeometry(ftr2) == FeatureGeometry::VECTOR && hasOrientation(ftr2)) {
+			const Math::Vector3D& acc_vec = getOrientation(ftr2);
+			double acc_ang = std::acos(angleCos(h_acc_vec, acc_vec, 1)) * 180.0 / M_PI;
+			double opt_ang_dev = acc_ang * 0.5 / maxAccAngle; 
+
+			score *= normFunc(opt_ang_dev);
+		}
+
+		return score;
+	}
+
+	if (getGeometry(ftr2) == FeatureGeometry::VECTOR && hasOrientation(ftr2)) {
+		const Math::Vector3D& orient = getOrientation(ftr2);
+		Math::Vector3D don_h_vec(orient * H_BOND_LENGTH /*getLength(ftr2)*/);
+		Math::Vector3D h_acc_vec(ftr1_pos - (get3DCoordinates(ftr2) + don_h_vec));
+
+		double hb_len = length(h_acc_vec);
+		double ctr_dev = (hb_len - (maxLength + minLength) * 0.5) / (maxLength - minLength);
+		double score = normFunc(ctr_dev);
+
+		h_acc_vec /= hb_len;
+
+		double ahd_ang = std::acos(angleCos(-orient, h_acc_vec, 1)) * 180.0 / M_PI;
+		double opt_ang_dev = (180.0 - ahd_ang) * 0.5 / (180.0 - minAHDAngle); 
+
+		return score * normFunc(opt_ang_dev);
+	}
+
+	double don_acc_vec_len = length(ftr1_pos - get3DCoordinates(ftr2));
+	double hb_len = don_acc_vec_len - H_BOND_LENGTH;
+	double ctr_dev = (hb_len - (maxLength + minLength) * 0.5) / (maxLength - minLength);
+
+	return normFunc(ctr_dev);
+}
+
+

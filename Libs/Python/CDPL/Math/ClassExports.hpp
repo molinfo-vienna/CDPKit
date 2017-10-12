@@ -61,7 +61,7 @@ namespace CDPLPythonMath
 	void exportGridTypes();
 	void exportZeroGridTypes();
 	void exportScalarGridTypes();
-	void exportUniformSpatialGridTypes();
+	void exportRegularSpatialGridTypes();
 
 	void exportRange();
 	void exportSlice();

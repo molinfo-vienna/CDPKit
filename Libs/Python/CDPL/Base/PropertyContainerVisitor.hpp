@@ -38,18 +38,18 @@
 			return;                                                                                 \
 		}                                                                                           \
                                                                                                     \
-		PropertyContainer::setProperty(key, value);                                                 \
+		CDPL::Base::PropertyContainer::setProperty(key, value);                                     \
 	}                                                                                               \
                                                                                                     \
 	void setPropertyDef(const CDPL::Base::LookupKey& key, const CDPL::Base::Variant& value) {       \
-		PropertyContainer::setProperty(key, value);                                                 \
+		CDPL::Base::PropertyContainer::setProperty(key, value);                                     \
 	}                                                                                               \
                                                                                                     \
 	const CDPL::Base::Variant& getProperty(const CDPL::Base::LookupKey& key, bool throw_) const {   \
 		if (boost::python::override f = this->get_override("getProperty"))                          \
 			return f(boost::ref(key), throw_);                                                      \
                                                                                                     \
-		return PropertyContainer::getProperty(key, throw_);                                         \
+		return CDPL::Base::PropertyContainer::getProperty(key, throw_);                             \
 	}                                                                                               \
                                                                                                     \
 	const CDPL::Base::Variant& getPropertyDef(const CDPL::Base::LookupKey& key, bool throw_) const {\
@@ -60,22 +60,22 @@
 		if (boost::python::override f = this->get_override("isPropertySet"))                        \
 			return f(boost::ref(key));                                                              \
                                                                                                     \
-		return PropertyContainer::isPropertySet(key);                                               \
+		return CDPL::Base::PropertyContainer::isPropertySet(key);                                   \
 	}                                                                                               \
                                                                                                     \
 	bool isPropertySetDef(const CDPL::Base::LookupKey& key) const {                                 \
-		return PropertyContainer::isPropertySet(key);                                               \
+		return CDPL::Base::PropertyContainer::isPropertySet(key);                                   \
 	}                                                                                               \
                                                                                                     \
 	bool removeProperty(const CDPL::Base::LookupKey& key) {                                         \
 		if (boost::python::override f = this->get_override("removeProperty"))                       \
 			return f(boost::ref(key));                                                              \
                                                                                                     \
-		return PropertyContainer::removeProperty(key);                                              \
+		return CDPL::Base::PropertyContainer::removeProperty(key);                                  \
 	}                                                                                               \
                                                                                                     \
 	bool removePropertyDef(const CDPL::Base::LookupKey& key) {                                      \
-		return PropertyContainer::removeProperty(key);                                              \
+		return CDPL::Base::PropertyContainer::removeProperty(key);                                  \
 	}                                                                                               \
                                                                                                     \
 	void clearProperties() {                                                                        \
@@ -84,39 +84,39 @@
 			return;                                                                                 \
 		}                                                                                           \
                                                                                                     \
-		PropertyContainer::clearProperties();                                                       \
+		CDPL::Base::PropertyContainer::clearProperties();                                           \
 	}                                                                                               \
                                                                                                     \
 	void clearPropertiesDef() {                                                                     \
-		PropertyContainer::clearProperties();                                                       \
+		CDPL::Base::PropertyContainer::clearProperties();                                           \
 	}                                                                                               \
                                                                                                     \
-	void addProperties(const PropertyContainer& cntnr) {                                            \
+	void addProperties(const CDPL::Base::PropertyContainer& cntnr) {                                \
 		if (boost::python::override f = this->get_override("addProperties")) {                      \
 			f(boost::ref(cntnr));                                                                   \
 			return;                                                                                 \
 		}                                                                                           \
                                                                                                     \
-		PropertyContainer::addProperties(cntnr);                                                    \
+		CDPL::Base::PropertyContainer::addProperties(cntnr);                                        \
 	}                                                                                               \
 	                                                                                                \
-	static void addPropertiesDef(PropertyContainer& self, PropertyContainer& cntnr) {               \
+	static void addPropertiesDef(CDPL::Base::PropertyContainer& self, CDPL::Base::PropertyContainer& cntnr) { \
 		if (dynamic_cast<Wrapper*>(boost::addressof(self)))                                         \
 			self.PropertyContainer::addProperties(cntnr);                                           \
 		else                                                                                        \
 			self.addProperties(cntnr);                                                              \
 	}	                                                                                            \
                                                                                                     \
-	void copyProperties(const PropertyContainer& cntnr) {                                           \
+	void copyProperties(const CDPL::Base::PropertyContainer& cntnr) {                              	\
 		if (boost::python::override f = this->get_override("copyProperties")) {                     \
 			f(boost::ref(cntnr));                                                                   \
 			return;                                                                                 \
 		}                                                                                           \
                                                                                                     \
-		PropertyContainer::copyProperties(cntnr);                                                   \
+		CDPL::Base::PropertyContainer::copyProperties(cntnr);                                       \
 	}                                                                                               \
 	                                                                                                \
-	static void copyPropertiesDef(PropertyContainer& self, PropertyContainer& cntnr) {              \
+	static void copyPropertiesDef(CDPL::Base::PropertyContainer& self, CDPL::Base::PropertyContainer& cntnr) { \
 		if (dynamic_cast<Wrapper*>(boost::addressof(self)))                                         \
 			self.PropertyContainer::copyProperties(cntnr);                                          \
 		else                                                                                        \

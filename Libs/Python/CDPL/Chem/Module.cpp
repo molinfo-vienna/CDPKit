@@ -129,6 +129,8 @@ BOOST_PYTHON_MODULE(_chem)
 	exportCircularFingerprintGenerator();
 	exportPatternAtomTyper();
 	exportSubstructureHistogramGenerator();
+	exportGeneralizedBellAtomDensity();
+	exportAtomDensityGridCalculator();
 
 	exportMoleculeReader();
 	exportMoleculeWriter();

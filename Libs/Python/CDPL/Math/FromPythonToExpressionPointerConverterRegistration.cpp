@@ -30,6 +30,8 @@
 
 #include "CDPL/Math/Vector.hpp"
 #include "CDPL/Math/Matrix.hpp"
+#include "CDPL/Math/Grid.hpp"
+#include "CDPL/Math/RegularSpatialGrid.hpp"
 #include "CDPL/Math/Quaternion.hpp"
 #include "CDPL/Math/AffineTransform.hpp"
 #include "CDPL/Math/VectorProxy.hpp"
@@ -40,6 +42,7 @@
 
 #include "VectorExpressionAdapter.hpp"
 #include "MatrixExpressionAdapter.hpp"
+#include "GridExpressionAdapter.hpp"
 #include "QuaternionExpressionAdapter.hpp"
 #include "ConverterRegistration.hpp"
 
@@ -136,6 +139,37 @@ namespace
 			typedef typename AdapterType::ExpressionPointer ExpressionPointerType;
 
 			ExpressionPointerFromPyObjectConverter<MatrixType, AdapterType, ExpressionPointerType>();
+		}
+	};
+
+
+	template <typename GridType>
+	struct ConstGridExpressionPointerFromPyObjectConverter 
+	{
+
+		ConstGridExpressionPointerFromPyObjectConverter() {
+			using namespace boost;
+			using namespace CDPLPythonMath;
+
+			typedef ConstGridExpressionAdapter<boost::reference_wrapper<GridType>, python::handle<> > ConstAdapterType;
+			typedef typename ConstAdapterType::ConstExpressionPointer ConstExpressionPointerType;
+
+			ExpressionPointerFromPyObjectConverter<GridType, ConstAdapterType, ConstExpressionPointerType>();
+		}
+	};
+
+	template <typename GridType>
+	struct GridExpressionPointerFromPyObjectConverter 
+	{
+
+		GridExpressionPointerFromPyObjectConverter() {
+			using namespace boost;
+			using namespace CDPLPythonMath;
+
+			typedef GridExpressionAdapter<boost::reference_wrapper<GridType>, python::handle<> > AdapterType;
+			typedef typename AdapterType::ExpressionPointer ExpressionPointerType;
+
+			ExpressionPointerFromPyObjectConverter<GridType, AdapterType, ExpressionPointerType>();
 		}
 	};
 
@@ -259,6 +293,20 @@ void CDPLPythonMath::registerFromPythonToExpressionPointerConverters()
 	ConstMatrixExpressionPointerFromPyObjectConverter<Math::DIdentityMatrix>();
 	ConstMatrixExpressionPointerFromPyObjectConverter<Math::LIdentityMatrix>();
 	ConstMatrixExpressionPointerFromPyObjectConverter<Math::ULIdentityMatrix>();
+
+	// Grid Types
+
+	GridExpressionPointerFromPyObjectConverter<Math::FGrid>();
+	GridExpressionPointerFromPyObjectConverter<Math::DGrid>();
+
+	ConstGridExpressionPointerFromPyObjectConverter<Math::FZeroGrid>();
+	ConstGridExpressionPointerFromPyObjectConverter<Math::DZeroGrid>();
+
+	ConstGridExpressionPointerFromPyObjectConverter<Math::FScalarGrid>();
+	ConstGridExpressionPointerFromPyObjectConverter<Math::DScalarGrid>();
+
+	GridExpressionPointerFromPyObjectConverter<Math::FRegularSpatialGrid>();
+	GridExpressionPointerFromPyObjectConverter<Math::DRegularSpatialGrid>();
 
 	// Quaternion Types
 

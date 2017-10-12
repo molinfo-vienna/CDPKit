@@ -29,7 +29,6 @@
 
 #include "CDPL/Base/LookupKeyDefinition.hpp"
 #include "CDPL/Biomol/ControlParameter.hpp"
-#include "CDPL/Chem/ControlParameter.hpp"
 
 
 namespace CDPL 
@@ -41,9 +40,8 @@ namespace CDPL
 		namespace ControlParameter
 		{
 		
-			const Base::LookupKey& STRICT_ERROR_CHECKING     = Chem::ControlParameter::STRICT_ERROR_CHECKING;
-			const Base::LookupKey& CHECK_LINE_LENGTH         = Chem::ControlParameter::CHECK_LINE_LENGTH;
-
+			CDPL_DEFINE_LOOKUP_KEY(STRICT_ERROR_CHECKING);
+			CDPL_DEFINE_LOOKUP_KEY(CHECK_LINE_LENGTH);
 			CDPL_DEFINE_LOOKUP_KEY(PDB_RESIDUE_DICTIONARY);
 			CDPL_DEFINE_LOOKUP_KEY(PDB_APPLY_DICT_ATOM_BONDING_TO_NON_STD_RESIDUES);
 			CDPL_DEFINE_LOOKUP_KEY(PDB_APPLY_DICT_ATOM_BONDING_TO_STD_RESIDUES);

@@ -39,9 +39,9 @@ namespace
 {
 
     bool callOperator(CDPL::Pharm::InteractionScoreCombiner& comb, 
-					  CDPL::Pharm::Feature& ftr1, CDPL::Pharm::Feature& ftr2)
+					  CDPL::Math::Vector3D& ftr1_pos, CDPL::Pharm::Feature& ftr2)
     {
-		return comb(ftr1, ftr2);
+		return comb(ftr1_pos, ftr2);
     }
 }
 
@@ -62,5 +62,5 @@ void CDPLPythonPharm::exportInteractionScoreCombiner()
 		.def("assign", CDPLPythonBase::copyAssOp(&Pharm::InteractionScoreCombiner::operator=), 
 			 (python::arg("self"), python::arg("con")), python::return_self<>())
 		.def("__call__", &callOperator, 
-			 (python::arg("self"), python::arg("ftr1"), python::arg("ftr2")));
+			 (python::arg("self"), python::arg("ftr1_pos"), python::arg("ftr2")));
 }

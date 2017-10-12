@@ -42,6 +42,31 @@ namespace CDPLPythonMath
 {
 
 	template <typename GridType>
+	struct ConstGridContainerVisitor : public boost::python::def_visitor<ConstGridContainerVisitor<GridType> >
+	{
+
+		friend class boost::python::def_visitor_access;
+
+		typedef typename GridType::ValueType ValueType;
+		typedef typename GridType::SizeType SizeType;
+
+		template <typename ClassType>
+		void visit(ClassType& cl) const {
+			using namespace boost;
+
+			cl
+				.def("getSize", &GridType::getSize, python::arg("self"))
+				.def("getElement", &getSeqElement, (python::arg("self"), python::arg("i")))
+				.def("__getitem__", &getSeqElement, (python::arg("self"), python::arg("i")))
+				.def("__call__", &getSeqElement, (python::arg("self"), python::arg("i")));
+		}
+
+		static ValueType getSeqElement(const GridType& grd, SizeType i) {
+			return grd(i);
+		}
+	};
+
+	template <typename GridType>
 	struct ConstGridVisitor : public boost::python::def_visitor<ConstGridVisitor<GridType> >
 	{
 
@@ -51,7 +76,7 @@ namespace CDPLPythonMath
 		typedef typename GridType::SizeType SizeType;
 		typedef typename ConstGridExpression<ValueType>::SharedPointer ExpressionPointer;
 
-		ConstGridVisitor(const char* arg_name = "m"): argName(arg_name) {}
+		ConstGridVisitor(const char* arg_name = "g"): argName(arg_name) {}
 
 		template <typename ClassType>
 		void visit(ClassType& cl) const {
@@ -129,12 +154,12 @@ namespace CDPLPythonMath
 	
 		static ExpressionPointer addOperator(const boost::python::object& grd1, const ExpressionPointer& grd2_expr) {
 			return makeConstGridExpressionAdapter(boost::python::extract<const GridType&>(grd1)() + *grd2_expr,
-													std::make_pair(grd1, grd2_expr));
+												  std::make_pair(grd1, grd2_expr));
 		}
 
 		static ExpressionPointer subOperator(const boost::python::object& grd1, const ExpressionPointer& grd2_expr) {
 			return makeConstGridExpressionAdapter(boost::python::extract<const GridType&>(grd1)() - *grd2_expr,
-													std::make_pair(grd1, grd2_expr));
+												  std::make_pair(grd1, grd2_expr));
 		}
 
 		static ExpressionPointer mulOperator(const boost::python::object& grd, const ValueType& value) {
@@ -159,7 +184,7 @@ namespace CDPLPythonMath
 
 		friend class boost::python::def_visitor_access;
 
-		GridAssignAndSwapVisitor(const char* arg_name = "m"): argName(arg_name) {}
+		GridAssignAndSwapVisitor(const char* arg_name = "g"): argName(arg_name) {}
 
 		template <typename ClassType>
 		void visit(ClassType& cl) const {
@@ -182,6 +207,29 @@ namespace CDPLPythonMath
 	};
 
 	template <typename GridType>
+	struct GridContainerVisitor : public boost::python::def_visitor<GridContainerVisitor<GridType> >
+	{
+
+		friend class boost::python::def_visitor_access;
+
+		typedef typename GridType::ValueType ValueType;
+		typedef typename GridType::SizeType SizeType;
+
+		template <typename ClassType>
+		void visit(ClassType& cl) const {
+			using namespace boost;
+
+			cl
+				.def("__setitem__", &setSeqElement, (python::arg("self"), python::arg("i"), python::arg("v")))
+				.def("setElement", &setSeqElement, (python::arg("self"), python::arg("i"), python::arg("v")));
+		}
+	
+		static void setSeqElement(GridType& grd, SizeType i, const ValueType& value) {
+			grd(i) = value;
+		}
+	};
+
+	template <typename GridType>
 	struct GridVisitor : public boost::python::def_visitor<GridVisitor<GridType> >
 	{
 
@@ -191,7 +239,7 @@ namespace CDPLPythonMath
 		typedef typename GridType::SizeType SizeType;
 		typedef typename ConstGridExpression<ValueType>::SharedPointer ExpressionPointer;
 
-		GridVisitor(const char* arg_name = "m"): argName(arg_name) {}
+		GridVisitor(const char* arg_name = "g"): argName(arg_name) {}
 
 		template <typename ClassType>
 		void visit(ClassType& cl) const {
@@ -213,7 +261,7 @@ namespace CDPLPythonMath
 				.def("__idiv__", &idivOperator, (python::arg("self"), python::arg("t")),
 					 python::return_self<>());
 		}
-
+	
 		static void setElement(GridType& grd, SizeType i, SizeType j, SizeType k, const ValueType& value) {
 			grd(i, j, k) = value;
 		}

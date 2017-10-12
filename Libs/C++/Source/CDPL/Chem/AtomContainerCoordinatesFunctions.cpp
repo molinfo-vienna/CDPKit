@@ -96,6 +96,12 @@ void Chem::get3DCoordinates(const AtomContainer& cntnr, Math::Vector3DArray& coo
 		coords.addElement(get3DCoordinates(*it));
 }
 
+void Chem::get3DCoordinates(const AtomContainer& cntnr, Math::Vector3DArray& coords, const Atom3DCoordinatesFunction& coords_func)
+{
+	for (AtomContainer::ConstAtomIterator it = cntnr.getAtomsBegin(), end = cntnr.getAtomsEnd(); it != end; ++it)
+		coords.addElement(coords_func(*it));
+}
+
 void Chem::set3DCoordinates(AtomContainer& cntnr, const Math::Vector3DArray& coords)
 {
 	std::size_t num_atoms = cntnr.getNumAtoms();

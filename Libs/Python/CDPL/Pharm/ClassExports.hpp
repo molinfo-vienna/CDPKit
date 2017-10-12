@@ -40,8 +40,6 @@ namespace CDPLPythonPharm
 	void exportPharmacophore();
 	void exportBasicPharmacophore();
 
-	void exportInteractionScoreGrid();
-	void exportInteractionScoreGridSet();
 	void exportFeatureMapping();
 	void exportFeatureTypeHistogram();
 	void exportFeatureRDFCodeCalculator();
@@ -49,35 +47,16 @@ namespace CDPLPythonPharm
 	void exportBoostFunctionWrappers();
 
 	void exportPharmacophoreReader();
-	void exportInteractionScoreGridReader();
-	void exportInteractionScoreGridSetReader();
 	void exportFeatureContainerWriter();
-	void exportInteractionScoreGridWriter();
-	void exportInteractionScoreGridSetWriter();
 	void exportPharmacophoreInputHandler();
-	void exportInteractionScoreGridInputHandler();
-	void exportInteractionScoreGridSetInputHandler();
 	void exportFeatureContainerOutputHandler();
-	void exportInteractionScoreGridOutputHandler();
-	void exportInteractionScoreGridSetOutputHandler();
 	void exportPharmacophoreIOManager();
 	void exportFeatureContainerIOManager();
-	void exportInteractionScoreGridIOManager();
-	void exportInteractionScoreGridSetIOManager();
 
 	void exportCDFPharmacophoreInputHandler();
 	void exportCDFFeatureContainerOutputHandler();
 	void exportCDFPharmacophoreReader();
 	void exportCDFFeatureContainerWriter();
-
-	void exportCDFInteractionScoreGridInputHandler();
-	void exportCDFInteractionScoreGridOutputHandler();
-	void exportCDFInteractionScoreGridSetInputHandler();
-	void exportCDFInteractionScoreGridSetOutputHandler();
-	void exportCDFInteractionScoreGridReader();
-	void exportCDFInteractionScoreGridWriter();
-	void exportCDFInteractionScoreGridSetReader();
-	void exportCDFInteractionScoreGridSetWriter();
 
 	void exportPMLPharmacophoreInputHandler();
 	void exportPMLFeatureContainerOutputHandler();
@@ -135,7 +114,6 @@ namespace CDPLPythonPharm
 	void exportCationPiInteractionConstraint();
 	void exportHBondingInteractionConstraint();
 
-	void exportGeneralizedBellFunction();
 	void exportInteractionScoreCombiner();
 	void exportFeatureDistanceScore();
 	void exportHydrophobicInteractionScore();
@@ -144,9 +122,9 @@ namespace CDPLPythonPharm
 	void exportParallelPiPiInteractionScore();
 	void exportCationPiInteractionScore();
 	void exportHBondingInteractionScore();
-	void exportStericAtomClashFactorCalculator();
 	void exportInteractionScoreGridCalculator();
-	void exportDefaultInteractionScoreGridCalculator();
+	void exportInteractionScoreGridSetCalculator();
+	void exportDefaultInteractionScoreGridSetCalculator();
 
 	void exportFeatureTypeMatchFunctor();
 	void exportFeaturePairDistanceMatchFunctor();

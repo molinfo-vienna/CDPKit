@@ -28,11 +28,13 @@
 
 #include <cmath>
 
+#include <boost/bind.hpp>
+
 #include "CDPL/Pharm/CationPiInteractionScore.hpp"
 #include "CDPL/Pharm/Feature.hpp"
 #include "CDPL/Pharm/FeatureFunctions.hpp"
 #include "CDPL/Pharm/FeatureGeometry.hpp"
-#include "CDPL/Pharm/GeneralizedBellFunction.hpp"
+#include "CDPL/Math/SpecialFunctions.hpp"
 #include "CDPL/Chem/Entity3DFunctions.hpp"
 
 
@@ -47,7 +49,7 @@ const double Pharm::CationPiInteractionScore::DEF_MAX_ANGLE    = 60.0;
 Pharm::CationPiInteractionScore::CationPiInteractionScore(bool aro_cat, double min_dist, double max_dist,
 														  double max_ang):
 	aroCatOrder(aro_cat), minDist(min_dist), maxDist(max_dist), maxAngle(max_ang), 
-	normFunc(GeneralizedBellFunction(0.5, 10, 0.0)) {}
+	normFunc(boost::bind(&Math::generalizedBell<double>, _1, 0.5, 10, 0.0)) {}
 
 double Pharm::CationPiInteractionScore::getMinDistance() const
 {
@@ -82,6 +84,26 @@ double Pharm::CationPiInteractionScore::operator()(const Feature& ftr1, const Fe
 
     if (hasOrientation(aro_ftr)) {
 		const Math::Vector3D& orient = getOrientation(aro_ftr);
+		double ang_cos = std::abs(angleCos(orient, aro_cat_vec, dist));
+		double angle = std::acos(ang_cos) * 180.0 / M_PI;
+
+		return (score * normFunc(angle / maxAngle * 0.5));
+    }
+
+    return score;
+}
+
+double Pharm::CationPiInteractionScore::operator()(const Math::Vector3D& ftr1_pos, const Feature& ftr2) const
+{
+    Math::Vector3D aro_cat_vec(get3DCoordinates(ftr2) - ftr1_pos);
+    double dist = length(aro_cat_vec);
+	double score = normFunc((dist - (maxDist + minDist) * 0.5) / (maxDist - minDist));
+
+	if (aroCatOrder)
+		return score;
+
+    if (hasOrientation(ftr2)) {
+		const Math::Vector3D& orient = getOrientation(ftr2);
 		double ang_cos = std::abs(angleCos(orient, aro_cat_vec, dist));
 		double angle = std::acos(ang_cos) * 180.0 / M_PI;
 

@@ -42,6 +42,6 @@ template class Base::DataIOManager<Pharm::Pharmacophore>;
 
 template class Base::DataIOManager<Pharm::FeatureContainer>;
 
-template class Base::DataIOManager<Pharm::InteractionScoreGrid>;
+template class Base::DataIOManager<Grid::RegularGrid<double, double> >;
 
-template class Base::DataIOManager<Pharm::InteractionScoreGridSet>;
+template class Base::DataIOManager<Grid::RegularGridSet<double, double> >;

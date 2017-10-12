@@ -7,14 +7,13 @@ SET(cdpl-pharm_LIB_SRCS
     FeatureSet.cpp
     Pharmacophore.cpp
     BasicPharmacophore.cpp
-
-    InteractionScoreGrid.cpp
-    InteractionScoreGridSet.cpp  
-
+  
     FeatureContainerProperty.cpp
     FeatureProperty.cpp
+    AttributedGridProperty.cpp
     FeatureContainerPropertyDefault.cpp
     FeaturePropertyDefault.cpp
+    AttributedGridPropertyDefault.cpp
     DataFormat.cpp
     ControlParameter.cpp
     ControlParameterDefault.cpp
@@ -40,7 +39,6 @@ SET(cdpl-pharm_LIB_SRCS
     OrthogonalPiPiInteractionConstraint.cpp
     ParallelPiPiInteractionConstraint.cpp
 
-    GeneralizedBellFunction.cpp
     InteractionScoreCombiner.cpp
     FeatureDistanceScore.cpp
     HydrophobicInteractionScore.cpp
@@ -49,9 +47,9 @@ SET(cdpl-pharm_LIB_SRCS
     OrthogonalPiPiInteractionScore.cpp
     ParallelPiPiInteractionScore.cpp
     CationPiInteractionScore.cpp
-    StericAtomClashFactorCalculator.cpp
     InteractionScoreGridCalculator.cpp
-    DefaultInteractionScoreGridCalculator.cpp
+    InteractionScoreGridSetCalculator.cpp
+    DefaultInteractionScoreGridSetCalculator.cpp
 
     FeatureTypeMatchFunctor.cpp
     FeaturePairDistanceMatchFunctor.cpp
@@ -67,19 +65,13 @@ SET(cdpl-pharm_LIB_SRCS
     ScreeningProcessorImpl.cpp
     PharmacophoreFitScreeningScore.cpp
 
+    CDFAttributedGridPropertyReader.cpp
+    CDFAttributedGridPropertyWriter.cpp
     CDFPharmacophoreDataReader.cpp
     CDFPharmacophoreDataWriter.cpp
-    CDFInteractionScoreGridDataReader.cpp
-    CDFInteractionScoreGridDataWriter.cpp
-    CDFInteractionScoreGridSetDataReader.cpp
-    CDFInteractionScoreGridSetDataWriter.cpp
     CDFPharmacophoreReader.cpp
     CDFFeatureContainerWriter.cpp
-    CDFInteractionScoreGridReader.cpp 
-    CDFInteractionScoreGridWriter.cpp 
-    CDFInteractionScoreGridSetReader.cpp 
-    CDFInteractionScoreGridSetWriter.cpp 
-
+  
     PMLDataReader.cpp
     PMLDataWriter.cpp
     PMLPharmacophoreReader.cpp
@@ -94,6 +86,8 @@ SET(cdpl-pharm_LIB_SRCS
     FeatureContainerGetFeatureAtomsFunction.cpp
 
     FeatureSetGetFeaturesFunction.cpp
+
+    AttributedGridPropertyFunctions.cpp
 
     PharmacophoreBuildInteractionPharmFunction.cpp
     PharmacophoreCreateXVolumesFunctions.cpp
@@ -154,10 +148,10 @@ ADD_LIBRARY(cdpl-pharm-static STATIC ${cdpl-pharm_LIB_SRCS})
 SET_TARGET_PROPERTIES(cdpl-pharm-static PROPERTIES 
                       OUTPUT_NAME cdpl-pharm
                       CLEAN_DIRECT_OUTPUT 1
-                      COMPILE_DEFINITIONS "CDPL_PHARM_STATIC_LINK;CDPL_CHEM_STATIC_LINK;CDPL_MATH_STATIC_LINK;CDPL_UTIL_STATIC_LINK;CDPL_BASE_STATIC_LINK"
+                      COMPILE_DEFINITIONS "CDPL_PHARM_STATIC_LINK;CDPL_CHEM_STATIC_LINK;CDPL_GRID_STATIC_LINK;CDPL_MATH_STATIC_LINK;CDPL_UTIL_STATIC_LINK;CDPL_BASE_STATIC_LINK"
                      )
 
-TARGET_LINK_LIBRARIES(cdpl-pharm-static cdpl-chem-static cdpl-math-static cdpl-util-static cdpl-base-static)
+TARGET_LINK_LIBRARIES(cdpl-pharm-static cdpl-chem-static cdpl-grid-static cdpl-math-static cdpl-util-static cdpl-base-static cdpl-internal-static)
 
 INSTALL(TARGETS cdpl-pharm-static
         DESTINATION "${CDPKIT_LIBRARY_INSTALL_DIR}" COMPONENT CDPLStaticLibraries
@@ -165,7 +159,7 @@ INSTALL(TARGETS cdpl-pharm-static
 
 ADD_LIBRARY(cdpl-pharm-shared SHARED ${cdpl-pharm_LIB_SRCS})
 
-TARGET_LINK_LIBRARIES(cdpl-pharm-shared cdpl-chem-shared cdpl-base-shared cdpl-math-shared cdpl-util-shared)
+TARGET_LINK_LIBRARIES(cdpl-pharm-shared cdpl-chem-shared cdpl-grid-shared cdpl-base-shared cdpl-math-shared cdpl-util-shared cdpl-internal-static)
 
 IF(APPLE)
   SET_TARGET_PROPERTIES(cdpl-pharm-shared PROPERTIES VERSION "${CDPL_SO_VERSION}"

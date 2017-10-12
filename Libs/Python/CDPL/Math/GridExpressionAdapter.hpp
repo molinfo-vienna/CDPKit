@@ -98,7 +98,7 @@ namespace CDPLPythonMath
 			exprData(expr_data), keepAliveWardData(alive_ward_data) {} 
 		
 		~GridExpressionAdapter() {} 
-	
+
 		ConstReference operator()(SizeType i, SizeType j, SizeType k) const {
 			return boost::unwrap_ref(exprData)(i, j, k);
 		}

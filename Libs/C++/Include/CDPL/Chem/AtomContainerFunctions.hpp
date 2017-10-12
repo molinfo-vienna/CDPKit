@@ -97,6 +97,8 @@ namespace CDPL
 
 		CDPL_CHEM_API void get3DCoordinates(const AtomContainer& cntnr, Math::Vector3DArray& coords);
 
+		CDPL_CHEM_API void get3DCoordinates(const AtomContainer& cntnr, Math::Vector3DArray& coords, const Atom3DCoordinatesFunction& coords_func);
+
 		CDPL_CHEM_API void set3DCoordinates(AtomContainer& cntnr, const Math::Vector3DArray& coords);
 
 		CDPL_CHEM_API void transform3DCoordinates(AtomContainer& cntnr, const Math::Matrix4D& mtx);

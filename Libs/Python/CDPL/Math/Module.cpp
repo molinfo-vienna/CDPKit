@@ -65,7 +65,7 @@ BOOST_PYTHON_MODULE(_math)
 	exportGridTypes();
 	exportZeroGridTypes();
 	exportScalarGridTypes();
-	exportUniformSpatialGridTypes();
+	exportRegularSpatialGridTypes();
 
 	exportRange();
 	exportSlice();

@@ -78,7 +78,11 @@ namespace
 	MAKE_MOLGRAPH_FUNC_WRAPPERS(const CDPL::Biomol::PDBData::SharedPointer&, PDBData)
 
 	MAKE_FUNCTION_WRAPPER4(void, extractEnvironmentResidues, CDPL::Chem::MolecularGraph&, CDPL::Chem::MolecularGraph&, CDPL::Chem::Fragment&, double);
+
+	MAKE_FUNCTION_WRAPPER5(void, extractEnvironmentResidues, CDPL::Chem::MolecularGraph&, CDPL::Chem::MolecularGraph&, CDPL::Chem::Fragment&, const CDPL::Chem::Atom3DCoordinatesFunction&, double);
 	MAKE_FUNCTION_WRAPPER5(void, extractProximalAtoms, CDPL::Chem::MolecularGraph&, CDPL::Chem::MolecularGraph&, CDPL::Chem::Fragment&, double, bool);
+
+	MAKE_FUNCTION_WRAPPER6(void, extractProximalAtoms, CDPL::Chem::MolecularGraph&, CDPL::Chem::MolecularGraph&, CDPL::Chem::Fragment&, const CDPL::Chem::Atom3DCoordinatesFunction&, double, bool);
 
 	bool matchesResidueInfoWrapper(CDPL::Chem::MolecularGraph& molgraph, const std::string& res_code, char chain_id, 
 								   long res_seq_no, char ins_code, std::size_t model_no) 
@@ -99,9 +103,15 @@ void CDPLPythonBiomol::exportMolecularGraphFunctions()
 	python::def("extractEnvironmentResidues", &extractEnvironmentResiduesWrapper4, 
 				(python::arg("core"), python::arg("macromol"), python::arg("env_residues"),
 				 python::arg("max_dist")));
+	python::def("extractEnvironmentResidues", &extractEnvironmentResiduesWrapper5, 
+				(python::arg("core"), python::arg("macromol"), python::arg("env_residues"),
+				 python::arg("coords_func"), python::arg("max_dist")));
 	python::def("extractProximalAtoms", &extractProximalAtomsWrapper5, 
 				(python::arg("core"), python::arg("macromol"), python::arg("env_atoms"),
 				 python::arg("max_dist"), python::arg("inc_core_atoms") = false));
+	python::def("extractProximalAtoms", &extractProximalAtomsWrapper6, 
+				(python::arg("core"), python::arg("macromol"), python::arg("env_atoms"),
+				 python::arg("coords_func"), python::arg("max_dist"), python::arg("inc_core_atoms") = false));
 	python::def("matchesResidueInfo", &matchesResidueInfoWrapper, 
 				(python::arg("molgraph"), python::arg("res_code") = "", python::arg("chain_id") = char(0), 
 				 python::arg("res_seq_no") = 0, python::arg("ins_code") = char(0), python::arg("model_no") = 0));

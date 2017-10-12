@@ -121,6 +121,8 @@ SET(cdpl-chem_LIB_SRCS
     CircularFingerprintGenerator.cpp
     PatternAtomTyper.cpp
     SubstructureHistogramGenerator.cpp
+    GeneralizedBellAtomDensity.cpp
+    AtomDensityGridCalculator.cpp
 
     Entity3DPropertyFunctions.cpp
 
@@ -290,10 +292,10 @@ ADD_LIBRARY(cdpl-chem-static STATIC ${cdpl-chem_LIB_SRCS})
 SET_TARGET_PROPERTIES(cdpl-chem-static PROPERTIES 
                       OUTPUT_NAME cdpl-chem
                       CLEAN_DIRECT_OUTPUT 1
-                      COMPILE_DEFINITIONS "CDPL_CHEM_STATIC_LINK;CDPL_MATH_STATIC_LINK;CDPL_UTIL_STATIC_LINK;CDPL_BASE_STATIC_LINK"
+                      COMPILE_DEFINITIONS "CDPL_CHEM_STATIC_LINK;CDPL_GRID_STATIC_LINK;CDPL_MATH_STATIC_LINK;CDPL_UTIL_STATIC_LINK;CDPL_BASE_STATIC_LINK"
                      )
 
-TARGET_LINK_LIBRARIES(cdpl-chem-static cdpl-math-static cdpl-util-static cdpl-base-static cdpl-internal-static inchi-static)
+TARGET_LINK_LIBRARIES(cdpl-chem-static cdpl-grid-static cdpl-math-static cdpl-util-static cdpl-base-static cdpl-internal-static inchi-static)
 
 INSTALL(TARGETS cdpl-chem-static
         DESTINATION "${CDPKIT_LIBRARY_INSTALL_DIR}" COMPONENT CDPLStaticLibraries
@@ -301,7 +303,7 @@ INSTALL(TARGETS cdpl-chem-static
 
 ADD_LIBRARY(cdpl-chem-shared SHARED ${cdpl-chem_LIB_SRCS})
 
-TARGET_LINK_LIBRARIES(cdpl-chem-shared cdpl-base-shared cdpl-math-shared cdpl-util-shared cdpl-internal-static inchi-static)
+TARGET_LINK_LIBRARIES(cdpl-chem-shared cdpl-grid-shared cdpl-base-shared cdpl-math-shared cdpl-util-shared cdpl-internal-static inchi-static)
 
 IF(APPLE)
   SET_TARGET_PROPERTIES(cdpl-chem-shared PROPERTIES VERSION "${CDPL_SO_VERSION}"

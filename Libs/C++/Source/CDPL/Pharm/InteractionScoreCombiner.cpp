@@ -40,7 +40,7 @@ Pharm::InteractionScoreCombiner::InteractionScoreCombiner(const ScoringFunction&
 Pharm::InteractionScoreCombiner::InteractionScoreCombiner(const ScoringFunction& func1, const ScoringFunction& func2): 
     scoringFunc1(func1), scoringFunc2(func2), combFunc(&std::max<double>) {}
 
-double Pharm::InteractionScoreCombiner::operator()(const Feature& ftr1, const Feature& ftr2) const
+double Pharm::InteractionScoreCombiner::operator()(const Math::Vector3D& ftr1_pos, const Feature& ftr2) const
 {
-    return combFunc(scoringFunc1(ftr1, ftr2), scoringFunc2(ftr1, ftr2));
+    return combFunc(scoringFunc1(ftr1_pos, ftr2), scoringFunc2(ftr1_pos, ftr2));
 }

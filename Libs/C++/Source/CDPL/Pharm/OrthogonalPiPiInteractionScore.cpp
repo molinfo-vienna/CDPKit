@@ -29,11 +29,13 @@
 #include <cmath>
 #include <algorithm>
 
+#include <boost/bind.hpp>
+
 #include "CDPL/Pharm/OrthogonalPiPiInteractionScore.hpp"
 #include "CDPL/Pharm/Feature.hpp"
 #include "CDPL/Pharm/FeatureFunctions.hpp"
 #include "CDPL/Pharm/FeatureGeometry.hpp"
-#include "CDPL/Pharm/GeneralizedBellFunction.hpp"
+#include "CDPL/Math/SpecialFunctions.hpp"
 #include "CDPL/Chem/Entity3DFunctions.hpp"
 
 #include "PiPiInteractionUtilities.hpp"
@@ -51,7 +53,7 @@ const double Pharm::OrthogonalPiPiInteractionScore::DEF_ANGLE_TOLERANCE = 35.0;
 Pharm::OrthogonalPiPiInteractionScore::OrthogonalPiPiInteractionScore(double min_v_dist, double max_v_dist,
 																	  double max_h_dist, double ang_tol):
 	minVDist(min_v_dist), maxVDist(max_v_dist),  maxHDist(max_h_dist), angleTol(ang_tol),
-	normFunc(GeneralizedBellFunction(0.5, 10, 0.0)) {}
+	normFunc(boost::bind(&Math::generalizedBell<double>, _1, 0.5, 10, 0.0)) {}
 
 double Pharm::OrthogonalPiPiInteractionScore::getMinVDistance() const
 {
@@ -104,6 +106,16 @@ double Pharm::OrthogonalPiPiInteractionScore::operator()(const Feature& ftr1, co
 	double dist_score2 = (has_orient2 ? calcDistanceScore(getOrientation(ftr2), ftr1_ftr2_vec) : 0.0);
 
 	return (std::max(dist_score1, dist_score2) * ang_score);
+}
+
+double Pharm::OrthogonalPiPiInteractionScore::operator()(const Math::Vector3D& ftr1_pos, const Feature& ftr2) const
+{
+    if (!hasOrientation(ftr2))
+		return 0.0;
+
+    Math::Vector3D ftr1_ftr2_vec(get3DCoordinates(ftr2) - ftr1_pos);
+
+	return calcDistanceScore(getOrientation(ftr2), ftr1_ftr2_vec);
 }
 
 double Pharm::OrthogonalPiPiInteractionScore::calcDistanceScore(const Math::Vector3D& orient1, const Math::Vector3D& ftr1_ftr2_vec) const

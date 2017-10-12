@@ -58,7 +58,7 @@
 #include "CDPL/Math/GridAssignment.hpp"
 #include "CDPL/Math/GridExpression.hpp"
 #include "CDPL/Math/Grid.hpp"
-#include "CDPL/Math/UniformSpatialGrid.hpp"
+#include "CDPL/Math/RegularSpatialGrid.hpp"
 #include "CDPL/Math/Range.hpp"
 #include "CDPL/Math/Slice.hpp"
 #include "CDPL/Math/SpecialFunctions.hpp"
