@@ -27,6 +27,7 @@
 #include "StaticInit.hpp"
 
 #include "CDPL/Biomol/AtomFunctions.hpp"
+#include "CDPL/Biomol/ResidueDictionary.hpp"
 #include "CDPL/Chem/Atom.hpp"
 #include "CDPL/Chem/Bond.hpp"
 #include "CDPL/Chem/Fragment.hpp"
@@ -172,6 +173,9 @@ void Biomol::extractResidueSubstructure(const Chem::Atom& atom, const Chem::Mole
 
 bool Biomol::isPDBBackboneAtom(const Chem::Atom& atom)
 {
+	if (!ResidueDictionary::isStdResidue(getResidueCode(atom)))
+		return false;
+
 	const std::string& label = getResidueAtomName(atom);
 
 	return (label == C_AA_CARBONYL || label == C_AA_ALPHA || label == N_AA_AMIDE || label == O_AA_ACID || label == O_AA_TERMINAL ||

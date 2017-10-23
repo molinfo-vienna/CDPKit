@@ -34,11 +34,21 @@
 using namespace CDPL; 
 
 
+namespace
+{
+
+	double maxValue(double v1, double v2)
+	{
+		return std::max(v1, v2);
+	}
+}
+
+
 Pharm::InteractionScoreCombiner::InteractionScoreCombiner(const ScoringFunction& func1, const ScoringFunction& func2, const CombinationFunction& comb_func): 
     scoringFunc1(func1), scoringFunc2(func2), combFunc(comb_func) {}
 
 Pharm::InteractionScoreCombiner::InteractionScoreCombiner(const ScoringFunction& func1, const ScoringFunction& func2): 
-    scoringFunc1(func1), scoringFunc2(func2), combFunc(&std::max<double>) {}
+    scoringFunc1(func1), scoringFunc2(func2), combFunc(&maxValue) {}
 
 double Pharm::InteractionScoreCombiner::operator()(const Math::Vector3D& ftr1_pos, const Feature& ftr2) const
 {

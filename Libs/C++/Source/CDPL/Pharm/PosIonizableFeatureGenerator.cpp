@@ -52,6 +52,7 @@ void Pharm::PosIonizableFeatureGenerator::init(bool fuzzy)
 
 	if (fuzzy) {
 		addIncludePattern(parseSMARTS("[NX3:3]([CX4])([CX4,#1])[CX4,#1]"), FeatureType::POS_IONIZABLE, 1.5, FeatureGeometry::SPHERE);
+		addIncludePattern(parseSMARTS("[NX4:3]([CX4])([CX4,#1])([CX4,#1])[CX4,#1]"), FeatureType::POS_IONIZABLE, 1.5, FeatureGeometry::SPHERE);
 		addIncludePattern(parseSMARTS("[N:3]=[CX3:3]([N:3])[!N]"), FeatureType::POS_IONIZABLE, 1.5, FeatureGeometry::SPHERE);
 		addIncludePattern(parseSMARTS("[N:3]=[CX3:3]([N:3])[N:3]"), FeatureType::POS_IONIZABLE, 1.5, FeatureGeometry::SPHERE);
 
