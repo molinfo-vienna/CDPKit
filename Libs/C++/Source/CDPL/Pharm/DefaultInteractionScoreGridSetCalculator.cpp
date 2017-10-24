@@ -173,7 +173,7 @@ void Pharm::DefaultInteractionScoreGridSetCalculator::init()
 	enableInteraction(FeatureType::HYDROPHOBIC, FeatureType::HYDROPHOBIC, true);
 
 	setScoringFunction(FeatureType::AROMATIC, FeatureType::AROMATIC, 
-								  InteractionScoreCombiner(OrthogonalPiPiInteractionScore(), ParallelPiPiInteractionScore(), &std::max<double>));
+								  InteractionScoreCombiner(OrthogonalPiPiInteractionScore(), ParallelPiPiInteractionScore()));
 	enableInteraction(FeatureType::AROMATIC, FeatureType::AROMATIC, true);
 
 	setScoringFunction(FeatureType::H_BOND_DONOR, FeatureType::H_BOND_ACCEPTOR, HBondingInteractionScore(true));
