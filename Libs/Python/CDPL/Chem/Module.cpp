@@ -131,6 +131,9 @@ BOOST_PYTHON_MODULE(_chem)
 	exportSubstructureHistogramGenerator();
 	exportGeneralizedBellAtomDensity();
 	exportAtomDensityGridCalculator();
+	exportAtomHydrophobicityCalculator();
+	exportBuriednessScore();
+	exportBuriednessGridCalculator();
 
 	exportMoleculeReader();
 	exportMoleculeWriter();

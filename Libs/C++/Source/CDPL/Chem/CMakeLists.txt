@@ -123,6 +123,9 @@ SET(cdpl-chem_LIB_SRCS
     SubstructureHistogramGenerator.cpp
     GeneralizedBellAtomDensity.cpp
     AtomDensityGridCalculator.cpp
+    AtomHydrophobicityCalculator.cpp
+    BuriednessScore.cpp
+    BuriednessGridCalculator.cpp
 
     Entity3DPropertyFunctions.cpp
 
@@ -242,6 +245,7 @@ SET(cdpl-chem_LIB_SRCS
     MolecularGraph2DCoordinatesFunction.cpp
     MolecularGraph3DCoordinatesFunctions.cpp
     MolecularGraphSybylAtomTypesFunction.cpp
+    MolecularGraphAtomHydrophobicityFunction.cpp 
 
     ReactionPropertyFunctions.cpp
     ReactionMatchConstraintsFunctions.cpp

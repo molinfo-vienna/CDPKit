@@ -284,6 +284,9 @@
 #include "CDPL/Chem/CircularFingerprintGenerator.hpp"
 #include "CDPL/Chem/GeneralizedBellAtomDensity.hpp"  
 #include "CDPL/Chem/AtomDensityGridCalculator.hpp"  
+#include "CDPL/Chem/AtomHydrophobicityCalculator.hpp"  
+#include "CDPL/Chem/BuriednessScore.hpp"  
+#include "CDPL/Chem/BuriednessGridCalculator.hpp"  
 
 #include "CDPL/Chem/TopologicalEntityAlignment.hpp"
 #include "CDPL/Chem/GeometricalEntityAlignment.hpp"

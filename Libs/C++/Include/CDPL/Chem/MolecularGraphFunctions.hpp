@@ -532,6 +532,8 @@ namespace CDPL
 		CDPL_CHEM_API void setAtomSymbolsFromTypes(MolecularGraph& molgraph, bool overwrite);
 
 		CDPL_CHEM_API void perceiveSybylAtomTypes(MolecularGraph& molgraph, bool overwrite);
+
+		CDPL_CHEM_API void calcAtomHydrophobicities(MolecularGraph& molgraph, bool overwrite);
 		
 		/**
 		 * @}

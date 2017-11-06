@@ -74,7 +74,6 @@ BOOST_AUTO_TEST_CASE(ReactionView2DTest)
 	using namespace Vis;
 	using namespace Chem;
 
-	std::size_t img_id = 1;
 	ReactionView2D view;
 
 	BOOST_CHECK(!view.getReaction());
@@ -83,6 +82,7 @@ BOOST_AUTO_TEST_CASE(ReactionView2DTest)
 #ifdef HAVE_CAIRO 
 # ifdef HAVE_CAIRO_PNG_SUPPORT
 
+	std::size_t img_id = 1;
 	CairoPointer<cairo_surface_t> surf_ptr(cairo_image_surface_create(CAIRO_FORMAT_ARGB32, 1, 1));
 
 	BOOST_CHECK(cairo_surface_status(surf_ptr.get()) == CAIRO_STATUS_SUCCESS);

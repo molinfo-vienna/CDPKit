@@ -39,16 +39,12 @@
 namespace
 {
 
-	void calculate1(CDPL::Chem::AtomDensityGridCalculator& calculator, CDPL::Chem::AtomContainer& atoms, CDPL::Grid::DSpatialGrid& grid)
+	void calculate(CDPL::Chem::AtomDensityGridCalculator& calculator, CDPL::Chem::AtomContainer& atoms, CDPL::Grid::DSpatialGrid& grid)
 	{
 		calculator.calculate(atoms, grid);
 	}
-
-	void calculate2(CDPL::Chem::AtomDensityGridCalculator& calculator, CDPL::Chem::AtomContainer& atoms, CDPL::Grid::DSpatialGrid& grid, const CDPL::Chem::AtomPredicate& tgt_atom_pred)
-	{
-		calculator.calculate(atoms, grid, tgt_atom_pred);
-	}
 }
+
 
 void CDPLPythonChem::exportAtomDensityGridCalculator()
 {
@@ -77,9 +73,7 @@ void CDPLPythonChem::exportAtomDensityGridCalculator()
 			 (python::arg("self"), python::arg("func")))
 		.def("getAtom3DCoordinatesFunction", &Chem::AtomDensityGridCalculator::getAtom3DCoordinatesFunction,
 			 python::arg("self"), python::return_internal_reference<>())
-		.def("calculate", &calculate1, (python::arg("self"), python::arg("atoms"), python::arg("grid")))
-		.def("calculate", &calculate2, 
-			 (python::arg("self"), python::arg("atoms"), python::arg("grid"), python::arg("tgt_atom_pred")))
+		.def("calculate", &calculate, (python::arg("self"), python::arg("atoms"), python::arg("grid")))
 		.add_property("densityFunction", 
 					  python::make_function(&Chem::AtomDensityGridCalculator::getDensityFunction, python::return_internal_reference<>()),
 					  &Chem::AtomDensityGridCalculator::setDensityFunction)

@@ -281,6 +281,8 @@ void CDPLPythonChem::exportMolecularGraphFunctions()
 				(python::arg("molgraph"), python::arg("overwrite")));
 	python::def("perceiveSybylAtomTypes", &Chem::perceiveSybylAtomTypes, 
 				(python::arg("molgraph"), python::arg("overwrite")));
+	python::def("calcAtomHydrophobicities", &Chem::calcAtomHydrophobicities, 
+				(python::arg("molgraph"), python::arg("overwrite")));
 
 	python::def("buildMatchExpression", &buildMatchExpressionWrapper1,
 	 			python::arg("molgraph"), python::with_custodian_and_ward_postcall<0, 1>());

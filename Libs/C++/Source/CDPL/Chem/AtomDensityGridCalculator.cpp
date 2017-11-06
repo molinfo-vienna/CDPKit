@@ -90,21 +90,7 @@ const Chem::Atom3DCoordinatesFunction& Chem::AtomDensityGridCalculator::getAtom3
 
 void Chem::AtomDensityGridCalculator::calculate(const AtomContainer& atoms, Grid::DSpatialGrid& grid)
 {
-	calculate(atoms, grid, AtomPredicate());
-}
-
-void Chem::AtomDensityGridCalculator::calculate(const AtomContainer& atoms, Grid::DSpatialGrid& grid, const AtomPredicate& tgt_atom_pred)
-{
-    tgtAtoms.clear();
-
-    for (AtomContainer::ConstAtomIterator it = atoms.getAtomsBegin(), end = atoms.getAtomsEnd(); it != end; ++it) {
-		const Atom& atom = *it;
-
-		if (!tgt_atom_pred || tgt_atom_pred(atom))
-			tgtAtoms.push_back(&atom);
-    }
-
-    partialDensities.resize(tgtAtoms.size(), false);
+    partialDensities.resize(atoms.getNumAtoms(), false);
 
     std::size_t num_pts = grid.getNumElements();
     Math::Vector3D grid_pos;
@@ -112,8 +98,9 @@ void Chem::AtomDensityGridCalculator::calculate(const AtomContainer& atoms, Grid
     for (std::size_t i = 0, l = 0; i < num_pts; i++, l = 0) {
 		grid.getCoordinates(i, grid_pos);
 
-		for (AtomList::const_iterator it = tgtAtoms.begin(), end = tgtAtoms.end(); it != end; ++it) {
-			const Atom& atom = **it;
+		for (AtomContainer::ConstAtomIterator it = atoms.getAtomsBegin(), end = atoms.getAtomsEnd(); it != end; ++it) {
+			const Atom& atom = *it;
+
 			partialDensities[l++] = densityFunc(grid_pos, coordsFunc(atom), atom);
 		}
 

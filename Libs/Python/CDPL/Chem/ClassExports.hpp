@@ -128,6 +128,9 @@ namespace CDPLPythonChem
 	void exportSubstructureHistogramGenerator();
 	void exportGeneralizedBellAtomDensity();
 	void exportAtomDensityGridCalculator();
+	void exportAtomHydrophobicityCalculator();
+	void exportBuriednessScore();
+	void exportBuriednessGridCalculator();
 
 	void exportMoleculeReader();
 	void exportMoleculeWriter();

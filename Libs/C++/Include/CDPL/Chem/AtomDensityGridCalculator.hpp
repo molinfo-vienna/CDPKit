@@ -31,15 +31,12 @@
 #ifndef CDPL_CHEM_ATOMDENSITYGRIDCALCULATOR_HPP
 #define CDPL_CHEM_ATOMDENSITYGRIDCALCULATOR_HPP
 
-#include <vector>
-
 #include <boost/function.hpp>
 #include <boost/shared_ptr.hpp>
 
 #include "CDPL/Chem/APIPrefix.hpp"
 #include "CDPL/Math/Vector.hpp"
 #include "CDPL/Chem/Atom3DCoordinatesFunction.hpp"
-#include "CDPL/Chem/AtomPredicate.hpp"
 #include "CDPL/Grid/SpatialGrid.hpp"
 
 
@@ -83,21 +80,16 @@ namespace CDPL
 			const DensityCombinationFunction& getDensityCombinationFunction() const;
 
 			/**
-			 * \brief Specifies a function for the retrieval of atom 3D-coordinates for feature generation.
+			 * \brief Specifies a function for the retrieval of atom 3D-coordinates for grid calculation.
 			 * \param func The atom 3D-coordinates function.
 			 */
 			void setAtom3DCoordinatesFunction(const Atom3DCoordinatesFunction& func);
 
 			const Atom3DCoordinatesFunction& getAtom3DCoordinatesFunction() const;
 
-			void calculate(const AtomContainer& atoms, Grid::DSpatialGrid& grid, const AtomPredicate& tgt_atom_pred);
-	
 			void calculate(const AtomContainer& atoms, Grid::DSpatialGrid& grid);
 
 		  private:
-			typedef std::vector<const Atom*> AtomList;
-
-			AtomList                   tgtAtoms;
 			Math::DVector              partialDensities;
 			DensityFunction            densityFunc;
 			DensityCombinationFunction densityCombinationFunc;

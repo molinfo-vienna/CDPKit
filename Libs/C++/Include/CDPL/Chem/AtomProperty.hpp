@@ -81,6 +81,8 @@ namespace CDPL
 			extern CDPL_CHEM_API const Base::LookupKey CIP_PRIORITY;
 			extern CDPL_CHEM_API const Base::LookupKey SYMMETRY_CLASS;
 
+			extern CDPL_CHEM_API const Base::LookupKey HYDROPHOBICITY;
+
 			extern CDPL_CHEM_API const Base::LookupKey STEREO_DESCRIPTOR;
 			extern CDPL_CHEM_API const Base::LookupKey STEREO_CENTER_FLAG;
 			extern CDPL_CHEM_API const Base::LookupKey CIP_CONFIGURATION;

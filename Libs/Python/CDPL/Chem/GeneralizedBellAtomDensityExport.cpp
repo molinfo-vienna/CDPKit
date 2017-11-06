@@ -60,7 +60,7 @@ void CDPLPythonChem::exportGeneralizedBellAtomDensity()
 		.def("getRadiusScalingFactor", &Chem::GeneralizedBellAtomDensity::getRadiusScalingFactor, python::arg("self"))
 		.def("assign", CDPLPythonBase::copyAssOp(&Chem::GeneralizedBellAtomDensity::operator=), 
 			 (python::arg("self"), python::arg("func")), python::return_self<>())
-		.def("__call__", &callOperator, (python::arg("self"), python::arg("pos"), python::arg("atoms"), python::arg("coords_func")))
+		.def("__call__", &callOperator, (python::arg("self"), python::arg("pos"), python::arg("atom_pos"), python::arg("atom")))
 		.add_property("probeRadius", &Chem::GeneralizedBellAtomDensity::getProbeRadius)
 		.add_property("radiusScalingFactor", &Chem::GeneralizedBellAtomDensity::getRadiusScalingFactor)
 		.def_readonly("DEF_RADIUS_SCALING_FACTOR", Chem::GeneralizedBellAtomDensity::DEF_RADIUS_SCALING_FACTOR)

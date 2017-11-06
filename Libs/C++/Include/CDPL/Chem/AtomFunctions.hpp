@@ -340,7 +340,16 @@ namespace CDPL
 	
 		CDPL_CHEM_API bool hasSymmetryClass(const Atom& atom);
 
-		
+
+		CDPL_CHEM_API double getHydrophobicity(const Atom& atom);
+
+		CDPL_CHEM_API void setHydrophobicity(Atom& atom, double hyd);
+
+		CDPL_CHEM_API void clearHydrophobicity(Atom& atom);	
+
+		CDPL_CHEM_API bool hasHydrophobicity(const Atom& atom);
+
+
 		CDPL_CHEM_API unsigned int getCIPConfiguration(const Atom& atom);
 
 		CDPL_CHEM_API void setCIPConfiguration(Atom& atom, unsigned int config);

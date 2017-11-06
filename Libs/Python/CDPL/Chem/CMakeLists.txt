@@ -100,6 +100,9 @@ SET(chem_MOD_SRCS
     SubstructureHistogramGeneratorExport.cpp 
     GeneralizedBellAtomDensityExport.cpp
     AtomDensityGridCalculatorExport.cpp
+    AtomHydrophobicityCalculatorExport.cpp
+    BuriednessScoreExport.cpp
+    BuriednessGridCalculatorExport.cpp
 
     MoleculeIOManagerExport.cpp 
     MolecularGraphIOManagerExport.cpp 

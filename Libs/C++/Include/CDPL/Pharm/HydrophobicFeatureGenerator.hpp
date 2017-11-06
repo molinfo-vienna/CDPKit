@@ -31,17 +31,15 @@
 #ifndef CDPL_PHARM_HYDROPHOBICFEATUREGENERATOR_HPP
 #define CDPL_PHARM_HYDROPHOBICFEATUREGENERATOR_HPP
 
-#include <cstddef>
-#include <vector>
-
 #include "CDPL/Pharm/APIPrefix.hpp"
 #include "CDPL/Pharm/PatternBasedFeatureGenerator.hpp"
 #include "CDPL/Pharm/FeatureType.hpp"
 #include "CDPL/Pharm/FeatureGeometry.hpp"
 #include "CDPL/Chem/Fragment.hpp"
-#include "CDPL/Chem/SubstructureSearch.hpp"
+#include "CDPL/Chem/AtomHydrophobicityCalculator.hpp"
 #include "CDPL/Math/Vector.hpp"
 #include "CDPL/Util/BitSet.hpp"
+#include "CDPL/Util/Array.hpp"
 
 
 namespace CDPL 
@@ -188,17 +186,13 @@ namespace CDPL
 			double getGroupHydrophobicityThreshold() const;
 
 			/**
-			 * \brief Constructs a copy of the \c %HydrophobicFeatureGenerator instance \a gen.
+			 * \brief Copies the \c %HydrophobicFeatureGenerator instance \a gen.
 			 * \param gen The \c %HydrophobicFeatureGenerator to copy.
 			 * \return A reference to itself.
 			 */
 			HydrophobicFeatureGenerator& operator=(const HydrophobicFeatureGenerator& gen);
 
 		  private:
-			typedef std::vector<double> DoubleArray;
-			typedef std::vector<Math::Vector3D> CoordsArray;
-			typedef std::vector<Chem::SubstructureSearch::SharedPointer> HydPatternSubSearchTable;
-
 			void addNonPatternFeatures(const Chem::MolecularGraph&, Pharmacophore&);
 
 			void init(const Chem::MolecularGraph&);
@@ -218,8 +212,7 @@ namespace CDPL
 
 			bool calcHydWeightedCentroid(const AtomList&, Math::Vector3D&) const;
 
-			void calcAtomHydrophobicities();
-			double calcAccessibleSurfaceFactor(const Chem::Atom&);
+			void getAtomHydrophobicities();
 
 			void buildAtomMask(const AtomList&, Util::BitSet&) const;
 			double calcSummedHydrophobicity(const AtomList& alist) const;
@@ -228,22 +221,20 @@ namespace CDPL
 
 			bool isChainEndAtom(const Chem::Atom&) const;
 
-			const Chem::MolecularGraph* molGraph;
-			HydPatternSubSearchTable    hydSubSearchTable;
-			Util::BitSet                procAtomMask;
-			Util::BitSet                hAtomMask;
-			Util::BitSet                tmpAtomMask;
-			unsigned int                featureType;
-			double                      featureTol;
-			unsigned int                featureGeom;
-			double                      hydThreshRing;  
-			double                      hydThreshChain; 
-			double                      hydThreshGroup;
-			DoubleArray                 atomHydTable;
-			DoubleArray                 nbrAtomVdWRadii;
-			CoordsArray                 nbrAtomPositions;
-			AtomList                    featureAtoms;
-			AtomList                    chainAtoms;
+			const Chem::MolecularGraph*        molGraph;
+			Util::BitSet                       procAtomMask;
+			Util::BitSet                       hAtomMask;
+			Util::BitSet                       tmpAtomMask;
+			unsigned int                       featureType;
+			double                             featureTol;
+			unsigned int                       featureGeom;
+			double                             hydThreshRing;  
+			double                             hydThreshChain; 
+			double                             hydThreshGroup;
+			Util::DArray                       atomHydTable;
+			AtomList                           featureAtoms;
+			AtomList                           chainAtoms;
+			Chem::AtomHydrophobicityCalculator atomHydCalculator;
 		};
 
 		/**
