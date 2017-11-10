@@ -43,6 +43,7 @@ namespace CDPLPythonPharm
 	void exportFeatureMapping();
 	void exportFeatureTypeHistogram();
 	void exportFeatureRDFCodeCalculator();
+	void exportPharmacophoreRDFFingerprintGenerator();
 
 	void exportBoostFunctionWrappers();
 

@@ -37,8 +37,8 @@
 
 #include <boost/function.hpp>
 
-#include "CDPL/Math/Vector.hpp"
 #include "CDPL/Math/Matrix.hpp"
+#include "CDPL/Math/Vector.hpp"
 
 
 namespace CDPL 
@@ -106,7 +106,7 @@ namespace CDPL
 			/**
 			 * \brief Allows to specify the scaling factor for the \e RDF code elements.
 			 * \param factor The scaling factor.
-			 * \note The default scaling factor is <em>100.0</em>.
+			 * \note The default scaling factor is <em>1.0</em>.
 			 */
 			void setScalingFactor(double factor);
 
@@ -187,8 +187,8 @@ namespace CDPL
 			 * \param end An iterator pointing one past the end of the entity sequence.
 			 * \param rdf_code The calculated \e RDF code vector.
  			 */
-			template <typename Iter>
-			void calculate(Iter beg, Iter end, Math::DVector& rdf_code);
+			template <typename Iter, typename Vec>
+			void calculate(Iter beg, Iter end, Vec& rdf_code);
 
 		private:
 			template <typename Iter>
@@ -217,7 +217,7 @@ namespace CDPL
 
 template <typename T>
 CDPL::Chem::RDFCodeCalculator<T>::RDFCodeCalculator(): 
-	smoothingFactor(1.0), scalingFactor(100.0), startRadius(0.0), radiusIncrement(0.1), numSteps(99) {}
+	smoothingFactor(1.0), scalingFactor(1.0), startRadius(0.0), radiusIncrement(0.1), numSteps(99) {}
 
 template <typename T>
 void CDPL::Chem::RDFCodeCalculator<T>::setSmoothingFactor(double factor)
@@ -292,12 +292,10 @@ void CDPL::Chem::RDFCodeCalculator<T>::setEntity3DCoordinatesFunction(const Enti
 }
 
 template <typename T>
-template <typename Iter>
-void CDPL::Chem::RDFCodeCalculator<T>::calculate(Iter beg, Iter end, Math::DVector& rdf_code)
+template <typename Iter, typename Vec>
+void CDPL::Chem::RDFCodeCalculator<T>::calculate(Iter beg, Iter end, Vec& rdf_code)
 {
 	init(beg, end);
-
-	rdf_code.resize(numSteps + 1, false);
 
 	double r = startRadius;
 
@@ -312,7 +310,7 @@ void CDPL::Chem::RDFCodeCalculator<T>::calculate(Iter beg, Iter end, Math::DVect
 			}
 		}
 
-		rdf_code(i) = scalingFactor * sum;
+		rdf_code[i] = scalingFactor * sum;
 	}
 }
 

@@ -48,5 +48,7 @@ CDPL::Chem::AtomRDFCodeCalculator::AtomRDFCodeCalculator(const AtomContainer& cn
 
 void CDPL::Chem::AtomRDFCodeCalculator::calculate(const AtomContainer& cntnr, Math::DVector& rdf_code)
 {
+	rdf_code.resize(getNumSteps() + 1, false);
+
 	RDFCodeCalculator::calculate(cntnr.getAtomsBegin(), cntnr.getAtomsEnd(), rdf_code);
 }

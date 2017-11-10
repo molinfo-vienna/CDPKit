@@ -33,6 +33,7 @@
 
 #include "CDPL/Chem/APIPrefix.hpp"
 #include "CDPL/Chem/RDFCodeCalculator.hpp"
+#include "CDPL/Math/Vector.hpp"
 
 
 namespace CDPL 
