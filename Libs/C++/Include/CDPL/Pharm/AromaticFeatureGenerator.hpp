@@ -138,6 +138,8 @@ namespace CDPL
 			 */
 			AromaticFeatureGenerator& operator=(const AromaticFeatureGenerator& gen);
 
+			FeatureGenerator::SharedPointer clone() const;
+
 		  private:
 			void addNonPatternFeatures(const Chem::MolecularGraph&, Pharmacophore&);
 

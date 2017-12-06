@@ -62,6 +62,8 @@ void CDPLPythonChem::exportBoostFunctionWrappers()
 	CDPLPythonBase::BoostFunction1Export<AtomPredicate, Atom&>("AtomPredicate");
 	CDPLPythonBase::BoostFunction1Export<BondPredicate, Bond&>("BondPredicate");
 	CDPLPythonBase::BoostFunction1Export<boost::function1<double, const Math::DVector&> >("DoubleDVectorFunctor"); 
+	CDPLPythonBase::BoostFunction1Export<boost::function1<bool, const MolecularGraph&> >("BoolMolecularGraphFunctor");
+	CDPLPythonBase::BoostFunction1Export<boost::function1<void, MolecularGraph&> >("VoidMolecularGraphFunctor");
 
     CDPLPythonBase::BoostFunction2Export<boost::function2<bool, const Entity3D&, const Entity3D&>, Entity3D&, Entity3D&>("BoolEntity3D2Functor");
     CDPLPythonBase::BoostFunction2Export<boost::function2<double, const Entity3D&, const Entity3D&>, Entity3D&, Entity3D&>("DoubleEntity3D2Functor");

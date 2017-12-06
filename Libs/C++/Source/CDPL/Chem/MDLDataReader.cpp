@@ -564,12 +564,16 @@ void Chem::MDLDataReader::skipCTabV2000(std::istream& is)
 
 void Chem::MDLDataReader::readCTabV2000AtomBlock(std::istream& is, Molecule& mol)
 {
+	mol.reserveMemoryForAtoms(mol.getNumAtoms() + atomCount);
+
 	for (std::size_t i = 0; i < atomCount; i++)
 		readCTabV2000Atom(is, mol);
 }
 
 void Chem::MDLDataReader::readCTabV2000BondBlock(std::istream& is, Molecule& mol, std::size_t atom_index_offs) const
 {
+	mol.reserveMemoryForBonds(mol.getNumBonds() + bondCount);
+
 	for (std::size_t i = 0; i < bondCount; i++)
 		readCTabV2000Bond(is, mol, atom_index_offs);
 }

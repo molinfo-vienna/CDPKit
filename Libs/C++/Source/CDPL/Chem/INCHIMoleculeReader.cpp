@@ -307,6 +307,8 @@ void Chem::INCHIMoleculeReader::buildMolecule(Molecule& mol, const inchi_Atom* i
 	std::size_t atom_idx_offs = mol.getNumAtoms();
 	std::size_t coords_dim = 0;
 
+	mol.reserveMemoryForAtoms(atom_idx_offs + num_inchi_atoms);
+
 	for (std::size_t i = 0; i < num_inchi_atoms; i++) {
 		Atom& atom = mol.addAtom();
 		const inchi_Atom& inchi_atom = inchi_atoms[i];

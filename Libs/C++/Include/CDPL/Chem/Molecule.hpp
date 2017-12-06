@@ -85,7 +85,7 @@ namespace CDPL
 			 *
 			 * Destroys the \c %Molecule instance and frees all allocated resources.
 			 */
-			virtual ~Molecule()  {}
+			virtual ~Molecule() {}
 
 			using AtomContainer::getAtomsBegin;
 			using AtomContainer::getAtomsEnd;
@@ -272,6 +272,24 @@ namespace CDPL
 			 * \return A smart pointer to the copy of the molecule.
 			 */
 			virtual SharedPointer clone() const = 0;
+
+			/**
+			 * \brief Reserves memory for \a num_atoms atoms.
+			 *
+			 * Allows implementors to speed up the creation of molecules with a known large number of atoms.
+			 * 
+			 * \param num_atoms The expected number of atoms for which memory shall be allocated in advance.
+			 */
+			virtual void reserveMemoryForAtoms(std::size_t num_atoms) {}
+
+			/**
+			 * \brief Reserves memory for \a num_bonds bonds.
+			 *
+			 * Allows implementors to speed up the creation of molecules with a known large number of bonds.
+			 * 
+			 * \param num_bonds The expected number of bonds for which memory shall be allocated in advance.
+			 */
+			virtual void reserveMemoryForBonds(std::size_t num_bonds) {}
 
 			/**
 			 * \brief Replaces the current set of atoms, bonds and properties by a copy of the

@@ -69,6 +69,7 @@ namespace CDPLPythonUtil
 				.def("resize", &ArrayType::resize, (python::arg("self"), python::arg("num_elem"), python::arg("value")), 
 					 ElementAdditionPolicy2())
 				.def("reserve", &ArrayType::reserve, (python::arg("self"), python::arg("num_elem")))
+				.def("getCapacity", &ArrayType::getCapacity, python::arg("self"))
 				.def("clear", &ArrayType::clear, python::arg("self"))
 				.def("assign", CDPLPythonBase::copyAssOp(&ArrayType::operator=), (python::arg("self"), python::arg("array")),
 					 python::return_self<ElementAdditionPolicy1>())

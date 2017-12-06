@@ -162,6 +162,11 @@ Pharm::HydrophobicFeatureGenerator& Pharm::HydrophobicFeatureGenerator::operator
 	return *this;
 }
 
+Pharm::FeatureGenerator::SharedPointer Pharm::HydrophobicFeatureGenerator::clone() const
+{
+	return FeatureGenerator::SharedPointer(new HydrophobicFeatureGenerator(*this));
+}
+
 void Pharm::HydrophobicFeatureGenerator::addNonPatternFeatures(const Chem::MolecularGraph& molgraph, Pharmacophore& pharm)
 {
 	init(molgraph);

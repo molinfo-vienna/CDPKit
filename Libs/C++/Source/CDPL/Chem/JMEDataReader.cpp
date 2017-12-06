@@ -339,6 +339,9 @@ void Chem::JMEDataReader::readComponent(std::istream& is, Molecule& mol) const
 	if (!(is >> num_bonds)) 
 		throw Base::IOError("JMEDataReader: error while reading component bond count");
 
+	mol.reserveMemoryForAtoms(atom_idx_offs + num_atoms);
+	mol.reserveMemoryForBonds(mol.getNumBonds() + num_bonds);
+
 	for (std::size_t i = 0; i < num_atoms; i++)
 		readAtom(is, mol);
 

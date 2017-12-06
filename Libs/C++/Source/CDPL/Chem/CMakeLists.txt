@@ -86,6 +86,20 @@ SET(cdpl-chem_LIB_SRCS
     MaxCommonAtomSubstructureSearch.cpp
     MaxCommonBondSubstructureSearch.cpp
     Reactor.cpp
+    TautomerGenerator.cpp
+    DefaultTautomerGenerator.cpp
+    PatternBasedTautomerizationRule.cpp 
+    KetoEnolTautomerization.cpp 
+    ImineEnamineTautomerization.cpp  
+    NitrosoOximeTautomerization.cpp  
+    AmideImidicAcidTautomerization.cpp  
+    LactamLactimTautomerization.cpp  
+    KeteneYnolTautomerization.cpp  
+    NitroAciTautomerization.cpp  
+    PhosphinicAcidTautomerization.cpp  
+    SulfenicAcidTautomerization.cpp  
+    GenericHydrogen13ShiftTautomerization.cpp  
+    GenericHydrogen15ShiftTautomerization.cpp  
 
     CompleteRingSet.cpp
     AromaticRingSet.cpp

@@ -340,11 +340,8 @@ void Chem::BasicMolecule::copy(const BasicMolecule& mol)
 	if (mol.atoms.size() == 0)
 		return;
 
-	atoms.reserve(mol.atoms.size());
-	allocAtoms.reserve(mol.atoms.size());
-
-	bonds.reserve(mol.bonds.size());
-	allocBonds.reserve(mol.bonds.size());
+	reserveMemoryForAtoms(mol.atoms.size());
+	reserveMemoryForBonds(mol.bonds.size());
 	
 	AtomPtrList::const_iterator mol_atoms_end = mol.atoms.end();
 
@@ -389,11 +386,8 @@ void Chem::BasicMolecule::doCopy(const T& mol)
 	if (mol.getNumAtoms() == 0)
 		return;
 
-	atoms.reserve(mol.getNumAtoms());
-	allocAtoms.reserve(mol.getNumAtoms());
-
-	bonds.reserve(mol.getNumBonds());
-	allocBonds.reserve(mol.getNumBonds());
+	reserveMemoryForAtoms(mol.getNumAtoms());
+	reserveMemoryForBonds(mol.getNumBonds());
 
 	typename T::ConstAtomIterator mol_atoms_end = mol.getAtomsEnd();
 
@@ -456,6 +450,18 @@ void Chem::BasicMolecule::append(const Molecule& mol)
 void Chem::BasicMolecule::append(const MolecularGraph& molgraph)
 {   
 	doAppend(molgraph);
+}
+
+void Chem::BasicMolecule::reserveMemoryForAtoms(std::size_t num_atoms)
+{
+	atoms.reserve(num_atoms);
+	allocAtoms.reserve(num_atoms);
+}
+
+void Chem::BasicMolecule::reserveMemoryForBonds(std::size_t num_bonds)
+{
+	bonds.reserve(num_bonds);
+	allocBonds.reserve(num_bonds);
 }
 
 template <typename T>

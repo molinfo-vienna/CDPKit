@@ -119,6 +119,12 @@
 \defgroup CDPL_CHEM_REACTION_TRANSFORMATIONS Reaction Transformations
 \ingroup CDPL_CHEM
 
+\defgroup CDPL_CHEM_TAUTOMER_GENERATION Tautomer Generation
+\ingroup CDPL_CHEM
+
+\defgroup CDPL_CHEM_TAUTOMER_GENERATION_RULES Tautomer Generation Rules
+\ingroup CDPL_CHEM_TAUTOMER_GENERATION
+
 \defgroup CDPL_CHEM_SUBSTRUCTURE_SEARCH Substructure Searching
 \ingroup CDPL_CHEM
 
@@ -370,6 +376,9 @@
 
 \defgroup CDPL_PHARM_RDF_CODES Radial Distribution Function (RDF) Codes
 \ingroup CDPL_PHARM
+
+\defgroup CDPL_PHARM_FINGERPRINTS Fingerprints
+\ingroup CDPL_CHEM
 
 \defgroup CDPL_PHARM_PROPERTIES Property Keys
 \ingroup CDPL_PHARM

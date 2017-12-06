@@ -192,6 +192,8 @@ namespace CDPL
 			 */
 			HydrophobicFeatureGenerator& operator=(const HydrophobicFeatureGenerator& gen);
 
+			FeatureGenerator::SharedPointer clone() const;
+
 		  private:
 			void addNonPatternFeatures(const Chem::MolecularGraph&, Pharmacophore&);
 

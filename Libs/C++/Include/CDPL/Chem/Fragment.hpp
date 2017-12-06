@@ -339,6 +339,10 @@ namespace CDPL
 			 */
 			Fragment& operator+=(const MolecularGraph& molgraph);
 
+			void reserveMemoryForAtoms(std::size_t num_atoms);
+
+			void reserveMemoryForBonds(std::size_t num_bonds);
+
 		private:
 			typedef boost::unordered_map<const Atom*, std::size_t> AtomIndexMap;
 			typedef boost::unordered_map<const Bond*, std::size_t> BondIndexMap;

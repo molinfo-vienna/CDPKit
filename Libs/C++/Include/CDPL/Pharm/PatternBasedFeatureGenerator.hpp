@@ -94,20 +94,20 @@ namespace CDPL
 
 			/**
 			 * \brief Appends a new feature include pattern to the current set of patterns.
-			 * \param substruct The substructure search pattern of the feature.
+			 * \param pattern The substructure search pattern of the feature.
 			 * \param type The value of the type property of the feature.
 			 * \param tol The value of the tolerance property of the feature.
 			 * \param geom The value of the geometry property of the feature.
 			 * \param length The value of the length property of vector features.
 			 */
-			void addIncludePattern(const Chem::MolecularGraph::SharedPointer& substruct, unsigned int type, 
+			void addIncludePattern(const Chem::MolecularGraph::SharedPointer& pattern, unsigned int type, 
 								   double tol, unsigned int geom, double length = 1.0);
 
 			/**
 			 * \brief Appends a new feature include pattern to the current set of patterns.
-			 * \param substruct The substructure search pattern of the feature.
+			 * \param pattern The substructure search pattern of the feature.
 			 */
-			void addExcludePattern(const Chem::MolecularGraph::SharedPointer& substruct);
+			void addExcludePattern(const Chem::MolecularGraph::SharedPointer& pattern);
 		
 			/**
 			 * \brief Clears the current set of include patterns.
@@ -134,6 +134,8 @@ namespace CDPL
 			 * \return A reference to itself.
 			 */
 			PatternBasedFeatureGenerator& operator=(const PatternBasedFeatureGenerator& gen);
+
+			FeatureGenerator::SharedPointer clone() const;
 
 		  protected:
 			typedef std::vector<const Chem::Atom*> AtomList;
@@ -195,7 +197,6 @@ namespace CDPL
 			void createMatchedAtomMask(const Chem::AtomMapping&, Util::BitSet&, bool) const;
 			bool isContainedInList(const Util::BitSet&, const BitSetList&) const;
 
-			void freeBitSet(Util::BitSet*);
 			Util::BitSet* allocBitSet();
 
 			const Chem::MolecularGraph* molGraph;
@@ -207,7 +208,7 @@ namespace CDPL
 			AtomList                    geomRefAtom1List;
 			AtomList                    geomRefAtom2List;
 			AllocBitSetList             allocBitSets;
-			BitSetList                  freeBitSets;
+			std::size_t                 freeBitSetIdx;
 			Math::Matrix<double>        svdU;
 			Math::Matrix3D              svdV;
 			Math::Vector3D              svdW;

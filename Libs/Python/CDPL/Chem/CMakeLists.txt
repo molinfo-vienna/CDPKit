@@ -103,6 +103,21 @@ SET(chem_MOD_SRCS
     AtomHydrophobicityCalculatorExport.cpp
     BuriednessScoreExport.cpp
     BuriednessGridCalculatorExport.cpp
+    TautomerGeneratorExport.cpp
+    DefaultTautomerGeneratorExport.cpp
+    TautomerizationRuleExport.cpp 
+    PatternBasedTautomerizationRuleExport.cpp 
+    KetoEnolTautomerizationExport.cpp 
+    ImineEnamineTautomerizationExport.cpp  
+    NitrosoOximeTautomerizationExport.cpp  
+    AmideImidicAcidTautomerizationExport.cpp  
+    LactamLactimTautomerizationExport.cpp  
+    KeteneYnolTautomerizationExport.cpp  
+    NitroAciTautomerizationExport.cpp  
+    PhosphinicAcidTautomerizationExport.cpp  
+    SulfenicAcidTautomerizationExport.cpp  
+    GenericHydrogen13ShiftTautomerizationExport.cpp  
+    GenericHydrogen15ShiftTautomerizationExport.cpp  
 
     MoleculeIOManagerExport.cpp 
     MolecularGraphIOManagerExport.cpp 
@@ -211,6 +226,7 @@ SET(chem_MOD_SRCS
     SybylBondTypeExport.cpp 
     MOL2MoleculeTypeExport.cpp 
     MOL2ChargeTypeExport.cpp 
+    TautomerizationTypeExport.cpp 
 
     ControlParameterFunctionExport.cpp 
     UtilityFunctionExport.cpp 

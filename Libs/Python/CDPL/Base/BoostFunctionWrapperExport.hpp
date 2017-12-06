@@ -253,9 +253,9 @@ namespace CDPLPythonBase
 
 			void* storage = ((python::converter::rvalue_from_python_storage<FunctionType>*)data)->storage.bytes;
 
-			if (obj_ptr == Py_None)
+			if (obj_ptr == Py_None) 
 				new (storage) FunctionType();
-			else
+			 else
 				new (storage) FunctionType(UnaryFunctionAdapter<typename FunctionType::result_type, 
 										   typename FunctionType::arg1_type, Copy>(python::object(python::handle<>(boost::python::borrowed(obj_ptr)))));
 

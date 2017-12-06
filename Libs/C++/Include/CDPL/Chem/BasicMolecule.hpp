@@ -255,6 +255,10 @@ namespace CDPL
 	
 			void append(const MolecularGraph& molgraph);
 
+			void reserveMemoryForAtoms(std::size_t num_atoms);
+
+			void reserveMemoryForBonds(std::size_t num_bonds);
+
 		private:
 			template <typename T>
 			void doCopy(const T& mol);

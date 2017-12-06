@@ -46,7 +46,7 @@ namespace CDPL
 		class FeatureContainer;
 
 		/**
-		 * \addtogroup CDPL_PHARM_RDF_FINGERPRINTS
+		 * \addtogroup CDPL_PHARM_FINGERPRINTS
 		 * @{
 		 */
 

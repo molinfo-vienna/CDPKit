@@ -47,6 +47,10 @@ namespace
 		void generate(const CDPL::Chem::MolecularGraph& molgraph, CDPL::Pharm::Pharmacophore& pharm) {	
 			this->get_override("generate")(boost::ref(molgraph), boost::ref(pharm));
 		}      
+
+		CDPL::Pharm::FeatureGenerator::SharedPointer clone() const {	
+			return this->get_override("clone")();
+		}      
 	};
 }
 
@@ -64,7 +68,9 @@ void CDPLPythonPharm::exportFeatureGenerator()
 		.def("getAtom3DCoordinatesFunction", &Pharm::FeatureGenerator::getAtom3DCoordinatesFunction, 
 			 python::arg("self"), python::return_internal_reference<>())
 		.def("generate", python::pure_virtual(&Pharm::FeatureGenerator::generate),
-			 (python::arg("self"), python::arg("molgraph"), python::arg("pharm")));
+			 (python::arg("self"), python::arg("molgraph"), python::arg("pharm")))
+		.def("clone", python::pure_virtual(&Pharm::FeatureGenerator::clone),
+			 python::arg("self"));
 
 	python::register_ptr_to_python<Pharm::FeatureGenerator::SharedPointer>();
 }

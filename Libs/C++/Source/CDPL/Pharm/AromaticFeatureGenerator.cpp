@@ -110,6 +110,11 @@ Pharm::AromaticFeatureGenerator& Pharm::AromaticFeatureGenerator::operator=(cons
 	return *this;
 }
 
+Pharm::FeatureGenerator::SharedPointer Pharm::AromaticFeatureGenerator::clone() const
+{
+	return FeatureGenerator::SharedPointer(new AromaticFeatureGenerator(*this));
+}
+
 void Pharm::AromaticFeatureGenerator::addNonPatternFeatures(const Chem::MolecularGraph& molgraph, Pharmacophore& pharm)
 {
 	using namespace Chem;

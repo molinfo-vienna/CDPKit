@@ -131,6 +131,21 @@ namespace CDPLPythonChem
 	void exportAtomHydrophobicityCalculator();
 	void exportBuriednessScore();
 	void exportBuriednessGridCalculator();
+	void exportTautomerGenerator();
+	void exportDefaultTautomerGenerator();
+	void exportTautomerizationRule();
+	void exportPatternBasedTautomerizationRule();
+	void exportKetoEnolTautomerization();
+    void exportImineEnamineTautomerization();  
+    void exportNitrosoOximeTautomerization();  
+    void exportAmideImidicAcidTautomerization();  
+    void exportLactamLactimTautomerization();  
+    void exportKeteneYnolTautomerization();  
+    void exportNitroAciTautomerization();  
+    void exportPhosphinicAcidTautomerization();  
+    void exportSulfenicAcidTautomerization();  
+    void exportGenericHydrogen13ShiftTautomerization();  
+    void exportGenericHydrogen15ShiftTautomerization();  
 
 	void exportMoleculeReader();
 	void exportMoleculeWriter();

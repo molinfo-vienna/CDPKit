@@ -32,6 +32,27 @@
 using namespace CDPL; 
 
 
+Pharm::PharmacophoreGenerator::PharmacophoreGenerator(const PharmacophoreGenerator& gen): 
+	featureGeneratorMap(gen.featureGeneratorMap), enabledFeatures(gen.enabledFeatures)
+{
+	for (FeatureGeneratorMap::iterator it = featureGeneratorMap.begin(), end = featureGeneratorMap.end(); it != end; ++it)
+		it->second = it->second->clone();
+}
+
+Pharm::PharmacophoreGenerator& Pharm::PharmacophoreGenerator::operator=(const PharmacophoreGenerator& gen)
+{
+	if (this == &gen)
+		return *this;
+
+	featureGeneratorMap = gen.featureGeneratorMap;
+	enabledFeatures = gen.enabledFeatures;
+
+	for (FeatureGeneratorMap::iterator it = featureGeneratorMap.begin(), end = featureGeneratorMap.end(); it != end; ++it)
+		it->second = it->second->clone();
+
+	return *this;
+}
+
 void Pharm::PharmacophoreGenerator::enableFeature(unsigned int type, bool enable)
 {
 	if (enable)
@@ -81,4 +102,9 @@ void Pharm::PharmacophoreGenerator::setAtom3DCoordinatesFunction(const Chem::Ato
 
 	for (FeatureGeneratorMap::const_iterator it = featureGeneratorMap.begin(), end = featureGeneratorMap.end(); it != end; ++it)
 		it->second->setAtom3DCoordinatesFunction(func);
+}
+
+Pharm::FeatureGenerator::SharedPointer Pharm::PharmacophoreGenerator::clone() const
+{
+	return FeatureGenerator::SharedPointer(new PharmacophoreGenerator(*this));
 }

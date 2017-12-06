@@ -95,6 +95,8 @@ namespace CDPL
 			 */
 			virtual void generate(const Chem::MolecularGraph& molgraph, Pharmacophore& pharm) = 0;
 
+			virtual SharedPointer clone() const = 0;
+
 		  protected:
 			/**
 			 * \brief Constructs a copy of the \c %FeatureGenerator instance \a gen.

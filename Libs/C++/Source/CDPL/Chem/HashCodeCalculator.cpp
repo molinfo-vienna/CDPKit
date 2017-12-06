@@ -263,10 +263,6 @@ Base::uint64 Chem::HashCodeCalculator::calculate(const MolecularGraph& molgraph)
 
 	calcAtomHashCodes();
 	calcBondHashCodes();
-
-	clearSHAInput();
-	createSHAInput();
-	sortSHAInput();
 	calcSHAHashCode();
 
 	return getResult();
@@ -687,13 +683,10 @@ void Chem::HashCodeCalculator::perceiveGlobalStereoReferenceBond(const Bond& bon
 	globalStereoReferenceBonds.push_back(molGraph->getBondIndex(*ref_bond));
 }
 
-void Chem::HashCodeCalculator::clearSHAInput()
+void Chem::HashCodeCalculator::calcSHAHashCode()
 {
 	shaInput.clear();
-}
 
-void Chem::HashCodeCalculator::createSHAInput()
-{
 	MolecularGraph::ConstAtomIterator atoms_end = molGraph->getAtomsEnd();
 
 	for (MolecularGraph::ConstAtomIterator it = molGraph->getAtomsBegin(); it != atoms_end; ++it) {
@@ -714,15 +707,9 @@ void Chem::HashCodeCalculator::createSHAInput()
 
 		shaInput.push_back(bondHashCodes[bond_idx]);
 	}
-}
 
-void Chem::HashCodeCalculator::sortSHAInput()
-{
 	std::sort(shaInput.begin(), shaInput.end());
-}
 
-void Chem::HashCodeCalculator::calcSHAHashCode()
-{
 	Internal::SHA1 sha;
 
 	sha.input(shaInput.begin(), shaInput.end());

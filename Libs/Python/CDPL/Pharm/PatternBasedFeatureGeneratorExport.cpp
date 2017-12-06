@@ -46,10 +46,10 @@ void CDPLPythonPharm::exportPatternBasedFeatureGenerator()
 	.def(python::init<const Pharm::PatternBasedFeatureGenerator&>(
 		 (python::arg("self"), python::arg("gen"))))
 	.def("addIncludePattern", &Pharm::PatternBasedFeatureGenerator::addIncludePattern, 
-	     (python::arg("self"), python::arg("substruct"), python::arg("type"), python::arg("tol"),
+	     (python::arg("self"), python::arg("pattern"), python::arg("type"), python::arg("tol"),
 	      python::arg("geom"), python::arg("length") = 1.0))
 	.def("addExcludePattern", &Pharm::PatternBasedFeatureGenerator::addExcludePattern, 
-	     (python::arg("self"), python::arg("substruct")))
+	     (python::arg("self"), python::arg("pattern")))
 	.def("clearIncludePatterns", &Pharm::PatternBasedFeatureGenerator::clearIncludePatterns, 
 	     python::arg("self"))
 	.def("clearExcludePatterns", &Pharm::PatternBasedFeatureGenerator::clearExcludePatterns, 

@@ -99,6 +99,8 @@ void CDPLPythonChem::exportFragment()
 			 python::with_custodian_and_ward_postcall<0, 1>())
 		.def("getBonds", &createMutableBondSequence<Chem::Fragment>, python::arg("self"),
 			 python::with_custodian_and_ward_postcall<0, 1>())
+		.def("reserveMemoryForAtoms", &Chem::Fragment::reserveMemoryForAtoms, (python::arg("self"), python::arg("num_atoms")))
+		.def("reserveMemoryForBonds", &Chem::Fragment::reserveMemoryForBonds, (python::arg("self"), python::arg("num_bonds")))
 		.def(AtomContainerSpecialFunctionsVisitor(true))
 		.def(BondContainerSpecialFunctionsVisitor(true))
 		.def(CDPLPythonBase::PropertyContainerSpecialFunctionsVisitor())

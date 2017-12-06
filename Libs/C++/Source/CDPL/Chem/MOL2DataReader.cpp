@@ -322,6 +322,8 @@ void Chem::MOL2DataReader::readAtomSection(std::istream& is, Molecule& mol)
 	if (!skipInputToRTI(is, MOL2::ATOM_RTI, true))
 		throw Base::IOError("MOL2DataReader: error while looking for molecule atom section: unexpected end of input");
 
+	mol.reserveMemoryForAtoms(mol.getNumAtoms() + molAtomCount);
+
 	atomIDsToIndex.clear();
 	substructIDsToAtoms.clear();
 
@@ -450,6 +452,8 @@ void Chem::MOL2DataReader::readBondSection(std::istream& is, Molecule& mol)
 
 	if (!skipInputToRTI(is, MOL2::BOND_RTI, true))
 		throw Base::IOError("MOL2DataReader: error while looking for molecule bond section: unexpected end of input");
+
+	mol.reserveMemoryForBonds(mol.getNumBonds() + molBondCount);
 
 	bool kekulize = false;
 	std::string tmp_string;

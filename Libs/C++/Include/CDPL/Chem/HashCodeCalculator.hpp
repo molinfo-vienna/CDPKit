@@ -266,6 +266,7 @@ namespace CDPL
 
 			void calcAtomHashCodes();
 			void calcBondHashCodes();
+			void calcSHAHashCode();
 	
 			void perceiveGlobalStereoFeatures();
 
@@ -274,11 +275,6 @@ namespace CDPL
 
 			void perceiveGlobalStereoReferenceBonds();
 			void perceiveGlobalStereoReferenceBond(const Bond&);
-
-			void clearSHAInput();
-			void createSHAInput();
-			void sortSHAInput();
-			void calcSHAHashCode();
 
 			typedef std::vector<Base::uint64> UInt64Array;
  			typedef std::vector<std::size_t> IndexList;

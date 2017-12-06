@@ -89,6 +89,28 @@ namespace
 			this->get_override("append")(boost::ref(molgraph));
 		}
 
+		void reserveMemoryForAtoms(std::size_t num_atoms) {
+			if (boost::python::override f = this->get_override("reserveMemoryForAtoms"))
+				f(num_atoms);    
+			else
+				Molecule::reserveMemoryForAtoms(num_atoms);
+		}
+
+		void reserveMemoryForAtomsDef(std::size_t num_atoms) {
+			Molecule::reserveMemoryForAtoms(num_atoms);
+		}
+
+ 		void reserveMemoryForBonds(std::size_t num_bonds) {
+			if (boost::python::override f = this->get_override("reserveMemoryForBonds"))
+				f(num_bonds);    
+			else
+				Molecule::reserveMemoryForBonds(num_bonds);
+		}
+
+		void reserveMemoryForBondsDef(std::size_t num_bonds) {
+			Molecule::reserveMemoryForBonds(num_bonds);
+		}
+
 		Molecule::SharedPointer clone() const {
 			return this->get_override("clone")();
 		}
@@ -120,6 +142,10 @@ void CDPLPythonChem::exportMolecule()
 		python::bases<Chem::MolecularGraph>,
 		boost::noncopyable>("Molecule", python::no_init)
 		.def(python::init<>(python::arg("self")))
+		.def("reserveMemoryForAtoms", &Chem::Molecule::reserveMemoryForAtoms, &MoleculeWrapper::reserveMemoryForAtomsDef,
+			 (python::arg("self"), python::arg("num_atoms")))
+		.def("reserveMemoryForBonds", &Chem::Molecule::reserveMemoryForBonds, &MoleculeWrapper::reserveMemoryForBondsDef,
+			 (python::arg("self"), python::arg("num_bonds")))
 		.def("clear",  python::pure_virtual(&Chem::Molecule::clear), python::arg("self"))
 		.def("addAtom",  python::pure_virtual(&Chem::Molecule::addAtom), python::arg("self"),
 			 python::return_internal_reference<1>())

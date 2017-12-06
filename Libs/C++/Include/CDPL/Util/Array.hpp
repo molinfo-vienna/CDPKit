@@ -173,7 +173,7 @@ namespace CDPL
 			const BaseType& getBase() const;
 
 			/**
-			 * \brief Returns the number of elements stored in the array
+			 * \brief Returns the number of elements stored in the array.
 			 * \return The size of the array.
 			 */
 			std::size_t getSize() const;

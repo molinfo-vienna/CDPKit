@@ -134,6 +134,21 @@ BOOST_PYTHON_MODULE(_chem)
 	exportAtomHydrophobicityCalculator();
 	exportBuriednessScore();
 	exportBuriednessGridCalculator();
+	exportTautomerGenerator();
+	exportDefaultTautomerGenerator();
+	exportTautomerizationRule();
+	exportPatternBasedTautomerizationRule();
+	exportKetoEnolTautomerization();
+	exportImineEnamineTautomerization();  
+    exportNitrosoOximeTautomerization();  
+    exportAmideImidicAcidTautomerization();  
+    exportLactamLactimTautomerization();  
+    exportKeteneYnolTautomerization();  
+    exportNitroAciTautomerization();  
+    exportPhosphinicAcidTautomerization();  
+    exportSulfenicAcidTautomerization();  
+    exportGenericHydrogen13ShiftTautomerization();  
+    exportGenericHydrogen15ShiftTautomerization();  
 
 	exportMoleculeReader();
 	exportMoleculeWriter();
@@ -246,6 +261,7 @@ BOOST_PYTHON_MODULE(_chem)
 	exportSybylBondTypes();
 	exportMOL2MoleculeTypes();
 	exportMOL2ChargeTypes();
+	exportTautomerizationTypes();
 
 	exportControlParameterFunctions();
 	exportUtilityFunctions();

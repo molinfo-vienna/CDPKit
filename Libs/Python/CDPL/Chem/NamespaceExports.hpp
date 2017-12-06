@@ -53,6 +53,7 @@ namespace CDPLPythonChem
 	void exportSybylBondTypes();
 	void exportMOL2MoleculeTypes();
 	void exportMOL2ChargeTypes();
+	void exportTautomerizationTypes();
 
 	void exportEntity3DProperties();
 	void exportAtomProperties();

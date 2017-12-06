@@ -30,8 +30,6 @@
 #include "CDPL/Chem/MolecularGraph.hpp"
 #include "CDPL/Pharm/Pharmacophore.hpp"
 
-#include "Base/CopyAssOp.hpp"
-
 #include "ClassExports.hpp"
 
 
@@ -45,7 +43,5 @@ void CDPLPythonPharm::exportDefaultPharmacophoreGenerator()
 		.def(python::init<bool>((python::arg("self"), python::arg("fuzzy"))))
 		.def(python::init<const Chem::MolecularGraph&, Pharm::Pharmacophore&, bool>(
 				 (python::arg("self"), python::arg("molgraph"), python::arg("pharm"), python::arg("fuzzy"))))
-		.def(python::init<const Pharm::DefaultPharmacophoreGenerator&>((python::arg("self"), python::arg("gen"))))
-		.def("assign", CDPLPythonBase::copyAssOp(&Pharm::DefaultPharmacophoreGenerator::operator=), 
-			 (python::arg("self"), python::arg("gen")), python::return_self<>());
+		.def(python::init<const Pharm::DefaultPharmacophoreGenerator&>((python::arg("self"), python::arg("gen"))));
 }

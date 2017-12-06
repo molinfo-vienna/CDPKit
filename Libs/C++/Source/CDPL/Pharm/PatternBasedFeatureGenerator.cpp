@@ -120,10 +120,12 @@ void Pharm::PatternBasedFeatureGenerator::generate(const Chem:: MolecularGraph& 
 		}
 	}
 
-	if (atom_mask)
-		freeBitSet(atom_mask);
-
 	addNonPatternFeatures(molgraph, pharm);
+}
+
+Pharm::FeatureGenerator::SharedPointer Pharm::PatternBasedFeatureGenerator::clone() const
+{
+	return FeatureGenerator::SharedPointer(new PatternBasedFeatureGenerator(*this));
 }
 
 Pharm::PatternBasedFeatureGenerator& Pharm::PatternBasedFeatureGenerator::operator=(const PatternBasedFeatureGenerator& gen)
@@ -356,35 +358,22 @@ void Pharm::PatternBasedFeatureGenerator::createMatchedAtomMask(const Chem::Atom
 void Pharm::PatternBasedFeatureGenerator::init(const Chem::MolecularGraph& molgraph)
 {
     molGraph = &molgraph;
-
-	std::for_each(includeMatches.begin(), includeMatches.end(), 
-				  boost::bind(&PatternBasedFeatureGenerator::freeBitSet, this, _1));
-
-	std::for_each(excludeMatches.begin(), excludeMatches.end(), 
-				  boost::bind(&PatternBasedFeatureGenerator::freeBitSet, this, _1));
+	freeBitSetIdx = 0;
 
 	includeMatches.clear();
 	excludeMatches.clear();
 }
 
-void Pharm::PatternBasedFeatureGenerator::freeBitSet(Util::BitSet* bset)
-{
-	freeBitSets.push_back(bset);
-}
-
 Util::BitSet* Pharm::PatternBasedFeatureGenerator::allocBitSet()
 {
-	if (freeBitSets.empty()) {
+	if (freeBitSetIdx == allocBitSets.size()) {
 		BitSetPtr bset_ptr(new Util::BitSet());
-	
 		allocBitSets.push_back(bset_ptr);
+		
+		freeBitSetIdx++;
 
 		return bset_ptr.get();
 	}
 
-	Util::BitSet* bset = freeBitSets.back();
-
-	freeBitSets.pop_back();
-
-	return bset;	
+	return allocBitSets[freeBitSetIdx++].get();
 }

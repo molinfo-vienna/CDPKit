@@ -322,6 +322,16 @@ bool Chem::Fragment::removeBond(const Bond& bond)
 	return true;
 }
 
+void Chem::Fragment::reserveMemoryForAtoms(std::size_t num_atoms)
+{
+	atoms.reserve(num_atoms);
+}
+
+void Chem::Fragment::reserveMemoryForBonds(std::size_t num_bonds)
+{
+	bonds.reserve(num_bonds);
+}
+
 void Chem::Fragment::clear()
 {
 	clearProperties();
@@ -353,6 +363,9 @@ Chem::Fragment& Chem::Fragment::operator=(const MolecularGraph& molgraph)
 	bonds.clear();
 	atomIndices.clear();
 	bondIndices.clear();
+
+	atoms.reserve(molgraph.getNumAtoms());
+	bonds.reserve(molgraph.getNumBonds());
 
 	std::for_each(molgraph.getAtomsBegin(), molgraph.getAtomsEnd(), 
 				  boost::bind(&Fragment::addAtom, this, _1));

@@ -239,6 +239,8 @@ std::size_t Chem::CDFDataReader::readAtoms(Molecule& mol, Internal::ByteBuffer& 
 
 	bbuf.getInt(num_atoms);
 
+	mol.reserveMemoryForAtoms(num_atoms);
+
 	for (std::size_t i = 0; i < num_atoms; i++) {
 		Atom& atom = mol.addAtom();
 
@@ -377,6 +379,8 @@ void Chem::CDFDataReader::readBonds(Molecule& mol, Internal::ByteBuffer& bbuf, s
 	CDF::SizeType num_bonds;
 
 	bbuf.getInt(num_bonds);
+
+	mol.reserveMemoryForBonds(num_bonds);
 
 	for (std::size_t i = 0; i < num_bonds; i++) {
 		bbuf.getInt(idx_lengths);

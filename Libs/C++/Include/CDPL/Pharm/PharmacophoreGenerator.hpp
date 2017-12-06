@@ -72,10 +72,9 @@ namespace CDPL
 			 */
 			PharmacophoreGenerator() {}
 
-			/**
-			 * \brief Virtual destructor.
-			 */
-			virtual ~PharmacophoreGenerator() {}
+			PharmacophoreGenerator(const PharmacophoreGenerator& gen);
+
+			PharmacophoreGenerator& operator=(const PharmacophoreGenerator& gen);
 
 			/**
 			 * \brief Enables or disables the generation of features of the specified type.
@@ -133,6 +132,8 @@ namespace CDPL
 			 * \param func The atom 3D-coordinates function.
 			 */
 			void setAtom3DCoordinatesFunction(const Chem::Atom3DCoordinatesFunction& func);
+
+			FeatureGenerator::SharedPointer clone() const;
 
 		  private:
 			typedef std::set<unsigned int> EnabledFeatureSet;
