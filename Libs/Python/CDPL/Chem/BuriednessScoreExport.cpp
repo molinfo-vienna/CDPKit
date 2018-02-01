@@ -53,8 +53,9 @@ void CDPLPythonChem::exportBuriednessScore()
 
     python::class_<Chem::BuriednessScore, boost::noncopyable>("BuriednessScore", python::no_init)
 		.def(python::init<const Chem::BuriednessScore&>((python::arg("self"), python::arg("score"))))
-		.def(python::init<double, double>((python::arg("self"), python::arg("probe_radius") = Chem::BuriednessScore::DEF_PROBE_RADIUS,
-										   python::arg("num_test_rays") = Chem::BuriednessScore::DEF_NUM_TEST_RAYS)))
+		.def(python::init<double, double, double>((python::arg("self"), python::arg("probe_radius") = Chem::BuriednessScore::DEF_PROBE_RADIUS,
+												   python::arg("min_vdw_surf_dist") = Chem::BuriednessScore::DEF_MIN_VDW_SURFACE_DISTANCE,
+												   python::arg("num_test_rays") = Chem::BuriednessScore::DEF_NUM_TEST_RAYS)))
 		.def(CDPLPythonBase::ObjectIdentityCheckVisitor<Chem::BuriednessScore>())
 		.def("setMinVdWSurfaceDistance", &Chem::BuriednessScore::setMinVdWSurfaceDistance, (python::arg("self"), python::arg("dist")))
 		.def("getMinVdWSurfaceDistance", &Chem::BuriednessScore::getMinVdWSurfaceDistance, python::arg("self"))

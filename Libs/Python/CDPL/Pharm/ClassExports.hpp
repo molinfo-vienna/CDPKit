@@ -100,6 +100,7 @@ namespace CDPLPythonPharm
 	void exportPatternBasedFeatureGenerator();
 	void exportAromaticFeatureGenerator();
 	void exportHydrophobicFeatureGenerator();
+	void exportHydrophobicAtomFeatureGenerator();
 	void exportHBondAcceptorFeatureGenerator();
 	void exportHBondDonorFeatureGenerator();
 	void exportPosIonizableFeatureGenerator();

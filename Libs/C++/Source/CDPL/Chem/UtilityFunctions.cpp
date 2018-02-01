@@ -92,3 +92,41 @@ bool Chem::parseSMILES(const std::string& smiles, Molecule& mol)
 	return false;
 }
 
+void Chem::extendBoundingBox(Math::Vector3D& min, Math::Vector3D& max, const Math::Vector3D& coords, bool reset)
+{
+	if (reset) {
+		max(0) = coords(0);
+		max(1) = coords(1);
+		max(2) = coords(2);
+
+		min(0) = coords(0);
+		min(1) = coords(1);
+		min(2) = coords(2);
+		return;
+	}
+
+	if (coords(0) > max(0))
+		max(0) = coords(0);
+
+	else if (coords(0) < min(0))
+		min(0) = coords(0);
+
+	if (coords(1) > max(1))
+		max(1) = coords(1);
+
+	else if (coords(1) < min(1))
+		min(1) = coords(1);
+
+	if (coords(2) > max(2))
+		max(2) = coords(2);
+			
+	else if (coords(2) < min(2))
+		min(2) = coords(2);
+}	
+
+bool Chem::insideBoundingBox(const Math::Vector3D& min, const Math::Vector3D& max, const Math::Vector3D& coords)
+{
+	return (coords(0) <= max(0) && coords(0) >= min(0) &&
+			coords(1) <= max(1) && coords(1) >= min(1) &&
+			coords(2) <= max(2) && coords(2) >= min(2));
+}

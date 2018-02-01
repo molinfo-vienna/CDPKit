@@ -48,6 +48,9 @@ void CDPLPythonPharm::exportFeaturePropertyDefaults()
 		.def_readonly("LENGTH", &Pharm::FeaturePropertyDefault::LENGTH)
 		.def_readonly("DISABLED_FLAG", &Pharm::FeaturePropertyDefault::DISABLED_FLAG)
 		.def_readonly("TOLERANCE", &Pharm::FeaturePropertyDefault::TOLERANCE)
+		.def_readonly("WEIGHT", &Pharm::FeaturePropertyDefault::WEIGHT)
 		.def_readonly("TYPE", &Pharm::FeaturePropertyDefault::TYPE)
-		.def_readonly("GEOMETRY", &Pharm::FeaturePropertyDefault::GEOMETRY);
+		.def_readonly("GEOMETRY", &Pharm::FeaturePropertyDefault::GEOMETRY)
+		.def_readonly("HYDROPHOBICITY", &Pharm::FeaturePropertyDefault::HYDROPHOBICITY)
+		;
 }

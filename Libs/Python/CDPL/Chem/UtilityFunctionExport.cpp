@@ -45,4 +45,6 @@ void CDPLPythonChem::exportUtilityFunctions()
 				python::arg("smiles"));
 	python::def("parseSMILES", static_cast<bool (*)(const std::string&, Chem::Molecule&)>(&Chem::parseSMILES), 
 				(python::arg("smiles"), python::arg("mol")));
+	python::def("extendBoundingBox", &Chem::extendBoundingBox, (python::arg("min"), python::arg("max"), python::arg("coords"), python::arg("reset") = false));
+	python::def("insideBoundingBox", &Chem::insideBoundingBox, (python::arg("min"), python::arg("max"), python::arg("coords")));
 }

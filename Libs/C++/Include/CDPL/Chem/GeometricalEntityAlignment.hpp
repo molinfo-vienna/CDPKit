@@ -221,7 +221,7 @@ namespace CDPL
 			 */
 			ConstEntityIterator getEntitiesEnd(bool first_set) const;
 
-			/*
+			/**
 			 * \brief Resets the internal state and prepares for a new search for entity alignments.
 			 * \note If addEntity() or clearEntity() was called before calling nextAlignment(), init() gets invoked automatically.
 			 */

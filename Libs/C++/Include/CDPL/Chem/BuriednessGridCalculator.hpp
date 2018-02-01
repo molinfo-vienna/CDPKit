@@ -31,64 +31,88 @@
 #ifndef CDPL_CHEM_BURIEDNESSGRIDCALCULATOR_HPP
 #define CDPL_CHEM_BURIEDNESSGRIDCALCULATOR_HPP
 
+#include <vector>
+#include <cstddef>
+
 #include <boost/shared_ptr.hpp>
 
 #include "CDPL/Chem/APIPrefix.hpp"
 #include "CDPL/Chem/BuriednessScore.hpp"
+#include "CDPL/Chem/Fragment.hpp"
 #include "CDPL/Grid/SpatialGrid.hpp"
+#include "CDPL/Math/Vector.hpp"
+#include "CDPL/Math/VectorArray.hpp"
 
 
 namespace CDPL 
 {
 
-    namespace Chem
-    {
-
-	/**
-	 * \addtogroup CDPL_CHEM_GRID_CALCULATION
-	 * @{
-	 */
-
-	/**
-	 * \brief BuriednessGridCalculator.
-	 */
-	class CDPL_CHEM_API BuriednessGridCalculator
+ 	namespace Internal 
 	{
 
-	  public:
-	    typedef boost::shared_ptr<BuriednessGridCalculator> SharedPointer;
+		template <typename PT, typename CT, typename ST> class Octree;
+	}
 
-	    BuriednessGridCalculator();
+	namespace Chem
+    {
 
-	    void setProbeRadius(double radius);
+		/**
+		 * \addtogroup CDPL_CHEM_GRID_CALCULATION
+		 * @{
+		 */
 
-	    double getProbeRadius() const;
+		/**
+		 * \brief BuriednessGridCalculator.
+		 */
+		class CDPL_CHEM_API BuriednessGridCalculator
+		{
 
-		void setMinVdWSurfaceDistance(double dist);
+		  public:
+			typedef boost::shared_ptr<BuriednessGridCalculator> SharedPointer;
 
-		double getMinVdWSurfaceDistance() const;
+			BuriednessGridCalculator();
 
-	    void setNumTestRays(std::size_t num_rays);
+			BuriednessGridCalculator(const BuriednessGridCalculator& calc);
 
-	    std::size_t getNumTestRays() const;
+			void setProbeRadius(double radius);
 
-	    /**
-	     * \brief Specifies a function for the retrieval of atom 3D-coordinates for grid calculation.
-	     * \param func The atom 3D-coordinates function.
-	     */
-	    void setAtom3DCoordinatesFunction(const Atom3DCoordinatesFunction& func);
+			double getProbeRadius() const;
 
-	    const Atom3DCoordinatesFunction& getAtom3DCoordinatesFunction() const;
+			void setMinVdWSurfaceDistance(double dist);
 
-	    void calculate(const AtomContainer& atoms, Grid::DSpatialGrid& grid);
+			double getMinVdWSurfaceDistance() const;
 
-	  private:
-	    BuriednessScore buriednessScore; 
-	};
+			void setNumTestRays(std::size_t num_rays);
 
-	/**
-	 * @}
-	 */
+			std::size_t getNumTestRays() const;
+
+			/**
+			 * \brief Specifies a function for the retrieval of atom 3D-coordinates for grid calculation.
+			 * \param func The atom 3D-coordinates function.
+			 */
+			void setAtom3DCoordinatesFunction(const Atom3DCoordinatesFunction& func);
+
+			const Atom3DCoordinatesFunction& getAtom3DCoordinatesFunction() const;
+
+			void calculate(const AtomContainer& atoms, Grid::DSpatialGrid& grid);
+
+			BuriednessGridCalculator& operator=(const BuriednessGridCalculator& calc);
+
+		  private:
+			typedef Internal::Octree<Math::Vector3D, Math::Vector3DArray, double> Octree;
+			typedef boost::shared_ptr<Octree> OctreePtr;
+			typedef std::vector<std::size_t> AtomIndexList;
+
+			BuriednessScore      buriednessScore; 
+			OctreePtr            octree;
+			Math::Vector3DArray  atomCoords;
+			AtomIndexList        atomIndices;
+			Fragment             atomSubset;
+		};
+
+		/**
+		 * @}
+		 */
     }
 }
 

@@ -158,6 +158,11 @@ void Pharm::CDFPharmacophoreDataReader::readFeatures(Pharmacophore& pharm, Inter
 					getFloatProperty(prop_spec, double_val, bbuf);
 					setTolerance(feature, double_val);
 					continue;
+	
+				case CDF::FeatureProperty::WEIGHT:
+					getFloatProperty(prop_spec, double_val, bbuf);
+					setWeight(feature, double_val);
+					continue;
 
 				case CDF::FeatureProperty::DISABLED_FLAG:
 					getIntProperty(prop_spec, bool_val, bbuf);
@@ -167,6 +172,11 @@ void Pharm::CDFPharmacophoreDataReader::readFeatures(Pharmacophore& pharm, Inter
 				case CDF::FeatureProperty::OPTIONAL_FLAG:
 					getIntProperty(prop_spec, bool_val, bbuf);
 					setOptionalFlag(feature, bool_val);
+					continue;
+
+				case CDF::FeatureProperty::HYDROPHOBICITY:
+					getFloatProperty(prop_spec, double_val, bbuf);
+					setHydrophobicity(feature, double_val);
 					continue;
 
 				default:

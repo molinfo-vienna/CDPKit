@@ -104,7 +104,7 @@ double Pharm::ParallelPiPiInteractionScore::operator()(const Feature& ftr1, cons
 		double h_dist = std::max(calcHPlaneDistance(orient1, ftr1_ftr2_vec), calcHPlaneDistance(orient2, ftr1_ftr2_vec));
 		double h_dist_score = normFunc(h_dist / maxHDist * 0.5);
 
-		return (ang_score * h_dist_score * v_dist_score);
+		return (ang_score * h_dist_score * v_dist_score * getWeight(ftr2));
 	}
  
 	if (has_orient1) {
@@ -118,7 +118,7 @@ double Pharm::ParallelPiPiInteractionScore::operator()(const Feature& ftr1, cons
 		double h_dist = calcHPlaneDistance(orient1, ftr1_ftr2_vec);
 		double h_dist_score = normFunc(h_dist / maxHDist * 0.5);
 
-		return (h_dist_score * v_dist_score);
+		return (h_dist_score * v_dist_score) * getWeight(ftr2);
 	}
 
 	const Math::Vector3D& orient2 = getOrientation(ftr2);
@@ -131,7 +131,7 @@ double Pharm::ParallelPiPiInteractionScore::operator()(const Feature& ftr1, cons
 	double h_dist = calcHPlaneDistance(orient2, ftr1_ftr2_vec);
 	double h_dist_score = normFunc(h_dist / maxHDist * 0.5);
 
-	return (h_dist_score * v_dist_score);
+	return (h_dist_score * v_dist_score * getWeight(ftr2));
 }
 
 double Pharm::ParallelPiPiInteractionScore::operator()(const Math::Vector3D& ftr1_pos, const Feature& ftr2) const
@@ -149,5 +149,5 @@ double Pharm::ParallelPiPiInteractionScore::operator()(const Math::Vector3D& ftr
 	double h_dist = calcHPlaneDistance(orient2, ftr1_ftr2_vec);
 	double h_dist_score = normFunc(h_dist / maxHDist * 0.5);
 
-	return (h_dist_score * v_dist_score);
+	return (h_dist_score * v_dist_score * getWeight(ftr2));
 }

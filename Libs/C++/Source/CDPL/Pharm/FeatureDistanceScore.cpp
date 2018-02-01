@@ -30,6 +30,7 @@
 
 #include "CDPL/Pharm/FeatureDistanceScore.hpp"
 #include "CDPL/Pharm/Feature.hpp"
+#include "CDPL/Pharm/FeatureFunctions.hpp"
 #include "CDPL/Math/SpecialFunctions.hpp"
 #include "CDPL/Chem/Entity3DFunctions.hpp"
 
@@ -65,5 +66,5 @@ double Pharm::FeatureDistanceScore::operator()(const Math::Vector3D& ftr1_pos, c
     double dist = length(get3DCoordinates(ftr2) - ftr1_pos);
     double ctr_dev = (dist - (maxDist + minDist) * 0.5) / (maxDist - minDist);
 
-	return normFunc(ctr_dev);
+	return normFunc(ctr_dev) * getWeight(ftr2);
 }

@@ -101,6 +101,7 @@ BOOST_PYTHON_MODULE(_pharm)
 	exportPatternBasedFeatureGenerator();
 	exportAromaticFeatureGenerator();
 	exportHydrophobicFeatureGenerator();
+	exportHydrophobicAtomFeatureGenerator();
 	exportHBondAcceptorFeatureGenerator();
 	exportHBondDonorFeatureGenerator();
 	exportPosIonizableFeatureGenerator();

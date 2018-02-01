@@ -35,37 +35,37 @@
 using namespace CDPL; 
 
 
-#define MAKE_FEATURE_PROPERTY_FUNCTIONS_COMMON(PROP_NAME, TYPE, FUNC_SUFFIX)   \
-void Pharm::set##FUNC_SUFFIX(Pharm::Feature& feature, TYPE arg)	               \
-{									       \
-    feature.setProperty(FeatureProperty::PROP_NAME, arg);		       \
-}									       \
-									       \
-bool Pharm::has##FUNC_SUFFIX(const Pharm::Feature& feature)		       \
-{									       \
-    return feature.isPropertySet(FeatureProperty::PROP_NAME);		       \
-}									       \
-									       \
-void Pharm::clear##FUNC_SUFFIX(Pharm::Feature& feature)			       \
-{									       \
-    feature.removeProperty(FeatureProperty::PROP_NAME);			       \
+#define MAKE_FEATURE_PROPERTY_FUNCTIONS_COMMON(PROP_NAME, TYPE, FUNC_SUFFIX) \
+void Pharm::set##FUNC_SUFFIX(Pharm::Feature& feature, TYPE arg)		    \
+{																		\
+    feature.setProperty(FeatureProperty::PROP_NAME, arg);				\
+}																		\
+																		\
+bool Pharm::has##FUNC_SUFFIX(const Pharm::Feature& feature)	            \
+{																		\
+    return feature.isPropertySet(FeatureProperty::PROP_NAME);			\
+}																		\
+																		\
+void Pharm::clear##FUNC_SUFFIX(Pharm::Feature& feature)					\
+{																		\
+    feature.removeProperty(FeatureProperty::PROP_NAME);					\
 }
 
-#define MAKE_FEATURE_PROPERTY_FUNCTIONS(PROP_NAME, TYPE, FUNC_SUFFIX)	       \
-TYPE Pharm::get##FUNC_SUFFIX(const Pharm::Feature& feature)		       \
-{									       \
-    return feature.getProperty<TYPE>(FeatureProperty::PROP_NAME);              \
-}									       \
-									       \
+#define MAKE_FEATURE_PROPERTY_FUNCTIONS(PROP_NAME, TYPE, FUNC_SUFFIX)   \
+TYPE Pharm::get##FUNC_SUFFIX(const Pharm::Feature& feature)		        \
+{																		\
+    return feature.getProperty<TYPE>(FeatureProperty::PROP_NAME);		\
+}																		\
+																		\
 MAKE_FEATURE_PROPERTY_FUNCTIONS_COMMON(PROP_NAME, TYPE, FUNC_SUFFIX)
 
-#define MAKE_FEATURE_PROPERTY_FUNCTIONS_WITH_DEF(PROP_NAME, TYPE, FUNC_SUFFIX)    \
-TYPE Pharm::get##FUNC_SUFFIX(const Pharm::Feature& feature)	                  \
-{									          \
-    return feature.getPropertyOrDefault<TYPE>(FeatureProperty::PROP_NAME,	  \
-					      FeaturePropertyDefault::PROP_NAME); \
-}									          \
-									          \
+#define MAKE_FEATURE_PROPERTY_FUNCTIONS_WITH_DEF(PROP_NAME, TYPE, FUNC_SUFFIX) \
+TYPE Pharm::get##FUNC_SUFFIX(const Pharm::Feature& feature)			           \
+{																		       \
+    return feature.getPropertyOrDefault<TYPE>(FeatureProperty::PROP_NAME,      \
+											  FeaturePropertyDefault::PROP_NAME); \
+}																		       \
+																		       \
 MAKE_FEATURE_PROPERTY_FUNCTIONS_COMMON(PROP_NAME, TYPE, FUNC_SUFFIX)
 
 
@@ -74,6 +74,8 @@ MAKE_FEATURE_PROPERTY_FUNCTIONS_WITH_DEF(GEOMETRY, unsigned int, Geometry)
 MAKE_FEATURE_PROPERTY_FUNCTIONS_WITH_DEF(LENGTH, double, Length) 
 MAKE_FEATURE_PROPERTY_FUNCTIONS(ORIENTATION, const Math::Vector3D&, Orientation) 
 MAKE_FEATURE_PROPERTY_FUNCTIONS_WITH_DEF(TOLERANCE, double, Tolerance) 
+MAKE_FEATURE_PROPERTY_FUNCTIONS_WITH_DEF(WEIGHT, double, Weight) 
 MAKE_FEATURE_PROPERTY_FUNCTIONS(SUBSTRUCTURE, const Chem::Fragment::SharedPointer&, Substructure) 
 MAKE_FEATURE_PROPERTY_FUNCTIONS_WITH_DEF(DISABLED_FLAG, bool, DisabledFlag) 
 MAKE_FEATURE_PROPERTY_FUNCTIONS_WITH_DEF(OPTIONAL_FLAG, bool, OptionalFlag) 
+MAKE_FEATURE_PROPERTY_FUNCTIONS_WITH_DEF(HYDROPHOBICITY, double, Hydrophobicity) 

@@ -26,11 +26,15 @@
  
 #include "StaticInit.hpp"
 
+#include <iterator>
+
 #include "CDPL/Chem/AtomDensityGridCalculator.hpp"
 #include "CDPL/Chem/GeneralizedBellAtomDensity.hpp"  
 #include "CDPL/Chem/Entity3DFunctions.hpp"
 #include "CDPL/Chem/AtomContainer.hpp"
+#include "CDPL/Chem/AtomContainerFunctions.hpp"
 #include "CDPL/Chem/Atom.hpp"
+#include "CDPL/Internal/Octree.hpp"
 
 
 using namespace CDPL;
@@ -46,17 +50,37 @@ namespace
 }
  
 
+const double Chem::AtomDensityGridCalculator::DEF_DISTANCE_CUTOFF = 4.5;
+
+
 Chem::AtomDensityGridCalculator::AtomDensityGridCalculator(): 
-    densityFunc(GeneralizedBellAtomDensity()), densityCombinationFunc(&maxElement), coordsFunc(&Chem::get3DCoordinates)
+    densityFunc(GeneralizedBellAtomDensity()), densityCombinationFunc(&maxElement), 
+	coordsFunc(static_cast<const Math::Vector3D& (*)(const Entity3D&)>(&Chem::get3DCoordinates)), distCutoff(DEF_DISTANCE_CUTOFF)
+{}
+
+Chem::AtomDensityGridCalculator::AtomDensityGridCalculator(const AtomDensityGridCalculator& calc): 
+    densityFunc(calc.densityFunc), densityCombinationFunc(calc.densityCombinationFunc), coordsFunc(calc.coordsFunc), distCutoff(calc.distCutoff)
 {}
 
 Chem::AtomDensityGridCalculator::AtomDensityGridCalculator(const DensityFunction& func): 
-    densityFunc(func), densityCombinationFunc(&maxElement), coordsFunc(&Chem::get3DCoordinates)
+    densityFunc(func), densityCombinationFunc(&maxElement), 
+	coordsFunc(static_cast<const Math::Vector3D& (*)(const Entity3D&)>(&Chem::get3DCoordinates)), distCutoff(DEF_DISTANCE_CUTOFF)
 {}
 
 Chem::AtomDensityGridCalculator::AtomDensityGridCalculator(const DensityFunction& density_func, const DensityCombinationFunction& comb_func): 
-    densityFunc(density_func), densityCombinationFunc(comb_func), coordsFunc(&Chem::get3DCoordinates)
+    densityFunc(density_func), densityCombinationFunc(comb_func), 
+	coordsFunc(static_cast<const Math::Vector3D& (*)(const Entity3D&)>(&Chem::get3DCoordinates)), distCutoff(DEF_DISTANCE_CUTOFF)
 {}
+
+void Chem::AtomDensityGridCalculator::setDistanceCutoff(double dist)
+{
+	distCutoff = dist;
+}
+
+double Chem::AtomDensityGridCalculator::getDistanceCutoff() const
+{
+	return distCutoff;
+}
 
 void Chem::AtomDensityGridCalculator::setDensityFunction(const DensityFunction& func)
 {
@@ -90,23 +114,51 @@ const Chem::Atom3DCoordinatesFunction& Chem::AtomDensityGridCalculator::getAtom3
 
 void Chem::AtomDensityGridCalculator::calculate(const AtomContainer& atoms, Grid::DSpatialGrid& grid)
 {
-    partialDensities.resize(atoms.getNumAtoms(), false);
+	atomCoords.clear();
+	get3DCoordinates(atoms, atomCoords, coordsFunc);
 
-    std::size_t num_pts = grid.getNumElements();
-    Math::Vector3D grid_pos;
+	if (!octree)
+		octree.reset(new Octree());
 
-    for (std::size_t i = 0, l = 0; i < num_pts; i++, l = 0) {
+	octree->initialize(atomCoords, 16);
+
+	std::size_t num_pts = grid.getNumElements();
+	Math::Vector3D grid_pos;
+
+    for (std::size_t i = 0; i < num_pts; i++) {
 		grid.getCoordinates(i, grid_pos);
+		atomIndices.clear();
 
-		for (AtomContainer::ConstAtomIterator it = atoms.getAtomsBegin(), end = atoms.getAtomsEnd(); it != end; ++it) {
-			const Atom& atom = *it;
+		octree->radiusNeighbors<Octree::L2Distance>(grid_pos, distCutoff, std::back_inserter(atomIndices));
 
-			partialDensities[l++] = densityFunc(grid_pos, coordsFunc(atom), atom);
-		}
+		std::size_t num_inc_atoms = atomIndices.size();
 
-		if (l == 0)
+		if (num_inc_atoms == 0) {
 			grid(i) = 0.0;
-		else
+
+		} else {
+			partialDensities.resize(num_inc_atoms, false);
+
+			for (std::size_t j = 0; j < num_inc_atoms; j++) {
+				std::size_t atom_idx = atomIndices[j];
+
+				partialDensities[j] = densityFunc(grid_pos, atomCoords[atom_idx], atoms.getAtom(atom_idx));
+			}
+
 			grid(i) = densityCombinationFunc(partialDensities);
+		}
 	}
+}
+
+Chem::AtomDensityGridCalculator& Chem::AtomDensityGridCalculator::operator=(const AtomDensityGridCalculator& calc)
+{
+	if (this == &calc)
+		return *this;
+
+	densityFunc = calc.densityFunc;
+	densityCombinationFunc = calc.densityCombinationFunc;
+	coordsFunc = calc.coordsFunc;
+	distCutoff = calc.distCutoff;
+
+	return *this;
 }

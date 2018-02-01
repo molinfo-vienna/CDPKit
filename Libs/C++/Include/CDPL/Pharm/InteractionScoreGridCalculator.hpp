@@ -32,17 +32,25 @@
 #define CDPL_PHARM_INTERACTIONSCOREGRIDCALCULATOR_HPP
 
 #include <vector>
+#include <cstddef>
 
 #include <boost/function.hpp>
 #include <boost/shared_ptr.hpp>
 
 #include "CDPL/Pharm/APIPrefix.hpp"
 #include "CDPL/Math/Vector.hpp"
+#include "CDPL/Math/VectorArray.hpp"
 #include "CDPL/Grid/SpatialGrid.hpp"
 
 
 namespace CDPL 
 {
+
+	namespace Internal 
+	{
+
+		template <typename PT, typename CT, typename ST> class Octree;
+	}
 
     namespace Pharm
     {
@@ -62,6 +70,8 @@ namespace CDPL
 		{
 
 		  public:
+			static const double DEF_DISTANCE_CUTOFF;
+			
 			typedef boost::shared_ptr<InteractionScoreGridCalculator> SharedPointer;
 
 			typedef boost::function1<bool, const Feature&> FeaturePredicate;
@@ -74,6 +84,10 @@ namespace CDPL
 
 			InteractionScoreGridCalculator(const ScoringFunction& scoring_func, const ScoreCombinationFunction& comb_func); 
 
+			InteractionScoreGridCalculator(const InteractionScoreGridCalculator& calc);
+
+			~InteractionScoreGridCalculator();
+
 			void setScoringFunction(const ScoringFunction& func);
 
 			const ScoringFunction& getScoringFunction() const;
@@ -82,17 +96,30 @@ namespace CDPL
 
 			const ScoreCombinationFunction& getScoreCombinationFunction() const;
 
+			void setDistanceCutoff(double dist);
+
+			double getDistanceCutoff() const;
+
 			void calculate(const FeatureContainer& features, Grid::DSpatialGrid& grid, const FeaturePredicate& tgt_ftr_pred);
 	
 			void calculate(const FeatureContainer& features, Grid::DSpatialGrid& grid);
 
+			InteractionScoreGridCalculator& operator=(const InteractionScoreGridCalculator& calc);
+
 		  private:
 			typedef std::vector<const Feature*> FeatureList;
+			typedef Internal::Octree<Math::Vector3D, Math::Vector3DArray, double> Octree;
+			typedef boost::shared_ptr<Octree> OctreePtr;
+			typedef std::vector<std::size_t> FeatureIndexList;
 
 			FeatureList              tgtFeatures;
 			Math::DVector            partialScores;
 			ScoringFunction          scoringFunc;
 			ScoreCombinationFunction scoreCombinationFunc;
+			double                   distCutoff;
+			OctreePtr                octree;
+			Math::Vector3DArray      featureCoords;
+			FeatureIndexList         featureIndices;	
 		};
 
 		/**

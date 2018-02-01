@@ -27,6 +27,7 @@
 #include "StaticInit.hpp"
 
 #include "CDPL/Chem/AtomContainerFunctions.hpp"
+#include "CDPL/Chem/UtilityFunctions.hpp"
 #include "CDPL/Chem/AtomContainer.hpp"
 #include "CDPL/Chem/Atom.hpp"
 
@@ -39,36 +40,8 @@ void Chem::calcBoundingBox(const AtomContainer& cntnr, Math::Vector3D& min, Math
 	for (AtomContainer::ConstAtomIterator it = cntnr.getAtomsBegin(), end = cntnr.getAtomsEnd(); it != end; ++it) {
 		const Math::Vector3D& coords = coords_func(*it);
 
-		if (reset) {
-			max(0) = coords(0);
-			max(1) = coords(1);
-			max(2) = coords(2);
-
-			min(0) = coords(0);
-			min(1) = coords(1);
-			min(2) = coords(2);
-
-			reset = false;
-			continue;
-		}
-
-		if (coords(0) > max(0))
-			max(0) = coords(0);
-
-		else if (coords(0) < min(0))
-			min(0) = coords(0);
-
-		if (coords(1) > max(1))
-			max(1) = coords(1);
-
-		else if (coords(1) < min(1))
-			min(1) = coords(1);
-
-		if (coords(2) > max(2))
-			max(2) = coords(2);
-			
-		else if (coords(2) < min(2))
-			min(2) = coords(2);
+		extendBoundingBox(min, max, coords, reset);
+		reset = false;
 	}
 }	
 
@@ -77,9 +50,7 @@ bool Chem::insideBoundingBox(const AtomContainer& cntnr, const Math::Vector3D& m
 	for (AtomContainer::ConstAtomIterator it = cntnr.getAtomsBegin(), end = cntnr.getAtomsEnd(); it != end; ++it) {
 		const Math::Vector3D& coords = coords_func(*it);
 
-		if (coords(0) <= max(0) && coords(0) >= min(0) &&
-			coords(1) <= max(1) && coords(1) >= min(1) &&
-			coords(2) <= max(2) && coords(2) >= min(2))
+		if (insideBoundingBox(min, max, coords))
 			continue;
 
 		return false;
@@ -93,9 +64,7 @@ bool Chem::intersectsBoundingBox(const AtomContainer& cntnr, const Math::Vector3
 	for (AtomContainer::ConstAtomIterator it = cntnr.getAtomsBegin(), end = cntnr.getAtomsEnd(); it != end; ++it) {
 		const Math::Vector3D& coords = coords_func(*it);
 
-		if (coords(0) <= max(0) && coords(0) >= min(0) &&
-			coords(1) <= max(1) && coords(1) >= min(1) &&
-			coords(2) <= max(2) && coords(2) >= min(2))
+		if (insideBoundingBox(min, max, coords))
 			return true;
 	}
 

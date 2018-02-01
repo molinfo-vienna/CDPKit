@@ -74,10 +74,12 @@ namespace
     MAKE_FEATURE_FUNC_WRAPPERS(unsigned int, Geometry)
     MAKE_FEATURE_FUNC_WRAPPERS(double, Length)
     MAKE_FEATURE_FUNC_WRAPPERS(double, Tolerance)
+    MAKE_FEATURE_FUNC_WRAPPERS(double, Weight)
     MAKE_FEATURE_FUNC_WRAPPERS(bool, DisabledFlag)
     MAKE_FEATURE_FUNC_WRAPPERS(bool, OptionalFlag)
 	MAKE_FEATURE_FUNC_WRAPPERS(const CDPL::Math::Vector3D&, Orientation)
 	MAKE_FEATURE_FUNC_WRAPPERS(const CDPL::Chem::Fragment::SharedPointer&, Substructure)
+    MAKE_FEATURE_FUNC_WRAPPERS(double, Hydrophobicity)
 }
 
 
@@ -90,8 +92,10 @@ void CDPLPythonPharm::exportFeatureFunctions()
     EXPORT_FEATURE_FUNCS(Geometry, geom)
     EXPORT_FEATURE_FUNCS(Length, length)
     EXPORT_FEATURE_FUNCS(Tolerance, tol)
+    EXPORT_FEATURE_FUNCS(Weight, weight)
     EXPORT_FEATURE_FUNCS(DisabledFlag, flag)
     EXPORT_FEATURE_FUNCS(OptionalFlag, flag)
 	EXPORT_FEATURE_FUNCS_INT_REF(Orientation, orient)
 	EXPORT_FEATURE_FUNCS_COPY_REF_CW(Substructure, substruct)
+    EXPORT_FEATURE_FUNCS(Hydrophobicity, hyd)
 }

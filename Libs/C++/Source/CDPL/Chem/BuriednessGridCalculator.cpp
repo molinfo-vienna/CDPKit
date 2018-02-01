@@ -26,13 +26,21 @@
  
 #include "StaticInit.hpp"
 
+#include <iterator>
+
 #include "CDPL/Chem/BuriednessGridCalculator.hpp"
+#include "CDPL/Chem/AtomContainerFunctions.hpp"
+#include "CDPL/Internal/Octree.hpp"
 
 
 using namespace CDPL;
 
 
 Chem::BuriednessGridCalculator::BuriednessGridCalculator() {}
+
+Chem::BuriednessGridCalculator::BuriednessGridCalculator(const BuriednessGridCalculator& calc): 
+    buriednessScore(calc.buriednessScore)
+{}
 
 void Chem::BuriednessGridCalculator::setProbeRadius(double radius)
 {
@@ -74,14 +82,43 @@ const Chem::Atom3DCoordinatesFunction& Chem::BuriednessGridCalculator::getAtom3D
     return buriednessScore.getAtom3DCoordinatesFunction();
 }
 
+Chem::BuriednessGridCalculator& Chem::BuriednessGridCalculator::operator=(const BuriednessGridCalculator& calc)
+{
+	if (this == &calc)
+		return *this;
+
+	buriednessScore = calc.buriednessScore;
+
+	return *this;
+}
+
 void Chem::BuriednessGridCalculator::calculate(const AtomContainer& atoms, Grid::DSpatialGrid& grid)
 {
-    std::size_t num_pts = grid.getNumElements();
+ 	atomCoords.clear();
+	get3DCoordinates(atoms, atomCoords, buriednessScore.getAtom3DCoordinatesFunction());
+
+	if (!octree)
+		octree.reset(new Octree());
+
+	octree->initialize(atomCoords, 16);
+
+	std::size_t num_pts = grid.getNumElements();
     Math::Vector3D grid_pos;
 
     for (std::size_t i = 0; i < num_pts; i++) {
 		grid.getCoordinates(i, grid_pos);
 
-		grid(i) = buriednessScore(grid_pos, atoms);
+		atomIndices.clear();
+
+		octree->radiusNeighbors<Octree::L2Distance>(grid_pos, buriednessScore.getProbeRadius(), std::back_inserter(atomIndices));
+
+		std::size_t num_inc_atoms = atomIndices.size();
+
+		atomSubset.clear();
+
+		for (std::size_t j = 0; j < num_inc_atoms; j++)
+			atomSubset.addAtom(atoms.getAtom(atomIndices[j]));
+
+		grid(i) = buriednessScore(grid_pos, atomSubset);
     }
 }

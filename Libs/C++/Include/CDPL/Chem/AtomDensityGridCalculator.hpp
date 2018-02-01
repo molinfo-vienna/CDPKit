@@ -31,17 +31,27 @@
 #ifndef CDPL_CHEM_ATOMDENSITYGRIDCALCULATOR_HPP
 #define CDPL_CHEM_ATOMDENSITYGRIDCALCULATOR_HPP
 
+#include <vector>
+#include <cstddef>
+
 #include <boost/function.hpp>
 #include <boost/shared_ptr.hpp>
 
 #include "CDPL/Chem/APIPrefix.hpp"
 #include "CDPL/Math/Vector.hpp"
+#include "CDPL/Math/VectorArray.hpp"
 #include "CDPL/Chem/Atom3DCoordinatesFunction.hpp"
 #include "CDPL/Grid/SpatialGrid.hpp"
 
 
 namespace CDPL 
 {
+
+	namespace Internal 
+	{
+
+		template <typename PT, typename CT, typename ST> class Octree;
+	}
 
     namespace Chem
     {
@@ -60,6 +70,8 @@ namespace CDPL
 		{
 
 		  public:
+			static const double DEF_DISTANCE_CUTOFF;
+
 			typedef boost::shared_ptr<AtomDensityGridCalculator> SharedPointer;
 
 			typedef boost::function3<double, const Math::Vector3D&, const Math::Vector3D&, const Atom&> DensityFunction;
@@ -67,9 +79,15 @@ namespace CDPL
 
 			AtomDensityGridCalculator();
 
+			AtomDensityGridCalculator(const AtomDensityGridCalculator& calc);
+
 			AtomDensityGridCalculator(const DensityFunction& func);
 
 			AtomDensityGridCalculator(const DensityFunction& density_func, const DensityCombinationFunction& comb_func); 
+
+			void setDistanceCutoff(double dist);
+
+			double getDistanceCutoff() const;
 
 			void setDensityFunction(const DensityFunction& func);
 
@@ -89,11 +107,21 @@ namespace CDPL
 
 			void calculate(const AtomContainer& atoms, Grid::DSpatialGrid& grid);
 
+			AtomDensityGridCalculator& operator=(const AtomDensityGridCalculator& calc);
+
 		  private:
+			typedef Internal::Octree<Math::Vector3D, Math::Vector3DArray, double> Octree;
+			typedef boost::shared_ptr<Octree> OctreePtr;
+			typedef std::vector<std::size_t> AtomIndexList;
+
 			Math::DVector              partialDensities;
 			DensityFunction            densityFunc;
 			DensityCombinationFunction densityCombinationFunc;
 			Atom3DCoordinatesFunction  coordsFunc;
+			double                     distCutoff;
+			OctreePtr                  octree;
+			Math::Vector3DArray        atomCoords;
+			AtomIndexList              atomIndices;
 		};
 
 		/**

@@ -420,15 +420,16 @@ Pharm::Feature& Pharm::HydrophobicFeatureGenerator::emitFeature(const AtomList& 
 																bool set_pos) const
 {
 	Feature& feature = pharm.addFeature();
+	Math::Vector3D pos;
+	double tot_hyd = calcHydWeightedCentroid(alist, pos);
 
 	setType(feature, featureType);
 	setTolerance(feature, featureTol);
 	setGeometry(feature, featureGeom);
 	setSubstructure(feature, substruct);
+	setHydrophobicity(feature, tot_hyd);
 
-	Math::Vector3D pos;
-
-	if (calcHydWeightedCentroid(alist, pos))
+	if (tot_hyd > 0.0)
 		set3DCoordinates(feature, pos);
 
 	return feature;
@@ -581,7 +582,7 @@ bool Pharm::HydrophobicFeatureGenerator::hasSubstWithMoreThan2Atoms(const Chem::
 	return false;
 }
 
-bool Pharm::HydrophobicFeatureGenerator::calcHydWeightedCentroid(const AtomList& alist, Math::Vector3D& centroid) const
+double Pharm::HydrophobicFeatureGenerator::calcHydWeightedCentroid(const AtomList& alist, Math::Vector3D& centroid) const
 {
 	const Chem::Atom3DCoordinatesFunction& coords_func = getAtom3DCoordinatesFunction();
 
@@ -599,11 +600,11 @@ bool Pharm::HydrophobicFeatureGenerator::calcHydWeightedCentroid(const AtomList&
 	}
 
 	if (total_hyd == 0.0)
-		return false;
+		return 0.0;
 
 	centroid /= total_hyd;
 
-	return true;
+	return total_hyd;
 }
 
 void Pharm::HydrophobicFeatureGenerator::getAtomHydrophobicities()

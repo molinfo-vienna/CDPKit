@@ -37,6 +37,7 @@
 #include "CDPL/Chem/APIPrefix.hpp"
 #include "CDPL/Chem/Molecule.hpp"
 #include "CDPL/Util/BitSet.hpp"
+#include "CDPL/Math/Vector.hpp"
 
 
 namespace CDPL 
@@ -71,6 +72,10 @@ namespace CDPL
 		CDPL_CHEM_API Molecule::SharedPointer parseSMILES(const std::string& smiles);
 
 		CDPL_CHEM_API bool parseSMILES(const std::string& smiles, Molecule& mol);
+
+		CDPL_CHEM_API void extendBoundingBox(Math::Vector3D& min, Math::Vector3D& max, const Math::Vector3D& coords, bool reset = false);
+
+		CDPL_CHEM_API bool insideBoundingBox(const Math::Vector3D& min, const Math::Vector3D& max, const Math::Vector3D& coords);
 
 		/**
 		 * @}

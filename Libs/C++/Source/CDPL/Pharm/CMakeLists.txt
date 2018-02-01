@@ -21,6 +21,7 @@ SET(cdpl-pharm_LIB_SRCS
     FeatureGenerator.cpp
     PatternBasedFeatureGenerator.cpp
     HydrophobicFeatureGenerator.cpp
+    HydrophobicAtomFeatureGenerator.cpp
     AromaticFeatureGenerator.cpp
     HBondAcceptorFeatureGenerator.cpp
     HBondDonorFeatureGenerator.cpp

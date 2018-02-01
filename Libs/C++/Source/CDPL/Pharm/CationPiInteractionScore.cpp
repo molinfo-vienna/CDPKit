@@ -87,10 +87,10 @@ double Pharm::CationPiInteractionScore::operator()(const Feature& ftr1, const Fe
 		double ang_cos = std::abs(angleCos(orient, aro_cat_vec, dist));
 		double angle = std::acos(ang_cos) * 180.0 / M_PI;
 
-		return (score * normFunc(angle / maxAngle * 0.5));
+		return (score * normFunc(angle / maxAngle * 0.5) * getWeight(ftr2));
     }
 
-    return score;
+    return score * getWeight(ftr2);
 }
 
 double Pharm::CationPiInteractionScore::operator()(const Math::Vector3D& ftr1_pos, const Feature& ftr2) const
@@ -100,15 +100,15 @@ double Pharm::CationPiInteractionScore::operator()(const Math::Vector3D& ftr1_po
 	double score = normFunc((dist - (maxDist + minDist) * 0.5) / (maxDist - minDist));
 
 	if (aroCatOrder)
-		return score;
+		return score * getWeight(ftr2);
 
     if (hasOrientation(ftr2)) {
 		const Math::Vector3D& orient = getOrientation(ftr2);
 		double ang_cos = std::abs(angleCos(orient, aro_cat_vec, dist));
 		double angle = std::acos(ang_cos) * 180.0 / M_PI;
 
-		return (score * normFunc(angle / maxAngle * 0.5));
+		return (score * normFunc(angle / maxAngle * 0.5) * getWeight(ftr2));
     }
 
-    return score;
+    return score * getWeight(ftr2);
 }

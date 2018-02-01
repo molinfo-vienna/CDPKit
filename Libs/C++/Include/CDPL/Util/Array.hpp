@@ -179,6 +179,12 @@ namespace CDPL
 			std::size_t getSize() const;
 
 			/**
+			 * \brief Returns the number of elements stored in the array.
+			 * \return The size of the array.
+			 */
+			std::size_t size() const;
+
+			/**
 			 * \brief Tells whether the array is empty (getSize() == 0).
 			 * \return \c true if the array is empty, \c false otherwise.
 			 */
@@ -632,6 +638,12 @@ inline const CDPL::Util::Array<ValueType>& CDPL::Util::Array<ValueType>::getBase
 
 template <typename ValueType>
 inline std::size_t CDPL::Util::Array<ValueType>::getSize() const 
+{
+	return data.size();
+}
+
+template <typename ValueType>
+inline std::size_t CDPL::Util::Array<ValueType>::size() const 
 {
 	return data.size();
 }

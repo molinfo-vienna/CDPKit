@@ -51,6 +51,10 @@ void CDPLPythonPharm::exportInteractionScoreGridCalculator()
 		.def(CDPLPythonBase::ObjectIdentityCheckVisitor<Pharm::InteractionScoreGridCalculator>())	
 		.def("assign", CDPLPythonBase::copyAssOp(&Pharm::InteractionScoreGridCalculator::operator=), 
 			 (python::arg("self"), python::arg("calculator")), python::return_self<>())
+		.def("setDistanceCutoff", &Pharm::InteractionScoreGridCalculator::setDistanceCutoff,
+			 (python::arg("self"), python::arg("dist")))
+		.def("getDistanceCutoff", &Pharm::InteractionScoreGridCalculator::getDistanceCutoff,
+			 python::arg("self"))
 		.def("setScoringFunction", &Pharm::InteractionScoreGridCalculator::setScoringFunction,
 			 (python::arg("self"), python::arg("func")))
 		.def("getScoringFunction", &Pharm::InteractionScoreGridCalculator::getScoringFunction,
@@ -64,9 +68,12 @@ void CDPLPythonPharm::exportInteractionScoreGridCalculator()
 			 (&Pharm::InteractionScoreGridCalculator::calculate),
 			 (python::arg("self"), python::arg("features"), python::arg("grid")))
 		.def("calculate", 
-			 static_cast<void (Pharm::InteractionScoreGridCalculator::*)(const Pharm::FeatureContainer&, Grid::DSpatialGrid& grid, const Pharm::InteractionScoreGridCalculator::FeaturePredicate&)>
+			 static_cast<void (Pharm::InteractionScoreGridCalculator::*)(const Pharm::FeatureContainer&, 
+																		 Grid::DSpatialGrid& grid, 
+																		 const Pharm::InteractionScoreGridCalculator::FeaturePredicate&)>
 			 (&Pharm::InteractionScoreGridCalculator::calculate),
 			 (python::arg("self"), python::arg("features"), python::arg("grid"), python::arg("tgt_ftr_pred")))
+		.add_property("distanceCutoff", &Pharm::InteractionScoreGridCalculator::getDistanceCutoff, &Pharm::InteractionScoreGridCalculator::setDistanceCutoff)
 		.add_property("scoringFunction", 
 					  python::make_function(&Pharm::InteractionScoreGridCalculator::getScoringFunction, python::return_internal_reference<>()),
 					  &Pharm::InteractionScoreGridCalculator::setScoringFunction)

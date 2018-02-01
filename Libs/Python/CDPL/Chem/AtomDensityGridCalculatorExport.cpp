@@ -61,6 +61,12 @@ void CDPLPythonChem::exportAtomDensityGridCalculator()
 		.def(CDPLPythonBase::ObjectIdentityCheckVisitor<Chem::AtomDensityGridCalculator>())	
 		.def("assign", CDPLPythonBase::copyAssOp(&Chem::AtomDensityGridCalculator::operator=), 
 			 (python::arg("self"), python::arg("calculator")), python::return_self<>())
+		.def("setDistanceCutoff", &Chem::AtomDensityGridCalculator::setDistanceCutoff,
+			 (python::arg("self"), python::arg("dist")))
+		.def("getDistanceCutoff", &Chem::AtomDensityGridCalculator::getDistanceCutoff,
+			 python::arg("self"))
+		.def("getDensityFunction", &Chem::AtomDensityGridCalculator::getDensityFunction,
+			 python::arg("self"), python::return_internal_reference<>())
 		.def("setDensityFunction", &Chem::AtomDensityGridCalculator::setDensityFunction,
 			 (python::arg("self"), python::arg("func")))
 		.def("getDensityFunction", &Chem::AtomDensityGridCalculator::getDensityFunction,
@@ -74,6 +80,7 @@ void CDPLPythonChem::exportAtomDensityGridCalculator()
 		.def("getAtom3DCoordinatesFunction", &Chem::AtomDensityGridCalculator::getAtom3DCoordinatesFunction,
 			 python::arg("self"), python::return_internal_reference<>())
 		.def("calculate", &calculate, (python::arg("self"), python::arg("atoms"), python::arg("grid")))
+		.add_property("distanceCutoff", &Chem::AtomDensityGridCalculator::getDistanceCutoff, &Chem::AtomDensityGridCalculator::setDistanceCutoff)
 		.add_property("densityFunction", 
 					  python::make_function(&Chem::AtomDensityGridCalculator::getDensityFunction, python::return_internal_reference<>()),
 					  &Chem::AtomDensityGridCalculator::setDensityFunction)

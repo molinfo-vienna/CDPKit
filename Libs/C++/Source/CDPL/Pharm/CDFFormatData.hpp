@@ -63,20 +63,22 @@ namespace CDPL
 			namespace FeatureProperty
 			{
 
-				const unsigned int TYPE            = 1; 
-				const unsigned int COORDINATES_3D  = 2;
-				const unsigned int GEOMETRY        = 3; 
-				const unsigned int LENGTH          = 4; 
-				const unsigned int ORIENTATION     = 5; 
-				const unsigned int TOLERANCE       = 6; 
-				const unsigned int DISABLED_FLAG   = 7; 
-				const unsigned int OPTIONAL_FLAG   = 8; 		
+				const unsigned int TYPE                    = 1; 
+				const unsigned int COORDINATES_3D          = 2;
+				const unsigned int GEOMETRY                = 3; 
+				const unsigned int LENGTH                  = 4; 
+				const unsigned int ORIENTATION             = 5; 
+				const unsigned int TOLERANCE               = 6; 
+				const unsigned int DISABLED_FLAG           = 7; 
+				const unsigned int OPTIONAL_FLAG           = 8; 
+				const unsigned int HYDROPHOBICITY          = 9;
+				const unsigned int WEIGHT                  = 10;
 			}
 		
 			namespace PharmacophoreProperty
 			{
 				
-				const unsigned int NAME            = 1; 
+				const unsigned int NAME = 1; 
 			}
 		}
     }

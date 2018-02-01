@@ -94,6 +94,15 @@ namespace CDPL
 		CDPL_PHARM_API bool hasTolerance(const Feature& feature);
 
 
+		CDPL_PHARM_API double getWeight(const Feature& feature);
+
+		CDPL_PHARM_API void setWeight(Feature& feature, double weight);
+
+		CDPL_PHARM_API void clearWeight(Feature& feature);
+
+		CDPL_PHARM_API bool hasWeight(const Feature& feature);
+
+
 		CDPL_PHARM_API const Chem::Fragment::SharedPointer& getSubstructure(const Feature& feature);
 
 		CDPL_PHARM_API void setSubstructure(Feature& feature, const Chem::Fragment::SharedPointer& substruct);
@@ -119,6 +128,15 @@ namespace CDPL
 		CDPL_PHARM_API void clearOptionalFlag(Feature& feature);
 
 		CDPL_PHARM_API bool hasOptionalFlag(const Feature& feature);
+
+	
+		CDPL_PHARM_API double getHydrophobicity(const Feature& feature);
+
+		CDPL_PHARM_API void setHydrophobicity(Feature& feature, double hyd);
+
+		CDPL_PHARM_API void clearHydrophobicity(Feature& feature);
+
+		CDPL_PHARM_API bool hasHydrophobicity(const Feature& feature);
 
 		/**
 		 * @}

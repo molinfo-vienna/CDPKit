@@ -61,6 +61,7 @@
 #include "CDPL/Pharm/PatternBasedFeatureGenerator.hpp"  
 #include "CDPL/Pharm/AromaticFeatureGenerator.hpp"  
 #include "CDPL/Pharm/HydrophobicFeatureGenerator.hpp"  
+#include "CDPL/Pharm/HydrophobicAtomFeatureGenerator.hpp"  
 #include "CDPL/Pharm/HBondAcceptorFeatureGenerator.hpp"  
 #include "CDPL/Pharm/HBondDonorFeatureGenerator.hpp"  
 #include "CDPL/Pharm/PosIonizableFeatureGenerator.hpp"  

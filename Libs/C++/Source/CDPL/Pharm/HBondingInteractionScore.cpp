@@ -130,7 +130,7 @@ double Pharm::HBondingInteractionScore::operator()(const Feature& ftr1, const Fe
 		score *= normFunc(opt_ang_dev);
 	}
 
-	return score;
+	return score * getWeight(ftr2);
 }
 
 double Pharm::HBondingInteractionScore::operator()(const Math::Vector3D& ftr1_pos, const Feature& ftr2) const
@@ -177,7 +177,7 @@ double Pharm::HBondingInteractionScore::operator()(const Math::Vector3D& ftr1_po
 	double hb_len = don_acc_vec_len - H_BOND_LENGTH;
 	double ctr_dev = (hb_len - (maxLength + minLength) * 0.5) / (maxLength - minLength);
 
-	return normFunc(ctr_dev);
+	return normFunc(ctr_dev) * getWeight(ftr2);
 }
 
 

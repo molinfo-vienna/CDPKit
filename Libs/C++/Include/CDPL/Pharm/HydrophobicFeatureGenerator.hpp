@@ -212,7 +212,7 @@ namespace CDPL
 			bool isHydrophobicRing(const Chem::Fragment&);
 			bool hasSubstWithMoreThan2Atoms(const Chem::Atom&, const Chem::Fragment&, bool) const;
 
-			bool calcHydWeightedCentroid(const AtomList&, Math::Vector3D&) const;
+			double calcHydWeightedCentroid(const AtomList&, Math::Vector3D&) const;
 
 			void getAtomHydrophobicities();
 

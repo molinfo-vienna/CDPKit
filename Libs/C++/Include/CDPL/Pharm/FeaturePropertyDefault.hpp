@@ -55,8 +55,10 @@ namespace CDPL
 			extern CDPL_PHARM_API const double LENGTH;
 			extern CDPL_PHARM_API const bool DISABLED_FLAG;
 			extern CDPL_PHARM_API const double TOLERANCE;
+			extern CDPL_PHARM_API const double WEIGHT;
 			extern CDPL_PHARM_API const unsigned int TYPE;
 			extern CDPL_PHARM_API const unsigned int GEOMETRY;
+			extern CDPL_PHARM_API const double HYDROPHOBICITY;
 		}
 
 		/**

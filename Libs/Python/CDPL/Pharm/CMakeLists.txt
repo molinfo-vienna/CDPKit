@@ -53,6 +53,7 @@ SET(pharm_MOD_SRCS
     PatternBasedFeatureGeneratorExport.cpp
     AromaticFeatureGeneratorExport.cpp
     HydrophobicFeatureGeneratorExport.cpp
+    HydrophobicAtomFeatureGeneratorExport.cpp
     HBondAcceptorFeatureGeneratorExport.cpp
     HBondDonorFeatureGeneratorExport.cpp
     PosIonizableFeatureGeneratorExport.cpp

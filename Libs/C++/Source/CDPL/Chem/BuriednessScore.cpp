@@ -38,7 +38,7 @@
 using namespace CDPL; 
 
 
-const double Chem::BuriednessScore::DEF_PROBE_RADIUS             = 10.0;
+const double Chem::BuriednessScore::DEF_PROBE_RADIUS             = 8.0;
 const double Chem::BuriednessScore::DEF_MIN_VDW_SURFACE_DISTANCE = 1.0;
 const std::size_t Chem::BuriednessScore::DEF_NUM_TEST_RAYS       = 200;
 

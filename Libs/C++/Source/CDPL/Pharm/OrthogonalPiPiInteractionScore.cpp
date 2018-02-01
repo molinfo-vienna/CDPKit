@@ -105,7 +105,7 @@ double Pharm::OrthogonalPiPiInteractionScore::operator()(const Feature& ftr1, co
 	double dist_score1 = (has_orient1 ? calcDistanceScore(getOrientation(ftr1), ftr1_ftr2_vec) : 0.0);
 	double dist_score2 = (has_orient2 ? calcDistanceScore(getOrientation(ftr2), ftr1_ftr2_vec) : 0.0);
 
-	return (std::max(dist_score1, dist_score2) * ang_score);
+	return (std::max(dist_score1, dist_score2) * ang_score * getWeight(ftr2));
 }
 
 double Pharm::OrthogonalPiPiInteractionScore::operator()(const Math::Vector3D& ftr1_pos, const Feature& ftr2) const
@@ -115,7 +115,7 @@ double Pharm::OrthogonalPiPiInteractionScore::operator()(const Math::Vector3D& f
 
     Math::Vector3D ftr1_ftr2_vec(get3DCoordinates(ftr2) - ftr1_pos);
 
-	return calcDistanceScore(getOrientation(ftr2), ftr1_ftr2_vec);
+	return calcDistanceScore(getOrientation(ftr2), ftr1_ftr2_vec) * getWeight(ftr2);
 }
 
 double Pharm::OrthogonalPiPiInteractionScore::calcDistanceScore(const Math::Vector3D& orient1, const Math::Vector3D& ftr1_ftr2_vec) const

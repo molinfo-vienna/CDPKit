@@ -111,11 +111,17 @@ void Pharm::CDFPharmacophoreDataWriter::outputFeatures(const FeatureContainer& c
 		if (hasTolerance(feature))
 			putFloatProperty(CDF::FeatureProperty::TOLERANCE, getTolerance(feature), bbuf);
 
+		if (hasWeight(feature))
+			putFloatProperty(CDF::FeatureProperty::WEIGHT, getWeight(feature), bbuf);
+
 		if (hasDisabledFlag(feature))
 			putIntProperty(CDF::FeatureProperty::DISABLED_FLAG, CDF::BoolType(getDisabledFlag(feature)), bbuf);
 
 		if (hasOptionalFlag(feature))
 			putIntProperty(CDF::FeatureProperty::OPTIONAL_FLAG, CDF::BoolType(getOptionalFlag(feature)), bbuf);
+
+		if (hasHydrophobicity(feature))
+			putFloatProperty(CDF::FeatureProperty::HYDROPHOBICITY, getHydrophobicity(feature), bbuf);
 
 		putPropertyListMarker(CDF::PROP_LIST_END, bbuf);
 	}
