@@ -273,13 +273,13 @@ namespace CDPL
 
 			template <typename V>
 			CDPL_MATH_INLINE bool containsLocalPoint(const V& pos) const {
-				if (std::abs(pos[0]) > (getXExtent() / 2))
+				if (std::abs(CoordinatesValueType(pos[0])) > (getXExtent() / 2))
 					return false;
 
-				if (std::abs(pos[1]) > (getYExtent() / 2))
+				if (std::abs(CoordinatesValueType(pos[1])) > (getYExtent() / 2))
 					return false;
 
-				if (std::abs(pos[2]) > (getZExtent() / 2))
+				if (std::abs(CoordinatesValueType(pos[2])) > (getZExtent() / 2))
 					return false;
 
 				return true;
