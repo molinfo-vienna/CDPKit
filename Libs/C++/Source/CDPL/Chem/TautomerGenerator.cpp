@@ -81,6 +81,7 @@ Chem::TautomerGenerator::TautomerGenerator(): mode(TOPOLOGICALLY_UNIQUE)
 																					  AtomPropertyFlag::ISOTOPE |
 																					  AtomPropertyFlag::FORMAL_CHARGE));
 	hashCalculator.setBondHashSeedFunction(HashCodeCalculator::DefBondHashSeedFunctor(hashCalculator, BondPropertyFlag::ORDER));
+	hashCalculator.includeGlobalStereoFeatures(false);
 }
 
 Chem::TautomerGenerator::TautomerGenerator(const TautomerGenerator& gen):

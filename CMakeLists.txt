@@ -143,7 +143,6 @@ ELSE(WIN32)
   SET(RUN_PYTHON_TESTS_IN "${CDPKIT_CMAKE_SCRIPTS_DIR}/RunPythonTests.sh.in")
 ENDIF(WIN32)
 
-
 SET(Boost_USE_MULTITHREAD ON)
 SET(Boost_USE_STATIC_LIBS OFF)
 FIND_PACKAGE(Boost 1.52.0 COMPONENTS date_time python unit_test_framework filesystem system
