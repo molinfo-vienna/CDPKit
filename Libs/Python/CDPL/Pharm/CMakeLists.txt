@@ -20,6 +20,8 @@ SET(pharm_MOD_SRCS
     FeatureTypeHistogramExport.cpp 
     FeatureRDFCodeCalculatorExport.cpp 
     PharmacophoreRDFFingerprintGeneratorExport.cpp
+    FeatureAutoCorrelation3DVectorCalculatorExport.cpp 
+    PharmacophoreAutoCorr3DFingerprintGeneratorExport.cpp
 
     FeatureContainerIOManagerExport.cpp 
     PharmacophoreIOManagerExport.cpp 

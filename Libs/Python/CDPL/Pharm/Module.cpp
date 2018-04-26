@@ -47,6 +47,8 @@ BOOST_PYTHON_MODULE(_pharm)
 	exportFeatureTypeHistogram();
 	exportFeatureRDFCodeCalculator();
 	exportPharmacophoreRDFFingerprintGenerator();
+	exportFeatureAutoCorrelation3DVectorCalculator();
+    exportPharmacophoreAutoCorr3DFingerprintGenerator();
 
 	exportPharmacophoreReader();
 	exportFeatureContainerWriter();

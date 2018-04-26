@@ -89,8 +89,9 @@ SET(chem_MOD_SRCS
     LogSCalculatorExport.cpp 
     MolecularComplexityCalculatorExport.cpp 
     PEOEChargeCalculatorExport.cpp 
-    AutoCorrelationVectorCalculatorExport.cpp 
+    AutoCorrelation2DVectorCalculatorExport.cpp 
     AtomRDFCodeCalculatorExport.cpp 
+    AtomAutoCorrelation3DVectorCalculatorExport.cpp 
     BurdenMatrixGeneratorExport.cpp 
     BCUTDescriptorCalculatorExport.cpp 
     SurfaceAtomExtractorExport.cpp 

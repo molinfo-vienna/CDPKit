@@ -1,7 +1,7 @@
 /* -*- mode: c++; c-basic-offset: 4; tab-width: 4; indent-tabs-mode: t -*- */
 
 /* 
- * AutoCorrelationVectorCalculator.hpp 
+ * AutoCorrelation2DVectorCalculator.hpp 
  *
  * This file is part of the Chemical Data Processing Toolkit
  *
@@ -25,11 +25,11 @@
 
 /**
  * \file
- * \brief Definition of the class CDPL::Chem::AutoCorrelationVectorCalculator.
+ * \brief Definition of the class CDPL::Chem::AutoCorrelation2DVectorCalculator.
  */
 
-#ifndef CDPL_CHEM_AUTOCORRELATIONVECTORCALCULATOR_HPP
-#define CDPL_CHEM_AUTOCORRELATIONVECTORCALCULATOR_HPP
+#ifndef CDPL_CHEM_AUTOCORRELATION2DVECTORCALCULATOR_HPP
+#define CDPL_CHEM_AUTOCORRELATION2DVECTORCALCULATOR_HPP
 
 #include <boost/function.hpp>
 
@@ -52,10 +52,10 @@ namespace CDPL
 		 */
 
 		/**
-		 * \brief AutoCorrelationVectorCalculator.
+		 * \brief AutoCorrelation2DVectorCalculator.
 		 * \see [\ref AUCOR, \ref HBMD]
 		 */
-		class CDPL_CHEM_API AutoCorrelationVectorCalculator
+		class CDPL_CHEM_API AutoCorrelation2DVectorCalculator
 		{
 
 		public:
@@ -70,12 +70,12 @@ namespace CDPL
 			typedef boost::function2<double, const Atom&, const Atom&> AtomPairWeightFunction;
 
 			/**
-			 * \brief Constructs the \c %AutoCorrelationVectorCalculator instance.
+			 * \brief Constructs the \c %AutoCorrelation2DVectorCalculator instance.
 			 */
-			AutoCorrelationVectorCalculator();
+			AutoCorrelation2DVectorCalculator();
 
 			/**
-			 * \brief Constructs the \c %AutoCorrelationVectorCalculator instance and calculates the autocorrelation
+			 * \brief Constructs the \c %AutoCorrelation2DVectorCalculator instance and calculates the autocorrelation
 			 *        vector of the molecular graph \a molgraph.
 			 *
 			 * The calculated autocorrelation vector can be retrieved by a call to getResult().
@@ -83,11 +83,11 @@ namespace CDPL
 			 * \param molgraph The molecular graph for which to calculate the autocorrelation vector.
 			 * \param corr_vec The calculated autocorrelation vector. 
 			 */
-			AutoCorrelationVectorCalculator(const MolecularGraph& molgraph, Math::DVector& corr_vec);
+			AutoCorrelation2DVectorCalculator(const MolecularGraph& molgraph, Math::DVector& corr_vec);
 
 			/**
 			 * \brief Allows to specify a custom atom pair weight function.
-			 * \param func An AutoCorrelationVectorCalculator::AtomPairWeightFunction instance that wraps the target function.
+			 * \param func An AutoCorrelation2DVectorCalculator::AtomPairWeightFunction instance that wraps the target function.
 			 * \note The default atom pair weight function returns the product of the atom types (see namespace
 			 *       Chem::AtomType).
 			 */
@@ -106,10 +106,6 @@ namespace CDPL
 			void calculate(const MolecularGraph& molgraph, Math::DVector& corr_vec);
 
 		private:
-			AutoCorrelationVectorCalculator(const AutoCorrelationVectorCalculator&);
-
-			AutoCorrelationVectorCalculator& operator=(const AutoCorrelationVectorCalculator&);
-
 			AtomPairWeightFunction weightFunc;
 		}; 
 
@@ -119,4 +115,4 @@ namespace CDPL
 	}
 }
 
-#endif // CDPL_CHEM_AUTOCORRELATIONVECTORCALCULATOR_HPP
+#endif // CDPL_CHEM_AUTOCORRELATION2DVECTORCALCULATOR_HPP

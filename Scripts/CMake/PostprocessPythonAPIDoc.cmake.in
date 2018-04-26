@@ -6,7 +6,7 @@ LIST(REMOVE_ITEM HTML_DOC_FILES
      index.html
      namespace
      pages.html 
-	 annotated.html
+     annotated.html
      modules.html
      FDL.html
      LGPL.html

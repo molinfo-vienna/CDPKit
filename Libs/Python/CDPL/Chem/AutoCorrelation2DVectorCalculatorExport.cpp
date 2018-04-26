@@ -1,7 +1,7 @@
 /* -*- mode: c++; c-basic-offset: 4; tab-width: 4; indent-tabs-mode: t -*- */
 
 /* 
- * AutoCorrelationVectorCalculatorExport.cpp 
+ * AutoCorrelation2DVectorCalculatorExport.cpp 
  *
  * This file is part of the Chemical Data Processing Toolkit
  *
@@ -26,27 +26,31 @@
 
 #include <boost/python.hpp>
 
-#include "CDPL/Chem/AutoCorrelationVectorCalculator.hpp"
+#include "CDPL/Chem/AutoCorrelation2DVectorCalculator.hpp"
 #include "CDPL/Chem/MolecularGraph.hpp"
 #include "CDPL/Chem/Atom.hpp"
 
 #include "Base/ObjectIdentityCheckVisitor.hpp"
+#include "Base/CopyAssOp.hpp"
 
 #include "ClassExports.hpp"
 
 
-void CDPLPythonChem::exportAutoCorrelationVectorCalculator()
+void CDPLPythonChem::exportAutoCorrelation2DVectorCalculator()
 {
 	using namespace boost;
 	using namespace CDPL;
 
-	python::class_<Chem::AutoCorrelationVectorCalculator, boost::noncopyable>("AutoCorrelationVectorCalculator", python::no_init)
+	python::class_<Chem::AutoCorrelation2DVectorCalculator, boost::noncopyable>("AutoCorrelation2DVectorCalculator", python::no_init)
 		.def(python::init<>(python::arg("self")))
+		.def(python::init<const Chem::AutoCorrelation2DVectorCalculator&>((python::arg("self"), python::arg("calculator"))))
 		.def(python::init<const Chem::MolecularGraph&, Math::DVector&>(
 				 (python::arg("self"), python::arg("molgraph"), python::arg("corr_vec"))))
-		.def(CDPLPythonBase::ObjectIdentityCheckVisitor<Chem::AutoCorrelationVectorCalculator>())	
-		.def("setAtomPairWeightFunction", &Chem::AutoCorrelationVectorCalculator::setAtomPairWeightFunction,
+		.def(CDPLPythonBase::ObjectIdentityCheckVisitor<Chem::AutoCorrelation2DVectorCalculator>())	
+		.def("assign", CDPLPythonBase::copyAssOp(&Chem::AutoCorrelation2DVectorCalculator::operator=), 
+			 (python::arg("self"), python::arg("calculator")), python::return_self<>())
+		.def("setAtomPairWeightFunction", &Chem::AutoCorrelation2DVectorCalculator::setAtomPairWeightFunction,
 			 (python::arg("self"), python::arg("func")))
-		.def("calculate", &Chem::AutoCorrelationVectorCalculator::calculate, 
+		.def("calculate", &Chem::AutoCorrelation2DVectorCalculator::calculate, 
 			 (python::arg("self"), python::arg("molgraph"), python::arg("corr_vec")));
 }

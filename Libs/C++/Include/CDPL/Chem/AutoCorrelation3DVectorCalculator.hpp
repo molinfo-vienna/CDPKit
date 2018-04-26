@@ -1,7 +1,7 @@
 /* -*- mode: c++; c-basic-offset: 4; tab-width: 4; indent-tabs-mode: t -*- */
 
 /* 
- * RDFCodeCalculator.hpp 
+ * AutoCorrelation3DVectorCalculator.hpp 
  *
  * This file is part of the Chemical Data Processing Toolkit
  *
@@ -25,11 +25,11 @@
 
 /**
  * \file
- * \brief Definition of the class CDPL::Chem::RDFCodeCalculator.
+ * \brief Definition of the class CDPL::Chem::AutoCorrelation3DVectorCalculator.
  */
 
-#ifndef CDPL_CHEM_RDFCODECALCULATOR_HPP
-#define CDPL_CHEM_RDFCODECALCULATOR_HPP
+#ifndef CDPL_CHEM_AUTOCORRELATION3DVECTORCALCULATOR_HPP
+#define CDPL_CHEM_AUTOCORRELATION3DVECTORCALCULATOR_HPP
 
 #include <cstddef>
 #include <iterator>
@@ -38,7 +38,7 @@
 #include <boost/function.hpp>
 
 #include "CDPL/Math/Matrix.hpp"
-#include "CDPL/Math/Vector.hpp"
+#include "CDPL/Math/VectorArray.hpp"
 
 
 namespace CDPL 
@@ -48,16 +48,15 @@ namespace CDPL
 	{
 
 		/**
-		 * \addtogroup CDPL_CHEM_RDF_CODES
+		 * \addtogroup CDPL_CHEM_3D_AUTOCORRELATION
 		 * @{
 		 */
 
 		/**
-		 * \brief RDFCodeCalculator.
-		 * \see [\ref CITB, \ref HBMD]
+		 * \brief AutoCorrelation3DVectorCalculator.
 		 */
 		template <typename T>
-		class RDFCodeCalculator
+		class AutoCorrelation3DVectorCalculator
 		{
 
 		public:
@@ -84,38 +83,10 @@ namespace CDPL
 			typedef boost::function1<const Math::Vector3D&, const EntityType&> Entity3DCoordinatesFunction;
 
 			/**
-			 * \brief Constructs the \c %RDFCodeCalculator instance.
+			 * \brief Constructs the \c %AutoCorrelation3DVectorCalculator instance.
 			 */
-			RDFCodeCalculator();
-
-			/**
-			 * \brief Allows to specify the smoothing factor used in the calculation of
-			 *        entity pair RDF contributions.
-			 * \param factor The smoothing factor.
-			 * \note The default value of the smoothing factor is <em>1.0</em>.
-			 */
-			void setSmoothingFactor(double factor);
-
-			/**
-			 * \brief Returns the smoothing factor used in the calculation of
-			 *        entity pair RDF contributions.
-			 * \return The applied smoothing factor.
-			 */
-			double getSmoothingFactor() const;
-
-			/**
-			 * \brief Allows to specify the scaling factor for the RDF code elements.
-			 * \param factor The scaling factor.
-			 * \note The default scaling factor is <em>1.0</em>.
-			 */
-			void setScalingFactor(double factor);
-
-			/**
-			 * \brief Returns the scaling factor applied to the RDF code elements.
-			 * \return The applied scaling factor.
-			 */
-			double getScalingFactor() const;
-
+			AutoCorrelation3DVectorCalculator();
+		
 			/**
 			 * \brief Sets the starting value of the radius.
 			 * \param start_radius The starting value of the radius.
@@ -130,14 +101,14 @@ namespace CDPL
 			double getStartRadius() const;
 
 			/**
-			 * \brief Sets the radius step size between successive RDF code elements.
+			 * \brief Sets the radius step size between successive autocorrelation vector elements.
 			 * \param radius_inc The radius step size.
 			 * \note The default radius step size is <em>0.1</em>&Aring;.
 			 */
 			void setRadiusIncrement(double radius_inc);
 
 			/**
-			 * \brief Returns the radius step size between successive RDF code elements.
+			 * \brief Returns the radius step size between successive autocorrelation vector elements.
 			 * \return The applied radius step size.
 			 */
 			double getRadiusIncrement() const;
@@ -145,7 +116,7 @@ namespace CDPL
 			/**
 			 * \brief Sets the number of desired radius incrementation steps.
 			 *
-			 * The number of performed radius incrementation steps defines the size of the calculated RDF code vector
+			 * The number of performed radius incrementation steps defines the size of the calculated autocorrelation vector
 			 * which is equal to the number of steps plus \e 1.
 			 *
 			 * \param num_steps The number of radius incrementation steps.
@@ -161,14 +132,14 @@ namespace CDPL
 
 			/**
 			 * \brief Allows to specify a custom entity pair weight function.
-			 * \param func A RDFCodeCalculator::EntityPairWeightFunction instance that wraps the target function.
+			 * \param func A AutoCorrelation3DVectorCalculator::EntityPairWeightFunction instance that wraps the target function.
 			 * \note The default entity pair weight function returns the value \e 1.
 			 */
 			void setEntityPairWeightFunction(const EntityPairWeightFunction& func);
 
 			/**
 			 * \brief Allows to specify the entity 3D coordinates function.
-			 * \param func A RDFCodeCalculator::Entity3DCoordinatesFunction instance that wraps the target function.
+			 * \param func A AutoCorrelation3DVectorCalculator::Entity3DCoordinatesFunction instance that wraps the target function.
 			 * \note The coordinates function must be specified before calling calculate(), otherwise a zero distance
 			 *       for each entity pair will be used for the calculation.
 			 */
@@ -177,33 +148,29 @@ namespace CDPL
 			/**
 			 * \brief Calculates the RDF code of an entity sequence.
 			 *
-			 * The elements of the returned RDF code vector correspond to the values of the radial distribution function
-			 * at different radii. The first element provides the RDF value at the start radius (see setStartRadius())
-			 * which gets incremented by the radius step size (see setRadiusIncrement()) for each successive
-			 * element. The total number of calculated RDF values (corresponds to the RDF code vector's length) is given by
-			 * the specified number of incrementation steps (see setNumSteps()) plus \e 1.
+			 * The elements of the returned vector correspond to the values of the 3D autocorrelation function
+			 * for the different interval centers. The total number of calculated vector elements is given by
+			 * the specified number of incrementation steps (see setNumSteps()).
 			 * 
 			 * \param beg An iterator pointing to the beginning of the entity sequence.
 			 * \param end An iterator pointing one past the end of the entity sequence.
-			 * \param rdf_code The calculated RDF code vector.
+			 * \param vec The calculated 3D autocorrelation vector.
  			 */
 			template <typename Iter, typename Vec>
-			void calculate(Iter beg, Iter end, Vec& rdf_code);
+			void calculate(Iter beg, Iter end, Vec& vec);
 
 		private:
 			template <typename Iter>
 			void init(Iter beg, Iter end);
 
-			double                    smoothingFactor;
-			double                    scalingFactor;
-			double                    startRadius;
-			double                    radiusIncrement;
-			std::size_t               numSteps;
-			std::size_t               numEntities;
-			EntityPairWeightFunction  weightFunc;
+			double                      startRadius;
+			double                      radiusIncrement;
+			std::size_t                 numSteps;
+			std::size_t                 numEntities;
+			EntityPairWeightFunction    weightFunc;
 			Entity3DCoordinatesFunction coordsFunc;
-			Math::DMatrix             weightMatrix;
-			Math::DMatrix             distMatrix;
+			Math::DMatrix               weightMatrix;
+			Math::Vector3DArray         entityPositions;
 		}; 
 
 		/**
@@ -216,120 +183,104 @@ namespace CDPL
 // Implementation
 
 template <typename T>
-CDPL::Chem::RDFCodeCalculator<T>::RDFCodeCalculator(): 
-	smoothingFactor(1.0), scalingFactor(1.0), startRadius(0.0), radiusIncrement(0.1), numSteps(99) {}
+CDPL::Chem::AutoCorrelation3DVectorCalculator<T>::AutoCorrelation3DVectorCalculator(): 
+	startRadius(0.0), radiusIncrement(0.1), numSteps(99) {}
 
 template <typename T>
-void CDPL::Chem::RDFCodeCalculator<T>::setSmoothingFactor(double factor)
-{
-	smoothingFactor = factor;
-}
-
-template <typename T>
-void CDPL::Chem::RDFCodeCalculator<T>::setScalingFactor(double factor)
-{
-	scalingFactor = factor;
-}
-
-template <typename T>
-void CDPL::Chem::RDFCodeCalculator<T>::setStartRadius(double start_radius)
+void CDPL::Chem::AutoCorrelation3DVectorCalculator<T>::setStartRadius(double start_radius)
 {
 	startRadius = start_radius;
 }
 
 template <typename T>
-void CDPL::Chem::RDFCodeCalculator<T>::setRadiusIncrement(double radius_inc)
+void CDPL::Chem::AutoCorrelation3DVectorCalculator<T>::setRadiusIncrement(double radius_inc)
 {
 	radiusIncrement = radius_inc;
 }
 
 template <typename T>
-void CDPL::Chem::RDFCodeCalculator<T>::setNumSteps(std::size_t num_steps)
+void CDPL::Chem::AutoCorrelation3DVectorCalculator<T>::setNumSteps(std::size_t num_steps)
 {
 	numSteps = num_steps;
 }
 
 template <typename T>
-double CDPL::Chem::RDFCodeCalculator<T>::getSmoothingFactor() const
-{
-	return smoothingFactor;
-}
-
-template <typename T>
-double CDPL::Chem::RDFCodeCalculator<T>::getScalingFactor() const
-{
-	return scalingFactor;
-}
-
-template <typename T>
-double CDPL::Chem::RDFCodeCalculator<T>::getStartRadius() const
+double CDPL::Chem::AutoCorrelation3DVectorCalculator<T>::getStartRadius() const
 {
 	return startRadius;
 }
 
 template <typename T>
-double CDPL::Chem::RDFCodeCalculator<T>::getRadiusIncrement() const
+double CDPL::Chem::AutoCorrelation3DVectorCalculator<T>::getRadiusIncrement() const
 {
 	return radiusIncrement;
 }
 
 template <typename T>
-std::size_t CDPL::Chem::RDFCodeCalculator<T>::getNumSteps() const
+std::size_t CDPL::Chem::AutoCorrelation3DVectorCalculator<T>::getNumSteps() const
 {
 	return numSteps;
 }
 
 template <typename T>
-void CDPL::Chem::RDFCodeCalculator<T>::setEntityPairWeightFunction(const EntityPairWeightFunction& func)
+void CDPL::Chem::AutoCorrelation3DVectorCalculator<T>::setEntityPairWeightFunction(const EntityPairWeightFunction& func)
 {
 	weightFunc = func;
 }
 
 template <typename T>
-void CDPL::Chem::RDFCodeCalculator<T>::setEntity3DCoordinatesFunction(const Entity3DCoordinatesFunction& func)
+void CDPL::Chem::AutoCorrelation3DVectorCalculator<T>::setEntity3DCoordinatesFunction(const Entity3DCoordinatesFunction& func)
 {
 	coordsFunc = func;
 }
 
 template <typename T>
 template <typename Iter, typename Vec>
-void CDPL::Chem::RDFCodeCalculator<T>::calculate(Iter beg, Iter end, Vec& rdf_code)
+void CDPL::Chem::AutoCorrelation3DVectorCalculator<T>::calculate(Iter beg, Iter end, Vec& vec)
 {
 	init(beg, end);
 
-	double r = startRadius;
+	for (std::size_t i = 0; i < numSteps; i++)
+		vec[i] = 0.0;
 
-	for (std::size_t i = 0; i <= numSteps; i++, r += radiusIncrement) {
-		double sum = 0.0;
+	Math::Vector3D tmp;
+	const double max_radius = startRadius + numSteps * radiusIncrement;
 
-		for (std::size_t j = 0; j < numEntities; ) {
-			for (std::size_t k = ++j; k < numEntities; k++) {
-				double t = r - distMatrix(j, k);
+	for (std::size_t i = 0; i < numEntities; i++) {
+		for (std::size_t j = i; j < numEntities; j++) {
+			double dist = 0.0;
 
-				sum += weightMatrix(j, k) * std::exp(-smoothingFactor * t * t);
+			if (i != j) {
+				tmp.assign(entityPositions[i] - entityPositions[j]);
+				dist = length(tmp);
 			}
-		}
 
-		rdf_code[i] = scalingFactor * sum;
+			if (dist < startRadius || dist >= max_radius)
+				continue;
+
+			std::size_t idx = std::floor((dist - startRadius) / radiusIncrement);
+			
+			vec[idx] = weightMatrix(i, j);
+		}
 	}
 }
 
 template <typename T>
 template <typename Iter>
-void CDPL::Chem::RDFCodeCalculator<T>::init(Iter beg, Iter end)
+void CDPL::Chem::AutoCorrelation3DVectorCalculator<T>::init(Iter beg, Iter end)
 {
 	numEntities = std::distance(beg, end);
 
 	weightMatrix.resize(numEntities, numEntities, false);
-	distMatrix.resize(numEntities, numEntities, false);
-
-	Math::Vector3D entity1_pos;
+	entityPositions.resize(numEntities);
 
 	for (std::size_t i = 0; beg != end; ) {
 		const EntityType& entity1 = *beg;
 		
 		if (coordsFunc)
-			entity1_pos = coordsFunc(entity1);
+			entityPositions[i] = coordsFunc(entity1);
+		else
+			entityPositions[i].clear(0.0);
 
 		std::size_t j = ++i;
 
@@ -340,13 +291,8 @@ void CDPL::Chem::RDFCodeCalculator<T>::init(Iter beg, Iter end)
 				weightMatrix(i, j) = 1.0;
 			else
 				weightMatrix(i, j) = weightFunc(entity1, entity2);
-
-			if (coordsFunc)
-				distMatrix(i, j) = length(entity1_pos - coordsFunc(entity2));
-			else
-				distMatrix(i, j) = 0.0;
 		}
 	}
 }
 
-#endif // CDPL_CHEM_RDFCODECALCULATOR_HPP
+#endif // CDPL_CHEM_AUTOCORRELATION3DVECTORCALCULATOR_HPP

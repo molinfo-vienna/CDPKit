@@ -126,7 +126,8 @@ SET(cdpl-chem_LIB_SRCS
     LogSCalculator.cpp
     MolecularComplexityCalculator.cpp
     PEOEChargeCalculator.cpp
-    AutoCorrelationVectorCalculator.cpp
+    AutoCorrelation2DVectorCalculator.cpp
+    AtomAutoCorrelation3DVectorCalculator.cpp
     AtomRDFCodeCalculator.cpp
     BurdenMatrixGenerator.cpp
     BCUTDescriptorCalculator.cpp

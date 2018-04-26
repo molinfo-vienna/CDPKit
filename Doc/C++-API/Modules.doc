@@ -65,6 +65,9 @@
 \defgroup CDPL_CHEM_2D_AUTOCORRELATION 2D Autocorrelation
 \ingroup CDPL_CHEM
 
+\defgroup CDPL_CHEM_3D_AUTOCORRELATION 3D Autocorrelation
+\ingroup CDPL_CHEM
+
 \defgroup CDPL_CHEM_RDF_CODES Radial Distribution Function (RDF) Codes
 \ingroup CDPL_CHEM
 
@@ -372,6 +375,9 @@
 \ingroup CDPL_PHARM
 
 \defgroup CDPL_PHARM_SCREENING Pharmacophore Screening
+\ingroup CDPL_PHARM
+
+\defgroup CDPL_PHARM_3D_AUTOCORRELATION 3D Autocorrelation
 \ingroup CDPL_PHARM
 
 \defgroup CDPL_PHARM_RDF_CODES Radial Distribution Function (RDF) Codes

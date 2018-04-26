@@ -1,7 +1,7 @@
 /* -*- mode: c++; c-basic-offset: 4; tab-width: 4; indent-tabs-mode: t -*- */
 
 /* 
- * PharmacophoreRDFFingerprintGenerator.hpp 
+ * PharmacophoreAutoCorr3DFingerprintGenerator.hpp 
  *
  * This file is part of the Chemical Data Processing Toolkit
  *
@@ -25,14 +25,14 @@
 
 /**
  * \file
- * \brief Definition of the class CDPL::Pharm::PharmacophoreRDFFingerprintGenerator.
+ * \brief Definition of the class CDPL::Pharm::PharmacophoreAutoCorr3DFingerprintGenerator.
  */
 
-#ifndef CDPL_PHARM_PHARMACOPHORERDFFINGERPRINTGENERATOR_HPP
-#define CDPL_PHARM_PHARMACOPHORERDFFINGERPRINTGENERATOR_HPP
+#ifndef CDPL_PHARM_PHARMACOPHOREAUTOCORR3DFINGERPRINTGENERATOR_HPP
+#define CDPL_PHARM_PHARMACOPHOREAUTOCORR3DFINGERPRINTGENERATOR_HPP
 
 #include "CDPL/Pharm/APIPrefix.hpp"
-#include "CDPL/Chem/RDFCodeCalculator.hpp"
+#include "CDPL/Chem/AutoCorrelation3DVectorCalculator.hpp"
 #include "CDPL/Math/Vector.hpp"
 
 
@@ -51,51 +51,22 @@ namespace CDPL
 		 */
 
 		/**
-		 * \brief PharmacophoreRDFFingerprintGenerator.
-		 * \see [\ref CITB, \ref HBMD]
+		 * \brief PharmacophoreAutoCorr3DFingerprintGenerator.
 		 */
-		class CDPL_PHARM_API PharmacophoreRDFFingerprintGenerator
+		class CDPL_PHARM_API PharmacophoreAutoCorr3DFingerprintGenerator
 		{
 
-			typedef Chem::RDFCodeCalculator<Feature> RDFCodeCalculator;
+			typedef Chem::AutoCorrelation3DVectorCalculator<Feature> AutoCorr3DVectorCalculator;
 
 		public:
-			typedef RDFCodeCalculator::Entity3DCoordinatesFunction Feature3DCoordinatesFunction;
+			typedef AutoCorr3DVectorCalculator::Entity3DCoordinatesFunction Feature3DCoordinatesFunction;
 			
 			/**
-			 * \brief Constructs the \c %PharmacophoreRDFFingerprintGenerator instance.
+			 * \brief Constructs the \c %PharmacophoreAutoCorr3DFingerprintGenerator instance.
 			 */
-			PharmacophoreRDFFingerprintGenerator();
+			PharmacophoreAutoCorr3DFingerprintGenerator();
 			
-			PharmacophoreRDFFingerprintGenerator(const FeatureContainer& cntnr, Math::DVector& fp);
-
-			/**
-			 * \brief Allows to specify the smoothing factor used in the calculation of
-			 *        feature pair \e RDF contributions.
-			 * \param factor The smoothing factor.
-			 * \note The default value of the smoothing factor is <em>1.0</em>.
-			 */
-			void setSmoothingFactor(double factor);
-
-			/**
-			 * \brief Returns the smoothing factor used in the calculation of
-			 *        feature pair \e RDF contributions.
-			 * \return The applied smoothing factor.
-			 */
-			double getSmoothingFactor() const;
-
-			/**
-			 * \brief Allows to specify the scaling factor for the \e RDF code elements.
-			 * \param factor The scaling factor.
-			 * \note The default scaling factor is <em>100.0</em>.
-			 */
-			void setScalingFactor(double factor);
-
-			/**
-			 * \brief Returns the scaling factor applied to the \e RDF code elements.
-			 * \return The applied scaling factor.
-			 */
-			double getScalingFactor() const;
+			PharmacophoreAutoCorr3DFingerprintGenerator(const FeatureContainer& cntnr, Math::DVector& fp);
 
 			/**
 			 * \brief Sets the starting value of the radius.
@@ -111,14 +82,14 @@ namespace CDPL
 			double getStartRadius() const;
 
 			/**
-			 * \brief Sets the radius step size between successive \e RDF code elements.
+			 * \brief Sets the radius step size between successive fingerprint vector elements.
 			 * \param radius_inc The radius step size.
 			 * \note The default radius step size is <em>0.1</em>&Aring;.
 			 */
 			void setRadiusIncrement(double radius_inc);
 
 			/**
-			 * \brief Returns the radius step size between successive \e RDF code elements.
+			 * \brief Returns the radius step size between successive \e AutoCorr3D code elements.
 			 * \return The applied radius step size.
 			 */
 			double getRadiusIncrement() const;
@@ -126,8 +97,8 @@ namespace CDPL
 			/**
 			 * \brief Sets the number of desired radius incrementation steps.
 			 *
-			 * The number of performed radius incrementation steps defines the size of the calculated \e RDF code vector
-			 * which is equal to the number of steps plus \e 1.
+			 * The number of performed radius incrementation steps defines the size of the calculated fingerprint vector
+			 * which is equal to the number of steps.
 			 *
 			 * \param num_steps The number of radius incrementation steps.
 			 * \note The default number of steps is \e 99.
@@ -151,7 +122,7 @@ namespace CDPL
 			void generate(const FeatureContainer& cntnr, Math::DVector& fp);
 
 		  private:
-			RDFCodeCalculator rdfCalculator;
+			AutoCorr3DVectorCalculator autoCorrCalculator;
 		}; 
 
 		/**
@@ -160,4 +131,4 @@ namespace CDPL
 	}
 }
 
-#endif // CDPL_PHARM_PHARMACOPHORERDFFINGERPRINTGENERATOR_HPP
+#endif // CDPL_PHARM_PHARMACOPHOREAUTOCORR3DFINGERPRINTGENERATOR_HPP

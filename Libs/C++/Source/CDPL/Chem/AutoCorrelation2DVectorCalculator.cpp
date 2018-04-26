@@ -1,7 +1,7 @@
 /* -*- mode: c++; c-basic-offset: 4; tab-width: 4; indent-tabs-mode: t -*- */
 
 /* 
- * AutoCorrelationVectorCalculator.cpp 
+ * AutoCorrelation2DVectorCalculator.cpp 
  *
  * This file is part of the Chemical Data Processing Toolkit
  *
@@ -26,12 +26,11 @@
 
 #include "StaticInit.hpp"
 
-#include <algorithm>
 #include <functional>
 
 #include <boost/bind.hpp>
 
-#include "CDPL/Chem/AutoCorrelationVectorCalculator.hpp"
+#include "CDPL/Chem/AutoCorrelation2DVectorCalculator.hpp"
 #include "CDPL/Chem/Atom.hpp"
 #include "CDPL/Chem/AtomFunctions.hpp"
 #include "CDPL/Chem/MolecularGraphFunctions.hpp"
@@ -40,18 +39,18 @@
 
 using namespace CDPL;
 
-Chem::AutoCorrelationVectorCalculator::AutoCorrelationVectorCalculator():
+Chem::AutoCorrelation2DVectorCalculator::AutoCorrelation2DVectorCalculator():
 	weightFunc(boost::bind(std::multiplies<unsigned int>(),
 						   boost::bind(&getType, _1), boost::bind(&getType, _1))) {}
 
-Chem::AutoCorrelationVectorCalculator::AutoCorrelationVectorCalculator(const MolecularGraph& molgraph, Math::DVector& corr_vec):
+Chem::AutoCorrelation2DVectorCalculator::AutoCorrelation2DVectorCalculator(const MolecularGraph& molgraph, Math::DVector& corr_vec):
 	weightFunc(boost::bind(std::multiplies<unsigned int>(),
 						   boost::bind(&getType, _1), boost::bind(&getType, _1)))
 {
 	calculate(molgraph, corr_vec);
 }
 
-void Chem::AutoCorrelationVectorCalculator::calculate(const MolecularGraph& molgraph, Math::DVector& corr_vec)
+void Chem::AutoCorrelation2DVectorCalculator::calculate(const MolecularGraph& molgraph, Math::DVector& corr_vec)
 {
 	corr_vec.resize(0, false);
 
@@ -74,20 +73,15 @@ void Chem::AutoCorrelationVectorCalculator::calculate(const MolecularGraph& molg
 
 			double weight = weightFunc(atom1, atom2);
 		
-			if (dist >= corr_vec.getSize()) {
-				std::size_t old_size = corr_vec.getSize();
-
-				corr_vec.resize(dist + 1);
-				
-				std::fill(Math::vectorBegin(corr_vec) + old_size, Math::vectorEnd(corr_vec), 0.0);
-			}
+			if (dist >= corr_vec.getSize())
+				corr_vec.resize(dist + 1, 0.0);
 
 			corr_vec(dist) += 2.0 * weight;
 		}
 	}
 }
 
-void Chem::AutoCorrelationVectorCalculator::setAtomPairWeightFunction(const AtomPairWeightFunction& func)
+void Chem::AutoCorrelation2DVectorCalculator::setAtomPairWeightFunction(const AtomPairWeightFunction& func)
 {
 	weightFunc = func;
 }

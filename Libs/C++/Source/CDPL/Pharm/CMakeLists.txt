@@ -59,7 +59,9 @@ SET(cdpl-pharm_LIB_SRCS
     GeometricalFeatureMappingExtractor.cpp
     PharmacophoreAlignment.cpp
     FeatureRDFCodeCalculator.cpp
+    FeatureAutoCorrelation3DVectorCalculator.cpp
     PharmacophoreRDFFingerprintGenerator.cpp
+    PharmacophoreAutoCorr3DFingerprintGenerator.cpp
 
     PharmacophoreFitScore.cpp
 
