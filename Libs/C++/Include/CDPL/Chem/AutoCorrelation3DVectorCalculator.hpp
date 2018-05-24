@@ -274,7 +274,7 @@ void CDPL::Chem::AutoCorrelation3DVectorCalculator<T>::init(Iter beg, Iter end)
 	weightMatrix.resize(numEntities, numEntities, false);
 	entityPositions.resize(numEntities);
 
-	for (std::size_t i = 0; beg != end; ) {
+	for (std::size_t i = 0; beg != end; i++) {
 		const EntityType& entity1 = *beg;
 		
 		if (coordsFunc)
@@ -282,9 +282,9 @@ void CDPL::Chem::AutoCorrelation3DVectorCalculator<T>::init(Iter beg, Iter end)
 		else
 			entityPositions[i].clear(0.0);
 
-		std::size_t j = ++i;
+		std::size_t j = i;
 
-		for (Iter it = ++beg; it != end; ++it, j++) {
+		for (Iter it = beg; it != end; ++it, j++) {
 			const EntityType& entity2 = *it;
 
 			if (!weightFunc)

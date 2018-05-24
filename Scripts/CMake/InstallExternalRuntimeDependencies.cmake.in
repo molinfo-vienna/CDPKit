@@ -25,6 +25,7 @@ MACRO(INSTALL_LINKED_LIBRARIES BINARY_FILE DID_INSTALL)
       "libz"
       "libsqlite3"
       "libcairo"
+      "libicu"
       )
 
   SET(LDD_OUTPUT "")

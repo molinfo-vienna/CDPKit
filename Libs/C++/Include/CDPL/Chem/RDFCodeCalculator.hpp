@@ -302,8 +302,8 @@ void CDPL::Chem::RDFCodeCalculator<T>::calculate(Iter beg, Iter end, Vec& rdf_co
 	for (std::size_t i = 0; i <= numSteps; i++, r += radiusIncrement) {
 		double sum = 0.0;
 
-		for (std::size_t j = 0; j < numEntities; ) {
-			for (std::size_t k = ++j; k < numEntities; k++) {
+		for (std::size_t j = 0; j < numEntities; j++) {
+			for (std::size_t k = j + 1; k < numEntities; k++) {
 				double t = r - distMatrix(j, k);
 
 				sum += weightMatrix(j, k) * std::exp(-smoothingFactor * t * t);
@@ -325,13 +325,13 @@ void CDPL::Chem::RDFCodeCalculator<T>::init(Iter beg, Iter end)
 
 	Math::Vector3D entity1_pos;
 
-	for (std::size_t i = 0; beg != end; ) {
+	for (std::size_t i = 0; beg != end; i++) {
 		const EntityType& entity1 = *beg;
 		
 		if (coordsFunc)
 			entity1_pos = coordsFunc(entity1);
 
-		std::size_t j = ++i;
+		std::size_t j = i + 1;
 
 		for (Iter it = ++beg; it != end; ++it, j++) {
 			const EntityType& entity2 = *it;
