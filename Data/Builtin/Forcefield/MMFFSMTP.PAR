@@ -1,0 +1,241 @@
+R"PARAMDATA(
+*
+*   SMARTS patterns for the assignment of symbolic atom types
+*
+*   PATTERN                                              SYMBOL  DESCRIPTION
+
+*   Fallback Definitions
+    [*:2]                                                CR
+    [*:2]=[*]                                            CSP2
+    [*:2]#[*]                                            CSP3
+    [#1:2]                                               HC
+    [#1:2]~[#8]                                          HO
+    [#7:2]                                               NR
+    [#7:2]=[*]                                           N=C
+    [#7:2]#[*]                                           NSP
+    [#8:2]                                               -O-
+    [#8:2]=[*]                                           O=C
+    [#16:2]                                              S
+    [#16:2]=[*]                                          S=C
+    [#15:2]                                              P
+    [#15:2]=[*]                                          -P=C
+    [#26:2]                                              FE+2
+    [#3:2]                                               LI+
+    [#11:2]                                              NA+
+    [#19:2]                                              K+
+    [#30:2]                                              ZINC
+    [#20:2]                                              CA+2 
+    [#29:2]                                              CU+1
+    [#12:2]                                              MG+2
+    [#25:2]                                              MG+2
+    [#5:2]                                               CR
+
+*   Carbon 
+    [#6X4:1]                                             CR      ALKYL CARBON, SP3
+    [#6X3:1]                                             CSP2    GENERIC SP2 CARBON
+    [#6X3:1]=[#6]                                        C=C     VINYLIC CARBON, SP2
+    [#6X4r4:1]                                           CR4R    CARBON IN 4-MEMBERED RINGS
+    [#6X4r3:1]                                           CR3R    CARBON IN A 3-MEMBERED RING
+    [#6X3r4:1]                                           CE4R    OLEFINIC CARBON IN 4-MEMBERED RINGS
+    [#6X3:1]=[#7]                                        C=N     SP2 CARBON IN C=N
+    [#6X3:1]=[#8]                                        C=O     GENERAL CARBONYL CARBON
+    [#6X3:1](=[#16])                                     C=S     THIOESTER CARBON, DOUBLY BONDED TO S
+    [#6X3:1](=[#7X2])(-[#7X3])-[#7X3]                    CGD     GUANIDINE CARBON, DOUBLY BONDED TO N
+    [#6X3:1](=[#8])(-[#6,#1])-[#6,#1]                    C=OR    KETONE OR ALDEHYDE CARBONYL CARBON
+    [#6X3:1](=[#8X1])-[#8]                               COO     CARBOXYLIC ACID OR ESTER CARBONYL CARBON
+    [#6X3:1](=[#8])-[#16]                                C=OS    THIOESTER CARBONYL CARBON, DOUBLE BONDED TO O
+    [#6X3:1](=[#8])-[#7]                                 C=ON    AMIDE CARBONYL CARBON
+    [#6X3:1](=[#16])-[#16]                               CSS     THIOCARBOXYLIC ACID OR ESTER CARBONYL CARBON
+    [#6X3:1](=[#16])-[#7X3+0]                            C=SN    THIOAMIDE, CARBON, DOUBLY BONDED TO S
+    [#6X3:1](=[#8])(-[#8])-[#7H2]                        COON    CARBAMATE CARBONYL CARBON
+    [#6X3:1](=[#8])(-[#8])-[#8]                          COOO    C ARBONIC ACID OR ESTER CARBONYL CARBON
+    [#6X3:1](=[#8])(-[#7])-[#7]                          CONN    UREA CARBONYL CARBON
+    [#6X3:1]=[#16]=[#8]                                  CS=O    CARBON IN >C=S=O (SULFINYL GROUP)
+    [#6X3:1]=[#16](-,=[#8])-,=[#8]                       CSO2    CARBON IN >C=SO2
+    [#6X3:1]=[#15]                                       C=P     CARBON DOUBLE BONDED TO PHOSPHOROUS
+    [#6X2:1]#[*]                                         CSP     ACETYLENIC CARBON
+    [#6X2:1](=[*])=[*]                                   =C=     ALLENIC CARBON
+    [#6X3:1](-,=[#8X1])-,=[#8X1]                         CO2M    CARBOXYLATE ANION CARBON
+    [#6X3:1](-,=[#16X1])-,=[#16X1]                       CS2M    CARBON IN THIOCARBOXYLATE ANION
+    [#6X3:1](=[#7X3+])-[#7X3+0]                          CNN+    C IN +N=C-N RESONANCE STRUCTURES
+    [#6X3:1](=[#7X3+])(-[#7X3+0])-[#7X3]                 CGD+    GUANIDINIUM CARBON
+    [#6X1:1]#[#7]                                        C%      ISONITRILE CARBON
+*   [c:1]                                                CB      CARBON AS IN BENZENE, PYRROLE
+*   [c:1]1:[n,s,o]:a:a:a1                                C5      GENERAL CARBON IN 5-MEMBERED HETEROAROMATIC RING
+*   [c:1]1:a:[n,s,o]:a:a1                                C5      GENERAL CARBON IN 5-MEMBERED HETEROAROMATIC RING
+*   [c:1]1:[n,s,o]:a:a:a1                                C5A     ALPHA CARBON IN 5-MEMBERED HETEROAROMATIC RING
+*   [c:1]1:a:[n,s,o]:a:a1                                C5B     BETA CARBON IN 5-MEMBERED HETEROAROMATIC RING
+*   [c:1]:[n+0]:a:a:[n+]1                                CIM+    C IN N-C-N IN IMIDAZOLIUM ION
+
+*   Oxygen
+    [#8X2:1]                                             -O-     GENERAL DIVALENT O
+    [#8X2:1]-[#6]                                        OR      ALCOHOL OR ETHER OXYGEN
+    [#8X2:1]-[#6X3]=[#7]                                 OC=N    DIVALENT OXYGEN 
+    [#8X2:1]-[#6X3]=[#6]                                 OC=C    ENOLIC OR PHENOLIC OXYGEN
+    [#8X2:1]-[#6X3]=[#8]                                 OC=O    ESTER OR CARBOXYLIC ACID -O-
+    [#8X2:1]-[#6X3]=[#16]                                OC=S    THIOESTER OR THIOACID -O-
+    [#8X2:1]-[#7]=[#8]                                   ON=O    DIVALENT NITRITE "ETHER" OXYGEN
+    [#8X2:1]-[#7](=,-[#8X1])=,-[#8X1]                    ONO2    DIVALENT NITRATE "ETHER" OXYGEN
+    [#8X2:1]-[#16]                                       -OS     GENERAL DIVALENT OX ATTACHED TO S
+    [#8X2:1]-[#16]-,=[#8]                                OSO     DIVALENT OXYGEN ATTACHED TO SULFUR
+    [#8X2:1]-[#16X3]=[#8]                                OS=O    DIVALENT OXYGEN ATTACHED TO SULFOXIDE SULFUR
+    [#8X2:1]-[#16X4](=,-[#8])-,=[#8]                     OSO2    DIVALENT OXYGEN ATTACHED TO SULFUR
+    [#8X2:1]-[#16X4](=,-[#8])(=,-[#8])-,=[#8]            OSO3    DIVALENT OXYGEN ATTACHED TO SULFUR
+    [#8X2:1]-[#15]                                       -OP     DIVALENT OXYGEN ATTACHED TO PHOSPHOROUS
+    [#8X2:1]-[#15]-,=[#8]                                OPO     DIVALENT OXYGEN ATTACHED TO PHOSPHOROUS
+    [#8X2:1]-[#15](=,-[#8])-,=[#8]                       OPO2    DIVALENT OXYGEN ATTACHED TO PHOSPHOROUS
+    [#8X2:1]-[#15](=,-[#8])(=,-[#8])-,=[#8]              OPO3    DIVALENT OXYGEN ATTACHED TO PHOSPHOROUS
+    [#8X1:1]=[#6]                                        O=C     GENERAL C=O
+    [#8X1:1]=[#6](-[#6,#1])-[#6,#1]                      O=CR    CARBONYL OXYGEN, ALDEHYDES AND KETONES
+    [#8X1:1]=[#6]-[#8]                                   O=CO    CARBONYL OXYGEN, CARBOXYLIC ACIDS AND ESTERS
+    [#8X1:1]=[#6]-[#7]                                   O=CN    CARBONYL OXYGEN, AMIDES
+    [#8X1:1]=[#7]                                        O=N     NITROSO OXYGEN
+    [#8X1:1]=[#16]                                       O=S     O=S IN SULFOXIDES
+    [#8X1:1]=[#16]=[#6]                                  O=S=    O=S ON SULFUR DOUBLY BONDED TO, E.G., CARBON
+    [#8X1-:1]                                            OM      ALKOXIDE OXYGEN, NEGATIVELY CHARGED
+    [#8X1-:1]-[#7v4]                                     OXN     N-OXIDE OXYGEN
+    [#8X1-:1]-[#6X3,#7X2]                                OM2     OXIDE OXYGEN ON SP2 CARBON, NEGATIVELY CHARGED
+    [#8X1:1]-,=[#6X3]-,=[#8X1]                           O2CM    OXYGEN IN CARBOXYLATE ANION
+    [#8X1:1]-,=[#7X3]-,=[#8X1]                           O2N     NITRO OXYGEN
+    [#8X1:1]-,=[#7X3](-,=[#8X1])-[#8X2]                  O2NO    NITRO-GROUP OXYGEN IN NITRATE
+    [#8X1:1]-,=[#7X3](-,=[#8X1])-,=[#8X1]                O3N     NITRATE ANION OXYGEN
+    [#8X1:1]-,=[#16X4]                                   O-S     SINGLE TERMINAL OXYGEN ON TETRACOORD SULFUR
+    [#8X1:1]-,=[#16]-,=[#8X1]                            O2S     TERMINAL O-S IN SULFONES AND SULFONAMIDES
+    [#8X1:1]-,=[#16](-,=[#8X1])-,=[#8X1]                 O3S     TERMINAL O IN SULFONATES
+    [#8X1:1]-,=[#16](-,=[#8X1])(-,=[#8X1])-,=[#8X1]      O4S     TERMINAL O IN SO4(-3)
+    [#8X1:1]-,=[#16]-,=[#16X1]                           OSMS    TERM O IN THIOSULFINATE ANION - FORMAL CHARGE=-0.5
+    [#8X1:1]-,=[#15]                                     OP      TERMINAL O IN PHOSPHOXIDES
+    [#8X1:1]-,=[#15]-,=[#8X1]                            O2P     TERMINAL O IN PHOSPHINATES
+    [#8X1:1]-,=[#15]-,=[#16X1]                           O2P     TERMINAL O IN PHOSPHINATES
+    [#8X1:1]-,=[#15](-,=[#8X1])-,=[#8X1]                 O3P     TERMINAL OXYGEN IN PHOSPHONATES
+    [#8X1:1]-,=[#15](-,=[#8X1])(-,=[#8X1])-,=[#8X1]      O4P     TERMINAL OXYGEN IN PHOSPHATES AND PHOSPHODIESTERS
+    [#8X1:1]-,=[#17](-,=[#8X1])(-,=[#8X1])-,=[#8X1]      O4CL    OXYGEN IN CLO4(-) ANION - FORMAL CHARGE=-0.25
+    [#8X3+:1]                                            O+      POSITIVELY CHARGED OXONIUM (TRICOORDINATE) OXYGEN
+    [#8X2+:1]                                            O=+     POSITIVELY CHARGED OXENIUM (DICOORDINATE) OXYGEN
+    [#8X2+0:1](-[#1])-[#1]                               OH2     OXYGEN ON WATER
+*   [o:1]                                                OFUR    AROMATIC OXYGEN AS IN FURAN
+
+*   Nitrogen
+    [#7X3:1]-[#7]=[#6]                                   NN=C    NITROGEN IN N-N=C
+    [#7X3v3:1]                                           NR      NITROGEN IN ALIPHATIC AMINES
+    [#7X4v4+:1]                                          NR+     QUATERNARY NITROGEN, SP3, POSITIVELY CHARGED
+    [#7X2:1]=[#6]                                        N=C     NITROGEN IN IMINES
+    [#7X2:1]=[#7]                                        N=N     NITROGEN IN AZO COMPOUNDS
+    [#7X3:1]-[#7]=[#7]                                   NN=N    NITROGEN IN N-N=N
+    [#7X3:1]-[#6X3]=[#6]                                 NC=C    NITROGEN ON N-C=C
+    [#7X3:1]-[#6X3]=[#7]                                 NC=N    NITROGEN IN N-C=N
+    [#7X3:1]-[#6X3]=[#15]                                NC=P    NITROGEN IN N-C=P
+    [#7X3:1]-[#6]=[#16]                                  NC=S    NITROGEN IN N-C=S, THIOAMIDE
+    [#7X3:1]-[#6X2]#[#6]                                 NC%C    NITROGEN ATTACHED TO C-C TRIPLE BOND
+    [#7X3:1]-[#6]=[#8]                                   NC=O    NITROGEN IN AMIDES
+    [#7X1:1]#[*]                                         NSP     NITROGEN, TRIPLE BONDED
+    [#7X2-:1]-[#6,#16]                                   NM      DEPROTONATED SULFONAMIDE N-; FORMAL CHARGE=-1
+    [#7X2-:1]-[#16](-,=[#8X1])(-,=[!#8])-,=[!#8]         NSO     DIVALENT NITROGEN REPLACING MONOVALENT O IN SO2 GROUP
+    [#7X2:1]=[#16](-,=[#8X1])(-,=[!#8])-,=[!#8]          NSO     DIVALENT NITROGEN REPLACING MONOVALENT O IN SO2 GROUP
+    [#7X3:1]-[#16](-,=[#8X1])-,=[#8X1]                   NSO2    NITROGEN IN SULFONAMIDES
+    [#7v3:1](=[#16])-[#16](-,=[#8X1])-,=[#8X1]           NSO2    NITROGEN IN SULFONAMIDES
+    [#7X3:1]-[#16](-,=[#8X1])(-,=[#8X1])-,=[#8]          NSO3    NITROGEN IN SULFONAMIDES, THREE O'S ON S
+    [#7X3:1]-[#15](-,=[#8X1])-,=[#8X1]                   NPO2    NITROGEN IN PHOSPHONAMIDES
+    [#7X3:1]-[#15](-,=[#8X1])(-,=[#8X1])-,=[#8]          NPO3    NITROGEN IN PHOSPHONAMIDES, THREE O'S ON P
+    [#7X3:1]-[#6X2]#[#7]                                 NC%N    NITROGEN ATTACHED TO CYANO GROUP
+    [#7X2:1]=[#8X1v2]                                    N=O     NITROSO NITROGEN
+    [#7X1:1]=[#7]                                        NAZT    TERMINAL NITROGEN IN AZIDO OR DIAZO GROUP
+    [#7X3+:1]=[#6]                                       N+=C    POSITIVELY CHARGED IMINIUM NITROGEN
+    [#7X3+:1]=[#7]                                       N+=N    POSITIVELY CHARGED NITROGEN DOUBLE-BONDED TO N
+    [#7X2:1](=[#7])=[#7,#6]                              =N=     NITROGEN IN C=N=N OR -N=N=N 
+    [#7X3+:1]=[#6X3]-[#7X3+0]                            NCN+    N IN +N=C-N RESONANCE STRUCTURES - FORMAL CHARGE=1/2
+    [#7X3+0:1]-[#6X3]=[#7X3+]                            NCN+    N IN +N=C-N RESONANCE STRUCTURES - FORMAL CHARGE=1/2
+    [#7X3+0:1]-[#6X3]1=[#7X3+]-*=*-*=*1                  NC=N    NITROGEN IN N-C=N
+    [#7X3+0:1]-[#6X3]1=[#7X3+]-[#8,#7,#16]-*=*1          NC=N    NITROGEN IN N-C=N
+    [#7X3+:1]=[#6X3](-[#7X3+0])-[#7X3]                   NGD+    GUANIDINIUM-TYPE NITROGEN - FORMAL CHARGE=1/3
+    [#7X3+0:1]-[#6X3](=[#7X3+])-[#7X3]                   NGD+    GUANIDINIUM-TYPE NITROGEN - FORMAL CHARGE=1/3
+    [#7X3:1]-[#6X3](=[#7X3+])-[#7X3+0]                   NGD+    GUANIDINIUM-TYPE NITROGEN - FORMAL CHARGE=1/3
+    [#7X2:1]#[#6X1]                                      NR%     ISONITRILE NITROGEN [FC = 0] OR DIAZO NITROGEN [FC = 1]
+    [#7X2:1]#[#7X1]                                      NR%     ISONITRILE NITROGEN [FC = 0] OR DIAZO NITROGEN [FC = 1]
+    [#7X3+:1]-[#8X1]                                     N2OX    SP2-HYDRIDIZED N-OXIDE NITROGEN
+    [#7X4+:1]-[#8X1]                                     N3OX    SP3-HYDRIDIZED N-OXIDE NITROGEN
+    [#7X3:1](-,=[#8X1])-,=[#8X1]                         NO2     NITRO GROUP NITROGEN
+    [#7X3:1](-,=[#8X1])(-,=[#8X1])-[#8]                  NO3     NITRATE GROUP NITROGEN
+*   [n:1]1:a:a:a:a:a1                                    NPYD    NITROGEN, AS IN PYRIDINE
+*   [nX3v4+:1]1:a:a:a:a:a1                               NPD+    PYRIDINIUM-TYPE NITROGEN - FORMAL CHARGE=1
+*   [nX3v4+:1]1(-[#8X1-]):a:a:a:a:a1                     NPOX    PYRIDINE N-OXIDE NITROGEN
+*   [#7r5:1]                                             N5      GENERAL NITROGEN IN 5-MEMBERED HETEROCYCLIC RING
+*   [n:1]1:a:a:a:a1                                      NPYL    NITROGEN, AS IN PYRROLE
+*   [n:1]1:[n,o,s]:a:a:a1                                N5A     ALPHA AROM HETEROCYCLIC 5-RINGNITROGEN
+*   [n:1]1:a:[n,o,s]:a:a1                                N5B     BETA AROM HETEROCYCLIC 5-RINGNITROGEN
+*   [#7r5+:1]                                            N5+     POSITIVE N5 NITROGEN - FORMAL CHARGE=1
+*   [n+:1]1:[n,o,s]:a:a:a1                               N5A+    POSITIVE N5A NITROGEN - FORMAL CHARGE=1
+*   [n+:1]1:a:[n,o,s]:a:a1                               N5B+    POSITIVE N5B NITROGEN - FORMAL CHARGE=1
+*   [n+1:1]1:c:[n+0]:a:a1                                NIM+    IMIDAZOLIUM-TYPE NITROGEN - FORMAL CHARGE=1/2
+*   [n+0:1]1:c:[n+1]:a:a1                                NIM+    IMIDAZOLIUM-TYPE NITROGEN - FORMAL CHARGE=1/2
+*   [nX3v4+:1]1(-[#8X1-]):a:a:a:a1                       N5OX    N-OXIDE NITROGEN IN GENERAL 5-RING POSITION
+*   [nX3v4+:1]1(-[#8X1-]):[n,o,s]:a:a:a1                 N5AX    N-OXIDE NITROGEN IN 5-RING ALPHA POSITION
+*   [nX3v4+:1]1(-[#8X1-]):a:[n,o,s]:a:a1                 N5BX    N-OXIDE NITROGEN IN 5-RING BETA POSITION
+    [#7X2-:1]1-*=*-*=*1                                  NM      DEPROTONATED SULFONAMIDE N-; FORMAL CHARGE=-1
+    [#7X2-]1-[#7:1]=*-*=*1                               NM      DEPROTONATED SULFONAMIDE N-; FORMAL CHARGE=-1
+    [#7X2-]1-*=[#7:1]-*=*1                               NM      DEPROTONATED SULFONAMIDE N-; FORMAL CHARGE=-1        
+*   [nX2-:1]1:n:c:c:n1                                   N5M     NEGATIVELY CHARGED N IN, E.G, TRI- OR TETRAZOLE ANION
+*   [nX2-:1]1:c:n:n:c1                                   N5M     NEGATIVELY CHARGED N IN, E.G, TRI- OR TETRAZOLE ANION
+*   n1:c:[nX2-:1]:n:c1                                   N5M     NEGATIVELY CHARGED N IN, E.G, TRI- OR TETRAZOLE ANION
+*   n1:c:n:[nX2-:1]:c1                                   N5M     NEGATIVELY CHARGED N IN, E.G, TRI- OR TETRAZOLE ANION
+*   [nX2-:1]1:n:n:n:c1                                   N5M     NEGATIVELY CHARGED N IN, E.G, TRI- OR TETRAZOLE ANION
+*   n1:[nX2-:1]:n:n:c1                                   N5M     NEGATIVELY CHARGED N IN, E.G, TRI- OR TETRAZOLE ANION
+
+*   Sulfur
+    [#16X2:1]                                            S       SULFUR IN THIOETHERS AND MERCAPTANS
+    [#16X1:1]=[#6]                                       S=C     TERMINAL SULFUR DOUBLY BONDED TO CARBON
+    [#16X3:1]=[#8]                                       S=O     SULFUR IN SULFOXIDES
+    [#16X3:1]=[#7]                                       >S=N    SULFUR, TRICOORD, DOUBLY BONDED TO N
+    [#16X4:1](=,-[#8])=,-[#8]                            SO2     SULFUR IN SULFONES 
+    [#16X4:1](=,-[#7,#8])-,=[#7]                         SNO     SULFUR IN NITROGEN ANALOG OF A SULFONE
+    [#16X4:1](=,-[#8])(=,-[#8])-,=[#7]                   SO2N    SULFUR IN SULFONAMIDES
+    [#16X4:1](=,-[#8])(=,-[#8])-,=[#8]                   SO3     SULFONATE SULFUR
+    [#16X4:1](=,-[#8])(=,-[#8])(-,=[#8])-,=[#8]          SO4     SULFATE SULFUR
+    [#16X1-:1]                                           SM      TERMINAL SULFUR - FORMAL CHARGE=-1
+    [#16X1:1]~[#15]                                      S-P     TERMINAL SULFUR BONDED TO PHOSPHORUS
+    [#16X1-:1]~[#15]~[#8X1]                              SM      TERMINAL SULFUR - FORMAL CHARGE=-1
+    [#16X1:1]-,=[#6X3]-,=[#16X1]                         S2CM    TERMINAL SULFUR IN THIOCARBOXYLATE ANION
+    [#16X1:1]-,=[#16X3]-,=[#8]                           SSMO    TERMINAL SULFUR IN THIOSULFINATE GROUP
+    [#16X3:1](=,-[#8X1])=,-[#8X1]                        SO2M    SULFUR IN NEGATIVELY CHARGED SULFINATE GROUP
+    [#16X3:1](=,-[#8X1])(=,-[#8X1])=[#6]                 =SO2    SULFONE SULPHUR DOUBLY BONDED TO CARBON
+    [#16X3:1](-,=[#16])-,=[#8]                           SSOM    TRICOORD SULFUR IN THIOSULFINATE GROUP
+    [#16X2:1](=[#8])=[#6]                                =S=O    SULFINYL SULFUR, EG. IN C=S=O
+*   [s:1]                                                STHI    SULFUR AS IN THIOPHENE
+
+*   Phosphorus
+    [#15X3:1]                                            P       TRICOORDINATE P, AS IN PHOSPHINES
+    [#15X4:1]                                            PTET    GENERAL TETRACOORDINATE PHOSPHORUS
+    [#15X4:1]=,-[#8]                                     PO      TETRACOORDINATE P WITH ONE ATTACHED OXYGEN
+    [#15X4:1](=,-[#8])-,=[#8]                            PO2     TETRACOORDINATE P WITH TWO ATTACHED OXYGENS
+    [#15X4:1](=,-[#8X1])-,=[#16X1]                       PO2     TETRACOORDINATE P WITH TWO ATTACHED OXYGENS
+    [#15X4:1](=,-[#8])(-,=[#8])-,=[#8]                   PO3     TETRACOORDINATE P WITH THREE ATTACHED OXYGENS
+    [#15X4:1](=,-[#8])(-,=[#8])(-,=[#8])-,=[#8]          PO4     PHOSPHOROUS IN PHOSPHATES AND PHOSPHODIESTERS
+    [#15;X2,X3:1]=[#6]                                   -P=C    PHOSPHOROUS DOUBLY BONDED TO CARBON
+
+*   Silicon
+    [#14:1]                                              SI      SILICON
+
+*   Halogens
+    [#9:1]                                               F       FLUORINE
+    [#17:1]                                              CL      CHLORINE
+    [#35:1]                                              BR      BROMINE
+    [#53:1]                                              I       IODINE
+    [#9-:1]                                              F-      FLUORIDE ANION
+    [#17-:1]                                             CL-     CHLORIDE ANION
+    [#35-:1]                                             BR-     BROMIDE ANION
+    [#17X4:1](=,-[#8X1])(=,-[#8X1])(=,-[#8X1])=,-[#8X1]  CLO4    CHLORINE IN PERCHLORATE ANION, CLO4(-)
+
+*   Metals
+    [#26+2:1]                                            FE+2    IRON +2 CATION
+    [#26+3:1]                                            FE+3    IROM +3 CATION
+    [#3+:1]                                              LI+     LITHIUM CATION
+    [#11+:1]                                             NA+     SODIUM CATION
+    [#19+:1]                                             K+      POTASSIUM CATION
+    [#30:1]                                              ZINC    DIPOSITIVE ZINC
+    [#30+2:1]                                            ZN+2    DIPOSITIVE ZINC
+    [#20+2:1]                                            CA+2    DIPOSITIVE CALCIUM 
+    [#29+:1]                                             CU+1    MONOPOSITIVE COPPER
+    [#29+2:1]                                            CU+2    DIPOSITIVE COPPER
+    [#12+2:1]                                            MG+2    DIPOSITIVE MAGNESIUM CATION
+$
+)PARAMDATA";

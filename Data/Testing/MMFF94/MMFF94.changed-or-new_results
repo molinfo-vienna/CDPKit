@@ -1,0 +1,35 @@
+This file summarizes differences from the initial 
+    release of the MMFF94 Validation Suite
+
+Changed energies (and geometries)
+---------------------------------
+
+Molecule  New energy   Old energy
+----------------------------------
+CEWYIM30    66.77530     54.79923
+DAKCEX       6.83065     17.35025
+FAPLUD    -389.23990   -404.09032
+GIGCEE      42.32187     40.83252
+KEPKIZ      61.81628     57.81972
+SAKGUG      26.03383     25.11418
+TAPJUP      19.89126     17.27335
+VEWZOM      -9.37968    -10.38716
+
+
+  New molecules
+  -------------
+
+Molecule     Energy 
+--------------------
+ERULE_01   -21.51511  
+ERULE_02    29.79957  
+ERULE_03    -2.93518  
+ERULE_04    -2.31007  
+ERULE_05     4.88443  
+ERULE_06     1.58172  
+ERULE_07     3.16775  
+ERULE_08    34.41382  
+
+
+All results shown are OPTIMOL energies in kcal/mol obtained on a SGI 
+R10000 workstation.

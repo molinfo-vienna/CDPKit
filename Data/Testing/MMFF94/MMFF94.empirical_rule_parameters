@@ -1,0 +1,72 @@
+This file lists the instances in which MMFF94's empirical rules have had to be
+used to resolve parameter requests. Each such listing first gives the value of the 
+interaction index (1.e., bond-type index = charge-type index, angle-type index, 
+or torsion-type index). This value is then followed by the numbers of the atoms
+involved in the interation.  Consult MMFF94_opti.log to determine the associated
+atom types and the parameter value(s) assigned.  
+
+Note: because of the way the host program OPTIMOL works, only the first instance 
+of generation of a given emperical-rule parameter appears in the list below.  
+
+The same listing lines also appear in the file MMFF94_opti.log.    
+
+ Structure Name: CEWYIM30
+
+ Empirical rule angle parameters:   7   8    3    9
+
+ Structure Name: KEPKIZ
+
+ Empirical rule angle parameters:   1   2    1    8
+ Empirical rule angle parameters:   1   1    8    9
+
+ Structure Name: OHMW1
+
+ Empirical rule (pbci) charges:    0   4    5
+ Empirical rule bond parameters:   0   4    5
+
+ Structure Name: ERULE_01
+
+ Empirical rule angle parameters:     0   2    1    5
+ Empirical rule angle parameters:     0   1    2    9
+ Empirical rule torsion parameters:   5   4    2    1    5
+
+ Structure Name: ERULE_02
+ 
+ Empirical rule angle parameters:     0   3    4    5
+ Empirical rule torsion parameters:   5   1    5    4    3
+
+ Structure Name: ERULE_03
+
+ Empirical rule (pbci) charges:        0   1    2 
+ Empirical rule torsion parameters:    0   6    1    2    3
+ Empirical rule torsion parameters:    0   7    1    2    3
+ Empirical rule bond parameters:       0   1    2
+ Empirical rule angle parameters:      0   2    1    6
+ Empirical rule angle parameters:      0   2    1    7
+ Empirical rule angle parameters:      0   1    2    3
+
+ Structure Name: ERULE_04
+
+ Empirical rule angle parameters:     0   3    4    5
+ Empirical rule torsion parameters:   5   2    3    4    5
+
+ Structure Name: ERULE_05
+
+ Empirical rule angle parameters:     3    2    1    3
+ Empirical rule angle parameters:     0    2    1    4
+
+ Structure Name: ERULE_06
+
+ Empirical rule (pbci) charges:       0   3    4
+ Empirical rule bond parameters:      0   3    4
+ Empirical rule angle parameters:     0   1    4    3
+
+ Structure Name: ERULE_07
+
+ Empirical rule torsion parameters:   5   3    1    5    4
+
+  Structure Name: ERULE_08
+
+ Empirical rule angle parameters:     4   2    1    4
+ Empirical rule torsion parameters:   4   3    2    1    4
+
