@@ -48,7 +48,7 @@ BOOST_AUTO_TEST_CASE(JMEMolecularGraphOutputHandlerTest)
 	using namespace Base;
 
 	Molecule mol1;
-	std::ifstream ifs(std::string(std::string(std::getenv("CDPTK_DATA_DIR")) + "/Morphine.jme").c_str());
+	std::ifstream ifs(std::string(std::string(std::getenv("CDPKIT_TEST_DATA_DIR")) + "/Morphine.jme").c_str());
 
 	BOOST_CHECK(ifs);
 	BOOST_CHECK(JMEMoleculeReader(ifs).read(mol1));

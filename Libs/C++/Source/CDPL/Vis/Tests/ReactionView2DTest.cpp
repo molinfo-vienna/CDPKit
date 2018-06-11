@@ -141,7 +141,7 @@ BOOST_AUTO_TEST_CASE(ReactionView2DTest)
 
 	rxn.clear();
 
-	std::ifstream is(std::string(std::string(std::getenv("CDPKIT_DATA_DIR")) + "/TestRxnData.jme").c_str());
+	std::ifstream is(std::string(std::string(std::getenv("CDPKIT_TEST_DATA_DIR")) + "/TestRxnData.jme").c_str());
 
 	BOOST_CHECK(is);
 	BOOST_CHECK(JMEReactionReader(is).read(rxn));

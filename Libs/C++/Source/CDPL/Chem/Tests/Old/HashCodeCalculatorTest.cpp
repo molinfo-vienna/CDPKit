@@ -354,7 +354,7 @@ BOOST_AUTO_TEST_CASE(HashCodeCalculatorTest)
 
 	Molecule molecules[num_molecules];
 
-	std::string data_dir(std::getenv("CDPTK_DATA_DIR"));
+	std::string data_dir(std::getenv("CDPKIT_TEST_DATA_DIR"));
 	data_dir.push_back('/');
 
 	for (std::size_t i = 0; i < num_molecules; i++) {

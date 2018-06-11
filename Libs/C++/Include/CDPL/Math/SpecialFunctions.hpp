@@ -101,11 +101,10 @@ namespace CDPL
 		 * \param c Locates the center of the curve.
 		 * \return The generalized bell function value at \a x.
 		 */
+		template <typename T>
+		T generalizedBell(const T& x, const T& a, const T& b, const T& c);
 
-		 template <typename T>
-		 T generalizedBell(const T& x, const T& a, const T& b, const T& c);
-
-		 /**
+		/**
 		 * @}
 		 */
 	}
@@ -236,12 +235,12 @@ template <typename T>
 CDPL_MATH_INLINE T CDPL::Math::lnGamma(const T& xx)
 {
 	static const long double cof[6] = {
-		 76.18009172947146,
-		-86.50532032941677,
-		 24.01409824083091,
-		-1.231739572450155,
-		 0.1208650973866179e-2,
-		-0.5395239384953e-5
+	76.18009172947146,
+	-86.50532032941677,
+	24.01409824083091,
+	-1.231739572450155,
+	0.1208650973866179e-2,
+	-0.5395239384953e-5
 	};
 
 	long double ser = 1.000000000190015;

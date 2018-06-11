@@ -275,6 +275,7 @@
 #include "CDPL/Chem/LogSCalculator.hpp"
 #include "CDPL/Chem/RDFCodeCalculator.hpp"
 #include "CDPL/Chem/AtomRDFCodeCalculator.hpp"
+#include "CDPL/Chem/MoleculeRDFDescriptorCalculator.hpp"
 #include "CDPL/Chem/AutoCorrelation2DVectorCalculator.hpp"
 #include "CDPL/Chem/AutoCorrelation3DVectorCalculator.hpp"
 #include "CDPL/Chem/AtomAutoCorrelation3DVectorCalculator.hpp"

@@ -136,7 +136,7 @@ def processMolecule(mol, stats):
 
 def cleanStructures():
     if len(sys.argv) < 5:
-        print >> sys.stderr, 'Usage:', sys.argv[0], 'input.sdf output.sdf dropped.sdf start_index [count]'
+        print >> sys.stderr, 'Usage:', sys.argv[0], '[input.sdf] [output.sdf] [dropped.sdf] [start_index] [[count]]'
         sys.exit(2)
 
     ifs = Base.FileIOStream(sys.argv[1], 'r')

@@ -51,5 +51,6 @@ void CDPLPythonPharm::exportFeatureTypes()
 	.def_readonly("POS_IONIZABLE", &Pharm::FeatureType::POS_IONIZABLE)
 	.def_readonly("H_BOND_DONOR", &Pharm::FeatureType::H_BOND_DONOR)
 	.def_readonly("H_BOND_ACCEPTOR", &Pharm::FeatureType::H_BOND_ACCEPTOR)
-	.def_readonly("X_VOLUME", &Pharm::FeatureType::X_VOLUME);
+	.def_readonly("X_VOLUME", &Pharm::FeatureType::X_VOLUME)
+	.def_readonly("MAX_TYPE", &Pharm::FeatureType::MAX_TYPE);
 }

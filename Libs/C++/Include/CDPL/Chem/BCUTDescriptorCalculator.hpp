@@ -44,7 +44,7 @@ namespace CDPL
 	{
 
 		/**
-		 * \addtogroup CDPL_CHEM_BCUT_DESCRIPTORS
+		 * \addtogroup CDPL_CHEM_DESCRIPTORS
 		 * @{
 		 */
 

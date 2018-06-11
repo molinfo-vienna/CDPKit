@@ -25,6 +25,7 @@
 
 
 #include <boost/python.hpp>
+#include <boost/math/special_functions/prime.hpp>
 
 #include "CDPL/Math/SpecialFunctions.hpp"
 #include "CDPL/Base/IntegerTypes.hpp"
@@ -32,11 +33,22 @@
 #include "FunctionExports.hpp"
 
 
+namespace
+{
+
+	std::size_t prime(std::size_t i)
+	{
+		return boost::math::prime(i);
+	}
+}
+
+
 void CDPLPythonMath::exportSpecialFunctions()
 {
 	using namespace boost;
 	using namespace CDPL;
 
+	python::def("prime", &prime, python::arg("i"));
 	python::def("factorial", &Math::factorial<Base::uint64>, python::arg("n"));
 	python::def("pythag", &Math::pythag<double>, (python::arg("a"), python::arg("b")));
 	python::def("sign", &Math::sign<double, double>, (python::arg("a"), python::arg("b")));

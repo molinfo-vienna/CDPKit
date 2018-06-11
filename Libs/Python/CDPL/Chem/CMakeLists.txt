@@ -91,6 +91,7 @@ SET(chem_MOD_SRCS
     PEOEChargeCalculatorExport.cpp 
     AutoCorrelation2DVectorCalculatorExport.cpp 
     AtomRDFCodeCalculatorExport.cpp 
+    MoleculeRDFDescriptorCalculatorExport.cpp 
     AtomAutoCorrelation3DVectorCalculatorExport.cpp 
     BurdenMatrixGeneratorExport.cpp 
     BCUTDescriptorCalculatorExport.cpp 

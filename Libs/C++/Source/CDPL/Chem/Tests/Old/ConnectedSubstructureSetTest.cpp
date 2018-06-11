@@ -42,7 +42,7 @@ BOOST_AUTO_TEST_CASE(ConnectedSubstructureSetTest)
 
 	Molecule mol1, mol2;
 
-	std::ifstream ifs1(std::string(std::string(std::getenv("CDPTK_DATA_DIR")) + "/Cis-14-Dimethylcyclohexane1.jme").c_str());
+	std::ifstream ifs1(std::string(std::string(std::getenv("CDPKIT_TEST_DATA_DIR")) + "/Cis-14-Dimethylcyclohexane1.jme").c_str());
 
 	BOOST_CHECK(ifs1);
 

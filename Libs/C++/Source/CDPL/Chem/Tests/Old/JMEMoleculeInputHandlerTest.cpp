@@ -60,7 +60,7 @@ BOOST_AUTO_TEST_CASE(JMEMoleculeInputHandlerTest)
 	BOOST_CHECK(DataIOManager<Molecule>::getInputHandlerByName("jme") == handler);
 	BOOST_CHECK(DataIOManager<Molecule>::getInputHandlerByFileExtension("jme") == handler);
 
-	std::ifstream ifs(std::string(std::string(std::getenv("CDPTK_DATA_DIR")) + "/Morphine.jme").c_str());
+	std::ifstream ifs(std::string(std::string(std::getenv("CDPKIT_TEST_DATA_DIR")) + "/Morphine.jme").c_str());
 
 	BOOST_CHECK(ifs);
 

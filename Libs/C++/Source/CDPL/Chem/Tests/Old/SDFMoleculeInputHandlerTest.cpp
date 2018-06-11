@@ -62,7 +62,7 @@ BOOST_AUTO_TEST_CASE(SDFMoleculeInputHandlerTest)
 	BOOST_CHECK(DataIOManager<Molecule>::getInputHandlerByFileExtension("sd") == handler);
 	BOOST_CHECK(DataIOManager<Molecule>::getInputHandlerByMimeType("chemical/x-mdl-sdfile") == handler);
 
-	std::ifstream ifs(std::string(std::string(std::getenv("CDPTK_DATA_DIR")) + "/Morphine.jme").c_str());
+	std::ifstream ifs(std::string(std::string(std::getenv("CDPKIT_TEST_DATA_DIR")) + "/Morphine.jme").c_str());
 
 	BOOST_CHECK(ifs);
 

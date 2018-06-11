@@ -82,8 +82,8 @@ BOOST_AUTO_TEST_CASE(ComponentSetTest)
 
 	Molecule mol1, mol2, mol3;
 
-	std::ifstream ifs1(std::string(std::string(std::getenv("CDPTK_DATA_DIR")) + "/Morphine.jme").c_str());
-	std::ifstream ifs2(std::string(std::string(std::getenv("CDPTK_DATA_DIR")) + "/Clique8.jme").c_str());
+	std::ifstream ifs1(std::string(std::string(std::getenv("CDPKIT_TEST_DATA_DIR")) + "/Morphine.jme").c_str());
+	std::ifstream ifs2(std::string(std::string(std::getenv("CDPKIT_TEST_DATA_DIR")) + "/Clique8.jme").c_str());
 
 	BOOST_CHECK(ifs1);
 	BOOST_CHECK(ifs2);

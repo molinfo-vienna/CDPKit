@@ -196,7 +196,9 @@ bool DataSetReader::appendRecords(bool use_file_ext)
 			reader_ptr = handler->createReader(fileName.toStdString().c_str(), std::ios_base::binary | std::ios_base::in);
 
 			reader_ptr->setParent(&settings.getReaderControlParameters(handler->getDataFormat().getName()));
-			reader_ptr->read(data);
+
+			if (!reader_ptr->read(data))
+				return false;
 
 		} catch (const Exception& e) {
 			std::cerr << "Reader (using file ext.): " << e.what() << std::endl;
@@ -217,9 +219,9 @@ bool DataSetReader::appendRecords(bool use_file_ext)
 				reader_ptr = h_it->createReader(fileName.toStdString().c_str(), std::ios_base::binary | std::ios_base::in);
 
 				reader_ptr->setParent(&settings.getReaderControlParameters(h_it->getDataFormat().getName()));
-				reader_ptr->read(data);
-
-				found_reader = true;
+				
+				if (reader_ptr->read(data))
+					found_reader = true;
 
 			} catch (const Exception& e) {
 				std::cerr << "Reader: " << e.what() << std::endl;

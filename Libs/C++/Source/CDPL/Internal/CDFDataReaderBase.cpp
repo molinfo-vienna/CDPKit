@@ -106,7 +106,7 @@ bool Internal::CDFDataReaderBase::getHeader(CDF::Header& header, ByteBuffer& bbu
 
 	if (header.formatID == CDF::FORMAT_ID)
 		return true;
- 
+
 	if (strictErrorChecks)
 		throw Base::IOError("CDFDataReaderBase: invalid CDF-header, format-ID mismatch");
 

@@ -117,8 +117,8 @@
 
 #include "CDPL/Pharm/FeatureRDFCodeCalculator.hpp"
 #include "CDPL/Pharm/FeatureAutoCorrelation3DVectorCalculator.hpp"
-#include "CDPL/Pharm/PharmacophoreRDFFingerprintGenerator.hpp"
-#include "CDPL/Pharm/PharmacophoreAutoCorr3DFingerprintGenerator.hpp"
+#include "CDPL/Pharm/PharmacophoreRDFDescriptorCalculator.hpp"
+#include "CDPL/Pharm/PharmacophoreAutoCorr3DDescriptorCalculator.hpp"
 
 #include "CDPL/Pharm/PharmacophoreFunctions.hpp"  
 #include "CDPL/Pharm/FeatureFunctions.hpp"

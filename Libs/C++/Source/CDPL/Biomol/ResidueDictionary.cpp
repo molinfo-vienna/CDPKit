@@ -41,9 +41,9 @@
 #include "CDPL/Chem/MolecularGraphFunctions.hpp"
 #include "CDPL/Base/Exceptions.hpp"
 
-#include "ResidueData.hpp"
+#include "BuiltinResidueDictionaryData.hpp"
 
-
+#include <fstream>
 using namespace CDPL;
 
 
@@ -51,7 +51,7 @@ namespace
 {
   
     typedef boost::unordered_set<std::string> StdResidueSet;
-    typedef boost::unordered_map<std::string, const ResidueDataEntry*> ResCodeToDataEntryMap;
+    typedef boost::unordered_map<std::string, const Biomol::BuiltinResidueDictionaryData::ResidueDataEntry*> ResCodeToDataEntryMap;
     typedef boost::unordered_map<std::string, Chem::MolecularGraph::SharedPointer> StructureCache;
 
 	StdResidueSet             stdResidueSet;
@@ -62,7 +62,8 @@ namespace
 
 	const Biomol::ResidueDictionary::Entry DEF_ENTRY;
 
-    boost::iostreams::stream<boost::iostreams::array_source> resStructureIStream(residueStructureData, RESIDUE_STRUCTURE_DATA_LEN);
+    boost::iostreams::stream<boost::iostreams::array_source> resStructureIStream(Biomol::BuiltinResidueDictionaryData::residueStructureData, 
+																				 Biomol::BuiltinResidueDictionaryData::RESIDUE_STRUCTURE_DATA_LEN);
     Chem::CDFMoleculeReader                                  resStructureReader(resStructureIStream);
 
 	const char* stdResidueList[] = {
@@ -75,10 +76,13 @@ namespace
 	{
 
 		Init() {
+			using namespace Biomol;
+			using namespace BuiltinResidueDictionaryData;
+
 			stdResidueSet.insert(&stdResidueList[0], &stdResidueList[sizeof(stdResidueList) / sizeof(const char*)]);
 			builtinDictionary.loadDefaultEntries();
 
-			for (std::size_t i = 0; i < sizeof(residueData) / sizeof(ResidueDataEntry); i++) {
+			for (std::size_t i = 0; i < NUM_RESIDUE_ENTRIES; i++) {
 				const ResidueDataEntry& entry = residueData[i];
 
 				resCodeToDataEntryMap.insert(ResCodeToDataEntryMap::value_type(entry.code, &entry));
@@ -91,6 +95,7 @@ namespace
 	{
 		using namespace Chem;
 		using namespace Biomol;
+		using namespace BuiltinResidueDictionaryData;
 
 		boost::lock_guard<boost::mutex> lock(loadStructureMutex);
 
@@ -257,9 +262,11 @@ Biomol::ResidueDictionary::ConstEntryIterator Biomol::ResidueDictionary::getEntr
 
 void Biomol::ResidueDictionary::loadDefaultEntries()
 {
+	using namespace BuiltinResidueDictionaryData;
+
 	Entry::StructureRetrievalFunction struc_ret_func(&loadResidueStructure);
 
-	for (std::size_t i = 0; i < sizeof(residueData) / sizeof(ResidueDataEntry); i++) {
+	for (std::size_t i = 0; i < NUM_RESIDUE_ENTRIES; i++) {
 		const ResidueDataEntry& res_data = residueData[i];
 
 		Entry entry(res_data.code, res_data.replacesCode, res_data.replacedByCode, res_data.obsolete,

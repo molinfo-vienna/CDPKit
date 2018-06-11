@@ -61,7 +61,7 @@ BOOST_AUTO_TEST_CASE(RXNReactionInputHandlerTest)
 	BOOST_CHECK(DataIOManager<Reaction>::getInputHandlerByFileExtension("rxn") == handler);
 	BOOST_CHECK(DataIOManager<Reaction>::getInputHandlerByMimeType("chemical/x-mdl-rxnfile") == handler);
 
-	std::ifstream ifs(std::string(std::string(std::getenv("CDPTK_DATA_DIR")) + "/MorphineAcetylation.jme").c_str());
+	std::ifstream ifs(std::string(std::string(std::getenv("CDPKIT_TEST_DATA_DIR")) + "/MorphineAcetylation.jme").c_str());
 
 	BOOST_CHECK(ifs);
 

@@ -129,6 +129,7 @@ SET(cdpl-chem_LIB_SRCS
     AutoCorrelation2DVectorCalculator.cpp
     AtomAutoCorrelation3DVectorCalculator.cpp
     AtomRDFCodeCalculator.cpp
+    MoleculeRDFDescriptorCalculator.cpp
     BurdenMatrixGenerator.cpp
     BCUTDescriptorCalculator.cpp
     SurfaceAtomExtractor.cpp

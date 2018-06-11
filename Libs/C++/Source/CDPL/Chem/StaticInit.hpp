@@ -67,7 +67,7 @@ namespace
 			CDPL::Chem::initBondPropertyDefaults();
 			CDPL::Chem::initMolecularGraphPropertyDefaults();
 			CDPL::Chem::initReactionPropertyDefaults();
-				CDPL::Chem::initControlParameters();
+			CDPL::Chem::initControlParameters();
 			CDPL::Chem::initControlParameterDefaults();
 			CDPL::Chem::initDataFormats();
 		}

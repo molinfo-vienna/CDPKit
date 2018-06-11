@@ -62,7 +62,7 @@ BOOST_AUTO_TEST_CASE(MolecularGraphSSSRTest)
 
 //-----
 
-	std::ifstream ifs(std::string(std::string(std::getenv("CDPTK_DATA_DIR")) + "/Fullerene2.jme").c_str());
+	std::ifstream ifs(std::string(std::string(std::getenv("CDPKIT_TEST_DATA_DIR")) + "/Fullerene2.jme").c_str());
 
 	BOOST_CHECK(ifs);
 

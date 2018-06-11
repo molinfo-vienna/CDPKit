@@ -35,8 +35,6 @@ namespace CDPL
 
 	namespace Forcefield
 	{
-
-		void initValueKey();
 	}
 }
 
@@ -47,7 +45,6 @@ namespace
 	{
 
 		CDPLForcefieldInit() {
-			CDPL::Forcefield::initValueKey();
 		}
 
 	} cdplForcefieldInit;

@@ -25,7 +25,6 @@
 
 
 import sys
-import os
 import string
 
 from CDPL.Chem import *
@@ -35,8 +34,8 @@ from CDPL.Base import *
 
 def genResidueDictionaryData():
     
-    if len(sys.argv) < 3:
-        print >> sys.stderr, 'Usage:', sys.argv[0], '[PDB Component Directory mmCIF input file] [data output header file]'
+    if len(sys.argv) < 4:
+        print >> sys.stderr, 'Usage:', sys.argv[0], '[PDB Component Directory mmCIF input file] [residue entry output file] [residue structure output file]'
         sys.exit(2)
 
     comp_type_map = { 'other' : 'OTHER', \
@@ -67,56 +66,11 @@ def genResidueDictionaryData():
 
     output = list()
 
-    output.append('/* -*- mode: c++; c-basic-offset: 4; tab-width: 4; indent-tabs-mode: t -*- */\n\n')
-    output.append('/*\n')
-    output.append(' * ' + os.path.basename(sys.argv[2]) + '\n')
-    output.append(' *\n')
-    output.append(' * This file is part of the Chemical Data Processing Toolkit\n')
-    output.append(' *\n')
-    output.append(' * Copyright (C) 2003-2015 Thomas A. Seidel <thomas.seidel@univie.ac.at>\n')
-    output.append(' *\n')
-    output.append(' * This library is free software; you can redistribute it and/or\n')
-    output.append(' * modify it under the terms of the GNU Lesser General Public\n')
-    output.append(' * License as published by the Free Software Foundation; either\n')
-    output.append(' * version 2 of the License, or (at your option) any later version.\n')
-    output.append(' *\n')
-    output.append(' * This library is distributed in the hope that it will be useful,\n')
-    output.append(' * but WITHOUT ANY WARRANTY; without even the implied warranty of\n')
-    output.append(' * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU\n')
-    output.append(' * Lesser General Public License for more details.\n')
-    output.append(' *\n')
-    output.append(' * You should have received a copy of the GNU Lesser General Public License\n')
-    output.append(' * along with this library; see the file COPYING. If not, write to\n')
-    output.append(' * the Free Software Foundation, Inc., 59 Temple Place - Suite 330,\n')
-    output.append(' * Boston, MA 02111-1307, USA.\n')
-    output.append(' */\n')
-    output.append('\n\n')
-
-    root_and_ext = os.path.splitext(os.path.basename(sys.argv[2]))
-    inc_guard = 'CDPL_BIOMOL_' + string.upper(root_and_ext[0]) + '_' + string.upper(string.lstrip(root_and_ext[1], '.'))
-
-    output.append('#ifndef ' + inc_guard + '\n')
-    output.append('#define ' + inc_guard + '\n')
-    output.append('\n\n')
-    output.append('namespace\n')
-    output.append('{\n\n')
-
-    output.append('\tstruct ResidueDataEntry\n')
-    output.append('\t{\n\n')
-    output.append('\t\tconst char*  code;\n')
-    output.append('\t\tconst char*  replacesCode;\n')
-    output.append('\t\tconst char*  replacedByCode;\n')
-    output.append('\t\tunsigned int type;\n')
-    output.append('\t\tbool         obsolete;\n')
-    output.append('\t\tconst char*  name;\n')
-    output.append('\t\tstd::size_t  molIndex;\n')
-    output.append('\t};\n\n')
-
-    output.append('\tResidueDataEntry residueData[] = {\n')
+    output.append('const ResidueDataEntry residueData[] = {\n')
   
     cif_file = file(sys.argv[1], 'r')
 
-    struct_os = StringIOStream('', 'wb');
+    struct_os = FileIOStream(sys.argv[3], 'wb');
     struct_wtr = CDFMolecularGraphWriter(struct_os)
     struct = BasicMolecule()
     struct_idx = 0
@@ -129,7 +83,7 @@ def genResidueDictionaryData():
 
         code = line[5:8].strip()
 
-        print 'Processing data for component ' + code + ' ...'
+        print 'Processing entry ' + code + ' ...'
         
         ##########
 
@@ -206,6 +160,8 @@ def genResidueDictionaryData():
         ########## ATOMS
 
         struct.clear()
+
+        setName(struct, code)
 
         atom_count = 0
         bond_count = 0
@@ -484,35 +440,25 @@ def genResidueDictionaryData():
 
         comp_name = comp_name.replace('"', '\\"')
 
+        setAtomTypesFromSymbols(struct, True)
+
         struct_wtr.write(struct)
 
-        output.append('\t\t{ "' + code + '", "' + replaces_code + '", "' + replaced_by_code + '", CDPL::Biomol::ResidueType::' + comp_type + ', ' + obsolete + ', "' + comp_name + '", ' + str(struct_idx) + ' },\n')
+        output.append('\t{ "' + code + '", "' + replaces_code + '", "' + replaced_by_code + '", ResidueType::' + comp_type + ', ' + obsolete + ', "' + comp_name + '", ' + str(struct_idx) + ' },\n')
 
         struct_idx += 1
 
         #break ###### 
 
-    output.append('\t};\n\n')
-    output.append('\tconst char residueStructureData[] = {\n\t\t"')
+    output.append('};\n')
+    output.append('\nconst std::size_t NUM_RESIDUE_ENTRIES = ' + str(struct_idx) + ';\n')
+    output.append('\nconst std::size_t RESIDUE_STRUCTURE_DATA_LEN = ' + str(struct_os.tell()) + ';\n')
 
-    struct_data = struct_os.getvalue()
-    char_cnt = 0
+    open(sys.argv[2], 'w').writelines(output);
+  
+    struct_os.flush()
+    struct_os.close()
 
-    for c in struct_data:
-        output.append('\\x{0:02x}'.format(ord(c)))
-        char_cnt += 1
-
-        if char_cnt % 20 == 0:
-            output.append('"\n\t\t"')
-    
-    output.append('"\n')
-    output.append('\t};\n')
-
-    output.append('\n\tstd::size_t RESIDUE_STRUCTURE_DATA_LEN = ' + str(char_cnt) + ';\n')
-    output.append('}\n\n')
-    output.append('#endif // ' + inc_guard + '\n')
-
-    file(sys.argv[2], 'w+').writelines(output)
 
 def skipToLine(prefix, in_file):
     while True: 
@@ -525,6 +471,7 @@ def skipToLine(prefix, in_file):
             continue
 
         return line    
+
 
 if __name__ == '__main__':
     genResidueDictionaryData()

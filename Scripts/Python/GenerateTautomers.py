@@ -49,7 +49,7 @@ class TautomerCB():
 
 def process():
     if len(sys.argv) < 3:
-        print >> sys.stderr, 'Usage:', sys.argv[0], 'input.sdf output.sdf'
+        print >> sys.stderr, 'Usage:', sys.argv[0], '[input.sdf] [output.sdf]'
         sys.exit(2)
 
     m = Chem.BasicMolecule()

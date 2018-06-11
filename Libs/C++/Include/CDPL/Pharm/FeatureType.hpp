@@ -64,6 +64,8 @@ namespace CDPL
 			const unsigned int H_BOND_ACCEPTOR = 6;
 
 			const unsigned int X_VOLUME        = 7;
+
+			const unsigned int MAX_TYPE        = X_VOLUME;
 		}
 
 		/**

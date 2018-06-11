@@ -31,7 +31,7 @@ import CDPL.Math as Math
 
 def process():
     if len(sys.argv) < 4:
-	    print >> sys.stderr, 'Usage:', sys.argv[0], 'training-set.sdf logS-data regression-coeff-file'
+	    print >> sys.stderr, 'Usage:', sys.argv[0], '[training-set.sdf] [logS-data] [regression coeff. output file]'
         sys.exit(2)
 
 	struct_is = Base.FileIOStream(sys.argv[1], 'r')

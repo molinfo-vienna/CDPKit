@@ -31,7 +31,7 @@ import re
 def cxxToPythonCode():
 	
 	if len(sys.argv) < 3:
-		print >> sys.stderr, 'Usage:', sys.argv[0], 'input-file output-file'
+		print >> sys.stderr, 'Usage:', sys.argv[0], '[input file] [output file]'
 		sys.exit(2)
 
 	output = list();

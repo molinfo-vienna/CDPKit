@@ -58,7 +58,7 @@ BOOST_AUTO_TEST_CASE(SMARTSMoleculeInputHandlerTest)
 	BOOST_CHECK(DataIOManager<Molecule>::getInputHandlerByName("smarts") == handler);
 	BOOST_CHECK(DataIOManager<Molecule>::getInputHandlerByFileExtension("sma") == handler);
 
-	std::ifstream ifs(std::string(std::string(std::getenv("CDPTK_DATA_DIR")) + "/Morphine.jme").c_str());
+	std::ifstream ifs(std::string(std::string(std::getenv("CDPKIT_TEST_DATA_DIR")) + "/Morphine.jme").c_str());
 
 	BOOST_CHECK(ifs);
 

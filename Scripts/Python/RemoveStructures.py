@@ -44,7 +44,7 @@ def setupMolecule(mol):
 
 def process():
     if len(sys.argv) < 4:
-        print >> sys.stderr, 'Usage:', sys.argv[0], 'input.sdf exclude-molecules.sdf output.sdf'
+        print >> sys.stderr, 'Usage:', sys.argv[0], '[input.sdf] [exclude-molecules.sdf] [output.sdf]'
         sys.exit(2)
 
     ifs = Base.FileIOStream(sys.argv[1], 'r')

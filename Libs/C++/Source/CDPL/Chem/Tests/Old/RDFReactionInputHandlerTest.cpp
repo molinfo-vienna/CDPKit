@@ -62,7 +62,7 @@ BOOST_AUTO_TEST_CASE(RDFReactionInputHandlerTest)
 	BOOST_CHECK(DataIOManager<Reaction>::getInputHandlerByFileExtension("rd") == handler);
 	BOOST_CHECK(DataIOManager<Reaction>::getInputHandlerByMimeType("chemical/x-mdl-rdfile") == handler);
 
-	std::ifstream ifs(std::string(std::string(std::getenv("CDPTK_DATA_DIR")) + "/MorphineAcetylation.jme").c_str());
+	std::ifstream ifs(std::string(std::string(std::getenv("CDPKIT_TEST_DATA_DIR")) + "/MorphineAcetylation.jme").c_str());
 
 	BOOST_CHECK(ifs);
 

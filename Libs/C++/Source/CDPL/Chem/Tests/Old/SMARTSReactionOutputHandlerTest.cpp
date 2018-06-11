@@ -47,7 +47,7 @@ BOOST_AUTO_TEST_CASE(SMARTSReactionOutputHandlerTest)
 	using namespace Base;
 
 	Reaction rxn1;
-	std::ifstream ifs(std::string(std::string(std::getenv("CDPTK_DATA_DIR")) + "/MorphineAcetylation.jme").c_str());
+	std::ifstream ifs(std::string(std::string(std::getenv("CDPKIT_TEST_DATA_DIR")) + "/MorphineAcetylation.jme").c_str());
 
 	BOOST_CHECK(ifs);
 	BOOST_CHECK(JMEReactionReader(ifs).read(rxn1));
