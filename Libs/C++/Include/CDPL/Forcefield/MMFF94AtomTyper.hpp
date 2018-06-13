@@ -31,33 +31,82 @@
 #ifndef CDPL_FORCEFIELD_MMFF94ATOMTYPER_HPP
 #define CDPL_FORCEFIELD_MMFF94ATOMTYPER_HPP
 
+#include <vector>
+#include <string>
+#include <cstddef>
+
 #include "CDPL/Forcefield/APIPrefix.hpp"
-#include "CDPL/Chem/MolecularGraph.hpp"
+#include "CDPL/Chem/PatternAtomTyper.hpp"
+#include "CDPL/Util/Array.hpp"
 
 
 namespace CDPL 
 {
 
+	namespace Chem
+	{
+
+		class MolecularGraph;
+	}
+
     namespace Forcefield 
     {
 
-	/**
-	 * \addtogroup CDPL_FORCEFIELD_ATOM_TYPE_PERCEPTION
-	 * @{
-	 */
+		class MMFF94SymbolicAtomTypePatternTable;
+		class MMFF94HeavyToHydrogenAtomTypeMap;
+		class MMFF94SymbolicToNumericAtomTypeMap;
 
-	class CDPL_FORCEFIELD_API MMFF94AtomTyper
-	{
+		/**
+		 * \addtogroup CDPL_FORCEFIELD_ATOM_TYPE_PERCEPTION
+		 * @{
+		 */
 
-	  public:
-	    MMFF94AtomTyper();
+		class CDPL_FORCEFIELD_API MMFF94AtomTyper
+		{
 
-	  private:
-	};
+		  public:
+			MMFF94AtomTyper();
+
+			void setSymbolicAtomTypePatternTable(const MMFF94SymbolicAtomTypePatternTable& table);
+
+			void setHeavyToHydrogenAtomTypeMap(const MMFF94HeavyToHydrogenAtomTypeMap& map);
+
+			void setSymbolicToNumericAtomTypeMap(const MMFF94SymbolicToNumericAtomTypeMap& map);
+
+			void strictAtomTyping(bool strict);
+
+			bool strictAtomTyping() const;
+
+			void perceiveTypes(const Chem::MolecularGraph& molgraph);
+
+			const std::string& getSymbolicType(std::size_t idx);
+
+			unsigned int getNumericType(std::size_t idx);
+
+		  private:
+			void init(const Chem::MolecularGraph& molgraph);
+
+			void perceiveInitialAtomTypes();
+			void assignAromaticAtomTypes();
+			void assignHydrogenAtomTypes();
+			void assignNumericAtomTypes();
+
+			typedef std::vector<std::string> SymbolicTypeTable;
+			typedef std::vector<unsigned int> NumericTypeTable;
+
+			bool                                         strictMode;
+			const MMFF94SymbolicAtomTypePatternTable*    symTypePatternTable;
+			const MMFF94HeavyToHydrogenAtomTypeMap*      hydTypeMap;
+			const MMFF94SymbolicToNumericAtomTypeMap*    numTypeMap;
+			const Chem::MolecularGraph*                  molGraph;
+			Chem::PatternAtomTyper                       atomTyper;
+			SymbolicTypeTable                            symTypes;
+			NumericTypeTable                             numTypes;
+		};
     
-	/**
-	 * @}
-	 */
+		/**
+		 * @}
+		 */
     }
 }
 

@@ -64,8 +64,8 @@ namespace
 const Forcefield::MMFF94SymbolicAtomTypePatternTable* Forcefield::MMFF94SymbolicAtomTypePatternTable::defaultTable = &builtinTable;
 
 
-Forcefield::MMFF94SymbolicAtomTypePatternTable::Entry::Entry(bool fallback, const Chem::MolecularGraph::SharedPointer& ptn, const std::string& sym_type):
-	fallback(fallback), pattern(ptn), symType(sym_type)
+Forcefield::MMFF94SymbolicAtomTypePatternTable::Entry::Entry(const Chem::MolecularGraph::SharedPointer& ptn, const std::string& sym_type, bool fallback):
+	pattern(ptn), symType(sym_type), fallback(fallback)
 {}
 
 bool Forcefield::MMFF94SymbolicAtomTypePatternTable::Entry::isFallbackType() const
@@ -92,9 +92,9 @@ std::size_t Forcefield::MMFF94SymbolicAtomTypePatternTable::getNumEntries() cons
     return entries.size();
 }
 
-void Forcefield::MMFF94SymbolicAtomTypePatternTable::addEntry(const Entry& entry)
+void Forcefield::MMFF94SymbolicAtomTypePatternTable::addEntry(const Chem::MolecularGraph::SharedPointer& ptn, const std::string& sym_type, bool fallback)
 {
-    entries.push_back(entry);
+    entries.push_back(Entry(ptn, sym_type, fallback));
 }
 
 const Forcefield::MMFF94SymbolicAtomTypePatternTable::Entry& Forcefield::MMFF94SymbolicAtomTypePatternTable::getEntry(std::size_t idx) const
@@ -114,18 +114,22 @@ Forcefield::MMFF94SymbolicAtomTypePatternTable::ConstEntryIterator Forcefield::M
 {
     return entries.end();
 }
-			
+
+void Forcefield::MMFF94SymbolicAtomTypePatternTable::clear()
+{
+    entries.clear();
+}
+
 void Forcefield::MMFF94SymbolicAtomTypePatternTable::load(std::istream& is)
 {
 	using namespace Chem;
 
 	std::string line;
-	std::istringstream line_iss;
 	std::string pattern;
 	std::string sym_type;
 
 	while (readMMFF94DataLine(is, line, "MMFF94SymbolicAtomTypePatternTable: error while reading symbolic atom type pattern data line")) {
-		line_iss.str(line);
+		std::istringstream line_iss(line);
 
 		if (!(line_iss >> pattern))
 			throw Base::IOError("MMFF94SymbolicAtomTypePatternTable: error while reading symbolic atom type pattern");
@@ -146,12 +150,10 @@ void Forcefield::MMFF94SymbolicAtomTypePatternTable::load(std::istream& is)
 			if (hasReactionAtomMappingID(atom)) {
 				if (getReactionAtomMappingID(atom) == 2)
 					fb = true;
-
-				setReactionAtomMappingID(atom, entries.size() + 1);
 			}
 		}
 
-		addEntry(Entry(fb, mol_ptr, sym_type));
+		addEntry(mol_ptr, sym_type, fb);
 	}
 }
 

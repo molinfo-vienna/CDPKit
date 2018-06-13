@@ -175,6 +175,19 @@ namespace CDPL
 			void setEntity3DCoordinatesFunction(const Entity3DCoordinatesFunction& func);
 
 			/**
+			 * \brief Allows to specify whether entity pair distances should be rounded to the nearest radius interval center.
+			 * \param enable \c true if pair distances should be rounded, and \c false otherwise.
+			 * \note The default setting is not to round the entity pair distances.
+			 */
+			void enableDistanceToIntervalCenterRounding(bool enable);
+
+			/**
+			 * \brief Tells whether entity pair distances get rounded to the nearest radius interval centers.
+			 * \return \c true if pair distances get rounded, and \c false otherwise.
+			 */
+			bool distanceToIntervalsCenterRoundingEnabled() const;
+
+			/**
 			 * \brief Calculates the RDF code of an entity sequence.
 			 *
 			 * The elements of the returned RDF code vector correspond to the values of the radial distribution function
@@ -194,16 +207,17 @@ namespace CDPL
 			template <typename Iter>
 			void init(Iter beg, Iter end);
 
-			double                    smoothingFactor;
-			double                    scalingFactor;
-			double                    startRadius;
-			double                    radiusIncrement;
-			std::size_t               numSteps;
-			std::size_t               numEntities;
-			EntityPairWeightFunction  weightFunc;
+			double                      smoothingFactor;
+			double                      scalingFactor;
+			double                      startRadius;
+			double                      radiusIncrement;
+			std::size_t                 numSteps;
+			std::size_t                 numEntities;
+			EntityPairWeightFunction    weightFunc;
 			Entity3DCoordinatesFunction coordsFunc;
-			Math::DMatrix             weightMatrix;
-			Math::DMatrix             distMatrix;
+			bool                        distToIntervalCenterRounding;
+			Math::DMatrix               weightMatrix;
+			Math::DMatrix               distMatrix;
 		}; 
 
 		/**
@@ -217,7 +231,9 @@ namespace CDPL
 
 template <typename T>
 CDPL::Chem::RDFCodeCalculator<T>::RDFCodeCalculator(): 
-	smoothingFactor(1.0), scalingFactor(1.0), startRadius(0.0), radiusIncrement(0.1), numSteps(99) {}
+	smoothingFactor(1.0), scalingFactor(1.0), startRadius(0.0), radiusIncrement(0.1), numSteps(99), 
+	distToIntervalCenterRounding(false) 
+{}
 
 template <typename T>
 void CDPL::Chem::RDFCodeCalculator<T>::setSmoothingFactor(double factor)
@@ -292,6 +308,18 @@ void CDPL::Chem::RDFCodeCalculator<T>::setEntity3DCoordinatesFunction(const Enti
 }
 
 template <typename T>
+void CDPL::Chem::RDFCodeCalculator<T>::enableDistanceToIntervalCenterRounding(bool enable)
+{
+	distToIntervalCenterRounding = enable;
+}
+
+template <typename T>
+bool CDPL::Chem::RDFCodeCalculator<T>::distanceToIntervalsCenterRoundingEnabled() const
+{
+	return distToIntervalCenterRounding;
+}
+
+template <typename T>
 template <typename Iter, typename Vec>
 void CDPL::Chem::RDFCodeCalculator<T>::calculate(Iter beg, Iter end, Vec& rdf_code)
 {
@@ -341,9 +369,15 @@ void CDPL::Chem::RDFCodeCalculator<T>::init(Iter beg, Iter end)
 			else
 				weightMatrix(i, j) = weightFunc(entity1, entity2);
 
-			if (coordsFunc)
-				distMatrix(i, j) = length(entity1_pos - coordsFunc(entity2));
-			else
+			if (coordsFunc) {
+				double dist = length(entity1_pos - coordsFunc(entity2));
+
+				if (distToIntervalCenterRounding) 
+					dist = std::round((dist - startRadius) / radiusIncrement) * radiusIncrement + startRadius;
+				
+				distMatrix(i, j) = dist;
+
+			} else
 				distMatrix(i, j) = 0.0;
 		}
 	}

@@ -31,6 +31,9 @@
 #ifndef CDPL_FORCEFIELD_HPP
 #define CDPL_FORCEFIELD_HPP
 
+#include "CDPL/Forcefield/MMFF94AtomTyper.hpp"
 #include "CDPL/Forcefield/MMFF94SymbolicAtomTypePatternTable.hpp"
+#include "CDPL/Forcefield/MMFF94HeavyToHydrogenAtomTypeMap.hpp"
+#include "CDPL/Forcefield/MMFF94SymbolicToNumericAtomTypeMap.hpp"
 
 #endif // CDPL_FORCEFIELD_HPP

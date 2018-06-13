@@ -72,12 +72,12 @@ namespace
 }
 
 
-CDPL::Pharm::PharmacophoreAutoCorr3DDescriptorCalculator::PharmacophoreAutoCorr3DDescriptorCalculator()
+CDPL::Pharm::PharmacophoreAutoCorr3DDescriptorCalculator::PharmacophoreAutoCorr3DDescriptorCalculator(): weightFunc()
 {
     setFeature3DCoordinatesFunction(&Chem::get3DCoordinates);
 } 
 
-CDPL::Pharm::PharmacophoreAutoCorr3DDescriptorCalculator::PharmacophoreAutoCorr3DDescriptorCalculator(const FeatureContainer& cntnr, Math::DVector& descr)
+CDPL::Pharm::PharmacophoreAutoCorr3DDescriptorCalculator::PharmacophoreAutoCorr3DDescriptorCalculator(const FeatureContainer& cntnr, Math::DVector& descr): weightFunc()
 {
     setFeature3DCoordinatesFunction(&Chem::get3DCoordinates);
     calculate(cntnr, descr);
@@ -118,6 +118,11 @@ void CDPL::Pharm::PharmacophoreAutoCorr3DDescriptorCalculator::setFeature3DCoord
     autoCorrCalculator.setEntity3DCoordinatesFunction(func);
 }
 
+void CDPL::Pharm::PharmacophoreAutoCorr3DDescriptorCalculator::setFeaturePairWeightFunction(const FeaturePairWeightFunction& func)
+{
+    weightFunc = func;
+}
+
 void CDPL::Pharm::PharmacophoreAutoCorr3DDescriptorCalculator::calculate(const FeatureContainer& cntnr, Math::DVector& descr)
 {
 	std::size_t sub_descr_size = autoCorrCalculator.getNumSteps() + 1;
@@ -125,8 +130,12 @@ void CDPL::Pharm::PharmacophoreAutoCorr3DDescriptorCalculator::calculate(const F
 
 	descr.resize(sub_descr_size * num_ftr_types, false);
 
+	if (weightFunc)
+		autoCorrCalculator.setEntityPairWeightFunction(weightFunc);
+
 	for (std::size_t i = 0; i < num_ftr_types; i++) {
-		autoCorrCalculator.setEntityPairWeightFunction(FeaturePairWeightFunc(FEATURE_TYPES[i]));
+		if (!weightFunc)
+			autoCorrCalculator.setEntityPairWeightFunction(FeaturePairWeightFunc(FEATURE_TYPES[i]));
 
 		Math::VectorRange<Math::DVector> sub_descr(descr, Math::range(i * sub_descr_size, (i + 1) * sub_descr_size));
 

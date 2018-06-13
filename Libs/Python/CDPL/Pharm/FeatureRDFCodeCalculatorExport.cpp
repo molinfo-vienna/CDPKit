@@ -76,7 +76,12 @@ void CDPLPythonPharm::exportFeatureRDFCodeCalculator()
 		.def("setScalingFactor", &Pharm::FeatureRDFCodeCalculator::setScalingFactor, 
 			 (python::arg("self"), python::arg("factor")))
 		.def("getScalingFactor", &Pharm::FeatureRDFCodeCalculator::getScalingFactor, python::arg("self"))
+		.def("enableDistanceToIntervalCenterRounding", &Pharm::FeatureRDFCodeCalculator::enableDistanceToIntervalCenterRounding, 
+			 (python::arg("self"), python::arg("enable")))
+		.def("distanceToIntervalsCenterRoundingEnabled", &Pharm::FeatureRDFCodeCalculator::distanceToIntervalsCenterRoundingEnabled, python::arg("self"))
 		.def("calculate", &calculate, (python::arg("self"), python::arg("cntnr"), python::arg("rdf_code")))
+		.add_property("distanceToIntervalCenterRounding", &Pharm::FeatureRDFCodeCalculator::distanceToIntervalsCenterRoundingEnabled,
+					  &Pharm::FeatureRDFCodeCalculator::enableDistanceToIntervalCenterRounding)
 		.add_property("smoothingFactor", &Pharm::FeatureRDFCodeCalculator::getSmoothingFactor,
 					  &Pharm::FeatureRDFCodeCalculator::setSmoothingFactor)
 		.add_property("scalingFactor", &Pharm::FeatureRDFCodeCalculator::getScalingFactor,

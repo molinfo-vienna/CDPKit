@@ -124,6 +124,7 @@ BOOST_PYTHON_MODULE(_chem)
 	exportAtomRDFCodeCalculator();
 	exportMoleculeRDFDescriptorCalculator();
 	exportAtomAutoCorrelation3DVectorCalculator();
+	exportMoleculeAutoCorr3DDescriptorCalculator();
 	exportBurdenMatrixGenerator();
 	exportBCUTDescriptorCalculator();
 	exportSurfaceAtomExtractor();

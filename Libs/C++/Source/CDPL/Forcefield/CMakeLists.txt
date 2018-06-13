@@ -6,6 +6,8 @@ SET(cdpl-forcefield_LIB_SRCS
     BuiltinMMFF94Data.cpp
 
     MMFF94SymbolicAtomTypePatternTable.cpp
+    MMFF94HeavyToHydrogenAtomTypeMap.cpp
+    MMFF94SymbolicToNumericAtomTypeMap.cpp
 
     Utilities.cpp
    )

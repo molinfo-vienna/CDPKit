@@ -121,6 +121,7 @@ namespace CDPLPythonChem
 	void exportAtomRDFCodeCalculator();
 	void exportMoleculeRDFDescriptorCalculator();
 	void exportAtomAutoCorrelation3DVectorCalculator();
+	void exportMoleculeAutoCorr3DDescriptorCalculator();
 	void exportBurdenMatrixGenerator();
 	void exportBCUTDescriptorCalculator();
 	void exportSurfaceAtomExtractor();

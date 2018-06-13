@@ -49,7 +49,7 @@ namespace CDPL
     {
 
 		/**
-		 * \addtogroup CDPL_FORCEFIELD_DATA_STRUCTURES
+		 * \addtogroup CDPL_FORCEFIELD_PARAMETER_TABLES
 		 * @{
 		 */
 
@@ -71,7 +71,7 @@ namespace CDPL
 			{
 
 			  public:
-				Entry(bool fallback, const Chem::MolecularGraph::SharedPointer& ptn, const std::string& sym_type);
+				Entry(const Chem::MolecularGraph::SharedPointer& ptn, const std::string& sym_type, bool fallback);
 
 				bool isFallbackType() const;
 
@@ -80,16 +80,16 @@ namespace CDPL
 				const std::string& getSymbolicType() const;
 
 			  private:
-				bool                                fallback;
 				Chem::MolecularGraph::SharedPointer pattern;
 				std::string                         symType;
+				bool                                fallback;
 			};			
 
 			MMFF94SymbolicAtomTypePatternTable();
 
 			std::size_t getNumEntries() const;
 
-			void addEntry(const Entry& entry);
+			void addEntry(const Chem::MolecularGraph::SharedPointer& ptn, const std::string& sym_type, bool fallback);
 
 			const Entry& getEntry(std::size_t idx) const;
 

@@ -72,12 +72,12 @@ namespace
 }
 
 
-CDPL::Pharm::PharmacophoreRDFDescriptorCalculator::PharmacophoreRDFDescriptorCalculator()
+CDPL::Pharm::PharmacophoreRDFDescriptorCalculator::PharmacophoreRDFDescriptorCalculator(): weightFunc()
 {
     setFeature3DCoordinatesFunction(&Chem::get3DCoordinates);
 } 
 
-CDPL::Pharm::PharmacophoreRDFDescriptorCalculator::PharmacophoreRDFDescriptorCalculator(const FeatureContainer& cntnr, Math::DVector& descr)
+CDPL::Pharm::PharmacophoreRDFDescriptorCalculator::PharmacophoreRDFDescriptorCalculator(const FeatureContainer& cntnr, Math::DVector& descr): weightFunc()
 {
     setFeature3DCoordinatesFunction(&Chem::get3DCoordinates);
     calculate(cntnr, descr);
@@ -138,6 +138,21 @@ void CDPL::Pharm::PharmacophoreRDFDescriptorCalculator::setFeature3DCoordinatesF
     rdfCalculator.setEntity3DCoordinatesFunction(func);
 }
 
+void CDPL::Pharm::PharmacophoreRDFDescriptorCalculator::setFeaturePairWeightFunction(const FeaturePairWeightFunction& func)
+{
+    weightFunc = func;
+}
+
+void CDPL::Pharm::PharmacophoreRDFDescriptorCalculator::enableDistanceToIntervalCenterRounding(bool enable)
+{
+	rdfCalculator.enableDistanceToIntervalCenterRounding(enable);
+}
+
+bool CDPL::Pharm::PharmacophoreRDFDescriptorCalculator::distanceToIntervalsCenterRoundingEnabled() const
+{
+	return rdfCalculator.distanceToIntervalsCenterRoundingEnabled();
+}
+
 void CDPL::Pharm::PharmacophoreRDFDescriptorCalculator::calculate(const FeatureContainer& cntnr, Math::DVector& descr)
 {
 	std::size_t sub_descr_size = rdfCalculator.getNumSteps() + 1;
@@ -145,8 +160,12 @@ void CDPL::Pharm::PharmacophoreRDFDescriptorCalculator::calculate(const FeatureC
 
 	descr.resize(sub_descr_size * num_ftr_types, false);
 
+	if (weightFunc)
+		rdfCalculator.setEntityPairWeightFunction(weightFunc);
+
 	for (std::size_t i = 0; i < num_ftr_types; i++) {
-		rdfCalculator.setEntityPairWeightFunction(FeaturePairWeightFunc(FEATURE_TYPES[i]));
+		if (!weightFunc)
+			rdfCalculator.setEntityPairWeightFunction(FeaturePairWeightFunc(FEATURE_TYPES[i]));
 
 		Math::VectorRange<Math::DVector> sub_descr(descr, Math::range(i * sub_descr_size, (i + 1) * sub_descr_size));
 

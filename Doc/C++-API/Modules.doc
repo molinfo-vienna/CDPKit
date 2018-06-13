@@ -437,6 +437,8 @@
 \defgroup CDPL_FORCEFIELD_ATOM_TYPE_PERCEPTION Atom Type Perception
 \ingroup CDPL_FORCEFIELD
 
+\defgroup CDPL_FORCEFIELD_PARAMETER_TABLES Parameter Lookup Tables
+\ingroup CDPL_FORCEFIELD
 
 \defgroup CDPL_GRID Grid Data Handling
 

@@ -93,6 +93,7 @@ SET(chem_MOD_SRCS
     AtomRDFCodeCalculatorExport.cpp 
     MoleculeRDFDescriptorCalculatorExport.cpp 
     AtomAutoCorrelation3DVectorCalculatorExport.cpp 
+    MoleculeAutoCorr3DDescriptorCalculatorExport.cpp 
     BurdenMatrixGeneratorExport.cpp 
     BCUTDescriptorCalculatorExport.cpp 
     SurfaceAtomExtractorExport.cpp 

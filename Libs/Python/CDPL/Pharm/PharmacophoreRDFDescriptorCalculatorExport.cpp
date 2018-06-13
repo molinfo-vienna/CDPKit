@@ -59,6 +59,8 @@ void CDPLPythonPharm::exportPharmacophoreRDFDescriptorCalculator()
 			 (python::arg("self"), python::arg("calculator")), python::return_self<>())
 		.def("setFeature3DCoordinatesFunction", &Pharm::PharmacophoreRDFDescriptorCalculator::setFeature3DCoordinatesFunction, 
 			 (python::arg("self"), python::arg("func")))
+		.def("setFeaturePairWeightFunction", &Pharm::PharmacophoreRDFDescriptorCalculator::setFeaturePairWeightFunction, 
+			 (python::arg("self"), python::arg("func")))
 		.def("setNumSteps", &Pharm::PharmacophoreRDFDescriptorCalculator::setNumSteps, 
 			 (python::arg("self"), python::arg("num_steps")))
 		.def("getNumSteps", &Pharm::PharmacophoreRDFDescriptorCalculator::getNumSteps, python::arg("self"))
@@ -74,7 +76,12 @@ void CDPLPythonPharm::exportPharmacophoreRDFDescriptorCalculator()
 		.def("setScalingFactor", &Pharm::PharmacophoreRDFDescriptorCalculator::setScalingFactor, 
 			 (python::arg("self"), python::arg("factor")))
 		.def("getScalingFactor", &Pharm::PharmacophoreRDFDescriptorCalculator::getScalingFactor, python::arg("self"))
+		.def("enableDistanceToIntervalCenterRounding", &Pharm::PharmacophoreRDFDescriptorCalculator::enableDistanceToIntervalCenterRounding, 
+			 (python::arg("self"), python::arg("enable")))
+		.def("distanceToIntervalsCenterRoundingEnabled", &Pharm::PharmacophoreRDFDescriptorCalculator::distanceToIntervalsCenterRoundingEnabled, python::arg("self"))
 		.def("calculate", &calculate, (python::arg("self"), python::arg("cntnr"), python::arg("descr")))
+		.add_property("distanceToIntervalCenterRounding", &Pharm::PharmacophoreRDFDescriptorCalculator::distanceToIntervalsCenterRoundingEnabled,
+					  &Pharm::PharmacophoreRDFDescriptorCalculator::enableDistanceToIntervalCenterRounding)
 		.add_property("smoothingFactor", &Pharm::PharmacophoreRDFDescriptorCalculator::getSmoothingFactor,
 					  &Pharm::PharmacophoreRDFDescriptorCalculator::setSmoothingFactor)
 		.add_property("scalingFactor", &Pharm::PharmacophoreRDFDescriptorCalculator::getScalingFactor,

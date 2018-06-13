@@ -59,6 +59,8 @@ void CDPLPythonPharm::exportPharmacophoreAutoCorr3DDescriptorCalculator()
 			 (python::arg("self"), python::arg("calculator")), python::return_self<>())
 		.def("setFeature3DCoordinatesFunction", &Pharm::PharmacophoreAutoCorr3DDescriptorCalculator::setFeature3DCoordinatesFunction, 
 			 (python::arg("self"), python::arg("func")))
+		.def("setFeaturePairWeightFunction", &Pharm::PharmacophoreAutoCorr3DDescriptorCalculator::setFeaturePairWeightFunction, 
+			 (python::arg("self"), python::arg("func")))
 		.def("setNumSteps", &Pharm::PharmacophoreAutoCorr3DDescriptorCalculator::setNumSteps, 
 			 (python::arg("self"), python::arg("num_steps")))
 		.def("getNumSteps", &Pharm::PharmacophoreAutoCorr3DDescriptorCalculator::getNumSteps, python::arg("self"))

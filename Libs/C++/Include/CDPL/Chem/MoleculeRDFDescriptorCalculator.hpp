@@ -61,6 +61,7 @@ namespace CDPL
 
 		public:
 			typedef RDFCodeCalculator::Entity3DCoordinatesFunction Atom3DCoordinatesFunction;
+			typedef RDFCodeCalculator::EntityPairWeightFunction AtomPairWeightFunction;
 			
 			/**
 			 * \brief Constructs the \c %MoleculeRDFDescriptorCalculator instance.
@@ -148,10 +149,30 @@ namespace CDPL
 			 */
 			void setAtom3DCoordinatesFunction(const Atom3DCoordinatesFunction& func);
 
+			/**
+			 * \brief Allows to specify a custom atom pair weight function.
+			 * \param func A AtomPairWeightFunction instance that wraps the target function.
+			 */
+			void setAtomPairWeightFunction(const AtomPairWeightFunction& func);
+
+			/**
+			 * \brief Allows to specify whether atom pair distances should be rounded to the nearest radius interval center.
+			 * \param enable \c true if pair distances should be rounded, and \c false otherwise.
+			 * \note The default setting is not to round the atom pair distances.
+			 */
+			void enableDistanceToIntervalCenterRounding(bool enable);
+
+			/**
+			 * \brief Tells whether atom pair distances get rounded to the nearest radius interval centers.
+			 * \return \c true if pair distances get rounded, and \c false otherwise.
+			 */
+			bool distanceToIntervalsCenterRoundingEnabled() const;
+
 			void calculate(const AtomContainer& cntnr, Math::DVector& descr);
 
 		  private:
-			RDFCodeCalculator rdfCalculator;
+			RDFCodeCalculator      rdfCalculator;
+			AtomPairWeightFunction weightFunc;
 		}; 
 
 		/**

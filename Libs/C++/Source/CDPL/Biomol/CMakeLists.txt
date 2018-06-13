@@ -1,6 +1,6 @@
 INCLUDE_DIRECTORIES("${CMAKE_CURRENT_SOURCE_DIR}" "${CDPL_SOURCE_DIR}" "${CMAKE_CURRENT_BINARY_DIR}")
 
-MESSAGE("Converting residue dictionary structure data to C-string, please wait...")
+MESSAGE("-- Processing residue dictionary structure data, please wait...")
 EXECUTE_PROCESS(COMMAND "${PYTHON_EXECUTABLE}" "${CDPKIT_PYTHON_SCRIPTS_DIR}/BinaryFileToCString.py" 
 			"${CDPKIT_BUILTIN_DATA_DIR}/Biomol/BuiltinResidueDictionaryStructureData.cdf" 
 			"${CMAKE_CURRENT_BINARY_DIR}/BuiltinResidueDictionaryStructureData.hpp")

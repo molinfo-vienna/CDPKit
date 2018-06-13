@@ -1,7 +1,7 @@
 /* -*- mode: c++; c-basic-offset: 4; tab-width: 4; indent-tabs-mode: t -*- */
 
 /* 
- * PharmacophoreAutoCorr3DDescriptorCalculator.hpp 
+ * MoleculeAutoCorr3DDescriptorCalculator.hpp 
  *
  * This file is part of the Chemical Data Processing Toolkit
  *
@@ -25,13 +25,13 @@
 
 /**
  * \file
- * \brief Definition of the class CDPL::Pharm::PharmacophoreAutoCorr3DDescriptorCalculator.
+ * \brief Definition of the class CDPL::Chem::MoleculeAutoCorr3DDescriptorCalculator.
  */
 
-#ifndef CDPL_PHARM_PHARMACOPHOREAUTOCORR3DDESCRIPTORCALCULATOR_HPP
-#define CDPL_PHARM_PHARMACOPHOREAUTOCORR3DDESCRIPTORCALCULATOR_HPP
+#ifndef CDPL_CHEM_MOLECULEAUTOCORR3DDESCRIPTORCALCULATOR_HPP
+#define CDPL_CHEM_MOLECULEAUTOCORR3DDESCRIPTORCALCULATOR_HPP
 
-#include "CDPL/Pharm/APIPrefix.hpp"
+#include "CDPL/Chem/APIPrefix.hpp"
 #include "CDPL/Chem/AutoCorrelation3DVectorCalculator.hpp"
 #include "CDPL/Math/Vector.hpp"
 
@@ -39,35 +39,35 @@
 namespace CDPL 
 {
 
-	namespace Pharm
+	namespace Chem
 	{
 
-		class Feature;
-		class FeatureContainer;
+		class Atom;
+		class AtomContainer;
 
 		/**
-		 * \addtogroup CDPL_PHARM_DESCRIPTORS
+		 * \addtogroup CDPL_CHEM_DESCRIPTORS
 		 * @{
 		 */
 
 		/**
-		 * \brief PharmacophoreAutoCorr3DDescriptorCalculator.
+		 * \brief MoleculeAutoCorr3DDescriptorCalculator.
 		 */
-		class CDPL_PHARM_API PharmacophoreAutoCorr3DDescriptorCalculator
+		class CDPL_CHEM_API MoleculeAutoCorr3DDescriptorCalculator
 		{
 
-			typedef Chem::AutoCorrelation3DVectorCalculator<Feature> AutoCorr3DVectorCalculator;
+			typedef AutoCorrelation3DVectorCalculator<Atom> AutoCorr3DVectorCalculator;
 
 		public:
-			typedef AutoCorr3DVectorCalculator::Entity3DCoordinatesFunction Feature3DCoordinatesFunction;
-			typedef AutoCorr3DVectorCalculator::EntityPairWeightFunction FeaturePairWeightFunction;
+			typedef AutoCorr3DVectorCalculator::Entity3DCoordinatesFunction Atom3DCoordinatesFunction;
+			typedef AutoCorr3DVectorCalculator::EntityPairWeightFunction AtomPairWeightFunction;
 	
 			/**
-			 * \brief Constructs the \c %PharmacophoreAutoCorr3DDescriptorCalculator instance.
+			 * \brief Constructs the \c %MoleculeAutoCorr3DDescriptorCalculator instance.
 			 */
-			PharmacophoreAutoCorr3DDescriptorCalculator();
+			MoleculeAutoCorr3DDescriptorCalculator();
 			
-			PharmacophoreAutoCorr3DDescriptorCalculator(const FeatureContainer& cntnr, Math::DVector& descr);
+			MoleculeAutoCorr3DDescriptorCalculator(const AtomContainer& cntnr, Math::DVector& descr);
 
 			/**
 			 * \brief Sets the starting value of the radius.
@@ -113,24 +113,24 @@ namespace CDPL
 			std::size_t getNumSteps() const;
 
 			/**
-			 * \brief Allows to specify the feature coordinates function.
-			 * \param func A Feature3DCoordinatesFunction instance that wraps the target function.
+			 * \brief Allows to specify the atom coordinates function.
+			 * \param func A Atom3DCoordinatesFunction instance that wraps the target function.
 			 * \note The coordinates function must be specified before calling calculate(), otherwise a zero distance
-			 *       for each feature pair will be used for the calculation.
+			 *       for each atom pair will be used for the calculation.
 			 */
-			void setFeature3DCoordinatesFunction(const Feature3DCoordinatesFunction& func);
+			void setAtom3DCoordinatesFunction(const Atom3DCoordinatesFunction& func);
 
 			/**
-			 * \brief Allows to specify a custom feature pair weight function.
-			 * \param func A FeaturePairWeightFunction instance that wraps the target function.
+			 * \brief Allows to specify a custom atom pair weight function.
+			 * \param func A AtomPairWeightFunction instance that wraps the target function.
 			 */
-			void setFeaturePairWeightFunction(const FeaturePairWeightFunction& func);
+			void setAtomPairWeightFunction(const AtomPairWeightFunction& func);
 
-			void calculate(const FeatureContainer& cntnr, Math::DVector& descr);
+			void calculate(const AtomContainer& cntnr, Math::DVector& descr);
 
 		  private:
 			AutoCorr3DVectorCalculator autoCorrCalculator;
-			FeaturePairWeightFunction  weightFunc;
+			AtomPairWeightFunction     weightFunc;
 		}; 
 
 		/**
@@ -139,4 +139,4 @@ namespace CDPL
 	}
 }
 
-#endif // CDPL_PHARM_PHARMACOPHOREAUTOCORR3DDESCRIPTORCALCULATOR_HPP
+#endif // CDPL_CHEM_MOLECULEAUTOCORR3DDESCRIPTORCALCULATOR_HPP

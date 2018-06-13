@@ -61,6 +61,7 @@ namespace CDPL
 
 		public:
 			typedef RDFCodeCalculator::Entity3DCoordinatesFunction Feature3DCoordinatesFunction;
+			typedef RDFCodeCalculator::EntityPairWeightFunction FeaturePairWeightFunction;
 			
 			/**
 			 * \brief Constructs the \c %PharmacophoreRDFDescriptorCalculator instance.
@@ -148,10 +149,30 @@ namespace CDPL
 			 */
 			void setFeature3DCoordinatesFunction(const Feature3DCoordinatesFunction& func);
 
+			/**
+			 * \brief Allows to specify a custom feature pair weight function.
+			 * \param func A FeaturePairWeightFunction instance that wraps the target function.
+			 */
+			void setFeaturePairWeightFunction(const FeaturePairWeightFunction& func);
+
+			/**
+			 * \brief Allows to specify whether feature pair distances should be rounded to the nearest radius interval center.
+			 * \param enable \c true if pair distances should be rounded, and \c false otherwise.
+			 * \note The default setting is not to round the feature pair distances.
+			 */
+			void enableDistanceToIntervalCenterRounding(bool enable);
+
+			/**
+			 * \brief Tells whether feature pair distances get rounded to the nearest radius interval centers.
+			 * \return \c true if pair distances get rounded, and \c false otherwise.
+			 */
+			bool distanceToIntervalsCenterRoundingEnabled() const;
+
 			void calculate(const FeatureContainer& cntnr, Math::DVector& descr);
 
 		  private:
-			RDFCodeCalculator rdfCalculator;
+			RDFCodeCalculator         rdfCalculator;
+			FeaturePairWeightFunction weightFunc;
 		}; 
 
 		/**

@@ -240,11 +240,11 @@ void CDPL::Chem::AutoCorrelation3DVectorCalculator<T>::calculate(Iter beg, Iter 
 {
 	init(beg, end);
 
-	for (std::size_t i = 0; i < numSteps; i++)
+	for (std::size_t i = 0; i <= numSteps; i++)
 		vec[i] = 0.0;
 
 	Math::Vector3D tmp;
-	const double max_radius = startRadius + numSteps * radiusIncrement;
+	const double max_radius = startRadius + (numSteps + 1) * radiusIncrement;
 
 	for (std::size_t i = 0; i < numEntities; i++) {
 		for (std::size_t j = i; j < numEntities; j++) {
@@ -259,7 +259,7 @@ void CDPL::Chem::AutoCorrelation3DVectorCalculator<T>::calculate(Iter beg, Iter 
 				continue;
 
 			std::size_t idx = std::floor((dist - startRadius) / radiusIncrement);
-			
+
 			vec[idx] = weightMatrix(i, j);
 		}
 	}
@@ -274,7 +274,7 @@ void CDPL::Chem::AutoCorrelation3DVectorCalculator<T>::init(Iter beg, Iter end)
 	weightMatrix.resize(numEntities, numEntities, false);
 	entityPositions.resize(numEntities);
 
-	for (std::size_t i = 0; beg != end; i++) {
+	for (std::size_t i = 0; beg != end; i++, ++beg) {
 		const EntityType& entity1 = *beg;
 		
 		if (coordsFunc)

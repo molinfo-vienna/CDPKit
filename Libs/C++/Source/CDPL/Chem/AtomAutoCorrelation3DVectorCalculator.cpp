@@ -48,7 +48,7 @@ CDPL::Chem::AtomAutoCorrelation3DVectorCalculator::AtomAutoCorrelation3DVectorCa
 
 void CDPL::Chem::AtomAutoCorrelation3DVectorCalculator::calculate(const AtomContainer& cntnr, Math::DVector& vec)
 {
-    vec.resize(getNumSteps(), false);
+    vec.resize(getNumSteps() + 1, false);
 
     AutoCorrelation3DVectorCalculator::calculate(cntnr.getAtomsBegin(), cntnr.getAtomsEnd(), vec);
 }

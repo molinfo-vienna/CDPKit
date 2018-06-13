@@ -76,7 +76,12 @@ void CDPLPythonChem::exportAtomRDFCodeCalculator()
 		.def("setScalingFactor", &Chem::AtomRDFCodeCalculator::setScalingFactor, 
 			 (python::arg("self"), python::arg("factor")))
 		.def("getScalingFactor", &Chem::AtomRDFCodeCalculator::getScalingFactor, python::arg("self"))
+		.def("enableDistanceToIntervalCenterRounding", &Chem::AtomRDFCodeCalculator::enableDistanceToIntervalCenterRounding, 
+			 (python::arg("self"), python::arg("enable")))
+		.def("distanceToIntervalsCenterRoundingEnabled", &Chem::AtomRDFCodeCalculator::distanceToIntervalsCenterRoundingEnabled, python::arg("self"))
 		.def("calculate", &calculate, (python::arg("self"), python::arg("cntnr"), python::arg("rdf_code")))
+		.add_property("distanceToIntervalCenterRounding", &Chem::AtomRDFCodeCalculator::distanceToIntervalsCenterRoundingEnabled,
+					  &Chem::AtomRDFCodeCalculator::enableDistanceToIntervalCenterRounding)
 		.add_property("smoothingFactor", &Chem::AtomRDFCodeCalculator::getSmoothingFactor,
 					  &Chem::AtomRDFCodeCalculator::setSmoothingFactor)
 		.add_property("scalingFactor", &Chem::AtomRDFCodeCalculator::getScalingFactor,
