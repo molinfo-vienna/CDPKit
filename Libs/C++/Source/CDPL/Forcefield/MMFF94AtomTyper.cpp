@@ -32,6 +32,7 @@
 
 #include "CDPL/Forcefield/MMFF94AtomTyper.hpp"
 #include "CDPL/Forcefield/MMFF94SymbolicAtomTypePatternTable.hpp"
+#include "CDPL/Forcefield/MMFF94AromaticAtomTypeDefinitionTable.hpp"
 #include "CDPL/Forcefield/MMFF94HeavyToHydrogenAtomTypeMap.hpp"
 #include "CDPL/Forcefield/MMFF94SymbolicToNumericAtomTypeMap.hpp"
 #include "CDPL/Chem/Atom.hpp"
@@ -44,9 +45,11 @@
 using namespace CDPL; 
 
 
-Forcefield::MMFF94AtomTyper::MMFF94AtomTyper(): strictMode(true), symTypePatternTable(0), hydTypeMap(0), numTypeMap(0), molGraph(0)
+Forcefield::MMFF94AtomTyper::MMFF94AtomTyper(): 
+	strictMode(true), symTypePatternTable(0), aromTypeDefTable(0), hydTypeMap(0), numTypeMap(0), molGraph(0)
 {
 	setSymbolicAtomTypePatternTable(MMFF94SymbolicAtomTypePatternTable::get());
+	setAromaticAtomTypeDefinitionTable(MMFF94AromaticAtomTypeDefinitionTable::get());
 	setHeavyToHydrogenAtomTypeMap(MMFF94HeavyToHydrogenAtomTypeMap::get());
 	setSymbolicToNumericAtomTypeMap(MMFF94SymbolicToNumericAtomTypeMap::get());
 }
@@ -64,6 +67,24 @@ void Forcefield::MMFF94AtomTyper::setSymbolicAtomTypePatternTable(const MMFF94Sy
 	}
 
 	symTypePatternTable = &table;
+}
+
+void Forcefield::MMFF94AtomTyper::setAromaticAtomTypeDefinitionTable(const MMFF94AromaticAtomTypeDefinitionTable& table)
+{
+	aromRSizeMask.reset();
+
+	for (MMFF94AromaticAtomTypeDefinitionTable::ConstEntryIterator it = aromTypeDefTable->getEntriesBegin(), 
+			 end = aromTypeDefTable->getEntriesEnd(); it != end; ++it) {
+
+		std::size_t r_size = it->getRingSize();
+
+		if (r_size > aromRSizeMask.size())
+			aromRSizeMask.resize(r_size + 1);
+
+		aromRSizeMask.set(r_size);
+	} 
+
+	aromTypeDefTable = &table;
 }
 
 void Forcefield::MMFF94AtomTyper::setHeavyToHydrogenAtomTypeMap(const MMFF94HeavyToHydrogenAtomTypeMap& map)
@@ -90,7 +111,7 @@ void Forcefield::MMFF94AtomTyper::perceiveTypes(const Chem::MolecularGraph& molg
 {
 	init(molgraph);
 
-	perceiveInitialAtomTypes();
+	assignProvisionalSymbolicAtomTypes();
 	assignAromaticAtomTypes();
 	assignHydrogenAtomTypes();
 	assignNumericAtomTypes();
@@ -118,11 +139,12 @@ void Forcefield::MMFF94AtomTyper::init(const Chem::MolecularGraph& molgraph)
 
 	symTypes.assign(num_atoms, "");
 	numTypes.assign(num_atoms, 0);
+	aromTypeDefIdxMap.clear();
 
 	molGraph = &molgraph;
 }
 
-void Forcefield::MMFF94AtomTyper::perceiveInitialAtomTypes()
+void Forcefield::MMFF94AtomTyper::assignProvisionalSymbolicAtomTypes()
 {
 	atomTyper.execute(*molGraph);
 
@@ -145,6 +167,25 @@ void Forcefield::MMFF94AtomTyper::perceiveInitialAtomTypes()
 
 void Forcefield::MMFF94AtomTyper::assignAromaticAtomTypes()
 {
+	using namespace Chem;
+
+	aromRings.extract(*molGraph);
+
+	for (AromaticSSSRSubset::ConstElementIterator it = aromRings.getElementsBegin(), end = aromRings.getElementsEnd(); it != end; ++it) {
+		const Fragment& ring = *it;
+
+		if (ring.getNumAtoms() < aromRSizeMask.size() && aromRSizeMask.test(ring.getNumAtoms()))
+			assignAromaticAtomTypes(ring);
+	}
+}
+
+void Forcefield::MMFF94AtomTyper::assignAromaticAtomTypes(const Chem::Fragment& ring)
+{
+	using namespace Chem;
+/*
+	std::size_t r_size = ring.getNumAtoms();
+	std::size_t het_atom_idx = getUniqueHeteroAtomIndex(const Chem::Fragment& ring);
+*/
 }
 
 void Forcefield::MMFF94AtomTyper::assignHydrogenAtomTypes()

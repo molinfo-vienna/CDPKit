@@ -3,13 +3,13 @@ INCLUDE_DIRECTORIES("${CMAKE_CURRENT_SOURCE_DIR}" "${CDPL_SOURCE_DIR}" "${CMAKE_
 MESSAGE("-- Processing residue dictionary structure data, please wait...")
 EXECUTE_PROCESS(COMMAND "${PYTHON_EXECUTABLE}" "${CDPKIT_PYTHON_SCRIPTS_DIR}/BinaryFileToCString.py" 
 			"${CDPKIT_BUILTIN_DATA_DIR}/Biomol/BuiltinResidueDictionaryStructureData.cdf" 
-			"${CMAKE_CURRENT_BINARY_DIR}/BuiltinResidueDictionaryStructureData.hpp")
+			"${CMAKE_CURRENT_BINARY_DIR}/ResidueDictionaryStructureData.hpp")
 
 SET(cdpl-biomol_LIB_SRCS
     PDBData.cpp
+    ResidueDictionaryData.cpp
     ResidueDictionary.cpp
     ResidueList.cpp
-    BuiltinResidueDictionaryData.cpp
 
     AtomProperty.cpp
     MolecularGraphProperty.cpp

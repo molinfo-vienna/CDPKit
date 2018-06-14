@@ -3,11 +3,12 @@ INCLUDE_DIRECTORIES("${CMAKE_CURRENT_SOURCE_DIR}" "${CDPL_SOURCE_DIR}" "${CDPKIT
 SET(cdpl-forcefield_LIB_SRCS
     MMFF94AtomTyper.cpp
 
-    BuiltinMMFF94Data.cpp
+    MMFF94ParameterData.cpp
 
     MMFF94SymbolicAtomTypePatternTable.cpp
     MMFF94HeavyToHydrogenAtomTypeMap.cpp
     MMFF94SymbolicToNumericAtomTypeMap.cpp
+    MMFF94AromaticAtomTypeDefinitionTable.cpp
 
     Utilities.cpp
    )

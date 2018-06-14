@@ -35,5 +35,6 @@
 #include "CDPL/Forcefield/MMFF94SymbolicAtomTypePatternTable.hpp"
 #include "CDPL/Forcefield/MMFF94HeavyToHydrogenAtomTypeMap.hpp"
 #include "CDPL/Forcefield/MMFF94SymbolicToNumericAtomTypeMap.hpp"
+#include "CDPL/Forcefield/MMFF94AromaticAtomTypeDefinitionTable.hpp"
 
 #endif // CDPL_FORCEFIELD_HPP

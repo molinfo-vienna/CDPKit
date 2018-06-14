@@ -35,7 +35,7 @@
 #include "CDPL/Forcefield/MMFF94HeavyToHydrogenAtomTypeMap.hpp"
 #include "CDPL/Base/Exceptions.hpp"
 
-#include "BuiltinMMFF94Data.hpp"
+#include "MMFF94ParameterData.hpp"
 #include "Utilities.hpp"
 
 
@@ -116,8 +116,8 @@ void Forcefield::MMFF94HeavyToHydrogenAtomTypeMap::load(std::istream& is)
 
 void Forcefield::MMFF94HeavyToHydrogenAtomTypeMap::loadDefaults()
 {
-    boost::iostreams::stream<boost::iostreams::array_source> is(Forcefield::BuiltinMMFF94Data::HYDROGEN_ATOM_TYPE_DEFINITIONS, 
-								std::strlen(Forcefield::BuiltinMMFF94Data::HYDROGEN_ATOM_TYPE_DEFINITIONS));
+    boost::iostreams::stream<boost::iostreams::array_source> is(Forcefield::MMFF94ParameterData::HYDROGEN_ATOM_TYPE_DEFINITIONS, 
+								std::strlen(Forcefield::MMFF94ParameterData::HYDROGEN_ATOM_TYPE_DEFINITIONS));
     load(is);
 }
 

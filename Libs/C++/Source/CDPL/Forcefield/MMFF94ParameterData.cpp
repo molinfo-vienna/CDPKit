@@ -1,7 +1,7 @@
 /* -*- mode: c++; c-basic-offset: 4; tab-width: 4; indent-tabs-mode: t -*- */
 
 /* 
- * BuiltinMMFF94Data.cpp 
+ * MMFF94ParameterData.cpp 
  *
  * This file is part of the Chemical Data Processing Toolkit
  *
@@ -26,46 +26,46 @@
  
 #include "StaticInit.hpp"
 
-#include "BuiltinMMFF94Data.hpp"
+#include "MMFF94ParameterData.hpp"
 
 
 using namespace CDPL;
 using namespace Forcefield;
 
 
-const char* BuiltinMMFF94Data::ANGLE_BENDING_PARAMETERS =                 
+const char* MMFF94ParameterData::ANGLE_BENDING_PARAMETERS =                 
 	#include "Forcefield/MMFFANG.PAR"
-const char* BuiltinMMFF94Data::BOND_STRETCHING_PARAMETERS =               
+const char* MMFF94ParameterData::BOND_STRETCHING_PARAMETERS =               
 	#include "Forcefield/MMFFBOND.PAR"
-const char* BuiltinMMFF94Data::BOND_STRETCHING_EMP_RULE_PARAMETERS =      
+const char* MMFF94ParameterData::BOND_STRETCHING_EMP_RULE_PARAMETERS =      
 	#include "Forcefield/MMFFBNDK.PAR"
-const char* BuiltinMMFF94Data::STRETCH_BEND_PARAMETERS =                  
+const char* MMFF94ParameterData::STRETCH_BEND_PARAMETERS =                  
 	#include "Forcefield/MMFFSTBN.PAR"
-const char* BuiltinMMFF94Data::DEFAULT_STRETCH_BEND_PARAMETERS =          
+const char* MMFF94ParameterData::DEFAULT_STRETCH_BEND_PARAMETERS =          
 	#include "Forcefield/MMFFDFSB.PAR"
-const char* BuiltinMMFF94Data::OUT_OF_PLANE_BENDING_PARAMETERS =    
+const char* MMFF94ParameterData::OUT_OF_PLANE_BENDING_PARAMETERS =    
 	#include "Forcefield/MMFFOOP.PAR"
-const char* BuiltinMMFF94Data::STATIC_OUT_OF_PLANE_BENDING_PARAMETERS =   
+const char* MMFF94ParameterData::STATIC_OUT_OF_PLANE_BENDING_PARAMETERS =   
 	#include "Forcefield/MMFFSOOP.PAR"
-const char* BuiltinMMFF94Data::TORSION_PARAMETERS =  
+const char* MMFF94ParameterData::TORSION_PARAMETERS =  
 	#include "Forcefield/MMFFTOR.PAR"
-const char* BuiltinMMFF94Data::STATIC_TORSION_PARAMETERS =              
+const char* MMFF94ParameterData::STATIC_TORSION_PARAMETERS =              
 	#include "Forcefield/MMFFSTOR.PAR"
-const char* BuiltinMMFF94Data::VAN_DER_WAALS_PARAMETERS = 
+const char* MMFF94ParameterData::VAN_DER_WAALS_PARAMETERS = 
 	#include "Forcefield/MMFFVDW.PAR"
 
-const char* BuiltinMMFF94Data::SYMBOLIC_ATOM_TYPE_PATTERNS =  
+const char* MMFF94ParameterData::SYMBOLIC_ATOM_TYPE_PATTERNS =  
 	#include "Forcefield/MMFFSMTP.PAR"
-const char* BuiltinMMFF94Data::AROMATIC_ATOM_TYPE_DEFINITIONS =        
+const char* MMFF94ParameterData::AROMATIC_ATOM_TYPE_DEFINITIONS =        
 	#include "Forcefield/MMFFAROM.PAR"
-const char* BuiltinMMFF94Data::HYDROGEN_ATOM_TYPE_DEFINITIONS =       
+const char* MMFF94ParameterData::HYDROGEN_ATOM_TYPE_DEFINITIONS =       
 	#include "Forcefield/MMFFHDEF.PAR"
-const char* BuiltinMMFF94Data::SYMBOLIC_TO_NUMERIC_ATOM_TYPE_MAPPING =   
+const char* MMFF94ParameterData::SYMBOLIC_TO_NUMERIC_ATOM_TYPE_MAPPING =   
 	#include "Forcefield/MMFFSYMB.PAR"
-const char* BuiltinMMFF94Data::NUMERIC_TO_PARAMETER_ATOM_TYPE_MAPPING =   
+const char* MMFF94ParameterData::NUMERIC_TO_PARAMETER_ATOM_TYPE_MAPPING =   
 	#include "Forcefield/MMFFDEF.PAR"
 
-const char* BuiltinMMFF94Data::BOND_CHARGE_INCREMENT_PARAMETERS =        
+const char* MMFF94ParameterData::BOND_CHARGE_INCREMENT_PARAMETERS =        
 	#include "Forcefield/MMFFCHG.PAR"
-const char* BuiltinMMFF94Data::PARTIAL_BOND_CHARGE_INCREMENT_PARAMETERS = 
+const char* MMFF94ParameterData::PARTIAL_BOND_CHARGE_INCREMENT_PARAMETERS = 
 	#include "Forcefield/MMFFPBCI.PAR"

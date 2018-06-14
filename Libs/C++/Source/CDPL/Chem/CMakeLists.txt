@@ -302,8 +302,6 @@ SET(cdpl-chem_LIB_SRCS
     MolecularGraphComponentGroupingMatchExpression.cpp
     ReactionAtomMappingMatchExpression.cpp
     ReactionComponentGroupingMatchExpression.cpp
-
-    AromaticityPerception.cpp
    )
 
 LINK_LIBRARIES(${Boost_THREAD_LIBRARY} ${Boost_SYSTEM_LIBRARY} ${Boost_DATE_TIME_LIBRARY})

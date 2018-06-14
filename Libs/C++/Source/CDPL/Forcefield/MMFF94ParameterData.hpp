@@ -1,7 +1,7 @@
 /* -*- mode: c++; c-basic-offset: 4; tab-width: 4; indent-tabs-mode: t -*- */
 
 /* 
- * BuiltinMMFF94Data.hpp 
+ * MMFF94ParameterData.hpp 
  *
  * This file is part of the Chemical Data Processing Toolkit
  *
@@ -24,8 +24,8 @@
  */
 
 
-#ifndef CDPL_FORCEFIELD_BUILTINMMFF94DATA_HPP
-#define CDPL_FORCEFIELD_BUILTINMMFF94DATA_HPP
+#ifndef CDPL_FORCEFIELD_MMFF94PARAMETERDATA_HPP
+#define CDPL_FORCEFIELD_MMFF94PARAMETERDATA_HPP
 
 
 namespace CDPL 
@@ -34,7 +34,7 @@ namespace CDPL
     namespace Forcefield 
     {
 
-		namespace BuiltinMMFF94Data
+		namespace MMFF94ParameterData
 		{
 
 			extern const char* ANGLE_BENDING_PARAMETERS;
@@ -60,4 +60,4 @@ namespace CDPL
     }
 }
 
-#endif // CDPL_FORCEFIELD_BUILTINMMFF94DATA_HPP
+#endif // CDPL_FORCEFIELD_MMFF94PARAMETERDATA_HPP

@@ -1,7 +1,7 @@
 /* -*- mode: c++; c-basic-offset: 4; tab-width: 4; indent-tabs-mode: t -*- */
 
 /* 
- * MMFF94SymbolicAtomTypePatternTable.hpp 
+ * MMFF94AromaticAtomTypeDefinitionTable.hpp 
  *
  * This file is part of the Chemical Data Processing Toolkit
  *
@@ -25,11 +25,11 @@
 
 /**
  * \file
- * \brief Pattern of the class CDPL::Forcefield::MMFF94SymbolicAtomTypePatternTable.
+ * \brief Definition of the class CDPL::Forcefield::MMFF94AromaticAtomTypeDefinitionTable.
  */
 
-#ifndef CDPL_FORCEFIELD_MMFF94SYMBOLICATOMTYPEPATTERNTABLE_HPP
-#define CDPL_FORCEFIELD_MMFF94SYMBOLICATOMTYPEPATTERNTABLE_HPP
+#ifndef CDPL_FORCEFIELD_MMFF94AROMATICATOMTYPEDEFINITIONTABLE_HPP
+#define CDPL_FORCEFIELD_MMFF94AROMATICATOMTYPEDEFINITIONTABLE_HPP
 
 #include <cstddef>
 #include <vector>
@@ -39,7 +39,6 @@
 #include <boost/shared_ptr.hpp>
 
 #include "CDPL/Forcefield/APIPrefix.hpp"
-#include "CDPL/Chem/MolecularGraph.hpp"
 
 
 namespace CDPL 
@@ -53,7 +52,7 @@ namespace CDPL
 		 * @{
 		 */
 
-		class CDPL_FORCEFIELD_API MMFF94SymbolicAtomTypePatternTable
+		class CDPL_FORCEFIELD_API MMFF94AromaticAtomTypeDefinitionTable
 		{
 
 		  public:
@@ -63,7 +62,7 @@ namespace CDPL
 			typedef std::vector<Entry> DataStorage;
 
 		  public:
-			typedef boost::shared_ptr<MMFF94SymbolicAtomTypePatternTable> SharedPointer;
+			typedef boost::shared_ptr<MMFF94AromaticAtomTypeDefinitionTable> SharedPointer;
 
 			typedef DataStorage::const_iterator ConstEntryIterator;
 	
@@ -71,25 +70,39 @@ namespace CDPL
 			{
 
 			  public:
-				Entry(const Chem::MolecularGraph::SharedPointer& ptn, const std::string& sym_type, bool fallback);
+				Entry(const std::string& old_type, const std::string& aro_type, unsigned int atomic_no, 
+					  std::size_t ring_size, std::size_t het_atom_dist, bool im_cation, bool n5_anion);
 
-				bool isFallbackType() const;
+				const std::string& getOldSymbolicAtomType() const;
+				
+				const std::string& getAromSymbolicAtomType() const;
+				
+				unsigned int getAtomicNumber() const;
 
-				const Chem::MolecularGraph::SharedPointer& getPattern() const;
+				std::size_t getRingSize() const;
 
-				const std::string& getSymbolicType() const;
+				std::size_t getHeteroAtomDistance();
+
+				bool isImidazoliumCation() const;
+
+				bool isN5RingAnion() const;
 
 			  private:
-				Chem::MolecularGraph::SharedPointer pattern;
-				std::string                         symType;
-				bool                                fallback;
+				std::string   oldType;
+				std::string   aroType;
+				unsigned int  atomicNumber; 
+				std::size_t   ringSize;
+				std::size_t   hetAtomDist;
+				bool          imCation;
+				bool          n5Anion;
 			};			
 
-			MMFF94SymbolicAtomTypePatternTable();
+			MMFF94AromaticAtomTypeDefinitionTable();
 
 			std::size_t getNumEntries() const;
 
-			void addEntry(const Chem::MolecularGraph::SharedPointer& ptn, const std::string& sym_type, bool fallback);
+			void addEntry(const std::string& old_type, const std::string& aro_type, unsigned int atomic_no, 
+						  std::size_t ring_size, std::size_t het_atom_dist, bool im_cation, bool n5_anion);
 
 			const Entry& getEntry(std::size_t idx) const;
 
@@ -103,13 +116,13 @@ namespace CDPL
 
 			void loadDefaults();
 
-			static void set(const MMFF94SymbolicAtomTypePatternTable* table);
+			static void set(const MMFF94AromaticAtomTypeDefinitionTable* table);
 
-			static const MMFF94SymbolicAtomTypePatternTable& get();
+			static const MMFF94AromaticAtomTypeDefinitionTable& get();
 
 		  private:
-			static const MMFF94SymbolicAtomTypePatternTable* defaultTable;
-			DataStorage                                      entries;
+			static const MMFF94AromaticAtomTypeDefinitionTable* defaultTable;
+			DataStorage                                         entries;
 		};
     
 		/**
@@ -118,4 +131,4 @@ namespace CDPL
 	}
 }
 
-#endif // CDPL_FORCEFIELD_MMFF94SYMBOLICATOMTYPEPATTERNTABLE_HPP
+#endif // CDPL_FORCEFIELD_MMFF94AROMATICATOMTYPEDEFINITIONTABLE_HPP

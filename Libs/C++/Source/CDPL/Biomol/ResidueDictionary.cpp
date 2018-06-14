@@ -41,9 +41,9 @@
 #include "CDPL/Chem/MolecularGraphFunctions.hpp"
 #include "CDPL/Base/Exceptions.hpp"
 
-#include "BuiltinResidueDictionaryData.hpp"
+#include "ResidueDictionaryData.hpp"
 
-#include <fstream>
+
 using namespace CDPL;
 
 
@@ -51,7 +51,7 @@ namespace
 {
   
     typedef boost::unordered_set<std::string> StdResidueSet;
-    typedef boost::unordered_map<std::string, const Biomol::BuiltinResidueDictionaryData::ResidueDataEntry*> ResCodeToDataEntryMap;
+    typedef boost::unordered_map<std::string, const Biomol::ResidueDictionaryData::ResidueDataEntry*> ResCodeToDataEntryMap;
     typedef boost::unordered_map<std::string, Chem::MolecularGraph::SharedPointer> StructureCache;
 
 	StdResidueSet             stdResidueSet;
@@ -62,8 +62,8 @@ namespace
 
 	const Biomol::ResidueDictionary::Entry DEF_ENTRY;
 
-    boost::iostreams::stream<boost::iostreams::array_source> resStructureIStream(Biomol::BuiltinResidueDictionaryData::residueStructureData, 
-																				 Biomol::BuiltinResidueDictionaryData::RESIDUE_STRUCTURE_DATA_LEN);
+    boost::iostreams::stream<boost::iostreams::array_source> resStructureIStream(Biomol::ResidueDictionaryData::residueStructureData, 
+																				 Biomol::ResidueDictionaryData::RESIDUE_STRUCTURE_DATA_LEN);
     Chem::CDFMoleculeReader                                  resStructureReader(resStructureIStream);
 
 	const char* stdResidueList[] = {
@@ -77,7 +77,7 @@ namespace
 
 		Init() {
 			using namespace Biomol;
-			using namespace BuiltinResidueDictionaryData;
+			using namespace ResidueDictionaryData;
 
 			stdResidueSet.insert(&stdResidueList[0], &stdResidueList[sizeof(stdResidueList) / sizeof(const char*)]);
 			builtinDictionary.loadDefaultEntries();
@@ -95,7 +95,7 @@ namespace
 	{
 		using namespace Chem;
 		using namespace Biomol;
-		using namespace BuiltinResidueDictionaryData;
+		using namespace ResidueDictionaryData;
 
 		boost::lock_guard<boost::mutex> lock(loadStructureMutex);
 
@@ -262,7 +262,7 @@ Biomol::ResidueDictionary::ConstEntryIterator Biomol::ResidueDictionary::getEntr
 
 void Biomol::ResidueDictionary::loadDefaultEntries()
 {
-	using namespace BuiltinResidueDictionaryData;
+	using namespace ResidueDictionaryData;
 
 	Entry::StructureRetrievalFunction struc_ret_func(&loadResidueStructure);
 

@@ -27,6 +27,7 @@
 #include <boost/python.hpp>
 
 #include "CDPL/Chem/UtilityFunctions.hpp"
+#include "CDPL/Chem/Fragment.hpp"
 
 #include "FunctionExports.hpp"
 
@@ -47,4 +48,6 @@ void CDPLPythonChem::exportUtilityFunctions()
 				(python::arg("smiles"), python::arg("mol")));
 	python::def("extendBoundingBox", &Chem::extendBoundingBox, (python::arg("min"), python::arg("max"), python::arg("coords"), python::arg("reset") = false));
 	python::def("insideBoundingBox", &Chem::insideBoundingBox, (python::arg("min"), python::arg("max"), python::arg("coords")));
+	python::def("isAromatic", &Chem::isAromatic, (python::arg("ring"), python::arg("molgraph"), python::arg("arom_bond_mask")));
+	python::def("isNotAromatic", &Chem::isNotAromatic, (python::arg("ring"), python::arg("molgraph")));
 }

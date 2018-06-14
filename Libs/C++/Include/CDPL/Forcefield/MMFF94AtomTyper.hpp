@@ -35,9 +35,12 @@
 #include <string>
 #include <cstddef>
 
+#include <boost/unordered_map.hpp>
+
 #include "CDPL/Forcefield/APIPrefix.hpp"
 #include "CDPL/Chem/PatternAtomTyper.hpp"
-#include "CDPL/Util/Array.hpp"
+#include "CDPL/Chem/AromaticSSSRSubset.hpp"
+#include "CDPL/Util/BitSet.hpp"
 
 
 namespace CDPL 
@@ -47,12 +50,14 @@ namespace CDPL
 	{
 
 		class MolecularGraph;
+		class Fragment;
 	}
 
     namespace Forcefield 
     {
 
 		class MMFF94SymbolicAtomTypePatternTable;
+		class MMFF94AromaticAtomTypeDefinitionTable;
 		class MMFF94HeavyToHydrogenAtomTypeMap;
 		class MMFF94SymbolicToNumericAtomTypeMap;
 
@@ -68,6 +73,8 @@ namespace CDPL
 			MMFF94AtomTyper();
 
 			void setSymbolicAtomTypePatternTable(const MMFF94SymbolicAtomTypePatternTable& table);
+
+			void setAromaticAtomTypeDefinitionTable(const MMFF94AromaticAtomTypeDefinitionTable& table);
 
 			void setHeavyToHydrogenAtomTypeMap(const MMFF94HeavyToHydrogenAtomTypeMap& map);
 
@@ -86,20 +93,27 @@ namespace CDPL
 		  private:
 			void init(const Chem::MolecularGraph& molgraph);
 
-			void perceiveInitialAtomTypes();
+			void assignProvisionalSymbolicAtomTypes();
 			void assignAromaticAtomTypes();
 			void assignHydrogenAtomTypes();
 			void assignNumericAtomTypes();
 
+			void assignAromaticAtomTypes(const Chem::Fragment& ring);
+
 			typedef std::vector<std::string> SymbolicTypeTable;
 			typedef std::vector<unsigned int> NumericTypeTable;
+			typedef boost::unordered_map<std::size_t, std::size_t> AtomIndexToAromTypeDefIndexMap;
 
 			bool                                         strictMode;
 			const MMFF94SymbolicAtomTypePatternTable*    symTypePatternTable;
+			const MMFF94AromaticAtomTypeDefinitionTable* aromTypeDefTable;
 			const MMFF94HeavyToHydrogenAtomTypeMap*      hydTypeMap;
 			const MMFF94SymbolicToNumericAtomTypeMap*    numTypeMap;
 			const Chem::MolecularGraph*                  molGraph;
 			Chem::PatternAtomTyper                       atomTyper;
+			Chem::AromaticSSSRSubset                     aromRings;
+			Util::BitSet                                 aromRSizeMask;
+			AtomIndexToAromTypeDefIndexMap               aromTypeDefIdxMap;
 			SymbolicTypeTable                            symTypes;
 			NumericTypeTable                             numTypes;
 		};

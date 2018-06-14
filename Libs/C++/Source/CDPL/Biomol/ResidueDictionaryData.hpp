@@ -1,11 +1,11 @@
 /* -*- mode: c++; c-basic-offset: 4; tab-width: 4; indent-tabs-mode: t -*- */
 
-/* 
- * AromaticityPerception.hpp 
+/*
+ * ResidueDictionaryData.hpp
  *
  * This file is part of the Chemical Data Processing Toolkit
  *
- * Copyright (C) 2003-2010 Thomas A. Seidel <thomas.seidel@univie.ac.at>
+ * Copyright (C) 2003-2015 Thomas A. Seidel <thomas.seidel@univie.ac.at>
  *
  * This library is free software; you can redistribute it and/or
  * modify it under the terms of the GNU Lesser General Public
@@ -24,25 +24,40 @@
  */
 
 
-#ifndef CDPL_CHEM_AROMATICITYPERCEPTION_HPP
-#define CDPL_CHEM_AROMATICITYPERCEPTION_HPP
+#ifndef CDPL_BIOMOL_RESIDUEDICTIONARYDATA_HPP
+#define CDPL_BIOMOL_RESIDUEDICTIONARYDATA_HPP
 
-#include "CDPL/Util/BitSet.hpp"
+#include <cstddef>
 
 
-namespace CDPL 
+namespace CDPL
 {
 
-	namespace Chem 
+	namespace Biomol
 	{
 
-		class Fragment;
-		class MolecularGraph;
+		namespace ResidueDictionaryData
+		{
 
-		bool isAromatic(const MolecularGraph&, const Fragment&, const Util::BitSet&);
-		bool isNotAromatic(const MolecularGraph&, const Fragment&);
+			struct ResidueDataEntry
+			{
+
+				const char*  code;
+				const char*  replacesCode;
+				const char*  replacedByCode;
+				unsigned int type;
+				bool         obsolete;
+				const char*  name;
+				std::size_t  molIndex;
+			};
+
+			extern const ResidueDataEntry residueData[];
+			extern const std::size_t NUM_RESIDUE_ENTRIES;
+
+			extern const char* residueStructureData;
+			extern const std::size_t RESIDUE_STRUCTURE_DATA_LEN;
+		}
 	}
 }
 
-#endif // CDPL_CHEM_AROMATICITYPERCEPTION_HPP
- 
+#endif // CDPL_BIOMOL_RESIDUEDICTIONARYDATA_HPP

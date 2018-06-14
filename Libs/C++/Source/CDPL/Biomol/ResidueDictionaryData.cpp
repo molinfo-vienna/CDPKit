@@ -1,11 +1,11 @@
 /* -*- mode: c++; c-basic-offset: 4; tab-width: 4; indent-tabs-mode: t -*- */
 
-/*
- * BuiltinResidueDictionaryData.hpp
+/* 
+ * ResidueDictionaryData.cpp 
  *
  * This file is part of the Chemical Data Processing Toolkit
  *
- * Copyright (C) 2003-2015 Thomas A. Seidel <thomas.seidel@univie.ac.at>
+ * Copyright (C) 2003-2010 Thomas A. Seidel <thomas.seidel@univie.ac.at>
  *
  * This library is free software; you can redistribute it and/or
  * modify it under the terms of the GNU Lesser General Public
@@ -24,40 +24,23 @@
  */
 
 
-#ifndef CDPL_BIOMOL_BUILTINRESIDUEDICTIONARYDATA_HPP
-#define CDPL_BIOMOL_BUILTINRESIDUEDICTIONARYDATA_HPP
+#include "StaticInit.hpp"
 
-#include <cstddef>
+#include "CDPL/Biomol/ResidueDictionaryData.hpp"
+#include "CDPL/Biomol/ResidueType.hpp"
 
 
 namespace CDPL
 {
+		
+    namespace Biomol    
+    {
 
-	namespace Biomol
-	{
+		namespace ResidueDictionaryData {
 
-		namespace BuiltinResidueDictionaryData
-		{
-
-			struct ResidueDataEntry
-			{
-
-				const char*  code;
-				const char*  replacesCode;
-				const char*  replacedByCode;
-				unsigned int type;
-				bool         obsolete;
-				const char*  name;
-				std::size_t  molIndex;
-			};
-
-			extern const ResidueDataEntry residueData[];
-			extern const std::size_t NUM_RESIDUE_ENTRIES;
-
-			extern const char* residueStructureData;
-			extern const std::size_t RESIDUE_STRUCTURE_DATA_LEN;
+			const char* residueStructureData =
+            #include "ResidueDictionaryStructureData.hpp"
+            #include "ResidueDictionaryEntries.hpp"
 		}
-	}
+    }
 }
-
-#endif // CDPL_BIOMOL_BUILTINRESIDUEDICTIONARYDATA_HPP

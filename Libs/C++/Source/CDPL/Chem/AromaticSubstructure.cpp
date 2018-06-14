@@ -34,8 +34,7 @@
 #include "CDPL/Chem/Atom.hpp"
 #include "CDPL/Chem/Bond.hpp"
 #include "CDPL/Chem/MolecularGraphFunctions.hpp"
-
-#include "AromaticityPerception.hpp"
+#include "CDPL/Chem/UtilityFunctions.hpp"
 
 
 using namespace CDPL;
@@ -102,7 +101,7 @@ void Chem::AromaticSubstructure::init(const MolecularGraph& molgraph)
 		if (num_ring_bonds == 0 || num_ring_bonds != ring_ptr->getNumAtoms()) // sanity check
 			continue;
 
-		if (isNotAromatic(molgraph, *ring_ptr))
+		if (isNotAromatic(*ring_ptr, molgraph))
 			continue;
 
 		RingDescriptor::SharedPointer ring_descr_ptr(new RingDescriptor(ring_ptr, molgraph));
@@ -288,7 +287,7 @@ void Chem::AromaticSubstructure::fuseRings(const RingDescriptor& ring_descr1, co
 
 bool Chem::AromaticSubstructure::isAromatic(const RingDescriptor::SharedPointer& ring_descr)
 {
-	if (!Chem::isAromatic(*molGraph, ring_descr->getRing(), aromBondMask))
+	if (!Chem::isAromatic(ring_descr->getRing(), *molGraph, aromBondMask))
 		return false;
 
 	aromBondMask |= ring_descr->getBondMask();

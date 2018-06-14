@@ -46,7 +46,7 @@ namespace CDPL
 	namespace Chem 
 	{
 
-		class Molecule;
+		class Fragment;
 
 		/**
 		 * \addtogroup CDPL_CHEM_UTILITY_FUNCTIONS
@@ -76,6 +76,10 @@ namespace CDPL
 		CDPL_CHEM_API void extendBoundingBox(Math::Vector3D& min, Math::Vector3D& max, const Math::Vector3D& coords, bool reset = false);
 
 		CDPL_CHEM_API bool insideBoundingBox(const Math::Vector3D& min, const Math::Vector3D& max, const Math::Vector3D& coords);
+
+		CDPL_CHEM_API bool isAromatic(const Fragment& ring, const MolecularGraph& molgraph, const Util::BitSet& arom_bond_mask);
+
+		CDPL_CHEM_API bool isNotAromatic(const Fragment& ring, const MolecularGraph& molgraph);
 
 		/**
 		 * @}

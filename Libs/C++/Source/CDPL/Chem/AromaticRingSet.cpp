@@ -34,8 +34,7 @@
 #include "CDPL/Chem/MolecularGraph.hpp"
 #include "CDPL/Chem/Bond.hpp"
 #include "CDPL/Chem/MolecularGraphFunctions.hpp"
-
-#include "AromaticityPerception.hpp"
+#include "CDPL/Chem/UtilityFunctions.hpp"
 
 
 using namespace CDPL;
@@ -73,7 +72,7 @@ void Chem::AromaticRingSet::init(const MolecularGraph& molgraph)
 		if (num_ring_bonds == 0 || num_ring_bonds != ring_ptr->getNumAtoms()) // sanity check
 			continue;
 	
-		if (isNotAromatic(molgraph, *ring_ptr))
+        if (isNotAromatic(*ring_ptr, molgraph))
 			continue;
 
 		addElement(ring_ptr);
@@ -109,7 +108,7 @@ bool Chem::AromaticRingSet::isAromatic(const Fragment::SharedPointer& ring_ptr)
 {
 	const Fragment& ring = *ring_ptr;
 
-	if (!Chem::isAromatic(*molGraph, ring, aromBondMask))
+	if (!Chem::isAromatic(ring, *molGraph, aromBondMask))
 		return false;
 
 	std::for_each(ring.getBondsBegin(), ring.getBondsEnd(),

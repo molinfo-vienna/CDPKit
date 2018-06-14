@@ -34,8 +34,8 @@
 #include "CDPL/Chem/MolecularGraph.hpp"
 #include "CDPL/Chem/MolecularGraphFunctions.hpp"
 #include "CDPL/Chem/BondFunctions.hpp"
+#include "CDPL/Chem/UtilityFunctions.hpp"
 
-#include "AromaticityPerception.hpp"
 
 
 using namespace CDPL;
@@ -87,7 +87,7 @@ void Chem::AromaticSSSRSubset::findAromaticRings()
 		if (num_ring_bonds == 0 || num_ring_bonds != ring_ptr->getNumAtoms()) // sanity check
 			continue;
 
-		if (Chem::isAromatic(*molGraph, *ring_ptr, aromBondMask))
+		if (Chem::isAromatic(*ring_ptr, *molGraph, aromBondMask))
 			addElement(ring_ptr);
 	}
 }

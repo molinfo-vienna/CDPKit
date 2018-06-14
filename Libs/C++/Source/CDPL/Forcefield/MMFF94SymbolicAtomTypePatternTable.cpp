@@ -38,7 +38,7 @@
 #include "CDPL/Chem/AtomFunctions.hpp"
 #include "CDPL/Base/Exceptions.hpp"
 
-#include "BuiltinMMFF94Data.hpp"
+#include "MMFF94ParameterData.hpp"
 #include "Utilities.hpp"
 
 
@@ -73,7 +73,7 @@ bool Forcefield::MMFF94SymbolicAtomTypePatternTable::Entry::isFallbackType() con
     return fallback;
 }
 
-Chem::MolecularGraph::SharedPointer Forcefield::MMFF94SymbolicAtomTypePatternTable::Entry::getPattern() const
+const Chem::MolecularGraph::SharedPointer& Forcefield::MMFF94SymbolicAtomTypePatternTable::Entry::getPattern() const
 {
     return pattern;
 }
@@ -159,8 +159,8 @@ void Forcefield::MMFF94SymbolicAtomTypePatternTable::load(std::istream& is)
 
 void Forcefield::MMFF94SymbolicAtomTypePatternTable::loadDefaults()
 {
-    boost::iostreams::stream<boost::iostreams::array_source> is(Forcefield::BuiltinMMFF94Data::SYMBOLIC_ATOM_TYPE_PATTERNS, 
-																std::strlen(Forcefield::BuiltinMMFF94Data::SYMBOLIC_ATOM_TYPE_PATTERNS));
+    boost::iostreams::stream<boost::iostreams::array_source> is(Forcefield::MMFF94ParameterData::SYMBOLIC_ATOM_TYPE_PATTERNS, 
+																std::strlen(Forcefield::MMFF94ParameterData::SYMBOLIC_ATOM_TYPE_PATTERNS));
     load(is);
 }
 

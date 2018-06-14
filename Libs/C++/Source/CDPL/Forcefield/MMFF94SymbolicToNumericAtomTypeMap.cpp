@@ -35,7 +35,7 @@
 #include "CDPL/Forcefield/MMFF94SymbolicToNumericAtomTypeMap.hpp"
 #include "CDPL/Base/Exceptions.hpp"
 
-#include "BuiltinMMFF94Data.hpp"
+#include "MMFF94ParameterData.hpp"
 #include "Utilities.hpp"
 
 
@@ -116,8 +116,8 @@ void Forcefield::MMFF94SymbolicToNumericAtomTypeMap::load(std::istream& is)
 
 void Forcefield::MMFF94SymbolicToNumericAtomTypeMap::loadDefaults()
 {
-    boost::iostreams::stream<boost::iostreams::array_source> is(Forcefield::BuiltinMMFF94Data::SYMBOLIC_TO_NUMERIC_ATOM_TYPE_MAPPING, 
-								std::strlen(Forcefield::BuiltinMMFF94Data::SYMBOLIC_TO_NUMERIC_ATOM_TYPE_MAPPING));
+    boost::iostreams::stream<boost::iostreams::array_source> is(Forcefield::MMFF94ParameterData::SYMBOLIC_TO_NUMERIC_ATOM_TYPE_MAPPING, 
+								std::strlen(Forcefield::MMFF94ParameterData::SYMBOLIC_TO_NUMERIC_ATOM_TYPE_MAPPING));
     load(is);
 }
 
