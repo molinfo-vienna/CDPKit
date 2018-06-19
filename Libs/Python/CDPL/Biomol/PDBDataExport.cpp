@@ -45,7 +45,7 @@ namespace
 		python::list types;
 			
 		std::for_each(pdb_data.getRecordsBegin(), pdb_data.getRecordsEnd(),
-					  boost::bind(&python::list::append<typename CDPL::Biomol::PDBData::RecordType>, boost::ref(types),
+					  boost::bind(&python::list::append<CDPL::Biomol::PDBData::RecordType>, boost::ref(types),
 								  boost::bind(&CDPL::Biomol::PDBData::Record::first, _1)));
 
 		return types;
@@ -57,7 +57,7 @@ namespace
 		python::list values;
 
 		std::for_each(pdb_data.getRecordsBegin(), pdb_data.getRecordsEnd(),
-					  boost::bind(&python::list::append<typename std::string>, boost::ref(values),
+					  boost::bind(&python::list::append<std::string>, boost::ref(values),
 								  boost::bind(&CDPL::Biomol::PDBData::Record::second, _1)));
 
 		return values;

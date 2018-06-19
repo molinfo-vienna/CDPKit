@@ -81,7 +81,7 @@ namespace CDPL
 
 				std::size_t getRingSize() const;
 
-				std::size_t getHeteroAtomDistance();
+				std::size_t getHeteroAtomDistance() const;
 
 				bool isImidazoliumCation() const;
 
@@ -116,13 +116,13 @@ namespace CDPL
 
 			void loadDefaults();
 
-			static void set(const MMFF94AromaticAtomTypeDefinitionTable* table);
+			static void set(const SharedPointer& table);
 
-			static const MMFF94AromaticAtomTypeDefinitionTable& get();
+			static const SharedPointer& get();
 
 		  private:
-			static const MMFF94AromaticAtomTypeDefinitionTable* defaultTable;
-			DataStorage                                         entries;
+			static SharedPointer defaultTable;
+			DataStorage          entries;
 		};
     
 		/**

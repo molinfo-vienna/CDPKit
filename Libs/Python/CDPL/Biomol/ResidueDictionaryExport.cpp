@@ -49,23 +49,6 @@ namespace
 
 		return entries;
 	}
-
-	void setDictionary(boost::python::object dict_obj)
-	{	
-		using namespace boost;
-		using namespace CDPL;
-
-		static python::handle<> dict_handle;
-
-		if (dict_obj.ptr() == Py_None) {
-			Biomol::ResidueDictionary::set(0);
-			dict_handle = python::handle<>();
-			return;
-		}
-
-		Biomol::ResidueDictionary::set(python::extract<const CDPL::Biomol::ResidueDictionary*>(dict_obj));
-		dict_handle = python::handle<>(python::borrowed(dict_obj.ptr()));
-	}
 }
 
 
@@ -90,7 +73,7 @@ void CDPLPythonBiomol::exportResidueDictionary()
 		.def("assign", CDPLPythonBase::copyAssOp(&Biomol::ResidueDictionary::operator=), (python::arg("self"), python::arg("dict")), python::return_self<>())
 		.add_property("numEntries", &Biomol::ResidueDictionary::getNumEntries)
 		.add_property("entries", &getEntries)
-		.def("set", &setDictionary, python::arg("dict"))
+		.def("set", &Biomol::ResidueDictionary::set, python::arg("dict"))
 		.staticmethod("set")
 		.def("get", &Biomol::ResidueDictionary::get, python::return_value_policy<python::reference_existing_object>())
 		.staticmethod("get")

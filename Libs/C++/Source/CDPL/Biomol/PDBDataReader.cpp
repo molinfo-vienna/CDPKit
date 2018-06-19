@@ -879,7 +879,7 @@ void Biomol::PDBDataReader::processAtomSequence(Chem::Molecule& mol, bool chain_
 	prevResidueAtoms.clear();
 	prevResidueLinkAtoms.clear();
 
-	const ResidueDictionary& res_dict = (resDictionary ? *resDictionary : ResidueDictionary::get());
+	const ResidueDictionary& res_dict = (resDictionary ? *resDictionary : *ResidueDictionary::get());
 
 	for (AtomList::iterator as_it = atomSequence.begin(), as_end = atomSequence.end(); as_it != as_end; ) {
 		Atom* first_atom = *as_it;
@@ -1048,7 +1048,7 @@ void Biomol::PDBDataReader::setBondOrdersFromResTemplates(Chem::Molecule& mol)
 		return;
 
 	std::string bo_cache_key;
-	const ResidueDictionary& res_dict = (resDictionary ? *resDictionary : ResidueDictionary::get());
+	ResDictPointer res_dict = (resDictionary ? resDictionary : ResidueDictionary::get());
 
 	for (Molecule::BondIterator it = mol.getBondsBegin() + startBondCount, end = mol.getBondsEnd(); it != end; ++it) {
 		Bond& bond = *it;
@@ -1068,7 +1068,7 @@ void Biomol::PDBDataReader::setBondOrdersFromResTemplates(Chem::Molecule& mol)
 		if (res_code1 != res_code2)
 			continue;
 
-		bool is_std_res = res_dict.isStdResidue(res_code1);	
+		bool is_std_res = res_dict->isStdResidue(res_code1);	
 
 		if ((is_std_res && !applyDictOrderToStdResidues) || (!is_std_res && !applyDictOrderToNonStdResidues))
 			continue;
@@ -1089,7 +1089,7 @@ void Biomol::PDBDataReader::setBondOrdersFromResTemplates(Chem::Molecule& mol)
 			continue;
 		}
 
-		MolecularGraph::SharedPointer res_tmplt = res_dict.getStructure(res_code1);
+		MolecularGraph::SharedPointer res_tmplt = res_dict->getStructure(res_code1);
 
 		if (!res_tmplt)
 			continue;

@@ -66,7 +66,7 @@ namespace CDPL
 
 	    void addEntry(const std::string& parent_type, const std::string& hyd_type);
 
-	    const std::string& getHydrogenType(const std::string& parent_type) const;
+	    const std::string& getEntry(const std::string& parent_type) const;
 
 	    void clear();
 
@@ -78,13 +78,13 @@ namespace CDPL
 
 	    void loadDefaults();
 
-	    static void set(const MMFF94HeavyToHydrogenAtomTypeMap* table);
+	    static void set(const SharedPointer& map);
 
-	    static const MMFF94HeavyToHydrogenAtomTypeMap& get();
+	    static const SharedPointer& get();
 
 	  private:
-	    static const MMFF94HeavyToHydrogenAtomTypeMap* defaultTable;
-	    DataStorage                                    entries;
+	    static SharedPointer defaultMap;
+	    DataStorage          entries;
 	};
     
 	/**

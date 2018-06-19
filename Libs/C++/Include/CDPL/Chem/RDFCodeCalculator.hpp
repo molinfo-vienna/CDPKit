@@ -36,6 +36,7 @@
 #include <cmath>
 
 #include <boost/function.hpp>
+#include <boost/math/special_functions/round.hpp>
 
 #include "CDPL/Math/Matrix.hpp"
 #include "CDPL/Math/Vector.hpp"
@@ -373,7 +374,7 @@ void CDPL::Chem::RDFCodeCalculator<T>::init(Iter beg, Iter end)
 				double dist = length(entity1_pos - coordsFunc(entity2));
 
 				if (distToIntervalCenterRounding) 
-					dist = std::round((dist - startRadius) / radiusIncrement) * radiusIncrement + startRadius;
+					dist = boost::math::round((dist - startRadius) / radiusIncrement) * radiusIncrement + startRadius;
 				
 				distMatrix(i, j) = dist;
 

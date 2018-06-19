@@ -26,11 +26,17 @@
  
 #include "StaticInit.hpp"
 
+#include "CDPL/Config.hpp"
+
 #include <cstring>
 #include <sstream>
 
+#if defined(HAVE_BOOST_IOSTREAMS)
+
 #include <boost/iostreams/device/array.hpp>
 #include <boost/iostreams/stream.hpp>
+
+#endif // defined(HAVE_BOOST_IOSTREAMS)
 
 #include "CDPL/Forcefield/MMFF94SymbolicAtomTypePatternTable.hpp"
 #include "CDPL/Chem/BasicMolecule.hpp"
@@ -48,20 +54,20 @@ using namespace CDPL;
 namespace
 {
  
-    Forcefield::MMFF94SymbolicAtomTypePatternTable builtinTable;
+    Forcefield::MMFF94SymbolicAtomTypePatternTable::SharedPointer builtinTable(new Forcefield::MMFF94SymbolicAtomTypePatternTable());
 
     struct Init
     {
 
 		Init() {
-			builtinTable.loadDefaults();
+			builtinTable->loadDefaults();
 		}
 
     } init;
 }
 
 
-const Forcefield::MMFF94SymbolicAtomTypePatternTable* Forcefield::MMFF94SymbolicAtomTypePatternTable::defaultTable = &builtinTable;
+Forcefield::MMFF94SymbolicAtomTypePatternTable::SharedPointer Forcefield::MMFF94SymbolicAtomTypePatternTable::defaultTable = builtinTable;
 
 
 Forcefield::MMFF94SymbolicAtomTypePatternTable::Entry::Entry(const Chem::MolecularGraph::SharedPointer& ptn, const std::string& sym_type, bool fallback):
@@ -159,17 +165,25 @@ void Forcefield::MMFF94SymbolicAtomTypePatternTable::load(std::istream& is)
 
 void Forcefield::MMFF94SymbolicAtomTypePatternTable::loadDefaults()
 {
-    boost::iostreams::stream<boost::iostreams::array_source> is(Forcefield::MMFF94ParameterData::SYMBOLIC_ATOM_TYPE_PATTERNS, 
-																std::strlen(Forcefield::MMFF94ParameterData::SYMBOLIC_ATOM_TYPE_PATTERNS));
+#if defined(HAVE_BOOST_IOSTREAMS)
+
+    boost::iostreams::stream<boost::iostreams::array_source> is(MMFF94ParameterData::SYMBOLIC_ATOM_TYPE_PATTERNS, 
+																std::strlen(MMFF94ParameterData::SYMBOLIC_ATOM_TYPE_PATTERNS));
+#else // defined(HAVE_BOOST_IOSTREAMS)
+
+	std::istringstream is(std::string(MMFF94ParameterData::SYMBOLIC_ATOM_TYPE_PATTERNS);
+
+#endif // defined(HAVE_BOOST_IOSTREAMS)
+
     load(is);
 }
 
-void Forcefield::MMFF94SymbolicAtomTypePatternTable::set(const Forcefield::MMFF94SymbolicAtomTypePatternTable* db)
+void Forcefield::MMFF94SymbolicAtomTypePatternTable::set(const SharedPointer& table)
 {	
-    defaultTable = (!db ? &builtinTable : db);
+    defaultTable = (!table ? builtinTable : table);
 }
 
-const Forcefield::MMFF94SymbolicAtomTypePatternTable& Forcefield::MMFF94SymbolicAtomTypePatternTable::get()
+const Forcefield::MMFF94SymbolicAtomTypePatternTable::SharedPointer& Forcefield::MMFF94SymbolicAtomTypePatternTable::get()
 {
-    return *defaultTable;
+    return defaultTable;
 }

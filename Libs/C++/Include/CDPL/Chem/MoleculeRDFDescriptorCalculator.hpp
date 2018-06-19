@@ -31,6 +31,8 @@
 #ifndef CDPL_CHEM_MOLECULERDFDESCRIPTORCALCULATOR_HPP
 #define CDPL_CHEM_MOLECULERDFDESCRIPTORCALCULATOR_HPP
 
+#include <boost/function.hpp>
+
 #include "CDPL/Chem/APIPrefix.hpp"
 #include "CDPL/Chem/RDFCodeCalculator.hpp"
 #include "CDPL/Math/Vector.hpp"
@@ -61,7 +63,7 @@ namespace CDPL
 
 		public:
 			typedef RDFCodeCalculator::Entity3DCoordinatesFunction Atom3DCoordinatesFunction;
-			typedef RDFCodeCalculator::EntityPairWeightFunction AtomPairWeightFunction;
+			typedef boost::function3<double, const Atom&, const Atom&, unsigned int> AtomPairWeightFunction;
 			
 			/**
 			 * \brief Constructs the \c %MoleculeRDFDescriptorCalculator instance.

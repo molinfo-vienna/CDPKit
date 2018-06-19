@@ -53,6 +53,7 @@ namespace CDPL
 			extern const char* HYDROGEN_ATOM_TYPE_DEFINITIONS;
 			extern const char* SYMBOLIC_TO_NUMERIC_ATOM_TYPE_MAPPING;
 			extern const char* NUMERIC_TO_PARAMETER_ATOM_TYPE_MAPPING;
+			extern const char* ATOM_TYPE_PROPERTIES;
 
 			extern const char* BOND_CHARGE_INCREMENT_PARAMETERS;
 			extern const char* PARTIAL_BOND_CHARGE_INCREMENT_PARAMETERS;

@@ -33,6 +33,8 @@
 
 #include <ios>
 
+#include <boost/shared_ptr.hpp>
+
 #include "CDPL/Base/DataWriter.hpp"
 
 
@@ -60,6 +62,8 @@ namespace CDPL
 
 		public:
 			typedef DataWriter<T> WriterType;
+
+			typedef boost::shared_ptr<DataOutputHandler> SharedPointer;
 
 			/**
 			 * \brief Virtual destructor.

@@ -31,6 +31,8 @@
 #ifndef CDPL_PHARM_PHARMACOPHORERDFDESCRIPTORCALCULATOR_HPP
 #define CDPL_PHARM_PHARMACOPHORERDFDESCRIPTORCALCULATOR_HPP
 
+#include <boost/function.hpp>
+
 #include "CDPL/Pharm/APIPrefix.hpp"
 #include "CDPL/Chem/RDFCodeCalculator.hpp"
 #include "CDPL/Math/Vector.hpp"
@@ -61,8 +63,8 @@ namespace CDPL
 
 		public:
 			typedef RDFCodeCalculator::Entity3DCoordinatesFunction Feature3DCoordinatesFunction;
-			typedef RDFCodeCalculator::EntityPairWeightFunction FeaturePairWeightFunction;
-			
+			typedef boost::function3<double, const Feature&, const Feature&, unsigned int> FeaturePairWeightFunction;
+				
 			/**
 			 * \brief Constructs the \c %PharmacophoreRDFDescriptorCalculator instance.
 			 */

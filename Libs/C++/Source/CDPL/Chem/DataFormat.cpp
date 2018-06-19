@@ -184,135 +184,71 @@ namespace
 			using namespace Base;
 			using namespace Chem;
 
-			static const JMEMoleculeInputHandler           jmeMolInputHandler;
-			static const MOLMoleculeInputHandler           molMolInputHandler;
-			static const SDFMoleculeInputHandler           sdfMolInputHandler;
-			static const SMILESMoleculeInputHandler        smilesMolInputHandler;
-			static const SMARTSMoleculeInputHandler        smartsMolInputHandler;
-			static const INCHIMoleculeInputHandler         inchiMolInputHandler;
-			static const CDFMoleculeInputHandler           cdfMolInputHandler;
-			static const MOL2MoleculeInputHandler          mol2MolInputHandler;
+			DataIOManager<Molecule>::registerInputHandler(DataIOManager<Molecule>::InputHandlerPointer(new JMEMoleculeInputHandler()));
+			DataIOManager<Molecule>::registerInputHandler(DataIOManager<Molecule>::InputHandlerPointer(new SDFMoleculeInputHandler()));
+			DataIOManager<Molecule>::registerInputHandler(DataIOManager<Molecule>::InputHandlerPointer(new MOLMoleculeInputHandler()));
+			DataIOManager<Molecule>::registerInputHandler(DataIOManager<Molecule>::InputHandlerPointer(new SMILESMoleculeInputHandler()));
+			DataIOManager<Molecule>::registerInputHandler(DataIOManager<Molecule>::InputHandlerPointer(new SMARTSMoleculeInputHandler()));
+			DataIOManager<Molecule>::registerInputHandler(DataIOManager<Molecule>::InputHandlerPointer(new INCHIMoleculeInputHandler()));
+			DataIOManager<Molecule>::registerInputHandler(DataIOManager<Molecule>::InputHandlerPointer(new CDFMoleculeInputHandler()));
+			DataIOManager<Molecule>::registerInputHandler(DataIOManager<Molecule>::InputHandlerPointer(new MOL2MoleculeInputHandler()));
 
-			static const JMEMolecularGraphOutputHandler    jmeMolGraphOutputHandler;
-			static const MOLMolecularGraphOutputHandler    molMolGraphOutputHandler;
-			static const SDFMolecularGraphOutputHandler    sdfMolGraphOutputHandler;
-			static const SMILESMolecularGraphOutputHandler smilesMolGraphOutputHandler;
-			static const SMARTSMolecularGraphOutputHandler smartsMolGraphOutputHandler;
-			static const INCHIMolecularGraphOutputHandler  inchiMolGraphOutputHandler;
-			static const CDFMolecularGraphOutputHandler    cdfMolGraphOutputHandler;
-			static const MOL2MolecularGraphOutputHandler   mol2MolGraphOutputHandler;
+			DataIOManager<MolecularGraph>::registerOutputHandler(DataIOManager<MolecularGraph>::OutputHandlerPointer(new JMEMolecularGraphOutputHandler()));
+			DataIOManager<MolecularGraph>::registerOutputHandler(DataIOManager<MolecularGraph>::OutputHandlerPointer(new SDFMolecularGraphOutputHandler()));
+			DataIOManager<MolecularGraph>::registerOutputHandler(DataIOManager<MolecularGraph>::OutputHandlerPointer(new MOLMolecularGraphOutputHandler()));
+			DataIOManager<MolecularGraph>::registerOutputHandler(DataIOManager<MolecularGraph>::OutputHandlerPointer(new SMILESMolecularGraphOutputHandler()));
+			DataIOManager<MolecularGraph>::registerOutputHandler(DataIOManager<MolecularGraph>::OutputHandlerPointer(new SMARTSMolecularGraphOutputHandler()));
+			DataIOManager<MolecularGraph>::registerOutputHandler(DataIOManager<MolecularGraph>::OutputHandlerPointer(new INCHIMolecularGraphOutputHandler()));
+			DataIOManager<MolecularGraph>::registerOutputHandler(DataIOManager<MolecularGraph>::OutputHandlerPointer(new CDFMolecularGraphOutputHandler()));
+			DataIOManager<MolecularGraph>::registerOutputHandler(DataIOManager<MolecularGraph>::OutputHandlerPointer(new MOL2MolecularGraphOutputHandler()));
 
-			static const JMEReactionInputHandler           jmeRxnInputHandler;
-			static const RXNReactionInputHandler           rxnRxnInputHandler;
-			static const RDFReactionInputHandler           rdfRxnInputHandler;
-			static const SMILESReactionInputHandler        smilesRxnInputHandler;
-			static const SMARTSReactionInputHandler        smartsRxnInputHandler;
-			static const CDFReactionInputHandler           cdfRxnInputHandler;
+			DataIOManager<Reaction>::registerInputHandler(DataIOManager<Reaction>::InputHandlerPointer(new JMEReactionInputHandler()));
+			DataIOManager<Reaction>::registerInputHandler(DataIOManager<Reaction>::InputHandlerPointer(new RXNReactionInputHandler()));
+			DataIOManager<Reaction>::registerInputHandler(DataIOManager<Reaction>::InputHandlerPointer(new RDFReactionInputHandler()));
+			DataIOManager<Reaction>::registerInputHandler(DataIOManager<Reaction>::InputHandlerPointer(new SMILESReactionInputHandler()));
+			DataIOManager<Reaction>::registerInputHandler(DataIOManager<Reaction>::InputHandlerPointer(new SMARTSReactionInputHandler()));
+			DataIOManager<Reaction>::registerInputHandler(DataIOManager<Reaction>::InputHandlerPointer(new CDFReactionInputHandler()));
 
-			static const JMEReactionOutputHandler          jmeRxnOutputHandler;
-			static const RXNReactionOutputHandler          rxnRxnOutputHandler;
-			static const RDFReactionOutputHandler          rdfRxnOutputHandler;
-			static const SMILESReactionOutputHandler       smilesRxnOutputHandler;
-			static const SMARTSReactionOutputHandler       smartsRxnOutputHandler;
-			static const CDFReactionOutputHandler          cdfRxnOutputHandler;
-
-			DataIOManager<Molecule>::registerInputHandler(jmeMolInputHandler);
-			DataIOManager<Molecule>::registerInputHandler(sdfMolInputHandler);
-			DataIOManager<Molecule>::registerInputHandler(molMolInputHandler);
-			DataIOManager<Molecule>::registerInputHandler(smilesMolInputHandler);
-			DataIOManager<Molecule>::registerInputHandler(smartsMolInputHandler);
-			DataIOManager<Molecule>::registerInputHandler(inchiMolInputHandler);
-			DataIOManager<Molecule>::registerInputHandler(cdfMolInputHandler);
-			DataIOManager<Molecule>::registerInputHandler(mol2MolInputHandler);
-
-			DataIOManager<MolecularGraph>::registerOutputHandler(jmeMolGraphOutputHandler);
-			DataIOManager<MolecularGraph>::registerOutputHandler(sdfMolGraphOutputHandler);
-			DataIOManager<MolecularGraph>::registerOutputHandler(molMolGraphOutputHandler);
-			DataIOManager<MolecularGraph>::registerOutputHandler(smilesMolGraphOutputHandler);
-			DataIOManager<MolecularGraph>::registerOutputHandler(smartsMolGraphOutputHandler);
-			DataIOManager<MolecularGraph>::registerOutputHandler(inchiMolGraphOutputHandler);
-			DataIOManager<MolecularGraph>::registerOutputHandler(cdfMolGraphOutputHandler);
-			DataIOManager<MolecularGraph>::registerOutputHandler(mol2MolGraphOutputHandler);
-
-			DataIOManager<Reaction>::registerInputHandler(jmeRxnInputHandler);
-			DataIOManager<Reaction>::registerInputHandler(rxnRxnInputHandler);
-			DataIOManager<Reaction>::registerInputHandler(rdfRxnInputHandler);
-			DataIOManager<Reaction>::registerInputHandler(smilesRxnInputHandler);
-			DataIOManager<Reaction>::registerInputHandler(smartsRxnInputHandler);
-			DataIOManager<Reaction>::registerInputHandler(cdfRxnInputHandler);
-
-			DataIOManager<Reaction>::registerOutputHandler(jmeRxnOutputHandler);
-			DataIOManager<Reaction>::registerOutputHandler(rxnRxnOutputHandler);
-			DataIOManager<Reaction>::registerOutputHandler(rdfRxnOutputHandler);
-			DataIOManager<Reaction>::registerOutputHandler(smilesRxnOutputHandler);
-			DataIOManager<Reaction>::registerOutputHandler(smartsRxnOutputHandler);
-			DataIOManager<Reaction>::registerOutputHandler(cdfRxnOutputHandler);
+			DataIOManager<Reaction>::registerOutputHandler(DataIOManager<Reaction>::OutputHandlerPointer(new JMEReactionOutputHandler()));
+			DataIOManager<Reaction>::registerOutputHandler(DataIOManager<Reaction>::OutputHandlerPointer(new RXNReactionOutputHandler()));
+			DataIOManager<Reaction>::registerOutputHandler(DataIOManager<Reaction>::OutputHandlerPointer(new RDFReactionOutputHandler()));
+			DataIOManager<Reaction>::registerOutputHandler(DataIOManager<Reaction>::OutputHandlerPointer(new SMILESReactionOutputHandler()));
+			DataIOManager<Reaction>::registerOutputHandler(DataIOManager<Reaction>::OutputHandlerPointer(new SMARTSReactionOutputHandler()));
+			DataIOManager<Reaction>::registerOutputHandler(DataIOManager<Reaction>::OutputHandlerPointer(new CDFReactionOutputHandler()));
 
 #if defined(HAVE_BOOST_FILESYSTEM) && defined(HAVE_BOOST_IOSTREAMS)
 
-			static const SDFGZMoleculeInputHandler         sdfGzMolInputHandler;
-			static const SDFBZ2MoleculeInputHandler        sdfBz2MolInputHandler;
-			static const CDFGZMoleculeInputHandler         cdfGzMolInputHandler;
-			static const CDFBZ2MoleculeInputHandler        cdfBz2MolInputHandler;
-			static const SMILESGZMoleculeInputHandler      smilesGzMolInputHandler;
-			static const SMILESBZ2MoleculeInputHandler     smilesBz2MolInputHandler;
-			static const MOL2GZMoleculeInputHandler        mol2GzMolInputHandler;
-			static const MOL2BZ2MoleculeInputHandler       mol2Bz2MolInputHandler;
+			DataIOManager<Molecule>::registerInputHandler(DataIOManager<Molecule>::InputHandlerPointer(new SDFGZMoleculeInputHandler()));
+			DataIOManager<Molecule>::registerInputHandler(DataIOManager<Molecule>::InputHandlerPointer(new SDFBZ2MoleculeInputHandler()));
+			DataIOManager<Molecule>::registerInputHandler(DataIOManager<Molecule>::InputHandlerPointer(new CDFGZMoleculeInputHandler()));
+			DataIOManager<Molecule>::registerInputHandler(DataIOManager<Molecule>::InputHandlerPointer(new CDFBZ2MoleculeInputHandler()));
+			DataIOManager<Molecule>::registerInputHandler(DataIOManager<Molecule>::InputHandlerPointer(new SMILESGZMoleculeInputHandler()));
+			DataIOManager<Molecule>::registerInputHandler(DataIOManager<Molecule>::InputHandlerPointer(new SMILESBZ2MoleculeInputHandler()));
+			DataIOManager<Molecule>::registerInputHandler(DataIOManager<Molecule>::InputHandlerPointer(new MOL2GZMoleculeInputHandler()));
+			DataIOManager<Molecule>::registerInputHandler(DataIOManager<Molecule>::InputHandlerPointer(new MOL2BZ2MoleculeInputHandler()));
 
-			static const SDFGZMolecularGraphOutputHandler     sdfGzMolGraphOutputHandler;
-			static const SDFBZ2MolecularGraphOutputHandler    sdfBz2MolGraphOutputHandler;
-			static const CDFGZMolecularGraphOutputHandler     cdfGzMolGraphOutputHandler;
-			static const CDFBZ2MolecularGraphOutputHandler    cdfBz2MolGraphOutputHandler;
-			static const SMILESGZMolecularGraphOutputHandler  smilesGzMolGraphOutputHandler;
-			static const SMILESBZ2MolecularGraphOutputHandler smilesBz2MolGraphOutputHandler;
-			static const MOL2GZMolecularGraphOutputHandler    mol2GzMolGraphOutputHandler;
-			static const MOL2BZ2MolecularGraphOutputHandler   mol2Bz2MolGraphOutputHandler;
+			DataIOManager<MolecularGraph>::registerOutputHandler(DataIOManager<MolecularGraph>::OutputHandlerPointer(new SDFGZMolecularGraphOutputHandler()));
+			DataIOManager<MolecularGraph>::registerOutputHandler(DataIOManager<MolecularGraph>::OutputHandlerPointer(new SDFBZ2MolecularGraphOutputHandler()));
+			DataIOManager<MolecularGraph>::registerOutputHandler(DataIOManager<MolecularGraph>::OutputHandlerPointer(new CDFGZMolecularGraphOutputHandler()));
+			DataIOManager<MolecularGraph>::registerOutputHandler(DataIOManager<MolecularGraph>::OutputHandlerPointer(new CDFBZ2MolecularGraphOutputHandler()));
+			DataIOManager<MolecularGraph>::registerOutputHandler(DataIOManager<MolecularGraph>::OutputHandlerPointer(new SMILESGZMolecularGraphOutputHandler()));
+			DataIOManager<MolecularGraph>::registerOutputHandler(DataIOManager<MolecularGraph>::OutputHandlerPointer(new SMILESBZ2MolecularGraphOutputHandler()));
+			DataIOManager<MolecularGraph>::registerOutputHandler(DataIOManager<MolecularGraph>::OutputHandlerPointer(new MOL2GZMolecularGraphOutputHandler()));
+			DataIOManager<MolecularGraph>::registerOutputHandler(DataIOManager<MolecularGraph>::OutputHandlerPointer(new MOL2BZ2MolecularGraphOutputHandler()));
 
-			static const RDFGZReactionInputHandler         rdfGzRxnInputHandler;
-			static const RDFBZ2ReactionInputHandler        rdfBz2RxnInputHandler;
-			static const SMILESGZReactionInputHandler      smilesGzRxnInputHandler;
-			static const SMILESBZ2ReactionInputHandler     smilesBz2RxnInputHandler;
-			static const CDFGZReactionInputHandler         cdfGzRxnInputHandler;
-			static const CDFBZ2ReactionInputHandler        cdfBz2RxnInputHandler;
+			DataIOManager<Reaction>::registerInputHandler(DataIOManager<Reaction>::InputHandlerPointer(new RDFGZReactionInputHandler()));
+			DataIOManager<Reaction>::registerInputHandler(DataIOManager<Reaction>::InputHandlerPointer(new RDFBZ2ReactionInputHandler()));
+			DataIOManager<Reaction>::registerInputHandler(DataIOManager<Reaction>::InputHandlerPointer(new SMILESGZReactionInputHandler()));
+			DataIOManager<Reaction>::registerInputHandler(DataIOManager<Reaction>::InputHandlerPointer(new SMILESBZ2ReactionInputHandler()));
+			DataIOManager<Reaction>::registerInputHandler(DataIOManager<Reaction>::InputHandlerPointer(new CDFGZReactionInputHandler()));
+			DataIOManager<Reaction>::registerInputHandler(DataIOManager<Reaction>::InputHandlerPointer(new CDFBZ2ReactionInputHandler()));
 
-			static const RDFGZReactionOutputHandler        rdfGzRxnOutputHandler;
-			static const RDFBZ2ReactionOutputHandler       rdfBz2RxnOutputHandler;
-			static const SMILESGZReactionOutputHandler     smilesGzRxnOutputHandler;
-			static const SMILESBZ2ReactionOutputHandler    smilesBz2RxnOutputHandler;
-			static const CDFGZReactionOutputHandler        cdfGzRxnOutputHandler;
-			static const CDFBZ2ReactionOutputHandler       cdfBz2RxnOutputHandler;
-
-			DataIOManager<Molecule>::registerInputHandler(sdfGzMolInputHandler);
-			DataIOManager<Molecule>::registerInputHandler(sdfBz2MolInputHandler);
-			DataIOManager<Molecule>::registerInputHandler(cdfGzMolInputHandler);
-			DataIOManager<Molecule>::registerInputHandler(cdfBz2MolInputHandler);
-			DataIOManager<Molecule>::registerInputHandler(smilesGzMolInputHandler);
-			DataIOManager<Molecule>::registerInputHandler(smilesBz2MolInputHandler);
-			DataIOManager<Molecule>::registerInputHandler(mol2GzMolInputHandler);
-			DataIOManager<Molecule>::registerInputHandler(mol2Bz2MolInputHandler);
-
-			DataIOManager<MolecularGraph>::registerOutputHandler(sdfGzMolGraphOutputHandler);
-			DataIOManager<MolecularGraph>::registerOutputHandler(sdfBz2MolGraphOutputHandler);
-			DataIOManager<MolecularGraph>::registerOutputHandler(cdfGzMolGraphOutputHandler);
-			DataIOManager<MolecularGraph>::registerOutputHandler(cdfBz2MolGraphOutputHandler);
-			DataIOManager<MolecularGraph>::registerOutputHandler(smilesGzMolGraphOutputHandler);
-			DataIOManager<MolecularGraph>::registerOutputHandler(smilesBz2MolGraphOutputHandler);
-			DataIOManager<MolecularGraph>::registerOutputHandler(mol2GzMolGraphOutputHandler);
-			DataIOManager<MolecularGraph>::registerOutputHandler(mol2Bz2MolGraphOutputHandler);
-
-			DataIOManager<Reaction>::registerInputHandler(rdfGzRxnInputHandler);
-			DataIOManager<Reaction>::registerInputHandler(rdfBz2RxnInputHandler);
-			DataIOManager<Reaction>::registerInputHandler(smilesGzRxnInputHandler);
-			DataIOManager<Reaction>::registerInputHandler(smilesBz2RxnInputHandler);
-			DataIOManager<Reaction>::registerInputHandler(cdfGzRxnInputHandler);
-			DataIOManager<Reaction>::registerInputHandler(cdfBz2RxnInputHandler);
-
-			DataIOManager<Reaction>::registerOutputHandler(rdfGzRxnOutputHandler);
-			DataIOManager<Reaction>::registerOutputHandler(rdfBz2RxnOutputHandler);
-			DataIOManager<Reaction>::registerOutputHandler(smilesGzRxnOutputHandler);
-			DataIOManager<Reaction>::registerOutputHandler(smilesBz2RxnOutputHandler);
-			DataIOManager<Reaction>::registerOutputHandler(cdfGzRxnOutputHandler);
-			DataIOManager<Reaction>::registerOutputHandler(cdfBz2RxnOutputHandler);
+			DataIOManager<Reaction>::registerOutputHandler(DataIOManager<Reaction>::OutputHandlerPointer(new RDFGZReactionOutputHandler()));
+			DataIOManager<Reaction>::registerOutputHandler(DataIOManager<Reaction>::OutputHandlerPointer(new RDFBZ2ReactionOutputHandler()));
+			DataIOManager<Reaction>::registerOutputHandler(DataIOManager<Reaction>::OutputHandlerPointer(new SMILESGZReactionOutputHandler()));
+			DataIOManager<Reaction>::registerOutputHandler(DataIOManager<Reaction>::OutputHandlerPointer(new SMILESBZ2ReactionOutputHandler()));
+			DataIOManager<Reaction>::registerOutputHandler(DataIOManager<Reaction>::OutputHandlerPointer(new CDFGZReactionOutputHandler()));
+			DataIOManager<Reaction>::registerOutputHandler(DataIOManager<Reaction>::OutputHandlerPointer(new CDFBZ2ReactionOutputHandler()));
 
 #endif // defined(HAVE_BOOST_FILESYSTEM) && defined(HAVE_BOOST_IOSTREAMS)
 		}

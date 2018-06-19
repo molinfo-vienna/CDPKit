@@ -216,7 +216,7 @@ void Biomol::PDBDataWriter::perceiveCONECTRecordBonds(const Chem::MolecularGraph
 	if (!writeConectRecords)
 		return;
 
-	const ResidueDictionary& res_dict = (resDictionary ? *resDictionary : ResidueDictionary::get());
+	ResDictPointer res_dict = (resDictionary ? resDictionary : ResidueDictionary::get());
 
 	for (Chem::MolecularGraph::ConstBondIterator it = molgraph.getBondsBegin(), end = molgraph.getBondsEnd(); it != end; ++it) {
 		const Bond& bond = *it;
@@ -255,14 +255,14 @@ void Biomol::PDBDataWriter::perceiveCONECTRecordBonds(const Chem::MolecularGraph
 		}
 
 		if (res_serial1 == res_serial2) {
-			MolecularGraph::SharedPointer tmplt = res_dict.getStructure(res_code1);
+			MolecularGraph::SharedPointer tmplt = res_dict->getStructure(res_code1);
 
 			if (tmplt && isStandardBond(bond, *tmplt))
 				continue;
 
 		} else if (std::abs(long(res_serial1) - long(res_serial2)) == 1) {
-			MolecularGraph::SharedPointer tmplt1 = res_dict.getStructure(res_code1);
-			MolecularGraph::SharedPointer tmplt2 = res_dict.getStructure(res_code2);
+			MolecularGraph::SharedPointer tmplt1 = res_dict->getStructure(res_code1);
+			MolecularGraph::SharedPointer tmplt2 = res_dict->getStructure(res_code2);
 
 			if (tmplt1 && tmplt2 && isLinkingAtom(atom1, *tmplt1) && isLinkingAtom(atom2, *tmplt2))
 				continue;

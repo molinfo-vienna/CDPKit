@@ -87,28 +87,19 @@ namespace
 			using namespace Chem;
 			using namespace Biomol;
 
-			static const PDBMoleculeInputHandler           pdbMolInputHandler;
-			static const PDBMolecularGraphOutputHandler    pdbMolGraphOutputHandler;
-
-			DataIOManager<Molecule>::registerInputHandler(pdbMolInputHandler);
-			DataIOManager<MolecularGraph>::registerOutputHandler(pdbMolGraphOutputHandler);
+			DataIOManager<Molecule>::registerInputHandler(DataIOManager<Molecule>::InputHandlerPointer(new PDBMoleculeInputHandler()));
+			DataIOManager<MolecularGraph>::registerOutputHandler(DataIOManager<MolecularGraph>::OutputHandlerPointer(new PDBMolecularGraphOutputHandler()));
 
 			Biomol::CDFDataReader::registerExternalPropertyHandlers();
 			Biomol::CDFDataWriter::registerExternalPropertyHandlers();
 
 #if defined(HAVE_BOOST_FILESYSTEM) && defined(HAVE_BOOST_IOSTREAMS)
 
-			static const PDBGZMoleculeInputHandler           pdbGzMolInputHandler;
-			static const PDBBZ2MoleculeInputHandler          pdbBz2MolInputHandler;
+			DataIOManager<Molecule>::registerInputHandler(DataIOManager<Molecule>::InputHandlerPointer(new PDBGZMoleculeInputHandler()));
+			DataIOManager<Molecule>::registerInputHandler(DataIOManager<Molecule>::InputHandlerPointer(new PDBBZ2MoleculeInputHandler()));
 
-			static const PDBGZMolecularGraphOutputHandler    pdbGzMolGraphOutputHandler;
-			static const PDBBZ2MolecularGraphOutputHandler   pdbBz2MolGraphOutputHandler;
-
-			DataIOManager<Molecule>::registerInputHandler(pdbGzMolInputHandler);
-			DataIOManager<Molecule>::registerInputHandler(pdbBz2MolInputHandler);
-
-			DataIOManager<MolecularGraph>::registerOutputHandler(pdbGzMolGraphOutputHandler);
-			DataIOManager<MolecularGraph>::registerOutputHandler(pdbBz2MolGraphOutputHandler);
+			DataIOManager<MolecularGraph>::registerOutputHandler(DataIOManager<MolecularGraph>::OutputHandlerPointer(new PDBGZMolecularGraphOutputHandler()));
+			DataIOManager<MolecularGraph>::registerOutputHandler(DataIOManager<MolecularGraph>::OutputHandlerPointer(new PDBBZ2MolecularGraphOutputHandler()));
 
 #endif // defined(HAVE_BOOST_FILESYSTEM) && defined(HAVE_BOOST_IOSTREAMS)
 		}

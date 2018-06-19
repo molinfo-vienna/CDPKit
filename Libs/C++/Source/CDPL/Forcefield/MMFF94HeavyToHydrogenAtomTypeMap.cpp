@@ -26,11 +26,17 @@
  
 #include "StaticInit.hpp"
 
+#include "CDPL/Config.hpp"
+
 #include <cstring>
 #include <sstream>
 
+#if defined(HAVE_BOOST_IOSTREAMS)
+
 #include <boost/iostreams/device/array.hpp>
 #include <boost/iostreams/stream.hpp>
+
+#endif // defined(HAVE_BOOST_IOSTREAMS)
 
 #include "CDPL/Forcefield/MMFF94HeavyToHydrogenAtomTypeMap.hpp"
 #include "CDPL/Base/Exceptions.hpp"
@@ -45,21 +51,21 @@ using namespace CDPL;
 namespace
 {
  
-    Forcefield::MMFF94HeavyToHydrogenAtomTypeMap builtinTable;
-    std::string                                  NOT_FOUND;
+    Forcefield::MMFF94HeavyToHydrogenAtomTypeMap::SharedPointer builtinMap(new Forcefield::MMFF94HeavyToHydrogenAtomTypeMap());
+    const std::string                                           NOT_FOUND;
 
     struct Init
     {
 
-	Init() {
-	    builtinTable.loadDefaults();
-	}
+		Init() {
+			builtinMap->loadDefaults();
+		}
 
     } init;
 }
 
 
-const Forcefield::MMFF94HeavyToHydrogenAtomTypeMap* Forcefield::MMFF94HeavyToHydrogenAtomTypeMap::defaultTable = &builtinTable;
+Forcefield::MMFF94HeavyToHydrogenAtomTypeMap::SharedPointer Forcefield::MMFF94HeavyToHydrogenAtomTypeMap::defaultMap = builtinMap;
 
 
 Forcefield::MMFF94HeavyToHydrogenAtomTypeMap::MMFF94HeavyToHydrogenAtomTypeMap()
@@ -70,12 +76,12 @@ void Forcefield::MMFF94HeavyToHydrogenAtomTypeMap::addEntry(const std::string& p
     entries.insert(DataStorage::value_type(parent_type, hyd_type));
 }
 
-const std::string& Forcefield::MMFF94HeavyToHydrogenAtomTypeMap::getHydrogenType(const std::string& parent_type) const
+const std::string& Forcefield::MMFF94HeavyToHydrogenAtomTypeMap::getEntry(const std::string& parent_type) const
 {
     DataStorage::const_iterator it = entries.find(parent_type);
 
     if (it == entries.end())
-	return NOT_FOUND;
+		return NOT_FOUND;
 
     return it->second;
 }
@@ -102,31 +108,40 @@ void Forcefield::MMFF94HeavyToHydrogenAtomTypeMap::load(std::istream& is)
     std::string hyd_type;
 
     while (readMMFF94DataLine(is, line, "MMFF94HeavyToHydrogenAtomTypeMap: error while reading hydrogen atom type definition data line")) {
-	std::istringstream line_iss(line);
+		std::istringstream line_iss(line);
 
-	if (!(line_iss >> parent_type))
-	    throw Base::IOError("MMFF94HeavyToHydrogenAtomTypeMap: error while reading parent atom type");
+		if (!(line_iss >> parent_type))
+			throw Base::IOError("MMFF94HeavyToHydrogenAtomTypeMap: error while reading parent atom type");
 		
-	if (!(line_iss >> hyd_type))
-	    throw Base::IOError("MMFF94HeavyToHydrogenAtomTypeMap: error while reading hydrogen atom type");
+		if (!(line_iss >> hyd_type))
+			throw Base::IOError("MMFF94HeavyToHydrogenAtomTypeMap: error while reading hydrogen atom type");
 	
-	addEntry(parent_type, hyd_type);
+		addEntry(parent_type, hyd_type);
     }
 }
 
 void Forcefield::MMFF94HeavyToHydrogenAtomTypeMap::loadDefaults()
 {
-    boost::iostreams::stream<boost::iostreams::array_source> is(Forcefield::MMFF94ParameterData::HYDROGEN_ATOM_TYPE_DEFINITIONS, 
-								std::strlen(Forcefield::MMFF94ParameterData::HYDROGEN_ATOM_TYPE_DEFINITIONS));
+
+#if defined(HAVE_BOOST_IOSTREAMS)
+
+    boost::iostreams::stream<boost::iostreams::array_source> is(MMFF94ParameterData::HYDROGEN_ATOM_TYPE_DEFINITIONS, 
+																std::strlen(MMFF94ParameterData::HYDROGEN_ATOM_TYPE_DEFINITIONS));
+#else // defined(HAVE_BOOST_IOSTREAMS)
+
+	std::istringstream is(std::string(MMFF94ParameterData::HYDROGEN_ATOM_TYPE_DEFINITIONS);
+
+#endif // defined(HAVE_BOOST_IOSTREAMS)
+
     load(is);
 }
 
-void Forcefield::MMFF94HeavyToHydrogenAtomTypeMap::set(const Forcefield::MMFF94HeavyToHydrogenAtomTypeMap* db)
+void Forcefield::MMFF94HeavyToHydrogenAtomTypeMap::set(const SharedPointer& map)
 {	
-    defaultTable = (!db ? &builtinTable : db);
+    defaultMap = (!map ? builtinMap : map);
 }
 
-const Forcefield::MMFF94HeavyToHydrogenAtomTypeMap& Forcefield::MMFF94HeavyToHydrogenAtomTypeMap::get()
+const Forcefield::MMFF94HeavyToHydrogenAtomTypeMap::SharedPointer& Forcefield::MMFF94HeavyToHydrogenAtomTypeMap::get()
 {
-    return *defaultTable;
+    return defaultMap;
 }

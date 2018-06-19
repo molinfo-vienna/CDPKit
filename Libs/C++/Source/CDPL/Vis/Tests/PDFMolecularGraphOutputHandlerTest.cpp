@@ -47,7 +47,7 @@ BOOST_AUTO_TEST_CASE(PDFMolecularGraphOutputHandlerTest)
 	using namespace Chem;
 	using namespace Base;
 
-	const DataOutputHandler<MolecularGraph>* handler = DataIOManager<MolecularGraph>::getOutputHandlerByFormat(Vis::DataFormat::PDF);
+	const DataOutputHandler<MolecularGraph>::SharedPointer handler = DataIOManager<MolecularGraph>::getOutputHandlerByFormat(Vis::DataFormat::PDF);
 
 	BOOST_CHECK(handler);
 

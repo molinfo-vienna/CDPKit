@@ -606,7 +606,7 @@ void PSDScreenImpl::initHitCollector()
 {
 	using namespace CDPL;
 
-	const HitOutputHandler* output_handler = getHitOutputHandler(hitOutputFile);
+	HitOutputHandlerPtr output_handler = getHitOutputHandler(hitOutputFile);
 
 	if (!output_handler)
 		throw Base::IOError("no output handler found for file '" + hitOutputFile + '\'');
@@ -628,7 +628,7 @@ void PSDScreenImpl::initQueryPharmReader()
 {
 	using namespace CDPL;
 
-	const QueryInputHandler* input_handler = getQueryInputHandler(queryPharmFile);
+	QueryInputHandlerPtr input_handler = getQueryInputHandler(queryPharmFile);
 
 	if (!input_handler)
 		throw Base::IOError("no input handler found for file '" + queryPharmFile + '\'');
@@ -666,7 +666,7 @@ void PSDScreenImpl::analyzeInputFiles()
 	printMessage(INFO, "");
 }
 
-const PSDScreenImpl::HitOutputHandler* PSDScreenImpl::getHitOutputHandler(const std::string& file_path) const
+PSDScreenImpl::HitOutputHandlerPtr PSDScreenImpl::getHitOutputHandler(const std::string& file_path) const
 {
 	if (hitOutputHandler)
 		return hitOutputHandler;
@@ -674,7 +674,7 @@ const PSDScreenImpl::HitOutputHandler* PSDScreenImpl::getHitOutputHandler(const 
 	return AppUtils::getOutputHandler<CDPL::Chem::MolecularGraph>(file_path);
 }
 
-const PSDScreenImpl::QueryInputHandler* PSDScreenImpl::getQueryInputHandler(const std::string& file_path) const
+PSDScreenImpl::QueryInputHandlerPtr PSDScreenImpl::getQueryInputHandler(const std::string& file_path) const
 {
 	if (queryInputHandler)
 		return queryInputHandler;

@@ -31,6 +31,8 @@
 #ifndef CDPL_PHARM_PHARMACOPHOREAUTOCORR3DDESCRIPTORCALCULATOR_HPP
 #define CDPL_PHARM_PHARMACOPHOREAUTOCORR3DDESCRIPTORCALCULATOR_HPP
 
+#include <boost/function.hpp>
+
 #include "CDPL/Pharm/APIPrefix.hpp"
 #include "CDPL/Chem/AutoCorrelation3DVectorCalculator.hpp"
 #include "CDPL/Math/Vector.hpp"
@@ -60,7 +62,7 @@ namespace CDPL
 
 		public:
 			typedef AutoCorr3DVectorCalculator::Entity3DCoordinatesFunction Feature3DCoordinatesFunction;
-			typedef AutoCorr3DVectorCalculator::EntityPairWeightFunction FeaturePairWeightFunction;
+			typedef boost::function3<double, const Feature&, const Feature&, unsigned int> FeaturePairWeightFunction;
 	
 			/**
 			 * \brief Constructs the \c %PharmacophoreAutoCorr3DDescriptorCalculator instance.

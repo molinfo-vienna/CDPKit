@@ -86,41 +86,29 @@ namespace
 
 #ifdef HAVE_CAIRO_PNG_SUPPORT
 
-			static const PNGMolecularGraphOutputHandler pngMolGraphOutputHandler;
-			static const PNGReactionOutputHandler       pngRxnOutputHandler;
-
-			DataIOManager<MolecularGraph>::registerOutputHandler(pngMolGraphOutputHandler);
-			DataIOManager<Reaction>::registerOutputHandler(pngRxnOutputHandler);
+			DataIOManager<MolecularGraph>::registerOutputHandler(DataIOManager<MolecularGraph>::OutputHandlerPointer(new PNGMolecularGraphOutputHandler()));
+			DataIOManager<Reaction>::registerOutputHandler(DataIOManager<Reaction>::OutputHandlerPointer(new PNGReactionOutputHandler()));
 
 #endif // HAVE_CAIRO_PNG_SUPPORT
 
 #ifdef HAVE_CAIRO_PDF_SUPPORT
 
-			static const PDFMolecularGraphOutputHandler pdfMolGraphOutputHandler;
-			static const PDFReactionOutputHandler       pdfRxnOutputHandler;
-
-			DataIOManager<MolecularGraph>::registerOutputHandler(pdfMolGraphOutputHandler);
-			DataIOManager<Reaction>::registerOutputHandler(pdfRxnOutputHandler);
+			DataIOManager<MolecularGraph>::registerOutputHandler(DataIOManager<MolecularGraph>::OutputHandlerPointer(new PDFMolecularGraphOutputHandler()));
+			DataIOManager<Reaction>::registerOutputHandler(DataIOManager<Reaction>::OutputHandlerPointer(new PDFReactionOutputHandler()));
 
 #endif // HAVE_CAIRO_PDF_SUPPORT
 
 #ifdef HAVE_CAIRO_PS_SUPPORT
 
-			static const PSMolecularGraphOutputHandler  psMolGraphOutputHandler;
-			static const PSReactionOutputHandler        psRxnOutputHandler;
-
-			DataIOManager<MolecularGraph>::registerOutputHandler(psMolGraphOutputHandler);
-			DataIOManager<Reaction>::registerOutputHandler(psRxnOutputHandler);
+			DataIOManager<MolecularGraph>::registerOutputHandler(DataIOManager<MolecularGraph>::OutputHandlerPointer(new PSMolecularGraphOutputHandler()));
+			DataIOManager<Reaction>::registerOutputHandler(DataIOManager<Reaction>::OutputHandlerPointer(new PSReactionOutputHandler()));
 
 #endif // HAVE_CAIRO_PS_SUPPORT
 
 #ifdef HAVE_CAIRO_SVG_SUPPORT
 
-			static const SVGMolecularGraphOutputHandler svgMolGraphOutputHandler;
-			static const SVGReactionOutputHandler       svgRxnOutputHandler;
-
-			DataIOManager<MolecularGraph>::registerOutputHandler(svgMolGraphOutputHandler);
-			DataIOManager<Reaction>::registerOutputHandler(svgRxnOutputHandler);
+			DataIOManager<MolecularGraph>::registerOutputHandler(DataIOManager<MolecularGraph>::OutputHandlerPointer(new SVGMolecularGraphOutputHandler()));
+			DataIOManager<Reaction>::registerOutputHandler(DataIOManager<Reaction>::OutputHandlerPointer(new SVGReactionOutputHandler()));
 
 #endif // HAVE_CAIRO_SVG_SUPPORT
 

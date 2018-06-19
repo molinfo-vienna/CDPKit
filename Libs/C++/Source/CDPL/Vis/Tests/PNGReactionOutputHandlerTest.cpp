@@ -47,7 +47,7 @@ BOOST_AUTO_TEST_CASE(PNGReactionOutputHandlerTest)
 	using namespace Chem;
 	using namespace Base;
 
-	const DataOutputHandler<Reaction>* handler = DataIOManager<Reaction>::getOutputHandlerByFormat(Vis::DataFormat::PNG);
+	const DataOutputHandler<Reaction>::SharedPointer handler = DataIOManager<Reaction>::getOutputHandlerByFormat(Vis::DataFormat::PNG);
 
 	BOOST_CHECK(handler);
 

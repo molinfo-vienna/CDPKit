@@ -64,6 +64,8 @@ const char* MMFF94ParameterData::SYMBOLIC_TO_NUMERIC_ATOM_TYPE_MAPPING =
 	#include "Forcefield/MMFFSYMB.PAR"
 const char* MMFF94ParameterData::NUMERIC_TO_PARAMETER_ATOM_TYPE_MAPPING =   
 	#include "Forcefield/MMFFDEF.PAR"
+const char* MMFF94ParameterData::ATOM_TYPE_PROPERTIES =   
+	#include "Forcefield/MMFFPROP.PAR"
 
 const char* MMFF94ParameterData::BOND_CHARGE_INCREMENT_PARAMETERS =        
 	#include "Forcefield/MMFFCHG.PAR"

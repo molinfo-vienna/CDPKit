@@ -101,45 +101,29 @@ namespace
 			using namespace Pharm;
 			using namespace Chem;
 
-			static const CDFPharmacophoreInputHandler           cdfPharmInputHandler;
-			static const PMLPharmacophoreInputHandler           pmlPharmInputHandler;
-	
-			static const CDFFeatureContainerOutputHandler        cdfFtrContOutputHandler;
-			static const PMLFeatureContainerOutputHandler        pmlFtrContOutputHandler;
-
 			CDFAttributedGridPropertyReader::registerExternalPropertyHandlers();
 			CDFAttributedGridPropertyWriter::registerExternalPropertyHandlers();
 
-			DataIOManager<Pharmacophore>::registerInputHandler(cdfPharmInputHandler);
-			DataIOManager<Pharmacophore>::registerInputHandler(pmlPharmInputHandler);
+			DataIOManager<Pharmacophore>::registerInputHandler(DataIOManager<Pharmacophore>::InputHandlerPointer(new CDFPharmacophoreInputHandler()));
+			DataIOManager<Pharmacophore>::registerInputHandler(DataIOManager<Pharmacophore>::InputHandlerPointer(new PMLPharmacophoreInputHandler()));
 		
-			DataIOManager<FeatureContainer>::registerOutputHandler(cdfFtrContOutputHandler);
-			DataIOManager<FeatureContainer>::registerOutputHandler(pmlFtrContOutputHandler);
+			DataIOManager<FeatureContainer>::registerOutputHandler(DataIOManager<FeatureContainer>::OutputHandlerPointer(new CDFFeatureContainerOutputHandler()));
+			DataIOManager<FeatureContainer>::registerOutputHandler(DataIOManager<FeatureContainer>::OutputHandlerPointer(new PMLFeatureContainerOutputHandler()));
 		
 #if defined(HAVE_BOOST_FILESYSTEM) && defined(HAVE_BOOST_IOSTREAMS)
 #ifdef HAVE_SQLITE3
 
-			static const PSDPharmacophoreInputHandler     psdPharmInputHandler;
-			static const PSDMoleculeInputHandler          psdMolInputHandler;
-			static const PSDMolecularGraphOutputHandler   psdMolGraphOutputHandler;
-
-			DataIOManager<Pharmacophore>::registerInputHandler(psdPharmInputHandler);
-			DataIOManager<Molecule>::registerInputHandler(psdMolInputHandler);
-			DataIOManager<MolecularGraph>::registerOutputHandler(psdMolGraphOutputHandler);
+			DataIOManager<Pharmacophore>::registerInputHandler(DataIOManager<Pharmacophore>::InputHandlerPointer(new PSDPharmacophoreInputHandler()));
+			DataIOManager<Molecule>::registerInputHandler(DataIOManager<Molecule>::InputHandlerPointer(new PSDMoleculeInputHandler()));
+			DataIOManager<MolecularGraph>::registerOutputHandler(DataIOManager<MolecularGraph>::OutputHandlerPointer(new PSDMolecularGraphOutputHandler()));
 
 #endif // HAVE_SQLITE3
 
-			static const CDFGZPharmacophoreInputHandler            cdfGzPharmInputHandler;
-			static const CDFBZ2PharmacophoreInputHandler           cdfBz2PharmInputHandler;
-		
-			static const CDFGZFeatureContainerOutputHandler         cdfGzFtrContOutputHandler;
-			static const CDFBZ2FeatureContainerOutputHandler        cdfBz2FtrContOutputHandler;
+			DataIOManager<Pharmacophore>::registerInputHandler(DataIOManager<Pharmacophore>::InputHandlerPointer(new CDFGZPharmacophoreInputHandler()));
+			DataIOManager<Pharmacophore>::registerInputHandler(DataIOManager<Pharmacophore>::InputHandlerPointer(new CDFBZ2PharmacophoreInputHandler()));
 	
-			DataIOManager<Pharmacophore>::registerInputHandler(cdfGzPharmInputHandler);
-			DataIOManager<Pharmacophore>::registerInputHandler(cdfBz2PharmInputHandler);
-	
-			DataIOManager<FeatureContainer>::registerOutputHandler(cdfGzFtrContOutputHandler);
-			DataIOManager<FeatureContainer>::registerOutputHandler(cdfBz2FtrContOutputHandler);
+			DataIOManager<FeatureContainer>::registerOutputHandler(DataIOManager<FeatureContainer>::OutputHandlerPointer(new CDFGZFeatureContainerOutputHandler()));
+			DataIOManager<FeatureContainer>::registerOutputHandler(DataIOManager<FeatureContainer>::OutputHandlerPointer(new CDFBZ2FeatureContainerOutputHandler()));
 	
 #endif // defined(HAVE_BOOST_FILESYSTEM) && defined(HAVE_BOOST_IOSTREAMS)
 		}

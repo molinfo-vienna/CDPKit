@@ -44,7 +44,7 @@ namespace
 		for (typename DataIOManager<T>::OutputHandlerIterator h_it = DataIOManager<T>::getOutputHandlersBegin(); 
 			 h_it != handlers_end; ++h_it) {
 
-			const DataFormat& fmt_descr = h_it->getDataFormat();
+			const DataFormat& fmt_descr = (*h_it)->getDataFormat();
 
 			if (filters.contains(QString::fromStdString(fmt_descr.getDescription())))
 				continue;

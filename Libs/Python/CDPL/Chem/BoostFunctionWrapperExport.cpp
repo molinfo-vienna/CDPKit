@@ -73,6 +73,7 @@ void CDPLPythonChem::exportBoostFunctionWrappers()
 
 	CDPLPythonBase::BoostFunction3Export<boost::function3<double, const Math::Vector3D&, const Math::Vector3D&, const Atom&>,
 										 const Math::Vector3D&, const Math::Vector3D&, Atom&>("DoubleVector3D2AtomFunctor");
+    CDPLPythonBase::BoostFunction3Export<boost::function3<double, const Atom&, const Atom&, unsigned int>, Atom&, Atom&>("DoubleAtom2UIntFunctor"); 	
 
     CDPLPythonBase::BoostFunction4Export<boost::function4<bool, const Entity3D&, const Entity3D&, const Entity3D&, const Entity3D&>,
 										 Entity3D&, Entity3D&, Entity3D&, Entity3D&>("BoolEntity3D4Functor");

@@ -542,7 +542,7 @@ void PSDCreateImpl::initInputReader()
 			return;
 
 		const std::string& file_path = inputFiles[i];
-		const InputHandler* input_handler = getInputHandler(file_path);
+		InputHandlerPtr input_handler = getInputHandler(file_path);
 
 		if (!input_handler)
 			throw Base::IOError("no input handler found for file '" + file_path + '\'');
@@ -562,7 +562,7 @@ void PSDCreateImpl::initInputReader()
 	printMessage(INFO, "");
 }
 
-const PSDCreateImpl::InputHandler* PSDCreateImpl::getInputHandler(const std::string& file_path) const
+PSDCreateImpl::InputHandlerPtr PSDCreateImpl::getInputHandler(const std::string& file_path) const
 {
 	if (inputHandler)
 		return inputHandler;

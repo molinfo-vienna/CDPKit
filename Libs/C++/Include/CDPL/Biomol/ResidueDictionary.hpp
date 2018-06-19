@@ -125,9 +125,9 @@ namespace CDPL
 			
 			void loadDefaultEntries();
 
-			static void set(const ResidueDictionary* dict);
+			static void set(const SharedPointer& dict);
 
-			static const ResidueDictionary& get();
+			static const SharedPointer& get();
 
 			static const std::string& getReplacedCode(const std::string& code);
 
@@ -144,8 +144,8 @@ namespace CDPL
 			static Chem::MolecularGraph::SharedPointer getStructure(const std::string& code);
 
 		  private:
-			static const ResidueDictionary* dictionary;
-			EntryLookupTable                entries;
+			static SharedPointer dictionary;
+			EntryLookupTable     entries;
 		};
 
 		/**

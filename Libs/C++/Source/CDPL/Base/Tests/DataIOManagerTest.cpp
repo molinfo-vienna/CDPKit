@@ -95,11 +95,11 @@ BOOST_AUTO_TEST_CASE(DataIOManagerTest)
 	using namespace CDPL;
 	using namespace Base;
 
-	TestInputHandler test_input_handler1(testFormat1);
-	TestInputHandler test_input_handler2(testFormat2);
+	TestInputHandler::SharedPointer test_input_handler1(new TestInputHandler(testFormat1));
+	TestInputHandler::SharedPointer test_input_handler2(new TestInputHandler(testFormat2));
 
-	TestOutputHandler test_output_handler1(testFormat1);
-	TestOutputHandler test_output_handler2(testFormat2);
+	TestOutputHandler::SharedPointer test_output_handler1(new TestOutputHandler(testFormat1));
+	TestOutputHandler::SharedPointer test_output_handler2(new TestOutputHandler(testFormat2));
 
 //-----
 
@@ -122,38 +122,38 @@ BOOST_AUTO_TEST_CASE(DataIOManagerTest)
 	BOOST_CHECK(DataIOManager<int>::getInputHandlersBegin() != DataIOManager<int>::getInputHandlersEnd());
 	BOOST_CHECK(DataIOManager<int>::getOutputHandlersBegin() == DataIOManager<int>::getOutputHandlersEnd());
 
-	BOOST_CHECK(&*DataIOManager<int>::getInputHandlersBegin() == &test_input_handler1); 
+	BOOST_CHECK(*DataIOManager<int>::getInputHandlersBegin() == test_input_handler1); 
 
-	BOOST_CHECK(&DataIOManager<int>::getInputHandler(0) == &test_input_handler1); 
+	BOOST_CHECK(DataIOManager<int>::getInputHandler(0) == test_input_handler1); 
 	BOOST_CHECK_THROW(DataIOManager<int>::getInputHandler(1), IndexError);
 
 	BOOST_CHECK_THROW(DataIOManager<int>::getOutputHandler(0), IndexError);
 
 //-----
 
-	BOOST_CHECK(DataIOManager<int>::getInputHandlerByFormat(testFormat1) == &test_input_handler1);
-	BOOST_CHECK(DataIOManager<int>::getInputHandlerByFormat(testFormat2) == 0);
+	BOOST_CHECK(DataIOManager<int>::getInputHandlerByFormat(testFormat1) == test_input_handler1);
+	BOOST_CHECK(DataIOManager<int>::getInputHandlerByFormat(testFormat2) == DataInputHandler<int>::SharedPointer());
 
-	BOOST_CHECK(DataIOManager<int>::getInputHandlerByName("test_fOrmat1") == &test_input_handler1);
-	BOOST_CHECK(DataIOManager<int>::getInputHandlerByName("TEST_format2") == 0);
+	BOOST_CHECK(DataIOManager<int>::getInputHandlerByName("test_fOrmat1") == test_input_handler1);
+	BOOST_CHECK(DataIOManager<int>::getInputHandlerByName("TEST_format2") == DataInputHandler<int>::SharedPointer());
 
-	BOOST_CHECK(DataIOManager<int>::getInputHandlerByName("test f rmat1") == 0);
-	BOOST_CHECK(DataIOManager<int>::getInputHandlerByName("test_format3") == 0);
-	BOOST_CHECK(DataIOManager<int>::getInputHandlerByName("") == 0);
+	BOOST_CHECK(DataIOManager<int>::getInputHandlerByName("test f rmat1") == DataInputHandler<int>::SharedPointer());
+	BOOST_CHECK(DataIOManager<int>::getInputHandlerByName("test_format3") == DataInputHandler<int>::SharedPointer());
+	BOOST_CHECK(DataIOManager<int>::getInputHandlerByName("") == DataInputHandler<int>::SharedPointer());
 
-	BOOST_CHECK(DataIOManager<int>::getInputHandlerByFileExtension("ExT1") == &test_input_handler1);
-	BOOST_CHECK(DataIOManager<int>::getInputHandlerByFileExtension("eXT2") == 0);
+	BOOST_CHECK(DataIOManager<int>::getInputHandlerByFileExtension("ExT1") == test_input_handler1);
+	BOOST_CHECK(DataIOManager<int>::getInputHandlerByFileExtension("eXT2") == DataInputHandler<int>::SharedPointer());
 
-	BOOST_CHECK(DataIOManager<int>::getInputHandlerByFileExtension(" xt2") == 0);
-	BOOST_CHECK(DataIOManager<int>::getInputHandlerByFileExtension("e t2") == 0);
-	BOOST_CHECK(DataIOManager<int>::getInputHandlerByFileExtension("") == 0);
+	BOOST_CHECK(DataIOManager<int>::getInputHandlerByFileExtension(" xt2") == DataInputHandler<int>::SharedPointer());
+	BOOST_CHECK(DataIOManager<int>::getInputHandlerByFileExtension("e t2") == DataInputHandler<int>::SharedPointer());
+	BOOST_CHECK(DataIOManager<int>::getInputHandlerByFileExtension("") == DataInputHandler<int>::SharedPointer());
 
-	BOOST_CHECK(DataIOManager<int>::getInputHandlerByMimeType("application/TeST1") == &test_input_handler1);
-	BOOST_CHECK(DataIOManager<int>::getInputHandlerByMimeType("APPLICATION/test2") == 0);
+	BOOST_CHECK(DataIOManager<int>::getInputHandlerByMimeType("application/TeST1") == test_input_handler1);
+	BOOST_CHECK(DataIOManager<int>::getInputHandlerByMimeType("APPLICATION/test2") == DataInputHandler<int>::SharedPointer());
 
-	BOOST_CHECK(DataIOManager<int>::getInputHandlerByMimeType("application/test1 ") == 0);
-	BOOST_CHECK(DataIOManager<int>::getInputHandlerByMimeType("abplication/test1") == 0);
-	BOOST_CHECK(DataIOManager<int>::getInputHandlerByMimeType("") == 0);
+	BOOST_CHECK(DataIOManager<int>::getInputHandlerByMimeType("application/test1 ") == DataInputHandler<int>::SharedPointer());
+	BOOST_CHECK(DataIOManager<int>::getInputHandlerByMimeType("abplication/test1") == DataInputHandler<int>::SharedPointer());
+	BOOST_CHECK(DataIOManager<int>::getInputHandlerByMimeType("") == DataInputHandler<int>::SharedPointer());
 
 //-----
 
@@ -165,40 +165,40 @@ BOOST_AUTO_TEST_CASE(DataIOManagerTest)
 	BOOST_CHECK(DataIOManager<int>::getInputHandlersBegin() != DataIOManager<int>::getInputHandlersEnd());
 	BOOST_CHECK(DataIOManager<int>::getOutputHandlersBegin() == DataIOManager<int>::getOutputHandlersEnd());
 
-	BOOST_CHECK(&*DataIOManager<int>::getInputHandlersBegin() == &test_input_handler1); 
-	BOOST_CHECK(&*(DataIOManager<int>::getInputHandlersBegin() + 1) == &test_input_handler2); 
+	BOOST_CHECK(*DataIOManager<int>::getInputHandlersBegin() == test_input_handler1); 
+	BOOST_CHECK(*(DataIOManager<int>::getInputHandlersBegin() + 1) == test_input_handler2); 
 
-	BOOST_CHECK(&DataIOManager<int>::getInputHandler(0) == &test_input_handler1); 
-	BOOST_CHECK(&DataIOManager<int>::getInputHandler(1) == &test_input_handler2); 
+	BOOST_CHECK(DataIOManager<int>::getInputHandler(0) == test_input_handler1); 
+	BOOST_CHECK(DataIOManager<int>::getInputHandler(1) == test_input_handler2); 
 	BOOST_CHECK_THROW(DataIOManager<int>::getInputHandler(2), IndexError);
 
 	BOOST_CHECK_THROW(DataIOManager<int>::getOutputHandler(0), IndexError);
 
 //-----
 
-	BOOST_CHECK(DataIOManager<int>::getInputHandlerByFormat(testFormat1) == &test_input_handler1);
-	BOOST_CHECK(DataIOManager<int>::getInputHandlerByFormat(testFormat2) == &test_input_handler2);
+	BOOST_CHECK(DataIOManager<int>::getInputHandlerByFormat(testFormat1) == test_input_handler1);
+	BOOST_CHECK(DataIOManager<int>::getInputHandlerByFormat(testFormat2) == test_input_handler2);
 
-	BOOST_CHECK(DataIOManager<int>::getInputHandlerByName("test_fOrmat1") == &test_input_handler1);
-	BOOST_CHECK(DataIOManager<int>::getInputHandlerByName("TEST_format2") == &test_input_handler2);
+	BOOST_CHECK(DataIOManager<int>::getInputHandlerByName("test_fOrmat1") == test_input_handler1);
+	BOOST_CHECK(DataIOManager<int>::getInputHandlerByName("TEST_format2") == test_input_handler2);
 
-	BOOST_CHECK(DataIOManager<int>::getInputHandlerByName("test f rmat1") == 0);
-	BOOST_CHECK(DataIOManager<int>::getInputHandlerByName("test_format3") == 0);
-	BOOST_CHECK(DataIOManager<int>::getInputHandlerByName("") == 0);
+	BOOST_CHECK(DataIOManager<int>::getInputHandlerByName("test f rmat1") == DataInputHandler<int>::SharedPointer());
+	BOOST_CHECK(DataIOManager<int>::getInputHandlerByName("test_format3") == DataInputHandler<int>::SharedPointer());
+	BOOST_CHECK(DataIOManager<int>::getInputHandlerByName("") == DataInputHandler<int>::SharedPointer());
 
-	BOOST_CHECK(DataIOManager<int>::getInputHandlerByFileExtension("ExT1") == &test_input_handler1);
-	BOOST_CHECK(DataIOManager<int>::getInputHandlerByFileExtension("eXT2") == &test_input_handler2);
+	BOOST_CHECK(DataIOManager<int>::getInputHandlerByFileExtension("ExT1") == test_input_handler1);
+	BOOST_CHECK(DataIOManager<int>::getInputHandlerByFileExtension("eXT2") == test_input_handler2);
 
-	BOOST_CHECK(DataIOManager<int>::getInputHandlerByFileExtension(" xt2") == 0);
-	BOOST_CHECK(DataIOManager<int>::getInputHandlerByFileExtension("e t2") == 0);
-	BOOST_CHECK(DataIOManager<int>::getInputHandlerByFileExtension("") == 0);
+	BOOST_CHECK(DataIOManager<int>::getInputHandlerByFileExtension(" xt2") == DataInputHandler<int>::SharedPointer());
+	BOOST_CHECK(DataIOManager<int>::getInputHandlerByFileExtension("e t2") == DataInputHandler<int>::SharedPointer());
+	BOOST_CHECK(DataIOManager<int>::getInputHandlerByFileExtension("") == DataInputHandler<int>::SharedPointer());
 
-	BOOST_CHECK(DataIOManager<int>::getInputHandlerByMimeType("application/TeST1") == &test_input_handler1);
-	BOOST_CHECK(DataIOManager<int>::getInputHandlerByMimeType("APPLICATION/test2") == &test_input_handler2);
+	BOOST_CHECK(DataIOManager<int>::getInputHandlerByMimeType("application/TeST1") == test_input_handler1);
+	BOOST_CHECK(DataIOManager<int>::getInputHandlerByMimeType("APPLICATION/test2") == test_input_handler2);
 
-	BOOST_CHECK(DataIOManager<int>::getInputHandlerByMimeType("application/test1 ") == 0);
-	BOOST_CHECK(DataIOManager<int>::getInputHandlerByMimeType("abplication/test1") == 0);
-	BOOST_CHECK(DataIOManager<int>::getInputHandlerByMimeType("") == 0);
+	BOOST_CHECK(DataIOManager<int>::getInputHandlerByMimeType("application/test1 ") == DataInputHandler<int>::SharedPointer());
+	BOOST_CHECK(DataIOManager<int>::getInputHandlerByMimeType("abplication/test1") == DataInputHandler<int>::SharedPointer());
+	BOOST_CHECK(DataIOManager<int>::getInputHandlerByMimeType("") == DataInputHandler<int>::SharedPointer());
 
 //-----
 
@@ -209,47 +209,47 @@ BOOST_AUTO_TEST_CASE(DataIOManagerTest)
 
 	BOOST_CHECK(DataIOManager<int>::getInputHandlersBegin() != DataIOManager<int>::getInputHandlersEnd());
 
-	BOOST_CHECK(&*DataIOManager<int>::getInputHandlersBegin() == &test_input_handler1); 
-	BOOST_CHECK(&*(DataIOManager<int>::getInputHandlersBegin() + 1) == &test_input_handler2); 
+	BOOST_CHECK(*DataIOManager<int>::getInputHandlersBegin() == test_input_handler1); 
+	BOOST_CHECK(*(DataIOManager<int>::getInputHandlersBegin() + 1) == test_input_handler2); 
 
-	BOOST_CHECK(&DataIOManager<int>::getInputHandler(0) == &test_input_handler1); 
-	BOOST_CHECK(&DataIOManager<int>::getInputHandler(1) == &test_input_handler2); 
+	BOOST_CHECK(DataIOManager<int>::getInputHandler(0) == test_input_handler1); 
+	BOOST_CHECK(DataIOManager<int>::getInputHandler(1) == test_input_handler2); 
 	BOOST_CHECK_THROW(DataIOManager<int>::getInputHandler(2), IndexError);
 
 	BOOST_CHECK(DataIOManager<int>::getNumOutputHandlers() == 1);
 
 	BOOST_CHECK(DataIOManager<int>::getOutputHandlersBegin() != DataIOManager<int>::getOutputHandlersEnd());
 
-	BOOST_CHECK(&*DataIOManager<int>::getOutputHandlersBegin() == &test_output_handler2); 
+	BOOST_CHECK(*DataIOManager<int>::getOutputHandlersBegin() == test_output_handler2); 
 
-	BOOST_CHECK(&DataIOManager<int>::getOutputHandler(0) == &test_output_handler2); 
+	BOOST_CHECK(DataIOManager<int>::getOutputHandler(0) == test_output_handler2); 
 	BOOST_CHECK_THROW(DataIOManager<int>::getOutputHandler(1), IndexError);
 
-//-----
+//----- 
 
-	BOOST_CHECK(DataIOManager<int>::getOutputHandlerByFormat(testFormat2) == &test_output_handler2);
-	BOOST_CHECK(DataIOManager<int>::getOutputHandlerByFormat(testFormat1) == 0);
+	BOOST_CHECK(DataIOManager<int>::getOutputHandlerByFormat(testFormat2) == test_output_handler2);
+	BOOST_CHECK(DataIOManager<int>::getOutputHandlerByFormat(testFormat1) == DataOutputHandler<int>::SharedPointer());
 
-	BOOST_CHECK(DataIOManager<int>::getOutputHandlerByName("test_fOrmat2") == &test_output_handler2);
-	BOOST_CHECK(DataIOManager<int>::getOutputHandlerByName("TEST_format1") == 0);
+	BOOST_CHECK(DataIOManager<int>::getOutputHandlerByName("test_fOrmat2") == test_output_handler2);
+	BOOST_CHECK(DataIOManager<int>::getOutputHandlerByName("TEST_format1") == DataOutputHandler<int>::SharedPointer());
 
-	BOOST_CHECK(DataIOManager<int>::getOutputHandlerByName("test f rmat1") == 0);
-	BOOST_CHECK(DataIOManager<int>::getOutputHandlerByName("test_format3") == 0);
-	BOOST_CHECK(DataIOManager<int>::getOutputHandlerByName("") == 0);
+	BOOST_CHECK(DataIOManager<int>::getOutputHandlerByName("test f rmat1") == DataOutputHandler<int>::SharedPointer());
+	BOOST_CHECK(DataIOManager<int>::getOutputHandlerByName("test_format3") == DataOutputHandler<int>::SharedPointer());
+	BOOST_CHECK(DataIOManager<int>::getOutputHandlerByName("") == DataOutputHandler<int>::SharedPointer());
 
-	BOOST_CHECK(DataIOManager<int>::getOutputHandlerByFileExtension("ExT2") == &test_output_handler2);
-	BOOST_CHECK(DataIOManager<int>::getOutputHandlerByFileExtension("eXT1") == 0);
+	BOOST_CHECK(DataIOManager<int>::getOutputHandlerByFileExtension("ExT2") == test_output_handler2);
+	BOOST_CHECK(DataIOManager<int>::getOutputHandlerByFileExtension("eXT1") == DataOutputHandler<int>::SharedPointer());
 
-	BOOST_CHECK(DataIOManager<int>::getOutputHandlerByFileExtension(" xt2") == 0);
-	BOOST_CHECK(DataIOManager<int>::getOutputHandlerByFileExtension("e t2") == 0);
-	BOOST_CHECK(DataIOManager<int>::getOutputHandlerByFileExtension("") == 0);
+	BOOST_CHECK(DataIOManager<int>::getOutputHandlerByFileExtension(" xt2") == DataOutputHandler<int>::SharedPointer());
+	BOOST_CHECK(DataIOManager<int>::getOutputHandlerByFileExtension("e t2") == DataOutputHandler<int>::SharedPointer());
+	BOOST_CHECK(DataIOManager<int>::getOutputHandlerByFileExtension("") == DataOutputHandler<int>::SharedPointer());
 
-	BOOST_CHECK(DataIOManager<int>::getOutputHandlerByMimeType("application/TeST2") == &test_output_handler2);
-	BOOST_CHECK(DataIOManager<int>::getOutputHandlerByMimeType("APPLICATION/test1") == 0);
+	BOOST_CHECK(DataIOManager<int>::getOutputHandlerByMimeType("application/TeST2") == test_output_handler2);
+	BOOST_CHECK(DataIOManager<int>::getOutputHandlerByMimeType("APPLICATION/test1") == DataOutputHandler<int>::SharedPointer());
 
-	BOOST_CHECK(DataIOManager<int>::getOutputHandlerByMimeType("application/test1 ") == 0);
-	BOOST_CHECK(DataIOManager<int>::getOutputHandlerByMimeType("abplication/test1") == 0);
-	BOOST_CHECK(DataIOManager<int>::getOutputHandlerByMimeType("") == 0);
+	BOOST_CHECK(DataIOManager<int>::getOutputHandlerByMimeType("application/test1 ") == DataOutputHandler<int>::SharedPointer());
+	BOOST_CHECK(DataIOManager<int>::getOutputHandlerByMimeType("abplication/test1") == DataOutputHandler<int>::SharedPointer());
+	BOOST_CHECK(DataIOManager<int>::getOutputHandlerByMimeType("") == DataOutputHandler<int>::SharedPointer());
 
 //-----
 
@@ -259,49 +259,49 @@ BOOST_AUTO_TEST_CASE(DataIOManagerTest)
 
 	BOOST_CHECK(DataIOManager<int>::getInputHandlersBegin() != DataIOManager<int>::getInputHandlersEnd());
 
-	BOOST_CHECK(&*DataIOManager<int>::getInputHandlersBegin() == &test_input_handler1); 
-	BOOST_CHECK(&*(DataIOManager<int>::getInputHandlersBegin() + 1) == &test_input_handler2); 
+	BOOST_CHECK(*DataIOManager<int>::getInputHandlersBegin() == test_input_handler1); 
+	BOOST_CHECK(*(DataIOManager<int>::getInputHandlersBegin() + 1) == test_input_handler2); 
 
-	BOOST_CHECK(&DataIOManager<int>::getInputHandler(0) == &test_input_handler1); 
-	BOOST_CHECK(&DataIOManager<int>::getInputHandler(1) == &test_input_handler2); 
+	BOOST_CHECK(DataIOManager<int>::getInputHandler(0) == test_input_handler1); 
+	BOOST_CHECK(DataIOManager<int>::getInputHandler(1) == test_input_handler2); 
 	BOOST_CHECK_THROW(DataIOManager<int>::getInputHandler(2), IndexError);
 
 	BOOST_CHECK(DataIOManager<int>::getNumOutputHandlers() == 2);
 
 	BOOST_CHECK(DataIOManager<int>::getOutputHandlersBegin() != DataIOManager<int>::getOutputHandlersEnd());
 
-	BOOST_CHECK(&*DataIOManager<int>::getOutputHandlersBegin() == &test_output_handler2); 
-	BOOST_CHECK(&*(DataIOManager<int>::getOutputHandlersBegin() + 1) == &test_output_handler1); 
+	BOOST_CHECK(*DataIOManager<int>::getOutputHandlersBegin() == test_output_handler2); 
+	BOOST_CHECK(*(DataIOManager<int>::getOutputHandlersBegin() + 1) == test_output_handler1); 
 
-	BOOST_CHECK(&DataIOManager<int>::getOutputHandler(0) == &test_output_handler2); 
-	BOOST_CHECK(&DataIOManager<int>::getOutputHandler(1) == &test_output_handler1); 
+	BOOST_CHECK(DataIOManager<int>::getOutputHandler(0) == test_output_handler2); 
+	BOOST_CHECK(DataIOManager<int>::getOutputHandler(1) == test_output_handler1); 
 	BOOST_CHECK_THROW(DataIOManager<int>::getOutputHandler(2), IndexError);
 
 //-----
 
-	BOOST_CHECK(DataIOManager<int>::getOutputHandlerByFormat(testFormat2) == &test_output_handler2);
-	BOOST_CHECK(DataIOManager<int>::getOutputHandlerByFormat(testFormat1) == &test_output_handler1);
+	BOOST_CHECK(DataIOManager<int>::getOutputHandlerByFormat(testFormat2) == test_output_handler2);
+	BOOST_CHECK(DataIOManager<int>::getOutputHandlerByFormat(testFormat1) == test_output_handler1);
 
-	BOOST_CHECK(DataIOManager<int>::getOutputHandlerByName("test_fOrmat2") == &test_output_handler2);
-	BOOST_CHECK(DataIOManager<int>::getOutputHandlerByName("TEST_format1") == &test_output_handler1);
+	BOOST_CHECK(DataIOManager<int>::getOutputHandlerByName("test_fOrmat2") == test_output_handler2);
+	BOOST_CHECK(DataIOManager<int>::getOutputHandlerByName("TEST_format1") == test_output_handler1);
 
-	BOOST_CHECK(DataIOManager<int>::getOutputHandlerByName("test f rmat1") == 0);
-	BOOST_CHECK(DataIOManager<int>::getOutputHandlerByName("test_format3") == 0);
-	BOOST_CHECK(DataIOManager<int>::getOutputHandlerByName("") == 0);
+	BOOST_CHECK(DataIOManager<int>::getOutputHandlerByName("test f rmat1") == DataOutputHandler<int>::SharedPointer());
+	BOOST_CHECK(DataIOManager<int>::getOutputHandlerByName("test_format3") == DataOutputHandler<int>::SharedPointer());
+	BOOST_CHECK(DataIOManager<int>::getOutputHandlerByName("") == DataOutputHandler<int>::SharedPointer());
 
-	BOOST_CHECK(DataIOManager<int>::getOutputHandlerByFileExtension("ExT2") == &test_output_handler2);
-	BOOST_CHECK(DataIOManager<int>::getOutputHandlerByFileExtension("eXT1") == &test_output_handler1);
+	BOOST_CHECK(DataIOManager<int>::getOutputHandlerByFileExtension("ExT2") == test_output_handler2);
+	BOOST_CHECK(DataIOManager<int>::getOutputHandlerByFileExtension("eXT1") == test_output_handler1);
 
-	BOOST_CHECK(DataIOManager<int>::getOutputHandlerByFileExtension(" xt2") == 0);
-	BOOST_CHECK(DataIOManager<int>::getOutputHandlerByFileExtension("e t2") == 0);
-	BOOST_CHECK(DataIOManager<int>::getOutputHandlerByFileExtension("") == 0);
+	BOOST_CHECK(DataIOManager<int>::getOutputHandlerByFileExtension(" xt2") == DataOutputHandler<int>::SharedPointer());
+	BOOST_CHECK(DataIOManager<int>::getOutputHandlerByFileExtension("e t2") == DataOutputHandler<int>::SharedPointer());
+	BOOST_CHECK(DataIOManager<int>::getOutputHandlerByFileExtension("") == DataOutputHandler<int>::SharedPointer());
 
-	BOOST_CHECK(DataIOManager<int>::getOutputHandlerByMimeType("application/TeST2") == &test_output_handler2);
-	BOOST_CHECK(DataIOManager<int>::getOutputHandlerByMimeType("APPLICATION/test1") == &test_output_handler1);
+	BOOST_CHECK(DataIOManager<int>::getOutputHandlerByMimeType("application/TeST2") == test_output_handler2);
+	BOOST_CHECK(DataIOManager<int>::getOutputHandlerByMimeType("APPLICATION/test1") == test_output_handler1);
 
-	BOOST_CHECK(DataIOManager<int>::getOutputHandlerByMimeType("application/test1 ") == 0);
-	BOOST_CHECK(DataIOManager<int>::getOutputHandlerByMimeType("abplication/test1") == 0);
-	BOOST_CHECK(DataIOManager<int>::getOutputHandlerByMimeType("") == 0);
+	BOOST_CHECK(DataIOManager<int>::getOutputHandlerByMimeType("application/test1 ") == DataOutputHandler<int>::SharedPointer());
+	BOOST_CHECK(DataIOManager<int>::getOutputHandlerByMimeType("abplication/test1") == DataOutputHandler<int>::SharedPointer());
+	BOOST_CHECK(DataIOManager<int>::getOutputHandlerByMimeType("") == DataOutputHandler<int>::SharedPointer());
 
 //-----
 
@@ -312,47 +312,47 @@ BOOST_AUTO_TEST_CASE(DataIOManagerTest)
 
 	BOOST_CHECK(DataIOManager<int>::getInputHandlersBegin() != DataIOManager<int>::getInputHandlersEnd());
 
-	BOOST_CHECK(&*DataIOManager<int>::getInputHandlersBegin() == &test_input_handler1); 
-	BOOST_CHECK(&*(DataIOManager<int>::getInputHandlersBegin() + 1) == &test_input_handler2); 
+	BOOST_CHECK(*DataIOManager<int>::getInputHandlersBegin() == test_input_handler1); 
+	BOOST_CHECK(*(DataIOManager<int>::getInputHandlersBegin() + 1) == test_input_handler2); 
 
-	BOOST_CHECK(&DataIOManager<int>::getInputHandler(0) == &test_input_handler1); 
-	BOOST_CHECK(&DataIOManager<int>::getInputHandler(1) == &test_input_handler2); 
+	BOOST_CHECK(DataIOManager<int>::getInputHandler(0) == test_input_handler1); 
+	BOOST_CHECK(DataIOManager<int>::getInputHandler(1) == test_input_handler2); 
 	BOOST_CHECK_THROW(DataIOManager<int>::getInputHandler(2), IndexError);
 
 	BOOST_CHECK(DataIOManager<int>::getNumOutputHandlers() == 1);
 
 	BOOST_CHECK(DataIOManager<int>::getOutputHandlersBegin() != DataIOManager<int>::getOutputHandlersEnd());
 
-	BOOST_CHECK(&*DataIOManager<int>::getOutputHandlersBegin() == &test_output_handler2); 
+	BOOST_CHECK(*DataIOManager<int>::getOutputHandlersBegin() == test_output_handler2); 
 
-	BOOST_CHECK(&DataIOManager<int>::getOutputHandler(0) == &test_output_handler2); 
+	BOOST_CHECK(DataIOManager<int>::getOutputHandler(0) == test_output_handler2); 
 	BOOST_CHECK_THROW(DataIOManager<int>::getOutputHandler(1), IndexError);
 
 //-----
 
-	BOOST_CHECK(DataIOManager<int>::getOutputHandlerByFormat(testFormat2) == &test_output_handler2);
-	BOOST_CHECK(DataIOManager<int>::getOutputHandlerByFormat(testFormat1) == 0);
+	BOOST_CHECK(DataIOManager<int>::getOutputHandlerByFormat(testFormat2) == test_output_handler2);
+	BOOST_CHECK(DataIOManager<int>::getOutputHandlerByFormat(testFormat1) == DataOutputHandler<int>::SharedPointer());
 
-	BOOST_CHECK(DataIOManager<int>::getOutputHandlerByName("test_fOrmat2") == &test_output_handler2);
-	BOOST_CHECK(DataIOManager<int>::getOutputHandlerByName("TEST_format1") == 0);
+	BOOST_CHECK(DataIOManager<int>::getOutputHandlerByName("test_fOrmat2") == test_output_handler2);
+	BOOST_CHECK(DataIOManager<int>::getOutputHandlerByName("TEST_format1") == DataOutputHandler<int>::SharedPointer());
 
-	BOOST_CHECK(DataIOManager<int>::getOutputHandlerByName("test f rmat1") == 0);
-	BOOST_CHECK(DataIOManager<int>::getOutputHandlerByName("test_format3") == 0);
-	BOOST_CHECK(DataIOManager<int>::getOutputHandlerByName("") == 0);
+	BOOST_CHECK(DataIOManager<int>::getOutputHandlerByName("test f rmat1") == DataOutputHandler<int>::SharedPointer());
+	BOOST_CHECK(DataIOManager<int>::getOutputHandlerByName("test_format3") == DataOutputHandler<int>::SharedPointer());
+	BOOST_CHECK(DataIOManager<int>::getOutputHandlerByName("") == DataOutputHandler<int>::SharedPointer());
 
-	BOOST_CHECK(DataIOManager<int>::getOutputHandlerByFileExtension("ExT2") == &test_output_handler2);
-	BOOST_CHECK(DataIOManager<int>::getOutputHandlerByFileExtension("eXT1") == 0);
+	BOOST_CHECK(DataIOManager<int>::getOutputHandlerByFileExtension("ExT2") == test_output_handler2);
+	BOOST_CHECK(DataIOManager<int>::getOutputHandlerByFileExtension("eXT1") == DataOutputHandler<int>::SharedPointer());
 
-	BOOST_CHECK(DataIOManager<int>::getOutputHandlerByFileExtension(" xt2") == 0);
-	BOOST_CHECK(DataIOManager<int>::getOutputHandlerByFileExtension("e t2") == 0);
-	BOOST_CHECK(DataIOManager<int>::getOutputHandlerByFileExtension("") == 0);
+	BOOST_CHECK(DataIOManager<int>::getOutputHandlerByFileExtension(" xt2") == DataOutputHandler<int>::SharedPointer());
+	BOOST_CHECK(DataIOManager<int>::getOutputHandlerByFileExtension("e t2") == DataOutputHandler<int>::SharedPointer());
+	BOOST_CHECK(DataIOManager<int>::getOutputHandlerByFileExtension("") == DataOutputHandler<int>::SharedPointer());
 
-	BOOST_CHECK(DataIOManager<int>::getOutputHandlerByMimeType("application/TeST2") == &test_output_handler2);
-	BOOST_CHECK(DataIOManager<int>::getOutputHandlerByMimeType("APPLICATION/test1") == 0);
+	BOOST_CHECK(DataIOManager<int>::getOutputHandlerByMimeType("application/TeST2") == test_output_handler2);
+	BOOST_CHECK(DataIOManager<int>::getOutputHandlerByMimeType("APPLICATION/test1") == DataOutputHandler<int>::SharedPointer());
 
-	BOOST_CHECK(DataIOManager<int>::getOutputHandlerByMimeType("application/test1 ") == 0);
-	BOOST_CHECK(DataIOManager<int>::getOutputHandlerByMimeType("abplication/test1") == 0);
-	BOOST_CHECK(DataIOManager<int>::getOutputHandlerByMimeType("") == 0);
+	BOOST_CHECK(DataIOManager<int>::getOutputHandlerByMimeType("application/test1 ") == DataOutputHandler<int>::SharedPointer());
+	BOOST_CHECK(DataIOManager<int>::getOutputHandlerByMimeType("abplication/test1") == DataOutputHandler<int>::SharedPointer());
+	BOOST_CHECK(DataIOManager<int>::getOutputHandlerByMimeType("") == DataOutputHandler<int>::SharedPointer());
 
 //-----
 
@@ -368,11 +368,11 @@ BOOST_AUTO_TEST_CASE(DataIOManagerTest)
 
 	BOOST_CHECK(DataIOManager<int>::getInputHandlersBegin() != DataIOManager<int>::getInputHandlersEnd());
 
-	BOOST_CHECK(&*DataIOManager<int>::getInputHandlersBegin() == &test_input_handler1); 
-	BOOST_CHECK(&*(DataIOManager<int>::getInputHandlersBegin() + 1) == &test_input_handler2); 
+	BOOST_CHECK(*DataIOManager<int>::getInputHandlersBegin() == test_input_handler1); 
+	BOOST_CHECK(*(DataIOManager<int>::getInputHandlersBegin() + 1) == test_input_handler2); 
 
-	BOOST_CHECK(&DataIOManager<int>::getInputHandler(0) == &test_input_handler1); 
-	BOOST_CHECK(&DataIOManager<int>::getInputHandler(1) == &test_input_handler2); 
+	BOOST_CHECK(DataIOManager<int>::getInputHandler(0) == test_input_handler1); 
+	BOOST_CHECK(DataIOManager<int>::getInputHandler(1) == test_input_handler2); 
 	BOOST_CHECK_THROW(DataIOManager<int>::getInputHandler(2), IndexError);
 
 	BOOST_CHECK(DataIOManager<int>::getNumOutputHandlers() == 0);
@@ -384,53 +384,53 @@ BOOST_AUTO_TEST_CASE(DataIOManagerTest)
 
 //-----
 
-	BOOST_CHECK(DataIOManager<int>::getOutputHandlerByFormat(testFormat2) == 0);
-	BOOST_CHECK(DataIOManager<int>::getOutputHandlerByFormat(testFormat1) == 0);
+	BOOST_CHECK(DataIOManager<int>::getOutputHandlerByFormat(testFormat2) == DataOutputHandler<int>::SharedPointer());
+	BOOST_CHECK(DataIOManager<int>::getOutputHandlerByFormat(testFormat1) == DataOutputHandler<int>::SharedPointer());
 
-	BOOST_CHECK(DataIOManager<int>::getOutputHandlerByName("test_fOrmat2") == 0);
-	BOOST_CHECK(DataIOManager<int>::getOutputHandlerByName("TEST_format1") == 0);
+	BOOST_CHECK(DataIOManager<int>::getOutputHandlerByName("test_fOrmat2") == DataOutputHandler<int>::SharedPointer());
+	BOOST_CHECK(DataIOManager<int>::getOutputHandlerByName("TEST_format1") == DataOutputHandler<int>::SharedPointer());
 
-	BOOST_CHECK(DataIOManager<int>::getOutputHandlerByName("test f rmat1") == 0);
-	BOOST_CHECK(DataIOManager<int>::getOutputHandlerByName("test_format3") == 0);
-	BOOST_CHECK(DataIOManager<int>::getOutputHandlerByName("") == 0);
+	BOOST_CHECK(DataIOManager<int>::getOutputHandlerByName("test f rmat1") == DataOutputHandler<int>::SharedPointer());
+	BOOST_CHECK(DataIOManager<int>::getOutputHandlerByName("test_format3") == DataOutputHandler<int>::SharedPointer());
+	BOOST_CHECK(DataIOManager<int>::getOutputHandlerByName("") == DataOutputHandler<int>::SharedPointer());
 
-	BOOST_CHECK(DataIOManager<int>::getOutputHandlerByFileExtension("ExT2") == 0);
-	BOOST_CHECK(DataIOManager<int>::getOutputHandlerByFileExtension("eXT1") == 0);
+	BOOST_CHECK(DataIOManager<int>::getOutputHandlerByFileExtension("ExT2") == DataOutputHandler<int>::SharedPointer());
+	BOOST_CHECK(DataIOManager<int>::getOutputHandlerByFileExtension("eXT1") == DataOutputHandler<int>::SharedPointer());
 
-	BOOST_CHECK(DataIOManager<int>::getOutputHandlerByFileExtension(" xt2") == 0);
-	BOOST_CHECK(DataIOManager<int>::getOutputHandlerByFileExtension("e t2") == 0);
-	BOOST_CHECK(DataIOManager<int>::getOutputHandlerByFileExtension("") == 0);
+	BOOST_CHECK(DataIOManager<int>::getOutputHandlerByFileExtension(" xt2") == DataOutputHandler<int>::SharedPointer());
+	BOOST_CHECK(DataIOManager<int>::getOutputHandlerByFileExtension("e t2") == DataOutputHandler<int>::SharedPointer());
+	BOOST_CHECK(DataIOManager<int>::getOutputHandlerByFileExtension("") == DataOutputHandler<int>::SharedPointer());
 
-	BOOST_CHECK(DataIOManager<int>::getOutputHandlerByMimeType("application/TeST2") == 0);
-	BOOST_CHECK(DataIOManager<int>::getOutputHandlerByMimeType("APPLICATION/test1") == 0);
+	BOOST_CHECK(DataIOManager<int>::getOutputHandlerByMimeType("application/TeST2") == DataOutputHandler<int>::SharedPointer());
+	BOOST_CHECK(DataIOManager<int>::getOutputHandlerByMimeType("APPLICATION/test1") == DataOutputHandler<int>::SharedPointer());
 
-	BOOST_CHECK(DataIOManager<int>::getOutputHandlerByMimeType("application/test1 ") == 0);
-	BOOST_CHECK(DataIOManager<int>::getOutputHandlerByMimeType("abplication/test1") == 0);
-	BOOST_CHECK(DataIOManager<int>::getOutputHandlerByMimeType("") == 0);
+	BOOST_CHECK(DataIOManager<int>::getOutputHandlerByMimeType("application/test1 ") == DataOutputHandler<int>::SharedPointer());
+	BOOST_CHECK(DataIOManager<int>::getOutputHandlerByMimeType("abplication/test1") == DataOutputHandler<int>::SharedPointer());
+	BOOST_CHECK(DataIOManager<int>::getOutputHandlerByMimeType("") == DataOutputHandler<int>::SharedPointer());
 
-	BOOST_CHECK(DataIOManager<int>::getInputHandlerByFormat(testFormat1) == &test_input_handler1);
-	BOOST_CHECK(DataIOManager<int>::getInputHandlerByFormat(testFormat2) == &test_input_handler2);
+	BOOST_CHECK(DataIOManager<int>::getInputHandlerByFormat(testFormat1) == test_input_handler1);
+	BOOST_CHECK(DataIOManager<int>::getInputHandlerByFormat(testFormat2) == test_input_handler2);
 
-	BOOST_CHECK(DataIOManager<int>::getInputHandlerByName("test_fOrmat1") == &test_input_handler1);
-	BOOST_CHECK(DataIOManager<int>::getInputHandlerByName("TEST_format2") == &test_input_handler2);
+	BOOST_CHECK(DataIOManager<int>::getInputHandlerByName("test_fOrmat1") == test_input_handler1);
+	BOOST_CHECK(DataIOManager<int>::getInputHandlerByName("TEST_format2") == test_input_handler2);
 
-	BOOST_CHECK(DataIOManager<int>::getInputHandlerByName("test f rmat1") == 0);
-	BOOST_CHECK(DataIOManager<int>::getInputHandlerByName("test_format3") == 0);
-	BOOST_CHECK(DataIOManager<int>::getInputHandlerByName("") == 0);
+	BOOST_CHECK(DataIOManager<int>::getInputHandlerByName("test f rmat1") == DataInputHandler<int>::SharedPointer());
+	BOOST_CHECK(DataIOManager<int>::getInputHandlerByName("test_format3") == DataInputHandler<int>::SharedPointer());
+	BOOST_CHECK(DataIOManager<int>::getInputHandlerByName("") == DataInputHandler<int>::SharedPointer());
 
-	BOOST_CHECK(DataIOManager<int>::getInputHandlerByFileExtension("ExT1") == &test_input_handler1);
-	BOOST_CHECK(DataIOManager<int>::getInputHandlerByFileExtension("eXT2") == &test_input_handler2);
+	BOOST_CHECK(DataIOManager<int>::getInputHandlerByFileExtension("ExT1") == test_input_handler1);
+	BOOST_CHECK(DataIOManager<int>::getInputHandlerByFileExtension("eXT2") == test_input_handler2);
 
-	BOOST_CHECK(DataIOManager<int>::getInputHandlerByFileExtension(" xt2") == 0);
-	BOOST_CHECK(DataIOManager<int>::getInputHandlerByFileExtension("e t2") == 0);
-	BOOST_CHECK(DataIOManager<int>::getInputHandlerByFileExtension("") == 0);
+	BOOST_CHECK(DataIOManager<int>::getInputHandlerByFileExtension(" xt2") == DataInputHandler<int>::SharedPointer());
+	BOOST_CHECK(DataIOManager<int>::getInputHandlerByFileExtension("e t2") == DataInputHandler<int>::SharedPointer());
+	BOOST_CHECK(DataIOManager<int>::getInputHandlerByFileExtension("") == DataInputHandler<int>::SharedPointer());
 
-	BOOST_CHECK(DataIOManager<int>::getInputHandlerByMimeType("application/TeST1") == &test_input_handler1);
-	BOOST_CHECK(DataIOManager<int>::getInputHandlerByMimeType("APPLICATION/test2") == &test_input_handler2);
+	BOOST_CHECK(DataIOManager<int>::getInputHandlerByMimeType("application/TeST1") == test_input_handler1);
+	BOOST_CHECK(DataIOManager<int>::getInputHandlerByMimeType("APPLICATION/test2") == test_input_handler2);
 
-	BOOST_CHECK(DataIOManager<int>::getInputHandlerByMimeType("application/test1 ") == 0);
-	BOOST_CHECK(DataIOManager<int>::getInputHandlerByMimeType("abplication/test1") == 0);
-	BOOST_CHECK(DataIOManager<int>::getInputHandlerByMimeType("") == 0);
+	BOOST_CHECK(DataIOManager<int>::getInputHandlerByMimeType("application/test1 ") == DataInputHandler<int>::SharedPointer());
+	BOOST_CHECK(DataIOManager<int>::getInputHandlerByMimeType("abplication/test1") == DataInputHandler<int>::SharedPointer());
+	BOOST_CHECK(DataIOManager<int>::getInputHandlerByMimeType("") == DataInputHandler<int>::SharedPointer());
 
 //-----
 
@@ -442,40 +442,40 @@ BOOST_AUTO_TEST_CASE(DataIOManagerTest)
 	BOOST_CHECK(DataIOManager<int>::getInputHandlersBegin() != DataIOManager<int>::getInputHandlersEnd());
 	BOOST_CHECK(DataIOManager<int>::getOutputHandlersBegin() == DataIOManager<int>::getOutputHandlersEnd());
 
-	BOOST_CHECK(&*DataIOManager<int>::getInputHandlersBegin() == &test_input_handler1); 
+	BOOST_CHECK(*DataIOManager<int>::getInputHandlersBegin() == test_input_handler1); 
 
-	BOOST_CHECK(&DataIOManager<int>::getInputHandler(0) == &test_input_handler1); 
+	BOOST_CHECK(DataIOManager<int>::getInputHandler(0) == test_input_handler1); 
 	BOOST_CHECK_THROW(DataIOManager<int>::getInputHandler(1), IndexError);
 
 	BOOST_CHECK_THROW(DataIOManager<int>::getOutputHandler(0), IndexError);
 
 //-----
 
-	BOOST_CHECK(DataIOManager<int>::getInputHandlerByFormat(testFormat1) == &test_input_handler1);
-	BOOST_CHECK(DataIOManager<int>::getInputHandlerByFormat(testFormat2) == 0);
+	BOOST_CHECK(DataIOManager<int>::getInputHandlerByFormat(testFormat1) == test_input_handler1);
+	BOOST_CHECK(DataIOManager<int>::getInputHandlerByFormat(testFormat2) == DataInputHandler<int>::SharedPointer());
 
-	BOOST_CHECK(DataIOManager<int>::getInputHandlerByName("test_fOrmat1") == &test_input_handler1);
-	BOOST_CHECK(DataIOManager<int>::getInputHandlerByName("TEST_format2") == 0);
+	BOOST_CHECK(DataIOManager<int>::getInputHandlerByName("test_fOrmat1") == test_input_handler1);
+	BOOST_CHECK(DataIOManager<int>::getInputHandlerByName("TEST_format2") == DataInputHandler<int>::SharedPointer());
 
-	BOOST_CHECK(DataIOManager<int>::getInputHandlerByName("test f rmat1") == 0);
-	BOOST_CHECK(DataIOManager<int>::getInputHandlerByName("test_format3") == 0);
-	BOOST_CHECK(DataIOManager<int>::getInputHandlerByName("") == 0);
+	BOOST_CHECK(DataIOManager<int>::getInputHandlerByName("test f rmat1") == DataInputHandler<int>::SharedPointer());
+	BOOST_CHECK(DataIOManager<int>::getInputHandlerByName("test_format3") == DataInputHandler<int>::SharedPointer());
+	BOOST_CHECK(DataIOManager<int>::getInputHandlerByName("") == DataInputHandler<int>::SharedPointer());
 
-	BOOST_CHECK(DataIOManager<int>::getInputHandlerByFileExtension("ext1") == &test_input_handler1);
-	BOOST_CHECK(DataIOManager<int>::getInputHandlerByFileExtension("ExT1") == &test_input_handler1);
-	BOOST_CHECK(DataIOManager<int>::getInputHandlerByFileExtension("eXT2") == 0);
+	BOOST_CHECK(DataIOManager<int>::getInputHandlerByFileExtension("ext1") == test_input_handler1);
+	BOOST_CHECK(DataIOManager<int>::getInputHandlerByFileExtension("ExT1") == test_input_handler1);
+	BOOST_CHECK(DataIOManager<int>::getInputHandlerByFileExtension("eXT2") == DataInputHandler<int>::SharedPointer());
 
-	BOOST_CHECK(DataIOManager<int>::getInputHandlerByFileExtension(" xt2") == 0);
-	BOOST_CHECK(DataIOManager<int>::getInputHandlerByFileExtension("e t2") == 0);
-	BOOST_CHECK(DataIOManager<int>::getInputHandlerByFileExtension("") == 0);
+	BOOST_CHECK(DataIOManager<int>::getInputHandlerByFileExtension(" xt2") == DataInputHandler<int>::SharedPointer());
+	BOOST_CHECK(DataIOManager<int>::getInputHandlerByFileExtension("e t2") == DataInputHandler<int>::SharedPointer());
+	BOOST_CHECK(DataIOManager<int>::getInputHandlerByFileExtension("") == DataInputHandler<int>::SharedPointer());
 
-	BOOST_CHECK(DataIOManager<int>::getInputHandlerByMimeType("application/test1") == &test_input_handler1);
-	BOOST_CHECK(DataIOManager<int>::getInputHandlerByMimeType("application/TeST1") == &test_input_handler1);
-	BOOST_CHECK(DataIOManager<int>::getInputHandlerByMimeType("APPLICATION/test2") == 0);
+	BOOST_CHECK(DataIOManager<int>::getInputHandlerByMimeType("application/test1") == test_input_handler1);
+	BOOST_CHECK(DataIOManager<int>::getInputHandlerByMimeType("application/TeST1") == test_input_handler1);
+	BOOST_CHECK(DataIOManager<int>::getInputHandlerByMimeType("APPLICATION/test2") == DataInputHandler<int>::SharedPointer());
 
-	BOOST_CHECK(DataIOManager<int>::getInputHandlerByMimeType("application/test1 ") == 0);
-	BOOST_CHECK(DataIOManager<int>::getInputHandlerByMimeType("abplication/test1") == 0);
-	BOOST_CHECK(DataIOManager<int>::getInputHandlerByMimeType("") == 0);
+	BOOST_CHECK(DataIOManager<int>::getInputHandlerByMimeType("application/test1 ") == DataInputHandler<int>::SharedPointer());
+	BOOST_CHECK(DataIOManager<int>::getInputHandlerByMimeType("abplication/test1") == DataInputHandler<int>::SharedPointer());
+	BOOST_CHECK(DataIOManager<int>::getInputHandlerByMimeType("") == DataInputHandler<int>::SharedPointer());
 
 //-----
 
@@ -492,53 +492,53 @@ BOOST_AUTO_TEST_CASE(DataIOManagerTest)
 
 //-----
 
-	BOOST_CHECK(DataIOManager<int>::getOutputHandlerByFormat(testFormat2) == 0);
-	BOOST_CHECK(DataIOManager<int>::getOutputHandlerByFormat(testFormat1) == 0);
+	BOOST_CHECK(DataIOManager<int>::getOutputHandlerByFormat(testFormat2) == DataOutputHandler<int>::SharedPointer());
+	BOOST_CHECK(DataIOManager<int>::getOutputHandlerByFormat(testFormat1) == DataOutputHandler<int>::SharedPointer());
 
-	BOOST_CHECK(DataIOManager<int>::getOutputHandlerByName("test_fOrmat2") == 0);
-	BOOST_CHECK(DataIOManager<int>::getOutputHandlerByName("TEST_format1") == 0);
+	BOOST_CHECK(DataIOManager<int>::getOutputHandlerByName("test_fOrmat2") == DataOutputHandler<int>::SharedPointer());
+	BOOST_CHECK(DataIOManager<int>::getOutputHandlerByName("TEST_format1") == DataOutputHandler<int>::SharedPointer());
 
-	BOOST_CHECK(DataIOManager<int>::getOutputHandlerByName("test f rmat1") == 0);
-	BOOST_CHECK(DataIOManager<int>::getOutputHandlerByName("test_format3") == 0);
-	BOOST_CHECK(DataIOManager<int>::getOutputHandlerByName("") == 0);
+	BOOST_CHECK(DataIOManager<int>::getOutputHandlerByName("test f rmat1") == DataOutputHandler<int>::SharedPointer());
+	BOOST_CHECK(DataIOManager<int>::getOutputHandlerByName("test_format3") == DataOutputHandler<int>::SharedPointer());
+	BOOST_CHECK(DataIOManager<int>::getOutputHandlerByName("") == DataOutputHandler<int>::SharedPointer());
 
-	BOOST_CHECK(DataIOManager<int>::getOutputHandlerByFileExtension("ExT2") == 0);
-	BOOST_CHECK(DataIOManager<int>::getOutputHandlerByFileExtension("eXT1") == 0);
+	BOOST_CHECK(DataIOManager<int>::getOutputHandlerByFileExtension("ExT2") == DataOutputHandler<int>::SharedPointer());
+	BOOST_CHECK(DataIOManager<int>::getOutputHandlerByFileExtension("eXT1") == DataOutputHandler<int>::SharedPointer());
 
-	BOOST_CHECK(DataIOManager<int>::getOutputHandlerByFileExtension(" xt2") == 0);
-	BOOST_CHECK(DataIOManager<int>::getOutputHandlerByFileExtension("e t2") == 0);
-	BOOST_CHECK(DataIOManager<int>::getOutputHandlerByFileExtension("") == 0);
+	BOOST_CHECK(DataIOManager<int>::getOutputHandlerByFileExtension(" xt2") == DataOutputHandler<int>::SharedPointer());
+	BOOST_CHECK(DataIOManager<int>::getOutputHandlerByFileExtension("e t2") == DataOutputHandler<int>::SharedPointer());
+	BOOST_CHECK(DataIOManager<int>::getOutputHandlerByFileExtension("") == DataOutputHandler<int>::SharedPointer());
 
-	BOOST_CHECK(DataIOManager<int>::getOutputHandlerByMimeType("application/TeST2") == 0);
-	BOOST_CHECK(DataIOManager<int>::getOutputHandlerByMimeType("APPLICATION/test1") == 0);
+	BOOST_CHECK(DataIOManager<int>::getOutputHandlerByMimeType("application/TeST2") == DataOutputHandler<int>::SharedPointer());
+	BOOST_CHECK(DataIOManager<int>::getOutputHandlerByMimeType("APPLICATION/test1") == DataOutputHandler<int>::SharedPointer());
 
-	BOOST_CHECK(DataIOManager<int>::getOutputHandlerByMimeType("application/test1 ") == 0);
-	BOOST_CHECK(DataIOManager<int>::getOutputHandlerByMimeType("abplication/test1") == 0);
-	BOOST_CHECK(DataIOManager<int>::getOutputHandlerByMimeType("") == 0);
+	BOOST_CHECK(DataIOManager<int>::getOutputHandlerByMimeType("application/test1 ") == DataOutputHandler<int>::SharedPointer());
+	BOOST_CHECK(DataIOManager<int>::getOutputHandlerByMimeType("abplication/test1") == DataOutputHandler<int>::SharedPointer());
+	BOOST_CHECK(DataIOManager<int>::getOutputHandlerByMimeType("") == DataOutputHandler<int>::SharedPointer());
 
-	BOOST_CHECK(DataIOManager<int>::getInputHandlerByFormat(testFormat1) == 0);
-	BOOST_CHECK(DataIOManager<int>::getInputHandlerByFormat(testFormat2) == 0);
+	BOOST_CHECK(DataIOManager<int>::getInputHandlerByFormat(testFormat1) == DataInputHandler<int>::SharedPointer());
+	BOOST_CHECK(DataIOManager<int>::getInputHandlerByFormat(testFormat2) == DataInputHandler<int>::SharedPointer());
 
-	BOOST_CHECK(DataIOManager<int>::getInputHandlerByName("test_fOrmat1") == 0);
-	BOOST_CHECK(DataIOManager<int>::getInputHandlerByName("TEST_format2") == 0);
+	BOOST_CHECK(DataIOManager<int>::getInputHandlerByName("test_fOrmat1") == DataInputHandler<int>::SharedPointer());
+	BOOST_CHECK(DataIOManager<int>::getInputHandlerByName("TEST_format2") == DataInputHandler<int>::SharedPointer());
 
-	BOOST_CHECK(DataIOManager<int>::getInputHandlerByName("test f rmat1") == 0);
-	BOOST_CHECK(DataIOManager<int>::getInputHandlerByName("test_format3") == 0);
-	BOOST_CHECK(DataIOManager<int>::getInputHandlerByName("") == 0);
+	BOOST_CHECK(DataIOManager<int>::getInputHandlerByName("test f rmat1") == DataInputHandler<int>::SharedPointer());
+	BOOST_CHECK(DataIOManager<int>::getInputHandlerByName("test_format3") == DataInputHandler<int>::SharedPointer());
+	BOOST_CHECK(DataIOManager<int>::getInputHandlerByName("") == DataInputHandler<int>::SharedPointer());
 
-	BOOST_CHECK(DataIOManager<int>::getInputHandlerByFileExtension("ExT1") == 0);
-	BOOST_CHECK(DataIOManager<int>::getInputHandlerByFileExtension("eXT2") == 0);
+	BOOST_CHECK(DataIOManager<int>::getInputHandlerByFileExtension("ExT1") == DataInputHandler<int>::SharedPointer());
+	BOOST_CHECK(DataIOManager<int>::getInputHandlerByFileExtension("eXT2") == DataInputHandler<int>::SharedPointer());
 
-	BOOST_CHECK(DataIOManager<int>::getInputHandlerByFileExtension(" xt2") == 0);
-	BOOST_CHECK(DataIOManager<int>::getInputHandlerByFileExtension("e t2") == 0);
-	BOOST_CHECK(DataIOManager<int>::getInputHandlerByFileExtension("") == 0);
+	BOOST_CHECK(DataIOManager<int>::getInputHandlerByFileExtension(" xt2") == DataInputHandler<int>::SharedPointer());
+	BOOST_CHECK(DataIOManager<int>::getInputHandlerByFileExtension("e t2") == DataInputHandler<int>::SharedPointer());
+	BOOST_CHECK(DataIOManager<int>::getInputHandlerByFileExtension("") == DataInputHandler<int>::SharedPointer());
 
-	BOOST_CHECK(DataIOManager<int>::getInputHandlerByMimeType("application/TeST1") == 0);
-	BOOST_CHECK(DataIOManager<int>::getInputHandlerByMimeType("APPLICATION/test2") == 0);
+	BOOST_CHECK(DataIOManager<int>::getInputHandlerByMimeType("application/TeST1") == DataInputHandler<int>::SharedPointer());
+	BOOST_CHECK(DataIOManager<int>::getInputHandlerByMimeType("APPLICATION/test2") == DataInputHandler<int>::SharedPointer());
 
-	BOOST_CHECK(DataIOManager<int>::getInputHandlerByMimeType("application/test1 ") == 0);
-	BOOST_CHECK(DataIOManager<int>::getInputHandlerByMimeType("abplication/test1") == 0);
-	BOOST_CHECK(DataIOManager<int>::getInputHandlerByMimeType("") == 0);
+	BOOST_CHECK(DataIOManager<int>::getInputHandlerByMimeType("application/test1 ") == DataInputHandler<int>::SharedPointer());
+	BOOST_CHECK(DataIOManager<int>::getInputHandlerByMimeType("abplication/test1") == DataInputHandler<int>::SharedPointer());
+	BOOST_CHECK(DataIOManager<int>::getInputHandlerByMimeType("") == DataInputHandler<int>::SharedPointer());
 
 //-----
 
@@ -561,22 +561,22 @@ BOOST_AUTO_TEST_CASE(DataIOManagerTest)
 
 	BOOST_CHECK(DataIOManager<int>::getInputHandlersBegin() != DataIOManager<int>::getInputHandlersEnd());
 
-	BOOST_CHECK(&*DataIOManager<int>::getInputHandlersBegin() == &test_input_handler2); 
-	BOOST_CHECK(&*(DataIOManager<int>::getInputHandlersBegin() + 1) == &test_input_handler1); 
+	BOOST_CHECK(*DataIOManager<int>::getInputHandlersBegin() == test_input_handler2); 
+	BOOST_CHECK(*(DataIOManager<int>::getInputHandlersBegin() + 1) == test_input_handler1); 
 
-	BOOST_CHECK(&DataIOManager<int>::getInputHandler(0) == &test_input_handler2); 
-	BOOST_CHECK(&DataIOManager<int>::getInputHandler(1) == &test_input_handler1); 
+	BOOST_CHECK(DataIOManager<int>::getInputHandler(0) == test_input_handler2); 
+	BOOST_CHECK(DataIOManager<int>::getInputHandler(1) == test_input_handler1); 
 	BOOST_CHECK_THROW(DataIOManager<int>::getInputHandler(2), IndexError);
 
 	BOOST_CHECK(DataIOManager<int>::getNumOutputHandlers() == 2);
 
 	BOOST_CHECK(DataIOManager<int>::getOutputHandlersBegin() != DataIOManager<int>::getOutputHandlersEnd());
 
-	BOOST_CHECK(&*DataIOManager<int>::getOutputHandlersBegin() == &test_output_handler1); 
-	BOOST_CHECK(&*(DataIOManager<int>::getOutputHandlersBegin() + 1) == &test_output_handler2); 
+	BOOST_CHECK(*DataIOManager<int>::getOutputHandlersBegin() == test_output_handler1); 
+	BOOST_CHECK(*(DataIOManager<int>::getOutputHandlersBegin() + 1) == test_output_handler2); 
 
-	BOOST_CHECK(&DataIOManager<int>::getOutputHandler(0) == &test_output_handler1); 
-	BOOST_CHECK(&DataIOManager<int>::getOutputHandler(1) == &test_output_handler2); 
+	BOOST_CHECK(DataIOManager<int>::getOutputHandler(0) == test_output_handler1); 
+	BOOST_CHECK(DataIOManager<int>::getOutputHandler(1) == test_output_handler2); 
 	BOOST_CHECK_THROW(DataIOManager<int>::getOutputHandler(2), IndexError);
 
 //-----
@@ -588,20 +588,20 @@ BOOST_AUTO_TEST_CASE(DataIOManagerTest)
 
 	BOOST_CHECK(DataIOManager<int>::getInputHandlersBegin() != DataIOManager<int>::getInputHandlersEnd());
 
-	BOOST_CHECK(&*DataIOManager<int>::getInputHandlersBegin() == &test_input_handler2); 
-	BOOST_CHECK(&*(DataIOManager<int>::getInputHandlersBegin() + 1) == &test_input_handler1); 
+	BOOST_CHECK(*DataIOManager<int>::getInputHandlersBegin() == test_input_handler2); 
+	BOOST_CHECK(*(DataIOManager<int>::getInputHandlersBegin() + 1) == test_input_handler1); 
 
-	BOOST_CHECK(&DataIOManager<int>::getInputHandler(0) == &test_input_handler2); 
-	BOOST_CHECK(&DataIOManager<int>::getInputHandler(1) == &test_input_handler1); 
+	BOOST_CHECK(DataIOManager<int>::getInputHandler(0) == test_input_handler2); 
+	BOOST_CHECK(DataIOManager<int>::getInputHandler(1) == test_input_handler1); 
 	BOOST_CHECK_THROW(DataIOManager<int>::getInputHandler(2), IndexError);
 
 	BOOST_CHECK(DataIOManager<int>::getNumOutputHandlers() == 1);
 
 	BOOST_CHECK(DataIOManager<int>::getOutputHandlersBegin() != DataIOManager<int>::getOutputHandlersEnd());
 
-	BOOST_CHECK(&*DataIOManager<int>::getOutputHandlersBegin() == &test_output_handler2); 
+	BOOST_CHECK(*DataIOManager<int>::getOutputHandlersBegin() == test_output_handler2); 
 
-	BOOST_CHECK(&DataIOManager<int>::getOutputHandler(0) == &test_output_handler2); 
+	BOOST_CHECK(DataIOManager<int>::getOutputHandler(0) == test_output_handler2); 
 	BOOST_CHECK_THROW(DataIOManager<int>::getOutputHandler(1), IndexError);
 
 //-----
@@ -623,11 +623,11 @@ BOOST_AUTO_TEST_CASE(DataIOManagerTest)
 
 	BOOST_CHECK(DataIOManager<int>::getInputHandlersBegin() != DataIOManager<int>::getInputHandlersEnd());
 
-	BOOST_CHECK(&*DataIOManager<int>::getInputHandlersBegin() == &test_input_handler2); 
-	BOOST_CHECK(&*(DataIOManager<int>::getInputHandlersBegin() + 1) == &test_input_handler1); 
+	BOOST_CHECK(*DataIOManager<int>::getInputHandlersBegin() == test_input_handler2); 
+	BOOST_CHECK(*(DataIOManager<int>::getInputHandlersBegin() + 1) == test_input_handler1); 
 
-	BOOST_CHECK(&DataIOManager<int>::getInputHandler(0) == &test_input_handler2); 
-	BOOST_CHECK(&DataIOManager<int>::getInputHandler(1) == &test_input_handler1); 
+	BOOST_CHECK(DataIOManager<int>::getInputHandler(0) == test_input_handler2); 
+	BOOST_CHECK(DataIOManager<int>::getInputHandler(1) == test_input_handler1); 
 	BOOST_CHECK_THROW(DataIOManager<int>::getInputHandler(2), IndexError);
 
 	BOOST_CHECK(DataIOManager<int>::getNumOutputHandlers() == 0);
@@ -647,9 +647,9 @@ BOOST_AUTO_TEST_CASE(DataIOManagerTest)
 	BOOST_CHECK(DataIOManager<int>::getInputHandlersBegin() != DataIOManager<int>::getInputHandlersEnd());
 	BOOST_CHECK(DataIOManager<int>::getOutputHandlersBegin() == DataIOManager<int>::getOutputHandlersEnd());
 
-	BOOST_CHECK(&*DataIOManager<int>::getInputHandlersBegin() == &test_input_handler2); 
+	BOOST_CHECK(*DataIOManager<int>::getInputHandlersBegin() == test_input_handler2); 
 
-	BOOST_CHECK(&DataIOManager<int>::getInputHandler(0) == &test_input_handler2); 
+	BOOST_CHECK(DataIOManager<int>::getInputHandler(0) == test_input_handler2); 
 	BOOST_CHECK_THROW(DataIOManager<int>::getInputHandler(1), IndexError);
 
 	BOOST_CHECK_THROW(DataIOManager<int>::getOutputHandler(0), IndexError);

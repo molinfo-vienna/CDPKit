@@ -26,11 +26,17 @@
  
 #include "StaticInit.hpp"
 
+#include "CDPL/Config.hpp"
+
 #include <cstring>
 #include <sstream>
 
+#if defined(HAVE_BOOST_IOSTREAMS)
+
 #include <boost/iostreams/device/array.hpp>
 #include <boost/iostreams/stream.hpp>
+
+#endif // defined(HAVE_BOOST_IOSTREAMS)
 
 #include "CDPL/Forcefield/MMFF94SymbolicToNumericAtomTypeMap.hpp"
 #include "CDPL/Base/Exceptions.hpp"
@@ -45,21 +51,20 @@ using namespace CDPL;
 namespace
 {
  
-    Forcefield::MMFF94SymbolicToNumericAtomTypeMap builtinTable;
-    unsigned int                                   NOT_FOUND = 0;
+    Forcefield::MMFF94SymbolicToNumericAtomTypeMap::SharedPointer builtinMap(new Forcefield::MMFF94SymbolicToNumericAtomTypeMap());
 
     struct Init
     {
 
-	Init() {
-	    builtinTable.loadDefaults();
-	}
+		Init() {
+			builtinMap->loadDefaults();
+		}
 
     } init;
 }
 
 
-const Forcefield::MMFF94SymbolicToNumericAtomTypeMap* Forcefield::MMFF94SymbolicToNumericAtomTypeMap::defaultTable = &builtinTable;
+Forcefield::MMFF94SymbolicToNumericAtomTypeMap::SharedPointer Forcefield::MMFF94SymbolicToNumericAtomTypeMap::defaultMap = builtinMap;
 
 
 Forcefield::MMFF94SymbolicToNumericAtomTypeMap::MMFF94SymbolicToNumericAtomTypeMap()
@@ -70,12 +75,12 @@ void Forcefield::MMFF94SymbolicToNumericAtomTypeMap::addEntry(const std::string&
     entries.insert(DataStorage::value_type(sym_type, num_type));
 }
 
-unsigned int Forcefield::MMFF94SymbolicToNumericAtomTypeMap::getNumericType(const std::string& sym_type) const
+unsigned int Forcefield::MMFF94SymbolicToNumericAtomTypeMap::getEntry(const std::string& sym_type) const
 {
     DataStorage::const_iterator it = entries.find(sym_type);
 
     if (it == entries.end())
-	return NOT_FOUND;
+		return 0;
 
     return it->second;
 }
@@ -102,31 +107,39 @@ void Forcefield::MMFF94SymbolicToNumericAtomTypeMap::load(std::istream& is)
     unsigned int num_type;
 
     while (readMMFF94DataLine(is, line, "MMFF94SymbolicToNumericAtomTypeMap: error while reading numeric atom type definition data line")) {
-	std::istringstream line_iss(line);
+		std::istringstream line_iss(line);
 
-	if (!(line_iss >> sym_type))
-	    throw Base::IOError("MMFF94SymbolicToNumericAtomTypeMap: error while reading symbolic atom type");
+		if (!(line_iss >> sym_type))
+			throw Base::IOError("MMFF94SymbolicToNumericAtomTypeMap: error while reading symbolic atom type");
 		
-	if (!(line_iss >> num_type))
-	    throw Base::IOError("MMFF94SymbolicToNumericAtomTypeMap: error while reading numeric atom type");
+		if (!(line_iss >> num_type))
+			throw Base::IOError("MMFF94SymbolicToNumericAtomTypeMap: error while reading numeric atom type");
 	
-	addEntry(sym_type, num_type);
+		addEntry(sym_type, num_type);
     }
 }
 
 void Forcefield::MMFF94SymbolicToNumericAtomTypeMap::loadDefaults()
 {
-    boost::iostreams::stream<boost::iostreams::array_source> is(Forcefield::MMFF94ParameterData::SYMBOLIC_TO_NUMERIC_ATOM_TYPE_MAPPING, 
-								std::strlen(Forcefield::MMFF94ParameterData::SYMBOLIC_TO_NUMERIC_ATOM_TYPE_MAPPING));
+#if defined(HAVE_BOOST_IOSTREAMS)
+
+    boost::iostreams::stream<boost::iostreams::array_source> is(MMFF94ParameterData::SYMBOLIC_TO_NUMERIC_ATOM_TYPE_MAPPING, 
+																std::strlen(MMFF94ParameterData::SYMBOLIC_TO_NUMERIC_ATOM_TYPE_MAPPING));
+#else // defined(HAVE_BOOST_IOSTREAMS)
+
+	std::istringstream is(std::string(MMFF94ParameterData::SYMBOLIC_TO_NUMERIC_ATOM_TYPE_MAPPING);
+
+#endif // defined(HAVE_BOOST_IOSTREAMS)
+
     load(is);
 }
 
-void Forcefield::MMFF94SymbolicToNumericAtomTypeMap::set(const Forcefield::MMFF94SymbolicToNumericAtomTypeMap* db)
+void Forcefield::MMFF94SymbolicToNumericAtomTypeMap::set(const SharedPointer& map)
 {	
-    defaultTable = (!db ? &builtinTable : db);
+    defaultMap = (!map ? builtinMap : map);
 }
 
-const Forcefield::MMFF94SymbolicToNumericAtomTypeMap& Forcefield::MMFF94SymbolicToNumericAtomTypeMap::get()
+const Forcefield::MMFF94SymbolicToNumericAtomTypeMap::SharedPointer& Forcefield::MMFF94SymbolicToNumericAtomTypeMap::get()
 {
-    return *defaultTable;
+    return defaultMap;
 }

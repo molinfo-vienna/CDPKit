@@ -55,7 +55,7 @@ void CDPLPythonGrid::exportAttributedGrid()
     using namespace boost;
     using namespace CDPL;
 
-    python::scope scope = python::class_<AttributedGridWrapper, typename AttributedGridWrapper::SharedPointer,
+    python::scope scope = python::class_<AttributedGridWrapper, AttributedGridWrapper::SharedPointer,
 										 python::bases<Base::PropertyContainer>,
 										 boost::noncopyable>("AttributedGrid", python::no_init)
 		.def(python::init<>(python::arg("self")))
@@ -65,5 +65,5 @@ void CDPLPythonGrid::exportAttributedGrid()
 		.def(CDPLPythonBase::PropertyContainerSpecialFunctionsVisitor())
 		.add_property("numElements", &Grid::AttributedGrid::getNumElements);
 
-    python::register_ptr_to_python<typename Grid::AttributedGrid::SharedPointer>();
+    python::register_ptr_to_python<Grid::AttributedGrid::SharedPointer>();
 }

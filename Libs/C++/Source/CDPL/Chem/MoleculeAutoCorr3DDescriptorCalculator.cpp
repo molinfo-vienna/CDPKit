@@ -26,6 +26,8 @@
 
 #include "StaticInit.hpp"
 
+#include <boost/bind.hpp>
+
 #include "CDPL/Chem/MoleculeAutoCorr3DDescriptorCalculator.hpp"
 #include "CDPL/Chem/AtomContainer.hpp"
 #include "CDPL/Chem/Atom.hpp"
@@ -43,22 +45,18 @@ namespace
 	struct AtomPairWeightFunc
 	{
 
-		AtomPairWeightFunc(unsigned int curr_atom_type): currAtomType(curr_atom_type) {}
-	
-		double operator()(const Chem::Atom& atom1, const Chem::Atom& atom2) const {
+		double operator()(const Chem::Atom& atom1, const Chem::Atom& atom2, unsigned int slot_atom_type) const {
 			unsigned int atom_type1 = getType(atom1);
 			unsigned int atom_type2 = getType(atom2);
 
-			if (atom_type1 == currAtomType && atom_type2 == currAtomType)
+			if (atom_type1 == slot_atom_type && atom_type2 == slot_atom_type)
 				return 2;
 
-			if (atom_type1 == currAtomType || atom_type2 == currAtomType)
+			if (atom_type1 == slot_atom_type || atom_type2 == slot_atom_type)
 				return 1;
 
 			return 0;
 		}
-
-		unsigned int currAtomType;
 	};
 
     unsigned int ATOM_TYPES[] = {
@@ -134,12 +132,11 @@ void CDPL::Chem::MoleculeAutoCorr3DDescriptorCalculator::calculate(const AtomCon
 
 	descr.resize(sub_descr_size * num_atom_types, false);
 
-	if (weightFunc)
-		autoCorrCalculator.setEntityPairWeightFunction(weightFunc);
-
 	for (std::size_t i = 0; i < num_atom_types; i++) {
-		if (!weightFunc)
-			autoCorrCalculator.setEntityPairWeightFunction(AtomPairWeightFunc(ATOM_TYPES[i]));
+		if (weightFunc)
+			autoCorrCalculator.setEntityPairWeightFunction(boost::bind<double>(weightFunc, _1, _2, ATOM_TYPES[i]));
+		else
+			autoCorrCalculator.setEntityPairWeightFunction(boost::bind<double>(AtomPairWeightFunc(), _1, _2, ATOM_TYPES[i]));
 
 		Math::VectorRange<Math::DVector> sub_descr(descr, Math::range(i * sub_descr_size, (i + 1) * sub_descr_size));
 

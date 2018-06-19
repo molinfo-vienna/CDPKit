@@ -50,5 +50,5 @@ void CDPL::Chem::AtomAutoCorrelation3DVectorCalculator::calculate(const AtomCont
 {
     vec.resize(getNumSteps() + 1, false);
 
-    AutoCorrelation3DVectorCalculator::calculate(cntnr.getAtomsBegin(), cntnr.getAtomsEnd(), vec);
+    AutoCorrelation3DVectorCalculator<Atom>::calculate(cntnr.getAtomsBegin(), cntnr.getAtomsEnd(), vec);
 }

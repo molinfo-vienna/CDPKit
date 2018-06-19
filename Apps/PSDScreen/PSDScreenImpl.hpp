@@ -38,6 +38,8 @@
 #include "CDPL/Pharm/ScreeningProcessor.hpp"
 #include "CDPL/Base/DataReader.hpp"
 #include "CDPL/Base/DataWriter.hpp"
+#include "CDPL/Base/DataInputHandler.hpp"
+#include "CDPL/Base/DataOutputHandler.hpp"
 
 #include "Lib/CmdLineBase.hpp"
 
@@ -57,13 +59,6 @@ namespace CDPL
 		class Pharmacophore;
 		class FileScreeningHitCollector;
 	}
-
-	namespace Base
-	{
-
-		template <typename T> class DataOutputHandler;
-		template <typename T> class DataInputHandler;
-	}
 }
 
 
@@ -81,6 +76,8 @@ namespace PSDScreen
 
 		typedef CDPL::Base::DataOutputHandler<CDPL::Chem::MolecularGraph> HitOutputHandler;
 		typedef CDPL::Base::DataInputHandler<CDPL::Pharm::Pharmacophore> QueryInputHandler;
+		typedef HitOutputHandler::SharedPointer HitOutputHandlerPtr;
+		typedef QueryInputHandler::SharedPointer QueryInputHandlerPtr;
 		typedef CDPL::Pharm::ScreeningProcessor::SearchHit SearchHit;
 
 		const char* getProgName() const;
@@ -119,8 +116,8 @@ namespace PSDScreen
 
 		std::string getMatchingModeString() const;
 
-		const HitOutputHandler* getHitOutputHandler(const std::string& file_path) const;
-		const QueryInputHandler* getQueryInputHandler(const std::string& file_path) const;
+		HitOutputHandlerPtr getHitOutputHandler(const std::string& file_path) const;
+		QueryInputHandlerPtr getQueryInputHandler(const std::string& file_path) const;
 
 		void addOptionLongDescriptions();
 	
@@ -149,8 +146,8 @@ namespace PSDScreen
 		std::size_t              endMolIndex;
 		std::size_t              maxOmittedFtrs;
 		MatchingMode             matchingMode;
-		const HitOutputHandler*  hitOutputHandler;
-		const QueryInputHandler* queryInputHandler;
+		HitOutputHandlerPtr      hitOutputHandler;
+		QueryInputHandlerPtr     queryInputHandler;
 		HitWriterPtr             hitMolWriter;
 		QueryReaderPtr           queryPharmReader;
 		HitCollectorPtr          hitCollector;

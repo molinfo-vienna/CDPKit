@@ -179,7 +179,7 @@ bool DataSetReader::appendRecords(bool use_file_ext)
 	typename FileDataRecord<T, ImplT>::ReaderPointer reader_ptr;
 
 	if (use_file_ext) {
-		const DataInputHandler<T>* handler =
+		typename DataInputHandler<T>::SharedPointer handler =
 			DataIOManager<T>::getInputHandlerByFileExtension(file_info.completeSuffix().toStdString().c_str());
 
 		if (!handler) {
@@ -216,9 +216,9 @@ bool DataSetReader::appendRecords(bool use_file_ext)
 			try {
 				ImplT data;
 
-				reader_ptr = h_it->createReader(fileName.toStdString().c_str(), std::ios_base::binary | std::ios_base::in);
+				reader_ptr = (*h_it)->createReader(fileName.toStdString().c_str(), std::ios_base::binary | std::ios_base::in);
 
-				reader_ptr->setParent(&settings.getReaderControlParameters(h_it->getDataFormat().getName()));
+				reader_ptr->setParent(&settings.getReaderControlParameters((*h_it)->getDataFormat().getName()));
 				
 				if (reader_ptr->read(data))
 					found_reader = true;

@@ -35,11 +35,13 @@
 #include <string>
 #include <cstddef>
 
-#include <boost/unordered_map.hpp>
-
 #include "CDPL/Forcefield/APIPrefix.hpp"
+#include "CDPL/Forcefield/MMFF94SymbolicAtomTypePatternTable.hpp"
+#include "CDPL/Forcefield/MMFF94AromaticAtomTypeDefinitionTable.hpp"
+#include "CDPL/Forcefield/MMFF94HeavyToHydrogenAtomTypeMap.hpp"
+#include "CDPL/Forcefield/MMFF94SymbolicToNumericAtomTypeMap.hpp"
+#include "CDPL/Forcefield/MMFF94AtomTypePropertyTable.hpp"
 #include "CDPL/Chem/PatternAtomTyper.hpp"
-#include "CDPL/Chem/AromaticSSSRSubset.hpp"
 #include "CDPL/Util/BitSet.hpp"
 
 
@@ -56,11 +58,6 @@ namespace CDPL
     namespace Forcefield 
     {
 
-		class MMFF94SymbolicAtomTypePatternTable;
-		class MMFF94AromaticAtomTypeDefinitionTable;
-		class MMFF94HeavyToHydrogenAtomTypeMap;
-		class MMFF94SymbolicToNumericAtomTypeMap;
-
 		/**
 		 * \addtogroup CDPL_FORCEFIELD_ATOM_TYPE_PERCEPTION
 		 * @{
@@ -72,13 +69,15 @@ namespace CDPL
 		  public:
 			MMFF94AtomTyper();
 
-			void setSymbolicAtomTypePatternTable(const MMFF94SymbolicAtomTypePatternTable& table);
+			void setSymbolicAtomTypePatternTable(const MMFF94SymbolicAtomTypePatternTable::SharedPointer& table);
 
-			void setAromaticAtomTypeDefinitionTable(const MMFF94AromaticAtomTypeDefinitionTable& table);
+			void setAromaticAtomTypeDefinitionTable(const MMFF94AromaticAtomTypeDefinitionTable::SharedPointer& table);
 
-			void setHeavyToHydrogenAtomTypeMap(const MMFF94HeavyToHydrogenAtomTypeMap& map);
+			void setHeavyToHydrogenAtomTypeMap(const MMFF94HeavyToHydrogenAtomTypeMap::SharedPointer& map);
 
-			void setSymbolicToNumericAtomTypeMap(const MMFF94SymbolicToNumericAtomTypeMap& map);
+			void setSymbolicToNumericAtomTypeMap(const MMFF94SymbolicToNumericAtomTypeMap::SharedPointer& map);
+
+			void setAtomTypePropertyTable(const MMFF94AtomTypePropertyTable::SharedPointer& table);
 
 			void strictAtomTyping(bool strict);
 
@@ -86,9 +85,9 @@ namespace CDPL
 
 			void perceiveTypes(const Chem::MolecularGraph& molgraph);
 
-			const std::string& getSymbolicType(std::size_t idx);
+			const std::string& getSymbolicType(std::size_t idx) const;
 
-			unsigned int getNumericType(std::size_t idx);
+			unsigned int getNumericType(std::size_t idx) const;
 
 		  private:
 			void init(const Chem::MolecularGraph& molgraph);
@@ -98,24 +97,36 @@ namespace CDPL
 			void assignHydrogenAtomTypes();
 			void assignNumericAtomTypes();
 
-			void assignAromaticAtomTypes(const Chem::Fragment& ring);
+			void perceiveAromaticRings();
+			void assignAromaticAtomTypes(const Chem::Fragment* ring);
+
+			std::size_t getUniqueHeteroAtomIndex(const Chem::Fragment& ring) const;
+			std::size_t calcHeteroAtomDistance(std::size_t r_size, std::size_t het_atom_idx, std::size_t from_atom_idx) const;
+
+			bool isN5Anion(const Chem::Fragment& ring) const;
+			bool isImidazoliumCation(const Chem::Fragment& ring) const;
+
+			bool matchesAromTypeDefEntry(bool wc_match, const std::string& sym_type, unsigned int atomic_no, 
+										 std::size_t r_size, std::size_t het_dist, bool im_cat, bool n5_anion,
+										 const MMFF94AromaticAtomTypeDefinitionTable::Entry& entry) const;
 
 			typedef std::vector<std::string> SymbolicTypeTable;
 			typedef std::vector<unsigned int> NumericTypeTable;
-			typedef boost::unordered_map<std::size_t, std::size_t> AtomIndexToAromTypeDefIndexMap;
+			typedef std::vector<const Chem::Fragment*> RingList;
 
-			bool                                         strictMode;
-			const MMFF94SymbolicAtomTypePatternTable*    symTypePatternTable;
-			const MMFF94AromaticAtomTypeDefinitionTable* aromTypeDefTable;
-			const MMFF94HeavyToHydrogenAtomTypeMap*      hydTypeMap;
-			const MMFF94SymbolicToNumericAtomTypeMap*    numTypeMap;
-			const Chem::MolecularGraph*                  molGraph;
-			Chem::PatternAtomTyper                       atomTyper;
-			Chem::AromaticSSSRSubset                     aromRings;
-			Util::BitSet                                 aromRSizeMask;
-			AtomIndexToAromTypeDefIndexMap               aromTypeDefIdxMap;
-			SymbolicTypeTable                            symTypes;
-			NumericTypeTable                             numTypes;
+			bool                                                 strictMode;
+			MMFF94SymbolicAtomTypePatternTable::SharedPointer    symTypePatternTable;
+			MMFF94AromaticAtomTypeDefinitionTable::SharedPointer aromTypeDefTable;
+			MMFF94HeavyToHydrogenAtomTypeMap::SharedPointer      hydTypeMap;
+			MMFF94SymbolicToNumericAtomTypeMap::SharedPointer    numTypeMap;
+			MMFF94AtomTypePropertyTable::SharedPointer           atomTypePropTable;
+			const Chem::MolecularGraph*                          molGraph;
+			Chem::PatternAtomTyper                               atomTyper;
+			Util::BitSet                                         aromRSizeMask;
+			RingList                                             aromRings;
+			Util::BitSet                                         aromBondMask;
+			SymbolicTypeTable                                    symTypes;
+			NumericTypeTable                                     numTypes;
 		};
     
 		/**

@@ -41,9 +41,21 @@ long Chem::calcFormalCharge(const Atom& atom, const MolecularGraph& molgraph)
 	unsigned int atom_type = getType(atom);
 	long valence = calcValence(atom, molgraph) + getUnpairedElectronCount(atom);
 
-	if ((atom_type == AtomType::C || atom_type == AtomType::N) && getImplicitHydrogenCount(atom) == 0 && getExplicitBondCount(atom, molgraph) == 1) {
-		if ((atom_type == AtomType::C && valence == 3) || (atom_type == AtomType::N && valence == 2))
-			return -1;
+	if ((atom_type == AtomType::C || atom_type == AtomType::N) && getImplicitHydrogenCount(atom) == 0) {
+		switch (getExplicitBondCount(atom, molgraph)) {
+
+			case 1:
+				if ((atom_type == AtomType::C && valence == 3) || (atom_type == AtomType::N && valence == 2))
+					return -1;
+                break;
+
+			case 2:
+				if (atom_type == AtomType::N && valence == 2)
+					return -1;
+
+			default:
+				break;
+		}
 	}
 
 	const Util::STArray& val_states = AtomDictionary::getValenceStates(atom_type);

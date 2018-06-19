@@ -47,7 +47,7 @@ BOOST_AUTO_TEST_CASE(SVGMolecularGraphOutputHandlerTest)
 	using namespace Chem;
 	using namespace Base;
 
-	const DataOutputHandler<MolecularGraph>* handler = DataIOManager<MolecularGraph>::getOutputHandlerByFormat(Vis::DataFormat::SVG);
+	const DataOutputHandler<MolecularGraph>::SharedPointer handler = DataIOManager<MolecularGraph>::getOutputHandlerByFormat(Vis::DataFormat::SVG);
 
 	BOOST_CHECK(handler);
 

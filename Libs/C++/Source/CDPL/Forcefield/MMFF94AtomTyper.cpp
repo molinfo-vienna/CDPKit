@@ -27,17 +27,20 @@
 #include "StaticInit.hpp"
 
 #include <algorithm>
+#include <locale>
+#include <functional>
 
 #include <boost/bind.hpp>
 
 #include "CDPL/Forcefield/MMFF94AtomTyper.hpp"
-#include "CDPL/Forcefield/MMFF94SymbolicAtomTypePatternTable.hpp"
-#include "CDPL/Forcefield/MMFF94AromaticAtomTypeDefinitionTable.hpp"
-#include "CDPL/Forcefield/MMFF94HeavyToHydrogenAtomTypeMap.hpp"
-#include "CDPL/Forcefield/MMFF94SymbolicToNumericAtomTypeMap.hpp"
+#include "CDPL/Chem/Fragment.hpp"
+#include "CDPL/Chem/FragmentList.hpp"
 #include "CDPL/Chem/Atom.hpp"
 #include "CDPL/Chem/Bond.hpp"
 #include "CDPL/Chem/AtomFunctions.hpp"
+#include "CDPL/Chem/BondFunctions.hpp"
+#include "CDPL/Chem/MolecularGraphFunctions.hpp"
+#include "CDPL/Chem/UtilityFunctions.hpp"
 #include "CDPL/Chem/AtomType.hpp"
 #include "CDPL/Base/Exceptions.hpp"
 
@@ -46,36 +49,35 @@ using namespace CDPL;
 
 
 Forcefield::MMFF94AtomTyper::MMFF94AtomTyper(): 
-	strictMode(true), symTypePatternTable(0), aromTypeDefTable(0), hydTypeMap(0), numTypeMap(0), molGraph(0)
+	strictMode(true)
 {
 	setSymbolicAtomTypePatternTable(MMFF94SymbolicAtomTypePatternTable::get());
 	setAromaticAtomTypeDefinitionTable(MMFF94AromaticAtomTypeDefinitionTable::get());
 	setHeavyToHydrogenAtomTypeMap(MMFF94HeavyToHydrogenAtomTypeMap::get());
 	setSymbolicToNumericAtomTypeMap(MMFF94SymbolicToNumericAtomTypeMap::get());
+	setAtomTypePropertyTable(MMFF94AtomTypePropertyTable::get());
 }
 
-void Forcefield::MMFF94AtomTyper::setSymbolicAtomTypePatternTable(const MMFF94SymbolicAtomTypePatternTable& table)
+void Forcefield::MMFF94AtomTyper::setSymbolicAtomTypePatternTable(const MMFF94SymbolicAtomTypePatternTable::SharedPointer& table)
 {
 	atomTyper.clear();
 
 	std::size_t i = 0;
 
-	for (MMFF94SymbolicAtomTypePatternTable::ConstEntryIterator it = table.getEntriesBegin(), end = table.getEntriesEnd(); it != end; ++it, i++) {
+	for (MMFF94SymbolicAtomTypePatternTable::ConstEntryIterator it = table->getEntriesBegin(), end = table->getEntriesEnd(); it != end; ++it, i++) {
 		const MMFF94SymbolicAtomTypePatternTable::Entry entry = *it;
 
 		atomTyper.addPattern(entry.getPattern(), i);
 	}
 
-	symTypePatternTable = &table;
+	symTypePatternTable = table;
 }
 
-void Forcefield::MMFF94AtomTyper::setAromaticAtomTypeDefinitionTable(const MMFF94AromaticAtomTypeDefinitionTable& table)
+void Forcefield::MMFF94AtomTyper::setAromaticAtomTypeDefinitionTable(const MMFF94AromaticAtomTypeDefinitionTable::SharedPointer& table)
 {
 	aromRSizeMask.reset();
 
-	for (MMFF94AromaticAtomTypeDefinitionTable::ConstEntryIterator it = aromTypeDefTable->getEntriesBegin(), 
-			 end = aromTypeDefTable->getEntriesEnd(); it != end; ++it) {
-
+	for (MMFF94AromaticAtomTypeDefinitionTable::ConstEntryIterator it = table->getEntriesBegin(), end = table->getEntriesEnd(); it != end; ++it) {
 		std::size_t r_size = it->getRingSize();
 
 		if (r_size > aromRSizeMask.size())
@@ -84,17 +86,22 @@ void Forcefield::MMFF94AtomTyper::setAromaticAtomTypeDefinitionTable(const MMFF9
 		aromRSizeMask.set(r_size);
 	} 
 
-	aromTypeDefTable = &table;
+	aromTypeDefTable = table;
 }
 
-void Forcefield::MMFF94AtomTyper::setHeavyToHydrogenAtomTypeMap(const MMFF94HeavyToHydrogenAtomTypeMap& map)
+void Forcefield::MMFF94AtomTyper::setHeavyToHydrogenAtomTypeMap(const MMFF94HeavyToHydrogenAtomTypeMap::SharedPointer& map)
 {
-	hydTypeMap = &map;
+	hydTypeMap = map;
 }
 
-void Forcefield::MMFF94AtomTyper::setSymbolicToNumericAtomTypeMap(const MMFF94SymbolicToNumericAtomTypeMap& map)
+void Forcefield::MMFF94AtomTyper::setSymbolicToNumericAtomTypeMap(const MMFF94SymbolicToNumericAtomTypeMap::SharedPointer& map)
 {
-	numTypeMap = &map;
+	numTypeMap = map;
+}
+
+void Forcefield::MMFF94AtomTyper::setAtomTypePropertyTable(const MMFF94AtomTypePropertyTable::SharedPointer& table)
+{
+	atomTypePropTable = table;
 }
 
 void Forcefield::MMFF94AtomTyper::strictAtomTyping(bool strict)
@@ -117,7 +124,7 @@ void Forcefield::MMFF94AtomTyper::perceiveTypes(const Chem::MolecularGraph& molg
 	assignNumericAtomTypes();
 }
 
-const std::string& Forcefield::MMFF94AtomTyper::getSymbolicType(std::size_t idx)
+const std::string& Forcefield::MMFF94AtomTyper::getSymbolicType(std::size_t idx) const
 {
 	if (idx >= symTypes.size())
 		throw Base::IndexError("MMFF94AtomTyper: atom index out of bounds");
@@ -125,7 +132,7 @@ const std::string& Forcefield::MMFF94AtomTyper::getSymbolicType(std::size_t idx)
 	return symTypes[idx];
 }
 
-unsigned int Forcefield::MMFF94AtomTyper::getNumericType(std::size_t idx)
+unsigned int Forcefield::MMFF94AtomTyper::getNumericType(std::size_t idx) const
 {
 	if (idx >= numTypes.size())
 		throw Base::IndexError("MMFF94AtomTyper: atom index out of bounds");
@@ -139,7 +146,10 @@ void Forcefield::MMFF94AtomTyper::init(const Chem::MolecularGraph& molgraph)
 
 	symTypes.assign(num_atoms, "");
 	numTypes.assign(num_atoms, 0);
-	aromTypeDefIdxMap.clear();
+
+	aromRings.clear();
+	aromBondMask.resize(molgraph.getNumBonds());
+	aromBondMask.reset();
 
 	molGraph = &molgraph;
 }
@@ -169,23 +179,78 @@ void Forcefield::MMFF94AtomTyper::assignAromaticAtomTypes()
 {
 	using namespace Chem;
 
-	aromRings.extract(*molGraph);
+	perceiveAromaticRings();
 
-	for (AromaticSSSRSubset::ConstElementIterator it = aromRings.getElementsBegin(), end = aromRings.getElementsEnd(); it != end; ++it) {
-		const Fragment& ring = *it;
+	std::sort(aromRings.begin(), aromRings.end(), 
+			  boost::bind(std::greater<std::size_t>(), boost::bind(&Fragment::getNumAtoms, _1), boost::bind(&Fragment::getNumAtoms, _2)));
 
-		if (ring.getNumAtoms() < aromRSizeMask.size() && aromRSizeMask.test(ring.getNumAtoms()))
-			assignAromaticAtomTypes(ring);
+	std::for_each(aromRings.begin(), aromRings.end(), 
+				  boost::bind(&Forcefield::MMFF94AtomTyper::assignAromaticAtomTypes, this, _1));
+}
+
+void Forcefield::MMFF94AtomTyper::perceiveAromaticRings()
+{
+	using namespace Chem;
+
+	const FragmentList& sssr = *getSSSR(*molGraph);
+
+	for (bool new_aro_rings = true; new_aro_rings; ) {
+		new_aro_rings = false;
+
+		for (FragmentList::ConstElementIterator it = sssr.getElementsBegin(), end = sssr.getElementsEnd(); it != end; ++it) {
+			const Fragment& ring = *it;
+
+			if (ring.getNumAtoms() >= aromRSizeMask.size() || !aromRSizeMask.test(ring.getNumAtoms()))
+				continue;
+
+			if (std::find(aromRings.begin(), aromRings.end(), &ring) != aromRings.end())
+				continue;
+
+			if (!Chem::isAromatic(ring, *molGraph, aromBondMask))
+				continue;
+
+			std::for_each(ring.getBondsBegin(), ring.getBondsEnd(),
+						  boost::bind(&Util::BitSet::set, boost::ref(aromBondMask),
+									  boost::bind(&BondContainer::getBondIndex, molGraph, _1), true));
+			
+			aromRings.push_back(&ring);
+			new_aro_rings = true;
+		}
 	}
 }
 
-void Forcefield::MMFF94AtomTyper::assignAromaticAtomTypes(const Chem::Fragment& ring)
+void Forcefield::MMFF94AtomTyper::assignAromaticAtomTypes(const Chem::Fragment* ring)
 {
 	using namespace Chem;
-/*
-	std::size_t r_size = ring.getNumAtoms();
-	std::size_t het_atom_idx = getUniqueHeteroAtomIndex(const Chem::Fragment& ring);
-*/
+
+	std::size_t r_size = ring->getNumAtoms();
+	std::size_t het_atom_idx = getUniqueHeteroAtomIndex(*ring);
+	bool n5_anion = isN5Anion(*ring);
+	bool im_cation = isImidazoliumCation(*ring);
+
+	std::size_t num_arom_atom_defs = aromTypeDefTable->getNumEntries();
+
+	for (std::size_t i = 0; i < r_size; i++) {
+		const Atom& atom = ring->getAtom(i);
+
+		unsigned int atomic_no = getType(atom);
+		std::size_t atom_idx = molGraph->getAtomIndex(atom);
+
+		const std::string& sym_type = symTypes[atom_idx];
+		std::size_t het_atom_dist = calcHeteroAtomDistance(r_size, het_atom_idx, i);
+		bool found_entry = false;
+
+		for (std::size_t j = 0; j < 2 && !found_entry; j++) { 
+			for (std::size_t k = 0; k < num_arom_atom_defs && !found_entry; k++) {
+				const MMFF94AromaticAtomTypeDefinitionTable::Entry& entry = aromTypeDefTable->getEntry(k);
+
+				if (matchesAromTypeDefEntry(j != 0, sym_type, atomic_no, r_size, het_atom_dist, im_cation, n5_anion, entry)) {
+					symTypes[atom_idx] = entry.getAromSymbolicAtomType();
+					found_entry = true;
+				}
+			}
+		}
+	}
 }
 
 void Forcefield::MMFF94AtomTyper::assignHydrogenAtomTypes()
@@ -198,7 +263,7 @@ void Forcefield::MMFF94AtomTyper::assignHydrogenAtomTypes()
 		if (getType(atom) == AtomType::H)
 			continue;
 
-		const std::string& h_type = hydTypeMap->getHydrogenType(symTypes[i]);
+		const std::string& h_type = hydTypeMap->getEntry(symTypes[i]);
 
 		if (h_type.empty())
 			continue;
@@ -226,5 +291,154 @@ void Forcefield::MMFF94AtomTyper::assignHydrogenAtomTypes()
 void Forcefield::MMFF94AtomTyper::assignNumericAtomTypes()
 {
 	std::transform(symTypes.begin(), symTypes.end(), numTypes.begin(), 
-				   boost::bind(&MMFF94SymbolicToNumericAtomTypeMap::getNumericType, boost::ref(numTypeMap), _1));
+				   boost::bind(&MMFF94SymbolicToNumericAtomTypeMap::getEntry, boost::ref(numTypeMap), _1));
+}
+
+std::size_t Forcefield::MMFF94AtomTyper::getUniqueHeteroAtomIndex(const Chem::Fragment& ring) const
+{
+	using namespace Chem;
+
+	std::size_t r_size = ring.getNumAtoms();
+	std::size_t het_idx = r_size;
+
+	for (std::size_t i = 0; i < r_size; i++) {
+		const std::string& sym_type = symTypes[molGraph->getAtomIndex(ring.getAtom(i))];
+		const MMFF94AtomTypePropertyTable::Entry& props = atomTypePropTable->getEntry(numTypeMap->getEntry(sym_type));
+
+		if (!props || !props.hasPiLonePair())
+			continue;
+
+		if (het_idx != r_size)
+			return r_size;
+
+		het_idx = i;
+	} 
+
+	return het_idx;
+}
+
+bool Forcefield::MMFF94AtomTyper::isN5Anion(const Chem::Fragment& ring) const
+{
+	using namespace Chem;
+
+	if (ring.getNumAtoms() != 5)
+		return false;
+
+	for (Fragment::ConstAtomIterator it = ring.getAtomsBegin(), end = ring.getAtomsEnd(); it != end; ++it) {
+		const Atom& atom = *it;
+
+		if (getType(atom) == AtomType::N && getFormalCharge(atom) < 0)
+			return true;
+	} 
+
+	return false;
+}
+
+bool Forcefield::MMFF94AtomTyper::isImidazoliumCation(const Chem::Fragment& ring) const
+{
+	using namespace Chem;
+
+	if (ring.getNumAtoms() != 5)
+		return false;
+
+	for (Fragment::ConstAtomIterator ra_it = ring.getAtomsBegin(), ra_end = ring.getAtomsEnd(); ra_it != ra_end; ++ra_it) {
+		const Atom& atom = *ra_it;
+
+		if (getType(atom) != AtomType::C)
+			continue;
+
+		if (getExplicitBondCount(atom, *molGraph) != 3)
+			continue;
+
+		bool found_n_db_c1 = false;
+		bool found_n_sb_c0 = false;
+
+		Atom::ConstAtomIterator a_it = atom.getAtomsBegin();
+
+		for (Atom::ConstBondIterator b_it = atom.getBondsBegin(), b_end = atom.getBondsEnd(); b_it != b_end; ++b_it, ++a_it) {
+			const Bond& nbr_bond = *b_it;
+
+			if (!molGraph->containsBond(nbr_bond))
+				continue;
+
+			const Atom& nbr_atom = *a_it;
+
+			if (!molGraph->containsAtom(nbr_atom))
+				continue;
+
+			if (getType(nbr_atom) != AtomType::N)
+				continue;
+
+			switch (getOrder(nbr_bond)) {
+
+				case 1:
+					if (getFormalCharge(nbr_atom) == 0)
+						found_n_sb_c0  = true;
+					
+					break;
+
+				case 2:
+					if (getFormalCharge(nbr_atom) == 1 && getBondCount(nbr_atom, *molGraph, 1, AtomType::O) == 0)
+						found_n_db_c1  = true;
+					
+				default:
+					break;
+			}
+		}
+
+		if (found_n_db_c1 && found_n_sb_c0)
+			return true;
+	} 
+
+	return false;
+}
+
+std::size_t Forcefield::MMFF94AtomTyper::calcHeteroAtomDistance(std::size_t r_size, std::size_t het_atom_idx, std::size_t from_atom_idx) const
+{
+	if (r_size == het_atom_idx)
+		return r_size;
+
+	if (from_atom_idx < het_atom_idx)
+		return (std::min(het_atom_idx - from_atom_idx, r_size - het_atom_idx + from_atom_idx) + 1);
+
+	return (std::min(from_atom_idx - het_atom_idx, r_size - from_atom_idx + het_atom_idx) + 1);
+}
+		
+bool Forcefield::MMFF94AtomTyper::matchesAromTypeDefEntry(bool wc_match, const std::string& sym_type, unsigned int atomic_no, std::size_t r_size, 
+														  std::size_t het_dist, bool im_cat, bool n5_anion,
+														  const MMFF94AromaticAtomTypeDefinitionTable::Entry& entry) const
+{
+	if (atomic_no != entry.getAtomicNumber())
+		return false;
+
+	if (r_size != entry.getRingSize())
+		return false;
+
+	std::size_t entry_het_dist = entry.getHeteroAtomDistance();
+
+	if (entry_het_dist != 0 && entry_het_dist <= (r_size / 2 + 1) && het_dist != entry_het_dist)
+		return false;
+
+	if (r_size == 5 && !wc_match) {
+		if (im_cat != entry.isImidazoliumCation())
+			return false;
+
+		if (n5_anion != entry.isN5RingAnion())
+			return false;
+	}
+
+	if (!wc_match)
+		return (sym_type == entry.getOldSymbolicAtomType());
+
+	std::string::size_type wc_pos = entry.getOldSymbolicAtomType().find('*');
+
+	if (wc_pos == std::string::npos)
+		return false;
+
+	std::string::size_type first_al_char = 0;
+
+	while (!std::isalpha(sym_type[first_al_char], std::locale::classic()) && first_al_char < sym_type.size())
+		first_al_char++;
+
+	return (sym_type.find(entry.getOldSymbolicAtomType().c_str(), first_al_char, wc_pos) == first_al_char);
 }

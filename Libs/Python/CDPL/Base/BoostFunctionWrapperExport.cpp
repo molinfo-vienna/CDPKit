@@ -42,7 +42,7 @@ void CDPLPythonBase::exportBoostFunctionWrappers()
 
     BoostFunction0Export<boost::function0<void> >("VoidFunctor");
 
-    BoostFunction2Export<boost::function2<void, const DataIOBase&, double>, DataIOBase&, double, python::return_value_policy<python::return_by_value>, true>("VoidDataIOBaseFunctor");
+    BoostFunction2Export<boost::function2<void, const DataIOBase&, double>, DataIOBase&, double, python::return_value_policy<python::return_by_value> >("VoidDataIOBaseFunctor");
     BoostFunction1Export<boost::function1<void, const LookupKey&> >("VoidLookupKeyFunctor");
 
     BoostFunction2Export<boost::function2<void, const LookupKey&, const Variant&> >("VoidLookupKeyVariantFunctor");

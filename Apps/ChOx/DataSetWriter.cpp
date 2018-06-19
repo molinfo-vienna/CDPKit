@@ -155,7 +155,7 @@ void DataSetWriter::writeRecords(const std::string& def_format)
 	QString file_ext = file_info.completeSuffix();
 	QString base_name;
 
-	const DataOutputHandler<T>* handler = 0;
+	typename DataOutputHandler<T>::SharedPointer handler;
 
 	if (file_ext.isEmpty() || !(handler = DataIOManager<T>::getOutputHandlerByFileExtension(file_ext.toStdString()))) {
 		typename DataIOManager<T>::OutputHandlerIterator handlers_end = DataIOManager<T>::getOutputHandlersEnd();
@@ -163,7 +163,7 @@ void DataSetWriter::writeRecords(const std::string& def_format)
 		for (typename DataIOManager<T>::OutputHandlerIterator h_it = DataIOManager<T>::getOutputHandlersBegin(); 
 			 h_it != handlers_end; ++h_it) {
 
-			handler = &*h_it;
+			handler = *h_it;
 
 			const DataFormat& fmt_descr = handler->getDataFormat();
 

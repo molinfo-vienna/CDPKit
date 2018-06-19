@@ -26,11 +26,17 @@
  
 #include "StaticInit.hpp"
 
+#include "CDPL/Config.hpp"
+
 #include <cstring>
 #include <sstream>
 
+#if defined(HAVE_BOOST_IOSTREAMS)
+
 #include <boost/iostreams/device/array.hpp>
 #include <boost/iostreams/stream.hpp>
+
+#endif // defined(HAVE_BOOST_IOSTREAMS)
 
 #include "CDPL/Forcefield/MMFF94AromaticAtomTypeDefinitionTable.hpp"
 #include "CDPL/Base/Exceptions.hpp"
@@ -45,20 +51,20 @@ using namespace CDPL;
 namespace
 {
  
-    Forcefield::MMFF94AromaticAtomTypeDefinitionTable builtinTable;
+    Forcefield::MMFF94AromaticAtomTypeDefinitionTable::SharedPointer builtinTable(new Forcefield::MMFF94AromaticAtomTypeDefinitionTable());
 
     struct Init
     {
 
 		Init() {
-			builtinTable.loadDefaults();
+			builtinTable->loadDefaults();
 		}
 
     } init;
 }
 
 
-const Forcefield::MMFF94AromaticAtomTypeDefinitionTable* Forcefield::MMFF94AromaticAtomTypeDefinitionTable::defaultTable = &builtinTable;
+Forcefield::MMFF94AromaticAtomTypeDefinitionTable::SharedPointer Forcefield::MMFF94AromaticAtomTypeDefinitionTable::defaultTable = builtinTable;
 
 
 Forcefield::MMFF94AromaticAtomTypeDefinitionTable::Entry::Entry(const std::string& old_type, const std::string& aro_type, unsigned int atomic_no, 
@@ -86,7 +92,7 @@ std::size_t Forcefield::MMFF94AromaticAtomTypeDefinitionTable::Entry::getRingSiz
 	return ringSize;
 }
 
-std::size_t Forcefield::MMFF94AromaticAtomTypeDefinitionTable::Entry::getHeteroAtomDistance()
+std::size_t Forcefield::MMFF94AromaticAtomTypeDefinitionTable::Entry::getHeteroAtomDistance() const
 {
 	return hetAtomDist;
 }
@@ -168,9 +174,6 @@ void Forcefield::MMFF94AromaticAtomTypeDefinitionTable::load(std::istream& is)
 		if (!(line_iss >> het_dist))
 			throw Base::IOError("MMFF94AromaticAtomTypeDefinitionTable: error while reading unique hetero atom distance");
 
-		if (het_dist > r_size / 2)
-			het_dist = 0;
-
 		if (!(line_iss >> im_flag))
 			throw Base::IOError("MMFF94AromaticAtomTypeDefinitionTable: error while reading imidazolium cation flag");
 	
@@ -183,17 +186,25 @@ void Forcefield::MMFF94AromaticAtomTypeDefinitionTable::load(std::istream& is)
 
 void Forcefield::MMFF94AromaticAtomTypeDefinitionTable::loadDefaults()
 {
-    boost::iostreams::stream<boost::iostreams::array_source> is(Forcefield::MMFF94ParameterData::AROMATIC_ATOM_TYPE_DEFINITIONS, 
-																std::strlen(Forcefield::MMFF94ParameterData::AROMATIC_ATOM_TYPE_DEFINITIONS));
-    load(is);
+#if defined(HAVE_BOOST_IOSTREAMS)
+
+	boost::iostreams::stream<boost::iostreams::array_source> is(MMFF94ParameterData::AROMATIC_ATOM_TYPE_DEFINITIONS, 
+																std::strlen(MMFF94ParameterData::AROMATIC_ATOM_TYPE_DEFINITIONS));
+#else // defined(HAVE_BOOST_IOSTREAMS)
+
+	std::istringstream is(std::string(MMFF94ParameterData::AROMATIC_ATOM_TYPE_DEFINITIONS));
+
+#endif // defined(HAVE_BOOST_IOSTREAMS)
+
+	load(is);
 }
 
-void Forcefield::MMFF94AromaticAtomTypeDefinitionTable::set(const Forcefield::MMFF94AromaticAtomTypeDefinitionTable* db)
+void Forcefield::MMFF94AromaticAtomTypeDefinitionTable::set(const SharedPointer& table)
 {	
-    defaultTable = (!db ? &builtinTable : db);
+    defaultTable = (!table ? builtinTable : table);
 }
 
-const Forcefield::MMFF94AromaticAtomTypeDefinitionTable& Forcefield::MMFF94AromaticAtomTypeDefinitionTable::get()
+const Forcefield::MMFF94AromaticAtomTypeDefinitionTable::SharedPointer& Forcefield::MMFF94AromaticAtomTypeDefinitionTable::get()
 {
-    return *defaultTable;
+    return defaultTable;
 }

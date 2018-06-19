@@ -49,7 +49,7 @@ namespace AppUtils
 		for (typename Base::DataIOManager<T>::InputHandlerIterator it = Base::DataIOManager<T>::getInputHandlersBegin(),
 				 end = Base::DataIOManager<T>::getInputHandlersEnd(); it != end; ++it, ++out) {
 
-			const Base::DataFormat& fmt_desc = it->getDataFormat();
+			const Base::DataFormat& fmt_desc = (*it)->getDataFormat();
 
 			format_str.clear();
 			format_str.append(fmt_desc.getDescription());
@@ -78,7 +78,7 @@ namespace AppUtils
 		for (typename Base::DataIOManager<T>::OutputHandlerIterator it = Base::DataIOManager<T>::getOutputHandlersBegin(),
 				 end = Base::DataIOManager<T>::getOutputHandlersEnd(); it != end; ++it, ++out) {
 
-			const Base::DataFormat& fmt_desc = it->getDataFormat();
+			const Base::DataFormat& fmt_desc = (*it)->getDataFormat();
 
 			format_str.clear();
 			format_str.append(fmt_desc.getDescription());
@@ -98,7 +98,7 @@ namespace AppUtils
 	}
 
 	template <typename T>
-	const CDPL::Base::DataInputHandler<T>* getInputHandler(const std::string& path)
+	typename CDPL::Base::DataInputHandler<T>::SharedPointer getInputHandler(const std::string& path)
 	{
 		using namespace CDPL;
 
@@ -107,17 +107,17 @@ namespace AppUtils
 		for (std::size_t pos = file_name.find('.'); pos != std::string::npos; pos = file_name.find('.', pos + 1)) {
 			std::string file_ext = file_name.substr(pos + 1);
 			
-			const Base::DataInputHandler<T>* handler = Base::DataIOManager<T>::getInputHandlerByFileExtension(file_ext);
+			typename Base::DataInputHandler<T>::SharedPointer handler = Base::DataIOManager<T>::getInputHandlerByFileExtension(file_ext);
 
 			if (handler)
 				return handler;
 		}
 
-		return 0;
+		return typename CDPL::Base::DataInputHandler<T>::SharedPointer();
 	}
 
 	template <typename T>
-	const CDPL::Base::DataOutputHandler<T>* getOutputHandler(const std::string& path)
+	typename CDPL::Base::DataOutputHandler<T>::SharedPointer getOutputHandler(const std::string& path)
 	{
 		using namespace CDPL;
 
@@ -126,13 +126,13 @@ namespace AppUtils
 		for (std::size_t pos = file_name.find('.'); pos != std::string::npos; pos = file_name.find('.', pos + 1)) {
 			std::string file_ext = file_name.substr(pos + 1);
 			
-			const Base::DataOutputHandler<T>* handler = Base::DataIOManager<T>::getOutputHandlerByFileExtension(file_ext);
+			typename Base::DataOutputHandler<T>::SharedPointer handler = Base::DataIOManager<T>::getOutputHandlerByFileExtension(file_ext);
 
 			if (handler)
 				return handler;
 		}
 
-		return 0;
+		return typename CDPL::Base::DataOutputHandler<T>::SharedPointer();
 	}
 
 	std::string formatTimeDuration(std::size_t secs);

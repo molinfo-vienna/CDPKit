@@ -26,11 +26,22 @@
 
 #include "StaticInit.hpp"
 
+#include "CDPL/Config.hpp"
+
 #include <boost/unordered_set.hpp>
 #include <boost/bind.hpp>
+#include <boost/thread.hpp>
+
+#if defined(HAVE_BOOST_IOSTREAMS)
+
 #include <boost/iostreams/device/array.hpp>
 #include <boost/iostreams/stream.hpp>
-#include <boost/thread.hpp>
+
+#else // defined(HAVE_BOOST_IOSTREAMS)
+
+#include <sstream>
+
+#endif // defined(HAVE_BOOST_IOSTREAMS)
 
 #include "CDPL/Biomol/ResidueDictionary.hpp"
 #include "CDPL/Biomol/ResidueType.hpp"
@@ -54,17 +65,27 @@ namespace
     typedef boost::unordered_map<std::string, const Biomol::ResidueDictionaryData::ResidueDataEntry*> ResCodeToDataEntryMap;
     typedef boost::unordered_map<std::string, Chem::MolecularGraph::SharedPointer> StructureCache;
 
-	StdResidueSet             stdResidueSet;
-    ResCodeToDataEntryMap     resCodeToDataEntryMap;
-	StructureCache            resStructureCache;
-	Biomol::ResidueDictionary builtinDictionary;
-	boost::mutex              loadStructureMutex;
+	StdResidueSet                            stdResidueSet;
+    ResCodeToDataEntryMap                    resCodeToDataEntryMap;
+	StructureCache                           resStructureCache;
+	Biomol::ResidueDictionary::SharedPointer builtinDictionary(new Biomol::ResidueDictionary());
+	boost::mutex                             loadStructureMutex;
 
 	const Biomol::ResidueDictionary::Entry DEF_ENTRY;
 
+#if defined(HAVE_BOOST_IOSTREAMS)
+
     boost::iostreams::stream<boost::iostreams::array_source> resStructureIStream(Biomol::ResidueDictionaryData::residueStructureData, 
 																				 Biomol::ResidueDictionaryData::RESIDUE_STRUCTURE_DATA_LEN);
-    Chem::CDFMoleculeReader                                  resStructureReader(resStructureIStream);
+
+#else // defined(HAVE_BOOST_IOSTREAMS)
+
+	std::istringstream resStructureIStream(std::string(Biomol::ResidueDictionaryData::residueStructureData, 
+													   Biomol::ResidueDictionaryData::RESIDUE_STRUCTURE_DATA_LEN), std::ios_base::in | std::ios_base::binary);
+
+#endif // defined(HAVE_BOOST_IOSTREAMS)
+
+    Chem::CDFMoleculeReader resStructureReader(resStructureIStream);
 
 	const char* stdResidueList[] = {
         "UNK", "ALA", "ARG", "ASN", "ASP", "CYS", "GLN", "GLU", "GLY", "HIS", "ILE", "LEU", "LYS", "MET",
@@ -80,7 +101,7 @@ namespace
 			using namespace ResidueDictionaryData;
 
 			stdResidueSet.insert(&stdResidueList[0], &stdResidueList[sizeof(stdResidueList) / sizeof(const char*)]);
-			builtinDictionary.loadDefaultEntries();
+			builtinDictionary->loadDefaultEntries();
 
 			for (std::size_t i = 0; i < NUM_RESIDUE_ENTRIES; i++) {
 				const ResidueDataEntry& entry = residueData[i];
@@ -156,7 +177,7 @@ namespace
 }
 
 
-const Biomol::ResidueDictionary* Biomol::ResidueDictionary::dictionary = &builtinDictionary;
+Biomol::ResidueDictionary::SharedPointer Biomol::ResidueDictionary::dictionary = builtinDictionary;
 
 
 Biomol::ResidueDictionary::Entry::Entry(const std::string& code, const std::string& rep_code, const std::string& rep_by_code, bool obsolete,
@@ -276,14 +297,14 @@ void Biomol::ResidueDictionary::loadDefaultEntries()
 	}
 }
 
-void Biomol::ResidueDictionary::set(const ResidueDictionary* dict)
+void Biomol::ResidueDictionary::set(const SharedPointer& dict)
 {
-	dictionary = (!dict ? &builtinDictionary : dict);
+	dictionary = (!dict ? builtinDictionary : dict);
 }
 
-const Biomol::ResidueDictionary& Biomol::ResidueDictionary::get()
+const Biomol::ResidueDictionary::SharedPointer& Biomol::ResidueDictionary::get()
 {
-    return *dictionary;
+    return dictionary;
 }
 
 bool Biomol::ResidueDictionary::isStdResidue(const std::string& code)

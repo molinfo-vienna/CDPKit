@@ -47,7 +47,7 @@ BOOST_AUTO_TEST_CASE(PNGMolecularGraphOutputHandlerTest)
 	using namespace Chem;
 	using namespace Base;
 
-	const DataOutputHandler<MolecularGraph>* handler = DataIOManager<MolecularGraph>::getOutputHandlerByFormat(Vis::DataFormat::PNG);
+	const DataOutputHandler<MolecularGraph>::SharedPointer handler = DataIOManager<MolecularGraph>::getOutputHandlerByFormat(Vis::DataFormat::PNG);
 
 	BOOST_CHECK(handler);
 

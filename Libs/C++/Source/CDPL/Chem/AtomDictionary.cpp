@@ -549,21 +549,21 @@ namespace
     { Chem::AtomType::ANY,0, "*",  "",             0,   0,          0,  false, false, { -1 },                      0,    { 0,    0,    0 },    0,    0          }
     };
 
-    Chem::AtomDictionary              builtinDictionary;
-	const Chem::AtomDictionary::Entry DEF_ENTRY;
+    Chem::AtomDictionary::SharedPointer builtinDictionary(new Chem::AtomDictionary());
+	const Chem::AtomDictionary::Entry   DEF_ENTRY;
 
 	struct Init
 	{
 
 		Init() {
-			builtinDictionary.loadDefaultEntries();
+			builtinDictionary->loadDefaultEntries();
 		}
 
 	} init;
 }
 
 
-const Chem::AtomDictionary* Chem::AtomDictionary::dictionary = &builtinDictionary;
+Chem::AtomDictionary::SharedPointer Chem::AtomDictionary::dictionary = builtinDictionary;
 
 
 Chem::AtomDictionary::Entry::Entry():
@@ -766,14 +766,14 @@ void Chem::AtomDictionary::loadDefaultEntries()
 	}
 }
 
-void Chem::AtomDictionary::set(const AtomDictionary* dict)
+void Chem::AtomDictionary::set(const SharedPointer& dict)
 {
-	dictionary = (!dict ? &builtinDictionary : dict);
+	dictionary = (!dict ? builtinDictionary : dict);
 }
 
-const Chem::AtomDictionary& Chem::AtomDictionary::get()
+const Chem::AtomDictionary::SharedPointer& Chem::AtomDictionary::get()
 {
-    return *dictionary;
+    return dictionary;
 }
 
 const std::string& Chem::AtomDictionary::getSymbol(unsigned int type, std::size_t iso) 

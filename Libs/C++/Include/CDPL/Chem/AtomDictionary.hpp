@@ -151,9 +151,9 @@ namespace CDPL
 			
 			void loadDefaultEntries();
 
-			static void set(const AtomDictionary* dict);
+			static void set(const SharedPointer& dict);
 
-			static const AtomDictionary& get();
+			static const SharedPointer& get();
 
 			/**
 			 * \brief Returns the symbol that is associated with the specified atom type and isotope.
@@ -321,8 +321,8 @@ namespace CDPL
 			static bool isNobleGas(unsigned int type);
 
 		  private:
-			static const AtomDictionary* dictionary;
-			EntryLookupTable             entries;
+			static SharedPointer dictionary;
+			EntryLookupTable     entries;
 		};
 	};
 

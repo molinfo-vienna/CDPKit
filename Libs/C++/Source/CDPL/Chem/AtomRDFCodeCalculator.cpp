@@ -50,5 +50,5 @@ void CDPL::Chem::AtomRDFCodeCalculator::calculate(const AtomContainer& cntnr, Ma
 {
 	rdf_code.resize(getNumSteps() + 1, false);
 
-	RDFCodeCalculator::calculate(cntnr.getAtomsBegin(), cntnr.getAtomsEnd(), rdf_code);
+	RDFCodeCalculator<Atom>::calculate(cntnr.getAtomsBegin(), cntnr.getAtomsEnd(), rdf_code);
 }

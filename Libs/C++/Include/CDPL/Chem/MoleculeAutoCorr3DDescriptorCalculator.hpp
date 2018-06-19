@@ -31,6 +31,8 @@
 #ifndef CDPL_CHEM_MOLECULEAUTOCORR3DDESCRIPTORCALCULATOR_HPP
 #define CDPL_CHEM_MOLECULEAUTOCORR3DDESCRIPTORCALCULATOR_HPP
 
+#include <boost/function.hpp>
+
 #include "CDPL/Chem/APIPrefix.hpp"
 #include "CDPL/Chem/AutoCorrelation3DVectorCalculator.hpp"
 #include "CDPL/Math/Vector.hpp"
@@ -60,8 +62,8 @@ namespace CDPL
 
 		public:
 			typedef AutoCorr3DVectorCalculator::Entity3DCoordinatesFunction Atom3DCoordinatesFunction;
-			typedef AutoCorr3DVectorCalculator::EntityPairWeightFunction AtomPairWeightFunction;
-	
+			typedef boost::function3<double, const Atom&, const Atom&, unsigned int> AtomPairWeightFunction;
+		
 			/**
 			 * \brief Constructs the \c %MoleculeAutoCorr3DDescriptorCalculator instance.
 			 */

@@ -47,7 +47,7 @@ BOOST_AUTO_TEST_CASE(PSReactionOutputHandlerTest)
 	using namespace Chem;
 	using namespace Base;
 
-	const DataOutputHandler<Reaction>* handler = DataIOManager<Reaction>::getOutputHandlerByFormat(Vis::DataFormat::PS);
+	const DataOutputHandler<Reaction>::SharedPointer handler = DataIOManager<Reaction>::getOutputHandlerByFormat(Vis::DataFormat::PS);
 
 	BOOST_CHECK(handler);
 

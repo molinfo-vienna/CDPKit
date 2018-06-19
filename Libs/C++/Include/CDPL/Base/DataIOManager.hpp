@@ -38,7 +38,6 @@
 #include <cstddef>
 
 #include <boost/bind.hpp>
-#include <boost/iterator/indirect_iterator.hpp>
 #include <boost/thread.hpp>
 
 #include "CDPL/Base/APIPrefix.hpp"
@@ -112,33 +111,39 @@ namespace CDPL
 		class DataIOManager
 		{
 
-			typedef std::vector<const DataInputHandler<T>*> InputHandlerList;
-			typedef std::vector<const DataOutputHandler<T>*> OutputHandlerList;
+		public:
+			typedef DataInputHandler<T> InputHandlerType;
+			typedef DataOutputHandler<T> OutputHandlerType;
+	
+			typedef typename InputHandlerType::SharedPointer InputHandlerPointer;
+			typedef typename OutputHandlerType::SharedPointer OutputHandlerPointer;
+
+		private:
+			typedef std::vector<InputHandlerPointer> InputHandlerList;
+			typedef std::vector<OutputHandlerPointer> OutputHandlerList;
 
 		public:
 			/**
 			 * \brief An iterator used to iterate over the list of registered input handlers.
 			 */
-			typedef typename boost::indirect_iterator<typename InputHandlerList::iterator, 
-													  const DataInputHandler<T> > InputHandlerIterator;
+			typedef typename InputHandlerList::iterator InputHandlerIterator;
 
 			/**
 			 * \brief An iterator used to iterate over the list of registered output handlers.
 			 */
-			typedef typename boost::indirect_iterator<typename OutputHandlerList::iterator, 
-													  const DataOutputHandler<T> > OutputHandlerIterator;
+			typedef typename OutputHandlerList::iterator OutputHandlerIterator;
 
 			/**
 			 * \brief Registers the specified Base::DataInputHandler implementation instance as an input handler.
 			 * \param handler The Base::DataInputHandler implementation instance to register.
 			 */
-			static void registerInputHandler(const DataInputHandler<T>& handler);
+			static void registerInputHandler(const InputHandlerPointer& handler);
 
 			/**
 			 * \brief Registers the specified Base::DataOutputHandler implementation instanceas an output handler.
 			 * \param handler The Base::DataOutputHandler implementation instance to register.
 			 */
-			static void registerOutputHandler(const DataOutputHandler<T>& handler);
+			static void registerOutputHandler(const OutputHandlerPointer& handler);
 
 			/**
 			 * \brief Unregisters the input handler for the specified data format.
@@ -169,14 +174,14 @@ namespace CDPL
 			 * \param handler The Base::DataInputHandler implementation instance to unregister.
 			 * \return \c true if the handler was found and has been unregistered, and \c false otherwise.
 			 */
-			static bool unregisterInputHandler(const DataInputHandler<T>& handler);
+			static bool unregisterInputHandler(const InputHandlerPointer& handler);
 
 			/**
 			 * \brief Unregisters the specified Base::DataOutputHandler implementation instance.
 			 * \param handler The Base::DataOutputHandler implementation instance to unregister.
 			 * \return \c true if the handler was found and has been unregistered, and \c false otherwise.
 			 */
-			static bool unregisterOutputHandler(const DataOutputHandler<T>& handler);
+			static bool unregisterOutputHandler(const OutputHandlerPointer& handler);
 
 			/**
 			 * \brief Unregisters the input handler with the specified index.
@@ -224,7 +229,7 @@ namespace CDPL
 			 * \return A reference to the input handler at the specified index.
 			 * \throw Base::IndexError if \a idx is out of bounds.
 			 */
-			static const DataInputHandler<T>& getInputHandler(std::size_t idx);
+			static const InputHandlerPointer& getInputHandler(std::size_t idx);
 
 			/**
 			 * \brief Returns a reference to the registered output handler with the specified index.
@@ -232,7 +237,7 @@ namespace CDPL
 			 * \return A reference to the output handler with the specified index.
 			 * \throw Base::IndexError if \a idx is out of bounds.
 			 */
-			static const DataOutputHandler<T>& getOutputHandler(std::size_t idx);
+			static const OutputHandlerPointer& getOutputHandler(std::size_t idx);
 
 			/**
 			 * \brief Returns an iterator pointing to the beginning of the list of registered input handlers.
@@ -263,7 +268,7 @@ namespace CDPL
 			 * \param fmt Specifies the data format that is associated with the requested input handler.
 			 * \return A pointer to an input handler for the specified data format, or \e null if a suitable handler is not available.
 			 */
-			static const DataInputHandler<T>* getInputHandlerByFormat(const DataFormat& fmt);
+			static InputHandlerPointer getInputHandlerByFormat(const DataFormat& fmt);
 
 			/**
 			 * \brief Returns a pointer to a registered input handler for the data format with the specified name.
@@ -272,7 +277,7 @@ namespace CDPL
 			 *         a suitable handler is not available.
 			 * \note The matching of the name is not case-sensitive.
 			 */
-			static const DataInputHandler<T>* getInputHandlerByName(const std::string& name);
+			static InputHandlerPointer getInputHandlerByName(const std::string& name);
 
 			/**
 			 * \brief Returns a pointer to a registered input handler for the data format with the specified file extension.
@@ -282,7 +287,7 @@ namespace CDPL
 			 *         suitable handler is not available.
 			 * \note The matching of the file extension is not case-sensitive.
 			 */
-			static const DataInputHandler<T>* getInputHandlerByFileExtension(const std::string& file_ext);
+			static InputHandlerPointer getInputHandlerByFileExtension(const std::string& file_ext);
 
 			/**
 			 * \brief Returns a pointer to a registered input handler for the data format with the specified mime-type.
@@ -292,14 +297,14 @@ namespace CDPL
 			 *         suitable handler is not available.
 			 * \note The matching of the mime-type is not case-sensitive.
 			 */
-			static const DataInputHandler<T>* getInputHandlerByMimeType(const std::string& mime_type);
+			static InputHandlerPointer getInputHandlerByMimeType(const std::string& mime_type);
 
 			/**
 			 * \brief Returns a pointer to a registered output handler for the specified data format.
 			 * \param fmt Specifies the data format that is associated with the requested output handler.
 			 * \return A pointer to an output handler for the specified data format, or \e null if a suitable handler is not available.
 			 */
-			static const DataOutputHandler<T>* getOutputHandlerByFormat(const DataFormat& fmt);
+			static OutputHandlerPointer getOutputHandlerByFormat(const DataFormat& fmt);
 
 			/**
 			 * \brief Returns a pointer to a registered output handler for the data format with the specified name.
@@ -308,7 +313,7 @@ namespace CDPL
 			 *         a suitable handler is not available.
 			 * \note The matching of the name is not case-sensitive.
 			 */
-			static const DataOutputHandler<T>* getOutputHandlerByName(const std::string& name);
+			static OutputHandlerPointer getOutputHandlerByName(const std::string& name);
 
 			/**
 			 * \brief Returns a pointer to a registered output handler for the data format with the specified file extension.
@@ -318,7 +323,7 @@ namespace CDPL
 			 *         suitable handler is not available.
 			 * \note The matching of the file extension is not case-sensitive.
 			 */	
-			static const DataOutputHandler<T>* getOutputHandlerByFileExtension(const std::string& file_ext);
+			static OutputHandlerPointer getOutputHandlerByFileExtension(const std::string& file_ext);
 
 			/**
 			 * \brief Returns a pointer to a registered output handler for the data format with the specified mime-type.
@@ -328,7 +333,7 @@ namespace CDPL
 			 *         suitable handler is not available.
 			 * \note The matching of the mime-type is not case-sensitive.
 			 */
-			static const DataOutputHandler<T>* getOutputHandlerByMimeType(const std::string& mime_type);
+			static OutputHandlerPointer getOutputHandlerByMimeType(const std::string& mime_type);
 
 		private:
 			DataIOManager() {}
@@ -396,15 +401,15 @@ CDPL::Base::DataIOManager<T>& CDPL::Base::DataIOManager<T>::getInstance()
 }
 
 template <typename T>
-inline void CDPL::Base::DataIOManager<T>::registerInputHandler(const DataInputHandler<T>& handler)
+inline void CDPL::Base::DataIOManager<T>::registerInputHandler(const InputHandlerPointer& handler)
 {
-	getInstance().inputHandlers.push_back(&handler);
+	getInstance().inputHandlers.push_back(handler);
 }
 
 template <typename T>
-inline void CDPL::Base::DataIOManager<T>::registerOutputHandler(const DataOutputHandler<T>& handler)
+inline void CDPL::Base::DataIOManager<T>::registerOutputHandler(const OutputHandlerPointer& handler)
 {
-	getInstance().outputHandlers.push_back(&handler);
+	getInstance().outputHandlers.push_back(handler);
 }
 
 template <typename T>
@@ -440,11 +445,11 @@ bool CDPL::Base::DataIOManager<T>::unregisterOutputHandler(const DataFormat& fmt
 }
 
 template <typename T>
-bool CDPL::Base::DataIOManager<T>::unregisterInputHandler(const DataInputHandler<T>& handler)
+bool CDPL::Base::DataIOManager<T>::unregisterInputHandler(const InputHandlerPointer& handler)
 {
 	InputHandlerList& handlers = getInstance().inputHandlers;
 
-	typename InputHandlerList::iterator it = std::find(handlers.begin(), handlers.end(), &handler);
+	typename InputHandlerList::iterator it = std::find(handlers.begin(), handlers.end(), handler);
 
 	if (it != handlers.end()) {
 		handlers.erase(it);
@@ -455,11 +460,11 @@ bool CDPL::Base::DataIOManager<T>::unregisterInputHandler(const DataInputHandler
 }
 
 template <typename T>
-bool CDPL::Base::DataIOManager<T>::unregisterOutputHandler(const DataOutputHandler<T>& handler)
+bool CDPL::Base::DataIOManager<T>::unregisterOutputHandler(const OutputHandlerPointer& handler)
 {
 	OutputHandlerList& handlers = getInstance().outputHandlers;
 
-	typename OutputHandlerList::iterator it = std::find(handlers.begin(), handlers.end(), &handler);
+	typename OutputHandlerList::iterator it = std::find(handlers.begin(), handlers.end(), handler);
 
 	if (it != handlers.end()) {
 		handlers.erase(it);
@@ -497,12 +502,10 @@ CDPL::Base::DataIOManager<T>::unregisterInputHandler(const InputHandlerIterator&
 {
 	InputHandlerList& handlers = getInstance().inputHandlers;
 
-	const typename InputHandlerList::iterator& base = it.base();
-
-	if (base < handlers.begin() || base >= handlers.end())
+	if (it < handlers.begin() || it >= handlers.end())
 		throw RangeError("DataIOManager: input-handler iterator out of valid range");
 
-	return handlers.erase(base);
+	return handlers.erase(it);
 }
 
 template <typename T>
@@ -511,12 +514,10 @@ CDPL::Base::DataIOManager<T>::unregisterOutputHandler(const OutputHandlerIterato
 {
 	OutputHandlerList& handlers = getInstance().outputHandlers;
 
-	const typename OutputHandlerList::iterator& base = it.base();
-
-	if (base < handlers.begin() || base >= handlers.end())
+	if (it < handlers.begin() || it >= handlers.end())
 		throw RangeError("DataIOManager: output-handler iterator out of valid range");
 
-	return handlers.erase(base);
+	return handlers.erase(it);
 }
 
 template <typename T>
@@ -532,25 +533,25 @@ inline std::size_t CDPL::Base::DataIOManager<T>::getNumOutputHandlers()
 }
 
 template <typename T>
-const CDPL::Base::DataInputHandler<T>& CDPL::Base::DataIOManager<T>::getInputHandler(std::size_t idx)
+const typename CDPL::Base::DataInputHandler<T>::SharedPointer& CDPL::Base::DataIOManager<T>::getInputHandler(std::size_t idx)
 {
 	const InputHandlerList& handlers = getInstance().inputHandlers;
 
 	if (idx >= handlers.size())
 		throw IndexError("DataIOManager: handler index out of bounds");
 
-	return *handlers[idx];
+	return handlers[idx];
 }
 
 template <typename T>
-const CDPL::Base::DataOutputHandler<T>& CDPL::Base::DataIOManager<T>::getOutputHandler(std::size_t idx)
+const typename CDPL::Base::DataOutputHandler<T>::SharedPointer& CDPL::Base::DataIOManager<T>::getOutputHandler(std::size_t idx)
 {
 	const OutputHandlerList& handlers = getInstance().outputHandlers;
 
 	if (idx >= handlers.size())
 		throw IndexError("DataIOManager: handler index out of bounds");
 
-	return *handlers[idx];
+	return handlers[idx];
 }
 
 template <typename T>
@@ -578,7 +579,7 @@ inline typename CDPL::Base::DataIOManager<T>::OutputHandlerIterator CDPL::Base::
 }
 
 template <typename T>
-const CDPL::Base::DataInputHandler<T>* CDPL::Base::DataIOManager<T>::getInputHandlerByFormat(const DataFormat& fmt)
+typename CDPL::Base::DataInputHandler<T>::SharedPointer CDPL::Base::DataIOManager<T>::getInputHandlerByFormat(const DataFormat& fmt)
 {
 	const InputHandlerList& handlers = getInstance().inputHandlers;
 
@@ -589,7 +590,7 @@ const CDPL::Base::DataInputHandler<T>* CDPL::Base::DataIOManager<T>::getInputHan
 }
 
 template <typename T>
-const CDPL::Base::DataInputHandler<T>* CDPL::Base::DataIOManager<T>::getInputHandlerByFileExtension(const std::string& file_ext)
+typename CDPL::Base::DataInputHandler<T>::SharedPointer CDPL::Base::DataIOManager<T>::getInputHandlerByFileExtension(const std::string& file_ext)
 {
 	const InputHandlerList& handlers = getInstance().inputHandlers;
 
@@ -601,7 +602,7 @@ const CDPL::Base::DataInputHandler<T>* CDPL::Base::DataIOManager<T>::getInputHan
 }
 
 template <typename T>
-const CDPL::Base::DataInputHandler<T>* CDPL::Base::DataIOManager<T>::getInputHandlerByName(const std::string& name)
+typename CDPL::Base::DataInputHandler<T>::SharedPointer CDPL::Base::DataIOManager<T>::getInputHandlerByName(const std::string& name)
 {
 	const InputHandlerList& handlers = getInstance().inputHandlers;
 
@@ -613,7 +614,7 @@ const CDPL::Base::DataInputHandler<T>* CDPL::Base::DataIOManager<T>::getInputHan
 }
 
 template <typename T>
-const CDPL::Base::DataInputHandler<T>* CDPL::Base::DataIOManager<T>::getInputHandlerByMimeType(const std::string& mime_type)
+typename CDPL::Base::DataInputHandler<T>::SharedPointer CDPL::Base::DataIOManager<T>::getInputHandlerByMimeType(const std::string& mime_type)
 {
 	const InputHandlerList& handlers = getInstance().inputHandlers;
 
@@ -625,7 +626,7 @@ const CDPL::Base::DataInputHandler<T>* CDPL::Base::DataIOManager<T>::getInputHan
 }
 
 template <typename T>
-const CDPL::Base::DataOutputHandler<T>* CDPL::Base::DataIOManager<T>::getOutputHandlerByFormat(const DataFormat& fmt)
+typename CDPL::Base::DataOutputHandler<T>::SharedPointer CDPL::Base::DataIOManager<T>::getOutputHandlerByFormat(const DataFormat& fmt)
 {
 	const OutputHandlerList& handlers = getInstance().outputHandlers;
 
@@ -636,7 +637,7 @@ const CDPL::Base::DataOutputHandler<T>* CDPL::Base::DataIOManager<T>::getOutputH
 }
 
 template <typename T>
-const CDPL::Base::DataOutputHandler<T>* CDPL::Base::DataIOManager<T>::getOutputHandlerByName(const std::string& name)
+typename CDPL::Base::DataOutputHandler<T>::SharedPointer CDPL::Base::DataIOManager<T>::getOutputHandlerByName(const std::string& name)
 {
 	const OutputHandlerList& handlers = getInstance().outputHandlers;
 
@@ -648,7 +649,7 @@ const CDPL::Base::DataOutputHandler<T>* CDPL::Base::DataIOManager<T>::getOutputH
 }
 
 template <typename T>
-const CDPL::Base::DataOutputHandler<T>* CDPL::Base::DataIOManager<T>::getOutputHandlerByFileExtension(const std::string& file_ext)
+typename CDPL::Base::DataOutputHandler<T>::SharedPointer CDPL::Base::DataIOManager<T>::getOutputHandlerByFileExtension(const std::string& file_ext)
 {
 	const OutputHandlerList& handlers = getInstance().outputHandlers;
 
@@ -660,7 +661,7 @@ const CDPL::Base::DataOutputHandler<T>* CDPL::Base::DataIOManager<T>::getOutputH
 }
 
 template <typename T>
-const CDPL::Base::DataOutputHandler<T>* CDPL::Base::DataIOManager<T>::getOutputHandlerByMimeType(const std::string& mime_type)
+typename CDPL::Base::DataOutputHandler<T>::SharedPointer CDPL::Base::DataIOManager<T>::getOutputHandlerByMimeType(const std::string& mime_type)
 {
 	const OutputHandlerList& handlers = getInstance().outputHandlers;
 

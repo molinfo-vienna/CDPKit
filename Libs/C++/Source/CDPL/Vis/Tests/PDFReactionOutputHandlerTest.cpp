@@ -47,7 +47,7 @@ BOOST_AUTO_TEST_CASE(PDFReactionOutputHandlerTest)
 	using namespace Chem;
 	using namespace Base;
 
-	const DataOutputHandler<Reaction>* handler = DataIOManager<Reaction>::getOutputHandlerByFormat(Vis::DataFormat::PDF);
+	const DataOutputHandler<Reaction>::SharedPointer handler = DataIOManager<Reaction>::getOutputHandlerByFormat(Vis::DataFormat::PDF);
 
 	BOOST_CHECK(handler);
 

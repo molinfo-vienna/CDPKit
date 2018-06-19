@@ -36,18 +36,13 @@
 
 #include "CDPL/Pharm/ScreeningDBCreator.hpp"
 #include "CDPL/Util/CompoundDataReader.hpp"
+#include "CDPL/Base/DataInputHandler.hpp"
 
 #include "Lib/CmdLineBase.hpp"
 
 
 namespace CDPL
 {
-
-	namespace Base
-	{
-
-		template <typename T> class DataInputHandler;
-	}
 
 	namespace Chem
 	{
@@ -68,6 +63,7 @@ namespace PSDCreate
 
     private:
 		typedef CDPL::Base::DataInputHandler<CDPL::Chem::Molecule> InputHandler;
+		typedef InputHandler::SharedPointer InputHandlerPtr;
 
 		const char* getProgName() const;
 		const char* getProgCopyright() const;
@@ -99,7 +95,7 @@ namespace PSDCreate
 
 		std::string getCreationModeString() const;
 
-		const InputHandler* getInputHandler(const std::string& file_path) const;
+		InputHandlerPtr getInputHandler(const std::string& file_path) const;
 
 		void addOptionLongDescriptions();
 
@@ -119,7 +115,7 @@ namespace PSDCreate
 		bool                   multiThreading;
 		std::size_t            numThreads;
 		CreationMode           creationMode;
-		const InputHandler*    inputHandler;
+		InputHandlerPtr        inputHandler;
 		CompMoleculeReader     inputReader;   
 		boost::mutex           mutex;
 		std::string            errorMessage;

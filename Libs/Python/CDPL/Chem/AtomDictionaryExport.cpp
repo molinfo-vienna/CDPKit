@@ -108,23 +108,6 @@ namespace
 
 		return entries;
 	}
-
-	void setDictionary(boost::python::object dict_obj)
-	{	
-		using namespace boost;
-		using namespace CDPL;
-
-		static python::handle<> dict_handle;
-
-		if (dict_obj.ptr() == Py_None) {
-			Chem::AtomDictionary::set(0);
-			dict_handle = python::handle<>();
-			return;
-		}
-
-		Chem::AtomDictionary::set(python::extract<const CDPL::Chem::AtomDictionary*>(dict_obj));
-		dict_handle = python::handle<>(python::borrowed(dict_obj.ptr()));
-	}
 }
 
 
@@ -149,7 +132,7 @@ void CDPLPythonChem::exportAtomDictionary()
 		.def("assign", CDPLPythonBase::copyAssOp(&Chem::AtomDictionary::operator=), (python::arg("self"), python::arg("dict")), python::return_self<>())
 		.add_property("numEntries", &Chem::AtomDictionary::getNumEntries)
 		.add_property("entries", &getEntries)
-		.def("set", &setDictionary, python::arg("dict"))
+		.def("set", &Chem::AtomDictionary::set, python::arg("dict"))
 		.staticmethod("set")
 		.def("get", &Chem::AtomDictionary::get, python::return_value_policy<python::reference_existing_object>())
 		.staticmethod("get")

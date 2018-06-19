@@ -103,13 +103,13 @@ namespace CDPL
 
 			void loadDefaults();
 
-			static void set(const MMFF94SymbolicAtomTypePatternTable* table);
+			static void set(const SharedPointer& table);
 
-			static const MMFF94SymbolicAtomTypePatternTable& get();
+			static const SharedPointer& get();
 
 		  private:
-			static const MMFF94SymbolicAtomTypePatternTable* defaultTable;
-			DataStorage                                      entries;
+			static SharedPointer defaultTable;
+			DataStorage          entries;
 		};
     
 		/**

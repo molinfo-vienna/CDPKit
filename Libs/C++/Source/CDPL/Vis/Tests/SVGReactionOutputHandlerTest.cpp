@@ -47,7 +47,7 @@ BOOST_AUTO_TEST_CASE(SVGReactionOutputHandlerTest)
 	using namespace Chem;
 	using namespace Base;
 
-	const DataOutputHandler<Reaction>* handler = DataIOManager<Reaction>::getOutputHandlerByFormat(Vis::DataFormat::SVG);
+	const DataOutputHandler<Reaction>::SharedPointer handler = DataIOManager<Reaction>::getOutputHandlerByFormat(Vis::DataFormat::SVG);
 
 	BOOST_CHECK(handler);
 

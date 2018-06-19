@@ -9,6 +9,7 @@ SET(cdpl-forcefield_LIB_SRCS
     MMFF94HeavyToHydrogenAtomTypeMap.cpp
     MMFF94SymbolicToNumericAtomTypeMap.cpp
     MMFF94AromaticAtomTypeDefinitionTable.cpp
+    MMFF94AtomTypePropertyTable.cpp
 
     Utilities.cpp
    )

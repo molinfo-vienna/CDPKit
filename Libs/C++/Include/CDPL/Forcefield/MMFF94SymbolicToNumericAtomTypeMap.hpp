@@ -66,7 +66,7 @@ namespace CDPL
 
 	    void addEntry(const std::string& sym_type, unsigned int num_type);
 
-	    unsigned int getNumericType(const std::string& sym_type) const;
+	    unsigned int getEntry(const std::string& sym_type) const;
 
 	    void clear();
 
@@ -78,13 +78,13 @@ namespace CDPL
 
 	    void loadDefaults();
 
-	    static void set(const MMFF94SymbolicToNumericAtomTypeMap* table);
+	    static void set(const SharedPointer& map);
 
-	    static const MMFF94SymbolicToNumericAtomTypeMap& get();
+	    static const SharedPointer& get();
 
 	  private:
-	    static const MMFF94SymbolicToNumericAtomTypeMap* defaultTable;
-	    DataStorage                                      entries;
+	    static SharedPointer defaultMap;
+	    DataStorage          entries;
 	};
     
 	/**

@@ -26,6 +26,8 @@
 
 #include "StaticInit.hpp"
 
+#include <boost/bind.hpp>
+
 #include "CDPL/Pharm/PharmacophoreAutoCorr3DDescriptorCalculator.hpp"
 #include "CDPL/Pharm/FeatureContainer.hpp"
 #include "CDPL/Pharm/Feature.hpp"
@@ -43,22 +45,18 @@ namespace
 	struct FeaturePairWeightFunc
 	{
 
-		FeaturePairWeightFunc(unsigned int curr_ftr_type): currFtrType(curr_ftr_type) {}
-	
-		double operator()(const Pharm::Feature& ftr1, const Pharm::Feature& ftr2) const {
+		double operator()(const Pharm::Feature& ftr1, const Pharm::Feature& ftr2, unsigned int slot_ftr_type) const {
 			unsigned int ftr_type1 = getType(ftr1);
 			unsigned int ftr_type2 = getType(ftr2);
 
-			if (ftr_type1 == currFtrType && ftr_type2 == currFtrType)
+			if (ftr_type1 == slot_ftr_type && ftr_type2 == slot_ftr_type)
 				return 2;
 
-			if (ftr_type1 == currFtrType || ftr_type2 == currFtrType)
+			if (ftr_type1 == slot_ftr_type || ftr_type2 == slot_ftr_type)
 				return 1;
 
 			return 0;
 		}
-
-		unsigned int currFtrType;
 	};
 
 	unsigned int FEATURE_TYPES[] = {
@@ -130,12 +128,11 @@ void CDPL::Pharm::PharmacophoreAutoCorr3DDescriptorCalculator::calculate(const F
 
 	descr.resize(sub_descr_size * num_ftr_types, false);
 
-	if (weightFunc)
-		autoCorrCalculator.setEntityPairWeightFunction(weightFunc);
-
 	for (std::size_t i = 0; i < num_ftr_types; i++) {
-		if (!weightFunc)
-			autoCorrCalculator.setEntityPairWeightFunction(FeaturePairWeightFunc(FEATURE_TYPES[i]));
+		if (weightFunc)
+			autoCorrCalculator.setEntityPairWeightFunction(boost::bind<double>(weightFunc, _1, _2, FEATURE_TYPES[i]));
+		else
+			autoCorrCalculator.setEntityPairWeightFunction(boost::bind<double>(FeaturePairWeightFunc(), _1, _2, FEATURE_TYPES[i]));
 
 		Math::VectorRange<Math::DVector> sub_descr(descr, Math::range(i * sub_descr_size, (i + 1) * sub_descr_size));
 

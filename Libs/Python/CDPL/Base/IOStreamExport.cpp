@@ -46,7 +46,7 @@ namespace
 	public:
 		FileIOStream(const char* file_name, const std::string& mode_str): 
 			std::fstream(file_name, parseOpenModeFlags(mode_str)), 
-			IOStream<std::fstream>(mode_str, parseOpenModeFlags(mode_str)), fileName(file_name) {
+			CDPLPythonBase::IOStream<std::fstream>(mode_str, parseOpenModeFlags(mode_str)), fileName(file_name) {
 
 			if (good())
 				return;
@@ -56,7 +56,7 @@ namespace
 
 		FileIOStream(const char* file_name, std::ios_base::openmode mode): 
 			std::fstream(file_name, mode), 
-			IOStream<std::fstream>("", mode), fileName(file_name) {
+			CDPLPythonBase::IOStream<std::fstream>("", mode), fileName(file_name) {
 			
 			if (good())
 				return;
@@ -118,7 +118,7 @@ namespace
 	public:
 		StringIOStream(const std::string& init_str, const std::string& mode_str): 
 			std::stringstream(init_str, parseOpenModeFlags(mode_str)), 
-			IOStream<std::stringstream>(mode_str, parseOpenModeFlags(mode_str)) {}
+			CDPLPythonBase::IOStream<std::stringstream>(mode_str, parseOpenModeFlags(mode_str)) {}
 
 		StringIOStream(const std::string& init_str, std::ios_base::openmode mode): 
 			std::stringstream(init_str, mode), IOStream<std::stringstream>("", mode) {}

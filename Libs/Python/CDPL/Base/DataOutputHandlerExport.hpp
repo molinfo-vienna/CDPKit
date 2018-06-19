@@ -28,6 +28,7 @@
 #define CDPL_PYTHON_BASE_DATAOUTPUTHANDLEREXPORT_HPP
 
 #include <boost/python.hpp>
+#include <boost/shared_ptr.hpp>
 
 #include "CDPL/Base/DataOutputHandler.hpp"
 #include "CDPL/Base/DataFormat.hpp"
@@ -45,6 +46,7 @@ namespace CDPLPythonBase
 	{
 
 		typedef typename CDPL::Base::DataOutputHandler<T>::WriterType WriterType;
+		typedef boost::shared_ptr<DataOutputHandlerWrapper> SharedPointer;
 
 		const CDPL::Base::DataFormat& getDataFormat() const {
 			return this->get_override("getDataFormat")();
@@ -72,7 +74,7 @@ namespace CDPLPythonBase
 			typename HandlerType::WriterType::SharedPointer (HandlerType::*createWriterFunc1)(std::istream&) const;
 			typename HandlerType::WriterType::SharedPointer (HandlerType::*createWriterFunc2)(const std::string&, std::ios_base::openmode) const;
 
-			python::class_<DataOutputHandlerWrapper<T>, boost::noncopyable>(name, python::no_init)
+            python::class_<DataOutputHandlerWrapper<T>, typename DataOutputHandlerWrapper<T>::SharedPointer, boost::noncopyable>(name, python::no_init)
 				.def(python::init<>(python::arg("self")))
 				.def(ObjectIdentityCheckVisitor<HandlerType>())
 				.def("getDataFormat", python::pure_virtual(&HandlerType::getDataFormat),
@@ -82,6 +84,8 @@ namespace CDPLPythonBase
 				.def("createWriter", python::pure_virtual(createWriterFunc2), 
 					 (python::arg("self"), python::arg("file_name"), python::arg("mode") = 
 					  std::ios_base::in | std::ios_base::out | std::ios_base::trunc | std::ios_base::binary));
+
+			python::register_ptr_to_python<typename Base::DataOutputHandler<T>::SharedPointer>();
 		}
 	};
 }

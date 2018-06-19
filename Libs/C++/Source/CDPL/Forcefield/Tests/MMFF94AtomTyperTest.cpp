@@ -44,7 +44,7 @@ BOOST_AUTO_TEST_CASE(MMFF94AtomTyperTest)
 	using namespace CDPL;
 
 	Chem::BasicMolecule mol;
-	Util::FileDataReader<Chem::MOL2MoleculeReader> mol_reader(std::getenv("CDPKIT_TEST_DATA_DIR") + std::string("/MMFF94/MMFF94_dative.mol2"));
+	Util::FileDataReader<Chem::MOL2MoleculeReader> mol_reader(std::getenv("CDPKIT_TEST_DATA_DIR") + std::string("/MMFF94/MMFF94_hypervalent.mol2"));
 
 	TestUtils::OptimolLogReader log_reader(std::getenv("CDPKIT_TEST_DATA_DIR") + std::string("/MMFF94/MMFF94_opti.log"));
 	TestUtils::OptimolLogReader::SymbolicAtomTypeArray sym_types;

@@ -223,7 +223,7 @@ R"PARAMDATA(
     [#9-:1]                                              F-      FLUORIDE ANION
     [#17-:1]                                             CL-     CHLORIDE ANION
     [#35-:1]                                             BR-     BROMIDE ANION
-    [#17X4:1](=,-[#8X1])(=,-[#8X1])(=,-[#8X1])=,-[#8X1]  CLO4    CHLORINE IN PERCHLORATE ANION, CLO4(-)
+    [#17D4:1](=,-[#8X1])(=,-[#8X1])(=,-[#8X1])=,-[#8X1]  CLO4    CHLORINE IN PERCHLORATE ANION, CLO4(-)
 
 *   Metals
     [#26+2:1]                                            FE+2    IRON +2 CATION

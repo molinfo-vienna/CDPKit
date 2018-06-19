@@ -91,40 +91,23 @@ namespace
 			using namespace Grid;
 			using namespace Chem;
 
-		
-			static const CDFDRegularGridInputHandler    cdfDRegularGridInputHandler;
-			static const CDFDRegularGridSetInputHandler cdfDRegularGridSetInputHandler;
+			DataIOManager<DRegularGrid>::registerInputHandler(DataIOManager<DRegularGrid>::InputHandlerPointer(new CDFDRegularGridInputHandler()));
+			DataIOManager<DRegularGridSet>::registerInputHandler(DataIOManager<DRegularGridSet>::InputHandlerPointer(new CDFDRegularGridSetInputHandler()));
 
-			static const CDFDRegularGridOutputHandler    cdfDRegularGridOutputHandler;
-			static const CDFDRegularGridSetOutputHandler cdfDRegularGridSetOutputHandler;
-
-			DataIOManager<DRegularGrid>::registerInputHandler(cdfDRegularGridInputHandler);
-			DataIOManager<DRegularGridSet>::registerInputHandler(cdfDRegularGridSetInputHandler);
-
-			DataIOManager<DRegularGrid>::registerOutputHandler(cdfDRegularGridOutputHandler);
-			DataIOManager<DRegularGridSet>::registerOutputHandler(cdfDRegularGridSetOutputHandler);
+			DataIOManager<DRegularGrid>::registerOutputHandler(DataIOManager<DRegularGrid>::OutputHandlerPointer(new CDFDRegularGridOutputHandler()));
+			DataIOManager<DRegularGridSet>::registerOutputHandler(DataIOManager<DRegularGridSet>::OutputHandlerPointer(new CDFDRegularGridSetOutputHandler()));
 
 #if defined(HAVE_BOOST_FILESYSTEM) && defined(HAVE_BOOST_IOSTREAMS)
 	
-			static const CDFGZDRegularGridInputHandler     cdfGzDRegularGridInputHandler;
-			static const CDFGZDRegularGridSetInputHandler  cdfGzDRegularGridSetInputHandler;
-			static const CDFBZ2DRegularGridInputHandler    cdfBz2DRegularGridInputHandler;
-			static const CDFBZ2DRegularGridSetInputHandler cdfBz2DRegularGridSetInputHandler;
-
-			static const CDFGZDRegularGridOutputHandler     cdfGzDRegularGridOutputHandler;
-			static const CDFGZDRegularGridSetOutputHandler  cdfGzDRegularGridSetOutputHandler;
-			static const CDFBZ2DRegularGridOutputHandler    cdfBz2DRegularGridOutputHandler;
-			static const CDFBZ2DRegularGridSetOutputHandler cdfBz2DRegularGridSetOutputHandler;
-
-			DataIOManager<DRegularGrid>::registerInputHandler(cdfGzDRegularGridInputHandler);
-			DataIOManager<DRegularGridSet>::registerInputHandler(cdfGzDRegularGridSetInputHandler);
-			DataIOManager<DRegularGrid>::registerInputHandler(cdfBz2DRegularGridInputHandler);
-			DataIOManager<DRegularGridSet>::registerInputHandler(cdfBz2DRegularGridSetInputHandler);
+			DataIOManager<DRegularGrid>::registerInputHandler(DataIOManager<DRegularGrid>::InputHandlerPointer(new CDFGZDRegularGridInputHandler()));
+			DataIOManager<DRegularGridSet>::registerInputHandler(DataIOManager<DRegularGridSet>::InputHandlerPointer(new CDFGZDRegularGridSetInputHandler()));
+			DataIOManager<DRegularGrid>::registerInputHandler(DataIOManager<DRegularGrid>::InputHandlerPointer(new CDFBZ2DRegularGridInputHandler()));
+			DataIOManager<DRegularGridSet>::registerInputHandler(DataIOManager<DRegularGridSet>::InputHandlerPointer(new CDFBZ2DRegularGridSetInputHandler()));
 			
-			DataIOManager<DRegularGrid>::registerOutputHandler(cdfGzDRegularGridOutputHandler);
-			DataIOManager<DRegularGridSet>::registerOutputHandler(cdfGzDRegularGridSetOutputHandler);
-			DataIOManager<DRegularGrid>::registerOutputHandler(cdfBz2DRegularGridOutputHandler);
-			DataIOManager<DRegularGridSet>::registerOutputHandler(cdfBz2DRegularGridSetOutputHandler);
+			DataIOManager<DRegularGrid>::registerOutputHandler(DataIOManager<DRegularGrid>::OutputHandlerPointer(new CDFGZDRegularGridOutputHandler()));
+			DataIOManager<DRegularGridSet>::registerOutputHandler(DataIOManager<DRegularGridSet>::OutputHandlerPointer(new CDFGZDRegularGridSetOutputHandler()));
+			DataIOManager<DRegularGrid>::registerOutputHandler(DataIOManager<DRegularGrid>::OutputHandlerPointer(new CDFBZ2DRegularGridOutputHandler()));
+			DataIOManager<DRegularGridSet>::registerOutputHandler(DataIOManager<DRegularGridSet>::OutputHandlerPointer(new CDFBZ2DRegularGridSetOutputHandler()));
 
 #endif // defined(HAVE_BOOST_FILESYSTEM) && defined(HAVE_BOOST_IOSTREAMS)
 		}
