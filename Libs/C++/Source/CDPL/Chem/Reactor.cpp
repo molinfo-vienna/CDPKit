@@ -767,7 +767,7 @@ const Base::Variant& Chem::Reactor::getProperty(const Bond* bond, const Base::Lo
 }
 
 template <typename T>
-inline void Chem::Reactor::copyProperty(const T* ptn_prod_obj, T* tgt_prod_obj, const Base::LookupKey& key) const
+void Chem::Reactor::copyProperty(const T* ptn_prod_obj, T* tgt_prod_obj, const Base::LookupKey& key) const
 {
 	const Base::Variant& prop_val = getProperty(ptn_prod_obj, key);
 

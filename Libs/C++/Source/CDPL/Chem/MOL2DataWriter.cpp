@@ -96,7 +96,7 @@ namespace
 		return (std::find_if(str.begin(), str.end(), Internal::IsWhitespace()) != str.end());
 	}
 
-	inline void removeWhitespace(std::string& str)
+	void removeWhitespace(std::string& str)
 	{
 		str.erase(std::remove_if(str.begin(), str.end(), Internal::IsWhitespace()), str.end());
 	}

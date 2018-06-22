@@ -363,13 +363,13 @@ void Chem::ConnectedSubstructureSet::SubstructDescriptor::copy(const SubstructDe
 	}
 }
 
-inline bool Chem::ConnectedSubstructureSet::SubstructDescriptor::operator<(const SubstructDescriptor& descr) const
+bool Chem::ConnectedSubstructureSet::SubstructDescriptor::operator<(const SubstructDescriptor& descr) const
 {
 	return (bondMask < descr.bondMask);
 }
 
 
-inline bool Chem::ConnectedSubstructureSet::SubstructDescriptorLessCmpFunc::operator()(const SubstructDescriptor* descr1, 
+bool Chem::ConnectedSubstructureSet::SubstructDescriptorLessCmpFunc::operator()(const SubstructDescriptor* descr1, 
 																					   const SubstructDescriptor* descr2) const
 {
 	return (*descr1 < *descr2);

@@ -29,7 +29,6 @@
 #ifndef CDPL_MATH_LINEARSOLVE_HPP
 #define CDPL_MATH_LINEARSOLVE_HPP
 
-#include "CDPL/Math/Config.hpp"
 #include "CDPL/Math/CommonType.hpp"
 
 
@@ -43,7 +42,6 @@ namespace CDPL
 		template <typename E> class MatrixExpression;
 
 		template <typename E1, typename E2>
-		CDPL_MATH_INLINE
 		bool
 		solveLower(const MatrixExpression<E1>& e1, VectorExpression<E2>& e2)
 		{
@@ -73,7 +71,6 @@ namespace CDPL
 		}
 
 		template <typename E1, typename E2>
-		CDPL_MATH_INLINE
 		bool
 		solveUnitLower(const MatrixExpression<E1>& e1, VectorExpression<E2>& e2)
 		{
@@ -99,8 +96,7 @@ namespace CDPL
 			return true;
 		}
 
-		template <typename E1, typename E2>
-		CDPL_MATH_INLINE
+		template <typename E1, typename E2>		
 		bool
 		solveLower(const MatrixExpression<E1>& e1, MatrixExpression<E2>& e2)
 		{
@@ -132,8 +128,7 @@ namespace CDPL
 			return true;
 		}
 
-		template <typename E1, typename E2>
-		CDPL_MATH_INLINE
+		template <typename E1, typename E2>		
 		bool
 		solveUnitLower(const MatrixExpression<E1>& e1, MatrixExpression<E2>& e2)
 		{
@@ -162,8 +157,7 @@ namespace CDPL
 			return true;
 		}
 
-		template <typename E1, typename E2>
-		CDPL_MATH_INLINE
+		template <typename E1, typename E2>		
 		bool
 		solveUpper(const MatrixExpression<E1>& e1, VectorExpression<E2>& e2)
 		{
@@ -193,8 +187,7 @@ namespace CDPL
 			return true;
 		}
 	
-		template <typename E1, typename E2>
-		CDPL_MATH_INLINE
+		template <typename E1, typename E2>		
 		bool
 		solveUnitUpper(const MatrixExpression<E1>& e1, VectorExpression<E2>& e2)
 		{
@@ -221,8 +214,7 @@ namespace CDPL
 			return true;
 		}
 
-		template <typename E1, typename E2>
-		CDPL_MATH_INLINE
+		template <typename E1, typename E2>		
 		bool
 		solveUpper(const MatrixExpression<E1>& e1, MatrixExpression<E2>& e2)
 		{
@@ -255,8 +247,7 @@ namespace CDPL
 			return true;
 		}
 
-		template <typename E1, typename E2>
-		CDPL_MATH_INLINE
+		template <typename E1, typename E2>		
 		bool
 		solveUnitUpper(const MatrixExpression<E1>& e1, MatrixExpression<E2>& e2)
 		{

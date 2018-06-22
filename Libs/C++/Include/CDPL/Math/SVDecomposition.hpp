@@ -33,7 +33,6 @@
 #include <cmath>
 #include <limits>
 
-#include "CDPL/Math/Config.hpp"
 #include "CDPL/Math/Check.hpp"
 #include "CDPL/Math/CommonType.hpp"
 #include "CDPL/Math/TypeTraits.hpp"

@@ -33,13 +33,11 @@
 #include <boost/type_traits/is_const.hpp>
 #include <boost/utility.hpp>
 
-#include "CDPL/Math/Config.hpp"
 #include "CDPL/Math/Expression.hpp"
 #include "CDPL/Math/QuaternionAssignment.hpp"
 #include "CDPL/Math/VectorAssignment.hpp"
 #include "CDPL/Math/TypeTraits.hpp"
 #include "CDPL/Math/Functional.hpp"
-
 
 
 namespace CDPL
@@ -69,113 +67,111 @@ namespace CDPL
 			typedef const SelfType ConstClosureType;
 			typedef SelfType ClosureType;
 			
-			CDPL_MATH_INLINE HomogenousCoordsAdapter(VectorType& v): data(v), extElem(1) {}
+			HomogenousCoordsAdapter(VectorType& v): data(v), extElem(1) {}
 
-			CDPL_MATH_INLINE Reference operator()(SizeType i) {
+			Reference operator()(SizeType i) {
 				if (i == data.getSize())
 					return extElem;
 
 				return data(i);
 			}
 
-			CDPL_MATH_INLINE ConstReference operator()(SizeType i) const {
+			ConstReference operator()(SizeType i) const {
 				if (i == data.getSize())
 					return extElem;
 
 				return data(i);
 			}
 	
-			CDPL_MATH_INLINE Reference operator[](SizeType i) {
+			Reference operator[](SizeType i) {
 				if (i == data.getSize())
 					return extElem;
 
 				return data[i];
 			}
 
-			CDPL_MATH_INLINE ConstReference operator[](SizeType i) const {
+			ConstReference operator[](SizeType i) const {
 				if (i == data.getSize())
 					return extElem;
 
 				return data[i];
 			}
 
-			CDPL_MATH_INLINE SizeType getSize() const {
+			SizeType getSize() const {
 				return (data.getSize() + SizeType(1));
 			}
 
-			CDPL_MATH_INLINE bool isEmpty() const {
+			bool isEmpty() const {
 				return false;
 			}
 
-			CDPL_MATH_INLINE VectorClosureType& getData() {
+			VectorClosureType& getData() {
 				return data;
 			}
 
-			CDPL_MATH_INLINE const VectorClosureType& getData() const {
+			const VectorClosureType& getData() const {
 				return data;
 			}
 
-			CDPL_MATH_INLINE HomogenousCoordsAdapter& operator=(const HomogenousCoordsAdapter& va) {
+			HomogenousCoordsAdapter& operator=(const HomogenousCoordsAdapter& va) {
 				vectorAssignVector<ScalarAssignment>(*this, typename VectorTemporaryTraits<V>::Type(va));
 				return *this;
 			}
 
 			template <typename E>
-			CDPL_MATH_INLINE HomogenousCoordsAdapter& operator=(const VectorExpression<E>& e) {
+			HomogenousCoordsAdapter& operator=(const VectorExpression<E>& e) {
 				vectorAssignVector<ScalarAssignment>(*this, typename VectorTemporaryTraits<V>::Type(e));
 				return *this;
 			}
 
 			template <typename E>
-			CDPL_MATH_INLINE HomogenousCoordsAdapter& operator+=(const VectorExpression<E>& e) {
+			HomogenousCoordsAdapter& operator+=(const VectorExpression<E>& e) {
 				vectorAssignVector<ScalarAssignment>(*this, typename VectorTemporaryTraits<V>::Type(*this + e));
 				return *this;
 			}	
 
 			template <typename E>
-			CDPL_MATH_INLINE HomogenousCoordsAdapter& operator-=(const VectorExpression<E>& e) {
+			HomogenousCoordsAdapter& operator-=(const VectorExpression<E>& e) {
 				vectorAssignVector<ScalarAssignment>(*this, typename VectorTemporaryTraits<V>::Type(*this - e));
 				return *this;
 			}
 
 			template <typename T>
-			CDPL_MATH_INLINE 
 			typename boost::enable_if<IsScalar<T>, HomogenousCoordsAdapter>::type& operator*=(const T& t) {
 				vectorAssignScalar<ScalarMultiplicationAssignment>(*this, t);
 				return *this;
 			}
 	
 			template <typename T>
-			CDPL_MATH_INLINE 
 			typename boost::enable_if<IsScalar<T>, HomogenousCoordsAdapter>::type& operator/=(const T& t) {
 				vectorAssignScalar<ScalarDivisionAssignment>(*this, t);
 				return *this;
 			}
 			
 			template <typename E>
-			CDPL_MATH_INLINE HomogenousCoordsAdapter& assign(const VectorExpression<E>& e) {
+			HomogenousCoordsAdapter& assign(const VectorExpression<E>& e) {
 				vectorAssignVector<ScalarAssignment>(*this, e);
 				return *this;
 			}
 
 			template <typename E>
-			CDPL_MATH_INLINE HomogenousCoordsAdapter& plusAssign(const VectorExpression<E>& e) {
+			HomogenousCoordsAdapter& plusAssign(const VectorExpression<E>& e) {
 				vectorAssignVector<ScalarAdditionAssignment>(*this, e);
 				return *this;
 			}
 
 			template <typename E>
-			CDPL_MATH_INLINE HomogenousCoordsAdapter& minusAssign(const VectorExpression<E>& e) {
+			HomogenousCoordsAdapter& minusAssign(const VectorExpression<E>& e) {
 				vectorAssignVector<ScalarSubtractionAssignment>(*this, e);
 				return *this;
 			}
 	
-			CDPL_MATH_INLINE void swap(HomogenousCoordsAdapter& va) {
+			void swap(HomogenousCoordsAdapter& va) {
 				if (this != &va)
 					vectorSwap(*this, va);
 			}
 	
-			CDPL_MATH_INLINE friend void swap(HomogenousCoordsAdapter& va1, HomogenousCoordsAdapter& va2) {
+			friend void swap(HomogenousCoordsAdapter& va1, HomogenousCoordsAdapter& va2) {
 				va1.swap(va2);
 			}
 
@@ -203,61 +199,60 @@ namespace CDPL
 			typedef const SelfType ConstClosureType;
 			typedef SelfType ClosureType;
 					
-			CDPL_MATH_INLINE explicit VectorQuaternionAdapter(VectorType& v): data(v) {}
+			explicit VectorQuaternionAdapter(VectorType& v): data(v) {}
 
-			CDPL_MATH_INLINE Reference getC1() {
+			Reference getC1() {
 				return data(0);
 			}
 
-			CDPL_MATH_INLINE Reference getC2() {
+			Reference getC2() {
 				return data(1);
 			}
 
-			CDPL_MATH_INLINE Reference getC3() {
+			Reference getC3() {
 				return data(2);
 			}
 
-			CDPL_MATH_INLINE Reference getC4() {
+			Reference getC4() {
 				return data(3);
 			}
 
-			CDPL_MATH_INLINE ConstReference getC1() const {
+			ConstReference getC1() const {
 				return data(0);
 			}
 
-			CDPL_MATH_INLINE ConstReference getC2() const {
+			ConstReference getC2() const {
 				return data(1);
 			}
 
-			CDPL_MATH_INLINE ConstReference getC3() const {
+			ConstReference getC3() const {
 				return data(2);
 			}
 
-			CDPL_MATH_INLINE ConstReference getC4() const {
+			ConstReference getC4() const {
 				return data(3);
 			}
 
-			CDPL_MATH_INLINE VectorClosureType& getData() {
+			VectorClosureType& getData() {
 				return data;
 			}
 
-			CDPL_MATH_INLINE const VectorClosureType& getData() const {
+			const VectorClosureType& getData() const {
 				return data;
 			}
 
-			CDPL_MATH_INLINE VectorQuaternionAdapter& operator=(const VectorQuaternionAdapter& a) {
+			VectorQuaternionAdapter& operator=(const VectorQuaternionAdapter& a) {
 				quaternionAssignQuaternion<ScalarAssignment>(*this, typename QuaternionTemporaryTraits<SelfType>::Type(a));
 				return *this;
 			}
 
 			template <typename E>
-			CDPL_MATH_INLINE VectorQuaternionAdapter& operator=(const QuaternionExpression<E>& e) {
+			VectorQuaternionAdapter& operator=(const QuaternionExpression<E>& e) {
 				quaternionAssignQuaternion<ScalarAssignment>(*this, typename QuaternionTemporaryTraits<SelfType>::Type(e));
 				return *this;
 			}
 
 			template <typename T>
-			CDPL_MATH_INLINE 
 			typename boost::enable_if<IsScalar<T>, VectorQuaternionAdapter>::type& 
 			operator=(const T& t) {
 				data(0) = t;
@@ -268,13 +263,12 @@ namespace CDPL
 			}
 
 			template <typename E>
-			CDPL_MATH_INLINE VectorQuaternionAdapter& operator+=(const QuaternionExpression<E>& e) {
+			VectorQuaternionAdapter& operator+=(const QuaternionExpression<E>& e) {
 				quaternionAssignQuaternion<ScalarAssignment>(*this, typename QuaternionTemporaryTraits<SelfType>::Type(*this + e));
 				return *this;
 			}	
 
 			template <typename T>
-			CDPL_MATH_INLINE 
 			typename boost::enable_if<IsScalar<T>, VectorQuaternionAdapter>::type& 
 			operator+=(const T& t) {
 				data(0) += t;
@@ -282,13 +276,12 @@ namespace CDPL
 			}
 
 			template <typename E>
-			CDPL_MATH_INLINE VectorQuaternionAdapter& operator-=(const QuaternionExpression<E>& e) {
+			VectorQuaternionAdapter& operator-=(const QuaternionExpression<E>& e) {
 				quaternionAssignQuaternion<ScalarAssignment>(*this, typename QuaternionTemporaryTraits<SelfType>::Type(*this - e));
 				return *this;
 			}
 
 			template <typename T>
-			CDPL_MATH_INLINE 
 			typename boost::enable_if<IsScalar<T>, VectorQuaternionAdapter>::type& 
 			operator-=(const T& t) {
 				data(0) -= t;
@@ -296,13 +289,12 @@ namespace CDPL
 			}
 
 			template <typename E>
-			CDPL_MATH_INLINE VectorQuaternionAdapter& operator*=(const QuaternionExpression<E>& e) {
+			VectorQuaternionAdapter& operator*=(const QuaternionExpression<E>& e) {
 				quaternionAssignQuaternion<ScalarAssignment>(*this, typename QuaternionTemporaryTraits<SelfType>::Type(*this * e));
 				return *this;
 			}
 
 			template <typename T>
-			CDPL_MATH_INLINE 
 			typename boost::enable_if<IsScalar<T>, VectorQuaternionAdapter>::type& 
 			operator*=(const T& t) {
 				quaternionAssignScalar<ScalarMultiplicationAssignment>(*this, t);
@@ -310,13 +302,12 @@ namespace CDPL
 			}
 
 			template <typename E>
-			CDPL_MATH_INLINE VectorQuaternionAdapter& operator/=(const QuaternionExpression<E>& e) {
+			VectorQuaternionAdapter& operator/=(const QuaternionExpression<E>& e) {
 				quaternionAssignQuaternion<ScalarAssignment>(*this, typename QuaternionTemporaryTraits<SelfType>::Type(*this / e));
 				return *this;
 			}
 
 			template <typename T>
-			CDPL_MATH_INLINE 
 			typename boost::enable_if<IsScalar<T>, VectorQuaternionAdapter>::type& 
 			operator/=(const T& t) {
 				quaternionAssignScalar<ScalarDivisionAssignment>(*this, t);
@@ -324,33 +315,33 @@ namespace CDPL
 			}
 			
 			template <typename E>
-			CDPL_MATH_INLINE VectorQuaternionAdapter& assign(const QuaternionExpression<E>& e) {
+			VectorQuaternionAdapter& assign(const QuaternionExpression<E>& e) {
 				quaternionAssignQuaternion<ScalarAssignment>(*this, e);
 				return *this;
 			}
 
 			template <typename E>
-			CDPL_MATH_INLINE VectorQuaternionAdapter& plusAssign(const QuaternionExpression<E>& e) {
+			VectorQuaternionAdapter& plusAssign(const QuaternionExpression<E>& e) {
 				quaternionAssignQuaternion<ScalarAdditionAssignment>(*this, e);
 				return *this;
 			}
 
 			template <typename E>
-			CDPL_MATH_INLINE VectorQuaternionAdapter& minusAssign(const QuaternionExpression<E>& e) {
+			VectorQuaternionAdapter& minusAssign(const QuaternionExpression<E>& e) {
 				quaternionAssignQuaternion<ScalarSubtractionAssignment>(*this, e);
 				return *this;
 			}
 
-			CDPL_MATH_INLINE void swap(VectorQuaternionAdapter& a) {
+			void swap(VectorQuaternionAdapter& a) {
 				if (this != &a)
 					quaternionSwap(*this, a);
 			}
 	
-			CDPL_MATH_INLINE friend void swap(VectorQuaternionAdapter& a1, VectorQuaternionAdapter& a2) {
+			friend void swap(VectorQuaternionAdapter& a1, VectorQuaternionAdapter& a2) {
 				a1.swap(a2);
 			}
 
-			CDPL_MATH_INLINE void set(const ValueType& c1 = ValueType(), const ValueType& c2 = ValueType(), 
+			void set(const ValueType& c1 = ValueType(), const ValueType& c2 = ValueType(), 
 									 const ValueType& c3 = ValueType(), const ValueType& c4 = ValueType()) {
 				data(0) = c1;
 				data(1) = c2;
@@ -363,7 +354,6 @@ namespace CDPL
 		};
 
 		template <typename T> class Quaternion;
-
 		template <typename V>
 		struct QuaternionTemporaryTraits<VectorQuaternionAdapter<V> >  
 		{
@@ -385,7 +375,6 @@ namespace CDPL
 		struct VectorTemporaryTraits<const HomogenousCoordsAdapter<V> > : public VectorTemporaryTraits<V> {};
 	
 		template <typename E>
-		CDPL_MATH_INLINE
 		VectorQuaternionAdapter<E> 
 		quat(VectorExpression<E>& e)
 		{
@@ -393,7 +382,6 @@ namespace CDPL
 		}
 
 		template <typename E>
-		CDPL_MATH_INLINE
 		VectorQuaternionAdapter<const E> 
 		quat(const VectorExpression<E>& e)
 		{
@@ -401,7 +389,6 @@ namespace CDPL
 		}
 
 		template <typename E>
-		CDPL_MATH_INLINE
 		HomogenousCoordsAdapter<E> 
 		homog(VectorExpression<E>& e)
 		{
@@ -409,7 +396,6 @@ namespace CDPL
 		}
 
 		template <typename E>
-		CDPL_MATH_INLINE
 		HomogenousCoordsAdapter<const E> 
 		homog(const VectorExpression<E>& e)
 		{

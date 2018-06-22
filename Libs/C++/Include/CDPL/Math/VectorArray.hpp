@@ -64,7 +64,7 @@ namespace CDPL
 			typedef boost::shared_ptr<VectorArray> SharedPointer;
 
 		private:
-			CDPL_MATH_INLINE const char* getClassName() const {
+			const char* getClassName() const {
 				return "VectorArray";
 			}
 		};

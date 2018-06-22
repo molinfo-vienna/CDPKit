@@ -33,7 +33,6 @@
 
 #include <boost/swap.hpp>
 
-#include "CDPL/Math/Config.hpp"
 #include "CDPL/Math/VectorProxy.hpp"
 #include "CDPL/Math/MatrixProxy.hpp"
 #include "CDPL/Math/LinearSolve.hpp"
@@ -131,8 +130,7 @@ namespace CDPL
 			return singular;
 		}
 
-		template <typename E, typename PV>
-		CDPL_MATH_INLINE
+		template <typename E, typename PV>		
 		void 
 		swapRows(VectorExpression<E>& e, const PV& pv)
 		{
@@ -144,8 +142,7 @@ namespace CDPL
 			}
 		}
 
-		template <typename E, typename PV>
-		CDPL_MATH_INLINE
+		template <typename E, typename PV>		
 		void 
 		swapRows(MatrixExpression<E>& e, const PV& pv)
 		{
@@ -160,7 +157,6 @@ namespace CDPL
 		}
 
 		template <typename E1, typename E2>
-		CDPL_MATH_INLINE
 		bool
 		luSubstitute(const MatrixExpression<E1>& lu, VectorExpression<E2>& b)
 		{
@@ -171,7 +167,6 @@ namespace CDPL
 		}
 
 		template <typename E1, typename E2, typename PV>
-		CDPL_MATH_INLINE
 		bool
 		luSubstitute(const MatrixExpression<E1>& lu, const PV& pv, VectorExpression<E2>& b)
 		{
@@ -181,7 +176,6 @@ namespace CDPL
 		}
 
 		template <typename E1, typename E2>
-		CDPL_MATH_INLINE
 		bool
 		luSubstitute(const MatrixExpression<E1>& lu, MatrixExpression<E2>& b)
 		{
@@ -192,7 +186,6 @@ namespace CDPL
 		}
 
 		template <typename E1, typename E2, typename PV>
-		CDPL_MATH_INLINE
 		bool
 		luSubstitute(const MatrixExpression<E1>& lu, const PV& pv, MatrixExpression<E2>& b)
 		{

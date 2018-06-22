@@ -38,7 +38,7 @@ using namespace CDPL;
 namespace
 {
 
-	inline void checkRole(unsigned int role) 
+	void checkRole(unsigned int role) 
 	{
 		using namespace Chem;
 

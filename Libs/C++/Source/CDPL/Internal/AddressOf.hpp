@@ -70,7 +70,7 @@ namespace CDPL
 // Implementation
 
 template <typename ArgType, typename ResType>
-inline ResType* CDPL::Internal::AddressOf<ArgType, ResType>::operator()(ArgType& ref) const
+ResType* CDPL::Internal::AddressOf<ArgType, ResType>::operator()(ArgType& ref) const
 {
 	return &ref;
 }

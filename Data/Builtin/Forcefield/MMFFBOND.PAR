@@ -1,4 +1,3 @@
-R"PARAMDATA(
 *
 *           Copyright (c) Merck and Co., Inc., 1994, 1995, 1996
 *                           All Rights Reserved
@@ -506,4 +505,3 @@ R"PARAMDATA(
 0  79   81     4.305     1.356   E94
 0  80   81     8.237     1.335   C94
 $
-)PARAMDATA";

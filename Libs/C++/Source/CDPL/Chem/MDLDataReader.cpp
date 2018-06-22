@@ -77,30 +77,30 @@ using namespace CDPL;
 namespace
 {
 
-	inline void skipMDLChars(std::istream& is, std::size_t count, const char* err_msg)
+	void skipMDLChars(std::istream& is, std::size_t count, const char* err_msg)
 	{
 		Internal::skipChars(is, count, err_msg, Chem::MDL::END_OF_LINE);
 	}
 
-	inline void skipMDLLines(std::istream& is, std::size_t count, const char* err_msg)
+	void skipMDLLines(std::istream& is, std::size_t count, const char* err_msg)
 	{
 		Internal::skipLines(is, count, err_msg, Chem::MDL::END_OF_LINE);
 	}
 		
-	inline std::string& readMDLLine(std::istream& is, std::string& line, const char* err_msg, bool trim = false, 
+	std::string& readMDLLine(std::istream& is, std::string& line, const char* err_msg, bool trim = false, 
 									bool check_ll = false, std::size_t max_llen = Chem::MDL::MAX_LINE_LENGTH)
 	{
 		return Internal::readLine(is, line, err_msg, trim, check_ll, max_llen, Chem::MDL::END_OF_LINE);
 	}
 
-	inline std::string& readMDLString(std::istream& is, std::size_t field_size, std::string& str, bool clear,
+	std::string& readMDLString(std::istream& is, std::size_t field_size, std::string& str, bool clear,
 									  const char* err_msg, bool trim = true)
 	{
 		return Internal::readString(is, field_size, str, clear, err_msg, trim, Chem::MDL::END_OF_LINE);
 	}
 
 	template <typename T, std::size_t FieldSize>
-	inline T readMDLNumber(std::istream& is, const char* err_msg, bool throw_ex = true, 
+	T readMDLNumber(std::istream& is, const char* err_msg, bool throw_ex = true, 
 						   const T empty_def_val = T(0), const T err_def_val = T(0))
 	{
 		return Internal::readNumber<T, FieldSize>(is, err_msg, throw_ex, empty_def_val, err_def_val, Chem::MDL::END_OF_LINE);

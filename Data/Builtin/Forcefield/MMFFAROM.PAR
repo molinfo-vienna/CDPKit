@@ -1,4 +1,3 @@
-R"PARAMDATA(
 *
 *          Copyright (c) Merck and Co., Inc., 1994, 1995, 1996
 *                         All Rights Reserved
@@ -54,4 +53,3 @@ NM      N5M     7    5    4    0    1
 O*      OFUR    8    5    1    0    0
 S*      STHI   16    5    1    0    0
 $
-)PARAMDATA";

@@ -1,4 +1,3 @@
-R"PARAMDATA(
 *
 *          Copyright (c) Merck and Co., Inc., 1994, 1995, 1996
 *                         All Rights Reserved
@@ -219,4 +218,3 @@ R"PARAMDATA(
   CU+2   98  DIPOSITIVE COPPER      
   MG+2   99  DIPOSITIVE MAGNESIUM CATION
 $
-)PARAMDATA";

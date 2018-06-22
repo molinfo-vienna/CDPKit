@@ -244,13 +244,13 @@ namespace CDPL
 // Implementation of template members
 
 template <typename T> 
-inline const T& CDPL::Base::PropertyContainer::getProperty(const LookupKey& key) const
+const T& CDPL::Base::PropertyContainer::getProperty(const LookupKey& key) const
 {
 	return getProperty(key, true).template getData<T>();
 }
 
 template <typename T> 
-inline const T& CDPL::Base::PropertyContainer::getPropertyOrDefault(const LookupKey& key, const T& def) const
+const T& CDPL::Base::PropertyContainer::getPropertyOrDefault(const LookupKey& key, const T& def) const
 {
 	const Variant& val = getProperty(key, false);
 

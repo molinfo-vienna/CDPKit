@@ -195,7 +195,7 @@ namespace CDPL
 // Implementation
 
 template <typename ValueType, typename MatchFunc, typename ObjType1, typename ObjType2>
-inline bool CDPL::Chem::PropertyMatchExpression<ValueType, MatchFunc, ObjType1, ObjType2>::operator()(const ObjType1& query_obj1, const ObjType2& query_obj2,
+bool CDPL::Chem::PropertyMatchExpression<ValueType, MatchFunc, ObjType1, ObjType2>::operator()(const ObjType1& query_obj1, const ObjType2& query_obj2,
 																									  const ObjType1& target_obj1, const ObjType2& target_obj2,
 																									  const Base::Variant&) const
 {
@@ -207,7 +207,7 @@ inline bool CDPL::Chem::PropertyMatchExpression<ValueType, MatchFunc, ObjType1, 
 
 
 template <typename ValueType, typename MatchFunc, typename ObjType>
-inline bool CDPL::Chem::PropertyMatchExpression<ValueType, MatchFunc, ObjType, void>::operator()(const ObjType& query_obj, const ObjType& target_obj,
+bool CDPL::Chem::PropertyMatchExpression<ValueType, MatchFunc, ObjType, void>::operator()(const ObjType& query_obj, const ObjType& target_obj,
 																								 const Base::Variant&) const
 {
 	if (fixed)

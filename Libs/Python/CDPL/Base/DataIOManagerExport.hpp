@@ -53,7 +53,6 @@ namespace CDPLPythonBase
 				.staticmethod("registerInputHandler")
 				.def("getInputHandler", &ManagerType::getInputHandler, python::arg("idx"),
 					 python::return_value_policy<python::copy_const_reference>())
-				.staticmethod("getOutputHandler")
 				.staticmethod("getInputHandler")
 				.def("getInputHandlerByFormat", &ManagerType::getInputHandlerByFormat, python::arg("fmt"))
 				.staticmethod("getInputHandlerByFormat")

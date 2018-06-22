@@ -101,7 +101,7 @@ namespace CDPL
 			struct L1Distance
 			{
 
-				static inline ScalarT compute(const PointT& p, const PointT& q) {
+				static ScalarT compute(const PointT& p, const PointT& q) {
 					ScalarT diff1 = p[0] - q[0];
 					ScalarT diff2 = p[1] - q[1];
 					ScalarT diff3 = p[2] - q[2];
@@ -109,15 +109,15 @@ namespace CDPL
 					return std::abs(diff1) + std::abs(diff2) + std::abs(diff3);
 				}
 
-				static inline ScalarT norm(ScalarT x, ScalarT y, ScalarT z) {
+				static ScalarT norm(ScalarT x, ScalarT y, ScalarT z) {
 					return std::abs(x) + std::abs(y) + std::abs(z);
 				}
 
-				static inline ScalarT sqr(ScalarT r) {
+				static ScalarT sqr(ScalarT r) {
 					return r;
 				}
 
-				static inline ScalarT sqrt(ScalarT r) {
+				static ScalarT sqrt(ScalarT r) {
 					return r;
 				}
 			};
@@ -125,7 +125,7 @@ namespace CDPL
 			struct L2Distance
 			{
 
-				static inline ScalarT compute(const PointT& p, const PointT& q) {
+				static ScalarT compute(const PointT& p, const PointT& q) {
 					ScalarT diff1 = p[0] - q[0];
 					ScalarT diff2 = p[1] - q[1];
 					ScalarT diff3 = p[2] - q[2];
@@ -133,15 +133,15 @@ namespace CDPL
 					return std::pow(diff1, 2) + std::pow(diff2, 2) + std::pow(diff3, 2);
 				}
 
-				static inline ScalarT norm(ScalarT x, ScalarT y, ScalarT z)	{
+				static ScalarT norm(ScalarT x, ScalarT y, ScalarT z)	{
 					return std::pow(x, 2) + std::pow(y, 2) + std::pow(z, 2);
 				}
 
-				static inline ScalarT sqr(ScalarT r) {
+				static ScalarT sqr(ScalarT r) {
 					return r * r;
 				}
 
-				static inline ScalarT sqrt(ScalarT r) {
+				static ScalarT sqrt(ScalarT r) {
 					return std::sqrt(r);
 				}
 			};
@@ -149,7 +149,7 @@ namespace CDPL
 			struct MaxDistance
 			{
 
-				static inline ScalarT compute(const PointT& p, const PointT& q) {
+				static ScalarT compute(const PointT& p, const PointT& q) {
 					ScalarT diff1 = std::abs(p[0] - q[0]);
 					ScalarT diff2 = std::abs(p[1] - q[1]);
 					ScalarT diff3 = std::abs(p[2] - q[2]);
@@ -163,7 +163,7 @@ namespace CDPL
 					return maximum;
 				}
 
-				static inline ScalarT norm(ScalarT x, ScalarT y, ScalarT z)	{
+				static ScalarT norm(ScalarT x, ScalarT y, ScalarT z)	{
 					ScalarT maximum = x;
 
 					if (y > maximum) 
@@ -174,11 +174,11 @@ namespace CDPL
 					return maximum;
 				}
 
-				static inline ScalarT sqr(ScalarT r) {
+				static ScalarT sqr(ScalarT r) {
 					return r;
 				}
 
-				static inline ScalarT sqrt(ScalarT r) {
+				static ScalarT sqrt(ScalarT r) {
 					return r;
 				}
 			};

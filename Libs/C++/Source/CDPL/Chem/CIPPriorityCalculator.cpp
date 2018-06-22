@@ -184,7 +184,7 @@ std::size_t Chem::CIPPriorityCalculator::AtomNode::getPriority() const
 }
 
 
-inline bool Chem::CIPPriorityCalculator::AtomNode::LessCmpFunc::operator()(const AtomNode* node1, 
+bool Chem::CIPPriorityCalculator::AtomNode::LessCmpFunc::operator()(const AtomNode* node1, 
 																		   const AtomNode* node2) const
 {
 	if (node1->priority == node2->priority)
@@ -196,13 +196,13 @@ inline bool Chem::CIPPriorityCalculator::AtomNode::LessCmpFunc::operator()(const
 }
 
 
-inline bool Chem::CIPPriorityCalculator::AtomNode::PriorityLessCmpFunc::operator()(const AtomNode* node1, 
+bool Chem::CIPPriorityCalculator::AtomNode::PriorityLessCmpFunc::operator()(const AtomNode* node1, 
 																				   const AtomNode* node2) const
 {
 	return (node1->priority < node2->priority);
 }
 
-inline bool Chem::CIPPriorityCalculator::AtomNode::PriorityGreaterCmpFunc::operator()(const AtomNode* node1, 
+bool Chem::CIPPriorityCalculator::AtomNode::PriorityGreaterCmpFunc::operator()(const AtomNode* node1, 
 																					  const AtomNode* node2) const
 {
 	return (node1->priority > node2->priority);

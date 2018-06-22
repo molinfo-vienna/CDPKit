@@ -154,7 +154,7 @@ namespace CDPL
 // Implementation
 
 template <typename ObjType1, typename ObjType2>
-inline bool CDPL::Chem::ORMatchExpressionList<ObjType1, ObjType2>::operator()(const ObjType1& query_obj1, const ObjType2& query_obj2, 
+bool CDPL::Chem::ORMatchExpressionList<ObjType1, ObjType2>::operator()(const ObjType1& query_obj1, const ObjType2& query_obj2, 
 																			  const ObjType1& target_obj1, const ObjType2& target_obj2, 
 																			  const Base::Variant& data) const
 {
@@ -171,7 +171,7 @@ inline bool CDPL::Chem::ORMatchExpressionList<ObjType1, ObjType2>::operator()(co
 }
 
 template <typename ObjType1, typename ObjType2>
-inline bool CDPL::Chem::ORMatchExpressionList<ObjType1, ObjType2>::operator()(const ObjType1& query_obj1, const ObjType2& query_obj2, 
+bool CDPL::Chem::ORMatchExpressionList<ObjType1, ObjType2>::operator()(const ObjType1& query_obj1, const ObjType2& query_obj2, 
 																			  const ObjType1& target_obj1, const ObjType2& target_obj2, 
 																			  const AtomBondMapping& mapping, const Base::Variant& data) const
 {
@@ -189,7 +189,7 @@ inline bool CDPL::Chem::ORMatchExpressionList<ObjType1, ObjType2>::operator()(co
 
 
 template <typename ObjType>
-inline bool CDPL::Chem::ORMatchExpressionList<ObjType, void>::operator()(const ObjType& query_obj, const ObjType& target_obj, 
+bool CDPL::Chem::ORMatchExpressionList<ObjType, void>::operator()(const ObjType& query_obj, const ObjType& target_obj, 
 																		 const Base::Variant& data) const
 {
 	if (this->isEmpty())
@@ -205,7 +205,7 @@ inline bool CDPL::Chem::ORMatchExpressionList<ObjType, void>::operator()(const O
 }
 
 template <typename ObjType>
-inline bool CDPL::Chem::ORMatchExpressionList<ObjType, void>::operator()(const ObjType& query_obj, const ObjType& target_obj, 
+bool CDPL::Chem::ORMatchExpressionList<ObjType, void>::operator()(const ObjType& query_obj, const ObjType& target_obj, 
 																		 const AtomBondMapping& mapping, const Base::Variant& data) const
 {
 	if (this->isEmpty())

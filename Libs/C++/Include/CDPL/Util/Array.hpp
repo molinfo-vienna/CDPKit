@@ -622,89 +622,89 @@ namespace CDPL
 }
 
 
-// Implementation of Array<>
+// Implementation
 
 template <typename ValueType>
-inline CDPL::Util::Array<ValueType>& CDPL::Util::Array<ValueType>::getBase()
+CDPL::Util::Array<ValueType>& CDPL::Util::Array<ValueType>::getBase()
 {
 	return *this;
 }
 
 template <typename ValueType>
-inline const CDPL::Util::Array<ValueType>& CDPL::Util::Array<ValueType>::getBase() const
+const CDPL::Util::Array<ValueType>& CDPL::Util::Array<ValueType>::getBase() const
 {
 	return *this;
 }
 
 template <typename ValueType>
-inline std::size_t CDPL::Util::Array<ValueType>::getSize() const 
+std::size_t CDPL::Util::Array<ValueType>::getSize() const 
 {
 	return data.size();
 }
 
 template <typename ValueType>
-inline std::size_t CDPL::Util::Array<ValueType>::size() const 
+std::size_t CDPL::Util::Array<ValueType>::size() const 
 {
 	return data.size();
 }
 
 template <typename ValueType>
-inline bool CDPL::Util::Array<ValueType>::isEmpty() const  
+bool CDPL::Util::Array<ValueType>::isEmpty() const  
 {	
 	return data.empty();
 }
 
 template <typename ValueType>
-inline void CDPL::Util::Array<ValueType>::resize(std::size_t n, const ValueType& value)  
+void CDPL::Util::Array<ValueType>::resize(std::size_t n, const ValueType& value)  
 {
 	data.resize(n, value);
 }
 
 template <typename ValueType>
-inline std::size_t CDPL::Util::Array<ValueType>::getCapacity() const  
+std::size_t CDPL::Util::Array<ValueType>::getCapacity() const  
 {
 	return data.capacity();
 }
 
 template <typename ValueType>
-inline void CDPL::Util::Array<ValueType>::reserve(std::size_t min_size)  
+void CDPL::Util::Array<ValueType>::reserve(std::size_t min_size)  
 {
 	data.reserve(min_size);
 }
 
 template <typename ValueType>
-inline void CDPL::Util::Array<ValueType>::clear()  
+void CDPL::Util::Array<ValueType>::clear()  
 {
 	data.clear();
 }
 
 template <typename ValueType>
-inline void CDPL::Util::Array<ValueType>::swap(Array& array)  
+void CDPL::Util::Array<ValueType>::swap(Array& array)  
 {
 	data.swap(array.data);
 }
 
 template <typename ValueType>
-inline void CDPL::Util::Array<ValueType>::assign(std::size_t n, const ValueType& value)  
+void CDPL::Util::Array<ValueType>::assign(std::size_t n, const ValueType& value)  
 {
 	data.assign(n, value);
 }
 
 template <typename ValueType>
 template <typename InputIter>
-inline void CDPL::Util::Array<ValueType>::assign(const InputIter& first, const InputIter& last)  
+void CDPL::Util::Array<ValueType>::assign(const InputIter& first, const InputIter& last)  
 {
 	data.assign(first, last);
 }
 
 template <typename ValueType>
-inline void CDPL::Util::Array<ValueType>::addElement(const ValueType& value)  
+void CDPL::Util::Array<ValueType>::addElement(const ValueType& value)  
 {
 	data.push_back(value);
 }
 
 template <typename ValueType>
-inline void CDPL::Util::Array<ValueType>::insertElement(std::size_t idx, const ValueType& value)  
+void CDPL::Util::Array<ValueType>::insertElement(std::size_t idx, const ValueType& value)  
 {
 	checkIndex(idx, true);
 
@@ -712,7 +712,7 @@ inline void CDPL::Util::Array<ValueType>::insertElement(std::size_t idx, const V
 }
 
 template <typename ValueType>
-inline typename CDPL::Util::Array<ValueType>::ElementIterator CDPL::Util::Array<ValueType>::insertElement(const ElementIterator& it, 
+typename CDPL::Util::Array<ValueType>::ElementIterator CDPL::Util::Array<ValueType>::insertElement(const ElementIterator& it, 
 																										  const ValueType& value)  
 {
 	checkIterator(it, true);
@@ -721,7 +721,7 @@ inline typename CDPL::Util::Array<ValueType>::ElementIterator CDPL::Util::Array<
 }
 
 template <typename ValueType>
-inline void CDPL::Util::Array<ValueType>::insertElements(std::size_t idx, std::size_t n, const ValueType& value)  
+void CDPL::Util::Array<ValueType>::insertElements(std::size_t idx, std::size_t n, const ValueType& value)  
 {
 	checkIndex(idx, true);
 
@@ -729,7 +729,7 @@ inline void CDPL::Util::Array<ValueType>::insertElements(std::size_t idx, std::s
 }
 
 template <typename ValueType>
-inline void CDPL::Util::Array<ValueType>::insertElements(const ElementIterator& it, std::size_t n, const ValueType& value)  
+void CDPL::Util::Array<ValueType>::insertElements(const ElementIterator& it, std::size_t n, const ValueType& value)  
 {
 	checkIterator(it, true);
 
@@ -738,7 +738,7 @@ inline void CDPL::Util::Array<ValueType>::insertElements(const ElementIterator& 
 
 template <typename ValueType>
 template <typename InputIter>
-inline void CDPL::Util::Array<ValueType>::insertElements(std::size_t idx, const InputIter& first, const InputIter& last)  
+void CDPL::Util::Array<ValueType>::insertElements(std::size_t idx, const InputIter& first, const InputIter& last)  
 {
 	checkIndex(idx, true);
 
@@ -747,7 +747,7 @@ inline void CDPL::Util::Array<ValueType>::insertElements(std::size_t idx, const 
 
 template <typename ValueType>
 template <typename InputIter>
-inline void CDPL::Util::Array<ValueType>::insertElements(const ElementIterator& it, const InputIter& first, const InputIter& last)  
+void CDPL::Util::Array<ValueType>::insertElements(const ElementIterator& it, const InputIter& first, const InputIter& last)  
 {	
 	checkIterator(it, true);
 
@@ -755,7 +755,7 @@ inline void CDPL::Util::Array<ValueType>::insertElements(const ElementIterator& 
 }
 
 template <typename ValueType>
-inline void CDPL::Util::Array<ValueType>::popLastElement()  
+void CDPL::Util::Array<ValueType>::popLastElement()  
 {
 	if (data.empty())
 		throw Base::OperationFailed("Array: attempt to pop element from an empty array");
@@ -764,7 +764,7 @@ inline void CDPL::Util::Array<ValueType>::popLastElement()
 }
 
 template <typename ValueType>
-inline void CDPL::Util::Array<ValueType>::removeElement(std::size_t idx)  
+void CDPL::Util::Array<ValueType>::removeElement(std::size_t idx)  
 {
 	checkIndex(idx, false);
 
@@ -772,7 +772,7 @@ inline void CDPL::Util::Array<ValueType>::removeElement(std::size_t idx)
 }
 
 template <typename ValueType>
-inline typename CDPL::Util::Array<ValueType>::ElementIterator CDPL::Util::Array<ValueType>::removeElement(const ElementIterator& it)  
+typename CDPL::Util::Array<ValueType>::ElementIterator CDPL::Util::Array<ValueType>::removeElement(const ElementIterator& it)  
 {
 	checkIterator(it, false);
 
@@ -780,7 +780,7 @@ inline typename CDPL::Util::Array<ValueType>::ElementIterator CDPL::Util::Array<
 }
 
 template <typename ValueType>
-inline typename CDPL::Util::Array<ValueType>::ElementIterator CDPL::Util::Array<ValueType>::removeElements(const ElementIterator& first, 
+typename CDPL::Util::Array<ValueType>::ElementIterator CDPL::Util::Array<ValueType>::removeElements(const ElementIterator& first, 
 																										   const ElementIterator& last)  
 {
 	checkIterator(first, true);
@@ -793,7 +793,7 @@ inline typename CDPL::Util::Array<ValueType>::ElementIterator CDPL::Util::Array<
 }
 
 template <typename ValueType>
-inline const ValueType& CDPL::Util::Array<ValueType>::getFirstElement() const  
+const ValueType& CDPL::Util::Array<ValueType>::getFirstElement() const  
 {
 	checkIfNonEmpty();
 		
@@ -801,7 +801,7 @@ inline const ValueType& CDPL::Util::Array<ValueType>::getFirstElement() const
 }
 
 template <typename ValueType>
-inline const ValueType& CDPL::Util::Array<ValueType>::getLastElement() const  
+const ValueType& CDPL::Util::Array<ValueType>::getLastElement() const  
 {
 	checkIfNonEmpty();
 
@@ -809,7 +809,7 @@ inline const ValueType& CDPL::Util::Array<ValueType>::getLastElement() const
 }
 
 template <typename ValueType>
-inline ValueType& CDPL::Util::Array<ValueType>::getFirstElement()  
+ValueType& CDPL::Util::Array<ValueType>::getFirstElement()  
 {
 	checkIfNonEmpty();
 
@@ -817,7 +817,7 @@ inline ValueType& CDPL::Util::Array<ValueType>::getFirstElement()
 }
 
 template <typename ValueType>
-inline ValueType& CDPL::Util::Array<ValueType>::getLastElement()  
+ValueType& CDPL::Util::Array<ValueType>::getLastElement()  
 {
 	checkIfNonEmpty();
 
@@ -825,55 +825,55 @@ inline ValueType& CDPL::Util::Array<ValueType>::getLastElement()
 }
 
 template <typename ValueType>
-inline typename CDPL::Util::Array<ValueType>::ConstElementIterator CDPL::Util::Array<ValueType>::getElementsBegin() const  
+typename CDPL::Util::Array<ValueType>::ConstElementIterator CDPL::Util::Array<ValueType>::getElementsBegin() const  
 {
 	return data.begin();
 }
 
 template <typename ValueType>
-inline typename CDPL::Util::Array<ValueType>::ElementIterator CDPL::Util::Array<ValueType>::getElementsBegin()  
+typename CDPL::Util::Array<ValueType>::ElementIterator CDPL::Util::Array<ValueType>::getElementsBegin()  
 {
 	return data.begin();
 }
 
 template <typename ValueType>		
-inline typename CDPL::Util::Array<ValueType>::ConstElementIterator CDPL::Util::Array<ValueType>::getElementsEnd() const  
+typename CDPL::Util::Array<ValueType>::ConstElementIterator CDPL::Util::Array<ValueType>::getElementsEnd() const  
 {
 	return data.end();
 }
 
 template <typename ValueType>
-inline typename CDPL::Util::Array<ValueType>::ElementIterator CDPL::Util::Array<ValueType>::getElementsEnd()  
+typename CDPL::Util::Array<ValueType>::ElementIterator CDPL::Util::Array<ValueType>::getElementsEnd()  
 {
 	return data.end();
 }
 
 template <typename ValueType>
-inline typename CDPL::Util::Array<ValueType>::ConstReverseElementIterator CDPL::Util::Array<ValueType>::getElementsReverseBegin() const  
+typename CDPL::Util::Array<ValueType>::ConstReverseElementIterator CDPL::Util::Array<ValueType>::getElementsReverseBegin() const  
 {
 	return data.rbegin();
 }
 
 template <typename ValueType>
-inline typename CDPL::Util::Array<ValueType>::ReverseElementIterator CDPL::Util::Array<ValueType>::getElementsReverseBegin()  
+typename CDPL::Util::Array<ValueType>::ReverseElementIterator CDPL::Util::Array<ValueType>::getElementsReverseBegin()  
 {
 	return data.rbegin();
 }
 
 template <typename ValueType>
-inline typename CDPL::Util::Array<ValueType>::ConstReverseElementIterator CDPL::Util::Array<ValueType>::getElementsReverseEnd() const  
+typename CDPL::Util::Array<ValueType>::ConstReverseElementIterator CDPL::Util::Array<ValueType>::getElementsReverseEnd() const  
 {
 	return data.rend();
 }
 
 template <typename ValueType>
-inline typename CDPL::Util::Array<ValueType>::ReverseElementIterator CDPL::Util::Array<ValueType>::getElementsReverseEnd()  
+typename CDPL::Util::Array<ValueType>::ReverseElementIterator CDPL::Util::Array<ValueType>::getElementsReverseEnd()  
 {
 	return data.rend();
 }
 
 template <typename ValueType>
-inline const ValueType& CDPL::Util::Array<ValueType>::getElement(std::size_t idx) const  
+const ValueType& CDPL::Util::Array<ValueType>::getElement(std::size_t idx) const  
 {
 	checkIndex(idx, false);
 
@@ -881,7 +881,7 @@ inline const ValueType& CDPL::Util::Array<ValueType>::getElement(std::size_t idx
 }
 
 template <typename ValueType>
-inline ValueType& CDPL::Util::Array<ValueType>::getElement(std::size_t idx)  
+ValueType& CDPL::Util::Array<ValueType>::getElement(std::size_t idx)  
 {
 	checkIndex(idx, false);
 
@@ -889,7 +889,7 @@ inline ValueType& CDPL::Util::Array<ValueType>::getElement(std::size_t idx)
 }
 
 template <typename ValueType>
-inline void CDPL::Util::Array<ValueType>::setElement(std::size_t idx, const ValueType& value)  
+void CDPL::Util::Array<ValueType>::setElement(std::size_t idx, const ValueType& value)  
 {
 	checkIndex(idx, false);
 
@@ -897,7 +897,7 @@ inline void CDPL::Util::Array<ValueType>::setElement(std::size_t idx, const Valu
 }
 
 template <typename ValueType>
-inline const ValueType& CDPL::Util::Array<ValueType>::operator[](std::size_t idx) const  
+const ValueType& CDPL::Util::Array<ValueType>::operator[](std::size_t idx) const  
 {
 	checkIndex(idx, false);
 
@@ -905,7 +905,7 @@ inline const ValueType& CDPL::Util::Array<ValueType>::operator[](std::size_t idx
 }
 
 template <typename ValueType>
-inline ValueType& CDPL::Util::Array<ValueType>::operator[](std::size_t idx)  
+ValueType& CDPL::Util::Array<ValueType>::operator[](std::size_t idx)  
 {
 	checkIndex(idx, false);
 
@@ -913,89 +913,89 @@ inline ValueType& CDPL::Util::Array<ValueType>::operator[](std::size_t idx)
 }
 
 template <typename ValueType>
-inline bool CDPL::Util::Array<ValueType>::operator==(const Array& array) const  
+bool CDPL::Util::Array<ValueType>::operator==(const Array& array) const  
 {
 	return (data == array.data);
 }
 
 template <typename ValueType>
-inline bool CDPL::Util::Array<ValueType>::operator!=(const Array& array) const  
+bool CDPL::Util::Array<ValueType>::operator!=(const Array& array) const  
 {
 	return (data != array.data);
 }
 
 template <typename ValueType>
-inline bool CDPL::Util::Array<ValueType>::operator<=(const Array& array) const  
+bool CDPL::Util::Array<ValueType>::operator<=(const Array& array) const  
 {
 	return (data <= array.data);
 }
 
 template <typename ValueType>
-inline bool CDPL::Util::Array<ValueType>::operator>=(const Array& array) const  
+bool CDPL::Util::Array<ValueType>::operator>=(const Array& array) const  
 {
 	return (data >= array.data);
 }
 
 template <typename ValueType>
-inline bool CDPL::Util::Array<ValueType>::operator<(const Array& array) const  
+bool CDPL::Util::Array<ValueType>::operator<(const Array& array) const  
 {
 	return (data < array.data);
 }
 
 template <typename ValueType>
-inline bool CDPL::Util::Array<ValueType>::operator>(const Array& array) const  
+bool CDPL::Util::Array<ValueType>::operator>(const Array& array) const  
 {
 	return (data > array.data);
 }
 
 template <typename ValueType>
-inline void CDPL::Util::Array<ValueType>::checkIfNonEmpty() const 
+void CDPL::Util::Array<ValueType>::checkIfNonEmpty() const 
 {
 	if (data.empty())
 		throwOperationFailed();
 }
 
 template <typename ValueType>
-inline void CDPL::Util::Array<ValueType>::checkIndex(std::size_t idx, bool allow_end) const 
+void CDPL::Util::Array<ValueType>::checkIndex(std::size_t idx, bool allow_end) const 
 {
 	if ((allow_end && idx > data.size()) || (!allow_end && idx >= data.size()))
 		throwIndexError();
 }
 
 template <typename ValueType>
-inline void CDPL::Util::Array<ValueType>::checkIterator(const ElementIterator& it, bool allow_end) 
+void CDPL::Util::Array<ValueType>::checkIterator(const ElementIterator& it, bool allow_end) 
 {
 	if (it < data.begin() || (allow_end && it > data.end()) || (!allow_end && it >= data.end()))	
 		throwRangeError();
 }
 
 template <typename ValueType>
-inline void CDPL::Util::Array<ValueType>::checkIterator(const ConstElementIterator& it, bool allow_end) const 
+void CDPL::Util::Array<ValueType>::checkIterator(const ConstElementIterator& it, bool allow_end) const 
 {
 	if (it < data.begin() || allow_end && it > data.end() || !allow_end && it >= data.end())	
 		throwRangeError();
 }
 
 template <typename ValueType>
-inline void CDPL::Util::Array<ValueType>::throwIndexError() const
+void CDPL::Util::Array<ValueType>::throwIndexError() const
 {
 	throw Base::IndexError(std::string(getClassName()) + ": element index out of bounds");
 }
 
 template <typename ValueType>
-inline void CDPL::Util::Array<ValueType>::throwRangeError() const
+void CDPL::Util::Array<ValueType>::throwRangeError() const
 {
 	throw Base::RangeError(std::string(getClassName()) + ": invalid iterator");
 }
 
 template <typename ValueType>
-inline void CDPL::Util::Array<ValueType>::throwOperationFailed() const 
+void CDPL::Util::Array<ValueType>::throwOperationFailed() const 
 {
 	throw Base::OperationFailed(std::string(getClassName()) + ": operation requires non-empty array");
 }
 
 template <typename ValueType>
-inline const char* CDPL::Util::Array<ValueType>::getClassName() const 
+const char* CDPL::Util::Array<ValueType>::getClassName() const 
 {
 	return "Array";
 }

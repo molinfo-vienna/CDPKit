@@ -56,23 +56,23 @@ using namespace CDPL;
 namespace
 {
 
-	inline void writePDBLine(std::ostream& os, const std::string& line, const char* err_msg, 
+	void writePDBLine(std::ostream& os, const std::string& line, const char* err_msg, 
 							 bool check_llen, bool trunc, std::size_t max_llen)
 	{
 		Internal::writeLine(os, line, err_msg, check_llen, false, trunc, max_llen, Biomol::PDB::END_OF_LINE);
 	}
 
-	inline void writePDBEOL(std::ostream& os)
+	void writePDBEOL(std::ostream& os)
 	{
 		Internal::writeEOL(os, Biomol::PDB::END_OF_LINE);
 	}
 
-	inline void writeChar(std::ostream& os, char ch)
+	void writeChar(std::ostream& os, char ch)
 	{
 		os << ch;
 	}
 
-	inline void writePDBRecordPrefix(std::ostream& os, const std::string& prefix)
+	void writePDBRecordPrefix(std::ostream& os, const std::string& prefix)
 	{
 		Internal::writeString(os, Biomol::PDB::RECORD_NAME_LENGTH, prefix, ("error while writing " + prefix + " record").c_str(), 
 							  false, false, false);

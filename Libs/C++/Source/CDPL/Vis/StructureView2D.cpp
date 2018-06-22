@@ -2209,7 +2209,7 @@ double Vis::StructureView2D::calcBondAngle(const Chem::Bond& bond1, const Chem::
 	return std::acos(dot_prod);
 }
 
-inline double Vis::StructureView2D::calcInputBondLength(const Chem::Bond& bond) const
+double Vis::StructureView2D::calcInputBondLength(const Chem::Bond& bond) const
 {
 	return norm2(inputAtomCoords[structure->getAtomIndex(bond.getBegin())] 
 				  - inputAtomCoords[structure->getAtomIndex(bond.getEnd())]);
@@ -2410,7 +2410,12 @@ void Vis::StructureView2D::initInputAtomPosTable()
 			calcInputAtomCoords.isEmpty() || calcBondStereoFlags.isEmpty()) {
 
 			Chem::Atom2DCoordinatesGenerator(*structure, calcInputAtomCoords);
-			Chem::BondStereoFlagGenerator(*structure, calcInputAtomCoords, calcBondStereoFlags);
+
+			Chem::BondStereoFlagGenerator sto_flag_gen;
+
+			sto_flag_gen.setAtom2DCoordinatesFunction(boost::bind(static_cast<const Math::Vector2D& (Math::Vector2DArray::*)(std::size_t) const>(&Math::Vector2DArray::getElement), 
+																  boost::ref(calcInputAtomCoords), boost::bind(&Chem::MolecularGraph::getAtomIndex, structure, _1)));
+			sto_flag_gen.generate(*structure, calcBondStereoFlags);
 		}
 
 		inputAtomCoords = calcInputAtomCoords;
@@ -3032,7 +3037,7 @@ double Vis::StructureView2D::calcOutputSize(const Chem::Atom& atom, const SizeSp
 	return calcOutputSize(size_spec.getValue() * getLabelSizeSpec(atom).getValue(), size_spec);
 }
 
-inline double Vis::StructureView2D::calcOutputSize(const SizeSpecification& size_spec) const
+double Vis::StructureView2D::calcOutputSize(const SizeSpecification& size_spec) const
 {
 	return calcOutputSize(size_spec.getValue(), size_spec);
 }

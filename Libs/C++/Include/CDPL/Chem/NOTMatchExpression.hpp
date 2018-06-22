@@ -175,7 +175,7 @@ namespace CDPL
 // Implementation
 
 template <typename ObjType1, typename ObjType2>
-inline bool CDPL::Chem::NOTMatchExpression<ObjType1, ObjType2>::operator()(const ObjType1& query_obj1, const ObjType2& query_obj2, 
+bool CDPL::Chem::NOTMatchExpression<ObjType1, ObjType2>::operator()(const ObjType1& query_obj1, const ObjType2& query_obj2, 
 																		   const ObjType1& target_obj1, const ObjType2& target_obj2, 
 																		   const Base::Variant& data) const
 {
@@ -183,7 +183,7 @@ inline bool CDPL::Chem::NOTMatchExpression<ObjType1, ObjType2>::operator()(const
 }
 
 template <typename ObjType1, typename ObjType2>
-inline bool CDPL::Chem::NOTMatchExpression<ObjType1, ObjType2>::operator()(const ObjType1& query_obj1, const ObjType2& query_obj2, 
+bool CDPL::Chem::NOTMatchExpression<ObjType1, ObjType2>::operator()(const ObjType1& query_obj1, const ObjType2& query_obj2, 
 																		   const ObjType1& target_obj1, const ObjType2& target_obj2, 
 																		   const AtomBondMapping& mapping, const Base::Variant& data) const
 {
@@ -191,28 +191,28 @@ inline bool CDPL::Chem::NOTMatchExpression<ObjType1, ObjType2>::operator()(const
 }
 
 template <typename ObjType1, typename ObjType2>
-inline bool CDPL::Chem::NOTMatchExpression<ObjType1, ObjType2>::requiresAtomBondMapping() const
+bool CDPL::Chem::NOTMatchExpression<ObjType1, ObjType2>::requiresAtomBondMapping() const
 {
 	return this->expression->requiresAtomBondMapping();
 }
 
 
 template <typename ObjType>
-inline bool CDPL::Chem::NOTMatchExpression<ObjType, void>::operator()(const ObjType& query_obj, const ObjType& target_obj, 
+bool CDPL::Chem::NOTMatchExpression<ObjType, void>::operator()(const ObjType& query_obj, const ObjType& target_obj, 
 																	  const Base::Variant& data) const
 {
 	return !this->expression->operator()(query_obj, target_obj, data);
 }
 
 template <typename ObjType>
-inline bool CDPL::Chem::NOTMatchExpression<ObjType, void>::operator()(const ObjType& query_obj, const ObjType& target_obj, 
+bool CDPL::Chem::NOTMatchExpression<ObjType, void>::operator()(const ObjType& query_obj, const ObjType& target_obj, 
 																	  const AtomBondMapping& mapping, const Base::Variant& data) const
 {
 	return !this->expression->operator()(query_obj, target_obj, mapping, data);
 }
 
 template <typename ObjType1>
-inline bool CDPL::Chem::NOTMatchExpression<ObjType1, void>::requiresAtomBondMapping() const
+bool CDPL::Chem::NOTMatchExpression<ObjType1, void>::requiresAtomBondMapping() const
 {
 	return this->expression->requiresAtomBondMapping();
 }

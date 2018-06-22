@@ -32,7 +32,6 @@
 #include <boost/utility.hpp>
 #include <boost/type_traits/is_arithmetic.hpp>
 
-#include "CDPL/Math/Config.hpp"
 #include "CDPL/Math/Expression.hpp"
 #include "CDPL/Math/CommonType.hpp"
 #include "CDPL/Math/Functional.hpp"
@@ -61,21 +60,21 @@ namespace CDPL
 			typedef const SelfType ConstClosureType;
 			typedef SelfType ClosureType;
 		
-			CDPL_MATH_INLINE QuaternionUnary1(const ExpressionType& e): expr(e) {}
+			QuaternionUnary1(const ExpressionType& e): expr(e) {}
 
-			CDPL_MATH_INLINE ConstReference getC1() const {
+			ConstReference getC1() const {
 				return FunctorType::apply(expr.getC1());
 			}
 
-			CDPL_MATH_INLINE ConstReference getC2() const {
+			ConstReference getC2() const {
 				return FunctorType::apply(expr.getC2());
 			}
 	
-			CDPL_MATH_INLINE ConstReference getC3() const {
+			ConstReference getC3() const {
 				return FunctorType::apply(expr.getC3());
 			}
 
-			CDPL_MATH_INLINE ConstReference getC4() const {
+			ConstReference getC4() const {
 				return FunctorType::apply(expr.getC4());
 			}
 
@@ -107,21 +106,21 @@ namespace CDPL
 			typedef const SelfType ConstClosureType;
 			typedef SelfType ClosureType;
 		
-			CDPL_MATH_INLINE QuaternionUnary2(const ExpressionType& e): expr(e) {}
+			QuaternionUnary2(const ExpressionType& e): expr(e) {}
 
-			CDPL_MATH_INLINE ConstReference getC1() const {
+			ConstReference getC1() const {
 				return FunctorType::applyC1(expr);
 			}
 
-			CDPL_MATH_INLINE ConstReference getC2() const {
+			ConstReference getC2() const {
 				return FunctorType::applyC2(expr);
 			}
 	
-			CDPL_MATH_INLINE ConstReference getC3() const {
+			ConstReference getC3() const {
 				return FunctorType::applyC3(expr);
 			}
 
-			CDPL_MATH_INLINE ConstReference getC4() const {
+			ConstReference getC4() const {
 				return FunctorType::applyC4(expr);
 			}
 
@@ -155,21 +154,21 @@ namespace CDPL
 			typedef const SelfType ConstClosureType;
 			typedef SelfType ClosureType;
 
-			CDPL_MATH_INLINE QuaternionBinary1(const Expression1Type& e1, const Expression2Type& e2): expr1(e1), expr2(e2) {}
+			QuaternionBinary1(const Expression1Type& e1, const Expression2Type& e2): expr1(e1), expr2(e2) {}
 		
-			CDPL_MATH_INLINE ConstReference getC1() const {
+			ConstReference getC1() const {
 				return FunctorType::apply(expr1.getC1(), expr2.getC1());
 			}
 
-			CDPL_MATH_INLINE ConstReference getC2() const {
+			ConstReference getC2() const {
 				return FunctorType::apply(expr1.getC2(), expr2.getC2());
 			}
 	
-			CDPL_MATH_INLINE ConstReference getC3() const {
+			ConstReference getC3() const {
 				return FunctorType::apply(expr1.getC3(), expr2.getC3());
 			}
 
-			CDPL_MATH_INLINE ConstReference getC4() const {
+			ConstReference getC4() const {
 				return FunctorType::apply(expr1.getC4(), expr2.getC4());
 			}
 
@@ -204,21 +203,21 @@ namespace CDPL
 			typedef const SelfType ConstClosureType;
 			typedef SelfType ClosureType;
 
-			CDPL_MATH_INLINE QuaternionBinary2(const Expression1Type& e1, const Expression2Type& e2): expr1(e1), expr2(e2) {}
+			QuaternionBinary2(const Expression1Type& e1, const Expression2Type& e2): expr1(e1), expr2(e2) {}
 		
-			CDPL_MATH_INLINE ConstReference getC1() const {
+			ConstReference getC1() const {
 				return FunctorType::applyC1(expr1, expr2);
 			}
 
-			CDPL_MATH_INLINE ConstReference getC2() const {
+			ConstReference getC2() const {
 				return FunctorType::applyC2(expr1, expr2);
 			}
 	
-			CDPL_MATH_INLINE ConstReference getC3() const {
+			ConstReference getC3() const {
 				return FunctorType::applyC3(expr1, expr2);
 			}
 
-			CDPL_MATH_INLINE ConstReference getC4() const {
+			ConstReference getC4() const {
 				return FunctorType::applyC4(expr1, expr2);
 			}
 
@@ -253,21 +252,21 @@ namespace CDPL
 			typedef const SelfType ConstClosureType;
 			typedef SelfType ClosureType;
 		
-			CDPL_MATH_INLINE Scalar1QuaternionBinary1(const Expression1Type& e1, const Expression2Type& e2): expr1(e1), expr2(e2) {}
+			Scalar1QuaternionBinary1(const Expression1Type& e1, const Expression2Type& e2): expr1(e1), expr2(e2) {}
 
-			CDPL_MATH_INLINE ConstReference getC1() const {
+			ConstReference getC1() const {
 				return FunctorType::apply(expr1, expr2.getC1());
 			}
 
-			CDPL_MATH_INLINE ConstReference getC2() const {
+			ConstReference getC2() const {
 				return FunctorType::apply(expr1, expr2.getC2());
 			}
 	
-			CDPL_MATH_INLINE ConstReference getC3() const {
+			ConstReference getC3() const {
 				return FunctorType::apply(expr1, expr2.getC3());
 			}
 
-			CDPL_MATH_INLINE ConstReference getC4() const {
+			ConstReference getC4() const {
 				return FunctorType::apply(expr1, expr2.getC4());
 			}
 
@@ -302,21 +301,21 @@ namespace CDPL
 			typedef const SelfType ConstClosureType;
 			typedef SelfType ClosureType;
 		
-			CDPL_MATH_INLINE Scalar1QuaternionBinary2(const Expression1Type& e1, const Expression2Type& e2): expr1(e1), expr2(e2) {}
+			Scalar1QuaternionBinary2(const Expression1Type& e1, const Expression2Type& e2): expr1(e1), expr2(e2) {}
 
-			CDPL_MATH_INLINE ConstReference getC1() const {
+			ConstReference getC1() const {
 				return FunctorType::applyC1(expr1, expr2);
 			}
 
-			CDPL_MATH_INLINE ConstReference getC2() const {
+			ConstReference getC2() const {
 				return FunctorType::applyC2(expr1, expr2);
 			}
 	
-			CDPL_MATH_INLINE ConstReference getC3() const {
+			ConstReference getC3() const {
 				return FunctorType::applyC3(expr1, expr2);
 			}
 
-			CDPL_MATH_INLINE ConstReference getC4() const {
+			ConstReference getC4() const {
 				return FunctorType::applyC4(expr1, expr2);
 			}
 
@@ -351,21 +350,21 @@ namespace CDPL
 			typedef const SelfType ConstClosureType;
 			typedef SelfType ClosureType;
 		
-			CDPL_MATH_INLINE Scalar2QuaternionBinary1(const Expression1Type& e1, const Expression2Type& e2): expr1(e1), expr2(e2) {}
+			Scalar2QuaternionBinary1(const Expression1Type& e1, const Expression2Type& e2): expr1(e1), expr2(e2) {}
 
-			CDPL_MATH_INLINE ConstReference getC1() const {
+			ConstReference getC1() const {
 				return FunctorType::apply(expr1.getC1(), expr2);
 			}
 
-			CDPL_MATH_INLINE ConstReference getC2() const {
+			ConstReference getC2() const {
 				return FunctorType::apply(expr1.getC2(), expr2);
 			}
 	
-			CDPL_MATH_INLINE ConstReference getC3() const {
+			ConstReference getC3() const {
 				return FunctorType::apply(expr1.getC3(), expr2);
 			}
 
-			CDPL_MATH_INLINE ConstReference getC4() const {
+			ConstReference getC4() const {
 				return FunctorType::apply(expr1.getC4(), expr2);
 			}
 
@@ -400,21 +399,21 @@ namespace CDPL
 			typedef const SelfType ConstClosureType;
 			typedef SelfType ClosureType;
 		
-			CDPL_MATH_INLINE Scalar2QuaternionBinary2(const Expression1Type& e1, const Expression2Type& e2): expr1(e1), expr2(e2) {}
+			Scalar2QuaternionBinary2(const Expression1Type& e1, const Expression2Type& e2): expr1(e1), expr2(e2) {}
 
-			CDPL_MATH_INLINE ConstReference getC1() const {
+			ConstReference getC1() const {
 				return FunctorType::applyC1(expr1, expr2);
 			}
 
-			CDPL_MATH_INLINE ConstReference getC2() const {
+			ConstReference getC2() const {
 				return FunctorType::applyC2(expr1, expr2);
 			}
 	
-			CDPL_MATH_INLINE ConstReference getC3() const {
+			ConstReference getC3() const {
 				return FunctorType::applyC3(expr1, expr2);
 			}
 
-			CDPL_MATH_INLINE ConstReference getC4() const {
+			ConstReference getC4() const {
 				return FunctorType::applyC4(expr1, expr2);
 			}
 
@@ -451,22 +450,22 @@ namespace CDPL
 			typedef const SelfType ConstClosureType;
 			typedef SelfType ClosureType;
 		
-			CDPL_MATH_INLINE Scalar3QuaternionTernary(const Expression1Type& e1, const Expression2Type& e2, const Expression3Type& e3):
+			Scalar3QuaternionTernary(const Expression1Type& e1, const Expression2Type& e2, const Expression3Type& e3):
 				expr1(e1), expr2(e2), expr3(e3) {}
 
-			CDPL_MATH_INLINE ConstReference getC1() const {
+			ConstReference getC1() const {
 				return FunctorType::applyC1(expr1, expr2, expr3);
 			}
 
-			CDPL_MATH_INLINE ConstReference getC2() const {
+			ConstReference getC2() const {
 				return FunctorType::applyC2(expr1, expr2, expr3);
 			}
 	
-			CDPL_MATH_INLINE ConstReference getC3() const {
+			ConstReference getC3() const {
 				return FunctorType::applyC3(expr1, expr2, expr3);
 			}
 
-			CDPL_MATH_INLINE ConstReference getC4() const {
+			ConstReference getC4() const {
 				return FunctorType::applyC4(expr1, expr2, expr3);
 			}
 
@@ -504,22 +503,22 @@ namespace CDPL
 			typedef const SelfType ConstClosureType;
 			typedef SelfType ClosureType;
 		
-			CDPL_MATH_INLINE Scalar13QuaternionTernary(const Expression1Type& e1, const Expression2Type& e2, const Expression3Type& e3):
+			Scalar13QuaternionTernary(const Expression1Type& e1, const Expression2Type& e2, const Expression3Type& e3):
 				expr1(e1), expr2(e2), expr3(e3) {}
 
-			CDPL_MATH_INLINE ConstReference getC1() const {
+			ConstReference getC1() const {
 				return FunctorType::applyC1(expr1, expr2, expr3);
 			}
 
-			CDPL_MATH_INLINE ConstReference getC2() const {
+			ConstReference getC2() const {
 				return FunctorType::applyC2(expr1, expr2, expr3);
 			}
 	
-			CDPL_MATH_INLINE ConstReference getC3() const {
+			ConstReference getC3() const {
 				return FunctorType::applyC3(expr1, expr2, expr3);
 			}
 
-			CDPL_MATH_INLINE ConstReference getC4() const {
+			ConstReference getC4() const {
 				return FunctorType::applyC4(expr1, expr2, expr3);
 			}
 
@@ -537,8 +536,7 @@ namespace CDPL
 			typedef ExpressionType ResultType;
 		};
 
-		template <typename E>
-		CDPL_MATH_INLINE
+		template <typename E>		
 		typename QuaternionUnary1Traits<E, ScalarNegation<typename E::ValueType> >::ResultType 
 		operator-(const QuaternionExpression<E>& e)
 		{
@@ -548,15 +546,13 @@ namespace CDPL
 		}
 	
 		template <typename E>
-		CDPL_MATH_INLINE
 		const E& 
 		operator+(const QuaternionExpression<E>& e)
 		{
 			return e();
 		}
 
-		template <typename E1, typename E2>
-		CDPL_MATH_INLINE
+		template <typename E1, typename E2>		
 		typename QuaternionBinary1Traits<E1, E2, ScalarAddition<typename E1::ValueType, typename E2::ValueType> >::ResultType 
 		operator+(const QuaternionExpression<E1>& e1, const QuaternionExpression<E2>& e2)
 		{
@@ -566,8 +562,7 @@ namespace CDPL
 			return ExpressionType(e1(), e2());
 		}
 	
-		template <typename E, typename T>
-		CDPL_MATH_INLINE
+		template <typename E, typename T>		
 		typename boost::enable_if<IsScalar<T>, typename Scalar2QuaternionBinary2Traits<E, T, Scalar2QuaternionAddition<E, T> >::ResultType>::type
 		operator+(const QuaternionExpression<E>& e, const T& t)
 		{
@@ -576,8 +571,7 @@ namespace CDPL
 			return ExpressionType(e(), t);
 		}
 
-		template <typename T, typename E>
-		CDPL_MATH_INLINE
+		template <typename T, typename E>		
 		typename boost::enable_if<IsScalar<T>, typename Scalar1QuaternionBinary2Traits<T, E, Scalar1QuaternionAddition<T, E> >::ResultType>::type
 		operator+(const T& t, const QuaternionExpression<E>& e)
 		{
@@ -586,8 +580,7 @@ namespace CDPL
 			return ExpressionType(t, e());
 		}
 
-		template <typename E1, typename E2>
-		CDPL_MATH_INLINE
+		template <typename E1, typename E2>		
 		typename QuaternionBinary1Traits<E1, E2, ScalarSubtraction<typename E1::ValueType, typename E2::ValueType> >::ResultType 
 		operator-(const QuaternionExpression<E1>& e1, const QuaternionExpression<E2>& e2)
 		{
@@ -597,8 +590,7 @@ namespace CDPL
 			return ExpressionType(e1(), e2());
 		}
 
-		template <typename E, typename T>
-		CDPL_MATH_INLINE
+		template <typename E, typename T>		
 		typename boost::enable_if<IsScalar<T>, typename Scalar2QuaternionBinary2Traits<E, T, Scalar2QuaternionSubtraction<E, T> >::ResultType>::type
 		operator-(const QuaternionExpression<E>& e, const T& t)
 		{
@@ -607,8 +599,7 @@ namespace CDPL
 			return ExpressionType(e(), t);
 		}
 
-		template <typename T, typename E>
-		CDPL_MATH_INLINE
+		template <typename T, typename E>		
 		typename boost::enable_if<IsScalar<T>, typename Scalar1QuaternionBinary2Traits<T, E, Scalar1QuaternionSubtraction<T, E> >::ResultType>::type
 		operator-(const T& t, const QuaternionExpression<E>& e)
 		{
@@ -617,8 +608,7 @@ namespace CDPL
 			return ExpressionType(t, e());
 		}
 
-		template <typename E1, typename E2>
-		CDPL_MATH_INLINE
+		template <typename E1, typename E2>		
 		typename QuaternionBinary2Traits<E1, E2, QuaternionProduct<E1, E2> >::ResultType 
 		operator*(const QuaternionExpression<E1>& e1, const QuaternionExpression<E2>& e2)
 		{
@@ -627,8 +617,7 @@ namespace CDPL
 			return ExpressionType(e1(), e2());
 		}
 
-		template <typename E, typename T>
-		CDPL_MATH_INLINE
+		template <typename E, typename T>		
 		typename boost::enable_if<IsScalar<T>, typename Scalar2QuaternionBinary1Traits<E, T, ScalarMultiplication<typename E::ValueType, T> >::ResultType>::type
 		operator*(const QuaternionExpression<E>& e, const T& t)
 		{
@@ -638,8 +627,7 @@ namespace CDPL
 			return ExpressionType(e(), t);
 		}
 
-		template <typename T, typename E>
-		CDPL_MATH_INLINE
+		template <typename T, typename E>		
 		typename boost::enable_if<IsScalar<T>, typename Scalar1QuaternionBinary1Traits<T, E, ScalarMultiplication<T, typename E::ValueType> >::ResultType>::type 
 		operator*(const T& t, const QuaternionExpression<E>& e)
 		{
@@ -649,8 +637,7 @@ namespace CDPL
 			return ExpressionType(t, e());
 		}
 
-		template <typename E1, typename E2>
-		CDPL_MATH_INLINE
+		template <typename E1, typename E2>		
 		typename Scalar3QuaternionTernaryTraits<E1, E2, typename QuaternionNorm2<E2>::ResultType, 
 												QuaternionDivision<E1, E2, typename QuaternionNorm2<E2>::ResultType> >::ResultType 
 		operator/(const QuaternionExpression<E1>& e1, const QuaternionExpression<E2>& e2)
@@ -661,8 +648,7 @@ namespace CDPL
 			return ExpressionType(e1(), e2(), norm2(e2));
 		}
 		
-		template <typename E, typename T>
-		CDPL_MATH_INLINE
+		template <typename E, typename T>		
 		typename boost::enable_if<IsScalar<T>, typename Scalar2QuaternionBinary1Traits<E, T, ScalarDivision<typename E::ValueType, T> >::ResultType>::type
 		operator/(const QuaternionExpression<E>& e, const T& t)
 		{
@@ -672,45 +658,40 @@ namespace CDPL
 			return ExpressionType(e(), t);
 		}
 		
-		template <typename T, typename E>
-		CDPL_MATH_INLINE
+		template <typename T, typename E>		
 		typename boost::enable_if<IsScalar<T>, 
 								  typename Scalar13QuaternionTernaryTraits<T, E, typename QuaternionNorm2<E>::ResultType, 
 																		   ScalarQuaternionDivision<T, E, typename QuaternionNorm2<E>::ResultType> >::ResultType>::type
 		operator/(const T& t, const QuaternionExpression<E>& e)
 		{
 			typedef typename Scalar13QuaternionTernaryTraits<T, E, typename QuaternionNorm2<E>::ResultType, 
-				ScalarQuaternionDivision<T, E, typename QuaternionNorm2<E>::ResultType> >::ExpressionType ExpressionType;
+															 ScalarQuaternionDivision<T, E, typename QuaternionNorm2<E>::ResultType> >::ExpressionType ExpressionType;
 
 			return ExpressionType(t, e(), norm2(e));
 		}
 
-		template <typename E1, typename E2>
-		CDPL_MATH_INLINE
+		template <typename E1, typename E2>		
 		typename QuaternionEquality<E1, E2>::ResultType
 		operator==(const QuaternionExpression<E1>& e1, const QuaternionExpression<E2>& e2)
 		{
 			return QuaternionEquality<E1, E2>::apply(e1, e2);
 		}
 
-		template <typename E1, typename E2>
-		CDPL_MATH_INLINE
+		template <typename E1, typename E2>		
 		typename QuaternionEquality<E1, E2>::ResultType
 		operator!=(const QuaternionExpression<E1>& e1, const QuaternionExpression<E2>& e2)
 		{
 			return !QuaternionEquality<E1, E2>::apply(e1, e2);
 		}
 
-		template <typename E1, typename E2, typename T>
-		CDPL_MATH_INLINE
+		template <typename E1, typename E2, typename T>		
 		typename boost::enable_if<boost::is_arithmetic<T>, typename QuaternionToleranceEquality<E1, E2, T>::ResultType>::type
 		equals(const QuaternionExpression<E1>& e1, const QuaternionExpression<E2>& e2, const T& eps)
 		{
 			return QuaternionToleranceEquality<E1, E2, T>::apply(e1, e2, eps);
 		}
 
-		template <typename E1, typename E2>
-		CDPL_MATH_INLINE
+		template <typename E1, typename E2>		
 		typename QuaternionBinary1Traits<E1, E2, ScalarDivision<typename E1::ValueType, typename E2::ValueType> >::ResultType 
 		elemDiv(const QuaternionExpression<E1>& e1, const QuaternionExpression<E2>& e2)
 		{
@@ -720,8 +701,7 @@ namespace CDPL
 			return ExpressionType(e1(), e2());
 		}
 
-		template <typename E1, typename E2>
-		CDPL_MATH_INLINE
+		template <typename E1, typename E2>		
 		typename QuaternionBinary1Traits<E1, E2, ScalarMultiplication<typename E1::ValueType, typename E2::ValueType> >::ResultType 
 		elemProd(const QuaternionExpression<E1>& e1, const QuaternionExpression<E2>& e2)
 		{
@@ -731,16 +711,14 @@ namespace CDPL
 			return ExpressionType(e1(), e2());
 		}
 
-		template <typename E>
-		CDPL_MATH_INLINE
+		template <typename E>		
 		typename E::ValueType 
 		real(const QuaternionExpression<E>& e)
 		{
 			return e().getC1();
 		}
 
-		template <typename E>
-		CDPL_MATH_INLINE
+		template <typename E>		
 		typename QuaternionUnary2Traits<E, QuaternionUnreal<E> >::ResultType 
 		unreal(const QuaternionExpression<E>& e)
 		{
@@ -749,8 +727,7 @@ namespace CDPL
 			return ExpressionType(e());
 		}
 
-		template <typename E>
-		CDPL_MATH_INLINE
+		template <typename E>		
 		typename QuaternionUnary2Traits<E, QuaternionConjugate<E> >::ResultType 
 		conj(const QuaternionExpression<E>& e)
 		{
@@ -759,8 +736,7 @@ namespace CDPL
 			return ExpressionType(e());
 		}
 	
-		template <typename E>
-		CDPL_MATH_INLINE
+		template <typename E>		
 		typename Scalar2QuaternionBinary2Traits<E, typename QuaternionNorm2<E>::ResultType, 
 												QuaternionInverse<E, typename QuaternionNorm2<E>::ResultType> >::ResultType 
 		inv(const QuaternionExpression<E>& e)
@@ -771,24 +747,21 @@ namespace CDPL
 			return ExpressionType(e(), norm2(e));
 		}
 		
-		template <typename E>
-		CDPL_MATH_INLINE
+		template <typename E>		
 		typename QuaternionNorm<E>::ResultType 
 		norm(const QuaternionExpression<E>& e)
 		{
 			return QuaternionNorm<E>::apply(e);
 		}
 
-		template <typename E>
-		CDPL_MATH_INLINE
+		template <typename E>		
 		typename QuaternionNorm2<E>::ResultType 
 		norm2(const QuaternionExpression<E>& e)
 		{
 			return QuaternionNorm2<E>::apply(e);
 		}
 
-		template <typename E>
-		CDPL_MATH_INLINE
+		template <typename E>		
 		typename QuaternionElementSum<E>::ResultType
 		sum(const QuaternionExpression<E>& e)
 		{

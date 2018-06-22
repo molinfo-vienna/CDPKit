@@ -29,8 +29,6 @@
 #ifndef CDPL_MATH_EXPRESSION_HPP
 #define CDPL_MATH_EXPRESSION_HPP
 
-#include "CDPL/Math/Config.hpp"
-
 
 namespace CDPL
 {
@@ -46,8 +44,8 @@ namespace CDPL
 			typedef E ExpressionType;
 
 		protected:
-			CDPL_MATH_INLINE Expression() {};
-			CDPL_MATH_INLINE ~Expression() {};
+			Expression() {};
+			~Expression() {};
 		
 		private:
 			const Expression& operator=(const Expression&);
@@ -60,17 +58,17 @@ namespace CDPL
 		public:
 			typedef E ExpressionType;
 
-			CDPL_MATH_INLINE const ExpressionType& operator()() const {
+			const ExpressionType& operator()() const {
 				return *static_cast<const ExpressionType*>(this);
 			}
 
-			CDPL_MATH_INLINE ExpressionType& operator()() {
+			ExpressionType& operator()() {
 				return *static_cast<ExpressionType*>(this);
 			}
 
 		protected:
-			CDPL_MATH_INLINE VectorExpression() {};
-			CDPL_MATH_INLINE ~VectorExpression() {};
+			VectorExpression() {};
+			~VectorExpression() {};
 		};
 
 		template <typename E>
@@ -80,17 +78,17 @@ namespace CDPL
 		public:
 			typedef E ExpressionType;
 
-			CDPL_MATH_INLINE const ExpressionType& operator()() const {
+			const ExpressionType& operator()() const {
 				return *static_cast<const ExpressionType*>(this);
 			}
 
-			CDPL_MATH_INLINE ExpressionType& operator()() {
+			ExpressionType& operator()() {
 				return *static_cast<ExpressionType*>(this);
 			}
 
 		protected:
-			CDPL_MATH_INLINE MatrixExpression() {};
-			CDPL_MATH_INLINE ~MatrixExpression() {};
+			MatrixExpression() {};
+			~MatrixExpression() {};
 		};
 
 		template <typename E>
@@ -100,17 +98,17 @@ namespace CDPL
 		public:
 			typedef E ExpressionType;
 
-			CDPL_MATH_INLINE const ExpressionType& operator()() const {
+			const ExpressionType& operator()() const {
 				return *static_cast<const ExpressionType*>(this);
 			}
 
-			CDPL_MATH_INLINE ExpressionType& operator()() {
+			ExpressionType& operator()() {
 				return *static_cast<ExpressionType*>(this);
 			}
 
 		protected:
-			CDPL_MATH_INLINE QuaternionExpression() {};
-			CDPL_MATH_INLINE ~QuaternionExpression() {};
+			QuaternionExpression() {};
+			~QuaternionExpression() {};
 		};
 
 		template <typename E>
@@ -120,17 +118,17 @@ namespace CDPL
 		public:
 			typedef E ExpressionType;
 
-			CDPL_MATH_INLINE const ExpressionType& operator()() const {
+			const ExpressionType& operator()() const {
 				return *static_cast<const ExpressionType*>(this);
 			}
 
-			CDPL_MATH_INLINE ExpressionType& operator()() {
+			ExpressionType& operator()() {
 				return *static_cast<ExpressionType*>(this);
 			}
 
 		protected:
-			CDPL_MATH_INLINE GridExpression() {};
-			CDPL_MATH_INLINE ~GridExpression() {};
+			GridExpression() {};
+			~GridExpression() {};
 		};
 
 		template <typename C> 
@@ -140,17 +138,17 @@ namespace CDPL
 		public:
 			typedef C ContainerType;
 
-			CDPL_MATH_INLINE const ContainerType& operator()() const {
+			const ContainerType& operator()() const {
 				return *static_cast<const ContainerType*>(this);
 			}
 
-			CDPL_MATH_INLINE ContainerType& operator()() {
+			ContainerType& operator()() {
 				return *static_cast<ContainerType*>(this);
 			}
 
 		protected:
-			CDPL_MATH_INLINE VectorContainer() {};
-			CDPL_MATH_INLINE ~VectorContainer() {};
+			VectorContainer() {};
+			~VectorContainer() {};
 		};
 	
 		template <typename C> 
@@ -160,17 +158,17 @@ namespace CDPL
 		public:
 			typedef C ContainerType;
 
-			CDPL_MATH_INLINE const ContainerType& operator()() const {
+			const ContainerType& operator()() const {
 				return *static_cast<const ContainerType*>(this);
 			}
 
-			CDPL_MATH_INLINE ContainerType& operator()() {
+			ContainerType& operator()() {
 				return *static_cast<ContainerType*>(this);
 			}
 
 		protected:
-			CDPL_MATH_INLINE MatrixContainer() {};
-			CDPL_MATH_INLINE ~MatrixContainer() {};
+			MatrixContainer() {};
+			~MatrixContainer() {};
 		};
 	
 		template <typename C> 
@@ -180,17 +178,17 @@ namespace CDPL
 		public:
 			typedef C ContainerType;
 
-			CDPL_MATH_INLINE const ContainerType& operator()() const {
+			const ContainerType& operator()() const {
 				return *static_cast<const ContainerType*>(this);
 			}
 
-			CDPL_MATH_INLINE ContainerType& operator()() {
+			ContainerType& operator()() {
 				return *static_cast<ContainerType*>(this);
 			}
 
 		protected:
-			CDPL_MATH_INLINE QuaternionContainer() {};
-			CDPL_MATH_INLINE ~QuaternionContainer() {};
+			QuaternionContainer() {};
+			~QuaternionContainer() {};
 		};
 
 		template <typename C> 
@@ -200,17 +198,17 @@ namespace CDPL
 		public:
 			typedef C ContainerType;
 
-			CDPL_MATH_INLINE const ContainerType& operator()() const {
+			const ContainerType& operator()() const {
 				return *static_cast<const ContainerType*>(this);
 			}
 
-			CDPL_MATH_INLINE ContainerType& operator()() {
+			ContainerType& operator()() {
 				return *static_cast<ContainerType*>(this);
 			}
 
 		protected:
-			CDPL_MATH_INLINE GridContainer() {};
-			CDPL_MATH_INLINE ~GridContainer() {};
+			GridContainer() {};
+			~GridContainer() {};
 		};
 	}
 }

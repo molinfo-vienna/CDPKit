@@ -240,20 +240,20 @@ namespace CDPL
 // Implementation
 
 template <typename T>
-inline CDPL::Vis::CairoPointer<T>::CairoPointer(T* p) throw() : pointer(p) {}
+CDPL::Vis::CairoPointer<T>::CairoPointer(T* p) throw() : pointer(p) {}
 
 template <typename T>
-inline CDPL::Vis::CairoPointer<T>::CairoPointer(const CairoPointer& other) throw() 
+CDPL::Vis::CairoPointer<T>::CairoPointer(const CairoPointer& other) throw() 
 	: pointer(CairoPointerTraits<T>::reference(other.pointer)) {}
 
 template <typename T>
-inline CDPL::Vis::CairoPointer<T>::~CairoPointer() 
+CDPL::Vis::CairoPointer<T>::~CairoPointer() 
 { 
 	CairoPointerTraits<T>::destroy(pointer); 
 }
 
 template <typename T>
-inline CDPL::Vis::CairoPointer<T>& CDPL::Vis::CairoPointer<T>::operator=(const CairoPointer& other) throw() 
+CDPL::Vis::CairoPointer<T>& CDPL::Vis::CairoPointer<T>::operator=(const CairoPointer& other) throw() 
 {
 	if (this != &other) {
 		CairoPointerTraits<T>::destroy(pointer);
@@ -264,31 +264,31 @@ inline CDPL::Vis::CairoPointer<T>& CDPL::Vis::CairoPointer<T>::operator=(const C
 }
 
 template <typename T>
-inline bool CDPL::Vis::CairoPointer<T>::operator!() const throw() 
+bool CDPL::Vis::CairoPointer<T>::operator!() const throw() 
 {
 	return !pointer;
 }
 
 template <typename T>
-inline T& CDPL::Vis::CairoPointer<T>::operator*() const throw() 
+T& CDPL::Vis::CairoPointer<T>::operator*() const throw() 
 { 
 	return *pointer; 
 }
 
 template <typename T>
-inline T* CDPL::Vis::CairoPointer<T>::operator->() const throw()
+T* CDPL::Vis::CairoPointer<T>::operator->() const throw()
 { 
 	return pointer; 
 }
 
 template <typename T>
-inline T* CDPL::Vis::CairoPointer<T>::get() const throw()
+T* CDPL::Vis::CairoPointer<T>::get() const throw()
 { 
 	return pointer; 
 }
 
 template <typename T>
-inline T* CDPL::Vis::CairoPointer<T>::release() throw()
+T* CDPL::Vis::CairoPointer<T>::release() throw()
 {
 	T* tmp = pointer;
 	pointer = 0;
@@ -296,7 +296,7 @@ inline T* CDPL::Vis::CairoPointer<T>::release() throw()
 }
 
 template <typename T>
-inline void CDPL::Vis::CairoPointer<T>::reset(T* p) throw()
+void CDPL::Vis::CairoPointer<T>::reset(T* p) throw()
 {
 	if (p != pointer) {
 		CairoPointerTraits<T>::destroy(pointer);

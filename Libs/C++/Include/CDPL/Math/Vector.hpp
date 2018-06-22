@@ -40,7 +40,6 @@
 #include <boost/swap.hpp>
 #include <boost/shared_ptr.hpp>
 
-#include "CDPL/Math/Config.hpp"
 #include "CDPL/Math/Check.hpp"
 #include "CDPL/Math/VectorExpression.hpp"
 #include "CDPL/Math/VectorAssignment.hpp"
@@ -74,104 +73,102 @@ namespace CDPL
 			typedef SelfType ClosureType;
 			typedef const SelfType ConstClosureType;
 			
-			CDPL_MATH_INLINE explicit VectorReference(VectorType& v): data(v) {}
+			explicit VectorReference(VectorType& v): data(v) {}
 
-			CDPL_MATH_INLINE Reference operator[](SizeType i) {
+			Reference operator[](SizeType i) {
 				return data[i];
 			}
 
-			CDPL_MATH_INLINE ConstReference operator[](SizeType i) const {
+			ConstReference operator[](SizeType i) const {
 				return data[i];
 			}
 
-			CDPL_MATH_INLINE Reference operator()(SizeType i) {
+			Reference operator()(SizeType i) {
 				return data(i);
 			}
 
-			CDPL_MATH_INLINE ConstReference operator()(SizeType i) const {
+			ConstReference operator()(SizeType i) const {
 				return data(i);
 			}
 	
-			CDPL_MATH_INLINE SizeType getSize() const {
+			SizeType getSize() const {
 				return data.getSize();
 			}
 
-			CDPL_MATH_INLINE SizeType getMaxSize() const {
+			SizeType getMaxSize() const {
 				return data.getMaxSize();
 			}
 
-			CDPL_MATH_INLINE bool isEmpty() const {
+			bool isEmpty() const {
 				return data.isEmpty();
 			}
 
-			CDPL_MATH_INLINE const VectorType& getData() const {
+			const VectorType& getData() const {
 				return data;
 			}
 
-			CDPL_MATH_INLINE VectorType& getData() {
+			VectorType& getData() {
 				return data;
 			}
 
-			CDPL_MATH_INLINE VectorReference& operator=(const VectorReference& r) {
+			VectorReference& operator=(const VectorReference& r) {
 				data.operator=(r.data);
 				return *this;
 			}
 
 			template <typename E>
-			CDPL_MATH_INLINE VectorReference& operator=(const VectorExpression<E>& e) {
+			VectorReference& operator=(const VectorExpression<E>& e) {
 				data.operator=(e);
 				return *this;
 			}
 
 			template <typename E>
-			CDPL_MATH_INLINE VectorReference& operator+=(const VectorExpression<E>& e) {
+			VectorReference& operator+=(const VectorExpression<E>& e) {
 				data.operator+=(e);
 				return *this;
 			}	
 
 			template <typename E>
-			CDPL_MATH_INLINE VectorReference& operator-=(const VectorExpression<E>& e) {
+			VectorReference& operator-=(const VectorExpression<E>& e) {
 				data.operator-=(e);
 				return *this;
 			}
 
 			template <typename T>
-			CDPL_MATH_INLINE 
 			typename boost::enable_if<IsScalar<T>, VectorReference>::type& operator*=(const T& t) {
 				data.operator*=(t);
 				return *this;
 			}
 	
 			template <typename T>
-			CDPL_MATH_INLINE 
 			typename boost::enable_if<IsScalar<T>, VectorReference>::type& operator/=(const T& t) {
 				data.operator/=(t);
 				return *this;
 			}
 			
 			template <typename E>
-			CDPL_MATH_INLINE VectorReference& assign(const VectorExpression<E>& e) {
+			VectorReference& assign(const VectorExpression<E>& e) {
 				data.assign(e);
 				return *this;
 			}
 
 			template <typename E>
-			CDPL_MATH_INLINE VectorReference& plusAssign(const VectorExpression<E>& e) {
+			VectorReference& plusAssign(const VectorExpression<E>& e) {
 				data.plusAssign(e);
 				return *this;
 			}
 
 			template <typename E>
-			CDPL_MATH_INLINE VectorReference& minusAssign(const VectorExpression<E>& e) {
+			VectorReference& minusAssign(const VectorExpression<E>& e) {
 				data.minusAssign(e);
 				return *this;
 			}
 
-			CDPL_MATH_INLINE void swap(VectorReference& r) {
+			void swap(VectorReference& r) {
 				data.swap(r.data);
 			}
 	
-			CDPL_MATH_INLINE friend void swap(VectorReference& r1, VectorReference& r2) {
+			friend void swap(VectorReference& r1, VectorReference& r2) {
 				r1.swap(r2);
 			}
 
@@ -199,71 +196,71 @@ namespace CDPL
 			typedef SelfType VectorTemporaryType;
 			typedef boost::shared_ptr<SelfType> SharedPointer;
 
-			CDPL_MATH_INLINE Vector(): data() {}
+			Vector(): data() {}
 
-			CDPL_MATH_INLINE explicit Vector(SizeType n): data(n) {}
+			explicit Vector(SizeType n): data(n) {}
 
-			CDPL_MATH_INLINE Vector(SizeType n, const ValueType& v): data(n, v) {}
+			Vector(SizeType n, const ValueType& v): data(n, v) {}
 
-			CDPL_MATH_INLINE Vector(const ArrayType& data): data(data) {}
+			Vector(const ArrayType& data): data(data) {}
 
-			CDPL_MATH_INLINE Vector(const Vector& v): data(v.data) {}
+			Vector(const Vector& v): data(v.data) {}
 
 			template <typename E>
-			CDPL_MATH_INLINE Vector(const VectorExpression<E>& e): data(e().getSize()) {
+			Vector(const VectorExpression<E>& e): data(e().getSize()) {
 				vectorAssignVector<ScalarAssignment>(*this, e);
 			}
 
-			CDPL_MATH_INLINE Reference operator[](SizeType i) {
+			Reference operator[](SizeType i) {
 				return this->operator()(i);
 			}
 
-			CDPL_MATH_INLINE ConstReference operator[](SizeType i) const {
+			ConstReference operator[](SizeType i) const {
 				return this->operator()(i);
 			}
 
-			CDPL_MATH_INLINE Reference operator()(SizeType i) {
+			Reference operator()(SizeType i) {
 				CDPL_MATH_CHECK(i < getSize(), "Index out of range", Base::IndexError);
 				return data[i];
 			}
 
-			CDPL_MATH_INLINE ConstReference operator()(SizeType i) const {
+			ConstReference operator()(SizeType i) const {
 				CDPL_MATH_CHECK(i < getSize(), "Index out of range", Base::IndexError);
 				return data[i];
 			}
 
-			CDPL_MATH_INLINE bool isEmpty() const {
+			bool isEmpty() const {
 				return data.empty();
 			}
 
-			CDPL_MATH_INLINE SizeType getSize() const {
+			SizeType getSize() const {
 				return data.size();
 			}
 
-			CDPL_MATH_INLINE SizeType getMaxSize() const {
+			SizeType getMaxSize() const {
 				return data.max_size();
 			}
 
-			CDPL_MATH_INLINE ArrayType& getData() {
+			ArrayType& getData() {
 				return data;
 			}
 			
-			CDPL_MATH_INLINE const ArrayType& getData() const {
+			const ArrayType& getData() const {
 				return data;
 			}
 
-			CDPL_MATH_INLINE Vector& operator=(const Vector& v) {
+			Vector& operator=(const Vector& v) {
 				data = v.data;
 				return *this;
 			}
 
 			template <typename C>
-			CDPL_MATH_INLINE Vector& operator=(const VectorContainer<C>& c) {
+			Vector& operator=(const VectorContainer<C>& c) {
 				return assign(c);
 			}
 
 			template <typename E>
-			CDPL_MATH_INLINE Vector& operator=(const VectorExpression<E>& e) {
+			Vector& operator=(const VectorExpression<E>& e) {
 				Vector tmp(e);
 				swap(tmp);
 
@@ -271,12 +268,12 @@ namespace CDPL
 			}
 
 			template <typename C>
-			CDPL_MATH_INLINE Vector& operator+=(const VectorContainer<C>& c) {
+			Vector& operator+=(const VectorContainer<C>& c) {
 				return plusAssign(c);
 			}
 
 			template <typename E>
-			CDPL_MATH_INLINE Vector& operator+=(const VectorExpression<E>& e) {
+			Vector& operator+=(const VectorExpression<E>& e) {
 				Vector tmp(*this + e);
 				swap(tmp);
 
@@ -284,12 +281,12 @@ namespace CDPL
 			}	
 
 			template <typename C>
-			CDPL_MATH_INLINE Vector& operator-=(const VectorContainer<C>& c) {
+			Vector& operator-=(const VectorContainer<C>& c) {
 				return minusAssign(c);
 			}
 
 			template <typename E>
-			CDPL_MATH_INLINE Vector& operator-=(const VectorExpression<E>& e) {
+			Vector& operator-=(const VectorExpression<E>& e) {
 				Vector tmp(*this - e);
 				swap(tmp);
 
@@ -297,52 +294,50 @@ namespace CDPL
 			}
 
 			template <typename T1>
-			CDPL_MATH_INLINE 
 			typename boost::enable_if<IsScalar<T1>, Vector>::type& operator*=(const T1& t) {
 				vectorAssignScalar<ScalarMultiplicationAssignment>(*this, t);
 				return *this;
 			}
 	
 			template <typename T1>
-			CDPL_MATH_INLINE 
 			typename boost::enable_if<IsScalar<T1>, Vector>::type& operator/=(const T1& t) {
 				vectorAssignScalar<ScalarDivisionAssignment>(*this, t);
 				return *this;
 			}
 			
 			template <typename E>
-			CDPL_MATH_INLINE Vector& assign(const VectorExpression<E>& e) {
+			Vector& assign(const VectorExpression<E>& e) {
 				resize(e().getSize());
 				vectorAssignVector<ScalarAssignment>(*this, e);
 				return *this;
 			}
 
 			template <typename E>
-			CDPL_MATH_INLINE Vector& plusAssign(const VectorExpression<E>& e) {
+			Vector& plusAssign(const VectorExpression<E>& e) {
 				vectorAssignVector<ScalarAdditionAssignment>(*this, e);
 				return *this;
 			}
 
 			template <typename E>
-			CDPL_MATH_INLINE Vector& minusAssign(const VectorExpression<E>& e) {
+			Vector& minusAssign(const VectorExpression<E>& e) {
 				vectorAssignVector<ScalarSubtractionAssignment>(*this, e);
 				return *this;
 			}
 
-			CDPL_MATH_INLINE void swap(Vector& v) {
+			void swap(Vector& v) {
 				if (this != &v)
 					boost::swap(data, v.data);
 			}
 	
-			CDPL_MATH_INLINE friend void swap(Vector& v1, Vector& v2) {
+			friend void swap(Vector& v1, Vector& v2) {
 				v1.swap(v2);
 			}
 
-			CDPL_MATH_INLINE void clear(const ValueType& v = ValueType()) {
+			void clear(const ValueType& v = ValueType()) {
 				std::fill(data.begin(), data.end(), v);
 			}
 
-			CDPL_MATH_INLINE void resize(SizeType n, const ValueType& v = ValueType()) {
+			void resize(SizeType n, const ValueType& v = ValueType()) {
 				data.resize(n, v);
 			}
 
@@ -372,65 +367,65 @@ namespace CDPL
 
 			static const SizeType MaxSize = N;
 
-			CDPL_MATH_INLINE BoundedVector(): size(0) {}
+			BoundedVector(): size(0) {}
 
-			CDPL_MATH_INLINE explicit BoundedVector(SizeType n): size(0) {
+			explicit BoundedVector(SizeType n): size(0) {
 				resize(n);
 			}
 
-			CDPL_MATH_INLINE BoundedVector(SizeType n, const ValueType& v): size(0) {
+			BoundedVector(SizeType n, const ValueType& v): size(0) {
 				resize(n, v);
 			}
 
-			CDPL_MATH_INLINE BoundedVector(const BoundedVector& v): size(v.size) {
+			BoundedVector(const BoundedVector& v): size(v.size) {
 				std::copy(v.data, v.data + v.size, data);
 			}
 
 			template <typename E>
-			CDPL_MATH_INLINE BoundedVector(const VectorExpression<E>& e): size(0) {
+			BoundedVector(const VectorExpression<E>& e): size(0) {
 				resize(e().getSize());
 				vectorAssignVector<ScalarAssignment>(*this, e);
 			}
 
-			CDPL_MATH_INLINE Reference operator[](SizeType i) {
+			Reference operator[](SizeType i) {
 				return this->operator()(i);
 			}
 
-			CDPL_MATH_INLINE ConstReference operator[](SizeType i) const {
+			ConstReference operator[](SizeType i) const {
 				return this->operator()(i);
 			}
 
-			CDPL_MATH_INLINE Reference operator()(SizeType i) {
+			Reference operator()(SizeType i) {
 				CDPL_MATH_CHECK(i < getSize(), "Index out of range", Base::IndexError);
 				return data[i];
 			}
 
-			CDPL_MATH_INLINE ConstReference operator()(SizeType i) const {
+			ConstReference operator()(SizeType i) const {
 				CDPL_MATH_CHECK(i < getSize(), "Index out of range", Base::IndexError);
 				return data[i];
 			}
 
-			CDPL_MATH_INLINE bool isEmpty() const {
+			bool isEmpty() const {
 				return (size == 0);
 			}
 
-			CDPL_MATH_INLINE SizeType getSize() const {
+			SizeType getSize() const {
 				return size;
 			}
 
-			CDPL_MATH_INLINE SizeType getMaxSize() const {
+			SizeType getMaxSize() const {
 				return N;
 			}
 
-			CDPL_MATH_INLINE Pointer getData() {
+			Pointer getData() {
 				return data;
 			}
 			
-			CDPL_MATH_INLINE ConstPointer getData() const {
+			ConstPointer getData() const {
 				return data;
 			}
 
-			CDPL_MATH_INLINE BoundedVector& operator=(const BoundedVector& v) {
+			BoundedVector& operator=(const BoundedVector& v) {
 				if (this != &v) {
 					std::copy(v.data, v.data + v.size, data);
 					size = v.size;
@@ -440,95 +435,93 @@ namespace CDPL
 			}
 
 			template <typename C>
-			CDPL_MATH_INLINE BoundedVector& operator=(const VectorContainer<C>& c) {
+			BoundedVector& operator=(const VectorContainer<C>& c) {
 				return assign(c);
 			}
 
 			template <typename E>
-			CDPL_MATH_INLINE BoundedVector& operator=(const VectorExpression<E>& e) {
+			BoundedVector& operator=(const VectorExpression<E>& e) {
 				BoundedVector tmp(e);
 
 				return this->operator=(tmp);
 			}
 
 			template <typename C>
-			CDPL_MATH_INLINE BoundedVector& operator+=(const VectorContainer<C>& c) {
+			BoundedVector& operator+=(const VectorContainer<C>& c) {
 				return plusAssign(c);
 			}
 
 			template <typename E>
-			CDPL_MATH_INLINE BoundedVector& operator+=(const VectorExpression<E>& e) {
+			BoundedVector& operator+=(const VectorExpression<E>& e) {
 				BoundedVector tmp(*this + e);
 
 				return this->operator=(tmp);
 			}	
 
 			template <typename C>
-			CDPL_MATH_INLINE BoundedVector& operator-=(const VectorContainer<C>& c) {
+			BoundedVector& operator-=(const VectorContainer<C>& c) {
 				return minusAssign(c);
 			}
 
 			template <typename E>
-			CDPL_MATH_INLINE BoundedVector& operator-=(const VectorExpression<E>& e) {
+			BoundedVector& operator-=(const VectorExpression<E>& e) {
 				BoundedVector tmp(*this - e);
 
 				return this->operator=(tmp);
 			}
 
 			template <typename T1>
-			CDPL_MATH_INLINE 
 			typename boost::enable_if<IsScalar<T1>, BoundedVector>::type& operator*=(const T1& t) {
 				vectorAssignScalar<ScalarMultiplicationAssignment>(*this, t);
 				return *this;
 			}
 	
 			template <typename T1>
-			CDPL_MATH_INLINE 
 			typename boost::enable_if<IsScalar<T1>, BoundedVector>::type& operator/=(const T1& t) {
 				vectorAssignScalar<ScalarDivisionAssignment>(*this, t);
 				return *this;
 			}
 			
 			template <typename E>
-			CDPL_MATH_INLINE BoundedVector& assign(const VectorExpression<E>& e) {
+			BoundedVector& assign(const VectorExpression<E>& e) {
 				resize(e().getSize());
 				vectorAssignVector<ScalarAssignment>(*this, e);
 				return *this;
 			}
 
 			template <typename E>
-			CDPL_MATH_INLINE BoundedVector& plusAssign(const VectorExpression<E>& e) {
+			BoundedVector& plusAssign(const VectorExpression<E>& e) {
 				vectorAssignVector<ScalarAdditionAssignment>(*this, e);
 				return *this;
 			}
 
 			template <typename E>
-			CDPL_MATH_INLINE BoundedVector& minusAssign(const VectorExpression<E>& e) {
+			BoundedVector& minusAssign(const VectorExpression<E>& e) {
 				vectorAssignVector<ScalarSubtractionAssignment>(*this, e);
 				return *this;
 			}
 
-			CDPL_MATH_INLINE void swap(BoundedVector& v) {
+			void swap(BoundedVector& v) {
 				if (this != &v) {
 					std::swap_ranges(data, data + std::max(size, v.size), v.data);
 					boost::swap(size, v.size);
 				}
 			}
 	
-			CDPL_MATH_INLINE friend void swap(BoundedVector& v1, BoundedVector& v2) {
+			friend void swap(BoundedVector& v1, BoundedVector& v2) {
 				v1.swap(v2);
 			}
 
-			CDPL_MATH_INLINE void clear(const ValueType& v = ValueType()) {
+			void clear(const ValueType& v = ValueType()) {
 				std::fill(data, data + size, v);
 			}
 
-			CDPL_MATH_INLINE void resize(SizeType n) {
+			void resize(SizeType n) {
 				CDPL_MATH_CHECK(n <= getMaxSize(), "Maximum size exceeded", Base::RangeError);
 				size = n;
 			}
 
-			CDPL_MATH_INLINE void resize(SizeType n, const ValueType& v) {
+			void resize(SizeType n, const ValueType& v) {
 				CDPL_MATH_CHECK(n <= getMaxSize(), "Maximum size exceeded", Base::RangeError);
 
 				if (n > size)
@@ -566,62 +559,62 @@ namespace CDPL
 
 			static const SizeType Size = N;
 
-			CDPL_MATH_INLINE CVector() {
+			CVector() {
 				clear();
 			}
 
-			CDPL_MATH_INLINE explicit CVector(const ValueType& v) {
+			explicit CVector(const ValueType& v) {
 				clear(v);
 			}
 
-			CDPL_MATH_INLINE CVector(const CVector& v) {
+			CVector(const CVector& v) {
 				std::copy(v.data, v.data + N, data);
 			}
 
 			template <typename E>
-			CDPL_MATH_INLINE CVector(const VectorExpression<E>& e) {
+			CVector(const VectorExpression<E>& e) {
 				vectorAssignVector<ScalarAssignment>(*this, e);
 			}
 
-			CDPL_MATH_INLINE Reference operator[](SizeType i) {
+			Reference operator[](SizeType i) {
 				return this->operator()(i);
 			}
 
-			CDPL_MATH_INLINE ConstReference operator[](SizeType i) const {
+			ConstReference operator[](SizeType i) const {
 				return this->operator()(i);
 			}
 
-			CDPL_MATH_INLINE Reference operator()(SizeType i) {
+			Reference operator()(SizeType i) {
 				CDPL_MATH_CHECK(i < getSize(), "Index out of range", Base::IndexError);
 				return data[i];
 			}
 
-			CDPL_MATH_INLINE ConstReference operator()(SizeType i) const {
+			ConstReference operator()(SizeType i) const {
 				CDPL_MATH_CHECK(i < getSize(), "Index out of range", Base::IndexError);
 				return data[i];
 			}
 
-			CDPL_MATH_INLINE bool isEmpty() const {
+			bool isEmpty() const {
 				return (N == 0);
 			}
 
-			CDPL_MATH_INLINE SizeType getSize() const {
+			SizeType getSize() const {
 				return N;
 			}
 
-			CDPL_MATH_INLINE SizeType getMaxSize() const {
+			SizeType getMaxSize() const {
 				return N;
 			}
 
-			CDPL_MATH_INLINE Pointer getData() {
+			Pointer getData() {
 				return data;
 			}
 			
-			CDPL_MATH_INLINE ConstPointer getData() const {
+			ConstPointer getData() const {
 				return data;
 			}
 
-			CDPL_MATH_INLINE CVector& operator=(const CVector& v) {
+			CVector& operator=(const CVector& v) {
 				if (this != &v)
 					std::copy(v.data, v.data + N, data);
 
@@ -629,83 +622,81 @@ namespace CDPL
 			}
 
 			template <typename C>
-			CDPL_MATH_INLINE CVector& operator=(const VectorContainer<C>& c) {
+			CVector& operator=(const VectorContainer<C>& c) {
 				return assign(c);
 			}
 
 			template <typename E>
-			CDPL_MATH_INLINE CVector& operator=(const VectorExpression<E>& e) {
+			CVector& operator=(const VectorExpression<E>& e) {
 				CVector tmp(e);
 
 				return this->operator=(tmp);
 			}
 
 			template <typename C>
-			CDPL_MATH_INLINE CVector& operator+=(const VectorContainer<C>& c) {
+			CVector& operator+=(const VectorContainer<C>& c) {
 				return plusAssign(c);
 			}
 
 			template <typename E>
-			CDPL_MATH_INLINE CVector& operator+=(const VectorExpression<E>& e) {
+			CVector& operator+=(const VectorExpression<E>& e) {
 				CVector tmp(*this + e);
 
 				return this->operator=(tmp);
 			}	
 
 			template <typename C>
-			CDPL_MATH_INLINE CVector& operator-=(const VectorContainer<C>& c) {
+			CVector& operator-=(const VectorContainer<C>& c) {
 				return minusAssign(c);
 			}
 
 			template <typename E>
-			CDPL_MATH_INLINE CVector& operator-=(const VectorExpression<E>& e) {
+			CVector& operator-=(const VectorExpression<E>& e) {
 				CVector tmp(*this - e);
 
 				return this->operator=(tmp);
 			}
 
 			template <typename T1>
-			CDPL_MATH_INLINE 
 			typename boost::enable_if<IsScalar<T1>, CVector>::type& operator*=(const T1& t) {
 				vectorAssignScalar<ScalarMultiplicationAssignment>(*this, t);
 				return *this;
 			}
 	
 			template <typename T1>
-			CDPL_MATH_INLINE 
 			typename boost::enable_if<IsScalar<T1>, CVector>::type& operator/=(const T1& t) {
 				vectorAssignScalar<ScalarDivisionAssignment>(*this, t);
 				return *this;
 			}
 			
 			template <typename E>
-			CDPL_MATH_INLINE CVector& assign(const VectorExpression<E>& e) {
+			CVector& assign(const VectorExpression<E>& e) {
 				vectorAssignVector<ScalarAssignment>(*this, e);
 				return *this;
 			}
 
 			template <typename E>
-			CDPL_MATH_INLINE CVector& plusAssign(const VectorExpression<E>& e) {
+			CVector& plusAssign(const VectorExpression<E>& e) {
 				vectorAssignVector<ScalarAdditionAssignment>(*this, e);
 				return *this;
 			}
 
 			template <typename E>
-			CDPL_MATH_INLINE CVector& minusAssign(const VectorExpression<E>& e) {
+			CVector& minusAssign(const VectorExpression<E>& e) {
 				vectorAssignVector<ScalarSubtractionAssignment>(*this, e);
 				return *this;
 			}
 
-			CDPL_MATH_INLINE void swap(CVector& v) {
+			void swap(CVector& v) {
 				if (this != &v)
 					std::swap_ranges(data, data + N, v.data);
 			}
 	
-			CDPL_MATH_INLINE friend void swap(CVector& v1, CVector& v2) {
+			friend void swap(CVector& v1, CVector& v2) {
 				v1.swap(v2);
 			}
 
-			CDPL_MATH_INLINE void clear(const ValueType& v = ValueType()) {
+			void clear(const ValueType& v = ValueType()) {
 				std::fill(data, data + N, v);
 			}
 
@@ -731,48 +722,48 @@ namespace CDPL
 			typedef const VectorReference<const SelfType> ConstClosureType;
 			typedef Vector<T> VectorTemporaryType;
 
-			CDPL_MATH_INLINE ZeroVector(): size(0) {}
+			ZeroVector(): size(0) {}
 
-			CDPL_MATH_INLINE explicit ZeroVector(SizeType n): size(n) {}
+			explicit ZeroVector(SizeType n): size(n) {}
 
-			CDPL_MATH_INLINE ZeroVector(const ZeroVector& v): size(v.size) {}
+			ZeroVector(const ZeroVector& v): size(v.size) {}
 	
-			CDPL_MATH_INLINE ConstReference operator[](SizeType i) const {
+			ConstReference operator[](SizeType i) const {
 				return this->operator()(i);
 			}
 
-			CDPL_MATH_INLINE ConstReference operator()(SizeType i) const {
+			ConstReference operator()(SizeType i) const {
 				CDPL_MATH_CHECK(i < getSize(), "Index out of range", Base::IndexError);
 				return zero;
 			}
 
-			CDPL_MATH_INLINE bool isEmpty() const {
+			bool isEmpty() const {
 				return (size == 0);
 			}
 
-			CDPL_MATH_INLINE SizeType getSize() const {
+			SizeType getSize() const {
 				return size;
 			}
 
-			CDPL_MATH_INLINE SizeType getMaxSize() const {
+			SizeType getMaxSize() const {
 				return std::numeric_limits<SizeType>::max();
 			}
 		
-			CDPL_MATH_INLINE ZeroVector& operator=(const ZeroVector& v) {
+			ZeroVector& operator=(const ZeroVector& v) {
 				size = v.size;
 				return *this;
 			}
 
-			CDPL_MATH_INLINE void resize(SizeType n) {
+			void resize(SizeType n) {
 				size = n;
 			}
 
-			CDPL_MATH_INLINE void swap(ZeroVector& v) {
+			void swap(ZeroVector& v) {
 				if (this != &v)
 					boost::swap(size, v.size);
 			}
 	
-			CDPL_MATH_INLINE friend void swap(ZeroVector& v1, ZeroVector& v2) {
+			friend void swap(ZeroVector& v1, ZeroVector& v2) {
 				v1.swap(v2);
 			}
 
@@ -799,39 +790,39 @@ namespace CDPL
 			typedef const VectorReference<const SelfType> ConstClosureType;
 			typedef Vector<T> VectorTemporaryType;
 
-			CDPL_MATH_INLINE UnitVector(): size(0), index(0) {}
+			UnitVector(): size(0), index(0) {}
 
-			CDPL_MATH_INLINE UnitVector(SizeType n, SizeType i): size(n), index(i) {}
+			UnitVector(SizeType n, SizeType i): size(n), index(i) {}
 
-			CDPL_MATH_INLINE UnitVector(const UnitVector& v): size(v.size), index(v.index) {}
+			UnitVector(const UnitVector& v): size(v.size), index(v.index) {}
 	
-			CDPL_MATH_INLINE ConstReference operator[](SizeType i) const {
+			ConstReference operator[](SizeType i) const {
 				return this->operator()(i);
 			}
 
-			CDPL_MATH_INLINE ConstReference operator()(SizeType i) const {
+			ConstReference operator()(SizeType i) const {
 				CDPL_MATH_CHECK(i < getSize(), "Index out of range", Base::IndexError);
 
 				return (i == index ? one : zero);
 			}
 
-			CDPL_MATH_INLINE bool isEmpty() const {
+			bool isEmpty() const {
 				return (size == 0);
 			}
 
-			CDPL_MATH_INLINE SizeType getSize() const {
+			SizeType getSize() const {
 				return size;
 			}
 
-			CDPL_MATH_INLINE SizeType getIndex() const {
+			SizeType getIndex() const {
 				return index;
 			}
 
-			CDPL_MATH_INLINE SizeType getMaxSize() const {
+			SizeType getMaxSize() const {
 				return std::numeric_limits<SizeType>::max();
 			}
 		
-			CDPL_MATH_INLINE UnitVector& operator=(const UnitVector& v) {
+			UnitVector& operator=(const UnitVector& v) {
 				if (this != &v) {
 					size = v.size;
 					index = v.index;
@@ -840,18 +831,18 @@ namespace CDPL
 				return *this;
 			}
 
-			CDPL_MATH_INLINE void resize(SizeType n) {
+			void resize(SizeType n) {
 				size = n;
 			}
 
-			CDPL_MATH_INLINE void swap(UnitVector& v) {
+			void swap(UnitVector& v) {
 				if (this != &v) {
 					boost::swap(size, v.size);
 					boost::swap(index, v.index);
 				}
 			}
 	
-			CDPL_MATH_INLINE friend void swap(UnitVector& v1, UnitVector& v2) {
+			friend void swap(UnitVector& v1, UnitVector& v2) {
 				v1.swap(v2);
 			}
 
@@ -881,34 +872,34 @@ namespace CDPL
 			typedef const VectorReference<const SelfType> ConstClosureType;
 			typedef Vector<T> VectorTemporaryType;
 
-			CDPL_MATH_INLINE ScalarVector(): size(0) {}
+			ScalarVector(): size(0) {}
 
-			CDPL_MATH_INLINE ScalarVector(SizeType n, const ValueType& v = ValueType()): size(n), value(v) {}
+			ScalarVector(SizeType n, const ValueType& v = ValueType()): size(n), value(v) {}
 
-			CDPL_MATH_INLINE ScalarVector(const ScalarVector& v): size(v.size), value(v.value) {}
+			ScalarVector(const ScalarVector& v): size(v.size), value(v.value) {}
 	
-			CDPL_MATH_INLINE ConstReference operator[](SizeType i) const {
+			ConstReference operator[](SizeType i) const {
 				return this->operator()(i);
 			}
 
-			CDPL_MATH_INLINE ConstReference operator()(SizeType i) const {
+			ConstReference operator()(SizeType i) const {
 				CDPL_MATH_CHECK(i < getSize(), "Index out of range", Base::IndexError);
 				return value;
 			}
 
-			CDPL_MATH_INLINE bool isEmpty() const {
+			bool isEmpty() const {
 				return (size == 0);
 			}
 
-			CDPL_MATH_INLINE SizeType getSize() const {
+			SizeType getSize() const {
 				return size;
 			}
 
-			CDPL_MATH_INLINE SizeType getMaxSize() const {
+			SizeType getMaxSize() const {
 				return std::numeric_limits<SizeType>::max();
 			}
 		
-			CDPL_MATH_INLINE ScalarVector& operator=(const ScalarVector& v) {
+			ScalarVector& operator=(const ScalarVector& v) {
 				if (this != &v) {
 					size = v.size;
 					value = v.value;
@@ -917,18 +908,18 @@ namespace CDPL
 				return *this;
 			}
 
-			CDPL_MATH_INLINE void resize(SizeType n) {
+			void resize(SizeType n) {
 				size = n;
 			}
 
-			CDPL_MATH_INLINE void swap(ScalarVector& v) {
+			void swap(ScalarVector& v) {
 				if (this != &v) {
 					boost::swap(size, v.size);
 					boost::swap(value, v.value);
 				}
 			}
 	
-			CDPL_MATH_INLINE friend void swap(ScalarVector& v1, ScalarVector& v2) {
+			friend void swap(ScalarVector& v1, ScalarVector& v2) {
 				v1.swap(v2);
 			}
 
@@ -944,7 +935,6 @@ namespace CDPL
 		struct VectorTemporaryTraits<VectorReference<V> > : public VectorTemporaryTraits<V> {};
 
 		template <typename T1, typename T2>
-		CDPL_MATH_INLINE
 		CVector<typename CommonType<T1, T2>::Type, 2> 
 		vec(const T1& t1, const T2& t2)
 		{
@@ -957,7 +947,6 @@ namespace CDPL
 		}
 		
 		template <typename T1, typename T2, typename T3>
-		CDPL_MATH_INLINE 
 		CVector<typename CommonType<typename CommonType<T1, T2>::Type, T3>::Type, 3> 
 		vec(const T1& t1, const T2& t2, const T3& t3)
 		{
@@ -971,7 +960,6 @@ namespace CDPL
 		}
 
 		template <typename T1, typename T2, typename T3, typename T4>
-		CDPL_MATH_INLINE 
 		CVector<typename CommonType<typename CommonType<typename CommonType<T1, T2>::Type, T3>::Type, T4>::Type, 4> 
 		vec(const T1& t1, const T2& t2, const T3& t3, const T4& t4)
 		{
@@ -1059,7 +1047,6 @@ namespace CDPL
 		 * \brief A bounded 4 element vector holding unsigned integers of type <tt>unsigned long</tt>.
 		 */
 		typedef CVector<unsigned long, 4> Vector4UL;
-
 
 		/**
 		 * \brief An unbounded vector holding floating point values of type <tt>float</tt>.

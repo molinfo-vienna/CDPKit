@@ -34,40 +34,73 @@ using namespace Forcefield;
 
 
 const char* MMFF94ParameterData::ANGLE_BENDING_PARAMETERS =                 
-	#include "Forcefield/MMFFANG.PAR"
+#include "MMFFANG.PAR.str" 
+;
+
 const char* MMFF94ParameterData::BOND_STRETCHING_PARAMETERS =               
-	#include "Forcefield/MMFFBOND.PAR"
+#include "MMFFBOND.PAR.str" 
+;
+
 const char* MMFF94ParameterData::BOND_STRETCHING_EMP_RULE_PARAMETERS =      
-	#include "Forcefield/MMFFBNDK.PAR"
+#include "MMFFBNDK.PAR.str" 
+;
+
 const char* MMFF94ParameterData::STRETCH_BEND_PARAMETERS =                  
-	#include "Forcefield/MMFFSTBN.PAR"
+#include "MMFFSTBN.PAR.str" 
+;
+
 const char* MMFF94ParameterData::DEFAULT_STRETCH_BEND_PARAMETERS =          
-	#include "Forcefield/MMFFDFSB.PAR"
+#include "MMFFDFSB.PAR.str" 
+;
+
 const char* MMFF94ParameterData::OUT_OF_PLANE_BENDING_PARAMETERS =    
-	#include "Forcefield/MMFFOOP.PAR"
+#include "MMFFOOP.PAR.str" 
+;
+
 const char* MMFF94ParameterData::STATIC_OUT_OF_PLANE_BENDING_PARAMETERS =   
-	#include "Forcefield/MMFFSOOP.PAR"
+#include "MMFFSOOP.PAR.str" 
+;
+
 const char* MMFF94ParameterData::TORSION_PARAMETERS =  
-	#include "Forcefield/MMFFTOR.PAR"
+#include "MMFFTOR.PAR.str" 
+;
+
 const char* MMFF94ParameterData::STATIC_TORSION_PARAMETERS =              
-	#include "Forcefield/MMFFSTOR.PAR"
+#include "MMFFSTOR.PAR.str" 
+;
+
 const char* MMFF94ParameterData::VAN_DER_WAALS_PARAMETERS = 
-	#include "Forcefield/MMFFVDW.PAR"
+#include "MMFFVDW.PAR.str" 
+;
 
 const char* MMFF94ParameterData::SYMBOLIC_ATOM_TYPE_PATTERNS =  
-	#include "Forcefield/MMFFSMTP.PAR"
+#include "MMFFSMTP.PAR.str" 
+;
+
 const char* MMFF94ParameterData::AROMATIC_ATOM_TYPE_DEFINITIONS =        
-	#include "Forcefield/MMFFAROM.PAR"
+#include "MMFFAROM.PAR.str" 
+;
+
 const char* MMFF94ParameterData::HYDROGEN_ATOM_TYPE_DEFINITIONS =       
-	#include "Forcefield/MMFFHDEF.PAR"
+#include "MMFFHDEF.PAR.str" 
+;
+
 const char* MMFF94ParameterData::SYMBOLIC_TO_NUMERIC_ATOM_TYPE_MAPPING =   
-	#include "Forcefield/MMFFSYMB.PAR"
+#include "MMFFSYMB.PAR.str" 
+;
+
 const char* MMFF94ParameterData::NUMERIC_TO_PARAMETER_ATOM_TYPE_MAPPING =   
-	#include "Forcefield/MMFFDEF.PAR"
+#include "MMFFDEF.PAR.str" 
+;
+
 const char* MMFF94ParameterData::ATOM_TYPE_PROPERTIES =   
-	#include "Forcefield/MMFFPROP.PAR"
+#include "MMFFPROP.PAR.str" 
+;
 
 const char* MMFF94ParameterData::BOND_CHARGE_INCREMENT_PARAMETERS =        
-	#include "Forcefield/MMFFCHG.PAR"
+#include "MMFFCHG.PAR.str" 
+;
+
 const char* MMFF94ParameterData::PARTIAL_BOND_CHARGE_INCREMENT_PARAMETERS = 
-	#include "Forcefield/MMFFPBCI.PAR"
+#include "MMFFPBCI.PAR.str" 
+;

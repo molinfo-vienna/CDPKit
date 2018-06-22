@@ -31,7 +31,6 @@
 
 #include <boost/swap.hpp>
 
-#include "CDPL/Math/Config.hpp"
 #include "CDPL/Math/Check.hpp"
 #include "CDPL/Math/CommonType.hpp"
 #include "CDPL/Base/Exceptions.hpp"
@@ -46,7 +45,6 @@ namespace CDPL
 		template <typename E> class VectorExpression;
 
 		template <template <typename T1, typename T2> class F, typename V, typename E>
-		CDPL_MATH_INLINE 
 		void vectorAssignVector(V& v, const VectorExpression<E>& e)
 		{
 			typedef typename CommonType<typename V::SizeType, typename E::SizeType>::Type SizeType;
@@ -60,7 +58,6 @@ namespace CDPL
 		}
 
 		template <template <typename T1, typename T2> class F, typename V, typename T>
-		CDPL_MATH_INLINE 
 		void vectorAssignScalar(V& v, const T& t)
 		{
 			typedef F<typename V::ValueType, T> FunctorType;
@@ -73,7 +70,6 @@ namespace CDPL
 		}
 	
 		template <typename V, typename E>
-		CDPL_MATH_INLINE 
 		void vectorSwap(V& v, VectorExpression<E>& e)
 		{
 			typedef typename CommonType<typename V::SizeType, typename E::SizeType>::Type SizeType;

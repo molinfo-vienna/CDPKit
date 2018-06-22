@@ -98,7 +98,7 @@ namespace CDPL
 // Implementation
 
 template <typename ObjType1, typename ObjType2>
-inline bool CDPL::Chem::MatchExpressionList<ObjType1, ObjType2>::requiresAtomBondMapping() const
+bool CDPL::Chem::MatchExpressionList<ObjType1, ObjType2>::requiresAtomBondMapping() const
 {
 	return (std::find_if(this->getElementsBegin(), this->getElementsEnd(),
 						 boost::bind(&MatchExpression<ObjType1, ObjType2>::requiresAtomBondMapping, _1)) != this->getElementsEnd());

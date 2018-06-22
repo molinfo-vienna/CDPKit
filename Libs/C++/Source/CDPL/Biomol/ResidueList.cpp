@@ -139,7 +139,7 @@ std::size_t Biomol::ResidueList::ResidueIDHashFunc::operator()(const ResidueID& 
 	return hash;
 }
 
-inline bool Biomol::ResidueList::ResidueID::operator==(const ResidueID& res_id) const
+bool Biomol::ResidueList::ResidueID::operator==(const ResidueID& res_id) const
 {
 	return (res_id.modelNumber == modelNumber && res_id.seqNumber == seqNumber && 
 			res_id.chainID == chainID && res_id.insCode == insCode &&

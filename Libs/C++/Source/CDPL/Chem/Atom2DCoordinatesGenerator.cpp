@@ -78,14 +78,14 @@ namespace
 	};
 
 
-	inline double calcAngle(const Math::Vector2D& v)
+	double calcAngle(const Math::Vector2D& v)
 	{
 		double ang = std::acos(v(0) / norm2(v));
 
 		return (v(1) >= 0.0 ? ang : 2.0 * M_PI - ang);
 	}
 
-	inline Math::Vector2D& calcPosition(const Math::Vector2D& org, double r, double angle, Math::Vector2D& res)
+	Math::Vector2D& calcPosition(const Math::Vector2D& org, double r, double angle, Math::Vector2D& res)
 	{
 		res(0) = r * std::cos(angle) + org(0);
 		res(1) = r * std::sin(angle) + org(1);
@@ -93,7 +93,7 @@ namespace
 		return res;
 	}
 
-	inline int ccw(const Math::Vector2D& p0, const Math::Vector2D& p1, const Math::Vector2D& p2)
+	int ccw(const Math::Vector2D& p0, const Math::Vector2D& p1, const Math::Vector2D& p2)
 	{
 		double dx1 = p1(0) - p0(0);
 		double dy1 = p1(1) - p0(1);
@@ -1776,7 +1776,7 @@ void Chem::Atom2DCoordinatesGenerator::RingSysNode::transformCoords(std::size_t 
 	}		
 }
 
-inline double Chem::Atom2DCoordinatesGenerator::RingSysNode::transformEdgeAngle(double edge_angle) const
+double Chem::Atom2DCoordinatesGenerator::RingSysNode::transformEdgeAngle(double edge_angle) const
 {
 	if (flipped) 
 		return (2.0 * rsysAxisAngle - edge_angle + rsysRotAngle);

@@ -106,7 +106,7 @@ namespace CDPL
 // Implementation
 
 template <typename T>
-inline std::size_t CDPL::Internal::ByteBuffer::putInt(const T& value, bool compress)
+std::size_t CDPL::Internal::ByteBuffer::putInt(const T& value, bool compress)
 {
 	BOOST_STATIC_ASSERT_MSG(sizeof(T) > 0, 
 							"ByteBuffer: byte size of integer type is zero");
@@ -115,13 +115,13 @@ inline std::size_t CDPL::Internal::ByteBuffer::putInt(const T& value, bool compr
 }
 
 template <typename T>
-inline void CDPL::Internal::ByteBuffer::getInt(T& value)
+void CDPL::Internal::ByteBuffer::getInt(T& value)
 {
 	getValueBytes(reinterpret_cast<char*>(&value), sizeof(T), sizeof(T));
 }
 
 template <typename T>
-inline void CDPL::Internal::ByteBuffer::getInt(T& value, std::size_t num_bytes)
+void CDPL::Internal::ByteBuffer::getInt(T& value, std::size_t num_bytes)
 {
 	value = T();
 	num_bytes = std::min(num_bytes, sizeof(T));
@@ -130,7 +130,7 @@ inline void CDPL::Internal::ByteBuffer::getInt(T& value, std::size_t num_bytes)
 }
 
 template <typename T>
-inline void CDPL::Internal::ByteBuffer::putFloat(const T& value)
+void CDPL::Internal::ByteBuffer::putFloat(const T& value)
 {
 	BOOST_STATIC_ASSERT_MSG(std::numeric_limits<T>::is_iec559, 
 							"ByteBuffer: floating-point types must adhere to the IEC-559 standard");
@@ -139,7 +139,7 @@ inline void CDPL::Internal::ByteBuffer::putFloat(const T& value)
 }
 
 template <typename T>
-inline void CDPL::Internal::ByteBuffer::getFloat(T& value)
+void CDPL::Internal::ByteBuffer::getFloat(T& value)
 {
 	BOOST_STATIC_ASSERT_MSG(std::numeric_limits<T>::is_iec559, 
 							"ByteBuffer: floating-point types must adhere to the IEC-559 standard");

@@ -154,7 +154,7 @@ namespace CDPL
 // Implementation
 
 template <typename ObjType1, typename ObjType2>
-inline bool CDPL::Chem::ANDMatchExpressionList<ObjType1, ObjType2>::operator()(const ObjType1& query_obj1, const ObjType2& query_obj2, 
+bool CDPL::Chem::ANDMatchExpressionList<ObjType1, ObjType2>::operator()(const ObjType1& query_obj1, const ObjType2& query_obj2, 
 																			   const ObjType1& target_obj1, const ObjType2& target_obj2, 
 																			   const Base::Variant& data) const
 {
@@ -168,7 +168,7 @@ inline bool CDPL::Chem::ANDMatchExpressionList<ObjType1, ObjType2>::operator()(c
 }
 
 template <typename ObjType1, typename ObjType2>
-inline bool CDPL::Chem::ANDMatchExpressionList<ObjType1, ObjType2>::operator()(const ObjType1& query_obj1, const ObjType2& query_obj2, 
+bool CDPL::Chem::ANDMatchExpressionList<ObjType1, ObjType2>::operator()(const ObjType1& query_obj1, const ObjType2& query_obj2, 
 																			  const ObjType1& target_obj1, const ObjType2& target_obj2, 
 																			  const AtomBondMapping& mapping, const Base::Variant& data) const
 {
@@ -183,7 +183,7 @@ inline bool CDPL::Chem::ANDMatchExpressionList<ObjType1, ObjType2>::operator()(c
 
 
 template <typename ObjType>
-inline bool CDPL::Chem::ANDMatchExpressionList<ObjType, void>::operator()(const ObjType& query_obj, const ObjType& target_obj, 
+bool CDPL::Chem::ANDMatchExpressionList<ObjType, void>::operator()(const ObjType& query_obj, const ObjType& target_obj, 
 																		  const Base::Variant& data) const
 {
 	typename MatchExpressionList<ObjType, void>::ConstElementIterator exprs_end = this->getElementsEnd();
@@ -196,7 +196,7 @@ inline bool CDPL::Chem::ANDMatchExpressionList<ObjType, void>::operator()(const 
 }
 
 template <typename ObjType>
-inline bool CDPL::Chem::ANDMatchExpressionList<ObjType, void>::operator()(const ObjType& query_obj, const ObjType& target_obj, 
+bool CDPL::Chem::ANDMatchExpressionList<ObjType, void>::operator()(const ObjType& query_obj, const ObjType& target_obj, 
 																		  const AtomBondMapping& mapping, const Base::Variant& data) const
 {
 	typename MatchExpressionList<ObjType, void>::ConstElementIterator exprs_end = this->getElementsEnd();

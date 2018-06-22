@@ -212,7 +212,7 @@ namespace CDPL
 // Implementation
 
 template <typename T>
-inline CDPL::Base::DataReader<T>& CDPL::Base::DataReader<T>::operator=(const DataReader& reader)
+CDPL::Base::DataReader<T>& CDPL::Base::DataReader<T>::operator=(const DataReader& reader)
 {
 	if (this == &reader)
 		return *this;
@@ -225,7 +225,7 @@ inline CDPL::Base::DataReader<T>& CDPL::Base::DataReader<T>::operator=(const Dat
 // \cond UNHIDE_DETAILS
 
 template <typename T>
-inline CDPL::Base::DataReader<T>& CDPL::Base::operator>>(DataReader<T>& reader, T& obj)
+CDPL::Base::DataReader<T>& CDPL::Base::operator>>(DataReader<T>& reader, T& obj)
 {
 	return reader.read(obj);
 }

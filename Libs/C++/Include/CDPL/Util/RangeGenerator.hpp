@@ -99,7 +99,7 @@ namespace CDPL
 // Implementation
 
 template <typename T>
-inline T CDPL::Util::RangeGenerator<T>::operator()()
+T CDPL::Util::RangeGenerator<T>::operator()()
 {
 	T tmp = currentValue;
 	currentValue += increment;

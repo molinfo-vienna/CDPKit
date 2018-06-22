@@ -86,7 +86,6 @@ namespace
 {
 
 	template <typename M>
-	CDPL_MATH_INLINE
 	void jacobiRotate(M& a, typename M::SizeType i, typename M::SizeType j, 
 					  typename M::SizeType k, typename M::SizeType l, 
 					  typename M::ValueType tau, typename M::ValueType s)

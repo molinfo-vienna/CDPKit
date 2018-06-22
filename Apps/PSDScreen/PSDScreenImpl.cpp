@@ -159,8 +159,8 @@ PSDScreenImpl::PSDScreenImpl():
 	checkXVols(true), alignConfs(true), bestAlignments(false), outputScore(true), outputMolIndex(false), 
 	outputConfIndex(false), outputDBName(false), outputPharmName(false), outputPharmIndex(false), multiThreading(false), 
 	numThreads(boost::thread::hardware_concurrency()), startMolIndex(0), endMolIndex(0), maxOmittedFtrs(0),
-	matchingMode(CDPL::Pharm::ScreeningProcessor::FIRST_MATCHING_CONF), hitOutputHandler(0), 
-	queryInputHandler(0), numQueryPharms(0), numDBMolecules(0), numDBPharms(0), numHits(0), lastProgValue(-1)
+	matchingMode(CDPL::Pharm::ScreeningProcessor::FIRST_MATCHING_CONF), hitOutputHandler(), 
+	queryInputHandler(), numQueryPharms(0), numDBMolecules(0), numDBPharms(0), numHits(0), lastProgValue(-1)
 {
 	addOption("database,d", "Screening database file.", 
 			  value<std::string>(&screeningDB)->required());

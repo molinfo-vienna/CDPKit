@@ -35,27 +35,27 @@ using namespace CDPL;
 
 
 #define MAKE_ENTITY3D_PROPERTY_FUNCTIONS_COMMON(PROP_NAME, TYPE, FUNC_SUFFIX) \
-void Chem::set##FUNC_SUFFIX(Chem::Entity3D& entity, TYPE arg)		      \
-{									      \
-    entity.setProperty(Entity3DProperty::PROP_NAME, arg);		      \
-}									      \
-									      \
-bool Chem::has##FUNC_SUFFIX(const Chem::Entity3D& entity)		      \
-{									      \
-    return entity.isPropertySet(Entity3DProperty::PROP_NAME);		      \
-}									      \
-									      \
-void Chem::clear##FUNC_SUFFIX(Chem::Entity3D& entity)			      \
-{									      \
-    entity.removeProperty(Entity3DProperty::PROP_NAME);			      \
-}
+	void Chem::set##FUNC_SUFFIX(Chem::Entity3D& entity, TYPE arg)		\
+	{																	\
+		entity.setProperty(Entity3DProperty::PROP_NAME, arg);			\
+	}																	\
+																		\
+	bool Chem::has##FUNC_SUFFIX(const Chem::Entity3D& entity)			\
+	{																	\
+		return entity.isPropertySet(Entity3DProperty::PROP_NAME);		\
+	}																	\
+																		\
+	void Chem::clear##FUNC_SUFFIX(Chem::Entity3D& entity)				\
+	{																	\
+		entity.removeProperty(Entity3DProperty::PROP_NAME);				\
+	}
 
 #define MAKE_ENTITY3D_PROPERTY_FUNCTIONS(PROP_NAME, TYPE, FUNC_SUFFIX)	\
-TYPE Chem::get##FUNC_SUFFIX(const Chem::Entity3D& entity)		\
-{									\
-    return entity.getProperty<TYPE>(Entity3DProperty::PROP_NAME);       \
-}									\
-									\
-MAKE_ENTITY3D_PROPERTY_FUNCTIONS_COMMON(PROP_NAME, TYPE, FUNC_SUFFIX)
+	TYPE Chem::get##FUNC_SUFFIX(const Chem::Entity3D& entity)			\
+	{																	\
+		return entity.getProperty<TYPE>(Entity3DProperty::PROP_NAME);	\
+	}																	\
+																		\
+	MAKE_ENTITY3D_PROPERTY_FUNCTIONS_COMMON(PROP_NAME, TYPE, FUNC_SUFFIX)
 
 MAKE_ENTITY3D_PROPERTY_FUNCTIONS(COORDINATES_3D, const Math::Vector3D&, 3DCoordinates)

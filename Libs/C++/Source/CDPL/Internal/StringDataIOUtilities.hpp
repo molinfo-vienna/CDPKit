@@ -102,7 +102,7 @@ namespace CDPL
 		}
 
 		template <typename T>
-		inline T parseNumber(const std::string& str, const char* err_msg = "Error", bool throw_ex = true, 
+		T parseNumber(const std::string& str, const char* err_msg = "Error", bool throw_ex = true, 
 							 const T empty_def_val = T(0), const T err_def_val = T(0))
 		{
 			const char* c_str = str.c_str();

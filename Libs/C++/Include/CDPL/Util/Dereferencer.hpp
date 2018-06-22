@@ -102,13 +102,13 @@ namespace CDPL
 // Implementation
 
 template <typename ArgType, typename ResType>
-inline ResType CDPL::Util::Dereferencer<ArgType, ResType>::operator()(const ArgType& ptr) const
+ResType CDPL::Util::Dereferencer<ArgType, ResType>::operator()(const ArgType& ptr) const
 {
 	return *ptr;
 }
 
 template <typename ArgType, typename ResType>
-inline ResType CDPL::Util::NullCheckDereferencer<ArgType, ResType>::operator()(const ArgType& ptr) const
+ResType CDPL::Util::NullCheckDereferencer<ArgType, ResType>::operator()(const ArgType& ptr) const
 {
 	if (!ptr)
 		throw Base::NullPointerException("NullCheckDereferencer: attempt to dereference null pointer");

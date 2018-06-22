@@ -42,11 +42,11 @@ namespace CDPL
 		public:
 			QueryTwoPointPharmacophore(const Feature& ftr1, const Feature& ftr2);
 
-			inline double getFeature1Tolerance() const {
+			double getFeature1Tolerance() const {
 				return ftr1Tol;
 			}
 
-			inline double getFeature2Tolerance() const {
+			double getFeature2Tolerance() const {
 				return ftr2Tol;
 			}
 

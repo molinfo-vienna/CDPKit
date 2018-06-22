@@ -40,7 +40,6 @@
 #include <boost/swap.hpp>
 #include <boost/shared_ptr.hpp>
 
-#include "CDPL/Math/Config.hpp"
 #include "CDPL/Math/Check.hpp"
 #include "CDPL/Math/GridExpression.hpp"
 #include "CDPL/Math/GridAssignment.hpp"
@@ -73,128 +72,126 @@ namespace CDPL
 			typedef SelfType ClosureType;
 			typedef const SelfType ConstClosureType;
 
-			CDPL_MATH_INLINE explicit GridReference(GridType& g): data(g) {}
+			explicit GridReference(GridType& g): data(g) {}
 
-			CDPL_MATH_INLINE Reference operator()(SizeType i) {
+			Reference operator()(SizeType i) {
 				return data(i);
 			}
 
-			CDPL_MATH_INLINE ConstReference operator()(SizeType i) const {
+			ConstReference operator()(SizeType i) const {
 				return data(i);
 			}
 	
-			CDPL_MATH_INLINE Reference operator()(SizeType i, SizeType j, SizeType k) {
+			Reference operator()(SizeType i, SizeType j, SizeType k) {
 				return data(i, j, k);
 			}
 
-			CDPL_MATH_INLINE ConstReference operator()(SizeType i, SizeType j, SizeType k) const {
+			ConstReference operator()(SizeType i, SizeType j, SizeType k) const {
 				return data(i, j, k);
 			}
 	
-			CDPL_MATH_INLINE SizeType getSize() const {
+			SizeType getSize() const {
 				return data.getSize();
 			}
 
-			CDPL_MATH_INLINE SizeType getSize1() const {
+			SizeType getSize1() const {
 				return data.getSize1();
 			}
 
-			CDPL_MATH_INLINE SizeType getSize2() const {
+			SizeType getSize2() const {
 				return data.getSize2();
 			}
 
-			CDPL_MATH_INLINE SizeType getSize3() const {
+			SizeType getSize3() const {
 				return data.getSize3();
 			}
 
-			CDPL_MATH_INLINE SizeType getMaxSize() const {
+			SizeType getMaxSize() const {
 				return data.getMaxSize();
 			}
 	
-			CDPL_MATH_INLINE SizeType getMaxSize1() const {
+			SizeType getMaxSize1() const {
 				return data.getMaxSize1();
 			}
 
-			CDPL_MATH_INLINE SizeType getMaxSize2() const {
+			SizeType getMaxSize2() const {
 				return data.getMaxSize2();
 			}
 		
-			CDPL_MATH_INLINE SizeType getMaxSize3() const {
+			SizeType getMaxSize3() const {
 				return data.getMaxSize3();
 			}
 		
-			CDPL_MATH_INLINE bool isEmpty() const {
+			bool isEmpty() const {
 				return data.isEmpty();
 			}
 	
-			CDPL_MATH_INLINE const GridType& getData() const {
+			const GridType& getData() const {
 				return data;
 			}
 
-			CDPL_MATH_INLINE GridType& getData() {
+			GridType& getData() {
 				return data;
 			}
 
-			CDPL_MATH_INLINE GridReference& operator=(const GridReference& r) {
+			GridReference& operator=(const GridReference& r) {
 				data.operator=(r.data);
 				return *this;
 			}
 
 			template <typename E>
-			CDPL_MATH_INLINE GridReference& operator=(const GridExpression<E>& e) {
+			GridReference& operator=(const GridExpression<E>& e) {
 				data.operator=(e);
 				return *this;
 			}
 
 			template <typename E>
-			CDPL_MATH_INLINE GridReference& operator+=(const GridExpression<E>& e) {
+			GridReference& operator+=(const GridExpression<E>& e) {
 				data.operator+=(e);
 				return *this;
 			}	
 
 			template <typename E>
-			CDPL_MATH_INLINE GridReference& operator-=(const GridExpression<E>& e) {
+			GridReference& operator-=(const GridExpression<E>& e) {
 				data.operator-=(e);
 				return *this;
 			}
 
-			template <typename T>
-			CDPL_MATH_INLINE 
+			template <typename T>			
 			typename boost::enable_if<IsScalar<T>, GridReference>::type& operator*=(const T& t) {
 				data.operator*=(t);
 				return *this;
 			}
 	
-			template <typename T>
-			CDPL_MATH_INLINE 
+			template <typename T>			
 			typename boost::enable_if<IsScalar<T>, GridReference>::type& operator/=(const T& t) {
 				data.operator/=(t);
 				return *this;
 			}
 			
 			template <typename E>
-			CDPL_MATH_INLINE GridReference& assign(const GridExpression<E>& e) {
+			GridReference& assign(const GridExpression<E>& e) {
 				data.assign(e);
 				return *this;
 			}
 
 			template <typename E>
-			CDPL_MATH_INLINE GridReference& plusAssign(const GridExpression<E>& e) {
+			GridReference& plusAssign(const GridExpression<E>& e) {
 				data.plusAssign(e);
 				return *this;
 			}
 
 			template <typename E>
-			CDPL_MATH_INLINE GridReference& minusAssign(const GridExpression<E>& e) {
+			GridReference& minusAssign(const GridExpression<E>& e) {
 				data.minusAssign(e);
 				return *this;
 			}
 
-			CDPL_MATH_INLINE void swap(GridReference& r) {
+			void swap(GridReference& r) {
 				data.swap(r.data);
 			}
 	
-			CDPL_MATH_INLINE friend void swap(GridReference& r1, GridReference& r2) {
+			friend void swap(GridReference& r1, GridReference& r2) {
 				r1.swap(r2);
 			}
 
@@ -222,75 +219,75 @@ namespace CDPL
 			typedef SelfType GridTemporaryType;
 			typedef boost::shared_ptr<SelfType> SharedPointer;
 
-			CDPL_MATH_INLINE Grid(): data(), size1(0), size2(0), size3(0) {}
+			Grid(): data(), size1(0), size2(0), size3(0) {}
 
-			CDPL_MATH_INLINE Grid(SizeType m, SizeType n, SizeType o): 
+			Grid(SizeType m, SizeType n, SizeType o): 
 				data(storageSize(m, n, o)), size1(m), size2(n), size3(o)  {}
 
-			CDPL_MATH_INLINE Grid(SizeType m, SizeType n, SizeType o, const ValueType& v):  
+			Grid(SizeType m, SizeType n, SizeType o, const ValueType& v):  
 				data(storageSize(m, n, o), v), size1(m), size2(n), size3(o) {}
 
-			CDPL_MATH_INLINE Grid(const Grid& m): data(m.data), size1(m.size1), size2(m.size2), size3(m.size3) {}
+			Grid(const Grid& m): data(m.data), size1(m.size1), size2(m.size2), size3(m.size3) {}
 
 			template <typename E>
-			CDPL_MATH_INLINE Grid(const GridExpression<E>& e): 
+			Grid(const GridExpression<E>& e): 
 				data(storageSize(e().getSize1(), e().getSize2(), e().getSize3())), size1(e().getSize1()), size2(e().getSize2()), size3(e().getSize3()) {
 				gridAssignGrid<ScalarAssignment>(*this, e);
 			}
 
-			CDPL_MATH_INLINE Reference operator()(SizeType i) {
+			Reference operator()(SizeType i) {
 				CDPL_MATH_CHECK(i < (getSize1() * getSize2() * getSize3()), "Index out of range", Base::IndexError);
 				return data[i];
 			}
 
-			CDPL_MATH_INLINE ConstReference operator()(SizeType i) const {
+			ConstReference operator()(SizeType i) const {
 				CDPL_MATH_CHECK(i < (getSize1() * getSize2() * getSize3()), "Index out of range", Base::IndexError);
 				return data[i];
 			}
 
-			CDPL_MATH_INLINE Reference operator()(SizeType i, SizeType j, SizeType k) {
+			Reference operator()(SizeType i, SizeType j, SizeType k) {
 				CDPL_MATH_CHECK(i < getSize1() && j < getSize2() && k < getSize3(), "Index out of range", Base::IndexError);
 				return data[(k * getSize2() + j) * getSize1() + i];
 			}
 
-			CDPL_MATH_INLINE ConstReference operator()(SizeType i, SizeType j, SizeType k) const {
+			ConstReference operator()(SizeType i, SizeType j, SizeType k) const {
 				CDPL_MATH_CHECK(i < getSize1() && j < getSize2() && k < getSize3(), "Index out of range", Base::IndexError);
 				return data[(k * getSize2() + j) * getSize1() + i];
 			}
 
-			CDPL_MATH_INLINE bool isEmpty() const {
+			bool isEmpty() const {
 				return data.empty();
 			}
 	
-			CDPL_MATH_INLINE SizeType getSize() const {
+			SizeType getSize() const {
 				return (size1 * size2 * size3);
 			}
 	
-			CDPL_MATH_INLINE SizeType getSize1() const {
+			SizeType getSize1() const {
 				return size1;
 			}
 	
-			CDPL_MATH_INLINE SizeType getSize2() const {
+			SizeType getSize2() const {
 				return size2;
 			}
 
-			CDPL_MATH_INLINE SizeType getSize3() const {
+			SizeType getSize3() const {
 				return size3;
 			}
 
-			CDPL_MATH_INLINE SizeType getMaxSize() const {
+			SizeType getMaxSize() const {
 				return data.max_size();
 			}
 
-			CDPL_MATH_INLINE ArrayType& getData() {
+			ArrayType& getData() {
 				return data;
 			}
 			
-			CDPL_MATH_INLINE const ArrayType& getData() const {
+			const ArrayType& getData() const {
 				return data;
 			}
 
-			CDPL_MATH_INLINE Grid& operator=(const Grid& g) {
+			Grid& operator=(const Grid& g) {
 				data = g.data;
 				size1 = g.size1;
 				size2 = g.size2;
@@ -299,12 +296,12 @@ namespace CDPL
 			}
 
 			template <typename C>
-			CDPL_MATH_INLINE Grid& operator=(const GridContainer<C>& c) {
+			Grid& operator=(const GridContainer<C>& c) {
 				return assign(c);
 			}
 
 			template <typename E>
-			CDPL_MATH_INLINE Grid& operator=(const GridExpression<E>& e) {
+			Grid& operator=(const GridExpression<E>& e) {
 				Grid tmp(e);
 				swap(tmp);
 
@@ -312,12 +309,12 @@ namespace CDPL
 			}
 
 			template <typename C>
-			CDPL_MATH_INLINE Grid& operator+=(const GridContainer<C>& c) {
+			Grid& operator+=(const GridContainer<C>& c) {
 				return plusAssign(c);
 			}
 
 			template <typename E>
-			CDPL_MATH_INLINE Grid& operator+=(const GridExpression<E>& e) {
+			Grid& operator+=(const GridExpression<E>& e) {
 				Grid tmp(*this + e);
 				swap(tmp);
 
@@ -325,52 +322,50 @@ namespace CDPL
 			}	
 
 			template <typename C>
-			CDPL_MATH_INLINE Grid& operator-=(const GridContainer<C>& c) {
+			Grid& operator-=(const GridContainer<C>& c) {
 				return minusAssign(c);
 			}
 
 			template <typename E>
-			CDPL_MATH_INLINE Grid& operator-=(const GridExpression<E>& e) {
+			Grid& operator-=(const GridExpression<E>& e) {
 				Grid tmp(*this - e);
 				swap(tmp);
 
 				return *this;
 			}
 
-			template <typename T1>
-			CDPL_MATH_INLINE 
+			template <typename T1>			
 			typename boost::enable_if<IsScalar<T1>, Grid>::type& operator*=(const T1& t) {
 				gridAssignScalar<ScalarMultiplicationAssignment>(*this, t);
 				return *this;
 			}
 	
-			template <typename T1>
-			CDPL_MATH_INLINE 
+			template <typename T1>			
 			typename boost::enable_if<IsScalar<T1>, Grid>::type& operator/=(const T1& t) {
 				gridAssignScalar<ScalarDivisionAssignment>(*this, t);
 				return *this;
 			}
 			
 			template <typename E>
-			CDPL_MATH_INLINE Grid& assign(const GridExpression<E>& e) {
+			Grid& assign(const GridExpression<E>& e) {
 				resize(e().getSize1(), e().getSize2());
 				gridAssignGrid<ScalarAssignment>(*this, e);
 				return *this;
 			}
 
 			template <typename E>
-			CDPL_MATH_INLINE Grid& plusAssign(const GridExpression<E>& e) {
+			Grid& plusAssign(const GridExpression<E>& e) {
 				gridAssignGrid<ScalarAdditionAssignment>(*this, e);
 				return *this;
 			}
 
 			template <typename E>
-			CDPL_MATH_INLINE Grid& minusAssign(const GridExpression<E>& e) {
+			Grid& minusAssign(const GridExpression<E>& e) {
 				gridAssignGrid<ScalarSubtractionAssignment>(*this, e);
 				return *this;
 			}
 
-			CDPL_MATH_INLINE void swap(Grid& g) {
+			void swap(Grid& g) {
 				if (this != &g) {
 					boost::swap(data, g.data);
 					boost::swap(size1, g.size1);
@@ -379,15 +374,15 @@ namespace CDPL
 				}
 			}
 	
-			CDPL_MATH_INLINE friend void swap(Grid& g1, Grid& g2) {
+			friend void swap(Grid& g1, Grid& g2) {
 				g1.swap(g2);
 			}
 
-			CDPL_MATH_INLINE void clear(const ValueType& v = ValueType()) {
+			void clear(const ValueType& v = ValueType()) {
 				std::fill(data.begin(), data.end(), v);
 			}
 
-			CDPL_MATH_INLINE void resize(SizeType m, SizeType n, SizeType o, bool preserve = true, const ValueType& v = ValueType()) {
+			void resize(SizeType m, SizeType n, SizeType o, bool preserve = true, const ValueType& v = ValueType()) {
 				if (size1 == m && size2 == n && size3 == o)
 					return;
 
@@ -410,7 +405,7 @@ namespace CDPL
 			}
 
 		private:
-			static CDPL_MATH_INLINE SizeType storageSize(SizeType m, SizeType n, SizeType o) {
+			static SizeType storageSize(SizeType m, SizeType n, SizeType o) {
 				CDPL_MATH_CHECK(n == 0 || o == 0 || 
 								(n <= (std::numeric_limits<SizeType>::max() / o) && m <= (std::numeric_limits<SizeType>::max() / (n * o))),
 								"Maximum size exceeded", Base::SizeError);
@@ -439,55 +434,55 @@ namespace CDPL
 			typedef const GridReference<const SelfType> ConstClosureType;
 			typedef Grid<T> GridTemporaryType;
 
-			CDPL_MATH_INLINE ZeroGrid(): size1(0), size2(0), size3(0) {}
+			ZeroGrid(): size1(0), size2(0), size3(0) {}
 
-			CDPL_MATH_INLINE ZeroGrid(SizeType m, SizeType n, SizeType o): size1(m), size2(n), size3(o) {}
+			ZeroGrid(SizeType m, SizeType n, SizeType o): size1(m), size2(n), size3(o) {}
 
-			CDPL_MATH_INLINE ZeroGrid(const ZeroGrid& m): size1(m.size1), size2(m.size2), size3(m.size3) {}
+			ZeroGrid(const ZeroGrid& m): size1(m.size1), size2(m.size2), size3(m.size3) {}
 
-			CDPL_MATH_INLINE ConstReference operator()(SizeType i) const {
+			ConstReference operator()(SizeType i) const {
 				CDPL_MATH_CHECK(i < (getSize1() * getSize2() * getSize3()), "Index out of range", Base::IndexError);
 				return zero;
 			}
 
-			CDPL_MATH_INLINE ConstReference operator()(SizeType i, SizeType j, SizeType k) const {
+			ConstReference operator()(SizeType i, SizeType j, SizeType k) const {
 				CDPL_MATH_CHECK(i < getSize1() && j < getSize2() && k < getSize3(), "Index out of range", Base::IndexError);
 				return zero;
 			}
 
-			CDPL_MATH_INLINE bool isEmpty() const {
+			bool isEmpty() const {
 				return (size1 == 0 || size2 == 0 || size3 == 0);
 			}
 	
-			CDPL_MATH_INLINE SizeType getSize() const {
+			SizeType getSize() const {
 				return (size1 * size2 * size3);
 			}
 	
-			CDPL_MATH_INLINE SizeType getSize1() const {
+			SizeType getSize1() const {
 				return size1;
 			}
 	
-			CDPL_MATH_INLINE SizeType getSize2() const {
+			SizeType getSize2() const {
 				return size2;
 			}
 
-			CDPL_MATH_INLINE SizeType getSize3() const {
+			SizeType getSize3() const {
 				return size3;
 			}
 
-			CDPL_MATH_INLINE SizeType getMaxSize1() const {
+			SizeType getMaxSize1() const {
 				return std::numeric_limits<SizeType>::max();
 			}
 	
-			CDPL_MATH_INLINE SizeType getMaxSize2() const {
+			SizeType getMaxSize2() const {
 				return std::numeric_limits<SizeType>::max();
 			}
 
-			CDPL_MATH_INLINE SizeType getMaxSize3() const {
+			SizeType getMaxSize3() const {
 				return std::numeric_limits<SizeType>::max();
 			}
 
-			CDPL_MATH_INLINE ZeroGrid& operator=(const ZeroGrid& g) {
+			ZeroGrid& operator=(const ZeroGrid& g) {
 				if (this != &g) {
 					size1 = g.size1;
 					size2 = g.size2;
@@ -497,7 +492,7 @@ namespace CDPL
 				return *this;
 			}
 
-			CDPL_MATH_INLINE void swap(ZeroGrid& g) {
+			void swap(ZeroGrid& g) {
 				if (this != &g) {
 					boost::swap(size1, g.size1);
 					boost::swap(size2, g.size2);
@@ -505,11 +500,11 @@ namespace CDPL
 				}
 			}
 	
-			CDPL_MATH_INLINE friend void swap(ZeroGrid& g1, ZeroGrid& g2) {
+			friend void swap(ZeroGrid& g1, ZeroGrid& g2) {
 				g1.swap(g2);
 			}
 
-			CDPL_MATH_INLINE void resize(SizeType m, SizeType n, SizeType o) {
+			void resize(SizeType m, SizeType n, SizeType o) {
 				size1 = m;
 				size2 = n;
 				size3 = o;
@@ -540,55 +535,55 @@ namespace CDPL
 			typedef const GridReference<const SelfType> ConstClosureType;
 			typedef Grid<T> GridTemporaryType;
 
-			CDPL_MATH_INLINE ScalarGrid(): size1(0), size2(0), size3(0), value() {}
+			ScalarGrid(): size1(0), size2(0), size3(0), value() {}
 
-			CDPL_MATH_INLINE ScalarGrid(SizeType m, SizeType n, SizeType o, const ValueType& v = ValueType()): size1(m), size2(n), size3(o), value(v) {}
+			ScalarGrid(SizeType m, SizeType n, SizeType o, const ValueType& v = ValueType()): size1(m), size2(n), size3(o), value(v) {}
 
-			CDPL_MATH_INLINE ScalarGrid(const ScalarGrid& m): size1(m.size1), size2(m.size2), size3(m.size3), value(m.value) {}
+			ScalarGrid(const ScalarGrid& m): size1(m.size1), size2(m.size2), size3(m.size3), value(m.value) {}
 
-			CDPL_MATH_INLINE ConstReference operator()(SizeType i) const {
+			ConstReference operator()(SizeType i) const {
 				CDPL_MATH_CHECK(i < (getSize1() * getSize2() * getSize3()), "Index out of range", Base::IndexError);
 				return value;
 			}
 
-			CDPL_MATH_INLINE ConstReference operator()(SizeType i, SizeType j, SizeType k) const {
+			ConstReference operator()(SizeType i, SizeType j, SizeType k) const {
 				CDPL_MATH_CHECK(i < getSize1() && j < getSize2() && k < getSize3(), "Index out of range", Base::IndexError);
 				return value;
 			}
 
-			CDPL_MATH_INLINE bool isEmpty() const {
+			bool isEmpty() const {
 				return (size1 == 0 || size2 == 0 || size3 == 0);
 			}
 	
-			CDPL_MATH_INLINE SizeType getSize() const {
+			SizeType getSize() const {
 				return (size1 * size2 * size3);
 			}
 	
-			CDPL_MATH_INLINE SizeType getSize1() const {
+			SizeType getSize1() const {
 				return size1;
 			}
 	
-			CDPL_MATH_INLINE SizeType getSize2() const {
+			SizeType getSize2() const {
 				return size2;
 			}
 
-			CDPL_MATH_INLINE SizeType getSize3() const {
+			SizeType getSize3() const {
 				return size3;
 			}
 
-			CDPL_MATH_INLINE SizeType getMaxSize1() const {
+			SizeType getMaxSize1() const {
 				return std::numeric_limits<SizeType>::max();
 			}
 	
-			CDPL_MATH_INLINE SizeType getMaxSize2() const {
+			SizeType getMaxSize2() const {
 				return std::numeric_limits<SizeType>::max();
 			}
 
-			CDPL_MATH_INLINE SizeType getMaxSize3() const {
+			SizeType getMaxSize3() const {
 				return std::numeric_limits<SizeType>::max();
 			}
 
-			CDPL_MATH_INLINE ScalarGrid& operator=(const ScalarGrid& g) {
+			ScalarGrid& operator=(const ScalarGrid& g) {
 				if (this != &g) {
 					size1 = g.size1;
 					size2 = g.size2;
@@ -599,7 +594,7 @@ namespace CDPL
 				return *this;
 			}
 
-			CDPL_MATH_INLINE void swap(ScalarGrid& g) {
+			void swap(ScalarGrid& g) {
 				if (this != &g) {
 					boost::swap(size1, g.size1);
 					boost::swap(size2, g.size2);
@@ -608,11 +603,11 @@ namespace CDPL
 				}
 			}
 	
-			CDPL_MATH_INLINE friend void swap(ScalarGrid& g1, ScalarGrid& g2) {
+			friend void swap(ScalarGrid& g1, ScalarGrid& g2) {
 				g1.swap(g2);
 			}
 
-			CDPL_MATH_INLINE void resize(SizeType m, SizeType n, SizeType o) {
+			void resize(SizeType m, SizeType n, SizeType o) {
 				size1 = m;
 				size2 = n;
 				size3 = o;

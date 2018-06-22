@@ -120,7 +120,6 @@ inline std::size_t CDPL::Internal::CDFDataReaderBase::extractPropertyValueLength
 }
 
 template <typename T>
-inline
 void CDPL::Internal::CDFDataReaderBase::getIntProperty(CDF::PropertySpec prop_spec, T& value, ByteBuffer& bbuf) const
 {
 	std::size_t len = extractPropertyValueLength(prop_spec);
@@ -132,7 +131,6 @@ void CDPL::Internal::CDFDataReaderBase::getIntProperty(CDF::PropertySpec prop_sp
 }
 
 template <typename T>
-inline
 void CDPL::Internal::CDFDataReaderBase::getFloatProperty(CDF::PropertySpec prop_spec, T& value, ByteBuffer& bbuf) const
 {
 	std::size_t len = extractPropertyValueLength(prop_spec);

@@ -156,7 +156,7 @@ namespace CDPL
 			 * \brief Specifies a function for the retrieval of atom 3D-coordinates.
 			 * \param func The atom 3D-coordinates function.
 			 */
-			virtual void setAtom3DCoordinatesFunction(const Atom3DCoordinatesFunction& func);
+			void setAtom3DCoordinatesFunction(const Atom3DCoordinatesFunction& func);
 
 			/**
 			 * \brief Returns the function that was registered for the retrieval of atom 3D-coordinates.

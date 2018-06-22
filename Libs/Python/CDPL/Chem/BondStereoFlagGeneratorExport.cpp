@@ -40,20 +40,17 @@ void CDPLPythonChem::exportBondStereoFlagGenerator()
 	using namespace boost;
 	using namespace CDPL;
 
-	void (Chem::BondStereoFlagGenerator::*calcFunc1)(const Chem::MolecularGraph&, Util::UIArray&) = 
-		&Chem::BondStereoFlagGenerator::generate;
-
-	void (Chem::BondStereoFlagGenerator::*calcFunc2)(const Chem::MolecularGraph&, const Math::Vector2DArray&, Util::UIArray&) = 
-		&Chem::BondStereoFlagGenerator::generate;
-
 	python::class_<Chem::BondStereoFlagGenerator, boost::noncopyable>("BondStereoFlagGenerator", python::no_init)
 		.def(python::init<>(python::arg("self")))
 		.def(python::init<const Chem::MolecularGraph&, Util::UIArray&>(
 				 (python::arg("self"), python::arg("molgraph"), python::arg("flags"))))
-		.def(python::init<const Chem::MolecularGraph&, const Math::Vector2DArray&, Util::UIArray&>
-			 ((python::arg("self"), python::arg("molgraph"), python::arg("coords"), python::arg("flags"))))
 		.def(CDPLPythonBase::ObjectIdentityCheckVisitor<Chem::BondStereoFlagGenerator>())	
-		.def("generate", calcFunc1, (python::arg("self"), python::arg("molgraph"), python::arg("flags")))
-		.def("generate", calcFunc2, (python::arg("self"), python::arg("molgraph"), python::arg("coords"), 
-									 python::arg("flags")));
+		.def("setAtom2DCoordinatesFunction", &Chem::BondStereoFlagGenerator::setAtom2DCoordinatesFunction,
+			 (python::arg("self"), python::arg("func")))
+		.def("getAtom2DCoordinatesFunction", &Chem::BondStereoFlagGenerator::getAtom2DCoordinatesFunction, 
+			 python::arg("self"), python::return_internal_reference<>())
+		.def("generate", &Chem::BondStereoFlagGenerator::generate, 
+			 (python::arg("self"), python::arg("molgraph"), python::arg("flags")))
+
+;
 }

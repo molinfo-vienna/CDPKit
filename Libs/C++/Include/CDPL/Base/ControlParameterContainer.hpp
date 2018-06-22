@@ -439,13 +439,13 @@ namespace CDPL
 // Implementation of template members
 
 template <typename T> 
-inline const T& CDPL::Base::ControlParameterContainer::getParameter(const LookupKey& key, bool local) const
+const T& CDPL::Base::ControlParameterContainer::getParameter(const LookupKey& key, bool local) const
 {
 	return getParameter(key, true, local).template getData<T>();
 }
 
 template <typename T> 
-inline const T& CDPL::Base::ControlParameterContainer::getParameterOrDefault(const LookupKey& key, const T& def, bool local) const
+const T& CDPL::Base::ControlParameterContainer::getParameterOrDefault(const LookupKey& key, const T& def, bool local) const
 {
 	const Variant& val = getParameter(key, false, local);
 

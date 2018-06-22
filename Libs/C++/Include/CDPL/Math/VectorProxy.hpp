@@ -33,7 +33,6 @@
 #include <boost/type_traits/is_const.hpp>
 #include <boost/utility.hpp>
 
-#include "CDPL/Math/Config.hpp"
 #include "CDPL/Math/Expression.hpp"
 #include "CDPL/Math/VectorAssignment.hpp"
 #include "CDPL/Math/TypeTraits.hpp"
@@ -70,105 +69,103 @@ namespace CDPL
 			typedef SelfType ClosureType;
 			typedef Range<SizeType> RangeType;
 			
-			CDPL_MATH_INLINE VectorRange(VectorType& v, const RangeType& r): data(v), range(r) {}
+			VectorRange(VectorType& v, const RangeType& r): data(v), range(r) {}
 
-			CDPL_MATH_INLINE Reference operator()(SizeType i) {
+			Reference operator()(SizeType i) {
 				return data(range(i));
 			}
 
-			CDPL_MATH_INLINE ConstReference operator()(SizeType i) const {
+			ConstReference operator()(SizeType i) const {
 				return data(range(i));
 			}
 	
-			CDPL_MATH_INLINE Reference operator[](SizeType i) {
+			Reference operator[](SizeType i) {
 				return data[range(i)];
 			}
 
-			CDPL_MATH_INLINE ConstReference operator[](SizeType i) const {
+			ConstReference operator[](SizeType i) const {
 				return data[range(i)];
 			}
 
-			CDPL_MATH_INLINE SizeType getStart() const {
+			SizeType getStart() const {
 				return range.getStart();
 			}
 
-			CDPL_MATH_INLINE SizeType getSize() const {
+			SizeType getSize() const {
 				return range.getSize();
 			}
 
-			CDPL_MATH_INLINE bool isEmpty() const {
+			bool isEmpty() const {
 				return range.isEmpty();
 			}
 
-			CDPL_MATH_INLINE VectorClosureType& getData() {
+			VectorClosureType& getData() {
 				return data;
 			}
 
-			CDPL_MATH_INLINE const VectorClosureType& getData() const {
+			const VectorClosureType& getData() const {
 				return data;
 			}
 
-			CDPL_MATH_INLINE VectorRange& operator=(const VectorRange& r) {
+			VectorRange& operator=(const VectorRange& r) {
 				vectorAssignVector<ScalarAssignment>(*this, typename VectorTemporaryTraits<V>::Type(r));
 				return *this;
 			}
 
 			template <typename E>
-			CDPL_MATH_INLINE VectorRange& operator=(const VectorExpression<E>& e) {
+			VectorRange& operator=(const VectorExpression<E>& e) {
 				vectorAssignVector<ScalarAssignment>(*this, typename VectorTemporaryTraits<V>::Type(e));
 				return *this;
 			}
 
 			template <typename E>
-			CDPL_MATH_INLINE VectorRange& operator+=(const VectorExpression<E>& e) {
+			VectorRange& operator+=(const VectorExpression<E>& e) {
 				vectorAssignVector<ScalarAssignment>(*this, typename VectorTemporaryTraits<V>::Type(*this + e));
 				return *this;
 			}	
 
 			template <typename E>
-			CDPL_MATH_INLINE VectorRange& operator-=(const VectorExpression<E>& e) {
+			VectorRange& operator-=(const VectorExpression<E>& e) {
 				vectorAssignVector<ScalarAssignment>(*this, typename VectorTemporaryTraits<V>::Type(*this - e));
 				return *this;
 			}
 
 			template <typename T>
-			CDPL_MATH_INLINE 
 			typename boost::enable_if<IsScalar<T>, VectorRange>::type& operator*=(const T& t) {
 				vectorAssignScalar<ScalarMultiplicationAssignment>(*this, t);
 				return *this;
 			}
 	
 			template <typename T>
-			CDPL_MATH_INLINE 
 			typename boost::enable_if<IsScalar<T>, VectorRange>::type& operator/=(const T& t) {
 				vectorAssignScalar<ScalarDivisionAssignment>(*this, t);
 				return *this;
 			}
 			
 			template <typename E>
-			CDPL_MATH_INLINE VectorRange& assign(const VectorExpression<E>& e) {
+			VectorRange& assign(const VectorExpression<E>& e) {
 				vectorAssignVector<ScalarAssignment>(*this, e);
 				return *this;
 			}
 
 			template <typename E>
-			CDPL_MATH_INLINE VectorRange& plusAssign(const VectorExpression<E>& e) {
+			VectorRange& plusAssign(const VectorExpression<E>& e) {
 				vectorAssignVector<ScalarAdditionAssignment>(*this, e);
 				return *this;
 			}
 
 			template <typename E>
-			CDPL_MATH_INLINE VectorRange& minusAssign(const VectorExpression<E>& e) {
+			VectorRange& minusAssign(const VectorExpression<E>& e) {
 				vectorAssignVector<ScalarSubtractionAssignment>(*this, e);
 				return *this;
 			}
 	
-			CDPL_MATH_INLINE void swap(VectorRange& r) {
+			void swap(VectorRange& r) {
 				if (this != &r)
 					vectorSwap(*this, r);
 			}
 	
-			CDPL_MATH_INLINE friend void swap(VectorRange& r1, VectorRange& r2) {
+			friend void swap(VectorRange& r1, VectorRange& r2) {
 				r1.swap(r2);
 			}
 
@@ -199,109 +196,107 @@ namespace CDPL
 			typedef SelfType ClosureType;
 			typedef Slice<SizeType, DifferenceType> SliceType;
 			
-			CDPL_MATH_INLINE VectorSlice(VectorType& v, const SliceType& s): data(v), slice(s) {}
+			VectorSlice(VectorType& v, const SliceType& s): data(v), slice(s) {}
 
-			CDPL_MATH_INLINE Reference operator()(SizeType i) {
+			Reference operator()(SizeType i) {
 				return data(slice(i));
 			}
 
-			CDPL_MATH_INLINE ConstReference operator()(SizeType i) const {
+			ConstReference operator()(SizeType i) const {
 				return data(slice(i));
 			}
 	
-			CDPL_MATH_INLINE Reference operator[](SizeType i) {
+			Reference operator[](SizeType i) {
 				return data[slice(i)];
 			}
 
-			CDPL_MATH_INLINE ConstReference operator[](SizeType i) const {
+			ConstReference operator[](SizeType i) const {
 				return data[slice(i)];
 			}
 
-			CDPL_MATH_INLINE SizeType getStart() const {
+			SizeType getStart() const {
 				return slice.getStart();
 			}
 
-			CDPL_MATH_INLINE DifferenceType getStride() const {
+			DifferenceType getStride() const {
 				return slice.getStride();
 			}
 
-			CDPL_MATH_INLINE SizeType getSize() const {
+			SizeType getSize() const {
 				return slice.getSize();
 			}
 			
-			CDPL_MATH_INLINE bool isEmpty() const {
+			bool isEmpty() const {
 				return slice.isEmpty();
 			}
 
-			CDPL_MATH_INLINE VectorClosureType& getData() {
+			VectorClosureType& getData() {
 				return data;
 			}
 
-			CDPL_MATH_INLINE const VectorClosureType& getData() const {
+			const VectorClosureType& getData() const {
 				return data;
 			}
 
-			CDPL_MATH_INLINE VectorSlice& operator=(const VectorSlice& s) {
+			VectorSlice& operator=(const VectorSlice& s) {
 				vectorAssignVector<ScalarAssignment>(*this, typename VectorTemporaryTraits<V>::Type(s));
 				return *this;
 			}
 
 			template <typename E>
-			CDPL_MATH_INLINE VectorSlice& operator=(const VectorExpression<E>& e) {
+			VectorSlice& operator=(const VectorExpression<E>& e) {
 				vectorAssignVector<ScalarAssignment>(*this, typename VectorTemporaryTraits<V>::Type(e));
 				return *this;
 			}
 
 			template <typename E>
-			CDPL_MATH_INLINE VectorSlice& operator+=(const VectorExpression<E>& e) {
+			VectorSlice& operator+=(const VectorExpression<E>& e) {
 				vectorAssignVector<ScalarAssignment>(*this, typename VectorTemporaryTraits<V>::Type(*this + e));
 				return *this;
 			}	
 
 			template <typename E>
-			CDPL_MATH_INLINE VectorSlice& operator-=(const VectorExpression<E>& e) {
+			VectorSlice& operator-=(const VectorExpression<E>& e) {
 				vectorAssignVector<ScalarAssignment>(*this, typename VectorTemporaryTraits<V>::Type(*this - e));
 				return *this;
 			}
 
 			template <typename T>
-			CDPL_MATH_INLINE 
 			typename boost::enable_if<IsScalar<T>, VectorSlice>::type& operator*=(const T& t) {
 				vectorAssignScalar<ScalarMultiplicationAssignment>(*this, t);
 				return *this;
 			}
 	
 			template <typename T>
-			CDPL_MATH_INLINE 
 			typename boost::enable_if<IsScalar<T>, VectorSlice>::type& operator/=(const T& t) {
 				vectorAssignScalar<ScalarDivisionAssignment>(*this, t);
 				return *this;
 			}
 			
 			template <typename E>
-			CDPL_MATH_INLINE VectorSlice& assign(const VectorExpression<E>& e) {
+			VectorSlice& assign(const VectorExpression<E>& e) {
 				vectorAssignVector<ScalarAssignment>(*this, e);
 				return *this;
 			}
 
 			template <typename E>
-			CDPL_MATH_INLINE VectorSlice& plusAssign(const VectorExpression<E>& e) {
+			VectorSlice& plusAssign(const VectorExpression<E>& e) {
 				vectorAssignVector<ScalarAdditionAssignment>(*this, e);
 				return *this;
 			}
 
 			template <typename E>
-			CDPL_MATH_INLINE VectorSlice& minusAssign(const VectorExpression<E>& e) {
+			VectorSlice& minusAssign(const VectorExpression<E>& e) {
 				vectorAssignVector<ScalarSubtractionAssignment>(*this, e);
 				return *this;
 			}
 	
-			CDPL_MATH_INLINE void swap(VectorSlice& s) {
+			void swap(VectorSlice& s) {
 				if (this != &s)
 					vectorSwap(*this, s);
 			}
 	
-			CDPL_MATH_INLINE friend void swap(VectorSlice& s1, VectorSlice& s2) {
+			friend void swap(VectorSlice& s1, VectorSlice& s2) {
 				s1.swap(s2);
 			}
 
@@ -323,7 +318,6 @@ namespace CDPL
 		struct VectorTemporaryTraits<const VectorSlice<V> > : public VectorTemporaryTraits<V> {};
 
 		template <typename E>
-		CDPL_MATH_INLINE
 		VectorRange<E> 
 		range(VectorExpression<E>& e, const typename VectorRange<E>::RangeType& r)
 		{
@@ -331,7 +325,6 @@ namespace CDPL
 		} 
 
 		template <typename E>
-		CDPL_MATH_INLINE
 		VectorRange<const E> 
 		range(const VectorExpression<E>& e, const typename VectorRange<const E>::RangeType& r)
 		{
@@ -339,7 +332,6 @@ namespace CDPL
 		} 
 
 		template <typename E>
-		CDPL_MATH_INLINE
 		VectorRange<E> 
 		range(VectorExpression<E>& e, 
 			  typename VectorRange<E>::RangeType::SizeType start, 
@@ -351,7 +343,6 @@ namespace CDPL
 		} 
 
 		template <typename E>
-		CDPL_MATH_INLINE
 		VectorRange<const E> 
 		range(const VectorExpression<E>& e, 
 			  typename VectorRange<const E>::RangeType::SizeType start, 
@@ -363,7 +354,6 @@ namespace CDPL
 		} 
 
 		template <typename E>
-		CDPL_MATH_INLINE
 		VectorSlice<E> 
 		slice(VectorExpression<E>& e, const typename VectorSlice<E>::SliceType& s)
 		{
@@ -371,7 +361,6 @@ namespace CDPL
 		} 
 
 		template <typename E>
-		CDPL_MATH_INLINE
 		VectorSlice<const E> 
 		slice(const VectorExpression<E>& e, const typename VectorSlice<const E>::SliceType& s)
 		{
@@ -379,7 +368,6 @@ namespace CDPL
 		} 
 
 		template <typename E>
-		CDPL_MATH_INLINE
 		VectorSlice<E> 
 		slice(VectorExpression<E>& e, 
 			  typename VectorSlice<E>::SliceType::SizeType start, 
@@ -392,7 +380,6 @@ namespace CDPL
 		} 
 
 		template <typename E>
-		CDPL_MATH_INLINE
 		VectorSlice<const E> 
 		slice(const VectorExpression<E>& e, 
 			  typename VectorSlice<const E>::SliceType::SizeType start, 

@@ -31,7 +31,6 @@
 
 #include <boost/swap.hpp>
 
-#include "CDPL/Math/Config.hpp"
 #include "CDPL/Math/Check.hpp"
 #include "CDPL/Math/CommonType.hpp"
 #include "CDPL/Base/Exceptions.hpp"
@@ -44,9 +43,7 @@ namespace CDPL
 	{
 
 		template <typename E> class GridExpression;
-
 		template <template <typename T1, typename T2> class F, typename G, typename E>
-		CDPL_MATH_INLINE 
 		void gridAssignGrid(G& g, const GridExpression<E>& e)
 		{
 			typedef typename CommonType<typename G::SizeType, typename E::SizeType>::Type SizeType;
@@ -64,7 +61,6 @@ namespace CDPL
 		}
 
 		template <template <typename T1, typename T2> class F, typename G, typename T>
-		CDPL_MATH_INLINE 
 		void gridAssignScalar(G& g, const T& t)
 		{
 			typedef F<typename G::ValueType, T> FunctorType;
@@ -81,7 +77,6 @@ namespace CDPL
 		}
 
 		template <typename G, typename E>
-		CDPL_MATH_INLINE 
 		void gridSwap(G& g, GridExpression<E>& e)
 		{
 			typedef typename CommonType<typename G::SizeType, typename E::SizeType>::Type SizeType;

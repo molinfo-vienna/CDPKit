@@ -35,7 +35,6 @@
 #include <boost/swap.hpp>
 #include <boost/shared_ptr.hpp>
 
-#include "CDPL/Math/Config.hpp"
 #include "CDPL/Math/GridExpression.hpp"
 #include "CDPL/Math/Grid.hpp"
 #include "CDPL/Math/Matrix.hpp"
@@ -54,17 +53,17 @@ namespace CDPL
 		struct GridCoordinatesMatrixTransformTraits
 		{
 
-			static CDPL_MATH_INLINE void init(MatrixType& mtx) {
+			static void init(MatrixType& mtx) {
 				mtx.assign(IdentityMatrix<typename MatrixType::ValueType>(4, 4));
 			}
 
 			template <typename M>
-			static CDPL_MATH_INLINE bool invert(const MatrixType& mtx, M& inv_mtx) {
+			static bool invert(const MatrixType& mtx, M& inv_mtx) {
 				return Math::invert(mtx, inv_mtx);
 			}
 
 			template <typename V, typename R>
-			static CDPL_MATH_INLINE void transform(const MatrixType& mtx, const V& v, R& r) {
+			static void transform(const MatrixType& mtx, const V& v, R& r) {
 				prod(mtx, v, r);
 			}
 		};
@@ -108,35 +107,35 @@ namespace CDPL
 			typedef const SelfType ConstClosureType;
             typedef boost::shared_ptr<SelfType> SharedPointer;
 
-			CDPL_MATH_INLINE RegularSpatialGrid(const CoordinatesValueType& xs, const CoordinatesValueType& ys, const CoordinatesValueType& zs): 
+			RegularSpatialGrid(const CoordinatesValueType& xs, const CoordinatesValueType& ys, const CoordinatesValueType& zs): 
 				dataMode(POINT), xStep(xs), yStep(ys), zStep(zs) {
 				
 				GridCoordinatesTransformTraits<CoordinatesTransformType>::init(xform);
 				GridCoordinatesTransformTraits<InvCoordinatesTransformType>::init(invXform);
 			}
 
-			CDPL_MATH_INLINE RegularSpatialGrid(const GridDataType& data, const CoordinatesValueType& xs, const CoordinatesValueType& ys, const CoordinatesValueType& zs): 
+			RegularSpatialGrid(const GridDataType& data, const CoordinatesValueType& xs, const CoordinatesValueType& ys, const CoordinatesValueType& zs): 
 				dataMode(POINT), data(data), xStep(xs), yStep(ys), zStep(zs) {
 			
 				GridCoordinatesTransformTraits<CoordinatesTransformType>::init(xform);
 				GridCoordinatesTransformTraits<InvCoordinatesTransformType>::init(invXform);
 			}
 	
-			explicit CDPL_MATH_INLINE RegularSpatialGrid(const CoordinatesValueType& s): 
+			explicit RegularSpatialGrid(const CoordinatesValueType& s): 
 				dataMode(POINT), xStep(s), yStep(s), zStep(s) {
 
 				GridCoordinatesTransformTraits<CoordinatesTransformType>::init(xform);
 				GridCoordinatesTransformTraits<InvCoordinatesTransformType>::init(invXform);
 			}
 
-			CDPL_MATH_INLINE RegularSpatialGrid(const GridDataType& data, const CoordinatesValueType& s): 
+			RegularSpatialGrid(const GridDataType& data, const CoordinatesValueType& s): 
 				dataMode(POINT), data(data), xStep(s), yStep(s), zStep(s) {
 
 				GridCoordinatesTransformTraits<CoordinatesTransformType>::init(xform);
 				GridCoordinatesTransformTraits<InvCoordinatesTransformType>::init(invXform);
 			}
 
-			virtual CDPL_MATH_INLINE ~RegularSpatialGrid() {}
+			virtual ~RegularSpatialGrid() {}
 
 			void setDataMode(DataMode mode) {
 				dataMode = mode;
@@ -146,92 +145,92 @@ namespace CDPL
 				return dataMode;
 			}
 
-			CDPL_MATH_INLINE Reference operator()(SizeType i) {
+			Reference operator()(SizeType i) {
 				return data(i);
 			}
 
-			CDPL_MATH_INLINE ConstReference operator()(SizeType i) const {
+			ConstReference operator()(SizeType i) const {
 				return data(i);
 			}
 
-			CDPL_MATH_INLINE Reference operator()(SizeType i, SizeType j, SizeType k) {
+			Reference operator()(SizeType i, SizeType j, SizeType k) {
 				return data(i, j, k);
 			}
 
-			CDPL_MATH_INLINE ConstReference operator()(SizeType i, SizeType j, SizeType k) const {
+			ConstReference operator()(SizeType i, SizeType j, SizeType k) const {
 				return data(i, j, k);
 			}
 
-			CDPL_MATH_INLINE SizeType getSize() const {
+			SizeType getSize() const {
 				return data.getSize();
 			}
 
-			CDPL_MATH_INLINE SizeType getSize1() const {
+			SizeType getSize1() const {
 				return data.getSize1();
 			}
 
-			CDPL_MATH_INLINE SizeType getSize2() const {
+			SizeType getSize2() const {
 				return data.getSize2();
 			}
 
-			CDPL_MATH_INLINE SizeType getSize3() const {
+			SizeType getSize3() const {
 				return data.getSize3();
 			}
 
-			CDPL_MATH_INLINE SizeType getMaxSize() const {
+			SizeType getMaxSize() const {
 				return data.getMaxSize();
 			}
 	
-			CDPL_MATH_INLINE SizeType getMaxSize1() const {
+			SizeType getMaxSize1() const {
 				return data.getMaxSize1();
 			}
 
-			CDPL_MATH_INLINE SizeType getMaxSize2() const {
+			SizeType getMaxSize2() const {
 				return data.getMaxSize2();
 			}
 		
-			CDPL_MATH_INLINE SizeType getMaxSize3() const {
+			SizeType getMaxSize3() const {
 				return data.getMaxSize3();
 			}
 		
-			CDPL_MATH_INLINE CoordinatesValueType getXStepSize() const {
+			CoordinatesValueType getXStepSize() const {
 				return xStep;
 			}
 		
-			CDPL_MATH_INLINE CoordinatesValueType getYStepSize() const {
+			CoordinatesValueType getYStepSize() const {
 				return yStep;
 			}
 		
-			CDPL_MATH_INLINE CoordinatesValueType getZStepSize() const {
+			CoordinatesValueType getZStepSize() const {
 				return zStep;
 			}
 
-			CDPL_MATH_INLINE void setXStepSize(const CoordinatesValueType& xs) {
+			void setXStepSize(const CoordinatesValueType& xs) {
 				xStep = xs;
 			}
 	
-			CDPL_MATH_INLINE void setYStepSize(const CoordinatesValueType& ys) {
+			void setYStepSize(const CoordinatesValueType& ys) {
 				yStep = ys;
 			}
 
-			CDPL_MATH_INLINE void setZStepSize(const CoordinatesValueType& zs) {
+			void setZStepSize(const CoordinatesValueType& zs) {
 				zStep = zs;
 			}
 
-			CDPL_MATH_INLINE CoordinatesValueType getXExtent() const {
+			CoordinatesValueType getXExtent() const {
 				return (data.getSize1() * xStep); 
 			}
 
-			CDPL_MATH_INLINE CoordinatesValueType getYExtent() const {
+			CoordinatesValueType getYExtent() const {
 				return (data.getSize2() * yStep); 
 			}
 
-			CDPL_MATH_INLINE CoordinatesValueType getZExtent() const {
+			CoordinatesValueType getZExtent() const {
 				return (data.getSize3() * zStep); 
 			}
 
 			template <typename V>
-			CDPL_MATH_INLINE void getCoordinates(SizeType i, V& coords) const {
+			void getCoordinates(SizeType i, V& coords) const {
 				SizeType z = i / (getSize1() * getSize2());
 				SizeType xy = i % (getSize1() * getSize2());
 				SizeType y = xy / getSize1();
@@ -241,7 +240,7 @@ namespace CDPL
 			}
 			
 			template <typename V>
-			CDPL_MATH_INLINE void getCoordinates(SizeType i, SizeType j, SizeType k, V& coords) const {
+			void getCoordinates(SizeType i, SizeType j, SizeType k, V& coords) const {
 				CVector<CoordinatesValueType, 4> local_coords;
 				
 				getLocalCoordinates(i, j, k, local_coords);
@@ -256,14 +255,14 @@ namespace CDPL
 			}
 
 			template <typename V>
-			CDPL_MATH_INLINE void getLocalCoordinates(SizeType i, SizeType j, SizeType k, V& coords) const {
+			void getLocalCoordinates(SizeType i, SizeType j, SizeType k, V& coords) const {
 				coords[0] = i * xStep + (xStep - getXExtent()) / 2;
 				coords[1] = j * yStep + (yStep - getYExtent()) / 2;
 				coords[2] = k * zStep + (zStep - getZExtent()) / 2;
 			}
 
 			template <typename V>
-			CDPL_MATH_INLINE bool containsPoint(const V& pos) const {
+			bool containsPoint(const V& pos) const {
 				CVector<CoordinatesValueType, 4> local_coords;
 
 				getLocalCoordinates(pos, local_coords);
@@ -272,7 +271,7 @@ namespace CDPL
 			}
 
 			template <typename V>
-			CDPL_MATH_INLINE bool containsLocalPoint(const V& pos) const {
+			bool containsLocalPoint(const V& pos) const {
 				if (std::abs(CoordinatesValueType(pos[0])) > (getXExtent() / 2))
 					return false;
 
@@ -286,7 +285,7 @@ namespace CDPL
 			}
 
 			template <typename V1, typename V2>
-			CDPL_MATH_INLINE bool getContainingCell(const V1& pos, V2& indices) const {
+			bool getContainingCell(const V1& pos, V2& indices) const {
 				CVector<CoordinatesValueType, 4> local_coords;
 
 				getLocalCoordinates(pos, local_coords);
@@ -295,7 +294,7 @@ namespace CDPL
 			}
 
 			template <typename V1, typename V2>
-			CDPL_MATH_INLINE bool getLocalContainingCell(const V1& pos, V2& indices) const {
+			bool getLocalContainingCell(const V1& pos, V2& indices) const {
 				CoordinatesValueType x = pos[0] + getXExtent() / 2;
 
 				if (x < CoordinatesValueType(0))
@@ -333,29 +332,29 @@ namespace CDPL
 				return true;
 			}
 
-			CDPL_MATH_INLINE bool isEmpty() const {
+			bool isEmpty() const {
 				return data.isEmpty();
 			}
 	
-			CDPL_MATH_INLINE const GridDataType& getData() const {
+			const GridDataType& getData() const {
 				return data;
 			}
 
-			CDPL_MATH_INLINE GridDataType& getData() {
+			GridDataType& getData() {
 				return data;
 			}
 
-			CDPL_MATH_INLINE const CoordinatesTransformType& getCoordinatesTransform() const {
+			const CoordinatesTransformType& getCoordinatesTransform() const {
 				return xform;
 			}
 
 			template <typename T1>
-			CDPL_MATH_INLINE void setCoordinatesTransform(const T1& xform) {
+			void setCoordinatesTransform(const T1& xform) {
 				this->xform = xform;
 				CDPL_MATH_CHECK(GridCoordinatesTransformTraits<CoordinatesTransformType>::invert(xform, invXform), "Inversion of transformation failed", Base::CalculationFailed);
 			}
 
-			CDPL_MATH_INLINE RegularSpatialGrid& operator=(const RegularSpatialGrid& usg) {
+			RegularSpatialGrid& operator=(const RegularSpatialGrid& usg) {
 				dataMode = usg.dataMode;
 				data = usg.data;
 				xform = usg.xform;
@@ -367,56 +366,54 @@ namespace CDPL
 			}
 
 			template <typename E>
-			CDPL_MATH_INLINE RegularSpatialGrid& operator=(const GridExpression<E>& e) {
+			RegularSpatialGrid& operator=(const GridExpression<E>& e) {
 				data.operator=(e);
 				return *this;
 			}
 
 			template <typename E>
-			CDPL_MATH_INLINE RegularSpatialGrid& operator+=(const GridExpression<E>& e) {
+			RegularSpatialGrid& operator+=(const GridExpression<E>& e) {
 				data.operator+=(e);
 				return *this;
 			}	
 
 			template <typename E>
-			CDPL_MATH_INLINE RegularSpatialGrid& operator-=(const GridExpression<E>& e) {
+			RegularSpatialGrid& operator-=(const GridExpression<E>& e) {
 				data.operator-=(e);
 				return *this;
 			}
 
 			template <typename T1>
-			CDPL_MATH_INLINE 
 			typename boost::enable_if<IsScalar<T>, RegularSpatialGrid>::type& operator*=(const T1& t) {
 				data.operator*=(t);
 				return *this;
 			}
 	
 			template <typename T1>
-			CDPL_MATH_INLINE 
 			typename boost::enable_if<IsScalar<T>, RegularSpatialGrid>::type& operator/=(const T1& t) {
 				data.operator/=(t);
 				return *this;
 			}
 			
 			template <typename E>
-			CDPL_MATH_INLINE RegularSpatialGrid& assign(const GridExpression<E>& e) {
+			RegularSpatialGrid& assign(const GridExpression<E>& e) {
 				data.assign(e);
 				return *this;
 			}
 
 			template <typename E>
-			CDPL_MATH_INLINE RegularSpatialGrid& plusAssign(const GridExpression<E>& e) {
+			RegularSpatialGrid& plusAssign(const GridExpression<E>& e) {
 				data.plusAssign(e);
 				return *this;
 			}
 
 			template <typename E>
-			CDPL_MATH_INLINE RegularSpatialGrid& minusAssign(const GridExpression<E>& e) {
+			RegularSpatialGrid& minusAssign(const GridExpression<E>& e) {
 				data.minusAssign(e);
 				return *this;
 			}
 
-			CDPL_MATH_INLINE void swap(RegularSpatialGrid& usg) {
+			void swap(RegularSpatialGrid& usg) {
 				data.swap(usg.data);
 				xform.swap(usg.xform);
 				invXform.swap(usg.invXform);
@@ -426,21 +423,21 @@ namespace CDPL
 				boost::swap(dataMode, dataMode);
 			}
 	
-			CDPL_MATH_INLINE friend void swap(RegularSpatialGrid& usg1, RegularSpatialGrid& usg2) {
+			friend void swap(RegularSpatialGrid& usg1, RegularSpatialGrid& usg2) {
 				usg1.swap(usg2);
 			}
 
-			CDPL_MATH_INLINE void clear(const ValueType& v = ValueType()) {
+			void clear(const ValueType& v = ValueType()) {
 				data.clear(v);
 			}
 
-			CDPL_MATH_INLINE void resize(SizeType m, SizeType n, SizeType o, bool preserve = true, const ValueType& v = ValueType()) {
+			void resize(SizeType m, SizeType n, SizeType o, bool preserve = true, const ValueType& v = ValueType()) {
 				data.resize(m, n, o, preserve, v);
 			}
 
 		private:
 			template <typename V1, typename V2>
-			CDPL_MATH_INLINE void getLocalCoordinates(const V1& coords, V2& local_coords) const {
+			void getLocalCoordinates(const V1& coords, V2& local_coords) const {
 				CVector<CoordinatesValueType, 4> world_coords;
 				
 				world_coords(0) = coords[0];

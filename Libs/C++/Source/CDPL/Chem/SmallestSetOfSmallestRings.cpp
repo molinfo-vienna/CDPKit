@@ -189,7 +189,7 @@ void Chem::SmallestSetOfSmallestRings::createRingFragments()
 		addElement((*it)->createRing(molGraph));
 }
 
-inline bool Chem::SmallestSetOfSmallestRings::sssrComplete() const
+bool Chem::SmallestSetOfSmallestRings::sssrComplete() const
 {
 	return (sssr.size() >= sssrSize);
 }
@@ -568,13 +568,13 @@ Chem::SmallestSetOfSmallestRings::PathMessage& Chem::SmallestSetOfSmallestRings:
 }
 
 
-inline bool Chem::SmallestSetOfSmallestRings::TestMatrixRowCmpFunc::operator()(const PathMessage* msg1, const PathMessage* msg2) const
+bool Chem::SmallestSetOfSmallestRings::TestMatrixRowCmpFunc::operator()(const PathMessage* msg1, const PathMessage* msg2) const
 {
 	return (msg1->getMaxBondIndex() > msg2->getMaxBondIndex());
 }
 
 
-inline bool Chem::SmallestSetOfSmallestRings::PathMessage::LessCmpFunc::operator()(const PathMessage* msg1, const PathMessage* msg2) const
+bool Chem::SmallestSetOfSmallestRings::PathMessage::LessCmpFunc::operator()(const PathMessage* msg1, const PathMessage* msg2) const
 {
 	return (msg1->bondPath < msg2->bondPath);
 }

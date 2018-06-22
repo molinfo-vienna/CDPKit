@@ -30,7 +30,6 @@
 #ifndef CDPL_MATH_MINIMIZERVARIABLEARRAYTRAITS_HPP
 #define CDPL_MATH_MINIMIZERVARIABLEARRAYTRAITS_HPP
 
-#include "CDPL/Math/Config.hpp"
 #include "CDPL/Math/VectorArray.hpp"
 #include "CDPL/Math/TypeTraits.hpp"
 
@@ -50,13 +49,12 @@ namespace CDPL
 			typedef typename A::SizeType SizeType;
 
 			template <typename T>
-			CDPL_MATH_INLINE
+			
 			static T dot(const ArrayType& a1, const ArrayType& a2) {
 				return innerProd(a1, a2);
 			}
 
 			template <typename T>
-			CDPL_MATH_INLINE
 			static T norm2(const ArrayType& a) {
 				T scale = T();
 				T ssq = T(1);
@@ -88,28 +86,23 @@ namespace CDPL
 			}
  
 			template <typename T>
-			CDPL_MATH_INLINE 
 			static void axpy(const T& alpha, const ArrayType& x, ArrayType& y) {
 				y.plusAssign(alpha * x);
 			}
-		
-			CDPL_MATH_INLINE 
+			
 			static void clear(ArrayType& a) {
 				a.clear(ValueType());
 			}
-
-			CDPL_MATH_INLINE 
+			
 			static void assign(ArrayType& a1, const ArrayType& a2) {
 				a1.assign(a2);
 			}
 
 			template <typename T>
-			CDPL_MATH_INLINE 
 			static void multiply(ArrayType& a, const T& v) {
 				a *= v;
 			}
-
-			CDPL_MATH_INLINE 
+			
 			static void sub(ArrayType& a1, const ArrayType& a2) {
 				a1.minusAssign(a2);
 			}
@@ -125,7 +118,6 @@ namespace CDPL
 			typedef typename ArrayType::SizeType SizeType;
 
 			template <typename T>
-			CDPL_MATH_INLINE
 			static T dot(const ArrayType& a1, const ArrayType& a2) {
 				T result = T();
 
@@ -136,7 +128,6 @@ namespace CDPL
 			}
 
 			template <typename T>
-			CDPL_MATH_INLINE
 			static T norm2(const ArrayType& a) {
 				T scale = T();
 				T ssq = T(1);
@@ -169,19 +160,16 @@ namespace CDPL
 			}
  
 			template <typename T>
-			CDPL_MATH_INLINE 
 			static void axpy(const T& alpha, const ArrayType& x, ArrayType& y) {
 				for (SizeType i = 0, size = x.getSize(); i < size; i++)
 					y[i].plusAssign(alpha * x[i]);
 			}
-		
-			CDPL_MATH_INLINE 
+			
 			static void clear(ArrayType& a) {
 				for (SizeType i = 0, size = a.getSize(); i < size; i++)
 					a[i].clear(ValueType());
 			}
 
-			CDPL_MATH_INLINE 
 			static void assign(ArrayType& a1, const ArrayType& a2) {
 				if (a1.getSize() != a2.getSize())
 					a1.resize(a2.getSize());
@@ -191,13 +179,12 @@ namespace CDPL
 			}
 
 			template <typename T>
-			CDPL_MATH_INLINE 
 			static void multiply(ArrayType& a, const T& v) {
 				for (SizeType i = 0, size = a.getSize(); i < size; i++)
 					a[i] *= v;
 			}
 
-			CDPL_MATH_INLINE 
+			
 			static void sub(ArrayType& a1, const ArrayType& a2) {
 				for (SizeType i = 0, size = a1.getSize(); i < size; i++)
 					a1[i].minusAssign(a2[i]);

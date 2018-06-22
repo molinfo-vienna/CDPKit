@@ -36,27 +36,27 @@
 using namespace CDPL; 
 
 
-#define MAKE_CONTROL_PARAM_FUNCTIONS(PARAM_NAME, TYPE, FUNC_INFIX)                      \
-TYPE Chem::get##FUNC_INFIX##Parameter(const Base::ControlParameterContainer& cntnr)     \
-{                                                                                       \
-	return cntnr.getParameterOrDefault<TYPE>(ControlParameter::PARAM_NAME,              \
-											 ControlParameterDefault::PARAM_NAME);      \
-}                                                                                       \
-                                                                                        \
-void Chem::set##FUNC_INFIX##Parameter(Base::ControlParameterContainer& cntnr, TYPE arg) \
-{                                                                                       \
-	cntnr.setParameter(ControlParameter::PARAM_NAME, arg);                              \
-}                                                                                       \
-                                                                                        \
-bool Chem::has##FUNC_INFIX##Parameter(const Base::ControlParameterContainer& cntnr)     \
-{                                                                                       \
-	return cntnr.isParameterSet(ControlParameter::PARAM_NAME);                          \
-}                                                                                       \
-                                                                                        \
-void Chem::clear##FUNC_INFIX##Parameter(Base::ControlParameterContainer& cntnr)         \
-{                                                                                       \
-	cntnr.removeParameter(ControlParameter::PARAM_NAME);                                \
-}
+#define MAKE_CONTROL_PARAM_FUNCTIONS(PARAM_NAME, TYPE, FUNC_INFIX)		\
+	TYPE Chem::get##FUNC_INFIX##Parameter(const Base::ControlParameterContainer& cntnr)	\
+	{																	\
+		return cntnr.getParameterOrDefault<TYPE>(ControlParameter::PARAM_NAME, \
+												 ControlParameterDefault::PARAM_NAME); \
+	}																	\
+																		\
+	void Chem::set##FUNC_INFIX##Parameter(Base::ControlParameterContainer& cntnr, TYPE arg) \
+	{																	\
+		cntnr.setParameter(ControlParameter::PARAM_NAME, arg);			\
+	}																	\
+																		\
+	bool Chem::has##FUNC_INFIX##Parameter(const Base::ControlParameterContainer& cntnr)	\
+	{																	\
+		return cntnr.isParameterSet(ControlParameter::PARAM_NAME);		\
+	}																	\
+																		\
+	void Chem::clear##FUNC_INFIX##Parameter(Base::ControlParameterContainer& cntnr)	\
+	{																	\
+		cntnr.removeParameter(ControlParameter::PARAM_NAME);			\
+	}
 
 
 MAKE_CONTROL_PARAM_FUNCTIONS(ORDINARY_HYDROGEN_DEPLETE, bool, OrdinaryHydrogenDeplete)

@@ -34,7 +34,6 @@
 
 #include <boost/function.hpp>
 
-#include "CDPL/Math/Config.hpp"
 #include "CDPL/Math/MinimizerVariableArrayTraits.hpp"
 #include "CDPL/Math/TypeTraits.hpp"
 
@@ -74,26 +73,26 @@ namespace CDPL
 				DELTAF_REACHED     = 8  // the specified function value delta between successive iterations has been reached
 			};
 
-			CDPL_MATH_INLINE BFGSMinimizer(const ObjectiveFunction& func, const GradientFunction& grad_func): 
+			BFGSMinimizer(const ObjectiveFunction& func, const GradientFunction& grad_func): 
 				rho(0.01), tau1(9), tau2(0.05), tau3(0.5), order(3), func(func), gradFunc(grad_func), status(SUCCESS) {}
 
-			CDPL_MATH_INLINE ValueType getGradientNorm() const {
+			ValueType getGradientNorm() const {
 				return g0Norm;
 			}
 
-			CDPL_MATH_INLINE ValueType getFunctionDelta() const {
+			ValueType getFunctionDelta() const {
 				return -deltaF;
 			}
 
-			CDPL_MATH_INLINE std::size_t getNumIterations() const {
+			std::size_t getNumIterations() const {
 				return numIter;
 			}
 
-			CDPL_MATH_INLINE Status getStatus() const {
+			Status getStatus() const {
 				return status;
 			}
 
-			CDPL_MATH_INLINE Status minimize(VariableArrayType& x, VariableArrayType& g, std::size_t max_iter, 
+			Status minimize(VariableArrayType& x, VariableArrayType& g, std::size_t max_iter, 
 											 const ValueType& g_norm, const ValueType& delta_f, bool do_setup = true) {
 				if (do_setup)
 					setup(x, g);
@@ -119,7 +118,7 @@ namespace CDPL
 				return (status = ITER_LIMIT_REACHED);
 			}
 
-			CDPL_MATH_INLINE ValueType setup(const VariableArrayType& x, VariableArrayType& g,
+			ValueType setup(const VariableArrayType& x, VariableArrayType& g,
 											 const ValueType& step_size = 0.1, const ValueType& tol = 0.01) {
 				numIter = 0;
 				step = step_size;
@@ -150,7 +149,7 @@ namespace CDPL
 				return startF;
 			}
 
-			CDPL_MATH_INLINE Status iterate(ValueType &f, VariableArrayType& x, VariableArrayType& g) {
+			Status iterate(ValueType &f, VariableArrayType& x, VariableArrayType& g) {
 				if (numIter == 0)
 					f = startF;
 
@@ -244,7 +243,7 @@ namespace CDPL
 
 			BFGSMinimizer& operator=(const BFGSMinimizer&);
 
-			CDPL_MATH_INLINE void initFuncEvalCache() {
+			void initFuncEvalCache() {
 				assign(xAlpha, x0); 
 				assign(gAlpha, g0);
 
@@ -256,39 +255,39 @@ namespace CDPL
 				dfCacheKey = ValueType(0);
 			}
 
-			CDPL_MATH_INLINE void assign(VariableArrayType& v1, const VariableArrayType& v2) {
+			void assign(VariableArrayType& v1, const VariableArrayType& v2) {
 				MinimizerVariableArrayTraits<VA>::assign(v1, v2);
 			}
 
-			CDPL_MATH_INLINE void clear(VariableArrayType& v) {
+			void clear(VariableArrayType& v) {
 				MinimizerVariableArrayTraits<VA>::clear(v);
 			}
 
-			CDPL_MATH_INLINE void multiply(VariableArrayType& v, const ValueType& f) {
+			void multiply(VariableArrayType& v, const ValueType& f) {
 				MinimizerVariableArrayTraits<VA>::multiply(v, f);
 			}
 
-			CDPL_MATH_INLINE void sub(VariableArrayType& v1, const VariableArrayType& v2) {
+			void sub(VariableArrayType& v1, const VariableArrayType& v2) {
 				MinimizerVariableArrayTraits<VA>::sub(v1, v2);
 			}
 
-			CDPL_MATH_INLINE ValueType norm2(const VariableArrayType& v) const {
+			ValueType norm2(const VariableArrayType& v) const {
 				return MinimizerVariableArrayTraits<VA>::template norm2<ValueType>(v);
 			}
 
-			CDPL_MATH_INLINE ValueType dot(const VariableArrayType& v1, const VariableArrayType& v2) const {
+			ValueType dot(const VariableArrayType& v1, const VariableArrayType& v2) const {
 				return MinimizerVariableArrayTraits<VA>::template dot<ValueType>(v1, v2);
 			}
 
-			CDPL_MATH_INLINE void axpy(const ValueType& alpha, const VariableArrayType& x, VariableArrayType& y) const {
+			void axpy(const ValueType& alpha, const VariableArrayType& x, VariableArrayType& y) const {
 				MinimizerVariableArrayTraits<VA>::axpy(alpha, x, y);
 			}
 		
-			CDPL_MATH_INLINE ValueType slope() const { /* compute gradient . direction */
+			ValueType slope() const { /* compute gradient . direction */
 				return dot(gAlpha, p);
 			}
 
-			CDPL_MATH_INLINE void moveTo(const ValueType& alpha) {
+			void moveTo(const ValueType& alpha) {
 				if (alpha == xCacheKey)  /* using previously cached position */
 					return;
 
@@ -301,7 +300,7 @@ namespace CDPL
 				xCacheKey = alpha;
 			}
 
-			CDPL_MATH_INLINE ValueType getF(const ValueType& alpha) {
+			ValueType getF(const ValueType& alpha) {
 				if (alpha == fCacheKey)  /* using previously cached f(alpha) */
 					return fAlpha;
 
@@ -313,7 +312,7 @@ namespace CDPL
 				return fAlpha;
 			}
 
-			CDPL_MATH_INLINE ValueType getDF(const ValueType& alpha) {
+			ValueType getDF(const ValueType& alpha) {
 				if (alpha == dfCacheKey) /* using previously cached df(alpha) */
 					return dfAlpha;
     
@@ -331,7 +330,7 @@ namespace CDPL
 				return dfAlpha;
 			}
 
-			CDPL_MATH_INLINE void getFDF(const ValueType& alpha, ValueType& f, ValueType& df) {
+			void getFDF(const ValueType& alpha, ValueType& f, ValueType& df) {
 				/* Check for previously cached values */
 				
 				if (alpha == fCacheKey && alpha == dfCacheKey) {
@@ -360,7 +359,7 @@ namespace CDPL
 				df = dfAlpha;
 			}
 
-			CDPL_MATH_INLINE void updatePosition(const ValueType& alpha, VariableArrayType& x, ValueType& f, VariableArrayType& g) {
+			void updatePosition(const ValueType& alpha, VariableArrayType& x, ValueType& f, VariableArrayType& g) {
 				ValueType f_alpha, df_alpha; 
 
 				/* ensure that everything is fully cached */
@@ -372,7 +371,7 @@ namespace CDPL
 				assign(g, gAlpha);
 			}  
 
-			CDPL_MATH_INLINE void changeDirection() {
+			void changeDirection() {
 				/* Convert the cache values from the end of the current minimisation
 				   to those needed for the start of the next minimisation, alpha = 0 */
 
@@ -396,7 +395,7 @@ namespace CDPL
 				dfCacheKey = ValueType(0);
 			}
 
-			CDPL_MATH_INLINE std::size_t solveQuadratic(const ValueType& a, const ValueType& b, const ValueType& c, 
+			std::size_t solveQuadratic(const ValueType& a, const ValueType& b, const ValueType& c, 
 														ValueType& x0, ValueType& x1) const {
 
 				ValueType disc = b * b - 4 * a * c;
@@ -449,7 +448,7 @@ namespace CDPL
 			 * (0, f0) (1, f1) with derivative fp0 at x = 0.  The interpolating
 			 * polynomial is q(x) = f0 + fp0 * z + (f1 - f0 - fp0) * z^2
 			 */
-			CDPL_MATH_INLINE ValueType interpolateQuadratic(const ValueType& f0, const ValueType& fp0, const ValueType& f1, 
+			ValueType interpolateQuadratic(const ValueType& f0, const ValueType& fp0, const ValueType& f1, 
 															const ValueType& zl, const ValueType& zh) const {
 		
 				ValueType fl = f0 + zl * (fp0 + zl * (f1 - f0 - fp0));
@@ -489,13 +488,13 @@ namespace CDPL
 			 *
 			 * where eta = 3 * (f1 - f0) - 2 * fp0 - fp1, xi = fp0 + fp1 - 2 * (f1 - f0). 
 			 */
-			CDPL_MATH_INLINE ValueType cubic(const ValueType& c0, const ValueType& c1, const ValueType& c2, 
+			ValueType cubic(const ValueType& c0, const ValueType& c1, const ValueType& c2, 
 											 const ValueType& c3, const ValueType& z) const {
 
 				return c0 + z * (c1 + z * (c2 + z * c3));
 			}
 
-			CDPL_MATH_INLINE void checkExtremum(const ValueType& c0, const ValueType& c1, const ValueType& c2, 
+			void checkExtremum(const ValueType& c0, const ValueType& c1, const ValueType& c2, 
 												const ValueType& c3, const ValueType& z, ValueType& zmin, ValueType& fmin) const {
 				/* could make an early return by testing curvature > 0 for minimum */
 
@@ -507,7 +506,7 @@ namespace CDPL
 				}
 			}
 
-			CDPL_MATH_INLINE ValueType interpolateCubic(const ValueType& f0, const ValueType& fp0, const ValueType& f1, 
+			ValueType interpolateCubic(const ValueType& f0, const ValueType& fp0, const ValueType& f1, 
 														const ValueType& fp1, const ValueType& zl, const ValueType& zh) const {
 
 				ValueType eta = 3 * (f1 - f0) - 2 * fp0 - fp1;
@@ -537,7 +536,7 @@ namespace CDPL
 				return zmin;
 			}
 
-			CDPL_MATH_INLINE ValueType interpolate(const ValueType& a, const ValueType& fa, const ValueType& fpa,
+			ValueType interpolate(const ValueType& a, const ValueType& fa, const ValueType& fpa,
 												   const ValueType& b, const ValueType& fb, const ValueType& fpb, 
 												   const ValueType& xmin, const ValueType& xmax) const {
 				/* Map [a, b] to [0, 1] */
@@ -563,7 +562,7 @@ namespace CDPL
 				return alpha;
 			}
 
-			CDPL_MATH_INLINE Status minimize(const ValueType& alpha1, ValueType& alpha_new) {
+			Status minimize(const ValueType& alpha1, ValueType& alpha_new) {
 				ValueType falpha, fpalpha, delta, alpha_next;
 				ValueType alpha = alpha1, alpha_prev = ValueType(0);
 				ValueType a = ValueType(0), fb = ValueType(0), fpb = ValueType(0);

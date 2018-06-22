@@ -230,7 +230,7 @@ void Chem::SMILESDataReader::getParameters()
 }
 
 template <typename T>
-inline void Chem::SMILESDataReader::readName(std::istream& is, T& obj, std::string& str, 
+void Chem::SMILESDataReader::readName(std::istream& is, T& obj, std::string& str, 
 											 const std::string& error_msg) const
 {
 	str.clear();

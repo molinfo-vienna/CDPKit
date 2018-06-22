@@ -77,12 +77,12 @@ using namespace CDPL;
 namespace
 {
 
-	inline void writeMDLEOL(std::ostream& os)
+	void writeMDLEOL(std::ostream& os)
 	{
 		Internal::writeEOL(os, Chem::MDL::END_OF_LINE);
 	}
 
-	inline void writeMDLLine(std::ostream& os, const std::string& line, const char* err_msg, 
+	void writeMDLLine(std::ostream& os, const std::string& line, const char* err_msg, 
 							 bool check_llen = true, bool trim = true, bool trunc = false, 
 							 std::size_t max_llen = Chem::MDL::MAX_LINE_LENGTH)
 	{

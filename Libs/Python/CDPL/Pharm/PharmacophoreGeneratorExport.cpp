@@ -40,6 +40,8 @@ void CDPLPythonPharm::exportPharmacophoreGenerator()
 				   python::bases<Pharm::FeatureGenerator>, boost::noncopyable>("PharmacophoreGenerator", python::no_init)
 		.def(python::init<>(python::arg("self")))
 		.def(python::init<Pharm::PharmacophoreGenerator>((python::arg("self"), python::arg("gen"))))
+		.def("setAtom3DCoordinatesFunction", &Pharm::PharmacophoreGenerator::setAtom3DCoordinatesFunction, 
+			 (python::arg("self"), python::arg("func")))
 		.def("setFeatureGenerator", &Pharm::PharmacophoreGenerator::setFeatureGenerator, 
 			 (python::arg("self"), python::arg("type"), python::arg("ftr_gen")))
 		.def("removeFeatureGenerator", &Pharm::PharmacophoreGenerator::removeFeatureGenerator, 

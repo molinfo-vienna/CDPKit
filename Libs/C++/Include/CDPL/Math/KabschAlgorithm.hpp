@@ -31,7 +31,6 @@
 
 #include <cstddef>
 
-#include "CDPL/Math/Config.hpp"
 #include "CDPL/Math/Check.hpp"
 #include "CDPL/Math/TypeTraits.hpp"
 #include "CDPL/Math/Matrix.hpp"
@@ -87,7 +86,7 @@ namespace CDPL
 			 */
 			template <typename M1, typename M2, typename V>
 			bool align(const MatrixExpression<M1>& points, const MatrixExpression<M2>& ref_points, const VectorExpression<V>& weights, 
-							   bool do_center = true, std::size_t max_svd_iter = 0) {
+					   bool do_center = true, std::size_t max_svd_iter = 0) {
 
 				typedef typename CommonType<typename CommonType<typename M1::SizeType, typename M2::SizeType>::Type,
 											typename V::SizeType>::Type SizeType;
@@ -161,7 +160,7 @@ namespace CDPL
 			 */
 			template <typename M1, typename M2>
 			bool align(const MatrixExpression<M1>& points, const MatrixExpression<M2>& ref_points, 
-							   bool do_center = true, std::size_t max_svd_iter = 0) {
+					   bool do_center = true, std::size_t max_svd_iter = 0) {
 
 				typedef typename CommonType<typename M1::SizeType, typename M2::SizeType>::Type SizeType;
 

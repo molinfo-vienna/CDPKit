@@ -35,38 +35,38 @@
 using namespace CDPL; 
 
 
-#define MAKE_ATTRGRID_PROPERTY_FUNCTIONS_COMMON(PROP_NAME, TYPE, FUNC_SUFFIX)   \
-void Pharm::set##FUNC_SUFFIX(Grid::AttributedGrid& grid, TYPE arg)	            \
-{									                                            \
-    grid.setProperty(AttributedGridProperty::PROP_NAME, arg);		            \
-}									                                            \
-									                                            \
-bool Pharm::has##FUNC_SUFFIX(const Grid::AttributedGrid& grid)	                \
-{									                                            \
-    return grid.isPropertySet(AttributedGridProperty::PROP_NAME);	            \
-}									                                            \
-									                                            \
-void Pharm::clear##FUNC_SUFFIX(Grid::AttributedGrid& grid)	                    \
-{									                                            \
-    grid.removeProperty(AttributedGridProperty::PROP_NAME);	                    \
-}
+#define MAKE_ATTRGRID_PROPERTY_FUNCTIONS_COMMON(PROP_NAME, TYPE, FUNC_SUFFIX) \
+	void Pharm::set##FUNC_SUFFIX(Grid::AttributedGrid& grid, TYPE arg)	\
+	{																	\
+		grid.setProperty(AttributedGridProperty::PROP_NAME, arg);		\
+	}																	\
+																		\
+	bool Pharm::has##FUNC_SUFFIX(const Grid::AttributedGrid& grid)		\
+	{																	\
+		return grid.isPropertySet(AttributedGridProperty::PROP_NAME);	\
+	}																	\
+																		\
+	void Pharm::clear##FUNC_SUFFIX(Grid::AttributedGrid& grid)			\
+	{																	\
+		grid.removeProperty(AttributedGridProperty::PROP_NAME);			\
+	}
 
-#define MAKE_ATTRGRID_PROPERTY_FUNCTIONS(PROP_NAME, TYPE, FUNC_SUFFIX)	       \
-TYPE Pharm::get##FUNC_SUFFIX(const Grid::AttributedGrid& grid)                 \
-{									                                           \
-    return grid.getProperty<TYPE>(AttributedGridProperty::PROP_NAME);          \
-}									                                           \
-									                                           \
-MAKE_ATTRGRID_PROPERTY_FUNCTIONS_COMMON(PROP_NAME, TYPE, FUNC_SUFFIX)
+#define MAKE_ATTRGRID_PROPERTY_FUNCTIONS(PROP_NAME, TYPE, FUNC_SUFFIX)	\
+	TYPE Pharm::get##FUNC_SUFFIX(const Grid::AttributedGrid& grid)		\
+	{																	\
+		return grid.getProperty<TYPE>(AttributedGridProperty::PROP_NAME); \
+	}																	\
+																		\
+	MAKE_ATTRGRID_PROPERTY_FUNCTIONS_COMMON(PROP_NAME, TYPE, FUNC_SUFFIX)
 
 #define MAKE_ATTRGRID_PROPERTY_FUNCTIONS_WITH_DEF(PROP_NAME, TYPE, FUNC_SUFFIX) \
-TYPE Pharm::get##FUNC_SUFFIX(const Grid::AttributedGrid& grid)	                \
-{									                                            \
-    return grid.getPropertyOrDefault<TYPE>(AttributedGridProperty::PROP_NAME,	\
-					   AttributedGridPropertyDefault::PROP_NAME);               \
-}									                                            \
-									                                            \
-MAKE_ATTRGRID_PROPERTY_FUNCTIONS_COMMON(PROP_NAME, TYPE, FUNC_SUFFIX)
+	TYPE Pharm::get##FUNC_SUFFIX(const Grid::AttributedGrid& grid)		\
+	{																	\
+		return grid.getPropertyOrDefault<TYPE>(AttributedGridProperty::PROP_NAME, \
+											   AttributedGridPropertyDefault::PROP_NAME); \
+	}																	\
+																		\
+	MAKE_ATTRGRID_PROPERTY_FUNCTIONS_COMMON(PROP_NAME, TYPE, FUNC_SUFFIX)
 
 
 MAKE_ATTRGRID_PROPERTY_FUNCTIONS_WITH_DEF(FEATURE_TYPE, unsigned int, FeatureType)

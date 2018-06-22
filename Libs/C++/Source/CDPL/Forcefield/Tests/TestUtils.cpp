@@ -28,6 +28,7 @@
 #include "CDPL/Chem/Atom.hpp"
 #include "CDPL/Chem/MolecularGraphFunctions.hpp"
 #include "CDPL/Chem/AtomFunctions.hpp"
+#include "CDPL/Forcefield/MolecularGraphFunctions.hpp"
 
 #include "TestUtils.hpp"
 
@@ -38,13 +39,13 @@ using namespace CDPL;
 void TestUtils::setupMMFF94TestSuiteMolecule(CDPL::Chem::Molecule& mol)
 {
     perceiveSSSR(mol, false);
-    setRingFlags(mol, false);
-    setAromaticityFlags(mol, false);
-
+  
     for (Chem::Molecule::AtomIterator it = mol.getAtomsBegin(), end = mol.getAtomsEnd(); it != end; ++it) {
-	Chem::Atom& atom = *it;
+		Chem::Atom& atom = *it;
 
-	if (isMetal(atom))
-	    setFormalCharge(atom, getMOL2Charge(atom));
+		if (isMetal(atom))
+			setFormalCharge(atom, getMOL2Charge(atom));
     }
+
+	Forcefield::perceiveMMFF94AromaticRings(mol, false);
 }

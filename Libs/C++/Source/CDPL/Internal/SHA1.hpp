@@ -113,7 +113,7 @@ namespace CDPL
 // Implementation of template members
 
 template <typename InputIter>
-inline void CDPL::Internal::SHA1::input(InputIter in, InputIter end)
+void CDPL::Internal::SHA1::input(InputIter in, InputIter end)
 {
 	if (digestComputed)
 		reset();
@@ -132,7 +132,7 @@ inline void CDPL::Internal::SHA1::input(InputIter in, InputIter end)
 }
 
 template <typename OutputIter>
-inline void CDPL::Internal::SHA1::getResult(OutputIter out)
+void CDPL::Internal::SHA1::getResult(OutputIter out)
 {
 	if (!digestComputed) {
 		padMessage();

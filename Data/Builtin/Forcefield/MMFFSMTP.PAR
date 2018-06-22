@@ -1,4 +1,3 @@
-R"PARAMDATA(
 *
 *   SMARTS patterns for the assignment of symbolic atom types
 *
@@ -238,4 +237,3 @@ R"PARAMDATA(
     [#29+2:1]                                            CU+2    DIPOSITIVE COPPER
     [#12+2:1]                                            MG+2    DIPOSITIVE MAGNESIUM CATION
 $
-)PARAMDATA";

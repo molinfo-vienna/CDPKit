@@ -35,7 +35,6 @@
 #include <cmath>
 #include <limits>
 
-#include "CDPL/Math/Config.hpp"
 #include "CDPL/Math/TypeTraits.hpp"
 
 
@@ -117,9 +116,8 @@ namespace
 {
 
 	// Computes the incomplete gamma function P(a, x) evaluated by its series representation.
-
 	template <typename T>
-	CDPL_MATH_INLINE T gammaPSer(const T& a, const T& x)
+	T gammaPSer(const T& a, const T& x)
 	{
 		using namespace CDPL;
 		using namespace Math;
@@ -149,9 +147,8 @@ namespace
 	}
 
 	// Computes the incomplete gamma function Q(a, x) evaluated by its continued fraction representation.
-
 	template <typename T>
-	CDPL_MATH_INLINE T gammaQContFrac(const T& a, const T& x)
+	T gammaQContFrac(const T& a, const T& x)
 	{
 		using namespace CDPL;
 		using namespace Math;
@@ -190,9 +187,8 @@ namespace
 }
 
 // \cond UNHIDE_DETAILS
-
 template <typename T>
-CDPL_MATH_INLINE T CDPL::Math::factorial(unsigned int n) 
+T CDPL::Math::factorial(unsigned int n) 
 {
 	T f(1);
 
@@ -206,7 +202,7 @@ CDPL_MATH_INLINE T CDPL::Math::factorial(unsigned int n)
 }
 
 template <typename T>
-CDPL_MATH_INLINE T CDPL::Math::pythag(const T& a, const T& b) 
+T CDPL::Math::pythag(const T& a, const T& b) 
 {
 	T abs_a = TypeTraits<T>::abs(a);
 	T abs_b = TypeTraits<T>::abs(b);
@@ -226,13 +222,13 @@ CDPL_MATH_INLINE T CDPL::Math::pythag(const T& a, const T& b)
 }
 
 template <typename T1, typename T2>
-CDPL_MATH_INLINE T1 CDPL::Math::sign(const T1& a, const T2& b)
+T1 CDPL::Math::sign(const T1& a, const T2& b)
 {
 	return (b >= 0 ? (a >= 0 ? a : -a) : (a >= 0 ? -a : a)); 
 }
 
 template <typename T>
-CDPL_MATH_INLINE T CDPL::Math::lnGamma(const T& xx)
+T CDPL::Math::lnGamma(const T& xx)
 {
 	static const long double cof[6] = {
 	76.18009172947146,
@@ -257,7 +253,7 @@ CDPL_MATH_INLINE T CDPL::Math::lnGamma(const T& xx)
 }
 
 template <typename T>
-CDPL_MATH_INLINE T CDPL::Math::gammaQ(const T& a, const T& x)
+T CDPL::Math::gammaQ(const T& a, const T& x)
 {
 	if (x < T(0) || a <= T(0))
 		return std::numeric_limits<T>::quiet_NaN();
@@ -269,7 +265,7 @@ CDPL_MATH_INLINE T CDPL::Math::gammaQ(const T& a, const T& x)
 }
 
 template <typename T>
-CDPL_MATH_INLINE T CDPL::Math::generalizedBell(const T& x, const T& a, const T& b, const T& c)
+T CDPL::Math::generalizedBell(const T& x, const T& a, const T& b, const T& c)
 {
 	return (T(1) / (T(1) + std::pow(std::abs((x - c) / a), T(2) * b)));
 }

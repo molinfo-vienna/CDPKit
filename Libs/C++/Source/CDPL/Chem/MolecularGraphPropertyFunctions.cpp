@@ -35,38 +35,38 @@
 using namespace CDPL; 
 
 
-#define MAKE_MOLGRAPH_PROPERTY_FUNCTIONS_COMMON(PROP_NAME, TYPE, FUNC_SUFFIX)        \
-void Chem::set##FUNC_SUFFIX(Chem::MolecularGraph& molgraph, TYPE arg)		     \
-{									             \
-    molgraph.setProperty(MolecularGraphProperty::PROP_NAME, arg);		     \
-}									             \
-									             \
-bool Chem::has##FUNC_SUFFIX(const Chem::MolecularGraph& molgraph)	  	     \
-{									             \
-    return molgraph.isPropertySet(MolecularGraphProperty::PROP_NAME);		     \
-}									             \
-									             \
-void Chem::clear##FUNC_SUFFIX(Chem::MolecularGraph& molgraph)			     \
-{									             \
-    molgraph.removeProperty(MolecularGraphProperty::PROP_NAME);			     \
-}
+#define MAKE_MOLGRAPH_PROPERTY_FUNCTIONS_COMMON(PROP_NAME, TYPE, FUNC_SUFFIX) \
+	void Chem::set##FUNC_SUFFIX(Chem::MolecularGraph& molgraph, TYPE arg) \
+	{																	\
+		molgraph.setProperty(MolecularGraphProperty::PROP_NAME, arg);	\
+	}																	\
+																		\
+	bool Chem::has##FUNC_SUFFIX(const Chem::MolecularGraph& molgraph)	\
+	{																	\
+		return molgraph.isPropertySet(MolecularGraphProperty::PROP_NAME); \
+	}																	\
+																		\
+	void Chem::clear##FUNC_SUFFIX(Chem::MolecularGraph& molgraph)		\
+	{																	\
+		molgraph.removeProperty(MolecularGraphProperty::PROP_NAME);		\
+	}
 
-#define MAKE_MOLGRAPH_PROPERTY_FUNCTIONS(PROP_NAME, TYPE, FUNC_SUFFIX)	             \
-TYPE Chem::get##FUNC_SUFFIX(const Chem::MolecularGraph& molgraph)		     \
-{									             \
-    return molgraph.getProperty<TYPE>(MolecularGraphProperty::PROP_NAME);            \
-}									             \
-									             \
-MAKE_MOLGRAPH_PROPERTY_FUNCTIONS_COMMON(PROP_NAME, TYPE, FUNC_SUFFIX)
+#define MAKE_MOLGRAPH_PROPERTY_FUNCTIONS(PROP_NAME, TYPE, FUNC_SUFFIX)	\
+	TYPE Chem::get##FUNC_SUFFIX(const Chem::MolecularGraph& molgraph)	\
+	{																	\
+		return molgraph.getProperty<TYPE>(MolecularGraphProperty::PROP_NAME); \
+	}																	\
+																		\
+	MAKE_MOLGRAPH_PROPERTY_FUNCTIONS_COMMON(PROP_NAME, TYPE, FUNC_SUFFIX)
 
-#define MAKE_MOLGRAPH_PROPERTY_FUNCTIONS_WITH_DEF(PROP_NAME, TYPE, FUNC_SUFFIX)            \
-TYPE Chem::get##FUNC_SUFFIX(const Chem::MolecularGraph& molgraph)	                   \
-{									                   \
-    return molgraph.getPropertyOrDefault<TYPE>(MolecularGraphProperty::PROP_NAME,	   \
-					       MolecularGraphPropertyDefault::PROP_NAME);  \
-}									                   \
-									                   \
-MAKE_MOLGRAPH_PROPERTY_FUNCTIONS_COMMON(PROP_NAME, TYPE, FUNC_SUFFIX)
+#define MAKE_MOLGRAPH_PROPERTY_FUNCTIONS_WITH_DEF(PROP_NAME, TYPE, FUNC_SUFFIX)	\
+	TYPE Chem::get##FUNC_SUFFIX(const Chem::MolecularGraph& molgraph)	\
+	{																	\
+		return molgraph.getPropertyOrDefault<TYPE>(MolecularGraphProperty::PROP_NAME, \
+												   MolecularGraphPropertyDefault::PROP_NAME); \
+	}																	\
+																		\
+	MAKE_MOLGRAPH_PROPERTY_FUNCTIONS_COMMON(PROP_NAME, TYPE, FUNC_SUFFIX)
 
 
 typedef const Chem::MatchExpression<Chem::MolecularGraph>::SharedPointer& MatchExpressionPtr;

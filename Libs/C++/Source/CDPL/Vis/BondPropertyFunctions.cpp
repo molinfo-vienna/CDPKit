@@ -35,27 +35,27 @@
 using namespace CDPL; 
 
 
-#define MAKE_BOND_PROPERTY_FUNCTIONS(PROP_NAME, TYPE, FUNC_SUFFIX)                      \
-TYPE Vis::get##FUNC_SUFFIX(const Chem::Bond& bond)                                      \
-{                                                                                       \
-	return bond.getPropertyOrDefault<TYPE>(BondProperty::PROP_NAME,                     \
-										   BondPropertyDefault::PROP_NAME);             \
-}                                                                                       \
-                                                                                        \
-void Vis::set##FUNC_SUFFIX(Chem::Bond& bond, TYPE arg)                                  \
-{                                                                                       \
-	bond.setProperty(BondProperty::PROP_NAME, arg);                                     \
-}                                                                                       \
-                                                                                        \
-bool Vis::has##FUNC_SUFFIX(const Chem::Bond& bond)                                      \
-{                                                                                       \
-	return bond.isPropertySet(BondProperty::PROP_NAME);                                 \
-}                                                                                       \
-                                                                                        \
-void Vis::clear##FUNC_SUFFIX(Chem::Bond& bond)                                          \
-{                                                                                       \
-	bond.removeProperty(BondProperty::PROP_NAME);                                       \
-}
+#define MAKE_BOND_PROPERTY_FUNCTIONS(PROP_NAME, TYPE, FUNC_SUFFIX)		\
+	TYPE Vis::get##FUNC_SUFFIX(const Chem::Bond& bond)					\
+	{																	\
+		return bond.getPropertyOrDefault<TYPE>(BondProperty::PROP_NAME,	\
+											   BondPropertyDefault::PROP_NAME);	\
+	}																	\
+																		\
+	void Vis::set##FUNC_SUFFIX(Chem::Bond& bond, TYPE arg)				\
+	{																	\
+		bond.setProperty(BondProperty::PROP_NAME, arg);					\
+	}																	\
+																		\
+	bool Vis::has##FUNC_SUFFIX(const Chem::Bond& bond)					\
+	{																	\
+		return bond.isPropertySet(BondProperty::PROP_NAME);				\
+	}																	\
+																		\
+	void Vis::clear##FUNC_SUFFIX(Chem::Bond& bond)						\
+	{																	\
+		bond.removeProperty(BondProperty::PROP_NAME);					\
+	}
 
 
 MAKE_BOND_PROPERTY_FUNCTIONS(COLOR, const Vis::Color&, Color)

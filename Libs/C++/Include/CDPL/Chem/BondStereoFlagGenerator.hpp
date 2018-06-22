@@ -36,6 +36,7 @@
 #include <utility>
 
 #include <boost/shared_ptr.hpp>
+#include <boost/function.hpp>
 
 #include "CDPL/Chem/APIPrefix.hpp"
 #include "CDPL/Util/BitSet.hpp"
@@ -65,6 +66,8 @@ namespace CDPL
 		{
 
 		public:
+			typedef boost::function1<const Math::Vector2D&, const Atom&> Atom2DCoordinatesFunction;
+
 			/**
 			 * \brief Constructs the \c %BondStereoFlagGenerator instance.
 			 */
@@ -83,17 +86,16 @@ namespace CDPL
 			BondStereoFlagGenerator(const MolecularGraph& molgraph, Util::UIArray& flags);
 
 			/**
-			 * \brief Constructs the \c %BondStereoFlagGenerator instance and generates the 2D stereo flags of the
-			 *        bonds in the molecular graph \a molgraph using the atom coordinates \a coords.
-			 * \param molgraph The molecular graph for which to generate the stereo flags. 
-			 * \param coords The atom coordinates to use for the calculation. 
-			 * \param flags An array containing the generated stereo flags (possible values are defined
-			 *         as constants in namespace Chem::BondStereoFlag). The stereo flags
-			 *         are stored in the same order as the bonds appear in the bond list of
-			 *         the molecular graph (i.e. the 2D stereo flag of a bond is accessible via
-			 *         its index).
+			 * \brief Specifies a function for the retrieval of atom 2D-coordinates.
+			 * \param func The atom 2D-coordinates function.
 			 */
-			BondStereoFlagGenerator(const MolecularGraph& molgraph, const Math::Vector2DArray& coords, Util::UIArray& flags);
+			void setAtom2DCoordinatesFunction(const Atom2DCoordinatesFunction& func);
+
+			/**
+			 * \brief Returns the function that was registered for the retrieval of atom 2D-coordinates.
+			 * \return The registered atom 2D-coordinates function.
+			 */
+			const Atom2DCoordinatesFunction& getAtom2DCoordinatesFunction() const;
 
 			/**
 			 * \brief Generates the 2D stereo flags of the bonds in the molecular graph \a molgraph.
@@ -106,19 +108,6 @@ namespace CDPL
 			 */
 			void generate(const MolecularGraph& molgraph, Util::UIArray& flags);
 
-			/**
-			 * \brief Generates the 2D stereo flags of the bonds in the molecular graph \a molgraph
-			 *        using the atom coordinates \a coords.
-			 * \param molgraph The molecular graph for which to generate the stereo flags. 
-			 * \param coords The atom coordinates to use for the calculation. 
-			 * \param flags An array containing the generated stereo flags (possible values are defined
-			 *         as constants in namespace Chem::BondStereoFlag). The stereo flags
-			 *         are stored in the same order as the bonds appear in the bond list of
-			 *         the molecular graph (i.e. the 2D stereo flag of a bond is accessible via
-			 *         its index).
-			 */
-			void generate(const MolecularGraph& molgraph, const Math::Vector2DArray& coords, Util::UIArray& flags);
-
 		private:
 			class StereoAtomInfo;
 
@@ -126,7 +115,7 @@ namespace CDPL
 
 			BondStereoFlagGenerator& operator=(const BondStereoFlagGenerator&);
 
-			void init(const MolecularGraph&, const Math::Vector2DArray*, Util::UIArray&);
+			void init(const MolecularGraph&, Util::UIArray&);
 
 			void assignStereoFlags(Util::UIArray&);
 
@@ -142,7 +131,7 @@ namespace CDPL
 			public:
 				typedef boost::shared_ptr<StereoAtomInfo> SharedPointer;
 
-				StereoAtomInfo(const MolecularGraph*, const Math::Vector2DArray*,
+				StereoAtomInfo(const MolecularGraph*, const Atom2DCoordinatesFunction& coords_func,
 							   const Atom*, unsigned int, std::size_t, const Atom**, const Bond**);
 
 				unsigned int getConfiguration() const;
@@ -179,6 +168,7 @@ namespace CDPL
 			typedef std::vector<const Bond*> BondList;
 
 			const MolecularGraph*      molGraph;
+			Atom2DCoordinatesFunction  coordsFunc;
 			Util::UIArray              currentStereoFlags;
 			StereoAtomInfoPtrTable     stereoAtomTable;
 			StereoAtomInfoList         stereoAtomList;

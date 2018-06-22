@@ -36,8 +36,6 @@
 
 #include <boost/type_traits/is_arithmetic.hpp>
 
-#include "CDPL/Math/Config.hpp"
-
 
 namespace CDPL
 {
@@ -50,7 +48,7 @@ namespace CDPL
 		{
 
 			template <typename T> 
-			static CDPL_MATH_INLINE T abs(const T& t) {
+			static T abs(const T& t) {
 				return std::abs(t);
 			}
 		};
@@ -60,7 +58,7 @@ namespace CDPL
 		{
 
 			template <typename T> 
-			static CDPL_MATH_INLINE const T& abs(const T& t) {
+			static const T& abs(const T& t) {
 				return t;
 			}
 		};
@@ -74,41 +72,40 @@ namespace CDPL
 			typedef const T& ConstReference;
 			typedef ScalarTraits<T> SelfType;
 
-			static CDPL_MATH_INLINE RealType real(ConstReference t) {
+			static RealType real(ConstReference t) {
 				return t;
 			}
 
-			static CDPL_MATH_INLINE RealType imag(ConstReference) {
+			static RealType imag(ConstReference) {
 				return RealType();
 			}
 
-			static CDPL_MATH_INLINE RealType conj(ConstReference t) {
+			static RealType conj(ConstReference t) {
 				return t;
 			}
 
-			static CDPL_MATH_INLINE RealType abs(ConstReference t) {
+			static RealType abs(ConstReference t) {
 				return ScalarAbsImpl<std::numeric_limits<ValueType>::is_signed>::abs(t);
 			}
 
-			static CDPL_MATH_INLINE ValueType sqrt(ConstReference t) {
+			static ValueType sqrt(ConstReference t) {
 				return ValueType(std::sqrt(t));
 			}
 	
-			static CDPL_MATH_INLINE RealType norm1(ConstReference t) {
+			static RealType norm1(ConstReference t) {
 				return SelfType::abs(t);
 			}
 	
-			static CDPL_MATH_INLINE RealType norm2(ConstReference t) {
+			static RealType norm2(ConstReference t) {
 				return SelfType::abs(t);
 			}
 
-			static CDPL_MATH_INLINE RealType normInf(ConstReference t) {
+			static RealType normInf(ConstReference t) {
 				return SelfType::abs(t);
 			}
 		};
 
 		template <typename T> struct TypeTraits;
-	
 		template <typename T>
 		struct ComplexTraits
 		{
@@ -118,36 +115,36 @@ namespace CDPL
 			typedef const T& ConstReference;
 			typedef ComplexTraits<T> SelfType;
 
-			static CDPL_MATH_INLINE RealType real(ConstReference t) {
+			static RealType real(ConstReference t) {
 				return std::real(t);
 			}
 
-			static CDPL_MATH_INLINE RealType imag(ConstReference t) {
+			static RealType imag(ConstReference t) {
 				return std::imag(t);
 			}
 
-			static CDPL_MATH_INLINE ValueType conj(ConstReference t) {
+			static ValueType conj(ConstReference t) {
 				return std::conj(t);
 			}
 
-			static CDPL_MATH_INLINE RealType abs(ConstReference t) {
+			static RealType abs(ConstReference t) {
 				return std::abs(t);
 			}
 
-			static CDPL_MATH_INLINE ValueType sqrt(ConstReference t) {
+			static ValueType sqrt(ConstReference t) {
 				return std::sqrt(t);
 			}
 
-			static CDPL_MATH_INLINE RealType norm1(ConstReference t) {
+			static RealType norm1(ConstReference t) {
 				return TypeTraits<RealType>::abs(SelfType::real(t)) 
 					+ TypeTraits<RealType>::abs(SelfType::imag(t));
 			}
 	
-			static CDPL_MATH_INLINE RealType norm2(ConstReference t) {
+			static RealType norm2(ConstReference t) {
 				return SelfType::abs(t);
 			}
 
-			static CDPL_MATH_INLINE RealType normInf(ConstReference t) {
+			static RealType normInf(ConstReference t) {
 				return std::max(TypeTraits<RealType>::abs(SelfType::real(t)),
 								TypeTraits<RealType>::abs(SelfType::imag(t)));
 			}

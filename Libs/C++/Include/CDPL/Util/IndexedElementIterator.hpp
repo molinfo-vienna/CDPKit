@@ -187,38 +187,38 @@ namespace CDPL
 // Implementation
 
 template <typename ValueType, typename AccessFunc, typename IndexType>
-inline IndexType CDPL::Util::IndexedElementIterator<ValueType, AccessFunc, IndexType>::getIndex() const
+IndexType CDPL::Util::IndexedElementIterator<ValueType, AccessFunc, IndexType>::getIndex() const
 {
 	return index;
 }
 
 template <typename ValueType, typename AccessFunc, typename IndexType>
-inline const AccessFunc& CDPL::Util::IndexedElementIterator<ValueType, AccessFunc, IndexType>::getAccessFunc() const
+const AccessFunc& CDPL::Util::IndexedElementIterator<ValueType, AccessFunc, IndexType>::getAccessFunc() const
 {
 	return accessFunc;
 }
 
 template <typename ValueType, typename AccessFunc, typename IndexType>
-inline void CDPL::Util::IndexedElementIterator<ValueType, AccessFunc, IndexType>::increment()
+void CDPL::Util::IndexedElementIterator<ValueType, AccessFunc, IndexType>::increment()
 {
 	index++;
 }
 
 template <typename ValueType, typename AccessFunc, typename IndexType>
-inline void CDPL::Util::IndexedElementIterator<ValueType, AccessFunc, IndexType>::decrement()
+void CDPL::Util::IndexedElementIterator<ValueType, AccessFunc, IndexType>::decrement()
 {
 	index--;
 }
 
 template <typename ValueType, typename AccessFunc, typename IndexType>
-inline void CDPL::Util::IndexedElementIterator<ValueType, AccessFunc, IndexType>::advance(DifferenceType diff)
+void CDPL::Util::IndexedElementIterator<ValueType, AccessFunc, IndexType>::advance(DifferenceType diff)
 {
 	index += diff;
 }
 
 template <typename ValueType, typename AccessFunc, typename IndexType>
 template<typename ValueType2, typename AccessFunc2,  typename IndexType2>
-inline typename CDPL::Util::IndexedElementIterator<ValueType, AccessFunc, IndexType>::DifferenceType
+typename CDPL::Util::IndexedElementIterator<ValueType, AccessFunc, IndexType>::DifferenceType
 CDPL::Util::IndexedElementIterator<ValueType, AccessFunc, IndexType>::distance_to(const IndexedElementIterator<ValueType2, AccessFunc2, IndexType2>& it) const
 {
 	return (DifferenceType(it.index) - DifferenceType(index));
@@ -226,13 +226,13 @@ CDPL::Util::IndexedElementIterator<ValueType, AccessFunc, IndexType>::distance_t
 
 template <typename ValueType, typename AccessFunc, typename IndexType>
 template<typename ValueType2, typename AccessFunc2,  typename IndexType2>
-inline bool CDPL::Util::IndexedElementIterator<ValueType, AccessFunc, IndexType>::equal(const IndexedElementIterator<ValueType2, AccessFunc2, IndexType2>& it) const
+bool CDPL::Util::IndexedElementIterator<ValueType, AccessFunc, IndexType>::equal(const IndexedElementIterator<ValueType2, AccessFunc2, IndexType2>& it) const
 {
 	return (index == it.index && accessFunc == it.accessFunc);
 }
 
 template <typename ValueType, typename AccessFunc, typename IndexType>
-inline ValueType& CDPL::Util::IndexedElementIterator<ValueType, AccessFunc, IndexType>::dereference() const
+ValueType& CDPL::Util::IndexedElementIterator<ValueType, AccessFunc, IndexType>::dereference() const
 {
 	return accessFunc(index);
 }

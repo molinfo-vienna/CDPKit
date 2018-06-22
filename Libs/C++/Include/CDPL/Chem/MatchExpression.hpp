@@ -209,7 +209,7 @@ namespace CDPL
 // Implementation
 
 template <typename ObjType1, typename ObjType2>
-inline bool CDPL::Chem::MatchExpression<ObjType1, ObjType2>::operator()(const ObjType1&, const ObjType2&, 
+bool CDPL::Chem::MatchExpression<ObjType1, ObjType2>::operator()(const ObjType1&, const ObjType2&, 
 																		const ObjType1&, const ObjType2&, 
 																		const Base::Variant&) const
 {
@@ -217,7 +217,7 @@ inline bool CDPL::Chem::MatchExpression<ObjType1, ObjType2>::operator()(const Ob
 }
 
 template <typename ObjType1, typename ObjType2>
-inline bool CDPL::Chem::MatchExpression<ObjType1, ObjType2>::operator()(const ObjType1& query_obj1, const ObjType2& query_obj2, 
+bool CDPL::Chem::MatchExpression<ObjType1, ObjType2>::operator()(const ObjType1& query_obj1, const ObjType2& query_obj2, 
 																		const ObjType1& target_obj1, const ObjType2& target_obj2, 
 																		const AtomBondMapping&, const Base::Variant& data) const
 {
@@ -225,28 +225,28 @@ inline bool CDPL::Chem::MatchExpression<ObjType1, ObjType2>::operator()(const Ob
 }
 
 template <typename ObjType1, typename ObjType2>
-inline bool CDPL::Chem::MatchExpression<ObjType1, ObjType2>::requiresAtomBondMapping() const
+bool CDPL::Chem::MatchExpression<ObjType1, ObjType2>::requiresAtomBondMapping() const
 {
 	return false;
 }
 
 
 template <typename ObjType>
-inline bool CDPL::Chem::MatchExpression<ObjType, void>::operator()(const ObjType&, const ObjType&, 
+bool CDPL::Chem::MatchExpression<ObjType, void>::operator()(const ObjType&, const ObjType&, 
 																   const Base::Variant&) const
 {
 	return true;
 }
 
 template <typename ObjType>
-inline bool CDPL::Chem::MatchExpression<ObjType, void>::operator()(const ObjType& query_obj, const ObjType& target_obj, 
+bool CDPL::Chem::MatchExpression<ObjType, void>::operator()(const ObjType& query_obj, const ObjType& target_obj, 
 																   const AtomBondMapping&, const Base::Variant& data) const
 {
 	return operator()(query_obj, target_obj, data);
 }
 
 template <typename ObjType1>
-inline bool CDPL::Chem::MatchExpression<ObjType1, void>::requiresAtomBondMapping() const
+bool CDPL::Chem::MatchExpression<ObjType1, void>::requiresAtomBondMapping() const
 {
 	return false;
 }

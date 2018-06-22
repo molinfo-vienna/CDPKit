@@ -36,7 +36,6 @@
 #include <boost/utility.hpp>
 #include <boost/swap.hpp>
 
-#include "CDPL/Math/Config.hpp"
 #include "CDPL/Math/QuaternionExpression.hpp"
 #include "CDPL/Math/QuaternionAssignment.hpp"
 #include "CDPL/Math/Functional.hpp"
@@ -65,61 +64,60 @@ namespace CDPL
 			typedef SelfType ClosureType;
 			typedef const SelfType ConstClosureType;
 			
-			CDPL_MATH_INLINE explicit QuaternionReference(QuaternionType& q): data(q) {}
+			explicit QuaternionReference(QuaternionType& q): data(q) {}
 
-			CDPL_MATH_INLINE Reference getC1() {
+			Reference getC1() {
 				return data.getC1();
 			}
 
-			CDPL_MATH_INLINE Reference getC2() {
+			Reference getC2() {
 				return data.getC2();
 			}
 
-			CDPL_MATH_INLINE Reference getC3() {
+			Reference getC3() {
 				return data.getC3();
 			}
 
-			CDPL_MATH_INLINE Reference getC4() {
+			Reference getC4() {
 				return data.getC4();
 			}
 
-			CDPL_MATH_INLINE ConstReference getC1() const {
+			ConstReference getC1() const {
 				return data.getC1();
 			}
 
-			CDPL_MATH_INLINE ConstReference getC2() const {
+			ConstReference getC2() const {
 				return data.getC2();
 			}
 
-			CDPL_MATH_INLINE ConstReference getC3() const {
+			ConstReference getC3() const {
 				return data.getC3();
 			}
 
-			CDPL_MATH_INLINE ConstReference getC4() const {
+			ConstReference getC4() const {
 				return data.getC4();
 			}
 		
-			CDPL_MATH_INLINE const QuaternionType& getData() const {
+			const QuaternionType& getData() const {
 				return data;
 			}
 
-			CDPL_MATH_INLINE QuaternionType& getData() {
+			QuaternionType& getData() {
 				return data;
 			}
 
-			CDPL_MATH_INLINE QuaternionReference& operator=(const QuaternionReference& r) {
+			QuaternionReference& operator=(const QuaternionReference& r) {
 				data.operator=(r.data);
 				return *this;
 			}
 
 			template <typename E>
-			CDPL_MATH_INLINE QuaternionReference& operator=(const QuaternionExpression<E>& e) {
+			QuaternionReference& operator=(const QuaternionExpression<E>& e) {
 				data.operator=(e);
 				return *this;
 			}
 
 			template <typename T>
-			CDPL_MATH_INLINE 
 			typename boost::enable_if<IsScalar<T>, QuaternionReference>::type& 
 			operator=(const T& t) {
 				data.operator=(t);
@@ -127,13 +125,12 @@ namespace CDPL
 			}
 
 			template <typename E>
-			CDPL_MATH_INLINE QuaternionReference& operator+=(const QuaternionExpression<E>& e) {
+			QuaternionReference& operator+=(const QuaternionExpression<E>& e) {
 				data.operator+=(e);
 				return *this;
 			}	
 
 			template <typename T>
-			CDPL_MATH_INLINE 
 			typename boost::enable_if<IsScalar<T>, QuaternionReference>::type& 
 			operator+=(const T& t) {
 				data.operator+=(t);
@@ -141,13 +138,12 @@ namespace CDPL
 			}
 
 			template <typename E>
-			CDPL_MATH_INLINE QuaternionReference& operator-=(const QuaternionExpression<E>& e) {
+			QuaternionReference& operator-=(const QuaternionExpression<E>& e) {
 				data.operator-=(e);
 				return *this;
 			}
 
 			template <typename T>
-			CDPL_MATH_INLINE 
 			typename boost::enable_if<IsScalar<T>, QuaternionReference>::type& 
 			operator-=(const T& t) {
 				data.operator-=(t);
@@ -155,13 +151,12 @@ namespace CDPL
 			}
 
 			template <typename E>
-			CDPL_MATH_INLINE QuaternionReference& operator*=(const QuaternionExpression<E>& e) {
+			QuaternionReference& operator*=(const QuaternionExpression<E>& e) {
 				data.operator*=(e);
 				return *this;
 			}
 
 			template <typename T>
-			CDPL_MATH_INLINE 
 			typename boost::enable_if<IsScalar<T>, QuaternionReference>::type& 
 			operator*=(const T& t) {
 				data.operator*=(t);
@@ -169,13 +164,12 @@ namespace CDPL
 			}
 
 			template <typename E>
-			CDPL_MATH_INLINE QuaternionReference& operator/=(const QuaternionExpression<E>& e) {
+			QuaternionReference& operator/=(const QuaternionExpression<E>& e) {
 				data.operator/=(e);
 				return *this;
 			}
 
 			template <typename T>
-			CDPL_MATH_INLINE 
 			typename boost::enable_if<IsScalar<T>, QuaternionReference>::type& 
 			operator/=(const T& t) {
 				data.operator/=(t);
@@ -183,32 +177,32 @@ namespace CDPL
 			}
 			
 			template <typename E>
-			CDPL_MATH_INLINE QuaternionReference& assign(const QuaternionExpression<E>& e) {
+			QuaternionReference& assign(const QuaternionExpression<E>& e) {
 				data.assign(e);
 				return *this;
 			}
 
 			template <typename E>
-			CDPL_MATH_INLINE QuaternionReference& plusAssign(const QuaternionExpression<E>& e) {
+			QuaternionReference& plusAssign(const QuaternionExpression<E>& e) {
 				data.plusAssign(e);
 				return *this;
 			}
 
 			template <typename E>
-			CDPL_MATH_INLINE QuaternionReference& minusAssign(const QuaternionExpression<E>& e) {
+			QuaternionReference& minusAssign(const QuaternionExpression<E>& e) {
 				data.minusAssign(e);
 				return *this;
 			}
 
-			CDPL_MATH_INLINE void swap(QuaternionReference& r) {
+			void swap(QuaternionReference& r) {
 				data.swap(r.data);
 			}
 	
-			CDPL_MATH_INLINE friend void swap(QuaternionReference& r1, QuaternionReference& r2) {
+			friend void swap(QuaternionReference& r1, QuaternionReference& r2) {
 				r1.swap(r2);
 			}
 
-			CDPL_MATH_INLINE void set(const ValueType& c1 = ValueType(), const ValueType& c2 = ValueType(), 
+			void set(const ValueType& c1 = ValueType(), const ValueType& c2 = ValueType(), 
 									 const ValueType& c3 = ValueType(), const ValueType& c4 = ValueType()) {
 				data.set(c1, c2, c3, c4);
 			}
@@ -234,9 +228,9 @@ namespace CDPL
 			typedef const QuaternionReference<const SelfType> ConstClosureType;
 			typedef SelfType QuaternionTemporaryType;
 
-			CDPL_MATH_INLINE Quaternion() {}
+			Quaternion() {}
 
-			CDPL_MATH_INLINE explicit Quaternion(const ValueType& c1, const ValueType& c2 = ValueType(), 
+			explicit Quaternion(const ValueType& c1, const ValueType& c2 = ValueType(), 
 												 const ValueType& c3 = ValueType(), const ValueType& c4 = ValueType()) {
 				data[0] = c1;
 				data[1] = c2;
@@ -244,64 +238,64 @@ namespace CDPL
 				data[3] = c4;
 			}
 
-			CDPL_MATH_INLINE Quaternion(const Quaternion& q) {
+			Quaternion(const Quaternion& q) {
 				std::copy(q.data, q.data + 4, data);
 			}
 
 			template <typename E>
-			CDPL_MATH_INLINE Quaternion(const QuaternionExpression<E>& e) {
+			Quaternion(const QuaternionExpression<E>& e) {
 				quaternionAssignQuaternion<ScalarAssignment>(*this, e);
 			}
 
-			CDPL_MATH_INLINE Pointer getData() {
+			Pointer getData() {
 				return data;
 			}
 			
-			CDPL_MATH_INLINE ConstPointer getData() const {
+			ConstPointer getData() const {
 				return data;
 			}
 
-			CDPL_MATH_INLINE Reference getC1() {
+			Reference getC1() {
 				return data[0];
 			}
 
-			CDPL_MATH_INLINE Reference getC2() {
+			Reference getC2() {
 				return data[1];
 			}
 
-			CDPL_MATH_INLINE Reference getC3() {
+			Reference getC3() {
 				return data[2];
 			}
 
-			CDPL_MATH_INLINE Reference getC4() {
+			Reference getC4() {
 				return data[3];
 			}
 
-			CDPL_MATH_INLINE ConstReference getC1() const {
+			ConstReference getC1() const {
 				return data[0];
 			}
 
-			CDPL_MATH_INLINE ConstReference getC2() const {
+			ConstReference getC2() const {
 				return data[1];
 			}
 
-			CDPL_MATH_INLINE ConstReference getC3() const {
+			ConstReference getC3() const {
 				return data[2];
 			}
 
-			CDPL_MATH_INLINE ConstReference getC4() const {
+			ConstReference getC4() const {
 				return data[3];
 			}
 			
-			CDPL_MATH_INLINE void set(const ValueType& c1 = ValueType(), const ValueType& c2 = ValueType(), 
-									 const ValueType& c3 = ValueType(), const ValueType& c4 = ValueType()) {
+			void set(const ValueType& c1 = ValueType(), const ValueType& c2 = ValueType(), 
+					 const ValueType& c3 = ValueType(), const ValueType& c4 = ValueType()) {
 				data[0] = c1;
 				data[1] = c2;
 				data[2] = c3;
 				data[3] = c4;
 			}
 
-			CDPL_MATH_INLINE Quaternion& operator=(const Quaternion& q) {
+			Quaternion& operator=(const Quaternion& q) {
 				if (this != &q)
 					std::copy(q.data, q.data + 4, data);
 
@@ -309,19 +303,18 @@ namespace CDPL
 			}
 
 			template <typename C>
-			CDPL_MATH_INLINE Quaternion& operator=(const QuaternionContainer<C>& c) {
+			Quaternion& operator=(const QuaternionContainer<C>& c) {
 				return assign(c);
 			}
 
 			template <typename E>
-			CDPL_MATH_INLINE Quaternion& operator=(const QuaternionExpression<E>& e) {
+			Quaternion& operator=(const QuaternionExpression<E>& e) {
 				Quaternion tmp(e);
 
 				return this->operator=(tmp);
 			}
 
 			template <typename T1>
-			CDPL_MATH_INLINE 
 			typename boost::enable_if<IsScalar<T1>, Quaternion>::type& 
 			operator=(const T1& t) {
 				data[0] = t;
@@ -333,7 +326,6 @@ namespace CDPL
 			}
 
 			template <typename T1>
-			CDPL_MATH_INLINE
 			typename boost::enable_if<IsScalar<T1>, Quaternion>::type&
 			operator+=(const T1& t) {
 				data[0] += t;
@@ -341,19 +333,18 @@ namespace CDPL
 			}
 
 			template <typename C>
-			CDPL_MATH_INLINE Quaternion& operator+=(const QuaternionContainer<C>& c) {
+			Quaternion& operator+=(const QuaternionContainer<C>& c) {
 				return plusAssign(c);
 			}
 
 			template <typename E>
-			CDPL_MATH_INLINE Quaternion& operator+=(const QuaternionExpression<E>& e) {
+			Quaternion& operator+=(const QuaternionExpression<E>& e) {
 				Quaternion tmp(*this + e);
 
 				return this->operator=(tmp);
 			}	
 
 			template <typename T1>
-			CDPL_MATH_INLINE
 			typename boost::enable_if<IsScalar<T1>, Quaternion>::type&
 			operator-=(const T1& t) {
 				data[0] -= t;
@@ -361,19 +352,18 @@ namespace CDPL
 			}
 
 			template <typename C>
-			CDPL_MATH_INLINE Quaternion& operator-=(const QuaternionContainer<C>& c) {
+			Quaternion& operator-=(const QuaternionContainer<C>& c) {
 				return minusAssign(c);
 			}
 
 			template <typename E>
-			CDPL_MATH_INLINE Quaternion& operator-=(const QuaternionExpression<E>& e) {
+			Quaternion& operator-=(const QuaternionExpression<E>& e) {
 				Quaternion tmp(*this - e);
 
 				return this->operator=(tmp);
 			}
 
 			template <typename T1>
-			CDPL_MATH_INLINE 
 			typename boost::enable_if<IsScalar<T1>, Quaternion>::type&
 			operator*=(const T1& t) {
 				quaternionAssignScalar<ScalarMultiplicationAssignment>(*this, t);
@@ -381,14 +371,13 @@ namespace CDPL
 			}
 
 			template <typename E>
-			CDPL_MATH_INLINE Quaternion& operator*=(const QuaternionExpression<E>& e) {
+			Quaternion& operator*=(const QuaternionExpression<E>& e) {
 				Quaternion tmp(*this * e);
 
 				return this->operator=(tmp);
 			}	
 
 			template <typename T1>
-			CDPL_MATH_INLINE 
 			typename boost::enable_if<IsScalar<T1>, Quaternion>::type&
 			operator/=(const T1& t) {
 				quaternionAssignScalar<ScalarDivisionAssignment>(*this, t);
@@ -396,36 +385,36 @@ namespace CDPL
 			}
 			
 			template <typename E>
-			CDPL_MATH_INLINE Quaternion& operator/=(const QuaternionExpression<E>& e) {
+			Quaternion& operator/=(const QuaternionExpression<E>& e) {
 				Quaternion tmp(*this / e);
 
 				return this->operator=(tmp);
 			}	
 
 			template <typename E>
-			CDPL_MATH_INLINE Quaternion& assign(const QuaternionExpression<E>& e) {
+			Quaternion& assign(const QuaternionExpression<E>& e) {
 				quaternionAssignQuaternion<ScalarAssignment>(*this, e);
 				return *this;
 			}
 
 			template <typename E>
-			CDPL_MATH_INLINE Quaternion& plusAssign(const QuaternionExpression<E>& e) {
+			Quaternion& plusAssign(const QuaternionExpression<E>& e) {
 				quaternionAssignQuaternion<ScalarAdditionAssignment>(*this, e);
 				return *this;
 			}
 
 			template <typename E>
-			CDPL_MATH_INLINE Quaternion& minusAssign(const QuaternionExpression<E>& e) {
+			Quaternion& minusAssign(const QuaternionExpression<E>& e) {
 				quaternionAssignQuaternion<ScalarSubtractionAssignment>(*this, e);
 				return *this;
 			}
 
-			CDPL_MATH_INLINE void swap(Quaternion& q) {
+			void swap(Quaternion& q) {
 				if (this != &q)
 					std::swap_ranges(data, data + 4, q.data);
 			}
 	
-			CDPL_MATH_INLINE friend void swap(Quaternion& q1, Quaternion& q2) {
+			friend void swap(Quaternion& q1, Quaternion& q2) {
 				q1.swap(q2);
 			}
 
@@ -447,46 +436,45 @@ namespace CDPL
 			typedef const QuaternionReference<const SelfType> ConstClosureType;
 			typedef Quaternion<T> QuaternionTemporaryType;
 
-			CDPL_MATH_INLINE RealQuaternion(): value() {}
+			RealQuaternion(): value() {}
 
-			CDPL_MATH_INLINE RealQuaternion(const ValueType& r): value(r) {}
+			RealQuaternion(const ValueType& r): value(r) {}
 
 			template <typename T1>
-			CDPL_MATH_INLINE RealQuaternion(const RealQuaternion<T1>& q): value(q.getC1()) {}
+			RealQuaternion(const RealQuaternion<T1>& q): value(q.getC1()) {}
 
-			CDPL_MATH_INLINE ConstReference getC1() const {
+			ConstReference getC1() const {
 				return value;
 			}
 
-			CDPL_MATH_INLINE ConstReference getC2() const {
+			ConstReference getC2() const {
 				return zero;
 			}
 
-			CDPL_MATH_INLINE ConstReference getC3() const {
+			ConstReference getC3() const {
 				return zero;
 			}
 
-			CDPL_MATH_INLINE ConstReference getC4() const {
+			ConstReference getC4() const {
 				return zero;
 			}
 			
-			CDPL_MATH_INLINE operator ValueType() const {
+			operator ValueType() const {
 				return value;
 			}
 
-			CDPL_MATH_INLINE RealQuaternion& operator=(const RealQuaternion& q) {
+			RealQuaternion& operator=(const RealQuaternion& q) {
 				value = q.value;
 				return *this;
 			}
 
 			template <typename T1>
-			CDPL_MATH_INLINE RealQuaternion& operator=(const RealQuaternion<T1>& q) {
+			RealQuaternion& operator=(const RealQuaternion<T1>& q) {
 				value = q.getC1();
 				return *this;
 			}
 
 			template <typename T1>
-			CDPL_MATH_INLINE 
 			typename boost::enable_if<IsScalar<T1>, RealQuaternion>::type&
 			operator=(const T1& t) {
 				value = t;
@@ -494,13 +482,12 @@ namespace CDPL
 			}
 
 			template <typename T1>
-			CDPL_MATH_INLINE RealQuaternion& operator+=(const RealQuaternion<T1>& q) {
+			RealQuaternion& operator+=(const RealQuaternion<T1>& q) {
 				value += q.getC1();
 				return *this;
 			}
 
 			template <typename T1>
-			CDPL_MATH_INLINE
 			typename boost::enable_if<IsScalar<T1>, RealQuaternion>::type&
 			operator+=(const T1& t) {
 				value += t;
@@ -508,13 +495,12 @@ namespace CDPL
 			}
 
 			template <typename T1>
-			CDPL_MATH_INLINE RealQuaternion& operator-=(const RealQuaternion<T1>& q) {
+			RealQuaternion& operator-=(const RealQuaternion<T1>& q) {
 				value -= q.getC1();
 				return *this;
 			}
 
 			template <typename T1>
-			CDPL_MATH_INLINE
 			typename boost::enable_if<IsScalar<T1>, RealQuaternion>::type&
 			operator-=(const T1& t) {
 				value -= t;
@@ -522,13 +508,12 @@ namespace CDPL
 			}
 
 			template <typename T1>
-			CDPL_MATH_INLINE RealQuaternion& operator*=(const RealQuaternion<T1>& q) {
+			RealQuaternion& operator*=(const RealQuaternion<T1>& q) {
 				value *= q.getC1();
 				return *this;
 			}	
 
 			template <typename T1>
-			CDPL_MATH_INLINE 
 			typename boost::enable_if<IsScalar<T1>, RealQuaternion>::type&
 			operator*=(const T1& t) {
 				value *= t;
@@ -536,13 +521,12 @@ namespace CDPL
 			}
 
 			template <typename T1>
-			CDPL_MATH_INLINE RealQuaternion& operator/=(const RealQuaternion<T1>& q) {
+			RealQuaternion& operator/=(const RealQuaternion<T1>& q) {
 				value /= q.getC1();
 				return *this;
 			}	
 
 			template <typename T1>
-			CDPL_MATH_INLINE 
 			typename boost::enable_if<IsScalar<T1>, RealQuaternion>::type&
 			operator/=(const T1& t) {
 				value /= t;
@@ -550,29 +534,29 @@ namespace CDPL
 			}
 			
 			template <typename T1>
-			CDPL_MATH_INLINE RealQuaternion& assign(const RealQuaternion<T1>& q) {
+			RealQuaternion& assign(const RealQuaternion<T1>& q) {
 				value = q.getC1();
 				return *this;
 			}
 
 			template <typename T1>
-			CDPL_MATH_INLINE RealQuaternion& plusAssign(const RealQuaternion<T1>& q) {
+			RealQuaternion& plusAssign(const RealQuaternion<T1>& q) {
 				value += q.getC1();
 				return *this;
 			}
 
 			template <typename T1>
-			CDPL_MATH_INLINE RealQuaternion& minusAssign(const RealQuaternion<T1>& q) {
+			RealQuaternion& minusAssign(const RealQuaternion<T1>& q) {
 				value -= q.getC1();
 				return *this;
 			}
 
-			CDPL_MATH_INLINE void swap(RealQuaternion& q) {
+			void swap(RealQuaternion& q) {
 				if (this != &q)
 					boost::swap(value, q.value);
 			}
 	
-			CDPL_MATH_INLINE friend void swap(RealQuaternion& q1, RealQuaternion& q2) {
+			friend void swap(RealQuaternion& q1, RealQuaternion& q2) {
 				q1.swap(q2);
 			}
 
@@ -590,7 +574,6 @@ namespace CDPL
 		struct QuaternionTemporaryTraits<QuaternionReference<Q> > : public QuaternionTemporaryTraits<Q> {};
 	
 		template <typename T>
-		CDPL_MATH_INLINE
 		typename boost::enable_if<IsScalar<T>, RealQuaternion<T> >::type 
 		quat(const T& t)
 		{
@@ -598,7 +581,6 @@ namespace CDPL
 		}
 
 		template <typename T1, typename T2>
-		CDPL_MATH_INLINE
 		Quaternion<typename CommonType<T1, T2>::Type> 
 		quat(const T1& t1, const T2& t2)
 		{
@@ -608,7 +590,6 @@ namespace CDPL
 		}
 		
 		template <typename T1, typename T2, typename T3>
-		CDPL_MATH_INLINE 
 		Quaternion<typename CommonType<typename CommonType<T1, T2>::Type, T3>::Type> 
 		quat(const T1& t1, const T2& t2, const T3& t3)
 		{
@@ -618,7 +599,6 @@ namespace CDPL
 		}
 
 		template <typename T1, typename T2, typename T3, typename T4>
-		CDPL_MATH_INLINE 
 		Quaternion<typename CommonType<typename CommonType<typename CommonType<T1, T2>::Type, T3>::Type, T4>::Type> 
 		quat(const T1& t1, const T2& t2, const T3& t3, const T4& t4)
 		{

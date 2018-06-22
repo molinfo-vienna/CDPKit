@@ -330,7 +330,7 @@ std::size_t Chem::SymmetryClassCalculator::AtomNode::getSymClassID() const
 }
 
 
-inline bool Chem::SymmetryClassCalculator::AtomNode::SymClassCmpFunc::operator()(const AtomNode* node1, 
+bool Chem::SymmetryClassCalculator::AtomNode::SymClassCmpFunc::operator()(const AtomNode* node1, 
 																				 const AtomNode* node2) const
 {
 	if (node1->symClassID == node2->symClassID) {
@@ -345,7 +345,7 @@ inline bool Chem::SymmetryClassCalculator::AtomNode::SymClassCmpFunc::operator()
 }
 
 
-inline bool Chem::SymmetryClassCalculator::AtomNode::SVMNumberCmpFunc::operator()(const AtomNode* node1, 
+bool Chem::SymmetryClassCalculator::AtomNode::SVMNumberCmpFunc::operator()(const AtomNode* node1, 
 																				  const AtomNode* node2) const
 {
 	return (node1->svmNumber < node2->svmNumber);

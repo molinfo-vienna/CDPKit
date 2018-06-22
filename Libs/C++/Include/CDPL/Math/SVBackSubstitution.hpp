@@ -82,7 +82,7 @@ namespace CDPL
 // Implementation
 
 template <typename M1, typename V1, typename M2, typename V2, typename V3>
-inline void CDPL::Math::svBackSubstitution(const M1& u, const V1& w, const M2& v, const V2& b, V3& x)
+void CDPL::Math::svBackSubstitution(const M1& u, const V1& w, const M2& v, const V2& b, V3& x)
 {
 	typedef typename V3::value_type T;
 

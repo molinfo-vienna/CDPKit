@@ -401,13 +401,13 @@ CDPL::Base::DataIOManager<T>& CDPL::Base::DataIOManager<T>::getInstance()
 }
 
 template <typename T>
-inline void CDPL::Base::DataIOManager<T>::registerInputHandler(const InputHandlerPointer& handler)
+void CDPL::Base::DataIOManager<T>::registerInputHandler(const InputHandlerPointer& handler)
 {
 	getInstance().inputHandlers.push_back(handler);
 }
 
 template <typename T>
-inline void CDPL::Base::DataIOManager<T>::registerOutputHandler(const OutputHandlerPointer& handler)
+void CDPL::Base::DataIOManager<T>::registerOutputHandler(const OutputHandlerPointer& handler)
 {
 	getInstance().outputHandlers.push_back(handler);
 }
@@ -497,7 +497,7 @@ void CDPL::Base::DataIOManager<T>::unregisterOutputHandler(std::size_t idx)
 }
 
 template <typename T>
-inline typename CDPL::Base::DataIOManager<T>::InputHandlerIterator 
+typename CDPL::Base::DataIOManager<T>::InputHandlerIterator 
 CDPL::Base::DataIOManager<T>::unregisterInputHandler(const InputHandlerIterator& it)
 {
 	InputHandlerList& handlers = getInstance().inputHandlers;
@@ -509,7 +509,7 @@ CDPL::Base::DataIOManager<T>::unregisterInputHandler(const InputHandlerIterator&
 }
 
 template <typename T>
-inline typename CDPL::Base::DataIOManager<T>::OutputHandlerIterator
+typename CDPL::Base::DataIOManager<T>::OutputHandlerIterator
 CDPL::Base::DataIOManager<T>::unregisterOutputHandler(const OutputHandlerIterator& it)
 {
 	OutputHandlerList& handlers = getInstance().outputHandlers;
@@ -521,13 +521,13 @@ CDPL::Base::DataIOManager<T>::unregisterOutputHandler(const OutputHandlerIterato
 }
 
 template <typename T>
-inline std::size_t CDPL::Base::DataIOManager<T>::getNumInputHandlers()
+std::size_t CDPL::Base::DataIOManager<T>::getNumInputHandlers()
 {
 	return getInstance().inputHandlers.size();
 }
 
 template <typename T>
-inline std::size_t CDPL::Base::DataIOManager<T>::getNumOutputHandlers()
+std::size_t CDPL::Base::DataIOManager<T>::getNumOutputHandlers()
 {
 	return getInstance().outputHandlers.size();
 }
@@ -555,25 +555,25 @@ const typename CDPL::Base::DataOutputHandler<T>::SharedPointer& CDPL::Base::Data
 }
 
 template <typename T>
-inline typename CDPL::Base::DataIOManager<T>::InputHandlerIterator CDPL::Base::DataIOManager<T>::getInputHandlersBegin()
+typename CDPL::Base::DataIOManager<T>::InputHandlerIterator CDPL::Base::DataIOManager<T>::getInputHandlersBegin()
 {
 	return getInstance().inputHandlers.begin();
 }
 
 template <typename T>
-inline typename CDPL::Base::DataIOManager<T>::InputHandlerIterator CDPL::Base::DataIOManager<T>::getInputHandlersEnd()
+typename CDPL::Base::DataIOManager<T>::InputHandlerIterator CDPL::Base::DataIOManager<T>::getInputHandlersEnd()
 {
 	return getInstance().inputHandlers.end();
 }
 
 template <typename T>
-inline typename CDPL::Base::DataIOManager<T>::OutputHandlerIterator CDPL::Base::DataIOManager<T>::getOutputHandlersBegin()
+typename CDPL::Base::DataIOManager<T>::OutputHandlerIterator CDPL::Base::DataIOManager<T>::getOutputHandlersBegin()
 {
 	return getInstance().outputHandlers.begin();
 }
 
 template <typename T>
-inline typename CDPL::Base::DataIOManager<T>::OutputHandlerIterator CDPL::Base::DataIOManager<T>::getOutputHandlersEnd()
+typename CDPL::Base::DataIOManager<T>::OutputHandlerIterator CDPL::Base::DataIOManager<T>::getOutputHandlersEnd()
 {
 	return getInstance().outputHandlers.end();
 }
@@ -586,7 +586,7 @@ typename CDPL::Base::DataInputHandler<T>::SharedPointer CDPL::Base::DataIOManage
 	typename InputHandlerList::const_iterator it = std::find_if(handlers.begin(), handlers.end(),
 																boost::bind(std::equal_to<DataFormat>(), boost::ref(fmt),
 																			boost::bind(&DataInputHandler<T>::getDataFormat, _1)));
-	return (it == handlers.end() ? 0 : *it);
+	return (it == handlers.end() ? InputHandlerPointer() : *it);
 }
 
 template <typename T>
@@ -598,7 +598,7 @@ typename CDPL::Base::DataInputHandler<T>::SharedPointer CDPL::Base::DataIOManage
 																boost::bind(&DataFormat::matchesFileExtension, 
 																			boost::bind(&DataInputHandler<T>::getDataFormat, _1),
 																			boost::ref(file_ext)));
-	return (it == handlers.end() ? 0 : *it);
+	return (it == handlers.end() ? InputHandlerPointer() : *it);
 }
 
 template <typename T>
@@ -610,7 +610,7 @@ typename CDPL::Base::DataInputHandler<T>::SharedPointer CDPL::Base::DataIOManage
 																boost::bind(&DataFormat::matchesName, 
 																			boost::bind(&DataInputHandler<T>::getDataFormat, _1),
 																			boost::ref(name)));
-	return (it == handlers.end() ? 0 : *it);
+	return (it == handlers.end() ? InputHandlerPointer() : *it);
 }
 
 template <typename T>
@@ -622,7 +622,7 @@ typename CDPL::Base::DataInputHandler<T>::SharedPointer CDPL::Base::DataIOManage
 																boost::bind(&DataFormat::matchesMimeType, 
 																			boost::bind(&DataInputHandler<T>::getDataFormat, _1),
 																			boost::ref(mime_type)));
-	return (it == handlers.end() ? 0 : *it);
+	return (it == handlers.end() ? InputHandlerPointer() : *it);
 }
 
 template <typename T>
@@ -633,7 +633,7 @@ typename CDPL::Base::DataOutputHandler<T>::SharedPointer CDPL::Base::DataIOManag
 	typename OutputHandlerList::const_iterator it = std::find_if(handlers.begin(), handlers.end(),
 																 boost::bind(std::equal_to<DataFormat>(), boost::ref(fmt),
 																			 boost::bind(&DataOutputHandler<T>::getDataFormat, _1)));
-	return (it == handlers.end() ? 0 : *it);
+	return (it == handlers.end() ? OutputHandlerPointer() : *it);
 }
 
 template <typename T>
@@ -645,7 +645,7 @@ typename CDPL::Base::DataOutputHandler<T>::SharedPointer CDPL::Base::DataIOManag
 																 boost::bind(&DataFormat::matchesName, 
 																			 boost::bind(&DataOutputHandler<T>::getDataFormat, _1),
 																			 boost::ref(name)));
-	return (it == handlers.end() ? 0 : *it);
+	return (it == handlers.end() ? OutputHandlerPointer() : *it);
 }
 
 template <typename T>
@@ -657,7 +657,7 @@ typename CDPL::Base::DataOutputHandler<T>::SharedPointer CDPL::Base::DataIOManag
 																 boost::bind(&DataFormat::matchesFileExtension, 
 																			 boost::bind(&DataOutputHandler<T>::getDataFormat, _1),
 																			 boost::ref(file_ext)));
-	return (it == handlers.end() ? 0 : *it);
+	return (it == handlers.end() ? OutputHandlerPointer() : *it);
 }
 
 template <typename T>
@@ -669,7 +669,7 @@ typename CDPL::Base::DataOutputHandler<T>::SharedPointer CDPL::Base::DataIOManag
 																 boost::bind(&DataFormat::matchesMimeType, 
 																			 boost::bind(&DataOutputHandler<T>::getDataFormat, _1),
 																			 boost::ref(mime_type)));
-	return (it == handlers.end() ? 0 : *it);
+	return (it == handlers.end() ? OutputHandlerPointer() : *it);
 }
 
 #endif // CDPL_BASE_DATAIOMANAGER_HPP

@@ -31,7 +31,18 @@
 #ifndef CDPL_FORCEFIELD_HPP
 #define CDPL_FORCEFIELD_HPP
 
+#include "CDPL/Forcefield/AtomProperty.hpp"
+#include "CDPL/Forcefield/BondProperty.hpp"
+#include "CDPL/Forcefield/MolecularGraphProperty.hpp"
+#include "CDPL/Forcefield/AtomFunctions.hpp"
+#include "CDPL/Forcefield/BondFunctions.hpp"
+#include "CDPL/Forcefield/MolecularGraphFunctions.hpp"
+
+#include "CDPL/Forcefield/MMFF94PropertyFunctions.hpp"
 #include "CDPL/Forcefield/MMFF94AtomTyper.hpp"
+#include "CDPL/Forcefield/MMFF94BondTyper.hpp"
+#include "CDPL/Forcefield/MMFF94AromaticSSSRSubset.hpp"
+
 #include "CDPL/Forcefield/MMFF94SymbolicAtomTypePatternTable.hpp"
 #include "CDPL/Forcefield/MMFF94HeavyToHydrogenAtomTypeMap.hpp"
 #include "CDPL/Forcefield/MMFF94SymbolicToNumericAtomTypeMap.hpp"

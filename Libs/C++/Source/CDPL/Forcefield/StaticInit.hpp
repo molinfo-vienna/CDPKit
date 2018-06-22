@@ -35,6 +35,10 @@ namespace CDPL
 
 	namespace Forcefield
 	{
+
+		void initAtomProperties();
+		void initBondProperties();
+		void initMolecularGraphProperties();
 	}
 }
 
@@ -45,6 +49,9 @@ namespace
 	{
 
 		CDPLForcefieldInit() {
+			CDPL::Forcefield::initAtomProperties();
+			CDPL::Forcefield::initBondProperties();
+			CDPL::Forcefield::initMolecularGraphProperties();
 		}
 
 	} cdplForcefieldInit;

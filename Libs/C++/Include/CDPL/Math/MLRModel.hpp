@@ -33,7 +33,6 @@
 
 #include <limits>
 
-#include "CDPL/Math/Config.hpp"
 #include "CDPL/Math/Vector.hpp"
 #include "CDPL/Math/Matrix.hpp"
 #include "CDPL/Math/CommonType.hpp"
@@ -315,7 +314,7 @@ namespace CDPL
 // Implementation
 
 template <typename T>
-CDPL_MATH_INLINE void CDPL::Math::MLRModel<T>::resizeDataSet(SizeType num_points, SizeType num_vars)
+void CDPL::Math::MLRModel<T>::resizeDataSet(SizeType num_points, SizeType num_vars)
 {
 	if (num_points == xMatrix.getSize1() && num_vars == xMatrix.getSize2())
 		return;
@@ -325,7 +324,7 @@ CDPL_MATH_INLINE void CDPL::Math::MLRModel<T>::resizeDataSet(SizeType num_points
 }
 
 template <typename T>
-CDPL_MATH_INLINE void CDPL::Math::MLRModel<T>::clearDataSet()
+void CDPL::Math::MLRModel<T>::clearDataSet()
 {
 	yValues.resize(0);
 	xMatrix.resize(0, 0, false);
@@ -333,7 +332,7 @@ CDPL_MATH_INLINE void CDPL::Math::MLRModel<T>::clearDataSet()
 
 template <typename T>
 template <typename V>
-CDPL_MATH_INLINE void CDPL::Math::MLRModel<T>::setXYData(SizeType i, const VectorExpression<V>& x_vars, ValueType y)
+void CDPL::Math::MLRModel<T>::setXYData(SizeType i, const VectorExpression<V>& x_vars, ValueType y)
 {
 	SizeType x_mtx_size1 = xMatrix.getSize1();
 	SizeType x_mtx_size2 = xMatrix.getSize2();
@@ -354,7 +353,7 @@ CDPL_MATH_INLINE void CDPL::Math::MLRModel<T>::setXYData(SizeType i, const Vecto
 
 template <typename T>
 template <typename V>
-CDPL_MATH_INLINE void CDPL::Math::MLRModel<T>::addXYData(const VectorExpression<V>& x_vars, ValueType y)
+void CDPL::Math::MLRModel<T>::addXYData(const VectorExpression<V>& x_vars, ValueType y)
 {
 	SizeType i = xMatrix.getSize1();
 	SizeType x_mtx_size2 = xMatrix.getSize2();
@@ -373,28 +372,28 @@ CDPL_MATH_INLINE void CDPL::Math::MLRModel<T>::addXYData(const VectorExpression<
 }
 
 template <typename T>
-CDPL_MATH_INLINE CDPL::Math::Matrix<typename CDPL::Math::MLRModel<T>::ValueType>&
+CDPL::Math::Matrix<typename CDPL::Math::MLRModel<T>::ValueType>&
 CDPL::Math::MLRModel<T>::getXMatrix()
 {
 	return xMatrix;
 }
 
 template <typename T>
-CDPL_MATH_INLINE const CDPL::Math::Matrix<typename CDPL::Math::MLRModel<T>::ValueType>&
+const CDPL::Math::Matrix<typename CDPL::Math::MLRModel<T>::ValueType>&
 CDPL::Math::MLRModel<T>::getXMatrix() const
 {
 	return xMatrix;
 }
 
 template <typename T>
-CDPL_MATH_INLINE CDPL::Math::Vector<typename CDPL::Math::MLRModel<T>::ValueType>&
+CDPL::Math::Vector<typename CDPL::Math::MLRModel<T>::ValueType>&
 CDPL::Math::MLRModel<T>::getYValues()
 {
 	return yValues;
 }
 
 template <typename T>
-CDPL_MATH_INLINE const CDPL::Math::Vector<typename CDPL::Math::MLRModel<T>::ValueType>&
+const CDPL::Math::Vector<typename CDPL::Math::MLRModel<T>::ValueType>&
 CDPL::Math::MLRModel<T>::getYValues() const
 {
 	return yValues;
@@ -442,7 +441,7 @@ void CDPL::Math::MLRModel<T>::buildModel()
 
 template <typename T>
 template <typename V>
-CDPL_MATH_INLINE typename CDPL::Math::MLRModel<T>::ValueType
+typename CDPL::Math::MLRModel<T>::ValueType
 CDPL::Math::MLRModel<T>::calcYValue(const VectorExpression<V>& x) const
 {	
 	if (SizeType(x().getSize()) != SizeType(coefficients.getSize()))
@@ -453,42 +452,42 @@ CDPL::Math::MLRModel<T>::calcYValue(const VectorExpression<V>& x) const
 
 template <typename T>
 template <typename V>
-CDPL_MATH_INLINE typename CDPL::Math::MLRModel<T>::ValueType
+typename CDPL::Math::MLRModel<T>::ValueType
 CDPL::Math::MLRModel<T>::operator()(const VectorExpression<V>& x) const
 {	
 	return calcYValue(x);
 }
 
 template <typename T>
-CDPL_MATH_INLINE const CDPL::Math::Vector<typename CDPL::Math::MLRModel<T>::ValueType>&
+const CDPL::Math::Vector<typename CDPL::Math::MLRModel<T>::ValueType>&
 CDPL::Math::MLRModel<T>::getCoefficients() const
 {
 	return coefficients;
 }
 
 template <typename T>
-CDPL_MATH_INLINE typename CDPL::Math::MLRModel<T>::ValueType
+typename CDPL::Math::MLRModel<T>::ValueType
 CDPL::Math::MLRModel<T>::getChiSquare() const
 {
 	return chiSquare;
 }
 
 template <typename T>
-CDPL_MATH_INLINE typename CDPL::Math::MLRModel<T>::ValueType
+typename CDPL::Math::MLRModel<T>::ValueType
 CDPL::Math::MLRModel<T>::getGoodnessOfFit() const
 {
 	return Q;
 }
 
 template <typename T>
-CDPL_MATH_INLINE typename CDPL::Math::MLRModel<T>::ValueType
+typename CDPL::Math::MLRModel<T>::ValueType
 CDPL::Math::MLRModel<T>::getCorrelationCoefficient() const
 {
 	return r;
 }
 
 template <typename T>
-CDPL_MATH_INLINE typename CDPL::Math::MLRModel<T>::ValueType
+typename CDPL::Math::MLRModel<T>::ValueType
 CDPL::Math::MLRModel<T>::getStandardDeviation() const
 {
 	return stdDeviation;

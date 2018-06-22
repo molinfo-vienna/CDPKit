@@ -32,7 +32,6 @@
 #include <boost/mpl/if.hpp>
 #include <boost/type_traits/is_const.hpp>
 
-#include "CDPL/Math/Config.hpp"
 #include "CDPL/Math/Expression.hpp"
 #include "CDPL/Math/TypeTraits.hpp"
 
@@ -49,7 +48,7 @@ namespace CDPL
 		{
 
 			template <typename M>
-			CDPL_MATH_INLINE static typename M::ConstReference get(const M& m, typename M::SizeType i, typename M::SizeType j) {
+			static typename M::ConstReference get(const M& m, typename M::SizeType i, typename M::SizeType j) {
 				if (i >= j)
 					return m.getData()(i, j);
 
@@ -61,7 +60,7 @@ namespace CDPL
 		{
 
 			template <typename M>
-			CDPL_MATH_INLINE static typename M::ConstReference get(const M& m, typename M::SizeType i, typename M::SizeType j) {
+			static typename M::ConstReference get(const M& m, typename M::SizeType i, typename M::SizeType j) {
 				if (i == j)
 					return m.one;
 
@@ -76,7 +75,7 @@ namespace CDPL
 		{
 
 			template <typename M>
-			CDPL_MATH_INLINE static typename M::ConstReference get(const M& m, typename M::SizeType i, typename M::SizeType j) {
+			static typename M::ConstReference get(const M& m, typename M::SizeType i, typename M::SizeType j) {
 				if (i <= j)
 					return m.getData()(i, j);
 
@@ -88,7 +87,7 @@ namespace CDPL
 		{
 
 			template <typename M>
-			CDPL_MATH_INLINE static typename M::ConstReference get(const M& m, typename M::SizeType i, typename M::SizeType j) {
+			static typename M::ConstReference get(const M& m, typename M::SizeType i, typename M::SizeType j) {
 				if (i == j)
 					return m.one;
 
@@ -127,29 +126,29 @@ namespace CDPL
 			typedef SelfType ClosureType;
 			typedef Range<SizeType> RangeType;
 			
-			CDPL_MATH_INLINE explicit TriangularAdapter(MatrixType& m): data(m) {}
+			explicit TriangularAdapter(MatrixType& m): data(m) {}
 
-			CDPL_MATH_INLINE ConstReference operator()(SizeType i, SizeType j) const {
+			ConstReference operator()(SizeType i, SizeType j) const {
 				return TriangularType::template get<SelfType>(*this, i, j);
 			}
 
-			CDPL_MATH_INLINE SizeType getSize1() const {
+			SizeType getSize1() const {
 				return data.getSize1();
 			}
 
-			CDPL_MATH_INLINE SizeType getSize2() const {
+			SizeType getSize2() const {
 				return data.getSize2();
 			}
 
-			CDPL_MATH_INLINE MatrixClosureType& getData() {
+			MatrixClosureType& getData() {
 				return data;
 			}
 
-			CDPL_MATH_INLINE const MatrixClosureType& getData() const {
+			const MatrixClosureType& getData() const {
 				return data;
 			}
 
-			CDPL_MATH_INLINE bool isEmpty() const {
+			bool isEmpty() const {
 				return (data.getSize1() == 0 || data.getSize2() == 0);
 			}
 
@@ -178,7 +177,6 @@ namespace CDPL
 		struct MatrixTemporaryTraits<const TriangularAdapter<M, Tri> > : public MatrixTemporaryTraits<M> {};
 
 		template <typename Tri, typename E>
-		CDPL_MATH_INLINE
 		TriangularAdapter<E, Tri> 
 		triang(MatrixExpression<E>& e)
 		{
@@ -186,7 +184,6 @@ namespace CDPL
 		}
 
 		template <typename Tri, typename E>
-		CDPL_MATH_INLINE
 		TriangularAdapter<const E, Tri> 
 		triang(const MatrixExpression<E>& e)
 		{

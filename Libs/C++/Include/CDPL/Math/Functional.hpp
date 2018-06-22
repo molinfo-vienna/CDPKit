@@ -31,7 +31,6 @@
 
 #include <boost/algorithm/clamp.hpp>
 
-#include "CDPL/Math/Config.hpp"
 #include "CDPL/Math/Check.hpp"
 #include "CDPL/Math/CommonType.hpp"
 #include "CDPL/Math/TypeTraits.hpp"
@@ -64,7 +63,7 @@ namespace CDPL
 			typedef typename ScalarBinaryAssignmentFunctor<T1, T2>::Argument1Type Argument1Type;
 			typedef typename ScalarBinaryAssignmentFunctor<T1, T2>::Argument2Type Argument2Type;
 
-			static CDPL_MATH_INLINE void apply(Argument1Type t1, Argument2Type t2) {
+			static void apply(Argument1Type t1, Argument2Type t2) {
 				t1 = t2;
 			}
 		};
@@ -76,7 +75,7 @@ namespace CDPL
 			typedef typename ScalarBinaryAssignmentFunctor<T1, T2>::Argument1Type Argument1Type;
 			typedef typename ScalarBinaryAssignmentFunctor<T1, T2>::Argument2Type Argument2Type;
 
-			static CDPL_MATH_INLINE void apply(Argument1Type t1, Argument2Type t2) {
+			static void apply(Argument1Type t1, Argument2Type t2) {
 				t1 += t2;
 			}
 		};
@@ -88,7 +87,7 @@ namespace CDPL
 			typedef typename ScalarBinaryAssignmentFunctor<T1, T2>::Argument1Type Argument1Type;
 			typedef typename ScalarBinaryAssignmentFunctor<T1, T2>::Argument2Type Argument2Type;
 
-			static CDPL_MATH_INLINE void apply(Argument1Type t1, Argument2Type t2) {
+			static void apply(Argument1Type t1, Argument2Type t2) {
 				t1 -= t2;
 			}
 		};
@@ -100,7 +99,7 @@ namespace CDPL
 			typedef typename ScalarBinaryAssignmentFunctor<T1, T2>::Argument1Type Argument1Type;
 			typedef typename ScalarBinaryAssignmentFunctor<T1, T2>::Argument2Type Argument2Type;
 
-			static CDPL_MATH_INLINE void apply(Argument1Type t1, Argument2Type t2) {
+			static void apply(Argument1Type t1, Argument2Type t2) {
 				t1 *= t2;
 			}
 		};
@@ -112,7 +111,7 @@ namespace CDPL
 			typedef typename ScalarBinaryAssignmentFunctor<T1, T2>::Argument1Type Argument1Type;
 			typedef typename ScalarBinaryAssignmentFunctor<T1, T2>::Argument2Type Argument2Type;
 
-			static CDPL_MATH_INLINE void apply(Argument1Type t1, Argument2Type t2) {
+			static void apply(Argument1Type t1, Argument2Type t2) {
 				t1 /= t2;
 			}
 		};
@@ -134,7 +133,7 @@ namespace CDPL
 			typedef typename ScalarUnaryFunctor<T>::ArgumentType ArgumentType;
 			typedef typename ScalarUnaryFunctor<T>::ResultType ResultType;
 
-			static CDPL_MATH_INLINE ResultType apply(ArgumentType v) {
+			static ResultType apply(ArgumentType v) {
 				return -v;
 			}
 		};
@@ -147,7 +146,7 @@ namespace CDPL
 			typedef typename ScalarUnaryFunctor<T>::ArgumentType ArgumentType;
 			typedef typename ScalarUnaryFunctor<T>::ResultType ResultType;
 
-			static CDPL_MATH_INLINE ResultType apply(ArgumentType v) {
+			static ResultType apply(ArgumentType v) {
 				return TypeTraits<ValueType>::conj(v);
 			}
 		};
@@ -169,7 +168,7 @@ namespace CDPL
 			typedef typename ScalarUnaryFunctor<T>::ArgumentType ArgumentType;
 			typedef typename ScalarUnaryFunctor<T>::ResultType ResultType;
 
-			static CDPL_MATH_INLINE ResultType apply(ArgumentType v) {
+			static ResultType apply(ArgumentType v) {
 				return TypeTraits<ValueType>::real(v);
 			}
 		};
@@ -182,7 +181,7 @@ namespace CDPL
 			typedef typename ScalarUnaryFunctor<T>::ArgumentType ArgumentType;
 			typedef typename ScalarUnaryFunctor<T>::ResultType ResultType;
 
-			static CDPL_MATH_INLINE ResultType apply(ArgumentType v) {
+			static ResultType apply(ArgumentType v) {
 				return TypeTraits<ValueType>::imag(v);
 			}
 		};
@@ -204,7 +203,7 @@ namespace CDPL
 			typedef typename ScalarBinaryFunctor<T1, T2>::Argument2Type Argument2Type;
 			typedef typename ScalarBinaryFunctor<T1, T2>::ResultType ResultType;
 
-			static CDPL_MATH_INLINE ResultType apply(Argument1Type t1, Argument2Type t2) {
+			static ResultType apply(Argument1Type t1, Argument2Type t2) {
 				return (t1 + t2);
 			}
 		};
@@ -217,7 +216,7 @@ namespace CDPL
 			typedef typename ScalarBinaryFunctor<T1, T2>::Argument2Type Argument2Type;
 			typedef typename ScalarBinaryFunctor<T1, T2>::ResultType ResultType;
 
-			static CDPL_MATH_INLINE ResultType apply(Argument1Type t1, Argument2Type t2) {
+			static ResultType apply(Argument1Type t1, Argument2Type t2) {
 				return (t1 - t2);
 			}
 		};
@@ -230,7 +229,7 @@ namespace CDPL
 			typedef typename ScalarBinaryFunctor<T1, T2>::Argument2Type Argument2Type;
 			typedef typename ScalarBinaryFunctor<T1, T2>::ResultType ResultType;
 
-			static CDPL_MATH_INLINE ResultType apply(Argument1Type t1, Argument2Type t2) {
+			static ResultType apply(Argument1Type t1, Argument2Type t2) {
 				return (t1 * t2);
 			}
 		};
@@ -243,7 +242,7 @@ namespace CDPL
 			typedef typename ScalarBinaryFunctor<T1, T2>::Argument2Type Argument2Type;
 			typedef typename ScalarBinaryFunctor<T1, T2>::ResultType ResultType;
 
-			static CDPL_MATH_INLINE ResultType apply(Argument1Type t1, Argument2Type t2) {
+			static ResultType apply(Argument1Type t1, Argument2Type t2) {
 				return (t1 / t2);
 			}
 		};
@@ -261,7 +260,7 @@ namespace CDPL
 
 			typedef typename VectorScalarBinaryFunctor<V1, V2>::ResultType ResultType;
 
-			static CDPL_MATH_INLINE ResultType apply(const VectorExpression<V1>& e1, const VectorExpression<V2>& e2) {
+			static ResultType apply(const VectorExpression<V1>& e1, const VectorExpression<V2>& e2) {
 				typedef typename CommonType<typename V1::SizeType, typename V2::SizeType>::Type SizeType;
 
 				SizeType size = CDPL_MATH_CHECK_SIZE_EQUALITY(SizeType(e1().getSize()), SizeType(e2().getSize()), Base::SizeError);
@@ -280,7 +279,7 @@ namespace CDPL
 
 			typedef typename CommonType<typename VectorInnerProduct<V1, V2>::ResultType, T>::Type ResultType;
 
-			static CDPL_MATH_INLINE ResultType apply(const VectorExpression<V1>& e1, const VectorExpression<V2>& e2, const T& sd, bool clamp) {
+			static ResultType apply(const VectorExpression<V1>& e1, const VectorExpression<V2>& e2, const T& sd, bool clamp) {
 				ResultType res = VectorInnerProduct<V1, V2>::apply(e1, e2) / sd;
 				
 				if (!clamp)
@@ -307,7 +306,7 @@ namespace CDPL
 			typedef typename VectorBooleanBinaryFunctor<V1, V2>::ValueType ValueType;
 			typedef typename VectorBooleanBinaryFunctor<V1, V2>::ResultType ResultType;
 
-			static CDPL_MATH_INLINE ResultType apply(const VectorExpression<V1>& e1, const VectorExpression<V2>& e2) {
+			static ResultType apply(const VectorExpression<V1>& e1, const VectorExpression<V2>& e2) {
 				if (SizeType(e1().getSize()) != SizeType(e2().getSize()))
 					return false;
 
@@ -338,7 +337,7 @@ namespace CDPL
 			typedef typename Scalar3VectorBooleanTernaryFunctor<V1, V2, T>::ResultType ResultType;
 			typedef typename Scalar3VectorBooleanTernaryFunctor<V1, V2, T>::Argument3Type Argument3Type;
 
-			static CDPL_MATH_INLINE ResultType apply(const VectorExpression<V1>& e1, const VectorExpression<V2>& e2, Argument3Type epsilon) {
+			static ResultType apply(const VectorExpression<V1>& e1, const VectorExpression<V2>& e2, Argument3Type epsilon) {
 				typedef typename CommonType<typename TypeTraits<ValueType>::RealType, T>::Type ComparisonType;
 
 				if (SizeType(e1().getSize()) != SizeType(e2().getSize()))
@@ -368,7 +367,7 @@ namespace CDPL
 			typedef typename VectorScalarBinaryFunctor<V1, V2>::ResultType ResultType;
 
 			template <typename E1, typename E2, typename SizeType>
-			static CDPL_MATH_INLINE ResultType apply(const VectorExpression<E1>& e1, const VectorExpression<E2>& e2, SizeType i) {
+			static ResultType apply(const VectorExpression<E1>& e1, const VectorExpression<E2>& e2, SizeType i) {
 				CDPL_MATH_CHECK(e1().getSize() == 3, "Invalid vector size", Base::SizeError); 
 				CDPL_MATH_CHECK(e2().getSize() == 3, "Invalid vector size", Base::SizeError); 
 
@@ -403,7 +402,7 @@ namespace CDPL
 			
 			typedef typename VectorScalarUnaryFunctor<V>::ResultType ResultType;
 
-			static CDPL_MATH_INLINE ResultType apply(const VectorExpression<V>& e) {
+			static ResultType apply(const VectorExpression<V>& e) {
 				typedef typename V::SizeType SizeType;
 
 				ResultType res = ResultType();
@@ -432,7 +431,7 @@ namespace CDPL
 			typedef typename VectorScalarRealUnaryFunctor<V>::RealType RealType;
 			typedef typename VectorScalarRealUnaryFunctor<V>::ResultType ResultType;
 
-			static CDPL_MATH_INLINE ResultType apply(const VectorExpression<V>& e) {
+			static ResultType apply(const VectorExpression<V>& e) {
 				typedef typename V::SizeType SizeType;
 
 				RealType res = RealType();
@@ -452,7 +451,7 @@ namespace CDPL
 			typedef typename VectorScalarRealUnaryFunctor<V>::RealType RealType;
 			typedef typename VectorScalarRealUnaryFunctor<V>::ResultType ResultType;
 
-			static CDPL_MATH_INLINE ResultType apply(const VectorExpression<V>& e) {
+			static ResultType apply(const VectorExpression<V>& e) {
 				typedef typename V::SizeType SizeType;
 
 				RealType res2 = RealType();
@@ -475,7 +474,7 @@ namespace CDPL
 			typedef typename VectorScalarRealUnaryFunctor<V>::RealType RealType;
 			typedef typename VectorScalarRealUnaryFunctor<V>::ResultType ResultType;
 
-			static CDPL_MATH_INLINE ResultType apply(const VectorExpression<V>& e) {
+			static ResultType apply(const VectorExpression<V>& e) {
 				typedef typename V::SizeType SizeType;
 
 				RealType res = RealType();
@@ -508,7 +507,7 @@ namespace CDPL
 			typedef typename VectorScalarIndexUnaryFunctor<V>::RealType RealType;
 			typedef typename VectorScalarIndexUnaryFunctor<V>::ResultType ResultType;
 
-			static CDPL_MATH_INLINE ResultType apply(const VectorExpression<V>& e) {
+			static ResultType apply(const VectorExpression<V>& e) {
 				typedef typename V::SizeType SizeType;
 
 				RealType norm = RealType();
@@ -544,7 +543,7 @@ namespace CDPL
 			typedef typename MatrixBooleanBinaryFunctor<M1, M2>::ValueType ValueType;
 			typedef typename MatrixBooleanBinaryFunctor<M1, M2>::ResultType ResultType;
 
-			static CDPL_MATH_INLINE ResultType apply(const MatrixExpression<M1>& e1, const MatrixExpression<M2>& e2) {
+			static ResultType apply(const MatrixExpression<M1>& e1, const MatrixExpression<M2>& e2) {
 				if (SizeType(e1().getSize1()) != SizeType(e2().getSize1()))
 					return false;
 
@@ -579,7 +578,7 @@ namespace CDPL
 			typedef typename Scalar3MatrixBooleanTernaryFunctor<M1, M2, T>::ResultType ResultType;
 			typedef typename Scalar3MatrixBooleanTernaryFunctor<M1, M2, T>::Argument3Type Argument3Type;
 
-			static CDPL_MATH_INLINE ResultType apply(const MatrixExpression<M1>& e1, const MatrixExpression<M2>& e2, Argument3Type epsilon) {
+			static ResultType apply(const MatrixExpression<M1>& e1, const MatrixExpression<M2>& e2, Argument3Type epsilon) {
 				typedef typename CommonType<typename TypeTraits<ValueType>::RealType, T>::Type ComparisonType;
 
 				if (SizeType(e1().getSize1()) != SizeType(e2().getSize1()))
@@ -612,7 +611,7 @@ namespace CDPL
 			
 			typedef typename MatrixScalarUnaryFunctor<M>::ResultType ResultType;
 
-			static CDPL_MATH_INLINE ResultType apply(const MatrixExpression<M>& e) {
+			static ResultType apply(const MatrixExpression<M>& e) {
 				typedef typename M::SizeType SizeType;
 
 				ResultType res = ResultType();
@@ -633,7 +632,7 @@ namespace CDPL
 			
 			typedef typename MatrixScalarUnaryFunctor<M>::ResultType ResultType;
 
-			static CDPL_MATH_INLINE ResultType apply(const MatrixExpression<M>& e) {
+			static ResultType apply(const MatrixExpression<M>& e) {
 				typedef typename M::SizeType SizeType;
 
 				SizeType size = CDPL_MATH_CHECK_SIZE_EQUALITY(e().getSize1(), e().getSize2(), Base::SizeError);
@@ -663,7 +662,7 @@ namespace CDPL
 			typedef typename MatrixScalarRealUnaryFunctor<M>::RealType RealType;
 			typedef typename MatrixScalarRealUnaryFunctor<M>::ResultType ResultType;
 
-			static CDPL_MATH_INLINE ResultType apply(const MatrixExpression<M>& e) {
+			static ResultType apply(const MatrixExpression<M>& e) {
 				typedef typename M::SizeType SizeType;
 
 				RealType res = RealType();
@@ -692,7 +691,7 @@ namespace CDPL
 			typedef typename MatrixScalarRealUnaryFunctor<M>::RealType RealType;
 			typedef typename MatrixScalarRealUnaryFunctor<M>::ResultType ResultType;
 
-			static CDPL_MATH_INLINE ResultType apply(const MatrixExpression<M>& e) {
+			static ResultType apply(const MatrixExpression<M>& e) {
 				typedef typename M::SizeType SizeType;
 
 				RealType res2 = RealType();
@@ -719,7 +718,7 @@ namespace CDPL
 			typedef typename MatrixScalarRealUnaryFunctor<M>::RealType RealType;
 			typedef typename MatrixScalarRealUnaryFunctor<M>::ResultType ResultType;
 
-			static CDPL_MATH_INLINE ResultType apply(const MatrixExpression<M>& e) {
+			static ResultType apply(const MatrixExpression<M>& e) {
 				typedef typename M::SizeType SizeType;
 
 				RealType res = RealType();
@@ -756,7 +755,7 @@ namespace CDPL
 			typedef typename VectorScalarUnaryFunctor<V>::SizeType SizeType;
 
 			template <typename E>
-			static CDPL_MATH_INLINE ResultType apply(const VectorExpression<E>& e, SizeType i, SizeType j) {
+			static ResultType apply(const VectorExpression<E>& e, SizeType i, SizeType j) {
 				if (i == j)
 					return e()(i);
 
@@ -772,7 +771,7 @@ namespace CDPL
 			typedef typename VectorScalarUnaryFunctor<V>::SizeType SizeType;
 
 			template <typename E>
-			static CDPL_MATH_INLINE ResultType apply(const VectorExpression<E>& e, SizeType i, SizeType j) {
+			static ResultType apply(const VectorExpression<E>& e, SizeType i, SizeType j) {
 				CDPL_MATH_CHECK(e().getSize() == 3, "Invalid vector size", Base::SizeError);
 
 				//                       |  0  -a3  a2 |
@@ -843,7 +842,7 @@ namespace CDPL
 			typedef typename MatrixVectorBinaryFunctor<M, V>::ResultType ResultType;
 
 			template <typename E1, typename E2>
-			static CDPL_MATH_INLINE ResultType apply(const MatrixExpression<E1>& e1, const VectorExpression<E2>& e2, SizeType i) {
+			static ResultType apply(const MatrixExpression<E1>& e1, const VectorExpression<E2>& e2, SizeType i) {
 				SizeType size = CDPL_MATH_CHECK_SIZE_EQUALITY(SizeType(e1().getSize2()), SizeType(e2().getSize()), Base::SizeError);
 				ResultType res = ResultType();
 
@@ -863,7 +862,7 @@ namespace CDPL
 			typedef typename MatrixVectorBinaryFunctor<M, V>::ResultType ResultType;
 
 			template <typename E1, typename E2>
-			static CDPL_MATH_INLINE ResultType apply(const VectorExpression<E1>& e1, const MatrixExpression<E2>& e2, SizeType i) {
+			static ResultType apply(const VectorExpression<E1>& e1, const MatrixExpression<E2>& e2, SizeType i) {
 				SizeType size = CDPL_MATH_CHECK_SIZE_EQUALITY(SizeType(e1().getSize()), SizeType(e2().getSize1()), Base::SizeError);
 				ResultType res = ResultType();
 
@@ -892,7 +891,7 @@ namespace CDPL
 			typedef typename MatrixVectorBinaryFunctor<M1, M2>::ResultType ResultType;
 
 			template <typename E1, typename E2>
-			static CDPL_MATH_INLINE ResultType apply(const MatrixExpression<E1>& e1, const MatrixExpression<E2>& e2, SizeType i, SizeType j) {
+			static ResultType apply(const MatrixExpression<E1>& e1, const MatrixExpression<E2>& e2, SizeType i, SizeType j) {
 				SizeType size = CDPL_MATH_CHECK_SIZE_EQUALITY(SizeType(e1().getSize2()), SizeType(e2().getSize1()), Base::SizeError);
 				ResultType res = ResultType();
 
@@ -918,7 +917,7 @@ namespace CDPL
 			typedef typename QuaternionBooleanBinaryFunctor<Q1, Q2>::ValueType ValueType;
 			typedef typename QuaternionBooleanBinaryFunctor<Q1, Q2>::ResultType ResultType;
 
-			static CDPL_MATH_INLINE ResultType apply(const QuaternionExpression<Q1>& e1, const QuaternionExpression<Q2>& e2) {
+			static ResultType apply(const QuaternionExpression<Q1>& e1, const QuaternionExpression<Q2>& e2) {
 				return (ValueType(e1().getC1()) == ValueType(e2().getC1())
 						&& ValueType(e1().getC2()) == ValueType(e2().getC2())
 						&& ValueType(e1().getC3()) == ValueType(e2().getC3())
@@ -943,7 +942,7 @@ namespace CDPL
 			typedef typename Scalar3QuaternionBooleanTernaryFunctor<Q1, Q2, T>::ResultType ResultType;
 			typedef typename Scalar3QuaternionBooleanTernaryFunctor<Q1, Q2, T>::Argument3Type Argument3Type;
 
-			static CDPL_MATH_INLINE ResultType apply(const QuaternionExpression<Q1>& e1, const QuaternionExpression<Q2>& e2, Argument3Type epsilon) {
+			static ResultType apply(const QuaternionExpression<Q1>& e1, const QuaternionExpression<Q2>& e2, Argument3Type epsilon) {
 				typedef typename CommonType<typename TypeTraits<ValueType>::RealType, T>::Type ComparisonType;
 
 				ComparisonType norm_inf_max(epsilon);
@@ -968,7 +967,7 @@ namespace CDPL
 			
 			typedef typename QuaternionScalarUnaryFunctor<Q>::ResultType ResultType;
 
-			static CDPL_MATH_INLINE ResultType apply(const QuaternionExpression<Q>& e) {
+			static ResultType apply(const QuaternionExpression<Q>& e) {
 				return (e().getC1() + e().getC2() + e().getC3() + e().getC4());
 			}
 		};
@@ -990,7 +989,7 @@ namespace CDPL
 			typedef typename QuaternionScalarRealUnaryFunctor<Q>::RealType RealType;
 			typedef typename QuaternionScalarRealUnaryFunctor<Q>::ResultType ResultType;
 
-			static CDPL_MATH_INLINE ResultType apply(const QuaternionExpression<Q>& e) {
+			static ResultType apply(const QuaternionExpression<Q>& e) {
 				RealType t = e().getC1() * e().getC1() +
 					e().getC2() * e().getC2() +
 					e().getC3() * e().getC3() +
@@ -1008,7 +1007,7 @@ namespace CDPL
 			typedef typename QuaternionScalarRealUnaryFunctor<Q>::RealType RealType;
 			typedef typename QuaternionScalarRealUnaryFunctor<Q>::ResultType ResultType;
 
-			static CDPL_MATH_INLINE ResultType apply(const QuaternionExpression<Q>& e) {
+			static ResultType apply(const QuaternionExpression<Q>& e) {
 				RealType t = e().getC1() * e().getC1() +
 					e().getC2() * e().getC2() +
 					e().getC3() * e().getC3() +
@@ -1032,25 +1031,25 @@ namespace CDPL
 			typedef typename QuaternionUnaryFunctor<Q>::ResultType ResultType;
 
 			template <typename E>
-			static CDPL_MATH_INLINE ResultType applyC1(const QuaternionExpression<E>& e)
+			static ResultType applyC1(const QuaternionExpression<E>& e)
 			{
 				return ResultType();
 			}
 
 			template <typename E>
-			static CDPL_MATH_INLINE ResultType applyC2(const QuaternionExpression<E>& e)
+			static ResultType applyC2(const QuaternionExpression<E>& e)
 			{
 				return e().getC2();
 			}
 
 			template <typename E>
-			static CDPL_MATH_INLINE ResultType applyC3(const QuaternionExpression<E>& e)
+			static ResultType applyC3(const QuaternionExpression<E>& e)
 			{
 				return e().getC3();
 			}
 
 			template <typename E>
-			static CDPL_MATH_INLINE ResultType applyC4(const QuaternionExpression<E>& e)
+			static ResultType applyC4(const QuaternionExpression<E>& e)
 			{
 				return e().getC4();
 			}
@@ -1063,25 +1062,25 @@ namespace CDPL
 			typedef typename QuaternionUnaryFunctor<Q>::ResultType ResultType;
 
 			template <typename E>
-			static CDPL_MATH_INLINE ResultType applyC1(const QuaternionExpression<E>& e)
+			static ResultType applyC1(const QuaternionExpression<E>& e)
 			{
 				return e().getC1();
 			}
 
 			template <typename E>
-			static CDPL_MATH_INLINE ResultType applyC2(const QuaternionExpression<E>& e)
+			static ResultType applyC2(const QuaternionExpression<E>& e)
 			{
 				return -e().getC2();
 			}
 
 			template <typename E>
-			static CDPL_MATH_INLINE ResultType applyC3(const QuaternionExpression<E>& e)
+			static ResultType applyC3(const QuaternionExpression<E>& e)
 			{
 				return -e().getC3();
 			}
 
 			template <typename E>
-			static CDPL_MATH_INLINE ResultType applyC4(const QuaternionExpression<E>& e)
+			static ResultType applyC4(const QuaternionExpression<E>& e)
 			{
 				return -e().getC4();
 			}
@@ -1103,25 +1102,25 @@ namespace CDPL
 			typedef typename Scalar1QuaternionBinaryFunctor<T, Q>::ResultType ResultType;
 
 			template <typename E>
-			static CDPL_MATH_INLINE ResultType applyC1(Argument1Type t, const QuaternionExpression<E>& e)
+			static ResultType applyC1(Argument1Type t, const QuaternionExpression<E>& e)
 			{
 				return (t + e().getC1());
 			}
 
 			template <typename E>
-			static CDPL_MATH_INLINE ResultType applyC2(Argument1Type, const QuaternionExpression<E>& e)
+			static ResultType applyC2(Argument1Type, const QuaternionExpression<E>& e)
 			{
 				return e().getC2();
 			}
 
 			template <typename E>
-			static CDPL_MATH_INLINE ResultType applyC3(Argument1Type, const QuaternionExpression<E>& e)
+			static ResultType applyC3(Argument1Type, const QuaternionExpression<E>& e)
 			{
 				return e().getC3();
 			}
 
 			template <typename E>
-			static CDPL_MATH_INLINE ResultType applyC4(Argument1Type, const QuaternionExpression<E>& e)
+			static ResultType applyC4(Argument1Type, const QuaternionExpression<E>& e)
 			{
 				return e().getC4();
 			}
@@ -1135,25 +1134,25 @@ namespace CDPL
 			typedef typename Scalar1QuaternionBinaryFunctor<T, Q>::ResultType ResultType;
 
 			template <typename E>
-			static CDPL_MATH_INLINE ResultType applyC1(Argument1Type t, const QuaternionExpression<E>& e)
+			static ResultType applyC1(Argument1Type t, const QuaternionExpression<E>& e)
 			{
 				return (t - e().getC1());
 			}
 
 			template <typename E>
-			static CDPL_MATH_INLINE ResultType applyC2(Argument1Type, const QuaternionExpression<E>& e)
+			static ResultType applyC2(Argument1Type, const QuaternionExpression<E>& e)
 			{
 				return -e().getC2();
 			}
 
 			template <typename E>
-			static CDPL_MATH_INLINE ResultType applyC3(Argument1Type, const QuaternionExpression<E>& e)
+			static ResultType applyC3(Argument1Type, const QuaternionExpression<E>& e)
 			{
 				return -e().getC3();
 			}
 
 			template <typename E>
-			static CDPL_MATH_INLINE ResultType applyC4(Argument1Type, const QuaternionExpression<E>& e)
+			static ResultType applyC4(Argument1Type, const QuaternionExpression<E>& e)
 			{
 				return -e().getC4();
 			}
@@ -1175,25 +1174,25 @@ namespace CDPL
 			typedef typename Scalar2QuaternionBinaryFunctor<Q, T>::ResultType ResultType;
 
 			template <typename E>
-			static CDPL_MATH_INLINE ResultType applyC1(const QuaternionExpression<E>& e, Argument2Type t)
+			static ResultType applyC1(const QuaternionExpression<E>& e, Argument2Type t)
 			{
 				return (e().getC1() + t);
 			}
 
 			template <typename E>
-			static CDPL_MATH_INLINE ResultType applyC2(const QuaternionExpression<E>& e, Argument2Type)
+			static ResultType applyC2(const QuaternionExpression<E>& e, Argument2Type)
 			{
 				return e().getC2();
 			}
 
 			template <typename E>
-			static CDPL_MATH_INLINE ResultType applyC3(const QuaternionExpression<E>& e, Argument2Type)
+			static ResultType applyC3(const QuaternionExpression<E>& e, Argument2Type)
 			{
 				return e().getC3();
 			}
 
 			template <typename E>
-			static CDPL_MATH_INLINE ResultType applyC4(const QuaternionExpression<E>& e, Argument2Type)
+			static ResultType applyC4(const QuaternionExpression<E>& e, Argument2Type)
 			{
 				return e().getC4();
 			}
@@ -1207,25 +1206,25 @@ namespace CDPL
 			typedef typename Scalar2QuaternionBinaryFunctor<Q, T>::ResultType ResultType;
 
 			template <typename E>
-			static CDPL_MATH_INLINE ResultType applyC1(const QuaternionExpression<E>& e, Argument2Type t)
+			static ResultType applyC1(const QuaternionExpression<E>& e, Argument2Type t)
 			{
 				return (e().getC1() - t);
 			}
 
 			template <typename E>
-			static CDPL_MATH_INLINE ResultType applyC2(const QuaternionExpression<E>& e, Argument2Type)
+			static ResultType applyC2(const QuaternionExpression<E>& e, Argument2Type)
 			{
 				return e().getC2();
 			}
 
 			template <typename E>
-			static CDPL_MATH_INLINE ResultType applyC3(const QuaternionExpression<E>& e, Argument2Type)
+			static ResultType applyC3(const QuaternionExpression<E>& e, Argument2Type)
 			{
 				return e().getC3();
 			}
 
 			template <typename E>
-			static CDPL_MATH_INLINE ResultType applyC4(const QuaternionExpression<E>& e, Argument2Type)
+			static ResultType applyC4(const QuaternionExpression<E>& e, Argument2Type)
 			{
 				return e().getC4();
 			}
@@ -1239,25 +1238,25 @@ namespace CDPL
 			typedef typename Scalar2QuaternionBinaryFunctor<Q, T>::ResultType ResultType;
 
 			template <typename E>
-			static CDPL_MATH_INLINE ResultType applyC1(const QuaternionExpression<E>& e, Argument2Type n2)
+			static ResultType applyC1(const QuaternionExpression<E>& e, Argument2Type n2)
 			{
 				return (e().getC1() / n2);
 			}
 
 			template <typename E>
-			static CDPL_MATH_INLINE ResultType applyC2(const QuaternionExpression<E>& e, Argument2Type n2)
+			static ResultType applyC2(const QuaternionExpression<E>& e, Argument2Type n2)
 			{
 				return (-e().getC2() / n2);
 			}
 
 			template <typename E>
-			static CDPL_MATH_INLINE ResultType applyC3(const QuaternionExpression<E>& e, Argument2Type n2)
+			static ResultType applyC3(const QuaternionExpression<E>& e, Argument2Type n2)
 			{
 				return (-e().getC3() / n2);
 			}
 
 			template <typename E>
-			static CDPL_MATH_INLINE ResultType applyC4(const QuaternionExpression<E>& e, Argument2Type n2)
+			static ResultType applyC4(const QuaternionExpression<E>& e, Argument2Type n2)
 			{
 				return (-e().getC4() / n2);
 			}
@@ -1277,7 +1276,7 @@ namespace CDPL
 			typedef typename QuaternionBinaryFunctor<Q1, Q2>::ResultType ResultType;
 
 			template <typename E1, typename E2>
-			static CDPL_MATH_INLINE ResultType applyC1(const QuaternionExpression<E1>& e1, const QuaternionExpression<E2>& e2)
+			static ResultType applyC1(const QuaternionExpression<E1>& e1, const QuaternionExpression<E2>& e2)
 			{
 				// a = a1 * a2 - b1 * b2 - c1 * c2 - d1 * d2
 				return (e1().getC1() * e2().getC1() - e1().getC2() * e2().getC2() 
@@ -1285,7 +1284,7 @@ namespace CDPL
 			}
 		
 			template <typename E1, typename E2>
-			static CDPL_MATH_INLINE ResultType applyC2(const QuaternionExpression<E1>& e1, const QuaternionExpression<E2>& e2)
+			static ResultType applyC2(const QuaternionExpression<E1>& e1, const QuaternionExpression<E2>& e2)
 			{
 				// b = a1 * b2 + b1 * a2 + c1 * d2 - d1 * c2 
 				return (e1().getC1() * e2().getC2() + e1().getC2() * e2().getC1() 
@@ -1293,7 +1292,7 @@ namespace CDPL
 			}
 
 			template <typename E1, typename E2>
-			static CDPL_MATH_INLINE ResultType applyC3(const QuaternionExpression<E1>& e1, const QuaternionExpression<E2>& e2)
+			static ResultType applyC3(const QuaternionExpression<E1>& e1, const QuaternionExpression<E2>& e2)
 			{
 				// c = a1 * c2 - b1 * d2 + c1 * a2 + d1 * b2
 				return (e1().getC1() * e2().getC3() - e1().getC2() * e2().getC4() 
@@ -1301,7 +1300,7 @@ namespace CDPL
 			}
 
 			template <typename E1, typename E2>
-			static CDPL_MATH_INLINE ResultType applyC4(const QuaternionExpression<E1>& e1, const QuaternionExpression<E2>& e2)
+			static ResultType applyC4(const QuaternionExpression<E1>& e1, const QuaternionExpression<E2>& e2)
 			{
 				// d = a1 * d2 + b1 * c2 - c1 * b2 + d1 * a2
 				return (e1().getC1() * e2().getC4() + e1().getC2() * e2().getC3() 
@@ -1325,7 +1324,7 @@ namespace CDPL
 			typedef typename Scalar3QuaternionTernaryFunctor<Q1, Q2, T>::ResultType ResultType;
 
 			template <typename E1, typename E2>
-			static CDPL_MATH_INLINE ResultType applyC1(const QuaternionExpression<E1>& e1, const QuaternionExpression<E2>& e2, Argument3Type n2)
+			static ResultType applyC1(const QuaternionExpression<E1>& e1, const QuaternionExpression<E2>& e2, Argument3Type n2)
 			{
 				// a = (a1 * a2 + b1 * b2 + c1 * c2 + d1 * d2) / n2
 				return ((e1().getC1() * e2().getC1() + e1().getC2() * e2().getC2() 
@@ -1333,7 +1332,7 @@ namespace CDPL
 			}
 
 			template <typename E1, typename E2>
-			static CDPL_MATH_INLINE ResultType applyC2(const QuaternionExpression<E1>& e1, const QuaternionExpression<E2>& e2, Argument3Type n2)
+			static ResultType applyC2(const QuaternionExpression<E1>& e1, const QuaternionExpression<E2>& e2, Argument3Type n2)
 			{
 				// b = (-a1 * b2 + b1 * a2 - c1 * d2 + d1 * c2) / n2 
 				return ((-e1().getC1() * e2().getC2() + e1().getC2() * e2().getC1() 
@@ -1341,7 +1340,7 @@ namespace CDPL
 			}
 
 			template <typename E1, typename E2>
-			static CDPL_MATH_INLINE ResultType applyC3(const QuaternionExpression<E1>& e1, const QuaternionExpression<E2>& e2, Argument3Type n2)
+			static ResultType applyC3(const QuaternionExpression<E1>& e1, const QuaternionExpression<E2>& e2, Argument3Type n2)
 			{
 				// c = (-a1 * c2 + b1 * d2 + c1 * a2 - d1 * b2) / n2
 				return ((-e1().getC1() * e2().getC3() + e1().getC2() * e2().getC4() 
@@ -1349,7 +1348,7 @@ namespace CDPL
 			}
 
 			template <typename E1, typename E2>
-			static CDPL_MATH_INLINE ResultType applyC4(const QuaternionExpression<E1>& e1, const QuaternionExpression<E2>& e2, Argument3Type n2)
+			static ResultType applyC4(const QuaternionExpression<E1>& e1, const QuaternionExpression<E2>& e2, Argument3Type n2)
 			{
 				// d = (-a1 * d2 - b1 * c2 + c1 * b2 + d1 * a2) / n2
 				return ((-e1().getC1() * e2().getC4() - e1().getC2() * e2().getC3() 
@@ -1375,25 +1374,25 @@ namespace CDPL
 			typedef typename Scalar13QuaternionTernaryFunctor<T1, Q, T2>::ResultType ResultType;
 
 			template <typename E>
-			static CDPL_MATH_INLINE ResultType applyC1(Argument1Type t, const QuaternionExpression<E>& e, Argument3Type n2)
+			static ResultType applyC1(Argument1Type t, const QuaternionExpression<E>& e, Argument3Type n2)
 			{
 				return (t * e().getC1() / n2);
 			}
 
 			template <typename E>
-			static CDPL_MATH_INLINE ResultType applyC2(Argument1Type t, const QuaternionExpression<E>& e, Argument3Type n2)
+			static ResultType applyC2(Argument1Type t, const QuaternionExpression<E>& e, Argument3Type n2)
 			{
 				return (t * -e().getC2() / n2);
 			}
 
 			template <typename E>
-			static CDPL_MATH_INLINE ResultType applyC3(Argument1Type t, const QuaternionExpression<E>& e, Argument3Type n2)
+			static ResultType applyC3(Argument1Type t, const QuaternionExpression<E>& e, Argument3Type n2)
 			{
 				return (t * -e().getC3() / n2);
 			}
 
 			template <typename E>
-			static CDPL_MATH_INLINE ResultType applyC4(Argument1Type t, const QuaternionExpression<E>& e, Argument3Type n2)
+			static ResultType applyC4(Argument1Type t, const QuaternionExpression<E>& e, Argument3Type n2)
 			{
 				return (t * -e().getC4() / n2);
 			}
@@ -1417,7 +1416,7 @@ namespace CDPL
 			typedef typename QuaternionVectorBinaryFunctor<Q, V>::ResultType ResultType;
 
 			template <typename E1, typename E2>
-			static CDPL_MATH_INLINE ResultType apply(const QuaternionExpression<E1>& e1, const VectorExpression<E2>& e2, SizeType i) {
+			static ResultType apply(const QuaternionExpression<E1>& e1, const VectorExpression<E2>& e2, SizeType i) {
 				CDPL_MATH_CHECK(e2().getSize() >= 3, "Invalid vector size", Base::SizeError);
 
 				switch (i) {
@@ -1472,7 +1471,7 @@ namespace CDPL
 			typedef typename GridBooleanBinaryFunctor<G1, G2>::ValueType ValueType;
 			typedef typename GridBooleanBinaryFunctor<G1, G2>::ResultType ResultType;
 
-			static CDPL_MATH_INLINE ResultType apply(const GridExpression<G1>& e1, const GridExpression<G2>& e2) {
+			static ResultType apply(const GridExpression<G1>& e1, const GridExpression<G2>& e2) {
 				if (SizeType(e1().getSize1()) != SizeType(e2().getSize1()))
 					return false;
 
@@ -1511,7 +1510,7 @@ namespace CDPL
 			typedef typename Scalar3GridBooleanTernaryFunctor<G1, G2, T>::ResultType ResultType;
 			typedef typename Scalar3GridBooleanTernaryFunctor<G1, G2, T>::Argument3Type Argument3Type;
 
-			static CDPL_MATH_INLINE ResultType apply(const GridExpression<G1>& e1, const GridExpression<G2>& e2, Argument3Type epsilon) {
+			static ResultType apply(const GridExpression<G1>& e1, const GridExpression<G2>& e2, Argument3Type epsilon) {
 				typedef typename CommonType<typename TypeTraits<ValueType>::RealType, T>::Type ComparisonType;
 
 				if (SizeType(e1().getSize1()) != SizeType(e2().getSize1()))
@@ -1548,7 +1547,7 @@ namespace CDPL
 			
 			typedef typename GridScalarUnaryFunctor<G>::ResultType ResultType;
 
-			static CDPL_MATH_INLINE ResultType apply(const GridExpression<G>& e) {
+			static ResultType apply(const GridExpression<G>& e) {
 				typedef typename G::SizeType SizeType;
 
 				ResultType res = ResultType();

@@ -247,7 +247,6 @@ namespace CDPL
 
 			return os;
 		}
-
 	}
 }
 

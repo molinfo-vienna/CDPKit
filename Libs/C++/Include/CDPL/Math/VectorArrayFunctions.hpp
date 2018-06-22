@@ -54,7 +54,6 @@ namespace CDPL
 		 * \param xform The transformation matrix.
 		 */
 		template <typename T, std::size_t Dim, typename T1>
-		CDPL_MATH_INLINE
 		void transform(VectorArray<CVector<T, Dim> >& va, const CMatrix<T1, Dim, Dim>& xform) 
 		{
 			typedef typename VectorArray<CVector<T, Dim> >::ElementIterator Iterator;
@@ -74,7 +73,6 @@ namespace CDPL
 		 * \note The missing vector element is taken to be \c 1.0.
 		 */
 		template <typename T, std::size_t Dim, typename T1>
-		CDPL_MATH_INLINE
 		void transform(VectorArray<CVector<T, Dim> >& va, const CMatrix<T1, Dim + 1, Dim + 1>& xform)
 		{
 			typedef typename VectorArray<CVector<T, Dim> >::ElementIterator Iterator;
@@ -103,7 +101,6 @@ namespace CDPL
 		 * \return \c true if the array is not empty, and \c false otherwise.
 		 */
 		template <typename T, std::size_t Dim, typename T1>
-		CDPL_MATH_INLINE
 		bool calcCentroid(const VectorArray<CVector<T, Dim> >& va, CVector<T1, Dim>& ctr)
 		{
 			if (va.isEmpty())

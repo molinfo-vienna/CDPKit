@@ -31,8 +31,6 @@
 
 #include <boost/swap.hpp>
 
-#include "CDPL/Math/Config.hpp"
-
 
 namespace CDPL
 {
@@ -43,7 +41,6 @@ namespace CDPL
 		template <typename E> class QuaternionExpression;
 
 		template <template <typename T1, typename T2> class F, typename Q, typename E>
-		CDPL_MATH_INLINE 
 		void quaternionAssignQuaternion(Q& q, const QuaternionExpression<E>& e)
 		{
 			typedef F<typename Q::ValueType, typename E::ValueType> FunctorType;
@@ -55,7 +52,6 @@ namespace CDPL
 		}
 
 		template <template <typename T1, typename T2> class F, typename Q, typename T>
-		CDPL_MATH_INLINE 
 		void quaternionAssignScalar(Q& q, const T& t)
 		{
 			typedef F<typename Q::ValueType, T> FunctorType;
@@ -67,7 +63,6 @@ namespace CDPL
 		}
 
 		template <typename Q, typename E>
-		CDPL_MATH_INLINE 
 		void quaternionSwap(Q& q, QuaternionExpression<E>& e)
 		{
 			boost::swap(q.getC1(), e().getC1());

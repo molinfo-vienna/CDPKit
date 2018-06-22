@@ -153,7 +153,7 @@ namespace CDPL
 // Implementation
 
 template <typename T>
-inline CDPL::Base::DataWriter<T>& CDPL::Base::DataWriter<T>::operator=(const DataWriter& writer)
+CDPL::Base::DataWriter<T>& CDPL::Base::DataWriter<T>::operator=(const DataWriter& writer)
 {
 	if (this == &writer)
 		return *this;
@@ -166,7 +166,7 @@ inline CDPL::Base::DataWriter<T>& CDPL::Base::DataWriter<T>::operator=(const Dat
 // \cond UNHIDE_DETAILS
 
 template <typename T>
-inline CDPL::Base::DataWriter<T>& CDPL::Base::operator<<(DataWriter<T>& writer, const T& obj)
+CDPL::Base::DataWriter<T>& CDPL::Base::operator<<(DataWriter<T>& writer, const T& obj)
 {
 	return writer.write(obj);
 }

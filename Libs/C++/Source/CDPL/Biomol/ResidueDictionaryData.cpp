@@ -36,10 +36,13 @@ namespace CDPL
     namespace Biomol    
     {
 
-		namespace ResidueDictionaryData {
+		namespace ResidueDictionaryData 
+		{
 
-			const char* residueStructureData =
-            #include "ResidueDictionaryStructureData.hpp"
+			const char* residueStructureData = 
+            #include "BuiltinResidueDictionaryStructureData.cdf.str"
+			;
+
             #include "ResidueDictionaryEntries.hpp"
 		}
     }

@@ -449,7 +449,7 @@ bool Chem::ReactionSubstructureSearch::nextTargetAtom(std::size_t query_atom_idx
 	return (target_atom_idx < numTargetAtoms);
 }
 
-inline bool Chem::ReactionSubstructureSearch::atomMappingAllowed(std::size_t query_atom_idx, std::size_t target_atom_idx) const
+bool Chem::ReactionSubstructureSearch::atomMappingAllowed(std::size_t query_atom_idx, std::size_t target_atom_idx) const
 {
 	return (!targetMappingMask.testAtomBit(target_atom_idx) && atomEquivMatrix[query_atom_idx].test(target_atom_idx));
 }
@@ -728,32 +728,32 @@ void Chem::ReactionSubstructureSearch::ABMappingMask::initBondMask(std::size_t n
 		bondMask.resize(num_bonds);
 }
 
-inline void Chem::ReactionSubstructureSearch::ABMappingMask::setAtomBit(std::size_t atom_idx)
+void Chem::ReactionSubstructureSearch::ABMappingMask::setAtomBit(std::size_t atom_idx)
 {
 	atomMask.set(atom_idx);
 }
 
-inline void Chem::ReactionSubstructureSearch::ABMappingMask::resetAtomBit(std::size_t atom_idx)
+void Chem::ReactionSubstructureSearch::ABMappingMask::resetAtomBit(std::size_t atom_idx)
 {
 	atomMask.reset(atom_idx);
 }
 
-inline bool Chem::ReactionSubstructureSearch::ABMappingMask::testAtomBit(std::size_t atom_idx) const
+bool Chem::ReactionSubstructureSearch::ABMappingMask::testAtomBit(std::size_t atom_idx) const
 {
 	return atomMask.test(atom_idx);
 }
 
-inline void Chem::ReactionSubstructureSearch::ABMappingMask::setBondBit(std::size_t bond_idx)
+void Chem::ReactionSubstructureSearch::ABMappingMask::setBondBit(std::size_t bond_idx)
 {
 	bondMask.set(bond_idx);
 }
 
-inline void Chem::ReactionSubstructureSearch::ABMappingMask::resetBondMask()
+void Chem::ReactionSubstructureSearch::ABMappingMask::resetBondMask()
 {
 	bondMask.reset();
 }
 
-inline bool Chem::ReactionSubstructureSearch::ABMappingMask::operator<(const ABMappingMask& mask) const
+bool Chem::ReactionSubstructureSearch::ABMappingMask::operator<(const ABMappingMask& mask) const
 {
 	if (atomMask == mask.atomMask)
 		return (bondMask < mask.bondMask);
@@ -761,7 +761,7 @@ inline bool Chem::ReactionSubstructureSearch::ABMappingMask::operator<(const ABM
 	return (atomMask < mask.atomMask);
 }
 
-inline bool Chem::ReactionSubstructureSearch::ABMappingMask::operator>(const ABMappingMask& mask) const
+bool Chem::ReactionSubstructureSearch::ABMappingMask::operator>(const ABMappingMask& mask) const
 {
 	if (atomMask == mask.atomMask)
 		return (bondMask > mask.bondMask);

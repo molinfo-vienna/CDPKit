@@ -942,63 +942,63 @@ void Chem::MaxCommonBondSubstructureSearch::ABMappingMask::initTargetBondMask(st
 		targetBondMask.resize(num_bonds);
 }
 
-inline void Chem::MaxCommonBondSubstructureSearch::ABMappingMask::setQueryAtomBit(std::size_t atom_idx)
+void Chem::MaxCommonBondSubstructureSearch::ABMappingMask::setQueryAtomBit(std::size_t atom_idx)
 {
 	queryAtomMask.set(atom_idx);
 }
 
-inline void Chem::MaxCommonBondSubstructureSearch::ABMappingMask::setTargetAtomBit(std::size_t atom_idx)
+void Chem::MaxCommonBondSubstructureSearch::ABMappingMask::setTargetAtomBit(std::size_t atom_idx)
 {
 	targetAtomMask.set(atom_idx);
 }
 
-inline void Chem::MaxCommonBondSubstructureSearch::ABMappingMask::resetQueryAtomBit(std::size_t atom_idx)
+void Chem::MaxCommonBondSubstructureSearch::ABMappingMask::resetQueryAtomBit(std::size_t atom_idx)
 {
 	queryAtomMask.reset(atom_idx);
 }
 
-inline void Chem::MaxCommonBondSubstructureSearch::ABMappingMask::resetTargetAtomBit(std::size_t atom_idx)
+void Chem::MaxCommonBondSubstructureSearch::ABMappingMask::resetTargetAtomBit(std::size_t atom_idx)
 {
 	targetAtomMask.reset(atom_idx);
 }
 
-inline bool Chem::MaxCommonBondSubstructureSearch::ABMappingMask::testQueryAtomBit(std::size_t atom_idx) const
+bool Chem::MaxCommonBondSubstructureSearch::ABMappingMask::testQueryAtomBit(std::size_t atom_idx) const
 {
 	return queryAtomMask.test(atom_idx);
 }
 
-inline bool Chem::MaxCommonBondSubstructureSearch::ABMappingMask::testTargetAtomBit(std::size_t atom_idx) const
+bool Chem::MaxCommonBondSubstructureSearch::ABMappingMask::testTargetAtomBit(std::size_t atom_idx) const
 {
 	return targetAtomMask.test(atom_idx);
 }
 
-inline void Chem::MaxCommonBondSubstructureSearch::ABMappingMask::setQueryBondBit(std::size_t bond_idx)
+void Chem::MaxCommonBondSubstructureSearch::ABMappingMask::setQueryBondBit(std::size_t bond_idx)
 {
 	queryBondMask.set(bond_idx);
 }
 
-inline void Chem::MaxCommonBondSubstructureSearch::ABMappingMask::setTargetBondBit(std::size_t bond_idx)
+void Chem::MaxCommonBondSubstructureSearch::ABMappingMask::setTargetBondBit(std::size_t bond_idx)
 {
 	targetBondMask.set(bond_idx);
 }
 
-inline void Chem::MaxCommonBondSubstructureSearch::ABMappingMask::resetQueryAtomBits()
+void Chem::MaxCommonBondSubstructureSearch::ABMappingMask::resetQueryAtomBits()
 {
 	queryAtomMask.reset();
 }
 
-inline void Chem::MaxCommonBondSubstructureSearch::ABMappingMask::resetTargetAtomBits()
+void Chem::MaxCommonBondSubstructureSearch::ABMappingMask::resetTargetAtomBits()
 {
 	targetAtomMask.reset();
 }
 
-inline void Chem::MaxCommonBondSubstructureSearch::ABMappingMask::resetBondBits()
+void Chem::MaxCommonBondSubstructureSearch::ABMappingMask::resetBondBits()
 {
 	queryBondMask.reset();
 	targetBondMask.reset();
 }
 
-inline bool Chem::MaxCommonBondSubstructureSearch::ABMappingMask::operator<(const ABMappingMask& mask) const
+bool Chem::MaxCommonBondSubstructureSearch::ABMappingMask::operator<(const ABMappingMask& mask) const
 {
 	if (queryAtomMask == mask.queryAtomMask) {
 		if (queryBondMask == mask.queryBondMask) {
@@ -1015,7 +1015,7 @@ inline bool Chem::MaxCommonBondSubstructureSearch::ABMappingMask::operator<(cons
 	return (queryAtomMask < mask.queryAtomMask);
 }
 
-inline bool Chem::MaxCommonBondSubstructureSearch::ABMappingMask::operator>(const ABMappingMask& mask) const
+bool Chem::MaxCommonBondSubstructureSearch::ABMappingMask::operator>(const ABMappingMask& mask) const
 {
 	if (queryAtomMask == mask.queryAtomMask) {
 		if (queryBondMask == mask.queryBondMask) {

@@ -50,39 +50,37 @@ using namespace CDPL;
 namespace
 {
 	
-	inline unsigned int getAtomType(const Chem::Atom* atom) 
+	unsigned int getAtomType(const Chem::Atom* atom) 
 	{
 		return getType(*atom);
 	}
 }
 
-Chem::BondStereoFlagGenerator::BondStereoFlagGenerator() {}
+Chem::BondStereoFlagGenerator::BondStereoFlagGenerator(): coordsFunc(&get2DCoordinates) {}
 
-Chem::BondStereoFlagGenerator::BondStereoFlagGenerator(const MolecularGraph& molgraph, Util::UIArray& flags)
+Chem::BondStereoFlagGenerator::BondStereoFlagGenerator(const MolecularGraph& molgraph, Util::UIArray& flags): coordsFunc(&get2DCoordinates)
 {
 	generate(molgraph, flags);
 }
 
-Chem::BondStereoFlagGenerator::BondStereoFlagGenerator(const MolecularGraph& molgraph, const Math::Vector2DArray& coords, Util::UIArray& flags)
+void Chem::BondStereoFlagGenerator::setAtom2DCoordinatesFunction(const Atom2DCoordinatesFunction& func)
 {
-	generate(molgraph, coords, flags);
+	coordsFunc = func;
+}
+
+const Chem::BondStereoFlagGenerator::Atom2DCoordinatesFunction& Chem::BondStereoFlagGenerator::getAtom2DCoordinatesFunction() const
+{
+	return coordsFunc;
 }
 
 void Chem::BondStereoFlagGenerator::generate(const MolecularGraph& molgraph, Util::UIArray& flags)
 {
-	init(molgraph, 0, flags);
+	init(molgraph, flags);
 
 	assignStereoFlags(flags);
 }
 
-void Chem::BondStereoFlagGenerator::generate(const MolecularGraph& molgraph, const Math::Vector2DArray& coords, Util::UIArray& flags)
-{
-	init(molgraph, &coords, flags);
-
-	assignStereoFlags(flags);
-}
-
-void Chem::BondStereoFlagGenerator::init(const MolecularGraph& molgraph, const Math::Vector2DArray* coords, Util::UIArray& flags)
+void Chem::BondStereoFlagGenerator::init(const MolecularGraph& molgraph, Util::UIArray& flags)
 {
 	molGraph = &molgraph;
 
@@ -166,14 +164,14 @@ void Chem::BondStereoFlagGenerator::init(const MolecularGraph& molgraph, const M
 		StereoAtomInfo::SharedPointer info_ptr;
 
 		if (perm_parity == 1) 
-			info_ptr.reset(new StereoAtomInfo(molGraph, coords, &atom, config == AtomConfiguration::R ? AtomConfiguration::S : 
+			info_ptr.reset(new StereoAtomInfo(molGraph, coordsFunc, &atom, config == AtomConfiguration::R ? AtomConfiguration::S : 
 											  config == AtomConfiguration::S ? AtomConfiguration::R : AtomConfiguration::EITHER, 
 											  num_bonds, nbr_atoms, nbr_bonds));
 		else if (perm_parity == 2) 
-			info_ptr.reset(new StereoAtomInfo(molGraph, coords, &atom, config, num_bonds, nbr_atoms, nbr_bonds));
+			info_ptr.reset(new StereoAtomInfo(molGraph, coordsFunc, &atom, config, num_bonds, nbr_atoms, nbr_bonds));
 
 		else if (config == AtomConfiguration::EITHER) 
-			info_ptr.reset(new StereoAtomInfo(molGraph, coords, &atom, config, num_bonds, nbr_atoms, nbr_bonds));
+			info_ptr.reset(new StereoAtomInfo(molGraph, coordsFunc, &atom, config, num_bonds, nbr_atoms, nbr_bonds));
 
 		else {
 			stereoAtomTable.push_back(StereoAtomInfo::SharedPointer());
@@ -505,7 +503,7 @@ void Chem::BondStereoFlagGenerator::switchStereoFlag(std::size_t bond_idx)
 //--------------
 
 Chem::BondStereoFlagGenerator::StereoAtomInfo::StereoAtomInfo(const MolecularGraph* molgraph, 
-															  const Math::Vector2DArray* coords,
+															  const Atom2DCoordinatesFunction& coords_func,
 															  const Atom* atom, unsigned int config, 
 															  std::size_t num_bonds, const Atom** nbr_atoms,
 															  const Bond** nbr_bonds): 
@@ -520,13 +518,13 @@ Chem::BondStereoFlagGenerator::StereoAtomInfo::StereoAtomInfo(const MolecularGra
 		ligands[i] = Ligand(nbr_atom, bond_idx);
 	}
 
-	const Math::Vector2D& atom1_coords = (!coords ? get2DCoordinates(*nbr_atoms[0]) : (*coords)[molgraph->getAtomIndex(*nbr_atoms[0])]);
-	const Math::Vector2D& atom2_coords = (!coords ? get2DCoordinates(*nbr_atoms[1]) : (*coords)[molgraph->getAtomIndex(*nbr_atoms[1])]);
-	const Math::Vector2D& atom3_coords = (!coords ? get2DCoordinates(*nbr_atoms[2]) : (*coords)[molgraph->getAtomIndex(*nbr_atoms[2])]);
+	const Math::Vector2D& atom1_coords = coords_func(*nbr_atoms[0]);
+	const Math::Vector2D& atom2_coords = coords_func(*nbr_atoms[1]);
+	const Math::Vector2D& atom3_coords = coords_func(*nbr_atoms[2]);
 
 	const Atom& ref_atom4 = (num_bonds == 3 ? *atom : *nbr_atoms[3]);
 
-	const Math::Vector2D& atom4_coords = (!coords ? get2DCoordinates(ref_atom4) : (*coords)[molgraph->getAtomIndex(ref_atom4)]);
+	const Math::Vector2D& atom4_coords = coords_func(ref_atom4);
 
 	configCalcTerms[0] = (atom2_coords[0] - atom4_coords[0]) * (atom3_coords[1] - atom4_coords[1])
 		- (atom2_coords[1] - atom4_coords[1]) * (atom3_coords[0] - atom4_coords[0]);

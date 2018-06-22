@@ -42,18 +42,18 @@ namespace CDPL
 		public:
 			TwoPointPharmacophore(const Feature& ftr1, const Feature& ftr2);
 
-			inline TwoPointPharmacophore(unsigned int ftr1_type, unsigned int ftr2_type, double ftr_dist):
+			TwoPointPharmacophore(unsigned int ftr1_type, unsigned int ftr2_type, double ftr_dist):
 				ftr1Type(ftr1_type), ftr2Type(ftr2_type), ftrDistance(ftr_dist) {}
 
-			inline unsigned int getFeature1Type() const {
+			unsigned int getFeature1Type() const {
 				return ftr1Type;
 			}
 
-			inline unsigned int getFeature2Type() const {
+			unsigned int getFeature2Type() const {
 				return ftr2Type;
 			}
 
-			inline double getFeatureDistance() const {
+			double getFeatureDistance() const {
 				return ftrDistance;
 			}
 

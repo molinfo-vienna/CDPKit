@@ -839,48 +839,48 @@ void Chem::CommonConnectedSubstructureSearch::ABMappingMask::initTargetBondMask(
 		targetBondMask.resize(num_bonds);
 }
 
-inline void Chem::CommonConnectedSubstructureSearch::ABMappingMask::setQueryAtomBit(std::size_t atom_idx)
+void Chem::CommonConnectedSubstructureSearch::ABMappingMask::setQueryAtomBit(std::size_t atom_idx)
 {
 	queryAtomMask.set(atom_idx);
 }
 
-inline void Chem::CommonConnectedSubstructureSearch::ABMappingMask::setTargetAtomBit(std::size_t atom_idx)
+void Chem::CommonConnectedSubstructureSearch::ABMappingMask::setTargetAtomBit(std::size_t atom_idx)
 {
 	targetAtomMask.set(atom_idx);
 }
 
-inline void Chem::CommonConnectedSubstructureSearch::ABMappingMask::resetQueryAtomBit(std::size_t atom_idx)
+void Chem::CommonConnectedSubstructureSearch::ABMappingMask::resetQueryAtomBit(std::size_t atom_idx)
 {
 	queryAtomMask.reset(atom_idx);
 }
 
-inline void Chem::CommonConnectedSubstructureSearch::ABMappingMask::resetTargetAtomBit(std::size_t atom_idx)
+void Chem::CommonConnectedSubstructureSearch::ABMappingMask::resetTargetAtomBit(std::size_t atom_idx)
 {
 	targetAtomMask.reset(atom_idx);
 }
 
-inline bool Chem::CommonConnectedSubstructureSearch::ABMappingMask::testTargetAtomBit(std::size_t atom_idx) const
+bool Chem::CommonConnectedSubstructureSearch::ABMappingMask::testTargetAtomBit(std::size_t atom_idx) const
 {
 	return targetAtomMask.test(atom_idx);
 }
 
-inline void Chem::CommonConnectedSubstructureSearch::ABMappingMask::setQueryBondBit(std::size_t bond_idx)
+void Chem::CommonConnectedSubstructureSearch::ABMappingMask::setQueryBondBit(std::size_t bond_idx)
 {
 	queryBondMask.set(bond_idx);
 }
 
-inline void Chem::CommonConnectedSubstructureSearch::ABMappingMask::setTargetBondBit(std::size_t bond_idx)
+void Chem::CommonConnectedSubstructureSearch::ABMappingMask::setTargetBondBit(std::size_t bond_idx)
 {
 	targetBondMask.set(bond_idx);
 }
 
-inline void Chem::CommonConnectedSubstructureSearch::ABMappingMask::resetBondMasks()
+void Chem::CommonConnectedSubstructureSearch::ABMappingMask::resetBondMasks()
 {
 	queryBondMask.reset();
 	targetBondMask.reset();
 }
 
-inline bool Chem::CommonConnectedSubstructureSearch::ABMappingMask::operator<(const ABMappingMask& mask) const
+bool Chem::CommonConnectedSubstructureSearch::ABMappingMask::operator<(const ABMappingMask& mask) const
 {
 	if (queryAtomMask == mask.queryAtomMask) {
 		if (queryBondMask == mask.queryBondMask) {
@@ -897,7 +897,7 @@ inline bool Chem::CommonConnectedSubstructureSearch::ABMappingMask::operator<(co
 	return (queryAtomMask < mask.queryAtomMask);
 }
 
-inline bool Chem::CommonConnectedSubstructureSearch::ABMappingMask::operator>(const ABMappingMask& mask) const
+bool Chem::CommonConnectedSubstructureSearch::ABMappingMask::operator>(const ABMappingMask& mask) const
 {
 	if (queryAtomMask == mask.queryAtomMask) {
 		if (queryBondMask == mask.queryBondMask) {

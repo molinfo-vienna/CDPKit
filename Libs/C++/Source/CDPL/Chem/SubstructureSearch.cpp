@@ -748,32 +748,32 @@ void Chem::SubstructureSearch::ABMappingMask::initBondMask(std::size_t num_bonds
 		bondMask.resize(num_bonds);
 }
 
-inline void Chem::SubstructureSearch::ABMappingMask::setAtomBit(std::size_t atom_idx)
+void Chem::SubstructureSearch::ABMappingMask::setAtomBit(std::size_t atom_idx)
 {
 	atomMask.set(atom_idx);
 }
 
-inline void Chem::SubstructureSearch::ABMappingMask::resetAtomBit(std::size_t atom_idx)
+void Chem::SubstructureSearch::ABMappingMask::resetAtomBit(std::size_t atom_idx)
 {
 	atomMask.reset(atom_idx);
 }
 
-inline bool Chem::SubstructureSearch::ABMappingMask::testAtomBit(std::size_t atom_idx) const
+bool Chem::SubstructureSearch::ABMappingMask::testAtomBit(std::size_t atom_idx) const
 {
 	return atomMask.test(atom_idx);
 }
 
-inline void Chem::SubstructureSearch::ABMappingMask::setBondBit(std::size_t bond_idx)
+void Chem::SubstructureSearch::ABMappingMask::setBondBit(std::size_t bond_idx)
 {
 	bondMask.set(bond_idx);
 }
 
-inline void Chem::SubstructureSearch::ABMappingMask::resetBondMask()
+void Chem::SubstructureSearch::ABMappingMask::resetBondMask()
 {
 	bondMask.reset();
 }
 
-inline bool Chem::SubstructureSearch::ABMappingMask::operator<(const ABMappingMask& mask) const
+bool Chem::SubstructureSearch::ABMappingMask::operator<(const ABMappingMask& mask) const
 {
 	if (atomMask == mask.atomMask)
 		return (bondMask < mask.bondMask);
@@ -781,7 +781,7 @@ inline bool Chem::SubstructureSearch::ABMappingMask::operator<(const ABMappingMa
 	return (atomMask < mask.atomMask);
 }
 
-inline bool Chem::SubstructureSearch::ABMappingMask::operator>(const ABMappingMask& mask) const
+bool Chem::SubstructureSearch::ABMappingMask::operator>(const ABMappingMask& mask) const
 {
 	if (atomMask == mask.atomMask)
 		return (bondMask > mask.bondMask);

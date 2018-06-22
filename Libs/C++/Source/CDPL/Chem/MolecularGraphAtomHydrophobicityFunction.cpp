@@ -44,9 +44,9 @@ using namespace CDPL;
 void Chem::calcAtomHydrophobicities(MolecularGraph& molgraph, bool overwrite)
 {
     if (!overwrite && std::find_if(molgraph.getAtomsBegin(), molgraph.getAtomsEnd(),
-				   boost::bind(std::equal_to<bool>(), false,
-					       boost::bind(&hasHydrophobicity, _1))) == molgraph.getAtomsEnd())
-	return;
+								   boost::bind(std::equal_to<bool>(), false,
+											   boost::bind(&hasHydrophobicity, _1))) == molgraph.getAtomsEnd())
+		return;
 
     Util::DArray hyd_table;
     AtomHydrophobicityCalculator calculator(molgraph, hyd_table);
@@ -54,5 +54,5 @@ void Chem::calcAtomHydrophobicities(MolecularGraph& molgraph, bool overwrite)
     std::size_t num_atoms = molgraph.getNumAtoms();
 
     for (std::size_t i = 0; i < num_atoms; i++) 
-	setHydrophobicity(molgraph.getAtom(i), hyd_table[i]);
+		setHydrophobicity(molgraph.getAtom(i), hyd_table[i]);
 }

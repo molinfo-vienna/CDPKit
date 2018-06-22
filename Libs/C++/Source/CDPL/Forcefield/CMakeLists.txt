@@ -1,10 +1,49 @@
-INCLUDE_DIRECTORIES("${CMAKE_CURRENT_SOURCE_DIR}" "${CDPL_SOURCE_DIR}" "${CDPKIT_BUILTIN_DATA_DIR}")
+INCLUDE_DIRECTORIES("${CMAKE_CURRENT_SOURCE_DIR}" "${CDPL_SOURCE_DIR}" "${CMAKE_CURRENT_BINARY_DIR}")
+
+SET(PARAMETER_FILES
+    MMFFANG.PAR
+    MMFFAROM.PAR
+    MMFFBNDK.PAR
+    MMFFBOND.PAR
+    MMFFCHG.PAR
+    MMFFDEF.PAR
+    MMFFDFSB.PAR
+    MMFFHDEF.PAR
+    MMFFOOP.PAR
+    MMFFPBCI.PAR
+    MMFFPROP.PAR
+    MMFFSMTP.PAR
+    MMFFSOOP.PAR
+    MMFFSTBN.PAR
+    MMFFSTOR.PAR
+    MMFFSYMB.PAR
+    MMFFTOR.PAR
+    MMFFVDW.PAR	
+   )
+
+FOREACH(PARAM_FILE ${PARAMETER_FILES})
+  EXECUTE_PROCESS(COMMAND "${PYTHON_EXECUTABLE}" "${CDPKIT_PYTHON_SCRIPTS_DIR}/FileDataToCString.py" 
+  		"${CDPKIT_BUILTIN_DATA_DIR}/Forcefield/${PARAM_FILE}" 
+		"${CMAKE_CURRENT_BINARY_DIR}/${PARAM_FILE}.str")
+ENDFOREACH(PARAM_FILE)
 
 SET(cdpl-forcefield_LIB_SRCS
+    AtomProperty.cpp
+    BondProperty.cpp
+    MolecularGraphProperty.cpp
+
+    AtomPropertyFunctions.cpp
+    BondPropertyFunctions.cpp
+    MolecularGraphPropertyFunctions.cpp
+    MolecularGraphMMFF94AtomTypesFunction.cpp
+    MolecularGraphMMFF94BondTypeIndicesFunction.cpp 
+    MolecularGraphMMFF94AromaticRingSetFunctions.cpp 
+
     MMFF94AtomTyper.cpp
+    MMFF94BondTyper.cpp
+    MMFF94AromaticSSSRSubset.cpp
 
     MMFF94ParameterData.cpp
-
     MMFF94SymbolicAtomTypePatternTable.cpp
     MMFF94HeavyToHydrogenAtomTypeMap.cpp
     MMFF94SymbolicToNumericAtomTypeMap.cpp

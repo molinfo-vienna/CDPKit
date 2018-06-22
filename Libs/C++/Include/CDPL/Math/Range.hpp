@@ -33,7 +33,6 @@
 
 #include <boost/swap.hpp>
 
-#include "CDPL/Math/Config.hpp"
 #include "CDPL/Math/Check.hpp"
 #include "CDPL/Base/Exceptions.hpp"
 
@@ -53,44 +52,42 @@ namespace CDPL
 		public:
 			typedef S SizeType;
 
-			CDPL_MATH_INLINE Range(): start(0), stop(0) {}
+			Range(): start(0), stop(0) {}
 
-			CDPL_MATH_INLINE Range(SizeType start, SizeType stop): start(start), stop(stop) {
+			Range(SizeType start, SizeType stop): start(start), stop(stop) {
 				CDPL_MATH_CHECK(start <= stop, "Invalid range specification", Base::RangeError);
 			}
 
-			CDPL_MATH_INLINE SizeType operator()(SizeType i) const {
+			SizeType operator()(SizeType i) const {
 				CDPL_MATH_CHECK(i < getSize(), "Index out of range", Base::IndexError);
 				return (start + i);
 			}
 
-			CDPL_MATH_INLINE SizeType getStart() const {
+			SizeType getStart() const {
 				return start;
 			}
 
-			CDPL_MATH_INLINE SizeType getStop() const {
+			SizeType getStop() const {
 				return stop;
 			}
 
-			CDPL_MATH_INLINE SizeType getSize() const {
+			SizeType getSize() const {
 				return (stop - start);
 			}
 
-			CDPL_MATH_INLINE bool isEmpty() const {
+			bool isEmpty() const {
 				return (stop == start);
 			}
-
-			CDPL_MATH_INLINE
+			
 			bool operator==(const Range& r) const {
 				return (start == r.start && stop == r.stop);
 			}
-
-			CDPL_MATH_INLINE
+			
 			bool operator!=(const Range& r) const {
 				return !this->operator==(r);
 			}
 
-			CDPL_MATH_INLINE void swap(Range& r) {
+			void swap(Range& r) {
 				if (this == &r)
 					return;
 
@@ -98,7 +95,7 @@ namespace CDPL
 				boost::swap(stop, r.stop);
 			}
 	
-			CDPL_MATH_INLINE friend void swap(Range& r1, Range& r2) {
+			friend void swap(Range& r1, Range& r2) {
 				r1.swap(r2);
 			}
 

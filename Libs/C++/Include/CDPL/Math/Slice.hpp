@@ -33,7 +33,6 @@
 
 #include <boost/swap.hpp>
 
-#include "CDPL/Math/Config.hpp"
 #include "CDPL/Math/Check.hpp"
 #include "CDPL/Base/Exceptions.hpp"
 
@@ -54,44 +53,42 @@ namespace CDPL
 			typedef S SizeType;
 			typedef D DifferenceType;
 
-			CDPL_MATH_INLINE Slice(): start(0), stride(0), size(0) {}
+			Slice(): start(0), stride(0), size(0) {}
 
-			CDPL_MATH_INLINE Slice(SizeType start, DifferenceType stride, SizeType size): start(start), stride(stride), size(size) {
+			Slice(SizeType start, DifferenceType stride, SizeType size): start(start), stride(stride), size(size) {
 				CDPL_MATH_CHECK(stride >= 0 || size == 0 || start >= -stride * (size - 1), "Invalid slice specification", Base::RangeError);
 			}
 
-			CDPL_MATH_INLINE SizeType operator()(SizeType i) const {
+			SizeType operator()(SizeType i) const {
 				CDPL_MATH_CHECK(i < getSize(), "Index out of range", Base::IndexError);
 				return (start + i * stride);
 			}
 
-			CDPL_MATH_INLINE SizeType getStart() const {
+			SizeType getStart() const {
 				return start;
 			}
 
-			CDPL_MATH_INLINE DifferenceType getStride() const {
+			DifferenceType getStride() const {
 				return stride;
 			}
 
-			CDPL_MATH_INLINE SizeType getSize() const {
+			SizeType getSize() const {
 				return size;
 			}
 
-			CDPL_MATH_INLINE bool isEmpty() const {
+			bool isEmpty() const {
 				return (size == 0);
 			}
 
-			CDPL_MATH_INLINE
 			bool operator==(const Slice& s) const {
 				return (start == s.start && stride == s.stride && size == s.size);
 			}
 
-			CDPL_MATH_INLINE
 			bool operator!=(const Slice& s) const {
 				return !this->operator==(s);
 			}
 
-			CDPL_MATH_INLINE void swap(Slice& s) {
+			void swap(Slice& s) {
 				if (this == &s)
 					return ;
 
@@ -100,7 +97,7 @@ namespace CDPL
 				boost::swap(size, s.size);
 			}
 	
-			CDPL_MATH_INLINE friend void swap(Slice& s1, Slice& s2) {
+			friend void swap(Slice& s1, Slice& s2) {
 				s1.swap(s2);
 			}
 

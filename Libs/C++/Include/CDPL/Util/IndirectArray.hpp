@@ -358,14 +358,14 @@ namespace CDPL
 // Implementation of IndirectArray<>
 
 template <typename ValueType, typename PointerType, bool NullPointerCheck>
-inline typename CDPL::Util::IndirectArray<ValueType, PointerType, NullPointerCheck>::ElementIterator 
+typename CDPL::Util::IndirectArray<ValueType, PointerType, NullPointerCheck>::ElementIterator 
 CDPL::Util::IndirectArray<ValueType, PointerType, NullPointerCheck>::insertElement(const ElementIterator& it, const PointerType& ptr)  
 {
 	return ElementIterator(Array<PointerType>::insertElement(it.base(), ptr));
 }
 
 template <typename ValueType, typename PointerType, bool NullPointerCheck>
-inline void CDPL::Util::IndirectArray<ValueType, PointerType, NullPointerCheck>::insertElements(const ElementIterator& it, std::size_t n, 
+void CDPL::Util::IndirectArray<ValueType, PointerType, NullPointerCheck>::insertElements(const ElementIterator& it, std::size_t n, 
 																								const PointerType& ptr)  
 {
 	Array<PointerType>::insertElements(it.base(), n, ptr);	
@@ -373,132 +373,132 @@ inline void CDPL::Util::IndirectArray<ValueType, PointerType, NullPointerCheck>:
 
 template <typename ValueType, typename PointerType, bool NullPointerCheck>
 template <typename InputIter>
-inline void CDPL::Util::IndirectArray<ValueType, PointerType, NullPointerCheck>::insertElements(const ElementIterator& it, const InputIter& first, 
+void CDPL::Util::IndirectArray<ValueType, PointerType, NullPointerCheck>::insertElements(const ElementIterator& it, const InputIter& first, 
 																								const InputIter& last)  
 {	
 	Array<PointerType>::insertElements(it.base(), first, last);	
 }
 
 template <typename ValueType, typename PointerType, bool NullPointerCheck>
-inline typename CDPL::Util::IndirectArray<ValueType, PointerType, NullPointerCheck>::ElementIterator 
+typename CDPL::Util::IndirectArray<ValueType, PointerType, NullPointerCheck>::ElementIterator 
 CDPL::Util::IndirectArray<ValueType, PointerType, NullPointerCheck>::removeElement(const ElementIterator& it)  
 {
 	return ElementIterator(Array<PointerType>::removeElement(it.base()));
 }
 
 template <typename ValueType, typename PointerType, bool NullPointerCheck>
-inline typename CDPL::Util::IndirectArray<ValueType, PointerType, NullPointerCheck>::ElementIterator 
+typename CDPL::Util::IndirectArray<ValueType, PointerType, NullPointerCheck>::ElementIterator 
 CDPL::Util::IndirectArray<ValueType, PointerType, NullPointerCheck>::removeElements(const ElementIterator& first, const ElementIterator& last)  
 {
 	return ElementIterator(Array<PointerType>::removeElements(first.base(), last.base()));
 }
 
 template <typename ValueType, typename PointerType, bool NullPointerCheck>
-inline const ValueType& CDPL::Util::IndirectArray<ValueType, PointerType, NullPointerCheck>::getFirstElement() const  
+const ValueType& CDPL::Util::IndirectArray<ValueType, PointerType, NullPointerCheck>::getFirstElement() const  
 {
 	return dereferencer(Array<PointerType>::getFirstElement());
 }
 
 template <typename ValueType, typename PointerType, bool NullPointerCheck>
-inline const ValueType& CDPL::Util::IndirectArray<ValueType, PointerType, NullPointerCheck>::getLastElement() const  
+const ValueType& CDPL::Util::IndirectArray<ValueType, PointerType, NullPointerCheck>::getLastElement() const  
 {
 	return dereferencer(Array<PointerType>::getLastElement());
 }
 
 template <typename ValueType, typename PointerType, bool NullPointerCheck>
-inline ValueType& CDPL::Util::IndirectArray<ValueType, PointerType, NullPointerCheck>::getFirstElement()  
+ValueType& CDPL::Util::IndirectArray<ValueType, PointerType, NullPointerCheck>::getFirstElement()  
 {
 	return dereferencer(Array<PointerType>::getFirstElement());
 }
 
 template <typename ValueType, typename PointerType, bool NullPointerCheck>
-inline ValueType& CDPL::Util::IndirectArray<ValueType, PointerType, NullPointerCheck>::getLastElement()  
+ValueType& CDPL::Util::IndirectArray<ValueType, PointerType, NullPointerCheck>::getLastElement()  
 {
 	return dereferencer(Array<PointerType>::getLastElement());
 }
 
 template <typename ValueType, typename PointerType, bool NullPointerCheck>
-inline typename CDPL::Util::IndirectArray<ValueType, PointerType, NullPointerCheck>::ConstElementIterator 
+typename CDPL::Util::IndirectArray<ValueType, PointerType, NullPointerCheck>::ConstElementIterator 
 CDPL::Util::IndirectArray<ValueType, PointerType, NullPointerCheck>::getElementsBegin() const  
 {
 	return ConstElementIterator(Array<PointerType>::getElementsBegin());
 }
 
 template <typename ValueType, typename PointerType, bool NullPointerCheck>
-inline typename CDPL::Util::IndirectArray<ValueType, PointerType, NullPointerCheck>::ElementIterator 
+typename CDPL::Util::IndirectArray<ValueType, PointerType, NullPointerCheck>::ElementIterator 
 CDPL::Util::IndirectArray<ValueType, PointerType, NullPointerCheck>::getElementsBegin()  
 {
 	return ElementIterator(Array<PointerType>::getElementsBegin());
 }
 
 template <typename ValueType, typename PointerType, bool NullPointerCheck>		
-inline typename CDPL::Util::IndirectArray<ValueType, PointerType, NullPointerCheck>::ConstElementIterator 
+typename CDPL::Util::IndirectArray<ValueType, PointerType, NullPointerCheck>::ConstElementIterator 
 CDPL::Util::IndirectArray<ValueType, PointerType, NullPointerCheck>::getElementsEnd() const  
 {
 	return ConstElementIterator(Array<PointerType>::getElementsEnd());
 }
 
 template <typename ValueType, typename PointerType, bool NullPointerCheck>
-inline typename CDPL::Util::IndirectArray<ValueType, PointerType, NullPointerCheck>::ElementIterator 
+typename CDPL::Util::IndirectArray<ValueType, PointerType, NullPointerCheck>::ElementIterator 
 CDPL::Util::IndirectArray<ValueType, PointerType, NullPointerCheck>::getElementsEnd()  
 {
 	return ElementIterator(Array<PointerType>::getElementsEnd());
 }
 
 template <typename ValueType, typename PointerType, bool NullPointerCheck>
-inline typename CDPL::Util::IndirectArray<ValueType, PointerType, NullPointerCheck>::ConstReverseElementIterator 
+typename CDPL::Util::IndirectArray<ValueType, PointerType, NullPointerCheck>::ConstReverseElementIterator 
 CDPL::Util::IndirectArray<ValueType, PointerType, NullPointerCheck>::getElementsReverseBegin() const  
 {
 	return ConstReverseElementIterator(Array<PointerType>::getElementsReverseBegin());
 }
 
 template <typename ValueType, typename PointerType, bool NullPointerCheck>
-inline typename CDPL::Util::IndirectArray<ValueType, PointerType, NullPointerCheck>::ReverseElementIterator 
+typename CDPL::Util::IndirectArray<ValueType, PointerType, NullPointerCheck>::ReverseElementIterator 
 CDPL::Util::IndirectArray<ValueType, PointerType, NullPointerCheck>::getElementsReverseBegin()  
 {
 	return ReverseElementIterator(Array<PointerType>::getElementsReverseBegin());
 }
 
 template <typename ValueType, typename PointerType, bool NullPointerCheck>
-inline typename CDPL::Util::IndirectArray<ValueType, PointerType, NullPointerCheck>::ConstReverseElementIterator 
+typename CDPL::Util::IndirectArray<ValueType, PointerType, NullPointerCheck>::ConstReverseElementIterator 
 CDPL::Util::IndirectArray<ValueType, PointerType, NullPointerCheck>::getElementsReverseEnd() const  
 {
 	return ConstReverseElementIterator(Array<PointerType>::getElementsReverseEnd());
 }
 
 template <typename ValueType, typename PointerType, bool NullPointerCheck>
-inline typename CDPL::Util::IndirectArray<ValueType, PointerType, NullPointerCheck>::ReverseElementIterator 
+typename CDPL::Util::IndirectArray<ValueType, PointerType, NullPointerCheck>::ReverseElementIterator 
 CDPL::Util::IndirectArray<ValueType, PointerType, NullPointerCheck>::getElementsReverseEnd()  
 {
 	return ReverseElementIterator(Array<PointerType>::getElementsReverseEnd());
 }
 
 template <typename ValueType, typename PointerType, bool NullPointerCheck>
-inline const ValueType& CDPL::Util::IndirectArray<ValueType, PointerType, NullPointerCheck>::getElement(std::size_t idx) const  
+const ValueType& CDPL::Util::IndirectArray<ValueType, PointerType, NullPointerCheck>::getElement(std::size_t idx) const  
 {
 	return dereferencer(Array<PointerType>::getElement(idx));
 }
 
 template <typename ValueType, typename PointerType, bool NullPointerCheck>
-inline ValueType& CDPL::Util::IndirectArray<ValueType, PointerType, NullPointerCheck>::getElement(std::size_t idx)  
+ValueType& CDPL::Util::IndirectArray<ValueType, PointerType, NullPointerCheck>::getElement(std::size_t idx)  
 {
 	return dereferencer(Array<PointerType>::getElement(idx));
 }
 
 template <typename ValueType, typename PointerType, bool NullPointerCheck>
-inline const ValueType& CDPL::Util::IndirectArray<ValueType, PointerType, NullPointerCheck>::operator[](std::size_t idx) const  
+const ValueType& CDPL::Util::IndirectArray<ValueType, PointerType, NullPointerCheck>::operator[](std::size_t idx) const  
 {
 	return dereferencer(Array<PointerType>::operator[](idx));
 }
 
 template <typename ValueType, typename PointerType, bool NullPointerCheck>
-inline ValueType& CDPL::Util::IndirectArray<ValueType, PointerType, NullPointerCheck>::operator[](std::size_t idx)  
+ValueType& CDPL::Util::IndirectArray<ValueType, PointerType, NullPointerCheck>::operator[](std::size_t idx)  
 {
 	return dereferencer(Array<PointerType>::operator[](idx));
 }
 
 template <typename ValueType, typename PointerType, bool NullPointerCheck>
-inline const char* CDPL::Util::IndirectArray<ValueType, PointerType, NullPointerCheck>::getClassName() const 
+const char* CDPL::Util::IndirectArray<ValueType, PointerType, NullPointerCheck>::getClassName() const 
 {
 	return "IndirectArray";
 }

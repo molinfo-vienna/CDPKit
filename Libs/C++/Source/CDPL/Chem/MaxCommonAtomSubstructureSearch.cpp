@@ -818,27 +818,27 @@ void Chem::MaxCommonAtomSubstructureSearch::ABMappingMask::initTargetBondMask(st
 		targetBondMask.resize(num_bonds);
 }
 
-inline void Chem::MaxCommonAtomSubstructureSearch::ABMappingMask::setQueryAtomBit(std::size_t atom_idx)
+void Chem::MaxCommonAtomSubstructureSearch::ABMappingMask::setQueryAtomBit(std::size_t atom_idx)
 {
 	queryAtomMask.set(atom_idx);
 }
 
-inline void Chem::MaxCommonAtomSubstructureSearch::ABMappingMask::setTargetAtomBit(std::size_t atom_idx)
+void Chem::MaxCommonAtomSubstructureSearch::ABMappingMask::setTargetAtomBit(std::size_t atom_idx)
 {
 	targetAtomMask.set(atom_idx);
 }
 
-inline void Chem::MaxCommonAtomSubstructureSearch::ABMappingMask::setQueryBondBit(std::size_t bond_idx)
+void Chem::MaxCommonAtomSubstructureSearch::ABMappingMask::setQueryBondBit(std::size_t bond_idx)
 {
 	queryBondMask.set(bond_idx);
 }
 
-inline void Chem::MaxCommonAtomSubstructureSearch::ABMappingMask::setTargetBondBit(std::size_t bond_idx)
+void Chem::MaxCommonAtomSubstructureSearch::ABMappingMask::setTargetBondBit(std::size_t bond_idx)
 {
 	targetBondMask.set(bond_idx);
 }
 
-inline void Chem::MaxCommonAtomSubstructureSearch::ABMappingMask::reset()
+void Chem::MaxCommonAtomSubstructureSearch::ABMappingMask::reset()
 {
 	queryAtomMask.reset();
 	targetAtomMask.reset();
@@ -846,7 +846,7 @@ inline void Chem::MaxCommonAtomSubstructureSearch::ABMappingMask::reset()
 	targetBondMask.reset();
 }
 
-inline bool Chem::MaxCommonAtomSubstructureSearch::ABMappingMask::operator<(const ABMappingMask& mask) const
+bool Chem::MaxCommonAtomSubstructureSearch::ABMappingMask::operator<(const ABMappingMask& mask) const
 {
 	if (queryAtomMask == mask.queryAtomMask) {
 		if (queryBondMask == mask.queryBondMask) {
@@ -863,7 +863,7 @@ inline bool Chem::MaxCommonAtomSubstructureSearch::ABMappingMask::operator<(cons
 	return (queryAtomMask < mask.queryAtomMask);
 }
 
-inline bool Chem::MaxCommonAtomSubstructureSearch::ABMappingMask::operator>(const ABMappingMask& mask) const
+bool Chem::MaxCommonAtomSubstructureSearch::ABMappingMask::operator>(const ABMappingMask& mask) const
 {
 	if (queryAtomMask == mask.queryAtomMask) {
 		if (queryBondMask == mask.queryBondMask) {

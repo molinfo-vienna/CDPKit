@@ -41,8 +41,9 @@
 #include "CDPL/Forcefield/MMFF94HeavyToHydrogenAtomTypeMap.hpp"
 #include "CDPL/Forcefield/MMFF94SymbolicToNumericAtomTypeMap.hpp"
 #include "CDPL/Forcefield/MMFF94AtomTypePropertyTable.hpp"
+#include "CDPL/Forcefield/MMFF94PropertyFunctions.hpp"
 #include "CDPL/Chem/PatternAtomTyper.hpp"
-#include "CDPL/Util/BitSet.hpp"
+#include "CDPL/Util/Array.hpp"
 
 
 namespace CDPL 
@@ -69,6 +70,8 @@ namespace CDPL
 		  public:
 			MMFF94AtomTyper();
 
+			MMFF94AtomTyper(const Chem::MolecularGraph& molgraph, Util::UIArray& num_types, bool strict = true);
+
 			void setSymbolicAtomTypePatternTable(const MMFF94SymbolicAtomTypePatternTable::SharedPointer& table);
 
 			void setAromaticAtomTypeDefinitionTable(const MMFF94AromaticAtomTypeDefinitionTable::SharedPointer& table);
@@ -79,25 +82,20 @@ namespace CDPL
 
 			void setAtomTypePropertyTable(const MMFF94AtomTypePropertyTable::SharedPointer& table);
 
-			void strictAtomTyping(bool strict);
+			void setAromaticRingSetFunction(const MMFF94AromaticRingSetFunction& func);
+		
+			void perceiveTypes(const Chem::MolecularGraph& molgraph, Util::UIArray& num_types, bool strict = true);
 
-			bool strictAtomTyping() const;
-
-			void perceiveTypes(const Chem::MolecularGraph& molgraph);
-
-			const std::string& getSymbolicType(std::size_t idx) const;
-
-			unsigned int getNumericType(std::size_t idx) const;
+			const Util::SArray& getSymbolicTypes() const;
 
 		  private:
-			void init(const Chem::MolecularGraph& molgraph);
+			void init(const Chem::MolecularGraph& molgraph, Util::UIArray& num_types);
 
-			void assignProvisionalSymbolicAtomTypes();
+			void assignProvisionalSymbolicAtomTypes(bool strict);
 			void assignAromaticAtomTypes();
 			void assignHydrogenAtomTypes();
-			void assignNumericAtomTypes();
+			void assignNumericAtomTypes(Util::UIArray& num_types);
 
-			void perceiveAromaticRings();
 			void assignAromaticAtomTypes(const Chem::Fragment* ring);
 
 			std::size_t getUniqueHeteroAtomIndex(const Chem::Fragment& ring) const;
@@ -109,24 +107,19 @@ namespace CDPL
 			bool matchesAromTypeDefEntry(bool wc_match, const std::string& sym_type, unsigned int atomic_no, 
 										 std::size_t r_size, std::size_t het_dist, bool im_cat, bool n5_anion,
 										 const MMFF94AromaticAtomTypeDefinitionTable::Entry& entry) const;
-
-			typedef std::vector<std::string> SymbolicTypeTable;
-			typedef std::vector<unsigned int> NumericTypeTable;
+	
 			typedef std::vector<const Chem::Fragment*> RingList;
 
-			bool                                                 strictMode;
 			MMFF94SymbolicAtomTypePatternTable::SharedPointer    symTypePatternTable;
 			MMFF94AromaticAtomTypeDefinitionTable::SharedPointer aromTypeDefTable;
 			MMFF94HeavyToHydrogenAtomTypeMap::SharedPointer      hydTypeMap;
 			MMFF94SymbolicToNumericAtomTypeMap::SharedPointer    numTypeMap;
 			MMFF94AtomTypePropertyTable::SharedPointer           atomTypePropTable;
+			MMFF94AromaticRingSetFunction                        aromRingSetFunc;
 			const Chem::MolecularGraph*                          molGraph;
-			Chem::PatternAtomTyper                               atomTyper;
-			Util::BitSet                                         aromRSizeMask;
 			RingList                                             aromRings;
-			Util::BitSet                                         aromBondMask;
-			SymbolicTypeTable                                    symTypes;
-			NumericTypeTable                                     numTypes;
+			Chem::PatternAtomTyper                               atomTyper;
+			Util::SArray                                         symTypes;
 		};
     
 		/**

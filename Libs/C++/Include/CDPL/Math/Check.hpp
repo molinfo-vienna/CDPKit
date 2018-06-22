@@ -49,7 +49,7 @@ namespace
 {
 
 	template <typename E, typename T>
-	CDPL_MATH_INLINE T checkSizeEquality(const T& size1, const T& size2)
+	T checkSizeEquality(const T& size1, const T& size2)
 	{
 		CDPL_MATH_CHECK(size1 == size2, "Size mismatch", E);
 		return std::min(size1, size2);

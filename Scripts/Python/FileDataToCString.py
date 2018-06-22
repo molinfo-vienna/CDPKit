@@ -1,7 +1,7 @@
 # -*- mode: python; tab-width: 4 -*- 
 
 ## 
-# BinaryFileToCString.py 
+# FileDataToCString.py 
 #
 # This file is part of the Chemical Data Processing Toolkit
 #
@@ -46,10 +46,11 @@ def convert():
         if char_cnt % 20 == 0:
             out_file.write('"\n"')
     
-    out_file.write('";')
+    out_file.write('"')
     out_file.flush()
     out_file.close()
     in_file.close()
+
 
 if __name__ == '__main__':
     convert()

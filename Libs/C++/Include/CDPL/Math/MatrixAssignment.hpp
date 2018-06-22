@@ -31,7 +31,6 @@
 
 #include <boost/swap.hpp>
 
-#include "CDPL/Math/Config.hpp"
 #include "CDPL/Math/Check.hpp"
 #include "CDPL/Math/CommonType.hpp"
 #include "CDPL/Base/Exceptions.hpp"
@@ -46,7 +45,6 @@ namespace CDPL
 		template <typename E> class MatrixExpression;
 
 		template <template <typename T1, typename T2> class F, typename M, typename E>
-		CDPL_MATH_INLINE 
 		void matrixAssignMatrix(M& m, const MatrixExpression<E>& e)
 		{
 			typedef typename CommonType<typename M::SizeType, typename E::SizeType>::Type SizeType;
@@ -62,7 +60,6 @@ namespace CDPL
 		}
 
 		template <template <typename T1, typename T2> class F, typename M, typename T>
-		CDPL_MATH_INLINE 
 		void matrixAssignScalar(M& m, const T& t)
 		{
 			typedef F<typename M::ValueType, T> FunctorType;
@@ -77,7 +74,6 @@ namespace CDPL
 		}
 
 		template <typename M, typename E>
-		CDPL_MATH_INLINE 
 		void matrixSwap(M& m, MatrixExpression<E>& e)
 		{
 			typedef typename CommonType<typename M::SizeType, typename E::SizeType>::Type SizeType;

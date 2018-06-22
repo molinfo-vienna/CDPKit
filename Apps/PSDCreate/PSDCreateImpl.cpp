@@ -130,7 +130,7 @@ struct PSDCreateImpl::DBCreationWorker
 
 PSDCreateImpl::PSDCreateImpl(): 
 	dropDuplicates(false), multiThreading(false), numThreads(boost::thread::hardware_concurrency()), 
-	creationMode(CDPL::Pharm::ScreeningDBCreator::CREATE), inputHandler(0), addSourceFileProp(false)
+	creationMode(CDPL::Pharm::ScreeningDBCreator::CREATE), inputHandler(), addSourceFileProp(false)
 {
 	addOption("input,i", "Input file(s).", 
 			  value<StringList>(&inputFiles)->multitoken()->required());

@@ -32,7 +32,6 @@
 #include <boost/utility.hpp>
 #include <boost/type_traits/is_arithmetic.hpp>
 
-#include "CDPL/Math/Config.hpp"
 #include "CDPL/Math/Check.hpp"
 #include "CDPL/Math/Expression.hpp"
 #include "CDPL/Math/CommonType.hpp"
@@ -65,17 +64,17 @@ namespace CDPL
 			typedef typename E::SizeType SizeType;
 			typedef typename E::DifferenceType DifferenceType;
 
-			CDPL_MATH_INLINE VectorUnary(const ExpressionType& e): expr(e) {}
+			VectorUnary(const ExpressionType& e): expr(e) {}
 
-			CDPL_MATH_INLINE SizeType getSize() const {
+			SizeType getSize() const {
 				return expr.getSize();
 			}
 
-			CDPL_MATH_INLINE ConstReference operator()(SizeType i) const {
+			ConstReference operator()(SizeType i) const {
 				return FunctorType::apply(expr(i));
 			}
 
-			CDPL_MATH_INLINE ConstReference operator[](SizeType i) const {
+			ConstReference operator[](SizeType i) const {
 				return FunctorType::apply(expr[i]);
 			}
 
@@ -111,17 +110,17 @@ namespace CDPL
 			typedef typename CommonType<typename E1::SizeType, typename E2::SizeType>::Type SizeType;
 			typedef typename CommonType<typename E1::DifferenceType, typename E2::DifferenceType>::Type DifferenceType;
 
-			CDPL_MATH_INLINE VectorBinary1(const Expression1Type& e1, const Expression2Type& e2): expr1(e1), expr2(e2) {}
+			VectorBinary1(const Expression1Type& e1, const Expression2Type& e2): expr1(e1), expr2(e2) {}
 
-			CDPL_MATH_INLINE SizeType getSize() const {
+			SizeType getSize() const {
 				return CDPL_MATH_CHECK_SIZE_EQUALITY(SizeType(expr1.getSize()), SizeType(expr2.getSize()), Base::SizeError);
 			}
 
-			CDPL_MATH_INLINE ConstReference operator()(SizeType i) const {
+			ConstReference operator()(SizeType i) const {
 				return FunctorType::apply(expr1(i), expr2(i));
 			}
 
-			CDPL_MATH_INLINE ConstReference operator[](SizeType i) const {
+			ConstReference operator[](SizeType i) const {
 				return FunctorType::apply(expr1[i], expr2[i]);
 			}
 
@@ -158,17 +157,17 @@ namespace CDPL
 			typedef typename CommonType<typename E1::SizeType, typename E2::SizeType>::Type SizeType;
 			typedef typename CommonType<typename E1::DifferenceType, typename E2::DifferenceType>::Type DifferenceType;
 
-			CDPL_MATH_INLINE VectorBinary2(const Expression1Type& e1, const Expression2Type& e2): expr1(e1), expr2(e2) {}
+			VectorBinary2(const Expression1Type& e1, const Expression2Type& e2): expr1(e1), expr2(e2) {}
 
-			CDPL_MATH_INLINE SizeType getSize() const {
+			SizeType getSize() const {
 				return CDPL_MATH_CHECK_SIZE_EQUALITY(SizeType(expr1.getSize()), SizeType(expr2.getSize()), Base::SizeError);
 			}
 
-			CDPL_MATH_INLINE ConstReference operator()(SizeType i) const {
+			ConstReference operator()(SizeType i) const {
 				return FunctorType::apply(expr1, expr2, i);
 			}
 
-			CDPL_MATH_INLINE ConstReference operator[](SizeType i) const {
+			ConstReference operator[](SizeType i) const {
 				return FunctorType::apply(expr1, expr2, i);
 			}
 
@@ -205,17 +204,17 @@ namespace CDPL
 			typedef typename E2::SizeType SizeType;
 			typedef typename E2::DifferenceType DifferenceType;
 
-			CDPL_MATH_INLINE Scalar1VectorBinary(const Expression1Type& e1, const Expression2Type& e2): expr1(e1), expr2(e2) {}
+			Scalar1VectorBinary(const Expression1Type& e1, const Expression2Type& e2): expr1(e1), expr2(e2) {}
 
-			CDPL_MATH_INLINE SizeType getSize() const {
+			SizeType getSize() const {
 				return expr2.getSize();
 			}
 
-			CDPL_MATH_INLINE ConstReference operator()(SizeType i) const {
+			ConstReference operator()(SizeType i) const {
 				return FunctorType::apply(expr1, expr2(i));
 			}
 
-			CDPL_MATH_INLINE ConstReference operator[](SizeType i) const {
+			ConstReference operator[](SizeType i) const {
 				return FunctorType::apply(expr1, expr2[i]);
 			}
 
@@ -252,17 +251,17 @@ namespace CDPL
 			typedef typename E1::SizeType SizeType;
 			typedef typename E1::DifferenceType DifferenceType;
 
-			CDPL_MATH_INLINE Scalar2VectorBinary(const Expression1Type& e1, const Expression2Type& e2): expr1(e1), expr2(e2) {}
+			Scalar2VectorBinary(const Expression1Type& e1, const Expression2Type& e2): expr1(e1), expr2(e2) {}
 
-			CDPL_MATH_INLINE SizeType getSize() const {
+			SizeType getSize() const {
 				return expr1.getSize();
 			}
 
-			CDPL_MATH_INLINE ConstReference operator()(SizeType i) const {
+			ConstReference operator()(SizeType i) const {
 				return FunctorType::apply(expr1(i), expr2);
 			}
 
-			CDPL_MATH_INLINE ConstReference operator[](SizeType i) const {
+			ConstReference operator[](SizeType i) const {
 				return FunctorType::apply(expr1[i], expr2);
 			}
 
@@ -299,17 +298,17 @@ namespace CDPL
 			typedef typename E2::SizeType SizeType;
 			typedef typename E2::DifferenceType DifferenceType;
 
-			CDPL_MATH_INLINE QuaternionVectorBinary(const Expression1Type& e1, const Expression2Type& e2): expr1(e1), expr2(e2) {}
+			QuaternionVectorBinary(const Expression1Type& e1, const Expression2Type& e2): expr1(e1), expr2(e2) {}
 
-			CDPL_MATH_INLINE SizeType getSize() const {
+			SizeType getSize() const {
 				return expr2.getSize();
 			}
 
-			CDPL_MATH_INLINE ConstReference operator()(SizeType i) const {
+			ConstReference operator()(SizeType i) const {
 				return FunctorType::apply(expr1, expr2, i);
 			}
 
-			CDPL_MATH_INLINE ConstReference operator[](SizeType i) const {
+			ConstReference operator[](SizeType i) const {
 				return FunctorType::apply(expr1, expr2, i);
 			}
 
@@ -327,7 +326,6 @@ namespace CDPL
 		};
 
 		template <typename E>
-		CDPL_MATH_INLINE
 		typename VectorUnaryTraits<E, ScalarNegation<typename E::ValueType> >::ResultType 
 		operator-(const VectorExpression<E>& e)
 		{
@@ -337,7 +335,6 @@ namespace CDPL
 		}
 	
 		template <typename E>
-		CDPL_MATH_INLINE
 		const E& 
 		operator+(const VectorExpression<E>& e)
 		{
@@ -345,7 +342,6 @@ namespace CDPL
 		}
 
 		template <typename E1, typename E2>
-		CDPL_MATH_INLINE
 		typename VectorBinary1Traits<E1, E2, ScalarAddition<typename E1::ValueType, typename E2::ValueType> >::ResultType 
 		operator+(const VectorExpression<E1>& e1, const VectorExpression<E2>& e2)
 		{
@@ -356,7 +352,6 @@ namespace CDPL
 		}
 	
 		template <typename E1, typename E2>
-		CDPL_MATH_INLINE
 		typename VectorBinary1Traits<E1, E2, ScalarSubtraction<typename E1::ValueType, typename E2::ValueType> >::ResultType 
 		operator-(const VectorExpression<E1>& e1, const VectorExpression<E2>& e2)
 		{
@@ -367,7 +362,6 @@ namespace CDPL
 		}
 
 		template <typename E, typename T>
-		CDPL_MATH_INLINE
 		typename boost::enable_if<IsScalar<T>, typename Scalar2VectorBinaryTraits<E, T, ScalarMultiplication<typename E::ValueType, T> >::ResultType>::type
 		operator*(const VectorExpression<E>& e, const T& t)
 		{
@@ -378,7 +372,6 @@ namespace CDPL
 		}
 
 		template <typename T, typename E>
-		CDPL_MATH_INLINE
 		typename boost::enable_if<IsScalar<T>, typename Scalar1VectorBinaryTraits<T, E, ScalarMultiplication<T, typename E::ValueType> >::ResultType>::type
 		operator*(const T& t, const VectorExpression<E>& e)
 		{
@@ -389,7 +382,6 @@ namespace CDPL
 		}
 
 		template <typename E, typename T>
-		CDPL_MATH_INLINE
 		typename boost::enable_if<IsScalar<T>, typename Scalar2VectorBinaryTraits<E, T, ScalarDivision<typename E::ValueType, T> >::ResultType>::type
 		operator/(const VectorExpression<E>& e, const T& t)
 		{
@@ -400,7 +392,6 @@ namespace CDPL
 		}
 
 		template <typename E1, typename E2>
-		CDPL_MATH_INLINE
 		typename VectorEquality<E1, E2>::ResultType
 		operator==(const VectorExpression<E1>& e1, const VectorExpression<E2>& e2)
 		{
@@ -408,7 +399,6 @@ namespace CDPL
 		}
 
 		template <typename E1, typename E2>
-		CDPL_MATH_INLINE
 		typename VectorEquality<E1, E2>::ResultType
 		operator!=(const VectorExpression<E1>& e1, const VectorExpression<E2>& e2)
 		{
@@ -416,7 +406,6 @@ namespace CDPL
 		}
 
 		template <typename E1, typename E2, typename T>
-		CDPL_MATH_INLINE
 		typename boost::enable_if<boost::is_arithmetic<T>, typename VectorToleranceEquality<E1, E2, T>::ResultType>::type
 		equals(const VectorExpression<E1>& e1, const VectorExpression<E2>& e2, const T& eps)
 		{
@@ -424,7 +413,6 @@ namespace CDPL
 		}
 
 		template <typename E>
-		CDPL_MATH_INLINE
 		typename VectorUnaryTraits<E, ScalarConjugation<typename E::ValueType> >::ResultType 
 		conj(const VectorExpression<E>& e)
 		{
@@ -434,7 +422,6 @@ namespace CDPL
 		}
 
 		template <typename E>
-		CDPL_MATH_INLINE
 		typename VectorUnaryTraits<E, ScalarConjugation<typename E::ValueType> >::ResultType 
 		herm(const VectorExpression<E>& e)
 		{
@@ -444,7 +431,6 @@ namespace CDPL
 		}
 
 		template <typename E>
-		CDPL_MATH_INLINE
 		typename VectorUnaryTraits<E, ScalarReal<typename E::ValueType> >::ResultType 
 		real(const VectorExpression<E>& e)
 		{
@@ -454,7 +440,6 @@ namespace CDPL
 		}
 
 		template <typename E>
-		CDPL_MATH_INLINE
 		typename VectorUnaryTraits<E, ScalarImaginary<typename E::ValueType> >::ResultType 
 		imag(const VectorExpression<E>& e)
 		{
@@ -464,7 +449,6 @@ namespace CDPL
 		}
 
 		template <typename E1, typename E2>
-		CDPL_MATH_INLINE
 		typename VectorBinary1Traits<E1, E2, ScalarDivision<typename E1::ValueType, typename E2::ValueType> >::ResultType 
 		elemDiv(const VectorExpression<E1>& e1, const VectorExpression<E2>& e2)
 		{
@@ -475,7 +459,6 @@ namespace CDPL
 		}
 
 		template <typename E1, typename E2>
-		CDPL_MATH_INLINE
 		typename VectorBinary1Traits<E1, E2, ScalarMultiplication<typename E1::ValueType, typename E2::ValueType> >::ResultType 
 		elemProd(const VectorExpression<E1>& e1, const VectorExpression<E2>& e2)
 		{
@@ -486,7 +469,6 @@ namespace CDPL
 		}
 
 		template <typename E1, typename E2>
-		CDPL_MATH_INLINE
 		typename VectorBinary2Traits<E1, E2, VectorCrossProduct<E1, E2> >::ResultType 
 		crossProd(const VectorExpression<E1>& e1, const VectorExpression<E2>& e2)
 		{
@@ -497,7 +479,6 @@ namespace CDPL
 		}
 
 		template <typename E1, typename E2>
-		CDPL_MATH_INLINE
 		typename VectorInnerProduct<E1, E2>::ResultType
 		innerProd(const VectorExpression<E1>& e1, const VectorExpression<E2>& e2)
 		{
@@ -505,7 +486,6 @@ namespace CDPL
 		}
 
 		template <typename E1, typename E2, typename T>
-		CDPL_MATH_INLINE
 		typename VectorAngleCosine<E1, E2, T>::ResultType
 		angleCos(const VectorExpression<E1>& e1, const VectorExpression<E2>& e2, const T& sd, bool clamp = true)
 		{
@@ -513,7 +493,6 @@ namespace CDPL
 		}
 	
 		template <typename E>
-		CDPL_MATH_INLINE
 		typename VectorElementSum<E>::ResultType
 		sum(const VectorExpression<E>& e)
 		{
@@ -521,7 +500,6 @@ namespace CDPL
 		}
 
 		template <typename E>
-		CDPL_MATH_INLINE
 		typename VectorNorm1<E>::ResultType
 		norm1(const VectorExpression<E>& e)
 		{
@@ -529,7 +507,6 @@ namespace CDPL
 		}
 	
 		template <typename E>
-		CDPL_MATH_INLINE
 		typename VectorNorm2<E>::ResultType
 		norm2(const VectorExpression<E>& e)
 		{
@@ -537,7 +514,6 @@ namespace CDPL
 		}
 
 		template <typename E>
-		CDPL_MATH_INLINE
 		typename VectorNormInfinity<E>::ResultType
 		normInf(const VectorExpression<E>& e)
 		{
@@ -545,7 +521,6 @@ namespace CDPL
 		}
 
 		template <typename E>
-		CDPL_MATH_INLINE
 		typename VectorNormInfinityIndex<E>::ResultType
 		normInfIndex(const VectorExpression<E>& e)
 		{
@@ -553,7 +528,6 @@ namespace CDPL
 		}
 
 		template <typename E>
-		CDPL_MATH_INLINE
 		typename VectorNorm2<E>::ResultType
 		length(const VectorExpression<E>& e)
 		{
@@ -561,7 +535,6 @@ namespace CDPL
 		}
 
 		template <typename E>
-		CDPL_MATH_INLINE
 		const E& 
 		trans(const VectorExpression<E>& e)
 		{
@@ -569,7 +542,6 @@ namespace CDPL
 		}
 
 		template <typename E>
-		CDPL_MATH_INLINE
 		E& 
 		trans(VectorExpression<E>& e)
 		{
@@ -577,7 +549,6 @@ namespace CDPL
 		}
 
 		template <typename E1, typename E2>
-		CDPL_MATH_INLINE
 		typename QuaternionVectorBinaryTraits<E1, E2, QuaternionVectorRotation<E1, E2> >::ResultType 
 		rotate(const QuaternionExpression<E1>& e1, const VectorExpression<E2>& e2)
 		{

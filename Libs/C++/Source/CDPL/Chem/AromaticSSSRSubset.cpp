@@ -76,7 +76,6 @@ void Chem::AromaticSSSRSubset::init(const MolecularGraph& molgraph)
 void Chem::AromaticSSSRSubset::findAromaticRings()
 {
 	const FragmentList::BaseType& sssr = *getSSSR(*molGraph);
-
 	FragmentList::BaseType::ConstElementIterator sssr_end = sssr.getElementsEnd();
 
 	for (FragmentList::BaseType::ConstElementIterator it = sssr.getElementsBegin(); it != sssr_end; ++it) {
