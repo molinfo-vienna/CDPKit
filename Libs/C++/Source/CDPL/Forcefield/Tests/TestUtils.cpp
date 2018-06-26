@@ -43,9 +43,7 @@ void TestUtils::setupMMFF94TestSuiteMolecule(CDPL::Chem::Molecule& mol)
     for (Chem::Molecule::AtomIterator it = mol.getAtomsBegin(), end = mol.getAtomsEnd(); it != end; ++it) {
 		Chem::Atom& atom = *it;
 
-		if (isMetal(atom))
+		if (isMetal(atom) && !isNonMetal(atom))
 			setFormalCharge(atom, getMOL2Charge(atom));
     }
-
-	Forcefield::perceiveMMFF94AromaticRings(mol, false);
 }

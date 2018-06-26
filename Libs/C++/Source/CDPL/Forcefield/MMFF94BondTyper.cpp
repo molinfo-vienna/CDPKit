@@ -86,13 +86,13 @@ void Forcefield::MMFF94BondTyper::perceiveTypes(const Chem::MolecularGraph& molg
 		const Bond& bond = molgraph.getBond(i);
 
 		if (getOrder(bond) == 1) {
-			const MMFF94AtomTypePropertyTable::Entry& atom1_props = atomTypePropTable->getEntry(atomTypeFunc(bond.getBegin()));
+			const TypePropertyEntry& atom1_props = atomTypePropTable->getEntry(atomTypeFunc(bond.getBegin()));
 
 			if (!atom1_props)
 				throw Base::ItemNotFound("MMFF94BondTyper: could not find MMFF94 atom type properties for atom #" + 
 										 boost::lexical_cast<std::string>(molgraph.getAtomIndex(bond.getBegin())));
 
-			const MMFF94AtomTypePropertyTable::Entry& atom2_props = atomTypePropTable->getEntry(atomTypeFunc(bond.getEnd()));
+			const TypePropertyEntry& atom2_props = atomTypePropTable->getEntry(atomTypeFunc(bond.getEnd()));
 
 			if (!atom2_props)
 				throw Base::ItemNotFound("MMFF94BondTyper: could not find MMFF94 atom type properties for atom #" + 

@@ -59,6 +59,15 @@ namespace CDPL
 
 		CDPL_FORCEFIELD_API bool hasMMFF94Type(const Chem::Atom& atom);
 
+
+		CDPL_FORCEFIELD_API double getMMFF94Charge(const Chem::Atom& atom);
+
+		CDPL_FORCEFIELD_API void setMMFF94Charge(Chem::Atom& atom, double charge);
+
+		CDPL_FORCEFIELD_API void clearMMFF94Charge(Chem::Atom& atom);
+
+		CDPL_FORCEFIELD_API bool hasMMFF94Charge(const Chem::Atom& atom);
+
 		/**
 		 * @}
 		 */

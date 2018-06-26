@@ -194,7 +194,7 @@ void Forcefield::MMFF94AtomTyper::assignAromaticAtomTypes(const Chem::Fragment* 
 
 		for (std::size_t j = 0; j < 2 && !found_entry; j++) { 
 			for (std::size_t k = 0; k < num_arom_atom_defs && !found_entry; k++) {
-				const MMFF94AromaticAtomTypeDefinitionTable::Entry& entry = aromTypeDefTable->getEntry(k);
+				const AromTypeDefEntry& entry = aromTypeDefTable->getEntry(k);
 
 				if (matchesAromTypeDefEntry(j != 0, sym_type, atomic_no, r_size, het_atom_dist, im_cation, n5_anion, entry)) {
 					symTypes[atom_idx] = entry.getAromSymbolicAtomType();
@@ -358,7 +358,7 @@ std::size_t Forcefield::MMFF94AtomTyper::calcHeteroAtomDistance(std::size_t r_si
 		
 bool Forcefield::MMFF94AtomTyper::matchesAromTypeDefEntry(bool wc_match, const std::string& sym_type, unsigned int atomic_no, std::size_t r_size, 
 														  std::size_t het_dist, bool im_cat, bool n5_anion,
-														  const MMFF94AromaticAtomTypeDefinitionTable::Entry& entry) const
+														  const AromTypeDefEntry& entry) const
 {
 	if (atomic_no != entry.getAtomicNumber())
 		return false;

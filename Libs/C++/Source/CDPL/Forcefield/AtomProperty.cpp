@@ -40,6 +40,7 @@ namespace CDPL
 		{
 
 			CDPL_DEFINE_LOOKUP_KEY(MMFF94_TYPE);
+			CDPL_DEFINE_LOOKUP_KEY(MMFF94_CHARGE);
 		}
 
 		void initAtomProperties() {}

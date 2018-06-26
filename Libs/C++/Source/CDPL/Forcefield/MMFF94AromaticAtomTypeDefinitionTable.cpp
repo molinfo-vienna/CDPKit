@@ -130,19 +130,50 @@ const Forcefield::MMFF94AromaticAtomTypeDefinitionTable::Entry& Forcefield::MMFF
 	return entries[idx];
 }
 
-Forcefield::MMFF94AromaticAtomTypeDefinitionTable::ConstEntryIterator Forcefield::MMFF94AromaticAtomTypeDefinitionTable::getEntriesBegin() const
+Forcefield::MMFF94AromaticAtomTypeDefinitionTable::ConstEntryIterator 
+Forcefield::MMFF94AromaticAtomTypeDefinitionTable::getEntriesBegin() const
 {
     return entries.begin();
 }
 
-Forcefield::MMFF94AromaticAtomTypeDefinitionTable::ConstEntryIterator Forcefield::MMFF94AromaticAtomTypeDefinitionTable::getEntriesEnd() const
+Forcefield::MMFF94AromaticAtomTypeDefinitionTable::ConstEntryIterator 
+Forcefield::MMFF94AromaticAtomTypeDefinitionTable::getEntriesEnd() const
 {
     return entries.end();
+}
+
+Forcefield::MMFF94AromaticAtomTypeDefinitionTable::EntryIterator 
+Forcefield::MMFF94AromaticAtomTypeDefinitionTable::getEntriesBegin()
+{
+	return entries.begin();
+}
+
+Forcefield::MMFF94AromaticAtomTypeDefinitionTable::EntryIterator 
+Forcefield::MMFF94AromaticAtomTypeDefinitionTable::getEntriesEnd()
+{
+	return entries.end();
 }
 
 void Forcefield::MMFF94AromaticAtomTypeDefinitionTable::clear()
 {
     entries.clear();
+}
+
+void Forcefield::MMFF94AromaticAtomTypeDefinitionTable::removeEntry(std::size_t idx)
+{
+	if (idx >= entries.size())
+		throw Base::IndexError("MMFF94AromaticAtomTypeDefinitionTable: entry index out of bounds");
+
+	entries.erase(entries.begin() + idx);
+}
+
+Forcefield::MMFF94AromaticAtomTypeDefinitionTable::EntryIterator 
+Forcefield::MMFF94AromaticAtomTypeDefinitionTable::removeEntry(const EntryIterator& it)
+{
+	if (it >= entries.end())
+		throw Base::IndexError("MMFF94AromaticAtomTypeDefinitionTable: iterator out of bounds");
+
+	return entries.erase(it);
 }
 
 void Forcefield::MMFF94AromaticAtomTypeDefinitionTable::load(std::istream& is)
@@ -156,7 +187,7 @@ void Forcefield::MMFF94AromaticAtomTypeDefinitionTable::load(std::istream& is)
 	unsigned int im_flag;
 	unsigned int n5_flag;
 
-	while (readMMFF94DataLine(is, line, "MMFF94AromaticAtomTypeDefinitionTable: error while reading aromatic atom type definition data line")) {
+	while (readMMFF94DataLine(is, line, "MMFF94AromaticAtomTypeDefinitionTable: error while reading aromatic atom type definition entry")) {
 		std::istringstream line_iss(line);
 
 		if (!(line_iss >> old_type))

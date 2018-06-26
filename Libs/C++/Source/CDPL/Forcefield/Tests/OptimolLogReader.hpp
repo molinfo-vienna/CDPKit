@@ -43,11 +43,17 @@ namespace TestUtils
     public:
 		typedef std::vector<std::string> SymbolicAtomTypeArray;
 		typedef std::vector<unsigned int> NumericAtomTypeArray;
+		typedef std::vector<double> AtomChargeArray;
 
 		OptimolLogReader(const std::string& log_file);
 
 		bool getSymbolicAtomTypes(const std::string& mol_name, SymbolicAtomTypeArray& sym_types);
+
 		bool getNumericAtomTypes(const std::string& mol_name, NumericAtomTypeArray& num_types);
+
+		bool getPartialAtomCharges(const std::string& mol_name, AtomChargeArray& charges);
+
+		bool getFormalAtomCharges(const std::string& mol_name, AtomChargeArray& charges);
 
     private:
 		void buildIndex();

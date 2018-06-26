@@ -58,6 +58,7 @@ namespace CDPL
 		{
 
 			extern CDPL_FORCEFIELD_API const Base::LookupKey MMFF94_TYPE;
+			extern CDPL_FORCEFIELD_API const Base::LookupKey MMFF94_CHARGE;
 		}
 
 		/**

@@ -67,10 +67,12 @@ namespace
 }
 
 
-Forcefield::MMFF94SymbolicAtomTypePatternTable::SharedPointer Forcefield::MMFF94SymbolicAtomTypePatternTable::defaultTable = builtinTable;
+Forcefield::MMFF94SymbolicAtomTypePatternTable::SharedPointer 
+Forcefield::MMFF94SymbolicAtomTypePatternTable::defaultTable = builtinTable;
 
 
-Forcefield::MMFF94SymbolicAtomTypePatternTable::Entry::Entry(const Chem::MolecularGraph::SharedPointer& ptn, const std::string& sym_type, bool fallback):
+Forcefield::MMFF94SymbolicAtomTypePatternTable::Entry::Entry(const Chem::MolecularGraph::SharedPointer& ptn, 
+															 const std::string& sym_type, bool fallback):
 	pattern(ptn), symType(sym_type), fallback(fallback)
 {}
 
@@ -98,12 +100,14 @@ std::size_t Forcefield::MMFF94SymbolicAtomTypePatternTable::getNumEntries() cons
     return entries.size();
 }
 
-void Forcefield::MMFF94SymbolicAtomTypePatternTable::addEntry(const Chem::MolecularGraph::SharedPointer& ptn, const std::string& sym_type, bool fallback)
+void Forcefield::MMFF94SymbolicAtomTypePatternTable::addEntry(const Chem::MolecularGraph::SharedPointer& ptn, 
+															  const std::string& sym_type, bool fallback)
 {
     entries.push_back(Entry(ptn, sym_type, fallback));
 }
 
-const Forcefield::MMFF94SymbolicAtomTypePatternTable::Entry& Forcefield::MMFF94SymbolicAtomTypePatternTable::getEntry(std::size_t idx) const
+const Forcefield::MMFF94SymbolicAtomTypePatternTable::Entry& 
+Forcefield::MMFF94SymbolicAtomTypePatternTable::getEntry(std::size_t idx) const
 {
 	if (idx >= entries.size())
 		throw Base::IndexError("MMFF94SymbolicAtomTypePatternTable: entry index out of bounds");
@@ -111,14 +115,45 @@ const Forcefield::MMFF94SymbolicAtomTypePatternTable::Entry& Forcefield::MMFF94S
 	return entries[idx];
 }
 
-Forcefield::MMFF94SymbolicAtomTypePatternTable::ConstEntryIterator Forcefield::MMFF94SymbolicAtomTypePatternTable::getEntriesBegin() const
+Forcefield::MMFF94SymbolicAtomTypePatternTable::ConstEntryIterator 
+Forcefield::MMFF94SymbolicAtomTypePatternTable::getEntriesBegin() const
 {
     return entries.begin();
 }
 
-Forcefield::MMFF94SymbolicAtomTypePatternTable::ConstEntryIterator Forcefield::MMFF94SymbolicAtomTypePatternTable::getEntriesEnd() const
+Forcefield::MMFF94SymbolicAtomTypePatternTable::ConstEntryIterator 
+Forcefield::MMFF94SymbolicAtomTypePatternTable::getEntriesEnd() const
 {
     return entries.end();
+}
+
+Forcefield::MMFF94SymbolicAtomTypePatternTable::EntryIterator 
+Forcefield::MMFF94SymbolicAtomTypePatternTable::getEntriesBegin()
+{
+	return entries.begin();
+}
+
+Forcefield::MMFF94SymbolicAtomTypePatternTable::EntryIterator 
+Forcefield::MMFF94SymbolicAtomTypePatternTable::getEntriesEnd()
+{
+	return entries.end();
+}
+
+void Forcefield::MMFF94SymbolicAtomTypePatternTable::removeEntry(std::size_t idx)
+{
+	if (idx >= entries.size())
+		throw Base::IndexError("MMFF94SymbolicAtomTypePatternTable: entry index out of bounds");
+
+	entries.erase(entries.begin() + idx);
+}
+
+Forcefield::MMFF94SymbolicAtomTypePatternTable::EntryIterator 
+Forcefield::MMFF94SymbolicAtomTypePatternTable::removeEntry(const EntryIterator& it)
+{
+	if (it >= entries.end())
+		throw Base::IndexError("MMFF94SymbolicAtomTypePatternTable: iterator out of bounds");
+
+	return entries.erase(it);
 }
 
 void Forcefield::MMFF94SymbolicAtomTypePatternTable::clear()
@@ -134,7 +169,7 @@ void Forcefield::MMFF94SymbolicAtomTypePatternTable::load(std::istream& is)
 	std::string pattern;
 	std::string sym_type;
 
-	while (readMMFF94DataLine(is, line, "MMFF94SymbolicAtomTypePatternTable: error while reading symbolic atom type pattern data line")) {
+	while (readMMFF94DataLine(is, line, "MMFF94SymbolicAtomTypePatternTable: error while reading symbolic atom type pattern entry")) {
 		std::istringstream line_iss(line);
 
 		if (!(line_iss >> pattern))

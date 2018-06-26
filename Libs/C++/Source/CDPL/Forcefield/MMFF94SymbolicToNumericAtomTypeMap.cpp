@@ -64,7 +64,8 @@ namespace
 }
 
 
-Forcefield::MMFF94SymbolicToNumericAtomTypeMap::SharedPointer Forcefield::MMFF94SymbolicToNumericAtomTypeMap::defaultMap = builtinMap;
+Forcefield::MMFF94SymbolicToNumericAtomTypeMap::SharedPointer 
+Forcefield::MMFF94SymbolicToNumericAtomTypeMap::defaultMap = builtinMap;
 
 
 Forcefield::MMFF94SymbolicToNumericAtomTypeMap::MMFF94SymbolicToNumericAtomTypeMap()
@@ -90,23 +91,48 @@ void Forcefield::MMFF94SymbolicToNumericAtomTypeMap::clear()
     entries.clear();
 }
 
-Forcefield::MMFF94SymbolicToNumericAtomTypeMap::ConstEntryIterator Forcefield::MMFF94SymbolicToNumericAtomTypeMap::getEntriesBegin() const
+Forcefield::MMFF94SymbolicToNumericAtomTypeMap::ConstEntryIterator 
+Forcefield::MMFF94SymbolicToNumericAtomTypeMap::getEntriesBegin() const
 {
     return entries.begin();
 }
 
-Forcefield::MMFF94SymbolicToNumericAtomTypeMap::ConstEntryIterator Forcefield::MMFF94SymbolicToNumericAtomTypeMap::getEntriesEnd() const
+Forcefield::MMFF94SymbolicToNumericAtomTypeMap::ConstEntryIterator 
+Forcefield::MMFF94SymbolicToNumericAtomTypeMap::getEntriesEnd() const
 {
     return entries.end();
 }
-			
+
+Forcefield::MMFF94SymbolicToNumericAtomTypeMap::EntryIterator 
+Forcefield::MMFF94SymbolicToNumericAtomTypeMap::getEntriesBegin()
+{
+	return entries.begin();
+}
+
+Forcefield::MMFF94SymbolicToNumericAtomTypeMap::EntryIterator 
+Forcefield::MMFF94SymbolicToNumericAtomTypeMap::getEntriesEnd()
+{
+	return entries.end();
+}
+
+bool Forcefield::MMFF94SymbolicToNumericAtomTypeMap::removeEntry(const std::string& sym_type)
+{
+	return entries.erase(sym_type);
+}
+
+Forcefield::MMFF94SymbolicToNumericAtomTypeMap::EntryIterator 
+Forcefield::MMFF94SymbolicToNumericAtomTypeMap::removeEntry(const EntryIterator& it)
+{
+	return entries.erase(it);
+}
+
 void Forcefield::MMFF94SymbolicToNumericAtomTypeMap::load(std::istream& is)
 {
     std::string line;
     std::string sym_type;
     unsigned int num_type;
 
-    while (readMMFF94DataLine(is, line, "MMFF94SymbolicToNumericAtomTypeMap: error while reading numeric atom type definition data line")) {
+    while (readMMFF94DataLine(is, line, "MMFF94SymbolicToNumericAtomTypeMap: error while reading numeric atom type definition entry")) {
 		std::istringstream line_iss(line);
 
 		if (!(line_iss >> sym_type))

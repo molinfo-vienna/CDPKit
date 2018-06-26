@@ -60,6 +60,7 @@ namespace CDPL
 	    typedef boost::shared_ptr<MMFF94SymbolicToNumericAtomTypeMap> SharedPointer;
 
 	    typedef DataStorage::const_iterator ConstEntryIterator;
+	    typedef DataStorage::iterator EntryIterator;
 		typedef DataStorage::value_type Entry;
 
 	    MMFF94SymbolicToNumericAtomTypeMap();
@@ -70,9 +71,17 @@ namespace CDPL
 
 	    void clear();
 
+		bool removeEntry(const std::string& sym_type);
+
+		EntryIterator removeEntry(const EntryIterator& it);
+
 	    ConstEntryIterator getEntriesBegin() const;
 
 	    ConstEntryIterator getEntriesEnd() const;
+
+		EntryIterator getEntriesBegin();
+
+		EntryIterator getEntriesEnd();
 			
 	    void load(std::istream& is);
 

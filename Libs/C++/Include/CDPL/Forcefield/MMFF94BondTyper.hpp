@@ -69,21 +69,23 @@ namespace CDPL
 			void setAtomTypeFunction(const MMFF94AtomTypeFunction& func);
 	
 			/**
-			 * \brief Assigns MMFF94 bond type indicies for all bonds of a molecular graph.
+			 * \brief Determines MMFF94 bond type indicies for the bonds of a molecular graph.
 			 *
-			 * Specifically, an nonstandard bond type index of "1" is assigned
+			 * Specifically, an nonstandard bond type index of \e "1" is assigned
 			 * whenever a single bond (formal bond order 1) is found a) between
-			 * non-aromatic atoms i and j of types I and J for which "sbmb" entries in
-			 * of "1" appear in the MMFFPROP.PAR file or b) between aromatic atoms
+			 * non-aromatic atoms \e i and \e j of types \e I and \e J for which \e "sbmb" entries in
+			 * of \e "1" appear in the "MMFFPROP.PAR" file or b) between aromatic atoms
 			 * belonging to different aromatic rings (as in the case of the central
 			 * C-C bond in biphenyl).
 			 * 
 			 * \param molgraph The molecular graph for which to assign bond type indices
-			 * \param types An array storing the determined bond type indices.
+			 * \param types The output array storing the determined bond type indices.
 			 */
 			void perceiveTypes(const Chem::MolecularGraph& molgraph, Util::UIArray& types);
 
 		  private:
+			typedef MMFF94AtomTypePropertyTable::Entry TypePropertyEntry;
+
 			MMFF94AtomTypePropertyTable::SharedPointer atomTypePropTable;
 			MMFF94AromaticRingSetFunction              aromRingSetFunc;
 			MMFF94AtomTypeFunction                     atomTypeFunc;

@@ -60,6 +60,7 @@ namespace CDPL
 	    typedef boost::shared_ptr<MMFF94HeavyToHydrogenAtomTypeMap> SharedPointer;
 
 	    typedef DataStorage::const_iterator ConstEntryIterator;
+	    typedef DataStorage::iterator EntryIterator;
 		typedef DataStorage::value_type Entry;
 
 	    MMFF94HeavyToHydrogenAtomTypeMap();
@@ -70,10 +71,18 @@ namespace CDPL
 
 	    void clear();
 
+		bool removeEntry(const std::string& parent_type);
+
+		EntryIterator removeEntry(const EntryIterator& it);
+
 	    ConstEntryIterator getEntriesBegin() const;
 
 	    ConstEntryIterator getEntriesEnd() const;
-			
+
+		EntryIterator getEntriesBegin();
+
+		EntryIterator getEntriesEnd();
+
 	    void load(std::istream& is);
 
 	    void loadDefaults();

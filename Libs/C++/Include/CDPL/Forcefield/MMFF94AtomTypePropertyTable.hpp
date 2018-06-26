@@ -36,6 +36,8 @@
 
 #include <boost/shared_ptr.hpp>
 #include <boost/unordered_map.hpp>
+#include <boost/function.hpp>
+#include <boost/iterator/transform_iterator.hpp>
 
 #include "CDPL/Forcefield/APIPrefix.hpp"
 
@@ -62,17 +64,17 @@ namespace CDPL
 
 		  public:
 			typedef boost::shared_ptr<MMFF94AtomTypePropertyTable> SharedPointer;
-
+	
 			class CDPL_FORCEFIELD_API Entry
 			{
 
 			  public:
 				Entry();
  
-				Entry(unsigned int num_type, unsigned int atomic_no, std::size_t num_nbrs, std::size_t valence, 
+				Entry(unsigned int atom_type, unsigned int atomic_no, std::size_t num_nbrs, std::size_t valence, 
 					  bool has_pi_lp, bool has_mb, bool is_arom, bool lin_bnd_ang, bool has_mb_or_sb);
 
-				unsigned int getNumericType() const;
+				unsigned int getAtomType() const;
 
 				unsigned int getAtomicNumber() const;
 
@@ -93,7 +95,7 @@ namespace CDPL
 				operator bool() const;
 
 			  private:
-				unsigned int numType;
+				unsigned int atomType;
 				unsigned int atomicNo;
 				std::size_t  numNeighbors;
 				std::size_t  valence;
@@ -104,15 +106,33 @@ namespace CDPL
 				bool         hasMultiOrSingleBonds;
 			};			
 
+			typedef boost::transform_iterator<boost::function1<const Entry&, const DataStorage::value_type&>, 
+											  DataStorage::const_iterator> ConstEntryIterator;
+
+			typedef boost::transform_iterator<boost::function1<Entry&, DataStorage::value_type&>, 
+											  DataStorage::iterator> EntryIterator;
+	
 			MMFF94AtomTypePropertyTable();
 
-			void addEntry(unsigned int num_type, unsigned int atomic_no, std::size_t num_nbrs, std::size_t valence, 
+			void addEntry(unsigned int atom_type, unsigned int atomic_no, std::size_t num_nbrs, std::size_t valence, 
 						  bool has_pi_lp, bool has_mb, bool is_arom, bool lin_bnd_ang, bool has_mb_or_sb);
 
-			const Entry& getEntry(unsigned int num_type) const;
+			const Entry& getEntry(unsigned int atom_type) const;
 
 			void clear();
-		
+
+			bool removeEntry(unsigned int atom_type);
+
+			EntryIterator removeEntry(const EntryIterator& it);
+
+			ConstEntryIterator getEntriesBegin() const;
+
+			ConstEntryIterator getEntriesEnd() const;
+	
+			EntryIterator getEntriesBegin();
+
+			EntryIterator getEntriesEnd();
+
 			void load(std::istream& is);
 
 			void loadDefaults();

@@ -34,13 +34,16 @@ SET(cdpl-forcefield_LIB_SRCS
 
     AtomPropertyFunctions.cpp
     BondPropertyFunctions.cpp
+
     MolecularGraphPropertyFunctions.cpp
     MolecularGraphMMFF94AtomTypesFunction.cpp
     MolecularGraphMMFF94BondTypeIndicesFunction.cpp 
     MolecularGraphMMFF94AromaticRingSetFunctions.cpp 
+    MolecularGraphMMFF94AtomChargesFunction.cpp
 
     MMFF94AtomTyper.cpp
     MMFF94BondTyper.cpp
+    MMFF94ChargeCalculator.cpp
     MMFF94AromaticSSSRSubset.cpp
 
     MMFF94ParameterData.cpp
@@ -49,6 +52,8 @@ SET(cdpl-forcefield_LIB_SRCS
     MMFF94SymbolicToNumericAtomTypeMap.cpp
     MMFF94AromaticAtomTypeDefinitionTable.cpp
     MMFF94AtomTypePropertyTable.cpp
+    MMFF94BondChargeIncrementTable.cpp
+    MMFF94PartialBondChargeIncrementTable.cpp
 
     Utilities.cpp
    )

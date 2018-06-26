@@ -89,6 +89,8 @@ namespace CDPL
 			const Util::SArray& getSymbolicTypes() const;
 
 		  private:
+			typedef MMFF94AromaticAtomTypeDefinitionTable::Entry AromTypeDefEntry;
+
 			void init(const Chem::MolecularGraph& molgraph, Util::UIArray& num_types);
 
 			void assignProvisionalSymbolicAtomTypes(bool strict);
@@ -106,7 +108,7 @@ namespace CDPL
 
 			bool matchesAromTypeDefEntry(bool wc_match, const std::string& sym_type, unsigned int atomic_no, 
 										 std::size_t r_size, std::size_t het_dist, bool im_cat, bool n5_anion,
-										 const MMFF94AromaticAtomTypeDefinitionTable::Entry& entry) const;
+										 const AromTypeDefEntry& entry) const;
 	
 			typedef std::vector<const Chem::Fragment*> RingList;
 

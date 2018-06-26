@@ -1,7 +1,7 @@
 /* -*- mode: c++; c-basic-offset: 4; tab-width: 4; indent-tabs-mode: t -*- */
 
 /* 
- * MMFF94AromaticAtomTypeDefinitionTable.hpp 
+ * MMFF94BondChargeIncrementTable.hpp 
  *
  * This file is part of the Chemical Data Processing Toolkit
  *
@@ -25,18 +25,19 @@
 
 /**
  * \file
- * \brief Definition of the class CDPL::Forcefield::MMFF94AromaticAtomTypeDefinitionTable.
+ * \brief Definition of the class CDPL::Forcefield::MMFF94BondChargeIncrementTable.
  */
 
-#ifndef CDPL_FORCEFIELD_MMFF94AROMATICATOMTYPEDEFINITIONTABLE_HPP
-#define CDPL_FORCEFIELD_MMFF94AROMATICATOMTYPEDEFINITIONTABLE_HPP
+#ifndef CDPL_FORCEFIELD_MMFF94BONDCHARGEINCREMENTTABLE_HPP
+#define CDPL_FORCEFIELD_MMFF94BONDCHARGEINCREMENTTABLE_HPP
 
 #include <cstddef>
-#include <vector>
-#include <string>
 #include <iosfwd>
 
 #include <boost/shared_ptr.hpp>
+#include <boost/unordered_map.hpp>
+#include <boost/function.hpp>
+#include <boost/iterator/transform_iterator.hpp>
 
 #include "CDPL/Forcefield/APIPrefix.hpp"
 
@@ -52,64 +53,58 @@ namespace CDPL
 		 * @{
 		 */
 
-		class CDPL_FORCEFIELD_API MMFF94AromaticAtomTypeDefinitionTable
+		class CDPL_FORCEFIELD_API MMFF94BondChargeIncrementTable
 		{
 
 		  public:
 			class Entry;
 
 		  private:
-			typedef std::vector<Entry> DataStorage;
+			typedef boost::unordered_map<std::size_t, Entry> DataStorage;
 
 		  public:
-			typedef boost::shared_ptr<MMFF94AromaticAtomTypeDefinitionTable> SharedPointer;
+			typedef boost::shared_ptr<MMFF94BondChargeIncrementTable> SharedPointer;
 
-			typedef DataStorage::const_iterator ConstEntryIterator;
-			typedef DataStorage::iterator EntryIterator;
-	
 			class CDPL_FORCEFIELD_API Entry
 			{
 
 			  public:
-				Entry(const std::string& old_type, const std::string& aro_type, unsigned int atomic_no, 
-					  std::size_t ring_size, std::size_t het_atom_dist, bool im_cation, bool n5_anion);
+				Entry();
+ 
+				Entry(unsigned int bond_type_idx, unsigned int atom_type1, unsigned int atom_type2, double bond_chg_inc);
 
-				const std::string& getOldSymbolicAtomType() const;
-				
-				const std::string& getAromSymbolicAtomType() const;
-				
-				unsigned int getAtomicNumber() const;
+				unsigned int getBondTypeIndex() const;
 
-				std::size_t getRingSize() const;
+				unsigned int getAtomType1() const;
 
-				std::size_t getHeteroAtomDistance() const;
+				unsigned int getAtomType2() const;
 
-				bool isImidazoliumCation() const;
+				double getChargeIncrement() const;
 
-				bool isN5RingAnion() const;
+				operator bool() const;
 
 			  private:
-				std::string   oldType;
-				std::string   aroType;
-				unsigned int  atomicNumber; 
-				std::size_t   ringSize;
-				std::size_t   hetAtomDist;
-				bool          imCation;
-				bool          n5Anion;
+				unsigned int bondTypeIdx;
+				unsigned int atomType1;
+				unsigned int atomType2;
+				double       chargeIncr;
 			};			
+	
+			typedef boost::transform_iterator<boost::function1<const Entry&, const DataStorage::value_type&>, 
+											  DataStorage::const_iterator> ConstEntryIterator;
 
-			MMFF94AromaticAtomTypeDefinitionTable();
+			typedef boost::transform_iterator<boost::function1<Entry&, DataStorage::value_type&>, 
+											  DataStorage::iterator> EntryIterator;
+	
+			MMFF94BondChargeIncrementTable();
 
-			std::size_t getNumEntries() const;
+			void addEntry(unsigned int bond_type_idx, unsigned int atom_type1, unsigned int atom_type2, double bond_chg_inc);
 
-			void addEntry(const std::string& old_type, const std::string& aro_type, unsigned int atomic_no, 
-						  std::size_t ring_size, std::size_t het_atom_dist, bool im_cation, bool n5_anion);
-
-			const Entry& getEntry(std::size_t idx) const;
+			const Entry& getEntry(unsigned int bnd_type_idx, unsigned int atom_type1, unsigned int atom_type2) const;
 
 			void clear();
 
-			void removeEntry(std::size_t idx);
+			bool removeEntry(unsigned int bnd_type_idx, unsigned int atom_type1, unsigned int atom_type2);
 
 			EntryIterator removeEntry(const EntryIterator& it);
 
@@ -120,7 +115,7 @@ namespace CDPL
 			EntryIterator getEntriesBegin();
 
 			EntryIterator getEntriesEnd();
-			
+
 			void load(std::istream& is);
 
 			void loadDefaults();
@@ -137,7 +132,7 @@ namespace CDPL
 		/**
 		 * @}
 		 */
-	}
+    }
 }
 
-#endif // CDPL_FORCEFIELD_MMFF94AROMATICATOMTYPEDEFINITIONTABLE_HPP
+#endif // CDPL_FORCEFIELD_MMFF94BONDCHARGEINCREMENTTABLE_HPP

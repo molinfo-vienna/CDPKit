@@ -440,6 +440,9 @@
 \defgroup CDPL_FORCEFIELD_BOND_TYPE_PERCEPTION Bond Type Perception
 \ingroup CDPL_FORCEFIELD
 
+\defgroup CDPL_FORCEFIELD_CHARGE_CALCULATION Charge Calculation
+\ingroup CDPL_FORCEFIELD
+
 \defgroup CDPL_FORCEFIELD_AROMATICITY Aromaticity Perception
 \ingroup CDPL_FORCEFIELD
 

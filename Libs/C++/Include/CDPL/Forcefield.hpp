@@ -38,9 +38,11 @@
 #include "CDPL/Forcefield/BondFunctions.hpp"
 #include "CDPL/Forcefield/MolecularGraphFunctions.hpp"
 
-#include "CDPL/Forcefield/MMFF94PropertyFunctions.hpp"
 #include "CDPL/Forcefield/MMFF94AtomTyper.hpp"
 #include "CDPL/Forcefield/MMFF94BondTyper.hpp"
+#include "CDPL/Forcefield/MMFF94ChargeCalculator.hpp"
+
+#include "CDPL/Forcefield/MMFF94PropertyFunctions.hpp"
 #include "CDPL/Forcefield/MMFF94AromaticSSSRSubset.hpp"
 
 #include "CDPL/Forcefield/MMFF94SymbolicAtomTypePatternTable.hpp"
@@ -48,5 +50,7 @@
 #include "CDPL/Forcefield/MMFF94SymbolicToNumericAtomTypeMap.hpp"
 #include "CDPL/Forcefield/MMFF94AromaticAtomTypeDefinitionTable.hpp"
 #include "CDPL/Forcefield/MMFF94AtomTypePropertyTable.hpp"
+#include "CDPL/Forcefield/MMFF94BondChargeIncrementTable.hpp"
+#include "CDPL/Forcefield/MMFF94PartialBondChargeIncrementTable.hpp"
 
 #endif // CDPL_FORCEFIELD_HPP

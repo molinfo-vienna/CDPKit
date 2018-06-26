@@ -119,6 +119,84 @@ bool OptimolLogReader::getNumericAtomTypes(const std::string& mol_name, NumericA
     return !num_types.empty();
 }
 
+bool OptimolLogReader::getPartialAtomCharges(const std::string& mol_name, AtomChargeArray& charges)
+{
+     if (!seekToRecord(mol_name))
+		return false;
+
+    std::string line;
+
+    if (!skipToLine(line, "ATOM    CHARGE"))
+		return false;
+
+    charges.clear();
+
+    std::string atom_name;
+	std::string atom_idx;
+    double charge;
+
+    while (readLine(line)) {
+		if (line.find("OPTIMOL-LIST") != std::string::npos)
+			break;
+	
+		std::istringstream iss(line);
+
+		while (true) {
+			if (!(iss >> atom_name))
+				break;
+	    
+			if (!(iss >> atom_idx))
+				break;
+	    
+			if (!(iss >> charge))
+				break;
+	    
+			charges.push_back(charge);
+		}
+    }
+
+   return !charges.empty();
+}
+
+bool OptimolLogReader::getFormalAtomCharges(const std::string& mol_name, AtomChargeArray& charges)
+{
+     if (!seekToRecord(mol_name))
+		return false;
+
+    std::string line;
+
+    if (!skipToLine(line, "ATOM   FCHARGE"))
+		return false;
+
+    charges.clear();
+
+    std::string atom_name;
+	std::string atom_idx;
+    double charge;
+
+    while (readLine(line)) {
+		if (line.find("OPTIMOL-LIST") != std::string::npos)
+			break;
+	
+		std::istringstream iss(line);
+
+		while (true) {
+			if (!(iss >> atom_name))
+				break;
+	    
+			if (!(iss >> atom_idx))
+				break;
+	    
+			if (!(iss >> charge))
+				break;
+	    
+			charges.push_back(charge);
+		}
+    }
+
+   return !charges.empty();
+}
+
 void OptimolLogReader::buildIndex()
 {
     std::string line;

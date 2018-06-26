@@ -66,6 +66,7 @@ namespace CDPL
 			typedef boost::shared_ptr<MMFF94SymbolicAtomTypePatternTable> SharedPointer;
 
 			typedef DataStorage::const_iterator ConstEntryIterator;
+			typedef DataStorage::iterator EntryIterator;
 	
 			class CDPL_FORCEFIELD_API Entry
 			{
@@ -95,10 +96,18 @@ namespace CDPL
 
 			void clear();
 
+			void removeEntry(std::size_t idx);
+
+			EntryIterator removeEntry(const EntryIterator& it);
+
 			ConstEntryIterator getEntriesBegin() const;
 
 			ConstEntryIterator getEntriesEnd() const;
-			
+	
+			EntryIterator getEntriesBegin();
+
+			EntryIterator getEntriesEnd();
+
 			void load(std::istream& is);
 
 			void loadDefaults();

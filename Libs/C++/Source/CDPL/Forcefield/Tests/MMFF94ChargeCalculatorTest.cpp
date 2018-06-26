@@ -25,10 +25,11 @@
 
 
 #include <cstdlib>
+#include <cmath>
 
 #include <boost/test/auto_unit_test.hpp>
 
-#include "CDPL/Forcefield/MMFF94AtomTyper.hpp"
+#include "CDPL/Forcefield/MMFF94ChargeCalculator.hpp"
 #include "CDPL/Forcefield/MolecularGraphFunctions.hpp"
 #include "CDPL/Chem/BasicMolecule.hpp"
 #include "CDPL/Chem/MOL2MoleculeReader.hpp"
@@ -40,7 +41,7 @@
 #include "TestUtils.hpp"
 
 
-BOOST_AUTO_TEST_CASE(MMFF94AtomTyperTest)
+BOOST_AUTO_TEST_CASE(MMFF94ChargeCalculatorTest)
 {
 	using namespace CDPL;
 
@@ -48,49 +49,53 @@ BOOST_AUTO_TEST_CASE(MMFF94AtomTyperTest)
 	Util::FileDataReader<Chem::MOL2MoleculeReader> mol_reader(std::getenv("CDPKIT_TEST_DATA_DIR") + std::string("/MMFF94/MMFF94_hypervalent.mol2"));
 
 	TestUtils::OptimolLogReader log_reader(std::getenv("CDPKIT_TEST_DATA_DIR") + std::string("/MMFF94/MMFF94_opti.log"));
-	TestUtils::OptimolLogReader::SymbolicAtomTypeArray sym_types;
-	TestUtils::OptimolLogReader::NumericAtomTypeArray num_types;
+	TestUtils::OptimolLogReader::AtomChargeArray part_charges;
+	TestUtils::OptimolLogReader::AtomChargeArray form_charges;
 
-	Forcefield::MMFF94AtomTyper atom_typer;
-	Util::UIArray perc_num_types;
+	Forcefield::MMFF94ChargeCalculator charge_calc;
+	Util::DArray calc_charges;
 	std::size_t mol_idx = 0;
 
 	while (mol_reader.read(mol)) {
 		TestUtils::setupMMFF94TestSuiteMolecule(mol);
 		Forcefield::perceiveMMFF94AromaticRings(mol, false);
+		Forcefield::assignMMFF94AtomTypes(mol, true, false);
+		Forcefield::assignMMFF94BondTypeIndices(mol, false);
 
 		const std::string& mol_name = getName(mol);
 
-		BOOST_CHECK(log_reader.getSymbolicAtomTypes(mol_name, sym_types));
-		BOOST_CHECK_EQUAL(sym_types.size(), mol.getNumAtoms());
+		BOOST_CHECK(log_reader.getPartialAtomCharges(mol_name, part_charges));
+		BOOST_CHECK_EQUAL(part_charges.size(), mol.getNumAtoms());
 
-		BOOST_CHECK(log_reader.getNumericAtomTypes(mol_name, num_types));
-		BOOST_CHECK_EQUAL(num_types.size(), mol.getNumAtoms());
+		BOOST_CHECK(log_reader.getFormalAtomCharges(mol_name, form_charges));
+		BOOST_CHECK_EQUAL(form_charges.size(), mol.getNumAtoms());
 
-		atom_typer.perceiveTypes(mol, perc_num_types, true);
+		charge_calc.calculate(mol, calc_charges);
 
 		for (std::size_t i = 0; i < mol.getNumAtoms(); i++) {
-			const std::string& correct_type = sym_types[i];
-			const std::string& perceived_type = atom_typer.getSymbolicTypes()[i];
+			double correct_charge = form_charges[i];
+			double calc_charge = charge_calc.getFormalCharges()[i];
 
-			if (perceived_type != correct_type) {
-				BOOST_MESSAGE("!! Symbolic atom type mismatch for atom #" << i << " (" << getMOL2Name(mol.getAtom(i)) << 
+			if (std::abs(calc_charge - correct_charge) > 0.001) {
+				BOOST_MESSAGE("!! Formal charge mismatch for atom #" << i << " (" << getMOL2Name(mol.getAtom(i)) <<
 							  ") of molecule #" << mol_idx << " (" << mol_name << "):");
-				BOOST_CHECK_EQUAL(perceived_type, correct_type);
+				BOOST_CHECK_EQUAL(calc_charge, correct_charge);
 			}
 		}
-			
+		/*
 		for (std::size_t i = 0; i < mol.getNumAtoms(); i++) {
-			unsigned int correct_type = num_types[i];
-			unsigned int perceived_type = perc_num_types[i];
+			double correct_charge = part_charges[i];
+			double calc_charge = calc_charges[i];
 
-			if (perceived_type != correct_type) {
-				BOOST_MESSAGE("!! Numeric atom type mismatch for atom #" << i << " (" << getMOL2Name(mol.getAtom(i)) << 
+			if (std::abs(calc_charge - correct_charge) > 0.001) {
+				BOOST_MESSAGE("!! Partial charge mismatch for atom #" << i << " (" << getMOL2Name(mol.getAtom(i)) <<
 							  ") of molecule #" << mol_idx << " (" << mol_name << "):");
-				BOOST_CHECK_EQUAL(perceived_type, correct_type);
+				BOOST_CHECK_EQUAL(calc_charge, correct_charge);
 			}
 		}
-			
+		*/	
+
+		BOOST_MESSAGE("--------------------------------------------------------------");
 		mol_idx++;
 		mol.clear();
 	}

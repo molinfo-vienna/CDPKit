@@ -4,6 +4,7 @@ SET(test-suite_SRCS
     Main.cpp
     ConvenienceHeaderTest.cpp
     MMFF94AtomTyperTest.cpp
+    MMFF94ChargeCalculatorTest.cpp
 
     OptimolLogReader.cpp
     TestUtils.cpp

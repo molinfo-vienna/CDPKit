@@ -91,23 +91,48 @@ void Forcefield::MMFF94HeavyToHydrogenAtomTypeMap::clear()
     entries.clear();
 }
 
-Forcefield::MMFF94HeavyToHydrogenAtomTypeMap::ConstEntryIterator Forcefield::MMFF94HeavyToHydrogenAtomTypeMap::getEntriesBegin() const
+Forcefield::MMFF94HeavyToHydrogenAtomTypeMap::ConstEntryIterator 
+Forcefield::MMFF94HeavyToHydrogenAtomTypeMap::getEntriesBegin() const
 {
     return entries.begin();
 }
 
-Forcefield::MMFF94HeavyToHydrogenAtomTypeMap::ConstEntryIterator Forcefield::MMFF94HeavyToHydrogenAtomTypeMap::getEntriesEnd() const
+Forcefield::MMFF94HeavyToHydrogenAtomTypeMap::ConstEntryIterator 
+Forcefield::MMFF94HeavyToHydrogenAtomTypeMap::getEntriesEnd() const
 {
     return entries.end();
 }
-			
+
+Forcefield::MMFF94HeavyToHydrogenAtomTypeMap::EntryIterator 
+Forcefield::MMFF94HeavyToHydrogenAtomTypeMap::getEntriesBegin()
+{
+	return entries.begin();
+}
+
+Forcefield::MMFF94HeavyToHydrogenAtomTypeMap::EntryIterator 
+Forcefield::MMFF94HeavyToHydrogenAtomTypeMap::getEntriesEnd()
+{
+	return entries.end();
+}
+
+bool Forcefield::MMFF94HeavyToHydrogenAtomTypeMap::removeEntry(const std::string& parent_type)
+{
+	return entries.erase(parent_type);
+}
+
+Forcefield::MMFF94HeavyToHydrogenAtomTypeMap::EntryIterator 
+Forcefield::MMFF94HeavyToHydrogenAtomTypeMap::removeEntry(const EntryIterator& it)
+{
+	return entries.erase(it);
+}
+
 void Forcefield::MMFF94HeavyToHydrogenAtomTypeMap::load(std::istream& is)
 {
     std::string line;
     std::string parent_type;
     std::string hyd_type;
 
-    while (readMMFF94DataLine(is, line, "MMFF94HeavyToHydrogenAtomTypeMap: error while reading hydrogen atom type definition data line")) {
+    while (readMMFF94DataLine(is, line, "MMFF94HeavyToHydrogenAtomTypeMap: error while reading hydrogen atom type definition entry")) {
 		std::istringstream line_iss(line);
 
 		if (!(line_iss >> parent_type))
