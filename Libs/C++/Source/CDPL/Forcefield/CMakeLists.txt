@@ -19,6 +19,7 @@ SET(PARAMETER_FILES
     MMFFSYMB.PAR
     MMFFTOR.PAR
     MMFFVDW.PAR	
+    MMFFFCHG.PAR	
    )
 
 FOREACH(PARAM_FILE ${PARAMETER_FILES})
@@ -54,6 +55,7 @@ SET(cdpl-forcefield_LIB_SRCS
     MMFF94AtomTypePropertyTable.cpp
     MMFF94BondChargeIncrementTable.cpp
     MMFF94PartialBondChargeIncrementTable.cpp
+    MMFF94FormalAtomChargeDefinitionTable.cpp
 
     Utilities.cpp
    )

@@ -70,7 +70,7 @@ namespace CDPL
 		  public:
 			MMFF94AtomTyper();
 
-			MMFF94AtomTyper(const Chem::MolecularGraph& molgraph, Util::UIArray& num_types, bool strict = true);
+			MMFF94AtomTyper(const Chem::MolecularGraph& molgraph, Util::SArray& sym_types, Util::UIArray& num_types, bool strict = true);
 
 			void setSymbolicAtomTypePatternTable(const MMFF94SymbolicAtomTypePatternTable::SharedPointer& table);
 
@@ -84,14 +84,12 @@ namespace CDPL
 
 			void setAromaticRingSetFunction(const MMFF94AromaticRingSetFunction& func);
 		
-			void perceiveTypes(const Chem::MolecularGraph& molgraph, Util::UIArray& num_types, bool strict = true);
-
-			const Util::SArray& getSymbolicTypes() const;
+			void perceiveTypes(const Chem::MolecularGraph& molgraph, Util::SArray& sym_types, Util::UIArray& num_types, bool strict = true);
 
 		  private:
 			typedef MMFF94AromaticAtomTypeDefinitionTable::Entry AromTypeDefEntry;
 
-			void init(const Chem::MolecularGraph& molgraph, Util::UIArray& num_types);
+			void init(const Chem::MolecularGraph& molgraph, Util::SArray& sym_types, Util::UIArray& num_types);
 
 			void assignProvisionalSymbolicAtomTypes(bool strict);
 			void assignAromaticAtomTypes();
@@ -119,9 +117,9 @@ namespace CDPL
 			MMFF94AtomTypePropertyTable::SharedPointer           atomTypePropTable;
 			MMFF94AromaticRingSetFunction                        aromRingSetFunc;
 			const Chem::MolecularGraph*                          molGraph;
+			Util::SArray*                                        symTypes;
 			RingList                                             aromRings;
 			Chem::PatternAtomTyper                               atomTyper;
-			Util::SArray                                         symTypes;
 		};
     
 		/**

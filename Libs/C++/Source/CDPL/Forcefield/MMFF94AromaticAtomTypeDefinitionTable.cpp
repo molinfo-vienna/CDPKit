@@ -72,12 +72,12 @@ Forcefield::MMFF94AromaticAtomTypeDefinitionTable::Entry::Entry(const std::strin
 	oldType(old_type), aroType(aro_type), atomicNumber(atomic_no), ringSize(ring_size), hetAtomDist(het_atom_dist), imCation(im_cation), n5Anion(n5_anion)
 {}
 
-const std::string& Forcefield::MMFF94AromaticAtomTypeDefinitionTable::Entry::getOldSymbolicAtomType() const
+const std::string& Forcefield::MMFF94AromaticAtomTypeDefinitionTable::Entry::getOldAtomType() const
 {
 	return oldType;
 }
 				
-const std::string& Forcefield::MMFF94AromaticAtomTypeDefinitionTable::Entry::getAromSymbolicAtomType() const
+const std::string& Forcefield::MMFF94AromaticAtomTypeDefinitionTable::Entry::getAromAtomType() const
 {
 	return aroType;
 }

@@ -53,6 +53,7 @@ BOOST_AUTO_TEST_CASE(MMFF94AtomTyperTest)
 
 	Forcefield::MMFF94AtomTyper atom_typer;
 	Util::UIArray perc_num_types;
+	Util::SArray perc_sym_types;
 	std::size_t mol_idx = 0;
 
 	while (mol_reader.read(mol)) {
@@ -67,11 +68,11 @@ BOOST_AUTO_TEST_CASE(MMFF94AtomTyperTest)
 		BOOST_CHECK(log_reader.getNumericAtomTypes(mol_name, num_types));
 		BOOST_CHECK_EQUAL(num_types.size(), mol.getNumAtoms());
 
-		atom_typer.perceiveTypes(mol, perc_num_types, true);
+		atom_typer.perceiveTypes(mol, perc_sym_types, perc_num_types, true);
 
 		for (std::size_t i = 0; i < mol.getNumAtoms(); i++) {
 			const std::string& correct_type = sym_types[i];
-			const std::string& perceived_type = atom_typer.getSymbolicTypes()[i];
+			const std::string& perceived_type = perc_sym_types[i];
 
 			if (perceived_type != correct_type) {
 				BOOST_MESSAGE("!! Symbolic atom type mismatch for atom #" << i << " (" << getMOL2Name(mol.getAtom(i)) << 

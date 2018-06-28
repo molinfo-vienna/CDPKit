@@ -31,6 +31,8 @@
 #ifndef CDPL_FORCEFIELD_ATOMFUNCTIONS_HPP
 #define CDPL_FORCEFIELD_ATOMFUNCTIONS_HPP
 
+#include <string>
+
 #include "CDPL/Forcefield/APIPrefix.hpp"
 
 
@@ -51,13 +53,22 @@ namespace CDPL
 		 * @{
 		 */
 
-		CDPL_FORCEFIELD_API unsigned int getMMFF94Type(const Chem::Atom& atom);
+		CDPL_FORCEFIELD_API const std::string& getMMFF94SymbolicType(const Chem::Atom& atom);
 
-		CDPL_FORCEFIELD_API void setMMFF94Type(Chem::Atom& atom, unsigned int type);
+		CDPL_FORCEFIELD_API void setMMFF94SymbolicType(Chem::Atom& atom, const std::string& type);
 
-		CDPL_FORCEFIELD_API void clearMMFF94Type(Chem::Atom& atom);
+		CDPL_FORCEFIELD_API void clearMMFF94SymbolicType(Chem::Atom& atom);
 
-		CDPL_FORCEFIELD_API bool hasMMFF94Type(const Chem::Atom& atom);
+		CDPL_FORCEFIELD_API bool hasMMFF94SymbolicType(const Chem::Atom& atom);
+
+
+		CDPL_FORCEFIELD_API unsigned int getMMFF94NumericType(const Chem::Atom& atom);
+
+		CDPL_FORCEFIELD_API void setMMFF94NumericType(Chem::Atom& atom, unsigned int type);
+
+		CDPL_FORCEFIELD_API void clearMMFF94NumericType(Chem::Atom& atom);
+
+		CDPL_FORCEFIELD_API bool hasMMFF94NumericType(const Chem::Atom& atom);
 
 
 		CDPL_FORCEFIELD_API double getMMFF94Charge(const Chem::Atom& atom);

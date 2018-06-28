@@ -50,6 +50,7 @@
 #include "CDPL/Forcefield/MMFF94SymbolicToNumericAtomTypeMap.hpp"
 #include "CDPL/Forcefield/MMFF94AromaticAtomTypeDefinitionTable.hpp"
 #include "CDPL/Forcefield/MMFF94AtomTypePropertyTable.hpp"
+#include "CDPL/Forcefield/MMFF94FormalAtomChargeDefinitionTable.hpp"
 #include "CDPL/Forcefield/MMFF94BondChargeIncrementTable.hpp"
 #include "CDPL/Forcefield/MMFF94PartialBondChargeIncrementTable.hpp"
 

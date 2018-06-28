@@ -45,7 +45,7 @@ using namespace CDPL;
 
 
 Forcefield::MMFF94BondTyper::MMFF94BondTyper(const Chem::MolecularGraph& molgraph, Util::UIArray& types):
-    aromRingSetFunc(&getMMFF94AromaticRings), atomTypeFunc(&getMMFF94Type) 
+    aromRingSetFunc(&getMMFF94AromaticRings), atomTypeFunc(&getMMFF94NumericType) 
 {
     setAtomTypePropertyTable(MMFF94AtomTypePropertyTable::get());
 
@@ -53,7 +53,7 @@ Forcefield::MMFF94BondTyper::MMFF94BondTyper(const Chem::MolecularGraph& molgrap
 }
 
 Forcefield::MMFF94BondTyper::MMFF94BondTyper(): 
-    aromRingSetFunc(&getMMFF94AromaticRings), atomTypeFunc(&getMMFF94Type) 
+    aromRingSetFunc(&getMMFF94AromaticRings), atomTypeFunc(&getMMFF94NumericType) 
 {
     setAtomTypePropertyTable(MMFF94AtomTypePropertyTable::get());
 }
@@ -68,7 +68,7 @@ void Forcefield::MMFF94BondTyper::setAromaticRingSetFunction(const MMFF94Aromati
     aromRingSetFunc = func;
 }
 	
-void Forcefield::MMFF94BondTyper::setAtomTypeFunction(const MMFF94AtomTypeFunction& func)
+void Forcefield::MMFF94BondTyper::setNumericAtomTypeFunction(const MMFF94NumericAtomTypeFunction& func)
 {
     atomTypeFunc = func;
 }

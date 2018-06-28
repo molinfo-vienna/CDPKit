@@ -57,7 +57,8 @@ namespace CDPL
 		namespace AtomProperty
 		{
 
-			extern CDPL_FORCEFIELD_API const Base::LookupKey MMFF94_TYPE;
+			extern CDPL_FORCEFIELD_API const Base::LookupKey MMFF94_SYMBOLIC_TYPE;
+			extern CDPL_FORCEFIELD_API const Base::LookupKey MMFF94_NUMERIC_TYPE;
 			extern CDPL_FORCEFIELD_API const Base::LookupKey MMFF94_CHARGE;
 		}
 

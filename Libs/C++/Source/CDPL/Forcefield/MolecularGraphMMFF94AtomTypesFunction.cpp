@@ -46,12 +46,19 @@ void Forcefield::assignMMFF94AtomTypes(Chem::MolecularGraph& molgraph, bool stri
 {
      if (!overwrite && std::find_if(molgraph.getAtomsBegin(), molgraph.getAtomsEnd(),
 								   boost::bind(std::equal_to<bool>(), false,
-											   boost::bind(&hasMMFF94Type, _1))) == molgraph.getAtomsEnd())
+											   boost::bind(&hasMMFF94SymbolicType, _1))) == molgraph.getAtomsEnd() &&
+		 std::find_if(molgraph.getAtomsBegin(), molgraph.getAtomsEnd(),
+					  boost::bind(std::equal_to<bool>(), false,
+								  boost::bind(&hasMMFF94NumericType, _1))) == molgraph.getAtomsEnd())
 		return;
 
-	 Util::UIArray types;
-	 MMFF94AtomTyper typer(molgraph, types, strict);
+	 Util::UIArray num_types;
+	 Util::SArray sym_types;
 
-	 for (std::size_t i = 0, num_atoms = molgraph.getNumAtoms(); i < num_atoms; i++) 
-		 setMMFF94Type(molgraph.getAtom(i), types[i]);
+	 MMFF94AtomTyper typer(molgraph, sym_types, num_types, strict);
+
+	 for (std::size_t i = 0, num_atoms = molgraph.getNumAtoms(); i < num_atoms; i++) {
+		 setMMFF94SymbolicType(molgraph.getAtom(i), sym_types[i]);
+		 setMMFF94NumericType(molgraph.getAtom(i), num_types[i]);
+	 }
 }

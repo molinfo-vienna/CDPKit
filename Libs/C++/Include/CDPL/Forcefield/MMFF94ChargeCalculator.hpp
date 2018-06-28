@@ -38,7 +38,9 @@
 #include "CDPL/Forcefield/MMFF94BondChargeIncrementTable.hpp"
 #include "CDPL/Forcefield/MMFF94PartialBondChargeIncrementTable.hpp"
 #include "CDPL/Forcefield/MMFF94PropertyFunctions.hpp"
+#include "CDPL/Forcefield/MMFF94FormalAtomChargeDefinitionTable.hpp"
 #include "CDPL/Util/Array.hpp"
+#include "CDPL/Util/BitSet.hpp"
 
 
 namespace CDPL 
@@ -48,7 +50,7 @@ namespace CDPL
 	{
 
 		class MolecularGraph;
-		class Bond;
+		class Atom;
 	}
 
     namespace Forcefield 
@@ -73,9 +75,13 @@ namespace CDPL
 
 			void setAtomTypePropertyTable(const MMFF94AtomTypePropertyTable::SharedPointer& table);
 
+			void setFormalChargeDefinitionTable(const MMFF94FormalAtomChargeDefinitionTable::SharedPointer& table);
+
 			void setAromaticRingSetFunction(const MMFF94AromaticRingSetFunction& func);
 
-			void setAtomTypeFunction(const MMFF94AtomTypeFunction& func);
+			void setNumericAtomTypeFunction(const MMFF94NumericAtomTypeFunction& func);
+
+			void setSymbolicAtomTypeFunction(const MMFF94SymbolicAtomTypeFunction& func);
 
 			void setBondTypeIndexFunction(const MMFF94BondTypeIndexFunction& func);
 
@@ -122,28 +128,32 @@ namespace CDPL
 			typedef MMFF94BondChargeIncrementTable::Entry BCIEntry;
 			typedef MMFF94PartialBondChargeIncrementTable::Entry PBCIEntry;
 			typedef MMFF94AtomTypePropertyTable::Entry TypePropertyEntry;
+			typedef MMFF94FormalAtomChargeDefinitionTable::Entry FormChargeDefEntry;
 
 			typedef std::vector<std::size_t> AtomIndexList;
 
 			void init(const Chem::MolecularGraph& molgraph, Util::DArray& charges);
 
-			void assignFormalCharges(const Chem::MolecularGraph& molgraph);
-			void calcPartialCharges(const Chem::MolecularGraph& molgraph, Util::DArray& charges) const;
+			void assignFormalCharges();
+			void distFormalNeighborCharges(const Chem::Atom& atom, const FormChargeDefEntry& entry);
+			void distFormalAromAtomCharges(const Chem::Atom& atom, const FormChargeDefEntry& entry);
 
-			void assignFormalCharges(std::size_t i, const Chem::MolecularGraph& molgraph);
-			void zeroOppositeFormCharges(const Chem::Bond& bond, const Chem::MolecularGraph& molgraph);
-
+			void calcPartialCharges(Util::DArray& charges) const;
 			double getBondChargeIncrement(unsigned int bnd_type_idx, unsigned int atom_type1, unsigned int atom_type2, 
 										  const PBCIEntry& pbci_entry1, const PBCIEntry& pbci_entry2) const;
 
 			MMFF94BondChargeIncrementTable::SharedPointer        bondChargeIncTable;
 			MMFF94PartialBondChargeIncrementTable::SharedPointer partBondChargeIncTable;
 			MMFF94AtomTypePropertyTable::SharedPointer           atomTypePropTable;
+			MMFF94FormalAtomChargeDefinitionTable::SharedPointer formChargeDefTable;
 			MMFF94AromaticRingSetFunction                        aromRingSetFunc;
-			MMFF94AtomTypeFunction                               atomTypeFunc;
+			MMFF94NumericAtomTypeFunction                        numAtomTypeFunc;
+			MMFF94SymbolicAtomTypeFunction                       symAtomTypeFunc;
 			MMFF94BondTypeIndexFunction                          bondTypeIdxFunc;
 			Util::DArray                                         formCharges;
-			AtomIndexList                                        atomIndexList;
+			Util::BitSet                                         assFormChargeMask;
+			AtomIndexList                                        atomList;
+			const Chem::MolecularGraph*                          molGraph;
 		};
     
 		/**

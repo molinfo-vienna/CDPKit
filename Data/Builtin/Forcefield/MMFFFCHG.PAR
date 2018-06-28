@@ -1,0 +1,53 @@
+*
+*   Formal MMFF94 atom charge definitions 
+*
+*   SYMBOL    ASSIGNMENT         FORMAL          VALID
+*             MODE               CHARGE          TYPE LIST
+
+    O2CM      0                  -0.5              -
+    O3N       0                  -0.3333333333     -
+    O4S       0                  -0.5              -
+    OSMS      0                  -0.5              -
+    O4CL      0                  -0.25             -
+    OM        0                  -1.0              -
+    OM2       0                  -1.0              -
+    NR+       0                   1.0              -
+    O+        0                   1.0              -
+    O=+       0                   1.0              -
+    N+=C      0                   1.0              -
+    N+=N      0                   1.0              -
+    NCN+      0                   0.5              -
+    NGD+      0                   0.3333333333     -
+    NPD+      0                   1.0              -
+    NM        0                  -1.0              -
+    SM        0                  -1.0              -
+    SSMO      0                  -0.5              -
+    S2CM      0                  -0.5              -
+    N5A+      0                   1.0              -
+    N5B+      0                   1.0              -
+    N5+       0                   1.0              -
+    FE+2      0                   2.0              -
+    FE+3      0                   3.0              -
+    ZN+2      0                   2.0              -
+    CA+2      0                   2.0              -
+    MG+2      0                   2.0              -
+    CU+2      0                   2.0              -
+    CU+1      0                   1.0              -
+    LI+       0                   1.0              -
+    NA+       0                   1.0              -
+    K+        0                   1.0              -
+    F-        0                  -1.0              -
+    CL-       0                  -1.0              -
+    BR-       0                  -1.0              -
+    SO2       1                   0.0              O2S,O2P,O3P,O3S,OM,SM
+    SO2M      1                  -1.0              O2S,O2P,O3P,O3S,OM,SM
+    SO3       1                   0.0              O2S,O2P,O3P,O3S,OM,SM
+    SO4       1                   0.0              O2S,O2P,O3P,O3S,OM,SM
+    PO2       1                   0.0              O2S,O2P,O3P,O3S,OM,SM
+    PO3       1                   0.0              O2S,O2P,O3P,O3S,OM,SM
+    PO4       1                   0.0              O2S,O2P,O3P,O3S,OM,SM
+    PO4       1                   0.0              O2S,O2P,O3P,O3S,OM,SM
+    NSP       1                   0.0              NR%
+    CIM+      1                   0.0              NIM+,NGD+,NCN+
+    N5M       5                  -1.0              N5M
+$

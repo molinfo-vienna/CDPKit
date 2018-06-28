@@ -104,3 +104,7 @@ const char* MMFF94ParameterData::BOND_CHARGE_INCREMENT_PARAMETERS =
 const char* MMFF94ParameterData::PARTIAL_BOND_CHARGE_INCREMENT_PARAMETERS = 
 #include "MMFFPBCI.PAR.str" 
 ;
+
+const char* MMFF94ParameterData::FORMAL_ATOM_CHARGE_DEFINITIONS =
+#include "MMFFFCHG.PAR.str" 
+;

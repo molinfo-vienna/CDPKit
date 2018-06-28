@@ -32,6 +32,8 @@
 #ifndef CDPL_FORCEFIELD_MMFF94PROPERTYFUNCTIONS_HPP
 #define CDPL_FORCEFIELD_MMFF94PROPERTYFUNCTIONS_HPP
 
+#include <string>
+
 #include <boost/function.hpp>
 
 #include "CDPL/Chem/FragmentList.hpp"
@@ -43,42 +45,47 @@ namespace CDPL
     namespace Chem
     {
 
-	class Atom;
-	class Bond;
-	class MolecularGraph;
+		class Atom;
+		class Bond;
+		class MolecularGraph;
     }
 
     namespace Forcefield 
     {
 
-	/**
-	 * \addtogroup CDPL_FORCEFIELD_DATA_STRUCTURES
-	 * @{
-	 */
+		/**
+		 * \addtogroup CDPL_FORCEFIELD_DATA_STRUCTURES
+		 * @{
+		 */
 
-	/**
-	 * \brief A generic wrapper class used to store a user-defined MMFF94 atom type function.
-	 */
-	typedef boost::function1<unsigned int, const Chem::Atom&> MMFF94AtomTypeFunction;
+		/**
+		 * \brief A generic wrapper class used to store a user-defined numeric MMFF94 atom type function.
+		 */
+		typedef boost::function1<unsigned int, const Chem::Atom&> MMFF94NumericAtomTypeFunction;
 
-	/**
-	 * \brief A generic wrapper class used to store a user-defined MMFF94 partial atom charge function.
-	 */
-	typedef boost::function1<double, const Chem::Atom&> MMFF94ChargeFunction;
+		/**
+		 * \brief A generic wrapper class used to store a user-defined symbolic MMFF94 atom type function.
+		 */
+		typedef boost::function1<const std::string&, const Chem::Atom&> MMFF94SymbolicAtomTypeFunction;
 
-	/**
-	 * \brief A generic wrapper class used to store a user-defined MMFF94 bond type index function.
-	 */
-	typedef boost::function1<unsigned int, const Chem::Bond&> MMFF94BondTypeIndexFunction;
+		/**
+		 * \brief A generic wrapper class used to store a user-defined MMFF94 partial atom charge function.
+		 */
+		typedef boost::function1<double, const Chem::Atom&> MMFF94ChargeFunction;
 
-	/**
-	 * \brief A generic wrapper class used to store a user-defined MMFF94 aromatic ring set function.
-	 */
-	typedef boost::function1<const Chem::FragmentList::SharedPointer&, const Chem::MolecularGraph&> MMFF94AromaticRingSetFunction;
+		/**
+		 * \brief A generic wrapper class used to store a user-defined MMFF94 bond type index function.
+		 */
+		typedef boost::function1<unsigned int, const Chem::Bond&> MMFF94BondTypeIndexFunction;
 
-	/**
-	 * @}
-	 */
+		/**
+		 * \brief A generic wrapper class used to store a user-defined MMFF94 aromatic ring set function.
+		 */
+		typedef boost::function1<const Chem::FragmentList::SharedPointer&, const Chem::MolecularGraph&> MMFF94AromaticRingSetFunction;
+
+		/**
+		 * @}
+		 */
     }
 }
 

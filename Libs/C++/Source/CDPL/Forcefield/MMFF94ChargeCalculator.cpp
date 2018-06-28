@@ -36,33 +36,58 @@
 #include "CDPL/Forcefield/MolecularGraphFunctions.hpp"
 #include "CDPL/Forcefield/AtomFunctions.hpp"
 #include "CDPL/Forcefield/BondFunctions.hpp"
-#include "CDPL/Chem/MolecularGraph.hpp"
+#include "CDPL/Chem/FragmentList.hpp"
+#include "CDPL/Chem/Fragment.hpp"
 #include "CDPL/Chem/Atom.hpp"
 #include "CDPL/Chem/Bond.hpp"
 #include "CDPL/Chem/AtomFunctions.hpp"
-#include "CDPL/Chem/AtomType.hpp"
 #include "CDPL/Base/Exceptions.hpp"
 
 
 using namespace CDPL; 
 
 
+namespace
+{
+
+	bool symbolicTypeInList(const std::string& type, const std::string& type_list)
+	{
+	
+		for (std::string::size_type pos = 0; (pos = type_list.find(type, pos)) != std::string::npos; pos++) {
+			if (pos > 0 && type_list[pos - 1] != ',')
+				continue;
+			
+			if ((pos + type.length()) < type_list.length() && type_list[pos + type.length()] != ',')
+				continue;
+
+			return true;
+		}
+
+		return false;
+	}
+}
+
+
 Forcefield::MMFF94ChargeCalculator::MMFF94ChargeCalculator(const Chem::MolecularGraph& molgraph, Util::DArray& charges):
-    aromRingSetFunc(&getMMFF94AromaticRings), atomTypeFunc(&getMMFF94Type), bondTypeIdxFunc(getMMFF94TypeIndex)
+    aromRingSetFunc(&getMMFF94AromaticRings), numAtomTypeFunc(&getMMFF94NumericType), symAtomTypeFunc(&getMMFF94SymbolicType), 
+	bondTypeIdxFunc(getMMFF94TypeIndex)
 {
 	setBondChargeIncrementTable(MMFF94BondChargeIncrementTable::get());
 	setPartialBondChargeIncrementTable(MMFF94PartialBondChargeIncrementTable::get());
 	setAtomTypePropertyTable(MMFF94AtomTypePropertyTable::get());
+	setFormalChargeDefinitionTable(MMFF94FormalAtomChargeDefinitionTable::get());
 
 	calculate(molgraph, charges);
 }
 
 Forcefield::MMFF94ChargeCalculator::MMFF94ChargeCalculator(): 
-	aromRingSetFunc(&getMMFF94AromaticRings), atomTypeFunc(&getMMFF94Type), bondTypeIdxFunc(getMMFF94TypeIndex)
+	aromRingSetFunc(&getMMFF94AromaticRings), numAtomTypeFunc(&getMMFF94NumericType), symAtomTypeFunc(&getMMFF94SymbolicType),
+	bondTypeIdxFunc(getMMFF94TypeIndex)
 {
 	setBondChargeIncrementTable(MMFF94BondChargeIncrementTable::get());
 	setPartialBondChargeIncrementTable(MMFF94PartialBondChargeIncrementTable::get());
 	setAtomTypePropertyTable(MMFF94AtomTypePropertyTable::get());
+	setFormalChargeDefinitionTable(MMFF94FormalAtomChargeDefinitionTable::get());
 }
 
 void Forcefield::MMFF94ChargeCalculator::setBondChargeIncrementTable(const MMFF94BondChargeIncrementTable::SharedPointer& table)
@@ -80,14 +105,24 @@ void Forcefield::MMFF94ChargeCalculator::setAtomTypePropertyTable(const MMFF94At
 	atomTypePropTable = table;
 }
 
+void Forcefield::MMFF94ChargeCalculator::setFormalChargeDefinitionTable(const MMFF94FormalAtomChargeDefinitionTable::SharedPointer& table)
+{
+	formChargeDefTable = table;
+}
+
 void Forcefield::MMFF94ChargeCalculator::setAromaticRingSetFunction(const MMFF94AromaticRingSetFunction& func)
 {
 	aromRingSetFunc = func;
 }
 
-void Forcefield::MMFF94ChargeCalculator::setAtomTypeFunction(const MMFF94AtomTypeFunction& func)
+void Forcefield::MMFF94ChargeCalculator::setNumericAtomTypeFunction(const MMFF94NumericAtomTypeFunction& func)
 {
-	atomTypeFunc = func;
+	numAtomTypeFunc = func;
+}
+
+void Forcefield::MMFF94ChargeCalculator::setSymbolicAtomTypeFunction(const MMFF94SymbolicAtomTypeFunction& func)
+{
+	symAtomTypeFunc = func;
 }
 
 void Forcefield::MMFF94ChargeCalculator::setBondTypeIndexFunction(const MMFF94BondTypeIndexFunction& func)
@@ -99,8 +134,8 @@ void Forcefield::MMFF94ChargeCalculator::calculate(const Chem::MolecularGraph& m
 {
 	init(molgraph, charges);
 
-	assignFormalCharges(molgraph);
-	calcPartialCharges(molgraph, charges);
+	assignFormalCharges();
+	calcPartialCharges(charges);
 }
 
 const Util::DArray& Forcefield::MMFF94ChargeCalculator::getFormalCharges() const
@@ -114,88 +149,138 @@ void Forcefield::MMFF94ChargeCalculator::init(const Chem::MolecularGraph& molgra
 
 	formCharges.assign(num_atoms, 0.0);
 	charges.assign(num_atoms, 0.0);
+	assFormChargeMask.resize(num_atoms);
+	assFormChargeMask.reset();
+
+	molGraph = &molgraph;
 }
 
-void Forcefield::MMFF94ChargeCalculator::assignFormalCharges(const Chem::MolecularGraph& molgraph)
+void Forcefield::MMFF94ChargeCalculator::assignFormalCharges()
 {
-	std::transform(molgraph.getAtomsBegin(), molgraph.getAtomsEnd(), formCharges.getElementsBegin(), 
-				   boost::bind(&Chem::getFormalCharge, _1));
+	using namespace Chem;
+	
+	std::size_t i = 0;
 
-	std::for_each(molgraph.getBondsBegin(), molgraph.getBondsEnd(), 
-				  boost::bind(&MMFF94ChargeCalculator::zeroOppositeFormCharges, this, _1, boost::ref(molgraph)));
+	for (MolecularGraph::ConstAtomIterator it = molGraph->getAtomsBegin(), end = molGraph->getAtomsEnd(); it != end; ++it, i++) {
+		const Atom& atom = *it;
 
-	for (std::size_t i = 0, num_atoms = molgraph.getNumAtoms(); i < num_atoms; i++)
-		assignFormalCharges(i, molgraph);
-}
+		if (assFormChargeMask.test(i))
+			continue;
 
-void Forcefield::MMFF94ChargeCalculator::zeroOppositeFormCharges(const Chem::Bond& bond, const Chem::MolecularGraph& molgraph)
-{
-	std::size_t atom_idx1 = molgraph.getAtomIndex(bond.getBegin());
-	std::size_t atom_idx2 = molgraph.getAtomIndex(bond.getEnd());
+		const std::string& sym_type = symAtomTypeFunc(atom);
+		const FormChargeDefEntry& entry = formChargeDefTable->getEntry(sym_type);
 
-	if (formCharges[atom_idx1] + formCharges[atom_idx2] == 0.0) {
-		formCharges[atom_idx1] = 0.0;
-		formCharges[atom_idx2] = 0.0;
+		if (!entry)
+			continue;
+
+		if (entry.getAssignmentMode() == 0) {
+			formCharges[i] = entry.getFormalCharge();
+			continue;
+		}
+
+		if (entry.getAssignmentMode() == 1) {
+			distFormalNeighborCharges(atom, entry);
+			continue;
+		}
+
+		if (entry.getAssignmentMode() >= 3)
+			distFormalAromAtomCharges(atom, entry);
 	}
 }
 
-void Forcefield::MMFF94ChargeCalculator::assignFormalCharges(std::size_t i, const Chem::MolecularGraph& molgraph)
+void Forcefield::MMFF94ChargeCalculator::distFormalAromAtomCharges(const Chem::Atom& atom, const FormChargeDefEntry& entry)
 {
 	using namespace Chem;
 
-	const Atom& atom = molgraph.getAtom(i);
+	atomList.clear();
 
+	double net_charge = entry.getFormalCharge();
+	const FragmentList::SharedPointer& arom_rings = aromRingSetFunc(*molGraph);
+
+	for (FragmentList::ConstElementIterator r_it = arom_rings->getElementsBegin(), r_end = arom_rings->getElementsEnd(); r_it != r_end; ++r_it) {
+		const Fragment& ring = *r_it;
+
+		if (!ring.getNumAtoms() == entry.getAssignmentMode())
+			continue;
+
+		if (!ring.containsAtom(atom))
+			continue;
+
+		for (Fragment::ConstAtomIterator a_it = ring.getAtomsBegin(), a_end = ring.getAtomsEnd(); a_it != a_end; ++a_it) {
+			const Atom& rng_atom = *a_it;
+
+			if (!symbolicTypeInList(symAtomTypeFunc(rng_atom), entry.getAtomTypeList()))
+				continue;
+
+			if (entry.getFormalCharge() == 0.0)
+				net_charge += getFormalCharge(rng_atom);
+
+			atomList.push_back(molGraph->getAtomIndex(rng_atom));
+		}
+
+		if (atomList.empty())
+			continue;
+
+		net_charge /= atomList.size();
+
+		for (AtomIndexList::const_iterator it = atomList.begin(), end = atomList.end(); it != end; ++it) {
+			std::size_t atom_idx = *it;
+
+			assFormChargeMask.set(atom_idx);
+			formCharges[atom_idx] = net_charge;
+		}
+	}
+}
+
+void Forcefield::MMFF94ChargeCalculator::distFormalNeighborCharges(const Chem::Atom& atom, const FormChargeDefEntry& entry)
+{
+	using namespace Chem;
+
+	atomList.clear();
+
+	double nbr_charge = (entry.getFormalCharge() == 0.0 ? getFormalCharge(atom) : entry.getFormalCharge());
 	Atom::ConstAtomIterator a_it = atom.getAtomsBegin();
-	double net_charge = 0.0;
-
-	atomIndexList.clear();
 
 	for (Atom::ConstBondIterator b_it = atom.getBondsBegin(), b_end = atom.getBondsEnd(); b_it != b_end; ++b_it, ++a_it) {
 		const Bond& nbr_bond = *b_it;
 			
-		if (!molgraph.containsBond(nbr_bond))
+		if (!molGraph->containsBond(nbr_bond))
 			continue;
 
 		const Atom& nbr_atom = *a_it;
 
-		if (!molgraph.containsAtom(nbr_atom))
+		if (!molGraph->containsAtom(nbr_atom))
 			continue;
 
-		unsigned int nbr_type = getType(nbr_atom);
-
-		if (nbr_type != AtomType::O && nbr_type != AtomType::S)
-			continue;
-		
-		if (getBondCount(nbr_atom, molgraph) != 1)
+		if (!symbolicTypeInList(symAtomTypeFunc(nbr_atom), entry.getAtomTypeList()))
 			continue;
 
-		std::size_t nbr_idx = molgraph.getAtomIndex(nbr_atom);
+		if (entry.getFormalCharge() == 0.0)
+			nbr_charge += getFormalCharge(nbr_atom);
 
-		atomIndexList.push_back(nbr_idx);
-		net_charge += formCharges[nbr_idx]; 
+		atomList.push_back(molGraph->getAtomIndex(nbr_atom));
 	}
 
-	std::size_t num_nbrs = atomIndexList.size();
-
-	if (num_nbrs > 1) {
-		double nbr_charge = net_charge / num_nbrs;
-
-		for (AtomIndexList::const_iterator it = atomIndexList.begin(), end = atomIndexList.end(); it != end; ++it)
-			formCharges[*it] = nbr_charge;
-
+	if (atomList.empty())
 		return;
-	}
 
-	
+	nbr_charge /= atomList.size();
+
+	for (AtomIndexList::const_iterator it = atomList.begin(), end = atomList.end(); it != end; ++it) {
+		std::size_t atom_idx = *it;
+
+		assFormChargeMask.set(atom_idx);
+		formCharges[atom_idx] = nbr_charge;
+	}
 }
 
-void Forcefield::MMFF94ChargeCalculator::calcPartialCharges(const Chem::MolecularGraph& molgraph, Util::DArray& charges) const
+void Forcefield::MMFF94ChargeCalculator::calcPartialCharges(Util::DArray& charges) const
 {
 	using namespace Chem;
 
-	for (std::size_t i = 0, num_atoms = molgraph.getNumAtoms(); i < num_atoms; i++) {
-		const Atom& atom = molgraph.getAtom(i);
-        unsigned int atom_type = atomTypeFunc(atom);
+	for (std::size_t i = 0, num_atoms = molGraph->getNumAtoms(); i < num_atoms; i++) {
+		const Atom& atom = molGraph->getAtom(i);
+        unsigned int atom_type = numAtomTypeFunc(atom);
 
 		const PBCIEntry& pbci_entry = partBondChargeIncTable->getEntry(atom_type);
 
@@ -220,16 +305,16 @@ void Forcefield::MMFF94ChargeCalculator::calcPartialCharges(const Chem::Molecula
         for (Atom::ConstBondIterator b_it = atom.getBondsBegin(), b_end = atom.getBondsEnd(); b_it != b_end; ++b_it, ++a_it) {
 			const Bond& nbr_bond = *b_it;
 
-			if (!molgraph.containsBond(nbr_bond))
+			if (!molGraph->containsBond(nbr_bond))
 				continue;
 
 			const Atom& nbr_atom = *a_it;
 
-			if (!molgraph.containsAtom(nbr_atom))
+			if (!molGraph->containsAtom(nbr_atom))
 				continue;
 			
-			std::size_t nbr_atom_idx = molgraph.getAtomIndex(nbr_atom);
-			unsigned int nbr_atom_type = atomTypeFunc(nbr_atom);
+			std::size_t nbr_atom_idx = molGraph->getAtomIndex(nbr_atom);
+			unsigned int nbr_atom_type = numAtomTypeFunc(nbr_atom);
 
 			const PBCIEntry& nbr_pbci_entry = partBondChargeIncTable->getEntry(nbr_atom_type);
 
