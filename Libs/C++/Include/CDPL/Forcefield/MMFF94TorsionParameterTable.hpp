@@ -1,7 +1,7 @@
 /* -*- mode: c++; c-basic-offset: 4; tab-width: 4; indent-tabs-mode: t -*- */
 
 /* 
- * MMFF94BondChargeIncrementTable.hpp 
+ * MMFF94TorsionParameterTable.hpp 
  *
  * This file is part of the Chemical Data Processing Toolkit
  *
@@ -25,11 +25,11 @@
 
 /**
  * \file
- * \brief Definition of the class CDPL::Forcefield::MMFF94BondChargeIncrementTable.
+ * \brief Definition of the class CDPL::Forcefield::MMFF94TorsionParameterTable.
  */
 
-#ifndef CDPL_FORCEFIELD_MMFF94BONDCHARGEINCREMENTTABLE_HPP
-#define CDPL_FORCEFIELD_MMFF94BONDCHARGEINCREMENTTABLE_HPP
+#ifndef CDPL_FORCEFIELD_MMFF94TORSIONPARAMETERTABLE_HPP
+#define CDPL_FORCEFIELD_MMFF94TORSIONPARAMETERTABLE_HPP
 
 #include <cstddef>
 #include <iosfwd>
@@ -53,7 +53,7 @@ namespace CDPL
 		 * @{
 		 */
 
-		class CDPL_FORCEFIELD_API MMFF94BondChargeIncrementTable
+		class CDPL_FORCEFIELD_API MMFF94TorsionParameterTable
 		{
 
 		  public:
@@ -63,48 +63,64 @@ namespace CDPL
 			typedef boost::unordered_map<std::size_t, Entry> DataStorage;
 
 		  public:
-			typedef boost::shared_ptr<MMFF94BondChargeIncrementTable> SharedPointer;
-
+			typedef boost::shared_ptr<MMFF94TorsionParameterTable> SharedPointer;
+	
 			class CDPL_FORCEFIELD_API Entry
 			{
 
 			  public:
 				Entry();
  
-				Entry(unsigned int bond_type_idx, unsigned int atom1_type, unsigned int atom2_type, double bond_chg_inc);
+				Entry(unsigned int tor_type_idx, unsigned int nbr_atom1_type, unsigned int ctr_atom1_type, unsigned int ctr_atom2_type,
+					  unsigned int nbr_atom2_type, double tor_param1, double tor_param2, double tor_param3);
 
-				unsigned int getBondTypeIndex() const;
+				unsigned int getTorsionTypeIndex() const;
 
-				unsigned int getAtom1Type() const;
+				unsigned int getNeighborAtom1Type() const;
 
-				unsigned int getAtom2Type() const;
+				unsigned int getCenterAtom1Type() const;
 
-				double getChargeIncrement() const;
+				unsigned int getCenterAtom2Type() const;
+
+				unsigned int getNeighborAtom2Type() const;
+
+				double getTorsionParameter1() const;
+
+				double getTorsionParameter2() const;
+
+				double getTorsionParameter3() const;
 
 				operator bool() const;
 
 			  private:
-				unsigned int bondTypeIdx;
-				unsigned int atom1Type;
-				unsigned int atom2Type;
-				double       chargeIncr;
+				unsigned int torTypeIdx;
+				unsigned int nbrAtom1Type;
+				unsigned int ctrAtom1Type;
+				unsigned int ctrAtom2Type;
+				unsigned int nbrAtom2Type;
+				double       torParam1;
+				double       torParam2;
+				double       torParam3;
 			};			
-	
+
 			typedef boost::transform_iterator<boost::function1<const Entry&, const DataStorage::value_type&>, 
 											  DataStorage::const_iterator> ConstEntryIterator;
 
 			typedef boost::transform_iterator<boost::function1<Entry&, DataStorage::value_type&>, 
 											  DataStorage::iterator> EntryIterator;
 	
-			MMFF94BondChargeIncrementTable();
+			MMFF94TorsionParameterTable();
 
-			void addEntry(unsigned int bond_type_idx, unsigned int atom1_type, unsigned int atom2_type, double bond_chg_inc);
+			void addEntry(unsigned int tor_type_idx, unsigned int nbr_atom1_type, unsigned int ctr_atom1_type, unsigned int ctr_atom2_type,
+						  unsigned int nbr_atom2_type, double tor_param1, double tor_param2, double tor_param3);
 
-			const Entry& getEntry(unsigned int bnd_type_idx, unsigned int atom1_type, unsigned int atom2_type) const;
-
+			const Entry& getEntry(unsigned int tor_type_idx, unsigned int nbr_atom1_type, unsigned int ctr_atom1_type, unsigned int ctr_atom2_type,
+								  unsigned int nbr_atom2_type) const;
+	
 			void clear();
 
-			bool removeEntry(unsigned int bnd_type_idx, unsigned int atom1_type, unsigned int atom2_type);
+			bool removeEntry(unsigned int tor_type_idx, unsigned int nbr_atom1_type, unsigned int ctr_atom1_type, unsigned int ctr_atom2_type,
+							 unsigned int nbr_atom2_type);
 
 			EntryIterator removeEntry(const EntryIterator& it);
 
@@ -120,12 +136,13 @@ namespace CDPL
 
 			void loadDefaults();
 
-			static void set(const SharedPointer& table);
+			static void set(const SharedPointer& table, bool mmff94s);
 
-			static const SharedPointer& get();
+			static const SharedPointer& get(bool mmff94s);
 
 		  private:
-			static SharedPointer defaultTable;
+			static SharedPointer defaultDynTable;
+			static SharedPointer defaultStatTable;
 			DataStorage          entries;
 		};
     
@@ -135,4 +152,4 @@ namespace CDPL
     }
 }
 
-#endif // CDPL_FORCEFIELD_MMFF94BONDCHARGEINCREMENTTABLE_HPP
+#endif // CDPL_FORCEFIELD_MMFF94TORSIONPARAMETERTABLE_HPP

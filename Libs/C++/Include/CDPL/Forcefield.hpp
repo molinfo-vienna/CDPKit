@@ -54,4 +54,14 @@
 #include "CDPL/Forcefield/MMFF94BondChargeIncrementTable.hpp"
 #include "CDPL/Forcefield/MMFF94PartialBondChargeIncrementTable.hpp"
 
+#include "CDPL/Forcefield/MMFF94PrimaryToParameterAtomTypeMap.hpp"
+#include "CDPL/Forcefield/MMFF94AngleBendingParameterTable.hpp"
+#include "CDPL/Forcefield/MMFF94BondStretchingParameterTable.hpp"
+#include "CDPL/Forcefield/MMFF94BondStretchingRuleParameterTable.hpp"
+#include "CDPL/Forcefield/MMFF94StretchBendParameterTable.hpp"
+#include "CDPL/Forcefield/MMFF94DefaultStretchBendParameterTable.hpp"
+#include "CDPL/Forcefield/MMFF94OutOfPlaneBendingParameterTable.hpp"
+#include "CDPL/Forcefield/MMFF94TorsionParameterTable.hpp"
+#include "CDPL/Forcefield/MMFF94VanDerWaalsParameterTable.hpp"
+
 #endif // CDPL_FORCEFIELD_HPP

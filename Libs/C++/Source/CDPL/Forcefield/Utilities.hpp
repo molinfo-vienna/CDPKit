@@ -37,7 +37,7 @@ namespace CDPL
     namespace Forcefield
     {
 
-	bool readMMFF94DataLine(std::istream& is, std::string& line, const char* err_msg = "Error while reading MMFF94 parameter data");
+		bool readMMFF94DataLine(std::istream& is, std::string& line, const char* err_msg = "Error while reading MMFF94 parameter data");
     }
 }
 

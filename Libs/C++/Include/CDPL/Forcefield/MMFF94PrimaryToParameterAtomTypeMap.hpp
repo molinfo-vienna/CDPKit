@@ -1,7 +1,7 @@
 /* -*- mode: c++; c-basic-offset: 4; tab-width: 4; indent-tabs-mode: t -*- */
 
 /* 
- * MMFF94BondChargeIncrementTable.hpp 
+ * MMFF94PrimaryToParameterAtomTypeMap.hpp 
  *
  * This file is part of the Chemical Data Processing Toolkit
  *
@@ -25,13 +25,12 @@
 
 /**
  * \file
- * \brief Definition of the class CDPL::Forcefield::MMFF94BondChargeIncrementTable.
+ * \brief Definition of the class CDPL::Forcefield::MMFF94PrimaryToParameterAtomTypeMap.
  */
 
-#ifndef CDPL_FORCEFIELD_MMFF94BONDCHARGEINCREMENTTABLE_HPP
-#define CDPL_FORCEFIELD_MMFF94BONDCHARGEINCREMENTTABLE_HPP
+#ifndef CDPL_FORCEFIELD_MMFF94PRIMARYTOPARAMETERATOMTYPEMAP_HPP
+#define CDPL_FORCEFIELD_MMFF94PRIMARYTOPARAMETERATOMTYPEMAP_HPP
 
-#include <cstddef>
 #include <iosfwd>
 
 #include <boost/shared_ptr.hpp>
@@ -53,58 +52,54 @@ namespace CDPL
 		 * @{
 		 */
 
-		class CDPL_FORCEFIELD_API MMFF94BondChargeIncrementTable
+		class CDPL_FORCEFIELD_API MMFF94PrimaryToParameterAtomTypeMap
 		{
 
 		  public:
 			class Entry;
 
 		  private:
-			typedef boost::unordered_map<std::size_t, Entry> DataStorage;
+			typedef boost::unordered_map<unsigned int, Entry> DataStorage;
 
 		  public:
-			typedef boost::shared_ptr<MMFF94BondChargeIncrementTable> SharedPointer;
-
+			typedef boost::shared_ptr<MMFF94PrimaryToParameterAtomTypeMap> SharedPointer;
+	
 			class CDPL_FORCEFIELD_API Entry
 			{
 
 			  public:
+				static const std::size_t NUM_TYPES = 4;
+
 				Entry();
  
-				Entry(unsigned int bond_type_idx, unsigned int atom1_type, unsigned int atom2_type, double bond_chg_inc);
+				Entry(unsigned int prim_type, unsigned int param_types[]);
 
-				unsigned int getBondTypeIndex() const;
+				unsigned int getAtomType() const;
 
-				unsigned int getAtom1Type() const;
-
-				unsigned int getAtom2Type() const;
-
-				double getChargeIncrement() const;
+				const unsigned int* getParameterTypes() const;
 
 				operator bool() const;
 
 			  private:
-				unsigned int bondTypeIdx;
-				unsigned int atom1Type;
-				unsigned int atom2Type;
-				double       chargeIncr;
+				unsigned int atomType;
+				unsigned int paramTypes[NUM_TYPES];
 			};			
-	
+
 			typedef boost::transform_iterator<boost::function1<const Entry&, const DataStorage::value_type&>, 
 											  DataStorage::const_iterator> ConstEntryIterator;
 
 			typedef boost::transform_iterator<boost::function1<Entry&, DataStorage::value_type&>, 
 											  DataStorage::iterator> EntryIterator;
 	
-			MMFF94BondChargeIncrementTable();
+			MMFF94PrimaryToParameterAtomTypeMap();
 
-			void addEntry(unsigned int bond_type_idx, unsigned int atom1_type, unsigned int atom2_type, double bond_chg_inc);
+			void addEntry(unsigned int prim_type, unsigned int param_types[4]);
 
-			const Entry& getEntry(unsigned int bnd_type_idx, unsigned int atom1_type, unsigned int atom2_type) const;
+			const Entry& getEntry(unsigned int prim_type) const;
 
 			void clear();
 
-			bool removeEntry(unsigned int bnd_type_idx, unsigned int atom1_type, unsigned int atom2_type);
+			bool removeEntry(unsigned int prim_type);
 
 			EntryIterator removeEntry(const EntryIterator& it);
 
@@ -135,4 +130,4 @@ namespace CDPL
     }
 }
 
-#endif // CDPL_FORCEFIELD_MMFF94BONDCHARGEINCREMENTTABLE_HPP
+#endif // CDPL_FORCEFIELD_MMFF94PRIMARYTOPARAMETERATOMTYPEMAP_HPP

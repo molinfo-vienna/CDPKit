@@ -348,15 +348,14 @@ double Forcefield::MMFF94ChargeCalculator::getBondChargeIncrement(unsigned int b
 	if (atom_type1 == atom_type2)
 		return 0.0;
 
-	const BCIEntry& bci_entry1 = bondChargeIncTable->getEntry(bnd_type_idx, atom_type1, atom_type2);
+	const BCIEntry& bci_entry = bondChargeIncTable->getEntry(bnd_type_idx, atom_type1, atom_type2);
 
-	if (bci_entry1)
-		return bci_entry1.getChargeIncrement();
+	if (bci_entry) {
+		if (bci_entry.getAtom1Type() == atom_type1)
+			return bci_entry.getChargeIncrement();
 
-	const BCIEntry& bci_entry2 = bondChargeIncTable->getEntry(bnd_type_idx, atom_type2, atom_type1);
-
-	if (bci_entry2)
-		return -bci_entry2.getChargeIncrement();
+		return -bci_entry.getChargeIncrement();
+	}
 
     return (pbci_entry2.getPartialChargeIncrement() - pbci_entry1.getPartialChargeIncrement());
 }

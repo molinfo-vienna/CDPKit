@@ -1,7 +1,7 @@
 /* -*- mode: c++; c-basic-offset: 4; tab-width: 4; indent-tabs-mode: t -*- */
 
 /* 
- * MMFF94BondChargeIncrementTable.hpp 
+ * MMFF94BondStretchingRuleParameterTable.hpp 
  *
  * This file is part of the Chemical Data Processing Toolkit
  *
@@ -25,11 +25,11 @@
 
 /**
  * \file
- * \brief Definition of the class CDPL::Forcefield::MMFF94BondChargeIncrementTable.
+ * \brief Definition of the class CDPL::Forcefield::MMFF94BondStretchingRuleParameterTable.
  */
 
-#ifndef CDPL_FORCEFIELD_MMFF94BONDCHARGEINCREMENTTABLE_HPP
-#define CDPL_FORCEFIELD_MMFF94BONDCHARGEINCREMENTTABLE_HPP
+#ifndef CDPL_FORCEFIELD_MMFF94BONDSTRETCHINGRULEPARAMETERTABLE_HPP
+#define CDPL_FORCEFIELD_MMFF94BONDSTRETCHINGRULEPARAMETERTABLE_HPP
 
 #include <cstddef>
 #include <iosfwd>
@@ -49,11 +49,11 @@ namespace CDPL
     {
 
 		/**
-		 * \addtogroup CDPL_FORCEFIELD_PARAMETER_TABLES
+		 * \addtogroup CDPL_FORCEFIELD_RULEPARAMETER_TABLES
 		 * @{
 		 */
 
-		class CDPL_FORCEFIELD_API MMFF94BondChargeIncrementTable
+		class CDPL_FORCEFIELD_API MMFF94BondStretchingRuleParameterTable
 		{
 
 		  public:
@@ -63,48 +63,48 @@ namespace CDPL
 			typedef boost::unordered_map<std::size_t, Entry> DataStorage;
 
 		  public:
-			typedef boost::shared_ptr<MMFF94BondChargeIncrementTable> SharedPointer;
-
+			typedef boost::shared_ptr<MMFF94BondStretchingRuleParameterTable> SharedPointer;
+	
 			class CDPL_FORCEFIELD_API Entry
 			{
 
 			  public:
 				Entry();
  
-				Entry(unsigned int bond_type_idx, unsigned int atom1_type, unsigned int atom2_type, double bond_chg_inc);
-
-				unsigned int getBondTypeIndex() const;
+				Entry(unsigned int atom1_type, unsigned int atom2_type, double force_const, double ref_length);
 
 				unsigned int getAtom1Type() const;
 
 				unsigned int getAtom2Type() const;
 
-				double getChargeIncrement() const;
+				double getForceConstant() const;
+
+				double getReferenceBondLength() const;
 
 				operator bool() const;
 
 			  private:
-				unsigned int bondTypeIdx;
 				unsigned int atom1Type;
 				unsigned int atom2Type;
-				double       chargeIncr;
+				double       forceConst;
+				double       refLength;
 			};			
-	
+
 			typedef boost::transform_iterator<boost::function1<const Entry&, const DataStorage::value_type&>, 
 											  DataStorage::const_iterator> ConstEntryIterator;
 
 			typedef boost::transform_iterator<boost::function1<Entry&, DataStorage::value_type&>, 
 											  DataStorage::iterator> EntryIterator;
 	
-			MMFF94BondChargeIncrementTable();
+			MMFF94BondStretchingRuleParameterTable();
 
-			void addEntry(unsigned int bond_type_idx, unsigned int atom1_type, unsigned int atom2_type, double bond_chg_inc);
+			void addEntry(unsigned int atom1_type, unsigned int atom2_type, double force_const, double ref_length);
 
-			const Entry& getEntry(unsigned int bnd_type_idx, unsigned int atom1_type, unsigned int atom2_type) const;
-
+			const Entry& getEntry(unsigned int atom1_type, unsigned int atom2_type) const;
+	
 			void clear();
 
-			bool removeEntry(unsigned int bnd_type_idx, unsigned int atom1_type, unsigned int atom2_type);
+			bool removeEntry(unsigned int atom1_type, unsigned int atom2_type);
 
 			EntryIterator removeEntry(const EntryIterator& it);
 
@@ -135,4 +135,4 @@ namespace CDPL
     }
 }
 
-#endif // CDPL_FORCEFIELD_MMFF94BONDCHARGEINCREMENTTABLE_HPP
+#endif // CDPL_FORCEFIELD_MMFF94BONDSTRETCHINGRULEPARAMETERTABLE_HPP

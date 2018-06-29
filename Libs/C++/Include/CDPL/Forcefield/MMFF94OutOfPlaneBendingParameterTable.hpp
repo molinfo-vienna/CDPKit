@@ -1,7 +1,7 @@
 /* -*- mode: c++; c-basic-offset: 4; tab-width: 4; indent-tabs-mode: t -*- */
 
 /* 
- * MMFF94BondChargeIncrementTable.hpp 
+ * MMFF94OutOfPlaneBendingParameterTable.hpp 
  *
  * This file is part of the Chemical Data Processing Toolkit
  *
@@ -25,11 +25,11 @@
 
 /**
  * \file
- * \brief Definition of the class CDPL::Forcefield::MMFF94BondChargeIncrementTable.
+ * \brief Definition of the class CDPL::Forcefield::MMFF94OutOfPlaneBendingParameterTable.
  */
 
-#ifndef CDPL_FORCEFIELD_MMFF94BONDCHARGEINCREMENTTABLE_HPP
-#define CDPL_FORCEFIELD_MMFF94BONDCHARGEINCREMENTTABLE_HPP
+#ifndef CDPL_FORCEFIELD_MMFF94OUTOFPLANEBENDINGPARAMETERTABLE_HPP
+#define CDPL_FORCEFIELD_MMFF94OUTOFPLANEBENDINGPARAMETERTABLE_HPP
 
 #include <cstddef>
 #include <iosfwd>
@@ -53,7 +53,7 @@ namespace CDPL
 		 * @{
 		 */
 
-		class CDPL_FORCEFIELD_API MMFF94BondChargeIncrementTable
+		class CDPL_FORCEFIELD_API MMFF94OutOfPlaneBendingParameterTable
 		{
 
 		  public:
@@ -63,48 +63,55 @@ namespace CDPL
 			typedef boost::unordered_map<std::size_t, Entry> DataStorage;
 
 		  public:
-			typedef boost::shared_ptr<MMFF94BondChargeIncrementTable> SharedPointer;
-
+			typedef boost::shared_ptr<MMFF94OutOfPlaneBendingParameterTable> SharedPointer;
+	
 			class CDPL_FORCEFIELD_API Entry
 			{
 
 			  public:
 				Entry();
  
-				Entry(unsigned int bond_type_idx, unsigned int atom1_type, unsigned int atom2_type, double bond_chg_inc);
+				Entry(unsigned int nbr_atom1_type, unsigned int ctr_atom_type, unsigned int nbr_atom2_type, 
+					  unsigned int oop_atom_type, double force_const);
 
-				unsigned int getBondTypeIndex() const;
+				unsigned int getNeighborAtom1Type() const;
 
-				unsigned int getAtom1Type() const;
+				unsigned int getNeighborAtom2Type() const;
 
-				unsigned int getAtom2Type() const;
+				unsigned int getCenterAtomType() const;
 
-				double getChargeIncrement() const;
+				unsigned int getOutOfPlaneAtomType() const;
+
+				double getForceConstant() const;
 
 				operator bool() const;
 
 			  private:
-				unsigned int bondTypeIdx;
-				unsigned int atom1Type;
-				unsigned int atom2Type;
-				double       chargeIncr;
+				unsigned int nbrAtom1Type;
+				unsigned int ctrAtomType;
+				unsigned int nbrAtom2Type;
+				unsigned int oopAtomType;
+				double       forceConst;
 			};			
-	
+
 			typedef boost::transform_iterator<boost::function1<const Entry&, const DataStorage::value_type&>, 
 											  DataStorage::const_iterator> ConstEntryIterator;
 
 			typedef boost::transform_iterator<boost::function1<Entry&, DataStorage::value_type&>, 
 											  DataStorage::iterator> EntryIterator;
 	
-			MMFF94BondChargeIncrementTable();
+			MMFF94OutOfPlaneBendingParameterTable();
 
-			void addEntry(unsigned int bond_type_idx, unsigned int atom1_type, unsigned int atom2_type, double bond_chg_inc);
+			void addEntry(unsigned int nbr_atom1_type, unsigned int ctr_atom_type, unsigned int nbr_atom2_type, 
+					  unsigned int oop_atom_type, double force_const);
 
-			const Entry& getEntry(unsigned int bnd_type_idx, unsigned int atom1_type, unsigned int atom2_type) const;
-
+			const Entry& getEntry(unsigned int nbr_atom1_type, unsigned int ctr_atom_type, unsigned int nbr_atom2_type, 
+								  unsigned int oop_atom_type) const;
+	
 			void clear();
 
-			bool removeEntry(unsigned int bnd_type_idx, unsigned int atom1_type, unsigned int atom2_type);
+			bool removeEntry(unsigned int nbr_atom1_type, unsigned int ctr_atom_type, unsigned int nbr_atom2_type, 
+							 unsigned int oop_atom_type);
 
 			EntryIterator removeEntry(const EntryIterator& it);
 
@@ -120,12 +127,13 @@ namespace CDPL
 
 			void loadDefaults();
 
-			static void set(const SharedPointer& table);
+			static void set(const SharedPointer& table, bool mmff94s);
 
-			static const SharedPointer& get();
+			static const SharedPointer& get(bool mmff94s);
 
 		  private:
-			static SharedPointer defaultTable;
+			static SharedPointer defaultDynTable;
+			static SharedPointer defaultStatTable;
 			DataStorage          entries;
 		};
     
@@ -135,4 +143,4 @@ namespace CDPL
     }
 }
 
-#endif // CDPL_FORCEFIELD_MMFF94BONDCHARGEINCREMENTTABLE_HPP
+#endif // CDPL_FORCEFIELD_MMFF94OUTOFPLANEBENDINGPARAMETERTABLE_HPP

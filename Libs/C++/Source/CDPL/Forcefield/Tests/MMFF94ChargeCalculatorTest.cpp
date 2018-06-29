@@ -76,7 +76,7 @@ BOOST_AUTO_TEST_CASE(MMFF94ChargeCalculatorTest)
 			double correct_charge = form_charges[i];
 			double calc_charge = charge_calc.getFormalCharges()[i];
 
-			if (std::abs(calc_charge - correct_charge) > 0.001) {
+			if (std::abs(calc_charge - correct_charge) > 0.0005) {
 				const Chem::Atom& atom = mol.getAtom(i);
 
 				BOOST_MESSAGE("!! Formal charge mismatch for atom #" << i << " (" << getMOL2Name(atom) <<
@@ -89,7 +89,7 @@ BOOST_AUTO_TEST_CASE(MMFF94ChargeCalculatorTest)
 			double correct_charge = part_charges[i];
 			double calc_charge = calc_charges[i];
 
-			if (std::abs(calc_charge - correct_charge) > 0.035) {
+			if (std::abs(calc_charge - correct_charge) > 0.0006) {
 				const Chem::Atom& atom = mol.getAtom(i);
 
 				BOOST_MESSAGE("!! Partial charge mismatch for atom #" << i << " (" << getMOL2Name(atom) <<
