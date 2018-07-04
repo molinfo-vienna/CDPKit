@@ -1,0 +1,289 @@
+/* -*- mode: c++; c-basic-offset: 4; tab-width: 4; indent-tabs-mode: t -*- */
+
+/* 
+ * MMFF94TorsionParameterTable.cpp 
+ *
+ * This file is part of the Chemical Data Processing Toolkit
+ *
+ * Copyright (C) 2003-2010 Thomas A. Seidel <thomas.seidel@univie.ac.at>
+ *
+ * This library is free software; you can redistribute it and/or
+ * modify it under the terms of the GNU Lesser General Public
+ * License as published by the Free Software Foundation; either
+ * version 2 of the License, or (at your option) any later version.
+ *
+ * This library is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU
+ * Lesser General Public License for more details.
+ *
+ * You should have received a copy of the GNU Lesser General Public License
+ * along with this library; see the file COPYING. If not, write to
+ * the Free Software Foundation, Inc., 59 Temple Place - Suite 330,
+ * Boston, MA 02111-1307, USA.
+ */
+
+ 
+#include "StaticInit.hpp"
+
+#include <cstring>
+#include <sstream>
+
+#include "CDPL/Config.hpp"
+
+#include <boost/bind.hpp>
+
+#if defined(HAVE_BOOST_IOSTREAMS)
+
+#include <boost/iostreams/device/array.hpp>
+#include <boost/iostreams/stream.hpp>
+
+#endif // defined(HAVE_BOOST_IOSTREAMS)
+
+#include "CDPL/Forcefield/MMFF94TorsionParameterTable.hpp"
+#include "CDPL/Base/Exceptions.hpp"
+
+#include "MMFF94ParameterData.hpp"
+#include "Utilities.hpp"
+
+
+using namespace CDPL; 
+
+
+namespace
+{
+ 
+    Forcefield::MMFF94TorsionParameterTable::SharedPointer builtinDynTable(new Forcefield::MMFF94TorsionParameterTable());
+    Forcefield::MMFF94TorsionParameterTable::SharedPointer builtinStatTable(new Forcefield::MMFF94TorsionParameterTable());
+
+    struct Init
+    {
+
+		Init() {
+			builtinDynTable->loadDefaults(false);
+			builtinStatTable->loadDefaults(true);
+		}
+
+    } init;
+
+	Base::uint64 lookupKey(Base::uint32 tor_type_idx, Base::uint32 nbr_atom1_type, Base::uint32 ctr_atom1_type, Base::uint32 ctr_atom2_type, Base::uint32 nbr_atom2_type)
+	{
+		if (nbr_atom1_type < nbr_atom2_type || (nbr_atom1_type == nbr_atom2_type && ctr_atom1_type <= ctr_atom2_type)) 
+			return ((Base::uint64(nbr_atom1_type) << 32) + (ctr_atom1_type << 24) + (ctr_atom2_type << 16) + (nbr_atom2_type << 8) + tor_type_idx);
+
+		return ((Base::uint64(nbr_atom2_type) << 32) + (ctr_atom2_type << 24) + (ctr_atom1_type << 16) + (nbr_atom1_type << 8) + tor_type_idx);
+	}
+
+	const Forcefield::MMFF94TorsionParameterTable::Entry NOT_FOUND;
+}
+
+
+Forcefield::MMFF94TorsionParameterTable::SharedPointer Forcefield::MMFF94TorsionParameterTable::defaultDynTable  = builtinDynTable;
+Forcefield::MMFF94TorsionParameterTable::SharedPointer Forcefield::MMFF94TorsionParameterTable::defaultStatTable = builtinStatTable;
+
+
+Forcefield::MMFF94TorsionParameterTable::Entry::Entry():
+	torTypeIdx(0), nbrAtom1Type(0), ctrAtom1Type(0), ctrAtom2Type(0), nbrAtom2Type(0),
+	torParam1(0), torParam2(0), torParam3(0), initialized(false)
+{}
+
+Forcefield::MMFF94TorsionParameterTable::Entry::Entry(unsigned int tor_type_idx, unsigned int nbr_atom1_type, unsigned int ctr_atom1_type, unsigned int ctr_atom2_type,
+													  unsigned int nbr_atom2_type, double tor_param1, double tor_param2, double tor_param3):
+	torTypeIdx(tor_type_idx), nbrAtom1Type(nbr_atom1_type), ctrAtom1Type(ctr_atom1_type), ctrAtom2Type(nbr_atom2_type), nbrAtom2Type(nbr_atom2_type),
+	torParam1(tor_param1), torParam2(tor_param2), torParam3(tor_param3), initialized(true)
+{}
+
+unsigned int Forcefield::MMFF94TorsionParameterTable::Entry::getNeighborAtom1Type() const
+{
+	return nbrAtom1Type;
+}
+
+unsigned int Forcefield::MMFF94TorsionParameterTable::Entry::getCenterAtom1Type() const
+{
+	return ctrAtom1Type;
+}
+
+unsigned int Forcefield::MMFF94TorsionParameterTable::Entry::getCenterAtom2Type() const
+{
+	return ctrAtom2Type;
+}
+
+unsigned int Forcefield::MMFF94TorsionParameterTable::Entry::getNeighborAtom2Type() const
+{
+	return nbrAtom2Type;
+}
+
+double Forcefield::MMFF94TorsionParameterTable::Entry::getTorsionParameter1() const
+{
+	return torParam1;
+}
+
+double Forcefield::MMFF94TorsionParameterTable::Entry::getTorsionParameter2() const
+{
+	return torParam2;
+}
+
+double Forcefield::MMFF94TorsionParameterTable::Entry::getTorsionParameter3() const
+{
+	return torParam3;
+}
+
+Forcefield::MMFF94TorsionParameterTable::Entry::operator bool() const
+{
+	return initialized;
+}
+
+
+Forcefield::MMFF94TorsionParameterTable::MMFF94TorsionParameterTable()
+{}
+
+void Forcefield::MMFF94TorsionParameterTable::addEntry(unsigned int tor_type_idx, unsigned int nbr_atom1_type, unsigned int ctr_atom1_type, unsigned int ctr_atom2_type,
+													   unsigned int nbr_atom2_type, double tor_param1, double tor_param2, double tor_param3)
+{
+    entries.insert(DataStorage::value_type(lookupKey(tor_type_idx, nbr_atom1_type, ctr_atom1_type, ctr_atom2_type, nbr_atom2_type), 
+										   Entry(tor_type_idx, nbr_atom1_type, ctr_atom1_type, ctr_atom2_type, nbr_atom2_type, tor_param1, tor_param2, tor_param3)));
+}
+
+const Forcefield::MMFF94TorsionParameterTable::Entry& 
+Forcefield::MMFF94TorsionParameterTable::getEntry(unsigned int tor_type_idx, unsigned int nbr_atom1_type, unsigned int ctr_atom1_type, 
+												  unsigned int ctr_atom2_type, unsigned int nbr_atom2_type) const
+{
+	DataStorage::const_iterator it = entries.find(lookupKey(tor_type_idx, nbr_atom1_type, ctr_atom1_type, ctr_atom2_type, nbr_atom2_type));
+
+	if (it == entries.end())
+		return NOT_FOUND;
+
+	return it->second;
+}
+
+std::size_t Forcefield::MMFF94TorsionParameterTable::getNumEntries() const
+{
+    return entries.size();
+}
+
+void Forcefield::MMFF94TorsionParameterTable::clear()
+{
+    entries.clear();
+}
+
+bool Forcefield::MMFF94TorsionParameterTable::removeEntry(unsigned int tor_type_idx, unsigned int nbr_atom1_type, unsigned int ctr_atom1_type, 
+														  unsigned int ctr_atom2_type, unsigned int nbr_atom2_type)
+{
+	return entries.erase(lookupKey(tor_type_idx, nbr_atom1_type, ctr_atom1_type, ctr_atom2_type, nbr_atom2_type));
+}
+
+Forcefield::MMFF94TorsionParameterTable::EntryIterator 
+Forcefield::MMFF94TorsionParameterTable::removeEntry(const EntryIterator& it)
+{
+	return EntryIterator(entries.erase(it.base()), boost::bind<Entry&>(&DataStorage::value_type::second, _1));
+}
+
+Forcefield::MMFF94TorsionParameterTable::ConstEntryIterator 
+Forcefield::MMFF94TorsionParameterTable::getEntriesBegin() const
+{
+	return ConstEntryIterator(entries.begin(), boost::bind(&DataStorage::value_type::second, _1));
+}
+
+Forcefield::MMFF94TorsionParameterTable::ConstEntryIterator 
+Forcefield::MMFF94TorsionParameterTable::getEntriesEnd() const
+{
+	return ConstEntryIterator(entries.end(), boost::bind(&DataStorage::value_type::second, _1));
+}
+	
+Forcefield::MMFF94TorsionParameterTable::EntryIterator 
+Forcefield::MMFF94TorsionParameterTable::getEntriesBegin()
+{
+	return EntryIterator(entries.begin(), boost::bind<Entry&>(&DataStorage::value_type::second, _1));
+}
+
+Forcefield::MMFF94TorsionParameterTable::EntryIterator 
+Forcefield::MMFF94TorsionParameterTable::getEntriesEnd()
+{
+	return EntryIterator(entries.end(), boost::bind<Entry&>(&DataStorage::value_type::second, _1));
+}
+
+void Forcefield::MMFF94TorsionParameterTable::load(std::istream& is)
+{
+    std::string line;
+	unsigned int tor_type_idx;
+	unsigned int nbr_atom1_type;
+	unsigned int ctr_atom1_type;
+	unsigned int ctr_atom2_type;
+	unsigned int nbr_atom2_type;
+	double tor_param1;
+	double tor_param2;
+	double tor_param3;
+
+    while (readMMFF94DataLine(is, line, "MMFF94TorsionParameterTable: error while reading torsion parameter entry")) {
+		std::istringstream line_iss(line);
+
+		if (!(line_iss >> tor_type_idx))
+			throw Base::IOError("MMFF94TorsionParameterTable: error while reading torsion type index");
+
+		if (!(line_iss >> nbr_atom1_type))
+			throw Base::IOError("MMFF94TorsionParameterTable: error while reading terminal atom 1 type");
+
+		if (!(line_iss >> ctr_atom1_type))
+			throw Base::IOError("MMFF94TorsionParameterTable: error while reading center atom 1 type");
+
+		if (!(line_iss >> ctr_atom2_type))
+			throw Base::IOError("MMFF94TorsionParameterTable: error while reading center atom 2 type");
+
+		if (!(line_iss >> nbr_atom2_type))
+			throw Base::IOError("MMFF94TorsionParameterTable: error while reading terminal atom 2 type");
+
+		if (!(line_iss >> tor_param1))
+			throw Base::IOError("MMFF94TorsionParameterTable: error while reading torsion parameter 1");
+
+		if (!(line_iss >> tor_param2))
+			throw Base::IOError("MMFF94TorsionParameterTable: error while reading torsion parameter 2");
+
+		if (!(line_iss >> tor_param3))
+			throw Base::IOError("MMFF94TorsionParameterTable: error while reading torsion parameter 3");
+
+		addEntry(tor_type_idx, nbr_atom1_type, ctr_atom1_type, ctr_atom2_type, nbr_atom2_type, tor_param1, tor_param2, tor_param3);
+    }
+}
+
+void Forcefield::MMFF94TorsionParameterTable::loadDefaults(bool mmff94s)
+{
+	if (mmff94s) {
+#if defined(HAVE_BOOST_IOSTREAMS)
+
+		boost::iostreams::stream<boost::iostreams::array_source> is(MMFF94ParameterData::STATIC_TORSION_PARAMETERS, 
+																	std::strlen(MMFF94ParameterData::STATIC_TORSION_PARAMETERS));
+#else // defined(HAVE_BOOST_IOSTREAMS)
+
+		std::istringstream is(std::string(MMFF94ParameterData::STATIC_TORSION_PARAMETERS));
+
+#endif // defined(HAVE_BOOST_IOSTREAMS)
+
+		load(is);
+
+	} else {
+#if defined(HAVE_BOOST_IOSTREAMS)
+
+		boost::iostreams::stream<boost::iostreams::array_source> is(MMFF94ParameterData::TORSION_PARAMETERS, 
+																	std::strlen(MMFF94ParameterData::TORSION_PARAMETERS));
+#else // defined(HAVE_BOOST_IOSTREAMS)
+
+		std::istringstream is(std::string(MMFF94ParameterData::TORSION_PARAMETERS));
+
+#endif // defined(HAVE_BOOST_IOSTREAMS)
+
+		load(is);
+	}
+}
+
+void Forcefield::MMFF94TorsionParameterTable::set(const SharedPointer& table, bool mmff94s)
+{	
+	if (mmff94s) 
+		defaultStatTable = (!table ? builtinStatTable : table);
+	else
+		defaultDynTable = (!table ? builtinDynTable : table);
+}
+
+const Forcefield::MMFF94TorsionParameterTable::SharedPointer& Forcefield::MMFF94TorsionParameterTable::get(bool mmff94s)
+{
+    return (mmff94s ? defaultStatTable : defaultDynTable);
+}
