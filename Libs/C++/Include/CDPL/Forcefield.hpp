@@ -53,7 +53,6 @@
 #include "CDPL/Forcefield/MMFF94FormalAtomChargeDefinitionTable.hpp"
 #include "CDPL/Forcefield/MMFF94BondChargeIncrementTable.hpp"
 #include "CDPL/Forcefield/MMFF94PartialBondChargeIncrementTable.hpp"
-
 #include "CDPL/Forcefield/MMFF94PrimaryToParameterAtomTypeMap.hpp"
 #include "CDPL/Forcefield/MMFF94AngleBendingParameterTable.hpp"
 #include "CDPL/Forcefield/MMFF94BondStretchingParameterTable.hpp"

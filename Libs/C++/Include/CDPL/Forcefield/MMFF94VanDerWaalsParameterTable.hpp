@@ -32,6 +32,7 @@
 #define CDPL_FORCEFIELD_MMFF94VANDERWAALSPARAMETERTABLE_HPP
 
 #include <iosfwd>
+#include <cstddef>
 
 #include <boost/shared_ptr.hpp>
 #include <boost/unordered_map.hpp>
@@ -76,7 +77,9 @@ namespace CDPL
 			{
 
 			  public:
-				Entry(unsigned int atom_type, double atom_pol, double eff_el_num, double scale_fac1, double scale_fac2, 
+				Entry();
+
+				Entry(unsigned int atom_type, double atom_pol, double eff_el_num, double scale_fact_a, double scale_fact_g, 
 					  HDonorAcceptorType don_acc_type);
  
 				unsigned int getAtomType() const;
@@ -117,9 +120,10 @@ namespace CDPL
 				unsigned int       atomType;
 				double             polarizability;
 				double             effElNumber;
-				double             scalingFact1;
-				double             scaleingFact2;
+				double             scalingFactA;
+				double             scalingFactG;
 				HDonorAcceptorType donAccType;
+				bool               initialized;
 			};			
 
 			typedef boost::transform_iterator<boost::function1<const Entry&, const DataStorage::value_type&>, 
@@ -130,10 +134,12 @@ namespace CDPL
 	
 			MMFF94VanDerWaalsParameterTable();
 
-			void addEntry(unsigned int atom_type, double atom_pol, double eff_el_num, double scale_fac1, double scale_fac2, 
+			void addEntry(unsigned int atom_type, double atom_pol, double eff_el_num, double scale_fact_a, double scale_fact_g, 
 						  HDonorAcceptorType don_acc_type);
 
 			const Entry& getEntry(unsigned int atom_type) const;
+
+			std::size_t getNumEntries() const;
 
 			void clear();
 
@@ -149,48 +155,48 @@ namespace CDPL
 
 			EntryIterator getEntriesEnd();
 
-			void setPEXP(double value);
+			void setExponent(double value);
 
-			void setAFACT(double value);
+			void setBeta(double value);
 
-			void setBFACT(double value);
+			void setBFactor(double value);
 
 			void setDARAD(double value);
 
 			void setDAEPS(double value);
 
 			/**
-			 * \brief Returns the PEXP value used in the calculation of van der Waals
+			 * \brief Returns the exponent used in the calculation of van der Waals
 			 *        interaction energies.
-			 * \return The PEXP value.
+			 * \return The exponent.
 			 */
-			double getPEXP() const;
+			double getExponent() const;
     
 			/**
-			 * \brief Returns the AFACT value used in the calculation of van der Waals
+			 * \brief Returns the value of the \e B factor used in the calculation of van der Waals
 			 *        interaction energies.
-			 * \return The AFACT value.
+			 * \return The value of the \e B factor.
 			 */
-			double getAFACT() const;
+			double getBFactor() const;
   
 			/**
-			 * \brief Returns the BFACT value used in the calculation of van der Waals
+			 * \brief Returns the value of \e beta used in the calculation of van der Waals
 			 *        interaction energies.
-			 * \return The BFACT value.
+			 * \return The value of \e beta.
 			 */
-			double getBFACT() const;
+			double getBeta() const;
    
 			/**
-			 * \brief Returns the DARAD value used in the calculation of van der Waals
+			 * \brief Returns the value of the \e DARAD factor used in the calculation of van der Waals
 			 *        interaction energies.
-			 * \return The DARAD value.
+			 * \return The value of the \e DARAD factor.
 			 */
 			double getDARAD() const;
    
 			/**
-			 * \brief Returns the DAEPS value used in the calculation of van der Waals
+			 * \brief Returns the value of the \e DAEPS factor used in the calculation of van der Waals
 			 *        interaction energies.
-			 * \return The DAEPS value.
+			 * \return The value of the \e DAEPS factor.
 			 */
 			double getDAEPS() const;
 
@@ -205,11 +211,11 @@ namespace CDPL
 		  private:
 			static SharedPointer defaultTable;
 			DataStorage          entries;
-			double               PEXP;
-			double               AFACT;
-			double               BFACT;
-			double               DARAD;
-			double               DAEPS;
+			double               exponent;
+			double               bFactor;
+			double               beta;
+			double               darad;
+			double               daeps;
 		};
     
 		/**

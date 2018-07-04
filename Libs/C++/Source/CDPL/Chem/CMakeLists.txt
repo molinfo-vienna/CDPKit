@@ -131,6 +131,7 @@ SET(cdpl-chem_LIB_SRCS
     AtomRDFCodeCalculator.cpp
     MoleculeRDFDescriptorCalculator.cpp
     MoleculeAutoCorr3DDescriptorCalculator.cpp
+    MoleculeAutoCorr2DDescriptorCalculator.cpp
     BurdenMatrixGenerator.cpp
     BCUTDescriptorCalculator.cpp
     SurfaceAtomExtractor.cpp

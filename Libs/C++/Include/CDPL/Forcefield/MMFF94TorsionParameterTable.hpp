@@ -40,6 +40,7 @@
 #include <boost/iterator/transform_iterator.hpp>
 
 #include "CDPL/Forcefield/APIPrefix.hpp"
+#include "CDPL/Base/IntTypes.hpp"
 
 
 namespace CDPL 
@@ -60,7 +61,7 @@ namespace CDPL
 			class Entry;
 
 		  private:
-			typedef boost::unordered_map<std::size_t, Entry> DataStorage;
+			typedef boost::unordered_map<Base::uint64, Entry> DataStorage;
 
 		  public:
 			typedef boost::shared_ptr<MMFF94TorsionParameterTable> SharedPointer;
@@ -101,6 +102,7 @@ namespace CDPL
 				double       torParam1;
 				double       torParam2;
 				double       torParam3;
+				bool         initialized;
 			};			
 
 			typedef boost::transform_iterator<boost::function1<const Entry&, const DataStorage::value_type&>, 
@@ -116,7 +118,9 @@ namespace CDPL
 
 			const Entry& getEntry(unsigned int tor_type_idx, unsigned int nbr_atom1_type, unsigned int ctr_atom1_type, unsigned int ctr_atom2_type,
 								  unsigned int nbr_atom2_type) const;
-	
+
+			std::size_t getNumEntries() const;
+
 			void clear();
 
 			bool removeEntry(unsigned int tor_type_idx, unsigned int nbr_atom1_type, unsigned int ctr_atom1_type, unsigned int ctr_atom2_type,
@@ -134,7 +138,7 @@ namespace CDPL
 
 			void load(std::istream& is);
 
-			void loadDefaults();
+			void loadDefaults(bool mmff94s);
 
 			static void set(const SharedPointer& table, bool mmff94s);
 

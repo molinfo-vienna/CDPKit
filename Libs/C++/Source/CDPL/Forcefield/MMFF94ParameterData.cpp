@@ -41,7 +41,7 @@ const char* MMFF94ParameterData::BOND_STRETCHING_PARAMETERS =
 #include "MMFFBOND.PAR.str" 
 ;
 
-const char* MMFF94ParameterData::BOND_STRETCHING_EMP_RULE_PARAMETERS =      
+const char* MMFF94ParameterData::BOND_STRETCHING_RULE_PARAMETERS =      
 #include "MMFFBNDK.PAR.str" 
 ;
 

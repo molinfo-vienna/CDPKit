@@ -33,6 +33,7 @@
 
 #include <string>
 #include <iosfwd>
+#include <cstddef>
 
 #include <boost/shared_ptr.hpp>
 #include <boost/unordered_map.hpp>
@@ -68,6 +69,8 @@ namespace CDPL
 	    void addEntry(const std::string& parent_type, const std::string& hyd_type);
 
 	    const std::string& getEntry(const std::string& parent_type) const;
+
+		std::size_t getNumEntries() const;
 
 	    void clear();
 

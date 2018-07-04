@@ -68,7 +68,7 @@ namespace
 
 
 Forcefield::MMFF94SymbolicAtomTypePatternTable::SharedPointer 
-Forcefield::MMFF94SymbolicAtomTypePatternTable::defaultTable = builtinTable;
+Forcefield::MMFF94SymbolicAtomTypePatternTable::defaultTable  = builtinTable;
 
 
 Forcefield::MMFF94SymbolicAtomTypePatternTable::Entry::Entry(const Chem::MolecularGraph::SharedPointer& ptn, 

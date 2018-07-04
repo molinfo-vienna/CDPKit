@@ -104,6 +104,7 @@ namespace CDPL
 				bool         isAroType;
 				bool         hasLinBondAng;
 				bool         hasMultiOrSingleBonds;
+				bool         initialized;
 			};			
 
 			typedef boost::transform_iterator<boost::function1<const Entry&, const DataStorage::value_type&>, 
@@ -118,6 +119,8 @@ namespace CDPL
 						  bool has_pi_lp, bool has_mb, bool is_arom, bool lin_bnd_ang, bool has_mb_or_sb);
 
 			const Entry& getEntry(unsigned int atom_type) const;
+
+			std::size_t getNumEntries() const;
 
 			void clear();
 

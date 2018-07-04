@@ -40,6 +40,7 @@
 #include <boost/iterator/transform_iterator.hpp>
 
 #include "CDPL/Forcefield/APIPrefix.hpp"
+#include "CDPL/Base/IntTypes.hpp"
 
 
 namespace CDPL 
@@ -60,7 +61,7 @@ namespace CDPL
 			class Entry;
 
 		  private:
-			typedef boost::unordered_map<std::size_t, Entry> DataStorage;
+            typedef boost::unordered_map<Base::uint32, Entry> DataStorage;
 
 		  public:
 			typedef boost::shared_ptr<MMFF94DefaultStretchBendParameterTable> SharedPointer;
@@ -74,11 +75,11 @@ namespace CDPL
 				Entry(unsigned int nbr_atom1_pte_row, unsigned int ctr_atom_pte_row, 
 					  unsigned int nbr_atom2_pte_row, double ijk_force_const, double kji_force_const);
 
-				unsigned int getNeighbor1AtomType() const;
+				unsigned int getNeighborAtom1PTERow() const;
 
-				unsigned int getCenterAtomType() const;
+				unsigned int getCenterAtomPTERow() const;
 
-				unsigned int getNeighbor2AtomType() const;
+				unsigned int getNeighborAtom2PTERow() const;
 
 				double getIJKForceConstant() const;
 
@@ -87,11 +88,12 @@ namespace CDPL
 				operator bool() const;
 
 			  private:
-				unsigned int nbrAtom1Type;
-				unsigned int ctrAtomType;
-				unsigned int nbrAtom2Type;
+				unsigned int nbrAtom1PTERow;
+				unsigned int ctrAtomPTERow;
+				unsigned int nbrAtom2PTERow;
 				double       ijkForceConst;
 				double       kjiForceConst;
+				bool         initialized;
 			};			
 
 			typedef boost::transform_iterator<boost::function1<const Entry&, const DataStorage::value_type&>, 
@@ -107,7 +109,9 @@ namespace CDPL
 
 			const Entry& getEntry(unsigned int nbr_atom1_pte_row, unsigned int ctr_atom_pte_row, 
 								  unsigned int nbr_atom2_pte_row) const;
-	
+
+			std::size_t getNumEntries() const;
+
 			void clear();
 
 			bool removeEntry(unsigned int nbr_atom1_pte_row, unsigned int ctr_atom_pte_row, 

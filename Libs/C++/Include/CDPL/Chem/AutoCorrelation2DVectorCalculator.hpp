@@ -31,6 +31,8 @@
 #ifndef CDPL_CHEM_AUTOCORRELATION2DVECTORCALCULATOR_HPP
 #define CDPL_CHEM_AUTOCORRELATION2DVECTORCALCULATOR_HPP
 
+#include <cstddef>
+
 #include <boost/function.hpp>
 
 #include "CDPL/Chem/APIPrefix.hpp"
@@ -86,6 +88,19 @@ namespace CDPL
 			AutoCorrelation2DVectorCalculator(const MolecularGraph& molgraph, Math::DVector& corr_vec);
 
 			/**
+			 * \brief Allows to specify that maximum bond path length to consider.
+			 * \param max_dist The maximum considered bond path length.
+			 * \note The default value is \e 0 which signals no path length limit.
+			 */
+			void setMaxDistance(std::size_t max_dist);
+
+			/**
+			 * \brief Returns the maximum considered bond path length.
+			 * \return The maximum considered bond path length.
+			 */
+			std::size_t getMaxDistance() const;
+
+			/**
 			 * \brief Allows to specify a custom atom pair weight function.
 			 * \param func An AutoCorrelation2DVectorCalculator::AtomPairWeightFunction instance that wraps the target function.
 			 * \note The default atom pair weight function returns the product of the atom types (see namespace
@@ -98,7 +113,8 @@ namespace CDPL
 			 *
 			 * The elements of the calculated vector provide the sum of the weights of all atom pairs with a
 			 * topological distance equal to the element index. The size of the vector is limited by the
-			 * topological diameter of the molecular graph.
+			 * topological diameter of the molecular graph or the specified maximum considered bond path length 
+			 * (\see setMaxDistance()).
 			 *
 			 * \param molgraph The molecular graph for which to calculate the autocorrelation vector.
 			 * \param corr_vec The calculated autocorrelation vector. 
@@ -107,6 +123,7 @@ namespace CDPL
 
 		private:
 			AtomPairWeightFunction weightFunc;
+			std::size_t            maxDist;
 		}; 
 
 		/**

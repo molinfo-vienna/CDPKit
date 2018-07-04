@@ -40,6 +40,7 @@
 #include <boost/iterator/transform_iterator.hpp>
 
 #include "CDPL/Forcefield/APIPrefix.hpp"
+#include "CDPL/Base/IntTypes.hpp"
 
 
 namespace CDPL 
@@ -60,7 +61,7 @@ namespace CDPL
 			class Entry;
 
 		  private:
-			typedef boost::unordered_map<std::size_t, Entry> DataStorage;
+			typedef boost::unordered_map<Base::uint32, Entry> DataStorage;
 
 		  public:
 			typedef boost::shared_ptr<MMFF94BondStretchingRuleParameterTable> SharedPointer;
@@ -71,11 +72,11 @@ namespace CDPL
 			  public:
 				Entry();
  
-				Entry(unsigned int atom1_type, unsigned int atom2_type, double force_const, double ref_length);
+				Entry(unsigned int atomic_no1, unsigned int atomic_no2, double force_const, double ref_length);
 
-				unsigned int getAtom1Type() const;
+				unsigned int getAtomicNumber1() const;
 
-				unsigned int getAtom2Type() const;
+				unsigned int getAtomicNumber2() const;
 
 				double getForceConstant() const;
 
@@ -84,10 +85,11 @@ namespace CDPL
 				operator bool() const;
 
 			  private:
-				unsigned int atom1Type;
-				unsigned int atom2Type;
+				unsigned int atomicNo1;
+				unsigned int atomicNo2;
 				double       forceConst;
 				double       refLength;
+				bool         initialized;
 			};			
 
 			typedef boost::transform_iterator<boost::function1<const Entry&, const DataStorage::value_type&>, 
@@ -98,13 +100,15 @@ namespace CDPL
 	
 			MMFF94BondStretchingRuleParameterTable();
 
-			void addEntry(unsigned int atom1_type, unsigned int atom2_type, double force_const, double ref_length);
+			void addEntry(unsigned int atomic_no1, unsigned int atomic_no2, double force_const, double ref_length);
 
-			const Entry& getEntry(unsigned int atom1_type, unsigned int atom2_type) const;
-	
+			const Entry& getEntry(unsigned int atomic_no1, unsigned int atomic_no2) const;
+
+			std::size_t getNumEntries() const;
+
 			void clear();
 
-			bool removeEntry(unsigned int atom1_type, unsigned int atom2_type);
+			bool removeEntry(unsigned int atomic_no1, unsigned int atomic_no2);
 
 			EntryIterator removeEntry(const EntryIterator& it);
 

@@ -32,6 +32,7 @@
 #define CDPL_FORCEFIELD_MMFF94PRIMARYTOPARAMETERATOMTYPEMAP_HPP
 
 #include <iosfwd>
+#include <cstddef>
 
 #include <boost/shared_ptr.hpp>
 #include <boost/unordered_map.hpp>
@@ -72,7 +73,7 @@ namespace CDPL
 
 				Entry();
  
-				Entry(unsigned int prim_type, unsigned int param_types[]);
+				Entry(unsigned int atom_type, unsigned int param_types[]);
 
 				unsigned int getAtomType() const;
 
@@ -83,6 +84,7 @@ namespace CDPL
 			  private:
 				unsigned int atomType;
 				unsigned int paramTypes[NUM_TYPES];
+				bool         initialized;
 			};			
 
 			typedef boost::transform_iterator<boost::function1<const Entry&, const DataStorage::value_type&>, 
@@ -93,13 +95,15 @@ namespace CDPL
 	
 			MMFF94PrimaryToParameterAtomTypeMap();
 
-			void addEntry(unsigned int prim_type, unsigned int param_types[4]);
+			void addEntry(unsigned int atom_type, unsigned int param_types[]);
 
-			const Entry& getEntry(unsigned int prim_type) const;
+			const Entry& getEntry(unsigned int atom_type) const;
+
+			std::size_t getNumEntries() const;
 
 			void clear();
 
-			bool removeEntry(unsigned int prim_type);
+			bool removeEntry(unsigned int atom_type);
 
 			EntryIterator removeEntry(const EntryIterator& it);
 

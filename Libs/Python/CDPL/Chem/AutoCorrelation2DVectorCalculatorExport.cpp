@@ -49,8 +49,14 @@ void CDPLPythonChem::exportAutoCorrelation2DVectorCalculator()
 		.def(CDPLPythonBase::ObjectIdentityCheckVisitor<Chem::AutoCorrelation2DVectorCalculator>())	
 		.def("assign", CDPLPythonBase::copyAssOp(&Chem::AutoCorrelation2DVectorCalculator::operator=), 
 			 (python::arg("self"), python::arg("calculator")), python::return_self<>())
+		.def("setMaxDistance", &Chem::AutoCorrelation2DVectorCalculator::setMaxDistance,
+			 (python::arg("self"), python::arg("max_dist")))
+		.def("getMaxDistance", &Chem::AutoCorrelation2DVectorCalculator::getMaxDistance,
+			 python::arg("self"))
 		.def("setAtomPairWeightFunction", &Chem::AutoCorrelation2DVectorCalculator::setAtomPairWeightFunction,
 			 (python::arg("self"), python::arg("func")))
 		.def("calculate", &Chem::AutoCorrelation2DVectorCalculator::calculate, 
-			 (python::arg("self"), python::arg("molgraph"), python::arg("corr_vec")));
+			 (python::arg("self"), python::arg("molgraph"), python::arg("corr_vec")))
+		.add_property("maxDistance", &Chem::AutoCorrelation2DVectorCalculator::getMaxDistance,
+					  &Chem::AutoCorrelation2DVectorCalculator::setMaxDistance);
 }

@@ -29,6 +29,8 @@
 #include <cstring>
 #include <sstream>
 
+#include "CDPL/Config.hpp"
+
 #include <boost/bind.hpp>
 
 #if defined(HAVE_BOOST_IOSTREAMS)
@@ -71,11 +73,11 @@ Forcefield::MMFF94PartialBondChargeIncrementTable::defaultTable   = builtinTable
 
 
 Forcefield::MMFF94PartialBondChargeIncrementTable::Entry::Entry():
-  	atomType(0), partChargeIncr(0), formChargeAdjFactor(0)
+  	atomType(0), partChargeIncr(0), formChargeAdjFactor(0), initialized(false)
 {}
 
 Forcefield::MMFF94PartialBondChargeIncrementTable::Entry::Entry(unsigned int atom_type, double part_bond_chg_inc, double form_chg_adj_factor):
-	atomType(atom_type), partChargeIncr(part_bond_chg_inc), formChargeAdjFactor(form_chg_adj_factor)
+	atomType(atom_type), partChargeIncr(part_bond_chg_inc), formChargeAdjFactor(form_chg_adj_factor), initialized(true)
 {}
 
 unsigned int Forcefield::MMFF94PartialBondChargeIncrementTable::Entry::getAtomType() const
@@ -95,7 +97,7 @@ double Forcefield::MMFF94PartialBondChargeIncrementTable::Entry::getFormalCharge
 
 Forcefield::MMFF94PartialBondChargeIncrementTable::Entry::operator bool() const
 {
-	return (atomType > 0);
+	return initialized;
 }
 
 
@@ -116,6 +118,11 @@ Forcefield::MMFF94PartialBondChargeIncrementTable::getEntry(unsigned int atom_ty
 		return NOT_FOUND;
 
 	return it->second;
+}
+
+std::size_t Forcefield::MMFF94PartialBondChargeIncrementTable::getNumEntries() const
+{
+    return entries.size();
 }
 
 void Forcefield::MMFF94PartialBondChargeIncrementTable::clear()
@@ -172,7 +179,7 @@ void Forcefield::MMFF94PartialBondChargeIncrementTable::load(std::istream& is)
 			throw Base::IOError("MMFF94PartialBondChargeIncrementTable: error while reading partial bond charge increment parameter entry");
 
 		if (!(line_iss >> atom_type))
-			throw Base::IOError("MMFF94PartialBondChargeIncrementTable: error while reading numeric atom type");
+			throw Base::IOError("MMFF94PartialBondChargeIncrementTable: error while reading atom type");
 
 		if (!(line_iss >> part_bond_chg_inc))
 			throw Base::IOError("MMFF94PartialBondChargeIncrementTable: error while reading partial bond charge increment");

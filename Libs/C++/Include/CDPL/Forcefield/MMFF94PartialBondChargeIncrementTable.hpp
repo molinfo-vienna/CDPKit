@@ -32,6 +32,7 @@
 #define CDPL_FORCEFIELD_MMFF94PARTIALBONDCHARGEINCREMENTTABLE_HPP
 
 #include <iosfwd>
+#include <cstddef>
 
 #include <boost/shared_ptr.hpp>
 #include <boost/unordered_map.hpp>
@@ -84,6 +85,7 @@ namespace CDPL
 				unsigned int atomType;
 				double       partChargeIncr;
 				double       formChargeAdjFactor;
+				bool         initialized;
 			};			
 	
 			typedef boost::transform_iterator<boost::function1<const Entry&, const DataStorage::value_type&>, 
@@ -97,6 +99,8 @@ namespace CDPL
 			void addEntry(unsigned int atom_type, double part_bond_chg_inc, double form_chg_adj_factor);
 
 			const Entry& getEntry(unsigned int atom_type) const;
+
+			std::size_t getNumEntries() const;
 
 			void clear();
 

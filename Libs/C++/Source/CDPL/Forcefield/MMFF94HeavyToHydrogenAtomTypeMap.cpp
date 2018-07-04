@@ -86,6 +86,11 @@ const std::string& Forcefield::MMFF94HeavyToHydrogenAtomTypeMap::getEntry(const 
     return it->second;
 }
 
+std::size_t Forcefield::MMFF94HeavyToHydrogenAtomTypeMap::getNumEntries() const
+{
+    return entries.size();
+}
+
 void Forcefield::MMFF94HeavyToHydrogenAtomTypeMap::clear()
 {
     entries.clear();

@@ -69,7 +69,8 @@ Forcefield::MMFF94AromaticAtomTypeDefinitionTable::SharedPointer Forcefield::MMF
 
 Forcefield::MMFF94AromaticAtomTypeDefinitionTable::Entry::Entry(const std::string& old_type, const std::string& aro_type, unsigned int atomic_no, 
 																std::size_t ring_size, std::size_t het_atom_dist, bool im_cation, bool n5_anion):
-	oldType(old_type), aroType(aro_type), atomicNumber(atomic_no), ringSize(ring_size), hetAtomDist(het_atom_dist), imCation(im_cation), n5Anion(n5_anion)
+	oldType(old_type), aroType(aro_type), atomicNumber(atomic_no), ringSize(ring_size), 
+	hetAtomDist(het_atom_dist), imCation(im_cation), n5Anion(n5_anion)
 {}
 
 const std::string& Forcefield::MMFF94AromaticAtomTypeDefinitionTable::Entry::getOldAtomType() const

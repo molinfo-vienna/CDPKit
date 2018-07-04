@@ -40,6 +40,7 @@
 #include <boost/iterator/transform_iterator.hpp>
 
 #include "CDPL/Forcefield/APIPrefix.hpp"
+#include "CDPL/Base/IntTypes.hpp"
 
 
 namespace CDPL 
@@ -60,7 +61,7 @@ namespace CDPL
 			class Entry;
 
 		  private:
-			typedef boost::unordered_map<std::size_t, Entry> DataStorage;
+			typedef boost::unordered_map<Base::uint32, Entry> DataStorage;
 
 		  public:
 			typedef boost::shared_ptr<MMFF94AngleBendingParameterTable> SharedPointer;
@@ -95,6 +96,7 @@ namespace CDPL
 				unsigned int nbrAtom2Type;
 				double       forceConst;
 				double       refAngle;
+				bool         initialized;
 			};			
 
 			typedef boost::transform_iterator<boost::function1<const Entry&, const DataStorage::value_type&>, 
@@ -110,7 +112,9 @@ namespace CDPL
 
 			const Entry& getEntry(unsigned int angle_type_idx, unsigned int nbr_atom1_type, unsigned int ctr_atom_type, 
 								  unsigned int nbr_atom2_type) const;
-	
+
+			std::size_t getNumEntries() const;
+
 			void clear();
 
 			bool removeEntry(unsigned int angle_type_idx, unsigned int nbr_atom1_type, unsigned int ctr_atom_type, 

@@ -39,7 +39,7 @@ namespace CDPL
 
 			extern const char* ANGLE_BENDING_PARAMETERS;
 			extern const char* BOND_STRETCHING_PARAMETERS;
-			extern const char* BOND_STRETCHING_EMP_RULE_PARAMETERS;
+			extern const char* BOND_STRETCHING_RULE_PARAMETERS;
 			extern const char* STRETCH_BEND_PARAMETERS;
 			extern const char* DEFAULT_STRETCH_BEND_PARAMETERS;
 			extern const char* OUT_OF_PLANE_BENDING_PARAMETERS;

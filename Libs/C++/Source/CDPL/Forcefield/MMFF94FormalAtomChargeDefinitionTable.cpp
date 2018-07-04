@@ -29,6 +29,8 @@
 #include <cstring>
 #include <sstream>
 
+#include "CDPL/Config.hpp"
+
 #include <boost/bind.hpp>
 
 #if defined(HAVE_BOOST_IOSTREAMS)
@@ -56,9 +58,9 @@ namespace
     struct Init
     {
 
-	Init() {
-	    builtinTable->loadDefaults();
-	}
+		Init() {
+			builtinTable->loadDefaults();
+		}
 
     } init;
 
@@ -70,11 +72,12 @@ Forcefield::MMFF94FormalAtomChargeDefinitionTable::SharedPointer Forcefield::MMF
 
 
 Forcefield::MMFF94FormalAtomChargeDefinitionTable::Entry::Entry():
-    atomType(), assMode(0), charge(0.0), typeList()
+    atomType(), assMode(0), charge(0.0), typeList(), initialized(false)
 {}
 
-Forcefield::MMFF94FormalAtomChargeDefinitionTable::Entry::Entry(const std::string& atom_type, std::size_t ass_mode, double charge, const std::string& type_list):
-    atomType(atom_type), assMode(ass_mode), charge(charge), typeList(type_list)
+Forcefield::MMFF94FormalAtomChargeDefinitionTable::Entry::Entry(const std::string& atom_type, std::size_t ass_mode, 
+																double charge, const std::string& type_list):
+    atomType(atom_type), assMode(ass_mode), charge(charge), typeList(type_list), initialized(true)
 {}
 
 const std::string& Forcefield::MMFF94FormalAtomChargeDefinitionTable::Entry::getAtomType() const
@@ -99,7 +102,7 @@ const std::string& Forcefield::MMFF94FormalAtomChargeDefinitionTable::Entry::get
 
 Forcefield::MMFF94FormalAtomChargeDefinitionTable::Entry::operator bool() const
 {
-    return !atomType.empty();
+    return initialized;
 }
 
 
@@ -107,7 +110,7 @@ Forcefield::MMFF94FormalAtomChargeDefinitionTable::MMFF94FormalAtomChargeDefinit
 {}
 
 void Forcefield::MMFF94FormalAtomChargeDefinitionTable::addEntry(const std::string& atom_type, std::size_t ass_mode, 
-								 double charge, const std::string& nbr_types)
+																 double charge, const std::string& nbr_types)
 {
     entries.insert(DataStorage::value_type(atom_type, Entry(atom_type, ass_mode, charge, nbr_types)));
 }
@@ -118,9 +121,14 @@ Forcefield::MMFF94FormalAtomChargeDefinitionTable::getEntry(const std::string& a
     DataStorage::const_iterator it = entries.find(atom_type);
 
     if (it == entries.end())
-	return NOT_FOUND;
+		return NOT_FOUND;
 
     return it->second;
+}
+
+std::size_t Forcefield::MMFF94FormalAtomChargeDefinitionTable::getNumEntries() const
+{
+    return entries.size();
 }
 
 void Forcefield::MMFF94FormalAtomChargeDefinitionTable::clear()
@@ -172,21 +180,21 @@ void Forcefield::MMFF94FormalAtomChargeDefinitionTable::load(std::istream& is)
     std::string type_list;
 
     while (readMMFF94DataLine(is, line, "MMFF94FormalAtomChargeDefinitionTable: error while reading formal atom charge definition entry")) {
-	std::istringstream line_iss(line);
+		std::istringstream line_iss(line);
 
-	if (!(line_iss >> atom_type))
-	    throw Base::IOError("MMFF94FormalAtomChargeDefinitionTable: error while reading symbolic atom type");
+		if (!(line_iss >> atom_type))
+			throw Base::IOError("MMFF94FormalAtomChargeDefinitionTable: error while reading symbolic atom type");
 	
-	if (!(line_iss >> ass_mode))
-	    throw Base::IOError("MMFF94FormalAtomChargeDefinitionTable: error while reading formal charge assignment mode");
+		if (!(line_iss >> ass_mode))
+			throw Base::IOError("MMFF94FormalAtomChargeDefinitionTable: error while reading formal charge assignment mode");
 
-	if (!(line_iss >> charge))
-	    throw Base::IOError("MMFF94FormalAtomChargeDefinitionTable: error while reading formal atom charge");
+		if (!(line_iss >> charge))
+			throw Base::IOError("MMFF94FormalAtomChargeDefinitionTable: error while reading formal atom charge");
 
-	if (!(line_iss >> type_list))
-	    throw Base::IOError("MMFF94FormalAtomChargeDefinitionTable: error while reading symbolic atom type list");
+		if (!(line_iss >> type_list))
+			throw Base::IOError("MMFF94FormalAtomChargeDefinitionTable: error while reading symbolic atom type list");
 		
-	addEntry(atom_type, ass_mode, charge, type_list);
+		addEntry(atom_type, ass_mode, charge, type_list);
     }
 }
 
@@ -195,7 +203,7 @@ void Forcefield::MMFF94FormalAtomChargeDefinitionTable::loadDefaults()
 #if defined(HAVE_BOOST_IOSTREAMS)
 
     boost::iostreams::stream<boost::iostreams::array_source> is(MMFF94ParameterData::FORMAL_ATOM_CHARGE_DEFINITIONS, 
-								std::strlen(MMFF94ParameterData::FORMAL_ATOM_CHARGE_DEFINITIONS));
+																std::strlen(MMFF94ParameterData::FORMAL_ATOM_CHARGE_DEFINITIONS));
 #else // defined(HAVE_BOOST_IOSTREAMS)
 
     std::istringstream is(std::string(MMFF94ParameterData::FORMAL_ATOM_CHARGE_DEFINITIONS));

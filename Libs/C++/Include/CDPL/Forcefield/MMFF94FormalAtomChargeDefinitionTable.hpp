@@ -86,10 +86,11 @@ namespace CDPL
 				operator bool() const;
 
 			  private:
-				std::string   atomType;
-				std::size_t   assMode;
-				double        charge;
-				std::string   typeList;
+				std::string  atomType;
+				std::size_t  assMode;
+				double       charge;
+				std::string  typeList;
+				bool         initialized;
 			};			
 	
 			typedef boost::transform_iterator<boost::function1<const Entry&, const DataStorage::value_type&>, 
@@ -103,6 +104,8 @@ namespace CDPL
 			void addEntry(const std::string& atom_type, std::size_t ass_mode, double charge, const std::string& nbr_types);
 
 			const Entry& getEntry(const std::string& atom_type) const;
+
+			std::size_t getNumEntries() const;
 
 			void clear();
 

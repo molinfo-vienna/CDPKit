@@ -280,6 +280,7 @@
 #include "CDPL/Chem/AutoCorrelation3DVectorCalculator.hpp"
 #include "CDPL/Chem/AtomAutoCorrelation3DVectorCalculator.hpp"
 #include "CDPL/Chem/MoleculeAutoCorr3DDescriptorCalculator.hpp"
+#include "CDPL/Chem/MoleculeAutoCorr2DDescriptorCalculator.hpp"
 #include "CDPL/Chem/BurdenMatrixGenerator.hpp"
 #include "CDPL/Chem/BCUTDescriptorCalculator.hpp"
 #include "CDPL/Chem/SurfaceAtomExtractor.hpp"

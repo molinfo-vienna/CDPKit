@@ -33,6 +33,7 @@
 
 #include <string>
 #include <iosfwd>
+#include <cstddef>
 
 #include <boost/shared_ptr.hpp>
 #include <boost/unordered_map.hpp>
@@ -70,6 +71,8 @@ namespace CDPL
 	    unsigned int getEntry(const std::string& sym_type) const;
 
 	    void clear();
+
+		std::size_t getNumEntries() const;
 
 		bool removeEntry(const std::string& sym_type);
 

@@ -52,7 +52,11 @@ Chem::AutoCorrelation2DVectorCalculator::AutoCorrelation2DVectorCalculator(const
 
 void Chem::AutoCorrelation2DVectorCalculator::calculate(const MolecularGraph& molgraph, Math::DVector& corr_vec)
 {
-	corr_vec.resize(0, false);
+	if (maxDist > 0) {
+		corr_vec.resize(maxDist + 1, false);
+		corr_vec.clear(0.0);
+	} else
+		corr_vec.resize(0, false);
 
 	const Math::ULMatrix& dist_mtx = *getTopologicalDistanceMatrix(molgraph);
 
@@ -65,18 +69,21 @@ void Chem::AutoCorrelation2DVectorCalculator::calculate(const MolecularGraph& mo
 		for (MolecularGraph::ConstAtomIterator it2 = it1; it2 != atoms_end; ++it2) {
 			const Atom& atom2 = *it2;
 			std::size_t atom2_idx = molgraph.getAtomIndex(atom2);
-
 			std::size_t dist = dist_mtx(atom1_idx, atom2_idx);
 
 			if (dist == 0 && atom1_idx != atom2_idx)
 				continue;
 
-			double weight = weightFunc(atom1, atom2);
-		
-			if (dist >= corr_vec.getSize())
+			if (maxDist > 0) {
+				if (dist > maxDist)
+					continue;
+
+			} else if (dist >= corr_vec.getSize())
 				corr_vec.resize(dist + 1, 0.0);
 
-			corr_vec(dist) += 2.0 * weight;
+			double weight = (weightFunc ? weightFunc(atom1, atom2) : 1.0);
+		
+			corr_vec(dist) += weight;
 		}
 	}
 }
@@ -84,4 +91,14 @@ void Chem::AutoCorrelation2DVectorCalculator::calculate(const MolecularGraph& mo
 void Chem::AutoCorrelation2DVectorCalculator::setAtomPairWeightFunction(const AtomPairWeightFunction& func)
 {
 	weightFunc = func;
+}
+
+void Chem::AutoCorrelation2DVectorCalculator::setMaxDistance(std::size_t max_dist)
+{
+	maxDist = max_dist;
+}
+
+std::size_t Chem::AutoCorrelation2DVectorCalculator::getMaxDistance() const
+{
+	return maxDist;
 }

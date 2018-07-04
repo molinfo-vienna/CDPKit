@@ -56,6 +56,15 @@ SET(cdpl-forcefield_LIB_SRCS
     MMFF94BondChargeIncrementTable.cpp
     MMFF94PartialBondChargeIncrementTable.cpp
     MMFF94FormalAtomChargeDefinitionTable.cpp
+    MMFF94PrimaryToParameterAtomTypeMap.cpp
+    MMFF94AngleBendingParameterTable.cpp
+    MMFF94BondStretchingParameterTable.cpp
+    MMFF94BondStretchingRuleParameterTable.cpp
+    MMFF94StretchBendParameterTable.cpp
+    MMFF94DefaultStretchBendParameterTable.cpp
+    MMFF94OutOfPlaneBendingParameterTable.cpp
+    MMFF94TorsionParameterTable.cpp
+    MMFF94VanDerWaalsParameterTable.cpp
 
     Utilities.cpp
    )

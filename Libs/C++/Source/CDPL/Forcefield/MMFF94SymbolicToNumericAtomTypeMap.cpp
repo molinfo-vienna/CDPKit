@@ -65,7 +65,7 @@ namespace
 
 
 Forcefield::MMFF94SymbolicToNumericAtomTypeMap::SharedPointer 
-Forcefield::MMFF94SymbolicToNumericAtomTypeMap::defaultMap = builtinMap;
+Forcefield::MMFF94SymbolicToNumericAtomTypeMap::defaultMap    = builtinMap;
 
 
 Forcefield::MMFF94SymbolicToNumericAtomTypeMap::MMFF94SymbolicToNumericAtomTypeMap()
@@ -84,6 +84,11 @@ unsigned int Forcefield::MMFF94SymbolicToNumericAtomTypeMap::getEntry(const std:
 		return 0;
 
     return it->second;
+}
+
+std::size_t Forcefield::MMFF94SymbolicToNumericAtomTypeMap::getNumEntries() const
+{
+    return entries.size();
 }
 
 void Forcefield::MMFF94SymbolicToNumericAtomTypeMap::clear()

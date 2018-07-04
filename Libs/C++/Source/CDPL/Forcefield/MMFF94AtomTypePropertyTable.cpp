@@ -29,6 +29,8 @@
 #include <cstring>
 #include <sstream>
 
+#include "CDPL/Config.hpp"
+
 #include <boost/bind.hpp>
 
 #if defined(HAVE_BOOST_IOSTREAMS)
@@ -69,15 +71,15 @@ namespace
 Forcefield::MMFF94AtomTypePropertyTable::SharedPointer Forcefield::MMFF94AtomTypePropertyTable::defaultTable = builtinTable;
 
 
+Forcefield::MMFF94AtomTypePropertyTable::Entry::Entry():
+    atomType(0), atomicNo(0), numNeighbors(0), valence(0), hasPiLonePr(false),
+    hasMultiBonds(false), isAroType(false), hasLinBondAng(false), hasMultiOrSingleBonds(false), initialized(false)
+{}
+
 Forcefield::MMFF94AtomTypePropertyTable::Entry::Entry(unsigned int atom_type, unsigned int atomic_no, std::size_t num_nbrs, std::size_t valence, 
 													  bool has_pi_lp, bool has_mb, bool is_arom, bool lin_bnd_ang, bool has_mb_or_sb):
     atomType(atom_type), atomicNo(atomic_no), numNeighbors(num_nbrs), valence(valence), hasPiLonePr(has_pi_lp),
-    hasMultiBonds(has_mb), isAroType(is_arom), hasLinBondAng(lin_bnd_ang), hasMultiOrSingleBonds(has_mb_or_sb)
-{}
-
-Forcefield::MMFF94AtomTypePropertyTable::Entry::Entry():
-    atomType(0), atomicNo(0), numNeighbors(0), valence(0), hasPiLonePr(false),
-    hasMultiBonds(false), isAroType(false), hasLinBondAng(false), hasMultiOrSingleBonds(false)
+    hasMultiBonds(has_mb), isAroType(is_arom), hasLinBondAng(lin_bnd_ang), hasMultiOrSingleBonds(has_mb_or_sb), initialized(true)
 {}
 
 unsigned int Forcefield::MMFF94AtomTypePropertyTable::Entry::getAtomType() const
@@ -127,7 +129,7 @@ bool Forcefield::MMFF94AtomTypePropertyTable::Entry::formsMultiOrSingleBonds() c
 
 Forcefield::MMFF94AtomTypePropertyTable::Entry::operator bool() const
 {
-	return (atomType > 0);
+	return initialized;
 }
 
 
@@ -148,6 +150,11 @@ const Forcefield::MMFF94AtomTypePropertyTable::Entry& Forcefield::MMFF94AtomType
 		return NOT_FOUND;
 
 	return it->second;
+}
+
+std::size_t Forcefield::MMFF94AtomTypePropertyTable::getNumEntries() const
+{
+    return entries.size();
 }
 
 void Forcefield::MMFF94AtomTypePropertyTable::clear()
@@ -207,7 +214,7 @@ void Forcefield::MMFF94AtomTypePropertyTable::load(std::istream& is)
 		std::istringstream line_iss(line);
 
 		if (!(line_iss >> atom_type))
-			throw Base::IOError("MMFF94AtomTypePropertyTable: error while reading numeric atom type");
+			throw Base::IOError("MMFF94AtomTypePropertyTable: error while reading atom type");
 	
 		if (!(line_iss >> atomic_no))
 			throw Base::IOError("MMFF94AtomTypePropertyTable: error while reading atomic number");
