@@ -40,6 +40,7 @@
 #include <boost/iterator/transform_iterator.hpp>
 
 #include "CDPL/Forcefield/APIPrefix.hpp"
+#include "CDPL/Forcefield/MMFF94VanDerWaalsInteraction.hpp"
 
 
 namespace CDPL 
@@ -64,22 +65,15 @@ namespace CDPL
 
 		  public:
 			typedef boost::shared_ptr<MMFF94VanDerWaalsParameterTable> SharedPointer;
+			typedef MMFF94VanDerWaalsInteraction::HDonorAcceptorType HDonorAcceptorType;
 	
-			enum HDonorAcceptorType 
-			{
-			
-			    NONE,
-				DONOR,
-				ACCEPTOR
-			};	
-
 			class CDPL_FORCEFIELD_API Entry
 			{
 
 			  public:
 				Entry();
 
-				Entry(unsigned int atom_type, double atom_pol, double eff_el_num, double scale_fact_a, double scale_fact_g, 
+				Entry(unsigned int atom_type, double atom_pol, double eff_el_num, double fact_a, double fact_g, 
 					  HDonorAcceptorType don_acc_type);
  
 				unsigned int getAtomType() const;
@@ -100,13 +94,13 @@ namespace CDPL
 				 * \brief Returns the scaling factor A parameter.
 				 * \return The scaling factor A.
 				 */
-				double getScalingFactorA() const;
+				double getFactorA() const;
   
 				/**
 				 * \brief Returns the scaling factor G parameter.
 				 * \return The scaling factor G
 				 */
-				double getScalingFactorG() const;
+				double getFactorG() const;
   
 				/**
 				 * Returns the H-donor/-acceptor property associated with the numeric MMFF94 atom type.
@@ -120,8 +114,8 @@ namespace CDPL
 				unsigned int       atomType;
 				double             polarizability;
 				double             effElNumber;
-				double             scalingFactA;
-				double             scalingFactG;
+				double             factA;
+				double             factG;
 				HDonorAcceptorType donAccType;
 				bool               initialized;
 			};			
@@ -134,7 +128,7 @@ namespace CDPL
 	
 			MMFF94VanDerWaalsParameterTable();
 
-			void addEntry(unsigned int atom_type, double atom_pol, double eff_el_num, double scale_fact_a, double scale_fact_g, 
+			void addEntry(unsigned int atom_type, double atom_pol, double eff_el_num, double fact_a, double fact_g, 
 						  HDonorAcceptorType don_acc_type);
 
 			const Entry& getEntry(unsigned int atom_type) const;
@@ -159,11 +153,11 @@ namespace CDPL
 
 			void setBeta(double value);
 
-			void setBFactor(double value);
+			void setFactorB(double value);
 
-			void setDARAD(double value);
+			void setFactorDARAD(double value);
 
-			void setDAEPS(double value);
+			void setFactorDAEPS(double value);
 
 			/**
 			 * \brief Returns the exponent used in the calculation of van der Waals
@@ -177,7 +171,7 @@ namespace CDPL
 			 *        interaction energies.
 			 * \return The value of the \e B factor.
 			 */
-			double getBFactor() const;
+			double getFactorB() const;
   
 			/**
 			 * \brief Returns the value of \e beta used in the calculation of van der Waals
@@ -191,14 +185,14 @@ namespace CDPL
 			 *        interaction energies.
 			 * \return The value of the \e DARAD factor.
 			 */
-			double getDARAD() const;
+			double getFactorDARAD() const;
    
 			/**
 			 * \brief Returns the value of the \e DAEPS factor used in the calculation of van der Waals
 			 *        interaction energies.
 			 * \return The value of the \e DAEPS factor.
 			 */
-			double getDAEPS() const;
+			double getFactorDAEPS() const;
 
 			void load(std::istream& is);
 
@@ -212,10 +206,10 @@ namespace CDPL
 			static SharedPointer defaultTable;
 			DataStorage          entries;
 			double               exponent;
-			double               bFactor;
+			double               factB;
 			double               beta;
-			double               darad;
-			double               daeps;
+			double               factDARAD;
+			double               factDAEPS;
 		};
     
 		/**

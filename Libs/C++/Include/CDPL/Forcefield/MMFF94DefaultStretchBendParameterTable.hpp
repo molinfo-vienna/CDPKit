@@ -72,14 +72,14 @@ namespace CDPL
 			  public:
 				Entry();
  
-				Entry(unsigned int nbr_atom1_pte_row, unsigned int ctr_atom_pte_row, 
-					  unsigned int nbr_atom2_pte_row, double ijk_force_const, double kji_force_const);
+				Entry(unsigned int term_atom1_pte_row, unsigned int ctr_atom_pte_row, 
+					  unsigned int term_atom2_pte_row, double ijk_force_const, double kji_force_const);
 
-				unsigned int getNeighborAtom1PTERow() const;
+				unsigned int getTerminalAtom1PTERow() const;
 
 				unsigned int getCenterAtomPTERow() const;
 
-				unsigned int getNeighborAtom2PTERow() const;
+				unsigned int getTerminalAtom2PTERow() const;
 
 				double getIJKForceConstant() const;
 
@@ -88,9 +88,9 @@ namespace CDPL
 				operator bool() const;
 
 			  private:
-				unsigned int nbrAtom1PTERow;
+				unsigned int termAtom1PTERow;
 				unsigned int ctrAtomPTERow;
-				unsigned int nbrAtom2PTERow;
+				unsigned int termAtom2PTERow;
 				double       ijkForceConst;
 				double       kjiForceConst;
 				bool         initialized;
@@ -104,18 +104,18 @@ namespace CDPL
 	
 			MMFF94DefaultStretchBendParameterTable();
 
-			void addEntry(unsigned int nbr_atom1_pte_row, unsigned int ctr_atom_pte_row, 
-						  unsigned int nbr_atom2_pte_row, double ijk_force_const, double kji_force_const);
+			void addEntry(unsigned int term_atom1_pte_row, unsigned int ctr_atom_pte_row, 
+						  unsigned int term_atom2_pte_row, double ijk_force_const, double kji_force_const);
 
-			const Entry& getEntry(unsigned int nbr_atom1_pte_row, unsigned int ctr_atom_pte_row, 
-								  unsigned int nbr_atom2_pte_row) const;
+			const Entry& getEntry(unsigned int term_atom1_pte_row, unsigned int ctr_atom_pte_row, 
+								  unsigned int term_atom2_pte_row) const;
 
 			std::size_t getNumEntries() const;
 
 			void clear();
 
-			bool removeEntry(unsigned int nbr_atom1_pte_row, unsigned int ctr_atom_pte_row, 
-							 unsigned int nbr_atom2_pte_row);
+			bool removeEntry(unsigned int term_atom1_pte_row, unsigned int ctr_atom_pte_row, 
+							 unsigned int term_atom2_pte_row);
 
 			EntryIterator removeEntry(const EntryIterator& it);
 

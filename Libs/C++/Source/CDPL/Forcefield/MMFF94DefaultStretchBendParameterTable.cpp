@@ -64,12 +64,12 @@ namespace
 
     } init;
 
-	Base::uint32 lookupKey(Base::uint32 nbr_atom1_pte_row, Base::uint32 ctr_atom_pte_row, Base::uint32 nbr_atom2_pte_row)
+	Base::uint32 lookupKey(Base::uint32 term_atom1_pte_row, Base::uint32 ctr_atom_pte_row, Base::uint32 term_atom2_pte_row)
 	{
-		if (nbr_atom1_pte_row < nbr_atom2_pte_row)
-			return ((nbr_atom1_pte_row << 16) + (ctr_atom_pte_row << 8) + nbr_atom2_pte_row);
+		if (term_atom1_pte_row < term_atom2_pte_row)
+			return ((term_atom1_pte_row << 16) + (ctr_atom_pte_row << 8) + term_atom2_pte_row);
 
-		return ((nbr_atom2_pte_row << 16) + (ctr_atom_pte_row << 8) + nbr_atom1_pte_row);
+		return ((term_atom2_pte_row << 16) + (ctr_atom_pte_row << 8) + term_atom1_pte_row);
 	}
 
 	const Forcefield::MMFF94DefaultStretchBendParameterTable::Entry NOT_FOUND;
@@ -80,19 +80,19 @@ Forcefield::MMFF94DefaultStretchBendParameterTable::SharedPointer Forcefield::MM
 
 
 Forcefield::MMFF94DefaultStretchBendParameterTable::Entry::Entry():
-	nbrAtom1PTERow(0), ctrAtomPTERow(0), nbrAtom2PTERow(0),
+	termAtom1PTERow(0), ctrAtomPTERow(0), termAtom2PTERow(0),
 	ijkForceConst(0), kjiForceConst(0), initialized(false)
 {}
 
-Forcefield::MMFF94DefaultStretchBendParameterTable::Entry::Entry(unsigned int nbr_atom1_pte_row, unsigned int ctr_atom_pte_row, 
-																 unsigned int nbr_atom2_pte_row, double force_const, double kji_force_const):
-	nbrAtom1PTERow(nbr_atom1_pte_row), ctrAtomPTERow(ctr_atom_pte_row), nbrAtom2PTERow(nbr_atom2_pte_row),
+Forcefield::MMFF94DefaultStretchBendParameterTable::Entry::Entry(unsigned int term_atom1_pte_row, unsigned int ctr_atom_pte_row, 
+																 unsigned int term_atom2_pte_row, double force_const, double kji_force_const):
+	termAtom1PTERow(term_atom1_pte_row), ctrAtomPTERow(ctr_atom_pte_row), termAtom2PTERow(term_atom2_pte_row),
 	ijkForceConst(force_const), kjiForceConst(kji_force_const), initialized(true)
 {}
 
-unsigned int Forcefield::MMFF94DefaultStretchBendParameterTable::Entry::getNeighborAtom1PTERow() const
+unsigned int Forcefield::MMFF94DefaultStretchBendParameterTable::Entry::getTerminalAtom1PTERow() const
 {
-	return nbrAtom1PTERow;
+	return termAtom1PTERow;
 }
 
 unsigned int Forcefield::MMFF94DefaultStretchBendParameterTable::Entry::getCenterAtomPTERow() const
@@ -100,9 +100,9 @@ unsigned int Forcefield::MMFF94DefaultStretchBendParameterTable::Entry::getCente
 	return ctrAtomPTERow;
 }
 
-unsigned int Forcefield::MMFF94DefaultStretchBendParameterTable::Entry::getNeighborAtom2PTERow() const
+unsigned int Forcefield::MMFF94DefaultStretchBendParameterTable::Entry::getTerminalAtom2PTERow() const
 {
-	return nbrAtom2PTERow;
+	return termAtom2PTERow;
 }
 
 double Forcefield::MMFF94DefaultStretchBendParameterTable::Entry::getIJKForceConstant() const
@@ -124,18 +124,18 @@ Forcefield::MMFF94DefaultStretchBendParameterTable::Entry::operator bool() const
 Forcefield::MMFF94DefaultStretchBendParameterTable::MMFF94DefaultStretchBendParameterTable()
 {}
 
-void Forcefield::MMFF94DefaultStretchBendParameterTable::addEntry(unsigned int nbr_atom1_pte_row, unsigned int ctr_atom_pte_row, 
-																  unsigned int nbr_atom2_pte_row, double ijk_force_const, double kji_force_const)
+void Forcefield::MMFF94DefaultStretchBendParameterTable::addEntry(unsigned int term_atom1_pte_row, unsigned int ctr_atom_pte_row, 
+																  unsigned int term_atom2_pte_row, double ijk_force_const, double kji_force_const)
 {
-    entries.insert(DataStorage::value_type(lookupKey(nbr_atom1_pte_row,  ctr_atom_pte_row, nbr_atom2_pte_row), 
-										   Entry(nbr_atom1_pte_row, ctr_atom_pte_row, nbr_atom2_pte_row, ijk_force_const, kji_force_const)));
+    entries.insert(DataStorage::value_type(lookupKey(term_atom1_pte_row,  ctr_atom_pte_row, term_atom2_pte_row), 
+										   Entry(term_atom1_pte_row, ctr_atom_pte_row, term_atom2_pte_row, ijk_force_const, kji_force_const)));
 }
 
 const Forcefield::MMFF94DefaultStretchBendParameterTable::Entry& 
-Forcefield::MMFF94DefaultStretchBendParameterTable::getEntry(unsigned int nbr_atom1_pte_row, unsigned int ctr_atom_pte_row, 
-															 unsigned int nbr_atom2_pte_row) const
+Forcefield::MMFF94DefaultStretchBendParameterTable::getEntry(unsigned int term_atom1_pte_row, unsigned int ctr_atom_pte_row, 
+															 unsigned int term_atom2_pte_row) const
 {
-	DataStorage::const_iterator it = entries.find(lookupKey(nbr_atom1_pte_row,  ctr_atom_pte_row, nbr_atom2_pte_row));
+	DataStorage::const_iterator it = entries.find(lookupKey(term_atom1_pte_row,  ctr_atom_pte_row, term_atom2_pte_row));
 
 	if (it == entries.end())
 		return NOT_FOUND;
@@ -153,10 +153,10 @@ void Forcefield::MMFF94DefaultStretchBendParameterTable::clear()
     entries.clear();
 }
 
-bool Forcefield::MMFF94DefaultStretchBendParameterTable::removeEntry(unsigned int nbr_atom1_pte_row, unsigned int ctr_atom_pte_row, 
-																	 unsigned int nbr_atom2_pte_row)
+bool Forcefield::MMFF94DefaultStretchBendParameterTable::removeEntry(unsigned int term_atom1_pte_row, unsigned int ctr_atom_pte_row, 
+																	 unsigned int term_atom2_pte_row)
 {
-	return entries.erase(lookupKey(nbr_atom1_pte_row,  ctr_atom_pte_row, nbr_atom2_pte_row));
+	return entries.erase(lookupKey(term_atom1_pte_row,  ctr_atom_pte_row, term_atom2_pte_row));
 }
 
 Forcefield::MMFF94DefaultStretchBendParameterTable::EntryIterator 
@@ -192,22 +192,22 @@ Forcefield::MMFF94DefaultStretchBendParameterTable::getEntriesEnd()
 void Forcefield::MMFF94DefaultStretchBendParameterTable::load(std::istream& is)
 {
     std::string line;
-	unsigned int nbr_atom1_pte_row;
+	unsigned int term_atom1_pte_row;
 	unsigned int ctr_atom_pte_row;
-	unsigned int nbr_atom2_pte_row;
+	unsigned int term_atom2_pte_row;
 	double ijk_force_const;
 	double kji_force_const;
 
     while (readMMFF94DataLine(is, line, "MMFF94DefaultStretchBendParameterTable: error while reading default stretch bend parameter entry")) {
 		std::istringstream line_iss(line);
 
-		if (!(line_iss >> nbr_atom1_pte_row))
+		if (!(line_iss >> term_atom1_pte_row))
 			throw Base::IOError("MMFF94DefaultStretchBendParameterTable: error while reading terminal atom 1 PTE row");
 
 		if (!(line_iss >> ctr_atom_pte_row))
 			throw Base::IOError("MMFF94DefaultStretchBendParameterTable: error while reading center atom PTE row");
 
-		if (!(line_iss >> nbr_atom2_pte_row))
+		if (!(line_iss >> term_atom2_pte_row))
 			throw Base::IOError("MMFF94DefaultStretchBendParameterTable: error while reading terminal atom 2 PTE row");
 	
 		if (!(line_iss >> ijk_force_const))
@@ -216,7 +216,7 @@ void Forcefield::MMFF94DefaultStretchBendParameterTable::load(std::istream& is)
 		if (!(line_iss >> kji_force_const))
 			throw Base::IOError("MMFF94DefaultStretchBendParameterTable: error while reading KJI force constant");
 
-		addEntry(nbr_atom1_pte_row, ctr_atom_pte_row, nbr_atom2_pte_row, ijk_force_const, kji_force_const);
+		addEntry(term_atom1_pte_row, ctr_atom_pte_row, term_atom2_pte_row, ijk_force_const, kji_force_const);
     }
 }
 

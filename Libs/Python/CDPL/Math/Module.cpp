@@ -49,6 +49,7 @@ BOOST_PYTHON_MODULE(_math)
 	exportUnitVectorTypes();
 	
 	exportMatrixTypes();
+	exportSparseMatrixTypes();
 	exportTranslationMatrixTypes();
 	exportScalingMatrixTypes();
 	exportRotationMatrixTypes();

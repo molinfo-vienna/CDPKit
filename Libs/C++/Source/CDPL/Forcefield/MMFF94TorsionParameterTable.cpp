@@ -66,12 +66,12 @@ namespace
 
     } init;
 
-	Base::uint64 lookupKey(Base::uint32 tor_type_idx, Base::uint32 nbr_atom1_type, Base::uint32 ctr_atom1_type, Base::uint32 ctr_atom2_type, Base::uint32 nbr_atom2_type)
+	Base::uint64 lookupKey(Base::uint32 tor_type_idx, Base::uint32 term_atom1_type, Base::uint32 ctr_atom1_type, Base::uint32 ctr_atom2_type, Base::uint32 term_atom2_type)
 	{
-		if (nbr_atom1_type < nbr_atom2_type || (nbr_atom1_type == nbr_atom2_type && ctr_atom1_type <= ctr_atom2_type)) 
-			return ((Base::uint64(nbr_atom1_type) << 32) + (ctr_atom1_type << 24) + (ctr_atom2_type << 16) + (nbr_atom2_type << 8) + tor_type_idx);
+		if (term_atom1_type < term_atom2_type || (term_atom1_type == term_atom2_type && ctr_atom1_type <= ctr_atom2_type)) 
+			return ((Base::uint64(term_atom1_type) << 32) + (ctr_atom1_type << 24) + (ctr_atom2_type << 16) + (term_atom2_type << 8) + tor_type_idx);
 
-		return ((Base::uint64(nbr_atom2_type) << 32) + (ctr_atom2_type << 24) + (ctr_atom1_type << 16) + (nbr_atom1_type << 8) + tor_type_idx);
+		return ((Base::uint64(term_atom2_type) << 32) + (ctr_atom2_type << 24) + (ctr_atom1_type << 16) + (term_atom1_type << 8) + tor_type_idx);
 	}
 
 	const Forcefield::MMFF94TorsionParameterTable::Entry NOT_FOUND;
@@ -83,19 +83,19 @@ Forcefield::MMFF94TorsionParameterTable::SharedPointer Forcefield::MMFF94Torsion
 
 
 Forcefield::MMFF94TorsionParameterTable::Entry::Entry():
-	torTypeIdx(0), nbrAtom1Type(0), ctrAtom1Type(0), ctrAtom2Type(0), nbrAtom2Type(0),
+	torTypeIdx(0), termAtom1Type(0), ctrAtom1Type(0), ctrAtom2Type(0), termAtom2Type(0),
 	torParam1(0), torParam2(0), torParam3(0), initialized(false)
 {}
 
-Forcefield::MMFF94TorsionParameterTable::Entry::Entry(unsigned int tor_type_idx, unsigned int nbr_atom1_type, unsigned int ctr_atom1_type, unsigned int ctr_atom2_type,
-													  unsigned int nbr_atom2_type, double tor_param1, double tor_param2, double tor_param3):
-	torTypeIdx(tor_type_idx), nbrAtom1Type(nbr_atom1_type), ctrAtom1Type(ctr_atom1_type), ctrAtom2Type(nbr_atom2_type), nbrAtom2Type(nbr_atom2_type),
+Forcefield::MMFF94TorsionParameterTable::Entry::Entry(unsigned int tor_type_idx, unsigned int term_atom1_type, unsigned int ctr_atom1_type, unsigned int ctr_atom2_type,
+													  unsigned int term_atom2_type, double tor_param1, double tor_param2, double tor_param3):
+	torTypeIdx(tor_type_idx), termAtom1Type(term_atom1_type), ctrAtom1Type(ctr_atom1_type), ctrAtom2Type(term_atom2_type), termAtom2Type(term_atom2_type),
 	torParam1(tor_param1), torParam2(tor_param2), torParam3(tor_param3), initialized(true)
 {}
 
-unsigned int Forcefield::MMFF94TorsionParameterTable::Entry::getNeighborAtom1Type() const
+unsigned int Forcefield::MMFF94TorsionParameterTable::Entry::getTerminalAtom1Type() const
 {
-	return nbrAtom1Type;
+	return termAtom1Type;
 }
 
 unsigned int Forcefield::MMFF94TorsionParameterTable::Entry::getCenterAtom1Type() const
@@ -108,9 +108,9 @@ unsigned int Forcefield::MMFF94TorsionParameterTable::Entry::getCenterAtom2Type(
 	return ctrAtom2Type;
 }
 
-unsigned int Forcefield::MMFF94TorsionParameterTable::Entry::getNeighborAtom2Type() const
+unsigned int Forcefield::MMFF94TorsionParameterTable::Entry::getTerminalAtom2Type() const
 {
-	return nbrAtom2Type;
+	return termAtom2Type;
 }
 
 double Forcefield::MMFF94TorsionParameterTable::Entry::getTorsionParameter1() const
@@ -137,18 +137,18 @@ Forcefield::MMFF94TorsionParameterTable::Entry::operator bool() const
 Forcefield::MMFF94TorsionParameterTable::MMFF94TorsionParameterTable()
 {}
 
-void Forcefield::MMFF94TorsionParameterTable::addEntry(unsigned int tor_type_idx, unsigned int nbr_atom1_type, unsigned int ctr_atom1_type, unsigned int ctr_atom2_type,
-													   unsigned int nbr_atom2_type, double tor_param1, double tor_param2, double tor_param3)
+void Forcefield::MMFF94TorsionParameterTable::addEntry(unsigned int tor_type_idx, unsigned int term_atom1_type, unsigned int ctr_atom1_type, unsigned int ctr_atom2_type,
+													   unsigned int term_atom2_type, double tor_param1, double tor_param2, double tor_param3)
 {
-    entries.insert(DataStorage::value_type(lookupKey(tor_type_idx, nbr_atom1_type, ctr_atom1_type, ctr_atom2_type, nbr_atom2_type), 
-										   Entry(tor_type_idx, nbr_atom1_type, ctr_atom1_type, ctr_atom2_type, nbr_atom2_type, tor_param1, tor_param2, tor_param3)));
+    entries.insert(DataStorage::value_type(lookupKey(tor_type_idx, term_atom1_type, ctr_atom1_type, ctr_atom2_type, term_atom2_type), 
+										   Entry(tor_type_idx, term_atom1_type, ctr_atom1_type, ctr_atom2_type, term_atom2_type, tor_param1, tor_param2, tor_param3)));
 }
 
 const Forcefield::MMFF94TorsionParameterTable::Entry& 
-Forcefield::MMFF94TorsionParameterTable::getEntry(unsigned int tor_type_idx, unsigned int nbr_atom1_type, unsigned int ctr_atom1_type, 
-												  unsigned int ctr_atom2_type, unsigned int nbr_atom2_type) const
+Forcefield::MMFF94TorsionParameterTable::getEntry(unsigned int tor_type_idx, unsigned int term_atom1_type, unsigned int ctr_atom1_type, 
+												  unsigned int ctr_atom2_type, unsigned int term_atom2_type) const
 {
-	DataStorage::const_iterator it = entries.find(lookupKey(tor_type_idx, nbr_atom1_type, ctr_atom1_type, ctr_atom2_type, nbr_atom2_type));
+	DataStorage::const_iterator it = entries.find(lookupKey(tor_type_idx, term_atom1_type, ctr_atom1_type, ctr_atom2_type, term_atom2_type));
 
 	if (it == entries.end())
 		return NOT_FOUND;
@@ -166,10 +166,10 @@ void Forcefield::MMFF94TorsionParameterTable::clear()
     entries.clear();
 }
 
-bool Forcefield::MMFF94TorsionParameterTable::removeEntry(unsigned int tor_type_idx, unsigned int nbr_atom1_type, unsigned int ctr_atom1_type, 
-														  unsigned int ctr_atom2_type, unsigned int nbr_atom2_type)
+bool Forcefield::MMFF94TorsionParameterTable::removeEntry(unsigned int tor_type_idx, unsigned int term_atom1_type, unsigned int ctr_atom1_type, 
+														  unsigned int ctr_atom2_type, unsigned int term_atom2_type)
 {
-	return entries.erase(lookupKey(tor_type_idx, nbr_atom1_type, ctr_atom1_type, ctr_atom2_type, nbr_atom2_type));
+	return entries.erase(lookupKey(tor_type_idx, term_atom1_type, ctr_atom1_type, ctr_atom2_type, term_atom2_type));
 }
 
 Forcefield::MMFF94TorsionParameterTable::EntryIterator 
@@ -206,10 +206,10 @@ void Forcefield::MMFF94TorsionParameterTable::load(std::istream& is)
 {
     std::string line;
 	unsigned int tor_type_idx;
-	unsigned int nbr_atom1_type;
+	unsigned int term_atom1_type;
 	unsigned int ctr_atom1_type;
 	unsigned int ctr_atom2_type;
-	unsigned int nbr_atom2_type;
+	unsigned int term_atom2_type;
 	double tor_param1;
 	double tor_param2;
 	double tor_param3;
@@ -220,7 +220,7 @@ void Forcefield::MMFF94TorsionParameterTable::load(std::istream& is)
 		if (!(line_iss >> tor_type_idx))
 			throw Base::IOError("MMFF94TorsionParameterTable: error while reading torsion type index");
 
-		if (!(line_iss >> nbr_atom1_type))
+		if (!(line_iss >> term_atom1_type))
 			throw Base::IOError("MMFF94TorsionParameterTable: error while reading terminal atom 1 type");
 
 		if (!(line_iss >> ctr_atom1_type))
@@ -229,7 +229,7 @@ void Forcefield::MMFF94TorsionParameterTable::load(std::istream& is)
 		if (!(line_iss >> ctr_atom2_type))
 			throw Base::IOError("MMFF94TorsionParameterTable: error while reading center atom 2 type");
 
-		if (!(line_iss >> nbr_atom2_type))
+		if (!(line_iss >> term_atom2_type))
 			throw Base::IOError("MMFF94TorsionParameterTable: error while reading terminal atom 2 type");
 
 		if (!(line_iss >> tor_param1))
@@ -241,7 +241,7 @@ void Forcefield::MMFF94TorsionParameterTable::load(std::istream& is)
 		if (!(line_iss >> tor_param3))
 			throw Base::IOError("MMFF94TorsionParameterTable: error while reading torsion parameter 3");
 
-		addEntry(tor_type_idx, nbr_atom1_type, ctr_atom1_type, ctr_atom2_type, nbr_atom2_type, tor_param1, tor_param2, tor_param3);
+		addEntry(tor_type_idx, term_atom1_type, ctr_atom1_type, ctr_atom2_type, term_atom2_type, tor_param1, tor_param2, tor_param3);
     }
 }
 

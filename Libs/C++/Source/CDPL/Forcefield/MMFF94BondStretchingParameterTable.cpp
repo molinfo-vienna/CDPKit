@@ -109,7 +109,7 @@ double Forcefield::MMFF94BondStretchingParameterTable::Entry::getForceConstant()
 	return forceConst;
 }
 
-double Forcefield::MMFF94BondStretchingParameterTable::Entry::getReferenceBondLength() const
+double Forcefield::MMFF94BondStretchingParameterTable::Entry::getReferenceLength() const
 {
 	return refLength;
 }

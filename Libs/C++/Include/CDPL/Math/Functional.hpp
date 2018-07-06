@@ -52,7 +52,7 @@ namespace CDPL
 		struct ScalarBinaryAssignmentFunctor
 		{
 
-			typedef T1& Argument1Type;
+			typedef T1 Argument1Type;
 			typedef const T2& Argument2Type;
 		};
 

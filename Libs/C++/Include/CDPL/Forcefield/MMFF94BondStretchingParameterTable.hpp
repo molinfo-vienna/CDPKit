@@ -83,7 +83,7 @@ namespace CDPL
 
 				double getForceConstant() const;
 
-				double getReferenceBondLength() const;
+				double getReferenceLength() const;
 
 				operator bool() const;
 

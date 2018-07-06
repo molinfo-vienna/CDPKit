@@ -174,7 +174,7 @@ void Pharm::InteractionScoreGridCalculator::calculate(const FeatureContainer& fe
 
 	if (score_range > 0.0) {
 		for (std::size_t i = 0; i < num_pts; i++)
-			grid(i) = (grid(i) + min_score) / (max_score - min_score);
+			grid(i) = (grid(i) - min_score) / (max_score - min_score);
 
 	} else {
 		for (std::size_t i = 0; i < num_pts; i++)

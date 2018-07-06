@@ -24,6 +24,9 @@
 \namespace CDPL::Biomol
 \brief Contains classes and functions related to biological macromolecules.
 
+\namespace CDPL::Grid
+\brief Contains classes and functions related to grid based data representation and processing.
+
 \namespace CDPL::Forcefield
 \brief Contains classes and functions related to molecular forcefields.
 

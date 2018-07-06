@@ -51,7 +51,7 @@ namespace CDPL
 
 			SizeType size = CDPL_MATH_CHECK_SIZE_EQUALITY(SizeType(v.getSize()), SizeType(e().getSize()), Base::SizeError);
 
-			typedef F<typename V::ValueType, typename E::ValueType> FunctorType;
+			typedef F<typename V::Reference, typename E::ValueType> FunctorType;
 
 			for (SizeType i = 0; i < size; i++)
 				FunctorType::apply(v(i), e()(i));
@@ -60,7 +60,7 @@ namespace CDPL
 		template <template <typename T1, typename T2> class F, typename V, typename T>
 		void vectorAssignScalar(V& v, const T& t)
 		{
-			typedef F<typename V::ValueType, T> FunctorType;
+			typedef F<typename V::Reference, T> FunctorType;
 			typedef typename V::SizeType SizeType;
 
 			SizeType size = v.getSize();

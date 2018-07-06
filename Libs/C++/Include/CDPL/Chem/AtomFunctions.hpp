@@ -544,6 +544,8 @@ namespace CDPL
 		CDPL_CHEM_API void buildMatchExpressionString(const Atom& atom, const MolecularGraph& molgraph, std::string& expr_str);
 
 
+		CDPL_CHEM_API std::size_t getTopologicalDistance(const Atom& atom1, const Atom& atom2, const MolecularGraph& molgraph);
+
 		CDPL_CHEM_API bool atomTypesMatch(unsigned int qry_type, unsigned int tgt_type);
 
 

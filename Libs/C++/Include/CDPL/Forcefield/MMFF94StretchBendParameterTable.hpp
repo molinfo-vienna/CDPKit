@@ -72,16 +72,16 @@ namespace CDPL
 			  public:
 				Entry();
  
-				Entry(unsigned int sb_type_idx, unsigned int nbr_atom1_type, unsigned int ctr_atom_type, 
-					  unsigned int nbr_atom2_type, double ijk_force_const, double kji_force_const);
+				Entry(unsigned int sb_type_idx, unsigned int term_atom1_type, unsigned int ctr_atom_type, 
+					  unsigned int term_atom2_type, double ijk_force_const, double kji_force_const);
 
 				unsigned int getStretchBendTypeIndex() const;
 
-				unsigned int getNeighborAtom1Type() const;
+				unsigned int getTerminalAtom1Type() const;
 
 				unsigned int getCenterAtomType() const;
 
-				unsigned int getNeighborAtom2Type() const;
+				unsigned int getTerminalAtom2Type() const;
 
 				double getIJKForceConstant() const;
 
@@ -91,9 +91,9 @@ namespace CDPL
 
 			  private:
 				unsigned int sbTypeIdx;
-				unsigned int nbrAtom1Type;
+				unsigned int termAtom1Type;
 				unsigned int ctrAtomType;
-				unsigned int nbrAtom2Type;
+				unsigned int termAtom2Type;
 				double       ijkForceConst;
 				double       kjiForceConst;
 				bool         initialized;
@@ -107,18 +107,18 @@ namespace CDPL
 	
 			MMFF94StretchBendParameterTable();
 
-			void addEntry(unsigned int sb_type_idx, unsigned int nbr_atom1_type, unsigned int ctr_atom_type, 
-						  unsigned int nbr_atom2_type, double ijk_force_const, double kji_force_const);
+			void addEntry(unsigned int sb_type_idx, unsigned int term_atom1_type, unsigned int ctr_atom_type, 
+						  unsigned int term_atom2_type, double ijk_force_const, double kji_force_const);
 
-			const Entry& getEntry(unsigned int sb_type_idx, unsigned int nbr_atom1_type, unsigned int ctr_atom_type, 
-								  unsigned int nbr_atom2_type) const;
+			const Entry& getEntry(unsigned int sb_type_idx, unsigned int term_atom1_type, unsigned int ctr_atom_type, 
+								  unsigned int term_atom2_type) const;
 
 			std::size_t getNumEntries() const;
 
 			void clear();
 
-			bool removeEntry(unsigned int sb_type_idx, unsigned int nbr_atom1_type, unsigned int ctr_atom_type, 
-							 unsigned int nbr_atom2_type);
+			bool removeEntry(unsigned int sb_type_idx, unsigned int term_atom1_type, unsigned int ctr_atom_type, 
+							 unsigned int term_atom2_type);
 
 			EntryIterator removeEntry(const EntryIterator& it);
 

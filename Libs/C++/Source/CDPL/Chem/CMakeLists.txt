@@ -189,6 +189,7 @@ SET(cdpl-chem_LIB_SRCS
     AtomMatchExpressionStringFunction.cpp
     AtomMatchExpressionFunction.cpp
     AtomSybylTypeFunctions.cpp
+    AtomTopologicalDistanceFunction.cpp
 
     BondPropertyFunctions.cpp
     BondRingMembershipFunctions.cpp
@@ -208,7 +209,6 @@ SET(cdpl-chem_LIB_SRCS
     MolecularGraphRingSetFunctions.cpp
     MolecularGraphSSSRFunctions.cpp
     MolecularGraphCyclicSubstructureFunctions.cpp
-    MolecularGraphTopologicalDistanceMatrixFunctions.cpp
     MolecularGraphGeometricalDistanceMatrixFunction.cpp
     MolecularGraphTopologicalDistanceFunctions.cpp
     MolecularGraphAdjacencyMatrixFunction.cpp

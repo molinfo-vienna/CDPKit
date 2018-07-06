@@ -1,9 +1,11 @@
+/* -*- mode: c++; c-basic-offset: 4; tab-width: 4; indent-tabs-mode: t -*- */
+
 /* 
- * Version.hpp 
+ * MMFF94AngleBendingInteractionList.hpp 
  *
  * This file is part of the Chemical Data Processing Toolkit
  *
- * Copyright (C) 2003-2008 Thomas A. Seidel <thomas.seidel@chemit.at>
+ * Copyright (C) 2003-2010 Thomas A. Seidel <thomas.seidel@univie.ac.at>
  *
  * This library is free software; you can redistribute it and/or
  * modify it under the terms of the GNU Lesser General Public
@@ -23,41 +25,33 @@
 
 /**
  * \file
- * \brief The header to include for \e %CDPL version and build time information.
+ * \brief Definition of the class CDPL::Forcefield::MMFF94AngleBendingInteractionList.
  */
 
-#ifndef CDPL_VERSION_HPP
-#define CDPL_VERSION_HPP
+#ifndef CDPL_FORCEFIELD_MMFF94ANGLEBENDINGINTERACTIONLIST_HPP
+#define CDPL_FORCEFIELD_MMFF94ANGLEBENDINGINTERACTIONLIST_HPP
 
-/**
- * \brief The \e %CDPL major version number. 
- */
-#define CDPL_MAJOR_VERSION 1
-
-/**
- * \brief The \e %CDPL minor version number. 
- */
-#define CDPL_MINOR_VERSION 0
-
-/**
- * \brief The \e %CDPL patch-level. 
- */
-#define CDPL_PATCH_VERSION 0
-
-/**
- * \brief The \e %CDPL version as a string. 
- */
-#define CDPL_VERSION_STRING "1.0.0"
-
-/**
- * \brief The \e %CDPL build date in the format \e YYYYMMDD. 
- */
-#define CDPL_BUILD_DATE 20180706
+#include "CDPL/Forcefield/MMFF94AngleBendingInteraction.hpp"
+#include "CDPL/Util/Array.hpp"
 
 
-/** 
- * \brief The full \e %CDPL version number. 
- */
-#define CDPL_VERSION (CDPL_MAJOR_VERSION * 10000 + CDPL_MINOR_VERSION * 100 + CDPL_PATCH_VERSION)
+namespace CDPL 
+{
 
-#endif // CDPL_VERSION_HPP
+    namespace Forcefield 
+    {
+
+	/**
+	 * \addtogroup CDPL_FORCEFIELD_INTERACTION_DATA
+	 * @{
+	 */
+
+	typedef Util::Array<MMFF94AngleBendingInteraction> MMFF94AngleBendingInteractionList;
+
+	/**
+	 * @}
+	 */
+    }
+}
+
+#endif // CDPL_FORCEFIELD_MMFF94ANGLEBENDINGINTERACTIONLIST_HPP

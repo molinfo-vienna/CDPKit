@@ -26,6 +26,7 @@ SET(math_impl_MOD_SRCS
     UnitVectorExport.cpp
 
     MatrixExport.cpp
+    SparseMatrixExport.cpp
     CMatrixExport1.cpp
     CMatrixExport2.cpp
     CMatrixExport3.cpp    

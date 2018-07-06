@@ -655,7 +655,7 @@ BOOST_AUTO_TEST_CASE(ScalarAssignmentTest)
 
 	result1 = rhs1; 
 
-	ScalarAssignment<double, float>::apply(lhs1, rhs1);
+	ScalarAssignment<double&, float>::apply(lhs1, rhs1);
 
 	BOOST_CHECK_EQUAL(lhs1, result1);
 
@@ -667,7 +667,7 @@ BOOST_AUTO_TEST_CASE(ScalarAssignmentTest)
 
 	result2 = rhs2; 
 
-	ScalarAssignment<std::complex<double>, std::complex<float> >::apply(lhs2, rhs2);
+	ScalarAssignment<std::complex<double>&, std::complex<float> >::apply(lhs2, rhs2);
 
 	BOOST_CHECK_EQUAL(lhs2, result2);
 }
@@ -683,7 +683,7 @@ BOOST_AUTO_TEST_CASE(ScalarAdditionAssignmentTest)
 
 	result1 += rhs1; 
 
-	ScalarAdditionAssignment<unsigned int, float>::apply(lhs1, rhs1);
+	ScalarAdditionAssignment<unsigned int&, float>::apply(lhs1, rhs1);
 
 	BOOST_CHECK_EQUAL(lhs1, result1);
 
@@ -695,7 +695,7 @@ BOOST_AUTO_TEST_CASE(ScalarAdditionAssignmentTest)
 
 	result2 += rhs2; 
 
-	ScalarAdditionAssignment<std::complex<double>, std::complex<float> >::apply(lhs2, rhs2);
+	ScalarAdditionAssignment<std::complex<double>&, std::complex<float> >::apply(lhs2, rhs2);
 
 	BOOST_CHECK_EQUAL(lhs2, result2);
 }
@@ -711,7 +711,7 @@ BOOST_AUTO_TEST_CASE(ScalarSubtractionAssignmentTest)
 
 	result1 -= rhs1; 
 
-	ScalarSubtractionAssignment<float, int>::apply(lhs1, rhs1);
+	ScalarSubtractionAssignment<float&, int>::apply(lhs1, rhs1);
 
 	BOOST_CHECK_EQUAL(lhs1, result1);
 
@@ -723,7 +723,7 @@ BOOST_AUTO_TEST_CASE(ScalarSubtractionAssignmentTest)
 
 	result2 -= rhs2; 
 
-	ScalarSubtractionAssignment<std::complex<double>, std::complex<float> >::apply(lhs2, rhs2);
+	ScalarSubtractionAssignment<std::complex<double>&, std::complex<float> >::apply(lhs2, rhs2);
 
 	BOOST_CHECK_EQUAL(lhs2, result2);
 }
@@ -739,7 +739,7 @@ BOOST_AUTO_TEST_CASE(ScalarMultiplicationAssignmentTest)
 
 	result1 *= rhs1; 
 
-	ScalarMultiplicationAssignment<double, int>::apply(lhs1, rhs1);
+	ScalarMultiplicationAssignment<double&, int>::apply(lhs1, rhs1);
 
 	BOOST_CHECK_EQUAL(lhs1, result1);
 
@@ -751,7 +751,7 @@ BOOST_AUTO_TEST_CASE(ScalarMultiplicationAssignmentTest)
 
 	result2 *= rhs2; 
 
-	ScalarMultiplicationAssignment<std::complex<double>, std::complex<float> >::apply(lhs2, rhs2);
+	ScalarMultiplicationAssignment<std::complex<double>&, std::complex<float> >::apply(lhs2, rhs2);
 
 	BOOST_CHECK_EQUAL(lhs2, result2);
 }
@@ -767,7 +767,7 @@ BOOST_AUTO_TEST_CASE(ScalarDivisionAssignmentTest)
 
 	result1 /= rhs1; 
 
-	ScalarDivisionAssignment<double, int>::apply(lhs1, rhs1);
+	ScalarDivisionAssignment<double&, int>::apply(lhs1, rhs1);
 
 	BOOST_CHECK_EQUAL(lhs1, result1);
 
@@ -779,7 +779,7 @@ BOOST_AUTO_TEST_CASE(ScalarDivisionAssignmentTest)
 
 	result2 /= rhs2; 
 
-	ScalarDivisionAssignment<std::complex<double>, std::complex<float> >::apply(lhs2, rhs2);
+	ScalarDivisionAssignment<std::complex<double>&, std::complex<float> >::apply(lhs2, rhs2);
 
 	BOOST_CHECK_EQUAL(lhs2, result2);
 }

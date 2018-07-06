@@ -45,6 +45,7 @@ namespace CDPLPythonMath
 	void exportUnitVectorTypes();
 	
 	void exportMatrixTypes();
+	void exportSparseMatrixTypes();
 	void exportTranslationMatrixTypes();
 	void exportScalingMatrixTypes();
 	void exportRotationMatrixTypes();

@@ -72,12 +72,12 @@ namespace CDPL
 			  public:
 				Entry();
  
-				Entry(unsigned int nbr_atom1_type, unsigned int ctr_atom_type, unsigned int nbr_atom2_type, 
+				Entry(unsigned int term_atom1_type, unsigned int ctr_atom_type, unsigned int term_atom2_type, 
 					  unsigned int oop_atom_type, double force_const);
 
-				unsigned int getNeighborAtom1Type() const;
+				unsigned int getTerminalAtom1Type() const;
 
-				unsigned int getNeighborAtom2Type() const;
+				unsigned int getTerminalAtom2Type() const;
 
 				unsigned int getCenterAtomType() const;
 
@@ -88,9 +88,9 @@ namespace CDPL
 				operator bool() const;
 
 			  private:
-				unsigned int nbrAtom1Type;
+				unsigned int termAtom1Type;
 				unsigned int ctrAtomType;
-				unsigned int nbrAtom2Type;
+				unsigned int termAtom2Type;
 				unsigned int oopAtomType;
 				double       forceConst;
 				bool         initialized;
@@ -104,17 +104,17 @@ namespace CDPL
 	
 			MMFF94OutOfPlaneBendingParameterTable();
 
-			void addEntry(unsigned int nbr_atom1_type, unsigned int ctr_atom_type, unsigned int nbr_atom2_type, 
+			void addEntry(unsigned int term_atom1_type, unsigned int ctr_atom_type, unsigned int term_atom2_type, 
 					  unsigned int oop_atom_type, double force_const);
 
-			const Entry& getEntry(unsigned int nbr_atom1_type, unsigned int ctr_atom_type, unsigned int nbr_atom2_type, 
+			const Entry& getEntry(unsigned int term_atom1_type, unsigned int ctr_atom_type, unsigned int term_atom2_type, 
 								  unsigned int oop_atom_type) const;
 
 			std::size_t getNumEntries() const;
 
 			void clear();
 
-			bool removeEntry(unsigned int nbr_atom1_type, unsigned int ctr_atom_type, unsigned int nbr_atom2_type, 
+			bool removeEntry(unsigned int term_atom1_type, unsigned int ctr_atom_type, unsigned int term_atom2_type, 
 							 unsigned int oop_atom_type);
 
 			EntryIterator removeEntry(const EntryIterator& it);

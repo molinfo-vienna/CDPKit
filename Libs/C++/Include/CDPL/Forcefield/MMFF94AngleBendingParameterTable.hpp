@@ -72,28 +72,28 @@ namespace CDPL
 			  public:
 				Entry();
  
-				Entry(unsigned int angle_type_idx, unsigned int nbr_atom1_type, unsigned int ctr_atom_type, 
-					  unsigned int nbr_atom2_type, double force_const, double ref_angle);
+				Entry(unsigned int angle_type_idx, unsigned int term_atom1_type, unsigned int ctr_atom_type, 
+					  unsigned int term_atom2_type, double force_const, double ref_angle);
 
 				unsigned int getAngleTypeIndex() const;
 
-				unsigned int getNeighborAtom1Type() const;
+				unsigned int getTerminalAtom1Type() const;
 
 				unsigned int getCenterAtomType() const;
 
-				unsigned int getNeighborAtom2Type() const;
+				unsigned int getTerminalAtom2Type() const;
 
 				double getForceConstant() const;
 
-				double getReferenceBondAngle() const;
+				double getReferenceAngle() const;
 
 				operator bool() const;
 
 			  private:
 				unsigned int angleTypeIdx;
-				unsigned int nbrAtom1Type;
+				unsigned int termAtom1Type;
 				unsigned int ctrAtomType;
-				unsigned int nbrAtom2Type;
+				unsigned int termAtom2Type;
 				double       forceConst;
 				double       refAngle;
 				bool         initialized;
@@ -107,18 +107,18 @@ namespace CDPL
 	
 			MMFF94AngleBendingParameterTable();
 
-			void addEntry(unsigned int angle_type_idx, unsigned int nbr_atom1_type, unsigned int ctr_atom_type, 
-						  unsigned int nbr_atom2_type, double force_const, double ref_angle);
+			void addEntry(unsigned int angle_type_idx, unsigned int term_atom1_type, unsigned int ctr_atom_type, 
+						  unsigned int term_atom2_type, double force_const, double ref_angle);
 
-			const Entry& getEntry(unsigned int angle_type_idx, unsigned int nbr_atom1_type, unsigned int ctr_atom_type, 
-								  unsigned int nbr_atom2_type) const;
+			const Entry& getEntry(unsigned int angle_type_idx, unsigned int term_atom1_type, unsigned int ctr_atom_type, 
+								  unsigned int term_atom2_type) const;
 
 			std::size_t getNumEntries() const;
 
 			void clear();
 
-			bool removeEntry(unsigned int angle_type_idx, unsigned int nbr_atom1_type, unsigned int ctr_atom_type, 
-							 unsigned int nbr_atom2_type);
+			bool removeEntry(unsigned int angle_type_idx, unsigned int term_atom1_type, unsigned int ctr_atom_type, 
+							 unsigned int term_atom2_type);
 
 			EntryIterator removeEntry(const EntryIterator& it);
 

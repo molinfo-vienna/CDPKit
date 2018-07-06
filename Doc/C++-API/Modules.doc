@@ -10,7 +10,6 @@
 
 \defgroup CDPL_BASE_VARIABLE_DATA_STORAGE Variable Data Storage 
 \ingroup CDPL_BASE
-
 \defgroup CDPL_BASE_EXCEPTIONS Exceptions
 \ingroup CDPL_BASE
 
@@ -231,7 +230,7 @@
 \ingroup CDPL_CHEM
 
 \defgroup CDPL_CHEM_CONTROL_PARAMETERS Control-Parameter Keys
-\ingroup CDPL_CHEM_CONSTANTS
+\ingroup CDPL_CHEM
 
 \defgroup CDPL_CHEM_FUNCTORS Functor Classes
 \ingroup CDPL_CHEM
@@ -315,7 +314,7 @@
 \ingroup CDPL_BIOMOL
 
 \defgroup CDPL_BIOMOL_CONTROL_PARAMETERS Control-Parameter Keys
-\ingroup CDPL_BIOMOL_CONSTANTS
+\ingroup CDPL_BIOMOL
 
 \defgroup CDPL_BIOMOL_FUNCTIONS Free Functions
 \ingroup CDPL_BIOMOL
@@ -384,7 +383,7 @@
 \ingroup CDPL_PHARM
 
 \defgroup CDPL_PHARM_DESCRIPTORS Descriptors
-\ingroup CDPL_CHEM
+\ingroup CDPL_PHARM
 
 \defgroup CDPL_PHARM_PROPERTIES Property Keys
 \ingroup CDPL_PHARM
@@ -402,7 +401,7 @@
 \ingroup CDPL_PHARM
 
 \defgroup CDPL_PHARM_CONTROL_PARAMETERS Control-Parameter Keys
-\ingroup CDPL_PHARM_CONSTANTS
+\ingroup CDPL_PHARM
 
 \defgroup CDPL_PHARM_FUNCTORS Functor Classes
 \ingroup CDPL_PHARM
@@ -431,9 +430,6 @@
 
 \defgroup CDPL_FORCEFIELD Molecular Forcefields
 
-\defgroup CDPL_FORCEFIELD_DATA_STRUCTURES Auxiliary Data Structures
-\ingroup CDPL_FORCEFIELD
-
 \defgroup CDPL_FORCEFIELD_ATOM_TYPE_PERCEPTION Atom Type Perception
 \ingroup CDPL_FORCEFIELD
 
@@ -446,8 +442,17 @@
 \defgroup CDPL_FORCEFIELD_AROMATICITY Aromaticity Perception
 \ingroup CDPL_FORCEFIELD
 
-\defgroup CDPL_FORCEFIELD_PARAMETER_TABLES Parameter Lookup Tables
+\defgroup CDPL_FORCEFIELD_INTERACTION_ANALYSIS Interaction Analysis
 \ingroup CDPL_FORCEFIELD
+
+\defgroup CDPL_FORCEFIELD_DATA_STRUCTURES Auxiliary Data Structures
+\ingroup CDPL_FORCEFIELD
+
+\defgroup CDPL_FORCEFIELD_PARAMETER_TABLES Parameter Lookup Tables
+\ingroup CDPL_FORCEFIELD_DATA_STRUCTURES
+
+\defgroup CDPL_FORCEFIELD_INTERACTION_DATA Interaction Data
+\ingroup CDPL_FORCEFIELD_DATA_STRUCTURES
 
 \defgroup CDPL_FORCEFIELD_PROPERTIES Property Keys
 \ingroup CDPL_FORCEFIELD
@@ -460,6 +465,9 @@
 
 \defgroup CDPL_FORCEFIELD_MOLECULAR_GRAPH_PROPERTIES Molecular Graph Properties
 \ingroup CDPL_FORCEFIELD_PROPERTIES
+
+\defgroup CDPL_FORCEFIELD_CONSTANTS Flags and Constants
+\ingroup CDPL_FORCEFIELD
 
 \defgroup CDPL_FORCEFIELD_FUNCTIONS Free Functions
 \ingroup CDPL_FORCEFIELD
@@ -558,7 +566,7 @@
 \ingroup CDPL_VIS
 
 \defgroup CDPL_VIS_CONTROL_PARAMETERS Control-Parameters
-\ingroup CDPL_VIS_CONSTANTS
+\ingroup CDPL_VIS
 
 \defgroup CDPL_VIS_FUNCTIONS Free Functions
 \ingroup CDPL_VIS

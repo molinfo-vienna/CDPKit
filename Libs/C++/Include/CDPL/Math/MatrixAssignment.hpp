@@ -52,7 +52,7 @@ namespace CDPL
 			SizeType size1 = CDPL_MATH_CHECK_SIZE_EQUALITY(SizeType(m.getSize1()), SizeType(e().getSize1()), Base::SizeError);
 			SizeType size2 = CDPL_MATH_CHECK_SIZE_EQUALITY(SizeType(m.getSize2()), SizeType(e().getSize2()), Base::SizeError);
 
-			typedef F<typename M::ValueType, typename E::ValueType> FunctorType;
+			typedef F<typename M::Reference, typename E::ValueType> FunctorType;
 
 			for (SizeType i = 0; i < size1; i++)
 				for (SizeType j = 0; j < size2; j++)
@@ -62,7 +62,7 @@ namespace CDPL
 		template <template <typename T1, typename T2> class F, typename M, typename T>
 		void matrixAssignScalar(M& m, const T& t)
 		{
-			typedef F<typename M::ValueType, T> FunctorType;
+			typedef F<typename M::Reference, T> FunctorType;
 			typedef typename M::SizeType SizeType;
 
 			SizeType size1 = m.getSize1();

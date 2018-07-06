@@ -900,6 +900,514 @@ BOOST_AUTO_TEST_CASE(MatrixTest)
 	checkValues1(2, 6, m1, values2);
 }
 
+BOOST_AUTO_TEST_CASE(SparseMatrixTest)
+{
+	using namespace CDPL;
+	using namespace Math;
+
+	typedef Matrix<double>::SizeType SizeType;
+
+	SparseMatrix<double> m1;
+
+	// ---------
+
+	BOOST_CHECK_EQUAL(m1.getMaxSize(), m1.getData().max_size());
+
+	// ---------
+
+	checkEmpty2(0, 0, m1);
+
+	// ---------
+
+	m1.resize(4, 5, false);
+	m1.clear(2.2);
+
+	BOOST_CHECK(m1.getData().empty());
+
+	checkValues2(4, 5, m1, 2.2);
+
+	// ---------
+
+	m1(0, 0) = 2.0;
+	m1(3, 1) = 3.0;
+	m1.getData()[std::make_pair(2, 4)] = -1.0;
+
+	BOOST_CHECK(m1.getData().size() == 3);
+
+	double values1[][5] = { 
+		{ 2.0, 2.2, 2.2, 2.2,  2.2 }, 
+		{ 2.2, 2.2, 2.2, 2.2,  2.2 },
+		{ 2.2, 2.2, 2.2, 2.2, -1.0 },
+		{ 2.2, 3.0, 2.2, 2.2,  2.2 } 
+	};
+
+	checkValues2(4, 5, m1, values1);
+
+	// ---------
+
+	SparseMatrix<double> m2(m1);
+
+	checkValues2(4, 5, m2, values1);
+
+	BOOST_CHECK(m2.getData().size() == 3);
+
+	// ---------
+
+	SparseMatrix<double> m3(3, 7);
+
+	checkValues2(3, 7, m3, 0.0);
+
+	// ---------
+
+	SparseMatrix<double> m4(5, 2, -1.97);
+
+	checkValues2(5, 2, m4, -1.97);
+
+	// ---------
+
+	SparseMatrix<double> m5(0, 5, 2.2);
+
+	checkEmpty2(0, 5, m5);
+
+	// ---------
+
+	SparseMatrix<double> m6(static_cast<const MatrixExpression<SparseMatrix<double> >&>(m1));
+
+	checkValues2(4, 5, m6, values1);
+
+	BOOST_CHECK(m6.getData().size() == 20);
+
+	// ---------
+
+	double values2[][6] = { 
+	    { 2.0, -1.2, 5.0, 0.0, 0.0, 1.0 },
+		{ 0.0,  0.0, 1.0, 1.1, 1.2, 1.3 }
+	};
+
+	SparseMatrix<double> m7;
+
+	m7.resize(2, 6);
+
+	m7(0, 0) = 2.0;
+	m7(0, 1) = -1.2;
+	m7(0, 2) = 5.0;
+	m7(0, 3) = 0.0;
+	m7(0, 4) = 0.0;
+	m7(0, 5) = 1.0;
+
+	m7.resize(1, 6, false);
+	
+	checkValues2(1, 6, m7, values2);
+
+	BOOST_CHECK(m7.getData().size() == 6);
+
+	// ---------
+
+	m7.resize(3, 3, false);
+	m7.clear();
+
+	checkValues2(3, 3, m7, 0.0);
+
+	BOOST_CHECK(m7.getData().empty());
+
+	m7.clear(-2.11);
+
+	checkValues2(3, 3, m7, -2.11);
+
+	BOOST_CHECK(m7.getData().empty());
+
+	SparseMatrix<double> m8;
+
+	checkEmpty2(0, 0, m8);
+
+	m8.clear();
+
+	checkEmpty2(0, 0, m8);
+
+	m8.clear(-2);
+
+	checkEmpty2(0, 0, m8);
+
+	BOOST_CHECK(m8.getData().empty());
+
+	// ---------
+
+	BOOST_CHECK(&(m1 *= -2) == &m1);
+
+	double values3[][5] = { 
+		{ 2.0, 2.2, 2.2, 2.2,  2.2 }, 
+		{ 2.2, 2.2, 2.2, 2.2,  2.2 },
+		{ 2.2, 2.2, 2.2, 2.2, -1.0 },
+		{ 2.2, 3.0, 2.2, 2.2,  2.2 } 
+	};
+
+	for (std::size_t i = 0; i < 4; i++)
+		for (std::size_t j = 0; j < 5; j++)
+			values3[i][j] *= -2;
+
+	checkValues2(4, 5, m1, values3);
+
+	BOOST_CHECK(m6.getData().size() == 20);
+
+	// ---------
+
+	BOOST_CHECK(&(m1 /= -2.0) == &m1);
+
+	for (std::size_t i = 0; i < 4; i++)
+		for (std::size_t j = 0; j < 5; j++)
+			values3[i][j] /= -2.0;
+
+	checkValues2(4, 5, m1, values3);
+
+	BOOST_CHECK(m1.getData().size() == 20);
+
+	// ---------
+
+	BOOST_CHECK(&(m1 += static_cast<const MatrixContainer<SparseMatrix<double> >&>(m1)) == &m1);
+
+	for (std::size_t i = 0; i < 4; i++)
+		for (std::size_t j = 0; j < 5; j++)
+			values3[i][j] += values3[i][j];
+
+	checkValues2(4, 5, m1, values3);
+
+	BOOST_CHECK(m1.getData().size() == 20);
+
+	BOOST_CHECK_THROW(m1 += static_cast<const MatrixContainer<SparseMatrix<double> >&>(m7), Base::SizeError);
+
+	checkValues2(4, 5, m1, values3);
+
+	BOOST_CHECK_THROW(m1 += static_cast<const MatrixContainer<SparseMatrix<float> >&>(SparseMatrix<float>()), Base::SizeError);
+
+	checkValues2(4, 5, m1, values3);
+
+	BOOST_CHECK(m1.getData().size() == 20);
+
+	// ---------
+
+	BOOST_CHECK(&(m1 -= static_cast<const MatrixContainer<SparseMatrix<double> >&>(m2)) == &m1);
+
+	checkValues2(4, 5, m1, values1);
+
+	BOOST_CHECK(m1.getData().size() == 20);
+
+	BOOST_CHECK_THROW(m1 -= static_cast<const MatrixContainer<SparseMatrix<double> >&>(m7), Base::SizeError);
+
+	checkValues2(4, 5, m1, values1);
+
+	BOOST_CHECK_THROW(m1 -= static_cast<const MatrixContainer<SparseMatrix<float> >&>(SparseMatrix<float>()), Base::SizeError);
+
+	checkValues2(4, 5, m1, values1);
+
+	// ---------
+
+	BOOST_CHECK(&(m1 += static_cast<const MatrixContainer<SparseMatrix<double> >&>(m2)) == &m1);
+
+	checkValues2(4, 5, m1, values3);
+
+	BOOST_CHECK(m1.getData().size() == 20);
+
+	// ---------
+
+	BOOST_CHECK(&(m1 -= static_cast<const MatrixContainer<SparseMatrix<double> >&>(m1)) == &m1);
+
+	checkValues2(4, 5, m1, 0.0);
+
+	BOOST_CHECK(m1.getData().size() == 20);
+
+	// ---------
+
+	BOOST_CHECK(&(m1 += static_cast<const MatrixExpression<SparseMatrix<double> >&>(m2)) == &m1);
+
+	checkValues2(4, 5, m1, values1);
+
+	BOOST_CHECK_THROW(m1 += static_cast<const MatrixExpression<SparseMatrix<double> >&>(m7), Base::SizeError);
+
+	checkValues2(4, 5, m1, values1);
+
+	BOOST_CHECK_THROW(m1 += static_cast<const MatrixExpression<SparseMatrix<int> >&>(SparseMatrix<int>()), Base::SizeError);
+
+	checkValues2(4, 5, m1, values1);
+
+	BOOST_CHECK(m1.getData().size() == 20);
+
+
+	// ---------
+
+	BOOST_CHECK(&(m1 += static_cast<const MatrixExpression<SparseMatrix<double> >&>(m1)) == &m1);
+
+	checkValues2(4, 5, m1, values3);
+
+	// ---------
+
+	BOOST_CHECK(&(m1 -= static_cast<const MatrixExpression<SparseMatrix<double> >&>(m2)) == &m1);
+
+	checkValues2(4, 5, m1, values1);
+
+	BOOST_CHECK_THROW(m1 -= static_cast<const MatrixExpression<SparseMatrix<double> >&>(m7), Base::SizeError);
+
+	checkValues2(4, 5, m1, values1);
+
+	BOOST_CHECK_THROW(m1 -= static_cast<const MatrixExpression<SparseMatrix<float> >&>(SparseMatrix<float>()), Base::SizeError);
+
+	checkValues2(4, 5, m1, values1);
+
+	// ---------
+
+	BOOST_CHECK(&(m1 -= static_cast<const MatrixExpression<SparseMatrix<double> >&>(m1)) == &m1);
+
+	checkValues2(4, 5, m1, 0.0);
+
+	// ---------
+
+	BOOST_CHECK(&m1.plusAssign(m2) == &m1);
+
+	checkValues2(4, 5, m1, values1);
+
+	BOOST_CHECK_THROW(m1.plusAssign(m7), Base::SizeError);
+
+	checkValues2(4, 5, m1, values1);
+
+	BOOST_CHECK_THROW(m1.plusAssign(SparseMatrix<float>()), Base::SizeError);
+
+	checkValues2(4, 5, m1, values1);
+
+	// ---------
+
+	BOOST_CHECK(&m1.plusAssign(m1) == &m1);
+
+	checkValues2(4, 5, m1, values3);
+
+	// ---------
+
+	BOOST_CHECK(&m1.minusAssign(m2) == &m1);
+
+	checkValues2(4, 5, m1, values1);
+
+	BOOST_CHECK_THROW(m1.minusAssign(m7), Base::SizeError);
+
+	checkValues2(4, 5, m1, values1);
+
+	BOOST_CHECK_THROW(m1.minusAssign(SparseMatrix<int>()), Base::SizeError);
+
+	checkValues2(4, 5, m1, values1);
+
+	// ---------
+
+	BOOST_CHECK(&m1.minusAssign(m1) == &m1);
+
+	checkValues2(4, 5, m1, 0.0);
+
+	// ---------
+
+	m7.resize(2, 6);
+
+	for (SizeType i = 0; i < 2; i++)
+		for (SizeType j = 0; j < 6; j++)
+			m7(i, j) = values2[i][j];
+
+	m1.resize(2, 6);
+	m1.clear();
+
+	checkValues2(2, 6, m1, 0.0);
+
+	BOOST_CHECK(&(m1 = m2) == &m1);
+
+	checkValues2(4, 5, m1, values1);
+	
+	m1.resize(0, 0);
+
+	checkEmpty2(0, 0, m1);
+
+	m5.resize(4, 5, true);
+	m5.clear(2.2);
+
+	BOOST_CHECK(&(m1 = m5) == &m1);
+
+	checkValues2(4, 5, m1, 2.2);
+
+	BOOST_CHECK(&(m1 = m7) == &m1);
+
+	checkValues2(2, 6, m1, values2);
+
+	BOOST_CHECK(&(m1 = m1) == &m1);
+
+	checkValues2(2, 6, m1, values2);
+
+	BOOST_CHECK(&(m1 = SparseMatrix<double>()) == &m1);
+
+	checkEmpty2(0, 0, m1);
+
+	BOOST_CHECK(&(m1 = m7) == &m1);
+
+	checkValues2(2, 6, m1, values2);
+
+	// ---------
+
+	m1.resize(1, 3, true);
+
+	checkValues2(1, 3, m1, values2);
+
+	BOOST_CHECK(&(m1 = static_cast<const MatrixExpression<SparseMatrix<double> >&>(m5)) == &m1);
+
+	checkValues2(4, 5, m1, 2.2);
+
+	m1.resize(0, 3);
+
+	checkEmpty2(0, 3, m1);
+
+	BOOST_CHECK(&(m1 = static_cast<const MatrixExpression<SparseMatrix<double> >&>(m7)) == &m1);
+
+	checkValues2(2, 6, m1, values2);
+
+	BOOST_CHECK(&(m1 = static_cast<const MatrixExpression<SparseMatrix<double> >&>(m6)) == &m1);
+
+	checkValues2(4, 5, m1, values1);
+
+	BOOST_CHECK(&(m1 = static_cast<const MatrixExpression<SparseMatrix<double> >&>(m1)) == &m1);
+
+	checkValues2(4, 5, m1, values1);
+
+	BOOST_CHECK(&(m1 = static_cast<const MatrixExpression<SparseMatrix<int> >&>(SparseMatrix<int>())) == &m1);
+
+	checkEmpty2(0, 0, m1);
+
+	BOOST_CHECK(&(m1 = static_cast<const MatrixExpression<SparseMatrix<double> >&>(m6)) == &m1);
+
+	checkValues2(4, 5, m1, values1);
+
+	// ---------
+
+	m1.resize(3, 4, true);
+
+	checkValues2(3, 4, m1, values1);
+
+	BOOST_CHECK(&(m1 = static_cast<const MatrixContainer<SparseMatrix<double> >&>(m5)) == &m1);
+
+	checkValues2(4, 5, m1, 2.2);
+
+	m1.resize(0, 1);
+
+	checkEmpty2(0, 1, m1);
+
+	BOOST_CHECK(&(m1 = static_cast<const MatrixContainer<SparseMatrix<double> >&>(m3)) == &m1);
+
+	checkValues2(3, 7, m1, 0.0);
+
+	BOOST_CHECK(&(m1 = static_cast<const MatrixContainer<SparseMatrix<double> >&>(m7)) == &m1);
+
+	checkValues2(2, 6, m1, values2);
+
+	BOOST_CHECK(&(m1 = static_cast<const MatrixContainer<SparseMatrix<double> >&>(m1)) == &m1);
+
+	checkValues2(2, 6, m1, values2);
+
+	BOOST_CHECK(&(m1 = static_cast<const MatrixContainer<SparseMatrix<long double> >&>(SparseMatrix<long double>())) == &m1);
+
+	checkEmpty2(0, 0, m1);
+	
+	BOOST_CHECK(&(m1 = static_cast<const MatrixContainer<SparseMatrix<double> >&>(m7)) == &m1);
+
+	checkValues2(2, 6, m1, values2);
+
+	// ---------
+
+	BOOST_CHECK(&m1.assign(m3) == &m1);
+
+	checkValues2(3, 7, m1, 0.0);
+
+	m1.resize(0, 0, true);
+
+	checkEmpty2(0, 0, m1);
+
+	BOOST_CHECK(&m1.assign(m5) == &m1);
+
+	checkValues2(4, 5, m1, 2.2);
+
+	BOOST_CHECK(&m1.assign(m6) == &m1);
+
+	checkValues2(4, 5, m1, values1);
+
+	BOOST_CHECK(&m1.assign(m1) == &m1);
+
+	checkValues2(4, 5, m1, values1);
+
+	BOOST_CHECK(&m1.assign(SparseMatrix<float>()) == &m1);
+
+	checkEmpty2(0, 0, m1);
+
+	BOOST_CHECK(&m1.assign(m6) == &m1);
+
+	checkValues2(4, 5, m1, values1);
+
+	// ---------
+	
+	swap(m1, m7);
+
+	checkValues2(4, 5, m7, values1);
+	checkValues2(2, 6, m1, values2);
+
+	swap(m1, m7);
+
+	checkValues2(2, 6, m7, values2);
+	checkValues2(4, 5, m1, values1);
+
+	swap(m7, m1);
+
+	checkValues2(4, 5, m7, values1);
+	checkValues2(2, 6, m1, values2);
+
+	swap(m7, m1);
+
+	checkValues2(2, 6, m7, values2);
+	checkValues2(4, 5, m1, values1);
+
+	m1.swap(m7);
+
+	checkValues2(4, 5, m7, values1);
+	checkValues2(2, 6, m1, values2);
+
+	m1.swap(m7);
+
+	checkValues2(2, 6, m7, values2);
+	checkValues2(4, 5, m1, values1);
+
+	m7.swap(m1);
+
+	checkValues2(4, 5, m7, values1);
+	checkValues2(2, 6, m1, values2);
+
+	m7.swap(m1);
+
+	checkValues2(2, 6, m7, values2);
+	checkValues2(4, 5, m1, values1);
+
+	m1.resize(0, 0);
+
+	checkEmpty2(0, 0, m1);
+
+	m1.swap(m7);
+
+	checkEmpty2(0, 0, m7);
+	checkValues2(2, 6, m1, values2);
+
+	swap(m7, m7);
+
+	checkEmpty2(0, 0, m7);
+
+	m7.swap(m7);
+
+	checkEmpty2(0, 0, m7);
+
+	swap(m1, m1);
+
+	checkValues2(2, 6, m1, values2);
+
+	m1.swap(m1);
+
+	checkValues2(2, 6, m1, values2);
+}
+
 BOOST_AUTO_TEST_CASE(BoundedMatrixTest)
 {
 	using namespace CDPL;

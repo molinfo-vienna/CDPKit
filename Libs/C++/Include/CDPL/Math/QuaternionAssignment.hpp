@@ -43,7 +43,7 @@ namespace CDPL
 		template <template <typename T1, typename T2> class F, typename Q, typename E>
 		void quaternionAssignQuaternion(Q& q, const QuaternionExpression<E>& e)
 		{
-			typedef F<typename Q::ValueType, typename E::ValueType> FunctorType;
+			typedef F<typename Q::Reference, typename E::ValueType> FunctorType;
 
 			FunctorType::apply(q.getC1(), e().getC1());
 			FunctorType::apply(q.getC2(), e().getC2());
@@ -54,7 +54,7 @@ namespace CDPL
 		template <template <typename T1, typename T2> class F, typename Q, typename T>
 		void quaternionAssignScalar(Q& q, const T& t)
 		{
-			typedef F<typename Q::ValueType, T> FunctorType;
+			typedef F<typename Q::Reference, T> FunctorType;
 		
 			FunctorType::apply(q.getC1(), t);
 			FunctorType::apply(q.getC2(), t);

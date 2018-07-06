@@ -323,9 +323,11 @@ namespace CDPL
 	
 		CDPL_CHEM_API bool hasTopologicalDistanceMatrix(const MolecularGraph& molgraph);
 
-		CDPL_CHEM_API Math::ULMatrix::SharedPointer calcTopologicalDistanceMatrix(MolecularGraph& molgraph, bool overwrite);
+		CDPL_CHEM_API Math::ULMatrix::SharedPointer calcTopologicalDistanceMatrix(MolecularGraph& molgraph, bool overwrite, std::size_t max_dist = 0);
 
-		CDPL_CHEM_API void calcTopologicalDistanceMatrix(const MolecularGraph& molgraph, Math::ULMatrix& mtx);
+		CDPL_CHEM_API void calcTopologicalDistanceMatrix(const MolecularGraph& molgraph, Math::ULMatrix& mtx, std::size_t max_dist = 0);
+
+		CDPL_CHEM_API void calcTopologicalDistanceMatrix(const MolecularGraph& molgraph, Math::SparseULMatrix& mtx, std::size_t max_dist = 0);
 
 
 		CDPL_CHEM_API const Math::DMatrix::SharedPointer& getGeometricalDistanceMatrix(const MolecularGraph& molgraph);

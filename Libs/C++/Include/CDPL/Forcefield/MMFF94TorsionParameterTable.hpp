@@ -72,18 +72,18 @@ namespace CDPL
 			  public:
 				Entry();
  
-				Entry(unsigned int tor_type_idx, unsigned int nbr_atom1_type, unsigned int ctr_atom1_type, unsigned int ctr_atom2_type,
-					  unsigned int nbr_atom2_type, double tor_param1, double tor_param2, double tor_param3);
+				Entry(unsigned int tor_type_idx, unsigned int term_atom1_type, unsigned int ctr_atom1_type, unsigned int ctr_atom2_type,
+					  unsigned int term_atom2_type, double tor_param1, double tor_param2, double tor_param3);
 
 				unsigned int getTorsionTypeIndex() const;
 
-				unsigned int getNeighborAtom1Type() const;
+				unsigned int getTerminalAtom1Type() const;
 
 				unsigned int getCenterAtom1Type() const;
 
 				unsigned int getCenterAtom2Type() const;
 
-				unsigned int getNeighborAtom2Type() const;
+				unsigned int getTerminalAtom2Type() const;
 
 				double getTorsionParameter1() const;
 
@@ -95,10 +95,10 @@ namespace CDPL
 
 			  private:
 				unsigned int torTypeIdx;
-				unsigned int nbrAtom1Type;
+				unsigned int termAtom1Type;
 				unsigned int ctrAtom1Type;
 				unsigned int ctrAtom2Type;
-				unsigned int nbrAtom2Type;
+				unsigned int termAtom2Type;
 				double       torParam1;
 				double       torParam2;
 				double       torParam3;
@@ -113,18 +113,18 @@ namespace CDPL
 	
 			MMFF94TorsionParameterTable();
 
-			void addEntry(unsigned int tor_type_idx, unsigned int nbr_atom1_type, unsigned int ctr_atom1_type, unsigned int ctr_atom2_type,
-						  unsigned int nbr_atom2_type, double tor_param1, double tor_param2, double tor_param3);
+			void addEntry(unsigned int tor_type_idx, unsigned int term_atom1_type, unsigned int ctr_atom1_type, unsigned int ctr_atom2_type,
+						  unsigned int term_atom2_type, double tor_param1, double tor_param2, double tor_param3);
 
-			const Entry& getEntry(unsigned int tor_type_idx, unsigned int nbr_atom1_type, unsigned int ctr_atom1_type, unsigned int ctr_atom2_type,
-								  unsigned int nbr_atom2_type) const;
+			const Entry& getEntry(unsigned int tor_type_idx, unsigned int term_atom1_type, unsigned int ctr_atom1_type, unsigned int ctr_atom2_type,
+								  unsigned int term_atom2_type) const;
 
 			std::size_t getNumEntries() const;
 
 			void clear();
 
-			bool removeEntry(unsigned int tor_type_idx, unsigned int nbr_atom1_type, unsigned int ctr_atom1_type, unsigned int ctr_atom2_type,
-							 unsigned int nbr_atom2_type);
+			bool removeEntry(unsigned int tor_type_idx, unsigned int term_atom1_type, unsigned int ctr_atom1_type, unsigned int ctr_atom2_type,
+							 unsigned int term_atom2_type);
 
 			EntryIterator removeEntry(const EntryIterator& it);
 
