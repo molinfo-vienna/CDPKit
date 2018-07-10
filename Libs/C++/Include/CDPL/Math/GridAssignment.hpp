@@ -52,7 +52,7 @@ namespace CDPL
 			SizeType size2 = CDPL_MATH_CHECK_SIZE_EQUALITY(SizeType(g.getSize2()), SizeType(e().getSize2()), Base::SizeError);
 			SizeType size3 = CDPL_MATH_CHECK_SIZE_EQUALITY(SizeType(g.getSize3()), SizeType(e().getSize3()), Base::SizeError);
 
-			typedef F<typename G::ValueType, typename E::ValueType> FunctorType;
+			typedef F<typename G::Reference, typename E::ValueType> FunctorType;
 
 			for (SizeType i = 0; i < size1; i++)
 				for (SizeType j = 0; j < size2; j++)
@@ -63,7 +63,7 @@ namespace CDPL
 		template <template <typename T1, typename T2> class F, typename G, typename T>
 		void gridAssignScalar(G& g, const T& t)
 		{
-			typedef F<typename G::ValueType, T> FunctorType;
+			typedef F<typename G::Reference, T> FunctorType;
 			typedef typename G::SizeType SizeType;
 
 			SizeType size1 = g.getSize1();

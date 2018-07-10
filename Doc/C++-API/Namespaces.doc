@@ -27,8 +27,8 @@
 \namespace CDPL::Grid
 \brief Contains classes and functions related to grid based data representation and processing.
 
-\namespace CDPL::Forcefield
-\brief Contains classes and functions related to molecular forcefields.
+\namespace CDPL::ForceField
+\brief Contains classes and functions related to molecular force fields.
 
 \namespace boost
 \brief The namespace of the Boost C++ Libraries (see [\ref BOOST] for details).

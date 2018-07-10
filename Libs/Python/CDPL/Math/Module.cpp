@@ -41,6 +41,7 @@ BOOST_PYTHON_MODULE(_math)
 	exportGridExpressionTypes();
 
 	exportVectorTypes();
+	exportSparseVectorTypes();
 	exportCVectorTypes1();
 	exportCVectorTypes2();
 	exportCVectorTypes3();

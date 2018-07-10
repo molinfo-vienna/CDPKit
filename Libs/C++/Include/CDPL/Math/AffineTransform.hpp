@@ -334,7 +334,7 @@ namespace CDPL
 			typedef Vector<T, std::vector<T> > VectorTemporaryType;
 	
 			explicit TranslationMatrix(SizeType n, const ValueType& tx = ValueType(), 
-													   const ValueType& ty = ValueType(), const ValueType& tz = ValueType()): size(n) {
+									   const ValueType& ty = ValueType(), const ValueType& tz = ValueType()): size(n) {
 				set(tx, ty, tz);
 			}
 
@@ -343,7 +343,7 @@ namespace CDPL
 			}
 
 			void set(const ValueType& tx = ValueType(), const ValueType& ty = ValueType(), 
-									 const ValueType& tz = ValueType()) {
+					 const ValueType& tz = ValueType()) {
 				data[0] = tx;
 				data[1] = ty;
 				data[2] = tz;

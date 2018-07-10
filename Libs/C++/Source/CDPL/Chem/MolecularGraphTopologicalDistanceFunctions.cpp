@@ -69,7 +69,7 @@ namespace
 			atoms.push_back(&*it1);
 			vis_atoms.set(i);
 
-			for (std::size_t path_len = 1; !atoms.empty() && (path_len == 0 || path_len <= max_dist); path_len++) {
+			for (std::size_t path_len = 1; !atoms.empty() && (max_dist == 0 || path_len <= max_dist); path_len++) {
 				AtomListIterator atoms_end = atoms.end(); 
 
 				for (AtomListIterator it2 = atoms.begin(); it2 != atoms_end; ++it2) {

@@ -15,6 +15,7 @@ SET(test-suite_SRCS
     FunctionalTest.cpp
     VectorAssignmentTest.cpp
     MatrixAssignmentTest.cpp
+    SparseContainerAssignmentTest.cpp
     QuaternionAssignmentTest.cpp
     ExpressionTest.cpp
     VectorTest.cpp

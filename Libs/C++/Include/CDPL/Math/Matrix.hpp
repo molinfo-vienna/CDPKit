@@ -33,11 +33,9 @@
 #include <algorithm>
 #include <vector>
 #include <limits>
-#include <utility>
 
 #include <boost/mpl/if.hpp>
 #include <boost/type_traits/is_const.hpp>
-#include <boost/utility.hpp>
 #include <boost/swap.hpp>
 #include <boost/shared_ptr.hpp>
 #include <boost/unordered_map.hpp>
@@ -45,10 +43,13 @@
 #include "CDPL/Math/Check.hpp"
 #include "CDPL/Math/MatrixExpression.hpp"
 #include "CDPL/Math/MatrixAssignment.hpp"
+#include "CDPL/Math/SparseContainerAssignment.hpp"
 #include "CDPL/Math/DirectAssignmentProxy.hpp"
 #include "CDPL/Math/Functional.hpp"
 #include "CDPL/Math/TypeTraits.hpp"
+#include "CDPL/Math/SparseContainerElement.hpp"
 #include "CDPL/Math/LUDecomposition.hpp"
+#include "CDPL/Base/IntTypes.hpp"
 #include "CDPL/Base/Exceptions.hpp"
 
 
@@ -370,8 +371,8 @@ namespace CDPL
 			}
 
 		private:
-			static SizeType storageSize(SizeType m, SizeType n) {
-				CDPL_MATH_CHECK(n == 0 || m <= std::numeric_limits<SizeType>::max() / n, "Maximum size exceeded", Base::SizeError);
+			SizeType storageSize(SizeType m, SizeType n) {
+				CDPL_MATH_CHECK(n == 0 || m <= data.max_size() / n, "Maximum size exceeded", Base::SizeError);
 				return (m * n);
 			}
 
@@ -380,129 +381,40 @@ namespace CDPL
 			ArrayType data;
 		};
 
-		template <typename M>
-		class SparseMatrixElement
-		{
-				
-		public:
-			typedef M MatrixType;
-			typedef typename MatrixType::ValueType ValueType;
-			typedef typename MatrixType::SizeType SizeType;
-			typedef ValueType& Reference;
-			typedef typename MatrixType::ConstReference ConstReference;
-
-			SparseMatrixElement(MatrixType& m, SizeType i, SizeType j): mtx(m), ij(i, j) {}
-
-			// Assignment
-			SparseMatrixElement& operator=(const SparseMatrixElement &p) {
-				ref() = p.constRef();
-				return *this;
-			}
-
-			template <typename D>
-			SparseMatrixElement& operator=(const D &d) {
-				ref() = d;
-				return *this;
-			}
-
-			template <typename D>
-			SparseMatrixElement& operator+=(const D &d) {
-				ref() += d;
-				return *this;
-			}
-
-			template <typename D>
-			SparseMatrixElement& operator-=(const D &d) {
-				ref() -= d;
-				return *this;
-			}
-
-			template <typename D>
-			SparseMatrixElement& operator*=(const D &d) {
-				ref() *= d;
-				return *this;
-			}
-
-			template <typename D>
-			SparseMatrixElement& operator/=(const D &d) {
-				ref() /= d;
-				return *this;
-			}
-
-			// Comparison
-			template <typename D>
-			bool operator==(const D &d) const {
-				return (constRef() == d);
-			}
-
-			template <typename D>
-			bool operator!=(const D &d) const {
-				return (constRef() != d);
-			}
-
-			operator ConstReference() const {
-				return constRef();
-			}
-
-			Reference& ref() const {
-				typename MatrixType::ArrayType::iterator it = mtx.getData().find(ij);
-
-				if (it == mtx.getData().end())
-					return mtx.getData().insert(typename MatrixType::ArrayType::value_type(ij, mtx.getDefaultValue())).first->second;
-
-				return it->second;
-			}
-	
-			ConstReference& constRef() const {
-				typename MatrixType::ArrayType::const_iterator it = mtx.getData().find(ij);
-
-				if (it == mtx.getData().end())
-					return mtx.getDefaultValue();
-
-				return it->second;
-			}
-
-		private:
-			typedef std::pair<SizeType, SizeType> IndexPair;
-
-			MatrixType& mtx;
-			IndexPair   ij;
-		};
-
-		template <typename M>
-		struct TypeTraits<SparseMatrixElement<M> > : public TypeTraits<typename M::ValueType>  {};
-
-		template <typename T, typename A = boost::unordered_map<std::pair<std::size_t, std::size_t>, T> > 
-		class SparseMatrix : public MatrixContainer<SparseMatrix<T, A> >
+		template <typename T> 
+		class SparseMatrix : public MatrixContainer<SparseMatrix<T> >
 		{
 
-			typedef SparseMatrix<T, A> SelfType;
+			typedef SparseMatrix<T> SelfType;
 
 		public:
 			typedef T ValueType;
-			typedef SparseMatrixElement<SelfType> Reference;
+			typedef Base::uint64 KeyType;
+			typedef SparseContainerElement<SelfType> Reference;
 			typedef const T& ConstReference;
 			typedef std::size_t SizeType;
 			typedef std::ptrdiff_t DifferenceType;
-			typedef A ArrayType;
+			typedef boost::unordered_map<KeyType, ValueType> ArrayType;
 			typedef T* Pointer;
 			typedef const T* ConstPointer;
 			typedef MatrixReference<SelfType> ClosureType;
 			typedef const MatrixReference<const SelfType> ConstClosureType;
 			typedef SelfType MatrixTemporaryType;
-			typedef Vector<T, A> VectorTemporaryType;
+			typedef Vector<T, std::vector<T> > VectorTemporaryType;
 			typedef boost::shared_ptr<SelfType> SharedPointer;
 		
 			SparseMatrix(): size1(0), size2(0), data(), defValue() {}
 
 			SparseMatrix(SizeType m, SizeType n): 
 				size1(m), size2(n), data(), defValue() {
-				CDPL_MATH_CHECK(n == 0 || m <= data.max_size() / n, "Maximum size exceeded", Base::SizeError);
+				CDPL_MATH_CHECK((n == 0 || m <= data.max_size() / n) && m <= std::numeric_limits<Base::uint32>::max() &&
+								n <= std::numeric_limits<Base::uint32>::max(), "Maximum size exceeded", Base::SizeError);
 			}
 
 			SparseMatrix(SizeType m, SizeType n, const ValueType& v):  
 				size1(m), size2(n), data(), defValue(v) {
-				CDPL_MATH_CHECK(n == 0 || m <= data.max_size() / n, "Maximum size exceeded", Base::SizeError);
+				CDPL_MATH_CHECK((n == 0 || m <= data.max_size() / n) && m <= std::numeric_limits<Base::uint32>::max() &&
+								n <= std::numeric_limits<Base::uint32>::max(), "Maximum size exceeded", Base::SizeError);
 			}
 
 			SparseMatrix(const SparseMatrix& m): size1(m.size1), size2(m.size2), data(m.data), defValue(m.defValue) {}
@@ -510,20 +422,21 @@ namespace CDPL
 			template <typename E>
 			SparseMatrix(const MatrixExpression<E>& e): 
 				size1(e().getSize1()), size2(e().getSize2()), data(), defValue() {
-				CDPL_MATH_CHECK(size1 == 0 || size2 <= data.max_size() / size1, "Maximum size exceeded", Base::SizeError);
+				CDPL_MATH_CHECK((size1 == 0 || size2 <= data.max_size() / size1) && size1 <= std::numeric_limits<Base::uint32>::max() &&
+								size2 <= std::numeric_limits<Base::uint32>::max(), "Maximum size exceeded", Base::SizeError);
 				matrixAssignMatrix<ScalarAssignment>(*this, e);
 			}
 
 			Reference operator()(SizeType i, SizeType j) {
 				CDPL_MATH_CHECK(i < getSize1() && j < getSize2(), "Index out of range", Base::IndexError);
 
-				return Reference(*this, i, j);
+				return Reference(*this, makeKey(i, j));
 			}
 
 			ConstReference operator()(SizeType i, SizeType j) const {
 				CDPL_MATH_CHECK(i < getSize1() && j < getSize2(), "Index out of range", Base::IndexError);
 
-				typename ArrayType::const_iterator it = data.find(std::make_pair(i, j));
+				typename ArrayType::const_iterator it = data.find(makeKey(i, j));
 
 				if (it == data.end())
 					return defValue;
@@ -559,6 +472,10 @@ namespace CDPL
 				return data;
 			}
 
+			ValueType& getDefaultValue() {
+				return defValue;
+			}
+	
 			ConstReference getDefaultValue() const {
 				return defValue;
 			}
@@ -612,13 +529,13 @@ namespace CDPL
 
 			template <typename T1>
 			typename boost::enable_if<IsScalar<T1>, SparseMatrix>::type& operator*=(const T1& t) {
-				matrixAssignScalar<ScalarMultiplicationAssignment>(*this, t);
+				sparseContainerAssignScalar<ScalarMultiplicationAssignment>(*this, t);
 				return *this;
 			}
 	
 			template <typename T1>
 			typename boost::enable_if<IsScalar<T1>, SparseMatrix>::type& operator/=(const T1& t) {
-				matrixAssignScalar<ScalarDivisionAssignment>(*this, t);
+				sparseContainerAssignScalar<ScalarDivisionAssignment>(*this, t);
 				return *this;
 			}
 			
@@ -660,13 +577,35 @@ namespace CDPL
 			}
 
 			void resize(SizeType m, SizeType n, bool preserve = true) {
-				CDPL_MATH_CHECK(n == 0 || m <= data.max_size() / n, "Maximum size exceeded", Base::SizeError);
+				CDPL_MATH_CHECK((n == 0 || m <= data.max_size() / n) && m <= std::numeric_limits<Base::uint32>::max() &&
+								n <= std::numeric_limits<Base::uint32>::max(), "Maximum size exceeded", Base::SizeError);
+
+				for (typename ArrayType::iterator it = data.begin(); it != data.end(); ) {
+					const KeyType& key = it->first;
+					
+					if (getRowIdx(key) >= m || getColIdx(key) >= n)
+						it = data.erase(it);
+					else
+						++it;
+				}
 
 				size1 = m;
 				size2 = n;
 			}
 
 		private:
+			static KeyType makeKey(Base::uint32 i, Base::uint32 j) {
+				return ((KeyType(i) << 32) + j);
+			}
+
+			static Base::uint32 getRowIdx(const KeyType& key) {
+				return (key >> 32);
+			}
+	
+			static Base::uint32 getColIdx(const KeyType& key) {
+				return key;
+			}
+
 			SizeType  size1;
 			SizeType  size2;
 			ArrayType data;

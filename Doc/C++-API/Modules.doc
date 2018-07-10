@@ -295,7 +295,7 @@
 \defgroup CDPL_BIOMOL_ATOM_PROPERTIES Atom Properties
 \ingroup CDPL_BIOMOL_PROPERTIES
 
-\defgroup CDPL_BIOMOL_MOLECULAR_GRAPH_PROPERTIES Molecular Graph Properties
+\defgroup CDPL_BIOMOL_MOLECULAR_GRAPH_PROPERTIES MolecularGraph Properties
 \ingroup CDPL_BIOMOL_PROPERTIES
 
 \defgroup CDPL_BIOMOL_DATA_IO Data I/O
@@ -428,7 +428,7 @@
 \ingroup CDPL_PHARM_FUNCTIONS
 
 
-\defgroup CDPL_FORCEFIELD Molecular Forcefields
+\defgroup CDPL_FORCEFIELD Molecular Force Fields
 
 \defgroup CDPL_FORCEFIELD_ATOM_TYPE_PERCEPTION Atom Type Perception
 \ingroup CDPL_FORCEFIELD
@@ -442,7 +442,7 @@
 \defgroup CDPL_FORCEFIELD_AROMATICITY Aromaticity Perception
 \ingroup CDPL_FORCEFIELD
 
-\defgroup CDPL_FORCEFIELD_INTERACTION_ANALYSIS Interaction Analysis
+\defgroup CDPL_FORCEFIELD_INTERACTION_ANALYSIS Interaction Analysis and Parameterization
 \ingroup CDPL_FORCEFIELD
 
 \defgroup CDPL_FORCEFIELD_DATA_STRUCTURES Auxiliary Data Structures
@@ -463,7 +463,7 @@
 \defgroup CDPL_FORCEFIELD_BOND_PROPERTIES Bond Properties
 \ingroup CDPL_FORCEFIELD_PROPERTIES
 
-\defgroup CDPL_FORCEFIELD_MOLECULAR_GRAPH_PROPERTIES Molecular Graph Properties
+\defgroup CDPL_FORCEFIELD_MOLECULAR_GRAPH_PROPERTIES MolecularGraph Properties
 \ingroup CDPL_FORCEFIELD_PROPERTIES
 
 \defgroup CDPL_FORCEFIELD_CONSTANTS Flags and Constants

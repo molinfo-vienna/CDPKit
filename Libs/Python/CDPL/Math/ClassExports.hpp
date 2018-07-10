@@ -37,6 +37,7 @@ namespace CDPLPythonMath
 	void exportGridExpressionTypes();
 
 	void exportVectorTypes();
+	void exportSparseVectorTypes();
 	void exportCVectorTypes1();
 	void exportCVectorTypes2();
 	void exportCVectorTypes3();

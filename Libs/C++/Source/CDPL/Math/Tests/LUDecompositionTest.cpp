@@ -43,11 +43,7 @@ BOOST_AUTO_TEST_CASE(VectorSwapRowsFunctionTest)
 	typedef Vector<int>::SizeType SizeType;
 
 	Vector<int> v1(10);
-	std::vector<SizeType> pv1(9);
-
-	BOOST_CHECK_THROW(swapRows(v1, pv1), Base::IndexError);
-
-	pv1.resize(11);
+	std::vector<SizeType> pv1(11);
 
 	BOOST_CHECK_NO_THROW(swapRows(v1, pv1));
 
@@ -120,11 +116,7 @@ BOOST_AUTO_TEST_CASE(MatrixSwapRowsFunctionTest)
 	typedef Matrix<std::complex<double> >::SizeType SizeType;
 
 	Matrix<std::complex<double> > m1(10, 8);
-	std::vector<SizeType> pv1(9);
-
-	BOOST_CHECK_THROW(swapRows(m1, pv1), Base::IndexError);
-
-	pv1.resize(11);
+	std::vector<SizeType> pv1(11);
 
 	BOOST_CHECK_NO_THROW(swapRows(m1, pv1));
 

@@ -45,14 +45,14 @@ namespace
 	struct AtomPairWeightFunc
 	{
 
-		double operator()(const Chem::Atom& atom1, const Chem::Atom& atom2, unsigned int slot_atom_type) const {
+		double operator()(const Chem::Atom& atom1, const Chem::Atom& atom2, unsigned int slot_type) const {
 			unsigned int atom_type1 = getType(atom1);
 			unsigned int atom_type2 = getType(atom2);
 
-			if (atom_type1 == slot_atom_type && atom_type2 == slot_atom_type)
+			if (atom_type1 == slot_type && atom_type2 == slot_type)
 				return 2;
 
-			if (atom_type1 == slot_atom_type || atom_type2 == slot_atom_type)
+			if (atom_type1 == slot_type || atom_type2 == slot_type)
 				return 1;
 
 			return 0;

@@ -40,7 +40,7 @@ using namespace CDPL;
 namespace
 {
 
-	struct AtomPairWeightFunc
+	struct AtomPairWeightFuncFS
 	{
 
 		double operator()(const Chem::Atom& atom1, const Chem::Atom& atom2, unsigned int slot_type1, unsigned int slot_type2) const {
@@ -49,6 +49,23 @@ namespace
 
 			if ((atom_type1 == slot_type1 && atom_type2 == slot_type2) ||
 				(atom_type2 == slot_type1 && atom_type1 == slot_type2))
+				return 1;
+
+			return 0;
+		}
+	};
+
+	struct AtomPairWeightFuncSS
+	{
+
+		double operator()(const Chem::Atom& atom1, const Chem::Atom& atom2, unsigned int slot_type, unsigned int) const {
+			unsigned int atom_type1 = getType(atom1);
+			unsigned int atom_type2 = getType(atom2);
+	
+			if (atom_type1 == slot_type && atom_type2 == slot_type)
+				return 2;
+
+			if (atom_type1 == slot_type || atom_type2 == slot_type)
 				return 1;
 
 			return 0;
@@ -70,12 +87,14 @@ namespace
 }
 
 
-CDPL::Chem::MoleculeAutoCorr2DDescriptorCalculator::MoleculeAutoCorr2DDescriptorCalculator(): weightFunc()
+CDPL::Chem::MoleculeAutoCorr2DDescriptorCalculator::MoleculeAutoCorr2DDescriptorCalculator(): 
+	weightFunc(), mode(FULL_SPLIT)
 {
 	setMaxDistance(15);
 } 
 
-CDPL::Chem::MoleculeAutoCorr2DDescriptorCalculator::MoleculeAutoCorr2DDescriptorCalculator(const MolecularGraph& molgraph, Math::DVector& descr): weightFunc()
+CDPL::Chem::MoleculeAutoCorr2DDescriptorCalculator::MoleculeAutoCorr2DDescriptorCalculator(const MolecularGraph& molgraph, Math::DVector& descr): 
+	weightFunc(), mode(FULL_SPLIT)
 {
 	setMaxDistance(15);
     calculate(molgraph, descr);
@@ -91,6 +110,16 @@ std::size_t CDPL::Chem::MoleculeAutoCorr2DDescriptorCalculator::getMaxDistance()
     return autoCorrCalculator.getMaxDistance();
 }
 
+void CDPL::Chem::MoleculeAutoCorr2DDescriptorCalculator::setMode(Mode mode)
+{
+	this->mode = mode;
+}
+
+CDPL::Chem::MoleculeAutoCorr2DDescriptorCalculator::Mode CDPL::Chem::MoleculeAutoCorr2DDescriptorCalculator::getMode() const
+{
+	return mode;
+}
+
 void CDPL::Chem::MoleculeAutoCorr2DDescriptorCalculator::setAtomPairWeightFunction(const AtomPairWeightFunction& func)
 {
     weightFunc = func;
@@ -100,21 +129,37 @@ void CDPL::Chem::MoleculeAutoCorr2DDescriptorCalculator::calculate(const Molecul
 {
 	std::size_t sub_descr_size = autoCorrCalculator.getMaxDistance() + 1;
 	std::size_t num_atom_types = sizeof(ATOM_TYPES) / sizeof(unsigned int);
-
-	descr.resize((sub_descr_size * (num_atom_types + 1) * num_atom_types) / 2, false);
-
 	Math::DVector sub_descr(sub_descr_size);
 
-	for (std::size_t i = 0, offs = 0; i < num_atom_types; i++) {
-		for (std::size_t j = i; j < num_atom_types; j++, offs += sub_descr_size) {
-			if (weightFunc)
-				autoCorrCalculator.setAtomPairWeightFunction(boost::bind<double>(weightFunc, _1, _2, ATOM_TYPES[i], ATOM_TYPES[j]));
-			else
-				autoCorrCalculator.setAtomPairWeightFunction(boost::bind<double>(AtomPairWeightFunc(), _1, _2, ATOM_TYPES[i], ATOM_TYPES[j]));
+	if (mode == FULL_SPLIT) {
+		descr.resize((sub_descr_size * (num_atom_types + 1) * num_atom_types) / 2, false);
 
-			autoCorrCalculator.calculate(molgraph, sub_descr);
+		for (std::size_t i = 0, offs = 0; i < num_atom_types; i++) {
+			for (std::size_t j = i; j < num_atom_types; j++, offs += sub_descr_size) {
+				if (weightFunc)
+					autoCorrCalculator.setAtomPairWeightFunction(boost::bind<double>(weightFunc, _1, _2, ATOM_TYPES[i], ATOM_TYPES[j]));
+				else
+					autoCorrCalculator.setAtomPairWeightFunction(boost::bind<double>(AtomPairWeightFuncFS(), _1, _2, ATOM_TYPES[i], ATOM_TYPES[j]));
+
+				autoCorrCalculator.calculate(molgraph, sub_descr);
 		
-			Math::VectorRange<Math::DVector>(descr, Math::range(offs, offs + sub_descr_size)).assign(sub_descr);
+				Math::VectorRange<Math::DVector>(descr, Math::range(offs, offs + sub_descr_size)).assign(sub_descr);
+			}
 		}
+
+		return;
+	}
+
+	descr.resize(sub_descr_size * num_atom_types, false);
+
+	for (std::size_t i = 0, offs = 0; i < num_atom_types; i++, offs += sub_descr_size) {
+		if (weightFunc)
+			autoCorrCalculator.setAtomPairWeightFunction(boost::bind<double>(weightFunc, _1, _2, ATOM_TYPES[i], ATOM_TYPES[i]));
+		else
+			autoCorrCalculator.setAtomPairWeightFunction(boost::bind<double>(AtomPairWeightFuncSS(), _1, _2, ATOM_TYPES[i], ATOM_TYPES[i]));
+
+		autoCorrCalculator.calculate(molgraph, sub_descr);
+
+		Math::VectorRange<Math::DVector>(descr, Math::range(offs, offs + sub_descr_size)).assign(sub_descr);
 	}
 }

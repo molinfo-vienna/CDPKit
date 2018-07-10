@@ -44,59 +44,71 @@ namespace CDPL
     namespace Chem
     {
 
-	class Atom;
-	class MolecularGraph;
+		class Atom;
+		class MolecularGraph;
 
-	/**
-	 * \addtogroup CDPL_CHEM_DESCRIPTORS
-	 * @{
-	 */
+		/**
+		 * \addtogroup CDPL_CHEM_DESCRIPTORS
+		 * @{
+		 */
 
-	/**
-	 * \brief MoleculeAutoCorr2DDescriptorCalculator.
-	 */
-	class CDPL_CHEM_API MoleculeAutoCorr2DDescriptorCalculator
-	{
+		/**
+		 * \brief MoleculeAutoCorr2DDescriptorCalculator.
+		 */
+		class CDPL_CHEM_API MoleculeAutoCorr2DDescriptorCalculator
+		{
 
-	  public:
-	    typedef boost::function4<double, const Atom&, const Atom&, unsigned int, unsigned int> AtomPairWeightFunction;
+		  public:
+			typedef boost::function4<double, const Atom&, const Atom&, unsigned int, unsigned int> AtomPairWeightFunction;
+
+			enum Mode 
+			{
+
+		    SEMI_SPLIT,
+			FULL_SPLIT
+			};
 		
-	    /**
-	     * \brief Constructs the \c %MoleculeAutoCorr2DDescriptorCalculator instance.
-	     */
-	    MoleculeAutoCorr2DDescriptorCalculator();
+			/**
+			 * \brief Constructs the \c %MoleculeAutoCorr2DDescriptorCalculator instance.
+			 */
+			MoleculeAutoCorr2DDescriptorCalculator();
 			
-	    MoleculeAutoCorr2DDescriptorCalculator(const MolecularGraph& molgraph, Math::DVector& descr);
+			MoleculeAutoCorr2DDescriptorCalculator(const MolecularGraph& molgraph, Math::DVector& descr);
 
-	    /**
-	     * \brief Allows to specify that maximum bond path length to consider.
-	     * \param max_dist The maximum considered bond path length.
-	     * \note The default value is \e 15.
-	     */
-	    void setMaxDistance(std::size_t max_dist);
+			/**
+			 * \brief Allows to specify that maximum bond path length to consider.
+			 * \param max_dist The maximum considered bond path length.
+			 * \note The default value is \e 15.
+			 */
+			void setMaxDistance(std::size_t max_dist);
 
-	    /**
-	     * \brief Returns the maximum considered bond path length.
-	     * \return The maximum considered bond path length.
-	     */
-	    std::size_t getMaxDistance() const;
+			/**
+			 * \brief Returns the maximum considered bond path length.
+			 * \return The maximum considered bond path length.
+			 */
+			std::size_t getMaxDistance() const;
 
-	    /**
-	     * \brief Allows to specify a custom atom pair weight function.
-	     * \param func A AtomPairWeightFunction instance that wraps the target function.
-	     */
-	    void setAtomPairWeightFunction(const AtomPairWeightFunction& func);
+			/**
+			 * \brief Allows to specify a custom atom pair weight function.
+			 * \param func A AtomPairWeightFunction instance that wraps the target function.
+			 */
+			void setAtomPairWeightFunction(const AtomPairWeightFunction& func);
 
-	    void calculate(const MolecularGraph& molgraph, Math::DVector& descr);
+			void setMode(Mode mode);
 
-	  private:
-	    AutoCorrelation2DVectorCalculator autoCorrCalculator;
-	    AtomPairWeightFunction            weightFunc;
-	}; 
+			Mode getMode() const;
 
-	/**
-	 * @}
-	 */
+			void calculate(const MolecularGraph& molgraph, Math::DVector& descr);
+
+		  private:
+			AutoCorrelation2DVectorCalculator autoCorrCalculator;
+			AtomPairWeightFunction            weightFunc;
+			Mode                              mode;
+		}; 
+
+		/**
+		 * @}
+		 */
     }
 }
 

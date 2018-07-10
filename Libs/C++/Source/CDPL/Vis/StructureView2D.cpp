@@ -116,10 +116,9 @@ void Vis::StructureView2D::render(Renderer2D& renderer)
 
 	paintBackground(renderer);
 
-	Math::Matrix3D transform = 
-		prod(prod(Math::TranslationMatrix<double>(3, viewTranslations[0](0), viewTranslations[0](1)),
-				  Math::ScalingMatrix<double>(3, viewScalingFactor, viewScalingFactor)), 
-			 Math::TranslationMatrix<double>(3, viewTranslations[1](0), viewTranslations[1](1)));
+	Math::Matrix3D transform(prod(prod(Math::TranslationMatrix<double>(3, viewTranslations[0](0), viewTranslations[0](1)),
+									   Math::ScalingMatrix<double>(3, viewScalingFactor, viewScalingFactor)), 
+								  Math::TranslationMatrix<double>(3, viewTranslations[1](0), viewTranslations[1](1))));
 
 	renderer.transform(transform);
 

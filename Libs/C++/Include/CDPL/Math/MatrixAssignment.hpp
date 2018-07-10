@@ -72,7 +72,7 @@ namespace CDPL
 				for (SizeType j = 0; j < size2; j++)
 					FunctorType::apply(m(i, j), t);
 		}
-
+	
 		template <typename M, typename E>
 		void matrixSwap(M& m, MatrixExpression<E>& e)
 		{

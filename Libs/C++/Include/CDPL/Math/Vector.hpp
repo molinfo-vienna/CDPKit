@@ -39,13 +39,16 @@
 #include <boost/utility.hpp>
 #include <boost/swap.hpp>
 #include <boost/shared_ptr.hpp>
+#include <boost/unordered_map.hpp>
 
 #include "CDPL/Math/Check.hpp"
 #include "CDPL/Math/VectorExpression.hpp"
 #include "CDPL/Math/VectorAssignment.hpp"
+#include "CDPL/Math/SparseContainerAssignment.hpp"
 #include "CDPL/Math/DirectAssignmentProxy.hpp"
 #include "CDPL/Math/Functional.hpp"
 #include "CDPL/Math/TypeTraits.hpp"
+#include "CDPL/Math/SparseContainerElement.hpp"
 #include "CDPL/Base/Exceptions.hpp"
 
 
@@ -198,16 +201,16 @@ namespace CDPL
 
 			Vector(): data() {}
 
-			explicit Vector(SizeType n): data(n) {}
+			explicit Vector(SizeType n): data(storageSize(n)) {}
 
-			Vector(SizeType n, const ValueType& v): data(n, v) {}
+			Vector(SizeType n, const ValueType& v): data(storageSize(n), v) {}
 
 			Vector(const ArrayType& data): data(data) {}
 
 			Vector(const Vector& v): data(v.data) {}
 
 			template <typename E>
-			Vector(const VectorExpression<E>& e): data(e().getSize()) {
+			Vector(const VectorExpression<E>& e): data(storageSize(e().getSize())) {
 				vectorAssignVector<ScalarAssignment>(*this, e);
 			}
 
@@ -338,11 +341,224 @@ namespace CDPL
 			}
 
 			void resize(SizeType n, const ValueType& v = ValueType()) {
-				data.resize(n, v);
+				data.resize(storageSize(n), v);
 			}
 
 		private:
+			SizeType storageSize(SizeType n) {
+				CDPL_MATH_CHECK(n <= data.max_size(), "Maximum size exceeded", Base::SizeError);
+				return n;
+			}
+
 			ArrayType data;
+		};
+ 
+		template <typename T> 
+		class SparseVector : public VectorContainer<SparseVector<T> >
+		{
+
+			typedef SparseVector<T> SelfType;
+
+		public:
+			typedef T ValueType;
+			typedef std::size_t SizeType;
+			typedef std::ptrdiff_t DifferenceType;
+			typedef SizeType KeyType;
+			typedef const T& ConstReference;
+			typedef SparseContainerElement<SelfType, KeyType> Reference;
+			typedef boost::unordered_map<KeyType, ValueType> ArrayType;
+			typedef T* Pointer;
+			typedef const T* ConstPointer;
+			typedef VectorReference<SelfType> ClosureType;
+			typedef const VectorReference<const SelfType> ConstClosureType;
+			typedef SelfType VectorTemporaryType;
+			typedef boost::shared_ptr<SelfType> SharedPointer;
+
+			SparseVector(): data(), size(0), defValue() {}
+
+			explicit SparseVector(SizeType n): data(), size(storageSize(n)), defValue() {}
+
+			SparseVector(SizeType n, const ValueType& v): data(), size(storageSize(n)), defValue(v) {}
+	
+			SparseVector(const SparseVector& v): data(v.data), size(v.size), defValue(v.defValue) {}
+
+			template <typename E>
+			SparseVector(const VectorExpression<E>& e): data(), size(storageSize(e().getSize())), defValue() {
+				vectorAssignVector<ScalarAssignment>(*this, e);
+			}
+
+			Reference operator[](SizeType i) {
+				return this->operator()(i);
+			}
+
+			ConstReference operator[](SizeType i) const {
+				return this->operator()(i);
+			}
+
+			Reference operator()(SizeType i) {
+				CDPL_MATH_CHECK(i < getSize(), "Index out of range", Base::IndexError);
+				return Reference(*this, i);
+			}
+
+			ConstReference operator()(SizeType i) const {
+				CDPL_MATH_CHECK(i < getSize(), "Index out of range", Base::IndexError);
+
+				typename ArrayType::const_iterator it = data.find(i);
+
+				if (it == data.end())
+					return defValue;
+
+				return it->second;
+			}
+
+		    SizeType getNumElements() const {
+				return data.size();
+			}
+
+			bool isEmpty() const {
+				return (size == 0);
+			}
+
+			SizeType getSize() const {
+				return size;
+			}
+
+			SizeType getMaxSize() const {
+				return data.max_size();
+			}
+
+			ArrayType& getData() {
+				return data;
+			}
+			
+			const ArrayType& getData() const {
+				return data;
+			}
+
+		    ConstReference getDefaultValue() const {
+				return defValue;
+			}
+
+			ValueType& getDefaultValue() {
+				return defValue;
+			}
+
+			SparseVector& operator=(const SparseVector& v) {
+				data = v.data;
+				defValue = v.defValue;
+				size = v.size;
+				return *this;
+			}
+
+			template <typename C>
+			SparseVector& operator=(const VectorContainer<C>& c) {
+				return assign(c);
+			}
+
+			template <typename E>
+			SparseVector& operator=(const VectorExpression<E>& e) {
+				SparseVector tmp(e);
+				swap(tmp);
+
+				return *this;
+			}
+
+			template <typename C>
+			SparseVector& operator+=(const VectorContainer<C>& c) {
+				return plusAssign(c);
+			}
+
+			template <typename E>
+			SparseVector& operator+=(const VectorExpression<E>& e) {
+				SparseVector tmp(*this + e);
+				swap(tmp);
+
+				return *this;
+			}	
+
+			template <typename C>
+			SparseVector& operator-=(const VectorContainer<C>& c) {
+				return minusAssign(c);
+			}
+
+			template <typename E>
+			SparseVector& operator-=(const VectorExpression<E>& e) {
+				SparseVector tmp(*this - e);
+				swap(tmp);
+
+				return *this;
+			}
+
+			template <typename T1>
+			typename boost::enable_if<IsScalar<T1>, SparseVector>::type& operator*=(const T1& t) {
+				sparseContainerAssignScalar<ScalarMultiplicationAssignment>(*this, t);
+				return *this;
+			}
+	
+			template <typename T1>
+			typename boost::enable_if<IsScalar<T1>, SparseVector>::type& operator/=(const T1& t) {
+				sparseContainerAssignScalar<ScalarDivisionAssignment>(*this, t);
+				return *this;
+			}
+			
+			template <typename E>
+			SparseVector& assign(const VectorExpression<E>& e) {
+				resize(e().getSize());
+				vectorAssignVector<ScalarAssignment>(*this, e);
+				return *this;
+			}
+
+			template <typename E>
+			SparseVector& plusAssign(const VectorExpression<E>& e) {
+				vectorAssignVector<ScalarAdditionAssignment>(*this, e);
+				return *this;
+			}
+
+			template <typename E>
+			SparseVector& minusAssign(const VectorExpression<E>& e) {
+				vectorAssignVector<ScalarSubtractionAssignment>(*this, e);
+				return *this;
+			}
+
+			void swap(SparseVector& v) {
+				if (this != &v) {
+					boost::swap(data, v.data);
+					boost::swap(size, v.size);
+					boost::swap(defValue, v.defValue);
+				}
+			}
+	
+			friend void swap(SparseVector& v1, SparseVector& v2) {
+				v1.swap(v2);
+			}
+
+			void clear(const ValueType& v = ValueType()) {
+				defValue = v;
+				data.clear();
+			}
+
+			void resize(SizeType n) {
+				CDPL_MATH_CHECK(n <= data.max_size(), "Maximum size exceeded", Base::SizeError);
+
+				for (typename ArrayType::iterator it = data.begin(); it != data.end(); ) {
+					if (it->first >= n)
+						it = data.erase(it);
+					else
+						++it;
+				}
+
+				size = n;
+			}
+
+		private:
+			SizeType storageSize(SizeType n) {
+				CDPL_MATH_CHECK(n <= data.max_size(), "Maximum size exceeded", Base::SizeError);
+				return n;
+			}
+
+			ArrayType data;
+			SizeType  size;
+			ValueType defValue;
 		};
  
 		template <typename T, std::size_t N> 
@@ -1049,24 +1265,44 @@ namespace CDPL
 		typedef CVector<unsigned long, 4> Vector4UL;
 
 		/**
-		 * \brief An unbounded vector holding floating point values of type <tt>float</tt>.
+		 * \brief An unbounded dense vector holding floating point values of type <tt>float</tt>.
 		 */
 		typedef Vector<float> FVector;
 
 		/**
-		 * \brief An unbounded vector holding floating point values of type <tt>double</tt>.
+		 * \brief An unbounded dense vector holding floating point values of type <tt>double</tt>.
 		 */
 		typedef Vector<double> DVector;
 
 		/**
-		 * \brief An unbounded vector holding signed integers of type <tt>long</tt>.
+		 * \brief An unbounded dense vector holding signed integers of type <tt>long</tt>.
 		 */
 		typedef Vector<long> LVector;
 
 		/**
-		 * \brief An unbounded vector holding unsigned integers of type <tt>unsigned long</tt>.
+		 * \brief An unbounded dense vector holding unsigned integers of type <tt>unsigned long</tt>.
 		 */
 		typedef Vector<unsigned long> ULVector;
+
+		/**
+		 * \brief An unbounded sparse vector holding floating point values of type <tt>float</tt>.
+		 */
+		typedef SparseVector<float> SparseFVector;
+
+		/**
+		 * \brief An unbounded sparse vector holding floating point values of type <tt>double</tt>.
+		 */
+		typedef SparseVector<double> SparseDVector;
+
+		/**
+		 * \brief An unbounded sparse vector holding signed integers of type <tt>long</tt>.
+		 */
+		typedef SparseVector<long> SparseLVector;
+
+		/**
+		 * \brief An unbounded sparse vector holding unsigned integers of type <tt>unsigned long</tt>.
+		 */
+		typedef SparseVector<unsigned long> SparseULVector;
 	}
 }
 

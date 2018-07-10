@@ -40,7 +40,16 @@ void CDPLPythonChem::exportMoleculeAutoCorr2DDescriptorCalculator()
 	using namespace boost;
 	using namespace CDPL;
 
-	python::class_<Chem::MoleculeAutoCorr2DDescriptorCalculator, boost::noncopyable>("MoleculeAutoCorr2DDescriptorCalculator", python::no_init)
+	python::class_<Chem::MoleculeAutoCorr2DDescriptorCalculator, boost::noncopyable> cl("MoleculeAutoCorr2DDescriptorCalculator", python::no_init);
+
+	python::scope scope = cl;
+  
+	python::enum_<Chem::MoleculeAutoCorr2DDescriptorCalculator::Mode>("Mode")
+		.value("SEMI_SPLIT", Chem::MoleculeAutoCorr2DDescriptorCalculator::SEMI_SPLIT)
+		.value("FULL_SPLIT", Chem::MoleculeAutoCorr2DDescriptorCalculator::FULL_SPLIT)
+		.export_values();
+
+	cl
 		.def(python::init<>(python::arg("self")))
 		.def(python::init<const Chem::MoleculeAutoCorr2DDescriptorCalculator&>((python::arg("self"), python::arg("calculator"))))
 		.def(python::init<const Chem::MolecularGraph&, Math::DVector&>(
@@ -52,10 +61,16 @@ void CDPLPythonChem::exportMoleculeAutoCorr2DDescriptorCalculator()
 			 (python::arg("self"), python::arg("max_dist")))
 		.def("getMaxDistance", &Chem::MoleculeAutoCorr2DDescriptorCalculator::getMaxDistance,
 			 python::arg("self"))
+		.def("setMode", &Chem::MoleculeAutoCorr2DDescriptorCalculator::setMode,
+			 (python::arg("self"), python::arg("max_dist")))
+		.def("getMode", &Chem::MoleculeAutoCorr2DDescriptorCalculator::getMode,
+			 python::arg("self"))
 		.def("setAtomPairWeightFunction", &Chem::MoleculeAutoCorr2DDescriptorCalculator::setAtomPairWeightFunction,
 			 (python::arg("self"), python::arg("func")))
 		.def("calculate", &Chem::MoleculeAutoCorr2DDescriptorCalculator::calculate, 
 			 (python::arg("self"), python::arg("molgraph"), python::arg("corr_vec")))
 		.add_property("maxDistance", &Chem::MoleculeAutoCorr2DDescriptorCalculator::getMaxDistance,
-					  &Chem::MoleculeAutoCorr2DDescriptorCalculator::setMaxDistance);
+					  &Chem::MoleculeAutoCorr2DDescriptorCalculator::setMaxDistance)
+		.add_property("mode", &Chem::MoleculeAutoCorr2DDescriptorCalculator::getMode,
+					  &Chem::MoleculeAutoCorr2DDescriptorCalculator::setMode);
 }

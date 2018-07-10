@@ -1,1 +1,0 @@
-ADD_TEST("CDPL.Forcefield" "${RUN_PYTHON_TESTS}" "${CMAKE_CURRENT_SOURCE_DIR}/TestSuite.py")

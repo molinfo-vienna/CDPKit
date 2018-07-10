@@ -18,6 +18,7 @@ SET(math_impl_MOD_SRCS
     GridExpressionExport.cpp
 
     VectorExport.cpp
+    SparseVectorExport.cpp
     CVectorExport1.cpp
     CVectorExport2.cpp	
     CVectorExport3.cpp	
