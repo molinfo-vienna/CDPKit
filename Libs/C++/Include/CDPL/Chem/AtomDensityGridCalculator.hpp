@@ -40,7 +40,7 @@
 #include "CDPL/Chem/APIPrefix.hpp"
 #include "CDPL/Math/Vector.hpp"
 #include "CDPL/Math/VectorArray.hpp"
-#include "CDPL/Chem/Atom3DCoordinatesFunction.hpp"
+#include "CDPL/Chem/Atom3DCoordinatesFunctionWrapper.hpp"
 #include "CDPL/Grid/SpatialGrid.hpp"
 
 

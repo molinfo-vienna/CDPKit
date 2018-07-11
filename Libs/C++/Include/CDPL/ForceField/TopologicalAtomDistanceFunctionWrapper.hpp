@@ -1,7 +1,7 @@
 /* -*- mode: c++; c-basic-offset: 4; tab-width: 4; indent-tabs-mode: t -*- */
 
 /* 
- * Feature3DCoordinatesFunction.hpp 
+ * TopologicalAtomDistanceFunctionWrappes.hpp 
  *
  * This file is part of the Chemical Data Processing Toolkit
  *
@@ -25,34 +25,40 @@
 
 /**
  * \file
- * \brief Type definition of a generic wrapper class for storing user-defined Pharm::Feature 3D-coordinates functions.
+ * \brief Type definition of generic wrapper class for storing an user-defined
+ *        topological atom-pair distance function.
  */
 
-#ifndef CDPL_PHARM_FEATURE3DCOORDINATESFUNCTION_HPP
-#define CDPL_PHARM_FEATURE3DCOORDINATESFUNCTION_HPP
+#ifndef CDPL_FORCEFIELD_TOPOLOGICALATOMDISTANCEFUNCTIONWRAPPER_HPP
+#define CDPL_FORCEFIELD_TOPOLOGICALATOMDISTANCEFUNCTIONWRAPPER_HPP
+
+#include <cstddef>
 
 #include <boost/function.hpp>
-
-#include "CDPL/Math/Vector.hpp"
 
 
 namespace CDPL 
 {
 
-    namespace Pharm
+    namespace Chem
     {
 
-	class Feature;
+	class Atom;
+	class MolecularGraph;
+    }
+
+    namespace ForceField 
+    {
 
 	/**
-	 * \addtogroup CDPL_PHARM_DATA_STRUCTURES
+	 * \addtogroup CDPL_FORCEFIELD_DATA_STRUCTURES
 	 * @{
 	 */
 
 	/**
-	 * \brief A generic wrapper class used to store a user-defined Pharm::Feature 3D-coordinates function.
+	 * \brief A generic wrapper class used to store a user-defined topological atom-pair distance function.
 	 */
-	typedef boost::function1<const Math::Vector3D&, const Pharm::Feature&> Feature3DCoordinatesFunction;
+	typedef boost::function3<std::size_t, const Chem::Atom&, const Chem::Atom&, const Chem::MolecularGraph&> TopologicalAtomDistanceFunction;
 
 	/**
 	 * @}
@@ -60,4 +66,4 @@ namespace CDPL
     }
 }
 
-#endif // CDPL_PHARM_FEATURE3DCOORDINATESFUNCTION_HPP
+#endif // CDPL_FORCEFIELD_TOPOLOGICALATOMDISTANCEFUNCTIONWRAPPER_HPP

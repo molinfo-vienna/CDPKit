@@ -905,7 +905,7 @@ BOOST_AUTO_TEST_CASE(SparseMatrixTest)
 	using namespace CDPL;
 	using namespace Math;
 
-	typedef Matrix<double>::SizeType SizeType;
+	typedef SparseMatrix<double>::SizeType SizeType;
 
 	SparseMatrix<double> m1;
 
@@ -917,14 +917,15 @@ BOOST_AUTO_TEST_CASE(SparseMatrixTest)
 
 	checkEmpty2(0, 0, m1);
 
+	BOOST_CHECK_EQUAL(m1.getNumElements(), 0);
+
 	// ---------
 
-	m1.resize(4, 5, false);
-	m1.clear(2.2);
+	m1.resize(4, 5);
 
 	BOOST_CHECK(m1.getData().empty());
 
-	checkValues2(4, 5, m1, 2.2);
+	checkValues2(4, 5, m1, 0.0);
 
 	// ---------
 
@@ -935,10 +936,10 @@ BOOST_AUTO_TEST_CASE(SparseMatrixTest)
 	BOOST_CHECK(m1.getNumElements() == 3);
 
 	double values1[][5] = { 
-		{ 2.0, 2.2, 2.2, 2.2,  2.2 }, 
-		{ 2.2, 2.2, 2.2, 2.2,  2.2 },
-		{ 2.2, 2.2, 2.2, 2.2, -1.0 },
-		{ 2.2, 3.0, 2.2, 2.2,  2.2 } 
+		{ 2.0, 0.0, 0.0, 0.0,  0.0 }, 
+		{ 0.0, 0.0, 0.0, 0.0,  0.0 },
+		{ 0.0, 0.0, 0.0, 0.0, -1.0 },
+		{ 0.0, 3.0, 0.0, 0.0,  0.0 } 
 	};
 
 	checkValues2(4, 5, m1, values1);
@@ -959,15 +960,9 @@ BOOST_AUTO_TEST_CASE(SparseMatrixTest)
 
 	// ---------
 
-	SparseMatrix<double> m4(5, 2, -1.97);
+	SparseMatrix<double> m4(5, 2);
 
-	checkValues2(5, 2, m4, -1.97);
-
-	// ---------
-
-	SparseMatrix<double> m5(0, 5, 2.2);
-
-	checkEmpty2(0, 5, m5);
+	checkValues2(5, 2, m4, 0.0);
 
 	// ---------
 
@@ -975,7 +970,7 @@ BOOST_AUTO_TEST_CASE(SparseMatrixTest)
 
 	checkValues2(4, 5, m6, values1);
 
-	BOOST_CHECK(m6.getNumElements() == 20);
+	BOOST_CHECK(m6.getNumElements() == 3);
 
 	// ---------
 
@@ -995,40 +990,22 @@ BOOST_AUTO_TEST_CASE(SparseMatrixTest)
 	m7(0, 4) = 0.0;
 	m7(0, 5) = 1.0;
 
+	BOOST_CHECK(m7.getNumElements() == 4);
+
 	m7.resize(1, 6, false);
 	
 	checkValues2(1, 6, m7, values2);
 
-	BOOST_CHECK(m7.getNumElements() == 6);
+	BOOST_CHECK(m7.getNumElements() == 4);
 
 	// ---------
 
-	m7.resize(3, 3, false);
+	m7.resize(3, 3);
 	m7.clear();
 
 	checkValues2(3, 3, m7, 0.0);
 
-	BOOST_CHECK(m7.getData().empty());
-
-	m7.clear(-2.11);
-
-	checkValues2(3, 3, m7, -2.11);
-
-	BOOST_CHECK(m7.getData().empty());
-
-	SparseMatrix<double> m8;
-
-	checkEmpty2(0, 0, m8);
-
-	m8.clear();
-
-	checkEmpty2(0, 0, m8);
-
-	m8.clear(-2);
-
-	checkEmpty2(0, 0, m8);
-
-	BOOST_CHECK(m8.getData().empty());
+	BOOST_CHECK_EQUAL(m7.getNumElements(), 0);
 
 	// ---------
 
@@ -1036,10 +1013,10 @@ BOOST_AUTO_TEST_CASE(SparseMatrixTest)
 	BOOST_CHECK(m1.getNumElements() == 3);
 
 	double values3[][5] = { 
-		{ 2.0, 2.2, 2.2, 2.2,  2.2 }, 
-		{ 2.2, 2.2, 2.2, 2.2,  2.2 },
-		{ 2.2, 2.2, 2.2, 2.2, -1.0 },
-		{ 2.2, 3.0, 2.2, 2.2,  2.2 } 
+		{ 2.0, 0.0, 0.0, 0.0,  0.0 }, 
+		{ 0.0, 0.0, 0.0, 0.0,  0.0 },
+		{ 0.0, 0.0, 0.0, 0.0, -1.0 },
+		{ 0.0, 3.0, 0.0, 0.0,  0.0 } 
 	};
 
 	for (std::size_t i = 0; i < 4; i++)
@@ -1058,7 +1035,7 @@ BOOST_AUTO_TEST_CASE(SparseMatrixTest)
 
 	checkValues2(4, 5, m1, values3);
 
-	BOOST_CHECK(m1.getNumElements() == 3);
+	BOOST_CHECK_EQUAL(m1.getNumElements(), 3);
 
 	// ---------
 
@@ -1070,7 +1047,7 @@ BOOST_AUTO_TEST_CASE(SparseMatrixTest)
 
 	checkValues2(4, 5, m1, values3);
 
-	BOOST_CHECK(m1.getNumElements() == 20);
+	BOOST_CHECK_EQUAL(m1.getNumElements(), 3);
 
 	BOOST_CHECK_THROW(m1 += static_cast<const MatrixContainer<SparseMatrix<double> >&>(m7), Base::SizeError);
 
@@ -1080,7 +1057,7 @@ BOOST_AUTO_TEST_CASE(SparseMatrixTest)
 
 	checkValues2(4, 5, m1, values3);
 
-	BOOST_CHECK(m1.getNumElements() == 20);
+	BOOST_CHECK_EQUAL(m1.getNumElements(), 3);
 
 	// ---------
 
@@ -1088,7 +1065,7 @@ BOOST_AUTO_TEST_CASE(SparseMatrixTest)
 
 	checkValues2(4, 5, m1, values1);
 
-	BOOST_CHECK(m1.getNumElements() == 20);
+	BOOST_CHECK_EQUAL(m1.getNumElements(), 3);
 
 	BOOST_CHECK_THROW(m1 -= static_cast<const MatrixContainer<SparseMatrix<double> >&>(m7), Base::SizeError);
 
@@ -1104,7 +1081,7 @@ BOOST_AUTO_TEST_CASE(SparseMatrixTest)
 
 	checkValues2(4, 5, m1, values3);
 
-	BOOST_CHECK(m1.getNumElements() == 20);
+	BOOST_CHECK_EQUAL(m1.getNumElements(), 3);
 
 	// ---------
 
@@ -1112,7 +1089,7 @@ BOOST_AUTO_TEST_CASE(SparseMatrixTest)
 
 	checkValues2(4, 5, m1, 0.0);
 
-	BOOST_CHECK(m1.getNumElements() == 20);
+	BOOST_CHECK_EQUAL(m1.getNumElements(), 0);
 
 	// ---------
 
@@ -1128,8 +1105,7 @@ BOOST_AUTO_TEST_CASE(SparseMatrixTest)
 
 	checkValues2(4, 5, m1, values1);
 
-	BOOST_CHECK(m1.getNumElements() == 20);
-
+	BOOST_CHECK_EQUAL(m1.getNumElements(), 3);
 
 	// ---------
 
@@ -1197,7 +1173,7 @@ BOOST_AUTO_TEST_CASE(SparseMatrixTest)
 
 	checkValues2(4, 5, m1, 0.0);
 
-	BOOST_CHECK(m1.getNumElements() == 20);
+	BOOST_CHECK_EQUAL(m1.getNumElements(), 0);
 
 	// ---------
 
@@ -1213,20 +1189,13 @@ BOOST_AUTO_TEST_CASE(SparseMatrixTest)
 	checkValues2(2, 6, m1, 0.0);
 
 	BOOST_CHECK(&(m1 = m2) == &m1);
-	BOOST_CHECK(m1.getNumElements() == m2.getNumElements());
+	BOOST_CHECK_EQUAL(m1.getNumElements(), m2.getNumElements());
 
 	checkValues2(4, 5, m1, values1);
 	
 	m1.resize(0, 0);
 
 	checkEmpty2(0, 0, m1);
-
-	m5.resize(4, 5, true);
-	m5.clear(2.2);
-
-	BOOST_CHECK(&(m1 = m5) == &m1);
-
-	checkValues2(4, 5, m1, 2.2);
 
 	BOOST_CHECK(&(m1 = m7) == &m1);
 
@@ -1246,17 +1215,20 @@ BOOST_AUTO_TEST_CASE(SparseMatrixTest)
 
 	// ---------
 
-	m1.resize(1, 3, true);
+	m1.resize(1, 3);
 
 	checkValues2(1, 3, m1, values2);
 
-	BOOST_CHECK(&(m1 = static_cast<const MatrixExpression<SparseMatrix<double> >&>(m5)) == &m1);
+	BOOST_CHECK(&(m1 = ScalarMatrix<double>(4, 5, 2.2)) == &m1);
 
 	checkValues2(4, 5, m1, 2.2);
+	BOOST_CHECK_EQUAL(m1.getNumElements(), 20);
 
 	m1.resize(0, 3);
 
 	checkEmpty2(0, 3, m1);
+
+	BOOST_CHECK_EQUAL(m1.getNumElements(), 0);
 
 	BOOST_CHECK(&(m1 = static_cast<const MatrixExpression<SparseMatrix<double> >&>(m7)) == &m1);
 
@@ -1284,9 +1256,10 @@ BOOST_AUTO_TEST_CASE(SparseMatrixTest)
 
 	checkValues2(3, 4, m1, values1);
 
-	BOOST_CHECK(&(m1 = static_cast<const MatrixContainer<SparseMatrix<double> >&>(m5)) == &m1);
+	BOOST_CHECK(&(m1 = ScalarMatrix<double>(4, 5, 3.2)) == &m1);
 
-	checkValues2(4, 5, m1, 2.2);
+	checkValues2(4, 5, m1, 3.2);
+	BOOST_CHECK_EQUAL(m1.getNumElements(), 20);
 
 	m1.resize(0, 1);
 
@@ -1318,53 +1291,61 @@ BOOST_AUTO_TEST_CASE(SparseMatrixTest)
 
 	checkValues2(3, 7, m1, 0.0);
 
-	m1.resize(0, 0, true);
+	m1.resize(0, 0);
 
 	checkEmpty2(0, 0, m1);
+	BOOST_CHECK_EQUAL(m1.getNumElements(), 0);
 
-	BOOST_CHECK(&m1.assign(m5) == &m1);
+	BOOST_CHECK(&m1.assign(ScalarMatrix<double>(4, 5, 3.2)) == &m1);
 
-	checkValues2(4, 5, m1, 2.2);
+	checkValues2(4, 5, m1, 3.2);
+	BOOST_CHECK_EQUAL(m1.getNumElements(), 20);
 
 	BOOST_CHECK(&m1.assign(m6) == &m1);
 
 	checkValues2(4, 5, m1, values1);
+	BOOST_CHECK_EQUAL(m1.getNumElements(), 3);
+
+	m1.resize(20, 20);
 
 	BOOST_CHECK(&m1.assign(m1) == &m1);
 
-	checkValues2(4, 5, m1, values1);
+	for (std::size_t i = 0; i < 4; i++)
+		for (std::size_t j = 0; j < 5; j++)
+			BOOST_CHECK_EQUAL(m1(i, j), values1[i][j]);
+
+	BOOST_CHECK_EQUAL(m1.getNumElements(), 3);
 
 	BOOST_CHECK(&m1.assign(SparseMatrix<float>()) == &m1);
 
 	checkEmpty2(0, 0, m1);
+	BOOST_CHECK_EQUAL(m1.getNumElements(), 0);
 
 	BOOST_CHECK(&m1.assign(m6) == &m1);
 
 	checkValues2(4, 5, m1, values1);
+	BOOST_CHECK_EQUAL(m1.getNumElements(), 3);
 
 	// ---------
 
-	m1.getDefaultValue() = 1;
-	m7.getDefaultValue() = 7;
-
-	BOOST_CHECK_EQUAL(m7.getNumElements(), 12);
-	BOOST_CHECK_EQUAL(m1.getNumElements(), 20);
+	BOOST_CHECK_EQUAL(m7.getNumElements(), 8);
+	BOOST_CHECK_EQUAL(m1.getNumElements(), 3);
 
 	swap(m1, m7);
 
 	checkValues2(4, 5, m7, values1);
 	checkValues2(2, 6, m1, values2);
 
-	BOOST_CHECK_EQUAL(m1.getNumElements(), 12);
-	BOOST_CHECK_EQUAL(m7.getNumElements(), 20);
-
-	BOOST_CHECK_EQUAL(m1.getDefaultValue(), 7);
-	BOOST_CHECK_EQUAL(m7.getDefaultValue(), 1);
+	BOOST_CHECK_EQUAL(m1.getNumElements(), 8);
+	BOOST_CHECK_EQUAL(m7.getNumElements(), 3);
 
 	swap(m1, m7);
 
 	checkValues2(2, 6, m7, values2);
 	checkValues2(4, 5, m1, values1);
+
+	BOOST_CHECK_EQUAL(m1.getNumElements(), 3);
+	BOOST_CHECK_EQUAL(m7.getNumElements(), 8);
 
 	swap(m7, m1);
 

@@ -1,7 +1,7 @@
 /* -*- mode: c++; c-basic-offset: 4; tab-width: 4; indent-tabs-mode: t -*- */
 
 /* 
- * SystemInfo.hpp
+ * InteractionFilterFunctionWrappers.hpp 
  *
  * This file is part of the Chemical Data Processing Toolkit
  *
@@ -23,12 +23,45 @@
  * Boston, MA 02111-1307, USA.
  */
 
+/**
+ * \file
+ * \brief Type definition of generic wrapper classes for storing user-defined interaction
+ *        filtering functions.
+ */
 
-#ifndef APP_UTILS_SYSTEMINFO_HPP
-#define APP_UTILS_SYSTEMINFO_HPP
+#ifndef CDPL_FORCEFIELD_INTERACTIONFILTERFUNCTIONWRAPPERS_HPP
+#define CDPL_FORCEFIELD_INTERACTIONFILTERFUNCTIONWRAPPERS_HPP
 
-#define SYS_INFO_COMPILER_ID    "GNU"
-#define SYS_INFO_BUILD_SYSTEM   "Linux-3.10.0-862.6.3.el7.x86_64"
-#define SYS_INFO_CDPKIT_VERSION "1.0.0"
+#include <boost/function.hpp>
 
-#endif // APP_UTILS_SYSTEMINFO_HPP
+
+namespace CDPL 
+{
+
+    namespace Chem
+    {
+
+		class Atom;
+	}
+
+    namespace ForceField 
+    {
+
+		/**
+		 * \addtogroup CDPL_FORCEFIELD_DATA_STRUCTURES
+		 * @{
+		 */
+		
+		typedef boost::function2<bool, const Chem::Atom&, const Chem::Atom&> InteractionFilterFunction2;
+
+		typedef boost::function3<bool, const Chem::Atom&, const Chem::Atom&, const Chem::Atom&> InteractionFilterFunction3;
+
+		typedef boost::function4<bool, const Chem::Atom&, const Chem::Atom&, const Chem::Atom&, const Chem::Atom&> InteractionFilterFunction4;
+
+		/**
+		 * @}
+		 */
+    }
+}
+
+#endif // CDPL_FORCEFIELD_INTERACTIONFILTERFUNCTIONWRAPPERS_HPP

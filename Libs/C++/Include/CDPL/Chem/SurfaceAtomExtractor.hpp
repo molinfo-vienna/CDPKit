@@ -37,7 +37,7 @@
 #include <boost/shared_ptr.hpp>
 
 #include "CDPL/Chem/APIPrefix.hpp"
-#include "CDPL/Chem/Atom3DCoordinatesFunction.hpp"
+#include "CDPL/Chem/Atom3DCoordinatesFunctionWrapper.hpp"
 #include "CDPL/Math/Matrix.hpp"
 #include "CDPL/Math/Vector.hpp"
 

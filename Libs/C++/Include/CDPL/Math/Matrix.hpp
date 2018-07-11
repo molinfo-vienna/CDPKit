@@ -43,7 +43,6 @@
 #include "CDPL/Math/Check.hpp"
 #include "CDPL/Math/MatrixExpression.hpp"
 #include "CDPL/Math/MatrixAssignment.hpp"
-#include "CDPL/Math/SparseContainerAssignment.hpp"
 #include "CDPL/Math/DirectAssignmentProxy.hpp"
 #include "CDPL/Math/Functional.hpp"
 #include "CDPL/Math/TypeTraits.hpp"
@@ -381,20 +380,20 @@ namespace CDPL
 			ArrayType data;
 		};
 
-		template <typename T> 
-		class SparseMatrix : public MatrixContainer<SparseMatrix<T> >
+		template <typename T, typename A = boost::unordered_map<std::size_t, T> > 
+		class SparseMatrix : public MatrixContainer<SparseMatrix<T, A> >
 		{
 
 			typedef SparseMatrix<T> SelfType;
 
 		public:
 			typedef T ValueType;
-			typedef Base::uint64 KeyType;
+			typedef typename A::key_type KeyType;
 			typedef SparseContainerElement<SelfType> Reference;
 			typedef const T& ConstReference;
 			typedef std::size_t SizeType;
 			typedef std::ptrdiff_t DifferenceType;
-			typedef boost::unordered_map<KeyType, ValueType> ArrayType;
+			typedef boost::unordered_map<Base::uint64, ValueType> ArrayType;
 			typedef T* Pointer;
 			typedef const T* ConstPointer;
 			typedef MatrixReference<SelfType> ClosureType;
@@ -403,25 +402,19 @@ namespace CDPL
 			typedef Vector<T, std::vector<T> > VectorTemporaryType;
 			typedef boost::shared_ptr<SelfType> SharedPointer;
 		
-			SparseMatrix(): size1(0), size2(0), data(), defValue() {}
+			SparseMatrix(): size1(0), size2(0), data() {}
 
 			SparseMatrix(SizeType m, SizeType n): 
-				size1(m), size2(n), data(), defValue() {
+				size1(m), size2(n), data() {
 				CDPL_MATH_CHECK((n == 0 || m <= data.max_size() / n) && m <= std::numeric_limits<Base::uint32>::max() &&
 								n <= std::numeric_limits<Base::uint32>::max(), "Maximum size exceeded", Base::SizeError);
 			}
 
-			SparseMatrix(SizeType m, SizeType n, const ValueType& v):  
-				size1(m), size2(n), data(), defValue(v) {
-				CDPL_MATH_CHECK((n == 0 || m <= data.max_size() / n) && m <= std::numeric_limits<Base::uint32>::max() &&
-								n <= std::numeric_limits<Base::uint32>::max(), "Maximum size exceeded", Base::SizeError);
-			}
-
-			SparseMatrix(const SparseMatrix& m): size1(m.size1), size2(m.size2), data(m.data), defValue(m.defValue) {}
+			SparseMatrix(const SparseMatrix& m): size1(m.size1), size2(m.size2), data(m.data) {}
 
 			template <typename E>
 			SparseMatrix(const MatrixExpression<E>& e): 
-				size1(e().getSize1()), size2(e().getSize2()), data(), defValue() {
+				size1(e().getSize1()), size2(e().getSize2()), data() {
 				CDPL_MATH_CHECK((size1 == 0 || size2 <= data.max_size() / size1) && size1 <= std::numeric_limits<Base::uint32>::max() &&
 								size2 <= std::numeric_limits<Base::uint32>::max(), "Maximum size exceeded", Base::SizeError);
 				matrixAssignMatrix<ScalarAssignment>(*this, e);
@@ -439,7 +432,7 @@ namespace CDPL
 				typename ArrayType::const_iterator it = data.find(makeKey(i, j));
 
 				if (it == data.end())
-					return defValue;
+					return zero;
 
 				return it->second;
 			}
@@ -472,19 +465,10 @@ namespace CDPL
 				return data;
 			}
 
-			ValueType& getDefaultValue() {
-				return defValue;
-			}
-	
-			ConstReference getDefaultValue() const {
-				return defValue;
-			}
-
 			SparseMatrix& operator=(const SparseMatrix& m) {
 				data = m.data;
 				size1 = m.size1;
 				size2 = m.size2;
-				defValue = m.defValue;
 				return *this;
 			}
 
@@ -529,13 +513,13 @@ namespace CDPL
 
 			template <typename T1>
 			typename boost::enable_if<IsScalar<T1>, SparseMatrix>::type& operator*=(const T1& t) {
-				sparseContainerAssignScalar<ScalarMultiplicationAssignment>(*this, t);
+				matrixAssignScalar<ScalarMultiplicationAssignment>(*this, t);
 				return *this;
 			}
 	
 			template <typename T1>
 			typename boost::enable_if<IsScalar<T1>, SparseMatrix>::type& operator/=(const T1& t) {
-				sparseContainerAssignScalar<ScalarDivisionAssignment>(*this, t);
+				matrixAssignScalar<ScalarDivisionAssignment>(*this, t);
 				return *this;
 			}
 			
@@ -563,7 +547,6 @@ namespace CDPL
 					boost::swap(data, m.data);
 					boost::swap(size1, m.size1);
 					boost::swap(size2, m.size2);
-					boost::swap(defValue, m.defValue);
 				}
 			}
 	
@@ -571,8 +554,7 @@ namespace CDPL
 				m1.swap(m2);
 			}
 
-			void clear(const ValueType& v = ValueType()) {
-				defValue = v;
+			void clear() {
 				data.clear();
 			}
 
@@ -606,11 +588,13 @@ namespace CDPL
 				return key;
 			}
 
-			SizeType  size1;
-			SizeType  size2;
-			ArrayType data;
-			ValueType defValue;
+			SizeType               size1;
+			SizeType               size2;
+			ArrayType              data;
+			static const ValueType zero;
 		};
+
+		template <typename T, typename A> const typename SparseMatrix<T, A>::ValueType SparseMatrix<T, A>::zero = SparseMatrix<T, A>::ValueType();
 
 		template <typename T, std::size_t N> class BoundedVector;
 

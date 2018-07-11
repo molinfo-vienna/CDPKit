@@ -33,19 +33,23 @@
 
 #include "CDPL/ForceField/APIPrefix.hpp"
 #include "CDPL/ForceField/MMFF94VanDerWaalsInteractionList.hpp"
+#include "CDPL/ForceField/MMFF94PropertyFunctionWrappers.hpp"
+#include "CDPL/ForceField/InteractionFilterFunctionWrappers.hpp"
+#include "CDPL/ForceField/TopologicalAtomDistanceFunctionWrapper.hpp"
+#include "CDPL/ForceField/MMFF94VanDerWaalsParameterTable.hpp"
 
 
 namespace CDPL 
 {
 
+	namespace Chem
+	{
+
+		class MolecularGraph;
+	}
+
     namespace ForceField 
     {
-
-		namespace Chem
-		{
-
-			class MolecularGraph;
-		}
 
 		/**
 		 * \addtogroup CDPL_FORCEFIELD_INTERACTION_ANALYSIS
@@ -61,10 +65,21 @@ namespace CDPL
 			MMFF94VanDerWaalsInteractionAnalyzer(const Chem::MolecularGraph& molgraph, 
 												 MMFF94VanDerWaalsInteractionList& iactions);
 
+			void setFilterFunction(const InteractionFilterFunction2& func); 
+
+			void setTypeFunction(const MMFF94NumericAtomTypeFunction& func); 
+
+			void setTopologicalDistanceFunction(const TopologicalAtomDistanceFunction& func); 
+
+			void setVdWParameterTable(const MMFF94VanDerWaalsParameterTable::SharedPointer& table);
+
 			void analyze(const Chem::MolecularGraph& molgraph, MMFF94VanDerWaalsInteractionList& iactions);
 
 		  private:
-		
+			InteractionFilterFunction2                     filterFunc;
+			MMFF94NumericAtomTypeFunction                  typeFunc;
+			TopologicalAtomDistanceFunction                distFunc;
+			MMFF94VanDerWaalsParameterTable::SharedPointer paramTable;
 		};			
     
 		/**

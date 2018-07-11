@@ -1,7 +1,7 @@
 /* -*- mode: c++; c-basic-offset: 4; tab-width: 4; indent-tabs-mode: t -*- */
 
 /* 
- * SystemInfo.hpp
+ * Atom3DCoordinatesFunctionWrapper.hpp 
  *
  * This file is part of the Chemical Data Processing Toolkit
  *
@@ -23,12 +23,41 @@
  * Boston, MA 02111-1307, USA.
  */
 
+/**
+ * \file
+ * \brief Type definition of a generic wrapper class for storing user-defined Chem::Atom 3D-coordinates functions.
+ */
 
-#ifndef APP_UTILS_SYSTEMINFO_HPP
-#define APP_UTILS_SYSTEMINFO_HPP
+#ifndef CDPL_CHEM_ATOM3DCOORDINATESFUNCTIONWRAPPER_HPP
+#define CDPL_CHEM_ATOM3DCOORDINATESFUNCTIONWRAPPER_HPP
 
-#define SYS_INFO_COMPILER_ID    "GNU"
-#define SYS_INFO_BUILD_SYSTEM   "Linux-3.10.0-862.6.3.el7.x86_64"
-#define SYS_INFO_CDPKIT_VERSION "1.0.0"
+#include <boost/function.hpp>
 
-#endif // APP_UTILS_SYSTEMINFO_HPP
+#include "CDPL/Math/Vector.hpp"
+
+
+namespace CDPL 
+{
+
+    namespace Chem
+    {
+
+		class Atom;
+
+		/**
+		 * \addtogroup CDPL_CHEM_DATA_STRUCTURES
+		 * @{
+		 */
+
+		/**
+		 * \brief A generic wrapper class used to store a user-defined atom 3D-coordinates function.
+		 */
+		typedef boost::function1<const Math::Vector3D&, const Chem::Atom&> Atom3DCoordinatesFunction;
+
+		/**
+		 * @}
+		 */
+    }
+}
+
+#endif // CDPL_CHEM_ATOM3DCOORDINATESFUNCTIONWRAPPER_HPP

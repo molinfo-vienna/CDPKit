@@ -35,7 +35,7 @@
 #include <string>
 
 #include "CDPL/Pharm/APIPrefix.hpp"
-#include "CDPL/Chem/Atom3DCoordinatesFunction.hpp"
+#include "CDPL/Chem/Atom3DCoordinatesFunctionWrapper.hpp"
 #include "CDPL/Math/Matrix.hpp"
 
 

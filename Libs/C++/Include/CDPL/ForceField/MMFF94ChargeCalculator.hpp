@@ -37,7 +37,7 @@
 #include "CDPL/ForceField/MMFF94AtomTypePropertyTable.hpp"
 #include "CDPL/ForceField/MMFF94BondChargeIncrementTable.hpp"
 #include "CDPL/ForceField/MMFF94PartialBondChargeIncrementTable.hpp"
-#include "CDPL/ForceField/MMFF94PropertyFunctions.hpp"
+#include "CDPL/ForceField/MMFF94PropertyFunctionWrappers.hpp"
 #include "CDPL/ForceField/MMFF94FormalAtomChargeDefinitionTable.hpp"
 #include "CDPL/Util/Array.hpp"
 #include "CDPL/Util/BitSet.hpp"

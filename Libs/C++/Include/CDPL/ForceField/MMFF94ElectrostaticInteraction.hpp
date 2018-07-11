@@ -52,9 +52,9 @@ namespace CDPL
 
 		  public:
 			MMFF94ElectrostaticInteraction(std::size_t atom1_idx, std::size_t atom2_idx, double atom1_chg, 
-										   double atom2_chg, double scale_fact, double de_const, double expo):
+										   double atom2_chg, double scale_fact, double de_const, double dist_expo):
 				atom1Idx(atom1_idx), atom2Idx(atom2_idx), atom1Chg(atom1_chg), atom2Chg(atom2_chg),
-				scaleFact(scale_fact), deConst(de_const), exponent(expo) {}
+				scaleFact(scale_fact), deConst(de_const), distExpo(dist_expo) {}
 
 			std::size_t getAtom1Index() const {
 				return atom1Idx;
@@ -80,8 +80,8 @@ namespace CDPL
 				return deConst;
 			}
 
-			double getExponent() const {
-				return exponent;
+			double getDistanceExponent() const {
+				return distExpo;
 			}
 
 		  private:
@@ -91,7 +91,7 @@ namespace CDPL
 			double      atom2Chg;
 			double      scaleFact;
 			double      deConst;
-			double      exponent;
+			double      distExpo;
 		};			
     
 		/**

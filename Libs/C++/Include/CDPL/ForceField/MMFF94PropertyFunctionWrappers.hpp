@@ -1,7 +1,7 @@
 /* -*- mode: c++; c-basic-offset: 4; tab-width: 4; indent-tabs-mode: t -*- */
 
 /* 
- * MMFF94PropertyFunctions.hpp 
+ * MMFF94PropertyFunctionWrappers.hpp 
  *
  * This file is part of the Chemical Data Processing Toolkit
  *
@@ -26,11 +26,11 @@
 /**
  * \file
  * \brief Type definition of generic wrapper classes for storing user-defined functions
- *        for the retrieval of MMFF94 properties.
+ *        for the retrieval of MMFF94 related properties.
  */
 
-#ifndef CDPL_FORCEFIELD_MMFF94PROPERTYFUNCTIONS_HPP
-#define CDPL_FORCEFIELD_MMFF94PROPERTYFUNCTIONS_HPP
+#ifndef CDPL_FORCEFIELD_MMFF94PROPERTYFUNCTIONWRAPPERS_HPP
+#define CDPL_FORCEFIELD_MMFF94PROPERTYFUNCTIONWRAPPERS_HPP
 
 #include <string>
 
@@ -71,7 +71,7 @@ namespace CDPL
 		/**
 		 * \brief A generic wrapper class used to store a user-defined MMFF94 partial atom charge function.
 		 */
-		typedef boost::function1<double, const Chem::Atom&> MMFF94ChargeFunction;
+		typedef boost::function1<double, const Chem::Atom&> MMFF94AtomChargeFunction;
 
 		/**
 		 * \brief A generic wrapper class used to store a user-defined MMFF94 bond type index function.
@@ -89,4 +89,4 @@ namespace CDPL
     }
 }
 
-#endif // CDPL_FORCEFIELD_MMFF94PROPERTYFUNCTIONS_HPP
+#endif // CDPL_FORCEFIELD_MMFF94PROPERTYFUNCTIONWRAPPERS_HPP

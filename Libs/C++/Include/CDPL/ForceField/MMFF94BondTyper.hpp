@@ -33,7 +33,7 @@
 
 #include "CDPL/ForceField/APIPrefix.hpp"
 #include "CDPL/ForceField/MMFF94AtomTypePropertyTable.hpp"
-#include "CDPL/ForceField/MMFF94PropertyFunctions.hpp"
+#include "CDPL/ForceField/MMFF94PropertyFunctionWrappers.hpp"
 #include "CDPL/Util/Array.hpp"
 
 

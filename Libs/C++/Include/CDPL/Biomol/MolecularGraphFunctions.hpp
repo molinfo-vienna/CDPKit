@@ -38,7 +38,7 @@
 #include "CDPL/Biomol/PDBData.hpp"
 #include "CDPL/Biomol/AtomPropertyFlag.hpp"
 #include "CDPL/Chem/Fragment.hpp"
-#include "CDPL/Chem/Atom3DCoordinatesFunction.hpp"
+#include "CDPL/Chem/Atom3DCoordinatesFunctionWrapper.hpp"
 
 
 namespace CDPL 

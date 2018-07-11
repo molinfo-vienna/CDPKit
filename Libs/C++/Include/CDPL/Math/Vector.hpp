@@ -44,7 +44,6 @@
 #include "CDPL/Math/Check.hpp"
 #include "CDPL/Math/VectorExpression.hpp"
 #include "CDPL/Math/VectorAssignment.hpp"
-#include "CDPL/Math/SparseContainerAssignment.hpp"
 #include "CDPL/Math/DirectAssignmentProxy.hpp"
 #include "CDPL/Math/Functional.hpp"
 #include "CDPL/Math/TypeTraits.hpp"
@@ -353,8 +352,8 @@ namespace CDPL
 			ArrayType data;
 		};
  
-		template <typename T> 
-		class SparseVector : public VectorContainer<SparseVector<T> >
+		template <typename T, typename A = boost::unordered_map<std::size_t, T> > 
+		class SparseVector : public VectorContainer<SparseVector<T, A> >
 		{
 
 			typedef SparseVector<T> SelfType;
@@ -363,10 +362,10 @@ namespace CDPL
 			typedef T ValueType;
 			typedef std::size_t SizeType;
 			typedef std::ptrdiff_t DifferenceType;
-			typedef SizeType KeyType;
+			typedef typename A::key_type KeyType;
 			typedef const T& ConstReference;
 			typedef SparseContainerElement<SelfType, KeyType> Reference;
-			typedef boost::unordered_map<KeyType, ValueType> ArrayType;
+			typedef A ArrayType;
 			typedef T* Pointer;
 			typedef const T* ConstPointer;
 			typedef VectorReference<SelfType> ClosureType;
@@ -374,16 +373,14 @@ namespace CDPL
 			typedef SelfType VectorTemporaryType;
 			typedef boost::shared_ptr<SelfType> SharedPointer;
 
-			SparseVector(): data(), size(0), defValue() {}
+			SparseVector(): data(), size(0) {}
 
-			explicit SparseVector(SizeType n): data(), size(storageSize(n)), defValue() {}
-
-			SparseVector(SizeType n, const ValueType& v): data(), size(storageSize(n)), defValue(v) {}
+			explicit SparseVector(SizeType n): data(), size(storageSize(n)) {}
 	
-			SparseVector(const SparseVector& v): data(v.data), size(v.size), defValue(v.defValue) {}
+			SparseVector(const SparseVector& v): data(v.data), size(v.size) {}
 
 			template <typename E>
-			SparseVector(const VectorExpression<E>& e): data(), size(storageSize(e().getSize())), defValue() {
+			SparseVector(const VectorExpression<E>& e): data(), size(storageSize(e().getSize())) {
 				vectorAssignVector<ScalarAssignment>(*this, e);
 			}
 
@@ -406,7 +403,7 @@ namespace CDPL
 				typename ArrayType::const_iterator it = data.find(i);
 
 				if (it == data.end())
-					return defValue;
+					return zero;
 
 				return it->second;
 			}
@@ -435,17 +432,8 @@ namespace CDPL
 				return data;
 			}
 
-		    ConstReference getDefaultValue() const {
-				return defValue;
-			}
-
-			ValueType& getDefaultValue() {
-				return defValue;
-			}
-
 			SparseVector& operator=(const SparseVector& v) {
 				data = v.data;
-				defValue = v.defValue;
 				size = v.size;
 				return *this;
 			}
@@ -491,13 +479,13 @@ namespace CDPL
 
 			template <typename T1>
 			typename boost::enable_if<IsScalar<T1>, SparseVector>::type& operator*=(const T1& t) {
-				sparseContainerAssignScalar<ScalarMultiplicationAssignment>(*this, t);
+				vectorAssignScalar<ScalarMultiplicationAssignment>(*this, t);
 				return *this;
 			}
 	
 			template <typename T1>
 			typename boost::enable_if<IsScalar<T1>, SparseVector>::type& operator/=(const T1& t) {
-				sparseContainerAssignScalar<ScalarDivisionAssignment>(*this, t);
+				vectorAssignScalar<ScalarDivisionAssignment>(*this, t);
 				return *this;
 			}
 			
@@ -524,7 +512,6 @@ namespace CDPL
 				if (this != &v) {
 					boost::swap(data, v.data);
 					boost::swap(size, v.size);
-					boost::swap(defValue, v.defValue);
 				}
 			}
 	
@@ -532,8 +519,7 @@ namespace CDPL
 				v1.swap(v2);
 			}
 
-			void clear(const ValueType& v = ValueType()) {
-				defValue = v;
+			void clear() {
 				data.clear();
 			}
 
@@ -556,11 +542,13 @@ namespace CDPL
 				return n;
 			}
 
-			ArrayType data;
-			SizeType  size;
-			ValueType defValue;
+			ArrayType              data;
+			SizeType               size;
+			static const ValueType zero;
 		};
- 
+
+		template <typename T, typename A> const typename SparseVector<T, A>::ValueType SparseVector<T, A>::zero = SparseVector<T, A>::ValueType();
+
 		template <typename T, std::size_t N> 
 		class BoundedVector : public VectorContainer<BoundedVector<T, N> >
 		{

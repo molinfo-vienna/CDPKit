@@ -37,8 +37,10 @@
 #include "CDPL/ForceField/AtomFunctions.hpp"
 #include "CDPL/ForceField/BondFunctions.hpp"
 #include "CDPL/ForceField/MolecularGraphFunctions.hpp"
+#include "CDPL/ForceField/InteractionFilterFunctionWrappers.hpp"
+#include "CDPL/ForceField/TopologicalAtomDistanceFunctionWrapper.hpp"
 
-#include "CDPL/ForceField/MMFF94PropertyFunctions.hpp"
+#include "CDPL/ForceField/MMFF94PropertyFunctionWrappers.hpp"
 #include "CDPL/ForceField/MMFF94AromaticSSSRSubset.hpp"
 #include "CDPL/ForceField/MMFF94AtomTyper.hpp"
 #include "CDPL/ForceField/MMFF94BondTyper.hpp"

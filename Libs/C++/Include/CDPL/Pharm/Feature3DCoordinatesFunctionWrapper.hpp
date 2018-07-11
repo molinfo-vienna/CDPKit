@@ -1,7 +1,7 @@
 /* -*- mode: c++; c-basic-offset: 4; tab-width: 4; indent-tabs-mode: t -*- */
 
 /* 
- * Atom3DCoordinatesFunction.hpp 
+ * Feature3DCoordinatesFunctionWrapper.hpp 
  *
  * This file is part of the Chemical Data Processing Toolkit
  *
@@ -25,11 +25,11 @@
 
 /**
  * \file
- * \brief Type definition of a generic wrapper class for storing user-defined Chem::Atom 3D-coordinates functions.
+ * \brief Type definition of a generic wrapper class for storing user-defined Pharm::Feature 3D-coordinates functions.
  */
 
-#ifndef CDPL_CHEM_ATOM3DCOORDINATESFUNCTION_HPP
-#define CDPL_CHEM_ATOM3DCOORDINATESFUNCTION_HPP
+#ifndef CDPL_PHARM_FEATURE3DCOORDINATESFUNCTIONWRAPPER_HPP
+#define CDPL_PHARM_FEATURE3DCOORDINATESFUNCTIONWRAPPER_HPP
 
 #include <boost/function.hpp>
 
@@ -39,20 +39,20 @@
 namespace CDPL 
 {
 
-    namespace Chem
+    namespace Pharm
     {
 
-		class Atom;
+		class Feature;
 
 		/**
-		 * \addtogroup CDPL_CHEM_DATA_STRUCTURES
+		 * \addtogroup CDPL_PHARM_DATA_STRUCTURES
 		 * @{
 		 */
 
 		/**
-		 * \brief A generic wrapper class used to store a user-defined atom 3D-coordinates function.
+		 * \brief A generic wrapper class used to store a user-defined Pharm::Feature 3D-coordinates function.
 		 */
-		typedef boost::function1<const Math::Vector3D&, const Chem::Atom&> Atom3DCoordinatesFunction;
+		typedef boost::function1<const Math::Vector3D&, const Pharm::Feature&> Feature3DCoordinatesFunction;
 
 		/**
 		 * @}
@@ -60,4 +60,4 @@ namespace CDPL
     }
 }
 
-#endif // CDPL_CHEM_ATOM3DCOORDINATESFUNCTION_HPP
+#endif // CDPL_PHARM_FEATURE3DCOORDINATESFUNCTIONWRAPPER_HPP

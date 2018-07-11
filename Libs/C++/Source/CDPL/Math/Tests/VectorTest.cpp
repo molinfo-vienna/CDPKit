@@ -725,25 +725,22 @@ BOOST_AUTO_TEST_CASE(SparseVectorTest)
 	// ---------
 
 	v1.resize(4);
-	v1.getDefaultValue() = 2.2;
 
-	checkValues3(4, v1, 2.2);
+	checkValues3(4, v1, 0.0);
 
 	BOOST_CHECK(v1.getNumElements() == 0);
-	BOOST_CHECK(v1.getDefaultValue() == 2.2);
 
 	// ---------
 
 	v1[0] = 2.0;
 	v1(3) = 3.0;
-	v1.getData()[2] = -1.0;
+	v1[2] = -1.0;
 
-	double values1[] = { 2.0, 2.2, -1.0, 3.0 };
+	double values1[] = { 2.0, 0.0, -1.0, 3.0 };
 
 	checkValues3(4, v1, values1);
 
 	BOOST_CHECK(v1.getNumElements() == 3);
-	BOOST_CHECK(v1.getDefaultValue() == 2.2);
 
 	// ---------
 
@@ -752,7 +749,6 @@ BOOST_AUTO_TEST_CASE(SparseVectorTest)
 	checkValues3(4, v2, values1);
 
 	BOOST_CHECK(v2.getNumElements() == 3);
-	BOOST_CHECK(v2.getDefaultValue() == 2.2);
 
 	// ---------
 
@@ -761,16 +757,6 @@ BOOST_AUTO_TEST_CASE(SparseVectorTest)
 	checkValues3(4, v4, 0.0);
 
 	BOOST_CHECK(v4.getNumElements() == 0);
-	BOOST_CHECK(v4.getDefaultValue() == 0.0);
-
-	// ---------
-
-	SparseVector<double> v5(4, 2.2);
-
-	checkValues3(4, v5, 2.2);
-
-	BOOST_CHECK(v5.getNumElements() == 0);
-	BOOST_CHECK(v5.getDefaultValue() == 2.2);
 
 	// ---------
 
@@ -778,68 +764,18 @@ BOOST_AUTO_TEST_CASE(SparseVectorTest)
 
 	checkValues3(4, v6, values1);
 
-	BOOST_CHECK(v6.getNumElements() == 4);
-	BOOST_CHECK(v6.getData().size() == 4);
-	BOOST_CHECK(v6.getDefaultValue() == 0.0);
-
-	// ---------
-
-	double values2[6];
-	SparseVector<double> v7;
-
-	checkEmpty2(v7);
-
-	v7.resize(6);
-	v7.getDefaultValue() = 1.0;
-
-	BOOST_CHECK(v7.getData().empty());
-	BOOST_CHECK(v7.getDefaultValue() == 1.0);
-
-	for (std::size_t i = 0; i < 6; i++)
-		values2[i] = 1.0;
-
-	checkValues3(6, v7, values2);
-
-	// ---------
-
-	v7.clear();
-
-	checkValues3(6, v7, 0.0);
-
-	BOOST_CHECK(v7.getData().empty());
-	BOOST_CHECK(v7.getDefaultValue() == 0.0);
-
-	v7.clear(2.0);
-
-	BOOST_CHECK(v7.getData().empty());
-	BOOST_CHECK(v7.getDefaultValue() == 2.0);
-
-	checkValues3(6, v7, 2.0);
-
-	SparseVector<double> v8;
-
-	checkEmpty2(v8);
-
-	v8.clear();
-
-	checkEmpty2(v8);
-
-	v8.clear(-2);
-
-	checkEmpty2(v8);
-
-	BOOST_CHECK(v8.getDefaultValue() == -2);
+	BOOST_CHECK(v6.getNumElements() == 3);
+	BOOST_CHECK(v6.getData().size() == 3);
 
 	// ---------
 
 	BOOST_CHECK(&(v1 *= -2.0) == &v1);
 
-	double values3[] = { 2.0 * -2.0, 2.2 * -2.0, -1.0 * -2.0, 3.0 * -2.0 };
+	double values3[] = { 2.0 * -2.0, 0.0 * -2.0, -1.0 * -2.0, 3.0 * -2.0 };
 
 	checkValues3(4, v1, values3);
 
 	BOOST_CHECK(v1.getNumElements() == 3);
-	BOOST_CHECK_EQUAL(v1.getDefaultValue(), 2.2 * -2.0);
 
 	// ---------
 
@@ -848,18 +784,16 @@ BOOST_AUTO_TEST_CASE(SparseVectorTest)
 	checkValues3(4, v1, values1);
 
 	BOOST_CHECK(v1.getNumElements() == 3);
-	BOOST_CHECK_EQUAL(v1.getDefaultValue(), 2.2 * -2.0 / -2.0);
-
 
 	// ---------
 
 	BOOST_CHECK(&(v1 += static_cast<const VectorContainer<SparseVector<double> >&>(v1)) == &v1);
 
-	double values4[] = { 2.0 + 2.0, 2.2 + 2.2, -1.0 - 1.0, 3.0 + 3.0 };
+	double values4[] = { 2.0 + 2.0, 0.0 + 0.0, -1.0 - 1.0, 3.0 + 3.0 };
 
 	checkValues3(4, v1, values4);
 
-	BOOST_CHECK_THROW(v1 += static_cast<const VectorContainer<SparseVector<double> >&>(v7), Base::SizeError);
+	BOOST_CHECK_THROW(v1 += static_cast<const VectorContainer<SparseVector<double> >&>(SparseVector<double>(7)), Base::SizeError);
 
 	checkValues3(4, v1, values4);
 
@@ -867,7 +801,7 @@ BOOST_AUTO_TEST_CASE(SparseVectorTest)
 
 	checkValues3(4, v1, values4);
 
-	BOOST_CHECK(v1.getNumElements() == 4);
+	BOOST_CHECK(v1.getNumElements() == 3);
 
 	// ---------
 
@@ -875,7 +809,7 @@ BOOST_AUTO_TEST_CASE(SparseVectorTest)
 
 	checkValues3(4, v1, values1);
 
-	BOOST_CHECK_THROW(v1 -= static_cast<const VectorContainer<SparseVector<double> >&>(v7), Base::SizeError);
+	BOOST_CHECK_THROW(v1 -= static_cast<const VectorContainer<SparseVector<double> >&>(SparseVector<double>(7)), Base::SizeError);
 
 	checkValues3(4, v1, values1);
 
@@ -901,7 +835,7 @@ BOOST_AUTO_TEST_CASE(SparseVectorTest)
 
 	checkValues3(4, v1, values1);
 
-	BOOST_CHECK_THROW(v1 += static_cast<const VectorExpression<SparseVector<double> >&>(v7), Base::SizeError);
+	BOOST_CHECK_THROW(v1 += static_cast<const VectorExpression<SparseVector<double> >&>(SparseVector<double>(7)), Base::SizeError);
 
 	checkValues3(4, v1, values1);
 
@@ -921,7 +855,7 @@ BOOST_AUTO_TEST_CASE(SparseVectorTest)
 
 	checkValues3(4, v1, values1);
 
-	BOOST_CHECK_THROW(v1 -= static_cast<const VectorExpression<SparseVector<double> >&>(v7), Base::SizeError);
+	BOOST_CHECK_THROW(v1 -= static_cast<const VectorExpression<SparseVector<double> >&>(SparseVector<double>(3)), Base::SizeError);
 
 	checkValues3(4, v1, values1);
 
@@ -941,7 +875,7 @@ BOOST_AUTO_TEST_CASE(SparseVectorTest)
 
 	checkValues3(4, v1, values1);
 
-	BOOST_CHECK_THROW(v1.plusAssign(v7), Base::SizeError);
+	BOOST_CHECK_THROW(v1.plusAssign(SparseVector<double>(7)), Base::SizeError);
 
 	checkValues3(4, v1, values1);
 
@@ -961,11 +895,11 @@ BOOST_AUTO_TEST_CASE(SparseVectorTest)
 
 	checkValues3(4, v1, values1);
 
-	BOOST_CHECK_THROW(v1.minusAssign(v7), Base::SizeError);
+	BOOST_CHECK_THROW(v1.minusAssign(SparseVector<double>(5)), Base::SizeError);
 
 	checkValues3(4, v1, values1);
 
-	BOOST_CHECK_THROW(v1.minusAssign(SparseVector<int>()), Base::SizeError);
+	BOOST_CHECK_THROW(v1.minusAssign(SparseVector<int>(2)), Base::SizeError);
 
 	checkValues3(4, v1, values1);
 
@@ -977,14 +911,18 @@ BOOST_AUTO_TEST_CASE(SparseVectorTest)
 
 	// ---------
 
+	SparseVector<double> v7(6);
+
+	double values2[] = { 1, 2, 3, 5, 4, 6 };
+
 	for (SparseVector<double>::SizeType i = 0; i < 6; i++)
 		v7(i) = values2[i];
 
-	BOOST_CHECK_EQUAL(v1.getNumElements(), 4);
+	BOOST_CHECK_EQUAL(v1.getNumElements(), 0);
 
 	v1.resize(2);
 
-	BOOST_CHECK_EQUAL(v1.getNumElements(), 2);
+	BOOST_CHECK_EQUAL(v1.getNumElements(), 0);
 
 	checkValues3(2, v1, 0.0);
 
@@ -997,11 +935,7 @@ BOOST_AUTO_TEST_CASE(SparseVectorTest)
 	checkEmpty2(v1);
 
 	BOOST_CHECK_EQUAL(v1.getNumElements(), 0);
-
-	BOOST_CHECK(&(v1 = v5) == &v1);
-
-	checkValues3(4, v1, 2.2);
-
+	
 	BOOST_CHECK(&(v1 = v7) == &v1);
 
 	checkValues3(6, v1, values2);
@@ -1025,18 +959,6 @@ BOOST_AUTO_TEST_CASE(SparseVectorTest)
 	BOOST_CHECK_EQUAL(v1.getNumElements(), 6);
 
 	// ---------
-
-	v1.resize(1);
-
-	checkValues3(1, v1, values2);
-
-	BOOST_CHECK_EQUAL(v1.getNumElements(), 1);
-
-	BOOST_CHECK(&(v1 = static_cast<const VectorExpression<SparseVector<double> >&>(v5)) == &v1);
-
-	checkValues3(4, v1, 2.2);
-
-	BOOST_CHECK_EQUAL(v1.getNumElements(), 4);
 
 	v1.resize(0);
 
@@ -1064,7 +986,7 @@ BOOST_AUTO_TEST_CASE(SparseVectorTest)
 
 	checkValues3(4, v1, values1);
 
-	BOOST_CHECK_EQUAL(v1.getNumElements(), 4);
+	BOOST_CHECK_EQUAL(v1.getNumElements(), 3);
 
 	// ---------
 
@@ -1072,11 +994,7 @@ BOOST_AUTO_TEST_CASE(SparseVectorTest)
 
 	checkValues3(3, v1, values1);
 
-	BOOST_CHECK_EQUAL(v1.getNumElements(), 3);
-
-	BOOST_CHECK(&(v1 = static_cast<const VectorContainer<SparseVector<double> >&>(v5)) == &v1);
-
-	checkValues3(4, v1, 2.2);
+	BOOST_CHECK_EQUAL(v1.getNumElements(), 2);
 
 	v1.resize(0);
 
@@ -1110,17 +1028,13 @@ BOOST_AUTO_TEST_CASE(SparseVectorTest)
 
 	checkValues3(4, v1, values1);
 
-	BOOST_CHECK_EQUAL(v1.getNumElements(), 4);
+	BOOST_CHECK_EQUAL(v1.getNumElements(), 3);
 
 	v1.resize(0);
 
 	BOOST_CHECK_EQUAL(v1.getNumElements(), 0);
 
 	checkEmpty2(v1);
-
-	BOOST_CHECK(&v1.assign(v5) == &v1);
-
-	checkValues3(4, v1, 2.2);
 
 	BOOST_CHECK(&v1.assign(v6) == &v1);
 
@@ -1138,29 +1052,25 @@ BOOST_AUTO_TEST_CASE(SparseVectorTest)
 
 	checkValues3(4, v1, values1);
 
-	BOOST_CHECK_EQUAL(v1.getNumElements(), 4);
-	BOOST_CHECK_EQUAL(v1.getData().size(), 4);
+	BOOST_CHECK_EQUAL(v1.getNumElements(), 3);
 
 	// ---------
 	
-	v1.getDefaultValue() = 1;
-	v7.getDefaultValue() = 7;
-
 	swap(v1, v7);
 
 	checkValues3(4, v7, values1);
 	checkValues3(6, v1, values2);
 
 	BOOST_CHECK_EQUAL(v1.getNumElements(), 6);
-	BOOST_CHECK_EQUAL(v7.getNumElements(), 4);
-
-	BOOST_CHECK_EQUAL(v1.getDefaultValue(), 7);
-	BOOST_CHECK_EQUAL(v7.getDefaultValue(), 1);
+	BOOST_CHECK_EQUAL(v7.getNumElements(), 3);
 
 	swap(v1, v7);
 
 	checkValues3(6, v7, values2);
 	checkValues3(4, v1, values1);
+
+	BOOST_CHECK_EQUAL(v1.getNumElements(), 3);
+	BOOST_CHECK_EQUAL(v7.getNumElements(), 6);
 
 	swap(v7, v1);
 

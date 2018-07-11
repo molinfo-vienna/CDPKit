@@ -38,7 +38,7 @@
 #include "CDPL/Chem/MassComposition.hpp"
 #include "CDPL/Chem/ElementHistogram.hpp"
 #include "CDPL/Chem/AtomPredicate.hpp"
-#include "CDPL/Chem/Atom3DCoordinatesFunction.hpp"
+#include "CDPL/Chem/Atom3DCoordinatesFunctionWrapper.hpp"
 #include "CDPL/Math/Matrix.hpp"
 #include "CDPL/Math/VectorArray.hpp"
 #include "CDPL/Util/BitSet.hpp"

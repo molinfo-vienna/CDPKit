@@ -32,7 +32,7 @@
 #include "CDPL/Chem/MolecularGraph.hpp"
 #include "CDPL/Chem/Atom.hpp"
 #include "CDPL/Chem/Bond.hpp"
-#include "CDPL/Chem/Atom3DCoordinatesFunction.hpp"
+#include "CDPL/Chem/Atom3DCoordinatesFunctionWrapper.hpp"
 #include "CDPL/Chem/AtomPredicate.hpp"
 #include "CDPL/Chem/BondPredicate.hpp"
 #include "CDPL/Math/Vector.hpp"

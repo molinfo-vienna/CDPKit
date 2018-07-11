@@ -33,19 +33,22 @@
 
 #include "CDPL/ForceField/APIPrefix.hpp"
 #include "CDPL/ForceField/MMFF94ElectrostaticInteractionList.hpp"
+#include "CDPL/ForceField/MMFF94PropertyFunctionWrappers.hpp"
+#include "CDPL/ForceField/InteractionFilterFunctionWrappers.hpp"
+#include "CDPL/ForceField/TopologicalAtomDistanceFunctionWrapper.hpp"
 
 
 namespace CDPL 
 {
 
+	namespace Chem
+	{
+
+		class MolecularGraph;
+	}
+
     namespace ForceField 
     {
-
-		namespace Chem
-		{
-
-			class MolecularGraph;
-		}
 
 		/**
 		 * \addtogroup CDPL_FORCEFIELD_INTERACTION_ANALYSIS
@@ -56,15 +59,32 @@ namespace CDPL
 		{
 
 		  public:
+			static const double DEF_DISTANCE_EXPONENT;
+			static const double DEF_DIELECTRIC_CONSTANT;
+
 			MMFF94ElectrostaticInteractionAnalyzer();
 
 			MMFF94ElectrostaticInteractionAnalyzer(const Chem::MolecularGraph& molgraph, 
 												   MMFF94ElectrostaticInteractionList& iactions);
 
+			void setFilterFunction(const InteractionFilterFunction2& func); 
+
+			void setChargeFunction(const MMFF94AtomChargeFunction& func); 
+
+			void setTopologicalDistanceFunction(const TopologicalAtomDistanceFunction& func); 
+
+			void setDielectricConstant(double de_const);
+
+			void setDistanceExponent(double dist_expo);
+
 			void analyze(const Chem::MolecularGraph& molgraph, MMFF94ElectrostaticInteractionList& iactions);
 
 		  private:
-		
+			InteractionFilterFunction2      filterFunc;
+			MMFF94AtomChargeFunction        chargeFunc;
+			TopologicalAtomDistanceFunction distFunc;
+			double                          deConst;
+			double                          distExpo;
 		};			
     
 		/**

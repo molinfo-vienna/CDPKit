@@ -50,37 +50,23 @@ namespace
 			using namespace CDPLPythonMath;
 
 			typedef typename MatrixType::SizeType SizeType;
-			typedef typename MatrixType::ValueType ValueType;
 
 			python::class_<MatrixType, typename MatrixType::SharedPointer>(name, python::no_init)
 				.def(python::init<>(python::arg("self")))
 				.def(python::init<const MatrixType&>((python::arg("self"), python::arg("m"))))
 				.def(python::init<SizeType, SizeType>(
 						 (python::arg("self"), python::arg("m"), python::arg("n"))))
-				.def(python::init<SizeType, SizeType, const ValueType&>(
-						 (python::arg("self"), python::arg("m"), python::arg("n"), python::arg("v"))))
 				.def("resize", &MatrixType::resize, 
-					 (python::arg("self"), python::arg("m"), python::arg("n"), python::arg("preserve") = true))
-				.def("clear", &MatrixType::clear, (python::arg("self"), python::arg("v") = ValueType()))
+					 (python::arg("self"), python::arg("m"), python::arg("n")))
+				.def("clear", &MatrixType::clear, python::arg("self"))
 				.def("getNumElements", &MatrixType::getNumElements, python::arg("self"))
-				.def("getDefaultValue", &getDefaultValue, python::arg("self"))
-				.def("setDefaultValue", &setDefaultValue, (python::arg("self"), python::arg("d")))
 				.def(CDPLPythonBase::ObjectIdentityCheckVisitor<MatrixType>())
 				.def(InitFunctionGeneratorVisitor<MatrixType, ConstMatrixExpression>("e"))
 				.def(AssignFunctionGeneratorVisitor<MatrixType, ConstMatrixExpression>("e"))
 				.def(ConstMatrixVisitor<MatrixType>())
 				.def(MatrixAssignAndSwapVisitor<MatrixType>())
 				.def(MatrixVisitor<MatrixType>())
-				.add_property("numElements", &MatrixType::getNumElements)
-				.add_property("defValue", &getDefaultValue, &setDefaultValue);
-		}
-
-		static typename MatrixType::ValueType getDefaultValue(MatrixType& m) {
-			return m.getDefaultValue();
-		}
-
-		static void setDefaultValue(MatrixType& m, const typename MatrixType::ValueType& d) {
-			m.getDefaultValue() = d;
+				.add_property("numElements", &MatrixType::getNumElements);
 		}
 	};
 }       

@@ -28,11 +28,10 @@
 
 #include "CDPL/Pharm/Feature.hpp"
 #include "CDPL/Pharm/FeatureMapping.hpp"
-#include "CDPL/Pharm/Feature3DCoordinatesFunction.hpp"
+#include "CDPL/Pharm/Feature3DCoordinatesFunctionWrapper.hpp"
 #include "CDPL/Pharm/ScreeningProcessor.hpp"
 #include "CDPL/Pharm/ScreeningDBCreator.hpp"
 #include "CDPL/Chem/Atom.hpp"
-#include "CDPL/Chem/Atom3DCoordinatesFunction.hpp"
 #include "CDPL/Math/Vector.hpp"
 #include "CDPL/Math/Matrix.hpp"
 
