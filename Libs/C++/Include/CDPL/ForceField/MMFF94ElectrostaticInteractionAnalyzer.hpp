@@ -69,7 +69,7 @@ namespace CDPL
 
 			void setFilterFunction(const InteractionFilterFunction2& func); 
 
-			void setChargeFunction(const MMFF94AtomChargeFunction& func); 
+			void setAtomChargeFunction(const MMFF94AtomChargeFunction& func); 
 
 			void setTopologicalDistanceFunction(const TopologicalAtomDistanceFunction& func); 
 

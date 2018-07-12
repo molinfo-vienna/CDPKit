@@ -1,7 +1,7 @@
 /* -*- mode: c++; c-basic-offset: 4; tab-width: 4; indent-tabs-mode: t -*- */
 
 /* 
- * MMFF94AtomTyperTest.cpp 
+ * MMFF94ChargeCalculatorTest.cpp 
  *
  * This file is part of the Chemical Data Processing Toolkit
  *
@@ -76,26 +76,16 @@ BOOST_AUTO_TEST_CASE(MMFF94ChargeCalculatorTest)
 			double correct_charge = form_charges[i];
 			double calc_charge = charge_calc.getFormalCharges()[i];
 
-			if (std::abs(calc_charge - correct_charge) > 0.0005) {
-				const Chem::Atom& atom = mol.getAtom(i);
-
-				BOOST_MESSAGE("!! Formal charge mismatch for atom #" << i << " (" << getMOL2Name(atom) <<
-							  ") of molecule #" << mol_idx << " (" << mol_name << "):");
-				BOOST_CHECK_EQUAL(calc_charge, correct_charge);
-			}
+			BOOST_CHECK_MESSAGE(std::abs(calc_charge - correct_charge) <= 0.0005, "Formal charge mismatch for atom #" << i << " (" << getMOL2Name(mol.getAtom(i)) <<
+								") of molecule #" << mol_idx << " (" << mol_name << "): " << calc_charge << " != " << correct_charge);
 		}
 		
 		for (std::size_t i = 0; i < mol.getNumAtoms(); i++) {
 			double correct_charge = part_charges[i];
 			double calc_charge = calc_charges[i];
-
-			if (std::abs(calc_charge - correct_charge) > 0.0006) {
-				const Chem::Atom& atom = mol.getAtom(i);
-
-				BOOST_MESSAGE("!! Partial charge mismatch for atom #" << i << " (" << getMOL2Name(atom) <<
-							  ") of molecule #" << mol_idx << " (" << mol_name << "):");
-				BOOST_CHECK_EQUAL(calc_charge, correct_charge);
-			}
+		
+			BOOST_CHECK_MESSAGE(std::abs(calc_charge - correct_charge) <= 0.0006, "Partial charge mismatch for atom #" << i << " (" << getMOL2Name(mol.getAtom(i)) <<
+								") of molecule #" << mol_idx << " (" << mol_name << "): " << calc_charge << " != " << correct_charge);
 		}
 
 		mol_idx++;

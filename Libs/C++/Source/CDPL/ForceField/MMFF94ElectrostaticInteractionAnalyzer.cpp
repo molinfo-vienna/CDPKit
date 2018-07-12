@@ -57,7 +57,7 @@ void ForceField::MMFF94ElectrostaticInteractionAnalyzer::setFilterFunction(const
 	filterFunc = func;
 } 
 
-void ForceField::MMFF94ElectrostaticInteractionAnalyzer::setChargeFunction(const MMFF94AtomChargeFunction& func)
+void ForceField::MMFF94ElectrostaticInteractionAnalyzer::setAtomChargeFunction(const MMFF94AtomChargeFunction& func)
 {
 	chargeFunc = func;
 }  

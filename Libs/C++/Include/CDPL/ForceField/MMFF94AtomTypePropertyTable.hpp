@@ -72,7 +72,7 @@ namespace CDPL
 				Entry();
  
 				Entry(unsigned int atom_type, unsigned int atomic_no, std::size_t num_nbrs, std::size_t valence, 
-					  bool has_pi_lp, bool has_mb, bool is_arom, bool lin_bnd_ang, bool has_mb_or_sb);
+					  bool has_pi_lp, unsigned int mltb_desig, bool is_arom, bool lin_bnd_ang, bool has_mb_or_sb);
 
 				unsigned int getAtomType() const;
 
@@ -84,7 +84,7 @@ namespace CDPL
 
 				bool hasPiLonePair() const;
 
-				bool formsMultiBonds() const;
+				unsigned int getMultiBondDesignator() const;
 
 				bool isAromaticAtomType() const;
 
@@ -100,7 +100,7 @@ namespace CDPL
 				std::size_t  numNeighbors;
 				std::size_t  valence;
 				bool         hasPiLonePr;
-				bool         hasMultiBonds;
+				unsigned int mltbDesig;
 				bool         isAroType;
 				bool         hasLinBondAng;
 				bool         hasMultiOrSingleBonds;
@@ -116,7 +116,7 @@ namespace CDPL
 			MMFF94AtomTypePropertyTable();
 
 			void addEntry(unsigned int atom_type, unsigned int atomic_no, std::size_t num_nbrs, std::size_t valence, 
-						  bool has_pi_lp, bool has_mb, bool is_arom, bool lin_bnd_ang, bool has_mb_or_sb);
+						  bool has_pi_lp, unsigned int mltb_desig, bool is_arom, bool lin_bnd_ang, bool has_mb_or_sb);
 
 			const Entry& getEntry(unsigned int atom_type) const;
 

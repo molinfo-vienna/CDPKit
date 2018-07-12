@@ -30,6 +30,7 @@
 #include <fstream>
 #include <string>
 #include <vector>
+#include <cstddef>
 
 #include <boost/unordered_map.hpp>
 
@@ -41,9 +42,19 @@ namespace TestUtils
     {
 
     public:
+		struct BondStretchingInteraction
+		{
+
+			std::size_t atom1Idx;
+			std::size_t atom2Idx;
+			double      forceConst;
+			double      refLength;
+		};
+
 		typedef std::vector<std::string> SymbolicAtomTypeArray;
 		typedef std::vector<unsigned int> NumericAtomTypeArray;
 		typedef std::vector<double> AtomChargeArray;
+		typedef std::vector<BondStretchingInteraction> BondStretchingInteractionList;
 
 		OptimolLogReader(const std::string& log_file);
 
@@ -55,9 +66,13 @@ namespace TestUtils
 
 		bool getFormalAtomCharges(const std::string& mol_name, AtomChargeArray& charges);
 
+		bool getBondStretchingInteractions(const std::string& mol_name, BondStretchingInteractionList& iactions);
+
     private:
 		void buildIndex();
 
+		bool skipLines(std::size_t n);
+		bool skipTokens(std::istream& is, std::size_t n) const;
 		bool readLine(std::string& line);
 		bool skipToLine(std::string& line, const char* srch_str);
 		bool seekToRecord(const std::string& mol_name);

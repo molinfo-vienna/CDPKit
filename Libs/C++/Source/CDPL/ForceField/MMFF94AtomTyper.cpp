@@ -48,24 +48,21 @@ using namespace CDPL;
 
 
 ForceField::MMFF94AtomTyper::MMFF94AtomTyper(const Chem::MolecularGraph& molgraph, Util::SArray& sym_types, Util::UIArray& num_types, bool strict):
-	aromRingSetFunc(&getMMFF94AromaticRings) 
+	aromTypeDefTable(MMFF94AromaticAtomTypeDefinitionTable::get()), hydTypeMap(MMFF94HeavyToHydrogenAtomTypeMap::get()), 
+	numTypeMap(MMFF94SymbolicToNumericAtomTypeMap::get()), atomTypePropTable(MMFF94AtomTypePropertyTable::get()), 
+	aromRingSetFunc(&getMMFF94AromaticRings)
 {
 	setSymbolicAtomTypePatternTable(MMFF94SymbolicAtomTypePatternTable::get());
-	setAromaticAtomTypeDefinitionTable(MMFF94AromaticAtomTypeDefinitionTable::get());
-	setHeavyToHydrogenAtomTypeMap(MMFF94HeavyToHydrogenAtomTypeMap::get());
-	setSymbolicToNumericAtomTypeMap(MMFF94SymbolicToNumericAtomTypeMap::get());
-	setAtomTypePropertyTable(MMFF94AtomTypePropertyTable::get());
 
 	perceiveTypes(molgraph, sym_types, num_types, strict);
 }
 
-ForceField::MMFF94AtomTyper::MMFF94AtomTyper(): aromRingSetFunc(&getMMFF94AromaticRings) 
+ForceField::MMFF94AtomTyper::MMFF94AtomTyper(): 
+	aromTypeDefTable(MMFF94AromaticAtomTypeDefinitionTable::get()), hydTypeMap(MMFF94HeavyToHydrogenAtomTypeMap::get()),
+	numTypeMap(MMFF94SymbolicToNumericAtomTypeMap::get()), atomTypePropTable(MMFF94AtomTypePropertyTable::get()), 
+	aromRingSetFunc(&getMMFF94AromaticRings)
 {
 	setSymbolicAtomTypePatternTable(MMFF94SymbolicAtomTypePatternTable::get());
-	setAromaticAtomTypeDefinitionTable(MMFF94AromaticAtomTypeDefinitionTable::get());
-	setHeavyToHydrogenAtomTypeMap(MMFF94HeavyToHydrogenAtomTypeMap::get());
-	setSymbolicToNumericAtomTypeMap(MMFF94SymbolicToNumericAtomTypeMap::get());
-	setAtomTypePropertyTable(MMFF94AtomTypePropertyTable::get());
 }
 
 void ForceField::MMFF94AtomTyper::setSymbolicAtomTypePatternTable(const MMFF94SymbolicAtomTypePatternTable::SharedPointer& table)

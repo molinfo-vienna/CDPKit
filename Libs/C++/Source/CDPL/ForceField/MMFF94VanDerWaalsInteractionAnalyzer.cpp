@@ -42,24 +42,23 @@ using namespace CDPL;
 
 ForceField::MMFF94VanDerWaalsInteractionAnalyzer::MMFF94VanDerWaalsInteractionAnalyzer(const Chem::MolecularGraph& molgraph, 
 																					   MMFF94VanDerWaalsInteractionList& iactions):
-	filterFunc(), typeFunc(&getMMFF94NumericType), distFunc(&Chem::getTopologicalDistance)
+	filterFunc(), typeFunc(&getMMFF94NumericType), distFunc(&Chem::getTopologicalDistance),
+	paramTable(MMFF94VanDerWaalsParameterTable::get())
 {
-	setVdWParameterTable(MMFF94VanDerWaalsParameterTable::get());
     analyze(molgraph, iactions);
 }
 
 ForceField::MMFF94VanDerWaalsInteractionAnalyzer::MMFF94VanDerWaalsInteractionAnalyzer() :
-	filterFunc(), typeFunc(&getMMFF94NumericType), distFunc(&Chem::getTopologicalDistance)
-{
-	setVdWParameterTable(MMFF94VanDerWaalsParameterTable::get());
-}
+	filterFunc(), typeFunc(&getMMFF94NumericType), distFunc(&Chem::getTopologicalDistance),
+	paramTable(MMFF94VanDerWaalsParameterTable::get())
+{}
 
 void ForceField::MMFF94VanDerWaalsInteractionAnalyzer::setFilterFunction(const InteractionFilterFunction2& func)
 {
 	filterFunc = func;
 } 
 
-void ForceField::MMFF94VanDerWaalsInteractionAnalyzer::setTypeFunction(const MMFF94NumericAtomTypeFunction& func)
+void ForceField::MMFF94VanDerWaalsInteractionAnalyzer::setAtomTypeFunction(const MMFF94NumericAtomTypeFunction& func)
 {
 	typeFunc = func;
 }  
@@ -69,7 +68,7 @@ void ForceField::MMFF94VanDerWaalsInteractionAnalyzer::setTopologicalDistanceFun
 	distFunc = func;
 }  
 
-void ForceField::MMFF94VanDerWaalsInteractionAnalyzer::setVdWParameterTable(const MMFF94VanDerWaalsParameterTable::SharedPointer& table)
+void ForceField::MMFF94VanDerWaalsInteractionAnalyzer::setParameterTable(const MMFF94VanDerWaalsParameterTable::SharedPointer& table)
 {
 	paramTable = table;
 }
@@ -83,9 +82,9 @@ void ForceField::MMFF94VanDerWaalsInteractionAnalyzer::analyze(const Chem::Molec
 
 	for (std::size_t i = 0, num_atoms = molgraph.getNumAtoms(); i < num_atoms; ) {
 		const Atom& atom1 = molgraph.getAtom(i);
-		const ParamEntry& params1 = paramTable->getEntry(typeFunc(atom1));
+		const ParamEntry& params_entry1 = paramTable->getEntry(typeFunc(atom1));
 
-		if (!params1)
+		if (!params_entry1)
 			throw Base::ItemNotFound("MMFF94VanDerWaalsInteractionAnalyzerr: could not find MMFF94 van der Waals parameters for atom #" + 
 									 boost::lexical_cast<std::string>(i));
 
@@ -99,16 +98,16 @@ void ForceField::MMFF94VanDerWaalsInteractionAnalyzer::analyze(const Chem::Molec
 			if (filterFunc && !filterFunc(atom1, atom2))
 				continue;
 	
-			const ParamEntry& params2 = paramTable->getEntry(typeFunc(atom2));
+			const ParamEntry& params_entry2 = paramTable->getEntry(typeFunc(atom2));
 
-			if (!params2)
+			if (!params_entry2)
 				throw Base::ItemNotFound("MMFF94VanDerWaalsInteractionAnalyzerr: could not find MMFF94 van der Waals parameters for atom #" + 
 										 boost::lexical_cast<std::string>(j));
 
-			iactions.addElement(MMFF94VanDerWaalsInteraction(i, j, params1.getAtomicPolarizability(), params1.getEffectiveElectronNumber(),
-															 params1.getFactorA(), params1.getFactorG(), params1.getHDonorAcceptorType(),
-															 params2.getAtomicPolarizability(), params2.getEffectiveElectronNumber(),
-															 params2.getFactorA(), params2.getFactorG(), params2.getHDonorAcceptorType(),
+			iactions.addElement(MMFF94VanDerWaalsInteraction(i, j, params_entry1.getAtomicPolarizability(), params_entry1.getEffectiveElectronNumber(),
+															 params_entry1.getFactorA(), params_entry1.getFactorG(), params_entry1.getHDonorAcceptorType(),
+															 params_entry2.getAtomicPolarizability(), params_entry2.getEffectiveElectronNumber(),
+															 params_entry2.getFactorA(), params_entry2.getFactorG(), params_entry2.getHDonorAcceptorType(),
 															 paramTable->getExponent(), paramTable->getFactorB(), paramTable->getBeta(),
 															 paramTable->getFactorDARAD(), paramTable->getFactorDAEPS()));
 		}

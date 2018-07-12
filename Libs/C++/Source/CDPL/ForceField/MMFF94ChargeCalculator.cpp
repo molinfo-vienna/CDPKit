@@ -69,26 +69,20 @@ namespace
 
 
 ForceField::MMFF94ChargeCalculator::MMFF94ChargeCalculator(const Chem::MolecularGraph& molgraph, Util::DArray& charges):
-    aromRingSetFunc(&getMMFF94AromaticRings), numAtomTypeFunc(&getMMFF94NumericType), symAtomTypeFunc(&getMMFF94SymbolicType), 
+    bondChargeIncTable(MMFF94BondChargeIncrementTable::get()), partBondChargeIncTable(MMFF94PartialBondChargeIncrementTable::get()),
+	atomTypePropTable(MMFF94AtomTypePropertyTable::get()), formChargeDefTable(MMFF94FormalAtomChargeDefinitionTable::get()),
+	aromRingSetFunc(&getMMFF94AromaticRings), numAtomTypeFunc(&getMMFF94NumericType), symAtomTypeFunc(&getMMFF94SymbolicType), 
 	bondTypeIdxFunc(getMMFF94TypeIndex)
 {
-	setBondChargeIncrementTable(MMFF94BondChargeIncrementTable::get());
-	setPartialBondChargeIncrementTable(MMFF94PartialBondChargeIncrementTable::get());
-	setAtomTypePropertyTable(MMFF94AtomTypePropertyTable::get());
-	setFormalChargeDefinitionTable(MMFF94FormalAtomChargeDefinitionTable::get());
-
 	calculate(molgraph, charges);
 }
 
 ForceField::MMFF94ChargeCalculator::MMFF94ChargeCalculator(): 
+	bondChargeIncTable(MMFF94BondChargeIncrementTable::get()), partBondChargeIncTable(MMFF94PartialBondChargeIncrementTable::get()),
+	atomTypePropTable(MMFF94AtomTypePropertyTable::get()), formChargeDefTable(MMFF94FormalAtomChargeDefinitionTable::get()),
 	aromRingSetFunc(&getMMFF94AromaticRings), numAtomTypeFunc(&getMMFF94NumericType), symAtomTypeFunc(&getMMFF94SymbolicType),
 	bondTypeIdxFunc(getMMFF94TypeIndex)
-{
-	setBondChargeIncrementTable(MMFF94BondChargeIncrementTable::get());
-	setPartialBondChargeIncrementTable(MMFF94PartialBondChargeIncrementTable::get());
-	setAtomTypePropertyTable(MMFF94AtomTypePropertyTable::get());
-	setFormalChargeDefinitionTable(MMFF94FormalAtomChargeDefinitionTable::get());
-}
+{}
 
 void ForceField::MMFF94ChargeCalculator::setBondChargeIncrementTable(const MMFF94BondChargeIncrementTable::SharedPointer& table)
 {

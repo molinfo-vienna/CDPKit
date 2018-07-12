@@ -27,10 +27,8 @@
 #include "StaticInit.hpp"
 
 #include <string>
-#include <algorithm>
 
 #include <boost/lexical_cast.hpp>
-#include <boost/bind.hpp>
 
 #include "CDPL/ForceField/MMFF94BondTyper.hpp"
 #include "CDPL/ForceField/MolecularGraphFunctions.hpp"
@@ -39,24 +37,22 @@
 #include "CDPL/Chem/Fragment.hpp"
 #include "CDPL/Chem/Bond.hpp"
 #include "CDPL/Chem/BondFunctions.hpp"
+#include "CDPL/Chem/UtilityFunctions.hpp"
 
 
 using namespace CDPL; 
 
 
 ForceField::MMFF94BondTyper::MMFF94BondTyper(const Chem::MolecularGraph& molgraph, Util::UIArray& types):
-    aromRingSetFunc(&getMMFF94AromaticRings), atomTypeFunc(&getMMFF94NumericType) 
+    atomTypePropTable(MMFF94AtomTypePropertyTable::get()), aromRingSetFunc(&getMMFF94AromaticRings), atomTypeFunc(&getMMFF94NumericType)
+	
 {
-    setAtomTypePropertyTable(MMFF94AtomTypePropertyTable::get());
-
     perceiveTypes(molgraph, types);
 }
 
 ForceField::MMFF94BondTyper::MMFF94BondTyper(): 
-    aromRingSetFunc(&getMMFF94AromaticRings), atomTypeFunc(&getMMFF94NumericType) 
-{
-    setAtomTypePropertyTable(MMFF94AtomTypePropertyTable::get());
-}
+    atomTypePropTable(MMFF94AtomTypePropertyTable::get()), aromRingSetFunc(&getMMFF94AromaticRings), atomTypeFunc(&getMMFF94NumericType)
+{}
 
 void ForceField::MMFF94BondTyper::setAtomTypePropertyTable(const MMFF94AtomTypePropertyTable::SharedPointer& table)
 {
@@ -77,7 +73,7 @@ void ForceField::MMFF94BondTyper::perceiveTypes(const Chem::MolecularGraph& molg
 {
     using namespace Chem;
 
-	const FragmentList::SharedPointer& arom_rings = aromRingSetFunc(molgraph);
+	const FragmentList& arom_rings = *aromRingSetFunc(molgraph);
 	std::size_t num_bonds = molgraph.getNumBonds();
 
 	types.resize(num_bonds);
@@ -98,18 +94,12 @@ void ForceField::MMFF94BondTyper::perceiveTypes(const Chem::MolecularGraph& molg
 				throw Base::ItemNotFound("MMFF94BondTyper: could not find MMFF94 atom type properties for atom #" + 
 										 boost::lexical_cast<std::string>(molgraph.getAtomIndex(bond.getEnd())));
 
-			if (!atom1_props.isAromaticAtomType() || !atom2_props.isAromaticAtomType()) {
-				if (atom1_props.formsMultiOrSingleBonds() && atom2_props.formsMultiOrSingleBonds()) {
-					types[i] = 1;
-					continue;
-				}
-
-			} else {
-				if (std::find_if(arom_rings->getElementsBegin(), arom_rings->getElementsEnd(), 
-								 boost::bind(&Fragment::containsBond, _1, boost::ref(bond))) == arom_rings->getElementsEnd())  {
-					types[i] = 1;
-					continue;
-				}
+			if ((atom1_props.isAromaticAtomType() || atom1_props.formsMultiOrSingleBonds()) && 
+				(atom2_props.isAromaticAtomType() || atom2_props.formsMultiOrSingleBonds())) {
+					if (!containsFragmentWithBond(arom_rings, bond))  {
+						types[i] = 1;
+						continue;
+					}
 			}
 		}
 

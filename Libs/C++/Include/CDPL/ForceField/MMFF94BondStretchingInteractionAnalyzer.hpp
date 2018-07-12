@@ -33,19 +33,25 @@
 
 #include "CDPL/ForceField/APIPrefix.hpp"
 #include "CDPL/ForceField/MMFF94BondStretchingInteractionList.hpp"
+#include "CDPL/ForceField/MMFF94PropertyFunctionWrappers.hpp"
+#include "CDPL/ForceField/InteractionFilterFunctionWrappers.hpp"
+#include "CDPL/ForceField/MMFF94BondStretchingParameterTable.hpp"
+#include "CDPL/ForceField/MMFF94BondStretchingRuleParameterTable.hpp"
+#include "CDPL/ForceField/MMFF94AtomTypePropertyTable.hpp"
 
 
 namespace CDPL 
 {
 
-    namespace ForceField 
+	namespace Chem
+	{
+
+		class MolecularGraph;
+		class Bond;
+	}
+    
+	namespace ForceField 
     {
-
-		namespace Chem
-		{
-
-			class MolecularGraph;
-		}
 
 		/**
 		 * \addtogroup CDPL_FORCEFIELD_INTERACTION_ANALYSIS
@@ -61,10 +67,36 @@ namespace CDPL
 			 MMFF94BondStretchingInteractionAnalyzer(const Chem::MolecularGraph& molgraph, 
 													 MMFF94BondStretchingInteractionList& iactions);
 
-			void analyze(const Chem::MolecularGraph& molgraph, MMFF94BondStretchingInteractionList& iactions);
+			 void setFilterFunction(const InteractionFilterFunction2& func); 
+
+			 void setAtomTypeFunction(const MMFF94NumericAtomTypeFunction& func); 
+
+			 void setBondTypeIndexFunction(const MMFF94BondTypeIndexFunction& func); 
+
+			 void setAromaticRingSetFunction(const MMFF94AromaticRingSetFunction& func);
+
+			 void setParameterTable(const MMFF94BondStretchingParameterTable::SharedPointer& table);
+
+			 void setRuleParameterTable(const MMFF94BondStretchingRuleParameterTable::SharedPointer& table);
+
+			 void setAtomTypePropertyTable(const MMFF94AtomTypePropertyTable::SharedPointer& table);
+
+			 void analyze(const Chem::MolecularGraph& molgraph, MMFF94BondStretchingInteractionList& iactions);
 
 		  private:
-		
+			 typedef MMFF94AtomTypePropertyTable::Entry AtomTypePropEntry;
+
+			 double calcReferenceBondLength(const Chem::MolecularGraph& molgraph, const Chem::Bond& bond, 
+											const AtomTypePropEntry& type1_prop_entry,
+											const AtomTypePropEntry& type2_prop_entry) const;
+
+			 InteractionFilterFunction2                            filterFunc;
+			 MMFF94NumericAtomTypeFunction                         atomTypeFunc;	
+			 MMFF94BondTypeIndexFunction                           bondTypeIdxFunc;	
+			 MMFF94AromaticRingSetFunction                         aromRingSetFunc;
+			 MMFF94BondStretchingParameterTable::SharedPointer     paramTable;
+			 MMFF94BondStretchingRuleParameterTable::SharedPointer ruleParamTable;
+			 MMFF94AtomTypePropertyTable::SharedPointer            typePropTable;
 		};			
     
 		/**

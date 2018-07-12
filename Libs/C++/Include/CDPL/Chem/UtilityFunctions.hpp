@@ -36,6 +36,7 @@
 
 #include "CDPL/Chem/APIPrefix.hpp"
 #include "CDPL/Chem/Molecule.hpp"
+#include "CDPL/Chem/FragmentList.hpp"
 #include "CDPL/Util/BitSet.hpp"
 #include "CDPL/Math/Vector.hpp"
 
@@ -45,8 +46,6 @@ namespace CDPL
 
 	namespace Chem 
 	{
-
-		class Fragment;
 
 		/**
 		 * \addtogroup CDPL_CHEM_UTILITY_FUNCTIONS
@@ -80,6 +79,8 @@ namespace CDPL
 		CDPL_CHEM_API bool isAromatic(const Fragment& ring, const MolecularGraph& molgraph, const Util::BitSet& arom_bond_mask);
 
 		CDPL_CHEM_API bool isNotAromatic(const Fragment& ring, const MolecularGraph& molgraph);
+
+		CDPL_CHEM_API bool containsFragmentWithBond(const FragmentList& frag_list, const Bond& bond);
 
 		/**
 		 * @}

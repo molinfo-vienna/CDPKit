@@ -103,7 +103,7 @@ double ForceField::MMFF94BondStretchingRuleParameterTable::Entry::getForceConsta
 	return forceConst;
 }
 
-double ForceField::MMFF94BondStretchingRuleParameterTable::Entry::getReferenceBondLength() const
+double ForceField::MMFF94BondStretchingRuleParameterTable::Entry::getReferenceLength() const
 {
 	return refLength;
 }
@@ -197,11 +197,11 @@ void ForceField::MMFF94BondStretchingRuleParameterTable::load(std::istream& is)
 		if (!(line_iss >> atomic_no2))
 			throw Base::IOError("MMFF94BondStretchingRuleParameterTable: error while reading atomic number of second atom");
 
-		if (!(line_iss >> force_const))
-			throw Base::IOError("MMFF94BondStretchingRuleParameterTable: error while reading force constant");
-	
 		if (!(line_iss >> ref_length))
 			throw Base::IOError("MMFF94BondStretchingRuleParameterTable: error while reading reference bond length");
+	
+		if (!(line_iss >> force_const))
+			throw Base::IOError("MMFF94BondStretchingRuleParameterTable: error while reading force constant");
 		
 		addEntry(atomic_no1, atomic_no2, force_const, ref_length);
     }

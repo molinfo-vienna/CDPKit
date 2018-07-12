@@ -28,8 +28,19 @@
 
 #include "CDPL/Chem/UtilityFunctions.hpp"
 #include "CDPL/Chem/Fragment.hpp"
+#include "CDPL/Chem/Bond.hpp"
 
 #include "FunctionExports.hpp"
+
+
+namespace
+{
+
+	bool containsFragmentWithBond(const CDPL::Chem::FragmentList& frag_list, CDPL::Chem::Bond& bond)
+	{
+		return CDPL::Chem::containsFragmentWithBond(frag_list, bond);
+	}
+}
 
 
 void CDPLPythonChem::exportUtilityFunctions()
@@ -50,4 +61,5 @@ void CDPLPythonChem::exportUtilityFunctions()
 	python::def("insideBoundingBox", &Chem::insideBoundingBox, (python::arg("min"), python::arg("max"), python::arg("coords")));
 	python::def("isAromatic", &Chem::isAromatic, (python::arg("ring"), python::arg("molgraph"), python::arg("arom_bond_mask")));
 	python::def("isNotAromatic", &Chem::isNotAromatic, (python::arg("ring"), python::arg("molgraph")));
+	python::def("containsFragmentWithBond", &containsFragmentWithBond, (python::arg("frag_list"), python::arg("bond")));
 }

@@ -67,11 +67,11 @@ namespace CDPL
 
 			void setFilterFunction(const InteractionFilterFunction2& func); 
 
-			void setTypeFunction(const MMFF94NumericAtomTypeFunction& func); 
+			void setAtomTypeFunction(const MMFF94NumericAtomTypeFunction& func); 
 
 			void setTopologicalDistanceFunction(const TopologicalAtomDistanceFunction& func); 
 
-			void setVdWParameterTable(const MMFF94VanDerWaalsParameterTable::SharedPointer& table);
+			void setParameterTable(const MMFF94VanDerWaalsParameterTable::SharedPointer& table);
 
 			void analyze(const Chem::MolecularGraph& molgraph, MMFF94VanDerWaalsInteractionList& iactions);
 

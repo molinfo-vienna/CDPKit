@@ -27,6 +27,9 @@
 #include "StaticInit.hpp"
 
 #include <sstream>
+#include <algorithm>
+
+#include <boost/bind.hpp>
 
 #include "CDPL/Chem/UtilityFunctions.hpp"
 #include "CDPL/Chem/MolecularGraphFunctions.hpp"
@@ -448,4 +451,11 @@ bool Chem::isNotAromatic(const Fragment& ring, const MolecularGraph& molgraph)
 	}
 
 	return false;
+}
+
+bool Chem::containsFragmentWithBond(const FragmentList& frag_list, const Bond& bond)
+{
+	FragmentList::ConstElementIterator end = frag_list.getElementsEnd();
+
+	return (std::find_if(frag_list.getElementsBegin(), end, boost::bind(&Fragment::containsBond, _1, boost::ref(bond))) != end);
 }

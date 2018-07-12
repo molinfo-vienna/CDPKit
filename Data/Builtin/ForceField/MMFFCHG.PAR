@@ -509,5 +509,4 @@
 0  78   81   -0.3500   #C94
 0  79   81   -0.0430   E94
 0  80   81   -0.4000   #C94
-1  80   81   -0.4000   #C94 Note: added by CDPKit, missing entry caused a part. charge error of ~0.03 on CIM+ and NIM+ atoms!
 $
