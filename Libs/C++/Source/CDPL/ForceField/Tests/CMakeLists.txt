@@ -6,6 +6,7 @@ SET(test-suite_SRCS
     MMFF94AtomTyperTest.cpp
     MMFF94ChargeCalculatorTest.cpp
     MMFF94BondStretchingInteractionAnalyzerTest.cpp
+    MMFF94AngleBendingInteractionAnalyzerTest.cpp
 
     OptimolLogReader.cpp
     TestUtils.cpp

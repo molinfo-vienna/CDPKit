@@ -51,22 +51,30 @@ namespace TestUtils
 			double      refLength;
 		};
 
+		struct AngleBendingInteraction
+		{
+
+			std::string termAtom1Name;
+			std::size_t ctrAtomIdx;
+			std::string termAtom2Name;
+			double      forceConst;
+			double      refAngle;
+		};
+
 		typedef std::vector<std::string> SymbolicAtomTypeArray;
 		typedef std::vector<unsigned int> NumericAtomTypeArray;
 		typedef std::vector<double> AtomChargeArray;
 		typedef std::vector<BondStretchingInteraction> BondStretchingInteractionList;
+		typedef std::vector<AngleBendingInteraction> AngleBendingInteractionList;
 
 		OptimolLogReader(const std::string& log_file);
 
 		bool getSymbolicAtomTypes(const std::string& mol_name, SymbolicAtomTypeArray& sym_types);
-
 		bool getNumericAtomTypes(const std::string& mol_name, NumericAtomTypeArray& num_types);
-
 		bool getPartialAtomCharges(const std::string& mol_name, AtomChargeArray& charges);
-
 		bool getFormalAtomCharges(const std::string& mol_name, AtomChargeArray& charges);
-
 		bool getBondStretchingInteractions(const std::string& mol_name, BondStretchingInteractionList& iactions);
+		bool getAngleBendingInteractions(const std::string& mol_name, AngleBendingInteractionList& iactions);
 
     private:
 		void buildIndex();

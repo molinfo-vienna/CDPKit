@@ -68,7 +68,7 @@ void ForceField::MMFF94VanDerWaalsInteractionAnalyzer::setTopologicalDistanceFun
 	distFunc = func;
 }  
 
-void ForceField::MMFF94VanDerWaalsInteractionAnalyzer::setParameterTable(const MMFF94VanDerWaalsParameterTable::SharedPointer& table)
+void ForceField::MMFF94VanDerWaalsInteractionAnalyzer::setVanDerWaalsParameterTable(const MMFF94VanDerWaalsParameterTable::SharedPointer& table)
 {
 	paramTable = table;
 }
@@ -80,7 +80,7 @@ void ForceField::MMFF94VanDerWaalsInteractionAnalyzer::analyze(const Chem::Molec
 
 	typedef MMFF94VanDerWaalsParameterTable::Entry ParamEntry;
 
-	for (std::size_t i = 0, num_atoms = molgraph.getNumAtoms(); i < num_atoms; ) {
+	for (std::size_t i = 0, num_atoms = molgraph.getNumAtoms(); i < num_atoms; i++) {
 		const Atom& atom1 = molgraph.getAtom(i);
 		const ParamEntry& params_entry1 = paramTable->getEntry(typeFunc(atom1));
 

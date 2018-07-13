@@ -186,10 +186,10 @@ bool OptimolLogReader::getBondStretchingInteractions(const std::string& mol_name
 
     std::string line;
 
-    if (!skipToLine(line, "------ATOMNAMES------   ATOM TYPES   FF     BOND     IDEAL             STRAIN     FORCE"))
+    if (!skipToLine(line, "B O N D   S T R E T C H I N G"))
 		return false;
 
-	if (!skipLines(2))
+	if (!skipLines(3))
 		return false;
 
 	iactions.clear();
@@ -235,6 +235,64 @@ bool OptimolLogReader::getBondStretchingInteractions(const std::string& mol_name
 			iactions.push_back(iaction);
 		}
     }
+
+	return !iactions.empty();
+}
+
+bool OptimolLogReader::getAngleBendingInteractions(const std::string& mol_name, AngleBendingInteractionList& iactions)
+{
+	if (!seekToRecord(mol_name))
+		return false;
+
+    std::string line;
+
+    if (!skipToLine(line, "A N G L E   B E N D I N G"))
+		return false;
+
+	if (!skipLines(3))
+		return false;
+
+	iactions.clear();
+
+	std::string atom_idx;
+	AngleBendingInteraction iaction;
+
+	while (readLine(line)) {
+		if (line.find("TOTAL ANGLE STRAIN ENERGY") != std::string::npos)
+			break;
+
+		std::istringstream iss(line);
+
+		while (true) {
+			if (!(iss >> iaction.termAtom1Name))
+				break;
+
+			if (!skipTokens(iss, 1))
+				break;
+	    
+			if (!(iss >> atom_idx))
+				break;
+	    
+			iaction.ctrAtomIdx = boost::lexical_cast<std::size_t>(atom_idx.substr(1, std::string::npos)) - 1;
+
+			if (!(iss >> iaction.termAtom2Name))
+				break;
+
+			if (!skipTokens(iss, 5))
+				break;
+	    
+			if (!(iss >> iaction.refAngle))
+				break;
+
+			if (!skipTokens(iss, 2))
+				break;
+
+			if (!(iss >> iaction.forceConst))
+				break;
+
+			iactions.push_back(iaction);
+		}
+	}
 
 	return !iactions.empty();
 }

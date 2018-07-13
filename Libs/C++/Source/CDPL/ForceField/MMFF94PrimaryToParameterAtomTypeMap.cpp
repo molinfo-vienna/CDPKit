@@ -91,6 +91,9 @@ unsigned int ForceField::MMFF94PrimaryToParameterAtomTypeMap::Entry::getAtomType
 
 const unsigned int* ForceField::MMFF94PrimaryToParameterAtomTypeMap::Entry::getParameterTypes() const
 {
+	if (!initialized)
+		return 0;
+
 	return &paramTypes[0];
 }
 

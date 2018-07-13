@@ -71,7 +71,7 @@ namespace CDPL
 
 			void setTopologicalDistanceFunction(const TopologicalAtomDistanceFunction& func); 
 
-			void setParameterTable(const MMFF94VanDerWaalsParameterTable::SharedPointer& table);
+			void setVanDerWaalsParameterTable(const MMFF94VanDerWaalsParameterTable::SharedPointer& table);
 
 			void analyze(const Chem::MolecularGraph& molgraph, MMFF94VanDerWaalsInteractionList& iactions);
 

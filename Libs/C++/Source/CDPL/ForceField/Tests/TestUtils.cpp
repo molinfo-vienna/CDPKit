@@ -47,3 +47,12 @@ void TestUtils::setupMMFF94TestSuiteMolecule(CDPL::Chem::Molecule& mol)
 			setFormalCharge(atom, getMOL2Charge(atom));
     }
 }
+
+std::size_t TestUtils::getAtomIndex(CDPL::Chem::Molecule& mol, const std::string& mol2_atom_name)
+{
+	for (std::size_t i = 0; i < mol.getNumAtoms(); i++)
+		if (getMOL2Name(mol.getAtom(i)) == mol2_atom_name)
+			return i;
+
+	return mol.getNumAtoms();
+}

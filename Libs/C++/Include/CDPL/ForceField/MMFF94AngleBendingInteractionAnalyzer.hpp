@@ -31,8 +31,19 @@
 #ifndef CDPL_FORCEFIELD_MMFF94ANGLEBENDINGINTERACTIONANALYZER_HPP
 #define CDPL_FORCEFIELD_MMFF94ANGLEBENDINGINTERACTIONANALYZER_HPP
 
+#include <vector>
+#include <cstddef>
+
 #include "CDPL/ForceField/APIPrefix.hpp"
 #include "CDPL/ForceField/MMFF94AngleBendingInteractionList.hpp"
+#include "CDPL/ForceField/MMFF94BondStretchingInteractionAnalyzer.hpp"
+#include "CDPL/ForceField/MMFF94PropertyFunctionWrappers.hpp"
+#include "CDPL/ForceField/InteractionFilterFunctionWrappers.hpp"
+#include "CDPL/ForceField/MMFF94BondStretchingParameterTable.hpp"
+#include "CDPL/ForceField/MMFF94BondStretchingRuleParameterTable.hpp"
+#include "CDPL/ForceField/MMFF94AngleBendingParameterTable.hpp"
+#include "CDPL/ForceField/MMFF94AtomTypePropertyTable.hpp"
+#include "CDPL/ForceField/MMFF94PrimaryToParameterAtomTypeMap.hpp"
 
 
 namespace CDPL 
@@ -42,6 +53,8 @@ namespace CDPL
 	{
 
 		class MolecularGraph;
+		class Atom;
+		class Bond;
 	}
 
     namespace ForceField 
@@ -61,10 +74,71 @@ namespace CDPL
 			MMFF94AngleBendingInteractionAnalyzer(const Chem::MolecularGraph& molgraph, 
 												  MMFF94AngleBendingInteractionList& iactions);
 
+			void setFilterFunction(const InteractionFilterFunction3& func); 
+
+			void setAtomTypeFunction(const MMFF94NumericAtomTypeFunction& func); 
+
+			void setBondTypeIndexFunction(const MMFF94BondTypeIndexFunction& func); 
+
+			void setAromaticRingSetFunction(const MMFF94AromaticRingSetFunction& func);
+
+			void setBondStretchingParameterTable(const MMFF94BondStretchingParameterTable::SharedPointer& table);
+
+			void setBondStretchingRuleParameterTable(const MMFF94BondStretchingRuleParameterTable::SharedPointer& table);
+
+			void setAngleBendingParameterTable(const MMFF94AngleBendingParameterTable::SharedPointer& table);
+
+			void setAtomTypePropertyTable(const MMFF94AtomTypePropertyTable::SharedPointer& table);
+
+			void setParameterAtomTypeMap(const MMFF94PrimaryToParameterAtomTypeMap::SharedPointer& map);
+
 			void analyze(const Chem::MolecularGraph& molgraph, MMFF94AngleBendingInteractionList& iactions);
 
+			void getParameters(const Chem::MolecularGraph& molgraph, const Chem::Atom& term_atom1, const Chem::Atom& ctr_atom, 
+							   const Chem::Atom& term_atom2, const Chem::Bond& term_atom1_bnd, const Chem::Bond& term_atom2_bnd,
+							   bool& linear, double& force_const, double& ref_angle) const;
+
 		  private:
-		
+			std::size_t getSizeOfContaining3Or4Ring(const Chem::MolecularGraph& molgraph, const Chem::Atom& term_atom1, 
+													const Chem::Atom& ctr_atom, const Chem::Atom& term_atom2) const;
+
+			/**
+			 * \brief Returns the angle type index. 
+			 *
+			 * The angle-bending parameters employ angle type indices ATIJK ranging between 0 and 8. 
+			 * Their meanings are as defined below:
+			 * 
+			 * ATIJK Structural significance
+			 * ---------------------------------------------------------------------------
+			 * 0 The angle i-j-k is a "normal" bond angle
+			 * 1 Either bond i-j or bond j-k has a bond type of 1
+			 * 2 Both i-j and j-k have bond types of 1; the sum is 2
+			 * 3 The angle occurs in a three-membered ring
+			 * 4 The angle occurs in a four-membered ring 
+			 * 5 Is in a three-membered ring and the sum of the bond types is 1
+			 * 6 Is in a three-membered ring and the sum of the bond types is 2
+			 * 7 Is in a four-membered ring and the sum of the bond types is 1
+			 * 8 Is in a four-membered ring and the sum of the bond types is 2
+			 * 
+			 * \param bond1 The first bond defining the angle.
+			 * \param bond2 The second bond defining the angle.
+			 * \param r_size The size of the ring the two bonds are a member of.
+			 * \return The angle type index.
+			 */
+			unsigned int getAngleTypeIndex(const Chem::Bond& bond1, const Chem::Bond& bond2, std::size_t r_size) const;
+
+			typedef std::vector<const Chem::Atom*> AtomList;
+			typedef std::vector<const Chem::Bond*> BondList;
+
+			InteractionFilterFunction3                            filterFunc;
+			MMFF94NumericAtomTypeFunction                         atomTypeFunc;	
+			MMFF94BondTypeIndexFunction                           bondTypeIdxFunc;	
+			MMFF94AngleBendingParameterTable::SharedPointer       paramTable;
+			MMFF94AtomTypePropertyTable::SharedPointer            typePropTable;
+			MMFF94PrimaryToParameterAtomTypeMap::SharedPointer    paramTypeMap;
+			MMFF94BondStretchingInteractionAnalyzer               bsAnalyzer;
+			AtomList                                              nbrAtoms;
+			BondList                                              nbrBonds;
 		};			
     
 		/**

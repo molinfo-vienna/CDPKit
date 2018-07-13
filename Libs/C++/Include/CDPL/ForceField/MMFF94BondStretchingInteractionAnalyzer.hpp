@@ -75,13 +75,16 @@ namespace CDPL
 
 			 void setAromaticRingSetFunction(const MMFF94AromaticRingSetFunction& func);
 
-			 void setParameterTable(const MMFF94BondStretchingParameterTable::SharedPointer& table);
+			 void setBondStretchingParameterTable(const MMFF94BondStretchingParameterTable::SharedPointer& table);
 
-			 void setRuleParameterTable(const MMFF94BondStretchingRuleParameterTable::SharedPointer& table);
+			 void setBondStretchingRuleParameterTable(const MMFF94BondStretchingRuleParameterTable::SharedPointer& table);
 
 			 void setAtomTypePropertyTable(const MMFF94AtomTypePropertyTable::SharedPointer& table);
 
 			 void analyze(const Chem::MolecularGraph& molgraph, MMFF94BondStretchingInteractionList& iactions);
+
+			 void getParameters(const Chem::MolecularGraph& molgraph, const Chem::Bond& bond, 
+								double& force_const, double& ref_length) const;
 
 		  private:
 			 typedef MMFF94AtomTypePropertyTable::Entry AtomTypePropEntry;

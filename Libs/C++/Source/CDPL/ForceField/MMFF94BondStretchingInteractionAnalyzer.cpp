@@ -229,12 +229,12 @@ void ForceField::MMFF94BondStretchingInteractionAnalyzer::setAromaticRingSetFunc
 	aromRingSetFunc = func;
 }
 
-void ForceField::MMFF94BondStretchingInteractionAnalyzer::setParameterTable(const MMFF94BondStretchingParameterTable::SharedPointer& table)
+void ForceField::MMFF94BondStretchingInteractionAnalyzer::setBondStretchingParameterTable(const MMFF94BondStretchingParameterTable::SharedPointer& table)
 {
 	paramTable = table;
 }
 
-void ForceField::MMFF94BondStretchingInteractionAnalyzer::setRuleParameterTable(const MMFF94BondStretchingRuleParameterTable::SharedPointer& table)
+void ForceField::MMFF94BondStretchingInteractionAnalyzer::setBondStretchingRuleParameterTable(const MMFF94BondStretchingRuleParameterTable::SharedPointer& table)
 {
 	ruleParamTable = table;
 }
@@ -248,9 +248,6 @@ void ForceField::MMFF94BondStretchingInteractionAnalyzer::analyze(const Chem::Mo
 																  MMFF94BondStretchingInteractionList& iactions)
 {
 	using namespace Chem;
-
-	typedef MMFF94BondStretchingParameterTable::Entry ParamEntry;
-	typedef MMFF94BondStretchingRuleParameterTable::Entry RuleParamEntry;
 
 	for (MolecularGraph::ConstBondIterator it = molgraph.getBondsBegin(), end = molgraph.getBondsEnd(); it != end; ++it) {
 		const Bond& bond = *it;
@@ -266,46 +263,57 @@ void ForceField::MMFF94BondStretchingInteractionAnalyzer::analyze(const Chem::Mo
 
 		if (filterFunc && !filterFunc(atom1, atom2))
 			continue;
-
-		unsigned int bond_type_idx = bondTypeIdxFunc(bond);
-		unsigned int atom1_type = atomTypeFunc(atom1);
-		unsigned int atom2_type = atomTypeFunc(atom2);
-
-		std::size_t atom1_idx = molgraph.getAtomIndex(atom1);
-		std::size_t atom2_idx = molgraph.getAtomIndex(atom2);
-
-		const ParamEntry& param_entry = paramTable->getEntry(bond_type_idx, atom1_type, atom2_type);
-
-		if (param_entry) {
-			iactions.addElement(MMFF94BondStretchingInteraction(atom1_idx, atom2_idx, param_entry.getForceConstant(), param_entry.getReferenceLength()));
-			continue;
-		}
-
-		// Empirical rule fallback
-
-		const AtomTypePropEntry& type1_prop_entry = typePropTable->getEntry(atom1_type);
 	
-		if (!type1_prop_entry)
-			throw Base::ItemNotFound("MMFF94ChargeCalculator: could not find MMFF94 atom type properties for atom #" + 
-									 boost::lexical_cast<std::string>(atom1_idx));
+		double ref_length = 0.0;
+		double force_const = 0.0;
 
-		const AtomTypePropEntry& type2_prop_entry = typePropTable->getEntry(atom2_type);
+		getParameters(molgraph, bond, force_const, ref_length);
 	
-		if (!type2_prop_entry)
-			throw Base::ItemNotFound("MMFF94ChargeCalculator: could not find MMFF94 atom type properties for atom #" + 
-									 boost::lexical_cast<std::string>(atom2_idx));
-
-		const RuleParamEntry& rule_param_entry = ruleParamTable->getEntry(type1_prop_entry.getAtomicNumber(), type2_prop_entry.getAtomicNumber());
-
-		if (!rule_param_entry)
-			throw Base::ItemNotFound("MMMFF94BondStretchingInteractionAnalyzer: could not find MMFF94 bond stretching rule parameters for bond between atoms #" + 
-									 boost::lexical_cast<std::string>(atom1_idx) + " and #" + boost::lexical_cast<std::string>(atom2_idx));
-
-		double r0IJ = calcReferenceBondLength(molgraph, bond, type1_prop_entry, type2_prop_entry);	
-		double kbIJ = rule_param_entry.getForceConstant() * std::pow(rule_param_entry.getReferenceLength() / r0IJ, 6.0);
-
-		iactions.addElement(MMFF94BondStretchingInteraction(atom1_idx, atom2_idx, kbIJ, r0IJ));
+		iactions.addElement(MMFF94BondStretchingInteraction(molgraph.getAtomIndex(atom1), molgraph.getAtomIndex(atom2), force_const, ref_length));
 	}
+}
+
+void ForceField::MMFF94BondStretchingInteractionAnalyzer::getParameters(const Chem::MolecularGraph& molgraph, const Chem::Bond& bond, 
+																		double& force_const, double& ref_length) const
+{
+	typedef MMFF94BondStretchingParameterTable::Entry ParamEntry;
+	typedef MMFF94BondStretchingRuleParameterTable::Entry RuleParamEntry;
+
+	unsigned int bond_type_idx = bondTypeIdxFunc(bond);
+	unsigned int atom1_type = atomTypeFunc(bond.getBegin());
+	unsigned int atom2_type = atomTypeFunc(bond.getEnd());
+
+	const ParamEntry& param_entry = paramTable->getEntry(bond_type_idx, atom1_type, atom2_type);
+
+	if (param_entry) {
+		force_const = param_entry.getForceConstant();
+		ref_length = param_entry.getReferenceLength();
+		return;
+	}
+
+	// Empirical rule fallback
+
+	const AtomTypePropEntry& type1_prop_entry = typePropTable->getEntry(atom1_type);
+	
+	if (!type1_prop_entry)
+		throw Base::ItemNotFound("MMFF94BondStretchingInteractionAnalyzer: could not find MMFF94 atom type properties for atom #" + 
+								 boost::lexical_cast<std::string>(molgraph.getAtomIndex(bond.getBegin())));
+
+	const AtomTypePropEntry& type2_prop_entry = typePropTable->getEntry(atom2_type);
+	
+	if (!type2_prop_entry)
+		throw Base::ItemNotFound("MMFF94BondStretchingInteractionAnalyzer: could not find MMFF94 atom type properties for atom #" + 
+								 boost::lexical_cast<std::string>(molgraph.getAtomIndex(bond.getEnd())));
+
+	const RuleParamEntry& rule_param_entry = ruleParamTable->getEntry(type1_prop_entry.getAtomicNumber(), type2_prop_entry.getAtomicNumber());
+
+	if (!rule_param_entry)
+		throw Base::ItemNotFound("MMMFF94BondStretchingInteractionAnalyzer: could not find MMFF94 bond stretching rule parameters for interaction #" + 
+								 boost::lexical_cast<std::string>(molgraph.getAtomIndex(bond.getBegin())) + "-#" + 
+								 boost::lexical_cast<std::string>(molgraph.getAtomIndex(bond.getEnd())));
+
+	ref_length = calcReferenceBondLength(molgraph, bond, type1_prop_entry, type2_prop_entry);	
+	force_const = rule_param_entry.getForceConstant() * std::pow(rule_param_entry.getReferenceLength() / ref_length, 6.0);
 }
 
 double ForceField::MMFF94BondStretchingInteractionAnalyzer::calcReferenceBondLength(const Chem::MolecularGraph& molgraph, const Chem::Bond& bond, 

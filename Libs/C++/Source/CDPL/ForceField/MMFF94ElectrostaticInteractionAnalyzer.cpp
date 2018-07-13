@@ -82,7 +82,7 @@ void ForceField::MMFF94ElectrostaticInteractionAnalyzer::analyze(const Chem::Mol
 {
 	using namespace Chem;
 
-	for (std::size_t i = 0, num_atoms = molgraph.getNumAtoms(); i < num_atoms; ) {
+	for (std::size_t i = 0, num_atoms = molgraph.getNumAtoms(); i < num_atoms; i++) {
 		const Atom& atom1 = molgraph.getAtom(i);
 
 		for (std::size_t j = i + 1; j < num_atoms; j++) {
