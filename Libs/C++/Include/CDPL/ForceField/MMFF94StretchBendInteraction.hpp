@@ -52,10 +52,10 @@ namespace CDPL
 
 		  public:
 			MMFF94StretchBendInteraction(std::size_t term_atom1_idx, std::size_t ctr_atom_idx, std::size_t term_atom2_idx,
-										 double ref_angle, double ref_length1, double ref_length2, double ijk_force_const,
-										 double kji_force_const):
+										 unsigned int sb_type_idx, double ref_angle, double ref_length1, double ref_length2, 
+										 double ijk_force_const, double kji_force_const):
 				termAtom1Idx(term_atom1_idx), ctrAtomIdx(ctr_atom_idx), termAtom2Idx(term_atom2_idx),
-				refAngle(ref_angle), refLength1(ref_length1), refLength2(ref_length2), 
+				sbTypeIdx(sb_type_idx), refAngle(ref_angle), refLength1(ref_length1), refLength2(ref_length2), 
 				ijkForceConst(ijk_force_const), kjiForceConst(kji_force_const)  {}
 
 			std::size_t getTerminalAtom1Index() const {
@@ -68,6 +68,10 @@ namespace CDPL
 
 			std::size_t getTerminalAtom2Index() const {
 				return termAtom2Idx;
+			}
+
+			unsigned int getStretchBendTypeIndex() const {
+				return sbTypeIdx;
 			}
 
 			double getIJKForceConstant() const {
@@ -91,14 +95,15 @@ namespace CDPL
 			}
 
 		  private:
-			std::size_t termAtom1Idx;
-			std::size_t ctrAtomIdx;
-			std::size_t termAtom2Idx;
-			double      refAngle;
-			double      refLength1;
-			double      refLength2;
-			double      ijkForceConst;
-			double      kjiForceConst;
+			std::size_t  termAtom1Idx;
+			std::size_t  ctrAtomIdx;
+			std::size_t  termAtom2Idx;
+			unsigned int sbTypeIdx;
+			double       refAngle;
+			double       refLength1;
+			double       refLength2;
+			double       ijkForceConst;
+			double       kjiForceConst;
 		};			
     
 		/**

@@ -31,21 +31,30 @@
 #ifndef CDPL_FORCEFIELD_MMFF94TORSIONINTERACTIONANALYZER_HPP
 #define CDPL_FORCEFIELD_MMFF94TORSIONINTERACTIONANALYZER_HPP
 
+#include <vector>
+
 #include "CDPL/ForceField/APIPrefix.hpp"
 #include "CDPL/ForceField/MMFF94TorsionInteractionList.hpp"
+#include "CDPL/ForceField/MMFF94PropertyFunctionWrappers.hpp"
+#include "CDPL/ForceField/InteractionFilterFunctionWrappers.hpp"
+#include "CDPL/ForceField/MMFF94TorsionParameterTable.hpp"
+#include "CDPL/ForceField/MMFF94AtomTypePropertyTable.hpp"
+#include "CDPL/ForceField/MMFF94PrimaryToParameterAtomTypeMap.hpp"
 
 
 namespace CDPL 
 {
 
+	namespace Chem
+	{
+
+		class MolecularGraph;
+		class Atom;
+		class Bond;
+	}
+
     namespace ForceField 
     {
-
-		namespace Chem
-		{
-
-			class MolecularGraph;
-		}
 
 		/**
 		 * \addtogroup CDPL_FORCEFIELD_INTERACTION_ANALYSIS
@@ -61,10 +70,43 @@ namespace CDPL
 			MMFF94TorsionInteractionAnalyzer(const Chem::MolecularGraph& molgraph, 
 											 MMFF94TorsionInteractionList& iactions);
 
+			void setFilterFunction(const InteractionFilterFunction4& func); 
+
+			void setAtomTypeFunction(const MMFF94NumericAtomTypeFunction& func); 
+
+			void setBondTypeIndexFunction(const MMFF94BondTypeIndexFunction& func); 
+
+			void setAromaticRingSetFunction(const MMFF94AromaticRingSetFunction& func);
+
+			void setTorsionParameterTable(const MMFF94TorsionParameterTable::SharedPointer& table);
+
+			void setAtomTypePropertyTable(const MMFF94AtomTypePropertyTable::SharedPointer& table);
+
+			void setParameterAtomTypeMap(const MMFF94PrimaryToParameterAtomTypeMap::SharedPointer& map);
+
 			void analyze(const Chem::MolecularGraph& molgraph, MMFF94TorsionInteractionList& iactions);
 
 		  private:
-		
+			typedef std::vector<const Chem::Atom*> AtomList;
+			typedef std::vector<const Chem::Bond*> BondList;
+
+			unsigned int getTorsionTypeIndex(const Chem::MolecularGraph& molgraph, const Chem::Atom& term_atom1, const Chem::Atom& ctr_atom1, 
+											 const Chem::Atom& ctr_atom2, const Chem::Atom& term_atom2, const Chem::Bond& ctr_bond,
+											 unsigned int term_atom1_type, unsigned int ctr_atom1_type, unsigned int ctr_atom2_type, 
+											 unsigned int term_atom2_type, unsigned int term_bond1_type_idx, unsigned int ctr_bond_type_idx,
+											 unsigned int term_bond2_type_idx) const;
+
+			InteractionFilterFunction4                          filterFunc;
+			MMFF94NumericAtomTypeFunction                       atomTypeFunc;	
+			MMFF94BondTypeIndexFunction                         bondTypeIdxFunc;	
+			MMFF94AromaticRingSetFunction                       aromRingSetFunc;
+			MMFF94TorsionParameterTable::SharedPointer          paramTable;
+			MMFF94AtomTypePropertyTable::SharedPointer          typePropTable;
+			MMFF94PrimaryToParameterAtomTypeMap::SharedPointer  paramTypeMap;
+			AtomList                                            nbrAtoms1;
+			AtomList                                            nbrAtoms2;
+			BondList                                            nbrBonds1;
+			BondList                                            nbrBonds2;
 		};			
     
 		/**

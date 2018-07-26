@@ -84,7 +84,7 @@ namespace CDPL
 			 void analyze(const Chem::MolecularGraph& molgraph, MMFF94BondStretchingInteractionList& iactions);
 
 			 void getParameters(const Chem::MolecularGraph& molgraph, const Chem::Bond& bond, 
-								double& force_const, double& ref_length) const;
+								unsigned int& bond_type_idx, double& force_const, double& ref_length) const;
 
 		  private:
 			 typedef MMFF94AtomTypePropertyTable::Entry AtomTypePropEntry;

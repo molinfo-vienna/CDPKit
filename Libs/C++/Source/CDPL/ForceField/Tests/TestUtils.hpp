@@ -44,9 +44,7 @@ namespace CDPL
 namespace TestUtils
 {
 
-    void setupMMFF94TestSuiteMolecule(CDPL::Chem::Molecule& mol);
-
-	std::size_t getAtomIndex(CDPL::Chem::Molecule& mol, const std::string& mol2_atom_name);
+	std::size_t getAtomIndex(const CDPL::Chem::Molecule& mol, const std::string& mol2_atom_name);
 }
 
 #endif // CDPL_FORCEFIELD_TEST_TESTUTILS_HPP

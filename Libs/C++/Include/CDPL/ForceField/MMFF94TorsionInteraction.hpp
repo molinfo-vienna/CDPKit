@@ -52,9 +52,11 @@ namespace CDPL
 
 		  public:
 			MMFF94TorsionInteraction(std::size_t term_atom1_idx, std::size_t ctr_atom1_idx, std::size_t ctr_atom2_idx, 
-									 std::size_t term_atom2_idx, double tor_param1, double tor_param2, double tor_param3):
+									 std::size_t term_atom2_idx, unsigned int tor_type_idx, double tor_param1, 
+									 double tor_param2, double tor_param3):
 				termAtom1Idx(term_atom1_idx), ctrAtom1Idx(ctr_atom1_idx), ctrAtom2Idx(ctr_atom2_idx), 
-				termAtom2Idx(term_atom2_idx), torParam1(tor_param1), torParam2(tor_param2), torParam3(tor_param3) {}
+				termAtom2Idx(term_atom2_idx), torTypeIdx(tor_type_idx), torParam1(tor_param1), torParam2(tor_param2), 
+				torParam3(tor_param3) {}
 
 			std::size_t getTerminalAtom1Index() const {
 				return termAtom1Idx;
@@ -72,6 +74,10 @@ namespace CDPL
 				return termAtom2Idx;
 			}
 
+			unsigned int getTorsionTypeIndex() const {
+				return torTypeIdx;
+			}
+
 			double getTorsionParameter1() const {
 				return torParam1;
 			}
@@ -85,13 +91,14 @@ namespace CDPL
 			}
 
 		  private:
-			std::size_t termAtom1Idx;
-			std::size_t ctrAtom1Idx;
-			std::size_t ctrAtom2Idx;
-			std::size_t termAtom2Idx;
-			double      torParam1;
-			double      torParam2;
-			double      torParam3;
+			std::size_t  termAtom1Idx;
+			std::size_t  ctrAtom1Idx;
+			std::size_t  ctrAtom2Idx;
+			std::size_t  termAtom2Idx;
+			unsigned int torTypeIdx;
+			double       torParam1;
+			double       torParam2;
+			double       torParam3;
 		};			
     
 		/**

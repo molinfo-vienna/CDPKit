@@ -35,7 +35,7 @@
 #include <boost/unordered_map.hpp>
 
 
-namespace TestUtils
+namespace MMFF94TestUtils
 {
 
     class OptimolLogReader
@@ -45,20 +45,53 @@ namespace TestUtils
 		struct BondStretchingInteraction
 		{
 
-			std::size_t atom1Idx;
-			std::size_t atom2Idx;
-			double      forceConst;
-			double      refLength;
+			std::size_t  atom1Idx;
+			std::size_t  atom2Idx;
+			unsigned int ffClass;
+			double       forceConst;
+			double       refLength;
 		};
 
 		struct AngleBendingInteraction
 		{
 
-			std::string termAtom1Name;
-			std::size_t ctrAtomIdx;
-			std::string termAtom2Name;
-			double      forceConst;
-			double      refAngle;
+			std::string  termAtom1Name;
+			std::size_t  ctrAtomIdx;
+			std::string  termAtom2Name;
+			unsigned int ffClass;
+			double       forceConst;
+			double       refAngle;
+		};
+
+		struct StretchBendInteraction
+		{
+
+			std::string  termAtom1Name;
+			std::size_t  ctrAtomIdx;
+			std::string  termAtom2Name;
+			unsigned int ffClass;
+			double       forceConst;
+		};
+	
+		struct OutOfPlaneBendingInteraction
+		{
+
+			std::string  termAtom1Name;
+			std::string  ctrAtomName;
+			std::string  termAtom2Name;
+			std::size_t  oopAtomIdx;
+			double       forceConst;
+		};
+
+		struct TorsionInteraction
+		{
+
+			std::string  termAtom1Name;
+			std::size_t  ctrAtom1Idx;
+			std::size_t  ctrAtom2Idx;
+			std::string  termAtom2Name;
+			unsigned int ffClass;
+			double       torParams[3];
 		};
 
 		typedef std::vector<std::string> SymbolicAtomTypeArray;
@@ -66,6 +99,9 @@ namespace TestUtils
 		typedef std::vector<double> AtomChargeArray;
 		typedef std::vector<BondStretchingInteraction> BondStretchingInteractionList;
 		typedef std::vector<AngleBendingInteraction> AngleBendingInteractionList;
+		typedef std::vector<StretchBendInteraction> StretchBendInteractionList;
+		typedef std::vector<OutOfPlaneBendingInteraction> OutOfPlaneBendingInteractionList;
+		typedef std::vector<TorsionInteraction> TorsionInteractionList;
 
 		OptimolLogReader(const std::string& log_file);
 
@@ -75,6 +111,9 @@ namespace TestUtils
 		bool getFormalAtomCharges(const std::string& mol_name, AtomChargeArray& charges);
 		bool getBondStretchingInteractions(const std::string& mol_name, BondStretchingInteractionList& iactions);
 		bool getAngleBendingInteractions(const std::string& mol_name, AngleBendingInteractionList& iactions);
+		bool getStretchBendInteractions(const std::string& mol_name, StretchBendInteractionList& iactions);
+		bool getOutOfPlaneBendingInteractions(const std::string& mol_name, OutOfPlaneBendingInteractionList& iactions);
+		bool getTorsionInteractions(const std::string& mol_name, TorsionInteractionList& iactions);
 
     private:
 		void buildIndex();

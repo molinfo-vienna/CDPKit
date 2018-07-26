@@ -50,7 +50,10 @@ Chem::FragmentList::SharedPointer Chem::perceiveRings(MolecularGraph& molgraph, 
 			return prev_rings.getData<FragmentList::SharedPointer>();
 	}
 
-	FragmentList::SharedPointer rings_ptr(new CompleteRingSet(molgraph));
+	CompleteRingSet rset(molgraph);
+	FragmentList::SharedPointer rings_ptr(new FragmentList());
+
+	rings_ptr->swap(rset);
 
 	molgraph.setProperty(MolecularGraphProperty::RINGS, rings_ptr);
 

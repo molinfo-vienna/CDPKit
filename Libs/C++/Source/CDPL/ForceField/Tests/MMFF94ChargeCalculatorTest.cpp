@@ -24,50 +24,36 @@
  */
 
 
-#include <cstdlib>
+#include <cstddef>
 #include <cmath>
 
 #include <boost/test/auto_unit_test.hpp>
 
 #include "CDPL/ForceField/MMFF94ChargeCalculator.hpp"
-#include "CDPL/ForceField/MolecularGraphFunctions.hpp"
-#include "CDPL/Chem/BasicMolecule.hpp"
-#include "CDPL/Chem/MOL2MoleculeReader.hpp"
 #include "CDPL/Chem/MolecularGraphFunctions.hpp"
 #include "CDPL/Chem/AtomFunctions.hpp"
-#include "CDPL/Util/FileDataReader.hpp"
 
-#include "OptimolLogReader.hpp"
-#include "TestUtils.hpp"
+#include "MMFF94TestData.hpp"
 
 
 BOOST_AUTO_TEST_CASE(MMFF94ChargeCalculatorTest)
 {
 	using namespace CDPL;
 
-	Chem::BasicMolecule mol;
-	Util::FileDataReader<Chem::MOL2MoleculeReader> mol_reader(std::getenv("CDPKIT_TEST_DATA_DIR") + std::string("/MMFF94/MMFF94_hypervalent.mol2"));
-
-	TestUtils::OptimolLogReader log_reader(std::getenv("CDPKIT_TEST_DATA_DIR") + std::string("/MMFF94/MMFF94_opti.log"));
-	TestUtils::OptimolLogReader::AtomChargeArray part_charges;
-	TestUtils::OptimolLogReader::AtomChargeArray form_charges;
+	MMFF94TestUtils::OptimolLogReader::AtomChargeArray part_charges;
+	MMFF94TestUtils::OptimolLogReader::AtomChargeArray form_charges;
 
 	ForceField::MMFF94ChargeCalculator charge_calc;
 	Util::DArray calc_charges;
-	std::size_t mol_idx = 0;
 
-	while (mol_reader.read(mol)) {
-		TestUtils::setupMMFF94TestSuiteMolecule(mol);
-		ForceField::perceiveMMFF94AromaticRings(mol, false);
-		ForceField::assignMMFF94AtomTypes(mol, true, false);
-		ForceField::assignMMFF94BondTypeIndices(mol, false);
-
+	for (std::size_t mol_idx = 0; mol_idx <	MMFF94TestData::DYN_TEST_MOLECULES.size(); mol_idx++) {
+		const Chem::Molecule& mol =	*MMFF94TestData::DYN_TEST_MOLECULES[mol_idx];
 		const std::string& mol_name = getName(mol);
 
-		BOOST_CHECK(log_reader.getPartialAtomCharges(mol_name, part_charges));
+		BOOST_CHECK(MMFF94TestData::DYN_LOG_READER.getPartialAtomCharges(mol_name, part_charges));
 		BOOST_CHECK_EQUAL(part_charges.size(), mol.getNumAtoms());
 
-		BOOST_CHECK(log_reader.getFormalAtomCharges(mol_name, form_charges));
+		BOOST_CHECK(MMFF94TestData::DYN_LOG_READER.getFormalAtomCharges(mol_name, form_charges));
 		BOOST_CHECK_EQUAL(form_charges.size(), mol.getNumAtoms());
 
 		charge_calc.calculate(mol, calc_charges);
@@ -87,8 +73,5 @@ BOOST_AUTO_TEST_CASE(MMFF94ChargeCalculatorTest)
 			BOOST_CHECK_MESSAGE(std::abs(calc_charge - correct_charge) <= 0.0006, "Partial charge mismatch for atom #" << i << "(" << getMOL2Name(mol.getAtom(i)) <<
 								") of molecule #" << mol_idx << " (" << mol_name << "): " << calc_charge << " != " << correct_charge);
 		}
-
-		mol_idx++;
-		mol.clear();
 	}
 }

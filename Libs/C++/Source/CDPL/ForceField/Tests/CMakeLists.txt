@@ -3,10 +3,15 @@ INCLUDE_DIRECTORIES("${CMAKE_CURRENT_SOURCE_DIR}" "${CDPL_SOURCE_DIR}")
 SET(test-suite_SRCS
     Main.cpp
     ConvenienceHeaderTest.cpp
+
+    MMFF94TestData.cpp
     MMFF94AtomTyperTest.cpp
     MMFF94ChargeCalculatorTest.cpp
     MMFF94BondStretchingInteractionAnalyzerTest.cpp
     MMFF94AngleBendingInteractionAnalyzerTest.cpp
+    MMFF94StretchBendInteractionAnalyzerTest.cpp
+    MMFF94OutOfPlaneBendingInteractionAnalyzerTest.cpp
+    MMFF94TorsionInteractionAnalyzerTest.cpp
 
     OptimolLogReader.cpp
     TestUtils.cpp

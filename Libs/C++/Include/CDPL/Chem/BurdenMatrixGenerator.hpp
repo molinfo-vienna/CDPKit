@@ -47,7 +47,7 @@ namespace CDPL
 		class Atom;
 
 		/**
-		 * \addtogroup CDPL_CHEM_BCUT_DESCRIPTORS
+		 * \addtogroup CDPL_CHEM_DESCRIPTORS
 		 * @{
 		 */
 

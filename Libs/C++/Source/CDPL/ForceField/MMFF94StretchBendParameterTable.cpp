@@ -68,7 +68,7 @@ namespace
 	{
 		if (term_atom1_type < term_atom2_type)
 			return ((term_atom1_type << 24) + (ctr_atom_type << 16) + (term_atom2_type << 8) + sb_type_idx);
-
+		
 		return ((term_atom2_type << 24) + (ctr_atom_type << 16) + (term_atom1_type << 8) + sb_type_idx);
 	}
 
@@ -85,9 +85,9 @@ ForceField::MMFF94StretchBendParameterTable::Entry::Entry():
 {}
 
 ForceField::MMFF94StretchBendParameterTable::Entry::Entry(unsigned int sb_type_idx, unsigned int term_atom1_type, unsigned int ctr_atom_type, 
-														  unsigned int term_atom2_type, double force_const, double kji_force_const):
+														  unsigned int term_atom2_type, double ijk_force_const, double kji_force_const):
 	sbTypeIdx(sb_type_idx), termAtom1Type(term_atom1_type), ctrAtomType(ctr_atom_type), termAtom2Type(term_atom2_type),
-	ijkForceConst(force_const), kjiForceConst(kji_force_const), initialized(true)
+	ijkForceConst(ijk_force_const), kjiForceConst(kji_force_const), initialized(true)
 {}
 
 unsigned int ForceField::MMFF94StretchBendParameterTable::Entry::getStretchBendTypeIndex() const

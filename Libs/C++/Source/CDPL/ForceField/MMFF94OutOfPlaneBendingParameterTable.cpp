@@ -28,6 +28,7 @@
 
 #include <cstring>
 #include <sstream>
+#include <algorithm>
 
 #include "CDPL/Config.hpp"
 
@@ -68,10 +69,11 @@ namespace
 
 	Base::uint32 lookupKey(Base::uint32 term_atom1_type, Base::uint32 ctr_atom_type, Base::uint32 term_atom2_type, Base::uint32 oop_atom_type)
 	{
-		if (term_atom1_type < term_atom2_type)
-			return ((term_atom1_type << 24) + (ctr_atom_type << 16) + (term_atom2_type << 8) + oop_atom_type);
+		unsigned int nbr_types[] = { term_atom1_type, term_atom2_type, oop_atom_type };
 
-		return ((term_atom2_type << 24) + (ctr_atom_type << 16) + (term_atom1_type << 8) + oop_atom_type);
+		std::sort(nbr_types, nbr_types + 3); 
+
+		return ((nbr_types[0] << 24) + (nbr_types[1] << 16) + (nbr_types[2] << 8) + ctr_atom_type);
 	}
 
 	const ForceField::MMFF94OutOfPlaneBendingParameterTable::Entry NOT_FOUND;
@@ -200,7 +202,7 @@ void ForceField::MMFF94OutOfPlaneBendingParameterTable::load(std::istream& is)
 	unsigned int oop_atom_type;
 	double force_const;
 
-    while (readMMFF94DataLine(is, line, "MMFF94OutOfPlaneBendingParameterTable: error while reading out of plane bending parameter entry")) {
+    while (readMMFF94DataLine(is, line, "MMFF94OutOfPlaneBendingParameterTable: error while reading out-of-plane bending parameter entry")) {
 		std::istringstream line_iss(line);
 
 		if (!(line_iss >> term_atom1_type))
@@ -213,7 +215,7 @@ void ForceField::MMFF94OutOfPlaneBendingParameterTable::load(std::istream& is)
 			throw Base::IOError("MMFF94OutOfPlaneBendingParameterTable: error while reading terminal atom 2 type");
 	
 		if (!(line_iss >> oop_atom_type))
-			throw Base::IOError("MMFF94OutOfPlaneBendingParameterTable: error while reading out of plane atom type");
+			throw Base::IOError("MMFF94OutOfPlaneBendingParameterTable: error while reading out-of-plane atom type");
 
 		if (!(line_iss >> force_const))
 			throw Base::IOError("MMFF94OutOfPlaneBendingParameterTable: error while reading force constant");

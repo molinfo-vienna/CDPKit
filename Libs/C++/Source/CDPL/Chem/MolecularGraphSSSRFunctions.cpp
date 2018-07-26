@@ -52,7 +52,10 @@ Chem::FragmentList::SharedPointer Chem::perceiveSSSR(MolecularGraph& molgraph, b
 			return prev_sssr.getData<FragmentList::SharedPointer>();
 	}
 
-	FragmentList::SharedPointer sssr_ptr(new SmallestSetOfSmallestRings(molgraph));
+	SmallestSetOfSmallestRings sssr(molgraph);
+	FragmentList::SharedPointer sssr_ptr(new FragmentList());
+
+	sssr_ptr->swap(sssr);
 
 	molgraph.setProperty(MolecularGraphProperty::SSSR, sssr_ptr);
 

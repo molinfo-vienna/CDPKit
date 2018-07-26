@@ -52,9 +52,9 @@ namespace CDPL
 
 		  public:
 			MMFF94AngleBendingInteraction(std::size_t term_atom1_idx, std::size_t ctr_atom_idx, std::size_t term_atom2_idx, 
-										  bool linear, double force_const, double ref_angle):
+										  unsigned int angle_type_idx, bool linear, double force_const, double ref_angle):
 				termAtom1Idx(term_atom1_idx), ctrAtomIdx(ctr_atom_idx), termAtom2Idx(term_atom2_idx),
-				linear(linear), forceConst(force_const), refAngle(ref_angle) {}
+				angleTypeIdx(angle_type_idx), linear(linear), forceConst(force_const), refAngle(ref_angle) {}
 
 			std::size_t getTerminalAtom1Index() const {
 				return termAtom1Idx;
@@ -66,6 +66,10 @@ namespace CDPL
 
 			std::size_t getTerminalAtom2Index() const {
 				return termAtom2Idx;
+			}
+
+			unsigned int getAngleTypeIndex() const {
+				return angleTypeIdx;
 			}
 
 			bool isLinearAngle() const {
@@ -81,12 +85,13 @@ namespace CDPL
 			}
 
 		  private:
-			std::size_t termAtom1Idx;
-			std::size_t ctrAtomIdx;
-			std::size_t termAtom2Idx;
-			bool        linear;
-			double      forceConst;
-			double      refAngle;
+			std::size_t  termAtom1Idx;
+			std::size_t  ctrAtomIdx;
+			std::size_t  termAtom2Idx;
+			unsigned int angleTypeIdx;
+			bool         linear;
+			double       forceConst;
+			double       refAngle;
 		};			
     
 		/**

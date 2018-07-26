@@ -85,9 +85,9 @@ ForceField::MMFF94DefaultStretchBendParameterTable::Entry::Entry():
 {}
 
 ForceField::MMFF94DefaultStretchBendParameterTable::Entry::Entry(unsigned int term_atom1_pte_row, unsigned int ctr_atom_pte_row, 
-																 unsigned int term_atom2_pte_row, double force_const, double kji_force_const):
+																 unsigned int term_atom2_pte_row, double ijk_force_const, double kji_force_const):
 	termAtom1PTERow(term_atom1_pte_row), ctrAtomPTERow(ctr_atom_pte_row), termAtom2PTERow(term_atom2_pte_row),
-	ijkForceConst(force_const), kjiForceConst(kji_force_const), initialized(true)
+	ijkForceConst(ijk_force_const), kjiForceConst(kji_force_const), initialized(true)
 {}
 
 unsigned int ForceField::MMFF94DefaultStretchBendParameterTable::Entry::getTerminalAtom1PTERow() const

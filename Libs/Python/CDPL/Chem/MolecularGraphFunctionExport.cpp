@@ -131,6 +131,7 @@ namespace
 	MAKE_FUNCTION_WRAPPER1(std::size_t, getHydrogenBondCount, CDPL::Chem::MolecularGraph&);
 	MAKE_FUNCTION_WRAPPER1(std::size_t, getChainBondCount, CDPL::Chem::MolecularGraph&);
 	MAKE_FUNCTION_WRAPPER1(std::size_t, getRotatableBondCount, CDPL::Chem::MolecularGraph&);
+	MAKE_FUNCTION_WRAPPER1(std::size_t, getComponentCount, CDPL::Chem::MolecularGraph&);
 	MAKE_FUNCTION_WRAPPER1(double, calcMass, CDPL::Chem::MolecularGraph&);
 	MAKE_FUNCTION_WRAPPER1(double, calcXLogP, CDPL::Chem::MolecularGraph&);
 	MAKE_FUNCTION_WRAPPER1(double, calcLogS, CDPL::Chem::MolecularGraph&);
@@ -373,6 +374,7 @@ void CDPLPythonChem::exportMolecularGraphFunctions()
 	python::def("getHydrogenBondCount", &getHydrogenBondCountWrapper1, python::arg("molgraph"));
 	python::def("getChainBondCount", &getChainBondCountWrapper1, python::arg("molgraph"));
 	python::def("getRotatableBondCount", &getRotatableBondCountWrapper1, python::arg("molgraph"));
+	python::def("getComponentCount", &getComponentCountWrapper1, python::arg("molgraph"));
 	python::def("calcMass", &calcMassWrapper1, python::arg("molgraph"));
 	python::def("calcMassComposition", &calcMassCompositionWrapper2, 
 				(python::arg("molgraph"), python::arg("comp")));

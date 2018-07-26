@@ -35,7 +35,7 @@
 
 
 using namespace CDPL;
-using namespace TestUtils;
+using namespace MMFF94TestUtils;
 
 
 OptimolLogReader::OptimolLogReader(const std::string& log_file): logIStream(log_file.c_str()) 
@@ -50,7 +50,10 @@ bool OptimolLogReader::getSymbolicAtomTypes(const std::string& mol_name, Symboli
 
     std::string line;
 
-    if (!skipToLine(line, "ATOM NAME SYMBOL"))
+	if (!skipToLine(line, "OPTIMOL-LIST>  # symb"))
+		return false;
+
+	if (!skipLines(1))
 		return false;
 
     sym_types.clear();
@@ -74,7 +77,7 @@ bool OptimolLogReader::getSymbolicAtomTypes(const std::string& mol_name, Symboli
 		}
     }
 
-    return !sym_types.empty();
+    return true;
 }
 
 bool OptimolLogReader::getNumericAtomTypes(const std::string& mol_name, NumericAtomTypeArray& num_types)
@@ -84,7 +87,10 @@ bool OptimolLogReader::getNumericAtomTypes(const std::string& mol_name, NumericA
 
     std::string line;
 
-    if (!skipToLine(line, "ATOM NAME  TYPE"))
+	if (!skipToLine(line, "OPTIMOL-LIST>  # ty"))
+		return false;
+
+	if (!skipLines(1))
 		return false;
 
     num_types.clear();
@@ -108,7 +114,7 @@ bool OptimolLogReader::getNumericAtomTypes(const std::string& mol_name, NumericA
 		}
     }
 
-    return !num_types.empty();
+    return true;
 }
 
 bool OptimolLogReader::getPartialAtomCharges(const std::string& mol_name, AtomChargeArray& charges)
@@ -118,7 +124,10 @@ bool OptimolLogReader::getPartialAtomCharges(const std::string& mol_name, AtomCh
 
     std::string line;
 
-    if (!skipToLine(line, "ATOM    CHARGE"))
+   if (!skipToLine(line, "OPTIMOL-LIST>  # char"))
+		return false;
+
+	if (!skipLines(1))
 		return false;
 
     charges.clear();
@@ -152,7 +161,10 @@ bool OptimolLogReader::getFormalAtomCharges(const std::string& mol_name, AtomCha
 
     std::string line;
 
-    if (!skipToLine(line, "ATOM   FCHARGE"))
+    if (!skipToLine(line, "OPTIMOL-LIST>  # fchar"))
+		return false;
+
+	if (!skipLines(1))
 		return false;
 
     charges.clear();
@@ -176,7 +188,7 @@ bool OptimolLogReader::getFormalAtomCharges(const std::string& mol_name, AtomCha
 		}
     }
 
-	return !charges.empty();
+	return true;
 }
 
 bool OptimolLogReader::getBondStretchingInteractions(const std::string& mol_name, BondStretchingInteractionList& iactions)
@@ -186,13 +198,22 @@ bool OptimolLogReader::getBondStretchingInteractions(const std::string& mol_name
 
     std::string line;
 
-    if (!skipToLine(line, "B O N D   S T R E T C H I N G"))
+	if (!skipToLine(line, "OPTIMOL-ANALYZE>  # bonds"))
+		return false;
+
+	if (!readLine(line))
+		return false;
+
+	iactions.clear();
+
+	if (line.find("TOTAL BOND STRAIN ENERGY") != std::string::npos)
+		return true;
+
+	if (line.find("B O N D   S T R E T C H I N G") == std::string::npos)
 		return false;
 
 	if (!skipLines(3))
 		return false;
-
-	iactions.clear();
 
 	std::string atom_idx;
 	BondStretchingInteraction iaction;
@@ -203,40 +224,44 @@ bool OptimolLogReader::getBondStretchingInteractions(const std::string& mol_name
 
 		std::istringstream iss(line);
 
-		while (true) {
-			if (!skipTokens(iss, 1))
-				break;
+		if (!skipTokens(iss, 1))
+			break;
 	    
-			if (!(iss >> atom_idx))
-				break;
+		if (!(iss >> atom_idx))
+			break;
 	    
-			iaction.atom1Idx = boost::lexical_cast<std::size_t>(atom_idx.substr(1, std::string::npos)) - 1;
+		iaction.atom1Idx = boost::lexical_cast<std::size_t>(atom_idx.substr(1, std::string::npos)) - 1;
 	
-			if (!skipTokens(iss, 1))
-				break;
+		if (!skipTokens(iss, 1))
+			break;
 	    
-			if (!(iss >> atom_idx))
-				break;
+		if (!(iss >> atom_idx))
+			break;
 	    
-			iaction.atom2Idx = boost::lexical_cast<std::size_t>(atom_idx.substr(1, std::string::npos)) - 1;
+		iaction.atom2Idx = boost::lexical_cast<std::size_t>(atom_idx.substr(1, std::string::npos)) - 1;
 	
-			if (!skipTokens(iss, 4))
-				break;
-	    
-			if (!(iss >> iaction.refLength))
-				break;
+		if (!skipTokens(iss, 2))
+			break;
 
-			if (!skipTokens(iss, 2))
-				break;
+		if (!(iss >> iaction.ffClass))
+			break;
 
-			if (!(iss >> iaction.forceConst))
-				break;
+		if (!skipTokens(iss, 1))
+			break;
 
-			iactions.push_back(iaction);
-		}
+		if (!(iss >> iaction.refLength))
+			break;
+
+		if (!skipTokens(iss, 2))
+			break;
+
+		if (!(iss >> iaction.forceConst))
+			break;
+
+		iactions.push_back(iaction);
     }
 
-	return !iactions.empty();
+	return true;
 }
 
 bool OptimolLogReader::getAngleBendingInteractions(const std::string& mol_name, AngleBendingInteractionList& iactions)
@@ -246,13 +271,22 @@ bool OptimolLogReader::getAngleBendingInteractions(const std::string& mol_name, 
 
     std::string line;
 
-    if (!skipToLine(line, "A N G L E   B E N D I N G"))
+	if (!skipToLine(line, "OPTIMOL-ANALYZE>  # angles"))
+		return false;
+
+	if (!readLine(line))
+		return false;
+
+	iactions.clear();
+
+	if (line.find("TOTAL ANGLE STRAIN ENERGY") != std::string::npos)
+		return true;
+
+	if (line.find("A N G L E   B E N D I N G") == std::string::npos)
 		return false;
 
 	if (!skipLines(3))
 		return false;
-
-	iactions.clear();
 
 	std::string atom_idx;
 	AngleBendingInteraction iaction;
@@ -263,38 +297,248 @@ bool OptimolLogReader::getAngleBendingInteractions(const std::string& mol_name, 
 
 		std::istringstream iss(line);
 
-		while (true) {
-			if (!(iss >> iaction.termAtom1Name))
-				break;
+		if (!(iss >> iaction.termAtom1Name))
+			break;
 
-			if (!skipTokens(iss, 1))
-				break;
+		if (!skipTokens(iss, 1))
+			break;
 	    
-			if (!(iss >> atom_idx))
-				break;
+		if (!(iss >> atom_idx))
+			break;
 	    
-			iaction.ctrAtomIdx = boost::lexical_cast<std::size_t>(atom_idx.substr(1, std::string::npos)) - 1;
+		iaction.ctrAtomIdx = boost::lexical_cast<std::size_t>(atom_idx.substr(1, std::string::npos)) - 1;
 
-			if (!(iss >> iaction.termAtom2Name))
-				break;
+		if (!(iss >> iaction.termAtom2Name))
+			break;
 
-			if (!skipTokens(iss, 5))
-				break;
+		if (!skipTokens(iss, 3))
+			break;
+
+		if (!(iss >> iaction.ffClass))
+			break;
+
+		if (!skipTokens(iss, 1))
+			break;
 	    
-			if (!(iss >> iaction.refAngle))
-				break;
+		if (!(iss >> iaction.refAngle))
+			break;
 
-			if (!skipTokens(iss, 2))
-				break;
+		if (!skipTokens(iss, 2))
+			break;
 
-			if (!(iss >> iaction.forceConst))
-				break;
+		if (!(iss >> iaction.forceConst))
+			break;
 
-			iactions.push_back(iaction);
-		}
+		iactions.push_back(iaction);
 	}
 
-	return !iactions.empty();
+	return true;
+}
+
+bool OptimolLogReader::getStretchBendInteractions(const std::string& mol_name, StretchBendInteractionList& iactions)
+{
+	if (!seekToRecord(mol_name))
+		return false;
+
+    std::string line;
+
+	if (!skipToLine(line, "OPTIMOL-ANALYZE>  # strbnd"))
+		return false;
+
+	if (!readLine(line))
+		return false;
+
+	iactions.clear();
+
+	if (line.find("TOTAL STRETCH-BEND STRAIN ENERGY") != std::string::npos)
+		return true;
+
+	if (line.find("S T R E T C H   B E N D I N G") == std::string::npos)
+		return false;
+
+	if (!skipLines(3))
+		return false;
+
+	std::string atom_idx;
+	StretchBendInteraction iaction;
+
+	while (readLine(line)) {
+		if (line.find("TOTAL STRETCH-BEND STRAIN ENERGY") != std::string::npos)
+			break;
+
+		std::istringstream iss(line);
+	
+		if (!(iss >> iaction.termAtom1Name))
+			break;
+
+		if (!skipTokens(iss, 1))
+			break;
+	    
+		if (!(iss >> atom_idx))
+			break;
+	    
+		iaction.ctrAtomIdx = boost::lexical_cast<std::size_t>(atom_idx.substr(1, std::string::npos)) - 1;
+
+		if (!(iss >> iaction.termAtom2Name))
+			break;
+
+		if (!skipTokens(iss, 3))
+			break;
+
+		if (!(iss >> iaction.ffClass))
+			break;
+
+		if (!skipTokens(iss, 4))
+			break;
+
+		if (!(iss >> iaction.forceConst))
+			break;
+
+		iactions.push_back(iaction);
+	}
+
+	return true;
+}
+
+bool OptimolLogReader::getOutOfPlaneBendingInteractions(const std::string& mol_name, OutOfPlaneBendingInteractionList& iactions)
+{
+	if (!seekToRecord(mol_name))
+		return false;
+
+    std::string line;
+
+    if (!skipToLine(line, "OPTIMOL-ANALYZE>  # out"))
+		return false;
+
+	if (!readLine(line))
+		return false;
+
+	iactions.clear();
+
+	if (line.find("TOTAL OUT-OF-PLANE STRAIN ENERGY") != std::string::npos)
+		return true;
+
+	if (line.find("O U T - O F - P L A N E    B E N D I N G") == std::string::npos)
+		return false;
+
+	if (!skipLines(4))
+		return false;
+
+	std::string atom_idx;
+	OutOfPlaneBendingInteraction iaction;
+
+	while (readLine(line)) {
+		if (line.find("TOTAL OUT-OF-PLANE STRAIN ENERGY") != std::string::npos)
+			break;
+
+		std::istringstream iss(line);
+
+		if (!(iss >> iaction.termAtom1Name))
+			break;
+
+		if (!(iss >> iaction.ctrAtomName))
+			break;
+
+		if (!(iss >> iaction.termAtom2Name))
+			break;
+
+		if (!skipTokens(iss, 1))
+			break;
+
+		if (!(iss >> atom_idx))
+			break;
+
+		iaction.oopAtomIdx = boost::lexical_cast<std::size_t>(atom_idx.substr(1, std::string::npos)) - 1;
+
+		if (!skipTokens(iss, 6))
+			break;
+
+		if (!(iss >> iaction.forceConst))
+			break;
+
+		iactions.push_back(iaction);
+	}
+
+	return true;
+}
+
+bool OptimolLogReader::getTorsionInteractions(const std::string& mol_name, TorsionInteractionList& iactions)
+{
+	if (!seekToRecord(mol_name))
+		return false;
+
+    std::string line;
+
+	if (!skipToLine(line, "OPTIMOL-ANALYZE>  # torsion"))
+		return false;
+
+	if (!readLine(line))
+		return false;
+
+	iactions.clear();
+
+	if (line.find("OPTIMOL-ANALYZE>  # b-intra") != std::string::npos)
+		return true;
+
+	if (line.find("T O R S I O N A L") == std::string::npos)
+		return false;
+
+	if (!skipLines(3))
+		return false;
+
+	std::string atom_idx;
+	TorsionInteraction iaction;
+
+	while (readLine(line)) {
+		if (line.find("TOTAL TORSION STRAIN ENERGY") != std::string::npos)
+			break;
+
+		std::istringstream iss(line);
+
+		if (!(iss >> iaction.termAtom1Name))
+			break;
+
+		if (!skipTokens(iss, 1))
+			break;
+	    
+		if (!(iss >> atom_idx))
+			break;
+	    
+		iaction.ctrAtom1Idx = boost::lexical_cast<std::size_t>(atom_idx.substr(1, std::string::npos)) - 1;
+
+		if (!skipTokens(iss, 1))
+			break;
+	    
+		if (!(iss >> atom_idx))
+			break;
+	    
+		iaction.ctrAtom2Idx = boost::lexical_cast<std::size_t>(atom_idx.substr(1, std::string::npos)) - 1;
+	
+		if (!(iss >> iaction.termAtom2Name))
+			break;
+	
+		if (!skipTokens(iss, 4))
+			break;
+
+		if (!(iss >> iaction.ffClass))
+			break;
+
+		if (!skipTokens(iss, 2))
+			break;
+
+		if (!(iss >> iaction.torParams[0]))
+			break;
+	
+		if (!(iss >> iaction.torParams[1]))
+			break;
+
+		if (!(iss >> iaction.torParams[2]))
+			break;
+
+		iactions.push_back(iaction);
+	}
+
+	return true;
 }
 
 bool OptimolLogReader::skipLines(std::size_t n)

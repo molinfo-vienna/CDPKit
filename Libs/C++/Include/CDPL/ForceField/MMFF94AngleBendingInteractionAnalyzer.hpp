@@ -94,11 +94,11 @@ namespace CDPL
 
 			void analyze(const Chem::MolecularGraph& molgraph, MMFF94AngleBendingInteractionList& iactions);
 
+		  private:
 			void getParameters(const Chem::MolecularGraph& molgraph, const Chem::Atom& term_atom1, const Chem::Atom& ctr_atom, 
 							   const Chem::Atom& term_atom2, const Chem::Bond& term_atom1_bnd, const Chem::Bond& term_atom2_bnd,
-							   bool& linear, double& force_const, double& ref_angle) const;
+							   unsigned int& angle_type_idx, bool& linear, double& force_const, double& ref_angle) const;
 
-		  private:
 			std::size_t getSizeOfContaining3Or4Ring(const Chem::MolecularGraph& molgraph, const Chem::Atom& term_atom1, 
 													const Chem::Atom& ctr_atom, const Chem::Atom& term_atom2) const;
 

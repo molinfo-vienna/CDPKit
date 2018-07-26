@@ -25,10 +25,7 @@
 
 
 #include "CDPL/Chem/Molecule.hpp"
-#include "CDPL/Chem/Atom.hpp"
-#include "CDPL/Chem/MolecularGraphFunctions.hpp"
 #include "CDPL/Chem/AtomFunctions.hpp"
-#include "CDPL/ForceField/MolecularGraphFunctions.hpp"
 
 #include "TestUtils.hpp"
 
@@ -36,19 +33,7 @@
 using namespace CDPL;
 
 
-void TestUtils::setupMMFF94TestSuiteMolecule(CDPL::Chem::Molecule& mol)
-{
-    perceiveSSSR(mol, false);
-  
-    for (Chem::Molecule::AtomIterator it = mol.getAtomsBegin(), end = mol.getAtomsEnd(); it != end; ++it) {
-		Chem::Atom& atom = *it;
-
-		if (isMetal(atom) && !isNonMetal(atom))
-			setFormalCharge(atom, getMOL2Charge(atom));
-    }
-}
-
-std::size_t TestUtils::getAtomIndex(CDPL::Chem::Molecule& mol, const std::string& mol2_atom_name)
+std::size_t TestUtils::getAtomIndex(const CDPL::Chem::Molecule& mol, const std::string& mol2_atom_name)
 {
 	for (std::size_t i = 0; i < mol.getNumAtoms(); i++)
 		if (getMOL2Name(mol.getAtom(i)) == mol2_atom_name)

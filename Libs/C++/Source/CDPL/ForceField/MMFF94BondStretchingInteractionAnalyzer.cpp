@@ -50,125 +50,15 @@ using namespace CDPL;
 namespace
 {
 
-	struct CovalentRadiusEntry
-	{
-
-		unsigned int atomicNo;
-		double       radius;
-	};
-
-	struct ElectronegativityEntry
-	{
-
-		unsigned int atomicNo;
-		double       enegativity;
-	};
-	
-	// Definition of covalent radii as used in MMFF94
-
-	CovalentRadiusEntry covRadiusList[] = {
-        { Chem::AtomType::H, 0.33 },
-		{ Chem::AtomType::Li, 1.34 },
-		{ Chem::AtomType::Be, 0.90 },
-		{ Chem::AtomType::B, 0.81 },
-		{ Chem::AtomType::C, 0.77 },
-		{ Chem::AtomType::N, 0.7287 },
-		{ Chem::AtomType::O, 0.72 },
-		{ Chem::AtomType::F, 0.7385 },
-		{ Chem::AtomType::Na, 1.54 },
-		{ Chem::AtomType::Mg, 1.30 },
-		{ Chem::AtomType::Al, 1.22 },
-		{ Chem::AtomType::Si, 1.15 },
-		{ Chem::AtomType::P, 1.091 },
-		{ Chem::AtomType::S, 1.03 },
-		{ Chem::AtomType::Cl, 1.01 },
-		{ Chem::AtomType::K, 1.96 },
-		{ Chem::AtomType::Ca, 1.74 },
-		{ Chem::AtomType::Sc, 1.44 },
-		{ Chem::AtomType::Ti, 1.36 },
-		{ Chem::AtomType::Cu, 1.38 },
-		{ Chem::AtomType::Zn, 1.31 },
-		{ Chem::AtomType::Ga, 1.19 },
-		{ Chem::AtomType::Ge, 1.20 },
-		{ Chem::AtomType::As, 1.20 },
-		{ Chem::AtomType::Se, 1.16 },
-		{ Chem::AtomType::Br, 1.15 },
-		{ Chem::AtomType::Rb, 2.11 },
-		{ Chem::AtomType::Sr, 1.92 },
-		{ Chem::AtomType::Y, 1.62 },
-		{ Chem::AtomType::Zr, 1.48 },
-		{ Chem::AtomType::Ag, 1.53 },
-		{ Chem::AtomType::Cd, 1.48 },
-		{ Chem::AtomType::In, 1.46 },
-		{ Chem::AtomType::Sn, 1.40 },
-		{ Chem::AtomType::Sb, 1.41 },
-		{ Chem::AtomType::Te, 1.35 },
-		{ Chem::AtomType::I, 1.33 }
-	};
-
-    // Definition of Allred Rochow electronegativities as used in MMFF94
-
-	ElectronegativityEntry enegativityList[] = {
-        { Chem::AtomType::H, 2.20 },
-		{ Chem::AtomType::Li, 0.97 },
-		{ Chem::AtomType::Be, 1.47 },
-		{ Chem::AtomType::B, 2.01 },
-		{ Chem::AtomType::C, 2.50 },
-		{ Chem::AtomType::N, 3.07 },
-		{ Chem::AtomType::O, 3.50 },
-		{ Chem::AtomType::F, 4.10 },
-		{ Chem::AtomType::Na, 1.01 },
-		{ Chem::AtomType::Mg, 1.23 },
-		{ Chem::AtomType::Al, 1.47 },
-		{ Chem::AtomType::Si, 1.74 },
-		{ Chem::AtomType::P, 2.06 },
-		{ Chem::AtomType::S, 2.44 },
-		{ Chem::AtomType::Cl, 2.83 },
-		{ Chem::AtomType::K, 0.91 },
-		{ Chem::AtomType::Ca, 1.04 },
-		{ Chem::AtomType::Sc, 1.30 },
-		{ Chem::AtomType::Ti, 1.50 },
-		{ Chem::AtomType::V, 1.60 },
-		{ Chem::AtomType::Cr, 1.60 },
-		{ Chem::AtomType::Mn, 1.50 },
-		{ Chem::AtomType::Fe, 1.80 },
-		{ Chem::AtomType::Co, 1.80 },
-		{ Chem::AtomType::Ni, 1.80 },
-		{ Chem::AtomType::Cu, 1.90 },
-		{ Chem::AtomType::Zn, 1.60 },
-		{ Chem::AtomType::Ga, 1.82 },
-		{ Chem::AtomType::Ge, 2.02 },
-		{ Chem::AtomType::As, 2.20 },
-		{ Chem::AtomType::Se, 2.48 },
-		{ Chem::AtomType::Br, 2.74 },
-		{ Chem::AtomType::Rb, 0.89 },
-		{ Chem::AtomType::Sr, 0.99 },
-		{ Chem::AtomType::Y, 1.30 },
-		{ Chem::AtomType::Zr, 1.40 },
-		{ Chem::AtomType::Nb, 1.60 },
-		{ Chem::AtomType::Mo, 1.80 },
-		{ Chem::AtomType::Tc, 1.90 },
-		{ Chem::AtomType::Ru, 2.20 },
-		{ Chem::AtomType::Rh, 2.20 },
-		{ Chem::AtomType::Pd, 2.20 },
-		{ Chem::AtomType::Ag, 1.90 },
-		{ Chem::AtomType::Cd, 1.70 },
-		{ Chem::AtomType::In, 1.49 },
-		{ Chem::AtomType::Sn, 1.72 },
-		{ Chem::AtomType::Sb, 1.82 },
-		{ Chem::AtomType::Te, 2.01 },
-		{ Chem::AtomType::I, 2.21 }
-	};
-
-	double covRadiusLookupTable[Chem::AtomType::MAX_TYPE + 1]   = { 0.0 };
-	double enegativityLookupTable[Chem::AtomType::MAX_TYPE + 1] = { 0.0 };
+	double covRadiusTable[Chem::AtomType::MAX_TYPE + 1] = { 0.0 };
+	double elnegTable[Chem::AtomType::MAX_TYPE + 1]     = { 0.0 };
 
 	double getCovalentRadius(unsigned int atomic_no)
 	{
 		if (atomic_no > Chem::AtomType::MAX_TYPE)
 			return 0.0;
 
-		return covRadiusLookupTable[atomic_no];
+		return covRadiusTable[atomic_no];
 	}
 
 	double getElectronegativity(unsigned int atomic_no)
@@ -176,18 +66,104 @@ namespace
 		if (atomic_no > Chem::AtomType::MAX_TYPE)
 			return 0.0;
 
-		return enegativityLookupTable[atomic_no];
+		return elnegTable[atomic_no];
 	}
 
 	struct Init
 	{
 
 		Init() {
-			for (std::size_t i = 0; i < sizeof(covRadiusList) / sizeof(CovalentRadiusEntry); i++)
-				covRadiusLookupTable[covRadiusList[i].atomicNo] = covRadiusList[i].radius;
+			// Definition of covalent radii as used in MMFF94
 
-			for (std::size_t i = 0; i < sizeof(enegativityList) / sizeof(ElectronegativityEntry); i++)
-				enegativityLookupTable[enegativityList[i].atomicNo] = enegativityList[i].enegativity;
+			covRadiusTable[Chem::AtomType::H]  = 0.33;
+			covRadiusTable[Chem::AtomType::Li] = 1.34;
+			covRadiusTable[Chem::AtomType::Be] = 0.90;
+			covRadiusTable[Chem::AtomType::B]  = 0.81;
+			covRadiusTable[Chem::AtomType::C]  = 0.77;
+			covRadiusTable[Chem::AtomType::N]  = 0.7287;
+			covRadiusTable[Chem::AtomType::O]  = 0.72;
+			covRadiusTable[Chem::AtomType::F]  = 0.7385;
+			covRadiusTable[Chem::AtomType::Na] = 1.54;
+			covRadiusTable[Chem::AtomType::Mg] = 1.30;
+			covRadiusTable[Chem::AtomType::Al] = 1.22;
+			covRadiusTable[Chem::AtomType::Si] = 1.15;
+			covRadiusTable[Chem::AtomType::P]  = 1.091;
+			covRadiusTable[Chem::AtomType::S]  = 1.03;
+			covRadiusTable[Chem::AtomType::Cl] = 1.01;
+			covRadiusTable[Chem::AtomType::K]  = 1.96;
+			covRadiusTable[Chem::AtomType::Ca] = 1.74;
+			covRadiusTable[Chem::AtomType::Sc] = 1.44;
+			covRadiusTable[Chem::AtomType::Ti] = 1.36;
+			covRadiusTable[Chem::AtomType::Cu] = 1.38;
+			covRadiusTable[Chem::AtomType::Zn] = 1.31;
+			covRadiusTable[Chem::AtomType::Ga] = 1.19;
+			covRadiusTable[Chem::AtomType::Ge] = 1.20;
+			covRadiusTable[Chem::AtomType::As] = 1.20;
+			covRadiusTable[Chem::AtomType::Se] = 1.16;
+			covRadiusTable[Chem::AtomType::Br] = 1.15;
+			covRadiusTable[Chem::AtomType::Rb] = 2.11;
+			covRadiusTable[Chem::AtomType::Sr] = 1.92;
+			covRadiusTable[Chem::AtomType::Y]  = 1.62;
+			covRadiusTable[Chem::AtomType::Zr] = 1.48;
+			covRadiusTable[Chem::AtomType::Ag] = 1.53;
+			covRadiusTable[Chem::AtomType::Cd] = 1.48;
+			covRadiusTable[Chem::AtomType::In] = 1.46;
+			covRadiusTable[Chem::AtomType::Sn] = 1.40;
+			covRadiusTable[Chem::AtomType::Sb] = 1.41;
+			covRadiusTable[Chem::AtomType::Te] = 1.35;
+			covRadiusTable[Chem::AtomType::I]  = 1.33;
+
+			// Definition of Allred Rochow electronegativities as used in MMFF94
+
+			elnegTable[Chem::AtomType::H]  = 2.20;
+			elnegTable[Chem::AtomType::Li] = 0.97;
+			elnegTable[Chem::AtomType::Be] = 1.47;
+			elnegTable[Chem::AtomType::B]  = 2.01;
+			elnegTable[Chem::AtomType::C]  = 2.50;
+			elnegTable[Chem::AtomType::N]  = 3.07;
+			elnegTable[Chem::AtomType::O]  = 3.50;
+			elnegTable[Chem::AtomType::F]  = 4.10;
+			elnegTable[Chem::AtomType::Na] = 1.01;
+			elnegTable[Chem::AtomType::Mg] = 1.23;
+			elnegTable[Chem::AtomType::Al] = 1.47;
+			elnegTable[Chem::AtomType::Si] = 1.74;
+			elnegTable[Chem::AtomType::P]  = 2.06;
+			elnegTable[Chem::AtomType::S]  = 2.44;
+			elnegTable[Chem::AtomType::Cl] = 2.83;
+			elnegTable[Chem::AtomType::K]  = 0.91;
+			elnegTable[Chem::AtomType::Ca] = 1.04;
+			elnegTable[Chem::AtomType::Sc] = 1.30;
+			elnegTable[Chem::AtomType::Ti] = 1.50;
+			elnegTable[Chem::AtomType::V]  = 1.60;
+			elnegTable[Chem::AtomType::Cr] = 1.60;
+			elnegTable[Chem::AtomType::Mn] = 1.50;
+			elnegTable[Chem::AtomType::Fe] = 1.80;
+			elnegTable[Chem::AtomType::Co] = 1.80;
+			elnegTable[Chem::AtomType::Ni] = 1.80;
+			elnegTable[Chem::AtomType::Cu] = 1.90;
+			elnegTable[Chem::AtomType::Zn] = 1.60;
+			elnegTable[Chem::AtomType::Ga] = 1.82;
+			elnegTable[Chem::AtomType::Ge] = 2.02;
+			elnegTable[Chem::AtomType::As] = 2.20;
+			elnegTable[Chem::AtomType::Se] = 2.48;
+			elnegTable[Chem::AtomType::Br] = 2.74;
+			elnegTable[Chem::AtomType::Rb] = 0.89;
+			elnegTable[Chem::AtomType::Sr] = 0.99;
+			elnegTable[Chem::AtomType::Y]  = 1.30;
+			elnegTable[Chem::AtomType::Zr] = 1.40;
+			elnegTable[Chem::AtomType::Nb] = 1.60;
+			elnegTable[Chem::AtomType::Mo] = 1.80;
+			elnegTable[Chem::AtomType::Tc] = 1.90;
+			elnegTable[Chem::AtomType::Ru] = 2.20;
+			elnegTable[Chem::AtomType::Rh] = 2.20;
+			elnegTable[Chem::AtomType::Pd] = 2.20;
+			elnegTable[Chem::AtomType::Ag] = 1.90;
+			elnegTable[Chem::AtomType::Cd] = 1.70;
+			elnegTable[Chem::AtomType::In] = 1.49;
+			elnegTable[Chem::AtomType::Sn] = 1.72;
+			elnegTable[Chem::AtomType::Sb] = 1.82;
+			elnegTable[Chem::AtomType::Te] = 2.01;
+			elnegTable[Chem::AtomType::I]  = 2.21;
 		}
 
 	} init;
@@ -264,24 +240,27 @@ void ForceField::MMFF94BondStretchingInteractionAnalyzer::analyze(const Chem::Mo
 		if (filterFunc && !filterFunc(atom1, atom2))
 			continue;
 	
+		unsigned int bond_type_idx = 0;
 		double ref_length = 0.0;
 		double force_const = 0.0;
 
-		getParameters(molgraph, bond, force_const, ref_length);
+		getParameters(molgraph, bond, bond_type_idx, force_const, ref_length);
 	
-		iactions.addElement(MMFF94BondStretchingInteraction(molgraph.getAtomIndex(atom1), molgraph.getAtomIndex(atom2), force_const, ref_length));
+		iactions.addElement(MMFF94BondStretchingInteraction(molgraph.getAtomIndex(atom1), molgraph.getAtomIndex(atom2), 
+															bond_type_idx, force_const, ref_length));
 	}
 }
 
 void ForceField::MMFF94BondStretchingInteractionAnalyzer::getParameters(const Chem::MolecularGraph& molgraph, const Chem::Bond& bond, 
-																		double& force_const, double& ref_length) const
+																		unsigned int& bond_type_idx, double& force_const, double& ref_length) const
 {
 	typedef MMFF94BondStretchingParameterTable::Entry ParamEntry;
 	typedef MMFF94BondStretchingRuleParameterTable::Entry RuleParamEntry;
 
-	unsigned int bond_type_idx = bondTypeIdxFunc(bond);
 	unsigned int atom1_type = atomTypeFunc(bond.getBegin());
 	unsigned int atom2_type = atomTypeFunc(bond.getEnd());
+
+	bond_type_idx = bondTypeIdxFunc(bond);
 
 	const ParamEntry& param_entry = paramTable->getEntry(bond_type_idx, atom1_type, atom2_type);
 

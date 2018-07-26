@@ -30,6 +30,7 @@
 #include <iomanip>
 #include <cmath>
 #include <csignal>
+#include <iostream>
 
 #include <boost/program_options/parsers.hpp>
 #include <boost/shared_ptr.hpp>

@@ -24,48 +24,36 @@
  */
 
 
-#include <cstdlib>
+#include <cstddef>
 
 #include <boost/test/auto_unit_test.hpp>
 
 #include "CDPL/ForceField/MMFF94AtomTyper.hpp"
-#include "CDPL/ForceField/MolecularGraphFunctions.hpp"
-#include "CDPL/Chem/BasicMolecule.hpp"
-#include "CDPL/Chem/MOL2MoleculeReader.hpp"
 #include "CDPL/Chem/MolecularGraphFunctions.hpp"
 #include "CDPL/Chem/AtomFunctions.hpp"
-#include "CDPL/Util/FileDataReader.hpp"
 
-#include "OptimolLogReader.hpp"
-#include "TestUtils.hpp"
+#include "MMFF94TestData.hpp"
 
 
 BOOST_AUTO_TEST_CASE(MMFF94AtomTyperTest)
 {
 	using namespace CDPL;
 
-	Chem::BasicMolecule mol;
-	Util::FileDataReader<Chem::MOL2MoleculeReader> mol_reader(std::getenv("CDPKIT_TEST_DATA_DIR") + std::string("/MMFF94/MMFF94_hypervalent.mol2"));
-
-	TestUtils::OptimolLogReader log_reader(std::getenv("CDPKIT_TEST_DATA_DIR") + std::string("/MMFF94/MMFF94_opti.log"));
-	TestUtils::OptimolLogReader::SymbolicAtomTypeArray sym_types;
-	TestUtils::OptimolLogReader::NumericAtomTypeArray num_types;
+	MMFF94TestUtils::OptimolLogReader::SymbolicAtomTypeArray sym_types;
+	MMFF94TestUtils::OptimolLogReader::NumericAtomTypeArray num_types;
 
 	ForceField::MMFF94AtomTyper atom_typer;
 	Util::UIArray perc_num_types;
 	Util::SArray perc_sym_types;
-	std::size_t mol_idx = 0;
 
-	while (mol_reader.read(mol)) {
-		TestUtils::setupMMFF94TestSuiteMolecule(mol);
-		ForceField::perceiveMMFF94AromaticRings(mol, false);
-
+	for (std::size_t mol_idx = 0; mol_idx <	MMFF94TestData::DYN_TEST_MOLECULES.size(); mol_idx++) {
+		const Chem::Molecule& mol =	*MMFF94TestData::DYN_TEST_MOLECULES[mol_idx];
 		const std::string& mol_name = getName(mol);
 
-		BOOST_CHECK(log_reader.getSymbolicAtomTypes(mol_name, sym_types));
+		BOOST_CHECK(MMFF94TestData::DYN_LOG_READER.getSymbolicAtomTypes(mol_name, sym_types));
 		BOOST_CHECK_EQUAL(sym_types.size(), mol.getNumAtoms());
 
-		BOOST_CHECK(log_reader.getNumericAtomTypes(mol_name, num_types));
+		BOOST_CHECK(MMFF94TestData::DYN_LOG_READER.getNumericAtomTypes(mol_name, num_types));
 		BOOST_CHECK_EQUAL(num_types.size(), mol.getNumAtoms());
 
 		atom_typer.perceiveTypes(mol, perc_sym_types, perc_num_types, true);
@@ -85,8 +73,5 @@ BOOST_AUTO_TEST_CASE(MMFF94AtomTyperTest)
 			BOOST_CHECK_MESSAGE(perceived_type == correct_type, "Numeric atom type mismatch for atom #" << i << "(" << getMOL2Name(mol.getAtom(i)) << 
 								") of molecule #" << mol_idx << " (" << mol_name << "): " << perceived_type << " != " << correct_type);
 		}
-			
-		mol_idx++;
-		mol.clear();
 	}
 }

@@ -25,6 +25,7 @@
 
 
 #include <fstream>
+#include <iostream>
 
 #include <QFileInfo>
 #include <QDir>

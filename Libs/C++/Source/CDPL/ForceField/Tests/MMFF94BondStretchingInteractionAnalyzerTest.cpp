@@ -24,50 +24,37 @@
  */
 
 
-#include <cstdlib>
+#include <cstddef>
 #include <cmath>
 
 #include <boost/test/auto_unit_test.hpp>
 
 #include "CDPL/ForceField/MMFF94BondStretchingInteractionAnalyzer.hpp"
-#include "CDPL/ForceField/MolecularGraphFunctions.hpp"
-#include "CDPL/Chem/BasicMolecule.hpp"
-#include "CDPL/Chem/MOL2MoleculeReader.hpp"
 #include "CDPL/Chem/MolecularGraphFunctions.hpp"
 #include "CDPL/Chem/AtomFunctions.hpp"
-#include "CDPL/Util/FileDataReader.hpp"
 
-#include "OptimolLogReader.hpp"
-#include "TestUtils.hpp"
+#include "MMFF94TestData.hpp"
 
 
 BOOST_AUTO_TEST_CASE(MMFF94BondStretchingInteractionAnalyzerTest)
 {
 	using namespace CDPL;
 
-	Chem::BasicMolecule mol;
-	Util::FileDataReader<Chem::MOL2MoleculeReader> mol_reader(std::getenv("CDPKIT_TEST_DATA_DIR") + std::string("/MMFF94/MMFF94_hypervalent.mol2"));
-
-	TestUtils::OptimolLogReader log_reader(std::getenv("CDPKIT_TEST_DATA_DIR") + std::string("/MMFF94/MMFF94_opti.log"));
-	TestUtils::OptimolLogReader::BondStretchingInteractionList iactions;
+	MMFF94TestUtils::OptimolLogReader::BondStretchingInteractionList iactions;
 
 	ForceField::MMFF94BondStretchingInteractionAnalyzer analyzer;
 	ForceField::MMFF94BondStretchingInteractionList found_iactions;
-	std::size_t mol_idx = 0;
 
-	while (mol_reader.read(mol)) {
-		TestUtils::setupMMFF94TestSuiteMolecule(mol);
-		ForceField::perceiveMMFF94AromaticRings(mol, false);
-		ForceField::assignMMFF94AtomTypes(mol, true, false);
-		ForceField::assignMMFF94BondTypeIndices(mol, false);
-
+	for (std::size_t mol_idx = 0; mol_idx <	MMFF94TestData::DYN_TEST_MOLECULES.size(); mol_idx++) {
+		const Chem::Molecule& mol =	*MMFF94TestData::DYN_TEST_MOLECULES[mol_idx];
 		const std::string& mol_name = getName(mol);
 
-		BOOST_CHECK(log_reader.getBondStretchingInteractions(mol_name, iactions));
+		BOOST_CHECK(MMFF94TestData::DYN_LOG_READER.getBondStretchingInteractions(mol_name, iactions));
 
 		analyzer.analyze(mol, found_iactions);
 
-		BOOST_CHECK_EQUAL(found_iactions.getSize(), iactions.size());
+		BOOST_CHECK_MESSAGE(found_iactions.getSize() == iactions.size(), "Bond stretching interaction count mismatch for molecule #" << mol_idx << " (" << mol_name << "): " <<
+							found_iactions.getSize() << " != " << iactions.size());
 
 		for (std::size_t i = 0; i < iactions.size(); i++) {
 			bool iaction_found = false;
@@ -77,7 +64,13 @@ BOOST_AUTO_TEST_CASE(MMFF94BondStretchingInteractionAnalyzerTest)
 
 				if ((iaction.getAtom1Index() == iactions[i].atom1Idx && iaction.getAtom2Index() == iactions[i].atom2Idx) ||
 					(iaction.getAtom1Index() == iactions[i].atom2Idx && iaction.getAtom2Index() == iactions[i].atom1Idx)) {
-
+		
+					BOOST_CHECK_MESSAGE(iaction.getBondTypeIndex() == iactions[i].ffClass, 
+										"Bond type index mismatch for bond stretching interaction #" << iactions[i].atom1Idx << "(" << 
+										getMOL2Name(mol.getAtom(iactions[i].atom1Idx)) << ")-#" << iactions[i].atom2Idx << "(" << 
+										getMOL2Name(mol.getAtom(iactions[i].atom2Idx)) << ") of molecule #" << mol_idx << " (" << mol_name <<
+										"): " << iaction.getBondTypeIndex() << " != " << iactions[i].ffClass);
+		
 					BOOST_CHECK_MESSAGE(std::abs(iaction.getReferenceLength() - iactions[i].refLength) < 0.0005, 
 										"Reference bond length mismatch for bond stretching interaction #" << iactions[i].atom1Idx << "(" << 
 										getMOL2Name(mol.getAtom(iactions[i].atom1Idx)) << ")-#" << iactions[i].atom2Idx << "(" << 
@@ -85,7 +78,7 @@ BOOST_AUTO_TEST_CASE(MMFF94BondStretchingInteractionAnalyzerTest)
 										"): " << iaction.getReferenceLength() << " != " << iactions[i].refLength);
 		
 					BOOST_CHECK_MESSAGE(std::abs(iaction.getForceConstant() - iactions[i].forceConst) < 0.0005, 
-										"!! Force constant mismatch for bond stretching interaction #" << iactions[i].atom1Idx << "(" << 
+										"Force constant mismatch for bond stretching interaction #" << iactions[i].atom1Idx << "(" << 
 										getMOL2Name(mol.getAtom(iactions[i].atom1Idx)) << ")-#" << iactions[i].atom2Idx << "(" << 
 										getMOL2Name(mol.getAtom(iactions[i].atom2Idx)) << ") of molecule #" << mol_idx << " (" << mol_name <<
 										"): " << iaction.getForceConstant() << " != " << iactions[i].forceConst);
@@ -99,9 +92,7 @@ BOOST_AUTO_TEST_CASE(MMFF94BondStretchingInteractionAnalyzerTest)
 								")-#" << iactions[i].atom2Idx << "(" << getMOL2Name(mol.getAtom(iactions[i].atom2Idx)) << ") of molecule #" << mol_idx << " (" << mol_name <<
 								") has not been found");
 		}
-
-		mol_idx++;
-		mol.clear();
+	
 		found_iactions.clear();
 	}
 }

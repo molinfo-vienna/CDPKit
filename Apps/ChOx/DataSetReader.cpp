@@ -26,6 +26,7 @@
 
 #include <vector>
 #include <cstddef>
+#include <iostream>
 
 #include <QFileInfo>
 #include <QDir>

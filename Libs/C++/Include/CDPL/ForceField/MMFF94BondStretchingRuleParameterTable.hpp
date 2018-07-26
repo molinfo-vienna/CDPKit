@@ -50,7 +50,7 @@ namespace CDPL
     {
 
 		/**
-		 * \addtogroup CDPL_FORCEFIELD_RULEPARAMETER_TABLES
+		 * \addtogroup CDPL_FORCEFIELD_PARAMETER_TABLES
 		 * @{
 		 */
 

@@ -51,8 +51,9 @@ namespace CDPL
 		{
 
 		  public:
-			MMFF94BondStretchingInteraction(std::size_t atom1_idx, std::size_t atom2_idx, double force_const, double ref_length):
-				atom1Idx(atom1_idx), atom2Idx(atom2_idx), forceConst(force_const), refLength(ref_length) {}
+			MMFF94BondStretchingInteraction(std::size_t atom1_idx, std::size_t atom2_idx, unsigned int bond_type_idx, 
+											double force_const, double ref_length):
+				atom1Idx(atom1_idx), atom2Idx(atom2_idx), bondTypeIdx(bond_type_idx), forceConst(force_const), refLength(ref_length) {}
 
 			std::size_t getAtom1Index() const {
 				return atom1Idx;
@@ -60,6 +61,10 @@ namespace CDPL
 
 			std::size_t getAtom2Index() const {
 				return atom2Idx;
+			}
+
+			unsigned int getBondTypeIndex() const {
+				return bondTypeIdx;
 			}
 
 			double getForceConstant() const {
@@ -71,10 +76,11 @@ namespace CDPL
 			}
 
 		  private:
-			std::size_t atom1Idx;
-			std::size_t atom2Idx;
-			double      forceConst;
-			double      refLength;
+			std::size_t  atom1Idx;
+			std::size_t  atom2Idx;
+			unsigned int bondTypeIdx;
+			double       forceConst;
+			double       refLength;
 		};			
     
 		/**
