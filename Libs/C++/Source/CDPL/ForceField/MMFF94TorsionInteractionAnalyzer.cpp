@@ -28,6 +28,7 @@
 
 #include <iterator>
 #include <cstddef>
+#include <cmath>
 
 #include "CDPL/ForceField/MMFF94TorsionInteractionAnalyzer.hpp"
 #include "CDPL/ForceField/MolecularGraphFunctions.hpp"
@@ -44,6 +45,51 @@
 
 
 using namespace CDPL; 
+
+
+namespace
+{
+	
+	double empRuleUParamTable[Chem::AtomType::MAX_TYPE + 1] = { 0.0 };
+	double empRuleVParamTable[Chem::AtomType::MAX_TYPE + 1] = { 0.0 };
+
+	double getEmpiricalRuleUParameter(unsigned int atomic_no)
+	{
+		if (atomic_no > Chem::AtomType::MAX_TYPE)
+			return 0.0;
+
+		return empRuleUParamTable[atomic_no];
+	}
+
+	double getEmpiricalRuleVParameter(unsigned int atomic_no)
+	{
+		if (atomic_no > Chem::AtomType::MAX_TYPE)
+			return 0.0;
+
+		return empRuleVParamTable[atomic_no];
+	}
+
+	struct Init
+	{
+		
+		Init() {
+			empRuleUParamTable[Chem::AtomType::C]  = 2.0;
+			empRuleUParamTable[Chem::AtomType::N]  = 2.0;
+			empRuleUParamTable[Chem::AtomType::O]  = 2.0;
+			empRuleUParamTable[Chem::AtomType::Si] = 1.25;
+			empRuleUParamTable[Chem::AtomType::P]  = 1.25;
+			empRuleUParamTable[Chem::AtomType::S]  = 1.25;
+
+			empRuleVParamTable[Chem::AtomType::C]  = 2.12;
+			empRuleVParamTable[Chem::AtomType::N]  = 1.50;
+			empRuleVParamTable[Chem::AtomType::O]  = 0.2;
+			empRuleVParamTable[Chem::AtomType::Si] = 1.22;
+			empRuleVParamTable[Chem::AtomType::P]  = 2.40;
+			empRuleVParamTable[Chem::AtomType::S]  = 0.48; // The paper says 0.49 - but that value gives wrong results in empirical rule h2)!
+		}
+
+	} init;
+}
 
 
 ForceField::MMFF94TorsionInteractionAnalyzer::MMFF94TorsionInteractionAnalyzer(const Chem::MolecularGraph& molgraph, 
@@ -101,8 +147,6 @@ void ForceField::MMFF94TorsionInteractionAnalyzer::analyze(const Chem::Molecular
 {
 	using namespace Chem;
 
-	typedef MMFF94AtomTypePropertyTable::Entry AtomTypePropEntry;
-
 	for (MolecularGraph::ConstBondIterator it = molgraph.getBondsBegin(), end = molgraph.getBondsEnd(); it != end; ++it) {
 		const Bond& ctr_bond = *it;
 		const Atom& ctr_atom1 = ctr_bond.getBegin();
@@ -119,7 +163,7 @@ void ForceField::MMFF94TorsionInteractionAnalyzer::analyze(const Chem::Molecular
 			throw Base::ItemNotFound("MMFF94TorsionInteractionAnalyzer: could not find MMFF94 atom type properties for atom #" + 
 									 boost::lexical_cast<std::string>(ctr_atom1_idx));
 
-		if (ctr_atom1_prop_entry.formsLinearBondAngle())
+		if (ctr_atom1_prop_entry.formsLinearBondAngle()) // Empirical rule a)
 			continue;
 
 		std::size_t ctr_atom2_idx = molgraph.getAtomIndex(ctr_atom2);
@@ -130,7 +174,7 @@ void ForceField::MMFF94TorsionInteractionAnalyzer::analyze(const Chem::Molecular
 			throw Base::ItemNotFound("MMFF94TorsionInteractionAnalyzer: could not find MMFF94 atom type properties for atom #" + 
 									 boost::lexical_cast<std::string>(ctr_atom2_idx));
 
-		if (ctr_atom2_prop_entry.formsLinearBondAngle())
+		if (ctr_atom2_prop_entry.formsLinearBondAngle()) // Empirical rule a)
 			continue;
 
 		nbrAtoms1.clear();
@@ -167,22 +211,221 @@ void ForceField::MMFF94TorsionInteractionAnalyzer::analyze(const Chem::Molecular
 				if (nbrAtoms2[j] == &ctr_atom1)
 					continue;
 				
+				if (nbrAtoms1[i] == nbrAtoms2[j]) // 3-membered ring!
+					continue;
+
 				std::size_t term_atom2_idx = molgraph.getAtomIndex(*nbrAtoms2[j]);
 				unsigned int term_atom2_type = atomTypeFunc(*nbrAtoms2[j]);
 				unsigned int term_bond2_type_idx = bondTypeIdxFunc(*nbrBonds2[j]);
-
 				unsigned int tor_type_idx = getTorsionTypeIndex(molgraph, *nbrAtoms1[i], ctr_atom1, ctr_atom2, *nbrAtoms2[j], ctr_bond,
 																term_atom1_type, ctr_atom1_type, ctr_atom2_type, term_atom2_type,
 																term_bond1_type_idx, ctr_bond_type_idx, term_bond2_type_idx);
 				double tor_param1 = 0.0;
 				double tor_param2 = 0.0;
 				double tor_param3 = 0.0;
-																
-				iactions.addElement(MMFF94TorsionInteraction(term_atom1_idx, ctr_atom1_idx, ctr_atom2_idx, term_atom2_idx, tor_type_idx,
-															 tor_param1, tor_param2, tor_param3));
+							
+				if (getParameters(molgraph, *nbrAtoms1[i], ctr_atom1, ctr_atom2, *nbrAtoms2[j], ctr_bond, term_atom1_type, ctr_atom1_type, 
+								  ctr_atom2_type, term_atom2_type, tor_type_idx, ctr_atom1_prop_entry, ctr_atom2_prop_entry, tor_param1,
+								  tor_param2, tor_param3))
+					iactions.addElement(MMFF94TorsionInteraction(term_atom1_idx, ctr_atom1_idx, ctr_atom2_idx, term_atom2_idx, tor_type_idx,
+																 tor_param1, tor_param2, tor_param3));
 			}
 		}
 	}
+}
+
+bool ForceField::MMFF94TorsionInteractionAnalyzer::getParameters(const Chem::MolecularGraph& molgraph, const Chem::Atom& term_atom1, const Chem::Atom& ctr_atom1, 
+																 const Chem::Atom& ctr_atom2, const Chem::Atom& term_atom2, const Chem::Bond& ctr_bond,
+																 unsigned int term_atom1_type, unsigned int ctr_atom1_type, unsigned int ctr_atom2_type,
+																 unsigned int term_atom2_type, unsigned int tor_type_idx, const AtomTypePropEntry& ctr_atom1_prop_entry, 
+																 const AtomTypePropEntry& ctr_atom2_prop_entry, double& tor_param1, double& tor_param2,
+																 double& tor_param3) const
+{
+	using namespace Chem;
+
+	typedef MMFF94TorsionParameterTable::Entry ParamEntry;
+
+	const unsigned int* term_atom1_param_types = paramTypeMap->getEntry(term_atom1_type).getParameterTypes();
+
+	if (!term_atom1_param_types)
+		throw Base::ItemNotFound("MMFF94TorsionInteractionAnalyzer: could not find MMFF94 parameter atom type equivalence list for atom #" + 
+								 boost::lexical_cast<std::string>(molgraph.getAtomIndex(term_atom1)));
+
+	const unsigned int* term_atom2_param_types = paramTypeMap->getEntry(term_atom2_type).getParameterTypes();
+
+	if (!term_atom2_param_types)
+		throw Base::ItemNotFound("MMFF94TorsionInteractionAnalyzer: could not find MMFF94 parameter atom type equivalence list for atom #" + 
+								 boost::lexical_cast<std::string>(molgraph.getAtomIndex(term_atom2)));
+
+	const ParamEntry* param_entry = &paramTable->getEntry(tor_type_idx, term_atom1_param_types[0], ctr_atom1_type, ctr_atom2_type, term_atom2_param_types[0]);
+
+	if (!(*param_entry)) {
+		param_entry = &paramTable->getEntry(tor_type_idx, term_atom1_param_types[1], ctr_atom1_type, ctr_atom2_type, term_atom2_param_types[3]);
+
+		if (!(*param_entry)) {
+			param_entry = &paramTable->getEntry(tor_type_idx, term_atom1_param_types[3], ctr_atom1_type, ctr_atom2_type, term_atom2_param_types[1]);
+
+			if (!(*param_entry))
+				param_entry = &paramTable->getEntry(tor_type_idx, term_atom1_param_types[3], ctr_atom1_type, ctr_atom2_type, term_atom2_param_types[3]);
+		}
+	}
+	
+	if (*param_entry) {
+		tor_param1 = param_entry->getTorsionParameter1();
+		tor_param2 = param_entry->getTorsionParameter2();
+		tor_param3 = param_entry->getTorsionParameter3();
+
+		return true;
+	}
+
+	// Empirical rule fallback
+
+	unsigned int ctr_atomic_no1 = ctr_atom1_prop_entry.getAtomicNumber();
+	unsigned int ctr_atomic_no2 = ctr_atom2_prop_entry.getAtomicNumber();
+
+	if (ctr_atom1_prop_entry.isAromaticAtomType() && ctr_atom2_prop_entry.isAromaticAtomType() &&
+		containsFragmentWithBond(*aromRingSetFunc(molgraph), ctr_bond)) {
+		// Rule b)
+
+        double pi_bnd_order = 0.3;
+
+        if (!ctr_atom1_prop_entry.hasPiLonePair() && !ctr_atom2_prop_entry.hasPiLonePair())
+			pi_bnd_order = 0.5;
+			
+        double beta = 6.0;
+
+        if ((ctr_atom1_prop_entry.getValence() == 3 && ctr_atom2_prop_entry.getValence() == 4)
+            || (ctr_atom1_prop_entry.getValence() == 4 && ctr_atom2_prop_entry.getValence() == 3))
+			beta = 3.0;
+		
+        tor_param2 = beta * pi_bnd_order * std::sqrt(getEmpiricalRuleUParameter(ctr_atomic_no1) * getEmpiricalRuleUParameter(ctr_atomic_no2));
+		return true;
+	}
+	
+	unsigned int ctr_atom1_mb_desig = ctr_atom1_prop_entry.getMultiBondDesignator();
+	unsigned int ctr_atom2_mb_desig = ctr_atom2_prop_entry.getMultiBondDesignator();
+
+	if (getOrder(ctr_bond) == 2) { 
+		// Rule c)
+
+		double pi_bnd_order = 0.4;
+
+		if (ctr_atom1_mb_desig == 2 && ctr_atom2_mb_desig == 2)
+			pi_bnd_order = 1.0;
+        
+		tor_param2 = 6.0 * pi_bnd_order * std::sqrt(getEmpiricalRuleUParameter(ctr_atomic_no1) * getEmpiricalRuleUParameter(ctr_atomic_no2));
+		return true;
+	}
+
+	if (ctr_atom1_prop_entry.getNumNeighbors() == 4 && ctr_atom2_prop_entry.getNumNeighbors() == 4) {
+		// Rule d)
+
+		tor_param3 = std::sqrt(getEmpiricalRuleVParameter(ctr_atomic_no1) * getEmpiricalRuleVParameter(ctr_atomic_no2)) / 9.0;
+		return true;
+	}
+
+	if (ctr_atom1_prop_entry.getNumNeighbors() == 4 || ctr_atom2_prop_entry.getNumNeighbors() == 4) {
+		// Rules e) and f)
+
+		const AtomTypePropEntry& non_tetra_coord_ctr_atom_props = (ctr_atom1_prop_entry.getNumNeighbors() == 4 ? ctr_atom2_prop_entry : ctr_atom1_prop_entry);
+
+		switch (non_tetra_coord_ctr_atom_props.getNumNeighbors()) {
+
+			case 3:
+				if (non_tetra_coord_ctr_atom_props.getValence() == 4 || non_tetra_coord_ctr_atom_props.getValence() == 34 ||
+					non_tetra_coord_ctr_atom_props.getMultiBondDesignator() != 0) 
+					return false;
+				
+				break;
+
+			case 2:
+				//if (non_tetra_coord_ctr_atom_props.getValence() == 3 || non_tetra_coord_ctr_atom_props.getMultiBondDesignator() != 0)
+				//  return false;
+	
+			case 1:
+				return false;
+
+			default:
+				break;
+		}
+
+		tor_param3 = std::sqrt(getEmpiricalRuleVParameter(ctr_atomic_no1) * getEmpiricalRuleVParameter(ctr_atomic_no2)) / 
+			(3.0 * (non_tetra_coord_ctr_atom_props.getNumNeighbors() - 1));
+
+		return true;
+	}
+			
+	if (getOrder(ctr_bond) == 1 && ctr_atom1_mb_desig != 0 && ctr_atom2_mb_desig != 0) {
+		// Rule g)
+
+		bool ctr_atom1_has_pi_lp = ctr_atom1_prop_entry.hasPiLonePair();
+		bool ctr_atom2_has_pi_lp = ctr_atom2_prop_entry.hasPiLonePair();
+
+		if (ctr_atom1_has_pi_lp && ctr_atom2_has_pi_lp) {
+			// Rule g1)
+
+			return false;
+		}
+		
+		if (ctr_atom1_has_pi_lp && ctr_atom2_mb_desig != 0) {
+			// Rule g2)
+
+			double pi_bnd_order = 0.15;
+
+			if (ctr_atom1_mb_desig != 0)
+				pi_bnd_order = 0.5;
+				
+			else if (isInSecondPTERow(ctr_atomic_no1) && isInSecondPTERow(ctr_atomic_no2))
+				pi_bnd_order = 0.3;
+				
+			tor_param2 = 6.0 * pi_bnd_order * std::sqrt(getEmpiricalRuleUParameter(ctr_atomic_no1) * getEmpiricalRuleUParameter(ctr_atomic_no2));
+			return true;
+		}
+
+		if (ctr_atom2_has_pi_lp && ctr_atom1_mb_desig != 0) {
+			// Rule g3)
+
+			double pi_bnd_order = 0.15;
+
+			if (ctr_atom2_mb_desig != 0)
+				pi_bnd_order = 0.5;
+					
+			else if (isInSecondPTERow(ctr_atomic_no1) && isInSecondPTERow(ctr_atomic_no2))
+				pi_bnd_order = 0.3;
+					
+			tor_param2 = 6.0 * pi_bnd_order * std::sqrt(getEmpiricalRuleUParameter(ctr_atomic_no1) * getEmpiricalRuleUParameter(ctr_atomic_no2));
+			return true;
+		}
+
+		if ((ctr_atom1_mb_desig != 0 || ctr_atom2_mb_desig != 0) && (ctr_atomic_no1 != AtomType::C || ctr_atomic_no2 != AtomType::C)) {
+			// Rule g4)
+
+			tor_param2 = 6.0 * 0.4 * std::sqrt(getEmpiricalRuleUParameter(ctr_atomic_no1) * getEmpiricalRuleUParameter(ctr_atomic_no2));
+			return true;
+		}
+
+		// Rule g5)
+
+		tor_param2 = 6.0 * 0.15 * std::sqrt(getEmpiricalRuleUParameter(ctr_atomic_no1) * getEmpiricalRuleUParameter(ctr_atomic_no2));
+		return true;
+	}
+
+	if ((ctr_atomic_no1 == AtomType::O || ctr_atomic_no1 == AtomType::S) && (ctr_atomic_no2 == AtomType::O || ctr_atomic_no2 == AtomType::S)) {
+		// Rule h1)
+
+		double wj = (ctr_atomic_no1 == AtomType::O ? 2.0 : 8.0);
+		double wk = (ctr_atomic_no2 == AtomType::O ? 2.0 : 8.0);
+
+		tor_param2 = -std::sqrt(wj * wk);
+		return true;
+	}
+
+	// Rule h2)
+
+	tor_param3 = std::sqrt(getEmpiricalRuleVParameter(ctr_atomic_no1) * getEmpiricalRuleVParameter(ctr_atomic_no2))
+		/ ((ctr_atom1_prop_entry.getNumNeighbors() - 1) * (ctr_atom2_prop_entry.getNumNeighbors() - 1));
+
+	return true;
 }
 
 unsigned int ForceField::MMFF94TorsionInteractionAnalyzer::getTorsionTypeIndex(const Chem::MolecularGraph& molgraph, const Chem::Atom& term_atom1, const Chem::Atom& ctr_atom1, 
@@ -240,4 +483,9 @@ unsigned int ForceField::MMFF94TorsionInteractionAnalyzer::getTorsionTypeIndex(c
 	}
 
     return 0;
+}
+
+bool ForceField::MMFF94TorsionInteractionAnalyzer::isInSecondPTERow(unsigned int atomic_no) const
+{
+	return (atomic_no >= Chem::AtomType::Li && atomic_no <= Chem::AtomType::Ne);
 }

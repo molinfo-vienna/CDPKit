@@ -87,14 +87,24 @@ namespace CDPL
 			void analyze(const Chem::MolecularGraph& molgraph, MMFF94TorsionInteractionList& iactions);
 
 		  private:
+			typedef MMFF94AtomTypePropertyTable::Entry AtomTypePropEntry;
 			typedef std::vector<const Chem::Atom*> AtomList;
 			typedef std::vector<const Chem::Bond*> BondList;
+
+			bool getParameters(const Chem::MolecularGraph& molgraph, const Chem::Atom& term_atom1, const Chem::Atom& ctr_atom1, 
+							   const Chem::Atom& ctr_atom2, const Chem::Atom& term_atom2, const Chem::Bond& ctr_bond,
+							   unsigned int term_atom1_type, unsigned int ctr_atom1_type, unsigned int ctr_atom2_type,
+							   unsigned int term_atom2_type, unsigned int tor_type_idx, const AtomTypePropEntry& ctr_atom1_prop_entry, 
+							   const AtomTypePropEntry& ctr_atom2_prop_entry, double& tor_param1, double& tor_param2,
+							   double& tor_param3) const;
 
 			unsigned int getTorsionTypeIndex(const Chem::MolecularGraph& molgraph, const Chem::Atom& term_atom1, const Chem::Atom& ctr_atom1, 
 											 const Chem::Atom& ctr_atom2, const Chem::Atom& term_atom2, const Chem::Bond& ctr_bond,
 											 unsigned int term_atom1_type, unsigned int ctr_atom1_type, unsigned int ctr_atom2_type, 
 											 unsigned int term_atom2_type, unsigned int term_bond1_type_idx, unsigned int ctr_bond_type_idx,
 											 unsigned int term_bond2_type_idx) const;
+
+			bool isInSecondPTERow(unsigned int atomic_no) const;
 
 			InteractionFilterFunction4                          filterFunc;
 			MMFF94NumericAtomTypeFunction                       atomTypeFunc;	

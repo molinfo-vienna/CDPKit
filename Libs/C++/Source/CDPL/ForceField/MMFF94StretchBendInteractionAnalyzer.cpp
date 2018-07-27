@@ -33,6 +33,7 @@
 #include "CDPL/ForceField/MMFF94StretchBendInteractionAnalyzer.hpp"
 #include "CDPL/ForceField/AtomFunctions.hpp"
 #include "CDPL/Chem/MolecularGraph.hpp"
+#include "CDPL/Chem/AtomType.hpp"
 #include "CDPL/Base/Exceptions.hpp"
 
 
@@ -244,6 +245,8 @@ unsigned int ForceField::MMFF94StretchBendInteractionAnalyzer::getStretchBendTyp
 
 unsigned int ForceField::MMFF94StretchBendInteractionAnalyzer::getPTERow(const Chem::MolecularGraph& molgraph, const Chem::Atom& atom, unsigned int atom_type) const
 {
+	using namespace Chem;
+
 	typedef MMFF94AtomTypePropertyTable::Entry AtomTypePropEntry;
 
 	const AtomTypePropEntry& prop_entry = typePropTable->getEntry(atom_type);
@@ -252,44 +255,27 @@ unsigned int ForceField::MMFF94StretchBendInteractionAnalyzer::getPTERow(const C
 		throw Base::ItemNotFound("MMFF94StretchBendInteractionAnalyzer: could not find MMFF94 atom type properties for atom #" + 
 								 boost::lexical_cast<std::string>(molgraph.getAtomIndex(atom)));
 
-    switch (prop_entry.getAtomicNumber()) {
+	unsigned int atomic_no = prop_entry.getAtomicNumber();
 
-		case 1:
-			return 0;
+	if (atomic_no <= AtomType::He)
+		return 0;
 
-		case 6:
-		case 3:
-		case 5:
-		case 7:
-		case 8:
-		case 9:
-		case 4:
-			return 1;
+	if (atomic_no <= AtomType::Ne)
+		return 1;
 
-		case 11:
-		case 12:
-		case 13:
-		case 14:
-		case 15:
-		case 16:
-		case 17:
-			return 2;
+	if (atomic_no <= AtomType::Ar)
+		return 2;
 
-		case 19:
-		case 20:
-		case 26:
-		case 28:
-		case 29:
-		case 30:
-		case 35:
-			return 3;
+	if (atomic_no <= AtomType::Kr)
+		return 3;
 
-		case 53:
-			return 4;
+	if (atomic_no <= AtomType::Xe)
+		return 4;
 
-		default:
-			throw Base::OperationFailed("MMFF94StretchBendInteractionAnalyzer: could not deduce PTE row for atom #" + 
-										boost::lexical_cast<std::string>(molgraph.getAtomIndex(atom)));
-			return 1;
-    }
+	if (atomic_no <= AtomType::Rn)
+		return 5;
+
+	throw Base::OperationFailed("MMFF94StretchBendInteractionAnalyzer: could not deduce PTE row for atom #" + 
+								boost::lexical_cast<std::string>(molgraph.getAtomIndex(atom)));
+	return 0;
 }

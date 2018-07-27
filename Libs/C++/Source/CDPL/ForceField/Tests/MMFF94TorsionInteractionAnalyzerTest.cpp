@@ -58,10 +58,10 @@ namespace
 			BOOST_CHECK(log_reader.getTorsionInteractions(mol_name, iactions));
 
 			analyzer.analyze(mol, found_iactions);
-/*
+
 			BOOST_CHECK_MESSAGE(found_iactions.getSize() == iactions.size(), "Torsion interaction count mismatch for molecule #" << mol_idx << " (" << mol_name << "): " <<
 								found_iactions.getSize() << " != " << iactions.size());
-*/
+
 			for (std::size_t i = 0; i < iactions.size(); i++) {
 				bool iaction_found = false;
 				std::size_t term_atom1_idx = TestUtils::getAtomIndex(mol, iactions[i].termAtom1Name);
@@ -83,7 +83,7 @@ namespace
 										getMOL2Name(mol.getAtom(iactions[i].ctrAtom2Idx)) << ")-#" << term_atom2_idx << "(" << 
 										iactions[i].termAtom2Name << ") of molecule #" << mol_idx << 
 										" (" << mol_name << "): " << iaction.getTorsionTypeIndex() << " != " << iactions[i].ffClass);
-/*
+
 					BOOST_CHECK_MESSAGE(std::abs(iaction.getTorsionParameter1() - iactions[i].torParams[0]) < 0.0005, 
 										"Torsion parameter V1 mismatch for torsion interaction #" << term_atom1_idx << "(" << 
 										iactions[i].termAtom1Name << ")-#" << iactions[i].ctrAtom1Idx << "(" << 
@@ -93,7 +93,7 @@ namespace
 										" (" << mol_name << "): " << iaction.getTorsionParameter1() << " != " << iactions[i].torParams[0]);
 	
 					BOOST_CHECK_MESSAGE(std::abs(iaction.getTorsionParameter2() - iactions[i].torParams[1]) < 0.0005, 
-										"Torsion parameter V1 mismatch for torsion interaction #" << term_atom1_idx << "(" << 
+										"Torsion parameter V2 mismatch for torsion interaction #" << term_atom1_idx << "(" << 
 										iactions[i].termAtom1Name << ")-#" << iactions[i].ctrAtom1Idx << "(" << 
 										getMOL2Name(mol.getAtom(iactions[i].ctrAtom1Idx)) << ")-#" << iactions[i].ctrAtom2Idx << "(" << 
 										getMOL2Name(mol.getAtom(iactions[i].ctrAtom2Idx)) << ")-#" << term_atom2_idx << "(" << 
@@ -101,13 +101,13 @@ namespace
 										" (" << mol_name << "): " << iaction.getTorsionParameter2() << " != " << iactions[i].torParams[1]);
 	
 					BOOST_CHECK_MESSAGE(std::abs(iaction.getTorsionParameter3() - iactions[i].torParams[2]) < 0.0005, 
-										"Torsion parameter V1 mismatch for torsion interaction #" << term_atom1_idx << "(" << 
+										"Torsion parameter V3 mismatch for torsion interaction #" << term_atom1_idx << "(" << 
 										iactions[i].termAtom1Name << ")-#" << iactions[i].ctrAtom1Idx << "(" << 
 										getMOL2Name(mol.getAtom(iactions[i].ctrAtom1Idx)) << ")-#" << iactions[i].ctrAtom2Idx << "(" << 
 										getMOL2Name(mol.getAtom(iactions[i].ctrAtom2Idx)) << ")-#" << term_atom2_idx << "(" << 
 										iactions[i].termAtom2Name << ") of molecule #" << mol_idx << 
 										" (" << mol_name << "): " << iaction.getTorsionParameter3() << " != " << iactions[i].torParams[2]);
-*/
+
 					iaction_found = true;
 					break;
 				}
