@@ -1,7 +1,7 @@
 /* -*- mode: c++; c-basic-offset: 4; tab-width: 4; indent-tabs-mode: t -*- */
 
 /* 
- * MMFF94ElectrostaticInteractionAnalyzer.hpp 
+ * MMFF94ElectrostaticInteractionParameterizer.hpp 
  *
  * This file is part of the Chemical Data Processing Toolkit
  *
@@ -25,14 +25,14 @@
 
 /**
  * \file
- * \brief Definition of the class CDPL::ForceField::MMFF94ElectrostaticInteractionAnalyzer.
+ * \brief Definition of the class CDPL::ForceField::MMFF94ElectrostaticInteractionParameterizer.
  */
 
-#ifndef CDPL_FORCEFIELD_MMFF94ELECTROSTATICINTERACTIONANALYZER_HPP
-#define CDPL_FORCEFIELD_MMFF94ELECTROSTATICINTERACTIONANALYZER_HPP
+#ifndef CDPL_FORCEFIELD_MMFF94ELECTROSTATICINTERACTIONPARAMETERIZER_HPP
+#define CDPL_FORCEFIELD_MMFF94ELECTROSTATICINTERACTIONPARAMETERIZER_HPP
 
 #include "CDPL/ForceField/APIPrefix.hpp"
-#include "CDPL/ForceField/MMFF94ElectrostaticInteractionList.hpp"
+#include "CDPL/ForceField/MMFF94ElectrostaticInteractionData.hpp"
 #include "CDPL/ForceField/MMFF94PropertyFunctionWrappers.hpp"
 #include "CDPL/ForceField/InteractionFilterFunctionWrappers.hpp"
 #include "CDPL/ForceField/TopologicalAtomDistanceFunctionWrapper.hpp"
@@ -51,21 +51,21 @@ namespace CDPL
     {
 
 		/**
-		 * \addtogroup CDPL_FORCEFIELD_INTERACTION_ANALYSIS
+		 * \addtogroup CDPL_FORCEFIELD_INTERACTION_PARAMETERIZATION
 		 * @{
 		 */
 
-		class CDPL_FORCEFIELD_API MMFF94ElectrostaticInteractionAnalyzer
+		class CDPL_FORCEFIELD_API MMFF94ElectrostaticInteractionParameterizer
 		{
 
 		  public:
 			static const double DEF_DISTANCE_EXPONENT;
 			static const double DEF_DIELECTRIC_CONSTANT;
 
-			MMFF94ElectrostaticInteractionAnalyzer();
+			MMFF94ElectrostaticInteractionParameterizer();
 
-			MMFF94ElectrostaticInteractionAnalyzer(const Chem::MolecularGraph& molgraph, 
-												   MMFF94ElectrostaticInteractionList& iactions);
+			MMFF94ElectrostaticInteractionParameterizer(const Chem::MolecularGraph& molgraph, 
+														MMFF94ElectrostaticInteractionData& ia_data);
 
 			void setFilterFunction(const InteractionFilterFunction2& func); 
 
@@ -77,7 +77,7 @@ namespace CDPL
 
 			void setDistanceExponent(double dist_expo);
 
-			void analyze(const Chem::MolecularGraph& molgraph, MMFF94ElectrostaticInteractionList& iactions);
+			void parameterize(const Chem::MolecularGraph& molgraph, MMFF94ElectrostaticInteractionData& ia_data);
 
 		  private:
 			InteractionFilterFunction2      filterFunc;
@@ -93,4 +93,4 @@ namespace CDPL
     }
 }
 
-#endif // CDPL_FORCEFIELD_MMFF94ELECTROSTATICINTERACTIONANALYZER_HPP
+#endif // CDPL_FORCEFIELD_MMFF94ELECTROSTATICINTERACTIONPARAMETERIZER_HPP

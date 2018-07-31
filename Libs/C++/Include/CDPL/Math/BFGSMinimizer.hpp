@@ -49,7 +49,7 @@ namespace CDPL
 		 *
 		 * The implementation has been taken from the <em>GNU Scientific Library</em>.
 		 *
-		 * \see R.Fletcher, "Practical Method's of Optimization", Second
+		 * \see R. Fletcher, "Practical Method's of Optimization", Second
 		 *      Edition, ISBN 0471915475.  Algorithms 2.6.2 and 2.6.4. 
 		 */
 		template <typename VA, typename VT = typename MinimizerVariableArrayTraits<VA>::ValueType, typename FVT = VT>
@@ -93,7 +93,7 @@ namespace CDPL
 			}
 
 			Status minimize(VariableArrayType& x, VariableArrayType& g, std::size_t max_iter, 
-											 const ValueType& g_norm, const ValueType& delta_f, bool do_setup = true) {
+							const ValueType& g_norm, const ValueType& delta_f, bool do_setup = true) {
 				if (do_setup)
 					setup(x, g);
 
@@ -119,7 +119,7 @@ namespace CDPL
 			}
 
 			ValueType setup(const VariableArrayType& x, VariableArrayType& g,
-											 const ValueType& step_size = 0.1, const ValueType& tol = 0.01) {
+							const ValueType& step_size = 0.1, const ValueType& tol = 0.01) {
 				numIter = 0;
 				step = step_size;
 				deltaF = ValueType(0);

@@ -1,7 +1,7 @@
 /* -*- mode: c++; c-basic-offset: 4; tab-width: 4; indent-tabs-mode: t -*- */
 
 /* 
- * MMFF94VanDerWaalsInteractionList.hpp 
+ * MMFF94BondStretchingInteractionData.hpp 
  *
  * This file is part of the Chemical Data Processing Toolkit
  *
@@ -25,13 +25,13 @@
 
 /**
  * \file
- * \brief Definition of the class CDPL::ForceField::MMFF94VanDerWaalsInteractionList.
+ * \brief Definition of the class CDPL::ForceField::MMFF94BondStretchingInteractionData.
  */
 
-#ifndef CDPL_FORCEFIELD_MMFF94VANDERWAALSINTERACTIONLIST_HPP
-#define CDPL_FORCEFIELD_MMFF94VANDERWAALSINTERACTIONLIST_HPP
+#ifndef CDPL_FORCEFIELD_MMFF94BONDSTRETCHINGINTERACTIONDATA_HPP
+#define CDPL_FORCEFIELD_MMFF94BONDSTRETCHINGINTERACTIONDATA_HPP
 
-#include "CDPL/ForceField/MMFF94VanDerWaalsInteraction.hpp"
+#include "CDPL/ForceField/MMFF94BondStretchingInteraction.hpp"
 #include "CDPL/Util/Array.hpp"
 
 
@@ -46,7 +46,7 @@ namespace CDPL
 	 * @{
 	 */
 
-	typedef Util::Array<MMFF94VanDerWaalsInteraction> MMFF94VanDerWaalsInteractionList;
+	typedef Util::Array<MMFF94BondStretchingInteraction> MMFF94BondStretchingInteractionData;
 
 	/**
 	 * @}
@@ -54,4 +54,4 @@ namespace CDPL
     }
 }
 
-#endif // CDPL_FORCEFIELD_MMFF94VANDERWAALSINTERACTIONLIST_HPP
+#endif // CDPL_FORCEFIELD_MMFF94BONDSTRETCHINGINTERACTIONDATA_HPP

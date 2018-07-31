@@ -7,11 +7,11 @@ SET(test-suite_SRCS
     MMFF94TestData.cpp
     MMFF94AtomTyperTest.cpp
     MMFF94ChargeCalculatorTest.cpp
-    MMFF94BondStretchingInteractionAnalyzerTest.cpp
-    MMFF94AngleBendingInteractionAnalyzerTest.cpp
-    MMFF94StretchBendInteractionAnalyzerTest.cpp
-    MMFF94OutOfPlaneBendingInteractionAnalyzerTest.cpp
-    MMFF94TorsionInteractionAnalyzerTest.cpp
+    MMFF94BondStretchingInteractionParameterizerTest.cpp
+    MMFF94AngleBendingInteractionParameterizerTest.cpp
+    MMFF94StretchBendInteractionParameterizerTest.cpp
+    MMFF94OutOfPlaneBendingInteractionParameterizerTest.cpp
+    MMFF94TorsionInteractionParameterizerTest.cpp
 
     OptimolLogReader.cpp
     TestUtils.cpp

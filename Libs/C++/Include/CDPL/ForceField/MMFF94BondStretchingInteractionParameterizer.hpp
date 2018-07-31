@@ -1,7 +1,7 @@
 /* -*- mode: c++; c-basic-offset: 4; tab-width: 4; indent-tabs-mode: t -*- */
 
 /* 
- * MMFF94BondStretchingInteractionAnalyzer.hpp 
+ * MMFF94BondStretchingInteractionParameterizer.hpp 
  *
  * This file is part of the Chemical Data Processing Toolkit
  *
@@ -25,14 +25,14 @@
 
 /**
  * \file
- * \brief Definition of the class CDPL::ForceField::MMFF94BondStretchingInteractionAnalyzer.
+ * \brief Definition of the class CDPL::ForceField::MMFF94BondStretchingInteractionParameterizer.
  */
 
-#ifndef CDPL_FORCEFIELD_MMFF94BONDSTRETCHINGINTERACTIONANALYZER_HPP
-#define CDPL_FORCEFIELD_MMFF94BONDSTRETCHINGINTERACTIONANALYZER_HPP
+#ifndef CDPL_FORCEFIELD_MMFF94BONDSTRETCHINGINTERACTIONPARAMETERIZER_HPP
+#define CDPL_FORCEFIELD_MMFF94BONDSTRETCHINGINTERACTIONPARAMETERIZER_HPP
 
 #include "CDPL/ForceField/APIPrefix.hpp"
-#include "CDPL/ForceField/MMFF94BondStretchingInteractionList.hpp"
+#include "CDPL/ForceField/MMFF94BondStretchingInteractionData.hpp"
 #include "CDPL/ForceField/MMFF94PropertyFunctionWrappers.hpp"
 #include "CDPL/ForceField/InteractionFilterFunctionWrappers.hpp"
 #include "CDPL/ForceField/MMFF94BondStretchingParameterTable.hpp"
@@ -54,18 +54,18 @@ namespace CDPL
     {
 
 		/**
-		 * \addtogroup CDPL_FORCEFIELD_INTERACTION_ANALYSIS
+		 * \addtogroup CDPL_FORCEFIELD_INTERACTION_PARAMETERIZATION
 		 * @{
 		 */
 
-		class CDPL_FORCEFIELD_API MMFF94BondStretchingInteractionAnalyzer
+		class CDPL_FORCEFIELD_API MMFF94BondStretchingInteractionParameterizer
 		{
 
 		  public:
-			 MMFF94BondStretchingInteractionAnalyzer();
+			 MMFF94BondStretchingInteractionParameterizer();
 
-			 MMFF94BondStretchingInteractionAnalyzer(const Chem::MolecularGraph& molgraph, 
-													 MMFF94BondStretchingInteractionList& iactions);
+			 MMFF94BondStretchingInteractionParameterizer(const Chem::MolecularGraph& molgraph, 
+														  MMFF94BondStretchingInteractionData& ia_data);
 
 			 void setFilterFunction(const InteractionFilterFunction2& func); 
 
@@ -81,7 +81,7 @@ namespace CDPL
 
 			 void setAtomTypePropertyTable(const MMFF94AtomTypePropertyTable::SharedPointer& table);
 
-			 void analyze(const Chem::MolecularGraph& molgraph, MMFF94BondStretchingInteractionList& iactions);
+			 void parameterize(const Chem::MolecularGraph& molgraph, MMFF94BondStretchingInteractionData& ia_data);
 
 			 void getParameters(const Chem::MolecularGraph& molgraph, const Chem::Bond& bond, 
 								unsigned int& bond_type_idx, double& force_const, double& ref_length) const;
@@ -108,4 +108,4 @@ namespace CDPL
     }
 }
 
-#endif // CDPL_FORCEFIELD_MMFF94BONDSTRETCHINGINTERACTIONANALYZER_HPP
+#endif // CDPL_FORCEFIELD_MMFF94BONDSTRETCHINGINTERACTIONPARAMETERIZER_HPP

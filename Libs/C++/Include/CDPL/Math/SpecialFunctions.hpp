@@ -187,6 +187,7 @@ namespace
 }
 
 // \cond UNHIDE_DETAILS
+
 template <typename T>
 T CDPL::Math::factorial(unsigned int n) 
 {

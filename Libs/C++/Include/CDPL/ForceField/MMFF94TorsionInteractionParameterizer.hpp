@@ -1,7 +1,7 @@
 /* -*- mode: c++; c-basic-offset: 4; tab-width: 4; indent-tabs-mode: t -*- */
 
 /* 
- * MMFF94TorsionInteractionAnalyzer.hpp 
+ * MMFF94TorsionInteractionParameterizer.hpp 
  *
  * This file is part of the Chemical Data Processing Toolkit
  *
@@ -25,16 +25,16 @@
 
 /**
  * \file
- * \brief Definition of the class CDPL::ForceField::MMFF94TorsionInteractionAnalyzer.
+ * \brief Definition of the class CDPL::ForceField::MMFF94TorsionInteractionParameterizer.
  */
 
-#ifndef CDPL_FORCEFIELD_MMFF94TORSIONINTERACTIONANALYZER_HPP
-#define CDPL_FORCEFIELD_MMFF94TORSIONINTERACTIONANALYZER_HPP
+#ifndef CDPL_FORCEFIELD_MMFF94TORSIONINTERACTIONPARAMETERIZER_HPP
+#define CDPL_FORCEFIELD_MMFF94TORSIONINTERACTIONPARAMETERIZER_HPP
 
 #include <vector>
 
 #include "CDPL/ForceField/APIPrefix.hpp"
-#include "CDPL/ForceField/MMFF94TorsionInteractionList.hpp"
+#include "CDPL/ForceField/MMFF94TorsionInteractionData.hpp"
 #include "CDPL/ForceField/MMFF94PropertyFunctionWrappers.hpp"
 #include "CDPL/ForceField/InteractionFilterFunctionWrappers.hpp"
 #include "CDPL/ForceField/MMFF94TorsionParameterTable.hpp"
@@ -57,18 +57,18 @@ namespace CDPL
     {
 
 		/**
-		 * \addtogroup CDPL_FORCEFIELD_INTERACTION_ANALYSIS
+		 * \addtogroup CDPL_FORCEFIELD_INTERACTION_PARAMETERIZATION
 		 * @{
 		 */
 
-		class CDPL_FORCEFIELD_API MMFF94TorsionInteractionAnalyzer
+		class CDPL_FORCEFIELD_API MMFF94TorsionInteractionParameterizer
 		{
 
 		  public:
-			MMFF94TorsionInteractionAnalyzer();
+			MMFF94TorsionInteractionParameterizer();
 
-			MMFF94TorsionInteractionAnalyzer(const Chem::MolecularGraph& molgraph, 
-											 MMFF94TorsionInteractionList& iactions);
+			MMFF94TorsionInteractionParameterizer(const Chem::MolecularGraph& molgraph, 
+												  MMFF94TorsionInteractionData& ia_data);
 
 			void setFilterFunction(const InteractionFilterFunction4& func); 
 
@@ -84,7 +84,7 @@ namespace CDPL
 
 			void setParameterAtomTypeMap(const MMFF94PrimaryToParameterAtomTypeMap::SharedPointer& map);
 
-			void analyze(const Chem::MolecularGraph& molgraph, MMFF94TorsionInteractionList& iactions);
+			void parameterize(const Chem::MolecularGraph& molgraph, MMFF94TorsionInteractionData& ia_data);
 
 		  private:
 			typedef MMFF94AtomTypePropertyTable::Entry AtomTypePropEntry;
@@ -125,4 +125,4 @@ namespace CDPL
     }
 }
 
-#endif // CDPL_FORCEFIELD_MMFF94TORSIONINTERACTIONANALYZER_HPP
+#endif // CDPL_FORCEFIELD_MMFF94TORSIONINTERACTIONPARAMETERIZER_HPP

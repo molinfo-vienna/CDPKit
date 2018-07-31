@@ -1,7 +1,7 @@
 /* -*- mode: c++; c-basic-offset: 4; tab-width: 4; indent-tabs-mode: t -*- */
 
 /* 
- * MMFF94StretchBendInteractionAnalyzer.cpp 
+ * MMFF94StretchBendInteractionParameterizer.cpp 
  *
  * This file is part of the Chemical Data Processing Toolkit
  *
@@ -30,7 +30,7 @@
 
 #include <boost/lexical_cast.hpp>
 
-#include "CDPL/ForceField/MMFF94StretchBendInteractionAnalyzer.hpp"
+#include "CDPL/ForceField/MMFF94StretchBendInteractionParameterizer.hpp"
 #include "CDPL/ForceField/AtomFunctions.hpp"
 #include "CDPL/Chem/MolecularGraph.hpp"
 #include "CDPL/Chem/AtomType.hpp"
@@ -40,52 +40,52 @@
 using namespace CDPL; 
 
 
-ForceField::MMFF94StretchBendInteractionAnalyzer::MMFF94StretchBendInteractionAnalyzer(const Chem::MolecularGraph& molgraph, const MMFF94BondStretchingInteractionList& bs_iactions, 
-																					   const MMFF94AngleBendingInteractionList& ab_iactions, MMFF94StretchBendInteractionList& iactions):
+ForceField::MMFF94StretchBendInteractionParameterizer::MMFF94StretchBendInteractionParameterizer(const Chem::MolecularGraph& molgraph, const MMFF94BondStretchingInteractionData& bs_ia_data, 
+																								 const MMFF94AngleBendingInteractionData& ab_ia_data, MMFF94StretchBendInteractionData& ia_data):
 	filterFunc(), atomTypeFunc(&getMMFF94NumericType), paramTable(MMFF94StretchBendParameterTable::get()), 
 	defParamTable(MMFF94DefaultStretchBendParameterTable::get()), typePropTable(MMFF94AtomTypePropertyTable::get())
 {
-	analyze(molgraph, bs_iactions, ab_iactions, iactions);
+	parameterize(molgraph, bs_ia_data, ab_ia_data, ia_data);
 }
 
-ForceField::MMFF94StretchBendInteractionAnalyzer::MMFF94StretchBendInteractionAnalyzer() :
+ForceField::MMFF94StretchBendInteractionParameterizer::MMFF94StretchBendInteractionParameterizer() :
 	filterFunc(), atomTypeFunc(&getMMFF94NumericType), paramTable(MMFF94StretchBendParameterTable::get()), 
 	defParamTable(MMFF94DefaultStretchBendParameterTable::get()), typePropTable(MMFF94AtomTypePropertyTable::get())
 {}
 
-void ForceField::MMFF94StretchBendInteractionAnalyzer::setFilterFunction(const InteractionFilterFunction3& func)
+void ForceField::MMFF94StretchBendInteractionParameterizer::setFilterFunction(const InteractionFilterFunction3& func)
 {
 	filterFunc = func;
 }
 
-void ForceField::MMFF94StretchBendInteractionAnalyzer::setAtomTypeFunction(const MMFF94NumericAtomTypeFunction& func)
+void ForceField::MMFF94StretchBendInteractionParameterizer::setAtomTypeFunction(const MMFF94NumericAtomTypeFunction& func)
 {
 	atomTypeFunc = func;
 }
 
-void ForceField::MMFF94StretchBendInteractionAnalyzer::setStretchBendParameterTable(const MMFF94StretchBendParameterTable::SharedPointer& table)
+void ForceField::MMFF94StretchBendInteractionParameterizer::setStretchBendParameterTable(const MMFF94StretchBendParameterTable::SharedPointer& table)
 {
 	paramTable = table;
 }
 
-void ForceField::MMFF94StretchBendInteractionAnalyzer::setDefaultStretchBendParameterTable(const MMFF94DefaultStretchBendParameterTable::SharedPointer& table)
+void ForceField::MMFF94StretchBendInteractionParameterizer::setDefaultStretchBendParameterTable(const MMFF94DefaultStretchBendParameterTable::SharedPointer& table)
 {
 	defParamTable = table;
 }
 
-void ForceField::MMFF94StretchBendInteractionAnalyzer::setAtomTypePropertyTable(const MMFF94AtomTypePropertyTable::SharedPointer& table)
+void ForceField::MMFF94StretchBendInteractionParameterizer::setAtomTypePropertyTable(const MMFF94AtomTypePropertyTable::SharedPointer& table)
 {
 	typePropTable = table;
 }
 
-void ForceField::MMFF94StretchBendInteractionAnalyzer::analyze(const Chem::MolecularGraph& molgraph, const MMFF94BondStretchingInteractionList& bs_iactions, 
-															   const MMFF94AngleBendingInteractionList& ab_iactions, MMFF94StretchBendInteractionList& iactions)
+void ForceField::MMFF94StretchBendInteractionParameterizer::parameterize(const Chem::MolecularGraph& molgraph, const MMFF94BondStretchingInteractionData& bs_ia_data, 
+																		 const MMFF94AngleBendingInteractionData& ab_ia_data, MMFF94StretchBendInteractionData& ia_data)
 {
 	using namespace Chem;
 
-	initBondStretchingParamLookupTable(bs_iactions);
+	initBondStretchingParamLookupTable(bs_ia_data);
 
-	for (MMFF94AngleBendingInteractionList::ConstElementIterator it = ab_iactions.getElementsBegin(), end = ab_iactions.getElementsEnd(); it != end; ++it) {
+	for (MMFF94AngleBendingInteractionData::ConstElementIterator it = ab_ia_data.getElementsBegin(), end = ab_ia_data.getElementsEnd(); it != end; ++it) {
 		const MMFF94AngleBendingInteraction& ab_int = *it;
 
 		if (ab_int.isLinearAngle())
@@ -119,16 +119,16 @@ void ForceField::MMFF94StretchBendInteractionAnalyzer::analyze(const Chem::Molec
 		getStretchBendParameters(molgraph, term_atom1, ctr_atom, term_atom2, bond_type_idx1, bond_type_idx2, 
 								 ab_int.getAngleTypeIndex(), sb_type_idx, ijk_force_const, kji_force_const);
 
-		iactions.addElement(MMFF94StretchBendInteraction(term_atom1_idx, ctr_atom_idx, term_atom2_idx, sb_type_idx, ab_int.getReferenceAngle(),
-														 ref_length1, ref_length2, ijk_force_const, kji_force_const));
+		ia_data.addElement(MMFF94StretchBendInteraction(term_atom1_idx, ctr_atom_idx, term_atom2_idx, sb_type_idx, ab_int.getReferenceAngle(),
+														ref_length1, ref_length2, ijk_force_const, kji_force_const));
 	}
 }
 	
-void ForceField::MMFF94StretchBendInteractionAnalyzer::initBondStretchingParamLookupTable(const MMFF94BondStretchingInteractionList& bs_iactions)
+void ForceField::MMFF94StretchBendInteractionParameterizer::initBondStretchingParamLookupTable(const MMFF94BondStretchingInteractionData& bs_ia_data)
 {
 	bsParamTable.clear();
 
-	for (MMFF94BondStretchingInteractionList::ConstElementIterator it = bs_iactions.getElementsBegin(), end = bs_iactions.getElementsEnd(); it != end; ++it) {
+	for (MMFF94BondStretchingInteractionData::ConstElementIterator it = bs_ia_data.getElementsBegin(), end = bs_ia_data.getElementsEnd(); it != end; ++it) {
 		const MMFF94BondStretchingInteraction& bs_int = *it;
 		std::size_t atom1_idx = bs_int.getAtom1Index();
 		std::size_t atom2_idx = bs_int.getAtom2Index();
@@ -140,8 +140,8 @@ void ForceField::MMFF94StretchBendInteractionAnalyzer::initBondStretchingParamLo
 	}
 }
 
-void ForceField::MMFF94StretchBendInteractionAnalyzer::getBondStretchingParameters(std::size_t atom1_idx, std::size_t atom2_idx,
-																				   unsigned int& bond_type_idx, double& ref_length) const
+void ForceField::MMFF94StretchBendInteractionParameterizer::getBondStretchingParameters(std::size_t atom1_idx, std::size_t atom2_idx,
+																						unsigned int& bond_type_idx, double& ref_length) const
 {
 	if (atom1_idx > atom2_idx)
 		std::swap(atom1_idx, atom2_idx);
@@ -149,16 +149,16 @@ void ForceField::MMFF94StretchBendInteractionAnalyzer::getBondStretchingParamete
 	BondStretchingParamLookupTable::const_iterator it = bsParamTable.find(std::make_pair(atom1_idx, atom2_idx));
 
 	if (it == bsParamTable.end())
-		throw Base::ItemNotFound("MMFF94StretchBendInteractionAnalyzer: could not find MMFF94 bond stretching parameters for bond #" + 
+		throw Base::ItemNotFound("MMFF94StretchBendInteractionParameterizer: could not find MMFF94 bond stretching parameters for bond #" + 
 								 boost::lexical_cast<std::string>(atom1_idx) + "-#" + boost::lexical_cast<std::string>(atom2_idx));
 
 	bond_type_idx = it->second->getBondTypeIndex();
 	ref_length = it->second->getReferenceLength();
 }
 			
-void ForceField::MMFF94StretchBendInteractionAnalyzer::getStretchBendParameters(const Chem::MolecularGraph& molgraph, const Chem::Atom& term_atom1, const Chem::Atom& ctr_atom, 
-																				const Chem::Atom& term_atom2, unsigned int bond_type_idx1, unsigned int bond_type_idx2,
-																				unsigned int angle_type_idx, unsigned int& sb_type_idx, double& ijk_force_const, double& kji_force_const) const
+void ForceField::MMFF94StretchBendInteractionParameterizer::getStretchBendParameters(const Chem::MolecularGraph& molgraph, const Chem::Atom& term_atom1, const Chem::Atom& ctr_atom, 
+																					 const Chem::Atom& term_atom2, unsigned int bond_type_idx1, unsigned int bond_type_idx2,
+																					 unsigned int angle_type_idx, unsigned int& sb_type_idx, double& ijk_force_const, double& kji_force_const) const
 {
 	typedef MMFF94StretchBendParameterTable::Entry ParamEntry;
 	typedef MMFF94DefaultStretchBendParameterTable::Entry DefParamEntry;
@@ -194,7 +194,7 @@ void ForceField::MMFF94StretchBendInteractionAnalyzer::getStretchBendParameters(
 	const DefParamEntry& def_param_entry = defParamTable->getEntry(term_atom1_pte_row, ctr_atom_pte_row, term_atom2_pte_row);
 
 	if (!def_param_entry) 
-		throw Base::ItemNotFound("MMFF94StretchBendInteractionAnalyzer: could not find MMFF94 default stretch bend parameters for interaction #" + 
+		throw Base::ItemNotFound("MMFF94StretchBendInteractionParameterizer: could not find MMFF94 default stretch-bend parameters for interaction #" + 
 								 boost::lexical_cast<std::string>(molgraph.getAtomIndex(term_atom1)) + "-#" + 
 								 boost::lexical_cast<std::string>(molgraph.getAtomIndex(ctr_atom)) + "-#" + 
 								 boost::lexical_cast<std::string>(molgraph.getAtomIndex(term_atom2)));
@@ -206,8 +206,8 @@ void ForceField::MMFF94StretchBendInteractionAnalyzer::getStretchBendParameters(
 		std::swap(ijk_force_const, kji_force_const);
 }
 
-unsigned int ForceField::MMFF94StretchBendInteractionAnalyzer::getStretchBendTypeIndex(bool symmetric, unsigned int bond_type_idx1, unsigned int bond_type_idx2, 
-																					   unsigned int angle_type_idx) const
+unsigned int ForceField::MMFF94StretchBendInteractionParameterizer::getStretchBendTypeIndex(bool symmetric, unsigned int bond_type_idx1, unsigned int bond_type_idx2, 
+																							unsigned int angle_type_idx) const
 {
 	switch (angle_type_idx) {
 
@@ -243,7 +243,7 @@ unsigned int ForceField::MMFF94StretchBendInteractionAnalyzer::getStretchBendTyp
     }
 }
 
-unsigned int ForceField::MMFF94StretchBendInteractionAnalyzer::getPTERow(const Chem::MolecularGraph& molgraph, const Chem::Atom& atom, unsigned int atom_type) const
+unsigned int ForceField::MMFF94StretchBendInteractionParameterizer::getPTERow(const Chem::MolecularGraph& molgraph, const Chem::Atom& atom, unsigned int atom_type) const
 {
 	using namespace Chem;
 
@@ -252,7 +252,7 @@ unsigned int ForceField::MMFF94StretchBendInteractionAnalyzer::getPTERow(const C
 	const AtomTypePropEntry& prop_entry = typePropTable->getEntry(atom_type);
 
 	if (!prop_entry)
-		throw Base::ItemNotFound("MMFF94StretchBendInteractionAnalyzer: could not find MMFF94 atom type properties for atom #" + 
+		throw Base::ItemNotFound("MMFF94StretchBendInteractionParameterizer: could not find MMFF94 atom type properties for atom #" + 
 								 boost::lexical_cast<std::string>(molgraph.getAtomIndex(atom)));
 
 	unsigned int atomic_no = prop_entry.getAtomicNumber();
@@ -275,7 +275,7 @@ unsigned int ForceField::MMFF94StretchBendInteractionAnalyzer::getPTERow(const C
 	if (atomic_no <= AtomType::Rn)
 		return 5;
 
-	throw Base::OperationFailed("MMFF94StretchBendInteractionAnalyzer: could not deduce PTE row for atom #" + 
+	throw Base::OperationFailed("MMFF94StretchBendInteractionParameterizer: could not deduce PTE row for atom #" + 
 								boost::lexical_cast<std::string>(molgraph.getAtomIndex(atom)));
 	return 0;
 }

@@ -1,7 +1,7 @@
 /* -*- mode: c++; c-basic-offset: 4; tab-width: 4; indent-tabs-mode: t -*- */
 
 /* 
- * MMFF94OutOfPlaneBendingInteractionAnalyzer.hpp 
+ * MMFF94OutOfPlaneBendingInteractionParameterizer.hpp 
  *
  * This file is part of the Chemical Data Processing Toolkit
  *
@@ -25,16 +25,16 @@
 
 /**
  * \file
- * \brief Definition of the class CDPL::ForceField::MMFF94OutOfPlaneBendingInteractionAnalyzer.
+ * \brief Definition of the class CDPL::ForceField::MMFF94OutOfPlaneBendingInteractionParameterizer.
  */
 
-#ifndef CDPL_FORCEFIELD_MMFF94OUTOFPLANEBENDINGINTERACTIONANALYZER_HPP
-#define CDPL_FORCEFIELD_MMFF94OUTOFPLANEBENDINGINTERACTIONANALYZER_HPP
+#ifndef CDPL_FORCEFIELD_MMFF94OUTOFPLANEBENDINGINTERACTIONPARAMETERIZER_HPP
+#define CDPL_FORCEFIELD_MMFF94OUTOFPLANEBENDINGINTERACTIONPARAMETERIZER_HPP
 
 #include <vector>
 
 #include "CDPL/ForceField/APIPrefix.hpp"
-#include "CDPL/ForceField/MMFF94OutOfPlaneBendingInteractionList.hpp"
+#include "CDPL/ForceField/MMFF94OutOfPlaneBendingInteractionData.hpp"
 #include "CDPL/ForceField/MMFF94PropertyFunctionWrappers.hpp"
 #include "CDPL/ForceField/InteractionFilterFunctionWrappers.hpp"
 #include "CDPL/ForceField/MMFF94OutOfPlaneBendingParameterTable.hpp"
@@ -56,18 +56,18 @@ namespace CDPL
     {
 
 		/**
-		 * \addtogroup CDPL_FORCEFIELD_INTERACTION_ANALYSIS
+		 * \addtogroup CDPL_FORCEFIELD_INTERACTION_PARAMETERIZATION
 		 * @{
 		 */
 
-		class CDPL_FORCEFIELD_API MMFF94OutOfPlaneBendingInteractionAnalyzer
+		class CDPL_FORCEFIELD_API MMFF94OutOfPlaneBendingInteractionParameterizer
 		{
 
 		  public:
-			MMFF94OutOfPlaneBendingInteractionAnalyzer();
+			MMFF94OutOfPlaneBendingInteractionParameterizer();
 
-			MMFF94OutOfPlaneBendingInteractionAnalyzer(const Chem::MolecularGraph& molgraph, 
-													   MMFF94OutOfPlaneBendingInteractionList& iactions);
+			MMFF94OutOfPlaneBendingInteractionParameterizer(const Chem::MolecularGraph& molgraph, 
+															MMFF94OutOfPlaneBendingInteractionData& ia_data);
 
 			void setFilterFunction(const InteractionFilterFunction4& func); 
 
@@ -79,7 +79,7 @@ namespace CDPL
 
 			void setParameterAtomTypeMap(const MMFF94PrimaryToParameterAtomTypeMap::SharedPointer& map);
 
-			void analyze(const Chem::MolecularGraph& molgraph, MMFF94OutOfPlaneBendingInteractionList& iactions);
+			void parameterize(const Chem::MolecularGraph& molgraph, MMFF94OutOfPlaneBendingInteractionData& ia_data);
 
 		  private:
 			typedef std::vector<const Chem::Atom*> AtomList;
@@ -101,4 +101,4 @@ namespace CDPL
     }
 }
 
-#endif // CDPL_FORCEFIELD_MMFF94OUTOFPLANEBENDINGINTERACTIONANALYZER_HPP
+#endif // CDPL_FORCEFIELD_MMFF94OUTOFPLANEBENDINGINTERACTIONPARAMETERIZER_HPP

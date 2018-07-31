@@ -442,7 +442,7 @@
 \defgroup CDPL_FORCEFIELD_AROMATICITY Aromaticity Perception
 \ingroup CDPL_FORCEFIELD
 
-\defgroup CDPL_FORCEFIELD_INTERACTION_ANALYSIS Interaction Analysis and Parameterization
+\defgroup CDPL_FORCEFIELD_INTERACTION_PARAMETERIZATION Interaction Analysis and Parameterization
 \ingroup CDPL_FORCEFIELD
 
 \defgroup CDPL_FORCEFIELD_DATA_STRUCTURES Auxiliary Data Structures
@@ -479,6 +479,12 @@
 \ingroup CDPL_FORCEFIELD_FUNCTIONS
 
 \defgroup CDPL_FORCEFIELD_MOLECULAR_GRAPH_FUNCTIONS MolecularGraph Functions
+\ingroup CDPL_FORCEFIELD_FUNCTIONS
+
+\defgroup CDPL_FORCEFIELD_ENERGY_FUNCTIONS Interaction Energy Functions
+\ingroup CDPL_FORCEFIELD_FUNCTIONS
+
+\defgroup CDPL_FORCEFIELD_UTILITY_FUNCTIONS Utility Functions
 \ingroup CDPL_FORCEFIELD_FUNCTIONS
 
 

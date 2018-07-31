@@ -89,21 +89,21 @@ namespace CDPL
 			 * \brief Calculates MMFF94 partial charges for the atoms of a molecular graph.
 			 *
 			 * The partial atomic charges are constructed from initial full or fractional
-			 * formal atomic charges \f$ q_I^0 \f$ (usually zero, but, e.g., \f$ +1/3 \f$ for guanidinium nitrogens) by
+			 * formal atomic charges \f$ q_I^0 \f$ (usually zero, but, e.g., \e +1/3 for guanidinium nitrogens) by
 			 * adding contributions from bond charge increments \f$ w_{KI} \f$ which describe the
-			 * polarity of the bonds to atom \f$ i \f$ from attached atoms \f$ k \f$. Thus, \f$ w_{KI} \f$ is the
-			 * contribution to the total charge on atom \f$ i \f$ of atom type \f$ I \f$ accumulated from,
-			 * and at the expense of, its bonded neighbor \f$ k \f$ of atom type \f$ K \f$. Specifically,
+			 * polarity of the bonds to atom \e i from attached atoms \e k. Thus, \f$ w_{KI} \f$ is the
+			 * contribution to the total charge on atom \e i of atom type \e I accumulated from,
+			 * and at the expense of, its bonded neighbor \e k of atom type \e K. Specifically,
 			 * MMFF computes \f$ q_i \f$ as
 			 * 
-			 * \f$ q_i = (1 - M_I \cdot u_I) \cdot q_I^0 + \sum (u_K \cdot q_K^0) + \sum w_{KI} \f$
+			 * \f$ q_i = (1 - M_I \: u_I) \:q_I^0 + \sum (u_K \: q_K^0) + \sum w_{KI} \f$
 			 * 
 			 * where \f$ w_{KI} = -w_{IK} \f$  and where the sums on the right hand side run over the \f$ M_I = crd(I) \f$
-			 * atoms \f$ k \f$ of MMFF atom type \f$ K \f$ directly attached to atom \e i (\f$ Crd(I) \f$
+			 * atoms \e k of MMFF atom type \e K directly attached to atom \e i (\f$ crd(I) \f$
 			 * comes from "MMFFPROP.PAR"). In this equation, \f$ q_I^0 \f$ and \f$ q_K^0 \f$ are the formal
 			 * charges assigned in the atom typing procedure (usually, by subroutine
 			 * XTYPE), and the sum of the first two terms gives the "effective" fractional
-			 * formal atomic charge residing on atom \f$ i \f$. This approach allows a formal
+			 * formal atomic charge residing on atom \e i. This approach allows a formal
 			 * atomic charge initially affixed by the atom-typing procedure (e.g., \f$ q_I^0 \f$) to
 			 * be shared in a prescribed manner with the neighbors bonded to the atom in
 			 * question. For example, for the series \e PO4(-3), \e HPO4(-2), \e H2PO4-, \e H3P04, it

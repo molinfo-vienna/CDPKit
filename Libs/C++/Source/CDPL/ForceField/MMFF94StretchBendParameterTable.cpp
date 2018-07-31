@@ -204,11 +204,11 @@ void ForceField::MMFF94StretchBendParameterTable::load(std::istream& is)
 	double ijk_force_const;
 	double kji_force_const;
 
-    while (readMMFF94DataLine(is, line, "MMFF94StretchBendParameterTable: error while reading stretch bend parameter entry")) {
+    while (readMMFF94DataLine(is, line, "MMFF94StretchBendParameterTable: error while reading stretch-bend parameter entry")) {
 		std::istringstream line_iss(line);
 
 		if (!(line_iss >> sb_type_idx))
-			throw Base::IOError("MMFF94StretchBendParameterTable: error while reading stretch bend type index");
+			throw Base::IOError("MMFF94StretchBendParameterTable: error while reading stretch-bend type index");
 
 		if (!(line_iss >> term_atom1_type))
 			throw Base::IOError("MMFF94StretchBendParameterTable: error while reading terminal atom 1 type");

@@ -1,7 +1,7 @@
 /* -*- mode: c++; c-basic-offset: 4; tab-width: 4; indent-tabs-mode: t -*- */
 
 /* 
- * MMFF94VanDerWaalsInteractionAnalyzer.hpp 
+ * MMFF94VanDerWaalsInteractionParameterizer.hpp 
  *
  * This file is part of the Chemical Data Processing Toolkit
  *
@@ -25,14 +25,14 @@
 
 /**
  * \file
- * \brief Definition of the class CDPL::ForceField::MMFF94VanDerWaalsInteractionAnalyzer.
+ * \brief Definition of the class CDPL::ForceField::MMFF94VanDerWaalsInteractionParameterizer.
  */
 
-#ifndef CDPL_FORCEFIELD_MMFF94VANDERWAALSINTERACTIONANALYZER_HPP
-#define CDPL_FORCEFIELD_MMFF94VANDERWAALSINTERACTIONANALYZER_HPP
+#ifndef CDPL_FORCEFIELD_MMFF94VANDERWAALSINTERACTIONPARAMETERIZER_HPP
+#define CDPL_FORCEFIELD_MMFF94VANDERWAALSINTERACTIONPARAMETERIZER_HPP
 
 #include "CDPL/ForceField/APIPrefix.hpp"
-#include "CDPL/ForceField/MMFF94VanDerWaalsInteractionList.hpp"
+#include "CDPL/ForceField/MMFF94VanDerWaalsInteractionData.hpp"
 #include "CDPL/ForceField/MMFF94PropertyFunctionWrappers.hpp"
 #include "CDPL/ForceField/InteractionFilterFunctionWrappers.hpp"
 #include "CDPL/ForceField/TopologicalAtomDistanceFunctionWrapper.hpp"
@@ -52,18 +52,18 @@ namespace CDPL
     {
 
 		/**
-		 * \addtogroup CDPL_FORCEFIELD_INTERACTION_ANALYSIS
+		 * \addtogroup CDPL_FORCEFIELD_INTERACTION_PARAMETERIZATION
 		 * @{
 		 */
 
-		class CDPL_FORCEFIELD_API MMFF94VanDerWaalsInteractionAnalyzer
+		class CDPL_FORCEFIELD_API MMFF94VanDerWaalsInteractionParameterizer
 		{
 
 		  public:
-			MMFF94VanDerWaalsInteractionAnalyzer();
+			MMFF94VanDerWaalsInteractionParameterizer();
 
-			MMFF94VanDerWaalsInteractionAnalyzer(const Chem::MolecularGraph& molgraph, 
-												 MMFF94VanDerWaalsInteractionList& iactions);
+			MMFF94VanDerWaalsInteractionParameterizer(const Chem::MolecularGraph& molgraph, 
+													  MMFF94VanDerWaalsInteractionData& ia_data);
 
 			void setFilterFunction(const InteractionFilterFunction2& func); 
 
@@ -73,7 +73,7 @@ namespace CDPL
 
 			void setVanDerWaalsParameterTable(const MMFF94VanDerWaalsParameterTable::SharedPointer& table);
 
-			void analyze(const Chem::MolecularGraph& molgraph, MMFF94VanDerWaalsInteractionList& iactions);
+			void parameterize(const Chem::MolecularGraph& molgraph, MMFF94VanDerWaalsInteractionData& ia_data);
 
 		  private:
 			InteractionFilterFunction2                     filterFunc;
@@ -88,4 +88,4 @@ namespace CDPL
     }
 }
 
-#endif // CDPL_FORCEFIELD_MMFF94VANDERWAALSINTERACTIONANALYZER_HPP
+#endif // CDPL_FORCEFIELD_MMFF94VANDERWAALSINTERACTIONPARAMETERIZER_HPP

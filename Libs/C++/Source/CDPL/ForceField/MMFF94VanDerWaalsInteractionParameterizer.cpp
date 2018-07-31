@@ -1,7 +1,7 @@
 /* -*- mode: c++; c-basic-offset: 4; tab-width: 4; indent-tabs-mode: t -*- */
 
 /* 
- * MMFF94VanDerWaalsInteractionAnalyzer.cpp 
+ * MMFF94VanDerWaalsInteractionParameterizer.cpp 
  *
  * This file is part of the Chemical Data Processing Toolkit
  *
@@ -30,7 +30,7 @@
 
 #include <boost/lexical_cast.hpp>
 
-#include "CDPL/ForceField/MMFF94VanDerWaalsInteractionAnalyzer.hpp"
+#include "CDPL/ForceField/MMFF94VanDerWaalsInteractionParameterizer.hpp"
 #include "CDPL/ForceField/AtomFunctions.hpp"
 #include "CDPL/Chem/MolecularGraph.hpp"
 #include "CDPL/Chem/AtomFunctions.hpp"
@@ -40,41 +40,41 @@
 using namespace CDPL; 
 
 
-ForceField::MMFF94VanDerWaalsInteractionAnalyzer::MMFF94VanDerWaalsInteractionAnalyzer(const Chem::MolecularGraph& molgraph, 
-																					   MMFF94VanDerWaalsInteractionList& iactions):
+ForceField::MMFF94VanDerWaalsInteractionParameterizer::MMFF94VanDerWaalsInteractionParameterizer(const Chem::MolecularGraph& molgraph, 
+																								 MMFF94VanDerWaalsInteractionData& ia_data):
 	filterFunc(), typeFunc(&getMMFF94NumericType), distFunc(&Chem::getTopologicalDistance),
 	paramTable(MMFF94VanDerWaalsParameterTable::get())
 {
-    analyze(molgraph, iactions);
+    parameterize(molgraph, ia_data);
 }
 
-ForceField::MMFF94VanDerWaalsInteractionAnalyzer::MMFF94VanDerWaalsInteractionAnalyzer() :
+ForceField::MMFF94VanDerWaalsInteractionParameterizer::MMFF94VanDerWaalsInteractionParameterizer() :
 	filterFunc(), typeFunc(&getMMFF94NumericType), distFunc(&Chem::getTopologicalDistance),
 	paramTable(MMFF94VanDerWaalsParameterTable::get())
 {}
 
-void ForceField::MMFF94VanDerWaalsInteractionAnalyzer::setFilterFunction(const InteractionFilterFunction2& func)
+void ForceField::MMFF94VanDerWaalsInteractionParameterizer::setFilterFunction(const InteractionFilterFunction2& func)
 {
 	filterFunc = func;
 } 
 
-void ForceField::MMFF94VanDerWaalsInteractionAnalyzer::setAtomTypeFunction(const MMFF94NumericAtomTypeFunction& func)
+void ForceField::MMFF94VanDerWaalsInteractionParameterizer::setAtomTypeFunction(const MMFF94NumericAtomTypeFunction& func)
 {
 	typeFunc = func;
 }  
 
-void ForceField::MMFF94VanDerWaalsInteractionAnalyzer::setTopologicalDistanceFunction(const TopologicalAtomDistanceFunction& func)
+void ForceField::MMFF94VanDerWaalsInteractionParameterizer::setTopologicalDistanceFunction(const TopologicalAtomDistanceFunction& func)
 {
 	distFunc = func;
 }  
 
-void ForceField::MMFF94VanDerWaalsInteractionAnalyzer::setVanDerWaalsParameterTable(const MMFF94VanDerWaalsParameterTable::SharedPointer& table)
+void ForceField::MMFF94VanDerWaalsInteractionParameterizer::setVanDerWaalsParameterTable(const MMFF94VanDerWaalsParameterTable::SharedPointer& table)
 {
 	paramTable = table;
 }
 
-void ForceField::MMFF94VanDerWaalsInteractionAnalyzer::analyze(const Chem::MolecularGraph& molgraph, 
-															   MMFF94VanDerWaalsInteractionList& iactions)
+void ForceField::MMFF94VanDerWaalsInteractionParameterizer::parameterize(const Chem::MolecularGraph& molgraph, 
+																		 MMFF94VanDerWaalsInteractionData& ia_data)
 {
 	using namespace Chem;
 
@@ -85,7 +85,7 @@ void ForceField::MMFF94VanDerWaalsInteractionAnalyzer::analyze(const Chem::Molec
 		const ParamEntry& params_entry1 = paramTable->getEntry(typeFunc(atom1));
 
 		if (!params_entry1)
-			throw Base::ItemNotFound("MMFF94VanDerWaalsInteractionAnalyzerr: could not find MMFF94 van der Waals parameters for atom #" + 
+			throw Base::ItemNotFound("MMFF94VanDerWaalsInteractionParameterizerr: could not find MMFF94 van der Waals parameters for atom #" + 
 									 boost::lexical_cast<std::string>(i));
 
 		for (std::size_t j = i + 1; j < num_atoms; j++) {
@@ -101,15 +101,15 @@ void ForceField::MMFF94VanDerWaalsInteractionAnalyzer::analyze(const Chem::Molec
 			const ParamEntry& params_entry2 = paramTable->getEntry(typeFunc(atom2));
 
 			if (!params_entry2)
-				throw Base::ItemNotFound("MMFF94VanDerWaalsInteractionAnalyzerr: could not find MMFF94 van der Waals parameters for atom #" + 
+				throw Base::ItemNotFound("MMFF94VanDerWaalsInteractionParameterizerr: could not find MMFF94 van der Waals parameters for atom #" + 
 										 boost::lexical_cast<std::string>(j));
 
-			iactions.addElement(MMFF94VanDerWaalsInteraction(i, j, params_entry1.getAtomicPolarizability(), params_entry1.getEffectiveElectronNumber(),
-															 params_entry1.getFactorA(), params_entry1.getFactorG(), params_entry1.getHDonorAcceptorType(),
-															 params_entry2.getAtomicPolarizability(), params_entry2.getEffectiveElectronNumber(),
-															 params_entry2.getFactorA(), params_entry2.getFactorG(), params_entry2.getHDonorAcceptorType(),
-															 paramTable->getExponent(), paramTable->getFactorB(), paramTable->getBeta(),
-															 paramTable->getFactorDARAD(), paramTable->getFactorDAEPS()));
+			ia_data.addElement(MMFF94VanDerWaalsInteraction(i, j, params_entry1.getAtomicPolarizability(), params_entry1.getEffectiveElectronNumber(),
+															params_entry1.getFactorA(), params_entry1.getFactorG(), params_entry1.getHDonorAcceptorType(),
+															params_entry2.getAtomicPolarizability(), params_entry2.getEffectiveElectronNumber(),
+															params_entry2.getFactorA(), params_entry2.getFactorG(), params_entry2.getHDonorAcceptorType(),
+															paramTable->getExponent(), paramTable->getFactorB(), paramTable->getBeta(),
+															paramTable->getFactorDARAD(), paramTable->getFactorDAEPS()));
 		}
 	}
 }

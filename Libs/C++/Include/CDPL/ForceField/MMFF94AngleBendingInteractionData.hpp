@@ -1,7 +1,7 @@
 /* -*- mode: c++; c-basic-offset: 4; tab-width: 4; indent-tabs-mode: t -*- */
 
 /* 
- * MMFF94TorsionInteractionList.hpp 
+ * MMFF94AngleBendingInteractionData.hpp 
  *
  * This file is part of the Chemical Data Processing Toolkit
  *
@@ -25,13 +25,13 @@
 
 /**
  * \file
- * \brief Definition of the class CDPL::ForceField::MMFF94TorsionInteractionList.
+ * \brief Definition of the class CDPL::ForceField::MMFF94AngleBendingInteractionData.
  */
 
-#ifndef CDPL_FORCEFIELD_MMFF94TORSIONINTERACTIONLIST_HPP
-#define CDPL_FORCEFIELD_MMFF94TORSIONINTERACTIONLIST_HPP
+#ifndef CDPL_FORCEFIELD_MMFF94ANGLEBENDINGINTERACTIONDATA_HPP
+#define CDPL_FORCEFIELD_MMFF94ANGLEBENDINGINTERACTIONDATA_HPP
 
-#include "CDPL/ForceField/MMFF94TorsionInteraction.hpp"
+#include "CDPL/ForceField/MMFF94AngleBendingInteraction.hpp"
 #include "CDPL/Util/Array.hpp"
 
 
@@ -46,7 +46,7 @@ namespace CDPL
 	 * @{
 	 */
 
-	typedef Util::Array<MMFF94TorsionInteraction> MMFF94TorsionInteractionList;
+	typedef Util::Array<MMFF94AngleBendingInteraction> MMFF94AngleBendingInteractionData;
 
 	/**
 	 * @}
@@ -54,4 +54,4 @@ namespace CDPL
     }
 }
 
-#endif // CDPL_FORCEFIELD_MMFF94TORSIONINTERACTIONLIST_HPP
+#endif // CDPL_FORCEFIELD_MMFF94ANGLEBENDINGINTERACTIONDATA_HPP

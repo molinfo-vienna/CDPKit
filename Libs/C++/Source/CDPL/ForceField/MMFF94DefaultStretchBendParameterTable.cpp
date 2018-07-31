@@ -198,7 +198,7 @@ void ForceField::MMFF94DefaultStretchBendParameterTable::load(std::istream& is)
 	double ijk_force_const;
 	double kji_force_const;
 
-    while (readMMFF94DataLine(is, line, "MMFF94DefaultStretchBendParameterTable: error while reading default stretch bend parameter entry")) {
+    while (readMMFF94DataLine(is, line, "MMFF94DefaultStretchBendParameterTable: error while reading default stretch-bend parameter entry")) {
 		std::istringstream line_iss(line);
 
 		if (!(line_iss >> term_atom1_pte_row))

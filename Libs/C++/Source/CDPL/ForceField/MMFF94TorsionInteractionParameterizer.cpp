@@ -1,7 +1,7 @@
 /* -*- mode: c++; c-basic-offset: 4; tab-width: 4; indent-tabs-mode: t -*- */
 
 /* 
- * MMFF94TorsionInteractionAnalyzer.cpp 
+ * MMFF94TorsionInteractionParameterizer.cpp 
  *
  * This file is part of the Chemical Data Processing Toolkit
  *
@@ -30,7 +30,7 @@
 #include <cstddef>
 #include <cmath>
 
-#include "CDPL/ForceField/MMFF94TorsionInteractionAnalyzer.hpp"
+#include "CDPL/ForceField/MMFF94TorsionInteractionParameterizer.hpp"
 #include "CDPL/ForceField/MolecularGraphFunctions.hpp"
 #include "CDPL/ForceField/AtomFunctions.hpp"
 #include "CDPL/ForceField/BondFunctions.hpp"
@@ -92,58 +92,58 @@ namespace
 }
 
 
-ForceField::MMFF94TorsionInteractionAnalyzer::MMFF94TorsionInteractionAnalyzer(const Chem::MolecularGraph& molgraph, 
-																			   MMFF94TorsionInteractionList& iactions):
+ForceField::MMFF94TorsionInteractionParameterizer::MMFF94TorsionInteractionParameterizer(const Chem::MolecularGraph& molgraph, 
+																						 MMFF94TorsionInteractionData& ia_data):
 	filterFunc(), atomTypeFunc(&getMMFF94NumericType), bondTypeIdxFunc(&getMMFF94TypeIndex), 
 	aromRingSetFunc(&getMMFF94AromaticRings), paramTable(MMFF94TorsionParameterTable::get(true)),
 	typePropTable(MMFF94AtomTypePropertyTable::get()), paramTypeMap(MMFF94PrimaryToParameterAtomTypeMap::get())
 {
-    analyze(molgraph, iactions);
+    parameterize(molgraph, ia_data);
 }
 
-ForceField::MMFF94TorsionInteractionAnalyzer::MMFF94TorsionInteractionAnalyzer():
+ForceField::MMFF94TorsionInteractionParameterizer::MMFF94TorsionInteractionParameterizer():
 	filterFunc(), atomTypeFunc(&getMMFF94NumericType), bondTypeIdxFunc(&getMMFF94TypeIndex), 
 	aromRingSetFunc(&getMMFF94AromaticRings), paramTable(MMFF94TorsionParameterTable::get(true)),
 	typePropTable(MMFF94AtomTypePropertyTable::get()), paramTypeMap(MMFF94PrimaryToParameterAtomTypeMap::get())
 {}
 
-void ForceField::MMFF94TorsionInteractionAnalyzer::setFilterFunction(const InteractionFilterFunction4& func)
+void ForceField::MMFF94TorsionInteractionParameterizer::setFilterFunction(const InteractionFilterFunction4& func)
 {
 	filterFunc = func;
 } 
 
-void ForceField::MMFF94TorsionInteractionAnalyzer::setAtomTypeFunction(const MMFF94NumericAtomTypeFunction& func)
+void ForceField::MMFF94TorsionInteractionParameterizer::setAtomTypeFunction(const MMFF94NumericAtomTypeFunction& func)
 {
 	atomTypeFunc = func;
 }  
 
-void ForceField::MMFF94TorsionInteractionAnalyzer::setBondTypeIndexFunction(const MMFF94BondTypeIndexFunction& func)
+void ForceField::MMFF94TorsionInteractionParameterizer::setBondTypeIndexFunction(const MMFF94BondTypeIndexFunction& func)
 {
 	bondTypeIdxFunc = func;
 }  
 
-void ForceField::MMFF94TorsionInteractionAnalyzer::setAromaticRingSetFunction(const MMFF94AromaticRingSetFunction& func)
+void ForceField::MMFF94TorsionInteractionParameterizer::setAromaticRingSetFunction(const MMFF94AromaticRingSetFunction& func)
 {
 	aromRingSetFunc = func;
 }
 
-void ForceField::MMFF94TorsionInteractionAnalyzer::setAtomTypePropertyTable(const MMFF94AtomTypePropertyTable::SharedPointer& table)
+void ForceField::MMFF94TorsionInteractionParameterizer::setAtomTypePropertyTable(const MMFF94AtomTypePropertyTable::SharedPointer& table)
 {
 	typePropTable = table;
 }
 
-void ForceField::MMFF94TorsionInteractionAnalyzer::setTorsionParameterTable(const MMFF94TorsionParameterTable::SharedPointer& table)
+void ForceField::MMFF94TorsionInteractionParameterizer::setTorsionParameterTable(const MMFF94TorsionParameterTable::SharedPointer& table)
 {
 	paramTable = table;
 }
 
-void ForceField::MMFF94TorsionInteractionAnalyzer::setParameterAtomTypeMap(const MMFF94PrimaryToParameterAtomTypeMap::SharedPointer& map)
+void ForceField::MMFF94TorsionInteractionParameterizer::setParameterAtomTypeMap(const MMFF94PrimaryToParameterAtomTypeMap::SharedPointer& map)
 {
 	paramTypeMap = map;
 }
 
-void ForceField::MMFF94TorsionInteractionAnalyzer::analyze(const Chem::MolecularGraph& molgraph, 
-														   MMFF94TorsionInteractionList& iactions)
+void ForceField::MMFF94TorsionInteractionParameterizer::parameterize(const Chem::MolecularGraph& molgraph, 
+																	 MMFF94TorsionInteractionData& ia_data)
 {
 	using namespace Chem;
 
@@ -160,7 +160,7 @@ void ForceField::MMFF94TorsionInteractionAnalyzer::analyze(const Chem::Molecular
 		const AtomTypePropEntry& ctr_atom1_prop_entry = typePropTable->getEntry(ctr_atom1_type);
 
 		if (!ctr_atom1_prop_entry)
-			throw Base::ItemNotFound("MMFF94TorsionInteractionAnalyzer: could not find MMFF94 atom type properties for atom #" + 
+			throw Base::ItemNotFound("MMFF94TorsionInteractionParameterizer: could not find MMFF94 atom type properties for atom #" + 
 									 boost::lexical_cast<std::string>(ctr_atom1_idx));
 
 		if (ctr_atom1_prop_entry.formsLinearBondAngle()) // Empirical rule a)
@@ -171,7 +171,7 @@ void ForceField::MMFF94TorsionInteractionAnalyzer::analyze(const Chem::Molecular
 		const AtomTypePropEntry& ctr_atom2_prop_entry = typePropTable->getEntry(ctr_atom2_type);
 
 		if (!ctr_atom2_prop_entry)
-			throw Base::ItemNotFound("MMFF94TorsionInteractionAnalyzer: could not find MMFF94 atom type properties for atom #" + 
+			throw Base::ItemNotFound("MMFF94TorsionInteractionParameterizer: could not find MMFF94 atom type properties for atom #" + 
 									 boost::lexical_cast<std::string>(ctr_atom2_idx));
 
 		if (ctr_atom2_prop_entry.formsLinearBondAngle()) // Empirical rule a)
@@ -227,19 +227,19 @@ void ForceField::MMFF94TorsionInteractionAnalyzer::analyze(const Chem::Molecular
 				if (getParameters(molgraph, *nbrAtoms1[i], ctr_atom1, ctr_atom2, *nbrAtoms2[j], ctr_bond, term_atom1_type, ctr_atom1_type, 
 								  ctr_atom2_type, term_atom2_type, tor_type_idx, ctr_atom1_prop_entry, ctr_atom2_prop_entry, tor_param1,
 								  tor_param2, tor_param3))
-					iactions.addElement(MMFF94TorsionInteraction(term_atom1_idx, ctr_atom1_idx, ctr_atom2_idx, term_atom2_idx, tor_type_idx,
-																 tor_param1, tor_param2, tor_param3));
+					ia_data.addElement(MMFF94TorsionInteraction(term_atom1_idx, ctr_atom1_idx, ctr_atom2_idx, term_atom2_idx, tor_type_idx,
+																tor_param1, tor_param2, tor_param3));
 			}
 		}
 	}
 }
 
-bool ForceField::MMFF94TorsionInteractionAnalyzer::getParameters(const Chem::MolecularGraph& molgraph, const Chem::Atom& term_atom1, const Chem::Atom& ctr_atom1, 
-																 const Chem::Atom& ctr_atom2, const Chem::Atom& term_atom2, const Chem::Bond& ctr_bond,
-																 unsigned int term_atom1_type, unsigned int ctr_atom1_type, unsigned int ctr_atom2_type,
-																 unsigned int term_atom2_type, unsigned int tor_type_idx, const AtomTypePropEntry& ctr_atom1_prop_entry, 
-																 const AtomTypePropEntry& ctr_atom2_prop_entry, double& tor_param1, double& tor_param2,
-																 double& tor_param3) const
+bool ForceField::MMFF94TorsionInteractionParameterizer::getParameters(const Chem::MolecularGraph& molgraph, const Chem::Atom& term_atom1, const Chem::Atom& ctr_atom1, 
+																	  const Chem::Atom& ctr_atom2, const Chem::Atom& term_atom2, const Chem::Bond& ctr_bond,
+																	  unsigned int term_atom1_type, unsigned int ctr_atom1_type, unsigned int ctr_atom2_type,
+																	  unsigned int term_atom2_type, unsigned int tor_type_idx, const AtomTypePropEntry& ctr_atom1_prop_entry, 
+																	  const AtomTypePropEntry& ctr_atom2_prop_entry, double& tor_param1, double& tor_param2,
+																	  double& tor_param3) const
 {
 	using namespace Chem;
 
@@ -248,13 +248,13 @@ bool ForceField::MMFF94TorsionInteractionAnalyzer::getParameters(const Chem::Mol
 	const unsigned int* term_atom1_param_types = paramTypeMap->getEntry(term_atom1_type).getParameterTypes();
 
 	if (!term_atom1_param_types)
-		throw Base::ItemNotFound("MMFF94TorsionInteractionAnalyzer: could not find MMFF94 parameter atom type equivalence list for atom #" + 
+		throw Base::ItemNotFound("MMFF94TorsionInteractionParameterizer: could not find MMFF94 parameter atom type equivalence list for atom #" + 
 								 boost::lexical_cast<std::string>(molgraph.getAtomIndex(term_atom1)));
 
 	const unsigned int* term_atom2_param_types = paramTypeMap->getEntry(term_atom2_type).getParameterTypes();
 
 	if (!term_atom2_param_types)
-		throw Base::ItemNotFound("MMFF94TorsionInteractionAnalyzer: could not find MMFF94 parameter atom type equivalence list for atom #" + 
+		throw Base::ItemNotFound("MMFF94TorsionInteractionParameterizer: could not find MMFF94 parameter atom type equivalence list for atom #" + 
 								 boost::lexical_cast<std::string>(molgraph.getAtomIndex(term_atom2)));
 
 	const ParamEntry* param_entry = &paramTable->getEntry(tor_type_idx, term_atom1_param_types[0], ctr_atom1_type, ctr_atom2_type, term_atom2_param_types[0]);
@@ -428,11 +428,11 @@ bool ForceField::MMFF94TorsionInteractionAnalyzer::getParameters(const Chem::Mol
 	return true;
 }
 
-unsigned int ForceField::MMFF94TorsionInteractionAnalyzer::getTorsionTypeIndex(const Chem::MolecularGraph& molgraph, const Chem::Atom& term_atom1, const Chem::Atom& ctr_atom1, 
-																			   const Chem::Atom& ctr_atom2, const Chem::Atom& term_atom2, const Chem::Bond& ctr_bond,
-																			   unsigned int term_atom1_type, unsigned int ctr_atom1_type, unsigned int ctr_atom2_type, 
-																			   unsigned int term_atom2_type, unsigned int term_bond1_type_idx, unsigned int ctr_bond_type_idx,
-																			   unsigned int term_bond2_type_idx) const
+unsigned int ForceField::MMFF94TorsionInteractionParameterizer::getTorsionTypeIndex(const Chem::MolecularGraph& molgraph, const Chem::Atom& term_atom1, const Chem::Atom& ctr_atom1, 
+																					const Chem::Atom& ctr_atom2, const Chem::Atom& term_atom2, const Chem::Bond& ctr_bond,
+																					unsigned int term_atom1_type, unsigned int ctr_atom1_type, unsigned int ctr_atom2_type, 
+																					unsigned int term_atom2_type, unsigned int term_bond1_type_idx, unsigned int ctr_bond_type_idx,
+																					unsigned int term_bond2_type_idx) const
 {
 	using namespace Chem;
 
@@ -485,7 +485,7 @@ unsigned int ForceField::MMFF94TorsionInteractionAnalyzer::getTorsionTypeIndex(c
     return 0;
 }
 
-bool ForceField::MMFF94TorsionInteractionAnalyzer::isInSecondPTERow(unsigned int atomic_no) const
+bool ForceField::MMFF94TorsionInteractionParameterizer::isInSecondPTERow(unsigned int atomic_no) const
 {
 	return (atomic_no >= Chem::AtomType::Li && atomic_no <= Chem::AtomType::Ne);
 }

@@ -1,7 +1,7 @@
 /* -*- mode: c++; c-basic-offset: 4; tab-width: 4; indent-tabs-mode: t -*- */
 
 /* 
- * MMFF94ElectrostaticInteractionAnalyzer.cpp 
+ * MMFF94ElectrostaticInteractionParameterizer.cpp 
  *
  * This file is part of the Chemical Data Processing Toolkit
  *
@@ -26,7 +26,7 @@
  
 #include "StaticInit.hpp"
 
-#include "CDPL/ForceField/MMFF94ElectrostaticInteractionAnalyzer.hpp"
+#include "CDPL/ForceField/MMFF94ElectrostaticInteractionParameterizer.hpp"
 #include "CDPL/ForceField/AtomFunctions.hpp"
 #include "CDPL/Chem/MolecularGraph.hpp"
 #include "CDPL/Chem/AtomFunctions.hpp"
@@ -35,50 +35,50 @@
 using namespace CDPL; 
 
 
-const double ForceField::MMFF94ElectrostaticInteractionAnalyzer::DEF_DISTANCE_EXPONENT   = 1.0;
-const double ForceField::MMFF94ElectrostaticInteractionAnalyzer::DEF_DIELECTRIC_CONSTANT = 1.0;
+const double ForceField::MMFF94ElectrostaticInteractionParameterizer::DEF_DISTANCE_EXPONENT   = 1.0;
+const double ForceField::MMFF94ElectrostaticInteractionParameterizer::DEF_DIELECTRIC_CONSTANT = 1.0;
 
 
-ForceField::MMFF94ElectrostaticInteractionAnalyzer::MMFF94ElectrostaticInteractionAnalyzer(const Chem::MolecularGraph& molgraph, 
-																						   MMFF94ElectrostaticInteractionList& iactions):
+ForceField::MMFF94ElectrostaticInteractionParameterizer::MMFF94ElectrostaticInteractionParameterizer(const Chem::MolecularGraph& molgraph, 
+																									 MMFF94ElectrostaticInteractionData& ia_data):
 	filterFunc(), chargeFunc(&getMMFF94Charge), distFunc(&Chem::getTopologicalDistance), 
 	deConst(DEF_DIELECTRIC_CONSTANT), distExpo(DEF_DISTANCE_EXPONENT)
 {
-    analyze(molgraph, iactions);
+    parameterize(molgraph, ia_data);
 }
 
-ForceField::MMFF94ElectrostaticInteractionAnalyzer::MMFF94ElectrostaticInteractionAnalyzer():
+ForceField::MMFF94ElectrostaticInteractionParameterizer::MMFF94ElectrostaticInteractionParameterizer():
 	filterFunc(), chargeFunc(&getMMFF94Charge), distFunc(&Chem::getTopologicalDistance), 
 	deConst(DEF_DIELECTRIC_CONSTANT), distExpo(DEF_DISTANCE_EXPONENT) 
 {}
 	
-void ForceField::MMFF94ElectrostaticInteractionAnalyzer::setFilterFunction(const InteractionFilterFunction2& func)
+void ForceField::MMFF94ElectrostaticInteractionParameterizer::setFilterFunction(const InteractionFilterFunction2& func)
 {
 	filterFunc = func;
 } 
 
-void ForceField::MMFF94ElectrostaticInteractionAnalyzer::setAtomChargeFunction(const MMFF94AtomChargeFunction& func)
+void ForceField::MMFF94ElectrostaticInteractionParameterizer::setAtomChargeFunction(const MMFF94AtomChargeFunction& func)
 {
 	chargeFunc = func;
 }  
 
-void ForceField::MMFF94ElectrostaticInteractionAnalyzer::setTopologicalDistanceFunction(const TopologicalAtomDistanceFunction& func)
+void ForceField::MMFF94ElectrostaticInteractionParameterizer::setTopologicalDistanceFunction(const TopologicalAtomDistanceFunction& func)
 {
 	distFunc = func;
 }  
 
-void ForceField::MMFF94ElectrostaticInteractionAnalyzer::setDielectricConstant(double de_const)
+void ForceField::MMFF94ElectrostaticInteractionParameterizer::setDielectricConstant(double de_const)
 {
 	deConst = de_const;
 } 
 
-void ForceField::MMFF94ElectrostaticInteractionAnalyzer::setDistanceExponent(double dist_expo)
+void ForceField::MMFF94ElectrostaticInteractionParameterizer::setDistanceExponent(double dist_expo)
 {
 	distExpo = dist_expo;
 } 
 
-void ForceField::MMFF94ElectrostaticInteractionAnalyzer::analyze(const Chem::MolecularGraph& molgraph, 
-																 MMFF94ElectrostaticInteractionList& iactions)
+void ForceField::MMFF94ElectrostaticInteractionParameterizer::parameterize(const Chem::MolecularGraph& molgraph, 
+																		   MMFF94ElectrostaticInteractionData& ia_data)
 {
 	using namespace Chem;
 
@@ -100,7 +100,7 @@ void ForceField::MMFF94ElectrostaticInteractionAnalyzer::analyze(const Chem::Mol
 			if (filterFunc && !filterFunc(atom1, atom2))
 				continue;
 	
-			iactions.addElement(MMFF94ElectrostaticInteraction(i, j, chargeFunc(atom1), chargeFunc(atom2), factor, deConst, distExpo));
+			ia_data.addElement(MMFF94ElectrostaticInteraction(i, j, chargeFunc(atom1), chargeFunc(atom2), factor, deConst, distExpo));
 		}
 	}
 }

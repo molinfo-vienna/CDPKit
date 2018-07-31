@@ -191,7 +191,7 @@ bool OptimolLogReader::getFormalAtomCharges(const std::string& mol_name, AtomCha
 	return true;
 }
 
-bool OptimolLogReader::getBondStretchingInteractions(const std::string& mol_name, BondStretchingInteractionList& iactions)
+bool OptimolLogReader::getBondStretchingInteractions(const std::string& mol_name, BondStretchingInteractionData& ia_data)
 {
 	if (!seekToRecord(mol_name))
 		return false;
@@ -204,7 +204,7 @@ bool OptimolLogReader::getBondStretchingInteractions(const std::string& mol_name
 	if (!readLine(line))
 		return false;
 
-	iactions.clear();
+	ia_data.clear();
 
 	if (line.find("TOTAL BOND STRAIN ENERGY") != std::string::npos)
 		return true;
@@ -258,13 +258,13 @@ bool OptimolLogReader::getBondStretchingInteractions(const std::string& mol_name
 		if (!(iss >> iaction.forceConst))
 			break;
 
-		iactions.push_back(iaction);
+		ia_data.push_back(iaction);
     }
 
 	return true;
 }
 
-bool OptimolLogReader::getAngleBendingInteractions(const std::string& mol_name, AngleBendingInteractionList& iactions)
+bool OptimolLogReader::getAngleBendingInteractions(const std::string& mol_name, AngleBendingInteractionData& ia_data)
 {
 	if (!seekToRecord(mol_name))
 		return false;
@@ -277,7 +277,7 @@ bool OptimolLogReader::getAngleBendingInteractions(const std::string& mol_name, 
 	if (!readLine(line))
 		return false;
 
-	iactions.clear();
+	ia_data.clear();
 
 	if (line.find("TOTAL ANGLE STRAIN ENERGY") != std::string::npos)
 		return true;
@@ -329,13 +329,13 @@ bool OptimolLogReader::getAngleBendingInteractions(const std::string& mol_name, 
 		if (!(iss >> iaction.forceConst))
 			break;
 
-		iactions.push_back(iaction);
+		ia_data.push_back(iaction);
 	}
 
 	return true;
 }
 
-bool OptimolLogReader::getStretchBendInteractions(const std::string& mol_name, StretchBendInteractionList& iactions)
+bool OptimolLogReader::getStretchBendInteractions(const std::string& mol_name, StretchBendInteractionData& ia_data)
 {
 	if (!seekToRecord(mol_name))
 		return false;
@@ -348,7 +348,7 @@ bool OptimolLogReader::getStretchBendInteractions(const std::string& mol_name, S
 	if (!readLine(line))
 		return false;
 
-	iactions.clear();
+	ia_data.clear();
 
 	if (line.find("TOTAL STRETCH-BEND STRAIN ENERGY") != std::string::npos)
 		return true;
@@ -394,13 +394,13 @@ bool OptimolLogReader::getStretchBendInteractions(const std::string& mol_name, S
 		if (!(iss >> iaction.forceConst))
 			break;
 
-		iactions.push_back(iaction);
+		ia_data.push_back(iaction);
 	}
 
 	return true;
 }
 
-bool OptimolLogReader::getOutOfPlaneBendingInteractions(const std::string& mol_name, OutOfPlaneBendingInteractionList& iactions)
+bool OptimolLogReader::getOutOfPlaneBendingInteractions(const std::string& mol_name, OutOfPlaneBendingInteractionData& ia_data)
 {
 	if (!seekToRecord(mol_name))
 		return false;
@@ -413,7 +413,7 @@ bool OptimolLogReader::getOutOfPlaneBendingInteractions(const std::string& mol_n
 	if (!readLine(line))
 		return false;
 
-	iactions.clear();
+	ia_data.clear();
 
 	if (line.find("TOTAL OUT-OF-PLANE STRAIN ENERGY") != std::string::npos)
 		return true;
@@ -456,13 +456,13 @@ bool OptimolLogReader::getOutOfPlaneBendingInteractions(const std::string& mol_n
 		if (!(iss >> iaction.forceConst))
 			break;
 
-		iactions.push_back(iaction);
+		ia_data.push_back(iaction);
 	}
 
 	return true;
 }
 
-bool OptimolLogReader::getTorsionInteractions(const std::string& mol_name, TorsionInteractionList& iactions)
+bool OptimolLogReader::getTorsionInteractions(const std::string& mol_name, TorsionInteractionData& ia_data)
 {
 	if (!seekToRecord(mol_name))
 		return false;
@@ -475,7 +475,7 @@ bool OptimolLogReader::getTorsionInteractions(const std::string& mol_name, Torsi
 	if (!readLine(line))
 		return false;
 
-	iactions.clear();
+	ia_data.clear();
 
 	if (line.find("OPTIMOL-ANALYZE>  # b-intra") != std::string::npos)
 		return true;
@@ -535,7 +535,7 @@ bool OptimolLogReader::getTorsionInteractions(const std::string& mol_name, Torsi
 		if (!(iss >> iaction.torParams[2]))
 			break;
 
-		iactions.push_back(iaction);
+		ia_data.push_back(iaction);
 	}
 
 	return true;

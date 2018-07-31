@@ -1,7 +1,7 @@
 /* -*- mode: c++; c-basic-offset: 4; tab-width: 4; indent-tabs-mode: t -*- */
 
 /* 
- * MMFF94OutOfPlaneBendingInteractionAnalyzer.cpp 
+ * MMFF94OutOfPlaneBendingInteractionParameterizer.cpp 
  *
  * This file is part of the Chemical Data Processing Toolkit
  *
@@ -32,7 +32,7 @@
 
 #include <boost/lexical_cast.hpp>
 
-#include "CDPL/ForceField/MMFF94OutOfPlaneBendingInteractionAnalyzer.hpp"
+#include "CDPL/ForceField/MMFF94OutOfPlaneBendingInteractionParameterizer.hpp"
 #include "CDPL/ForceField/AtomFunctions.hpp"
 #include "CDPL/Chem/MolecularGraph.hpp"
 #include "CDPL/Chem/Atom.hpp"
@@ -44,46 +44,46 @@
 using namespace CDPL; 
 
 
-ForceField::MMFF94OutOfPlaneBendingInteractionAnalyzer::MMFF94OutOfPlaneBendingInteractionAnalyzer(const Chem::MolecularGraph& molgraph, 
-																								   MMFF94OutOfPlaneBendingInteractionList& iactions):
+ForceField::MMFF94OutOfPlaneBendingInteractionParameterizer::MMFF94OutOfPlaneBendingInteractionParameterizer(const Chem::MolecularGraph& molgraph, 
+																											 MMFF94OutOfPlaneBendingInteractionData& ia_data):
 	filterFunc(), atomTypeFunc(&getMMFF94NumericType), paramTable(MMFF94OutOfPlaneBendingParameterTable::get(true)),
 	typePropTable(MMFF94AtomTypePropertyTable::get()), paramTypeMap(MMFF94PrimaryToParameterAtomTypeMap::get())
 {
-    analyze(molgraph, iactions);
+    parameterize(molgraph, ia_data);
 }
 
-ForceField::MMFF94OutOfPlaneBendingInteractionAnalyzer::MMFF94OutOfPlaneBendingInteractionAnalyzer():
+ForceField::MMFF94OutOfPlaneBendingInteractionParameterizer::MMFF94OutOfPlaneBendingInteractionParameterizer():
 	filterFunc(), atomTypeFunc(&getMMFF94NumericType), paramTable(MMFF94OutOfPlaneBendingParameterTable::get(true)),
 	typePropTable(MMFF94AtomTypePropertyTable::get()), paramTypeMap(MMFF94PrimaryToParameterAtomTypeMap::get()) 
 {}
 
 
-void ForceField::MMFF94OutOfPlaneBendingInteractionAnalyzer::setFilterFunction(const InteractionFilterFunction4& func)
+void ForceField::MMFF94OutOfPlaneBendingInteractionParameterizer::setFilterFunction(const InteractionFilterFunction4& func)
 {
 	filterFunc = func;
 } 
 
-void ForceField::MMFF94OutOfPlaneBendingInteractionAnalyzer::setAtomTypeFunction(const MMFF94NumericAtomTypeFunction& func)
+void ForceField::MMFF94OutOfPlaneBendingInteractionParameterizer::setAtomTypeFunction(const MMFF94NumericAtomTypeFunction& func)
 {
 	atomTypeFunc = func;
 }  
 
-void ForceField::MMFF94OutOfPlaneBendingInteractionAnalyzer::setOutOfPlaneBendingParameterTable(const MMFF94OutOfPlaneBendingParameterTable::SharedPointer& table)
+void ForceField::MMFF94OutOfPlaneBendingInteractionParameterizer::setOutOfPlaneBendingParameterTable(const MMFF94OutOfPlaneBendingParameterTable::SharedPointer& table)
 {
 	paramTable = table;
 }
 
-void ForceField::MMFF94OutOfPlaneBendingInteractionAnalyzer::setParameterAtomTypeMap(const MMFF94PrimaryToParameterAtomTypeMap::SharedPointer& map)
+void ForceField::MMFF94OutOfPlaneBendingInteractionParameterizer::setParameterAtomTypeMap(const MMFF94PrimaryToParameterAtomTypeMap::SharedPointer& map)
 {
 	paramTypeMap = map;
 }
 
-void ForceField::MMFF94OutOfPlaneBendingInteractionAnalyzer::setAtomTypePropertyTable(const MMFF94AtomTypePropertyTable::SharedPointer& table)
+void ForceField::MMFF94OutOfPlaneBendingInteractionParameterizer::setAtomTypePropertyTable(const MMFF94AtomTypePropertyTable::SharedPointer& table)
 {
 	typePropTable = table;
 }
 
-void ForceField::MMFF94OutOfPlaneBendingInteractionAnalyzer::analyze(const Chem::MolecularGraph& molgraph, MMFF94OutOfPlaneBendingInteractionList& iactions)
+void ForceField::MMFF94OutOfPlaneBendingInteractionParameterizer::parameterize(const Chem::MolecularGraph& molgraph, MMFF94OutOfPlaneBendingInteractionData& ia_data)
 {
 	using namespace Chem;
 
@@ -95,7 +95,7 @@ void ForceField::MMFF94OutOfPlaneBendingInteractionAnalyzer::analyze(const Chem:
 		const AtomTypePropEntry& ctr_prop_entry = typePropTable->getEntry(ctr_atom_type);
 
 		if (!ctr_prop_entry)
-			throw Base::ItemNotFound("MMFF94OutOfPlaneBendingInteractionAnalyzer: could not find MMFF94 atom type properties for atom #" + 
+			throw Base::ItemNotFound("MMFF94OutOfPlaneBendingInteractionParameterizer: could not find MMFF94 atom type properties for atom #" + 
 									 boost::lexical_cast<std::string>(i));
 
 		if (ctr_prop_entry.getNumNeighbors() != 3) // only 3-valent atoms are considered
@@ -116,14 +116,14 @@ void ForceField::MMFF94OutOfPlaneBendingInteractionAnalyzer::analyze(const Chem:
 		for (std::size_t j = 0; j < 3; j++)
 			nbr_atom_idcs[j] = molgraph.getAtomIndex(*nbrAtoms[j]);
 		
-		iactions.addElement(MMFF94OutOfPlaneBendingInteraction(nbr_atom_idcs[0], i, nbr_atom_idcs[1], nbr_atom_idcs[2], force_const));
-		iactions.addElement(MMFF94OutOfPlaneBendingInteraction(nbr_atom_idcs[2], i, nbr_atom_idcs[0], nbr_atom_idcs[1], force_const));
-		iactions.addElement(MMFF94OutOfPlaneBendingInteraction(nbr_atom_idcs[1], i, nbr_atom_idcs[2], nbr_atom_idcs[0], force_const));
+		ia_data.addElement(MMFF94OutOfPlaneBendingInteraction(nbr_atom_idcs[0], i, nbr_atom_idcs[1], nbr_atom_idcs[2], force_const));
+		ia_data.addElement(MMFF94OutOfPlaneBendingInteraction(nbr_atom_idcs[2], i, nbr_atom_idcs[0], nbr_atom_idcs[1], force_const));
+		ia_data.addElement(MMFF94OutOfPlaneBendingInteraction(nbr_atom_idcs[1], i, nbr_atom_idcs[2], nbr_atom_idcs[0], force_const));
 	} 
 }
 
-double ForceField::MMFF94OutOfPlaneBendingInteractionAnalyzer::getForceConstant(const Chem::MolecularGraph& molgraph, unsigned int ctr_atom_type, 
-																				std::size_t ctr_atom_idx, const AtomList& nbr_atoms) const
+double ForceField::MMFF94OutOfPlaneBendingInteractionParameterizer::getForceConstant(const Chem::MolecularGraph& molgraph, unsigned int ctr_atom_type, 
+																					 std::size_t ctr_atom_idx, const AtomList& nbr_atoms) const
 {
 	typedef MMFF94OutOfPlaneBendingParameterTable::Entry ParamEntry;
 
@@ -135,7 +135,7 @@ double ForceField::MMFF94OutOfPlaneBendingInteractionAnalyzer::getForceConstant(
 		nbr_atom_param_types[i] = paramTypeMap->getEntry(nbr_atom_type).getParameterTypes();
 
 		if (!nbr_atom_param_types[i])
-			throw Base::ItemNotFound("MMFF94OutOfPlaneBendingInteractionAnalyzer: could not find MMFF94 parameter atom type equivalence list for atom #" + 
+			throw Base::ItemNotFound("MMFF94OutOfPlaneBendingInteractionParameterizer: could not find MMFF94 parameter atom type equivalence list for atom #" + 
 									 boost::lexical_cast<std::string>(molgraph.getAtomIndex(*nbr_atoms[i])));
 	}
 
@@ -148,7 +148,7 @@ double ForceField::MMFF94OutOfPlaneBendingInteractionAnalyzer::getForceConstant(
 		return param_entry.getForceConstant();
 	}
 
-	throw Base::ItemNotFound("MMFF94OutOfPlaneBendingInteractionAnalyzer: could not find MMFF94 parameters for out-of-plane bending interaction centered at atom #" + 
+	throw Base::ItemNotFound("MMFF94OutOfPlaneBendingInteractionParameterizer: could not find MMFF94 parameters for out-of-plane bending interaction centered at atom #" + 
 							 boost::lexical_cast<std::string>(ctr_atom_idx));
 	return 0.0;
 }

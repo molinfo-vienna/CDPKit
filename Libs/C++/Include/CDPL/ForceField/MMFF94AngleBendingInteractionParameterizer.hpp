@@ -1,7 +1,7 @@
 /* -*- mode: c++; c-basic-offset: 4; tab-width: 4; indent-tabs-mode: t -*- */
 
 /* 
- * MMFF94AngleBendingInteractionAnalyzer.hpp 
+ * MMFF94AngleBendingInteractionParameterizer.hpp 
  *
  * This file is part of the Chemical Data Processing Toolkit
  *
@@ -25,18 +25,18 @@
 
 /**
  * \file
- * \brief Definition of the class CDPL::ForceField::MMFF94AngleBendingInteractionAnalyzer.
+ * \brief Definition of the class CDPL::ForceField::MMFF94AngleBendingInteractionParameterizer.
  */
 
-#ifndef CDPL_FORCEFIELD_MMFF94ANGLEBENDINGINTERACTIONANALYZER_HPP
-#define CDPL_FORCEFIELD_MMFF94ANGLEBENDINGINTERACTIONANALYZER_HPP
+#ifndef CDPL_FORCEFIELD_MMFF94ANGLEBENDINGINTERACTIONPARAMETERIZER_HPP
+#define CDPL_FORCEFIELD_MMFF94ANGLEBENDINGINTERACTIONPARAMETERIZER_HPP
 
 #include <vector>
 #include <cstddef>
 
 #include "CDPL/ForceField/APIPrefix.hpp"
-#include "CDPL/ForceField/MMFF94AngleBendingInteractionList.hpp"
-#include "CDPL/ForceField/MMFF94BondStretchingInteractionAnalyzer.hpp"
+#include "CDPL/ForceField/MMFF94AngleBendingInteractionData.hpp"
+#include "CDPL/ForceField/MMFF94BondStretchingInteractionParameterizer.hpp"
 #include "CDPL/ForceField/MMFF94PropertyFunctionWrappers.hpp"
 #include "CDPL/ForceField/InteractionFilterFunctionWrappers.hpp"
 #include "CDPL/ForceField/MMFF94BondStretchingParameterTable.hpp"
@@ -61,18 +61,18 @@ namespace CDPL
     {
 
 		/**
-		 * \addtogroup CDPL_FORCEFIELD_INTERACTION_ANALYSIS
+		 * \addtogroup CDPL_FORCEFIELD_INTERACTION_PARAMETERIZATION
 		 * @{
 		 */
 
-		class CDPL_FORCEFIELD_API MMFF94AngleBendingInteractionAnalyzer
+		class CDPL_FORCEFIELD_API MMFF94AngleBendingInteractionParameterizer
 		{
 
 		  public:
-			MMFF94AngleBendingInteractionAnalyzer();
+			MMFF94AngleBendingInteractionParameterizer();
 
-			MMFF94AngleBendingInteractionAnalyzer(const Chem::MolecularGraph& molgraph, 
-												  MMFF94AngleBendingInteractionList& iactions);
+			MMFF94AngleBendingInteractionParameterizer(const Chem::MolecularGraph& molgraph, 
+													   MMFF94AngleBendingInteractionData& ia_data);
 
 			void setFilterFunction(const InteractionFilterFunction3& func); 
 
@@ -92,7 +92,7 @@ namespace CDPL
 
 			void setParameterAtomTypeMap(const MMFF94PrimaryToParameterAtomTypeMap::SharedPointer& map);
 
-			void analyze(const Chem::MolecularGraph& molgraph, MMFF94AngleBendingInteractionList& iactions);
+			void parameterize(const Chem::MolecularGraph& molgraph, MMFF94AngleBendingInteractionData& ia_data);
 
 		  private:
 			void getParameters(const Chem::MolecularGraph& molgraph, const Chem::Atom& term_atom1, const Chem::Atom& ctr_atom, 
@@ -136,7 +136,7 @@ namespace CDPL
 			MMFF94AngleBendingParameterTable::SharedPointer       paramTable;
 			MMFF94AtomTypePropertyTable::SharedPointer            typePropTable;
 			MMFF94PrimaryToParameterAtomTypeMap::SharedPointer    paramTypeMap;
-			MMFF94BondStretchingInteractionAnalyzer               bsAnalyzer;
+			MMFF94BondStretchingInteractionParameterizer               bsParameterizer;
 			AtomList                                              nbrAtoms;
 			BondList                                              nbrBonds;
 		};			
@@ -147,4 +147,4 @@ namespace CDPL
     }
 }
 
-#endif // CDPL_FORCEFIELD_MMFF94ANGLEBENDINGINTERACTIONANALYZER_HPP
+#endif // CDPL_FORCEFIELD_MMFF94ANGLEBENDINGINTERACTIONPARAMETERIZER_HPP

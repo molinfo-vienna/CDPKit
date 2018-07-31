@@ -97,11 +97,11 @@ namespace MMFF94TestUtils
 		typedef std::vector<std::string> SymbolicAtomTypeArray;
 		typedef std::vector<unsigned int> NumericAtomTypeArray;
 		typedef std::vector<double> AtomChargeArray;
-		typedef std::vector<BondStretchingInteraction> BondStretchingInteractionList;
-		typedef std::vector<AngleBendingInteraction> AngleBendingInteractionList;
-		typedef std::vector<StretchBendInteraction> StretchBendInteractionList;
-		typedef std::vector<OutOfPlaneBendingInteraction> OutOfPlaneBendingInteractionList;
-		typedef std::vector<TorsionInteraction> TorsionInteractionList;
+		typedef std::vector<BondStretchingInteraction> BondStretchingInteractionData;
+		typedef std::vector<AngleBendingInteraction> AngleBendingInteractionData;
+		typedef std::vector<StretchBendInteraction> StretchBendInteractionData;
+		typedef std::vector<OutOfPlaneBendingInteraction> OutOfPlaneBendingInteractionData;
+		typedef std::vector<TorsionInteraction> TorsionInteractionData;
 
 		OptimolLogReader(const std::string& log_file);
 
@@ -109,11 +109,11 @@ namespace MMFF94TestUtils
 		bool getNumericAtomTypes(const std::string& mol_name, NumericAtomTypeArray& num_types);
 		bool getPartialAtomCharges(const std::string& mol_name, AtomChargeArray& charges);
 		bool getFormalAtomCharges(const std::string& mol_name, AtomChargeArray& charges);
-		bool getBondStretchingInteractions(const std::string& mol_name, BondStretchingInteractionList& iactions);
-		bool getAngleBendingInteractions(const std::string& mol_name, AngleBendingInteractionList& iactions);
-		bool getStretchBendInteractions(const std::string& mol_name, StretchBendInteractionList& iactions);
-		bool getOutOfPlaneBendingInteractions(const std::string& mol_name, OutOfPlaneBendingInteractionList& iactions);
-		bool getTorsionInteractions(const std::string& mol_name, TorsionInteractionList& iactions);
+		bool getBondStretchingInteractions(const std::string& mol_name, BondStretchingInteractionData& ia_data);
+		bool getAngleBendingInteractions(const std::string& mol_name, AngleBendingInteractionData& ia_data);
+		bool getStretchBendInteractions(const std::string& mol_name, StretchBendInteractionData& ia_data);
+		bool getOutOfPlaneBendingInteractions(const std::string& mol_name, OutOfPlaneBendingInteractionData& ia_data);
+		bool getTorsionInteractions(const std::string& mol_name, TorsionInteractionData& ia_data);
 
     private:
 		void buildIndex();

@@ -54,13 +54,13 @@ SET(cdpl-forcefield_LIB_SRCS
     MMFF94ChargeCalculator.cpp
     MMFF94AromaticSSSRSubset.cpp
 
-    MMFF94BondStretchingInteractionAnalyzer.cpp
-    MMFF94AngleBendingInteractionAnalyzer.cpp
-    MMFF94StretchBendInteractionAnalyzer.cpp
-    MMFF94OutOfPlaneBendingInteractionAnalyzer.cpp
-    MMFF94TorsionInteractionAnalyzer.cpp
-    MMFF94VanDerWaalsInteractionAnalyzer.cpp
-    MMFF94ElectrostaticInteractionAnalyzer.cpp
+    MMFF94BondStretchingInteractionParameterizer.cpp
+    MMFF94AngleBendingInteractionParameterizer.cpp
+    MMFF94StretchBendInteractionParameterizer.cpp
+    MMFF94OutOfPlaneBendingInteractionParameterizer.cpp
+    MMFF94TorsionInteractionParameterizer.cpp
+    MMFF94VanDerWaalsInteractionParameterizer.cpp
+    MMFF94ElectrostaticInteractionParameterizer.cpp
 
     MMFF94ParameterData.cpp
     MMFF94SymbolicAtomTypePatternTable.cpp

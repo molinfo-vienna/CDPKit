@@ -1,7 +1,7 @@
 /* -*- mode: c++; c-basic-offset: 4; tab-width: 4; indent-tabs-mode: t -*- */
 
 /* 
- * MMFF94BondStretchingInteractionAnalyzer.cpp 
+ * MMFF94BondStretchingInteractionParameterizer.cpp 
  *
  * This file is part of the Chemical Data Processing Toolkit
  *
@@ -32,7 +32,7 @@
 
 #include <boost/lexical_cast.hpp>
 
-#include "CDPL/ForceField/MMFF94BondStretchingInteractionAnalyzer.hpp"
+#include "CDPL/ForceField/MMFF94BondStretchingInteractionParameterizer.hpp"
 #include "CDPL/ForceField/MolecularGraphFunctions.hpp"
 #include "CDPL/ForceField/AtomFunctions.hpp"
 #include "CDPL/ForceField/BondFunctions.hpp"
@@ -170,58 +170,58 @@ namespace
 }
 
 
-ForceField::MMFF94BondStretchingInteractionAnalyzer::MMFF94BondStretchingInteractionAnalyzer(const Chem::MolecularGraph& molgraph, 
-																							 MMFF94BondStretchingInteractionList& iactions):
+ForceField::MMFF94BondStretchingInteractionParameterizer::MMFF94BondStretchingInteractionParameterizer(const Chem::MolecularGraph& molgraph, 
+																									   MMFF94BondStretchingInteractionData& ia_data):
 	filterFunc(), atomTypeFunc(&getMMFF94NumericType), bondTypeIdxFunc(&getMMFF94TypeIndex), aromRingSetFunc(&getMMFF94AromaticRings),
 	paramTable(MMFF94BondStretchingParameterTable::get()), ruleParamTable(MMFF94BondStretchingRuleParameterTable::get()),
 	typePropTable(MMFF94AtomTypePropertyTable::get())
 {
-    analyze(molgraph, iactions);
+    parameterize(molgraph, ia_data);
 }
 
-ForceField::MMFF94BondStretchingInteractionAnalyzer::MMFF94BondStretchingInteractionAnalyzer():
+ForceField::MMFF94BondStretchingInteractionParameterizer::MMFF94BondStretchingInteractionParameterizer():
 	filterFunc(), atomTypeFunc(&getMMFF94NumericType), bondTypeIdxFunc(&getMMFF94TypeIndex), aromRingSetFunc(&getMMFF94AromaticRings),
 	paramTable(MMFF94BondStretchingParameterTable::get()), ruleParamTable(MMFF94BondStretchingRuleParameterTable::get()),
 	typePropTable(MMFF94AtomTypePropertyTable::get())
 {}
 
-void ForceField::MMFF94BondStretchingInteractionAnalyzer::setFilterFunction(const InteractionFilterFunction2& func)
+void ForceField::MMFF94BondStretchingInteractionParameterizer::setFilterFunction(const InteractionFilterFunction2& func)
 {
 	filterFunc = func;
 } 
 
-void ForceField::MMFF94BondStretchingInteractionAnalyzer::setAtomTypeFunction(const MMFF94NumericAtomTypeFunction& func)
+void ForceField::MMFF94BondStretchingInteractionParameterizer::setAtomTypeFunction(const MMFF94NumericAtomTypeFunction& func)
 {
 	atomTypeFunc = func;
 }  
 
-void ForceField::MMFF94BondStretchingInteractionAnalyzer::setBondTypeIndexFunction(const MMFF94BondTypeIndexFunction& func)
+void ForceField::MMFF94BondStretchingInteractionParameterizer::setBondTypeIndexFunction(const MMFF94BondTypeIndexFunction& func)
 {
 	bondTypeIdxFunc = func;
 }  
 
-void ForceField::MMFF94BondStretchingInteractionAnalyzer::setAromaticRingSetFunction(const MMFF94AromaticRingSetFunction& func)
+void ForceField::MMFF94BondStretchingInteractionParameterizer::setAromaticRingSetFunction(const MMFF94AromaticRingSetFunction& func)
 {
 	aromRingSetFunc = func;
 }
 
-void ForceField::MMFF94BondStretchingInteractionAnalyzer::setBondStretchingParameterTable(const MMFF94BondStretchingParameterTable::SharedPointer& table)
+void ForceField::MMFF94BondStretchingInteractionParameterizer::setBondStretchingParameterTable(const MMFF94BondStretchingParameterTable::SharedPointer& table)
 {
 	paramTable = table;
 }
 
-void ForceField::MMFF94BondStretchingInteractionAnalyzer::setBondStretchingRuleParameterTable(const MMFF94BondStretchingRuleParameterTable::SharedPointer& table)
+void ForceField::MMFF94BondStretchingInteractionParameterizer::setBondStretchingRuleParameterTable(const MMFF94BondStretchingRuleParameterTable::SharedPointer& table)
 {
 	ruleParamTable = table;
 }
 
-void ForceField::MMFF94BondStretchingInteractionAnalyzer::setAtomTypePropertyTable(const MMFF94AtomTypePropertyTable::SharedPointer& table)
+void ForceField::MMFF94BondStretchingInteractionParameterizer::setAtomTypePropertyTable(const MMFF94AtomTypePropertyTable::SharedPointer& table)
 {
 	typePropTable = table;
 }
 
-void ForceField::MMFF94BondStretchingInteractionAnalyzer::analyze(const Chem::MolecularGraph& molgraph, 
-																  MMFF94BondStretchingInteractionList& iactions)
+void ForceField::MMFF94BondStretchingInteractionParameterizer::parameterize(const Chem::MolecularGraph& molgraph, 
+																			MMFF94BondStretchingInteractionData& ia_data)
 {
 	using namespace Chem;
 
@@ -246,13 +246,13 @@ void ForceField::MMFF94BondStretchingInteractionAnalyzer::analyze(const Chem::Mo
 
 		getParameters(molgraph, bond, bond_type_idx, force_const, ref_length);
 	
-		iactions.addElement(MMFF94BondStretchingInteraction(molgraph.getAtomIndex(atom1), molgraph.getAtomIndex(atom2), 
-															bond_type_idx, force_const, ref_length));
+		ia_data.addElement(MMFF94BondStretchingInteraction(molgraph.getAtomIndex(atom1), molgraph.getAtomIndex(atom2), 
+														   bond_type_idx, force_const, ref_length));
 	}
 }
 
-void ForceField::MMFF94BondStretchingInteractionAnalyzer::getParameters(const Chem::MolecularGraph& molgraph, const Chem::Bond& bond, 
-																		unsigned int& bond_type_idx, double& force_const, double& ref_length) const
+void ForceField::MMFF94BondStretchingInteractionParameterizer::getParameters(const Chem::MolecularGraph& molgraph, const Chem::Bond& bond, 
+																			 unsigned int& bond_type_idx, double& force_const, double& ref_length) const
 {
 	typedef MMFF94BondStretchingParameterTable::Entry ParamEntry;
 	typedef MMFF94BondStretchingRuleParameterTable::Entry RuleParamEntry;
@@ -275,19 +275,19 @@ void ForceField::MMFF94BondStretchingInteractionAnalyzer::getParameters(const Ch
 	const AtomTypePropEntry& type1_prop_entry = typePropTable->getEntry(atom1_type);
 	
 	if (!type1_prop_entry)
-		throw Base::ItemNotFound("MMFF94BondStretchingInteractionAnalyzer: could not find MMFF94 atom type properties for atom #" + 
+		throw Base::ItemNotFound("MMFF94BondStretchingInteractionParameterizer: could not find MMFF94 atom type properties for atom #" + 
 								 boost::lexical_cast<std::string>(molgraph.getAtomIndex(bond.getBegin())));
 
 	const AtomTypePropEntry& type2_prop_entry = typePropTable->getEntry(atom2_type);
 	
 	if (!type2_prop_entry)
-		throw Base::ItemNotFound("MMFF94BondStretchingInteractionAnalyzer: could not find MMFF94 atom type properties for atom #" + 
+		throw Base::ItemNotFound("MMFF94BondStretchingInteractionParameterizer: could not find MMFF94 atom type properties for atom #" + 
 								 boost::lexical_cast<std::string>(molgraph.getAtomIndex(bond.getEnd())));
 
 	const RuleParamEntry& rule_param_entry = ruleParamTable->getEntry(type1_prop_entry.getAtomicNumber(), type2_prop_entry.getAtomicNumber());
 
 	if (!rule_param_entry)
-		throw Base::ItemNotFound("MMMFF94BondStretchingInteractionAnalyzer: could not find MMFF94 bond stretching rule parameters for interaction #" + 
+		throw Base::ItemNotFound("MMMFF94BondStretchingInteractionParameterizer: could not find MMFF94 bond stretching rule parameters for interaction #" + 
 								 boost::lexical_cast<std::string>(molgraph.getAtomIndex(bond.getBegin())) + "-#" + 
 								 boost::lexical_cast<std::string>(molgraph.getAtomIndex(bond.getEnd())));
 
@@ -295,8 +295,8 @@ void ForceField::MMFF94BondStretchingInteractionAnalyzer::getParameters(const Ch
 	force_const = rule_param_entry.getForceConstant() * std::pow(rule_param_entry.getReferenceLength() / ref_length, 6.0);
 }
 
-double ForceField::MMFF94BondStretchingInteractionAnalyzer::calcReferenceBondLength(const Chem::MolecularGraph& molgraph, const Chem::Bond& bond, 
-																					const AtomTypePropEntry& type1_prop_entry, const AtomTypePropEntry& type2_prop_entry) const
+double ForceField::MMFF94BondStretchingInteractionParameterizer::calcReferenceBondLength(const Chem::MolecularGraph& molgraph, const Chem::Bond& bond, 
+																						 const AtomTypePropEntry& type1_prop_entry, const AtomTypePropEntry& type2_prop_entry) const
 {
 	using namespace Chem;
 
@@ -311,13 +311,13 @@ double ForceField::MMFF94BondStretchingInteractionAnalyzer::calcReferenceBondLen
 		bond_order_idx = 5;
 	
 	else if (containsFragmentWithBond(*aromRingSetFunc(molgraph), bond)) {
-      bool pilp_flag1 = type1_prop_entry.hasPiLonePair();
-      bool pilp_flag2 = type2_prop_entry.hasPiLonePair();
+		bool pilp_flag1 = type1_prop_entry.hasPiLonePair();
+		bool pilp_flag2 = type2_prop_entry.hasPiLonePair();
 
-      if (!pilp_flag1 && !pilp_flag2)
-		  bond_order_idx = 4;
-	  else
-		  bond_order_idx = 5;
+		if (!pilp_flag1 && !pilp_flag2)
+			bond_order_idx = 4;
+		else
+			bond_order_idx = 5;
 	}
 
     unsigned int atomic_no1 = type1_prop_entry.getAtomicNumber();
@@ -327,48 +327,48 @@ double ForceField::MMFF94BondStretchingInteractionAnalyzer::calcReferenceBondLen
 
     switch (bond_order_idx) {
 
-      case 1:
-		  switch (mltb_desig1 * 10 + mltb_desig2) {
+		case 1:
+			switch (mltb_desig1 * 10 + mltb_desig2) {
 
-			  case 11:
-			  case 12:
-			  case 21:
-			  case 22:
-				  cov_rad1 -= 0.03;
-				  cov_rad2 -= 0.03;
-				  break;
+				case 11:
+				case 12:
+				case 21:
+				case 22:
+					cov_rad1 -= 0.03;
+					cov_rad2 -= 0.03;
+					break;
 
-			  case 33:
-				  cov_rad1 -= 0.08;
-				  cov_rad2 -= 0.08;
+				case 33:
+					cov_rad1 -= 0.08;
+					cov_rad2 -= 0.08;
 
-			  default:
-				  break;
-		  }
+				default:
+					break;
+			}
 
-		  break;
+			break;
 
-      case 2:
-        cov_rad1 -= 0.1;
-        cov_rad2 -= 0.1;
-        break;
+		case 2:
+			cov_rad1 -= 0.1;
+			cov_rad2 -= 0.1;
+			break;
 
-      case 3:
-        cov_rad1 -= 0.17;
-        cov_rad2 -= 0.17;
-        break;
+		case 3:
+			cov_rad1 -= 0.17;
+			cov_rad2 -= 0.17;
+			break;
 
-      case 4:
-        cov_rad1 -= 0.075;
-        cov_rad2 -= 0.075;
-        break;
+		case 4:
+			cov_rad1 -= 0.075;
+			cov_rad2 -= 0.075;
+			break;
 
-      case 5:
-        cov_rad1 -= 0.04;
-        cov_rad2 -= 0.04;
+		case 5:
+			cov_rad1 -= 0.04;
+			cov_rad2 -= 0.04;
 
-      default:
-        break;
+		default:
+			break;
     }
 
     double elneg1 = getElectronegativity(atomic_no1);
@@ -376,7 +376,7 @@ double ForceField::MMFF94BondStretchingInteractionAnalyzer::calcReferenceBondLen
     double c = 0.085;
 
     if (atomic_no1 == AtomType::H || atomic_no2 == AtomType::H)
-      c = 0.05;
+		c = 0.05;
 
     double r0IJ = cov_rad1 + cov_rad2 - c * std::pow(std::abs(elneg1 - elneg2), 1.4); // - 0.008; // test suite values seem not to have this value subtracted!
 

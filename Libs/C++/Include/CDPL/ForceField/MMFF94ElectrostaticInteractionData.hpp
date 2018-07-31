@@ -1,7 +1,7 @@
 /* -*- mode: c++; c-basic-offset: 4; tab-width: 4; indent-tabs-mode: t -*- */
 
 /* 
- * MMFF94AngleBendingInteractionList.hpp 
+ * MMFF94ElectrostaticInteractionData.hpp 
  *
  * This file is part of the Chemical Data Processing Toolkit
  *
@@ -25,13 +25,13 @@
 
 /**
  * \file
- * \brief Definition of the class CDPL::ForceField::MMFF94AngleBendingInteractionList.
+ * \brief Definition of the class CDPL::ForceField::MMFF94ElectrostaticInteractionData.
  */
 
-#ifndef CDPL_FORCEFIELD_MMFF94ANGLEBENDINGINTERACTIONLIST_HPP
-#define CDPL_FORCEFIELD_MMFF94ANGLEBENDINGINTERACTIONLIST_HPP
+#ifndef CDPL_FORCEFIELD_MMFF94ELECTROSTATICINTERACTIONDATA_HPP
+#define CDPL_FORCEFIELD_MMFF94ELECTROSTATICINTERACTIONDATA_HPP
 
-#include "CDPL/ForceField/MMFF94AngleBendingInteraction.hpp"
+#include "CDPL/ForceField/MMFF94ElectrostaticInteraction.hpp"
 #include "CDPL/Util/Array.hpp"
 
 
@@ -46,7 +46,7 @@ namespace CDPL
 	 * @{
 	 */
 
-	typedef Util::Array<MMFF94AngleBendingInteraction> MMFF94AngleBendingInteractionList;
+	typedef Util::Array<MMFF94ElectrostaticInteraction> MMFF94ElectrostaticInteractionData;
 
 	/**
 	 * @}
@@ -54,4 +54,4 @@ namespace CDPL
     }
 }
 
-#endif // CDPL_FORCEFIELD_MMFF94ANGLEBENDINGINTERACTIONLIST_HPP
+#endif // CDPL_FORCEFIELD_MMFF94ELECTROSTATICINTERACTIONDATA_HPP

@@ -1,7 +1,7 @@
 /* -*- mode: c++; c-basic-offset: 4; tab-width: 4; indent-tabs-mode: t -*- */
 
 /* 
- * MMFF94StretchBendInteractionList.hpp 
+ * MMFF94StretchBendInteractionData.hpp 
  *
  * This file is part of the Chemical Data Processing Toolkit
  *
@@ -25,11 +25,11 @@
 
 /**
  * \file
- * \brief Definition of the class CDPL::ForceField::MMFF94StretchBendInteractionList.
+ * \brief Definition of the class CDPL::ForceField::MMFF94StretchBendInteractionData.
  */
 
-#ifndef CDPL_FORCEFIELD_MMFF94STRETCHBENDINTERACTIONLIST_HPP
-#define CDPL_FORCEFIELD_MMFF94STRETCHBENDINTERACTIONLIST_HPP
+#ifndef CDPL_FORCEFIELD_MMFF94STRETCHBENDINTERACTIONDATA_HPP
+#define CDPL_FORCEFIELD_MMFF94STRETCHBENDINTERACTIONDATA_HPP
 
 #include "CDPL/ForceField/MMFF94StretchBendInteraction.hpp"
 #include "CDPL/Util/Array.hpp"
@@ -46,7 +46,7 @@ namespace CDPL
 	 * @{
 	 */
 
-	typedef Util::Array<MMFF94StretchBendInteraction> MMFF94StretchBendInteractionList;
+	typedef Util::Array<MMFF94StretchBendInteraction> MMFF94StretchBendInteractionData;
 
 	/**
 	 * @}
@@ -54,4 +54,4 @@ namespace CDPL
     }
 }
 
-#endif // CDPL_FORCEFIELD_MMFF94STRETCHBENDINTERACTIONLIST_HPP
+#endif // CDPL_FORCEFIELD_MMFF94STRETCHBENDINTERACTIONDATA_HPP

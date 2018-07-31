@@ -1,7 +1,7 @@
 /* -*- mode: c++; c-basic-offset: 4; tab-width: 4; indent-tabs-mode: t -*- */
 
 /* 
- * MMFF94AngleBendingInteractionAnalyzer.cpp 
+ * MMFF94AngleBendingInteractionParameterizer.cpp 
  *
  * This file is part of the Chemical Data Processing Toolkit
  *
@@ -29,7 +29,7 @@
 #include <iterator>
 #include <cmath>
 
-#include "CDPL/ForceField/MMFF94AngleBendingInteractionAnalyzer.hpp"
+#include "CDPL/ForceField/MMFF94AngleBendingInteractionParameterizer.hpp"
 #include "CDPL/ForceField/AtomFunctions.hpp"
 #include "CDPL/ForceField/BondFunctions.hpp"
 #include "CDPL/Chem/MolecularGraph.hpp"
@@ -96,72 +96,72 @@ namespace
 }
 
 
-ForceField::MMFF94AngleBendingInteractionAnalyzer::MMFF94AngleBendingInteractionAnalyzer(const Chem::MolecularGraph& molgraph, 
-																						 MMFF94AngleBendingInteractionList& iactions):
+ForceField::MMFF94AngleBendingInteractionParameterizer::MMFF94AngleBendingInteractionParameterizer(const Chem::MolecularGraph& molgraph, 
+																								   MMFF94AngleBendingInteractionData& ia_data):
 	filterFunc(), atomTypeFunc(&getMMFF94NumericType), bondTypeIdxFunc(&getMMFF94TypeIndex), paramTable(MMFF94AngleBendingParameterTable::get()),
 	typePropTable(MMFF94AtomTypePropertyTable::get()), paramTypeMap(MMFF94PrimaryToParameterAtomTypeMap::get())
 {
-    analyze(molgraph, iactions);
+    parameterize(molgraph, ia_data);
 }
 
-ForceField::MMFF94AngleBendingInteractionAnalyzer::MMFF94AngleBendingInteractionAnalyzer():
+ForceField::MMFF94AngleBendingInteractionParameterizer::MMFF94AngleBendingInteractionParameterizer():
 	filterFunc(), atomTypeFunc(&getMMFF94NumericType), bondTypeIdxFunc(&getMMFF94TypeIndex), paramTable(MMFF94AngleBendingParameterTable::get()),
 	typePropTable(MMFF94AtomTypePropertyTable::get()), paramTypeMap(MMFF94PrimaryToParameterAtomTypeMap::get()) 
 {}
 
-void ForceField::MMFF94AngleBendingInteractionAnalyzer::setFilterFunction(const InteractionFilterFunction3& func)
+void ForceField::MMFF94AngleBendingInteractionParameterizer::setFilterFunction(const InteractionFilterFunction3& func)
 {
 	filterFunc = func;
 } 
 
-void ForceField::MMFF94AngleBendingInteractionAnalyzer::setAtomTypeFunction(const MMFF94NumericAtomTypeFunction& func)
+void ForceField::MMFF94AngleBendingInteractionParameterizer::setAtomTypeFunction(const MMFF94NumericAtomTypeFunction& func)
 {
 	atomTypeFunc = func;
 
-	bsAnalyzer.setAtomTypeFunction(func);
+	bsParameterizer.setAtomTypeFunction(func);
 }  
 
-void ForceField::MMFF94AngleBendingInteractionAnalyzer::setBondTypeIndexFunction(const MMFF94BondTypeIndexFunction& func)
+void ForceField::MMFF94AngleBendingInteractionParameterizer::setBondTypeIndexFunction(const MMFF94BondTypeIndexFunction& func)
 {
 	bondTypeIdxFunc = func;
 
-	bsAnalyzer.setBondTypeIndexFunction(func);
+	bsParameterizer.setBondTypeIndexFunction(func);
 }  
 
-void ForceField::MMFF94AngleBendingInteractionAnalyzer::setAromaticRingSetFunction(const MMFF94AromaticRingSetFunction& func)
+void ForceField::MMFF94AngleBendingInteractionParameterizer::setAromaticRingSetFunction(const MMFF94AromaticRingSetFunction& func)
 {
-	bsAnalyzer.setAromaticRingSetFunction(func);
+	bsParameterizer.setAromaticRingSetFunction(func);
 }
 
-void ForceField::MMFF94AngleBendingInteractionAnalyzer::setBondStretchingParameterTable(const MMFF94BondStretchingParameterTable::SharedPointer& table)
+void ForceField::MMFF94AngleBendingInteractionParameterizer::setBondStretchingParameterTable(const MMFF94BondStretchingParameterTable::SharedPointer& table)
 {
-	bsAnalyzer.setBondStretchingParameterTable(table);
+	bsParameterizer.setBondStretchingParameterTable(table);
 }
 
-void ForceField::MMFF94AngleBendingInteractionAnalyzer::setBondStretchingRuleParameterTable(const MMFF94BondStretchingRuleParameterTable::SharedPointer& table)
+void ForceField::MMFF94AngleBendingInteractionParameterizer::setBondStretchingRuleParameterTable(const MMFF94BondStretchingRuleParameterTable::SharedPointer& table)
 {
-	bsAnalyzer.setBondStretchingRuleParameterTable(table);
+	bsParameterizer.setBondStretchingRuleParameterTable(table);
 }
 
-void ForceField::MMFF94AngleBendingInteractionAnalyzer::setAtomTypePropertyTable(const MMFF94AtomTypePropertyTable::SharedPointer& table)
+void ForceField::MMFF94AngleBendingInteractionParameterizer::setAtomTypePropertyTable(const MMFF94AtomTypePropertyTable::SharedPointer& table)
 {
 	typePropTable = table;
 
-	bsAnalyzer.setAtomTypePropertyTable(table);
+	bsParameterizer.setAtomTypePropertyTable(table);
 }
 
-void ForceField::MMFF94AngleBendingInteractionAnalyzer::setAngleBendingParameterTable(const MMFF94AngleBendingParameterTable::SharedPointer& table)
+void ForceField::MMFF94AngleBendingInteractionParameterizer::setAngleBendingParameterTable(const MMFF94AngleBendingParameterTable::SharedPointer& table)
 {
 	paramTable = table;
 }
 
-void ForceField::MMFF94AngleBendingInteractionAnalyzer::setParameterAtomTypeMap(const MMFF94PrimaryToParameterAtomTypeMap::SharedPointer& map)
+void ForceField::MMFF94AngleBendingInteractionParameterizer::setParameterAtomTypeMap(const MMFF94PrimaryToParameterAtomTypeMap::SharedPointer& map)
 {
 	paramTypeMap = map;
 }
 
-void ForceField::MMFF94AngleBendingInteractionAnalyzer::analyze(const Chem::MolecularGraph& molgraph, 
-																MMFF94AngleBendingInteractionList& iactions)
+void ForceField::MMFF94AngleBendingInteractionParameterizer::parameterize(const Chem::MolecularGraph& molgraph, 
+																		  MMFF94AngleBendingInteractionData& ia_data)
 {
 	using namespace Chem;
 
@@ -192,16 +192,16 @@ void ForceField::MMFF94AngleBendingInteractionAnalyzer::analyze(const Chem::Mole
 				getParameters(molgraph, term_atom1, ctr_atom, term_atom2, term_atom1_bnd, *nbrBonds[k], 
 							  angle_type_idx, linear, force_const, ref_angle);
 
-				iactions.addElement(MMFF94AngleBendingInteraction(term_atom1_idx, i, molgraph.getAtomIndex(term_atom2), 
-																  angle_type_idx, linear, force_const, ref_angle));
+				ia_data.addElement(MMFF94AngleBendingInteraction(term_atom1_idx, i, molgraph.getAtomIndex(term_atom2), 
+																 angle_type_idx, linear, force_const, ref_angle));
 			}
 		}
 	}
 }
 
-void ForceField::MMFF94AngleBendingInteractionAnalyzer::getParameters(const Chem::MolecularGraph& molgraph, const Chem::Atom& term_atom1, const Chem::Atom& ctr_atom, 
-																	  const Chem::Atom& term_atom2, const Chem::Bond& term_atom1_bnd, const Chem::Bond& term_atom2_bnd,
-																	  unsigned int& angle_type_idx, bool& linear, double& force_const, double& ref_angle) const
+void ForceField::MMFF94AngleBendingInteractionParameterizer::getParameters(const Chem::MolecularGraph& molgraph, const Chem::Atom& term_atom1, const Chem::Atom& ctr_atom, 
+																		   const Chem::Atom& term_atom2, const Chem::Bond& term_atom1_bnd, const Chem::Bond& term_atom2_bnd,
+																		   unsigned int& angle_type_idx, bool& linear, double& force_const, double& ref_angle) const
 {
 	typedef MMFF94AngleBendingParameterTable::Entry ParamEntry;
 	typedef MMFF94AtomTypePropertyTable::Entry AtomTypePropEntry;
@@ -216,7 +216,7 @@ void ForceField::MMFF94AngleBendingInteractionAnalyzer::getParameters(const Chem
 	const AtomTypePropEntry& ctr_prop_entry = typePropTable->getEntry(ctr_atom_type);
 	
 	if (!ctr_prop_entry)
-		throw Base::ItemNotFound("MMFF94AngleBendingInteractionAnalyzer: could not find MMFF94 atom type properties for atom #" + 
+		throw Base::ItemNotFound("MMFF94AngleBendingInteractionParameterizer: could not find MMFF94 atom type properties for atom #" + 
 								 boost::lexical_cast<std::string>(molgraph.getAtomIndex(ctr_atom)));
 
 	linear = ctr_prop_entry.formsLinearBondAngle();		  
@@ -224,13 +224,13 @@ void ForceField::MMFF94AngleBendingInteractionAnalyzer::getParameters(const Chem
 	const unsigned int* term_atom1_param_types = paramTypeMap->getEntry(term_atom1_type).getParameterTypes();
 
 	if (!term_atom1_param_types)
-		throw Base::ItemNotFound("MMFF94AngleBendingInteractionAnalyzer: could not find MMFF94 parameter atom type equivalence list for atom #" + 
+		throw Base::ItemNotFound("MMFF94AngleBendingInteractionParameterizer: could not find MMFF94 parameter atom type equivalence list for atom #" + 
 								 boost::lexical_cast<std::string>(molgraph.getAtomIndex(term_atom1)));
 
 	const unsigned int* term_atom2_param_types = paramTypeMap->getEntry(term_atom2_type).getParameterTypes();
 
 	if (!term_atom2_param_types)
-		throw Base::ItemNotFound("MMFF94AngleBendingInteractionAnalyzer: could not find MMFF94 parameter atom type equivalence list for atom #" + 
+		throw Base::ItemNotFound("MMFF94AngleBendingInteractionParameterizer: could not find MMFF94 parameter atom type equivalence list for atom #" + 
 								 boost::lexical_cast<std::string>(molgraph.getAtomIndex(term_atom2)));
 
 	for (std::size_t i = 0; i < MMFF94PrimaryToParameterAtomTypeMap::Entry::NUM_TYPES - 1; i++) {
@@ -311,13 +311,13 @@ void ForceField::MMFF94AngleBendingInteractionAnalyzer::getParameters(const Chem
 	const AtomTypePropEntry& term1_prop_entry = typePropTable->getEntry(term_atom1_type);
 	
 	if (!term1_prop_entry)
-		throw Base::ItemNotFound("MMFF94AngleBendingInteractionAnalyzer: could not find MMFF94 atom type properties for atom #" + 
+		throw Base::ItemNotFound("MMFF94AngleBendingInteractionParameterizer: could not find MMFF94 atom type properties for atom #" + 
 								 boost::lexical_cast<std::string>(molgraph.getAtomIndex(term_atom1)));
 
 	const AtomTypePropEntry& term2_prop_entry = typePropTable->getEntry(term_atom2_type);
 	
 	if (!term2_prop_entry)
-		throw Base::ItemNotFound("MMFF94AngleBendingInteractionAnalyzer: could not find MMFF94 atom type properties for atom #" + 
+		throw Base::ItemNotFound("MMFF94AngleBendingInteractionParameterizer: could not find MMFF94 atom type properties for atom #" + 
 								 boost::lexical_cast<std::string>(molgraph.getAtomIndex(term_atom2)));
 
     double zI = getEmpiricalRuleZParameter(term1_prop_entry.getAtomicNumber());
@@ -328,8 +328,8 @@ void ForceField::MMFF94AngleBendingInteractionAnalyzer::getParameters(const Chem
     double r0JK = 0.0;
 	unsigned int tmp = 0;
 
-	bsAnalyzer.getParameters(molgraph, term_atom1_bnd, tmp, force_const, r0IJ);
-	bsAnalyzer.getParameters(molgraph, term_atom2_bnd, tmp, force_const, r0JK);
+	bsParameterizer.getParameters(molgraph, term_atom1_bnd, tmp, force_const, r0IJ);
+	bsParameterizer.getParameters(molgraph, term_atom2_bnd, tmp, force_const, r0JK);
 
     double d = (r0IJ - r0JK) * (r0IJ - r0JK) / ((r0IJ + r0JK) * (r0IJ + r0JK));
 	double ref_ang_rad = M_PI * ref_angle / 180.0;
@@ -337,8 +337,8 @@ void ForceField::MMFF94AngleBendingInteractionAnalyzer::getParameters(const Chem
 	force_const = beta * zI * cJ * zK / ((r0IJ + r0JK) * ref_ang_rad * ref_ang_rad) * std::exp(-2.0 * d);
 }
 
-std::size_t ForceField::MMFF94AngleBendingInteractionAnalyzer::getSizeOfContaining3Or4Ring(const Chem::MolecularGraph& molgraph, const Chem::Atom& term_atom1, 
-																						   const Chem::Atom& ctr_atom, const Chem::Atom& term_atom2) const
+std::size_t ForceField::MMFF94AngleBendingInteractionParameterizer::getSizeOfContaining3Or4Ring(const Chem::MolecularGraph& molgraph, const Chem::Atom& term_atom1, 
+																								const Chem::Atom& ctr_atom, const Chem::Atom& term_atom2) const
 {
 	using namespace Chem;
 
@@ -370,7 +370,7 @@ std::size_t ForceField::MMFF94AngleBendingInteractionAnalyzer::getSizeOfContaini
     return 0;
 }
 
-unsigned int ForceField::MMFF94AngleBendingInteractionAnalyzer::getAngleTypeIndex(const Chem::Bond& bond1, const Chem::Bond& bond2, std::size_t r_size) const
+unsigned int ForceField::MMFF94AngleBendingInteractionParameterizer::getAngleTypeIndex(const Chem::Bond& bond1, const Chem::Bond& bond2, std::size_t r_size) const
 {
     unsigned int bond_type_idx1 = bondTypeIdxFunc(bond1);
     unsigned int bond_type_idx2 = bondTypeIdxFunc(bond2);
