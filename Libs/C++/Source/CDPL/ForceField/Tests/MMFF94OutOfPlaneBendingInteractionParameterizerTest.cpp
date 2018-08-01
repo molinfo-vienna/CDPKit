@@ -41,11 +41,12 @@
 namespace
 {
 
-	void performTesting(const MMFF94TestData::MoleculeList& mols, MMFF94TestUtils::OptimolLogReader& log_reader, bool stat)
+	void performTesting(const Testing::MMFF94TestData::MoleculeList& mols, Testing::OptimolLogReader& log_reader, bool stat)
 	{
 		using namespace CDPL;
+		using namespace Testing;
 
-		MMFF94TestUtils::OptimolLogReader::OutOfPlaneBendingInteractionData ia_data;
+		OptimolLogReader::OutOfPlaneBendingInteractionData ia_data;
 		ForceField::MMFF94OutOfPlaneBendingInteractionParameterizer parameterizer;
 		ForceField::MMFF94OutOfPlaneBendingInteractionData found_ia_data;
 
@@ -110,6 +111,7 @@ namespace
 BOOST_AUTO_TEST_CASE(MMFF94OutOfPlaneBendingInteractionParameterizerTest)
 {
 	using namespace CDPL;
+	using namespace Testing;
 
 	performTesting(MMFF94TestData::DYN_TEST_MOLECULES, MMFF94TestData::DYN_LOG_READER, false);
 	performTesting(MMFF94TestData::STAT_TEST_MOLECULES, MMFF94TestData::STAT_LOG_READER, true);

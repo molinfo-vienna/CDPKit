@@ -39,9 +39,10 @@
 BOOST_AUTO_TEST_CASE(MMFF94ChargeCalculatorTest)
 {
 	using namespace CDPL;
+	using namespace Testing;
 
-	MMFF94TestUtils::OptimolLogReader::AtomChargeArray part_charges;
-	MMFF94TestUtils::OptimolLogReader::AtomChargeArray form_charges;
+	OptimolLogReader::AtomChargeArray part_charges;
+	OptimolLogReader::AtomChargeArray form_charges;
 
 	ForceField::MMFF94ChargeCalculator charge_calc;
 	Util::DArray calc_charges;

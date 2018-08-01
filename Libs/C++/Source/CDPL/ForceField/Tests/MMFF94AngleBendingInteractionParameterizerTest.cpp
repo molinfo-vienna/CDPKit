@@ -40,8 +40,9 @@
 BOOST_AUTO_TEST_CASE(MMFF94AngleBendingInteractionParameterizerTest)
 {
 	using namespace CDPL;
+	using namespace Testing;
 
-	MMFF94TestUtils::OptimolLogReader::AngleBendingInteractionData ia_data;
+	OptimolLogReader::AngleBendingInteractionData ia_data;
 
 	ForceField::MMFF94AngleBendingInteractionParameterizer parameterizer;
 	ForceField::MMFF94AngleBendingInteractionData found_ia_data;

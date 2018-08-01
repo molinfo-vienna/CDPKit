@@ -39,8 +39,9 @@
 BOOST_AUTO_TEST_CASE(MMFF94BondStretchingInteractionParameterizerTest)
 {
 	using namespace CDPL;
+	using namespace Testing;
 
-	MMFF94TestUtils::OptimolLogReader::BondStretchingInteractionData ia_data;
+	OptimolLogReader::BondStretchingInteractionData ia_data;
 
 	ForceField::MMFF94BondStretchingInteractionParameterizer parameterizer;
 	ForceField::MMFF94BondStretchingInteractionData found_ia_data;

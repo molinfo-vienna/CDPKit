@@ -78,14 +78,15 @@ void ForceField::MMFF94VanDerWaalsInteractionParameterizer::parameterize(const C
 {
 	using namespace Chem;
 
+
 	typedef MMFF94VanDerWaalsParameterTable::Entry ParamEntry;
 
 	for (std::size_t i = 0, num_atoms = molgraph.getNumAtoms(); i < num_atoms; i++) {
 		const Atom& atom1 = molgraph.getAtom(i);
-		const ParamEntry& params_entry1 = paramTable->getEntry(typeFunc(atom1));
+		const ParamEntry& param_entry1 = paramTable->getEntry(typeFunc(atom1));
 
-		if (!params_entry1)
-			throw Base::ItemNotFound("MMFF94VanDerWaalsInteractionParameterizerr: could not find MMFF94 van der Waals parameters for atom #" + 
+		if (!param_entry1)
+			throw Base::ItemNotFound("MMFF94VanDerWaalsInteractionParameterizer: could not find MMFF94 van der Waals parameters for atom #" + 
 									 boost::lexical_cast<std::string>(i));
 
 		for (std::size_t j = i + 1; j < num_atoms; j++) {
@@ -98,16 +99,16 @@ void ForceField::MMFF94VanDerWaalsInteractionParameterizer::parameterize(const C
 			if (filterFunc && !filterFunc(atom1, atom2))
 				continue;
 	
-			const ParamEntry& params_entry2 = paramTable->getEntry(typeFunc(atom2));
+			const ParamEntry& param_entry2 = paramTable->getEntry(typeFunc(atom2));
 
-			if (!params_entry2)
-				throw Base::ItemNotFound("MMFF94VanDerWaalsInteractionParameterizerr: could not find MMFF94 van der Waals parameters for atom #" + 
+			if (!param_entry2)
+				throw Base::ItemNotFound("MMFF94VanDerWaalsInteractionParameterizer: could not find MMFF94 van der Waals parameters for atom #" + 
 										 boost::lexical_cast<std::string>(j));
 
-			ia_data.addElement(MMFF94VanDerWaalsInteraction(i, j, params_entry1.getAtomicPolarizability(), params_entry1.getEffectiveElectronNumber(),
-															params_entry1.getFactorA(), params_entry1.getFactorG(), params_entry1.getHDonorAcceptorType(),
-															params_entry2.getAtomicPolarizability(), params_entry2.getEffectiveElectronNumber(),
-															params_entry2.getFactorA(), params_entry2.getFactorG(), params_entry2.getHDonorAcceptorType(),
+			ia_data.addElement(MMFF94VanDerWaalsInteraction(i, j, param_entry1.getAtomicPolarizability(), param_entry1.getEffectiveElectronNumber(),
+															param_entry1.getFactorA(), param_entry1.getFactorG(), param_entry1.getHDonorAcceptorType(),
+															param_entry2.getAtomicPolarizability(), param_entry2.getEffectiveElectronNumber(),
+															param_entry2.getFactorA(), param_entry2.getFactorG(), param_entry2.getHDonorAcceptorType(),
 															paramTable->getExponent(), paramTable->getFactorB(), paramTable->getBeta(),
 															paramTable->getFactorDARAD(), paramTable->getFactorDAEPS()));
 		}

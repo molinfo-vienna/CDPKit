@@ -38,9 +38,10 @@
 BOOST_AUTO_TEST_CASE(MMFF94AtomTyperTest)
 {
 	using namespace CDPL;
+	using namespace Testing;
 
-	MMFF94TestUtils::OptimolLogReader::SymbolicAtomTypeArray sym_types;
-	MMFF94TestUtils::OptimolLogReader::NumericAtomTypeArray num_types;
+	OptimolLogReader::SymbolicAtomTypeArray sym_types;
+	OptimolLogReader::NumericAtomTypeArray num_types;
 
 	ForceField::MMFF94AtomTyper atom_typer;
 	Util::UIArray perc_num_types;

@@ -90,14 +90,13 @@ namespace CDPL
 				double rII = fact_a1 * std::pow(atom_pol1, expo);
 				double rJJ = fact_a2 * std::pow(atom_pol2, expo);
 				double gIJ = (rII - rJJ) / (rII + rJJ);
-    
+    	
 				rIJ = 0.5 * (rII + rJJ);
     
 				if (!have_don)
-					rIJ += rIJ * fact_b * (1.0 - std::exp(beta * gIJ * gIJ));
-        
-				eIJ = 181.16 * fact_g1 * fact_g2 * fact_a1 * fact_a2  / 
-					(std::pow(fact_a1 / eff_el_num1, 0.5) + std::pow(fact_a2 / eff_el_num2, 0.5)) * std::pow(rIJ, -6.0);
+					rIJ += rIJ * fact_b * (1.0 - std::exp(-beta * gIJ * gIJ));
+
+				eIJ = 181.16 * fact_g1 * fact_g2 * atom_pol1 * atom_pol2 / (std::pow(atom_pol1 / eff_el_num1, 0.5) + std::pow(atom_pol2 / eff_el_num2, 0.5)) * std::pow(rIJ, -6.0);
     
 				if (have_don_acc) {
 					rIJ *= fact_darad;

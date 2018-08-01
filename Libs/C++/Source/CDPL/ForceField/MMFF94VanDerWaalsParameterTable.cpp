@@ -79,7 +79,7 @@ ForceField::MMFF94VanDerWaalsParameterTable::Entry::Entry():
 ForceField::MMFF94VanDerWaalsParameterTable::Entry::Entry(unsigned int atom_type, double atom_pol, double eff_el_num, 
 														  double fact_a, double fact_g, HDonorAcceptorType don_acc_type):
 	atomType(atom_type), polarizability(atom_pol), effElNumber(eff_el_num), factA(fact_a), 
-	factG(fact_g), donAccType(MMFF94VanDerWaalsInteraction::NONE), initialized(true)
+	factG(fact_g), donAccType(don_acc_type), initialized(true)
 {}
 
 unsigned int ForceField::MMFF94VanDerWaalsParameterTable::Entry::getAtomType() const
@@ -119,7 +119,8 @@ ForceField::MMFF94VanDerWaalsParameterTable::Entry::operator bool() const
 }
 
 
-ForceField::MMFF94VanDerWaalsParameterTable::MMFF94VanDerWaalsParameterTable()
+ForceField::MMFF94VanDerWaalsParameterTable::MMFF94VanDerWaalsParameterTable():
+	exponent(0.25), factB(0.2), beta(12.0), factDARAD(0.8), factDAEPS(0.5)
 {}
 
 void ForceField::MMFF94VanDerWaalsParameterTable::addEntry(unsigned int atom_type, double atom_pol, double eff_el_num, 

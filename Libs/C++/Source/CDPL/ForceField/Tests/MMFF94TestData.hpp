@@ -34,16 +34,20 @@
 #include "OptimolLogReader.hpp"
 
 
-namespace MMFF94TestData
+namespace Testing
 {
 
-    typedef std::vector<CDPL::Chem::Molecule::SharedPointer> MoleculeList;
+	namespace MMFF94TestData
+	{
 
-    extern MoleculeList                      DYN_TEST_MOLECULES;
-    extern MoleculeList                      STAT_TEST_MOLECULES;
+		typedef std::vector<CDPL::Chem::Molecule::SharedPointer> MoleculeList;
 
-    extern MMFF94TestUtils::OptimolLogReader DYN_LOG_READER;
-    extern MMFF94TestUtils::OptimolLogReader STAT_LOG_READER;
+		extern MoleculeList     DYN_TEST_MOLECULES;
+		extern MoleculeList     STAT_TEST_MOLECULES;
+
+		extern OptimolLogReader DYN_LOG_READER;
+		extern OptimolLogReader STAT_LOG_READER;
+	}
 }
 
 #endif // CDPL_FORCEFIELD_TEST_MMFF94TESTDATA_HPP

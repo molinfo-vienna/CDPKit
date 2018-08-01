@@ -43,8 +43,9 @@
 BOOST_AUTO_TEST_CASE(MMFF94StretchBendInteractionParameterizerTest)
 {
 	using namespace CDPL;
+	using namespace Testing;
 
-	MMFF94TestUtils::OptimolLogReader::StretchBendInteractionData ia_data;
+	OptimolLogReader::StretchBendInteractionData ia_data;
 
 	ForceField::MMFF94AngleBendingInteractionParameterizer ab_parameterizer;
 	ForceField::MMFF94BondStretchingInteractionParameterizer bs_parameterizer;
@@ -77,7 +78,6 @@ BOOST_AUTO_TEST_CASE(MMFF94StretchBendInteractionParameterizerTest)
 				if ((iaction.getTerminalAtom1Index() == term_atom1_idx && iaction.getTerminalAtom2Index() == term_atom2_idx) ||
 					(iaction.getTerminalAtom1Index() == term_atom2_idx && iaction.getTerminalAtom2Index() == term_atom1_idx)) {
 		
-
 					BOOST_CHECK_MESSAGE(iaction.getStretchBendTypeIndex() == ia_data[i].ffClass, 
 										"Stretch-bend type index mismatch for stretch-bend interaction #" << term_atom1_idx << "(" << 
 										ia_data[i].termAtom1Name << ")-#" << ia_data[i].ctrAtomIdx << "(" << 

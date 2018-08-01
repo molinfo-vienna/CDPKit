@@ -54,6 +54,8 @@ SET(cdpl-forcefield_LIB_SRCS
     MMFF94ChargeCalculator.cpp
     MMFF94AromaticSSSRSubset.cpp
 
+    MMFF94InteractionData.cpp
+
     MMFF94BondStretchingInteractionParameterizer.cpp
     MMFF94AngleBendingInteractionParameterizer.cpp
     MMFF94StretchBendInteractionParameterizer.cpp

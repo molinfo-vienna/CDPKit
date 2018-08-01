@@ -35,7 +35,7 @@
 #include <boost/unordered_map.hpp>
 
 
-namespace MMFF94TestUtils
+namespace Testing
 {
 
     class OptimolLogReader
@@ -50,6 +50,7 @@ namespace MMFF94TestUtils
 			unsigned int ffClass;
 			double       forceConst;
 			double       refLength;
+			double       energy;
 		};
 
 		struct AngleBendingInteraction
@@ -61,6 +62,7 @@ namespace MMFF94TestUtils
 			unsigned int ffClass;
 			double       forceConst;
 			double       refAngle;
+			double       energy;
 		};
 
 		struct StretchBendInteraction
@@ -71,6 +73,7 @@ namespace MMFF94TestUtils
 			std::string  termAtom2Name;
 			unsigned int ffClass;
 			double       forceConst;
+			double       energy;
 		};
 	
 		struct OutOfPlaneBendingInteraction
@@ -81,6 +84,7 @@ namespace MMFF94TestUtils
 			std::string  termAtom2Name;
 			std::size_t  oopAtomIdx;
 			double       forceConst;
+			double       energy;
 		};
 
 		struct TorsionInteraction
@@ -92,6 +96,28 @@ namespace MMFF94TestUtils
 			std::string  termAtom2Name;
 			unsigned int ffClass;
 			double       torParams[3];
+			double       energy;
+		};
+
+		struct VanDerWaalsInteraction
+		{
+
+			std::size_t  atom1Idx;
+			std::size_t  atom2Idx;
+			double       energy;
+		};
+
+		struct EnergyData
+		{
+
+			double total;
+			double bondStretching;
+			double angleBending;
+			double stretchBend;
+			double outOfPlaneBending;
+			double torsion;
+			double electrostatic;
+			double vanDerWaals;
 		};
 
 		typedef std::vector<std::string> SymbolicAtomTypeArray;
@@ -102,6 +128,7 @@ namespace MMFF94TestUtils
 		typedef std::vector<StretchBendInteraction> StretchBendInteractionData;
 		typedef std::vector<OutOfPlaneBendingInteraction> OutOfPlaneBendingInteractionData;
 		typedef std::vector<TorsionInteraction> TorsionInteractionData;
+		typedef std::vector<VanDerWaalsInteraction> VanDerWaalsInteractionData;
 
 		OptimolLogReader(const std::string& log_file);
 
@@ -114,6 +141,9 @@ namespace MMFF94TestUtils
 		bool getStretchBendInteractions(const std::string& mol_name, StretchBendInteractionData& ia_data);
 		bool getOutOfPlaneBendingInteractions(const std::string& mol_name, OutOfPlaneBendingInteractionData& ia_data);
 		bool getTorsionInteractions(const std::string& mol_name, TorsionInteractionData& ia_data);
+		bool getVanDerWaalsInteractions(const std::string& mol_name, VanDerWaalsInteractionData& ia_data);
+
+		bool getEnergies(const std::string& mol_name, EnergyData& energies);
 
     private:
 		void buildIndex();

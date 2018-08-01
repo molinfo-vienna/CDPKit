@@ -57,6 +57,7 @@
 #include "CDPL/ForceField/MMFF94VanDerWaalsInteraction.hpp"
 #include "CDPL/ForceField/MMFF94ElectrostaticInteraction.hpp"
 
+#include "CDPL/ForceField/MMFF94InteractionData.hpp"
 #include "CDPL/ForceField/MMFF94BondStretchingInteractionData.hpp"
 #include "CDPL/ForceField/MMFF94AngleBendingInteractionData.hpp"
 #include "CDPL/ForceField/MMFF94StretchBendInteractionData.hpp"

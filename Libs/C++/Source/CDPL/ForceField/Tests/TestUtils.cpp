@@ -33,7 +33,7 @@
 using namespace CDPL;
 
 
-std::size_t TestUtils::getAtomIndex(const CDPL::Chem::Molecule& mol, const std::string& mol2_atom_name)
+std::size_t Testing::TestUtils::getAtomIndex(const CDPL::Chem::Molecule& mol, const std::string& mol2_atom_name)
 {
 	for (std::size_t i = 0; i < mol.getNumAtoms(); i++)
 		if (getMOL2Name(mol.getAtom(i)) == mol2_atom_name)

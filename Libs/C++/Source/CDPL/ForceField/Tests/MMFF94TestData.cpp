@@ -39,13 +39,14 @@
 
 
 using namespace CDPL;
+using namespace Testing;
 
 
 MMFF94TestData::MoleculeList      MMFF94TestData::DYN_TEST_MOLECULES;
 MMFF94TestData::MoleculeList      MMFF94TestData::STAT_TEST_MOLECULES;
 
-MMFF94TestUtils::OptimolLogReader MMFF94TestData::DYN_LOG_READER(std::getenv("CDPKIT_TEST_DATA_DIR") + std::string("/MMFF94/MMFF94_opti.log"));
-MMFF94TestUtils::OptimolLogReader MMFF94TestData::STAT_LOG_READER(std::getenv("CDPKIT_TEST_DATA_DIR") + std::string("/MMFF94/MMFF94s_opti.log"));
+OptimolLogReader MMFF94TestData::DYN_LOG_READER(std::getenv("CDPKIT_TEST_DATA_DIR") + std::string("/MMFF94/MMFF94_opti.log"));
+OptimolLogReader MMFF94TestData::STAT_LOG_READER(std::getenv("CDPKIT_TEST_DATA_DIR") + std::string("/MMFF94/MMFF94s_opti.log"));
 
 
 namespace
@@ -64,6 +65,7 @@ namespace
 		}
 
 		perceiveSSSR(mol, false);
+		calcTopologicalDistanceMatrix(mol, false);
 		perceiveMMFF94AromaticRings(mol, false);
 		assignMMFF94AtomTypes(mol, true, false);
 		assignMMFF94BondTypeIndices(mol, false);

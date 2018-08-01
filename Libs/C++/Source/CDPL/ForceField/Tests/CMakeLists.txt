@@ -12,6 +12,8 @@ SET(test-suite_SRCS
     MMFF94StretchBendInteractionParameterizerTest.cpp
     MMFF94OutOfPlaneBendingInteractionParameterizerTest.cpp
     MMFF94TorsionInteractionParameterizerTest.cpp
+    MMFF94VanDerWaalsInteractionParameterizerTest.cpp
+    MMFF94EnergyFunctionsTest.cpp
 
     OptimolLogReader.cpp
     TestUtils.cpp

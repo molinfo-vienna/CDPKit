@@ -119,8 +119,9 @@ void ForceField::MMFF94StretchBendInteractionParameterizer::parameterize(const C
 		getStretchBendParameters(molgraph, term_atom1, ctr_atom, term_atom2, bond_type_idx1, bond_type_idx2, 
 								 ab_int.getAngleTypeIndex(), sb_type_idx, ijk_force_const, kji_force_const);
 
-		ia_data.addElement(MMFF94StretchBendInteraction(term_atom1_idx, ctr_atom_idx, term_atom2_idx, sb_type_idx, ab_int.getReferenceAngle(),
-														ref_length1, ref_length2, ijk_force_const, kji_force_const));
+		if (ijk_force_const != 0.0 || kji_force_const != 0.0)
+			ia_data.addElement(MMFF94StretchBendInteraction(term_atom1_idx, ctr_atom_idx, term_atom2_idx, sb_type_idx, ab_int.getReferenceAngle(),
+															ref_length1, ref_length2, ijk_force_const, kji_force_const));
 	}
 }
 	

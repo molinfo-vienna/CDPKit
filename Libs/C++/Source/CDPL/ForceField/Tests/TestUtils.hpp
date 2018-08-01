@@ -41,10 +41,14 @@ namespace CDPL
     }
 }
 
-namespace TestUtils
+namespace Testing
 {
 
-	std::size_t getAtomIndex(const CDPL::Chem::Molecule& mol, const std::string& mol2_atom_name);
+	namespace TestUtils
+	{
+
+		std::size_t getAtomIndex(const CDPL::Chem::Molecule& mol, const std::string& mol2_atom_name);
+	}
 }
 
 #endif // CDPL_FORCEFIELD_TEST_TESTUTILS_HPP
