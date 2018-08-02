@@ -63,6 +63,7 @@ SET(cdpl-forcefield_LIB_SRCS
     MMFF94TorsionInteractionParameterizer.cpp
     MMFF94VanDerWaalsInteractionParameterizer.cpp
     MMFF94ElectrostaticInteractionParameterizer.cpp
+    MMFF94InteractionParameterizer.cpp
 
     MMFF94ParameterData.cpp
     MMFF94SymbolicAtomTypePatternTable.cpp

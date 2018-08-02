@@ -225,6 +225,8 @@ void ForceField::MMFF94BondStretchingInteractionParameterizer::parameterize(cons
 {
 	using namespace Chem;
 
+	ia_data.clear();
+
 	for (MolecularGraph::ConstBondIterator it = molgraph.getBondsBegin(), end = molgraph.getBondsEnd(); it != end; ++it) {
 		const Bond& bond = *it;
 		const Atom& atom1 = bond.getBegin();

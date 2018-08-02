@@ -89,6 +89,8 @@ void ForceField::MMFF94OutOfPlaneBendingInteractionParameterizer::parameterize(c
 
 	typedef MMFF94AtomTypePropertyTable::Entry AtomTypePropEntry;
 
+	ia_data.clear();
+
 	for (std::size_t i = 0, num_atoms = molgraph.getNumAtoms(); i < num_atoms; i++) {
 		const Atom& ctr_atom = molgraph.getAtom(i);
 		unsigned int ctr_atom_type = atomTypeFunc(ctr_atom);

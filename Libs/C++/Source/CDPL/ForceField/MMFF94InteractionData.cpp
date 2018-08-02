@@ -84,12 +84,12 @@ ForceField::MMFF94TorsionInteractionData& ForceField::MMFF94InteractionData::get
 
 const ForceField::MMFF94ElectrostaticInteractionData& ForceField::MMFF94InteractionData::getElectrostaticInteractions() const
 {
-	return elstaticData;
+	return electrostaticData;
 }
 
 ForceField::MMFF94ElectrostaticInteractionData& ForceField::MMFF94InteractionData::getElectrostaticInteractions()
 {
-	return elstaticData;
+	return electrostaticData;
 }
 
 const ForceField::MMFF94VanDerWaalsInteractionData& ForceField::MMFF94InteractionData::getVanDerWaalsInteractions() const
@@ -102,3 +102,13 @@ ForceField::MMFF94VanDerWaalsInteractionData& ForceField::MMFF94InteractionData:
 	return vanDerWaalsData;
 }
 
+void ForceField::MMFF94InteractionData::clear()
+{
+	bondStretchingData.clear();
+	angleBendingData.clear();
+	stretchBendData.clear();
+	outOfPlaneData.clear();
+	torsionData.clear();
+	electrostaticData.clear();
+	vanDerWaalsData.clear();
+}

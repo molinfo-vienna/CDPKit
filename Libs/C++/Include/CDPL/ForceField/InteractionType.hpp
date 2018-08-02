@@ -52,7 +52,7 @@ namespace CDPL
 	    const unsigned int NONE                   = 0x00;
 	    const unsigned int BOND_STRETCHING        = 0x01;
 	    const unsigned int ANGLE_BENDING          = 0x02;
-	    const unsigned int STRETCH_BENDING        = 0x04;
+	    const unsigned int STRETCH_BEND           = 0x04;
 	    const unsigned int OUT_OF_PLANE_BENDING   = 0x08;
 	    const unsigned int TORSION                = 0x10;
 	    const unsigned int VAN_DER_WAALS          = 0x20;

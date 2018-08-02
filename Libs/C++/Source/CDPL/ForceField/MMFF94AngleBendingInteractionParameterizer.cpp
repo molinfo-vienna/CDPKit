@@ -165,6 +165,8 @@ void ForceField::MMFF94AngleBendingInteractionParameterizer::parameterize(const 
 {
 	using namespace Chem;
 
+	ia_data.clear();
+
 	for (std::size_t i = 0, num_atoms = molgraph.getNumAtoms(); i < num_atoms; i++) {
 		const Atom& ctr_atom = molgraph.getAtom(i);
 

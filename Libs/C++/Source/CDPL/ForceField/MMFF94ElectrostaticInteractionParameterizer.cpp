@@ -82,6 +82,8 @@ void ForceField::MMFF94ElectrostaticInteractionParameterizer::parameterize(const
 {
 	using namespace Chem;
 
+	ia_data.clear();
+
 	for (std::size_t i = 0, num_atoms = molgraph.getNumAtoms(); i < num_atoms; i++) {
 		const Atom& atom1 = molgraph.getAtom(i);
 

@@ -147,6 +147,8 @@ void ForceField::MMFF94TorsionInteractionParameterizer::parameterize(const Chem:
 {
 	using namespace Chem;
 
+	ia_data.clear();
+
 	for (MolecularGraph::ConstBondIterator it = molgraph.getBondsBegin(), end = molgraph.getBondsEnd(); it != end; ++it) {
 		const Bond& ctr_bond = *it;
 		const Atom& ctr_atom1 = ctr_bond.getBegin();

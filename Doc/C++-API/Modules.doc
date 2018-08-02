@@ -445,6 +445,9 @@
 \defgroup CDPL_FORCEFIELD_INTERACTION_PARAMETERIZATION Interaction Analysis and Parameterization
 \ingroup CDPL_FORCEFIELD
 
+\defgroup CDPL_FORCEFIELD_ENERGY_CALCULATION Interaction Energy Calculation
+\ingroup CDPL_FORCEFIELD
+
 \defgroup CDPL_FORCEFIELD_DATA_STRUCTURES Auxiliary Data Structures
 \ingroup CDPL_FORCEFIELD
 

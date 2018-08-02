@@ -83,6 +83,7 @@ void ForceField::MMFF94StretchBendInteractionParameterizer::parameterize(const C
 {
 	using namespace Chem;
 
+	ia_data.clear();
 	initBondStretchingParamLookupTable(bs_ia_data);
 
 	for (MMFF94AngleBendingInteractionData::ConstElementIterator it = ab_ia_data.getElementsBegin(), end = ab_ia_data.getElementsEnd(); it != end; ++it) {

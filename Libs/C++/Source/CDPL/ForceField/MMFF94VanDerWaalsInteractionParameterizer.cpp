@@ -78,8 +78,9 @@ void ForceField::MMFF94VanDerWaalsInteractionParameterizer::parameterize(const C
 {
 	using namespace Chem;
 
-
 	typedef MMFF94VanDerWaalsParameterTable::Entry ParamEntry;
+
+	ia_data.clear();
 
 	for (std::size_t i = 0, num_atoms = molgraph.getNumAtoms(); i < num_atoms; i++) {
 		const Atom& atom1 = molgraph.getAtom(i);

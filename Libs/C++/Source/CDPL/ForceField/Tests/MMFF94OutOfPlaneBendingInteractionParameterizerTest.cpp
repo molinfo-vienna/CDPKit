@@ -101,8 +101,6 @@ namespace
 									getMOL2Name(mol.getAtom(ia_data[i].oopAtomIdx)) << ") of molecule #" << mol_idx << 
 									" (" << mol_name << ") has not been found");
 			}
-
-			found_ia_data.clear();
 		}
 	}
 }

@@ -81,39 +81,47 @@ namespace CDPL
 }
 
 
-namespace
+// Implementation
+// \cond UNHIDE_DETAILS
+
+namespace CDPL
 {
 
-	template <typename ValueType, typename VecType>
-	ValueType calcDotProduct(const VecType& vec1, const VecType& vec2)
+	namespace ForceField
 	{
-		return (vec1[0] * vec2[0] + vec1[1] * vec2[1] + vec1[2] * vec2[2]); 
-	}
 
-	template <typename VecType, typename ResVecType>
-	void calcCrossProduct(const VecType& vec1, const VecType& vec2,  ResVecType& cross_prod)
-	{
-		cross_prod[0] = vec1[1] * vec2[2] - vec1[2] * vec2[1]; 
-		cross_prod[1] = vec1[2] * vec2[0] - vec1[0] * vec2[2]; 
-		cross_prod[2] = vec1[0] * vec2[1] - vec1[1] * vec2[0]; 
-	}
+		namespace Detail
+		{
 
-	template <typename ValueType>
-	ValueType clampCosine(const ValueType& v)
-	{
-		if (v > ValueType(1))
-			return ValueType(1);
+			template <typename ValueType, typename VecType>
+			ValueType calcDotProduct(const VecType& vec1, const VecType& vec2)
+			{
+				return (vec1[0] * vec2[0] + vec1[1] * vec2[1] + vec1[2] * vec2[2]); 
+			}
 
-		if (v < ValueType(-1))
-			return ValueType(-1);
+			template <typename VecType, typename ResVecType>
+			void calcCrossProduct(const VecType& vec1, const VecType& vec2,  ResVecType& cross_prod)
+			{
+				cross_prod[0] = vec1[1] * vec2[2] - vec1[2] * vec2[1]; 
+				cross_prod[1] = vec1[2] * vec2[0] - vec1[0] * vec2[2]; 
+				cross_prod[2] = vec1[0] * vec2[1] - vec1[1] * vec2[0]; 
+			}
 
-		return v;
+			template <typename ValueType>
+			ValueType clampCosine(const ValueType& v)
+			{
+				if (v > ValueType(1))
+					return ValueType(1);
+
+				if (v < ValueType(-1))
+					return ValueType(-1);
+
+				return v;
+			}
+		}
 	}
 }
 
-
-// Implementation
-// \cond UNHIDE_DETAILS
 
 template <typename VecType, typename ResVecType>
 void CDPL::ForceField::calcDifference(const VecType& atom1_pos, const VecType& atom2_pos,  ResVecType& pos_diff)
@@ -130,7 +138,7 @@ ValueType CDPL::ForceField::calcSquaredDistance(const VecType& atom1_pos, const 
 
 	calcDifference(atom1_pos, atom2_pos, pos_diff);
 
-    return calcDotProduct<ValueType>(pos_diff, pos_diff);
+    return Detail::calcDotProduct<ValueType>(pos_diff, pos_diff);
 }
 
 template <typename ValueType, typename VecType>
@@ -149,10 +157,10 @@ ValueType CDPL::ForceField::calcBondLengthsAndAngleCos(const VecType& term_atom1
 	calcDifference(ctr_atom_pos, term_atom1_pos, bond_vec1);
 	calcDifference(ctr_atom_pos, term_atom2_pos, bond_vec2);
 
-    bond_length1 = std::sqrt(calcDotProduct<ValueType>(bond_vec1, bond_vec1));
-    bond_length2 = std::sqrt(calcDotProduct<ValueType>(bond_vec2, bond_vec2));
+    bond_length1 = std::sqrt(Detail::calcDotProduct<ValueType>(bond_vec1, bond_vec1));
+    bond_length2 = std::sqrt(Detail::calcDotProduct<ValueType>(bond_vec2, bond_vec2));
     
-	return clampCosine(calcDotProduct<ValueType>(bond_vec1, bond_vec2) / (bond_length1 * bond_length2));
+	return Detail::clampCosine(Detail::calcDotProduct<ValueType>(bond_vec1, bond_vec2) / (bond_length1 * bond_length2));
 }
 
 template <typename ValueType, typename VecType>
@@ -187,11 +195,11 @@ ValueType CDPL::ForceField::calcOutOfPlaneAngle(const VecType& term_atom1_pos, c
 	calcDifference(ctr_atom_pos, term_atom1_pos, term_bond1_vec);
 	calcDifference(ctr_atom_pos, term_atom2_pos, term_bond2_vec);
 	calcDifference(ctr_atom_pos, oop_atom_pos, oop_bond_vec);
-	calcCrossProduct(term_bond1_vec, term_bond2_vec, plane_normal);
+	Detail::calcCrossProduct(term_bond1_vec, term_bond2_vec, plane_normal);
 
-	ValueType pn_len = std::sqrt(calcDotProduct<ValueType>(plane_normal, plane_normal));
-	ValueType oop_bnd_len = std::sqrt(calcDotProduct<ValueType>(oop_bond_vec, oop_bond_vec));
-	ValueType ang_cos = clampCosine(calcDotProduct<ValueType>(plane_normal, oop_bond_vec) / (pn_len * oop_bnd_len));
+	ValueType pn_len = std::sqrt(Detail::calcDotProduct<ValueType>(plane_normal, plane_normal));
+	ValueType oop_bnd_len = std::sqrt(Detail::calcDotProduct<ValueType>(oop_bond_vec, oop_bond_vec));
+	ValueType ang_cos = Detail::clampCosine(Detail::calcDotProduct<ValueType>(plane_normal, oop_bond_vec) / (pn_len * oop_bnd_len));
 
 	return (ValueType(M_PI * 0.5) - std::acos(ang_cos));
 }
@@ -209,13 +217,13 @@ ValueType CDPL::ForceField::calcDihedralAngleCos(const VecType& term_atom1_pos, 
 	calcDifference(ctr_atom1_pos, ctr_atom2_pos, ctr_bond_vec);
 	calcDifference(term_atom2_pos, ctr_atom2_pos, term_bond2_vec);
 
-	calcCrossProduct(term_bond1_vec, ctr_bond_vec, plane_normal1);
-	calcCrossProduct(ctr_bond_vec, term_bond2_vec, plane_normal2);
+	Detail::calcCrossProduct(term_bond1_vec, ctr_bond_vec, plane_normal1);
+	Detail::calcCrossProduct(ctr_bond_vec, term_bond2_vec, plane_normal2);
 
-	ValueType pn1_len = std::sqrt(calcDotProduct<ValueType>(plane_normal1, plane_normal1));
-	ValueType pn2_len = std::sqrt(calcDotProduct<ValueType>(plane_normal2, plane_normal2));
+	ValueType pn1_len = std::sqrt(Detail::calcDotProduct<ValueType>(plane_normal1, plane_normal1));
+	ValueType pn2_len = std::sqrt(Detail::calcDotProduct<ValueType>(plane_normal2, plane_normal2));
 
-	return clampCosine(calcDotProduct<ValueType>(plane_normal1, plane_normal2) / (pn1_len * pn2_len));
+	return Detail::clampCosine(Detail::calcDotProduct<ValueType>(plane_normal1, plane_normal2) / (pn1_len * pn2_len));
 }
 
 // \endcond

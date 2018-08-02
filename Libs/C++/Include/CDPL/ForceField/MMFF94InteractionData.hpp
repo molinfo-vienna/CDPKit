@@ -31,6 +31,7 @@
 #ifndef CDPL_FORCEFIELD_MMFF94INTERACTIONDATA_HPP
 #define CDPL_FORCEFIELD_MMFF94INTERACTIONDATA_HPP
 
+#include "CDPL/ForceField/APIPrefix.hpp"
 #include "CDPL/ForceField/MMFF94BondStretchingInteractionData.hpp"
 #include "CDPL/ForceField/MMFF94AngleBendingInteractionData.hpp"
 #include "CDPL/ForceField/MMFF94StretchBendInteractionData.hpp"
@@ -51,7 +52,7 @@ namespace CDPL
 		 * @{
 		 */
 
-		class MMFF94InteractionData
+		class CDPL_FORCEFIELD_API MMFF94InteractionData
 		{
 
 		public:
@@ -83,13 +84,15 @@ namespace CDPL
 
 			MMFF94VanDerWaalsInteractionData& getVanDerWaalsInteractions();
 
+			void clear();
+
 		private:
 			MMFF94BondStretchingInteractionData    bondStretchingData;
 			MMFF94AngleBendingInteractionData      angleBendingData;
 			MMFF94StretchBendInteractionData       stretchBendData;
 			MMFF94OutOfPlaneBendingInteractionData outOfPlaneData;
 			MMFF94TorsionInteractionData           torsionData;
-			MMFF94ElectrostaticInteractionData     elstaticData;
+			MMFF94ElectrostaticInteractionData     electrostaticData;
 			MMFF94VanDerWaalsInteractionData       vanDerWaalsData;
 		};
 

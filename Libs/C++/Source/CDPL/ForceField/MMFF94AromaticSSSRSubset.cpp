@@ -49,7 +49,7 @@ void ForceField::MMFF94AromaticSSSRSubset::extract(const Chem::MolecularGraph& m
     clear();
 
     if (molgraph.getNumAtoms() == 0 || molgraph.getNumBonds() == 0)
-	return;
+		return;
 
 	init(molgraph);
     perceiveAromaticRings();
@@ -113,6 +113,6 @@ void ForceField::MMFF94AromaticSSSRSubset::addToAromaticBondMask(const Chem::Fra
     using namespace Chem;
 
     std::for_each(ring.getBondsBegin(), ring.getBondsEnd(),
-		  boost::bind(&Util::BitSet::set, boost::ref(aromBondMask),
-			      boost::bind(&BondContainer::getBondIndex, molGraph, _1), true));
+				  boost::bind(&Util::BitSet::set, boost::ref(aromBondMask),
+							  boost::bind(&BondContainer::getBondIndex, molGraph, _1), true));
 }

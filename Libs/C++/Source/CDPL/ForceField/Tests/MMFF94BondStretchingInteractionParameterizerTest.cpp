@@ -93,7 +93,5 @@ BOOST_AUTO_TEST_CASE(MMFF94BondStretchingInteractionParameterizerTest)
 								")-#" << ia_data[i].atom2Idx << "(" << getMOL2Name(mol.getAtom(ia_data[i].atom2Idx)) << ") of molecule #" << mol_idx << " (" << mol_name <<
 								") has not been found");
 		}
-	
-		found_ia_data.clear();
 	}
 }

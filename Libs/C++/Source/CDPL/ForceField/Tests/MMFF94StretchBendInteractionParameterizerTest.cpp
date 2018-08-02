@@ -111,9 +111,5 @@ BOOST_AUTO_TEST_CASE(MMFF94StretchBendInteractionParameterizerTest)
 										getMOL2Name(mol.getAtom(ia_data[i].ctrAtomIdx)) << ")-#" << term_atom2_idx << "(" << 
 										ia_data[i].termAtom2Name << ") of molecule #" << mol_idx << " (" << mol_name << ") has not been found");
 		}
-
-		found_ia_data.clear();
-		bs_ia_data.clear();
-		ab_ia_data.clear();
 	}
 }

@@ -63,56 +63,54 @@ BOOST_AUTO_TEST_CASE(MMFF94BondStretchingEnergyFunctionTest)
 //double max_en_diff = 0;
 
     for (std::size_t mol_idx = 0; mol_idx < MMFF94TestData::DYN_TEST_MOLECULES.size(); mol_idx++) {
-	const Chem::Molecule& mol = *MMFF94TestData::DYN_TEST_MOLECULES[mol_idx];
-	const std::string& mol_name = getName(mol);
+		const Chem::Molecule& mol = *MMFF94TestData::DYN_TEST_MOLECULES[mol_idx];
+		const std::string& mol_name = getName(mol);
 
-	BOOST_CHECK(MMFF94TestData::DYN_LOG_READER.getBondStretchingInteractions(mol_name, ia_data));
+		BOOST_CHECK(MMFF94TestData::DYN_LOG_READER.getBondStretchingInteractions(mol_name, ia_data));
 
-	parameterizer.parameterize(mol, found_ia_data);
+		parameterizer.parameterize(mol, found_ia_data);
 
-	BOOST_CHECK_MESSAGE(found_ia_data.getSize() == ia_data.size(), "Bond stretching interaction count mismatch for molecule #" << mol_idx << " (" << mol_name << "): " <<
-			    found_ia_data.getSize() << " != " << ia_data.size());
-	coords.clear();
-	get3DCoordinates(mol, coords);
+		BOOST_CHECK_MESSAGE(found_ia_data.getSize() == ia_data.size(), "Bond stretching interaction count mismatch for molecule #" << mol_idx << " (" << mol_name << "): " <<
+							found_ia_data.getSize() << " != " << ia_data.size());
+		coords.clear();
+		get3DCoordinates(mol, coords);
 
-	for (std::size_t i = 0; i < ia_data.size(); i++) {
-	    bool iaction_found = false;
+		for (std::size_t i = 0; i < ia_data.size(); i++) {
+			bool iaction_found = false;
 
-	    for (std::size_t j = 0; j < found_ia_data.getSize(); j++) {
-		const ForceField::MMFF94BondStretchingInteraction& iaction = found_ia_data[j];
+			for (std::size_t j = 0; j < found_ia_data.getSize(); j++) {
+				const ForceField::MMFF94BondStretchingInteraction& iaction = found_ia_data[j];
 
-		if ((iaction.getAtom1Index() == ia_data[i].atom1Idx && iaction.getAtom2Index() == ia_data[i].atom2Idx) ||
-		    (iaction.getAtom1Index() == ia_data[i].atom2Idx && iaction.getAtom2Index() == ia_data[i].atom1Idx)) {
+				if ((iaction.getAtom1Index() == ia_data[i].atom1Idx && iaction.getAtom2Index() == ia_data[i].atom2Idx) ||
+					(iaction.getAtom1Index() == ia_data[i].atom2Idx && iaction.getAtom2Index() == ia_data[i].atom1Idx)) {
 
-		    double energy = ForceField::calcMMFF94BondStretchingEnergy<double>(iaction, coords);
+					double energy = ForceField::calcMMFF94BondStretchingEnergy<double>(iaction, coords);
 		
-		    BOOST_CHECK_MESSAGE(std::abs(energy - ia_data[i].energy) < 0.00332, 
-					"Energy mismatch for bond stretching interaction #" << ia_data[i].atom1Idx << "(" << 
-					getMOL2Name(mol.getAtom(ia_data[i].atom1Idx)) << ")-#" << ia_data[i].atom2Idx << "(" << 
-					getMOL2Name(mol.getAtom(ia_data[i].atom2Idx)) << ") of molecule #" << mol_idx << " (" << mol_name <<
-					"): calc. " << energy << " != " << ia_data[i].energy);
+					BOOST_CHECK_MESSAGE(std::abs(energy - ia_data[i].energy) < 0.00332, 
+										"Energy mismatch for bond stretching interaction #" << ia_data[i].atom1Idx << "(" << 
+										getMOL2Name(mol.getAtom(ia_data[i].atom1Idx)) << ")-#" << ia_data[i].atom2Idx << "(" << 
+										getMOL2Name(mol.getAtom(ia_data[i].atom2Idx)) << ") of molecule #" << mol_idx << " (" << mol_name <<
+										"): calc. " << energy << " != " << ia_data[i].energy);
 		
-		    iaction_found = true;
-		    break;
+					iaction_found = true;
+					break;
+				}
+			}
+
+			BOOST_CHECK_MESSAGE(iaction_found, "Bond stretching interaction #" << ia_data[i].atom1Idx << "(" << getMOL2Name(mol.getAtom(ia_data[i].atom1Idx)) << 
+								")-#" << ia_data[i].atom2Idx << "(" << getMOL2Name(mol.getAtom(ia_data[i].atom2Idx)) << ") of molecule #" << mol_idx << " (" << mol_name <<
+								") has not been found");
 		}
-	    }
 
-	    BOOST_CHECK_MESSAGE(iaction_found, "Bond stretching interaction #" << ia_data[i].atom1Idx << "(" << getMOL2Name(mol.getAtom(ia_data[i].atom1Idx)) << 
-				")-#" << ia_data[i].atom2Idx << "(" << getMOL2Name(mol.getAtom(ia_data[i].atom2Idx)) << ") of molecule #" << mol_idx << " (" << mol_name <<
-				") has not been found");
-	}
+		BOOST_CHECK(MMFF94TestData::DYN_LOG_READER.getEnergies(mol_name, energies));
 
-	BOOST_CHECK(MMFF94TestData::DYN_LOG_READER.getEnergies(mol_name, energies));
-
-	double energy = ForceField::calcMMFF94BondStretchingEnergy<double>(found_ia_data.getElementsBegin(), found_ia_data.getElementsEnd(), coords);
+		double energy = ForceField::calcMMFF94BondStretchingEnergy<double>(found_ia_data.getElementsBegin(), found_ia_data.getElementsEnd(), coords);
 		
-	//max_en_diff = std::max(max_en_diff, std::abs(energy - energies.bondStretching));
+		//max_en_diff = std::max(max_en_diff, std::abs(energy - energies.bondStretching));
 		    
-	BOOST_CHECK_MESSAGE(std::abs(energy - energies.bondStretching) < 0.00552, 
-			    "Total bond stretching energy mismatch for molecule #" << mol_idx << " (" << mol_name <<
-			    "): calc. " << energy << " != " << energies.bondStretching);
-
-	found_ia_data.clear();
+		BOOST_CHECK_MESSAGE(std::abs(energy - energies.bondStretching) < 0.00552, 
+							"Total bond stretching energy mismatch for molecule #" << mol_idx << " (" << mol_name <<
+							"): calc. " << energy << " != " << energies.bondStretching);
     }
 
     //BOOST_MESSAGE("Max. energy difference: " << max_en_diff); 
@@ -133,64 +131,62 @@ BOOST_AUTO_TEST_CASE(MMFF94AngleBendingEnergyFunctionTest)
     //double max_en_diff = 0;
 
     for (std::size_t mol_idx = 0; mol_idx < MMFF94TestData::DYN_TEST_MOLECULES.size(); mol_idx++) {
-	const Chem::Molecule& mol = *MMFF94TestData::DYN_TEST_MOLECULES[mol_idx];
-	const std::string& mol_name = getName(mol);
+		const Chem::Molecule& mol = *MMFF94TestData::DYN_TEST_MOLECULES[mol_idx];
+		const std::string& mol_name = getName(mol);
 
-	BOOST_CHECK(MMFF94TestData::DYN_LOG_READER.getAngleBendingInteractions(mol_name, ia_data));
+		BOOST_CHECK(MMFF94TestData::DYN_LOG_READER.getAngleBendingInteractions(mol_name, ia_data));
 
-	parameterizer.parameterize(mol, found_ia_data);
+		parameterizer.parameterize(mol, found_ia_data);
 
-	BOOST_CHECK_MESSAGE(found_ia_data.getSize() == ia_data.size(), "Angle bending interaction count mismatch for molecule #" << mol_idx << " (" << mol_name << "): " <<
-			    found_ia_data.getSize() << " != " << ia_data.size());
+		BOOST_CHECK_MESSAGE(found_ia_data.getSize() == ia_data.size(), "Angle bending interaction count mismatch for molecule #" << mol_idx << " (" << mol_name << "): " <<
+							found_ia_data.getSize() << " != " << ia_data.size());
 
-	coords.clear();
-	get3DCoordinates(mol, coords);
+		coords.clear();
+		get3DCoordinates(mol, coords);
 
-	for (std::size_t i = 0; i < ia_data.size(); i++) {
-	    bool iaction_found = false;
-	    std::size_t term_atom1_idx = TestUtils::getAtomIndex(mol, ia_data[i].termAtom1Name);
-	    std::size_t term_atom2_idx = TestUtils::getAtomIndex(mol, ia_data[i].termAtom2Name);
+		for (std::size_t i = 0; i < ia_data.size(); i++) {
+			bool iaction_found = false;
+			std::size_t term_atom1_idx = TestUtils::getAtomIndex(mol, ia_data[i].termAtom1Name);
+			std::size_t term_atom2_idx = TestUtils::getAtomIndex(mol, ia_data[i].termAtom2Name);
 
-	    for (std::size_t j = 0; j < found_ia_data.getSize(); j++) {
-		const ForceField::MMFF94AngleBendingInteraction& iaction = found_ia_data[j];
+			for (std::size_t j = 0; j < found_ia_data.getSize(); j++) {
+				const ForceField::MMFF94AngleBendingInteraction& iaction = found_ia_data[j];
 
-		if (iaction.getCenterAtomIndex() != ia_data[i].ctrAtomIdx)
-		    continue;
+				if (iaction.getCenterAtomIndex() != ia_data[i].ctrAtomIdx)
+					continue;
 
-		if ((iaction.getTerminalAtom1Index() == term_atom1_idx && iaction.getTerminalAtom2Index() == term_atom2_idx) ||
-		    (iaction.getTerminalAtom1Index() == term_atom2_idx && iaction.getTerminalAtom2Index() == term_atom1_idx)) {
+				if ((iaction.getTerminalAtom1Index() == term_atom1_idx && iaction.getTerminalAtom2Index() == term_atom2_idx) ||
+					(iaction.getTerminalAtom1Index() == term_atom2_idx && iaction.getTerminalAtom2Index() == term_atom1_idx)) {
 		
-		    double energy = ForceField::calcMMFF94AngleBendingEnergy<double>(iaction, coords);
+					double energy = ForceField::calcMMFF94AngleBendingEnergy<double>(iaction, coords);
 		
-		    BOOST_CHECK_MESSAGE(std::abs(energy - ia_data[i].energy) < 0.0376, 
-					"Energy mismatch for angle bending interaction #" << term_atom1_idx << "(" << 
-					ia_data[i].termAtom1Name << ")-#" << ia_data[i].ctrAtomIdx << "(" << 
-					getMOL2Name(mol.getAtom(ia_data[i].ctrAtomIdx)) << ")-#" << term_atom2_idx << "(" << 
-					ia_data[i].termAtom2Name << ") of molecule #" << mol_idx << " (" << mol_name << "): calc. " << 
-					energy << " != " << ia_data[i].energy);
+					BOOST_CHECK_MESSAGE(std::abs(energy - ia_data[i].energy) < 0.0376, 
+										"Energy mismatch for angle bending interaction #" << term_atom1_idx << "(" << 
+										ia_data[i].termAtom1Name << ")-#" << ia_data[i].ctrAtomIdx << "(" << 
+										getMOL2Name(mol.getAtom(ia_data[i].ctrAtomIdx)) << ")-#" << term_atom2_idx << "(" << 
+										ia_data[i].termAtom2Name << ") of molecule #" << mol_idx << " (" << mol_name << "): calc. " << 
+										energy << " != " << ia_data[i].energy);
 		
-		    iaction_found = true;
-		    break;
+					iaction_found = true;
+					break;
+				}
+			}
+		
+			BOOST_CHECK_MESSAGE(iaction_found, "Angle bending interaction #" << term_atom1_idx << "(" << 
+								ia_data[i].termAtom1Name << ")-#" << ia_data[i].ctrAtomIdx << "(" << 
+								getMOL2Name(mol.getAtom(ia_data[i].ctrAtomIdx)) << ")-#" << term_atom2_idx << "(" << 
+								ia_data[i].termAtom2Name << ") of molecule #" << mol_idx << " (" << mol_name << ") has not been found");
 		}
-	    }
-		
-	    BOOST_CHECK_MESSAGE(iaction_found, "Angle bending interaction #" << term_atom1_idx << "(" << 
-				ia_data[i].termAtom1Name << ")-#" << ia_data[i].ctrAtomIdx << "(" << 
-				getMOL2Name(mol.getAtom(ia_data[i].ctrAtomIdx)) << ")-#" << term_atom2_idx << "(" << 
-				ia_data[i].termAtom2Name << ") of molecule #" << mol_idx << " (" << mol_name << ") has not been found");
-	}
 
-	BOOST_CHECK(MMFF94TestData::DYN_LOG_READER.getEnergies(mol_name, energies));
+		BOOST_CHECK(MMFF94TestData::DYN_LOG_READER.getEnergies(mol_name, energies));
 
-	double energy = ForceField::calcMMFF94AngleBendingEnergy<double>(found_ia_data.getElementsBegin(), found_ia_data.getElementsEnd(), coords);
+		double energy = ForceField::calcMMFF94AngleBendingEnergy<double>(found_ia_data.getElementsBegin(), found_ia_data.getElementsEnd(), coords);
 		
-	//max_en_diff = std::max(max_en_diff, std::abs(energy - energies.angleBending));
+		//max_en_diff = std::max(max_en_diff, std::abs(energy - energies.angleBending));
 		    
-	BOOST_CHECK_MESSAGE(std::abs(energy - energies.angleBending) < 0.0704, 
-			    "Total angle bending energy mismatch for molecule #" << mol_idx << " (" << mol_name <<
-			    "): calc. " << energy << " != " << energies.angleBending);
-
-	found_ia_data.clear();
+		BOOST_CHECK_MESSAGE(std::abs(energy - energies.angleBending) < 0.0704, 
+							"Total angle bending energy mismatch for molecule #" << mol_idx << " (" << mol_name <<
+							"): calc. " << energy << " != " << energies.angleBending);
     }
 
     //BOOST_MESSAGE("Max. energy difference: " << max_en_diff); 
@@ -215,82 +211,78 @@ BOOST_AUTO_TEST_CASE(MMFF94StretchBendEnergyFunctionTest)
     //double max_en_diff = 0;
 
     for (std::size_t mol_idx = 0; mol_idx < MMFF94TestData::DYN_TEST_MOLECULES.size(); mol_idx++) {
-	const Chem::Molecule& mol = *MMFF94TestData::DYN_TEST_MOLECULES[mol_idx];
-	const std::string& mol_name = getName(mol);
+		const Chem::Molecule& mol = *MMFF94TestData::DYN_TEST_MOLECULES[mol_idx];
+		const std::string& mol_name = getName(mol);
 
-	BOOST_CHECK(MMFF94TestData::DYN_LOG_READER.getStretchBendInteractions(mol_name, ia_data));
+		BOOST_CHECK(MMFF94TestData::DYN_LOG_READER.getStretchBendInteractions(mol_name, ia_data));
 
-	for (std::size_t i = 0; i < ia_data.size(); i++) {
-	    for (std::size_t j = i + 1; j < ia_data.size(); j++) {
-		if (ia_data[i].ctrAtomIdx == ia_data[j].ctrAtomIdx &&
-		    ia_data[i].termAtom1Name == ia_data[j].termAtom2Name &&
-		    ia_data[i].termAtom2Name == ia_data[j].termAtom1Name) {
+		for (std::size_t i = 0; i < ia_data.size(); i++) {
+			for (std::size_t j = i + 1; j < ia_data.size(); j++) {
+				if (ia_data[i].ctrAtomIdx == ia_data[j].ctrAtomIdx &&
+					ia_data[i].termAtom1Name == ia_data[j].termAtom2Name &&
+					ia_data[i].termAtom2Name == ia_data[j].termAtom1Name) {
 
-		    ia_data[i].energy += ia_data[j].energy;
+					ia_data[i].energy += ia_data[j].energy;
 
-		    ia_data.erase(ia_data.begin() + j);
-		    break;
+					ia_data.erase(ia_data.begin() + j);
+					break;
+				}
+			}
 		}
-	    }
-	}
 
-	bs_parameterizer.parameterize(mol, bs_ia_data);
-	ab_parameterizer.parameterize(mol, ab_ia_data);
-	sb_parameterizer.parameterize(mol, bs_ia_data, ab_ia_data, found_ia_data);
+		bs_parameterizer.parameterize(mol, bs_ia_data);
+		ab_parameterizer.parameterize(mol, ab_ia_data);
+		sb_parameterizer.parameterize(mol, bs_ia_data, ab_ia_data, found_ia_data);
 
-	BOOST_CHECK_MESSAGE(found_ia_data.getSize() == ia_data.size(), "Stretch-bend interaction count mismatch for molecule #" << mol_idx << " (" << mol_name << "): " <<
-			    found_ia_data.getSize() << " != " << ia_data.size());
+		BOOST_CHECK_MESSAGE(found_ia_data.getSize() == ia_data.size(), "Stretch-bend interaction count mismatch for molecule #" << mol_idx << " (" << mol_name << "): " <<
+							found_ia_data.getSize() << " != " << ia_data.size());
 
-	coords.clear();
-	get3DCoordinates(mol, coords);
+		coords.clear();
+		get3DCoordinates(mol, coords);
 
-	for (std::size_t i = 0; i < ia_data.size(); i++) {
-	    bool iaction_found = false;
-	    std::size_t term_atom1_idx = TestUtils::getAtomIndex(mol, ia_data[i].termAtom1Name);
-	    std::size_t term_atom2_idx = TestUtils::getAtomIndex(mol, ia_data[i].termAtom2Name);
+		for (std::size_t i = 0; i < ia_data.size(); i++) {
+			bool iaction_found = false;
+			std::size_t term_atom1_idx = TestUtils::getAtomIndex(mol, ia_data[i].termAtom1Name);
+			std::size_t term_atom2_idx = TestUtils::getAtomIndex(mol, ia_data[i].termAtom2Name);
 
-	    for (std::size_t j = 0; j < found_ia_data.getSize(); j++) {
-		const ForceField::MMFF94StretchBendInteraction& iaction = found_ia_data[j];
+			for (std::size_t j = 0; j < found_ia_data.getSize(); j++) {
+				const ForceField::MMFF94StretchBendInteraction& iaction = found_ia_data[j];
 
-		if (iaction.getCenterAtomIndex() != ia_data[i].ctrAtomIdx)
-		    continue;
+				if (iaction.getCenterAtomIndex() != ia_data[i].ctrAtomIdx)
+					continue;
 
-		if ((iaction.getTerminalAtom1Index() == term_atom1_idx && iaction.getTerminalAtom2Index() == term_atom2_idx) ||
-		    (iaction.getTerminalAtom1Index() == term_atom2_idx && iaction.getTerminalAtom2Index() == term_atom1_idx)) {
+				if ((iaction.getTerminalAtom1Index() == term_atom1_idx && iaction.getTerminalAtom2Index() == term_atom2_idx) ||
+					(iaction.getTerminalAtom1Index() == term_atom2_idx && iaction.getTerminalAtom2Index() == term_atom1_idx)) {
 
-		    double energy = ForceField::calcMMFF94StretchBendEnergy<double>(iaction, coords);
+					double energy = ForceField::calcMMFF94StretchBendEnergy<double>(iaction, coords);
 		
-		    BOOST_CHECK_MESSAGE(std::abs(energy - ia_data[i].energy) < 0.00257, 
-					"Energy mismatch for stretch-bend interaction #" << term_atom1_idx << "(" << 
-					ia_data[i].termAtom1Name << ")-#" << ia_data[i].ctrAtomIdx << "(" << 
-					getMOL2Name(mol.getAtom(ia_data[i].ctrAtomIdx)) << ")-#" << term_atom2_idx << "(" << 
-					ia_data[i].termAtom2Name << ") of molecule #" << mol_idx << " (" << mol_name << "): calc. " << 
-					energy << " != " << ia_data[i].energy);
+					BOOST_CHECK_MESSAGE(std::abs(energy - ia_data[i].energy) < 0.00257, 
+										"Energy mismatch for stretch-bend interaction #" << term_atom1_idx << "(" << 
+										ia_data[i].termAtom1Name << ")-#" << ia_data[i].ctrAtomIdx << "(" << 
+										getMOL2Name(mol.getAtom(ia_data[i].ctrAtomIdx)) << ")-#" << term_atom2_idx << "(" << 
+										ia_data[i].termAtom2Name << ") of molecule #" << mol_idx << " (" << mol_name << "): calc. " << 
+										energy << " != " << ia_data[i].energy);
 
-		    iaction_found = true;
-		    break;
+					iaction_found = true;
+					break;
+				}
+			}
+		
+			BOOST_CHECK_MESSAGE(iaction_found, "Stretch-bend interaction #" << term_atom1_idx << "(" << 
+								ia_data[i].termAtom1Name << ")-#" << ia_data[i].ctrAtomIdx << "(" << 
+								getMOL2Name(mol.getAtom(ia_data[i].ctrAtomIdx)) << ")-#" << term_atom2_idx << "(" << 
+								ia_data[i].termAtom2Name << ") of molecule #" << mol_idx << " (" << mol_name << ") has not been found");
 		}
-	    }
-		
-	    BOOST_CHECK_MESSAGE(iaction_found, "Stretch-bend interaction #" << term_atom1_idx << "(" << 
-				ia_data[i].termAtom1Name << ")-#" << ia_data[i].ctrAtomIdx << "(" << 
-				getMOL2Name(mol.getAtom(ia_data[i].ctrAtomIdx)) << ")-#" << term_atom2_idx << "(" << 
-				ia_data[i].termAtom2Name << ") of molecule #" << mol_idx << " (" << mol_name << ") has not been found");
-	}
 
-	BOOST_CHECK(MMFF94TestData::DYN_LOG_READER.getEnergies(mol_name, energies));
+		BOOST_CHECK(MMFF94TestData::DYN_LOG_READER.getEnergies(mol_name, energies));
 
-	double energy = ForceField::calcMMFF94StretchBendEnergy<double>(found_ia_data.getElementsBegin(), found_ia_data.getElementsEnd(), coords);
+		double energy = ForceField::calcMMFF94StretchBendEnergy<double>(found_ia_data.getElementsBegin(), found_ia_data.getElementsEnd(), coords);
 		
-	//max_en_diff = std::max(max_en_diff, std::abs(energy - energies.stretchBend));
+		//max_en_diff = std::max(max_en_diff, std::abs(energy - energies.stretchBend));
 		    
-	BOOST_CHECK_MESSAGE(std::abs(energy - energies.stretchBend) < 0.00422, 
-			    "Total stretch-bend energy mismatch for molecule #" << mol_idx << " (" << mol_name <<
-			    "): calc. " << energy << " != " << energies.stretchBend);
-
-	found_ia_data.clear();
-	bs_ia_data.clear();
-	ab_ia_data.clear();
+		BOOST_CHECK_MESSAGE(std::abs(energy - energies.stretchBend) < 0.00422, 
+							"Total stretch-bend energy mismatch for molecule #" << mol_idx << " (" << mol_name <<
+							"): calc. " << energy << " != " << energies.stretchBend);
     }  
 
     //BOOST_MESSAGE("Max. energy difference: " << max_en_diff); 
@@ -311,78 +303,76 @@ BOOST_AUTO_TEST_CASE(MMFF94OutOfPlaneBendingEnergyFunctionTest)
     //double max_en_diff = 0;
 
     for (bool stat = false; !stat; stat = true) {
-	OptimolLogReader& log_reader = (stat ? MMFF94TestData::STAT_LOG_READER : MMFF94TestData::DYN_LOG_READER);
-	const MMFF94TestData::MoleculeList& mols = (stat ? MMFF94TestData::STAT_TEST_MOLECULES : MMFF94TestData::DYN_TEST_MOLECULES);
+		OptimolLogReader& log_reader = (stat ? MMFF94TestData::STAT_LOG_READER : MMFF94TestData::DYN_LOG_READER);
+		const MMFF94TestData::MoleculeList& mols = (stat ? MMFF94TestData::STAT_TEST_MOLECULES : MMFF94TestData::DYN_TEST_MOLECULES);
 
-	parameterizer.setOutOfPlaneBendingParameterTable(ForceField::MMFF94OutOfPlaneBendingParameterTable::get(stat));
+		parameterizer.setOutOfPlaneBendingParameterTable(ForceField::MMFF94OutOfPlaneBendingParameterTable::get(stat));
 
-	for (std::size_t mol_idx = 0; mol_idx < mols.size(); mol_idx++) {
-	    const Chem::Molecule& mol = *mols[mol_idx];
-	    const std::string& mol_name = getName(mol);
+		for (std::size_t mol_idx = 0; mol_idx < mols.size(); mol_idx++) {
+			const Chem::Molecule& mol = *mols[mol_idx];
+			const std::string& mol_name = getName(mol);
 
-	    BOOST_CHECK(log_reader.getOutOfPlaneBendingInteractions(mol_name, ia_data));
+			BOOST_CHECK(log_reader.getOutOfPlaneBendingInteractions(mol_name, ia_data));
 
-	    parameterizer.parameterize(mol, found_ia_data);
+			parameterizer.parameterize(mol, found_ia_data);
 
-	    BOOST_CHECK_MESSAGE(found_ia_data.getSize() == ia_data.size(), "Out-Of-Plane bending interaction count mismatch for molecule #" << mol_idx << " (" << mol_name << "): " <<
-				found_ia_data.getSize() << " != " << ia_data.size());
+			BOOST_CHECK_MESSAGE(found_ia_data.getSize() == ia_data.size(), "Out-Of-Plane bending interaction count mismatch for molecule #" << mol_idx << " (" << mol_name << "): " <<
+								found_ia_data.getSize() << " != " << ia_data.size());
 
-	    coords.clear();
-	    get3DCoordinates(mol, coords);
+			coords.clear();
+			get3DCoordinates(mol, coords);
 
-	    for (std::size_t i = 0; i < ia_data.size(); i++) {
-		bool iaction_found = false;
-		std::size_t term_atom1_idx = TestUtils::getAtomIndex(mol, ia_data[i].termAtom1Name);
-		std::size_t term_atom2_idx = TestUtils::getAtomIndex(mol, ia_data[i].termAtom2Name);
-		std::size_t ctr_atom_idx = TestUtils::getAtomIndex(mol, ia_data[i].ctrAtomName);
+			for (std::size_t i = 0; i < ia_data.size(); i++) {
+				bool iaction_found = false;
+				std::size_t term_atom1_idx = TestUtils::getAtomIndex(mol, ia_data[i].termAtom1Name);
+				std::size_t term_atom2_idx = TestUtils::getAtomIndex(mol, ia_data[i].termAtom2Name);
+				std::size_t ctr_atom_idx = TestUtils::getAtomIndex(mol, ia_data[i].ctrAtomName);
 
-		for (std::size_t j = 0; j < found_ia_data.getSize(); j++) {
-		    const ForceField::MMFF94OutOfPlaneBendingInteraction& iaction = found_ia_data[j];
+				for (std::size_t j = 0; j < found_ia_data.getSize(); j++) {
+					const ForceField::MMFF94OutOfPlaneBendingInteraction& iaction = found_ia_data[j];
 
-		    if (iaction.getCenterAtomIndex() != ctr_atom_idx)
-			continue;
+					if (iaction.getCenterAtomIndex() != ctr_atom_idx)
+						continue;
 
-		    if (iaction.getOutOfPlaneAtomIndex() != ia_data[i].oopAtomIdx)
-			continue;
+					if (iaction.getOutOfPlaneAtomIndex() != ia_data[i].oopAtomIdx)
+						continue;
 
-		    if ((iaction.getTerminalAtom1Index() == term_atom1_idx && iaction.getTerminalAtom2Index() == term_atom2_idx) ||
-			(iaction.getTerminalAtom1Index() == term_atom2_idx && iaction.getTerminalAtom2Index() == term_atom1_idx)) {
+					if ((iaction.getTerminalAtom1Index() == term_atom1_idx && iaction.getTerminalAtom2Index() == term_atom2_idx) ||
+						(iaction.getTerminalAtom1Index() == term_atom2_idx && iaction.getTerminalAtom2Index() == term_atom1_idx)) {
 
-			double energy = ForceField::calcMMFF94OutOfPlaneBendingEnergy<double>(iaction, coords);
+						double energy = ForceField::calcMMFF94OutOfPlaneBendingEnergy<double>(iaction, coords);
 
-			BOOST_CHECK_MESSAGE(std::abs(energy - ia_data[i].energy) < 0.0009, 
-					    "Energy mismatch for out-of-plane bending interaction <#" << term_atom1_idx << "(" << 
-					    ia_data[i].termAtom1Name << ")-#" << ctr_atom_idx << "(" << 
-					    ia_data[i].ctrAtomName << ")-#" << term_atom2_idx << "(" << 
-					    ia_data[i].termAtom2Name << ")>~#" << ia_data[i].oopAtomIdx << "(" << 
-					    getMOL2Name(mol.getAtom(ia_data[i].oopAtomIdx)) << ") of molecule #" << mol_idx << 
-					    " (" << mol_name << "): calc. " << energy << " != " << energy);
+						BOOST_CHECK_MESSAGE(std::abs(energy - ia_data[i].energy) < 0.0009, 
+											"Energy mismatch for out-of-plane bending interaction <#" << term_atom1_idx << "(" << 
+											ia_data[i].termAtom1Name << ")-#" << ctr_atom_idx << "(" << 
+											ia_data[i].ctrAtomName << ")-#" << term_atom2_idx << "(" << 
+											ia_data[i].termAtom2Name << ")>~#" << ia_data[i].oopAtomIdx << "(" << 
+											getMOL2Name(mol.getAtom(ia_data[i].oopAtomIdx)) << ") of molecule #" << mol_idx << 
+											" (" << mol_name << "): calc. " << energy << " != " << energy);
 
-			iaction_found = true;
-			break;
-		    }
-		}
+						iaction_found = true;
+						break;
+					}
+				}
 		
-		BOOST_CHECK_MESSAGE(iaction_found, "Out-Of-Plane bending interaction <#" << term_atom1_idx << "(" << 
-				    ia_data[i].termAtom1Name << ")-#" << ctr_atom_idx << "(" << 
-				    ia_data[i].ctrAtomName << ")-#" << term_atom2_idx << "(" << 
-				    ia_data[i].termAtom2Name << ")>~#" << ia_data[i].oopAtomIdx << "(" << 
-				    getMOL2Name(mol.getAtom(ia_data[i].oopAtomIdx)) << ") of molecule #" << mol_idx << 
-				    " (" << mol_name << ") has not been found");
-	    }
+				BOOST_CHECK_MESSAGE(iaction_found, "Out-Of-Plane bending interaction <#" << term_atom1_idx << "(" << 
+									ia_data[i].termAtom1Name << ")-#" << ctr_atom_idx << "(" << 
+									ia_data[i].ctrAtomName << ")-#" << term_atom2_idx << "(" << 
+									ia_data[i].termAtom2Name << ")>~#" << ia_data[i].oopAtomIdx << "(" << 
+									getMOL2Name(mol.getAtom(ia_data[i].oopAtomIdx)) << ") of molecule #" << mol_idx << 
+									" (" << mol_name << ") has not been found");
+			}
 
-	    BOOST_CHECK(log_reader.getEnergies(mol_name, energies));
+			BOOST_CHECK(log_reader.getEnergies(mol_name, energies));
 
-	    double energy = ForceField::calcMMFF94OutOfPlaneBendingEnergy<double>(found_ia_data.getElementsBegin(), found_ia_data.getElementsEnd(), coords);
+			double energy = ForceField::calcMMFF94OutOfPlaneBendingEnergy<double>(found_ia_data.getElementsBegin(), found_ia_data.getElementsEnd(), coords);
 		
-	    //max_en_diff = std::max(max_en_diff, std::abs(energy - energies.outOfPlaneBending));
+			//max_en_diff = std::max(max_en_diff, std::abs(energy - energies.outOfPlaneBending));
 		    
-	    BOOST_CHECK_MESSAGE(std::abs(energy - energies.outOfPlaneBending) < 0.00168, 
-				"Total out-of-plane bending energy mismatch for molecule #" << mol_idx << " (" << mol_name <<
-				"): calc. " << energy << " != " << energies.outOfPlaneBending);
-
-	    found_ia_data.clear();
-	}
+			BOOST_CHECK_MESSAGE(std::abs(energy - energies.outOfPlaneBending) < 0.00168, 
+								"Total out-of-plane bending energy mismatch for molecule #" << mol_idx << " (" << mol_name <<
+								"): calc. " << energy << " != " << energies.outOfPlaneBending);
+		}
     }
 
     //BOOST_MESSAGE("Max. energy difference: " << max_en_diff); 
@@ -403,74 +393,72 @@ BOOST_AUTO_TEST_CASE(MMFF94TorsionEnergyFunctionTest)
     //double max_en_diff = 0;
 
     for (bool stat = false; !stat; stat = true) {
-	OptimolLogReader& log_reader = (stat ? MMFF94TestData::STAT_LOG_READER : MMFF94TestData::DYN_LOG_READER);
-	const MMFF94TestData::MoleculeList& mols = (stat ? MMFF94TestData::STAT_TEST_MOLECULES : MMFF94TestData::DYN_TEST_MOLECULES);
+		OptimolLogReader& log_reader = (stat ? MMFF94TestData::STAT_LOG_READER : MMFF94TestData::DYN_LOG_READER);
+		const MMFF94TestData::MoleculeList& mols = (stat ? MMFF94TestData::STAT_TEST_MOLECULES : MMFF94TestData::DYN_TEST_MOLECULES);
 
-	parameterizer.setTorsionParameterTable(ForceField::MMFF94TorsionParameterTable::get(stat));
+		parameterizer.setTorsionParameterTable(ForceField::MMFF94TorsionParameterTable::get(stat));
 
-	for (std::size_t mol_idx = 0; mol_idx <	mols.size(); mol_idx++) {
-	    const Chem::Molecule& mol =	*mols[mol_idx];
-	    const std::string& mol_name = getName(mol);
+		for (std::size_t mol_idx = 0; mol_idx <	mols.size(); mol_idx++) {
+			const Chem::Molecule& mol =	*mols[mol_idx];
+			const std::string& mol_name = getName(mol);
 
-	    BOOST_CHECK(log_reader.getTorsionInteractions(mol_name, ia_data));
+			BOOST_CHECK(log_reader.getTorsionInteractions(mol_name, ia_data));
 
-	    parameterizer.parameterize(mol, found_ia_data);
+			parameterizer.parameterize(mol, found_ia_data);
 
-	    BOOST_CHECK_MESSAGE(found_ia_data.getSize() == ia_data.size(), "Torsion interaction count mismatch for molecule #" << mol_idx << " (" << mol_name << "): " <<
-				found_ia_data.getSize() << " != " << ia_data.size());
+			BOOST_CHECK_MESSAGE(found_ia_data.getSize() == ia_data.size(), "Torsion interaction count mismatch for molecule #" << mol_idx << " (" << mol_name << "): " <<
+								found_ia_data.getSize() << " != " << ia_data.size());
 
-	    coords.clear();
-	    get3DCoordinates(mol, coords);
+			coords.clear();
+			get3DCoordinates(mol, coords);
 
-	    for (std::size_t i = 0; i < ia_data.size(); i++) {
-		bool iaction_found = false;
-		std::size_t term_atom1_idx = TestUtils::getAtomIndex(mol, ia_data[i].termAtom1Name);
-		std::size_t term_atom2_idx = TestUtils::getAtomIndex(mol, ia_data[i].termAtom2Name);
+			for (std::size_t i = 0; i < ia_data.size(); i++) {
+				bool iaction_found = false;
+				std::size_t term_atom1_idx = TestUtils::getAtomIndex(mol, ia_data[i].termAtom1Name);
+				std::size_t term_atom2_idx = TestUtils::getAtomIndex(mol, ia_data[i].termAtom2Name);
 
-		for (std::size_t j = 0; j < found_ia_data.getSize(); j++) {
-		    const ForceField::MMFF94TorsionInteraction& iaction = found_ia_data[j];
+				for (std::size_t j = 0; j < found_ia_data.getSize(); j++) {
+					const ForceField::MMFF94TorsionInteraction& iaction = found_ia_data[j];
 
-		    if (!((iaction.getTerminalAtom1Index() == term_atom1_idx && iaction.getCenterAtom1Index() == ia_data[i].ctrAtom1Idx && 
-			   iaction.getCenterAtom2Index() == ia_data[i].ctrAtom2Idx && iaction.getTerminalAtom2Index() == term_atom2_idx) ||
-			  (iaction.getTerminalAtom2Index() == term_atom1_idx && iaction.getCenterAtom2Index() == ia_data[i].ctrAtom1Idx && 
-			   iaction.getCenterAtom1Index() == ia_data[i].ctrAtom2Idx && iaction.getTerminalAtom1Index() == term_atom2_idx)))
-			continue;
+					if (!((iaction.getTerminalAtom1Index() == term_atom1_idx && iaction.getCenterAtom1Index() == ia_data[i].ctrAtom1Idx && 
+						   iaction.getCenterAtom2Index() == ia_data[i].ctrAtom2Idx && iaction.getTerminalAtom2Index() == term_atom2_idx) ||
+						  (iaction.getTerminalAtom2Index() == term_atom1_idx && iaction.getCenterAtom2Index() == ia_data[i].ctrAtom1Idx && 
+						   iaction.getCenterAtom1Index() == ia_data[i].ctrAtom2Idx && iaction.getTerminalAtom1Index() == term_atom2_idx)))
+						continue;
 
-		    double energy = ForceField::calcMMFF94TorsionEnergy<double>(iaction, coords);
+					double energy = ForceField::calcMMFF94TorsionEnergy<double>(iaction, coords);
 		
-		    BOOST_CHECK_MESSAGE(std::abs(energy - ia_data[i].energy) < 0.00122, 
-					"Energy mismatch for torsion interaction #" << term_atom1_idx << "(" << 
-					ia_data[i].termAtom1Name << ")-#" << ia_data[i].ctrAtom1Idx << "(" << 
-					getMOL2Name(mol.getAtom(ia_data[i].ctrAtom1Idx)) << ")-#" << ia_data[i].ctrAtom2Idx << "(" << 
-					getMOL2Name(mol.getAtom(ia_data[i].ctrAtom2Idx)) << ")-#" << term_atom2_idx << "(" << 
-					ia_data[i].termAtom2Name << ") of molecule #" << mol_idx << 
-					" (" << mol_name << "): calc. " << energy << " != " << ia_data[i].energy);
+					BOOST_CHECK_MESSAGE(std::abs(energy - ia_data[i].energy) < 0.00122, 
+										"Energy mismatch for torsion interaction #" << term_atom1_idx << "(" << 
+										ia_data[i].termAtom1Name << ")-#" << ia_data[i].ctrAtom1Idx << "(" << 
+										getMOL2Name(mol.getAtom(ia_data[i].ctrAtom1Idx)) << ")-#" << ia_data[i].ctrAtom2Idx << "(" << 
+										getMOL2Name(mol.getAtom(ia_data[i].ctrAtom2Idx)) << ")-#" << term_atom2_idx << "(" << 
+										ia_data[i].termAtom2Name << ") of molecule #" << mol_idx << 
+										" (" << mol_name << "): calc. " << energy << " != " << ia_data[i].energy);
 	
 
-		    iaction_found = true;
-		    break;
-		}
+					iaction_found = true;
+					break;
+				}
 		
-		BOOST_CHECK_MESSAGE(iaction_found, "Torsion interaction #" << term_atom1_idx << "(" << 
-				    ia_data[i].termAtom1Name << ")-#" << ia_data[i].ctrAtom1Idx << "(" << 
-				    getMOL2Name(mol.getAtom(ia_data[i].ctrAtom1Idx)) << ")-#" << ia_data[i].ctrAtom2Idx << "(" << 
-				    getMOL2Name(mol.getAtom(ia_data[i].ctrAtom2Idx)) << ")-#" << term_atom2_idx << "(" << 
-				    ia_data[i].termAtom2Name << ") of molecule #" << mol_idx << 
-				    " (" << mol_name << ") has not been found");
-	    }
+				BOOST_CHECK_MESSAGE(iaction_found, "Torsion interaction #" << term_atom1_idx << "(" << 
+									ia_data[i].termAtom1Name << ")-#" << ia_data[i].ctrAtom1Idx << "(" << 
+									getMOL2Name(mol.getAtom(ia_data[i].ctrAtom1Idx)) << ")-#" << ia_data[i].ctrAtom2Idx << "(" << 
+									getMOL2Name(mol.getAtom(ia_data[i].ctrAtom2Idx)) << ")-#" << term_atom2_idx << "(" << 
+									ia_data[i].termAtom2Name << ") of molecule #" << mol_idx << 
+									" (" << mol_name << ") has not been found");
+			}
 
-	    BOOST_CHECK(log_reader.getEnergies(mol_name, energies));
+			BOOST_CHECK(log_reader.getEnergies(mol_name, energies));
 
-	    double energy = ForceField::calcMMFF94TorsionEnergy<double>(found_ia_data.getElementsBegin(), found_ia_data.getElementsEnd(), coords);
+			double energy = ForceField::calcMMFF94TorsionEnergy<double>(found_ia_data.getElementsBegin(), found_ia_data.getElementsEnd(), coords);
 		
-	    //max_en_diff = std::max(max_en_diff, std::abs(energy - energies.torsion));
+			//max_en_diff = std::max(max_en_diff, std::abs(energy - energies.torsion));
 		    
-	    BOOST_CHECK_MESSAGE(std::abs(energy - energies.torsion) < 0.00141, 
-				"Total torsion energy mismatch for molecule #" << mol_idx << " (" << mol_name <<
-				"): calc. " << energy << " != " << energies.torsion);
-
-	    found_ia_data.clear();
-	}
+			BOOST_CHECK_MESSAGE(std::abs(energy - energies.torsion) < 0.00141, 
+								"Total torsion energy mismatch for molecule #" << mol_idx << " (" << mol_name <<
+								"): calc. " << energy << " != " << energies.torsion);
+		}
     }
 
     //BOOST_MESSAGE("Max. energy difference: " << max_en_diff); 
@@ -491,57 +479,55 @@ BOOST_AUTO_TEST_CASE(MMFF94VanDerWaalsEnergyFunctionTest)
     //double max_en_diff = 0;
 
     for (std::size_t mol_idx = 0; mol_idx < MMFF94TestData::DYN_TEST_MOLECULES.size(); mol_idx++) {
-	const Chem::Molecule& mol = *MMFF94TestData::DYN_TEST_MOLECULES[mol_idx];
-	const std::string& mol_name = getName(mol);
+		const Chem::Molecule& mol = *MMFF94TestData::DYN_TEST_MOLECULES[mol_idx];
+		const std::string& mol_name = getName(mol);
 
-	BOOST_CHECK(MMFF94TestData::DYN_LOG_READER.getVanDerWaalsInteractions(mol_name, ia_data));
+		BOOST_CHECK(MMFF94TestData::DYN_LOG_READER.getVanDerWaalsInteractions(mol_name, ia_data));
 
-	parameterizer.parameterize(mol, found_ia_data);
+		parameterizer.parameterize(mol, found_ia_data);
 
-	//BOOST_CHECK_MESSAGE(found_ia_data.getSize() == ia_data.size(), "Van der Waals interaction count mismatch for molecule #" << mol_idx << " (" << mol_name << "): " <<
-	//					found_ia_data.getSize() << " != " << ia_data.size());
+		//BOOST_CHECK_MESSAGE(found_ia_data.getSize() == ia_data.size(), "Van der Waals interaction count mismatch for molecule #" << mol_idx << " (" << mol_name << "): " <<
+		//					found_ia_data.getSize() << " != " << ia_data.size());
 	
-	coords.clear();
-	get3DCoordinates(mol, coords);
+		coords.clear();
+		get3DCoordinates(mol, coords);
 
-	for (std::size_t i = 0; i < ia_data.size(); i++) {
-	    bool iaction_found = false;
+		for (std::size_t i = 0; i < ia_data.size(); i++) {
+			bool iaction_found = false;
 
-	    for (std::size_t j = 0; j < found_ia_data.getSize(); j++) {
-		const ForceField::MMFF94VanDerWaalsInteraction& iaction = found_ia_data[j];
+			for (std::size_t j = 0; j < found_ia_data.getSize(); j++) {
+				const ForceField::MMFF94VanDerWaalsInteraction& iaction = found_ia_data[j];
 
-		if ((iaction.getAtom1Index() == ia_data[i].atom1Idx && iaction.getAtom2Index() == ia_data[i].atom2Idx) ||
-		    (iaction.getAtom1Index() == ia_data[i].atom2Idx && iaction.getAtom2Index() == ia_data[i].atom1Idx)) {
+				if ((iaction.getAtom1Index() == ia_data[i].atom1Idx && iaction.getAtom2Index() == ia_data[i].atom2Idx) ||
+					(iaction.getAtom1Index() == ia_data[i].atom2Idx && iaction.getAtom2Index() == ia_data[i].atom1Idx)) {
 
-		    double energy = ForceField::calcMMFF94VanDerWaalsEnergy<double>(iaction, coords);
+					double energy = ForceField::calcMMFF94VanDerWaalsEnergy<double>(iaction, coords);
 		   
-		    BOOST_CHECK_MESSAGE(std::abs(energy - ia_data[i].energy) < 0.00356, 
-					"Energy mismatch for van der Waals interaction #" << ia_data[i].atom1Idx << "(" << 
-					getMOL2Name(mol.getAtom(ia_data[i].atom1Idx)) << ")-#" << ia_data[i].atom2Idx << "(" << 
-					getMOL2Name(mol.getAtom(ia_data[i].atom2Idx)) << ") of molecule #" << mol_idx << " (" << mol_name <<
-					"): calc. " << energy << " != " << ia_data[i].energy);
+					BOOST_CHECK_MESSAGE(std::abs(energy - ia_data[i].energy) < 0.00356, 
+										"Energy mismatch for van der Waals interaction #" << ia_data[i].atom1Idx << "(" << 
+										getMOL2Name(mol.getAtom(ia_data[i].atom1Idx)) << ")-#" << ia_data[i].atom2Idx << "(" << 
+										getMOL2Name(mol.getAtom(ia_data[i].atom2Idx)) << ") of molecule #" << mol_idx << " (" << mol_name <<
+										"): calc. " << energy << " != " << ia_data[i].energy);
 		    
-		    iaction_found = true;
-		    break;
+					iaction_found = true;
+					break;
+				}
+			}
+		
+			BOOST_CHECK_MESSAGE(iaction_found, "Van der Waals interaction #" << ia_data[i].atom1Idx << "(" << getMOL2Name(mol.getAtom(ia_data[i].atom1Idx)) << 
+								")-#" << ia_data[i].atom2Idx << "(" << getMOL2Name(mol.getAtom(ia_data[i].atom2Idx)) << ") of molecule #" << mol_idx << " (" << mol_name <<
+								") has not been found");
 		}
-	    }
-		
-	    BOOST_CHECK_MESSAGE(iaction_found, "Van der Waals interaction #" << ia_data[i].atom1Idx << "(" << getMOL2Name(mol.getAtom(ia_data[i].atom1Idx)) << 
-				")-#" << ia_data[i].atom2Idx << "(" << getMOL2Name(mol.getAtom(ia_data[i].atom2Idx)) << ") of molecule #" << mol_idx << " (" << mol_name <<
-				") has not been found");
-	}
 
-	BOOST_CHECK(MMFF94TestData::DYN_LOG_READER.getEnergies(mol_name, energies));
+		BOOST_CHECK(MMFF94TestData::DYN_LOG_READER.getEnergies(mol_name, energies));
 
-	double energy = ForceField::calcMMFF94VanDerWaalsEnergy<double>(found_ia_data.getElementsBegin(), found_ia_data.getElementsEnd(), coords);
+		double energy = ForceField::calcMMFF94VanDerWaalsEnergy<double>(found_ia_data.getElementsBegin(), found_ia_data.getElementsEnd(), coords);
 		
-	//max_en_diff = std::max(max_en_diff, std::abs(energy - energies.vanDerWaals));
+		//max_en_diff = std::max(max_en_diff, std::abs(energy - energies.vanDerWaals));
 		    
-	BOOST_CHECK_MESSAGE(std::abs(energy - energies.vanDerWaals) < 0.00621, 
-			    "Total van der Waals energy mismatch for molecule #" << mol_idx << " (" << mol_name <<
-			    "): calc. " << energy << " != " << energies.vanDerWaals);
-
-	found_ia_data.clear();
+		BOOST_CHECK_MESSAGE(std::abs(energy - energies.vanDerWaals) < 0.00621, 
+							"Total van der Waals energy mismatch for molecule #" << mol_idx << " (" << mol_name <<
+							"): calc. " << energy << " != " << energies.vanDerWaals);
     }
 
     //BOOST_MESSAGE("Max. energy difference: " << max_en_diff); 
@@ -561,27 +547,25 @@ BOOST_AUTO_TEST_CASE(MMFF94ElectrostaticEnergyFunctionTest)
     //double max_en_diff = 0;
 
     for (std::size_t mol_idx = 0; mol_idx < MMFF94TestData::DYN_TEST_MOLECULES.size(); mol_idx++) {
-	Chem::Molecule& mol = *MMFF94TestData::DYN_TEST_MOLECULES[mol_idx];
-	const std::string& mol_name = getName(mol);
+		Chem::Molecule& mol = *MMFF94TestData::DYN_TEST_MOLECULES[mol_idx];
+		const std::string& mol_name = getName(mol);
 
-	BOOST_CHECK(MMFF94TestData::DYN_LOG_READER.getEnergies(mol_name, energies));
+		BOOST_CHECK(MMFF94TestData::DYN_LOG_READER.getEnergies(mol_name, energies));
 
-	ForceField::calcMMFF94AtomCharges(mol, false);
+		ForceField::calcMMFF94AtomCharges(mol, false);
 
-	parameterizer.parameterize(mol, found_ia_data);
+		parameterizer.parameterize(mol, found_ia_data);
 	
-	coords.clear();
-	get3DCoordinates(mol, coords);
+		coords.clear();
+		get3DCoordinates(mol, coords);
 
-	double energy = ForceField::calcMMFF94ElectrostaticEnergy<double>(found_ia_data.getElementsBegin(), found_ia_data.getElementsEnd(), coords);
+		double energy = ForceField::calcMMFF94ElectrostaticEnergy<double>(found_ia_data.getElementsBegin(), found_ia_data.getElementsEnd(), coords);
 
-	//max_en_diff = std::max(max_en_diff, std::abs(energy - energies.electrostatic));
+		//max_en_diff = std::max(max_en_diff, std::abs(energy - energies.electrostatic));
 		    
-	BOOST_CHECK_MESSAGE(std::abs(energy - energies.electrostatic) < 0.00564, 
-			    "Total electrostatic energy mismatch for molecule #" << mol_idx << " (" << mol_name <<
-			    "): calc. " << energy << " != " << energies.electrostatic);
-
-	found_ia_data.clear();
+		BOOST_CHECK_MESSAGE(std::abs(energy - energies.electrostatic) < 0.00564, 
+							"Total electrostatic energy mismatch for molecule #" << mol_idx << " (" << mol_name <<
+							"): calc. " << energy << " != " << energies.electrostatic);
     }
 
     //BOOST_MESSAGE("Max. energy difference: " << max_en_diff);

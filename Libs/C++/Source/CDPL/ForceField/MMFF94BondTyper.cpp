@@ -64,7 +64,7 @@ void ForceField::MMFF94BondTyper::setAromaticRingSetFunction(const MMFF94Aromati
     aromRingSetFunc = func;
 }
 	
-void ForceField::MMFF94BondTyper::setNumericAtomTypeFunction(const MMFF94NumericAtomTypeFunction& func)
+void ForceField::MMFF94BondTyper::setAtomTypeFunction(const MMFF94NumericAtomTypeFunction& func)
 {
     atomTypeFunc = func;
 }

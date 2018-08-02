@@ -66,7 +66,7 @@ namespace CDPL
 
 			void setAromaticRingSetFunction(const MMFF94AromaticRingSetFunction& func);
 
-			void setNumericAtomTypeFunction(const MMFF94NumericAtomTypeFunction& func);
+			void setAtomTypeFunction(const MMFF94NumericAtomTypeFunction& func);
 	
 			/**
 			 * \brief Determines MMFF94 bond type indicies for the bonds of a molecular graph.

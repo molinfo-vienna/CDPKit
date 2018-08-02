@@ -120,8 +120,6 @@ namespace
 									ia_data[i].termAtom2Name << ") of molecule #" << mol_idx << 
 									" (" << mol_name << ") has not been found");
 			}
-
-			found_ia_data.clear();
 		}
 	}
 }

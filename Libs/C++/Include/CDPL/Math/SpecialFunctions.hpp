@@ -111,82 +111,90 @@ namespace CDPL
 
 
 // Implementation 
+// \cond UNHIDE_DETAILS
 
-namespace
+namespace CDPL
 {
 
-	// Computes the incomplete gamma function P(a, x) evaluated by its series representation.
-	template <typename T>
-	T gammaPSer(const T& a, const T& x)
+	namespace Math
 	{
-		using namespace CDPL;
-		using namespace Math;
 
-		if (x <= 0) {
-			if (x < 0)
+		namespace Detail
+		{
+
+			// Computes the incomplete gamma function P(a, x) evaluated by its series representation.
+			template <typename T>
+			T gammaPSer(const T& a, const T& x)
+			{
+				using namespace CDPL;
+				using namespace Math;
+
+				if (x <= 0) {
+					if (x < 0)
+						return std::numeric_limits<T>::quiet_NaN();
+
+					return 0;
+				}
+
+				T ap = a;
+				T del = 1 / a;
+				T sum = del;
+
+				for (unsigned int i = 0; i < 100; i++) {
+					++ap;
+
+					del *= x / ap;
+					sum += del;
+
+					if (TypeTraits<T>::abs(del) < TypeTraits<T>::abs(sum) * std::numeric_limits<T>::epsilon())
+						return (sum * std::exp(-x + a * log(x) - CDPL::Math::lnGamma(a)));
+				}
+
 				return std::numeric_limits<T>::quiet_NaN();
+			}
 
-			return 0;
-		}
+			// Computes the incomplete gamma function Q(a, x) evaluated by its continued fraction representation.
+			template <typename T>
+			T gammaQContFrac(const T& a, const T& x)
+			{
+				using namespace CDPL;
+				using namespace Math;
 
-		T ap = a;
-		T del = 1 / a;
-		T sum = del;
+				static const T EPS = std::numeric_limits<T>::epsilon();
+				static const T FP_MIN = std::numeric_limits<T>::min() / EPS;
 
-		for (unsigned int i = 0; i < 100; i++) {
-			++ap;
+				T b = x + 1 - a;
+				T c = 1 / FP_MIN;
+				T d = 1 / b;
+				T h = d;
 
-			del *= x / ap;
-			sum += del;
+				for (unsigned int i = 0; i < 100; i++) {
+					T an = -i * (i - a);
+					b += 2;
+					d = an * d + b;
 
-			if (TypeTraits<T>::abs(del) < TypeTraits<T>::abs(sum) * std::numeric_limits<T>::epsilon())
-				return (sum * std::exp(-x + a * log(x) - CDPL::Math::lnGamma(a)));
-		}
-
-		return std::numeric_limits<T>::quiet_NaN();
-	}
-
-	// Computes the incomplete gamma function Q(a, x) evaluated by its continued fraction representation.
-	template <typename T>
-	T gammaQContFrac(const T& a, const T& x)
-	{
-		using namespace CDPL;
-		using namespace Math;
-
-		static const T EPS = std::numeric_limits<T>::epsilon();
-		static const T FP_MIN = std::numeric_limits<T>::min() / EPS;
-
-		T b = x + 1 - a;
-		T c = 1 / FP_MIN;
-		T d = 1 / b;
-		T h = d;
-
-		for (unsigned int i = 0; i < 100; i++) {
-			T an = -i * (i - a);
-			b += 2;
-			d = an * d + b;
-
-			if (TypeTraits<T>::abs(d) < FP_MIN)
-				d = FP_MIN;
+					if (TypeTraits<T>::abs(d) < FP_MIN)
+						d = FP_MIN;
 		
-			c = b + an / c;
+					c = b + an / c;
 
-			if (TypeTraits<T>::abs(c) < FP_MIN)
-				c = FP_MIN;
+					if (TypeTraits<T>::abs(c) < FP_MIN)
+						c = FP_MIN;
 		
-			d = 1 / d;
-			T del = d * c;
-			h *= del;
+					d = 1 / d;
+					T del = d * c;
+					h *= del;
 
-			if (TypeTraits<T>::abs(del - 1) <= EPS)
-				return (std::exp(-x + a * log(x) - CDPL::Math::lnGamma(a)) * h);
+					if (TypeTraits<T>::abs(del - 1) <= EPS)
+						return (std::exp(-x + a * log(x) - CDPL::Math::lnGamma(a)) * h);
+				}
+
+				return std::numeric_limits<T>::quiet_NaN();
+			}
 		}
-
-		return std::numeric_limits<T>::quiet_NaN();
 	}
 }
 
-// \cond UNHIDE_DETAILS
 
 template <typename T>
 T CDPL::Math::factorial(unsigned int n) 
@@ -232,12 +240,12 @@ template <typename T>
 T CDPL::Math::lnGamma(const T& xx)
 {
 	static const long double cof[6] = {
-	76.18009172947146,
-	-86.50532032941677,
-	24.01409824083091,
-	-1.231739572450155,
-	0.1208650973866179e-2,
-	-0.5395239384953e-5
+	    76.18009172947146,
+		-86.50532032941677,
+		24.01409824083091,
+		-1.231739572450155,
+		0.1208650973866179e-2,
+		-0.5395239384953e-5
 	};
 
 	long double ser = 1.000000000190015;
@@ -260,9 +268,9 @@ T CDPL::Math::gammaQ(const T& a, const T& x)
 		return std::numeric_limits<T>::quiet_NaN();
 
 	if (x < (a + T(1))) 
-		return (T(1) - gammaPSer(a, x));
+		return (T(1) - Detail::gammaPSer(a, x));
 	
-	return gammaQContFrac(a, x);
+	return Detail::gammaQContFrac(a, x);
 }
 
 template <typename T>
