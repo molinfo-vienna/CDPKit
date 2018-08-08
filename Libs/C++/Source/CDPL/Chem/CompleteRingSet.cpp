@@ -32,7 +32,7 @@
 #include "CDPL/Chem/CompleteRingSet.hpp"
 #include "CDPL/Chem/Atom.hpp"
 #include "CDPL/Chem/Bond.hpp"
-#include "CDPL/Util/RangeGenerator.hpp"
+#include "CDPL/Internal/RangeGenerator.hpp"
 
 
 using namespace CDPL;
@@ -74,7 +74,7 @@ void Chem::CompleteRingSet::init(const MolecularGraph& molgraph)
 	nodes.clear();
 	nodes.reserve(num_atoms);
 
-	std::generate_n(std::back_inserter(nodes), num_atoms, Util::RangeGenerator<std::size_t>());
+	std::generate_n(std::back_inserter(nodes), num_atoms, Internal::RangeGenerator<std::size_t>());
 
 	MolecularGraph::ConstBondIterator bonds_end = molgraph.getBondsEnd();
  

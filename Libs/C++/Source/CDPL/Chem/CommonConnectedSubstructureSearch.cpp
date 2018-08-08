@@ -35,7 +35,7 @@
 #include "CDPL/Chem/AtomFunctions.hpp"
 #include "CDPL/Chem/BondFunctions.hpp"
 #include "CDPL/Chem/MolecularGraphFunctions.hpp"
-#include "CDPL/Util/RangeGenerator.hpp"
+#include "CDPL/Internal/RangeGenerator.hpp"
 #include "CDPL/Base/Exceptions.hpp"
 
 

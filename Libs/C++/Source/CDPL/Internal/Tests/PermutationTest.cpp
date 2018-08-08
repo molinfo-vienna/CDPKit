@@ -28,13 +28,13 @@
 
 #include <boost/test/auto_unit_test.hpp>
 
-#include "CDPL/Util/Permutation.hpp"
+#include "CDPL/Internal/Permutation.hpp"
 
 
 BOOST_AUTO_TEST_CASE(PermutationTest)
 {
 	using namespace CDPL;
-	using namespace Util;
+	using namespace Internal;
 
 	int data[25 * 4] = { 0, 1, 2, 3 };
 

@@ -108,21 +108,21 @@ namespace CDPL
 			}
 		};
 
-		template <typename A>
-		struct MinimizerVariableArrayTraits<VectorArray<A> >
+		template <typename V>
+		struct MinimizerVariableArrayTraits<VectorArray<V> >
 		{
 
-			typedef VectorArray<A> ArrayType;
-			typedef A VectorType;
-			typedef typename A::ValueType ValueType;
+			typedef VectorArray<V> ArrayType;
+			typedef V VectorType;
+			typedef typename V::ValueType ValueType;
 			typedef typename ArrayType::SizeType SizeType;
 
 			template <typename T>
 			static T dot(const ArrayType& a1, const ArrayType& a2) {
 				T result = T();
 
-				for (SizeType i = 0, size = a1.getSize(); i < size; i++)
-					result += innerProd(a1[i], a2[i]);
+				for (typename ArrayType::ConstElementIterator it1 = a1.getElementsBegin(), it2 = a2.getElementsBegin(), end1 = a1.getElementsEnd(); it1 != end1; ++it1, ++it2)
+					result += innerProd(*it1, *it2);
 
 				return result;
 			}
@@ -131,16 +131,12 @@ namespace CDPL
 			static T norm2(const ArrayType& a) {
 				T scale = T();
 				T ssq = T(1);
-				SizeType size = a.getSize();
 
-				if (size == SizeType(0))
-					return T();
+				for (typename ArrayType::ConstElementIterator it = a.getElementsBegin(), end = a.getElementsEnd(); it != end; ++it) {
+					const VectorType& vx = *it;
 
-				for (SizeType i = 0; i < size; i++) {
-					const VectorType& vx = a[i];
-
-					for (typename VectorType::SizeType j = 0, dim = vx.getSize(); j < dim; j++) {
-						const ValueType& x = vx(j);
+					for (typename VectorType::SizeType i = 0, dim = vx.getSize(); i < dim; i++) {
+						const ValueType& x = vx(i);
 
 						if (x != ValueType()) {
 							const typename TypeTraits<ValueType>::RealType ax = TypeTraits<ValueType>::abs(x);
@@ -161,33 +157,39 @@ namespace CDPL
  
 			template <typename T>
 			static void axpy(const T& alpha, const ArrayType& x, ArrayType& y) {
-				for (SizeType i = 0, size = x.getSize(); i < size; i++)
-					y[i].plusAssign(alpha * x[i]);
+				typename ArrayType::ElementIterator it2 = y.getElementsBegin();
+
+				for (typename ArrayType::ConstElementIterator it1 = x.getElementsBegin(), end1 = x.getElementsEnd(); it1 != end1; ++it1, ++it2)
+					it2->plusAssign(alpha * *it1);
 			}
 			
 			static void clear(ArrayType& a) {
-				for (SizeType i = 0, size = a.getSize(); i < size; i++)
-					a[i].clear(ValueType());
+				for (typename ArrayType::ElementIterator it = a.getElementsBegin(), end = a.getElementsEnd(); it != end; ++it)
+					it->clear(ValueType());
 			}
 
 			static void assign(ArrayType& a1, const ArrayType& a2) {
 				if (a1.getSize() != a2.getSize())
 					a1.resize(a2.getSize());
 
-				for (SizeType i = 0, size = a1.getSize(); i < size; i++)
-					a1[i].assign(a2[i]);
+				typename ArrayType::ConstElementIterator it2 = a2.getElementsBegin();
+
+				for (typename ArrayType::ElementIterator it1 = a1.getElementsBegin(), end1 = a1.getElementsEnd(); it1 != end1; ++it1, ++it2)
+					it1->assign(*it2);
 			}
 
 			template <typename T>
 			static void multiply(ArrayType& a, const T& v) {
-				for (SizeType i = 0, size = a.getSize(); i < size; i++)
-					a[i] *= v;
+				for (typename ArrayType::ElementIterator it = a.getElementsBegin(), end = a.getElementsEnd(); it != end; ++it)
+					*it *= v;
 			}
 
 			
 			static void sub(ArrayType& a1, const ArrayType& a2) {
-				for (SizeType i = 0, size = a1.getSize(); i < size; i++)
-					a1[i].minusAssign(a2[i]);
+				typename ArrayType::ConstElementIterator it2 = a2.getElementsBegin();
+
+				for (typename ArrayType::ElementIterator it1 = a1.getElementsBegin(), end1 = a1.getElementsEnd(); it1 != end1; ++it1, ++it2)
+					it1->minusAssign(*it2);
 			}
 		};
 	}

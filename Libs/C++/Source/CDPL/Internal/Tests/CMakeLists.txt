@@ -4,6 +4,8 @@ SET(test-suite_SRCS
     Main.cpp
     SHA1Test.cpp
     AddressOfTest.cpp
+    PermutationTest.cpp
+    RangeGeneratorTest.cpp
    )
 
 ADD_DEFINITIONS(-DBOOST_TEST_DYN_LINK)

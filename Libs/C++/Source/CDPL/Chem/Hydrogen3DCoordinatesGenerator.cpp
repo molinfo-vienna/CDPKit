@@ -41,7 +41,7 @@
 #include "CDPL/Chem/HybridizationState.hpp"
 #include "CDPL/Math/Vector.hpp"
 #include "CDPL/Math/SpecialFunctions.hpp"
-#include "CDPL/Util/Permutation.hpp"
+#include "CDPL/Internal/Permutation.hpp"
 
 
 using namespace CDPL;
@@ -584,7 +584,7 @@ void Chem::Hydrogen3DCoordinatesGenerator::assignTemplateCoords(
 					}
 				}
 
-				Util::nextPermutation(curr_tmplt_perm, curr_tmplt_perm + num_def_atoms);
+				Internal::nextPermutation(curr_tmplt_perm, curr_tmplt_perm + num_def_atoms);
 			}
 		}
 

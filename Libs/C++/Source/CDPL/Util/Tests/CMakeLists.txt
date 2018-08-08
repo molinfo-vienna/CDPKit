@@ -9,8 +9,6 @@ SET(test-suite_SRCS
     IndirectArrayTest.cpp           # TODO
     DereferencerTest.cpp
     IndexedElementIteratorTest.cpp
-    PermutationTest.cpp
-    RangeGeneratorTest.cpp
     StreamDataReaderTest.cpp
     PropertyValueTest.cpp
     PropertyValueProductTest.cpp

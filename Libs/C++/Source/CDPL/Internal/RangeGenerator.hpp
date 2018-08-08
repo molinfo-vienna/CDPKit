@@ -25,23 +25,18 @@
 
 /**
  * \file
- * \brief Definition of the class CDPL::Util::RangeGenerator.
+ * \brief Definition of the class CDPL::Internal::RangeGenerator.
  */
 
-#ifndef CDPL_UTIL_RANGEGENERATOR_HPP
-#define CDPL_UTIL_RANGEGENERATOR_HPP
+#ifndef CDPL_INTERNAL_RANGEGENERATOR_HPP
+#define CDPL_INTERNAL_RANGEGENERATOR_HPP
 
 
 namespace CDPL
 {
 
-	namespace Util
+	namespace Internal
 	{
-
-		/**
-		 * \addtogroup CDPL_UTIL_FUNCTORS
-		 * @{
-		 */
 
 		/**
 		 * \brief A function object for the generation of arithmetic progressions.
@@ -88,10 +83,6 @@ namespace CDPL
 			T increment;
 			T currentValue;
 		};
-
-		/**
-		 * @}
-		 */
 	}
 }
 
@@ -99,7 +90,7 @@ namespace CDPL
 // Implementation
 
 template <typename T>
-T CDPL::Util::RangeGenerator<T>::operator()()
+T CDPL::Internal::RangeGenerator<T>::operator()()
 {
 	T tmp = currentValue;
 	currentValue += increment;
@@ -107,4 +98,4 @@ T CDPL::Util::RangeGenerator<T>::operator()()
 	return tmp;
 }
 
-#endif // CDPL_UTIL_RANGEGENERATOR_HPP
+#endif // CDPL_INTERNAL_RANGEGENERATOR_HPP

@@ -15,6 +15,8 @@ SET(test-suite_SRCS
     MMFF94VanDerWaalsInteractionParameterizerTest.cpp
     MMFF94EnergyFunctionsTest.cpp
     MMFF94EnergyCalculatorTest.cpp
+    MMFF94GradientFunctionsTest.cpp
+    MMFF94GradientCalculatorTest.cpp
 
     OptimolLogReader.cpp
     TestUtils.cpp

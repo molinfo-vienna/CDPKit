@@ -28,13 +28,13 @@
 
 #include <boost/test/auto_unit_test.hpp>
 
-#include "CDPL/Util/RangeGenerator.hpp"
+#include "CDPL/Internal/RangeGenerator.hpp"
 
 
 BOOST_AUTO_TEST_CASE(RangeGeneratorTest)
 {
 	using namespace CDPL;
-	using namespace Util;
+	using namespace Internal;
 
 	int data[4];
 

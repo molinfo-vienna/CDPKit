@@ -41,7 +41,7 @@
 #include "CDPL/Chem/MolecularGraphFunctions.hpp"
 #include "CDPL/Chem/AtomType.hpp"
 #include "CDPL/Chem/StereoDescriptor.hpp"
-#include "CDPL/Util/Permutation.hpp"
+#include "CDPL/Internal/Permutation.hpp"
 
 
 using namespace CDPL;
@@ -732,7 +732,7 @@ void Chem::CanonicalNumberingGenerator::AtomNode::appendAtomConfigData(Connectio
 	std::size_t num_swaps = 0;
 
 	while (!std::equal(nbr_atoms, nbr_atoms + num_edges, refNbrAtoms) && (++num_perms < (num_edges == 3 ? 6 : 24)))
-		num_swaps += Util::nextPermutation(nbr_atoms, nbr_atoms + num_edges);
+		num_swaps += Internal::nextPermutation(nbr_atoms, nbr_atoms + num_edges);
 
 	if (num_perms >= (num_edges == 3 ? 6 : 24)) {  // a matching permutation should have been found
 		hasConfiguration = false;

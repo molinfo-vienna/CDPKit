@@ -30,7 +30,7 @@
 
 #include "CDPL/Chem/StereoDescriptor.hpp"
 #include "CDPL/Chem/Atom.hpp"
-#include "CDPL/Util/Permutation.hpp"
+#include "CDPL/Internal/Permutation.hpp"
 #include "CDPL/Math/SpecialFunctions.hpp"
 
 
@@ -49,7 +49,7 @@ namespace
 
 		while (!std::equal(ref_atoms, ref_atoms + cmp_seq_len,  perm_atoms) &&
 			   (++num_perms < max_num_perms))
-			num_swaps += Util::nextPermutation(perm_atoms, perm_atoms + num_perm_atoms);
+			num_swaps +=Internal::nextPermutation(perm_atoms, perm_atoms + num_perm_atoms);
 
 		if (num_perms >= max_num_perms)  //	a matching permutation should have been found
 			return 0;

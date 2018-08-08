@@ -41,6 +41,7 @@
 #include "CDPL/ForceField/InteractionFilterFunctionWrappers.hpp"
 #include "CDPL/ForceField/TopologicalAtomDistanceFunctionWrapper.hpp"
 #include "CDPL/ForceField/InteractionType.hpp"
+#include "CDPL/ForceField/GradientVectorTraits.hpp"
 
 #include "CDPL/ForceField/MMFF94PropertyFunctionWrappers.hpp"
 #include "CDPL/ForceField/MMFF94AromaticSSSRSubset.hpp"
@@ -49,7 +50,9 @@
 #include "CDPL/ForceField/MMFF94ChargeCalculator.hpp"
 
 #include "CDPL/ForceField/MMFF94EnergyFunctions.hpp"
+#include "CDPL/ForceField/MMFF94GradientFunctions.hpp"
 #include "CDPL/ForceField/MMFF94EnergyCalculator.hpp"
+#include "CDPL/ForceField/MMFF94GradientCalculator.hpp"
 
 #include "CDPL/ForceField/MMFF94BondStretchingInteraction.hpp"
 #include "CDPL/ForceField/MMFF94AngleBendingInteraction.hpp"

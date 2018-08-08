@@ -28,8 +28,8 @@
  * \brief Provides a function for the generation of sequence permutations.
  */
 
-#ifndef CDPL_UTIL_PERMUTATION_HPP
-#define CDPL_UTIL_PERMUTATION_HPP
+#ifndef CDPL_INTERNAL_PERMUTATION_HPP
+#define CDPL_INTERNAL_PERMUTATION_HPP
 
 #include <algorithm>
 #include <iterator>
@@ -38,13 +38,8 @@
 namespace CDPL
 {
 
-	namespace Util
+	namespace Internal
 	{
-
-		/**
-		 * \addtogroup CDPL_UTIL_ALGORITHMS
-		 * @{
-		 */
 
 		/**
 		 * \brief Permutes the range of elements [\a first, \a last) into the 
@@ -61,10 +56,6 @@ namespace CDPL
 		 */
 		template<typename BidirIter>
 		typename std::iterator_traits<BidirIter>::difference_type nextPermutation(BidirIter first, BidirIter last);
-
-		/**
-		 * @}
-		 */
 	}
 }
 
@@ -72,7 +63,7 @@ namespace CDPL
 // Implementation
 
 template<typename BidirIter>
-typename std::iterator_traits<BidirIter>::difference_type CDPL::Util::nextPermutation(BidirIter first, BidirIter last)
+typename std::iterator_traits<BidirIter>::difference_type CDPL::Internal::nextPermutation(BidirIter first, BidirIter last)
 {
 	if (first == last)
 		return 0;
@@ -107,4 +98,4 @@ typename std::iterator_traits<BidirIter>::difference_type CDPL::Util::nextPermut
 	}
 }
 
-#endif // CDPL_UTIL_PERMUTATION_HPP
+#endif // CDPL_INTERNAL_PERMUTATION_HPP

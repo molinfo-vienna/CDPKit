@@ -448,7 +448,10 @@
 \defgroup CDPL_FORCEFIELD_ENERGY_CALCULATION Interaction Energy Calculation
 \ingroup CDPL_FORCEFIELD
 
-\defgroup CDPL_FORCEFIELD_DATA_STRUCTURES Auxiliary Data Structures
+\defgroup CDPL_FORCEFIELD_GRADIENT_CALCULATION Interaction Energy Gradient Calculation
+\ingroup CDPL_FORCEFIELD
+
+\defgroup CDPL_FORCEFIELD_DATA_STRUCTURES Data Structures
 \ingroup CDPL_FORCEFIELD
 
 \defgroup CDPL_FORCEFIELD_PARAMETER_TABLES Parameter Lookup Tables
@@ -456,6 +459,9 @@
 
 \defgroup CDPL_FORCEFIELD_INTERACTION_DATA Interaction Data
 \ingroup CDPL_FORCEFIELD_DATA_STRUCTURES
+
+\defgroup CDPL_FORCEFIELD_HELPER_CLASSES Helper Classes
+\ingroup CDPL_FORCEFIELD
 
 \defgroup CDPL_FORCEFIELD_PROPERTIES Property Keys
 \ingroup CDPL_FORCEFIELD
@@ -485,6 +491,9 @@
 \ingroup CDPL_FORCEFIELD_FUNCTIONS
 
 \defgroup CDPL_FORCEFIELD_ENERGY_FUNCTIONS Interaction Energy Functions
+\ingroup CDPL_FORCEFIELD_FUNCTIONS
+
+\defgroup CDPL_FORCEFIELD_GRADIENT_FUNCTIONS Interaction Energy Gradient Functions
 \ingroup CDPL_FORCEFIELD_FUNCTIONS
 
 \defgroup CDPL_FORCEFIELD_UTILITY_FUNCTIONS Utility Functions
