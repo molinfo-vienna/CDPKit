@@ -234,9 +234,10 @@ namespace CDPL
 		/**
 		 * \brief Calculates the electrostatic interaction energy \f$ EQ_{ij} \f$ of an atom pair \e i-j.
 		 * 
-		 * \f$ EQ_{ij} = 332.0716 \: \frac{q_i \: q_j}{D \: (R_{ij} + \delta)^n} \f$
+		 * \f$ EQ_{ij} = S \: 332.0716 \: \frac{q_i \: q_j}{D \: (R_{ij} + \delta)^n} \f$
 		 * 
 		 * where:<br>
+		 *  \f$ S \f$ = A scaling factor depending on the topological distance of \e i-j.<br>
 		 *  \f$ q_i \f$ and \f$ q_j \f$ = Partial atomic charges.<br>
 		 *  \f$ D \f$ = Dielectric constant.<br>
 		 *  \f$ R_{ij} \f$ = Interatomic distance (Å).<br>
@@ -251,7 +252,7 @@ namespace CDPL
 		 * \param atom2_pos The position of atom \e j.
 		 * \param atom1_chg The partial atom charge \f$ q_i \f$ of atom \e i.
 		 * \param atom2_chg The partial atom charge \f$ q_j \f$ of atom \e j.
-		 * \param scale_factor A scaling factor for \f$ EQ_{ij} \f$ depending on the topological \e i-j distance.
+		 * \param scale_fact The scaling factor for \f$ S \f$ depending on the topological \e i-j distance.
 		 * \param de_const The dielectric constant \f$ D \f$.
 		 * \param dist_expo The exponent \f$ n \f$.
 		 * \return The calculated electrostatic interaction energy \f$ EQ_{ij} \f$.

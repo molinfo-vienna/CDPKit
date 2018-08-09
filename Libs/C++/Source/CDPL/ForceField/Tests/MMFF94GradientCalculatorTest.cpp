@@ -51,8 +51,8 @@ BOOST_AUTO_TEST_CASE(MMFF94GradientCalculatorTest)
 
 	ForceField::MMFF94InteractionParameterizer parameterizer;
     ForceField::MMFF94InteractionData ia_data;
-    ForceField::MMFF94EnergyCalculator<double> en_calc(ia_data);
-    ForceField::MMFF94GradientCalculator<double> gr_calc(ia_data);
+    ForceField::MMFF94EnergyCalculator<double> en_calc;
+    ForceField::MMFF94GradientCalculator<double> gr_calc;
     Math::Vector3DArray coords;
     Math::Vector3DArray grad;
     Math::Vector3D num_atom_grad;
@@ -75,7 +75,7 @@ BOOST_AUTO_TEST_CASE(MMFF94GradientCalculatorTest)
 	
 			parameterizer.parameterize(mol, ia_data);
 			en_calc.setup(ia_data);
-			gr_calc.setup(ia_data);
+			gr_calc.setup(ia_data, mol.getNumAtoms());
 
 			gr_calc(coords, grad);
 			en_calc(coords);

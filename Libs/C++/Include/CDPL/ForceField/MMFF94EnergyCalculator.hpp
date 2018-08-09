@@ -51,6 +51,8 @@ namespace CDPL
 		{
 
 		public:
+			MMFF94EnergyCalculator();
+
 			MMFF94EnergyCalculator(const MMFF94InteractionData& ia_data);
 
 			void setup(const MMFF94InteractionData& ia_data);
@@ -97,6 +99,13 @@ namespace CDPL
 // \cond UNHIDE_DETAILS
 
 template <typename ValueType>
+CDPL::ForceField::MMFF94EnergyCalculator<ValueType>::MMFF94EnergyCalculator():
+    interactionData(0), totalEnergy(), bondStretchingEnergy(), angleBendingEnergy(),
+    stretchBendEnergy(), outOfPlaneEnergy(), torsionEnergy(), electrostaticEnergy(), 
+    vanDerWaalsEnergy() 
+{}
+
+template <typename ValueType>
 CDPL::ForceField::MMFF94EnergyCalculator<ValueType>::MMFF94EnergyCalculator(const MMFF94InteractionData& ia_data):
     interactionData(&ia_data), totalEnergy(), bondStretchingEnergy(), angleBendingEnergy(),
     stretchBendEnergy(), outOfPlaneEnergy(), torsionEnergy(), electrostaticEnergy(), 
@@ -113,6 +122,18 @@ template <typename ValueType>
 template <typename CoordsArray>
 ValueType CDPL::ForceField::MMFF94EnergyCalculator<ValueType>::operator()(const CoordsArray& coords)
 {
+	if (!interactionData) {
+		totalEnergy = ValueType();
+		bondStretchingEnergy = ValueType();
+		angleBendingEnergy = ValueType();
+		stretchBendEnergy = ValueType();
+		outOfPlaneEnergy = ValueType();
+		torsionEnergy = ValueType();
+		electrostaticEnergy = ValueType();
+		vanDerWaalsEnergy = ValueType();
+
+		return ValueType();
+	}
 
     bondStretchingEnergy = calcMMFF94BondStretchingEnergy<ValueType>(interactionData->getBondStretchingInteractions().getElementsBegin(),
 																	 interactionData->getBondStretchingInteractions().getElementsEnd(), 

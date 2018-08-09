@@ -45,53 +45,369 @@ namespace CDPL
 		 * @{
 		 */
 
+		/**
+		 *\brief Calculates the squared distance \f$ r_{ij}^2 \f$ between two atoms \e i and \e j.
+		 *
+		 * \f$ r_{ij}^2 = |\vec{r_{ij}}|^2 = \vec{r_{ij}} \cdot \vec{r_{ij}} \f$<br>
+		 * <br>
+		 * \f$ \vec{r_{ij}} = \vec{p_j} - \vec{p_i} \f$<br>
+		 *
+		 * where:<br>
+		 * \f$ \vec{p_i} \f$ = The coordinates of atom \e i.<br>
+		 * \f$ \vec{p_j} \f$ = The coordinates of atom \e j.<br>
+		 *
+		 * \param atom1_pos The position \f$ \vec{p_i} \f$ of atom \e i.
+		 * \param atom2_pos The position \f$ \vec{p_j} \f$ of atom \e j.
+		 * \return The calculated squared distance \f$ r_{ij}^2 \f$.
+		 */
 		template <typename ValueType, typename CoordsVec>
 		ValueType calcSquaredDistance(const CoordsVec& atom1_pos, const CoordsVec& atom2_pos);
 
+		/**
+		 * \brief Calculates the distance \f$ r_{ij} \f$ between two atoms \e i and \e j.
+		 *
+		 * \f$ r_{ij} = |\vec{r_{ij}}| = \sqrt{\vec{r_{ij}} \cdot \vec{r_{ij}}} \f$<br>
+		 * <br>
+		 * \f$ \vec{r_{ij}} = \vec{p_j} - \vec{p_i} \f$<br>
+		 *
+		 * where:<br>
+		 * \f$ \vec{p_i} \f$ = The coordinates of atom \e i.<br>
+		 * \f$ \vec{p_j} \f$ = The coordinates of atom \e j.<br>
+		 *
+		 * \param atom1_pos The position \f$ \vec{p_i} \f$ of atom \e i.
+		 * \param atom2_pos The position \f$ \vec{p_j} \f$ of atom \e j.
+		 * \return The calculated distance \f$ r_{ij} \f$.
+		 */
 		template <typename ValueType, typename CoordsVec>
 		ValueType calcDistance(const CoordsVec& atom1_pos, const CoordsVec& atom2_pos);
 
+		/**
+		 * \brief Calculates bond lengths \f$ r_{ij} \f$ and \f$ r_{jk} \f$ and the \e cosine of the bond angle
+		 *        \f$ \vartheta_{ijk} \f$ between the two bonds \e i-j and \e j-k.
+		 *
+		 * \f$ r_{ij} = \sqrt{\vec{r_{ij}} \cdot \vec{r_{ij}}} \f$<br>
+		 * \f$ r_{jk} = \sqrt{\vec{r_{jk}} \cdot \vec{r_{jk}}} \f$<br>
+		 * \f$ \cos(\vartheta_{ijk}) = \frac{\vec{r_{ij}} \cdot \vec{r_{jk}}}{r_{ij} \: r_{jk}} \f$<br>
+		 * <br>
+		 * \f$ \vec{r_{ij}} = \vec{p_j} - \vec{p_i} \f$<br>
+		 * \f$ \vec{r_{jk}} = \vec{p_k} - \vec{p_j} \f$<br>
+		 *
+		 * where:<br>
+		 * \f$ \vec{p_i} \f$ = The coordinates of atom \e i.<br>
+		 * \f$ \vec{p_j} \f$ = The coordinates of atom \e j.<br>
+		 * \f$ \vec{p_k} \f$ = The coordinates of atom \e k.<br>
+		 *
+		 * \param term_atom1_pos The position \f$ \vec{p_i} \f$ of the terminal atom \e i.
+		 * \param ctr_atom_pos The position \f$ \vec{p_j} \f$ of the central atom \e j.
+		 * \param term_atom2_pos The position \f$ \vec{p_k} \f$ of the terminal atom \e k.
+		 * \param bond_length1 Output variable for the bond length \f$ r_{ij} \f$.
+		 * \param bond_length2 Output variable for the bond length \f$ r_{jk} \f$.
+		 * \return The calculated cosine of the bond angle \f$ \vartheta_{ijk} \f$.
+		 */
 		template <typename ValueType, typename CoordsVec>
 		ValueType calcBondLengthsAndAngleCos(const CoordsVec& term_atom1_pos, const CoordsVec& ctr_atom_pos, const CoordsVec& term_atom2_pos, 
 											 ValueType& bond_length1, ValueType& bond_length2);
 
+		/**
+		 * \brief Calculates bond lengths \f$ r_{ij} \f$ and \f$ r_{jk} \f$ and the bond angle
+		 *        \f$ \vartheta_{ijk} \f$ between the two bonds \e i-j and \e j-k.
+		 *
+		 * \f$ r_{ij} = \sqrt{\vec{r_{ij}} \cdot \vec{r_{ij}}} \f$<br>
+		 * \f$ r_{jk} = \sqrt{\vec{r_{jk}} \cdot \vec{r_{jk}}} \f$<br>
+		 * \f$ \vartheta_{ijk} = \arccos(\frac{\vec{r_{ij}} \cdot \vec{r_{jk}}}{r_{ij} \: r_{jk}}) \f$<br>
+		 * <br>
+		 * \f$ \vec{r_{ij}} = \vec{p_j} - \vec{p_i} \f$<br>
+		 * \f$ \vec{r_{jk}} = \vec{p_k} - \vec{p_j} \f$<br>
+		 *
+		 * where:<br>
+		 * \f$ \vec{p_i} \f$ = The coordinates of atom \e i.<br>
+		 * \f$ \vec{p_j} \f$ = The coordinates of atom \e j.<br>
+		 * \f$ \vec{p_k} \f$ = The coordinates of atom \e k.<br>
+		 *
+		 * \param term_atom1_pos The position \f$ \vec{p_i} \f$ of the terminal atom \e i.
+		 * \param ctr_atom_pos The position \f$ \vec{p_j} \f$ of the central atom \e j.
+		 * \param term_atom2_pos The position \f$ \vec{p_k} \f$ of the terminal atom \e k.
+		 * \param bond_length1 Output variable for the bond length \f$ r_{ij} \f$.
+		 * \param bond_length2 Output variable for the bond length \f$ r_{jk} \f$.
+		 * \return The calculated bond angle \f$ \vartheta_{ijk} \f$.
+		 */
 		template <typename ValueType, typename CoordsVec>
 		ValueType calcBondLengthsAndAngle(const CoordsVec& term_atom1_pos, const CoordsVec& ctr_atom_pos, const CoordsVec& term_atom2_pos, 
 										  ValueType& bond_length1, ValueType& bond_length2);
-
+	
+		/**
+		 * \brief Calculates the \e cosine of the bond angle \f$ \vartheta_{ijk} \f$ between the two bonds \e i-j and \e j-k.
+		 *
+		 * \f$ \cos(\vartheta_{ijk}) = \frac{\vec{r_{ij}} \cdot \vec{r_{jk}}}{r_{ij} \: r_{jk}} \f$<br>
+		 * <br>
+		 * \f$ \vec{r_{ij}} = \vec{p_j} - \vec{p_i} \f$<br>
+		 * \f$ \vec{r_{jk}} = \vec{p_k} - \vec{p_j} \f$<br>
+		 * \f$ r_{ij} = \sqrt{\vec{r_{ij}} \cdot \vec{r_{ij}}} \f$<br>
+		 * \f$ r_{jk} = \sqrt{\vec{r_{jk}} \cdot \vec{r_{jk}}} \f$<br>
+		 *
+		 * where:<br>
+		 * \f$ \vec{p_i} \f$ = The coordinates of atom \e i.<br>
+		 * \f$ \vec{p_j} \f$ = The coordinates of atom \e j.<br>
+		 * \f$ \vec{p_k} \f$ = The coordinates of atom \e k.<br>
+		 *
+		 * \param term_atom1_pos The position \f$ \vec{p_i} \f$ of the terminal atom \e i.
+		 * \param ctr_atom_pos The position \f$ \vec{p_j} \f$ of the central atom \e j.
+		 * \param term_atom2_pos The position \f$ \vec{p_k} \f$ of the terminal atom \e k.
+		 * \return The calculated cosine of the bond angle \f$ \vartheta_{ijk} \f$.
+		 */
 		template <typename ValueType, typename CoordsVec>
 		ValueType calcBondAngleCos(const CoordsVec& term_atom1_pos, const CoordsVec& ctr_atom_pos, const CoordsVec& term_atom2_pos);
 
+		/**
+		 * \brief Calculates the bond angle \f$ \vartheta_{ijk} \f$ between the two bonds \e i-j and \e j-k.
+		 *
+		 * \f$ \vartheta_{ijk} = \arccos(\frac{\vec{r_{ij}} \cdot \vec{r_{jk}}}{r_{ij} \: r_{jk}}) \f$<br>
+		 * <br>
+		 * \f$ \vec{r_{ij}} = \vec{p_j} - \vec{p_i} \f$<br>
+		 * \f$ \vec{r_{jk}} = \vec{p_k} - \vec{p_j} \f$<br>
+		 * \f$ r_{ij} = \sqrt{\vec{r_{ij}} \cdot \vec{r_{ij}}} \f$<br>
+		 * \f$ r_{jk} = \sqrt{\vec{r_{jk}} \cdot \vec{r_{jk}}} \f$<br>
+		 *
+		 * where:<br>
+		 * \f$ \vec{p_i} \f$ = The coordinates of atom \e i.<br>
+		 * \f$ \vec{p_j} \f$ = The coordinates of atom \e j.<br>
+		 * \f$ \vec{p_k} \f$ = The coordinates of atom \e k.<br>
+		 *
+		 * \param term_atom1_pos The position \f$ \vec{p_i} \f$ of the terminal atom \e i.
+		 * \param ctr_atom_pos The position \f$ \vec{p_j} \f$ of the central atom \e j.
+		 * \param term_atom2_pos The position \f$ \vec{p_k} \f$ of the terminal atom \e k.
+		 * \return The calculated bond angle \f$ \vartheta_{ijk} \f$.
+		 */
 		template <typename ValueType, typename CoordsVec>
 		ValueType calcBondAngle(const CoordsVec& term_atom1_pos, const CoordsVec& ctr_atom_pos, const CoordsVec& term_atom2_pos);
 	
-		template <typename ValueType, typename CoordsVec>
+		/**
+		 * \brief Calculates the out-of-plane angle \f$ \chi_{ijk;l} \f$ between the bond \e j-l and the plane defined by the atoms \e i-j-k.
+		 *
+		 * \f$ \chi_{ijk;l} = 0.5 \: \pi - \arccos(\frac{\vec{n_{ijk}} \cdot \vec{r_{jl}}}{|\vec{n_{ijk}}| \: r_{jl}}) \f$<br>
+		 * <br>
+		 * \f$ \vec{r_{ji}} = \vec{p_i} - \vec{p_j} \f$<br>
+		 * \f$ \vec{r_{jk}} = \vec{p_k} - \vec{p_j} \f$<br>
+		 * \f$ \vec{r_{jl}} = \vec{p_l} - \vec{p_j} \f$<br>
+		 * \f$ \vec{n_{ijk}} = \vec{r_{ji}} \times \vec{r_{jk}} \f$<br>
+		 * \f$ r_{ji} = \sqrt{\vec{r_{ji}} \cdot \vec{r_{ji}}} \f$<br>
+		 * \f$ r_{jk} = \sqrt{\vec{r_{jk}} \cdot \vec{r_{jk}}} \f$<br>
+		 * \f$ r_{jl} = \sqrt{\vec{r_{jl}} \cdot \vec{r_{jl}}} \f$<br>
+		 *
+		 * where:<br>
+		 * \f$ \vec{p_i} \f$ = The coordinates of atom \e i.<br>
+		 * \f$ \vec{p_j} \f$ = The coordinates of atom \e j.<br>
+		 * \f$ \vec{p_k} \f$ = The coordinates of atom \e k.<br>
+		 * \f$ \vec{p_l} \f$ = The coordinates of atom \e l.<br>
+		 *
+		 * \param term_atom1_pos The position \f$ \vec{p_i} \f$ of the terminal atom \e i.
+		 * \param ctr_atom_pos The position \f$ \vec{p_j} \f$ of the central atom \e j.
+		 * \param term_atom2_pos The position \f$ \vec{p_k} \f$ of the terminal atom \e k.
+		 * \param oop_atom_pos The position \f$ \vec{p_l} \f$ of the out-of-plane atom \e l.
+		 * \return The calculated out-of-plane angle \f$ \chi_{ijk;l} \f$.
+		 */
+		template <typename ValueType, typename CoordsVec>	
 		ValueType calcOutOfPlaneAngle(const CoordsVec& term_atom1_pos, const CoordsVec& ctr_atom_pos, 
 									  const CoordsVec& term_atom2_pos, const CoordsVec& oop_atom_pos);
 
+		/**
+		 * \brief Calculates the \e cosine of the dihedral angle \f$ \Phi_{ijkl} \f$ between the planes defined by the atom triplets \e i-j-k and \e j-k-l.
+		 *
+		 * \f$ \cos(\Phi_{ijkl}) = \frac{\vec{n_{ijk}} \cdot \vec{n_{jkl}}}{|\vec{n_{ijk}}| \: |\vec{n_{jkl}}|} \f$<br>
+		 * <br>
+		 * \f$ \vec{r_{ji}} = \vec{p_i} - \vec{p_j} \f$<br>
+		 * \f$ \vec{r_{jk}} = \vec{p_k} - \vec{p_j} \f$<br>
+		 * \f$ \vec{r_{lk}} = \vec{p_k} - \vec{p_l} \f$<br>
+		 * \f$ \vec{n_{ijk}} = \vec{r_{ji}} \times \vec{r_{jk}} \f$<br>
+		 * \f$ \vec{n_{jkl}} = \vec{r_{jk}} \times \vec{r_{lk}} \f$<br>
+		 *
+		 * where:<br>
+		 * \f$ \vec{p_i} \f$ = The coordinates of atom \e i.<br>
+		 * \f$ \vec{p_j} \f$ = The coordinates of atom \e j.<br>
+		 * \f$ \vec{p_k} \f$ = The coordinates of atom \e k.<br>
+		 * \f$ \vec{p_l} \f$ = The coordinates of atom \e l.<br>
+		 *
+		 * \param term_atom1_pos The position \f$ \vec{p_i} \f$ of the terminal atom \e i.
+		 * \param ctr_atom1_pos The position \f$ \vec{p_j} \f$ of the central atom \e j.
+		 * \param ctr_atom2_pos The position \f$ \vec{p_k} \f$ of the central atom \e k.
+		 * \param term_atom2_pos The position \f$ \vec{p_l} \f$ of the terminal atom \e l.
+		 * \return The calculated cosine of the dihedral angle \f$ \Phi_{ijkl} \f$.
+		 */
 		template <typename ValueType, typename CoordsVec>
 		ValueType calcDihedralAngleCos(const CoordsVec& term_atom1_pos, const CoordsVec& ctr_atom1_pos, 
 									   const CoordsVec& ctr_atom2_pos, const CoordsVec& term_atom2_pos);
-
-		template <typename ValueType, typename CoordsVec, typename GradVec>
-		ValueType calcDistanceGradient(const CoordsVec& atom1_pos, const CoordsVec& atom2_pos,
-									   GradVec& atom1_grad, GradVec& atom2_grad);
-
-		template <typename ValueType, typename CoordsVec, typename GradVec>
-		ValueType calcBondAngleCosGradient(const CoordsVec& term_atom1_pos, const CoordsVec& ctr_atom_pos, const CoordsVec& term_atom2_pos,
-										   GradVec& term_atom1_grad, GradVec& ctr_atom_grad, GradVec& term_atom2_grad);
 	
+		/**
+		 * \brief Calculates the partial derivatives \f$ \frac{\partial r_{ij}}{\partial \vec{p_x}} \f$ of the 
+		 *        distance \f$ r_{ij} \f$ between two atoms \e i and \e j.
+		 *
+		 * \f$ \frac{\partial r_{ij}}{\partial \vec{p_i}} = \frac{-\vec{r_{ij}}}{r_{ij}} \f$<br>
+		 * \f$ \frac{\partial r_{ij}}{\partial \vec{p_j}} = \frac{\vec{r_{ij}}}{r_{ij}} \f$<br>
+		 * <br>
+		 * \f$ \vec{r_{ij}} = \vec{p_j} - \vec{p_i} \f$<br>
+		 * \f$ r_{ij} = \sqrt{\vec{r_{ij}} \cdot \vec{r_{ij}}} \f$<br>
+		 *
+		 * where:<br>
+		 * \f$ \vec{p_i} \f$ = The coordinates of atom \e i.<br>
+		 * \f$ \vec{p_j} \f$ = The coordinates of atom \e j.<br>
+		 *
+		 * \param atom1_pos The position \f$ \vec{p_i} \f$ of atom \e i.
+		 * \param atom2_pos The position \f$ \vec{p_j} \f$ of atom \e j.
+		 * \param atom1_deriv Output variable for the calculated partial derivative \f$ \frac{\partial r_{ij}}{\partial \vec{p_i}} \f$ 
+		 *                    at the given atom positions.
+		 * \param atom2_deriv Output variable for the calculated partial derivative \f$ \frac{\partial r_{ij}}{\partial \vec{p_j}} \f$ 
+		 *                    at the given atom positions.
+		 * \return The calculated distance \f$ r_{ij} \f$.
+		 */
 		template <typename ValueType, typename CoordsVec, typename GradVec>
-		ValueType calcDihedralAngleCosGradient(const CoordsVec& term_atom1_pos, const CoordsVec& ctr_atom1_pos, 
-											   const CoordsVec& ctr_atom2_pos, const CoordsVec& term_atom2_pos,
-											   GradVec& term_atom1_grad, GradVec& ctr_atom1_grad, 
-											   GradVec& ctr_atom2_grad, GradVec& term_atom2_grad);
+		ValueType calcDistanceDerivatives(const CoordsVec& atom1_pos, const CoordsVec& atom2_pos,
+										  GradVec& atom1_deriv, GradVec& atom2_deriv);
 
+		/**
+		 * \brief Calculates the partial derivatives \f$ \frac{\partial \cos(\vartheta_{ijk})}{\partial \vec{p_x}} \f$ of the 
+		 *        of the \e cosine of the angle \f$ \vartheta_{ijk} \f$ between the bonds \e i-j and \e j-k.
+		 *
+		 * \f$ \frac{\partial \cos(\vartheta_{ijk})}{\partial \vec{p_i}} = \frac{\vec{r_{jk}}}{r_{ji} \: r_{jk}} - \frac{\vec{r_{ji}} \: (\vec{r_{ji}} \cdot \vec{r_{jk}})}{r_{ji}^3 \: r_{jk}} \f$<br>
+		 * \f$ \frac{\partial \cos(\vartheta_{ijk})}{\partial \vec{p_k}} = \frac{\vec{r_{ji}}}{r_{ji} \: r_{jk}} - \frac{\vec{r_{jk}} \: (\vec{r_{ji}} \cdot \vec{r_{jk}})}{r_{ji} \: r_{jk}^3} \f$<br>
+		 * \f$ \frac{\partial \cos(\vartheta_{ijk})}{\partial \vec{p_j}} = -(\frac{\partial \cos(\vartheta_{ijk})}{\partial \vec{p_i}} + \frac{\partial \cos(\vartheta_{ijk})}{\partial \vec{p_k}}) \f$<br>
+		 * <br>
+		 * \f$ \vec{r_{ji}} = \vec{p_i} - \vec{p_j} \f$<br>
+		 * \f$ \vec{r_{jk}} = \vec{p_k} - \vec{p_j} \f$<br>
+		 * \f$ r_{ji} = \sqrt{\vec{r_{ji}} \cdot \vec{r_{ji}}} \f$<br>
+		 * \f$ r_{jk} = \sqrt{\vec{r_{jk}} \cdot \vec{r_{jk}}} \f$<br>
+		 *
+		 * where:<br>
+		 * \f$ \vec{p_i} \f$ = The coordinates of atom \e i.<br>
+		 * \f$ \vec{p_j} \f$ = The coordinates of atom \e j.<br>
+		 * \f$ \vec{p_k} \f$ = The coordinates of atom \e k.<br>
+		 *
+		 * \param term_atom1_pos The position \f$ \vec{p_i} \f$ of atom \e i.
+		 * \param ctr_atom_pos The position \f$ \vec{p_j} \f$ of atom \e j.
+		 * \param term_atom2_pos The position \f$ \vec{p_k} \f$ of atom \e k.
+		 * \param term_atom1_deriv Output variable for the calculated partial derivative \f$ \frac{\partial \cos(\vartheta_{ijk})}{\partial \vec{p_i}} \f$ 
+		 *                         at the given atom positions.
+		 * \param ctr_atom_deriv Output variable for the calculated partial derivative \f$ \frac{\partial \cos(\vartheta_{ijk})}{\partial \vec{p_j}} \f$ 
+		 *                       at the given atom positions.
+		 * \param term_atom2_deriv Output variable for the calculated partial derivative \f$ \frac{\partial \cos(\vartheta_{ijk})}{\partial \vec{p_k}} \f$ 
+		 *                         at the given atom positions.
+		 * \return The calculated cosine of the bond angle \f$ \vartheta_{ijk} \f$.
+		 */
 		template <typename ValueType, typename CoordsVec, typename GradVec>
-		ValueType calcOutOfPlaneAngleCosGradient(const CoordsVec& term_atom1_pos, const CoordsVec& ctr_atom_pos, 
-												 const CoordsVec& term_atom2_pos, const CoordsVec& oop_atom_pos,
-												 GradVec& term_atom1_grad, GradVec& ctr_atom_grad, 
-												 GradVec& term_atom2_grad, GradVec& oop_atom_grad);
+		ValueType calcBondAngleCosDerivatives(const CoordsVec& term_atom1_pos, const CoordsVec& ctr_atom_pos, const CoordsVec& term_atom2_pos,
+											  GradVec& term_atom1_deriv, GradVec& ctr_atom_deriv, GradVec& term_atom2_deriv);
+
+		/**
+		 * \brief Calculates the partial derivatives \f$ \frac{\partial \cos(\Phi_{ijkl})}{\partial \vec{p_x}} \f$ of the \e cosine
+		 *        of the angle \f$ \Phi_{ijkl} \f$ between the planes defined by the atom triplets \e i-j-k and \e j-k-l.
+		 *
+		 * \f$ \frac{\partial \cos(\Phi_{ijkl})}{\partial \vec{p_i}} = \vec{r_{jk}} \times \vec{a} \f$<br>  
+		 * \f$ \frac{\partial \cos(\Phi_{ijkl})}{\partial \vec{p_j}} = \vec{r_{ki}} \times \vec{a} - \vec{r_{lk}} \times \vec{b} \f$<br>
+		 * \f$ \frac{\partial \cos(\Phi_{ijkl})}{\partial \vec{p_l}} = \vec{r_{jk}} \times \vec{b} \f$<br>
+		 * \f$ \frac{\partial \cos(\Phi_{ijkl})}{\partial \vec{p_k}} = -(\frac{\partial \cos(\Phi_{ijkl})}{\partial \vec{p_i}} +
+		 *                                                              \frac{\partial \cos(\Phi_{ijkl})}{\partial \vec{p_j}} +
+		 *                                                              \frac{\partial \cos(\Phi_{ijkl})}{\partial \vec{p_l}} \f$<br>
+		 * <br>
+		 * \f$ \vec{r_{ji}} = \vec{p_i} - \vec{p_j} \f$<br>
+		 * \f$ \vec{r_{jk}} = \vec{p_k} - \vec{p_j} \f$<br>
+		 * \f$ \vec{r_{lk}} = \vec{p_k} - \vec{p_l} \f$<br>
+		 * \f$ \vec{r_{ki}} = \vec{p_i} - \vec{p_k} \f$<br>
+		 * \f$ \vec{n_{ijk}} = \vec{r_{ji}} \times \vec{r_{jk}} \f$<br>
+		 * \f$ \vec{n_{jkl}} = \vec{r_{jk}} \times \vec{r_{lk}} \f$<br>
+		 * \f$ \vec{a} = \frac{\frac{\vec{n_{jkl}}}{|\vec{n_{jkl}}|} - \cos(\Phi_{ijkl}) \: \frac{\vec{n_{ijk}}}{|\vec{n_{ijk}}|}}{|\vec{n_{ijk}}|} \f$<br> 
+		 * \f$ \vec{b} = \frac{\frac{\vec{n_{ijk}}}{|\vec{n_{ijk}}|} - \cos(\Phi_{ijkl}) \: \frac{\vec{n_{jkl}}}{|\vec{n_{jkl}}|}}{|\vec{n_{jkl}}|} \f$<br>
+		 *
+		 * where:<br>
+		 * \f$ \vec{p_i} \f$ = The coordinates of atom \e i.<br>
+		 * \f$ \vec{p_j} \f$ = The coordinates of atom \e j.<br>
+		 * \f$ \vec{p_k} \f$ = The coordinates of atom \e k.<br>
+		 * \f$ \vec{p_l} \f$ = The coordinates of atom \e l.<br>
+		 *
+		 * \param term_atom1_pos The position \f$ \vec{p_i} \f$ of the terminal atom \e i.
+		 * \param ctr_atom1_pos The position \f$ \vec{p_j} \f$ of the central atom \e j.
+		 * \param ctr_atom2_pos The position \f$ \vec{p_k} \f$ of the central atom \e k.
+		 * \param term_atom2_pos The position \f$ \vec{p_l} \f$ of the terminal atom \e l.
+		 * \param term_atom1_deriv Output variable for the calculated partial derivative \f$ \frac{\partial \cos(\Phi_{ijkl})}{\partial \vec{p_i}} \f$ 
+		 *                         at the given atom positions.
+		 * \param ctr_atom1_deriv Output variable for the calculated partial derivative \f$ \frac{\partial \cos(\Phi_{ijkl})}{\partial \vec{p_j}} \f$ 
+		 *                       at the given atom positions.
+		 * \param ctr_atom2_deriv Output variable for the calculated partial derivative \f$ \frac{\partial \cos(\Phi_{ijkl})}{\partial \vec{p_k}} \f$ 
+		 *                       at the given atom positions.
+		 * \param term_atom2_deriv Output variable for the calculated partial derivative \f$ \frac{\partial \cos(\Phi_{ijkl})}{\partial \vec{p_l}} \f$ 
+		 *                         at the given atom positions.
+		 * \return The calculated cosine of the dihedral angle \f$ \Phi_{ijkl} \f$.
+		 */
+		template <typename ValueType, typename CoordsVec, typename GradVec>
+		ValueType calcDihedralAngleCosDerivatives(const CoordsVec& term_atom1_pos, const CoordsVec& ctr_atom1_pos, 
+												  const CoordsVec& ctr_atom2_pos, const CoordsVec& term_atom2_pos,
+												  GradVec& term_atom1_deriv, GradVec& ctr_atom1_deriv, 
+												  GradVec& ctr_atom2_deriv, GradVec& term_atom2_deriv);
+
+		/**
+		 * \brief Calculates the partial derivatives \f$ \frac{\partial \cos(\omega_{ijk;l})}{\partial \vec{p_x}} \f$ of the \e cosine
+		 *        of the angle \f$ \omega_{ijk;l} \f$ between the bond \e j-l and the normal of the plane defined by the atoms \e i-j-k.
+		 *
+		 * 
+		 * \f$ \frac{\partial \cos(\omega_{ijk;l})}{\partial \vec{p_i}} = \frac{\vec{r_{jk}} \times \vec{r_{jl}}}{|\vec{n_{ijk}}| \: r_{jl}} -
+		 *                                                                \cos(\omega_{ijk;l}) \: \frac{M_1 \cdot \vec{n_{ijk}}}{|\vec{n_{ijk}}|^2} \f$<br>
+		 * \f$ \frac{\partial \cos(\omega_{ijk;l})}{\partial \vec{p_k}} = \frac{\vec{r_{jl}} \times \vec{r_{ji}}}{|\vec{n_{ijk}}| \: r_{jl}} - 
+		 *                                                                \cos(\omega_{ijk;l}) \: \frac{M_2 \cdot \vec{n_{ijk}}}{|\vec{n_{ijk}}|^2} \f$<br>
+		 * \f$ \frac{\partial \cos(\omega_{ijk;l})}{\partial \vec{p_l}} = \frac{-1}{|\vec{n_{ijk}}| \: r_{jl}} \: (\frac{\vec{r_{jl}} (\vec{n_{ijk}} \cdot \vec{r_{jl}})}{r_{jl}^2} +
+		 *                                                                \vec{r_{kl}} \times \vec{r_{il}} + \vec{r_{jl}} \times \vec{r_{ji}} + 
+		 *                                                                \vec{r_{jk}} \times \vec{r_{jl}}) \f$<br>
+		 * \f$ \frac{\partial \cos(\omega_{ijk;l})}{\partial \vec{p_j}} = -(\frac{\partial \cos(\omega_{ijk;l})}{\partial \vec{p_i}} + 
+		 *                                                                 \frac{\partial \cos(\omega_{ijk;l})}{\partial \vec{p_k}} +
+		 *                                                                 \frac{\partial \cos(\omega_{ijk;l})}{\partial \vec{p_l}}) \f$<br>
+		 * <br>
+		 * \f$ M_1 = 
+		 *   \left|
+		 *      \begin{array}{ccc}
+		 *       0 & -\vec{r_{jk}}.z & \vec{r_{jk}}.y \\
+		 *       \vec{r_{jk}}.z & 0 & -\vec{r_{jk}}.x \\
+		 *       -\vec{r_{jk}}.y & \vec{r_{jk}}.x & 0
+		 *      \end{array}
+		 *   \right| \f$<br>
+		 * \f$ M_2 = 
+		 *   \left| 
+		 *      \begin{array}{ccc}
+		 *       0 & \vec{r_{ji}}.z & -\vec{r_{ji}}.y \\
+		 *       -\vec{r_{ji}}.z & 0 & \vec{r_{ji}}.x \\
+		 *        \vec{r_{ji}}.y & -\vec{r_{ji}}.x & 0
+		 *      \end{array}
+		 *   \right| \f$<br>
+		 * \f$ \vec{r_{ji}} = \vec{p_i} - \vec{p_j} \f$<br>
+		 * \f$ \vec{r_{jk}} = \vec{p_k} - \vec{p_j} \f$<br>
+		 * \f$ \vec{r_{jl}} = \vec{p_l} - \vec{p_j} \f$<br>
+		 * \f$ \vec{r_{kl}} = \vec{p_l} - \vec{p_k} \f$<br>
+		 * \f$ \vec{r_{il}} = \vec{p_l} - \vec{p_i} \f$<br>
+		 * \f$ \vec{n_{ijk}} = \vec{r_{ji}} \times \vec{r_{jk}} \f$<br>
+		 * \f$ r_{jl} = \sqrt{\vec{r_{jl}} \cdot \vec{r_{jl}}} \f$<br>
+		 * \f$ \cos(\omega_{ijk;l}) = \frac{\vec{n_{ijk}} \cdot \vec{r_{jl}}}{|\vec{n_{ijk}}| \: r_{jl}} \f$<br>
+		 *
+		 * where:<br>
+		 * \f$ \vec{p_i} \f$ = The coordinates of atom \e i.<br>
+		 * \f$ \vec{p_j} \f$ = The coordinates of atom \e j.<br>
+		 * \f$ \vec{p_k} \f$ = The coordinates of atom \e k.<br>
+		 * \f$ \vec{p_l} \f$ = The coordinates of atom \e l.<br>
+		 *
+		 * \param term_atom1_pos The position \f$ \vec{p_i} \f$ of the terminal atom \e i.
+		 * \param ctr_atom_pos The position \f$ \vec{p_j} \f$ of the central atom \e j.
+		 * \param term_atom2_pos The position \f$ \vec{p_k} \f$ of the terminal atom \e k.
+		 * \param oop_atom_pos The position \f$ \vec{p_l} \f$ of the out-of-plane atom \e l.
+		 * \param term_atom1_deriv Output variable for the calculated partial derivative \f$ \frac{\partial \cos(\omega_{ijkl})}{\partial \vec{p_i}} \f$ 
+		 *                         at the given atom positions.
+		 * \param ctr_atom_deriv Output variable for the calculated partial derivative \f$ \frac{\partial \cos(\omega_{ijkl})}{\partial \vec{p_j}} \f$ 
+		 *                       at the given atom positions.
+		 * \param term_atom2_deriv Output variable for the calculated partial derivative \f$ \frac{\partial \cos(\omega_{ijkl})}{\partial \vec{p_k}} \f$ 
+		 *                       at the given atom positions.
+		 * \param oop_atom_deriv Output variable for the calculated partial derivative \f$ \frac{\partial \cos(\omega_{ijkl})}{\partial \vec{p_l}} \f$ 
+		 *                         at the given atom positions.
+		 * \return The calculated cosine of the angle \f$ \omega_{ijk;l} \f$.
+		 */
+		template <typename ValueType, typename CoordsVec, typename GradVec>
+		ValueType calcOutOfPlaneAngleCosDerivatives(const CoordsVec& term_atom1_pos, const CoordsVec& ctr_atom_pos, 
+													const CoordsVec& term_atom2_pos, const CoordsVec& oop_atom_pos,
+													GradVec& term_atom1_deriv, GradVec& ctr_atom_deriv, 
+													GradVec& term_atom2_deriv, GradVec& oop_atom_deriv);
 		/**
 		 * @}
 		 */
@@ -319,22 +635,22 @@ ValueType CDPL::ForceField::calcDihedralAngleCos(const CoordsVec& term_atom1_pos
 }
 
 template <typename ValueType, typename CoordsVec, typename GradVec>
-ValueType CDPL::ForceField::calcDistanceGradient(const CoordsVec& atom1_pos, const CoordsVec& atom2_pos,
-												  GradVec& atom1_grad, GradVec& atom2_grad)
+ValueType CDPL::ForceField::calcDistanceDerivatives(const CoordsVec& atom1_pos, const CoordsVec& atom2_pos,
+													GradVec& atom1_deriv, GradVec& atom2_deriv)
 {
-	Detail::subVectors(atom2_pos, atom1_pos, atom1_grad);
+	Detail::subVectors(atom1_pos, atom2_pos, atom1_deriv);
 
-	ValueType dist = std::sqrt(Detail::calcDotProduct<ValueType>(atom1_grad, atom1_grad));
+	ValueType dist = std::sqrt(Detail::calcDotProduct<ValueType>(atom1_deriv, atom1_deriv));
 
-	Detail::invScaleVector(atom1_grad, dist);
-	Detail::negateCopyVector(atom1_grad, atom2_grad);
+	Detail::invScaleVector(atom1_deriv, -dist);
+	Detail::negateCopyVector(atom1_deriv, atom2_deriv);
 
     return dist;
 }
 	
 template <typename ValueType, typename CoordsVec, typename GradVec>
-ValueType CDPL::ForceField::calcBondAngleCosGradient(const CoordsVec& term_atom1_pos, const CoordsVec& ctr_atom_pos, const CoordsVec& term_atom2_pos,
-													 GradVec& term_atom1_grad, GradVec& ctr_atom_grad, GradVec& term_atom2_grad)
+ValueType CDPL::ForceField::calcBondAngleCosDerivatives(const CoordsVec& term_atom1_pos, const CoordsVec& ctr_atom_pos, const CoordsVec& term_atom2_pos,
+														GradVec& term_atom1_deriv, GradVec& ctr_atom_deriv, GradVec& term_atom2_deriv)
 {
 	ValueType bond_vec1[3];
     ValueType bond_vec2[3];
@@ -348,25 +664,25 @@ ValueType CDPL::ForceField::calcBondAngleCosGradient(const CoordsVec& term_atom1
 	ValueType dot_prod = Detail::calcDotProduct<ValueType>(bond_vec1, bond_vec2);
 	ValueType bl_prod = bond_length1 * bond_length2;
 
-	Detail::invScaleCopyVector(bond_vec2, bl_prod, term_atom1_grad);
-	Detail::scaleCopyVector(bond_vec1, dot_prod / (bond_length1 * bond_length1 * bl_prod), ctr_atom_grad);
-	Detail::subVectors(ctr_atom_grad, term_atom1_grad, term_atom1_grad);
+	Detail::invScaleCopyVector(bond_vec2, bl_prod, term_atom1_deriv);
+	Detail::scaleCopyVector(bond_vec1, dot_prod / (bond_length1 * bond_length1 * bl_prod), ctr_atom_deriv);
+	Detail::subVectors(ctr_atom_deriv, term_atom1_deriv, term_atom1_deriv);
 
-	Detail::invScaleCopyVector(bond_vec1, bl_prod, term_atom2_grad);
-	Detail::scaleCopyVector(bond_vec2, dot_prod / (bond_length2 * bond_length2 * bl_prod), ctr_atom_grad);
-	Detail::subVectors(ctr_atom_grad, term_atom2_grad, term_atom2_grad);
+	Detail::invScaleCopyVector(bond_vec1, bl_prod, term_atom2_deriv);
+	Detail::scaleCopyVector(bond_vec2, dot_prod / (bond_length2 * bond_length2 * bl_prod), ctr_atom_deriv);
+	Detail::subVectors(ctr_atom_deriv, term_atom2_deriv, term_atom2_deriv);
 
-	Detail::negateCopyVector(term_atom1_grad, ctr_atom_grad);
-	Detail::subVectors(term_atom2_grad, ctr_atom_grad, ctr_atom_grad);
+	Detail::negateCopyVector(term_atom1_deriv, ctr_atom_deriv);
+	Detail::subVectors(term_atom2_deriv, ctr_atom_deriv, ctr_atom_deriv);
 
 	return Detail::clampCosine(dot_prod / bl_prod);
 }
 
 template <typename ValueType, typename CoordsVec, typename GradVec>
-ValueType CDPL::ForceField::calcDihedralAngleCosGradient(const CoordsVec& term_atom1_pos, const CoordsVec& ctr_atom1_pos, 
-														 const CoordsVec& ctr_atom2_pos, const CoordsVec& term_atom2_pos,
-														 GradVec& term_atom1_grad, GradVec& ctr_atom1_grad, 
-														 GradVec& ctr_atom2_grad, GradVec& term_atom2_grad)
+ValueType CDPL::ForceField::calcDihedralAngleCosDerivatives(const CoordsVec& term_atom1_pos, const CoordsVec& ctr_atom1_pos, 
+															const CoordsVec& ctr_atom2_pos, const CoordsVec& term_atom2_pos,
+															GradVec& term_atom1_deriv, GradVec& ctr_atom1_deriv, 
+															GradVec& ctr_atom2_deriv, GradVec& term_atom2_deriv)
 {
 	ValueType term_bond1_vec[3];
     ValueType ctr_bond_vec[3];
@@ -402,26 +718,26 @@ ValueType CDPL::ForceField::calcDihedralAngleCosGradient(const CoordsVec& term_a
 	Detail::addVectors(b, plane_normal1, b);
 	Detail::invScaleVector(b, pn2_len);
 
-	Detail::calcCrossProduct(ctr_bond_vec, a, term_atom1_grad);
-	Detail::calcCrossProduct(ctr_bond_vec, b, term_atom2_grad);
+	Detail::calcCrossProduct(ctr_bond_vec, a, term_atom1_deriv);
+	Detail::calcCrossProduct(ctr_bond_vec, b, term_atom2_deriv);
 
-	Detail::calcCrossProduct(term1_ctr2_vec, a, ctr_atom1_grad);
-	Detail::calcCrossProduct(term_bond2_vec, b, ctr_atom2_grad);
+	Detail::calcCrossProduct(term1_ctr2_vec, a, ctr_atom1_deriv);
+	Detail::calcCrossProduct(term_bond2_vec, b, ctr_atom2_deriv);
 
-	Detail::subVectors(ctr_atom2_grad, ctr_atom1_grad, ctr_atom1_grad);
+	Detail::subVectors(ctr_atom2_deriv, ctr_atom1_deriv, ctr_atom1_deriv);
 
-	Detail::addVectors(term_atom1_grad, ctr_atom1_grad, ctr_atom2_grad);
-	Detail::addVectors(ctr_atom2_grad, term_atom2_grad, ctr_atom2_grad);
-    Detail::negateVector(ctr_atom2_grad);
+	Detail::addVectors(term_atom1_deriv, ctr_atom1_deriv, ctr_atom2_deriv);
+	Detail::addVectors(ctr_atom2_deriv, term_atom2_deriv, ctr_atom2_deriv);
+    Detail::negateVector(ctr_atom2_deriv);
 
     return ang_cos;
 }
 
 template <typename ValueType, typename CoordsVec, typename GradVec>
-ValueType CDPL::ForceField::calcOutOfPlaneAngleCosGradient(const CoordsVec& term_atom1_pos, const CoordsVec& ctr_atom_pos, 
-														   const CoordsVec& term_atom2_pos, const CoordsVec& oop_atom_pos,
-														   GradVec& term_atom1_grad, GradVec& ctr_atom_grad, 
-														   GradVec& term_atom2_grad, GradVec& oop_atom_grad)
+ValueType CDPL::ForceField::calcOutOfPlaneAngleCosDerivatives(const CoordsVec& term_atom1_pos, const CoordsVec& ctr_atom_pos, 
+															  const CoordsVec& term_atom2_pos, const CoordsVec& oop_atom_pos,
+															  GradVec& term_atom1_deriv, GradVec& ctr_atom_deriv, 
+															  GradVec& term_atom2_deriv, GradVec& oop_atom_deriv)
 {
 	ValueType term_bond1_vec[3];
     ValueType term_bond2_vec[3];
@@ -451,36 +767,36 @@ ValueType CDPL::ForceField::calcOutOfPlaneAngleCosGradient(const CoordsVec& term
 	Detail::calcCrossProduct(term_bond2_vec, oop_bond_vec, kjl_pn);
 	Detail::calcCrossProduct(oop_bond_vec, term_bond1_vec, lji_pn);
 
-	ctr_atom_grad[0] = ijk_pn[1] * -term_bond2_vec[2] + ijk_pn[2] * term_bond2_vec[1];
-	ctr_atom_grad[1] = ijk_pn[0] * term_bond2_vec[2] + ijk_pn[2] * -term_bond2_vec[0];
-	ctr_atom_grad[2] = ijk_pn[0] * -term_bond2_vec[1] + ijk_pn[1] * term_bond2_vec[0];
+	ctr_atom_deriv[0] = ijk_pn[1] * -term_bond2_vec[2] + ijk_pn[2] * term_bond2_vec[1];
+	ctr_atom_deriv[1] = ijk_pn[0] * term_bond2_vec[2] + ijk_pn[2] * -term_bond2_vec[0];
+	ctr_atom_deriv[2] = ijk_pn[0] * -term_bond2_vec[1] + ijk_pn[1] * term_bond2_vec[0];
 
-	Detail::scaleVector(ctr_atom_grad, ang_cos / ijk_pn_len_2);
+	Detail::scaleVector(ctr_atom_deriv, ang_cos / ijk_pn_len_2);
 
-	Detail::invScaleCopyVector(kjl_pn, oop_ijk_pn_len_prod, term_atom1_grad);
-	Detail::subVectors(ctr_atom_grad, term_atom1_grad, term_atom1_grad);
+	Detail::invScaleCopyVector(kjl_pn, oop_ijk_pn_len_prod, term_atom1_deriv);
+	Detail::subVectors(ctr_atom_deriv, term_atom1_deriv, term_atom1_deriv);
 
-	ctr_atom_grad[0] = ijk_pn[1] * term_bond1_vec[2] + ijk_pn[2] * -term_bond1_vec[1];
-	ctr_atom_grad[1] = ijk_pn[0] * -term_bond1_vec[2] + ijk_pn[2] * term_bond1_vec[0];
-	ctr_atom_grad[2] = ijk_pn[0] * term_bond1_vec[1] + ijk_pn[1] * -term_bond1_vec[0];
+	ctr_atom_deriv[0] = ijk_pn[1] * term_bond1_vec[2] + ijk_pn[2] * -term_bond1_vec[1];
+	ctr_atom_deriv[1] = ijk_pn[0] * -term_bond1_vec[2] + ijk_pn[2] * term_bond1_vec[0];
+	ctr_atom_deriv[2] = ijk_pn[0] * term_bond1_vec[1] + ijk_pn[1] * -term_bond1_vec[0];
 
-	Detail::scaleVector(ctr_atom_grad, ang_cos / ijk_pn_len_2);
+	Detail::scaleVector(ctr_atom_deriv, ang_cos / ijk_pn_len_2);
 
-	Detail::invScaleCopyVector(lji_pn, oop_ijk_pn_len_prod, term_atom2_grad);
-	Detail::subVectors(ctr_atom_grad, term_atom2_grad, term_atom2_grad);
+	Detail::invScaleCopyVector(lji_pn, oop_ijk_pn_len_prod, term_atom2_deriv);
+	Detail::subVectors(ctr_atom_deriv, term_atom2_deriv, term_atom2_deriv);
 
-	Detail::calcCrossProduct(term2_oop_vec, term1_oop_vec, ctr_atom_grad);
+	Detail::calcCrossProduct(term2_oop_vec, term1_oop_vec, ctr_atom_deriv);
 
-	Detail::scaleCopyVector(oop_bond_vec, oop_ijk_pn_dot_prod / (oop_bnd_len * oop_bnd_len), oop_atom_grad);
-	Detail::addVectors(oop_atom_grad, lji_pn, oop_atom_grad);
-	Detail::addVectors(oop_atom_grad, kjl_pn, oop_atom_grad);
-	Detail::addVectors(oop_atom_grad, ctr_atom_grad, oop_atom_grad);
-	Detail::invScaleVector(oop_atom_grad, -oop_ijk_pn_len_prod);
+	Detail::scaleCopyVector(oop_bond_vec, oop_ijk_pn_dot_prod / (oop_bnd_len * oop_bnd_len), oop_atom_deriv);
+	Detail::addVectors(oop_atom_deriv, lji_pn, oop_atom_deriv);
+	Detail::addVectors(oop_atom_deriv, kjl_pn, oop_atom_deriv);
+	Detail::addVectors(oop_atom_deriv, ctr_atom_deriv, oop_atom_deriv);
+	Detail::invScaleVector(oop_atom_deriv, -oop_ijk_pn_len_prod);
 	
-	Detail::copyVector(term_atom1_grad, ctr_atom_grad);
-	Detail::addVectors(term_atom2_grad, ctr_atom_grad, ctr_atom_grad);
-	Detail::addVectors(oop_atom_grad, ctr_atom_grad, ctr_atom_grad);
-	Detail::negateVector(ctr_atom_grad);
+	Detail::copyVector(term_atom1_deriv, ctr_atom_deriv);
+	Detail::addVectors(term_atom2_deriv, ctr_atom_deriv, ctr_atom_deriv);
+	Detail::addVectors(oop_atom_deriv, ctr_atom_deriv, ctr_atom_deriv);
+	Detail::negateVector(ctr_atom_deriv);
 
 	return ang_cos;
 }

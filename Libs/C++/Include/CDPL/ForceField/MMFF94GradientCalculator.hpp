@@ -31,6 +31,8 @@
 #ifndef CDPL_FORCEFIELD_MMFF94GRADIENTCALCULATOR_HPP
 #define CDPL_FORCEFIELD_MMFF94GRADIENTCALCULATOR_HPP
 
+#include <cstddef>
+
 #include "CDPL/ForceField/MMFF94InteractionData.hpp"
 #include "CDPL/ForceField/MMFF94GradientFunctions.hpp"
 #include "CDPL/ForceField/GradientVectorTraits.hpp"
@@ -52,12 +54,14 @@ namespace CDPL
 		{
 
 		public:
-			MMFF94GradientCalculator(const MMFF94InteractionData& ia_data);
+			MMFF94GradientCalculator();
 
-			void setup(const MMFF94InteractionData& ia_data);
+			MMFF94GradientCalculator(const MMFF94InteractionData& ia_data, std::size_t num_atoms);
 
-			template <typename CoordsArray, typename GradArray>
-			ValueType operator()(const CoordsArray& coords, GradArray& grad);
+			void setup(const MMFF94InteractionData& ia_data, std::size_t num_atoms);
+
+			template <typename CoordsArray, typename GradVector>
+			ValueType operator()(const CoordsArray& coords, GradVector& grad);
 
 			ValueType getTotalEnergy() const;
 
@@ -77,6 +81,7 @@ namespace CDPL
 
 		private:
 			const MMFF94InteractionData* interactionData;
+			std::size_t                  numAtoms;
 			ValueType                    totalEnergy;
 			ValueType                    bondStretchingEnergy;
 			ValueType                    angleBendingEnergy;
@@ -98,23 +103,44 @@ namespace CDPL
 // \cond UNHIDE_DETAILS
 
 template <typename ValueType>
-CDPL::ForceField::MMFF94GradientCalculator<ValueType>::MMFF94GradientCalculator(const MMFF94InteractionData& ia_data):
-    interactionData(&ia_data), totalEnergy(), bondStretchingEnergy(), angleBendingEnergy(),
+CDPL::ForceField::MMFF94GradientCalculator<ValueType>::MMFF94GradientCalculator():
+    interactionData(0), numAtoms(0), totalEnergy(), bondStretchingEnergy(), angleBendingEnergy(),
     stretchBendEnergy(), outOfPlaneEnergy(), torsionEnergy(), electrostaticEnergy(), 
     vanDerWaalsEnergy() 
 {}
 
 template <typename ValueType>
-void CDPL::ForceField::MMFF94GradientCalculator<ValueType>::setup(const MMFF94InteractionData& ia_data)
+CDPL::ForceField::MMFF94GradientCalculator<ValueType>::MMFF94GradientCalculator(const MMFF94InteractionData& ia_data, std::size_t num_atoms):
+    interactionData(&ia_data), numAtoms(num_atoms), totalEnergy(), bondStretchingEnergy(), angleBendingEnergy(),
+    stretchBendEnergy(), outOfPlaneEnergy(), torsionEnergy(), electrostaticEnergy(), 
+    vanDerWaalsEnergy() 
+{}
+
+template <typename ValueType>
+void CDPL::ForceField::MMFF94GradientCalculator<ValueType>::setup(const MMFF94InteractionData& ia_data, std::size_t num_atoms)
 {
     interactionData = &ia_data;
+	numAtoms = num_atoms;
 }
 
 template <typename ValueType>
-template <typename CoordsArray, typename GradArray>
-ValueType CDPL::ForceField::MMFF94GradientCalculator<ValueType>::operator()(const CoordsArray& coords, GradArray& grad)
+template <typename CoordsArray, typename GradVector>
+ValueType CDPL::ForceField::MMFF94GradientCalculator<ValueType>::operator()(const CoordsArray& coords, GradVector& grad)
 {
-	GradientVectorTraits<GradArray>::clear(grad);
+	if (!interactionData) {
+		totalEnergy = ValueType();
+		bondStretchingEnergy = ValueType();
+		angleBendingEnergy = ValueType();
+		stretchBendEnergy = ValueType();
+		outOfPlaneEnergy = ValueType();
+		torsionEnergy = ValueType();
+		electrostaticEnergy = ValueType();
+		vanDerWaalsEnergy = ValueType();
+
+		return ValueType();
+	}
+
+	GradientVectorTraits<GradVector>::clear(grad, numAtoms);
 
     bondStretchingEnergy = calcMMFF94BondStretchingGradient<ValueType>(interactionData->getBondStretchingInteractions().getElementsBegin(),
 																	   interactionData->getBondStretchingInteractions().getElementsEnd(), 

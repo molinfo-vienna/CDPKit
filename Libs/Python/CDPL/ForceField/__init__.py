@@ -24,5 +24,7 @@
 ##
 
 
-from _forcefield import *
+import CDPL.Math
+import CDPL.Chem
 
+from _forcefield import *

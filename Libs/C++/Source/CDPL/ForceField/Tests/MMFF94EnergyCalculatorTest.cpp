@@ -47,7 +47,7 @@ BOOST_AUTO_TEST_CASE(MMFF94EnergyCalculatorTest)
 
     ForceField::MMFF94InteractionParameterizer parameterizer;
     ForceField::MMFF94InteractionData ia_data;
-    ForceField::MMFF94EnergyCalculator<double> calculator(ia_data);
+    ForceField::MMFF94EnergyCalculator<double> calculator;
     Math::Vector3DArray coords;
 
     //double max_en_diff = 0;
