@@ -63,13 +63,13 @@ namespace CDPL
 		 * 
 		 * \f$ EB_{ij} = 143.9325 \: \frac{kb_{IJ}}{2} \: \Delta r_{ij}^2 \times (1 + cs \: \Delta r_{ij} + \frac{7}{12} \: cs^2 \: \Delta r_{ij}^2) \f$
 		 *
-		 * where:<br>
-		 *  \f$ kb_{IJ} \f$ = the bond stretching force constant in \f$ \frac{md}{\AA} \f$ for bonded 
-		 *                    atoms \e i and \e j of types \e I and \e J.<br>
-		 *  \f$ \Delta r_{ij} \f$ = \f$ r_{ij} - r_{IJ}^0 \f$, the difference in angstroms between actual and
-		 *                          reference bond lengths between bonded atoms \e i and 
-		 *                          \e j of types \e I and \e J.<br>
-		 *  \f$ cs \f$ = \f$ -2 \: \AA^{-1} \f$, the "cubic stretch" constant.<br>
+		 * where<br>
+		 * \f$ kb_{IJ} \f$ = the bond stretching force constant in \f$ \frac{md}{Ang} \f$ for bonded 
+		 *                   atoms \e i and \e j of types \e I and \e J.<br>
+		 * \f$ \Delta r_{ij} \f$ = \f$ r_{ij} - r_{IJ}^0 \f$, the difference in angstroms between actual and
+		 *                         reference bond lengths between bonded atoms \e i and 
+		 *                         \e j of types \e I and \e J (see calcDistance()).<br>
+		 * \f$ cs \f$ = \f$ -2 \: Ang^{-1} \f$, the "cubic stretch" constant.<br>
 		 *
 		 * Note: throughout this description, the indices \e i, \e j, \e k, ... represent atoms;
 		 * \e I, \e J, \e K, ... denote the corresponding numerical MMFF atom types (or, 
@@ -79,7 +79,7 @@ namespace CDPL
 		 * \param atom2_pos The position of atom \e j.
 		 * \param force_const The bond stretching force constant \f$ kb_{IJ} \f$.
 		 * \param ref_length The reference bond length \f$ r_{IJ}^0 \f$.
-		 * \return The calculated bond stretching energy \f$ EB_{ij} \f$.
+		 * \return The calculated bond stretching interaction energy \f$ EB_{ij} \f$.
 		 */
 		template <typename ValueType, typename CoordsVec>
 		ValueType calcMMFF94BondStretchingEnergy(const CoordsVec& atom1_pos, const CoordsVec& atom2_pos, 
@@ -93,17 +93,16 @@ namespace CDPL
 		ValueType calcMMFF94AngleBendingEnergy(const MMFF94AngleBendingInteraction& iaction, const CoordsArray& coords);
 
 		/**
-		 * \brief Calculates the angle bending energy \f$ EA_{ijk} \f$ for two bonds \e i-j and \e j-k. 
+		 * \brief Calculates the angle bending interaction energy \f$ EA_{ijk} \f$ for two bonds \e i-j and \e j-k. 
 		 *
 		 * \f$ EA_{ijk} = 0.043844 \: \frac{ka_{IJK}}{2} \: \Delta \vartheta_{ijk}^2 \: (1 + cb \: \Delta \vartheta_{ijk}) \f$
 		 *
-		 * where:<br>
-		 *  \f$ ka_{IJK} \f$ = angle bending force constant in  \f$ \frac{md \AA}{rad^2} \f$ for the
-		 *                     angle between atoms \e i, \e j and \e k of atom types \e I, \e J and \e K.<br>
-		 *  \f$ \Delta \vartheta_{ijk} \f$ = \f$ \vartheta_{ijk} - \vartheta_{IJK}^0 \f$, the difference between actual and 
-		 *                                   reference \e i-j-k bond angles in degrees.<br>
-		 *  \f$ cb \f$ = \f$ -0.007 \: deg^{-1} \f$, the "cubic-bend" constant.<br>
-		 *
+		 * where<br>
+		 * \f$ ka_{IJK} \f$ = angle bending force constant in  \f$ \frac{md Ang}{rad^2} \f$ for the
+		 *                    angle between atoms \e i, \e j and \e k of atom types \e I, \e J and \e K.<br>
+		 * \f$ \Delta \vartheta_{ijk} \f$ = \f$ \vartheta_{ijk} - \vartheta_{IJK}^0 \f$, the difference between actual and 
+		 *                                  reference \e i-j-k bond angles in degrees (see calcBondAngle()).<br>
+		 * \f$ cb \f$ = \f$ -0.007 \: deg^{-1} \f$, the "cubic-bend" constant.<br>
 		 *
 		 * For linear or near-linear bond angles such as those which occur in alkynes,
 		 * nitriles, isonitriles, azides, and diazo compounds, the form used 
@@ -119,7 +118,7 @@ namespace CDPL
 		 * \param linear If \c true, the bond angle is linear.
 		 * \param force_const The angle bending force constant \f$ ka_{IJK} \f$.
 		 * \param ref_angle The reference bond angle \f$ \vartheta_{IJK}^0 \f$.
-		 * \return The calculated angle bending energy \f$ EA_{ijk} \f$.
+		 * \return The calculated angle bending interaction energy \f$ EA_{ijk} \f$.
 		 */
 		template <typename ValueType, typename CoordsVec>
 		ValueType calcMMFF94AngleBendingEnergy(const CoordsVec& term_atom1_pos, const CoordsVec& ctr_atom_pos, const CoordsVec& term_atom2_pos, 
@@ -133,19 +132,21 @@ namespace CDPL
 		ValueType calcMMFF94StretchBendEnergy(const MMFF94StretchBendInteraction& iaction, const CoordsArray& coords);
 
 		/**
-		 * \brief Calculates the stretch-bend energy \f$ EBA_{ijk} \f$ for two bonds \e i-j and \e j-k.
+		 * \brief Calculates the stretch-bend interaction energy \f$ EBA_{ijk} \f$ for two bonds \e i-j and \e j-k.
 		 * 
 		 * \f$ EBA_{ijk} = 2.51210 \: (kba_{IJK} \: \Delta r_{ij} + kba_{KJI} \: \Delta r_{kj}) \: \Delta \vartheta_{ijk} \f$
 		 *
-		 * where:<br>
-		 *  \f$ kba_{IJK} \f$ = force constant in \f$ \frac{md}{rad} \f$ for \e i-j stretch coupled to \e i-j-k bend.<br>
-		 *  \f$ kba_{KJI} \f$ = force constant in \f$ \frac{md}{rad} \f$ for \e k-j stretch coupled to \e i-j-k bend.<br>
-		 *  \f$ \Delta r_{ij} \f$ = \f$ r_{ij} - r_{IJ}^0 \f$, the difference in angstroms between actual and
-		 *                          reference bond lengths between bonded atoms \e i and \e j of types \e I and \e J.<br>
-		 *  \f$ \Delta r_{kj} \f$ = \f$ r_{kj} - r_{KJ}^0 \f$, the difference in angstroms between actual and
-		 *                          reference bond lengths between bonded atoms \e k and \e j of types \e K and \e J.<br>
-		 *  \f$ \Delta \vartheta_{ijk} \f$ = \f$ \vartheta_{ijk} - \vartheta_{IJK}^0 \f$, the difference between actual and 
-		 *                                   reference \e i-j-k bond angles in degrees.<br>
+		 * where<br>
+		 * \f$ kba_{IJK} \f$ = force constant in \f$ \frac{md}{rad} \f$ for \e i-j stretch coupled to \e i-j-k bend.<br>
+		 * \f$ kba_{KJI} \f$ = force constant in \f$ \frac{md}{rad} \f$ for \e k-j stretch coupled to \e i-j-k bend.<br>
+		 * \f$ \Delta r_{ij} \f$ = \f$ r_{ij} - r_{IJ}^0 \f$, the difference in angstroms between actual and
+		 *                         reference bond lengths between bonded atoms \e i and \e j of types \e I and \e J.<br>
+		 * \f$ \Delta r_{kj} \f$ = \f$ r_{kj} - r_{KJ}^0 \f$, the difference in angstroms between actual and
+		 *                         reference bond lengths between bonded atoms \e k and \e j of types \e K and \e J.<br>
+		 * \f$ \Delta \vartheta_{ijk} \f$ = \f$ \vartheta_{ijk} - \vartheta_{IJK}^0 \f$, the difference between actual and 
+		 *                                  reference \e i-j-k bond angles in degrees.<br>
+		 *
+		 * For the calculation of \f$ r_{ij} \f$, \f$ r_{kj} \f$, and \f$ \vartheta_{ijk} \f$ see calcBondLengthsAndAngle().
 		 *
 		 * Currently, stretch-bend interactions are omitted when the \e i-j-k interaction
 		 * corresponds to a linear bond angle.  
@@ -158,8 +159,8 @@ namespace CDPL
 		 * \param ref_angle The reference bond angle \f$ \vartheta_{IJK}^0 \f$.
 		 * \param ref_length1 The reference bond length \f$ r_{IJ}^0 \f$.
 		 * \param ref_length2 The reference bond length \f$ r_{KJ}^0 \f$.
-		 * \return The calculated stretch-bend energy \f$ EBA_{ijk} \f$.
-		 */
+		 * \return The calculated stretch-bend interaction energy \f$ EBA_{ijk} \f$.
+ 		 */
 		template <typename ValueType, typename CoordsVec>
 		ValueType calcMMFF94StretchBendEnergy(const CoordsVec& term_atom1_pos, const CoordsVec& ctr_atom_pos, const CoordsVec& term_atom2_pos, 
 											  const ValueType& ijk_force_const, const ValueType& kji_force_const, const ValueType& ref_angle, 
@@ -173,21 +174,21 @@ namespace CDPL
 		ValueType calcMMFF94OutOfPlaneBendingEnergy(const MMFF94OutOfPlaneBendingInteraction& iaction, const CoordsArray& coords);
 
 		/**
-		 * \brief Calculates the out-of-plane bending energy \f$ EOOP_{ijk;l} \f$ for the bond \e j-l and the plane \e i-j-k.
+		 * \brief Calculates the out-of-plane bending interaction energy \f$ EOOP_{ijk;l} \f$ for the bond \e j-l and the plane \e i-j-k.
 		 * 
 		 * \f$ EOOP_{ijk;l} = 0.043844 \: \frac{koop_{IJK \colon L}}{2} \: \chi_{ijk;l}^2 \f$ 
 		 *
-		 * where:<br>
-		 *  \f$ koop_{IJK \colon L} \f$ = out-of-plane bending force constant in \f$ \frac{md \AA}{rad^2} \f$.<br>
-		 *  \f$ \chi_{ijk;l} \f$ = angle in degrees between the bond \e j-l and the 
-		 *                         plane \e i-j-k, where \e j is the central atom.<br>
+		 * where<br>
+		 * \f$ koop_{IJK \colon L} \f$ = out-of-plane bending force constant in \f$ \frac{md Ang}{rad^2} \f$.<br>
+		 * \f$ \chi_{ijk;l} \f$ = angle in degrees between the bond \e j-l and the 
+		 *                        plane \e i-j-k, where \e j is the central atom (see calcOutOfPlaneAngle()).<br>
 		 *
 		 * \param term_atom1_pos The position of atom \e i.
 		 * \param ctr_atom_pos The position of the central atom \e j.
 		 * \param term_atom2_pos The position of atom \e k.
 		 * \param oop_atom_pos The position of the out-of-plane atom \e l.
 		 * \param force_const The out-of-plane bending force constant \f$ koop_{IJK \colon L} \f$.
-		 * \return The calculated out-of-plane energy \f$ EOOP_{ijk;l} \f$.
+		 * \return The calculated out-of-plane bending interaction energy \f$ EOOP_{ijk;l} \f$.
 		 */
 		template <typename ValueType, typename CoordsVec>
 		ValueType calcMMFF94OutOfPlaneBendingEnergy(const CoordsVec& term_atom1_pos, const CoordsVec& ctr_atom_pos, const CoordsVec& term_atom2_pos, 
@@ -204,19 +205,21 @@ namespace CDPL
 		 * \brief Calculates the torsion interaction energy \f$ ET_{ijkl} \f$ for the central bond \e j-k 
 		 *        and the connected bonds \e i-j and \e k-l.
 		 *
-		 * \f$ ET_{ijkl} = 0.5 \: (V1 \: (1 + \cos(\Phi)) + V2 \: (1 - \cos(2 \: \Phi)) + V3 \: (1 + \cos(3 \: \Phi))) \f$
+		 * \f$ ET_{ijkl} = 0.5 \: (V_1 \: (1 + \cos(\Phi_{ijkl})) + V_2 \: (1 - \cos(2 \: \Phi_{ijkl})) + V_3 \: (1 + \cos(3 \: \Phi_{ijkl}))) \f$
 		 *
-		 * where \f$ \Phi \f$ is the \e i-j-k-l dihedral angle in degrees. The constants \f$ V1 \f$, \f$ V2 \f$ and 
-		 * \f$ V3 \f$ depend on the atom types \e I, \e J, \e K and \e L for atoms \e i, \e j, \e k and \e l, where \e i-j, 
+		 * where \f$ \Phi_{ijkl} \f$ is the \e i-j-k-l dihedral angle. The constants \f$ V_1 \f$, \f$ V_2 \f$ and 
+		 * \f$ V_3 \f$ depend on the atom types \e I, \e J, \e K and \e L for atoms \e i, \e j, \e k and \e l, where \e i-j, 
 		 * \e j-k and \e k-l are bonded pairs and \e i is not equal to \e l.  
 		 *
-		 * \param term_atom1_pos The position of the wing atom \e i.
+		 * For the calculation of \f$ \cos(\Phi_{ijkl}) \f$ see calcDihedralAngleCos().
+		 *
+		 * \param term_atom1_pos The position of the terminal atom \e i.
 		 * \param ctr_atom1_pos The position of the central atom \e j.
 		 * \param ctr_atom2_pos The position of the central atom \e k.
-		 * \param term_atom2_pos The position of the wing atom \e l.
-		 * \param tor_param1 The torsion parameter \f$ V1 \f$.
-		 * \param tor_param2 The torsion parameter \f$ V2 \f$.
-		 * \param tor_param3 The torsion parameter \f$ V3 \f$.
+		 * \param term_atom2_pos The position of the terminal atom \e l.
+		 * \param tor_param1 The torsion parameter \f$ V_1 \f$.
+		 * \param tor_param2 The torsion parameter \f$ V_2 \f$.
+		 * \param tor_param3 The torsion parameter \f$ V_3 \f$.
 		 * \return The calculated torsion interaction energy \f$ ET_{ijkl} \f$.
 		 */
 		template <typename ValueType, typename CoordsVec>
@@ -232,18 +235,18 @@ namespace CDPL
 		ValueType calcMMFF94ElectrostaticEnergy(const MMFF94ElectrostaticInteraction& iaction, const CoordsArray& coords);
 
 		/**
-		 * \brief Calculates the electrostatic interaction energy \f$ EQ_{ij} \f$ of an atom pair \e i-j.
+		 * \brief Calculates the electrostatic interaction energy \f$ EQ_{ij} \f$ for the atom pair \e i-j.
 		 * 
 		 * \f$ EQ_{ij} = S \: 332.0716 \: \frac{q_i \: q_j}{D \: (R_{ij} + \delta)^n} \f$
 		 * 
-		 * where:<br>
-		 *  \f$ S \f$ = A scaling factor depending on the topological distance of \e i-j.<br>
-		 *  \f$ q_i \f$ and \f$ q_j \f$ = Partial atomic charges.<br>
-		 *  \f$ D \f$ = Dielectric constant.<br>
-		 *  \f$ R_{ij} \f$ = Interatomic distance (Å).<br>
-		 *  \f$ \delta \f$ = Electrostatic buffering constant (\e 0.05 Å).<br>
-		 *  \f$ n \f$ = Exponent (normally \e 1, but can be \e 2 for 
-		 *              distance-dependent dielectric constant).<br>
+		 * where<br>
+		 * \f$ S \f$ = a scaling factor depending on the topological distance of \e i-j.<br>
+		 * \f$ q_i \f$ and \f$ q_j \f$ = Partial atomic charges.<br>
+		 * \f$ D \f$ = Dielectric constant.<br>
+		 * \f$ R_{ij} \f$ = Interatomic distance (Å) (see calcDistance()).<br>
+		 * \f$ \delta \f$ = Electrostatic buffering constant (\e 0.05 Å).<br>
+		 * \f$ n \f$ = Exponent (normally \e 1, but can be \e 2 for 
+		 *             distance-dependent dielectric constant).<br>
 		 *
 		 * Note: 1-4 electrostatic interactions are scaled by \e 0.75 (thus,
 		 * the electrostatic energy term becomes \f$ EQ_{14} \: 0.75 \f$). 
@@ -270,16 +273,16 @@ namespace CDPL
 		ValueType calcMMFF94VanDerWaalsEnergy(const MMFF94VanDerWaalsInteraction& iaction, const CoordsArray& coords);
 
 		/**
-		 * \brief Calculates the van der Waals interaction energy \f$ E_{vdW_{ij}} \f$ of an atom pair \e i-j.
+		 * \brief Calculates the van der Waals interaction energy \f$ E_{vdW_{ij}} \f$ for the atom pair \e i-j.
 		 *
-		 * \f$ E_{vdW_{ij}} = \varepsilon_{IJ} \: (\frac{1.07 \: R_{IJ}^*}{(R_{ij} + 0.07 \: R_{IJ}^*)})^7 \: (\frac{1.12 \: R_{IJ}^{*7}}{(R_{ij}^7 + 0.12 \: R_{IJ}^{*7})} - 2) \;\;\;\; (1) \f$
+		 * \f$ E_{vdW_{ij}} = \varepsilon_{IJ} \: (\frac{1.07 \: R_{IJ}^*}{(R_{ij} + 0.07 \: R_{IJ}^*)})^7 \: (\frac{1.12 \: R_{IJ}^{*^7}}{(R_{ij}^7 + 0.12 \: R_{IJ}^{*^7})} - 2) \;\;\;\; (1) \f$
 		 *
-		 * where:<br>
-		 *  \f$R_{ij} \f$ = The interatomic distance.<br>
-		 *  \f$ R_{II}^* = A_I \: \alpha_I^{PEXP} \;\;\;\; (2) \f$<br>
-		 *  \f$ R_{IJ}^* = 0.5 \: (R_{II}^* + R_{JJ}^*) \: (1 + AFACT(1 - \exp(-BFACT \: \gamma_{IJ}^2))) \;\;\;\; (3) \f$<br> 
-		 *  \f$ \gamma_{IJ} = \frac{(R_{II}^* - R_{JJ}^*)}{(R_{II}^* + R_{JJ}^*)} \;\;\;\; (4) \f$ <br>
-		 *  \f$ \varepsilon_{IJ} = \frac{181.16 \: G_I \: GJ \: \alpha_I \: \alpha_J}{((\alpha_I / N_I)^{1/2} + (\alpha_J / N_J)^{1/2})} \: \frac{1}{R_{IJ}^{*6}} \;\;\;\; (5) \f$<br>
+		 * where<br>
+		 * \f$ R_{ij} \f$ = the interatomic distance (see calcDistance()).<br>
+		 * \f$ R_{II}^* = A_I \: \alpha_I^{PEXP} \;\;\;\; (2) \f$<br>
+		 * \f$ R_{IJ}^* = 0.5 \: (R_{II}^* + R_{JJ}^*) \: (1 + AFACT(1 - \exp(-BFACT \: \gamma_{IJ}^2))) \;\;\;\; (3) \f$<br> 
+		 * \f$ \gamma_{IJ} = \frac{(R_{II}^* - R_{JJ}^*)}{(R_{II}^* + R_{JJ}^*)} \;\;\;\; (4) \f$ <br>
+		 * \f$ \varepsilon_{IJ} = \frac{181.16 \: G_I \: GJ \: \alpha_I \: \alpha_J}{((\alpha_I / N_I)^{1/2} + (\alpha_J / N_J)^{1/2})} \: \frac{1}{R_{IJ}^{*^6}} \;\;\;\; (5) \f$<br>
 		 *
 		 * MMFF employs a "Buffered 14-7" form (eq 1) together with an 
 		 * expression which relates the minimum-energy separation \f$ R_{II}^* \f$ to the 
@@ -301,7 +304,7 @@ namespace CDPL
 		 * \param atom2_pos The position of atom \e j.
 		 * \param e_IJ The precalculated value \f$ \varepsilon_{IJ} \f$.
 		 * \param r_IJ The precalculated value \f$ R_{IJ}^* \f$.
-		 * \param r_IJ_7 The precalculated value \f$ R_{IJ}^{*7} \f$.
+		 * \param r_IJ_7 The precalculated value \f$ R_{IJ}^{*^7} \f$.
 		 * \return The calculated van der Waals interaction energy \f$ E_{vdW_{ij}} \f$.
 		 */
 		template <typename ValueType, typename CoordsVec>

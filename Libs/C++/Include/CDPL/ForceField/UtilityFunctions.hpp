@@ -42,19 +42,19 @@ namespace CDPL
 
 		/**
 		 * \addtogroup CDPL_FORCEFIELD_UTILITY_FUNCTIONS
-		 * @{
+		 * @{ 
 		 */
 
 		/**
 		 *\brief Calculates the squared distance \f$ r_{ij}^2 \f$ between two atoms \e i and \e j.
 		 *
-		 * \f$ r_{ij}^2 = |\vec{r_{ij}}|^2 = \vec{r_{ij}} \cdot \vec{r_{ij}} \f$<br>
-		 * <br>
-		 * \f$ \vec{r_{ij}} = \vec{p_j} - \vec{p_i} \f$<br>
+		 * \f$ r_{ij}^2 = |\vec{v_{ij}}|^2 \f$<br>
 		 *
-		 * where:<br>
-		 * \f$ \vec{p_i} \f$ = The coordinates of atom \e i.<br>
-		 * \f$ \vec{p_j} \f$ = The coordinates of atom \e j.<br>
+		 * where<br>
+		 * \f$ \vec{v_{ij}} = \vec{p_j} - \vec{p_i} \f$<br>
+		 *
+		 * \f$ \vec{p_i} \f$ = coordinates of atom \e i.<br>
+		 * \f$ \vec{p_j} \f$ = coordinates of atom \e j.<br>
 		 *
 		 * \param atom1_pos The position \f$ \vec{p_i} \f$ of atom \e i.
 		 * \param atom2_pos The position \f$ \vec{p_j} \f$ of atom \e j.
@@ -66,13 +66,13 @@ namespace CDPL
 		/**
 		 * \brief Calculates the distance \f$ r_{ij} \f$ between two atoms \e i and \e j.
 		 *
-		 * \f$ r_{ij} = |\vec{r_{ij}}| = \sqrt{\vec{r_{ij}} \cdot \vec{r_{ij}}} \f$<br>
-		 * <br>
-		 * \f$ \vec{r_{ij}} = \vec{p_j} - \vec{p_i} \f$<br>
+		 * \f$ r_{ij} = |\vec{v_{ij}}| \f$<br>
 		 *
-		 * where:<br>
-		 * \f$ \vec{p_i} \f$ = The coordinates of atom \e i.<br>
-		 * \f$ \vec{p_j} \f$ = The coordinates of atom \e j.<br>
+		 * where<br>
+		 * \f$ \vec{v_{ij}} = \vec{p_j} - \vec{p_i} \f$<br>
+		 *
+		 * \f$ \vec{p_i} \f$ = coordinates of atom \e i.<br>
+		 * \f$ \vec{p_j} \f$ = coordinates of atom \e j.<br>
 		 *
 		 * \param atom1_pos The position \f$ \vec{p_i} \f$ of atom \e i.
 		 * \param atom2_pos The position \f$ \vec{p_j} \f$ of atom \e j.
@@ -85,17 +85,17 @@ namespace CDPL
 		 * \brief Calculates bond lengths \f$ r_{ij} \f$ and \f$ r_{jk} \f$ and the \e cosine of the bond angle
 		 *        \f$ \vartheta_{ijk} \f$ between the two bonds \e i-j and \e j-k.
 		 *
-		 * \f$ r_{ij} = \sqrt{\vec{r_{ij}} \cdot \vec{r_{ij}}} \f$<br>
-		 * \f$ r_{jk} = \sqrt{\vec{r_{jk}} \cdot \vec{r_{jk}}} \f$<br>
-		 * \f$ \cos(\vartheta_{ijk}) = \frac{\vec{r_{ij}} \cdot \vec{r_{jk}}}{r_{ij} \: r_{jk}} \f$<br>
-		 * <br>
-		 * \f$ \vec{r_{ij}} = \vec{p_j} - \vec{p_i} \f$<br>
-		 * \f$ \vec{r_{jk}} = \vec{p_k} - \vec{p_j} \f$<br>
+		 * \f$ r_{ij} = |\vec{v_{ij}}| \f$<br>
+		 * \f$ r_{jk} = |\vec{v_{jk}}| \f$<br>
+		 * \f$ \cos(\vartheta_{ijk}) = \frac{\vec{v_{ij}} \cdot \vec{v_{jk}}}{r_{ij} \: r_{jk}} \f$<br>
 		 *
-		 * where:<br>
-		 * \f$ \vec{p_i} \f$ = The coordinates of atom \e i.<br>
-		 * \f$ \vec{p_j} \f$ = The coordinates of atom \e j.<br>
-		 * \f$ \vec{p_k} \f$ = The coordinates of atom \e k.<br>
+		 * where<br>
+		 * \f$ \vec{v_{ij}} = \vec{p_j} - \vec{p_i} \f$<br>
+		 * \f$ \vec{v_{jk}} = \vec{p_k} - \vec{p_j} \f$<br>
+		 *
+		 * \f$ \vec{p_i} \f$ = coordinates of atom \e i.<br>
+		 * \f$ \vec{p_j} \f$ = coordinates of atom \e j.<br>
+		 * \f$ \vec{p_k} \f$ = coordinates of atom \e k.<br>
 		 *
 		 * \param term_atom1_pos The position \f$ \vec{p_i} \f$ of the terminal atom \e i.
 		 * \param ctr_atom_pos The position \f$ \vec{p_j} \f$ of the central atom \e j.
@@ -112,17 +112,17 @@ namespace CDPL
 		 * \brief Calculates bond lengths \f$ r_{ij} \f$ and \f$ r_{jk} \f$ and the bond angle
 		 *        \f$ \vartheta_{ijk} \f$ between the two bonds \e i-j and \e j-k.
 		 *
-		 * \f$ r_{ij} = \sqrt{\vec{r_{ij}} \cdot \vec{r_{ij}}} \f$<br>
-		 * \f$ r_{jk} = \sqrt{\vec{r_{jk}} \cdot \vec{r_{jk}}} \f$<br>
-		 * \f$ \vartheta_{ijk} = \arccos(\frac{\vec{r_{ij}} \cdot \vec{r_{jk}}}{r_{ij} \: r_{jk}}) \f$<br>
-		 * <br>
-		 * \f$ \vec{r_{ij}} = \vec{p_j} - \vec{p_i} \f$<br>
-		 * \f$ \vec{r_{jk}} = \vec{p_k} - \vec{p_j} \f$<br>
+		 * \f$ r_{ij} = |\vec{v_{ij}}| \f$<br>
+		 * \f$ r_{jk} = |\vec{v_{jk}}| \f$<br>
+		 * \f$ \vartheta_{ijk} = \arccos(\frac{\vec{v_{ij}} \cdot \vec{v_{jk}}}{r_{ij} \: r_{jk}}) \f$<br>
 		 *
-		 * where:<br>
-		 * \f$ \vec{p_i} \f$ = The coordinates of atom \e i.<br>
-		 * \f$ \vec{p_j} \f$ = The coordinates of atom \e j.<br>
-		 * \f$ \vec{p_k} \f$ = The coordinates of atom \e k.<br>
+		 * where<br>
+		 * \f$ \vec{v_{ij}} = \vec{p_j} - \vec{p_i} \f$<br>
+		 * \f$ \vec{v_{jk}} = \vec{p_k} - \vec{p_j} \f$<br>
+		 *
+		 * \f$ \vec{p_i} \f$ = coordinates of atom \e i.<br>
+		 * \f$ \vec{p_j} \f$ = coordinates of atom \e j.<br>
+		 * \f$ \vec{p_k} \f$ = coordinates of atom \e k.<br>
 		 *
 		 * \param term_atom1_pos The position \f$ \vec{p_i} \f$ of the terminal atom \e i.
 		 * \param ctr_atom_pos The position \f$ \vec{p_j} \f$ of the central atom \e j.
@@ -138,17 +138,15 @@ namespace CDPL
 		/**
 		 * \brief Calculates the \e cosine of the bond angle \f$ \vartheta_{ijk} \f$ between the two bonds \e i-j and \e j-k.
 		 *
-		 * \f$ \cos(\vartheta_{ijk}) = \frac{\vec{r_{ij}} \cdot \vec{r_{jk}}}{r_{ij} \: r_{jk}} \f$<br>
-		 * <br>
-		 * \f$ \vec{r_{ij}} = \vec{p_j} - \vec{p_i} \f$<br>
-		 * \f$ \vec{r_{jk}} = \vec{p_k} - \vec{p_j} \f$<br>
-		 * \f$ r_{ij} = \sqrt{\vec{r_{ij}} \cdot \vec{r_{ij}}} \f$<br>
-		 * \f$ r_{jk} = \sqrt{\vec{r_{jk}} \cdot \vec{r_{jk}}} \f$<br>
+		 * \f$ \cos(\vartheta_{ijk}) = \frac{\vec{v_{ij}} \cdot \vec{v_{jk}}}{|\vec{v_{ij}}| \: |\vec{v_{jk}}|} \f$<br>
 		 *
-		 * where:<br>
-		 * \f$ \vec{p_i} \f$ = The coordinates of atom \e i.<br>
-		 * \f$ \vec{p_j} \f$ = The coordinates of atom \e j.<br>
-		 * \f$ \vec{p_k} \f$ = The coordinates of atom \e k.<br>
+		 * where<br>
+		 * \f$ \vec{v_{ij}} = \vec{p_j} - \vec{p_i} \f$<br>
+		 * \f$ \vec{v_{jk}} = \vec{p_k} - \vec{p_j} \f$<br>
+		 *
+		 * \f$ \vec{p_i} \f$ = coordinates of atom \e i.<br>
+		 * \f$ \vec{p_j} \f$ = coordinates of atom \e j.<br>
+		 * \f$ \vec{p_k} \f$ = coordinates of atom \e k.<br>
 		 *
 		 * \param term_atom1_pos The position \f$ \vec{p_i} \f$ of the terminal atom \e i.
 		 * \param ctr_atom_pos The position \f$ \vec{p_j} \f$ of the central atom \e j.
@@ -161,17 +159,15 @@ namespace CDPL
 		/**
 		 * \brief Calculates the bond angle \f$ \vartheta_{ijk} \f$ between the two bonds \e i-j and \e j-k.
 		 *
-		 * \f$ \vartheta_{ijk} = \arccos(\frac{\vec{r_{ij}} \cdot \vec{r_{jk}}}{r_{ij} \: r_{jk}}) \f$<br>
-		 * <br>
-		 * \f$ \vec{r_{ij}} = \vec{p_j} - \vec{p_i} \f$<br>
-		 * \f$ \vec{r_{jk}} = \vec{p_k} - \vec{p_j} \f$<br>
-		 * \f$ r_{ij} = \sqrt{\vec{r_{ij}} \cdot \vec{r_{ij}}} \f$<br>
-		 * \f$ r_{jk} = \sqrt{\vec{r_{jk}} \cdot \vec{r_{jk}}} \f$<br>
+		 * \f$ \vartheta_{ijk} = \arccos(\frac{\vec{v_{ij}} \cdot \vec{v_{jk}}}{|\vec{v_{ij}}| \: |\vec{v_{jk}}|}) \f$<br>
 		 *
-		 * where:<br>
-		 * \f$ \vec{p_i} \f$ = The coordinates of atom \e i.<br>
-		 * \f$ \vec{p_j} \f$ = The coordinates of atom \e j.<br>
-		 * \f$ \vec{p_k} \f$ = The coordinates of atom \e k.<br>
+		 * where<br>
+		 * \f$ \vec{v_{ij}} = \vec{p_j} - \vec{p_i} \f$<br>
+		 * \f$ \vec{v_{jk}} = \vec{p_k} - \vec{p_j} \f$<br>
+		 *
+		 * \f$ \vec{p_i} \f$ = coordinates of atom \e i.<br>
+		 * \f$ \vec{p_j} \f$ = coordinates of atom \e j.<br>
+		 * \f$ \vec{p_k} \f$ = coordinates of atom \e k.<br>
 		 *
 		 * \param term_atom1_pos The position \f$ \vec{p_i} \f$ of the terminal atom \e i.
 		 * \param ctr_atom_pos The position \f$ \vec{p_j} \f$ of the central atom \e j.
@@ -184,21 +180,18 @@ namespace CDPL
 		/**
 		 * \brief Calculates the out-of-plane angle \f$ \chi_{ijk;l} \f$ between the bond \e j-l and the plane defined by the atoms \e i-j-k.
 		 *
-		 * \f$ \chi_{ijk;l} = 0.5 \: \pi - \arccos(\frac{\vec{n_{ijk}} \cdot \vec{r_{jl}}}{|\vec{n_{ijk}}| \: r_{jl}}) \f$<br>
-		 * <br>
-		 * \f$ \vec{r_{ji}} = \vec{p_i} - \vec{p_j} \f$<br>
-		 * \f$ \vec{r_{jk}} = \vec{p_k} - \vec{p_j} \f$<br>
-		 * \f$ \vec{r_{jl}} = \vec{p_l} - \vec{p_j} \f$<br>
-		 * \f$ \vec{n_{ijk}} = \vec{r_{ji}} \times \vec{r_{jk}} \f$<br>
-		 * \f$ r_{ji} = \sqrt{\vec{r_{ji}} \cdot \vec{r_{ji}}} \f$<br>
-		 * \f$ r_{jk} = \sqrt{\vec{r_{jk}} \cdot \vec{r_{jk}}} \f$<br>
-		 * \f$ r_{jl} = \sqrt{\vec{r_{jl}} \cdot \vec{r_{jl}}} \f$<br>
+		 * \f$ \chi_{ijk;l} = \frac{\pi}{2} - \arccos(\frac{\vec{n_{ijk}} \cdot \vec{v_{jl}}}{|\vec{n_{ijk}}| \: |\vec{v_{jl}}|}) \f$<br>
 		 *
-		 * where:<br>
-		 * \f$ \vec{p_i} \f$ = The coordinates of atom \e i.<br>
-		 * \f$ \vec{p_j} \f$ = The coordinates of atom \e j.<br>
-		 * \f$ \vec{p_k} \f$ = The coordinates of atom \e k.<br>
-		 * \f$ \vec{p_l} \f$ = The coordinates of atom \e l.<br>
+		 * where<br>
+		 * \f$ \vec{v_{ji}} = \vec{p_i} - \vec{p_j} \f$<br>
+		 * \f$ \vec{v_{jk}} = \vec{p_k} - \vec{p_j} \f$<br>
+		 * \f$ \vec{v_{jl}} = \vec{p_l} - \vec{p_j} \f$<br>
+		 * \f$ \vec{n_{ijk}} = \vec{v_{ji}} \times \vec{v_{jk}} \f$<br>
+		 *
+		 * \f$ \vec{p_i} \f$ = coordinates of atom \e i.<br>
+		 * \f$ \vec{p_j} \f$ = coordinates of atom \e j.<br>
+		 * \f$ \vec{p_k} \f$ = coordinates of atom \e k.<br>
+		 * \f$ \vec{p_l} \f$ = coordinates of atom \e l.<br>
 		 *
 		 * \param term_atom1_pos The position \f$ \vec{p_i} \f$ of the terminal atom \e i.
 		 * \param ctr_atom_pos The position \f$ \vec{p_j} \f$ of the central atom \e j.
@@ -214,18 +207,18 @@ namespace CDPL
 		 * \brief Calculates the \e cosine of the dihedral angle \f$ \Phi_{ijkl} \f$ between the planes defined by the atom triplets \e i-j-k and \e j-k-l.
 		 *
 		 * \f$ \cos(\Phi_{ijkl}) = \frac{\vec{n_{ijk}} \cdot \vec{n_{jkl}}}{|\vec{n_{ijk}}| \: |\vec{n_{jkl}}|} \f$<br>
-		 * <br>
-		 * \f$ \vec{r_{ji}} = \vec{p_i} - \vec{p_j} \f$<br>
-		 * \f$ \vec{r_{jk}} = \vec{p_k} - \vec{p_j} \f$<br>
-		 * \f$ \vec{r_{lk}} = \vec{p_k} - \vec{p_l} \f$<br>
-		 * \f$ \vec{n_{ijk}} = \vec{r_{ji}} \times \vec{r_{jk}} \f$<br>
-		 * \f$ \vec{n_{jkl}} = \vec{r_{jk}} \times \vec{r_{lk}} \f$<br>
 		 *
-		 * where:<br>
-		 * \f$ \vec{p_i} \f$ = The coordinates of atom \e i.<br>
-		 * \f$ \vec{p_j} \f$ = The coordinates of atom \e j.<br>
-		 * \f$ \vec{p_k} \f$ = The coordinates of atom \e k.<br>
-		 * \f$ \vec{p_l} \f$ = The coordinates of atom \e l.<br>
+		 * where<br>
+		 * \f$ \vec{v_{ji}} = \vec{p_i} - \vec{p_j} \f$<br>
+		 * \f$ \vec{v_{jk}} = \vec{p_k} - \vec{p_j} \f$<br>
+		 * \f$ \vec{v_{lk}} = \vec{p_k} - \vec{p_l} \f$<br>
+		 * \f$ \vec{n_{ijk}} = \vec{v_{ji}} \times \vec{v_{jk}} \f$<br>
+		 * \f$ \vec{n_{jkl}} = \vec{v_{jk}} \times \vec{v_{lk}} \f$<br>
+		 *
+		 * \f$ \vec{p_i} \f$ = coordinates of atom \e i.<br>
+		 * \f$ \vec{p_j} \f$ = coordinates of atom \e j.<br>
+		 * \f$ \vec{p_k} \f$ = coordinates of atom \e k.<br>
+		 * \f$ \vec{p_l} \f$ = coordinates of atom \e l.<br>
 		 *
 		 * \param term_atom1_pos The position \f$ \vec{p_i} \f$ of the terminal atom \e i.
 		 * \param ctr_atom1_pos The position \f$ \vec{p_j} \f$ of the central atom \e j.
@@ -241,15 +234,15 @@ namespace CDPL
 		 * \brief Calculates the partial derivatives \f$ \frac{\partial r_{ij}}{\partial \vec{p_x}} \f$ of the 
 		 *        distance \f$ r_{ij} \f$ between two atoms \e i and \e j.
 		 *
-		 * \f$ \frac{\partial r_{ij}}{\partial \vec{p_i}} = \frac{-\vec{r_{ij}}}{r_{ij}} \f$<br>
-		 * \f$ \frac{\partial r_{ij}}{\partial \vec{p_j}} = \frac{\vec{r_{ij}}}{r_{ij}} \f$<br>
-		 * <br>
-		 * \f$ \vec{r_{ij}} = \vec{p_j} - \vec{p_i} \f$<br>
-		 * \f$ r_{ij} = \sqrt{\vec{r_{ij}} \cdot \vec{r_{ij}}} \f$<br>
+		 * \f$ \frac{\partial r_{ij}}{\partial \vec{p_i}} = \frac{-\vec{v_{ij}}}{r_{ij}} \f$<br>
+		 * \f$ \frac{\partial r_{ij}}{\partial \vec{p_j}} = \frac{\vec{v_{ij}}}{r_{ij}} \f$<br>
+		 * \f$ r_{ij} = |\vec{v_{ij}}| \f$<br>
 		 *
-		 * where:<br>
-		 * \f$ \vec{p_i} \f$ = The coordinates of atom \e i.<br>
-		 * \f$ \vec{p_j} \f$ = The coordinates of atom \e j.<br>
+		 * where<br>
+		 * \f$ \vec{v_{ij}} = \vec{p_j} - \vec{p_i} \f$<br>
+		 *
+		 * \f$ \vec{p_i} \f$ = coordinates of atom \e i.<br>
+		 * \f$ \vec{p_j} \f$ = coordinates of atom \e j.<br>
 		 *
 		 * \param atom1_pos The position \f$ \vec{p_i} \f$ of atom \e i.
 		 * \param atom2_pos The position \f$ \vec{p_j} \f$ of atom \e j.
@@ -267,19 +260,20 @@ namespace CDPL
 		 * \brief Calculates the partial derivatives \f$ \frac{\partial \cos(\vartheta_{ijk})}{\partial \vec{p_x}} \f$ of the 
 		 *        of the \e cosine of the angle \f$ \vartheta_{ijk} \f$ between the bonds \e i-j and \e j-k.
 		 *
-		 * \f$ \frac{\partial \cos(\vartheta_{ijk})}{\partial \vec{p_i}} = \frac{\vec{r_{jk}}}{r_{ji} \: r_{jk}} - \frac{\vec{r_{ji}} \: (\vec{r_{ji}} \cdot \vec{r_{jk}})}{r_{ji}^3 \: r_{jk}} \f$<br>
-		 * \f$ \frac{\partial \cos(\vartheta_{ijk})}{\partial \vec{p_k}} = \frac{\vec{r_{ji}}}{r_{ji} \: r_{jk}} - \frac{\vec{r_{jk}} \: (\vec{r_{ji}} \cdot \vec{r_{jk}})}{r_{ji} \: r_{jk}^3} \f$<br>
+		 * \f$ \frac{\partial \cos(\vartheta_{ijk})}{\partial \vec{p_i}} = \frac{\vec{v_{jk}}}{r_{ji} \: r_{jk}} - \frac{\vec{v_{ji}} \: (\vec{v_{ji}} \cdot \vec{v_{jk}})}{r_{ji}^3 \: r_{jk}} \f$<br>
+		 * \f$ \frac{\partial \cos(\vartheta_{ijk})}{\partial \vec{p_k}} = \frac{\vec{v_{ji}}}{r_{ji} \: r_{jk}} - \frac{\vec{v_{jk}} \: (\vec{v_{ji}} \cdot \vec{v_{jk}})}{r_{ji} \: r_{jk}^3} \f$<br>
 		 * \f$ \frac{\partial \cos(\vartheta_{ijk})}{\partial \vec{p_j}} = -(\frac{\partial \cos(\vartheta_{ijk})}{\partial \vec{p_i}} + \frac{\partial \cos(\vartheta_{ijk})}{\partial \vec{p_k}}) \f$<br>
-		 * <br>
-		 * \f$ \vec{r_{ji}} = \vec{p_i} - \vec{p_j} \f$<br>
-		 * \f$ \vec{r_{jk}} = \vec{p_k} - \vec{p_j} \f$<br>
-		 * \f$ r_{ji} = \sqrt{\vec{r_{ji}} \cdot \vec{r_{ji}}} \f$<br>
-		 * \f$ r_{jk} = \sqrt{\vec{r_{jk}} \cdot \vec{r_{jk}}} \f$<br>
+		 * \f$ \cos(\vartheta_{ijk}) = \frac{\vec{v_{ij}} \cdot \vec{v_{jk}}}{r_{ij} \: r_{jk}} \f$<br>
 		 *
-		 * where:<br>
-		 * \f$ \vec{p_i} \f$ = The coordinates of atom \e i.<br>
-		 * \f$ \vec{p_j} \f$ = The coordinates of atom \e j.<br>
-		 * \f$ \vec{p_k} \f$ = The coordinates of atom \e k.<br>
+		 * where<br>
+		 * \f$ \vec{v_{ji}} = \vec{p_i} - \vec{p_j} \f$<br>
+		 * \f$ \vec{v_{jk}} = \vec{p_k} - \vec{p_j} \f$<br>
+		 * \f$ r_{ji} = |\vec{v_{ji}}| \f$<br>
+		 * \f$ r_{jk} = |\vec{v_{jk}}| \f$<br>
+		 *
+		 * \f$ \vec{p_i} \f$ = coordinates of atom \e i.<br>
+		 * \f$ \vec{p_j} \f$ = coordinates of atom \e j.<br>
+		 * \f$ \vec{p_k} \f$ = coordinates of atom \e k.<br>
 		 *
 		 * \param term_atom1_pos The position \f$ \vec{p_i} \f$ of atom \e i.
 		 * \param ctr_atom_pos The position \f$ \vec{p_j} \f$ of atom \e j.
@@ -300,27 +294,28 @@ namespace CDPL
 		 * \brief Calculates the partial derivatives \f$ \frac{\partial \cos(\Phi_{ijkl})}{\partial \vec{p_x}} \f$ of the \e cosine
 		 *        of the angle \f$ \Phi_{ijkl} \f$ between the planes defined by the atom triplets \e i-j-k and \e j-k-l.
 		 *
-		 * \f$ \frac{\partial \cos(\Phi_{ijkl})}{\partial \vec{p_i}} = \vec{r_{jk}} \times \vec{a} \f$<br>  
-		 * \f$ \frac{\partial \cos(\Phi_{ijkl})}{\partial \vec{p_j}} = \vec{r_{ki}} \times \vec{a} - \vec{r_{lk}} \times \vec{b} \f$<br>
-		 * \f$ \frac{\partial \cos(\Phi_{ijkl})}{\partial \vec{p_l}} = \vec{r_{jk}} \times \vec{b} \f$<br>
+		 * \f$ \frac{\partial \cos(\Phi_{ijkl})}{\partial \vec{p_i}} = \vec{v_{jk}} \times \vec{a} \f$<br>  
+		 * \f$ \frac{\partial \cos(\Phi_{ijkl})}{\partial \vec{p_j}} = \vec{r_{ki}} \times \vec{a} - \vec{v_{lk}} \times \vec{b} \f$<br>
+		 * \f$ \frac{\partial \cos(\Phi_{ijkl})}{\partial \vec{p_l}} = \vec{v_{jk}} \times \vec{b} \f$<br>
 		 * \f$ \frac{\partial \cos(\Phi_{ijkl})}{\partial \vec{p_k}} = -(\frac{\partial \cos(\Phi_{ijkl})}{\partial \vec{p_i}} +
 		 *                                                              \frac{\partial \cos(\Phi_{ijkl})}{\partial \vec{p_j}} +
 		 *                                                              \frac{\partial \cos(\Phi_{ijkl})}{\partial \vec{p_l}} \f$<br>
-		 * <br>
-		 * \f$ \vec{r_{ji}} = \vec{p_i} - \vec{p_j} \f$<br>
-		 * \f$ \vec{r_{jk}} = \vec{p_k} - \vec{p_j} \f$<br>
-		 * \f$ \vec{r_{lk}} = \vec{p_k} - \vec{p_l} \f$<br>
+		 * \f$ \cos(\Phi_{ijkl}) = \frac{\vec{n_{ijk}} \cdot \vec{n_{jkl}}}{|\vec{n_{ijk}}| \: |\vec{n_{jkl}}|} \f$<br>
+		 *
+		 * where<br>
+		 * \f$ \vec{v_{ji}} = \vec{p_i} - \vec{p_j} \f$<br>
+		 * \f$ \vec{v_{jk}} = \vec{p_k} - \vec{p_j} \f$<br>
+		 * \f$ \vec{v_{lk}} = \vec{p_k} - \vec{p_l} \f$<br>
 		 * \f$ \vec{r_{ki}} = \vec{p_i} - \vec{p_k} \f$<br>
-		 * \f$ \vec{n_{ijk}} = \vec{r_{ji}} \times \vec{r_{jk}} \f$<br>
-		 * \f$ \vec{n_{jkl}} = \vec{r_{jk}} \times \vec{r_{lk}} \f$<br>
+		 * \f$ \vec{n_{ijk}} = \vec{v_{ji}} \times \vec{v_{jk}} \f$<br>
+		 * \f$ \vec{n_{jkl}} = \vec{v_{jk}} \times \vec{v_{lk}} \f$<br>
 		 * \f$ \vec{a} = \frac{\frac{\vec{n_{jkl}}}{|\vec{n_{jkl}}|} - \cos(\Phi_{ijkl}) \: \frac{\vec{n_{ijk}}}{|\vec{n_{ijk}}|}}{|\vec{n_{ijk}}|} \f$<br> 
 		 * \f$ \vec{b} = \frac{\frac{\vec{n_{ijk}}}{|\vec{n_{ijk}}|} - \cos(\Phi_{ijkl}) \: \frac{\vec{n_{jkl}}}{|\vec{n_{jkl}}|}}{|\vec{n_{jkl}}|} \f$<br>
 		 *
-		 * where:<br>
-		 * \f$ \vec{p_i} \f$ = The coordinates of atom \e i.<br>
-		 * \f$ \vec{p_j} \f$ = The coordinates of atom \e j.<br>
-		 * \f$ \vec{p_k} \f$ = The coordinates of atom \e k.<br>
-		 * \f$ \vec{p_l} \f$ = The coordinates of atom \e l.<br>
+		 * \f$ \vec{p_i} \f$ = coordinates of atom \e i.<br>
+		 * \f$ \vec{p_j} \f$ = coordinates of atom \e j.<br>
+		 * \f$ \vec{p_k} \f$ = coordinates of atom \e k.<br>
+		 * \f$ \vec{p_l} \f$ = coordinates of atom \e l.<br>
 		 *
 		 * \param term_atom1_pos The position \f$ \vec{p_i} \f$ of the terminal atom \e i.
 		 * \param ctr_atom1_pos The position \f$ \vec{p_j} \f$ of the central atom \e j.
@@ -347,47 +342,47 @@ namespace CDPL
 		 *        of the angle \f$ \omega_{ijk;l} \f$ between the bond \e j-l and the normal of the plane defined by the atoms \e i-j-k.
 		 *
 		 * 
-		 * \f$ \frac{\partial \cos(\omega_{ijk;l})}{\partial \vec{p_i}} = \frac{\vec{r_{jk}} \times \vec{r_{jl}}}{|\vec{n_{ijk}}| \: r_{jl}} -
+		 * \f$ \frac{\partial \cos(\omega_{ijk;l})}{\partial \vec{p_i}} = \frac{\vec{v_{jk}} \times \vec{v_{jl}}}{|\vec{n_{ijk}}| \: r_{jl}} -
 		 *                                                                \cos(\omega_{ijk;l}) \: \frac{M_1 \cdot \vec{n_{ijk}}}{|\vec{n_{ijk}}|^2} \f$<br>
-		 * \f$ \frac{\partial \cos(\omega_{ijk;l})}{\partial \vec{p_k}} = \frac{\vec{r_{jl}} \times \vec{r_{ji}}}{|\vec{n_{ijk}}| \: r_{jl}} - 
+		 * \f$ \frac{\partial \cos(\omega_{ijk;l})}{\partial \vec{p_k}} = \frac{\vec{v_{jl}} \times \vec{v_{ji}}}{|\vec{n_{ijk}}| \: r_{jl}} - 
 		 *                                                                \cos(\omega_{ijk;l}) \: \frac{M_2 \cdot \vec{n_{ijk}}}{|\vec{n_{ijk}}|^2} \f$<br>
-		 * \f$ \frac{\partial \cos(\omega_{ijk;l})}{\partial \vec{p_l}} = \frac{-1}{|\vec{n_{ijk}}| \: r_{jl}} \: (\frac{\vec{r_{jl}} (\vec{n_{ijk}} \cdot \vec{r_{jl}})}{r_{jl}^2} +
-		 *                                                                \vec{r_{kl}} \times \vec{r_{il}} + \vec{r_{jl}} \times \vec{r_{ji}} + 
-		 *                                                                \vec{r_{jk}} \times \vec{r_{jl}}) \f$<br>
+		 * \f$ \frac{\partial \cos(\omega_{ijk;l})}{\partial \vec{p_l}} = \frac{-1}{|\vec{n_{ijk}}| \: r_{jl}} \: (\frac{\vec{v_{jl}} (\vec{n_{ijk}} \cdot \vec{v_{jl}})}{r_{jl}^2} +
+		 *                                                                \vec{r_{kl}} \times \vec{v_{il}} + \vec{v_{jl}} \times \vec{v_{ji}} + 
+		 *                                                                \vec{v_{jk}} \times \vec{v_{jl}}) \f$<br>
 		 * \f$ \frac{\partial \cos(\omega_{ijk;l})}{\partial \vec{p_j}} = -(\frac{\partial \cos(\omega_{ijk;l})}{\partial \vec{p_i}} + 
 		 *                                                                 \frac{\partial \cos(\omega_{ijk;l})}{\partial \vec{p_k}} +
 		 *                                                                 \frac{\partial \cos(\omega_{ijk;l})}{\partial \vec{p_l}}) \f$<br>
-		 * <br>
+		 * \f$ \cos(\omega_{ijk;l}) = \frac{\vec{n_{ijk}} \cdot \vec{v_{jl}}}{|\vec{n_{ijk}}| \: r_{jl}} \f$<br>
+		 *
+		 * where<br>
 		 * \f$ M_1 = 
 		 *   \left|
 		 *      \begin{array}{ccc}
-		 *       0 & -\vec{r_{jk}}.z & \vec{r_{jk}}.y \\
-		 *       \vec{r_{jk}}.z & 0 & -\vec{r_{jk}}.x \\
-		 *       -\vec{r_{jk}}.y & \vec{r_{jk}}.x & 0
+		 *       0 & -\vec{v_{jk}}.z & \vec{v_{jk}}.y \\
+		 *       \vec{v_{jk}}.z & 0 & -\vec{v_{jk}}.x \\
+		 *       -\vec{v_{jk}}.y & \vec{v_{jk}}.x & 0
 		 *      \end{array}
 		 *   \right| \f$<br>
 		 * \f$ M_2 = 
 		 *   \left| 
 		 *      \begin{array}{ccc}
-		 *       0 & \vec{r_{ji}}.z & -\vec{r_{ji}}.y \\
-		 *       -\vec{r_{ji}}.z & 0 & \vec{r_{ji}}.x \\
-		 *        \vec{r_{ji}}.y & -\vec{r_{ji}}.x & 0
+		 *       0 & \vec{v_{ji}}.z & -\vec{v_{ji}}.y \\
+		 *       -\vec{v_{ji}}.z & 0 & \vec{v_{ji}}.x \\
+		 *        \vec{v_{ji}}.y & -\vec{v_{ji}}.x & 0
 		 *      \end{array}
 		 *   \right| \f$<br>
-		 * \f$ \vec{r_{ji}} = \vec{p_i} - \vec{p_j} \f$<br>
-		 * \f$ \vec{r_{jk}} = \vec{p_k} - \vec{p_j} \f$<br>
-		 * \f$ \vec{r_{jl}} = \vec{p_l} - \vec{p_j} \f$<br>
+		 * \f$ \vec{v_{ji}} = \vec{p_i} - \vec{p_j} \f$<br>
+		 * \f$ \vec{v_{jk}} = \vec{p_k} - \vec{p_j} \f$<br>
+		 * \f$ \vec{v_{jl}} = \vec{p_l} - \vec{p_j} \f$<br>
 		 * \f$ \vec{r_{kl}} = \vec{p_l} - \vec{p_k} \f$<br>
-		 * \f$ \vec{r_{il}} = \vec{p_l} - \vec{p_i} \f$<br>
-		 * \f$ \vec{n_{ijk}} = \vec{r_{ji}} \times \vec{r_{jk}} \f$<br>
-		 * \f$ r_{jl} = \sqrt{\vec{r_{jl}} \cdot \vec{r_{jl}}} \f$<br>
-		 * \f$ \cos(\omega_{ijk;l}) = \frac{\vec{n_{ijk}} \cdot \vec{r_{jl}}}{|\vec{n_{ijk}}| \: r_{jl}} \f$<br>
+		 * \f$ \vec{v_{il}} = \vec{p_l} - \vec{p_i} \f$<br>
+		 * \f$ \vec{n_{ijk}} = \vec{v_{ji}} \times \vec{v_{jk}} \f$<br>
+		 * \f$ r_{jl} = |\vec{v_{jl}}| \f$<br>
 		 *
-		 * where:<br>
-		 * \f$ \vec{p_i} \f$ = The coordinates of atom \e i.<br>
-		 * \f$ \vec{p_j} \f$ = The coordinates of atom \e j.<br>
-		 * \f$ \vec{p_k} \f$ = The coordinates of atom \e k.<br>
-		 * \f$ \vec{p_l} \f$ = The coordinates of atom \e l.<br>
+		 * \f$ \vec{p_i} \f$ = coordinates of atom \e i.<br>
+		 * \f$ \vec{p_j} \f$ = coordinates of atom \e j.<br>
+		 * \f$ \vec{p_k} \f$ = coordinates of atom \e k.<br>
+		 * \f$ \vec{p_l} \f$ = coordinates of atom \e l.<br>
 		 *
 		 * \param term_atom1_pos The position \f$ \vec{p_i} \f$ of the terminal atom \e i.
 		 * \param ctr_atom_pos The position \f$ \vec{p_j} \f$ of the central atom \e j.

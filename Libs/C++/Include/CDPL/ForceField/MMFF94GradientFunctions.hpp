@@ -61,27 +61,42 @@ namespace CDPL
 		ValueType calcMMFF94BondStretchingGradient(const MMFF94BondStretchingInteraction& iaction, const CoordsArray& coords, GradVector& grad);
 
 		/**
-		 * \brief Calculates the bond stretching interaction gradient \f$ EB_{ij} \f$ for the bond \e i-j.
+		 * \brief Calculates the bond stretching interaction energy gradient \f$ \nabla EB_{ij} \f$ for the bond \e i-j.
 		 * 
+		 * Energy function:<br>
+		 *
 		 * \f$ EB_{ij} = 143.9325 \: \frac{kb_{IJ}}{2} \: \Delta r_{ij}^2 \times (1 + cs \: \Delta r_{ij} + \frac{7}{12} \: cs^2 \: \Delta r_{ij}^2) \f$
 		 *
-		 * where:<br>
-		 *  \f$ kb_{IJ} \f$ = the bond stretching force constant in \f$ \frac{md}{\AA} \f$ for bonded 
-		 *                    atoms \e i and \e j of types \e I and \e J.<br>
-		 *  \f$ \Delta r_{ij} \f$ = \f$ r_{ij} - r_{IJ}^0 \f$, the difference in angstroms between actual and
-		 *                          reference bond lengths between bonded atoms \e i and 
-		 *                          \e j of types \e I and \e J.<br>
-		 *  \f$ cs \f$ = \f$ -2 \: \AA^{-1} \f$, the "cubic stretch" constant.<br>
+		 * The partial derivatives with respect to the atom coordinates \f$ \vec{p_x} \f$ are calculated by:<br>
+		 *
+		 * \f$ \frac{\partial EB_{ij}}{\partial \vec{p_x}} = \frac{\partial EB_{ij}}{\partial \Delta r_{ij}} \: \frac{\partial \Delta r_{ij}}{\partial \vec{p_x}} \f$<br>
+		 *
+		 * \f$ \frac{\partial EB_{ij}}{\partial \Delta r_{ij}} = (167.92125 \: \Delta r_{ij}^3 \: cs^2  + 215.89875 \: \Delta r_{ij}^2 \: cs + 143.9325 \: \Delta r_{ij}) \: kb_{IJ} \f$<br>
+		 *
+		 * for the calculation of the partial derivatives \f$ \frac{\partial \Delta r_{ij}}{\partial \vec{p_x}} \f$ see calcDistanceDerivatives().
+		 *
+		 * where<br>
+		 * \f$ kb_{IJ} \f$ = the bond stretching force constant in \f$ \frac{md}{Ang} \f$ for bonded 
+		 *                   atoms \e i and \e j of types \e I and \e J.<br>
+		 * \f$ \Delta r_{ij} \f$ = \f$ r_{ij} - r_{IJ}^0 \f$, the difference in angstroms between actual and
+		 *                         reference bond lengths between bonded atoms \e i and 
+		 *                         \e j of types \e I and \e J.<br>
+		 * \f$ cs \f$ = \f$ -2 \: Ang^{-1} \f$, the "cubic stretch" constant.<br>
+		 * \f$ \vec{p_x} \f$ = coordinates of the involved atoms \e i and \e j.<br>
 		 *
 		 * Note: throughout this description, the indices \e i, \e j, \e k, ... represent atoms;
 		 * \e I, \e J, \e K, ... denote the corresponding numerical MMFF atom types (or, 
 		 * occasionally, the atomic species).
 		 * 
-		 * \param atom1_pos The position of atom \e i.
-		 * \param atom2_pos The position of atom \e j.
+		 * \param atom1_pos The position \f$ \vec{p_i} \f$ of atom \e i.
+		 * \param atom2_pos The position \f$ \vec{p_j} \f$ of atom \e j.
+		 * \param atom1_grad The output variable storing the accumulated energy gradient contributions for atom \e i.
+		 * \param atom2_grad The output variable storing the accumulated energy gradient contributions for atom \e j.
 		 * \param force_const The bond stretching force constant \f$ kb_{IJ} \f$.
 		 * \param ref_length The reference bond length \f$ r_{IJ}^0 \f$.
-		 * \return The calculated bond stretching gradient \f$ EB_{ij} \f$.
+		 * \return The calculated bond stretching interaction energy \f$ EB_{ij} \f$.
+		 * \note The calculated partial energy derivative (see above) for an atom gets \e added to the
+		 *       corresponding output variable!
 		 */
 		template <typename ValueType, typename CoordsVec, typename GradVec>
 		ValueType calcMMFF94BondStretchingGradient(const CoordsVec& atom1_pos, const CoordsVec& atom2_pos, 
@@ -96,33 +111,53 @@ namespace CDPL
 		ValueType calcMMFF94AngleBendingGradient(const MMFF94AngleBendingInteraction& iaction, const CoordsArray& coords, GradVector& grad);
 
 		/**
-		 * \brief Calculates the angle bending gradient \f$ EA_{ijk} \f$ for two bonds \e i-j and \e j-k. 
+		 * \brief Calculates the angle bending interaction energy gradient \f$ \nabla EA_{ijk} \f$ for two bonds \e i-j and \e j-k. 
+		 *
+		 * Energy function employed for the non-linear case:<br>
 		 *
 		 * \f$ EA_{ijk} = 0.043844 \: \frac{ka_{IJK}}{2} \: \Delta \vartheta_{ijk}^2 \: (1 + cb \: \Delta \vartheta_{ijk}) \f$
 		 *
-		 * where:<br>
-		 *  \f$ ka_{IJK} \f$ = angle bending force constant in  \f$ \frac{md \AA}{rad^2} \f$ for the
-		 *                     angle between atoms \e i, \e j and \e k of atom types \e I, \e J and \e K.<br>
-		 *  \f$ \Delta \vartheta_{ijk} \f$ = \f$ \vartheta_{ijk} - \vartheta_{IJK}^0 \f$, the difference between actual and 
-		 *                                   reference \e i-j-k bond angles in degrees.<br>
-		 *  \f$ cb \f$ = \f$ -0.007 \: deg^{-1} \f$, the "cubic-bend" constant.<br>
+		 * The partial derivatives with respect to the atom coordinates \f$ \vec{p_x} \f$ are calculated by:<br>
 		 *
+		 * \f$ \frac{\partial EA_{ijk}}{\partial \vec{p_x}} = \frac{\partial EA_{ijk}}{\partial \vartheta_{ijk}} \: \frac{\partial \vartheta_{ijk}}{\partial \cos(\vartheta_{ijk})} \: 
+		 *                                                    \frac{\partial \cos(\vartheta_{ijk})}{\vec{p_x}} \f$<br>
+		 *
+		 * \f$ \frac{\partial EA_{ijk}}{\partial \vartheta_{ijk}} = -ka_{IJK} \: (86.58992538 \: \vartheta_{ijk}^2 - 3.022558594 \: \vartheta_{ijk} \: \vartheta_{IJK}^0  
+		 *                                                          - 143.9313616 \: \vartheta_{ijk} + 0.02637679965 \: \vartheta_{IJK}^{0^2} + 2.512076157 \: \vartheta_{IJK}^0) \f$<br>
+		 * \f$ \frac{\partial \vartheta_{ijk}}{\partial \cos(\vartheta_{ijk})} = \frac{-1}{\sqrt{1 - \cos(\vartheta_{ijk})^2}} \f$<br>
+		 *
+		 * for the calculation of the partial derivatives \f$ \frac{\partial \cos(\vartheta_{ijk})}{\vec{p_x}} \f$ see calcBondAngleCosDerivatives().
 		 *
 		 * For linear or near-linear bond angles such as those which occur in alkynes,
-		 * nitriles, isonitriles, azides, and diazo compounds, the form used 
+		 * nitriles, isonitriles, azides, and diazo compounds, the energy function form used 
 		 * in DREIDING and UFF is employed:
 		 *
 		 * \f$ EA_{ijk} = 143.9325 \: ka_{IJK} \:(1 + \cos(\vartheta_{ijk})) \f$
 		 *
-		 * where \f$ ka_{IJK} \f$ and \f$ \vartheta_{ijk} \f$ are defined as above. 
-		 * 
-		 * \param term_atom1_pos The position of atom \e i.
-		 * \param ctr_atom_pos The position of the central atom \e j.
-		 * \param term_atom2_pos The position of atom \e k.
+		 * The partial derivatives with respect to the atom coordinates \f$ \vec{p_x} \f$ are calculated by:<br>
+		 *
+		 * \f$ \frac{\partial EA_{ijk}}{\partial \vec{p_x}} = 143.9325 \: ka_{IJK} \: \frac{\partial \cos(\vartheta_{ijk})}{\vec{p_x}} \f$<br>
+		 *
+		 * where<br>
+		 * \f$ ka_{IJK} \f$ = angle bending force constant in  \f$ \frac{md Ang}{rad^2} \f$ for the
+		 *                    angle between atoms \e i, \e j and \e k of atom types \e I, \e J and \e K.<br>
+		 * \f$ \Delta \vartheta_{ijk} \f$ = \f$ \vartheta_{ijk} - \vartheta_{IJK}^0 \f$, the difference between actual and 
+		 *                                  reference \e i-j-k bond angles in degrees.<br>
+		 * \f$ cb \f$ = \f$ -0.007 \: deg^{-1} \f$, the "cubic-bend" constant.<br>
+		 * \f$ \vec{p_x} \f$ = coordinates of the involved atoms \e i, \e j and \e k.<br>
+		 *
+		 * \param term_atom1_pos The position \f$ \vec{p_i} \f$ of atom \e i.
+		 * \param ctr_atom_pos The position \f$ \vec{p_j} \f$ of the central atom \e j.
+		 * \param term_atom2_pos The position \f$ \vec{p_k} \f$ of atom \e k.
+		 * \param term_atom1_grad The output variable storing the accumulated energy gradient contributions for atom \e i.
+		 * \param ctr_atom_grad The output variable storing the accumulated energy gradient contributions for atom \e j.
+		 * \param term_atom2_grad The output variable storing the accumulated energy gradient contributions for atom \e k.
 		 * \param linear If \c true, the bond angle is linear.
 		 * \param force_const The angle bending force constant \f$ ka_{IJK} \f$.
 		 * \param ref_angle The reference bond angle \f$ \vartheta_{IJK}^0 \f$.
-		 * \return The calculated angle bending gradient \f$ EA_{ijk} \f$.
+		 * \return The calculated angle bending interaction energy \f$ EA_{ijk} \f$.
+		 * \note The calculated partial energy derivative (see above) for an atom gets \e added to the
+		 *       corresponding output variable!
 		 */
 		template <typename ValueType, typename CoordsVec, typename GradVec>
 		ValueType calcMMFF94AngleBendingGradient(const CoordsVec& term_atom1_pos, const CoordsVec& ctr_atom_pos, const CoordsVec& term_atom2_pos, 
@@ -136,33 +171,54 @@ namespace CDPL
 		template <typename ValueType, typename CoordsArray, typename GradVector>
 		ValueType calcMMFF94StretchBendGradient(const MMFF94StretchBendInteraction& iaction, const CoordsArray& coords, GradVector& grad);
 
-		/**
-		 * \brief Calculates the stretch-bend gradient \f$ EBA_{ijk} \f$ for two bonds \e i-j and \e j-k.
+ 		/**
+		 * \brief Calculates the stretch-bend interaction energy gradient \f$ \nabla EBA_{ijk} \f$ for two bonds \e i-j and \e j-k.
 		 * 
+		 * Energy function:<br>
+		 *
 		 * \f$ EBA_{ijk} = 2.51210 \: (kba_{IJK} \: \Delta r_{ij} + kba_{KJI} \: \Delta r_{kj}) \: \Delta \vartheta_{ijk} \f$
 		 *
-		 * where:<br>
-		 *  \f$ kba_{IJK} \f$ = force constant in \f$ \frac{md}{rad} \f$ for \e i-j stretch coupled to \e i-j-k bend.<br>
-		 *  \f$ kba_{KJI} \f$ = force constant in \f$ \frac{md}{rad} \f$ for \e k-j stretch coupled to \e i-j-k bend.<br>
-		 *  \f$ \Delta r_{ij} \f$ = \f$ r_{ij} - r_{IJ}^0 \f$, the difference in angstroms between actual and
-		 *                          reference bond lengths between bonded atoms \e i and \e j of types \e I and \e J.<br>
-		 *  \f$ \Delta r_{kj} \f$ = \f$ r_{kj} - r_{KJ}^0 \f$, the difference in angstroms between actual and
-		 *                          reference bond lengths between bonded atoms \e k and \e j of types \e K and \e J.<br>
-		 *  \f$ \Delta \vartheta_{ijk} \f$ = \f$ \vartheta_{ijk} - \vartheta_{IJK}^0 \f$, the difference between actual and 
-		 *                                   reference \e i-j-k bond angles in degrees.<br>
+		 * The partial derivatives with respect to the atom coordinates \f$ \vec{p_x} \f$ are calculated by:<br>
+		 *
+		 * \f$ \frac{\partial EBA_{ijk}}{\partial \vec{p_x}} = 2.5121 \: \Delta \vartheta_{ijk} \: (kba_{IJK} \: \frac{\partial \Delta r_{ij}}{\partial \vec{p_x}} + kba_{KJI} \: \frac{\partial \Delta r_{kj}}{\partial \vec{p_x}}) + 
+		 *                                                     2.5121 \: \frac{\partial \Delta \vartheta_{ijk}}{\partial \vec{p_x}} \: (kba_{IJK} \: \Delta r_{ij} + kba_{KJI} \: \Delta r_{kj}) \f$<br>
+		 *
+		 * \f$ \frac{\partial \Delta \vartheta_{ijk}}{\partial \vec{p_x}} = \frac{\partial \Delta \vartheta_{ijk}}{\partial \vartheta_{ijk}} \: \frac{\partial \vartheta_{ijk}}{\partial \cos(\vartheta_{ijk})} \: 
+		 *                                                                  \frac{\partial \cos(\vartheta_{ijk})}{\vec{p_x}} \f$<br>
+		 * \f$ \frac{\partial \Delta \vartheta_{ijk}}{\partial \vartheta_{ijk}} = \frac{180}{\pi} \f$<br>
+		 * \f$ \frac{\partial \vartheta_{ijk}}{\partial \cos(\vartheta_{ijk})} = \frac{-1}{\sqrt{1 - \cos(\vartheta_{ijk})^2}} \f$<br>
+		 *
+		 * for the calculation of the partial derivatives \f$ \frac{\partial \cos(\vartheta_{ijk})}{\vec{p_x}} \f$ see calcBondAngleCosDerivatives()
+		 * and for the calculation of \f$ \frac{\partial \Delta r_{ij}}{\partial \vec{p_x}} \f$ see calcDistanceDerivatives().
+		 *
+		 * where<br>
+		 * \f$ kba_{IJK} \f$ = force constant in \f$ \frac{md}{rad} \f$ for \e i-j stretch coupled to \e i-j-k bend.<br>
+		 * \f$ kba_{KJI} \f$ = force constant in \f$ \frac{md}{rad} \f$ for \e k-j stretch coupled to \e i-j-k bend.<br>
+		 * \f$ \Delta r_{ij} \f$ = \f$ r_{ij} - r_{IJ}^0 \f$, the difference in angstroms between actual and
+		 *                         reference bond lengths between bonded atoms \e i and \e j of types \e I and \e J.<br>
+		 * \f$ \Delta r_{kj} \f$ = \f$ r_{kj} - r_{KJ}^0 \f$, the difference in angstroms between actual and
+		 *                         reference bond lengths between bonded atoms \e k and \e j of types \e K and \e J.<br>
+		 * \f$ \Delta \vartheta_{ijk} \f$ = \f$ \vartheta_{ijk} \: \frac{180}{\pi} - \vartheta_{IJK}^0 \f$, the difference between actual and 
+		 *                                  reference \e i-j-k bond angles in degrees.<br>
+		 * \f$ \vec{p_x} \f$ = coordinates of the involved atoms \e i, \e j and \e k.<br>
 		 *
 		 * Currently, stretch-bend interactions are omitted when the \e i-j-k interaction
 		 * corresponds to a linear bond angle.  
 		 *
-		 * \param term_atom1_pos The position of atom \e i.
-		 * \param ctr_atom_pos The position of the central atom \e j.
-		 * \param term_atom2_pos The position of atom \e k.
+		 * \param term_atom1_pos The position \f$ \vec{p_i} \f$ of atom \e i.
+		 * \param ctr_atom_pos The position \f$ \vec{p_j} \f$ of the central atom \e j.
+		 * \param term_atom2_pos The position \f$ \vec{p_k} \f$ of atom \e k.
+		 * \param term_atom1_grad The output variable storing the accumulated energy gradient contributions for atom \e i.
+		 * \param ctr_atom_grad The output variable storing the accumulated energy gradient contributions for atom \e j.
+		 * \param term_atom2_grad The output variable storing the accumulated energy gradient contributions for atom \e k.
 		 * \param ijk_force_const The stretch-bend force constant \f$ kba_{IJK} \f$.
 		 * \param kji_force_const The stretch-bend force constant \f$ kba_{KJI} \f$.
 		 * \param ref_angle The reference bond angle \f$ \vartheta_{IJK}^0 \f$.
 		 * \param ref_length1 The reference bond length \f$ r_{IJ}^0 \f$.
 		 * \param ref_length2 The reference bond length \f$ r_{KJ}^0 \f$.
-		 * \return The calculated stretch-bend gradient \f$ EBA_{ijk} \f$.
+		 * \return The calculated stretch-bend interaction energy \f$ EBA_{ijk} \f$.
+		 * \note The calculated partial energy derivative (see above) for an atom gets \e added to the
+		 *       corresponding output variable!
 		 */
 		template <typename ValueType, typename CoordsVec, typename GradVec>
 		ValueType calcMMFF94StretchBendGradient(const CoordsVec& term_atom1_pos, const CoordsVec& ctr_atom_pos, const CoordsVec& term_atom2_pos, 
@@ -176,23 +232,43 @@ namespace CDPL
 
 		template <typename ValueType, typename CoordsArray, typename GradVector>
 		ValueType calcMMFF94OutOfPlaneBendingGradient(const MMFF94OutOfPlaneBendingInteraction& iaction, const CoordsArray& coords, GradVector& grad);
-
+  
 		/**
-		 * \brief Calculates the out-of-plane bending gradient \f$ EOOP_{ijk;l} \f$ for the bond \e j-l and the plane \e i-j-k.
+		 * \brief Calculates the out-of-plane bending interaction energy gradient \f$ \nabla EOOP_{ijk;l} \f$ for the bond \e j-l and the plane \e i-j-k.
 		 * 
-		 * \f$ EOOP_{ijk;l} = 0.043844 \: \frac{koop_{IJK \colon L}}{2} \: \chi_{ijk;l}^2 \f$ 
+		 * Energy function:<br>
 		 *
-		 * where:<br>
-		 *  \f$ koop_{IJK \colon L} \f$ = out-of-plane bending force constant in \f$ \frac{md \AA}{rad^2} \f$.<br>
-		 *  \f$ \chi_{ijk;l} \f$ = angle in degrees between the bond \e j-l and the 
-		 *                         plane \e i-j-k, where \e j is the central atom.<br>
+		 * \f$ EOOP_{ijk;l} = 0.043844 \: \frac{koop_{IJK \colon L}}{2} \: (\chi_{ijk;l} \: \frac{180}{\pi})^2 \f$ 
 		 *
-		 * \param term_atom1_pos The position of atom \e i.
-		 * \param ctr_atom_pos The position of the central atom \e j.
-		 * \param term_atom2_pos The position of atom \e k.
-		 * \param oop_atom_pos The position of the out-of-plane atom \e l.
+		 * The partial derivatives with respect to the atom coordinates \f$ \vec{p_x} \f$ are calculated by:<br>
+		 *
+		 * \f$ \frac{\partial EOOP_{ijk;l}}{\partial \vec{p_x}} = \frac{\partial EOOP_{ijk;l}}{\partial \chi_{ijk;l}} \: \frac{\partial \chi_{ijk;l}}{\partial \cos(\alpha_{ijk;l})} \:
+		 *                                                        \frac{\partial \cos(\alpha_{ijk;l})}{\partial \vec{p_x}} \f$<br>
+		 *
+		 * \f$ \frac{\partial EOOP_{ijk;l}}{\partial \chi_{ijk;l}} = 0.043844 \: (\frac{180}{\pi})^2 \: \chi_{ijk;l} \: koop_{IJK \colon L} \f$<br>
+		 * \f$ \chi_{ijk;l} = \frac{\pi}{2} - \alpha_{ijk;l} \f$<br>
+		 * \f$ \frac{\partial \chi_{ijk;l}}{\partial \cos(\alpha_{ijk;l})} = \frac{-1}{\sqrt{1 - \cos(\alpha_{ijk;l})^2}} \f$<br>
+		 *
+		 * for the calculation of the partial derivatives \f$ \frac{\partial \cos(\alpha_{ijk;l})}{\partial \vec{p_x}} \f$ see calcOutOfPlaneAngleCosDerivatives().
+		 *
+		 * where<br>
+		 * \f$ koop_{IJK \colon L} \f$ = out-of-plane bending force constant in \f$ \frac{md Ang}{rad^2} \f$.<br>
+		 * \f$ \chi_{ijk;l} \f$ = angle in radians between the bond \e j-l and the 
+		 *                        plane \e i-j-k, where \e j is the central atom.<br>
+		 * \f$ \vec{p_x} \f$ = coordinates of the involved atoms \e i, \e j, \e k and \e l.<br>
+		 *
+		 * \param term_atom1_pos The position \f$ \vec{p_i} \f$ of atom \e i.
+		 * \param ctr_atom_pos The position \f$ \vec{p_j} \f$ of the central atom \e j.
+		 * \param term_atom2_pos The position \f$ \vec{p_k} \f$ of atom \e k.
+		 * \param oop_atom_pos The position \f$ \vec{p_l} \f$ of the out-of-plane atom \e l.
+		 * \param term_atom1_grad The output variable storing the accumulated energy gradient contributions for atom \e i.
+		 * \param ctr_atom_grad The output variable storing the accumulated energy gradient contributions for atom \e j.
+		 * \param term_atom2_grad The output variable storing the accumulated energy gradient contributions for atom \e k.
+		 * \param oop_atom_grad The output variable storing the accumulated energy gradient contributions for atom \e l.
 		 * \param force_const The out-of-plane bending force constant \f$ koop_{IJK \colon L} \f$.
-		 * \return The calculated out-of-plane gradient \f$ EOOP_{ijk;l} \f$.
+		 * \return The calculated out-of-plane bending interaction energy \f$ EOOP_{ijk;l} \f$.
+		 * \note The calculated partial energy derivative (see above) for an atom gets \e added to the
+		 *       corresponding output variable!
 		 */
 		template <typename ValueType, typename CoordsVec, typename GradVec>
 		ValueType calcMMFF94OutOfPlaneBendingGradient(const CoordsVec& term_atom1_pos, const CoordsVec& ctr_atom_pos, const CoordsVec& term_atom2_pos, 
@@ -205,25 +281,45 @@ namespace CDPL
 
 		template <typename ValueType, typename CoordsArray, typename GradVector>
 		ValueType calcMMFF94TorsionGradient(const MMFF94TorsionInteraction& iaction, const CoordsArray& coords, GradVector& grad);
-
+ 
 		/**
-		 * \brief Calculates the torsion interaction gradient \f$ ET_{ijkl} \f$ for the central bond \e j-k 
+		 * \brief Calculates the torsion interaction energy gradient \f$ \nabla ET_{ijkl} \f$ for the central bond \e j-k 
 		 *        and the connected bonds \e i-j and \e k-l.
 		 *
-		 * \f$ ET_{ijkl} = 0.5 \: (V1 \: (1 + \cos(\Phi)) + V2 \: (1 - \cos(2 \: \Phi)) + V3 \: (1 + \cos(3 \: \Phi))) \f$
+		 * Energy function:<br>
 		 *
-		 * where \f$ \Phi \f$ is the \e i-j-k-l dihedral angle in degrees. The constants \f$ V1 \f$, \f$ V2 \f$ and 
-		 * \f$ V3 \f$ depend on the atom types \e I, \e J, \e K and \e L for atoms \e i, \e j, \e k and \e l, where \e i-j, 
-		 * \e j-k and \e k-l are bonded pairs and \e i is not equal to \e l.  
+		 * \f$ ET_{ijkl} = 0.5 \: (V_1 \: (1 + \cos(\Phi_{ijkl})) + V_2 \: (1 - \cos(2 \: \Phi_{ijkl})) + V_3 \: (1 + \cos(3 \: \Phi_{ijkl}))) \f$
 		 *
-		 * \param term_atom1_pos The position of the wing atom \e i.
-		 * \param ctr_atom1_pos The position of the central atom \e j.
-		 * \param ctr_atom2_pos The position of the central atom \e k.
-		 * \param term_atom2_pos The position of the wing atom \e l.
-		 * \param tor_param1 The torsion parameter \f$ V1 \f$.
-		 * \param tor_param2 The torsion parameter \f$ V2 \f$.
-		 * \param tor_param3 The torsion parameter \f$ V3 \f$.
-		 * \return The calculated torsion interaction gradient \f$ ET_{ijkl} \f$.
+		 * The partial derivatives with respect to the atom coordinates \f$ \vec{p_x} \f$ are calculated by:<br>
+		 *
+		 * \f$ \frac{\partial ET_{ijkl}}{\partial \vec{p_x}} = \frac{\partial ET_{ijkl}}{\partial \Phi_{ijkl}} \: \frac{\partial \Phi_{ijkl}}{\partial \cos(\Phi_{ijkl})} \:
+		 *                                                     \frac{\partial \cos(\Phi_{ijkl})}{\partial \vec{p_x}} \f$<br>
+		 *
+		 * \f$ \frac{\partial ET_{ijkl}}{\partial \Phi_{ijkl}} = V_2 \: \sin(2 \: \Phi_{ijkl}) - 0.5 \: V_1 \: \sin(\Phi_{ijkl}) - 1.5 \: V_3 \: \sin(3 \: \Phi_{ijkl}) \f$<br>
+		 * \f$ \frac{\partial \Phi_{ijkl}}{\partial \cos(\Phi_{ijkl})} = \frac{-1}{\sqrt{1 - \cos(\Phi_{ijkl})^2}} \f$<br>
+		 *
+		 * for the calculation of the partial derivatives \f$ \frac{\partial \cos(\Phi_{ijkl})}{\partial \vec{p_x}} \f$ see calcDihedralAngleCosDerivatives().
+		 *
+		 * where<br>
+		 * \f$ \Phi_{ijkl} \f$ is the \e i-j-k-l dihedral angle. The constants \f$ V_1 \f$, \f$ V_2 \f$ and 
+		 * \f$ V_3 \f$ depend on the atom types \e I, \e J, \e K and \e L for atoms \e i, \e j, \e k and \e l, where \e i-j, 
+		 * \e j-k and \e k-l are bonded pairs and \e i is not equal to \e l.<br>  
+		 * \f$ \vec{p_x} \f$ = coordinates of the involved atoms \e i, \e j, \e k and \e l.<br>
+		 *
+		 * \param term_atom1_pos The position \f$ \vec{p_i} \f$ of the terminal atom \e i.
+		 * \param ctr_atom1_pos The position \f$ \vec{p_j} \f$ of the central atom \e j.
+		 * \param ctr_atom2_pos The position \f$ \vec{p_k} \f$ of the central atom \e k.
+		 * \param term_atom2_pos The position \f$ \vec{p_l} \f$ of the terminal atom \e l.
+		 * \param term_atom1_grad The output variable storing the accumulated energy gradient contributions for atom \e i.
+		 * \param ctr_atom1_grad The output variable storing the accumulated energy gradient contributions for atom \e j.
+		 * \param ctr_atom2_grad The output variable storing the accumulated energy gradient contributions for atom \e k.
+		 * \param term_atom2_grad The output variable storing the accumulated energy gradient contributions for atom \e l.
+		 * \param tor_param1 The torsion parameter \f$ V_1 \f$.
+		 * \param tor_param2 The torsion parameter \f$ V_2 \f$.
+		 * \param tor_param3 The torsion parameter \f$ V_3 \f$.
+		 * \return The calculated torsion interaction energy \f$ ET_{ijkl} \f$.
+		 * \note The calculated partial energy derivative (see above) for an atom gets \e added to the
+		 *       corresponding output variable!
 		 */
 		template <typename ValueType, typename CoordsVec, typename GradVec>
 		ValueType calcMMFF94TorsionGradient(const CoordsVec& term_atom1_pos, const CoordsVec& ctr_atom1_pos, const CoordsVec& ctr_atom2_pos, 
@@ -237,31 +333,47 @@ namespace CDPL
 
 		template <typename ValueType, typename CoordsArray, typename GradVector>
 		ValueType calcMMFF94ElectrostaticGradient(const MMFF94ElectrostaticInteraction& iaction, const CoordsArray& coords, GradVector& grad);
-
+ 
 		/**
-		 * \brief Calculates the electrostatic interaction gradient \f$ EQ_{ij} \f$ of an atom pair \e i-j.
+		 * \brief Calculates the electrostatic interaction energy gradient \f$ \nabla EQ_{ij} \f$ for the atom pair \e i-j.
 		 * 
-		 * \f$ EQ_{ij} = 332.0716 \: \frac{q_i \: q_j}{D \: (R_{ij} + \delta)^n} \f$
+		 * Energy function:<br>
+		 *
+		 * \f$ EQ_{ij} = S \: 332.0716 \: \frac{q_i \: q_j}{D \: (R_{ij} + \delta)^n} \f$
 		 * 
-		 * where:<br>
-		 *  \f$ q_i \f$ and \f$ q_j \f$ = Partial atomic charges.<br>
-		 *  \f$ D \f$ = Dielectric constant.<br>
-		 *  \f$ R_{ij} \f$ = Interatomic distance (Å).<br>
-		 *  \f$ \delta \f$ = Electrostatic buffering constant (\e 0.05 Å).<br>
-		 *  \f$ n \f$ = Exponent (normally \e 1, but can be \e 2 for 
-		 *              distance-dependent dielectric constant).<br>
+		 * The partial derivatives with respect to the atom coordinates \f$ \vec{p_x} \f$ are calculated by:<br>
+		 *
+		 * \f$ \frac{\partial EQ_{ij}}{\partial \vec{p_x}} = \frac{\partial EQ_{ij}}{\partial R_{ij}} \: \frac{\partial R_{ij}}{\partial \vec{p_x}} \f$<br>
+		 *
+		 * \f$ \frac{\partial EQ_{ij}}{\partial R_{ij}} = -S \: 332.0716 \: n \: \frac{q_i \: q_j}{D \: (R_{ij} + \delta)^{n + 1}} \f$<br>
+		 *
+		 * for the calculation of the partial derivatives \f$ \frac{\partial R_{ij}}{\partial \vec{p_x}} \f$ see calcDistanceDerivatives().
+		 *
+		 * where<br>
+		 * \f$ S \f$ = a scaling factor depending on the topological distance of \e i-j.<br>
+		 * \f$ q_i \f$ and \f$ q_j \f$ = partial atomic charges.<br>
+		 * \f$ D \f$ = dielectric constant.<br>
+		 * \f$ R_{ij} \f$ = interatomic distance (Å).<br>
+		 * \f$ \delta \f$ = electrostatic buffering constant (\e 0.05 Å).<br>
+		 * \f$ n \f$ = exponent (normally \e 1, but can be \e 2 for 
+		 *             distance-dependent dielectric constant).<br>
+		 * \f$ \vec{p_x} \f$ = coordinates of the involved atoms \e i and \e j.<br>
 		 *
 		 * Note: 1-4 electrostatic interactions are scaled by \e 0.75 (thus,
 		 * the electrostatic gradient term becomes \f$ EQ_{14} \: 0.75 \f$). 
 		 * 
-		 * \param atom1_pos The position of atom \e i.
-		 * \param atom2_pos The position of atom \e j.
+		 * \param atom1_pos The position \f$ \vec{p_i} \f$ of atom \e i.
+		 * \param atom2_pos The position \f$ \vec{p_j} \f$ of atom \e j.
+		 * \param atom1_grad The output variable storing the accumulated energy gradient contributions for atom \e i.
+		 * \param atom2_grad The output variable storing the accumulated energy gradient contributions for atom \e j.
 		 * \param atom1_chg The partial atom charge \f$ q_i \f$ of atom \e i.
 		 * \param atom2_chg The partial atom charge \f$ q_j \f$ of atom \e j.
 		 * \param scale_fact The scaling factor for \f$ S \f$ depending on the topological \e i-j distance.
 		 * \param de_const The dielectric constant \f$ D \f$.
 		 * \param dist_expo The exponent \f$ n \f$.
-		 * \return The calculated electrostatic interaction gradient \f$ EQ_{ij} \f$.
+		 * \return The calculated electrostatic interaction energy \f$ EQ_{ij} \f$.
+		 * \note The calculated partial energy derivative (see above) for an atom gets \e added to the
+		 *       corresponding output variable!
 		 */
 		template <typename ValueType, typename CoordsVec, typename GradVec>
 		ValueType calcMMFF94ElectrostaticGradient(const CoordsVec& atom1_pos, const CoordsVec& atom2_pos, GradVec& atom1_grad, 
@@ -274,18 +386,34 @@ namespace CDPL
 
 		template <typename ValueType, typename CoordsArray, typename GradVector>
 		ValueType calcMMFF94VanDerWaalsGradient(const MMFF94VanDerWaalsInteraction& iaction, const CoordsArray& coords, GradVector& grad);
+		/*
+		 * dEvdwij/dVi = dEvdwij/dRij * dRij/dVi
+		 * dEvdwij/dRij = -R*IJ^7 * eIJ / (Rij + 0.07 * R*IJ)^8 / (Rij^7 + 0.12 * R*IJ^7)^2 * 
+		 *               (-22.48094067 * Rij^14 + 19.78322779 * Rij^7 * R*IJ^7 + 0.8812528743 * Rij^6 * R*IJ^8 + 1.186993667 * R*IJ^14)
+		 */
 
 		/**
-		 * \brief Calculates the van der Waals interaction gradient \f$ E_{vdW_{ij}} \f$ of an atom pair \e i-j.
+		 * \brief Calculates the van der Waals interaction energy gradient \f$ \nabla E_{vdW_{ij}} \f$ for the atom pair \e i-j.
 		 *
-		 * \f$ E_{vdW_{ij}} = \varepsilon_{IJ} \: (\frac{1.07 \: R_{IJ}^*}{(R_{ij} + 0.07 \: R_{IJ}^*)})^7 \: (\frac{1.12 \: R_{IJ}^{*7}}{(R_{ij}^7 + 0.12 \: R_{IJ}^{*7})} - 2) \;\;\;\; (1) \f$
+		 * Energy function:<br>
+		 * \f$ E_{vdW_{ij}} = \varepsilon_{IJ} \: (\frac{1.07 \: R_{IJ}^*}{(R_{ij} + 0.07 \: R_{IJ}^*)})^7 \: (\frac{1.12 \: R_{IJ}^{*^7}}{(R_{ij}^7 + 0.12 \: R_{IJ}^{*^7})} - 2) \;\;\;\; (1) \f$
 		 *
-		 * where:<br>
-		 *  \f$R_{ij} \f$ = The interatomic distance.<br>
-		 *  \f$ R_{II}^* = A_I \: \alpha_I^{PEXP} \;\;\;\; (2) \f$<br>
-		 *  \f$ R_{IJ}^* = 0.5 \: (R_{II}^* + R_{JJ}^*) \: (1 + AFACT(1 - \exp(-BFACT \: \gamma_{IJ}^2))) \;\;\;\; (3) \f$<br> 
-		 *  \f$ \gamma_{IJ} = \frac{(R_{II}^* - R_{JJ}^*)}{(R_{II}^* + R_{JJ}^*)} \;\;\;\; (4) \f$ <br>
-		 *  \f$ \varepsilon_{IJ} = \frac{181.16 \: G_I \: GJ \: \alpha_I \: \alpha_J}{((\alpha_I / N_I)^{1/2} + (\alpha_J / N_J)^{1/2})} \: \frac{1}{R_{IJ}^{*6}} \;\;\;\; (5) \f$<br>
+		 * The partial derivatives with respect to the atom coordinates \f$ \vec{p_x} \f$ are calculated by:<br>
+		 *
+		 * \f$ \frac{\partial E_{vdW_{ij}}}{\partial \vec{p_x}} = \frac{\partial E_{vdW_{ij}}}{\partial R_{ij}} \: \frac{\partial R_{ij}}{\partial \vec{p_x}} \f$<br>
+		 *
+		 * \f$ \frac{\partial E_{vdW_{ij}}}{\partial R_{ij}} = \frac{-R_{IJ}^{*^7} \: \varepsilon_{IJ}}{(R_{ij} + 0.07 \: R_{IJ}^*)^8 \: (R_{ij}^7 + 0.12 \: R_{IJ}^{*^7})^2} \: 
+		 *               (-22.48094067 \: R_{ij}^{14} + 19.78322779 \: R_{ij}^7 \: R_{IJ}^{*^7} + 0.8812528743 \: R_{ij}^6 \: R_{IJ}^{*^8} + 1.186993667 \: R_{IJ}^{*^{14}}) \f$<br>
+		 *
+		 * for the calculation of the partial derivatives \f$ \frac{\partial R_{ij}}{\partial \vec{p_x}} \f$ see calcDistanceDerivatives().
+		 *
+		 * where<br>
+		 * \f$ R_{ij} \f$ = the interatomic distance.<br>
+		 * \f$ R_{II}^* = A_I \: \alpha_I^{PEXP} \;\;\;\; (2) \f$<br>
+		 * \f$ R_{IJ}^* = 0.5 \: (R_{II}^* + R_{JJ}^*) \: (1 + AFACT(1 - \exp(-BFACT \: \gamma_{IJ}^2))) \;\;\;\; (3) \f$<br> 
+		 * \f$ \gamma_{IJ} = \frac{(R_{II}^* - R_{JJ}^*)}{(R_{II}^* + R_{JJ}^*)} \;\;\;\; (4) \f$ <br>
+		 * \f$ \varepsilon_{IJ} = \frac{181.16 \: G_I \: GJ \: \alpha_I \: \alpha_J}{((\alpha_I / N_I)^{1/2} + (\alpha_J / N_J)^{1/2})} \: \frac{1}{R_{IJ}^{*6}} \;\;\;\; (5) \f$<br>
+		 * \f$ \vec{p_x} \f$ = coordinates of the involved atoms \e i and \e j.<br>
 		 *
 		 * MMFF employs a "Buffered 14-7" form (eq 1) together with an 
 		 * expression which relates the minimum-gradient separation \f$ R_{II}^* \f$ to the 
@@ -303,12 +431,16 @@ namespace CDPL
 		 * by eq 3 by \e DARAD (currently \e 0.8) and \f$ \varepsilon_{IJ} \f$ as given by eq 5 by \e DAEPS (currently
 		 * \e 0.5). 
 		 *   
-		 * \param atom1_pos The position of atom \e i.
-		 * \param atom2_pos The position of atom \e j.
+		 * \param atom1_pos The position \f$ \vec{p_i} \f$ of atom \e i.
+		 * \param atom2_pos The position \f$ \vec{p_j} \f$ of atom \e j.
+		 * \param atom1_grad The output variable storing the accumulated energy gradient contributions for atom \e i.
+		 * \param atom2_grad The output variable storing the accumulated energy gradient contributions for atom \e j.
 		 * \param e_IJ The precalculated value \f$ \varepsilon_{IJ} \f$.
 		 * \param r_IJ The precalculated value \f$ R_{IJ}^* \f$.
-		 * \param r_IJ_7 The precalculated value \f$ R_{IJ}^{*7} \f$.
-		 * \return The calculated van der Waals interaction gradient \f$ E_{vdW_{ij}} \f$.
+		 * \param r_IJ_7 The precalculated value \f$ R_{IJ}^{*^7} \f$.
+		 * \return The calculated van der Waals interaction energy \f$ E_{vdW_{ij}} \f$.
+		 * \note The calculated partial energy derivative (see above) for an atom gets \e added to the
+		 *       corresponding output variable!
 		 */
 		template <typename ValueType, typename CoordsVec, typename GradVec>
 		ValueType calcMMFF94VanDerWaalsGradient(const CoordsVec& atom1_pos, const CoordsVec& atom2_pos, GradVec& atom1_grad, 
