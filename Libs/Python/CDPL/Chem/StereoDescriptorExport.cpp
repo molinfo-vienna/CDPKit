@@ -30,6 +30,8 @@
 #include "CDPL/Chem/Atom.hpp"
 #include "CDPL/Base/Exceptions.hpp"
 
+#include "Base/ObjectIdentityCheckVisitor.hpp"
+
 #include "ClassExports.hpp"
 
 
@@ -125,6 +127,7 @@ void CDPLPythonChem::exportStereoDescriptor()
 		.def("getPermutationParity", &getPermutationParity3, 
 			 (python::arg("self"), python::arg("atom1"), python::arg("atom2"), 
 			  python::arg("atom3")))
+		.def(CDPLPythonBase::ObjectIdentityCheckVisitor<Chem::StereoDescriptor>())
 		.def("isValid", &isValidForAtom, (python::arg("self"), python::arg("atom")))
 		.def("isValid", &isValidForBond, (python::arg("self"), python::arg("bond")))
 		.add_property("configuration", &Chem::StereoDescriptor::getConfiguration, 

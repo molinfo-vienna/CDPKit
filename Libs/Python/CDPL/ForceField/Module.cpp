@@ -36,6 +36,73 @@ BOOST_PYTHON_MODULE(_forcefield)
 {
 	using namespace CDPLPythonForceField;
 
+	exportInteractionTypes();
+
+	exportAtomProperties();
+	exportBondProperties();
+	exportMolecularGraphProperties();
+
+	exportMMFF94AromaticSSSRSubset();
+	exportMMFF94AtomTyper();
+	exportMMFF94BondTyper();
+	exportMMFF94ChargeCalculator();
+
+	exportMMFF94EnergyCalculator();
+	exportMMFF94GradientCalculator();
+
+	exportMMFF94BondStretchingInteraction();
+	exportMMFF94AngleBendingInteraction();
+	exportMMFF94StretchBendInteraction();
+	exportMMFF94OutOfPlaneBendingInteraction();
+	exportMMFF94TorsionInteraction();
+	exportMMFF94VanDerWaalsInteraction();
+	exportMMFF94ElectrostaticInteraction();
+
+	exportMMFF94BondStretchingInteractionData();
+	exportMMFF94AngleBendingInteractionData();
+	exportMMFF94StretchBendInteractionData();
+	exportMMFF94OutOfPlaneBendingInteractionData();
+	exportMMFF94TorsionInteractionData();
+	exportMMFF94VanDerWaalsInteractionData();
+	exportMMFF94ElectrostaticInteractionData();
+	exportMMFF94InteractionData();
+
+	exportMMFF94BondStretchingInteractionParameterizer();
+	exportMMFF94AngleBendingInteractionParameterizer();
+	exportMMFF94StretchBendInteractionParameterizer();
+	exportMMFF94OutOfPlaneBendingInteractionParameterizer();
+	exportMMFF94TorsionInteractionParameterizer();
+	exportMMFF94VanDerWaalsInteractionParameterizer();
+	exportMMFF94ElectrostaticInteractionParameterizer();
+	exportMMFF94InteractionParameterizer();
+
+	exportMMFF94SymbolicAtomTypePatternTable();
+	exportMMFF94HeavyToHydrogenAtomTypeMap();
+	exportMMFF94SymbolicToNumericAtomTypeMap();
+	exportMMFF94AromaticAtomTypeDefinitionTable();
+	exportMMFF94AtomTypePropertyTable();
+	exportMMFF94FormalAtomChargeDefinitionTable();
+	exportMMFF94BondChargeIncrementTable();
+	exportMMFF94PartialBondChargeIncrementTable();
+	exportMMFF94PrimaryToParameterAtomTypeMap();
+	exportMMFF94AngleBendingParameterTable();
+	exportMMFF94BondStretchingParameterTable();
+	exportMMFF94BondStretchingRuleParameterTable();
+	exportMMFF94StretchBendParameterTable();
+	exportMMFF94DefaultStretchBendParameterTable();
+	exportMMFF94OutOfPlaneBendingParameterTable();
+	exportMMFF94TorsionParameterTable();
+	exportMMFF94VanDerWaalsParameterTable();
+
+	exportUtilityFunctions();
+	exportMMFF94EnergyFunctions();
+	exportMMFF94GradientFunctions();
+	exportAtomFunctions();
+	exportBondFunctions();
+	exportMolecularGraphFunctions();
+
+	exportBoostFunctionWrappers();
+
 	registerToPythonConverters();
 	registerFromPythonConverters();
 }

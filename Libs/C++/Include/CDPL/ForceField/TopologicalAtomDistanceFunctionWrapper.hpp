@@ -43,26 +43,26 @@ namespace CDPL
     namespace Chem
     {
 
-	class Atom;
-	class MolecularGraph;
+		class Atom;
+		class MolecularGraph;
     }
 
     namespace ForceField 
     {
 
-	/**
-	 * \addtogroup CDPL_FORCEFIELD_DATA_STRUCTURES
-	 * @{
-	 */
+		/**
+		 * \addtogroup CDPL_FORCEFIELD_DATA_STRUCTURES
+		 * @{
+		 */
 
-	/**
-	 * \brief A generic wrapper class used to store a user-defined topological atom-pair distance function.
-	 */
-	typedef boost::function3<std::size_t, const Chem::Atom&, const Chem::Atom&, const Chem::MolecularGraph&> TopologicalAtomDistanceFunction;
+		/**
+		 * \brief A generic wrapper class used to store a user-defined topological atom-pair distance function.
+		 */
+		typedef boost::function3<std::size_t, const Chem::Atom&, const Chem::Atom&, const Chem::MolecularGraph&> TopologicalAtomDistanceFunction;
 
-	/**
-	 * @}
-	 */
+		/**
+		 * @}
+		 */
     }
 }
 

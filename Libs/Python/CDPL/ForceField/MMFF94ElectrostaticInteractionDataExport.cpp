@@ -1,7 +1,7 @@
 /* -*- mode: c++; c-basic-offset: 4; tab-width: 4; indent-tabs-mode: t -*- */
 
 /* 
- * FromPythonConverterRegistration.cpp 
+ * MMFF94ElectrostaticInteractionDataExport.cpp 
  *
  * This file is part of the Chemical Data Processing Toolkit
  *
@@ -24,21 +24,24 @@
  */
 
 
-#include "CDPL/ForceField/MMFF94EnergyCalculator.hpp"
-#include "CDPL/ForceField/MMFF94GradientCalculator.hpp"
-#include "CDPL/Math/BFGSMinimizer.hpp"
+#include <boost/python.hpp>
 
-#include "Base/GenericFromPythonConverter.hpp"
+#include "CDPL/ForceField/MMFF94ElectrostaticInteractionData.hpp"
 
-#include "ConverterRegistration.hpp"
+#include "Util/ArrayVisitor.hpp"
+
+#include "ClassExports.hpp"
 
 
-void CDPLPythonForceField::registerFromPythonConverters()
+void CDPLPythonForceField::exportMMFF94ElectrostaticInteractionData()
 {
-	using namespace CDPL;
+    using namespace boost;
+    using namespace CDPL;
 
-	CDPLPythonBase::GenericFromPythonConverter<ForceField::MMFF94EnergyCalculator<double>,
-											   Math::BFGSMinimizer<Math::Vector3DArray, double, double>::ObjectiveFunction>();
-	CDPLPythonBase::GenericFromPythonConverter<ForceField::MMFF94GradientCalculator<double>,
-											   Math::BFGSMinimizer<Math::Vector3DArray, double, double>::GradientFunction>();
+    python::class_<ForceField::MMFF94ElectrostaticInteractionData, ForceField::MMFF94ElectrostaticInteractionData::SharedPointer>("MMFF94ElectrostaticInteractionData", python::no_init)
+	.def(python::init<>(python::arg("self")))
+	.def(python::init<const ForceField::MMFF94ElectrostaticInteractionData&>((python::arg("self"), python::arg("ia_data"))))
+	.def(CDPLPythonUtil::ArrayVisitor<ForceField::MMFF94ElectrostaticInteractionData, 
+	     python::return_internal_reference<>, python::default_call_policies, python::default_call_policies, 
+	     python::default_call_policies>());
 }

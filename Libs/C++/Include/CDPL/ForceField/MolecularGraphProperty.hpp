@@ -40,29 +40,29 @@ namespace CDPL
     namespace Base
     {
 
-	class LookupKey;
+		class LookupKey;
     }
 
     namespace ForceField
     {
 
-	/**
-	 * \addtogroup CDPL_FORCEFIELD_MOLECULAR_GRAPH_PROPERTIES
-	 * @{
-	 */
+		/**
+		 * \addtogroup CDPL_FORCEFIELD_MOLECULAR_GRAPH_PROPERTIES
+		 * @{
+		 */
 
-	/**
-	 * \brief Provides keys for built-in Chem::MolecularGraph properties.
-	 */
-	namespace MolecularGraphProperty
-	{
+		/**
+		 * \brief Provides keys for built-in Chem::MolecularGraph properties.
+		 */
+		namespace MolecularGraphProperty
+		{
 
-	    extern CDPL_FORCEFIELD_API const Base::LookupKey MMFF94_AROMATIC_RINGS;
-	}
+			extern CDPL_FORCEFIELD_API const Base::LookupKey MMFF94_AROMATIC_RINGS;
+		}
 
-	/**
-	 * @}
-	 */
+		/**
+		 * @}
+		 */
     }
 }
 

@@ -9,6 +9,73 @@ ENDFOREACH(PYTHON_FILE)
 
 SET(forcefield_MOD_SRCS
     Module.cpp
+ 
+    MolecularGraphPropertyExport.cpp 
+    AtomPropertyExport.cpp 
+    BondPropertyExport.cpp 
+    InteractionTypeExport.cpp
+
+    # MMFF94AromaticSSSRSubsetExport.cpp
+    # MMFF94AtomTyperExport.cpp
+    # MMFF94BondTyperExport.cpp
+    # MMFF94ChargeCalculatorExport.cpp
+
+    # MMFF94EnergyCalculatorExport.cpp
+    # MMFF94GradientCalculatorExport.cpp
+
+    MMFF94BondStretchingInteractionExport.cpp
+    MMFF94AngleBendingInteractionExport.cpp
+    MMFF94StretchBendInteractionExport.cpp
+    MMFF94OutOfPlaneBendingInteractionExport.cpp
+    MMFF94TorsionInteractionExport.cpp
+    MMFF94VanDerWaalsInteractionExport.cpp
+    MMFF94ElectrostaticInteractionExport.cpp
+
+    MMFF94BondStretchingInteractionDataExport.cpp
+    MMFF94AngleBendingInteractionDataExport.cpp
+    MMFF94StretchBendInteractionDataExport.cpp
+    MMFF94OutOfPlaneBendingInteractionDataExport.cpp
+    MMFF94TorsionInteractionDataExport.cpp
+    MMFF94VanDerWaalsInteractionDataExport.cpp
+    MMFF94ElectrostaticInteractionDataExport.cpp
+    MMFF94InteractionDataExport.cpp
+
+    # MMFF94BondStretchingInteractionParameterizerExport.cpp
+    # MMFF94AngleBendingInteractionParameterizerExport.cpp
+    # MMFF94StretchBendInteractionParameterizerExport.cpp
+    # MMFF94OutOfPlaneBendingInteractionParameterizerExport.cpp
+    # MMFF94TorsionInteractionParameterizerExport.cpp
+    # MMFF94VanDerWaalsInteractionParameterizerExport.cpp
+    # MMFF94ElectrostaticInteractionParameterizerExport.cpp
+    # MMFF94InteractionParameterizerExport.cpp
+
+    MMFF94SymbolicAtomTypePatternTableExport.cpp
+    MMFF94HeavyToHydrogenAtomTypeMapExport.cpp
+    MMFF94SymbolicToNumericAtomTypeMapExport.cpp
+    MMFF94AromaticAtomTypeDefinitionTableExport.cpp
+    MMFF94AtomTypePropertyTableExport.cpp
+    MMFF94FormalAtomChargeDefinitionTableExport.cpp
+    MMFF94BondChargeIncrementTableExport.cpp
+    MMFF94PartialBondChargeIncrementTableExport.cpp
+    MMFF94PrimaryToParameterAtomTypeMapExport.cpp
+    MMFF94BondStretchingParameterTableExport.cpp
+    MMFF94BondStretchingRuleParameterTableExport.cpp
+    MMFF94AngleBendingParameterTableExport.cpp
+    MMFF94StretchBendParameterTableExport.cpp
+    # MMFF94DefaultStretchBendParameterTableExport.cpp
+    # MMFF94OutOfPlaneBendingParameterTableExport.cpp
+    # MMFF94TorsionParameterTableExport.cpp
+    # MMFF94VanDerWaalsParameterTableExport.cpp
+
+    UtilityFunctionExport.cpp 
+    MMFF94EnergyFunctionExport.cpp 
+    MMFF94GradientFunctionExport.cpp 
+    AtomFunctionExport.cpp 
+    BondFunctionExport.cpp 
+    MolecularGraphFunctionExport.cpp 
+
+    BoostFunctionWrapperExport.cpp
+
     ToPythonConverterRegistration.cpp
     FromPythonConverterRegistration.cpp
    )

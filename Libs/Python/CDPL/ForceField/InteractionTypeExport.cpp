@@ -1,7 +1,7 @@
 /* -*- mode: c++; c-basic-offset: 4; tab-width: 4; indent-tabs-mode: t -*- */
 
 /* 
- * FromPythonConverterRegistration.cpp 
+ * InteractionTypeExport.cpp 
  *
  * This file is part of the Chemical Data Processing Toolkit
  *
@@ -24,21 +24,33 @@
  */
 
 
-#include "CDPL/ForceField/MMFF94EnergyCalculator.hpp"
-#include "CDPL/ForceField/MMFF94GradientCalculator.hpp"
-#include "CDPL/Math/BFGSMinimizer.hpp"
+#include <boost/python.hpp>
 
-#include "Base/GenericFromPythonConverter.hpp"
+#include "CDPL/ForceField/InteractionType.hpp"
 
-#include "ConverterRegistration.hpp"
+#include "NamespaceExports.hpp"
 
 
-void CDPLPythonForceField::registerFromPythonConverters()
+namespace 
 {
+
+	struct InteractionType {};
+}
+
+
+void CDPLPythonForceField::exportInteractionTypes()
+{
+	using namespace boost;
 	using namespace CDPL;
 
-	CDPLPythonBase::GenericFromPythonConverter<ForceField::MMFF94EnergyCalculator<double>,
-											   Math::BFGSMinimizer<Math::Vector3DArray, double, double>::ObjectiveFunction>();
-	CDPLPythonBase::GenericFromPythonConverter<ForceField::MMFF94GradientCalculator<double>,
-											   Math::BFGSMinimizer<Math::Vector3DArray, double, double>::GradientFunction>();
+	python::class_<InteractionType, boost::noncopyable>("InteractionType", python::no_init)
+		.def_readonly("NONE", &ForceField::InteractionType::NONE)
+		.def_readonly("BOND_STRETCHING", &ForceField::InteractionType::BOND_STRETCHING)
+		.def_readonly("ANGLE_BENDING", &ForceField::InteractionType::ANGLE_BENDING)
+		.def_readonly("STRETCH_BEND", &ForceField::InteractionType::STRETCH_BEND)
+		.def_readonly("OUT_OF_PLANE_BENDING", &ForceField::InteractionType::OUT_OF_PLANE_BENDING)
+		.def_readonly("TORSION", &ForceField::InteractionType::TORSION)
+		.def_readonly("VAN_DER_WAALS", &ForceField::InteractionType::VAN_DER_WAALS)
+		.def_readonly("ELECTROSTATIC", &ForceField::InteractionType::ELECTROSTATIC)
+		.def_readonly("ALL", &ForceField::InteractionType::ALL);
 }

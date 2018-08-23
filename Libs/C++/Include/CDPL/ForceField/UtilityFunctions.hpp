@@ -299,7 +299,7 @@ namespace CDPL
 		 * \f$ \frac{\partial \cos(\Phi_{ijkl})}{\partial \vec{p_l}} = \vec{v_{jk}} \times \vec{b} \f$<br>
 		 * \f$ \frac{\partial \cos(\Phi_{ijkl})}{\partial \vec{p_k}} = -(\frac{\partial \cos(\Phi_{ijkl})}{\partial \vec{p_i}} +
 		 *                                                              \frac{\partial \cos(\Phi_{ijkl})}{\partial \vec{p_j}} +
-		 *                                                              \frac{\partial \cos(\Phi_{ijkl})}{\partial \vec{p_l}} \f$<br>
+		 *                                                              \frac{\partial \cos(\Phi_{ijkl})}{\partial \vec{p_l}}) \f$<br>
 		 * \f$ \cos(\Phi_{ijkl}) = \frac{\vec{n_{ijk}} \cdot \vec{n_{jkl}}}{|\vec{n_{ijk}}| \: |\vec{n_{jkl}}|} \f$<br>
 		 *
 		 * where<br>
@@ -422,8 +422,8 @@ namespace CDPL
 		namespace Detail
 		{
 
-			template <typename VecType1, typename VecType2>
-			void addVectors(const VecType1& vec1, const VecType1& vec2, VecType2& res)
+			template <typename VecType1, typename VecType2, typename VecType3>
+			void addVectors(const VecType1& vec1, const VecType2& vec2, VecType3& res)
 			{
 				res[0] = vec2[0] + vec1[0];
 				res[1] = vec2[1] + vec1[1];

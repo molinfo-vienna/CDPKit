@@ -30,6 +30,60 @@
 
 namespace CDPLPythonForceField
 {
+
+	void exportMMFF94AromaticSSSRSubset();
+	void exportMMFF94AtomTyper();
+	void exportMMFF94BondTyper();
+	void exportMMFF94ChargeCalculator();
+
+	void exportMMFF94EnergyCalculator();
+	void exportMMFF94GradientCalculator();
+
+	void exportMMFF94BondStretchingInteraction();
+	void exportMMFF94AngleBendingInteraction();
+	void exportMMFF94StretchBendInteraction();
+	void exportMMFF94OutOfPlaneBendingInteraction();
+	void exportMMFF94TorsionInteraction();
+	void exportMMFF94VanDerWaalsInteraction();
+	void exportMMFF94ElectrostaticInteraction();
+
+	void exportMMFF94BondStretchingInteractionData();
+	void exportMMFF94AngleBendingInteractionData();
+	void exportMMFF94StretchBendInteractionData();
+	void exportMMFF94OutOfPlaneBendingInteractionData();
+	void exportMMFF94TorsionInteractionData();
+	void exportMMFF94VanDerWaalsInteractionData();
+	void exportMMFF94ElectrostaticInteractionData();
+	void exportMMFF94InteractionData();
+
+	void exportMMFF94BondStretchingInteractionParameterizer();
+	void exportMMFF94AngleBendingInteractionParameterizer();
+	void exportMMFF94StretchBendInteractionParameterizer();
+	void exportMMFF94OutOfPlaneBendingInteractionParameterizer();
+	void exportMMFF94TorsionInteractionParameterizer();
+	void exportMMFF94VanDerWaalsInteractionParameterizer();
+	void exportMMFF94ElectrostaticInteractionParameterizer();
+	void exportMMFF94InteractionParameterizer();
+
+	void exportMMFF94SymbolicAtomTypePatternTable();
+	void exportMMFF94HeavyToHydrogenAtomTypeMap();
+	void exportMMFF94SymbolicToNumericAtomTypeMap();
+	void exportMMFF94AromaticAtomTypeDefinitionTable();
+	void exportMMFF94AtomTypePropertyTable();
+	void exportMMFF94FormalAtomChargeDefinitionTable();
+	void exportMMFF94BondChargeIncrementTable();
+	void exportMMFF94PartialBondChargeIncrementTable();
+	void exportMMFF94PrimaryToParameterAtomTypeMap();
+	void exportMMFF94AngleBendingParameterTable();
+	void exportMMFF94BondStretchingParameterTable();
+	void exportMMFF94BondStretchingRuleParameterTable();
+	void exportMMFF94StretchBendParameterTable();
+	void exportMMFF94DefaultStretchBendParameterTable();
+	void exportMMFF94OutOfPlaneBendingParameterTable();
+	void exportMMFF94TorsionParameterTable();
+	void exportMMFF94VanDerWaalsParameterTable();
+
+	void exportBoostFunctionWrappers();
 }
 
 #endif // CDPL_PYTHON_FORCEFIELD_CLASSEXPORTS_HPP

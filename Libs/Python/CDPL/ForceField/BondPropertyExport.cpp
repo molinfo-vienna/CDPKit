@@ -1,7 +1,7 @@
 /* -*- mode: c++; c-basic-offset: 4; tab-width: 4; indent-tabs-mode: t -*- */
 
 /* 
- * FromPythonConverterRegistration.cpp 
+ * BondPropertyExport.cpp 
  *
  * This file is part of the Chemical Data Processing Toolkit
  *
@@ -24,21 +24,26 @@
  */
 
 
-#include "CDPL/ForceField/MMFF94EnergyCalculator.hpp"
-#include "CDPL/ForceField/MMFF94GradientCalculator.hpp"
-#include "CDPL/Math/BFGSMinimizer.hpp"
+#include <boost/python.hpp>
 
-#include "Base/GenericFromPythonConverter.hpp"
+#include "CDPL/ForceField/BondProperty.hpp"
+#include "CDPL/Base/LookupKey.hpp"
 
-#include "ConverterRegistration.hpp"
+#include "NamespaceExports.hpp"
 
 
-void CDPLPythonForceField::registerFromPythonConverters()
+namespace 
 {
+
+	struct BondProperty {};
+}
+
+
+void CDPLPythonForceField::exportBondProperties()
+{
+	using namespace boost;
 	using namespace CDPL;
 
-	CDPLPythonBase::GenericFromPythonConverter<ForceField::MMFF94EnergyCalculator<double>,
-											   Math::BFGSMinimizer<Math::Vector3DArray, double, double>::ObjectiveFunction>();
-	CDPLPythonBase::GenericFromPythonConverter<ForceField::MMFF94GradientCalculator<double>,
-											   Math::BFGSMinimizer<Math::Vector3DArray, double, double>::GradientFunction>();
+	python::class_<BondProperty, boost::noncopyable>("BondProperty", python::no_init)
+		.def_readonly("MMFF94_TYPE_INDEX", &ForceField::BondProperty::MMFF94_TYPE_INDEX);
 }
