@@ -15,13 +15,13 @@ SET(forcefield_MOD_SRCS
     BondPropertyExport.cpp 
     InteractionTypeExport.cpp
 
-    # MMFF94AromaticSSSRSubsetExport.cpp
-    # MMFF94AtomTyperExport.cpp
-    # MMFF94BondTyperExport.cpp
-    # MMFF94ChargeCalculatorExport.cpp
+    MMFF94AromaticSSSRSubsetExport.cpp
+    MMFF94AtomTyperExport.cpp
+    MMFF94BondTyperExport.cpp
+    MMFF94ChargeCalculatorExport.cpp
 
-    # MMFF94EnergyCalculatorExport.cpp
-    # MMFF94GradientCalculatorExport.cpp
+    MMFF94EnergyCalculatorExport.cpp
+    MMFF94GradientCalculatorExport.cpp
 
     MMFF94BondStretchingInteractionExport.cpp
     MMFF94AngleBendingInteractionExport.cpp
@@ -40,14 +40,14 @@ SET(forcefield_MOD_SRCS
     MMFF94ElectrostaticInteractionDataExport.cpp
     MMFF94InteractionDataExport.cpp
 
-    # MMFF94BondStretchingInteractionParameterizerExport.cpp
-    # MMFF94AngleBendingInteractionParameterizerExport.cpp
-    # MMFF94StretchBendInteractionParameterizerExport.cpp
-    # MMFF94OutOfPlaneBendingInteractionParameterizerExport.cpp
-    # MMFF94TorsionInteractionParameterizerExport.cpp
-    # MMFF94VanDerWaalsInteractionParameterizerExport.cpp
-    # MMFF94ElectrostaticInteractionParameterizerExport.cpp
-    # MMFF94InteractionParameterizerExport.cpp
+    MMFF94BondStretchingInteractionParameterizerExport.cpp
+    MMFF94AngleBendingInteractionParameterizerExport.cpp
+    MMFF94StretchBendInteractionParameterizerExport.cpp
+    MMFF94OutOfPlaneBendingInteractionParameterizerExport.cpp
+    MMFF94TorsionInteractionParameterizerExport.cpp
+    MMFF94VanDerWaalsInteractionParameterizerExport.cpp
+    MMFF94ElectrostaticInteractionParameterizerExport.cpp
+    MMFF94InteractionParameterizerExport.cpp
 
     MMFF94SymbolicAtomTypePatternTableExport.cpp
     MMFF94HeavyToHydrogenAtomTypeMapExport.cpp
@@ -62,10 +62,10 @@ SET(forcefield_MOD_SRCS
     MMFF94BondStretchingRuleParameterTableExport.cpp
     MMFF94AngleBendingParameterTableExport.cpp
     MMFF94StretchBendParameterTableExport.cpp
-    # MMFF94DefaultStretchBendParameterTableExport.cpp
-    # MMFF94OutOfPlaneBendingParameterTableExport.cpp
-    # MMFF94TorsionParameterTableExport.cpp
-    # MMFF94VanDerWaalsParameterTableExport.cpp
+    MMFF94DefaultStretchBendParameterTableExport.cpp
+    MMFF94OutOfPlaneBendingParameterTableExport.cpp
+    MMFF94TorsionParameterTableExport.cpp
+    MMFF94VanDerWaalsParameterTableExport.cpp
 
     UtilityFunctionExport.cpp 
     MMFF94EnergyFunctionExport.cpp 

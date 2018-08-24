@@ -60,7 +60,7 @@ namespace CDPL
 		  public:
 			MMFF94BondTyper();
 
-			MMFF94BondTyper(const Chem::MolecularGraph& molgraph, Util::UIArray& num_types);
+			MMFF94BondTyper(const Chem::MolecularGraph& molgraph, Util::UIArray& types);
 
 			void setAtomTypePropertyTable(const MMFF94AtomTypePropertyTable::SharedPointer& table);
 

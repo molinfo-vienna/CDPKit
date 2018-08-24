@@ -35,6 +35,8 @@
 #include <string>
 #include <cstddef>
 
+#include <boost/shared_ptr.hpp>
+
 #include "CDPL/ForceField/APIPrefix.hpp"
 #include "CDPL/ForceField/MMFF94SymbolicAtomTypePatternTable.hpp"
 #include "CDPL/ForceField/MMFF94AromaticAtomTypeDefinitionTable.hpp"
@@ -68,6 +70,8 @@ namespace CDPL
 		{
 
 		  public:
+			typedef boost::shared_ptr<MMFF94AtomTyper> SharedPointer;
+
 			MMFF94AtomTyper();
 
 			MMFF94AtomTyper(const Chem::MolecularGraph& molgraph, Util::SArray& sym_types, Util::UIArray& num_types, bool strict = true);

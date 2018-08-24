@@ -39,9 +39,9 @@ void CDPLPythonForceField::exportMMFF94StretchBendInteractionData()
     using namespace CDPL;
 
     python::class_<ForceField::MMFF94StretchBendInteractionData, ForceField::MMFF94StretchBendInteractionData::SharedPointer>("MMFF94StretchBendInteractionData", python::no_init)
-	.def(python::init<>(python::arg("self")))
-	.def(python::init<const ForceField::MMFF94StretchBendInteractionData&>((python::arg("self"), python::arg("ia_data"))))
-	.def(CDPLPythonUtil::ArrayVisitor<ForceField::MMFF94StretchBendInteractionData, 
-	     python::return_internal_reference<>, python::default_call_policies, python::default_call_policies, 
-	     python::default_call_policies>());
+		.def(python::init<>(python::arg("self")))
+		.def(python::init<const ForceField::MMFF94StretchBendInteractionData&>((python::arg("self"), python::arg("ia_data"))))
+		.def(CDPLPythonUtil::ArrayVisitor<ForceField::MMFF94StretchBendInteractionData, 
+			 python::return_internal_reference<>, python::default_call_policies, python::default_call_policies, 
+			 python::default_call_policies>());
 }

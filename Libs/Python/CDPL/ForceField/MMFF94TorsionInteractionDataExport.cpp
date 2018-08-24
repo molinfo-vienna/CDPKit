@@ -39,9 +39,9 @@ void CDPLPythonForceField::exportMMFF94TorsionInteractionData()
     using namespace CDPL;
 
     python::class_<ForceField::MMFF94TorsionInteractionData, ForceField::MMFF94TorsionInteractionData::SharedPointer>("MMFF94TorsionInteractionData", python::no_init)
-	.def(python::init<>(python::arg("self")))
-	.def(python::init<const ForceField::MMFF94TorsionInteractionData&>((python::arg("self"), python::arg("ia_data"))))
-	.def(CDPLPythonUtil::ArrayVisitor<ForceField::MMFF94TorsionInteractionData, 
-	     python::return_internal_reference<>, python::default_call_policies, python::default_call_policies, 
-	     python::default_call_policies>());
+		.def(python::init<>(python::arg("self")))
+		.def(python::init<const ForceField::MMFF94TorsionInteractionData&>((python::arg("self"), python::arg("ia_data"))))
+		.def(CDPLPythonUtil::ArrayVisitor<ForceField::MMFF94TorsionInteractionData, 
+			 python::return_internal_reference<>, python::default_call_policies, python::default_call_policies, 
+			 python::default_call_policies>());
 }

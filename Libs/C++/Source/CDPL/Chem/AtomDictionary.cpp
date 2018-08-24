@@ -556,7 +556,7 @@ namespace
 	{
 
 		Init() {
-			builtinDictionary->loadDefaultEntries();
+			builtinDictionary->loadDefaults();
 		}
 
 	} init;
@@ -740,7 +740,7 @@ Chem::AtomDictionary::ConstEntryIterator Chem::AtomDictionary::getEntriesEnd() c
 	return ConstEntryIterator(entries.end(), boost::bind(&EntryLookupTable::value_type::second, _1));
 }
 
-void Chem::AtomDictionary::loadDefaultEntries()
+void Chem::AtomDictionary::loadDefaults()
 {
 	Util::STArray val_states;
 	Entry::IsotopeMassMap iso_masses;

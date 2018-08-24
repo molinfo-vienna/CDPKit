@@ -35,6 +35,7 @@
 #include <cstddef>
 
 #include <boost/unordered_map.hpp>
+#include <boost/shared_ptr.hpp>
 
 #include "CDPL/ForceField/APIPrefix.hpp"
 #include "CDPL/ForceField/MMFF94StretchBendInteractionData.hpp"
@@ -69,6 +70,8 @@ namespace CDPL
 		{
 
 		  public:
+			typedef boost::shared_ptr<MMFF94StretchBendInteractionParameterizer> SharedPointer;
+
 			MMFF94StretchBendInteractionParameterizer();
 
 			MMFF94StretchBendInteractionParameterizer(const Chem::MolecularGraph& molgraph, const MMFF94BondStretchingInteractionData& bs_ia_data, 
@@ -85,7 +88,7 @@ namespace CDPL
 			void setAtomTypePropertyTable(const MMFF94AtomTypePropertyTable::SharedPointer& table);
 
 			void parameterize(const Chem::MolecularGraph& molgraph, const MMFF94BondStretchingInteractionData& bs_ia_data, 
-						 const MMFF94AngleBendingInteractionData& ab_ia_data, MMFF94StretchBendInteractionData& ia_data);
+							  const MMFF94AngleBendingInteractionData& ab_ia_data, MMFF94StretchBendInteractionData& ia_data);
 
 		  private:
 			void initBondStretchingParamLookupTable(const MMFF94BondStretchingInteractionData& bs_ia_data);

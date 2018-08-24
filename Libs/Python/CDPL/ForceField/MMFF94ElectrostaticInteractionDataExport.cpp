@@ -39,9 +39,9 @@ void CDPLPythonForceField::exportMMFF94ElectrostaticInteractionData()
     using namespace CDPL;
 
     python::class_<ForceField::MMFF94ElectrostaticInteractionData, ForceField::MMFF94ElectrostaticInteractionData::SharedPointer>("MMFF94ElectrostaticInteractionData", python::no_init)
-	.def(python::init<>(python::arg("self")))
-	.def(python::init<const ForceField::MMFF94ElectrostaticInteractionData&>((python::arg("self"), python::arg("ia_data"))))
-	.def(CDPLPythonUtil::ArrayVisitor<ForceField::MMFF94ElectrostaticInteractionData, 
-	     python::return_internal_reference<>, python::default_call_policies, python::default_call_policies, 
-	     python::default_call_policies>());
+		.def(python::init<>(python::arg("self")))
+		.def(python::init<const ForceField::MMFF94ElectrostaticInteractionData&>((python::arg("self"), python::arg("ia_data"))))
+		.def(CDPLPythonUtil::ArrayVisitor<ForceField::MMFF94ElectrostaticInteractionData, 
+			 python::return_internal_reference<>, python::default_call_policies, python::default_call_policies, 
+			 python::default_call_policies>());
 }

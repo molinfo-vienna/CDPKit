@@ -34,6 +34,8 @@
 #include <string>
 #include <cstddef>
 
+#include <boost/shared_ptr.hpp>
+
 #include "CDPL/ForceField/APIPrefix.hpp"
 #include "CDPL/ForceField/InteractionType.hpp"
 #include "CDPL/ForceField/InteractionFilterFunctionWrappers.hpp"
@@ -94,6 +96,8 @@ namespace CDPL
 		{
 
 		  public:
+			typedef boost::shared_ptr<MMFF94InteractionParameterizer> SharedPointer;
+
 			MMFF94InteractionParameterizer(bool mmff94s = true);
 
 			MMFF94InteractionParameterizer(const MMFF94InteractionParameterizer& parameterizer);

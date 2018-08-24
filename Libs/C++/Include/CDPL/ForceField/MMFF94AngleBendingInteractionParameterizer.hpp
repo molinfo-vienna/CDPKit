@@ -34,6 +34,8 @@
 #include <vector>
 #include <cstddef>
 
+#include <boost/shared_ptr.hpp>
+
 #include "CDPL/ForceField/APIPrefix.hpp"
 #include "CDPL/ForceField/MMFF94AngleBendingInteractionData.hpp"
 #include "CDPL/ForceField/MMFF94BondStretchingInteractionParameterizer.hpp"
@@ -69,6 +71,8 @@ namespace CDPL
 		{
 
 		  public:
+			typedef boost::shared_ptr<MMFF94AngleBendingInteractionParameterizer> SharedPointer;
+
 			MMFF94AngleBendingInteractionParameterizer();
 
 			MMFF94AngleBendingInteractionParameterizer(const Chem::MolecularGraph& molgraph, 

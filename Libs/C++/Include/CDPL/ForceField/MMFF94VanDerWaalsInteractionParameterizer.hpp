@@ -31,6 +31,8 @@
 #ifndef CDPL_FORCEFIELD_MMFF94VANDERWAALSINTERACTIONPARAMETERIZER_HPP
 #define CDPL_FORCEFIELD_MMFF94VANDERWAALSINTERACTIONPARAMETERIZER_HPP
 
+#include <boost/shared_ptr.hpp>
+
 #include "CDPL/ForceField/APIPrefix.hpp"
 #include "CDPL/ForceField/MMFF94VanDerWaalsInteractionData.hpp"
 #include "CDPL/ForceField/MMFF94PropertyFunctionWrappers.hpp"
@@ -60,6 +62,8 @@ namespace CDPL
 		{
 
 		  public:
+			typedef boost::shared_ptr<MMFF94VanDerWaalsInteractionParameterizer> SharedPointer;
+
 			MMFF94VanDerWaalsInteractionParameterizer();
 
 			MMFF94VanDerWaalsInteractionParameterizer(const Chem::MolecularGraph& molgraph, 

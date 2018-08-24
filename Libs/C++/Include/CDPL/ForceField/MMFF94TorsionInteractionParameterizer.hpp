@@ -33,6 +33,8 @@
 
 #include <vector>
 
+#include <boost/shared_ptr.hpp>
+
 #include "CDPL/ForceField/APIPrefix.hpp"
 #include "CDPL/ForceField/MMFF94TorsionInteractionData.hpp"
 #include "CDPL/ForceField/MMFF94PropertyFunctionWrappers.hpp"
@@ -65,6 +67,8 @@ namespace CDPL
 		{
 
 		  public:
+			typedef boost::shared_ptr<MMFF94TorsionInteractionParameterizer> SharedPointer;
+
 			MMFF94TorsionInteractionParameterizer();
 
 			MMFF94TorsionInteractionParameterizer(const Chem::MolecularGraph& molgraph, 

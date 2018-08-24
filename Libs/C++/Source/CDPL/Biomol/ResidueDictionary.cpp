@@ -101,7 +101,7 @@ namespace
 			using namespace ResidueDictionaryData;
 
 			stdResidueSet.insert(&stdResidueList[0], &stdResidueList[sizeof(stdResidueList) / sizeof(const char*)]);
-			builtinDictionary->loadDefaultEntries();
+			builtinDictionary->loadDefaults();
 
 			for (std::size_t i = 0; i < NUM_RESIDUE_ENTRIES; i++) {
 				const ResidueDataEntry& entry = residueData[i];
@@ -281,7 +281,7 @@ Biomol::ResidueDictionary::ConstEntryIterator Biomol::ResidueDictionary::getEntr
 	return ConstEntryIterator(entries.end(), boost::bind(&EntryLookupTable::value_type::second, _1));
 }
 
-void Biomol::ResidueDictionary::loadDefaultEntries()
+void Biomol::ResidueDictionary::loadDefaults()
 {
 	using namespace ResidueDictionaryData;
 

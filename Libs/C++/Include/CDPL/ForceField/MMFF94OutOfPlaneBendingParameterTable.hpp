@@ -105,7 +105,7 @@ namespace CDPL
 			MMFF94OutOfPlaneBendingParameterTable();
 
 			void addEntry(unsigned int term_atom1_type, unsigned int ctr_atom_type, unsigned int term_atom2_type, 
-					  unsigned int oop_atom_type, double force_const);
+						  unsigned int oop_atom_type, double force_const);
 
 			const Entry& getEntry(unsigned int term_atom1_type, unsigned int ctr_atom_type, unsigned int term_atom2_type, 
 								  unsigned int oop_atom_type) const;

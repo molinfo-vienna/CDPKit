@@ -1,7 +1,7 @@
 /* -*- mode: c++; c-basic-offset: 4; tab-width: 4; indent-tabs-mode: t -*- */
 
 /* 
- * MMFF94VanDerWaalsInteractionDataExport.cpp 
+ * MMFF94AromaticSSSRSubsetExport.cpp 
  *
  * This file is part of the Chemical Data Processing Toolkit
  *
@@ -26,22 +26,22 @@
 
 #include <boost/python.hpp>
 
-#include "CDPL/ForceField/MMFF94VanDerWaalsInteractionData.hpp"
-
-#include "Util/ArrayVisitor.hpp"
+#include "CDPL/ForceField/MMFF94AromaticSSSRSubset.hpp"
+#include "CDPL/Chem/MolecularGraph.hpp"
 
 #include "ClassExports.hpp"
 
 
-void CDPLPythonForceField::exportMMFF94VanDerWaalsInteractionData()
+void CDPLPythonForceField::exportMMFF94AromaticSSSRSubset()
 {
-    using namespace boost;
-    using namespace CDPL;
+	using namespace boost;
+	using namespace CDPL;
 
-    python::class_<ForceField::MMFF94VanDerWaalsInteractionData, ForceField::MMFF94VanDerWaalsInteractionData::SharedPointer>("MMFF94VanDerWaalsInteractionData", python::no_init)
+	python::class_<ForceField::MMFF94AromaticSSSRSubset, ForceField::MMFF94AromaticSSSRSubset::SharedPointer,
+				   python::bases<Chem::FragmentList>, boost::noncopyable>("MMFF94AromaticSSSRSubset", python::no_init)
 		.def(python::init<>(python::arg("self")))
-		.def(python::init<const ForceField::MMFF94VanDerWaalsInteractionData&>((python::arg("self"), python::arg("ia_data"))))
-		.def(CDPLPythonUtil::ArrayVisitor<ForceField::MMFF94VanDerWaalsInteractionData, 
-			 python::return_internal_reference<>, python::default_call_policies, python::default_call_policies, 
-			 python::default_call_policies>());
+		.def(python::init<const Chem::MolecularGraph&>((python::arg("self"), python::arg("molgraph")))
+			 [python::with_custodian_and_ward<1, 2>()])
+		.def("extract", &ForceField::MMFF94AromaticSSSRSubset::extract, (python::arg("self"), python::arg("molgraph")), 
+			 python::with_custodian_and_ward<1, 2>());
 }

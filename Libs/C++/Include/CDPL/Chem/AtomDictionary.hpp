@@ -149,7 +149,7 @@ namespace CDPL
 
 			ConstEntryIterator getEntriesEnd() const;
 			
-			void loadDefaultEntries();
+			void loadDefaults();
 
 			static void set(const SharedPointer& dict);
 

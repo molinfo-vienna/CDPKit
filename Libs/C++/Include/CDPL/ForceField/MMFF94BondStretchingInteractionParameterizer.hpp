@@ -31,6 +31,8 @@
 #ifndef CDPL_FORCEFIELD_MMFF94BONDSTRETCHINGINTERACTIONPARAMETERIZER_HPP
 #define CDPL_FORCEFIELD_MMFF94BONDSTRETCHINGINTERACTIONPARAMETERIZER_HPP
 
+#include <boost/shared_ptr.hpp>
+
 #include "CDPL/ForceField/APIPrefix.hpp"
 #include "CDPL/ForceField/MMFF94BondStretchingInteractionData.hpp"
 #include "CDPL/ForceField/MMFF94PropertyFunctionWrappers.hpp"
@@ -62,6 +64,8 @@ namespace CDPL
 		{
 
 		  public:
+			typedef boost::shared_ptr<MMFF94BondStretchingInteractionParameterizer> SharedPointer;
+
 			 MMFF94BondStretchingInteractionParameterizer();
 
 			 MMFF94BondStretchingInteractionParameterizer(const Chem::MolecularGraph& molgraph, 

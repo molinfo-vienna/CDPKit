@@ -33,6 +33,8 @@
 
 #include <vector>
 
+#include <boost/shared_ptr.hpp>
+
 #include "CDPL/ForceField/APIPrefix.hpp"
 #include "CDPL/ForceField/MMFF94OutOfPlaneBendingInteractionData.hpp"
 #include "CDPL/ForceField/MMFF94PropertyFunctionWrappers.hpp"
@@ -64,6 +66,8 @@ namespace CDPL
 		{
 
 		  public:
+			typedef boost::shared_ptr<MMFF94OutOfPlaneBendingInteractionParameterizer> SharedPointer;
+
 			MMFF94OutOfPlaneBendingInteractionParameterizer();
 
 			MMFF94OutOfPlaneBendingInteractionParameterizer(const Chem::MolecularGraph& molgraph, 

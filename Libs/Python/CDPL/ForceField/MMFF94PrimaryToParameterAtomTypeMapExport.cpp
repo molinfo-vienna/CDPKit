@@ -55,7 +55,7 @@ namespace
 		using namespace CDPL;
 		using namespace ForceField;
 
-		if (!entry)
+		if (!entry.getParameterTypes())
 			return boost::python::object();
 
 		boost::python::list types;

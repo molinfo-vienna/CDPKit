@@ -33,6 +33,8 @@
 
 #include <cstddef>
 
+#include <boost/shared_ptr.hpp>
+
 #include "CDPL/ForceField/APIPrefix.hpp"
 #include "CDPL/ForceField/MMFF94AtomTypePropertyTable.hpp"
 #include "CDPL/ForceField/MMFF94BondChargeIncrementTable.hpp"
@@ -65,6 +67,8 @@ namespace CDPL
 		{
 
 		  public:
+			typedef boost::shared_ptr<MMFF94ChargeCalculator> SharedPointer;
+
 			MMFF94ChargeCalculator();
 
 			MMFF94ChargeCalculator(const Chem::MolecularGraph& molgraph, Util::DArray& charges);

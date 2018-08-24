@@ -31,6 +31,8 @@
 #ifndef CDPL_FORCEFIELD_MMFF94ELECTROSTATICINTERACTIONPARAMETERIZER_HPP
 #define CDPL_FORCEFIELD_MMFF94ELECTROSTATICINTERACTIONPARAMETERIZER_HPP
 
+#include <boost/shared_ptr.hpp>
+
 #include "CDPL/ForceField/APIPrefix.hpp"
 #include "CDPL/ForceField/MMFF94ElectrostaticInteractionData.hpp"
 #include "CDPL/ForceField/MMFF94PropertyFunctionWrappers.hpp"
@@ -61,6 +63,8 @@ namespace CDPL
 		  public:
 			static const double DEF_DISTANCE_EXPONENT;
 			static const double DEF_DIELECTRIC_CONSTANT;
+
+			typedef boost::shared_ptr<MMFF94ElectrostaticInteractionParameterizer> SharedPointer;
 
 			MMFF94ElectrostaticInteractionParameterizer();
 

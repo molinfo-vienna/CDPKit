@@ -93,6 +93,11 @@ ForceField::MMFF94TorsionParameterTable::Entry::Entry(unsigned int tor_type_idx,
 	torParam1(tor_param1), torParam2(tor_param2), torParam3(tor_param3), initialized(true)
 {}
 
+unsigned int ForceField::MMFF94TorsionParameterTable::Entry::getTorsionTypeIndex() const
+{
+	return torTypeIdx;
+}
+
 unsigned int ForceField::MMFF94TorsionParameterTable::Entry::getTerminalAtom1Type() const
 {
 	return termAtom1Type;
