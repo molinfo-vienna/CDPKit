@@ -1,4 +1,4 @@
-INCLUDE_DIRECTORIES("${CMAKE_CURRENT_SOURCE_DIR}")
+INCLUDE_DIRECTORIES("${CMAKE_CURRENT_SOURCE_DIR}" "${CDPL_SOURCE_DIR}")
 
 SET(cdpl-vis_LIB_SRCS
     AtomProperty.cpp
@@ -34,6 +34,7 @@ SET(cdpl-vis_LIB_SRCS
     Rectangle2D.cpp
     Line2D.cpp
     PointArray2D.cpp
+    EllipsePrimitive2D.cpp
     LinePrimitive2D.cpp
     PolygonPrimitive2D.cpp
     PolylinePrimitive2D.cpp
@@ -101,7 +102,7 @@ ENDIF(CAIRO_FOUND)
 
 ADD_LIBRARY(cdpl-vis-static STATIC ${cdpl-vis_LIB_SRCS})
 
-TARGET_LINK_LIBRARIES(cdpl-vis-static cdpl-chem-static cdpl-base-static)
+TARGET_LINK_LIBRARIES(cdpl-vis-static cdpl-chem-static cdpl-base-static cdpl-internal-static)
 
 SET_TARGET_PROPERTIES(cdpl-vis-static PROPERTIES 
                       OUTPUT_NAME cdpl-vis
@@ -115,7 +116,7 @@ INSTALL(TARGETS cdpl-vis-static
 
 ADD_LIBRARY(cdpl-vis-shared SHARED ${cdpl-vis_LIB_SRCS})
 
-TARGET_LINK_LIBRARIES(cdpl-vis-shared cdpl-chem-shared cdpl-base-shared)
+TARGET_LINK_LIBRARIES(cdpl-vis-shared cdpl-chem-shared cdpl-base-shared cdpl-internal-static)
 
 IF(APPLE)
   SET_TARGET_PROPERTIES(cdpl-vis-shared PROPERTIES VERSION "${CDPL_SO_VERSION}"

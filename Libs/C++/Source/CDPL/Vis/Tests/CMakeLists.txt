@@ -21,6 +21,7 @@ SET(test-suite_SRCS
     LineSegmentListPrimitive2DTest.cpp
     PointListPrimitive2DTest.cpp
     TextLabelPrimitive2DTest.cpp
+    EllipsePrimitive2DTest.cpp
     DataFormatTest.cpp
     #ControlParameterFunctionsTest.cpp
     #AtomFunctionsTest.cpp

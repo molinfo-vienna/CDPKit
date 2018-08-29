@@ -46,6 +46,8 @@ namespace CDPL
 		 * @{
 		 */
 
+		class Rectangle2D;
+
 		/**
 		 * \brief Stores a set of points in 2D space.
 		 */
@@ -58,6 +60,8 @@ namespace CDPL
 			 * \param vec The translation vector.
 			 */
 			void translate(const Math::Vector2D& vec);
+
+			void getBounds(Rectangle2D& bounds) const;
 
 		private:
 			const char* getClassName() const;

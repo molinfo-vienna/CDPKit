@@ -28,6 +28,8 @@
 
 #include "CDPL/Vis/TextLabelPrimitive2D.hpp"
 #include "CDPL/Vis/Renderer2D.hpp"
+#include "CDPL/Vis/Rectangle2D.hpp"
+#include "CDPL/Vis/FontMetrics.hpp"
 #include "CDPL/Math/Vector.hpp"
 
 
@@ -89,3 +91,21 @@ const Vis::Font& Vis::TextLabelPrimitive2D::getFont() const
 {
 	return font;
 }	
+
+Vis::GraphicsPrimitive2D::SharedPointer Vis::TextLabelPrimitive2D::clone() const
+{
+	return SharedPointer(new TextLabelPrimitive2D(*this));
+}
+
+void Vis::TextLabelPrimitive2D::getBounds(Rectangle2D& bounds, FontMetrics* fm) const
+{
+	if (!fm) {
+		bounds.reset();
+		return;
+	}
+
+	fm->setFont(font);
+	fm->getBounds(text, bounds);
+
+	bounds.translate(position);
+}

@@ -27,6 +27,7 @@
 #include <boost/python.hpp>
 
 #include "CDPL/Vis/PointArray2D.hpp"
+#include "CDPL/Vis/Rectangle2D.hpp"
 
 #include "ClassExports.hpp"
 
@@ -39,5 +40,6 @@ void CDPLPythonVis::exportPointArray2D()
 	python::class_<Vis::PointArray2D, python::bases<Math::Vector2DArray> >("PointArray2D", python::no_init)
 		.def(python::init<>(python::arg("self")))    
 		.def(python::init<const Vis::PointArray2D&>((python::arg("self"), python::arg("array"))))
-		.def("translate", &Vis::PointArray2D::translate, (python::arg("self"), python::arg("vec")));
+		.def("translate", &Vis::PointArray2D::translate, (python::arg("self"), python::arg("vec")))
+		.def("getBounds", &Vis::PointArray2D::getBounds, (python::arg("self"), python::arg("bbox")));
 }

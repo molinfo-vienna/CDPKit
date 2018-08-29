@@ -28,6 +28,7 @@
 
 #include "CDPL/Config.hpp"
 #include "CDPL/Vis/TextLabelPrimitive2D.hpp"
+#include "CDPL/Vis/Rectangle2D.hpp"
 #include "CDPL/Vis/Pen.hpp"
 #include "CDPL/Vis/Color.hpp"
 #include "CDPL/Vis/Font.hpp"
@@ -44,6 +45,42 @@
 #endif // HAVE_CAIRO
 
 
+namespace
+{
+
+#ifdef HAVE_CAIRO 	
+
+	void renderBBox(const CDPL::Vis::TextLabelPrimitive2D& tlp, CDPL::Vis::CairoRenderer2D& renderer)
+	{
+		using namespace CDPL;
+		using namespace Vis;
+
+		Rectangle2D bbox;
+		tlp.getBounds(bbox, 0);
+
+		renderer.setPen(Color::RED);
+		renderer.setBrush(Brush());
+		renderer.drawRectangle(bbox.getMin()(0), bbox.getMin()(1), bbox.getWidth(), bbox.getHeight());
+	}
+
+#endif // HAVE_CAIRO 
+
+	void checkClone(const CDPL::Vis::TextLabelPrimitive2D& prim)
+	{
+		using namespace CDPL;
+		using namespace Vis;
+
+		GraphicsPrimitive2D::SharedPointer gp_clone_ptr = prim.clone();
+		const TextLabelPrimitive2D* prim_clone_ptr = static_cast<const TextLabelPrimitive2D*>(gp_clone_ptr.get());
+
+		BOOST_CHECK(prim_clone_ptr->getPosition() == prim.getPosition());
+		BOOST_CHECK(prim_clone_ptr->getPen() == prim.getPen());
+		BOOST_CHECK(prim_clone_ptr->getFont() == prim.getFont());
+		BOOST_CHECK(prim_clone_ptr->getText() == prim.getText());
+	}
+}
+
+
 BOOST_AUTO_TEST_CASE(TextLabelPrimitive2DTest)
 {
 	using namespace CDPL;
@@ -56,12 +93,16 @@ BOOST_AUTO_TEST_CASE(TextLabelPrimitive2DTest)
 	BOOST_CHECK(tlp.getPen() == Pen());
 	BOOST_CHECK(tlp.getFont() == Font());
 
+	checkClone(tlp);
+
 	tlp.setPen(Color::GREEN);
 
 	BOOST_CHECK(tlp.getText() == "");
 	BOOST_CHECK(tlp.getPosition()(0) == 0.0 && tlp.getPosition()(1) == 0.0);
 	BOOST_CHECK(tlp.getPen() == Pen(Color::GREEN));
 	BOOST_CHECK(tlp.getFont() == Font());
+
+	checkClone(tlp);
 
 	tlp.setText("Test Text");
 
@@ -70,12 +111,16 @@ BOOST_AUTO_TEST_CASE(TextLabelPrimitive2DTest)
 	BOOST_CHECK(tlp.getPen() == Pen(Color::GREEN));
 	BOOST_CHECK(tlp.getFont() == Font());
 
+	checkClone(tlp);
+
 	tlp.setFont(Font("Times", 13.3));
 
 	BOOST_CHECK(tlp.getText() == "Test Text");
 	BOOST_CHECK(tlp.getPosition()(0) == 0.0 && tlp.getPosition()(1) == 0.0);
 	BOOST_CHECK(tlp.getPen() == Pen(Color::GREEN));
 	BOOST_CHECK(tlp.getFont() == Font("Times", 13.3));
+
+	checkClone(tlp);
 
 	Math::Vector2D pos;
 	
@@ -89,12 +134,16 @@ BOOST_AUTO_TEST_CASE(TextLabelPrimitive2DTest)
 	BOOST_CHECK(tlp.getPen() == Pen(Color::GREEN));
 	BOOST_CHECK(tlp.getFont() == Font("Times", 13.3));
 
+	checkClone(tlp);
+
 	tlp.setPosition(10.2, -2.3);
 
 	BOOST_CHECK(tlp.getText() == "Test Text");
 	BOOST_CHECK(tlp.getPosition()(0) == 10.2 && tlp.getPosition()(1) == -2.3);
 	BOOST_CHECK(tlp.getPen() == Pen(Color::GREEN));
 	BOOST_CHECK(tlp.getFont() == Font("Times", 13.3));
+
+	checkClone(tlp);
 
 //-----
 
@@ -118,6 +167,10 @@ BOOST_AUTO_TEST_CASE(TextLabelPrimitive2DTest)
 
 	tlp.render(renderer);
 
+	renderBBox(tlp, renderer);
+
+	checkClone(tlp);
+
 	BOOST_CHECK(cairo_surface_status(surf_ptr.get()) == CAIRO_STATUS_SUCCESS);
 	BOOST_CHECK(cairo_status(ctxt_ptr.get()) == CAIRO_STATUS_SUCCESS);
 
@@ -126,6 +179,10 @@ BOOST_AUTO_TEST_CASE(TextLabelPrimitive2DTest)
 	tlp.setFont(Font("Times", 15.0));
 
 	tlp.render(renderer);
+
+	renderBBox(tlp, renderer);
+
+	checkClone(tlp);
 
 	BOOST_CHECK(cairo_surface_status(surf_ptr.get()) == CAIRO_STATUS_SUCCESS);
 	BOOST_CHECK(cairo_status(ctxt_ptr.get()) == CAIRO_STATUS_SUCCESS);
@@ -139,6 +196,10 @@ BOOST_AUTO_TEST_CASE(TextLabelPrimitive2DTest)
 	tlp.setFont(f);
 
 	tlp.render(renderer);
+
+	renderBBox(tlp, renderer);
+
+	checkClone(tlp);
 
 	BOOST_CHECK(cairo_surface_status(surf_ptr.get()) == CAIRO_STATUS_SUCCESS);
 	BOOST_CHECK(cairo_status(ctxt_ptr.get()) == CAIRO_STATUS_SUCCESS);
@@ -154,6 +215,10 @@ BOOST_AUTO_TEST_CASE(TextLabelPrimitive2DTest)
 
 	tlp.render(renderer);
 
+	renderBBox(tlp, renderer);
+
+	checkClone(tlp);
+
 	BOOST_CHECK(cairo_surface_status(surf_ptr.get()) == CAIRO_STATUS_SUCCESS);
 	BOOST_CHECK(cairo_status(ctxt_ptr.get()) == CAIRO_STATUS_SUCCESS);
 
@@ -166,6 +231,10 @@ BOOST_AUTO_TEST_CASE(TextLabelPrimitive2DTest)
 	tlp.setFont(f);
 
 	tlp.render(renderer);
+
+	renderBBox(tlp, renderer);
+
+	checkClone(tlp);
 
 	BOOST_CHECK(cairo_surface_status(surf_ptr.get()) == CAIRO_STATUS_SUCCESS);
 	BOOST_CHECK(cairo_status(ctxt_ptr.get()) == CAIRO_STATUS_SUCCESS);

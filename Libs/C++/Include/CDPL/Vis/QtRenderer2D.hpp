@@ -91,6 +91,7 @@ namespace CDPL
 			void drawLineSegments(const Math::Vector2DArray& points);
 			void drawPoint(double x, double y);
 			void drawText(double x, double y, const std::string& txt);
+			void drawEllipse(double x, double y, double width, double height);
 
 		private:
 			QtRenderer2D(const QtRenderer2D&);

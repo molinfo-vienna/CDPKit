@@ -31,6 +31,7 @@
 #include "CDPL/Config.hpp"
 #include "CDPL/Vis/LinePrimitive2D.hpp"
 #include "CDPL/Vis/Line2D.hpp"
+#include "CDPL/Vis/Rectangle2D.hpp"
 #include "CDPL/Vis/Pen.hpp"
 #include "CDPL/Vis/Color.hpp"
 
@@ -44,6 +45,24 @@
 
 # endif // HAVE_CAIRO_PNG_SUPPORT
 #endif // HAVE_CAIRO
+
+
+namespace
+{
+
+	void checkClone(const CDPL::Vis::LinePrimitive2D& prim)
+	{
+		using namespace CDPL;
+		using namespace Vis;
+
+		GraphicsPrimitive2D::SharedPointer gp_clone_ptr = prim.clone();
+		const LinePrimitive2D* prim_clone_ptr = static_cast<const LinePrimitive2D*>(gp_clone_ptr.get());
+
+		BOOST_CHECK(prim_clone_ptr->getBegin() == prim.getBegin());
+		BOOST_CHECK(prim_clone_ptr->getEnd() == prim.getEnd());
+		BOOST_CHECK(prim_clone_ptr->getPen() == prim.getPen());
+	}
+}
 
 
 BOOST_AUTO_TEST_CASE(LinePrimitive2DTest)
@@ -64,12 +83,16 @@ BOOST_AUTO_TEST_CASE(LinePrimitive2DTest)
 	BOOST_CHECK(lp1.getBegin() == v1);
 	BOOST_CHECK(lp1.getEnd() == v2);
 
+	checkClone(lp1);
+
 	Line2D l(v2, v1);
 
 	LinePrimitive2D lp2(l);
 
 	BOOST_CHECK(lp2.getBegin() == v2);
 	BOOST_CHECK(lp2.getEnd() == v1);
+
+	checkClone(lp1);
 
 //-----
 
@@ -78,6 +101,8 @@ BOOST_AUTO_TEST_CASE(LinePrimitive2DTest)
 	lp1.setPen(Pen(Color::GREEN, Pen::DASH_LINE));
 
 	BOOST_CHECK(lp1.getPen() == Pen(Color::GREEN, Pen::DASH_LINE));
+
+	checkClone(lp1);
 
 //-----
 
@@ -163,10 +188,19 @@ BOOST_AUTO_TEST_CASE(LinePrimitive2DTest)
 
 	for (std::size_t i = 0; i < 6 * 9 ; i++, y += 20.0) {
 		lp1.setPen(test_pens[i]);
-		lp1.setPoints(10.0, y, 150.0, y);
+		lp1.setPoints(10.0, y, 150.0, y + 10.0);
 
 		lp1.render(renderer);
-	   
+
+	   	Rectangle2D bbox;
+		lp1.getBounds(bbox, 0);
+
+		renderer.setPen(Color::RED);
+		renderer.setBrush(Brush());
+		renderer.drawRectangle(bbox.getMin()(0), bbox.getMin()(1), bbox.getWidth(), bbox.getHeight());
+
+		checkClone(lp1);
+
 		BOOST_CHECK(cairo_surface_status(surf_ptr.get()) == CAIRO_STATUS_SUCCESS);
 		BOOST_CHECK(cairo_status(ctxt_ptr.get()) == CAIRO_STATUS_SUCCESS);
 	}

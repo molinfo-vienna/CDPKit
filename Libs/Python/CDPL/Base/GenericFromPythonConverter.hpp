@@ -33,7 +33,7 @@
 namespace CDPLPythonBase
 {
 
-	template <typename SourceType, typename TargetType>
+	template <typename SourceType, typename TargetType, bool BoostRef = false>
 	struct GenericFromPythonConverter 
 	{
 
@@ -62,6 +62,40 @@ namespace CDPLPythonBase
 			void* storage = ((python::converter::rvalue_from_python_storage<TargetType>*)data)->storage.bytes;
 
 			new (storage) TargetType(python::extract<SourceType>(obj_ptr)());
+
+			data->convertible = storage;
+		}
+	};
+
+	template <typename SourceType, typename TargetType>
+	struct GenericFromPythonConverter<SourceType, TargetType, true>
+	{
+
+		GenericFromPythonConverter() {
+			using namespace boost;
+
+			python::converter::registry::insert(&convertible, &construct, python::type_id<TargetType>());
+		}
+
+		static void* convertible(PyObject* obj_ptr) {
+			using namespace boost;
+
+			if (!obj_ptr)
+				return 0;
+
+			if (!python::extract<SourceType>(obj_ptr).check())
+				return 0;
+
+			return obj_ptr;
+		}
+
+		static void construct(PyObject* obj_ptr, boost::python::converter::rvalue_from_python_stage1_data* data) {
+			using namespace boost;
+			using namespace CDPL;
+
+			void* storage = ((python::converter::rvalue_from_python_storage<TargetType>*)data)->storage.bytes;
+
+			new (storage) TargetType(boost::ref(python::extract<SourceType>(obj_ptr)()));
 
 			data->convertible = storage;
 		}

@@ -28,6 +28,7 @@
 
 #include "CDPL/Vis/PolylinePrimitive2D.hpp"
 #include "CDPL/Vis/Renderer2D.hpp"
+#include "CDPL/Vis/Rectangle2D.hpp"
 
 
 using namespace CDPL;
@@ -48,4 +49,15 @@ void Vis::PolylinePrimitive2D::setPen(const Pen& pen)
 const Vis::Pen& Vis::PolylinePrimitive2D::getPen() const
 {
 	return pen;
+}
+
+Vis::GraphicsPrimitive2D::SharedPointer Vis::PolylinePrimitive2D::clone() const
+{
+	return SharedPointer(new PolylinePrimitive2D(*this));
+}
+
+void Vis::PolylinePrimitive2D::getBounds(Rectangle2D& bounds, FontMetrics* fm) const
+{
+	PointArray2D::getBounds(bounds);
+	bounds.addMargin(pen.getWidth() * 0.5, pen.getWidth() * 0.5);
 }

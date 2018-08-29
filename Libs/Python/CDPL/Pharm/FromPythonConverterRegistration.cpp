@@ -55,60 +55,60 @@ void CDPLPythonPharm::registerFromPythonConverters()
 {
 	using namespace CDPL;
 
-	CDPLPythonBase::GenericFromPythonConverter<Pharm::PharmacophoreFitScore,
+	CDPLPythonBase::GenericFromPythonConverter<const Pharm::PharmacophoreFitScore&,
 											   boost::function3<double, const Pharm::FeatureContainer&, const Pharm::FeatureContainer&, 
 																const Math::Matrix4D&> >();
-	CDPLPythonBase::GenericFromPythonConverter<Pharm::PharmacophoreFitScreeningScore,
+	CDPLPythonBase::GenericFromPythonConverter<const Pharm::PharmacophoreFitScreeningScore&,
 											   boost::function1<double, const Pharm::ScreeningProcessor::SearchHit&> >();
-	CDPLPythonBase::GenericFromPythonConverter<Pharm::FileScreeningHitCollector,
+	CDPLPythonBase::GenericFromPythonConverter<const Pharm::FileScreeningHitCollector&,
 											   boost::function2<bool, const Pharm::ScreeningProcessor::SearchHit&, double> >();
 
-	CDPLPythonBase::GenericFromPythonConverter<Pharm::FeaturePairDistanceMatchFunctor,
+	CDPLPythonBase::GenericFromPythonConverter<const Pharm::FeaturePairDistanceMatchFunctor&,
 											   boost::function4<bool, const Pharm::Feature&, const Pharm::Feature&, 
 																const Pharm::Feature&, const Pharm::Feature&> >();
 
-	CDPLPythonBase::GenericFromPythonConverter<Pharm::FeaturePositionMatchFunctor, 
+	CDPLPythonBase::GenericFromPythonConverter<const Pharm::FeaturePositionMatchFunctor&, 
 											   boost::function3<double, const Pharm::Feature&, 
 																const Pharm::Feature&, const Math::Matrix4D&> >();
-	CDPLPythonBase::GenericFromPythonConverter<Pharm::FeatureGeometryMatchFunctor, 
+	CDPLPythonBase::GenericFromPythonConverter<const Pharm::FeatureGeometryMatchFunctor&, 
 											   boost::function3<double, const Pharm::Feature&, 
 																const Pharm::Feature&, const Math::Matrix4D&> >();
 
-	CDPLPythonBase::GenericFromPythonConverter<Pharm::HBondingInteractionConstraint, 
+	CDPLPythonBase::GenericFromPythonConverter<const Pharm::HBondingInteractionConstraint&, 
 											   boost::function2<bool, const Pharm::Feature&, const Pharm::Feature&> >();
-	CDPLPythonBase::GenericFromPythonConverter<Pharm::OrthogonalPiPiInteractionConstraint, 
+	CDPLPythonBase::GenericFromPythonConverter<const Pharm::OrthogonalPiPiInteractionConstraint&, 
 											   boost::function2<bool, const Pharm::Feature&, const Pharm::Feature&> >();
-	CDPLPythonBase::GenericFromPythonConverter<Pharm::CationPiInteractionConstraint, 
+	CDPLPythonBase::GenericFromPythonConverter<const Pharm::CationPiInteractionConstraint&, 
 											   boost::function2<bool, const Pharm::Feature&, const Pharm::Feature&> >();
-	CDPLPythonBase::GenericFromPythonConverter<Pharm::FeatureTypeMatchFunctor, 
+	CDPLPythonBase::GenericFromPythonConverter<const Pharm::FeatureTypeMatchFunctor&, 
 											   boost::function2<bool, const Pharm::Feature&, const Pharm::Feature&> >();
-	CDPLPythonBase::GenericFromPythonConverter<Pharm::ParallelPiPiInteractionConstraint, 
+	CDPLPythonBase::GenericFromPythonConverter<const Pharm::ParallelPiPiInteractionConstraint&, 
 											   boost::function2<bool, const Pharm::Feature&, const Pharm::Feature&> >();
-	CDPLPythonBase::GenericFromPythonConverter<Pharm::FeatureDistanceConstraint, 
+	CDPLPythonBase::GenericFromPythonConverter<const Pharm::FeatureDistanceConstraint&, 
 											   boost::function2<bool, const Pharm::Feature&, const Pharm::Feature&> >();
-	CDPLPythonBase::GenericFromPythonConverter<Pharm::InteractionConstraintConnector, 
+	CDPLPythonBase::GenericFromPythonConverter<const Pharm::InteractionConstraintConnector&, 
 											   boost::function2<bool, const Pharm::Feature&, const Pharm::Feature&> >();
 
-	CDPLPythonBase::GenericFromPythonConverter<Pharm::HBondingInteractionScore, 
+	CDPLPythonBase::GenericFromPythonConverter<const Pharm::HBondingInteractionScore&, 
 											   boost::function2<double, const Pharm::Feature&, const Pharm::Feature&> >();
-	CDPLPythonBase::GenericFromPythonConverter<Pharm::HBondingInteractionScore, 
+	CDPLPythonBase::GenericFromPythonConverter<const Pharm::HBondingInteractionScore&, 
 											   boost::function2<double, const Math::Vector3D&, const Pharm::Feature&> >();
-	CDPLPythonBase::GenericFromPythonConverter<Pharm::OrthogonalPiPiInteractionScore, 
+	CDPLPythonBase::GenericFromPythonConverter<const Pharm::OrthogonalPiPiInteractionScore&, 
 											   boost::function2<double, const Pharm::Feature&, const Pharm::Feature&> >();
-	CDPLPythonBase::GenericFromPythonConverter<Pharm::OrthogonalPiPiInteractionScore, 
+	CDPLPythonBase::GenericFromPythonConverter<const Pharm::OrthogonalPiPiInteractionScore&, 
 											   boost::function2<double, const Math::Vector3D&, const Pharm::Feature&> >();
-	CDPLPythonBase::GenericFromPythonConverter<Pharm::CationPiInteractionScore, 
+	CDPLPythonBase::GenericFromPythonConverter<const Pharm::CationPiInteractionScore&, 
 											   boost::function2<double, const Pharm::Feature&, const Pharm::Feature&> >();
-	CDPLPythonBase::GenericFromPythonConverter<Pharm::CationPiInteractionScore, 
+	CDPLPythonBase::GenericFromPythonConverter<const Pharm::CationPiInteractionScore&, 
 											   boost::function2<double, const Math::Vector3D&, const Pharm::Feature&> >();
-	CDPLPythonBase::GenericFromPythonConverter<Pharm::ParallelPiPiInteractionScore, 
+	CDPLPythonBase::GenericFromPythonConverter<const Pharm::ParallelPiPiInteractionScore&, 
 											   boost::function2<double, const Pharm::Feature&, const Pharm::Feature&> >();
-	CDPLPythonBase::GenericFromPythonConverter<Pharm::ParallelPiPiInteractionScore, 
+	CDPLPythonBase::GenericFromPythonConverter<const Pharm::ParallelPiPiInteractionScore&, 
 											   boost::function2<double, const Math::Vector3D&, const Pharm::Feature&> >();
-	CDPLPythonBase::GenericFromPythonConverter<Pharm::FeatureDistanceScore, 
+	CDPLPythonBase::GenericFromPythonConverter<const Pharm::FeatureDistanceScore&, 
 											   boost::function2<double, const Pharm::Feature&, const Pharm::Feature&> >();
-	CDPLPythonBase::GenericFromPythonConverter<Pharm::FeatureDistanceScore, 
+	CDPLPythonBase::GenericFromPythonConverter<const Pharm::FeatureDistanceScore&, 
 											   boost::function2<double, const Math::Vector3D&, const Pharm::Feature&> >();
-	CDPLPythonBase::GenericFromPythonConverter<Pharm::InteractionScoreCombiner, 
+	CDPLPythonBase::GenericFromPythonConverter<const Pharm::InteractionScoreCombiner&, 
 											   boost::function2<double, const Math::Vector3D&, const Pharm::Feature&> >();
 }

@@ -28,6 +28,7 @@
 
 #include "CDPL/Vis/LineSegmentListPrimitive2D.hpp"
 #include "CDPL/Vis/Renderer2D.hpp"
+#include "CDPL/Vis/Rectangle2D.hpp"
 
 
 using namespace CDPL;
@@ -47,4 +48,15 @@ void Vis::LineSegmentListPrimitive2D::setPen(const Pen& pen)
 const Vis::Pen& Vis::LineSegmentListPrimitive2D::getPen() const
 {
 	return pen;
+}
+
+Vis::GraphicsPrimitive2D::SharedPointer Vis::LineSegmentListPrimitive2D::clone() const
+{
+	return SharedPointer(new LineSegmentListPrimitive2D(*this));
+}
+
+void Vis::LineSegmentListPrimitive2D::getBounds(Rectangle2D& bounds, FontMetrics* fm) const
+{
+	PointArray2D::getBounds(bounds);
+	bounds.addMargin(pen.getWidth() * 0.5, pen.getWidth() * 0.5);
 }

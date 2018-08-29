@@ -239,7 +239,11 @@ class QtRenderer2D(CDPL.Vis.Renderer2D):
 	def drawPoint(self, x, y):
 		"drawPoint(QtRenderer2D self, float x, float y) -> None :"
 		self.__qPainter.drawPoint(QtGui.QPointF(x, y))
-	
+        
+	def drawEllipse(self, x, y, width, height)
+		"drawEllipse(QtRenderer2D self, float x, float y, float width, float height) -> None :"
+		self.__qPainter.drawEllipse(QtGui.QPointF(x, y), width * 0.5, height * 0.5)
+
 	def drawText(self, x, y, txt):
 		"drawText(QtRenderer2D self, float x, float y, str txt) -> None :"
 		self.__qPainter.drawText(QtGui.QPointF(x, y), txt)

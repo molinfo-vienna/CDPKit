@@ -97,6 +97,10 @@ namespace
 		void drawText(double x, double y, const std::string& txt) {
 			this->get_override("drawText")(x, y, txt);
 		}
+
+		void drawEllipse(double x, double y, double w, double h) {
+			this->get_override("drawEllipse")(x, y, w, h);
+		}
 	};
 }
 
@@ -122,6 +126,8 @@ void CDPLPythonVis::exportRenderer2D()
 		.def("setFont", python::pure_virtual(&CDPL::Vis::Renderer2D::setFont), 
 			 (python::arg("self"), python::arg("font")))
 		.def("drawRectangle", python::pure_virtual(&CDPL::Vis::Renderer2D::drawRectangle), 
+			 (python::arg("self"), python::arg("x"), python::arg("y"), python::arg("width"), python::arg("height")))
+		.def("drawEllipse", python::pure_virtual(&CDPL::Vis::Renderer2D::drawEllipse), 
 			 (python::arg("self"), python::arg("x"), python::arg("y"), python::arg("width"), python::arg("height")))
 		.def("drawPolygon", python::pure_virtual(&CDPL::Vis::Renderer2D::drawPolygon), 
 			 (python::arg("self"), python::arg("points")))

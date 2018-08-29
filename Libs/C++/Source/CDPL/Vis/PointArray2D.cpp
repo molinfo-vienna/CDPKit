@@ -27,6 +27,7 @@
 #include "StaticInit.hpp"
 
 #include "CDPL/Vis/PointArray2D.hpp"
+#include "CDPL/Vis/Rectangle2D.hpp"
 
 
 using namespace CDPL;
@@ -39,6 +40,14 @@ void Vis::PointArray2D::translate(const Math::Vector2D& vec)
 
 		pt += vec;
 	}
+}
+
+void Vis::PointArray2D::getBounds(Rectangle2D& bounds) const
+{
+	bounds.reset();
+
+	for (ConstElementIterator it = getElementsBegin(), end = getElementsEnd(); it != end; ++it)
+		bounds.addPoint(*it);
 }
 
 const char* Vis::PointArray2D::getClassName() const 

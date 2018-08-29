@@ -348,6 +348,22 @@ void Vis::CairoRenderer2D::drawText(double x, double y, const std::string& txt)
 	cairo_show_text(cairoContext.get(), txt.c_str());
 }
 
+void Vis::CairoRenderer2D::drawEllipse(double x, double y, double width, double height)
+{
+	cairo_save(cairoContext.get());
+
+	cairo_new_path(cairoContext.get());
+
+	cairo_translate(cairoContext.get(), x, y);
+	cairo_scale(cairoContext.get(), 1.0, height / width);
+	cairo_arc(cairoContext.get(), 0.0, 0.0, width * 0.5, 0.0, 2 * M_PI);
+
+	fillPath();
+	strokePath();
+
+	cairo_restore(cairoContext.get());
+}
+
 void Vis::CairoRenderer2D::fillPath() const
 {
 	std::size_t brush_style = brushStack.back().getStyle();

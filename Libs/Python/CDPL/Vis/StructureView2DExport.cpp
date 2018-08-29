@@ -28,9 +28,22 @@
 
 #include "CDPL/Vis/StructureView2D.hpp"
 #include "CDPL/Vis/FontMetrics.hpp"
-#include "CDPL/Chem/MolecularGraph.hpp"
+#include "CDPL/Chem/Fragment.hpp"
+#include "CDPL/Chem/Atom.hpp"
 
 #include "ClassExports.hpp"
+
+
+namespace
+{
+
+	void addGraphicsPrimitive(CDPL::Vis::StructureView2D& view, CDPL::Chem::Atom& anchor_atom, 
+							  const CDPL::Vis::GraphicsPrimitive2D& prim, 
+							  unsigned int alignment, bool front)
+	{
+		view.addGraphicsPrimitive(anchor_atom, prim, alignment, front);
+	}
+}
 
 
 void CDPLPythonVis::exportStructureView2D()
@@ -47,12 +60,21 @@ void CDPLPythonVis::exportStructureView2D()
 			 python::return_internal_reference<1>())
 		.def("getFontMetrics", &Vis::StructureView2D::getFontMetrics, python::arg("self"),
 			 python::return_internal_reference<1>())
+		.def("addGraphicsPrimitive", static_cast<void (Vis::StructureView2D::*)(const Math::Vector2D&, const Vis::GraphicsPrimitive2D&, unsigned int, bool)>
+			 (&Vis::StructureView2D::addGraphicsPrimitive), 
+			 (python::arg("self"), python::arg("anchor_pos"), python::arg("prim"), python::arg("alignment"), python::arg("front")))
+		.def("addGraphicsPrimitive", &addGraphicsPrimitive, 
+			 (python::arg("self"), python::arg("anchor_atom"), python::arg("prim"), python::arg("alignment"), python::arg("front")))
+		.def("addGraphicsPrimitive", static_cast<void (Vis::StructureView2D::*)(const Chem::Fragment&, const Vis::GraphicsPrimitive2D&, unsigned int, bool)>
+			 (&Vis::StructureView2D::addGraphicsPrimitive), 
+			 (python::arg("self"), python::arg("anchor_atoms"), python::arg("prim"), python::arg("alignment"), python::arg("front")))
+		.def("clearGraphicsPrimitives", &Vis::StructureView2D::clearGraphicsPrimitives, python::arg("self"))
 		.add_property("structure", python::make_function(&Vis::StructureView2D::getStructure,
 														 python::return_internal_reference<1>()),
-					 python::make_function(&Vis::StructureView2D::setStructure, 
-										   python::with_custodian_and_ward<1, 2>()))
+					  python::make_function(&Vis::StructureView2D::setStructure, 
+											python::with_custodian_and_ward<1, 2>()))
 		.add_property("fontMetrics", python::make_function(&Vis::StructureView2D::getFontMetrics,
 														   python::return_internal_reference<1>()),
-					 python::make_function(&Vis::StructureView2D::setFontMetrics,	 
-										   python::with_custodian_and_ward<1, 2>()));
+					  python::make_function(&Vis::StructureView2D::setFontMetrics,	 
+											python::with_custodian_and_ward<1, 2>()));
 }

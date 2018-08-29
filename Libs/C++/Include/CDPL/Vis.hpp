@@ -80,6 +80,7 @@
 #include "CDPL/Vis/PolylinePrimitive2D.hpp"
 #include "CDPL/Vis/LineSegmentListPrimitive2D.hpp"
 #include "CDPL/Vis/PointListPrimitive2D.hpp"
+#include "CDPL/Vis/EllipsePrimitive2D.hpp"
 #include "CDPL/Vis/TextLabelPrimitive2D.hpp"
 
 #ifdef HAVE_QT

@@ -37,6 +37,9 @@
 #include "CDPL/Vis/Pen.hpp"
 #include "CDPL/Vis/Brush.hpp"
 #include "CDPL/Vis/Font.hpp"
+#include "CDPL/Vis/TextLabelPrimitive2D.hpp"
+#include "CDPL/Vis/PolygonPrimitive2D.hpp"
+#include "CDPL/Vis/EllipsePrimitive2D.hpp"
 #include "CDPL/Vis/SizeSpecification.hpp"
 #include "CDPL/Vis/AtomColorTable.hpp"
 #include "CDPL/Vis/Alignment.hpp"
@@ -56,6 +59,7 @@
 #include "CDPL/Chem/ReactionCenterStatus.hpp"
 #include "CDPL/Chem/BondMatchConstraint.hpp"
 #include "CDPL/Chem/MolecularGraphFunctions.hpp"
+#include "CDPL/Chem/AtomFunctions.hpp"
 #include "CDPL/Chem/JMEMoleculeReader.hpp"
 
 #include "Utilities.hpp"
@@ -139,6 +143,65 @@ BOOST_AUTO_TEST_CASE(StructureView2DTest)
 	BOOST_CHECK(view.getStructure() == &mol);
 
 	dumpImage(view, "StructureView2DTest_", img_id, "FontMetrics != 0");
+
+//----
+
+	TextLabelPrimitive2D text_label;
+
+	text_label.setPen(Pen(Color::BLUE));
+	text_label.setFont(Font("Helvetica", 12.0));
+	text_label.setText("Ring");
+
+	Rectangle2D label_bounds;
+
+	text_label.getBounds(label_bounds, &font_metrics);
+	label_bounds.addMargin(3.0, 3.0);
+
+	PolygonPrimitive2D poly_prim;
+
+	poly_prim.addElement(label_bounds.getMin());
+	poly_prim.addElement(Math::vec(label_bounds.getMax()[0], label_bounds.getMin()[1]));
+	poly_prim.addElement(label_bounds.getMax());
+	poly_prim.addElement(Math::vec(label_bounds.getMin()[0], label_bounds.getMax()[1]));
+
+	poly_prim.setPen(Pen(Color::DARK_GRAY));
+	poly_prim.setBrush(Brush(Color(0.0, 1.0, 0.0, 0.3)));
+
+	const FragmentList& sssr = *getSSSR(mol);
+
+	BOOST_CHECK(sssr.getSize() > 0);
+
+	view.addGraphicsPrimitive(sssr[0], poly_prim, Alignment::H_CENTER | Alignment::V_CENTER, true);
+	view.addGraphicsPrimitive(sssr[0], text_label, Alignment::H_CENTER | Alignment::V_CENTER, true);
+
+	EllipsePrimitive2D el_prim;
+
+	el_prim.setWidth(15.0);
+	el_prim.setHeight(12.0);
+	el_prim.setBrush(Brush(Color(1.0, 0.5, 0.0, 1.0)));
+	el_prim.setPen(Pen(Color::DARK_GRAY));
+
+	view.addGraphicsPrimitive(mol.getAtom(0), el_prim, Alignment::LEFT | Alignment::TOP, false);
+	view.addGraphicsPrimitive(mol.getAtom(0), el_prim, Alignment::LEFT | Alignment::V_CENTER, true);
+	view.addGraphicsPrimitive(mol.getAtom(0), el_prim, Alignment::LEFT | Alignment::BOTTOM, false);
+	view.addGraphicsPrimitive(mol.getAtom(0), el_prim, Alignment::H_CENTER | Alignment::TOP, true);
+	view.addGraphicsPrimitive(mol.getAtom(0), el_prim, Alignment::H_CENTER | Alignment::V_CENTER, false);
+	view.addGraphicsPrimitive(mol.getAtom(0), el_prim, Alignment::H_CENTER | Alignment::BOTTOM, true);
+	view.addGraphicsPrimitive(mol.getAtom(0), el_prim, Alignment::RIGHT | Alignment::TOP, false);
+	view.addGraphicsPrimitive(mol.getAtom(0), el_prim, Alignment::RIGHT | Alignment::V_CENTER, true);
+	view.addGraphicsPrimitive(mol.getAtom(0), el_prim, Alignment::RIGHT | Alignment::BOTTOM, false);
+
+	poly_prim.clear();
+	poly_prim.setPen(Pen(Color(0.0, 0.0, 1.0, 0.2), 7.0));
+	poly_prim.setBrush(Color::TRANSPARENT);
+
+	for (std::size_t i = 0; i < sssr[0].getNumAtoms(); i++) {
+		const Math::Vector2D& pos = get2DCoordinates(sssr[0].getAtom(i));
+
+		poly_prim.addElement(Math::vec(pos(0), - pos(1)));
+	}
+
+	view.addGraphicsPrimitive(Math::vec(0.0, 0.0), poly_prim, Alignment::NONE, true);
 
 //----
 

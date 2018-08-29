@@ -1,7 +1,7 @@
 /* -*- mode: c++; c-basic-offset: 4; tab-width: 4; indent-tabs-mode: t -*- */
 
 /* 
- * PolygonPrimitive2D.cpp 
+ * EllipsePrimitive2D.cpp 
  *
  * This file is part of the Chemical Data Processing Toolkit
  *
@@ -26,7 +26,7 @@
 
 #include "StaticInit.hpp"
 
-#include "CDPL/Vis/PolygonPrimitive2D.hpp"
+#include "CDPL/Vis/EllipsePrimitive2D.hpp"
 #include "CDPL/Vis/Renderer2D.hpp"
 #include "CDPL/Vis/Rectangle2D.hpp"
 
@@ -34,41 +34,72 @@
 using namespace CDPL;
 
 
-void Vis::PolygonPrimitive2D::render(Renderer2D& renderer) const
+void Vis::EllipsePrimitive2D::render(Renderer2D& renderer) const
 {
 	renderer.setPen(pen);
 	renderer.setBrush(brush);
 
-	renderer.drawPolygon(*this);
+	renderer.drawEllipse(position(0), position(1), width, height);
 }
 
-void Vis::PolygonPrimitive2D::setPen(const Pen& pen)
+void Vis::EllipsePrimitive2D::setPen(const Pen& pen)
 {
 	this->pen = pen;
 }
 
-const Vis::Pen& Vis::PolygonPrimitive2D::getPen() const
+const Vis::Pen& Vis::EllipsePrimitive2D::getPen() const
 {
 	return pen;
 }
 
-void Vis::PolygonPrimitive2D::setBrush(const Brush& brush)
+void Vis::EllipsePrimitive2D::setBrush(const Brush& brush)
 {
 	this->brush = brush;
 }
 
-const Vis::Brush& Vis::PolygonPrimitive2D::getBrush() const
+const Vis::Brush& Vis::EllipsePrimitive2D::getBrush() const
 {
 	return brush;
 }
 
-Vis::GraphicsPrimitive2D::SharedPointer Vis::PolygonPrimitive2D::clone() const
+void Vis::EllipsePrimitive2D::setPosition(const Math::Vector2D& pos)
 {
-	return SharedPointer(new PolygonPrimitive2D(*this));
+	position = pos;
 }
 
-void Vis::PolygonPrimitive2D::getBounds(Rectangle2D& bounds, FontMetrics* fm) const
+const Math::Vector2D& Vis::EllipsePrimitive2D::getPosition() const
 {
-	PointArray2D::getBounds(bounds);
+	return position;
+}
+
+void Vis::EllipsePrimitive2D::setWidth(double width)
+{
+	this->width = width;
+}
+
+double Vis::EllipsePrimitive2D::getWidth() const
+{
+	return width;
+}
+
+void Vis::EllipsePrimitive2D::setHeight(double height)
+{
+	this->height = height;
+}
+
+double Vis::EllipsePrimitive2D::getHeight() const
+{
+	return height;
+}
+
+Vis::GraphicsPrimitive2D::SharedPointer Vis::EllipsePrimitive2D::clone() const
+{
+	return SharedPointer(new EllipsePrimitive2D(*this));
+}
+
+void Vis::EllipsePrimitive2D::getBounds(Rectangle2D& bounds, FontMetrics* fm) const
+{
+	bounds.setBounds(position(0) - width * 0.5, position(1) - height * 0.5, 
+					 position(0) + width * 0.5, position(1) + height * 0.5);
 	bounds.addMargin(pen.getWidth() * 0.5, pen.getWidth() * 0.5);
 }

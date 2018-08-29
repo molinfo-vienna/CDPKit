@@ -125,6 +125,11 @@ void Vis::QtRenderer2D::drawText(double x, double y, const std::string& txt)
 	qPainter.drawText(QPointF(x, y), QString::fromStdString(txt));
 }
 
+void Vis::QtRenderer2D::drawEllipse(double x, double y, double width, double height)
+{
+	qPainter.drawEllipse(QPointF(x, y), width * 0.5, height * 0.5);
+}
+
 void Vis::QtRenderer2D::convertToQPolygon(const Math::Vector2DArray& points)
 {
 	if (!qPolygon.get())

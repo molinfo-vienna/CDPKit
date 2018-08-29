@@ -94,6 +94,10 @@ namespace CDPL
 			 */
 			const Brush& getBrush() const;
 
+			GraphicsPrimitive2D::SharedPointer clone() const;
+
+			void getBounds(Rectangle2D& bounds, FontMetrics* font_metrics = 0) const;
+
 		private:
 			Pen   pen;
 			Brush brush;

@@ -29,6 +29,7 @@
 #include <algorithm>
 #include <limits>
 #include <cmath>
+#include <iterator>
 
 #include <boost/bind.hpp>
 #include <boost/lexical_cast.hpp>
@@ -60,6 +61,7 @@
 #include "CDPL/Chem/Atom2DCoordinatesGenerator.hpp"
 #include "CDPL/Chem/BondStereoFlagGenerator.hpp"
 #include "CDPL/Math/AffineTransform.hpp"
+#include "CDPL/Internal/AddressOf.hpp"
 
 #include "StructureView2DParameters.hpp"
 
@@ -115,13 +117,6 @@ void Vis::StructureView2D::render(Renderer2D& renderer)
 	renderer.saveState();
 
 	paintBackground(renderer);
-
-	Math::Matrix3D transform(prod(prod(Math::TranslationMatrix<double>(3, viewTranslations[0](0), viewTranslations[0](1)),
-									   Math::ScalingMatrix<double>(3, viewScalingFactor, viewScalingFactor)), 
-								  Math::TranslationMatrix<double>(3, viewTranslations[1](0), viewTranslations[1](1))));
-
-	renderer.transform(transform);
-
 	renderGraphicsPrimitives(renderer);
 
 	renderer.restoreState();
@@ -171,9 +166,32 @@ void Vis::StructureView2D::getModelBounds(Rectangle2D& bounds)
 	bounds.translate(viewTranslations[0]);
 }
 
+void Vis::StructureView2D::addGraphicsPrimitive(const Math::Vector2D& anchor_pos, const GraphicsPrimitive2D& prim, unsigned int alignment, bool front)
+{
+	addCustomGraphics(new CustomGraphicsData(anchor_pos, prim, alignment), front);
+}
+
+void Vis::StructureView2D::addGraphicsPrimitive(const Chem::Atom& anchor_atom, const GraphicsPrimitive2D& prim, unsigned int alignment, bool front)
+{
+	addCustomGraphics(new CustomGraphicsData(anchor_atom, prim, alignment), front);
+}
+
+void Vis::StructureView2D::addGraphicsPrimitive(const Chem::Fragment& anchor_atoms, const GraphicsPrimitive2D& prim, unsigned int alignment, bool front)
+{
+	addCustomGraphics(new CustomGraphicsData(anchor_atoms, prim, alignment), front);
+}
+
+void Vis::StructureView2D::clearGraphicsPrimitives()
+{
+	frontCustomGraphics.clear();
+	backCustomGraphics.clear();
+
+	customGraphicsChanged = true;
+}
+
 void Vis::StructureView2D::init()
 {
-	if (!(structureChanged || fontMetricsChanged || parameters->coordinatesChanged() 
+	if (!(structureChanged || customGraphicsChanged || fontMetricsChanged || parameters->coordinatesChanged() 
 		  || parameters->explicitHVisibilityChanged() || parameters->propertyVisibilityChanged()
 		  || parameters->graphicsAttributeChanged() || parameters->viewportChanged() 
 		  || parameters->alignmentChanged() || parameters->sizeAdjustmentChanged() 
@@ -183,7 +201,7 @@ void Vis::StructureView2D::init()
 	if (structureChanged)
 		setHasAtomCoordsFlag();
 
-	if (structureChanged || parameters->explicitHVisibilityChanged() || parameters->propertyVisibilityChanged()
+	if (structureChanged || customGraphicsChanged || parameters->explicitHVisibilityChanged() || parameters->propertyVisibilityChanged()
 		|| parameters->coordinatesChanged()) {
 
 		prepareStructureData();
@@ -194,11 +212,11 @@ void Vis::StructureView2D::init()
 		|| parameters->stdBondLengthChanged() || parameters->propertyVisibilityChanged())
 		calcStdBondLengthScalingFactor();
 
-	if (structureChanged || parameters->coordinatesChanged() || parameters->explicitHVisibilityChanged()
+	if (structureChanged || customGraphicsChanged || parameters->coordinatesChanged() || parameters->explicitHVisibilityChanged()
 		|| fontMetricsChanged || parameters->propertyVisibilityChanged() || parameters->graphicsAttributeChanged())
 		calcInputStructureBounds();
 
-	if (structureChanged || fontMetricsChanged || parameters->coordinatesChanged() 
+	if (structureChanged || customGraphicsChanged || fontMetricsChanged || parameters->coordinatesChanged() 
 		|| parameters->explicitHVisibilityChanged() || parameters->viewportChanged() 
 		|| parameters->sizeAdjustmentChanged() || parameters->stdBondLengthChanged() 
 		|| parameters->propertyVisibilityChanged() || parameters->graphicsAttributeChanged()) {
@@ -220,8 +238,9 @@ void Vis::StructureView2D::init()
 	} else if (parameters->alignmentChanged())
 		calcViewTransforms();
 
-	structureChanged   = false;
-	fontMetricsChanged = false;
+	structureChanged      = false;
+	fontMetricsChanged    = false;
+	customGraphicsChanged = false;
 
 	parameters->clearChangeFlags();
 }
@@ -241,8 +260,43 @@ void Vis::StructureView2D::paintBackground(Renderer2D& renderer) const
 
 void Vis::StructureView2D::renderGraphicsPrimitives(Renderer2D& renderer) const
 {
+	Math::Matrix3D xform(prod(prod(Math::TranslationMatrix<double>(3, viewTranslations[0](0), viewTranslations[0](1)),
+								   Math::ScalingMatrix<double>(3, viewScalingFactor, viewScalingFactor)), 
+							  Math::TranslationMatrix<double>(3, viewTranslations[1](0), viewTranslations[1](1))));
+
+	renderer.transform(xform);
+
+	renderCustomGraphics(renderer, backCustomGraphics);
+
 	std::for_each(drawList.rbegin(), drawList.rend(), 
 				  boost::bind(&GraphicsPrimitive2D::render, _1, boost::ref(renderer)));
+
+	renderCustomGraphics(renderer, frontCustomGraphics);
+}
+
+void Vis::StructureView2D::renderCustomGraphics(Renderer2D& renderer, const CustomGraphicsDataList& gfx_data) const
+{
+	double scale_fact = stdBondLengthScalingFactor * viewportAdjustmentScalingFactor;
+
+	Math::ScalingMatrix<double> scaling_mtx(3, scale_fact, scale_fact);
+	Math::TranslationMatrix<double> trans_mtx(3);
+
+	Math::Matrix3D xform;
+
+	for (CustomGraphicsDataList::const_iterator it = gfx_data.begin(), end = gfx_data.end(); it != end; ++it) {
+		const CustomGraphicsData& gfx_item = **it;
+
+		renderer.saveState();
+
+		trans_mtx.set(gfx_item.getTranslation()(0), gfx_item.getTranslation()(1));
+		xform.assign(prod(scaling_mtx, trans_mtx));
+
+		renderer.transform(xform);
+
+		gfx_item.getPrimitive().render(renderer);
+
+		renderer.restoreState();
+	}
 }
 
 void Vis::StructureView2D::initTextLabelBounds()
@@ -2617,31 +2671,36 @@ void Vis::StructureView2D::calcInputStructureBounds()
 		calcOutputStructureBounds();
 
 		inputStructureBounds = outputStructureBounds;
-		return;
+
+	} else {
+		inputStructureBounds.reset();
+
+		for (std::size_t i = 0; i < num_atoms; i++) 
+			inputStructureBounds.addPoint(inputAtomCoords[i]);
 	}
 
-	inputStructureBounds.reset();
+	std::for_each(frontCustomGraphics.begin(), frontCustomGraphics.end(),
+				  boost::bind(&Rectangle2D::addRectangle, boost::ref(inputStructureBounds),
+							  boost::bind(&CustomGraphicsData::calcBounds, _1, boost::ref(inputAtomCoords), boost::ref(*structure), fontMetrics)));
 
-	for (std::size_t i = 0; i < num_atoms; i++) 
-		inputStructureBounds.addPoint(inputAtomCoords[i]);
+	std::for_each(backCustomGraphics.begin(), backCustomGraphics.end(),
+				  boost::bind(&Rectangle2D::addRectangle, boost::ref(inputStructureBounds),
+							  boost::bind(&CustomGraphicsData::calcBounds, _1, boost::ref(inputAtomCoords), boost::ref(*structure), fontMetrics)));
 }
 
 void Vis::StructureView2D::calcOutputStructureBounds()
 {
-	outputStructureBounds.reset();
-
-	std::size_t num_atoms = structure->getNumAtoms();
-
-	for (std::size_t i = 0; i < num_atoms; i++) {
-		outputStructureBounds.addPoint(outputAtomCoords[i]);
-
-		if (fontMetrics)
-			std::for_each(atomLabelBounds[i].begin(), atomLabelBounds[i].end(),
-						  boost::bind(&Rectangle2D::addRectangle, boost::ref(outputStructureBounds), _1));
-	}
+	outputStructureBounds = inputStructureBounds;
+	outputStructureBounds.scale(stdBondLengthScalingFactor * viewportAdjustmentScalingFactor);
 
 	if (!fontMetrics)
 		return;
+
+	std::size_t num_atoms = structure->getNumAtoms();
+
+	for (std::size_t i = 0; i < num_atoms; i++)
+		std::for_each(atomLabelBounds[i].begin(), atomLabelBounds[i].end(),
+					  boost::bind(&Rectangle2D::addRectangle, boost::ref(outputStructureBounds), _1));
 
 	std::size_t num_bonds = structure->getNumBonds();
 
@@ -3193,4 +3252,110 @@ Vis::TextLabelPrimitive2D* Vis::StructureView2D::allocTextLabelPrimitive()
 	prim->setPen(activePen.getColor());
 
 	return prim;
+}
+	
+void Vis::StructureView2D::addCustomGraphics(CustomGraphicsData* gfx_data, bool front)
+{
+	
+	if (front)
+		frontCustomGraphics.push_back(CustomGraphicsDataPtr(gfx_data));
+	else
+		backCustomGraphics.push_back(CustomGraphicsDataPtr(gfx_data));
+
+	customGraphicsChanged = true;
+}
+
+
+Vis::StructureView2D::CustomGraphicsData::CustomGraphicsData(const Math::Vector2D& anchor_pos, const GraphicsPrimitive2D& prim, 
+															 unsigned int alignment):
+	anchorPos(anchor_pos), primitive(prim.clone()), alignment(alignment) 
+{}
+
+Vis::StructureView2D::CustomGraphicsData::CustomGraphicsData(const Chem::Atom& anchor_atom, const GraphicsPrimitive2D& prim, 
+															 unsigned int alignment):
+	anchorPos(), primitive(prim.clone()), alignment(alignment) 
+{
+	anchorAtoms.push_back(&anchor_atom);
+}
+
+Vis::StructureView2D::CustomGraphicsData::CustomGraphicsData(const Chem::Fragment& anchor_atoms, const GraphicsPrimitive2D& prim, 
+															 unsigned int alignment):
+	anchorPos(), primitive(prim.clone()), alignment(alignment) 
+{
+	std::transform(anchor_atoms.getAtomsBegin(), anchor_atoms.getAtomsEnd(), std::back_inserter(anchorAtoms),
+				   boost::bind(Internal::AddressOf<const Chem::Atom>(), _1));
+}
+
+const Vis::Rectangle2D& Vis::StructureView2D::CustomGraphicsData::calcBounds(const Math::Vector2DArray& coords, const Chem::MolecularGraph& structure, FontMetrics* font_metrics)
+{
+	primitive->getBounds(bounds, font_metrics);
+
+	Math::Vector2D anchor_pos;
+
+	if (!anchorAtoms.empty()) {
+		for (AtomList::const_iterator it = anchorAtoms.begin(), end = anchorAtoms.end(); it != end; ++it) {
+			std::size_t atom_idx = structure.getAtomIndex(**it);
+
+			anchor_pos.plusAssign(coords[atom_idx]);
+		}
+
+		anchor_pos /= anchorAtoms.size();
+
+	} else
+		anchor_pos.assign(anchorPos);
+
+	switch (alignment & Alignment::H_ALIGNMENT_MASK) {
+
+		case Alignment::H_CENTER:
+			translation[0] = anchor_pos[0] - (bounds.getMin()[0] + bounds.getMax()[0]) * 0.5;
+			break;
+
+		case Alignment::LEFT:
+			translation[0] = anchor_pos[0] - bounds.getMin()[0];
+			break;
+
+		case Alignment::RIGHT:
+			translation[0] = anchor_pos[0] - bounds.getMax()[0];
+			break;
+
+		default:
+			translation[0] = anchor_pos[0];
+	}
+
+	switch (alignment & Alignment::V_ALIGNMENT_MASK) {
+
+		case Alignment::V_CENTER:
+			translation[1] = anchor_pos[1] - (bounds.getMin()[1] + bounds.getMax()[1]) * 0.5;
+			break;
+
+		case Alignment::TOP:
+			translation[1] = anchor_pos[1] - bounds.getMin()[1];
+			break;
+
+		case Alignment::BOTTOM:
+			translation[1] = anchor_pos[1] - bounds.getMax()[1];
+			break;
+
+		default:
+			translation[1] = anchor_pos[1];
+	}
+
+	bounds.translate(translation);
+
+	return bounds;
+}
+
+const Vis::Rectangle2D& Vis::StructureView2D::CustomGraphicsData::getBounds() const
+{
+	return bounds;
+}
+
+const Math::Vector2D& Vis::StructureView2D::CustomGraphicsData::getTranslation() const
+{
+	return translation;
+}
+
+const Vis::GraphicsPrimitive2D& Vis::StructureView2D::CustomGraphicsData::getPrimitive() const
+{
+	return *primitive;
 }

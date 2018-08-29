@@ -269,6 +269,21 @@ class CairoRenderer2D(CDPL.Vis.Renderer2D):
 		self.__cairoContext.arc(x, y, radius, 0.0, 2.0 * math.pi)
 		self.__cairoContext.fill()
 
+	def drawEllipse(self, x, y, width, height):
+		"drawEllipse(CairoRenderer2D self, float x, float y, float width, float height) -> None :"
+        self.__cairoContext.save()
+	
+        self.__cairoContext.new_path()
+
+        self.__cairoContext.translate(x, y);
+        self.__cairoContext.scale(1.0, height / width);
+        self.__cairoContext.arc(0.0, 0.0, width * 0.5, 0.0, 2 * M_PI);
+
+        self.__fillPath();
+        self.__strokePath();
+
+        self.__cairoContext.restore()
+
 	def drawText(self, x, y, txt):
 		"drawText(CairoRenderer2D self, float x, float y, str txt) -> None :"
 		font = self.__fontStack[-1]

@@ -216,6 +216,20 @@ namespace CDPL
 			 * \see setPen()
 			 */
 			virtual void drawPoint(double x, double y) = 0;
+
+			/**
+			 * \brief Draws an ellipse with the given width and height around the center position <em>(x, y)</em>.
+			 *
+			 * The ellipse is filled as specified by the current brush and the outline will be drawn as specified by
+			 * the current pen.
+			 *
+			 * \param x The x-coordinate of the center point.
+			 * \param y The y-coordinate of the center point.
+			 * \param width The width of the ellipse.
+			 * \param height The height of the ellipse.
+			 * \see setPen(), setBrush()
+			 */
+			virtual void drawEllipse(double x, double y, double width, double height) = 0;
 			
 			/**
 			 * \brief Draws the specified text at the position <em>(x, y)</em>.

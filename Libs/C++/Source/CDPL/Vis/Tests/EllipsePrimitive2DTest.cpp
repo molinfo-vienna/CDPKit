@@ -1,7 +1,7 @@
 /* -*- mode: c++; c-basic-offset: 4; tab-width: 4; indent-tabs-mode: t -*- */
 
 /* 
- * PolylinePrimitive2DTest.cpp 
+ * EllipsePrimitive2DTest.cpp 
  *
  * This file is part of the Chemical Data Processing Toolkit
  *
@@ -29,9 +29,10 @@
 #include <boost/test/auto_unit_test.hpp>
 
 #include "CDPL/Config.hpp"
-#include "CDPL/Vis/PolylinePrimitive2D.hpp"
+#include "CDPL/Vis/EllipsePrimitive2D.hpp"
 #include "CDPL/Vis/Rectangle2D.hpp"
 #include "CDPL/Vis/Pen.hpp"
+#include "CDPL/Vis/Brush.hpp"
 #include "CDPL/Vis/Color.hpp"
 
 #ifdef HAVE_CAIRO 
@@ -49,46 +50,57 @@
 namespace
 {
 
-	void checkClone(const CDPL::Vis::PolylinePrimitive2D& prim)
+	void checkClone(const CDPL::Vis::EllipsePrimitive2D& prim)
 	{
 		using namespace CDPL;
 		using namespace Vis;
 
 		GraphicsPrimitive2D::SharedPointer gp_clone_ptr = prim.clone();
-		const PolylinePrimitive2D* prim_clone_ptr = static_cast<const PolylinePrimitive2D*>(gp_clone_ptr.get());
+		const EllipsePrimitive2D* prim_clone_ptr = static_cast<const EllipsePrimitive2D*>(gp_clone_ptr.get());
 
-		BOOST_CHECK_EQUAL(prim_clone_ptr->getSize(), prim.getSize());
+		BOOST_CHECK(prim_clone_ptr->getPosition() == prim.getPosition());
 		BOOST_CHECK(prim_clone_ptr->getPen() == prim.getPen());
-
-		for (std::size_t i = 0; i < prim.getSize(); i++)
-			BOOST_CHECK((*prim_clone_ptr)[i] == prim[i]);
+		BOOST_CHECK(prim_clone_ptr->getBrush() == prim.getBrush());
+		BOOST_CHECK(prim_clone_ptr->getWidth() == prim.getWidth());
+		BOOST_CHECK(prim_clone_ptr->getHeight() == prim.getHeight());
 	}
 }
 
 
-BOOST_AUTO_TEST_CASE(PolylinePrimitive2DTest)
+BOOST_AUTO_TEST_CASE(EllipsePrimitive2DTest)
 {
 	using namespace CDPL;
 	using namespace Vis;
 
-	PolylinePrimitive2D plp;
+	EllipsePrimitive2D ep;
 
-	BOOST_CHECK(plp.getPen() == Pen());
+	BOOST_CHECK(ep.getPen() == Pen());
+	BOOST_CHECK(ep.getBrush() == Brush());
+	BOOST_CHECK(ep.getWidth() == 0.0);
+	BOOST_CHECK(ep.getHeight() == 0.0);
 
-	checkClone(plp);
+	checkClone(ep);
 
-	plp.setPen(Pen(Color::GREEN, Pen::DASH_LINE));
+	ep.setPen(Pen(Color::RED, 2.3, Pen::DOT_LINE));
 
-	BOOST_CHECK(plp.getPen() == Pen(Color::GREEN, Pen::DASH_LINE));
+	BOOST_CHECK(ep.getPen() == Pen(Color::RED, 2.3, Pen::DOT_LINE));
+	BOOST_CHECK(ep.getBrush() == Brush());
 
-	checkClone(plp);
+	checkClone(ep);
+
+	ep.setBrush(Brush::DENSE1_PATTERN);
+
+	BOOST_CHECK(ep.getPen() == Pen(Color::RED, 2.3, Pen::DOT_LINE));
+	BOOST_CHECK(ep.getBrush() == Brush(Brush::DENSE1_PATTERN));
+
+	checkClone(ep);
 
 //-----
 
 #ifdef HAVE_CAIRO 
 # ifdef HAVE_CAIRO_PNG_SUPPORT
 
-	CairoPointer<cairo_surface_t> surf_ptr(cairo_image_surface_create(CAIRO_FORMAT_ARGB32, 310, 1300));
+	CairoPointer<cairo_surface_t> surf_ptr(cairo_image_surface_create(CAIRO_FORMAT_ARGB32, 600, 500));
 
 	BOOST_CHECK(cairo_surface_status(surf_ptr.get()) == CAIRO_STATUS_SUCCESS);
 
@@ -141,56 +153,64 @@ BOOST_AUTO_TEST_CASE(PolylinePrimitive2DTest)
 		Pen(Color::CYAN, 5.0, Pen::DASH_DOT_LINE, Pen::SQUARE_CAP, Pen::MITER_JOIN),
 		Pen(Color::CYAN, 5.0, Pen::DASH_DOT_DOT_LINE, Pen::SQUARE_CAP, Pen::BEVEL_JOIN),
 		
-		Pen(Color::YELLOW, 10.0, Pen::NO_LINE, Pen::ROUND_CAP, Pen::MITER_JOIN),
-		Pen(Color::YELLOW, 10.0, Pen::SOLID_LINE, Pen::ROUND_CAP, Pen::BEVEL_JOIN),
-		Pen(Color::YELLOW, 10.0, Pen::DASH_LINE, Pen::ROUND_CAP, Pen::ROUND_JOIN),
-		Pen(Color::YELLOW, 10.0, Pen::DOT_LINE, Pen::ROUND_CAP, Pen::MITER_JOIN),
-		Pen(Color::YELLOW, 10.0, Pen::DASH_DOT_LINE, Pen::ROUND_CAP, Pen::BEVEL_JOIN),
-		Pen(Color::YELLOW, 10.0, Pen::DASH_DOT_DOT_LINE, Pen::ROUND_CAP, Pen::ROUND_JOIN)
+		Pen(Color(1.0, 1.0, 0.0, 0.5), 10.0, Pen::NO_LINE, Pen::ROUND_CAP, Pen::MITER_JOIN),
+		Pen(Color(1.0, 1.0, 0.0, 0.5), 10.0, Pen::SOLID_LINE, Pen::ROUND_CAP, Pen::BEVEL_JOIN),
+		Pen(Color(1.0, 1.0, 0.0, 0.5), 10.0, Pen::DASH_LINE, Pen::ROUND_CAP, Pen::ROUND_JOIN),
+		Pen(Color(1.0, 1.0, 0.0, 0.5), 10.0, Pen::DOT_LINE, Pen::ROUND_CAP, Pen::MITER_JOIN),
+		Pen(Color(1.0, 1.0, 0.0, 0.5), 10.0, Pen::DASH_DOT_LINE, Pen::ROUND_CAP, Pen::BEVEL_JOIN),
+		Pen(Color(1.0, 1.0, 0.0, 0.5), 10.0, Pen::DASH_DOT_DOT_LINE, Pen::ROUND_CAP, Pen::ROUND_JOIN)
 	};
 
-	plp.resize(5);
+	Brush test_brushes[] = {
+		Brush(Color::RED, Brush::SOLID_PATTERN),
+		Brush(Color(1.0, 1.0, 1.0, 0.5), Brush::DENSE1_PATTERN),
+		Brush(Color::BLUE, Brush::DENSE2_PATTERN),
+		Brush(Color::YELLOW, Brush::DENSE3_PATTERN),
+		Brush(Color::MAGENTA, Brush::DENSE4_PATTERN),
+		Brush(Color::WHITE, Brush::DENSE5_PATTERN),
+		Brush(Color::GREEN, Brush::DENSE6_PATTERN),
+		Brush(Color::CYAN, Brush::DENSE7_PATTERN),
+		Brush(Color::DARK_MAGENTA, Brush::H_PATTERN),
+		Brush(Color::DARK_GREEN, Brush::V_PATTERN),
+		Brush(Color::DARK_BLUE, Brush::CROSS_PATTERN),
+		Brush(Color::DARK_YELLOW, Brush::LEFT_DIAG_PATTERN),
+		Brush(Color::DARK_CYAN, Brush::RIGHT_DIAG_PATTERN),
+		Brush(Color::DARK_RED, Brush::DIAG_CROSS_PATTERN),
+		Brush(Color::BLACK, Brush::NO_PATTERN)
+	};
 
-	double y = 140.0;
+	ep.setWidth(80.0);
+	ep.setHeight(50.0);
 
-	for (std::size_t i = 0; i < 7; y += 170.0, i++) {
-		for (std::size_t j = 0; j < 6; j++) {
-			plp.setPen(test_pens[i * 6 + j]);
+	BOOST_CHECK(ep.getWidth() == 80.0);
+	BOOST_CHECK(ep.getHeight() == 50.0);
 
-			plp[0](0) = -1.0 * 20.0 * j;
-			plp[0](1) = 1.0 * 20.0 * j;
+	double y = 35.0;
 
-			plp[1](0) = 1.0 * 20.0 * j;
-			plp[1](1) = 1.0 * 20.0 * j;
+	for (std::size_t i = 0; i < 7; i++, y += 70.0) {
+		double x = 50.0;
 
-			plp[2](0) = 0.5 * 20.0 * j;
-			plp[2](1) = -1.0 * 20.0 * j;
-			
-			plp[3](0) = -1.5 * 20.0 * j;
-			plp[3](1) = -0.5 * 20.0 * j;
-
-			plp[4](0) = -1.8 * 20.0 * j;
-			plp[4](1) = 0.5 * 20.0 * j;
-
-			plp.translate(Math::vec(195.0, y));
-
-			checkClone(plp);
-
-			plp.render(renderer);
-
+		for (std::size_t j = 0; j < 6; j++, x += 100.0) {
+			ep.setPen(test_pens[i * 6 + j]);
+			ep.setBrush(test_brushes[(i * 6 + j) % 15]);
+			ep.setPosition(Math::vec(x, y));
+			ep.render(renderer);
+	   
 			Rectangle2D bbox;
-			plp.getBounds(bbox, 0);
+			ep.getBounds(bbox, 0);
 
 			renderer.setPen(Color::RED);
 			renderer.setBrush(Brush());
 			renderer.drawRectangle(bbox.getMin()(0), bbox.getMin()(1), bbox.getWidth(), bbox.getHeight());
+
+			checkClone(ep);
 
 			BOOST_CHECK(cairo_surface_status(surf_ptr.get()) == CAIRO_STATUS_SUCCESS);
 			BOOST_CHECK(cairo_status(ctxt_ptr.get()) == CAIRO_STATUS_SUCCESS);
 		}
 	}
 
-	BOOST_CHECK(cairo_surface_write_to_png(surf_ptr.get(), "PolylinePrimitive2DTest.png") == CAIRO_STATUS_SUCCESS);
+	BOOST_CHECK(cairo_surface_write_to_png(surf_ptr.get(), "EllipsePrimitive2DTest.png") == CAIRO_STATUS_SUCCESS);
 
 //	BOOST_MESSAGE(cairo_status_to_string(cairo_surface_status(surf_ptr.get())));
 //	BOOST_MESSAGE(cairo_status_to_string(cairo_status(ctxt_ptr.get())));

@@ -488,10 +488,53 @@ namespace CDPL
 			 */
 			const Chem::MolecularGraph* getStructure() const;
 
+			/**
+			 * \brief Calculates the bounds of the rendered structure in output space.
+			 * \param bounds The object storing the calculated bounding box.
+			 */
 			void getModelBounds(Rectangle2D& bounds);
 
+			/**
+			 * \brief Add a custom graphics primitive that gets rendered along the structure diagram.
+			 * \param anchor_pos The anchor position of the primitive in the atom 2D coordinates space of the structure.
+			 * \param prim The graphics primitive to render.
+			 * \param alignment The alignment of the primitive relative to the anchor position.
+			 * \param front \c true if the primitive shall be rendered after the structure, and \false if before.
+			 * \note A copy of the specified graphics primitive gets stored and thus can be reused/changed after the call.
+			 */
+			void addGraphicsPrimitive(const Math::Vector2D& anchor_pos, const GraphicsPrimitive2D& prim, unsigned int alignment, bool front);
+	
+			/**
+			 * \brief Add a custom graphics primitive that gets rendered along the structure diagram.
+			 * \param anchor_atom Specifies an atom of the structure that serves as the anchor position of the primitive.
+			 * \param prim The graphics primitive to render.
+			 * \param alignment The alignment of the primitive relative to the anchor atom position.
+			 * \param front \c true if the primitive shall be rendered after the structure, and \false if before.
+			 * \note A copy of the specified graphics primitive gets stored and thus can be reused/changed after the call.
+			 */
+			void addGraphicsPrimitive(const Chem::Atom& anchor_atom, const GraphicsPrimitive2D& prim, unsigned int alignment, bool front);
+	
+			/**
+			 * \brief Add a custom graphics primitive that gets rendered along the structure diagram.
+			 * \param anchor_atoms Specifies a group of atoms of the structure whose centroid serves as the anchor position of the primitive.
+			 * \param prim The graphics primitive to render.
+			 * \param alignment The alignment of the primitive relative to the centroid of the anchor atom group.
+			 * \param front \c true if the primitive shall be rendered after the structure, and \false if before.
+			 * \note A copy of the specified graphics primitive gets stored and thus can be reused/changed after the call.
+			 */
+			void addGraphicsPrimitive(const Chem::Fragment& anchor_atoms, const GraphicsPrimitive2D& prim, unsigned int alignment, bool front);
+
+			/**
+			 * \brief Removes all previously added custom graphics primitives.
+			 */
+			void clearGraphicsPrimitives();
+
 		private:
+			class CustomGraphicsData;
 			friend class ReactionView2D;
+
+			typedef boost::shared_ptr<CustomGraphicsData> CustomGraphicsDataPtr;
+			typedef std::vector<CustomGraphicsDataPtr> CustomGraphicsDataList;
 
 			StructureView2D(const StructureView2D&);
 			StructureView2D(bool);
@@ -630,6 +673,38 @@ namespace CDPL
 			PointListPrimitive2D* allocPointListPrimitive();
 			TextLabelPrimitive2D* allocTextLabelPrimitive();
 
+			void addCustomGraphics(CustomGraphicsData* gfx_data, bool front);
+			void renderCustomGraphics(Renderer2D& renderer, const CustomGraphicsDataList& gfx_data) const;
+
+			class CustomGraphicsData
+			{
+
+			public:
+				CustomGraphicsData(const Math::Vector2D& anchor_pos, const GraphicsPrimitive2D& prim, unsigned int alignment);
+
+				CustomGraphicsData(const Chem::Atom& anchor_atom, const GraphicsPrimitive2D& prim, unsigned int alignment);
+
+				CustomGraphicsData(const Chem::Fragment& anchor_atoms, const GraphicsPrimitive2D& prim, unsigned int alignment);
+
+				const Rectangle2D& calcBounds(const Math::Vector2DArray& coords, const Chem::MolecularGraph& structure, FontMetrics* font_metrics);
+
+				const Rectangle2D& getBounds() const;
+
+				const Math::Vector2D& getTranslation() const;
+
+				const GraphicsPrimitive2D& getPrimitive() const;
+
+			private:
+				typedef std::vector<const Chem::Atom*>   AtomList;
+
+				Math::Vector2D                     anchorPos;
+				AtomList                           anchorAtoms;
+				GraphicsPrimitive2D::SharedPointer primitive;
+				unsigned int                       alignment;
+				Math::Vector2D                     translation;
+				Rectangle2D                        bounds;
+			};
+
 			typedef std::vector<const GraphicsPrimitive2D*> GraphicsPrimitiveList;
 			typedef std::vector<Rectangle2D> RectangleList;
 			typedef std::vector<RectangleList> RectangleListTable;
@@ -667,6 +742,7 @@ namespace CDPL
 			Math::Vector2D                     viewTranslations[2];
 			bool                               structureChanged;
 			bool                               fontMetricsChanged;
+			bool                               customGraphicsChanged;
 			Pen                                activePen;
 			Font                               activeLabelFont;
 			Font                               activeSecondaryLabelFont;
@@ -677,6 +753,8 @@ namespace CDPL
 			AllocLineSegListPrimitiveList      allocLineSegListPrimitives;
 			AllocPointListPrimitiveList        allocPointListPrimitives;
 			AllocTextLabelPrimitiveList        allocTextLabelPrimitives;
+			CustomGraphicsDataList             backCustomGraphics;
+			CustomGraphicsDataList             frontCustomGraphics;
 			std::size_t                        freeLinePrimitiveIdx;
 			std::size_t                        freePolylinePrimitiveIdx;
 			std::size_t                        freePolygonPrimitiveIdx;

@@ -81,6 +81,10 @@ namespace CDPL
 			 */		
 			const Pen& getPen() const;
 
+			GraphicsPrimitive2D::SharedPointer clone() const;
+
+			void getBounds(Rectangle2D& bounds, FontMetrics* font_metrics = 0) const;
+
 		private:
 			Pen   pen;
 		};

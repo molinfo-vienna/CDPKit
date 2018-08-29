@@ -31,6 +31,8 @@
 #ifndef CDPL_VIS_GRAPHICSPRIMITIVE2D_HPP
 #define CDPL_VIS_GRAPHICSPRIMITIVE2D_HPP
 
+#include <boost/shared_ptr.hpp>
+
 #include "CDPL/Vis/APIPrefix.hpp"
 
 
@@ -46,6 +48,8 @@ namespace CDPL
 		 */
 
 		class Renderer2D;
+		class FontMetrics;
+		class Rectangle2D;
 
 		/**
 		 * \brief The abstract base class of all 2D graphics primitives.
@@ -61,6 +65,11 @@ namespace CDPL
 
 		public:
 			/**
+			 * \brief A reference-counted smart pointer [\ref BSHPTR] for dynamically allocated \c %GraphicsPrimitive2D instances.
+			 */
+			typedef boost::shared_ptr<GraphicsPrimitive2D> SharedPointer;
+
+			/**
 			 * \brief Virtual destructor.
 			 */
 			virtual ~GraphicsPrimitive2D() {}
@@ -70,6 +79,19 @@ namespace CDPL
 			 * \param renderer The renderer that performs the drawing operations.
 			 */
 			virtual void render(Renderer2D& renderer) const = 0;
+
+			/**
+			 * \brief Creates a dynamically allocated copy of the graphics primitive.
+			 * \return The copy of the graphics primitive.
+			 */
+			virtual SharedPointer clone() const = 0;
+
+			/**
+			 * \brief Calculates the bounds of the graphics primitive.
+			 * \param bounds The object storing the calculated bounding box.
+			 * \param font_metrics The font metrics object to use for bounds calculation (if required).
+			 */
+			virtual void getBounds(Rectangle2D& bounds, FontMetrics* font_metrics = 0) const = 0;
 		};
 
 		/**

@@ -30,6 +30,7 @@
 
 #include "CDPL/Config.hpp"
 #include "CDPL/Vis/PolygonPrimitive2D.hpp"
+#include "CDPL/Vis/Rectangle2D.hpp"
 #include "CDPL/Vis/Pen.hpp"
 #include "CDPL/Vis/Brush.hpp"
 #include "CDPL/Vis/Color.hpp"
@@ -46,6 +47,27 @@
 #endif // HAVE_CAIRO
 
 
+namespace
+{
+
+	void checkClone(const CDPL::Vis::PolygonPrimitive2D& prim)
+	{
+		using namespace CDPL;
+		using namespace Vis;
+
+		GraphicsPrimitive2D::SharedPointer gp_clone_ptr = prim.clone();
+		const PolygonPrimitive2D* prim_clone_ptr = static_cast<const PolygonPrimitive2D*>(gp_clone_ptr.get());
+
+		BOOST_CHECK_EQUAL(prim_clone_ptr->getSize(), prim.getSize());
+		BOOST_CHECK(prim_clone_ptr->getPen() == prim.getPen());
+		BOOST_CHECK(prim_clone_ptr->getBrush() == prim.getBrush());
+
+		for (std::size_t i = 0; i < prim.getSize(); i++)
+			BOOST_CHECK((*prim_clone_ptr)[i] == prim[i]);
+	}
+}
+
+
 BOOST_AUTO_TEST_CASE(PolygonPrimitive2DTest)
 {
 	using namespace CDPL;
@@ -56,15 +78,21 @@ BOOST_AUTO_TEST_CASE(PolygonPrimitive2DTest)
 	BOOST_CHECK(pp.getPen() == Pen());
 	BOOST_CHECK(pp.getBrush() == Brush());
 
+	checkClone(pp);
+
 	pp.setPen(Pen(Color::RED, 2.3, Pen::DOT_LINE));
 
 	BOOST_CHECK(pp.getPen() == Pen(Color::RED, 2.3, Pen::DOT_LINE));
 	BOOST_CHECK(pp.getBrush() == Brush());
+	
+	checkClone(pp);
 
 	pp.setBrush(Brush::DENSE1_PATTERN);
 
 	BOOST_CHECK(pp.getPen() == Pen(Color::RED, 2.3, Pen::DOT_LINE));
 	BOOST_CHECK(pp.getBrush() == Brush(Brush::DENSE1_PATTERN));
+
+	checkClone(pp);
 
 //-----
 
@@ -178,8 +206,17 @@ BOOST_AUTO_TEST_CASE(PolygonPrimitive2DTest)
 
 			pp.translate(Math::vec(x, y));
 
+			checkClone(pp);
+
 			pp.render(renderer);
-	   
+
+			Rectangle2D bbox;
+			pp.getBounds(bbox, 0);
+
+			renderer.setPen(Color::RED);
+			renderer.setBrush(Brush());
+			renderer.drawRectangle(bbox.getMin()(0), bbox.getMin()(1), bbox.getWidth(), bbox.getHeight());
+
 			BOOST_CHECK(cairo_surface_status(surf_ptr.get()) == CAIRO_STATUS_SUCCESS);
 			BOOST_CHECK(cairo_status(ctxt_ptr.get()) == CAIRO_STATUS_SUCCESS);
 		}

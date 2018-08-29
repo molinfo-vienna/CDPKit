@@ -31,6 +31,7 @@
 
 #include "CDPL/Config.hpp"
 #include "CDPL/Vis/PointListPrimitive2D.hpp"
+#include "CDPL/Vis/Rectangle2D.hpp"
 #include "CDPL/Vis/Pen.hpp"
 #include "CDPL/Vis/Color.hpp"
 
@@ -46,6 +47,26 @@
 #endif // HAVE_CAIRO
 
 
+namespace
+{
+
+	void checkClone(const CDPL::Vis::PointListPrimitive2D& prim)
+	{
+		using namespace CDPL;
+		using namespace Vis;
+
+		GraphicsPrimitive2D::SharedPointer gp_clone_ptr = prim.clone();
+		const PointListPrimitive2D* prim_clone_ptr = static_cast<const PointListPrimitive2D*>(gp_clone_ptr.get());
+
+		BOOST_CHECK_EQUAL(prim_clone_ptr->getSize(), prim.getSize());
+		BOOST_CHECK(prim_clone_ptr->getPen() == prim.getPen());
+
+		for (std::size_t i = 0; i < prim.getSize(); i++)
+			BOOST_CHECK((*prim_clone_ptr)[i] == prim[i]);
+	}
+}
+
+
 BOOST_AUTO_TEST_CASE(PointListPrimitive2DTest)
 {
 	using namespace CDPL;
@@ -55,9 +76,13 @@ BOOST_AUTO_TEST_CASE(PointListPrimitive2DTest)
 
 	BOOST_CHECK(plp.getPen() == Pen());
 
+	checkClone(plp);
+
 	plp.setPen(Pen(Color::GREEN, Pen::DASH_LINE));
 
 	BOOST_CHECK(plp.getPen() == Pen(Color::GREEN, Pen::DASH_LINE));
+
+	checkClone(plp);
 
 //------
 
@@ -135,6 +160,7 @@ BOOST_AUTO_TEST_CASE(PointListPrimitive2DTest)
 	plp.resize(1);
 
 	double y = 5.0;
+	Rectangle2D bbox;
 
 	for (std::size_t i = 0; i < 6 * 8; y += 20.0) {
 		double x = 10.0;
@@ -145,8 +171,15 @@ BOOST_AUTO_TEST_CASE(PointListPrimitive2DTest)
 			plp[0](0) = x;
 			plp[0](1) = y;
 
+			checkClone(plp);
+
 			plp.render(renderer);
-	   
+			plp.getBounds(bbox, 0);
+
+			renderer.setPen(Color::RED);
+			renderer.setBrush(Brush());
+			renderer.drawRectangle(bbox.getMin()(0), bbox.getMin()(1), bbox.getWidth(), bbox.getHeight());
+
 			BOOST_CHECK(cairo_surface_status(surf_ptr.get()) == CAIRO_STATUS_SUCCESS);
 			BOOST_CHECK(cairo_status(ctxt_ptr.get()) == CAIRO_STATUS_SUCCESS);
 		}
@@ -162,8 +195,15 @@ BOOST_AUTO_TEST_CASE(PointListPrimitive2DTest)
 		plp.addElement(Math::vec(40.0 * std::cos(2.0 * M_PI / 15.0 * i) + 60.0, 
 								 40.0 * std::sin(2.0 * M_PI / 15.0 * i) + y + 40.0));
 
+	checkClone(plp);
+
 	plp.render(renderer);
-	   
+	plp.getBounds(bbox, 0);
+
+	renderer.setPen(Color::RED);
+	renderer.setBrush(Brush());
+	renderer.drawRectangle(bbox.getMin()(0), bbox.getMin()(1), bbox.getWidth(), bbox.getHeight());
+
 	BOOST_CHECK(cairo_surface_status(surf_ptr.get()) == CAIRO_STATUS_SUCCESS);
 	BOOST_CHECK(cairo_status(ctxt_ptr.get()) == CAIRO_STATUS_SUCCESS);
 

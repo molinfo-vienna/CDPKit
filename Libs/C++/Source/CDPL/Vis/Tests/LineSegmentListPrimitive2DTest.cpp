@@ -30,6 +30,7 @@
 
 #include "CDPL/Config.hpp"
 #include "CDPL/Vis/LineSegmentListPrimitive2D.hpp"
+#include "CDPL/Vis/Rectangle2D.hpp"
 #include "CDPL/Vis/Pen.hpp"
 #include "CDPL/Vis/Color.hpp"
 
@@ -45,6 +46,26 @@
 #endif // HAVE_CAIRO
 
 
+namespace
+{
+
+	void checkClone(const CDPL::Vis::LineSegmentListPrimitive2D& prim)
+	{
+		using namespace CDPL;
+		using namespace Vis;
+
+		GraphicsPrimitive2D::SharedPointer gp_clone_ptr = prim.clone();
+		const LineSegmentListPrimitive2D* prim_clone_ptr = static_cast<const LineSegmentListPrimitive2D*>(gp_clone_ptr.get());
+
+		BOOST_CHECK_EQUAL(prim_clone_ptr->getSize(), prim.getSize());
+		BOOST_CHECK(prim_clone_ptr->getPen() == prim.getPen());
+
+		for (std::size_t i = 0; i < prim.getSize(); i++)
+			BOOST_CHECK((*prim_clone_ptr)[i] == prim[i]);
+	}
+}
+
+
 BOOST_AUTO_TEST_CASE(LineSegmentListPrimitive2DTest)
 {
 	using namespace CDPL;
@@ -54,9 +75,13 @@ BOOST_AUTO_TEST_CASE(LineSegmentListPrimitive2DTest)
 
 	BOOST_CHECK(lslp.getPen() == Pen());
 
+	checkClone(lslp);
+
 	lslp.setPen(Pen(Color::GREEN, Pen::DASH_LINE));
 
 	BOOST_CHECK(lslp.getPen() == Pen(Color::GREEN, Pen::DASH_LINE));
+
+	checkClone(lslp);
 
 //-----
 
@@ -159,7 +184,16 @@ BOOST_AUTO_TEST_CASE(LineSegmentListPrimitive2DTest)
 			lslp.translate(Math::vec(160.0, y));
 
 			lslp.render(renderer);
-	   
+
+	      	Rectangle2D bbox;
+			lslp.getBounds(bbox, 0);
+
+			renderer.setPen(Color::RED);
+			renderer.setBrush(Brush());
+			renderer.drawRectangle(bbox.getMin()(0), bbox.getMin()(1), bbox.getWidth(), bbox.getHeight());
+
+			checkClone(lslp);
+
 			BOOST_CHECK(cairo_surface_status(surf_ptr.get()) == CAIRO_STATUS_SUCCESS);
 			BOOST_CHECK(cairo_status(ctxt_ptr.get()) == CAIRO_STATUS_SUCCESS);
 		}

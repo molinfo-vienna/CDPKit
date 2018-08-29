@@ -37,8 +37,8 @@ void CDPLPythonForceField::registerFromPythonConverters()
 {
 	using namespace CDPL;
 
-	CDPLPythonBase::GenericFromPythonConverter<ForceField::MMFF94EnergyCalculator<double>,
-											   Math::BFGSMinimizer<Math::Vector3DArray, double, double>::ObjectiveFunction>();
-	CDPLPythonBase::GenericFromPythonConverter<ForceField::MMFF94GradientCalculator<double>,
-											   Math::BFGSMinimizer<Math::Vector3DArray, double, double>::GradientFunction>();
+	CDPLPythonBase::GenericFromPythonConverter<ForceField::MMFF94EnergyCalculator<double>&,
+											   Math::BFGSMinimizer<Math::Vector3DArray, double, double>::ObjectiveFunction, true>();
+	CDPLPythonBase::GenericFromPythonConverter<ForceField::MMFF94GradientCalculator<double>&,
+											   Math::BFGSMinimizer<Math::Vector3DArray, double, double>::GradientFunction, true>();
 }
