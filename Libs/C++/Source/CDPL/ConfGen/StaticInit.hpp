@@ -1,7 +1,7 @@
 /* -*- mode: c++; c-basic-offset: 4; tab-width: 4; indent-tabs-mode: t -*- */
 
 /* 
- * ConverterRegistration.hpp 
+ * StaticInit.hpp 
  *
  * This file is part of the Chemical Data Processing Toolkit
  *
@@ -24,15 +24,41 @@
  */
 
 
-#ifndef CDPL_PYTHON_FORCEFIELD_CONVERTERREGISTRATION_HPP
-#define CDPL_PYTHON_FORCEFIELD_CONVERTERREGISTRATION_HPP
+#ifndef CDPL_CONFGEN_STATICINIT_HPP
+#define CDPL_CONFGEN_STATICINIT_HPP
+
+#ifdef CDPL_CONFGEN_STATIC_LINK
 
 
-namespace CDPLPythonForceField
+namespace CDPL
 {
-	
-	void registerFromPythonConverters();
-	void registerToPythonConverters();
+
+	namespace ConfGen
+	{
+
+		void initAtomProperties();
+		void initBondProperties();
+		void initMolecularGraphProperties();
+	}
 }
 
-#endif // CDPL_PYTHON_FORCEFIELD_CONVERTERREGISTRATION_HPP
+namespace
+{
+
+	struct CDPLConfGenInit
+	{
+
+		CDPLConfGenInit() {
+/*
+			CDPL::ConfGen::initAtomProperties();
+			CDPL::ConfGen::initBondProperties();
+			CDPL::ConfGen::initMolecularGraphProperties();
+*/
+		}
+
+	} cdplConfGenInit;
+}
+
+#endif // CDPL_CONFGEN_STATIC_LINK
+
+#endif // CDPL_CONFGEN_STATICINIT_HPP

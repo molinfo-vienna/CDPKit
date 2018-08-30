@@ -1,7 +1,7 @@
 /* -*- mode: c++; c-basic-offset: 4; tab-width: 4; indent-tabs-mode: t -*- */
 
 /* 
- * ConverterRegistration.hpp 
+ * APIPrefix.hpp 
  *
  * This file is part of the Chemical Data Processing Toolkit
  *
@@ -23,16 +23,28 @@
  * Boston, MA 02111-1307, USA.
  */
 
+/**
+ * \file
+ * \brief Definition of the preprocessor macro \ref CDPL_CONFGEN_API.
+ */
 
-#ifndef CDPL_PYTHON_FORCEFIELD_CONVERTERREGISTRATION_HPP
-#define CDPL_PYTHON_FORCEFIELD_CONVERTERREGISTRATION_HPP
+#ifndef CDPL_CONFGEN_APIPREFIX_HPP
+#define CDPL_CONFGEN_APIPREFIX_HPP
 
+#ifdef CDPL_CONFGEN_STATIC_LINK
+#  define CDPL_CONFGEN_API
+#else // CDPL_CONFGEN_STATIC_LINK
+#  include "CDPL/APIPrefix.hpp"
+#  ifdef cdpl_confgen_shared_EXPORTS
+#    define CDPL_CONFGEN_API CDPL_API_EXPORT
+#  else // cdpl_confgen_shared_EXPORTS
+#    define CDPL_CONFGEN_API CDPL_API_IMPORT
+#  endif // cdpl_confgen_shared_EXPORTS
+#endif // CDPL_CONFGEN_STATIC_LINK
 
-namespace CDPLPythonForceField
-{
-	
-	void registerFromPythonConverters();
-	void registerToPythonConverters();
-}
+/**
+ * \def CDPL_CONFGEN_API
+ * \brief Tells the compiler/linker which classes, functions and variables are part of the library API.
+ */
 
-#endif // CDPL_PYTHON_FORCEFIELD_CONVERTERREGISTRATION_HPP
+#endif // CDPL_CONFGEN_APIPREFIX_HPP

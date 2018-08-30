@@ -93,14 +93,16 @@ namespace
 
 
 Vis::StructureView2D::StructureView2D(const Chem::MolecularGraph* molgraph): 
-	parameters(new StructureView2DParameters(*this)), fontMetrics(0), fontMetricsChanged(true), reactionContext(false), hasAtomCoords(false)
+	parameters(new StructureView2DParameters(*this)), fontMetrics(0), fontMetricsChanged(true), 
+	customGraphicsChanged(true), reactionContext(false), hasAtomCoords(false)
 {
 	setStructure(molgraph);
 }
 
 Vis::StructureView2D::StructureView2D(bool): 
 	parameters(new StructureView2DParameters(*this)), origStructure(0), fontMetrics(0), 
-	structureChanged(true), fontMetricsChanged(true), reactionContext(true), hasAtomCoords(false) {}
+	structureChanged(true), fontMetricsChanged(true), customGraphicsChanged(true), reactionContext(true), 
+	hasAtomCoords(false) {}
 
 Vis::StructureView2D::~StructureView2D() {}
 

@@ -1,7 +1,7 @@
 /* -*- mode: c++; c-basic-offset: 4; tab-width: 4; indent-tabs-mode: t -*- */
 
 /* 
- * ConverterRegistration.hpp 
+ * ConfGen.hpp 
  *
  * This file is part of the Chemical Data Processing Toolkit
  *
@@ -23,16 +23,12 @@
  * Boston, MA 02111-1307, USA.
  */
 
+/**
+ * \file
+ * \brief A convenience header including everything that is defined in namespace CDPL::ConfGen.
+ */
 
-#ifndef CDPL_PYTHON_FORCEFIELD_CONVERTERREGISTRATION_HPP
-#define CDPL_PYTHON_FORCEFIELD_CONVERTERREGISTRATION_HPP
+#ifndef CDPL_CONFGEN_HPP
+#define CDPL_CONFGEN_HPP
 
-
-namespace CDPLPythonForceField
-{
-	
-	void registerFromPythonConverters();
-	void registerToPythonConverters();
-}
-
-#endif // CDPL_PYTHON_FORCEFIELD_CONVERTERREGISTRATION_HPP
+#endif // CDPL_CONFGEN_HPP

@@ -40,7 +40,8 @@ void CDPLPythonVis::exportReactionView2D()
 
 	python::class_<Vis::ReactionView2D, 
 		python::bases<Vis::View2D>, boost::noncopyable>("ReactionView2D", python::no_init)
-		.def(python::init<const Chem::Reaction*>((python::arg("self"), python::arg("rxn") = 0)))
+		.def(python::init<>(python::arg("self")))
+		.def(python::init<const Chem::Reaction*>((python::arg("self"), python::arg("rxn")))[python::with_custodian_and_ward<1, 2>()])
 		.def("setReaction", &Vis::ReactionView2D::setReaction, (python::arg("self"), python::arg("rxn")),
 			 python::with_custodian_and_ward<1, 2>())
 		.def("getReaction", &Vis::ReactionView2D::getReaction, python::arg("self"), 

@@ -194,15 +194,15 @@ class QtRenderer2D(CDPL.Vis.Renderer2D):
 	
 	def setTransform(self, xform):
 		"setTransform(QtRenderer2D self, Math.AffineTransform3D xform) -> None :"
-		self.__qPainter.setWorldTransform(QtGui.QTransform(xform[0][0], xform[1][0], xform[2][0], 
-														   xform[0][1], xform[1][1], xform[2][1], 
-														   xform[0][2], xform[1][2], xform[2][2]), False)
+		self.__qPainter.setWorldTransform(QtGui.QTransform(xform(0, 0), xform(1, 0), xform(2, 0), 
+														   xform(0, 1), xform(1, 1), xform(2, 1), 
+														   xform(0, 2), xform(1, 2), xform(2, 2)), False)
 	
 	def transform(self, xform):
 		"transform(QtRenderer2D self, Math.AffineTransform3D xform) -> None :"
-		self.__qPainter.setWorldTransform(QtGui.QTransform(xform[0][0], xform[1][0], xform[2][0], 
-														   xform[0][1], xform[1][1], xform[2][1], 
-														   xform[0][2], xform[1][2], xform[2][2]), True)
+		self.__qPainter.setWorldTransform(QtGui.QTransform(xform(0, 0), xform(1, 0), xform(2, 0), 
+														   xform(0, 1), xform(1, 1), xform(2, 1), 
+														   xform(0, 2), xform(1, 2), xform(2, 2)), True)
 
 	def setPen(self, pen):
 		"setPen(QtRenderer2D self, Vis.Pen pen) -> None :"

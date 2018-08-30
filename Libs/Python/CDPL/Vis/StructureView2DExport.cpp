@@ -53,7 +53,8 @@ void CDPLPythonVis::exportStructureView2D()
 
 	python::class_<Vis::StructureView2D, 
 		python::bases<Vis::View2D>, boost::noncopyable>("StructureView2D", python::no_init)
-		.def(python::init<const Chem::MolecularGraph*>((python::arg("self"), python::arg("molgraph") = 0)))
+		.def(python::init<>(python::arg("self")))
+		.def(python::init<const Chem::MolecularGraph*>((python::arg("self"), python::arg("molgraph")))[python::with_custodian_and_ward<1, 2>()])
 		.def("setStructure", &Vis::StructureView2D::setStructure, (python::arg("self"), python::arg("molgraph")),
 			 python::with_custodian_and_ward<1, 2>())
 		.def("getStructure", &Vis::StructureView2D::getStructure, python::arg("self"),

@@ -1,7 +1,7 @@
 /* -*- mode: c++; c-basic-offset: 4; tab-width: 4; indent-tabs-mode: t -*- */
 
 /* 
- * ConverterRegistration.hpp 
+ * Module.cpp 
  *
  * This file is part of the Chemical Data Processing Toolkit
  *
@@ -24,15 +24,18 @@
  */
 
 
-#ifndef CDPL_PYTHON_FORCEFIELD_CONVERTERREGISTRATION_HPP
-#define CDPL_PYTHON_FORCEFIELD_CONVERTERREGISTRATION_HPP
+#include <boost/python.hpp>
+
+#include "ClassExports.hpp"
+#include "FunctionExports.hpp"
+#include "NamespaceExports.hpp"
+#include "ConverterRegistration.hpp"
 
 
-namespace CDPLPythonForceField
+BOOST_PYTHON_MODULE(_confgen)
 {
-	
-	void registerFromPythonConverters();
-	void registerToPythonConverters();
-}
+	using namespace CDPLPythonConfGen;
 
-#endif // CDPL_PYTHON_FORCEFIELD_CONVERTERREGISTRATION_HPP
+	registerToPythonConverters();
+	registerFromPythonConverters();
+}

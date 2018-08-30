@@ -31,6 +31,7 @@ SET(vis_MOD_SRCS
     LineSegmentListPrimitive2DExport.cpp
     PointListPrimitive2DExport.cpp
     TextLabelPrimitive2DExport.cpp
+    EllipsePrimitive2DExport.cpp
 
     MolecularGraphFunctionExport.cpp
     AtomFunctionExport.cpp

@@ -170,15 +170,15 @@ class CairoRenderer2D(CDPL.Vis.Renderer2D):
 
 	def setTransform(self, xform):
 		"setTransform(CairoRenderer2D self, Math.AffineTransform3D xform) -> None :"
-		cairo_xform = cairo.Matrix(xform[0][0], xform[1][0], xform[0][1], 
-								   xform[1][1], xform[0][2], xform[1][2])
+		cairo_xform = cairo.Matrix(xform(0, 0), xform(1, 0), xform(0, 1), 
+								   xform(1, 1), xform(0, 2), xform(1, 2))
 
 		self.__cairoContext.set_matrix(cairo_xform)
 
 	def transform(self, xform):
 		"transform(CairoRenderer2D self, Math.AffineTransform3D xform) -> None :"
-		cairo_xform = cairo.Matrix(xform[0][0], xform[1][0], xform[0][1], 
-								   xform[1][1], xform[0][2], xform[1][2])
+		cairo_xform = cairo.Matrix(xform(0, 0), xform(1, 0), xform(0, 1), 
+								   xform(1, 1), xform(0, 2), xform(1, 2))
 	
 		self.__cairoContext.transform(cairo_xform)
 
@@ -277,7 +277,7 @@ class CairoRenderer2D(CDPL.Vis.Renderer2D):
 
         self.__cairoContext.translate(x, y);
         self.__cairoContext.scale(1.0, height / width);
-        self.__cairoContext.arc(0.0, 0.0, width * 0.5, 0.0, 2 * M_PI);
+        self.__cairoContext.arc(0.0, 0.0, width * 0.5, 0.0, 2 * 3.141593);
 
         self.__fillPath();
         self.__strokePath();

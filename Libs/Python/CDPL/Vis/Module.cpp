@@ -59,6 +59,7 @@ BOOST_PYTHON_MODULE(_vis)
 	exportLineSegmentListPrimitive2D();
 	exportPointListPrimitive2D();
 	exportTextLabelPrimitive2D();
+	exportEllipsePrimitive2D();
 
 #ifdef HAVE_CAIRO_PNG_SUPPORT
 
