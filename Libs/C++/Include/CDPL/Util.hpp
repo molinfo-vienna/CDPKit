@@ -36,6 +36,7 @@
 #include "CDPL/Util/Array.hpp"
 #include "CDPL/Util/BitSet.hpp"
 #include "CDPL/Util/BronKerboschAlgorithm.hpp"
+#include "CDPL/Util/DGCoordinatesGenerator.hpp"
 #include "CDPL/Util/Dereferencer.hpp"
 #include "CDPL/Util/IndexedElementIterator.hpp"
 #include "CDPL/Util/IndirectArray.hpp"

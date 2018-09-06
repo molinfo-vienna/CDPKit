@@ -108,7 +108,7 @@ namespace CDPL
 					if (g_norm >= ValueType(0) && g0Norm <= g_norm)
 						status = GNORM_REACHED;
 
-					if (delta_f >= ValueType(0) && deltaF <= deltaF)
+					if (delta_f >= ValueType(0) && deltaF <= delta_f)
 						status = Status(status | DELTAF_REACHED);
 
 					if (status != SUCCESS)
