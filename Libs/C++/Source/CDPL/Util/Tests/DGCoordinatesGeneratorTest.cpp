@@ -34,6 +34,26 @@
 
 #include "CDPL/Util/DGCoordinatesGenerator.hpp"
 #include "CDPL/Math/Vector.hpp"
+#include "CDPL/Math/IO.hpp"
+
+
+namespace
+{
+
+	typedef std::vector<CDPL::Math::Vector3D> CoordsArray;
+
+	double calcVolume(std::size_t pt_inds[4], const CoordsArray& coords)
+	{
+		using namespace CDPL;
+
+		const Math::Vector3D& pt1 = coords[pt_inds[0]];
+		const Math::Vector3D& pt2 = coords[pt_inds[1]];
+		const Math::Vector3D& pt3 = coords[pt_inds[2]];
+		const Math::Vector3D& pt4 = coords[pt_inds[3]];
+
+		return innerProd(pt1 - pt4, crossProd(pt2 - pt4, pt3 - pt4)) / 6.0;
+	}
+}
 
 
 BOOST_AUTO_TEST_CASE(DGCoordinatesGeneratorTest)
@@ -41,39 +61,75 @@ BOOST_AUTO_TEST_CASE(DGCoordinatesGeneratorTest)
 	using namespace CDPL;
 	using namespace Util;
 	
-	const std::size_t NUM_POINTS = 100;
-	const double      BOX_SIZE   = 50.0; 
-	const double      MAX_ERROR  = 0.25; 
+	const std::size_t NUM_POINTS     = 1000;
+	const std::size_t MAX_NUM_TRIALS = 5;
+	const double      BOX_SIZE       = 100.0; 
+
+	std::size_t VOL_CONSTRAINT_INDS[][4] = {
+	    { 0, 1, 2, 3 },
+	    { 2, 10, 12, 22 },
+	    { 1, 4, 8, 11 },
+	    { 4, 5, 6, 7 },
+	    { 5, 16, 17, 24 }
+	};
+
+	std::size_t NUM_VOL_CONSTRAINTS = 5;
 
 	DGCoordinatesGenerator<3, double> coords_gen;
-	std::vector<Math::Vector3D> test_points(NUM_POINTS);
-	boost::random::mt19937 rand_eng;
+	CoordsArray test_points(NUM_POINTS);
+	CoordsArray gen_coords(NUM_POINTS);
+
+	boost::random::mt19937 rand_eng(100);
 	boost::random::uniform_real_distribution<double> rand_dist(0.0, BOX_SIZE);
 
+	// generate random test point set
+
 	for (std::size_t i = 0; i < NUM_POINTS; i++) {
-		test_points[i][0] = rand_dist(rand_eng);
-		test_points[i][1] = rand_dist(rand_eng);
 		test_points[i][2] = rand_dist(rand_eng);
+		test_points[i][1] = rand_dist(rand_eng);
+		test_points[i][0] = rand_dist(rand_eng);
 	}
+
+	// specify distance constraints from inter test point distances
 
 	for (std::size_t i = 0; i < NUM_POINTS; i++) {
 		for (std::size_t j = i + 1; j < NUM_POINTS; j++) {
 			double dist = length(test_points[i] - test_points[j]);
-
+			
 			coords_gen.addDistanceConstraint(i, j, dist, dist);
 		}
 	}
 
+	// specify volume constraints using arbitrary quadruples of the test points
+
+	for (std::size_t i = 0; i < NUM_VOL_CONSTRAINTS; i++) {
+		double vol = calcVolume(VOL_CONSTRAINT_INDS[i], test_points);
+
+		coords_gen.addVolumeConstraint(VOL_CONSTRAINT_INDS[i][0], VOL_CONSTRAINT_INDS[i][1], VOL_CONSTRAINT_INDS[i][2], VOL_CONSTRAINT_INDS[i][3],
+									   vol, vol);
+	}
+
+	// setup DG coordinates generator and run
+
 	coords_gen.setNumPoints(NUM_POINTS);
 	coords_gen.setBoxSize(BOX_SIZE);
-	coords_gen.setMaxError(MAX_ERROR);
-	coords_gen.generate();
 
-	std::vector<Math::Vector3D> gen_coords(NUM_POINTS);
+	std::size_t num_trials = 0;
+
+	for ( ; num_trials < MAX_NUM_TRIALS; num_trials++) {
+		coords_gen.generate();
+		
+		if (coords_gen.getDistanceError() < 0.5 && coords_gen.getVolumeError() < 0.5) 
+			break;
+	}
+
+	BOOST_CHECK(num_trials < MAX_NUM_TRIALS);
 
 	coords_gen.getCoordinates(gen_coords);
 
-	double rms_dev = 0.0;
+	// check results
+
+	double dist_rms_dev = 0.0;
 
 	for (std::size_t i = 0; i < NUM_POINTS; i++) {
 		for (std::size_t j = i + 1; j < NUM_POINTS; j++) {
@@ -81,12 +137,28 @@ BOOST_AUTO_TEST_CASE(DGCoordinatesGeneratorTest)
 			double gen_dist = length(gen_coords[i] - gen_coords[j]);
 			double diff = orig_dist - gen_dist;
 
-			rms_dev += diff * diff;
+			dist_rms_dev += diff * diff;
 		}
 	}
 
-	rms_dev = std::sqrt(rms_dev / (NUM_POINTS * (NUM_POINTS - 1) * 0.5));
+	dist_rms_dev = std::sqrt(dist_rms_dev / (NUM_POINTS * (NUM_POINTS - 1) * 0.5));
 
-	std::cerr << " RMSD = " << rms_dev << std::endl;
+	double vol_rms_dev = 0.0;
+
+	for (std::size_t i = 0; i < NUM_VOL_CONSTRAINTS; i++) {
+		double orig_vol = calcVolume(VOL_CONSTRAINT_INDS[i], test_points);
+		double gen_vol = calcVolume(VOL_CONSTRAINT_INDS[i], gen_coords);
+		double diff = orig_vol - gen_vol;
+
+		vol_rms_dev += diff * diff;
+	}
+
+	vol_rms_dev = std::sqrt(vol_rms_dev / NUM_VOL_CONSTRAINTS);
+
+	BOOST_CHECK(dist_rms_dev < 0.000001);
+	BOOST_CHECK(vol_rms_dev < 0.000001);
+
+	//BOOST_MESSAGE("Solution distance RMSD: " << dist_rms_dev);
+	//BOOST_MESSAGE("Solution volume RMSD: " << vol_rms_dev);
 }
 

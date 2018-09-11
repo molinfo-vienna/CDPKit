@@ -1,3 +1,36 @@
 Installation Instructions
 *************************
 
+For a successful build of CDPKit the following dependencies
+need to be installed on the build host:
+
+- Boost-devel C++ libraries (V >= 1.52, mandatory)
+- Qt5-devel (optional)
+- Cairo-devel (V >= 1.14, optional)
+- Python-devel 2.x (optional) and Python-interpreter (mandatory)
+- SQLite-devel V3 (optional)
+
+CDPKit requires CMake V2.8.12 or higher for generating 
+build makefiles. The makefiles are generated as follows
+(assuming a Linux build):
+
+> mkdir <BUILD-DIR>
+> cd <BUILD-DIR>
+> cmake <CDPKIT-SOURCE-DIR>
+
+If the makefiles have been generated without errors, invoking
+'make' from within <BUILD-DIR> starts the actual build process: 
+
+> make
+
+Building CDPKit should proceed without any issues at least on RHEL 7 based systems 
+(other current systems should also work). 
+
+If the build finished without errors
+
+> make install
+
+will install CDPKit in the /opt directory of your system (please refer to
+the CMake documentation for how to change the default path).
+
+Enjoy!!!!!

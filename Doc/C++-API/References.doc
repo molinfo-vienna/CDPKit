@@ -5,6 +5,14 @@
 <table border="0">
 
 <tr>
+<td valign="top">\anchor ASPE<i>[ASPE]</i></td>
+<td valign="top">
+H. Xu, S. Izrailev, D. K. Agrafiotis, Conformational Sampling by Self-Organization,
+<i>J. Chem. Inf. Comput. Sci.</i> <b>2003</b>, 43, 1186-1191
+</td>
+</tr>
+
+<tr>
 <td valign="top">\anchor AUCOR<i>[AUCOR]</i></td>
 <td valign="top">
 G. Moreau, P. Broto, The Autocorrelation of a Topological Structure: A New Molecular Descriptor, 
@@ -298,14 +306,6 @@ Daylight SMARTS Theory website: http://www.daylight.com/dayhtml/doc/theory/theor
 <td valign="top">\anchor PDB<i>[PDB]</i></td>
 <td valign="top">
 PDB File-Format Specification website: http://www.wwpdb.org/docs.html
-</td>
-</tr>
-
-<tr>
-<td valign="top">\anchor SDGM<i>[SDGM]</i></td>
-<td valign="top">
-D. C. Spellmeyer, A. K. Wong, M. J. Bower, J. M. Blaney, Conformational analysis using distance geometry methods,
-<i>J. Mol. Graph. Model.</i> <b>1997</b>, 15, 18-36
 </td>
 </tr>
 
