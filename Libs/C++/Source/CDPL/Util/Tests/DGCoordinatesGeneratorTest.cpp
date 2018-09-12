@@ -61,8 +61,8 @@ BOOST_AUTO_TEST_CASE(DGCoordinatesGeneratorTest)
 	using namespace CDPL;
 	using namespace Util;
 	
-	const std::size_t NUM_POINTS     = 1000;
-	const std::size_t MAX_NUM_TRIALS = 5;
+	const std::size_t NUM_POINTS     = 2500;
+	const std::size_t MAX_NUM_TRIALS = 20;
 	const double      BOX_SIZE       = 100.0; 
 
 	std::size_t VOL_CONSTRAINT_INDS[][4] = {
@@ -111,21 +111,18 @@ BOOST_AUTO_TEST_CASE(DGCoordinatesGeneratorTest)
 
 	// setup DG coordinates generator and run
 
-	coords_gen.setNumPoints(NUM_POINTS);
 	coords_gen.setBoxSize(BOX_SIZE);
 
 	std::size_t num_trials = 0;
 
 	for ( ; num_trials < MAX_NUM_TRIALS; num_trials++) {
-		coords_gen.generate();
+		coords_gen.generate(NUM_POINTS, gen_coords);
 		
-		if (coords_gen.getDistanceError() < 0.5 && coords_gen.getVolumeError() < 0.5) 
+		if (coords_gen.getDistanceError(gen_coords) < 0.1 && coords_gen.getVolumeError(gen_coords) < 0.1) 
 			break;
 	}
 
 	BOOST_CHECK(num_trials < MAX_NUM_TRIALS);
-
-	coords_gen.getCoordinates(gen_coords);
 
 	// check results
 

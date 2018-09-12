@@ -120,7 +120,7 @@ void Biomol::extractEnvironmentResidues(const Chem::MolecularGraph& core, const 
 	bsphere_rad = std::max(bsphere_rad, length(*it - core_ctr));
 
     bsphere_rad += max_dist;
-	
+
     for (MolecularGraph::ConstAtomIterator it = macromol.getAtomsBegin(), end = macromol.getAtomsEnd(); it != end; ++it) {
 	const Atom& atom = *it;
 	const Math::Vector3D& atom_pos = coords_func(atom);
@@ -144,7 +144,7 @@ void Biomol::extractEnvironmentResidues(const Chem::MolecularGraph& core, const 
     for (std::size_t i = 0; i < num_atoms; i++) {
 	const Atom& env_atom = env_residues.getAtom(i);
 	Atom::ConstBondIterator b_it = env_atom.getBondsBegin();
-	
+
 	for (Atom::ConstAtomIterator a_it = env_atom.getAtomsBegin(), a_end = env_atom.getAtomsEnd(); a_it != a_end; ++a_it, ++b_it) {
 	    const Atom& nbr_atom = *a_it;
 
