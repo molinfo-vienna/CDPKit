@@ -71,6 +71,13 @@ namespace CDPL
 			typedef typename DistanceConstraintList::const_iterator ConstDistanceConstraintIterator;
 			typedef T ValueType;
 
+			static const std::size_t COORDS_DIM                  = Dim;
+			static const std::size_t DEF_NUM_CYCLES              = 50;
+			static const std::size_t DEF_CYCLE_STEP_COUNT_FACTOR = 50;
+
+			static const ValueType   DEF_START_LEARNING_RATE;
+			static const ValueType   DEF_LEARNING_RATE_DECREMENT;
+
 			class DistanceConstraint
 			{
 
@@ -102,9 +109,9 @@ namespace CDPL
 
 			DistanceConstraint& getDistanceConstraint(std::size_t idx);
 
-			void removeDistanceConstraints(std::size_t idx);
+			void removeDistanceConstraint(std::size_t idx);
 
-			void removeDistanceConstraints(const DistanceConstraintIterator& it);
+			void removeDistanceConstraint(const DistanceConstraintIterator& it);
 
 			DistanceConstraintIterator getDistanceConstraintsBegin();
 
@@ -181,11 +188,30 @@ namespace CDPL
 			RandNumEngine          randomEngine;
 		};
 
+		template <std::size_t Dim, typename T, typename Derived> 
+		const std::size_t DGCoordinatesGeneratorBase<Dim, T, Derived>::COORDS_DIM;
+
+		template <std::size_t Dim, typename T, typename Derived> 
+		const std::size_t DGCoordinatesGeneratorBase<Dim, T, Derived>::DEF_NUM_CYCLES;
+
+		template <std::size_t Dim, typename T, typename Derived> 
+		const std::size_t DGCoordinatesGeneratorBase<Dim, T, Derived>::DEF_CYCLE_STEP_COUNT_FACTOR;
+
+		template <std::size_t Dim, typename T, typename Derived> 
+		const typename DGCoordinatesGeneratorBase<Dim, T, Derived>::ValueType
+		DGCoordinatesGeneratorBase<Dim, T, Derived>::DEF_START_LEARNING_RATE = 1;
+
+		template <std::size_t Dim, typename T, typename Derived> 
+		const typename DGCoordinatesGeneratorBase<Dim, T, Derived>::ValueType
+		DGCoordinatesGeneratorBase<Dim, T, Derived>::DEF_LEARNING_RATE_DECREMENT = 0.9 / 50;
+
+
 		/**
 		 * \brief Generic implementation for generation of coordinates that fulfill user-provided point distance constraints [\ref ASPE].
 		 */
 		template <std::size_t Dim, typename T>
 		class DGCoordinatesGenerator : public DGCoordinatesGeneratorBase<Dim, T, DGCoordinatesGenerator<Dim, T> > {};
+
 
 		/**
 		 * \brief Specialized implementation for the generation of 3D coordinates that fulfill user-provided point distance and volume constraints [\ref ASPE].
@@ -247,9 +273,9 @@ namespace CDPL
 
 			VolumeConstraint& getVolumeConstraint(std::size_t idx);
 
-			void removeVolumeConstraints(std::size_t idx);
+			void removeVolumeConstraint(std::size_t idx);
 
-			void removeVolumeConstraints(const VolumeConstraintIterator& it);
+			void removeVolumeConstraint(const VolumeConstraintIterator& it);
 
 			VolumeConstraintIterator getVolumeConstraintsBegin();
 
@@ -319,8 +345,8 @@ const T& CDPL::Util::DGCoordinatesGeneratorBase<Dim, T, Derived>::DistanceConstr
 
 template <std::size_t Dim, typename T, typename Derived>
 CDPL::Util::DGCoordinatesGeneratorBase<Dim, T, Derived>::DGCoordinatesGeneratorBase(): 
-	numCycles(50), cycleStepCountFactor(50), startLearningRate(1), learningRateDecr(0.9 / 50),
-	boxSize(10), randomEngine(170375)
+	numCycles(DEF_NUM_CYCLES), cycleStepCountFactor(DEF_CYCLE_STEP_COUNT_FACTOR), startLearningRate(DEF_START_LEARNING_RATE), 
+	learningRateDecr(DEF_LEARNING_RATE_DECREMENT), boxSize(10), randomEngine(170375)
 {}
 	
 template <std::size_t Dim, typename T, typename Derived>
@@ -388,21 +414,21 @@ CDPL::Util::DGCoordinatesGeneratorBase<Dim, T, Derived>::getDistanceConstraint(s
 }
 
 template <std::size_t Dim, typename T, typename Derived>
-void CDPL::Util::DGCoordinatesGeneratorBase<Dim, T, Derived>::removeDistanceConstraints(std::size_t idx)
+void CDPL::Util::DGCoordinatesGeneratorBase<Dim, T, Derived>::removeDistanceConstraint(std::size_t idx)
 {
 	if (idx >= distConstraints.size())
 		throw Base::IndexError("DGCoordinatesGeneratorBase: constraint index out of bounds");
 
-	return distConstraints.erase(distConstraints.begin() + idx);
+	distConstraints.erase(distConstraints.begin() + idx);
 }
 
 template <std::size_t Dim, typename T, typename Derived>
-void CDPL::Util::DGCoordinatesGeneratorBase<Dim, T, Derived>::removeDistanceConstraints(const DistanceConstraintIterator& it)
+void CDPL::Util::DGCoordinatesGeneratorBase<Dim, T, Derived>::removeDistanceConstraint(const DistanceConstraintIterator& it)
 {
 	if ((it - distConstraints.begin()) >= distConstraints.size())
 		throw Base::IndexError("DGCoordinatesGeneratorBase: constraint iterator out of bounds");
 
-	return distConstraints.erase(it);
+	distConstraints.erase(it);
 }
 
 template <std::size_t Dim, typename T, typename Derived>
@@ -742,21 +768,21 @@ CDPL::Util::DGCoordinatesGenerator<3, T>::getVolumeConstraint(std::size_t idx)
 }
 
 template <typename T>
-void CDPL::Util::DGCoordinatesGenerator<3, T>::removeVolumeConstraints(std::size_t idx)
+void CDPL::Util::DGCoordinatesGenerator<3, T>::removeVolumeConstraint(std::size_t idx)
 {
 	if (idx >= volConstraints.size())
 		throw Base::IndexError("DGCoordinatesGenerator: constraint index out of bounds");
 
-	return volConstraints.erase(volConstraints.begin() + idx);
+	volConstraints.erase(volConstraints.begin() + idx);
 }
 
 template <typename T>
-void CDPL::Util::DGCoordinatesGenerator<3, T>::removeVolumeConstraints(const VolumeConstraintIterator& it)
+void CDPL::Util::DGCoordinatesGenerator<3, T>::removeVolumeConstraint(const VolumeConstraintIterator& it)
 {
 	if ((it - volConstraints.begin()) >= volConstraints.size())
 		throw Base::IndexError("DGCoordinatesGenerator: constraint iterator out of bounds");
 
-	return volConstraints.erase(it);
+	volConstraints.erase(it);
 }
 
 template <typename T>

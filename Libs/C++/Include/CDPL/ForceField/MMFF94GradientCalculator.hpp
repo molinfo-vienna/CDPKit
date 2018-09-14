@@ -61,23 +61,23 @@ namespace CDPL
 			void setup(const MMFF94InteractionData& ia_data, std::size_t num_atoms);
 
 			template <typename CoordsArray, typename GradVector>
-			ValueType operator()(const CoordsArray& coords, GradVector& grad);
+			const ValueType& operator()(const CoordsArray& coords, GradVector& grad);
 
-			ValueType getTotalEnergy() const;
+			const ValueType& getTotalEnergy() const;
 
-			ValueType getBondStretchingEnergy() const;
+			const ValueType& getBondStretchingEnergy() const;
 
-			ValueType getAngleBendingEnergy() const;
+			const ValueType& getAngleBendingEnergy() const;
 
-			ValueType getStretchBendEnergy() const;
+			const ValueType& getStretchBendEnergy() const;
 
-			ValueType getOutOfPlaneBendingEnergy() const;
+			const ValueType& getOutOfPlaneBendingEnergy() const;
 
-			ValueType getTorsionEnergy() const;
+			const ValueType& getTorsionEnergy() const;
 
-			ValueType getElectrostaticEnergy() const;
+			const ValueType& getElectrostaticEnergy() const;
 
-			ValueType getVanDerWaalsEnergy() const;
+			const ValueType& getVanDerWaalsEnergy() const;
 
 		private:
 			const MMFF94InteractionData* interactionData;
@@ -125,7 +125,7 @@ void CDPL::ForceField::MMFF94GradientCalculator<ValueType>::setup(const MMFF94In
 
 template <typename ValueType>
 template <typename CoordsArray, typename GradVector>
-ValueType CDPL::ForceField::MMFF94GradientCalculator<ValueType>::operator()(const CoordsArray& coords, GradVector& grad)
+const ValueType& CDPL::ForceField::MMFF94GradientCalculator<ValueType>::operator()(const CoordsArray& coords, GradVector& grad)
 {
 	if (!interactionData) {
 		totalEnergy = ValueType();
@@ -137,7 +137,7 @@ ValueType CDPL::ForceField::MMFF94GradientCalculator<ValueType>::operator()(cons
 		electrostaticEnergy = ValueType();
 		vanDerWaalsEnergy = ValueType();
 
-		return ValueType();
+		return totalEnergy;
 	}
 
 	GradientVectorTraits<GradVector>::clear(grad, numAtoms);
@@ -171,49 +171,49 @@ ValueType CDPL::ForceField::MMFF94GradientCalculator<ValueType>::operator()(cons
 }
 
 template <typename ValueType>
-ValueType CDPL::ForceField::MMFF94GradientCalculator<ValueType>::getTotalEnergy() const
+const ValueType& CDPL::ForceField::MMFF94GradientCalculator<ValueType>::getTotalEnergy() const
 {
     return totalEnergy;
 }
 
 template <typename ValueType>
-ValueType CDPL::ForceField::MMFF94GradientCalculator<ValueType>::getBondStretchingEnergy() const
+const ValueType& CDPL::ForceField::MMFF94GradientCalculator<ValueType>::getBondStretchingEnergy() const
 {
     return bondStretchingEnergy;
 }
 
 template <typename ValueType>
-ValueType CDPL::ForceField::MMFF94GradientCalculator<ValueType>::getAngleBendingEnergy() const
+const ValueType& CDPL::ForceField::MMFF94GradientCalculator<ValueType>::getAngleBendingEnergy() const
 {
     return angleBendingEnergy;
 }
 
 template <typename ValueType>
-ValueType CDPL::ForceField::MMFF94GradientCalculator<ValueType>::getStretchBendEnergy() const
+const ValueType& CDPL::ForceField::MMFF94GradientCalculator<ValueType>::getStretchBendEnergy() const
 {
     return stretchBendEnergy;
 }
 
 template <typename ValueType>
-ValueType CDPL::ForceField::MMFF94GradientCalculator<ValueType>::getOutOfPlaneBendingEnergy() const
+const ValueType& CDPL::ForceField::MMFF94GradientCalculator<ValueType>::getOutOfPlaneBendingEnergy() const
 {
     return outOfPlaneEnergy;
 }
 
 template <typename ValueType>
-ValueType CDPL::ForceField::MMFF94GradientCalculator<ValueType>::getTorsionEnergy() const
+const ValueType& CDPL::ForceField::MMFF94GradientCalculator<ValueType>::getTorsionEnergy() const
 {
     return torsionEnergy;
 }
 
 template <typename ValueType>
-ValueType CDPL::ForceField::MMFF94GradientCalculator<ValueType>::getElectrostaticEnergy() const
+const ValueType& CDPL::ForceField::MMFF94GradientCalculator<ValueType>::getElectrostaticEnergy() const
 {
     return electrostaticEnergy;
 }
 
 template <typename ValueType>
-ValueType CDPL::ForceField::MMFF94GradientCalculator<ValueType>::getVanDerWaalsEnergy() const
+const ValueType& CDPL::ForceField::MMFF94GradientCalculator<ValueType>::getVanDerWaalsEnergy() const
 {
     return vanDerWaalsEnergy;
 }

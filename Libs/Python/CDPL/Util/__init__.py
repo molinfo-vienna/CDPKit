@@ -25,6 +25,7 @@
 
 
 import CDPL.Base
+import CDPL.Math
 
 from _util import *
 from Functors import *

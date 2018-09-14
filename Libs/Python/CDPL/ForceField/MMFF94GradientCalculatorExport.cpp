@@ -52,21 +52,38 @@ void CDPLPythonForceField::exportMMFF94GradientCalculator()
 			 (python::arg("self"), python::arg("calculator")), python::return_self<>())
 		.def("setup", &CalculatorType::setup, (python::arg("self"), python::arg("ia_data"), python::arg("num_atoms")))
 		.def("__call__", &CalculatorType::operator()<Math::Vector3DArray, Math::Vector3DArray>, 
-			 (python::arg("self"), python::arg("coords"), python::arg("grad")))
-		.def("getTotalEnergy", &CalculatorType::getTotalEnergy, python::arg("self"))
-		.def("getBondStretchingEnergy", &CalculatorType::getBondStretchingEnergy, python::arg("self"))
-		.def("getAngleBendingEnergy", &CalculatorType::getAngleBendingEnergy, python::arg("self"))
-		.def("getStretchBendEnergy", &CalculatorType::getStretchBendEnergy, python::arg("self"))
-		.def("getOutOfPlaneBendingEnergy", &CalculatorType::getOutOfPlaneBendingEnergy, python::arg("self"))
-		.def("getTorsionEnergy", &CalculatorType::getTorsionEnergy, python::arg("self"))
-		.def("getElectrostaticEnergy", &CalculatorType::getElectrostaticEnergy, python::arg("self"))
-		.def("getVanDerWaalsEnergy", &CalculatorType::getVanDerWaalsEnergy, python::arg("self"))
-		.add_property("totalEnergy", &CalculatorType::getTotalEnergy)
-		.add_property("bondStretchingEnergy", &CalculatorType::getBondStretchingEnergy)
-		.add_property("angleBendingEnergy", &CalculatorType::getAngleBendingEnergy)
-		.add_property("stretchBendEnergy", &CalculatorType::getStretchBendEnergy)
-		.add_property("outOfPlaneBendingEnergy", &CalculatorType::getOutOfPlaneBendingEnergy)
-		.add_property("torsionEnergy", &CalculatorType::getTorsionEnergy)
-		.add_property("electrostaticEnergy", &CalculatorType::getElectrostaticEnergy)
-		.add_property("vanDerWaalsEnergy", &CalculatorType::getVanDerWaalsEnergy);
+			 (python::arg("self"), python::arg("coords"), python::arg("grad")),
+			 python::return_value_policy<python::copy_const_reference>())
+		.def("getTotalEnergy", &CalculatorType::getTotalEnergy, python::arg("self"),
+			 python::return_value_policy<python::copy_const_reference>())
+		.def("getBondStretchingEnergy", &CalculatorType::getBondStretchingEnergy, python::arg("self"),
+			 python::return_value_policy<python::copy_const_reference>())
+		.def("getAngleBendingEnergy", &CalculatorType::getAngleBendingEnergy, python::arg("self"),
+			 python::return_value_policy<python::copy_const_reference>())
+		.def("getStretchBendEnergy", &CalculatorType::getStretchBendEnergy, python::arg("self"),
+			 python::return_value_policy<python::copy_const_reference>())
+		.def("getOutOfPlaneBendingEnergy", &CalculatorType::getOutOfPlaneBendingEnergy, python::arg("self"),
+			 python::return_value_policy<python::copy_const_reference>())
+		.def("getTorsionEnergy", &CalculatorType::getTorsionEnergy, python::arg("self"),
+			 python::return_value_policy<python::copy_const_reference>())
+		.def("getElectrostaticEnergy", &CalculatorType::getElectrostaticEnergy, python::arg("self"),
+			 python::return_value_policy<python::copy_const_reference>())
+		.def("getVanDerWaalsEnergy", &CalculatorType::getVanDerWaalsEnergy, python::arg("self"),
+			 python::return_value_policy<python::copy_const_reference>())
+		.add_property("totalEnergy", python::make_function(&CalculatorType::getTotalEnergy,
+														   python::return_value_policy<python::copy_const_reference>()))
+		.add_property("bondStretchingEnergy", python::make_function(&CalculatorType::getBondStretchingEnergy,
+																	python::return_value_policy<python::copy_const_reference>()))
+		.add_property("angleBendingEnergy", python::make_function(&CalculatorType::getAngleBendingEnergy,
+																  python::return_value_policy<python::copy_const_reference>()))
+		.add_property("stretchBendEnergy", python::make_function(&CalculatorType::getStretchBendEnergy,
+																 python::return_value_policy<python::copy_const_reference>()))
+		.add_property("outOfPlaneBendingEnergy", python::make_function(&CalculatorType::getOutOfPlaneBendingEnergy,
+																	   python::return_value_policy<python::copy_const_reference>()))
+		.add_property("torsionEnergy", python::make_function(&CalculatorType::getTorsionEnergy,
+															 python::return_value_policy<python::copy_const_reference>()))
+		.add_property("electrostaticEnergy", python::make_function(&CalculatorType::getElectrostaticEnergy,
+																   python::return_value_policy<python::copy_const_reference>()))
+		.add_property("vanDerWaalsEnergy", python::make_function(&CalculatorType::getVanDerWaalsEnergy,
+																 python::return_value_policy<python::copy_const_reference>()));
 }

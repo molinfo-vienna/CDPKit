@@ -58,23 +58,23 @@ namespace CDPL
 			void setup(const MMFF94InteractionData& ia_data);
 
 			template <typename CoordsArray>
-			ValueType operator()(const CoordsArray& coords);
+			const ValueType& operator()(const CoordsArray& coords);
 
-			ValueType getTotalEnergy() const;
+			const ValueType& getTotalEnergy() const;
 
-			ValueType getBondStretchingEnergy() const;
+			const ValueType& getBondStretchingEnergy() const;
 
-			ValueType getAngleBendingEnergy() const;
+			const ValueType& getAngleBendingEnergy() const;
 
-			ValueType getStretchBendEnergy() const;
+			const ValueType& getStretchBendEnergy() const;
 
-			ValueType getOutOfPlaneBendingEnergy() const;
+			const ValueType& getOutOfPlaneBendingEnergy() const;
 
-			ValueType getTorsionEnergy() const;
+			const ValueType& getTorsionEnergy() const;
 
-			ValueType getElectrostaticEnergy() const;
+			const ValueType& getElectrostaticEnergy() const;
 
-			ValueType getVanDerWaalsEnergy() const;
+			const ValueType& getVanDerWaalsEnergy() const;
 
 		private:
 			const MMFF94InteractionData* interactionData;
@@ -120,7 +120,7 @@ void CDPL::ForceField::MMFF94EnergyCalculator<ValueType>::setup(const MMFF94Inte
 
 template <typename ValueType>
 template <typename CoordsArray>
-ValueType CDPL::ForceField::MMFF94EnergyCalculator<ValueType>::operator()(const CoordsArray& coords)
+const ValueType& CDPL::ForceField::MMFF94EnergyCalculator<ValueType>::operator()(const CoordsArray& coords)
 {
 	if (!interactionData) {
 		totalEnergy = ValueType();
@@ -132,7 +132,7 @@ ValueType CDPL::ForceField::MMFF94EnergyCalculator<ValueType>::operator()(const 
 		electrostaticEnergy = ValueType();
 		vanDerWaalsEnergy = ValueType();
 
-		return ValueType();
+		return totalEnergy;
 	}
 
     bondStretchingEnergy = calcMMFF94BondStretchingEnergy<ValueType>(interactionData->getBondStretchingInteractions().getElementsBegin(),
@@ -164,49 +164,49 @@ ValueType CDPL::ForceField::MMFF94EnergyCalculator<ValueType>::operator()(const 
 }
 
 template <typename ValueType>
-ValueType CDPL::ForceField::MMFF94EnergyCalculator<ValueType>::getTotalEnergy() const
+const ValueType& CDPL::ForceField::MMFF94EnergyCalculator<ValueType>::getTotalEnergy() const
 {
     return totalEnergy;
 }
 
 template <typename ValueType>
-ValueType CDPL::ForceField::MMFF94EnergyCalculator<ValueType>::getBondStretchingEnergy() const
+const ValueType& CDPL::ForceField::MMFF94EnergyCalculator<ValueType>::getBondStretchingEnergy() const
 {
     return bondStretchingEnergy;
 }
 
 template <typename ValueType>
-ValueType CDPL::ForceField::MMFF94EnergyCalculator<ValueType>::getAngleBendingEnergy() const
+const ValueType& CDPL::ForceField::MMFF94EnergyCalculator<ValueType>::getAngleBendingEnergy() const
 {
     return angleBendingEnergy;
 }
 
 template <typename ValueType>
-ValueType CDPL::ForceField::MMFF94EnergyCalculator<ValueType>::getStretchBendEnergy() const
+const ValueType& CDPL::ForceField::MMFF94EnergyCalculator<ValueType>::getStretchBendEnergy() const
 {
     return stretchBendEnergy;
 }
 
 template <typename ValueType>
-ValueType CDPL::ForceField::MMFF94EnergyCalculator<ValueType>::getOutOfPlaneBendingEnergy() const
+const ValueType& CDPL::ForceField::MMFF94EnergyCalculator<ValueType>::getOutOfPlaneBendingEnergy() const
 {
     return outOfPlaneEnergy;
 }
 
 template <typename ValueType>
-ValueType CDPL::ForceField::MMFF94EnergyCalculator<ValueType>::getTorsionEnergy() const
+const ValueType& CDPL::ForceField::MMFF94EnergyCalculator<ValueType>::getTorsionEnergy() const
 {
     return torsionEnergy;
 }
 
 template <typename ValueType>
-ValueType CDPL::ForceField::MMFF94EnergyCalculator<ValueType>::getElectrostaticEnergy() const
+const ValueType& CDPL::ForceField::MMFF94EnergyCalculator<ValueType>::getElectrostaticEnergy() const
 {
     return electrostaticEnergy;
 }
 
 template <typename ValueType>
-ValueType CDPL::ForceField::MMFF94EnergyCalculator<ValueType>::getVanDerWaalsEnergy() const
+const ValueType& CDPL::ForceField::MMFF94EnergyCalculator<ValueType>::getVanDerWaalsEnergy() const
 {
     return vanDerWaalsEnergy;
 }
