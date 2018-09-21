@@ -165,7 +165,7 @@ namespace
 					 python::return_value_policy<python::copy_const_reference>())
 				.def("generate", 
 					 &GeneratorType::template generate<Math::VectorArray<Math::CVector<ValueType, GeneratorType::COORDS_DIM> > >, 
-					 (python::arg("self"), python::arg("num_points"), python::arg("coords")))
+					 (python::arg("self"), python::arg("num_points"), python::arg("coords"), python::arg("randomize") = true))
 				.def("getDistanceError", 
 					 &GeneratorType::template getDistanceError<Math::VectorArray<Math::CVector<ValueType, GeneratorType::COORDS_DIM> > >, 
 					 (python::arg("self"), python::arg("coords")))

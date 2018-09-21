@@ -500,6 +500,12 @@
 \ingroup CDPL_FORCEFIELD_FUNCTIONS
 
 
+\defgroup CDPL_CONFGEN Molecule Conformer Generation
+
+\defgroup CDPL_CONFGEN_UTILITIES Utility Functions and Classes
+\ingroup CDPL_CONFGEN
+
+
 \defgroup CDPL_GRID Grid Data Handling
 
 \defgroup CDPL_GRID_DATA_STRUCTURES Data Structures

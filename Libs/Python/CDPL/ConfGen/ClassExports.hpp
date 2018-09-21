@@ -30,6 +30,8 @@
 
 namespace CDPLPythonConfGen
 {
+
+	void exportMolecularGraphDGConstraintGenerator();
 }
 
 #endif // CDPL_PYTHON_CONFGEN_CLASSEXPORTS_HPP

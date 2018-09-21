@@ -41,16 +41,16 @@ namespace CDPL
     namespace ForceField 
     {
 
-	/**
-	 * \addtogroup CDPL_FORCEFIELD_INTERACTION_DATA
-	 * @{
-	 */
+		/**
+		 * \addtogroup CDPL_FORCEFIELD_INTERACTION_DATA
+		 * @{
+		 */
 
-	typedef Util::Array<MMFF94AngleBendingInteraction> MMFF94AngleBendingInteractionData;
+		typedef Util::Array<MMFF94AngleBendingInteraction> MMFF94AngleBendingInteractionData;
 
-	/**
-	 * @}
-	 */
+		/**
+		 * @}
+		 */
     }
 }
 

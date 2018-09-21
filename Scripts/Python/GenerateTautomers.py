@@ -1,7 +1,7 @@
 # -*- mode: python; tab-width: 4 -*- 
 
 ## 
-# CleanStructures.py 
+# GenerateTautomers.py 
 #
 # This file is part of the Chemical Data Processing Toolkit
 #

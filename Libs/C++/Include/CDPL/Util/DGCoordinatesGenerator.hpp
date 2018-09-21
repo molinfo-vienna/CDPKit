@@ -142,7 +142,7 @@ namespace CDPL
 			const ValueType& getLearningRateDecrement() const;
 
 			template <typename CoordsArray>
-			void generate(std::size_t num_points, CoordsArray& coords);
+			void generate(std::size_t num_points, CoordsArray& coords, bool randomize = true);
 
 			template <typename CoordsArray>
 			ValueType getDistanceError(const CoordsArray& coords) const;
@@ -301,6 +301,8 @@ namespace CDPL
 
 			VolumeConstraintList volConstraints;
 		};
+
+		typedef DGCoordinatesGenerator<3, double> DG3DCoordinatesGenerator;
 
 		/**
 		 * @}
@@ -565,9 +567,11 @@ std::size_t CDPL::Util::DGCoordinatesGeneratorBase<Dim, T, Derived>::getNumVolum
 
 template <std::size_t Dim, typename T, typename Derived>
 template <typename CoordsArray>
-void CDPL::Util::DGCoordinatesGeneratorBase<Dim, T, Derived>::generate(std::size_t num_points, CoordsArray& coords)
+void CDPL::Util::DGCoordinatesGeneratorBase<Dim, T, Derived>::generate(std::size_t num_points, CoordsArray& coords, bool randomize)
 {
-	genRandomCoords(num_points, coords);
+	if (randomize)
+		genRandomCoords(num_points, coords);
+
 	embedCoords(num_points, coords);
 }
 
@@ -600,7 +604,9 @@ void CDPL::Util::DGCoordinatesGeneratorBase<Dim, T, Derived>::embedCoords(std::s
 		boost::random::uniform_int_distribution<std::size_t> vol_constr_sd(0, num_vol_constrs - 1);
 		boost::random::uniform_real_distribution<ValueType> vol_dist_constr_sd(0, 1);
 
-		ValueType vol_constr_prob = std::max(ValueType(0.5), ValueType(num_vol_constrs) / (num_vol_constrs + num_dist_constrs));
+		ValueType vol_constr_prob = std::max(ValueType(0.4), ValueType(num_vol_constrs) / (num_vol_constrs + num_dist_constrs));
+
+		//std::cerr << "vol_constr_prob = " << vol_constr_prob << std::endl;
 
 		for (std::size_t i = 0; i < numCycles; i++, lambda -= learningRateDecr) {
 			for (std::size_t j = 0; j < num_steps; j++) {

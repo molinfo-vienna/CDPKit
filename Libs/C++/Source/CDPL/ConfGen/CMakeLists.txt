@@ -1,7 +1,7 @@
 INCLUDE_DIRECTORIES("${CMAKE_CURRENT_SOURCE_DIR}")
 
 SET(cdpl-confgen_LIB_SRCS
-    Dummy.cpp
+    MolecularGraphDGConstraintGenerator.cpp
    )
 
 LINK_LIBRARIES(${Boost_THREAD_LIBRARY} ${Boost_SYSTEM_LIBRARY})

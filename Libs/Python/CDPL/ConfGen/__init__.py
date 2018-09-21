@@ -26,6 +26,7 @@
 
 import CDPL.Math
 import CDPL.Chem
+import CDPL.Util
 import CDPL.ForceField
 
 from _confgen import *
