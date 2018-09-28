@@ -35,6 +35,8 @@
 #include <vector>
 
 #include "CDPL/Chem/APIPrefix.hpp"
+#include "CDPL/Chem/Atom3DCoordinatesFunctionWrapper.hpp"
+#include "CDPL/Chem/AtomPredicate.hpp"
 #include "CDPL/Math/VectorArray.hpp"
 #include "CDPL/Math/Matrix.hpp"
 #include "CDPL/Math/KabschAlgorithm.hpp"
@@ -96,19 +98,44 @@ namespace CDPL
 			bool undefinedOnly() const;
 
 			/**
+			 * \brief Specifies a function that tells whether 3D coordinates are available for it's argument atom.
+			 * \param func The atom 3D coordinates check function.
+			 */
+			void setAtom3DCoordinatesCheckFunction(const AtomPredicate& func);
+
+			/**
+			 * \brief Returns the function that was registered to determine whether for a given atom 3D coordinates are available.
+			 * \return The registered atom 3D coordinates check function.
+			 */
+			const AtomPredicate& getAtom3DCoordinatesCheckFunction() const;
+
+			/**
+			 * \brief Specifies a function for the retrieval of atom 3D-coordinates.
+			 * \param func The atom 3D-coordinates function.
+			 */
+			void setAtom3DCoordinatesFunction(const Atom3DCoordinatesFunction& func);
+
+			/**
+			 * \brief Returns the function that was registered for the retrieval of atom 3D-coordinates.
+			 * \return The registered atom 3D-coordinates function.
+			 */
+			const Atom3DCoordinatesFunction& getAtom3DCoordinatesFunction() const;
+
+			/**
 			 * \brief Generates 3D-coordinates for the hydrogen atoms of the molecular graph \a molgraph.
 			 * \param molgraph The molecular graph for which to generate 3D-coordinates.
 			 * \param coords An array containing the heavy atom and generated hydrogen 3D-coordinates. The coordinates
 			 *         are stored in the same order as the atoms appear in the atom list of
 			 *         the molecular graph (i.e. the coordinates of an atom are accessible via
 			 *         its index).
+			 * \paran copy_atom_coords If \false, defined atom coordinates are already set in \a coords and thus won't get copied.
 			 */
-			void generate(const MolecularGraph& molgraph, Math::Vector3DArray& coords);
+			void generate(const MolecularGraph& molgraph, Math::Vector3DArray& coords, bool copy_atom_coords = true);
 
 		private:
 			typedef std::vector<std::size_t> AtomIndexList;
 				
-			void init(const MolecularGraph&, Math::Vector3DArray&);
+			void init(const MolecularGraph&, Math::Vector3DArray&, bool copy_atom_coords);
 
 			void assignCoordinates(Math::Vector3DArray&);
 			void assignDiatomicMolCoords(const Atom&, std::size_t, Math::Vector3DArray&);
@@ -140,16 +167,18 @@ namespace CDPL
 			
 			typedef std::vector<Math::Vector3D> DynamicPointArray;
 			
-			const MolecularGraph*         molGraph;
-			bool                          undefOnly;
-			Util::BitSet                  defCoordsMask;
-			AtomIndexList                 centerAtoms;
-			AtomIndexList                 conctdAtoms;
-			Math::DMatrix                 refPoints;
-			Math::DMatrix                 tmpltPoints;
-			DynamicPointArray             genPoints;
-			Math::KabschAlgorithm<double> kabschAlgo;
-			Util::BitSet                  usedPosMask;
+			const MolecularGraph*          molGraph;
+			bool                           undefOnly;
+			Atom3DCoordinatesFunction      coordsFunc;
+			AtomPredicate                  hasCoordsFunc;
+			Util::BitSet                   defCoordsMask;
+			AtomIndexList                  centerAtoms;
+			AtomIndexList                  conctdAtoms;
+			Math::DMatrix                  refPoints;
+			Math::DMatrix                  tmpltPoints;
+			DynamicPointArray              genPoints;
+			Math::KabschAlgorithm<double>  kabschAlgo;
+			Util::BitSet                   usedPosMask;
 		};
 
 		/**

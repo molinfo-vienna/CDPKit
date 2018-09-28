@@ -246,6 +246,32 @@ Chem::StereoDescriptor Chem::calcStereoDescriptor(const Atom& atom, const Molecu
 	return makeStereoDescriptor(AtomConfiguration::EITHER, atom, molgraph);
 }
 
+bool Chem::checkAtomConfiguration(const Atom& atom, const MolecularGraph& molgraph, const StereoDescriptor& descr, const Math::Vector3DArray& coords)
+{
+	std::size_t num_ref_atoms = descr.getNumReferenceAtoms();
+
+	if (num_ref_atoms < 3)
+		return true;
+
+	unsigned int config = descr.getConfiguration();
+
+	if (config != AtomConfiguration::R && config != AtomConfiguration::S)
+		return true;
+
+	const Math::Vector3D& atom1_coords = coords[molgraph.getAtomIndex(*descr.getReferenceAtoms()[0])];
+	const Math::Vector3D& atom2_coords = coords[molgraph.getAtomIndex(*descr.getReferenceAtoms()[1])];
+	const Math::Vector3D& atom3_coords = coords[molgraph.getAtomIndex(*descr.getReferenceAtoms()[2])];
+	const Math::Vector3D& atom4_coords = coords[molgraph.getAtomIndex(num_ref_atoms == 3 ? atom : *descr.getReferenceAtoms()[3])];
+
+	double vol = innerProd(crossProd(atom4_coords - atom2_coords, atom4_coords - atom1_coords), 
+						   atom4_coords - atom3_coords); 
+
+	if (config == AtomConfiguration::S)
+		return (vol > 0.0);
+
+	return (vol < 0.0);
+}
+
 Chem::StereoDescriptor Chem::calcStereoDescriptorFromMDLParity(const Atom& atom, const MolecularGraph& molgraph)
 {
 	std::size_t num_bonds = getExplicitBondCount(atom, molgraph);

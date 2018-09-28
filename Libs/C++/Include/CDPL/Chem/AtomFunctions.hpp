@@ -373,6 +373,9 @@ namespace CDPL
 
 		CDPL_CHEM_API StereoDescriptor calcStereoDescriptorFromMDLParity(const Atom& atom, const MolecularGraph& molgraph);
 
+		CDPL_CHEM_API bool checkAtomConfiguration(const Atom& atom, const MolecularGraph& molgraph, const StereoDescriptor& descr,
+												  const Math::Vector3DArray& coords);
+
 
 		CDPL_CHEM_API bool getStereoCenterFlag(const Atom& atom);
 

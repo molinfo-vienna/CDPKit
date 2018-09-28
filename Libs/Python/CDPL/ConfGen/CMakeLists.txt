@@ -10,7 +10,8 @@ ENDFOREACH(PYTHON_FILE)
 SET(confgen_MOD_SRCS
     Module.cpp
 
-    MolecularGraphDGConstraintGeneratorExport.cpp
+    DGConstraintGeneratorExport.cpp
+    Raw3DStructureGeneratorExport.cpp
    
     ToPythonConverterRegistration.cpp
     FromPythonConverterRegistration.cpp

@@ -36,7 +36,8 @@ BOOST_PYTHON_MODULE(_confgen)
 {
 	using namespace CDPLPythonConfGen;
 
-	exportMolecularGraphDGConstraintGenerator();
+	exportDGConstraintGenerator();
+	exportRaw3DStructureGenerator();
 
 	registerToPythonConverters();
 	registerFromPythonConverters();

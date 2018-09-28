@@ -202,6 +202,7 @@ namespace
 
 	MAKE_FUNCTION_WRAPPER4(std::size_t, getExplicitAtomCount, CDPL::Chem::Atom&, CDPL::Chem::MolecularGraph&, unsigned int, bool);
 	MAKE_FUNCTION_WRAPPER4(std::size_t, getAtomCount, CDPL::Chem::Atom&, CDPL::Chem::MolecularGraph&, unsigned int, bool);
+	MAKE_FUNCTION_WRAPPER4(bool, checkAtomConfiguration, CDPL::Chem::Atom&, CDPL::Chem::MolecularGraph&, const CDPL::Chem::StereoDescriptor&, const CDPL::Math::Vector3DArray&);
 
 	MAKE_FUNCTION_WRAPPER5(std::size_t, getExplicitBondCount, CDPL::Chem::Atom&, CDPL::Chem::MolecularGraph&, std::size_t, unsigned int, bool);
 	MAKE_FUNCTION_WRAPPER5(std::size_t, getBondCount, CDPL::Chem::Atom&, CDPL::Chem::MolecularGraph&, std::size_t, unsigned int, bool);
@@ -371,6 +372,8 @@ void CDPLPythonChem::exportAtomFunctions()
 				(python::arg("atom"), python::arg("molgraph"), python::arg("type"), (python::arg("strict") = true)));
 	python::def("getAtomCount", &getAtomCountWrapper4,
 				(python::arg("atom"), python::arg("molgraph"), python::arg("type"), (python::arg("strict") = true)));
+	python::def("checkAtomConfiguration", &checkAtomConfigurationWrapper4,
+				(python::arg("atom"), python::arg("molgraph"), python::arg("descr"), python::arg("coords")));
 
 	python::def("getExplicitBondCount", &getExplicitBondCountWrapper5,
 				(python::arg("atom"), python::arg("molgraph"), python::arg("order"), python::arg("type"), (python::arg("strict") = true)));

@@ -31,6 +31,7 @@
 #ifndef CDPL_CONFGEN_HPP
 #define CDPL_CONFGEN_HPP
 
-#include "CDPL/ConfGen/MolecularGraphDGConstraintGenerator.hpp"
+#include "CDPL/ConfGen/DGConstraintGenerator.hpp"
+#include "CDPL/ConfGen/Raw3DStructureGenerator.hpp"
 
 #endif // CDPL_CONFGEN_HPP

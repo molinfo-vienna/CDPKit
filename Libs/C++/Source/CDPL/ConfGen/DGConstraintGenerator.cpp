@@ -1,7 +1,7 @@
 /* -*- mode: c++; c-basic-offset: 4; tab-width: 4; indent-tabs-mode: t -*- */
 
 /* 
- * MolecularGraphDGConstraintGenerator.cpp 
+ * DGConstraintGenerator.cpp 
  *
  * This file is part of the Chemical Data Processing Toolkit
  *
@@ -28,11 +28,12 @@
 
 #include <cmath>
 #include <algorithm>
+#include <limits>
 
 #include <boost/tuple/tuple_comparison.hpp>
 #include <boost/bind.hpp>
 
-#include "CDPL/ConfGen/MolecularGraphDGConstraintGenerator.hpp"
+#include "CDPL/ConfGen/DGConstraintGenerator.hpp"
 #include "CDPL/Chem/FragmentList.hpp"
 #include "CDPL/Chem/MolecularGraph.hpp"
 #include "CDPL/Chem/Atom.hpp"
@@ -42,7 +43,6 @@
 #include "CDPL/Chem/MolecularGraphFunctions.hpp"
 #include "CDPL/Chem/AtomContainerFunctions.hpp"
 #include "CDPL/Chem/AtomDictionary.hpp"
-#include "CDPL/Chem/StereoDescriptor.hpp"
 #include "CDPL/Chem/HybridizationState.hpp"
 #include "CDPL/Chem/AtomConfiguration.hpp"
 #include "CDPL/Chem/BondConfiguration.hpp"
@@ -52,12 +52,13 @@
 #include "CDPL/ForceField/MMFF94BondStretchingInteraction.hpp"
 #include "CDPL/ForceField/MMFF94AngleBendingInteractionData.hpp"
 #include "CDPL/ForceField/MMFF94AngleBendingInteraction.hpp"
+#include "CDPL/Base/Exceptions.hpp"
 
 
 using namespace CDPL;
 
 
-std::size_t ConfGen::MolecularGraphDGConstraintGenerator::BondAngleKeyHash::operator()(const BondAngleKey& k) const 
+std::size_t ConfGen::DGConstraintGenerator::BondAngleKeyHash::operator()(const BondAngleKey& k) const 
 {
 	size_t hash = 0;
 
@@ -69,56 +70,124 @@ std::size_t ConfGen::MolecularGraphDGConstraintGenerator::BondAngleKeyHash::oper
 }
 
 
-ConfGen::MolecularGraphDGConstraintGenerator::MolecularGraphDGConstraintGenerator():
-    molGraph(0), noHydrogens(false), regAtomStereo(true), regBondStereo(true)
+ConfGen::DGConstraintGenerator::DGConstraintGenerator():
+    molGraph(0), noHydrogens(true), regAtomConfig(true), regBondConfig(true)
 {}
 
-void ConfGen::MolecularGraphDGConstraintGenerator::excludeHydrogens(bool exclude)
+void ConfGen::DGConstraintGenerator::excludeHydrogens(bool exclude)
 {
     noHydrogens = exclude;
 }
 
-bool ConfGen::MolecularGraphDGConstraintGenerator::hydrogensExcluded() const
+bool ConfGen::DGConstraintGenerator::hydrogensExcluded() const
 {
     return noHydrogens;
 }
 
-void ConfGen::MolecularGraphDGConstraintGenerator::regardAtomStereo(bool regard)
+void ConfGen::DGConstraintGenerator::regardAtomConfiguration(bool regard)
 {
-    regAtomStereo = regard;
+    regAtomConfig = regard;
 }
 
-bool ConfGen::MolecularGraphDGConstraintGenerator::atomStereoRegarded() const
+bool ConfGen::DGConstraintGenerator::atomConfigurationRegarded() const
 {
-    return regAtomStereo;
+    return regAtomConfig;
 }
 
-void ConfGen::MolecularGraphDGConstraintGenerator::regardBondStereo(bool regard)
+void ConfGen::DGConstraintGenerator::regardBondConfiguration(bool regard)
 {
-    regBondStereo = regard;
+    regBondConfig = regard;
 }
 
-bool ConfGen::MolecularGraphDGConstraintGenerator::bondStereoRegarded() const
+bool ConfGen::DGConstraintGenerator::bondConfigurationRegarded() const
 {
-    return regBondStereo;
+    return regBondConfig;
+}
+	
+const Util::BitSet& ConfGen::DGConstraintGenerator::getExcludedHydrogenMask() const
+{
+	return hAtomMask;
 }
 
-void CDPL::ConfGen::MolecularGraphDGConstraintGenerator::setup(const Chem::MolecularGraph& molgraph, 
-															   const ForceField::MMFF94InteractionData& ia_data)
+std::size_t ConfGen::DGConstraintGenerator::getNumAtomStereoCenters() const
+{
+	return atomStereoData.size();
+}
+
+std::size_t ConfGen::DGConstraintGenerator::getNumBondStereoCenters() const
+{
+	return bondStereoData.size();
+}
+
+const ConfGen::DGConstraintGenerator::StereoCenterData& 
+ConfGen::DGConstraintGenerator::getAtomStereoCenterData(std::size_t idx) const
+{
+	if (idx >= atomStereoData.size())
+		throw Base::IndexError("DGConstraintGenerator: atom stereo center index out of bounds");
+
+	return atomStereoData[idx];
+}
+
+const ConfGen::DGConstraintGenerator::StereoCenterData& 
+ConfGen::DGConstraintGenerator::getBondStereoCenterData(std::size_t idx) const
+{
+	if (idx >= bondStereoData.size())
+		throw Base::IndexError("DGConstraintGenerator: bond stereo center index out of bounds");
+
+	return bondStereoData[idx];
+}
+
+ConfGen::DGConstraintGenerator::ConstStereoCenterDataIterator 
+ConfGen::DGConstraintGenerator::getAtomStereoCenterDataBegin() const
+{
+	return atomStereoData.begin();
+}
+
+ConfGen::DGConstraintGenerator::ConstStereoCenterDataIterator 
+ConfGen::DGConstraintGenerator::getAtomStereoCenterDataEnd() const
+{
+	return atomStereoData.end();
+}
+
+ConfGen::DGConstraintGenerator::ConstStereoCenterDataIterator 
+ConfGen::DGConstraintGenerator::getBondStereoCenterDataBegin() const
+{
+	return bondStereoData.begin();
+}
+
+ConfGen::DGConstraintGenerator::ConstStereoCenterDataIterator 
+ConfGen::DGConstraintGenerator::getBondStereoCenterDataEnd() const
+{
+	return bondStereoData.end();
+}
+
+void CDPL::ConfGen::DGConstraintGenerator::setup(const Chem::MolecularGraph& molgraph, 
+												 const ForceField::MMFF94InteractionData& ia_data)
+{
+	setup(molgraph, &ia_data);
+}
+
+void CDPL::ConfGen::DGConstraintGenerator::setup(const Chem::MolecularGraph& molgraph) 
+{
+	setup(molgraph, 0);
+}
+
+void CDPL::ConfGen::DGConstraintGenerator::setup(const Chem::MolecularGraph& molgraph, 
+												 const ForceField::MMFF94InteractionData* ia_data)
 {
     init(molgraph);
   
-	if (regAtomStereo)
-		getAtomStereoDescriptors();
+	if (regAtomConfig)
+		extractAtomStereoCenterData();
 
-	if (regBondStereo)
-		getBondStereoDescriptors();
+	if (regBondConfig)
+		extractBondStereoCenterData();
 
 	assignBondLengths(ia_data);
     assignBondAngles(ia_data);
 }
 
-void ConfGen::MolecularGraphDGConstraintGenerator::addBondLengthConstraints(Util::DG3DCoordinatesGenerator& coords_gen)
+void ConfGen::DGConstraintGenerator::addBondLengthConstraints(Util::DG3DCoordinatesGenerator& coords_gen)
 {
 	for (BondLengthTable::const_iterator it = bondLengthTable.begin(), end = bondLengthTable.end(); it != end; ++it) {
 		double bond_len = it->second;
@@ -133,7 +202,7 @@ void ConfGen::MolecularGraphDGConstraintGenerator::addBondLengthConstraints(Util
 	}
 }
 
-void ConfGen::MolecularGraphDGConstraintGenerator::addBondAngleConstraints(Util::DG3DCoordinatesGenerator& coords_gen)
+void ConfGen::DGConstraintGenerator::addBondAngleConstraints(Util::DG3DCoordinatesGenerator& coords_gen)
 {
 	for (BondAngleTable::const_iterator it = bondAngleTable.begin(), end = bondAngleTable.end(); it != end; ++it) {
 		std::size_t atom1_idx = it->first.get<0>();
@@ -154,7 +223,7 @@ void ConfGen::MolecularGraphDGConstraintGenerator::addBondAngleConstraints(Util:
 	}
 }
 
-void ConfGen::MolecularGraphDGConstraintGenerator::addDefaultDistanceConstraints(Util::DG3DCoordinatesGenerator& coords_gen)
+void ConfGen::DGConstraintGenerator::addDefaultDistanceConstraints(Util::DG3DCoordinatesGenerator& coords_gen)
 {
 	using namespace Chem;
 
@@ -179,13 +248,13 @@ void ConfGen::MolecularGraphDGConstraintGenerator::addDefaultDistanceConstraints
 
 			double vdw_rad2 = AtomDictionary::getVdWRadius(getType(molGraph->getAtom(j)));
 
-			coords_gen.addDistanceConstraint(i, j, vdw_rad1 + vdw_rad2, bond_length_sum);
+			coords_gen.addDistanceConstraint(i, j, (vdw_rad1 + vdw_rad2), bond_length_sum);
 			markAtomPairProcessed(i, j);
 		}
 	}
 }
 
-void ConfGen::MolecularGraphDGConstraintGenerator::add14DistanceConstraints(Util::DG3DCoordinatesGenerator& coords_gen)
+void ConfGen::DGConstraintGenerator::add14DistanceConstraints(Util::DG3DCoordinatesGenerator& coords_gen)
 {
 	using namespace Chem;
 
@@ -272,7 +341,92 @@ void ConfGen::MolecularGraphDGConstraintGenerator::add14DistanceConstraints(Util
 	}
 }
 
-void ConfGen::MolecularGraphDGConstraintGenerator::addAtomPlanarityConstraints(Util::DG3DCoordinatesGenerator& coords_gen)
+void ConfGen::DGConstraintGenerator::addAtomConfigurationConstraints(Util::DG3DCoordinatesGenerator& coords_gen)
+{
+	using namespace Chem;
+
+	for (ConstStereoCenterDataIterator it = atomStereoData.begin(), end = atomStereoData.end(); it != end; ++it) {
+		const Chem::StereoDescriptor& descr = it->second;
+		double lb = 0.5;
+		double ub = 1000.0;
+
+		if (descr.getConfiguration() == AtomConfiguration::R) {
+			ub = -0.5;
+			lb = -1000.0;
+		}
+
+		std::size_t atom_idx = it->first;
+
+		stereoAtomMask.set(atom_idx);
+		coords_gen.addVolumeConstraint(molGraph->getAtomIndex(*descr.getReferenceAtoms()[0]),
+									   molGraph->getAtomIndex(*descr.getReferenceAtoms()[1]),
+									   molGraph->getAtomIndex(*descr.getReferenceAtoms()[2]),
+									   descr.getNumReferenceAtoms() == 3 ? 
+									   atom_idx : molGraph->getAtomIndex(*descr.getReferenceAtoms()[3]),
+									   lb, ub);
+	}
+}
+
+void ConfGen::DGConstraintGenerator::addBondConfigurationConstraints(Util::DG3DCoordinatesGenerator& coords_gen)
+{
+	using namespace Chem;
+
+	for (ConstStereoCenterDataIterator it = bondStereoData.begin(), end = bondStereoData.end(); it != end; ++it) {
+		const Bond& bond = molGraph->getBond(it->first);
+		const Atom& atom1 = bond.getBegin();
+		const Atom& atom2 = bond.getEnd();
+
+		const Chem::StereoDescriptor& descr = it->second;
+		unsigned int ref_config = descr.getConfiguration();
+
+		std::size_t ref_atom1_idx = molGraph->getAtomIndex(*descr.getReferenceAtoms()[0]);
+		std::size_t ref_atom2_idx = molGraph->getAtomIndex(*descr.getReferenceAtoms()[3]);
+		std::size_t atom1_idx = molGraph->getAtomIndex(atom1);
+		std::size_t atom2_idx = molGraph->getAtomIndex(atom2);
+
+		if (getNeighborAtoms(atom1, atomIndexList1, &atom2) == 0)
+			continue;
+	
+		if (getNeighborAtoms(atom2, atomIndexList2, &atom1) == 0)
+			continue;
+
+		double bond_len = getBondLength(atom1_idx, atom2_idx);
+
+		for (std::size_t i = 0, num_nbrs1 = atomIndexList1.size(); i < num_nbrs1; i++) {
+			std::size_t nbr_atom1_idx = atomIndexList1[i];
+			double nbr_bond1_angle = getBondAngle(nbr_atom1_idx, atom1_idx, atom2_idx);
+
+			if (nbr_bond1_angle <= 0.0)
+				continue;
+
+			double nbr_bond1_len = getBondLength(nbr_atom1_idx, atom1_idx);
+
+			for (std::size_t j = 0, num_nbrs2 = atomIndexList2.size(); j < num_nbrs2; j++) {
+				std::size_t nbr_atom2_idx = atomIndexList2[j];
+				double nbr_bond2_angle = getBondAngle(nbr_atom2_idx, atom2_idx, atom1_idx);
+				
+				if (nbr_bond2_angle <= 0.0)
+					continue;
+
+				double nbr_bond2_len = getBondLength(nbr_atom2_idx, atom2_idx);
+				double nbr_atom_dist = 0.0;
+				unsigned int config = (nbr_atom1_idx == ref_atom1_idx) ^ (nbr_atom2_idx == ref_atom2_idx) ? 
+					(ref_config == BondConfiguration::TRANS ? BondConfiguration::CIS : BondConfiguration::TRANS) :
+					(ref_config == BondConfiguration::CIS ? BondConfiguration::CIS : BondConfiguration::TRANS);
+
+				if (config == BondConfiguration::CIS)
+					nbr_atom_dist = calcCis14AtomDistance(nbr_bond1_len, bond_len, nbr_bond2_len, nbr_bond1_angle, nbr_bond2_angle);	
+				else
+					nbr_atom_dist = calcTrans14AtomDistance(nbr_bond1_len, bond_len, nbr_bond2_len, nbr_bond1_angle, nbr_bond2_angle);
+
+				coords_gen.addDistanceConstraint(nbr_atom1_idx, nbr_atom2_idx, nbr_atom_dist, nbr_atom_dist);
+				markAtomPairProcessed(nbr_atom1_idx, nbr_atom2_idx);
+			}
+		}
+	}
+}
+
+void ConfGen::DGConstraintGenerator::addAtomPlanarityConstraints(Util::DG3DCoordinatesGenerator& coords_gen)
 {
 	using namespace Chem;
 
@@ -281,6 +435,9 @@ void ConfGen::MolecularGraphDGConstraintGenerator::addAtomPlanarityConstraints(U
 
 	for (std::size_t i = 0; i < numAtoms; i++) {
 		if (noHydrogens && hAtomMask.test(i))
+			continue;
+
+		if (regAtomConfig && stereoAtomMask.test(i))
 			continue;
 
 		const Atom& atom = molGraph->getAtom(i);
@@ -295,7 +452,7 @@ void ConfGen::MolecularGraphDGConstraintGenerator::addAtomPlanarityConstraints(U
 	}
 }
 
-void ConfGen::MolecularGraphDGConstraintGenerator::addBondPlanarityConstraints(Util::DG3DCoordinatesGenerator& coords_gen)
+void ConfGen::DGConstraintGenerator::addBondPlanarityConstraints(Util::DG3DCoordinatesGenerator& coords_gen)
 {
 	using namespace Chem;
 
@@ -314,6 +471,9 @@ void ConfGen::MolecularGraphDGConstraintGenerator::addBondPlanarityConstraints(U
 		if (noHydrogens && hAtomMask.test(atom1_idx))
 			continue;
 
+		if (regAtomConfig && stereoAtomMask.test(atom1_idx))
+			continue;
+
 		const Atom& atom2 = bond.getEnd();
 
 		if (!molGraph->containsAtom(atom2))
@@ -322,6 +482,9 @@ void ConfGen::MolecularGraphDGConstraintGenerator::addBondPlanarityConstraints(U
 		std::size_t atom2_idx = molGraph->getAtomIndex(atom2);
 
 		if (noHydrogens && hAtomMask.test(atom2_idx))
+			continue;
+
+		if (regAtomConfig && stereoAtomMask.test(atom1_idx))
 			continue;
 
 		if (!isPlanar(bond))
@@ -349,51 +512,62 @@ void ConfGen::MolecularGraphDGConstraintGenerator::addBondPlanarityConstraints(U
 	}
 }
 
-void ConfGen::MolecularGraphDGConstraintGenerator::init(const Chem::MolecularGraph& molgraph)
+void ConfGen::DGConstraintGenerator::init(const Chem::MolecularGraph& molgraph)
 {
-    if (noHydrogens)  {
-		hAtomMask.reset();
-		buildAtomTypeMask(molgraph, hAtomMask, Chem::AtomType::H);
-	}
-
 	molGraph = &molgraph;
 
 	bondLengthTable.clear();
 	bondAngleTable.clear();
-	atomStereoDescrs.clear();
-	bondStereoDescrs.clear();
+	atomStereoData.clear();
+	bondStereoData.clear();
 
     numAtoms = molgraph.getNumAtoms();
 	
 	procAtomPairMask.resize(numAtoms * numAtoms);
 	procAtomPairMask.reset();
+
+    if (noHydrogens)  {
+		hAtomMask.reset();
+		buildAtomTypeMask(molgraph, hAtomMask, Chem::AtomType::H);
+
+	} else {
+		hAtomMask.resize(numAtoms);
+		hAtomMask.reset();
+	}
+
+	if (regAtomConfig) {
+		stereoAtomMask.resize(numAtoms);
+		stereoAtomMask.reset();
+	}
 }
 
-void ConfGen::MolecularGraphDGConstraintGenerator::assignBondLengths(const ForceField::MMFF94InteractionData& ia_data)
+void ConfGen::DGConstraintGenerator::assignBondLengths(const ForceField::MMFF94InteractionData* ia_data)
 {
 	using namespace ForceField;
 	using namespace Chem;
 
-	const MMFF94BondStretchingInteractionData& bs_data = ia_data.getBondStretchingInteractions();
+	if (ia_data) {
+		const MMFF94BondStretchingInteractionData& bs_data = ia_data->getBondStretchingInteractions();
 	
-	for (MMFF94BondStretchingInteractionData::ConstElementIterator it = bs_data.getElementsBegin(), end = bs_data.getElementsEnd(); it != end; ++it) {
-		const MMFF94BondStretchingInteraction& iactn = *it;
+		for (MMFF94BondStretchingInteractionData::ConstElementIterator it = bs_data.getElementsBegin(), end = bs_data.getElementsEnd(); it != end; ++it) {
+			const MMFF94BondStretchingInteraction& iactn = *it;
 
-		std::size_t atom1_idx = iactn.getAtom1Index();
+			std::size_t atom1_idx = iactn.getAtom1Index();
 
-		if (atom1_idx >= numAtoms)
-			continue;
+			if (atom1_idx >= numAtoms)
+				continue;
 
-		std::size_t atom2_idx = iactn.getAtom2Index();
+			std::size_t atom2_idx = iactn.getAtom2Index();
 
-		if (atom2_idx >= numAtoms)
-			continue;
+			if (atom2_idx >= numAtoms)
+				continue;
 		
-		if (noHydrogens && (hAtomMask.test(atom1_idx) || hAtomMask.test(atom2_idx)))
-			continue;
+			if (noHydrogens && (hAtomMask.test(atom1_idx) || hAtomMask.test(atom2_idx)))
+				continue;
 
-		setBondLength(atom1_idx, atom2_idx, iactn.getReferenceLength());
-	} 
+			setBondLength(atom1_idx, atom2_idx, iactn.getReferenceLength());
+		} 
+	}
 
 	// Fallback
 
@@ -426,40 +600,43 @@ void ConfGen::MolecularGraphDGConstraintGenerator::assignBondLengths(const Force
 	}
 }
 
-void ConfGen::MolecularGraphDGConstraintGenerator::assignBondAngles(const ForceField::MMFF94InteractionData& ia_data)
+void ConfGen::DGConstraintGenerator::assignBondAngles(const ForceField::MMFF94InteractionData* ia_data)
 {
 	using namespace ForceField;
 	using namespace Chem;
 
 	const FragmentList& sssr = *getSSSR(*molGraph);
-	const MMFF94AngleBendingInteractionData& bs_data = ia_data.getAngleBendingInteractions();
+
+	if (ia_data) {
+		const MMFF94AngleBendingInteractionData& bs_data = ia_data->getAngleBendingInteractions();
 	
-	for (MMFF94AngleBendingInteractionData::ConstElementIterator it = bs_data.getElementsBegin(), end = bs_data.getElementsBegin(); it != end; ++it) {
-		const MMFF94AngleBendingInteraction& iactn = *it;
+		for (MMFF94AngleBendingInteractionData::ConstElementIterator it = bs_data.getElementsBegin(), end = bs_data.getElementsBegin(); it != end; ++it) {
+			const MMFF94AngleBendingInteraction& iactn = *it;
 
-		std::size_t term_atom1_idx = iactn.getTerminalAtom1Index();
+			std::size_t term_atom1_idx = iactn.getTerminalAtom1Index();
 
-		if (term_atom1_idx >= numAtoms)
-			continue;
+			if (term_atom1_idx >= numAtoms)
+				continue;
 
-		std::size_t ctr_atom_idx = iactn.getCenterAtomIndex();
+			std::size_t ctr_atom_idx = iactn.getCenterAtomIndex();
 
-		if (ctr_atom_idx >= numAtoms)
-			continue;
+			if (ctr_atom_idx >= numAtoms)
+				continue;
 	
-		std::size_t term_atom2_idx = iactn.getTerminalAtom2Index();
+			std::size_t term_atom2_idx = iactn.getTerminalAtom2Index();
 
-		if (term_atom2_idx >= numAtoms)
-			continue;
+			if (term_atom2_idx >= numAtoms)
+				continue;
 	
-		if (noHydrogens && (hAtomMask.test(term_atom1_idx) || hAtomMask.test(ctr_atom_idx) || hAtomMask.test(term_atom2_idx)))
-			continue;
+			if (noHydrogens && (hAtomMask.test(term_atom1_idx) || hAtomMask.test(ctr_atom_idx) || hAtomMask.test(term_atom2_idx)))
+				continue;
 
-		if (iactn.isLinearAngle())
-			setBondAngle(term_atom1_idx, ctr_atom_idx, term_atom2_idx, M_PI);
-		else
-			setBondAngle(term_atom1_idx, ctr_atom_idx, term_atom2_idx, std::abs(iactn.getReferenceAngle()) * M_PI / 180.0);
-	} 
+			if (iactn.isLinearAngle())
+				setBondAngle(term_atom1_idx, ctr_atom_idx, term_atom2_idx, M_PI);
+			else
+				setBondAngle(term_atom1_idx, ctr_atom_idx, term_atom2_idx, std::abs(iactn.getReferenceAngle()) * M_PI / 180.0);
+		} 
+	}
 
 	// Fallback
 
@@ -546,46 +723,89 @@ void ConfGen::MolecularGraphDGConstraintGenerator::assignBondAngles(const ForceF
 	}
 }
 
-void ConfGen::MolecularGraphDGConstraintGenerator::getAtomStereoDescriptors()
+void ConfGen::DGConstraintGenerator::extractAtomStereoCenterData()
 {
 	using namespace Chem;
 
-	for (MolecularGraph::ConstAtomIterator it = molGraph->getAtomsBegin(), end = molGraph->getAtomsEnd(); it != end; ++it) {
-		const StereoDescriptor& descr = getStereoDescriptor(*it);
+	std::size_t atom_idx = 0;
+
+	for (MolecularGraph::ConstAtomIterator it = molGraph->getAtomsBegin(), end = molGraph->getAtomsEnd(); it != end; ++it, atom_idx++) {
+		const Atom& atom = *it;
+		const StereoDescriptor& descr = getStereoDescriptor(atom);
 
 		if (descr.getConfiguration() != AtomConfiguration::R && descr.getConfiguration() != AtomConfiguration::S)
 			continue;
 
-		std::size_t num_ref_atoms = descr.getNumReferenceAtoms();
-
-		if (num_ref_atoms < 3 || num_ref_atoms > 4)
+		if (!descr.isValid(atom))
 			continue;
 
-		bool valid = false;
+		std::size_t num_ref_atoms = descr.getNumReferenceAtoms();
+		bool valid = true;
+
+		for (std::size_t i = 0; i < num_ref_atoms; i++) {
+			const Atom* ref_atom = descr.getReferenceAtoms()[i];
+
+			if (!molGraph->containsAtom(*ref_atom)) {
+				valid = false;
+				break;
+			}
+
+			if (noHydrogens)
+				hAtomMask.reset(molGraph->getAtomIndex(*ref_atom));
+		}
 
 		if (valid)
-			atomStereoDescrs.push_back(&descr);
+			atomStereoData.push_back(StereoCenterData(atom_idx, descr));
 	}
 }
 
-void ConfGen::MolecularGraphDGConstraintGenerator::getBondStereoDescriptors()
+void ConfGen::DGConstraintGenerator::extractBondStereoCenterData()
 {
 	using namespace Chem;
 
-	for (MolecularGraph::ConstBondIterator it = molGraph->getBondsBegin(), end = molGraph->getBondsEnd(); it != end; ++it) {
-		const StereoDescriptor& descr = getStereoDescriptor(*it);
+	std::size_t bond_idx = 0;
+
+	for (MolecularGraph::ConstBondIterator it = molGraph->getBondsBegin(), end = molGraph->getBondsEnd(); it != end; ++it, bond_idx++) {
+		const Bond& bond = *it;
+		const StereoDescriptor& descr = getStereoDescriptor(bond);
 
 		if (descr.getConfiguration() != BondConfiguration::CIS && descr.getConfiguration() != BondConfiguration::TRANS)
 			continue;
 
-		bool valid = false;
+		if (!molGraph->containsAtom(bond.getBegin()))
+			continue;
 
-		if (valid)
-			bondStereoDescrs.push_back(&descr);
+		if (!molGraph->containsAtom(bond.getEnd()))
+			continue;
+
+		if (!descr.isValid(bond))
+			continue;
+
+		if (!molGraph->containsAtom(*descr.getReferenceAtoms()[0]) || !molGraph->containsAtom(*descr.getReferenceAtoms()[3]))
+			continue;
+
+		if (noHydrogens) {
+			for (std::size_t i = 0; i < 2; i++) {
+				const Atom& atom = bond.getAtom(i);
+				Atom::ConstBondIterator b_it = atom.getBondsBegin();
+
+				for (Atom::ConstAtomIterator a_it = atom.getAtomsBegin(), a_end = atom.getAtomsEnd(); a_it != a_end; ++a_it, ++b_it) {
+					if (!molGraph->containsBond(*b_it))
+						continue;
+
+					if (!molGraph->containsAtom(*a_it))
+						continue;
+
+					hAtomMask.reset(molGraph->getAtomIndex(*a_it));
+				}
+			}
+		}
+
+		bondStereoData.push_back(StereoCenterData(bond_idx, descr));
 	}
 }
 
-void ConfGen::MolecularGraphDGConstraintGenerator::setBondLength(std::size_t atom1_idx, std::size_t atom2_idx, double length)
+void ConfGen::DGConstraintGenerator::setBondLength(std::size_t atom1_idx, std::size_t atom2_idx, double length)
 {
 	if (atom1_idx > atom2_idx)
 		std::swap(atom1_idx, atom2_idx);
@@ -593,7 +813,7 @@ void ConfGen::MolecularGraphDGConstraintGenerator::setBondLength(std::size_t ato
 	bondLengthTable[std::make_pair(atom1_idx, atom2_idx)] = length;
 }
 
-double ConfGen::MolecularGraphDGConstraintGenerator::getBondLength(std::size_t atom1_idx, std::size_t atom2_idx) const
+double ConfGen::DGConstraintGenerator::getBondLength(std::size_t atom1_idx, std::size_t atom2_idx) const
 {
 	if (atom1_idx > atom2_idx)
 		std::swap(atom1_idx, atom2_idx);
@@ -606,7 +826,7 @@ double ConfGen::MolecularGraphDGConstraintGenerator::getBondLength(std::size_t a
 	return it->second;
 }
 
-void ConfGen::MolecularGraphDGConstraintGenerator::setBondAngle(std::size_t atom1_idx, std::size_t atom2_idx, std::size_t atom3_idx, double angle)
+void ConfGen::DGConstraintGenerator::setBondAngle(std::size_t atom1_idx, std::size_t atom2_idx, std::size_t atom3_idx, double angle)
 {
 	if (atom1_idx > atom3_idx)
 		std::swap(atom1_idx, atom3_idx);
@@ -614,7 +834,7 @@ void ConfGen::MolecularGraphDGConstraintGenerator::setBondAngle(std::size_t atom
 	bondAngleTable[BondAngleKey(atom1_idx, atom2_idx, atom3_idx)] = angle;
 }
 
-double ConfGen::MolecularGraphDGConstraintGenerator::getBondAngle(std::size_t atom1_idx, std::size_t atom2_idx, std::size_t atom3_idx) const
+double ConfGen::DGConstraintGenerator::getBondAngle(std::size_t atom1_idx, std::size_t atom2_idx, std::size_t atom3_idx) const
 {
 	if (atom1_idx > atom3_idx)
 		std::swap(atom1_idx, atom3_idx);
@@ -627,8 +847,8 @@ double ConfGen::MolecularGraphDGConstraintGenerator::getBondAngle(std::size_t at
 	return it->second;
 }
 
-std::size_t ConfGen::MolecularGraphDGConstraintGenerator::getSmallestRingSize(const Chem::FragmentList& sssr, const Chem::Bond& bond1, 
-																			  const Chem::Bond& bond2) const
+std::size_t ConfGen::DGConstraintGenerator::getSmallestRingSize(const Chem::FragmentList& sssr, const Chem::Bond& bond1, 
+																const Chem::Bond& bond2) const
 {
 	using namespace Chem;
 
@@ -649,7 +869,7 @@ std::size_t ConfGen::MolecularGraphDGConstraintGenerator::getSmallestRingSize(co
 	return sm_size;
 } 
 
-std::size_t ConfGen::MolecularGraphDGConstraintGenerator::getSmallestRingSize(const Chem::FragmentList& sssr, std::size_t atom1_idx, std::size_t atom2_idx) const
+std::size_t ConfGen::DGConstraintGenerator::getSmallestRingSize(const Chem::FragmentList& sssr, std::size_t atom1_idx, std::size_t atom2_idx) const
 {
 	using namespace Chem;
 
@@ -672,7 +892,7 @@ std::size_t ConfGen::MolecularGraphDGConstraintGenerator::getSmallestRingSize(co
 	return sm_size;
 } 
 
-void ConfGen::MolecularGraphDGConstraintGenerator::markAtomPairProcessed(std::size_t atom1_idx, std::size_t atom2_idx)
+void ConfGen::DGConstraintGenerator::markAtomPairProcessed(std::size_t atom1_idx, std::size_t atom2_idx)
 {
 	if (atom1_idx > atom2_idx)
 		std::swap(atom1_idx, atom2_idx);
@@ -680,7 +900,7 @@ void ConfGen::MolecularGraphDGConstraintGenerator::markAtomPairProcessed(std::si
 	procAtomPairMask.set(atom1_idx * numAtoms + atom2_idx);
 }
 
-bool ConfGen::MolecularGraphDGConstraintGenerator::atomPairProcessed(std::size_t atom1_idx, std::size_t atom2_idx) const
+bool ConfGen::DGConstraintGenerator::atomPairProcessed(std::size_t atom1_idx, std::size_t atom2_idx) const
 {
 	if (atom1_idx > atom2_idx)
 		std::swap(atom1_idx, atom2_idx);
@@ -688,7 +908,7 @@ bool ConfGen::MolecularGraphDGConstraintGenerator::atomPairProcessed(std::size_t
 	return procAtomPairMask.test(atom1_idx * numAtoms + atom2_idx);
 }
 
-double ConfGen::MolecularGraphDGConstraintGenerator::calc13AtomDistance(double bond1_len, double bond2_len, double angle) const
+double ConfGen::DGConstraintGenerator::calc13AtomDistance(double bond1_len, double bond2_len, double angle) const
 {
 	double r1_2 = bond1_len * bond1_len;
 	double r2_2 = bond2_len * bond2_len;
@@ -697,14 +917,14 @@ double ConfGen::MolecularGraphDGConstraintGenerator::calc13AtomDistance(double b
 	return std::sqrt(r1_2 + r2_2 - x);
 }
 
-double ConfGen::MolecularGraphDGConstraintGenerator::calcCis14AtomDistance(double bond1_len, double bond2_len, double bond3_len, 
-																		   double angle_12, double angle_23) const
+double ConfGen::DGConstraintGenerator::calcCis14AtomDistance(double bond1_len, double bond2_len, double bond3_len, 
+															 double angle_12, double angle_23) const
 {
 	return (bond2_len - bond1_len * std::cos(angle_12) - bond3_len * std::cos(angle_23));
 }
 
-double ConfGen::MolecularGraphDGConstraintGenerator::calcTrans14AtomDistance(double bond1_len, double bond2_len, double bond3_len, 
-																			 double angle_12, double angle_23) const
+double ConfGen::DGConstraintGenerator::calcTrans14AtomDistance(double bond1_len, double bond2_len, double bond3_len, 
+															   double angle_12, double angle_23) const
 {
 	double x1 = bond1_len * std::cos(angle_12);
 	double y1 = bond1_len * std::sin(angle_12);
@@ -717,7 +937,7 @@ double ConfGen::MolecularGraphDGConstraintGenerator::calcTrans14AtomDistance(dou
 	return std::sqrt(dx * dx + dy * dy);
 }
 
-bool ConfGen::MolecularGraphDGConstraintGenerator::isPlanar(const Chem::Atom& atom) const
+bool ConfGen::DGConstraintGenerator::isPlanar(const Chem::Atom& atom) const
 {
 	using namespace Chem;
 
@@ -735,7 +955,7 @@ bool ConfGen::MolecularGraphDGConstraintGenerator::isPlanar(const Chem::Atom& at
 	return false;
 }
 
-bool ConfGen::MolecularGraphDGConstraintGenerator::isPlanar(const Chem::Bond& bond) const
+bool ConfGen::DGConstraintGenerator::isPlanar(const Chem::Bond& bond) const
 {
 	using namespace Chem;
 
@@ -756,7 +976,7 @@ bool ConfGen::MolecularGraphDGConstraintGenerator::isPlanar(const Chem::Bond& bo
 	if (order == 3)
 		return true;
 
-	if (order == 1) {
+	if (order == 1 && getRingFlag(bond)) {
 		unsigned int atom_type = getType(atom1);
 	
 		if ((atom_type == AtomType::N || atom_type == AtomType::O) && 
@@ -775,7 +995,7 @@ bool ConfGen::MolecularGraphDGConstraintGenerator::isPlanar(const Chem::Bond& bo
 	return false;
 }
 
-bool ConfGen::MolecularGraphDGConstraintGenerator::hasNeighborWithDoubleBond(const Chem::Atom& atom) const
+bool ConfGen::DGConstraintGenerator::hasNeighborWithDoubleBond(const Chem::Atom& atom) const
 {
 	using namespace Chem;
 
@@ -814,7 +1034,7 @@ bool ConfGen::MolecularGraphDGConstraintGenerator::hasNeighborWithDoubleBond(con
 	return false;
 }
 
-std::size_t ConfGen::MolecularGraphDGConstraintGenerator::getNeighborAtoms(const Chem::Atom& atom, AtomIndexList& idx_list, const Chem::Atom* x_atom) const
+std::size_t ConfGen::DGConstraintGenerator::getNeighborAtoms(const Chem::Atom& atom, AtomIndexList& idx_list, const Chem::Atom* x_atom) const
 {
 	using namespace Chem;
 

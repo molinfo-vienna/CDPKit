@@ -31,7 +31,8 @@
 namespace CDPLPythonConfGen
 {
 
-	void exportMolecularGraphDGConstraintGenerator();
+	void exportDGConstraintGenerator();
+	void exportRaw3DStructureGenerator();
 }
 
 #endif // CDPL_PYTHON_CONFGEN_CLASSEXPORTS_HPP

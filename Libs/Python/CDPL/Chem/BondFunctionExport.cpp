@@ -115,6 +115,8 @@ namespace
 	MAKE_FUNCTION_WRAPPER3(bool, isInFragmentOfSize, CDPL::Chem::Bond&, CDPL::Chem::FragmentList&, std::size_t);
 	MAKE_FUNCTION_WRAPPER3(bool, isStereoCenter, CDPL::Chem::Bond&, CDPL::Chem::MolecularGraph&, std::size_t);
 
+	MAKE_FUNCTION_WRAPPER4(bool, checkBondConfiguration, CDPL::Chem::Bond&, CDPL::Chem::MolecularGraph&, const CDPL::Chem::StereoDescriptor&, const CDPL::Math::Vector3DArray&);
+
 	MAKE_FUNCTION_WRAPPER5(CDPL::Chem::StereoDescriptor, calcStereoDescriptor, CDPL::Chem::Bond&, CDPL::Chem::MolecularGraph&, std::size_t, std::size_t, bool);
 
 	std::string buildMatchExpressionStringWrapper(CDPL::Chem::Bond& bond, CDPL::Chem::MolecularGraph& molgraph)
@@ -164,6 +166,9 @@ void CDPLPythonChem::exportBondFunctions()
 				(python::arg("bond"), python::arg("frag_list"), python::arg("size")));
 	python::def("isStereoCenter", &isStereoCenterWrapper3, 
 				(python::arg("bond"), python::arg("molgraph"), python::arg("min_ring_size") = 8));
+
+	python::def("checkBondConfiguration", &checkBondConfigurationWrapper4,
+				(python::arg("bond"), python::arg("molgraph"), python::arg("descr"), python::arg("coords")));
 
 	python::def("calcStereoDescriptor", &calcStereoDescriptorWrapper5, 
 				(python::arg("bond"), python::arg("molgraph"), python::arg("dim") = 1, 

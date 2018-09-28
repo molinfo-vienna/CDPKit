@@ -38,6 +38,7 @@
 #include "CDPL/Chem/MatchExpression.hpp"
 #include "CDPL/Chem/MatchConstraintList.hpp"
 #include "CDPL/Chem/FragmentList.hpp"
+#include "CDPL/Math/VectorArray.hpp"
 
 
 namespace CDPL 
@@ -128,6 +129,9 @@ namespace CDPL
 
 		CDPL_CHEM_API StereoDescriptor calcStereoDescriptor(const Bond& bond, const MolecularGraph& molgraph, std::size_t dim = 1, 
 															std::size_t min_ring_size = 8, bool check_order = true);
+
+		CDPL_CHEM_API bool checkBondConfiguration(const Bond& bond, const MolecularGraph& molgraph, const StereoDescriptor& descr,
+												  const Math::Vector3DArray& coords);
 
 
 		CDPL_CHEM_API bool getStereoCenterFlag(const Bond& bond);

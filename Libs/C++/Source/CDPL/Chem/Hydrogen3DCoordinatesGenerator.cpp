@@ -184,10 +184,13 @@ namespace
 }
 
 
-Chem::Hydrogen3DCoordinatesGenerator::Hydrogen3DCoordinatesGenerator(): undefOnly(true) {}
+Chem::Hydrogen3DCoordinatesGenerator::Hydrogen3DCoordinatesGenerator(): 
+	undefOnly(true), coordsFunc(&get3DCoordinates), hasCoordsFunc(&has3DCoordinates)
+{}
 
 Chem::Hydrogen3DCoordinatesGenerator::Hydrogen3DCoordinatesGenerator(
-	const MolecularGraph& molgraph, Math::Vector3DArray& coords, bool undef_only): undefOnly(undef_only) 
+	const MolecularGraph& molgraph, Math::Vector3DArray& coords, bool undef_only): 
+	undefOnly(undef_only), coordsFunc(&get3DCoordinates), hasCoordsFunc(&has3DCoordinates)  
 {
 	generate(molgraph, coords);
 }
@@ -202,13 +205,33 @@ bool Chem::Hydrogen3DCoordinatesGenerator::undefinedOnly() const
 	return undefOnly;
 }
 
-void Chem::Hydrogen3DCoordinatesGenerator::generate(const MolecularGraph& molgraph, Math::Vector3DArray& coords)
+void Chem::Hydrogen3DCoordinatesGenerator::setAtom3DCoordinatesCheckFunction(const AtomPredicate& func)
 {
-	init(molgraph, coords);
+	hasCoordsFunc = func;
+}
+
+const Chem::AtomPredicate& Chem::Hydrogen3DCoordinatesGenerator::getAtom3DCoordinatesCheckFunction() const
+{
+	return hasCoordsFunc;
+}
+
+void Chem::Hydrogen3DCoordinatesGenerator::setAtom3DCoordinatesFunction(const Atom3DCoordinatesFunction& func)
+{
+	coordsFunc = func;
+}
+
+const Chem::Atom3DCoordinatesFunction& Chem::Hydrogen3DCoordinatesGenerator::getAtom3DCoordinatesFunction() const
+{
+	return coordsFunc;
+}
+
+void Chem::Hydrogen3DCoordinatesGenerator::generate(const MolecularGraph& molgraph, Math::Vector3DArray& coords, bool copy_atom_coords)
+{
+	init(molgraph, coords, copy_atom_coords);
 	assignCoordinates(coords);
 }
 
-void Chem::Hydrogen3DCoordinatesGenerator::init(const MolecularGraph& molgraph, Math::Vector3DArray& coords)
+void Chem::Hydrogen3DCoordinatesGenerator::init(const MolecularGraph& molgraph, Math::Vector3DArray& coords, bool copy_atom_coords)
 {
 	std::size_t num_atoms = molgraph.getNumAtoms();
 
@@ -227,15 +250,17 @@ void Chem::Hydrogen3DCoordinatesGenerator::init(const MolecularGraph& molgraph, 
 		getConnectedAtoms(atom, conctdAtoms);
 
 		if (conctdAtoms.size() == 1 && 
-			getType(atom) == AtomType::H && has3DCoordinates(molgraph.getAtom(conctdAtoms[0]))) {
+			getType(atom) == AtomType::H && hasCoordsFunc(molgraph.getAtom(conctdAtoms[0]))) {
 
-			if (undefOnly && has3DCoordinates(atom)) 
-				coords[i] = get3DCoordinates(atom);
-			else 
+			if (undefOnly && hasCoordsFunc(atom)) {
+				if (copy_atom_coords)
+					coords[i] = coordsFunc(atom);
+			} else 
 				defCoordsMask.reset(i);
 			
 		} else {
-		    coords[i] = get3DCoordinates(atom);
+		    if (copy_atom_coords)
+				coords[i] = coordsFunc(atom);
 			centerAtoms.push_back(i);
 		}
 	}

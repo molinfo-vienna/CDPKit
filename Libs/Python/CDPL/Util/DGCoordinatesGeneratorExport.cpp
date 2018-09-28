@@ -255,6 +255,9 @@ void CDPLPythonUtil::exportDGCoordinatesGenerator()
 		.def("removeVolumeConstraint", 
 			 static_cast<void (GeneratorType::*)(std::size_t)>(&GeneratorType::removeVolumeConstraint),
 			 (python::arg("self"), python::arg("idx")))
+		.def("getVolumeError", 
+					 &GeneratorType::getVolumeError<Math::VectorArray<Math::CVector<ValueType, GeneratorType::COORDS_DIM> > >, 
+					 (python::arg("self"), python::arg("coords")))
 		.add_property("numVolumeConstraints", &GeneratorType::getNumVolumeConstraints)
 		.add_property("volumeConstraints", python::make_function(&createVolumeConstraintList<GeneratorType>,
 																 python::with_custodian_and_ward_postcall<0, 1>()));
