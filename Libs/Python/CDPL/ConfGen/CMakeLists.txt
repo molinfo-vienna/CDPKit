@@ -17,6 +17,13 @@ SET(confgen_MOD_SRCS
     FromPythonConverterRegistration.cpp
    )
 
+IF(Boost_TIMER_FOUND AND Boost_CHRONO_FOUND)
+  SET(confgen_MOD_SRCS
+      ${confgen_MOD_SRCS}
+      RandomConformerGeneratorExport.cpp
+     )	
+ENDIF(Boost_TIMER_FOUND AND Boost_CHRONO_FOUND)
+
 ADD_LIBRARY(_confgen MODULE ${confgen_MOD_SRCS})
 
 TARGET_LINK_LIBRARIES(_confgen cdpl-confgen-shared ${Boost_PYTHON_LIBRARY} ${PYTHON_LIBRARIES})

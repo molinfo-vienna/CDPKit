@@ -84,6 +84,10 @@ namespace CDPL
 				return -deltaF;
 			}
 
+			ValueType getFunctionValue() const {
+				return fValue;
+			}
+
 			std::size_t getNumIterations() const {
 				return numIter;
 			}
@@ -97,10 +101,10 @@ namespace CDPL
 				if (do_setup)
 					setup(x, g);
 
-				ValueType fval = ValueType(0);
+				fValue = ValueType(0);
 					
 				for (std::size_t i = 0; max_iter == 0 || i < max_iter; i++) {
-					status = iterate(fval, x, g);
+					status = iterate(fValue, x, g);
 
 					if (status != SUCCESS)
 						return status;
@@ -692,6 +696,7 @@ namespace CDPL
 			ValueType           pNorm;
 			ValueType           startF;
 			ValueType           deltaF;
+			ValueType           fValue;
 			ValueType           fp0;
 			VariableArrayType   x0;
 			VariableArrayType   g0;

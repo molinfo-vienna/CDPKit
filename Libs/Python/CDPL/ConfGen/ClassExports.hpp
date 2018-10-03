@@ -27,12 +27,20 @@
 #ifndef CDPL_PYTHON_CONFGEN_CLASSEXPORTS_HPP
 #define CDPL_PYTHON_CONFGEN_CLASSEXPORTS_HPP
 
+#include "CDPL/Config.hpp"
+
 
 namespace CDPLPythonConfGen
 {
 
 	void exportDGConstraintGenerator();
 	void exportRaw3DStructureGenerator();
+
+#if defined(HAVE_BOOST_TIMER) && defined(HAVE_BOOST_CHRONO)
+
+	void exportRandomConformerGenerator();
+
+#endif // defined(HAVE_BOOST_TIMER) && defined(HAVE_BOOST_CHRONO)
 }
 
 #endif // CDPL_PYTHON_CONFGEN_CLASSEXPORTS_HPP

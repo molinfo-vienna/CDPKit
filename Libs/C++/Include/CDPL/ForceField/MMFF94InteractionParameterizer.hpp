@@ -157,6 +157,8 @@ namespace CDPL
 			void setDynamicParameterDefaults();
 
 			void performStrictAtomTyping(bool strict);
+	
+			bool strictAtomTypingPerformed() const;
 
 			MMFF94InteractionParameterizer& operator=(const MMFF94InteractionParameterizer& parameterizer);
 

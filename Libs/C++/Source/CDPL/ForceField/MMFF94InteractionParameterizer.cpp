@@ -224,6 +224,11 @@ void ForceField::MMFF94InteractionParameterizer::performStrictAtomTyping(bool st
 	strictAtomTyping = strict;
 }
 
+bool ForceField::MMFF94InteractionParameterizer::strictAtomTypingPerformed() const
+{
+	return strictAtomTyping;
+}
+
 void ForceField::MMFF94InteractionParameterizer::parameterize(const Chem::MolecularGraph& molgraph, MMFF94InteractionData& ia_data,
 															  unsigned int ia_types)
 {

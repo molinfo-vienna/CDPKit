@@ -70,6 +70,16 @@
 #define HAVE_BOOST_FILESYSTEM
 
 /**	
+ * \brief Defined if the \e Boost chrono library is available.
+ */
+#define HAVE_BOOST_CHRONO
+
+/**	
+ * \brief Defined if the \e Boost timer library is available.
+ */
+#define HAVE_BOOST_TIMER
+
+/**	
  * \brief Defined if the \e Boost iostreams library is available.
  */
 #define HAVE_BOOST_IOSTREAMS

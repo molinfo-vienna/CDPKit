@@ -114,6 +114,13 @@ const Chem::Atom3DCoordinatesFunction& Chem::AtomDensityGridCalculator::getAtom3
 
 void Chem::AtomDensityGridCalculator::calculate(const AtomContainer& atoms, Grid::DSpatialGrid& grid)
 {
+	if (atoms.getNumAtoms() == 0) {
+		for (std::size_t i = 0, num_pts = grid.getNumElements(); i < num_pts; i++)
+			grid(i) = 0.0;
+
+		return;
+	}
+
 	atomCoords.clear();
 	get3DCoordinates(atoms, atomCoords, coordsFunc);
 

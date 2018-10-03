@@ -72,13 +72,13 @@ namespace CDPL
 
 			bool generate(Math::Vector3DArray& coords);
 
+			bool checkAtomConfigurations(Math::Vector3DArray& coords) const;
+			bool checkBondConfigurations(Math::Vector3DArray& coords) const;
+
 		private:
 			void setup(const Chem::MolecularGraph& molgraph, const ForceField::MMFF94InteractionData* ia_data);
 
 			void calcHydrogenCoordinates(Math::Vector3DArray& coords);
-
-			bool checkAtomConfigurations(Math::Vector3DArray& coords) const;
-			bool checkBondConfigurations(Math::Vector3DArray& coords) const;
 
 			const Math::Vector3D& get3DCoordinates(const Chem::Atom& atom) const;
 			bool has3DCoordinates(const Chem::Atom& atom) const;

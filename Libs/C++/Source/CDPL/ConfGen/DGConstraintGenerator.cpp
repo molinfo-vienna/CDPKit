@@ -976,7 +976,7 @@ bool ConfGen::DGConstraintGenerator::isPlanar(const Chem::Bond& bond) const
 	if (order == 3)
 		return true;
 
-	if (order == 1 && getRingFlag(bond)) {
+	if (order == 1  && getRingFlag(bond)) {
 		unsigned int atom_type = getType(atom1);
 	
 		if ((atom_type == AtomType::N || atom_type == AtomType::O) && 

@@ -23,12 +23,6 @@ SET(cdpl-grid_LIB_SRCS
     ControlParameterFunctions.cpp
    )
 
-LINK_LIBRARIES(${Boost_THREAD_LIBRARY} ${Boost_SYSTEM_LIBRARY})
-
-IF(Boost_ATOMIC_FOUND)
-  LINK_LIBRARIES(${Boost_ATOMIC_LIBRARY})
-ENDIF(Boost_ATOMIC_FOUND)
-
 ADD_LIBRARY(cdpl-grid-static STATIC ${cdpl-grid_LIB_SRCS})
 
 TARGET_LINK_LIBRARIES(cdpl-grid-static cdpl-base-static cdpl-util-static cdpl-internal-static)

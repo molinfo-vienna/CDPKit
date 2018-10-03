@@ -56,12 +56,16 @@ void CDPLPythonConfGen::exportRaw3DStructureGenerator()
 		.def("regardBondConfiguration", &ConfGen::Raw3DStructureGenerator::regardBondConfiguration, 
 			 (python::arg("self"), python::arg("regard")))
 		.def("bondConfigurationRegarded", &ConfGen::Raw3DStructureGenerator::bondConfigurationRegarded, python::arg("self"))
-			.def("setup", static_cast<void (ConfGen::Raw3DStructureGenerator::*)(const Chem::MolecularGraph&)>
+		.def("setup", static_cast<void (ConfGen::Raw3DStructureGenerator::*)(const Chem::MolecularGraph&)>
 			 (&ConfGen::Raw3DStructureGenerator::setup), (python::arg("self"), python::arg("molgraph")))
 		.def("setup", static_cast<void (ConfGen::Raw3DStructureGenerator::*)(const Chem::MolecularGraph&, const ForceField::MMFF94InteractionData&)>
 			 (&ConfGen::Raw3DStructureGenerator::setup), 
 			 (python::arg("self"), python::arg("molgraph"), python::arg("ia_data")))
 		.def("generate", &ConfGen::Raw3DStructureGenerator::generate, (python::arg("self"), python::arg("coords")))
+		.def("checkAtomConfigurations", &ConfGen::Raw3DStructureGenerator::checkAtomConfigurations,
+			 (python::arg("self"), python::arg("coords")))
+		.def("checkBondConfigurations", &ConfGen::Raw3DStructureGenerator::checkBondConfigurations,
+			 (python::arg("self"), python::arg("coords")))
 		.add_property("calcHydrogenPositions", &ConfGen::Raw3DStructureGenerator::hydrogenPositionsCalculated, 
 					  &ConfGen::Raw3DStructureGenerator::calculateHydrogenPositions)
 		.add_property("regardAtomConfig", &ConfGen::Raw3DStructureGenerator::atomConfigurationRegarded, 

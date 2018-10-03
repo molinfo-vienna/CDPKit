@@ -5,18 +5,21 @@ SET(cdpl-confgen_LIB_SRCS
     Raw3DStructureGenerator.cpp
    )
 
-LINK_LIBRARIES(${Boost_THREAD_LIBRARY} ${Boost_SYSTEM_LIBRARY})
+IF(Boost_TIMER_FOUND AND Boost_CHRONO_FOUND)
+   SET(cdpl-confgen_LIB_SRCS
+       ${cdpl-confgen_LIB_SRCS}
+       RandomConformerGenerator.cpp
+      )	  
 
-IF(Boost_ATOMIC_FOUND)
-  LINK_LIBRARIES(${Boost_ATOMIC_LIBRARY})
-ENDIF(Boost_ATOMIC_FOUND)
+   LINK_LIBRARIES(${Boost_TIMER_LIBRARY} ${Boost_CHRONO_LIBRARY})	
+ENDIF(Boost_TIMER_FOUND AND Boost_CHRONO_FOUND)
 
 ADD_LIBRARY(cdpl-confgen-static STATIC ${cdpl-confgen_LIB_SRCS})
 
 SET_TARGET_PROPERTIES(cdpl-confgen-static PROPERTIES 
                       OUTPUT_NAME cdpl-confgen
                       CLEAN_DIRECT_OUTPUT 1
-                      COMPILE_DEFINITIONS "CDPL_CONFGEN_STATIC_LINK;CDPL_BASE_STATIC_LINK;CDPL_CHEM_STATIC_LINK;CDPL_MATH_STATIC_LINK;CDPL_FORCEFIELD_STATIC_LINK"
+                      COMPILE_DEFINITIONS "CDPL_CONFGEN_STATIC_LINK;CDPL_BASE_STATIC_LINK;CDPL_CHEM_STATIC_LINK;CDPL_MATH_STATIC_LINK;CDPL_UTIL_STATIC_LINK;CDPL_FORCEFIELD_STATIC_LINK"
                      )
 
 TARGET_LINK_LIBRARIES(cdpl-confgen-static cdpl-base-static cdpl-chem-static cdpl-math-static cdpl-util-static cdpl-forcefield-static)

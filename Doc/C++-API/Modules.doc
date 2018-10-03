@@ -502,6 +502,9 @@
 
 \defgroup CDPL_CONFGEN Molecule Conformer Generation
 
+\defgroup CDPL_CONFGEN_GENERATORS Conformer Generator Classes
+\ingroup CDPL_CONFGEN
+
 \defgroup CDPL_CONFGEN_UTILITIES Utility Functions and Classes
 \ingroup CDPL_CONFGEN
 

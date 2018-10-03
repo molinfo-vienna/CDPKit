@@ -128,6 +128,13 @@ void Pharm::InteractionScoreGridCalculator::calculate(const FeatureContainer& fe
 	}
 
 	std::size_t num_features = tgtFeatures.size();
+
+	if (num_features == 0) {
+		for (std::size_t i = 0, num_pts = grid.getNumElements(); i < num_pts; i++)
+			grid(i) = 0.0;
+
+		return;
+	}
 	
 	featureCoords.resize(num_features);
 

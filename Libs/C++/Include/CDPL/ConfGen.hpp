@@ -31,7 +31,13 @@
 #ifndef CDPL_CONFGEN_HPP
 #define CDPL_CONFGEN_HPP
 
+#include "CDPL/Config.hpp"
 #include "CDPL/ConfGen/DGConstraintGenerator.hpp"
 #include "CDPL/ConfGen/Raw3DStructureGenerator.hpp"
 
+#if defined(HAVE_BOOST_TIMER) && defined(HAVE_BOOST_CHRONO)
+
+#include "CDPL/ConfGen/RandomConformerGenerator.hpp"
+
+#endif // defined(HAVE_BOOST_TIMER) && defined(HAVE_BOOST_CHRONO)
 #endif // CDPL_CONFGEN_HPP

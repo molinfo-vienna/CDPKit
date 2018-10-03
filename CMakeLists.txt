@@ -186,7 +186,7 @@ FIND_PACKAGE(PythonLibs)
 SET(Boost_USE_MULTITHREAD ON)
 SET(Boost_USE_STATIC_LIBS OFF)
 FIND_PACKAGE(Boost 1.52.0 COMPONENTS date_time python unit_test_framework filesystem system
-	     iostreams program_options thread atomic chrono)
+	     iostreams program_options thread atomic chrono timer)
 
 IF(NOT SQLITE3_FOUND)
   MESSAGE("!! Warning: SQLite3 library not found -> can't build pharmacophore screening components.")
@@ -204,6 +204,10 @@ IF(NOT Boost_SYSTEM_FOUND)
   MESSAGE(FATAL_ERROR "Boost system library not found.")
 ENDIF(NOT Boost_SYSTEM_FOUND)
 
+IF(NOT Boost_ATOMIC_FOUND)
+  MESSAGE(FATAL_ERROR "Boost atomic library not found.")
+ENDIF(NOT Boost_ATOMIC_FOUND)
+
 IF(NOT Boost_FILESYSTEM_FOUND)
   MESSAGE("!! Warning: Boost filesystem library not found -> dependent components won't be built.")
 ENDIF(NOT Boost_FILESYSTEM_FOUND)
@@ -217,8 +221,12 @@ IF(NOT Boost_PROGRAM_OPTIONS_FOUND)
 ENDIF(NOT Boost_PROGRAM_OPTIONS_FOUND)
 
 IF(NOT Boost_CHRONO_FOUND)
-  MESSAGE("!! Warning: Boost chrono library not found -> commandline applications won't be built.")
+  MESSAGE("!! Warning: Boost chrono library not found -> commandline applications and conformer generators won't be built.")
 ENDIF(NOT Boost_CHRONO_FOUND)
+
+IF(NOT Boost_TIMER_FOUND)
+  MESSAGE("!! Warning: Boost timer library not found -> conformer generators won't be built.")
+ENDIF(NOT Boost_TIMER_FOUND)
 
 IF(NOT Boost_UNIT_TEST_FRAMEWORK_FOUND)
   MESSAGE("!! Warning: Boost unit_test_framework not found -> can't build and run C++ unit test cases.")
@@ -262,6 +270,8 @@ SET(HAVE_CAIRO ${CAIRO_FOUND})
 SET(HAVE_SQLITE3 ${SQLITE3_FOUND})
 SET(HAVE_BOOST_FILESYSTEM ${Boost_FILESYSTEM_FOUND})
 SET(HAVE_BOOST_IOSTREAMS ${Boost_IOSTREAMS_FOUND})
+SET(HAVE_BOOST_CHRONO ${Boost_CHRONO_FOUND})
+SET(HAVE_BOOST_TIMER ${Boost_TIMER_FOUND})
 SET(HAVE_QT ${Qt5Gui_FOUND})
 
 INCLUDE(CheckTypeSize)

@@ -39,6 +39,12 @@ BOOST_PYTHON_MODULE(_confgen)
 	exportDGConstraintGenerator();
 	exportRaw3DStructureGenerator();
 
+#if defined(HAVE_BOOST_TIMER) && defined(HAVE_BOOST_CHRONO)
+
+	exportRandomConformerGenerator();
+
+#endif // defined(HAVE_BOOST_TIMER) && defined(HAVE_BOOST_CHRONO)
+
 	registerToPythonConverters();
 	registerFromPythonConverters();
 }

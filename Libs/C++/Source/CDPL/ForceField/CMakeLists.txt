@@ -86,12 +86,6 @@ SET(cdpl-forcefield_LIB_SRCS
     Utilities.cpp
    )
 
-LINK_LIBRARIES(${Boost_THREAD_LIBRARY} ${Boost_SYSTEM_LIBRARY})
-
-IF(Boost_ATOMIC_FOUND)
-  LINK_LIBRARIES(${Boost_ATOMIC_LIBRARY})
-ENDIF(Boost_ATOMIC_FOUND)
-
 ADD_LIBRARY(cdpl-forcefield-static STATIC ${cdpl-forcefield_LIB_SRCS})
 
 SET_TARGET_PROPERTIES(cdpl-forcefield-static PROPERTIES 

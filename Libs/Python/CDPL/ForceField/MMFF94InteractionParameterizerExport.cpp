@@ -97,8 +97,11 @@ void CDPLPythonForceField::exportMMFF94InteractionParameterizer()
 		.def("setDynamicParameterDefaults", &ForceField::MMFF94InteractionParameterizer::setDynamicParameterDefaults, python::arg("self"))
 		.def("performStrictAtomTyping", &ForceField::MMFF94InteractionParameterizer::performStrictAtomTyping, 
 			 (python::arg("self"), python::arg("strict")))
+		.def("strictAtomTypingPerformed", &ForceField::MMFF94InteractionParameterizer::strictAtomTypingPerformed, python::arg("self"))
 		.def("assign", CDPLPythonBase::copyAssOp(&ForceField::MMFF94InteractionParameterizer::operator=),
 			 (python::arg("self"), python::arg("parameterizer")), python::return_self<>())
 		.def("parameterize", &ForceField::MMFF94InteractionParameterizer::parameterize, 
-			 (python::arg("self"), python::arg("molgraph"), python::arg("ia_data"), python::arg("ia_types") = ForceField::InteractionType::ALL));
+			 (python::arg("self"), python::arg("molgraph"), python::arg("ia_data"), python::arg("ia_types") = ForceField::InteractionType::ALL))
+		.add_property("strictAtomTyping", &ForceField::MMFF94InteractionParameterizer::strictAtomTypingPerformed, 
+					  &ForceField::MMFF94InteractionParameterizer::performStrictAtomTyping);
 }

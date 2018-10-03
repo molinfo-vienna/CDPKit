@@ -66,6 +66,7 @@ namespace
 				.def(CDPLPythonBase::ObjectIdentityCheckVisitor<MinimizerType>())
 				.def("getGradientNorm", &MinimizerType::getGradientNorm, python::arg("self"))
 				.def("getFunctionDelta", &MinimizerType::getFunctionDelta, python::arg("self"))
+				.def("getFunctionValue", &MinimizerType::getFunctionValue, python::arg("self"))
 				.def("getNumIterations", &MinimizerType::getNumIterations, python::arg("self"))
 				.def("getStatus", &MinimizerType::getStatus, python::arg("self"))
 				.def("minimizes", &minimize, 
@@ -77,6 +78,7 @@ namespace
 				.def("iterate", &iterate, (python::arg("self"), python::arg("f"), python::arg("x"), python::arg("g")))
 				.add_property("gradientNorm", &MinimizerType::getGradientNorm)
 				.add_property("functionDelta", &MinimizerType::getFunctionDelta)
+				.add_property("functionValue", &MinimizerType::getFunctionValue)
 				.add_property("numIterations", &MinimizerType::getNumIterations)
 				.add_property("status", &MinimizerType::getStatus);
 		}
