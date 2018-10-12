@@ -33,10 +33,11 @@
 #include "CDPL/Chem/Atom.hpp"
 #include "CDPL/Chem/Bond.hpp"
 #include "CDPL/Chem/Atom3DCoordinatesFunctionWrapper.hpp"
-#include "CDPL/Chem/AtomPredicate.hpp"
-#include "CDPL/Chem/BondPredicate.hpp"
+#include "CDPL/Chem/AtomPriorityFunctionWrapper.hpp"
+#include "CDPL/Chem/AtomPredicateWrapper.hpp"
+#include "CDPL/Chem/BondPredicateWrapper.hpp"
 #include "CDPL/Math/Vector.hpp"
-#include "CDPL/Base/IntTypes.hpp"
+#include "CDPL/Base/IntegerTypes.hpp"
 
 #include "Base/BoostFunctionWrapperExport.hpp"
 
@@ -61,6 +62,7 @@ void CDPLPythonChem::exportBoostFunctionWrappers()
 										 python::return_internal_reference<> >("Atom3DCoordinatesFunction");
     CDPLPythonBase::BoostFunction1Export<boost::function1<double, const Atom&>, Atom&>("DoubleAtomFunctor");
 	CDPLPythonBase::BoostFunction1Export<boost::function1<double, const Entity3D&>, Entity3D&>("DoubleEntity3DFunctor");
+	CDPLPythonBase::BoostFunction1Export<boost::function1<std::size_t, const Atom&>, Atom&>("SizeTypeAtomFunctor");
 	CDPLPythonBase::BoostFunction1Export<AtomPredicate, Atom&>("AtomPredicate");
 	CDPLPythonBase::BoostFunction1Export<BondPredicate, Bond&>("BondPredicate");
 	CDPLPythonBase::BoostFunction1Export<boost::function1<double, const Math::DVector&> >("DoubleDVectorFunctor"); 

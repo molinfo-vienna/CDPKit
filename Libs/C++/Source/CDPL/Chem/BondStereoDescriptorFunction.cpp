@@ -229,17 +229,12 @@ Chem::StereoDescriptor Chem::calcStereoDescriptor(const Bond& bond, const Molecu
 	return StereoDescriptor(BondConfiguration::EITHER, *ref_atoms[0], *bond_atoms[0], *bond_atoms[1], *ref_atoms[1]);
 }
 
-bool Chem::checkBondConfiguration(const Bond& bond, const MolecularGraph& molgraph, const StereoDescriptor& descr, const Math::Vector3DArray& coords)
+unsigned int Chem::calcBondConfiguration(const Bond& bond, const MolecularGraph& molgraph, const StereoDescriptor& descr, const Math::Vector3DArray& coords)
 {
 	std::size_t num_ref_atoms = descr.getNumReferenceAtoms();
 
 	if (num_ref_atoms != 4)
-		return true;
-
-	unsigned int config = descr.getConfiguration();
-
-	if (config != BondConfiguration::CIS && config != BondConfiguration::TRANS)
-		return true;
+		return BondConfiguration::NONE;
 
 	const Math::Vector3D& ligand1_coords = coords[molgraph.getAtomIndex(*descr.getReferenceAtoms()[0])];
 	const Math::Vector3D& atom1_coords = coords[molgraph.getAtomIndex(*descr.getReferenceAtoms()[1])];
@@ -249,8 +244,11 @@ bool Chem::checkBondConfiguration(const Bond& bond, const MolecularGraph& molgra
 	double tmp = innerProd(crossProd(ligand1_coords - atom1_coords, atom2_coords - atom1_coords), 
 						   crossProd(ligand2_coords - atom2_coords, atom1_coords - atom2_coords));
 		
-	if (config == BondConfiguration::TRANS)
-		return (tmp > 0.0);
+	if (tmp > 0.0)
+		return BondConfiguration::TRANS;
 
-	return (tmp < 0.0);
+	if (tmp < 0.0)
+		return BondConfiguration::CIS;
+
+	return BondConfiguration::EITHER;
 }

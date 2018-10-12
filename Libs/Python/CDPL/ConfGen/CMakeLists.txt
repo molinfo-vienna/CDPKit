@@ -10,8 +10,16 @@ ENDFOREACH(PYTHON_FILE)
 SET(confgen_MOD_SRCS
     Module.cpp
 
+    ForceFieldTypeExport.cpp
+    FragmentTypeExport.cpp
+
     DGConstraintGeneratorExport.cpp
-    Raw3DStructureGeneratorExport.cpp
+    Raw3DCoordinatesGeneratorExport.cpp
+    FragmentListExport.cpp
+    FragmentLibraryEntryExport.cpp
+    FragmentLibraryExport.cpp
+
+    UtilityFunctionExport.cpp
    
     ToPythonConverterRegistration.cpp
     FromPythonConverterRegistration.cpp

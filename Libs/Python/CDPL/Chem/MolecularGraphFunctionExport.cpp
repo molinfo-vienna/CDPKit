@@ -79,6 +79,7 @@ namespace
 	MAKE_MOLGRAPH_FUNC_WRAPPERS(std::size_t, MDLDimensionality)
 	MAKE_MOLGRAPH_FUNC_WRAPPERS(const std::string&, MDLComment)
 	MAKE_MOLGRAPH_FUNC_WRAPPERS(const CDPL::Chem::StringDataBlock::SharedPointer&, StructureData)
+	MAKE_MOLGRAPH_FUNC_WRAPPERS(CDPL::Base::uint64, HashCode)
 	MAKE_MOLGRAPH_FUNC_WRAPPERS(unsigned int, MDLCTABVersion)
 	MAKE_MOLGRAPH_FUNC_WRAPPERS(long, MDLScalingFactor1)
 	MAKE_MOLGRAPH_FUNC_WRAPPERS(double, MDLScalingFactor2)
@@ -130,7 +131,6 @@ namespace
 	MAKE_FUNCTION_WRAPPER1(std::size_t, getBondCount, CDPL::Chem::MolecularGraph&);
 	MAKE_FUNCTION_WRAPPER1(std::size_t, getHydrogenBondCount, CDPL::Chem::MolecularGraph&);
 	MAKE_FUNCTION_WRAPPER1(std::size_t, getChainBondCount, CDPL::Chem::MolecularGraph&);
-	MAKE_FUNCTION_WRAPPER1(std::size_t, getRotatableBondCount, CDPL::Chem::MolecularGraph&);
 	MAKE_FUNCTION_WRAPPER1(std::size_t, getComponentCount, CDPL::Chem::MolecularGraph&);
 	MAKE_FUNCTION_WRAPPER1(double, calcMass, CDPL::Chem::MolecularGraph&);
 	MAKE_FUNCTION_WRAPPER1(double, calcXLogP, CDPL::Chem::MolecularGraph&);
@@ -154,6 +154,7 @@ namespace
 
 	MAKE_FUNCTION_WRAPPER3(void, calcTopologicalDistanceMatrix, CDPL::Chem::MolecularGraph&, CDPL::Math::ULMatrix&, std::size_t)
 	MAKE_FUNCTION_WRAPPER3(void, calcTopologicalDistanceMatrix, CDPL::Chem::MolecularGraph&, CDPL::Math::SparseULMatrix&, std::size_t)
+	MAKE_FUNCTION_WRAPPER3(std::size_t, getRotatableBondCount, CDPL::Chem::MolecularGraph&, bool, bool);
 
 	MAKE_FUNCTION_WRAPPER5(CDPL::Base::uint64, calcHashCode, CDPL::Chem::MolecularGraph&,
 	 					   unsigned int, unsigned int, bool, bool)
@@ -373,7 +374,6 @@ void CDPLPythonChem::exportMolecularGraphFunctions()
 	python::def("getBondCount", &getBondCountWrapper2, (python::arg("molgraph"), python::arg("order")));
 	python::def("getHydrogenBondCount", &getHydrogenBondCountWrapper1, python::arg("molgraph"));
 	python::def("getChainBondCount", &getChainBondCountWrapper1, python::arg("molgraph"));
-	python::def("getRotatableBondCount", &getRotatableBondCountWrapper1, python::arg("molgraph"));
 	python::def("getComponentCount", &getComponentCountWrapper1, python::arg("molgraph"));
 	python::def("calcMass", &calcMassWrapper1, python::arg("molgraph"));
 	python::def("calcMassComposition", &calcMassCompositionWrapper2, 
@@ -386,6 +386,8 @@ void CDPLPythonChem::exportMolecularGraphFunctions()
 	python::def("calcRuleOfFiveScore", &calcRuleOfFiveScoreWrapper1, python::arg("molgraph"));
 	python::def("calcMeanPolarizability", &calcMeanPolarizabilityWrapper1, python::arg("molgraph"));
 	python::def("calcMolecularComplexity", &calcMolecularComplexityWrapper1, python::arg("molgraph"));
+	python::def("getRotatableBondCount", &getRotatableBondCountWrapper3, 
+				(python::arg("molgraph"), python::arg("inc_h_rotors"), python::arg("inc_amide_bonds")));
 
 	python::def("generateINCHI", &generateINCHIWrapper, 
 				(python::arg("molgraph"), python::arg("options") = Chem::ControlParameterDefault::INCHI_OUTPUT_OPTIONS,
@@ -429,6 +431,7 @@ void CDPLPythonChem::exportMolecularGraphFunctions()
 	EXPORT_MOLGRAPH_FUNCS(MDLChiralFlag, flag)
 	EXPORT_MOLGRAPH_FUNCS(StoichiometricNumber, num)
 	EXPORT_MOLGRAPH_FUNCS(ConformationIndex, index)
+	EXPORT_MOLGRAPH_FUNCS(HashCode, hash_code)
 	EXPORT_MOLGRAPH_FUNCS_COPY_REF(MDLComment, comment)
 	EXPORT_MOLGRAPH_FUNCS_COPY_REF(StructureData, data)
 	EXPORT_MOLGRAPH_FUNCS_COPY_REF(TopologicalDistanceMatrix, mtx)

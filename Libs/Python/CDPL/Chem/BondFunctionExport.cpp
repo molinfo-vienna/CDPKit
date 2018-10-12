@@ -106,16 +106,17 @@ namespace
 	MAKE_FUNCTION_WRAPPER2(MatchExpressionPtr, buildMatchExpression, CDPL::Chem::Bond&, CDPL::Chem::MolecularGraph&);
 	MAKE_FUNCTION_WRAPPER2(unsigned int, calcCIPConfiguration, CDPL::Chem::Bond&, CDPL::Chem::MolecularGraph&);
 	MAKE_FUNCTION_WRAPPER2(std::size_t, getNumContainingSSSRRings, CDPL::Chem::Bond&, CDPL::Chem::MolecularGraph&);
-	MAKE_FUNCTION_WRAPPER2(bool, isRotatable, CDPL::Chem::Bond&, CDPL::Chem::MolecularGraph&);
 	MAKE_FUNCTION_WRAPPER2(unsigned int, perceiveSybylType, CDPL::Chem::Bond&, CDPL::Chem::MolecularGraph&);
 
 	MAKE_FUNCTION_WRAPPER3(void, getContainingFragments, CDPL::Chem::Bond&, CDPL::Chem::FragmentList&, CDPL::Chem::FragmentList&);
 	MAKE_FUNCTION_WRAPPER3(double, calcPolarizability, CDPL::Chem::Bond&, CDPL::Chem::MolecularGraph&, double);
 	MAKE_FUNCTION_WRAPPER3(bool, isInRingOfSize, CDPL::Chem::Bond&, CDPL::Chem::MolecularGraph&, std::size_t);
 	MAKE_FUNCTION_WRAPPER3(bool, isInFragmentOfSize, CDPL::Chem::Bond&, CDPL::Chem::FragmentList&, std::size_t);
-	MAKE_FUNCTION_WRAPPER3(bool, isStereoCenter, CDPL::Chem::Bond&, CDPL::Chem::MolecularGraph&, std::size_t);
+	MAKE_FUNCTION_WRAPPER3(unsigned int, calcCIPConfiguration, CDPL::Chem::Bond&, CDPL::Chem::MolecularGraph&, const CDPL::Chem::AtomPriorityFunction&);
 
-	MAKE_FUNCTION_WRAPPER4(bool, checkBondConfiguration, CDPL::Chem::Bond&, CDPL::Chem::MolecularGraph&, const CDPL::Chem::StereoDescriptor&, const CDPL::Math::Vector3DArray&);
+	MAKE_FUNCTION_WRAPPER4(bool, isStereoCenter, CDPL::Chem::Bond&, CDPL::Chem::MolecularGraph&, std::size_t, bool);
+	MAKE_FUNCTION_WRAPPER4(unsigned int, calcBondConfiguration, CDPL::Chem::Bond&, CDPL::Chem::MolecularGraph&, const CDPL::Chem::StereoDescriptor&, const CDPL::Math::Vector3DArray&);
+	MAKE_FUNCTION_WRAPPER4(bool, isRotatable, CDPL::Chem::Bond&, CDPL::Chem::MolecularGraph&, bool, bool);
 
 	MAKE_FUNCTION_WRAPPER5(CDPL::Chem::StereoDescriptor, calcStereoDescriptor, CDPL::Chem::Bond&, CDPL::Chem::MolecularGraph&, std::size_t, std::size_t, bool);
 
@@ -151,10 +152,11 @@ void CDPLPythonChem::exportBondFunctions()
 				(python::arg("bond"), python::arg("molgraph")));
 	python::def("getNumContainingSSSRRings", &getNumContainingSSSRRingsWrapper2, 
 				(python::arg("bond"), python::arg("molgraph")));
-	python::def("isRotatable", &isRotatableWrapper2, (python::arg("bond"), python::arg("molgraph")));
 	python::def("perceiveSybylType", &perceiveSybylTypeWrapper2,
 				(python::arg("bond"), python::arg("molgraph")));
 
+	python::def("calcCIPConfiguration", &calcCIPConfigurationWrapper3, 
+				(python::arg("bond"), python::arg("molgraph"), python::arg("cip_pri_func")));
 	python::def("getContainingFragments", &getContainingFragmentsWrapper3,
 				(python::arg("bond"), python::arg("frag_list"), python::arg("cont_frag_list")),
 				python::with_custodian_and_ward<3, 2>());
@@ -164,11 +166,13 @@ void CDPLPythonChem::exportBondFunctions()
 				(python::arg("bond"), python::arg("molgraph"), python::arg("size")));
 	python::def("isInFragmentOfSize", &isInFragmentOfSizeWrapper3, 
 				(python::arg("bond"), python::arg("frag_list"), python::arg("size")));
-	python::def("isStereoCenter", &isStereoCenterWrapper3, 
-				(python::arg("bond"), python::arg("molgraph"), python::arg("min_ring_size") = 8));
 
-	python::def("checkBondConfiguration", &checkBondConfigurationWrapper4,
+	python::def("isStereoCenter", &isStereoCenterWrapper4, 
+				(python::arg("bond"), python::arg("molgraph"), python::arg("min_ring_size") = 8, python::arg("check_cip_sym") = true));
+	python::def("calcBondConfiguration", &calcBondConfigurationWrapper4,
 				(python::arg("bond"), python::arg("molgraph"), python::arg("descr"), python::arg("coords")));
+	python::def("isRotatable", &isRotatableWrapper4, 
+				(python::arg("bond"), python::arg("molgraph"), python::arg("inc_h_rotors"), python::arg("inc_amide_bonds")));
 
 	python::def("calcStereoDescriptor", &calcStereoDescriptorWrapper5, 
 				(python::arg("bond"), python::arg("molgraph"), python::arg("dim") = 1, 

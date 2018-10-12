@@ -77,7 +77,7 @@ void CDPLPythonForceField::exportMMFF94AtomTypePropertyTable()
 		.def("assign", CDPLPythonBase::copyAssOp(&ForceField::MMFF94AtomTypePropertyTable::operator=), 
 			 (python::arg("self"), python::arg("table")), python::return_self<>())
 		.add_property("numEntries", &ForceField::MMFF94AtomTypePropertyTable::getNumEntries)
-		.add_property("entries", &getEntries)
+		.add_property("entries", python::make_function(&getEntries))
 		.def("set", &ForceField::MMFF94AtomTypePropertyTable::set, python::arg("table"))
 		.staticmethod("set")
 		.def("get", &ForceField::MMFF94AtomTypePropertyTable::get, python::return_value_policy<python::copy_const_reference>())

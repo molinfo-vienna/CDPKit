@@ -30,6 +30,9 @@
 
 namespace CDPLPythonConfGen
 {
+
+	void exportFragmentTypes();
+	void exportForceFieldTypes();
 }
 
 #endif // CDPL_PYTHON_CONFGEN_NAMESPACEEXPORTS_HPP

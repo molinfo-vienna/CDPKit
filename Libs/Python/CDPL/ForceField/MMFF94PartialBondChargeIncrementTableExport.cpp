@@ -76,7 +76,7 @@ void CDPLPythonForceField::exportMMFF94PartialBondChargeIncrementTable()
 		.def("assign", CDPLPythonBase::copyAssOp(&ForceField::MMFF94PartialBondChargeIncrementTable::operator=), 
 			 (python::arg("self"), python::arg("table")), python::return_self<>())
 		.add_property("numEntries", &ForceField::MMFF94PartialBondChargeIncrementTable::getNumEntries)
-		.add_property("entries", &getEntries)
+		.add_property("entries", python::make_function(&getEntries))
 		.def("set", &ForceField::MMFF94PartialBondChargeIncrementTable::set, python::arg("table"))
 		.staticmethod("set")
 		.def("get", &ForceField::MMFF94PartialBondChargeIncrementTable::get, python::return_value_policy<python::copy_const_reference>())

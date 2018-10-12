@@ -32,7 +32,7 @@
 #define CDPL_CHEM_FRAGMENTFUNCTIONS_HPP
 
 #include "CDPL/Chem/APIPrefix.hpp"
-#include "CDPL/Chem/AtomPredicate.hpp"
+#include "CDPL/Chem/AtomPredicateWrapper.hpp"
 
 
 namespace CDPL 

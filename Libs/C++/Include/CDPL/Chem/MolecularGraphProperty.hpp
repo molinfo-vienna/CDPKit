@@ -78,6 +78,8 @@ namespace CDPL
 
 			extern CDPL_CHEM_API const Base::LookupKey STRUCTURE_DATA;
 
+			extern CDPL_CHEM_API const Base::LookupKey HASH_CODE;
+
 			extern CDPL_CHEM_API const Base::LookupKey MDL_USER_INITIALS;
 			extern CDPL_CHEM_API const Base::LookupKey MDL_PROGRAM_NAME;
 			extern CDPL_CHEM_API const Base::LookupKey MDL_TIMESTAMP;

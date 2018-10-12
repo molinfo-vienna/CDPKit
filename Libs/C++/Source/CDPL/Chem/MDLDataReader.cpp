@@ -2492,12 +2492,11 @@ void Chem::MDLDataReader::readPastCTabV3000BlockEnd(std::istream& is)
 {
 	using namespace MDL;
 
-	std::istringstream line_iss;
-
 	while (true) {
 		readV3000DataLine(is);
 
-		line_iss.str(line);
+		std::istringstream line_iss(line);
+	
 		line_iss >> tmpString;
 
 		if (tmpString != V3000::BLOCK_END_TAG)
@@ -2505,7 +2504,7 @@ void Chem::MDLDataReader::readPastCTabV3000BlockEnd(std::istream& is)
 
 		line_iss >> tmpString;
 
-		if (tmpString == MOLFile::CTab::V3000::BLOCK_TYPE_KEY)
+		if (tmpString == MOLFile::CTab::V3000::BLOCK_TYPE_KEY) 
 			return;
 	}
 }

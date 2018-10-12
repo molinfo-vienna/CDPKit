@@ -47,6 +47,11 @@ using namespace CDPL;
 
 unsigned int Chem::calcCIPConfiguration(const Atom& atom, const MolecularGraph& molgraph)
 {
+	return calcCIPConfiguration(atom, molgraph, &getCIPPriority);
+}
+
+unsigned int Chem::calcCIPConfiguration(const Atom& atom, const MolecularGraph& molgraph, const AtomPriorityFunction& cip_pri_func)
+{
     std::size_t num_bonds = getExplicitBondCount(atom, molgraph);
 
     if (num_bonds < 3 || num_bonds > 4)
@@ -72,8 +77,8 @@ unsigned int Chem::calcCIPConfiguration(const Atom& atom, const MolecularGraph& 
 
     std::sort(nbr_atoms, nbr_atoms + num_bonds,
 			  boost::bind(std::greater<std::size_t>(),
-						  boost::bind(&getCIPPriority, boost::bind(Util::Dereferencer<const Atom*, const Atom&>(), _1)), 
-						  boost::bind(&getCIPPriority, boost::bind(Util::Dereferencer<const Atom*, const Atom&>(), _2))));
+						  boost::bind(cip_pri_func, boost::bind(Util::Dereferencer<const Atom*, const Atom&>(), _1)), 
+						  boost::bind(cip_pri_func, boost::bind(Util::Dereferencer<const Atom*, const Atom&>(), _2))));
 
     std::size_t cip_pri1 = getCIPPriority(*nbr_atoms[0]);
     std::size_t cip_pri2 = getCIPPriority(*nbr_atoms[1]);

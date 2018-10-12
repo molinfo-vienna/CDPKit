@@ -29,7 +29,7 @@
 
 #include <cstddef>
 
-#include "CDPL/Base/IntTypes.hpp"
+#include "CDPL/Base/IntegerTypes.hpp"
 #include "CDPL/Internal/CDFFormatData.hpp"
 
 
@@ -105,6 +105,7 @@ namespace CDPL
 				const unsigned int STOICHIOMETRIC_NUMBER    = 3;
 				const unsigned int CONFORMATION_INDEX       = 4;
 				const unsigned int STRUCTURE_DATA           = 5;
+				const unsigned int HASH_CODE                = 6;
 			}
 
 			namespace ReactionProperty

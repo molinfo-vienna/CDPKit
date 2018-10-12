@@ -168,6 +168,19 @@ namespace CDPL
 		CDPL_CHEM_API bool hasConformationIndex(const MolecularGraph& molgraph);
 
 
+		CDPL_CHEM_API Base::uint64 getHashCode(const MolecularGraph& molgraph);
+
+		CDPL_CHEM_API void setHashCode(MolecularGraph& molgraph, Base::uint64 hash_code);
+
+		CDPL_CHEM_API void clearHashCode(MolecularGraph& molgraph);
+
+		CDPL_CHEM_API bool hasHashCode(const MolecularGraph& molgraph);
+
+		CDPL_CHEM_API Base::uint64 calcHashCode(const MolecularGraph& molgraph, unsigned int atom_flags = AtomPropertyFlag::DEFAULT, 
+												unsigned int bond_flags = BondPropertyFlag::DEFAULT,
+												bool global_stereo = true, bool ord_h_deplete = true);
+
+
 		CDPL_CHEM_API void extractReactionCenter(const MolecularGraph& molgraph, Fragment& rxn_center);
 
 
@@ -394,7 +407,7 @@ namespace CDPL
 
 		CDPL_CHEM_API std::size_t getChainBondCount(const MolecularGraph& molgraph);
 
-		CDPL_CHEM_API std::size_t getRotatableBondCount(const MolecularGraph& molgraph);
+		CDPL_CHEM_API std::size_t getRotatableBondCount(const MolecularGraph& molgraph, bool inc_h_rotors, bool inc_amide_bonds);
 
 	
 		CDPL_CHEM_API double calcMass(const MolecularGraph& molgraph);
@@ -435,10 +448,6 @@ namespace CDPL
 										std::size_t dim = 0);
 
 		CDPL_CHEM_API int generateINCHIKey(const MolecularGraph& molgraph, std::string& inchi_key);
-
-		CDPL_CHEM_API Base::uint64 calcHashCode(const MolecularGraph& molgraph, unsigned int atom_flags = AtomPropertyFlag::DEFAULT, 
-												unsigned int bond_flags = BondPropertyFlag::DEFAULT,
-												bool global_stereo = true, bool ord_h_deplete = true);
 
 
 		CDPL_CHEM_API double calcXLogP(const MolecularGraph& molgraph);

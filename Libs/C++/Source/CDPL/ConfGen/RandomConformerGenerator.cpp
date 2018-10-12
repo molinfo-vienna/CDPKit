@@ -28,45 +28,47 @@
 
 #include "CDPL/ConfGen/RandomConformerGenerator.hpp"
 #include "CDPL/ForceField/InteractionType.hpp"
+#include "CDPL/Chem/MolecularGraph.hpp"
 
 
 using namespace CDPL;
 
 
-const std::size_t ConfGen::RandomConformerGenerator::DEF_MAX_NUM_TRIALS;
-const std::size_t ConfGen::RandomConformerGenerator::DEF_MAX_NUM_NINIMIZATION_STEPS;
-const std::size_t ConfGen::RandomConformerGenerator::DEF_TIMEOUT;
-const double      ConfGen::RandomConformerGenerator::DEF_MINIMIZATION_STOP_GRADIENT_NORM = 0.1;
+const unsigned int ConfGen::RandomConformerGenerator::DEF_FORCE_FIELD_TYPE;
+const std::size_t  ConfGen::RandomConformerGenerator::DEF_MAX_NUM_TRIALS;
+const std::size_t  ConfGen::RandomConformerGenerator::DEF_MAX_NUM_MINIMIZATION_STEPS;
+const std::size_t  ConfGen::RandomConformerGenerator::DEF_TIMEOUT;
+const double       ConfGen::RandomConformerGenerator::DEF_MINIMIZATION_STOP_GRADIENT_NORM = 0.1;
 
 
 ConfGen::RandomConformerGenerator::RandomConformerGenerator(): 
-    molGraph(0), maxNumTrials(DEF_MAX_NUM_TRIALS), maxNumMinSteps(DEF_MAX_NUM_NINIMIZATION_STEPS), 
-	minStopGradNorm(DEF_MINIMIZATION_STOP_GRADIENT_NORM), timeout(DEF_TIMEOUT), elstaticMMFF94Terms(false), 
-	energy(0.0), energyMinimizer(boost::ref(mmff94EnergyCalc), boost::ref(mmff94GradientCalc))
+    molGraph(0), maxNumTrials(DEF_MAX_NUM_TRIALS), maxNumMinSteps(DEF_MAX_NUM_MINIMIZATION_STEPS), 
+	minStopGradNorm(DEF_MINIMIZATION_STOP_GRADIENT_NORM), timeout(DEF_TIMEOUT), forceFieldType(DEF_FORCE_FIELD_TYPE), 
+	strictAtomTyping(true), energy(0.0), energyMinimizer(boost::ref(mmff94EnergyCalc), boost::ref(mmff94GradientCalc))
 {
-    raw3DStructureGen.calculateHydrogenPositions(true);
-    raw3DStructureGen.regardAtomConfiguration(true);
-    raw3DStructureGen.regardBondConfiguration(true);
+    rawCoordsGenerator.calculateHydrogenPositions(true);
+    rawCoordsGenerator.regardAtomConfiguration(true);
+    rawCoordsGenerator.regardBondConfiguration(true);
 }
 
 void ConfGen::RandomConformerGenerator::regardAtomConfiguration(bool regard)
 {
-    raw3DStructureGen.regardAtomConfiguration(regard);
+    rawCoordsGenerator.regardAtomConfiguration(regard);
 }
 
 bool ConfGen::RandomConformerGenerator::atomConfigurationRegarded() const
 {
-    return raw3DStructureGen.atomConfigurationRegarded();
+    return rawCoordsGenerator.atomConfigurationRegarded();
 }
 
 void ConfGen::RandomConformerGenerator::regardBondConfiguration(bool regard)
 {
-    raw3DStructureGen.regardBondConfiguration(regard);
+    rawCoordsGenerator.regardBondConfiguration(regard);
 }
 
 bool ConfGen::RandomConformerGenerator::bondConfigurationRegarded() const
 {
-    return raw3DStructureGen.bondConfigurationRegarded();
+    return rawCoordsGenerator.bondConfigurationRegarded();
 }
 
 void ConfGen::RandomConformerGenerator::setMaxNumTrials(std::size_t max_num)
@@ -111,45 +113,50 @@ std::size_t ConfGen::RandomConformerGenerator::getTimeout() const
 
 void ConfGen::RandomConformerGenerator::performStrictMMFF94AtomTyping(bool strict)
 {
-	mmff94Parameterizer.performStrictAtomTyping(strict);
+	strictAtomTyping = strict;
 }
 
 bool ConfGen::RandomConformerGenerator::strictMMFF94AtomTypingPerformed() const
 {
-	return mmff94Parameterizer.strictAtomTypingPerformed();
+	return strictAtomTyping;
 }
 
-void ConfGen::RandomConformerGenerator::useDynamicMMFF94Parameters()
+void ConfGen::RandomConformerGenerator::setForceFieldType(unsigned int type)
 {
-	mmff94Parameterizer.setDynamicParameterDefaults();
-}
-
-void ConfGen::RandomConformerGenerator::useStaticMMFF94Parameters()
-{
-	mmff94Parameterizer.setStaticParameterDefaults();
-}
-
-void ConfGen::RandomConformerGenerator::enableElectrostaticMMFF94Terms(bool enable)
-{
-	elstaticMMFF94Terms = enable;
+	forceFieldType = type;
 }
 	
-bool ConfGen::RandomConformerGenerator::electrostaticMMFF94TermsEnabled() const
+unsigned int ConfGen::RandomConformerGenerator::getForceFieldType() const
 {
-	return elstaticMMFF94Terms;
+	return forceFieldType;
 }
-	
+
 void ConfGen::RandomConformerGenerator::setup(const Chem::MolecularGraph& molgraph) 
 {
     molGraph = &molgraph;
-    
-    mmff94Parameterizer.parameterize(molgraph, mmff94ParamData, 
-									 elstaticMMFF94Terms ? ForceField::InteractionType::ALL :
+
+	if (forceFieldType == ForceFieldType::MMFF94 || forceFieldType == ForceFieldType::MMFF94_NO_ESTAT)
+		mmff94Parameterizer.setDynamicParameterDefaults();
+	else
+		mmff94Parameterizer.setStaticParameterDefaults();
+
+	mmff94Parameterizer.performStrictAtomTyping(strictAtomTyping);
+	mmff94Parameterizer.parameterize(molgraph, mmff94ParamData, 
+									 forceFieldType == ForceFieldType::MMFF94 || forceFieldType == ForceFieldType::MMFF94S ?
+									 ForceField::InteractionType::ALL :
 									 ForceField::InteractionType::ALL ^ ForceField::InteractionType::ELECTROSTATIC);
+
+    unsigned int int_types = (forceFieldType == ForceFieldType::MMFF94 || forceFieldType == ForceFieldType::MMFF94S ?
+							  ForceField::InteractionType::ALL :
+							  ForceField::InteractionType::ALL ^ ForceField::InteractionType::ELECTROSTATIC);
+
+	mmff94EnergyCalc.setEnabledInteractionTypes(int_types);
     mmff94EnergyCalc.setup(mmff94ParamData);
+
+	mmff94GradientCalc.setEnabledInteractionTypes(int_types);
     mmff94GradientCalc.setup(mmff94ParamData, molgraph.getNumAtoms());
 
-    raw3DStructureGen.setup(molgraph, mmff94ParamData);
+    rawCoordsGenerator.setup(molgraph, mmff94ParamData);
 
     gradient.resize(molgraph.getNumAtoms());
 }
@@ -165,14 +172,14 @@ ConfGen::RandomConformerGenerator::Status ConfGen::RandomConformerGenerator::gen
 		if (timeoutExceeded())
 			return TIMEOUT_EXCEEDED;
 
-		if (!raw3DStructureGen.generate(coords)) 
+		if (!rawCoordsGenerator.generate(coords)) 
 			continue;
 		
 		energyMinimizer.setup(coords, gradient);
 		energy = 0.0;
 
 		for (std::size_t j = 0; maxNumMinSteps == 0 || j < maxNumMinSteps; j++) {
-			if (timeoutExceeded())
+			if ((j % 10) == 0 && timeoutExceeded())
 				return TIMEOUT_EXCEEDED;
 
 			BFGSMinimizer::Status status = energyMinimizer.iterate(energy, coords, gradient);
@@ -184,10 +191,10 @@ ConfGen::RandomConformerGenerator::Status ConfGen::RandomConformerGenerator::gen
 				break;
 		}
 
-		if (raw3DStructureGen.atomConfigurationRegarded() && !raw3DStructureGen.checkAtomConfigurations(coords)) 
+		if (rawCoordsGenerator.atomConfigurationRegarded() && !rawCoordsGenerator.checkAtomConfigurations(coords)) 
 			continue;
 		
-		if (raw3DStructureGen.bondConfigurationRegarded() && !raw3DStructureGen.checkBondConfigurations(coords)) 
+		if (rawCoordsGenerator.bondConfigurationRegarded() && !rawCoordsGenerator.checkBondConfigurations(coords)) 
 			continue;
 		
 		return SUCCESS;

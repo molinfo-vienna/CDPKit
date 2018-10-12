@@ -37,13 +37,21 @@ BOOST_PYTHON_MODULE(_confgen)
 	using namespace CDPLPythonConfGen;
 
 	exportDGConstraintGenerator();
-	exportRaw3DStructureGenerator();
+	exportRaw3DCoordinatesGenerator();
+	exportFragmentList();
+	exportFragmentLibraryEntry();
+	exportFragmentLibrary();
 
 #if defined(HAVE_BOOST_TIMER) && defined(HAVE_BOOST_CHRONO)
 
 	exportRandomConformerGenerator();
 
 #endif // defined(HAVE_BOOST_TIMER) && defined(HAVE_BOOST_CHRONO)
+
+	exportFragmentTypes();
+	exportForceFieldTypes();
+
+	exportUtilityFunctions();
 
 	registerToPythonConverters();
 	registerFromPythonConverters();

@@ -43,7 +43,7 @@
 #include "CDPL/Chem/Molecule.hpp"
 #include "CDPL/Chem/TautomerizationRule.hpp"
 #include "CDPL/Chem/HashCodeCalculator.hpp"
-#include "CDPL/Base/IntTypes.hpp"
+#include "CDPL/Base/IntegerTypes.hpp"
 
 
 namespace CDPL 

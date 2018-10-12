@@ -40,7 +40,7 @@
 #include <boost/iterator/transform_iterator.hpp>
 
 #include "CDPL/ForceField/APIPrefix.hpp"
-#include "CDPL/Base/IntTypes.hpp"
+#include "CDPL/Base/IntegerTypes.hpp"
 
 
 namespace CDPL 

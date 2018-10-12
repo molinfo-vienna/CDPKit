@@ -66,7 +66,7 @@ namespace CDPL
     {
 
 		/**
-		 * \addtogroup CDPL_CONFGEN_UTILITIES
+		 * \addtogroup CDPL_CONFGEN_HELPERS
 		 * @{
 		 */
 
@@ -95,6 +95,9 @@ namespace CDPL
 			void regardBondConfiguration(bool regard);
 
 			bool bondConfigurationRegarded() const;
+
+			void addAtomStereoCenter(const Chem::Atom& atom, const Chem::StereoDescriptor& descr);
+			void addBondStereoCenter(const Chem::Bond& bond, const Chem::StereoDescriptor& descr);
 
 			void setup(const Chem::MolecularGraph& molgraph);
 			void setup(const Chem::MolecularGraph& molgraph, const ForceField::MMFF94InteractionData& ia_data);

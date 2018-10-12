@@ -161,6 +161,73 @@ ConfGen::DGConstraintGenerator::getBondStereoCenterDataEnd() const
 	return bondStereoData.end();
 }
 
+void ConfGen::DGConstraintGenerator::addAtomStereoCenter(const Chem::Atom& atom, const Chem::StereoDescriptor& descr)
+{
+	using namespace Chem;
+
+	if (descr.getConfiguration() != AtomConfiguration::R && descr.getConfiguration() != AtomConfiguration::S)
+		return;
+
+	if (!descr.isValid(atom))
+		return;
+
+	std::size_t num_ref_atoms = descr.getNumReferenceAtoms();
+	
+	for (std::size_t i = 0; i < num_ref_atoms; i++) {
+		const Atom* ref_atom = descr.getReferenceAtoms()[i];
+
+		if (!molGraph->containsAtom(*ref_atom)) 
+			return;
+
+		if (noHydrogens)
+			hAtomMask.reset(molGraph->getAtomIndex(*ref_atom));
+	}
+
+	atomStereoData.push_back(StereoCenterData(molGraph->getAtomIndex(atom), descr));
+}
+
+void ConfGen::DGConstraintGenerator::addBondStereoCenter(const Chem::Bond& bond, const Chem::StereoDescriptor& descr)
+{
+	using namespace Chem;
+	
+	if (descr.getConfiguration() != BondConfiguration::CIS && descr.getConfiguration() != BondConfiguration::TRANS)
+		return;
+
+	if (!molGraph->containsBond(bond))
+		return;
+
+	if (!molGraph->containsAtom(bond.getBegin()))
+		return;
+
+	if (!molGraph->containsAtom(bond.getEnd()))
+		return;
+
+	if (!descr.isValid(bond))
+		return;
+
+	if (!molGraph->containsAtom(*descr.getReferenceAtoms()[0]) || !molGraph->containsAtom(*descr.getReferenceAtoms()[3]))
+		return;
+
+	if (noHydrogens) {
+		for (std::size_t i = 0; i < 2; i++) {
+			const Atom& atom = bond.getAtom(i);
+			Atom::ConstBondIterator b_it = atom.getBondsBegin();
+
+			for (Atom::ConstAtomIterator a_it = atom.getAtomsBegin(), a_end = atom.getAtomsEnd(); a_it != a_end; ++a_it, ++b_it) {
+				if (!molGraph->containsBond(*b_it))
+					continue;
+
+				if (!molGraph->containsAtom(*a_it))
+					continue;
+
+				hAtomMask.reset(molGraph->getAtomIndex(*a_it));
+			}
+		}
+	}
+
+	bondStereoData.push_back(StereoCenterData(molGraph->getBondIndex(bond), descr));
+}
+
 void CDPL::ConfGen::DGConstraintGenerator::setup(const Chem::MolecularGraph& molgraph, 
 												 const ForceField::MMFF94InteractionData& ia_data)
 {
@@ -727,35 +794,11 @@ void ConfGen::DGConstraintGenerator::extractAtomStereoCenterData()
 {
 	using namespace Chem;
 
-	std::size_t atom_idx = 0;
-
-	for (MolecularGraph::ConstAtomIterator it = molGraph->getAtomsBegin(), end = molGraph->getAtomsEnd(); it != end; ++it, atom_idx++) {
+	for (MolecularGraph::ConstAtomIterator it = molGraph->getAtomsBegin(), end = molGraph->getAtomsEnd(); it != end; ++it) {
 		const Atom& atom = *it;
 		const StereoDescriptor& descr = getStereoDescriptor(atom);
 
-		if (descr.getConfiguration() != AtomConfiguration::R && descr.getConfiguration() != AtomConfiguration::S)
-			continue;
-
-		if (!descr.isValid(atom))
-			continue;
-
-		std::size_t num_ref_atoms = descr.getNumReferenceAtoms();
-		bool valid = true;
-
-		for (std::size_t i = 0; i < num_ref_atoms; i++) {
-			const Atom* ref_atom = descr.getReferenceAtoms()[i];
-
-			if (!molGraph->containsAtom(*ref_atom)) {
-				valid = false;
-				break;
-			}
-
-			if (noHydrogens)
-				hAtomMask.reset(molGraph->getAtomIndex(*ref_atom));
-		}
-
-		if (valid)
-			atomStereoData.push_back(StereoCenterData(atom_idx, descr));
+		addAtomStereoCenter(atom, descr);
 	}
 }
 
@@ -763,45 +806,11 @@ void ConfGen::DGConstraintGenerator::extractBondStereoCenterData()
 {
 	using namespace Chem;
 
-	std::size_t bond_idx = 0;
-
-	for (MolecularGraph::ConstBondIterator it = molGraph->getBondsBegin(), end = molGraph->getBondsEnd(); it != end; ++it, bond_idx++) {
+	for (MolecularGraph::ConstBondIterator it = molGraph->getBondsBegin(), end = molGraph->getBondsEnd(); it != end; ++it) {
 		const Bond& bond = *it;
 		const StereoDescriptor& descr = getStereoDescriptor(bond);
 
-		if (descr.getConfiguration() != BondConfiguration::CIS && descr.getConfiguration() != BondConfiguration::TRANS)
-			continue;
-
-		if (!molGraph->containsAtom(bond.getBegin()))
-			continue;
-
-		if (!molGraph->containsAtom(bond.getEnd()))
-			continue;
-
-		if (!descr.isValid(bond))
-			continue;
-
-		if (!molGraph->containsAtom(*descr.getReferenceAtoms()[0]) || !molGraph->containsAtom(*descr.getReferenceAtoms()[3]))
-			continue;
-
-		if (noHydrogens) {
-			for (std::size_t i = 0; i < 2; i++) {
-				const Atom& atom = bond.getAtom(i);
-				Atom::ConstBondIterator b_it = atom.getBondsBegin();
-
-				for (Atom::ConstAtomIterator a_it = atom.getAtomsBegin(), a_end = atom.getAtomsEnd(); a_it != a_end; ++a_it, ++b_it) {
-					if (!molGraph->containsBond(*b_it))
-						continue;
-
-					if (!molGraph->containsAtom(*a_it))
-						continue;
-
-					hAtomMask.reset(molGraph->getAtomIndex(*a_it));
-				}
-			}
-		}
-
-		bondStereoData.push_back(StereoCenterData(bond_idx, descr));
+		addBondStereoCenter(bond, descr);
 	}
 }
 

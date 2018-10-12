@@ -30,6 +30,9 @@
     [#5:2]                                               CR
 
 *   Carbon 
+    [c:1]                                                CB      SPECIAL ENTRY FOR CONFGEN: CARBON AS IN BENZENE, PYRROLE
+    [#6X2:1]                                             CSP     SPECIAL ENTRY FOR CONFGEN: ACETYLENIC CARBON
+
     [#6X4:1]                                             CR      ALKYL CARBON, SP3
     [#6X3:1]                                             CSP2    GENERIC SP2 CARBON
     [#6X3:1]=[#6]                                        C=C     VINYLIC CARBON, SP2
@@ -59,7 +62,6 @@
     [#6X3:1](=[#7X3+])-[#7X3+0]                          CNN+    C IN +N=C-N RESONANCE STRUCTURES
     [#6X3:1](=[#7X3+])(-[#7X3+0])-[#7X3]                 CGD+    GUANIDINIUM CARBON
     [#6X1:1]#[#7]                                        C%      ISONITRILE CARBON
-*   [c:1]                                                CB      CARBON AS IN BENZENE, PYRROLE
 *   [c:1]1:[n,s,o]:a:a:a1                                C5      GENERAL CARBON IN 5-MEMBERED HETEROAROMATIC RING
 *   [c:1]1:a:[n,s,o]:a:a1                                C5      GENERAL CARBON IN 5-MEMBERED HETEROAROMATIC RING
 *   [c:1]1:[n,s,o]:a:a:a1                                C5A     ALPHA CARBON IN 5-MEMBERED HETEROAROMATIC RING
@@ -115,6 +117,8 @@
 *   [o:1]                                                OFUR    AROMATIC OXYGEN AS IN FURAN
 
 *   Nitrogen
+    [n:1]                                                NPYD    SPECIAL ENTRY FOR CONFGEN: NITROGEN, AS IN PYRIDINE
+
     [#7X3:1]-[#7]=[#6]                                   NN=C    NITROGEN IN N-N=C
     [#7X3v3:1]                                           NR      NITROGEN IN ALIPHATIC AMINES
     [#7X4v4+:1]                                          NR+     QUATERNARY NITROGEN, SP3, POSITIVELY CHARGED

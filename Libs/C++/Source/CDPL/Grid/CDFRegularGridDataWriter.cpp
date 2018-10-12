@@ -30,7 +30,7 @@
 
 #include <boost/numeric/conversion/cast.hpp>
 
-#include "CDPL/Base/IntTypes.hpp"
+#include "CDPL/Base/IntegerTypes.hpp"
 #include "CDPL/Grid/ControlParameterFunctions.hpp"
 
 #include "CDFRegularGridDataWriter.hpp"

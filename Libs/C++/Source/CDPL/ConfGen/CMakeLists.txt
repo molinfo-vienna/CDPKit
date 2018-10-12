@@ -2,13 +2,18 @@ INCLUDE_DIRECTORIES("${CMAKE_CURRENT_SOURCE_DIR}")
 
 SET(cdpl-confgen_LIB_SRCS
     DGConstraintGenerator.cpp
-    Raw3DStructureGenerator.cpp
+    Raw3DCoordinatesGenerator.cpp
+    FragmentList.cpp
+    FragmentLibraryEntry.cpp
+    FragmentLibrary.cpp
+    UtilityFunctions.cpp
    )
 
 IF(Boost_TIMER_FOUND AND Boost_CHRONO_FOUND)
    SET(cdpl-confgen_LIB_SRCS
        ${cdpl-confgen_LIB_SRCS}
        RandomConformerGenerator.cpp
+       FragmentConformerGenerator.cpp
       )	  
 
    LINK_LIBRARIES(${Boost_TIMER_LIBRARY} ${Boost_CHRONO_LIBRARY})	

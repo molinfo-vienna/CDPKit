@@ -246,17 +246,13 @@ Chem::StereoDescriptor Chem::calcStereoDescriptor(const Atom& atom, const Molecu
 	return makeStereoDescriptor(AtomConfiguration::EITHER, atom, molgraph);
 }
 
-bool Chem::checkAtomConfiguration(const Atom& atom, const MolecularGraph& molgraph, const StereoDescriptor& descr, const Math::Vector3DArray& coords)
+unsigned int Chem::calcAtomConfiguration(const Atom& atom, const MolecularGraph& molgraph, 
+										 const StereoDescriptor& descr, const Math::Vector3DArray& coords) 
 {
 	std::size_t num_ref_atoms = descr.getNumReferenceAtoms();
 
 	if (num_ref_atoms < 3)
-		return true;
-
-	unsigned int config = descr.getConfiguration();
-
-	if (config != AtomConfiguration::R && config != AtomConfiguration::S)
-		return true;
+		return AtomConfiguration::NONE;
 
 	const Math::Vector3D& atom1_coords = coords[molgraph.getAtomIndex(*descr.getReferenceAtoms()[0])];
 	const Math::Vector3D& atom2_coords = coords[molgraph.getAtomIndex(*descr.getReferenceAtoms()[1])];
@@ -266,10 +262,13 @@ bool Chem::checkAtomConfiguration(const Atom& atom, const MolecularGraph& molgra
 	double vol = innerProd(crossProd(atom4_coords - atom2_coords, atom4_coords - atom1_coords), 
 						   atom4_coords - atom3_coords); 
 
-	if (config == AtomConfiguration::S)
-		return (vol > 0.0);
+	if (vol > 0.0)
+		return AtomConfiguration::S;
 
-	return (vol < 0.0);
+	if (vol < 0.0)
+		return AtomConfiguration::R;
+
+	return AtomConfiguration::EITHER;
 }
 
 Chem::StereoDescriptor Chem::calcStereoDescriptorFromMDLParity(const Atom& atom, const MolecularGraph& molgraph)

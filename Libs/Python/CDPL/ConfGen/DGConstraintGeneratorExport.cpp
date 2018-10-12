@@ -28,12 +28,29 @@
 
 #include "CDPL/ConfGen/DGConstraintGenerator.hpp"
 #include "CDPL/Chem/MolecularGraph.hpp"
+#include "CDPL/Chem/Atom.hpp"
+#include "CDPL/Chem/Bond.hpp"
 #include "CDPL/ForceField/MMFF94InteractionData.hpp"
 
 #include "Base/ObjectIdentityCheckVisitor.hpp"
 #include "Base/CopyAssOp.hpp"
 
 #include "ClassExports.hpp"
+
+
+namespace
+{
+
+	void addAtomStereoCenter(CDPL::ConfGen::DGConstraintGenerator& gen, CDPL::Chem::Atom& atom, const CDPL::Chem::StereoDescriptor& descr) 
+	{
+		gen.addAtomStereoCenter(atom, descr);
+	}
+
+	void addBondStereoCenter(CDPL::ConfGen::DGConstraintGenerator& gen, CDPL::Chem::Bond& bond, const CDPL::Chem::StereoDescriptor& descr) 
+	{
+		gen.addBondStereoCenter(bond, descr);
+	}
+}
 
 
 void CDPLPythonConfGen::exportDGConstraintGenerator()
@@ -69,6 +86,8 @@ void CDPLPythonConfGen::exportDGConstraintGenerator()
 		.def("bondConfigurationRegarded", &ConfGen::DGConstraintGenerator::bondConfigurationRegarded, python::arg("self"))
 		.def("getExcludedHydrogenMask", &ConfGen::DGConstraintGenerator::getExcludedHydrogenMask, python::arg("self"), 
 			 python::return_internal_reference<>())
+		.def("addAtomStereoCenter", &addAtomStereoCenter, (python::arg("atom"), python::arg("descr")))
+		.def("addBondStereoCenter", &addBondStereoCenter, (python::arg("bond"), python::arg("descr")))
 		.def("setup", static_cast<void (ConfGen::DGConstraintGenerator::*)(const Chem::MolecularGraph&)>
 			 (&ConfGen::DGConstraintGenerator::setup), (python::arg("self"), python::arg("molgraph")))
 		.def("setup", static_cast<void (ConfGen::DGConstraintGenerator::*)(const Chem::MolecularGraph&, const ForceField::MMFF94InteractionData&)>

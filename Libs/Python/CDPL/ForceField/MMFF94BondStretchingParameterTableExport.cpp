@@ -79,7 +79,7 @@ void CDPLPythonForceField::exportMMFF94BondStretchingParameterTable()
 		.def("assign", CDPLPythonBase::copyAssOp(&ForceField::MMFF94BondStretchingParameterTable::operator=), 
 			 (python::arg("self"), python::arg("table")), python::return_self<>())
 		.add_property("numEntries", &ForceField::MMFF94BondStretchingParameterTable::getNumEntries)
-		.add_property("entries", &getEntries)
+		.add_property("entries", python::make_function(&getEntries))
 		.def("set", &ForceField::MMFF94BondStretchingParameterTable::set, python::arg("table"))
 		.staticmethod("set")
 		.def("get", &ForceField::MMFF94BondStretchingParameterTable::get, python::return_value_policy<python::copy_const_reference>())

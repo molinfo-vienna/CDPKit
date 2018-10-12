@@ -163,6 +163,7 @@ namespace
 				.def("setLearningRateDecrement", &GeneratorType::setLearningRateDecrement, (python::arg("self"), python::arg("decr")))
 				.def("getLearningRateDecrement", &GeneratorType::getLearningRateDecrement, python::arg("self"), 
 					 python::return_value_policy<python::copy_const_reference>())
+				.def("setRandomSeed", &GeneratorType::setRandomSeed, (python::arg("self"), python::arg("seed")))
 				.def("generate", 
 					 &GeneratorType::template generate<Math::VectorArray<Math::CVector<ValueType, GeneratorType::COORDS_DIM> > >, 
 					 (python::arg("self"), python::arg("num_points"), python::arg("coords"), python::arg("randomize") = true))

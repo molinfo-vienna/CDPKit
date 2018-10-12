@@ -163,14 +163,14 @@ Base::uint64 Chem::HashCodeCalculator::DefAtomHashSeedFunctor::getAtomConfigHash
 
 	switch (config) {
 
-	case AtomConfiguration::R: 
-		return boost::math::prime(ATOM_CONFIG_R_IDX);
+		case AtomConfiguration::R: 
+			return boost::math::prime(ATOM_CONFIG_R_IDX);
 
-	case AtomConfiguration::S: 
-		return boost::math::prime(ATOM_CONFIG_S_IDX);
+		case AtomConfiguration::S: 
+			return boost::math::prime(ATOM_CONFIG_S_IDX);
 
-	default: 
-		return 1;
+		default: 
+			return 1;
 	}
 }
 
@@ -216,14 +216,14 @@ Base::uint64 Chem::HashCodeCalculator::DefBondHashSeedFunctor::getBondConfigHash
 
 	switch (config) {
 
-	case BondConfiguration::E:
-		return boost::math::prime(BOND_CONFIG_E_IDX);
+		case BondConfiguration::E:
+			return boost::math::prime(BOND_CONFIG_E_IDX);
 
-	case BondConfiguration::Z:
-		return boost::math::prime(BOND_CONFIG_Z_IDX);
+		case BondConfiguration::Z:
+			return boost::math::prime(BOND_CONFIG_Z_IDX);
 
-	default:
-		return 1;
+		default:
+			return 1;
 	}
 }
 

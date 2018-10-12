@@ -297,6 +297,9 @@ void Chem::CDFDataWriter::outputMolGraphProperties(const MolecularGraph& molgrap
 	if (hasStructureData(molgraph))
 		putStringData(CDF::MolecularGraphProperty::STRUCTURE_DATA, getStructureData(molgraph), bbuf);
 
+	if (hasHashCode(molgraph))
+		putIntProperty(CDF::MolecularGraphProperty::HASH_CODE, getHashCode(molgraph), bbuf);
+
 	// CDF::MolecularGraphProperty::MATCH_CONSTRAINTS // TODO
 
 	outputExternalProperties(molgraph, bbuf);

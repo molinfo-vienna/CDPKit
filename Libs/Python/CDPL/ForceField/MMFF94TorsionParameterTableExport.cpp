@@ -81,7 +81,7 @@ void CDPLPythonForceField::exportMMFF94TorsionParameterTable()
 		.def("assign", CDPLPythonBase::copyAssOp(&ForceField::MMFF94TorsionParameterTable::operator=), 
 			 (python::arg("self"), python::arg("table")), python::return_self<>())
 		.add_property("numEntries", &ForceField::MMFF94TorsionParameterTable::getNumEntries)
-		.add_property("entries", &getEntries)
+		.add_property("entries", python::make_function(&getEntries))
 		.def("set", &ForceField::MMFF94TorsionParameterTable::set, (python::arg("table"), python::arg("mmff94s")))
 		.staticmethod("set")
 		.def("get", &ForceField::MMFF94TorsionParameterTable::get, python::arg("mmff94s"),

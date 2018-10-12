@@ -48,7 +48,7 @@
 #include "CDPL/Math/TypeTraits.hpp"
 #include "CDPL/Math/SparseContainerElement.hpp"
 #include "CDPL/Math/LUDecomposition.hpp"
-#include "CDPL/Base/IntTypes.hpp"
+#include "CDPL/Base/IntegerTypes.hpp"
 #include "CDPL/Base/Exceptions.hpp"
 
 

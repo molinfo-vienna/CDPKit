@@ -74,12 +74,12 @@ std::size_t Chem::getChainBondCount(const MolecularGraph& molgraph)
 	return (getExplicitChainBondCount(molgraph) + getImplicitHydrogenCount(molgraph));
 }
 
-std::size_t Chem::getRotatableBondCount(const MolecularGraph& molgraph)
+std::size_t Chem::getRotatableBondCount(const MolecularGraph& molgraph, bool inc_h_rotors, bool inc_amide_bonds)
 {
 	std::size_t count = 0;
 
 	for (MolecularGraph::ConstBondIterator it = molgraph.getBondsBegin(), end = molgraph.getBondsEnd(); it != end; ++it)
-		if (isRotatable(*it, molgraph))
+		if (isRotatable(*it, molgraph, inc_h_rotors, inc_amide_bonds))
 			count++;
 
 	return count;

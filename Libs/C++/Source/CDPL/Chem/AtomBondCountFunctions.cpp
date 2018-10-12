@@ -169,7 +169,7 @@ std::size_t Chem::getHeavyBondCount(const Atom& atom, const MolecularGraph& molg
     return count;
 }
 
-std::size_t Chem::getRotatableBondCount(const Atom& atom, const MolecularGraph& molgraph)
+std::size_t Chem::getRotatableBondCount(const Atom& atom, const MolecularGraph& molgraph, bool inc_h_rotors, bool inc_amide_bonds)
 {
 	std::size_t count = 0;
 
@@ -177,7 +177,7 @@ std::size_t Chem::getRotatableBondCount(const Atom& atom, const MolecularGraph& 
 	Atom::ConstBondIterator b_it = atom.getBondsBegin();
 
 	for (Atom::ConstAtomIterator a_it = atom.getAtomsBegin(); a_it != atoms_end; ++a_it, ++b_it)
-		if (molgraph.containsAtom(*a_it) && molgraph.containsBond(*b_it) && isRotatable(*b_it, molgraph))
+		if (molgraph.containsAtom(*a_it) && molgraph.containsBond(*b_it) && isRotatable(*b_it, molgraph, inc_h_rotors, inc_amide_bonds))
 			count++;
 
     return count;

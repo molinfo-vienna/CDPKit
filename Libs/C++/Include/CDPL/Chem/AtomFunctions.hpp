@@ -42,6 +42,7 @@
 #include "CDPL/Chem/MatchConstraintList.hpp"
 #include "CDPL/Chem/FragmentList.hpp"
 #include "CDPL/Chem/AtomPropertyFlag.hpp"
+#include "CDPL/Chem/AtomPriorityFunctionWrapper.hpp"
 #include "CDPL/Math/Vector.hpp"
 #include "CDPL/Math/VectorArray.hpp"
 
@@ -281,7 +282,7 @@ namespace CDPL
 
 		CDPL_CHEM_API std::size_t getHeavyBondCount(const Atom& atom, const MolecularGraph& molgraph);
 
-		CDPL_CHEM_API std::size_t getRotatableBondCount(const Atom& atom, const MolecularGraph& molgraph);
+		CDPL_CHEM_API std::size_t getRotatableBondCount(const Atom& atom, const MolecularGraph& molgraph, bool inc_h_rotors, bool inc_amide_bonds);
 
 
 		CDPL_CHEM_API const Math::Vector2D& get2DCoordinates(const Atom& atom);
@@ -359,6 +360,8 @@ namespace CDPL
 		CDPL_CHEM_API bool hasCIPConfiguration(const Atom& atom);
 
 		CDPL_CHEM_API unsigned int calcCIPConfiguration(const Atom& atom, const MolecularGraph& molgraph);
+
+		CDPL_CHEM_API unsigned int calcCIPConfiguration(const Atom& atom, const MolecularGraph& molgraph, const AtomPriorityFunction& cip_pri_func);
 	
 
 		CDPL_CHEM_API const StereoDescriptor& getStereoDescriptor(const Atom& atom);
@@ -373,8 +376,8 @@ namespace CDPL
 
 		CDPL_CHEM_API StereoDescriptor calcStereoDescriptorFromMDLParity(const Atom& atom, const MolecularGraph& molgraph);
 
-		CDPL_CHEM_API bool checkAtomConfiguration(const Atom& atom, const MolecularGraph& molgraph, const StereoDescriptor& descr,
-												  const Math::Vector3DArray& coords);
+		CDPL_CHEM_API unsigned int calcAtomConfiguration(const Atom& atom, const MolecularGraph& molgraph, const StereoDescriptor& descr,
+														 const Math::Vector3DArray& coords);
 
 
 		CDPL_CHEM_API bool getStereoCenterFlag(const Atom& atom);
@@ -385,7 +388,7 @@ namespace CDPL
 	
 		CDPL_CHEM_API bool hasStereoCenterFlag(const Atom& atom);
 
-		CDPL_CHEM_API bool isStereoCenter(const Atom& atom, const MolecularGraph& molgraph);
+		CDPL_CHEM_API bool isStereoCenter(const Atom& atom, const MolecularGraph& molgraph, bool check_cip_sym = true);
 	
 
 		CDPL_CHEM_API unsigned int getSybylType(const Atom& atom);

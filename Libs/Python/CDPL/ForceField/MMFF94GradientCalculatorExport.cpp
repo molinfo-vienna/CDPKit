@@ -50,6 +50,8 @@ void CDPLPythonForceField::exportMMFF94GradientCalculator()
 		.def(CDPLPythonBase::ObjectIdentityCheckVisitor<CalculatorType>())
 		.def("assign", CDPLPythonBase::copyAssOp(&CalculatorType::operator=),
 			 (python::arg("self"), python::arg("calculator")), python::return_self<>())
+		.def("setEnabledInteractionTypes", &CalculatorType::setEnabledInteractionTypes, (python::arg("self"), python::arg("types")))
+		.def("getEnabledInteractionTypes", &CalculatorType::getEnabledInteractionTypes, python::arg("self"))
 		.def("setup", &CalculatorType::setup, (python::arg("self"), python::arg("ia_data"), python::arg("num_atoms")))
 		.def("__call__", &CalculatorType::operator()<Math::Vector3DArray, Math::Vector3DArray>, 
 			 (python::arg("self"), python::arg("coords"), python::arg("grad")),
@@ -70,6 +72,8 @@ void CDPLPythonForceField::exportMMFF94GradientCalculator()
 			 python::return_value_policy<python::copy_const_reference>())
 		.def("getVanDerWaalsEnergy", &CalculatorType::getVanDerWaalsEnergy, python::arg("self"),
 			 python::return_value_policy<python::copy_const_reference>())
+		.add_property("enabledInteractionTypes", &CalculatorType::getEnabledInteractionTypes, 
+					  &CalculatorType::setEnabledInteractionTypes)
 		.add_property("totalEnergy", python::make_function(&CalculatorType::getTotalEnergy,
 														   python::return_value_policy<python::copy_const_reference>()))
 		.add_property("bondStretchingEnergy", python::make_function(&CalculatorType::getBondStretchingEnergy,

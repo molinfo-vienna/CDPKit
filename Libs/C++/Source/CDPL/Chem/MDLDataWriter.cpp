@@ -557,7 +557,8 @@ void Chem::MDLDataWriter::writeCTabV2000AtomCoords(std::ostream& os, const Molec
 
 void Chem::MDLDataWriter::writeCTabV2000AtomSymbol(std::ostream& os, const Atom& atom) const
 {
-	Internal::writeString(os, 3, getSymbol(atom), "MDLDataWriter: error while writing atom symbol",
+	Internal::writeString(os, 3, hasSymbol(atom) ? getSymbol(atom) : getSymbolForType(atom),
+						  "MDLDataWriter: error while writing atom symbol",
 						  trimStrings, truncateStrings);
 }
 
@@ -2089,7 +2090,7 @@ void Chem::MDLDataWriter::writeCTabV3000AtomType(std::ostream& os, const Atom& a
 		return;
 
 	if (trimStrings) 
-		writeCTabV3000PropertyStringValue(os, Internal::trimStringCopy(getSymbol(atom)));
+		writeCTabV3000PropertyStringValue(os, Internal::trimStringCopy(hasSymbol(atom) ? getSymbol(atom) : getSymbolForType(atom)));
 	else
 		writeCTabV3000PropertyStringValue(os, getSymbol(atom));
 }

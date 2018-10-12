@@ -1,7 +1,7 @@
 /* -*- mode: c++; c-basic-offset: 4; tab-width: 4; indent-tabs-mode: t -*- */
 
 /* 
- * BondPredicate.hpp 
+ * FragmentType.hpp 
  *
  * This file is part of the Chemical Data Processing Toolkit
  *
@@ -25,37 +25,40 @@
 
 /**
  * \file
- * \brief Type definition of a generic wrapper class for storing user-defined Chem::Bond predicates.
+ * \brief Definition of constants in namespace CDPL::ConfGen::FragmentType.
  */
 
-#ifndef CDPL_CHEM_BONDPREDICATE_HPP
-#define CDPL_CHEM_BONDPREDICATE_HPP
-
-#include <boost/function.hpp>
+#ifndef CDPL_CONFGEN_FRAGMENTTYPE_HPP
+#define CDPL_CONFGEN_FRAGMENTTYPE_HPP
 
 
 namespace CDPL 
 {
 
-    namespace Chem
-    {
+	namespace ConfGen
+	{
 
-	class Bond;
+		/**
+		 * \addtogroup CDPL_CONFGEN_CONSTANTS
+		 * @{
+		 */
 
-	/**
-	 * \addtogroup CDPL_CHEM_DATA_STRUCTURES
-	 * @{
-	 */
+		/**
+		 * \brief Provides constants that are used to describe the nature of fragments used 
+		 *        to build-up molecule 3D models.
+		 */
+		namespace FragmentType
+		{
+					
+			const unsigned int CHAIN                 = 0;
+			const unsigned int FLEXIBLE_RING_SYSTEM  = 1;
+			const unsigned int RIGID_RING_SYSTEM     = 2;
+		}
 
-	/**
-	 * \brief A generic wrapper class used to store a user-defined bond predicate.
-	 */
-	typedef boost::function1<bool, const Chem::Bond&> BondPredicate;
-
-	/**
-	 * @}
-	 */
-    }
+		/**
+		 * @}
+		 */
+	}
 }
 
-#endif // CDPL_CHEM_BONDPREDICATE_HPP
+#endif // CDPL_CONFGEN_FRAGMENTTYPE_HPP

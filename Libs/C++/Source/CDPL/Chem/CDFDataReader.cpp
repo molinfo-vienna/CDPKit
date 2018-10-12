@@ -43,6 +43,7 @@
 #include "CDPL/Chem/StereoDescriptor.hpp"
 #include "CDPL/Chem/ReactionRole.hpp"
 #include "CDPL/Base/Exceptions.hpp"
+#include "CDPL/Base/IntegerTypes.hpp"
 #include "CDPL/Math/Vector.hpp"
 #include "CDPL/Math/VectorArray.hpp"
 
@@ -471,6 +472,7 @@ void Chem::CDFDataReader::readMoleculeProperties(Molecule& mol, Internal::ByteBu
 	CDF::PropertySpec prop_spec;
 	CDF::SizeType size_val;
 	std::string str_val;
+	Base::uint64 uint64_val;
 	double double_val;
 
 	while (true) {
@@ -502,6 +504,11 @@ void Chem::CDFDataReader::readMoleculeProperties(Molecule& mol, Internal::ByteBu
 
 			case CDF::MolecularGraphProperty::STRUCTURE_DATA:
 				setStructureData(mol, readStringData(prop_spec, bbuf));
+				continue;
+
+			case CDF::MolecularGraphProperty::HASH_CODE:
+				getIntProperty(prop_spec, uint64_val, bbuf);
+				setHashCode(mol, uint64_val);
 				continue;
 
 			case CDF::MolecularGraphProperty::MATCH_CONSTRAINTS:

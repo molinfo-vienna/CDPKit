@@ -36,6 +36,7 @@
 #include <functional>
 
 #include <boost/shared_ptr.hpp>
+#include <boost/function.hpp>
 
 #include "CDPL/Chem/APIPrefix.hpp"
 #include "CDPL/Util/Array.hpp"
@@ -48,6 +49,7 @@ namespace CDPL
 	{
 
 		class MolecularGraph;
+		class Atom;
 
 		/**
 		 * \addtogroup CDPL_CHEM_CIP_PRIORITIES
@@ -62,10 +64,12 @@ namespace CDPL
 		{
 
 		public:
+			typedef boost::function1<std::size_t, const Atom&> ImplicitHydrogenCountFunction;
+
 			/**
 			 * \brief Constructs the \c %CIPPriorityCalculator instance.
 			 */
-			CIPPriorityCalculator() {}
+			CIPPriorityCalculator();
 
 			/**
 			 * \brief Constructs the \c %CIPPriorityCalculator instance and calculates the topological \e CIP priorities
@@ -76,6 +80,10 @@ namespace CDPL
 			 *         (i.e. the \e CIP priority of an atom is accessible via its index).
 			 */
 			CIPPriorityCalculator(const MolecularGraph& molgraph, Util::STArray& priorities);
+
+			void setImplicitHydrogenCountFunction(const ImplicitHydrogenCountFunction& func);
+
+			const ImplicitHydrogenCountFunction& getImplicitHydrogenCountFunction();
 
 			/**
 			 * \brief Calculates the topological \e CIP priorities of the atoms in the molecular graph \a molgraph.
@@ -141,9 +149,10 @@ namespace CDPL
 		 
 			typedef std::vector<AtomNode::SharedPointer> AllocNodeList;
 
-			AllocNodeList allocAtomNodes;
-			AllocNodeList allocImplHNodes;
-			NodeList      atomNodes;
+			AllocNodeList                 allocAtomNodes;
+			AllocNodeList                 allocImplHNodes;
+			NodeList                      atomNodes;
+			ImplicitHydrogenCountFunction implHCountFunc;
 		};
 
 		/**

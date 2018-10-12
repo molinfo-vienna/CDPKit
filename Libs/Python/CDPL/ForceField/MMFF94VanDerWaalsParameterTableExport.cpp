@@ -77,7 +77,7 @@ void CDPLPythonForceField::exportMMFF94VanDerWaalsParameterTable()
 		.def("assign", CDPLPythonBase::copyAssOp(&ForceField::MMFF94VanDerWaalsParameterTable::operator=), 
 			 (python::arg("self"), python::arg("table")), python::return_self<>())
 		.add_property("numEntries", &ForceField::MMFF94VanDerWaalsParameterTable::getNumEntries)
-		.add_property("entries", &getEntries)
+		.add_property("entries", python::make_function(&getEntries))
 		.def("setExponent", &ForceField::MMFF94VanDerWaalsParameterTable::setExponent, (python::arg("self"), python::arg("value")))
 		.def("setBeta", &ForceField::MMFF94VanDerWaalsParameterTable::setBeta, (python::arg("self"), python::arg("value")))
 		.def("setFactorB", &ForceField::MMFF94VanDerWaalsParameterTable::setFactorB, (python::arg("self"), python::arg("value")))

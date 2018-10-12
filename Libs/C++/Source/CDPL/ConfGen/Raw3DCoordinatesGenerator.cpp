@@ -1,7 +1,7 @@
 /* -*- mode: c++; c-basic-offset: 4; tab-width: 4; indent-tabs-mode: t -*- */
 
 /* 
- * Raw3DStructureGenerator.cpp 
+ * Raw3DCoordinatesGenerator.cpp 
  *
  * This file is part of the Chemical Data Processing Toolkit
  *
@@ -28,7 +28,7 @@
 
 #include <boost/bind.hpp>
 
-#include "CDPL/ConfGen/Raw3DStructureGenerator.hpp"
+#include "CDPL/ConfGen/Raw3DCoordinatesGenerator.hpp"
 #include "CDPL/Chem/MolecularGraph.hpp"
 #include "CDPL/Chem/AtomFunctions.hpp"
 #include "CDPL/Chem/BondFunctions.hpp"
@@ -37,53 +37,53 @@
 using namespace CDPL;
 
 
-ConfGen::Raw3DStructureGenerator::Raw3DStructureGenerator(): molGraph(0), currCoords(0)
+ConfGen::Raw3DCoordinatesGenerator::Raw3DCoordinatesGenerator(): molGraph(0), currCoords(0)
 {
 	hCoordsGen.undefinedOnly(true);
 }
 
-void ConfGen::Raw3DStructureGenerator::regardAtomConfiguration(bool regard)
+void ConfGen::Raw3DCoordinatesGenerator::regardAtomConfiguration(bool regard)
 {
     dgConstraintsGen.regardAtomConfiguration(regard);
 }
 
-bool ConfGen::Raw3DStructureGenerator::atomConfigurationRegarded() const
+bool ConfGen::Raw3DCoordinatesGenerator::atomConfigurationRegarded() const
 {
     return dgConstraintsGen.atomConfigurationRegarded();
 }
 
-void ConfGen::Raw3DStructureGenerator::regardBondConfiguration(bool regard)
+void ConfGen::Raw3DCoordinatesGenerator::regardBondConfiguration(bool regard)
 {
     dgConstraintsGen.regardBondConfiguration(regard);
 }
 
-bool ConfGen::Raw3DStructureGenerator::bondConfigurationRegarded() const
+bool ConfGen::Raw3DCoordinatesGenerator::bondConfigurationRegarded() const
 {
     return dgConstraintsGen.bondConfigurationRegarded();
 }
 
-void ConfGen::Raw3DStructureGenerator::calculateHydrogenPositions(bool calc)
+void ConfGen::Raw3DCoordinatesGenerator::calculateHydrogenPositions(bool calc)
 {
     dgConstraintsGen.excludeHydrogens(calc);
 }
 
-bool ConfGen::Raw3DStructureGenerator::hydrogenPositionsCalculated() const
+bool ConfGen::Raw3DCoordinatesGenerator::hydrogenPositionsCalculated() const
 {
     return dgConstraintsGen.hydrogensExcluded();
 }
 
-void ConfGen::Raw3DStructureGenerator::setup(const Chem::MolecularGraph& molgraph, 
-											 const ForceField::MMFF94InteractionData& ia_data)
+void ConfGen::Raw3DCoordinatesGenerator::setup(const Chem::MolecularGraph& molgraph, 
+											   const ForceField::MMFF94InteractionData& ia_data)
 {
     setup(molgraph, &ia_data);
 }
 
-void ConfGen::Raw3DStructureGenerator::setup(const Chem::MolecularGraph& molgraph) 
+void ConfGen::Raw3DCoordinatesGenerator::setup(const Chem::MolecularGraph& molgraph) 
 {
     setup(molgraph, 0);
 }
 
-bool ConfGen::Raw3DStructureGenerator::generate(Math::Vector3DArray& coords)
+bool ConfGen::Raw3DCoordinatesGenerator::generate(Math::Vector3DArray& coords)
 {
     if (!molGraph)
 		return false;
@@ -103,8 +103,8 @@ bool ConfGen::Raw3DStructureGenerator::generate(Math::Vector3DArray& coords)
     return true;
 }
 
-void ConfGen::Raw3DStructureGenerator::setup(const Chem::MolecularGraph& molgraph, 
-											 const ForceField::MMFF94InteractionData* ia_data)
+void ConfGen::Raw3DCoordinatesGenerator::setup(const Chem::MolecularGraph& molgraph, 
+											   const ForceField::MMFF94InteractionData* ia_data)
 {
     molGraph = &molgraph;
 
@@ -130,19 +130,21 @@ void ConfGen::Raw3DStructureGenerator::setup(const Chem::MolecularGraph& molgrap
 
     dgConstraintsGen.addAtomPlanarityConstraints(phase2CoordsGen);	 
     dgConstraintsGen.addBondPlanarityConstraints(phase2CoordsGen);
+
+	phase1CoordsGen.setRandomSeed(170375);
 }
 
-void ConfGen::Raw3DStructureGenerator::calcHydrogenCoordinates(Math::Vector3DArray& coords)
+void ConfGen::Raw3DCoordinatesGenerator::calcHydrogenCoordinates(Math::Vector3DArray& coords)
 {
 	currCoords = &coords;
 
-	hCoordsGen.setAtom3DCoordinatesFunction(boost::bind(&ConfGen::Raw3DStructureGenerator::get3DCoordinates, this, _1));
-	hCoordsGen.setAtom3DCoordinatesCheckFunction(boost::bind(&ConfGen::Raw3DStructureGenerator::has3DCoordinates, this, _1));
+	hCoordsGen.setAtom3DCoordinatesFunction(boost::bind(&ConfGen::Raw3DCoordinatesGenerator::get3DCoordinates, this, _1));
+	hCoordsGen.setAtom3DCoordinatesCheckFunction(boost::bind(&ConfGen::Raw3DCoordinatesGenerator::has3DCoordinates, this, _1));
 
 	hCoordsGen.generate(*molGraph, coords, false);
 }
 
-bool ConfGen::Raw3DStructureGenerator::checkAtomConfigurations(Math::Vector3DArray& coords) const
+bool ConfGen::Raw3DCoordinatesGenerator::checkAtomConfigurations(Math::Vector3DArray& coords) const
 {
 
 	for (DGConstraintGenerator::ConstStereoCenterDataIterator it = dgConstraintsGen.getAtomStereoCenterDataBegin(),
@@ -150,33 +152,33 @@ bool ConfGen::Raw3DStructureGenerator::checkAtomConfigurations(Math::Vector3DArr
 
 		const DGConstraintGenerator::StereoCenterData& sc_data = *it;
 
-		if (!checkAtomConfiguration(molGraph->getAtom(sc_data.first), *molGraph, sc_data.second, coords))
+		if (calcAtomConfiguration(molGraph->getAtom(sc_data.first), *molGraph, sc_data.second, coords) != sc_data.second.getConfiguration())
 			return false;
 	}
 
 	return true;
 }
 
-bool ConfGen::Raw3DStructureGenerator::checkBondConfigurations(Math::Vector3DArray& coords) const
+bool ConfGen::Raw3DCoordinatesGenerator::checkBondConfigurations(Math::Vector3DArray& coords) const
 {
 	for (DGConstraintGenerator::ConstStereoCenterDataIterator it = dgConstraintsGen.getBondStereoCenterDataBegin(),
 			 end = dgConstraintsGen.getBondStereoCenterDataEnd(); it != end; ++it) {
 
 		const DGConstraintGenerator::StereoCenterData& sc_data = *it;
 
-		if (!checkBondConfiguration(molGraph->getBond(sc_data.first), *molGraph, sc_data.second, coords))
+		if (calcBondConfiguration(molGraph->getBond(sc_data.first), *molGraph, sc_data.second, coords) != sc_data.second.getConfiguration())
 			return false;
 	}
 
 	return true;
 }
 
-const Math::Vector3D& ConfGen::Raw3DStructureGenerator::get3DCoordinates(const Chem::Atom& atom) const
+const Math::Vector3D& ConfGen::Raw3DCoordinatesGenerator::get3DCoordinates(const Chem::Atom& atom) const
 {
 	return (*currCoords)[molGraph->getAtomIndex(atom)];
 }
 
-bool ConfGen::Raw3DStructureGenerator::has3DCoordinates(const Chem::Atom& atom) const
+bool ConfGen::Raw3DCoordinatesGenerator::has3DCoordinates(const Chem::Atom& atom) const
 {
 	return !dgConstraintsGen.getExcludedHydrogenMask().test(molGraph->getAtomIndex(atom));
 }

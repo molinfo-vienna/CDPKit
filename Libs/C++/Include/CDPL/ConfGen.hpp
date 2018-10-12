@@ -32,12 +32,20 @@
 #define CDPL_CONFGEN_HPP
 
 #include "CDPL/Config.hpp"
+
 #include "CDPL/ConfGen/DGConstraintGenerator.hpp"
-#include "CDPL/ConfGen/Raw3DStructureGenerator.hpp"
+#include "CDPL/ConfGen/Raw3DCoordinatesGenerator.hpp"
+#include "CDPL/ConfGen/FragmentList.hpp"
+#include "CDPL/ConfGen/FragmentLibraryEntry.hpp"
+#include "CDPL/ConfGen/FragmentLibrary.hpp"
+#include "CDPL/ConfGen/UtilityFunctions.hpp"
+#include "CDPL/ConfGen/FragmentType.hpp"
+#include "CDPL/ConfGen/ForceFieldType.hpp"
 
 #if defined(HAVE_BOOST_TIMER) && defined(HAVE_BOOST_CHRONO)
 
 #include "CDPL/ConfGen/RandomConformerGenerator.hpp"
+#include "CDPL/ConfGen/FragmentConformerGenerator.hpp"
 
 #endif // defined(HAVE_BOOST_TIMER) && defined(HAVE_BOOST_CHRONO)
 #endif // CDPL_CONFGEN_HPP

@@ -30,6 +30,8 @@
 
 namespace CDPLPythonConfGen
 {
+
+	void exportUtilityFunctions();
 }
 
 #endif // CDPL_PYTHON_CONFGEN_FUNCTIONEXPORTS_HPP

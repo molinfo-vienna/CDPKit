@@ -119,7 +119,7 @@ void CDPLPythonForceField::exportMMFF94PrimaryToParameterAtomTypeMap()
 		.def("assign", CDPLPythonBase::copyAssOp(&ForceField::MMFF94PrimaryToParameterAtomTypeMap::operator=), 
 			 (python::arg("self"), python::arg("map")), python::return_self<>())
 		.add_property("numEntries", &ForceField::MMFF94PrimaryToParameterAtomTypeMap::getNumEntries)
-		.add_property("entries", &getEntries)
+		.add_property("entries", python::make_function(&getEntries))
 		.def("set", &ForceField::MMFF94PrimaryToParameterAtomTypeMap::set, python::arg("map"))
 		.staticmethod("set")
 		.def("get", &ForceField::MMFF94PrimaryToParameterAtomTypeMap::get, python::return_value_policy<python::copy_const_reference>())

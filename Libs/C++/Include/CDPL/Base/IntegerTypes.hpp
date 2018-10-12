@@ -28,8 +28,8 @@
  * \brief Definition of exact-width integer types.
  */
 
-#ifndef CDPL_BASE_INTTYPES_HPP
-#define CDPL_BASE_INTTYPES_HPP
+#ifndef CDPL_BASE_INTEGERTYPES_HPP
+#define CDPL_BASE_INTEGERTYPES_HPP
 
 #include <boost/cstdint.hpp>
 
@@ -107,4 +107,4 @@ namespace CDPL
 	}
 }
 
-#endif // CDPL_BASE_INTTYPES_HPP
+#endif // CDPL_BASE_INTEGERTYPES_HPP

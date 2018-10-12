@@ -42,28 +42,34 @@ void Chem::replaceAtomStereoReferenceAtoms(Molecule& mol_copy, const MolecularGr
 										   std::size_t atom_idx_offs)
 {
 	Molecule::AtomIterator atoms_end = mol_copy.getAtomsEnd();
-	
-	for (Molecule::AtomIterator a_it = mol_copy.getAtomsBegin() + atom_idx_offs; a_it != atoms_end; ++a_it) {
+	std::size_t i = 0;
+
+	for (Molecule::AtomIterator a_it = mol_copy.getAtomsBegin() + atom_idx_offs; a_it != atoms_end; ++a_it, i++) {
 		Atom& atom = *a_it;
 		const StereoDescriptor& stereo_desc = getStereoDescriptor(atom);
-		std::size_t num_ref_atoms = stereo_desc.getNumReferenceAtoms();
 
-		if (num_ref_atoms < 3)
+		if (!stereo_desc.isValid(molgraph.getAtom(i))) {
+			clearStereoDescriptor(atom);
 			continue;
+		}
 
 		const Atom* const* ref_atoms = stereo_desc.getReferenceAtoms();
 
-		if (num_ref_atoms == 3) 
-			setStereoDescriptor(atom, StereoDescriptor(stereo_desc.getConfiguration(),
-													   mol_copy.getAtom(molgraph.getAtomIndex(*ref_atoms[0]) + atom_idx_offs),
-													   mol_copy.getAtom(molgraph.getAtomIndex(*ref_atoms[1]) + atom_idx_offs),
-													   mol_copy.getAtom(molgraph.getAtomIndex(*ref_atoms[2]) + atom_idx_offs)));
-		else
-			setStereoDescriptor(atom, StereoDescriptor(stereo_desc.getConfiguration(),
-													   mol_copy.getAtom(molgraph.getAtomIndex(*ref_atoms[0]) + atom_idx_offs),
-													   mol_copy.getAtom(molgraph.getAtomIndex(*ref_atoms[1]) + atom_idx_offs),
-													   mol_copy.getAtom(molgraph.getAtomIndex(*ref_atoms[2]) + atom_idx_offs),
-													   mol_copy.getAtom(molgraph.getAtomIndex(*ref_atoms[3]) + atom_idx_offs)));
+		try {
+			if (stereo_desc.getNumReferenceAtoms() == 3) 
+				setStereoDescriptor(atom, StereoDescriptor(stereo_desc.getConfiguration(),
+														   mol_copy.getAtom(molgraph.getAtomIndex(*ref_atoms[0]) + atom_idx_offs),
+														   mol_copy.getAtom(molgraph.getAtomIndex(*ref_atoms[1]) + atom_idx_offs),
+														   mol_copy.getAtom(molgraph.getAtomIndex(*ref_atoms[2]) + atom_idx_offs)));
+			else
+				setStereoDescriptor(atom, StereoDescriptor(stereo_desc.getConfiguration(),
+														   mol_copy.getAtom(molgraph.getAtomIndex(*ref_atoms[0]) + atom_idx_offs),
+														   mol_copy.getAtom(molgraph.getAtomIndex(*ref_atoms[1]) + atom_idx_offs),
+														   mol_copy.getAtom(molgraph.getAtomIndex(*ref_atoms[2]) + atom_idx_offs),
+														   mol_copy.getAtom(molgraph.getAtomIndex(*ref_atoms[3]) + atom_idx_offs)));
+		} catch (const Base::ItemNotFound& e) {
+			clearStereoDescriptor(atom);
+		} 
 	}
 }
 
@@ -71,21 +77,27 @@ void Chem::replaceBondStereoReferenceAtoms(Molecule& mol_copy, const MolecularGr
 										   std::size_t atom_idx_offs, std::size_t bond_start_idx)
 {
 	Molecule::BondIterator bonds_end = mol_copy.getBondsEnd();
-	
+	std::size_t i = 0;
+
 	for (Molecule::BondIterator b_it = mol_copy.getBondsBegin() + bond_start_idx; b_it != bonds_end; ++b_it) {
 		Bond& bond = *b_it;
 		const StereoDescriptor& stereo_desc = getStereoDescriptor(bond);
-		std::size_t num_ref_atoms = stereo_desc.getNumReferenceAtoms();
 
-		if (num_ref_atoms < 4)
+		if (!stereo_desc.isValid(molgraph.getBond(i))) {
+			clearStereoDescriptor(bond);
 			continue;
+		}
 
 		const Atom* const* ref_atoms = stereo_desc.getReferenceAtoms();
 
-		setStereoDescriptor(bond, StereoDescriptor(stereo_desc.getConfiguration(),
-												   mol_copy.getAtom(molgraph.getAtomIndex(*ref_atoms[0]) + atom_idx_offs),
-												   mol_copy.getAtom(molgraph.getAtomIndex(*ref_atoms[1]) + atom_idx_offs),
-												   mol_copy.getAtom(molgraph.getAtomIndex(*ref_atoms[2]) + atom_idx_offs),
-												   mol_copy.getAtom(molgraph.getAtomIndex(*ref_atoms[3]) + atom_idx_offs)));
+		try {
+			setStereoDescriptor(bond, StereoDescriptor(stereo_desc.getConfiguration(),
+													   mol_copy.getAtom(molgraph.getAtomIndex(*ref_atoms[0]) + atom_idx_offs),
+													   mol_copy.getAtom(molgraph.getAtomIndex(*ref_atoms[1]) + atom_idx_offs),
+													   mol_copy.getAtom(molgraph.getAtomIndex(*ref_atoms[2]) + atom_idx_offs),
+													   mol_copy.getAtom(molgraph.getAtomIndex(*ref_atoms[3]) + atom_idx_offs)));
+		} catch (const Base::ItemNotFound& e) {
+			clearStereoDescriptor(bond);
+		} 
 	}
 }

@@ -70,10 +70,31 @@ namespace
 
 		return false;
 	}
+
+	bool isAmideBond(const Chem::Bond& bond, const Chem::Atom& atom1, const Chem::Atom& atom2, std::size_t bond_count1, 
+					 std::size_t bond_count2, const Chem::MolecularGraph& molgraph)
+	{
+		using namespace Chem;
+
+		unsigned int atom_type1 = getType(atom1);
+
+		if (atom_type1 != AtomType::C && atom_type1 != AtomType::N)
+			return false;
+
+		unsigned int atom_type2 = getType(atom2);
+
+		if (bond_count1 == 3 && atom_type1 == AtomType::C && atom_type2 == AtomType::N) 
+			return isCarbonylCarbon(atom1, bond, molgraph);
+
+		if (bond_count2 == 3 && atom_type1 == AtomType::N && atom_type2 == AtomType::C) 
+			return isCarbonylCarbon(atom2, bond, molgraph);
+
+		return true;
+	}
 }
 
 
-bool Chem::isRotatable(const Bond& bond, const MolecularGraph& molgraph)
+bool Chem::isRotatable(const Bond& bond, const MolecularGraph& molgraph, bool inc_h_rotors, bool inc_amide_bonds)
 {
     if (getOrder(bond) != 1)
 		return false;
@@ -82,31 +103,25 @@ bool Chem::isRotatable(const Bond& bond, const MolecularGraph& molgraph)
 		return false;
 
     const Atom& atom1 = bond.getBegin();
-	std::size_t hvy_bond_count1 = getHeavyBondCount(atom1, molgraph);
-
-	if (hvy_bond_count1 < 2)
-		return false;
-
 	const Atom& atom2 = bond.getEnd();
-	std::size_t hvy_bond_count2 = getHeavyBondCount(atom2, molgraph);
 
-	if (hvy_bond_count2 < 2)
+	std::size_t bond_count1 = getBondCount(atom1, molgraph);
+
+	if (bond_count1 < 2 ) 
+		return false;
+		
+	std::size_t bond_count2 = getBondCount(atom2, molgraph);
+
+	if (bond_count2 < 2)
 		return false;
 
-	unsigned int atom_type1 = getType(atom1);
+	if (!inc_h_rotors && (getHeavyBondCount(atom1, molgraph) < 2 || getHeavyBondCount(atom2, molgraph) < 2))
+		return false;
 
-	if (atom_type1 != AtomType::C && atom_type1 != AtomType::N)
+	if (inc_amide_bonds)
 		return true;
 
-	unsigned int atom_type2 = getType(atom2);
-
-	if (hvy_bond_count1 <= 3 && atom_type1 == AtomType::C && atom_type2 == AtomType::N) 
-		return !isCarbonylCarbon(atom1, bond, molgraph);
-
-	if (hvy_bond_count2 <= 3 && atom_type1 == AtomType::N && atom_type2 == AtomType::C) 
-		return !isCarbonylCarbon(atom2, bond, molgraph);
-
-	return true;
+	return !isAmideBond(bond, atom1, atom2, bond_count1, bond_count2, molgraph); 
 }
  
 bool Chem::isHydrogenBond(const Bond& bond)

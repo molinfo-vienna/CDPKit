@@ -37,7 +37,7 @@
 using namespace CDPL; 
 
 
-bool Chem::isStereoCenter(const Atom& atom, const MolecularGraph& molgraph)
+bool Chem::isStereoCenter(const Atom& atom, const MolecularGraph& molgraph, bool check_cip_sym)
 {
     std::size_t num_bonds = getExplicitBondCount(atom, molgraph);
 
@@ -68,6 +68,9 @@ bool Chem::isStereoCenter(const Atom& atom, const MolecularGraph& molgraph)
 
 	if (getOrdinaryHydrogenCount(atom, molgraph, AtomPropertyFlag::ISOTOPE | AtomPropertyFlag::FORMAL_CHARGE | AtomPropertyFlag::H_COUNT) > 1)
 	    return false;
+
+	if (!check_cip_sym)
+		return true;
 
     std::size_t cip_priorities[4];
 

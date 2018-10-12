@@ -27,7 +27,7 @@
 #ifndef CDPL_PHARM_CDFFORMATDATA_HPP
 #define CDPL_PHARM_CDFFORMATDATA_HPP
 
-#include "CDPL/Base/IntTypes.hpp"
+#include "CDPL/Base/IntegerTypes.hpp"
 #include "CDPL/Internal/CDFFormatData.hpp"
 
 

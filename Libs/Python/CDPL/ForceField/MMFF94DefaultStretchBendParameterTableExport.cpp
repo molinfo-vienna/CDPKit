@@ -80,7 +80,7 @@ void CDPLPythonForceField::exportMMFF94DefaultStretchBendParameterTable()
 		.def("assign", CDPLPythonBase::copyAssOp(&ForceField::MMFF94DefaultStretchBendParameterTable::operator=), 
 			 (python::arg("self"), python::arg("table")), python::return_self<>())
 		.add_property("numEntries", &ForceField::MMFF94DefaultStretchBendParameterTable::getNumEntries)
-		.add_property("entries", &getEntries)
+		.add_property("entries", python::make_function(&getEntries))
 		.def("set", &ForceField::MMFF94DefaultStretchBendParameterTable::set, python::arg("table"))
 		.staticmethod("set")
 		.def("get", &ForceField::MMFF94DefaultStretchBendParameterTable::get, python::return_value_policy<python::copy_const_reference>())

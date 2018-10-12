@@ -141,6 +141,8 @@ namespace CDPL
 
 			const ValueType& getLearningRateDecrement() const;
 
+			void setRandomSeed(unsigned int seed);
+
 			template <typename CoordsArray>
 			void generate(std::size_t num_points, CoordsArray& coords, bool randomize = true);
 
@@ -177,7 +179,7 @@ namespace CDPL
 			template <typename Vec>
 			static ValueType calcDiffVectorAndSquaredDist(const Vec& pt1_pos, const Vec& pt2_pos, ValueType diff[]);
 
-			typedef boost::random::mt19937 RandNumEngine;
+			typedef boost::random::mt11213b RandNumEngine;
 
 			std::size_t            numCycles;
 			std::size_t            cycleStepCountFactor;
@@ -522,6 +524,13 @@ const typename CDPL::Util::DGCoordinatesGeneratorBase<Dim, T, Derived>::ValueTyp
 CDPL::Util::DGCoordinatesGeneratorBase<Dim, T, Derived>::getLearningRateDecrement() const
 {
 	return learningRateDecr;
+}
+
+template <std::size_t Dim, typename T, typename Derived>
+void
+CDPL::Util::DGCoordinatesGeneratorBase<Dim, T, Derived>::setRandomSeed(unsigned int seed)
+{
+	randomEngine.seed(seed);
 }
 
 template <std::size_t Dim, typename T, typename Derived>

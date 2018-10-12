@@ -37,7 +37,7 @@
 #include "CDPL/Pharm/CDFPharmacophoreDataReader.hpp"
 #include "CDPL/Chem/CDFDataReader.hpp"
 #include "CDPL/Base/ControlParameterList.hpp"
-#include "CDPL/Base/IntTypes.hpp"
+#include "CDPL/Base/IntegerTypes.hpp"
 #include "CDPL/Internal/ByteBuffer.hpp"
 
 

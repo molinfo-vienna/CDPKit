@@ -34,7 +34,10 @@ namespace CDPLPythonConfGen
 {
 
 	void exportDGConstraintGenerator();
-	void exportRaw3DStructureGenerator();
+	void exportRaw3DCoordinatesGenerator();
+	void exportFragmentList();
+	void exportFragmentLibraryEntry();
+	void exportFragmentLibrary();
 
 #if defined(HAVE_BOOST_TIMER) && defined(HAVE_BOOST_CHRONO)
 

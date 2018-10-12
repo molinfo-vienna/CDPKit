@@ -231,12 +231,7 @@ Chem::MolecularGraph::SharedPointer Biomol::ResidueDictionary::Entry::getStructu
 
 void Biomol::ResidueDictionary::addEntry(const Entry& entry)
 {
-	EntryLookupTable::iterator it = entries.find(entry.getCode());
-
-	if (it == entries.end()) 
-		entries.insert(EntryLookupTable::value_type(entry.getCode(), entry));
-	else 
-		it->second = entry;
+	entries.insert(EntryLookupTable::value_type(entry.getCode(), entry));
 }
 
 bool Biomol::ResidueDictionary::containsEntry(const std::string& code) const

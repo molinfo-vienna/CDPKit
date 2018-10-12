@@ -505,7 +505,16 @@
 \defgroup CDPL_CONFGEN_GENERATORS Conformer Generator Classes
 \ingroup CDPL_CONFGEN
 
-\defgroup CDPL_CONFGEN_UTILITIES Utility Functions and Classes
+\defgroup CDPL_CONFGEN_DATA_STRUCTURES Data Structures
+\ingroup CDPL_CONFGEN
+
+\defgroup CDPL_CONFGEN_FUNCTIONS Free Functions
+\ingroup CDPL_CONFGEN
+
+\defgroup CDPL_CONFGEN_CONSTANTS Flags and Constants
+\ingroup CDPL_CONFGEN
+
+\defgroup CDPL_CONFGEN_HELPERS Implementation Helper Classes
 \ingroup CDPL_CONFGEN
 
 

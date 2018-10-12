@@ -78,16 +78,11 @@ void CDPLPythonConfGen::exportRandomConformerGenerator()
 			 (python::arg("self"), python::arg("strict")))
 		.def("strictMMFF94AtomTypingPerformed", &ConfGen::RandomConformerGenerator::strictMMFF94AtomTypingPerformed,
 			 python::arg("self"))
-		.def("useDynamicMMFF94Parameters", &ConfGen::RandomConformerGenerator::useDynamicMMFF94Parameters,
+		.def("setForceFieldType", &ConfGen::RandomConformerGenerator::setForceFieldType,
+			 (python::arg("self"), python::arg("type")))
+		.def("getForceFieldType", &ConfGen::RandomConformerGenerator::getForceFieldType,
 			 python::arg("self"))
-		.def("useStaticMMFF94Parameters", &ConfGen::RandomConformerGenerator::useStaticMMFF94Parameters,
-			 python::arg("self"))
-		.def("enableElectrostaticMMFF94Terms", &ConfGen::RandomConformerGenerator::enableElectrostaticMMFF94Terms,
-			 (python::arg("self"), python::arg("enable")))
-		.def("electrostaticMMFF94TermsEnabled", &ConfGen::RandomConformerGenerator::electrostaticMMFF94TermsEnabled,
-			 python::arg("self"))
-		.def("setup", static_cast<void (ConfGen::RandomConformerGenerator::*)(const Chem::MolecularGraph&)>
-			 (&ConfGen::RandomConformerGenerator::setup), (python::arg("self"), python::arg("molgraph")))
+		.def("setup", &ConfGen::RandomConformerGenerator::setup, (python::arg("self"), python::arg("molgraph")))
 		.def("generate", &ConfGen::RandomConformerGenerator::generate, (python::arg("self"), python::arg("coords")))
 		.def("getEnergy", &ConfGen::RandomConformerGenerator::getEnergy, python::arg("self"))
 		.add_property("energy", &ConfGen::RandomConformerGenerator::getEnergy) 
@@ -105,6 +100,6 @@ void CDPLPythonConfGen::exportRandomConformerGenerator()
 					  &ConfGen::RandomConformerGenerator::setTimeout)
 		.add_property("strictMMFF94AtomTyping", &ConfGen::RandomConformerGenerator::strictMMFF94AtomTypingPerformed,
 					  &ConfGen::RandomConformerGenerator::performStrictMMFF94AtomTyping)
-		.add_property("electrostaticMMFF94Terms", &ConfGen::RandomConformerGenerator::electrostaticMMFF94TermsEnabled,
-					  &ConfGen::RandomConformerGenerator::enableElectrostaticMMFF94Terms);
+		.add_property("forceFieldType", &ConfGen::RandomConformerGenerator::getForceFieldType,
+					  &ConfGen::RandomConformerGenerator::setForceFieldType);
 }

@@ -29,7 +29,7 @@
 
 #include <cstddef>
 
-#include "CDPL/Base/IntTypes.hpp"
+#include "CDPL/Base/IntegerTypes.hpp"
 
 
 namespace CDPL

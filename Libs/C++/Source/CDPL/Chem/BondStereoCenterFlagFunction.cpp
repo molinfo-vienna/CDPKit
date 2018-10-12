@@ -39,7 +39,7 @@
 using namespace CDPL; 
 
 
-bool Chem::isStereoCenter(const Bond& bond, const MolecularGraph& molgraph, std::size_t min_ring_size)
+bool Chem::isStereoCenter(const Bond& bond, const MolecularGraph& molgraph, std::size_t min_ring_size, bool check_cip_sym)
 {
     if (getOrder(bond) != 2)
 		return false;
@@ -47,10 +47,12 @@ bool Chem::isStereoCenter(const Bond& bond, const MolecularGraph& molgraph, std:
 	if (getAromaticityFlag(bond))
 		return false;
 
-	std::size_t smallest_rsize = getSizeOfSmallestContainingFragment(bond, *getSSSR(molgraph));
+	if (min_ring_size > 0) {
+		std::size_t smallest_rsize = getSizeOfSmallestContainingFragment(bond, *getSSSR(molgraph));
 
-	if (smallest_rsize > 0 && smallest_rsize < min_ring_size)
-		return false;
+		if (smallest_rsize > 0 && smallest_rsize < min_ring_size)
+			return false;
+	}
 
     const Atom* bond_atoms[2] = { &bond.getBegin(), &bond.getEnd() };
 
@@ -68,6 +70,9 @@ bool Chem::isStereoCenter(const Bond& bond, const MolecularGraph& molgraph, std:
 
 		if (getOrdinaryHydrogenCount(*bond_atoms[i], molgraph, AtomPropertyFlag::ISOTOPE | AtomPropertyFlag::FORMAL_CHARGE | AtomPropertyFlag::H_COUNT) > 1)
 			return false;
+
+		if (!check_cip_sym)
+			continue;
 
 		Atom::ConstAtomIterator atoms_end = bond_atoms[i]->getAtomsEnd();
 		Atom::ConstBondIterator b_it = bond_atoms[i]->getBondsBegin();

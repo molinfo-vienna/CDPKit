@@ -35,7 +35,7 @@
 
 #include "CDPL/Math/VectorArray.hpp"
 
-#include "CDPL/Base/IntTypes.hpp"
+#include "CDPL/Base/IntegerTypes.hpp"
 #include "CDPL/Internal/CDFFormatData.hpp"
 #include "CDPL/Internal/ByteBuffer.hpp"
 

@@ -1,7 +1,7 @@
 /* -*- mode: c++; c-basic-offset: 4; tab-width: 4; indent-tabs-mode: t -*- */
 
 /* 
- * Raw3DStructureGenerator.hpp 
+ * Raw3DCoordinatesGenerator.hpp 
  *
  * This file is part of the Chemical Data Processing Toolkit
  *
@@ -25,11 +25,11 @@
 
 /**
  * \file
- * \brief Definition of the class CDPL::ConfGen::Raw3DStructureGenerator.
+ * \brief Definition of the class CDPL::ConfGen::Raw3DCoordinatesGenerator.
  */
 
-#ifndef CDPL_CONFGEN_RAW3DSTRUCTUREGENERATOR_HPP
-#define CDPL_CONFGEN_RAW3DSTRUCTUREGENERATOR_HPP
+#ifndef CDPL_CONFGEN_RAW3DCOORDINATESGENERATOR_HPP
+#define CDPL_CONFGEN_RAW3DCOORDINATESGENERATOR_HPP
 
 #include "CDPL/ConfGen/APIPrefix.hpp"
 #include "CDPL/ConfGen/DGConstraintGenerator.hpp"
@@ -45,15 +45,15 @@ namespace CDPL
     {
 
 		/**
-		 * \addtogroup CDPL_CONFGEN_UTILITIES
+		 * \addtogroup CDPL_CONFGEN_HELPERS
 		 * @{
 		 */
 
-		class CDPL_CONFGEN_API Raw3DStructureGenerator
+		class CDPL_CONFGEN_API Raw3DCoordinatesGenerator
 		{
 
 		public:
-			Raw3DStructureGenerator();
+			Raw3DCoordinatesGenerator();
 
 			void regardAtomConfiguration(bool regard);
 
@@ -97,4 +97,4 @@ namespace CDPL
     }
 }
 
-#endif // CDPL_CONFGEN_RAW3DSTRUCTUREGENERATOR_HPP
+#endif // CDPL_CONFGEN_RAW3DCOORDINATESGENERATOR_HPP

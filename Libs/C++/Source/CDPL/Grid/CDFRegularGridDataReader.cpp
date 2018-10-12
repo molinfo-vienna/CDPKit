@@ -27,7 +27,7 @@
 #include "StaticInit.hpp"
 
 #include "CDPL/Grid/ControlParameterFunctions.hpp"
-#include "CDPL/Base/IntTypes.hpp"
+#include "CDPL/Base/IntegerTypes.hpp"
 #include "CDPL/Base/Exceptions.hpp"
 
 #include "CDFRegularGridDataReader.hpp"

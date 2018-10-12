@@ -80,7 +80,7 @@ void CDPLPythonForceField::exportMMFF94OutOfPlaneBendingParameterTable()
 		.def("assign", CDPLPythonBase::copyAssOp(&ForceField::MMFF94OutOfPlaneBendingParameterTable::operator=), 
 			 (python::arg("self"), python::arg("table")), python::return_self<>())
 		.add_property("numEntries", &ForceField::MMFF94OutOfPlaneBendingParameterTable::getNumEntries)
-		.add_property("entries", &getEntries)
+		.add_property("entries", python::make_function(&getEntries))
 		.def("set", &ForceField::MMFF94OutOfPlaneBendingParameterTable::set, (python::arg("table"), python::arg("mmff94s")))
 		.staticmethod("set")
 		.def("get", &ForceField::MMFF94OutOfPlaneBendingParameterTable::get, python::arg("mmff94s"),

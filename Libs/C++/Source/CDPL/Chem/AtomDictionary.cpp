@@ -688,10 +688,7 @@ void Chem::AtomDictionary::addEntry(const Entry& entry)
 	EntryLookupTable::key_type key(entry.getType(), entry.getIsotope());
 	EntryLookupTable::iterator it = entries.find(key);
 
-	if (it == entries.end()) 
-		entries.insert(EntryLookupTable::value_type(key, entry));
-	else 
-		it->second = entry;
+	entries.insert(EntryLookupTable::value_type(key, entry));
 }
 
 bool Chem::AtomDictionary::containsEntry(unsigned int type, std::size_t isotope) const
