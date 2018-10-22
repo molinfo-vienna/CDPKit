@@ -1,7 +1,7 @@
 /* -*- mode: c++; c-basic-offset: 4; tab-width: 4; indent-tabs-mode: t -*- */
 
 /* 
- * Utilities.cpp
+ * CDFFragmentLibraryDataWriter.hpp 
  *
  * This file is part of the Chemical Data Processing Toolkit
  *
@@ -24,35 +24,39 @@
  */
 
 
-#include "StaticInit.hpp"
+#ifndef CDPL_CONFGEN_CDFFRAGMENTLIBRARYDATAWRITER_HPP
+#define CDPL_CONFGEN_CDFFRAGMENTLIBRARYDATAWRITER_HPP
 
-#include <istream>
+#include <iosfwd>
 
-#include "CDPL/Internal/StringDataIOUtilities.hpp"
-
-#include "Utilities.hpp"
-#include "MMFF94DataFormat.hpp"
-
-
-using namespace CDPL;
+#include "CDPL/ConfGen/FragmentLibrary.hpp"
+#include "CDPL/Chem/CDFDataWriter.hpp"
+#include "CDPL/Base/ControlParameterList.hpp"
+#include "CDPL/Internal/CDFDataWriterBase.hpp"
+#include "CDPL/Internal/ByteBuffer.hpp"
 
 
-bool ForceField::readMMFF94DataLine(std::istream& is, std::string& line, const char* err_msg)
+namespace CDPL 
 {
-	while (!std::istream::traits_type::eq_int_type(is.peek(), std::istream::traits_type::eof())) {
-		Internal::readLine(is, line, err_msg, true, false, 0, MMFF94DataFormat::END_OF_LINE);
 
-		if (line.empty())
-			continue;
+	namespace ConfGen
+	{
 
-		if (line[0] == MMFF94DataFormat::COMMENT_PREFIX)
-			continue;
+		class CDFFragmentLibraryDataWriter : private Internal::CDFDataWriterBase
+		{
 
-		if (line.size() == 1 && line[0] == MMFF94DataFormat::END_OF_FILE)
-			return false;
+		public:
+			CDFFragmentLibraryDataWriter();
 
-		return true;
+			bool write(std::ostream& os, const FragmentLibrary::Entry& entry);
+
+		private:
+			Internal::ByteBuffer       entryInfoBuffer;
+			Internal::ByteBuffer       molDataBuffer;
+			Base::ControlParameterList ctrlParams;
+			Chem::CDFDataWriter        molWriter;
+		};
 	}
-
-	return false;
 }
+
+#endif // CDPL_CONFGEN_CDFFRAGMENTLIBRARYDATAWRITER_HPP

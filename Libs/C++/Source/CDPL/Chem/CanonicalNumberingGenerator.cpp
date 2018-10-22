@@ -242,9 +242,9 @@ void Chem::CanonicalNumberingGenerator::setup(const MolecularGraph& comp)
 
 void Chem::CanonicalNumberingGenerator::canonicalize(const MolecularGraph& molgraph, Util::STArray& numbering)
 {
-	if (getComponents(molgraph)->getSize() <= 1) {
+	if (!hasComponents(molgraph) || getComponents(molgraph)->getSize() <= 1) {
 		if (molgraph.getNumAtoms() == 0)
-			return ;
+			return;
 
 		setup(molgraph);
 		canonicalize(0);

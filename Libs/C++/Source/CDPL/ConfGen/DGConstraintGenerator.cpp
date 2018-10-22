@@ -297,9 +297,12 @@ void ConfGen::DGConstraintGenerator::addDefaultDistanceConstraints(Util::DG3DCoo
 	if (!molGraph)
 		return;
 
+//	const Math::ULMatrix::SharedPointer& top_dist_mtx = getTopologicalDistanceMatrix(*molGraph);
+
 	double bond_length_sum = std::accumulate(bondLengthTable.begin(), bondLengthTable.end(), double(),
 											 boost::bind(std::plus<double>(), _1,
 														 boost::bind(&BondLengthTable::value_type::second, _2)));
+
 	for (std::size_t i = 0; i < numAtoms; i++) {
 		if (noHydrogens && hAtomMask.test(i))
 			continue;
@@ -315,7 +318,7 @@ void ConfGen::DGConstraintGenerator::addDefaultDistanceConstraints(Util::DG3DCoo
 
 			double vdw_rad2 = AtomDictionary::getVdWRadius(getType(molGraph->getAtom(j)));
 
-			coords_gen.addDistanceConstraint(i, j, (vdw_rad1 + vdw_rad2), bond_length_sum);
+			coords_gen.addDistanceConstraint(i, j, (vdw_rad1 + vdw_rad2), /*(*top_dist_mtx)(i, j)*/bond_length_sum);
 			markAtomPairProcessed(i, j);
 		}
 	}
@@ -326,9 +329,6 @@ void ConfGen::DGConstraintGenerator::add14DistanceConstraints(Util::DG3DCoordina
 	using namespace Chem;
 
 	if (!molGraph)
-		return;
-
-	const FragmentList& sssr = *getSSSR(*molGraph);
 
 	for (MolecularGraph::ConstBondIterator it = molGraph->getBondsBegin(), end = molGraph->getBondsEnd(); it != end; ++it) {
 		const Bond& bond = *it;
@@ -359,7 +359,6 @@ void ConfGen::DGConstraintGenerator::add14DistanceConstraints(Util::DG3DCoordina
 			continue;
 
 		double bond_len = getBondLength(atom1_idx, atom2_idx);
-		bool ring_check = getRingFlag(bond);
 
 		for (std::size_t i = 0, num_nbrs1 = atomIndexList1.size(); i < num_nbrs1; i++) {
 			std::size_t nbr_atom1_idx = atomIndexList1[i];
@@ -382,24 +381,9 @@ void ConfGen::DGConstraintGenerator::add14DistanceConstraints(Util::DG3DCoordina
 					continue;
 
 				double nbr_bond2_len = getBondLength(nbr_atom2_idx, atom2_idx);
-				bool cis_only = false;
 
-				if (ring_check) {
-					std::size_t ring_size = getSmallestRingSize(sssr, nbr_atom1_idx, nbr_atom2_idx);
-
-					if (ring_size > 0 && ring_size < 8)
-						cis_only = true;
-				}
-			
 				double cis_dist = calcCis14AtomDistance(nbr_bond1_len, bond_len, nbr_bond2_len, nbr_bond1_angle, nbr_bond2_angle);				
-
-				if (cis_only) {
-					coords_gen.addDistanceConstraint(nbr_atom1_idx, nbr_atom2_idx, cis_dist, cis_dist);
-					markAtomPairProcessed(nbr_atom1_idx, nbr_atom2_idx);
-					continue;
-				}
-
-				double trans_dist = calcTrans14AtomDistance(nbr_bond1_len, bond_len, nbr_bond2_len, nbr_bond1_angle, nbr_bond2_angle);
+				double trans_dist = calcTrans14AtomDistance(nbr_bond1_len, bond_len, nbr_bond2_len, nbr_bond1_angle, nbr_bond2_angle);				
 
 				coords_gen.addDistanceConstraint(nbr_atom1_idx, nbr_atom2_idx, cis_dist, trans_dist);
 				markAtomPairProcessed(nbr_atom1_idx, nbr_atom2_idx);

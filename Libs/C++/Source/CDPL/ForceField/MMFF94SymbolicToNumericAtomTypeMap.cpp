@@ -42,7 +42,7 @@
 #include "CDPL/Base/Exceptions.hpp"
 
 #include "MMFF94ParameterData.hpp"
-#include "Utilities.hpp"
+#include "DataIOUtilities.hpp"
 
 
 using namespace CDPL; 

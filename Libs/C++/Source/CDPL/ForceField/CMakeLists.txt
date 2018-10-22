@@ -83,7 +83,8 @@ SET(cdpl-forcefield_LIB_SRCS
     MMFF94TorsionParameterTable.cpp
     MMFF94VanDerWaalsParameterTable.cpp
 
-    Utilities.cpp
+    UtilityFunctions.cpp
+    DataIOUtilities.cpp
    )
 
 ADD_LIBRARY(cdpl-forcefield-static STATIC ${cdpl-forcefield_LIB_SRCS})

@@ -308,7 +308,6 @@ void Chem::SMILESDataWriter::writeNonCanonSMILES(std::ostream& os, const Molecul
 	}
 
 	bool first_comp = true;
-
 	FragmentList& components = *getComponents(molgraph);
 	FragmentList::ElementIterator comps_end = components.getElementsEnd();
 
@@ -323,11 +322,8 @@ void Chem::SMILESDataWriter::writeNonCanonSMILES(std::ostream& os, const Molecul
 		if (!ctrlParameters.writeHydrogens) {
 			buildHDepleteMolGraph(comp);
 			output_molgraph = hDepleteMolGraph.get();
-	
-		} else {
-			perceiveSSSR(*output_molgraph, false);
-		}
-
+		} 
+		
 		if (ctrlParameters.writeBondStereo)
 			bondDirGenerator->generate(*output_molgraph, bondDirections);
 
@@ -390,7 +386,6 @@ void Chem::SMILESDataWriter::generateCanonComponentSMILES(const MolecularGraph& 
 	canonNumberingGenerator->setBondPropertyFlags(bond_prop_flags);
 
 	std::ostringstream oss;
-
 	FragmentList& components = *getComponents(molgraph);
 	FragmentList::ElementIterator comps_end = components.getElementsEnd();
 
@@ -404,11 +399,9 @@ void Chem::SMILESDataWriter::generateCanonComponentSMILES(const MolecularGraph& 
 			buildHDepleteMolGraph(comp);
 			buildCanonMolGraph(*hDepleteMolGraph);
 
-		} else {
-			perceiveSSSR(comp, false);
+		} else 
 			buildCanonMolGraph(comp);
-		}
-
+		
 		if (ctrlParameters.writeBondStereo)
 			bondDirGenerator->generate(*canonMolGraph, bondDirections);
 
@@ -555,8 +548,6 @@ void Chem::SMILESDataWriter::buildHDepleteMolGraph(const MolecularGraph& molgrap
 			num_atoms--;
 		}
 	}
-
-	perceiveSSSR(*hDepleteMolGraph, true);
 }
 
 void Chem::SMILESDataWriter::buildCanonMolGraph(const MolecularGraph& molgraph)

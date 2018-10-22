@@ -35,20 +35,23 @@ using namespace CDPL;
 
 
 const unsigned int ConfGen::RandomConformerGenerator::DEF_FORCE_FIELD_TYPE;
-const std::size_t  ConfGen::RandomConformerGenerator::DEF_MAX_NUM_TRIALS;
+const std::size_t  ConfGen::RandomConformerGenerator::DEF_MAX_NUM_STRUCTURE_GEN_TRIALS;
 const std::size_t  ConfGen::RandomConformerGenerator::DEF_MAX_NUM_MINIMIZATION_STEPS;
 const std::size_t  ConfGen::RandomConformerGenerator::DEF_TIMEOUT;
 const double       ConfGen::RandomConformerGenerator::DEF_MINIMIZATION_STOP_GRADIENT_NORM = 0.1;
 
 
 ConfGen::RandomConformerGenerator::RandomConformerGenerator(): 
-    molGraph(0), maxNumTrials(DEF_MAX_NUM_TRIALS), maxNumMinSteps(DEF_MAX_NUM_MINIMIZATION_STEPS), 
+    molGraph(0), maxNumStructGenTrials(DEF_MAX_NUM_STRUCTURE_GEN_TRIALS), maxNumMinSteps(DEF_MAX_NUM_MINIMIZATION_STEPS), 
 	minStopGradNorm(DEF_MINIMIZATION_STOP_GRADIENT_NORM), timeout(DEF_TIMEOUT), forceFieldType(DEF_FORCE_FIELD_TYPE), 
 	strictAtomTyping(true), energy(0.0), energyMinimizer(boost::ref(mmff94EnergyCalc), boost::ref(mmff94GradientCalc))
 {
-    rawCoordsGenerator.calculateHydrogenPositions(true);
+    rawCoordsGenerator.excludeHydrogens(true);
     rawCoordsGenerator.regardAtomConfiguration(true);
     rawCoordsGenerator.regardBondConfiguration(true);
+	rawCoordsGenerator.enablePlanarityConstraints(false);
+
+	hCoordsGenerator.undefinedOnly(false);
 }
 
 void ConfGen::RandomConformerGenerator::regardAtomConfiguration(bool regard)
@@ -71,14 +74,14 @@ bool ConfGen::RandomConformerGenerator::bondConfigurationRegarded() const
     return rawCoordsGenerator.bondConfigurationRegarded();
 }
 
-void ConfGen::RandomConformerGenerator::setMaxNumTrials(std::size_t max_num)
+void ConfGen::RandomConformerGenerator::setMaxNumStructureGenerationTrials(std::size_t max_num)
 {
-	maxNumTrials = max_num;
+	maxNumStructGenTrials = max_num;
 }
 
-std::size_t ConfGen::RandomConformerGenerator::getMaxNumTrials() const
+std::size_t ConfGen::RandomConformerGenerator::getMaxNumStructureGenerationTrials() const
 {
-	return maxNumTrials;
+	return maxNumStructGenTrials;
 }
 
 void ConfGen::RandomConformerGenerator::setMaxNumMinimizationSteps(std::size_t max_num)
@@ -168,13 +171,15 @@ ConfGen::RandomConformerGenerator::Status ConfGen::RandomConformerGenerator::gen
 
 	timer.start();
 
-	for (std::size_t i = 0; i < maxNumTrials; i++) {
+	for (std::size_t i = 0; i < maxNumStructGenTrials; i++) {
 		if (timeoutExceeded())
 			return TIMEOUT_EXCEEDED;
 
 		if (!rawCoordsGenerator.generate(coords)) 
 			continue;
-		
+
+		hCoordsGenerator.generate(*molGraph, coords, false);
+
 		energyMinimizer.setup(coords, gradient);
 		energy = 0.0;
 
@@ -182,10 +187,8 @@ ConfGen::RandomConformerGenerator::Status ConfGen::RandomConformerGenerator::gen
 			if ((j % 10) == 0 && timeoutExceeded())
 				return TIMEOUT_EXCEEDED;
 
-			BFGSMinimizer::Status status = energyMinimizer.iterate(energy, coords, gradient);
-
-			if (status != BFGSMinimizer::SUCCESS) 
-				return MINIMIZATION_ERROR;
+			if (energyMinimizer.iterate(energy, coords, gradient) != BFGSMinimizer::SUCCESS) 
+				break;
 			
 			if (minStopGradNorm >= 0.0 && energyMinimizer.getGradientNorm() <= minStopGradNorm)
 				break;

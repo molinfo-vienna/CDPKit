@@ -1,7 +1,7 @@
 /* -*- mode: c++; c-basic-offset: 4; tab-width: 4; indent-tabs-mode: t -*- */
 
 /* 
- * Module.cpp 
+ * CDFMoleculeDataFunctions.hpp 
  *
  * This file is part of the Chemical Data Processing Toolkit
  *
@@ -24,36 +24,39 @@
  */
 
 
-#include <boost/python.hpp>
+#ifndef CDPL_CONFGEN_CDFMOLECULEDATAFUNCTIONS_HPP
+#define CDPL_CONFGEN_CDFMOLECULEDATAFUNCTIONS_HPP
 
-#include "ClassExports.hpp"
-#include "FunctionExports.hpp"
-#include "NamespaceExports.hpp"
-#include "ConverterRegistration.hpp"
+#include <boost/shared_ptr.hpp>
+
+#include "CDPL/Chem/MolecularGraph.hpp"
 
 
-BOOST_PYTHON_MODULE(_confgen)
+namespace CDPL 
 {
-	using namespace CDPLPythonConfGen;
 
-	exportDGConstraintGenerator();
-	exportRaw3DCoordinatesGenerator();
-	exportFragmentList();
-	exportFragmentLibraryEntry();
-	exportFragmentLibrary();
+    namespace Internal
+    {
 
-#if defined(HAVE_BOOST_TIMER) && defined(HAVE_BOOST_CHRONO)
+	class ByteBuffer;
+    }
 
-	exportRandomConformerGenerator();
-	exportFragmentConformerGenerator();
+    namespace ConfGen 
+    {
 
-#endif // defined(HAVE_BOOST_TIMER) && defined(HAVE_BOOST_CHRONO)
+	typedef boost::shared_ptr<Internal::ByteBuffer> MoleculeDataPointer;
 
-	exportFragmentTypes();
-	exportForceFieldTypes();
+	const MoleculeDataPointer& getCDFMoleculeData(const Chem::MolecularGraph& molgraph);
 
-	exportUtilityFunctions();
+	void setCDFMoleculeData(Chem::MolecularGraph& molgraph, const MoleculeDataPointer& data);
 
-	registerToPythonConverters();
-	registerFromPythonConverters();
+	void clearCDFMoleculeData(Chem::MolecularGraph& molgraph);
+
+	bool hasCDFMoleculeData(const Chem::MolecularGraph& molgraph);
+
+	Chem::MolecularGraph::SharedPointer createMoleculeFromCDFData(const Chem::MolecularGraph& molgraph);
+    }
 }
+
+#endif // CDPL_CONFGEN_CDFMOLECULEDATAFUNCTIONS_HPP
+ 

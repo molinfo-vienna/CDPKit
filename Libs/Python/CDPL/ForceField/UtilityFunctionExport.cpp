@@ -27,6 +27,7 @@
 #include <boost/python.hpp>
 
 #include "CDPL/ForceField/UtilityFunctions.hpp"
+#include "CDPL/ForceField/MMFF94InteractionData.hpp"
 #include "CDPL/Math/Vector.hpp"
 
 #include "FunctionExports.hpp"
@@ -62,6 +63,8 @@ void CDPLPythonForceField::exportUtilityFunctions()
 	using namespace boost;
 	using namespace CDPL;
 
+	python::def("filterInteractions", &ForceField::filterInteractions,
+				(python::arg("ia_data"), python::arg("filtered_ia_data"),  python::arg("inc_atom_mask")));
 	python::def("calcSquaredDistance", &ForceField::calcSquaredDistance<double, Math::Vector3D>, 
 				(python::arg("atom1_pos"), python::arg("atom2_pos")));
 	python::def("calcDistance", &ForceField::calcDistance<double, Math::Vector3D>, 

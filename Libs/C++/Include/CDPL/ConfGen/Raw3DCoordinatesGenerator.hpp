@@ -33,7 +33,6 @@
 
 #include "CDPL/ConfGen/APIPrefix.hpp"
 #include "CDPL/ConfGen/DGConstraintGenerator.hpp"
-#include "CDPL/Chem/Hydrogen3DCoordinatesGenerator.hpp"
 #include "CDPL/Util/DGCoordinatesGenerator.hpp"
 #include "CDPL/Math/VectorArray.hpp"
 
@@ -55,6 +54,10 @@ namespace CDPL
 		public:
 			Raw3DCoordinatesGenerator();
 
+			void setBoxSize(double size);
+
+			double getBoxSize() const;
+
 			void regardAtomConfiguration(bool regard);
 
 			bool atomConfigurationRegarded() const;
@@ -63,9 +66,15 @@ namespace CDPL
 
 			bool bondConfigurationRegarded() const;
 
-			void calculateHydrogenPositions(bool calc);
+			void excludeHydrogens(bool exclude);
 
-			bool hydrogenPositionsCalculated() const;
+			bool hydrogensExcluded() const;
+
+			void enablePlanarityConstraints(bool enable);
+
+			bool planarityConstraintsEnabled() const;
+
+			const Util::BitSet& getExcludedHydrogenMask() const;
 
 			void setup(const Chem::MolecularGraph& molgraph);
 			void setup(const Chem::MolecularGraph& molgraph, const ForceField::MMFF94InteractionData& ia_data);
@@ -78,17 +87,11 @@ namespace CDPL
 		private:
 			void setup(const Chem::MolecularGraph& molgraph, const ForceField::MMFF94InteractionData* ia_data);
 
-			void calcHydrogenCoordinates(Math::Vector3DArray& coords);
-
-			const Math::Vector3D& get3DCoordinates(const Chem::Atom& atom) const;
-			bool has3DCoordinates(const Chem::Atom& atom) const;
-
-			const Chem::MolecularGraph*          molGraph;
-			Math::Vector3DArray*                 currCoords;
-			DGConstraintGenerator                dgConstraintsGen;
-			Util::DG3DCoordinatesGenerator       phase1CoordsGen;
-			Util::DG3DCoordinatesGenerator       phase2CoordsGen;
-			Chem::Hydrogen3DCoordinatesGenerator hCoordsGen;
+			const Chem::MolecularGraph*    molGraph;
+			DGConstraintGenerator          dgConstraintsGen;
+			Util::DG3DCoordinatesGenerator phase1CoordsGen;
+			Util::DG3DCoordinatesGenerator phase2CoordsGen;
+			bool                           withPlanConstr;                         
 		};
 
 		/**

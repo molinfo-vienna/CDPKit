@@ -41,9 +41,9 @@ namespace
 		return CDPL::ConfGen::isFragmentLinkBond(bond, molgraph);
 	}
 
-	unsigned int perceiveFragmentType(CDPL::Chem::BondContainer& cntnr)
+	unsigned int perceiveFragmentType(CDPL::Chem::MolecularGraph& molgraph)
 	{
-		return CDPL::ConfGen::perceiveFragmentType(cntnr);
+		return CDPL::ConfGen::perceiveFragmentType(molgraph);
 	}
 }
 
@@ -54,5 +54,5 @@ void CDPLPythonConfGen::exportUtilityFunctions()
 	using namespace CDPL;
 
 	python::def("isFragmentLinkBond", &isFragmentLinkBond, (python::arg("bond"), python::arg("molgraph"))); 
-	python::def("perceiveFragmentType", &perceiveFragmentType, python::arg("cntnr"));
+	python::def("perceiveFragmentType", &perceiveFragmentType, python::arg("molgraph"));
 }

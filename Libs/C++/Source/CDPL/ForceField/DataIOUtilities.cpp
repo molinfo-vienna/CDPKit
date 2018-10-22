@@ -1,7 +1,7 @@
 /* -*- mode: c++; c-basic-offset: 4; tab-width: 4; indent-tabs-mode: t -*- */
 
 /* 
- * Module.cpp 
+ * DataIOUtilities.cpp
  *
  * This file is part of the Chemical Data Processing Toolkit
  *
@@ -24,36 +24,35 @@
  */
 
 
-#include <boost/python.hpp>
+#include "StaticInit.hpp"
 
-#include "ClassExports.hpp"
-#include "FunctionExports.hpp"
-#include "NamespaceExports.hpp"
-#include "ConverterRegistration.hpp"
+#include <istream>
+
+#include "CDPL/Internal/StringDataIOUtilities.hpp"
+
+#include "DataIOUtilities.hpp"
+#include "MMFF94DataFormat.hpp"
 
 
-BOOST_PYTHON_MODULE(_confgen)
+using namespace CDPL;
+
+
+bool ForceField::readMMFF94DataLine(std::istream& is, std::string& line, const char* err_msg)
 {
-	using namespace CDPLPythonConfGen;
+	while (!std::istream::traits_type::eq_int_type(is.peek(), std::istream::traits_type::eof())) {
+		Internal::readLine(is, line, err_msg, true, false, 0, MMFF94DataFormat::END_OF_LINE);
 
-	exportDGConstraintGenerator();
-	exportRaw3DCoordinatesGenerator();
-	exportFragmentList();
-	exportFragmentLibraryEntry();
-	exportFragmentLibrary();
+		if (line.empty())
+			continue;
 
-#if defined(HAVE_BOOST_TIMER) && defined(HAVE_BOOST_CHRONO)
+		if (line[0] == MMFF94DataFormat::COMMENT_PREFIX)
+			continue;
 
-	exportRandomConformerGenerator();
-	exportFragmentConformerGenerator();
+		if (line.size() == 1 && line[0] == MMFF94DataFormat::END_OF_FILE)
+			return false;
 
-#endif // defined(HAVE_BOOST_TIMER) && defined(HAVE_BOOST_CHRONO)
+		return true;
+	}
 
-	exportFragmentTypes();
-	exportForceFieldTypes();
-
-	exportUtilityFunctions();
-
-	registerToPythonConverters();
-	registerFromPythonConverters();
+	return false;
 }

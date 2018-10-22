@@ -27,14 +27,15 @@
 #include "StaticInit.hpp"
 
 #include <string>
-#include <cassert>
+
+#include <boost/bind.hpp>
 
 #include "CDPL/ConfGen/FragmentLibrary.hpp"
-#include "CDPL/Chem/BasicMolecule.hpp"
-#include "CDPL/Chem/CDFMolecularGraphWriter.hpp"
-#include "CDPL/Chem/CDFMoleculeReader.hpp"
-#include "CDPL/Chem/MolecularGraphFunctions.hpp"
 #include "CDPL/Base/Exceptions.hpp"
+
+#include "CDFFragmentLibraryDataReader.hpp"
+#include "CDFFragmentLibraryDataWriter.hpp"
+#include "CDFMoleculeDataFunctions.hpp"
 
 
 using namespace CDPL;
@@ -63,76 +64,97 @@ ConfGen::FragmentLibrary::SharedPointer ConfGen::FragmentLibrary::defaultLib = b
 
 ConfGen::FragmentLibrary::FragmentLibrary() {}
 
-void ConfGen::FragmentLibrary::addEntry(Base::uint64 frag_hash, const Chem::MolecularGraph::SharedPointer& frag)
+ConfGen::FragmentLibrary::FragmentLibrary(const FragmentLibrary& lib): hashToFragMap(lib.hashToFragMap) 
+{}
+
+ConfGen::FragmentLibrary::~FragmentLibrary() {}
+
+ConfGen::FragmentLibrary& ConfGen::FragmentLibrary::operator=(const FragmentLibrary& lib)
+{
+	if (this == &lib)
+		return *this;
+
+	hashToFragMap = lib.hashToFragMap;
+
+	return *this;
+}
+
+bool ConfGen::FragmentLibrary::addEntry(Base::uint64 frag_hash, const Chem::MolecularGraph::SharedPointer& frag)
 {
 	if (!frag)
-		return;
+		return false;
 
-    fragData.insert(HashToFragmentDataMap::value_type(frag_hash, frag));
+    return hashToFragMap.insert(Entry(frag_hash, frag)).second;
 }
 
 const Chem::MolecularGraph::SharedPointer& ConfGen::FragmentLibrary::getEntry(Base::uint64 frag_hash) const
 {
-    ConstEntryIterator it = fragData.find(frag_hash);
+    HashToFragmentMap::iterator it = hashToFragMap.find(frag_hash);
 
-    if (it == fragData.end())
+    if (it == hashToFragMap.end())
 		return NO_ENTRY;
+
+	loadMolStructure(*it);
 
     return it->second;
 }
 
+bool ConfGen::FragmentLibrary::containsEntry(Base::uint64 frag_hash) const
+{
+    return (hashToFragMap.find(frag_hash) != hashToFragMap.end());
+}
+
 std::size_t ConfGen::FragmentLibrary::getNumEntries() const
 {
-    return fragData.size();
+    return hashToFragMap.size();
 }
 
 void ConfGen::FragmentLibrary::clear()
 {
-    fragData.clear();
+    hashToFragMap.clear();
 }
 
 bool ConfGen::FragmentLibrary::removeEntry(Base::uint64 frag_hash)
 {
-    return (fragData.erase(frag_hash) > 0);
+   return (hashToFragMap.erase(frag_hash) > 0);
 }
 
 ConfGen::FragmentLibrary::EntryIterator ConfGen::FragmentLibrary::removeEntry(const EntryIterator& it)
 {
-    return fragData.erase(it);
+    return EntryIterator(hashToFragMap.erase(it.base()), boost::bind(&FragmentLibrary::loadMolStructure, this, _1));
 }
 
 ConfGen::FragmentLibrary::ConstEntryIterator ConfGen::FragmentLibrary::getEntriesBegin() const
 {
-    return fragData.begin();
+    return ConstEntryIterator(hashToFragMap.begin(), boost::bind(&FragmentLibrary::loadMolStructure, this, _1));
 }
 
 ConfGen::FragmentLibrary::ConstEntryIterator ConfGen::FragmentLibrary::getEntriesEnd() const
 {
-    return fragData.end();
+    return ConstEntryIterator(hashToFragMap.end(), boost::bind(&FragmentLibrary::loadMolStructure, this, _1));
 }
 	
 ConfGen::FragmentLibrary::EntryIterator ConfGen::FragmentLibrary::getEntriesBegin()
 {
-    return fragData.begin();
+    return EntryIterator(hashToFragMap.begin(), boost::bind(&FragmentLibrary::loadMolStructure, this, _1));
 }
 
 ConfGen::FragmentLibrary::EntryIterator ConfGen::FragmentLibrary::getEntriesEnd()
 {
-    return fragData.end();
+    return EntryIterator(hashToFragMap.end(), boost::bind(&FragmentLibrary::loadMolStructure, this, _1));
 }
 
 void ConfGen::FragmentLibrary::load(std::istream& is)
 {
- 	Chem::CDFMoleculeReader reader(is);
+	CDFFragmentLibraryDataReader reader;
+	Entry entry;
 
 	while (true) {
 		try {
-			Chem::BasicMolecule::SharedPointer mol_ptr(new Chem::BasicMolecule());
-
-			if (!reader.read(*mol_ptr))
+			if (!reader.read(is, entry))
 				break;
 
-			addEntry(getHashCode(*mol_ptr), mol_ptr);
+			hashToFragMap.insert(entry);
 
 		} catch (const std::exception& e) {
 			throw Base::IOError("FragmentLibrary: error while loading fragment library: " + std::string(e.what()));
@@ -140,19 +162,15 @@ void ConfGen::FragmentLibrary::load(std::istream& is)
 	}
 }
 
-void ConfGen::FragmentLibrary::save(std::ostream& os)
+void ConfGen::FragmentLibrary::save(std::ostream& os) const
 {
-	Chem::CDFMolecularGraphWriter writer(os);
+	boost::lock_guard<boost::mutex> lock(mutex);
 
-	for (ConstEntryIterator it = fragData.begin(), end = fragData.end(); it != end; ++it) {
+	CDFFragmentLibraryDataWriter writer;
+
+	for (HashToFragmentMap::const_iterator it = hashToFragMap.begin(), end = hashToFragMap.end(); it != end; ++it) {
 		try {
-			assert(it->second);
-
-			Chem::MolecularGraph& frag = *it->second;
-
-			setHashCode(frag, it->first);
-
-			if (!writer.write(frag))
+			if (!writer.write(os, *it))
 				throw Base::IOError("FragmentLibrary: unspecified error while saving fragment library");
 
 		} catch (const std::exception& e) {
@@ -174,4 +192,16 @@ void ConfGen::FragmentLibrary::set(const SharedPointer& lib)
 const ConfGen::FragmentLibrary::SharedPointer& ConfGen::FragmentLibrary::get()
 {
     return defaultLib;
+}
+
+ConfGen::FragmentLibrary::Entry& ConfGen::FragmentLibrary::loadMolStructure(Entry& entry) const
+{
+	boost::lock_guard<boost::mutex> lock(mutex);
+
+	if (!hasCDFMoleculeData(*entry.second))
+		return entry;
+
+	entry.second = createMoleculeFromCDFData(*entry.second);
+
+	return entry;
 }

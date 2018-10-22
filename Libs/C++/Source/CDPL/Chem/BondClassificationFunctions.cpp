@@ -94,12 +94,16 @@ namespace
 }
 
 
-bool Chem::isRotatable(const Bond& bond, const MolecularGraph& molgraph, bool inc_h_rotors, bool inc_amide_bonds)
+bool Chem::isRotatable(const Bond& bond, const MolecularGraph& molgraph, bool h_rotors, bool ring_bonds, bool amide_bonds)
 {
     if (getOrder(bond) != 1)
 		return false;
 
-    if (getRingFlag(bond))
+	if (ring_bonds) {
+		if (getAromaticityFlag(bond))
+			return false;
+
+	} else if (getRingFlag(bond))
 		return false;
 
     const Atom& atom1 = bond.getBegin();
@@ -115,10 +119,10 @@ bool Chem::isRotatable(const Bond& bond, const MolecularGraph& molgraph, bool in
 	if (bond_count2 < 2)
 		return false;
 
-	if (!inc_h_rotors && (getHeavyBondCount(atom1, molgraph) < 2 || getHeavyBondCount(atom2, molgraph) < 2))
+	if (!h_rotors && (getHeavyBondCount(atom1, molgraph) < 2 || getHeavyBondCount(atom2, molgraph) < 2))
 		return false;
 
-	if (inc_amide_bonds)
+	if (amide_bonds)
 		return true;
 
 	return !isAmideBond(bond, atom1, atom2, bond_count1, bond_count2, molgraph); 

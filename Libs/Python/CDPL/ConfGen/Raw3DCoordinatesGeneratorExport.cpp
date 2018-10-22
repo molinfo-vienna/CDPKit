@@ -47,15 +47,20 @@ void CDPLPythonConfGen::exportRaw3DCoordinatesGenerator()
 		.def(CDPLPythonBase::ObjectIdentityCheckVisitor<ConfGen::Raw3DCoordinatesGenerator>())
 		.def("assign", CDPLPythonBase::copyAssOp(&ConfGen::Raw3DCoordinatesGenerator::operator=), 
 			 (python::arg("self"), python::arg("gen")), python::return_self<>())
-		.def("calculateHydrogenPositions", &ConfGen::Raw3DCoordinatesGenerator::calculateHydrogenPositions, 
-			 (python::arg("self"), python::arg("calc")))
-		.def("hydrogenPositionsCalculated", &ConfGen::Raw3DCoordinatesGenerator::hydrogenPositionsCalculated, python::arg("self"))
+		.def("excludeHydrogens", &ConfGen::Raw3DCoordinatesGenerator::excludeHydrogens, 
+			 (python::arg("self"), python::arg("exclude")))
+		.def("hydrogensExcluded", &ConfGen::Raw3DCoordinatesGenerator::hydrogensExcluded, python::arg("self"))
+		.def("enablePlanarityConstraints", &ConfGen::Raw3DCoordinatesGenerator::enablePlanarityConstraints, 
+			 (python::arg("self"), python::arg("exclude")))
+		.def("planarityConstraintsEnabled", &ConfGen::Raw3DCoordinatesGenerator::planarityConstraintsEnabled, python::arg("self"))
 		.def("regardAtomConfiguration", &ConfGen::Raw3DCoordinatesGenerator::regardAtomConfiguration, 
 			 (python::arg("self"), python::arg("regard")))
 		.def("atomConfigurationRegarded", &ConfGen::Raw3DCoordinatesGenerator::atomConfigurationRegarded, python::arg("self"))
 		.def("regardBondConfiguration", &ConfGen::Raw3DCoordinatesGenerator::regardBondConfiguration, 
 			 (python::arg("self"), python::arg("regard")))
 		.def("bondConfigurationRegarded", &ConfGen::Raw3DCoordinatesGenerator::bondConfigurationRegarded, python::arg("self"))
+		.def("getExcludedHydrogenMask", &ConfGen::Raw3DCoordinatesGenerator::getExcludedHydrogenMask, python::arg("self"), 
+			 python::return_internal_reference<>())
 		.def("setup", static_cast<void (ConfGen::Raw3DCoordinatesGenerator::*)(const Chem::MolecularGraph&)>
 			 (&ConfGen::Raw3DCoordinatesGenerator::setup), (python::arg("self"), python::arg("molgraph")))
 		.def("setup", static_cast<void (ConfGen::Raw3DCoordinatesGenerator::*)(const Chem::MolecularGraph&, const ForceField::MMFF94InteractionData&)>
@@ -66,8 +71,12 @@ void CDPLPythonConfGen::exportRaw3DCoordinatesGenerator()
 			 (python::arg("self"), python::arg("coords")))
 		.def("checkBondConfigurations", &ConfGen::Raw3DCoordinatesGenerator::checkBondConfigurations,
 			 (python::arg("self"), python::arg("coords")))
-		.add_property("calcHydrogenPositions", &ConfGen::Raw3DCoordinatesGenerator::hydrogenPositionsCalculated, 
-					  &ConfGen::Raw3DCoordinatesGenerator::calculateHydrogenPositions)
+		.add_property("exclHydrogenMask", python::make_function(&ConfGen::Raw3DCoordinatesGenerator::getExcludedHydrogenMask, 
+																python::return_internal_reference<>())) 
+		.add_property("planarityConstraints", &ConfGen::Raw3DCoordinatesGenerator::planarityConstraintsEnabled, 
+					  &ConfGen::Raw3DCoordinatesGenerator::enablePlanarityConstraints)
+		.add_property("exclHydrogens", &ConfGen::Raw3DCoordinatesGenerator::hydrogensExcluded, 
+					  &ConfGen::Raw3DCoordinatesGenerator::excludeHydrogens)
 		.add_property("regardAtomConfig", &ConfGen::Raw3DCoordinatesGenerator::atomConfigurationRegarded, 
 					  &ConfGen::Raw3DCoordinatesGenerator::regardAtomConfiguration)
 		.add_property("regardBondConfig", &ConfGen::Raw3DCoordinatesGenerator::bondConfigurationRegarded, 

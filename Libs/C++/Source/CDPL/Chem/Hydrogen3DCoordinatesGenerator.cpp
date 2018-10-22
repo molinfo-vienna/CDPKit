@@ -249,9 +249,7 @@ void Chem::Hydrogen3DCoordinatesGenerator::init(const MolecularGraph& molgraph, 
 
 		getConnectedAtoms(atom, conctdAtoms);
 
-		if (conctdAtoms.size() == 1 && 
-			getType(atom) == AtomType::H && hasCoordsFunc(molgraph.getAtom(conctdAtoms[0]))) {
-
+		if (conctdAtoms.size() == 1 && getType(atom) == AtomType::H) {
 			if (undefOnly && hasCoordsFunc(atom)) {
 				if (copy_atom_coords)
 					coords[i] = coordsFunc(atom);

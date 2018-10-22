@@ -30,8 +30,8 @@
     [#5:2]                                               CR
 
 *   Carbon 
-    [c:1]                                                CB      SPECIAL ENTRY FOR CONFGEN: CARBON AS IN BENZENE, PYRROLE
-    [#6X2:1]                                             CSP     SPECIAL ENTRY FOR CONFGEN: ACETYLENIC CARBON
+    [#6X2:1]                                             CSP     SPECIAL ENTRY FOR CONFGEN: SP CARBON
+    [c:1]                                                CB      SPECIAL ENTRY FOR CONFGEN: AROMATIC CARBON
 
     [#6X4:1]                                             CR      ALKYL CARBON, SP3
     [#6X3:1]                                             CSP2    GENERIC SP2 CARBON
@@ -117,7 +117,10 @@
 *   [o:1]                                                OFUR    AROMATIC OXYGEN AS IN FURAN
 
 *   Nitrogen
-    [n:1]                                                NPYD    SPECIAL ENTRY FOR CONFGEN: NITROGEN, AS IN PYRIDINE
+    [#7X1:1]                                             NSP     SPECIAL ENTRY FOR CONFGEN: SP NITROGEN
+    [#7X1:1]=[*]                                         =N=     SPECIAL ENTRY FOR CONFGEN: SP NITROGEN
+    [#7X2:1]                                             N=C     SPECIAL ENTRY FOR CONFGEN: SP2 NITROGEN
+    [n:1]                                                NPYD    SPECIAL ENTRY FOR CONFGEN: AROMATIC NITROGEN
 
     [#7X3:1]-[#7]=[#6]                                   NN=C    NITROGEN IN N-N=C
     [#7X3v3:1]                                           NR      NITROGEN IN ALIPHATIC AMINES

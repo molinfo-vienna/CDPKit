@@ -39,15 +39,15 @@ namespace
 
     boost::python::list getEntries(const CDPL::ConfGen::FragmentLibrary& map)
     {
-	using namespace CDPL;
-	using namespace ConfGen;
+		using namespace CDPL;
+		using namespace ConfGen;
 
-	boost::python::list entries;
+		boost::python::list entries;
 
-	for (FragmentLibrary::ConstEntryIterator it = map.getEntriesBegin(), end = map.getEntriesEnd(); it != end; ++it)
-	    entries.append(boost::ref(*it));
+		for (FragmentLibrary::ConstEntryIterator it = map.getEntriesBegin(), end = map.getEntriesEnd(); it != end; ++it)
+			entries.append(boost::ref(*it));
 
-	return entries;
+		return entries;
     }
 }
 
@@ -57,38 +57,40 @@ void CDPLPythonConfGen::exportFragmentLibrary()
     using namespace boost;
     using namespace CDPL;
 
-    python::scope scope = python::class_<ConfGen::FragmentLibrary, 
-					 ConfGen::FragmentLibrary::SharedPointer>("FragmentLibrary", python::no_init)
-	.def(python::init<>(python::arg("self")))
-	.def(python::init<const ConfGen::FragmentLibrary&>((python::arg("self"), python::arg("lib"))))
-	.def(CDPLPythonBase::ObjectIdentityCheckVisitor<ConfGen::FragmentLibrary>())	
-	.def("addEntry", &ConfGen::FragmentLibrary::addEntry, 
-	     (python::arg("self"), python::arg("frag_hash"), python::arg("frag"))) 
-	.def("removeEntry", static_cast<bool (ConfGen::FragmentLibrary::*)(Base::uint64)>(
-		 &ConfGen::FragmentLibrary::removeEntry), (python::arg("self"), python::arg("frag_hash"))) 
-	.def("getEntry", &ConfGen::FragmentLibrary::getEntry, 
-	     (python::arg("self"), python::arg("frag_hash")), python::return_value_policy<python::copy_const_reference>()) 
-	.def("clear", &ConfGen::FragmentLibrary::clear, python::arg("self")) 
-	.def("getNumEntries", &ConfGen::FragmentLibrary::getNumEntries, python::arg("self")) 
-	.def("getEntries", &getEntries, python::arg("self")) 
-	.def("load", &ConfGen::FragmentLibrary::load, (python::arg("self"), python::arg("is"))) 
-	.def("loadDefaults", &ConfGen::FragmentLibrary::loadDefaults, python::arg("self")) 
-	.def("save", &ConfGen::FragmentLibrary::save, (python::arg("self"), python::arg("os"))) 
-	.def("assign", CDPLPythonBase::copyAssOp(&ConfGen::FragmentLibrary::operator=), 
-	     (python::arg("self"), python::arg("lib")), python::return_self<>())
-	.add_property("numEntries", &ConfGen::FragmentLibrary::getNumEntries)
-	.add_property("entries", python::make_function(&getEntries))
-	.def("set", &ConfGen::FragmentLibrary::set, python::arg("map"))
-	.staticmethod("set")
-	.def("get", &ConfGen::FragmentLibrary::get, python::return_value_policy<python::copy_const_reference>())
-	.staticmethod("get");
+    python::class_<ConfGen::FragmentLibrary, 
+				   ConfGen::FragmentLibrary::SharedPointer>("FragmentLibrary", python::no_init)
+		.def(python::init<>(python::arg("self")))
+		.def(python::init<const ConfGen::FragmentLibrary&>((python::arg("self"), python::arg("lib"))))
+		.def(CDPLPythonBase::ObjectIdentityCheckVisitor<ConfGen::FragmentLibrary>())	
+		.def("addEntry", &ConfGen::FragmentLibrary::addEntry, 
+			 (python::arg("self"), python::arg("frag_hash"), python::arg("frag"))) 
+		.def("removeEntry", static_cast<bool (ConfGen::FragmentLibrary::*)(Base::uint64)>(
+				 &ConfGen::FragmentLibrary::removeEntry), (python::arg("self"), python::arg("frag_hash"))) 
+		.def("getEntry", &ConfGen::FragmentLibrary::getEntry, 
+			 (python::arg("self"), python::arg("frag_hash")), python::return_value_policy<python::copy_const_reference>()) 
+		.def("containsEntry", &ConfGen::FragmentLibrary::containsEntry, 
+			 (python::arg("self"), python::arg("frag_hash"))) 
+		.def("clear", &ConfGen::FragmentLibrary::clear, python::arg("self")) 
+		.def("getNumEntries", &ConfGen::FragmentLibrary::getNumEntries, python::arg("self")) 
+		.def("getEntries", &getEntries, python::arg("self")) 
+		.def("load", &ConfGen::FragmentLibrary::load, (python::arg("self"), python::arg("is"))) 
+		.def("loadDefaults", &ConfGen::FragmentLibrary::loadDefaults, python::arg("self")) 
+		.def("save", &ConfGen::FragmentLibrary::save, (python::arg("self"), python::arg("os"))) 
+		.def("assign", CDPLPythonBase::copyAssOp(&ConfGen::FragmentLibrary::operator=), 
+			 (python::arg("self"), python::arg("lib")), python::return_self<>())
+		.add_property("numEntries", &ConfGen::FragmentLibrary::getNumEntries)
+		.add_property("entries", python::make_function(&getEntries))
+		.def("set", &ConfGen::FragmentLibrary::set, python::arg("map"))
+		.staticmethod("set")
+		.def("get", &ConfGen::FragmentLibrary::get, python::return_value_policy<python::copy_const_reference>())
+		.staticmethod("get");
 
     python::class_<ConfGen::FragmentLibrary::Entry>("Entry", python::no_init)
-	.def(python::init<>(python::arg("self")))
-	.def(python::init<const ConfGen::FragmentLibrary::Entry&>((python::arg("self"), python::arg("entry"))))
-	.def(python::init<Base::uint64, Chem::MolecularGraph::SharedPointer>(
-		 (python::arg("self"), python::arg("frag_hash"), python::arg("frag"))))
-	.def(CDPLPythonBase::ObjectIdentityCheckVisitor<ConfGen::FragmentLibrary::Entry>())	
-	.def_readonly("hashCode", &ConfGen::FragmentLibrary::Entry::first)
-	.def_readonly("fragment", &ConfGen::FragmentLibrary::Entry::second);
+		.def(python::init<>(python::arg("self")))
+		.def(python::init<const ConfGen::FragmentLibrary::Entry&>((python::arg("self"), python::arg("entry"))))
+		.def(python::init<Base::uint64, Chem::MolecularGraph::SharedPointer>(
+				 (python::arg("self"), python::arg("frag_hash"), python::arg("frag"))))
+		.def(CDPLPythonBase::ObjectIdentityCheckVisitor<ConfGen::FragmentLibrary::Entry>())	
+		.def_readonly("hashCode", &ConfGen::FragmentLibrary::Entry::first)
+		.def_readonly("fragment", &ConfGen::FragmentLibrary::Entry::second);
 }

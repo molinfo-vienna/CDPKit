@@ -42,6 +42,7 @@
 #include "CDPL/ForceField/MMFF94GradientCalculator.hpp"
 #include "CDPL/ForceField/MMFF94InteractionData.hpp"
 #include "CDPL/ForceField/MMFF94InteractionParameterizer.hpp"
+#include "CDPL/Chem/Hydrogen3DCoordinatesGenerator.hpp"
 #include "CDPL/Math/BFGSMinimizer.hpp"
 #include "CDPL/Math/VectorArray.hpp"
 
@@ -62,7 +63,7 @@ namespace CDPL
 
 		public:
 			static const unsigned int DEF_FORCE_FIELD_TYPE                = ForceFieldType::MMFF94S_NO_ESTAT;
-			static const std::size_t  DEF_MAX_NUM_TRIALS                  = 10;
+			static const std::size_t  DEF_MAX_NUM_STRUCTURE_GEN_TRIALS    = 10;
 			static const std::size_t  DEF_MAX_NUM_MINIMIZATION_STEPS      = 0;
 			static const std::size_t  DEF_TIMEOUT                         = 600 * 1000;
 			static const double       DEF_MINIMIZATION_STOP_GRADIENT_NORM;
@@ -73,7 +74,6 @@ namespace CDPL
 			    SUCCESS,
 			    UNINITIALIZED,
 				MAX_NUM_TRIALS_EXCEEDED,
-				MINIMIZATION_ERROR,
 				TIMEOUT_EXCEEDED
 			};
 
@@ -87,9 +87,9 @@ namespace CDPL
 
 			bool bondConfigurationRegarded() const;
 
-			void setMaxNumTrials(std::size_t max_num);
+			void setMaxNumStructureGenerationTrials(std::size_t max_num);
 
-			std::size_t getMaxNumTrials() const;
+			std::size_t getMaxNumStructureGenerationTrials() const;
 
 			void setMaxNumMinimizationSteps(std::size_t max_num);
 
@@ -125,7 +125,7 @@ namespace CDPL
 			typedef Math::BFGSMinimizer<Math::Vector3DArray, double> BFGSMinimizer; 
 		
 			const Chem::MolecularGraph*                molGraph;
-			std::size_t                                maxNumTrials;
+			std::size_t                                maxNumStructGenTrials;
 			std::size_t                                maxNumMinSteps;
 			double                                     minStopGradNorm;
 			std::size_t                                timeout;
@@ -139,6 +139,7 @@ namespace CDPL
 			MMFF94GradientCalculator                   mmff94GradientCalc;
 			BFGSMinimizer                              energyMinimizer;
 			Raw3DCoordinatesGenerator                  rawCoordsGenerator;
+			Chem::Hydrogen3DCoordinatesGenerator       hCoordsGenerator;
 			Math::Vector3DArray                        gradient;
 		};
 

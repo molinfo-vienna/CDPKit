@@ -1,7 +1,7 @@
 /* -*- mode: c++; c-basic-offset: 4; tab-width: 4; indent-tabs-mode: t -*- */
 
 /* 
- * Module.cpp 
+ * DataIOUtilities.hpp
  *
  * This file is part of the Chemical Data Processing Toolkit
  *
@@ -24,36 +24,21 @@
  */
 
 
-#include <boost/python.hpp>
+#ifndef CDPL_FORCEFIELD_DATAIOUTILITIES_HPP
+#define CDPL_FORCEFIELD_DATAIOUTILITIES_HPP
 
-#include "ClassExports.hpp"
-#include "FunctionExports.hpp"
-#include "NamespaceExports.hpp"
-#include "ConverterRegistration.hpp"
+#include <string>
+#include <iosfwd>
 
 
-BOOST_PYTHON_MODULE(_confgen)
+namespace CDPL
 {
-	using namespace CDPLPythonConfGen;
 
-	exportDGConstraintGenerator();
-	exportRaw3DCoordinatesGenerator();
-	exportFragmentList();
-	exportFragmentLibraryEntry();
-	exportFragmentLibrary();
+    namespace ForceField
+    {
 
-#if defined(HAVE_BOOST_TIMER) && defined(HAVE_BOOST_CHRONO)
-
-	exportRandomConformerGenerator();
-	exportFragmentConformerGenerator();
-
-#endif // defined(HAVE_BOOST_TIMER) && defined(HAVE_BOOST_CHRONO)
-
-	exportFragmentTypes();
-	exportForceFieldTypes();
-
-	exportUtilityFunctions();
-
-	registerToPythonConverters();
-	registerFromPythonConverters();
+		bool readMMFF94DataLine(std::istream& is, std::string& line, const char* err_msg = "Error while reading MMFF94 parameter data");
+    }
 }
+
+#endif // CDPL_FORCEFIELD_DATAIOUTILITIES_HPP

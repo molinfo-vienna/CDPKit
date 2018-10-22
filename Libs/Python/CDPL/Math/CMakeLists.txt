@@ -86,6 +86,7 @@ SET(math_impl_MOD_SRCS
     MLRModelExport.cpp
     BFGSMinimizerExport.cpp
     KabschAlgorithmExport.cpp
+    VectorArrayAlignmentCalculatorExport.cpp
     BoostFunctionWrapperExport.cpp
     
     ToPythonConverterRegistration.cpp

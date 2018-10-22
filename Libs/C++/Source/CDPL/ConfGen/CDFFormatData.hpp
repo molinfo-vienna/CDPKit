@@ -1,7 +1,7 @@
 /* -*- mode: c++; c-basic-offset: 4; tab-width: 4; indent-tabs-mode: t -*- */
 
 /* 
- * Utilities.hpp
+ * CDFFormatData.hpp
  *
  * This file is part of the Chemical Data Processing Toolkit
  *
@@ -24,21 +24,27 @@
  */
 
 
-#ifndef CDPL_FORCEFIELD_UTILITIES_HPP
-#define CDPL_FORCEFIELD_UTILITIES_HPP
+#ifndef CDPL_CONFGEN_CDFFORMATDATA_HPP
+#define CDPL_CONFGEN_CDFFORMATDATA_HPP
 
-#include <string>
-#include <iosfwd>
+#include "CDPL/Internal/CDFFormatData.hpp"
 
 
 namespace CDPL
 {
 
-    namespace ForceField
+    namespace ConfGen
     {
 
-		bool readMMFF94DataLine(std::istream& is, std::string& line, const char* err_msg = "Error while reading MMFF94 parameter data");
+	namespace CDF
+	{
+			
+	    using namespace Internal::CDF;
+
+	    const Base::uint8 FRAGLIB_DATA_RECORD_ID  = 6;
+	    const Base::uint8 CURR_FORMAT_VERSION     = 1;
+	}
     }
 }
 
-#endif // CDPL_FORCEFIELD_UTILITIES_HPP
+#endif // CDPL_CONFGEN_CDFFORMATDATA_HPP

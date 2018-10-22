@@ -44,7 +44,6 @@ namespace
 	{
 
 		typedef CDPL::Math::KabschAlgorithm<T> AlgoType;
-		typedef typename CDPL::Math::KabschAlgorithm<T>::MatrixType MatrixType;
 
 		KabschAlgorithmExport(const char* name) {
 			using namespace boost;
@@ -63,10 +62,10 @@ namespace
 				.def("align", &align<double>, 
 					 (python::arg("self"), python::arg("points"), python::arg("ref_points"), 
 					  python::arg("do_center") = true, python::arg("max_svd_iter") = 0))
-				.def("align", &calcWeightedTransform<float>, 
+				.def("align", &alignWeighted<float>, 
 					 (python::arg("self"), python::arg("points"), python::arg("ref_points"), python::arg("weights"), 
 					  python::arg("do_center") = true, python::arg("max_svd_iter") = 0))
-				.def("align", &calcWeightedTransform<double>, 
+				.def("align", &alignWeighted<double>, 
 					 (python::arg("self"), python::arg("points"), python::arg("ref_points"), python::arg("weights"), 
 					  python::arg("do_center") = true, python::arg("max_svd_iter") = 0))
 				.add_property("transform", python::make_function(&AlgoType::getTransform, 
@@ -83,11 +82,11 @@ namespace
 		}
 	
 		template <typename T1>
-		static bool calcWeightedTransform(AlgoType& algo,  
-										  const typename CDPLPythonMath::ConstMatrixExpression<T1>::SharedPointer& points,
-										  const typename CDPLPythonMath::ConstMatrixExpression<T1>::SharedPointer& ref_points,
-										  const typename CDPLPythonMath::ConstVectorExpression<T1>::SharedPointer& weights,
-										  bool do_center, std::size_t max_svd_iter) {
+		static bool alignWeighted(AlgoType& algo,  
+								  const typename CDPLPythonMath::ConstMatrixExpression<T1>::SharedPointer& points,
+								  const typename CDPLPythonMath::ConstMatrixExpression<T1>::SharedPointer& ref_points,
+								  const typename CDPLPythonMath::ConstVectorExpression<T1>::SharedPointer& weights,
+								  bool do_center, std::size_t max_svd_iter) {
 
 			return algo.align(*points, *ref_points, *weights, do_center, max_svd_iter);
 		}

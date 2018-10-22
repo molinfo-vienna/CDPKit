@@ -192,11 +192,11 @@ void ConfGen::FragmentLibraryEntry::create(const Chem::MolecularGraph& molgraph)
     clear();
 	copyAtoms(molgraph);
 
-	bool flex_rsys = copyBonds(molgraph);
+	bool ring_rsys = copyBonds(molgraph);
 
 	fixStereoDescriptors(molgraph);
 	hydrogenize();
-	calcHashCode(flex_rsys);
+	calcHashCode(ring_rsys);
 }
 
 void ConfGen::FragmentLibraryEntry::copyAtoms(const Chem::MolecularGraph& molgraph)
@@ -290,7 +290,7 @@ bool ConfGen::FragmentLibraryEntry::copyBonds(const Chem::MolecularGraph& molgra
  
 	molecule.reserveMemoryForBonds(molgraph.getNumBonds());
 
-	bool flex_rsys = false;
+	bool ring_sys = false;
 
     for (MolecularGraph::ConstBondIterator it = molgraph.getBondsBegin(), end =  molgraph.getBondsEnd(); it != end; ++it) {
 		const Bond& bond = *it;
@@ -301,11 +301,12 @@ bool ConfGen::FragmentLibraryEntry::copyBonds(const Chem::MolecularGraph& molgra
 			continue;
 
 		bool ring_flag = getRingFlag(bond);
+	
+		if (ring_flag)
+			ring_sys = true;
+
 		bool arom_flag = getAromaticityFlag(bond);
 		std::size_t order = getOrder(bond);
-
-		flex_rsys = (flex_rsys || (ring_flag && !arom_flag));
-
 		Bond& new_bond = molecule.addBond(molgraph.getAtomIndex(atom1), molgraph.getAtomIndex(atom2));
 
 		setOrder(new_bond, order);
@@ -325,7 +326,7 @@ bool ConfGen::FragmentLibraryEntry::copyBonds(const Chem::MolecularGraph& molgra
 		}
     }
 
-	return flex_rsys;
+	return ring_sys;
 }
 
 void ConfGen::FragmentLibraryEntry::fixStereoDescriptors(const Chem::MolecularGraph& molgraph)

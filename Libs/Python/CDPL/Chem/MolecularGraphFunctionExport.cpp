@@ -145,6 +145,7 @@ namespace
 	MAKE_FUNCTION_WRAPPER2(void, buildIncidenceMatrix, CDPL::Chem::MolecularGraph&, CDPL::Math::ULMatrix&)
 	MAKE_FUNCTION_WRAPPER2(void, buildBondMatrix, CDPL::Chem::MolecularGraph&, CDPL::Math::ULMatrix&)
 	MAKE_FUNCTION_WRAPPER2(void, buildBondElectronMatrix, CDPL::Chem::MolecularGraph&, CDPL::Math::ULMatrix&)
+	MAKE_FUNCTION_WRAPPER2(void, buildBondAtomTypeMatrix, CDPL::Chem::MolecularGraph&, CDPL::Math::ULMatrix&)
 	MAKE_FUNCTION_WRAPPER2(std::size_t, getAtomCount, CDPL::Chem::MolecularGraph&, unsigned int);
 	MAKE_FUNCTION_WRAPPER2(void, calcMassComposition, CDPL::Chem::MolecularGraph&, CDPL::Chem::MassComposition&);
     MAKE_FUNCTION_WRAPPER2(void, buildElementHistogram, CDPL::Chem::MolecularGraph&, CDPL::Chem::ElementHistogram&);
@@ -340,6 +341,8 @@ void CDPLPythonChem::exportMolecularGraphFunctions()
     python::def("buildIncidenceMatrix",  &buildIncidenceMatrixWrapper2,
 				(python::arg("molgraph"), python::arg("mtx")));
     python::def("buildBondMatrix",  &buildBondMatrixWrapper2, 
+				(python::arg("molgraph"), python::arg("mtx")));
+    python::def("buildBondAtomTypeMatrix",  &buildBondAtomTypeMatrixWrapper2, 
 				(python::arg("molgraph"), python::arg("mtx")));
     python::def("buildBondElectronMatrix",  &buildBondElectronMatrixWrapper2, 
 				(python::arg("molgraph"), python::arg("mtx")));

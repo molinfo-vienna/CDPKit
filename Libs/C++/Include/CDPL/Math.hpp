@@ -35,6 +35,8 @@
 #include "CDPL/Math/APIPrefix.hpp"                                              
 #include "CDPL/Math/MinimizerVariableArrayTraits.hpp"                                          
 #include "CDPL/Math/BFGSMinimizer.hpp"                                          
+#include "CDPL/Math/KabschAlgorithm.hpp"
+#include "CDPL/Math/VectorArrayAlignmentCalculator.hpp"
 #include "CDPL/Math/Check.hpp"                                                  
 #include "CDPL/Math/CommonType.hpp"                                             
 #include "CDPL/Math/Config.hpp"                                                 

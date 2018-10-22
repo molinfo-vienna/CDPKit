@@ -47,7 +47,6 @@ void CDPLPythonConfGen::exportRandomConformerGenerator()
 		.value("SUCCESS", ConfGen::RandomConformerGenerator::SUCCESS)
 		.value("UNINITIALIZED", ConfGen::RandomConformerGenerator::UNINITIALIZED)
 		.value("MAX_NUM_TRIALS_EXCEEDED", ConfGen::RandomConformerGenerator::MAX_NUM_TRIALS_EXCEEDED)
-		.value("MINIMIZATION_ERROR", ConfGen::RandomConformerGenerator::MINIMIZATION_ERROR)
 		.value("TIMEOUT_EXCEEDED", ConfGen::RandomConformerGenerator::TIMEOUT_EXCEEDED)
 		.export_values();
 
@@ -63,9 +62,10 @@ void CDPLPythonConfGen::exportRandomConformerGenerator()
 		.def("regardBondConfiguration", &ConfGen::RandomConformerGenerator::regardBondConfiguration, 
 			 (python::arg("self"), python::arg("regard")))
 		.def("bondConfigurationRegarded", &ConfGen::RandomConformerGenerator::bondConfigurationRegarded, python::arg("self"))
-
-		.def("setMaxNumTrials", &ConfGen::RandomConformerGenerator::setMaxNumTrials, (python::arg("self"), python::arg("max_num")))
-		.def("getMaxNumTrials", &ConfGen::RandomConformerGenerator::getMaxNumTrials, python::arg("self"))
+		.def("setMaxNumStructureGenerationTrials", &ConfGen::RandomConformerGenerator::setMaxNumStructureGenerationTrials, 
+			 (python::arg("self"), python::arg("max_num")))
+		.def("getMaxNumStructureGenerationTrials", &ConfGen::RandomConformerGenerator::getMaxNumStructureGenerationTrials, 
+			 python::arg("self"))
 		.def("setMaxNumMinimizationSteps", &ConfGen::RandomConformerGenerator::setMaxNumMinimizationSteps, 
 			 (python::arg("self"), python::arg("max_num")))
 		.def("getMaxNumMinimizationSteps", &ConfGen::RandomConformerGenerator::getMaxNumMinimizationSteps, python::arg("self"))
@@ -85,13 +85,18 @@ void CDPLPythonConfGen::exportRandomConformerGenerator()
 		.def("setup", &ConfGen::RandomConformerGenerator::setup, (python::arg("self"), python::arg("molgraph")))
 		.def("generate", &ConfGen::RandomConformerGenerator::generate, (python::arg("self"), python::arg("coords")))
 		.def("getEnergy", &ConfGen::RandomConformerGenerator::getEnergy, python::arg("self"))
+		.def_readonly("DEF_FORCE_FIELD_TYPE", ConfGen::RandomConformerGenerator::DEF_FORCE_FIELD_TYPE)
+		.def_readonly("DEF_MAX_NUM_STRUCTURE_GEN_TRIALS", ConfGen::RandomConformerGenerator::DEF_MAX_NUM_STRUCTURE_GEN_TRIALS)
+		.def_readonly("DEF_MAX_NUM_MINIMIZATION_STEPS", ConfGen::RandomConformerGenerator::DEF_MAX_NUM_MINIMIZATION_STEPS)
+		.def_readonly("DEF_TIMEOUT", ConfGen::RandomConformerGenerator::DEF_TIMEOUT)
+		.def_readonly("DEF_MINIMIZATION_STOP_GRADIENT_NORM", ConfGen::RandomConformerGenerator::DEF_MINIMIZATION_STOP_GRADIENT_NORM)
 		.add_property("energy", &ConfGen::RandomConformerGenerator::getEnergy) 
 		.add_property("regardAtomConfig", &ConfGen::RandomConformerGenerator::atomConfigurationRegarded, 
 					  &ConfGen::RandomConformerGenerator::regardAtomConfiguration)
 		.add_property("regardBondConfig", &ConfGen::RandomConformerGenerator::bondConfigurationRegarded, 
 					  &ConfGen::RandomConformerGenerator::regardBondConfiguration)
-		.add_property("maxNumTrials", &ConfGen::RandomConformerGenerator::getMaxNumTrials, 
-					  &ConfGen::RandomConformerGenerator::setMaxNumTrials)
+		.add_property("maxNumStructGenTrials", &ConfGen::RandomConformerGenerator::getMaxNumStructureGenerationTrials, 
+					  &ConfGen::RandomConformerGenerator::setMaxNumStructureGenerationTrials)
 		.add_property("maxNumMinimizationSteps", &ConfGen::RandomConformerGenerator::getMaxNumMinimizationSteps, 
 					  &ConfGen::RandomConformerGenerator::setMaxNumMinimizationSteps)
 		.add_property("minimizationStopGradientNorm", &ConfGen::RandomConformerGenerator::getMinimizationStopGradientNorm,

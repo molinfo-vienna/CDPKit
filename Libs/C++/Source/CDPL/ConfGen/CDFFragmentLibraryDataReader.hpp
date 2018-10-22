@@ -1,7 +1,7 @@
 /* -*- mode: c++; c-basic-offset: 4; tab-width: 4; indent-tabs-mode: t -*- */
 
 /* 
- * Module.cpp 
+ * CDFFragmentLibraryDataReader.hpp 
  *
  * This file is part of the Chemical Data Processing Toolkit
  *
@@ -24,36 +24,32 @@
  */
 
 
-#include <boost/python.hpp>
+#ifndef CDPL_CONFGEN_CDFFRAGMENTLIBRARYDATAREADER_HPP
+#define CDPL_CONFGEN_CDFFRAGMENTLIBRARYDATAREADER_HPP
 
-#include "ClassExports.hpp"
-#include "FunctionExports.hpp"
-#include "NamespaceExports.hpp"
-#include "ConverterRegistration.hpp"
+#include <iosfwd>
+
+#include "CDPL/ConfGen/FragmentLibrary.hpp"
+#include "CDPL/Internal/CDFDataReaderBase.hpp"
+#include "CDPL/Internal/ByteBuffer.hpp"
 
 
-BOOST_PYTHON_MODULE(_confgen)
+namespace CDPL 
 {
-	using namespace CDPLPythonConfGen;
 
-	exportDGConstraintGenerator();
-	exportRaw3DCoordinatesGenerator();
-	exportFragmentList();
-	exportFragmentLibraryEntry();
-	exportFragmentLibrary();
+	namespace ConfGen
+	{
 
-#if defined(HAVE_BOOST_TIMER) && defined(HAVE_BOOST_CHRONO)
+		class CDFFragmentLibraryDataReader : private Internal::CDFDataReaderBase
+		{
 
-	exportRandomConformerGenerator();
-	exportFragmentConformerGenerator();
+		public:
+			bool read(std::istream& is, FragmentLibrary::Entry& entry);
 
-#endif // defined(HAVE_BOOST_TIMER) && defined(HAVE_BOOST_CHRONO)
-
-	exportFragmentTypes();
-	exportForceFieldTypes();
-
-	exportUtilityFunctions();
-
-	registerToPythonConverters();
-	registerFromPythonConverters();
+		private:
+			Internal::ByteBuffer entryInfoBuffer;
+		};
+	}
 }
+
+#endif // CDPL_CONFGEN_CDFFRAGMENTLIBRARYDATAREADER_HPP

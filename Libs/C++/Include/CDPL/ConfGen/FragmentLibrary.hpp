@@ -36,6 +36,9 @@
 
 #include <boost/shared_ptr.hpp>
 #include <boost/unordered_map.hpp>
+#include <boost/thread.hpp>
+#include <boost/function.hpp>
+#include <boost/iterator/transform_iterator.hpp>
 
 #include "CDPL/ConfGen/APIPrefix.hpp"
 #include "CDPL/Chem/MolecularGraph.hpp"
@@ -47,63 +50,77 @@ namespace CDPL
     namespace ConfGen 
     {
 
-	/**
-	 * \addtogroup CDPL_CONFGEN_DATA_STRUCTURES
-	 * @{
-	 */
+		/**
+		 * \addtogroup CDPL_CONFGEN_DATA_STRUCTURES
+		 * @{
+		 */
 
-	class CDPL_CONFGEN_API FragmentLibrary
-	{
+		class CDPL_CONFGEN_API FragmentLibrary
+		{
 
-	    typedef boost::unordered_map<Base::uint64, Chem::MolecularGraph::SharedPointer> HashToFragmentDataMap;
+			typedef boost::unordered_map<Base::uint64, Chem::MolecularGraph::SharedPointer> HashToFragmentMap;
 
-	  public:
-	    typedef boost::shared_ptr<FragmentLibrary> SharedPointer;
+		  public:
+			typedef boost::shared_ptr<FragmentLibrary> SharedPointer;
 	
-		typedef HashToFragmentDataMap::value_type Entry;
-	    typedef HashToFragmentDataMap::const_iterator ConstEntryIterator;
-	    typedef HashToFragmentDataMap::iterator EntryIterator;
+			typedef HashToFragmentMap::value_type Entry;
 
-	    FragmentLibrary();
+			typedef boost::transform_iterator<boost::function1<const Entry&, Entry&>, 
+											  HashToFragmentMap::iterator> ConstEntryIterator;
+			typedef boost::transform_iterator<boost::function1<Entry&, Entry&>, 
+											  HashToFragmentMap::iterator> EntryIterator;
 
-	    void addEntry(Base::uint64 frag_hash, const Chem::MolecularGraph::SharedPointer& frag);
+			FragmentLibrary();
 
-	    const Chem::MolecularGraph::SharedPointer& getEntry(Base::uint64 frag_hash) const;
+			FragmentLibrary(const FragmentLibrary& lib);
 
-	    std::size_t getNumEntries() const;
+			~FragmentLibrary();
 
-	    void clear();
+			FragmentLibrary& operator=(const FragmentLibrary& lib);
 
-	    bool removeEntry(Base::uint64 frag_hash);
+			bool addEntry(Base::uint64 frag_hash, const Chem::MolecularGraph::SharedPointer& frag);
 
-	    EntryIterator removeEntry(const EntryIterator& it);
+			const Chem::MolecularGraph::SharedPointer& getEntry(Base::uint64 frag_hash) const;
 
-	    ConstEntryIterator getEntriesBegin() const;
+			bool containsEntry(Base::uint64 frag_hash) const;
 
-	    ConstEntryIterator getEntriesEnd() const;
+			std::size_t getNumEntries() const;
+
+			void clear();
+
+			bool removeEntry(Base::uint64 frag_hash);
+
+			EntryIterator removeEntry(const EntryIterator& it);
+
+			ConstEntryIterator getEntriesBegin() const;
+
+			ConstEntryIterator getEntriesEnd() const;
 	
-	    EntryIterator getEntriesBegin();
+			EntryIterator getEntriesBegin();
 
-	    EntryIterator getEntriesEnd();
+			EntryIterator getEntriesEnd();
 
-	    void load(std::istream& is);
+			void load(std::istream& is);
 
-	    void save(std::ostream& os);
+			void save(std::ostream& os) const;
 
-	    void loadDefaults();
+			void loadDefaults();
 
-	    static void set(const SharedPointer& lib);
+			static void set(const SharedPointer& lib);
 
-	    static const SharedPointer& get();
+			static const SharedPointer& get();
 
-	  private:
-	    static SharedPointer  defaultLib;
-	    HashToFragmentDataMap fragData;
-	};
+		  private:
+			Entry& loadMolStructure(Entry& entry) const;
+			
+			static SharedPointer      defaultLib;
+			mutable HashToFragmentMap hashToFragMap;
+			mutable boost::mutex      mutex;
+		};
     
-	/**
-	 * @}
-	 */
+		/**
+		 * @}
+		 */
     }
 }
 

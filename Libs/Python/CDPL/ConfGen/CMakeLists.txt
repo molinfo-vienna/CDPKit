@@ -29,6 +29,7 @@ IF(Boost_TIMER_FOUND AND Boost_CHRONO_FOUND)
   SET(confgen_MOD_SRCS
       ${confgen_MOD_SRCS}
       RandomConformerGeneratorExport.cpp
+      FragmentConformerGeneratorExport.cpp
      )	
 ENDIF(Boost_TIMER_FOUND AND Boost_CHRONO_FOUND)
 

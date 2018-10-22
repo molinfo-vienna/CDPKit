@@ -67,7 +67,7 @@ void Grid::CDFRegularGridSetDataWriter::appendGridSet(const DRegularGridSet& gri
 
 	bbuf.setIOPointer(init_pos);
 
-	outputGridSetHeader(grid_set, bbuf, saved_pos - init_pos -CDF::HEADER_SIZE);
+	outputGridSetHeader(grid_set, bbuf, saved_pos - init_pos - CDF::HEADER_SIZE);
 
 	bbuf.setIOPointer(saved_pos);
 

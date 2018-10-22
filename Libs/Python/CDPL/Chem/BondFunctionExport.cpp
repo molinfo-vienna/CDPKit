@@ -116,8 +116,8 @@ namespace
 
 	MAKE_FUNCTION_WRAPPER4(bool, isStereoCenter, CDPL::Chem::Bond&, CDPL::Chem::MolecularGraph&, std::size_t, bool);
 	MAKE_FUNCTION_WRAPPER4(unsigned int, calcBondConfiguration, CDPL::Chem::Bond&, CDPL::Chem::MolecularGraph&, const CDPL::Chem::StereoDescriptor&, const CDPL::Math::Vector3DArray&);
-	MAKE_FUNCTION_WRAPPER4(bool, isRotatable, CDPL::Chem::Bond&, CDPL::Chem::MolecularGraph&, bool, bool);
 
+	MAKE_FUNCTION_WRAPPER5(bool, isRotatable, CDPL::Chem::Bond&, CDPL::Chem::MolecularGraph&, bool, bool, bool);
 	MAKE_FUNCTION_WRAPPER5(CDPL::Chem::StereoDescriptor, calcStereoDescriptor, CDPL::Chem::Bond&, CDPL::Chem::MolecularGraph&, std::size_t, std::size_t, bool);
 
 	std::string buildMatchExpressionStringWrapper(CDPL::Chem::Bond& bond, CDPL::Chem::MolecularGraph& molgraph)
@@ -171,9 +171,9 @@ void CDPLPythonChem::exportBondFunctions()
 				(python::arg("bond"), python::arg("molgraph"), python::arg("min_ring_size") = 8, python::arg("check_cip_sym") = true));
 	python::def("calcBondConfiguration", &calcBondConfigurationWrapper4,
 				(python::arg("bond"), python::arg("molgraph"), python::arg("descr"), python::arg("coords")));
-	python::def("isRotatable", &isRotatableWrapper4, 
-				(python::arg("bond"), python::arg("molgraph"), python::arg("inc_h_rotors"), python::arg("inc_amide_bonds")));
 
+	python::def("isRotatable", &isRotatableWrapper5, 
+				(python::arg("bond"), python::arg("molgraph"), python::arg("h_rotors"), python::arg("ring_bonds"), python::arg("amide_bonds")));
 	python::def("calcStereoDescriptor", &calcStereoDescriptorWrapper5, 
 				(python::arg("bond"), python::arg("molgraph"), python::arg("dim") = 1, 
 				 python::arg("min_ring_size") = 8, python::arg("check_order") = true));

@@ -33,6 +33,9 @@
 
 #include <cmath>
 
+#include "CDPL/ForceField/APIPrefix.hpp"
+#include "CDPL/Util/BitSet.hpp"
+
 
 namespace CDPL 
 {
@@ -40,10 +43,14 @@ namespace CDPL
     namespace ForceField 
     {
 
+		class MMFF94InteractionData;
+
 		/**
 		 * \addtogroup CDPL_FORCEFIELD_UTILITY_FUNCTIONS
 		 * @{ 
 		 */
+
+		CDPL_FORCEFIELD_API void filterInteractions(const MMFF94InteractionData& ia_data, MMFF94InteractionData& filtered_ia_data, const Util::BitSet& inc_atom_mask);
 
 		/**
 		 *\brief Calculates the squared distance \f$ r_{ij}^2 \f$ between two atoms \e i and \e j.

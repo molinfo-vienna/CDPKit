@@ -143,24 +143,24 @@ bool ConfGen::isFragmentLinkBond(const Chem::Bond& bond, const Chem::MolecularGr
     return false;
 } 
 
-unsigned int ConfGen::perceiveFragmentType(const Chem::BondContainer& cntnr)
+unsigned int ConfGen::perceiveFragmentType(const Chem::MolecularGraph& molgraph)
 {
     using namespace Chem;
 
-	bool has_arom_ring_bonds = false;
+	bool has_rigid_ring_bonds = false;
 
-	for (BondContainer::ConstBondIterator it = cntnr.getBondsBegin(), end = cntnr.getBondsEnd(); it != end; ++it) {
+	for (MolecularGraph::ConstBondIterator it = molgraph.getBondsBegin(), end = molgraph.getBondsEnd(); it != end; ++it) {
 		const Bond& bond = *it;
 
 		if (getRingFlag(bond)) {
-			if (getAromaticityFlag(bond))
-				has_arom_ring_bonds = true;
+			if (isRotatable(bond, molgraph, false, true, false))
+				has_rigid_ring_bonds = true;
 			else
 				return FragmentType::FLEXIBLE_RING_SYSTEM;
 		}
 	}
 
-	if (has_arom_ring_bonds)
+	if (has_rigid_ring_bonds)
 		return FragmentType::RIGID_RING_SYSTEM;
 	
 	return FragmentType::CHAIN;

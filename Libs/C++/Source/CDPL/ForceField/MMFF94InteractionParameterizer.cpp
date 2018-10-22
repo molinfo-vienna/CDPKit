@@ -307,6 +307,7 @@ void ForceField::MMFF94InteractionParameterizer::setPropertyFunctions()
 	vanDerWaalsParameterizer.setTopologicalDistanceFunction(boost::bind(&MMFF94InteractionParameterizer::getTopologicalDistance, this, _1, _2, _3));
 
 	electrostaticParameterizer.setAtomChargeFunction(boost::bind(&MMFF94InteractionParameterizer::getAtomCharge, this, _1));
+	electrostaticParameterizer.setTopologicalDistanceFunction(boost::bind(&MMFF94InteractionParameterizer::getTopologicalDistance, this, _1, _2, _3));
 
 	atomTyper.setAromaticRingSetFunction(boost::bind(&MMFF94InteractionParameterizer::getAromaticRings, this, _1));
 

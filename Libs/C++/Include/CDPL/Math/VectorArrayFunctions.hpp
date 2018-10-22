@@ -56,13 +56,28 @@ namespace CDPL
 		template <typename T, std::size_t Dim, typename T1>
 		void transform(VectorArray<CVector<T, Dim> >& va, const CMatrix<T1, Dim, Dim>& xform) 
 		{
-			typedef typename VectorArray<CVector<T, Dim> >::ElementIterator Iterator;
-			typedef typename VectorArray<CVector<T, Dim> >::ValueType ValueType;
+			typedef CVector<T, Dim> VecType;
+			typedef CMatrix<T1, Dim, Dim> MtxType;
+
+			typedef typename VectorArray<VecType>::ElementIterator Iterator;
+			typedef typename VecType::Pointer VecDataPointer;
+			typedef typename MtxType::ConstArrayPointer MtxDataPointer;
+
+			T tmp[Dim];
+			MtxDataPointer xform_data = xform.getData();
 
 			for (Iterator it = va.getElementsBegin(), end = va.getElementsEnd(); it != end; ++it) {
-				ValueType& vec = *it;
+				VecDataPointer vec = it->getData();
 
-				vec = prod(xform, vec);  
+				for (std::size_t i = 0; i < Dim; i++) {
+					tmp[i] = T();
+	
+					for (std::size_t j = 0; j < Dim; j++) 
+						tmp[i] += vec[j] * xform_data[i][j];
+				}
+
+				for (std::size_t i = 0; i < Dim; i++) 
+					vec[i] = tmp[i];
 			}
 		}
 
@@ -75,22 +90,30 @@ namespace CDPL
 		template <typename T, std::size_t Dim, typename T1>
 		void transform(VectorArray<CVector<T, Dim> >& va, const CMatrix<T1, Dim + 1, Dim + 1>& xform)
 		{
-			typedef typename VectorArray<CVector<T, Dim> >::ElementIterator Iterator;
-			typedef typename VectorArray<CVector<T, Dim> >::ValueType ValueType;
+			typedef CVector<T, Dim> VecType;
+			typedef CMatrix<T1, Dim + 1, Dim + 1> MtxType;
 
-			CVector<T, Dim + 1> tmp1(1.0);
-			CVector<T, Dim + 1> tmp2;
+			typedef typename VectorArray<VecType>::ElementIterator Iterator;
+			typedef typename VecType::Pointer VecDataPointer;
+			typedef typename MtxType::ConstArrayPointer MtxDataPointer;
+
+			T tmp[Dim];
+			MtxDataPointer xform_data = xform.getData();
 
 			for (Iterator it = va.getElementsBegin(), end = va.getElementsEnd(); it != end; ++it) {
-				ValueType& vec = *it;
+				VecDataPointer vec = it->getData();
 		
-				for (std::size_t i = 0; i < Dim; i++)
-					tmp1(i) = vec(i);
-
-				prod(xform, tmp1, tmp2);
+				for (std::size_t i = 0; i < Dim; i++) {
+					tmp[i] = T();
 	
-				for (std::size_t i = 0; i < Dim; i++)
-					vec(i) = tmp2(i);
+					for (std::size_t j = 0; j < Dim; j++) 
+						tmp[i] += vec[j] * xform_data[i][j];
+
+					tmp[i] += xform_data[i][Dim];
+				}
+
+				for (std::size_t i = 0; i < Dim; i++) 
+					vec[i] = tmp[i];
 			}
 		}
 
@@ -116,6 +139,74 @@ namespace CDPL
 			ctr /= va.getSize();
 
 			return true;
+		}
+
+		template <typename T, std::size_t Dim>
+		T calcRMSD(const VectorArray<CVector<T, Dim> >& va1, const VectorArray<CVector<T, Dim> >& va2)
+		{
+			typedef CVector<T, Dim> VecType;
+			typedef typename VectorArray<VecType>::SizeType ArraySizeType;
+
+			ArraySizeType num_elem = std::min(va1.getSize(), va2.getSize());
+
+			if (num_elem == 0)
+				return T();
+
+			typedef typename VectorArray<VecType>::ConstElementIterator Iterator;
+			typedef typename VecType::ConstPointer VecDataPointer;
+
+			T sd = T();
+
+			for (Iterator it1 = va1.getElementsBegin(), it2 = va2.getElementsBegin(), end = it1 + num_elem; it1 != end; ++it1, ++it2) {
+				VecDataPointer vec1 = it1->getData();
+				VecDataPointer vec2 = it2->getData();
+
+				for (std::size_t i = 0; i < Dim; i++) {
+					T diff = vec1[i] - vec2[i];
+
+					sd += diff * diff;
+				}
+			}
+
+			return std::sqrt(sd / num_elem); 
+		}
+
+		template <typename T, std::size_t Dim, typename T1>
+		T calcRMSD(const VectorArray<CVector<T, Dim> >& va1, const VectorArray<CVector<T, Dim> >& va2, const CMatrix<T1, Dim + 1, Dim + 1>& va1_xform)
+		{
+			typedef CVector<T, Dim> VecType;
+			typedef CMatrix<T1, Dim + 1, Dim + 1> MtxType;
+
+			typedef typename VectorArray<VecType>::SizeType ArraySizeType;
+
+			ArraySizeType num_elem = std::min(va1.getSize(), va2.getSize());
+
+			if (num_elem == 0)
+				return T();
+
+			typedef typename VectorArray<VecType>::ConstElementIterator Iterator;
+			typedef typename VecType::ConstPointer VecDataPointer;
+			typedef typename MtxType::ConstArrayPointer MtxDataPointer;
+
+			T sd = T();
+			MtxDataPointer xform_data = va1_xform.getData();
+
+			for (Iterator it1 = va1.getElementsBegin(), it2 = va2.getElementsBegin(), end = it1 + num_elem; it1 != end; ++it1, ++it2) {
+				VecDataPointer vec1 = it1->getData();
+				VecDataPointer vec2 = it2->getData();
+
+				for (std::size_t i = 0; i < Dim; i++) {
+					T tmp = T();
+
+					for (std::size_t j = 0; j < Dim; j++) 
+						tmp += vec1[j] * xform_data[i][j];
+
+					tmp += xform_data[i][Dim] - vec2[i];
+					sd += tmp * tmp;
+				}
+			}
+
+			return std::sqrt(sd / num_elem); 
 		}
 
 		/**

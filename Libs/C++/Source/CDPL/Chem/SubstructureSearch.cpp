@@ -294,10 +294,8 @@ bool Chem::SubstructureSearch::findEquivAtoms()
 		const MatchExpression<Atom, MolecularGraph>& expr = **ame_it;
 		Util::BitSet& equiv_mask = *tem_it;
 
+		equiv_mask.resize(numTargetAtoms);
 		equiv_mask.reset();
-
-		if (equiv_mask.size() < numTargetAtoms)
-			equiv_mask.resize(numTargetAtoms);
 
 		bool no_equiv_atoms = true;
 		std::size_t target_atom_idx = 0;
@@ -336,10 +334,8 @@ bool Chem::SubstructureSearch::findEquivBonds()
 	for (MolecularGraph::ConstBondIterator pb_it = query->getBondsBegin(); pb_it != query_bonds_end; ++pb_it, ++tem_it, ++bme_it, ++query_bond_idx) {
 		Util::BitSet& equiv_mask = *tem_it;
 
+		equiv_mask.resize(numTargetBonds);
 		equiv_mask.reset();
-
-		if (equiv_mask.size() < numTargetBonds)		
-			equiv_mask.resize(numTargetBonds);
 
 		if (!*bme_it)
 			continue;
@@ -390,12 +386,25 @@ bool Chem::SubstructureSearch::mapAtoms()
 
 std::size_t Chem::SubstructureSearch::nextQueryAtom() const
 {
-	std::size_t idx;
+	std::size_t idx = numQueryAtoms;
 
 	if (!termQueryAtoms.empty()) 
 		idx = termQueryAtoms.front();
-	else 
-		for (idx = 0; idx < numQueryAtoms && queryAtomMapping[idx]; idx++);
+	else {
+		std::size_t min_num_equiv_tgt_atoms = std::numeric_limits<std::size_t>::max();
+		
+		for (std::size_t i = 0; i < numQueryAtoms; i++) {
+			if (queryAtomMapping[i])
+				continue;
+
+			std::size_t num_equiv_atoms = atomEquivMatrix[i].count();
+
+			if (num_equiv_atoms < min_num_equiv_tgt_atoms) {
+				idx = i;
+				min_num_equiv_tgt_atoms = num_equiv_atoms;
+			}
+		}
+	}
 
 	assert(queryMappingMask.test(idx) == false);
 	assert(idx < numQueryAtoms);

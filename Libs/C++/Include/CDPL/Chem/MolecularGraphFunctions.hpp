@@ -327,6 +327,10 @@ namespace CDPL
 
 		CDPL_CHEM_API void buildBondElectronMatrix(const MolecularGraph& molgraph, Math::ULMatrix& mtx);
 
+		CDPL_CHEM_API void buildBondElectronMatrix(const MolecularGraph& molgraph, Math::ULMatrix& mtx);
+
+		CDPL_CHEM_API void buildBondAtomTypeMatrix(const MolecularGraph& molgraph, Math::ULMatrix& mtx);
+
 	
 		CDPL_CHEM_API const Math::ULMatrix::SharedPointer& getTopologicalDistanceMatrix(const MolecularGraph& molgraph);
 

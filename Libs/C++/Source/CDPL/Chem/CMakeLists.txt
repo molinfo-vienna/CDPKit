@@ -215,6 +215,7 @@ SET(cdpl-chem_LIB_SRCS
     MolecularGraphIncidenceMatrixFunction.cpp
     MolecularGraphBondMatrixFunction.cpp
     MolecularGraphBondElectronMatrixFunction.cpp
+    MolecularGraphBondAtomTypeMatrixFunction.cpp
     MolecularGraphKierShapeFunctions.cpp
     MolecularGraphZagrebIndexFunctions.cpp
     MolecularGraphRingComplexityFunction.cpp

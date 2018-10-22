@@ -1,4 +1,4 @@
-INCLUDE_DIRECTORIES("${CMAKE_CURRENT_SOURCE_DIR}")
+INCLUDE_DIRECTORIES("${CMAKE_CURRENT_SOURCE_DIR}" "${CDPL_SOURCE_DIR}")
 
 SET(cdpl-confgen_LIB_SRCS
     DGConstraintGenerator.cpp
@@ -6,6 +6,9 @@ SET(cdpl-confgen_LIB_SRCS
     FragmentList.cpp
     FragmentLibraryEntry.cpp
     FragmentLibrary.cpp
+    CDFFragmentLibraryDataReader.cpp
+    CDFFragmentLibraryDataWriter.cpp
+    CDFMoleculeDataFunctions.cpp
     UtilityFunctions.cpp
    )
 
@@ -27,7 +30,7 @@ SET_TARGET_PROPERTIES(cdpl-confgen-static PROPERTIES
                       COMPILE_DEFINITIONS "CDPL_CONFGEN_STATIC_LINK;CDPL_BASE_STATIC_LINK;CDPL_CHEM_STATIC_LINK;CDPL_MATH_STATIC_LINK;CDPL_UTIL_STATIC_LINK;CDPL_FORCEFIELD_STATIC_LINK"
                      )
 
-TARGET_LINK_LIBRARIES(cdpl-confgen-static cdpl-base-static cdpl-chem-static cdpl-math-static cdpl-util-static cdpl-forcefield-static)
+TARGET_LINK_LIBRARIES(cdpl-confgen-static cdpl-base-static cdpl-chem-static cdpl-math-static cdpl-util-static cdpl-forcefield-static cdpl-internal-static)
 
 INSTALL(TARGETS cdpl-confgen-static
         DESTINATION "${CDPKIT_LIBRARY_INSTALL_DIR}" COMPONENT CDPLStaticLibraries
@@ -35,7 +38,7 @@ INSTALL(TARGETS cdpl-confgen-static
 
 ADD_LIBRARY(cdpl-confgen-shared SHARED ${cdpl-confgen_LIB_SRCS})
 
-TARGET_LINK_LIBRARIES(cdpl-confgen-shared cdpl-base-shared cdpl-chem-shared cdpl-math-shared cdpl-util-shared cdpl-forcefield-shared)
+TARGET_LINK_LIBRARIES(cdpl-confgen-shared cdpl-base-shared cdpl-chem-shared cdpl-math-shared cdpl-util-shared cdpl-forcefield-shared cdpl-internal-static)
 
 IF(APPLE)
   SET_TARGET_PROPERTIES(cdpl-confgen-shared PROPERTIES VERSION "${CDPL_SO_VERSION}"

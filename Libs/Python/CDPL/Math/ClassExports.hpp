@@ -100,6 +100,7 @@ namespace CDPLPythonMath
 	void exportMLRModelTypes();
 	void exportBFGSMinimizerTypes();
 	void exportKabschAlgorithmTypes();
+	void exportVectorArrayAlignmentCalculatorTypes();
 
 	void exportVectorArrayTypes();
 
