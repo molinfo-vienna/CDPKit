@@ -50,7 +50,7 @@ namespace
 		ResultType res = VIP::apply(v1, v2);
 		ResultType exp_val = ResultType();
 
-		for (SizeType i = 0; i < v1.getSize(); i++)
+		for (SizeType i = 0; i < std::min(v1.getSize(), v2.getSize()); i++)
 			exp_val += v1(i) * v2(i);
 
 		BOOST_CHECK_EQUAL(res, exp_val);

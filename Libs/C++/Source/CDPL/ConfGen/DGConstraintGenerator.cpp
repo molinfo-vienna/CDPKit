@@ -254,7 +254,7 @@ void CDPL::ConfGen::DGConstraintGenerator::setup(const Chem::MolecularGraph& mol
     assignBondAngles(ia_data);
 }
 
-void ConfGen::DGConstraintGenerator::addBondLengthConstraints(Util::DG3DCoordinatesGenerator& coords_gen)
+void ConfGen::DGConstraintGenerator::addBondLengthConstraints(Util::DG3DCoordinatesOptimizer& coords_gen)
 {
 	for (BondLengthTable::const_iterator it = bondLengthTable.begin(), end = bondLengthTable.end(); it != end; ++it) {
 		double bond_len = it->second;
@@ -269,7 +269,7 @@ void ConfGen::DGConstraintGenerator::addBondLengthConstraints(Util::DG3DCoordina
 	}
 }
 
-void ConfGen::DGConstraintGenerator::addBondAngleConstraints(Util::DG3DCoordinatesGenerator& coords_gen)
+void ConfGen::DGConstraintGenerator::addBondAngleConstraints(Util::DG3DCoordinatesOptimizer& coords_gen)
 {
 	for (BondAngleTable::const_iterator it = bondAngleTable.begin(), end = bondAngleTable.end(); it != end; ++it) {
 		std::size_t atom1_idx = it->first.get<0>();
@@ -290,7 +290,7 @@ void ConfGen::DGConstraintGenerator::addBondAngleConstraints(Util::DG3DCoordinat
 	}
 }
 
-void ConfGen::DGConstraintGenerator::addDefaultDistanceConstraints(Util::DG3DCoordinatesGenerator& coords_gen)
+void ConfGen::DGConstraintGenerator::addDefaultDistanceConstraints(Util::DG3DCoordinatesOptimizer& coords_gen)
 {
 	using namespace Chem;
 
@@ -324,7 +324,7 @@ void ConfGen::DGConstraintGenerator::addDefaultDistanceConstraints(Util::DG3DCoo
 	}
 }
 
-void ConfGen::DGConstraintGenerator::add14DistanceConstraints(Util::DG3DCoordinatesGenerator& coords_gen)
+void ConfGen::DGConstraintGenerator::add14DistanceConstraints(Util::DG3DCoordinatesOptimizer& coords_gen)
 {
 	using namespace Chem;
 
@@ -392,7 +392,7 @@ void ConfGen::DGConstraintGenerator::add14DistanceConstraints(Util::DG3DCoordina
 	}
 }
 
-void ConfGen::DGConstraintGenerator::addAtomConfigurationConstraints(Util::DG3DCoordinatesGenerator& coords_gen)
+void ConfGen::DGConstraintGenerator::addAtomConfigurationConstraints(Util::DG3DCoordinatesOptimizer& coords_gen)
 {
 	using namespace Chem;
 
@@ -418,7 +418,7 @@ void ConfGen::DGConstraintGenerator::addAtomConfigurationConstraints(Util::DG3DC
 	}
 }
 
-void ConfGen::DGConstraintGenerator::addBondConfigurationConstraints(Util::DG3DCoordinatesGenerator& coords_gen)
+void ConfGen::DGConstraintGenerator::addBondConfigurationConstraints(Util::DG3DCoordinatesOptimizer& coords_gen)
 {
 	using namespace Chem;
 
@@ -477,7 +477,7 @@ void ConfGen::DGConstraintGenerator::addBondConfigurationConstraints(Util::DG3DC
 	}
 }
 
-void ConfGen::DGConstraintGenerator::addAtomPlanarityConstraints(Util::DG3DCoordinatesGenerator& coords_gen)
+void ConfGen::DGConstraintGenerator::addAtomPlanarityConstraints(Util::DG3DCoordinatesOptimizer& coords_gen)
 {
 	using namespace Chem;
 
@@ -503,7 +503,7 @@ void ConfGen::DGConstraintGenerator::addAtomPlanarityConstraints(Util::DG3DCoord
 	}
 }
 
-void ConfGen::DGConstraintGenerator::addBondPlanarityConstraints(Util::DG3DCoordinatesGenerator& coords_gen)
+void ConfGen::DGConstraintGenerator::addBondPlanarityConstraints(Util::DG3DCoordinatesOptimizer& coords_gen)
 {
 	using namespace Chem;
 

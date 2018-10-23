@@ -31,9 +31,12 @@
 #ifndef CDPL_CONFGEN_RAW3DCOORDINATESGENERATOR_HPP
 #define CDPL_CONFGEN_RAW3DCOORDINATESGENERATOR_HPP
 
+#include <boost/random/mersenne_twister.hpp>
+#include <boost/random/uniform_real.hpp>
+
 #include "CDPL/ConfGen/APIPrefix.hpp"
 #include "CDPL/ConfGen/DGConstraintGenerator.hpp"
-#include "CDPL/Util/DGCoordinatesGenerator.hpp"
+#include "CDPL/Util/DGCoordinatesOptimizer.hpp"
 #include "CDPL/Math/VectorArray.hpp"
 
 
@@ -87,11 +90,15 @@ namespace CDPL
 		private:
 			void setup(const Chem::MolecularGraph& molgraph, const ForceField::MMFF94InteractionData* ia_data);
 
+			typedef boost::random::mt11213b RandNumEngine;
+
 			const Chem::MolecularGraph*    molGraph;
 			DGConstraintGenerator          dgConstraintsGen;
-			Util::DG3DCoordinatesGenerator phase1CoordsGen;
-			Util::DG3DCoordinatesGenerator phase2CoordsGen;
-			bool                           withPlanConstr;                         
+			Util::DG3DCoordinatesOptimizer phase1CoordsGen;
+			Util::DG3DCoordinatesOptimizer phase2CoordsGen;
+			RandNumEngine                  randomEngine;
+			bool                           withPlanConstr;    
+			double                         boxSize;
 		};
 
 		/**

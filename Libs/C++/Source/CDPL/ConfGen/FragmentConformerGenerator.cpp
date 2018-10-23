@@ -28,7 +28,6 @@
 
 #include <cmath>
 #include <algorithm>
-#include <functional>
 
 #include <boost/bind.hpp>
 
@@ -178,37 +177,42 @@ void ConfGen::FragmentConformerGenerator::generate(const Chem::MolecularGraph& m
 
 std::size_t ConfGen::FragmentConformerGenerator::getNumConformers() const
 {
-	return conformers.size();
+	return outputConfs.size();
 }
 
 const Math::Vector3DArray& ConfGen::FragmentConformerGenerator::getCoordinates(std::size_t conf_idx) const
 {
-	if (conf_idx >= conformers.size())
+	if (conf_idx >= outputConfs.size())
 		throw Base::IndexError("FragmentConformerGenerator: conformer index out of bounds");
 
-	return *conformers[conf_idx].get<1>();
+	return *outputConfs[conf_idx].get<1>();
 }
 
 Math::Vector3DArray& ConfGen::FragmentConformerGenerator::getCoordinates(std::size_t conf_idx)
 {
-	if (conf_idx >= conformers.size())
+	if (conf_idx >= outputConfs.size())
 		throw Base::IndexError("FragmentConformerGenerator: conformer index out of bounds");
 
-	return *conformers[conf_idx].get<1>();
+	return *outputConfs[conf_idx].get<1>();
 }
 
 double ConfGen::FragmentConformerGenerator::getEnergy(std::size_t conf_idx) const
 {
-	if (conf_idx >= conformers.size())
+	if (conf_idx >= outputConfs.size())
 		throw Base::IndexError("FragmentConformerGenerator: conformer index out of bounds");
 
-	return conformers[conf_idx].get<0>();
+	return outputConfs[conf_idx].get<0>();
 }
 
 void ConfGen::FragmentConformerGenerator::generateSingleConformer()
 {
-	if (reuseExistingCoords && extractExistingCoordinates())
+	Conformation conf;
+
+	if (reuseExistingCoords && extractExistingCoordinates(conf)) {
+		workingConfs.insert(ConformerList::value_type(0.0, conf));
+		outputConfs.push_back(conf);
 		return;
+	}
 
 	rawCoordsGenerator.setup(*molGraph, *mmff94Interactions);
 	rawCoordsGenerator.enablePlanarityConstraints(true);
@@ -217,12 +221,11 @@ void ConfGen::FragmentConformerGenerator::generateSingleConformer()
 	mmff94GradientCalc.setup(*mmff94Interactions, numAtoms);
     gradient.resize(numAtoms);
 
-	Conformation conf;
-
 	if (!generateRandomConformer(conf))
 		return;
 
-	conformers.push_back(conf);
+	workingConfs.insert(ConformerList::value_type(0.0, conf));
+	outputConfs.push_back(conf);
 }
 
 void ConfGen::FragmentConformerGenerator::generateFlexibleRingConformers()
@@ -247,58 +250,51 @@ void ConfGen::FragmentConformerGenerator::generateFlexibleRingConformers()
 
 	rawCoordsGenerator.setBoxSize(std::sqrt(double(heavyAtomMask.count())) * 2.0);
 
-	if (!isMacrocyclicRingSystem()) {
-		for (std::size_t i = 0, num_retrials = getNumRingConformerRetrials(); i < num_retrials && conformers.size() < maxNumRingConfs; ) {
-			if (timeoutExceeded())
-				break;
+	double e_window = eWindow;
+	std::size_t num_retrials = 0;
+	std::size_t num_rot_bonds = getNumRotatableRingBonds();
 
-			Conformation conf;
-
-			if (!generateRandomConformer(conf))
-				break;
-
-			if (checkEnergyWindow(conf) && checkRMSD(conf)) {
-				addRingConformer(conf, true);
-				i = 0;
-				continue;
-			}
-		
-			i++;
-		}
+	if (isMacrocyclicRingSystem()) {
+		e_window = num_rot_bonds * e_window;
+		num_retrials = std::pow(2, num_rot_bonds);
 
 	} else {
-		for (std::size_t i = 0, num_retrials = ringConfRetrialFact; i < num_retrials && conformers.size() < maxNumRingConfs; ) {
-			if (timeoutExceeded())
-				break;
-
-			Conformation conf;
-
-			if (!generateRandomConformer(conf))
-				break;
-
-			if (checkRMSD(conf)) {
-				addRingConformer(conf, false);
-				i = 0;
-				continue;
-			}
-		
-			i++;
-		}
+		num_retrials = num_rot_bonds * ringConfRetrialFact;
 	}
 
-	for (ConformerArray::const_iterator it = conformers.begin(), end = conformers.end(); it != end; ++it)
-		hCoordsGenerator.generate(*molGraph, *it->get<1>(), false);
+	num_retrials = std::min(maxNumRingConfs * 4, num_retrials); 
+
+	for (std::size_t i = 0; i < num_retrials; i++) {
+		Conformation conf;
+
+		if (!generateRandomConformer(conf))
+			break;
+
+		if (!checkEnergyWindow(conf, e_window))
+			continue;
+
+		if (checkRMSD(conf))
+			addRingConformer(conf, e_window);
+	}
+
+	for (ConformerList::const_iterator it = workingConfs.begin(), end = workingConfs.end(); it != end; ++it) {
+		const Conformation& conf = it->second;
+
+		hCoordsGenerator.generate(*molGraph, *conf.get<1>(), false);
+		outputConfs.push_back(conf);
+	}
 }
 
 void ConfGen::FragmentConformerGenerator::init(const Chem::MolecularGraph& molgraph, 
 											   const ForceField::MMFF94InteractionData& ia_data)
 {
-	for (ConformerArray::const_iterator it = conformers.begin(), end = conformers.end(); it != end; ++it) {
-		freeCoordinatesArray(it->get<1>());
-		freeCoordinatesArray(it->get<2>());
+	for (ConformerList::const_iterator it = workingConfs.begin(), end = workingConfs.end(); it != end; ++it) {
+		freeCoordinatesArray(it->second.get<1>());
+		freeCoordinatesArray(it->second.get<2>());
 	}
 
-	conformers.clear();
+	outputConfs.clear();
+	workingConfs.clear();
 	timer.start();
 
 	molGraph = &molgraph;
@@ -306,12 +302,12 @@ void ConfGen::FragmentConformerGenerator::init(const Chem::MolecularGraph& molgr
 	numAtoms = molgraph.getNumAtoms();
 }
 
-bool ConfGen::FragmentConformerGenerator::extractExistingCoordinates()
+bool ConfGen::FragmentConformerGenerator::extractExistingCoordinates(Conformation& conf)
 {
 	using namespace Chem;
 
-	Math::Vector3DArray::SharedPointer coords_ptr = allocCoordinatesArray();
-	Math::Vector3DArray& coords = *coords_ptr;
+	conf.get<1>() = allocCoordinatesArray();
+	Math::Vector3DArray& coords = *conf.get<1>();
 	bool have_h_atom_coords = true;
 
 	for (std::size_t i = 0; i < numAtoms; i++) {
@@ -322,14 +318,14 @@ bool ConfGen::FragmentConformerGenerator::extractExistingCoordinates()
 
 		} catch (const Base::ItemNotFound& e) {
 			if (getType(atom) != AtomType::H) {
-				freeCoordinatesArray(coords_ptr);
+				freeCoordinatesArray(conf.get<1>());
 				return false;
 			} 
 			
 			have_h_atom_coords = false;
 
 		} catch (const std::exception& e) {
-			freeCoordinatesArray(coords_ptr);
+			freeCoordinatesArray(conf.get<1>());
 			throw e;
 		}
 	}
@@ -339,12 +335,14 @@ bool ConfGen::FragmentConformerGenerator::extractExistingCoordinates()
 		hCoordsGenerator.generate(*molGraph, coords, false);
 	}
 
-	conformers.push_back(Conformation(0.0, coords_ptr));
 	return true;
 }
 
 bool ConfGen::FragmentConformerGenerator::generateRandomConformer(Conformation& conf)
 {
+	if (timeoutExceeded())
+		return false;
+
 	conf.get<1>() = allocCoordinatesArray();
 
 	Math::Vector3DArray& coords = *conf.get<1>();
@@ -378,31 +376,28 @@ bool ConfGen::FragmentConformerGenerator::generateRandomConformer(Conformation& 
 	return false;
 }
 
-bool ConfGen::FragmentConformerGenerator::checkEnergyWindow(const Conformation& conf)
-{
-	if (!conformers.empty() && conf.get<0>() > conformers[0].get<0>() + eWindow) {
-		freeCoordinatesArray(conf.get<1>());
-		return false;
-	}
-
-	return true;
-}
-
 bool ConfGen::FragmentConformerGenerator::checkRMSD(Conformation& conf)
 {
+	if (workingConfs.empty()) 
+		return true;
+
 	conf.get<2>() = allocCoordinatesArray(false);
+
 	Math::Vector3DArray& new_conf_ha_coords = *conf.get<2>();
 
 	getHeavyAtomCoordinates(*conf.get<1>(), new_conf_ha_coords);
 
-	if (conformers.empty()) 
-		return true;
-
 	Math::Matrix4D conf_xform;
 	bool rmsd_ok = true;
 
-	for (ConformerArray::const_iterator it = conformers.begin(), end = conformers.end(); it != end; ++it) {
-		const Math::Vector3DArray& conf_ha_coords = *it->get<2>();
+	for (ConformerList::iterator it = workingConfs.begin(), end = workingConfs.end(); it != end; ++it) {
+		if (!it->second.get<2>()) {
+			it->second.get<2>() = allocCoordinatesArray(false);
+
+			getHeavyAtomCoordinates(*it->second.get<1>(), *it->second.get<2>());
+		}
+
+		const Math::Vector3DArray& conf_ha_coords = *it->second.get<2>();
 
 		if (!alignmentCalc.calculate(conf_ha_coords, new_conf_ha_coords, false)) {
 			rmsd_ok = false;
@@ -422,39 +417,52 @@ bool ConfGen::FragmentConformerGenerator::checkRMSD(Conformation& conf)
 	if (!rmsd_ok) {
 		freeCoordinatesArray(conf.get<1>());
 		freeCoordinatesArray(conf.get<2>());
+
 		return false;
 	}
 
 	return true;
 }
 
-void ConfGen::FragmentConformerGenerator::addRingConformer(const Conformation& conf, bool prune)
+bool ConfGen::FragmentConformerGenerator::checkEnergyWindow(const Conformation& conf, double e_window)
 {
-	ConformerArray::iterator it = conformers.begin();
+	if (workingConfs.empty()) 
+		return true;
+
 	double energy = conf.get<0>();
 
-	for (ConformerArray::iterator end = conformers.end(); it != end; ++it) {
-		if (it->get<0>() > energy)
-			break;
+	if ((workingConfs.size() >= maxNumRingConfs && workingConfs.rbegin()->first <= energy) ||
+		energy > (workingConfs.begin()->first + e_window)) {
+
+		freeCoordinatesArray(conf.get<1>());
+		freeCoordinatesArray(conf.get<2>());
+
+		return false;
 	}
 
-	conformers.insert(it, conf);
+	return true;
+}
 
-	if (!prune)
-		return;
+void ConfGen::FragmentConformerGenerator::addRingConformer(const Conformation& conf, double e_window)
+{
+	double energy = conf.get<0>();
 
-	double prune_energy = conformers[0].get<0>() + eWindow;
+	workingConfs.insert(ConformerList::value_type(energy, conf));
 
-	while (!conformers.empty()) {
-		const Conformation& test_conf = conformers.back();
+	double max_energy = workingConfs.begin()->first + e_window;
 
-		if (test_conf.get<0>() > prune_energy) {
-			freeCoordinatesArray(test_conf.get<1>());
-			freeCoordinatesArray(test_conf.get<2>());
-			conformers.pop_back();
+	while (!workingConfs.empty()) {
+		ConformerList::reverse_iterator last = workingConfs.rbegin();
 
-		} else
-			return;
+		if (workingConfs.size() > maxNumRingConfs || last->first > max_energy) {
+			freeCoordinatesArray(last->second.get<1>());
+			freeCoordinatesArray(last->second.get<2>());
+
+			workingConfs.erase(--last.base());
+			continue;
+		} 
+
+		break;
 	}
 }
 
@@ -505,9 +513,20 @@ bool ConfGen::FragmentConformerGenerator::isMacrocyclicRingSystem() const
 			sssr.getElementsEnd());
 }
 
-std::size_t ConfGen::FragmentConformerGenerator::getNumRingConformerRetrials() const
+std::size_t ConfGen::FragmentConformerGenerator::getNumRotatableRingBonds() const
 {
-	return (ringConfRetrialFact * getSSSR(*molGraph)->getSize() * 3);
+	using namespace Chem;
+
+	std::size_t count = 0;
+
+	for (MolecularGraph::ConstBondIterator it = molGraph->getBondsBegin(), end = molGraph->getBondsEnd(); it != end; ++it) {
+		const Bond& bond = *it;
+
+		if (getRingFlag(bond) && !getAromaticityFlag(bond) && getOrder(bond) == 1)
+			count++;
+	}
+
+	return count;
 }
 
 bool ConfGen::FragmentConformerGenerator::timeoutExceeded() const
@@ -521,6 +540,11 @@ bool ConfGen::FragmentConformerGenerator::timeoutExceeded() const
 		return true;
 
 	return false;
+}
+
+bool ConfGen::FragmentConformerGenerator::inAscendingEnergyOrder(const Conformation& conf1, const Conformation& conf2)
+{
+	return (conf1.get<0>() <= conf2.get<0>());
 }
 
 Math::Vector3DArray::SharedPointer ConfGen::FragmentConformerGenerator::allocCoordinatesArray(bool resize)

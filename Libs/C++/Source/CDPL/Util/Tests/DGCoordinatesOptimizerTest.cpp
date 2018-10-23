@@ -1,7 +1,7 @@
 /* -*- mode: c++; c-basic-offset: 4; tab-width: 4; indent-tabs-mode: t -*- */
 
 /* 
- * DGCoordinatesGeneratorTest.cpp 
+ * DGCoordinatesOptimizerTest.cpp 
  *
  * This file is part of the Chemical Data Processing Toolkit
  *
@@ -32,7 +32,7 @@
 #include <boost/random/mersenne_twister.hpp>
 #include <boost/random/uniform_real.hpp>
 
-#include "CDPL/Util/DGCoordinatesGenerator.hpp"
+#include "CDPL/Util/DGCoordinatesOptimizer.hpp"
 #include "CDPL/Math/Vector.hpp"
 #include "CDPL/Math/IO.hpp"
 
@@ -56,7 +56,7 @@ namespace
 }
 
 
-BOOST_AUTO_TEST_CASE(DGCoordinatesGeneratorTest)
+BOOST_AUTO_TEST_CASE(DGCoordinatesOptimizerTest)
 {
 	using namespace CDPL;
 	using namespace Util;
@@ -75,12 +75,12 @@ BOOST_AUTO_TEST_CASE(DGCoordinatesGeneratorTest)
 
 	std::size_t NUM_VOL_CONSTRAINTS = 5;
 
-	DGCoordinatesGenerator<3, double> coords_gen;
+	DGCoordinatesOptimizer<3, double> coords_opt;
 	CoordsArray test_points(NUM_POINTS);
-	CoordsArray gen_coords(NUM_POINTS);
+	CoordsArray opt_coords(NUM_POINTS);
 
 	boost::random::mt19937 rand_eng(100);
-	boost::random::uniform_real_distribution<double> rand_dist(0.0, BOX_SIZE);
+	boost::random::uniform_real_distribution<double> rand_dist(-BOX_SIZE / 2, BOX_SIZE / 2);
 
 	// generate random test point set
 
@@ -96,7 +96,7 @@ BOOST_AUTO_TEST_CASE(DGCoordinatesGeneratorTest)
 		for (std::size_t j = i + 1; j < NUM_POINTS; j++) {
 			double dist = length(test_points[i] - test_points[j]);
 			
-			coords_gen.addDistanceConstraint(i, j, dist, dist);
+			coords_opt.addDistanceConstraint(i, j, dist, dist);
 		}
 	}
 
@@ -105,20 +105,24 @@ BOOST_AUTO_TEST_CASE(DGCoordinatesGeneratorTest)
 	for (std::size_t i = 0; i < NUM_VOL_CONSTRAINTS; i++) {
 		double vol = calcVolume(VOL_CONSTRAINT_INDS[i], test_points);
 
-		coords_gen.addVolumeConstraint(VOL_CONSTRAINT_INDS[i][0], VOL_CONSTRAINT_INDS[i][1], VOL_CONSTRAINT_INDS[i][2], VOL_CONSTRAINT_INDS[i][3],
+		coords_opt.addVolumeConstraint(VOL_CONSTRAINT_INDS[i][0], VOL_CONSTRAINT_INDS[i][1], VOL_CONSTRAINT_INDS[i][2], VOL_CONSTRAINT_INDS[i][3],
 									   vol, vol);
 	}
 
-	// setup DG coordinates generator and run
-
-	coords_gen.setBoxSize(BOX_SIZE);
+	// run DG coordinates optimizer
 
 	std::size_t num_trials = 0;
 
 	for ( ; num_trials < MAX_NUM_TRIALS; num_trials++) {
-		coords_gen.generate(NUM_POINTS, gen_coords);
+		for (std::size_t i = 0; i < NUM_POINTS; i++) {
+			opt_coords[i][2] = rand_dist(rand_eng);
+			opt_coords[i][1] = rand_dist(rand_eng);
+			opt_coords[i][0] = rand_dist(rand_eng);
+		}
+
+		coords_opt.optimize(NUM_POINTS, opt_coords);
 		
-		if (coords_gen.getDistanceError(gen_coords) < 0.1 && coords_gen.getVolumeError(gen_coords) < 0.1) 
+		if (coords_opt.getDistanceError(opt_coords) < 0.1 && coords_opt.getVolumeError(opt_coords) < 0.1) 
 			break;
 	}
 
@@ -131,8 +135,8 @@ BOOST_AUTO_TEST_CASE(DGCoordinatesGeneratorTest)
 	for (std::size_t i = 0; i < NUM_POINTS; i++) {
 		for (std::size_t j = i + 1; j < NUM_POINTS; j++) {
 			double orig_dist = length(test_points[i] - test_points[j]);
-			double gen_dist = length(gen_coords[i] - gen_coords[j]);
-			double diff = orig_dist - gen_dist;
+			double opt_dist = length(opt_coords[i] - opt_coords[j]);
+			double diff = orig_dist - opt_dist;
 
 			dist_rms_dev += diff * diff;
 		}
@@ -144,8 +148,8 @@ BOOST_AUTO_TEST_CASE(DGCoordinatesGeneratorTest)
 
 	for (std::size_t i = 0; i < NUM_VOL_CONSTRAINTS; i++) {
 		double orig_vol = calcVolume(VOL_CONSTRAINT_INDS[i], test_points);
-		double gen_vol = calcVolume(VOL_CONSTRAINT_INDS[i], gen_coords);
-		double diff = orig_vol - gen_vol;
+		double opt_vol = calcVolume(VOL_CONSTRAINT_INDS[i], opt_coords);
+		double diff = orig_vol - opt_vol;
 
 		vol_rms_dev += diff * diff;
 	}

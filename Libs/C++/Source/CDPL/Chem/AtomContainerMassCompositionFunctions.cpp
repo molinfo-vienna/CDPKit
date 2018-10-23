@@ -43,7 +43,7 @@ using namespace CDPL;
 
 double Chem::calcExplicitMass(const AtomContainer& cntnr)
 {
-	double mass;
+	double mass = 0.0;
 
 	for (AtomContainer::ConstAtomIterator it = cntnr.getAtomsBegin(), end = cntnr.getAtomsEnd(); it != end; ++it)
 		mass += getAtomicWeight(*it);

@@ -42,7 +42,7 @@ using namespace CDPL;
 
 double Chem::calcMass(const MolecularGraph& molgraph)
 {
-	double mass;
+	double mass = 0.0;
 	std::size_t imp_h_count = 0;
 
 	for (MolecularGraph::ConstAtomIterator it = molgraph.getAtomsBegin(), end = molgraph.getAtomsEnd(); it != end; ++it) {

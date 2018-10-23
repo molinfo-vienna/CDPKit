@@ -37,7 +37,7 @@ BOOST_PYTHON_MODULE(_util)
 	exportBitSet();
 	exportArrays();
 	exportBronKerboschAlgorithm();
-	exportDGCoordinatesGenerator();
+	exportDGCoordinatesOptimizer();
 
 #if defined(HAVE_BOOST_FILESYSTEM) && defined(HAVE_BOOST_IOSTREAMS)
 

@@ -38,17 +38,17 @@ using namespace CDPL;
 
 
 ConfGen::Raw3DCoordinatesGenerator::Raw3DCoordinatesGenerator(): 
-	molGraph(0), withPlanConstr(true)
+	molGraph(0), withPlanConstr(true), boxSize(20.0)
 {}
 
 void ConfGen::Raw3DCoordinatesGenerator::setBoxSize(double size)
 {
-    phase1CoordsGen.setBoxSize(size);
+    boxSize = size;
 }
 
 double ConfGen::Raw3DCoordinatesGenerator::getBoxSize() const
 {
-    return phase1CoordsGen.getBoxSize();
+    return boxSize;
 }
 
 void ConfGen::Raw3DCoordinatesGenerator::regardAtomConfiguration(bool regard)
@@ -112,10 +112,20 @@ bool ConfGen::Raw3DCoordinatesGenerator::generate(Math::Vector3DArray& coords)
     if (!molGraph)
 		return false;
 
-    phase1CoordsGen.generate(molGraph->getNumAtoms(), coords, true);
+	boost::random::uniform_real_distribution<double> coord_dist(-boxSize * 0.5, boxSize * 0.5);
+
+	for (Math::Vector3DArray::ElementIterator it = coords.getElementsBegin(), end = coords.getElementsEnd(); it != end; ++it) {
+		Math::Vector3D& pos = *it;
+
+		pos[0] = coord_dist(randomEngine);
+		pos[1] = coord_dist(randomEngine);
+		pos[2] = coord_dist(randomEngine);
+	}
+
+    phase1CoordsGen.optimize(molGraph->getNumAtoms(), coords);
 
 	if (withPlanConstr) 
-		phase2CoordsGen.generate(molGraph->getNumAtoms(), coords, false);
+		phase2CoordsGen.optimize(molGraph->getNumAtoms(), coords);
 	
 	if (dgConstraintsGen.atomConfigurationRegarded() && !checkAtomConfigurations(coords))
 		return false;
@@ -136,13 +146,10 @@ void ConfGen::Raw3DCoordinatesGenerator::setup(const Chem::MolecularGraph& molgr
     else
 		dgConstraintsGen.setup(molgraph);
 
-	double box_size = molGraph->getNumBonds() * 2;
-
 	phase1CoordsGen.clearDistanceConstraints();
     phase1CoordsGen.clearVolumeConstraints();
-	phase1CoordsGen.setBoxSize(box_size);
 	phase1CoordsGen.setRandomSeed(170375);
-	phase1CoordsGen.setCycleStepCountFactor((Util::DG3DCoordinatesGenerator::DEF_CYCLE_STEP_COUNT_FACTOR * 
+	phase1CoordsGen.setCycleStepCountFactor((Util::DG3DCoordinatesOptimizer::DEF_CYCLE_STEP_COUNT_FACTOR * 
 											 dgConstraintsGen.getExcludedHydrogenMask().count()) / molGraph->getNumAtoms());
 
     dgConstraintsGen.addBondLengthConstraints(phase1CoordsGen);
@@ -162,6 +169,8 @@ void ConfGen::Raw3DCoordinatesGenerator::setup(const Chem::MolecularGraph& molgr
 		phase2CoordsGen.clearVolumeConstraints();
 		phase2CoordsGen.clearDistanceConstraints();
 	}
+
+	randomEngine.seed(170375);
 }
 
 bool ConfGen::Raw3DCoordinatesGenerator::checkAtomConfigurations(Math::Vector3DArray& coords) const
