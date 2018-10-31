@@ -34,14 +34,14 @@
 #include "CDPL/Math/Config.hpp"
 
 #ifndef CDPL_MATH_CHECK
-#  if (CDPL_MATH_CHECK_DISABLE == 0)
+#  if (CDPL_MATH_CHECKS_DISABLE == 0)
 #    define CDPL_MATH_CHECK(expr, msg, e)	 \
 	   if (!(expr)) {						 \
 		   throw e(msg);					 \
 	   }
-#  else // CDPL_MATH_CHECK_DISABLE != 0
+#  else // CDPL_MATH_CHECKS_DISABLE != 0
 #    define CDPL_MATH_CHECK(expr, msg, e)
-#  endif // CDPL_MATH_CHECK_DISABLE == 0
+#  endif // CDPL_MATH_CHECKS_DISABLE == 0
 #endif // CDPL_MATH_CHECK
 
 

@@ -78,6 +78,10 @@ void CDPLPythonConfGen::exportFragmentConformerGenerator()
 			 (python::arg("self"), python::arg("min_rmsd")))
 		.def("getMinRMSD", &ConfGen::FragmentConformerGenerator::getMinRMSD,
 			 python::arg("self"))
+		.def("setMaxNumRingConformers", &ConfGen::FragmentConformerGenerator::setMaxNumRingConformers, 
+			 (python::arg("self"), python::arg("max_num")))
+		.def("getMaxNumRingConformers", &ConfGen::FragmentConformerGenerator::getMaxNumRingConformers, 
+			 python::arg("self"))
 		.def("generate", &ConfGen::FragmentConformerGenerator::generate, 
 			 (python::arg("self"), python::arg("molgraph"), python::arg("ia_data"), python::arg("frag_type")))
 		.def("getNumConformers", &ConfGen::FragmentConformerGenerator::getNumConformers, python::arg("self"))
@@ -88,6 +92,7 @@ void CDPLPythonConfGen::exportFragmentConformerGenerator()
 			 (python::arg("self"), python::arg("conf_idx")))
 		.def_readonly("DEF_MAX_NUM_STRUCTURE_GEN_TRIALS", ConfGen::FragmentConformerGenerator::DEF_MAX_NUM_STRUCTURE_GEN_TRIALS)
 		.def_readonly("DEF_MAX_NUM_MINIMIZATION_STEPS", ConfGen::FragmentConformerGenerator::DEF_MAX_NUM_MINIMIZATION_STEPS)
+		.def_readonly("DEF_MAX_NUM_RING_CONFORMERS", ConfGen::FragmentConformerGenerator::DEF_MAX_NUM_RING_CONFORMERS)
 		.def_readonly("DEF_TIMEOUT", ConfGen::FragmentConformerGenerator::DEF_TIMEOUT)
 		.def_readonly("DEF_RING_CONF_RETRIAL_FACTOR", ConfGen::FragmentConformerGenerator::DEF_RING_CONF_RETRIAL_FACTOR)
 		.def_readonly("DEF_MINIMIZATION_STOP_GRADIENT_NORM", ConfGen::FragmentConformerGenerator::DEF_MINIMIZATION_STOP_GRADIENT_NORM)
@@ -98,6 +103,8 @@ void CDPLPythonConfGen::exportFragmentConformerGenerator()
 					  &ConfGen::FragmentConformerGenerator::setMaxNumStructureGenerationTrials)
 		.add_property("maxNumMinimizationSteps", &ConfGen::FragmentConformerGenerator::getMaxNumMinimizationSteps, 
 					  &ConfGen::FragmentConformerGenerator::setMaxNumMinimizationSteps)
+		.add_property("maxNumRingConformers", &ConfGen::FragmentConformerGenerator::getMaxNumRingConformers, 
+					  &ConfGen::FragmentConformerGenerator::setMaxNumRingConformers)
 		.add_property("minimizationStopGradientNorm", &ConfGen::FragmentConformerGenerator::getMinimizationStopGradientNorm,
 					  &ConfGen::FragmentConformerGenerator::setMinimizationStopGradientNorm)
 		.add_property("timeout", &ConfGen::FragmentConformerGenerator::getTimeout,

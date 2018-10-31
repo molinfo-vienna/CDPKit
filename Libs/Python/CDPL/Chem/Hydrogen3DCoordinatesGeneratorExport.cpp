@@ -57,8 +57,15 @@ void CDPLPythonChem::exportHydrogen3DCoordinatesGenerator()
 			 (python::arg("self"), python::arg("func")))
 		.def("getAtom3DCoordinatesCheckFunction", &Chem::Hydrogen3DCoordinatesGenerator::getAtom3DCoordinatesCheckFunction, 
 			 python::arg("self"), python::return_internal_reference<>())
-		.def("generate", &Chem::Hydrogen3DCoordinatesGenerator::generate, 
-			 (python::arg("self"), python::arg("molgraph"), python::arg("coords"), python::arg("copy_atom_coords") = true))
+		.def("setup", &Chem::Hydrogen3DCoordinatesGenerator::setup, 
+			 (python::arg("self"), python::arg("molgraph")))
+		.def("generate", static_cast<void (Chem::Hydrogen3DCoordinatesGenerator::*)(const Chem::MolecularGraph&, Math::Vector3DArray&, bool)>(
+				 &Chem::Hydrogen3DCoordinatesGenerator::generate), 
+			 (python::arg("self"), python::arg("molgraph"), python::arg("coords"), python::arg("init_coords") = true))
+		.def("generate", static_cast<void (Chem::Hydrogen3DCoordinatesGenerator::*)(Math::Vector3DArray&, bool)>(
+				 &Chem::Hydrogen3DCoordinatesGenerator::generate), 
+			 (python::arg("self"), python::arg("coords"), python::arg("init_coords") = true))
+
 		.add_property("undefinedOnly", undefOnlyGetterFunc, undefOnlySetterFunc)
 		.add_property("coordsFunction", 
 					  python::make_function(&Chem::Hydrogen3DCoordinatesGenerator::getAtom3DCoordinatesFunction, 

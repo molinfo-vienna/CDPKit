@@ -37,6 +37,16 @@
 #include "GridExpression.hpp"
 #include "GridExpressionAdapter.hpp"
 
+ 
+#if (CDPL_MATH_CHECKS_DISABLE == 0)
+#define CHECK_GRID_INDICES(g, i, j, k)
+#else
+#define CHECK_GRID_INDICES(g, i, j, k)									\
+	if (i >= g.getSize1() || j >= g.getSize2() || k >= g.getSize3()) {	\
+		throw CDPL::Base::IndexError("Grid: element index out of bounds"); \
+	}
+#endif
+
 
 namespace CDPLPythonMath
 {
@@ -133,6 +143,8 @@ namespace CDPLPythonMath
 		}
 
 		static ValueType getElement(const GridType& grd, SizeType i, SizeType j, SizeType k) {
+			CHECK_GRID_INDICES(grd, i, j, k);
+
 			return grd(i, j, k);
 		}
 
@@ -143,7 +155,7 @@ namespace CDPLPythonMath
 			SizeType j = python::extract<SizeType>(indices[1]);
 			SizeType k = python::extract<SizeType>(indices[2]);
 			
-			return grd(i, j, k);
+			return getElement(grd, i, j, k);
 		}
 
 		static void posOperator(const GridType& grd) {}
@@ -263,6 +275,8 @@ namespace CDPLPythonMath
 		}
 	
 		static void setElement(GridType& grd, SizeType i, SizeType j, SizeType k, const ValueType& value) {
+			CHECK_GRID_INDICES(grd, i, j, k);
+
 			grd(i, j, k) = value;
 		}
 	
@@ -273,7 +287,7 @@ namespace CDPLPythonMath
 			SizeType j = python::extract<SizeType>(indices[1]);
 			SizeType k = python::extract<SizeType>(indices[2]);
 
-			grd(i, j, k) = value;
+			setElement(grd, i, j, k, value);
 		}
 
 		static void iaddOperator(GridType& grd1, const GridType& grd2) {

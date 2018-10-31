@@ -245,9 +245,14 @@ namespace CDPL
 			template <typename T>
 			static void axpy(const T& alpha, const ArrayType& x, ArrayType& y) {
 				typename ArrayType::iterator it2 = y.begin();
+				VectorType tmp;
 
-				for (typename ArrayType::const_iterator it1 = x.begin(), end1 = x.end(); it1 != end1; ++it1, ++it2)
-					it2->plusAssign(alpha * *it1);
+				for (typename ArrayType::const_iterator it1 = x.begin(), end1 = x.end(); it1 != end1; ++it1, ++it2) {
+					tmp = *it1;
+					tmp *= alpha;
+
+					it2->plusAssign(tmp);
+				}
 			}
 			
 			static void clear(ArrayType& a) {
@@ -259,10 +264,9 @@ namespace CDPL
 				if (a1.size() != a2.size())
 					a1.resize(a2.size());
 
-				typename ArrayType::const_iterator it2 = a2.begin();
+                typename ArrayType::const_iterator it2 = a2.begin();
 
-				for (typename ArrayType::iterator it1 = a1.begin(), end1 = a1.end(); it1 != end1; ++it1, ++it2)
-					it1->assign(*it2);
+				for (typename ArrayType::iterator it1 = a1.begin(), end1 = a1.end(); it1 != end1; ++it1, ++it2)                                                                                                                                                  *it1 = *it2;
 			}
 
 			template <typename T>

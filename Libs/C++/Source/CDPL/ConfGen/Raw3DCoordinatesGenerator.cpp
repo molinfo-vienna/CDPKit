@@ -112,6 +112,8 @@ bool ConfGen::Raw3DCoordinatesGenerator::generate(Math::Vector3DArray& coords)
     if (!molGraph)
 		return false;
 
+	coords.resize(molGraph->getNumAtoms());
+
 	boost::random::uniform_real_distribution<double> coord_dist(-boxSize * 0.5, boxSize * 0.5);
 
 	for (Math::Vector3DArray::ElementIterator it = coords.getElementsBegin(), end = coords.getElementsEnd(); it != end; ++it) {
@@ -122,10 +124,10 @@ bool ConfGen::Raw3DCoordinatesGenerator::generate(Math::Vector3DArray& coords)
 		pos[2] = coord_dist(randomEngine);
 	}
 
-    phase1CoordsGen.optimize(molGraph->getNumAtoms(), coords);
+    phase1CoordsGen.optimize(molGraph->getNumAtoms(), coords.getData());
 
 	if (withPlanConstr) 
-		phase2CoordsGen.optimize(molGraph->getNumAtoms(), coords);
+		phase2CoordsGen.optimize(molGraph->getNumAtoms(), coords.getData());
 	
 	if (dgConstraintsGen.atomConfigurationRegarded() && !checkAtomConfigurations(coords))
 		return false;
@@ -149,8 +151,6 @@ void ConfGen::Raw3DCoordinatesGenerator::setup(const Chem::MolecularGraph& molgr
 	phase1CoordsGen.clearDistanceConstraints();
     phase1CoordsGen.clearVolumeConstraints();
 	phase1CoordsGen.setRandomSeed(170375);
-	phase1CoordsGen.setCycleStepCountFactor((Util::DG3DCoordinatesOptimizer::DEF_CYCLE_STEP_COUNT_FACTOR * 
-											 dgConstraintsGen.getExcludedHydrogenMask().count()) / molGraph->getNumAtoms());
 
     dgConstraintsGen.addBondLengthConstraints(phase1CoordsGen);
     dgConstraintsGen.addBondAngleConstraints(phase1CoordsGen);
@@ -175,7 +175,6 @@ void ConfGen::Raw3DCoordinatesGenerator::setup(const Chem::MolecularGraph& molgr
 
 bool ConfGen::Raw3DCoordinatesGenerator::checkAtomConfigurations(Math::Vector3DArray& coords) const
 {
-
 	for (DGConstraintGenerator::ConstStereoCenterDataIterator it = dgConstraintsGen.getAtomStereoCenterDataBegin(),
 			 end = dgConstraintsGen.getAtomStereoCenterDataEnd(); it != end; ++it) {
 

@@ -34,6 +34,18 @@
 #include "Base/ObjectIdentityCheckVisitor.hpp"
 
 
+#if (CDPL_UTIL_ARRAY_CHECKS_DISABLE == 0)
+#define CHECK_ARRAY_INDEX(a, i, end_ok)
+#else
+#define CHECK_ARRAY_INDEX(a, i, end_ok)									\
+	if (end_ok) {														\
+		if (i > a.getSize())											\
+			throw CDPL::Base::IndexError("Array: element index out of bounds"); \
+	} else if (i >= a.getSize())										\
+		throw CDPL::Base::IndexError("Array: element index out of bounds"); 
+#endif
+
+
 namespace CDPLPythonUtil
 {
 
@@ -92,7 +104,7 @@ namespace CDPLPythonUtil
 				.def("getLastElement", getLastElementFunc, python::arg("self"), ElementReturnPolicy())
 				.def("getElement", getElementFunc, (python::arg("self"), python::arg("idx")), 
 					 ElementReturnPolicy())
-				.def("setElement", &ArrayType::setElement, (python::arg("self"), python::arg("idx"), python::arg("value")), 
+				.def("setElement", &setItem, (python::arg("self"), python::arg("idx"), python::arg("value")), 
 					 ElementAdditionPolicy2())
 				.def("__delitem__", &delItem, (python::arg("self"), python::arg("idx")))
 				.def("__getitem__", &getItem, (python::arg("self"), python::arg("idx")), ElementReturnPolicy())
@@ -102,7 +114,18 @@ namespace CDPLPythonUtil
 				.add_property("size", &ArrayType::getSize);
 		}
 
+		static void popElement(ArrayType& array) {
+#if (CDPL_UTIL_ARRAY_CHECKS_DISABLE == 0)
+#else
+		if (array.isEmpty())
+			throw CDPL::Base::OperationFailed("Array: operation requires non-empty array");
+#endif
+			array.popLastElement();
+		}
+
 		static void insertElements(ArrayType& array, std::size_t index, const ArrayType& values) {
+			CHECK_ARRAY_INDEX(array, index, true);
+
 			array.insertElements(index, values.getBase().getElementsBegin(), values.getBase().getElementsEnd());
 		}
 
@@ -111,18 +134,27 @@ namespace CDPLPythonUtil
 		}
 		
 		static void removeElements(ArrayType& array, std::size_t begin, std::size_t end) {
+			CHECK_ARRAY_INDEX(array, begin, true);
+			CHECK_ARRAY_INDEX(array, end, true);
+
 			array.removeElements(array.getElementsBegin() + begin, array.getElementsBegin() + end);
 		}
 
 		static typename ArrayType::BaseType::ElementType& getItem(ArrayType& array, std::size_t idx) {
+			CHECK_ARRAY_INDEX(array, idx, false);
+
 			return array.ArrayType::BaseType::getElement(idx);
 		} 	
 
 		static void delItem(ArrayType& array, std::size_t idx) {
+			CHECK_ARRAY_INDEX(array, idx, false);
+
 			array.removeElement(idx);
 		} 
 
 		static void setItem(ArrayType& array, std::size_t idx, const typename ArrayType::BaseType::ElementType& value) {
+			CHECK_ARRAY_INDEX(array, idx, false);
+
 			array.setElement(idx, value);
 		} 
 	};

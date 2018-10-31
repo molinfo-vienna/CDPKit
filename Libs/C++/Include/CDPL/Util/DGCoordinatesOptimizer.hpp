@@ -73,7 +73,7 @@ namespace CDPL
 
 			static const std::size_t COORDS_DIM                  = Dim;
 			static const std::size_t DEF_NUM_CYCLES              = 50;
-			static const std::size_t DEF_CYCLE_STEP_COUNT_FACTOR = 50;
+			static const std::size_t DEF_CYCLE_STEP_COUNT_FACTOR = 1;
 
 			static const ValueType   DEF_START_LEARNING_RATE;
 			static const ValueType   DEF_LEARNING_RATE_DECREMENT;
@@ -197,7 +197,7 @@ namespace CDPL
 
 		template <std::size_t Dim, typename T, typename Derived> 
 		const typename DGCoordinatesOptimizerBase<Dim, T, Derived>::ValueType
-		DGCoordinatesOptimizerBase<Dim, T, Derived>::DEF_LEARNING_RATE_DECREMENT = 0.9 / 50;
+		DGCoordinatesOptimizerBase<Dim, T, Derived>::DEF_LEARNING_RATE_DECREMENT = 0.95 / 50;
 
 
 		/**
@@ -310,7 +310,7 @@ namespace CDPL
 
 template <std::size_t Dim, typename T, typename Derived>
 CDPL::Util::DGCoordinatesOptimizerBase<Dim, T, Derived>::DistanceConstraint::DistanceConstraint(std::size_t pt1_idx, std::size_t pt2_idx, 
-																					   const ValueType& lb, const ValueType& ub):
+																								const ValueType& lb, const ValueType& ub):
 	point1Idx(pt1_idx), point2Idx(pt2_idx), lowerBound(lb), upperBound(ub) {}
 
 template <std::size_t Dim, typename T, typename Derived>
@@ -569,24 +569,20 @@ void CDPL::Util::DGCoordinatesOptimizerBase<Dim, T, Derived>::embedCoords(std::s
 	if ((num_dist_constrs + num_vol_constrs) == 0)
 		return;
 
-	std::size_t num_steps = num_points * cycleStepCountFactor;
+	std::size_t num_steps = (num_dist_constrs + num_vol_constrs) * cycleStepCountFactor;
 	ValueType lambda = startLearningRate;
 
 	if (num_dist_constrs > 0 && num_vol_constrs > 0) {
-		boost::random::uniform_int_distribution<std::size_t> dist_constr_sd(0, num_dist_constrs - 1);
-		boost::random::uniform_int_distribution<std::size_t> vol_constr_sd(0, num_vol_constrs - 1);
-		boost::random::uniform_real_distribution<ValueType> vol_dist_constr_sd(0, 1);
-
-		ValueType vol_constr_prob = std::max(ValueType(0.4), ValueType(num_vol_constrs) / (num_vol_constrs + num_dist_constrs));
-
-		//std::cerr << "vol_constr_prob = " << vol_constr_prob << std::endl;
+		boost::random::uniform_int_distribution<std::size_t> constr_sd(0, num_dist_constrs  + num_vol_constrs - 1);
 
 		for (std::size_t i = 0; i < numCycles; i++, lambda -= learningRateDecr) {
 			for (std::size_t j = 0; j < num_steps; j++) {
-				if (vol_dist_constr_sd(randomEngine) > vol_constr_prob)
-					adjCoordsForDistanceConstraint(coords, lambda, dist_constr_sd(randomEngine));
+				std::size_t constr_idx = constr_sd(randomEngine);
+
+				if (constr_idx < num_dist_constrs)
+					adjCoordsForDistanceConstraint(coords, lambda, constr_idx);
 				else
-					static_cast<Derived&>(*this).adjCoordsForVolumeConstraint<CoordsArray>(coords, lambda, vol_constr_sd(randomEngine));
+					static_cast<Derived&>(*this).adjCoordsForVolumeConstraint<CoordsArray>(coords, lambda, constr_idx - num_dist_constrs);
 			}
 		}
 
@@ -594,20 +590,20 @@ void CDPL::Util::DGCoordinatesOptimizerBase<Dim, T, Derived>::embedCoords(std::s
 	}
  
 	if (num_dist_constrs > 0) {
-		boost::random::uniform_int_distribution<std::size_t> dist_constr_sd(0, num_dist_constrs - 1);
+		boost::random::uniform_int_distribution<std::size_t> constr_sd(0, num_dist_constrs - 1);
 
 		for (std::size_t i = 0; i < numCycles; i++, lambda -= learningRateDecr) 
 			for (std::size_t j = 0; j < num_steps; j++) 
-				adjCoordsForDistanceConstraint(coords, lambda, dist_constr_sd(randomEngine));
+				adjCoordsForDistanceConstraint(coords, lambda, constr_sd(randomEngine));
 		
 		return;
 	}
 
-	boost::random::uniform_int_distribution<std::size_t> vol_constr_sd(0, num_vol_constrs - 1);
+	boost::random::uniform_int_distribution<std::size_t> constr_sd(0, num_vol_constrs - 1);
 
 	for (std::size_t i = 0; i < numCycles; i++, lambda -= learningRateDecr) 
 		for (std::size_t j = 0; j < num_steps; j++) 
-			static_cast<Derived&>(*this).adjCoordsForVolumeConstraint<CoordsArray>(coords, lambda, vol_constr_sd(randomEngine));
+			static_cast<Derived&>(*this).adjCoordsForVolumeConstraint<CoordsArray>(coords, lambda, constr_sd(randomEngine));
 }
 
 template <std::size_t Dim, typename T, typename Derived>

@@ -39,6 +39,16 @@
 #include "VectorExpressionAdapter.hpp"
 
 
+#if (CDPL_MATH_CHECKS_DISABLE == 0)
+#define CHECK_VECTOR_INDEX(v, i)
+#else
+#define CHECK_VECTOR_INDEX(v, i) \
+	if (i >= v.getSize()) {						\
+		throw CDPL::Base::IndexError("Vector: element index out of bounds"); \
+	}
+#endif
+
+
 namespace CDPLPythonMath
 {
 
@@ -108,6 +118,8 @@ namespace CDPLPythonMath
 		}
 
 		static ValueType getElement(const VectorType& vec, SizeType i) {
+			CHECK_VECTOR_INDEX(vec, i);
+
 			return vec(i);
 		}
 
@@ -210,6 +222,8 @@ namespace CDPLPythonMath
 		}
 
 		static void setElement(VectorType& vec, SizeType i, const ValueType& value) {
+			CHECK_VECTOR_INDEX(vec, i);
+
 			vec(i) = value;
 		}
 

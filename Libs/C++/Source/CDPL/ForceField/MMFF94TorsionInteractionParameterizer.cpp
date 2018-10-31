@@ -40,6 +40,7 @@
 #include "CDPL/Chem/AtomFunctions.hpp"
 #include "CDPL/Chem/BondFunctions.hpp"
 #include "CDPL/Chem/AtomType.hpp"
+#include "CDPL/Chem/HybridizationState.hpp"
 #include "CDPL/Chem/UtilityFunctions.hpp"
 #include "CDPL/Base/Exceptions.hpp"
 

@@ -180,14 +180,14 @@ ConfGen::RandomConformerGenerator::Status ConfGen::RandomConformerGenerator::gen
 
 		hCoordsGenerator.generate(*molGraph, coords, false);
 
-		energyMinimizer.setup(coords, gradient);
+		energyMinimizer.setup(coords.getData(), gradient);
 		energy = 0.0;
 
 		for (std::size_t j = 0; maxNumMinSteps == 0 || j < maxNumMinSteps; j++) {
 			if ((j % 10) == 0 && timeoutExceeded())
 				return TIMEOUT_EXCEEDED;
 
-			if (energyMinimizer.iterate(energy, coords, gradient) != BFGSMinimizer::SUCCESS) 
+			if (energyMinimizer.iterate(energy, coords.getData(), gradient) != BFGSMinimizer::SUCCESS) 
 				break;
 			
 			if (minStopGradNorm >= 0.0 && energyMinimizer.getGradientNorm() <= minStopGradNorm)

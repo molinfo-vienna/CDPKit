@@ -121,6 +121,8 @@ namespace CDPL
 			 */
 			const Atom3DCoordinatesFunction& getAtom3DCoordinatesFunction() const;
 
+			void setup(const MolecularGraph& molgraph);
+
 			/**
 			 * \brief Generates 3D-coordinates for the hydrogen atoms of the molecular graph \a molgraph.
 			 * \param molgraph The molecular graph for which to generate 3D-coordinates.
@@ -128,16 +130,16 @@ namespace CDPL
 			 *         are stored in the same order as the atoms appear in the atom list of
 			 *         the molecular graph (i.e. the coordinates of an atom are accessible via
 			 *         its index).
-			 * \paran copy_atom_coords If \false, defined atom coordinates are already set in \a coords and thus won't get copied.
+			 * \paran init_coords If \false, defined atom coordinates are already present in \a coords and thus won't get assigned again.
 			 */
-			void generate(const MolecularGraph& molgraph, Math::Vector3DArray& coords, bool copy_atom_coords = true);
+			void generate(const MolecularGraph& molgraph, Math::Vector3DArray& coords, bool init_coords = true);
+
+			void generate(Math::Vector3DArray& coords, bool init_coords = true);
 
 		private:
 			typedef std::vector<std::size_t> AtomIndexList;
-				
-			void init(const MolecularGraph&, Math::Vector3DArray&, bool copy_atom_coords);
-
-			void assignCoordinates(Math::Vector3DArray&);
+		
+			void assignCoordinates(Math::Vector3DArray&, bool init_coords);
 			void assignDiatomicMolCoords(const Atom&, std::size_t, Math::Vector3DArray&);
 			void assignLinearCoords(const Atom&, std::size_t, std::size_t, Math::Vector3DArray&);
 			void assignTrigonalPlanarCoords(const Atom&, std::size_t, std::size_t, Math::Vector3DArray&);
@@ -172,6 +174,7 @@ namespace CDPL
 			Atom3DCoordinatesFunction      coordsFunc;
 			AtomPredicate                  hasCoordsFunc;
 			Util::BitSet                   defCoordsMask;
+			Util::BitSet                   savedCoordsMask;
 			AtomIndexList                  centerAtoms;
 			AtomIndexList                  conctdAtoms;
 			Math::DMatrix                  refPoints;

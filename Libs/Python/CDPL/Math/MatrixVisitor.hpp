@@ -40,6 +40,16 @@
 #include "VectorExpressionAdapter.hpp"
 
 
+#if (CDPL_MATH_CHECKS_DISABLE == 0)
+#define CHECK_MATRIX_INDICES(m, i, j)
+#else
+#define CHECK_MATRIX_INDICES(m, i, j) \
+	if (i >= m.getSize1() || j >= m.getSize2()) {						\
+		throw CDPL::Base::IndexError("Matrix: element index out of bounds"); \
+	}
+#endif
+
+
 namespace CDPLPythonMath
 {
 
@@ -111,6 +121,8 @@ namespace CDPLPythonMath
 		}
 
 		static ValueType getElement(const MatrixType& mtx, SizeType i, SizeType j) {
+			CHECK_MATRIX_INDICES(mtx, i, j);
+
 			return mtx(i, j);
 		}
 
@@ -120,7 +132,7 @@ namespace CDPLPythonMath
 			SizeType i = python::extract<SizeType>(indices[0]);
 			SizeType j = python::extract<SizeType>(indices[1]);
 			
-			return mtx(i, j);
+			return getElement(mtx, i, j);
 		}
 
 		static void posOperator(const MatrixType& mtx) {}
@@ -227,6 +239,8 @@ namespace CDPLPythonMath
 		}
 
 		static void setElement(MatrixType& mtx, SizeType i, SizeType j, const ValueType& value) {
+			CHECK_MATRIX_INDICES(mtx, i, j);
+
 			mtx(i, j) = value;
 		}
 	
@@ -236,7 +250,7 @@ namespace CDPLPythonMath
 			SizeType i = python::extract<SizeType>(indices[0]);
 			SizeType j = python::extract<SizeType>(indices[1]);
 
-			mtx(i, j) = value;
+			setElement(mtx, i, j, value);
 		}
 
 		static void iaddOperator(MatrixType& mtx1, const MatrixType& mtx2) {

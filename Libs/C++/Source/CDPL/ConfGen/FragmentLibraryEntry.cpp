@@ -192,11 +192,11 @@ void ConfGen::FragmentLibraryEntry::create(const Chem::MolecularGraph& molgraph)
     clear();
 	copyAtoms(molgraph);
 
-	bool ring_rsys = copyBonds(molgraph);
+	bool flex_ring_rsys = copyBonds(molgraph);
 
 	fixStereoDescriptors(molgraph);
 	hydrogenize();
-	calcHashCode(ring_rsys);
+	calcHashCode(flex_ring_rsys);
 }
 
 void ConfGen::FragmentLibraryEntry::copyAtoms(const Chem::MolecularGraph& molgraph)
@@ -266,6 +266,8 @@ void ConfGen::FragmentLibraryEntry::copyAtoms(const Chem::MolecularGraph& molgra
 			continue;
 		
 		if (hyb_state == HybridizationState::SP) {
+			setFormalCharge(new_atom, 0);
+
 			std::size_t exp_val = calcExplicitValence(atom, molgraph);
 
 			if (exp_val == 1)
@@ -274,6 +276,8 @@ void ConfGen::FragmentLibraryEntry::copyAtoms(const Chem::MolecularGraph& molgra
 				setUnpairedElectronCount(new_atom, 1);
 
 		} else if (hyb_state == HybridizationState::SP2) {
+			setFormalCharge(new_atom, 0);
+
 			std::size_t exp_val = calcExplicitValence(atom, molgraph);
 
 			if (exp_val == 1)
@@ -290,7 +294,7 @@ bool ConfGen::FragmentLibraryEntry::copyBonds(const Chem::MolecularGraph& molgra
  
 	molecule.reserveMemoryForBonds(molgraph.getNumBonds());
 
-	bool ring_sys = false;
+	bool flex_ring_sys = false;
 
     for (MolecularGraph::ConstBondIterator it = molgraph.getBondsBegin(), end =  molgraph.getBondsEnd(); it != end; ++it) {
 		const Bond& bond = *it;
@@ -301,13 +305,12 @@ bool ConfGen::FragmentLibraryEntry::copyBonds(const Chem::MolecularGraph& molgra
 			continue;
 
 		bool ring_flag = getRingFlag(bond);
-	
-		if (ring_flag)
-			ring_sys = true;
-
 		bool arom_flag = getAromaticityFlag(bond);
 		std::size_t order = getOrder(bond);
 		Bond& new_bond = molecule.addBond(molgraph.getAtomIndex(atom1), molgraph.getAtomIndex(atom2));
+
+		if (ring_flag && !arom_flag && order == 1)
+			flex_ring_sys = true;
 
 		setOrder(new_bond, order);
 		setRingFlag(new_bond, ring_flag);
@@ -326,7 +329,7 @@ bool ConfGen::FragmentLibraryEntry::copyBonds(const Chem::MolecularGraph& molgra
 		}
     }
 
-	return ring_sys;
+	return flex_ring_sys;
 }
 
 void ConfGen::FragmentLibraryEntry::fixStereoDescriptors(const Chem::MolecularGraph& molgraph)

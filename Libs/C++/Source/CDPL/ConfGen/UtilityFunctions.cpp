@@ -125,7 +125,7 @@ bool ConfGen::isFragmentLinkBond(const Chem::Bond& bond, const Chem::MolecularGr
 
     if (getOrder(bond) != 1)
 		return false;
- 
+
     if (atom1_type == AtomType::C) {
 		if (!isSplitHeteroAtom(atom2_type))
 			return false;

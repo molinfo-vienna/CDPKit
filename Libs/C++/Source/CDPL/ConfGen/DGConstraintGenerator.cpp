@@ -297,8 +297,6 @@ void ConfGen::DGConstraintGenerator::addDefaultDistanceConstraints(Util::DG3DCoo
 	if (!molGraph)
 		return;
 
-//	const Math::ULMatrix::SharedPointer& top_dist_mtx = getTopologicalDistanceMatrix(*molGraph);
-
 	double bond_length_sum = std::accumulate(bondLengthTable.begin(), bondLengthTable.end(), double(),
 											 boost::bind(std::plus<double>(), _1,
 														 boost::bind(&BondLengthTable::value_type::second, _2)));
@@ -318,7 +316,7 @@ void ConfGen::DGConstraintGenerator::addDefaultDistanceConstraints(Util::DG3DCoo
 
 			double vdw_rad2 = AtomDictionary::getVdWRadius(getType(molGraph->getAtom(j)));
 
-			coords_gen.addDistanceConstraint(i, j, (vdw_rad1 + vdw_rad2), /*(*top_dist_mtx)(i, j)*/bond_length_sum);
+			coords_gen.addDistanceConstraint(i, j, (vdw_rad1 + vdw_rad2), bond_length_sum);
 			markAtomPairProcessed(i, j);
 		}
 	}
@@ -577,14 +575,11 @@ void ConfGen::DGConstraintGenerator::init(const Chem::MolecularGraph& molgraph)
 	procAtomPairMask.resize(numAtoms * numAtoms);
 	procAtomPairMask.reset();
 
-    if (noHydrogens)  {
-		hAtomMask.reset();
-		buildAtomTypeMask(molgraph, hAtomMask, Chem::AtomType::H);
+	hAtomMask.resize(numAtoms);
+	hAtomMask.reset();
 
-	} else {
-		hAtomMask.resize(numAtoms);
-		hAtomMask.reset();
-	}
+    if (noHydrogens)
+		buildAtomTypeMask(molgraph, hAtomMask, Chem::AtomType::H);
 
 	if (regAtomConfig) {
 		stereoAtomMask.resize(numAtoms);

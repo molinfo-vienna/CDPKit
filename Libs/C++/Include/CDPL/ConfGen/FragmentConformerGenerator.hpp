@@ -33,16 +33,14 @@
 
 #include <cstddef>
 #include <vector>
-#include <map>
+#include <utility>
 
 #include <boost/timer/timer.hpp>
-#include <boost/tuple/tuple.hpp>
 
 #include "CDPL/ConfGen/APIPrefix.hpp"
 #include "CDPL/ConfGen/Raw3DCoordinatesGenerator.hpp"
 #include "CDPL/ForceField/MMFF94EnergyCalculator.hpp"
 #include "CDPL/ForceField/MMFF94GradientCalculator.hpp"
-#include "CDPL/ForceField/MMFF94InteractionData.hpp"
 #include "CDPL/Chem/Hydrogen3DCoordinatesGenerator.hpp"
 #include "CDPL/Math/BFGSMinimizer.hpp"
 #include "CDPL/Math/VectorArray.hpp"
@@ -112,8 +110,8 @@ namespace CDPL
 
 			std::size_t getMaxNumRingConformers() const;
 
-			void generate(const Chem::MolecularGraph& molgraph, const ForceField::MMFF94InteractionData& ia_data, 
-						  unsigned int frag_type);
+			std::size_t generate(const Chem::MolecularGraph& molgraph, const ForceField::MMFF94InteractionData& ia_data, 
+								 unsigned int frag_type);
 
 			std::size_t getNumConformers() const;
 
@@ -124,42 +122,65 @@ namespace CDPL
 			double getEnergy(std::size_t conf_idx) const;
 
 		  private:
-			typedef boost::tuple<double, Math::Vector3DArray::SharedPointer, Math::Vector3DArray::SharedPointer> Conformation;
+			typedef std::pair<double, Math::Vector3DArray::SharedPointer> ConfData;
 
 			void generateSingleConformer();
 			void generateFlexibleRingConformers();
 
-			bool extractExistingCoordinates(Conformation& conf);
-			bool generateRandomConformer(Conformation& conf);
+			bool extractExistingCoordinates(ConfData& conf);
+			bool generateRandomConformer(ConfData& conf);
 
 			void init(const Chem::MolecularGraph& molgraph, const ForceField::MMFF94InteractionData& ia_data);
+			void initRandomConformerGeneration();
+
+			bool checkRMSD(const ConfData& conf);
 			
-			void getHeavyAtomCoordinates(const Math::Vector3DArray& coords, Math::Vector3DArray& hvy_atom_coords) const;
+			Math::Vector3DArray::SharedPointer getHeavyAtomCoordinates(const ConfData& conf);
 			void getHeavyAtomIndices();
 
-			void addRingConformer(const Conformation& conf, double e_window);
-
-			bool checkRMSD(Conformation& conf);
-			bool checkEnergyWindow(const Conformation& conf, double e_window);
 			bool isMacrocyclicRingSystem() const;
-
 			std::size_t getNumRotatableRingBonds() const;
 
-			Math::Vector3DArray::SharedPointer allocCoordinatesArray(bool resize = true);
-			void freeCoordinatesArray(const Math::Vector3DArray::SharedPointer& coords_ptr);
+			void freeCoordinates(const Math::Vector3DArray::SharedPointer& coords_ptr);
+			void freeCoordinates(const ConfData& conf);
+
+			Math::Vector3DArray::SharedPointer allocCoordinates();
+			void allocCoordinates(ConfData& conf);
 
 			bool timeoutExceeded() const;
 			bool has3DCoordinates(const Chem::Atom& atom) const;
 
-			static bool inAscendingEnergyOrder(const Conformation& conf1, const Conformation& conf2);
+			class CoordsDeallocator
+			{
+
+			public:
+				CoordsDeallocator(FragmentConformerGenerator* owner, const ConfData& conf): 
+					owner(owner), coordsPtr(conf.second), released(false) {}
+
+				CoordsDeallocator(FragmentConformerGenerator* owner, const Math::Vector3DArray::SharedPointer& coords_ptr): 
+					owner(owner), coordsPtr(coords_ptr), released(false) {}
+
+				~CoordsDeallocator() {
+					if (!released)
+						owner->freeCoordinates(coordsPtr);
+				}
+
+				void release() {
+					released = true;
+				}
+
+			private:
+				FragmentConformerGenerator*               owner;
+				const Math::Vector3DArray::SharedPointer& coordsPtr;
+				bool                                      released;
+			};
 
 			typedef ForceField::MMFF94EnergyCalculator<double> MMFF94EnergyCalculator;
 			typedef ForceField::MMFF94GradientCalculator<double> MMFF94GradientCalculator;
-			typedef Math::BFGSMinimizer<Math::Vector3DArray, double> BFGSMinimizer; 
+			typedef Math::BFGSMinimizer<Math::Vector3DArray::StorageType, double> BFGSMinimizer; 
 			typedef Math::VectorArrayAlignmentCalculator<Math::Vector3DArray> AlignmentCalculator;
-			typedef std::vector<Conformation> ConformerArray;
-			typedef std::multimap<double, Conformation> ConformerList;
-			typedef std::vector<Math::Vector3DArray::SharedPointer> CoordinatesArrayCache;
+			typedef std::vector<ConfData> ConfDataArray;
+			typedef std::vector<Math::Vector3DArray::SharedPointer> CoordsDataArray;
 			typedef std::vector<std::size_t> IndexList;
 
 			std::size_t                              maxNumStructGenTrials;
@@ -175,19 +196,19 @@ namespace CDPL
 			const Chem::MolecularGraph*              molGraph;
 			std::size_t                              numAtoms;
 			const ForceField::MMFF94InteractionData* mmff94Interactions;   
-			ForceField::MMFF94InteractionData        mmff94InteractionsXH;   
 			MMFF94EnergyCalculator                   mmff94EnergyCalc;
 			MMFF94GradientCalculator                 mmff94GradientCalc;
 			BFGSMinimizer                            energyMinimizer;
 			Raw3DCoordinatesGenerator                rawCoordsGenerator;
 			Chem::Hydrogen3DCoordinatesGenerator     hCoordsGenerator;
 			AlignmentCalculator                      alignmentCalc;
-			Math::Vector3DArray                      gradient;
+			Math::Vector3DArray::StorageType         gradient;
 			IndexList                                heavyAtomIndices;
 			Util::BitSet                             heavyAtomMask;
-			ConformerArray                           outputConfs;
-			ConformerList                            workingConfs;
-			CoordinatesArrayCache                    coordsArrayCache;
+			CoordsDataArray                          heavyAtomCoords;
+			ConfDataArray                            outputConfs;
+			ConfDataArray                            workingConfs;
+			CoordsDataArray                          coordsCache;
 		};
 
 		/**

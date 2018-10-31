@@ -556,7 +556,10 @@ ValueType CDPL::ForceField::calcMMFF94AngleBendingGradient(const CoordsVec& term
     } else {
 		ValueType a_ijk_cos_2 = a_ijk_cos * a_ijk_cos;
 		ValueType a_ijk = std::acos(a_ijk_cos);
-       
+
+       	if (a_ijk_cos_2 > 0.999999)
+			a_ijk_cos_2 = 0.999999;
+
 		grad_fact = force_const / std::sqrt(1 - a_ijk_cos_2) * 
 			(a_ijk * (ValueType(86.58992538) * a_ijk - ValueType(143.9313616)) - 
 			 ref_angle * (ValueType(3.022558594) * a_ijk - ValueType(0.02637679965) * ref_angle - ValueType(2.512076157)));
@@ -569,7 +572,7 @@ ValueType CDPL::ForceField::calcMMFF94AngleBendingGradient(const CoordsVec& term
    	Detail::scaleAddVector(ac_term1_grad, grad_fact, term_atom1_grad);
    	Detail::scaleAddVector(ac_ctr_grad, grad_fact, ctr_atom_grad);
    	Detail::scaleAddVector(ac_term2_grad, grad_fact, term_atom2_grad);
-       
+
     return e_a;
 }
 
@@ -612,6 +615,9 @@ ValueType CDPL::ForceField::calcMMFF94StretchBendGradient(const CoordsVec& term_
 	ValueType a_ijk_cos_2 = a_ijk_cos * a_ijk_cos;
 	ValueType a_ijk = std::acos(a_ijk_cos);
 
+	if (a_ijk_cos_2 > 0.999999)
+		a_ijk_cos_2 = 0.999999;
+
 	ValueType dr_ij = r_ij - ref_length1;
 	ValueType dr_kj = r_kj - ref_length2;
 	ValueType da_ijk = a_ijk * ValueType(180 / M_PI) - ref_angle;
@@ -629,9 +635,9 @@ ValueType CDPL::ForceField::calcMMFF94StretchBendGradient(const CoordsVec& term_
 	Detail::scaleAddVector(dist_ctr_grad1, r_ij_grad_fact, ctr_atom_grad);
 	Detail::scaleAddVector(dist_ctr_grad2, r_kj_grad_fact, ctr_atom_grad);
 	Detail::scaleAddVector(ac_ctr_grad, a_ijk_grad_fact, ctr_atom_grad);
- 
+	
 	ValueType e_ab = r_ij_grad_fact * dr_ij + r_kj_grad_fact * dr_kj; 
- 
+
 	return e_ab;
 }
 
@@ -723,7 +729,7 @@ ValueType CDPL::ForceField::calcMMFF94TorsionGradient(const CoordsVec& term_atom
 		(tor_param2 * std::sin(2 * phi)  - 
 		 ValueType(0.5) * tor_param1 * std::sin(phi) - 
 		 ValueType(1.5) * tor_param3 * std::sin(3 * phi));
-  
+	
    	Detail::scaleAddVector(ac_term1_grad, grad_fact, term_atom1_grad);
 	Detail::scaleAddVector(ac_ctr1_grad, grad_fact, ctr_atom1_grad);
 	Detail::scaleAddVector(ac_ctr2_grad, grad_fact, ctr_atom2_grad);
@@ -771,7 +777,7 @@ ValueType CDPL::ForceField::calcMMFF94ElectrostaticGradient(const CoordsVec& ato
 	Detail::scaleAddVector(dist_atom2_grad, grad_fact, atom2_grad);
       
     double e_q = ValueType(332.0716) * tmp3;
-    
+
     return e_q;
 }
 
@@ -821,7 +827,7 @@ ValueType CDPL::ForceField::calcMMFF94VanDerWaalsGradient(const CoordsVec& atom1
 	Detail::scaleAddVector(dist_atom2_grad, grad_fact, atom2_grad);
 
     ValueType e_vdw = e_IJ * tmp3_7 * (ValueType(1.12) * r_IJ_7 / tmp2 - 2);
-  
+
 	return e_vdw;
 }
 

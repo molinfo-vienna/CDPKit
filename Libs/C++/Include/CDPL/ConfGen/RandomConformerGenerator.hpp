@@ -122,7 +122,7 @@ namespace CDPL
 
 			typedef ForceField::MMFF94EnergyCalculator<double> MMFF94EnergyCalculator;
 			typedef ForceField::MMFF94GradientCalculator<double> MMFF94GradientCalculator;
-			typedef Math::BFGSMinimizer<Math::Vector3DArray, double> BFGSMinimizer; 
+			typedef Math::BFGSMinimizer<Math::Vector3DArray::StorageType, double> BFGSMinimizer; 
 		
 			const Chem::MolecularGraph*                molGraph;
 			std::size_t                                maxNumStructGenTrials;
@@ -140,7 +140,7 @@ namespace CDPL
 			BFGSMinimizer                              energyMinimizer;
 			Raw3DCoordinatesGenerator                  rawCoordsGenerator;
 			Chem::Hydrogen3DCoordinatesGenerator       hCoordsGenerator;
-			Math::Vector3DArray                        gradient;
+			Math::Vector3DArray::StorageType           gradient;
 		};
 
 		/**

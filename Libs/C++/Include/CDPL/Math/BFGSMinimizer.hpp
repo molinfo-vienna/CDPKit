@@ -511,7 +511,7 @@ namespace CDPL
 			}
 
 			ValueType interpolateCubic(const ValueType& f0, const ValueType& fp0, const ValueType& f1, 
-														const ValueType& fp1, const ValueType& zl, const ValueType& zh) const {
+									   const ValueType& fp1, const ValueType& zl, const ValueType& zh) const {
 
 				ValueType eta = 3 * (f1 - f0) - 2 * fp0 - fp1;
 				ValueType xi = fp0 + fp1 - 2 * (f1 - f0);
@@ -572,6 +572,7 @@ namespace CDPL
 				ValueType a = ValueType(0), fb = ValueType(0), fpb = ValueType(0);
 
 				ValueType f0, fp0;
+
 				getFDF(ValueType(0), f0, fp0);
 
 				ValueType falpha_prev = f0;

@@ -116,7 +116,8 @@ namespace
 
 			python::class_<DistanceConstraint>("DistanceConstraint", python::no_init)
 				.def(python::init<std::size_t, std::size_t, const ValueType&, const ValueType&>(
-						 (python::arg("self"), python::arg("pt1_idx"), python::arg("pt2_idx"), python::arg("lb"), python::arg("ub"))))
+						 (python::arg("self"), python::arg("pt1_idx"), python::arg("pt2_idx"), python::arg("lb"),
+						  python::arg("ub"))))
 				.def(python::init<const DistanceConstraint&>((python::arg("self"), python::arg("constr"))))
 				.def(CDPLPythonBase::ObjectIdentityCheckVisitor<DistanceConstraint>())
 				.def("assign", CDPLPythonBase::copyAssOp(&DistanceConstraint::operator=), 
@@ -146,7 +147,8 @@ namespace
 					 static_cast<DistanceConstraint& (OptimizerType::*)(std::size_t)>(&OptimizerType::getDistanceConstraint),
 					 (python::arg("self"), python::arg("idx")), python::return_internal_reference<>())
 				.def("addDistanceConstraint", &OptimizerType::addDistanceConstraint, 
-					 (python::arg("self"), python::arg("pt1_idx"), python::arg("pt2_idx"), python::arg("lb"), python::arg("ub")))
+					 (python::arg("self"), python::arg("pt1_idx"), python::arg("pt2_idx"), python::arg("lb"), 
+					  python::arg("ub")))
 				.def("removeDistanceConstraint", 
 					 static_cast<void (OptimizerType::*)(std::size_t)>(&OptimizerType::removeDistanceConstraint),
 					 (python::arg("self"), python::arg("idx")))

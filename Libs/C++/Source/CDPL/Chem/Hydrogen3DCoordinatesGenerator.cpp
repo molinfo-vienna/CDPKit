@@ -185,7 +185,7 @@ namespace
 
 
 Chem::Hydrogen3DCoordinatesGenerator::Hydrogen3DCoordinatesGenerator(): 
-	undefOnly(true), coordsFunc(&get3DCoordinates), hasCoordsFunc(&has3DCoordinates)
+	molGraph(0), undefOnly(true), coordsFunc(&get3DCoordinates), hasCoordsFunc(&has3DCoordinates)
 {}
 
 Chem::Hydrogen3DCoordinatesGenerator::Hydrogen3DCoordinatesGenerator(
@@ -225,19 +225,25 @@ const Chem::Atom3DCoordinatesFunction& Chem::Hydrogen3DCoordinatesGenerator::get
 	return coordsFunc;
 }
 
-void Chem::Hydrogen3DCoordinatesGenerator::generate(const MolecularGraph& molgraph, Math::Vector3DArray& coords, bool copy_atom_coords)
+void Chem::Hydrogen3DCoordinatesGenerator::generate(const MolecularGraph& molgraph, Math::Vector3DArray& coords, bool init_coords)
 {
-	init(molgraph, coords, copy_atom_coords);
-	assignCoordinates(coords);
+	setup(molgraph);
+	assignCoordinates(coords, init_coords);
 }
 
-void Chem::Hydrogen3DCoordinatesGenerator::init(const MolecularGraph& molgraph, Math::Vector3DArray& coords, bool copy_atom_coords)
+void Chem::Hydrogen3DCoordinatesGenerator::generate(Math::Vector3DArray& coords, bool init_coords)
+{
+	if (!molGraph)
+		return;
+
+	assignCoordinates(coords, init_coords);
+}
+
+void Chem::Hydrogen3DCoordinatesGenerator::setup(const MolecularGraph& molgraph)
 {
 	std::size_t num_atoms = molgraph.getNumAtoms();
 
 	molGraph = &molgraph;
-	
-	coords.resize(num_atoms);
 	
 	defCoordsMask.resize(num_atoms);
 	defCoordsMask.set();
@@ -250,23 +256,27 @@ void Chem::Hydrogen3DCoordinatesGenerator::init(const MolecularGraph& molgraph, 
 		getConnectedAtoms(atom, conctdAtoms);
 
 		if (conctdAtoms.size() == 1 && getType(atom) == AtomType::H) {
-			if (undefOnly && hasCoordsFunc(atom)) {
-				if (copy_atom_coords)
-					coords[i] = coordsFunc(atom);
-			} else 
+			if (!undefOnly || !hasCoordsFunc(atom))
 				defCoordsMask.reset(i);
 			
-		} else {
-		    if (copy_atom_coords)
-				coords[i] = coordsFunc(atom);
+		} else 
 			centerAtoms.push_back(i);
-		}
 	}
 }
 
-void Chem::Hydrogen3DCoordinatesGenerator::assignCoordinates(Math::Vector3DArray& coords)
+void Chem::Hydrogen3DCoordinatesGenerator::assignCoordinates(Math::Vector3DArray& coords, bool init_coords)
 {
 	using namespace HybridizationState;
+	
+	if (init_coords) {
+		coords.resize(molGraph->getNumAtoms());
+
+		for (std::size_t i = 0, num_atoms = molGraph->getNumAtoms(); i < num_atoms; i++) 
+			if (defCoordsMask.test(i))
+				coords[i] = coordsFunc(molGraph->getAtom(i));
+	}
+
+	savedCoordsMask = defCoordsMask;
 
 	for (AtomIndexList::const_iterator it = centerAtoms.begin(), end = centerAtoms.end(); it != end; ++it) { 
 		std::size_t atom_idx = *it;
@@ -318,6 +328,8 @@ void Chem::Hydrogen3DCoordinatesGenerator::assignCoordinates(Math::Vector3DArray
 				break;
 		}
 	}
+
+	savedCoordsMask.swap(defCoordsMask);
 }
 
 void Chem::Hydrogen3DCoordinatesGenerator::assignDiatomicMolCoords(
