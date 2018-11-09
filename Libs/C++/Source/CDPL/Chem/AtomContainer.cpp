@@ -35,22 +35,22 @@ using namespace CDPL;
 
 Chem::AtomContainer::ConstAtomIterator Chem::AtomContainer::getAtomsBegin() const
 {
-	return ConstAtomIterator(*this, 0);
+	return ConstAtomIterator(this, 0);
 }
 
 Chem::AtomContainer::ConstAtomIterator Chem::AtomContainer::getAtomsEnd() const
 {
-	return ConstAtomIterator(*this, getNumAtoms());
+	return ConstAtomIterator(this, getNumAtoms());
 }
 
 Chem::AtomContainer::AtomIterator Chem::AtomContainer::getAtomsBegin()
 {
-	return AtomIterator(*this, 0);
+	return AtomIterator(this, 0);
 }
 
 Chem::AtomContainer::AtomIterator Chem::AtomContainer::getAtomsEnd()
 {
-	return AtomIterator(*this, getNumAtoms());
+	return AtomIterator(this, getNumAtoms());
 }
 
 Chem::AtomContainer& Chem::AtomContainer::operator=(const AtomContainer& cntnr) 
@@ -78,27 +78,27 @@ Chem::Entity3D& Chem::AtomContainer::getEntity(std::size_t idx)
 
 const Chem::Atom& Chem::AtomContainer::ConstAtomAccessor::operator()(std::size_t idx) const
 {
-	return container.get().getAtom(idx);
+	return container->getAtom(idx);
 }
 
 bool Chem::AtomContainer::ConstAtomAccessor::operator==(const ConstAtomAccessor& accessor) const 
 {
-	return (container.get_pointer() == accessor.container.get_pointer());
+	return (container == accessor.container);
 }
 
 Chem::AtomContainer::ConstAtomAccessor& Chem::AtomContainer::ConstAtomAccessor::operator=(const AtomAccessor& accessor) 
 {
-	container = boost::reference_wrapper<const AtomContainer>(accessor.container);
+	container = accessor.container;
 	return *this;
 }
 
 
 Chem::Atom& Chem::AtomContainer::AtomAccessor::operator()(std::size_t idx) const
 {
-	return container.get().getAtom(idx);
+	return container->getAtom(idx);
 }
 
 bool Chem::AtomContainer::AtomAccessor::operator==(const AtomAccessor& accessor) const 
 {
-	return (container.get_pointer() == accessor.container.get_pointer());
+	return (container == accessor.container);
 }

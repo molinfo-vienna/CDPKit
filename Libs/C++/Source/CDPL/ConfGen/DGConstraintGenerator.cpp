@@ -28,7 +28,6 @@
 
 #include <cmath>
 #include <algorithm>
-#include <limits>
 
 #include <boost/tuple/tuple_comparison.hpp>
 #include <boost/bind.hpp>
@@ -327,6 +326,7 @@ void ConfGen::DGConstraintGenerator::add14DistanceConstraints(Util::DG3DCoordina
 	using namespace Chem;
 
 	if (!molGraph)
+		return;
 
 	for (MolecularGraph::ConstBondIterator it = molGraph->getBondsBegin(), end = molGraph->getBondsEnd(); it != end; ++it) {
 		const Bond& bond = *it;
@@ -964,7 +964,7 @@ bool ConfGen::DGConstraintGenerator::isPlanar(const Chem::Bond& bond) const
 	if (order == 3)
 		return true;
 
-	if (order == 1  && getRingFlag(bond)) {
+	if (order == 1 && getRingFlag(bond)) {
 		unsigned int atom_type = getType(atom1);
 	
 		if ((atom_type == AtomType::N || atom_type == AtomType::O) && 
@@ -987,36 +987,19 @@ bool ConfGen::DGConstraintGenerator::hasNeighborWithDoubleBond(const Chem::Atom&
 {
 	using namespace Chem;
 
-	Atom::ConstBondIterator b_it1 = atom.getBondsBegin();
+	Atom::ConstBondIterator b_it = atom.getBondsBegin();
 
-	for (Atom::ConstAtomIterator a_it1 = atom.getAtomsBegin(), a_end1 = atom.getAtomsEnd(); a_it1 != a_end1; ++a_it1, ++b_it1) {
-		const Atom& nbr_atom = *a_it1;
+	for (Atom::ConstAtomIterator a_it = atom.getAtomsBegin(), a_end = atom.getAtomsEnd(); a_it != a_end; ++a_it, ++b_it) {
+		const Atom& nbr_atom = *a_it;
 
 		if (!molGraph->containsAtom(nbr_atom))
 			continue;
 
-		if (!molGraph->containsBond(*b_it1))
+		if (!molGraph->containsBond(*b_it))
 			continue;
 
-		Atom::ConstBondIterator b_it2 = nbr_atom.getBondsBegin();
-
-		for (Atom::ConstAtomIterator a_it2 = nbr_atom.getAtomsBegin(), a_end2 = nbr_atom.getAtomsEnd(); a_it2 != a_end2; ++a_it2, ++b_it2) {
-			const Atom& nbr_nbr_atom = *a_it2;
-
-			if (&nbr_nbr_atom == &atom)
-				continue;
-
-			if (!molGraph->containsAtom(nbr_nbr_atom))
-				continue;
-
-			const Bond& nbr_nbr_bond = *b_it2;
-			
-			if (!molGraph->containsBond(nbr_nbr_bond))
-				continue;
-
-			if (getOrder(nbr_nbr_bond) > 1)
-				return true;
-		}
+		if (isUnsaturated(atom, *molGraph))
+			return true;
 	}
 
 	return false;

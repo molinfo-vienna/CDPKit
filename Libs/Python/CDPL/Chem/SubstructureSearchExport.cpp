@@ -50,6 +50,12 @@ void CDPLPythonChem::exportSubstructureSearch()
 		.def(python::init<const Chem::MolecularGraph&>((python::arg("self"), python::arg("query")))
 			 [python::with_custodian_and_ward<1, 2>()])
 		.def(CDPLPythonBase::ObjectIdentityCheckVisitor<Chem::SubstructureSearch>())	
+		.def("setAtomMatchExpressionFunction", &Chem::SubstructureSearch::setAtomMatchExpressionFunction, 
+			 (python::arg("self"), python::arg("func")))
+		.def("setBondMatchExpressionFunction", &Chem::SubstructureSearch::setBondMatchExpressionFunction, 
+			 (python::arg("self"), python::arg("func")))
+		.def("setMolecularGraphMatchExpressionFunction", &Chem::SubstructureSearch::setMolecularGraphMatchExpressionFunction, 
+			 (python::arg("self"), python::arg("func")))
 		.def("mappingExists", &Chem::SubstructureSearch::mappingExists, (python::arg("self"), python::arg("target")), 
 			 python::with_custodian_and_ward<1, 2>())
 		.def("findMappings", &Chem::SubstructureSearch::findMappings, (python::arg("self"), python::arg("target")), 

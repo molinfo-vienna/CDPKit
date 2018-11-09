@@ -200,6 +200,9 @@ namespace
 	MAKE_FUNCTION_WRAPPER3(double, calcEffectivePolarizability, CDPL::Chem::Atom&, CDPL::Chem::MolecularGraph&, double);
 	MAKE_FUNCTION_WRAPPER3(std::size_t, getTopologicalDistance, CDPL::Chem::Atom&, CDPL::Chem::Atom&, CDPL::Chem::MolecularGraph&);
 
+	MAKE_FUNCTION_WRAPPER4(bool, isCarbonylLikeAtom, CDPL::Chem::Atom&, CDPL::Chem::MolecularGraph&, bool, bool);
+	MAKE_FUNCTION_WRAPPER4(bool, isAmideCenterAtom, CDPL::Chem::Atom&, CDPL::Chem::MolecularGraph&, bool, bool);
+	MAKE_FUNCTION_WRAPPER4(bool, isAmideNitrogen, CDPL::Chem::Atom&, CDPL::Chem::MolecularGraph&, bool, bool);
 	MAKE_FUNCTION_WRAPPER4(std::size_t, getExplicitAtomCount, CDPL::Chem::Atom&, CDPL::Chem::MolecularGraph&, unsigned int, bool);
 	MAKE_FUNCTION_WRAPPER4(std::size_t, getAtomCount, CDPL::Chem::Atom&, CDPL::Chem::MolecularGraph&, unsigned int, bool);
 	MAKE_FUNCTION_WRAPPER4(unsigned int, calcAtomConfiguration, CDPL::Chem::Atom&, CDPL::Chem::MolecularGraph&, const CDPL::Chem::StereoDescriptor&, const CDPL::Math::Vector3DArray&);
@@ -373,6 +376,12 @@ void CDPLPythonChem::exportAtomFunctions()
 	python::def("calcEffectivePolarizability", &calcEffectivePolarizabilityWrapper3, 
 				(python::arg("atom"), python::arg("molgraph"), python::arg("damping") = 0.75));
 
+	python::def("isCarbonylLikeAtom", &isCarbonylLikeAtomWrapper4, 
+				(python::arg("atom"), python::arg("molgraph"), python::arg("c_only") = false, python::arg("db_o_only") = false));
+	python::def("isAmideCenterAtom", &isAmideCenterAtomWrapper4, 
+				(python::arg("atom"), python::arg("molgraph"), python::arg("c_only") = false, python::arg("db_o_only") = false));
+	python::def("isAmideNitrogen", &isAmideNitrogenWrapper4, 
+				(python::arg("atom"), python::arg("molgraph"), python::arg("c_only") = false, python::arg("db_o_only") = false));
 	python::def("getExplicitAtomCount", &getExplicitAtomCountWrapper4,
 				(python::arg("atom"), python::arg("molgraph"), python::arg("type"), (python::arg("strict") = true)));
 	python::def("getAtomCount", &getAtomCountWrapper4,

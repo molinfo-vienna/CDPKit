@@ -37,62 +37,24 @@
 using namespace CDPL;
 
 
-namespace
+bool Chem::isAmideBond(const Chem::Bond& bond, const Chem::MolecularGraph& molgraph, bool c_only, bool db_o_only)
 {
+	using namespace Chem;
 
-	bool isCarbonylCarbon(const Chem::Atom& atom, const Chem::Bond& bond, const Chem::MolecularGraph& molgraph)
-	{
-		using namespace Chem;
-
-		Atom::ConstAtomIterator atoms_end = atom.getAtomsEnd();
-		Atom::ConstBondIterator b_it = atom.getBondsBegin();
-
-		for (Atom::ConstAtomIterator a_it = atom.getAtomsBegin(); a_it != atoms_end; ++a_it, ++b_it) {
-			const Bond& att_bond = *b_it;
-
-			if (&att_bond == &bond)
-				continue;
-
-			if (!molgraph.containsBond(att_bond))
-				continue;
-
-			const Atom& nbr_atom = *a_it;
-
-			if (!molgraph.containsAtom(nbr_atom))
-				continue;
-
-			if (getType(nbr_atom) != AtomType::O)
-				continue;
-
-			if (getOrder(att_bond) == 2)
-				return true;	
-		}
-
+	if (getOrder(bond) != 1)
 		return false;
-	}
 
-	bool isAmideBond(const Chem::Bond& bond, const Chem::Atom& atom1, const Chem::Atom& atom2, std::size_t bond_count1, 
-					 std::size_t bond_count2, const Chem::MolecularGraph& molgraph)
-	{
-		using namespace Chem;
+	const Atom& atom1 = bond.getBegin();
+	const Atom& atom2 = bond.getEnd();
 
-		unsigned int atom_type1 = getType(atom1);
+	if (getType(atom1) == AtomType::N)
+		return isCarbonylLikeAtom(atom2, molgraph, c_only, db_o_only);
 
-		if (atom_type1 != AtomType::C && atom_type1 != AtomType::N)
-			return false;
+	if (getType(atom2) == AtomType::N)
+		return isCarbonylLikeAtom(atom1, molgraph, c_only, db_o_only);
 
-		unsigned int atom_type2 = getType(atom2);
-
-		if (bond_count1 == 3 && atom_type1 == AtomType::C && atom_type2 == AtomType::N) 
-			return isCarbonylCarbon(atom1, bond, molgraph);
-
-		if (bond_count2 == 3 && atom_type1 == AtomType::N && atom_type2 == AtomType::C) 
-			return isCarbonylCarbon(atom2, bond, molgraph);
-
-		return true;
-	}
+	return false;
 }
-
 
 bool Chem::isRotatable(const Bond& bond, const MolecularGraph& molgraph, bool h_rotors, bool ring_bonds, bool amide_bonds)
 {
@@ -125,7 +87,7 @@ bool Chem::isRotatable(const Bond& bond, const MolecularGraph& molgraph, bool h_
 	if (amide_bonds)
 		return true;
 
-	return !isAmideBond(bond, atom1, atom2, bond_count1, bond_count2, molgraph); 
+	return !isAmideBond(bond, molgraph, true, true); 
 }
  
 bool Chem::isHydrogenBond(const Bond& bond)

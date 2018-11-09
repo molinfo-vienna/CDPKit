@@ -79,6 +79,10 @@ namespace CDPL
 
 			const ScoreCombinationFunction& getScoreCombinationFunction() const;
 
+			void normalizeScores(bool normalize);
+
+			bool scoresNormalized() const;
+
 		  protected:
 			void calculate(const FeatureContainer& features);
 

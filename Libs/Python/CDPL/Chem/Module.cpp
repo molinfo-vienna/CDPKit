@@ -89,6 +89,7 @@ BOOST_PYTHON_MODULE(_chem)
 	exportCommonConnectedSubstructureSearch();
 	exportMaxCommonAtomSubstructureSearch();
 	exportMaxCommonBondSubstructureSearch();
+	exportAutomorphismGroupSearch();
 
 	exportReactor();
 

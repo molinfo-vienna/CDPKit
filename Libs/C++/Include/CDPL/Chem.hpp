@@ -256,6 +256,7 @@
 #include "CDPL/Chem/CommonConnectedSubstructureSearch.hpp"
 #include "CDPL/Chem/MaxCommonAtomSubstructureSearch.hpp"
 #include "CDPL/Chem/MaxCommonBondSubstructureSearch.hpp"
+#include "CDPL/Chem/AutomorphismGroupSearch.hpp"
 #include "CDPL/Chem/Reactor.hpp"
 
 #include "CDPL/Chem/MorganNumberingGenerator.hpp"

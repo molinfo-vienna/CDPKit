@@ -140,6 +140,8 @@ namespace CDPL
 			void hydrogenize();
 			void calcHashCode(bool stereo);
 
+			bool hasSymTerminalNeighbors(const Chem::Atom& atom, const Chem::MolecularGraph& molgraph) const;
+
 			Chem::BasicMolecule         molecule;
 			Base::uint64                hashCode;
 			Chem::HashCodeCalculator    hashCodeCalc;

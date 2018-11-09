@@ -54,7 +54,8 @@ bool Chem::AtomConfigurationMatchExpression::operator()(const Atom& query_atom, 
 	const StereoDescriptor& target_stereo_desc = getStereoDescriptor(target_atom);
 	unsigned int target_config = target_stereo_desc.getConfiguration();
 
-	if (((configFlags & AtomConfiguration::EITHER) & target_config) != 0)
+	if ((configFlags & AtomConfiguration::EITHER) != 0 && 
+		(target_config & (AtomConfiguration::R | AtomConfiguration::S | AtomConfiguration::EITHER)) != 0)
 		return !notMatch;
 
 	if (((configFlags & AtomConfiguration::NONE) & target_config) != 0)

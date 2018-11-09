@@ -53,9 +53,11 @@ void CDPLPythonChem::exportAtomPropertyFlags()
 		.def_readonly("FORMAL_CHARGE", &Chem::AtomPropertyFlag::FORMAL_CHARGE)
 		.def_readonly("H_COUNT", &Chem::AtomPropertyFlag::H_COUNT)
 		.def_readonly("HEAVY_BOND_COUNT", &Chem::AtomPropertyFlag::HEAVY_BOND_COUNT)
+		.def_readonly("EXPLICIT_BOND_COUNT", &Chem::AtomPropertyFlag::EXPLICIT_BOND_COUNT)
 		.def_readonly("VALENCE", &Chem::AtomPropertyFlag::VALENCE)
 		.def_readonly("ISOTOPE", &Chem::AtomPropertyFlag::ISOTOPE)
 		.def_readonly("SYMBOL", &Chem::AtomPropertyFlag::SYMBOL)
 		.def_readonly("TOPOLOGY", &Chem::AtomPropertyFlag::TOPOLOGY)
+		.def_readonly("HYBRIDIZATION_STATE", &Chem::AtomPropertyFlag::HYBRIDIZATION_STATE)
 		.def_readonly("ATOM_MAPPING_ID", &Chem::AtomPropertyFlag::TOPOLOGY);
 }

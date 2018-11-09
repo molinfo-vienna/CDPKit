@@ -53,15 +53,16 @@ namespace
 const double Pharm::InteractionScoreGridCalculator::DEF_DISTANCE_CUTOFF = 10.0;
 
 
-Pharm::InteractionScoreGridCalculator::InteractionScoreGridCalculator(): scoreCombinationFunc(&maxElement), distCutoff(DEF_DISTANCE_CUTOFF)
+Pharm::InteractionScoreGridCalculator::InteractionScoreGridCalculator(): 
+	scoreCombinationFunc(&maxElement), distCutoff(DEF_DISTANCE_CUTOFF), normScores(true)
 {}
 
 Pharm::InteractionScoreGridCalculator::InteractionScoreGridCalculator(const ScoringFunction& func): 
-	scoringFunc(func), scoreCombinationFunc(&maxElement), distCutoff(DEF_DISTANCE_CUTOFF)
+	scoringFunc(func), scoreCombinationFunc(&maxElement), distCutoff(DEF_DISTANCE_CUTOFF), normScores(true)
 {}
 
 Pharm::InteractionScoreGridCalculator::InteractionScoreGridCalculator(const ScoringFunction& scoring_func, const ScoreCombinationFunction& comb_func): 
-	scoringFunc(scoring_func), scoreCombinationFunc(comb_func), distCutoff(DEF_DISTANCE_CUTOFF)
+	scoringFunc(scoring_func), scoreCombinationFunc(comb_func), distCutoff(DEF_DISTANCE_CUTOFF), normScores(true)
 {}
 
 Pharm::InteractionScoreGridCalculator::InteractionScoreGridCalculator(const InteractionScoreGridCalculator& calc):
@@ -77,6 +78,16 @@ void Pharm::InteractionScoreGridCalculator::setDistanceCutoff(double dist)
 double Pharm::InteractionScoreGridCalculator::getDistanceCutoff() const
 {
 	return distCutoff;
+}
+
+void Pharm::InteractionScoreGridCalculator::normalizeScores(bool normalize)
+{
+	normScores = normalize;
+}
+
+bool Pharm::InteractionScoreGridCalculator::scoresNormalized() const
+{
+	return normScores;
 }
 
 void Pharm::InteractionScoreGridCalculator::setScoringFunction(const ScoringFunction& func)
@@ -174,6 +185,9 @@ void Pharm::InteractionScoreGridCalculator::calculate(const FeatureContainer& fe
 		max_score = std::max(grid(i), max_score);
 		min_score = std::min(grid(i), min_score);
 	}
+
+	if (!normScores)
+		return;
 
 	// normalize to range [0, 1]
 

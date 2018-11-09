@@ -47,6 +47,9 @@ void CDPLPythonConfGen::exportRaw3DCoordinatesGenerator()
 		.def(CDPLPythonBase::ObjectIdentityCheckVisitor<ConfGen::Raw3DCoordinatesGenerator>())
 		.def("assign", CDPLPythonBase::copyAssOp(&ConfGen::Raw3DCoordinatesGenerator::operator=), 
 			 (python::arg("self"), python::arg("gen")), python::return_self<>())
+		.def("setBoxSize", &ConfGen::Raw3DCoordinatesGenerator::setBoxSize, 
+			 (python::arg("self"), python::arg("size")))
+		.def("getBoxSize", &ConfGen::Raw3DCoordinatesGenerator::getBoxSize, python::arg("self"))
 		.def("excludeHydrogens", &ConfGen::Raw3DCoordinatesGenerator::excludeHydrogens, 
 			 (python::arg("self"), python::arg("exclude")))
 		.def("hydrogensExcluded", &ConfGen::Raw3DCoordinatesGenerator::hydrogensExcluded, python::arg("self"))
@@ -73,6 +76,8 @@ void CDPLPythonConfGen::exportRaw3DCoordinatesGenerator()
 			 (python::arg("self"), python::arg("coords")))
 		.add_property("exclHydrogenMask", python::make_function(&ConfGen::Raw3DCoordinatesGenerator::getExcludedHydrogenMask, 
 																python::return_internal_reference<>())) 
+		.add_property("boxSize", &ConfGen::Raw3DCoordinatesGenerator::getBoxSize, 
+					  &ConfGen::Raw3DCoordinatesGenerator::setBoxSize)
 		.add_property("planarityConstraints", &ConfGen::Raw3DCoordinatesGenerator::planarityConstraintsEnabled, 
 					  &ConfGen::Raw3DCoordinatesGenerator::enablePlanarityConstraints)
 		.add_property("exclHydrogens", &ConfGen::Raw3DCoordinatesGenerator::hydrogensExcluded, 

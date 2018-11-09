@@ -42,6 +42,8 @@
 #include "CDPL/ForceField/MMFF94EnergyCalculator.hpp"
 #include "CDPL/ForceField/MMFF94GradientCalculator.hpp"
 #include "CDPL/Chem/Hydrogen3DCoordinatesGenerator.hpp"
+#include "CDPL/Chem/AutomorphismGroupSearch.hpp"
+#include "CDPL/Chem/Fragment.hpp"
 #include "CDPL/Math/BFGSMinimizer.hpp"
 #include "CDPL/Math/VectorArray.hpp"
 #include "CDPL/Math/VectorArrayAlignmentCalculator.hpp"
@@ -65,10 +67,13 @@ namespace CDPL
 		  public:
 			static const std::size_t  DEF_MAX_NUM_STRUCTURE_GEN_TRIALS    = 10;
 			static const std::size_t  DEF_MAX_NUM_MINIMIZATION_STEPS      = 0;
-			static const std::size_t  DEF_MAX_NUM_RING_CONFORMERS         = 1000;
+			static const std::size_t  DEF_MAX_NUM_OUTPUT_CONFORMERS       = 1000;
+			static const std::size_t  DEF_MIN_NUM_RING_CONFORMER_TRIALS   = 30;
+			static const std::size_t  DEF_MAX_NUM_RING_CONFORMER_TRIALS   = 1000;
+			static const std::size_t  DEF_RING_CONFORMER_TRIAL_FACTOR     = 20;
 			static const std::size_t  DEF_TIMEOUT                         = 10 * 60 * 1000;
-			static const std::size_t  DEF_RING_CONF_RETRIAL_FACTOR        = 20;
 			static const double       DEF_MINIMIZATION_STOP_GRADIENT_NORM;
+			static const double       DEF_MINIMIZATION_STOP_ENERGY_DELTA;
 			static const double       DEF_ENERGY_WINDOW;
 			static const double       DEF_MIN_RMSD;
 
@@ -86,6 +91,10 @@ namespace CDPL
 
 			double getMinimizationStopGradientNorm() const;
 
+			void setMinimizationStopEnergyDelta(double e_delta);
+
+			double getMinimizationStopEnergyDelta() const;
+
 			void setTimeout(std::size_t mil_secs);
 
 			std::size_t getTimeout() const;
@@ -98,17 +107,25 @@ namespace CDPL
 
 			double getEnergyWindow() const;
 
-			void setRingConformerRetrialFactor(std::size_t factor);
+			void setRingConformerTrialFactor(std::size_t factor);
 
-			std::size_t getRingConformerRetrialFactor() const;
+			std::size_t getRingConformerTrialFactor() const;
 
+			void setMinNumRingConformerTrials(std::size_t min_num);
+
+			std::size_t getMinNumRingConformerTrials() const;
+
+			void setMaxNumRingConformerTrials(std::size_t max_num);
+
+			std::size_t getMaxNumRingConformerTrials() const;
+			
 			void setMinRMSD(double min_rmsd);
 
 			double getMinRMSD() const;
 
-			void setMaxNumRingConformers(std::size_t max_num);
+			void setMaxNumOutputConformers(std::size_t max_num);
 
-			std::size_t getMaxNumRingConformers() const;
+			std::size_t getMaxNumOutputConformers() const;
 
 			std::size_t generate(const Chem::MolecularGraph& molgraph, const ForceField::MMFF94InteractionData& ia_data, 
 								 unsigned int frag_type);
@@ -123,12 +140,13 @@ namespace CDPL
 
 		  private:
 			typedef std::pair<double, Math::Vector3DArray::SharedPointer> ConfData;
+			typedef std::vector<const Chem::Atom*> AtomList;
 
 			void generateSingleConformer();
 			void generateFlexibleRingConformers();
 
 			bool extractExistingCoordinates(ConfData& conf);
-			bool generateRandomConformer(ConfData& conf);
+			bool generateRandomConformer(ConfData& conf, bool best_opt);
 
 			void init(const Chem::MolecularGraph& molgraph, const ForceField::MMFF94InteractionData& ia_data);
 			void initRandomConformerGeneration();
@@ -136,10 +154,19 @@ namespace CDPL
 			bool checkRMSD(const ConfData& conf);
 			
 			Math::Vector3DArray::SharedPointer getHeavyAtomCoordinates(const ConfData& conf);
+
 			void getHeavyAtomIndices();
+			void getAtomSymmetryMappings();
+			void getNeighborHydrogens(const Chem::Atom& atom, AtomList& nbr_list) const;
 
 			bool isMacrocyclicRingSystem() const;
-			std::size_t getNumRotatableRingBonds() const;
+
+			std::size_t calcStandardRingSystemConformerTrials() const;
+			std::size_t calcMacrocyclicRingSystemConformerTrials() const;
+
+			std::size_t getNumRotatableRingBonds(const Chem::MolecularGraph& molgraph) const;
+
+			double calcMacrocyclicRingSystemEnergyWindow() const;
 
 			void freeCoordinates(const Math::Vector3DArray::SharedPointer& coords_ptr);
 			void freeCoordinates(const ConfData& conf);
@@ -185,12 +212,15 @@ namespace CDPL
 
 			std::size_t                              maxNumStructGenTrials;
 			std::size_t                              maxNumMinSteps;
-			std::size_t                              maxNumRingConfs;
+			std::size_t                              maxNumOutputConfs;
 			double                                   minStopGradNorm;
+			double                                   minStopEnergyDelta;
 			std::size_t                              timeout;
 			bool                                     reuseExistingCoords;
 			double                                   eWindow;
-			std::size_t                              ringConfRetrialFact;
+			std::size_t                              ringConfTrialFactor;
+			std::size_t                              minNumRingConfTrials;
+			std::size_t                              maxNumRingConfTrials;
 			double                                   minRMSD;
 			boost::timer::cpu_timer                  timer;
 			const Chem::MolecularGraph*              molGraph;
@@ -201,10 +231,15 @@ namespace CDPL
 			BFGSMinimizer                            energyMinimizer;
 			Raw3DCoordinatesGenerator                rawCoordsGenerator;
 			Chem::Hydrogen3DCoordinatesGenerator     hCoordsGenerator;
+			Chem::AutomorphismGroupSearch            automorphGroupSearch;
 			AlignmentCalculator                      alignmentCalc;
 			Math::Vector3DArray::StorageType         gradient;
 			IndexList                                heavyAtomIndices;
-			Util::BitSet                             heavyAtomMask;
+			IndexList                                atomSymmetryMappings;
+			AtomList                                 nbrHydrogens1;
+			AtomList                                 nbrHydrogens2;
+			Chem::Fragment                           ordHDepleteMolGraph;
+			Util::BitSet                             ordHDepleteAtomMask;
 			CoordsDataArray                          heavyAtomCoords;
 			ConfDataArray                            outputConfs;
 			ConfDataArray                            workingConfs;

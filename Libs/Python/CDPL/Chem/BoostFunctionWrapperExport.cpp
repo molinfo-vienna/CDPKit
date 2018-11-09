@@ -36,6 +36,7 @@
 #include "CDPL/Chem/AtomPriorityFunctionWrapper.hpp"
 #include "CDPL/Chem/AtomPredicateWrapper.hpp"
 #include "CDPL/Chem/BondPredicateWrapper.hpp"
+#include "CDPL/Chem/MatchExpression.hpp"
 #include "CDPL/Math/Vector.hpp"
 #include "CDPL/Base/IntegerTypes.hpp"
 
@@ -50,8 +51,11 @@ void CDPLPythonChem::exportBoostFunctionWrappers()
     using namespace CDPL;
     using namespace Chem;
 
-    CDPLPythonBase::BoostFunction1Export<boost::function1<Base::uint64, const Atom&>, Atom& >("UInt64AtomFunctor");
-    CDPLPythonBase::BoostFunction1Export<boost::function1<Base::uint64, const Bond&>, Bond& >("UInt64BondFunctor");
+    CDPLPythonBase::BoostFunction1Export<boost::function1<const MatchExpression<Atom, MolecularGraph>::SharedPointer&, const Atom&>, Atom&>("AtomMatchExpressionPtrAtomFunctor");
+    CDPLPythonBase::BoostFunction1Export<boost::function1<const MatchExpression<Bond, MolecularGraph>::SharedPointer&, const Bond&>, Bond&>("BondMatchExpressionPtrBondFunctor");
+    CDPLPythonBase::BoostFunction1Export<boost::function1<const MatchExpression<MolecularGraph>::SharedPointer&, const MolecularGraph&> >("MolGraphMatchExpressionPtrMolGraphFunctor");
+    CDPLPythonBase::BoostFunction1Export<boost::function1<Base::uint64, const Atom&>, Atom&>("UInt64AtomFunctor");
+    CDPLPythonBase::BoostFunction1Export<boost::function1<Base::uint64, const Bond&>, Bond&>("UInt64BondFunctor");
     CDPLPythonBase::BoostFunction1Export<boost::function1<bool, const Entity3DMapping&> >("BoolEntity3DMappingFunctor");
     CDPLPythonBase::BoostFunction1Export<boost::function1<bool, const AtomMapping&> >("BoolAtomMappingFunctor");
 	CDPLPythonBase::BoostFunction1Export<boost::function1<const Math::Vector2D&, const Atom&>, Atom&, 

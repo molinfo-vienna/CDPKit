@@ -26,6 +26,8 @@
  
 #include "StaticInit.hpp"
 
+#include <boost/bind.hpp>
+
 #include "CDPL/ConfGen/RandomConformerGenerator.hpp"
 #include "CDPL/ForceField/InteractionType.hpp"
 #include "CDPL/Chem/MolecularGraph.hpp"
@@ -49,9 +51,10 @@ ConfGen::RandomConformerGenerator::RandomConformerGenerator():
     rawCoordsGenerator.excludeHydrogens(true);
     rawCoordsGenerator.regardAtomConfiguration(true);
     rawCoordsGenerator.regardBondConfiguration(true);
-	rawCoordsGenerator.enablePlanarityConstraints(false);
+	rawCoordsGenerator.enablePlanarityConstraints(true);
 
-	hCoordsGenerator.undefinedOnly(false);
+	hCoordsGenerator.undefinedOnly(true);
+	hCoordsGenerator.setAtom3DCoordinatesCheckFunction(boost::bind(&RandomConformerGenerator::has3DCoordinates, this, _1));
 }
 
 void ConfGen::RandomConformerGenerator::regardAtomConfiguration(bool regard)
@@ -160,6 +163,7 @@ void ConfGen::RandomConformerGenerator::setup(const Chem::MolecularGraph& molgra
     mmff94GradientCalc.setup(mmff94ParamData, molgraph.getNumAtoms());
 
     rawCoordsGenerator.setup(molgraph, mmff94ParamData);
+	rawCoordsGenerator.setBoxSize(molgraph.getNumBonds() * 2);
 
     gradient.resize(molgraph.getNumAtoms());
 }
@@ -222,4 +226,9 @@ bool ConfGen::RandomConformerGenerator::timeoutExceeded() const
 		return true;
 
 	return false;
+}
+
+bool ConfGen::RandomConformerGenerator::has3DCoordinates(const Chem::Atom& atom) const
+{
+	return !rawCoordsGenerator.getExcludedHydrogenMask().test(molGraph->getAtomIndex(atom));
 }

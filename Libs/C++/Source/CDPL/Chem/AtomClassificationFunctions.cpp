@@ -152,3 +152,63 @@ bool Chem::isHydrogenDonor(const Atom& atom, const MolecularGraph& molgraph)
 
     return (getAtomCount(atom, molgraph, AtomType::H) > 0);
 }
+
+bool Chem::isCarbonylLikeAtom(const Atom& atom, const MolecularGraph& molgraph, bool c_only, bool db_o_only)
+{
+	unsigned int type = getType(atom);
+
+	switch (type) {
+
+		case AtomType::C:
+			break;
+
+		case AtomType::S:
+		case AtomType::P:
+			if (!c_only)
+				break;
+
+		default:
+			return false;
+	}
+
+	if (getExplicitBondCount(atom, molgraph, 2, AtomType::O, true) > 0)
+		return true;
+
+	if (db_o_only)
+		return false;
+
+	if (type != AtomType::S && getExplicitBondCount(atom, molgraph, 2, AtomType::S, true) > 0)
+		return true;
+
+	return false;
+}
+
+bool Chem::isAmideCenterAtom(const Atom& atom, const MolecularGraph& molgraph, bool c_only, bool db_o_only)
+{
+	return (isCarbonylLikeAtom(atom, molgraph, c_only, db_o_only) && getExplicitBondCount(atom, molgraph, 1, AtomType::N, true) > 0);
+}
+
+bool Chem::isAmideNitrogen(const Atom& atom, const MolecularGraph& molgraph, bool c_only, bool db_o_only)
+{
+	if (getType(atom) != AtomType::N)
+		return false;
+
+	Atom::ConstAtomIterator atoms_end = atom.getAtomsEnd();
+	Atom::ConstBondIterator b_it = atom.getBondsBegin();
+
+	for (Atom::ConstAtomIterator a_it = atom.getAtomsBegin(); a_it != atoms_end; ++a_it, ++b_it) {
+		const Bond& bond = *b_it;
+		const Atom& nbr_atom = *a_it;
+
+		if (!molgraph.containsAtom(nbr_atom) || !molgraph.containsBond(bond))
+			continue;
+
+		if (getOrder(bond) != 1)
+			continue;
+
+		if (isCarbonylLikeAtom(nbr_atom, molgraph, c_only, db_o_only))
+			return true;
+	}
+
+	return false;
+}

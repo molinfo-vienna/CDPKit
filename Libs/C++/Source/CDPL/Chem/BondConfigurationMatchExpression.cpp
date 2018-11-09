@@ -52,7 +52,8 @@ bool Chem::BondConfigurationMatchExpression::operator()(const Bond& query_bond, 
 	const StereoDescriptor& target_stereo_desc = getStereoDescriptor(target_bond);
 	unsigned int target_config = target_stereo_desc.getConfiguration();
 
-	if (((configFlags & BondConfiguration::EITHER) & target_config) != 0)
+	if ((configFlags & BondConfiguration::EITHER) != 0 && 
+		(target_config & (BondConfiguration::CIS | BondConfiguration::TRANS | BondConfiguration::EITHER)) != 0)
 		return !notMatch;
 
 	if (((configFlags & BondConfiguration::NONE) & target_config) != 0)

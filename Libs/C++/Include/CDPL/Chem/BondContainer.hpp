@@ -33,8 +33,6 @@
 
 #include <cstddef>
 
-#include <boost/ref.hpp>
-
 #include "CDPL/Chem/APIPrefix.hpp"
 #include "CDPL/Util/IndexedElementIterator.hpp"
 
@@ -156,7 +154,7 @@ namespace CDPL
 			public:
 				ConstBondAccessor(const BondAccessor& accessor): container(accessor.container) {}
 
-				ConstBondAccessor(const BondContainer& cntnr): container(cntnr) {}
+				ConstBondAccessor(const BondContainer* cntnr): container(cntnr) {}
 
 				const Bond& operator()(std::size_t idx) const;
 
@@ -165,7 +163,7 @@ namespace CDPL
 				ConstBondAccessor& operator=(const BondAccessor& accessor);
 
 			private:
-				boost::reference_wrapper<const BondContainer> container;
+				const BondContainer* container;
 			};
 
 			class CDPL_CHEM_API BondAccessor
@@ -174,14 +172,14 @@ namespace CDPL
 				friend class ConstBondAccessor;
 
 			public:
-				BondAccessor(BondContainer& cntnr): container(cntnr) {}
+				BondAccessor(BondContainer* cntnr): container(cntnr) {}
 
 				Bond& operator()(std::size_t idx) const;
 
 				bool operator==(const BondAccessor& accessor) const;
 
 			private:
-				boost::reference_wrapper<BondContainer> container;
+				BondContainer* container;
 			};
 		};
 

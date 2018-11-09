@@ -205,6 +205,8 @@ namespace CDPL
 
 		CDPL_CHEM_API bool isHydrogenBond(const Bond& bond);
 
+		CDPL_CHEM_API bool isAmideBond(const Bond& bond, const MolecularGraph& molgraph, bool c_only = false, bool db_o_only = false);
+
 
 		CDPL_CHEM_API unsigned int getSybylType(const Bond& bond);
 

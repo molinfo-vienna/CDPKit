@@ -211,6 +211,12 @@ namespace CDPL
 
 		CDPL_CHEM_API bool isHydrogenDonor(const Atom& atom, const MolecularGraph& molgraph);
 
+		CDPL_CHEM_API bool isCarbonylLikeAtom(const Atom& atom, const MolecularGraph& molgraph, bool c_only = false, bool db_o_only = false);
+
+		CDPL_CHEM_API bool isAmideCenterAtom(const Atom& atom, const MolecularGraph& molgraph, bool c_only = false, bool db_o_only = false);
+
+		CDPL_CHEM_API bool isAmideNitrogen(const Atom& atom, const MolecularGraph& molgraph, bool c_only = false, bool db_o_only = false);
+
 
 		CDPL_CHEM_API std::size_t calcExplicitValence(const Atom& atom, const MolecularGraph& molgraph);
 	

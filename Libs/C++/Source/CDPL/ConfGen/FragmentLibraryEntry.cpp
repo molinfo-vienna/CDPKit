@@ -239,10 +239,16 @@ void ConfGen::FragmentLibraryEntry::copyAtoms(const Chem::MolecularGraph& molgra
 			continue;
 		} 
 
-		if (exp_atom_count >= 3) {
+		bool arom_flag = getAromaticityFlag(atom);
+		unsigned int hyb_state = getHybridizationState(atom);
+
+		if (exp_atom_count >= 3 && !arom_flag && hyb_state == HybridizationState::SP3) {
 			const StereoDescriptor& desc = getStereoDescriptor(atom);
 	
-			if ((desc.getConfiguration() == AtomConfiguration::R || desc.getConfiguration() == AtomConfiguration::S) && desc.isValid(atom))
+			if ((desc.getConfiguration() == AtomConfiguration::R || desc.getConfiguration() == AtomConfiguration::S) && desc.isValid(atom) &&
+				(getOrdinaryHydrogenCount(atom, molgraph, AtomPropertyFlag::ISOTOPE | AtomPropertyFlag::FORMAL_CHARGE | AtomPropertyFlag::H_COUNT) <= 1) &&
+				!hasSymTerminalNeighbors(atom, molgraph))
+
 				setStereoDescriptor(new_atom, desc);
 		}
 
@@ -253,13 +259,7 @@ void ConfGen::FragmentLibraryEntry::copyAtoms(const Chem::MolecularGraph& molgra
 		setIsotope(new_atom, getIsotope(atom));
 		setFormalCharge(new_atom, getFormalCharge(atom));
 		setRingFlag(new_atom, getRingFlag(atom));
-
-		bool arom_flag = getAromaticityFlag(atom);
-
 		setAromaticityFlag(new_atom, arom_flag);
-		
-		unsigned int hyb_state = getHybridizationState(atom);
-
 		setHybridizationState(new_atom, hyb_state);
 	
 		if (arom_flag || (atom_type != AtomType::N && atom_type != AtomType::C) || exp_atom_count != 1)
@@ -296,7 +296,7 @@ bool ConfGen::FragmentLibraryEntry::copyBonds(const Chem::MolecularGraph& molgra
 
 	bool flex_ring_sys = false;
 
-    for (MolecularGraph::ConstBondIterator it = molgraph.getBondsBegin(), end =  molgraph.getBondsEnd(); it != end; ++it) {
+    for (MolecularGraph::ConstBondIterator it = molgraph.getBondsBegin(), end = molgraph.getBondsEnd(); it != end; ++it) {
 		const Bond& bond = *it;
 		const Atom& atom1 = bond.getBegin();
 		const Atom& atom2 = bond.getEnd();
@@ -454,8 +454,55 @@ void ConfGen::FragmentLibraryEntry::calcHashCode(bool stereo)
 																						BondPropertyFlag::TOPOLOGY |
 																						BondPropertyFlag::AROMATICITY));
 		hashCodeCalc.includeGlobalStereoFeatures(false);
-
 	}
 
 	hashCode = hashCodeCalc.calculate(molecule);
+}
+
+bool ConfGen::FragmentLibraryEntry::hasSymTerminalNeighbors(const Chem::Atom& atom, const Chem::MolecularGraph& molgraph) const
+{
+	using namespace Chem;
+
+	for (Atom::ConstBondIterator it1 = atom.getBondsBegin(), end = atom.getBondsEnd(); it1 != end; ++it1) {
+		const Bond& nbr_bond1 = *it1;
+
+		if (!molgraph.containsBond(nbr_bond1))
+			continue;
+
+		const Atom& nbr_atom1 = nbr_bond1.getNeighbor(atom);
+	
+		if (!molgraph.containsBond(nbr_bond1))
+			continue;
+
+		if (!getHeavyAtomCount(nbr_atom1, molgraph) != 1)
+			continue;
+
+		unsigned int type = getType(nbr_atom1);
+		long charge = getFormalCharge(nbr_atom1);
+		unsigned int hyb_state = getHybridizationState(nbr_atom1);
+		bool arom_flag = getAromaticityFlag(nbr_atom1);
+		std::size_t iso = getIsotope(nbr_atom1);
+
+		for (Atom::ConstBondIterator it2 = it1 + 1; it2 != end; ++it2) {
+			const Bond& nbr_bond2 = *it2;
+
+			if (!molgraph.containsBond(nbr_bond2))
+				continue;
+
+			const Atom& nbr_atom2 = nbr_bond2.getNeighbor(atom);
+	
+			if (!molgraph.containsBond(nbr_bond2))
+				continue;
+
+			if (!getHeavyAtomCount(nbr_atom2, molgraph) != 1)
+				continue;
+
+			if (type == getType(nbr_atom2) && charge == getFormalCharge(nbr_atom2) && 
+				hyb_state == getHybridizationState(nbr_atom2) && arom_flag == getAromaticityFlag(nbr_atom2) &&
+				iso == getIsotope(nbr_atom2))
+				return true;
+		}
+	}
+
+	return false;
 }

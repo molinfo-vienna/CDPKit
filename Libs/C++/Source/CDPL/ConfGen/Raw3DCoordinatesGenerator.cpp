@@ -38,7 +38,7 @@ using namespace CDPL;
 
 
 ConfGen::Raw3DCoordinatesGenerator::Raw3DCoordinatesGenerator(): 
-	molGraph(0), withPlanConstr(true), boxSize(20.0)
+	molGraph(0), withPlanConstr(true), boxSize(50.0)
 {}
 
 void ConfGen::Raw3DCoordinatesGenerator::setBoxSize(double size)

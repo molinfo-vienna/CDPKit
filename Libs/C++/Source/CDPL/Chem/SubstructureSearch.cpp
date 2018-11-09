@@ -41,12 +41,19 @@
 using namespace CDPL;
 
 
-Chem::SubstructureSearch::SubstructureSearch(): 
-	query(0), queryChanged(true), initQueryData(true), uniqueMatches(false), 
+Chem::SubstructureSearch::SubstructureSearch():
+	query(0), 
+	atomMatchExprFunc(static_cast<const AtomMatchExprPtr& (*)(const Atom&)>(&getMatchExpression)), 
+	bondMatchExprFunc(static_cast<const BondMatchExprPtr& (*)(const Bond&)>(&getMatchExpression)), 
+	molGraphMatchExprFunc(static_cast<const MolGraphMatchExprPtr& (*)(const MolecularGraph&)>(&getMatchExpression)),
+	queryChanged(true), initQueryData(true), uniqueMatches(false), 
 	numMappedAtoms(0), maxNumMappings(0), atomMappingConstrMatrixSize(0),
 	bondMappingConstrMatrixSize(0){}
 
 Chem::SubstructureSearch::SubstructureSearch(const MolecularGraph& query): 
+	atomMatchExprFunc(static_cast<const AtomMatchExprPtr& (*)(const Atom&)>(&getMatchExpression)), 
+	bondMatchExprFunc(static_cast<const BondMatchExprPtr& (*)(const Bond&)>(&getMatchExpression)), 
+	molGraphMatchExprFunc(static_cast<const MolGraphMatchExprPtr& (*)(const MolecularGraph&)>(&getMatchExpression)),
 	uniqueMatches(false), numMappedAtoms(0), maxNumMappings(0), atomMappingConstrMatrixSize(0),
 	bondMappingConstrMatrixSize(0)
 {
@@ -54,6 +61,21 @@ Chem::SubstructureSearch::SubstructureSearch(const MolecularGraph& query):
 }
 
 Chem::SubstructureSearch::~SubstructureSearch() {}
+
+void Chem::SubstructureSearch::setAtomMatchExpressionFunction(const AtomMatchExpressionFunction& func)
+{
+	atomMatchExprFunc = func;
+}
+
+void Chem::SubstructureSearch::setBondMatchExpressionFunction(const BondMatchExpressionFunction& func)
+{
+	bondMatchExprFunc = func;
+}
+
+void Chem::SubstructureSearch::setMolecularGraphMatchExpressionFunction(const MolecularGraphMatchExpressionFunction& func)
+{
+	molGraphMatchExprFunc = func;
+}
 
 bool Chem::SubstructureSearch::mappingExists(const MolecularGraph& target)
 {
@@ -75,7 +97,6 @@ bool Chem::SubstructureSearch::findMappings(const MolecularGraph& target)
 		return false;
 
 	saveMappings = true;
-
 	mapAtoms();
 
 	return !foundMappings.empty();
@@ -196,10 +217,9 @@ bool Chem::SubstructureSearch::init(const MolecularGraph& tgt)
 	if (!query)
 		return false;
 
-	target = &tgt;
-	numTargetAtoms = target->getNumAtoms();
-	numTargetBonds = target->getNumBonds();
-	
+	numTargetAtoms = tgt.getNumAtoms();
+	numTargetBonds = tgt.getNumBonds();
+
 	if (queryChanged) {
 		numQueryAtoms = query->getNumAtoms();
 		numQueryBonds = query->getNumBonds();
@@ -208,6 +228,8 @@ bool Chem::SubstructureSearch::init(const MolecularGraph& tgt)
 
 		queryChanged = false;
 	}
+
+	target = &tgt;
 
 	if ((*molGraphMatchExpr)(*query, tgt, Base::Variant()) && findEquivAtoms() && findEquivBonds()) {
 		if (initQueryData) {
@@ -221,7 +243,7 @@ bool Chem::SubstructureSearch::init(const MolecularGraph& tgt)
 
 			initQueryData = false;
 		}
-		
+
 		targetMappingMask.initAtomMask(numTargetAtoms);
 		targetMappingMask.initBondMask(numTargetBonds);
 
@@ -246,8 +268,7 @@ void Chem::SubstructureSearch::initMatchExpressions()
 
 	for (MolecularGraph::ConstAtomIterator it = query->getAtomsBegin(); it != atoms_end; ++it) {
 		const Atom* atom = &*it;
-
-		const MatchExpression<Atom, MolecularGraph>::SharedPointer& expr = getMatchExpression(*atom);
+		const MatchExpression<Atom, MolecularGraph>::SharedPointer& expr = atomMatchExprFunc(*atom);
 
 		if (expr->requiresAtomBondMapping())
 			postMappingMatchAtoms.push_back(atom);
@@ -265,7 +286,7 @@ void Chem::SubstructureSearch::initMatchExpressions()
 			continue;
 		}
 
-		const MatchExpression<Bond, MolecularGraph>::SharedPointer& expr = getMatchExpression(*bond);
+		const MatchExpression<Bond, MolecularGraph>::SharedPointer& expr = bondMatchExprFunc(*bond);
 
 		if (expr->requiresAtomBondMapping())
 			postMappingMatchBonds.push_back(bond);
@@ -273,24 +294,19 @@ void Chem::SubstructureSearch::initMatchExpressions()
 		bondMatchExprTable.push_back(expr);
 	}
 
-	molGraphMatchExpr = getMatchExpression(*query);
+	molGraphMatchExpr = molGraphMatchExprFunc(*query);
 }
 
 bool Chem::SubstructureSearch::findEquivAtoms()
-{
+{	
 	if (atomEquivMatrix.size() < numQueryAtoms)
 		atomEquivMatrix.resize(numQueryAtoms);
 
-	MolecularGraph::ConstAtomIterator query_atoms_end = query->getAtomsEnd();
-	MolecularGraph::ConstAtomIterator target_atoms_beg = target->getAtomsBegin();
-	MolecularGraph::ConstAtomIterator target_atoms_end = target->getAtomsEnd();
-
 	AtomMatchExprTable::const_iterator ame_it = atomMatchExprTable.begin();
 	BitMatrix::iterator tem_it = atomEquivMatrix.begin();
-	std::size_t query_atom_idx = 0;
 
-	for (MolecularGraph::ConstAtomIterator pa_it = query->getAtomsBegin(); pa_it != query_atoms_end; ++pa_it, ++tem_it, ++ame_it, ++query_atom_idx) {
-		const Atom& query_atom = *pa_it;
+	for (std::size_t i = 0; i < numQueryAtoms; i++, ++tem_it, ++ame_it) {
+		const Atom& query_atom = query->getAtom(i);
 		const MatchExpression<Atom, MolecularGraph>& expr = **ame_it;
 		Util::BitSet& equiv_mask = *tem_it;
 
@@ -298,14 +314,13 @@ bool Chem::SubstructureSearch::findEquivAtoms()
 		equiv_mask.reset();
 
 		bool no_equiv_atoms = true;
-		std::size_t target_atom_idx = 0;
 
-		for (MolecularGraph::ConstAtomIterator ta_it = target_atoms_beg; ta_it != target_atoms_end; ++ta_it, ++target_atom_idx) {
-			const Atom& target_atom = *ta_it;
+		for (std::size_t j = 0; j < numTargetAtoms; j++) {
+			const Atom& target_atom = target->getAtom(j);
 
 			if (expr(query_atom, *query, target_atom, *target, Base::Variant())) {
-				if (checkAtomMappingConstraints(query_atom_idx, target_atom_idx)) {
-					equiv_mask.set(target_atom_idx);
+				if (checkAtomMappingConstraints(i, j)) {
+					equiv_mask.set(j);
 					no_equiv_atoms = false;
 				}
 			}
@@ -323,15 +338,10 @@ bool Chem::SubstructureSearch::findEquivBonds()
 	if (bondEquivMatrix.size() < numQueryBonds)
 		bondEquivMatrix.resize(numQueryBonds);
 
-	MolecularGraph::ConstBondIterator query_bonds_end = query->getBondsEnd();
-	MolecularGraph::ConstBondIterator target_bonds_beg = target->getBondsBegin();
-	MolecularGraph::ConstBondIterator target_bonds_end = target->getBondsEnd();
-
 	BondMatchExprTable::const_iterator bme_it = bondMatchExprTable.begin();
 	BitMatrix::iterator tem_it = bondEquivMatrix.begin();
-	std::size_t query_bond_idx = 0;
 
-	for (MolecularGraph::ConstBondIterator pb_it = query->getBondsBegin(); pb_it != query_bonds_end; ++pb_it, ++tem_it, ++bme_it, ++query_bond_idx) {
+	for (std::size_t i = 0; i < numQueryBonds; i++, ++tem_it, ++bme_it) {
 		Util::BitSet& equiv_mask = *tem_it;
 
 		equiv_mask.resize(numTargetBonds);
@@ -340,21 +350,20 @@ bool Chem::SubstructureSearch::findEquivBonds()
 		if (!*bme_it)
 			continue;
 
-		const Bond& query_bond = *pb_it;
+		const Bond& query_bond = query->getBond(i);
 		const MatchExpression<Bond, MolecularGraph>& expr = **bme_it;
 
 		bool no_equiv_bonds = true;
-		std::size_t target_bond_idx = 0;
 
-		for (MolecularGraph::ConstBondIterator tb_it = target_bonds_beg; tb_it != target_bonds_end; ++tb_it, ++target_bond_idx) {
-			const Bond& target_bond = *tb_it;
+		for (std::size_t j = 0; j < numTargetBonds; j++) {
+			const Bond& target_bond = target->getBond(j);
 
 			if (!target->containsAtom(target_bond.getBegin()) || !target->containsAtom(target_bond.getEnd()))
 				continue;
 
 			if (expr(query_bond, *query, target_bond, *target, Base::Variant())) {
-				if (checkBondMappingConstraints(query_bond_idx, target_bond_idx)) {
-					equiv_mask.set(target_bond_idx);
+				if (checkBondMappingConstraints(i, j)) {
+					equiv_mask.set(j);
 					no_equiv_bonds = false;
 				}
 			}

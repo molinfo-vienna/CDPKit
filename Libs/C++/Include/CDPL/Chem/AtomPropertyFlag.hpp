@@ -118,6 +118,16 @@ namespace CDPL
 			 * \brief Specifies the valence of an atom.
 			 */
 			const unsigned int VALENCE           = 0x800;
+			
+			/**
+			 * \brief Specifies the explicit bond count of an atom.
+			 */
+			const unsigned int EXPLICIT_BOND_COUNT  = 0x1000;
+
+			/**
+			 * \brief Specifies the hybridization state an atom.
+			 */
+			const unsigned int HYBRIDIZATION_STATE  = 0x2000;
 		}
 
 		/**

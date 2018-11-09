@@ -119,6 +119,7 @@ namespace CDPL
 
 		private:
 			bool timeoutExceeded() const;
+			bool has3DCoordinates(const Chem::Atom& atom) const;
 
 			typedef ForceField::MMFF94EnergyCalculator<double> MMFF94EnergyCalculator;
 			typedef ForceField::MMFF94GradientCalculator<double> MMFF94GradientCalculator;

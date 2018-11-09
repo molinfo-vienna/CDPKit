@@ -60,6 +60,10 @@ void CDPLPythonPharm::exportInteractionScoreGridSetCalculator()
 			 (python::arg("self"), python::arg("func")))
 		.def("getScoreCombinationFunction", &Pharm::InteractionScoreGridSetCalculator::getScoreCombinationFunction,
 			 python::arg("self"), python::return_internal_reference<>())
+		.def("normalizeScores", &Pharm::InteractionScoreGridSetCalculator::normalizeScores, (python::arg("self"), python::arg("normalize")))
+		.def("scoresNormalized", &Pharm::InteractionScoreGridSetCalculator::scoresNormalized, python::arg("self"))
+		.add_property("normalizedScores", &Pharm::InteractionScoreGridSetCalculator::scoresNormalized,
+					  &Pharm::InteractionScoreGridSetCalculator::normalizeScores)
 		.add_property("scoreCombinationFunction", python::make_function(&Pharm::InteractionScoreGridCalculator::getScoreCombinationFunction, python::return_internal_reference<>()),
 					  &Pharm::InteractionScoreGridCalculator::setScoreCombinationFunction);
 }

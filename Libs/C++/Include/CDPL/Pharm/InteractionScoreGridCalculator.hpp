@@ -88,6 +88,10 @@ namespace CDPL
 
 			~InteractionScoreGridCalculator();
 
+			void normalizeScores(bool normalize);
+
+			bool scoresNormalized() const;
+
 			void setScoringFunction(const ScoringFunction& func);
 
 			const ScoringFunction& getScoringFunction() const;
@@ -119,7 +123,8 @@ namespace CDPL
 			double                   distCutoff;
 			OctreePtr                octree;
 			Math::Vector3DArray      featureCoords;
-			FeatureIndexList         featureIndices;	
+			FeatureIndexList         featureIndices;
+			bool                     normScores;
 		};
 
 		/**

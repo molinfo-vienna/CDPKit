@@ -160,6 +160,9 @@
 \defgroup CDPL_CHEM_REACTION_SUBSTRUCTURE_SEARCH Reaction Substructure Search
 \ingroup CDPL_CHEM_SUBSTRUCTURE_SEARCH
 
+\defgroup CDPL_CHEM_GRAPH_AUTOMORPHISM_SEARCH Graph Automorphism Group Search
+\ingroup CDPL_CHEM_SUBSTRUCTURE_SEARCH
+
 \defgroup CDPL_CHEM_ALIGNMENT Chemical Entity Alignment 
 \ingroup CDPL_CHEM
 

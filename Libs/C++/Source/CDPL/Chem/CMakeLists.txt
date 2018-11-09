@@ -85,6 +85,7 @@ SET(cdpl-chem_LIB_SRCS
     CommonConnectedSubstructureSearch.cpp
     MaxCommonAtomSubstructureSearch.cpp
     MaxCommonBondSubstructureSearch.cpp
+    AutomorphismGroupSearch.cpp
     Reactor.cpp
     TautomerGenerator.cpp
     DefaultTautomerGenerator.cpp

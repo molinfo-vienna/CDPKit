@@ -33,8 +33,6 @@
 
 #include <cstddef>
 
-#include <boost/ref.hpp>
-
 #include "CDPL/Chem/APIPrefix.hpp"
 #include "CDPL/Chem/Entity3DContainer.hpp"
 #include "CDPL/Util/IndexedElementIterator.hpp"
@@ -163,7 +161,7 @@ namespace CDPL
 			public:
 				ConstAtomAccessor(const AtomAccessor& accessor): container(accessor.container) {}
 
-				ConstAtomAccessor(const AtomContainer& cntnr): container(cntnr) {}
+				ConstAtomAccessor(const AtomContainer* cntnr): container(cntnr) {}
 
 				const Atom& operator()(std::size_t idx) const;
 
@@ -172,7 +170,7 @@ namespace CDPL
 				ConstAtomAccessor& operator=(const AtomAccessor& accessor);
 
 			private:
-				boost::reference_wrapper<const AtomContainer> container;
+				const AtomContainer* container;
 			};
 
 			class CDPL_CHEM_API AtomAccessor
@@ -181,14 +179,14 @@ namespace CDPL
 				friend class ConstAtomAccessor;
 
 			public:
-				AtomAccessor(AtomContainer& cntnr): container(cntnr) {}
+				AtomAccessor(AtomContainer* cntnr): container(cntnr) {}
 
 				Atom& operator()(std::size_t idx) const;
 
 				bool operator==(const AtomAccessor& accessor) const;
 
 			private:
-				boost::reference_wrapper<AtomContainer> container;
+				AtomContainer* container;
 			};
 		};
 

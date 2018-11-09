@@ -90,6 +90,16 @@ const Pharm::InteractionScoreGridSetCalculator::ScoreCombinationFunction& Pharm:
     return gridCalculator.getScoreCombinationFunction();
 }
 
+void Pharm::InteractionScoreGridSetCalculator::normalizeScores(bool normalize)
+{
+	gridCalculator.normalizeScores(normalize);
+}
+
+bool Pharm::InteractionScoreGridSetCalculator::scoresNormalized() const
+{
+	return gridCalculator.scoresNormalized();
+}
+
 void Pharm::InteractionScoreGridSetCalculator::calculate(const FeatureContainer& features)
 {
     for (ScoringFuncMap::const_iterator it = scoringFuncMap.begin(), end = scoringFuncMap.end(); it != end; ++it) {
