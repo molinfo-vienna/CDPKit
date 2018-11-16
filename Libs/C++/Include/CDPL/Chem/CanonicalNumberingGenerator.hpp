@@ -41,6 +41,7 @@
 #include <utility>
 
 #include <boost/shared_ptr.hpp>
+#include <boost/function.hpp>
 
 #include "CDPL/Chem/APIPrefix.hpp"
 #include "CDPL/Chem/AtomPropertyFlag.hpp"
@@ -89,6 +90,8 @@ namespace CDPL
 			static const unsigned int DEF_BOND_PROPERTY_FLAGS = 
 				BondPropertyFlag::ORDER | BondPropertyFlag::AROMATICITY | BondPropertyFlag::CONFIGURATION;
 
+			typedef boost::function2<std::size_t, const Atom&, const MolecularGraph&> HydrogenCountFunction;
+
 			/**
 			 * \brief Constructs the \c %CanonicalNumberingGenerator instance.
 			 */
@@ -115,7 +118,6 @@ namespace CDPL
 			 *  - Chem::AtomPropertyFlag::FORMAL_CHARGE
 			 *  - Chem::AtomPropertyFlag::AROMATICITY
 			 *  - Chem::AtomPropertyFlag::CONFIGURATION
-			 *  - Chem::AtomPropertyFlag::CONFIGURATION
 			 *  - and Chem::AtomPropertyFlag::H_COUNT
 			 *
 			 * \param flags The set of atomic properties to consider.
@@ -139,7 +141,6 @@ namespace CDPL
 			 * Chem::BondPropertyFlag. Supported property flags are:
 			 *  - Chem::BondPropertyFlag::ORDER
 			 *  - Chem::BondPropertyFlag::CONFIGURATION
-			 *  - Chem::BondPropertyFlag::CONFIGURATION
 			 *  - and Chem::BondPropertyFlag::AROMATICITY
 			 *
 			 * \param flags The set of bond properties to consider.
@@ -154,6 +155,10 @@ namespace CDPL
 			 * \see setBondPropertyFlags()
 			 */
 			unsigned int getBondPropertyFlags() const;
+
+			void setHydrogenCountFunction(const HydrogenCountFunction& func);
+
+			const HydrogenCountFunction& getHydrogenCountFunction();
 
 			/**
 			 * \brief Performs a canonical numbering of the atoms in the molecular graph \a molgraph.
@@ -325,6 +330,7 @@ namespace CDPL
 
 			unsigned int           atomPropertyFlags;
 			unsigned int           bondPropertyFlags;
+			HydrogenCountFunction  hCountFunc;
 			bool                   foundStereogenicAtoms;
 			bool                   foundStereogenicBonds;
 			const MolecularGraph*  molGraph;

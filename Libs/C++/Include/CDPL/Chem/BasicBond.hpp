@@ -87,6 +87,8 @@ namespace CDPL
 
 			std::size_t getIndex() const;
 
+			void orderAtoms(const AtomCompareFunction& func);
+
 			/**
 			 * \brief Assignment operator that replaces the current set of properties with the properties of \a bond;
 			 * \param bond The bond whose properties get copied.

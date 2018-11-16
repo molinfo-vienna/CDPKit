@@ -39,35 +39,25 @@ using namespace CDPL;
 
 bool Chem::isStereoCenter(const Atom& atom, const MolecularGraph& molgraph, bool check_cip_sym)
 {
-    std::size_t num_bonds = getExplicitBondCount(atom, molgraph);
-
-    if (num_bonds < 3 || num_bonds > 4)
-		return false;
-
-    if (getAromaticityFlag(atom))
-		return false;
-
-	if ((num_bonds + getImplicitHydrogenCount(atom)) > 4)
+	if (getAromaticityFlag(atom))
 		return false;
 
     if (getHybridizationState(atom) != HybridizationState::SP3)
 		return false;
 
-	if (getType(atom) == AtomType::N && num_bonds == 3) {
-		if (getRingBondCount(atom, molgraph) != 3)
-			return false;
+	std::size_t num_bonds = getExplicitBondCount(atom, molgraph);
 
-		Atom::ConstAtomIterator atoms_end = atom.getAtomsEnd();
-		Atom::ConstBondIterator b_it = atom.getBondsBegin();
+    if (num_bonds < 3 || num_bonds > 4)
+		return false;
 
-		for (Atom::ConstAtomIterator a_it = atom.getAtomsBegin(); a_it != atoms_end; ++a_it, ++b_it) {
-			if (molgraph.containsAtom(*a_it) && molgraph.containsBond(*b_it) && isUnsaturated(*a_it, molgraph))
-				return false;
-		}
-	}
+	if ((num_bonds + getImplicitHydrogenCount(atom)) > 4)
+		return false;
 
 	if (getOrdinaryHydrogenCount(atom, molgraph, AtomPropertyFlag::ISOTOPE | AtomPropertyFlag::FORMAL_CHARGE | AtomPropertyFlag::H_COUNT) > 1)
 	    return false;
+
+	if (isPlanarNitrogen(atom, molgraph))
+		return false;
 
 	if (!check_cip_sym)
 		return true;

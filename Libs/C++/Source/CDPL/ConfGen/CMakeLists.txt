@@ -17,6 +17,7 @@ IF(Boost_TIMER_FOUND AND Boost_CHRONO_FOUND)
        ${cdpl-confgen_LIB_SRCS}
        RandomConformerGenerator.cpp
        FragmentConformerGenerator.cpp
+       FragmentLibraryGenerator.cpp
       )	  
 
    LINK_LIBRARIES(${Boost_TIMER_LIBRARY} ${Boost_CHRONO_LIBRARY})	

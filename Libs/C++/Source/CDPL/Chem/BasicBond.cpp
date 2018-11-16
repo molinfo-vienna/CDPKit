@@ -26,6 +26,7 @@
  
 #include "StaticInit.hpp"
 
+#include <algorithm>
 #include <cassert>
 
 #include "CDPL/Chem/BasicBond.hpp"
@@ -172,4 +173,12 @@ void Chem::BasicBond::setBegin(BasicAtom& atom)
 void Chem::BasicBond::setEnd(BasicAtom& atom)
 {
 	atoms[1] = &atom;
+}
+
+void Chem::BasicBond::orderAtoms(const AtomCompareFunction& func)
+{
+	if (func(*atoms[0], *atoms[1]))
+		return;
+
+	std::swap(atoms[0], atoms[1]);
 }

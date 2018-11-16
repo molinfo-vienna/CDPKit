@@ -49,7 +49,7 @@ void CDPLPythonChem::exportCIPPriorityCalculator()
 			 python::arg("self"), python::return_internal_reference<>())
 		.def("calculate", &Chem::CIPPriorityCalculator::calculate, 
 			 (python::arg("self"), python::arg("molgraph"), python::arg("priorities")))
-			.add_property("implHydrogenCountFunc", 
+		.add_property("implHydrogenCountFunc", 
 					  python::make_function(&Chem::CIPPriorityCalculator::getImplicitHydrogenCountFunction, 
 											python::return_internal_reference<>()),
 					  &Chem::CIPPriorityCalculator::setImplicitHydrogenCountFunction);

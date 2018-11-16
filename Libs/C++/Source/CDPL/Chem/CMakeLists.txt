@@ -266,6 +266,7 @@ SET(cdpl-chem_LIB_SRCS
     MolecularGraph3DCoordinatesFunctions.cpp
     MolecularGraphSybylAtomTypesFunction.cpp
     MolecularGraphAtomHydrophobicityFunction.cpp 
+    MolecularGraphCanonicalizationFunctions.cpp 
 
     ReactionPropertyFunctions.cpp
     ReactionMatchConstraintsFunctions.cpp

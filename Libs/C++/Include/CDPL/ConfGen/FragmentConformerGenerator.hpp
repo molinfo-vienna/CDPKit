@@ -69,7 +69,7 @@ namespace CDPL
 			static const std::size_t  DEF_MAX_NUM_MINIMIZATION_STEPS      = 0;
 			static const std::size_t  DEF_MAX_NUM_OUTPUT_CONFORMERS       = 1000;
 			static const std::size_t  DEF_MIN_NUM_RING_CONFORMER_TRIALS   = 30;
-			static const std::size_t  DEF_MAX_NUM_RING_CONFORMER_TRIALS   = 1000;
+			static const std::size_t  DEF_MAX_NUM_RING_CONFORMER_TRIALS   = 2000;
 			static const std::size_t  DEF_RING_CONFORMER_TRIAL_FACTOR     = 20;
 			static const std::size_t  DEF_TIMEOUT                         = 10 * 60 * 1000;
 			static const double       DEF_MINIMIZATION_STOP_GRADIENT_NORM;
@@ -142,6 +142,10 @@ namespace CDPL
 			typedef std::pair<double, Math::Vector3DArray::SharedPointer> ConfData;
 			typedef std::vector<const Chem::Atom*> AtomList;
 
+			FragmentConformerGenerator(const FragmentConformerGenerator&);
+
+			FragmentConformerGenerator& operator=(const FragmentConformerGenerator&);
+
 			void generateSingleConformer();
 			void generateFlexibleRingConformers();
 
@@ -153,9 +157,9 @@ namespace CDPL
 
 			bool checkRMSD(const ConfData& conf);
 			
-			Math::Vector3DArray::SharedPointer getHeavyAtomCoordinates(const ConfData& conf);
+			Math::Vector3DArray::SharedPointer getRingAtomCoordinates(const ConfData& conf);
 
-			void getHeavyAtomIndices();
+			void getRingAtomIndices();
 			void getAtomSymmetryMappings();
 			void getNeighborHydrogens(const Chem::Atom& atom, AtomList& nbr_list) const;
 
@@ -234,13 +238,13 @@ namespace CDPL
 			Chem::AutomorphismGroupSearch            automorphGroupSearch;
 			AlignmentCalculator                      alignmentCalc;
 			Math::Vector3DArray::StorageType         gradient;
-			IndexList                                heavyAtomIndices;
+			IndexList                                ringAtomIndices;
 			IndexList                                atomSymmetryMappings;
 			AtomList                                 nbrHydrogens1;
 			AtomList                                 nbrHydrogens2;
 			Chem::Fragment                           ordHDepleteMolGraph;
 			Util::BitSet                             ordHDepleteAtomMask;
-			CoordsDataArray                          heavyAtomCoords;
+			CoordsDataArray                          ringAtomCoords;
 			ConfDataArray                            outputConfs;
 			ConfDataArray                            workingConfs;
 			CoordsDataArray                          coordsCache;

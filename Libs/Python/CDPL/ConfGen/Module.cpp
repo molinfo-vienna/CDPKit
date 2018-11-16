@@ -46,6 +46,7 @@ BOOST_PYTHON_MODULE(_confgen)
 
 	exportRandomConformerGenerator();
 	exportFragmentConformerGenerator();
+	exportFragmentLibraryGenerator();
 
 #endif // defined(HAVE_BOOST_TIMER) && defined(HAVE_BOOST_CHRONO)
 
@@ -53,6 +54,8 @@ BOOST_PYTHON_MODULE(_confgen)
 	exportForceFieldTypes();
 
 	exportUtilityFunctions();
+
+	exportBoostFunctionWrappers();
 
 	registerToPythonConverters();
 	registerFromPythonConverters();

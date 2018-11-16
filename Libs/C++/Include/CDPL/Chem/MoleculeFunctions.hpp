@@ -60,22 +60,25 @@ namespace CDPL
 		/**
 		 * \brief Removes all explicit hydrogen atoms from the molecule \a mol.
 		 * \param mol The molecule for which to remove all explicit hydrogen atoms.
+		 * \return \c false if \a mol was not altered, \c true otherwise.
 		 */
-		CDPL_CHEM_API void makeHydrogenDeplete(Molecule& mol);
+		CDPL_CHEM_API bool makeHydrogenDeplete(Molecule& mol);
 
 		/**
 		 * \brief Removes all explicit ordinary hydrogen atoms from the molecule \a mol.
 		 * \param mol The molecule for which to remove all explicit ordinary hydrogen atoms.
 		 * \param flags Specifies the set of atom properties to check (see namespace Chem::AtomPropertyFlag).
+		 * \return \c false if \a mol was not altered, \c true otherwise.
 		 * \see Chem::isOrdinaryHydrogen
 		 */
-		CDPL_CHEM_API void makeOrdinaryHydrogenDeplete(Molecule& mol, unsigned int flags);
+		CDPL_CHEM_API bool makeOrdinaryHydrogenDeplete(Molecule& mol, unsigned int flags);
 
 		/**
 		 * \brief Converts all implicit hydrogens of the molecule \a mol to explicit hydrogen atoms.
 		 * \param mol The molecule that has to be made hydrogen complete.
+		 * \return \c false if \a mol was not altered, \c true otherwise.
 		 */
-		CDPL_CHEM_API void makeHydrogenComplete(Molecule& mol);
+		CDPL_CHEM_API bool makeHydrogenComplete(Molecule& mol);
 
 		CDPL_CHEM_API void removeAtomsIf(Molecule& mol, const AtomPredicate& pred);
 

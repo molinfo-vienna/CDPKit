@@ -49,11 +49,19 @@ void CDPLPythonChem::exportCanonicalNumberingGenerator()
 		.def("setBondPropertyFlags", &Chem::CanonicalNumberingGenerator::setBondPropertyFlags, 
 			 (python::arg("self"), python::arg("flags")))
 		.def("getBondPropertyFlags", &Chem::CanonicalNumberingGenerator::getBondPropertyFlags, python::arg("self"))
+		.def("setHydrogenCountFunction", &Chem::CanonicalNumberingGenerator::setHydrogenCountFunction, 
+			 (python::arg("self"), python::arg("func")))
+		.def("getHydrogenCountFunction", &Chem::CanonicalNumberingGenerator::getHydrogenCountFunction, 
+			 python::arg("self"), python::return_internal_reference<>())
 		.def("generate", &Chem::CanonicalNumberingGenerator::generate, (python::arg("self"), python::arg("molgraph"), python::arg("numbering")))
 		.add_property("atomPropertyFlags", &Chem::CanonicalNumberingGenerator::getAtomPropertyFlags, 
 					  &Chem::CanonicalNumberingGenerator::setAtomPropertyFlags)
 		.add_property("bondPropertyFlags", &Chem::CanonicalNumberingGenerator::getBondPropertyFlags, 
 					  &Chem::CanonicalNumberingGenerator::setBondPropertyFlags)
 		.def_readonly("DEF_ATOM_PROPERTY_FLAGS", Chem::CanonicalNumberingGenerator::DEF_ATOM_PROPERTY_FLAGS)
-		.def_readonly("DEF_BOND_PROPERTY_FLAGS", Chem::CanonicalNumberingGenerator::DEF_BOND_PROPERTY_FLAGS);
+		.def_readonly("DEF_BOND_PROPERTY_FLAGS", Chem::CanonicalNumberingGenerator::DEF_BOND_PROPERTY_FLAGS)
+		.add_property("hydrogenCountFunc", 
+					  python::make_function(&Chem::CanonicalNumberingGenerator::getHydrogenCountFunction, 
+											python::return_internal_reference<>()),
+					  &Chem::CanonicalNumberingGenerator::setHydrogenCountFunction);
 }

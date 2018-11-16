@@ -106,6 +106,8 @@ namespace CDPL
 
 			void loadDefaults();
 
+			boost::mutex& getMutex();
+
 			static void set(const SharedPointer& lib);
 
 			static const SharedPointer& get();

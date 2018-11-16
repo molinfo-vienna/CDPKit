@@ -35,7 +35,7 @@
 using namespace CDPL; 
 
 
-void Chem::perceiveBondStereoCenters(MolecularGraph& molgraph, bool overwrite, std::size_t min_ring_size)
+void Chem::perceiveBondStereoCenters(MolecularGraph& molgraph, bool overwrite, bool check_cip_sym, std::size_t min_ring_size)
 {
 	MolecularGraph::BondIterator bonds_end = molgraph.getBondsEnd();
 
@@ -45,7 +45,7 @@ void Chem::perceiveBondStereoCenters(MolecularGraph& molgraph, bool overwrite, s
 		if (!overwrite && hasStereoCenterFlag(bond))
 			continue;
 
-		setStereoCenterFlag(bond, isStereoCenter(bond, molgraph, min_ring_size));
+		setStereoCenterFlag(bond, isStereoCenter(bond, molgraph, check_cip_sym, min_ring_size));
 	}
 }
 

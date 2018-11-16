@@ -1,7 +1,7 @@
 /* -*- mode: c++; c-basic-offset: 4; tab-width: 4; indent-tabs-mode: t -*- */
 
 /* 
- * ConfGen.hpp 
+ * BoostFunctionWrapperExport.cpp 
  *
  * This file is part of the Chemical Data Processing Toolkit
  *
@@ -23,30 +23,23 @@
  * Boston, MA 02111-1307, USA.
  */
 
-/**
- * \file
- * \brief A convenience header including everything that is defined in namespace CDPL::ConfGen.
- */
 
-#ifndef CDPL_CONFGEN_HPP
-#define CDPL_CONFGEN_HPP
+#include <string>
 
-#include "CDPL/Config.hpp"
+#include <boost/function.hpp>
 
-#include "CDPL/ConfGen/DGConstraintGenerator.hpp"
-#include "CDPL/ConfGen/Raw3DCoordinatesGenerator.hpp"
-#include "CDPL/ConfGen/FragmentList.hpp"
-#include "CDPL/ConfGen/FragmentLibraryEntry.hpp"
-#include "CDPL/ConfGen/FragmentLibrary.hpp"
-#include "CDPL/ConfGen/UtilityFunctions.hpp"
-#include "CDPL/ConfGen/FragmentType.hpp"
-#include "CDPL/ConfGen/ForceFieldType.hpp"
+#include "CDPL/Chem/MolecularGraph.hpp"
 
-#if defined(HAVE_BOOST_TIMER) && defined(HAVE_BOOST_CHRONO)
+#include "Base/BoostFunctionWrapperExport.hpp"
 
-#include "CDPL/ConfGen/RandomConformerGenerator.hpp"
-#include "CDPL/ConfGen/FragmentConformerGenerator.hpp"
-#include "CDPL/ConfGen/FragmentLibraryGenerator.hpp"
+#include "ClassExports.hpp"
 
-#endif // defined(HAVE_BOOST_TIMER) && defined(HAVE_BOOST_CHRONO)
-#endif // CDPL_CONFGEN_HPP
+
+void CDPLPythonConfGen::exportBoostFunctionWrappers()
+{
+	using namespace boost;
+    using namespace CDPL;
+
+	CDPLPythonBase::BoostFunction2Export<boost::function2<bool, const Chem::MolecularGraph&, const std::string&> >("BoolMolecularGraphStringFunctor");
+	CDPLPythonBase::BoostFunction3Export<boost::function3<void, const Chem::MolecularGraph&, bool, std::size_t> >("VoidMolecularGraphBoolSizeTypeFunctor");
+}

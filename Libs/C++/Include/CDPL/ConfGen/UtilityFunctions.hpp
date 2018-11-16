@@ -42,6 +42,7 @@ namespace CDPL
 
 		class Bond;
 		class MolecularGraph;
+		class Molecule;
 	}
 
 	namespace ConfGen 
@@ -55,6 +56,8 @@ namespace CDPL
 		CDPL_CONFGEN_API bool isFragmentLinkBond(const Chem::Bond& bond, const Chem::MolecularGraph& molgraph); 
 
 		CDPL_CONFGEN_API unsigned int perceiveFragmentType(const Chem::MolecularGraph& molgraph); 
+
+		CDPL_CONFGEN_API void prepareForConformerGeneration(Chem::Molecule& mol); 
 		
 		/**
 		 * @}

@@ -28,6 +28,7 @@
 #define CDPL_PYTHON_BASE_CALLABLEOBJECTADAPTER_HPP
 
 #include <functional>
+#include <string>
 
 #include <boost/python.hpp>
 #include <boost/type_traits.hpp>
@@ -40,9 +41,9 @@ namespace CDPLPythonBase
 	struct MakeRef
 	{
 
-		typedef typename boost::reference_wrapper<T> Type;
+		typedef typename boost::reference_wrapper<T> RetType;
 
-		static inline Type make(T& arg) {
+		static inline RetType make(T& arg) {
 			return boost::ref(arg);
 		}
 	};
@@ -51,15 +52,26 @@ namespace CDPLPythonBase
 	struct MakeRef<T, true>
 	{
 
-		typedef const T& Type;
+		typedef const T& RetType;
 
-		static inline Type make(T& arg) {
+		static inline RetType make(T& arg) {
 			return arg;
 		}
 	};
 
+	template <>
+	struct MakeRef<const std::string, false>
+	{
+
+		typedef boost::python::str RetType;
+
+		static inline RetType make(const std::string& arg) {
+			return boost::python::str(arg);
+		}
+	};
+
 	template <typename T>
-	inline typename MakeRef<T, boost::is_fundamental<T>::value>::Type makeRef(T& arg)
+	inline typename MakeRef<T, boost::is_fundamental<T>::value>::RetType makeRef(T& arg)
 	{
 		return MakeRef<T, boost::is_fundamental<T>::value>::make(arg);
 	}

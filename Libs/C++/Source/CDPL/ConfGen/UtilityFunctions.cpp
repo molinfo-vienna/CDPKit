@@ -30,10 +30,13 @@
 #include "CDPL/ConfGen/FragmentType.hpp"
 #include "CDPL/Chem/Atom.hpp"
 #include "CDPL/Chem/Bond.hpp"
-#include "CDPL/Chem/MolecularGraph.hpp"
+#include "CDPL/Chem/Molecule.hpp"
 #include "CDPL/Chem/BondFunctions.hpp"
 #include "CDPL/Chem/AtomFunctions.hpp"
+#include "CDPL/Chem/MoleculeFunctions.hpp"
+#include "CDPL/Chem/MolecularGraphFunctions.hpp"
 #include "CDPL/Chem/AtomType.hpp"
+#include "CDPL/Chem/StereoDescriptor.hpp"
 
 
 using namespace CDPL; 
@@ -164,4 +167,41 @@ unsigned int ConfGen::perceiveFragmentType(const Chem::MolecularGraph& molgraph)
 		return FragmentType::RIGID_RING_SYSTEM;
 	
 	return FragmentType::CHAIN;
+}
+
+void ConfGen::prepareForConformerGeneration(Chem::Molecule& mol)
+{
+	using namespace Chem;
+
+	calcImplicitHydrogenCounts(mol, false);
+
+	bool changed = makeHydrogenComplete(mol);
+
+	if (changed)
+		calcImplicitHydrogenCounts(mol, true);
+
+	perceiveComponents(mol, changed);
+	perceiveHybridizationStates(mol, false);
+
+	perceiveSSSR(mol, false);
+	setRingFlags(mol, changed);
+	setAromaticityFlags(mol, changed);
+
+	for (Molecule::AtomIterator it = mol.getAtomsBegin(), end = mol.getAtomsEnd(); it != end; ++it) {
+		Atom& atom = *it;
+
+		if (!isStereoCenter(atom, mol, false))
+			clearStereoDescriptor(atom);
+		else if (!hasStereoDescriptor(atom))
+			setStereoDescriptor(atom, calcStereoDescriptor(atom, mol, 1));
+	}
+
+	for (Molecule::BondIterator it = mol.getBondsBegin(), end = mol.getBondsEnd(); it != end; ++it) {
+		Bond& bond = *it;
+
+		if (!isStereoCenter(bond, mol, false))
+			clearStereoDescriptor(bond);
+		else if (!hasStereoDescriptor(bond))
+			setStereoDescriptor(bond, calcStereoDescriptor(bond, mol, 1));
+	}
 }

@@ -34,6 +34,7 @@
 #include <cstddef>
 
 #include "CDPL/Chem/APIPrefix.hpp"
+#include "CDPL/Chem/BondCompareFunctionWrapper.hpp"
 #include "CDPL/Util/IndexedElementIterator.hpp"
 
 
@@ -133,6 +134,8 @@ namespace CDPL
 			 * \throw Base::ItemNotFound if the specified Chem::Bond instance could not be found.
 			 */
 			virtual std::size_t getBondIndex(const Bond& bond) const = 0;
+
+			virtual void orderBonds(const BondCompareFunction& func) = 0;
 
 		protected:
 			/**

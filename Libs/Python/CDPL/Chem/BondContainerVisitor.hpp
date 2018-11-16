@@ -32,6 +32,10 @@
 
 
 #define BONDCONTAINER_IMPL()                                         \
+	void orderBonds(const CDPL::Chem::BondCompareFunction& func) {   \
+		this->get_override("orderBonds")(boost::ref(func));          \
+	}                                                                \
+                                                                     \
 	std::size_t getNumBonds() const {                                \
 		return this->get_override("getNumBonds")();                  \
 	}                                                                \
@@ -80,6 +84,7 @@ namespace CDPLPythonChem
 				.def("getBond", python::pure_virtual(static_cast<Chem::Bond& (Chem::BondContainer::*)(std::size_t)>(&Chem::BondContainer::getBond)), 
 					 (python::arg("self"), python::arg("idx")), python::return_internal_reference<1>())
 				.def("containsBond", python::pure_virtual(&this->containsBond), (python::arg("self"), python::arg("bond")))
+				.def("orderBonds", python::pure_virtual(&Chem::BondContainer::orderBonds), (python::arg("self"), python::arg("func")))
 				.def("getBondIndex", python::pure_virtual(&getBondIndex), (python::arg("self"), python::arg("bond")))
 				.def("getNumBonds", python::pure_virtual(&Chem::BondContainer::getNumBonds), python::arg("self"));
 		}

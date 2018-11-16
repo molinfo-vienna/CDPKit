@@ -41,9 +41,10 @@
 using namespace CDPL; 
 
 
-void Chem::makeHydrogenDeplete(Fragment& frag)
+bool Chem::makeHydrogenDeplete(Fragment& frag)
 {
  	std::size_t num_atoms = frag.getNumAtoms();
+	bool changes = false;
 
 	for (std::size_t i = 0; i < num_atoms; ) {
 		const Atom& atom = frag.getAtom(i);
@@ -59,12 +60,16 @@ void Chem::makeHydrogenDeplete(Fragment& frag)
 					  boost::bind<bool>(&Fragment::removeBond, boost::ref(frag), _1));
 
 		num_atoms--;
+		changes = true;
 	}
+
+	return changes;
 }
 
-void Chem::makeOrdinaryHydrogenDeplete(Fragment& frag, unsigned int flags)
+bool Chem::makeOrdinaryHydrogenDeplete(Fragment& frag, unsigned int flags)
 {
  	std::size_t num_atoms = frag.getNumAtoms();
+	bool changes = false;
 
 	for (std::size_t i = 0; i < num_atoms; ) {
 		const Atom& atom = frag.getAtom(i);
@@ -80,5 +85,8 @@ void Chem::makeOrdinaryHydrogenDeplete(Fragment& frag, unsigned int flags)
 					  boost::bind<bool>(&Fragment::removeBond, boost::ref(frag), _1));
 
 		num_atoms--;
+		changes = true;
 	}
+
+	return changes;
 }

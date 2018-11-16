@@ -39,10 +39,13 @@ namespace CDPLPythonConfGen
 	void exportFragmentLibraryEntry();
 	void exportFragmentLibrary();
 
+	void exportBoostFunctionWrappers();
+
 #if defined(HAVE_BOOST_TIMER) && defined(HAVE_BOOST_CHRONO)
 
 	void exportRandomConformerGenerator();
 	void exportFragmentConformerGenerator();
+	void exportFragmentLibraryGenerator();
 
 #endif // defined(HAVE_BOOST_TIMER) && defined(HAVE_BOOST_CHRONO)
 }

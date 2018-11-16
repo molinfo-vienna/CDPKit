@@ -111,7 +111,7 @@ namespace
 			Molecule::reserveMemoryForBonds(num_bonds);
 		}
 
-		Molecule::SharedPointer clone() const {
+		MolecularGraph::SharedPointer clone() const {
 			return this->get_override("clone")();
 		}
 	};

@@ -32,8 +32,9 @@
 #define CDPL_CHEM_BASICATOM_HPP
 
 #include <vector>
+#include <utility>
 
-#include <boost/iterator/indirect_iterator.hpp>
+#include <boost/iterator/transform_iterator.hpp>
 
 #include "CDPL/Chem/APIPrefix.hpp"
 #include "CDPL/Chem/Atom.hpp"
@@ -61,14 +62,36 @@ namespace CDPL
 
 			friend class BasicMolecule;
 
-			typedef std::vector<BasicAtom*> AtomList;
-			typedef std::vector<BasicBond*> BondList;
+			typedef std::pair<BasicAtom*, BasicBond*> AtomBondPair;
+			typedef std::vector<AtomBondPair> NeighborList;
+
+			template <typename AtomType>
+			struct AtomAccessor
+			{
+
+				typedef AtomType& result_type;
+
+				AtomType& operator()(const AtomBondPair& ab_pair) const {
+					return *ab_pair.first;
+				}
+			};
+
+			template <typename BondType>
+			struct BondAccessor
+			{
+
+				typedef BondType& result_type;
+
+				BondType& operator()(const AtomBondPair& ab_pair) const {
+					return *ab_pair.second;
+				}
+			};
 
 		public:
-			typedef boost::indirect_iterator<AtomList::iterator, BasicAtom> AtomIterator;
-			typedef boost::indirect_iterator<AtomList::const_iterator, const BasicAtom> ConstAtomIterator;
-			typedef boost::indirect_iterator<BondList::iterator, BasicBond> BondIterator;
-			typedef boost::indirect_iterator<BondList::const_iterator, const BasicBond> ConstBondIterator;
+			typedef boost::transform_iterator<AtomAccessor<BasicAtom>, NeighborList::iterator> AtomIterator;
+			typedef boost::transform_iterator<AtomAccessor<const BasicAtom>, NeighborList::const_iterator> ConstAtomIterator;
+			typedef boost::transform_iterator<BondAccessor<BasicBond>, NeighborList::iterator> BondIterator;
+			typedef boost::transform_iterator<BondAccessor<const BasicBond>, NeighborList::const_iterator> ConstBondIterator;
 	
 			const Molecule& getMolecule() const;
 
@@ -152,6 +175,10 @@ namespace CDPL
 
 			std::size_t getIndex() const;
 
+			void orderAtoms(const AtomCompareFunction& func);
+
+			void orderBonds(const BondCompareFunction& func);
+
 			/**
 			 * \brief Assignment operator that replaces the current set of properties with the properties of \a atom;
 			 * \param atom The atom whose properties get copied.
@@ -178,8 +205,7 @@ namespace CDPL
 
 			BasicMolecule* molecule;
 			std::size_t    index;
-			AtomList       atoms;
-			BondList       bonds;
+			NeighborList   neighbors;
 		};
 
 		/**

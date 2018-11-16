@@ -96,6 +96,7 @@ namespace
 	MAKE_MOLGRAPH_FUNC_WRAPPERS(const CDPL::Math::ULMatrix::SharedPointer&, TopologicalDistanceMatrix)
 	MAKE_MOLGRAPH_FUNC_WRAPPERS(const CDPL::Math::DMatrix::SharedPointer&, GeometricalDistanceMatrix)
 	MAKE_MOLGRAPH_FUNC_WRAPPERS(std::size_t, ConformationIndex)
+	MAKE_MOLGRAPH_FUNC_WRAPPERS(const CDPL::Math::DVector::SharedPointer&, ConformationEnergies)
 	MAKE_MOLGRAPH_FUNC_WRAPPERS(unsigned int, MOL2ChargeType)
 	MAKE_MOLGRAPH_FUNC_WRAPPERS(unsigned int, MOL2MoleculeType)
 
@@ -159,6 +160,11 @@ namespace
 
 	MAKE_FUNCTION_WRAPPER5(CDPL::Base::uint64, calcHashCode, CDPL::Chem::MolecularGraph&,
 	 					   unsigned int, unsigned int, bool, bool)
+	MAKE_FUNCTION_WRAPPER5(void, canonicalize, CDPL::Chem::MolecularGraph&,
+	 					   bool, bool, bool, bool)
+
+	MAKE_FUNCTION_WRAPPER6(void, canonicalize, CDPL::Chem::MolecularGraph&, const CDPL::Chem::AtomCompareFunction&,
+	 					   bool, bool, bool, bool)
 
 	boost::python::object generateSMILESWrapper(CDPL::Chem::MolecularGraph& molgraph, bool canonical, bool ord_h_deplete,
 												unsigned int atom_flags, unsigned int bond_flags)
@@ -259,9 +265,9 @@ void CDPLPythonChem::exportMolecularGraphFunctions()
 	python::def("perceiveBondOrders", &Chem::perceiveBondOrders, 
 				(python::arg("molgraph"), python::arg("overwrite")));
 	python::def("perceiveAtomStereoCenters", &Chem::perceiveAtomStereoCenters, 
-				(python::arg("molgraph"), python::arg("overwrite")));
+				(python::arg("molgraph"), python::arg("overwrite"), python::arg("check_cip_sym") = true));
 	python::def("perceiveBondStereoCenters", &Chem::perceiveBondStereoCenters,
-				(python::arg("molgraph"), python::arg("overwrite"), python::arg("min_ring_size") = 8));
+				(python::arg("molgraph"), python::arg("overwrite"), python::arg("check_cip_sym") = true, python::arg("min_ring_size") = 8));
 	python::def("calcMDLParities", &Chem::calcMDLParities,
 				(python::arg("molgraph"), python::arg("overwrite")));
 	python::def("calcAtomStereoDescriptors", &Chem::calcAtomStereoDescriptors,
@@ -415,6 +421,14 @@ void CDPLPythonChem::exportMolecularGraphFunctions()
 				python::arg("molgraph"), python::return_value_policy<python::copy_const_reference, 
 				python::with_custodian_and_ward_postcall<0, 1> >());
 
+	python::def("canonicalize", &canonicalizeWrapper5, 
+				(python::arg("molgraph"), python::arg("atoms") = true, python::arg("atom_nbrs") = true, 
+				 python::arg("bonds") = true, python::arg("bond_atoms") = false));
+
+	python::def("canonicalize", &canonicalizeWrapper6, 
+				(python::arg("molgraph"),  python::arg("func"), python::arg("atoms") = true, 
+				 python::arg("atom_nbrs") = true, python::arg("bonds") = true, python::arg("bond_atoms") = false));
+
 	EXPORT_MOLGRAPH_FUNCS_COPY_REF_CW(AromaticSubstructure, substruct)
 	EXPORT_MOLGRAPH_FUNCS_COPY_REF_CW(CyclicSubstructure, substruct)
 	EXPORT_MOLGRAPH_FUNCS_COPY_REF_CW(SSSR, sssr)
@@ -434,6 +448,7 @@ void CDPLPythonChem::exportMolecularGraphFunctions()
 	EXPORT_MOLGRAPH_FUNCS(MDLChiralFlag, flag)
 	EXPORT_MOLGRAPH_FUNCS(StoichiometricNumber, num)
 	EXPORT_MOLGRAPH_FUNCS(ConformationIndex, index)
+	EXPORT_MOLGRAPH_FUNCS_COPY_REF(ConformationEnergies, energies)
 	EXPORT_MOLGRAPH_FUNCS(HashCode, hash_code)
 	EXPORT_MOLGRAPH_FUNCS_COPY_REF(MDLComment, comment)
 	EXPORT_MOLGRAPH_FUNCS_COPY_REF(StructureData, data)

@@ -656,7 +656,7 @@ void ConfGen::DGConstraintGenerator::assignBondAngles(const ForceField::MMFF94In
 	if (ia_data) {
 		const MMFF94AngleBendingInteractionData& bs_data = ia_data->getAngleBendingInteractions();
 	
-		for (MMFF94AngleBendingInteractionData::ConstElementIterator it = bs_data.getElementsBegin(), end = bs_data.getElementsBegin(); it != end; ++it) {
+		for (MMFF94AngleBendingInteractionData::ConstElementIterator it = bs_data.getElementsBegin(), end = bs_data.getElementsEnd(); it != end; ++it) {
 			const MMFF94AngleBendingInteraction& iactn = *it;
 
 			std::size_t term_atom1_idx = iactn.getTerminalAtom1Index();
@@ -937,7 +937,7 @@ bool ConfGen::DGConstraintGenerator::isPlanar(const Chem::Atom& atom) const
 
 	unsigned int atom_type = getType(atom);
 
-	if ((atom_type == AtomType::N || atom_type == AtomType::O) && hasNeighborWithDoubleBond(atom))
+	if ((atom_type == AtomType::N || atom_type == AtomType::O || atom_type == AtomType::S) && hasNeighborWithDoubleBond(atom))
 		return true;
 
 	return false;
@@ -951,32 +951,28 @@ bool ConfGen::DGConstraintGenerator::isPlanar(const Chem::Bond& bond) const
 		return true;
 
 	std::size_t order = getOrder(bond);
+
+	if (order == 3)
+		return true;
+
 	const Atom& atom1 = bond.getBegin();
 	const Atom& atom2 = bond.getEnd();
-
-	if (getAromaticityFlag(bond))
-		return true;
 
 	if (order == 2 && (getHybridizationState(atom1) == HybridizationState::SP2 || getAromaticityFlag(atom1)) &&
 		(getHybridizationState(atom2) == HybridizationState::SP2 || getAromaticityFlag(atom2)))
 		return true;
 
-	if (order == 3)
-		return true;
-
-	if (order == 1 && getRingFlag(bond)) {
+	if (order == 1) {
 		unsigned int atom_type = getType(atom1);
 	
-		if ((atom_type == AtomType::N || atom_type == AtomType::O) && 
-			((getAromaticityFlag(atom2) && getHeavyAtomCount(atom1, *molGraph) == 1)
-			 || (getHybridizationState(atom2) == HybridizationState::SP2 && getExplicitBondCount(atom2, *molGraph, 2, AtomType::HET, false) == 1)))
+		if ((atom_type == AtomType::N || atom_type == AtomType::O || atom_type == AtomType::S) && 
+			(getAromaticityFlag(atom2) || (getHybridizationState(atom2) == HybridizationState::SP2 && getExplicitBondCount(atom2, *molGraph, 2, AtomType::HET, false) == 1)))
 			return true;
 
 		atom_type = getType(atom2);
 
-		if ((atom_type == AtomType::N || atom_type == AtomType::O) && 
-			((getAromaticityFlag(atom1) && getHeavyAtomCount(atom2, *molGraph) == 1)
-			 || (getHybridizationState(atom1) == HybridizationState::SP2 && getExplicitBondCount(atom1, *molGraph, 2, AtomType::HET, false) == 1)))
+		if ((atom_type == AtomType::N || atom_type == AtomType::O || atom_type == AtomType::S) && 
+			(getAromaticityFlag(atom1) || (getHybridizationState(atom1) == HybridizationState::SP2 && getExplicitBondCount(atom1, *molGraph, 2, AtomType::HET, false) == 1)))
 			return true;
 	}
 
@@ -998,7 +994,7 @@ bool ConfGen::DGConstraintGenerator::hasNeighborWithDoubleBond(const Chem::Atom&
 		if (!molGraph->containsBond(*b_it))
 			continue;
 
-		if (isUnsaturated(atom, *molGraph))
+		if (isUnsaturated(nbr_atom, *molGraph))
 			return true;
 	}
 

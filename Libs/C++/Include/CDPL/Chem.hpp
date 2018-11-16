@@ -65,6 +65,8 @@
 #include "CDPL/Chem/AtomPriorityFunctionWrapper.hpp"
 #include "CDPL/Chem/AtomPredicateWrapper.hpp"
 #include "CDPL/Chem/BondPredicateWrapper.hpp"
+#include "CDPL/Chem/AtomCompareFunctionWrapper.hpp"
+#include "CDPL/Chem/BondCompareFunctionWrapper.hpp"
 
 #include "CDPL/Chem/MatchExpression.hpp"
 #include "CDPL/Chem/MatchExpressionList.hpp"

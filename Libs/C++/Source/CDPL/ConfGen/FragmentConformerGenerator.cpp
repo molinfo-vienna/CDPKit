@@ -47,6 +47,13 @@
 #include "CDPL/Base/Exceptions.hpp"
 
 
+namespace
+{
+
+	const std::size_t MIN_MACROCYCLE_SIZE = 10;
+}
+
+
 using namespace CDPL;
 
 
@@ -81,10 +88,9 @@ ConfGen::FragmentConformerGenerator::FragmentConformerGenerator():
 	hCoordsGenerator.undefinedOnly(true);
 
 	automorphGroupSearch.includeIdentityMapping(false);
-	automorphGroupSearch.setAtomPropertyFlags(AtomPropertyFlag::TYPE | AtomPropertyFlag::ISOTOPE |
-											  AtomPropertyFlag::FORMAL_CHARGE | AtomPropertyFlag::CONFIGURATION |
-											  AtomPropertyFlag::AROMATICITY | AtomPropertyFlag::EXPLICIT_BOND_COUNT |
-											  AtomPropertyFlag::HYBRIDIZATION_STATE);
+	automorphGroupSearch.setAtomPropertyFlags(AtomPropertyFlag::TYPE | AtomPropertyFlag::FORMAL_CHARGE | 
+											  AtomPropertyFlag::CONFIGURATION | AtomPropertyFlag::AROMATICITY |
+											  AtomPropertyFlag::EXPLICIT_BOND_COUNT | AtomPropertyFlag::HYBRIDIZATION_STATE);
 }
 
 void ConfGen::FragmentConformerGenerator::setMaxNumStructureGenerationTrials(std::size_t max_num)
@@ -273,9 +279,9 @@ void ConfGen::FragmentConformerGenerator::generateFlexibleRingConformers()
 {
 	initRandomConformerGeneration();
 
-	rawCoordsGenerator.setBoxSize(std::sqrt(double(numAtoms)) * 4);
+	rawCoordsGenerator.setBoxSize(numAtoms);//std::sqrt(double(numAtoms)));
 
-	getHeavyAtomIndices();
+	getRingAtomIndices();
 	getAtomSymmetryMappings();
 
 	double e_window = eWindow;
@@ -293,8 +299,7 @@ void ConfGen::FragmentConformerGenerator::generateFlexibleRingConformers()
 	double min_energy = 0.0;
 
 	for (std::size_t i = 0; i < num_retrials; i++) {
-		std::cerr << '.';
-
+		//std::cerr << '.';
 		ConfData conf;
 
 		if (!generateRandomConformer(conf, false)) 
@@ -315,7 +320,7 @@ void ConfGen::FragmentConformerGenerator::generateFlexibleRingConformers()
 		dealloc_guard.release();
 	}
 
-	std::cerr << std::endl;
+	//std::cerr << std::endl;
 
 	if (workingConfs.empty())
 		return;
@@ -373,13 +378,13 @@ void ConfGen::FragmentConformerGenerator::init(const Chem::MolecularGraph& molgr
 				  boost::bind(static_cast<void (FragmentConformerGenerator::*)(const ConfData&)>(
 								  &FragmentConformerGenerator::freeCoordinates), this, _1));
 
-	std::for_each(heavyAtomCoords.begin(), heavyAtomCoords.end(), 
+	std::for_each(ringAtomCoords.begin(), ringAtomCoords.end(), 
 				  boost::bind(static_cast<void (FragmentConformerGenerator::*)(const Math::Vector3DArray::SharedPointer&)>(
 								  &FragmentConformerGenerator::freeCoordinates), this, _1));
 
 	outputConfs.clear();
 	workingConfs.clear();
-	heavyAtomCoords.clear();
+	ringAtomCoords.clear();
 
 	timer.start();
 
@@ -444,7 +449,7 @@ bool ConfGen::FragmentConformerGenerator::extractExistingCoordinates(ConfData& c
 bool ConfGen::FragmentConformerGenerator::generateRandomConformer(ConfData& conf, bool best_opt)
 {
 	if (timeoutExceeded()) {
-		std::cerr << "TIMEOUT" << std::endl;
+		//std::cerr << "TIMEOUT" << std::endl;
 		return false;
 	}
 
@@ -496,13 +501,13 @@ bool ConfGen::FragmentConformerGenerator::generateRandomConformer(ConfData& conf
 
 bool ConfGen::FragmentConformerGenerator::checkRMSD(const ConfData& conf)
 {
-	Math::Vector3DArray::SharedPointer conf_ha_coords_ptr = getHeavyAtomCoordinates(conf);
+	Math::Vector3DArray::SharedPointer conf_ha_coords_ptr = getRingAtomCoordinates(conf);
 
 	CoordsDeallocator dealloc_guard(this, conf_ha_coords_ptr);
 	Math::Vector3DArray& conf_ha_coords = *conf_ha_coords_ptr;
 	Math::Matrix4D conf_xform;
 
-	for (CoordsDataArray::const_reverse_iterator it = heavyAtomCoords.rbegin(), end = heavyAtomCoords.rend(); it != end; ++it) {
+	for (CoordsDataArray::const_reverse_iterator it = ringAtomCoords.rbegin(), end = ringAtomCoords.rend(); it != end; ++it) {
 		const Math::Vector3DArray& prev_conf_ha_coords = **it;
 
 		if (!alignmentCalc.calculate(prev_conf_ha_coords, conf_ha_coords, false))
@@ -516,7 +521,7 @@ bool ConfGen::FragmentConformerGenerator::checkRMSD(const ConfData& conf)
 			return false;
 	}
 
-	heavyAtomCoords.push_back(conf_ha_coords_ptr);
+	ringAtomCoords.push_back(conf_ha_coords_ptr);
 	dealloc_guard.release();
 
 	return true;
@@ -527,7 +532,7 @@ bool ConfGen::FragmentConformerGenerator::has3DCoordinates(const Chem::Atom& ato
 	return ordHDepleteAtomMask.test(molGraph->getAtomIndex(atom));
 }
 
-Math::Vector3DArray::SharedPointer ConfGen::FragmentConformerGenerator::getHeavyAtomCoordinates(const ConfData& conf)
+Math::Vector3DArray::SharedPointer ConfGen::FragmentConformerGenerator::getRingAtomCoordinates(const ConfData& conf)
 {
 	Math::Vector3DArray::SharedPointer ha_coords_ptr = allocCoordinates();
 	
@@ -538,7 +543,7 @@ Math::Vector3DArray::SharedPointer ConfGen::FragmentConformerGenerator::getHeavy
 
 	ha_coords.clear();
 
-	for (IndexList::const_iterator it = heavyAtomIndices.begin(), end = heavyAtomIndices.end(); it != end; ++it) {
+	for (IndexList::const_iterator it = ringAtomIndices.begin(), end = ringAtomIndices.end(); it != end; ++it) {
 		const Math::Vector3D& pos = coords[*it];
 
 		ctr += pos;
@@ -546,7 +551,7 @@ Math::Vector3DArray::SharedPointer ConfGen::FragmentConformerGenerator::getHeavy
 		ha_coords.addElement(pos);
 	}
 
-	ctr /= heavyAtomIndices.size();
+	ctr /= ringAtomIndices.size();
 
 	for (Math::Vector3DArray::ElementIterator it = ha_coords.getElementsBegin(), end = ha_coords.getElementsEnd(); it != end; ++it)
 		*it -= ctr;
@@ -556,16 +561,18 @@ Math::Vector3DArray::SharedPointer ConfGen::FragmentConformerGenerator::getHeavy
 	return ha_coords_ptr;
 }
 
-void ConfGen::FragmentConformerGenerator::getHeavyAtomIndices()
+void ConfGen::FragmentConformerGenerator::getRingAtomIndices()
 {
 	using namespace Chem;
 
-	heavyAtomIndices.clear();
+	ringAtomIndices.clear();
 
-	for (std::size_t i = 0; i < numAtoms; i++)
-		if (getRingFlag(molGraph->getAtom(i)) && getRingBondCount(molGraph->getAtom(i), *molGraph) >= 2)
-			//if (getType(molGraph->getAtom(i)) != AtomType::H)
-			heavyAtomIndices.push_back(i);
+	for (std::size_t i = 0; i < numAtoms; i++) {
+		const Atom& atom = molGraph->getAtom(i);
+
+		if (getRingFlag(atom) && getRingBondCount(atom, *molGraph) >= 2)
+			ringAtomIndices.push_back(i);
+	}
 }
 
 void ConfGen::FragmentConformerGenerator::getAtomSymmetryMappings()
@@ -587,10 +594,11 @@ void ConfGen::FragmentConformerGenerator::getAtomSymmetryMappings()
 	std::size_t mapping_offs = 0;
 
 	for (AutomorphismGroupSearch::ConstMappingIterator it = automorphGroupSearch.getMappingsBegin(), 
-			 end = automorphGroupSearch.getMappingsEnd(); it != end; ++it, mapping_offs += numAtoms) {
+			 end = automorphGroupSearch.getMappingsEnd(); it != end; ++it) {
 
 		const AtomMapping& am = it->getAtomMapping();
 		AtomMapping::ConstEntryIterator am_end = am.getEntriesEnd();
+		bool keep_mapping = false;
 
 		for (AtomMapping::ConstEntryIterator am_it = am.getEntriesBegin(); am_it != am_end; ++am_it) {
 			const Atom& first_atom = *am_it->first;
@@ -600,6 +608,11 @@ void ConfGen::FragmentConformerGenerator::getAtomSymmetryMappings()
 
 			if (getType(first_atom) == AtomType::H)
 				continue;
+
+			if (&first_atom != &second_atom && 
+				(getAromaticityFlag(first_atom) || 
+				 (getRingFlag(first_atom) && getRingBondCount(first_atom, *molGraph) < getHeavyBondCount(first_atom, *molGraph))))
+				keep_mapping = true;
 
 			getNeighborHydrogens(first_atom, nbrHydrogens1);
 			getNeighborHydrogens(second_atom, nbrHydrogens2);
@@ -626,14 +639,17 @@ void ConfGen::FragmentConformerGenerator::getAtomSymmetryMappings()
 				nbrHydrogens2.erase(al_it);
 			}
 
-			if (bad_mapping || (nbrHydrogens1.size() != nbrHydrogens2.size())) { // invalid mapping encountered, should never happen!?
-				mapping_offs -= numAtoms;
+			if (bad_mapping || (nbrHydrogens1.size() != nbrHydrogens2.size())) { 
+				keep_mapping = false;
 				break;
 			}
 
 			for (std::size_t i = 0; i < nbrHydrogens1.size(); i++)
 				atomSymmetryMappings[mapping_offs + molGraph->getAtomIndex(*nbrHydrogens1[i])] = molGraph->getAtomIndex(*nbrHydrogens2[i]);
 		}
+
+		if (keep_mapping)
+			mapping_offs += numAtoms;
 	}
 
 	atomSymmetryMappings.resize(mapping_offs);
@@ -670,7 +686,7 @@ bool ConfGen::FragmentConformerGenerator::isMacrocyclicRingSystem() const
 	const FragmentList& sssr = *getSSSR(*molGraph);
 
 	return (std::find_if(sssr.getElementsBegin(), sssr.getElementsEnd(),
-						 boost::bind(std::greater<std::size_t>(), boost::bind(&Fragment::getNumAtoms, _1), 10)) !=
+						 boost::bind(std::greater<std::size_t>(), boost::bind(&Fragment::getNumAtoms, _1), MIN_MACROCYCLE_SIZE)) !=
 			sssr.getElementsEnd());
 }
 

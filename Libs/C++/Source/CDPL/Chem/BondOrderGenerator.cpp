@@ -298,7 +298,7 @@ void Chem::BondOrderGenerator::init(const MolecularGraph& molgraph, Util::STArra
 	std::size_t num_patterns = funcGroupPatternMols.size();
 
 	for (std::size_t i = 0; i < num_patterns; i++) {
-		Molecule::SharedPointer ptn_copy = funcGroupPatternMols[i]->clone();
+		MolecularGraph::SharedPointer ptn_copy = funcGroupPatternMols[i]->clone();
 
 		std::for_each(ptn_copy->getAtomsBegin(), ptn_copy->getAtomsEnd(), 
 					  boost::bind(static_cast<void (*)(Atom&, const MatchExpression<Atom,

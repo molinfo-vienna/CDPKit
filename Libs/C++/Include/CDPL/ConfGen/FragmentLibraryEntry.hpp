@@ -28,15 +28,17 @@
  * \brief Definition of the class CDPL::ConfGen::FragmentLibraryEntry.
  */
 
-#ifndef CDPL_CONFGEN_BUILDFRAGMENTMOLECULE_HPP
-#define CDPL_CONFGEN_BUILDFRAGMENTMOLECULE_HPP
+#ifndef CDPL_CONFGEN_FRAGMENTLIBRARYENTRY_HPP
+#define CDPL_CONFGEN_FRAGMENTLIBRARYENTRY_HPP
+
+#include <vector>
 
 #include <boost/shared_ptr.hpp>
 
 #include "CDPL/ConfGen/APIPrefix.hpp"
 #include "CDPL/Chem/BasicMolecule.hpp"
-#include "CDPL/Chem/HashCodeCalculator.hpp"
-#include "CDPL/Chem/CIPPriorityCalculator.hpp"
+#include "CDPL/Chem/Fragment.hpp"
+#include "CDPL/Chem/CanonicalNumberingGenerator.hpp"
 #include "CDPL/Util/Array.hpp"
 #include "CDPL/Base/IntegerTypes.hpp"
 
@@ -126,7 +128,13 @@ namespace CDPL
 
 			std::size_t getBondIndex(const Chem::Bond& bond) const;
 
+			void orderAtoms(const Chem::AtomCompareFunction& func);
+
+			void orderBonds(const Chem::BondCompareFunction& func);
+
 			const Base::uint64& getHashCode() const;
+
+			Chem::MolecularGraph::SharedPointer clone() const;
 
 			FragmentLibraryEntry& operator=(const FragmentLibraryEntry& entry);
 
@@ -138,15 +146,25 @@ namespace CDPL
 
 			void fixStereoDescriptors(const Chem::MolecularGraph& molgraph);
 			void hydrogenize();
+			void generateCanonicalMolGraph(bool stereo);
 			void calcHashCode(bool stereo);
+			void makeAtomOrderCanonical();
 
-			bool hasSymTerminalNeighbors(const Chem::Atom& atom, const Chem::MolecularGraph& molgraph) const;
+			bool compareCanonNumber(const Chem::Atom& atom1, const Chem::Atom& atom2) const;
+			bool compareAtomPointerIndex(const Chem::Atom* atom1, const Chem::Atom* atom2) const;
+			bool compareAtomIndex(const Chem::Atom& atom1, const Chem::Atom& atom2) const;
+			bool compareBondAtomIndices(const Chem::Bond& bond1, const Chem::Bond& bond2) const;
 
-			Chem::BasicMolecule         molecule;
-			Base::uint64                hashCode;
-			Chem::HashCodeCalculator    hashCodeCalc;
-			Chem::CIPPriorityCalculator cipPriorityCalc;
-			Util::STArray               cipPriorities;
+			const Chem::Atom* getNeighborWithLowestIndex(const Chem::Atom* atom, const Chem::Atom* x_atom) const;
+
+			typedef std::vector<Base::uint32> HashInputData;
+
+			Chem::BasicMolecule               molecule;
+			Base::uint64                      hashCode;
+			Chem::Fragment                    canonMolGraph;
+			Chem::CanonicalNumberingGenerator canonNumGen;
+			Util::STArray                     canonNumbers;
+			HashInputData                     hashInputData;
 		};
 
 		/**
@@ -155,4 +173,4 @@ namespace CDPL
     }
 }
 
-#endif // CDPL_CONFGEN_BUILDFRAGMENTMOLECULE_HPP
+#endif // CDPL_CONFGEN_FRAGMENTLIBRARYENTRY_HPP

@@ -103,9 +103,9 @@ namespace CDPL
 
 			std::size_t getTimeout() const;
 
-			void performStrictMMFF94AtomTyping(bool strict);
+			void performStrictAtomTyping(bool strict);
 
-			bool strictMMFF94AtomTypingPerformed() const;
+			bool strictAtomTypingPerformed() const;
 	
 			void setForceFieldType(unsigned int type);
 	
@@ -118,6 +118,10 @@ namespace CDPL
 			double getEnergy() const;
 
 		private:
+			RandomConformerGenerator(const RandomConformerGenerator&);
+
+			RandomConformerGenerator& operator=(const RandomConformerGenerator&);
+
 			bool timeoutExceeded() const;
 			bool has3DCoordinates(const Chem::Atom& atom) const;
 
@@ -131,7 +135,6 @@ namespace CDPL
 			double                                     minStopGradNorm;
 			std::size_t                                timeout;
 			unsigned int                               forceFieldType;
-			bool                                       strictAtomTyping;
 			boost::timer::cpu_timer                    timer;
 			double                                     energy;
 			ForceField::MMFF94InteractionParameterizer mmff94Parameterizer;

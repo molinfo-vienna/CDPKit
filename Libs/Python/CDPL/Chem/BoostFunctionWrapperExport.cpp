@@ -76,8 +76,10 @@ void CDPLPythonChem::exportBoostFunctionWrappers()
     CDPLPythonBase::BoostFunction2Export<boost::function2<bool, const Entity3D&, const Entity3D&>, Entity3D&, Entity3D&>("BoolEntity3D2Functor");
     CDPLPythonBase::BoostFunction2Export<boost::function2<double, const Entity3D&, const Entity3D&>, Entity3D&, Entity3D&>("DoubleEntity3D2Functor");
     CDPLPythonBase::BoostFunction2Export<boost::function2<bool, const Atom&, const Atom&>, Atom&, Atom&>("BoolAtom2Functor");
+    CDPLPythonBase::BoostFunction2Export<boost::function2<bool, const Bond&, const Bond&>, Bond&, Bond&>("BoolBond2Functor");
     CDPLPythonBase::BoostFunction2Export<boost::function2<double, const Atom&, const Atom&>, Atom&, Atom&>("DoubleAtom2Functor");
     CDPLPythonBase::BoostFunction2Export<boost::function2<Base::uint64, const Atom&, const MolecularGraph&>, Atom&, MolecularGraph&>("UInt64AtomMolecularGraphFunctor");
+    CDPLPythonBase::BoostFunction2Export<boost::function2<std::size_t, const Atom&, const MolecularGraph&>, Atom&, MolecularGraph&>("SizeTypeAtomMolecularGraphFunctor");
 
 	CDPLPythonBase::BoostFunction3Export<boost::function3<double, const Math::Vector3D&, const Math::Vector3D&, const Atom&>,
 										 const Math::Vector3D&, const Math::Vector3D&, Atom&>("DoubleVector3D2AtomFunctor");

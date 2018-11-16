@@ -37,9 +37,10 @@
 using namespace CDPL; 
 
 
-void Chem::makeHydrogenDeplete(Molecule& mol)
+bool Chem::makeHydrogenDeplete(Molecule& mol)
 {
 	std::size_t num_atoms = mol.getNumAtoms();
+	bool changes = false;
 
 	for (std::size_t i = 0; i < num_atoms; ) {
 		const Atom& atom = mol.getAtom(i);
@@ -51,12 +52,16 @@ void Chem::makeHydrogenDeplete(Molecule& mol)
 
 		mol.removeAtom(i);
 		num_atoms--;
+		changes = true;
 	}
+
+	return changes;
 }
 	
-void Chem::makeOrdinaryHydrogenDeplete(Molecule& mol, unsigned int flags)
+bool Chem::makeOrdinaryHydrogenDeplete(Molecule& mol, unsigned int flags)
 {
 	std::size_t num_atoms = mol.getNumAtoms();
+	bool changes = false;
 
 	for (std::size_t i = 0; i < num_atoms; ) {
 		const Atom& atom = mol.getAtom(i);
@@ -68,12 +73,16 @@ void Chem::makeOrdinaryHydrogenDeplete(Molecule& mol, unsigned int flags)
 
 		mol.removeAtom(i);
 		num_atoms--;
+		changes = true;
 	}
+
+	return changes;
 }
 
-void Chem::makeHydrogenComplete(Molecule& mol)
+bool Chem::makeHydrogenComplete(Molecule& mol)
 {
 	std::size_t num_atoms = mol.getNumAtoms();
+	bool changes = false;
 
 	for (std::size_t i = 0; i < num_atoms; i++) {
 		std::size_t impl_h_cnt = getImplicitHydrogenCount(mol.getAtom(i));
@@ -84,6 +93,9 @@ void Chem::makeHydrogenComplete(Molecule& mol)
 			
 			setType(new_atom, AtomType::H);
 			setOrder(new_bond, 1);
+			changes = true;
 		} 
 	}
+
+	return changes;
 }

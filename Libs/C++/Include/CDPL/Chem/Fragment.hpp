@@ -314,6 +314,10 @@ namespace CDPL
 			 */
 			void clear();
 
+			void orderAtoms(const AtomCompareFunction& func);
+
+			void orderBonds(const BondCompareFunction& func);
+
 			/**
 			 * \brief Replaces the current set of atoms, bonds and properties by the atoms, bonds and properties
 			 *        of the fragment \a frag.
@@ -338,6 +342,8 @@ namespace CDPL
 			 * \note Does not affect any properties.
 			 */
 			Fragment& operator+=(const MolecularGraph& molgraph);
+
+			MolecularGraph::SharedPointer clone() const;
 
 			void reserveMemoryForAtoms(std::size_t num_atoms);
 

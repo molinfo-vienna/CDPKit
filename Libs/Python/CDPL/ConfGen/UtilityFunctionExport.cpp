@@ -27,7 +27,7 @@
 #include <boost/python.hpp>
 
 #include "CDPL/ConfGen/UtilityFunctions.hpp"
-#include "CDPL/Chem/MolecularGraph.hpp"
+#include "CDPL/Chem/Molecule.hpp"
 #include "CDPL/Chem/Bond.hpp"
 
 #include "FunctionExports.hpp"
@@ -40,11 +40,6 @@ namespace
 	{
 		return CDPL::ConfGen::isFragmentLinkBond(bond, molgraph);
 	}
-
-	unsigned int perceiveFragmentType(CDPL::Chem::MolecularGraph& molgraph)
-	{
-		return CDPL::ConfGen::perceiveFragmentType(molgraph);
-	}
 }
 
 
@@ -54,5 +49,6 @@ void CDPLPythonConfGen::exportUtilityFunctions()
 	using namespace CDPL;
 
 	python::def("isFragmentLinkBond", &isFragmentLinkBond, (python::arg("bond"), python::arg("molgraph"))); 
-	python::def("perceiveFragmentType", &perceiveFragmentType, python::arg("molgraph"));
+	python::def("perceiveFragmentType", &ConfGen::perceiveFragmentType, python::arg("molgraph"));
+	python::def("prepareForConformerGeneration", &ConfGen::prepareForConformerGeneration, python::arg("mol"));
 }

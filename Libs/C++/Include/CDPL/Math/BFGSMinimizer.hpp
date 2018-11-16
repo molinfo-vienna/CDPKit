@@ -647,7 +647,7 @@ namespace CDPL
 					alpha = interpolate(a, fa, fpa, b, fb, fpb, lower, upper);
 					ValueType tmp_fpalpha = getDF(alpha);
 					falpha = getF(alpha);
-      
+
 					if ((a - alpha) * fpa <= std::numeric_limits<ValueType>::epsilon()) {
 						/* roundoff prevents progress */
 						return NO_PROGRESS;
@@ -661,7 +661,7 @@ namespace CDPL
 
 					} else {
 						fpalpha = tmp_fpalpha;//getDF(alpha);
-          
+
 						if (TypeTraits<ValueType>::abs(fpalpha) <= -sigma * fp0) {
 							alpha_new = alpha;
 							return SUCCESS;  /* terminate */

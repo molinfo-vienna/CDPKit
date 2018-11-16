@@ -39,7 +39,7 @@
 using namespace CDPL; 
 
 
-bool Chem::isStereoCenter(const Bond& bond, const MolecularGraph& molgraph, std::size_t min_ring_size, bool check_cip_sym)
+bool Chem::isStereoCenter(const Bond& bond, const MolecularGraph& molgraph, bool check_cip_sym, std::size_t min_ring_size)
 {
     if (getOrder(bond) != 2)
 		return false;

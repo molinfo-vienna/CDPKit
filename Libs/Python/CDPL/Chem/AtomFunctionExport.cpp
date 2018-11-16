@@ -186,6 +186,8 @@ namespace
 	MAKE_FUNCTION_WRAPPER2(std::size_t, getSizeOfLargestContainingFragment, CDPL::Chem::Atom&, CDPL::Chem::FragmentList&);
 	MAKE_FUNCTION_WRAPPER2(std::size_t, getNumContainingFragments, CDPL::Chem::Atom&, CDPL::Chem::FragmentList&);
 	MAKE_FUNCTION_WRAPPER2(unsigned int, perceiveSybylType, CDPL::Chem::Atom&, CDPL::Chem::MolecularGraph&);
+	MAKE_FUNCTION_WRAPPER2(bool, isPlanarNitrogen, CDPL::Chem::Atom&, CDPL::Chem::MolecularGraph&);
+	MAKE_FUNCTION_WRAPPER2(bool, isInvertibleNitrogen, CDPL::Chem::Atom&, CDPL::Chem::MolecularGraph&);
 
 	MAKE_FUNCTION_WRAPPER3(bool, isStereoCenter, CDPL::Chem::Atom&, CDPL::Chem::MolecularGraph&, bool);
 	MAKE_FUNCTION_WRAPPER3(unsigned int, calcCIPConfiguration, CDPL::Chem::Atom&, CDPL::Chem::MolecularGraph&, const CDPL::Chem::AtomPriorityFunction&);
@@ -306,6 +308,8 @@ void CDPLPythonChem::exportAtomFunctions()
 	python::def("calcValence", &calcValenceWrapper2, (python::arg("atom"), python::arg("molgraph")));
 	python::def("calcFreeValenceElectronCount", &calcFreeValenceElectronCountWrapper2,
 				(python::arg("atom"), python::arg("molgraph")));
+	python::def("isPlanarNitrogen", &isPlanarNitrogenWrapper2, (python::arg("atom"), python::arg("molgraph")));
+	python::def("isInvertibleNitrogen", &isInvertibleNitrogenWrapper2, (python::arg("atom"), python::arg("molgraph")));
 	python::def("isUnsaturated", &isUnsaturatedWrapper2, (python::arg("atom"), python::arg("molgraph")));
 	python::def("isHydrogenAcceptor", &isHydrogenAcceptorWrapper2, (python::arg("atom"), python::arg("molgraph")));
 	python::def("isHydrogenDonor", &isHydrogenDonorWrapper2, (python::arg("atom"), python::arg("molgraph")));

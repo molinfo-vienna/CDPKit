@@ -68,6 +68,12 @@ namespace CDPL
 			 */
 			virtual ~MolecularGraph() {}
 
+			/**
+			 * \brief Creates a copy of the molecular graph.
+			 * \return A smart pointer to the copy of the molecular graph.
+			 */
+			virtual SharedPointer clone() const = 0;
+
 		protected:	
 			/**
 			 * \brief Assignment operator.

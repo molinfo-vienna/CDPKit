@@ -33,7 +33,7 @@
 #include "CDPL/Chem/Fragment.hpp"
 #include "CDPL/Chem/Atom.hpp"
 #include "CDPL/Chem/Bond.hpp"
-
+#include "CDPL/Util/Dereferencer.hpp"
 #include "CDPL/Base/Exceptions.hpp"
 
 
@@ -322,6 +322,26 @@ bool Chem::Fragment::removeBond(const Bond& bond)
 	return true;
 }
 
+void Chem::Fragment::orderAtoms(const AtomCompareFunction& func)
+{
+	std::sort(atoms.begin(), atoms.end(), 
+			  boost::bind(func, boost::bind(Util::Dereferencer<const Atom*, const Atom&>(), _1), 
+						  boost::bind(Util::Dereferencer<const Atom*, const Atom&>(), _2)));
+
+	for (std::size_t i = 0, num_atoms = atoms.size(); i < num_atoms; i++)
+		atomIndices[atoms[i]] = i;
+}
+
+void Chem::Fragment::orderBonds(const BondCompareFunction& func)
+{
+	std::sort(bonds.begin(), bonds.end(), 
+			  boost::bind(func, boost::bind(Util::Dereferencer<const Bond*, const Bond&>(), _1), 
+						  boost::bind(Util::Dereferencer<const Bond*, const Bond&>(), _2)));
+
+	for (std::size_t i = 0, num_bonds = bonds.size(); i < num_bonds; i++)
+		bondIndices[bonds[i]] = i;
+}
+
 void Chem::Fragment::reserveMemoryForAtoms(std::size_t num_atoms)
 {
 	atoms.reserve(num_atoms);
@@ -390,4 +410,9 @@ Chem::Fragment& Chem::Fragment::operator+=(const MolecularGraph& molgraph)
 				  boost::bind(&Fragment::addBond, this, _1));
 
 	return *this;
+}
+
+Chem::MolecularGraph::SharedPointer Chem::Fragment::clone()  const
+{
+	return MolecularGraph::SharedPointer(new Fragment(*this));
 }

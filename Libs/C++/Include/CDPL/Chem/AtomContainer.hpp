@@ -35,6 +35,7 @@
 
 #include "CDPL/Chem/APIPrefix.hpp"
 #include "CDPL/Chem/Entity3DContainer.hpp"
+#include "CDPL/Chem/AtomCompareFunctionWrapper.hpp"
 #include "CDPL/Util/IndexedElementIterator.hpp"
 
 
@@ -140,6 +141,8 @@ namespace CDPL
 			virtual const Entity3D& getEntity(std::size_t idx) const;
 
 			virtual Entity3D& getEntity(std::size_t idx);
+
+			virtual void orderAtoms(const AtomCompareFunction& func) = 0;
 
 		protected:
 			/**

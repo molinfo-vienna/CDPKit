@@ -32,6 +32,7 @@
 #include <boost/bind.hpp>
 
 #include "CDPL/Chem/BasicMolecule.hpp"
+#include "CDPL/Util/Dereferencer.hpp"
 #include "CDPL/Base/Exceptions.hpp"
 
 
@@ -307,9 +308,27 @@ std::size_t Chem::BasicMolecule::getBondIndex(const Bond& bond) const
 	return bond.getIndex();
 }
 
-Chem::Molecule::SharedPointer Chem::BasicMolecule::clone() const
+void Chem::BasicMolecule::orderAtoms(const AtomCompareFunction& func)
 {
-	return Molecule::SharedPointer(new BasicMolecule(*this));
+	std::sort(atoms.begin(), atoms.end(), 
+			  boost::bind(func, boost::bind(Util::Dereferencer<const Atom*, const Atom&>(), _1), 
+						  boost::bind(Util::Dereferencer<const Atom*, const Atom&>(), _2)));
+
+	renumberAtoms(0);
+}
+
+void Chem::BasicMolecule::orderBonds(const BondCompareFunction& func)
+{
+	std::sort(bonds.begin(), bonds.end(), 
+			  boost::bind(func, boost::bind(Util::Dereferencer<const Bond*, const Bond&>(), _1), 
+						  boost::bind(Util::Dereferencer<const Bond*, const Bond&>(), _2)));
+
+	renumberBonds(0);
+}
+
+Chem::MolecularGraph::SharedPointer Chem::BasicMolecule::clone() const
+{
+	return MolecularGraph::SharedPointer(new BasicMolecule(*this));
 }
 
 Chem::BasicMolecule& Chem::BasicMolecule::operator=(const BasicMolecule& mol)

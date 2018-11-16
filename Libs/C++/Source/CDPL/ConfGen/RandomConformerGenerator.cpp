@@ -45,8 +45,8 @@ const double       ConfGen::RandomConformerGenerator::DEF_MINIMIZATION_STOP_GRAD
 
 ConfGen::RandomConformerGenerator::RandomConformerGenerator(): 
     molGraph(0), maxNumStructGenTrials(DEF_MAX_NUM_STRUCTURE_GEN_TRIALS), maxNumMinSteps(DEF_MAX_NUM_MINIMIZATION_STEPS), 
-	minStopGradNorm(DEF_MINIMIZATION_STOP_GRADIENT_NORM), timeout(DEF_TIMEOUT), forceFieldType(DEF_FORCE_FIELD_TYPE), 
-	strictAtomTyping(true), energy(0.0), energyMinimizer(boost::ref(mmff94EnergyCalc), boost::ref(mmff94GradientCalc))
+	minStopGradNorm(DEF_MINIMIZATION_STOP_GRADIENT_NORM), timeout(DEF_TIMEOUT),  
+	energy(0.0), energyMinimizer(boost::ref(mmff94EnergyCalc), boost::ref(mmff94GradientCalc))
 {
     rawCoordsGenerator.excludeHydrogens(true);
     rawCoordsGenerator.regardAtomConfiguration(true);
@@ -55,6 +55,9 @@ ConfGen::RandomConformerGenerator::RandomConformerGenerator():
 
 	hCoordsGenerator.undefinedOnly(true);
 	hCoordsGenerator.setAtom3DCoordinatesCheckFunction(boost::bind(&RandomConformerGenerator::has3DCoordinates, this, _1));
+
+	performStrictAtomTyping(false);
+	setForceFieldType(DEF_FORCE_FIELD_TYPE);
 }
 
 void ConfGen::RandomConformerGenerator::regardAtomConfiguration(bool regard)
@@ -117,18 +120,23 @@ std::size_t ConfGen::RandomConformerGenerator::getTimeout() const
 	return timeout;
 }
 
-void ConfGen::RandomConformerGenerator::performStrictMMFF94AtomTyping(bool strict)
+void ConfGen::RandomConformerGenerator::performStrictAtomTyping(bool strict)
 {
-	strictAtomTyping = strict;
+	mmff94Parameterizer.performStrictAtomTyping(strict);
 }
 
-bool ConfGen::RandomConformerGenerator::strictMMFF94AtomTypingPerformed() const
+bool ConfGen::RandomConformerGenerator::strictAtomTypingPerformed() const
 {
-	return strictAtomTyping;
+	return mmff94Parameterizer.strictAtomTypingPerformed();
 }
 
 void ConfGen::RandomConformerGenerator::setForceFieldType(unsigned int type)
 {
+	if (type == ForceFieldType::MMFF94 || type == ForceFieldType::MMFF94_NO_ESTAT)
+		mmff94Parameterizer.setDynamicParameterDefaults();
+	else
+		mmff94Parameterizer.setStaticParameterDefaults();
+
 	forceFieldType = type;
 }
 	
@@ -140,21 +148,12 @@ unsigned int ConfGen::RandomConformerGenerator::getForceFieldType() const
 void ConfGen::RandomConformerGenerator::setup(const Chem::MolecularGraph& molgraph) 
 {
     molGraph = &molgraph;
+	
+    const unsigned int int_types = (forceFieldType == ForceFieldType::MMFF94 || forceFieldType == ForceFieldType::MMFF94S ?
+									ForceField::InteractionType::ALL :
+									ForceField::InteractionType::ALL ^ ForceField::InteractionType::ELECTROSTATIC);
 
-	if (forceFieldType == ForceFieldType::MMFF94 || forceFieldType == ForceFieldType::MMFF94_NO_ESTAT)
-		mmff94Parameterizer.setDynamicParameterDefaults();
-	else
-		mmff94Parameterizer.setStaticParameterDefaults();
-
-	mmff94Parameterizer.performStrictAtomTyping(strictAtomTyping);
-	mmff94Parameterizer.parameterize(molgraph, mmff94ParamData, 
-									 forceFieldType == ForceFieldType::MMFF94 || forceFieldType == ForceFieldType::MMFF94S ?
-									 ForceField::InteractionType::ALL :
-									 ForceField::InteractionType::ALL ^ ForceField::InteractionType::ELECTROSTATIC);
-
-    unsigned int int_types = (forceFieldType == ForceFieldType::MMFF94 || forceFieldType == ForceFieldType::MMFF94S ?
-							  ForceField::InteractionType::ALL :
-							  ForceField::InteractionType::ALL ^ ForceField::InteractionType::ELECTROSTATIC);
+	mmff94Parameterizer.parameterize(molgraph, mmff94ParamData, int_types);
 
 	mmff94EnergyCalc.setEnabledInteractionTypes(int_types);
     mmff94EnergyCalc.setup(mmff94ParamData);
@@ -172,6 +171,9 @@ ConfGen::RandomConformerGenerator::Status ConfGen::RandomConformerGenerator::gen
 {
     if (!molGraph)
 		return UNINITIALIZED;
+
+	if (molGraph->getNumAtoms() < 2)
+		return SUCCESS;
 
 	timer.start();
 

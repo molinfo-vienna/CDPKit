@@ -32,6 +32,10 @@
 
 
 #define ATOMCONTAINER_IMPL()                                         \
+	void orderAtoms(const CDPL::Chem::AtomCompareFunction& func) {   \
+		this->get_override("orderAtoms")(boost::ref(func));          \
+	}                                                                \
+                                                                     \
 	std::size_t getNumAtoms() const {                                \
 		return this->get_override("getNumAtoms")();                  \
 	}                                                                \
@@ -112,6 +116,7 @@ namespace CDPLPythonChem
 				.def("containsAtom", python::pure_virtual(&this->containsAtom), (python::arg("self"), python::arg("atom")))
 				.def("getAtomIndex", python::pure_virtual(&getAtomIndex), (python::arg("self"), python::arg("atom")))
 				.def("getNumAtoms", python::pure_virtual(&Chem::AtomContainer::getNumAtoms), python::arg("self"))
+				.def("orderAtoms", python::pure_virtual(&Chem::AtomContainer::orderAtoms), (python::arg("self"), python::arg("func")))
 				.def("getEntity", static_cast<Chem::Entity3D& (Chem::AtomContainer::*)(std::size_t)>(&Chem::AtomContainer::getEntity), 
 					 &Wrapper::getEntityDef, (python::arg("self"), python::arg("idx")),
 					 python::return_internal_reference<1>())

@@ -52,10 +52,12 @@ const unsigned int Chem::CanonicalNumberingGenerator::DEF_BOND_PROPERTY_FLAGS;
 
 
 Chem::CanonicalNumberingGenerator::CanonicalNumberingGenerator():
-	atomPropertyFlags(DEF_ATOM_PROPERTY_FLAGS), bondPropertyFlags(DEF_BOND_PROPERTY_FLAGS) {}
+	atomPropertyFlags(DEF_ATOM_PROPERTY_FLAGS), bondPropertyFlags(DEF_BOND_PROPERTY_FLAGS), 
+	hCountFunc(boost::bind(&getBondCount, _1, _2, 1, AtomType::H, true)) {}
 
 Chem::CanonicalNumberingGenerator::CanonicalNumberingGenerator(const MolecularGraph& molgraph, Util::STArray& numbering):
-	atomPropertyFlags(DEF_ATOM_PROPERTY_FLAGS), bondPropertyFlags(DEF_BOND_PROPERTY_FLAGS)
+	atomPropertyFlags(DEF_ATOM_PROPERTY_FLAGS), bondPropertyFlags(DEF_BOND_PROPERTY_FLAGS), 
+	hCountFunc(boost::bind(&getBondCount, _1, _2, 1, AtomType::H, true))
 {
 	generate(molgraph, numbering);
 }
@@ -78,6 +80,17 @@ void Chem::CanonicalNumberingGenerator::setBondPropertyFlags(unsigned int flags)
 unsigned int Chem::CanonicalNumberingGenerator::getBondPropertyFlags() const
 {
 	return bondPropertyFlags;
+}
+
+void Chem::CanonicalNumberingGenerator::setHydrogenCountFunction(const HydrogenCountFunction& func)
+{
+	hCountFunc = func;
+}
+
+const Chem::CanonicalNumberingGenerator::HydrogenCountFunction& 
+Chem::CanonicalNumberingGenerator::getHydrogenCountFunction()
+{
+	return hCountFunc;
 }
 
 void Chem::CanonicalNumberingGenerator::generate(const MolecularGraph& molgraph, Util::STArray& numbering)
@@ -123,7 +136,7 @@ void Chem::CanonicalNumberingGenerator::init(const MolecularGraph& molgraph, Uti
 			atom_label = atom_label * AtomType::MAX_TYPE * 3 + getIsotope(atom);
 
 		if (atomPropertyFlags & AtomPropertyFlag::H_COUNT)
-			atom_label = atom_label * 10 + (getExplicitBondCount(atom, molgraph, 1, AtomType::H) + calcImplicitHydrogenCount(atom, molgraph));
+			atom_label = atom_label * 10 + hCountFunc(atom, molgraph);
 
 		if (atomPropertyFlags & AtomPropertyFlag::FORMAL_CHARGE) {
 			long charge = getFormalCharge(atom);
@@ -139,7 +152,7 @@ void Chem::CanonicalNumberingGenerator::init(const MolecularGraph& molgraph, Uti
 		if (atomPropertyFlags & AtomPropertyFlag::AROMATICITY)
 			atom_label = atom_label * 2 + getAromaticityFlag(atom);
 
-		if (atomPropertyFlags & AtomPropertyFlag::CONFIGURATION) {
+		if ((atomPropertyFlags & AtomPropertyFlag::CONFIGURATION) && hasCIPConfiguration(atom)) {
 			atom_label *= 3;
 
 			switch (getCIPConfiguration(atom)) {
@@ -181,7 +194,7 @@ void Chem::CanonicalNumberingGenerator::init(const MolecularGraph& molgraph, Uti
 		if (bond_label == 0 && (bondPropertyFlags & BondPropertyFlag::ORDER))
 			bond_label = getOrder(bond) + 2;
 	
-		if (bondPropertyFlags & BondPropertyFlag::CONFIGURATION) {
+		if ((bondPropertyFlags & BondPropertyFlag::CONFIGURATION) && hasCIPConfiguration(bond)) {
 			bond_label *= 3;
 
 			switch (getCIPConfiguration(bond)) {
@@ -876,7 +889,7 @@ bool Chem::CanonicalNumberingGenerator::AtomNode::initConfigurationData()
 	if (num_edges < 3 || num_edges > 4)
 		return false;
 
-	const StereoDescriptor& stereo_desc = calcStereoDescriptor(*atom, *generator->molGraph, 0);
+	const StereoDescriptor& stereo_desc = getStereoDescriptor(*atom);
 	std::size_t num_ref_atoms = stereo_desc.getNumReferenceAtoms();
 
 	if (num_edges != num_ref_atoms)

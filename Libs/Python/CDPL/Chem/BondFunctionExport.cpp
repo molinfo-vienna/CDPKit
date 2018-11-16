@@ -115,7 +115,7 @@ namespace
 	MAKE_FUNCTION_WRAPPER3(unsigned int, calcCIPConfiguration, CDPL::Chem::Bond&, CDPL::Chem::MolecularGraph&, const CDPL::Chem::AtomPriorityFunction&);
 
 	MAKE_FUNCTION_WRAPPER4(bool, isAmideBond, CDPL::Chem::Bond&, CDPL::Chem::MolecularGraph&, bool, bool);
-	MAKE_FUNCTION_WRAPPER4(bool, isStereoCenter, CDPL::Chem::Bond&, CDPL::Chem::MolecularGraph&, std::size_t, bool);
+	MAKE_FUNCTION_WRAPPER4(bool, isStereoCenter, CDPL::Chem::Bond&, CDPL::Chem::MolecularGraph&, bool, std::size_t);
 	MAKE_FUNCTION_WRAPPER4(unsigned int, calcBondConfiguration, CDPL::Chem::Bond&, CDPL::Chem::MolecularGraph&, const CDPL::Chem::StereoDescriptor&, const CDPL::Math::Vector3DArray&);
 
 	MAKE_FUNCTION_WRAPPER5(bool, isRotatable, CDPL::Chem::Bond&, CDPL::Chem::MolecularGraph&, bool, bool, bool);
@@ -171,7 +171,7 @@ void CDPLPythonChem::exportBondFunctions()
 	python::def("isAmideBond", &isAmideBondWrapper4, 
 				(python::arg("bond"), python::arg("molgraph"), python::arg("c_only") = false, python::arg("db_o_only") = false));
 	python::def("isStereoCenter", &isStereoCenterWrapper4, 
-				(python::arg("bond"), python::arg("molgraph"), python::arg("min_ring_size") = 8, python::arg("check_cip_sym") = true));
+				(python::arg("bond"), python::arg("molgraph"), python::arg("check_cip_sym") = true, python::arg("min_ring_size") = 8));
 	python::def("calcBondConfiguration", &calcBondConfigurationWrapper4,
 				(python::arg("bond"), python::arg("molgraph"), python::arg("descr"), python::arg("coords")));
 

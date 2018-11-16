@@ -43,6 +43,10 @@ namespace
 	class CDFMoleculeDataHolder : public Chem::MolecularGraph
 	{
 
+		void orderAtoms(const Chem::AtomCompareFunction& func) {}
+
+		void orderBonds(const Chem::BondCompareFunction& func) {}
+
 		const Chem::Atom& getAtom(std::size_t idx) const {
 			throw Base::IndexError("CDFMoleculeDataHolder: atom index out of bounds");
 		}
@@ -93,6 +97,10 @@ namespace
 
 		std::size_t getBondIndex(const Chem::Bond& bond) const {
 			throw Base::ItemNotFound("CDFMoleculeDataHolder: argument bond not part of the molecule");
+		}
+
+		Chem::MolecularGraph::SharedPointer clone() const {
+			return Chem::MolecularGraph::SharedPointer(new CDFMoleculeDataHolder(*this));
 		}
 	};
 }

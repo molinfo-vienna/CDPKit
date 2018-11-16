@@ -51,16 +51,18 @@ namespace CDPL
 		/**
 		 * \brief Removes all explicit hydrogen atoms from the fragment \a frag.
 		 * \param frag The fragment for which to remove all explicit hydrogen atoms.
+		 * \return \c false if \a frag was not altered, \c true otherwise.
 		 */
-		CDPL_CHEM_API void makeHydrogenDeplete(Fragment& frag);
+		CDPL_CHEM_API bool makeHydrogenDeplete(Fragment& frag);
 
 		/**
 		 * \brief Removes all explicit ordinary hydrogen atoms from the fragment \a frag.
 		 * \param frag The fragment for which to remove all explicit ordinary hydrogen atoms.
 		 * \param flags Specifies the set of atom properties to check (see namespace Chem::AtomPropertyFlag).
+		 * \return \c false if \a frag was not altered, \c true otherwise.
 		 * \see Chem::isOrdinaryHydrogen
 		 */
-		CDPL_CHEM_API void makeOrdinaryHydrogenDeplete(Fragment& frag, unsigned int flags);
+		CDPL_CHEM_API bool makeOrdinaryHydrogenDeplete(Fragment& frag, unsigned int flags);
 
 		CDPL_CHEM_API void removeAtomsIf(Fragment& frag, const AtomPredicate& pred);
 

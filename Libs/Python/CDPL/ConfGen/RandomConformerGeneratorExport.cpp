@@ -40,7 +40,7 @@ void CDPLPythonConfGen::exportRandomConformerGenerator()
     using namespace boost;
     using namespace CDPL;
 
-	python::class_<ConfGen::RandomConformerGenerator> cl("RandomConformerGenerator", python::no_init);
+	python::class_<ConfGen::RandomConformerGenerator, boost::noncopyable> cl("RandomConformerGenerator", python::no_init);
 	python::scope scope = cl;
 
 	python::enum_<ConfGen::RandomConformerGenerator::Status>("Status")
@@ -52,7 +52,7 @@ void CDPLPythonConfGen::exportRandomConformerGenerator()
 
 	cl
 		.def(python::init<>(python::arg("self")))
-		.def(python::init<const ConfGen::RandomConformerGenerator&>((python::arg("self"), python::arg("gen"))))
+//		.def(python::init<const ConfGen::RandomConformerGenerator&>((python::arg("self"), python::arg("gen"))))
 		.def(CDPLPythonBase::ObjectIdentityCheckVisitor<ConfGen::RandomConformerGenerator>())
 //		.def("assign", CDPLPythonBase::copyAssOp(&ConfGen::RandomConformerGenerator::operator=), 
 //			 (python::arg("self"), python::arg("gen")), python::return_self<>())
@@ -74,9 +74,9 @@ void CDPLPythonConfGen::exportRandomConformerGenerator()
 		.def("getMinimizationStopGradientNorm", &ConfGen::RandomConformerGenerator::getMinimizationStopGradientNorm, python::arg("self"))
 		.def("setTimeout", &ConfGen::RandomConformerGenerator::setTimeout, (python::arg("self"), python::arg("mil_secs")))
 		.def("getTimeout", &ConfGen::RandomConformerGenerator::getTimeout, python::arg("self"))
-		.def("performStrictMMFF94AtomTyping", &ConfGen::RandomConformerGenerator::performStrictMMFF94AtomTyping,
+		.def("performStrictAtomTyping", &ConfGen::RandomConformerGenerator::performStrictAtomTyping,
 			 (python::arg("self"), python::arg("strict")))
-		.def("strictMMFF94AtomTypingPerformed", &ConfGen::RandomConformerGenerator::strictMMFF94AtomTypingPerformed,
+		.def("strictAtomTypingPerformed", &ConfGen::RandomConformerGenerator::strictAtomTypingPerformed,
 			 python::arg("self"))
 		.def("setForceFieldType", &ConfGen::RandomConformerGenerator::setForceFieldType,
 			 (python::arg("self"), python::arg("type")))
@@ -103,8 +103,8 @@ void CDPLPythonConfGen::exportRandomConformerGenerator()
 					  &ConfGen::RandomConformerGenerator::setMinimizationStopGradientNorm)
 		.add_property("timeout", &ConfGen::RandomConformerGenerator::getTimeout,
 					  &ConfGen::RandomConformerGenerator::setTimeout)
-		.add_property("strictMMFF94AtomTyping", &ConfGen::RandomConformerGenerator::strictMMFF94AtomTypingPerformed,
-					  &ConfGen::RandomConformerGenerator::performStrictMMFF94AtomTyping)
+		.add_property("strictAtomTyping", &ConfGen::RandomConformerGenerator::strictAtomTypingPerformed,
+					  &ConfGen::RandomConformerGenerator::performStrictAtomTyping)
 		.add_property("forceFieldType", &ConfGen::RandomConformerGenerator::getForceFieldType,
 					  &ConfGen::RandomConformerGenerator::setForceFieldType);
 }

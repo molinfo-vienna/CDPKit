@@ -1,7 +1,7 @@
 /* -*- mode: c++; c-basic-offset: 4; tab-width: 4; indent-tabs-mode: t -*- */
 
 /* 
- * ConfGen.hpp 
+ * AtomCompareFunctionWrapper.hpp 
  *
  * This file is part of the Chemical Data Processing Toolkit
  *
@@ -25,28 +25,37 @@
 
 /**
  * \file
- * \brief A convenience header including everything that is defined in namespace CDPL::ConfGen.
+ * \brief Type definition of a generic wrapper class for storing user-defined Chem::Atom compare functions.
  */
 
-#ifndef CDPL_CONFGEN_HPP
-#define CDPL_CONFGEN_HPP
+#ifndef CDPL_CHEM_ATOMCOMPAREFUNCTIONWRAPPER_HPP
+#define CDPL_CHEM_ATOMCOMPAREFUNCTIONWRAPPER_HPP
 
-#include "CDPL/Config.hpp"
+#include <boost/function.hpp>
 
-#include "CDPL/ConfGen/DGConstraintGenerator.hpp"
-#include "CDPL/ConfGen/Raw3DCoordinatesGenerator.hpp"
-#include "CDPL/ConfGen/FragmentList.hpp"
-#include "CDPL/ConfGen/FragmentLibraryEntry.hpp"
-#include "CDPL/ConfGen/FragmentLibrary.hpp"
-#include "CDPL/ConfGen/UtilityFunctions.hpp"
-#include "CDPL/ConfGen/FragmentType.hpp"
-#include "CDPL/ConfGen/ForceFieldType.hpp"
 
-#if defined(HAVE_BOOST_TIMER) && defined(HAVE_BOOST_CHRONO)
+namespace CDPL 
+{
 
-#include "CDPL/ConfGen/RandomConformerGenerator.hpp"
-#include "CDPL/ConfGen/FragmentConformerGenerator.hpp"
-#include "CDPL/ConfGen/FragmentLibraryGenerator.hpp"
+    namespace Chem
+    {
 
-#endif // defined(HAVE_BOOST_TIMER) && defined(HAVE_BOOST_CHRONO)
-#endif // CDPL_CONFGEN_HPP
+		class Atom;
+
+		/**
+		 * \addtogroup CDPL_CHEM_DATA_STRUCTURES
+		 * @{
+		 */
+
+		/**
+		 * \brief A generic wrapper class used to store a user-defined atom compare function.
+		 */
+		typedef boost::function2<bool, const Chem::Atom&, const Chem::Atom&> AtomCompareFunction;
+
+		/**
+		 * @}
+		 */
+    }
+}
+
+#endif // CDPL_CHEM_ATOMCOMPAREFUNCTIONWRAPPER_HPP

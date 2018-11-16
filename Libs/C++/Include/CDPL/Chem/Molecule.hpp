@@ -266,13 +266,7 @@ namespace CDPL
 			 * \note Does not affect any properties.
 			 */
 			virtual void append(const MolecularGraph& molgraph) = 0;
-
-			/**
-			 * \brief Creates a copy of the current molecule state.
-			 * \return A smart pointer to the copy of the molecule.
-			 */
-			virtual SharedPointer clone() const = 0;
-
+		
 			/**
 			 * \brief Reserves memory for \a num_atoms atoms.
 			 *

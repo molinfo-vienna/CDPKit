@@ -204,6 +204,10 @@ namespace CDPL
 
 			std::size_t getBondIndex(const Bond& bond) const;
 
+			void orderAtoms(const AtomCompareFunction& func);
+
+			void orderBonds(const BondCompareFunction& func);
+
 			/**
 			 * \brief Replaces the current set of atoms, bonds and properties by a copy of the
 			 *        atoms, bonds and properties of the molecule \a mol.
@@ -230,7 +234,7 @@ namespace CDPL
 
 			using Molecule::operator+=;
 
-			Molecule::SharedPointer clone() const;
+			MolecularGraph::SharedPointer clone() const;
 	
 			/**
 			 * \brief Replaces the current set of atoms, bonds and properties by a copy of the

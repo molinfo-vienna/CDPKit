@@ -31,7 +31,7 @@
 
 *   Carbon 
     [#6X2:1]                                             CSP     SPECIAL ENTRY FOR CONFGEN: SP CARBON
-    [c:1]                                                CB      SPECIAL ENTRY FOR CONFGEN: AROMATIC CARBON
+    [cX1:1]                                              C=C     SPECIAL ENTRY FOR CONFGEN: AROMATIC CARBON
 
     [#6X4:1]                                             CR      ALKYL CARBON, SP3
     [#6X3:1]                                             CSP2    GENERIC SP2 CARBON
@@ -120,11 +120,15 @@
     [#7X1:1]                                             NSP     SPECIAL ENTRY FOR CONFGEN: SP NITROGEN
     [#7X1:1]=[*]                                         =N=     SPECIAL ENTRY FOR CONFGEN: SP NITROGEN
     [#7X2:1]                                             N=C     SPECIAL ENTRY FOR CONFGEN: SP2 NITROGEN
-    [n:1]                                                NPYD    SPECIAL ENTRY FOR CONFGEN: AROMATIC NITROGEN
+    [nX1:1]                                              N=C     SPECIAL ENTRY FOR CONFGEN: AROMATIC NITROGEN
 
     [#7X3:1]-[#7]=[#6]                                   NN=C    NITROGEN IN N-N=C
     [#7X3v3:1]                                           NR      NITROGEN IN ALIPHATIC AMINES
     [#7X4v4+:1]                                          NR+     QUATERNARY NITROGEN, SP3, POSITIVELY CHARGED
+
+    [#7X3R:1]-[#6X3H2]                                   NC=C    SPECIAL ENTRY FOR CONFGEN: RING NITROGEN BONDED TO SP2 CARBON
+    [#7X3R:1]-[cX1]                                      NC=C    SPECIAL ENTRY FOR CONFGEN: RING NITROGEN BONDED TO AROMATIC CARBON
+
     [#7X2:1]=[#6]                                        N=C     NITROGEN IN IMINES
     [#7X2:1]=[#7]                                        N=N     NITROGEN IN AZO COMPOUNDS
     [#7X3:1]-[#7]=[#7]                                   NN=N    NITROGEN IN N-N=N

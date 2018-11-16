@@ -145,8 +145,7 @@ namespace CDPL
 	
 		CDPL_CHEM_API bool hasStereoCenterFlag(const Bond& bond);
 
-		CDPL_CHEM_API bool isStereoCenter(const Bond& bond, const MolecularGraph& molgraph, std::size_t min_ring_size = 8, 
-										  bool check_cip_sym = true);
+		CDPL_CHEM_API bool isStereoCenter(const Bond& bond, const MolecularGraph& molgraph, bool check_cip_sym = true, std::size_t min_ring_size = 8);
 		
 
 		CDPL_CHEM_API unsigned int getDirection(const Bond& bond);

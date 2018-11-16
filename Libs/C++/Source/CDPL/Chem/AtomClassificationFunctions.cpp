@@ -212,3 +212,69 @@ bool Chem::isAmideNitrogen(const Atom& atom, const MolecularGraph& molgraph, boo
 
 	return false;
 }
+
+bool Chem::isInvertibleNitrogen(const Atom& atom, const MolecularGraph& molgraph)
+{
+	if (getType(atom) != AtomType::N)
+		return false;
+
+	std::size_t bond_count = 0;
+	std::size_t ring_bond_count = 0;
+
+	Atom::ConstAtomIterator atoms_end = atom.getAtomsEnd();
+	Atom::ConstBondIterator b_it = atom.getBondsBegin();
+
+	for (Atom::ConstAtomIterator a_it = atom.getAtomsBegin(); a_it != atoms_end; ++a_it, ++b_it) {
+		const Atom& nbr_atom = *a_it;
+		const Bond& bond = *b_it;
+
+		if (!molgraph.containsAtom(nbr_atom) || !molgraph.containsBond(bond))
+			continue;
+
+		if (getOrder(bond) > 1)
+			return false;
+
+		if (getRingFlag(bond) && (++ring_bond_count > 2))
+			return false;
+
+		if (isUnsaturated(nbr_atom, molgraph))
+			return false;
+
+		bond_count++;
+	}
+
+	return ((bond_count + getImplicitHydrogenCount(atom)) == 3);
+}
+
+bool Chem::isPlanarNitrogen(const Atom& atom, const MolecularGraph& molgraph)
+{
+	if (getType(atom) != AtomType::N)
+		return false;
+
+	std::size_t bond_count = 0;
+	bool unsat_nbrs = false;
+
+	Atom::ConstAtomIterator atoms_end = atom.getAtomsEnd();
+	Atom::ConstBondIterator b_it = atom.getBondsBegin();
+
+	for (Atom::ConstAtomIterator a_it = atom.getAtomsBegin(); a_it != atoms_end; ++a_it, ++b_it) {
+		const Atom& nbr_atom = *a_it;
+		const Bond& bond = *b_it;
+
+		if (!molgraph.containsAtom(nbr_atom) || !molgraph.containsBond(bond))
+			continue;
+
+		if (getOrder(bond) > 1)
+			return true;
+
+		if (isUnsaturated(nbr_atom, molgraph))
+			unsat_nbrs = true;
+
+		bond_count++;
+	}
+
+	if (getImplicitHydrogenCount(atom) + bond_count  > 3)
+		return false;
+
+	return unsat_nbrs;
+}

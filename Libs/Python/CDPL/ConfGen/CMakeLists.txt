@@ -20,6 +20,8 @@ SET(confgen_MOD_SRCS
     FragmentLibraryExport.cpp
 
     UtilityFunctionExport.cpp
+
+    BoostFunctionWrapperExport.cpp
    
     ToPythonConverterRegistration.cpp
     FromPythonConverterRegistration.cpp
@@ -30,6 +32,7 @@ IF(Boost_TIMER_FOUND AND Boost_CHRONO_FOUND)
       ${confgen_MOD_SRCS}
       RandomConformerGeneratorExport.cpp
       FragmentConformerGeneratorExport.cpp
+      FragmentLibraryGeneratorExport.cpp
      )	
 ENDIF(Boost_TIMER_FOUND AND Boost_CHRONO_FOUND)
 
@@ -59,7 +62,7 @@ ELSE(WIN32)
 ENDIF(WIN32)
 
 INSTALL(FILES ${PYTHON_FILES} DESTINATION "${CDPKIT_PYTHON_INSTALL_DIR}/CDPL/ConfGen" COMPONENT CDPLPythonModules)
-INSTALL(TARGETS _confgen DESTINATION "${CDPKIT_PYTHON_INSTALL_DIR}/CDPL/ConGgen" COMPONENT CDPLPythonModules)
+INSTALL(TARGETS _confgen DESTINATION "${CDPKIT_PYTHON_INSTALL_DIR}/CDPL/ConfGen" COMPONENT CDPLPythonModules)
 
 IF(PYTHONINTERP_FOUND)
   ADD_SUBDIRECTORY(Tests)
