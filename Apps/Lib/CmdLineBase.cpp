@@ -31,6 +31,7 @@
 #include <cmath>
 #include <csignal>
 #include <iostream>
+#include <cstring>
 
 #include <boost/program_options/parsers.hpp>
 #include <boost/shared_ptr.hpp>
@@ -41,6 +42,7 @@
 #include <boost/atomic.hpp>
 
 #include "CDPL/Version.hpp"
+#include "CDPL/Base/Exceptions.hpp"
 
 #include "CmdLineBase.hpp"
 #include "HelperFunctions.hpp"
@@ -59,7 +61,7 @@ namespace
 
 	void handleSignal(int sig) 
 	{
-		std::cerr << std::endl << "Caught signal (" << sig << ") - attempting graceful shutdown..." << std::endl;
+		std::cerr << std::endl << "Caught signal (" << strsignal(sig) << ") - attempting graceful shutdown..." << std::endl;
 		signalCaught.store(true);
 	}
 }
@@ -67,7 +69,8 @@ namespace
 
 CmdLineBase::CmdLineBase(): 
 	optOptions("Other Options"), mandOptions("Mandatory Options"), verbLevel(INFO), 
-	logStreamPtr(&std::cerr), progressBarLen(50), lastProgressValue(-1), progressStartTime(Clock::now())
+	logStreamPtr(&std::cerr), showProgress(true), progressBarLen(50), lastProgressValue(-1), progressStartTime(Clock::now()),
+	inProgressLine(false), inNewLine(true)
 {
 	addOption("help,h", "Print help message and exit (ABOUT, USAGE, SHORT, ALL or 'name of option', default: SHORT).", 
 			  value<std::string>()->implicit_value("SHORT"));
@@ -78,6 +81,8 @@ CmdLineBase::CmdLineBase():
 			  value<std::string>());
 	addOption("log-file,l", "Redirect text-output to file.", 
 			  value<std::string>());
+	addOption("progress,p", "Show progress bar (default: true).", 
+			   value<bool>(&showProgress)->implicit_value(true));
 
 	std::signal(SIGTERM, &handleSignal);
 	std::signal(SIGINT, &handleSignal);
@@ -152,6 +157,11 @@ int CmdLineBase::run(int argc, char* argv[])
 	return result;
 }
 
+CmdLineBase::VerbosityLevel CmdLineBase::getVerbosityLevel() const
+{
+	return verbLevel;
+}
+
 bool CmdLineBase::termSignalCaught()
 {
 	return signalCaught.load();
@@ -221,20 +231,34 @@ const char* CmdLineBase::getProgAboutText() const
 	return "";
 }
 
-void CmdLineBase::printMessage(VerbosityLevel level, const std::string& msg, bool nl) const
+void CmdLineBase::printMessage(VerbosityLevel level, const std::string& msg, bool nl, bool file_only)
 {
-	if (level > verbLevel)
+	if (level > verbLevel || (termSignalCaught() && level != ERROR))
 		return;
+
+	if (file_only && logStreamPtr == &std::cerr)
+		return;
+
+	if (logStreamPtr == &std::cerr && inProgressLine)
+		logStream() << std::endl;
 
 	logStream() << msg;
 
-	if (nl)
+	if (nl) 
 		logStream() << std::endl;
+	
+	inNewLine = nl;
+	inProgressLine = false;
 }
 
 std::ostream& CmdLineBase::logStream() const 
 {
 	return *logStreamPtr;
+}
+
+bool CmdLineBase::progressEnabled() const
+{
+	return showProgress;
 }
 
 void CmdLineBase::initProgress(std::size_t prog_bar_len)
@@ -244,9 +268,9 @@ void CmdLineBase::initProgress(std::size_t prog_bar_len)
 	progressStartTime = Clock::now();
 }
 
-void CmdLineBase::printProgress(VerbosityLevel level, const std::string& prefix, double progress)
+void CmdLineBase::printProgress(const std::string& prefix, double progress)
 {
-	if (level > verbLevel)
+	if (!showProgress || verbLevel == QUIET || termSignalCaught())
 		return;
 
 	progress = std::min(1.0, progress);
@@ -262,17 +286,23 @@ void CmdLineBase::printProgress(VerbosityLevel level, const std::string& prefix,
 	lastProgressValue = curr_prog_value;
 	std::size_t curr_prog_bar_len = progressBarLen * progress;
 
-	logStream() << prefix << std::fixed << std::setw(7) << std::setprecision(1) 
-				<< (double(lastProgressValue) / 10) 
-				<< "% [" << std::setfill('=') << std::setw(curr_prog_bar_len) << "" 
-				<< std::setfill(' ') << std::setw(progressBarLen - curr_prog_bar_len + 1) << "]";
+	if (logStreamPtr == &std::cerr && !inProgressLine && !inNewLine)
+		std::cerr << std::endl;
+
+	std::cerr << prefix << std::fixed << std::setw(7) << std::setprecision(1) 
+			  << (double(lastProgressValue) / 10) 
+			  << "% [" << std::setfill('=') << std::setw(curr_prog_bar_len) << "" 
+			  << std::setfill(' ') << std::setw(progressBarLen - curr_prog_bar_len + 1) << "]";
 
 	Clock::duration elapsed = Clock::now() - progressStartTime;
 	std::size_t tot_eta_secs = boost::chrono::duration_cast<boost::chrono::duration<std::size_t> >(
 		elapsed / progress * (1.0 - progress)).count();
 
-	logStream() << " ETA: " << formatTimeDuration(tot_eta_secs) 
-				<< std::setw(10) << "\r";
+	std::cerr << " ETA: " << formatTimeDuration(tot_eta_secs) 
+			  << std::setw(10) << "\r";
+
+	inProgressLine = true;
+	inNewLine = false;
 }
 
 void CmdLineBase::throwValidationError(const char* option) const
@@ -309,7 +339,7 @@ void CmdLineBase::openLogFile()
 	logFile.open(getOptionValue<std::string>("log-file").c_str(), std::ios_base::out | std::ios_base::trunc);
 
 	if (!logFile)
-		throw boost::program_options::error("opening log-file failed");
+		throw CDPL::Base::IOError("opening log-file failed");
 
 	logStreamPtr = &logFile;
 }

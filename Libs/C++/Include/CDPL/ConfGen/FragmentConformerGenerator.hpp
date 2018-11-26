@@ -36,6 +36,7 @@
 #include <utility>
 
 #include <boost/timer/timer.hpp>
+#include <boost/function.hpp>
 
 #include "CDPL/ConfGen/APIPrefix.hpp"
 #include "CDPL/ConfGen/Raw3DCoordinatesGenerator.hpp"
@@ -65,6 +66,8 @@ namespace CDPL
 		{
 
 		  public:
+			typedef boost::function0<bool> ProgressCallbackFunction;
+
 			static const std::size_t  DEF_MAX_NUM_STRUCTURE_GEN_TRIALS    = 10;
 			static const std::size_t  DEF_MAX_NUM_MINIMIZATION_STEPS      = 0;
 			static const std::size_t  DEF_MAX_NUM_OUTPUT_CONFORMERS       = 1000;
@@ -126,6 +129,10 @@ namespace CDPL
 			void setMaxNumOutputConformers(std::size_t max_num);
 
 			std::size_t getMaxNumOutputConformers() const;
+
+			void setProgressCallback(const ProgressCallbackFunction& func);
+
+			const ProgressCallbackFunction& getProgressCallback() const;
 
 			std::size_t generate(const Chem::MolecularGraph& molgraph, const ForceField::MMFF94InteractionData& ia_data, 
 								 unsigned int frag_type);
@@ -226,6 +233,7 @@ namespace CDPL
 			std::size_t                              minNumRingConfTrials;
 			std::size_t                              maxNumRingConfTrials;
 			double                                   minRMSD;
+			ProgressCallbackFunction                 progCallback;
 			boost::timer::cpu_timer                  timer;
 			const Chem::MolecularGraph*              molGraph;
 			std::size_t                              numAtoms;

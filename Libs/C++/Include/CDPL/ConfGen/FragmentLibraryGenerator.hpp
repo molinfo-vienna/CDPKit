@@ -67,6 +67,7 @@ namespace CDPL
 
 			typedef boost::function3<void, const Chem::MolecularGraph&, bool, std::size_t> ProcessingResultCallbackFunction;
 			typedef boost::function2<bool, const Chem::MolecularGraph&, const std::string&> ProcessingErrorCallbackFunction;
+			typedef FragmentConformerGenerator::ProgressCallbackFunction ProgressCallbackFunction;
 
 			FragmentLibraryGenerator();
 
@@ -139,6 +140,10 @@ namespace CDPL
 			void setProcessingErrorCallback(const ProcessingErrorCallbackFunction& func);
 
 			const ProcessingErrorCallbackFunction& getProcessingErrorCallback();
+
+			void setProgressCallback(const ProgressCallbackFunction& func);
+
+			const ProgressCallbackFunction& getProgressCallback() const;
 
 			void process(const Chem::MolecularGraph& molgraph);
 	

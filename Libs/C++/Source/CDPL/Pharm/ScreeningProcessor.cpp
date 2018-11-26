@@ -142,24 +142,24 @@ bool Pharm::ScreeningProcessor::bestAlignmentsSeeked() const
 	return impl->bestAlignmentsSeeked();
 }
 
-void Pharm::ScreeningProcessor::setHitCallbackFunction(const HitCallbackFunction& func)
+void Pharm::ScreeningProcessor::setHitCallback(const HitCallbackFunction& func)
 {
-	impl->setHitCallbackFunction(func);
+	impl->setHitCallback(func);
 }
 
-const Pharm::ScreeningProcessor::HitCallbackFunction& Pharm::ScreeningProcessor::getHitCallbackFunction() const
+const Pharm::ScreeningProcessor::HitCallbackFunction& Pharm::ScreeningProcessor::getHitCallback() const
 {
-	return impl->getHitCallbackFunction();
+	return impl->getHitCallback();
 }
 
-void Pharm::ScreeningProcessor::setProgressCallbackFunction(const ProgressCallbackFunction& func)
+void Pharm::ScreeningProcessor::setProgressCallback(const ProgressCallbackFunction& func)
 {
-	impl->setProgressCallbackFunction(func);
+	impl->setProgressCallback(func);
 }
 
-const Pharm::ScreeningProcessor::ProgressCallbackFunction& Pharm::ScreeningProcessor::getProgressCallbackFunction() const
+const Pharm::ScreeningProcessor::ProgressCallbackFunction& Pharm::ScreeningProcessor::getProgressCallback() const
 {
-	return impl->getProgressCallbackFunction();
+	return impl->getProgressCallback();
 }
 
 void Pharm::ScreeningProcessor::setScoringFunction(const ScoringFunction& func)

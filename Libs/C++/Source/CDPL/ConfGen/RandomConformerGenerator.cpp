@@ -190,7 +190,7 @@ ConfGen::RandomConformerGenerator::Status ConfGen::RandomConformerGenerator::gen
 		energy = 0.0;
 
 		for (std::size_t j = 0; maxNumMinSteps == 0 || j < maxNumMinSteps; j++) {
-			if ((j % 10) == 0 && timeoutExceeded())
+			if ((j % 50) == 0 && timeoutExceeded())
 				return TIMEOUT_EXCEEDED;
 
 			if (energyMinimizer.iterate(energy, coords.getData(), gradient) != BFGSMinimizer::SUCCESS) 
@@ -224,7 +224,7 @@ bool ConfGen::RandomConformerGenerator::timeoutExceeded() const
 
 	boost::timer::cpu_times times = timer.elapsed();
 
-	if ((times.system + times.user) > (boost::timer::nanosecond_type(timeout) * 1000000))
+	if (times.wall > (boost::timer::nanosecond_type(timeout) * 1000000))
 		return true;
 
 	return false;

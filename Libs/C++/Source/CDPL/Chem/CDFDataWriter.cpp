@@ -211,9 +211,9 @@ void Chem::CDFDataWriter::outputAtoms(const MolecularGraph& molgraph, Internal::
 		if (hasReactionAtomMappingID(atom))
 			putIntProperty(CDF::AtomProperty::REACTION_ATOM_MAPPING_ID, boost::numeric_cast<CDF::SizeType>(getReactionAtomMappingID(atom)), bbuf);
 
-		if (hasStereoDescriptor(atom))
+		if (hasStereoDescriptor(atom)) 
 			putStereoDescriptor(molgraph, CDF::AtomProperty::STEREO_DESCRIPTOR, getStereoDescriptor(atom), bbuf);
-
+		
 		// CDF::AtomProperty::MATCH_CONSTRAINTS // TODO
 
 		outputExternalProperties(atom, bbuf);
@@ -272,7 +272,7 @@ void Chem::CDFDataWriter::outputBonds(const MolecularGraph& molgraph, Internal::
 		if (hasReactionCenterStatus(bond))
 			putIntProperty(CDF::BondProperty::REACTION_CENTER_STATUS, boost::numeric_cast<CDF::UIntType>(getReactionCenterStatus(bond)), bbuf);
 
-		if (hasStereoDescriptor(bond))
+		if (hasStereoDescriptor(bond)) 
 			putStereoDescriptor(molgraph, CDF::BondProperty::STEREO_DESCRIPTOR, getStereoDescriptor(bond), bbuf);
 
 		// CDF::BondProperty::MATCH_CONSTRAINTS // TODO

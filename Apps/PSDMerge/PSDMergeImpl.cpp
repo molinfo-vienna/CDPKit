@@ -54,7 +54,7 @@ struct PSDMergeImpl::MergeDBsProgressCallback
 		if (PSDMergeImpl::termSignalCaught())
 			return false;
 
-		parent->printProgress(INFO, "Merging Databases... ", offset + scale * progress);
+		parent->printProgress("Merging Databases... ", offset + scale * progress);
 		return true;
 	}
 
@@ -130,11 +130,9 @@ int PSDMergeImpl::mergeDatabases()
 
 	std::size_t num_mols = 0;
 	std::size_t num_pharms = 0;
-
 	DBAccessorList db_accessors;
 
-	printMessage(INFO, "");
-	printMessage(INFO, "Analyzing Input Databases... ", false);
+	printMessage(INFO, "Analyzing Input Databases...");
 
 	for (std::size_t i = 0; i < inputDatabases.size(); i++) {
 		if (termSignalCaught())
@@ -151,12 +149,17 @@ int PSDMergeImpl::mergeDatabases()
 	if (termSignalCaught())
 		return EXIT_FAILURE;
 
-	printMessage(INFO, "found " + boost::lexical_cast<std::string>(num_mols) + " Molecules/" +
+	printMessage(INFO, " - Found " + boost::lexical_cast<std::string>(num_mols) + " Molecules/" +
 				 boost::lexical_cast<std::string>(num_pharms) + " Pharmacophores");
+	printMessage(INFO, "");
 
 	Pharm::PSDScreeningDBCreator db_creator(outputDatabase, creationMode, !dropDuplicates);
 
-	initProgress();
+	if (progressEnabled()) {
+		initProgress();
+		printMessage(INFO, "Merging Databases...", true, true); 
+	} else
+		printMessage(INFO, "Merging Databases..."); 
 
 	for (std::size_t i = 0; i < inputDatabases.size(); i++) {
 		if (termSignalCaught())
@@ -167,7 +170,7 @@ int PSDMergeImpl::mergeDatabases()
 												  1.0 / inputDatabases.size()));
 	}
 
-	printMessage(INFO, "", false);
+	printMessage(INFO, "");
 
 	if (termSignalCaught())
 		return EXIT_FAILURE;
@@ -181,9 +184,8 @@ int PSDMergeImpl::mergeDatabases()
 
 void PSDMergeImpl::printStatistics(std::size_t num_proc, std::size_t num_rej, 
 								   std::size_t num_del, std::size_t num_ins,
-								   std::size_t proc_time) const
+								   std::size_t proc_time)
 {
-	printMessage(INFO, "");
 	printMessage(INFO, "Statistics:");
 	printMessage(INFO, " Processed Molecules: " + boost::lexical_cast<std::string>(num_proc));
 	printMessage(INFO, " Rejected  Molecules: " + boost::lexical_cast<std::string>(num_rej));
@@ -209,7 +211,7 @@ void PSDMergeImpl::checkInputFiles() const
 		throw Base::ValueError("output file must not occur in list of input files");
 }
 
-void PSDMergeImpl::printOptionSummary() const
+void PSDMergeImpl::printOptionSummary()
 {
 	printMessage(VERBOSE, "Option Summary:");
 	printMessage(VERBOSE, " Input Databases(s):       " + inputDatabases[0]);
@@ -220,7 +222,6 @@ void PSDMergeImpl::printOptionSummary() const
 	printMessage(VERBOSE, " Output Database:          " + outputDatabase);
  	printMessage(VERBOSE, " Creation Mode:            " + getModeString());
  	printMessage(VERBOSE, " Drop Duplicates:          " + std::string(dropDuplicates ? "Yes" : "No"));
-
 	printMessage(VERBOSE, "");
 }
 

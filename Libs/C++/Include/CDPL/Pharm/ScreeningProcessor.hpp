@@ -151,13 +151,13 @@ namespace CDPL
 
 			bool bestAlignmentsSeeked() const;
 
-			void setHitCallbackFunction(const HitCallbackFunction& func);
+			void setHitCallback(const HitCallbackFunction& func);
 
-			const HitCallbackFunction& getHitCallbackFunction() const;
+			const HitCallbackFunction& getHitCallback() const;
 
-			void setProgressCallbackFunction(const ProgressCallbackFunction& func);
+			void setProgressCallback(const ProgressCallbackFunction& func);
 
-			const ProgressCallbackFunction& getProgressCallbackFunction() const;
+			const ProgressCallbackFunction& getProgressCallback() const;
 
 			void setScoringFunction(const ScoringFunction& func);
 

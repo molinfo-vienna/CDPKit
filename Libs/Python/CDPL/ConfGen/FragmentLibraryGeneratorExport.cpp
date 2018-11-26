@@ -58,6 +58,10 @@ void CDPLPythonConfGen::exportFragmentLibraryGenerator()
 			 (python::arg("self"), python::arg("func")))
 		.def("getProcessingErrorCallback", &ConfGen::FragmentLibraryGenerator::getProcessingErrorCallback, 
 			 python::arg("self"), python::return_internal_reference<>())
+		.def("setProgressCallback", &ConfGen::FragmentLibraryGenerator::setProgressCallback, 
+			 (python::arg("self"), python::arg("func")))
+		.def("getProgressCallback", &ConfGen::FragmentLibraryGenerator::getProgressCallback, 
+			 python::arg("self"), python::return_internal_reference<>())
 		.def("setForceFieldType", &ConfGen::FragmentLibraryGenerator::setForceFieldType,
 			 (python::arg("self"), python::arg("type")))
 		.def("getForceFieldType", &ConfGen::FragmentLibraryGenerator::getForceFieldType,
@@ -125,6 +129,10 @@ void CDPLPythonConfGen::exportFragmentLibraryGenerator()
 					  python::make_function(&ConfGen::FragmentLibraryGenerator::getProcessingErrorCallback,
 											python::return_internal_reference<>()),
 					  &ConfGen::FragmentLibraryGenerator::setProcessingErrorCallback)
+		.add_property("progressCallback", 
+					  python::make_function(&ConfGen::FragmentLibraryGenerator::getProgressCallback,
+											python::return_internal_reference<>()),
+					  &ConfGen::FragmentLibraryGenerator::setProgressCallback)
 		.add_property("fragmentLibrary", 
 					  python::make_function(&ConfGen::FragmentLibraryGenerator::getFragmentLibrary,
 											python::return_value_policy<python::copy_const_reference>()),

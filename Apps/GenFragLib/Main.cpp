@@ -1,7 +1,7 @@
 /* -*- mode: c++; c-basic-offset: 4; tab-width: 4; indent-tabs-mode: t -*- */
 
 /* 
- * BoostFunctionWrapperExport.cpp 
+ * Main.cpp
  *
  * This file is part of the Chemical Data Processing Toolkit
  *
@@ -24,23 +24,10 @@
  */
 
 
-#include <string>
-
-#include <boost/function.hpp>
-
-#include "CDPL/Chem/MolecularGraph.hpp"
-
-#include "Base/BoostFunctionWrapperExport.hpp"
-
-#include "ClassExports.hpp"
+#include "GenFragLibImpl.hpp"
 
 
-void CDPLPythonConfGen::exportBoostFunctionWrappers()
+int main(int argc, char* argv[])
 {
-	using namespace boost;
-    using namespace CDPL;
-
-	CDPLPythonBase::BoostFunction0Export<boost::function0<bool> >("BoolVoidFunctor");
-	CDPLPythonBase::BoostFunction2Export<boost::function2<bool, const Chem::MolecularGraph&, const std::string&> >("BoolMolecularGraphStringFunctor");
-	CDPLPythonBase::BoostFunction3Export<boost::function3<void, const Chem::MolecularGraph&, bool, std::size_t> >("VoidMolecularGraphBoolSizeTypeFunctor");
+    return GenFragLib::GenFragLibImpl().run(argc, argv);
 }

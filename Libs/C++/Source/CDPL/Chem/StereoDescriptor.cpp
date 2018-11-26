@@ -143,7 +143,7 @@ bool Chem::StereoDescriptor::isValid(const Bond& bond) const
 	if (numRefAtoms < 4)
 		return false;
 
-	if (refAtoms[1]->findBondToAtom(*refAtoms[2]) != &bond)
+	if (refAtoms[1]->findBondToAtom(*refAtoms[2]) != &bond) 
 		return false;
 
 	if (refAtoms[0] == refAtoms[2])

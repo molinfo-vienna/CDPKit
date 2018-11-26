@@ -185,10 +185,12 @@ namespace CDPL
 			/**
 			 * \brief Returns the numeric atom type that is associated with the specified atom type symbol.
 			 * \param symbol The atom type symbol.
+			 * \param strict If \c true, dictionary symbols strictly have to match the argument symbol. Otherwise, 
+			 *               the symbols will be converted to upper-case before their comparison.
 			 * \return The numeric atom type, or AtomType::UNKNOWN if \a symbol does not specify a
 			 *         supported atom type.
 			 */
-			static unsigned int getType(const std::string& symbol);
+			static unsigned int getType(const std::string& symbol, bool strict = false);
 
 			/**
 			 * \brief Returns the mass number of the most abundant isotope of the chemical element specified by

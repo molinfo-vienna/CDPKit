@@ -50,11 +50,11 @@ namespace PSDInfo
 
 		int process();
 
-		int printStatistics() const;
-		void printStatistics(const std::string& db_name) const;
+		int printStatistics();
+		void printStatistics(const std::string& db_name);
 	
 		void checkInputFiles() const;
-		void printOptionSummary() const;
+		void printOptionSummary();
 
 		void printTableRow(std::ostream& os, const std::string& stat_type, 
 						   std::size_t min, double avg, std::size_t max) const;

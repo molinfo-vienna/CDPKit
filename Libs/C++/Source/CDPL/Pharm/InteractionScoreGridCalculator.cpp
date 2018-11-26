@@ -40,25 +40,15 @@
 using namespace CDPL;
 
 
-namespace
-{
-
-    double maxElement(const Math::DVector& vec)
-    {
-		return normInf(vec);
-    }
-}
- 
-
 const double Pharm::InteractionScoreGridCalculator::DEF_DISTANCE_CUTOFF = 10.0;
 
 
 Pharm::InteractionScoreGridCalculator::InteractionScoreGridCalculator(): 
-	scoreCombinationFunc(&maxElement), distCutoff(DEF_DISTANCE_CUTOFF), normScores(true)
+	scoreCombinationFunc(MaxScoreFunctor()), distCutoff(DEF_DISTANCE_CUTOFF), normScores(true)
 {}
 
 Pharm::InteractionScoreGridCalculator::InteractionScoreGridCalculator(const ScoringFunction& func): 
-	scoringFunc(func), scoreCombinationFunc(&maxElement), distCutoff(DEF_DISTANCE_CUTOFF), normScores(true)
+	scoringFunc(func), scoreCombinationFunc(MaxScoreFunctor()), distCutoff(DEF_DISTANCE_CUTOFF), normScores(true)
 {}
 
 Pharm::InteractionScoreGridCalculator::InteractionScoreGridCalculator(const ScoringFunction& scoring_func, const ScoreCombinationFunction& comb_func): 

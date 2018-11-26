@@ -60,7 +60,7 @@ struct PSDCreateImpl::InputScanProgressCallback
 		if (PSDCreateImpl::termSignalCaught())
 			return;
 
-		parent->printProgress(INFO, "Scanning Input File(s)...      ", offset + scale * progress);
+		parent->printProgress("Scanning Input File(s)...      ", offset + scale * progress);
 	}
 
 	PSDCreateImpl* parent;
@@ -78,7 +78,7 @@ struct PSDCreateImpl::MergeDBsProgressCallback
 		if (PSDCreateImpl::termSignalCaught())
 			return false;
 
-		parent->printProgress(INFO, "Merging Temporary Databases... ", offset + scale * progress);
+		parent->printProgress("Merging Temporary Databases... ", offset + scale * progress);
 		return true;
 	}
 
@@ -90,7 +90,6 @@ struct PSDCreateImpl::MergeDBsProgressCallback
 struct PSDCreateImpl::DBCreationWorker
 {
 
-	typedef boost::function1<bool, CDPL::Chem::Molecule&> MoleculeFetchFunction;
 	typedef CDPL::Pharm::ScreeningDBCreator::SharedPointer ScrenningDBCreatorPtr;
 
 	DBCreationWorker(PSDCreateImpl* parent, const ScrenningDBCreatorPtr& db_creator):
@@ -266,7 +265,11 @@ int PSDCreateImpl::process()
 	if (termSignalCaught())
 		return EXIT_FAILURE;
 
-	initProgress();
+	if (progressEnabled()) {
+		initProgress();
+		printMessage(INFO, "Creating Database(s)...", true, true);
+	} else
+		printMessage(INFO, "Creating Database(s)...");
 
 	if (multiThreading)
 		processMultiThreaded();
@@ -365,7 +368,11 @@ void PSDCreateImpl::processMultiThreaded()
 	std::size_t num_proc = main_db_creator->getNumProcessed();
 	std::size_t num_rej = 0;
 
-	initProgress();
+	if (progressEnabled()) {
+		initProgress();
+		printMessage(INFO, "Merging Temporary Databases...", true, true);
+	} else
+		printMessage(INFO, "Merging Temporary Databases...");
 
 	for (std::size_t i = 0; i < numThreads - 1; i++) {
 		if (termSignalCaught())
@@ -421,9 +428,8 @@ bool PSDCreateImpl::haveErrorMessage()
 
 void PSDCreateImpl::printStatistics(std::size_t num_proc, std::size_t num_rej, 
 									std::size_t num_del, std::size_t num_ins,
-									std::size_t proc_time) const
+									std::size_t proc_time)
 {
-	printMessage(INFO, "");
 	printMessage(INFO, "Statistics:");
 	printMessage(INFO, " Processed Molecules: " + boost::lexical_cast<std::string>(num_proc));
 	printMessage(INFO, " Rejected  Molecules: " + boost::lexical_cast<std::string>(num_rej));
@@ -451,40 +457,44 @@ bool PSDCreateImpl::doReadNextMolecule(CDPL::Chem::Molecule& mol)
 	if (!errorMessage.empty())
 		return false;
 
-	try {
-		if (inputReader.getRecordIndex() >= inputReader.getNumRecords()) 
-			return false;
+	while (true) {
+		try {
+			if (inputReader.getRecordIndex() >= inputReader.getNumRecords()) 
+				return false;
 
-		if (!inputReader.read(mol))
-			return false;
+			if (!inputReader.read(mol))
+				return false;
 
-		if (addSourceFileProp) {
-			std::size_t reader_id = inputReader.getReaderIDForRecordIndex(inputReader.getRecordIndex() - 1);
+			if (addSourceFileProp) {
+				std::size_t reader_id = inputReader.getReaderIDForRecordIndex(inputReader.getRecordIndex() - 1);
 
-			if (reader_id != 0) {
-				CDPL::Chem::StringDataBlock::SharedPointer sd_ptr = getStructureData(mol);
+				if (reader_id != 0) {
+					CDPL::Chem::StringDataBlock::SharedPointer sd_ptr = getStructureData(mol);
 
-				sd_ptr->addEntry("<Source File>", boost::filesystem::path(inputFiles[reader_id - 1]).filename().string());
+					sd_ptr->addEntry("<Source File>", boost::filesystem::path(inputFiles[reader_id - 1]).filename().string());
+				}
 			}
+
+			std::string msg;
+
+			if (!multiThreading)
+				msg = "Creating Database...           ";
+			else
+				msg = "Creating Temporary Databases...";
+
+			printProgress(msg, double(inputReader.getRecordIndex()) / inputReader.getNumRecords());
+			return true;
+
+		} catch (const std::exception& e) {
+			printMessage(ERROR, "reading molecule " + boost::lexical_cast<std::string>(inputReader.getRecordIndex() + 1) + '/' +
+						 boost::lexical_cast<std::string>(inputReader.getNumRecords()) + " failed: " + e.what());
+			inputReader.setRecordIndex(inputReader.getRecordIndex() + 1);
+
+		} catch (...) {
+			printMessage(ERROR, "reading molecule " + boost::lexical_cast<std::string>(inputReader.getRecordIndex() + 1) + '/' +
+						 boost::lexical_cast<std::string>(inputReader.getNumRecords()) + " failed");
+			inputReader.setRecordIndex(inputReader.getRecordIndex() + 1);
 		}
-
-		std::string msg;
-
-		if (!multiThreading)
-			msg = "Creating Database...           ";
-		else
-			msg = "Creating Temporary Databases...";
-
-		printProgress(INFO, msg, double(inputReader.getRecordIndex()) / inputReader.getNumRecords());
-		return true;
-
-	} catch (const std::exception& e) {
-		errorMessage = "reading molecule " + boost::lexical_cast<std::string>(inputReader.getRecordIndex() + 1) + '/' +
-			boost::lexical_cast<std::string>(inputReader.getNumRecords()) + " failed: " + e.what();
-
-	} catch (...) {
-		errorMessage = "reading molecule " + boost::lexical_cast<std::string>(inputReader.getRecordIndex() + 1) + '/' +
-			boost::lexical_cast<std::string>(inputReader.getNumRecords()) + " failed";
 	}
 
 	return false;
@@ -507,7 +517,7 @@ void PSDCreateImpl::checkInputFiles() const
 		throw Base::ValueError("output file must not occur in list of input files");
 }
 
-void PSDCreateImpl::printOptionSummary() const
+void PSDCreateImpl::printOptionSummary()
 {
 	printMessage(VERBOSE, "Option Summary:");
 	printMessage(VERBOSE, " Input File(s):            " + inputFiles[0]);
@@ -535,7 +545,11 @@ void PSDCreateImpl::initInputReader()
 
 	std::size_t num_in_files = inputFiles.size();
 
-	initProgress();
+	if (progressEnabled()) {
+		initProgress();
+		printMessage(INFO, "Scanning Input File(s)...", true, true);
+	} else
+		printMessage(INFO, "Scanning Input File(s)...");
 
 	for (std::size_t i = 0; i < num_in_files; i++) {
 		if (termSignalCaught())
@@ -557,8 +571,7 @@ void PSDCreateImpl::initInputReader()
 	if (PSDCreateImpl::termSignalCaught())
 		return;
 
-	printMessage(INFO, "");
-	printMessage(INFO, "-> Found " + boost::lexical_cast<std::string>(inputReader.getNumRecords()) + " input molecules");
+	printMessage(INFO, " - Found " + boost::lexical_cast<std::string>(inputReader.getNumRecords()) + " input molecules");
 	printMessage(INFO, "");
 }
 

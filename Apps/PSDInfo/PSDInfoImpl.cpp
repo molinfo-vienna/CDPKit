@@ -50,11 +50,11 @@ PSDInfoImpl::PSDInfoImpl(): printConfStats(false), printPharmStats(false), print
 {
 	addOption("input,i", "Database(s) to analyze.", 
 			  value<StringList>(&inputDatabases)->multitoken()->required());
-	addOption("conf-stats,n", "Print molecule conformation count statistics (default: false).", 
+	addOption("conf-stats,C", "Print molecule conformation count statistics (default: false).", 
 			  value<bool>(&printConfStats)->implicit_value(true));
-	addOption("pharm-stats,p", "Print pharmacophore feature count statistics (default: false).", 
+	addOption("pharm-stats,P", "Print pharmacophore feature count statistics (default: false).", 
 			  value<bool>(&printPharmStats)->implicit_value(true));
-	addOption("feature-stats,f", "Print feature type statistics (default: false).", 
+	addOption("feature-stats,F", "Print feature type statistics (default: false).", 
 			  value<bool>(&printFeatureStats)->implicit_value(true));
 }
 
@@ -76,6 +76,7 @@ const char* PSDInfoImpl::getProgAboutText() const
 int PSDInfoImpl::process()
 {
 	printMessage(INFO, getProgTitleString());
+	printMessage(INFO, "");
 
 	checkInputFiles();
 	printOptionSummary();
@@ -83,7 +84,7 @@ int PSDInfoImpl::process()
 	return printStatistics();
 }
 
-int PSDInfoImpl::printStatistics() const
+int PSDInfoImpl::printStatistics()
 {
 	for (StringList::const_iterator it = inputDatabases.begin(), end = inputDatabases.end(); it != end; ++it) {
 		if (termSignalCaught())
@@ -98,7 +99,7 @@ int PSDInfoImpl::printStatistics() const
 	return EXIT_SUCCESS;
 }
 
-void PSDInfoImpl::printStatistics(const std::string& db_name) const
+void PSDInfoImpl::printStatistics(const std::string& db_name)
 {
 	using namespace CDPL;
 
@@ -107,7 +108,6 @@ void PSDInfoImpl::printStatistics(const std::string& db_name) const
 	std::size_t num_mols = db_acc.getNumMolecules();
 	std::size_t num_pharms = db_acc.getNumPharmacophores();
 
-	printMessage(INFO, "");
 	printMessage(INFO, "Database '" + db_name + "':");
 	printMessage(INFO, " Num. Molecules:         " + boost::lexical_cast<std::string>(num_mols));
 	printMessage(INFO, " Num. Pharmacophores:    " + boost::lexical_cast<std::string>(num_pharms));
@@ -235,9 +235,8 @@ void PSDInfoImpl::checkInputFiles() const
 		throw Base::IOError("file '" + *it + "' does not exist");
 }
 
-void PSDInfoImpl::printOptionSummary() const
+void PSDInfoImpl::printOptionSummary()
 {
-	printMessage(VERBOSE, "");
 	printMessage(VERBOSE, "Option Summary:");
 	printMessage(VERBOSE, " Input Databases(s):       " + inputDatabases[0]);
 	
@@ -247,4 +246,5 @@ void PSDInfoImpl::printOptionSummary() const
 	printMessage(VERBOSE, std::string(" Conf. Count Statistics:   ") + (printConfStats ? "Yes" : "No"));
 	printMessage(VERBOSE, std::string(" Feature Count Statistics: ") + (printPharmStats ? "Yes" : "No"));
 	printMessage(VERBOSE, std::string(" Feature Type Statistics:  ") + (printFeatureStats ? "Yes" : "No"));
+	printMessage(VERBOSE, "");
 }

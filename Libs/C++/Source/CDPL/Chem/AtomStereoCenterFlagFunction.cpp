@@ -42,9 +42,9 @@ bool Chem::isStereoCenter(const Atom& atom, const MolecularGraph& molgraph, bool
 	if (getAromaticityFlag(atom))
 		return false;
 
-    if (getHybridizationState(atom) != HybridizationState::SP3)
+    if (getHybridizationState(atom) != HybridizationState::SP3) 
 		return false;
-
+	
 	std::size_t num_bonds = getExplicitBondCount(atom, molgraph);
 
     if (num_bonds < 3 || num_bonds > 4)

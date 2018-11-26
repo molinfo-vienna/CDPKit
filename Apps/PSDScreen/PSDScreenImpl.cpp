@@ -85,8 +85,8 @@ struct PSDScreenImpl::ScreeningWorker
 			scr_proc.setMaxNumOmittedFeatures(parent->maxOmittedFtrs);
 			scr_proc.checkXVolumeClashes(parent->checkXVols);
 			scr_proc.seekBestAlignments(parent->bestAlignments);
-			scr_proc.setHitCallbackFunction(boost::bind(&ScreeningWorker::reportHit, this, _1, _2));
-			scr_proc.setProgressCallbackFunction(boost::bind(&ScreeningWorker::reportProgress, this, _1, _2));
+			scr_proc.setHitCallback(boost::bind(&ScreeningWorker::reportHit, this, _1, _2));
+			scr_proc.setProgressCallback(boost::bind(&ScreeningWorker::reportProgress, this, _1, _2));
 
 			for (queryIndex = 0; queryIndex < parent->numQueryPharms; queryIndex++) {
 				if (PSDScreenImpl::termSignalCaught() || parent->haveErrorMessage())
@@ -327,7 +327,12 @@ int PSDScreenImpl::process()
 	initQueryPharmReader();
 	initHitCollector();
 	analyzeInputFiles();
-	initProgress();
+
+	if (progressEnabled()) {
+		initProgress();
+		printMessage(INFO, "Screening Database...", true, true);
+	} else 
+		printMessage(INFO, "Screening Database...");
 
 	if (termSignalCaught())
 		return EXIT_FAILURE;
@@ -466,6 +471,9 @@ bool PSDScreenImpl::printProgress(std::size_t worker_idx, double progress)
 	if (termSignalCaught())
 		return false;
 
+	if (!progressEnabled())
+		return true;
+
 	if (multiThreading) {
 		boost::lock_guard<boost::mutex> lock(mutex);
 
@@ -494,7 +502,7 @@ bool PSDScreenImpl::doPrintProgress(std::size_t worker_idx, double progress)
 		if (prog_prefix.size() < 35)
 			prog_prefix.resize(35, ' ');
 
-		CmdLineBase::printProgress(INFO, prog_prefix, total_prog);
+		CmdLineBase::printProgress(prog_prefix, total_prog);
 		return true;
 
 	} catch (const std::exception& e) {
@@ -531,14 +539,13 @@ bool PSDScreenImpl::haveErrorMessage()
 	return !errorMessage.empty();
 }
 
-void PSDScreenImpl::printStatistics() const
+void PSDScreenImpl::printStatistics()
 {
 	using namespace CDPL;
 	using namespace Pharm;
 
 	std::size_t proc_time = boost::chrono::duration_cast<boost::chrono::duration<std::size_t> >(Clock::now() - startTime).count();
 
-	printMessage(INFO, "");
 	printMessage(INFO, "Statistics:");
 	printMessage(INFO, " Num. Screened Molecules: " + boost::lexical_cast<std::string>(endMolIndex - startMolIndex));
 	printMessage(INFO, " Num. Reported Hits:      " + boost::lexical_cast<std::string>(numHits));
@@ -576,7 +583,7 @@ void PSDScreenImpl::checkInputFiles() const
 		throw Base::IOError("screening database '" + screeningDB + "' does not exist");
 }
 
-void PSDScreenImpl::printOptionSummary() const
+void PSDScreenImpl::printOptionSummary()
 {
 	printMessage(VERBOSE, "Option Summary:");
 	printMessage(VERBOSE, " Pharm. Query File(s):         " + queryPharmFile);
@@ -661,7 +668,6 @@ void PSDScreenImpl::analyzeInputFiles()
 
 	std::size_t num_screened = endMolIndex - startMolIndex;
 
-	printMessage(VERBOSE, "");
 	printMessage(VERBOSE, "-> Screening " + boost::lexical_cast<std::string>(num_screened) + " Molecule" + (num_screened != 1 ? "s" : ""));
 	printMessage(INFO, "");
 }

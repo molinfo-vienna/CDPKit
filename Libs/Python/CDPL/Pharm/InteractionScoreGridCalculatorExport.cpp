@@ -41,7 +41,8 @@ void CDPLPythonPharm::exportInteractionScoreGridCalculator()
     using namespace boost;
 	using namespace CDPL;
 
-	python::class_<Pharm::InteractionScoreGridCalculator, Pharm::InteractionScoreGridCalculator::SharedPointer, boost::noncopyable>("InteractionScoreGridCalculator", python::no_init)
+	python::scope scope = python::class_<Pharm::InteractionScoreGridCalculator, Pharm::InteractionScoreGridCalculator::SharedPointer, 
+										 boost::noncopyable>("InteractionScoreGridCalculator", python::no_init)
 		.def(python::init<>(python::arg("self")))
 		.def(python::init<const Pharm::InteractionScoreGridCalculator::ScoringFunction&>(
 				 (python::arg("self"), python::arg("func"))))
@@ -85,4 +86,11 @@ void CDPLPythonPharm::exportInteractionScoreGridCalculator()
 					  python::make_function(&Pharm::InteractionScoreGridCalculator::getScoreCombinationFunction, python::return_internal_reference<>()),
 					  &Pharm::InteractionScoreGridCalculator::setScoreCombinationFunction);
 
+	python::class_<Pharm::InteractionScoreGridCalculator::MaxScoreFunctor>("MaxScoreFunctor", python::no_init)
+		.def(python::init<>(python::arg("self")))
+		.def("__call__", &Pharm::InteractionScoreGridCalculator::MaxScoreFunctor::operator(), (python::arg("self"), python::arg("scores")));
+
+	python::class_<Pharm::InteractionScoreGridCalculator::ScoreSumFunctor>("ScoreSumFunctor", python::no_init)
+		.def(python::init<>(python::arg("self")))
+		.def("__call__", &Pharm::InteractionScoreGridCalculator::ScoreSumFunctor::operator(), (python::arg("self"), python::arg("scores")));
 }

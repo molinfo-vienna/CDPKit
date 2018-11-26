@@ -78,6 +78,20 @@ namespace CDPL
 			typedef boost::function2<double, const Math::Vector3D&, const Feature&> ScoringFunction;
 			typedef boost::function1<double, const Math::DVector&> ScoreCombinationFunction;
 
+			struct MaxScoreFunctor {
+
+				double operator()(const Math::DVector& scores) const {
+					return normInf(scores);
+				}
+			};
+
+			struct ScoreSumFunctor {
+
+				double operator()(const Math::DVector& scores) const {
+					return sum(scores);
+				}
+			};
+
 			InteractionScoreGridCalculator();
 
 			InteractionScoreGridCalculator(const ScoringFunction& func);

@@ -213,6 +213,17 @@ std::size_t ConfGen::FragmentConformerGenerator::getMaxNumOutputConformers() con
 	return maxNumOutputConfs;
 }
 
+void ConfGen::FragmentConformerGenerator::setProgressCallback(const ProgressCallbackFunction& func)
+{
+	progCallback = func;
+}
+
+const ConfGen::FragmentConformerGenerator::ProgressCallbackFunction& 
+ConfGen::FragmentConformerGenerator::getProgressCallback() const
+{
+	return progCallback;
+}
+
 std::size_t ConfGen::FragmentConformerGenerator::generate(const Chem::MolecularGraph& molgraph, 
 														  const ForceField::MMFF94InteractionData& ia_data,
 														  unsigned int frag_type) 
@@ -262,48 +273,60 @@ void ConfGen::FragmentConformerGenerator::generateSingleConformer()
 
 	if (reuseExistingCoords && extractExistingCoordinates(conf)) {
 		outputConfs.push_back(conf);
+
+		if (progCallback)
+			progCallback();
+
 		return;
 	}
 
 	initRandomConformerGeneration();
 
-	rawCoordsGenerator.setBoxSize(numAtoms * 2);
+	rawCoordsGenerator.setBoxSize(ordHDepleteAtomMask.count() * 2);
 
 	if (!generateRandomConformer(conf, true))
 		return;
 
 	outputConfs.push_back(conf);
+
+	if (progCallback)
+		progCallback();
 }
 
 void ConfGen::FragmentConformerGenerator::generateFlexibleRingConformers()
 {
 	initRandomConformerGeneration();
 
-	rawCoordsGenerator.setBoxSize(numAtoms);//std::sqrt(double(numAtoms)));
+	rawCoordsGenerator.setBoxSize(ordHDepleteAtomMask.count());
 
 	getRingAtomIndices();
 	getAtomSymmetryMappings();
 
 	double e_window = eWindow;
-	std::size_t num_retrials = 0;
+	std::size_t num_trials = 0;
 
 	if (isMacrocyclicRingSystem()) {
 		e_window = calcMacrocyclicRingSystemEnergyWindow();
-		num_retrials = calcMacrocyclicRingSystemConformerTrials();
+		num_trials = calcMacrocyclicRingSystemConformerTrials();
 
 	} else 
-		num_retrials = calcStandardRingSystemConformerTrials();
+		num_trials = calcStandardRingSystemConformerTrials();
 	
-	num_retrials = std::max(minNumRingConfTrials, std::min(maxNumRingConfTrials, num_retrials));
+	num_trials = std::max(minNumRingConfTrials, std::min(maxNumRingConfTrials, num_trials));
 
 	double min_energy = 0.0;
 
-	for (std::size_t i = 0; i < num_retrials; i++) {
-		//std::cerr << '.';
+	for (std::size_t i = 0; i < num_trials; i++) {
+		if (timeoutExceeded()) 
+			break;
+
+		if (progCallback && !progCallback())
+			break;
+
 		ConfData conf;
 
 		if (!generateRandomConformer(conf, false)) 
-			break;
+			continue;
 
 		CoordsDeallocator dealloc_guard(this, conf);
 
@@ -448,11 +471,6 @@ bool ConfGen::FragmentConformerGenerator::extractExistingCoordinates(ConfData& c
 
 bool ConfGen::FragmentConformerGenerator::generateRandomConformer(ConfData& conf, bool best_opt)
 {
-	if (timeoutExceeded()) {
-		//std::cerr << "TIMEOUT" << std::endl;
-		return false;
-	}
-
 	allocCoordinates(conf);
 
 	CoordsDeallocator dealloc_guard(this, conf);
@@ -740,7 +758,7 @@ bool ConfGen::FragmentConformerGenerator::timeoutExceeded() const
 
 	boost::timer::cpu_times times = timer.elapsed();
 
-	if ((times.system + times.user) > (boost::timer::nanosecond_type(timeout) * 1000000))
+	if (times.wall > (boost::timer::nanosecond_type(timeout) * 1000000))
 		return true;
 
 	return false;

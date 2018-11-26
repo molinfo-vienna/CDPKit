@@ -65,6 +65,8 @@ namespace AppUtils
 
 		virtual int process() = 0;
 
+		VerbosityLevel getVerbosityLevel() const;
+
 		void addOption(const char* name, const std::string& descr);
 
 		void addOption(const char* name, const std::string& descr,
@@ -77,12 +79,13 @@ namespace AppUtils
 		template <typename T>
 		const T& getOptionValue(const char* name) const;
 
-		void printMessage(VerbosityLevel level, const std::string& msg, bool nl = true) const;
+		void printMessage(VerbosityLevel level, const std::string& msg, bool nl = true, bool file_only = false);
 
 		std::ostream& logStream() const;
 
+		bool progressEnabled() const;
 		void initProgress(std::size_t prog_bar_len = 40);
-		void printProgress(VerbosityLevel level, const std::string& prefix, double progress);
+		void printProgress(const std::string& prefix, double progress);
 
 		std::string getProgTitleString() const;
 
@@ -137,9 +140,12 @@ namespace AppUtils
 		VerbosityLevel     verbLevel;
 		std::ostream*      logStreamPtr;
 		std::ofstream      logFile;
+		bool               showProgress;
 		std::size_t        progressBarLen;
 		int                lastProgressValue;
 		Clock::time_point  progressStartTime;
+		bool               inProgressLine;
+		bool               inNewLine;
     };
 
 

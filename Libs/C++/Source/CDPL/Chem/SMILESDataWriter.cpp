@@ -324,8 +324,10 @@ void Chem::SMILESDataWriter::writeNonCanonSMILES(std::ostream& os, const Molecul
 			output_molgraph = hDepleteMolGraph.get();
 		} 
 		
-		if (ctrlParameters.writeBondStereo)
+		if (ctrlParameters.writeBondStereo) {
+			perceiveSSSR(*output_molgraph, false);
 			bondDirGenerator->generate(*output_molgraph, bondDirections);
+		}
 
 		if (!first_comp)
 			os << SMILES::COMPONENT_SEPARATOR;
@@ -402,8 +404,10 @@ void Chem::SMILESDataWriter::generateCanonComponentSMILES(const MolecularGraph& 
 		} else 
 			buildCanonMolGraph(comp);
 		
-		if (ctrlParameters.writeBondStereo)
+		if (ctrlParameters.writeBondStereo) {
+			perceiveSSSR(*canonMolGraph, true);
 			bondDirGenerator->generate(*canonMolGraph, bondDirections);
+		}
 
 		freeNodes();
 		freeEdges();

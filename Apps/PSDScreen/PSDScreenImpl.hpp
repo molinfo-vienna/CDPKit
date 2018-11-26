@@ -97,8 +97,8 @@ namespace PSDScreen
 		void setErrorMessage(const std::string& msg);
 		bool haveErrorMessage();
 
-		void printStatistics() const;
-		void printOptionSummary() const;
+		void printStatistics();
+		void printOptionSummary();
 
 		void checkInputFiles() const;
 		void initQueryPharmReader();

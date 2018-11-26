@@ -27,6 +27,7 @@
 #include "StaticInit.hpp"
 
 #include <boost/bind.hpp>
+#include <boost/algorithm/string.hpp>
 
 #include "CDPL/Chem/AtomDictionary.hpp"
 #include "CDPL/Chem/AtomType.hpp"
@@ -783,12 +784,29 @@ const std::string& Chem::AtomDictionary::getName(unsigned int type, std::size_t 
     return dictionary->getEntry(type, iso).getName();
 }
 
-unsigned int Chem::AtomDictionary::getType(const std::string& sym) 
+unsigned int Chem::AtomDictionary::getType(const std::string& sym, bool strict) 
 {
+	if (strict) {
+		for (EntryLookupTable::const_iterator it = dictionary->entries.begin(), end = dictionary->entries.end(); it != end; ++it)
+			if (it->second.getSymbol() == sym)
+				return it->first.first;
 
-	for (EntryLookupTable::const_iterator it = dictionary->entries.begin(), end = dictionary->entries.end(); it != end; ++it)
-		if (it->second.getSymbol() == sym)
+		return AtomType::UNKNOWN;
+	}
+
+	std::string uc_dict_sym;
+	std::string uc_arg_sym = sym;
+
+	boost::to_upper(uc_arg_sym);
+
+	for (EntryLookupTable::const_iterator it = dictionary->entries.begin(), end = dictionary->entries.end(); it != end; ++it) {
+		uc_dict_sym = it->second.getSymbol();
+
+		boost::to_upper(uc_dict_sym);
+
+		if (uc_dict_sym == uc_arg_sym)
 			return it->first.first;
+	}
 
 	return AtomType::UNKNOWN;
 }

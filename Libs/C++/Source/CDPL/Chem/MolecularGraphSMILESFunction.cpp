@@ -54,10 +54,10 @@ bool Chem::generateSMILES(const MolecularGraph& molgraph, std::string& smiles, b
 	setSMILESMolWriteAtomMappingIDParameter(smi_writer, atom_flags & AtomPropertyFlag::ATOM_MAPPING_ID);
 	setSMILESWriteIsotopeParameter(smi_writer, atom_flags & AtomPropertyFlag::ISOTOPE);
 	setSMILESWriteAtomStereoParameter(smi_writer, atom_flags & AtomPropertyFlag::CONFIGURATION);
-	setSMILESWriteBondStereoParameter(smi_writer, atom_flags & BondPropertyFlag::CONFIGURATION);
-	setSMILESWriteRingBondStereoParameter(smi_writer, atom_flags & BondPropertyFlag::CONFIGURATION);
-	setSMILESWriteAromaticBondsParameter(smi_writer, atom_flags & BondPropertyFlag::AROMATICITY);
-	setSMILESWriteKekuleFormParameter(smi_writer, atom_flags & BondPropertyFlag::ORDER);
+	setSMILESWriteBondStereoParameter(smi_writer, bond_flags & BondPropertyFlag::CONFIGURATION);
+	setSMILESWriteRingBondStereoParameter(smi_writer, bond_flags & BondPropertyFlag::CONFIGURATION);
+	setSMILESWriteAromaticBondsParameter(smi_writer, bond_flags & BondPropertyFlag::AROMATICITY);
+	setSMILESWriteKekuleFormParameter(smi_writer, bond_flags & BondPropertyFlag::ORDER);
 
 	bool result = !(!smi_writer.write(molgraph));
 

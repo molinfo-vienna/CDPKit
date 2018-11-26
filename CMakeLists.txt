@@ -230,7 +230,7 @@ IF(NOT Boost_CHRONO_FOUND)
 ENDIF(NOT Boost_CHRONO_FOUND)
 
 IF(NOT Boost_TIMER_FOUND)
-  MESSAGE("!! Warning: Boost timer library not found -> conformer generators won't be built.")
+  MESSAGE("!! Warning: Boost timer library not found -> conformer generation components won't be built.")
 ENDIF(NOT Boost_TIMER_FOUND)
 
 IF(NOT Boost_UNIT_TEST_FRAMEWORK_FOUND)

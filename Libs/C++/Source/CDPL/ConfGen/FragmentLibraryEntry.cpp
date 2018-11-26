@@ -381,10 +381,10 @@ void ConfGen::FragmentLibraryEntry::fixStereoDescriptors(const Chem::MolecularGr
 														   molecule.getAtom(molgraph.getAtomIndex(*ref_atoms[1])),
 														   molecule.getAtom(molgraph.getAtomIndex(*ref_atoms[2])),
 														   molecule.getAtom(molgraph.getAtomIndex(*ref_atoms[3]))));
-			continue;
-		} catch (const Base::ItemNotFound& e) {} 
-		
-		clearStereoDescriptor(atom);
+
+		} catch (const Base::ItemNotFound& e) {
+			clearStereoDescriptor(atom);
+		} 
 	}
 
 	MolecularGraph::ConstBondIterator mg_b_it = molgraph.getBondsBegin();
@@ -404,10 +404,10 @@ void ConfGen::FragmentLibraryEntry::fixStereoDescriptors(const Chem::MolecularGr
 													   molecule.getAtom(molgraph.getAtomIndex(*ref_atoms[1])),
 													   molecule.getAtom(molgraph.getAtomIndex(*ref_atoms[2])),
 													   molecule.getAtom(molgraph.getAtomIndex(*ref_atoms[3]))));
-			continue;
-		} catch (const Base::ItemNotFound& e) {} 
 
-		clearStereoDescriptor(bond);
+		} catch (const Base::ItemNotFound& e) {
+			clearStereoDescriptor(bond);
+		} 
 	}
 }
 

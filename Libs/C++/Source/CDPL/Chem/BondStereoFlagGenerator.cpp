@@ -29,6 +29,7 @@
 #include <cassert>
 #include <functional>
 #include <algorithm>
+#include <utility>
 
 #include <boost/bind.hpp>
 
@@ -46,15 +47,6 @@
 
 using namespace CDPL;
 
-
-namespace
-{
-	
-	unsigned int getAtomType(const Chem::Atom* atom) 
-	{
-		return getType(*atom);
-	}
-}
 
 Chem::BondStereoFlagGenerator::BondStereoFlagGenerator(): coordsFunc(&get2DCoordinates) {}
 
@@ -549,89 +541,37 @@ void Chem::BondStereoFlagGenerator::StereoAtomInfo::findBestBondOrder(const Util
 {
 	hasStereoNbrs = false;
 
-	std::size_t num_no_sto_chn_bnds = 0;
-	Ligand no_sto_chn_bnds[4];
+	typedef std::pair<std::size_t, unsigned int> LigandTypeDescr;
 
-	std::size_t num_no_sto_rng_bnds = 0;
-	Ligand no_sto_rng_bnds[4];
-
-	std::size_t num_sto_chn_bnds = 0;
-	Ligand sto_chn_bnds[4];
-
-	std::size_t num_sto_rng_bnds = 0;
-	Ligand sto_rng_bnds[4];
+	LigandTypeDescr ordered_ligs[4];
 
 	for (std::size_t i = 0; i < numBonds; i++) {
 		const Atom* nbr_atom = ligands[i].first;
 		std::size_t bond_idx = ligands[i].second;
 
-		if (ring_bnd_mask.test(bond_idx)) {
-			if (stereo_ctr_mask.test(molGraph->getAtomIndex(*nbr_atom))) {
-				hasStereoNbrs = true;
-				sto_rng_bnds[num_sto_rng_bnds++] = ligands[i];
+		ordered_ligs[i].first = i;
+		ordered_ligs[i].second = 0;
 
-			} else
-				no_sto_rng_bnds[num_no_sto_rng_bnds++] = ligands[i];
-
-		} else {
-			if (stereo_ctr_mask.test(molGraph->getAtomIndex(*nbr_atom))) {
-				hasStereoNbrs = true;
-				sto_chn_bnds[num_sto_chn_bnds++] = ligands[i];
-
-			} else
-				no_sto_chn_bnds[num_no_sto_chn_bnds++] = ligands[i];
+		if (stereo_ctr_mask.test(molGraph->getAtomIndex(*nbr_atom))) {
+			hasStereoNbrs = true;
+			ordered_ligs[i].second |= 16;
 		}
+
+		if (ring_bnd_mask.test(bond_idx))
+			ordered_ligs[i].second |= 8;
+
+		if (getType(*nbr_atom) == AtomType::H || isUnsaturated(*nbr_atom, *molGraph))
+			ordered_ligs[i].second |= 4;
+
+		if (getHeavyBondCount(*nbr_atom, *molGraph) > 1)
+			ordered_ligs[i].second |= 2;
 	}
 
-	assert(numBonds == num_no_sto_chn_bnds + num_no_sto_rng_bnds + num_sto_chn_bnds + num_sto_rng_bnds);
+	std::sort(ordered_ligs, ordered_ligs + numBonds, 
+			  boost::bind(std::less<unsigned int>(), boost::bind(&LigandTypeDescr::second, _1), boost::bind(&LigandTypeDescr::second, _2)));
 
-	if (num_no_sto_chn_bnds > 1) {
-		Ligand* carbons_beg = std::partition(no_sto_chn_bnds, no_sto_chn_bnds + num_no_sto_chn_bnds,
-											 boost::bind(std::not_equal_to<unsigned int>(), 
-														 boost::bind(&getAtomType,
-																	 boost::bind(&Ligand::first, _1)),
-														 AtomType::C));
-		std::partition(no_sto_chn_bnds, carbons_beg,
-					   boost::bind(std::equal_to<unsigned int>(), 
-								   boost::bind(&getAtomType,
-											   boost::bind(&Ligand::first, _1)),
-								   AtomType::H));
-	}
-
-	if (num_no_sto_rng_bnds > 1)
-		std::partition(no_sto_rng_bnds, no_sto_rng_bnds + num_no_sto_rng_bnds,
-					   boost::bind(std::not_equal_to<unsigned int>(), 
-								   boost::bind(&getAtomType,
-											   boost::bind(&Ligand::first, _1)),
-								   AtomType::C));
-
-	if (num_sto_chn_bnds > 1)
-		std::partition(sto_chn_bnds, sto_chn_bnds + num_sto_chn_bnds,
-					   boost::bind(std::not_equal_to<unsigned int>(), 
-								   boost::bind(&getAtomType,
-											   boost::bind(&Ligand::first, _1)),
-								   AtomType::C));
-
-	if (num_sto_rng_bnds > 1)
-		std::partition(sto_rng_bnds, sto_rng_bnds + num_sto_rng_bnds,
-					   boost::bind(std::not_equal_to<unsigned int>(), 
-								   boost::bind(&getAtomType,
-											   boost::bind(&Ligand::first, _1)),
-								   AtomType::C));
-
-	std::size_t ligand_idx = 0;
-
-	for (std::size_t i = 0; i < num_no_sto_chn_bnds; i++)
-		orderedLigands[ligand_idx++] = no_sto_chn_bnds[i];
-
-	for (std::size_t i = 0; i < num_no_sto_rng_bnds; i++)
-		orderedLigands[ligand_idx++] = no_sto_rng_bnds[i];
-
-	for (std::size_t i = 0; i < num_sto_chn_bnds; i++)
-		orderedLigands[ligand_idx++] = sto_chn_bnds[i];
-
-	for (std::size_t i = 0; i < num_sto_rng_bnds; i++)
-		orderedLigands[ligand_idx++] = sto_rng_bnds[i];
+	for (std::size_t i = 0; i < numBonds; i++)
+		orderedLigands[i] = ligands[ordered_ligs[i].first];
 }
 
 bool Chem::BondStereoFlagGenerator::StereoAtomInfo::hasStereoAtomNbrs() const

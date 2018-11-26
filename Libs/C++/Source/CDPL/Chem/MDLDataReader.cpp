@@ -541,7 +541,10 @@ void Chem::MDLDataReader::readCTabV2000(std::istream& is, Molecule& mol)
 	stereoAtoms.clear();
 
 	readCTabV2000AtomBlock(is, mol);
-	readCTabV2000BondBlock(is, mol, atom_index_offs);
+
+	if (readCTabV2000BondBlock(is, mol, atom_index_offs))
+		kekulizeUndefBonds(mol);
+
 	readCTabV2000AListBlock(is, mol, atom_index_offs);
 	readCTabV2000STextBlock(is);
 	readCTabV2000PropertyBlock(is, mol, atom_index_offs);
@@ -570,12 +573,16 @@ void Chem::MDLDataReader::readCTabV2000AtomBlock(std::istream& is, Molecule& mol
 		readCTabV2000Atom(is, mol);
 }
 
-void Chem::MDLDataReader::readCTabV2000BondBlock(std::istream& is, Molecule& mol, std::size_t atom_index_offs) const
+bool Chem::MDLDataReader::readCTabV2000BondBlock(std::istream& is, Molecule& mol, std::size_t atom_index_offs) const
 {
 	mol.reserveMemoryForBonds(mol.getNumBonds() + bondCount);
 
+	bool kekulize = false;
+
 	for (std::size_t i = 0; i < bondCount; i++)
-		readCTabV2000Bond(is, mol, atom_index_offs);
+		kekulize |= readCTabV2000Bond(is, mol, atom_index_offs);
+
+	return kekulize;
 }
 
 void Chem::MDLDataReader::readCTabV2000AListBlock(std::istream& is, Molecule& mol, std::size_t atom_index_offs)
@@ -971,7 +978,7 @@ void Chem::MDLDataReader::readCTabV2000AtomRxnInfo(std::istream& is, Atom& atom)
 	setReactionCenterStatus(atom, rxn_center_status);
 }
 
-void Chem::MDLDataReader::readCTabV2000Bond(std::istream& is, Molecule& mol, std::size_t atom_index_offs) const
+bool Chem::MDLDataReader::readCTabV2000Bond(std::istream& is, Molecule& mol, std::size_t atom_index_offs) const
 {
 	Bond& bond = createCTabV2000Bond(is, mol, atom_index_offs);
 
@@ -999,6 +1006,8 @@ void Chem::MDLDataReader::readCTabV2000Bond(std::istream& is, Molecule& mol, std
 	readCTabV2000BondRxnCenterStatus(is, bond);
 
 	skipMDLLines(is, 1, "MDLDataReader: error while reading bond block");	
+
+	return (order == 0);
 }
 
 Chem::Bond& Chem::MDLDataReader::createCTabV2000Bond(std::istream& is, Molecule& mol, std::size_t atom_index_offs) const
@@ -1021,11 +1030,12 @@ std::size_t Chem::MDLDataReader::readCTabV2000BondType(std::istream& is, Bond& b
 {
 	using namespace MDL::MOLFile::CTab::V2000;
 
-	std::size_t order = 1;
+	std::size_t order = 0;
 
 	switch (readMDLNumber<unsigned int, 3>(is, "MDLDataReader: error while reading bond type specification")) {
 
 		case BondBlock::TYPE_SINGLE:
+			order = 1;
 			break;
 
 		case BondBlock::TYPE_DOUBLE:
@@ -1065,7 +1075,8 @@ std::size_t Chem::MDLDataReader::readCTabV2000BondType(std::istream& is, Bond& b
 			throw Base::IOError("MDLDataReader: invalid bond type specification");
 	}
 
-	setOrder(bond, order);
+	if (order != 0)
+		setOrder(bond, order);
 
 	return order;
 }
@@ -2369,7 +2380,9 @@ void Chem::MDLDataReader::readCTabV3000(std::istream& is, Molecule& mol)
 
 	readCTabV3000CountsLine(is, mol);
 	readCTabV3000AtomBlock(is, mol);
-	readCTabV3000BondBlock(is, mol);
+	
+	if (readCTabV3000BondBlock(is, mol))
+		kekulizeUndefBonds(mol);
 
 	readPastCTabV3000BlockEnd(is);
 
@@ -2476,16 +2489,20 @@ void Chem::MDLDataReader::fixCTabV3000AtomCoordsDim(Molecule& mol, std::size_t o
 	setMDLDimensionality(mol, 2); 
 }
 
-void Chem::MDLDataReader::readCTabV3000BondBlock(std::istream& is, Molecule& mol)
+bool Chem::MDLDataReader::readCTabV3000BondBlock(std::istream& is, Molecule& mol)
 {
 	using namespace MDL::MOLFile::CTab::V3000;
 
 	readV3000BlockBegin(is, BondBlock::BLOCK_TYPE_KEY);
 
+	bool kekulize = false;
+
 	for (std::size_t i = 0; i < bondCount; i++)
-		readCTabV3000Bond(is, mol);
+		kekulize |= readCTabV3000Bond(is, mol);
 
 	readV3000BlockEnd(is, BondBlock::BLOCK_TYPE_KEY);
+
+	return kekulize;
 }
 
 void Chem::MDLDataReader::readPastCTabV3000BlockEnd(std::istream& is)
@@ -3074,7 +3091,7 @@ void Chem::MDLDataReader::readCTabV3000AtomQueryRingBondCount(std::istream& is, 
 	}
 }
 
-void Chem::MDLDataReader::readCTabV3000Bond(std::istream& is, Molecule& mol)
+bool Chem::MDLDataReader::readCTabV3000Bond(std::istream& is, Molecule& mol)
 {
 	using namespace MDL::MOLFile::CTab::V3000;
 
@@ -3120,6 +3137,8 @@ void Chem::MDLDataReader::readCTabV3000Bond(std::istream& is, Molecule& mol)
 
 	if (constr_list_ptr->getSize() != 0)
 		setMatchConstraints(bond, constr_list_ptr); 
+
+	return (order == 0);
 }
 
 void Chem::MDLDataReader::readCTabV3000BondIndex(std::istream& is) const
@@ -3178,11 +3197,12 @@ std::size_t Chem::MDLDataReader::setCTabV3000BondType(unsigned int bond_type, Bo
 {
 	using namespace MDL::MOLFile::CTab::V3000;
 
-	std::size_t order = 1;
+	std::size_t order = 0;
 
 	switch (bond_type) {
 
 		case BondBlock::TYPE_SINGLE:
+			order = 1;
 			break;
 
 		case BondBlock::TYPE_DOUBLE:
@@ -3222,7 +3242,8 @@ std::size_t Chem::MDLDataReader::setCTabV3000BondType(unsigned int bond_type, Bo
 			throw Base::IOError("MDLDataReader: invalid ctab V3000 bond type specification");
 	}
 
-	setOrder(bond, order);
+	if (order != 0)
+		setOrder(bond, order);
 
 	return order;
 }
@@ -3643,6 +3664,13 @@ void Chem::MDLDataReader::convertParities(Molecule& mol) const
 
 	for (StereoAtomList::const_iterator it = stereoAtoms.begin(); it != end; ++it) {
 		Atom& atom = **it;
-		setStereoDescriptor(atom, calcStereoDescriptorFromMDLParity(atom, mol));
+
+		if (getMDLParity(atom) != MDLParity::NONE)
+			setStereoDescriptor(atom, calcStereoDescriptorFromMDLParity(atom, mol));
 	}
+}
+
+void Chem::MDLDataReader::kekulizeUndefBonds(Molecule& mol) const
+{
+	kekulizeBonds(mol);
 }

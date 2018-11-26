@@ -1,7 +1,7 @@
 /* -*- mode: c++; c-basic-offset: 4; tab-width: 4; indent-tabs-mode: t -*- */
 
 /* 
- * PSDCreateImpl.hpp
+ * GenFragLibImpl.hpp
  *
  * This file is part of the Chemical Data Processing Toolkit
  *
@@ -24,8 +24,8 @@
  */
 
 
-#ifndef PSDCREATE_PSDCREATEIMPL_HPP
-#define PSDCREATE_PSDCREATEIMPL_HPP
+#ifndef GENFRAGLIB_GENFRAGLIBIMPL_HPP
+#define GENFRAGLIB_GENFRAGLIBIMPL_HPP
 
 #include <cstddef>
 #include <vector>
@@ -34,7 +34,7 @@
 #include <boost/thread.hpp>
 #include <boost/chrono/chrono.hpp>
 
-#include "CDPL/Pharm/ScreeningDBCreator.hpp"
+#include "CDPL/ConfGen/FragmentLibrary.hpp"
 #include "CDPL/Util/CompoundDataReader.hpp"
 #include "CDPL/Base/DataInputHandler.hpp"
 
@@ -52,16 +52,23 @@ namespace CDPL
 }
 
 
-namespace PSDCreate
+namespace GenFragLib
 {
 
-    class PSDCreateImpl : public AppUtils::CmdLineBase
+    class GenFragLibImpl : public AppUtils::CmdLineBase
     {
 
     public:
-		PSDCreateImpl();
+		GenFragLibImpl();
 
     private:
+		enum Mode 
+		{
+
+		  CREATE,
+		  UPDATE
+		};
+
 		typedef CDPL::Base::DataInputHandler<CDPL::Chem::Molecule> InputHandler;
 		typedef InputHandler::SharedPointer InputHandlerPtr;
 
@@ -69,15 +76,21 @@ namespace PSDCreate
 		const char* getProgCopyright() const;
 		const char* getProgAboutText() const;
 
-		void setCreationMode(const std::string& mode);
+		void setRMSD(double rmsd);
+		void setEnergyWindow(double ewin);
+		void setConfGenTrialFactor(std::size_t factor);
+		void setForceFieldType(const std::string& type_str);
+		void setMode(const std::string& mode_str);
 		void setInputFormat(const std::string& file_ext);
 		void setMaxNumThreads(unsigned int num_threads);
-		void setTmpFileDirectory(const std::string& dir_path);
 
 		int process();
 
 		void processSingleThreaded();
 		void processMultiThreaded();
+
+		void loadFragmentLibrary();
+		int saveFragmentLibrary();
 
 		bool readNextMolecule(CDPL::Chem::Molecule& mol);
 		bool doReadNextMolecule(CDPL::Chem::Molecule& mol);
@@ -85,43 +98,50 @@ namespace PSDCreate
 		void setErrorMessage(const std::string& msg);
 		bool haveErrorMessage();
 
-		void printStatistics(std::size_t num_proc, std::size_t num_rej, 
-							 std::size_t num_del, std::size_t num_ins,
+		void printMessage(VerbosityLevel level, const std::string& msg, bool nl = true, bool file_only = false);
+
+		void printStatistics(std::size_t num_proc_mols, std::size_t num_proc_frags, 
+							 std::size_t num_added_frags, std::size_t num_gen_confs,
 							 std::size_t proc_time);
 
 		void checkInputFiles() const;
 		void printOptionSummary();
 		void initInputReader();
 
-		std::string getCreationModeString() const;
+		std::string getModeString() const;
+		std::string getForceFieldTypeString() const;
 
 		InputHandlerPtr getInputHandler(const std::string& file_path) const;
 
 		void addOptionLongDescriptions();
 
-		struct InputScanProgressCallback;
-		struct MergeDBsProgressCallback;
-		struct DBCreationWorker;
+		class InputScanProgressCallback;
+		class FragLibGenerationWorker;
 
 		typedef std::vector<std::string> StringList;
-		typedef CDPL::Pharm::ScreeningDBCreator::Mode CreationMode;
 		typedef CDPL::Base::DataReader<CDPL::Chem::Molecule> MoleculeReader;
 		typedef CDPL::Util::CompoundDataReader<CDPL::Chem::Molecule> CompMoleculeReader;
 		typedef boost::chrono::system_clock Clock;
+		typedef CDPL::ConfGen::FragmentLibrary FragmentLibrary;
 
-		StringList             inputFiles;
-		std::string            outputDatabase;
-		bool                   dropDuplicates;
-		bool                   multiThreading;
-		std::size_t            numThreads;
-		CreationMode           creationMode;
-		InputHandlerPtr        inputHandler;
-		CompMoleculeReader     inputReader;   
-		boost::mutex           mutex;
-		std::string            errorMessage;
-		bool                   addSourceFileProp;
-		Clock::time_point      startTime;
+		StringList                     inputFiles;
+		std::string                    outputFile;
+		bool                           multiThreading;
+		std::size_t                    numThreads;
+		Mode                           mode;
+		double                         minRMSD;
+		std::size_t                    timeout;
+		double                         eWindow;
+		std::size_t                    confGenTrialFactor;
+		unsigned int                   forceFieldType;
+		bool                           useInputCoords;
+		InputHandlerPtr                inputHandler;
+		CompMoleculeReader             inputReader;
+		FragmentLibrary::SharedPointer fragmentLibPtr;
+		boost::mutex                   mutex;
+		std::string                    errorMessage;
+		Clock::time_point              startTime;
     };
 }
 
-#endif // PSDCREATE_PSDCREATEIMPL_HPP
+#endif // GENFRAGLIB_GENFRAGLIBIMPL_HPP

@@ -26,6 +26,10 @@
 
 #include "StaticInit.hpp"
 
+#include <string>
+
+#include <boost/lexical_cast.hpp>
+
 #include "CDPL/ConfGen/FragmentLibraryGenerator.hpp"
 #include "CDPL/ConfGen/UtilityFunctions.hpp"
 #include "CDPL/Chem/AtomContainerFunctions.hpp"
@@ -42,14 +46,14 @@ const unsigned int ConfGen::FragmentLibraryGenerator::DEF_FORCE_FIELD_TYPE;
 ConfGen::FragmentLibraryGenerator::FragmentLibraryGenerator(): 
 	fragLib(), fragSSSR(new Chem::SmallestSetOfSmallestRings())
 {
-	performStrictAtomTyping(false);
+	performStrictAtomTyping(true);
 	setForceFieldType(DEF_FORCE_FIELD_TYPE);
 }
 
 ConfGen::FragmentLibraryGenerator::FragmentLibraryGenerator(const FragmentLibrary::SharedPointer& lib): 
 	fragLib(lib), fragSSSR(new Chem::SmallestSetOfSmallestRings())
 {
-	performStrictAtomTyping(false);
+	performStrictAtomTyping(true);
 	setForceFieldType(DEF_FORCE_FIELD_TYPE);
 }
 
@@ -230,6 +234,17 @@ ConfGen::FragmentLibraryGenerator::getProcessingErrorCallback()
 	return errorCallback;
 }
 
+void ConfGen::FragmentLibraryGenerator::setProgressCallback(const ProgressCallbackFunction& func)
+{
+	fragConfGen.setProgressCallback(func);
+}
+
+const ConfGen::FragmentLibraryGenerator::ProgressCallbackFunction& 
+ConfGen::FragmentLibraryGenerator::getProgressCallback() const
+{
+	return fragConfGen.getProgressCallback();
+}
+
 void ConfGen::FragmentLibraryGenerator::process(const Chem::MolecularGraph& molgraph)
 {
 	if (!fragLib)
@@ -287,6 +302,8 @@ void ConfGen::FragmentLibraryGenerator::processFragment(const Chem::MolecularGra
 			replaceBondStereoReferenceAtoms(*fl_entry, fragLibEntry, 0, 0);
 
 			fl_entry->clearProperties();
+
+			setName(*fl_entry, boost::lexical_cast<std::string>(fragLibEntry.getHashCode()));
 		}
 
 		if (resultCallback)
@@ -296,7 +313,7 @@ void ConfGen::FragmentLibraryGenerator::processFragment(const Chem::MolecularGra
 		removeNewLibraryEntry();
 
 		if (errorCallback && 
-			errorCallback(*fl_entry, std::string("FragmentLibraryGenerator: could not generate conformers: ") + e.what()))
+			errorCallback(fragLibEntry, std::string("FragmentLibraryGenerator: could not generate conformers: ") + e.what()))
 			return;
 
 		throw e;
@@ -336,7 +353,7 @@ Chem::Molecule::SharedPointer ConfGen::FragmentLibraryGenerator::addNewLibraryEn
 
 	} catch (const std::exception& e) {
 		if (errorCallback && 
-			errorCallback(frag, std::string("FragmentLibraryGenerator: could not process canonical library fragment: ") + e.what()))
+			errorCallback(fragLibEntry, std::string("FragmentLibraryGenerator: could not process canonical library fragment: ") + e.what()))
 			return Molecule::SharedPointer();
 
 		throw e;

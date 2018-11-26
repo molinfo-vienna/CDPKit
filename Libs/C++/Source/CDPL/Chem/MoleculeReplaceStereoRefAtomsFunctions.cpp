@@ -79,7 +79,7 @@ void Chem::replaceBondStereoReferenceAtoms(Molecule& mol_copy, const MolecularGr
 	Molecule::BondIterator bonds_end = mol_copy.getBondsEnd();
 	std::size_t i = 0;
 
-	for (Molecule::BondIterator b_it = mol_copy.getBondsBegin() + bond_start_idx; b_it != bonds_end; ++b_it) {
+	for (Molecule::BondIterator b_it = mol_copy.getBondsBegin() + bond_start_idx; b_it != bonds_end; ++b_it, i++) {
 		Bond& bond = *b_it;
 		const StereoDescriptor& stereo_desc = getStereoDescriptor(bond);
 

@@ -120,13 +120,13 @@ void CDPLPythonPharm::exportScreeningProcessor()
 			 (python::arg("self"), python::arg("seek_best")))
 		.def("bestAlignmentsSeeked", &Pharm::ScreeningProcessor::bestAlignmentsSeeked, 
 			 python::arg("self"))
-		.def("setHitCallbackFunction", &Pharm::ScreeningProcessor::setHitCallbackFunction, 
+		.def("setHitCallback", &Pharm::ScreeningProcessor::setHitCallback, 
 			 (python::arg("self"), python::arg("func")))
-		.def("getHitCallbackFunction", &Pharm::ScreeningProcessor::getHitCallbackFunction, 
+		.def("getHitCallback", &Pharm::ScreeningProcessor::getHitCallback, 
 			 python::arg("self"), python::return_internal_reference<>())
-		.def("setProgressCallbackFunction", &Pharm::ScreeningProcessor::setProgressCallbackFunction, 
+		.def("setProgressCallback", &Pharm::ScreeningProcessor::setProgressCallback, 
 			 (python::arg("self"), python::arg("func")))
-		.def("getProgressCallbackFunction", &Pharm::ScreeningProcessor::getProgressCallbackFunction, 
+		.def("getProgressCallback", &Pharm::ScreeningProcessor::getProgressCallback, 
 			 python::arg("self"), python::return_internal_reference<>())
 		.def("setScoringFunction", &Pharm::ScreeningProcessor::setScoringFunction, 
 			 (python::arg("self"), python::arg("func")))
@@ -138,12 +138,12 @@ void CDPLPythonPharm::exportScreeningProcessor()
 														   python::return_internal_reference<>()),
 					  python::make_function(&Pharm::ScreeningProcessor::setDBAccessor, 
 											python::with_custodian_and_ward<1, 2>()))
-		.add_property("hitCallbackFunction", python::make_function(&Pharm::ScreeningProcessor::getHitCallbackFunction,
+		.add_property("hitCallback", python::make_function(&Pharm::ScreeningProcessor::getHitCallback,
 																   python::return_internal_reference<>()),
-					  &Pharm::ScreeningProcessor::setHitCallbackFunction)
-		.add_property("progressCallbackFunction", python::make_function(&Pharm::ScreeningProcessor::getProgressCallbackFunction,
+					  &Pharm::ScreeningProcessor::setHitCallback)
+		.add_property("progressCallback", python::make_function(&Pharm::ScreeningProcessor::getProgressCallback,
 																		python::return_internal_reference<>()),
-					  &Pharm::ScreeningProcessor::setProgressCallbackFunction)
+					  &Pharm::ScreeningProcessor::setProgressCallback)
 		.add_property("scoringFunction", python::make_function(&Pharm::ScreeningProcessor::getScoringFunction,
 															   python::return_internal_reference<>()),
 					  &Pharm::ScreeningProcessor::setScoringFunction)

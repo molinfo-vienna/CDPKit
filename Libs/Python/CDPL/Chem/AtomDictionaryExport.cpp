@@ -142,7 +142,7 @@ void CDPLPythonChem::exportAtomDictionary()
 		.def("getName", &Chem::AtomDictionary::getName, (python::arg("type"), python::arg("isotope") = 0),
 			 python::return_value_policy<python::copy_const_reference>())
 		.staticmethod("getName")
-		.def("getType", &Chem::AtomDictionary::getType, python::arg("symbol"))
+		.def("getType", &Chem::AtomDictionary::getType, (python::arg("symbol"), python::arg("strict") = false))
 		.staticmethod("getType")
 		.def("getMostAbundantIsotope", &Chem::AtomDictionary::getMostAbundantIsotope, python::arg("type"))
 		.staticmethod("getMostAbundantIsotope")

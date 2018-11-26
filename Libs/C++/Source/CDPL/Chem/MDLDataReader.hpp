@@ -92,7 +92,7 @@ namespace CDPL
 			void skipCTabV2000(std::istream&);
 
 			void readCTabV2000AtomBlock(std::istream&, Molecule&);
-			void readCTabV2000BondBlock(std::istream&, Molecule&, std::size_t) const;
+			bool readCTabV2000BondBlock(std::istream&, Molecule&, std::size_t) const;
 			void readCTabV2000AListBlock(std::istream&, Molecule&, std::size_t);
 			void readCTabV2000STextBlock(std::istream&) const;
 
@@ -110,7 +110,7 @@ namespace CDPL
 			void readCTabV2000AtomValence(std::istream&, Atom&) const;
 			void readCTabV2000AtomRxnInfo(std::istream&, Atom&) const;
 
-			void readCTabV2000Bond(std::istream&, Molecule&, std::size_t) const;
+			bool readCTabV2000Bond(std::istream&, Molecule&, std::size_t) const;
 			Bond& createCTabV2000Bond(std::istream&, Molecule&, std::size_t) const;
 			std::size_t readCTabV2000BondType(std::istream&, Bond&, MatchConstraintList&) const;
 			void readCTabV2000BondStereo(std::istream&, Bond&) const;
@@ -158,7 +158,7 @@ namespace CDPL
 			void readCTabV3000(std::istream&, Molecule&);
 			void readCTabV3000CountsLine(std::istream&, Molecule&);
 			void readCTabV3000AtomBlock(std::istream&, Molecule&);
-			void readCTabV3000BondBlock(std::istream&, Molecule&);
+			bool readCTabV3000BondBlock(std::istream&, Molecule&);
 			void fixCTabV3000AtomCoordsDim(Molecule&, std::size_t) const;
 			void readPastCTabV3000BlockEnd(std::istream&);
 
@@ -181,7 +181,7 @@ namespace CDPL
 			void readCTabV3000AtomQueryUnsaturationFlag(std::istream&, MatchConstraintList&) const;
 			void readCTabV3000AtomQueryRingBondCount(std::istream&, Atom&, MatchConstraintList&) const;
 
-			void readCTabV3000Bond(std::istream&, Molecule&);
+			bool readCTabV3000Bond(std::istream&, Molecule&);
 			void readCTabV3000BondIndex(std::istream&) const;
 			unsigned int readCTabV3000BondType(std::istream&) const;
 			Bond& createCTabV3000Bond(std::istream&, Molecule&) const; 
@@ -210,6 +210,7 @@ namespace CDPL
 			void skipV3000Data(std::istream&);
 
 			void addAtomQueryHCountConstraints() const;
+			void kekulizeUndefBonds(Molecule&) const;
 			void convertParities(Molecule&) const;
 
 			typedef std::map<std::size_t, std::size_t> AtomIndexMap;

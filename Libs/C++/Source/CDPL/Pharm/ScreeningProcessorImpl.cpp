@@ -132,22 +132,22 @@ bool Pharm::ScreeningProcessorImpl::bestAlignmentsSeeked() const
 	return bestAlignments;
 }
 
-void Pharm::ScreeningProcessorImpl::setHitCallbackFunction(const HitCallbackFunction& func)
+void Pharm::ScreeningProcessorImpl::setHitCallback(const HitCallbackFunction& func)
 {
 	hitCallback = func;
 }
 
-const Pharm::ScreeningProcessor::HitCallbackFunction& Pharm::ScreeningProcessorImpl::getHitCallbackFunction() const
+const Pharm::ScreeningProcessor::HitCallbackFunction& Pharm::ScreeningProcessorImpl::getHitCallback() const
 {
 	return hitCallback;
 }
 
-void Pharm::ScreeningProcessorImpl::setProgressCallbackFunction(const ProgressCallbackFunction& func)
+void Pharm::ScreeningProcessorImpl::setProgressCallback(const ProgressCallbackFunction& func)
 {
 	progressCallback = func;
 }
 
-const Pharm::ScreeningProcessor::ProgressCallbackFunction& Pharm::ScreeningProcessorImpl::getProgressCallbackFunction() const
+const Pharm::ScreeningProcessor::ProgressCallbackFunction& Pharm::ScreeningProcessorImpl::getProgressCallback() const
 {
 	return progressCallback;
 }

@@ -58,11 +58,11 @@ namespace PSDMerge
 		int mergeDatabases();
 	
 		void checkInputFiles() const;
-		void printOptionSummary() const;
+		void printOptionSummary();
 		
 		void printStatistics(std::size_t num_proc, std::size_t num_rej, 
 							 std::size_t num_del, std::size_t num_ins,
-							 std::size_t proc_time) const;
+							 std::size_t proc_time);
 
 		std::string getModeString() const;
 

@@ -33,15 +33,20 @@
 #include <QPainter>
 
 #include "CDPL/Base/DataFormat.hpp"
-
 #include "CDPL/Chem/Reaction.hpp"
 #include "CDPL/Chem/Molecule.hpp"
+#include "CDPL/Chem/Atom.hpp"
+#include "CDPL/Chem/Bond.hpp"
 #include "CDPL/Chem/ReactionFunctions.hpp"
 #include "CDPL/Chem/MolecularGraphFunctions.hpp"
 #include "CDPL/Chem/AtomContainerFunctions.hpp"
+#include "CDPL/Chem/AtomFunctions.hpp"
+#include "CDPL/Chem/BondFunctions.hpp"
+#include "CDPL/Chem/StereoDescriptor.hpp"
 #include "CDPL/Chem/ControlParameterFunctions.hpp"
 #include "CDPL/Chem/DataFormat.hpp"
-
+#include "CDPL/Chem/AtomConfiguration.hpp"
+#include "CDPL/Chem/BondConfiguration.hpp"
 #include "CDPL/Vis/Alignment.hpp"
 
 #include "Utilities.hpp"
@@ -111,15 +116,26 @@ void ChOx::initData(CDPL::Chem::Molecule& mol)
 
 	calcImplicitHydrogenCounts(mol, false);
 	perceiveHybridizationStates(mol, false);
-
 	setAromaticityFlags(mol, false);
-
-	calcAtomStereoDescriptors(mol, false);
-	calcBondStereoDescriptors(mol, false);
 	calcCIPPriorities(mol, false);
-	calcAtomCIPConfigurations(mol, false);
-	calcBondCIPConfigurations(mol, false);
+
 	perceiveAtomStereoCenters(mol, false);
+	perceiveBondStereoCenters(mol, false);
+
+	for (Molecule::AtomIterator it = mol.getAtomsBegin(), end = mol.getAtomsEnd(); it != end; ++it) {
+		Atom& atom = *it;
+
+		if (getStereoCenterFlag(atom) && (!hasStereoDescriptor(atom) || getStereoDescriptor(atom).getConfiguration() == AtomConfiguration::UNDEF)) 
+			setStereoDescriptor(atom, calcStereoDescriptor(atom, mol, 1));
+	}
+
+	for (Molecule::BondIterator it = mol.getBondsBegin(), end = mol.getBondsEnd(); it != end; ++it) {
+		Bond& bond = *it;
+
+		if (getStereoCenterFlag(bond) && (!hasStereoDescriptor(bond) || getStereoDescriptor(bond).getConfiguration() == AtomConfiguration::UNDEF))
+			setStereoDescriptor(bond, calcStereoDescriptor(bond, mol, 1));
+	}
+
 	setAtomSymbolsFromTypes(mol, false);
 
 	buildMatchExpressionStrings(mol, false);

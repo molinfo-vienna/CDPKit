@@ -46,6 +46,10 @@ void CDPLPythonConfGen::exportFragmentConformerGenerator()
 		.def(CDPLPythonBase::ObjectIdentityCheckVisitor<ConfGen::FragmentConformerGenerator>())
 //		.def("assign", CDPLPythonBase::copyAssOp(&ConfGen::FragmentConformerGenerator::operator=), 
 //			 (python::arg("self"), python::arg("gen")), python::return_self<>())
+		.def("setProgressCallback", &ConfGen::FragmentConformerGenerator::setProgressCallback, 
+			 (python::arg("self"), python::arg("func")))
+		.def("getProgressCallback", &ConfGen::FragmentConformerGenerator::getProgressCallback, 
+			 python::arg("self"), python::return_internal_reference<>())
 		.def("setMaxNumStructureGenerationTrials", &ConfGen::FragmentConformerGenerator::setMaxNumStructureGenerationTrials, 
 			 (python::arg("self"), python::arg("max_num")))
 		.def("getMaxNumStructureGenerationTrials", &ConfGen::FragmentConformerGenerator::getMaxNumStructureGenerationTrials, 
@@ -111,6 +115,10 @@ void CDPLPythonConfGen::exportFragmentConformerGenerator()
 		.def_readonly("DEF_MINIMIZATION_STOP_ENERGY_DELTA", ConfGen::FragmentConformerGenerator::DEF_MINIMIZATION_STOP_ENERGY_DELTA)
 		.def_readonly("DEF_ENERGY_WINDOW", ConfGen::FragmentConformerGenerator::DEF_ENERGY_WINDOW)
 		.def_readonly("DEF_MIN_RMSD", ConfGen::FragmentConformerGenerator::DEF_MIN_RMSD)
+		.add_property("progressCallback", 
+					  python::make_function(&ConfGen::FragmentConformerGenerator::getProgressCallback,
+											python::return_internal_reference<>()),
+					  &ConfGen::FragmentConformerGenerator::setProgressCallback)
 		.add_property("numConformers", &ConfGen::FragmentConformerGenerator::getNumConformers) 
 		.add_property("maxNumStructGenTrials", &ConfGen::FragmentConformerGenerator::getMaxNumStructureGenerationTrials, 
 					  &ConfGen::FragmentConformerGenerator::setMaxNumStructureGenerationTrials)

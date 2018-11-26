@@ -36,6 +36,8 @@
 #include "CDPL/Chem/MoleculeFunctions.hpp"
 #include "CDPL/Chem/MolecularGraphFunctions.hpp"
 #include "CDPL/Chem/AtomType.hpp"
+#include "CDPL/Chem/AtomConfiguration.hpp"
+#include "CDPL/Chem/BondConfiguration.hpp"
 #include "CDPL/Chem/StereoDescriptor.hpp"
 
 
@@ -190,18 +192,20 @@ void ConfGen::prepareForConformerGeneration(Chem::Molecule& mol)
 	for (Molecule::AtomIterator it = mol.getAtomsBegin(), end = mol.getAtomsEnd(); it != end; ++it) {
 		Atom& atom = *it;
 
-		if (!isStereoCenter(atom, mol, false))
-			clearStereoDescriptor(atom);
-		else if (!hasStereoDescriptor(atom))
+		if (!isStereoCenter(atom, mol, false)) 
+			setStereoDescriptor(atom, StereoDescriptor(AtomConfiguration::NONE));
+
+		else if ((!hasStereoDescriptor(atom) || getStereoDescriptor(atom).getConfiguration() == AtomConfiguration::UNDEF) && !isInvertibleNitrogen(atom, mol)) 
 			setStereoDescriptor(atom, calcStereoDescriptor(atom, mol, 1));
 	}
 
 	for (Molecule::BondIterator it = mol.getBondsBegin(), end = mol.getBondsEnd(); it != end; ++it) {
 		Bond& bond = *it;
 
-		if (!isStereoCenter(bond, mol, false))
-			clearStereoDescriptor(bond);
-		else if (!hasStereoDescriptor(bond))
+		if (!isStereoCenter(bond, mol, false)) 
+			setStereoDescriptor(bond, StereoDescriptor(BondConfiguration::NONE));
+		
+		else if (!hasStereoDescriptor(bond) || getStereoDescriptor(bond).getConfiguration() == AtomConfiguration::UNDEF)
 			setStereoDescriptor(bond, calcStereoDescriptor(bond, mol, 1));
 	}
 }
