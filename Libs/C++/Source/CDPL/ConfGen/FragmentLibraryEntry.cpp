@@ -457,11 +457,8 @@ void ConfGen::FragmentLibraryEntry::generateCanonicalMolGraph(bool stereo)
 		if (!stereo || !hasStereoDescriptor(atom))
 			continue;
 
-		const StereoDescriptor& descr = getStereoDescriptor(atom);
-		const Atom* const* ref_atoms = descr.getReferenceAtoms();
-
-		for (std::size_t i = 0, num_ref_atoms = descr.getNumReferenceAtoms(); i < num_ref_atoms; i++)
-			canonMolGraph.addAtom(*ref_atoms[i]);
+		for (Atom::ConstAtomIterator a_it = atom.getAtomsBegin(), a_end = atom.getAtomsEnd(); a_it != a_end; ++a_it)
+			canonMolGraph.addAtom(*a_it);
 	}
 
 	if (stereo) {
@@ -475,8 +472,7 @@ void ConfGen::FragmentLibraryEntry::generateCanonicalMolGraph(bool stereo)
 				const Atom& atom = bond.getAtom(i);
 
 				for (Atom::ConstAtomIterator a_it = atom.getAtomsBegin(), a_end = atom.getAtomsEnd(); a_it != a_end; ++a_it)
-					if (!canonMolGraph.containsAtom(*a_it))
-						canonMolGraph.addAtom(*a_it);
+					canonMolGraph.addAtom(*a_it);
 			}
 		}
 	}
@@ -523,11 +519,11 @@ void ConfGen::FragmentLibraryEntry::calcHashCode(bool stereo)
 
 		if (stereo && hasStereoDescriptor(atom)) {
 			std::size_t num_nbrs = atom.getNumAtoms();
-			const StereoDescriptor& descr = getStereoDescriptor(atom);
 			const Atom* nbr_atoms[4] = { &atom.getAtom(0), &atom.getAtom(1), &atom.getAtom(2), (num_nbrs == 4 ? &atom.getAtom(3) : static_cast<const Atom*>(0)) };
 
 			std::sort(nbr_atoms, nbr_atoms + num_nbrs, boost::bind(&FragmentLibraryEntry::compareAtomPointerIndex, this, _1, _2));
 
+			const StereoDescriptor& descr = getStereoDescriptor(atom);
 			unsigned int perm_pty = (num_nbrs == 3 ? descr.getPermutationParity(*nbr_atoms[0], *nbr_atoms[1], *nbr_atoms[2]) :
 									 descr.getPermutationParity(*nbr_atoms[0], *nbr_atoms[1], *nbr_atoms[2], *nbr_atoms[3]));
 

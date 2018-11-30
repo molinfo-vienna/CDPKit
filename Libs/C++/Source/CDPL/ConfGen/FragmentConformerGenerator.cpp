@@ -31,6 +31,7 @@
 #include <functional>
 
 #include <boost/bind.hpp>
+#include <boost/math/special_functions.hpp>
 
 #include "CDPL/ConfGen/FragmentConformerGenerator.hpp"
 #include "CDPL/ConfGen/FragmentType.hpp"
@@ -317,6 +318,7 @@ void ConfGen::FragmentConformerGenerator::generateFlexibleRingConformers()
 	double min_energy = 0.0;
 
 	for (std::size_t i = 0; i < num_trials; i++) {
+
 		if (timeoutExceeded()) 
 			break;
 
@@ -343,8 +345,6 @@ void ConfGen::FragmentConformerGenerator::generateFlexibleRingConformers()
 		dealloc_guard.release();
 	}
 
-	//std::cerr << std::endl;
-
 	if (workingConfs.empty())
 		return;
 
@@ -362,12 +362,12 @@ void ConfGen::FragmentConformerGenerator::generateFlexibleRingConformers()
 
 		if (conf.first > max_energy || !checkRMSD(conf))
 			continue;
-	
+
 		outputConfs.push_back(conf);
 		dealloc_guard.release();
 
 		const Math::Vector3DArray& coords = *conf.second;
-		
+
 		for (std::size_t mapping_offs = 0, mappings_size = atomSymmetryMappings.size(); 
 			 mapping_offs < mappings_size && outputConfs.size() < maxNumOutputConfs; mapping_offs += numAtoms) {
 
@@ -485,8 +485,15 @@ bool ConfGen::FragmentConformerGenerator::generateRandomConformer(ConfData& conf
 		energyMinimizer.setup(coords.getData(), gradient);
 
 		for (std::size_t j = 0; maxNumMinSteps == 0 || j < maxNumMinSteps; j++) {
-			if (energyMinimizer.iterate(conf.first, coords.getData(), gradient) != BFGSMinimizer::SUCCESS)
+			if (energyMinimizer.iterate(conf.first, coords.getData(), gradient) != BFGSMinimizer::SUCCESS) {
+				if ((boost::math::isnan)(conf.first))
+					return false;
+
 				break;
+			}
+
+			if ((boost::math::isnan)(conf.first))
+				return false;
 		
 			if (best_opt && minStopEnergyDelta >= 0.0 && minStopGradNorm >= 0.0) {
 				if (energyMinimizer.getFunctionDelta() <= minStopEnergyDelta && energyMinimizer.getGradientNorm() <= minStopGradNorm)

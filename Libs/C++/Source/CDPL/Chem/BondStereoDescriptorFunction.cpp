@@ -179,8 +179,11 @@ Chem::StereoDescriptor Chem::calcStereoDescriptor(const Bond& bond, const Molecu
 			return StereoDescriptor(config, *ref_atoms[0], *bond_atoms[0], *bond_atoms[1], *ref_atoms[1]);
 		}
 
+		if (config == BondConfiguration::EITHER || config == BondConfiguration::NONE)
+			return StereoDescriptor(config, *ref_atoms[0], *bond_atoms[0], *bond_atoms[1], *ref_atoms[1]);
+
 		if (dim == 0)
-			return StereoDescriptor(BondConfiguration::EITHER, *ref_atoms[0], *bond_atoms[0], *bond_atoms[1], *ref_atoms[1]);
+			return StereoDescriptor(BondConfiguration::NONE, *ref_atoms[0], *bond_atoms[0], *bond_atoms[1], *ref_atoms[1]);
 	}
 
 	if (dim != 2) {

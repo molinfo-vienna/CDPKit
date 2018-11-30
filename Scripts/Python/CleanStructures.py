@@ -28,8 +28,24 @@ import sys
 import CDPL.Base as Base
 import CDPL.Chem as Chem
 
+
+REMOVE_FLUORINATED = True
+FLUOR_ATOM_COUNT = 9
+MIN_HEAVY_ATOM_COUNT = 5
+VALID_ATOM_TYPES = [Chem.AtomType.H, Chem.AtomType.C, Chem.AtomType.F, Chem.AtomType.Cl, Chem.AtomType.Br, Chem.AtomType.I, Chem.AtomType.N, Chem.AtomType.O, Chem.AtomType.S, Chem.AtomType.Se, Chem.AtomType.P, Chem.AtomType.Pt, Chem.AtomType.As, Chem.AtomType.Si]    
+CARBON_ATOMS_MANDATORY = True
+NEUTRALIZE = True
+KEEP_ONLY_LARGEST_COMP = True
+
+
 class Stats:
     pass
+
+def generateSMILES(mol):
+    try:
+        return Chem.generateSMILES(mol)
+    except:
+        return ''
 
 def processMolecule(mol, stats):
     Chem.perceiveComponents(mol, False)
@@ -42,7 +58,7 @@ def processMolecule(mol, stats):
     modified = False
     comps = Chem.getComponents(mol)
 
-    if comps.getSize() > 1:
+    if comps.getSize() > 1 and KEEP_ONLY_LARGEST_COMP:
         largest_comp = None
 
         for comp in comps:
@@ -55,7 +71,7 @@ def processMolecule(mol, stats):
         Chem.perceiveSSSR(largest_comp, False)
         Chem.setName(largest_comp, Chem.getName(mol))
 
-        print 'Removed Components from Molecule ' + str(stats.read) + ': ' + Chem.generateSMILES(mol) + ' ' + Chem.getName(mol)
+        print 'Removed Components from Molecule ' + str(stats.read) + ': ' + generateSMILES(mol) + ' ' + Chem.getName(mol)
 
         modified = True
 
@@ -67,13 +83,11 @@ def processMolecule(mol, stats):
 
         mol = largest_comp
 
-    if Chem.getHeavyAtomCount(mol) < 5:
+    if Chem.getHeavyAtomCount(mol) < MIN_HEAVY_ATOM_COUNT:
         return None
 
-    if Chem.getAtomCount(mol, Chem.AtomType.F) > 9:
+    if REMOVE_FLUORINATED and Chem.getAtomCount(mol, Chem.AtomType.F) > FLUOR_ATOM_COUNT:
         return None
-
-    valid_atom_types = [Chem.AtomType.H, Chem.AtomType.C, Chem.AtomType.F, Chem.AtomType.Cl, Chem.AtomType.Br, Chem.AtomType.I, Chem.AtomType.N, Chem.AtomType.O, Chem.AtomType.S, Chem.AtomType.Se, Chem.AtomType.P, Chem.AtomType.Pt, Chem.AtomType.As, Chem.AtomType.Si]    
 
     carbon_seen = False
     hs_to_remove = list()
@@ -81,44 +95,46 @@ def processMolecule(mol, stats):
     for atom in mol.atoms:
         atom_type = Chem.getType(atom)
 
-        if atom_type not in valid_atom_types:
-            #print 'Invalid atom type: ' + str(Chem.getType(atom))
-            return None
+        for valid_type in VALID_ATOM_TYPES:
+            if not Chem.atomTypesMatch(valid_type, atom_type):
+                #print 'Invalid atom type: ' + str(atom_type)
+                return None
 
         if atom_type == Chem.AtomType.C:
             carbon_seen = True
 
-        form_charge = Chem.getFormalCharge(atom)
+        if NEUTRALIZE:
+            form_charge = Chem.getFormalCharge(atom)
 
-        if form_charge != 0:
-            for nbr_atom in atom.atoms:
-                if Chem.getFormalCharge(nbr_atom) != 0:
-                    form_charge = 0
-                    break
-
-        if form_charge != 0:
-            if form_charge > 0:
-                form_charge -= Chem.getImplicitHydrogenCount(atom)
-
-                if form_charge < 0:
-                    form_charge = 0
-
-                for nbr_atom in atom.atoms: 
-                    if form_charge == 0:
+            if form_charge != 0:
+                for nbr_atom in atom.atoms:
+                    if Chem.getFormalCharge(nbr_atom) != 0:
+                        form_charge = 0
                         break
 
-                    if Chem.getType(nbr_atom) == Chem.AtomType.H:
-                        hs_to_remove.append(nbr_atom)
-                        form_charge -= 1
-                 
-                Chem.setFormalCharge(atom, form_charge)
+            if form_charge != 0:
+                if form_charge > 0:
+                    form_charge -= Chem.getImplicitHydrogenCount(atom)
 
-            else:
-                Chem.setFormalCharge(atom, 0)
+                    if form_charge < 0:
+                        form_charge = 0
 
-            modified = True
+                    for nbr_atom in atom.atoms: 
+                        if form_charge == 0:
+                            break
+
+                        if Chem.getType(nbr_atom) == Chem.AtomType.H:
+                            hs_to_remove.append(nbr_atom)
+                            form_charge -= 1
+                        
+                    Chem.setFormalCharge(atom, form_charge)
+
+                else:
+                    Chem.setFormalCharge(atom, 0)
+                            
+                modified = True
     
-    if carbon_seen == False:
+    if CARBON_ATOMS_MANDATORY and carbon_seen == False:
         return None
 
     if len(hs_to_remove) > 0:
@@ -181,7 +197,7 @@ def cleanStructures():
         else:
             stats.dropped += 1
             dwriter.write(mol)
-            print 'Dropped Molecule ' + str(stats.read) + ': ' + Chem.generateSMILES(mol) + ' ' + Chem.getName(mol)
+            print 'Dropped Molecule ' + str(stats.read) + ': ' + generateSMILES(mol) + ' ' + Chem.getName(mol)
 
         mol.clear()
       

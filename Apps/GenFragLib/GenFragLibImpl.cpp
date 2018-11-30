@@ -78,7 +78,7 @@ class GenFragLibImpl::FragLibGenerationWorker
 public:
 	FragLibGenerationWorker(GenFragLibImpl* parent):
 		parent(parent), fragLibGen(parent->fragmentLibPtr), numProcMols(0),
-		numProcFrags(0), numAddedFrags(0), totalNumConfs(0)  
+		numProcFrags(0), numErrorFrags(0), numAddedFrags(0), totalNumConfs(0)  
 	{
 		fragLibGen.setProcessingResultCallback(boost::bind(&FragLibGenerationWorker::fragmentProcessed, this, _1, _2, _3));
 		fragLibGen.setProcessingErrorCallback(boost::bind(&FragLibGenerationWorker::handleError, this, _1, _2));
@@ -89,6 +89,7 @@ public:
 		fragLibGen.setTimeout(parent->timeout * 1000);
 		fragLibGen.reuseExistingCoordinates(parent->useInputCoords);
 		fragLibGen.setForceFieldType(parent->forceFieldType);
+		fragLibGen.performStrictAtomTyping(parent->strictMMFF94AtomTypes);
 	}
 
 	void operator()() {
@@ -125,6 +126,10 @@ public:
 		return numProcFrags;
 	}
 
+	std::size_t getNumErrorFragments() const {
+		return numErrorFrags;
+	}
+
 	std::size_t getNumAddedFragments() const {
 		return numAddedFrags;
 	}
@@ -145,10 +150,14 @@ private:
 				parent->printMessage(VERBOSE, "Fragment '" + getSMILES(frag) + "': " + boost::lexical_cast<std::string>(num_confs) + 
 									 (num_confs == 1 ? " Conf." : " Confs."));
 			}
-		}
+
+		} else if (parent->getVerbosityLevel() >= DEBUG) 
+			parent->printMessage(DEBUG, "Fragment '" + getSMILES(frag) + "': already processed");
 	}
 
 	bool handleError(const CDPL::Chem::MolecularGraph& frag, const std::string& err_msg) {
+		numErrorFrags++;
+
 		parent->printMessage(ERROR, "Error while processing " + std::string(&frag == &molecule ? "molecule" : "fragment") + 
 							 " '" + getSMILES(frag) + "':\n" + err_msg);
 
@@ -183,6 +192,7 @@ private:
 	CDPL::Chem::BasicMolecule               molecule;
 	std::size_t                             numProcMols;
 	std::size_t                             numProcFrags;
+	std::size_t                             numErrorFrags;
 	std::size_t                             numAddedFrags;
 	std::size_t                             totalNumConfs;
 };
@@ -195,13 +205,14 @@ GenFragLibImpl::GenFragLibImpl():
 	eWindow(CDPL::ConfGen::FragmentConformerGenerator::DEF_ENERGY_WINDOW), 
 	confGenTrialFactor(CDPL::ConfGen::FragmentConformerGenerator::DEF_RING_CONFORMER_TRIAL_FACTOR), 
 	forceFieldType(CDPL::ConfGen::FragmentLibraryGenerator::DEF_FORCE_FIELD_TYPE), 
-	useInputCoords(false), inputHandler(), fragmentLibPtr(new CDPL::ConfGen::FragmentLibrary())
+	useInputCoords(false), strictMMFF94AtomTypes(true), inputHandler(), 
+	fragmentLibPtr(new CDPL::ConfGen::FragmentLibrary())
 {
 	addOption("input,i", "Input file(s).", 
 			  value<StringList>(&inputFiles)->multitoken()->required());
 	addOption("output,o", "Output fragment library file.", 
 			  value<std::string>(&outputFile)->required());
-	addOption("mode,m", "Output mode (CREATE, UPDATE, default: CREATE).", 
+	addOption("mode,m", "Processing mode (CREATE, UPDATE, MERGE default: CREATE).", 
 			  value<std::string>()->notifier(boost::bind(&GenFragLibImpl::setMode, this, _1)));
 	addOption("multi-threading,t", "Enable multi-threaded processing (default: false).", 
 			  value<bool>(&multiThreading)->implicit_value(true));
@@ -225,6 +236,8 @@ GenFragLibImpl::GenFragLibImpl():
 			  value<std::size_t>()->notifier(boost::bind(&GenFragLibImpl::setConfGenTrialFactor, this, _1)));
 	addOption("forcefield,f", "Build force field type (MMFF94, MMFF94_NO_ESTAT, MMFF94S, MMFF94S_NO_ESTAT, default: " + getForceFieldTypeString() + ").", 
 			  value<std::string>()->notifier(boost::bind(&GenFragLibImpl::setForceFieldType, this, _1)));
+	addOption("strict-atom-typing,s", "Perform strict MMFF94 atom typing (default: true).", 
+			  value<bool>(&strictMMFF94AtomTypes)->implicit_value(true));
 
 	addOptionLongDescriptions();
 	setMultiConfImportParameter(inputReader, false);
@@ -242,7 +255,7 @@ const char* GenFragLibImpl::getProgCopyright() const
 
 const char* GenFragLibImpl::getProgAboutText() const
 {
-	return "Creates or updates a fragment library for conformer generation.";
+	return "Creates, updates or merges fragment libraries for conformer generation.";
 }
 
 void GenFragLibImpl::addOptionLongDescriptions()
@@ -256,8 +269,9 @@ void GenFragLibImpl::addOptionLongDescriptions()
 		formats_str.append(" - ").append(*it).push_back('\n');
 
 	addOptionLongDescription("input", 
-							 "Specifies one or more input file(s) with molecules whose fragments shall be stored in the created fragment library.\n\n" +
-							 formats_str);
+							 "When operating in CREATE or UPDATE mode, specifies one or more input file(s) with molecules whose fragments shall be stored in the created fragment library.\n\n" +
+							 formats_str +
+							 "In MERGE mode, specifies multiple existing fragment libraries in CDF format.");
 
 	addOptionLongDescription("input-format", 
 							 "Allows to explicitly specify the format of the input file(s) by providing one of the supported "
@@ -322,6 +336,8 @@ void GenFragLibImpl::setMode(const std::string& mode_str)
 		mode = CREATE;
 	else if (uc_mode == "UPDATE")
 		mode = UPDATE;
+	else if (uc_mode == "MERGE")
+		mode = MERGE;
 	else
 		throwValidationError("mode");
 }
@@ -356,37 +372,68 @@ int GenFragLibImpl::process()
 
 	checkInputFiles();
 	printOptionSummary();
-	initInputReader();
 
-	if (termSignalCaught())
-		return EXIT_FAILURE;
+	if (mode == MERGE) {
+		mergeFragmentLibraries();
 
-	if (mode == UPDATE)
-		loadFragmentLibrary();
+	} else {
+		initInputReader();
 
-	if (termSignalCaught())
-		return EXIT_FAILURE;
+		if (termSignalCaught())
+			return EXIT_FAILURE;
 
-	if (progressEnabled()) {
-		initProgress();
-		printMessage(INFO, "Processing Input Molecules...", true, true);
-	} else
-		printMessage(INFO, "Processing Input Molecules...");
+		if (mode == UPDATE)
+			loadFragmentLibrary(outputFile, *fragmentLibPtr);
 
-	if (multiThreading)
-		processMultiThreaded();
-	else
-		processSingleThreaded();
+		if (termSignalCaught())
+			return EXIT_FAILURE;
 
-	if (haveErrorMessage()) {
-		printMessage(ERROR, "Error: " + errorMessage); 
-		return EXIT_FAILURE;
+		if (progressEnabled()) {
+			initProgress();
+			printMessage(INFO, "Processing Input Molecules...", true, true);
+		} else
+			printMessage(INFO, "Processing Input Molecules...");
+
+		if (multiThreading)
+			processMultiThreaded();
+		else
+			processSingleThreaded();
+
+		if (haveErrorMessage()) {
+			printMessage(ERROR, "Error: " + errorMessage); 
+			return EXIT_FAILURE;
+		}
 	}
 
 	if (termSignalCaught())
 		return EXIT_FAILURE;
 
 	return saveFragmentLibrary();
+}
+
+void GenFragLibImpl::mergeFragmentLibraries()
+{
+	FragmentLibrary input_lib;
+
+	for (StringList::const_iterator it = inputFiles.begin(), end = inputFiles.end(); it != end; ++it) {
+		if (GenFragLibImpl::termSignalCaught())
+			return;
+
+		loadFragmentLibrary(*it, input_lib);
+
+		if (GenFragLibImpl::termSignalCaught())
+			return;
+
+		std::size_t old_num_frags = fragmentLibPtr->getNumEntries();
+
+		printMessage(INFO, "Adding fragments to output library...");
+
+		fragmentLibPtr->addEntries(input_lib);
+
+		printMessage(INFO, " - Added " + boost::lexical_cast<std::string>(fragmentLibPtr->getNumEntries() - old_num_frags) + " fragment(s)");
+	}
+
+	printMessage(INFO, "");
 }
 
 void GenFragLibImpl::processSingleThreaded()
@@ -405,7 +452,7 @@ void GenFragLibImpl::processSingleThreaded()
 	if (termSignalCaught())
 		return;
 
-	printStatistics(worker.getNumProcMolecules(), worker.getNumProcFragments(),
+	printStatistics(worker.getNumProcMolecules(), worker.getNumProcFragments(), worker.getNumErrorFragments(),
 					worker.getNumAddedFragments(), worker.getNumGeneratedConfs(),
 					boost::chrono::duration_cast<boost::chrono::duration<std::size_t> >(Clock::now() - startTime).count());
 }
@@ -458,6 +505,7 @@ void GenFragLibImpl::processMultiThreaded()
 	
 	std::size_t num_proc_mols = 0;
 	std::size_t num_proc_frags = 0;
+	std::size_t num_error_frags = 0;
 	std::size_t num_added_frags = 0;
 	std::size_t num_gen_confs = 0;
 
@@ -466,43 +514,43 @@ void GenFragLibImpl::processMultiThreaded()
 
 		num_proc_mols += worker.getNumProcMolecules();
 		num_proc_frags += worker.getNumProcFragments();
+		num_error_frags += worker.getNumErrorFragments();
 		num_added_frags += worker.getNumAddedFragments();
 		num_gen_confs += worker.getNumGeneratedConfs();
 	}
 
-	printStatistics(num_proc_mols, num_proc_frags, num_added_frags, num_gen_confs,
+	printStatistics(num_proc_mols, num_proc_frags, num_error_frags, num_added_frags, num_gen_confs,
 					boost::chrono::duration_cast<boost::chrono::duration<std::size_t> >(Clock::now() - startTime).count());
 
 }
 
-void GenFragLibImpl::loadFragmentLibrary()
+void GenFragLibImpl::loadFragmentLibrary(const std::string& fname, FragmentLibrary& lib)
 {
 	using namespace CDPL;
 
-	std::ifstream is(outputFile);
+	std::ifstream is(fname);
 
-	if (!is)
-		throw Base::IOError("opening fragment library '" + outputFile + "' failed");
+	if (!is) 
+		throw Base::IOError("opening fragment library '" + fname + "' failed");
+	
+	printMessage(INFO, "Loading fragments from library '" + fname + "'...");
 
-	printMessage(INFO, "Loading fragments from library '" + outputFile + "'...");
-
-	fragmentLibPtr->load(is);
+	lib.clear();
+	lib.load(is);
 
 	if (GenFragLibImpl::termSignalCaught())
 		return;
 
 	if (!is)
-		throw Base::IOError("loading fragments from library '" + outputFile + "' failed");
+		throw Base::IOError("loading fragments from library '" + fname + "' failed");
 
-	printMessage(INFO, "-> Loaded " + boost::lexical_cast<std::string>(fragmentLibPtr->getNumEntries()) + " fragments");
+	printMessage(INFO, " - Loaded " + boost::lexical_cast<std::string>(lib.getNumEntries()) + " fragments");
 	printMessage(INFO, "");
 }
 
 int GenFragLibImpl::saveFragmentLibrary()
 {
 	using namespace CDPL;
-
-	printMessage(INFO, "");
 
 	std::ofstream os(outputFile, std::ios_base::out | std::ios_base::trunc);
 
@@ -516,7 +564,7 @@ int GenFragLibImpl::saveFragmentLibrary()
 	if (!os)
 		throw Base::IOError("saving fragments failed");
 
-	printMessage(INFO, "DONE.");
+	printMessage(INFO, " - Saved " + boost::lexical_cast<std::string>(fragmentLibPtr->getNumEntries()) + " fragments");
 
 	return EXIT_SUCCESS;
 }
@@ -545,16 +593,16 @@ bool GenFragLibImpl::haveErrorMessage()
 	return !errorMessage.empty();
 }
 
-void GenFragLibImpl::printStatistics(std::size_t num_proc_mols, std::size_t num_proc_frags, 
-									 std::size_t num_added_frags, std::size_t num_gen_confs,
-									 std::size_t proc_time)
+void GenFragLibImpl::printStatistics(std::size_t num_proc_mols, std::size_t num_proc_frags,  std::size_t num_error_frags, 
+									 std::size_t num_added_frags, std::size_t num_gen_confs, std::size_t proc_time)
 {
 	printMessage(INFO, "Statistics:");
-	printMessage(INFO, " Processed Molecules:  " + boost::lexical_cast<std::string>(num_proc_mols));
-	printMessage(INFO, " Processed Fragments:  " + boost::lexical_cast<std::string>(num_proc_frags));
-	printMessage(INFO, " Output Fragments:     " + boost::lexical_cast<std::string>(num_added_frags));
-	printMessage(INFO, " Generated Conformers: " + boost::lexical_cast<std::string>(num_gen_confs));
-	printMessage(INFO, " Processing Time:      " + AppUtils::formatTimeDuration(proc_time));
+	printMessage(INFO, " Processed Molecules:       " + boost::lexical_cast<std::string>(num_proc_mols));
+	printMessage(INFO, " Succ. Processed Fragments: " + boost::lexical_cast<std::string>(num_proc_frags));
+	printMessage(INFO, " Fragments With Errors:     " + boost::lexical_cast<std::string>(num_error_frags));
+	printMessage(INFO, " Unique Output Fragments:   " + boost::lexical_cast<std::string>(num_added_frags));
+	printMessage(INFO, " Generated Conformers:      " + boost::lexical_cast<std::string>(num_gen_confs));
+	printMessage(INFO, " Processing Time:           " + AppUtils::formatTimeDuration(proc_time));
 	printMessage(INFO, "");
 }
 
@@ -577,23 +625,34 @@ bool GenFragLibImpl::doReadNextMolecule(CDPL::Chem::Molecule& mol)
 	if (!errorMessage.empty())
 		return false;
 
-	try {
-		if (inputReader.getRecordIndex() >= inputReader.getNumRecords()) 
-			return false;
+	while (true) {
+		try {
+			if (inputReader.getRecordIndex() >= inputReader.getNumRecords()) 
+				return false;
 
-		if (!inputReader.read(mol))
-			return false;
+			CmdLineBase::printMessage(DEBUG, "Starting to process molecule " + boost::lexical_cast<std::string>(inputReader.getRecordIndex() + 1) + '/' +
+									  boost::lexical_cast<std::string>(inputReader.getNumRecords()) + "...");
 
-		printProgress("Processing molecules...        ", double(inputReader.getRecordIndex()) / inputReader.getNumRecords());
-		return true;
+			if (!inputReader.read(mol)) {
+				CmdLineBase::printMessage(ERROR, "Reading molecule " + boost::lexical_cast<std::string>(inputReader.getRecordIndex() + 1) + '/' +
+										  boost::lexical_cast<std::string>(inputReader.getNumRecords()) + " failed");			
+				return false;
+			}
 
-	} catch (const std::exception& e) {
-		errorMessage = "reading molecule " + boost::lexical_cast<std::string>(inputReader.getRecordIndex() + 1) + '/' +
-			boost::lexical_cast<std::string>(inputReader.getNumRecords()) + " failed: " + e.what();
+			printProgress("Processing molecules...        ", double(inputReader.getRecordIndex()) / inputReader.getNumRecords());
+			return true;
 
-	} catch (...) {
-		errorMessage = "reading molecule " + boost::lexical_cast<std::string>(inputReader.getRecordIndex() + 1) + '/' +
-			boost::lexical_cast<std::string>(inputReader.getNumRecords()) + " failed";
+		} catch (const std::exception& e) {
+			CmdLineBase::printMessage(ERROR, "Error while reading molecule " + boost::lexical_cast<std::string>(inputReader.getRecordIndex() + 1) + '/' +
+									  boost::lexical_cast<std::string>(inputReader.getNumRecords()) + ": " + e.what());
+
+
+		} catch (...) {
+			CmdLineBase::printMessage(ERROR, "Error while reading molecule " + boost::lexical_cast<std::string>(inputReader.getRecordIndex() + 1) + '/' +
+									  boost::lexical_cast<std::string>(inputReader.getNumRecords()));
+		}
+
+		inputReader.setRecordIndex(inputReader.getRecordIndex() + 1);
 	}
 
 	return false;
@@ -628,22 +687,27 @@ void GenFragLibImpl::printMessage(VerbosityLevel level, const std::string& msg, 
 void GenFragLibImpl::printOptionSummary()
 {
 	printMessage(VERBOSE, "Option Summary:");
-	printMessage(VERBOSE, " Input File(s):            " + inputFiles[0]);
+	printMessage(VERBOSE, " Input File(s):                " + inputFiles[0]);
 	
 	for (StringList::const_iterator it = ++inputFiles.begin(), end = inputFiles.end(); it != end; ++it)
 		printMessage(VERBOSE, std::string(27, ' ') + *it);
 
 	printMessage(VERBOSE, " Output File:                  " + outputFile);
  	printMessage(VERBOSE, " Mode:                         " + getModeString());
-	printMessage(VERBOSE, " Multi-threading:              " + std::string(multiThreading ? "Yes" : "No"));
-	printMessage(VERBOSE, " Number of Threads:            " + boost::lexical_cast<std::string>(numThreads));
-	printMessage(VERBOSE, " Input File Format:            " + (inputHandler ? inputHandler->getDataFormat().getName() : std::string("Auto-detect")));
-	printMessage(VERBOSE, " Timeout:                      " + boost::lexical_cast<std::string>(timeout) + "s");
-	printMessage(VERBOSE, " RMSD:                         " + (boost::format("%.4f") % minRMSD).str());
-	printMessage(VERBOSE, " Energy Window:                " + boost::lexical_cast<std::string>(eWindow));
-	printMessage(VERBOSE, " Use Input Coordinates:        " + std::string(useInputCoords ? "Yes" : "No"));
-	printMessage(VERBOSE, " Ring Conf. Gen. Trial Factor: " + boost::lexical_cast<std::string>(confGenTrialFactor));
-	printMessage(VERBOSE, " Build Force Field Type:       " + getForceFieldTypeString());
+
+	if (mode != MERGE) {
+		printMessage(VERBOSE, " Multi-threading:              " + std::string(multiThreading ? "Yes" : "No"));
+		printMessage(VERBOSE, " Number of Threads:            " + boost::lexical_cast<std::string>(numThreads));
+		printMessage(VERBOSE, " Input File Format:            " + (inputHandler ? inputHandler->getDataFormat().getName() : std::string("Auto-detect")));
+		printMessage(VERBOSE, " Timeout:                      " + boost::lexical_cast<std::string>(timeout) + "s");
+		printMessage(VERBOSE, " RMSD:                         " + (boost::format("%.4f") % minRMSD).str());
+		printMessage(VERBOSE, " Energy Window:                " + boost::lexical_cast<std::string>(eWindow));
+		printMessage(VERBOSE, " Use Input Coordinates:        " + std::string(useInputCoords ? "Yes" : "No"));
+		printMessage(VERBOSE, " Strict MMFF94 Atom Typing:    " + std::string(strictMMFF94AtomTypes ? "Yes" : "No"));
+		printMessage(VERBOSE, " Ring Conf. Gen. Trial Factor: " + boost::lexical_cast<std::string>(confGenTrialFactor));
+		printMessage(VERBOSE, " Build Force Field Type:       " + getForceFieldTypeString());
+	}
+
 	printMessage(VERBOSE, "");
 }
 
@@ -682,7 +746,7 @@ void GenFragLibImpl::initInputReader()
 	if (GenFragLibImpl::termSignalCaught())
 		return;
 
-	printMessage(INFO, " - Found " + boost::lexical_cast<std::string>(inputReader.getNumRecords()) + " input molecules");
+	printMessage(INFO, " - Found " + boost::lexical_cast<std::string>(inputReader.getNumRecords()) + " input molecule(s)");
 	printMessage(INFO, "");
 }
 
@@ -703,6 +767,9 @@ std::string GenFragLibImpl::getModeString() const
 
 	if (mode == UPDATE)
 		return "UPDATE";
+
+	if (mode == MERGE)
+		return "MERGE";
 	
 	return "UNKNOWN";
 }

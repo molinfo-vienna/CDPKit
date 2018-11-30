@@ -256,6 +256,9 @@ void Chem::BondStereoFlagGenerator::assignFlagsForEitherDoubleBonds(Util::UIArra
 		if (!molGraph->containsAtom(bond.getBegin()) || !molGraph->containsAtom(bond.getEnd()))
 			continue;
 
+		if (hasStereoCenterFlag(bond) && !getStereoCenterFlag(bond))
+			continue;
+
 		const StereoDescriptor& stereo_desc = calcStereoDescriptor(bond, *molGraph, 0);
 		unsigned int config = stereo_desc.getConfiguration();
 

@@ -141,10 +141,7 @@ void Chem::BondDirectionGenerator::init(const MolecularGraph& molgraph, Util::UI
 				continue;
 
 			const Atom* const* sto_ref_atoms = stereo_desc.getReferenceAtoms();
-
-			if (!molgraph.containsAtom(*sto_ref_atoms[0]) || !molgraph.containsAtom(*sto_ref_atoms[3]))
-				continue;
-			
+	
 			if (sto_ref_atoms[1] == bond_atoms[1] && sto_ref_atoms[2] == bond_atoms[0]) {
 				config_ref_atoms[0] = sto_ref_atoms[3];
 				config_ref_atoms[1] = sto_ref_atoms[0];
@@ -208,14 +205,11 @@ void Chem::BondDirectionGenerator::init(const MolecularGraph& molgraph, Util::UI
 		if (!add_to_list)
 			continue;
 
-		if 	(config != BondConfiguration::EITHER) {
-			std::size_t config_ref_atm_idx1 = molgraph.getAtomIndex(*config_ref_atoms[0]);
-			std::size_t config_ref_atm_idx2 = molgraph.getAtomIndex(*config_ref_atoms[1]);
-
-			if ((stereo_bond.getNeighborAtomIndex(0, 0) == config_ref_atm_idx1) ^ (stereo_bond.getNeighborAtomIndex(1, 0) == config_ref_atm_idx2))
-				config = (config == BondConfiguration::CIS ? BondConfiguration::TRANS : BondConfiguration::CIS);
-		}
-
+		if 	(config != BondConfiguration::EITHER &&
+			 ((&molgraph.getAtom(stereo_bond.getNeighborAtomIndex(0, 0)) == config_ref_atoms[0]) ^ 
+			  (&molgraph.getAtom(stereo_bond.getNeighborAtomIndex(1, 0)) == config_ref_atoms[1])))
+			config = (config == BondConfiguration::CIS ? BondConfiguration::TRANS : BondConfiguration::CIS);
+		
 		stereo_bond.setConfiguration(config);
 		stereoBonds.push_back(stereo_bond);
 

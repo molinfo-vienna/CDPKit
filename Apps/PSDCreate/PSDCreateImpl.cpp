@@ -462,8 +462,14 @@ bool PSDCreateImpl::doReadNextMolecule(CDPL::Chem::Molecule& mol)
 			if (inputReader.getRecordIndex() >= inputReader.getNumRecords()) 
 				return false;
 
-			if (!inputReader.read(mol))
+			printMessage(DEBUG, "Starting to process molecule " + boost::lexical_cast<std::string>(inputReader.getRecordIndex() + 1) +  '/' +
+						 boost::lexical_cast<std::string>(inputReader.getNumRecords()) + "...");
+
+			if (!inputReader.read(mol)) {
+				printMessage(ERROR, "Reading molecule " + boost::lexical_cast<std::string>(inputReader.getRecordIndex() + 1) + '/' +
+							 boost::lexical_cast<std::string>(inputReader.getNumRecords()) + " failed");			
 				return false;
+			}
 
 			if (addSourceFileProp) {
 				std::size_t reader_id = inputReader.getReaderIDForRecordIndex(inputReader.getRecordIndex() - 1);
@@ -486,15 +492,15 @@ bool PSDCreateImpl::doReadNextMolecule(CDPL::Chem::Molecule& mol)
 			return true;
 
 		} catch (const std::exception& e) {
-			printMessage(ERROR, "reading molecule " + boost::lexical_cast<std::string>(inputReader.getRecordIndex() + 1) + '/' +
-						 boost::lexical_cast<std::string>(inputReader.getNumRecords()) + " failed: " + e.what());
-			inputReader.setRecordIndex(inputReader.getRecordIndex() + 1);
+			printMessage(ERROR, "Error while reading molecule " + boost::lexical_cast<std::string>(inputReader.getRecordIndex() + 1) + '/' +
+						 boost::lexical_cast<std::string>(inputReader.getNumRecords()) + ": " + e.what());
 
 		} catch (...) {
-			printMessage(ERROR, "reading molecule " + boost::lexical_cast<std::string>(inputReader.getRecordIndex() + 1) + '/' +
-						 boost::lexical_cast<std::string>(inputReader.getNumRecords()) + " failed");
-			inputReader.setRecordIndex(inputReader.getRecordIndex() + 1);
+			printMessage(ERROR, "Error while reading molecule " + boost::lexical_cast<std::string>(inputReader.getRecordIndex() + 1) + '/' +
+						 boost::lexical_cast<std::string>(inputReader.getNumRecords()));
 		}
+
+		inputReader.setRecordIndex(inputReader.getRecordIndex() + 1);
 	}
 
 	return false;
@@ -571,7 +577,7 @@ void PSDCreateImpl::initInputReader()
 	if (PSDCreateImpl::termSignalCaught())
 		return;
 
-	printMessage(INFO, " - Found " + boost::lexical_cast<std::string>(inputReader.getNumRecords()) + " input molecules");
+	printMessage(INFO, " - Found " + boost::lexical_cast<std::string>(inputReader.getNumRecords()) + " input molecule(s)");
 	printMessage(INFO, "");
 }
 

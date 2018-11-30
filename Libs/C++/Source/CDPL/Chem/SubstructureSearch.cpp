@@ -47,15 +47,14 @@ Chem::SubstructureSearch::SubstructureSearch():
 	bondMatchExprFunc(static_cast<const BondMatchExprPtr& (*)(const Bond&)>(&getMatchExpression)), 
 	molGraphMatchExprFunc(static_cast<const MolGraphMatchExprPtr& (*)(const MolecularGraph&)>(&getMatchExpression)),
 	queryChanged(true), initQueryData(true), uniqueMatches(false), 
-	numMappedAtoms(0), maxNumMappings(0), atomMappingConstrMatrixSize(0),
-	bondMappingConstrMatrixSize(0){}
+	numMappedAtoms(0), maxNumMappings(0) 
+{}
 
 Chem::SubstructureSearch::SubstructureSearch(const MolecularGraph& query): 
 	atomMatchExprFunc(static_cast<const AtomMatchExprPtr& (*)(const Atom&)>(&getMatchExpression)), 
 	bondMatchExprFunc(static_cast<const BondMatchExprPtr& (*)(const Bond&)>(&getMatchExpression)), 
 	molGraphMatchExprFunc(static_cast<const MolGraphMatchExprPtr& (*)(const MolecularGraph&)>(&getMatchExpression)),
-	uniqueMatches(false), numMappedAtoms(0), maxNumMappings(0), atomMappingConstrMatrixSize(0),
-	bondMappingConstrMatrixSize(0)
+	uniqueMatches(false), numMappedAtoms(0), maxNumMappings(0)
 {
 	setQuery(query);
 }
@@ -165,44 +164,23 @@ std::size_t Chem::SubstructureSearch::getMaxNumMappings() const
 
 void Chem::SubstructureSearch::addAtomMappingConstraint(std::size_t query_atom_idx, std::size_t target_atom_idx)
 {
-	if (query_atom_idx >= atomMappingConstrMatrix.size())
-		atomMappingConstrMatrix.resize(query_atom_idx + 1);
-
-	for ( ; atomMappingConstrMatrixSize <= query_atom_idx; atomMappingConstrMatrixSize++)
-		atomMappingConstrMatrix[atomMappingConstrMatrixSize].clear();
-
-	Util::BitSet& constr_mask = atomMappingConstrMatrix[query_atom_idx];
-
-	if (constr_mask.size() <= target_atom_idx)
-		constr_mask.resize(target_atom_idx + 1);
-
-	constr_mask.set(target_atom_idx);
+	atomMappingConstrs.insert(MappingConstraintMap::value_type(query_atom_idx, target_atom_idx));
 }
 
 void Chem::SubstructureSearch::clearAtomMappingConstraints()
 {
-	atomMappingConstrMatrixSize = 0;
+	atomMappingConstrs.clear();
 }
 
 void Chem::SubstructureSearch::addBondMappingConstraint(std::size_t query_bond_idx, std::size_t target_bond_idx)
 {
-	if (query_bond_idx >= bondMappingConstrMatrix.size())
-		bondMappingConstrMatrix.resize(query_bond_idx + 1);
+	bondMappingConstrs.insert(MappingConstraintMap::value_type(query_bond_idx, target_bond_idx));
 
-	for ( ; bondMappingConstrMatrixSize <= query_bond_idx; bondMappingConstrMatrixSize++)
-		bondMappingConstrMatrix[bondMappingConstrMatrixSize].clear();
-
-	Util::BitSet& constr_mask = bondMappingConstrMatrix[query_bond_idx];
-
-	if (constr_mask.size() <= target_bond_idx)
-		constr_mask.resize(target_bond_idx + 1);
-
-	constr_mask.set(target_bond_idx);
 }
 
 void Chem::SubstructureSearch::clearBondMappingConstraints()
 {
-	bondMappingConstrMatrixSize = 0;
+	bondMappingConstrs.clear();
 }
 
 void Chem::SubstructureSearch::setQuery(const MolecularGraph& query)
@@ -316,13 +294,14 @@ bool Chem::SubstructureSearch::findEquivAtoms()
 		bool no_equiv_atoms = true;
 
 		for (std::size_t j = 0; j < numTargetAtoms; j++) {
+			if (!checkAtomMappingConstraints(i, j))
+				continue;
+
 			const Atom& target_atom = target->getAtom(j);
 
 			if (expr(query_atom, *query, target_atom, *target, Base::Variant())) {
-				if (checkAtomMappingConstraints(i, j)) {
-					equiv_mask.set(j);
-					no_equiv_atoms = false;
-				}
+				equiv_mask.set(j);
+				no_equiv_atoms = false;
 			}
 		}
 
@@ -356,16 +335,17 @@ bool Chem::SubstructureSearch::findEquivBonds()
 		bool no_equiv_bonds = true;
 
 		for (std::size_t j = 0; j < numTargetBonds; j++) {
+			if (!checkBondMappingConstraints(i, j))
+				continue;
+ 
 			const Bond& target_bond = target->getBond(j);
 
 			if (!target->containsAtom(target_bond.getBegin()) || !target->containsAtom(target_bond.getEnd()))
 				continue;
 
 			if (expr(query_bond, *query, target_bond, *target, Base::Variant())) {
-				if (checkBondMappingConstraints(i, j)) {
-					equiv_mask.set(j);
-					no_equiv_bonds = false;
-				}
+				equiv_mask.set(j);
+				no_equiv_bonds = false;
 			}
 		}
 
@@ -463,36 +443,36 @@ bool Chem::SubstructureSearch::atomMappingAllowed(std::size_t query_atom_idx, st
 
 bool Chem::SubstructureSearch::checkAtomMappingConstraints(std::size_t query_atom_idx, std::size_t target_atom_idx) const
 {
-	if (query_atom_idx >= atomMappingConstrMatrixSize)
+	if (atomMappingConstrs.empty())
 		return true;
 
-	const Util::BitSet& constr_mask = atomMappingConstrMatrix[query_atom_idx];
-	std::size_t constr_mask_size = constr_mask.size();
+	std::pair<MappingConstraintMap::const_iterator, MappingConstraintMap::const_iterator> eq_range = atomMappingConstrs.equal_range(query_atom_idx);
 
-	if (constr_mask_size == 0)
+	if (eq_range.first == eq_range.second)
 		return true;
 
-	if (target_atom_idx >= constr_mask_size)
-		return false;
+	for ( ; eq_range.first != eq_range.second; ++eq_range.first)
+		if (eq_range.first->second == target_atom_idx)
+			return true;
 
-	return constr_mask.test(target_atom_idx);
+	return false;
 }
 
 bool Chem::SubstructureSearch::checkBondMappingConstraints(std::size_t query_bond_idx, std::size_t target_bond_idx) const
 {
-	if (query_bond_idx >= bondMappingConstrMatrixSize)
+	if (bondMappingConstrs.empty())
 		return true;
 
-	const Util::BitSet& constr_mask = bondMappingConstrMatrix[query_bond_idx];
-	std::size_t constr_mask_size = constr_mask.size();
+	std::pair<MappingConstraintMap::const_iterator, MappingConstraintMap::const_iterator> eq_range = bondMappingConstrs.equal_range(query_bond_idx);
 
-	if (constr_mask_size == 0)
+	if (eq_range.first == eq_range.second)
 		return true;
 
-	if (target_bond_idx >= constr_mask_size)
-		return false;
+	for ( ; eq_range.first != eq_range.second; ++eq_range.first)
+		if (eq_range.first->second == target_bond_idx)
+			return true;
 
-	return constr_mask.test(target_bond_idx);
+	return false;
 }
 
 bool Chem::SubstructureSearch::mapBonds(std::size_t query_atom_idx, std::size_t target_atom_idx)

@@ -32,6 +32,7 @@
 #include "CDPL/Chem/Molecule.hpp"
 #include "CDPL/Chem/Atom.hpp"
 #include "CDPL/Chem/AtomType.hpp"
+#include "CDPL/Chem/HybridizationState.hpp"
 
 
 using namespace CDPL; 
@@ -93,6 +94,11 @@ bool Chem::makeHydrogenComplete(Molecule& mol)
 			
 			setType(new_atom, AtomType::H);
 			setOrder(new_bond, 1);
+			setRingFlag(new_bond, false);
+			setRingFlag(new_atom, false);
+			setAromaticityFlag(new_bond, false);
+			setAromaticityFlag(new_atom, false);
+			setHybridizationState(new_atom, HybridizationState::UNKNOWN);
 			changes = true;
 		} 
 	}

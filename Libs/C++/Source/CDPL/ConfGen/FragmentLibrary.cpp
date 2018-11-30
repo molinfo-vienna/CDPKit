@@ -85,6 +85,12 @@ ConfGen::FragmentLibrary& ConfGen::FragmentLibrary::operator=(const FragmentLibr
 	return *this;
 }
 
+void ConfGen::FragmentLibrary::addEntries(const FragmentLibrary& lib)
+{
+	for (HashToFragmentMap::iterator it = lib.hashToFragMap.begin(), end = lib.hashToFragMap.end(); it != end; ++it)
+		hashToFragMap.insert(Entry(it->first, hasCDFMoleculeData(*it->second) ? it->second->clone() : it->second));
+}
+
 bool ConfGen::FragmentLibrary::addEntry(Base::uint64 frag_hash, const Chem::MolecularGraph::SharedPointer& frag)
 {
 	if (!frag)

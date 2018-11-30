@@ -1,7 +1,7 @@
 /* -*- mode: c++; c-basic-offset: 4; tab-width: 4; indent-tabs-mode: t -*- */
 
 /* 
- * ConfGen.hpp 
+ * TorsionLibrary.hpp 
  *
  * This file is part of the Chemical Data Processing Toolkit
  *
@@ -25,31 +25,51 @@
 
 /**
  * \file
- * \brief A convenience header including everything that is defined in namespace CDPL::ConfGen.
+ * \brief Definition of the class CDPL::ConfGen::TorsionLibrary.
  */
 
-#ifndef CDPL_CONFGEN_HPP
-#define CDPL_CONFGEN_HPP
+#ifndef CDPL_CONFGEN_TORSIONLIBRARY_HPP
+#define CDPL_CONFGEN_TORSIONLIBRARY_HPP
 
-#include "CDPL/Config.hpp"
+#include <boost/shared_ptr.hpp>
 
-#include "CDPL/ConfGen/DGConstraintGenerator.hpp"
-#include "CDPL/ConfGen/Raw3DCoordinatesGenerator.hpp"
-#include "CDPL/ConfGen/FragmentList.hpp"
-#include "CDPL/ConfGen/FragmentLibraryEntry.hpp"
-#include "CDPL/ConfGen/FragmentLibrary.hpp"
-#include "CDPL/ConfGen/TorsionRule.hpp"
+#include "CDPL/ConfGen/APIPrefix.hpp"
 #include "CDPL/ConfGen/TorsionCategory.hpp"
-#include "CDPL/ConfGen/TorsionLibrary.hpp"
-#include "CDPL/ConfGen/UtilityFunctions.hpp"
-#include "CDPL/ConfGen/FragmentType.hpp"
-#include "CDPL/ConfGen/ForceFieldType.hpp"
 
-#if defined(HAVE_BOOST_TIMER) && defined(HAVE_BOOST_CHRONO)
 
-#include "CDPL/ConfGen/RandomConformerGenerator.hpp"
-#include "CDPL/ConfGen/FragmentConformerGenerator.hpp"
-#include "CDPL/ConfGen/FragmentLibraryGenerator.hpp"
+namespace CDPL 
+{
 
-#endif // defined(HAVE_BOOST_TIMER) && defined(HAVE_BOOST_CHRONO)
-#endif // CDPL_CONFGEN_HPP
+	namespace ConfGen 
+	{
+
+		/**
+		 * \addtogroup CDPL_CONFGEN_DATA_STRUCTURES
+		 * @{
+		 */
+
+		class CDPL_CONFGEN_API TorsionLibrary : public TorsionCategory
+		{
+			
+		  public:
+			typedef boost::shared_ptr<TorsionLibrary> SharedPointer;
+	
+			TorsionLibrary();
+
+			void loadDefaults();
+
+			static void set(const SharedPointer& lib);
+
+			static const SharedPointer& get();
+
+		  private:
+			static SharedPointer defaultLib;
+		};
+    
+		/**
+		 * @}
+		 */
+	}
+}
+
+#endif // CDPL_CONFGEN_TORSIONLIBRARY_HPP

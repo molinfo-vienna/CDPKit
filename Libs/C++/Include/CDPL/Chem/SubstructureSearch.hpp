@@ -37,6 +37,7 @@
 #include <cstddef>
 
 #include <boost/iterator/indirect_iterator.hpp>
+#include <boost/unordered_map.hpp>
 #include <boost/shared_ptr.hpp>
 #include <boost/function.hpp>
 
@@ -347,6 +348,7 @@ namespace CDPL
 			typedef std::vector<const Bond*> BondList;
 			typedef std::vector<AtomMatchExprPtr> AtomMatchExprTable;
 			typedef std::vector<BondMatchExprPtr> BondMatchExprTable;
+			typedef boost::unordered_multimap<std::size_t, std::size_t> MappingConstraintMap;
 
 			const MolecularGraph*                 query;
 			const MolecularGraph*                 target;
@@ -355,8 +357,8 @@ namespace CDPL
 			MolecularGraphMatchExpressionFunction molGraphMatchExprFunc;
 			BitMatrix                             atomEquivMatrix;
 			BitMatrix                             bondEquivMatrix;
-			BitMatrix                             atomMappingConstrMatrix;
-			BitMatrix                             bondMappingConstrMatrix;
+			MappingConstraintMap                  atomMappingConstrs;
+			MappingConstraintMap                  bondMappingConstrs;
 			AtomQueue                             termQueryAtoms;
 			AtomMappingTable                      queryAtomMapping;
 			BondMappingTable                      queryBondMapping;
@@ -381,8 +383,6 @@ namespace CDPL
 			std::size_t                           numMappedAtoms;
 			std::size_t                           maxNumMappings;
 			std::size_t                           freeMappingIdx;
-			std::size_t                           atomMappingConstrMatrixSize;
-			std::size_t                           bondMappingConstrMatrixSize;
 		};
 
 		/**

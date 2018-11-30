@@ -78,6 +78,8 @@ namespace CDPL
 
 			FragmentLibrary& operator=(const FragmentLibrary& lib);
 
+			void addEntries(const FragmentLibrary& lib);
+
 			bool addEntry(Base::uint64 frag_hash, const Chem::MolecularGraph::SharedPointer& frag);
 
 			const Chem::MolecularGraph::SharedPointer& getEntry(Base::uint64 frag_hash) const;

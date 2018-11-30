@@ -40,7 +40,7 @@ namespace CDPL
 		{
 
 			const char* residueStructureData = 
-            #include "BuiltinResidueDictionaryStructureData.cdf.str"
+            #include "ResidueDictionaryStructureData.cdf.str"
 			;
 
             #include "ResidueDictionaryEntries.hpp"

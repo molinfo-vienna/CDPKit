@@ -40,8 +40,6 @@
 #include "CDPL/Chem/BondFunctions.hpp"
 #include "CDPL/Chem/MolecularGraphFunctions.hpp"
 #include "CDPL/Chem/AtomType.hpp"
-#include "CDPL/Chem/StereoDescriptor.hpp"
-#include "CDPL/Internal/Permutation.hpp"
 
 
 using namespace CDPL;
@@ -653,7 +651,7 @@ bool Chem::CanonicalNumberingGenerator::ComponentCmpFunc::operator()(const Canon
 Chem::CanonicalNumberingGenerator::AtomNode::AtomNode(Generator* generator, const Atom* atom, 
 													  Base::uint64 label, std::size_t id):
 	generator(generator), atom(atom), initialLabel(label), label(label), newLabel(label), 
-	id(id), configDataValid(false), partOfStereocenterValid(false) {}
+	id(id), stereoDescr(AtomConfiguration::NONE), configDataValid(false), partOfStereocenterValid(false) {}
 
 const Chem::Atom* Chem::CanonicalNumberingGenerator::AtomNode::getAtom() const
 {
@@ -732,32 +730,24 @@ void Chem::CanonicalNumberingGenerator::AtomNode::appendAtomConfigData(Connectio
 	if (!initConfigurationData())
 		return;
 
-	const Atom* nbr_atoms[4];
-
-	std::transform(edges.begin(), edges.end(), nbr_atoms,
-				   boost::bind(&AtomNode::atom, boost::bind(&Edge::getNeighborNode, _1)));
-
 	std::size_t num_edges = edges.size();
 
 	assert(num_edges == 3 || num_edges == 4);
 
-	std::size_t num_perms = 0;
-	std::size_t num_swaps = 0;
+	std::size_t perm_pty = (num_edges == 3 ? stereoDescr.getPermutationParity(*edges[0]->getNeighborNode()->atom, *edges[1]->getNeighborNode()->atom, *edges[2]->getNeighborNode()->atom) :
+							stereoDescr.getPermutationParity(*edges[0]->getNeighborNode()->atom, *edges[1]->getNeighborNode()->atom, *edges[2]->getNeighborNode()->atom, *edges[2]->getNeighborNode()->atom));
 
-	while (!std::equal(nbr_atoms, nbr_atoms + num_edges, refNbrAtoms) && (++num_perms < (num_edges == 3 ? 6 : 24)))
-		num_swaps += Internal::nextPermutation(nbr_atoms, nbr_atoms + num_edges);
-
-	if (num_perms >= (num_edges == 3 ? 6 : 24)) {  // a matching permutation should have been found
+	if (perm_pty != 1 && perm_pty != 2) {
 		hasConfiguration = false;
 		return;
 	}
 
 	ctab.push_back(label);
 
-	if ((num_swaps % 2) == 0) 
-		ctab.push_back(configuration);
+	if (perm_pty == 2) 
+		ctab.push_back(stereoDescr.getConfiguration());
 	else
-		ctab.push_back(configuration == AtomConfiguration::R ? AtomConfiguration::S : AtomConfiguration::R);
+		ctab.push_back(stereoDescr.getConfiguration() == AtomConfiguration::R ? AtomConfiguration::S : AtomConfiguration::R);
 }
 
 void Chem::CanonicalNumberingGenerator::AtomNode::appendBondConfigData(ConnectionTable& ctab) const
@@ -889,21 +879,15 @@ bool Chem::CanonicalNumberingGenerator::AtomNode::initConfigurationData()
 	if (num_edges < 3 || num_edges > 4)
 		return false;
 
-	const StereoDescriptor& stereo_desc = getStereoDescriptor(*atom);
-	std::size_t num_ref_atoms = stereo_desc.getNumReferenceAtoms();
+	stereoDescr = getStereoDescriptor(*atom);
 
-	if (num_edges != num_ref_atoms)
+	if (stereoDescr.getConfiguration() != AtomConfiguration::R && stereoDescr.getConfiguration() != AtomConfiguration::S)
 		return false;
 
-	configuration = stereo_desc.getConfiguration();
-
-	if (configuration != AtomConfiguration::R && configuration != AtomConfiguration::S)
+	if (!stereoDescr.isValid(*atom))
 		return false;
-
-	std::copy(stereo_desc.getReferenceAtoms(), stereo_desc.getReferenceAtoms() + num_ref_atoms, &refNbrAtoms[0]);
 
 	hasConfiguration = true;
-
 	return true;
 }
 
@@ -923,7 +907,8 @@ bool Chem::CanonicalNumberingGenerator::AtomNode::LessCmpFunc::operator()(const 
 
 Chem::CanonicalNumberingGenerator::Edge::Edge(const Generator* generator, const Bond* bond, Base::uint64 label, 
 											  AtomNode* nbr_node, std::size_t id):
-	generator(generator), bond(bond), nbrNode(nbr_node), label(label), id(id), configDataValid(false) {}
+	generator(generator), bond(bond), nbrNode(nbr_node), label(label), id(id), stereoDescr(BondConfiguration::NONE),
+	configDataValid(false) {}
 
 Chem::CanonicalNumberingGenerator::AtomNode* Chem::CanonicalNumberingGenerator::Edge::getNeighborNode() const
 {
@@ -962,10 +947,10 @@ void Chem::CanonicalNumberingGenerator::Edge::appendConfigurationData(const Atom
 	ctab.push_back(node->getLabel());
 	ctab.push_back(nbrNode->getLabel());
 
-	if ((ref_atoms[0] == configRefAtoms[0]) ^ (ref_atoms[1] == configRefAtoms[1]))
-		ctab.push_back(configuration == BondConfiguration::CIS ? BondConfiguration::TRANS : BondConfiguration::CIS);
+	if ((ref_atoms[0] == stereoDescr.getReferenceAtoms()[0]) ^ (ref_atoms[1] == stereoDescr.getReferenceAtoms()[3]))
+		ctab.push_back(stereoDescr.getConfiguration() == BondConfiguration::CIS ? BondConfiguration::TRANS : BondConfiguration::CIS);
 	else
-		ctab.push_back(configuration);
+		ctab.push_back(stereoDescr.getConfiguration());
 }
 
 bool Chem::CanonicalNumberingGenerator::Edge::representsStereoBond(const AtomNode* node)
@@ -992,25 +977,18 @@ bool Chem::CanonicalNumberingGenerator::Edge::initConfigurationData(const AtomNo
 	if (nbrNode->getNumEdges() < 2 || nbrNode->getNumEdges() > 3)
 		return false;
 
-	const StereoDescriptor& stereo_desc = getStereoDescriptor(*bond);
-	configuration = stereo_desc.getConfiguration();
+	stereoDescr = getStereoDescriptor(*bond);
 
-	if (configuration != BondConfiguration::CIS && configuration != BondConfiguration::TRANS)
+	if (stereoDescr.getConfiguration() != BondConfiguration::CIS && stereoDescr.getConfiguration() != BondConfiguration::TRANS)
 		return false;
 
-	if (!stereo_desc.isValid(*bond))
+	if (!stereoDescr.isValid(*bond))
 		return false;
 
-	const Atom* const* sto_ref_atoms = stereo_desc.getReferenceAtoms();
+	const Atom* const* sto_ref_atoms = stereoDescr.getReferenceAtoms();
 
-	if (sto_ref_atoms[1] == nbrNode->getAtom() && sto_ref_atoms[2] == node->getAtom()) {
-		configRefAtoms[0] = sto_ref_atoms[3];
-		configRefAtoms[1] = sto_ref_atoms[0];
-
-	} else {
-		configRefAtoms[0] = sto_ref_atoms[0];
-		configRefAtoms[1] = sto_ref_atoms[3];
-	}
+	if (sto_ref_atoms[1] == nbrNode->getAtom() && sto_ref_atoms[2] == node->getAtom()) 
+		stereoDescr = StereoDescriptor(stereoDescr.getConfiguration(), *sto_ref_atoms[3], *sto_ref_atoms[2], *sto_ref_atoms[1], *sto_ref_atoms[0]);
 
 	hasConfiguration = true;
 

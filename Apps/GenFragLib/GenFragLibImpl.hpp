@@ -62,11 +62,14 @@ namespace GenFragLib
 		GenFragLibImpl();
 
     private:
+		typedef CDPL::ConfGen::FragmentLibrary FragmentLibrary;
+
 		enum Mode 
 		{
 
 		  CREATE,
-		  UPDATE
+		  UPDATE,
+		  MERGE
 		};
 
 		typedef CDPL::Base::DataInputHandler<CDPL::Chem::Molecule> InputHandler;
@@ -86,10 +89,11 @@ namespace GenFragLib
 
 		int process();
 
+		void mergeFragmentLibraries();
 		void processSingleThreaded();
 		void processMultiThreaded();
 
-		void loadFragmentLibrary();
+		void loadFragmentLibrary(const std::string& fname, FragmentLibrary& lib);
 		int saveFragmentLibrary();
 
 		bool readNextMolecule(CDPL::Chem::Molecule& mol);
@@ -100,9 +104,8 @@ namespace GenFragLib
 
 		void printMessage(VerbosityLevel level, const std::string& msg, bool nl = true, bool file_only = false);
 
-		void printStatistics(std::size_t num_proc_mols, std::size_t num_proc_frags, 
-							 std::size_t num_added_frags, std::size_t num_gen_confs,
-							 std::size_t proc_time);
+		void printStatistics(std::size_t num_proc_mols, std::size_t num_proc_frags, std::size_t num_error_frags, 
+							 std::size_t num_added_frags, std::size_t num_gen_confs, std::size_t proc_time);
 
 		void checkInputFiles() const;
 		void printOptionSummary();
@@ -122,7 +125,6 @@ namespace GenFragLib
 		typedef CDPL::Base::DataReader<CDPL::Chem::Molecule> MoleculeReader;
 		typedef CDPL::Util::CompoundDataReader<CDPL::Chem::Molecule> CompMoleculeReader;
 		typedef boost::chrono::system_clock Clock;
-		typedef CDPL::ConfGen::FragmentLibrary FragmentLibrary;
 
 		StringList                     inputFiles;
 		std::string                    outputFile;
@@ -135,6 +137,7 @@ namespace GenFragLib
 		std::size_t                    confGenTrialFactor;
 		unsigned int                   forceFieldType;
 		bool                           useInputCoords;
+		bool                           strictMMFF94AtomTypes;
 		InputHandlerPtr                inputHandler;
 		CompMoleculeReader             inputReader;
 		FragmentLibrary::SharedPointer fragmentLibPtr;

@@ -46,6 +46,7 @@ void CDPLPythonConfGen::exportRandomConformerGenerator()
 	python::enum_<ConfGen::RandomConformerGenerator::Status>("Status")
 		.value("SUCCESS", ConfGen::RandomConformerGenerator::SUCCESS)
 		.value("UNINITIALIZED", ConfGen::RandomConformerGenerator::UNINITIALIZED)
+		.value("MINIMIZATION_ERROR", ConfGen::RandomConformerGenerator::MINIMIZATION_ERROR)
 		.value("MAX_NUM_TRIALS_EXCEEDED", ConfGen::RandomConformerGenerator::MAX_NUM_TRIALS_EXCEEDED)
 		.value("TIMEOUT_EXCEEDED", ConfGen::RandomConformerGenerator::TIMEOUT_EXCEEDED)
 		.export_values();

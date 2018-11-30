@@ -176,18 +176,12 @@ void ConfGen::prepareForConformerGeneration(Chem::Molecule& mol)
 	using namespace Chem;
 
 	calcImplicitHydrogenCounts(mol, false);
-
-	bool changed = makeHydrogenComplete(mol);
-
-	if (changed)
-		calcImplicitHydrogenCounts(mol, true);
-
-	perceiveComponents(mol, changed);
 	perceiveHybridizationStates(mol, false);
 
+	perceiveComponents(mol, false);
 	perceiveSSSR(mol, false);
-	setRingFlags(mol, changed);
-	setAromaticityFlags(mol, changed);
+	setRingFlags(mol, false);
+	setAromaticityFlags(mol, false);
 
 	for (Molecule::AtomIterator it = mol.getAtomsBegin(), end = mol.getAtomsEnd(); it != end; ++it) {
 		Atom& atom = *it;
@@ -207,5 +201,10 @@ void ConfGen::prepareForConformerGeneration(Chem::Molecule& mol)
 		
 		else if (!hasStereoDescriptor(bond) || getStereoDescriptor(bond).getConfiguration() == AtomConfiguration::UNDEF)
 			setStereoDescriptor(bond, calcStereoDescriptor(bond, mol, 1));
+	}
+
+	if (makeHydrogenComplete(mol)) {
+		calcImplicitHydrogenCounts(mol, true);
+		perceiveComponents(mol, true);
 	}
 }

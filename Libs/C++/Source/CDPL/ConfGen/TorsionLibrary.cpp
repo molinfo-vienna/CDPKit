@@ -1,7 +1,7 @@
 /* -*- mode: c++; c-basic-offset: 4; tab-width: 4; indent-tabs-mode: t -*- */
 
 /* 
- * ConfGen.hpp 
+ * TorsionLibrary.cpp 
  *
  * This file is part of the Chemical Data Processing Toolkit
  *
@@ -23,33 +23,47 @@
  * Boston, MA 02111-1307, USA.
  */
 
-/**
- * \file
- * \brief A convenience header including everything that is defined in namespace CDPL::ConfGen.
- */
 
-#ifndef CDPL_CONFGEN_HPP
-#define CDPL_CONFGEN_HPP
+#include "StaticInit.hpp"
 
-#include "CDPL/Config.hpp"
-
-#include "CDPL/ConfGen/DGConstraintGenerator.hpp"
-#include "CDPL/ConfGen/Raw3DCoordinatesGenerator.hpp"
-#include "CDPL/ConfGen/FragmentList.hpp"
-#include "CDPL/ConfGen/FragmentLibraryEntry.hpp"
-#include "CDPL/ConfGen/FragmentLibrary.hpp"
-#include "CDPL/ConfGen/TorsionRule.hpp"
-#include "CDPL/ConfGen/TorsionCategory.hpp"
 #include "CDPL/ConfGen/TorsionLibrary.hpp"
-#include "CDPL/ConfGen/UtilityFunctions.hpp"
-#include "CDPL/ConfGen/FragmentType.hpp"
-#include "CDPL/ConfGen/ForceFieldType.hpp"
 
-#if defined(HAVE_BOOST_TIMER) && defined(HAVE_BOOST_CHRONO)
 
-#include "CDPL/ConfGen/RandomConformerGenerator.hpp"
-#include "CDPL/ConfGen/FragmentConformerGenerator.hpp"
-#include "CDPL/ConfGen/FragmentLibraryGenerator.hpp"
+using namespace CDPL;
 
-#endif // defined(HAVE_BOOST_TIMER) && defined(HAVE_BOOST_CHRONO)
-#endif // CDPL_CONFGEN_HPP
+
+namespace
+{
+
+    ConfGen::TorsionLibrary::SharedPointer builtinTorLib(new ConfGen::TorsionLibrary());
+
+    struct Init
+    {
+
+		Init() {
+			builtinTorLib->loadDefaults();
+		}
+
+    } init;
+}
+
+
+ConfGen::TorsionLibrary::SharedPointer ConfGen::TorsionLibrary::defaultLib = builtinTorLib;
+
+
+ConfGen::TorsionLibrary::TorsionLibrary(): TorsionCategory("") {}
+
+void ConfGen::TorsionLibrary::loadDefaults()
+{
+    // TODO
+}
+
+void ConfGen::TorsionLibrary::set(const SharedPointer& lib)
+{
+    defaultLib = (!lib ? builtinTorLib : lib);
+}
+
+const ConfGen::TorsionLibrary::SharedPointer& ConfGen::TorsionLibrary::get()
+{
+    return defaultLib;
+}

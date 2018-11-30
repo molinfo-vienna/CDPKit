@@ -65,8 +65,8 @@ namespace
 
 	const Math::Vector3D trigonalBipyramidalTemplate[] = {
 	    Math::vec(0.0, 0.0, 1.0),
-	    Math::vec(0.0, 0.0, -1.0),
 	    Math::vec(0.0, -1.0, 0.0),
+	    Math::vec(0.0, 0.0, -1.0),
 		Math::vec(-SQRT_3 * 0.5, 0.5, 0.0),
 		Math::vec(SQRT_3 * 0.5, 0.5, 0.0)
 	};
@@ -555,7 +555,6 @@ void Chem::Hydrogen3DCoordinatesGenerator::assignTemplateCoords(
 	if (num_def_atoms == 1) {
 		Math::Vector3D ref_vec;	getRotationReferenceVector(atom, atom_idx, conctdAtoms[0], num_def_atoms, ref_vec, coords);
 		Math::Vector3D bond_vec = coords[conctdAtoms[0]] - coords[atom_idx];
-	
 		Math::Matrix3D ctr_atom_basis; buildOrthogonalBasis(bond_vec, ref_vec, ctr_atom_basis, false);
 		Math::Matrix3D tmplt_basis; buildOrthogonalBasis(tmplt[0], tmplt[1], tmplt_basis, true);
 		Math::Matrix3D tmplt_xform = prod(ctr_atom_basis, tmplt_basis);
@@ -763,6 +762,7 @@ void Chem::Hydrogen3DCoordinatesGenerator::buildOrthogonalBasis(
 		row(basis, 2) = crossProd(v1, v2);
 		row(basis, 2) /= length(row(basis, 2));
 		row(basis, 1) = crossProd(row(basis, 2), row(basis, 0));
+
 		return;
 	}
 

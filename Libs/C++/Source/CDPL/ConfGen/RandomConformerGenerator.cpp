@@ -27,6 +27,7 @@
 #include "StaticInit.hpp"
 
 #include <boost/bind.hpp>
+#include <boost/math/special_functions.hpp>
 
 #include "CDPL/ConfGen/RandomConformerGenerator.hpp"
 #include "CDPL/ForceField/InteractionType.hpp"
@@ -193,9 +194,16 @@ ConfGen::RandomConformerGenerator::Status ConfGen::RandomConformerGenerator::gen
 			if ((j % 50) == 0 && timeoutExceeded())
 				return TIMEOUT_EXCEEDED;
 
-			if (energyMinimizer.iterate(energy, coords.getData(), gradient) != BFGSMinimizer::SUCCESS) 
+			if (energyMinimizer.iterate(energy, coords.getData(), gradient) != BFGSMinimizer::SUCCESS) {
+				if ((boost::math::isnan)(energy))
+					return MINIMIZATION_ERROR;
+
 				break;
-			
+			}
+
+			if ((boost::math::isnan)(energy))
+				return MINIMIZATION_ERROR;
+
 			if (minStopGradNorm >= 0.0 && energyMinimizer.getGradientNorm() <= minStopGradNorm)
 				break;
 		}

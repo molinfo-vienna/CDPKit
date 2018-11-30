@@ -1,11 +1,30 @@
-INCLUDE_DIRECTORIES("${CMAKE_CURRENT_SOURCE_DIR}" "${CDPL_SOURCE_DIR}")
+INCLUDE_DIRECTORIES("${CMAKE_CURRENT_SOURCE_DIR}" "${CDPL_SOURCE_DIR}" "${CMAKE_CURRENT_BINARY_DIR}")
+
+SET(DATA_FILES
+    TorsionLibrary.xml
+   )
+
+FOREACH(DATA_FILE ${DATA_FILES})
+  ADD_CUSTOM_COMMAND(OUTPUT "${DATA_FILE}.str"
+		     COMMAND "${PYTHON_EXECUTABLE}" "${CDPKIT_PYTHON_SCRIPTS_DIR}/FileDataToCString.py" 
+  		     "${CDPKIT_BUILTIN_DATA_DIR}/ConfGen/${DATA_FILE}" 
+		     "${DATA_FILE}.str"
+		     DEPENDS "${CDPKIT_BUILTIN_DATA_DIR}/ConfGen/${DATA_FILE}"
+		     )
+  SET(DATA_FILE_STRINGS "${DATA_FILE_STRINGS}" "${DATA_FILE}.str") 
+ENDFOREACH(DATA_FILE)
 
 SET(cdpl-confgen_LIB_SRCS
+    ${DATA_FILE_STRINGS}
+
     DGConstraintGenerator.cpp
     Raw3DCoordinatesGenerator.cpp
     FragmentList.cpp
     FragmentLibraryEntry.cpp
     FragmentLibrary.cpp
+    TorsionLibrary.cpp
+    TorsionRule.cpp
+    TorsionCategory.cpp
     CDFFragmentLibraryDataReader.cpp
     CDFFragmentLibraryDataWriter.cpp
     CDFMoleculeDataFunctions.cpp

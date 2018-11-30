@@ -156,20 +156,23 @@ Chem::StereoDescriptor Chem::calcStereoDescriptor(const Atom& atom, const Molecu
 		const StereoDescriptor& stereo_desc = getStereoDescriptor(atom);
 		unsigned int config = stereo_desc.getConfiguration();
 
-		if (config == AtomConfiguration::R || config == AtomConfiguration::S) {
+		if ((config == AtomConfiguration::R || config == AtomConfiguration::S) && stereo_desc.isValid(atom)) {
 			unsigned int perm_parity = (num_bonds == 3 ? 
 										stereo_desc.getPermutationParity(*ligands[0].first, *ligands[1].first, *ligands[2].first) :
 										stereo_desc.getPermutationParity(*ligands[0].first, *ligands[1].first, *ligands[2].first, *ligands[3].first));
 
 			if (perm_parity == 1)
 				return makeStereoDescriptor(config == AtomConfiguration::R ? AtomConfiguration::S : AtomConfiguration::R, atom, molgraph);
-				
+
 			if (perm_parity == 2)
 				return makeStereoDescriptor(config, atom, molgraph);
-		}
+		} 
+
+		if (config == AtomConfiguration::EITHER || config == AtomConfiguration::NONE)
+			return makeStereoDescriptor(config, atom, molgraph);
 
 		if (dim == 0)
-			return makeStereoDescriptor(AtomConfiguration::EITHER, atom, molgraph);
+			return makeStereoDescriptor(AtomConfiguration::NONE, atom, molgraph);
 	}
 
     if (num_bonds == 3) 

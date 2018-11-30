@@ -46,6 +46,7 @@
 #include "CDPL/Chem/APIPrefix.hpp"
 #include "CDPL/Chem/AtomPropertyFlag.hpp"
 #include "CDPL/Chem/BondPropertyFlag.hpp"
+#include "CDPL/Chem/StereoDescriptor.hpp"
 #include "CDPL/Util/Array.hpp"
 #include "CDPL/Util/BitSet.hpp"
 #include "CDPL/Base/IntegerTypes.hpp"
@@ -266,8 +267,7 @@ namespace CDPL
 				Util::BitSet      equivNodeMask;
 				Util::BitSet      nonEquivNodeMask;
 				EdgeList          edges;
-				const Atom*       refNbrAtoms[4];
-				unsigned int      configuration;
+				StereoDescriptor  stereoDescr;
 				bool              hasConfiguration;
 				bool              configDataValid;
 				bool              partOfStereocenter;
@@ -306,8 +306,7 @@ namespace CDPL
 				AtomNode*         nbrNode;
 				Base::uint64      label;
 				std::size_t       id;
-				const Atom*       configRefAtoms[2];
-				unsigned int      configuration;
+				StereoDescriptor  stereoDescr;
 				bool              hasConfiguration;
 				bool              configDataValid;
 			};
