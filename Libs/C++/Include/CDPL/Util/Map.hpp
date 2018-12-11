@@ -53,6 +53,29 @@ namespace CDPL
 		 * @{
 		 */
 
+		template <typename ValueType, bool Allow = true> 
+		struct MapDefaultValue
+		{
+
+			static const ValueType& get() {
+				return defValue;
+			} 
+
+			static const ValueType defValue;
+		};
+
+		template <typename ValueType, bool Allow> 
+		const ValueType MapDefaultValue<ValueType, Allow>::defValue = ValueType();
+
+		template <typename ValueType> 
+		struct MapDefaultValue<ValueType, false>
+		{
+
+			static const ValueType& get() {
+				throw Base::OperationFailed("Map: default value not supported");
+			} 
+		};
+
 		/**
 		 * \brief A unique sorted associative container that maps keys to values.
 		 *
@@ -967,9 +990,7 @@ const char* CDPL::Util::Map<Key, Value, AllowDefValues, KeyCompFunc>::getClassNa
 template <typename Key, typename Value, bool AllowDefValues, typename KeyCompFunc>
 const Value& CDPL::Util::Map<Key, Value, AllowDefValues, KeyCompFunc>::getDefaultValue() const
 {
-	static const Value def_value = Value();
-
-	return def_value;
+	return MapDefaultValue<Value, AllowDefValues>::get();
 }
 
 #endif // CDPL_UTIL_MAP_HPP

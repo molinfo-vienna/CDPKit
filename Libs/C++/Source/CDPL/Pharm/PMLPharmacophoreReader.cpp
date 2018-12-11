@@ -29,6 +29,7 @@
 #include <boost/lexical_cast.hpp>
 
 #include "CDPL/Pharm/PMLPharmacophoreReader.hpp"
+#include "CDPL/Pharm/Pharmacophore.hpp"
 #include "CDPL/Base/Exceptions.hpp"
 
 #include "PMLDataReader.hpp"
@@ -42,9 +43,12 @@ Pharm::PMLPharmacophoreReader::PMLPharmacophoreReader(std::istream& is):
 
 Pharm::PMLPharmacophoreReader::~PMLPharmacophoreReader() {}
 
-bool Pharm::PMLPharmacophoreReader::readData(std::istream& is, Pharmacophore& pharm)
+bool Pharm::PMLPharmacophoreReader::readData(std::istream& is, Pharmacophore& pharm, bool overwrite)
 {
 	try {
+		if (overwrite)
+			pharm.clear();
+
 		return reader->readPharmacophore(is, pharm);
 
 	} catch (const std::exception& e) {

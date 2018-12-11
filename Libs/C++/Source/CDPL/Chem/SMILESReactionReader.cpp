@@ -29,6 +29,7 @@
 #include <boost/lexical_cast.hpp>
 
 #include "CDPL/Chem/SMILESReactionReader.hpp"
+#include "CDPL/Chem/Reaction.hpp"
 #include "CDPL/Base/Exceptions.hpp"
 
 #include "SMILESDataReader.hpp"
@@ -42,9 +43,12 @@ Chem::SMILESReactionReader::SMILESReactionReader(std::istream& is):
 
 Chem::SMILESReactionReader::~SMILESReactionReader() {}
 
-bool Chem::SMILESReactionReader::readData(std::istream& is, Reaction& rxn)
+bool Chem::SMILESReactionReader::readData(std::istream& is, Reaction& rxn, bool overwrite)
 {
 	try {
+		if (overwrite)
+			rxn.clear();
+
 		return reader->readReaction(is, rxn);
 
 	} catch (const std::exception& e) {

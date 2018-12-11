@@ -51,7 +51,7 @@ int Chem::generateINCHI(const MolecularGraph& molgraph, std::string& inchi, cons
 	if (!inchi_writer.write(molgraph))
 		return inchi_writer.getReturnCode();
 
-	inchi.append(oss.str());
+	inchi = oss.str();
 
 	return inchi_writer.getReturnCode();
 }
@@ -73,7 +73,7 @@ int Chem::generateINCHIKey(const MolecularGraph& molgraph, std::string& inchi_ke
 	if (ret_code != INCHIKEY_OK)
 		return INCHIReturnCode::ERROR;
 
-	inchi_key.append(inchi_key_cstr);
+	inchi_key = inchi_key_cstr;
 
 	return INCHIReturnCode::OKAY;
 }

@@ -95,12 +95,15 @@ void Chem::buildExplicitMolecularFormula(const AtomContainer& cntnr, std::string
 		formula_os << '?';
 	if (unknown_count > 1)
 		formula_os << boost::lexical_cast<std::string>(unknown_count);
-
-	formula.append(formula_os.str());
+	
+	formula = formula_os.str();
 }
 
-void Chem::buildExplicitElementHistogram(const AtomContainer& cntnr, ElementHistogram& hist)
+void Chem::buildExplicitElementHistogram(const AtomContainer& cntnr, ElementHistogram& hist, bool append)
 {
+	if (!append)
+		hist.clear();
+
 	AtomContainer::ConstAtomIterator atoms_end = cntnr.getAtomsEnd();
 
 	for (AtomContainer::ConstAtomIterator it = cntnr.getAtomsBegin(); it != atoms_end; ++it) {

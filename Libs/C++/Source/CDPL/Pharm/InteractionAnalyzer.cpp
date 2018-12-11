@@ -60,8 +60,12 @@ Pharm::InteractionAnalyzer::getConstraintFunction(unsigned int type1, unsigned i
     return (it == constraintFuncMap.end() ? DEF_FUNC : it->second);
 }
 
-void Pharm::InteractionAnalyzer::analyze(const FeatureContainer& cntnr1, const FeatureContainer& cntnr2, FeatureMapping& iactions) const
+void Pharm::InteractionAnalyzer::analyze(const FeatureContainer& cntnr1, const FeatureContainer& cntnr2, 
+										 FeatureMapping& iactions, bool append) const
 {
+	if (!append)
+		iactions.clear();
+	
 	ConstraintFunctionMap::const_iterator cf_map_end = constraintFuncMap.end();
 	FeatureTypePair type_pair;
 

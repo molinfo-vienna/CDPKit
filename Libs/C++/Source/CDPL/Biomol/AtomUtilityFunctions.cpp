@@ -81,7 +81,7 @@ bool Biomol::areInSameResidue(const Chem::Atom& atom1, const Chem::Atom& atom2, 
 }
 
 void Biomol::extractResidueSubstructure(const Chem::Atom& atom, const Chem::MolecularGraph& molgraph, 
-										Chem::Fragment& res_substruct, bool cnctd_only, unsigned int flags)
+										Chem::Fragment& res_substruct, bool cnctd_only, unsigned int flags, bool append)
 {
 	using namespace Chem;
 
@@ -91,6 +91,9 @@ void Biomol::extractResidueSubstructure(const Chem::Atom& atom, const Chem::Mole
 			AtomPropertyFlag::RESIDUE_INS_CODE |
 			AtomPropertyFlag::CHAIN_ID |
 			AtomPropertyFlag::MODEL_NUMBER;
+
+	if (!append)
+		res_substruct.clear();
 
 	std::string res_code = (flags & AtomPropertyFlag::RESIDUE_CODE) ? getResidueCode(atom) : std::string();
 	std::size_t model_no = (flags & AtomPropertyFlag::MODEL_NUMBER) ? getModelNumber(atom) : std::size_t(0);
@@ -164,7 +167,7 @@ void Biomol::extractResidueSubstructure(const Chem::Atom& atom, const Chem::Mole
 			if ((flags & AtomPropertyFlag::RESIDUE_CODE) && res_code != getResidueCode(cand_atom))
 				continue;
 
-			extractResidueSubstructure(cand_atom, molgraph, res_substruct, cnctd_only, flags);
+			extractResidueSubstructure(cand_atom, molgraph, res_substruct, cnctd_only, flags, true);
 		}
 
 		res_substruct.addBond(*b_it);

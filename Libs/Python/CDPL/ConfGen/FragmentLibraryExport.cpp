@@ -82,7 +82,7 @@ void CDPLPythonConfGen::exportFragmentLibrary()
 			 (python::arg("self"), python::arg("lib")), python::return_self<>())
 		.add_property("numEntries", &ConfGen::FragmentLibrary::getNumEntries)
 		.add_property("entries", python::make_function(&getEntries))
-		.def("set", &ConfGen::FragmentLibrary::set, python::arg("map"))
+		.def("set", &ConfGen::FragmentLibrary::set, python::arg("lib"))
 		.staticmethod("set")
 		.def("get", &ConfGen::FragmentLibrary::get, python::return_value_policy<python::copy_const_reference>())
 		.staticmethod("get");

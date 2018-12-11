@@ -29,6 +29,7 @@
 #include <boost/lexical_cast.hpp>
 
 #include "CDPL/Biomol/PDBMoleculeReader.hpp"
+#include "CDPL/Chem/Molecule.hpp"
 #include "CDPL/Base/Exceptions.hpp"
 
 #include "PDBDataReader.hpp"
@@ -42,9 +43,12 @@ Biomol::PDBMoleculeReader::PDBMoleculeReader(std::istream& is):
 
 Biomol::PDBMoleculeReader::~PDBMoleculeReader() {}
 
-bool Biomol::PDBMoleculeReader::readData(std::istream& is, Chem::Molecule& mol)
+bool Biomol::PDBMoleculeReader::readData(std::istream& is, Chem::Molecule& mol, bool overwrite)
 {
 	try {
+		if (overwrite)
+			mol.clear();
+
 		return reader->readPDBFile(is, mol);
 
 	} catch (const std::exception& e) {

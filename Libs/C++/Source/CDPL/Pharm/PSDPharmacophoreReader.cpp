@@ -87,7 +87,7 @@ Pharm::PSDPharmacophoreReader::~PSDPharmacophoreReader()
 	try { accessor.close(); } catch (...) {}
 }
 
-Pharm::PSDPharmacophoreReader& Pharm::PSDPharmacophoreReader::read(Pharmacophore& pharm)
+Pharm::PSDPharmacophoreReader& Pharm::PSDPharmacophoreReader::read(Pharmacophore& pharm, bool overwrite)
 {
 	state = false;
 
@@ -95,7 +95,7 @@ Pharm::PSDPharmacophoreReader& Pharm::PSDPharmacophoreReader::read(Pharmacophore
 		return *this;
 
 	try {
-		accessor.getPharmacophore(recordIndex, pharm);
+		accessor.getPharmacophore(recordIndex, pharm, overwrite);
 
 	} catch (const std::exception& e) {
 		throw Base::IOError("PSDPharmacophoreReader: while reading record " + boost::lexical_cast<std::string>(recordIndex) + 
@@ -110,11 +110,11 @@ Pharm::PSDPharmacophoreReader& Pharm::PSDPharmacophoreReader::read(Pharmacophore
     return *this;
 }
 
-Pharm::PSDPharmacophoreReader& Pharm::PSDPharmacophoreReader::read(std::size_t idx, Pharmacophore& pharm)
+Pharm::PSDPharmacophoreReader& Pharm::PSDPharmacophoreReader::read(std::size_t idx, Pharmacophore& pharm, bool overwrite)
 {
 	setRecordIndex(idx);
 
-	return read(pharm);
+	return read(pharm, overwrite);
 }
 
 Pharm::PSDPharmacophoreReader& Pharm::PSDPharmacophoreReader::skip()

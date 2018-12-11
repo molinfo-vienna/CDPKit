@@ -110,7 +110,7 @@ namespace CDPL
 
 			RDFReactionReader& operator=(const RDFReactionReader&);
 
-			bool readData(std::istream&, Reaction&);
+			bool readData(std::istream&, Reaction&, bool overwrite);
 			bool skipData(std::istream&);
 			bool moreData(std::istream&);
 

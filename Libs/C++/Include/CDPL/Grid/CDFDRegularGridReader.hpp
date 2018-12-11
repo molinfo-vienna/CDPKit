@@ -77,7 +77,7 @@ namespace CDPL
 
 			CDFDRegularGridReader& operator=(const CDFDRegularGridReader&);
 
-			bool readData(std::istream&, DRegularGrid&);
+			bool readData(std::istream&, DRegularGrid&, bool overwrite);
 			bool skipData(std::istream&);
 			bool moreData(std::istream&);
 

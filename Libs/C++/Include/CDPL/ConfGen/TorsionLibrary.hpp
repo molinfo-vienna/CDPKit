@@ -54,8 +54,6 @@ namespace CDPL
 		  public:
 			typedef boost::shared_ptr<TorsionLibrary> SharedPointer;
 	
-			TorsionLibrary();
-
 			void loadDefaults();
 
 			static void set(const SharedPointer& lib);

@@ -73,11 +73,11 @@ void CDPLPythonPharm::exportFeatureContainerFunctions()
 	python::def("getFeatureCount", static_cast<std::size_t (*)(const Pharm::FeatureContainer&, unsigned int)>(&Pharm::getFeatureCount), 
 				(python::arg("cntnr"), python::arg("type")));
 	python::def("buildFeatureTypeHistogram", &Pharm::buildFeatureTypeHistogram, 
-				(python::arg("cntnr"), python::arg("hist")));
+				(python::arg("cntnr"), python::arg("hist"), python::arg("append") = false));
 	python::def("checkExclusionVolumeClash", &checkExclusionVolumeClashWrapper5, 
 				(python::arg("ftr_cntnr"), python::arg("atom_cntnr"), python::arg("coords_func"), 
 				 python::arg("xform"), python::arg("vdw_factor") = 1.0));
-	python::def("getFeatureAtoms", &Pharm::getFeatureAtoms, (python::arg("cntnr"), python::arg("atoms")));
+	python::def("getFeatureAtoms", &Pharm::getFeatureAtoms, (python::arg("cntnr"), python::arg("atoms"), python::arg("append") = false));
 
 	EXPORT_FTRCONTAINER_FUNCS_COPY_REF(Name, name)
 }

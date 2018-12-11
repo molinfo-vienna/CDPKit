@@ -66,8 +66,11 @@ void Chem::applyConformation(AtomContainer& cntnr, std::size_t conf_idx)
 	}
 }
 
-void Chem::getConformation(const AtomContainer& cntnr, std::size_t conf_idx, Math::Vector3DArray& coords)
+void Chem::getConformation(const AtomContainer& cntnr, std::size_t conf_idx, Math::Vector3DArray& coords, bool append)
 {
+	if (!append)
+		coords.clear();
+
 	for (AtomContainer::ConstAtomIterator it = cntnr.getAtomsBegin(), end = cntnr.getAtomsEnd(); it != end; ++it)
 		coords.addElement((*get3DCoordinatesArray(*it))[conf_idx]);
 }

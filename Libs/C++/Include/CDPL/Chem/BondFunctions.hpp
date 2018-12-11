@@ -88,7 +88,7 @@ namespace CDPL
 
 		CDPL_CHEM_API std::size_t getNumContainingFragments(const Bond& bond, const FragmentList& frag_list);
 
-		CDPL_CHEM_API void getContainingFragments(const Bond& bond, const FragmentList& frag_list, FragmentList& cont_frag_list);
+		CDPL_CHEM_API void getContainingFragments(const Bond& bond, const FragmentList& frag_list, FragmentList& cont_frag_list, bool append = false);
 
 
 		CDPL_CHEM_API bool getAromaticityFlag(const Bond& bond);

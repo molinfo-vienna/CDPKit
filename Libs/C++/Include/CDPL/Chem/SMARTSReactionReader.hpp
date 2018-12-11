@@ -90,7 +90,7 @@ namespace CDPL
 
 			SMARTSReactionReader& operator=(const SMARTSReactionReader&);
 
-			bool readData(std::istream&, Reaction&);
+			bool readData(std::istream&, Reaction&, bool overwrite);
 			bool skipData(std::istream&);
 			bool moreData(std::istream&);
 

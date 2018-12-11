@@ -75,8 +75,6 @@ def process():
             xhashes.add(hashcode)
             writer.write(mol)
 
-        mol.clear()
-      
         stats.read += 1
 
         if stats.read % 10000 == 0:

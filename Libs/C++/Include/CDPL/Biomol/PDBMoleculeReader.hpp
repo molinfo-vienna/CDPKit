@@ -84,7 +84,7 @@ namespace CDPL
 
 			PDBMoleculeReader& operator=(const PDBMoleculeReader&);
 
-			bool readData(std::istream&, Chem::Molecule&);
+			bool readData(std::istream&, Chem::Molecule&, bool overwrite);
 			bool skipData(std::istream&);
 			bool moreData(std::istream&);
 

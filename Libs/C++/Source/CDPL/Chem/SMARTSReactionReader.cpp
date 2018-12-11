@@ -29,6 +29,7 @@
 #include <boost/lexical_cast.hpp>
 
 #include "CDPL/Chem/SMARTSReactionReader.hpp"
+#include "CDPL/Chem/Reaction.hpp"
 #include "CDPL/Base/Exceptions.hpp"
 
 #include "SMARTSDataReader.hpp"
@@ -42,9 +43,12 @@ Chem::SMARTSReactionReader::SMARTSReactionReader(std::istream& is):
 
 Chem::SMARTSReactionReader::~SMARTSReactionReader() {}
 
-bool Chem::SMARTSReactionReader::readData(std::istream& is, Reaction& rxn)
+bool Chem::SMARTSReactionReader::readData(std::istream& is, Reaction& rxn, bool overwrite)
 {
 	try {
+		if (overwrite)
+			rxn.clear();
+
 		return reader->readReaction(is, rxn);
 
 	} catch (const std::exception& e) {

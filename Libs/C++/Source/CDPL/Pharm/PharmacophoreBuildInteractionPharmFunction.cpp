@@ -39,8 +39,11 @@
 using namespace CDPL; 
 
 
-void Pharm::buildInteractionPharmacophore(Pharmacophore& pharm, const FeatureMapping& iactions)
+void Pharm::buildInteractionPharmacophore(Pharmacophore& pharm, const FeatureMapping& iactions, bool append)
 {
+	if (!append)
+		pharm.clear();
+
 	for (FeatureMapping::ConstEntryIterator it = iactions.getEntriesBegin(), end = iactions.getEntriesEnd(); it != end; ) {
 		if (!it->first || !it->second) {
 			++it;

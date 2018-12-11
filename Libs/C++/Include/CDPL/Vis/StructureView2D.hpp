@@ -499,7 +499,7 @@ namespace CDPL
 			 * \param anchor_pos The anchor position of the primitive in the atom 2D coordinates space of the structure.
 			 * \param prim The graphics primitive to render.
 			 * \param alignment The alignment of the primitive relative to the anchor position.
-			 * \param front \c true if the primitive shall be rendered after the structure, and \false if before.
+			 * \param front \c true if the primitive shall be rendered after the structure, and \c false if before.
 			 * \note A copy of the specified graphics primitive gets stored and thus can be reused/changed after the call.
 			 */
 			void addGraphicsPrimitive(const Math::Vector2D& anchor_pos, const GraphicsPrimitive2D& prim, unsigned int alignment, bool front);
@@ -509,7 +509,7 @@ namespace CDPL
 			 * \param anchor_atom Specifies an atom of the structure that serves as the anchor position of the primitive.
 			 * \param prim The graphics primitive to render.
 			 * \param alignment The alignment of the primitive relative to the anchor atom position.
-			 * \param front \c true if the primitive shall be rendered after the structure, and \false if before.
+			 * \param front \c true if the primitive shall be rendered after the structure, and \c false if before.
 			 * \note A copy of the specified graphics primitive gets stored and thus can be reused/changed after the call.
 			 */
 			void addGraphicsPrimitive(const Chem::Atom& anchor_atom, const GraphicsPrimitive2D& prim, unsigned int alignment, bool front);
@@ -519,7 +519,7 @@ namespace CDPL
 			 * \param anchor_atoms Specifies a group of atoms of the structure whose centroid serves as the anchor position of the primitive.
 			 * \param prim The graphics primitive to render.
 			 * \param alignment The alignment of the primitive relative to the centroid of the anchor atom group.
-			 * \param front \c true if the primitive shall be rendered after the structure, and \false if before.
+			 * \param front \c true if the primitive shall be rendered after the structure, and \c false if before.
 			 * \note A copy of the specified graphics primitive gets stored and thus can be reused/changed after the call.
 			 */
 			void addGraphicsPrimitive(const Chem::Fragment& anchor_atoms, const GraphicsPrimitive2D& prim, unsigned int alignment, bool front);

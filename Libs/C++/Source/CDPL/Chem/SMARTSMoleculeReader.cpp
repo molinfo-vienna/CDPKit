@@ -29,6 +29,7 @@
 #include <boost/lexical_cast.hpp>
 
 #include "CDPL/Chem/SMARTSMoleculeReader.hpp"
+#include "CDPL/Chem/Molecule.hpp"
 #include "CDPL/Base/Exceptions.hpp"
 
 #include "SMARTSDataReader.hpp"
@@ -42,9 +43,12 @@ Chem::SMARTSMoleculeReader::SMARTSMoleculeReader(std::istream& is):
 
 Chem::SMARTSMoleculeReader::~SMARTSMoleculeReader() {}
 
-bool Chem::SMARTSMoleculeReader::readData(std::istream& is, Molecule& mol)
+bool Chem::SMARTSMoleculeReader::readData(std::istream& is, Molecule& mol, bool overwrite)
 {
 	try {
+		if (overwrite)
+			mol.clear();
+
 		return reader->readMolecule(is, mol);
 
 	} catch (const std::exception& e) {

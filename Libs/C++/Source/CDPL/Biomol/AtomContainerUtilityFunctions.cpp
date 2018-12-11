@@ -32,7 +32,7 @@
 
 #include "CDPL/Biomol/AtomContainerFunctions.hpp"
 #include "CDPL/Biomol/AtomFunctions.hpp"
-#include "CDPL/Chem/AtomContainer.hpp"
+#include "CDPL/Chem/Fragment.hpp"
 #include "CDPL/Chem/Atom.hpp"
 
 
@@ -40,9 +40,12 @@ using namespace CDPL;
 
 
 void Biomol::extractResidueSubstructures(const Chem::AtomContainer& cntnr, const Chem::MolecularGraph& molgraph, 
-					 Chem::Fragment& res_substructs, bool cnctd_only, unsigned int flags)
+										 Chem::Fragment& res_substructs, bool cnctd_only, unsigned int flags, bool append)
 {
+	if (!append)
+		res_substructs.clear();
+
     std::for_each(cntnr.getAtomsBegin(), cntnr.getAtomsEnd(), 
 		  boost::bind(&extractResidueSubstructure, _1, boost::ref(molgraph), boost::ref(res_substructs),
-			      cnctd_only, flags));
+					  cnctd_only, flags, true));
 }

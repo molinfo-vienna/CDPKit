@@ -41,17 +41,8 @@
 namespace CDPL 
 {
 
-	namespace Chem
-	{
-
-		class MolecularGraph;
-	}
-
     namespace Pharm
     {
-
-		class Pharmacophore;
-		class FeatureGenerator;
 
 		/**
 		 * \addtogroup CDPL_PHARM_PERCEPTION
@@ -61,7 +52,7 @@ namespace CDPL
 		/**
 		 * \brief PharmacophoreGenerator.
 		 */
-		class CDPL_PHARM_API PharmacophoreGenerator : public FeatureGenerator
+		class CDPL_PHARM_API PharmacophoreGenerator 
 		{
 
 		  public:
@@ -70,9 +61,11 @@ namespace CDPL
 			/**
 			 * \brief Constructs the \c %PharmacophoreGenerator instance.
 			 */
-			PharmacophoreGenerator() {}
+			PharmacophoreGenerator();
 
 			PharmacophoreGenerator(const PharmacophoreGenerator& gen);
+
+			virtual ~PharmacophoreGenerator() {}
 
 			PharmacophoreGenerator& operator=(const PharmacophoreGenerator& gen);
 
@@ -121,11 +114,12 @@ namespace CDPL
 
 			/**
 			 * \brief Perceives the enabled pharmacophore features of the molecular graph a\ molgraph 
-			 *        and appends them to the pharmacophore \a pharm.
+			 *        and adds them to the pharmacophore \a pharm.
 			 * \param molgraph The molecular graph for which to perceive the features.
 			 * \param pharm The pharmacophore instance where the generated output features get appended.
+			 * \param append If \c false, \a pharm gets cleared before adding any new features.
 			 */
-			void generate(const Chem::MolecularGraph& molgraph, Pharmacophore& pharm);
+			void generate(const Chem::MolecularGraph& molgraph, Pharmacophore& pharm, bool append = false);
 
 			/**
 			 * \brief Specifies a function for the retrieval of atom 3D-coordinates for feature generation.
@@ -133,14 +127,21 @@ namespace CDPL
 			 */
 			void setAtom3DCoordinatesFunction(const Chem::Atom3DCoordinatesFunction& func);
 
-			FeatureGenerator::SharedPointer clone() const;
+			/**
+			 * \brief Returns the function that was registered for the retrieval of atom 3D-coordinates.
+			 * \return The registered atom 3D-coordinates function.
+			 */
+			const Chem::Atom3DCoordinatesFunction& getAtom3DCoordinatesFunction() const;
+
+			SharedPointer clone() const;
 
 		  private:
 			typedef std::set<unsigned int> EnabledFeatureSet;
 			typedef std::map<unsigned int, FeatureGenerator::SharedPointer> FeatureGeneratorMap;
 		
-			FeatureGeneratorMap featureGeneratorMap;
-			EnabledFeatureSet   enabledFeatures;
+			FeatureGeneratorMap             featureGeneratorMap;
+			EnabledFeatureSet               enabledFeatures;
+			Chem::Atom3DCoordinatesFunction coordsFunc;
 		};
 
 		/**

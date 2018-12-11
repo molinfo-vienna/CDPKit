@@ -29,6 +29,7 @@
 #include <boost/lexical_cast.hpp>
 
 #include "CDPL/Chem/JMEReactionReader.hpp"
+#include "CDPL/Chem/Reaction.hpp"
 #include "CDPL/Base/Exceptions.hpp"
 
 #include "JMEDataReader.hpp"
@@ -42,9 +43,12 @@ Chem::JMEReactionReader::JMEReactionReader(std::istream& is):
 
 Chem::JMEReactionReader::~JMEReactionReader() {}
 
-bool Chem::JMEReactionReader::readData(std::istream& is, Reaction& rxn)
+bool Chem::JMEReactionReader::readData(std::istream& is, Reaction& rxn, bool overwrite)
 {
 	try {
+		if (overwrite)
+			rxn.clear();
+
 		return reader->readReaction(is, rxn);
 
 	} catch (const std::exception& e) {

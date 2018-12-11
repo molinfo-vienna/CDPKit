@@ -1,4 +1,4 @@
-INCLUDE_DIRECTORIES("${CMAKE_CURRENT_SOURCE_DIR}" "${CDPL_SOURCE_DIR}" "${CMAKE_CURRENT_BINARY_DIR}")
+INCLUDE_DIRECTORIES("${CMAKE_CURRENT_SOURCE_DIR}" "${CDPL_SOURCE_DIR}" "${CMAKE_CURRENT_BINARY_DIR}" "${CDPKIT_EXTERNAL_DIR}")
 
 SET(DATA_FILES
     TorsionLibrary.xml
@@ -25,11 +25,17 @@ SET(cdpl-confgen_LIB_SRCS
     TorsionLibrary.cpp
     TorsionRule.cpp
     TorsionCategory.cpp
+    TorsionRuleMatch.cpp
+
     CDFFragmentLibraryDataReader.cpp
     CDFFragmentLibraryDataWriter.cpp
+    TorsionLibraryDataReader.cpp
+
     CDFMoleculeDataFunctions.cpp
     UtilityFunctions.cpp
    )
+
+LINK_LIBRARIES(${Boost_THREAD_LIBRARY} ${Boost_SYSTEM_LIBRARY})
 
 IF(Boost_TIMER_FOUND AND Boost_CHRONO_FOUND)
    SET(cdpl-confgen_LIB_SRCS
@@ -41,6 +47,10 @@ IF(Boost_TIMER_FOUND AND Boost_CHRONO_FOUND)
 
    LINK_LIBRARIES(${Boost_TIMER_LIBRARY} ${Boost_CHRONO_LIBRARY})	
 ENDIF(Boost_TIMER_FOUND AND Boost_CHRONO_FOUND)
+
+IF(Boost_IOSTREAMS_FOUND)
+   LINK_LIBRARIES(${Boost_IOSTREAMS_LIBRARY})
+ENDIF(Boost_IOSTREAMS_FOUND)
 
 ADD_LIBRARY(cdpl-confgen-static STATIC ${cdpl-confgen_LIB_SRCS})
 

@@ -56,7 +56,7 @@ namespace CDPL
 		CDPL_CHEM_API double calcGeometricalDiameter(const Entity3DContainer& cntnr);
 
 	
-		CDPL_CHEM_API void get3DCoordinates(const Entity3DContainer& cntnr, Math::Vector3DArray& coords);
+		CDPL_CHEM_API void get3DCoordinates(const Entity3DContainer& cntnr, Math::Vector3DArray& coords, bool append = false);
 
 		CDPL_CHEM_API void set3DCoordinates(Entity3DContainer& cntnr, const Math::Vector3DArray& coords);	
 

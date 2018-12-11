@@ -46,9 +46,12 @@ using namespace CDPL;
 
 void Pharm::createExclusionVolumes(Pharmacophore& pharm, const Chem::AtomContainer& cntnr, 
 								   const Chem::Atom3DCoordinatesFunction& coords_func, 
-								   double tol, double min_dist, bool rel_dist)
+								   double tol, double min_dist, bool rel_dist, bool append)
 {
 	using namespace Chem;
+
+	if (!append)
+		pharm.clear();
 
 	typedef std::vector<Math::Vector3D> PositionArray;
 	typedef std::vector<double> ToleranceArray;
@@ -110,9 +113,12 @@ void Pharm::createExclusionVolumes(Pharmacophore& pharm, const Chem::AtomContain
 }
 
 void Pharm::createExclusionVolumes(Pharmacophore& pharm, const FeatureContainer& cntnr, 
-								   double tol, double min_dist, bool rel_dist)
+								   double tol, double min_dist, bool rel_dist, bool append)
 {
 	using namespace Chem;
+
+	if (!append)
+		pharm.clear();
 
 	typedef std::vector<Math::Vector3D> PositionArray;
 	typedef std::vector<double> ToleranceArray;

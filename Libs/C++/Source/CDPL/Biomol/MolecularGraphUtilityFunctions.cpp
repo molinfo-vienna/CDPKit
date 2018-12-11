@@ -45,16 +45,20 @@ using namespace CDPL;
 
 
 void Biomol::extractProximalAtoms(const Chem::MolecularGraph& core, const Chem::MolecularGraph& macromol, 
-				  Chem::Fragment& env_atoms, double max_dist, bool inc_core_atoms)
+				  Chem::Fragment& env_atoms, double max_dist, bool inc_core_atoms, bool append)
 {
-    extractProximalAtoms(core, macromol, env_atoms, static_cast<const Math::Vector3D& (*)(const Chem::Entity3D&)>(&Chem::get3DCoordinates), max_dist, inc_core_atoms);
+    extractProximalAtoms(core, macromol, env_atoms, 
+			 static_cast<const Math::Vector3D& (*)(const Chem::Entity3D&)>(&Chem::get3DCoordinates), max_dist, inc_core_atoms, append);
 }
 
 void Biomol::extractProximalAtoms(const Chem::MolecularGraph& core, const Chem::MolecularGraph& macromol, 
 				  Chem::Fragment& env_atoms, const Chem::Atom3DCoordinatesFunction& coords_func,
-				  double max_dist, bool inc_core_atoms)
+				  double max_dist, bool inc_core_atoms, bool append)
 {
     using namespace Chem;
+
+    if (!append)
+	env_atoms.clear();
 
     if (core.getNumAtoms() == 0)
 	return;
@@ -95,15 +99,20 @@ void Biomol::extractProximalAtoms(const Chem::MolecularGraph& core, const Chem::
 }
 
 void Biomol::extractEnvironmentResidues(const Chem::MolecularGraph& core, const Chem::MolecularGraph& macromol, 
-					Chem::Fragment& env_residues, double max_dist)
+					Chem::Fragment& env_residues, double max_dist, bool append)
 {
-    extractEnvironmentResidues(core, macromol, env_residues, static_cast<const Math::Vector3D& (*)(const Chem::Entity3D&)>(&Chem::get3DCoordinates), max_dist);
+    extractEnvironmentResidues(core, macromol, env_residues, 
+			       static_cast<const Math::Vector3D& (*)(const Chem::Entity3D&)>(&Chem::get3DCoordinates), max_dist, append);
 }
 
 void Biomol::extractEnvironmentResidues(const Chem::MolecularGraph& core, const Chem::MolecularGraph& macromol, 
-					Chem::Fragment& env_residues, const Chem::Atom3DCoordinatesFunction& coords_func, double max_dist)
+					Chem::Fragment& env_residues, const Chem::Atom3DCoordinatesFunction& coords_func, 
+					double max_dist, bool append)
 {
     using namespace Chem;
+
+    if (!append)
+	env_residues.clear();
 
     if (core.getNumAtoms() == 0)
 	return;
@@ -133,7 +142,7 @@ void Biomol::extractEnvironmentResidues(const Chem::MolecularGraph& core, const 
 
 	for (Math::Vector3DArray::ConstElementIterator c_it = core_coords.getElementsBegin(), c_end = core_coords.getElementsEnd(); c_it != c_end; ++c_it) {
 	    if (length(atom_pos - *c_it) <= max_dist) {
-		extractResidueSubstructure(atom, macromol, env_residues, true);
+		extractResidueSubstructure(atom, macromol, env_residues, true, true);
 		break;
 	    }
 	}

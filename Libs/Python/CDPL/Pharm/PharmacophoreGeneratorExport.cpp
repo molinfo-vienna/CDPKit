@@ -27,6 +27,10 @@
 #include <boost/python.hpp>
 
 #include "CDPL/Pharm/PharmacophoreGenerator.hpp"
+#include "CDPL/Pharm/Pharmacophore.hpp"
+#include "CDPL/Chem/MolecularGraph.hpp"
+
+#include "Base/ObjectIdentityCheckVisitor.hpp"
 
 #include "ClassExports.hpp"
 
@@ -36,12 +40,18 @@ void CDPLPythonPharm::exportPharmacophoreGenerator()
     using namespace boost;
     using namespace CDPL;
 
-	python::class_<Pharm::PharmacophoreGenerator, Pharm::PharmacophoreGenerator::SharedPointer,
-				   python::bases<Pharm::FeatureGenerator>, boost::noncopyable>("PharmacophoreGenerator", python::no_init)
+	python::class_<Pharm::PharmacophoreGenerator, Pharm::PharmacophoreGenerator::SharedPointer, 
+				   boost::noncopyable>("PharmacophoreGenerator", python::no_init)
 		.def(python::init<>(python::arg("self")))
-		.def(python::init<Pharm::PharmacophoreGenerator>((python::arg("self"), python::arg("gen"))))
+		.def(python::init<const Pharm::PharmacophoreGenerator&>((python::arg("self"), python::arg("gen"))))
+		.def(CDPLPythonBase::ObjectIdentityCheckVisitor<Pharm::PharmacophoreGenerator>())	
+		.def("generate", &Pharm::PharmacophoreGenerator::generate,
+			 (python::arg("self"), python::arg("molgraph"), python::arg("pharm"), python::arg("append") = false))
+		.def("clone", &Pharm::PharmacophoreGenerator::clone, python::arg("self"))
 		.def("setAtom3DCoordinatesFunction", &Pharm::PharmacophoreGenerator::setAtom3DCoordinatesFunction, 
 			 (python::arg("self"), python::arg("func")))
+		.def("getAtom3DCoordinatesFunction", &Pharm::PharmacophoreGenerator::getAtom3DCoordinatesFunction, 
+			 python::arg("self"), python::return_internal_reference<>())
 		.def("setFeatureGenerator", &Pharm::PharmacophoreGenerator::setFeatureGenerator, 
 			 (python::arg("self"), python::arg("type"), python::arg("ftr_gen")))
 		.def("removeFeatureGenerator", &Pharm::PharmacophoreGenerator::removeFeatureGenerator, 
@@ -54,5 +64,9 @@ void CDPLPythonPharm::exportPharmacophoreGenerator()
 			 (python::arg("self"), python::arg("ft_type")))
 		.def("clearEnabledFeatures", &Pharm::PharmacophoreGenerator::isFeatureEnabled, python::arg("self"))
 		.def("assign", &Pharm::PharmacophoreGenerator::operator=, 
-			 (python::arg("self"), python::arg("gen")), python::return_self<>());
+			 (python::arg("self"), python::arg("gen")), python::return_self<>())
+		.add_property("atom3DCoordsFunc", python::make_function(&Pharm::PharmacophoreGenerator::getAtom3DCoordinatesFunction, 
+																python::return_internal_reference<>()),
+						  
+					  &Pharm::PharmacophoreGenerator::setAtom3DCoordinatesFunction);
 }

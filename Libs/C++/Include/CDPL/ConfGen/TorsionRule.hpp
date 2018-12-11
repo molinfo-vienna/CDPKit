@@ -31,7 +31,11 @@
 #ifndef CDPL_CONFGEN_TORSIONRULE_HPP
 #define CDPL_CONFGEN_TORSIONRULE_HPP
 
+#include <vector>
+#include <cstddef>
+
 #include "CDPL/ConfGen/APIPrefix.hpp"
+#include "CDPL/Chem/MolecularGraph.hpp"
 
 
 namespace CDPL 
@@ -40,20 +44,92 @@ namespace CDPL
     namespace ConfGen 
     {
 
-	/**
-	 * \addtogroup CDPL_CONFGEN_DATA_STRUCTURES
-	 * @{
-	 */
+		/**
+		 * \addtogroup CDPL_CONFGEN_DATA_STRUCTURES
+		 * @{
+		 */
 
-	class CDPL_CONFGEN_API TorsionRule
-	{
+		class CDPL_CONFGEN_API TorsionRule
+		{
 
-	  public:
-	};
+		  public:
+			class AngleEntry;
+
+		  private:
+			typedef std::vector<AngleEntry> AngleEntryList;
+
+		  public:
+			class AngleEntry
+			{
+		
+			public:
+				AngleEntry(double ang, double tol1 = 0.0, double tol2 = 0.0, double score = 0.0):
+					angle(ang), tolerance1(tol1), tolerance2(tol2), score(score) {} 
+
+				double getAngle() const {
+					return angle;
+				}
+
+				double getTolerance1() const {
+					return tolerance1;
+				}
+
+				double getTolerance2() const {
+					return tolerance2;
+				}
+
+				double getScore() const {
+					return score;
+				}
+
+			private:
+				double angle;
+				double tolerance1;
+				double tolerance2;
+				double score;
+			};
+
+			typedef AngleEntryList::iterator AngleEntryIterator;
+			typedef AngleEntryList::const_iterator ConstAngleEntryIterator;
+
+			const Chem::MolecularGraph::SharedPointer& getMatchPattern() const;
+
+			void setMatchPattern(const Chem::MolecularGraph::SharedPointer& ptn);
+
+			void addAngle(const AngleEntry& ang_entry);
+
+			void addAngle(double angle, double tol1 = 0.0, double tol2 = 0.0, double score = 0.0);
+
+			std::size_t getNumAngles() const;
+
+			const AngleEntry& getAngle(std::size_t idx) const;
+
+			void removeAngle(std::size_t idx);
+
+			void removeAngle(const AngleEntryIterator& it);
+
+			AngleEntryIterator getAnglesBegin();
+
+			AngleEntryIterator getAnglesEnd();
+
+			ConstAngleEntryIterator getAnglesBegin() const;
+
+			ConstAngleEntryIterator getAnglesEnd() const;
+
+			void swap(TorsionRule& rule);
+
+			void clear();
+
+		  private:
+			void checkAngleIndex(std::size_t idx, bool it) const;
+
+			Chem::MolecularGraph::SharedPointer matchPattern;
+			AngleEntryList                      angles;
+		};
     
-	/**
-	 * @}
-	 */
+		/**
+		 * @}
+		 */
     }
 }
 

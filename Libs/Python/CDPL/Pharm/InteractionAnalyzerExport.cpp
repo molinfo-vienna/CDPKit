@@ -55,5 +55,6 @@ void CDPLPythonPharm::exportInteractionAnalyzer()
 		.def("assign", &Pharm::InteractionAnalyzer::operator=, 
 			 (python::arg("self"), python::arg("analyzer")), python::return_self<>())
 		.def("analyze", &Pharm::InteractionAnalyzer::analyze,
-			 (python::arg("self"), python::arg("cntnr1"), python::arg("cntnr2"), python::arg("iactions")));
+			 (python::arg("self"), python::arg("cntnr1"), python::arg("cntnr2"), 
+			  python::arg("iactions"), python::arg("append") = false));
 }

@@ -94,11 +94,15 @@ def processMolecule(mol, stats):
 
     for atom in mol.atoms:
         atom_type = Chem.getType(atom)
+        invalid_type = True
 
         for valid_type in VALID_ATOM_TYPES:
-            if not Chem.atomTypesMatch(valid_type, atom_type):
-                #print 'Invalid atom type: ' + str(atom_type)
-                return None
+            if Chem.atomTypesMatch(valid_type, atom_type):
+                invalid_type = False
+                break
+
+        if invalid_type:
+            return None
 
         if atom_type == Chem.AtomType.C:
             carbon_seen = True
@@ -198,9 +202,7 @@ def cleanStructures():
             stats.dropped += 1
             dwriter.write(mol)
             print 'Dropped Molecule ' + str(stats.read) + ': ' + generateSMILES(mol) + ' ' + Chem.getName(mol)
-
-        mol.clear()
-      
+       
         stats.read += 1
 
         if stats.read % 10000 == 0:

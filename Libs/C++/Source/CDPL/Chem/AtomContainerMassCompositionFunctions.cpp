@@ -55,6 +55,8 @@ void Chem::calcExplicitMassComposition(const AtomContainer& cntnr, MassCompositi
 {
 	double mass = 0.0;
 	
+	comp.clear();
+
 	AtomContainer::ConstAtomIterator atoms_end = cntnr.getAtomsEnd();
 
 	for (AtomContainer::ConstAtomIterator it = cntnr.getAtomsBegin(); it != atoms_end; ++it) {

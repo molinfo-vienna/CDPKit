@@ -80,8 +80,8 @@ namespace CDPL
 
 			const ReaderPointer& getReader(std::size_t idx) const;
 
-			CompoundDataReader& read(DataType& obj);
-			CompoundDataReader& read(std::size_t idx, DataType& obj);
+			CompoundDataReader& read(DataType& obj, bool overwrite = true);
+			CompoundDataReader& read(std::size_t idx, DataType& obj, bool overwrite = true);
 
 			CompoundDataReader& skip();
 
@@ -196,14 +196,14 @@ CDPL::Util::CompoundDataReader<DataType>::getReader(std::size_t idx) const
 
 template <typename DataType>
 CDPL::Util::CompoundDataReader<DataType>&
-CDPL::Util::CompoundDataReader<DataType>::read(DataType& obj)
+CDPL::Util::CompoundDataReader<DataType>::read(DataType& obj, bool overwrite)
 {
 	state = false;
 	
 	std::size_t idx = recordIdx;
 	ReaderType* reader = getReaderForRecordIndex(idx);
 
-	if (reader && (state = reader->read(idx, obj))) {
+	if (reader && (state = reader->read(idx, obj, overwrite))) {
 		recordIdx++;
 		this->invokeIOCallbacks(1.0);
 	}
@@ -213,11 +213,11 @@ CDPL::Util::CompoundDataReader<DataType>::read(DataType& obj)
 
 template <typename DataType>
 CDPL::Util::CompoundDataReader<DataType>&
-CDPL::Util::CompoundDataReader<DataType>::read(std::size_t idx, DataType& obj)
+CDPL::Util::CompoundDataReader<DataType>::read(std::size_t idx, DataType& obj, bool overwrite)
 {
  	setRecordIndex(idx);
 
-    return read(obj);
+    return read(obj, overwrite);
 }
 
 template <typename DataType>

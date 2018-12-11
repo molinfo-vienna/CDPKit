@@ -29,6 +29,7 @@
 #include <boost/function.hpp>
 
 #include "CDPL/Chem/MolecularGraph.hpp"
+#include "CDPL/Base/IntegerTypes.hpp"
 
 #include "Base/BoostFunctionWrapperExport.hpp"
 
@@ -42,5 +43,5 @@ void CDPLPythonConfGen::exportBoostFunctionWrappers()
 
 	CDPLPythonBase::BoostFunction0Export<boost::function0<bool> >("BoolVoidFunctor");
 	CDPLPythonBase::BoostFunction2Export<boost::function2<bool, const Chem::MolecularGraph&, const std::string&> >("BoolMolecularGraphStringFunctor");
-	CDPLPythonBase::BoostFunction3Export<boost::function3<void, const Chem::MolecularGraph&, bool, std::size_t> >("VoidMolecularGraphBoolSizeTypeFunctor");
+	CDPLPythonBase::BoostFunction4Export<boost::function4<void, Base::uint64, const Chem::MolecularGraph&, bool, std::size_t> >("VoidUInt64MolecularGraphBoolSizeTypeFunctor");
 }

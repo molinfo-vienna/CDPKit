@@ -90,8 +90,11 @@ std::size_t Chem::getNumContainingFragments(const Bond& bond, const FragmentList
 	return count;
 }
 
-void Chem::getContainingFragments(const Bond& bond, const FragmentList& frag_list, FragmentList& cont_frag_list)
+void Chem::getContainingFragments(const Bond& bond, const FragmentList& frag_list, FragmentList& cont_frag_list, bool append)
 {
+	if (!append)
+		cont_frag_list.clear();
+
 	for (FragmentList::BaseType::ConstElementIterator it = frag_list.getBase().getElementsBegin(), 
 			 end = frag_list.getBase().getElementsEnd(); it != end; ++it)
 		if ((*it)->containsBond(bond))

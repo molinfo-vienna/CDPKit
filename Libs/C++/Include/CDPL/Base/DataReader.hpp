@@ -97,10 +97,13 @@ namespace CDPL
 			 * If the read operation was successful, the record index is incremented by \e 1.
 			 *
 			 * \param obj The object storing the read data.
+			 * \param overwrite Specifies whether any existing data in \a obj shall be replaced by the
+			 *                  newly read data or if the read data should be appended (if supported by the
+			 *                  reader and data type). 
 			 * \return A reference to itself.
 			 * \throw Base::IOError if an I/O error occurred.
 			 */
-			virtual DataReader& read(DataType& obj) = 0;
+			virtual DataReader& read(DataType& obj, bool overwrite = true) = 0;
 
 			/**
 			 * \brief Reads the data record at index \a idx and stores the read data in \a obj.
@@ -109,11 +112,14 @@ namespace CDPL
 			 *
 			 * \param idx The zero-based index of the data record to read.
 			 * \param obj The object storing the read data.
+			 * \param overwrite Specifies whether any existing data in \a obj shall be replaced by the
+			 *                  newly read data or if the read data should be appended (if supported by the
+			 *                  reader and data type). 
 			 * \return A reference to itself.
 			 * \throw Base::IndexError if \a idx is greater or equal to the number of records. 
 			 *        Base::IOError if an I/O error occurred.
 			 */
-			virtual DataReader& read(std::size_t idx, DataType& obj) = 0;
+			virtual DataReader& read(std::size_t idx, DataType& obj, bool overwrite = true) = 0;
 
 			/**
 			 * \brief Skips the data record at the current record index.

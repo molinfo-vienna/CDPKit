@@ -25,6 +25,7 @@
 
 
 #include <algorithm>
+#include <functional>
 #include <iterator>
 #include <fstream>
 #include <vector>
@@ -55,12 +56,14 @@ class GenFragLibImpl::InputScanProgressCallback
 {
 
 public:
+	class Terminated : public std::exception {};
+
 	InputScanProgressCallback(GenFragLibImpl* parent, double offset, double scale): 
 		parent(parent), offset(offset), scale(scale) {}
 
 	void operator()(const CDPL::Base::DataIOBase&, double progress) const {
 		if (GenFragLibImpl::termSignalCaught())
-			return;
+			throw Terminated();
 
 		parent->printProgress("Scanning Input File(s)...      ", offset + scale * progress);
 	}
@@ -80,7 +83,7 @@ public:
 		parent(parent), fragLibGen(parent->fragmentLibPtr), numProcMols(0),
 		numProcFrags(0), numErrorFrags(0), numAddedFrags(0), totalNumConfs(0)  
 	{
-		fragLibGen.setProcessingResultCallback(boost::bind(&FragLibGenerationWorker::fragmentProcessed, this, _1, _2, _3));
+		fragLibGen.setProcessingResultCallback(boost::bind(&FragLibGenerationWorker::fragmentProcessed, this, _1, _2, _3, _4));
 		fragLibGen.setProcessingErrorCallback(boost::bind(&FragLibGenerationWorker::handleError, this, _1, _2));
 		fragLibGen.setProgressCallback(boost::bind(&FragLibGenerationWorker::progress, this));
 		fragLibGen.setEnergyWindow(parent->eWindow);
@@ -98,8 +101,6 @@ public:
 		try {
 
 			while (true) {
-				molecule.clear();
-
 				if (!parent->readNextMolecule(molecule))
 					return;
 
@@ -139,8 +140,10 @@ public:
 	}
 
 private:
-	void fragmentProcessed(const CDPL::Chem::MolecularGraph& frag, bool added, std::size_t num_confs) {
+	void fragmentProcessed(CDPL::Base::uint64 hash_code, const CDPL::Chem::MolecularGraph& frag, bool added, std::size_t num_confs) {
 		numProcFrags++;
+
+		parent->updateOccurrenceCount(hash_code);
 
 		if (added) {
 			numAddedFrags++;
@@ -205,7 +208,7 @@ GenFragLibImpl::GenFragLibImpl():
 	eWindow(CDPL::ConfGen::FragmentConformerGenerator::DEF_ENERGY_WINDOW), 
 	confGenTrialFactor(CDPL::ConfGen::FragmentConformerGenerator::DEF_RING_CONFORMER_TRIAL_FACTOR), 
 	forceFieldType(CDPL::ConfGen::FragmentLibraryGenerator::DEF_FORCE_FIELD_TYPE), 
-	useInputCoords(false), strictMMFF94AtomTypes(true), inputHandler(), 
+	useInputCoords(false), strictMMFF94AtomTypes(true), maxLibSize(0), inputHandler(), 
 	fragmentLibPtr(new CDPL::ConfGen::FragmentLibrary())
 {
 	addOption("input,i", "Input file(s).", 
@@ -226,7 +229,9 @@ GenFragLibImpl::GenFragLibImpl():
 	addOption("timeout,T", "Time in seconds after which fragment conformer generation will be stopped (default: " + 
 			  boost::lexical_cast<std::string>(timeout) + ", must be >= 0, 0 disables timeout).",
 			  value<std::size_t>(&timeout));
-	addOption("use-input-coords,x", "If available, use existing input 3D coordinates for chain fragments (default: false).", 
+	addOption("max-lib-size,x", "Maximum number of output fragments (default: 0, must be >= 0, 0 disables limit, only valid in CREATE mode).",
+			  value<std::size_t>(&maxLibSize));
+	addOption("use-input-coords,u", "If available, use existing input 3D coordinates for chain fragments (default: false).", 
 			  value<bool>(&useInputCoords)->implicit_value(true));
 	addOption("e-window,e", "Output energy window for ring conformers (default: " + 
 			  boost::lexical_cast<std::string>(eWindow) + ", must be > 0).",
@@ -431,9 +436,8 @@ void GenFragLibImpl::mergeFragmentLibraries()
 		fragmentLibPtr->addEntries(input_lib);
 
 		printMessage(INFO, " - Added " + boost::lexical_cast<std::string>(fragmentLibPtr->getNumEntries() - old_num_frags) + " fragment(s)");
+		printMessage(INFO, "");
 	}
-
-	printMessage(INFO, "");
 }
 
 void GenFragLibImpl::processSingleThreaded()
@@ -548,6 +552,21 @@ void GenFragLibImpl::loadFragmentLibrary(const std::string& fname, FragmentLibra
 	printMessage(INFO, "");
 }
 
+void GenFragLibImpl::updateOccurrenceCount(CDPL::Base::uint64 hash_code)
+{
+	if (maxLibSize == 0)
+		return;
+
+	if (multiThreading) {
+		boost::lock_guard<boost::mutex> lock(mutex);
+
+		fragmentOccCounts[hash_code]++;
+		return;
+	}
+	
+	fragmentOccCounts[hash_code]++;
+}
+
 int GenFragLibImpl::saveFragmentLibrary()
 {
 	using namespace CDPL;
@@ -558,6 +577,22 @@ int GenFragLibImpl::saveFragmentLibrary()
 		throw Base::IOError("opening output fragment library '" + outputFile + "' failed");
 
 	printMessage(INFO, "Saving fragments to library '" + outputFile + "'...");
+
+	if (mode == CREATE && maxLibSize > 0) {
+		typedef std::pair<Base::uint64, std::size_t> HashCodeOccCountPair;
+		typedef std::vector<HashCodeOccCountPair> HashCodeOccCountPairArray;
+
+		HashCodeOccCountPairArray occ_sorted_frags(fragmentOccCounts.begin(), fragmentOccCounts.end());
+
+		std::sort(occ_sorted_frags.begin(), occ_sorted_frags.end(), 
+				  boost::bind(std::less<std::size_t>(),
+							  boost::bind(&HashCodeOccCountPair::second, _1),
+							  boost::bind(&HashCodeOccCountPair::second, _2)));
+																				
+		for (HashCodeOccCountPairArray::const_iterator it = occ_sorted_frags.begin(), end = occ_sorted_frags.end(); 
+			 it != end && fragmentLibPtr->getNumEntries() > maxLibSize; ++it)
+			fragmentLibPtr->removeEntry(it->first);
+	}
 
 	fragmentLibPtr->save(os);
 
@@ -690,7 +725,7 @@ void GenFragLibImpl::printOptionSummary()
 	printMessage(VERBOSE, " Input File(s):                " + inputFiles[0]);
 	
 	for (StringList::const_iterator it = ++inputFiles.begin(), end = inputFiles.end(); it != end; ++it)
-		printMessage(VERBOSE, std::string(27, ' ') + *it);
+		printMessage(VERBOSE, std::string(31, ' ') + *it);
 
 	printMessage(VERBOSE, " Output File:                  " + outputFile);
  	printMessage(VERBOSE, " Mode:                         " + getModeString());
@@ -699,6 +734,7 @@ void GenFragLibImpl::printOptionSummary()
 		printMessage(VERBOSE, " Multi-threading:              " + std::string(multiThreading ? "Yes" : "No"));
 		printMessage(VERBOSE, " Number of Threads:            " + boost::lexical_cast<std::string>(numThreads));
 		printMessage(VERBOSE, " Input File Format:            " + (inputHandler ? inputHandler->getDataFormat().getName() : std::string("Auto-detect")));
+		printMessage(VERBOSE, " Max. Output Library Size:     " + boost::lexical_cast<std::string>(maxLibSize));
 		printMessage(VERBOSE, " Timeout:                      " + boost::lexical_cast<std::string>(timeout) + "s");
 		printMessage(VERBOSE, " RMSD:                         " + (boost::format("%.4f") % minRMSD).str());
 		printMessage(VERBOSE, " Energy Window:                " + boost::lexical_cast<std::string>(eWindow));
@@ -739,7 +775,14 @@ void GenFragLibImpl::initInputReader()
 
 		std::size_t cb_id = reader_ptr->registerIOCallback(InputScanProgressCallback(this, i * 1.0 / num_in_files, 1.0 / num_in_files));
 
-		inputReader.addReader(reader_ptr);
+		try {
+			inputReader.addReader(reader_ptr);
+
+		} catch (const InputScanProgressCallback::Terminated&) {
+			reader_ptr->unregisterIOCallback(cb_id);
+			break;
+		}
+
 		reader_ptr->unregisterIOCallback(cb_id);
 	}
 

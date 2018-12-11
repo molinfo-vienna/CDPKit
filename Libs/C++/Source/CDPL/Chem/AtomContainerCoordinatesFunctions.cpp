@@ -52,8 +52,11 @@ bool Chem::hasCoordinates(const AtomContainer& cntnr, std::size_t dim)
 									 boost::bind(&has2DCoordinates, _1))) == cntnr.getAtomsEnd());
 }
 
-void Chem::get2DCoordinates(const AtomContainer& cntnr, Math::Vector2DArray& coords)
+void Chem::get2DCoordinates(const AtomContainer& cntnr, Math::Vector2DArray& coords, bool append)
 {
+	if (!append)
+		coords.clear();
+
 	for (AtomContainer::ConstAtomIterator it = cntnr.getAtomsBegin(), end = cntnr.getAtomsEnd(); it != end; ++it)
 		coords.addElement(get2DCoordinates(*it));
 }
@@ -90,14 +93,20 @@ void Chem::transform2DCoordinates(AtomContainer& cntnr, const Math::Matrix3D& mt
 	}
 }
 
-void Chem::get3DCoordinates(const AtomContainer& cntnr, Math::Vector3DArray& coords)
+void Chem::get3DCoordinates(const AtomContainer& cntnr, Math::Vector3DArray& coords, bool append)
 {
+	if (!append)
+		coords.clear();
+
 	for (AtomContainer::ConstAtomIterator it = cntnr.getAtomsBegin(), end = cntnr.getAtomsEnd(); it != end; ++it)
 		coords.addElement(get3DCoordinates(*it));
 }
 
-void Chem::get3DCoordinates(const AtomContainer& cntnr, Math::Vector3DArray& coords, const Atom3DCoordinatesFunction& coords_func)
+void Chem::get3DCoordinates(const AtomContainer& cntnr, Math::Vector3DArray& coords, const Atom3DCoordinatesFunction& coords_func, bool append)
 {
+	if (!append)
+		coords.clear();
+
 	for (AtomContainer::ConstAtomIterator it = cntnr.getAtomsBegin(), end = cntnr.getAtomsEnd(); it != end; ++it)
 		coords.addElement(coords_func(*it));
 }

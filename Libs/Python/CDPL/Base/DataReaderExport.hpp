@@ -42,14 +42,14 @@ namespace CDPLPythonBase
 
 		typedef boost::shared_ptr<DataReaderWrapper<T> > SharedPointer;
 
-		CDPL::Base::DataReader<T>& read(T& obj) {
-			this->get_override("read")(boost::ref(obj));
+		CDPL::Base::DataReader<T>& read(T& obj, bool overwrite) {
+			this->get_override("read")(boost::ref(obj), overwrite);
 
 			return *this;
 		}
 
-		CDPL::Base::DataReader<T>& read(std::size_t idx, T& obj) {
-			this->get_override("read")(idx, boost::ref(obj));
+		CDPL::Base::DataReader<T>& read(std::size_t idx, T& obj, bool overwrite) {
+			this->get_override("read")(idx, boost::ref(obj), overwrite);
 
 			return *this;		
 		}
@@ -98,15 +98,15 @@ namespace CDPLPythonBase
 
 			typedef Base::DataReader<T> ReaderType;
 
-			ReaderType& (ReaderType::*readFunc1)(T&) = &ReaderType::read;
-			ReaderType& (ReaderType::*readFunc2)(std::size_t, T&) = &ReaderType::read;
+			ReaderType& (ReaderType::*readFunc1)(T&, bool) = &ReaderType::read;
+			ReaderType& (ReaderType::*readFunc2)(std::size_t, T&, bool) = &ReaderType::read;
 
 			python::class_<DataReaderWrapper<T>, typename DataReaderWrapper<T>::SharedPointer,
 				python::bases<Base::DataIOBase>, boost::noncopyable>(name, python::no_init)
 				.def(python::init<>(python::arg("self")))
-				.def("read", python::pure_virtual(readFunc1), (python::arg("self"), python::arg(obj_arg_name)), 
+				.def("read", python::pure_virtual(readFunc1), (python::arg("self"), python::arg(obj_arg_name), python::arg("overwrite") = true), 
 					 python::return_self<>())
-				.def("read", python::pure_virtual(readFunc2), (python::arg("self"), python::arg("idx"), python::arg(obj_arg_name)), 
+				.def("read", python::pure_virtual(readFunc2), (python::arg("self"), python::arg("idx"), python::arg(obj_arg_name), python::arg("overwrite") = true), 
 					 python::return_self<>())
 				.def("skip", python::pure_virtual(&ReaderType::skip), python::arg("self"), python::return_self<>())
 				.def("hasMoreData", python::pure_virtual(&ReaderType::hasMoreData), python::arg("self"))

@@ -61,7 +61,7 @@ bool Chem::generateSMILES(const MolecularGraph& molgraph, std::string& smiles, b
 
 	bool result = !(!smi_writer.write(molgraph));
 
-	smiles.append(oss.str());
+	smiles = oss.str();
 
 	return result;
 }

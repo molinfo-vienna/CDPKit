@@ -289,10 +289,13 @@ void ConfGen::FragmentLibraryGenerator::processFragment(const Chem::MolecularGra
 
 		std::size_t num_confs = fragConfGen.getNumConformers();
 
-		if (num_confs == 0) 
+		if (num_confs == 0) {
 			removeNewLibraryEntry();
 
-		else {
+			if (errorCallback) 
+				errorCallback(fragLibEntry, "FragmentLibraryGenerator: could not generate any conformers");
+
+		} else {
 			for (std::size_t i = 0; i < num_confs; i++)
 				addConformation(fragLibEntry, fragConfGen.getCoordinates(i));
 	
@@ -307,7 +310,7 @@ void ConfGen::FragmentLibraryGenerator::processFragment(const Chem::MolecularGra
 		}
 
 		if (resultCallback)
-			resultCallback(fragLibEntry, true, num_confs);
+			resultCallback(fragLibEntry.getHashCode(), fragLibEntry, true, num_confs);
 
 	} catch (const std::exception& e) {
 		removeNewLibraryEntry();
@@ -340,7 +343,7 @@ Chem::Molecule::SharedPointer ConfGen::FragmentLibraryGenerator::addNewLibraryEn
 
 		if (fragLib->containsEntry(fragLibEntry.getHashCode())) {
 			if (resultCallback)
-				resultCallback(fragLibEntry, false, 0);
+				resultCallback(fragLibEntry.getHashCode(), fragLibEntry, false, 0);
 
 			return Molecule::SharedPointer();
 		}

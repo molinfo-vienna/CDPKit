@@ -79,9 +79,9 @@ namespace CDPL
 
 			~PSDMoleculeReader();
 
-			PSDMoleculeReader& read(Chem::Molecule& mol);
+			PSDMoleculeReader& read(Chem::Molecule& mol, bool overwrite = true);
 
-			PSDMoleculeReader& read(std::size_t idx, Chem::Molecule& mol);
+			PSDMoleculeReader& read(std::size_t idx, Chem::Molecule& mol, bool overwrite = true);
 
 			PSDMoleculeReader& skip();
 

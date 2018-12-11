@@ -87,7 +87,7 @@ Pharm::PSDMoleculeReader::~PSDMoleculeReader()
 	try { accessor.close(); } catch (...) {}
 }
 
-Pharm::PSDMoleculeReader& Pharm::PSDMoleculeReader::read(Chem::Molecule& mol)
+Pharm::PSDMoleculeReader& Pharm::PSDMoleculeReader::read(Chem::Molecule& mol, bool overwrite)
 {
 	state = false;
 
@@ -95,7 +95,7 @@ Pharm::PSDMoleculeReader& Pharm::PSDMoleculeReader::read(Chem::Molecule& mol)
 		return *this;
 
 	try {
-		accessor.getMolecule(recordIndex, mol);
+		accessor.getMolecule(recordIndex, mol, overwrite);
 
 	} catch (const std::exception& e) {
 		throw Base::IOError("PSDMoleculeReader: while reading record " + boost::lexical_cast<std::string>(recordIndex) + 
@@ -110,11 +110,11 @@ Pharm::PSDMoleculeReader& Pharm::PSDMoleculeReader::read(Chem::Molecule& mol)
     return *this;
 }
 
-Pharm::PSDMoleculeReader& Pharm::PSDMoleculeReader::read(std::size_t idx, Chem::Molecule& mol)
+Pharm::PSDMoleculeReader& Pharm::PSDMoleculeReader::read(std::size_t idx, Chem::Molecule& mol, bool overwrite)
 {
 	setRecordIndex(idx);
 
-	return read(mol);
+	return read(mol, overwrite);
 }
 
 Pharm::PSDMoleculeReader& Pharm::PSDMoleculeReader::skip()

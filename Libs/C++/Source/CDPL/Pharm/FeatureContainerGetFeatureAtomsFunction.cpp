@@ -34,14 +34,18 @@
 #include "CDPL/Pharm/FeatureContainer.hpp"
 #include "CDPL/Pharm/Feature.hpp"
 #include "CDPL/Pharm/FeatureFunctions.hpp"
+#include "CDPL/Chem/Fragment.hpp"
 #include "CDPL/Chem/Atom.hpp"
 
 
 using namespace CDPL; 
 
 
-void Pharm::getFeatureAtoms(const FeatureContainer& cntnr, Chem::Fragment& atoms)
+void Pharm::getFeatureAtoms(const FeatureContainer& cntnr, Chem::Fragment& atoms, bool append)
 {
+	if (!append)
+		atoms.clear();
+
 	for (FeatureContainer::ConstFeatureIterator it = cntnr.getFeaturesBegin(), end = cntnr.getFeaturesEnd(); it != end; ++it) {
 		const Feature& ftr = *it;
 

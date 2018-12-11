@@ -110,7 +110,7 @@ namespace CDPL
 
 			RXNReactionReader& operator=(const RXNReactionReader&);
 
-			bool readData(std::istream&, Reaction&);
+			bool readData(std::istream&, Reaction&, bool overwrite);
 			bool skipData(std::istream&);
 			bool moreData(std::istream&);
 

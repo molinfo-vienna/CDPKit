@@ -301,7 +301,6 @@ bool  Pharm::PSDScreeningDBCreatorImpl::merge(const ScreeningDBAccessor& db_acc,
 		if (func && !func(double(i) / num_mols))
 			return (numInserted > old_num_ins);
 
-		mol.clear();
 		db_acc.getMolecule(i, mol);
 
 		calcCIPPriorities(mol, false);

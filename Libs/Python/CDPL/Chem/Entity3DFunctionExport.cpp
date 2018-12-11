@@ -35,21 +35,21 @@
 
 
 #define MAKE_ENTITY_FUNC_WRAPPERS(TYPE, FUNC_SUFFIX)                    \
-TYPE get##FUNC_SUFFIX##Wrapper(CDPL::Chem::Entity3D& feature)           \
+TYPE get##FUNC_SUFFIX##Wrapper(CDPL::Chem::Entity3D& entity)            \
 {                                                                       \
-	return get##FUNC_SUFFIX(feature);                                   \
+	return get##FUNC_SUFFIX(entity);                                    \
 }                                                                       \
                                                                         \
-bool has##FUNC_SUFFIX##Wrapper(CDPL::Chem::Entity3D& feature)           \
+bool has##FUNC_SUFFIX##Wrapper(CDPL::Chem::Entity3D& entity)            \
 {                                                                       \
-	return has##FUNC_SUFFIX(feature);                                   \
+	return has##FUNC_SUFFIX(entity);                                    \
 }
 
-#define EXPORT_ENTITY_FUNCS(FUNC_SUFFIX, ARG_NAME)                                                           \
-python::def("get"#FUNC_SUFFIX, &get##FUNC_SUFFIX##Wrapper, python::arg("feature"));                          \
-python::def("has"#FUNC_SUFFIX, &has##FUNC_SUFFIX##Wrapper, python::arg("feature"));                          \
-python::def("clear"#FUNC_SUFFIX, &Chem::clear##FUNC_SUFFIX, python::arg("feature"));                         \
-python::def("set"#FUNC_SUFFIX, &Chem::set##FUNC_SUFFIX, (python::arg("feature"), python::arg(#ARG_NAME))); 
+#define EXPORT_ENTITY_FUNCS(FUNC_SUFFIX, ARG_NAME)                                                          \
+python::def("get"#FUNC_SUFFIX, &get##FUNC_SUFFIX##Wrapper, python::arg("entity"));                          \
+python::def("has"#FUNC_SUFFIX, &has##FUNC_SUFFIX##Wrapper, python::arg("entity"));                          \
+python::def("clear"#FUNC_SUFFIX, &Chem::clear##FUNC_SUFFIX, python::arg("entity"));                         \
+python::def("set"#FUNC_SUFFIX, &Chem::set##FUNC_SUFFIX, (python::arg("entity"), python::arg(#ARG_NAME))); 
 
 #define EXPORT_ENTITY_FUNCS_INT_REF(FUNC_SUFFIX, ARG_NAME)                                                   \
 python::def("get"#FUNC_SUFFIX, &get##FUNC_SUFFIX##Wrapper, python::arg("entity"),                            \

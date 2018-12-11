@@ -29,6 +29,7 @@
 #include <boost/lexical_cast.hpp>
 
 #include "CDPL/Chem/MOLMoleculeReader.hpp"
+#include "CDPL/Chem/Molecule.hpp"
 #include "CDPL/Base/Exceptions.hpp"
 
 #include "MDLDataReader.hpp"
@@ -42,9 +43,12 @@ Chem::MOLMoleculeReader::MOLMoleculeReader(std::istream& is):
 
 Chem::MOLMoleculeReader::~MOLMoleculeReader() {}
 
-bool Chem::MOLMoleculeReader::readData(std::istream& is, Molecule& mol)
+bool Chem::MOLMoleculeReader::readData(std::istream& is, Molecule& mol, bool overwrite)
 {
 	try {
+		if (overwrite)
+			mol.clear();
+
 		return reader->readMOLFile(is, mol);
 
 	} catch (const std::exception& e) {

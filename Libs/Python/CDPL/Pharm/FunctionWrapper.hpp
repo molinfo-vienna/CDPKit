@@ -63,4 +63,10 @@ RET_TYPE FUNC_NAME##Wrapper6(ARG1_TYPE arg1, ARG2_TYPE arg2, ARG3_TYPE arg3, ARG
 	return CDPL::Pharm::FUNC_NAME(arg1, arg2, arg3, arg4, arg5, arg6);                                                        \
 }
 
+#define MAKE_FUNCTION_WRAPPER7(RET_TYPE, FUNC_NAME, ARG1_TYPE, ARG2_TYPE, ARG3_TYPE, ARG4_TYPE, ARG5_TYPE, ARG6_TYPE, ARG7_TYPE)        \
+RET_TYPE FUNC_NAME##Wrapper7(ARG1_TYPE arg1, ARG2_TYPE arg2, ARG3_TYPE arg3, ARG4_TYPE arg4, ARG5_TYPE arg5, ARG6_TYPE arg6, ARG7_TYPE arg7) \
+{                                                                                                                            \
+	return CDPL::Pharm::FUNC_NAME(arg1, arg2, arg3, arg4, arg5, arg6, arg7);	\
+}
+
 #endif // CDPL_PYTHON_CHEM_FUNCTIONWRAPPER_HPP

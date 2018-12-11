@@ -41,6 +41,11 @@ BOOST_PYTHON_MODULE(_confgen)
 	exportFragmentList();
 	exportFragmentLibraryEntry();
 	exportFragmentLibrary();
+	exportTorsionRule();
+	exportTorsionCategory();
+	exportTorsionLibrary();
+	exportTorsionRuleMatch();
+	exportTorsionRuleMapping();
 
 #if defined(HAVE_BOOST_TIMER) && defined(HAVE_BOOST_CHRONO)
 

@@ -101,11 +101,14 @@ void Chem::buildMolecularFormula(const MolecularGraph& molgraph, std::string& fo
 	if (unknown_count > 1)
 		formula_os << boost::lexical_cast<std::string>(unknown_count);
 
-	formula.append(formula_os.str());
+	formula = formula_os.str();
 }
 
-void Chem::buildElementHistogram(const MolecularGraph& molgraph, ElementHistogram& hist)
+void Chem::buildElementHistogram(const MolecularGraph& molgraph, ElementHistogram& hist, bool append)
 {
+	if (!append)
+		hist.clear();
+
 	MolecularGraph::ConstAtomIterator atoms_end = molgraph.getAtomsEnd();
 
 	for (MolecularGraph::ConstAtomIterator it = molgraph.getAtomsBegin(); it != atoms_end; ++it) {

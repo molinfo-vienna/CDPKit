@@ -23,6 +23,10 @@ SET(cdpl-grid_LIB_SRCS
     ControlParameterFunctions.cpp
    )
 
+IF(Boost_FILESYSTEM_FOUND AND Boost_IOSTREAMS_FOUND)
+   LINK_LIBRARIES(${Boost_FILESYSTEM_LIBRARY} ${Boost_IOSTREAMS_LIBRARY})
+ENDIF(Boost_FILESYSTEM_FOUND AND Boost_IOSTREAMS_FOUND)
+
 ADD_LIBRARY(cdpl-grid-static STATIC ${cdpl-grid_LIB_SRCS})
 
 TARGET_LINK_LIBRARIES(cdpl-grid-static cdpl-base-static cdpl-util-static cdpl-internal-static)

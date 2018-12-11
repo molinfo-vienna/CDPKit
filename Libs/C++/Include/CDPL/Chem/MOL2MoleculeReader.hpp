@@ -74,7 +74,7 @@ namespace CDPL
 
 			MOL2MoleculeReader& operator=(const MOL2MoleculeReader&);
 
-			bool readData(std::istream&, Molecule&);
+			bool readData(std::istream&, Molecule&, bool overwrite);
 			bool skipData(std::istream&);
 			bool moreData(std::istream&);
 

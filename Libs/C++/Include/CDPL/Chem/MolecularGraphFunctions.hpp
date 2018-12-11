@@ -432,7 +432,7 @@ namespace CDPL
 
 		CDPL_CHEM_API void buildMolecularFormula(const MolecularGraph& molgraph, std::string& formula);
 
-		CDPL_CHEM_API void buildElementHistogram(const MolecularGraph& molgraph, ElementHistogram& hist);
+		CDPL_CHEM_API void buildElementHistogram(const MolecularGraph& molgraph, ElementHistogram& hist, bool append = false);
 
 	
 		CDPL_CHEM_API FragmentList::SharedPointer perceiveAromaticRings(const MolecularGraph& molgraph);

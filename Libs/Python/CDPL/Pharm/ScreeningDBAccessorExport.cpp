@@ -68,16 +68,16 @@ namespace
 			return this->get_override("getNumPharmacophores")(mol_idx);
 		}
 
-		void getMolecule(std::size_t mol_idx, CDPL::Chem::Molecule& mol) const {
-			this->get_override("getMolecule")(mol_idx, boost::ref(mol));
+		void getMolecule(std::size_t mol_idx, CDPL::Chem::Molecule& mol, bool overwrite) const {
+			this->get_override("getMolecule")(mol_idx, boost::ref(mol), overwrite);
 		} 
 
-		void getPharmacophore(std::size_t pharm_idx, CDPL::Pharm::Pharmacophore& pharm) const {
-			this->get_override("getPharmacophore")(pharm_idx, boost::ref(pharm));
+		void getPharmacophore(std::size_t pharm_idx, CDPL::Pharm::Pharmacophore& pharm, bool overwrite) const {
+			this->get_override("getPharmacophore")(pharm_idx, boost::ref(pharm), overwrite);
 		} 
 
-		void getPharmacophore(std::size_t mol_idx, std::size_t mol_conf_idx, CDPL::Pharm::Pharmacophore& pharm) const {
-			this->get_override("getPharmacophore")(mol_idx, mol_conf_idx, boost::ref(pharm));
+		void getPharmacophore(std::size_t mol_idx, std::size_t mol_conf_idx, CDPL::Pharm::Pharmacophore& pharm, bool overwrite) const {
+			this->get_override("getPharmacophore")(mol_idx, mol_conf_idx, boost::ref(pharm), overwrite);
 		} 
 
 		std::size_t getMoleculeIndex(std::size_t pharm_idx) const {
@@ -123,17 +123,17 @@ void CDPLPythonPharm::exportScreeningDBAccessor()
 				 static_cast<std::size_t (Pharm::ScreeningDBAccessor::*)(std::size_t) const>(&Pharm::ScreeningDBAccessor::getNumPharmacophores)),
 			 (python::arg("self"), python::arg("mol_idx")))
 		.def("getMolecule", python::pure_virtual(&Pharm::ScreeningDBAccessor::getMolecule),
-			 (python::arg("self"), python::arg("mol_idx"), python::arg("mol")))
+			 (python::arg("self"), python::arg("mol_idx"), python::arg("mol"), python::arg("overwrite") = true))
 		.def("getPharmacophore", 
 			 python::pure_virtual(
-				 static_cast<void (Pharm::ScreeningDBAccessor::*)(std::size_t, Pharm::Pharmacophore&) const>(
+				 static_cast<void (Pharm::ScreeningDBAccessor::*)(std::size_t, Pharm::Pharmacophore&, bool) const>(
 					 &Pharm::ScreeningDBAccessor::getPharmacophore)),
-			 (python::arg("self"), python::arg("pharm_idx"), python::arg("pharm")))
+			 (python::arg("self"), python::arg("pharm_idx"), python::arg("pharm"), python::arg("overwrite") = true))
 		.def("getPharmacophore", 
 			 python::pure_virtual(
-				 static_cast<void (Pharm::ScreeningDBAccessor::*)(std::size_t, std::size_t, Pharm::Pharmacophore&) const>(
+				 static_cast<void (Pharm::ScreeningDBAccessor::*)(std::size_t, std::size_t, Pharm::Pharmacophore&, bool) const>(
 					 &Pharm::ScreeningDBAccessor::getPharmacophore)),
-			 (python::arg("self"), python::arg("mol_idx"), python::arg("mol_conf_idx"), python::arg("pharm")))
+			 (python::arg("self"), python::arg("mol_idx"), python::arg("mol_conf_idx"), python::arg("pharm"), python::arg("overwrite") = true))
 		.def("getMoleculeIndex", python::pure_virtual(&Pharm::ScreeningDBAccessor::getMoleculeIndex),
 			 (python::arg("self"), python::arg("pharm_idx")))
 		.def("getConformationIndex", python::pure_virtual(&Pharm::ScreeningDBAccessor::getConformationIndex),

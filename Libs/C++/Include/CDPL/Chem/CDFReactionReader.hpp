@@ -77,7 +77,7 @@ namespace CDPL
 
 			CDFReactionReader& operator=(const CDFReactionReader&);
 
-			bool readData(std::istream&, Reaction&);
+			bool readData(std::istream&, Reaction&, bool overwrite);
 			bool skipData(std::istream&);
 			bool moreData(std::istream&);
 

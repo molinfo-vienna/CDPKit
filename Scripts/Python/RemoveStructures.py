@@ -72,8 +72,6 @@ def process():
         hashcode = Chem.calcHashCode(mol)
         xhashes.add(hashcode)
 
-        mol.clear()
-
     while reader.read(mol):
         #print 'Processing Molecule ' + str(stats.read)
         setupMolecule(mol)
@@ -86,8 +84,6 @@ def process():
         else:
             writer.write(mol)
 
-        mol.clear()
-      
         stats.read += 1
 
         if stats.read % 10000 == 0:

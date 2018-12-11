@@ -28,12 +28,18 @@
 
 #include "CDPL/ConfGen/TorsionLibrary.hpp"
 
+#include "TorsionLibraryDataReader.hpp"
+
 
 using namespace CDPL;
 
 
 namespace
 {
+
+	const char* BUILTIN_TOR_LIB_DATA =                 
+        #include "TorsionLibrary.xml.str" 
+		;
 
     ConfGen::TorsionLibrary::SharedPointer builtinTorLib(new ConfGen::TorsionLibrary());
 
@@ -51,11 +57,9 @@ namespace
 ConfGen::TorsionLibrary::SharedPointer ConfGen::TorsionLibrary::defaultLib = builtinTorLib;
 
 
-ConfGen::TorsionLibrary::TorsionLibrary(): TorsionCategory("") {}
-
 void ConfGen::TorsionLibrary::loadDefaults()
 {
-    // TODO
+	TorsionLibraryDataReader().read(BUILTIN_TOR_LIB_DATA, *this);
 }
 
 void ConfGen::TorsionLibrary::set(const SharedPointer& lib)

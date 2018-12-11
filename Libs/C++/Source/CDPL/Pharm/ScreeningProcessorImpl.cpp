@@ -597,7 +597,6 @@ void Pharm::ScreeningProcessorImpl::loadMolecule(std::size_t mol_idx)
 		return;
 
 	atomVdWRadii.clear();
-	dbMolecule.clear();
 
 	dbAccessor->getMolecule(mol_idx, dbMolecule);
 
@@ -610,7 +609,6 @@ void Pharm::ScreeningProcessorImpl::loadPharmacophore(std::size_t pharm_idx)
 		return;
 
 	atomCoordinates.clear();
-	dbPharmacophore.clear();
 	dbFeaturePositions.clear();
 	initDBFeaturesByType = true;
 

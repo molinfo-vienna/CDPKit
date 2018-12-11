@@ -18,6 +18,11 @@ SET(confgen_MOD_SRCS
     FragmentListExport.cpp
     FragmentLibraryEntryExport.cpp
     FragmentLibraryExport.cpp
+    TorsionRuleExport.cpp
+    TorsionCategoryExport.cpp
+    TorsionLibraryExport.cpp
+    TorsionRuleMatchExport.cpp
+    TorsionRuleMappingExport.cpp
 
     UtilityFunctionExport.cpp
 

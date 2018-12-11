@@ -405,8 +405,8 @@ void ForceField::MMFF94InteractionParameterizer::setupAtomTypes()
 		} else {
 			atomTyper.perceiveTypes(*molGraph, symAtomTypes, numAtomTypes, strictAtomTyping);
 
-			for (std::size_t j = 0; j < num_atoms; j++) 
-				if (numAtomTypes[j] == 0)
+			for (std::size_t j = 0; j < num_atoms; j++)
+				if (numAtomTypes[j] == 0) 
 					throw Base::OperationFailed("MMFF94InteractionParameterizer: could not determine MMFF94 type of atom #" + boost::lexical_cast<std::string>(j));
 
 			return;

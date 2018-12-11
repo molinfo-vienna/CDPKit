@@ -84,7 +84,6 @@ def process():
 
         print >> sys.stderr, '   -> Generated', tgcb.count, 'tautomers'
 
-        m.clear()
         tgcb.count = 0
         i += 1
 

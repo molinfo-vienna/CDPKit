@@ -130,7 +130,7 @@ namespace CDPL
 			 *         are stored in the same order as the atoms appear in the atom list of
 			 *         the molecular graph (i.e. the coordinates of an atom are accessible via
 			 *         its index).
-			 * \paran init_coords If \false, defined atom coordinates are already present in \a coords and thus won't get assigned again.
+			 * \param init_coords If \c false, defined atom coordinates are already present in \a coords and thus won't get assigned again.
 			 */
 			void generate(const MolecularGraph& molgraph, Math::Vector3DArray& coords, bool init_coords = true);
 

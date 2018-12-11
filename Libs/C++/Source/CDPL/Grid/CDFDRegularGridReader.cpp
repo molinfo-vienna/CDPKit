@@ -42,9 +42,12 @@ Grid::CDFDRegularGridReader::CDFDRegularGridReader(std::istream& is):
 
 Grid::CDFDRegularGridReader::~CDFDRegularGridReader() {}
 
-bool Grid::CDFDRegularGridReader::readData(std::istream& is, DRegularGrid& grid)
+bool Grid::CDFDRegularGridReader::readData(std::istream& is, DRegularGrid& grid, bool overwrite)
 {
 	try {
+		if (overwrite)
+			grid.clear();
+
 		return reader->readGrid(is, grid);
 
 	} catch (const std::exception& e) {

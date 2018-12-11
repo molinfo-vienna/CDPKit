@@ -33,6 +33,7 @@
 
 #include <boost/thread.hpp>
 #include <boost/chrono/chrono.hpp>
+#include <boost/unordered_map.hpp>
 
 #include "CDPL/ConfGen/FragmentLibrary.hpp"
 #include "CDPL/Util/CompoundDataReader.hpp"
@@ -99,6 +100,8 @@ namespace GenFragLib
 		bool readNextMolecule(CDPL::Chem::Molecule& mol);
 		bool doReadNextMolecule(CDPL::Chem::Molecule& mol);
 
+		void updateOccurrenceCount(CDPL::Base::uint64 hash_code);
+
 		void setErrorMessage(const std::string& msg);
 		bool haveErrorMessage();
 
@@ -122,6 +125,7 @@ namespace GenFragLib
 		class FragLibGenerationWorker;
 
 		typedef std::vector<std::string> StringList;
+		typedef boost::unordered_map<CDPL::Base::uint64, std::size_t> FragmentFrequencyMap;
 		typedef CDPL::Base::DataReader<CDPL::Chem::Molecule> MoleculeReader;
 		typedef CDPL::Util::CompoundDataReader<CDPL::Chem::Molecule> CompMoleculeReader;
 		typedef boost::chrono::system_clock Clock;
@@ -138,9 +142,11 @@ namespace GenFragLib
 		unsigned int                   forceFieldType;
 		bool                           useInputCoords;
 		bool                           strictMMFF94AtomTypes;
+		std::size_t                    maxLibSize;
 		InputHandlerPtr                inputHandler;
 		CompMoleculeReader             inputReader;
 		FragmentLibrary::SharedPointer fragmentLibPtr;
+		FragmentFrequencyMap           fragmentOccCounts;
 		boost::mutex                   mutex;
 		std::string                    errorMessage;
 		Clock::time_point              startTime;

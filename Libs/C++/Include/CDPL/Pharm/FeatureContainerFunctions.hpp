@@ -73,14 +73,14 @@ namespace CDPL
 
 		CDPL_PHARM_API std::size_t getFeatureCount(const FeatureContainer& cntnr, unsigned int type);
 
-		CDPL_PHARM_API void buildFeatureTypeHistogram(const FeatureContainer& cntnr, FeatureTypeHistogram& hist);
+		CDPL_PHARM_API void buildFeatureTypeHistogram(const FeatureContainer& cntnr, FeatureTypeHistogram& hist, bool append = false);
 
 
 		CDPL_PHARM_API bool checkExclusionVolumeClash(const FeatureContainer& ftr_cntnr, const Chem::AtomContainer& atom_cntnr, 
 													  const Chem::Atom3DCoordinatesFunction& coords_func,
 													  const Math::Matrix4D& xform, double vdw_factor = 1.0);
 
-		CDPL_PHARM_API void getFeatureAtoms(const FeatureContainer& cntnr, Chem::Fragment& atoms);
+		CDPL_PHARM_API void getFeatureAtoms(const FeatureContainer& cntnr, Chem::Fragment& atoms, bool append = false);
 
 		/**
 		 * @}

@@ -27,8 +27,93 @@
 #include "StaticInit.hpp"
 
 #include "CDPL/ConfGen/TorsionRule.hpp"
+#include "CDPL/Base/Exceptions.hpp"
 
 
 using namespace CDPL;
 
 
+const Chem::MolecularGraph::SharedPointer& ConfGen::TorsionRule::getMatchPattern() const
+{
+	return matchPattern;
+}
+
+void ConfGen::TorsionRule::setMatchPattern(const Chem::MolecularGraph::SharedPointer& ptn)
+{
+	matchPattern = ptn;
+}
+
+void ConfGen::TorsionRule::addAngle(const AngleEntry& angle)
+{
+	angles.push_back(angle);
+}
+
+void ConfGen::TorsionRule::addAngle(double angle, double tol1, double tol2, double score)
+{
+	angles.push_back(AngleEntry(angle, tol1, tol2, score));
+}
+
+std::size_t ConfGen::TorsionRule::getNumAngles() const
+{
+	return angles.size();
+}
+
+const ConfGen::TorsionRule::AngleEntry& ConfGen::TorsionRule::getAngle(std::size_t idx) const
+{
+	checkAngleIndex(idx, false);
+
+	return angles[idx];
+}
+
+void ConfGen::TorsionRule::removeAngle(std::size_t idx)
+{
+	checkAngleIndex(idx, false);
+
+	angles.erase(angles.begin() + idx);
+}
+
+void ConfGen::TorsionRule::removeAngle(const AngleEntryIterator& it)
+{
+	checkAngleIndex(it - angles.begin(), true);
+
+	angles.erase(it);
+}
+
+ConfGen::TorsionRule::AngleEntryIterator ConfGen::TorsionRule::getAnglesBegin()
+{
+	return angles.begin();
+}
+
+ConfGen::TorsionRule::AngleEntryIterator ConfGen::TorsionRule::getAnglesEnd()
+{
+	return angles.end();
+}
+
+ConfGen::TorsionRule::ConstAngleEntryIterator ConfGen::TorsionRule::getAnglesBegin() const
+{
+	return angles.begin();
+}
+
+ConfGen::TorsionRule::ConstAngleEntryIterator ConfGen::TorsionRule::getAnglesEnd() const
+{
+	return angles.end();
+}
+
+void ConfGen::TorsionRule::swap(TorsionRule& cat)
+{
+	matchPattern.swap(cat.matchPattern);
+	angles.swap(cat.angles);
+}
+
+void ConfGen::TorsionRule::clear()
+{
+	angles.clear();
+	matchPattern.reset();
+}
+
+void ConfGen::TorsionRule::checkAngleIndex(std::size_t idx, bool it) const
+{
+	if (idx >= angles.size())
+		throw Base::IndexError(it ? "TorsionRule: angle iterator out of bounds" : 
+							   "TorsionRule: angle index out of bounds");
+}

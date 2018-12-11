@@ -29,6 +29,7 @@
 #include <boost/lexical_cast.hpp>
 
 #include "CDPL/Chem/SDFMoleculeReader.hpp"
+#include "CDPL/Chem/Molecule.hpp"
 #include "CDPL/Base/Exceptions.hpp"
 
 #include "MDLDataReader.hpp"
@@ -42,9 +43,12 @@ Chem::SDFMoleculeReader::SDFMoleculeReader(std::istream& is):
 
 Chem::SDFMoleculeReader::~SDFMoleculeReader() {}
 
-bool Chem::SDFMoleculeReader::readData(std::istream& is, Molecule& mol)
+bool Chem::SDFMoleculeReader::readData(std::istream& is, Molecule& mol, bool overwrite)
 {
 	try {
+		if (overwrite)
+			mol.clear();
+
 		return reader->readSDFileRecord(is, mol);
 
 	} catch (const std::exception& e) {

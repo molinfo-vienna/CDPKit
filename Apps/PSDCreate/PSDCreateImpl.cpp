@@ -50,19 +50,23 @@
 using namespace PSDCreate;
 
 
-struct PSDCreateImpl::InputScanProgressCallback
+class PSDCreateImpl::InputScanProgressCallback
 {
+
+public:
+	class Terminated : public std::exception {};
 
 	InputScanProgressCallback(PSDCreateImpl* parent, double offset, double scale): 
 		parent(parent), offset(offset), scale(scale) {}
 
 	void operator()(const CDPL::Base::DataIOBase&, double progress) const {
 		if (PSDCreateImpl::termSignalCaught())
-			return;
+			throw Terminated();
 
 		parent->printProgress("Scanning Input File(s)...      ", offset + scale * progress);
 	}
 
+private:
 	PSDCreateImpl* parent;
 	double         offset;
 	double         scale;
@@ -111,7 +115,6 @@ struct PSDCreateImpl::DBCreationWorker
 				calcBondCIPConfigurations(mol, false);
 
 				dbCreator->process(mol);
-				mol.clear();
 			}
 
 		} catch (const std::exception& e) {
@@ -570,7 +573,14 @@ void PSDCreateImpl::initInputReader()
 		MoleculeReader::SharedPointer reader_ptr = input_handler->createReader(file_path);
 		std::size_t cb_id = reader_ptr->registerIOCallback(InputScanProgressCallback(this, i * 1.0 / num_in_files, 1.0 / num_in_files));
 
-		inputReader.addReader(reader_ptr);
+		try {
+			inputReader.addReader(reader_ptr);
+
+		} catch (const InputScanProgressCallback::Terminated&) {
+			reader_ptr->unregisterIOCallback(cb_id);
+			break;
+		}
+
 		reader_ptr->unregisterIOCallback(cb_id);
 	}
 

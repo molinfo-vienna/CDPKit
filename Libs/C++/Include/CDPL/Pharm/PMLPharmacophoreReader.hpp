@@ -77,7 +77,7 @@ namespace CDPL
 
 			PMLPharmacophoreReader& operator=(const PMLPharmacophoreReader&);
 
-			bool readData(std::istream&, Pharmacophore&);
+			bool readData(std::istream&, Pharmacophore&, bool overwrite);
 			bool skipData(std::istream&);
 			bool moreData(std::istream&);
 

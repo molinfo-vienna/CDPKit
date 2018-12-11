@@ -52,7 +52,6 @@ using namespace CDPL;
 namespace
 {
 
-	const double DEF_FEATURE_WEIGHT               = 1.0;
 	const double PLANE_FEATURE_SECOND_TOL_FACTOR  = 0.5;
 	const double VECTOR_FEATURE_TARGET_TOL_FACTOR = 1.5;
 	const std::string NOT_FOUND;
@@ -214,7 +213,7 @@ void Pharm::PMLDataWriter::writeDefaultFeatureAttributes(std::ostream& os, const
 	writeAttribute(os, PML::FEATURE_ID_ATTRIBUTE, featureID++, false);
 	writeAttribute(os, PML::OPTIONAL_ATTRIBUTE, getOptionalFlag(ftr), false);
 	writeAttribute(os, PML::DISABLED_ATTRIBUTE, getDisabledFlag(ftr), false);
-	writeAttribute(os, PML::WEIGHT_ATTRIBUTE, DEF_FEATURE_WEIGHT, false);
+	writeAttribute(os, PML::WEIGHT_ATTRIBUTE, getWeight(ftr), false);
 	writeAttribute(os, PML::ID_ATTRIBUTE, "feature" + boost::lexical_cast<std::string>(id), close);
 }
 
@@ -226,7 +225,7 @@ void Pharm::PMLDataWriter::writeXVolume(std::ostream& os, const Feature& ftr, st
 	writeAttribute(os, PML::FEATURE_ID_ATTRIBUTE, featureID++, false);
 	writeAttribute(os, PML::OPTIONAL_ATTRIBUTE, getOptionalFlag(ftr), false);
 	writeAttribute(os, PML::DISABLED_ATTRIBUTE, getDisabledFlag(ftr), false);
-	writeAttribute(os, PML::WEIGHT_ATTRIBUTE, DEF_FEATURE_WEIGHT, false);
+	writeAttribute(os, PML::WEIGHT_ATTRIBUTE, getWeight(ftr), false);
 	writeAttribute(os, PML::ID_ATTRIBUTE, "feature" + boost::lexical_cast<std::string>(id), true);
 
 	writePositionAndTolerance(os, PML::FEATURE_POSITION_TAG, get3DCoordinates(ftr), getTolerance(ftr));

@@ -29,6 +29,7 @@
 #include <boost/lexical_cast.hpp>
 
 #include "CDPL/Chem/CDFReactionReader.hpp"
+#include "CDPL/Chem/Reaction.hpp"
 #include "CDPL/Base/Exceptions.hpp"
 
 #include "CDFDataReader.hpp"
@@ -42,25 +43,28 @@ Chem::CDFReactionReader::CDFReactionReader(std::istream& is):
 
 Chem::CDFReactionReader::~CDFReactionReader() {}
 
-bool Chem::CDFReactionReader::readData(std::istream& is, Reaction& rxn)
+bool Chem::CDFReactionReader::readData(std::istream& is, Reaction& rxn, bool overwrite)
 {
     try {
-	return reader->readReaction(is, rxn);
+		if (overwrite)
+			rxn.clear();
+
+		return reader->readReaction(is, rxn);
 
     } catch (const std::exception& e) {
-	throw Base::IOError("CDFReactionReader: while reading record " + boost::lexical_cast<std::string>(getRecordIndex()) + 
-			    ": " + e.what());
+		throw Base::IOError("CDFReactionReader: while reading record " + boost::lexical_cast<std::string>(getRecordIndex()) + 
+							": " + e.what());
     }
 }
 
 bool Chem::CDFReactionReader::skipData(std::istream& is)
 {
     try {
-	return reader->skipReaction(is);
+		return reader->skipReaction(is);
 
     } catch (const std::exception& e) {
-	throw Base::IOError("CDFReactionReader: while skipping record " + boost::lexical_cast<std::string>(getRecordIndex()) + 
-			    ": " + e.what());
+		throw Base::IOError("CDFReactionReader: while skipping record " + boost::lexical_cast<std::string>(getRecordIndex()) + 
+							": " + e.what());
     }
 }
 

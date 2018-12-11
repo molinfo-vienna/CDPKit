@@ -119,9 +119,12 @@ const std::string& Chem::INCHIMoleculeReader::getLogOutput() const
 	return logOutput;
 }
 
-bool Chem::INCHIMoleculeReader::readData(std::istream& is, Molecule& mol)
+bool Chem::INCHIMoleculeReader::readData(std::istream& is, Molecule& mol, bool overwrite)
 {
 	try {
+		if (overwrite)
+			mol.clear();
+
 		return readMolecule(is, mol);
 
 	} catch (const std::exception& e) {

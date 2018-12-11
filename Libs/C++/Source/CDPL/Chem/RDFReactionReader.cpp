@@ -29,6 +29,7 @@
 #include <boost/lexical_cast.hpp>
 
 #include "CDPL/Chem/RDFReactionReader.hpp"
+#include "CDPL/Chem/Reaction.hpp"
 #include "CDPL/Base/Exceptions.hpp"
 
 #include "MDLDataReader.hpp"
@@ -42,9 +43,12 @@ Chem::RDFReactionReader::RDFReactionReader(std::istream& is):
 
 Chem::RDFReactionReader::~RDFReactionReader() {}
 
-bool Chem::RDFReactionReader::readData(std::istream& is, Reaction& rxn)
+bool Chem::RDFReactionReader::readData(std::istream& is, Reaction& rxn, bool overwrite)
 {
 	try {
+		if (overwrite)
+			rxn.clear();
+
 		return reader->readRDFileRecord(is, rxn);
 
 	} catch (const std::exception& e) {

@@ -36,8 +36,11 @@
 using namespace CDPL; 
 
 
-void Pharm::buildFeatureTypeHistogram(const FeatureContainer& cntnr, FeatureTypeHistogram& hist)
+void Pharm::buildFeatureTypeHistogram(const FeatureContainer& cntnr, FeatureTypeHistogram& hist, bool append)
 {
+	if (!append)
+		hist.clear();
+
 	FeatureContainer::ConstFeatureIterator ftrs_end = cntnr.getFeaturesEnd();
 
 	for (FeatureContainer::ConstFeatureIterator it = cntnr.getFeaturesBegin(); it != ftrs_end; ++it) {

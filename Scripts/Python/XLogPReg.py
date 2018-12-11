@@ -64,8 +64,6 @@ def process():
         histo += xlogp_calc.getFeatureVector()
 
 		mlr_model.addXYData(xlogp_calc.getFeatureVector(), exp_logp)
-		mol.clear()
-	
 
 	mlr_model.buildModel()
 	mlr_model.calcStatistics()

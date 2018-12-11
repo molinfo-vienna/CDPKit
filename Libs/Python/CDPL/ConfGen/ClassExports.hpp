@@ -38,6 +38,11 @@ namespace CDPLPythonConfGen
 	void exportFragmentList();
 	void exportFragmentLibraryEntry();
 	void exportFragmentLibrary();
+	void exportTorsionRule();
+	void exportTorsionCategory();
+	void exportTorsionLibrary();
+	void exportTorsionRuleMatch();
+	void exportTorsionRuleMapping();
 
 	void exportBoostFunctionWrappers();
 

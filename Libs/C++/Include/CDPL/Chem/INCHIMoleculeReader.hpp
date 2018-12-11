@@ -193,7 +193,7 @@ namespace CDPL
 
 			INCHIMoleculeReader& operator=(const INCHIMoleculeReader&);
 
-			bool readData(std::istream&, Molecule&);
+			bool readData(std::istream&, Molecule&, bool overwrite);
 			bool skipData(std::istream&);
 			bool moreData(std::istream&);
 

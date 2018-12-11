@@ -36,8 +36,11 @@
 using namespace CDPL; 
 
 
-void Chem::get3DCoordinates(const Entity3DContainer& cntnr, Math::Vector3DArray& coords)
+void Chem::get3DCoordinates(const Entity3DContainer& cntnr, Math::Vector3DArray& coords, bool append)
 {
+	if (!append)
+		coords.clear();
+
 	for (Entity3DContainer::ConstEntityIterator it = cntnr.getEntitiesBegin(), end = cntnr.getEntitiesEnd(); it != end; ++it)
 		coords.addElement(get3DCoordinates(*it));
 }

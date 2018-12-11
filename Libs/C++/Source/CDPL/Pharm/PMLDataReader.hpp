@@ -65,28 +65,32 @@ namespace CDPL
 			bool hasMoreData(std::istream& is);
 
 		private:
+			typedef rapidxml::xml_document<char> XMLDocument;
+			typedef rapidxml::xml_node<char> XMLNode;
+			typedef rapidxml::xml_attribute<char> XMLAttribute;
+
 			void init(); 
 
-			void getPharmacophoreProperties(const rapidxml::xml_node<char>* pharm_node, Pharmacophore& pharm) const;
+			void getPharmacophoreProperties(const XMLNode* pharm_node, Pharmacophore& pharm) const;
 
-			void extractFeatures(const rapidxml::xml_node<char>* pharm_node, Pharmacophore& pharm) const;
+			void extractFeatures(const XMLNode* pharm_node, Pharmacophore& pharm) const;
 
-			void addPointFeature(const rapidxml::xml_node<char>* ftr_node, Pharmacophore& pharm) const;
-			void addPlaneFeature(const rapidxml::xml_node<char>* ftr_node, Pharmacophore& pharm) const;
-			void addVectorFeature(const rapidxml::xml_node<char>* ftr_node, Pharmacophore& pharm) const;
-			void addVolumeFeature(const rapidxml::xml_node<char>* ftr_node, Pharmacophore& pharm) const;
+			void addPointFeature(const XMLNode* ftr_node, Pharmacophore& pharm) const;
+			void addPlaneFeature(const XMLNode* ftr_node, Pharmacophore& pharm) const;
+			void addVectorFeature(const XMLNode* ftr_node, Pharmacophore& pharm) const;
+			void addVolumeFeature(const XMLNode* ftr_node, Pharmacophore& pharm) const;
 
-			Feature* createFeature(const rapidxml::xml_node<char>* ftr_node, Pharmacophore& pharm) const;
+			Feature* createFeature(const XMLNode* ftr_node, Pharmacophore& pharm) const;
 
-			void getDefaultFeatureProperties(const rapidxml::xml_node<char>* ftr_node, Feature& ftr) const;
+			void getDefaultFeatureProperties(const XMLNode* ftr_node, Feature& ftr) const;
 
-			bool getPosition(const rapidxml::xml_node<char>* ftr_node, const std::string& tag, Math::Vector3D& vec) const; 
-			bool getTolerance(const rapidxml::xml_node<char>* ftr_node, const std::string& tag, double& tol) const; 
+			bool getPosition(const XMLNode* ftr_node, const std::string& tag, Math::Vector3D& vec) const; 
+			bool getTolerance(const XMLNode* ftr_node, const std::string& tag, double& tol) const; 
 
-			const Base::DataIOBase&      ioBase;	
-			bool                         strictErrorChecking;
-			std::string                  pharmData;
-			rapidxml::xml_document<char> pharmDocument;
+			const Base::DataIOBase& ioBase;	
+			bool                    strictErrorChecking;
+			std::string             pharmData;
+			XMLDocument             pharmDocument;
 		};
 	}
 }

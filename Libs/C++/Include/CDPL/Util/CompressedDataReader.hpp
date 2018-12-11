@@ -60,8 +60,8 @@ namespace CDPL
 		public:
 			CompressedDataReader(std::istream& is); 
 
-			CompressedDataReader& read(DataType& obj);
-			CompressedDataReader& read(std::size_t idx, DataType& obj);
+			CompressedDataReader& read(DataType& obj, bool overwrite = true);
+			CompressedDataReader& read(std::size_t idx, DataType& obj, bool overwrite = true);
 
 			CompressedDataReader& skip();
 
@@ -99,18 +99,18 @@ CDPL::Util::CompressedDataReader<ReaderImpl, DecompStream, DataType>::Compressed
 
 template <typename ReaderImpl, typename DecompStream, typename DataType>
 CDPL::Util::CompressedDataReader<ReaderImpl, DecompStream, DataType>&
-CDPL::Util::CompressedDataReader<ReaderImpl, DecompStream, DataType>::read(DataType& obj)
+CDPL::Util::CompressedDataReader<ReaderImpl, DecompStream, DataType>::read(DataType& obj, bool overwrite)
 {
-    reader.read(obj);
+    reader.read(obj, overwrite);
 
     return *this;
 }
 
 template <typename ReaderImpl, typename DecompStream, typename DataType>
 CDPL::Util::CompressedDataReader<ReaderImpl, DecompStream, DataType>&
-CDPL::Util::CompressedDataReader<ReaderImpl, DecompStream, DataType>::read(std::size_t idx, DataType& obj)
+CDPL::Util::CompressedDataReader<ReaderImpl, DecompStream, DataType>::read(std::size_t idx, DataType& obj, bool overwrite)
 {
-    reader.read(idx, obj);
+    reader.read(idx, obj, overwrite);
 
     return *this;
 }

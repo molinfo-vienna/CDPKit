@@ -36,7 +36,7 @@
 namespace
 {
 
-    MAKE_FUNCTION_WRAPPER5(void, extractResidueSubstructures, CDPL::Chem::AtomContainer&, CDPL::Chem::MolecularGraph&, CDPL::Chem::Fragment&, bool, unsigned int);
+    MAKE_FUNCTION_WRAPPER6(void, extractResidueSubstructures, CDPL::Chem::AtomContainer&, CDPL::Chem::MolecularGraph&, CDPL::Chem::Fragment&, bool, unsigned int, bool);
 }
 
 
@@ -45,7 +45,8 @@ void CDPLPythonBiomol::exportAtomContainerFunctions()
     using namespace boost;
     using namespace CDPL;
 
-    python::def("extractResidueSubstructures", &extractResidueSubstructuresWrapper5,
+    python::def("extractResidueSubstructures", &extractResidueSubstructuresWrapper6,
 		(python::arg("cntnr"), python::arg("molgraph"), python::arg("res_substructs"), 
-		 python::arg("cnctd_only") = false, python::arg("flags") = Biomol::AtomPropertyFlag::DEFAULT));
+		 python::arg("cnctd_only") = false, python::arg("flags") = Biomol::AtomPropertyFlag::DEFAULT,
+		 python::arg("append") = false));
 }

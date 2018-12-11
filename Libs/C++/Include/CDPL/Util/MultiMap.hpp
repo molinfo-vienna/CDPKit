@@ -53,6 +53,29 @@ namespace CDPL
 		 * @{
 		 */
 
+		template <typename ValueType, bool Allow = true> 
+		struct MultiMapDefaultValue
+		{
+
+			static const ValueType& get() {
+				return defValue;
+			} 
+
+			static const ValueType defValue;
+		};
+
+		template <typename ValueType, bool Allow> 
+		const ValueType MultiMapDefaultValue<ValueType, Allow>::defValue = ValueType();
+
+		template <typename ValueType> 
+		struct MultiMapDefaultValue<ValueType, false>
+		{
+
+			static const ValueType& get() {
+				throw Base::OperationFailed("MultiMap: default value not supported");
+			} 
+		};
+
 		/**
 		 * \brief A multiple sorted associative container that maps keys to values.
 		 *
@@ -79,7 +102,7 @@ namespace CDPL
 		{
 
 			typedef std::multimap<Key, Value, KeyCompFunc> StorageType;
-
+		
 		public:
 			/**
 			 * \brief A reference-counted smart pointer [\ref BSHPTR] for dynamically allocated \c %MultiMap instances.
@@ -1018,9 +1041,7 @@ const char* CDPL::Util::MultiMap<Key, Value, AllowDefValues, KeyCompFunc>::getCl
 template <typename Key, typename Value, bool AllowDefValues, typename KeyCompFunc>
 const Value& CDPL::Util::MultiMap<Key, Value, AllowDefValues, KeyCompFunc>::getDefaultValue() const
 {
-	static const Value def_value = Value();
-
-	return def_value;
+	return MultiMapDefaultValue<Value, AllowDefValues>::get();
 }
 
 #endif // CDPL_UTIL_MULTIMAP_HPP

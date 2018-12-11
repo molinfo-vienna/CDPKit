@@ -118,8 +118,9 @@ namespace CDPL
 			 * \param cntnr2 The second feature container.
 			 * \param iactions An output map that contains features of \a cntnr1 as keys and interacting features of \a cntnr2
 			 *                     as values.
+			 * \param append If \c false, \a iactions gets cleared before adding any feature mappings.
 			 */
-			void analyze(const FeatureContainer& cntnr1, const FeatureContainer& cntnr2, FeatureMapping& iactions) const;
+			void analyze(const FeatureContainer& cntnr1, const FeatureContainer& cntnr2, FeatureMapping& iactions, bool append = false) const;
 
 		  private:
 			typedef std::pair<unsigned int, unsigned int> FeatureTypePair;

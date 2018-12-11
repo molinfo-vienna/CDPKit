@@ -120,7 +120,7 @@ void CDPLPythonChem::exportStereoDescriptor()
 		.def("getReferenceAtoms", &createReferenceAtomArray, python::arg("self"), 
 			 python::with_custodian_and_ward_postcall<0, 1>())
 		.def("assign", &Chem::StereoDescriptor::operator=, 
-			 (python::arg("self"), python::arg("descr")), python::return_self<>())
+			 (python::arg("self"), python::arg("descr")), python::return_self<python::with_custodian_and_ward<1, 2> >())
 		.def("getPermutationParity", &getPermutationParity4, 
 			 (python::arg("self"), python::arg("atom1"), python::arg("atom2"), 
 			  python::arg("atom3"), python::arg("atom4")))

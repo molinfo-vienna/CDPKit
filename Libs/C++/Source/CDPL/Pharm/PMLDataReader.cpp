@@ -26,6 +26,8 @@
 
 #include "StaticInit.hpp"
 
+#include <cstring>
+
 #include <boost/algorithm/string.hpp>
 #include <boost/unordered_map.hpp>
 
@@ -124,7 +126,7 @@ bool Pharm::PMLDataReader::readPharmacophore(std::istream& is, Pharmacophore& ph
 
 	pharmDocument.parse<0>(&pharmData[0]);
 	
-	const rapidxml::xml_node<char>* pharm_node = pharmDocument.first_node(PML::PHARMACOPHORE_TAG.c_str());
+	const XMLNode* pharm_node = pharmDocument.first_node(PML::PHARMACOPHORE_TAG.c_str());
 
 	if (!pharm_node)
 		throw Base::IOError("PMLDataReader: error while reading pharmacophore, pharmacophore node not accessible");
@@ -157,36 +159,32 @@ void Pharm::PMLDataReader::init()
 	strictErrorChecking = getStrictErrorCheckingParameter(ioBase); 
 }
 
-void Pharm::PMLDataReader::getPharmacophoreProperties(const rapidxml::xml_node<char>* pharm_node, Pharmacophore& pharm) const
+void Pharm::PMLDataReader::getPharmacophoreProperties(const XMLNode* pharm_node, Pharmacophore& pharm) const
 {
-	if (rapidxml::xml_attribute<char>* attr = pharm_node->first_attribute(PML::NAME_ATTRIBUTE.c_str()))
+	if (const XMLAttribute* attr = pharm_node->first_attribute(PML::NAME_ATTRIBUTE.c_str()))
 		setName(pharm, attr->value());
 }
 
-void Pharm::PMLDataReader::extractFeatures(const rapidxml::xml_node<char>* pharm_node, Pharmacophore& pharm) const
+void Pharm::PMLDataReader::extractFeatures(const XMLNode* pharm_node, Pharmacophore& pharm) const
 {
-	using namespace rapidxml;
+	for (const XMLNode* node = pharm_node->first_node(); node; node = node->next_sibling()) {
+		const char* node_name = node->name();
 
-	std::string node_name;
-
-	for (xml_node<char>* node = pharm_node->first_node(); node; node = node->next_sibling()) {
-		node_name = node->name();
-
-		if (node_name == PML::POINT_FEATURE_TAG)
+		if (std::strcmp(node_name, PML::POINT_FEATURE_TAG.c_str()) == 0)
 			addPointFeature(node, pharm);
 
-		else if (node_name == PML::PLANE_FEATURE_TAG)
+		else if (std::strcmp(node_name, PML::PLANE_FEATURE_TAG.c_str()) == 0)
 			addPlaneFeature(node, pharm);
 
-		else if (node_name == PML::VECTOR_FEATURE_TAG)
+		else if (std::strcmp(node_name, PML::VECTOR_FEATURE_TAG.c_str()) == 0)
 			addVectorFeature(node, pharm);
 
-		else if (node_name == PML::VOLUME_FEATURE_TAG)
+		else if (std::strcmp(node_name, PML::VOLUME_FEATURE_TAG.c_str()) == 0)
 			addVolumeFeature(node, pharm);
 	}
 }
 
-void Pharm::PMLDataReader::addPointFeature(const rapidxml::xml_node<char>* ftr_node, Pharmacophore& pharm) const
+void Pharm::PMLDataReader::addPointFeature(const XMLNode* ftr_node, Pharmacophore& pharm) const
 {
 	Feature* ftr = createFeature(ftr_node, pharm);
 
@@ -206,7 +204,7 @@ void Pharm::PMLDataReader::addPointFeature(const rapidxml::xml_node<char>* ftr_n
 		setTolerance(*ftr, tol);
 }
 
-void Pharm::PMLDataReader::addPlaneFeature(const rapidxml::xml_node<char>* ftr_node, Pharmacophore& pharm) const
+void Pharm::PMLDataReader::addPlaneFeature(const XMLNode* ftr_node, Pharmacophore& pharm) const
 {
 	Feature* ftr = createFeature(ftr_node, pharm);
 
@@ -229,7 +227,7 @@ void Pharm::PMLDataReader::addPlaneFeature(const rapidxml::xml_node<char>* ftr_n
 		setTolerance(*ftr, tol);
 }
 
-void Pharm::PMLDataReader::addVectorFeature(const rapidxml::xml_node<char>* ftr_node, Pharmacophore& pharm) const
+void Pharm::PMLDataReader::addVectorFeature(const XMLNode* ftr_node, Pharmacophore& pharm) const
 {
 	Feature* ftr = createFeature(ftr_node, pharm);
 
@@ -238,7 +236,7 @@ void Pharm::PMLDataReader::addVectorFeature(const rapidxml::xml_node<char>* ftr_
 	
 	setGeometry(*ftr, FeatureGeometry::VECTOR);
 
-	rapidxml::xml_attribute<char>* attr = ftr_node->first_attribute(PML::POINTS_TO_LIGAND_ATTRIBUTE.c_str());
+	const XMLAttribute* attr = ftr_node->first_attribute(PML::POINTS_TO_LIGAND_ATTRIBUTE.c_str());
 	bool points_to_lig = false;
 
 	if (attr)
@@ -280,14 +278,14 @@ void Pharm::PMLDataReader::addVectorFeature(const rapidxml::xml_node<char>* ftr_
 	}
 }
 
-void Pharm::PMLDataReader::addVolumeFeature(const rapidxml::xml_node<char>* ftr_node, Pharmacophore& pharm) const
+void Pharm::PMLDataReader::addVolumeFeature(const XMLNode* ftr_node, Pharmacophore& pharm) const
 {
-	rapidxml::xml_attribute<char>* attr = ftr_node->first_attribute(PML::TYPE_ATTRIBUTE.c_str());
+	const XMLAttribute* attr = ftr_node->first_attribute(PML::TYPE_ATTRIBUTE.c_str());
 
 	if (!attr)
 		return;
 
-	if (attr->value() != PML::VOLUME_TYPE_EXCLUSION)
+	if (std::strcmp(attr->value(), PML::VOLUME_TYPE_EXCLUSION.c_str()) != 0)
 		return;
 
 	Feature& ftr = pharm.addFeature();
@@ -308,9 +306,9 @@ void Pharm::PMLDataReader::addVolumeFeature(const rapidxml::xml_node<char>* ftr_
 		setTolerance(ftr, tol);
 }
 
-Pharm::Feature* Pharm::PMLDataReader::createFeature(const rapidxml::xml_node<char>* ftr_node, Pharmacophore& pharm) const
+Pharm::Feature* Pharm::PMLDataReader::createFeature(const XMLNode* ftr_node, Pharmacophore& pharm) const
 {
-	rapidxml::xml_attribute<char>* attr = ftr_node->first_attribute(PML::NAME_ATTRIBUTE.c_str());
+	const XMLAttribute* attr = ftr_node->first_attribute(PML::NAME_ATTRIBUTE.c_str());
 
 	if (!attr)
 		return 0;
@@ -328,9 +326,9 @@ Pharm::Feature* Pharm::PMLDataReader::createFeature(const rapidxml::xml_node<cha
 	return &ftr;
 }
 
-void Pharm::PMLDataReader::getDefaultFeatureProperties(const rapidxml::xml_node<char>* ftr_node, Feature& ftr) const
+void Pharm::PMLDataReader::getDefaultFeatureProperties(const XMLNode* ftr_node, Feature& ftr) const
 {
-	rapidxml::xml_attribute<char>* attr = ftr_node->first_attribute(PML::OPTIONAL_ATTRIBUTE.c_str());
+	const XMLAttribute* attr = ftr_node->first_attribute(PML::OPTIONAL_ATTRIBUTE.c_str());
 
 	if (attr)
 		setOptionalFlag(ftr, getBoolValue(attr->value()));
@@ -341,46 +339,50 @@ void Pharm::PMLDataReader::getDefaultFeatureProperties(const rapidxml::xml_node<
 		setDisabledFlag(ftr, getBoolValue(attr->value()));
 }
 
-bool Pharm::PMLDataReader::getPosition(const rapidxml::xml_node<char>* ftr_node, const std::string& tag, Math::Vector3D& vec) const 
+bool Pharm::PMLDataReader::getPosition(const XMLNode* ftr_node, const std::string& tag, Math::Vector3D& vec) const 
 {
 	using namespace Internal;
 
-	rapidxml::xml_node<char>* vec_node = ftr_node->first_node(tag.c_str());
+	const XMLNode* vec_node = ftr_node->first_node(tag.c_str());
 
 	if (!vec_node)
 		return false;
 
-	rapidxml::xml_attribute<char>* attr = vec_node->first_attribute(PML::COORDS_X_ATTRIBUTE.c_str());
+	const XMLAttribute* attr = vec_node->first_attribute(PML::COORDS_X_ATTRIBUTE.c_str());
 
 	if (attr)
-		vec[0] = parseNumber<double>(std::string(attr->value()), "PMLDataReader: error while parsing vector x-ccordinate");
+		vec[0] = parseNumber<double>(attr->value(), attr->value() + std::strlen(attr->value()), 
+									 "PMLDataReader: error while parsing vector x-ccordinate");
 
 	attr = vec_node->first_attribute(PML::COORDS_Y_ATTRIBUTE.c_str());
 
 	if (attr)
-		vec[1] = parseNumber<double>(std::string(attr->value()), "PMLDataReader: error while parsing vector y-ccordinate");
+		vec[1] = parseNumber<double>(attr->value(), attr->value() + std::strlen(attr->value()), 
+									 "PMLDataReader: error while parsing vector y-ccordinate");
 
 	attr = vec_node->first_attribute(PML::COORDS_Z_ATTRIBUTE.c_str());
 
 	if (attr)
-		vec[2] = parseNumber<double>(std::string(attr->value()), "PMLDataReader: error while parsing vector z-ccordinate");
+		vec[2] = parseNumber<double>(attr->value(), attr->value() + std::strlen(attr->value()), 
+									 "PMLDataReader: error while parsing vector z-ccordinate");
 
 	return true;
 }
 
-bool Pharm::PMLDataReader::getTolerance(const rapidxml::xml_node<char>* ftr_node, const std::string& tag, double& tol) const 
+bool Pharm::PMLDataReader::getTolerance(const XMLNode* ftr_node, const std::string& tag, double& tol) const 
 {
-	rapidxml::xml_node<char>* vec_node = ftr_node->first_node(tag.c_str());
+	const XMLNode* vec_node = ftr_node->first_node(tag.c_str());
 
 	if (!vec_node)
 		return false;
 
-	rapidxml::xml_attribute<char>* attr = vec_node->first_attribute(PML::TOLERANCE_ATTRIBUTE.c_str());
+	const XMLAttribute* attr = vec_node->first_attribute(PML::TOLERANCE_ATTRIBUTE.c_str());
 
 	if (!attr)
 		return false;
 
-	tol = Internal::parseNumber<double>(std::string(attr->value()), "PMLDataReader: error while parsing feature tolerance");
+	tol = Internal::parseNumber<double>(attr->value(), attr->value() + std::strlen(attr->value()), 
+										"PMLDataReader: error while parsing feature tolerance");
 
 	return true;
 }

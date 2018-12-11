@@ -27,6 +27,8 @@
 #include "StaticInit.hpp"
 
 #include "CDPL/Pharm/PSDScreeningDBAccessor.hpp"
+#include "CDPL/Pharm/Pharmacophore.hpp"
+#include "CDPL/Chem/Molecule.hpp"
 
 #include "PSDScreeningDBAccessorImpl.hpp"
 
@@ -76,18 +78,27 @@ std::size_t Pharm::PSDScreeningDBAccessor::getNumPharmacophores(std::size_t mol_
 	return impl->getNumPharmacophores(mol_idx);
 }
 
-void Pharm::PSDScreeningDBAccessor::getMolecule(std::size_t mol_idx, Chem::Molecule& mol) const
+void Pharm::PSDScreeningDBAccessor::getMolecule(std::size_t mol_idx, Chem::Molecule& mol, bool overwrite) const
 {
+	if (overwrite)
+		mol.clear();
+
 	impl->getMolecule(mol_idx, mol);
 }
 
-void Pharm::PSDScreeningDBAccessor::getPharmacophore(std::size_t pharm_idx, Pharmacophore& pharm) const
+void Pharm::PSDScreeningDBAccessor::getPharmacophore(std::size_t pharm_idx, Pharmacophore& pharm, bool overwrite) const
 {
+	if (overwrite)
+		pharm.clear();
+
 	impl->getPharmacophore(pharm_idx, pharm);
 }
 
-void Pharm::PSDScreeningDBAccessor::getPharmacophore(std::size_t mol_idx, std::size_t mol_conf_idx, Pharmacophore& pharm) const
+void Pharm::PSDScreeningDBAccessor::getPharmacophore(std::size_t mol_idx, std::size_t mol_conf_idx, Pharmacophore& pharm, bool overwrite) const
 {
+	if (overwrite)
+		pharm.clear();
+
 	impl->getPharmacophore(mol_idx, mol_conf_idx, pharm);
 }
 

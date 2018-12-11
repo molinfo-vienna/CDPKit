@@ -65,7 +65,7 @@ namespace CDPL
 		  public:
 			static const unsigned int DEF_FORCE_FIELD_TYPE = ForceFieldType::MMFF94S_NO_ESTAT;
 
-			typedef boost::function3<void, const Chem::MolecularGraph&, bool, std::size_t> ProcessingResultCallbackFunction;
+			typedef boost::function4<void, Base::uint64, const Chem::MolecularGraph&, bool, std::size_t> ProcessingResultCallbackFunction;
 			typedef boost::function2<bool, const Chem::MolecularGraph&, const std::string&> ProcessingErrorCallbackFunction;
 			typedef FragmentConformerGenerator::ProgressCallbackFunction ProgressCallbackFunction;
 

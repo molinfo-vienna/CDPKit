@@ -61,7 +61,7 @@ namespace CDPL
 		 * three methods which perform the actual data decoding.
 		 *
 		 * These methods must have the following signatures and semantics:
-		 *  - \c bool \c readData(std::istream& is, DataType& obj) \n
+		 *  - \c bool \c readData(std::istream& is, DataType& obj, bool overwrite) \n
 		 *   Reads the next data record from the input stream \a is into the data object \a obj of
 		 *   type \c DataType. Returns \c true if the read operation was successful, and \c false
 		 *   if the end of input has already been reached.
@@ -80,8 +80,8 @@ namespace CDPL
 		{
 
 		public:
-			Base::DataReader<DataType>& read(DataType& obj);
-			Base::DataReader<DataType>& read(std::size_t idx, DataType& obj);
+			Base::DataReader<DataType>& read(DataType& obj, bool overwrite = true);
+			Base::DataReader<DataType>& read(std::size_t idx, DataType& obj, bool overwrite = true);
 
 			Base::DataReader<DataType>& skip();
 
@@ -131,11 +131,11 @@ namespace CDPL
 
 template <typename DataType, typename ReaderImpl>
 CDPL::Base::DataReader<DataType>&
-CDPL::Util::StreamDataReader<DataType, ReaderImpl>::read(DataType& obj)
+CDPL::Util::StreamDataReader<DataType, ReaderImpl>::read(DataType& obj, bool overwrite)
 {
 	state = false;
 
-	if ((state = static_cast<ReaderImpl*>(this)->readData(input, obj))) {
+	if ((state = static_cast<ReaderImpl*>(this)->readData(input, obj, overwrite))) {
 		recordIndex++;
 		this->invokeIOCallbacks(1.0);
 	}
@@ -145,11 +145,11 @@ CDPL::Util::StreamDataReader<DataType, ReaderImpl>::read(DataType& obj)
 
 template <typename DataType, typename ReaderImpl>
 CDPL::Base::DataReader<DataType>&
-CDPL::Util::StreamDataReader<DataType, ReaderImpl>::read(std::size_t idx, DataType& obj)
+CDPL::Util::StreamDataReader<DataType, ReaderImpl>::read(std::size_t idx, DataType& obj, bool overwrite)
 {
 	setRecordIndex(idx);
 
-	return read(obj);
+	return read(obj, overwrite);
 }
 
 template <typename DataType, typename ReaderImpl>

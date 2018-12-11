@@ -35,42 +35,54 @@
 using namespace CDPL; 
 
 
-void Chem::copyAtomsIf(const AtomContainer& cntnr, Molecule& mol, const AtomPredicate& pred)
+void Chem::copyAtomsIf(const AtomContainer& cntnr, Molecule& mol, const AtomPredicate& pred, bool append)
 {
-    for (AtomContainer::ConstAtomIterator it = cntnr.getAtomsBegin(), end = cntnr.getAtomsEnd(); it != end; ++it) {
-	const Atom& atom = *it;
+	if (!append)
+		mol.clear();
 
-	if (pred(atom))
-	    mol.addAtom().copyProperties(atom);
+    for (AtomContainer::ConstAtomIterator it = cntnr.getAtomsBegin(), end = cntnr.getAtomsEnd(); it != end; ++it) {
+		const Atom& atom = *it;
+
+		if (pred(atom))
+			mol.addAtom().copyProperties(atom);
     }
 }
 
-void Chem::copyAtomsIf(const AtomContainer& cntnr, Fragment& frag, const AtomPredicate& pred)
+void Chem::copyAtomsIf(const AtomContainer& cntnr, Fragment& frag, const AtomPredicate& pred, bool append)
 {
-    for (AtomContainer::ConstAtomIterator it = cntnr.getAtomsBegin(), end = cntnr.getAtomsEnd(); it != end; ++it) {
-	const Atom& atom = *it;
+ 	if (!append)
+		frag.clear();
 
-	if (pred(atom))
-	    frag.addAtom(atom);
+   for (AtomContainer::ConstAtomIterator it = cntnr.getAtomsBegin(), end = cntnr.getAtomsEnd(); it != end; ++it) {
+		const Atom& atom = *it;
+
+		if (pred(atom))
+			frag.addAtom(atom);
     }  
 }
 
-void Chem::copyAtomsIfNot(const AtomContainer& cntnr, Molecule& mol, const AtomPredicate& pred)
+void Chem::copyAtomsIfNot(const AtomContainer& cntnr, Molecule& mol, const AtomPredicate& pred, bool append)
 {
-    for (AtomContainer::ConstAtomIterator it = cntnr.getAtomsBegin(), end = cntnr.getAtomsEnd(); it != end; ++it) {
-	const Atom& atom = *it;
+ 	if (!append)
+		mol.clear();
 
-	if (!pred(atom))
-	    mol.addAtom().copyProperties(atom);
+	for (AtomContainer::ConstAtomIterator it = cntnr.getAtomsBegin(), end = cntnr.getAtomsEnd(); it != end; ++it) {
+		const Atom& atom = *it;
+
+		if (!pred(atom))
+			mol.addAtom().copyProperties(atom);
     }
 }
 
-void Chem::copyAtomsIfNot(const AtomContainer& cntnr, Fragment& frag, const AtomPredicate& pred)
+void Chem::copyAtomsIfNot(const AtomContainer& cntnr, Fragment& frag, const AtomPredicate& pred, bool append)
 {
-    for (AtomContainer::ConstAtomIterator it = cntnr.getAtomsBegin(), end = cntnr.getAtomsEnd(); it != end; ++it) {
-	const Atom& atom = *it;
+	if (!append)
+		frag.clear();
 
-	if (!pred(atom))
-	    frag.addAtom(atom);
+    for (AtomContainer::ConstAtomIterator it = cntnr.getAtomsBegin(), end = cntnr.getAtomsEnd(); it != end; ++it) {
+		const Atom& atom = *it;
+
+		if (!pred(atom))
+			frag.addAtom(atom);
     }  
 }

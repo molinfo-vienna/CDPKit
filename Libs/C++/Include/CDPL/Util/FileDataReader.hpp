@@ -62,8 +62,8 @@ namespace CDPL
 			FileDataReader(const std::string& file_name, 
 						   std::ios_base::openmode mode = std::ios_base::in | std::ios_base::binary); 
 
-			FileDataReader& read(DataType& obj);
-			FileDataReader& read(std::size_t idx, DataType& obj);
+			FileDataReader& read(DataType& obj, bool overwrite = true);
+			FileDataReader& read(std::size_t idx, DataType& obj, bool overwrite = true);
 
 			FileDataReader& skip();
 
@@ -102,10 +102,10 @@ CDPL::Util::FileDataReader<ReaderImpl, DataType>::FileDataReader(const std::stri
 
 template <typename ReaderImpl, typename DataType>
 CDPL::Util::FileDataReader<ReaderImpl, DataType>&
-CDPL::Util::FileDataReader<ReaderImpl, DataType>::read(DataType& obj)
+CDPL::Util::FileDataReader<ReaderImpl, DataType>::read(DataType& obj, bool overwrite)
 {
 	try {
-		reader.read(obj);
+		reader.read(obj, overwrite);
 
 	} catch (const std::exception& e) {
 		throw Base::IOError("FileDataReader: while reading file '" + fileName + "': " + e.what());
@@ -116,10 +116,10 @@ CDPL::Util::FileDataReader<ReaderImpl, DataType>::read(DataType& obj)
 
 template <typename ReaderImpl, typename DataType>
 CDPL::Util::FileDataReader<ReaderImpl, DataType>&
-CDPL::Util::FileDataReader<ReaderImpl, DataType>::read(std::size_t idx, DataType& obj)
+CDPL::Util::FileDataReader<ReaderImpl, DataType>::read(std::size_t idx, DataType& obj, bool overwrite)
 {
 	try {
-		reader.read(idx, obj);
+		reader.read(idx, obj, overwrite);
 
 	} catch (const std::exception& e) {
 		throw Base::IOError("FileDataReader: while reading file '" + fileName + "': " + e.what());

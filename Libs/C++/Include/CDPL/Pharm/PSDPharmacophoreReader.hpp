@@ -75,9 +75,9 @@ namespace CDPL
 
 			~PSDPharmacophoreReader();
 
-			PSDPharmacophoreReader& read(Pharmacophore& pharm);
+			PSDPharmacophoreReader& read(Pharmacophore& pharm, bool overwrite = true);
 
-			PSDPharmacophoreReader& read(std::size_t idx, Pharmacophore& pharm);
+			PSDPharmacophoreReader& read(std::size_t idx, Pharmacophore& pharm, bool overwrite = true);
 
 			PSDPharmacophoreReader& skip();
 
