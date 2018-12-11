@@ -28,6 +28,7 @@
 
 #include <cmath>
 #include <algorithm>
+#include <numeric>
 
 #include <boost/tuple/tuple_comparison.hpp>
 #include <boost/bind.hpp>
