@@ -54,14 +54,14 @@ const Biomol::HierarchyViewChain& Biomol::HierarchyViewModel::getChain(std::size
 	return *chains[idx];
 }
 
-bool Biomol::HierarchyViewModel::hasChainWithID(char id) const
+bool Biomol::HierarchyViewModel::hasChainWithID(const std::string& id) const
 {
 	initChainList();
 
 	return (idToChainMap.find(id) != idToChainMap.end());
 }
 
-const Biomol::HierarchyViewChain& Biomol::HierarchyViewModel::getChainByID(char id) const
+const Biomol::HierarchyViewChain& Biomol::HierarchyViewModel::getChainByID(const std::string& id) const
 {
 	initChainList();
 
@@ -100,7 +100,7 @@ void Biomol::HierarchyViewModel::initChainList() const
 
 	for (Fragment::ConstAtomIterator a_it = getAtomsBegin(), a_end = getAtomsEnd(); a_it != a_end; ++a_it) {
 		const Atom& atom = *a_it;
-		char chain_id = getChainID(atom);
+		const std::string& chain_id = getChainID(atom);
 
 		IDToChainMap::iterator c_it = idToChainMap.find(chain_id);
 

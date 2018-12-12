@@ -230,7 +230,7 @@ void Biomol::setHydrogenResidueSequenceInfo(Chem::MolecularGraph& molgraph, bool
     }
 }
 
-bool Biomol::matchesResidueInfo(const Chem::MolecularGraph& molgraph, const char* res_code, char chain_id, long res_seq_no,
+bool Biomol::matchesResidueInfo(const Chem::MolecularGraph& molgraph, const char* res_code, const char* chain_id, long res_seq_no,
 				char ins_code, std::size_t model_no)
 {
     if (res_code != 0 && (getResidueCode(molgraph) != res_code))

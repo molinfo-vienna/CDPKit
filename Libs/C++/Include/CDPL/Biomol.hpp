@@ -48,9 +48,11 @@
 
 #include "CDPL/Biomol/PDBMoleculeInputHandler.hpp"
 #include "CDPL/Biomol/PDBMolecularGraphOutputHandler.hpp"
+#include "CDPL/Biomol/MMTFMoleculeInputHandler.hpp"
 
 #include "CDPL/Biomol/PDBMoleculeReader.hpp"
 #include "CDPL/Biomol/PDBMolecularGraphWriter.hpp"
+#include "CDPL/Biomol/MMTFMoleculeReader.hpp"
 
 #include "CDPL/Biomol/HierarchyViewNode.hpp"
 #include "CDPL/Biomol/HierarchyViewModel.hpp"
@@ -70,13 +72,17 @@
 
 #include "CDPL/Biomol/PDBGZMoleculeInputHandler.hpp"
 #include "CDPL/Biomol/PDBGZMolecularGraphOutputHandler.hpp"
+#include "CDPL/Biomol/MMTFGZMoleculeInputHandler.hpp"
 #include "CDPL/Biomol/PDBBZ2MoleculeInputHandler.hpp"
 #include "CDPL/Biomol/PDBBZ2MolecularGraphOutputHandler.hpp"
+#include "CDPL/Biomol/MMTFBZ2MoleculeInputHandler.hpp"
 
 #include "CDPL/Biomol/PDBGZMoleculeReader.hpp"
 #include "CDPL/Biomol/PDBGZMolecularGraphWriter.hpp"
+#include "CDPL/Biomol/MMTFGZMoleculeReader.hpp"
 #include "CDPL/Biomol/PDBBZ2MoleculeReader.hpp"
 #include "CDPL/Biomol/PDBBZ2MolecularGraphWriter.hpp"
+#include "CDPL/Biomol/MMTFBZ2MoleculeReader.hpp"
 
 #endif // defined(HAVE_BOOST_FILESYSTEM) && defined(HAVE_BOOST_IOSTREAMS)
 #endif // CDPL_BIOMOL_HPP

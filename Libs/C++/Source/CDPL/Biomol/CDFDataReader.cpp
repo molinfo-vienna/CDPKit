@@ -107,8 +107,8 @@ bool Biomol::CDFDataReader::readAtomProperties(unsigned int handler_id, const Ch
 				continue;
 
 			case CDF::AtomProperty::CHAIN_ID:
-				reader.getIntProperty(prop_spec, char_val, data);
-				setChainID(atom, char_val);
+				reader.getStringProperty(prop_spec, string_val, data);
+				setChainID(atom, string_val);
 				continue;
 
 			case CDF::AtomProperty::MODEL_NUMBER:
@@ -117,8 +117,8 @@ bool Biomol::CDFDataReader::readAtomProperties(unsigned int handler_id, const Ch
 				continue;
 
 			case CDF::AtomProperty::SERIAL_NUMBER:
-				reader.getIntProperty(prop_spec, size_val, data);
-				setSerialNumber(atom, size_val);
+				reader.getIntProperty(prop_spec, long_val, data);
+				setSerialNumber(atom, long_val);
 				continue;
 
 			default:
@@ -163,8 +163,8 @@ bool Biomol::CDFDataReader::readMoleculeProperties(unsigned int handler_id, cons
 				continue;
 
 			case CDF::MolecularGraphProperty::CHAIN_ID:
-				reader.getIntProperty(prop_spec, char_val, data);
-				setChainID(mol, char_val);
+				reader.getStringProperty(prop_spec, string_val, data);
+				setChainID(mol, string_val);
 				continue;
 
 			case CDF::MolecularGraphProperty::MODEL_NUMBER:

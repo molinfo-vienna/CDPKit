@@ -92,11 +92,8 @@ namespace
 		return Internal::readNumber<T, FieldSize>(is, err_msg, throw_ex, empty_def_val, err_def_val, Biomol::PDB::END_OF_LINE);
 	}
 
-	class ResidueAtomCmpFunc : public std::binary_function<const Chem::Atom*, const Chem::Atom*, bool>
+	struct ResidueAtomCmpFunc : public std::binary_function<const Chem::Atom*, const Chem::Atom*, bool>
 	{
-
-	public:
-		ResidueAtomCmpFunc() {}
 
 		bool operator()(const Chem::Atom* atom1, const Chem::Atom* atom2) const {
 			using namespace Biomol;
@@ -442,7 +439,7 @@ std::size_t Biomol::PDBDataReader::readATOMRecord(std::istream& is, Chem::Molecu
 std::size_t Biomol::PDBDataReader::readTERRecord(std::istream& is, Chem::Molecule& mol)
 {
 	if (strictErrorChecking) {
-		std::size_t serial = readPDBNumber<std::size_t, 5>(is, "PDBDataReader: error while reading serial number from TER record", true);
+		long serial = readPDBNumber<long, 5>(is, "PDBDataReader: error while reading serial number from TER record", true);
 
 		SerialToAtomMap::mapped_type::const_iterator term_atom_it = serialToAtomMap[currModelID].find(serial - 1);
 
@@ -468,7 +465,7 @@ std::size_t Biomol::PDBDataReader::readTERRecord(std::istream& is, Chem::Molecul
 		if (stringData.length() != 1)
 			throw Base::IOError("PDBDataReader: unexpected end of TER record");
 
-		if (getChainID(term_atom) != stringData[0])
+		if (getChainID(term_atom) != stringData)
 			throw Base::IOError("PDBDataReader: chain ID in TER record does not match chain ID of terminal atom");
 
 		long res_seq_num = readPDBNumber<long, 4>(is, "PDBDataReader: error while reading residue sequence number from TER record", true);
@@ -519,12 +516,12 @@ std::size_t Biomol::PDBDataReader::readCONECTRecord(std::istream& is, Chem::Mole
 		return PDB::CONECT_DATA_LENGTH;
 	}
 
-	std::size_t serials[5];
+	long serials[5];
 	std::size_t num_atoms = 0;
 	std::size_t chars_read = 0;
 
 	for (std::size_t i = 0; i < 5; i++) {
-		std::size_t serial = readPDBNumber<std::size_t, 5>(is, "PDBDataReader: error while reading atom serial from CONECT record", true, 100000);
+		long serial = readPDBNumber<long, 5>(is, "PDBDataReader: error while reading atom serial from CONECT record", true, 100000);
 
 		if (serial == 100000)
 			break;
@@ -655,7 +652,7 @@ std::size_t Biomol::PDBDataReader::readMASTERRecord(std::istream& is)
 
 void Biomol::PDBDataReader::readATOMRecord(std::istream& is, Chem::Molecule& mol, const std::string& rec_name, bool het_atom)
 {
-	std::size_t serial = readPDBNumber<std::size_t, 5>(is, ("PDBDataReader: error while reading serial number from " + rec_name + " record").c_str(), true);
+	long serial = readPDBNumber<long, 5>(is, ("PDBDataReader: error while reading serial number from " + rec_name + " record").c_str(), true);
 	Chem::Atom* atom = &mol.addAtom();
 
 	serialToAtomMap[currModelID][serial] = atom;		
@@ -694,7 +691,7 @@ void Biomol::PDBDataReader::readATOMRecord(std::istream& is, Chem::Molecule& mol
 	if (stringData.length() != 1)
 		throw Base::IOError(("PDBDataReader: unexpected end of " + rec_name + " record").c_str());
 
-	setChainID(*atom, stringData[0]);
+	setChainID(*atom, stringData);
 
 	long res_seq_num = readPDBNumber<long, 4>(is, ("PDBDataReader: error while reading residue sequence number from " + 
 											  rec_name + " record").c_str(), true);

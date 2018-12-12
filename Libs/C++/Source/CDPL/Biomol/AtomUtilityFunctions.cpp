@@ -98,7 +98,7 @@ void Biomol::extractResidueSubstructure(const Chem::Atom& atom, const Chem::Mole
 	std::string res_code = (flags & AtomPropertyFlag::RESIDUE_CODE) ? getResidueCode(atom) : std::string();
 	std::size_t model_no = (flags & AtomPropertyFlag::MODEL_NUMBER) ? getModelNumber(atom) : std::size_t(0);
 	long seq_no = (flags & AtomPropertyFlag::RESIDUE_SEQ_NO) ? getResidueSequenceNumber(atom) : std::size_t(0);
-	char chain_id = (flags & AtomPropertyFlag::CHAIN_ID) ? getChainID(atom) : ' ';
+	std::string chain_id = (flags & AtomPropertyFlag::CHAIN_ID) ? getChainID(atom) : std::string();
 	char ins_code = (flags & AtomPropertyFlag::RESIDUE_INS_CODE) ? getResidueInsertionCode(atom) : ' ';
 
 	res_substruct.addAtom(atom);
@@ -186,8 +186,8 @@ bool Biomol::isPDBBackboneAtom(const Chem::Atom& atom)
 }
 
 
-bool Biomol::matchesResidueInfo(const Chem::Atom& atom, const char* res_code, char chain_id, long res_seq_no,
-								char ins_code, std::size_t model_no, const char* atom_name, std::size_t serial_no)
+bool Biomol::matchesResidueInfo(const Chem::Atom& atom, const char* res_code, const char* chain_id, long res_seq_no,
+								char ins_code, std::size_t model_no, const char* atom_name, long serial_no)
 {
     if (res_code != 0 && (getResidueCode(atom) != res_code))
 		return false;

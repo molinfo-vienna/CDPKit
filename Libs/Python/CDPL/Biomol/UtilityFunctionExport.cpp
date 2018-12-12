@@ -35,7 +35,7 @@
 namespace
 {
 
-	boost::python::ssize_t findResidueAtomWrapper(PyObject* cont, boost::python::ssize_t idx, const std::string& res_code, char chain_id, 
+	boost::python::ssize_t findResidueAtomWrapper(PyObject* cont, boost::python::ssize_t idx, const std::string& res_code, const std::string& chain_id, 
 									   long res_seq_no, char ins_code, std::size_t model_no, const std::string& atom_name, std::size_t serial_no) 
     {
 		using namespace boost;
@@ -59,7 +59,7 @@ namespace
 			const CDPL::Chem::Atom& atom = extract();
 
 			if (CDPL::Biomol::matchesResidueInfo(atom,
-												 (res_code.empty() ? 0 : res_code.c_str()), chain_id, res_seq_no, ins_code, model_no,
+												 (res_code.empty() ? 0 : res_code.c_str()), (chain_id.empty() ? 0 : chain_id.c_str()), res_seq_no, ins_code, model_no,
 												 (atom_name.empty() ? 0 : atom_name.c_str()), serial_no))
 				return i;
 		}
@@ -67,7 +67,7 @@ namespace
 		return size;
     }
 
-    boost::python::ssize_t findResidueWrapper(PyObject* cont, boost::python::ssize_t idx, const std::string& res_code, char chain_id, 
+    boost::python::ssize_t findResidueWrapper(PyObject* cont, boost::python::ssize_t idx, const std::string& res_code, const std::string& chain_id, 
 											  long res_seq_no, char ins_code, std::size_t model_no, const std::string& atom_name, std::size_t serial_no) 
     {
 		using namespace boost;
@@ -90,12 +90,12 @@ namespace
 
 			const CDPL::Chem::MolecularGraph& molgraph = extract();
 
-			if (CDPL::Biomol::matchesResidueInfo(molgraph, (res_code.empty() ? 0 : res_code.c_str()), chain_id, res_seq_no, ins_code, model_no)) {
+			if (CDPL::Biomol::matchesResidueInfo(molgraph, (res_code.empty() ? 0 : res_code.c_str()), (chain_id.empty() ? 0 : chain_id.c_str()), res_seq_no, ins_code, model_no)) {
 				if (atom_name.empty() && serial_no == 0)
 					return i;
 
 				if (CDPL::Biomol::findResidueAtom(molgraph.getAtomsBegin(), molgraph.getAtomsEnd(), (res_code.empty() ? 0 : res_code.c_str()), 
-												  chain_id, res_seq_no, ins_code, model_no,
+												  (chain_id.empty() ? 0 : chain_id.c_str()), res_seq_no, ins_code, model_no,
 												  (atom_name.empty() ? 0 : atom_name.c_str()), serial_no) != molgraph.getAtomsEnd())
 					return i;
 			}
@@ -112,11 +112,11 @@ void CDPLPythonBiomol::exportUtilityFunctions()
     using namespace CDPL;
 
     python::def("findResidueAtom", &findResidueAtomWrapper, 
-				(python::arg("cntnr"), python::arg("idx"),  python::arg("res_code") = "", python::arg("chain_id") = char(0), 
+				(python::arg("cntnr"), python::arg("idx"),  python::arg("res_code") = "", python::arg("chain_id") = "", 
 				 python::arg("res_seq_no") = 0, python::arg("ins_code") = char(0), python::arg("model_no") = 0, 
 				 python::arg("atom_name") = "", python::arg("serial_no") = 0));
     python::def("findResidue", &findResidueWrapper, 
-				(python::arg("cntnr"), python::arg("idx"),  python::arg("res_code") = "", python::arg("chain_id") = char(0), 
+				(python::arg("cntnr"), python::arg("idx"),  python::arg("res_code") = "", python::arg("chain_id") = "", 
 				 python::arg("res_seq_no") = 0, python::arg("ins_code") = char(0), python::arg("model_no") = 0, 
 				 python::arg("atom_name") = "", python::arg("serial_no") = 0));
 }

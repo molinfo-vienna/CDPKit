@@ -79,7 +79,7 @@ void Biomol::HierarchyViewChain::initFragmentList() const
     Util::BitSet vis_atoms(getNumAtoms());
     std::size_t i = 0;
 
-	char chain_id = getChainID(*this);
+	const std::string& chain_id = getChainID(*this);
 	std::size_t model_no = getModelNumber(*this);
 
     for (Fragment::ConstAtomIterator it = getAtomsBegin(), atoms_end = getAtomsEnd(); it != atoms_end; ++it, i++)

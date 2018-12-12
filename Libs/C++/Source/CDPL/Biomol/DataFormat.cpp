@@ -32,6 +32,7 @@
 #include "CDPL/Biomol/DataFormat.hpp"
 #include "CDPL/Biomol/PDBMoleculeInputHandler.hpp"
 #include "CDPL/Biomol/PDBMolecularGraphOutputHandler.hpp"
+#include "CDPL/Biomol/MMTFMoleculeInputHandler.hpp"
 #include "CDPL/Biomol/CDFDataReader.hpp"
 #include "CDPL/Biomol/CDFDataWriter.hpp"
 
@@ -41,6 +42,8 @@
 #include "CDPL/Biomol/PDBGZMolecularGraphOutputHandler.hpp"
 #include "CDPL/Biomol/PDBBZ2MoleculeInputHandler.hpp"
 #include "CDPL/Biomol/PDBBZ2MolecularGraphOutputHandler.hpp"
+#include "CDPL/Biomol/MMTFGZMoleculeInputHandler.hpp"
+#include "CDPL/Biomol/MMTFBZ2MoleculeInputHandler.hpp"
 
 #endif // defined(HAVE_BOOST_FILESYSTEM) && defined(HAVE_BOOST_IOSTREAMS)
 
@@ -51,6 +54,10 @@ namespace
 	const char* pdbFileExtensions[]    = { "pdb", "ent" };
 	const char* pdbGzFileExtensions[]  = { "pdb.gz", "ent.gz" };
 	const char* pdbBz2FileExtensions[] = { "pdb.bz2", "ent.bz2" };
+
+	const char* mmtfFileExtensions[]    = { "mmtf" };
+	const char* mmtfGzFileExtensions[]  = { "mmtf.gz" };
+	const char* mmtfBz2FileExtensions[] = { "mmtf.bz2" };
 }
 
 
@@ -63,6 +70,13 @@ const Base::DataFormat Biomol::DataFormat::PDB_GZ("PDB_GZ", "GZip-Compressed Bro
 											   pdbGzFileExtensions, pdbGzFileExtensions + 2, false);
 const Base::DataFormat Biomol::DataFormat::PDB_BZ2("PDB_BZ2", "BZip2-Compressed Brookhaven Protein Data Bank Entry", "chemical/x-pdb", 
 											   pdbBz2FileExtensions, pdbBz2FileExtensions + 2, false);
+
+const Base::DataFormat Biomol::DataFormat::MMTF("MMTF", "Macromolecular Transmission Format", "chemical/x-mmtf", 
+											   mmtfFileExtensions, mmtfFileExtensions + 1, false);
+const Base::DataFormat Biomol::DataFormat::MMTF_GZ("MMTF_GZ", "GZip-Compressed Macromolecular Transmission Format", "chemical/x-mmtf", 
+											   mmtfGzFileExtensions, mmtfGzFileExtensions + 1, false);
+const Base::DataFormat Biomol::DataFormat::MMTF_BZ2("MMTF_BZ2", "BZip2-Compressed Macromolecular Transmission Format", "chemical/x-mmtf", 
+											   mmtfBz2FileExtensions, mmtfBz2FileExtensions + 1, false);
 
 
 namespace CDPL
@@ -90,6 +104,8 @@ namespace
 			DataIOManager<Molecule>::registerInputHandler(DataIOManager<Molecule>::InputHandlerPointer(new PDBMoleculeInputHandler()));
 			DataIOManager<MolecularGraph>::registerOutputHandler(DataIOManager<MolecularGraph>::OutputHandlerPointer(new PDBMolecularGraphOutputHandler()));
 
+			DataIOManager<Molecule>::registerInputHandler(DataIOManager<Molecule>::InputHandlerPointer(new MMTFMoleculeInputHandler()));
+
 			Biomol::CDFDataReader::registerExternalPropertyHandlers();
 			Biomol::CDFDataWriter::registerExternalPropertyHandlers();
 
@@ -97,6 +113,9 @@ namespace
 
 			DataIOManager<Molecule>::registerInputHandler(DataIOManager<Molecule>::InputHandlerPointer(new PDBGZMoleculeInputHandler()));
 			DataIOManager<Molecule>::registerInputHandler(DataIOManager<Molecule>::InputHandlerPointer(new PDBBZ2MoleculeInputHandler()));
+
+			DataIOManager<Molecule>::registerInputHandler(DataIOManager<Molecule>::InputHandlerPointer(new MMTFGZMoleculeInputHandler()));
+			DataIOManager<Molecule>::registerInputHandler(DataIOManager<Molecule>::InputHandlerPointer(new MMTFBZ2MoleculeInputHandler()));
 
 			DataIOManager<MolecularGraph>::registerOutputHandler(DataIOManager<MolecularGraph>::OutputHandlerPointer(new PDBGZMolecularGraphOutputHandler()));
 			DataIOManager<MolecularGraph>::registerOutputHandler(DataIOManager<MolecularGraph>::OutputHandlerPointer(new PDBBZ2MolecularGraphOutputHandler()));

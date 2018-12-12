@@ -74,6 +74,24 @@ namespace CDPL
 			 *        [\ref PDB] format.
 			 */
 			extern CDPL_BIOMOL_API const Base::DataFormat PDB_BZ2;
+
+			/**
+			 * \brief Provides meta-information about the <em>Macromolecular Transmission Format</em>
+			 *        [\ref MMTF] format.
+			 */
+			extern CDPL_BIOMOL_API const Base::DataFormat MMTF;
+
+			/**
+			 * \brief Provides meta-information about the gzip-compressed <em>Macromolecular Transmission Format</em>
+			 *        [\ref MMTF] format.
+			 */
+			extern CDPL_BIOMOL_API const Base::DataFormat MMTF_GZ;
+
+			/**
+			 * \brief Provides meta-information about the bzip2-compressed <em>Macromolecular Transmission Format</em>
+			 *        [\ref MMTF] format.
+			 */
+			extern CDPL_BIOMOL_API const Base::DataFormat MMTF_BZ2;
 		}
 
 		/**

@@ -85,9 +85,9 @@ namespace CDPL
 		CDPL_BIOMOL_API bool hasResidueInsertionCode(const Chem::MolecularGraph& molgraph);
 
 
-		CDPL_BIOMOL_API char getChainID(const Chem::MolecularGraph& molgraph);
+		CDPL_BIOMOL_API const std::string& getChainID(const Chem::MolecularGraph& molgraph);
 
-		CDPL_BIOMOL_API void setChainID(Chem::MolecularGraph& molgraph, char id);
+		CDPL_BIOMOL_API void setChainID(Chem::MolecularGraph& molgraph, const std::string& id);
 
 		CDPL_BIOMOL_API void clearChainID(Chem::MolecularGraph& molgraph);
 
@@ -126,7 +126,7 @@ namespace CDPL
 
 		CDPL_BIOMOL_API void setHydrogenResidueSequenceInfo(Chem::MolecularGraph& molgraph, bool overwrite, unsigned int flags = AtomPropertyFlag::DEFAULT);
 
-		CDPL_BIOMOL_API bool matchesResidueInfo(const Chem::MolecularGraph& molgraph, const char* res_code = 0, char chain_id = 0, long res_seq_no = 0,
+		CDPL_BIOMOL_API bool matchesResidueInfo(const Chem::MolecularGraph& molgraph, const char* res_code = 0, const char* chain_id = 0, long res_seq_no = 0,
 												char ins_code = 0, std::size_t model_no = 0);
 
 		/**
