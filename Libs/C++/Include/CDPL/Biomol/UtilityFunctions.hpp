@@ -53,14 +53,14 @@ namespace CDPL
 		 */
 
 		template <typename Iter>
-		Iter findResidueAtom(Iter it, Iter end, const char* res_code = 0, char chain_id = 0, long res_seq_no = 0,
+		Iter findResidueAtom(Iter it, Iter end, const char* res_code = 0, const char* chain_id = 0, long res_seq_no = 0,
 							 char ins_code = 0, std::size_t model_no = 0, const char* atom_name = 0, std::size_t serial_no = 0)
 		{
 			return std::find_if(it, end, boost::bind(&matchesResidueInfo, _1, res_code, chain_id, res_seq_no, ins_code, model_no, atom_name, serial_no));
 		}
 
 	    template <typename Iter>
-		Iter findResidue(Iter it, Iter end, const char* res_code = 0, char chain_id = 0, long res_seq_no = 0,
+		Iter findResidue(Iter it, Iter end, const char* res_code = 0, const char* chain_id = 0, long res_seq_no = 0,
 						 char ins_code = 0, std::size_t model_no = 0, const char* atom_name = 0, std::size_t serial_no = 0)
 		{
 			for ( ; it != end; ++it) {

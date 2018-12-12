@@ -69,13 +69,13 @@ unsigned int Biomol::CDFDataWriter::outputAtomProperties(const Chem::CDFDataWrit
 		writer.putIntProperty(CDF::AtomProperty::RESIDUE_INSERTION_CODE, boost::numeric_cast<CDF::CharType>(getResidueInsertionCode(atom)), data);
 
 	if (hasChainID(atom))
-		writer.putIntProperty(CDF::AtomProperty::CHAIN_ID, boost::numeric_cast<CDF::CharType>(getChainID(atom)), data);
+		writer.putStringProperty(CDF::AtomProperty::CHAIN_ID, getChainID(atom), data);
 
 	if (hasModelNumber(atom))
 		writer.putIntProperty(CDF::AtomProperty::MODEL_NUMBER, boost::numeric_cast<CDF::SizeType>(getModelNumber(atom)), data);
 
 	if (hasSerialNumber(atom))
-		writer.putIntProperty(CDF::AtomProperty::SERIAL_NUMBER, boost::numeric_cast<CDF::SizeType>(getSerialNumber(atom)), data);
+		writer.putIntProperty(CDF::AtomProperty::SERIAL_NUMBER, boost::numeric_cast<CDF::LongType>(getSerialNumber(atom)), data);
 
 	if (hasHeteroAtomFlag(atom))
 		writer.putIntProperty(CDF::AtomProperty::HETERO_ATOM_FLAG, CDF::BoolType(getHeteroAtomFlag(atom)), data);
@@ -95,7 +95,7 @@ unsigned int Biomol::CDFDataWriter::outputMolGraphProperties(const Chem::CDFData
 		writer.putIntProperty(CDF::MolecularGraphProperty::RESIDUE_INSERTION_CODE, boost::numeric_cast<CDF::CharType>(getResidueInsertionCode(molgraph)), data);
 
 	if (hasChainID(molgraph))
-		writer.putIntProperty(CDF::MolecularGraphProperty::CHAIN_ID, boost::numeric_cast<CDF::CharType>(getChainID(molgraph)), data);
+		writer.putStringProperty(CDF::MolecularGraphProperty::CHAIN_ID, getChainID(molgraph), data);
 
 	if (hasModelNumber(molgraph))
 		writer.putIntProperty(CDF::MolecularGraphProperty::MODEL_NUMBER, boost::numeric_cast<CDF::SizeType>(getModelNumber(molgraph)), data);

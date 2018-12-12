@@ -103,7 +103,10 @@ namespace CDPL
 				ORIGX3,
 				SCALE1,
 				SCALE2,
-				SCALE3
+				SCALE3,
+				STRUCTURE_ID,
+				DEPOSITION_DATE,
+				RESOLUTION
 			};
 
 		private:

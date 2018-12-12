@@ -137,6 +137,9 @@ void CDPLPythonBiomol::exportPDBData()
 	    .value("SCALE1", Biomol::PDBData::SCALE1)
 	    .value("SCALE2", Biomol::PDBData::SCALE2)
 	    .value("SCALE3", Biomol::PDBData::SCALE3)
+	    .value("STRUCTURE_ID", Biomol::PDBData::STRUCTURE_ID)
+	    .value("DEPOSITION_DATE", Biomol::PDBData::DEPOSITION_DATE)
+	    .value("RESOLUTION", Biomol::PDBData::RESOLUTION)
 	    .export_values();
 	
 	pdb_data_class

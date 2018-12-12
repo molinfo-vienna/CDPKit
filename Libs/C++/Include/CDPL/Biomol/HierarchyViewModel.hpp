@@ -33,6 +33,7 @@
 
 #include <cstddef>
 #include <vector>
+#include <string>
 
 #include <boost/shared_ptr.hpp>
 #include <boost/unordered_map.hpp>
@@ -73,9 +74,9 @@ namespace CDPL
 
 			const HierarchyViewChain& getChain(std::size_t idx) const;
 
-			bool hasChainWithID(char id) const;
+			bool hasChainWithID(const std::string& id) const;
 
-			const HierarchyViewChain& getChainByID(char id) const;
+			const HierarchyViewChain& getChainByID(const std::string& id) const;
 
 			ConstChainIterator getChainsBegin() const;
 
@@ -86,7 +87,7 @@ namespace CDPL
 
 			void initChainList() const;
 
-			typedef boost::unordered_map<std::size_t, ChainPtr> IDToChainMap;
+			typedef boost::unordered_map<std::string, ChainPtr> IDToChainMap;
 
 			mutable ChainList    chains;
 			mutable IDToChainMap idToChainMap;

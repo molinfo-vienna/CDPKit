@@ -161,7 +161,7 @@ void Biomol::PDBDataWriter::processAtomSequence(const Chem::MolecularGraph& molg
 	numModels = model_ids.size();
 
 	std::sort(atomSequence.begin(), atomSequence.end(), boost::bind(&PDBDataWriter::atomOrderingFunc, this, _1, _2));
-	std::size_t res_serial = 1;
+	long res_serial = 1;
 
 	for (AtomList::const_iterator it = atomSequence.begin(), end = atomSequence.end(); it != end; res_serial++) {
 		const Atom* first_atom = *it;
@@ -198,8 +198,8 @@ void Biomol::PDBDataWriter::processAtomSequence(const Chem::MolecularGraph& molg
 		if (!molgraph.containsAtom(atom2))
 			continue;
 
-		std::size_t res_serial1 = atomToResidueSerialMap[&atom1];
-		std::size_t res_serial2 = atomToResidueSerialMap[&atom2];
+		long res_serial1 = atomToResidueSerialMap[&atom1];
+		long res_serial2 = atomToResidueSerialMap[&atom2];
 
 		assert(res_serial1 != 0);
 		assert(res_serial2 != 0);
@@ -235,8 +235,8 @@ void Biomol::PDBDataWriter::perceiveCONECTRecordBonds(const Chem::MolecularGraph
 			continue;
 		}
 
-		std::size_t res_serial1 = atomToResidueSerialMap[&atom1];
-		std::size_t res_serial2 = atomToResidueSerialMap[&atom2];
+		long res_serial1 = atomToResidueSerialMap[&atom1];
+		long res_serial2 = atomToResidueSerialMap[&atom2];
 
 		assert(res_serial1 != 0);
 		assert(res_serial2 != 0);
@@ -260,7 +260,7 @@ void Biomol::PDBDataWriter::perceiveCONECTRecordBonds(const Chem::MolecularGraph
 			if (tmplt && isStandardBond(bond, *tmplt))
 				continue;
 
-		} else if (std::abs(long(res_serial1) - long(res_serial2)) == 1) {
+		} else if (std::abs(res_serial1 - res_serial2) == 1) {
 			MolecularGraph::SharedPointer tmplt1 = res_dict->getStructure(res_code1);
 			MolecularGraph::SharedPointer tmplt2 = res_dict->getStructure(res_code2);
 
@@ -396,13 +396,13 @@ void Biomol::PDBDataWriter::writeCoordinateSection(std::ostream& os)
 	using namespace Chem;
 
 	std::size_t last_model_id = 0;
-	std::size_t next_serial = 1;
-	std::size_t last_res_serial = 0;
+	long next_serial = 1;
+	long last_res_serial = 0;
 	std::size_t chain_len = 1;
 
 	for (AtomList::const_iterator it = atomSequence.begin(), end = atomSequence.end(); it != end; ++it) {
 		const Atom& atom = **it;
-		std::size_t res_serial = atomToResidueSerialMap[&atom];
+		long res_serial = atomToResidueSerialMap[&atom];
 
 		assert(res_serial != 0);
 		
@@ -468,7 +468,7 @@ void Biomol::PDBDataWriter::writeConnectivitySection(std::ostream& os, const Che
 
 	for (AtomList::const_iterator it = atomSequence.begin(), end = atomSequence.end(); it != end; ++it) {
 		const Atom& atom = **it;
-		std::size_t serial = atomToSerialMap[&atom];
+		long serial = atomToSerialMap[&atom];
 
 		assert(serial != 0);
 		nbrAtomSerials.clear();
@@ -480,7 +480,7 @@ void Biomol::PDBDataWriter::writeConnectivitySection(std::ostream& os, const Che
 				continue;
 
 			const Atom& nbr_atom = bond.getNeighbor(atom);
-			std::size_t nbr_serial = atomToSerialMap[&nbr_atom];
+			long nbr_serial = atomToSerialMap[&nbr_atom];
 
 			assert(nbr_serial != 0);
 
@@ -593,7 +593,7 @@ bool Biomol::PDBDataWriter::writeGenericDataRecord(std::ostream& os, PDBData::Re
 	return true;
 }
 
-std::size_t Biomol::PDBDataWriter::writeATOMRecord(std::ostream& os, std::size_t serial, const Chem::Atom& atom)
+long Biomol::PDBDataWriter::writeATOMRecord(std::ostream& os, long serial, const Chem::Atom& atom)
 {
 	using namespace Internal;
 
@@ -632,7 +632,10 @@ std::size_t Biomol::PDBDataWriter::writeATOMRecord(std::ostream& os, std::size_t
 
 	writeString(os, 3, res_code, ("PDBDataWriter: error while writing residue name for " + rec_prefix + " record").c_str());
 	writeWhitespace(os, 1);
-	writeChar(os, getChainID(atom));
+
+	const std::string& chain_id = getChainID(atom);
+
+	writeChar(os, chain_id.length() >= 1 ? chain_id[0] : ' ');
 	writeIntegerNumber(os, 4, getResidueSequenceNumber(atom), ("PDBDataWriter: error while writing residue sequence number for " + 
 					   rec_prefix + " record").c_str(), false);
 	writeChar(os, getResidueInsertionCode(atom));
@@ -671,7 +674,7 @@ std::size_t Biomol::PDBDataWriter::writeATOMRecord(std::ostream& os, std::size_t
 	return (serial + 1);
 }
 
-void Biomol::PDBDataWriter::writeTERRecord(std::ostream& os, std::size_t serial, const Chem::Atom& atom) const
+void Biomol::PDBDataWriter::writeTERRecord(std::ostream& os, long serial, const Chem::Atom& atom) const
 {
 	using namespace Internal;
 
@@ -680,7 +683,10 @@ void Biomol::PDBDataWriter::writeTERRecord(std::ostream& os, std::size_t serial,
 	writeWhitespace(os, 6);
 	writeString(os, 3, getResidueCode(atom), "PDBDataWriter: error while writing residue name for TER record");
 	writeWhitespace(os, 1);
-	writeChar(os, getChainID(atom));
+
+	const std::string& chain_id = getChainID(atom);
+
+	writeChar(os, chain_id.length() >= 1 ? chain_id[0] : ' ');
 	writeIntegerNumber(os, 4, getResidueSequenceNumber(atom), "PDBDataWriter: error while writing residue sequence number for TER record", false);
 	writeChar(os, getResidueInsertionCode(atom));
 	writePDBEOL(os);
@@ -733,7 +739,7 @@ bool Biomol::PDBDataWriter::atomOrderingFunc(const Chem::Atom* atom1, const Chem
 	return (getSerialNumber(*atom1) < getSerialNumber(*atom2));
 }
 /*
-std::size_t Biomol::PDBDataWriter::getSerialNumber(const Chem::Atom& atom) const
+long Biomol::PDBDataWriter::getSerialNumber(const Chem::Atom& atom) const
 {
 	try {
 		return Biomol::getSerialNumber(atom);

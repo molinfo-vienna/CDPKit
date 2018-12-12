@@ -73,7 +73,7 @@ namespace
 	MAKE_MOLGRAPH_FUNC_WRAPPERS(const std::string&, ResidueCode)
 	MAKE_MOLGRAPH_FUNC_WRAPPERS(long, ResidueSequenceNumber)
 	MAKE_MOLGRAPH_FUNC_WRAPPERS(char, ResidueInsertionCode)
-	MAKE_MOLGRAPH_FUNC_WRAPPERS(char, ChainID)
+	MAKE_MOLGRAPH_FUNC_WRAPPERS(const std::string&, ChainID)
 	MAKE_MOLGRAPH_FUNC_WRAPPERS(std::size_t, ModelNumber)
 	MAKE_MOLGRAPH_FUNC_WRAPPERS(const CDPL::Biomol::PDBData::SharedPointer&, PDBData)
 
@@ -88,10 +88,10 @@ namespace
 	MAKE_FUNCTION_WRAPPER7(void, extractProximalAtoms, CDPL::Chem::MolecularGraph&, CDPL::Chem::MolecularGraph&, 
 						   CDPL::Chem::Fragment&, const CDPL::Chem::Atom3DCoordinatesFunction&, double, bool, bool);
 
-	bool matchesResidueInfoWrapper(CDPL::Chem::MolecularGraph& molgraph, const std::string& res_code, char chain_id, 
+	bool matchesResidueInfoWrapper(CDPL::Chem::MolecularGraph& molgraph, const std::string& res_code, const std::string& chain_id, 
 								   long res_seq_no, char ins_code, std::size_t model_no) 
 	{
-		return CDPL::Biomol::matchesResidueInfo(molgraph, (res_code.empty() ? 0 : res_code.c_str()), chain_id, 
+		return CDPL::Biomol::matchesResidueInfo(molgraph, (res_code.empty() ? 0 : res_code.c_str()), (chain_id.empty() ? 0 : chain_id.c_str()), 
 												res_seq_no, ins_code, model_no);
  	}
 }
@@ -117,13 +117,13 @@ void CDPLPythonBiomol::exportMolecularGraphFunctions()
 				(python::arg("core"), python::arg("macromol"), python::arg("env_atoms"),
 				 python::arg("coords_func"), python::arg("max_dist"), python::arg("inc_core_atoms") = false, python::arg("append") = false));
 	python::def("matchesResidueInfo", &matchesResidueInfoWrapper, 
-				(python::arg("molgraph"), python::arg("res_code") = "", python::arg("chain_id") = char(0), 
+				(python::arg("molgraph"), python::arg("res_code") = "", python::arg("chain_id") = "", 
 				 python::arg("res_seq_no") = 0, python::arg("ins_code") = char(0), python::arg("model_no") = 0));
 
 	EXPORT_MOLGRAPH_FUNCS_COPY_REF(ResidueCode, code)
 	EXPORT_MOLGRAPH_FUNCS(ResidueSequenceNumber, seq_no)
 	EXPORT_MOLGRAPH_FUNCS(ResidueInsertionCode, code)
-	EXPORT_MOLGRAPH_FUNCS(ChainID, id)
+	EXPORT_MOLGRAPH_FUNCS_COPY_REF(ChainID, id)
 	EXPORT_MOLGRAPH_FUNCS(ModelNumber, model_no)
 	EXPORT_MOLGRAPH_FUNCS_COPY_REF(PDBData, data)
 }

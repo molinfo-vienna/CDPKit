@@ -89,7 +89,7 @@ namespace CDPL
 			{
 		
 				std::size_t modelNumber;
-				char        chainID;
+				std::string chainID;
 				char        insCode;
 				std::string resCode;
 				long        seqNumber;

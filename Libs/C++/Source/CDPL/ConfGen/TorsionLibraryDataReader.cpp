@@ -84,7 +84,7 @@ void ConfGen::TorsionLibraryDataReader::read(std::istream& is, TorsionLibrary& l
 	std::istream::pos_type data_len = is.tellg();
 
 	if (data_len < 0)
-		throw Base::IOError("TorsionLibraryDataReader: reading torsion library data failed");
+		throw Base::IOError("TorsionLibraryDataReader: could not determine length of input data");
 
 	charBuffer.resize(data_len + std::istream::pos_type(1));
 

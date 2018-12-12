@@ -88,8 +88,8 @@ namespace CDPL
 			bool writeGenericDataRecord(std::ostream& os, PDBData::RecordType type, const Chem::MolecularGraph& molgraph, 
 										const std::string& prefix, std::size_t max_llen);
 
-			std::size_t writeATOMRecord(std::ostream& os, std::size_t serial, const Chem::Atom& atom);
-			void writeTERRecord(std::ostream& os, std::size_t serial, const Chem::Atom& atom) const;
+			long writeATOMRecord(std::ostream& os, long serial, const Chem::Atom& atom);
+			void writeTERRecord(std::ostream& os, long serial, const Chem::Atom& atom) const;
 
 			void writeNUMMDLRecord(std::ostream& os) const;
 			void writeMODELRecord(std::ostream& os, std::size_t model_id) const;
@@ -102,7 +102,7 @@ namespace CDPL
 
 			bool atomOrderingFunc(const Chem::Atom* atom1, const Chem::Atom* atom2) const;
 /*
-			std::size_t getSerialNumber(const Chem::Atom& atom) const;
+			long getSerialNumber(const Chem::Atom& atom) const;
 			long getResidueSequenceNumber(const Chem::Atom& atom) const;
 			char getResidueInsertionCode(const Chem::Atom& atom) const;
 			char getChainID(const Chem::Atom& atom) const;
@@ -111,10 +111,10 @@ namespace CDPL
 			const std::string& getResidueAtomName(const Chem::Atom& atom) const;
 */
 			typedef std::vector<const Chem::Atom*> AtomList;
-			typedef std::vector<std::size_t> AtomSerialList;
+			typedef std::vector<long> AtomSerialList;
 			typedef boost::unordered_map<std::string, std::size_t> RecordHistogram;
 			typedef boost::unordered_map<const Chem::Atom*, std::size_t> AtomToSerialMap;
-			typedef std::pair<std::size_t, std::size_t> SerialPair;
+			typedef std::pair<long, long> SerialPair;
 			typedef boost::unordered_set<SerialPair> SerialPairSet;
 			typedef boost::unordered_set<const Chem::Bond*> BondSet;
 

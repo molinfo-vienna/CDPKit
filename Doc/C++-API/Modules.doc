@@ -310,6 +310,9 @@
 \defgroup CDPL_BIOMOL_PDB_IO Brookhaven Protein Databank (PDB) File I/O 
 \ingroup CDPL_BIOMOL_DATA_IO
 
+\defgroup CDPL_BIOMOL_MMTF_IO Macromolecular Transmission Format (MMTF) I/O 
+\ingroup CDPL_BIOMOL_DATA_IO
+
 \defgroup CDPL_BIOMOL_CDF_IO The Native CDPL Format
 \ingroup CDPL_BIOMOL_DATA_IO
 

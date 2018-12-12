@@ -94,10 +94,10 @@ namespace
 	MAKE_ATOM_FUNC_WRAPPERS(bool, HeteroAtomFlag)
 	MAKE_ATOM_FUNC_WRAPPERS(long, ResidueSequenceNumber)
 	MAKE_ATOM_FUNC_WRAPPERS(char, ResidueInsertionCode)
-	MAKE_ATOM_FUNC_WRAPPERS(char, ChainID)
+	MAKE_ATOM_FUNC_WRAPPERS(const std::string&, ChainID)
 	MAKE_ATOM_FUNC_WRAPPERS(char, AltLocationID)
 	MAKE_ATOM_FUNC_WRAPPERS(std::size_t, ModelNumber)
-	MAKE_ATOM_FUNC_WRAPPERS(std::size_t, SerialNumber)
+	MAKE_ATOM_FUNC_WRAPPERS(long, SerialNumber)
 	MAKE_ATOM_FUNC_WRAPPERS(double, Occupancy)
 	MAKE_ATOM_FUNC_WRAPPERS(double, BFactor)
 
@@ -107,10 +107,10 @@ namespace
 
 	MAKE_FUNCTION_WRAPPER6(void, extractResidueSubstructure, CDPL::Chem::Atom&, CDPL::Chem::MolecularGraph&, CDPL::Chem::Fragment&, bool, unsigned int, bool);
 
-	bool matchesResidueInfoWrapper(CDPL::Chem::Atom& atom, const std::string& res_code, char chain_id, 
-								   long res_seq_no, char ins_code, std::size_t model_no, const std::string& atom_name, std::size_t serial_no) 
+	bool matchesResidueInfoWrapper(CDPL::Chem::Atom& atom, const std::string& res_code, const std::string& chain_id, 
+								   long res_seq_no, char ins_code, std::size_t model_no, const std::string& atom_name, long serial_no) 
 	{
-		return CDPL::Biomol::matchesResidueInfo(atom, (res_code.empty() ? 0 : res_code.c_str()), chain_id, 
+		return CDPL::Biomol::matchesResidueInfo(atom, (res_code.empty() ? 0 : res_code.c_str()), (chain_id.empty() ? 0 : chain_id.c_str()), 
 												res_seq_no, ins_code, model_no, (atom_name.empty() ? 0 : atom_name.c_str()), serial_no);
  	}
 }
@@ -128,7 +128,7 @@ void CDPLPythonBiomol::exportAtomFunctions()
 				(python::arg("atom"), python::arg("molgraph"), python::arg("res_substruct"), 
 				 python::arg("cnctd_only") = false, python::arg("flags") = Biomol::AtomPropertyFlag::DEFAULT, python::arg("append") = false));
 	python::def("matchesResidueInfo", &matchesResidueInfoWrapper, 
-				(python::arg("atom"), python::arg("res_code") = "", python::arg("chain_id") = char(0), 
+				(python::arg("atom"), python::arg("res_code") = "", python::arg("chain_id") = "", 
 				 python::arg("res_seq_no") = 0, python::arg("ins_code") = char(0), python::arg("model_no") = 0, 
 				 python::arg("atom_name") = "", python::arg("serial_no") = 0));
 
@@ -140,7 +140,7 @@ void CDPLPythonBiomol::exportAtomFunctions()
 	EXPORT_ATOM_FUNCS(ResidueSequenceNumber, seq_no)
 	EXPORT_ATOM_FUNCS(ResidueInsertionCode, code)
 	EXPORT_ATOM_FUNCS(HeteroAtomFlag, is_het)
-	EXPORT_ATOM_FUNCS(ChainID, id)
+	EXPORT_ATOM_FUNCS_COPY_REF(ChainID, id)
 	EXPORT_ATOM_FUNCS(AltLocationID, id)
 	EXPORT_ATOM_FUNCS(ModelNumber, model_no)
 	EXPORT_ATOM_FUNCS(SerialNumber, serial_no)

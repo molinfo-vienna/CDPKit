@@ -24,8 +24,8 @@
  */
 
 
-#ifndef CDPL_CHEM_PDBDATAREADER_HPP
-#define CDPL_CHEM_PDBDATAREADER_HPP
+#ifndef CDPL_BIOMOL_PDBDATAREADER_HPP
+#define CDPL_BIOMOL_PDBDATAREADER_HPP
 
 #include <cstddef>
 #include <iosfwd>
@@ -105,7 +105,7 @@ namespace CDPL
 
 			typedef std::vector<Chem::Atom*> AtomList;
 			typedef boost::unordered_map<std::string, std::size_t> RecordHistogram;
-			typedef boost::unordered_map<std::size_t, boost::unordered_map<std::size_t, Chem::Atom*> > SerialToAtomMap;
+			typedef boost::unordered_map<std::size_t, boost::unordered_map<long, Chem::Atom*> > SerialToAtomMap;
 			typedef boost::unordered_map<std::string, Chem::Atom*> NameToAtomMap;
 			typedef boost::unordered_map<std::string, std::size_t> BondOrderCache;
 
@@ -147,4 +147,4 @@ namespace CDPL
     }
 }
 
-#endif // CDPL_CHEM_PDBDATAREADER_HPP
+#endif // CDPL_BIOMOL_PDBDATAREADER_HPP
