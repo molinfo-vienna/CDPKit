@@ -27,7 +27,6 @@
 #include "StaticInit.hpp"
 
 #include <istream>
-#include <cstddef>
 #include <functional>
 #include <algorithm>
 
@@ -40,6 +39,7 @@
 #include "CDPL/Biomol/PDBData.hpp"
 #include "CDPL/Chem/Molecule.hpp"
 #include "CDPL/Chem/Atom.hpp"
+#include "CDPL/Chem/Bond.hpp"
 #include "CDPL/Chem/Entity3DFunctions.hpp"
 #include "CDPL/Chem/AtomFunctions.hpp"
 #include "CDPL/Chem/BondFunctions.hpp"
@@ -85,14 +85,13 @@ bool Biomol::MMTFDataReader::readRecord(std::istream& is, Chem::Molecule& mol)
 		return false;
 
 	mmtf::StructureData struct_data;
-
+	
 	handle.get().convert(struct_data);
-
+	
 	if (getStrictErrorCheckingParameter(ioBase) && !struct_data.hasConsistentData(false))
 		throw Base::IOError("MMTFDataReader: got inconsistent MMTF data");
 
 	buildMolecule(mol, struct_data);
-	removeAltLocAtoms(mol);
 
 	return true;
 }
@@ -152,9 +151,9 @@ bool Biomol::MMTFDataReader::readRecordData(std::istream& is, msgpack::object_ha
 
 void Biomol::MMTFDataReader::buildMolecule(Chem::Molecule& mol, const mmtf::StructureData& struct_data)
 {
-	std::size_t start_atom_idx = mol.getNumAtoms();
-	
-	mol.reserveMemoryForAtoms(start_atom_idx + struct_data.numAtoms);
+	using namespace Chem;
+		
+	mol.reserveMemoryForAtoms(mol.getNumAtoms() + struct_data.numAtoms);
 	mol.reserveMemoryForBonds(mol.getNumBonds() + struct_data.numBonds);
 
 	PDBData::SharedPointer pdb_data;
@@ -173,8 +172,8 @@ void Biomol::MMTFDataReader::buildMolecule(Chem::Molecule& mol, const mmtf::Stru
 	pdb_data->setRecord(PDBData::DEPOSITION_DATE, struct_data.depositionDate);
 	pdb_data->setRecord(PDBData::STRUCTURE_ID, struct_data.structureId);
 
-	altLocAtomLists.clear();
-
+	atoms.clear();
+	
 	// traverse models
 	for (std::size_t model_idx = 0, num_models = struct_data.numModels, chain_idx = 0, res_idx = 0, atom_idx = 0; model_idx < num_models; model_idx++) {
 
@@ -184,21 +183,66 @@ void Biomol::MMTFDataReader::buildMolecule(Chem::Molecule& mol, const mmtf::Stru
 			// traverse chain residues
 			for (std::size_t chain_res_idx = 0, num_res = struct_data.groupsPerChain[chain_idx]; chain_res_idx < num_res; chain_res_idx++, res_idx++) {
 				const mmtf::GroupType& group = struct_data.groupList[struct_data.groupTypeList[res_idx]];
-				std::size_t atom_idx_offs = start_atom_idx + atom_idx;
-
-				residueAtoms.clear();
+				std::size_t atom_idx_offs = atom_idx;
 
 				// traverse residue atoms
 				for (std::size_t res_atom_idx = 0; res_atom_idx < group.atomNameList.size(); res_atom_idx++, atom_idx++) {
-					Chem::Atom& atom = mol.addAtom();
-
-					residueAtoms.push_back(&atom);
-
 					Math::Vector3D coords;
 
 					coords(0) = struct_data.xCoordList[atom_idx];
 					coords(1) = struct_data.yCoordList[atom_idx];
 					coords(2) = struct_data.zCoordList[atom_idx];
+
+					if (struct_data.altLocList[atom_idx] != ' ') {
+						bool alt_loc_atom = false;
+					
+						for (AtomArray::reverse_iterator it = atoms.rbegin(), end = atoms.rend(); it != end; ++it) {
+							Atom& atom = **it;
+
+							if (getResidueSequenceNumber(atom) != struct_data.groupIdList[res_idx])
+								break;
+
+							if (getResidueInsertionCode(atom) != struct_data.insCodeList[res_idx])
+								break;
+
+							if (getResidueCode(atom) != group.groupName)
+								break;
+
+							if (getModelNumber(atom) != (model_idx + 1))
+								break;
+
+							if (getChainID(atom) != struct_data.chainIdList[chain_idx])
+								break;
+
+							if (getResidueAtomName(atom) != group.atomNameList[res_atom_idx])
+								continue;
+
+							Math::Vector3DArray::SharedPointer coords_array_ptr;
+
+							if (has3DCoordinatesArray(atom))
+								coords_array_ptr = get3DCoordinatesArray(atom);
+
+							else {
+								coords_array_ptr.reset(new Math::Vector3DArray());
+								coords_array_ptr->addElement(get3DCoordinates(atom));
+
+								set3DCoordinatesArray(atom, coords_array_ptr);
+							}
+
+							coords_array_ptr->addElement(coords);
+
+							atoms.push_back(&atom);
+							alt_loc_atom = true;
+							break;
+						}
+
+						if (alt_loc_atom)
+							continue;
+					}
+					
+					Atom& atom = mol.addAtom();
+
+					atoms.push_back(&atom);
 
 					setModelNumber(atom, model_idx + 1);
 					set3DCoordinates(atom, coords);
@@ -212,18 +256,16 @@ void Biomol::MMTFDataReader::buildMolecule(Chem::Molecule& mol, const mmtf::Stru
 					setFormalCharge(atom, group.formalChargeList[res_atom_idx]);
 					setResidueAtomName(atom, group.atomNameList[res_atom_idx]);
 					setSymbol(atom, group.elementList[res_atom_idx]);
-					setType(atom, Chem::AtomDictionary::getType(group.elementList[res_atom_idx]));
+					setType(atom, AtomDictionary::getType(group.elementList[res_atom_idx]));
 					setAltLocationID(atom, struct_data.altLocList[atom_idx]);
 				}
 
-				getResidueAltLocAtoms();
-
 				// traverse residue bonds
 				for (std::size_t res_bond_idx = 0, num_bonds = group.bondAtomList.size() / 2; res_bond_idx < num_bonds; res_bond_idx++) {
-					std::size_t atom1_idx = atom_idx_offs + group.bondAtomList[res_bond_idx * 2];
-					std::size_t atom2_idx = atom_idx_offs + group.bondAtomList[res_bond_idx * 2 + 1];
+					std::size_t atom1_idx = mol.getAtomIndex(*atoms[atom_idx_offs + group.bondAtomList[res_bond_idx * 2]]);
+					std::size_t atom2_idx = mol.getAtomIndex(*atoms[atom_idx_offs + group.bondAtomList[res_bond_idx * 2 + 1]]);
 
-					setOrder(mol.addBond(atom1_idx, atom2_idx), group.bondOrderList[res_bond_idx]);
+					addBond(mol, atom1_idx, atom2_idx, group.bondOrderList[res_bond_idx]);
 				}
 			}
 		}
@@ -231,21 +273,19 @@ void Biomol::MMTFDataReader::buildMolecule(Chem::Molecule& mol, const mmtf::Stru
 
 	// traverse inter-residue bonds
 	for (std::size_t i = 0, num_bonds = struct_data.bondAtomList.size() / 2; i < num_bonds; i++) {
-		std::size_t atom1_idx = start_atom_idx + struct_data.bondAtomList[i * 2];
-		std::size_t atom2_idx = start_atom_idx + struct_data.bondAtomList[i * 2 + 1];
-		
-		setOrder(mol.addBond(atom1_idx, atom2_idx), struct_data.bondOrderList[i]);
+		std::size_t atom1_idx = mol.getAtomIndex(*atoms[struct_data.bondAtomList[i * 2]]);
+		std::size_t atom2_idx = mol.getAtomIndex(*atoms[struct_data.bondAtomList[i * 2 + 1]]);
+
+		addBond(mol, atom1_idx, atom2_idx, struct_data.bondOrderList[i]);
 	}
 }
 
-void Biomol::MMTFDataReader::getResidueAltLocAtoms()
+void Biomol::MMTFDataReader::addBond(Chem::Molecule& mol, std::size_t atom1_idx, std::size_t atom2_idx, std::size_t order) const
 {
-	std::sort(residueAtoms.begin(), residueAtoms.end(), ResidueAtomCmpFunc());
+	using namespace Chem;
 
+	if (atom1_idx == atom2_idx)
+		return;
+	
+	setOrder(mol.addBond(atom1_idx, atom2_idx), order);
 }
-
-void Biomol::MMTFDataReader::removeAltLocAtoms(Chem::Molecule& mol) const
-{
-
-}
-

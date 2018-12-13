@@ -39,7 +39,6 @@ SET(biomol_MOD_SRCS
     DataFormatExport.cpp
 
     AtomFunctionExport.cpp
-    AtomContainerFunctionExport.cpp
     MolecularGraphFunctionExport.cpp
     ControlParameterFunctionExport.cpp 
     UtilityFunctionExport.cpp 

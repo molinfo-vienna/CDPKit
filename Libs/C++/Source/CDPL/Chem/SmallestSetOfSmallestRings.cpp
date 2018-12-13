@@ -169,14 +169,19 @@ void Chem::SmallestSetOfSmallestRings::findSSSR()
 	std::size_t num_nodes = nodes.size();
 
 	while (!sssrComplete()) {
+		bool new_messages = false;
+		
 		for (std::size_t i = 0; i < num_nodes; i++)
 			if (!nodes[i].stripped())
-				nodes[i].send(this);
+				new_messages |= nodes[i].send(this);
 
+		if (!new_messages)
+			return;
+		
 		for (std::size_t i = 0; i < num_nodes; i++)
 			if (!nodes[i].stripped() && nodes[i].receive(this))
 				return;
-
+		
 		processEvenRings();
 	}
 }
@@ -239,10 +244,10 @@ bool Chem::SmallestSetOfSmallestRings::processCollision(const PathMessage* msg1,
 {
 	if (!testRing->join(msg1, msg2))
 		return false;
-
+	
 	if (!procRings.insert(testRing).second)
 		return false;
-	
+
 	if (odd)
 		processRing(testRing);
 	else
@@ -279,28 +284,28 @@ void Chem::SmallestSetOfSmallestRings::processRing(PathMessage* ring)
 
 			if (lb != mtx_end && !search_func(linDepTestRing, *lb)) 
 				continue;
-
+			
 			if (lb == mtx_end && linDepTestRing->getMaxBondIndex() == 0) 
 				return;
-
+			
 			linDepTestMtx.insert(lb, linDepTestRing);
 			linDepTestRing = allocMessage();
-
 			break;
 		}
 
-	} else
+	} else 
 		linDepTestMtx.insert(lb, ring);
 
 	sssr.push_back(ring);
 }
 
 
-void Chem::SmallestSetOfSmallestRings::TNode::send(Controller* controller)
+bool Chem::SmallestSetOfSmallestRings::TNode::send(Controller* controller)
 {
 	std::size_t num_nbr_nodes = nbrNodes.size();
 	std::size_t num_messages = sendBuffer.size();
-
+	bool new_messages = false;
+	
 	if (num_nbr_nodes == 1) {
 		if (num_messages > 0) 
 			controller->freeMessage(sendBuffer.front());
@@ -324,7 +329,8 @@ void Chem::SmallestSetOfSmallestRings::TNode::send(Controller* controller)
 
 				new_msg->copy(msg);
 				new_msg->push(this, bond_idx);
-		
+
+				new_messages = true;
 				nbr_node->receiveBuffer.push_back(new_msg);
 			}
 
@@ -333,6 +339,8 @@ void Chem::SmallestSetOfSmallestRings::TNode::send(Controller* controller)
 	}
 
 	sendBuffer.clear();
+
+	return new_messages;
 }
 
 bool Chem::SmallestSetOfSmallestRings::TNode::receive(Controller* controller)
@@ -385,8 +393,9 @@ bool Chem::SmallestSetOfSmallestRings::TNode::receive(Controller* controller)
 				if (controller->processCollision(msg1, msg2, true))				
 					return true; 
 
-			} else
+			} else {
 				continue;
+			}
 
 			msg1->setCollisionFlag();
 			msg2->setCollisionFlag();
@@ -394,7 +403,7 @@ bool Chem::SmallestSetOfSmallestRings::TNode::receive(Controller* controller)
 
 		if (msg1->collided())
 			controller->freeMessage(msg1);
-		else
+		else 
 			sendBuffer.push_back(msg1);
 	}
 

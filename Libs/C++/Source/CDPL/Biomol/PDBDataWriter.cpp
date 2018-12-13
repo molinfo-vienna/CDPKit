@@ -28,7 +28,6 @@
 
 #include <algorithm>
 #include <cmath>
-#include <cassert>
 
 #include <boost/tokenizer.hpp>
 #include <boost/algorithm/string.hpp>
@@ -92,6 +91,7 @@ namespace
 	}
 
 	const std::string DEF_RESIDUE_CODE = "UNL";
+	const std::string DEF_CHAIN_ID     = "A";
 }
 
 
@@ -165,7 +165,7 @@ void Biomol::PDBDataWriter::processAtomSequence(const Chem::MolecularGraph& molg
 
 	for (AtomList::const_iterator it = atomSequence.begin(), end = atomSequence.end(); it != end; res_serial++) {
 		const Atom* first_atom = *it;
-		std::size_t res_id = (getResidueSequenceNumber(*first_atom) << (sizeof(char) * 8)) + getResidueInsertionCode(*first_atom);
+		long res_id = (getResidueSequenceNumber(*first_atom) << (sizeof(char) * 8)) + getResidueInsertionCode(*first_atom);
 		const std::string& res_code = getResidueCode(*first_atom);
 
 		atomToResidueSerialMap[first_atom] = res_serial; 
@@ -177,7 +177,7 @@ void Biomol::PDBDataWriter::processAtomSequence(const Chem::MolecularGraph& molg
 			if (next_res_code != res_code)
 				break;
 
-			std::size_t next_res_id = (getResidueSequenceNumber(*next_atom) << (sizeof(char) * 8)) + getResidueInsertionCode(*next_atom);
+			long next_res_id = (getResidueSequenceNumber(*next_atom) << (sizeof(char) * 8)) + getResidueInsertionCode(*next_atom);
 
 			if (next_res_id != res_id)
 				break;
@@ -200,9 +200,6 @@ void Biomol::PDBDataWriter::processAtomSequence(const Chem::MolecularGraph& molg
 
 		long res_serial1 = atomToResidueSerialMap[&atom1];
 		long res_serial2 = atomToResidueSerialMap[&atom2];
-
-		assert(res_serial1 != 0);
-		assert(res_serial2 != 0);
 
 		connectedResidueLookup.insert(SerialPair(res_serial1, res_serial2));
 		connectedResidueLookup.insert(SerialPair(res_serial2, res_serial1));
@@ -237,9 +234,6 @@ void Biomol::PDBDataWriter::perceiveCONECTRecordBonds(const Chem::MolecularGraph
 
 		long res_serial1 = atomToResidueSerialMap[&atom1];
 		long res_serial2 = atomToResidueSerialMap[&atom2];
-
-		assert(res_serial1 != 0);
-		assert(res_serial2 != 0);
 
 		const std::string& res_code1 = getResidueCode(atom1);
 		const std::string& res_code2 = getResidueCode(atom2);
@@ -403,8 +397,6 @@ void Biomol::PDBDataWriter::writeCoordinateSection(std::ostream& os)
 	for (AtomList::const_iterator it = atomSequence.begin(), end = atomSequence.end(); it != end; ++it) {
 		const Atom& atom = **it;
 		long res_serial = atomToResidueSerialMap[&atom];
-
-		assert(res_serial != 0);
 		
 		if (last_res_serial != 0 && res_serial != last_res_serial) {
 			if (connectedResidueLookup.find(SerialPair(last_res_serial, res_serial)) != connectedResidueLookup.end()) 
@@ -470,7 +462,6 @@ void Biomol::PDBDataWriter::writeConnectivitySection(std::ostream& os, const Che
 		const Atom& atom = **it;
 		long serial = atomToSerialMap[&atom];
 
-		assert(serial != 0);
 		nbrAtomSerials.clear();
 		
 		for (Atom::ConstBondIterator nb_it = atom.getBondsBegin(), nb_end = atom.getBondsEnd(); nb_it != nb_end; ++nb_it) {
@@ -481,8 +472,6 @@ void Biomol::PDBDataWriter::writeConnectivitySection(std::ostream& os, const Che
 
 			const Atom& nbr_atom = bond.getNeighbor(atom);
 			long nbr_serial = atomToSerialMap[&nbr_atom];
-
-			assert(nbr_serial != 0);
 
 			if (!writtenConectAtomPairs.insert(SerialPair(serial, nbr_serial)).second)
 				continue;
@@ -602,9 +591,11 @@ long Biomol::PDBDataWriter::writeATOMRecord(std::ostream& os, long serial, const
 	writePDBRecordPrefix(os, rec_prefix);
 
 	serial = std::max(serial, getSerialNumber(atom));
+	
 	atomToSerialMap[&atom] = serial;
 
-	writeIntegerNumber(os, 5, serial, ("PDBDataWriter: error while writing serial number for " + rec_prefix + " record").c_str(), false);
+	writeIntegerNumber(os, 5, checkSerialNumber(serial),
+					   ("PDBDataWriter: error while writing serial number for " + rec_prefix + " record").c_str(), false);
 	
 	std::string symbol = getSymbol(atom);
 	const std::string& name = getResidueAtomName(atom);
@@ -635,9 +626,12 @@ long Biomol::PDBDataWriter::writeATOMRecord(std::ostream& os, long serial, const
 
 	const std::string& chain_id = getChainID(atom);
 
+	if (strictErrorChecking && chain_id.length() > 1)
+		throw Base::IOError("PDBDataWriter: while writing " + rec_prefix + " record: length of chain id > 1");
+	
 	writeChar(os, chain_id.length() >= 1 ? chain_id[0] : ' ');
-	writeIntegerNumber(os, 4, getResidueSequenceNumber(atom), ("PDBDataWriter: error while writing residue sequence number for " + 
-					   rec_prefix + " record").c_str(), false);
+	writeIntegerNumber(os, 4, checkResidueSequenceNumber(getResidueSequenceNumber(atom)),
+					   ("PDBDataWriter: error while writing residue sequence number for " + rec_prefix + " record").c_str(), false);
 	writeChar(os, getResidueInsertionCode(atom));
 	writeWhitespace(os, 3);
 	
@@ -679,15 +673,20 @@ void Biomol::PDBDataWriter::writeTERRecord(std::ostream& os, long serial, const 
 	using namespace Internal;
 
 	writePDBRecordPrefix(os, PDB::TER_PREFIX);
-	writeIntegerNumber(os, 5, serial, "PDBDataWriter: error while writing serial number for TER record", false);
+	writeIntegerNumber(os, 5, checkSerialNumber(serial),
+					   "PDBDataWriter: error while writing serial number for TER record", false);
 	writeWhitespace(os, 6);
 	writeString(os, 3, getResidueCode(atom), "PDBDataWriter: error while writing residue name for TER record");
 	writeWhitespace(os, 1);
 
 	const std::string& chain_id = getChainID(atom);
 
+	if (strictErrorChecking && chain_id.length() > 1)
+		throw Base::IOError("PDBDataWriter: error while writing chain id for TER record: length of chain id > 1");
+
 	writeChar(os, chain_id.length() >= 1 ? chain_id[0] : ' ');
-	writeIntegerNumber(os, 4, getResidueSequenceNumber(atom), "PDBDataWriter: error while writing residue sequence number for TER record", false);
+	writeIntegerNumber(os, 4, checkResidueSequenceNumber(getResidueSequenceNumber(atom)),
+					   "PDBDataWriter: error while writing residue sequence number for TER record", false);
 	writeChar(os, getResidueInsertionCode(atom));
 	writePDBEOL(os);
 }
@@ -723,6 +722,36 @@ void Biomol::PDBDataWriter::writeENDMDLRecord(std::ostream& os) const
 {
 	writePDBRecordPrefix(os, PDB::ENDMDL_PREFIX);
 	writePDBEOL(os);
+}
+
+long Biomol::PDBDataWriter::checkSerialNumber(long serial_no) const
+{
+	if (serial_no < 0) {
+		if (strictErrorChecking && serial_no < -9999)
+			throw Base::IOError("PDBDataWriter: atom serial number out of allowed range");
+
+		return -(std::abs(serial_no) % 10000);
+	}
+
+	if (strictErrorChecking && serial_no > 99999)
+		throw Base::IOError("PDBDataWriter: atom serial number out of allowed range");
+
+	return (serial_no % 100000);
+}
+
+long Biomol::PDBDataWriter::checkResidueSequenceNumber(long seq_no) const
+{
+	if (seq_no < 0) {
+		if (strictErrorChecking && seq_no < -999)
+			throw Base::IOError("PDBDataWriter: residue sequence number out of allowed range");
+
+		return -(std::abs(seq_no) % 1000);
+	}
+
+	if (strictErrorChecking && seq_no > 9999)
+		throw Base::IOError("PDBDataWriter: residue sequence number out of allowed range");
+
+	return (seq_no % 10000);
 }
 
 bool Biomol::PDBDataWriter::atomOrderingFunc(const Chem::Atom* atom1, const Chem::Atom* atom2) const
@@ -778,7 +807,7 @@ char Biomol::PDBDataWriter::getResidueInsertionCode(const Chem::Atom& atom) cons
 	}
 }
 
-char Biomol::PDBDataWriter::getChainID(const Chem::Atom& atom) const
+const std::string& Biomol::PDBDataWriter::getChainID(const Chem::Atom& atom) const
 {
 	try {
 		return Biomol::getChainID(atom);
@@ -787,7 +816,7 @@ char Biomol::PDBDataWriter::getChainID(const Chem::Atom& atom) const
 		if (strictErrorChecking)
 			throw Base::IOError("PDBDataWriter: chain-id property not found for atom");
 
-		return 'A';
+		return DEF_CHAIN_ID;
 	}
 }
 

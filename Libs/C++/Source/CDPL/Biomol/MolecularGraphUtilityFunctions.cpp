@@ -29,10 +29,8 @@
 
 #include <algorithm>
 
-#include "CDPL/Biomol/MolecularGraphFunctions.hpp"
+#include "CDPL/Biomol/UtilityFunctions.hpp"
 #include "CDPL/Biomol/AtomFunctions.hpp"
-#include "CDPL/Chem/MolecularGraph.hpp"
-#include "CDPL/Chem/Atom.hpp"
 #include "CDPL/Chem/Bond.hpp"
 #include "CDPL/Chem/AtomFunctions.hpp"
 #include "CDPL/Chem/Entity3DFunctions.hpp"
@@ -239,7 +237,7 @@ bool Biomol::matchesResidueInfo(const Chem::MolecularGraph& molgraph, const char
     if (chain_id != 0 && (getChainID(molgraph) != chain_id))
 	return false;
 
-    if (res_seq_no != 0 && (getResidueSequenceNumber(molgraph) != res_seq_no))
+    if (res_seq_no != IGNORE_SEQUENCE_NO && (getResidueSequenceNumber(molgraph) != res_seq_no))
 	return false;
 
     if (ins_code != 0 && (getResidueInsertionCode(molgraph) != ins_code))

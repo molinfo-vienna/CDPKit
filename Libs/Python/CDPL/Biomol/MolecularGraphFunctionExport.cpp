@@ -26,8 +26,8 @@
 
 #include <boost/python.hpp>
 
-#include "CDPL/Chem/MolecularGraph.hpp"
 #include "CDPL/Biomol/MolecularGraphFunctions.hpp"
+#include "CDPL/Chem/MolecularGraph.hpp"
 
 #include "FunctionExports.hpp"
 #include "FunctionWrapper.hpp"
@@ -76,24 +76,6 @@ namespace
 	MAKE_MOLGRAPH_FUNC_WRAPPERS(const std::string&, ChainID)
 	MAKE_MOLGRAPH_FUNC_WRAPPERS(std::size_t, ModelNumber)
 	MAKE_MOLGRAPH_FUNC_WRAPPERS(const CDPL::Biomol::PDBData::SharedPointer&, PDBData)
-
-	MAKE_FUNCTION_WRAPPER5(void, extractEnvironmentResidues, CDPL::Chem::MolecularGraph&, CDPL::Chem::MolecularGraph&, 
-						   CDPL::Chem::Fragment&, double, bool);
-
-	MAKE_FUNCTION_WRAPPER6(void, extractEnvironmentResidues, CDPL::Chem::MolecularGraph&, CDPL::Chem::MolecularGraph&, 
-						   CDPL::Chem::Fragment&, const CDPL::Chem::Atom3DCoordinatesFunction&, double, bool);
-	MAKE_FUNCTION_WRAPPER6(void, extractProximalAtoms, CDPL::Chem::MolecularGraph&, CDPL::Chem::MolecularGraph&, 
-						   CDPL::Chem::Fragment&, double, bool, bool);
-
-	MAKE_FUNCTION_WRAPPER7(void, extractProximalAtoms, CDPL::Chem::MolecularGraph&, CDPL::Chem::MolecularGraph&, 
-						   CDPL::Chem::Fragment&, const CDPL::Chem::Atom3DCoordinatesFunction&, double, bool, bool);
-
-	bool matchesResidueInfoWrapper(CDPL::Chem::MolecularGraph& molgraph, const std::string& res_code, const std::string& chain_id, 
-								   long res_seq_no, char ins_code, std::size_t model_no) 
-	{
-		return CDPL::Biomol::matchesResidueInfo(molgraph, (res_code.empty() ? 0 : res_code.c_str()), (chain_id.empty() ? 0 : chain_id.c_str()), 
-												res_seq_no, ins_code, model_no);
- 	}
 }
 
 
@@ -101,24 +83,6 @@ void CDPLPythonBiomol::exportMolecularGraphFunctions()
 {
 	using namespace boost;
 	using namespace CDPL;
-
-	python::def("setHydrogenResidueSequenceInfo", &Biomol::setHydrogenResidueSequenceInfo, 
-				(python::arg("molgraph"), python::arg("overwrite"), python::arg("flags") = Biomol::AtomPropertyFlag::DEFAULT));
-	python::def("extractEnvironmentResidues", &extractEnvironmentResiduesWrapper5, 
-				(python::arg("core"), python::arg("macromol"), python::arg("env_residues"),
-				 python::arg("max_dist"), python::arg("append") = false));
-	python::def("extractEnvironmentResidues", &extractEnvironmentResiduesWrapper6, 
-				(python::arg("core"), python::arg("macromol"), python::arg("env_residues"),
-				 python::arg("coords_func"), python::arg("max_dist"), python::arg("append") = false));
-	python::def("extractProximalAtoms", &extractProximalAtomsWrapper6, 
-				(python::arg("core"), python::arg("macromol"), python::arg("env_atoms"),
-				 python::arg("max_dist"), python::arg("inc_core_atoms") = false, python::arg("append") = false));
-	python::def("extractProximalAtoms", &extractProximalAtomsWrapper7, 
-				(python::arg("core"), python::arg("macromol"), python::arg("env_atoms"),
-				 python::arg("coords_func"), python::arg("max_dist"), python::arg("inc_core_atoms") = false, python::arg("append") = false));
-	python::def("matchesResidueInfo", &matchesResidueInfoWrapper, 
-				(python::arg("molgraph"), python::arg("res_code") = "", python::arg("chain_id") = "", 
-				 python::arg("res_seq_no") = 0, python::arg("ins_code") = char(0), python::arg("model_no") = 0));
 
 	EXPORT_MOLGRAPH_FUNCS_COPY_REF(ResidueCode, code)
 	EXPORT_MOLGRAPH_FUNCS(ResidueSequenceNumber, seq_no)

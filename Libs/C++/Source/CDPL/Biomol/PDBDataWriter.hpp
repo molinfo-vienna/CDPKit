@@ -100,12 +100,15 @@ namespace CDPL
 
 			const Chem::Atom* getResTemplateAtom(const Chem::Atom& atom, const Chem::MolecularGraph& tmplt) const;
 
+			long checkSerialNumber(long serial_no) const;
+			long checkResidueSequenceNumber(long seq_no) const;
+			
 			bool atomOrderingFunc(const Chem::Atom* atom1, const Chem::Atom* atom2) const;
 /*
 			long getSerialNumber(const Chem::Atom& atom) const;
 			long getResidueSequenceNumber(const Chem::Atom& atom) const;
 			char getResidueInsertionCode(const Chem::Atom& atom) const;
-			char getChainID(const Chem::Atom& atom) const;
+			const std::string& getChainID(const Chem::Atom& atom) const;
 			bool getHeteroAtomFlag(const Chem::Atom& atom) const;
 			const std::string& getResidueCode(const Chem::Atom& atom) const;
 			const std::string& getResidueAtomName(const Chem::Atom& atom) const;

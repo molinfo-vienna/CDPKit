@@ -121,7 +121,7 @@ namespace CDPL
 			public:
 				TNode(std::size_t idx): index(idx) {}
 
-				void send(Controller*);
+				bool send(Controller*);
 				bool receive(Controller*);
 
 				void freeMessages(Controller*);

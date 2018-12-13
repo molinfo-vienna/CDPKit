@@ -26,9 +26,8 @@
 
 #include "StaticInit.hpp"
 
-#include "CDPL/Biomol/AtomFunctions.hpp"
+#include "CDPL/Biomol/UtilityFunctions.hpp"
 #include "CDPL/Biomol/ResidueDictionary.hpp"
-#include "CDPL/Chem/Atom.hpp"
 #include "CDPL/Chem/Bond.hpp"
 #include "CDPL/Chem/Fragment.hpp"
 
@@ -97,7 +96,7 @@ void Biomol::extractResidueSubstructure(const Chem::Atom& atom, const Chem::Mole
 
 	std::string res_code = (flags & AtomPropertyFlag::RESIDUE_CODE) ? getResidueCode(atom) : std::string();
 	std::size_t model_no = (flags & AtomPropertyFlag::MODEL_NUMBER) ? getModelNumber(atom) : std::size_t(0);
-	long seq_no = (flags & AtomPropertyFlag::RESIDUE_SEQ_NO) ? getResidueSequenceNumber(atom) : std::size_t(0);
+	long seq_no = (flags & AtomPropertyFlag::RESIDUE_SEQ_NO) ? getResidueSequenceNumber(atom) : IGNORE_SEQUENCE_NO;
 	std::string chain_id = (flags & AtomPropertyFlag::CHAIN_ID) ? getChainID(atom) : std::string();
 	char ins_code = (flags & AtomPropertyFlag::RESIDUE_INS_CODE) ? getResidueInsertionCode(atom) : ' ';
 
@@ -195,7 +194,7 @@ bool Biomol::matchesResidueInfo(const Chem::Atom& atom, const char* res_code, co
     if (chain_id != 0 && (getChainID(atom) != chain_id))
 		return false;
 
-    if (res_seq_no != 0 && (getResidueSequenceNumber(atom) != res_seq_no))
+    if (res_seq_no != IGNORE_SEQUENCE_NO && (getResidueSequenceNumber(atom) != res_seq_no))
 		return false;
 
     if (ins_code != 0 && (getResidueInsertionCode(atom) != ins_code))
@@ -207,7 +206,7 @@ bool Biomol::matchesResidueInfo(const Chem::Atom& atom, const char* res_code, co
 	if (atom_name != 0 && (getResidueAtomName(atom) != atom_name))
 		return false;
 
-	if (serial_no != 0 && (getSerialNumber(atom) != serial_no))
+	if (serial_no != IGNORE_SERIAL_NO && (getSerialNumber(atom) != serial_no))
 		return false;
 
     return true;

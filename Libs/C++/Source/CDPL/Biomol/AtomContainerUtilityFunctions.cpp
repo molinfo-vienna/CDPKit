@@ -30,10 +30,8 @@
 
 #include <boost/bind.hpp>
 
-#include "CDPL/Biomol/AtomContainerFunctions.hpp"
-#include "CDPL/Biomol/AtomFunctions.hpp"
+#include "CDPL/Biomol/UtilityFunctions.hpp"
 #include "CDPL/Chem/Fragment.hpp"
-#include "CDPL/Chem/Atom.hpp"
 
 
 using namespace CDPL; 

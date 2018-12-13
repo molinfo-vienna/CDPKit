@@ -28,15 +28,50 @@
 #include <boost/python/ssize_t.hpp>
 
 #include "CDPL/Biomol/UtilityFunctions.hpp"
+#include "CDPL/Chem/Fragment.hpp"
 
 #include "FunctionExports.hpp"
+#include "FunctionWrapper.hpp"
 
 
 namespace
 {
 
+	MAKE_FUNCTION_WRAPPER1(bool, isPDBBackboneAtom, CDPL::Chem::Atom&);
+	
+	MAKE_FUNCTION_WRAPPER3(bool, areInSameResidue, CDPL::Chem::Atom&, CDPL::Chem::Atom&, unsigned int);
+
+	MAKE_FUNCTION_WRAPPER6(void, extractResidueSubstructure, CDPL::Chem::Atom&, CDPL::Chem::MolecularGraph&, CDPL::Chem::Fragment&, bool, unsigned int, bool);
+
+	bool matchesResidueInfoWrapper1(CDPL::Chem::Atom& atom, const std::string& res_code, const std::string& chain_id, 
+								   long res_seq_no, char ins_code, std::size_t model_no, const std::string& atom_name, long serial_no) 
+	{
+		return CDPL::Biomol::matchesResidueInfo(atom, (res_code.empty() ? 0 : res_code.c_str()), (chain_id.empty() ? 0 : chain_id.c_str()), 
+												res_seq_no, ins_code, model_no, (atom_name.empty() ? 0 : atom_name.c_str()), serial_no);
+ 	}
+
+	MAKE_FUNCTION_WRAPPER5(void, extractEnvironmentResidues, CDPL::Chem::MolecularGraph&, CDPL::Chem::MolecularGraph&, 
+						   CDPL::Chem::Fragment&, double, bool);
+
+	MAKE_FUNCTION_WRAPPER6(void, extractEnvironmentResidues, CDPL::Chem::MolecularGraph&, CDPL::Chem::MolecularGraph&, 
+						   CDPL::Chem::Fragment&, const CDPL::Chem::Atom3DCoordinatesFunction&, double, bool);
+	MAKE_FUNCTION_WRAPPER6(void, extractProximalAtoms, CDPL::Chem::MolecularGraph&, CDPL::Chem::MolecularGraph&, 
+						   CDPL::Chem::Fragment&, double, bool, bool);
+
+	MAKE_FUNCTION_WRAPPER7(void, extractProximalAtoms, CDPL::Chem::MolecularGraph&, CDPL::Chem::MolecularGraph&, 
+						   CDPL::Chem::Fragment&, const CDPL::Chem::Atom3DCoordinatesFunction&, double, bool, bool);
+
+	bool matchesResidueInfoWrapper2(CDPL::Chem::MolecularGraph& molgraph, const std::string& res_code, const std::string& chain_id, 
+								   long res_seq_no, char ins_code, std::size_t model_no) 
+	{
+		return CDPL::Biomol::matchesResidueInfo(molgraph, (res_code.empty() ? 0 : res_code.c_str()), (chain_id.empty() ? 0 : chain_id.c_str()), 
+												res_seq_no, ins_code, model_no);
+ 	}
+
+	MAKE_FUNCTION_WRAPPER6(void, extractResidueSubstructures, CDPL::Chem::AtomContainer&, CDPL::Chem::MolecularGraph&, CDPL::Chem::Fragment&, bool, unsigned int, bool);
+	
 	boost::python::ssize_t findResidueAtomWrapper(PyObject* cont, boost::python::ssize_t idx, const std::string& res_code, const std::string& chain_id, 
-									   long res_seq_no, char ins_code, std::size_t model_no, const std::string& atom_name, std::size_t serial_no) 
+									   long res_seq_no, char ins_code, std::size_t model_no, const std::string& atom_name, long serial_no) 
     {
 		using namespace boost;
 
@@ -68,7 +103,7 @@ namespace
     }
 
     boost::python::ssize_t findResidueWrapper(PyObject* cont, boost::python::ssize_t idx, const std::string& res_code, const std::string& chain_id, 
-											  long res_seq_no, char ins_code, std::size_t model_no, const std::string& atom_name, std::size_t serial_no) 
+											  long res_seq_no, char ins_code, std::size_t model_no, const std::string& atom_name, long serial_no) 
     {
 		using namespace boost;
 
@@ -111,12 +146,48 @@ void CDPLPythonBiomol::exportUtilityFunctions()
     using namespace boost;
     using namespace CDPL;
 
+	python::scope().attr("IGNORE_SEQUENCE_NO") = Biomol::IGNORE_SEQUENCE_NO;
+	python::scope().attr("IGNORE_SERIAL_NO") = Biomol::IGNORE_SERIAL_NO;
+
+	python::def("isPDBBackboneAtom", &isPDBBackboneAtomWrapper1, python::arg("atom"));
+
+	python::def("areInSameResidue", &areInSameResidueWrapper3, 
+				(python::arg("atom1"), python::arg("atom2"), python::arg("flags") = Biomol::AtomPropertyFlag::DEFAULT));
+	python::def("extractResidueSubstructure", &extractResidueSubstructureWrapper6,
+				(python::arg("atom"), python::arg("molgraph"), python::arg("res_substruct"), 
+				 python::arg("cnctd_only") = false, python::arg("flags") = Biomol::AtomPropertyFlag::DEFAULT, python::arg("append") = false));
+	python::def("matchesResidueInfo", &matchesResidueInfoWrapper1, 
+				(python::arg("atom"), python::arg("res_code") = "", python::arg("chain_id") = "", 
+				 python::arg("res_seq_no") = Biomol::IGNORE_SEQUENCE_NO, python::arg("ins_code") = char(0), python::arg("model_no") = 0, 
+				 python::arg("atom_name") = "", python::arg("serial_no") = Biomol::IGNORE_SERIAL_NO));
+	python::def("setHydrogenResidueSequenceInfo", &Biomol::setHydrogenResidueSequenceInfo, 
+				(python::arg("molgraph"), python::arg("overwrite"), python::arg("flags") = Biomol::AtomPropertyFlag::DEFAULT));
+	python::def("extractEnvironmentResidues", &extractEnvironmentResiduesWrapper5, 
+				(python::arg("core"), python::arg("macromol"), python::arg("env_residues"),
+				 python::arg("max_dist"), python::arg("append") = false));
+	python::def("extractEnvironmentResidues", &extractEnvironmentResiduesWrapper6, 
+				(python::arg("core"), python::arg("macromol"), python::arg("env_residues"),
+				 python::arg("coords_func"), python::arg("max_dist"), python::arg("append") = false));
+	python::def("extractProximalAtoms", &extractProximalAtomsWrapper6, 
+				(python::arg("core"), python::arg("macromol"), python::arg("env_atoms"),
+				 python::arg("max_dist"), python::arg("inc_core_atoms") = false, python::arg("append") = false));
+	python::def("extractProximalAtoms", &extractProximalAtomsWrapper7, 
+				(python::arg("core"), python::arg("macromol"), python::arg("env_atoms"),
+				 python::arg("coords_func"), python::arg("max_dist"), python::arg("inc_core_atoms") = false, python::arg("append") = false));
+	python::def("matchesResidueInfo", &matchesResidueInfoWrapper2, 
+				(python::arg("molgraph"), python::arg("res_code") = "", python::arg("chain_id") = "", 
+				 python::arg("res_seq_no") = Biomol::IGNORE_SEQUENCE_NO, python::arg("ins_code") = char(0), python::arg("model_no") = 0));
+	python::def("extractResidueSubstructures", &extractResidueSubstructuresWrapper6,
+				(python::arg("cntnr"), python::arg("molgraph"), python::arg("res_substructs"), 
+				 python::arg("cnctd_only") = false, python::arg("flags") = Biomol::AtomPropertyFlag::DEFAULT,
+				 python::arg("append") = false));
+   
     python::def("findResidueAtom", &findResidueAtomWrapper, 
 				(python::arg("cntnr"), python::arg("idx"),  python::arg("res_code") = "", python::arg("chain_id") = "", 
-				 python::arg("res_seq_no") = 0, python::arg("ins_code") = char(0), python::arg("model_no") = 0, 
-				 python::arg("atom_name") = "", python::arg("serial_no") = 0));
+				 python::arg("res_seq_no") = Biomol::IGNORE_SEQUENCE_NO, python::arg("ins_code") = char(0), python::arg("model_no") = 0, 
+				 python::arg("atom_name") = "", python::arg("serial_no") = Biomol::IGNORE_SERIAL_NO));
     python::def("findResidue", &findResidueWrapper, 
 				(python::arg("cntnr"), python::arg("idx"),  python::arg("res_code") = "", python::arg("chain_id") = "", 
-				 python::arg("res_seq_no") = 0, python::arg("ins_code") = char(0), python::arg("model_no") = 0, 
-				 python::arg("atom_name") = "", python::arg("serial_no") = 0));
+				 python::arg("res_seq_no") = Biomol::IGNORE_SEQUENCE_NO, python::arg("ins_code") = char(0), python::arg("model_no") = 0, 
+				 python::arg("atom_name") = "", python::arg("serial_no") = Biomol::IGNORE_SERIAL_NO));
 }

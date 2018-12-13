@@ -29,6 +29,7 @@
 
 #include <iosfwd>
 #include <vector>
+#include <cstddef>
 
 #include <msgpack.hpp>
 #include <mmtf.hpp>
@@ -69,15 +70,13 @@ namespace CDPL
 			bool readRecordData(std::istream& is, msgpack::object_handle& handle) const;
 
 			void buildMolecule(Chem::Molecule& mol, const mmtf::StructureData& struct_data);
+			
+			void addBond(Chem::Molecule& mol, std::size_t atom1_idx, std::size_t atom2_idx, std::size_t order) const;
 
-			void getResidueAltLocAtoms();
-			void removeAltLocAtoms(Chem::Molecule& mol) const;
-
-			typedef std::vector<Chem::Atom*> AtomList;
+			typedef std::vector<Chem::Atom*> AtomArray;
 
 			const Base::DataIOBase& ioBase;
-			AtomList                residueAtoms;
-			AtomList                altLocAtomLists;
+			AtomArray               atoms;
 		};
     }
 }
