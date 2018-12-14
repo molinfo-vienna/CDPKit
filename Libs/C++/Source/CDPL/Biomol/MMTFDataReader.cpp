@@ -57,23 +57,7 @@ using namespace CDPL;
 namespace
 {
 
-	const std::size_t DATA_BLOCK_SIZE = 1024 * 4;
-
-	struct ResidueAtomCmpFunc : public std::binary_function<const Chem::Atom*, const Chem::Atom*, bool>
-	{
-
-		bool operator()(const Chem::Atom* atom1, const Chem::Atom* atom2) const {
-			using namespace Biomol;
-
-			const std::string& res_atom_name1 = getResidueAtomName(*atom1);
-			const std::string& res_atom_name2 = getResidueAtomName(*atom2);
-
-			if (res_atom_name1 == res_atom_name2)
-				return (getAltLocationID(*atom1) < getAltLocationID(*atom2));
-	
-			return (res_atom_name1 < res_atom_name2);
-		}
-	};
+	const std::size_t DATA_BLOCK_SIZE = 1024 * 64;
 }
 
 
