@@ -140,7 +140,7 @@ void Biomol::extractEnvironmentResidues(const Chem::MolecularGraph& core, const 
 
 	for (Math::Vector3DArray::ConstElementIterator c_it = core_coords.getElementsBegin(), c_end = core_coords.getElementsEnd(); c_it != c_end; ++c_it) {
 	    if (length(atom_pos - *c_it) <= max_dist) {
-		extractResidueSubstructure(atom, macromol, env_residues, true, true);
+		extractResidueSubstructure(atom, macromol, env_residues, true, Chem::AtomPropertyFlag::DEFAULT, true);
 		break;
 	    }
 	}

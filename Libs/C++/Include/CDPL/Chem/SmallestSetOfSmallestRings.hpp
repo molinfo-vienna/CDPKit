@@ -36,7 +36,6 @@
 
 #include <vector>
 #include <functional>
-#include <iterator>
 #include <cstddef>
 #include <set>
 
@@ -44,6 +43,7 @@
 
 #include "CDPL/Chem/APIPrefix.hpp"
 #include "CDPL/Chem/FragmentList.hpp"
+#include "CDPL/Chem/CyclicSubstructure.hpp"
 #include "CDPL/Util/BitSet.hpp"
 
 
@@ -99,8 +99,7 @@ namespace CDPL
 			SmallestSetOfSmallestRings& operator=(const SmallestSetOfSmallestRings&);
 
 			void init(const MolecularGraph&);
-			bool stripTermAtoms(const Atom&, std::size_t, const Atom* = 0);
-
+	
 			void findSSSR();
 			void createRingFragments();
 
@@ -128,8 +127,6 @@ namespace CDPL
 
 				std::size_t getIndex() const;
 
-				bool stripped() const;
-
 				static void connect(Controller*, TNode*, TNode*, std::size_t, std::size_t);
 
 			private:
@@ -140,7 +137,6 @@ namespace CDPL
 				NodeList      nbrNodes;
 				BondIndexList bondIndices;
 				MessageBuffer receiveBuffer;
-				MessageBuffer mergeBuffer;
 				MessageBuffer sendBuffer;
 				std::size_t   index;
 			};
@@ -163,9 +159,6 @@ namespace CDPL
 
 				bool containsBond(std::size_t const);
 
-				void setCollisionFlag();
-				bool collided() const;
-
 				const TNode* getFirstNode() const;
 				const TNode* getLastNode() const;
 				
@@ -173,7 +166,7 @@ namespace CDPL
 				std::size_t getMaxBondIndex() const;
 				std::size_t getSize() const;
 
-				Fragment::SharedPointer createRing(const MolecularGraph*) const;
+				Fragment::SharedPointer createRing(const MolecularGraph&) const;
 
 				PathMessage& operator^=(const PathMessage&);
 
@@ -189,7 +182,6 @@ namespace CDPL
 				std::size_t  maxBondIdx;
 				const TNode* firstNode;
 				const TNode* lastNode;
-				bool         collFlag;
 			};
 
 			struct TestMatrixRowCmpFunc : public std::binary_function<const PathMessage*, const PathMessage*, bool>
@@ -203,10 +195,8 @@ namespace CDPL
 			typedef std::vector<PathMessage::SharedPointer> AllocMessageList;
 			typedef std::set<const PathMessage*, PathMessage::LessCmpFunc> ProcRingSet;
 
-			const MolecularGraph*    molGraph;
+			CyclicSubstructure       cycleSubstruct;
 			NodeArray                nodes;
-			Util::BitSet             strippedAtomMask;
-			Util::BitSet             visAtomMask;
 			AllocMessageList         allocMessages;
 			MessageList              freeMessages;
 			ProcRingSet              procRings;

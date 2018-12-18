@@ -27,7 +27,6 @@
 #include "StaticInit.hpp"
 
 #include <algorithm>
-#include <cassert>
 
 #include <boost/bind.hpp>
 
@@ -60,12 +59,7 @@ void Chem::SmallestSetOfSmallestRings::perceive(const MolecularGraph& molgraph)
 
 void Chem::SmallestSetOfSmallestRings::init(const MolecularGraph& molgraph)
 {
-	molGraph = &molgraph;
-
-	long nullity = calcCyclomaticNumber(molgraph);
-
 	sssr.clear();
-
 	procRings.clear();
 	evenRings.clear();
 	linDepTestMtx.clear();
@@ -73,95 +67,33 @@ void Chem::SmallestSetOfSmallestRings::init(const MolecularGraph& molgraph)
 	freeMessages.reserve(allocMessages.size());
 
 	std::transform(allocMessages.begin(), allocMessages.end(), std::back_inserter(freeMessages),
-				   std::mem_fun_ref(&PathMessage::SharedPointer::get));
+				   boost::bind(&PathMessage::SharedPointer::get, _1));
 
 	testRing = allocMessage();
 	linDepTestRing = allocMessage();
 
-	std::size_t num_atoms = molgraph.getNumAtoms();
-	std::size_t num_bonds = molgraph.getNumBonds();
+	cycleSubstruct.perceive(molgraph);
 
-	strippedAtomMask.resize(num_atoms);
-	strippedAtomMask.reset();
+	std::size_t num_atoms = cycleSubstruct.getNumAtoms();
+	std::size_t num_bonds = cycleSubstruct.getNumBonds();
 
-	visAtomMask.resize(num_atoms);
-	visAtomMask.reset();
-
-	for (std::size_t i = 0; i < num_atoms; i++)
-		if (!visAtomMask.test(i))
-			stripTermAtoms(molGraph->getAtom(i), i);
+	sssrSize = num_bonds + getComponentCount(cycleSubstruct) - num_atoms;
 
 	nodes.clear();
 	nodes.reserve(num_atoms);
 
 	std::generate_n(std::back_inserter(nodes), num_atoms, Internal::RangeGenerator<std::size_t>());
 
-	MolecularGraph::ConstBondIterator bonds_end = molgraph.getBondsEnd();
-
-	for (MolecularGraph::ConstBondIterator it = molgraph.getBondsBegin(); it != bonds_end; ++it) {
+	for (Fragment::ConstBondIterator it = cycleSubstruct.getBondsBegin(), end = cycleSubstruct.getBondsEnd(); it != end; ++it) {
 		const Bond& bond = *it;
 		const Atom& atom1 = bond.getBegin();
-
-		if (!molgraph.containsAtom(atom1))
-			continue;
-
-		std::size_t atom1_idx = molgraph.getAtomIndex(atom1);
-
-		if (strippedAtomMask.test(atom1_idx))
-			continue;
-
 		const Atom& atom2 = bond.getEnd();
 
-		if (!molgraph.containsAtom(atom2))
-			continue;
+		std::size_t atom1_idx = cycleSubstruct.getAtomIndex(atom1);
+		std::size_t atom2_idx = cycleSubstruct.getAtomIndex(atom2);
 
-		std::size_t atom2_idx = molgraph.getAtomIndex(atom2);
-
-		if (strippedAtomMask.test(atom2_idx))
-			continue;
-
-		TNode::connect(this, &nodes[atom1_idx], &nodes[atom2_idx], molgraph.getBondIndex(bond), num_bonds);
+		TNode::connect(this, &nodes[atom1_idx], &nodes[atom2_idx], cycleSubstruct.getBondIndex(bond), num_bonds);
 	}
-
-	assert(nullity >= 0);
-
-	sssrSize = std::size_t(nullity);
-}
-
-bool Chem::SmallestSetOfSmallestRings::stripTermAtoms(const Atom& atom, std::size_t atom_idx, const Atom* from_atom)
-{
-	visAtomMask.set(atom_idx);
-
-	Atom::ConstBondIterator b_it = atom.getBondsBegin();
-	bool only_term_nbrs = true;
-
-	for (Atom::ConstAtomIterator a_it = atom.getAtomsBegin(), a_end = atom.getAtomsEnd(); a_it != a_end; ++a_it, ++b_it) {
-		const Atom& nbr_atom = *a_it;
-
-		if (&nbr_atom == from_atom)
-			continue;
-
-		if (!molGraph->containsAtom(nbr_atom))
-			continue;
-
-		if (!molGraph->containsBond(*b_it))
-			continue;
-
-		std::size_t nbr_atom_idx = molGraph->getAtomIndex(nbr_atom);
-	
-		if (visAtomMask.test(nbr_atom_idx)) {
-			only_term_nbrs = false;
-			continue;
-		}
-
-		if (!stripTermAtoms(nbr_atom, nbr_atom_idx, &atom))
-			only_term_nbrs = false;
-	}
-
-	if (only_term_nbrs)
-		strippedAtomMask.set(atom_idx);
-
-	return only_term_nbrs;
 }
 
 void Chem::SmallestSetOfSmallestRings::findSSSR()
@@ -172,14 +104,13 @@ void Chem::SmallestSetOfSmallestRings::findSSSR()
 		bool new_messages = false;
 		
 		for (std::size_t i = 0; i < num_nodes; i++)
-			if (!nodes[i].stripped())
-				new_messages |= nodes[i].send(this);
+			new_messages |= nodes[i].send(this);
 
-		if (!new_messages)
+		if (!new_messages) 
 			return;
-		
+
 		for (std::size_t i = 0; i < num_nodes; i++)
-			if (!nodes[i].stripped() && nodes[i].receive(this))
+			if (nodes[i].receive(this))
 				return;
 		
 		processEvenRings();
@@ -191,7 +122,7 @@ void Chem::SmallestSetOfSmallestRings::createRingFragments()
 	MessageList::const_iterator sssr_end = sssr.end();
 
 	for (MessageList::const_iterator it = sssr.begin(); it != sssr_end; ++it)
-		addElement((*it)->createRing(molGraph));
+		addElement((*it)->createRing(cycleSubstruct));
 }
 
 bool Chem::SmallestSetOfSmallestRings::sssrComplete() const
@@ -245,7 +176,7 @@ bool Chem::SmallestSetOfSmallestRings::processCollision(const PathMessage* msg1,
 	if (!testRing->join(msg1, msg2))
 		return false;
 	
-	if (!procRings.insert(testRing).second)
+	if (!procRings.insert(testRing).second) 
 		return false;
 
 	if (odd)
@@ -270,6 +201,8 @@ void Chem::SmallestSetOfSmallestRings::processEvenRings()
 
 void Chem::SmallestSetOfSmallestRings::processRing(PathMessage* ring)
 {
+// TODO: check for spiro rings
+
 	TestMatrixRowCmpFunc search_func;
 
 	MessageList::iterator mtx_end = linDepTestMtx.end();
@@ -306,36 +239,30 @@ bool Chem::SmallestSetOfSmallestRings::TNode::send(Controller* controller)
 	std::size_t num_messages = sendBuffer.size();
 	bool new_messages = false;
 	
-	if (num_nbr_nodes == 1) {
-		if (num_messages > 0) 
-			controller->freeMessage(sendBuffer.front());
+	for (std::size_t i = 0; i < num_messages; i++) {
+		PathMessage* msg = sendBuffer[i];
 
-	} else {
-		for (std::size_t i = 0; i < num_messages; i++) {
-			PathMessage* msg = sendBuffer[i];
-	
-			for (std::size_t j = 0; j < num_nbr_nodes; j++) {
-				TNode* nbr_node = nbrNodes[j];
+		for (std::size_t j = 0; j < num_nbr_nodes; j++) {
+			TNode* nbr_node = nbrNodes[j];
 
-				if (nbr_node == msg->getLastNode() || nbr_node == msg->getFirstNode()) // check message return to sender cases
-					continue;
+			if (nbr_node == msg->getLastNode() || nbr_node == msg->getFirstNode())  // check message return to sender cases 
+				continue;
 
-				std::size_t bond_idx = bondIndices[j]; 
+			std::size_t bond_idx = bondIndices[j]; 
 
-				if (msg->containsBond(bond_idx)) // check bond path collision
-					continue;
+			if (msg->containsBond(bond_idx)) // check bond path collision 
+				continue;
 
-				PathMessage* new_msg = controller->allocMessage();		
+			PathMessage* new_msg = controller->allocMessage();		
 
-				new_msg->copy(msg);
-				new_msg->push(this, bond_idx);
+			new_msg->copy(msg);
+			new_msg->push(this, bond_idx);
 
-				new_messages = true;
-				nbr_node->receiveBuffer.push_back(new_msg);
-			}
-
-			controller->freeMessage(msg);
+			new_messages = true;
+			nbr_node->receiveBuffer.push_back(new_msg);
 		}
+
+		controller->freeMessage(msg);
 	}
 
 	sendBuffer.clear();
@@ -345,67 +272,35 @@ bool Chem::SmallestSetOfSmallestRings::TNode::send(Controller* controller)
 
 bool Chem::SmallestSetOfSmallestRings::TNode::receive(Controller* controller)
 {
-	mergeBuffer.clear();
-
+	MessageBuffer::iterator rcv_buf_beg = receiveBuffer.begin();
 	MessageBuffer::iterator rcv_buf_end = receiveBuffer.end();
 
-	for (MessageBuffer::iterator it = receiveBuffer.begin(); it != rcv_buf_end; ++it) {
-		PathMessage* msg1 = *it;
-
-		if (msg1->collided()) {
-			controller->freeMessage(msg1);
-			continue;
-		}
-
-		const TNode* first_node = msg1->getFirstNode();
-
-		std::size_t first_bnd_idx = msg1->getFirstBondIndex();
-
-		for (MessageBuffer::iterator it2 = it + 1; it2 != rcv_buf_end; ++it2) {
-			PathMessage* msg2 = *it2;
-
-			if (!msg2->collided() && first_node == msg2->getFirstNode() 
-				&& first_bnd_idx == msg2->getFirstBondIndex()) 		// direct edge collision
-
-				msg2->setCollisionFlag();
-		}
-
-		mergeBuffer.push_back(msg1);
-	}
-
-	receiveBuffer.clear();
-
-	MessageBuffer::iterator mrg_buf_end = mergeBuffer.end();
-
-	for (MessageBuffer::iterator it = mergeBuffer.begin(); it != mrg_buf_end; ) {
+	for (MessageBuffer::iterator it = rcv_buf_beg; it != rcv_buf_end; ) {
 		PathMessage* msg1 = *it;
 		const TNode* first_node = msg1->getFirstNode();
 		std::size_t first_bnd_idx = msg1->getFirstBondIndex();
 
-		for (MessageBuffer::iterator it2 = ++it; it2 != mrg_buf_end; ++it2) {
+		for (MessageBuffer::iterator it2 = ++it; it2 != rcv_buf_end; ++it2) {
 			PathMessage* msg2 = *it2;
 
 			if (first_node == msg2->getFirstNode()) {				 // node collision
+				if (first_bnd_idx == msg2->getFirstBondIndex())      // edge collision
+					continue;
+
 				if (controller->processCollision(msg1, msg2, false))				
 					return true;
 
-			} else if (first_bnd_idx == msg2->getFirstBondIndex()) {  // inverse edge collision
+			} else if (first_bnd_idx == msg2->getFirstBondIndex()) { // inverse edge collision
 				if (controller->processCollision(msg1, msg2, true))				
 					return true; 
 
-			} else {
-				continue;
-			}
-
-			msg1->setCollisionFlag();
-			msg2->setCollisionFlag();
+			}                                                        // no collision
 		}
-
-		if (msg1->collided())
-			controller->freeMessage(msg1);
-		else 
-			sendBuffer.push_back(msg1);
 	}
+
+	sendBuffer.swap(receiveBuffer);
+
+	receiveBuffer.clear();
 
 	return false;
 }
@@ -413,11 +308,6 @@ bool Chem::SmallestSetOfSmallestRings::TNode::receive(Controller* controller)
 std::size_t Chem::SmallestSetOfSmallestRings::TNode::getIndex() const
 {
 	return index;
-}
-
-bool Chem::SmallestSetOfSmallestRings::TNode::stripped() const
-{
-	return nbrNodes.empty();
 }
 
 void Chem::SmallestSetOfSmallestRings::TNode::connect(Controller* controller, TNode* node1, TNode* node2, 
@@ -449,27 +339,21 @@ void Chem::SmallestSetOfSmallestRings::PathMessage::init(const TNode* first_node
 	maxBondIdx = first_bnd_idx + 1;
 	firstNode = first_node;
 	lastNode = first_node;
-	collFlag = false;
 }
 
 void Chem::SmallestSetOfSmallestRings::PathMessage::push(const TNode* last_node, std::size_t idx)
 {
-	lastNode = last_node;
-
 	bondPath.set(idx);
 
+	lastNode = last_node;
 	maxBondIdx = std::max(maxBondIdx, idx + 1);
-
-	collFlag = false;
 }
 
 void Chem::SmallestSetOfSmallestRings::PathMessage::copy(const PathMessage* msg)
 {
 	bondPath = msg->bondPath;
-
 	firstBondIdx = msg->firstBondIdx;
 	maxBondIdx = msg->maxBondIdx;
-
 	firstNode = msg->firstNode;
 }
 
@@ -480,15 +364,13 @@ bool Chem::SmallestSetOfSmallestRings::PathMessage::join(const PathMessage* msg1
 	bondPath.reset(msg1->firstBondIdx);
 	bondPath &= msg2->bondPath;
 
-	if (bondPath.any())  // messages contain common bonds other than the first
+	if (bondPath.any())   // messages contain common bonds other than the first
 		return false;
 
 	bondPath = msg1->bondPath;
-
 	bondPath |= msg2->bondPath;
 
 	firstNode = msg1->firstNode;
-
 	maxBondIdx = std::max(msg1->maxBondIdx, msg2->maxBondIdx);
 
 	return true;
@@ -497,16 +379,6 @@ bool Chem::SmallestSetOfSmallestRings::PathMessage::join(const PathMessage* msg1
 bool Chem::SmallestSetOfSmallestRings::PathMessage::containsBond(std::size_t bond_idx)
 {
 	return bondPath.test(bond_idx);
-}
-
-void Chem::SmallestSetOfSmallestRings::PathMessage::setCollisionFlag()
-{
-	collFlag = true;
-}
-
-bool Chem::SmallestSetOfSmallestRings::PathMessage::collided() const
-{
-	return collFlag;
 }
 
 const Chem::SmallestSetOfSmallestRings::TNode* Chem::SmallestSetOfSmallestRings::PathMessage::getFirstNode() const
@@ -534,12 +406,12 @@ std::size_t Chem::SmallestSetOfSmallestRings::PathMessage::getSize() const
 	return bondPath.count();
 }
 
-Chem::Fragment::SharedPointer Chem::SmallestSetOfSmallestRings::PathMessage::createRing(const MolecularGraph* molgraph) const
+Chem::Fragment::SharedPointer Chem::SmallestSetOfSmallestRings::PathMessage::createRing(const MolecularGraph& molgraph) const
 {
 	Fragment::SharedPointer ring_ptr(new Fragment());
 	Fragment& ring = *ring_ptr;
 
-	const Atom* atom = &molgraph->getAtom(firstNode->getIndex());
+	const Atom* atom = &molgraph.getAtom(firstNode->getIndex());
 
 	ring.addAtom(*atom);
 
@@ -550,10 +422,10 @@ Chem::Fragment::SharedPointer Chem::SmallestSetOfSmallestRings::PathMessage::cre
 		for ( ; it != bonds_end; ++it) {
 			const Bond& bond = *it;
 
-			if (!molgraph->containsBond(bond))
+			if (!molgraph.containsBond(bond))
 				continue;
 
-			if (!ring.containsBond(bond) && bondPath.test(molgraph->getBondIndex(bond))) {
+			if (!ring.containsBond(bond) && bondPath.test(molgraph.getBondIndex(bond))) {
 				ring.addBond(bond);
 				atom = &bond.getNeighbor(*atom);
 				break;
