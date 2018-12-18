@@ -106,7 +106,7 @@ namespace CDPL
 			bool sssrComplete() const;
 
 			PathMessage* allocMessage();
-			PathMessage* allocMessage(const TNode*, std::size_t, std::size_t);
+			PathMessage* allocMessage(std::size_t, std::size_t, std::size_t, std::size_t);
 
 			void freeMessage(PathMessage*);
 
@@ -127,7 +127,7 @@ namespace CDPL
 
 				std::size_t getIndex() const;
 
-				static void connect(Controller*, TNode*, TNode*, std::size_t, std::size_t);
+				static void connect(Controller*, TNode*, TNode*, std::size_t, std::size_t, std::size_t);
 
 			private:
 				typedef std::vector<TNode*> NodeList;
@@ -148,23 +148,23 @@ namespace CDPL
 				typedef boost::shared_ptr<PathMessage> SharedPointer;
 
 				PathMessage() {} 
-				PathMessage(const TNode*, std::size_t, std::size_t); 
+				PathMessage(std::size_t, std::size_t, std::size_t, std::size_t); 
 
-				void init(const TNode*, std::size_t, std::size_t);
+				void init(std::size_t, std::size_t, std::size_t, std::size_t);
 
 				void copy(const PathMessage*);
 				bool join(const PathMessage*, const PathMessage*);
 
-				void push(const TNode*, std::size_t);
+				void push(std::size_t, std::size_t);
 
+				bool containsAtom(std::size_t const);
 				bool containsBond(std::size_t const);
 
-				const TNode* getFirstNode() const;
-				const TNode* getLastNode() const;
-				
+				std::size_t getFirstAtomIndex() const;
 				std::size_t getFirstBondIndex() const;
+				
 				std::size_t getMaxBondIndex() const;
-				std::size_t getSize() const;
+				std::size_t getNumBonds() const;
 
 				Fragment::SharedPointer createRing(const MolecularGraph&) const;
 
@@ -177,11 +177,11 @@ namespace CDPL
 				};
 
 			private:
+				Util::BitSet atomPath;
 				Util::BitSet bondPath;
+				std::size_t  firstAtomIdx;
 				std::size_t  firstBondIdx;
 				std::size_t  maxBondIdx;
-				const TNode* firstNode;
-				const TNode* lastNode;
 			};
 
 			struct TestMatrixRowCmpFunc : public std::binary_function<const PathMessage*, const PathMessage*, bool>

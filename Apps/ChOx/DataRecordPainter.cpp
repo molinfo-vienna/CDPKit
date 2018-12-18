@@ -99,7 +99,6 @@ void DataRecordPainter::drawRecord(int rec_no, double vp_width, double vp_height
 				return;
 				
 			} catch (const std::exception& e) {
-				//std::cerr << e.what() << std::endl;
 				dataView = DataViewPointer();
 			}
 
