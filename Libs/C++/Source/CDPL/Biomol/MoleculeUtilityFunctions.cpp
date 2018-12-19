@@ -31,6 +31,7 @@
 #include <algorithm>
 #include <functional>
 #include <iterator>
+#include <cstddef>
 
 #include <boost/bind.hpp>
 
@@ -39,7 +40,7 @@
 #include "CDPL/Chem/Molecule.hpp"
 #include "CDPL/Internal/AddressOf.hpp"
 
-
+#include <iostream>
 using namespace CDPL; 
 
 
@@ -70,8 +71,8 @@ namespace
 	    if (res_code1 > res_code2)
 		return false;
  
-	    std::size_t res_seq_no1 = getResidueSequenceNumber(*atom1);
-	    std::size_t res_seq_no2 = getResidueSequenceNumber(*atom2);
+	    long res_seq_no1 = getResidueSequenceNumber(*atom1);
+	    long res_seq_no2 = getResidueSequenceNumber(*atom2);
 
 	    if (res_seq_no1 < res_seq_no2)
 		return true;
@@ -97,7 +98,37 @@ bool Biomol::combineInterferingResidueCoordinates(Chem::Molecule& mol, double ma
     std::transform(mol.getAtomsBegin(), mol.getAtomsEnd(), std::back_inserter(atoms),
 		   boost::bind(Internal::AddressOf<Atom>(), _1));
 
+    if (atoms.empty())
+	return false;
+    
     std::sort(atoms.begin(), atoms.end(), AtomLessCompareFunc());
 
+    std::vector<std::size_t> res_atom_ranges;
+    
+    for (std::size_t i = 0, num_atoms = atoms.size(); i < num_atoms; ) {
+	std::size_t model_no = getModelNumber(*atoms[i]);
+
+	for ( ; i < num_atoms && getModelNumber(*atoms[i]) == model_no; ) {
+	    const std::string& res_code = getResidueCode(*atoms[i]);
+	
+	    res_atom_ranges.clear();
+
+	    //std::cerr << "------------------------" << std::endl;
+	    
+	    for ( ; i < num_atoms && getResidueCode(*atoms[i]) == res_code && getModelNumber(*atoms[i]) == model_no; ) {
+		long res_seq_no = getResidueSequenceNumber(*atoms[i]);
+	    
+		res_atom_ranges.push_back(i);
+
+		//std::cerr << i << ": model_no = " << model_no << ", res_code = " << res_code << ", res_seq_no = " << res_seq_no << std::endl;
+		
+		for (i++; i < num_atoms && getResidueCode(*atoms[i]) == res_code && getModelNumber(*atoms[i]) == model_no &&
+			 getResidueSequenceNumber(*atoms[i]) == res_seq_no; i++);
+
+		res_atom_ranges.push_back(i);
+	    }
+	}
+    }
+    
     return false;
 }
