@@ -35,7 +35,7 @@
 #include "CDPL/Biomol/AtomFunctions.hpp"
 #include "CDPL/Biomol/MolecularGraphFunctions.hpp"
 #include "CDPL/Biomol/ControlParameterFunctions.hpp"
-#include "CDPL/Biomol/ControlParameterDefault.hpp"
+#include "CDPL/Biomol/UtilityFunctions.hpp"
 #include "CDPL/Biomol/PDBData.hpp"
 #include "CDPL/Chem/Molecule.hpp"
 #include "CDPL/Chem/Atom.hpp"
@@ -76,6 +76,9 @@ bool Biomol::MMTFDataReader::readRecord(std::istream& is, Chem::Molecule& mol)
 		throw Base::IOError("MMTFDataReader: got inconsistent MMTF data");
 
 	buildMolecule(mol, struct_data);
+
+	if (getCombineInterferingResidueCoordinatesParameter(ioBase))
+		combineInterferingResidueCoordinates(mol);
 
 	return true;
 }

@@ -231,6 +231,15 @@ namespace CDPL
 
 		CDPL_BIOMOL_API void clearPDBWriteCONECTRecordsReflectingBondOrderParameter(Base::ControlParameterContainer& cntnr);
 
+
+		CDPL_BIOMOL_API bool getCombineInterferingResidueCoordinatesParameter(const Base::ControlParameterContainer& cntnr);
+
+		CDPL_BIOMOL_API void setCombineInterferingResidueCoordinatesParameter(Base::ControlParameterContainer& cntnr, bool comb);
+
+		CDPL_BIOMOL_API bool hasCombineInterferingResidueCoordinatesParameter(const Base::ControlParameterContainer& cntnr);
+
+		CDPL_BIOMOL_API void clearCombineInterferingResidueCoordinatesParameter(Base::ControlParameterContainer& cntnr);
+
 		/**
 		 * @}
 		 */

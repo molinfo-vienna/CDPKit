@@ -34,6 +34,7 @@
 #include "CDPL/Chem/Atom.hpp"
 #include "CDPL/Chem/Bond.hpp"
 #include "CDPL/Chem/MolecularGraphFunctions.hpp"
+#include "CDPL/Base/Exceptions.hpp"
 #include "CDPL/Internal/RangeGenerator.hpp"
 
 
@@ -109,7 +110,7 @@ void Chem::SmallestSetOfSmallestRings::findSSSR()
 			new_messages |= nodes[i].send(this);
 
 		if (!new_messages) 
-			return;
+			throw Base::CalculationFailed("SmallestSetOfSmallestRings: SSSR incomplete");
 
 		for (std::size_t i = 0; i < num_nodes; i++)
 			if (nodes[i].receive(this))
@@ -288,7 +289,6 @@ bool Chem::SmallestSetOfSmallestRings::TNode::receive(Controller* controller)
 			} else if (first_bond_idx == msg2->getFirstBondIndex()) { // inverse edge collision
 				if (controller->processCollision(msg1, msg2, true))				
 					return true; 
-
 			}                                                        // no collision
 		}
 	}
@@ -361,11 +361,20 @@ void Chem::SmallestSetOfSmallestRings::PathMessage::copy(const PathMessage* msg)
 bool Chem::SmallestSetOfSmallestRings::PathMessage::join(const PathMessage* msg1, const PathMessage* msg2)
 {
 	bondPath = msg1->bondPath;
-
-	bondPath.reset(msg1->firstBondIdx);
 	bondPath &= msg2->bondPath;
 
+	bondPath.reset(msg1->firstBondIdx);
+
 	if (bondPath.any())   // messages contain common bonds other than the first
+		return false;
+
+	atomPath = msg1->atomPath;
+	atomPath &= msg2->atomPath;
+
+	atomPath.reset(msg1->firstAtomIdx);
+	atomPath.reset(msg2->firstAtomIdx);
+
+	if (atomPath.any())   // messages contain common atoms other than the origin atoms
 		return false;
 
 	bondPath = msg1->bondPath;

@@ -45,6 +45,7 @@ SET(cdpl-biomol_LIB_SRCS
     AtomUtilityFunctions.cpp
     AtomContainerUtilityFunctions.cpp
     MolecularGraphUtilityFunctions.cpp
+    MoleculeUtilityFunctions.cpp
    )
 
 LINK_LIBRARIES(${Boost_THREAD_LIBRARY} ${Boost_SYSTEM_LIBRARY})

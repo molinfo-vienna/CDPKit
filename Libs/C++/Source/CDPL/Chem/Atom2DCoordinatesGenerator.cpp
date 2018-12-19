@@ -226,7 +226,7 @@ void Chem::Atom2DCoordinatesGenerator::generate(const MolecularGraph& molgraph, 
 	calcRingPriorities();
 
 	layoutComponents(coords);
-	alignComponents(coords );
+	alignComponents(coords);
 }
 
 void Chem::Atom2DCoordinatesGenerator::init(const MolecularGraph& molgraph, Math::Vector2DArray& coords)

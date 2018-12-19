@@ -58,6 +58,7 @@ namespace CDPL
 			const bool PDB_WRITE_CONECT_RECORDS                            = true;
 			const bool PDB_WRITE_CONECT_RECORDS_FOR_ALL_BONDS              = false;
 			const bool PDB_WRITE_CONECT_RECORDS_REFLECTING_BOND_ORDER      = false;
+			const bool COMBINE_INTERFERING_RESIDUE_COORDINATES             = true;
 		}
 
 		void initControlParameterDefaults() {}

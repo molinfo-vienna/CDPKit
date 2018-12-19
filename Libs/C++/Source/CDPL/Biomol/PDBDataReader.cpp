@@ -47,6 +47,7 @@
 #include "CDPL/Biomol/ControlParameterFunctions.hpp"
 #include "CDPL/Biomol/MolecularGraphFunctions.hpp"
 #include "CDPL/Biomol/AtomFunctions.hpp"
+#include "CDPL/Biomol/UtilityFunctions.hpp"
 #include "CDPL/Biomol/PDBData.hpp"
 #include "CDPL/Base/DataIOBase.hpp"
 #include "CDPL/Base/Exceptions.hpp"
@@ -322,6 +323,10 @@ bool Biomol::PDBDataReader::readPDBFile(std::istream& is, Chem::Molecule& mol)
 
 	checkMandatoryRecords();
 	processAtomSequence(mol, false);
+
+	if (getCombineInterferingResidueCoordinatesParameter(ioBase))
+		combineInterferingResidueCoordinates(mol);
+
 	setBondOrdersFromResTemplates(mol);
 	perceiveBondOrders(mol);
 	calcAtomCharges(mol);

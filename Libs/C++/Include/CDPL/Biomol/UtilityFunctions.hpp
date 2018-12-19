@@ -52,6 +52,7 @@ namespace CDPL
 	{
 
 		class Fragment;
+		class Molecule;
 	}
 	
     namespace Biomol 
@@ -67,6 +68,8 @@ namespace CDPL
 
 
 		CDPL_BIOMOL_API bool isPDBBackboneAtom(const Chem::Atom& atom);
+
+		CDPL_BIOMOL_API bool combineInterferingResidueCoordinates(Chem::Molecule& mol, double max_rmsd = 1.0);
 
 		CDPL_BIOMOL_API void extractProximalAtoms(const Chem::MolecularGraph& core, const Chem::MolecularGraph& macromol, Chem::Fragment& env_atoms, 
 												  double max_dist, bool inc_core_atoms = false, bool append = false);

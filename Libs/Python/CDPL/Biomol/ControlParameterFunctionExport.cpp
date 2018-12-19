@@ -80,6 +80,7 @@ namespace
 	MAKE_CONTROL_PARAM_FUNC_WRAPPERS(bool, PDBWriteCONECTRecords)
 	MAKE_CONTROL_PARAM_FUNC_WRAPPERS(bool, PDBWriteCONECTRecordsForAllBonds)
 	MAKE_CONTROL_PARAM_FUNC_WRAPPERS(bool, PDBWriteCONECTRecordsReflectingBondOrder)
+	MAKE_CONTROL_PARAM_FUNC_WRAPPERS(bool, CombineInterferingResidueCoordinates)
 }
 
 
@@ -108,4 +109,5 @@ void CDPLPythonBiomol::exportControlParameterFunctions()
 	EXPORT_CONTROL_PARAM_FUNCS(PDBWriteCONECTRecords, write)
 	EXPORT_CONTROL_PARAM_FUNCS(PDBWriteCONECTRecordsForAllBonds, write)
 	EXPORT_CONTROL_PARAM_FUNCS(PDBWriteCONECTRecordsReflectingBondOrder, write)
+	EXPORT_CONTROL_PARAM_FUNCS(CombineInterferingResidueCoordinates, comb)
 }
