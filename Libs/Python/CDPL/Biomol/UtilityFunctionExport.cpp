@@ -152,7 +152,7 @@ void CDPLPythonBiomol::exportUtilityFunctions()
 
 	python::def("isPDBBackboneAtom", &isPDBBackboneAtomWrapper1, python::arg("atom"));
 	python::def("combineInterferingResidueCoordinates", &Biomol::combineInterferingResidueCoordinates, 
-				(python::arg("mol"), python::arg("max_rmsd") = 1.0));
+				(python::arg("mol"), python::arg("max_ctr_dist") = 1.0));
 
 	python::def("areInSameResidue", &areInSameResidueWrapper3, 
 				(python::arg("atom1"), python::arg("atom2"), python::arg("flags") = Biomol::AtomPropertyFlag::DEFAULT));
