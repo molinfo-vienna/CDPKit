@@ -80,6 +80,8 @@ namespace CDPL
 		private:
 			MOL2MolecularGraphWriter(const MOL2MolecularGraphWriter&);
 
+			MOL2MolecularGraphWriter& operator=(const MOL2MolecularGraphWriter&);
+
 			typedef std::auto_ptr<MOL2DataWriter> MOL2DataWriterPtr;
 
 			std::ostream&     output;

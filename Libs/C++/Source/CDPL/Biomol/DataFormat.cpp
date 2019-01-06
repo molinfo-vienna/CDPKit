@@ -33,6 +33,7 @@
 #include "CDPL/Biomol/PDBMoleculeInputHandler.hpp"
 #include "CDPL/Biomol/PDBMolecularGraphOutputHandler.hpp"
 #include "CDPL/Biomol/MMTFMoleculeInputHandler.hpp"
+#include "CDPL/Biomol/MMTFMolecularGraphOutputHandler.hpp"
 #include "CDPL/Biomol/CDFDataReader.hpp"
 #include "CDPL/Biomol/CDFDataWriter.hpp"
 
@@ -43,7 +44,9 @@
 #include "CDPL/Biomol/PDBBZ2MoleculeInputHandler.hpp"
 #include "CDPL/Biomol/PDBBZ2MolecularGraphOutputHandler.hpp"
 #include "CDPL/Biomol/MMTFGZMoleculeInputHandler.hpp"
+#include "CDPL/Biomol/MMTFGZMolecularGraphOutputHandler.hpp"
 #include "CDPL/Biomol/MMTFBZ2MoleculeInputHandler.hpp"
+#include "CDPL/Biomol/MMTFBZ2MolecularGraphOutputHandler.hpp"
 
 #endif // defined(HAVE_BOOST_FILESYSTEM) && defined(HAVE_BOOST_IOSTREAMS)
 
@@ -105,7 +108,8 @@ namespace
 			DataIOManager<MolecularGraph>::registerOutputHandler(DataIOManager<MolecularGraph>::OutputHandlerPointer(new PDBMolecularGraphOutputHandler()));
 
 			DataIOManager<Molecule>::registerInputHandler(DataIOManager<Molecule>::InputHandlerPointer(new MMTFMoleculeInputHandler()));
-
+			DataIOManager<MolecularGraph>::registerOutputHandler(DataIOManager<MolecularGraph>::OutputHandlerPointer(new MMTFMolecularGraphOutputHandler()));
+			
 			Biomol::CDFDataReader::registerExternalPropertyHandlers();
 			Biomol::CDFDataWriter::registerExternalPropertyHandlers();
 
@@ -119,6 +123,9 @@ namespace
 
 			DataIOManager<MolecularGraph>::registerOutputHandler(DataIOManager<MolecularGraph>::OutputHandlerPointer(new PDBGZMolecularGraphOutputHandler()));
 			DataIOManager<MolecularGraph>::registerOutputHandler(DataIOManager<MolecularGraph>::OutputHandlerPointer(new PDBBZ2MolecularGraphOutputHandler()));
+
+			DataIOManager<MolecularGraph>::registerOutputHandler(DataIOManager<MolecularGraph>::OutputHandlerPointer(new MMTFGZMolecularGraphOutputHandler()));
+			DataIOManager<MolecularGraph>::registerOutputHandler(DataIOManager<MolecularGraph>::OutputHandlerPointer(new MMTFBZ2MolecularGraphOutputHandler()));
 
 #endif // defined(HAVE_BOOST_FILESYSTEM) && defined(HAVE_BOOST_IOSTREAMS)
 		}

@@ -103,6 +103,8 @@ namespace CDPL
 
 			SMARTSReactionWriter(const SMARTSReactionWriter&);
 
+			SMARTSReactionWriter& operator=(const SMARTSReactionWriter&);
+
 			std::ostream&       output;
 			bool                state;
 			SMARTSDataWriterPtr writer;

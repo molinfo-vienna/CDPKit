@@ -85,6 +85,8 @@ namespace CDPL
 
 			CDFDRegularGridSetWriter(const CDFDRegularGridSetWriter&);
 
+			CDFDRegularGridSetWriter& operator=(const CDFDRegularGridSetWriter&);
+
 			std::ostream&    output;
 			bool             state;
 			CDFDataWriterPtr writer;

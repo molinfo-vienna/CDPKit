@@ -57,7 +57,7 @@ namespace CDPL
 		 */
 
 		/**
-		 * \brief A writer for molecular graph data in the <em>Brookhaven Protein Data Bank</em> [\ref PDB] format.
+		 * \brief A writer for molecular graph data in the <em>Brookhaven Protein Data Bank (PDB)</em> [\ref PDB] format.
 		 */
 		class CDPL_BIOMOL_API PDBMolecularGraphWriter : public Base::DataWriter<Chem::MolecularGraph>
 		{
@@ -77,7 +77,7 @@ namespace CDPL
 
 			/**
 			 * \brief Writes data of the molecular graph \a molgraph to the output stream specified in the constructor.
-			 * \param molgraph The moleculargraph to write.
+			 * \param molgraph The molecular graph to write.
 			 * \return A reference to itself.
 			 */
 			Base::DataWriter<Chem::MolecularGraph>& write(const Chem::MolecularGraph& molgraph);
@@ -89,6 +89,8 @@ namespace CDPL
 			typedef std::auto_ptr<PDBDataWriter> PDBDataWriterPtr;
 
 			PDBMolecularGraphWriter(const PDBMolecularGraphWriter&);
+
+			PDBMolecularGraphWriter& operator=(const PDBMolecularGraphWriter&);
 
 			std::ostream&    output;
 			bool             state;

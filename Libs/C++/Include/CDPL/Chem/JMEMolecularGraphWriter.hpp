@@ -477,6 +477,8 @@ namespace CDPL
 
 			JMEMolecularGraphWriter(const JMEMolecularGraphWriter&);
 
+			JMEMolecularGraphWriter& operator=(const JMEMolecularGraphWriter&);
+
 			std::ostream&    output;
 			bool             state;
 			JMEDataWriterPtr writer;

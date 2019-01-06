@@ -152,6 +152,8 @@ namespace CDPL
 		private:
 			SDFMolecularGraphWriter(const SDFMolecularGraphWriter&);
 
+			SDFMolecularGraphWriter& operator=(const SDFMolecularGraphWriter&);
+
 			typedef std::auto_ptr<MDLDataWriter> MDLDataWriterPtr;
 
 			std::ostream&    output;

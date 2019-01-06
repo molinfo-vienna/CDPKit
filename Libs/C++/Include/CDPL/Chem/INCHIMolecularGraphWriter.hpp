@@ -213,6 +213,8 @@ namespace CDPL
 		private:
 			INCHIMolecularGraphWriter(const INCHIMolecularGraphWriter&);
 
+			INCHIMolecularGraphWriter& operator=(const INCHIMolecularGraphWriter&);
+
 			void writeMolGraph(const MolecularGraph&);
 
 			void setupAtomTable(const MolecularGraph&, std::size_t);

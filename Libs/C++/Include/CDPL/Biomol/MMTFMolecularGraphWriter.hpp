@@ -1,7 +1,7 @@
 /* -*- mode: c++; c-basic-offset: 4; tab-width: 4; indent-tabs-mode: t -*- */
 
 /* 
- * CDFReactionWriter.hpp 
+ * MMTFMolecularGraphWriter.hpp 
  *
  * This file is part of the Chemical Data Processing Toolkit
  *
@@ -25,15 +25,15 @@
 
 /**
  * \file
- * \brief Definition of the class CDPL::Chem::CDFReactionWriter.
+ * \brief Definition of the class CDPL::Biomol::MMTFMolecularGraphWriter.
  */
 
-#ifndef CDPL_CHEM_CDFREACTIONWRITER_HPP
-#define CDPL_CHEM_CDFREACTIONWRITER_HPP
+#ifndef CDPL_BIOMOL_MMTFMOLECULARGRAPHWRITER_HPP
+#define CDPL_BIOMOL_MMTFMOLECULARGRAPHWRITER_HPP
 
 #include <memory>
 
-#include "CDPL/Chem/APIPrefix.hpp"
+#include "CDPL/Biomol/APIPrefix.hpp"
 #include "CDPL/Base/DataWriter.hpp"
 
 
@@ -43,53 +43,58 @@ namespace CDPL
 	namespace Chem
 	{
 
-		class CDFDataWriter;
-		class Reaction;
+		class MolecularGraph;
+	}
+
+	namespace Biomol
+	{
+
+		class MMTFDataWriter;
 
 		/**
-		 * \addtogroup CDPL_CHEM_CDF_IO
+		 * \addtogroup CDPL_BIOMOL_MMTF_IO
 		 * @{
 		 */
 
 		/**
-		 * \brief A writer for molecular graph data in the native I/O format of the <em>CDPL</em>.
+		 * \brief A writer for molecular graph data in the <em>Macromolecular Transmission Format (MMTF)</em> [\ref MMTF].
 		 */
-		class CDPL_CHEM_API CDFReactionWriter : public Base::DataWriter<Reaction>
+		class CDPL_BIOMOL_API MMTFMolecularGraphWriter : public Base::DataWriter<Chem::MolecularGraph>
 		{
 
 		public:
 			/**
-			 * \brief Constructs a \c %CDFReactionWriter instance that will write reaction data  to the output
+			 * \brief Constructs a \c %MMTFMolecularGraphWriter instance that will write data of molecular graphs to the output
 			 *        stream \a os.
 			 * \param os The output stream to write to.
 			 */
-			CDFReactionWriter(std::ostream& os);
+			MMTFMolecularGraphWriter(std::ostream& os);
 
 			/**
 			 * \brief Destructor.
 			 */
-			~CDFReactionWriter();
+			~MMTFMolecularGraphWriter();
 
 			/**
-			 * \brief Writes the reaction \a rxn to the output stream specified in the constructor.
-			 * \param rxn The reaction data to write.
+			 * \brief Writes data of the molecular graph \a molgraph to the output stream specified in the constructor.
+			 * \param molgraph The molecular graph to write.
 			 * \return A reference to itself.
 			 */
-			Base::DataWriter<Reaction>& write(const Reaction& rxn);
+			Base::DataWriter<Chem::MolecularGraph>& write(const Chem::MolecularGraph& molgraph);
 
 			operator const void*() const;
 			bool operator!() const;
 
 		private:
-			typedef std::auto_ptr<CDFDataWriter> CDFDataWriterPtr;
+			typedef std::auto_ptr<MMTFDataWriter> MMTFDataWriterPtr;
 
-			CDFReactionWriter(const CDFReactionWriter&);
+			MMTFMolecularGraphWriter(const MMTFMolecularGraphWriter&);
 
-			CDFReactionWriter& operator=(const CDFReactionWriter&);
+			MMTFMolecularGraphWriter& operator=(const MMTFMolecularGraphWriter&);
 
-			std::ostream&    output;
-			bool             state;
-			CDFDataWriterPtr writer;
+			std::ostream&     output;
+			bool              state;
+			MMTFDataWriterPtr writer;
 		};
 
 		/**
@@ -98,4 +103,4 @@ namespace CDPL
 	}
 }
 
-#endif // CDPL_CHEM_CDFREACTIONWRITER_HPP
+#endif // CDPL_BIOMOL_MMTFMOLECULARGRAPHWRITER_HPP

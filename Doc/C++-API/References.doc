@@ -130,13 +130,6 @@ Description of several chemical structure file formats used by computer programs
 </tr>
 
 <tr>
-<td valign="top">\anchor PDB<i>[PDB]</i></td>
-<td valign="top">
-Protein Data Bank File Format Documentation page: http://www.wwpdb.org/docs.html
-</td>
-</tr>
-
-<tr>
 <td valign="top">\anchor CITB<i>[CITB]</i></td>
 <td valign="top">
 Chemoinformatics - A Textbook; Johann Gasteiger and Thomas Engel (Eds.), WILEY-VCH, ISBN 3-527-30681-1
@@ -288,6 +281,13 @@ ISBN 0-521-43108-5, http://www.nr.com/
 </tr>
 
 <tr>
+<td valign="top">\anchor PDB<i>[PDB]</i></td>
+<td valign="top">
+PDB File-Format Specification website: http://www.wwpdb.org/docs.html
+</td>
+</tr>
+
+<tr>
 <td valign="top">\anchor PEOE<i>[PEOE]</i></td>
 <td valign="top">
 J. Gasteiger, M. Marsili, Iterative Partial Equalization of Orbital Electronegativity - A Rapid Access to Atomic Charges,
@@ -306,13 +306,6 @@ Qt Online Reference Documentation: http://doc.trolltech.com/
 <td valign="top">\anchor SMARTS<i>[SMARTS]</i></td>
 <td valign="top">
 Daylight SMARTS Theory website: http://www.daylight.com/dayhtml/doc/theory/theory.smarts.html
-</td>
-</tr>
-
-<tr>
-<td valign="top">\anchor PDB<i>[PDB]</i></td>
-<td valign="top">
-PDB File-Format Specification website: http://www.wwpdb.org/docs.html
 </td>
 </tr>
 

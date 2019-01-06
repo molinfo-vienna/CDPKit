@@ -101,6 +101,8 @@ namespace CDPL
 		private:
 			SMARTSMolecularGraphWriter(const SMARTSMolecularGraphWriter&);
 
+			SMARTSMolecularGraphWriter& operator=(const SMARTSMolecularGraphWriter&);
+
 			typedef std::auto_ptr<SMARTSDataWriter> SMARTSDataWriterPtr;
 
 			std::ostream&       output;

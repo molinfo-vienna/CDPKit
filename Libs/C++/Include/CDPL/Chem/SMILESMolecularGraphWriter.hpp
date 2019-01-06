@@ -163,6 +163,8 @@ namespace CDPL
 
 			SMILESMolecularGraphWriter(const SMILESMolecularGraphWriter&);
 
+			SMILESMolecularGraphWriter& operator=(const SMILESMolecularGraphWriter&);
+
 			std::ostream&       output;
 			bool                state;
 			SMILESDataWriterPtr writer;

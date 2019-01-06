@@ -31,8 +31,10 @@ SET(cdpl-biomol_LIB_SRCS
     CDFDataReader.cpp
     CDFDataWriter.cpp
     MMTFDataReader.cpp
+    MMTFDataWriter.cpp
     MMTFMoleculeReader.cpp
-
+    MMTFMolecularGraphWriter.cpp
+    
     HierarchyViewNode.cpp
     HierarchyViewModel.cpp
     HierarchyViewChain.cpp

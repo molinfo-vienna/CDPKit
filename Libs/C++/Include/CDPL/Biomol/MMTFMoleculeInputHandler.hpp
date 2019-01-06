@@ -48,8 +48,8 @@ namespace CDPL
 		 */
 
 		/**
-		 * \brief A handler for the input of molecule data in the <em>Macromolecular Transmission Format (MMTF)</em>
-		 *        [\ref MMTF] format.
+		 * \brief A handler for the input of molecule data in the <em>Macromolecular Transmission Format (MMTF)y</em>
+		 *        [\ref MMTF].
 		 */
 		typedef Util::DefaultDataInputHandler<MMTFMoleculeReader, DataFormat::MMTF> MMTFMoleculeInputHandler;
 

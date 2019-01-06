@@ -154,6 +154,8 @@ namespace CDPL
 
 			MOLMolecularGraphWriter(const MOLMolecularGraphWriter&);
 
+			MOLMolecularGraphWriter& operator=(const MOLMolecularGraphWriter&);
+
 			std::ostream&    output;
 			bool             state;
 			MDLDataWriterPtr writer;

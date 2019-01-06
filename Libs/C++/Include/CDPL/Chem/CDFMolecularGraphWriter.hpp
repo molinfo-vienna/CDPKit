@@ -85,6 +85,8 @@ namespace CDPL
 
 			CDFMolecularGraphWriter(const CDFMolecularGraphWriter&);
 
+			CDFMolecularGraphWriter& operator=(const CDFMolecularGraphWriter&);
+
 			std::ostream&    output;
 			bool             state;
 			CDFDataWriterPtr writer;

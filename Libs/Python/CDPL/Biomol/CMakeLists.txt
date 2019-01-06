@@ -17,11 +17,13 @@ SET(biomol_MOD_SRCS
     PDBMoleculeReaderExport.cpp
     PDBMolecularGraphWriterExport.cpp
     MMTFMoleculeReaderExport.cpp
-
+    MMTFMolecularGraphWriterExport.cpp
+    
     PDBMoleculeInputHandlerExport.cpp
     PDBMolecularGraphOutputHandlerExport.cpp
     MMTFMoleculeInputHandlerExport.cpp
-
+    MMTFMolecularGraphOutputHandlerExport.cpp
+    
     HierarchyViewNodeExport.cpp
     HierarchyViewModelExport.cpp
     HierarchyViewChainExport.cpp

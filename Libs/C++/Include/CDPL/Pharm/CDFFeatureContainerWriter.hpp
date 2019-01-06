@@ -85,6 +85,8 @@ namespace CDPL
 
 			CDFFeatureContainerWriter(const CDFFeatureContainerWriter&);
 
+			CDFFeatureContainerWriter& operator=(const CDFFeatureContainerWriter&);
+
 			std::ostream&    output;
 			bool             state;
 			CDFDataWriterPtr writer;

@@ -67,9 +67,9 @@ namespace CDPL
 			bool hasMoreData(std::istream& is) const;
 
 		private:
-			bool readRecordData(std::istream& is, msgpack::object_handle& handle) const;
+			bool readRecordData(std::istream& is, msgpack::object_handle& handle);
 
-			void buildMolecule(Chem::Molecule& mol, const mmtf::StructureData& struct_data);
+			void buildMolecule(Chem::Molecule& mol);
 			
 			void addBond(Chem::Molecule& mol, std::size_t atom1_idx, std::size_t atom2_idx, std::size_t order) const;
 
@@ -77,6 +77,7 @@ namespace CDPL
 
 			const Base::DataIOBase& ioBase;
 			AtomArray               atoms;
+			mmtf::StructureData     structData;
 		};
     }
 }

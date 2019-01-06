@@ -163,6 +163,8 @@ namespace CDPL
 
 			SMILESReactionWriter(const SMILESReactionWriter&);
 
+			SMILESReactionWriter& operator=(const SMILESReactionWriter&);
+
 			std::ostream&       output;
 			bool                state;
 			SMILESDataWriterPtr writer;

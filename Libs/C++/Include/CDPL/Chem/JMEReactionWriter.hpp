@@ -486,6 +486,8 @@ namespace CDPL
 
 			JMEReactionWriter(const JMEReactionWriter&);
 
+			JMEReactionWriter& operator=(const JMEReactionWriter&);
+
 			std::ostream&    output;
 			bool             state;
 			JMEDataWriterPtr writer;

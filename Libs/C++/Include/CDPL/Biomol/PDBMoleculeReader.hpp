@@ -58,7 +58,7 @@ namespace CDPL
 		 */
 
 		/**
-		 * \brief A reader for molecule data in the <em>Brookhaven Protein Data Bank</em>
+		 * \brief A reader for molecule data in the <em>Brookhaven Protein Data Bank (PDB)</em>
 		 *        [\ref PDB] format.
 		 */
 		class CDPL_BIOMOL_API PDBMoleculeReader : public Util::StreamDataReader<Chem::Molecule, PDBMoleculeReader>

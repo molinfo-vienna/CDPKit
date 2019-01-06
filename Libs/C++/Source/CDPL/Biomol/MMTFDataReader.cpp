@@ -67,15 +67,13 @@ bool Biomol::MMTFDataReader::readRecord(std::istream& is, Chem::Molecule& mol)
 
 	if (!readRecordData(is, handle))
 		return false;
-
-	mmtf::StructureData struct_data;
 	
-	handle.get().convert(struct_data);
+	handle.get().convert(structData);
 	
-	if (getStrictErrorCheckingParameter(ioBase) && !struct_data.hasConsistentData(false))
+	if (getStrictErrorCheckingParameter(ioBase) && !structData.hasConsistentData(false))
 		throw Base::IOError("MMTFDataReader: got inconsistent MMTF data");
 
-	buildMolecule(mol, struct_data);
+	buildMolecule(mol);
 
 	if (getCombineInterferingResidueCoordinatesParameter(ioBase))
 		combineInterferingResidueCoordinates(mol);
@@ -95,7 +93,7 @@ bool Biomol::MMTFDataReader::hasMoreData(std::istream& is) const
     return !std::istream::traits_type::eq_int_type(is.peek(), std::istream::traits_type::eof());
 }
 
-bool Biomol::MMTFDataReader::readRecordData(std::istream& is, msgpack::object_handle& handle) const
+bool Biomol::MMTFDataReader::readRecordData(std::istream& is, msgpack::object_handle& handle)
 {
     if (!hasMoreData(is))
 		return false;
@@ -105,27 +103,27 @@ bool Biomol::MMTFDataReader::readRecordData(std::istream& is, msgpack::object_ha
 	if (curr_is_pos < 0)
 		throw Base::IOError("MMTFDataReader: could not determine input stream read position");
 
-	msgpack::unpacker unp;
-
-	while (true) {
-		unp.reserve_buffer(DATA_BLOCK_SIZE);
+	msgpack::unpacker unpacker;
 	
-		if (!is.read(unp.buffer(), DATA_BLOCK_SIZE)) {
+	while (true) {
+		unpacker.reserve_buffer(DATA_BLOCK_SIZE);
+	
+		if (!is.read(unpacker.buffer(), DATA_BLOCK_SIZE)) {
 			if (is.bad() || !is.eof())
 				throw Base::IOError("MMTFDataReader: reading raw input data failed");
 		}
 
-		unp.buffer_consumed(is.gcount());
+		unpacker.buffer_consumed(is.gcount());
 
-		bool finished = unp.parser::next();
+		bool finished = unpacker.parser::next();
 
 		if (finished) {
-			handle.zone().reset(unp.release_zone());
-			handle.set(unp.data());
+			handle.zone().reset(unpacker.release_zone());
+			handle.set(unpacker.data());
 
-			if (!is.eof()) 
-				is.seekg(curr_is_pos + std::istream::pos_type(unp.parsed_size()));
-		
+			is.clear();
+			is.seekg(curr_is_pos + std::istream::pos_type(unpacker.parsed_size()));
+			
 			return true;
 		}
 
@@ -136,12 +134,12 @@ bool Biomol::MMTFDataReader::readRecordData(std::istream& is, msgpack::object_ha
 	return false;
 }
 
-void Biomol::MMTFDataReader::buildMolecule(Chem::Molecule& mol, const mmtf::StructureData& struct_data)
+void Biomol::MMTFDataReader::buildMolecule(Chem::Molecule& mol)
 {
 	using namespace Chem;
 		
-	mol.reserveMemoryForAtoms(mol.getNumAtoms() + struct_data.numAtoms);
-	mol.reserveMemoryForBonds(mol.getNumBonds() + struct_data.numBonds);
+	mol.reserveMemoryForAtoms(mol.getNumAtoms() + structData.numAtoms);
+	mol.reserveMemoryForBonds(mol.getNumBonds() + structData.numBonds);
 
 	PDBData::SharedPointer pdb_data;
 
@@ -154,42 +152,42 @@ void Biomol::MMTFDataReader::buildMolecule(Chem::Molecule& mol, const mmtf::Stru
 		setPDBData(mol, pdb_data);
 	}
 
-	pdb_data->setRecord(PDBData::TITLE, struct_data.title);
-	pdb_data->setRecord(PDBData::RESOLUTION, boost::lexical_cast<std::string>(struct_data.resolution));
-	pdb_data->setRecord(PDBData::DEPOSITION_DATE, struct_data.depositionDate);
-	pdb_data->setRecord(PDBData::STRUCTURE_ID, struct_data.structureId);
+	pdb_data->setRecord(PDBData::TITLE, structData.title);
+	pdb_data->setRecord(PDBData::RESOLUTION, boost::lexical_cast<std::string>(structData.resolution));
+	pdb_data->setRecord(PDBData::DEPOSITION_DATE, structData.depositionDate);
+	pdb_data->setRecord(PDBData::STRUCTURE_ID, structData.structureId);
 
 	atoms.clear();
 	
 	// traverse models
-	for (std::size_t model_idx = 0, num_models = struct_data.numModels, chain_idx = 0, res_idx = 0, atom_idx = 0; model_idx < num_models; model_idx++) {
+	for (std::size_t model_idx = 0, num_models = structData.numModels, chain_idx = 0, res_idx = 0, atom_idx = 0; model_idx < num_models; model_idx++) {
 
 		// traverse model chains
-		for (std::size_t model_chain_idx = 0, num_chains = struct_data.chainsPerModel[chain_idx]; model_chain_idx < num_chains; model_chain_idx++, chain_idx++) {
+		for (std::size_t model_chain_idx = 0, num_chains = structData.chainsPerModel[chain_idx]; model_chain_idx < num_chains; model_chain_idx++, chain_idx++) {
 
 			// traverse chain residues
-			for (std::size_t chain_res_idx = 0, num_res = struct_data.groupsPerChain[chain_idx]; chain_res_idx < num_res; chain_res_idx++, res_idx++) {
-				const mmtf::GroupType& group = struct_data.groupList[struct_data.groupTypeList[res_idx]];
+			for (std::size_t chain_res_idx = 0, num_res = structData.groupsPerChain[chain_idx]; chain_res_idx < num_res; chain_res_idx++, res_idx++) {
+				const mmtf::GroupType& group = structData.groupList[structData.groupTypeList[res_idx]];
 				std::size_t atom_idx_offs = atom_idx;
 
 				// traverse residue atoms
 				for (std::size_t res_atom_idx = 0; res_atom_idx < group.atomNameList.size(); res_atom_idx++, atom_idx++) {
 					Math::Vector3D coords;
 
-					coords(0) = struct_data.xCoordList[atom_idx];
-					coords(1) = struct_data.yCoordList[atom_idx];
-					coords(2) = struct_data.zCoordList[atom_idx];
+					coords(0) = structData.xCoordList[atom_idx];
+					coords(1) = structData.yCoordList[atom_idx];
+					coords(2) = structData.zCoordList[atom_idx];
 
-					if (struct_data.altLocList[atom_idx] != ' ') {
+					if (structData.altLocList[atom_idx] != ' ') {
 						bool alt_loc_atom = false;
 					
 						for (AtomArray::reverse_iterator it = atoms.rbegin(), end = atoms.rend(); it != end; ++it) {
 							Atom& atom = **it;
 
-							if (getResidueSequenceNumber(atom) != struct_data.groupIdList[res_idx])
+							if (getResidueSequenceNumber(atom) != structData.groupIdList[res_idx])
 								break;
 
-							if (getResidueInsertionCode(atom) != struct_data.insCodeList[res_idx])
+							if (getResidueInsertionCode(atom) != structData.insCodeList[res_idx])
 								break;
 
 							if (getResidueCode(atom) != group.groupName)
@@ -198,7 +196,7 @@ void Biomol::MMTFDataReader::buildMolecule(Chem::Molecule& mol, const mmtf::Stru
 							if (getModelNumber(atom) != (model_idx + 1))
 								break;
 
-							if (getChainID(atom) != struct_data.chainIdList[chain_idx])
+							if (getChainID(atom) != structData.chainIdList[chain_idx])
 								break;
 
 							if (getResidueAtomName(atom) != group.atomNameList[res_atom_idx])
@@ -234,17 +232,17 @@ void Biomol::MMTFDataReader::buildMolecule(Chem::Molecule& mol, const mmtf::Stru
 					setModelNumber(atom, model_idx + 1);
 					set3DCoordinates(atom, coords);
 					setResidueCode(atom, group.groupName);
-					setResidueSequenceNumber(atom, struct_data.groupIdList[res_idx]);
-					setResidueInsertionCode(atom, struct_data.insCodeList[res_idx]);
-					setChainID(atom, struct_data.chainIdList[chain_idx]);
-					setBFactor(atom, struct_data.bFactorList[atom_idx]);
-					setOccupancy(atom, struct_data.occupancyList[atom_idx]);
-					setSerialNumber(atom, struct_data.atomIdList[atom_idx]);
+					setResidueSequenceNumber(atom, structData.groupIdList[res_idx]);
+					setResidueInsertionCode(atom, structData.insCodeList[res_idx]);
+					setChainID(atom, structData.chainIdList[chain_idx]);
+					setBFactor(atom, structData.bFactorList[atom_idx]);
+					setOccupancy(atom, structData.occupancyList[atom_idx]);
+					setSerialNumber(atom, structData.atomIdList[atom_idx]);
 					setFormalCharge(atom, group.formalChargeList[res_atom_idx]);
 					setResidueAtomName(atom, group.atomNameList[res_atom_idx]);
 					setSymbol(atom, group.elementList[res_atom_idx]);
 					setType(atom, AtomDictionary::getType(group.elementList[res_atom_idx]));
-					setAltLocationID(atom, struct_data.altLocList[atom_idx]);
+					setAltLocationID(atom, structData.altLocList[atom_idx]);
 				}
 
 				// traverse residue bonds
@@ -259,11 +257,11 @@ void Biomol::MMTFDataReader::buildMolecule(Chem::Molecule& mol, const mmtf::Stru
 	}
 
 	// traverse inter-residue bonds
-	for (std::size_t i = 0, num_bonds = struct_data.bondAtomList.size() / 2; i < num_bonds; i++) {
-		std::size_t atom1_idx = mol.getAtomIndex(*atoms[struct_data.bondAtomList[i * 2]]);
-		std::size_t atom2_idx = mol.getAtomIndex(*atoms[struct_data.bondAtomList[i * 2 + 1]]);
+	for (std::size_t i = 0, num_bonds = structData.bondAtomList.size() / 2; i < num_bonds; i++) {
+		std::size_t atom1_idx = mol.getAtomIndex(*atoms[structData.bondAtomList[i * 2]]);
+		std::size_t atom2_idx = mol.getAtomIndex(*atoms[structData.bondAtomList[i * 2 + 1]]);
 
-		addBond(mol, atom1_idx, atom2_idx, struct_data.bondOrderList[i]);
+		addBond(mol, atom1_idx, atom2_idx, structData.bondOrderList[i]);
 	}
 }
 

@@ -48,7 +48,7 @@ namespace CDPL
     {
 
 		/**
-		 * \addtogroup CDPL_CHEM_GRAPH_AUTOMORPHISM
+		 * \addtogroup CDPL_CHEM_GRAPH_AUTOMORPHISM_SEARCH
 		 * @{
 		 */
 

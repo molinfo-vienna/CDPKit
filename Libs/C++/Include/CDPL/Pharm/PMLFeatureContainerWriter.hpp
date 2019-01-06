@@ -88,6 +88,8 @@ namespace CDPL
 
 			PMLFeatureContainerWriter(const PMLFeatureContainerWriter&);
 
+			PMLFeatureContainerWriter& operator=(const PMLFeatureContainerWriter&);
+			
 			std::ostream&    output;
 			bool             state;
 			PMLDataWriterPtr writer;

@@ -154,6 +154,8 @@ namespace CDPL
 
 			RXNReactionWriter(const RXNReactionWriter&);
 
+			RXNReactionWriter& operator=(const RXNReactionWriter&);
+
 			std::ostream&    output;
 			bool             state;
 			MDLDataWriterPtr writer;

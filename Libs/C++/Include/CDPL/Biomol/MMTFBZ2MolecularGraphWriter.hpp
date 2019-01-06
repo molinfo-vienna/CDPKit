@@ -1,7 +1,7 @@
 /* -*- mode: c++; c-basic-offset: 4; tab-width: 4; indent-tabs-mode: t -*- */
 
 /* 
- * ClassExports.hpp 
+ * MMTFBZ2MolecularGraphWriter.hpp 
  *
  * This file is part of the Chemical Data Processing Toolkit
  *
@@ -23,35 +23,35 @@
  * Boston, MA 02111-1307, USA.
  */
 
+/**
+ * \file
+ * \brief Definition of the class CDPL::Biomol::MMTFBZ2MolecularGraphWriter.
+ */
 
-#ifndef CDPL_PYTHON_BIOMOL_CLASSEXPORTS_HPP
-#define CDPL_PYTHON_BIOMOL_CLASSEXPORTS_HPP
+#ifndef CDPL_BIOMOL_MMTFBZ2MOLECULARGRAPHWRITER_HPP
+#define CDPL_BIOMOL_MMTFBZ2MOLECULARGRAPHWRITER_HPP
+
+#include "CDPL/Biomol/MMTFMolecularGraphWriter.hpp"
+#include "CDPL/Util/CompressedDataWriter.hpp"
 
 
-namespace CDPLPythonBiomol
+namespace CDPL 
 {
 
-	void exportPDBData();
-	void exportResidueList();
-	void exportResidueDictionary();
+	namespace Biomol
+	{
 
-	void exportPDBMoleculeReader();
-	void exportPDBMolecularGraphWriter();
-	void exportMMTFMoleculeReader();
-	void exportMMTFMolecularGraphWriter();
-	
-	void exportPDBMoleculeInputHandler();
-	void exportPDBMolecularGraphOutputHandler();
-	void exportMMTFMoleculeInputHandler();
-	void exportMMTFMolecularGraphOutputHandler();
-	
-	void exportHierarchyViewNode();
-	void exportHierarchyViewModel();
-	void exportHierarchyViewChain();
-	void exportHierarchyViewFragment();
-	void exportHierarchyView();
+		/**
+		 * \addtogroup CDPL_BIOMOL_MMTF_IO
+		 * @{
+		 */
 
-	void exportBoostFunctionWrappers();
+		typedef Util::CompressedDataWriter<MMTFMolecularGraphWriter, Util::BZip2OStream> MMTFBZ2MolecularGraphWriter;
+
+		/**
+		 * @}
+		 */
+	}
 }
 
-#endif // CDPL_PYTHON_BIOMOL_CLASSEXPORTS_HPP
+#endif // CDPL_BIOMOL_MMTFBZ2MOLECULARGRAPHWRITER_HPP
