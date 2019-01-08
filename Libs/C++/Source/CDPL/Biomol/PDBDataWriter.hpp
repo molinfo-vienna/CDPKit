@@ -88,7 +88,7 @@ namespace CDPL
 			bool writeGenericDataRecord(std::ostream& os, PDBData::RecordType type, const Chem::MolecularGraph& molgraph, 
 										const std::string& prefix, std::size_t max_llen);
 
-			long writeATOMRecord(std::ostream& os, long serial, const Chem::Atom& atom);
+			long writeATOMRecord(std::ostream& os, long serial, const Chem::Atom& atom, std::size_t conf_idx = 0);
 			void writeTERRecord(std::ostream& os, long serial, const Chem::Atom& atom) const;
 
 			void writeNUMMDLRecord(std::ostream& os) const;

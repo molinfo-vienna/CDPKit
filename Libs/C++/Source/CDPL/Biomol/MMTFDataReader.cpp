@@ -37,6 +37,7 @@
 #include "CDPL/Biomol/ControlParameterFunctions.hpp"
 #include "CDPL/Biomol/UtilityFunctions.hpp"
 #include "CDPL/Biomol/PDBData.hpp"
+#include "CDPL/Biomol/ResidueDictionary.hpp"
 #include "CDPL/Chem/Molecule.hpp"
 #include "CDPL/Chem/Atom.hpp"
 #include "CDPL/Chem/Bond.hpp"
@@ -158,7 +159,7 @@ void Biomol::MMTFDataReader::buildMolecule(Chem::Molecule& mol)
 	pdb_data->setRecord(PDBData::STRUCTURE_ID, structData.structureId);
 
 	atoms.clear();
-	
+
 	// traverse models
 	for (std::size_t model_idx = 0, num_models = structData.numModels, chain_idx = 0, res_idx = 0, atom_idx = 0; model_idx < num_models; model_idx++) {
 
@@ -169,6 +170,7 @@ void Biomol::MMTFDataReader::buildMolecule(Chem::Molecule& mol)
 			for (std::size_t chain_res_idx = 0, num_res = structData.groupsPerChain[chain_idx]; chain_res_idx < num_res; chain_res_idx++, res_idx++) {
 				const mmtf::GroupType& group = structData.groupList[structData.groupTypeList[res_idx]];
 				std::size_t atom_idx_offs = atom_idx;
+				bool het_group = !ResidueDictionary::isStdResidue(group.groupName);
 
 				// traverse residue atoms
 				for (std::size_t res_atom_idx = 0; res_atom_idx < group.atomNameList.size(); res_atom_idx++, atom_idx++) {
@@ -178,7 +180,7 @@ void Biomol::MMTFDataReader::buildMolecule(Chem::Molecule& mol)
 					coords(1) = structData.yCoordList[atom_idx];
 					coords(2) = structData.zCoordList[atom_idx];
 
-					if (structData.altLocList[atom_idx] != ' ') {
+					if (structData.altLocList[atom_idx] != 0 && structData.altLocList[atom_idx] != ' ') {
 						bool alt_loc_atom = false;
 					
 						for (AtomArray::reverse_iterator it = atoms.rbegin(), end = atoms.rend(); it != end; ++it) {
@@ -243,6 +245,7 @@ void Biomol::MMTFDataReader::buildMolecule(Chem::Molecule& mol)
 					setSymbol(atom, group.elementList[res_atom_idx]);
 					setType(atom, AtomDictionary::getType(group.elementList[res_atom_idx]));
 					setAltLocationID(atom, structData.altLocList[atom_idx]);
+					setHeteroAtomFlag(atom, het_group);
 				}
 
 				// traverse residue bonds

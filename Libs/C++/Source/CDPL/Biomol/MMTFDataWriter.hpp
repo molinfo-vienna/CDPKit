@@ -33,6 +33,7 @@
 
 #include <mmtf.hpp>
 
+#include "CDPL/Math/Vector.hpp"
 #include "CDPL/Util/BitSet.hpp"
 
 
@@ -70,11 +71,15 @@ namespace CDPL
 			void clearResidueData();
 			
 			bool outputStructureData(std::ostream& os, const Chem::MolecularGraph& molgraph);
+
 			std::size_t createStructureData(const Chem::MolecularGraph& molgraph);
 
-			void setStructureMetaData(const Chem::MolecularGraph& molgraph);
+			void addAtomData(const Chem::Atom& atom, const Math::Vector3D& coords, long& atom_serial);
+			void createResidueBondData(std::size_t start_atom_idx, std::size_t end_atom_idx, const Chem::MolecularGraph& molgraph);
+			void addResidueTypeIndex();
 			void createGlobalBondData(const Chem::MolecularGraph& molgraph);
-			
+			void setStructureMetaData(const Chem::MolecularGraph& molgraph);
+
 			typedef std::vector<const Chem::Atom*> AtomArray;
 			typedef std::vector<std::size_t> AtomIndexArray;
 

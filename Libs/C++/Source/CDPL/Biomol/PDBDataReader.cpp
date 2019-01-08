@@ -821,11 +821,11 @@ std::size_t Biomol::PDBDataReader::startNextRecord(std::istream& is, std::string
 
 void Biomol::PDBDataReader::skipInputToNextLine(std::istream& is, std::size_t rem_llen, const std::string& rec_name)
 {
-	if (checkLineLength || strictErrorChecking) {
+	if (strictErrorChecking) {
 		readPDBLine(is, stringData, ("PDBDataReader: error while reading line of record " + rec_name).c_str(), checkLineLength, 
 					rem_llen);
 
-		if (strictErrorChecking && !Internal::trimString(stringData).empty())
+		if (!Internal::trimString(stringData).empty())
 			throw Base::IOError(("PDBDataReader: found garbage after data of record " + rec_name).c_str());
 			
 	} else
@@ -911,10 +911,9 @@ void Biomol::PDBDataReader::processAtomSequence(Chem::Molecule& mol, bool chain_
 		for (AtomList::iterator res_as_it = res_as_start_it; res_as_it != as_it; ) {
 			Atom* atom = *res_as_it;
 			const std::string& atom_name = getResidueAtomName(*atom);
-			Math::Vector3DArray::SharedPointer coords(new Math::Vector3DArray());
+			Math::Vector3DArray::SharedPointer coords;
 
 			currResidueAtoms[atom_name] = atom;
-			coords->addElement(get3DCoordinates(*atom));
 
 			for (++res_as_it; res_as_it != as_it; ++res_as_it) {
 				Atom* next_atom = *res_as_it;
@@ -922,6 +921,11 @@ void Biomol::PDBDataReader::processAtomSequence(Chem::Molecule& mol, bool chain_
 
 				if (next_atom_name != atom_name)
 					break;
+
+				if (!coords) {
+					coords.reset(new Math::Vector3DArray());
+					coords->addElement(get3DCoordinates(*atom));					
+				}
 
 				//std::cerr << "alt. loc. atom: " << getSerialNumber(*next_atom) << " "
 				//		  << getResidueAtomName(*next_atom) << " " << getAltLocationID(*next_atom) << std::endl;
@@ -932,7 +936,8 @@ void Biomol::PDBDataReader::processAtomSequence(Chem::Molecule& mol, bool chain_
 				mol.removeAtom(next_atom->getIndex());
 			}
 
-			set3DCoordinatesArray(*atom, coords);
+			if (coords)
+				set3DCoordinatesArray(*atom, coords);
 		}
 
 		MolecularGraph::SharedPointer res_tmplt = res_dict.getStructure(res_code);

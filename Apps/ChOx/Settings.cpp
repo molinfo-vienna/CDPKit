@@ -601,6 +601,18 @@ void Settings::load()
 	readParameter<bool>(pdb_rparams, settings, Biomol::ControlParameter::CHECK_LINE_LENGTH, ControlParameterDefault::PDB_INPUT_CHECK_LINE_LENGTH);
 
 	settings.endGroup();
+	
+    // ------
+
+	settings.beginGroup(QString::fromStdString("Input/" + Biomol::DataFormat::MMTF.getName()));
+
+	SettingsContainer& mmtf_rparams = readerControlParams[Biomol::DataFormat::MMTF.getName()];
+
+	mmtf_rparams.setParent(this);
+
+	readParameter<bool>(mmtf_rparams, settings, Biomol::ControlParameter::STRICT_ERROR_CHECKING, ControlParameterDefault::MMTF_INPUT_STRICT_ERROR_CHECKING);
+
+	settings.endGroup();
 
 	// ------
 
@@ -1053,6 +1065,16 @@ void Settings::save() const
 
 	writeParameter<bool>(pdb_rparams, settings, Biomol::ControlParameter::STRICT_ERROR_CHECKING);
 	writeParameter<bool>(pdb_rparams, settings, Biomol::ControlParameter::CHECK_LINE_LENGTH);
+
+	settings.endGroup();
+
+	// ------
+
+	settings.beginGroup(QString::fromStdString("Input/" + Biomol::DataFormat::MMTF.getName()));
+
+	const SettingsContainer& mmtf_rparams = getReaderControlParameters(Biomol::DataFormat::MMTF.getName());
+
+	writeParameter<bool>(mmtf_rparams, settings, Biomol::ControlParameter::STRICT_ERROR_CHECKING);
 
 	settings.endGroup();
 

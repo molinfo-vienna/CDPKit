@@ -211,7 +211,9 @@ namespace ChOx
 		const bool                                 INCHI_OUTPUT_WRITE_SINGLE_RECORD_FILES  = true;
 
 		const bool                                 PDB_INPUT_STRICT_ERROR_CHECKING         = true;
-		const bool                                 PDB_INPUT_CHECK_LINE_LENGTH             = true;
+		const bool                                 PDB_INPUT_CHECK_LINE_LENGTH             = false;
+
+		const bool                                 MMTF_INPUT_STRICT_ERROR_CHECKING        = true;
 
 		const bool                                 CDF_OUTPUT_WRITE_SINGLE_RECORD_FILES     = false;
 		const bool                                 CDF_OUTPUT_WRITE_SINGLE_PRECISION_FLOATS = true;

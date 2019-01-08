@@ -42,6 +42,7 @@
 #include "CDPL/Chem/MolecularGraph.hpp"
 #include "CDPL/Chem/Atom.hpp"
 #include "CDPL/Chem/Bond.hpp"
+#include "CDPL/Math/VectorArray.hpp"
 #include "CDPL/Base/DataIOBase.hpp"
 #include "CDPL/Internal/StringDataIOUtilities.hpp"
 
@@ -582,7 +583,7 @@ bool Biomol::PDBDataWriter::writeGenericDataRecord(std::ostream& os, PDBData::Re
 	return true;
 }
 
-long Biomol::PDBDataWriter::writeATOMRecord(std::ostream& os, long serial, const Chem::Atom& atom)
+long Biomol::PDBDataWriter::writeATOMRecord(std::ostream& os, long serial, const Chem::Atom& atom, std::size_t conf_idx)
 {
 	using namespace Internal;
 
@@ -592,7 +593,8 @@ long Biomol::PDBDataWriter::writeATOMRecord(std::ostream& os, long serial, const
 
 	serial = std::max(serial, getSerialNumber(atom));
 	
-	atomToSerialMap[&atom] = serial;
+	if (conf_idx == 0)
+		atomToSerialMap[&atom] = serial;
 
 	writeIntegerNumber(os, 5, checkSerialNumber(serial),
 					   ("PDBDataWriter: error while writing serial number for " + rec_prefix + " record").c_str(), false);
@@ -617,7 +619,25 @@ long Biomol::PDBDataWriter::writeATOMRecord(std::ostream& os, long serial, const
 		writeString(os, 4, name, ("PDBDataWriter: error while writing atom name for " + rec_prefix + " record").c_str());
 	}
 
-	writeWhitespace(os, 1); // FIX ME: alternate locations
+	const Math::Vector3D* coords_ptr = 0;
+	bool more_confs = false;
+
+	if (has3DCoordinatesArray(atom)) {
+		const Math::Vector3DArray& coords_array = *get3DCoordinatesArray(atom);
+
+		if (coords_array.getSize() > 1) {
+			coords_ptr = &coords_array[conf_idx];
+			more_confs = (conf_idx < 25 && (conf_idx + 1) < coords_array.getSize());
+
+			writeChar(os, 'A' + char(conf_idx));
+		}
+	}
+
+	if (!coords_ptr) {
+		coords_ptr = &get3DCoordinates(atom);
+
+		writeWhitespace(os, 1);
+	}
 
 	const std::string& res_code = getResidueCode(atom);
 
@@ -632,14 +652,18 @@ long Biomol::PDBDataWriter::writeATOMRecord(std::ostream& os, long serial, const
 	writeChar(os, chain_id.length() >= 1 ? chain_id[0] : ' ');
 	writeIntegerNumber(os, 4, checkResidueSequenceNumber(getResidueSequenceNumber(atom)),
 					   ("PDBDataWriter: error while writing residue sequence number for " + rec_prefix + " record").c_str(), false);
-	writeChar(os, getResidueInsertionCode(atom));
+
+	char ins_code = getResidueInsertionCode(atom);
+
+	writeChar(os, ins_code == 0 ? ' ' : ins_code);
 	writeWhitespace(os, 3);
 	
-	const Math::Vector3D& coords = get3DCoordinates(atom);
+	const Math::Vector3D& coords = *coords_ptr;
 
 	writeFloatNumber(os, 8, 3, coords(0), ("PDBDataWriter: error while writing x-coordinate for " + rec_prefix + " record").c_str());
 	writeFloatNumber(os, 8, 3, coords(1), ("PDBDataWriter: error while writing y-coordinate for " + rec_prefix + " record").c_str());
 	writeFloatNumber(os, 8, 3, coords(2), ("PDBDataWriter: error while writing z-coordinate for " + rec_prefix + " record").c_str());
+
 	writeFloatNumber(os, 6, 2, getOccupancy(atom), ("PDBDataWriter: error while writing occupancy for " + rec_prefix + " record").c_str());
 	writeFloatNumber(os, 6, 2, getBFactor(atom), ("PDBDataWriter: error while writing temperature factor for " + rec_prefix + " record").c_str());
 	writeWhitespace(os, 10);
@@ -663,8 +687,11 @@ long Biomol::PDBDataWriter::writeATOMRecord(std::ostream& os, long serial, const
 	writePDBEOL(os);
 
 //	if (numWrittenModels < 1)
-		recordHistogram[PDB::ATOM_PREFIX]++;
+	recordHistogram[PDB::ATOM_PREFIX]++;
 	
+	if (more_confs)
+		return writeATOMRecord(os, serial + 1, atom, conf_idx + 1);
+
 	return (serial + 1);
 }
 
@@ -687,7 +714,10 @@ void Biomol::PDBDataWriter::writeTERRecord(std::ostream& os, long serial, const 
 	writeChar(os, chain_id.length() >= 1 ? chain_id[0] : ' ');
 	writeIntegerNumber(os, 4, checkResidueSequenceNumber(getResidueSequenceNumber(atom)),
 					   "PDBDataWriter: error while writing residue sequence number for TER record", false);
-	writeChar(os, getResidueInsertionCode(atom));
+
+	char ins_code = getResidueInsertionCode(atom);
+
+	writeChar(os, ins_code == 0 ? ' ' : ins_code);
 	writePDBEOL(os);
 }
 
