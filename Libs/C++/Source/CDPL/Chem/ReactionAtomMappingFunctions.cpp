@@ -61,7 +61,7 @@ Chem::AtomMapping::SharedPointer Chem::perceiveAtomMapping(const Reaction& rxn)
 
 			for (Molecule::ConstAtomIterator a_it = comp.getAtomsBegin(); a_it != atoms_end; ++a_it) {
 				const Atom& atom = *a_it;
-				std::size_t aam_id = getReactionAtomMappingID(atom);
+				std::size_t aam_id = getAtomMappingID(atom);
 
 				if (aam_id > 0)
 					alist_map[aam_id].push_back(&atom);

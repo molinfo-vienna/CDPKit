@@ -215,7 +215,7 @@ void Chem::Reactor::init()
 
 		for (Molecule::ConstAtomIterator a_it = reac.getAtomsBegin(); a_it != atoms_end; ++a_it) {
 			const Atom& atom = *a_it;
-			std::size_t aam_class_id = getReactionAtomMappingID(atom);
+			std::size_t aam_class_id = getAtomMappingID(atom);
 
 			if (aam_class_id > 0) {
 				reacAtomsToDelete[aam_class_id] = &atom;
@@ -237,7 +237,7 @@ void Chem::Reactor::init()
 			if (!mappedAtomMask.test(reac.getAtomIndex(atom2)))
 				continue;
 
-			IDPair atom_ids(getReactionAtomMappingID(atom1), getReactionAtomMappingID(atom2));
+			IDPair atom_ids(getAtomMappingID(atom1), getAtomMappingID(atom2));
 
 			if (atom_ids.first > atom_ids.second)
 				std::swap(atom_ids.first, atom_ids.second);
@@ -264,7 +264,7 @@ void Chem::Reactor::init()
 
 		for (Molecule::ConstAtomIterator a_it = prod.getAtomsBegin(); a_it != atoms_end; ++a_it) {
 			const Atom& atom = *a_it;
-			std::size_t aam_class_id = getReactionAtomMappingID(atom);
+			std::size_t aam_class_id = getAtomMappingID(atom);
 
 			if (aam_class_id > 0) {
 				prodAtomsToCreate[aam_class_id] = &atom;
@@ -286,7 +286,7 @@ void Chem::Reactor::init()
 			if (!mappedAtomMask.test(prod.getAtomIndex(atom2)))
 				continue;
 
-			IDPair atom_ids(getReactionAtomMappingID(atom1), getReactionAtomMappingID(atom2));
+			IDPair atom_ids(getAtomMappingID(atom1), getAtomMappingID(atom2));
 
 			if (atom_ids.first > atom_ids.second)
 				std::swap(atom_ids.first, atom_ids.second);

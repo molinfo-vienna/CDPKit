@@ -220,7 +220,7 @@ namespace CDPL
 
 		CDPL_CHEM_API std::size_t getMaxComponentGroupID(const Reaction& rxn);
 
-		CDPL_CHEM_API std::size_t getMaxReactionAtomMappingID(const Reaction& rxn);
+		CDPL_CHEM_API std::size_t getMaxAtomMappingID(const Reaction& rxn);
 
 
 		CDPL_CHEM_API void setAtomMatchConstraints(Reaction& rxn, const MatchConstraintList::SharedPointer& constr, bool overwrite);

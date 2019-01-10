@@ -33,8 +33,6 @@
 
 #include <cstddef>
 
-#include <boost/ref.hpp>
-
 #include "CDPL/Chem/APIPrefix.hpp"
 #include "CDPL/Util/IndexedElementIterator.hpp"
 
@@ -141,16 +139,23 @@ namespace CDPL
 			public:
 				ConstEntityAccessor(const EntityAccessor& accessor): container(accessor.container) {}
 
-				ConstEntityAccessor(const Entity3DContainer& cntnr): container(cntnr) {}
+				ConstEntityAccessor(const Entity3DContainer* cntnr): container(cntnr) {}
 
-				const Entity3D& operator()(std::size_t idx) const;
+				const Entity3D& operator()(std::size_t idx) const {
+					return container->getEntity(idx);
+				}
 
-				bool operator==(const ConstEntityAccessor& accessor) const;
+				bool operator==(const ConstEntityAccessor& accessor) const {
+					return (container == accessor.container);
+				} 
 
-				ConstEntityAccessor& operator=(const EntityAccessor& accessor);
+				ConstEntityAccessor& operator=(const EntityAccessor& accessor) {
+					container = accessor.container;
+					return *this;
+				}
 
 			private:
-				boost::reference_wrapper<const Entity3DContainer> container;
+				const Entity3DContainer* container;
 			};
 
 			class CDPL_CHEM_API EntityAccessor
@@ -159,14 +164,18 @@ namespace CDPL
 				friend class ConstEntityAccessor;
 
 			public:
-				EntityAccessor(Entity3DContainer& cntnr): container(cntnr) {}
+				EntityAccessor(Entity3DContainer* cntnr): container(cntnr) {}
 
-				Entity3D& operator()(std::size_t idx) const;
+				Entity3D& operator()(std::size_t idx) const {
+					return container->getEntity(idx);
+				}
 
-				bool operator==(const EntityAccessor& accessor) const;
+				bool operator==(const EntityAccessor& accessor) const {
+					return (container == accessor.container);
+				}
 
 			private:
-				boost::reference_wrapper<Entity3DContainer> container;
+				Entity3DContainer* container;
 			};
 		};
 

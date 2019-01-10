@@ -511,13 +511,13 @@ namespace CDPL
 		CDPL_CHEM_API bool hasReactionCenterStatus(const Atom& atom);
 
 
-		CDPL_CHEM_API std::size_t getReactionAtomMappingID(const Atom& atom);
+		CDPL_CHEM_API std::size_t getAtomMappingID(const Atom& atom);
 
-		CDPL_CHEM_API void setReactionAtomMappingID(Atom& atom, std::size_t id);
+		CDPL_CHEM_API void setAtomMappingID(Atom& atom, std::size_t id);
 
-		CDPL_CHEM_API void clearReactionAtomMappingID(Atom& atom);
+		CDPL_CHEM_API void clearAtomMappingID(Atom& atom);
 	
-		CDPL_CHEM_API bool hasReactionAtomMappingID(const Atom& atom);
+		CDPL_CHEM_API bool hasAtomMappingID(const Atom& atom);
 
 
 		CDPL_CHEM_API std::size_t getComponentGroupID(const Atom& atom);

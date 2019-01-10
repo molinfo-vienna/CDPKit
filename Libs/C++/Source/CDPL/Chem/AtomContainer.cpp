@@ -74,31 +74,3 @@ Chem::Entity3D& Chem::AtomContainer::getEntity(std::size_t idx)
 {
 	return getAtom(idx);
 }
-
-
-const Chem::Atom& Chem::AtomContainer::ConstAtomAccessor::operator()(std::size_t idx) const
-{
-	return container->getAtom(idx);
-}
-
-bool Chem::AtomContainer::ConstAtomAccessor::operator==(const ConstAtomAccessor& accessor) const 
-{
-	return (container == accessor.container);
-}
-
-Chem::AtomContainer::ConstAtomAccessor& Chem::AtomContainer::ConstAtomAccessor::operator=(const AtomAccessor& accessor) 
-{
-	container = accessor.container;
-	return *this;
-}
-
-
-Chem::Atom& Chem::AtomContainer::AtomAccessor::operator()(std::size_t idx) const
-{
-	return container->getAtom(idx);
-}
-
-bool Chem::AtomContainer::AtomAccessor::operator==(const AtomAccessor& accessor) const 
-{
-	return (container == accessor.container);
-}

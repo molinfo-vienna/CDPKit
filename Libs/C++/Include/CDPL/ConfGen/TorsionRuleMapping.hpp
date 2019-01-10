@@ -42,32 +42,32 @@ namespace CDPL
     namespace Chem
     {
 
-	class Bond;
+		class Bond;
     }
 
     namespace ConfGen
     {
 
-	/**
-	 * \addtogroup CDPL_CONFGEN_DATA_STRUCTURES
-	 * @{
-	 */
+		/**
+		 * \addtogroup CDPL_CONFGEN_DATA_STRUCTURES
+		 * @{
+		 */
 	
-	class CDPL_CONFGEN_API TorsionRuleMapping : public Util::MultiMap<const Chem::Bond*, TorsionRuleMatch, false>
-	{
+		class CDPL_CONFGEN_API TorsionRuleMapping : public Util::MultiMap<const Chem::Bond*, TorsionRuleMatch, false>
+		{
 
-	  public:
-	    typedef boost::shared_ptr<TorsionRuleMapping> SharedPointer;
+		  public:
+			typedef boost::shared_ptr<TorsionRuleMapping> SharedPointer;
 
-	  private:
-	    const char* getClassName() const {
-		return "TorsionRuleMapping";
-	    }
-	};
+		  private:
+			const char* getClassName() const {
+				return "TorsionRuleMapping";
+			}
+		};
 
-	/**
-	 * @}
-	 */
+		/**
+		 * @}
+		 */
     }
 }
 

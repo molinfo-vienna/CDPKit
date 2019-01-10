@@ -273,7 +273,7 @@ void Chem::AtomHydrophobicityCalculator::calcHydrophobicities(Util::DArray& hyd_
 	    const AtomMapping& mapping = m_it->getAtomMapping();
 
 	    for (AtomMapping::ConstEntryIterator it = mapping.getEntriesBegin(), end = mapping.getEntriesEnd(); it != end; ++it) {
-		std::size_t hyd_cat = getReactionAtomMappingID(*it->first);
+		std::size_t hyd_cat = getAtomMappingID(*it->first);
 
 		if (hyd_cat == 0)
 		    continue;

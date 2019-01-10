@@ -92,7 +92,7 @@ inline std::map<std::string, msgpack::object>
 encodeToMap(const StructureData& data, msgpack::zone& m_zone,
     int32_t coord_divider, int32_t occupancy_b_factor_divider,
     int32_t chain_name_max_length) {
-  if (!data.hasConsistentData(true, chain_name_max_length)) {
+  if (!data.hasConsistentData(false, chain_name_max_length)) {
     throw mmtf::EncodeError("mmtf EncoderError, StructureData does not have Consistent data... exiting!");
   }
 

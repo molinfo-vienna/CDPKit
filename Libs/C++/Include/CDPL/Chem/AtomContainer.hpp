@@ -166,11 +166,18 @@ namespace CDPL
 
 				ConstAtomAccessor(const AtomContainer* cntnr): container(cntnr) {}
 
-				const Atom& operator()(std::size_t idx) const;
+				const Atom& operator()(std::size_t idx) const {
+					return container->getAtom(idx);
+				}
 
-				bool operator==(const ConstAtomAccessor& accessor) const;
+				bool operator==(const ConstAtomAccessor& accessor) const {
+					return (container == accessor.container);
+				} 
 
-				ConstAtomAccessor& operator=(const AtomAccessor& accessor);
+				ConstAtomAccessor& operator=(const AtomAccessor& accessor) {
+					container = accessor.container;
+					return *this;
+				}
 
 			private:
 				const AtomContainer* container;
@@ -184,9 +191,13 @@ namespace CDPL
 			public:
 				AtomAccessor(AtomContainer* cntnr): container(cntnr) {}
 
-				Atom& operator()(std::size_t idx) const;
+				Atom& operator()(std::size_t idx) const {
+					return container->getAtom(idx);
+				}
 
-				bool operator==(const AtomAccessor& accessor) const;
+				bool operator==(const AtomAccessor& accessor) const {
+					return (container == accessor.container);
+				}
 
 			private:
 				AtomContainer* container;

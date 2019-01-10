@@ -213,7 +213,7 @@ void Chem::JMEDataWriter::writeAtom(std::ostream& os, const MolecularGraph& molg
 
 	writeAtomString(os, molgraph, atom);
 
-	std::size_t rxn_aam_id = getReactionAtomMappingID(atom);
+	std::size_t rxn_aam_id = getAtomMappingID(atom);
 
 	if (rxn_aam_id > 0)
 		os << AtomString::RXN_ATOM_ID_SEPARATOR << rxn_aam_id;

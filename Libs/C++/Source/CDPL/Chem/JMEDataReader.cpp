@@ -64,7 +64,7 @@ bool Chem::JMEDataReader::readReaction(std::istream& is, Reaction& rxn)
 
 	init();
 		
-	atomMappingIDOffset = getMaxReactionAtomMappingID(rxn);
+	atomMappingIDOffset = getMaxAtomMappingID(rxn);
 
 	unsigned int rxn_role = ReactionRole::REACTANT;
 	bool read_comp = false;
@@ -216,7 +216,7 @@ bool Chem::JMEDataReader::readMolecule(std::istream& is, Molecule& mol)
 
 	init();
 
-	atomMappingIDOffset = getMaxReactionAtomMappingID(mol);
+	atomMappingIDOffset = getMaxAtomMappingID(mol);
 
 	bool read_comp = false;
 	bool seen_delim = false;
@@ -779,7 +779,7 @@ void Chem::JMEDataReader::readReactionAtomMappingID(Atom& atom, std::string::con
 		throw Base::IOError("JMEDataReader: junk after reaction atom atom mapping class number");
 
 	if (rxn_aam_id > 0)
-		setReactionAtomMappingID(atom, rxn_aam_id + atomMappingIDOffset);
+		setAtomMappingID(atom, rxn_aam_id + atomMappingIDOffset);
 }
 
 void Chem::JMEDataReader::readBond(std::istream& is, Molecule& mol, std::size_t atom_idx_offs, 

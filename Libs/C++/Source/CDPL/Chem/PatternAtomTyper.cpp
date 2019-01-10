@@ -45,8 +45,8 @@ Chem::PatternAtomTyper::Pattern::Pattern(const MolecularGraph::SharedPointer& st
 	for (MolecularGraph::ConstAtomIterator it = structure->getAtomsBegin(), end = structure->getAtomsEnd(); it != end; ++it) {
 		const Atom& atom = *it;
 
-		if (hasReactionAtomMappingID(atom))
-			labeledAtoms.push_back(AtomLabelPair(&atom, getReactionAtomMappingID(atom)));
+		if (hasAtomMappingID(atom))
+			labeledAtoms.push_back(AtomLabelPair(&atom, getAtomMappingID(atom)));
 	}
 }
 

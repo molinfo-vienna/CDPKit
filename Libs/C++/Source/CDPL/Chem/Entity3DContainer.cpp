@@ -35,53 +35,25 @@ using namespace CDPL;
 
 Chem::Entity3DContainer::ConstEntityIterator Chem::Entity3DContainer::getEntitiesBegin() const
 {
-	return ConstEntityIterator(*this, 0);
+	return ConstEntityIterator(this, 0);
 }
 
 Chem::Entity3DContainer::ConstEntityIterator Chem::Entity3DContainer::getEntitiesEnd() const
 {
-	return ConstEntityIterator(*this, getNumEntities());
+	return ConstEntityIterator(this, getNumEntities());
 }
 
 Chem::Entity3DContainer::EntityIterator Chem::Entity3DContainer::getEntitiesBegin()
 {
-	return EntityIterator(*this, 0);
+	return EntityIterator(this, 0);
 }
 
 Chem::Entity3DContainer::EntityIterator Chem::Entity3DContainer::getEntitiesEnd()
 {
-	return EntityIterator(*this, getNumEntities());
+	return EntityIterator(this, getNumEntities());
 }
 
 Chem::Entity3DContainer& Chem::Entity3DContainer::operator=(const Entity3DContainer& cntnr) 
 {
 	return *this;
-}
-
-
-const Chem::Entity3D& Chem::Entity3DContainer::ConstEntityAccessor::operator()(std::size_t idx) const
-{
-	return container.get().getEntity(idx);
-}
-
-bool Chem::Entity3DContainer::ConstEntityAccessor::operator==(const ConstEntityAccessor& accessor) const 
-{
-	return (container.get_pointer() == accessor.container.get_pointer());
-}
-
-Chem::Entity3DContainer::ConstEntityAccessor& Chem::Entity3DContainer::ConstEntityAccessor::operator=(const EntityAccessor& accessor) 
-{
-	container = boost::reference_wrapper<const Entity3DContainer>(accessor.container);
-	return *this;
-}
-
-
-Chem::Entity3D& Chem::Entity3DContainer::EntityAccessor::operator()(std::size_t idx) const
-{
-	return container.get().getEntity(idx);
-}
-
-bool Chem::Entity3DContainer::EntityAccessor::operator==(const EntityAccessor& accessor) const 
-{
-	return (container.get_pointer() == accessor.container.get_pointer());
 }

@@ -77,7 +77,7 @@ unsigned int ConfGen::TorsionCategory::getBondAtom2Type() const
 
 void ConfGen::TorsionCategory::setBondAtom2Type(unsigned int type)
 {
-	bondAtom1Type = type;
+	bondAtom2Type = type;
 }
 
 ConfGen::TorsionCategory& ConfGen::TorsionCategory::addCategory()

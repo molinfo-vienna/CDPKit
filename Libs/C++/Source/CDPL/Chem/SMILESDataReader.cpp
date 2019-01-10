@@ -77,7 +77,7 @@ bool Chem::SMILESDataReader::readReaction(std::istream& is, Reaction& rxn)
 
 	getParameters();
 
-	atomMappingIDOffset = getMaxReactionAtomMappingID(rxn);
+	atomMappingIDOffset = getMaxAtomMappingID(rxn);
 
 	if (!(is >> rxnSMILESString)) 
 		throw Base::IOError("SMILESDataReader: reading of reaction SMILES string failed");
@@ -187,7 +187,7 @@ bool Chem::SMILESDataReader::readMolecule(std::istream& is, Molecule& mol)
 
 	getParameters();
 
-	atomMappingIDOffset = getMaxReactionAtomMappingID(mol);
+	atomMappingIDOffset = getMaxAtomMappingID(mol);
 
 	if (!(is >> molSMILESString)) 
 		throw Base::IOError("SMILESDataReader: reading of molecule SMILES string failed");
@@ -569,7 +569,7 @@ const Chem::Atom* Chem::SMILESDataReader::parseSpecialAtom(Molecule& mol)
 		setImplicitHydrogenCount(atom, impl_h_count);
 
 	if (aam_id > 0)
-		setReactionAtomMappingID(atom, aam_id + atomMappingIDOffset);
+		setAtomMappingID(atom, aam_id + atomMappingIDOffset);
 
 	if (aromatic)
 		setAtomAromaticityFlag(atom_idx);

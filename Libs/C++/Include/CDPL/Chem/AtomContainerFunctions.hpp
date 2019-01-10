@@ -121,7 +121,7 @@ namespace CDPL
 
 		CDPL_CHEM_API std::size_t getMaxComponentGroupID(const AtomContainer& cntnr);
 
-		CDPL_CHEM_API std::size_t getMaxReactionAtomMappingID(const AtomContainer& cntnr);
+		CDPL_CHEM_API std::size_t getMaxAtomMappingID(const AtomContainer& cntnr);
 
 
 		CDPL_CHEM_API std::size_t buildAtomTypeMask(const AtomContainer& cntnr, Util::BitSet& mask, unsigned int type, bool reset = true);

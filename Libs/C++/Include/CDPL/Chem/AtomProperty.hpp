@@ -100,7 +100,7 @@ namespace CDPL
 			extern CDPL_CHEM_API const Base::LookupKey PEOE_CHARGE;
 	
 			extern CDPL_CHEM_API const Base::LookupKey REACTION_CENTER_STATUS;
-			extern CDPL_CHEM_API const Base::LookupKey REACTION_ATOM_MAPPING_ID;
+			extern CDPL_CHEM_API const Base::LookupKey ATOM_MAPPING_ID;
 			
 			extern CDPL_CHEM_API const Base::LookupKey MATCH_CONSTRAINTS;
 			extern CDPL_CHEM_API const Base::LookupKey MATCH_EXPRESSION;

@@ -188,8 +188,8 @@ void ForceField::MMFF94SymbolicAtomTypePatternTable::load(std::istream& is)
 		for (BasicMolecule::AtomIterator it = mol_ptr->getAtomsBegin(), end = mol_ptr->getAtomsEnd(); it != end; ++it) {
 			Atom& atom = *it;
 
-			if (hasReactionAtomMappingID(atom)) {
-				if (getReactionAtomMappingID(atom) == 2)
+			if (hasAtomMappingID(atom)) {
+				if (getAtomMappingID(atom) == 2)
 					fb = true;
 			}
 		}

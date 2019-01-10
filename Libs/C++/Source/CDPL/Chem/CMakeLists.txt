@@ -159,7 +159,7 @@ SET(cdpl-chem_LIB_SRCS
     AtomContainerElementalCompositionFunctions.cpp
     AtomContainerMassCompositionFunctions.cpp
     AtomContainerCoordinatesFunctions.cpp
-    AtomContainerMaxReactionAtomMappingIDFunction.cpp
+    AtomContainerMaxAtomMappingIDFunction.cpp
     AtomContainerMaxComponentGroupIDFunction.cpp
     AtomContainerConformationFunctions.cpp
     AtomContainerAtomTypeMaskFunction.cpp
@@ -276,7 +276,7 @@ SET(cdpl-chem_LIB_SRCS
     ReactionHashCodeFunction.cpp
     ReactionSMILESFunction.cpp
     ReactionSubstructSearchInitializationFunctions.cpp
-    ReactionMaxReactionAtomMappingIDFunction.cpp
+    ReactionMaxAtomMappingIDFunction.cpp
     ReactionMaxComponentGroupIDFunction.cpp
 
     MoleculeHydrogenManipulationFunctions.cpp

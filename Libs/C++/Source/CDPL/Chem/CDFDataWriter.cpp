@@ -208,8 +208,8 @@ void Chem::CDFDataWriter::outputAtoms(const MolecularGraph& molgraph, Internal::
 		if (hasReactionCenterStatus(atom))
 			putIntProperty(CDF::AtomProperty::REACTION_CENTER_STATUS, boost::numeric_cast<CDF::UIntType>(getReactionCenterStatus(atom)), bbuf);
 
-		if (hasReactionAtomMappingID(atom))
-			putIntProperty(CDF::AtomProperty::REACTION_ATOM_MAPPING_ID, boost::numeric_cast<CDF::SizeType>(getReactionAtomMappingID(atom)), bbuf);
+		if (hasAtomMappingID(atom))
+			putIntProperty(CDF::AtomProperty::ATOM_MAPPING_ID, boost::numeric_cast<CDF::SizeType>(getAtomMappingID(atom)), bbuf);
 
 		if (hasStereoDescriptor(atom)) 
 			putStereoDescriptor(molgraph, CDF::AtomProperty::STEREO_DESCRIPTOR, getStereoDescriptor(atom), bbuf);

@@ -57,31 +57,3 @@ Chem::BondContainer& Chem::BondContainer::operator=(const BondContainer& cntnr)
 {
 	return *this;
 }
-
-
-const Chem::Bond& Chem::BondContainer::ConstBondAccessor::operator()(std::size_t idx) const
-{
-	return container->getBond(idx);
-}
-
-bool Chem::BondContainer::ConstBondAccessor::operator==(const ConstBondAccessor& accessor) const 
-{
-	return (container == accessor.container);
-}
-
-Chem::BondContainer::ConstBondAccessor& Chem::BondContainer::ConstBondAccessor::operator=(const BondAccessor& accessor) 
-{
-	container = accessor.container;
-	return *this;
-}
-
-
-Chem::Bond& Chem::BondContainer::BondAccessor::operator()(std::size_t idx) const
-{
-	return container->getBond(idx);
-}
-
-bool Chem::BondContainer::BondAccessor::operator==(const BondAccessor& accessor) const 
-{
-	return (container == accessor.container);
-}

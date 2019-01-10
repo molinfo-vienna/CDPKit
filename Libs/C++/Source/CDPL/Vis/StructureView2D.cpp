@@ -349,7 +349,7 @@ void Vis::StructureView2D::createAtomPrimitives(const Chem::Atom& atom)
 {
 	std::size_t h_count = getHydrogenCount(atom);
 	std::size_t rad_elec_count = (parameters->showRadicalElectrons() ? getUnpairedElectronCount(atom) : 0);
-	std::size_t aam_id = (parameters->showAtomReactionInfos() ? getReactionAtomMappingID(atom) : 0);
+	std::size_t aam_id = (parameters->showAtomReactionInfos() ? getAtomMappingID(atom) : 0);
 	std::string symbol = getSymbol(atom);
 	std::size_t isotope = (parameters->showIsotopes() ? getIsotope(atom) : 0);
 	long charge = (parameters->showCharges() ? getFormalCharge(atom) : 0);
@@ -2419,7 +2419,7 @@ void Vis::StructureView2D::prepareStructureData()
 			if (parameters->showIsotopes() && getIsotope(nbr_atom) > 0)
 				continue;
 					
-			if (parameters->showAtomReactionInfos() && getReactionAtomMappingID(nbr_atom) > 0)
+			if (parameters->showAtomReactionInfos() && getAtomMappingID(nbr_atom) > 0)
 				continue;
 		
 			if (parameters->showCharges() && getFormalCharge(nbr_atom) != 0)

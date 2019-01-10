@@ -45,7 +45,7 @@ namespace
 	MAKE_FUNCTION_WRAPPER1(std::size_t, getRingAtomCount, CDPL::Chem::AtomContainer&)
 	MAKE_FUNCTION_WRAPPER1(std::size_t, getAromaticAtomCount, CDPL::Chem::AtomContainer&)
 	MAKE_FUNCTION_WRAPPER1(std::size_t, getHeavyAtomCount, CDPL::Chem::AtomContainer&)
-	MAKE_FUNCTION_WRAPPER1(std::size_t, getMaxReactionAtomMappingID, CDPL::Chem::AtomContainer&)
+	MAKE_FUNCTION_WRAPPER1(std::size_t, getMaxAtomMappingID, CDPL::Chem::AtomContainer&)
 	MAKE_FUNCTION_WRAPPER1(std::size_t, getMaxComponentGroupID, CDPL::Chem::AtomContainer&)
 	MAKE_FUNCTION_WRAPPER1(long, calcFormalCharge, CDPL::Chem::AtomContainer&)
 	MAKE_FUNCTION_WRAPPER1(double, calcExplicitMass, CDPL::Chem::AtomContainer&)
@@ -101,7 +101,7 @@ void CDPLPythonChem::exportAtomContainerFunctions()
 	python::def("getAromaticAtomCount", &getAromaticAtomCountWrapper1, python::arg("cntnr"));
 	python::def("getHeavyAtomCount", &getHeavyAtomCountWrapper1, python::arg("cntnr"));
 	python::def("getMaxComponentGroupID", &getMaxComponentGroupIDWrapper1, python::arg("cntnr"));
-	python::def("getMaxReactionAtomMappingID", &getMaxReactionAtomMappingIDWrapper1, python::arg("cntnr"));
+	python::def("getMaxAtomMappingID", &getMaxAtomMappingIDWrapper1, python::arg("cntnr"));
 	python::def("calcFormalCharge", &calcFormalChargeWrapper1, python::arg("cntnr"));
 	python::def("calcExplicitMass", &calcExplicitMassWrapper1, python::arg("cntnr"));
 	python::def("calcExplicitMassComposition", &calcExplicitMassCompositionWrapper2, (python::arg("cntnr"), python::arg("mass_comp")));

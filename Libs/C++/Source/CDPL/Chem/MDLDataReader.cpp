@@ -120,7 +120,7 @@ bool Chem::MDLDataReader::readMolecule(std::istream& is, Molecule& mol, bool rea
 	std::size_t atom_idx_offs = mol.getNumAtoms();
 	std::size_t bond_idx_offs = mol.getNumBonds();
 
-	atomMappingIDOffset = getMaxReactionAtomMappingID(mol);
+	atomMappingIDOffset = getMaxAtomMappingID(mol);
 
 	readMOLHeaderBlock(is, mol);
 	readMOLCTab(is, mol);
@@ -196,7 +196,7 @@ bool Chem::MDLDataReader::readRXNFile(std::istream& is, Reaction& rxn)
 
 	init(is);
 
-	atomMappingIDOffset = getMaxReactionAtomMappingID(rxn);
+	atomMappingIDOffset = getMaxAtomMappingID(rxn);
 
 	readRXNHeaderBlock(is, rxn);
 	readRXNReaction(is, rxn);
@@ -938,7 +938,7 @@ void Chem::MDLDataReader::readCTabV2000AtomRxnInfo(std::istream& is, Atom& atom)
 													   strictErrorChecking);
 
 	if (aam_id > 0)
-		setReactionAtomMappingID(atom, aam_id + atomMappingIDOffset);
+		setAtomMappingID(atom, aam_id + atomMappingIDOffset);
 
 	unsigned int rxn_center_status = ReactionCenterStatus::NONE;
 
@@ -2738,7 +2738,7 @@ void Chem::MDLDataReader::readCTabV3000AtomRxnAAMNumber(std::istream& is, Atom& 
 		throw Base::IOError("MDLDataReader: error while reading ctab V3000 reaction atom atom mapping number");
 
 	if (aam_id > 0)
-		setReactionAtomMappingID(atom, aam_id + atomMappingIDOffset);
+		setAtomMappingID(atom, aam_id + atomMappingIDOffset);
 }
 
 void Chem::MDLDataReader::readCTabV3000AtomCharge(std::istream& is, Atom& atom) const

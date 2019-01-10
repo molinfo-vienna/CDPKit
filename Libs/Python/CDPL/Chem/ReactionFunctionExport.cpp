@@ -88,7 +88,7 @@ namespace
 	MAKE_FUNCTION_WRAPPER1(const CDPL::Chem::MatchConstraintList::SharedPointer&, getMatchConstraints, CDPL::Chem::Reaction&)
 	MAKE_FUNCTION_WRAPPER1(bool, hasMatchConstraints, CDPL::Chem::Reaction&)
 
-	MAKE_FUNCTION_WRAPPER1(std::size_t, getMaxReactionAtomMappingID, CDPL::Chem::Reaction&)
+	MAKE_FUNCTION_WRAPPER1(std::size_t, getMaxAtomMappingID, CDPL::Chem::Reaction&)
 	MAKE_FUNCTION_WRAPPER1(std::size_t, getMaxComponentGroupID, CDPL::Chem::Reaction&)
 
 	MAKE_FUNCTION_WRAPPER1(CDPL::Chem::MatchExpression<CDPL::Chem::Reaction>::SharedPointer, buildMatchExpression, CDPL::Chem::Reaction&)
@@ -153,7 +153,7 @@ void CDPLPythonChem::exportReactionFunctions()
 														python::arg("global_stereo") = true, python::arg("ord_h_deplete") = true));
 
 	python::def("getMaxComponentGroupID", &getMaxComponentGroupIDWrapper1, python::arg("rxn"));
-	python::def("getMaxReactionAtomMappingID", &getMaxReactionAtomMappingIDWrapper1, python::arg("rxn"));
+	python::def("getMaxAtomMappingID", &getMaxAtomMappingIDWrapper1, python::arg("rxn"));
 
 	EXPORT_REACTION_FUNCS_COPY_REF_CW(MatchExpression, expr)
 	EXPORT_REACTION_FUNCS_COPY_REF_CW(ComponentGroups, comp_groups)

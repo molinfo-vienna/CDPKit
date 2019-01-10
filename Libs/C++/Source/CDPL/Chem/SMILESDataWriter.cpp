@@ -528,7 +528,7 @@ void Chem::SMILESDataWriter::buildHDepleteMolGraph(const MolecularGraph& molgrap
 				continue;
 					
 			if (ctrlParameters.writeRxnAtomMappingID &&
-				getReactionAtomMappingID(nbr_atom) > 0)
+				getAtomMappingID(nbr_atom) > 0)
 				continue;
 		
 			if (getFormalCharge(nbr_atom) != 0)
@@ -969,7 +969,7 @@ void Chem::SMILESDataWriter::DFSTreeNode::writeAtomString(std::ostream& os) cons
 	long charge = getFormalCharge(*atom);
 	unsigned int atom_type = getType(*atom);
 	std::size_t isotope = (writer.ctrlParameters.writeIsotope ? getIsotope(*atom) : 0);
-	std::size_t aam_id = (writer.ctrlParameters.writeRxnAtomMappingID ? getReactionAtomMappingID(*atom) : 0);
+	std::size_t aam_id = (writer.ctrlParameters.writeRxnAtomMappingID ? getAtomMappingID(*atom) : 0);
 	int stereo_rot = (writer.ctrlParameters.writeAtomStereo ? getStereoParity() : 0);
 	std::size_t impl_h_count = calcImplicitHydrogenCount(*atom, *molGraph);
 	bool in_brackets;

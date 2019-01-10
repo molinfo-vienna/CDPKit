@@ -78,7 +78,7 @@ namespace CDPL
 				const unsigned int STEREO_DESCRIPTOR        = 15;
 				const unsigned int CIP_CONFIGURATION        = 16;
 				const unsigned int REACTION_CENTER_STATUS   = 17;
-				const unsigned int REACTION_ATOM_MAPPING_ID = 18;
+				const unsigned int ATOM_MAPPING_ID          = 18;
 				const unsigned int MATCH_CONSTRAINTS        = 19;
 				const unsigned int COMPONENT_GROUP_ID       = 20;
 			}

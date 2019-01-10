@@ -3127,7 +3127,7 @@
       </rule>
     </category>
 
-  <category name="GG" pattern="[*:2][*:3]">
+  <category name="GG" atomType1="*" atomType2="*">
     <rule pattern="[*:1]~[CX4:2]!@[n:3]~[*:4]">
       <torsions>
         <angle value="0.0" tolerance1="30.00" tolerance2="30.00" score="3.07"/>

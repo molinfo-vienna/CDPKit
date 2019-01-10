@@ -170,7 +170,7 @@ void Pharm::PatternBasedFeatureGenerator::addFeature(const Chem::AtomBondMapping
 		const Atom& ptn_atom = *it->first;
 		const Atom& mpd_atom = *it->second;
 
-		std::size_t label = getReactionAtomMappingID(ptn_atom);
+		std::size_t label = getAtomMappingID(ptn_atom);
 
 		if (label & FEATURE_ATOM_FLAG)
 			substruct_ptr->addAtom(mpd_atom);
@@ -345,7 +345,7 @@ void Pharm::PatternBasedFeatureGenerator::createMatchedAtomMask(const Chem::Atom
 
 	for (AtomMapping::ConstEntryIterator it = mapping.getEntriesBegin(), end = mapping.getEntriesEnd(); it != end; ++it) {
 		if (check_label) {
-			std::size_t label = getReactionAtomMappingID(*it->first);
+			std::size_t label = getAtomMappingID(*it->first);
 
 			if (!(label & FEATURE_ATOM_FLAG))
 				continue;

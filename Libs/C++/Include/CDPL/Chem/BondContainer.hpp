@@ -159,11 +159,18 @@ namespace CDPL
 
 				ConstBondAccessor(const BondContainer* cntnr): container(cntnr) {}
 
-				const Bond& operator()(std::size_t idx) const;
+				const Bond& operator()(std::size_t idx) const {
+					return container->getBond(idx);
+				}
 
-				bool operator==(const ConstBondAccessor& accessor) const;
+				bool operator==(const ConstBondAccessor& accessor) const {
+					return (container == accessor.container);
+				} 
 
-				ConstBondAccessor& operator=(const BondAccessor& accessor);
+				ConstBondAccessor& operator=(const BondAccessor& accessor) {
+					container = accessor.container;
+					return *this;
+				}
 
 			private:
 				const BondContainer* container;
@@ -177,9 +184,13 @@ namespace CDPL
 			public:
 				BondAccessor(BondContainer* cntnr): container(cntnr) {}
 
-				Bond& operator()(std::size_t idx) const;
+				Bond& operator()(std::size_t idx) const {
+					return container->getBond(idx);
+				}
 
-				bool operator==(const BondAccessor& accessor) const;
+				bool operator==(const BondAccessor& accessor) const {
+					return (container == accessor.container);
+				}
 
 			private:
 				BondContainer* container;

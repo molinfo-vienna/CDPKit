@@ -345,9 +345,9 @@ std::size_t Chem::CDFDataReader::readAtoms(Molecule& mol, Internal::ByteBuffer& 
 					setReactionCenterStatus(atom, uint_val);
 					continue;
 
-				case CDF::AtomProperty::REACTION_ATOM_MAPPING_ID:
+				case CDF::AtomProperty::ATOM_MAPPING_ID:
 					getIntProperty(prop_spec, size_val, bbuf);
-					setReactionAtomMappingID(atom, size_val);
+					setAtomMappingID(atom, size_val);
 					continue;
 
 				case CDF::AtomProperty::STEREO_DESCRIPTOR: {

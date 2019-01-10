@@ -575,7 +575,7 @@ void Chem::SMARTSDataWriter::DFSTreeNode::writeAtomExpression(std::ostream& os) 
 	using namespace SMARTS;
 
 	const MatchConstraintList& constr_list = *getMatchConstraints(*atom);
-	std::size_t aam_id = getReactionAtomMappingID(*atom);
+	std::size_t aam_id = getAtomMappingID(*atom);
 
 	if (aam_id == 0) {
 		if (constr_list.getSize() == 0) {

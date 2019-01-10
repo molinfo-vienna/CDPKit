@@ -26,6 +26,7 @@ SET(cdpl-confgen_LIB_SRCS
     TorsionRule.cpp
     TorsionCategory.cpp
     TorsionRuleMatch.cpp
+    TorsionRuleMatcher.cpp
 
     CDFFragmentLibraryDataReader.cpp
     CDFFragmentLibraryDataWriter.cpp

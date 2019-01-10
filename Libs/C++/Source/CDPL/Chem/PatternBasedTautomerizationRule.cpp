@@ -235,7 +235,7 @@ Chem::Atom* Chem::PatternBasedTautomerizationRule::getTautomerAtom(Molecule& tau
 	for (MolecularGraph::ConstAtomIterator it = structPatterns[currPatternIdx]->getAtomsBegin(), end = structPatterns[currPatternIdx]->getAtomsEnd(); it != end; ++it) {
 		const Atom& ptn_atom = *it;
 
-		if (getReactionAtomMappingID(ptn_atom) != ptn_atom_id)
+		if (getAtomMappingID(ptn_atom) != ptn_atom_id)
 			continue;
 
 		const Atom* tgt_atom = mapping[&ptn_atom];

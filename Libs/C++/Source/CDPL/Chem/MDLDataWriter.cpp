@@ -772,7 +772,7 @@ void Chem::MDLDataWriter::writeCTabV2000AtomRxnInfo(std::ostream& os, const Atom
 	using namespace Internal;
 	using namespace MDL::MOLFile::CTab::V2000;
 
-	std::size_t rxn_aam_no = getReactionAtomMappingID(atom); 
+	std::size_t rxn_aam_no = getAtomMappingID(atom); 
 
 	writeIntegerNumber(os, 3, rxn_aam_no == 0 ? AtomBlock::RXN_MAPPING_NO_UNDEF : rxn_aam_no, 
 					   "MDLDataWriter: error while writing reaction atom atom mapping number");
@@ -2224,7 +2224,7 @@ void Chem::MDLDataWriter::writeCTabV3000AtomCoords(std::ostream& os, const Molec
 
 void Chem::MDLDataWriter::writeCTabV3000AtomRxnAAMNumber(std::ostream& os, const Atom& atom) const
 {
-	os << ' ' << getReactionAtomMappingID(atom);
+	os << ' ' << getAtomMappingID(atom);
 }
 
 void Chem::MDLDataWriter::writeCTabV3000AtomCharge(std::ostream& os, const Atom& atom) const

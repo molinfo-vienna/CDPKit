@@ -43,6 +43,7 @@
 #include "CDPL/ConfGen/TorsionLibrary.hpp"
 #include "CDPL/ConfGen/TorsionRuleMatch.hpp"
 #include "CDPL/ConfGen/TorsionRuleMapping.hpp"
+#include "CDPL/ConfGen/TorsionRuleMatcher.hpp"
 #include "CDPL/ConfGen/UtilityFunctions.hpp"
 #include "CDPL/ConfGen/FragmentType.hpp"
 #include "CDPL/ConfGen/ForceFieldType.hpp"

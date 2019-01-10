@@ -81,7 +81,7 @@ bool Chem::SMARTSDataReader::readReaction(std::istream& is, Reaction& rxn)
 		throw Base::IOError("SMARTSDataReader: reading of reaction SMARTS string failed");
 
 	strictErrorChecking = getStrictErrorCheckingParameter(ioBase);
-	atomMappingIDOffset = getMaxReactionAtomMappingID(rxn);
+	atomMappingIDOffset = getMaxAtomMappingID(rxn);
 
 	bool have_aam_ids = false;
 	bool have_comp_groups = false;
@@ -214,7 +214,7 @@ bool Chem::SMARTSDataReader::readMolecule(std::istream& is, Molecule& mol)
 		throw Base::IOError("SMARTSDataReader: reading of molecule SMARTS string failed");
 
 	strictErrorChecking = getStrictErrorCheckingParameter(ioBase);
-	atomMappingIDOffset = getMaxReactionAtomMappingID(mol);
+	atomMappingIDOffset = getMaxAtomMappingID(mol);
 
 	init(mol);
 	
@@ -852,7 +852,7 @@ Chem::MatchConstraintList::SharedPointer Chem::SMARTSDataReader::parseExplicitHA
 		return MatchConstraintList::SharedPointer();
 	}
 
-	addAtomTypeConstraint(AtomType::H, false, false, *constr_list);
+	addAtomTypeConstraint(AtomType::H, false, *constr_list);
 
 	getChar(c, false);
 
@@ -1940,7 +1940,7 @@ void Chem::SMARTSDataReader::parseReactionAtomMappingID(Atom& atom)
 		throw Base::IOError("SMARTSDataReader: invalid or missing reaction atom atom mapping class number");
 
 	if (aam_id > 0)
-		setReactionAtomMappingID(atom, aam_id + atomMappingIDOffset);
+		setAtomMappingID(atom, aam_id + atomMappingIDOffset);
 
 	hasUnspecStereoSuffix();
 
