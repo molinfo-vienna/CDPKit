@@ -760,7 +760,7 @@ void Chem::SMARTSDataWriter::DFSTreeNode::writeComplexAtomExpression(const Match
 	using namespace SMARTS;
 
 	if (depth == 0) {
-		if (writeAtomTypeExpression(constr_list, expr_list_str))
+		if (writeAtomTypeExpression(constr_list, expr_list_str, true))
 			return;
 
 		switch (constr_list.getType()) {
@@ -1047,7 +1047,7 @@ void Chem::SMARTSDataWriter::DFSTreeNode::writeAtomTypeExpression(const MatchCon
 }
 
 bool Chem::SMARTSDataWriter::DFSTreeNode::writeAtomTypeExpression(const MatchConstraintList& constr_list, 
-																  std::string& expr_str) const
+																  std::string& expr_str, bool allow_exp_h) const
 {
 	using namespace SMARTS;
 
@@ -1169,14 +1169,18 @@ bool Chem::SMARTSDataWriter::DFSTreeNode::writeAtomTypeExpression(const MatchCon
 			if (write_not_prefix)
 				return false;
 
-			if (type_first) 
-				writeAtomicNumber(1, false, expr_str);
+			if (allow_exp_h && !write_arom_sym) 
+				expr_str.push_back('H');
 
-			expr_str.push_back(write_arom_sym ? AtomExpression::ANY_AROMATIC_ATOM : AtomExpression::ANY_NON_AROMATIC_ATOM);
+			else {
+				if (type_first) 
+					writeAtomicNumber(1, false, expr_str);
 
-			if (!type_first) 
-				writeAtomicNumber(1, false, expr_str);
+				expr_str.push_back(write_arom_sym ? AtomExpression::ANY_AROMATIC_ATOM : AtomExpression::ANY_NON_AROMATIC_ATOM);
 
+				if (!type_first) 
+					writeAtomicNumber(1, false, expr_str);
+			}
 			return true;
 
 		default:

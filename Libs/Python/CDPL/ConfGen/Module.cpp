@@ -45,7 +45,6 @@ BOOST_PYTHON_MODULE(_confgen)
 	exportTorsionCategory();
 	exportTorsionLibrary();
 	exportTorsionRuleMatch();
-	exportTorsionRuleMapping();
 	exportTorsionRuleMatcher();
 
 #if defined(HAVE_BOOST_TIMER) && defined(HAVE_BOOST_CHRONO)

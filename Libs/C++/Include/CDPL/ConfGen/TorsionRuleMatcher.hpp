@@ -31,8 +31,11 @@
 #ifndef CDPL_CONFGEN_TORSIONRULEMATCHER_HPP
 #define CDPL_CONFGEN_TORSIONRULEMATCHER_HPP
 
+#include <vector>
+
 #include "CDPL/ConfGen/APIPrefix.hpp"
 #include "CDPL/ConfGen/TorsionLibrary.hpp"
+#include "CDPL/ConfGen/TorsionRuleMatch.hpp"
 #include "CDPL/Chem/SubstructureSearch.hpp"
 
 
@@ -42,8 +45,6 @@ namespace CDPL
     namespace ConfGen 
     {
 
-		class TorsionRuleMapping;
-
 		/**
 		 * \addtogroup CDPL_CONFGEN_HELPERS
 		 * @{
@@ -52,7 +53,11 @@ namespace CDPL
 		class CDPL_CONFGEN_API TorsionRuleMatcher
 		{
 
+			typedef std::vector<TorsionRuleMatch> RuleMatchList;
+
 		  public:
+			typedef RuleMatchList::const_iterator ConstMatchIterator;
+
 			TorsionRuleMatcher();
 
 			TorsionRuleMatcher(const TorsionLibrary::SharedPointer& lib);
@@ -73,19 +78,40 @@ namespace CDPL
 
 			const TorsionLibrary::SharedPointer& getTorsionLibrary() const;
 
-			bool findMatches(const Chem::Bond& bond, const Chem::MolecularGraph& molgraph, 
-							 TorsionRuleMapping& rule_map, bool append = false);
+			/**
+			 * \brief Returns the number of stored torsion rule matches found by calls to findMatches().
+			 * \return The number of stored torsion rule matches.
+			 */
+			std::size_t getNumMatches() const;
+
+			/**
+			 * \brief Returns a \c const reference to the stored torsion rule match at index \a idx.
+			 * \param idx The zero-based index of the torsion rule match to return.
+			 * \return A \c const reference to the torsion rule match at index \a idx.
+			 * \throw Base::IndexError if no torsion rulematches are available or \a idx is not in the range [0, getNumMatches() - 1].
+			 */
+			const TorsionRuleMatch& getMatch(std::size_t idx) const;
+
+			/**
+			 * \brief Returns a constant iterator pointing to the beginning of the stored torsion rule matches.
+			 * \return A constant iterator pointing to the beginning of the stored torsion rule matches.
+			 */
+			ConstMatchIterator getMatchesBegin() const;
+
+			/**
+			 * \brief Returns a constant iterator pointing to the end of the stored torsion rule matches.
+			 * \return A constant iterator pointing to the end of the stored torsion rule matches.
+			 */
+			ConstMatchIterator getMatchesEnd() const;
+
+			bool findMatches(const Chem::Bond& bond, const Chem::MolecularGraph& molgraph, bool append = false);
 
 		  private:
-			bool findMatchingRules(const TorsionCategory& tor_cat, const Chem::Bond& bond, 
-								   const Chem::MolecularGraph& molgraph, TorsionRuleMapping& rule_map);
-			bool getRuleMatches(const TorsionRule& rule, const Chem::Bond& bond, const Chem::MolecularGraph& molgraph, 
-								TorsionRuleMapping& rule_map);
-			bool matchesCategory(const TorsionCategory& tor_cat, const Chem::Bond& bond, 
-								 const Chem::MolecularGraph& molgraph);
+			bool findMatchingRules(const TorsionCategory& tor_cat, const Chem::Bond& bond, const Chem::MolecularGraph& molgraph);
+			bool getRuleMatches(const TorsionRule& rule, const Chem::Bond& bond, const Chem::MolecularGraph& molgraph);
+			bool matchesCategory(const TorsionCategory& tor_cat, const Chem::Bond& bond, const Chem::MolecularGraph& molgraph);
 
-			void outputRuleMatch(const Chem::AtomBondMapping& ab_mapping, const Chem::Bond& bond, 
-								 const TorsionRule& rule, TorsionRuleMapping& rule_map) const;
+			void outputMatch(const Chem::AtomBondMapping& ab_mapping, const Chem::Bond& bond, const TorsionRule& rule);
 
 			std::size_t getCentralBondIndex(const Chem::MolecularGraph& ptn) const;
 
@@ -93,6 +119,7 @@ namespace CDPL
 			Chem::SubstructureSearch      subSearch;
 			bool                          uniqueMappingsOnly;
 			bool                          stopAtFirstRule;
+			RuleMatchList                 matches;
 		};
     
 		/**

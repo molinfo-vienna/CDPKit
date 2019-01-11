@@ -31,9 +31,9 @@
 #include <boost/bind.hpp>
 
 #include "CDPL/ConfGen/TorsionRuleMatcher.hpp"
-#include "CDPL/ConfGen/TorsionRuleMapping.hpp"
 #include "CDPL/Chem/AtomFunctions.hpp"
 #include "CDPL/Chem/Bond.hpp"
+#include "CDPL/Base/Exceptions.hpp"
 
 
 using namespace CDPL;
@@ -97,20 +97,43 @@ const ConfGen::TorsionLibrary::SharedPointer& ConfGen::TorsionRuleMatcher::getTo
     return torLib;
 }
 
+std::size_t ConfGen::TorsionRuleMatcher::getNumMatches() const
+{
+	return matches.size();
+}
+		
+const ConfGen::TorsionRuleMatch& ConfGen::TorsionRuleMatcher::getMatch(std::size_t idx) const
+{
+	if (idx >= matches.size())
+		throw Base::IndexError("TorsionRuleMatcher: torsion rule match index out of bounds");
+
+	return matches[idx];
+}
+
+ConfGen::TorsionRuleMatcher::ConstMatchIterator ConfGen::TorsionRuleMatcher::getMatchesBegin() const
+{
+	return matches.begin();
+}
+
+ConfGen::TorsionRuleMatcher::ConstMatchIterator ConfGen::TorsionRuleMatcher::getMatchesEnd() const
+{
+	return matches.end();
+}
+
 bool ConfGen::TorsionRuleMatcher::findMatches(const Chem::Bond& bond, const Chem::MolecularGraph& molgraph, 
-											  TorsionRuleMapping& rule_map, bool append)
+											  bool append)
 {
     if (!append)
-		rule_map.clear();
+		matches.clear();
 
 	if (!torLib)
 		return false;
 
-	return findMatchingRules(*torLib, bond, molgraph, rule_map);
+	return findMatchingRules(*torLib, bond, molgraph);
 }
 
 bool ConfGen::TorsionRuleMatcher::findMatchingRules(const TorsionCategory& cat, const Chem::Bond& bond, 
-													const Chem::MolecularGraph& molgraph, TorsionRuleMapping& rule_map)
+													const Chem::MolecularGraph& molgraph)
 {
 	if (&cat != torLib.get() && !matchesCategory(cat, bond, molgraph)) 
 		return false;
@@ -120,7 +143,7 @@ bool ConfGen::TorsionRuleMatcher::findMatchingRules(const TorsionCategory& cat, 
 // category rules first
 
 	for (TorsionCategory::ConstRuleIterator it = cat.getRulesBegin(), end = cat.getRulesEnd(); it != end; ++it) {
-		if (getRuleMatches(*it, bond, molgraph, rule_map)) {
+		if (getRuleMatches(*it, bond, molgraph)) {
 			if (stopAtFirstRule)
 				return true;
 
@@ -131,7 +154,7 @@ bool ConfGen::TorsionRuleMatcher::findMatchingRules(const TorsionCategory& cat, 
 // subcategories second
 
 	for (TorsionCategory::ConstCategoryIterator it = cat.getCategoriesBegin(), end = cat.getCategoriesEnd(); it != end; ++it) {
-		if (findMatchingRules(*it, bond, molgraph, rule_map)) {
+		if (findMatchingRules(*it, bond, molgraph)) {
 			if (stopAtFirstRule)
 				return true;
 
@@ -143,7 +166,7 @@ bool ConfGen::TorsionRuleMatcher::findMatchingRules(const TorsionCategory& cat, 
 }
 
 bool ConfGen::TorsionRuleMatcher::getRuleMatches(const TorsionRule& rule, const Chem::Bond& bond, 
-												 const Chem::MolecularGraph& molgraph, TorsionRuleMapping& rule_map)
+												 const Chem::MolecularGraph& molgraph)
 {
 	using namespace Chem;
 
@@ -160,17 +183,16 @@ bool ConfGen::TorsionRuleMatcher::getRuleMatches(const TorsionRule& rule, const 
 	if (!subSearch.findMappings(molgraph)) 
 		return false;
 
-	std::size_t old_num_entries = rule_map.getSize();
+	std::size_t old_num_matches = matches.size();
 
 	std::for_each(subSearch.getMappingsBegin(), subSearch.getMappingsEnd(), 
-				  boost::bind(&TorsionRuleMatcher::outputRuleMatch, this, _1, boost::ref(bond), 
-							  boost::ref(rule), boost::ref(rule_map))); 
+				  boost::bind(&TorsionRuleMatcher::outputMatch, this, _1, boost::ref(bond), boost::ref(rule))); 
 
-	return (rule_map.getSize() > old_num_entries);
+	return (matches.size() > old_num_matches);
 }
 
-void ConfGen::TorsionRuleMatcher::outputRuleMatch(const Chem::AtomBondMapping& ab_mapping, const Chem::Bond& bond, 
-												  const TorsionRule& rule, TorsionRuleMapping& rule_map) const
+void ConfGen::TorsionRuleMatcher::outputMatch(const Chem::AtomBondMapping& ab_mapping, const Chem::Bond& bond, 
+											  const TorsionRule& rule)
 {
 	using namespace Chem;
 
@@ -195,12 +217,13 @@ void ConfGen::TorsionRuleMatcher::outputRuleMatch(const Chem::AtomBondMapping& a
 		return;
 
 	if (uniqueMappingsOnly) {
-		TorsionRuleMapping::ConstEntryIteratorRange prev_entries = rule_map.getEntries(&bond);
-
-		for ( ; prev_entries.first != prev_entries.second; ++prev_entries.first) {
-			const TorsionRuleMatch& match = prev_entries.first->second;
+		for (ConstMatchIterator it = matches.begin(), end = matches.end(); it != end; ++it) {
+			const TorsionRuleMatch& match = *it;
 
 			if (&match.getRule() != &rule)
+				continue;
+
+			if (&match.getBond() != &bond)
 				continue;
 
 			const Chem::Atom* const* mpd_atoms = match.getAtoms();
@@ -211,7 +234,7 @@ void ConfGen::TorsionRuleMatcher::outputRuleMatch(const Chem::AtomBondMapping& a
 		}
 	}
 
-	rule_map.insertEntry(&bond, TorsionRuleMatch(rule, atoms[0], atoms[1], atoms[2], atoms[3]));
+	matches.push_back(TorsionRuleMatch(rule, bond, atoms[0], atoms[1], atoms[2], atoms[3]));
 }
 
 bool ConfGen::TorsionRuleMatcher::matchesCategory(const TorsionCategory& cat, const Chem::Bond& bond, const Chem::MolecularGraph& molgraph)

@@ -45,6 +45,7 @@ namespace CDPL
     {
 	
 		class Atom;
+		class Bond;
     }
 
     namespace ConfGen 
@@ -61,15 +62,19 @@ namespace CDPL
 		{
 
 		  public:
-			TorsionRuleMatch(const TorsionRule& rule, const Chem::Atom* atom1, const Chem::Atom* atom2, 
+			TorsionRuleMatch(const TorsionRule& rule, const Chem::Bond& bond, 
+							 const Chem::Atom* atom1, const Chem::Atom* atom2, 
 							 const Chem::Atom* atom3, const Chem::Atom* atom4);
 
 			const Chem::Atom* const* getAtoms() const;
 
 			const TorsionRule& getRule() const;
 
+			const Chem::Bond& getBond() const;
+
 		  private:
 			const TorsionRule* rule;
+			const Chem::Bond*  bond;
 			const Chem::Atom*  atoms[4];
 		};
     

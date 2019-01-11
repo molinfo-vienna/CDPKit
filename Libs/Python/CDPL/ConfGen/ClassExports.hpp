@@ -42,7 +42,6 @@ namespace CDPLPythonConfGen
 	void exportTorsionCategory();
 	void exportTorsionLibrary();
 	void exportTorsionRuleMatch();
-	void exportTorsionRuleMapping();
 	void exportTorsionRuleMatcher();
 
 	void exportBoostFunctionWrappers();

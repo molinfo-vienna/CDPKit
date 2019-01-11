@@ -27,7 +27,6 @@
 #include <boost/python.hpp>
 
 #include "CDPL/ConfGen/TorsionRuleMatcher.hpp"
-#include "CDPL/ConfGen/TorsionRuleMapping.hpp"
 #include "CDPL/Chem/Bond.hpp"
 
 #include "Base/CopyAssOp.hpp"
@@ -40,9 +39,9 @@ namespace
 {
 	
 	bool findMatches(CDPL::ConfGen::TorsionRuleMatcher& matcher, CDPL::Chem::Bond& bond, 
-					 const CDPL::Chem::MolecularGraph& molgraph, CDPL::ConfGen::TorsionRuleMapping& rule_map, bool append)
+					 const CDPL::Chem::MolecularGraph& molgraph, bool append)
 	{
-		return matcher.findMatches(bond, molgraph, rule_map, append);
+		return matcher.findMatches(bond, molgraph, append);
 	}
 }
 
@@ -71,12 +70,18 @@ void CDPLPythonConfGen::exportTorsionRuleMatcher()
 			 (python::arg("self"), python::arg("lib")))
 		.def("getTorsionLibrary", &ConfGen::TorsionRuleMatcher::getTorsionLibrary, 
 			 python::arg("self"), python::return_value_policy<python::copy_const_reference>())
+		.def("getNumMatches", &ConfGen::TorsionRuleMatcher::getNumMatches, python::arg("self"))
+		.def("getMatch", &ConfGen::TorsionRuleMatcher::getMatch, (python::arg("self"), python::arg("idx")),
+			 python::return_internal_reference<1>())
 		.def("findMatches", &findMatches, 
-			 (python::arg("self"), python::arg("bond"), python::arg("molgraph"), 
-			  python::arg("rule_map"), python::arg("append") = false))
+			 (python::arg("self"), python::arg("bond"), python::arg("molgraph"), python::arg("append") = false))
 		.def(CDPLPythonBase::ObjectIdentityCheckVisitor<ConfGen::TorsionRuleMatcher>())
 		//.def("assign", CDPLPythonBase::copyAssOp(&ConfGen::TorsionRuleMatcher::operator=), 
 		//	 (python::arg("self"), python::arg("gen")), python::return_self<>())
+		.def("__getitem__", &ConfGen::TorsionRuleMatcher::getMatch, (python::arg("self"), python::arg("idx")), 
+			 python::return_internal_reference<1>())
+		.def("__len__", &ConfGen::TorsionRuleMatcher::getNumMatches, python::arg("self"))
+		.add_property("numMatches", &ConfGen::TorsionRuleMatcher::getNumMatches)
 		.add_property("uniqueMappingsOnly", &ConfGen::TorsionRuleMatcher::onlyUniqueMappingsReported,
 					  &ConfGen::TorsionRuleMatcher::reportUniqueMappingsOnly)
 		.add_property("allRuleMappings", &ConfGen::TorsionRuleMatcher::allRuleMappingsReported,

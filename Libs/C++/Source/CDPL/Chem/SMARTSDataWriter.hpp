@@ -178,7 +178,7 @@ namespace CDPL
 
 				void writeAtomTypeExpression(const MatchConstraint*, const MatchConstraint*,
 											 std::string&, bool) const;
-				bool writeAtomTypeExpression(const MatchConstraintList&, std::string&) const;
+				bool writeAtomTypeExpression(const MatchConstraintList&, std::string&, bool = false) const;
 				void writeExpressionList(const MatchConstraint&, std::string&, std::size_t) const;
 				void writeAtomicNumber(unsigned int, bool, std::string&) const;
 				void writeImplicitHCountExpression(const MatchConstraint&, std::string&) const;

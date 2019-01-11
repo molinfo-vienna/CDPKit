@@ -29,6 +29,7 @@
 #include "CDPL/ConfGen/TorsionRuleMatch.hpp"
 #include "CDPL/ConfGen/TorsionRule.hpp"
 #include "CDPL/Chem/Atom.hpp"
+#include "CDPL/Chem/Bond.hpp"
 
 #include "Base/CopyAssOp.hpp"
 #include "Base/ObjectIdentityCheckVisitor.hpp"
@@ -81,20 +82,24 @@ void CDPLPythonConfGen::exportTorsionRuleMatch()
    	python::scope scope = python::class_<ConfGen::TorsionRuleMatch>("TorsionRuleMatch", python::no_init)
 		.def(python::init<const ConfGen::TorsionRuleMatch&>((python::arg("self"), python::arg("match")))
 			 [python::with_custodian_and_ward<1, 2>()])
-		.def(python::init<const ConfGen::TorsionRule&, Chem::Atom*, Chem::Atom*, Chem::Atom*, Chem::Atom*>((python::arg("self"), python::arg("rule"), 
-																							 python::arg("atom1"), python::arg("atom2"), 
-																							 python::arg("atom3"), python::arg("atom4")))
+		.def(python::init<const ConfGen::TorsionRule&, Chem::Bond&, Chem::Atom*, Chem::Atom*, Chem::Atom*, Chem::Atom*>((python::arg("self"), python::arg("rule"), 
+																														 python::arg("bond"), python::arg("atom1"), 
+																														 python::arg("atom2"), python::arg("atom3"),
+																														 python::arg("atom4")))
 			 [python::with_custodian_and_ward<1, 3, python::with_custodian_and_ward<1, 4, python::with_custodian_and_ward<1, 5, 
-			  python::with_custodian_and_ward<1, 6> > > >()])
+			  python::with_custodian_and_ward<1, 6, python::with_custodian_and_ward<1, 7> > > > >()])
 		.def(CDPLPythonBase::ObjectIdentityCheckVisitor<ConfGen::TorsionRuleMatch>())
 		.def("getAtoms", &createAtomArray, python::arg("self"), 
 			 python::with_custodian_and_ward_postcall<0, 1>())
+		.def("getBond", &ConfGen::TorsionRuleMatch::getBond, python::arg("self"), 
+			 python::return_internal_reference<>())
 		.def("getRule", &ConfGen::TorsionRuleMatch::getRule, python::arg("self"), 
 			 python::return_internal_reference<>())
 		.def("assign", CDPLPythonBase::copyAssOp(&ConfGen::TorsionRuleMatch::operator=), 
 			 (python::arg("self"), python::arg("match")), python::return_self<python::with_custodian_and_ward<1, 2> >())
 			.def(CDPLPythonBase::ObjectIdentityCheckVisitor<ConfGen::TorsionRuleMatch>())
 		.add_property("rule", python::make_function(&ConfGen::TorsionRuleMatch::getRule, python::return_internal_reference<>()))
+		.add_property("bond", python::make_function(&ConfGen::TorsionRuleMatch::getBond, python::return_internal_reference<>()))
 		.add_property("atoms", python::make_function(&createAtomArray, python::with_custodian_and_ward_postcall<0, 1>()));
 
 	python::class_<AtomArray>("AtomArray", python::no_init)

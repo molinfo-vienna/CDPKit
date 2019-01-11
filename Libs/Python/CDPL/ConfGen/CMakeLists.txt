@@ -22,7 +22,6 @@ SET(confgen_MOD_SRCS
     TorsionCategoryExport.cpp
     TorsionLibraryExport.cpp
     TorsionRuleMatchExport.cpp
-    TorsionRuleMappingExport.cpp
     TorsionRuleMatcherExport.cpp
 
     UtilityFunctionExport.cpp

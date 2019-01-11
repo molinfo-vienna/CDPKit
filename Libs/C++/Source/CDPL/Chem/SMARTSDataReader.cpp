@@ -852,7 +852,7 @@ Chem::MatchConstraintList::SharedPointer Chem::SMARTSDataReader::parseExplicitHA
 		return MatchConstraintList::SharedPointer();
 	}
 
-	addAtomTypeConstraint(AtomType::H, false, *constr_list);
+	addAtomTypeConstraint(AtomType::H, false, false, *constr_list);
 
 	getChar(c, false);
 
