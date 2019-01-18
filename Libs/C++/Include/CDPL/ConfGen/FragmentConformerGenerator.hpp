@@ -145,6 +145,8 @@ namespace CDPL
 
 			double getEnergy(std::size_t conf_idx) const;
 
+			bool getExistingCoordinates(const Chem::MolecularGraph& molgraph, Math::Vector3DArray& coords);
+
 		  private:
 			typedef std::pair<double, Math::Vector3DArray::SharedPointer> ConfData;
 			typedef std::vector<const Chem::Atom*> AtomList;
@@ -156,7 +158,7 @@ namespace CDPL
 			void generateSingleConformer();
 			void generateFlexibleRingConformers();
 
-			bool extractExistingCoordinates(ConfData& conf);
+			bool outputExistingCoordinates(ConfData& conf);
 			bool generateRandomConformer(ConfData& conf, bool best_opt);
 
 			void init(const Chem::MolecularGraph& molgraph, const ForceField::MMFF94InteractionData& ia_data);
@@ -179,28 +181,28 @@ namespace CDPL
 
 			double calcMacrocyclicRingSystemEnergyWindow() const;
 
-			void freeCoordinates(const Math::Vector3DArray::SharedPointer& coords_ptr);
-			void freeCoordinates(const ConfData& conf);
+			void freeVector3DArray(const Math::Vector3DArray::SharedPointer& coords_ptr);
+			void freeVector3DArray(const ConfData& conf);
 
-			Math::Vector3DArray::SharedPointer allocCoordinates();
-			void allocCoordinates(ConfData& conf);
+			Math::Vector3DArray::SharedPointer allocVector3DArray();
+			void allocVector3DArray(ConfData& conf);
 
 			bool timeoutExceeded() const;
 			bool has3DCoordinates(const Chem::Atom& atom) const;
 
-			class CoordsDeallocator
+			class Vec3DArrayDeallocator
 			{
 
 			public:
-				CoordsDeallocator(FragmentConformerGenerator* owner, const ConfData& conf): 
+				Vec3DArrayDeallocator(FragmentConformerGenerator* owner, const ConfData& conf): 
 					owner(owner), coordsPtr(conf.second), released(false) {}
 
-				CoordsDeallocator(FragmentConformerGenerator* owner, const Math::Vector3DArray::SharedPointer& coords_ptr): 
+				Vec3DArrayDeallocator(FragmentConformerGenerator* owner, const Math::Vector3DArray::SharedPointer& coords_ptr): 
 					owner(owner), coordsPtr(coords_ptr), released(false) {}
 
-				~CoordsDeallocator() {
+				~Vec3DArrayDeallocator() {
 					if (!released)
-						owner->freeCoordinates(coordsPtr);
+						owner->freeVector3DArray(coordsPtr);
 				}
 
 				void release() {
@@ -218,7 +220,7 @@ namespace CDPL
 			typedef Math::BFGSMinimizer<Math::Vector3DArray::StorageType, double> BFGSMinimizer; 
 			typedef Math::VectorArrayAlignmentCalculator<Math::Vector3DArray> AlignmentCalculator;
 			typedef std::vector<ConfData> ConfDataArray;
-			typedef std::vector<Math::Vector3DArray::SharedPointer> CoordsDataArray;
+			typedef std::vector<Math::Vector3DArray::SharedPointer> Vector3DArrayList;
 			typedef std::vector<std::size_t> IndexList;
 
 			std::size_t                              maxNumStructGenTrials;
@@ -252,10 +254,10 @@ namespace CDPL
 			AtomList                                 nbrHydrogens2;
 			Chem::Fragment                           ordHDepleteMolGraph;
 			Util::BitSet                             ordHDepleteAtomMask;
-			CoordsDataArray                          ringAtomCoords;
+			Vector3DArrayList                        ringAtomCoords;
 			ConfDataArray                            outputConfs;
 			ConfDataArray                            workingConfs;
-			CoordsDataArray                          coordsCache;
+			Vector3DArrayList                        coordArrayCache;
 		};
 
 		/**

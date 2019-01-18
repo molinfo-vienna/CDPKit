@@ -230,12 +230,7 @@ bool ConfGen::RandomConformerGenerator::timeoutExceeded() const
 	if (timeout == 0)
 		return false;
 
-	boost::timer::cpu_times times = timer.elapsed();
-
-	if (times.wall > (boost::timer::nanosecond_type(timeout) * 1000000))
-		return true;
-
-	return false;
+	return (timer.elapsed().wall > (boost::timer::nanosecond_type(timeout) * 1000000));
 }
 
 bool ConfGen::RandomConformerGenerator::has3DCoordinates(const Chem::Atom& atom) const

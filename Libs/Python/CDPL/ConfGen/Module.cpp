@@ -50,6 +50,7 @@ BOOST_PYTHON_MODULE(_confgen)
 #if defined(HAVE_BOOST_TIMER) && defined(HAVE_BOOST_CHRONO)
 
 	exportRandomConformerGenerator();
+	exportSystematicConformerGenerator();
 	exportFragmentConformerGenerator();
 	exportFragmentLibraryGenerator();
 

@@ -45,6 +45,7 @@
 #include "CDPL/Chem/AtomPriorityFunctionWrapper.hpp"
 #include "CDPL/Math/Vector.hpp"
 #include "CDPL/Math/VectorArray.hpp"
+#include "CDPL/Util/BitSet.hpp"
 
 
 namespace CDPL 
@@ -559,6 +560,9 @@ namespace CDPL
 
 		CDPL_CHEM_API void buildMatchExpressionString(const Atom& atom, const MolecularGraph& molgraph, std::string& expr_str);
 
+
+		CDPL_CHEM_API void markReachableAtoms(const Atom& atom, const MolecularGraph& molgraph, 
+											  Util::BitSet& atom_mask, bool reset = true);
 
 		CDPL_CHEM_API std::size_t getTopologicalDistance(const Atom& atom1, const Atom& atom2, const MolecularGraph& molgraph);
 

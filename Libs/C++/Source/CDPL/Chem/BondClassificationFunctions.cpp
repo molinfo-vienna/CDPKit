@@ -56,6 +56,23 @@ bool Chem::isAmideBond(const Chem::Bond& bond, const Chem::MolecularGraph& molgr
 	return false;
 }
 
+bool Chem::isHydrogenRotor(const Bond& bond, const MolecularGraph& molgraph)
+{
+	if (getOrder(bond) != 1)
+		return false;
+
+	const Atom& atom1 = bond.getBegin();
+	const Atom& atom2 = bond.getEnd();
+
+	if (getBondCount(atom1, molgraph) < 2 ) 
+		return false;
+
+	if (getBondCount(atom2, molgraph) < 2)
+		return false;
+
+	return (getHeavyBondCount(atom1, molgraph) < 2 || getHeavyBondCount(atom2, molgraph) < 2);
+}
+
 bool Chem::isRotatable(const Bond& bond, const MolecularGraph& molgraph, bool h_rotors, bool ring_bonds, bool amide_bonds)
 {
     if (getOrder(bond) != 1)
@@ -71,14 +88,10 @@ bool Chem::isRotatable(const Bond& bond, const MolecularGraph& molgraph, bool h_
     const Atom& atom1 = bond.getBegin();
 	const Atom& atom2 = bond.getEnd();
 
-	std::size_t bond_count1 = getBondCount(atom1, molgraph);
-
-	if (bond_count1 < 2 ) 
+	if (getBondCount(atom1, molgraph) < 2 ) 
 		return false;
-		
-	std::size_t bond_count2 = getBondCount(atom2, molgraph);
 
-	if (bond_count2 < 2)
+	if (getBondCount(atom2, molgraph) < 2)
 		return false;
 
 	if (!h_rotors && (getHeavyBondCount(atom1, molgraph) < 2 || getHeavyBondCount(atom2, molgraph) < 2))

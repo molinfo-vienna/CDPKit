@@ -88,13 +88,13 @@ namespace
 	}
 		
 	std::string& readMDLLine(std::istream& is, std::string& line, const char* err_msg, bool trim = false, 
-									bool check_ll = false, std::size_t max_llen = Chem::MDL::MAX_LINE_LENGTH)
+							 bool check_ll = false, std::size_t max_llen = Chem::MDL::MAX_LINE_LENGTH)
 	{
 		return Internal::readLine(is, line, err_msg, trim, check_ll, max_llen, Chem::MDL::END_OF_LINE);
 	}
 
 	std::string& readMDLString(std::istream& is, std::size_t field_size, std::string& str, bool clear,
-									  const char* err_msg, bool trim = true)
+							   const char* err_msg, bool trim = true)
 	{
 		return Internal::readString(is, field_size, str, clear, err_msg, trim, Chem::MDL::END_OF_LINE);
 	}
@@ -230,11 +230,24 @@ bool Chem::MDLDataReader::skipMolecule(std::istream& is, bool skip_data)
 	init(is);
 
 	if (!multiConfImport) {
+		if (skip_data) {
+//			skipMOLHeaderBlock(is);
+//			skipMOLCTab(is);
+//			skipSDFData(is);
+
+			do {
+				readMDLString(is, MDL::SDFile::RECORD_DELIMITER.length(), tmpString, true, "MDLDataReader: error while skipping molecule");
+				skipMDLLines(is, 1, "MDLDataReader: error while skipping molecule");
+
+				if (tmpString == MDL::SDFile::RECORD_DELIMITER)
+					return true;
+			} while (hasMoreData(is));
+
+			return false;
+		} 
+
 		skipMOLHeaderBlock(is);
 		skipMOLCTab(is);
-
-		if (skip_data)
-			skipSDFData(is);
 
 		return true;
 	}

@@ -31,6 +31,7 @@ SET(cdpl-confgen_LIB_SRCS
     CDFFragmentLibraryDataReader.cpp
     CDFFragmentLibraryDataWriter.cpp
     TorsionLibraryDataReader.cpp
+    FragmentTreeNode.cpp
 
     CDFMoleculeDataFunctions.cpp
     UtilityFunctions.cpp
@@ -42,6 +43,8 @@ IF(Boost_TIMER_FOUND AND Boost_CHRONO_FOUND)
    SET(cdpl-confgen_LIB_SRCS
        ${cdpl-confgen_LIB_SRCS}
        RandomConformerGenerator.cpp
+       SystematicConformerGenerator.cpp
+       SystematicConformerGeneratorImpl.cpp
        FragmentConformerGenerator.cpp
        FragmentLibraryGenerator.cpp
       )	  

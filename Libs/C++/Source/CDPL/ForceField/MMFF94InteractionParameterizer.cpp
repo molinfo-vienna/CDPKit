@@ -465,7 +465,7 @@ void ForceField::MMFF94InteractionParameterizer::setupTopDistances()
 		if (!topDistMatrix)
 			topDistMatrix = Math::ULMatrix::SharedPointer(new Math::ULMatrix());
 
-		calcTopologicalDistanceMatrix(*molGraph, *topDistMatrix, 3);
+		calcTopologicalDistanceMatrix(*molGraph, *topDistMatrix);
 		usedTopDistMatrix = topDistMatrix;
 	}
 }

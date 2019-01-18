@@ -182,6 +182,7 @@ void ConfGen::prepareForConformerGeneration(Chem::Molecule& mol)
 	perceiveSSSR(mol, false);
 	setRingFlags(mol, false);
 	setAromaticityFlags(mol, false);
+	calcTopologicalDistanceMatrix(mol, false);
 
 	for (Molecule::AtomIterator it = mol.getAtomsBegin(), end = mol.getAtomsEnd(); it != end; ++it) {
 		Atom& atom = *it;

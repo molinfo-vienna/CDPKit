@@ -150,8 +150,10 @@
     [#7X3:1]-[#6X2]#[#7]                                 NC%N    NITROGEN ATTACHED TO CYANO GROUP
     [#7X2:1]=[#8X1v2]                                    N=O     NITROSO NITROGEN
     [#7X1:1]=[#7]                                        NAZT    TERMINAL NITROGEN IN AZIDO OR DIAZO GROUP
-    [#7X3+:1]=[#6]                                       N+=C    POSITIVELY CHARGED IMINIUM NITROGEN
-    [#7X3+:1]=[#7]                                       N+=N    POSITIVELY CHARGED NITROGEN DOUBLE-BONDED TO N
+    [#7X3v4:1]=[#6]                                      N+=C    POSITIVELY CHARGED IMINIUM NITROGEN
+*   [#7X3+:1]=[#6]                                       N+=C    POSITIVELY CHARGED IMINIUM NITROGEN
+    [#7X3v4:1]=[#7]                                      N+=N    POSITIVELY CHARGED NITROGEN DOUBLE-BONDED TO N
+*   [#7X3+:1]=[#7]                                       N+=N    POSITIVELY CHARGED NITROGEN DOUBLE-BONDED TO N
     [#7X2:1](=[#7])=[#7,#6]                              =N=     NITROGEN IN C=N=N OR -N=N=N 
     [#7X3+:1]=[#6X3]-[#7X3+0]                            NCN+    N IN +N=C-N RESONANCE STRUCTURES - FORMAL CHARGE=1/2
     [#7X3+0:1]-[#6X3]=[#7X3+]                            NCN+    N IN +N=C-N RESONANCE STRUCTURES - FORMAL CHARGE=1/2

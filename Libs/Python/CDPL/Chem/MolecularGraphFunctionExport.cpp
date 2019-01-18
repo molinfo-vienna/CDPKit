@@ -153,9 +153,9 @@ namespace
 	MAKE_FUNCTION_WRAPPER2(std::size_t, getOrdinaryHydrogenCount, CDPL::Chem::MolecularGraph&, unsigned int);
 	MAKE_FUNCTION_WRAPPER2(std::size_t, getExplicitOrdinaryHydrogenCount, CDPL::Chem::MolecularGraph&, unsigned int);
 	MAKE_FUNCTION_WRAPPER2(std::size_t, getBondCount, CDPL::Chem::MolecularGraph&, std::size_t);
+	MAKE_FUNCTION_WRAPPER2(void, calcTopologicalDistanceMatrix, CDPL::Chem::MolecularGraph&, CDPL::Math::ULMatrix&)
+	MAKE_FUNCTION_WRAPPER2(void, calcTopologicalDistanceMatrix, CDPL::Chem::MolecularGraph&, CDPL::Math::SparseULMatrix&)
 
-	MAKE_FUNCTION_WRAPPER3(void, calcTopologicalDistanceMatrix, CDPL::Chem::MolecularGraph&, CDPL::Math::ULMatrix&, std::size_t)
-	MAKE_FUNCTION_WRAPPER3(void, calcTopologicalDistanceMatrix, CDPL::Chem::MolecularGraph&, CDPL::Math::SparseULMatrix&, std::size_t)
 	MAKE_FUNCTION_WRAPPER3(std::size_t, getRotatableBondCount, CDPL::Chem::MolecularGraph&, bool, bool);
 
 	MAKE_FUNCTION_WRAPPER5(CDPL::Base::uint64, calcHashCode, CDPL::Chem::MolecularGraph&,
@@ -336,8 +336,8 @@ void CDPLPythonChem::exportMolecularGraphFunctions()
 				static_cast<Chem::Fragment::SharedPointer (*)(Chem::MolecularGraph&, bool)>(&Chem::perceiveAromaticSubstructure),
 	 			(python::arg("molgraph"), python::arg("overwrite")), python::with_custodian_and_ward_postcall<0, 1>());
      python::def("calcTopologicalDistanceMatrix", 
-				 static_cast<Math::ULMatrix::SharedPointer (*)(Chem::MolecularGraph&, bool, std::size_t)>(&Chem::calcTopologicalDistanceMatrix),
-				 (python::arg("molgraph"), python::arg("overwrite"), python::arg("max_dist") = 0));
+				 static_cast<Math::ULMatrix::SharedPointer (*)(Chem::MolecularGraph&, bool)>(&Chem::calcTopologicalDistanceMatrix),
+				 (python::arg("molgraph"), python::arg("overwrite")));
  
 	python::def("extractReactionCenter",  &extractReactionCenterWrapper2, 
 				(python::arg("molgraph"), python::arg("rxn_center")),
@@ -352,10 +352,10 @@ void CDPLPythonChem::exportMolecularGraphFunctions()
 				(python::arg("molgraph"), python::arg("mtx")));
     python::def("buildBondElectronMatrix",  &buildBondElectronMatrixWrapper2, 
 				(python::arg("molgraph"), python::arg("mtx")));
-    python::def("calcTopologicalDistanceMatrix", static_cast<void (*)(Chem::MolecularGraph&, Math::ULMatrix&, std::size_t)>(&calcTopologicalDistanceMatrixWrapper3), 
-				(python::arg("molgraph"), python::arg("mtx"), python::arg("max_dist") = 0));
-	python::def("calcTopologicalDistanceMatrix",  static_cast<void (*)(Chem::MolecularGraph&, Math::ULMatrix&, std::size_t)>(&calcTopologicalDistanceMatrixWrapper3), 
-				(python::arg("molgraph"), python::arg("mtx"), python::arg("max_dist") = 0));
+    python::def("calcTopologicalDistanceMatrix", static_cast<void (*)(Chem::MolecularGraph&, Math::ULMatrix&)>(&calcTopologicalDistanceMatrixWrapper2), 
+				(python::arg("molgraph"), python::arg("mtx")));
+	python::def("calcTopologicalDistanceMatrix",  static_cast<void (*)(Chem::MolecularGraph&, Math::ULMatrix&)>(&calcTopologicalDistanceMatrixWrapper2), 
+				(python::arg("molgraph"), python::arg("mtx")));
  	python::def("calcTopologicalRadius", &calcTopologicalRadiusWrapper1, python::arg("molgraph"));
 	python::def("calcTopologicalDiameter", &calcTopologicalDiameterWrapper1, python::arg("molgraph"));
 	python::def("calcRingComplexity", &calcRingComplexityWrapper1, python::arg("molgraph"));

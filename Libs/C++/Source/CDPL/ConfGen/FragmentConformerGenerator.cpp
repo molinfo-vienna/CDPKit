@@ -272,7 +272,7 @@ void ConfGen::FragmentConformerGenerator::generateSingleConformer()
 {
 	ConfData conf;
 
-	if (reuseExistingCoords && extractExistingCoordinates(conf)) {
+	if (reuseExistingCoords && outputExistingCoordinates(conf)) {
 		outputConfs.push_back(conf);
 
 		if (progCallback)
@@ -330,7 +330,7 @@ void ConfGen::FragmentConformerGenerator::generateFlexibleRingConformers()
 		if (!generateRandomConformer(conf, false)) 
 			continue;
 
-		CoordsDeallocator dealloc_guard(this, conf);
+		Vec3DArrayDeallocator dealloc_guard(this, conf);
 
 		if (workingConfs.empty())
 			min_energy = conf.first;
@@ -355,7 +355,7 @@ void ConfGen::FragmentConformerGenerator::generateFlexibleRingConformers()
 
 	for (ConfDataArray::const_iterator it = workingConfs.begin(), end = workingConfs.end(); it != end; ++it) {
 		const ConfData& conf = *it;
-		CoordsDeallocator dealloc_guard(this, conf);
+		Vec3DArrayDeallocator dealloc_guard(this, conf);
 
 		if (outputConfs.size() >= maxNumOutputConfs) 
 			continue;
@@ -373,9 +373,9 @@ void ConfGen::FragmentConformerGenerator::generateFlexibleRingConformers()
 
 			ConfData sym_conf;
 
-			allocCoordinates(sym_conf);
+			allocVector3DArray(sym_conf);
 
-			CoordsDeallocator dealloc_guard(this, sym_conf);
+			Vec3DArrayDeallocator dealloc_guard(this, sym_conf);
 			Math::Vector3DArray& sym_coords = *sym_conf.second;
 
 			sym_coords.resize(numAtoms);
@@ -399,11 +399,11 @@ void ConfGen::FragmentConformerGenerator::init(const Chem::MolecularGraph& molgr
 {
 	std::for_each(outputConfs.begin(), outputConfs.end(), 
 				  boost::bind(static_cast<void (FragmentConformerGenerator::*)(const ConfData&)>(
-								  &FragmentConformerGenerator::freeCoordinates), this, _1));
+								  &FragmentConformerGenerator::freeVector3DArray), this, _1));
 
 	std::for_each(ringAtomCoords.begin(), ringAtomCoords.end(), 
 				  boost::bind(static_cast<void (FragmentConformerGenerator::*)(const Math::Vector3DArray::SharedPointer&)>(
-								  &FragmentConformerGenerator::freeCoordinates), this, _1));
+								  &FragmentConformerGenerator::freeVector3DArray), this, _1));
 
 	outputConfs.clear();
 	workingConfs.clear();
@@ -433,20 +433,35 @@ void ConfGen::FragmentConformerGenerator::initRandomConformerGeneration()
     gradient.resize(numAtoms);
 }
 
-bool ConfGen::FragmentConformerGenerator::extractExistingCoordinates(ConfData& conf)
+bool ConfGen::FragmentConformerGenerator::outputExistingCoordinates(ConfData& conf)
 {
 	using namespace Chem;
 
-	allocCoordinates(conf);
+	allocVector3DArray(conf);
 
-	CoordsDeallocator dealloc_guard(this, conf);
+	Vec3DArrayDeallocator dealloc_guard(this, conf);
 	Math::Vector3DArray& coords = *conf.second;
+
+	if (getExistingCoordinates(*molGraph, coords)) {
+		dealloc_guard.release();
+		
+		return true;
+	}
+	
+	return false;
+}
+
+bool ConfGen::FragmentConformerGenerator::getExistingCoordinates(const Chem::MolecularGraph& molgraph, Math::Vector3DArray& coords)
+{
+	using namespace Chem;
+
+	std::size_t num_atoms = molgraph.getNumAtoms();
 	bool have_h_atom_coords = true;
 
-	coords.resize(numAtoms);
+	coords.resize(num_atoms);
 
-	for (std::size_t i = 0; i < numAtoms; i++) {
-		const Atom& atom = molGraph->getAtom(i);
+	for (std::size_t i = 0; i < num_atoms; i++) {
+		const Atom& atom = molgraph.getAtom(i);
 
 		try {
 			coords[i] = get3DCoordinates(atom);
@@ -461,19 +476,17 @@ bool ConfGen::FragmentConformerGenerator::extractExistingCoordinates(ConfData& c
 
 	if (!have_h_atom_coords) { 
 		hCoordsGenerator.setAtom3DCoordinatesCheckFunction(&Chem::has3DCoordinates);
-		hCoordsGenerator.generate(*molGraph, coords, false);
+		hCoordsGenerator.generate(molgraph, coords, false);
 	}
-
-	dealloc_guard.release();
 
 	return true;
 }
 
 bool ConfGen::FragmentConformerGenerator::generateRandomConformer(ConfData& conf, bool best_opt)
 {
-	allocCoordinates(conf);
+	allocVector3DArray(conf);
 
-	CoordsDeallocator dealloc_guard(this, conf);
+	Vec3DArrayDeallocator dealloc_guard(this, conf);
 	Math::Vector3DArray& coords = *conf.second;
 	std::size_t i = 0;
 
@@ -528,11 +541,11 @@ bool ConfGen::FragmentConformerGenerator::checkRMSD(const ConfData& conf)
 {
 	Math::Vector3DArray::SharedPointer conf_ha_coords_ptr = getRingAtomCoordinates(conf);
 
-	CoordsDeallocator dealloc_guard(this, conf_ha_coords_ptr);
+	Vec3DArrayDeallocator dealloc_guard(this, conf_ha_coords_ptr);
 	Math::Vector3DArray& conf_ha_coords = *conf_ha_coords_ptr;
 	Math::Matrix4D conf_xform;
 
-	for (CoordsDataArray::const_reverse_iterator it = ringAtomCoords.rbegin(), end = ringAtomCoords.rend(); it != end; ++it) {
+	for (Vector3DArrayList::const_reverse_iterator it = ringAtomCoords.rbegin(), end = ringAtomCoords.rend(); it != end; ++it) {
 		const Math::Vector3DArray& prev_conf_ha_coords = **it;
 
 		if (!alignmentCalc.calculate(prev_conf_ha_coords, conf_ha_coords, false))
@@ -559,9 +572,9 @@ bool ConfGen::FragmentConformerGenerator::has3DCoordinates(const Chem::Atom& ato
 
 Math::Vector3DArray::SharedPointer ConfGen::FragmentConformerGenerator::getRingAtomCoordinates(const ConfData& conf)
 {
-	Math::Vector3DArray::SharedPointer ha_coords_ptr = allocCoordinates();
+	Math::Vector3DArray::SharedPointer ha_coords_ptr = allocVector3DArray();
 	
-	CoordsDeallocator dealloc_guard(this, ha_coords_ptr);
+	Vec3DArrayDeallocator dealloc_guard(this, ha_coords_ptr);
 	const Math::Vector3DArray& coords = *conf.second;
 	Math::Vector3DArray& ha_coords = *ha_coords_ptr;
 	Math::Vector3D ctr;
@@ -763,35 +776,30 @@ bool ConfGen::FragmentConformerGenerator::timeoutExceeded() const
 	if (timeout == 0)
 		return false;
 
-	boost::timer::cpu_times times = timer.elapsed();
-
-	if (times.wall > (boost::timer::nanosecond_type(timeout) * 1000000))
-		return true;
-
-	return false;
+	return (timer.elapsed().wall > (boost::timer::nanosecond_type(timeout) * 1000000));
 }
 
-void ConfGen::FragmentConformerGenerator::freeCoordinates(const ConfData& conf)
+void ConfGen::FragmentConformerGenerator::freeVector3DArray(const ConfData& conf)
 {
-	freeCoordinates(conf.second);
+	freeVector3DArray(conf.second);
 }
 
-void ConfGen::FragmentConformerGenerator::allocCoordinates(ConfData& conf)
+void ConfGen::FragmentConformerGenerator::allocVector3DArray(ConfData& conf)
 {
-	conf.second = allocCoordinates();
+	conf.second = allocVector3DArray();
 }
 
-void ConfGen::FragmentConformerGenerator::freeCoordinates(const Math::Vector3DArray::SharedPointer& coords_ptr)
+void ConfGen::FragmentConformerGenerator::freeVector3DArray(const Math::Vector3DArray::SharedPointer& coords_ptr)
 {
-	coordsCache.push_back(coords_ptr);
+	coordArrayCache.push_back(coords_ptr);
 }
 
-Math::Vector3DArray::SharedPointer ConfGen::FragmentConformerGenerator::allocCoordinates()
+Math::Vector3DArray::SharedPointer ConfGen::FragmentConformerGenerator::allocVector3DArray()
 {
-	if (!coordsCache.empty()) {
-		Math::Vector3DArray::SharedPointer coords_ptr = coordsCache.back();
+	if (!coordArrayCache.empty()) {
+		Math::Vector3DArray::SharedPointer coords_ptr = coordArrayCache.back();
 
-		coordsCache.pop_back();
+		coordArrayCache.pop_back();
 
 		return coords_ptr;
 	} 

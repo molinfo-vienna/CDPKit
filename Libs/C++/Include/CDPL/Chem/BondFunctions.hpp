@@ -200,6 +200,8 @@ namespace CDPL
 		CDPL_CHEM_API double calcPolarizability(const Bond& bond, const MolecularGraph& molgraph, double damping = 0.75);
 
 
+		CDPL_CHEM_API bool isHydrogenRotor(const Bond& bond, const MolecularGraph& molgraph);
+		
 		CDPL_CHEM_API bool isRotatable(const Bond& bond, const MolecularGraph& molgraph, bool h_rotors = false, bool ring_bonds = false, bool amide_bonds = false);
 
 		CDPL_CHEM_API bool isHydrogenBond(const Bond& bond);

@@ -191,6 +191,7 @@ SET(cdpl-chem_LIB_SRCS
     AtomMatchExpressionFunction.cpp
     AtomSybylTypeFunctions.cpp
     AtomTopologicalDistanceFunction.cpp
+    AtomMarkReachableAtomsFunction.cpp 
 
     BondPropertyFunctions.cpp
     BondRingMembershipFunctions.cpp

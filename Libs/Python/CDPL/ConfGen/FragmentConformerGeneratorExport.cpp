@@ -100,6 +100,8 @@ void CDPLPythonConfGen::exportFragmentConformerGenerator()
 			 python::arg("self"))
 		.def("generate", &ConfGen::FragmentConformerGenerator::generate, 
 			 (python::arg("self"), python::arg("molgraph"), python::arg("ia_data"), python::arg("frag_type")))
+		.def("getExistingCoordinates", &ConfGen::FragmentConformerGenerator::getExistingCoordinates, 
+			 (python::arg("self"), python::arg("molgraph"), python::arg("coords")))
 		.def("getNumConformers", &ConfGen::FragmentConformerGenerator::getNumConformers, python::arg("self"))
 		.def("getCoordinates", static_cast<Math::Vector3DArray& (ConfGen::FragmentConformerGenerator::*)(std::size_t)>(
 				 &ConfGen::FragmentConformerGenerator::getCoordinates),
