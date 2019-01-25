@@ -223,64 +223,41 @@ void Chem::SMILESDataReader::getParameters()
 {
 	strictErrorChecking = getStrictErrorCheckingParameter(ioBase);
 	recordFormat = getSMILESRecordFormatParameter(ioBase);
+	recordSeparator = getRecordSeparatorParameter(ioBase);
 
-	if (recordFormat != "S" && recordFormat != "S:" && recordFormat != "S$" &&
-		recordFormat != "S:N" && recordFormat != "S:N:" && recordFormat != "S:N$")
+	if (recordFormat != "S" && recordFormat != "SN")
 		throw Base::IOError("SMILESDataReader: invalid smiles record format control-parameter");
 }
 
 template <typename T>
 void Chem::SMILESDataReader::readName(std::istream& is, T& obj, std::string& str, 
-											 const std::string& error_msg) const
+									  const std::string& error_msg) const
 {
-	str.clear();
-
-	if (recordFormat == "S:N" || recordFormat == "S:N:") {
-		if (!hasMoreData(is))
-			return;
-
-		if (!(is >> str)) 
-			throw Base::IOError(error_msg);
-
-	} else if (recordFormat == "S:N$") {
-		std::getline(is, str);
+	if (recordFormat == "SN") {
+		if (recordSeparator.size() == 1)
+			std::getline(is, str, recordSeparator[0]);
+		else
+			std::getline(is, str);
 
 		if (!is)
 			throw Base::IOError(error_msg);
 
 		Internal::trimString(str);
 
-	} else if (recordFormat == "S$") {
-		if (is.eof())
-			return;
-
-		std::getline(is, str);
-
-		if (!is)
-			throw Base::IOError(error_msg);
-
-		return;
+		setName(obj, str);
 	}
-
-	setName(obj, str);
 }
 
 void Chem::SMILESDataReader::skipName(std::istream& is, std::string& str, const std::string& error_msg) const
 {
-	str.clear();
-
-	if (recordFormat == "S:N" || recordFormat == "S:N:") {
-		if (!hasMoreData(is))
-			return;
-
-		if (!(is >> str)) 
-			throw Base::IOError(error_msg);
-
-	} else if (recordFormat == "S:N$" || recordFormat == "S$") {
+	if (recordFormat == "SN") {
 		if (is.eof())
 			return;
 
-		std::getline(is, str);
+		if (recordSeparator.size() == 1)
+			std::getline(is, str, recordSeparator[0]);
+		else
+			std::getline(is, str);
 
 		if (!is)
 			throw Base::IOError(error_msg);

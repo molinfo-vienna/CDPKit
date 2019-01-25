@@ -28,12 +28,11 @@
 #include <functional>
 #include <iterator>
 #include <fstream>
-#include <vector>
 
 #include <boost/algorithm/string.hpp>
 #include <boost/bind.hpp>
-#include <boost/lexical_cast.hpp>
 #include <boost/format.hpp>
+#include <boost/lexical_cast.hpp>
 
 #include "CDPL/Chem/BasicMolecule.hpp"
 #include "CDPL/Chem/ControlParameterFunctions.hpp"
@@ -245,7 +244,9 @@ GenFragLibImpl::GenFragLibImpl():
 			  value<bool>(&strictMMFF94AtomTypes)->implicit_value(true));
 
 	addOptionLongDescriptions();
+
 	setMultiConfImportParameter(inputReader, false);
+	setSMILESRecordFormatParameter(inputReader, "SN");
 }
 
 const char* GenFragLibImpl::getProgName() const
@@ -671,6 +672,8 @@ bool GenFragLibImpl::doReadNextMolecule(CDPL::Chem::Molecule& mol)
 			if (!inputReader.read(mol)) {
 				CmdLineBase::printMessage(ERROR, "Reading molecule " + boost::lexical_cast<std::string>(inputReader.getRecordIndex() + 1) + '/' +
 										  boost::lexical_cast<std::string>(inputReader.getNumRecords()) + " failed");			
+				
+				inputReader.setRecordIndex(inputReader.getRecordIndex() + 1);
 				return false;
 			}
 

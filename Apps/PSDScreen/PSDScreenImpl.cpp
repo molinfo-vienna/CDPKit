@@ -27,7 +27,6 @@
 #include <cstdlib>
 #include <algorithm>
 #include <iterator>
-#include <vector>
 #include <numeric>
 #include <sstream>
 #include <iomanip>

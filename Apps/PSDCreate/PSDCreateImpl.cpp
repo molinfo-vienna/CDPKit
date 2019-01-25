@@ -471,6 +471,8 @@ bool PSDCreateImpl::doReadNextMolecule(CDPL::Chem::Molecule& mol)
 			if (!inputReader.read(mol)) {
 				printMessage(ERROR, "Reading molecule " + boost::lexical_cast<std::string>(inputReader.getRecordIndex() + 1) + '/' +
 							 boost::lexical_cast<std::string>(inputReader.getNumRecords()) + " failed");			
+				
+				inputReader.setRecordIndex(inputReader.getRecordIndex() + 1);
 				return false;
 			}
 

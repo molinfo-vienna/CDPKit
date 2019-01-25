@@ -111,6 +111,7 @@ BOOST_PYTHON_MODULE(_math)
 	exportMatrixFunctions();
 	exportQuaternionFunctions();
 	exportGridFunctions();
+	exportRegularSpatialGridFunctions();
 	exportSpecialFunctions();
 	exportVectorArrayFunctions();
 

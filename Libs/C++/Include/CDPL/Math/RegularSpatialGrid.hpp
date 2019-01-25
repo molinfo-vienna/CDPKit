@@ -457,6 +457,51 @@ namespace CDPL
 			InvCoordinatesTransformType invXform;
 		};
 
+		template <typename T, typename C, typename GD, typename XF, typename V> 
+		T interpolateTrilinear(const RegularSpatialGrid<T, C, GD, XF>& grid, const V& pos, bool local_pos)
+		{
+			typename GD::SizeType inds[3];
+
+			if (local_pos) {
+				if (!grid.getLocalContainingCell(pos, inds))
+					return T();
+
+			} else {
+				if (!grid.getContainingCell(pos, inds))
+					return T();
+			}
+
+			if (inds[0] + 1 >= grid.getSize1() || inds[1] + 1 >= grid.getSize2() || inds[2] + 1 >= grid.getSize3())
+				return T();
+
+			C xyz0[3];
+
+			if (local_pos) 
+				grid.getLocalCoordinates(inds[0], inds[1], inds[2], xyz0);
+			else
+				grid.getCoordinates(inds[0], inds[1], inds[2], xyz0);
+
+			C x1 = xyz0[0] + grid.getXStepSize();
+			C y1 = xyz0[1] + grid.getYStepSize();
+			C z1 = xyz0[2] + grid.getZStepSize();
+
+			C xd = (pos[0] - xyz0[0]) / (x1 - xyz0[0]);
+			C yd = (pos[1] - xyz0[1]) / (y1 - xyz0[1]);
+			C zd = (pos[2] - xyz0[2]) / (z1 - xyz0[2]);
+
+			T c00 = grid(inds[0], inds[1], inds[2]) * (1 - xd) + grid(inds[0] + 1, inds[1], inds[2]) * xd;
+			T c01 = grid(inds[0], inds[1], inds[2] + 1) * (1 - xd) + grid(inds[0] + 1, inds[1], inds[2] + 1) * xd;
+			T c10 = grid(inds[0], inds[1] + 1, inds[2]) * (1 - xd) + grid(inds[0] + 1, inds[1] + 1, inds[2]) * xd;
+			T c11 = grid(inds[0], inds[1] + 1, inds[2] + 1) * (1 - xd) + grid(inds[0] + 1, inds[1] + 1, inds[2] + 1) * xd;
+
+			T c0 = c00 * (1 - yd) + c10 * yd;
+			T c1 = c01 * (1 - yd) + c11 * yd;
+
+			T c = c0 * (1 - zd) + c1 * zd;
+
+			return c;
+		}
+	
 		/**
 		 * \brief An unbounded dense regular grid in 3D space holding floating point values of type <tt>float</tt>.
 		 */

@@ -61,7 +61,7 @@
 namespace
 {
 
-	const std::string DEF_ATOM_SYMBOL      = "?";
+	const std::string DEF_ATOM_SYMBOL = "?";
 }
 
 

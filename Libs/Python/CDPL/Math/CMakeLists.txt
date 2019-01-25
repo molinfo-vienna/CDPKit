@@ -80,6 +80,7 @@ SET(math_impl_MOD_SRCS
     SpecialFunctionExport.cpp
     QuaternionFunctionExport.cpp
     GridFunctionExport.cpp
+    RegularSpatialGridFunctionExport.cpp
 
     VectorArrayExport.cpp
     VectorArrayFunctionExport.cpp

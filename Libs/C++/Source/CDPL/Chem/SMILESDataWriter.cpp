@@ -122,33 +122,8 @@ void Chem::SMILESDataWriter::writeName(std::ostream& os, const T& obj) const
 	if (ctrlParameters.recordFormat == "S")
 		return;
 
-	if (ctrlParameters.recordFormat == "S:") {
-		os << ' ';
-		return;
-	}
-
-	if (ctrlParameters.recordFormat == "S$") {
-		os << '\n';
-		return;
-	}
-
-	const std::string& name = getName(obj);
-
-	if (ctrlParameters.recordFormat == "S:N:") {
-		if (!name.empty())
-			os << ' ' << name;
-
-		os << ' ';
-		return;
-	}
-
-	if (ctrlParameters.recordFormat == "S:N$") {
-		if (!name.empty())
-			os << ' ' << name;
-
-		os << '\n';
-		return;
-	}
+	if (ctrlParameters.recordFormat == "SN") 
+		os << ' ' << getName(obj);
 }
 
 void Chem::SMILESDataWriter::init(std::ostream& os, bool rxn_context)
@@ -168,13 +143,15 @@ void Chem::SMILESDataWriter::init(std::ostream& os, bool rxn_context)
 	ctrlParameters.writeRxnAtomMappingID  =  rxn_context ? getSMILESRxnWriteAtomMappingIDParameter(ioBase) : getSMILESMolWriteAtomMappingIDParameter(ioBase);
 	ctrlParameters.recordFormat           =  getSMILESRecordFormatParameter(ioBase); 
 
-	if (ctrlParameters.recordFormat != "S" && ctrlParameters.recordFormat != "S:" && ctrlParameters.recordFormat != "S$" &&
-		ctrlParameters.recordFormat != "S:N" && ctrlParameters.recordFormat != "S:N:" && ctrlParameters.recordFormat != "S:N$")
+	if (ctrlParameters.recordFormat != "S" && ctrlParameters.recordFormat != "SN")
 		throw Base::IOError("SMILESDataWriter: invalid smiles record format control-parameter");
 
 	os.imbue(std::locale::classic());
 
 	os << std::dec;
+
+	if (os.tellp() > 0)
+		os << getRecordSeparatorParameter(ioBase);
 }
 
 void Chem::SMILESDataWriter::init()

@@ -43,16 +43,10 @@ void SMILESRecordFormatEditWidget::updateGUI()
 {
 	recordFormatComboBox->blockSignals(true);
 
-	if (recordFormat == "S:") 
+	if (recordFormat == "S") 
+		recordFormatComboBox->setCurrentIndex(0);
+	else if (recordFormat == "SN")
 		recordFormatComboBox->setCurrentIndex(1);
-	else if (recordFormat == "S$")
-		recordFormatComboBox->setCurrentIndex(2);
-	else if (recordFormat == "S:N")
-		recordFormatComboBox->setCurrentIndex(3);
-	else if (recordFormat == "S:N:")
-		recordFormatComboBox->setCurrentIndex(4);
-	else if (recordFormat == "S:N$")
-		recordFormatComboBox->setCurrentIndex(5);
 	else
 		recordFormatComboBox->setCurrentIndex(0);
 
@@ -64,23 +58,7 @@ void SMILESRecordFormatEditWidget::handleFormatSelection(int idx)
 	switch (idx) {
 
 		case 1:
-			recordFormat = "S:";
-			break;
-
-		case 2:
-			recordFormat = "S$";
-			break;
-
-		case 3:
-			recordFormat = "S:N";
-			break;
-
-		case 4:
-			recordFormat = "S:N:";
-			break;
-
-		case 5:
-			recordFormat = "S:N$";
+			recordFormat = "SN";
 			break;
 
 		default:
@@ -103,11 +81,7 @@ void SMILESRecordFormatEditWidget::init()
 	setFocusProxy(recordFormatComboBox);
 
 	recordFormatComboBox->addItem(tr("Smiles"));
-	recordFormatComboBox->addItem(tr("Smiles:Space"));
-	recordFormatComboBox->addItem(tr("Smiles:Linebreak"));
-	recordFormatComboBox->addItem(tr("Smiles:Space:Name"));
-	recordFormatComboBox->addItem(tr("Smiles:Space:Name:Space"));
-	recordFormatComboBox->addItem(tr("Smiles:Space:Name:Linebreak"));
+	recordFormatComboBox->addItem(tr("Smiles:Name"));
 
 	main_layout->addWidget(recordFormatComboBox);
 

@@ -103,6 +103,14 @@ namespace CDPL
 
 			Mode getMode() const;
 
+			void regardStereochemistry(bool regard);
+
+			bool stereochemistryRegarded() const;
+
+			void regardIsotopes(bool regard);
+
+			bool isotopesRegarded() const;
+
 			/**
 			 * \brief Generates all unique tautomers of the molecular graph \a molgraph.
 			 * \param molgraph The molecular graph for which to generate the tautomers.
@@ -113,6 +121,7 @@ namespace CDPL
 			class SafeMoleculePtr;
 
 			bool init(const MolecularGraph& molgraph);
+			void initHashCalculator();
 
 			bool addNewTautomer(Molecule* mol);
 
@@ -135,6 +144,8 @@ namespace CDPL
 
 			CallbackFunction   callbackFunc;
 			Mode               mode;
+			bool               regStereo;
+			bool               regIsotopes;
 			TautRuleList       tautRules;
 			MoleculeList       currGeneration;
 			MoleculeList       nextGeneration;

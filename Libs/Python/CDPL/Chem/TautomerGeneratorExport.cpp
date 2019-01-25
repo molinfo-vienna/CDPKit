@@ -68,6 +68,10 @@ void CDPLPythonChem::exportTautomerGenerator()
 	     python::arg("self"), python::return_internal_reference<>())
 	.def("setMode", &Chem::TautomerGenerator::setMode, (python::arg("self"), python::arg("mode")))
 	.def("getMode", &Chem::TautomerGenerator::getMode, python::arg("self"))
+	.def("regardStereochemistry", &Chem::TautomerGenerator::regardStereochemistry, (python::arg("self"), python::arg("regard")))
+	.def("stereochemistryRegarded", &Chem::TautomerGenerator::stereochemistryRegarded, python::arg("self"))
+	.def("regardIsotopes", &Chem::TautomerGenerator::regardIsotopes, (python::arg("self"), python::arg("regard")))
+	.def("isotopesRegarded", &Chem::TautomerGenerator::isotopesRegarded, python::arg("self"))
 	.def("generate", &Chem::TautomerGenerator::generate, 
 	     (python::arg("self"), python::arg("molgraph")))
 	.def("assign", &Chem::TautomerGenerator::operator=, 
@@ -76,5 +80,7 @@ void CDPLPythonChem::exportTautomerGenerator()
 								python::return_internal_reference<>()),
 		      &Chem::TautomerGenerator::setCallbackFunction)
 	.add_property("mode", &Chem::TautomerGenerator::getMode, &Chem::TautomerGenerator::setMode)
+	.add_property("regStereo", &Chem::TautomerGenerator::stereochemistryRegarded, &Chem::TautomerGenerator::regardStereochemistry)
+	.add_property("regIsotopes", &Chem::TautomerGenerator::isotopesRegarded, &Chem::TautomerGenerator::regardIsotopes)
 	.add_property("numTautomerizationRules", &Chem::TautomerGenerator::getNumTautomerizationRules);
 }

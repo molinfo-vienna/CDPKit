@@ -94,8 +94,8 @@ namespace CDPL
 			extern CDPL_CHEM_API const Base::LookupKey STRICT_ERROR_CHECKING;
 
 			/**
-			 * \brief Specifies the separator for \e SMARTS, \e JME and \e InChI output data records
-			 *        [\ref SMARTS, \ref JME, \ref INCHI].
+			 * \brief Specifies the separator for \e SMILES, \e SMARTS, \e JME and \e InChI output data records
+			 *        [\ref SMILES, \ref SMARTS, \ref JME, \ref INCHI].
 			 *
 			 * Typical separators are, for example, space (" "), tab ("\t") or newline ("\n").
 			 *
@@ -266,18 +266,12 @@ namespace CDPL
 			/**
 			 * \brief Specifies the format of \e SMILES molecular graph or reaction data records [\ref SMILES].
 			 *
-			 * The data record format is specified by one of the following format strings:
+			 * The data record format is specified by one of the two following format strings:
 			 * - "S"
-			 * - "S:"
-			 * - "S$"
-			 * - "S:N"
-			 * - "S:N:"
-			 * - "S:N$"
+			 * - "SN"
 			 *
 			 * The character 'S' denotes the \e SMILES representation of the molecular graph or reaction, and 'N' the name of the
-			 * molecular graph/reaction (see Chem::MolecularGraphProperty::NAME and Chem::ReactionProperty::NAME). The two
-			 * remaining characters specify data field and record separators where ':' stands for a space, and '$' for a
-			 * newline character.
+			 * molecular graph/reaction (see Chem::MolecularGraphProperty::NAME and Chem::ReactionProperty::NAME).
 			 *
 			 * \valuetype \c std::string
 			 */

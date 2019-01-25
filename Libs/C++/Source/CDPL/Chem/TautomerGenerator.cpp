@@ -74,18 +74,12 @@ private:
 };
 
 
-Chem::TautomerGenerator::TautomerGenerator(): mode(TOPOLOGICALLY_UNIQUE) 
-{
-	hashCalculator.setAtomHashSeedFunction(HashCodeCalculator::DefAtomHashSeedFunctor(hashCalculator,
-																					  AtomPropertyFlag::TYPE | 
-																					  AtomPropertyFlag::ISOTOPE |
-																					  AtomPropertyFlag::FORMAL_CHARGE));
-	hashCalculator.setBondHashSeedFunction(HashCodeCalculator::DefBondHashSeedFunctor(hashCalculator, BondPropertyFlag::ORDER));
-	hashCalculator.includeGlobalStereoFeatures(false);
-}
+Chem::TautomerGenerator::TautomerGenerator(): 
+	mode(TOPOLOGICALLY_UNIQUE), regStereo(true), regIsotopes(true)
+{}
 
 Chem::TautomerGenerator::TautomerGenerator(const TautomerGenerator& gen):
-	callbackFunc(gen.callbackFunc), mode(gen.mode)
+	callbackFunc(gen.callbackFunc), mode(gen.mode), regStereo(true), regIsotopes(true)
 {
 	std::transform(gen.tautRules.begin(), gen.tautRules.end(), std::back_inserter(tautRules), boost::bind(&TautomerizationRule::clone, _1));
 }
@@ -151,6 +145,26 @@ Chem::TautomerGenerator::Mode Chem::TautomerGenerator::getMode() const
 	return mode;
 }
 
+void Chem::TautomerGenerator::regardStereochemistry(bool regard)
+{
+	regStereo = regard;
+}
+
+bool Chem::TautomerGenerator::stereochemistryRegarded() const
+{
+	return regStereo;
+}
+
+void Chem::TautomerGenerator::regardIsotopes(bool regard)
+{
+	regIsotopes = regard;
+}
+
+bool Chem::TautomerGenerator::isotopesRegarded() const
+{
+	return regIsotopes;
+}
+
 void Chem::TautomerGenerator::generate(const MolecularGraph& molgraph)
 {
     if (!callbackFunc)
@@ -194,6 +208,8 @@ void Chem::TautomerGenerator::generate(const MolecularGraph& molgraph)
 
 bool Chem::TautomerGenerator::init(const MolecularGraph& molgraph)
 {
+	initHashCalculator();
+
 	freeCurrentGenTautomers();
 	freeNextGenTautomers();
 
@@ -213,6 +229,23 @@ bool Chem::TautomerGenerator::init(const MolecularGraph& molgraph)
 	return callbackFunc(*mol.release());
 }
 
+void Chem::TautomerGenerator::initHashCalculator()
+{
+	if (regIsotopes) {
+		hashCalculator.setAtomHashSeedFunction(HashCodeCalculator::DefAtomHashSeedFunctor(hashCalculator,
+																						  AtomPropertyFlag::TYPE | 
+																						  AtomPropertyFlag::ISOTOPE |
+																						  AtomPropertyFlag::FORMAL_CHARGE));
+	} else {
+		hashCalculator.setAtomHashSeedFunction(HashCodeCalculator::DefAtomHashSeedFunctor(hashCalculator,
+																						  AtomPropertyFlag::TYPE | 
+																						  AtomPropertyFlag::FORMAL_CHARGE));
+	}
+
+	hashCalculator.setBondHashSeedFunction(HashCodeCalculator::DefBondHashSeedFunctor(hashCalculator, BondPropertyFlag::ORDER));
+	hashCalculator.includeGlobalStereoFeatures(false);
+}
+
 bool Chem::TautomerGenerator::addNewTautomer(Molecule* mol)
 {
 	Base::uint64 hash = calcTautomerHashCode(*mol);
@@ -228,7 +261,7 @@ bool Chem::TautomerGenerator::addNewTautomer(Molecule* mol)
 Base::uint64 Chem::TautomerGenerator::calcTautomerHashCode(const Molecule& tautomer)
 {
 	if (mode == TOPOLOGICALLY_UNIQUE)
-		return hashCalculator.calculate(tautomer);
+		return hashCalculator.calculate(tautomer); // TODO stereochemistry
 
 	BondDescriptor bond_desc;
 
@@ -237,9 +270,13 @@ Base::uint64 Chem::TautomerGenerator::calcTautomerHashCode(const Molecule& tauto
 	for (Molecule::ConstBondIterator it = tautomer.getBondsBegin(), end = tautomer.getBondsEnd(); it != end; ++it) {
 		const Bond& bond = *it;
 
-		if (mode == GEOMETRICALLY_UNIQUE && 
-			(isOrdinaryHydrogen(bond.getBegin(), tautomer) || isOrdinaryHydrogen(bond.getEnd(), tautomer)))
-			continue;
+		if (mode == GEOMETRICALLY_UNIQUE) {
+			if (regIsotopes) {
+				if (isOrdinaryHydrogen(bond.getBegin(), tautomer) || isOrdinaryHydrogen(bond.getEnd(), tautomer)) 
+					continue;
+			} else if (isHydrogenBond(bond)) 
+				continue;
+		}
 
 		std::size_t atom1_idx = bond.getBegin().getIndex();
 		std::size_t atom2_idx = bond.getEnd().getIndex();

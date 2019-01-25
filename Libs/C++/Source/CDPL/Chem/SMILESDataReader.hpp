@@ -170,6 +170,7 @@ namespace CDPL
 			BondListTable           nbrBondListTable;
 			bool                    strictErrorChecking;
 			std::string             recordFormat;
+			std::string             recordSeparator;
 			Fragment                readMolGraph;
 		};
 	}
