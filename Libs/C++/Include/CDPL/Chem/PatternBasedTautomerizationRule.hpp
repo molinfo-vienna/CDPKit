@@ -66,8 +66,6 @@ namespace CDPL
 		  public:
 			typedef boost::shared_ptr<PatternBasedTautomerizationRule> SharedPointer;
 
-			typedef boost::function1<void, MolecularGraph&> CustomSetupFunction;
-
 			struct BondOrderChange
 			{
 
@@ -97,8 +95,6 @@ namespace CDPL
 
 			void clearExcludePatterns();
 
-			void setCustomSetupFunction(const CustomSetupFunction& func);
-
 			bool setup(MolecularGraph& parent_molgraph);
 		
 			unsigned int getID() const;
@@ -126,7 +122,6 @@ namespace CDPL
 			typedef std::vector<BitSetPtr> AllocBitSetList;
 
 			unsigned int                ruleID;
-			CustomSetupFunction         customSetupFunc;
 			StructPatternList           structPatterns;
 			StructPatternList           excludePatterns;
 			BondOrderChangeListArray    patternBondChangeLists;

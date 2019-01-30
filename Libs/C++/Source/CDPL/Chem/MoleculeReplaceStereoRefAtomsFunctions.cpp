@@ -43,8 +43,9 @@ void Chem::replaceAtomStereoReferenceAtoms(Molecule& mol_copy, const MolecularGr
 {
 	Molecule::AtomIterator atoms_end = mol_copy.getAtomsEnd();
 	std::size_t i = 0;
+	std::size_t num_mg_atoms = molgraph.getNumAtoms();
 
-	for (Molecule::AtomIterator a_it = mol_copy.getAtomsBegin() + atom_idx_offs; a_it != atoms_end; ++a_it, i++) {
+	for (Molecule::AtomIterator a_it = mol_copy.getAtomsBegin() + atom_idx_offs; a_it != atoms_end && i < num_mg_atoms; ++a_it, i++) {
 		Atom& atom = *a_it;
 		const StereoDescriptor& stereo_desc = getStereoDescriptor(atom);
 
@@ -67,7 +68,7 @@ void Chem::replaceAtomStereoReferenceAtoms(Molecule& mol_copy, const MolecularGr
 														   mol_copy.getAtom(molgraph.getAtomIndex(*ref_atoms[1]) + atom_idx_offs),
 														   mol_copy.getAtom(molgraph.getAtomIndex(*ref_atoms[2]) + atom_idx_offs),
 														   mol_copy.getAtom(molgraph.getAtomIndex(*ref_atoms[3]) + atom_idx_offs)));
-		} catch (const Base::ItemNotFound& e) {
+		} catch (const Base::IndexError& e) {
 			clearStereoDescriptor(atom);
 		} 
 	}
@@ -78,8 +79,9 @@ void Chem::replaceBondStereoReferenceAtoms(Molecule& mol_copy, const MolecularGr
 {
 	Molecule::BondIterator bonds_end = mol_copy.getBondsEnd();
 	std::size_t i = 0;
+	std::size_t num_mg_bonds = molgraph.getNumBonds();
 
-	for (Molecule::BondIterator b_it = mol_copy.getBondsBegin() + bond_start_idx; b_it != bonds_end; ++b_it, i++) {
+	for (Molecule::BondIterator b_it = mol_copy.getBondsBegin() + bond_start_idx; b_it != bonds_end && i < num_mg_bonds; ++b_it, i++) {
 		Bond& bond = *b_it;
 		const StereoDescriptor& stereo_desc = getStereoDescriptor(bond);
 
@@ -96,7 +98,7 @@ void Chem::replaceBondStereoReferenceAtoms(Molecule& mol_copy, const MolecularGr
 													   mol_copy.getAtom(molgraph.getAtomIndex(*ref_atoms[1]) + atom_idx_offs),
 													   mol_copy.getAtom(molgraph.getAtomIndex(*ref_atoms[2]) + atom_idx_offs),
 													   mol_copy.getAtom(molgraph.getAtomIndex(*ref_atoms[3]) + atom_idx_offs)));
-		} catch (const Base::ItemNotFound& e) {
+		} catch (const Base::IndexError& e) {
 			clearStereoDescriptor(bond);
 		} 
 	}

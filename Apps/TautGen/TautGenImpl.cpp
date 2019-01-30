@@ -98,8 +98,16 @@ public:
 			while (true) {
 				if (!parent->readNextMolecule(molecule))
 					return;
-			
-				initSubstructureSearchTarget(molecule, false);
+
+				if (parent->regardStereo) {
+					calcImplicitHydrogenCounts(molecule, false);
+					perceiveHybridizationStates(molecule, false);
+					perceiveSSSR(molecule, false);
+					setRingFlags(molecule, false);
+					setAromaticityFlags(molecule, false);
+					calcAtomStereoDescriptors(molecule, false);
+					calcBondStereoDescriptors(molecule, false);
+				}
 
 				numGenMolTauts = 0;
 
@@ -138,6 +146,7 @@ private:
 		tautGen.setMode(parent->mode);
 		tautGen.regardIsotopes(parent->regardIsotopes);
 		tautGen.regardStereochemistry(parent->regardStereo);
+		tautGen.setCustomSetupFunction(boost::bind(&setRingFlags, _1, false));
 
 		PatternBasedTautomerizationRule::SharedPointer h13_shift(new GenericHydrogen13ShiftTautomerization());
 		PatternBasedTautomerizationRule::SharedPointer h15_shift(new GenericHydrogen15ShiftTautomerization());
@@ -157,6 +166,13 @@ private:
 		h13_shift->addExcludePatterns(*amide_imidic);
 		h13_shift->addExcludePatterns(*lactam_lactim);
 		h13_shift->addExcludePatterns(*nitro_aci);
+
+		h15_shift->addExcludePatterns(*keto_enol);
+		h15_shift->addExcludePatterns(*imine_enamine);
+		h15_shift->addExcludePatterns(*nitroso_oxime);
+		h15_shift->addExcludePatterns(*amide_imidic);
+		h15_shift->addExcludePatterns(*lactam_lactim);
+		h15_shift->addExcludePatterns(*nitro_aci);
 	
 		if (parent->ketoEnol)
 			tautGen.addTautomerizationRule(keto_enol);
@@ -164,14 +180,14 @@ private:
 		if (parent->imineEnamine)
 			tautGen.addTautomerizationRule(imine_enamine);
 
-		if (parent->nitrosoOxime)
-			tautGen.addTautomerizationRule(nitroso_oxime);
-
 		if (parent->amideImidicAcid)
 			tautGen.addTautomerizationRule(amide_imidic);
 
 		if (parent->lactamLactim)
 			tautGen.addTautomerizationRule(lactam_lactim);
+
+		if (parent->nitrosoOxime)
+			tautGen.addTautomerizationRule(nitroso_oxime);
 
 		if (parent->keteneYnol)
 			tautGen.addTautomerizationRule(ketene_ynol);
@@ -192,7 +208,7 @@ private:
 			tautGen.addTautomerizationRule(h15_shift);
 	}
 
-	bool tautomerGenerated(const CDPL::Chem::MolecularGraph& taut) {
+	bool tautomerGenerated(CDPL::Chem::MolecularGraph& taut) {
 		using namespace CDPL;
 		using namespace Chem;
 
@@ -201,6 +217,14 @@ private:
 
 		numGenTauts++;
 		numGenMolTauts++;
+
+		perceiveComponents(taut, false);
+		setRingFlags(taut, false);
+		perceiveHybridizationStates(taut, false);
+		perceiveSSSR(taut, false);
+		setAromaticityFlags(taut, false);
+		setAtomSymbolsFromTypes(taut, false);
+		setName(taut, getName(molecule));
 
 		parent->writeMolecule(taut);
 
@@ -671,6 +695,9 @@ void TautGenImpl::initInputReader()
 	} else
 		printMessage(INFO, "Scanning Input File(s)...");
 
+	setMultiConfImportParameter(inputReader, false);
+	setSMILESRecordFormatParameter(inputReader, "SN");
+
 	for (std::size_t i = 0; i < num_in_files; i++) {
 		if (termSignalCaught())
 			return;
@@ -701,9 +728,6 @@ void TautGenImpl::initInputReader()
 	if (TautGenImpl::termSignalCaught())
 		return;
 
-	setMultiConfImportParameter(inputReader, false);
-	setSMILESRecordFormatParameter(inputReader, "SN");
-
 	printMessage(INFO, " - Found " + boost::lexical_cast<std::string>(inputReader.getNumRecords()) + " input molecule(s)");
 	printMessage(INFO, "");
 }
@@ -719,7 +743,7 @@ void TautGenImpl::initOutputWriter()
 
 	outputWriter = output_handler->createWriter(outputFile);
 
-	setSMILESRecordFormatParameter(*outputWriter, "S");
+	setSMILESRecordFormatParameter(*outputWriter, "SN");
 	setMultiConfExportParameter(*outputWriter, false);
 }
 

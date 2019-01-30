@@ -154,7 +154,6 @@ PSDCreateImpl::PSDCreateImpl():
 			  value<bool>(&addSourceFileProp)->implicit_value(true));
 
 	addOptionLongDescriptions();
-	setMultiConfImportParameter(inputReader, true);
 }
 
 const char* PSDCreateImpl::getProgName() const
@@ -561,6 +560,8 @@ void PSDCreateImpl::initInputReader()
 		printMessage(INFO, "Scanning Input File(s)...", true, true);
 	} else
 		printMessage(INFO, "Scanning Input File(s)...");
+
+	setMultiConfImportParameter(inputReader, true);
 
 	for (std::size_t i = 0; i < num_in_files; i++) {
 		if (termSignalCaught())

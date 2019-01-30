@@ -72,6 +72,7 @@ void CDPLPythonChem::exportTautomerGenerator()
 	.def("stereochemistryRegarded", &Chem::TautomerGenerator::stereochemistryRegarded, python::arg("self"))
 	.def("regardIsotopes", &Chem::TautomerGenerator::regardIsotopes, (python::arg("self"), python::arg("regard")))
 	.def("isotopesRegarded", &Chem::TautomerGenerator::isotopesRegarded, python::arg("self"))
+	.def("setCustomSetupFunction", &Chem::TautomerGenerator::setCustomSetupFunction, (python::arg("self"), python::arg("func")))
 	.def("generate", &Chem::TautomerGenerator::generate, 
 	     (python::arg("self"), python::arg("molgraph")))
 	.def("assign", &Chem::TautomerGenerator::operator=, 

@@ -72,7 +72,7 @@ namespace CDPL
 			static const unsigned int DEF_ATOM_PROPERTY_FLAGS = 
 				AtomPropertyFlag::TYPE | AtomPropertyFlag::ISOTOPE |
 				AtomPropertyFlag::H_COUNT | AtomPropertyFlag::FORMAL_CHARGE |
-				AtomPropertyFlag::CONFIGURATION | AtomPropertyFlag::AROMATICITY;
+				AtomPropertyFlag::CIP_CONFIGURATION | AtomPropertyFlag::AROMATICITY;
 
 			/**
 			 * \brief Specifies the default set of bond properties considered in the generation
@@ -80,7 +80,7 @@ namespace CDPL
 			 */
 			static const unsigned int DEF_BOND_PROPERTY_FLAGS = 
 				BondPropertyFlag::ORDER | BondPropertyFlag::TOPOLOGY |
-				BondPropertyFlag::AROMATICITY | BondPropertyFlag::CONFIGURATION;
+				BondPropertyFlag::AROMATICITY | BondPropertyFlag::CIP_CONFIGURATION;
 
 			/**
 			 * \brief The default functor for the generation of atom hash seeds.
@@ -99,7 +99,7 @@ namespace CDPL
 				 *  - Chem::AtomPropertyFlag::H_COUNT
 				 *  - Chem::AtomPropertyFlag::FORMAL_CHARGE
 				 *  - Chem::AtomPropertyFlag::AROMATICITY
-				 *  - and Chem::AtomPropertyFlag::CONFIGURATION
+				 *  - and Chem::AtomPropertyFlag::CIP_CONFIGURATION
 				 *
 				 * \param calculator The \c %HashCodeCalculator instance that 'owns' the functor object.
 				 * \param flags Specifies the set of considered atomic properties.
@@ -145,7 +145,7 @@ namespace CDPL
 				 *  - Chem::BondPropertyFlag::ORDER
 				 *  - Chem::BondPropertyFlag::TOPOLOGY
 				 *  - Chem::BondPropertyFlag::AROMATICITY
-				 *  - and Chem::BondPropertyFlag::CONFIGURATION
+				 *  - and Chem::BondPropertyFlag::CIP_CONFIGURATION
 				 *
 				 * \param calculator The \c %HashCodeCalculator instance that 'owns' the functor object.
 				 * \param flags Specifies the set of considered bond properties.

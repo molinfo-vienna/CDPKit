@@ -45,9 +45,9 @@ Chem::ImineEnamineTautomerization::ImineEnamineTautomerization():
 		{ 1, 4, 1 }
 	};
 
-	addTransformationPattern(parseSMARTS("[#7:1]=[#6:2]-[#6:3]-[#1:4]"), 
+	addTransformationPattern(parseSMARTS("[#7:1]=[#6:2]-[#6X4v4:3]-[#1:4]"), 
 							 &bond_changes[0], &bond_changes[sizeof(bond_changes) / sizeof(BondOrderChange)]);
-	addTransformationPattern(parseSMARTS("[#1:1]-[#7:2]-[#6:3]=[#6:4]"), 
+	addTransformationPattern(parseSMARTS("[#1:1]-[#7X3v3:2]-[#6:3]=[#6:4]"), 
 							 &bond_changes[0], &bond_changes[sizeof(bond_changes) / sizeof(BondOrderChange)]);
 
 }

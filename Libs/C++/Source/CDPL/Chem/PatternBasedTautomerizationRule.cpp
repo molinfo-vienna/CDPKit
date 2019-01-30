@@ -36,6 +36,7 @@
 #include "CDPL/Chem/Bond.hpp"
 #include "CDPL/Chem/AtomFunctions.hpp"
 #include "CDPL/Chem/BondFunctions.hpp"
+#include "CDPL/Chem/Entity3DFunctions.hpp"
 
 
 using namespace CDPL;
@@ -108,16 +109,8 @@ Chem::TautomerizationRule::SharedPointer Chem::PatternBasedTautomerizationRule::
 	return SharedPointer(new PatternBasedTautomerizationRule(*this));
 }
 
-void Chem::PatternBasedTautomerizationRule::setCustomSetupFunction(const CustomSetupFunction& func)
-{
-	customSetupFunc = func;
-}
-
 bool Chem::PatternBasedTautomerizationRule::setup(MolecularGraph& parent_molgraph)
 {
-	if (customSetupFunc)
-		customSetupFunc(parent_molgraph);
-
     std::for_each(patternSubSearchList.begin(), patternSubSearchList.end(), boost::bind(&SubstructureSearch::findMappings, _1, boost::ref(parent_molgraph)));
 
 	parentMolGraph = &parent_molgraph;
@@ -187,23 +180,49 @@ bool Chem::PatternBasedTautomerizationRule::applyTransformation(Molecule& tautom
 		createMatchedBondMask(mapping.getBondMapping(), bondMask);
 
 		for (BitSetList::const_iterator it = excludeMatches.begin(), end = excludeMatches.end(); it != end; ++it)
-			if (bondMask.is_subset_of(**it))
+			if ((*it)->is_subset_of(bondMask))
 				return false;
 	}
 
-	tautomer.copy(*parentMolGraph);
+	tautomer.clear();
+
+	for (MolecularGraph::ConstAtomIterator it = parentMolGraph->getAtomsBegin(), end = parentMolGraph->getAtomsEnd(); it != end; ++it) {
+		const Atom& atom = *it;
+
+		Atom& atom_copy = tautomer.addAtom();
+
+		setType(atom_copy, getType(atom));
+		setFormalCharge(atom_copy, getFormalCharge(atom));
+		setUnpairedElectronCount(atom_copy, getUnpairedElectronCount(atom));
+		setIsotope(atom_copy, getIsotope(atom));
+		setImplicitHydrogenCount(atom_copy, 0);
+
+		if (has3DCoordinates(atom))
+			set3DCoordinates(atom_copy, get3DCoordinates(atom));
+
+		if (has2DCoordinates(atom))
+			set2DCoordinates(atom_copy, get2DCoordinates(atom));
+	}
+
+	for (MolecularGraph::ConstBondIterator it = parentMolGraph->getBondsBegin(), end = parentMolGraph->getBondsEnd(); it != end; ++it) {
+		const Bond& bond = *it;
+		Bond& bond_copy = tautomer.addBond(parentMolGraph->getAtomIndex(bond.getBegin()), parentMolGraph->getAtomIndex(bond.getEnd()));
+
+		setOrder(bond_copy, getOrder(bond));
+		set2DStereoFlag(bond_copy, get2DStereoFlag(bond));
+	}
 
 	const AtomMapping& atom_mapping = mapping.getAtomMapping();
 
 	for (BondOrderChangeList::const_iterator it = patternBondChangeLists[currPatternIdx].begin(), end = patternBondChangeLists[currPatternIdx].end(); it != end; ++it) {
 		const BondOrderChange& bond_chg_data = *it;
 
-		Atom* atom1 = getTautomerAtom(tautomer, bond_chg_data.atom1ID, atom_mapping);
+		Atom* atom1 = getTautomerAtom(tautomer, bond_chg_data.atom2ID, atom_mapping);
 
 		if (!atom1)
 			return false;
 
-		const Atom* atom2 = getTautomerAtom(tautomer, bond_chg_data.atom2ID, atom_mapping);
+		const Atom* atom2 = getTautomerAtom(tautomer, bond_chg_data.atom1ID, atom_mapping);
 
 		if (!atom2)
 			return false;
@@ -211,9 +230,9 @@ bool Chem::PatternBasedTautomerizationRule::applyTransformation(Molecule& tautom
 		Bond* bond = atom1->findBondToAtom(*atom2);
 
 		if (!bond) {
-			if (bond_chg_data.orderChange > 0)
+			if (bond_chg_data.orderChange > 0) 
 				setOrder(tautomer.addBond(atom1->getIndex(), atom2->getIndex()), bond_chg_data.orderChange);
-			
+
 			continue;
 		}
 

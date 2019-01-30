@@ -26,12 +26,9 @@
  
 #include "StaticInit.hpp"
 
-#include <boost/bind.hpp>
-
 #include "CDPL/Chem/LactamLactimTautomerization.hpp"
 #include "CDPL/Chem/TautomerizationType.hpp"
 #include "CDPL/Chem/UtilityFunctions.hpp"
-#include "CDPL/Chem/MolecularGraphFunctions.hpp"
 
 
 using namespace CDPL;
@@ -51,6 +48,4 @@ Chem::LactamLactimTautomerization::LactamLactimTautomerization():
 							 &bond_changes[0], &bond_changes[sizeof(bond_changes) / sizeof(BondOrderChange)]);
 	addTransformationPattern(parseSMARTS("[#1:1]-[#8,#16,#34:2]-;!@[#6:3]=;@[#7:4]"), 
 							 &bond_changes[0], &bond_changes[sizeof(bond_changes) / sizeof(BondOrderChange)]);
-
-	setCustomSetupFunction(boost::bind(&setRingFlags, _1, true));
 }

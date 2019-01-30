@@ -148,13 +148,13 @@ void CDPL::Util::CompoundDataReader<DataType>::addReader(const ReaderPointer& re
 	readers.reserve(readers.size() + 1);
 	recordIdxBounds.reserve(readers.size() + 1);
 
+	reader->setParent(this);
+
 	std::size_t num_recs = reader->getNumRecords();
 
 	readers.push_back(reader);
 	numRecords += num_recs;
 	recordIdxBounds.push_back(numRecords);
-
-	reader->setParent(this);
 
 	state |= static_cast<bool>(reader->operator const void*());
 }

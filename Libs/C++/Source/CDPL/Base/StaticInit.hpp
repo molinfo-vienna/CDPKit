@@ -36,7 +36,7 @@ namespace CDPL
 	namespace Base
 	{
 
-		void initValueKey();
+		void initLookupKey();
 	}
 }
 
@@ -47,7 +47,7 @@ namespace
 	{
 
 		CDPLBaseInit() {
-			CDPL::Base::initValueKey();
+			CDPL::Base::initLookupKey();
 		}
 
 	} cdplBaseInit;

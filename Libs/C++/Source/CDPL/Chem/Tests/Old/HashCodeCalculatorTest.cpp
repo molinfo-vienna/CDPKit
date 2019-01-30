@@ -103,250 +103,250 @@ BOOST_AUTO_TEST_CASE(HashCodeCalculatorTest)
 		{ 0, 1, 
 		  AtomPropertyFlag::TYPE | AtomPropertyFlag::ISOTOPE | 
 		  AtomPropertyFlag::H_COUNT | AtomPropertyFlag::FORMAL_CHARGE |
-		  AtomPropertyFlag::CONFIGURATION | AtomPropertyFlag::AROMATICITY,
+		  AtomPropertyFlag::CIP_CONFIGURATION | AtomPropertyFlag::AROMATICITY,
 		  BondPropertyFlag::ORDER | BondPropertyFlag::TOPOLOGY | 
-		  BondPropertyFlag::AROMATICITY | BondPropertyFlag::CONFIGURATION,
+		  BondPropertyFlag::AROMATICITY | BondPropertyFlag::CIP_CONFIGURATION,
 		  true, true, true, true, true },
 		{ 0, 1, 
 		  AtomPropertyFlag::TYPE | AtomPropertyFlag::ISOTOPE | 
 		  AtomPropertyFlag::H_COUNT | AtomPropertyFlag::FORMAL_CHARGE |
-		  AtomPropertyFlag::CONFIGURATION | AtomPropertyFlag::AROMATICITY,
+		  AtomPropertyFlag::CIP_CONFIGURATION | AtomPropertyFlag::AROMATICITY,
 		  BondPropertyFlag::ORDER | BondPropertyFlag::TOPOLOGY | 
-		  BondPropertyFlag::AROMATICITY | BondPropertyFlag::CONFIGURATION,
+		  BondPropertyFlag::AROMATICITY | BondPropertyFlag::CIP_CONFIGURATION,
 		  true, false, false, true, true },
 		{ 0, 2, 
 		  AtomPropertyFlag::TYPE | AtomPropertyFlag::ISOTOPE | 
 		  AtomPropertyFlag::H_COUNT | AtomPropertyFlag::FORMAL_CHARGE |
-		  AtomPropertyFlag::CONFIGURATION | AtomPropertyFlag::AROMATICITY,
+		  AtomPropertyFlag::CIP_CONFIGURATION | AtomPropertyFlag::AROMATICITY,
 		  BondPropertyFlag::ORDER | BondPropertyFlag::TOPOLOGY | 
-		  BondPropertyFlag::AROMATICITY | BondPropertyFlag::CONFIGURATION,
+		  BondPropertyFlag::AROMATICITY | BondPropertyFlag::CIP_CONFIGURATION,
 		  false, true, true, true, true },
 		{ 2, 3, 
 		  AtomPropertyFlag::TYPE | AtomPropertyFlag::ISOTOPE | 
 		  AtomPropertyFlag::H_COUNT | AtomPropertyFlag::FORMAL_CHARGE |
-		  AtomPropertyFlag::CONFIGURATION | AtomPropertyFlag::AROMATICITY,
+		  AtomPropertyFlag::CIP_CONFIGURATION | AtomPropertyFlag::AROMATICITY,
 		  BondPropertyFlag::ORDER | BondPropertyFlag::TOPOLOGY | 
-		  BondPropertyFlag::AROMATICITY | BondPropertyFlag::CONFIGURATION,
+		  BondPropertyFlag::AROMATICITY | BondPropertyFlag::CIP_CONFIGURATION,
 		  true, true, true, true, true },
 		{ 2, 3, 
 		  AtomPropertyFlag::TYPE | AtomPropertyFlag::ISOTOPE | 
 		  AtomPropertyFlag::H_COUNT | AtomPropertyFlag::FORMAL_CHARGE |
-		  AtomPropertyFlag::CONFIGURATION | AtomPropertyFlag::AROMATICITY,
+		  AtomPropertyFlag::CIP_CONFIGURATION | AtomPropertyFlag::AROMATICITY,
 		  BondPropertyFlag::ORDER | BondPropertyFlag::TOPOLOGY | 
-		  BondPropertyFlag::AROMATICITY | BondPropertyFlag::CONFIGURATION,
+		  BondPropertyFlag::AROMATICITY | BondPropertyFlag::CIP_CONFIGURATION,
 		  true, false, false, true, true },
 		{ 0, 3, 
 		  AtomPropertyFlag::TYPE | AtomPropertyFlag::ISOTOPE | 
 		  AtomPropertyFlag::H_COUNT | AtomPropertyFlag::FORMAL_CHARGE |
-		  AtomPropertyFlag::CONFIGURATION | AtomPropertyFlag::AROMATICITY,
+		  AtomPropertyFlag::CIP_CONFIGURATION | AtomPropertyFlag::AROMATICITY,
 		  BondPropertyFlag::ORDER | BondPropertyFlag::TOPOLOGY | 
-		  BondPropertyFlag::AROMATICITY | BondPropertyFlag::CONFIGURATION,
+		  BondPropertyFlag::AROMATICITY | BondPropertyFlag::CIP_CONFIGURATION,
 		  true, true, false, true, true },
 		{ 4, 5, 
 		  AtomPropertyFlag::TYPE | AtomPropertyFlag::ISOTOPE | 
 		  AtomPropertyFlag::H_COUNT | AtomPropertyFlag::FORMAL_CHARGE |
-		  AtomPropertyFlag::CONFIGURATION | AtomPropertyFlag::AROMATICITY,
+		  AtomPropertyFlag::CIP_CONFIGURATION | AtomPropertyFlag::AROMATICITY,
 		  BondPropertyFlag::ORDER | BondPropertyFlag::TOPOLOGY | 
-		  BondPropertyFlag::AROMATICITY | BondPropertyFlag::CONFIGURATION,
+		  BondPropertyFlag::AROMATICITY | BondPropertyFlag::CIP_CONFIGURATION,
 		  true, true, false, true, true },
 		{ 6, 7, 
 		  AtomPropertyFlag::TYPE | AtomPropertyFlag::ISOTOPE | 
 		  AtomPropertyFlag::H_COUNT | AtomPropertyFlag::FORMAL_CHARGE |
-		  AtomPropertyFlag::CONFIGURATION | AtomPropertyFlag::AROMATICITY,
+		  AtomPropertyFlag::CIP_CONFIGURATION | AtomPropertyFlag::AROMATICITY,
 		  BondPropertyFlag::ORDER | BondPropertyFlag::TOPOLOGY | 
-		  BondPropertyFlag::AROMATICITY | BondPropertyFlag::CONFIGURATION,
+		  BondPropertyFlag::AROMATICITY | BondPropertyFlag::CIP_CONFIGURATION,
 		  true, true, false, true, true },
 		{ 6, 7, 
 		  AtomPropertyFlag::TYPE | AtomPropertyFlag::ISOTOPE | 
 		  AtomPropertyFlag::H_COUNT | AtomPropertyFlag::FORMAL_CHARGE |
-		  AtomPropertyFlag::CONFIGURATION | AtomPropertyFlag::AROMATICITY,
+		  AtomPropertyFlag::CIP_CONFIGURATION | AtomPropertyFlag::AROMATICITY,
 		  BondPropertyFlag::ORDER | BondPropertyFlag::TOPOLOGY | 
-		  BondPropertyFlag::AROMATICITY | BondPropertyFlag::CONFIGURATION,
+		  BondPropertyFlag::AROMATICITY | BondPropertyFlag::CIP_CONFIGURATION,
 		  false, true, true, true, true },
 		{ 6, 8, 
 		  AtomPropertyFlag::TYPE | AtomPropertyFlag::ISOTOPE | 
 		  AtomPropertyFlag::H_COUNT | AtomPropertyFlag::FORMAL_CHARGE |
-		  AtomPropertyFlag::CONFIGURATION | AtomPropertyFlag::AROMATICITY,
+		  AtomPropertyFlag::CIP_CONFIGURATION | AtomPropertyFlag::AROMATICITY,
 		  BondPropertyFlag::ORDER | BondPropertyFlag::TOPOLOGY | 
-		  BondPropertyFlag::AROMATICITY | BondPropertyFlag::CONFIGURATION,
+		  BondPropertyFlag::AROMATICITY | BondPropertyFlag::CIP_CONFIGURATION,
 		  true, true, true, true, true },
 		{ 9, 10, 
 		  AtomPropertyFlag::TYPE | AtomPropertyFlag::ISOTOPE | 
 		  AtomPropertyFlag::H_COUNT | AtomPropertyFlag::FORMAL_CHARGE |
-		  AtomPropertyFlag::CONFIGURATION | AtomPropertyFlag::AROMATICITY,
+		  AtomPropertyFlag::CIP_CONFIGURATION | AtomPropertyFlag::AROMATICITY,
 		  BondPropertyFlag::ORDER | BondPropertyFlag::TOPOLOGY | 
-		  BondPropertyFlag::AROMATICITY | BondPropertyFlag::CONFIGURATION,
+		  BondPropertyFlag::AROMATICITY | BondPropertyFlag::CIP_CONFIGURATION,
 		  true, true, false, true, true },
 		{ 9, 10, 
 		  AtomPropertyFlag::TYPE | AtomPropertyFlag::ISOTOPE | 
 		  AtomPropertyFlag::H_COUNT | AtomPropertyFlag::FORMAL_CHARGE |
-		  /*AtomPropertyFlag::CONFIGURATION |*/ AtomPropertyFlag::AROMATICITY,
+		  /*AtomPropertyFlag::CIP_CONFIGURATION |*/ AtomPropertyFlag::AROMATICITY,
 		  BondPropertyFlag::ORDER | BondPropertyFlag::TOPOLOGY | 
-		  BondPropertyFlag::AROMATICITY | BondPropertyFlag::CONFIGURATION,
+		  BondPropertyFlag::AROMATICITY | BondPropertyFlag::CIP_CONFIGURATION,
 		  true, true, true, true, true },
 
 		{ 11, 12, 
 		  AtomPropertyFlag::TYPE | AtomPropertyFlag::ISOTOPE | 
 		  AtomPropertyFlag::H_COUNT | AtomPropertyFlag::FORMAL_CHARGE |
-		  AtomPropertyFlag::CONFIGURATION | AtomPropertyFlag::AROMATICITY,
+		  AtomPropertyFlag::CIP_CONFIGURATION | AtomPropertyFlag::AROMATICITY,
 		  BondPropertyFlag::ORDER | BondPropertyFlag::TOPOLOGY | 
-		  BondPropertyFlag::AROMATICITY | BondPropertyFlag::CONFIGURATION,
+		  BondPropertyFlag::AROMATICITY | BondPropertyFlag::CIP_CONFIGURATION,
 		  true, false, true, true, false },
 		{ 11, 12, 
 		  AtomPropertyFlag::TYPE | AtomPropertyFlag::ISOTOPE | 
 		  AtomPropertyFlag::H_COUNT | AtomPropertyFlag::FORMAL_CHARGE |
-		  AtomPropertyFlag::CONFIGURATION /*| AtomPropertyFlag::AROMATICITY*/,
+		  AtomPropertyFlag::CIP_CONFIGURATION /*| AtomPropertyFlag::AROMATICITY*/,
 		  BondPropertyFlag::ORDER | BondPropertyFlag::TOPOLOGY | 
-		  BondPropertyFlag::AROMATICITY | BondPropertyFlag::CONFIGURATION,
+		  BondPropertyFlag::AROMATICITY | BondPropertyFlag::CIP_CONFIGURATION,
 		  true, false, true, true, true },
 	
 		{ 11, 13, 
 		  AtomPropertyFlag::TYPE | AtomPropertyFlag::ISOTOPE | 
 		  AtomPropertyFlag::H_COUNT | AtomPropertyFlag::FORMAL_CHARGE |
-		  AtomPropertyFlag::CONFIGURATION | AtomPropertyFlag::AROMATICITY,
+		  AtomPropertyFlag::CIP_CONFIGURATION | AtomPropertyFlag::AROMATICITY,
 		  BondPropertyFlag::ORDER | BondPropertyFlag::TOPOLOGY | 
-		  BondPropertyFlag::AROMATICITY | BondPropertyFlag::CONFIGURATION,
+		  BondPropertyFlag::AROMATICITY | BondPropertyFlag::CIP_CONFIGURATION,
 		  true, false, false, true, true },
 		{ 11, 13, 
 		  /*AtomPropertyFlag::TYPE |*/ AtomPropertyFlag::ISOTOPE | 
 		  AtomPropertyFlag::H_COUNT | AtomPropertyFlag::FORMAL_CHARGE |
-		  AtomPropertyFlag::CONFIGURATION | AtomPropertyFlag::AROMATICITY,
+		  AtomPropertyFlag::CIP_CONFIGURATION | AtomPropertyFlag::AROMATICITY,
 		  BondPropertyFlag::ORDER | BondPropertyFlag::TOPOLOGY | 
-		  BondPropertyFlag::AROMATICITY | BondPropertyFlag::CONFIGURATION,
+		  BondPropertyFlag::AROMATICITY | BondPropertyFlag::CIP_CONFIGURATION,
 		  true, false, true, true, true },
 
 		{ 11, 14, 
 		  AtomPropertyFlag::TYPE | AtomPropertyFlag::ISOTOPE | 
 		  AtomPropertyFlag::H_COUNT | AtomPropertyFlag::FORMAL_CHARGE |
-		  AtomPropertyFlag::CONFIGURATION | AtomPropertyFlag::AROMATICITY,
+		  AtomPropertyFlag::CIP_CONFIGURATION | AtomPropertyFlag::AROMATICITY,
 		  BondPropertyFlag::ORDER | BondPropertyFlag::TOPOLOGY | 
-		  BondPropertyFlag::AROMATICITY | BondPropertyFlag::CONFIGURATION,
+		  BondPropertyFlag::AROMATICITY | BondPropertyFlag::CIP_CONFIGURATION,
 		  true, false, false, true, true },
 		{ 11, 14, 
 		  AtomPropertyFlag::TYPE | AtomPropertyFlag::ISOTOPE | 
 		  /*AtomPropertyFlag::H_COUNT |*/ AtomPropertyFlag::FORMAL_CHARGE |
-		  AtomPropertyFlag::CONFIGURATION | AtomPropertyFlag::AROMATICITY,
+		  AtomPropertyFlag::CIP_CONFIGURATION | AtomPropertyFlag::AROMATICITY,
 		  BondPropertyFlag::ORDER | BondPropertyFlag::TOPOLOGY | 
-		  BondPropertyFlag::AROMATICITY | BondPropertyFlag::CONFIGURATION,
+		  BondPropertyFlag::AROMATICITY | BondPropertyFlag::CIP_CONFIGURATION,
 		  true, false, false, true, true },
 		{ 11, 14, 
 		  AtomPropertyFlag::TYPE | AtomPropertyFlag::ISOTOPE | 
 		  /*AtomPropertyFlag::H_COUNT | AtomPropertyFlag::FORMAL_CHARGE |*/
-		  AtomPropertyFlag::CONFIGURATION | AtomPropertyFlag::AROMATICITY,
+		  AtomPropertyFlag::CIP_CONFIGURATION | AtomPropertyFlag::AROMATICITY,
 		  BondPropertyFlag::ORDER | BondPropertyFlag::TOPOLOGY | 
-		  BondPropertyFlag::AROMATICITY | BondPropertyFlag::CONFIGURATION,
+		  BondPropertyFlag::AROMATICITY | BondPropertyFlag::CIP_CONFIGURATION,
 		  true, false, true, true, true },
 		
 		{ 11, 15, 
 		  AtomPropertyFlag::TYPE | AtomPropertyFlag::ISOTOPE | 
 		  AtomPropertyFlag::H_COUNT | AtomPropertyFlag::FORMAL_CHARGE |
-		  AtomPropertyFlag::CONFIGURATION | AtomPropertyFlag::AROMATICITY,
+		  AtomPropertyFlag::CIP_CONFIGURATION | AtomPropertyFlag::AROMATICITY,
 		  BondPropertyFlag::ORDER | BondPropertyFlag::TOPOLOGY | 
-		  BondPropertyFlag::AROMATICITY | BondPropertyFlag::CONFIGURATION,
+		  BondPropertyFlag::AROMATICITY | BondPropertyFlag::CIP_CONFIGURATION,
 		  true, false, false, true, true },
 		{ 11, 15, 
 		  AtomPropertyFlag::TYPE | /*AtomPropertyFlag::ISOTOPE |*/ 
 		  AtomPropertyFlag::H_COUNT | AtomPropertyFlag::FORMAL_CHARGE |
-		  AtomPropertyFlag::CONFIGURATION | AtomPropertyFlag::AROMATICITY,
+		  AtomPropertyFlag::CIP_CONFIGURATION | AtomPropertyFlag::AROMATICITY,
 		  BondPropertyFlag::ORDER | BondPropertyFlag::TOPOLOGY | 
-		  BondPropertyFlag::AROMATICITY | BondPropertyFlag::CONFIGURATION,
+		  BondPropertyFlag::AROMATICITY | BondPropertyFlag::CIP_CONFIGURATION,
 		  true, false, true, true, true },
 
 		{ 11, 16, 
 		  AtomPropertyFlag::TYPE | AtomPropertyFlag::ISOTOPE | 
 		  AtomPropertyFlag::H_COUNT | AtomPropertyFlag::FORMAL_CHARGE |
-		  AtomPropertyFlag::CONFIGURATION | AtomPropertyFlag::AROMATICITY,
+		  AtomPropertyFlag::CIP_CONFIGURATION | AtomPropertyFlag::AROMATICITY,
 		  BondPropertyFlag::ORDER | BondPropertyFlag::TOPOLOGY | 
-		  BondPropertyFlag::AROMATICITY | BondPropertyFlag::CONFIGURATION,
+		  BondPropertyFlag::AROMATICITY | BondPropertyFlag::CIP_CONFIGURATION,
 		  true, false, false, true, true },
 		{ 11, 16, 
 		  AtomPropertyFlag::TYPE | AtomPropertyFlag::ISOTOPE |
 		  AtomPropertyFlag::H_COUNT | AtomPropertyFlag::FORMAL_CHARGE |
-		  /*AtomPropertyFlag::CONFIGURATION |*/ AtomPropertyFlag::AROMATICITY,
+		  /*AtomPropertyFlag::CIP_CONFIGURATION |*/ AtomPropertyFlag::AROMATICITY,
 		  BondPropertyFlag::ORDER | BondPropertyFlag::TOPOLOGY | 
-		  BondPropertyFlag::AROMATICITY | BondPropertyFlag::CONFIGURATION,
+		  BondPropertyFlag::AROMATICITY | BondPropertyFlag::CIP_CONFIGURATION,
 		  true, false, true, true, true },
 
 		{ 11, 17, 
 		  AtomPropertyFlag::TYPE | AtomPropertyFlag::ISOTOPE | 
 		  AtomPropertyFlag::H_COUNT | AtomPropertyFlag::FORMAL_CHARGE |
-		  AtomPropertyFlag::CONFIGURATION | AtomPropertyFlag::AROMATICITY,
+		  AtomPropertyFlag::CIP_CONFIGURATION | AtomPropertyFlag::AROMATICITY,
 		  BondPropertyFlag::ORDER | BondPropertyFlag::TOPOLOGY | 
-		  BondPropertyFlag::AROMATICITY | BondPropertyFlag::CONFIGURATION,
+		  BondPropertyFlag::AROMATICITY | BondPropertyFlag::CIP_CONFIGURATION,
 		  true, false, false, true, true },
 		{ 11, 17, 
 		  AtomPropertyFlag::TYPE | AtomPropertyFlag::ISOTOPE | 
 		  /*AtomPropertyFlag::H_COUNT |*/ AtomPropertyFlag::FORMAL_CHARGE |
-		  AtomPropertyFlag::CONFIGURATION | AtomPropertyFlag::AROMATICITY,
+		  AtomPropertyFlag::CIP_CONFIGURATION | AtomPropertyFlag::AROMATICITY,
 		  BondPropertyFlag::ORDER | BondPropertyFlag::TOPOLOGY | 
-		  BondPropertyFlag::AROMATICITY | BondPropertyFlag::CONFIGURATION,
+		  BondPropertyFlag::AROMATICITY | BondPropertyFlag::CIP_CONFIGURATION,
 		  true, false, false, true, true },
 		{ 11, 17, 
 		  AtomPropertyFlag::TYPE | AtomPropertyFlag::ISOTOPE | 
 		  /*AtomPropertyFlag::H_COUNT |*/ AtomPropertyFlag::FORMAL_CHARGE |
-		  AtomPropertyFlag::CONFIGURATION | AtomPropertyFlag::AROMATICITY,
+		  AtomPropertyFlag::CIP_CONFIGURATION | AtomPropertyFlag::AROMATICITY,
 		  BondPropertyFlag::ORDER | BondPropertyFlag::TOPOLOGY | 
-		  BondPropertyFlag::AROMATICITY/* | BondPropertyFlag::CONFIGURATION*/,
+		  BondPropertyFlag::AROMATICITY/* | BondPropertyFlag::CIP_CONFIGURATION*/,
 		  true, false, false, true, true },
 		{ 11, 17, 
 		  AtomPropertyFlag::TYPE | AtomPropertyFlag::ISOTOPE |
 		  /*AtomPropertyFlag::H_COUNT |*/ AtomPropertyFlag::FORMAL_CHARGE |
-		  AtomPropertyFlag::CONFIGURATION | AtomPropertyFlag::AROMATICITY,
+		  AtomPropertyFlag::CIP_CONFIGURATION | AtomPropertyFlag::AROMATICITY,
 		  /*BondPropertyFlag::ORDER |*/ BondPropertyFlag::TOPOLOGY | 
-		  BondPropertyFlag::AROMATICITY/* | BondPropertyFlag::CONFIGURATION*/,
+		  BondPropertyFlag::AROMATICITY/* | BondPropertyFlag::CIP_CONFIGURATION*/,
 		  true, false, true, true, true },
 
 		{ 11, 18, 
 		  AtomPropertyFlag::TYPE | AtomPropertyFlag::ISOTOPE | 
 		  AtomPropertyFlag::H_COUNT | AtomPropertyFlag::FORMAL_CHARGE |
-		  AtomPropertyFlag::CONFIGURATION | AtomPropertyFlag::AROMATICITY,
+		  AtomPropertyFlag::CIP_CONFIGURATION | AtomPropertyFlag::AROMATICITY,
 		  BondPropertyFlag::ORDER | BondPropertyFlag::TOPOLOGY | 
-		  BondPropertyFlag::AROMATICITY | BondPropertyFlag::CONFIGURATION,
+		  BondPropertyFlag::AROMATICITY | BondPropertyFlag::CIP_CONFIGURATION,
 		  true, false, true, true, false },
 		{ 11, 18, 
 		  AtomPropertyFlag::TYPE | AtomPropertyFlag::ISOTOPE |
 		  AtomPropertyFlag::H_COUNT | AtomPropertyFlag::FORMAL_CHARGE |
-		  AtomPropertyFlag::CONFIGURATION | AtomPropertyFlag::AROMATICITY,
+		  AtomPropertyFlag::CIP_CONFIGURATION | AtomPropertyFlag::AROMATICITY,
 		  BondPropertyFlag::ORDER | BondPropertyFlag::TOPOLOGY | 
-		  /*BondPropertyFlag::AROMATICITY |*/ BondPropertyFlag::CONFIGURATION,
+		  /*BondPropertyFlag::AROMATICITY |*/ BondPropertyFlag::CIP_CONFIGURATION,
 		  true, false, true, true, true },
 
 		{ 11, 19, 
 		  AtomPropertyFlag::TYPE | AtomPropertyFlag::ISOTOPE | 
 		  AtomPropertyFlag::H_COUNT | AtomPropertyFlag::FORMAL_CHARGE |
-		  AtomPropertyFlag::CONFIGURATION | AtomPropertyFlag::AROMATICITY,
+		  AtomPropertyFlag::CIP_CONFIGURATION | AtomPropertyFlag::AROMATICITY,
 		  BondPropertyFlag::ORDER | BondPropertyFlag::TOPOLOGY | 
-		  BondPropertyFlag::AROMATICITY | BondPropertyFlag::CONFIGURATION,
+		  BondPropertyFlag::AROMATICITY | BondPropertyFlag::CIP_CONFIGURATION,
 		  true, false, true, true, true },
 		{ 11, 19, 
 		  AtomPropertyFlag::TYPE | AtomPropertyFlag::ISOTOPE |
 		  AtomPropertyFlag::H_COUNT | AtomPropertyFlag::FORMAL_CHARGE |
-		  AtomPropertyFlag::CONFIGURATION | AtomPropertyFlag::AROMATICITY,
+		  AtomPropertyFlag::CIP_CONFIGURATION | AtomPropertyFlag::AROMATICITY,
 		  BondPropertyFlag::ORDER | BondPropertyFlag::TOPOLOGY | 
-		  BondPropertyFlag::AROMATICITY /*| BondPropertyFlag::CONFIGURATION*/,
+		  BondPropertyFlag::AROMATICITY /*| BondPropertyFlag::CIP_CONFIGURATION*/,
 		  true, false, true, true, true },
 
 		{ 11, 20, 
 		  AtomPropertyFlag::TYPE | AtomPropertyFlag::ISOTOPE | 
 		  AtomPropertyFlag::H_COUNT | AtomPropertyFlag::FORMAL_CHARGE |
-		  AtomPropertyFlag::CONFIGURATION | AtomPropertyFlag::AROMATICITY,
+		  AtomPropertyFlag::CIP_CONFIGURATION | AtomPropertyFlag::AROMATICITY,
 		  BondPropertyFlag::ORDER | BondPropertyFlag::TOPOLOGY | 
-		  BondPropertyFlag::AROMATICITY | BondPropertyFlag::CONFIGURATION,
+		  BondPropertyFlag::AROMATICITY | BondPropertyFlag::CIP_CONFIGURATION,
 		  true, false, true, true, true },
 		{ 11, 20, 
 		  AtomPropertyFlag::TYPE | AtomPropertyFlag::ISOTOPE |
 		  AtomPropertyFlag::H_COUNT | AtomPropertyFlag::FORMAL_CHARGE |
-		  AtomPropertyFlag::CONFIGURATION | AtomPropertyFlag::AROMATICITY,
+		  AtomPropertyFlag::CIP_CONFIGURATION | AtomPropertyFlag::AROMATICITY,
 		  BondPropertyFlag::ORDER | /*BondPropertyFlag::TOPOLOGY |*/ 
-		  BondPropertyFlag::AROMATICITY | BondPropertyFlag::CONFIGURATION,
+		  BondPropertyFlag::AROMATICITY | BondPropertyFlag::CIP_CONFIGURATION,
 		  true, false, true, true, true },
 
 		{ 21, 22, 
 		  AtomPropertyFlag::TYPE | AtomPropertyFlag::ISOTOPE |
 		  AtomPropertyFlag::H_COUNT | AtomPropertyFlag::FORMAL_CHARGE |
-		  AtomPropertyFlag::CONFIGURATION | AtomPropertyFlag::AROMATICITY,
+		  AtomPropertyFlag::CIP_CONFIGURATION | AtomPropertyFlag::AROMATICITY,
 		  BondPropertyFlag::ORDER | BondPropertyFlag::TOPOLOGY | 
-		  BondPropertyFlag::AROMATICITY | BondPropertyFlag::CONFIGURATION,
+		  BondPropertyFlag::AROMATICITY | BondPropertyFlag::CIP_CONFIURATION,
 		  true, true, true, true, true },
 	}; 
 

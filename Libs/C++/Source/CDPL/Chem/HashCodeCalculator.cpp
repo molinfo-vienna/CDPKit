@@ -115,7 +115,7 @@ Base::uint64 Chem::HashCodeCalculator::DefAtomHashSeedFunctor::operator()(const 
 	if (flags & AtomPropertyFlag::FORMAL_CHARGE)
 		seed *= getAtomChargeHashSeed(atom);
 
-	if (flags & AtomPropertyFlag::CONFIGURATION)
+	if (flags & AtomPropertyFlag::CIP_CONFIGURATION)
   		seed *= getAtomConfigHashSeed(atom);
 
 	if (flags & AtomPropertyFlag::AROMATICITY)
@@ -183,7 +183,7 @@ Base::uint64 Chem::HashCodeCalculator::DefBondHashSeedFunctor::operator()(const 
 	if (flags & (BondPropertyFlag::ORDER | BondPropertyFlag::AROMATICITY))
 		seed = getBondTypeHashSeed(bond);
 
-	if (flags & BondPropertyFlag::CONFIGURATION)
+	if (flags & BondPropertyFlag::CIP_CONFIGURATION)
 		seed *= getBondConfigHashSeed(bond);
 
 	if (flags & BondPropertyFlag::TOPOLOGY)

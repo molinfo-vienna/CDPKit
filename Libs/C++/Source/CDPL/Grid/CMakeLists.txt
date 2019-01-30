@@ -43,7 +43,7 @@ INSTALL(TARGETS cdpl-grid-static
 
 ADD_LIBRARY(cdpl-grid-shared SHARED ${cdpl-grid_LIB_SRCS})
 
-TARGET_LINK_LIBRARIES(cdpl-grid-shared cdpl-base-shared  cdpl-util-shared cdpl-internal-static)
+TARGET_LINK_LIBRARIES(cdpl-grid-shared cdpl-base-shared cdpl-util-shared cdpl-internal-static)
 
 IF(APPLE)
   SET_TARGET_PROPERTIES(cdpl-grid-shared PROPERTIES VERSION "${CDPL_SO_VERSION}"

@@ -234,6 +234,11 @@ void Chem::SMILESDataReader::readName(std::istream& is, T& obj, std::string& str
 									  const std::string& error_msg) const
 {
 	if (recordFormat == "SN") {
+		if (is.eof()) {
+			str.clear();
+			return;
+		}
+
 		if (recordSeparator.size() == 1)
 			std::getline(is, str, recordSeparator[0]);
 		else

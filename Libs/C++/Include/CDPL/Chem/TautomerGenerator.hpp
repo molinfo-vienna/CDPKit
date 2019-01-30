@@ -74,7 +74,8 @@ namespace CDPL
 
 			typedef boost::shared_ptr<TautomerGenerator> SharedPointer;
 
-			typedef boost::function1<bool, const MolecularGraph&> CallbackFunction;
+			typedef boost::function1<bool, MolecularGraph&> CallbackFunction;
+			typedef boost::function1<void, MolecularGraph&> CustomSetupFunction;
 
 			/**
 			 * \brief Constructs the \c %TautomerGenerator instance.
@@ -111,6 +112,8 @@ namespace CDPL
 
 			bool isotopesRegarded() const;
 
+			void setCustomSetupFunction(const CustomSetupFunction& func);
+
 			/**
 			 * \brief Generates all unique tautomers of the molecular graph \a molgraph.
 			 * \param molgraph The molecular graph for which to generate the tautomers.
@@ -123,15 +126,17 @@ namespace CDPL
 			bool init(const MolecularGraph& molgraph);
 			void initHashCalculator();
 
+			void copyInputMolGraph(const MolecularGraph& molgraph, Molecule* mol_copy) const;
+
+			void extractStereoCenters(const MolecularGraph& molgraph);
+			void extractAtomStereoCenters(const MolecularGraph& molgraph);
+			void extractBondStereoCenters(const MolecularGraph& molgraph);
+
 			bool addNewTautomer(Molecule* mol);
 
 			Base::uint64 calcTautomerHashCode(const Molecule& tautomer);
 
-			void freeCurrentGenTautomers();
-			void freeNextGenTautomers();
-
 			Molecule* allocMolecule();
-			
 			void freeMolecule(Molecule* mol);
 
 			typedef boost::array<std::size_t, 3> BondDescriptor;
@@ -141,20 +146,25 @@ namespace CDPL
 			typedef std::vector<BondDescriptor> BondDescrArray;
 			typedef std::vector<std::size_t> SizeTArray;
 			typedef boost::unordered_set<Base::uint64> HashCodeSet;
+			typedef boost::array<std::size_t, 6> StereoCenter;
+			typedef std::vector<StereoCenter> StereoCenterList;
 
-			CallbackFunction   callbackFunc;
-			Mode               mode;
-			bool               regStereo;
-			bool               regIsotopes;
-			TautRuleList       tautRules;
-			MoleculeList       currGeneration;
-			MoleculeList       nextGeneration;
-			MoleculeList       freeMolecules;
-			AllocMoleculeList  allocMolecules;
-			HashCodeSet        tautHashCodes;
-			HashCodeCalculator hashCalculator;
-			BondDescrArray     tautomerBonds;
-			SizeTArray         shaInput;
+			CallbackFunction      callbackFunc;
+			Mode                  mode;
+			bool                  regStereo;
+			bool                  regIsotopes;
+			CustomSetupFunction   customSetupFunc;
+			TautRuleList          tautRules;
+			MoleculeList          currGeneration;
+			MoleculeList          nextGeneration;
+			StereoCenterList      atomStereoCenters;
+			StereoCenterList      bondStereoCenters;
+			MoleculeList          freeMolecules;
+			AllocMoleculeList     allocMolecules;
+			HashCodeSet           tautHashCodes;
+			HashCodeCalculator    hashCalculator;
+			BondDescrArray        tautomerBonds;
+			SizeTArray            shaInput;
 		};
 
 		/**

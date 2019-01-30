@@ -244,9 +244,6 @@ GenFragLibImpl::GenFragLibImpl():
 			  value<bool>(&strictMMFF94AtomTypes)->implicit_value(true));
 
 	addOptionLongDescriptions();
-
-	setMultiConfImportParameter(inputReader, false);
-	setSMILESRecordFormatParameter(inputReader, "SN");
 }
 
 const char* GenFragLibImpl::getProgName() const
@@ -761,6 +758,9 @@ void GenFragLibImpl::initInputReader()
 		printMessage(INFO, "Scanning Input File(s)...", true, true);
 	} else
 		printMessage(INFO, "Scanning Input File(s)...");
+
+	setMultiConfImportParameter(inputReader, false);
+	setSMILESRecordFormatParameter(inputReader, "SN");
 
 	for (std::size_t i = 0; i < num_in_files; i++) {
 		if (termSignalCaught())
