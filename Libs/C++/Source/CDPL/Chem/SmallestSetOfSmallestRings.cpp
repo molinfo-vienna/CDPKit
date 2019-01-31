@@ -50,7 +50,7 @@ void Chem::SmallestSetOfSmallestRings::perceive(const MolecularGraph& molgraph)
 {
 	clear();
 
-	if (molgraph.getNumAtoms() == 0 || molgraph.getNumBonds() == 0)
+	if (molgraph.getNumAtoms() < 3 || molgraph.getNumBonds() < 3)
 		return;
 
 	init(molgraph);

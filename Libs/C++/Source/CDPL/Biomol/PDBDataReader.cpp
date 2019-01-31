@@ -951,8 +951,8 @@ void Biomol::PDBDataReader::processAtomSequence(Chem::Molecule& mol, bool chain_
 					const Atom& atom = *a_it;
 					Atom* res_atom = currResidueAtoms[getResidueAtomName(atom)];
 
-					if (!res_atom)
-						res_atom = currResidueAtoms[getResidueAltAtomName(atom)];
+					//if (!res_atom)
+					//	res_atom = currResidueAtoms[getResidueAltAtomName(atom)];
 
 					if (!res_atom)
 						continue;
@@ -971,16 +971,16 @@ void Biomol::PDBDataReader::processAtomSequence(Chem::Molecule& mol, bool chain_
 
 					Atom* res_atom1 = currResidueAtoms[getResidueAtomName(bond.getBegin())];
 
-					if (!res_atom1) 
-						res_atom1 = currResidueAtoms[getResidueAltAtomName(bond.getBegin())];
+					//if (!res_atom1) 
+					//	res_atom1 = currResidueAtoms[getResidueAltAtomName(bond.getBegin())];
 	
 					if (!res_atom1)
 						continue;
 
 					Atom* res_atom2 = currResidueAtoms[getResidueAtomName(bond.getEnd())];
 
-					if (!res_atom2)
-						res_atom2 = currResidueAtoms[getResidueAltAtomName(bond.getEnd())];
+					//if (!res_atom2)
+					//	res_atom2 = currResidueAtoms[getResidueAltAtomName(bond.getEnd())];
 
 					if (!res_atom2) 
 						continue;
@@ -996,8 +996,8 @@ void Biomol::PDBDataReader::processAtomSequence(Chem::Molecule& mol, bool chain_
 					const Atom& atom = *a_it;
 					Atom* res_atom = currResidueAtoms[getResidueAtomName(atom)];
 
-					if (!res_atom)
-						res_atom = currResidueAtoms[getResidueAltAtomName(atom)];
+					//if (!res_atom)
+					//	res_atom = currResidueAtoms[getResidueAltAtomName(atom)];
 
 					if (!res_atom)
 						continue;
@@ -1141,8 +1141,8 @@ const Chem::Atom* Biomol::PDBDataReader::getResTemplateAtom(const Chem::Molecula
 		if (getResidueAtomName(atom) == atom_name)
 			return &atom;
 
-		if (getResidueAltAtomName(atom) == atom_name)
-			return &atom;
+		//if (getResidueAltAtomName(atom) == atom_name) // causes lots of atom mixup problems, better to just deal with the lates label version
+		//	return &atom;
 	}
 
 	return 0;

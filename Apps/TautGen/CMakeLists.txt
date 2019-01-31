@@ -22,6 +22,12 @@ INSTALL(SCRIPT "${CMAKE_CURRENT_BINARY_DIR}/InstallExternalRuntimeDependencies.c
 TARGET_LINK_LIBRARIES(tautgen app-utils-static cdpl-util-shared cdpl-base-shared cdpl-chem-shared)
 
 # Special non-dynamic version without external dependencies
-#TARGET_LINK_LIBRARIES(tautgen "-static" app-utils-static cdpl-util-static cdpl-base-static cdpl-chem-static ${Boost_IOSTREAMS_LIBRARY} pthread z bz2) 
+#SET_TARGET_PROPERTIES(tautgen PROPERTIES LINK_FLAGS "-static")
+
+#TARGET_LINK_LIBRARIES(tautgen app-utils-static cdpl-util-static cdpl-base-static cdpl-chem-static pthread) 
+
+#IF(Boost_IOSTREAMS_FOUND)
+#  TARGET_LINK_LIBRARIES(tautgen ${Boost_IOSTREAMS_LIBRARY} z bz2) 
+#ENDIF(Boost_IOSTREAMS_FOUND)
 
 INSTALL(TARGETS tautgen DESTINATION "${CDPKIT_EXECUTABLE_INSTALL_DIR}" COMPONENT Applications)
