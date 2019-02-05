@@ -97,6 +97,7 @@ void CDPLPythonForceField::exportMMFF94FormalAtomChargeDefinitionTable()
 		.def("getAtomTypeList", &ForceField::MMFF94FormalAtomChargeDefinitionTable::Entry::getAtomTypeList, python::arg("self"), 
 			 python::return_value_policy<python::copy_const_reference>())
 		.def("__nonzero__", &ForceField::MMFF94FormalAtomChargeDefinitionTable::Entry::operator bool, python::arg("self"))
+		.def("__bool__", &ForceField::MMFF94FormalAtomChargeDefinitionTable::Entry::operator bool, python::arg("self"))
 		.add_property("atomType", python::make_function(&ForceField::MMFF94FormalAtomChargeDefinitionTable::Entry::getAtomType, 
 														python::return_value_policy<python::copy_const_reference>()))
 		.add_property("assignmentMode", &ForceField::MMFF94FormalAtomChargeDefinitionTable::Entry::getAssignmentMode)

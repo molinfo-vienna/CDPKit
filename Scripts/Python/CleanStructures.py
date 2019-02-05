@@ -24,6 +24,8 @@
 ##
 
 
+from __future__ import print_function 
+
 import sys
 import CDPL.Base as Base
 import CDPL.Chem as Chem
@@ -71,7 +73,7 @@ def processMolecule(mol, stats):
         Chem.perceiveSSSR(largest_comp, False)
         Chem.setName(largest_comp, Chem.getName(mol))
 
-        print 'Removed Components from Molecule ' + str(stats.read) + ': ' + generateSMILES(mol) + ' ' + Chem.getName(mol)
+        print('Removed Components from Molecule ' + str(stats.read) + ': ' + generateSMILES(mol) + ' ' + Chem.getName(mol), file=sys.stderr)
 
         modified = True
 
@@ -156,7 +158,7 @@ def processMolecule(mol, stats):
 
 def cleanStructures():
     if len(sys.argv) < 5:
-        print >> sys.stderr, 'Usage:', sys.argv[0], '[input.sdf] [output.sdf] [dropped.sdf] [start_index] [[count]]'
+        print('Usage:', sys.argv[0], '[input.sdf] [output.sdf] [dropped.sdf] [start_index] [[count]]', file=sys.stderr)
         sys.exit(2)
 
     ifs = Base.FileIOStream(sys.argv[1], 'r')
@@ -173,9 +175,7 @@ def cleanStructures():
     dwriter = Chem.SDFMolecularGraphWriter(dofs)
     mol = Chem.BasicMolecule()
     
-    #Chem.setSMILESRecordFormatParameter(reader, 'S:N$')
-    #Chem.setSMILESRecordFormatParameter(writer, 'S:N$')
-    #Chem.setSMILESRecordFormatParameter(dwriter, 'S:N$')
+    #Chem.setSMILESRecordFormatParameter(reader, 'SN')
 
     stats = Stats()
     stats.read = 0
@@ -186,14 +186,14 @@ def cleanStructures():
     Chem.setMultiConfExportParameter(writer, False)
     Chem.setMultiConfExportParameter(dwriter, False)
 
-    print 'Skipping Molecules to Start Index ' + str(offset)
+    print('Skipping Molecules to Start Index ' + str(offset), file=sys.stderr)
     reader.setRecordIndex(offset)
 
     stats.read = offset
-    #print 'Finished Setting Record Index'
+    #print('Finished Setting Record Index', file=sys.stderr)
     
     while reader.read(mol):
-        #print 'Processing Molecule ' + str(stats.read)
+        #print('Processing Molecule ' + str(stats.read)
         proc_mol = processMolecule(mol, stats)
 
         if proc_mol:
@@ -201,21 +201,21 @@ def cleanStructures():
         else:
             stats.dropped += 1
             dwriter.write(mol)
-            print 'Dropped Molecule ' + str(stats.read) + ': ' + generateSMILES(mol) + ' ' + Chem.getName(mol)
+            print('Dropped Molecule ' + str(stats.read) + ': ' + generateSMILES(mol) + ' ' + Chem.getName(mol), file=sys.stderr)
        
         stats.read += 1
 
         if stats.read % 10000 == 0:
-            print 'Processed ' + str(stats.read - offset) + ' Molecules...'
+            print('Processed ' + str(stats.read - offset) + ' Molecules...', file=sys.stderr)
 
         if count > 0 and (stats.read - offset) >= count:
             break
 
-    print ''
-    print '-- Summary --'
-    print 'Molecules processed: ' + str(stats.read - offset)
-    print 'Molecules dropped: ' + str(stats.dropped)
-    print 'Molecules modified: ' + str(stats.modified)
+    print('', file=sys.stderr)
+    print('-- Summary --', file=sys.stderr)
+    print('Molecules processed: ' + str(stats.read - offset), file=sys.stderr)
+    print('Molecules dropped: ' + str(stats.dropped), file=sys.stderr)
+    print('Molecules modified: ' + str(stats.modified), file=sys.stderr)
 
 if __name__ == '__main__':
     cleanStructures()

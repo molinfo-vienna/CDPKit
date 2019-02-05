@@ -27,6 +27,7 @@
 #include "StaticInit.hpp"
 
 #include "CDPL/Biomol/ControlParameterDefault.hpp"
+#include "CDPL/Biomol/PDBFormatVersion.hpp"
 
 
 namespace CDPL
@@ -58,6 +59,7 @@ namespace CDPL
 			const bool PDB_WRITE_CONECT_RECORDS                            = true;
 			const bool PDB_WRITE_CONECT_RECORDS_FOR_ALL_BONDS              = false;
 			const bool PDB_WRITE_CONECT_RECORDS_REFLECTING_BOND_ORDER      = false;
+			const unsigned int PDB_FORMAT_VERSION                          = PDBFormatVersion::V3;
 			const bool COMBINE_INTERFERING_RESIDUE_COORDINATES             = true;
 		}
 

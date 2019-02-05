@@ -77,14 +77,20 @@ namespace CDPLPythonBase
 		}
 		
 		operator const void*() const {
-			if (this->get_override("__nonzero__")())
+			if (boost::python::override f = this->get_override("__nonzero__"))
+				return (f() ? static_cast<const void*>(this) : static_cast<const void*>(0));
+
+			if (this->get_override("__bool__")())
 				return this;
 
 			return 0;
 		}
 
 		bool operator!() const {
-			return !this->get_override("__nonzero__")();
+			if (boost::python::override f = this->get_override("__nonzero__"))
+				return !f();
+
+			return !this->get_override("__bool__")();
 		}
 	};
 
@@ -114,6 +120,7 @@ namespace CDPLPythonBase
 				.def("setRecordIndex", python::pure_virtual(&ReaderType::setRecordIndex), (python::arg("self"), python::arg("idx")))
 				.def("getNumRecords", python::pure_virtual(&ReaderType::getNumRecords), python::arg("self"))
 				.def("__nonzero__", python::pure_virtual(&nonZero), python::arg("self"))
+				.def("__bool__", python::pure_virtual(&nonZero), python::arg("self"))
 				.add_property("numRecords", &ReaderType::getNumRecords);
 
 			python::register_ptr_to_python<typename Base::DataReader<T>::SharedPointer>();

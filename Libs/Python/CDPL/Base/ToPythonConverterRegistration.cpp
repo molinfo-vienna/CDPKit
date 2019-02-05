@@ -103,8 +103,11 @@ namespace CDPLPythonBase
 			const python::converter::registration* reg = python::converter::registry::query(type);
 
 			if (!reg) {
+#if PY_MAJOR_VERSION >= 3
+				python::handle<> msg(PyUnicode_FromFormat("No to_python (by-value) converter found for C++ type: %s" , type.name()));
+#else
 				python::handle<> msg(PyString_FromFormat("No to_python (by-value) converter found for C++ type: %s" , type.name()));
-				
+#endif				
 				PyErr_SetObject(PyExc_TypeError, msg.get());
 
 				python::throw_error_already_set();

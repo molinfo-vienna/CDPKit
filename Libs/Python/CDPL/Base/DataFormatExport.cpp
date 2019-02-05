@@ -97,24 +97,11 @@ namespace
 				python::throw_error_already_set();
 			}
 
-			python::handle<> iter_handle(python::borrowed(iter)); Py_DECREF(iter);
-
+			python::handle<> iter_handle(iter);
 			PyObject *item;
 
-			while ((item = PyIter_Next(iter))) {
-				python::handle<> item_handle(python::borrowed(item)); Py_DECREF(item);
-
-				char* buf;
-				python::ssize_t length;
-
-				if (PyString_AsStringAndSize(item, &buf, &length) != 0) {
-					PyErr_SetString(PyExc_TypeError, "DataFormat: string sequence expected as 4th argument");
-
-					python::throw_error_already_set();
-				}
-
-				addFileExtension(std::string(buf, buf + length));
-			}
+			while ((item = PyIter_Next(iter)))
+				addFileExtension(python::extract<std::string>(python::object(python::handle<>(item))));
 		} 
 	};
 

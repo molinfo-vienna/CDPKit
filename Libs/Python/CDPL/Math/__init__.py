@@ -24,6 +24,8 @@
 ##
 
 
+from __future__ import absolute_import
+
 import CDPL.Base
 
-from _math import *
+from ._math import *

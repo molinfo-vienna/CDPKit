@@ -24,14 +24,18 @@
 ##
 
 
+from __future__ import print_function 
+
 import sys
+
 import CDPL.Base as Base
 import CDPL.Chem as Chem
 import CDPL.Math as Math
 
+
 def process():
     if len(sys.argv) < 4:
-	    print >> sys.stderr, 'Usage:', sys.argv[0], '[training-set.sdf] [logS-data] [regression coeff. output file]'
+	    print('Usage:', sys.argv[0], '[training-set.sdf] [logS-data] [regression coeff. output file]', file=sys.stderr)
         sys.exit(2)
 
 	struct_is = Base.FileIOStream(sys.argv[1], 'r')
@@ -69,12 +73,12 @@ def process():
 	mlr_model.buildModel()
 	mlr_model.calcStatistics()
 
-	print 'Model Statistics:'
-	print '----------------------------------'
-	print ' Correlation Coeff.: ', mlr_model.getCorrelationCoefficient()
-	print ' Goodness of Fit:    ', mlr_model.getGoodnessOfFit()
-	print ' Standard Deviation: ', mlr_model.getStandardDeviation()
-	print ' Chi Square:         ', mlr_model.getChiSquare()
+	print('Model Statistics:', file=sys.stderr)
+	print('----------------------------------', file=sys.stderr)
+	print(' Correlation Coeff.: ', mlr_model.getCorrelationCoefficient(), file=sys.stderr)
+	print(' Goodness of Fit:    ', mlr_model.getGoodnessOfFit(), file=sys.stderr)
+	print(' Standard Deviation: ', mlr_model.getStandardDeviation(), file=sys.stderr)
+	print(' Chi Square:         ', mlr_model.getChiSquare(), file=sys.stderr)
 
 #    i = 0
 #    for v in histo:

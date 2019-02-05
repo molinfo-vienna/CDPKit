@@ -3,8 +3,7 @@ INCLUDE_DIRECTORIES("${CMAKE_CURRENT_SOURCE_DIR}")
 FILE(GLOB PYTHON_FILES "*.py")
 
 FOREACH(PYTHON_FILE ${PYTHON_FILES})
-  EXECUTE_PROCESS(COMMAND "${CMAKE_COMMAND}" -E copy "${PYTHON_FILE}" "${CMAKE_CURRENT_BINARY_DIR}"
-                  WORKING_DIRECTORY "${CMAKE_CURRENT_SOURCE_DIR}")
+  CONFIGURE_FILE("${PYTHON_FILE}" "${CMAKE_CURRENT_BINARY_DIR}" COPYONLY)
 ENDFOREACH(PYTHON_FILE)
 
 SET(biomol_MOD_SRCS
@@ -38,6 +37,7 @@ SET(biomol_MOD_SRCS
     ControlParameterDefaultExport.cpp 
     AtomPropertyFlagExport.cpp
     ResidueTypeExport.cpp
+    PDBFormatVersionExport.cpp
     DataFormatExport.cpp
 
     AtomFunctionExport.cpp

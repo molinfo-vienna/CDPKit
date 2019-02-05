@@ -76,5 +76,6 @@ void CDPLPythonChem::exportReactionSubstructureSearch()
 		.def("__getitem__", getMappingFunc, (python::arg("self"), python::arg("idx")), 
 			 python::return_internal_reference<1>())
 		.def("__len__", &Chem::ReactionSubstructureSearch::getNumMappings, python::arg("self"))
-		.def("__nonzero__", &Chem::ReactionSubstructureSearch::mappingExists, python::arg("self"));
+		.def("__nonzero__", &Chem::ReactionSubstructureSearch::mappingExists, python::arg("self"))
+		.def("__bool__", &Chem::ReactionSubstructureSearch::mappingExists, python::arg("self"));
 }

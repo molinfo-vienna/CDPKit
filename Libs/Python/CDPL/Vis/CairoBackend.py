@@ -24,6 +24,8 @@
 ##
 
 
+from __future__ import absolute_import
+
 import array
 import cairo
 import math
@@ -271,18 +273,18 @@ class CairoRenderer2D(CDPL.Vis.Renderer2D):
 
 	def drawEllipse(self, x, y, width, height):
 		"drawEllipse(CairoRenderer2D self, float x, float y, float width, float height) -> None :"
-        self.__cairoContext.save()
-	
-        self.__cairoContext.new_path()
+		self.__cairoContext.save()
 
-        self.__cairoContext.translate(x, y);
-        self.__cairoContext.scale(1.0, height / width);
-        self.__cairoContext.arc(0.0, 0.0, width * 0.5, 0.0, 2 * 3.141593);
+		self.__cairoContext.new_path()
 
-        self.__fillPath();
-        self.__strokePath();
+		self.__cairoContext.translate(x, y);
+		self.__cairoContext.scale(1.0, height / width);
+		self.__cairoContext.arc(0.0, 0.0, width * 0.5, 0.0, 2 * 3.141593)
 
-        self.__cairoContext.restore()
+		self.__fillPath();
+		self.__strokePath();
+
+		self.__cairoContext.restore()
 
 	def drawText(self, x, y, txt):
 		"drawText(CairoRenderer2D self, float x, float y, str txt) -> None :"

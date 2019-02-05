@@ -24,5 +24,7 @@
 ##
 
 
-from _base import *
-from Exceptions import *
+from __future__ import absolute_import
+
+from ._base import *
+from .Exceptions import *

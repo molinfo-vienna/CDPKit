@@ -102,6 +102,7 @@ namespace CDPL
 			void calcAtomCharges(Chem::Molecule&);
 
 			const Chem::Atom* getResTemplateAtom(const Chem::MolecularGraph& tmplt, const std::string& atom_name) const;
+			const std::string& getResTemplateAtomName(const Chem::Atom& atom) const;
 
 			typedef std::vector<Chem::Atom*> AtomList;
 			typedef boost::unordered_map<std::string, std::size_t> RecordHistogram;
@@ -128,6 +129,7 @@ namespace CDPL
 			bool                    calcCharges;
 			bool                    perceiveOrders;
 			bool                    evalMASTERRecord;
+			unsigned int            formatVersion;
 			PDBData::SharedPointer  pdbData;
 			RecordHistogram         recordHistogram;
 			std::size_t             currModelID;

@@ -24,7 +24,9 @@
 ##
 
 
+from __future__ import absolute_import
+
 import CDPL.Chem
 import CDPL.Grid
 
-from _pharm import *
+from ._pharm import *

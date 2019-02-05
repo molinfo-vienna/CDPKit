@@ -24,9 +24,11 @@
 ##
 
 
+from __future__ import absolute_import
+
 import CDPL.Math
 import CDPL.Chem
 import CDPL.Util
 import CDPL.ForceField
 
-from _confgen import *
+from ._confgen import *

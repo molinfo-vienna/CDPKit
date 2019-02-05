@@ -1,7 +1,7 @@
 /* -*- mode: c++; c-basic-offset: 4; tab-width: 4; indent-tabs-mode: t -*- */
 
 /* 
- * NamespaceExports.hpp 
+ * PDBFormatVersion.hpp 
  *
  * This file is part of the Chemical Data Processing Toolkit
  *
@@ -23,27 +23,53 @@
  * Boston, MA 02111-1307, USA.
  */
 
+/**
+ * \file
+ * \brief Definition of constants in namespace CDPL::Biomol::PDBFormatVersion.
+ */
 
-#ifndef CDPL_PYTHON_BIOMOL_NAMESPACEEXPORTS_HPP
-#define CDPL_PYTHON_BIOMOL_NAMESPACEEXPORTS_HPP
+#ifndef CDPL_BIOMOL_PDBFORMATVERSION_HPP
+#define CDPL_BIOMOL_PDBFORMATVERSION_HPP
 
 
-namespace CDPLPythonBiomol
+namespace CDPL
 {
 
-	void exportAtomPropertyFlags();
-	void exportResidueTypes();
-	void exportPDBFormatVersions();
+	namespace Biomol
+	{
 
-	void exportAtomProperties();
-	void exportMolecularGraphProperties();
-	void exportAtomPropertyDefaults();
-	void exportMolecularGraphPropertyDefaults();
+		/**
+		 * \addtogroup CDPL_BIOMOL_CONSTANTS
+		 * @{
+		 */
 
-	void exportControlParameters();
-	void exportControlParameterDefaults();
+		/**
+		 * \brief Provides constants for the specification of the <em>Brookhaven Protein Data Bank (PDB)</em>
+		 *        [\ref PDB] format version.
+		 */
+		namespace PDBFormatVersion
+		{
 
-	void exportDataFormats();
+			/**
+			 * \brief Specifies that the data format version is undefined.
+			 */
+			const unsigned int UNDEF = 0;
+
+			/**
+			 * \brief Specifies the PDB format version \e V2.
+			 */
+			const unsigned int V2    = 2;
+
+			/**
+			 * \brief Specifies the PDB format version \e V3.
+			 */
+			const unsigned int V3    = 3;
+		}
+
+		/**
+		 * @}
+		 */
+	}
 }
 
-#endif // CDPL_PYTHON_BIOMOL_NAMESPACEEXPORTS_HPP
+#endif // CDPL_BIOMOL_PDBFORMATVERSION_HPP

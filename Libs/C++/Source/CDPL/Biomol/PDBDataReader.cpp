@@ -49,6 +49,7 @@
 #include "CDPL/Biomol/AtomFunctions.hpp"
 #include "CDPL/Biomol/UtilityFunctions.hpp"
 #include "CDPL/Biomol/PDBData.hpp"
+#include "CDPL/Biomol/PDBFormatVersion.hpp"
 #include "CDPL/Base/DataIOBase.hpp"
 #include "CDPL/Base/Exceptions.hpp"
 #include "CDPL/Internal/StringUtilities.hpp"
@@ -389,6 +390,7 @@ void Biomol::PDBDataReader::init(std::istream& is, Chem::Molecule& mol)
 	calcCharges                          = getPDBCalcMissingFormalChargesParameter(ioBase);
 	perceiveOrders                       = getPDBPerceiveMissingBondOrdersParameter(ioBase);
 	evalMASTERRecord                     = getPDBEvaluateMASTERRecordParameter(ioBase);
+	formatVersion                        = getPDBFormatVersionParameter(ioBase);
 
 	pdbData = PDBData::SharedPointer(new PDBData());
 	currModelID = 0;
@@ -949,10 +951,7 @@ void Biomol::PDBDataReader::processAtomSequence(Chem::Molecule& mol, bool chain_
 			if (applyDictAtomTypes || applyDictAtomCharges) {
 				for (MolecularGraph::ConstAtomIterator a_it = res_tmplt->getAtomsBegin(), a_end = res_tmplt->getAtomsEnd(); a_it != a_end; ++a_it) {
 					const Atom& atom = *a_it;
-					Atom* res_atom = currResidueAtoms[getResidueAtomName(atom)];
-
-					//if (!res_atom)
-					//	res_atom = currResidueAtoms[getResidueAltAtomName(atom)];
+					Atom* res_atom = currResidueAtoms[getResTemplateAtomName(atom)];
 
 					if (!res_atom)
 						continue;
@@ -969,18 +968,12 @@ void Biomol::PDBDataReader::processAtomSequence(Chem::Molecule& mol, bool chain_
 				for (MolecularGraph::ConstBondIterator b_it = res_tmplt->getBondsBegin(), b_end = res_tmplt->getBondsEnd(); b_it != b_end; ++b_it) {
 					const Bond& bond = *b_it;
 
-					Atom* res_atom1 = currResidueAtoms[getResidueAtomName(bond.getBegin())];
+					Atom* res_atom1 = currResidueAtoms[getResTemplateAtomName(bond.getBegin())];
 
-					//if (!res_atom1) 
-					//	res_atom1 = currResidueAtoms[getResidueAltAtomName(bond.getBegin())];
-	
 					if (!res_atom1)
 						continue;
 
-					Atom* res_atom2 = currResidueAtoms[getResidueAtomName(bond.getEnd())];
-
-					//if (!res_atom2)
-					//	res_atom2 = currResidueAtoms[getResidueAltAtomName(bond.getEnd())];
+					Atom* res_atom2 = currResidueAtoms[getResTemplateAtomName(bond.getEnd())];
 
 					if (!res_atom2) 
 						continue;
@@ -994,10 +987,7 @@ void Biomol::PDBDataReader::processAtomSequence(Chem::Molecule& mol, bool chain_
 			if (res_tmplt) {
 				for (MolecularGraph::ConstAtomIterator a_it = res_tmplt->getAtomsBegin(), a_end = res_tmplt->getAtomsEnd(); a_it != a_end; ++a_it) {
 					const Atom& atom = *a_it;
-					Atom* res_atom = currResidueAtoms[getResidueAtomName(atom)];
-
-					//if (!res_atom)
-					//	res_atom = currResidueAtoms[getResidueAltAtomName(atom)];
+					Atom* res_atom = currResidueAtoms[getResTemplateAtomName(atom)];
 
 					if (!res_atom)
 						continue;
@@ -1138,14 +1128,19 @@ const Chem::Atom* Biomol::PDBDataReader::getResTemplateAtom(const Chem::Molecula
 	for (MolecularGraph::ConstAtomIterator it = tmplt.getAtomsBegin(), end = tmplt.getAtomsEnd(); it != end; ++it) {
 		const Atom& atom = *it;
 
-		if (getResidueAtomName(atom) == atom_name)
+		if (getResTemplateAtomName(atom) == atom_name)
 			return &atom;
-
-		//if (getResidueAltAtomName(atom) == atom_name) // causes lots of atom mixup problems, better to just deal with the lates label version
-		//	return &atom;
 	}
 
 	return 0;
+}
+
+const std::string& Biomol::PDBDataReader::getResTemplateAtomName(const Chem::Atom& atom) const
+{
+	if (formatVersion == PDBFormatVersion::V2)
+		return getResidueAltAtomName(atom);
+
+	return getResidueAtomName(atom);
 }
 
 void Biomol::PDBDataReader::perceiveBondOrders(Chem::Molecule& mol)

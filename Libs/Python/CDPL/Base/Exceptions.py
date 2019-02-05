@@ -24,9 +24,14 @@
 ##
 
 
-import exceptions
+from __future__ import absolute_import
 
-import _base
+try:
+    import exceptions
+except ImportError:
+    import builtins as exceptions
+
+from . import _base
 
 
 class Exception(exceptions.Exception):

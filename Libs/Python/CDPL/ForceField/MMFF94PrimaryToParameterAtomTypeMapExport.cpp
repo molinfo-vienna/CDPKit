@@ -136,6 +136,7 @@ void CDPLPythonForceField::exportMMFF94PrimaryToParameterAtomTypeMap()
 		.def("getAtomType", &ForceField::MMFF94PrimaryToParameterAtomTypeMap::Entry::getAtomType, python::arg("self"))
 		.def("getParameterAtomTypes", &getParameterAtomTypes, python::arg("self"))
 		.def("__nonzero__", &ForceField::MMFF94PrimaryToParameterAtomTypeMap::Entry::operator bool, python::arg("self"))
+		.def("__bool__", &ForceField::MMFF94PrimaryToParameterAtomTypeMap::Entry::operator bool, python::arg("self"))
 		.add_property("atomType", &ForceField::MMFF94PrimaryToParameterAtomTypeMap::Entry::getAtomType)
 		.add_property("paramAtomTypes", &getParameterAtomTypes)
 		.def_readonly("NUM_TYPES", &ForceField::MMFF94PrimaryToParameterAtomTypeMap::Entry::NUM_TYPES);

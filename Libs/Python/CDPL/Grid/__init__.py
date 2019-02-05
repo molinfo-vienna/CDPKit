@@ -24,8 +24,10 @@
 ##
 
 
+from __future__ import absolute_import
+
 import CDPL.Base
 import CDPL.Math
 
-from _grid import *
+from ._grid import *
 

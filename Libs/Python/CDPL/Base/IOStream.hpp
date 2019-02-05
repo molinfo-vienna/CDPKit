@@ -36,6 +36,11 @@
 #include "CDPL/Base/Exceptions.hpp"
 
 
+#if PY_MAJOR_VERSION >= 3
+#define PyString_AsStringAndSize PyBytes_AsStringAndSize
+#endif
+
+
 namespace CDPLPythonBase
 {
 

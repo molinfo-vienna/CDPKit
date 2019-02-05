@@ -78,5 +78,6 @@ void CDPLPythonChem::exportMaxCommonBondSubstructureSearch()
 		.def("__getitem__", getMappingFunc, (python::arg("self"), python::arg("idx")), 
 			 python::return_internal_reference<1>())
 		.def("__len__", &Chem::MaxCommonBondSubstructureSearch::getNumMappings, python::arg("self"))
-		.def("__nonzero__", &Chem::MaxCommonBondSubstructureSearch::mappingExists, python::arg("self"));
+		.def("__nonzero__", &Chem::MaxCommonBondSubstructureSearch::mappingExists, python::arg("self"))
+		.def("__bool__", &Chem::MaxCommonBondSubstructureSearch::mappingExists, python::arg("self"));
 }

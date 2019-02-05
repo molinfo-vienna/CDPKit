@@ -24,6 +24,8 @@
 ##
 
 
+from __future__ import print_function 
+
 import sys
 import re
 
@@ -31,7 +33,7 @@ import re
 def cxxToPythonCode():
 	
 	if len(sys.argv) < 3:
-		print >> sys.stderr, 'Usage:', sys.argv[0], '[input file] [output file]'
+		print('Usage:', sys.argv[0], '[input file] [output file]', file=sys.stderr)
 		sys.exit(2)
 
 	output = list();

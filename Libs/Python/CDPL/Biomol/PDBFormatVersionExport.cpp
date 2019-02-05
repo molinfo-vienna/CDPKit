@@ -1,7 +1,7 @@
 /* -*- mode: c++; c-basic-offset: 4; tab-width: 4; indent-tabs-mode: t -*- */
 
 /* 
- * NamespaceExports.hpp 
+ * PDBFormatVersionExport.cpp 
  *
  * This file is part of the Chemical Data Processing Toolkit
  *
@@ -24,26 +24,27 @@
  */
 
 
-#ifndef CDPL_PYTHON_BIOMOL_NAMESPACEEXPORTS_HPP
-#define CDPL_PYTHON_BIOMOL_NAMESPACEEXPORTS_HPP
+#include <boost/python.hpp>
+
+#include "CDPL/Biomol/PDBFormatVersion.hpp"
+
+#include "NamespaceExports.hpp"
 
 
-namespace CDPLPythonBiomol
+namespace 
 {
 
-	void exportAtomPropertyFlags();
-	void exportResidueTypes();
-	void exportPDBFormatVersions();
-
-	void exportAtomProperties();
-	void exportMolecularGraphProperties();
-	void exportAtomPropertyDefaults();
-	void exportMolecularGraphPropertyDefaults();
-
-	void exportControlParameters();
-	void exportControlParameterDefaults();
-
-	void exportDataFormats();
+    struct PDBFormatVersion {};
 }
 
-#endif // CDPL_PYTHON_BIOMOL_NAMESPACEEXPORTS_HPP
+
+void CDPLPythonBiomol::exportPDBFormatVersions()
+{
+    using namespace boost;
+    using namespace CDPL;
+
+    python::class_<PDBFormatVersion, boost::noncopyable>("PDBFormatVersion", python::no_init)
+		.def_readonly("UNDEF", Biomol::PDBFormatVersion::UNDEF)
+	    .def_readonly("V2", Biomol::PDBFormatVersion::V2)
+	    .def_readonly("V3", Biomol::PDBFormatVersion::V3);
+}

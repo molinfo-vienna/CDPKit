@@ -24,9 +24,11 @@
 ##
 
 
+from __future__ import absolute_import
+
 import CDPL.Base
 import CDPL.Math
 
-from _util import *
-from Functors import *
+from ._util import *
+from .Functors import *
 

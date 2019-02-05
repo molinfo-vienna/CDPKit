@@ -24,6 +24,8 @@
 ##
 
 
+from __future__ import print_function 
+
 import sys
 import inspect
 import re
@@ -462,7 +464,7 @@ def extendByModuleName(type_name):
 
 def genPythonAPIDocFiles():
 	if len(sys.argv) < 2:
-		print >> sys.stderr, 'Usage:', sys.argv[0], '[package] [output dir]'
+		print('Usage:', sys.argv[0], '[package] [output dir]', file=sys.stderr)
 		sys.exit(2)
 
 	__import__(sys.argv[1])

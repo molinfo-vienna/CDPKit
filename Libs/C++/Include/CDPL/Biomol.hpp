@@ -40,6 +40,7 @@
 #include "CDPL/Biomol/AtomPropertyDefault.hpp"
 #include "CDPL/Biomol/MolecularGraphPropertyDefault.hpp"
 #include "CDPL/Biomol/AtomPropertyFlag.hpp"
+#include "CDPL/Biomol/PDBFormatVersion.hpp"
 #include "CDPL/Biomol/ResidueType.hpp"
 #include "CDPL/Biomol/DataFormat.hpp"
 #include "CDPL/Biomol/ControlParameter.hpp"

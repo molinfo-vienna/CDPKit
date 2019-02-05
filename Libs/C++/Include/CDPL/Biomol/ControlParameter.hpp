@@ -119,6 +119,8 @@ namespace CDPL
 
 			extern CDPL_BIOMOL_API const Base::LookupKey PDB_WRITE_CONECT_RECORDS_REFLECTING_BOND_ORDER;
 
+			extern CDPL_BIOMOL_API const Base::LookupKey PDB_FORMAT_VERSION;
+
 			extern CDPL_BIOMOL_API const Base::LookupKey COMBINE_INTERFERING_RESIDUE_COORDINATES;
 		}
 

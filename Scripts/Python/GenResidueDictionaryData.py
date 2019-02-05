@@ -24,6 +24,8 @@
 ##
 
 
+from __future__ import print_function 
+
 import sys
 import string
 
@@ -35,7 +37,7 @@ from CDPL.Base import *
 def genResidueDictionaryData():
     
     if len(sys.argv) < 4:
-        print >> sys.stderr, 'Usage:', sys.argv[0], '[PDB Component Directory mmCIF input file] [residue entry output file] [residue structure output file]'
+        print('Usage:', sys.argv[0], '[PDB Component Directory mmCIF input file] [residue entry output file] [residue structure output file]', file=sys.stderr)
         sys.exit(2)
 
     comp_type_map = { 'other' : 'OTHER', \
@@ -83,7 +85,7 @@ def genResidueDictionaryData():
 
         code = line[5:8].strip()
 
-        print 'Processing entry ' + code + ' ...'
+        print('Processing entry ' + code + ' ...', file=sys.stderr)
         
         ##########
 
@@ -104,7 +106,7 @@ def genResidueDictionaryData():
         comp_type = line[len('_chem_comp.type'):].strip().strip('"').lower()
 
         if comp_type not in comp_type_map:
-            print 'Unsupported component type: ' + comp_type
+            print('Unsupported component type: ' + comp_type, file=sys.stderr)
             comp_type = 'OTHER'
         else:
             comp_type = comp_type_map[comp_type]
@@ -119,7 +121,7 @@ def genResidueDictionaryData():
         rel_status = line[len('_chem_comp.pdbx_release_status'):].strip()
 
         if rel_status != 'REL' and rel_status != 'OBS':
-            print 'Skipping record because relase status != REL or OBS'  
+            print('Skipping record because relase status != REL or OBS'  , file=sys.stderr)
             continue
 
         obsolete = 'false'
@@ -187,7 +189,7 @@ def genResidueDictionaryData():
 
         if have_atoms:
             if not loop_entry:
-                #print 'Found single atom entry: ' + code
+                #print('Found single atom entry: ' + code, file=sys.stderr)
 
                 line = skipToLine('_chem_comp_atom.atom_id', cif_file)
 
@@ -356,7 +358,7 @@ def genResidueDictionaryData():
 
             if have_bonds:
                 if not loop_entry: # SINGLE BOND
-                    #print 'Found single bond entry: ' + code
+                    #print('Found single bond entry: ' + code, file=sys.stderr)
 
                     line = skipToLine('_chem_comp_bond.atom_id_1', cif_file)
 
@@ -386,7 +388,7 @@ def genResidueDictionaryData():
                     elif value_order == 'TRIP':
                         order = '3'
                     elif value_order != 'SING':
-                        print 'found bond with order ' + value_order
+                        print('found bond with order ' + value_order, file=sys.stderr)
 
                     bond = struct.addBond(name_to_index[atom_id_1], name_to_index[atom_id_2])
 
@@ -421,7 +423,7 @@ def genResidueDictionaryData():
                         elif fields[3] == 'TRIP':
                             order = '3'
                         elif fields[3] != 'SING':
-                            print 'found bond with order ' + fields[3]
+                            print('found bond with order ' + fields[3], file=sys.stderr)
 
                         bond = struct.addBond(atom1_idx, atom2_idx)
 
@@ -433,10 +435,10 @@ def genResidueDictionaryData():
                         break
 
         #if not have_atoms:
-        #    print 'Entry with NO atoms: ' + code
+        #    print('Entry with NO atoms: ' + code, file=sys.stderr)
 
         #if not have_bonds:
-        #    print 'Entry with NO bonds: ' + code
+        #    print('Entry with NO bonds: ' + code, file=sys.stderr)
 
         comp_name = comp_name.replace('"', '\\"')
 

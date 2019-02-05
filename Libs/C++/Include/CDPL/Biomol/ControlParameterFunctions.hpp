@@ -232,6 +232,15 @@ namespace CDPL
 		CDPL_BIOMOL_API void clearPDBWriteCONECTRecordsReflectingBondOrderParameter(Base::ControlParameterContainer& cntnr);
 
 
+		CDPL_BIOMOL_API unsigned int getPDBFormatVersionParameter(const Base::ControlParameterContainer& cntnr);
+
+		CDPL_BIOMOL_API void setPDBFormatVersionParameter(Base::ControlParameterContainer& cntnr, unsigned int ver);
+
+		CDPL_BIOMOL_API bool hasPDBFormatVersionParameter(const Base::ControlParameterContainer& cntnr);
+
+		CDPL_BIOMOL_API void clearPDBFormatVersionParameter(Base::ControlParameterContainer& cntnr);
+
+
 		CDPL_BIOMOL_API bool getCombineInterferingResidueCoordinatesParameter(const Base::ControlParameterContainer& cntnr);
 
 		CDPL_BIOMOL_API void setCombineInterferingResidueCoordinatesParameter(Base::ControlParameterContainer& cntnr, bool comb);

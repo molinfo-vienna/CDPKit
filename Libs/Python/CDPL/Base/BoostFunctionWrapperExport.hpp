@@ -68,6 +68,7 @@ namespace CDPLPythonBase
 				.def("__call__", &callOperator, 
 					 (python::arg("self"), python::arg("arg1"), python::arg("arg2"), 
 					  python::arg("arg3"), python::arg("arg4")), RetValPolicy())
+				.def("__bool__", &this->nonZero, python::arg("self"))
 				.def("__nonzero__", &this->nonZero, python::arg("self"));
 
 			python::converter::registry::push_back(&this->convertible, &convConstruct, python::type_id<FunctionType>());
@@ -123,6 +124,7 @@ namespace CDPLPythonBase
 				.def("__call__", &callOperator, 
 					 (python::arg("self"), python::arg("arg1"), python::arg("arg2"), python::arg("arg3")),
 					 RetValPolicy())
+				.def("__bool__", &this->nonZero, python::arg("self"))
 				.def("__nonzero__", &this->nonZero, python::arg("self"));
 
 			python::converter::registry::push_back(&this->convertible, &convConstruct, python::type_id<FunctionType>());
@@ -176,6 +178,7 @@ namespace CDPLPythonBase
 				.def("__call__", &callOperator, 
 					 (python::arg("self"), python::arg("arg1"), python::arg("arg2")), 
 					 RetValPolicy())
+				.def("__bool__", &this->nonZero, python::arg("self"))
 				.def("__nonzero__", &this->nonZero, python::arg("self"));
 
 			python::converter::registry::push_back(&this->convertible, &convConstruct, python::type_id<FunctionType>());
@@ -226,6 +229,7 @@ namespace CDPLPythonBase
 														  python::arg("callable")))
 				.def("__call__", &callOperator, (python::arg("self"), python::arg("arg1")),
 					 RetValPolicy())
+				.def("__bool__", &this->nonZero, python::arg("self"))
 				.def("__nonzero__", &this->nonZero, python::arg("self"));
 
 			python::converter::registry::push_back(&this->convertible, &convConstruct, python::type_id<FunctionType>());
@@ -273,6 +277,7 @@ namespace CDPLPythonBase
 				.def("__init__", python::make_constructor(&construct, python::default_call_policies(), 
 														  python::arg("callable")))
 				.def("__call__", &callOperator, python::arg("self"), RetValPolicy())
+				.def("__bool__", &this->nonZero, python::arg("self"))
 				.def("__nonzero__", &this->nonZero, python::arg("self"));
 
 			python::converter::registry::push_back(&this->convertible, &convConstruct, python::type_id<FunctionType>());

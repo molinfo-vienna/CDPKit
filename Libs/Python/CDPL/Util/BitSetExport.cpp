@@ -285,6 +285,7 @@ void CDPLPythonUtil::exportBitSet()
 		.def("__ge__", &geOperator, (python::arg("self"), python::arg("bs")))
 		.def("__len__", &Util::BitSet::size, python::arg("self"))
 		.def("__nonzero__", &Util::BitSet::any, python::arg("self"))
+		.def("__bool__", &Util::BitSet::any, python::arg("self"))
 		.def("__str__", &toString, python::arg("self"))
 		.add_static_property("npos", &getNPos);
 }

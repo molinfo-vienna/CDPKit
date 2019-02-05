@@ -24,8 +24,10 @@
 ##
 
 
+from __future__ import absolute_import
+
 import CDPL.Base
 import CDPL.Math
 import CDPL.Chem
 
-from _vis import *
+from ._vis import *

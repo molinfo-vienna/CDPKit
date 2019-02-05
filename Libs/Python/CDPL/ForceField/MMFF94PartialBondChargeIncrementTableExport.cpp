@@ -94,6 +94,7 @@ void CDPLPythonForceField::exportMMFF94PartialBondChargeIncrementTable()
 		.def("getPartialChargeIncrement", &ForceField::MMFF94PartialBondChargeIncrementTable::Entry::getPartialChargeIncrement, python::arg("self"))
 		.def("getFormalChargeAdjustmentFactor", &ForceField::MMFF94PartialBondChargeIncrementTable::Entry::getFormalChargeAdjustmentFactor, python::arg("self"))
 		.def("__nonzero__", &ForceField::MMFF94PartialBondChargeIncrementTable::Entry::operator bool, python::arg("self"))
+		.def("__bool__", &ForceField::MMFF94PartialBondChargeIncrementTable::Entry::operator bool, python::arg("self"))
 		.add_property("atomType", &ForceField::MMFF94PartialBondChargeIncrementTable::Entry::getAtomType)
 		.add_property("partialChargeIncrement", &ForceField::MMFF94PartialBondChargeIncrementTable::Entry::getPartialChargeIncrement)
 		.add_property("formalChargeAdjustmentFactor", &ForceField::MMFF94PartialBondChargeIncrementTable::Entry::getFormalChargeAdjustmentFactor);

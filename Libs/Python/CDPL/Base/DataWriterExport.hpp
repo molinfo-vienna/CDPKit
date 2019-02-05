@@ -49,14 +49,20 @@ namespace CDPLPythonBase
 		}
 
 		operator const void*() const {
-			if (this->get_override("__nonzero__")())
+			if (boost::python::override f = this->get_override("__nonzero__"))
+				return (f() ? static_cast<const void*>(this) : static_cast<const void*>(0));
+
+			if (this->get_override("__bool__")())
 				return this;
 
 			return 0;
 		}
 
 		bool operator!() const {
-			return !this->get_override("__nonzero__")();
+			if (boost::python::override f = this->get_override("__nonzero__"))
+				return !f();
+
+			return !this->get_override("__bool__")();
 		}
 
 		void close() {
@@ -89,6 +95,7 @@ namespace CDPLPythonBase
 				.def("write", python::pure_virtual(&WriterType::write), 
 					 (python::arg("self"), python::arg(obj_arg_name)), python::return_self<>())
 				.def("close", &WriterType::close, &DataWriterWrapper<T>::closeDef, python::arg("self"))
+				.def("__bool__", python::pure_virtual(&nonZero), python::arg("self"))
 				.def("__nonzero__", python::pure_virtual(&nonZero), python::arg("self"));
 
 			python::register_ptr_to_python<typename Base::DataWriter<T>::SharedPointer>();

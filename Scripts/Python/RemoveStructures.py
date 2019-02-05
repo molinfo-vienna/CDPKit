@@ -24,9 +24,13 @@
 ##
 
 
+from __future__ import print_function 
+
 import sys
+
 import CDPL.Base as Base
 import CDPL.Chem as Chem
+
 
 class Stats:
     pass
@@ -44,7 +48,7 @@ def setupMolecule(mol):
 
 def process():
     if len(sys.argv) < 4:
-        print >> sys.stderr, 'Usage:', sys.argv[0], '[input.sdf] [exclude-molecules.sdf] [output.sdf]'
+        print('Usage:', sys.argv[0], '[input.sdf] [exclude-molecules.sdf] [output.sdf]', file=sys.stderr)
         sys.exit(2)
 
     ifs = Base.FileIOStream(sys.argv[1], 'r')
@@ -73,26 +77,26 @@ def process():
         xhashes.add(hashcode)
 
     while reader.read(mol):
-        #print 'Processing Molecule ' + str(stats.read)
+        #print('Processing Molecule ' + str(stats.read)
         setupMolecule(mol)
 
         hashcode = Chem.calcHashCode(mol)
 
         if hashcode in xhashes:
             stats.dropped += 1
-            print 'Dropped Molecule ' + str(stats.read) + ': ' + Chem.generateSMILES(mol) + ' ' + Chem.getName(mol)
+            print('Dropped Molecule ' + str(stats.read) + ': ' + Chem.generateSMILES(mol) + ' ' + Chem.getName(mol), file=sys.stderr)
         else:
             writer.write(mol)
 
         stats.read += 1
 
         if stats.read % 10000 == 0:
-            print 'Processed ' + str(stats.read) + ' Molecules...'
+            print('Processed ' + str(stats.read) + ' Molecules...', file=sys.stderr)
 
-    print ''
-    print '-- Summary --'
-    print 'Molecules processed: ' + str(stats.read)
-    print 'Molecules dropped: ' + str(stats.dropped)
+    print('', file=sys.stderr)
+    print('-- Summary --', file=sys.stderr)
+    print('Molecules processed: ' + str(stats.read), file=sys.stderr)
+    print('Molecules dropped: ' + str(stats.dropped), file=sys.stderr)
 
 if __name__ == '__main__':
     process()

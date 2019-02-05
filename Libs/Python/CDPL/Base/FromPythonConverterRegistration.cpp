@@ -37,6 +37,13 @@
 #include "ConverterRegistration.hpp"
 #include "GenericVariantFromPythonConverter.hpp"
 
+
+#if PY_MAJOR_VERSION >= 3
+# define PyInt_Check PyLong_Check
+# define PyInt_AS_LONG PyLong_AS_LONG
+#endif
+
+
 namespace
 {
 

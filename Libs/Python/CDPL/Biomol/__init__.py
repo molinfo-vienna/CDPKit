@@ -24,6 +24,8 @@
 ##
 
 
+from __future__ import absolute_import
+
 import CDPL.Chem
 
-from _biomol import *
+from ._biomol import *

@@ -24,4 +24,6 @@
 ##
 
 
-from _cdpl import *
+from __future__ import absolute_import
+
+from ._cdpl import *

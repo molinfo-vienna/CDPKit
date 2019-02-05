@@ -24,12 +24,14 @@
 ##
 
 
+from __future__ import print_function 
+
 import sys
 
 
 def convert():
     if len(sys.argv) < 3:
-        print >> sys.stderr, 'Usage:', sys.argv[0], '[input file] [output file]'
+        print('Usage:', sys.argv[0], '[input file] [output file]', file=sys.stderr)
         sys.exit(2)
 
     in_file = open(sys.argv[1], 'rb')
@@ -39,13 +41,21 @@ def convert():
 
     char_cnt = 0
 
-    for c in in_file.read():
-        out_file.write('\\x{0:02x}'.format(ord(c)))
-        char_cnt += 1
+    if sys.version_info[0] < 3:
+        for c in in_file.read():
+            out_file.write('\\x{0:02x}'.format(ord(c)))
+            char_cnt += 1
 
-        if char_cnt % 20 == 0:
-            out_file.write('"\n"')
-    
+            if char_cnt % 20 == 0:
+                out_file.write('"\n"')
+    else:   
+        for c in in_file.read():
+            out_file.write('\\x{0:02x}'.format(c))
+            char_cnt += 1
+
+            if char_cnt % 20 == 0:
+                out_file.write('"\n"')
+
     out_file.write('"')
     out_file.flush()
     out_file.close()

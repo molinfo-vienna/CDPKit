@@ -64,6 +64,7 @@ void CDPLPythonBiomol::exportControlParameters()
 		.def_readonly("PDB_WRITE_CONECT_RECORDS", &Biomol::ControlParameter::PDB_WRITE_CONECT_RECORDS)
 		.def_readonly("PDB_WRITE_CONECT_RECORDS_FOR_ALL_BONDS", &Biomol::ControlParameter::PDB_WRITE_CONECT_RECORDS_FOR_ALL_BONDS)
 		.def_readonly("PDB_WRITE_CONECT_RECORDS_REFLECTING_BOND_ORDER", &Biomol::ControlParameter::PDB_WRITE_CONECT_RECORDS_REFLECTING_BOND_ORDER)
+		.def_readonly("PDB_FORMAT_VERSION", &Biomol::ControlParameter::PDB_FORMAT_VERSION)
 		.def_readonly("COMBINE_INTERFERING_RESIDUE_COORDINATES", &Biomol::ControlParameter::COMBINE_INTERFERING_RESIDUE_COORDINATES)
 		;
 }

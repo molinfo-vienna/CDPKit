@@ -24,8 +24,10 @@
 ##
 
 
-import PyQt4.QtCore as QtCore
-import PyQt4.QtGui as QtGui
+from __future__ import absolute_import
+
+import PyQt5.QtCore as QtCore
+import PyQt5.QtGui as QtGui
 
 import CDPL.Vis
 
@@ -240,7 +242,7 @@ class QtRenderer2D(CDPL.Vis.Renderer2D):
 		"drawPoint(QtRenderer2D self, float x, float y) -> None :"
 		self.__qPainter.drawPoint(QtGui.QPointF(x, y))
         
-	def drawEllipse(self, x, y, width, height)
+	def drawEllipse(self, x, y, width, height):
 		"drawEllipse(QtRenderer2D self, float x, float y, float width, float height) -> None :"
 		self.__qPainter.drawEllipse(QtGui.QPointF(x, y), width * 0.5, height * 0.5)
 

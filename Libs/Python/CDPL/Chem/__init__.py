@@ -24,9 +24,11 @@
 ##
 
 
+from __future__ import absolute_import
+
 import CDPL.Base
 import CDPL.Math
 import CDPL.Util
 import CDPL.Grid
 
-from _chem import *
+from ._chem import *
