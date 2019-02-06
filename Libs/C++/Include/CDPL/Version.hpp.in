@@ -49,11 +49,6 @@
  */
 #define CDPL_VERSION_STRING "@CDPL_VERSION@"
 
-/**
- * \brief The \e %CDPL build date in the format \e YYYYMMDD. 
- */
-#define CDPL_BUILD_DATE @CDPL_BUILD_DATE@
-
 /** 
  * \brief The full \e %CDPL version number. 
  */

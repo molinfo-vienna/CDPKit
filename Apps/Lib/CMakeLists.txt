@@ -1,7 +1,5 @@
 INCLUDE_DIRECTORIES("${CMAKE_CURRENT_SOURCE_DIR}")
 
-CONFIGURE_FILE("${CMAKE_CURRENT_SOURCE_DIR}/SystemInfo.hpp.in" "${CMAKE_CURRENT_SOURCE_DIR}/SystemInfo.hpp")
-
 SET(app-utils_LIB_SRCS
     CmdLineBase.cpp
     HelperFunctions.cpp

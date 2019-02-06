@@ -42,11 +42,11 @@
 #include <boost/atomic.hpp>
 
 #include "CDPL/Version.hpp"
+#include "CDPL/BuildInfo.hpp"
 #include "CDPL/Base/Exceptions.hpp"
 
 #include "CmdLineBase.hpp"
 #include "HelperFunctions.hpp"
-#include "SystemInfo.hpp"
 
 
 using namespace AppUtils;
@@ -203,7 +203,7 @@ boost::program_options::typed_value<bool>* CmdLineBase::boolSwitch(bool* v)
 
 const char* CmdLineBase::getProgVersion() const
 {
-	return SYS_INFO_CDPKIT_VERSION;
+	return CDPL_VERSION_STRING;
 }
 
 const char* CmdLineBase::getProgCopyright() const
@@ -348,8 +348,9 @@ void CmdLineBase::printVersion() const
 {
 	std::cerr << getProgTitleString() << std::endl 
 			  << "(CDPL-Version: " <<  CDPL_VERSION_STRING 
-			  << ", Build: " << CDPL_BUILD_DATE << ", Compiler: " << SYS_INFO_COMPILER_ID 
-			  << " on " << SYS_INFO_BUILD_SYSTEM << ")" << std::endl;
+			  << ", Build: " << CDPL_BUILD_TIME << ", Compiler: " << CDPL_COMPILER_ID 
+			  << " " << CDPL_COMPILER_VERSION
+			  << " on " << CDPL_BUILD_SYSTEM << ")" << std::endl;
 }
 
 void CmdLineBase::printHelp(const char* bin_path, const std::string& what) const

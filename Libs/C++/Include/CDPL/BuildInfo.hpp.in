@@ -1,11 +1,9 @@
-/* -*- mode: c++; c-basic-offset: 4; tab-width: 4; indent-tabs-mode: t -*- */
-
 /* 
- * SystemInfo.hpp
+ * BuildInfo.hpp 
  *
  * This file is part of the Chemical Data Processing Toolkit
  *
- * Copyright (C) 2003-2010 Thomas A. Seidel <thomas.seidel@univie.ac.at>
+ * Copyright (C) 2003-2008 Thomas A. Seidel <thomas.seidel@chemit.at>
  *
  * This library is free software; you can redistribute it and/or
  * modify it under the terms of the GNU Lesser General Public
@@ -23,12 +21,32 @@
  * Boston, MA 02111-1307, USA.
  */
 
+/**
+ * \file
+ * \brief The header to include for \e %CDPL build information.
+ */
 
-#ifndef APP_UTILS_SYSTEMINFO_HPP
-#define APP_UTILS_SYSTEMINFO_HPP
+#ifndef CDPL_BUILDINFO_HPP
+#define CDPL_BUILDINFO_HPP
 
-#define SYS_INFO_COMPILER_ID    "GNU"
-#define SYS_INFO_BUILD_SYSTEM   "Linux-3.10.0-957.5.1.el7.x86_64"
-#define SYS_INFO_CDPKIT_VERSION "1.0.0"
+/**
+ * \brief An identifier for the compiler that was used to build \e %CDPL.
+ */
+#define CDPL_COMPILER_ID      "@CDPKIT_COMPILER_ID@"
 
-#endif // APP_UTILS_SYSTEMINFO_HPP
+/**
+ * \brief The version of the compiler that was used to build \e %CDPL.
+ */
+#define CDPL_COMPILER_VERSION "@CDPKIT_COMPILER_VERSION@"
+
+/**
+ * \brief \e %CDPL build system information.
+ */
+#define CDPL_BUILD_SYSTEM     "@CDPKIT_BUILD_SYSTEM@"
+
+/**
+ * \brief The \e %CDPL build time in the format \e YYYYMMDDHHMM. 
+ */
+#define CDPL_BUILD_TIME        @CDPKIT_BUILD_TIME@
+
+#endif // CDPL_BUILDINFO_HPP

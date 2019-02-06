@@ -27,6 +27,7 @@
 #include <boost/python.hpp>
 
 #include "CDPL/Version.hpp"
+#include "CDPL/BuildInfo.hpp"
 
 #include "Exports.hpp"
 
@@ -42,5 +43,8 @@ void CDPLPython::exportVersionInfo()
     module.attr("PATCH_VERSION") = CDPL_PATCH_VERSION;
     module.attr("VERSION") = CDPL_VERSION;
     module.attr("VERSION_STRING") = CDPL_VERSION_STRING;
-    module.attr("BUILD_DATE") = CDPL_BUILD_DATE;
+    module.attr("BUILD_TIME") = CDPL_BUILD_TIME;
+    module.attr("BUILD_SYSTEM") = CDPL_BUILD_SYSTEM;
+    module.attr("COMPILER_ID") = CDPL_COMPILER_ID;
+    module.attr("COMPILER_VERSION") = CDPL_COMPILER_VERSION;
 }
