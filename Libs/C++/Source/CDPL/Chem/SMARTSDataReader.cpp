@@ -378,6 +378,9 @@ void Chem::SMARTSDataReader::parseRingClosures(Molecule& mol, const Atom& atom)
 		if (lb != closureBondMap.end() && !(closureBondMap.key_comp()(closure_no, lb->first))) {
 			const ClosureBond& closure_bond = lb->second;
 
+			if (strictErrorChecking && closure_bond.startAtom == &atom)
+				throw Base::IOError("SMARTSDataReader: trying to connect atom with itself");
+
 			constr_list = combineBondMatchConstraints(constr_list, closure_bond.matchConstraints);
 
 			createBond(mol, closure_bond.startAtom, &atom, constr_list, closure_bond.lexBondNumber);

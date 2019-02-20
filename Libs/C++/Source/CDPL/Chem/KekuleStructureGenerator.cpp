@@ -121,6 +121,9 @@ void Chem::KekuleStructureGenerator::generate(const MolecularGraph& molgraph, Ut
 
 		const Bond& bond = *it;
 
+		if (&bond.getBegin() == &bond.getEnd())
+			continue;
+
 		conctdUndefBonds.clear();
 
 		getConnectedUndefBonds(bond.getEnd());

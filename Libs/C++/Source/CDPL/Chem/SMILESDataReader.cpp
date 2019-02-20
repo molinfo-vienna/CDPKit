@@ -386,6 +386,9 @@ void Chem::SMILESDataReader::parseRingClosures(Molecule& mol, const Atom& atom)
 		if (lb != closureBondMap.end() && !(closureBondMap.key_comp()(closure_no, lb->first))) {
 			const ClosureBond& closure_bond = lb->second;
 
+			if (strictErrorChecking && closure_bond.startAtom == &atom)
+				throw Base::IOError("SMILESDataReader: trying to connect atom with itself");
+
 			bond_params.combineWith(closure_bond.bondParameters, strictErrorChecking);
 
 			createBond(mol, closure_bond.startAtom, &atom, bond_params, closure_bond.lexBondNumber);
