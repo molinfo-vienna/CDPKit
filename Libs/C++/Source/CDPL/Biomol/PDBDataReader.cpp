@@ -889,6 +889,7 @@ void Biomol::PDBDataReader::processAtomSequence(Chem::Molecule& mol, bool chain_
 		Atom* first_atom = *as_it;
 		std::size_t res_id = (getResidueSequenceNumber(*first_atom) << (sizeof(char) * 8)) + getResidueInsertionCode(*first_atom);
 		const std::string& res_code = getResidueCode(*first_atom);
+		const std::string& chain_id = getChainID(*first_atom);
 
 		currResidueAtoms.clear();
 		currResidueLinkAtoms.clear();
@@ -897,6 +898,12 @@ void Biomol::PDBDataReader::processAtomSequence(Chem::Molecule& mol, bool chain_
 
 		for (++as_it; as_it != as_end; ++as_it) {
 			Atom* next_atom = *as_it;
+
+			const std::string& next_chain_id = getChainID(*next_atom);
+
+			if (next_chain_id != chain_id)
+				break;
+
 			const std::string& next_res_code = getResidueCode(*next_atom);
 
 			if (next_res_code != res_code)
@@ -977,7 +984,7 @@ void Biomol::PDBDataReader::processAtomSequence(Chem::Molecule& mol, bool chain_
 
 					if (!res_atom2) 
 						continue;
-
+				
 					mol.addBond(mol.getAtomIndex(*res_atom1), mol.getAtomIndex(*res_atom2));
 				}
 			}

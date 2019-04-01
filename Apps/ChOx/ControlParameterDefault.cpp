@@ -178,7 +178,7 @@ namespace ChOx
 		const std::string                          JME_OUTPUT_RECORD_SEPARATOR             = "\n";
 
 		const bool                                 SMILES_INPUT_STRICT_ERROR_CHECKING      = false;
-		const std::string                          SMILES_INPUT_RECORD_FORMAT              = "S:N$";
+		const std::string                          SMILES_INPUT_RECORD_FORMAT              = "SN";
 
 		const bool                                 SMILES_OUTPUT_STRICT_ERROR_CHECKING     = false;
 		const bool                                 SMILES_OUTPUT_ORDINARY_H_DEPLETE        = true;
@@ -194,7 +194,7 @@ namespace ChOx
 		const bool                                 SMILES_OUTPUT_NO_ORGANIC_SUBSET         = false;
 		const std::size_t                          SMILES_OUTPUT_MIN_STEREO_BOND_RING_SIZE = 8;
 		const bool                                 SMILES_OUTPUT_WRITE_SINGLE_RECORD_FILES = true;
-		const std::string                          SMILES_OUTPUT_RECORD_FORMAT             = "S:N$";
+		const std::string                          SMILES_OUTPUT_RECORD_FORMAT             = "SN";
 
 		const bool                                 SMARTS_INPUT_STRICT_ERROR_CHECKING      = false;
 
