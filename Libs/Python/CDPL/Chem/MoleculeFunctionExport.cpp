@@ -56,6 +56,7 @@ void CDPLPythonChem::exportMoleculeFunctions()
 	python::def("makeOrdinaryHydrogenDeplete", &Chem::makeOrdinaryHydrogenDeplete, 
 				(python::arg("mol"), python::arg("flags")));
 	python::def("makeHydrogenComplete", &Chem::makeHydrogenComplete, python::arg("mol"));
+	python::def("neutralize", &Chem::neutralize, python::arg("mol"));
 	python::def("removeAtomsIf", &Chem::removeAtomsIf, (python::arg("mol"), python::arg("pred")));
 	python::def("removeAtomsIfNot", &Chem::removeAtomsIfNot, (python::arg("mol"), python::arg("pred")));
 }

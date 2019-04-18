@@ -136,6 +136,7 @@ namespace CDPLPythonChem
 	void exportAtomHydrophobicityCalculator();
 	void exportBuriednessScore();
 	void exportBuriednessGridCalculator();
+	void exportTautomerScore();
 	void exportTautomerGenerator();
 	void exportDefaultTautomerGenerator();
 	void exportTautomerizationRule();

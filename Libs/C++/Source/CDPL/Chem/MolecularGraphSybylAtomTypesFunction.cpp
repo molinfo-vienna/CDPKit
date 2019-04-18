@@ -39,11 +39,11 @@ void Chem::perceiveSybylAtomTypes(MolecularGraph& molgraph, bool overwrite)
     MolecularGraph::AtomIterator atoms_end = molgraph.getAtomsEnd();
 
     for (MolecularGraph::AtomIterator a_it = molgraph.getAtomsBegin(); a_it != atoms_end; ++a_it) {
-	Atom& atom = *a_it;
+		Atom& atom = *a_it;
  
-	if (!overwrite && hasSybylType(atom))
-	    continue;
+		if (!overwrite && hasSybylType(atom))
+			continue;
 
-	setSybylType(atom, perceiveSybylType(atom, molgraph));
+		setSybylType(atom, perceiveSybylType(atom, molgraph));
     }
 }

@@ -98,8 +98,9 @@ namespace CDPL
 
 			SmallestSetOfSmallestRings& operator=(const SmallestSetOfSmallestRings&);
 
-			void init(const MolecularGraph&);
-	
+			void visitComponentAtom(const Atom& atom);
+
+			void init();
 			void findSSSR();
 			void createRingFragments();
 
@@ -196,6 +197,8 @@ namespace CDPL
 			typedef std::set<const PathMessage*, PathMessage::LessCmpFunc> ProcRingSet;
 
 			CyclicSubstructure       cycleSubstruct;
+			Fragment                 component;
+			Util::BitSet             visAtomMask;
 			NodeArray                nodes;
 			AllocMessageList         allocMessages;
 			MessageList              freeMessages;

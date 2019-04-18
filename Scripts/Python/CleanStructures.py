@@ -50,6 +50,11 @@ def generateSMILES(mol):
         return ''
 
 def processMolecule(mol, stats):
+    modified = False
+
+    if NEUTRALIZE:
+        modified = Chem.neutralize(mol)
+
     Chem.perceiveComponents(mol, False)
     Chem.perceiveSSSR(mol, False)
     Chem.setRingFlags(mol, False)
@@ -57,7 +62,6 @@ def processMolecule(mol, stats):
     Chem.perceiveHybridizationStates(mol, False)
     Chem.setAromaticityFlags(mol, False)
 
-    modified = False
     comps = Chem.getComponents(mol)
 
     if comps.getSize() > 1 and KEEP_ONLY_LARGEST_COMP:
@@ -92,7 +96,6 @@ def processMolecule(mol, stats):
         return None
 
     carbon_seen = False
-    hs_to_remove = list()
 
     for atom in mol.atoms:
         atom_type = Chem.getType(atom)
@@ -108,49 +111,10 @@ def processMolecule(mol, stats):
 
         if atom_type == Chem.AtomType.C:
             carbon_seen = True
-
-        if NEUTRALIZE:
-            form_charge = Chem.getFormalCharge(atom)
-
-            if form_charge != 0:
-                for nbr_atom in atom.atoms:
-                    if Chem.getFormalCharge(nbr_atom) != 0:
-                        form_charge = 0
-                        break
-
-            if form_charge != 0:
-                if form_charge > 0:
-                    form_charge -= Chem.getImplicitHydrogenCount(atom)
-
-                    if form_charge < 0:
-                        form_charge = 0
-
-                    for nbr_atom in atom.atoms: 
-                        if form_charge == 0:
-                            break
-
-                        if Chem.getType(nbr_atom) == Chem.AtomType.H:
-                            hs_to_remove.append(nbr_atom)
-                            form_charge -= 1
-                        
-                    Chem.setFormalCharge(atom, form_charge)
-
-                else:
-                    Chem.setFormalCharge(atom, 0)
-                            
-                modified = True
     
     if CARBON_ATOMS_MANDATORY and carbon_seen == False:
         return None
-
-    if len(hs_to_remove) > 0:
-        for atom in hs_to_remove:
-            mol.removeAtom(mol.getAtomIndex(atom))
- 
-        for atom in mol.atoms:
-            Chem.setImplicitHydrogenCount(atom, Chem.calcImplicitHydrogenCount(atom, mol))
-            Chem.setHybridizationState(atom, Chem.perceiveHybridizationState(atom, mol))
-
+  
     if modified:
         stats.modified += 1
 

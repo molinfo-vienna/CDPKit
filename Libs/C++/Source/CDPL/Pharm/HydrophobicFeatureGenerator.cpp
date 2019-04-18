@@ -56,9 +56,9 @@ namespace
 
 
 const double       Pharm::HydrophobicFeatureGenerator::DEF_FEATURE_TOL         = 1.5;
-const double       Pharm::HydrophobicFeatureGenerator::DEF_HYD_THRESHOLD_RING  = 1.2;
-const double       Pharm::HydrophobicFeatureGenerator::DEF_HYD_THRESHOLD_CHAIN = 1.2;
-const double       Pharm::HydrophobicFeatureGenerator::DEF_HYD_THRESHOLD_GROUP = 1.2;
+const double       Pharm::HydrophobicFeatureGenerator::DEF_HYD_THRESHOLD_RING  = 7.0;
+const double       Pharm::HydrophobicFeatureGenerator::DEF_HYD_THRESHOLD_CHAIN = 3.0;
+const double       Pharm::HydrophobicFeatureGenerator::DEF_HYD_THRESHOLD_GROUP = 5.0;
 const unsigned int Pharm::HydrophobicFeatureGenerator::DEF_FEATURE_TYPE;
 const unsigned int Pharm::HydrophobicFeatureGenerator::DEF_FEATURE_GEOM;
 

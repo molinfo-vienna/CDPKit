@@ -297,6 +297,7 @@
 #include "CDPL/Chem/AtomHydrophobicityCalculator.hpp"  
 #include "CDPL/Chem/BuriednessScore.hpp"  
 #include "CDPL/Chem/BuriednessGridCalculator.hpp"  
+#include "CDPL/Chem/TautomerScore.hpp"  
 #include "CDPL/Chem/TautomerGenerator.hpp"  
 #include "CDPL/Chem/DefaultTautomerGenerator.hpp"  
 #include "CDPL/Chem/TautomerizationRule.hpp"  

@@ -38,7 +38,6 @@
 #include "CDPL/Base/DataWriter.hpp"
 #include "CDPL/Base/DataInputHandler.hpp"
 #include "CDPL/Base/DataOutputHandler.hpp"
-#include "CDPL/Chem/TautomerGenerator.hpp"
 
 #include "Lib/CmdLineBase.hpp"
 
@@ -65,7 +64,15 @@ namespace TautGen
 		TautGenImpl();
 
     private:
-		typedef CDPL::Chem::TautomerGenerator::Mode Mode;
+		enum Mode 
+		{
+
+		  STANDARDIZE,
+		  TOPOLOGICALLY_UNIQUE,
+		  GEOMETRICALLY_UNIQUE,
+		  EXHAUSTIVE
+		};
+
 		typedef CDPL::Base::DataOutputHandler<CDPL::Chem::MolecularGraph> OutputHandler;
 		typedef CDPL::Base::DataInputHandler<CDPL::Chem::Molecule> InputHandler;
 		typedef InputHandler::SharedPointer InputHandlerPtr;
@@ -124,6 +131,7 @@ namespace TautGen
 		bool                           multiThreading;
 		bool                           regardStereo;
 		bool                           regardIsotopes;
+		bool                           neutralize;
 		bool                           ketoEnol;
 		bool                           imineEnamine;
 		bool                           nitrosoOxime;

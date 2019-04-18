@@ -107,6 +107,7 @@ SET(chem_MOD_SRCS
     AtomHydrophobicityCalculatorExport.cpp
     BuriednessScoreExport.cpp
     BuriednessGridCalculatorExport.cpp
+    TautomerScoreExport.cpp
     TautomerGeneratorExport.cpp
     DefaultTautomerGeneratorExport.cpp
     TautomerizationRuleExport.cpp 

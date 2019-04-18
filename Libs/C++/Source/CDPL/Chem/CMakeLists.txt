@@ -87,6 +87,7 @@ SET(cdpl-chem_LIB_SRCS
     MaxCommonBondSubstructureSearch.cpp
     AutomorphismGroupSearch.cpp
     Reactor.cpp
+    TautomerScore.cpp
     TautomerGenerator.cpp
     DefaultTautomerGenerator.cpp
     PatternBasedTautomerizationRule.cpp 
@@ -283,6 +284,7 @@ SET(cdpl-chem_LIB_SRCS
     MoleculeHydrogenManipulationFunctions.cpp
     MoleculeReplaceStereoRefAtomsFunctions.cpp  
     MoleculeRemoveAtomsFunctions.cpp
+    MoleculeNeutralizeFunction.cpp
 
     FragmentHydrogenManipulationFunctions.cpp
     FragmentRemoveAtomsFunctions.cpp

@@ -80,6 +80,8 @@ namespace CDPL
 		 */
 		CDPL_CHEM_API bool makeHydrogenComplete(Molecule& mol);
 
+		CDPL_CHEM_API bool neutralize(Molecule& mol);
+
 		CDPL_CHEM_API void removeAtomsIf(Molecule& mol, const AtomPredicate& pred);
 
 		CDPL_CHEM_API void removeAtomsIfNot(Molecule& mol, const AtomPredicate& pred);

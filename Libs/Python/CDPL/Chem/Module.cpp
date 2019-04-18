@@ -139,6 +139,7 @@ BOOST_PYTHON_MODULE(_chem)
 	exportAtomHydrophobicityCalculator();
 	exportBuriednessScore();
 	exportBuriednessGridCalculator();
+	exportTautomerScore();
 	exportTautomerGenerator();
 	exportDefaultTautomerGenerator();
 	exportTautomerizationRule();

@@ -33,7 +33,6 @@
 #include "CDPL/Chem/SmallestSetOfSmallestRings.hpp"
 #include "CDPL/Chem/Atom.hpp"
 #include "CDPL/Chem/Bond.hpp"
-#include "CDPL/Chem/MolecularGraphFunctions.hpp"
 #include "CDPL/Base/Exceptions.hpp"
 #include "CDPL/Internal/RangeGenerator.hpp"
 
@@ -50,12 +49,91 @@ void Chem::SmallestSetOfSmallestRings::perceive(const MolecularGraph& molgraph)
 {
 	clear();
 
-	init(molgraph);
-	findSSSR();
-	createRingFragments();
+	cycleSubstruct.perceive(molgraph);
+	visAtomMask.resize(cycleSubstruct.getNumAtoms());
+	visAtomMask.reset();
+
+	std::size_t i = 0;
+	Fragment::ConstAtomIterator atoms_end = cycleSubstruct.getAtomsEnd();
+
+	for (Fragment::ConstAtomIterator it = cycleSubstruct.getAtomsBegin(); it != atoms_end; ++it, i++) {
+		if (!visAtomMask.test(i)) {
+			component.clear();
+
+			const Atom& atom = *it;
+
+			component.addAtom(atom);
+
+			visitComponentAtom(atom);
+
+			sssrSize = component.getNumBonds() + 1 - component.getNumAtoms();
+
+			if (sssrSize == 1) {
+				const Atom* r_atom = &atom;
+				Fragment::SharedPointer ring_ptr(new Fragment());
+				Fragment& ring = *ring_ptr;
+
+				while (true) {
+					ring.addAtom(*r_atom);
+
+					Atom::ConstBondIterator nb_it = r_atom->getBondsBegin();
+					Atom::ConstBondIterator nb_end = r_atom->getBondsEnd();
+
+					for (; nb_it != nb_end; ++nb_it) {
+						const Bond& bond = *nb_it;
+
+						if (!component.containsBond(bond))
+							continue;
+			
+						if (!ring.containsBond(bond)) {
+							ring.addBond(bond);
+							r_atom = &bond.getNeighbor(*r_atom);
+							break;
+						}
+					}
+
+					if (nb_it == nb_end)
+						break;
+				}
+
+				addElement(ring_ptr);
+				continue;
+			}
+
+			init();
+			findSSSR();
+			createRingFragments();
+		}
+	}
 }
 
-void Chem::SmallestSetOfSmallestRings::init(const MolecularGraph& molgraph)
+void Chem::SmallestSetOfSmallestRings::visitComponentAtom(const Atom& atom)
+{
+	visAtomMask.set(cycleSubstruct.getAtomIndex(atom));
+
+	Atom::ConstAtomIterator atoms_end = atom.getAtomsEnd();
+	Atom::ConstBondIterator b_it = atom.getBondsBegin();
+		
+	for (Atom::ConstAtomIterator a_it = atom.getAtomsBegin(); a_it != atoms_end; ++a_it, ++b_it) {
+		const Bond& bond = *b_it;
+
+		if (!cycleSubstruct.containsBond(bond))
+			continue;
+
+		const Atom& nbr_atom = *a_it;
+
+		if (!cycleSubstruct.containsAtom(nbr_atom))
+			continue;
+
+		if (!component.containsBond(bond))
+			component.addBond(bond);
+
+		if (!visAtomMask.test(cycleSubstruct.getAtomIndex(nbr_atom))) 
+			visitComponentAtom(nbr_atom);
+	}
+}
+
+void Chem::SmallestSetOfSmallestRings::init()
 {
 	sssr.clear();
 	procRings.clear();
@@ -70,12 +148,8 @@ void Chem::SmallestSetOfSmallestRings::init(const MolecularGraph& molgraph)
 	testRing = allocMessage();
 	linDepTestRing = allocMessage();
 
-	cycleSubstruct.perceive(molgraph);
-
-	std::size_t num_atoms = cycleSubstruct.getNumAtoms();
-	std::size_t num_bonds = cycleSubstruct.getNumBonds();
-
-	sssrSize = num_bonds + getComponentCount(cycleSubstruct) - num_atoms;
+	std::size_t num_atoms = component.getNumAtoms();
+	std::size_t num_bonds = component.getNumBonds();
 
 	nodes.clear();
 	nodes.reserve(num_atoms);
@@ -83,14 +157,14 @@ void Chem::SmallestSetOfSmallestRings::init(const MolecularGraph& molgraph)
 	std::generate_n(std::back_inserter(nodes), num_atoms, Internal::RangeGenerator<std::size_t>());
 
 	std::size_t bond_idx = 0;
-	
-	for (Fragment::ConstBondIterator it = cycleSubstruct.getBondsBegin(), end = cycleSubstruct.getBondsEnd(); it != end; ++it, bond_idx++) {
+
+	for (Fragment::ConstBondIterator it = component.getBondsBegin(), end = component.getBondsEnd(); it != end; ++it, bond_idx++) {
 		const Bond& bond = *it;
 		const Atom& atom1 = bond.getBegin();
 		const Atom& atom2 = bond.getEnd();
 
-		std::size_t atom1_idx = cycleSubstruct.getAtomIndex(atom1);
-		std::size_t atom2_idx = cycleSubstruct.getAtomIndex(atom2);
+		std::size_t atom1_idx = component.getAtomIndex(atom1);
+		std::size_t atom2_idx = component.getAtomIndex(atom2);
 
 		TNode::connect(this, &nodes[atom1_idx], &nodes[atom2_idx], bond_idx, num_atoms, num_bonds);
 	}
@@ -122,7 +196,7 @@ void Chem::SmallestSetOfSmallestRings::createRingFragments()
 	MessageList::const_iterator sssr_end = sssr.end();
 
 	for (MessageList::const_iterator it = sssr.begin(); it != sssr_end; ++it)
-		addElement((*it)->createRing(cycleSubstruct));
+		addElement((*it)->createRing(component));
 }
 
 bool Chem::SmallestSetOfSmallestRings::sssrComplete() const
@@ -417,7 +491,6 @@ Chem::Fragment::SharedPointer Chem::SmallestSetOfSmallestRings::PathMessage::cre
 {
 	Fragment::SharedPointer ring_ptr(new Fragment());
 	Fragment& ring = *ring_ptr;
-
 	const Atom* atom = &molgraph.getAtom(firstAtomIdx);
 
 	ring.addAtom(*atom);
