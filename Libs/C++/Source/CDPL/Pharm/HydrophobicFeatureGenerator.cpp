@@ -260,7 +260,7 @@ void Pharm::HydrophobicFeatureGenerator::genGroupFeatures(Pharmacophore& pharm)
 		
 		if (num_hvy_bonds < 3 || featureAtoms.empty()) 
 			continue;
-		
+
 		buildAtomMask(featureAtoms, tmpAtomMask);
 
 		procAtomMask |= tmpAtomMask;
@@ -270,7 +270,7 @@ void Pharm::HydrophobicFeatureGenerator::genGroupFeatures(Pharmacophore& pharm)
 
 		// check min. summed hydrophobicity
 
-		if (calcSummedHydrophobicity(featureAtoms) < hydThreshGroup)
+		if (calcSummedHydrophobicity(featureAtoms) < hydThreshGroup) 
 			continue;
 
 		emitFeature(featureAtoms, pharm, makeFragment(featureAtoms));
@@ -380,9 +380,9 @@ void Pharm::HydrophobicFeatureGenerator::processChain(Pharmacophore& pharm)
 			hyd_sum += atomHydTable[atom_idx];
 		} 
 
-		if (hyd_sum < hydThreshChain) 
+		if (hyd_sum < hydThreshChain)
 			break;
-		
+
 		if (isContainedInExMatchList(tmpAtomMask) || isContainedInIncMatchList(tmpAtomMask))
 			continue;
 
@@ -681,7 +681,7 @@ bool Pharm::HydrophobicFeatureGenerator::isChainEndAtom(const Chem::Atom& atom) 
 {
 	using namespace Chem;
 
-	bool found_unproc_nbr;
+	bool found_unproc_nbr = false;
 	Atom::ConstAtomIterator a_it = atom.getAtomsBegin();
 
 	for (Atom::ConstBondIterator b_it = atom.getBondsBegin(), b_end = atom.getBondsEnd(); b_it != b_end; ++b_it, ++a_it) {
