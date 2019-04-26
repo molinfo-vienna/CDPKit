@@ -921,6 +921,7 @@ void Biomol::PDBDataReader::processAtomSequence(Chem::Molecule& mol, bool chain_
 			Atom* atom = *res_as_it;
 			const std::string& atom_name = getResidueAtomName(*atom);
 			Math::Vector3DArray::SharedPointer coords;
+			char alt_loc_id = getAltLocationID(*atom);
 
 			currResidueAtoms[atom_name] = atom;
 
@@ -929,6 +930,9 @@ void Biomol::PDBDataReader::processAtomSequence(Chem::Molecule& mol, bool chain_
 				const std::string& next_atom_name = getResidueAtomName(*next_atom);
 
 				if (next_atom_name != atom_name)
+					break;
+
+				if (getAltLocationID(*next_atom) == alt_loc_id)
 					break;
 
 				if (!coords) {
