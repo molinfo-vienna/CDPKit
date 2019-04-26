@@ -32,6 +32,10 @@
 
 #include "ClassExports.hpp"
 
+#ifdef HAVE_NUMPY
+# include "NumPy.hpp"
+#endif
+
 
 namespace
 {
@@ -51,8 +55,52 @@ namespace
 					 python::return_internal_reference<>, python::default_call_policies, 
 					 python::default_call_policies, python::default_call_policies>())
 				.def("__eq__", &ArrayType::operator==, (python::arg("self"), python::arg("array")))
-				.def("__ne__", &ArrayType::operator!=, (python::arg("self"), python::arg("array")));
+				.def("__ne__", &ArrayType::operator!=, (python::arg("self"), python::arg("array")))
+#ifdef HAVE_NUMPY
+				.def("toArray", &toArray, (python::arg("self"), python::arg("as_vec")))
+#endif
+				;
 		}
+#ifdef HAVE_NUMPY
+		static boost::python::object toArray(const ArrayType& va, bool as_vec) {
+			using namespace boost;
+
+			if (!NumPy::available())
+				python::object();			
+
+			typedef typename ArrayType::ValueType::ValueType ValueType;
+
+			if (as_vec) {
+				npy_intp shape[] = { npy_intp(va.getSize() * Dim) };
+				PyObject* array = PyArray_SimpleNew(1, shape, NumPy::DataTypeNum<ValueType>::Value);
+
+				if (array) {
+					ValueType* data = static_cast<ValueType*>(PyArray_GETPTR1(reinterpret_cast<PyArrayObject*>(array), 0));
+
+					for (std::size_t i = 0, size = va.getSize(); i < size; i++) 
+						for (std::size_t j = 0; j < Dim; j++, data++) 
+						*data = va[i][j];
+
+					return python::object(python::handle<>(array));
+				}
+
+			} else {
+				npy_intp shape[] = { npy_intp(va.getSize()), npy_intp(Dim) };
+				PyObject* py_obj = PyArray_SimpleNew(2, shape, NumPy::DataTypeNum<ValueType>::Value);
+				PyArrayObject* array = reinterpret_cast<PyArrayObject*>(py_obj);
+
+				if (array) {
+					for (std::size_t i = 0, size = mtx.getSize(); i < size; i++)
+						for (std::size_t j = 0; j < Dim; j++)
+							*static_cast<ValueType*>(PyArray_GETPTR2(array, i, j)) = va[i][j];
+
+					return python::object(python::handle<>(py_obj));
+				}
+			}
+
+			return python::object();			
+		}
+#endif
 	};
 }
 

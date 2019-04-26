@@ -39,11 +39,15 @@
 #include "MatrixExpressionAdapter.hpp"
 #include "VectorExpressionAdapter.hpp"
 
+#ifdef HAVE_NUMPY
+# include "NumPy.hpp"
+#endif
+
 
 #if (CDPL_MATH_CHECKS_DISABLE == 0)
-#define CHECK_MATRIX_INDICES(m, i, j)
+# define CHECK_MATRIX_INDICES(m, i, j)
 #else
-#define CHECK_MATRIX_INDICES(m, i, j) \
+# define CHECK_MATRIX_INDICES(m, i, j) \
 	if (i >= m.getSize1() || j >= m.getSize2()) {						\
 		throw CDPL::Base::IndexError("Matrix: element index out of bounds"); \
 	}
@@ -92,10 +96,33 @@ namespace CDPLPythonMath
 				.def("__mul__", &mulOperatorVecExpr, (python::arg("self"), python::arg("e")))
 				.def("__div__", &divOperator, (python::arg("self"), python::arg("t")))
 				.def("__rmul__", &rmulOperator, (python::arg("self"), python::arg("t")))
+#ifdef HAVE_NUMPY
+				.def("toArray", &toArray, python::arg("self"))
+#endif
 				.add_property("size1", &MatrixType::getSize1)
 				.add_property("size2", &MatrixType::getSize2);
 		}
+#ifdef HAVE_NUMPY
+		static boost::python::object toArray(const MatrixType& mtx) {
+			using namespace boost;
 
+			if (NumPy::available()) {
+				npy_intp shape[] = { npy_intp(mtx.getSize1()), npy_intp(mtx.getSize2()) };
+				PyObject* py_obj = PyArray_SimpleNew(2, shape, NumPy::DataTypeNum<typename MatrixType::ValueType>::Value);
+				PyArrayObject* array = reinterpret_cast<PyArrayObject*>(py_obj);
+
+				if (array) {
+					for (std::size_t i = 0, size1 = mtx.getSize1(), size2 = mtx.getSize2(); i < size1; i++)
+						for (std::size_t j = 0; j < size2; j++)
+							*static_cast<typename MatrixType::ValueType*>(PyArray_GETPTR2(array, i, j)) = mtx(i, j);
+
+					return python::object(python::handle<>(py_obj));
+				}
+			}
+
+			return python::object();			
+		}
+#endif
 		static bool eqOperator(const MatrixType& mtx1, const MatrixType& mtx2) {
 			return (mtx1 == mtx2);
 		}

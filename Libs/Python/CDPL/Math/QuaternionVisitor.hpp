@@ -37,6 +37,10 @@
 #include "QuaternionExpression.hpp"
 #include "QuaternionExpressionAdapter.hpp"
 
+#ifdef HAVE_NUMPY
+# include "NumPy.hpp"
+#endif
+
 
 namespace CDPLPythonMath
 {
@@ -79,9 +83,35 @@ namespace CDPLPythonMath
 				.def("__mul__", &mulOperatorExpr, (python::arg("self"), python::arg("e")))
 				.def("__div__", &divOperator, (python::arg("self"), python::arg("t")))
 				.def("__rdiv__", &rdivOperator, (python::arg("self"), python::arg("t")))
-				.def("__div__", &divOperatorExpr, (python::arg("self"), python::arg("e")));
+				.def("__div__", &divOperatorExpr, (python::arg("self"), python::arg("e")))
+#ifdef HAVE_NUMPY
+				.def("toArray", &toArray, python::arg("self"))
+#endif
+				;
 		}
-	
+#ifdef HAVE_NUMPY
+		static boost::python::object toArray(const QuaternionType& quat) {
+			using namespace boost;
+
+			if (NumPy::available()) {
+				npy_intp shape[] = { 4 };
+				PyObject* array = PyArray_SimpleNew(1, shape, NumPy::DataTypeNum<typename QuaternionType::ValueType>::Value);
+
+				if (array) {
+					typename QuaternionType::ValueType* data = static_cast<typename QuaternionType::ValueType*>(PyArray_GETPTR1(reinterpret_cast<PyArrayObject*>(array), 0));
+
+					data[0] = quat.getC1();
+					data[1] = quat.getC2();
+					data[2] = quat.getC3();
+					data[3] = quat.getC4();
+
+					return python::object(python::handle<>(array));
+				}
+			}
+
+			return python::object();			
+		}
+#endif	
 		static ValueType getC1(const QuaternionType& quat) {
 			return quat.getC1();
 		}

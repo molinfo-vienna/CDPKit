@@ -37,11 +37,15 @@
 #include "GridExpression.hpp"
 #include "GridExpressionAdapter.hpp"
 
+#ifdef HAVE_NUMPY
+# include "NumPy.hpp"
+#endif
+
  
 #if (CDPL_MATH_CHECKS_DISABLE == 0)
-#define CHECK_GRID_INDICES(g, i, j, k)
+# define CHECK_GRID_INDICES(g, i, j, k)
 #else
-#define CHECK_GRID_INDICES(g, i, j, k)									\
+# define CHECK_GRID_INDICES(g, i, j, k)									\
 	if (i >= g.getSize1() || j >= g.getSize2() || k >= g.getSize3()) {	\
 		throw CDPL::Base::IndexError("Grid: element index out of bounds"); \
 	}
@@ -113,11 +117,35 @@ namespace CDPLPythonMath
 				.def("__mul__", &mulOperator, (python::arg("self"), python::arg("t")))
 				.def("__div__", &divOperator, (python::arg("self"), python::arg("t")))
 				.def("__rmul__", &rmulOperator, (python::arg("self"), python::arg("t")))
+#ifdef HAVE_NUMPY
+				.def("toArray", &toArray, python::arg("self"))
+#endif
 				.add_property("size1", &GridType::getSize1)
 				.add_property("size2", &GridType::getSize2)
 				.add_property("size3", &GridType::getSize3);
 		}
+#ifdef HAVE_NUMPY
+		static boost::python::object toArray(const GridType& grd) {
+			using namespace boost;
 
+			if (NumPy::available()) {
+				npy_intp shape[] = { npy_intp(grd.getSize1()), npy_intp(grd.getSize2()), npy_intp(grd.getSize3()) };
+				PyObject* py_obj = PyArray_SimpleNew(3, shape, NumPy::DataTypeNum<typename GridType::ValueType>::Value);
+				PyArrayObject* array = reinterpret_cast<PyArrayObject*>(py_obj);
+
+				if (array) {
+					for (std::size_t i = 0, size1 = grd.getSize1(), size2 = grd.getSize2(), size3 = grd.getSize3(); i < size1; i++)
+						for (std::size_t j = 0; j < size2; j++)
+							for (std::size_t k = 0; k < size3; k++)
+								*static_cast<typename GridType::ValueType*>(PyArray_GETPTR3(array, i, j, k)) = grd(i, j, k);
+
+					return python::object(python::handle<>(py_obj));
+				}
+			}
+
+			return python::object();			
+		}
+#endif
 		static bool eqOperator(const GridType& grd1, const GridType& grd2) {
 			return (grd1 == grd2);
 		}

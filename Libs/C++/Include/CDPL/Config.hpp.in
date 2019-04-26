@@ -84,6 +84,11 @@
  */
 #cmakedefine HAVE_BOOST_IOSTREAMS
 
+/**	
+ * \brief Defined if the \e NumPy python module is available.
+ */
+#cmakedefine HAVE_NUMPY
+
 /**
  * \brief The size of <tt>long int</tt>.
  */

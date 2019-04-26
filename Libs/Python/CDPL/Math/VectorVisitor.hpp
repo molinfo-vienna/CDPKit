@@ -38,11 +38,15 @@
 #include "MatrixExpression.hpp"
 #include "VectorExpressionAdapter.hpp"
 
+#ifdef HAVE_NUMPY
+# include "NumPy.hpp"
+#endif
+
 
 #if (CDPL_MATH_CHECKS_DISABLE == 0)
-#define CHECK_VECTOR_INDEX(v, i)
+# define CHECK_VECTOR_INDEX(v, i)
 #else
-#define CHECK_VECTOR_INDEX(v, i) \
+# define CHECK_VECTOR_INDEX(v, i) \
 	if (i >= v.getSize()) {						\
 		throw CDPL::Base::IndexError("Vector: element index out of bounds"); \
 	}
@@ -90,9 +94,32 @@ namespace CDPLPythonMath
 				.def("__mul__", &mulOperatorMtxExpr, (python::arg("self"), python::arg("e")))
 				.def("__div__", &divOperator, (python::arg("self"), python::arg("t")))
 				.def("__rmul__", &rmulOperator, (python::arg("self"), python::arg("t")))
+#ifdef HAVE_NUMPY
+				.def("toArray", &toArray, python::arg("self"))
+#endif
 				.add_property("size", &VectorType::getSize);
 		}
-	
+#ifdef HAVE_NUMPY
+		static boost::python::object toArray(const VectorType& vec) {
+			using namespace boost;
+
+			if (NumPy::available()) {
+				npy_intp shape[] = { npy_intp(vec.getSize()) };
+				PyObject* array = PyArray_SimpleNew(1, shape, NumPy::DataTypeNum<typename VectorType::ValueType>::Value);
+
+				if (array) {
+					typename VectorType::ValueType* data = static_cast<typename VectorType::ValueType*>(PyArray_GETPTR1(reinterpret_cast<PyArrayObject*>(array), 0));
+
+					for (std::size_t i = 0, size = vec.getSize(); i < size; i++, data++) 
+						*data = vec[i];
+
+					return python::object(python::handle<>(array));
+				}
+			}
+
+			return python::object();			
+		}
+#endif
 		static std::string toString(const VectorType& vec) {
 			std::ostringstream oss;
 
