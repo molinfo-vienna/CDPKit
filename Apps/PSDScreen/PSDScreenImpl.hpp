@@ -158,6 +158,7 @@ namespace PSDScreen
 		std::size_t              numDBMolecules;
 		std::size_t              numDBPharms;
 		std::size_t              numHits;
+		std::size_t              maxNumHits;
 		int                      lastProgValue;
 		WorkerProgressArray      workerProgArray;
     };

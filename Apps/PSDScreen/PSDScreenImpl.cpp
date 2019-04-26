@@ -159,7 +159,7 @@ PSDScreenImpl::PSDScreenImpl():
 	outputConfIndex(false), outputDBName(false), outputPharmName(false), outputPharmIndex(false), multiThreading(false), 
 	numThreads(boost::thread::hardware_concurrency()), startMolIndex(0), endMolIndex(0), maxOmittedFtrs(0),
 	matchingMode(CDPL::Pharm::ScreeningProcessor::FIRST_MATCHING_CONF), hitOutputHandler(), 
-	queryInputHandler(), numQueryPharms(0), numDBMolecules(0), numDBPharms(0), numHits(0), lastProgValue(-1)
+	queryInputHandler(), numQueryPharms(0), numDBMolecules(0), numDBPharms(0), numHits(0), maxNumHits(0), lastProgValue(-1)
 {
 	addOption("database,d", "Screening database file.", 
 			  value<std::string>(&screeningDB)->required());
@@ -174,6 +174,8 @@ PSDScreenImpl::PSDScreenImpl():
 	addOption("end-index,e", "Screening range end molecule index (zero-based and not included"
 			  " in screening!, default: one after last molecule).", 
 			  value<std::size_t>(&endMolIndex)->default_value(0));
+	addOption("max-num-hits,X", "Maxmimum number of hits to report (default: no limit).", 
+			  value<std::size_t>(&maxNumHits)->default_value(0));
 	addOption("max-omitted,M", "Maximum number of allowed unmatched features.", 
 			  value<std::size_t>(&maxOmittedFtrs)->default_value(0));
 	addOption("check-xvols,x", "Check for exclusion volume clashes (default: true).", 
@@ -422,6 +424,9 @@ bool PSDScreenImpl::doCollectHit(const SearchHit& hit, double score)
 		return false;
 
 	try {
+		if (maxNumHits > 0 && numHits >= maxNumHits)
+			return false;
+
 		numHits++;
 
 		return (*hitCollector)(hit, score);
@@ -592,6 +597,7 @@ void PSDScreenImpl::printOptionSummary()
 	printMessage(VERBOSE, " Max. Num. Omitted Features:   " + boost::lexical_cast<std::string>(maxOmittedFtrs));
  	printMessage(VERBOSE, " Screening Start Molecule:     " + boost::lexical_cast<std::string>(startMolIndex));
  	printMessage(VERBOSE, " Screening End Molecule:       " + (endMolIndex != 0 ? boost::lexical_cast<std::string>(startMolIndex) : std::string("Last")));
+ 	printMessage(VERBOSE, " Maximum Number of Hits:       " + (maxNumHits != 0 ? boost::lexical_cast<std::string>(maxNumHits) : std::string("No Limit")));
  	printMessage(VERBOSE, " Check X-Volume Clashes:       " + std::string(checkXVols ? "Yes" : "No"));
  	printMessage(VERBOSE, " Align Hit Molecules:          " + std::string(alignConfs ? "Yes" : "No"));
  	printMessage(VERBOSE, " Seek Best Alignments:         " + std::string(bestAlignments ? "Yes" : "No"));
