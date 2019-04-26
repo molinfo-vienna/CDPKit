@@ -146,7 +146,8 @@ public:
 				if (parent->mode == STANDARDIZE && numGenMolTauts > 0) {
 					perceiveComponents(stdTautomer, true);
 					perceiveSSSR(stdTautomer, true);
-					outputMolecule(stdTautomer, tautScore);
+
+					outputMolecule(stdTautomer, tautScore, hashCode);
 				}
 
 				if (parent->getVerbosityLevel() >= VERBOSE) {
@@ -215,34 +216,39 @@ private:
 		h13_shift->addExcludePatterns(*amide_imidic);
 		h13_shift->addExcludePatterns(*lactam_lactim);
 		h13_shift->addExcludePatterns(*nitro_aci);
-/*
-		h15_shift->addExcludePatterns(*keto_enol);
-		h15_shift->addExcludePatterns(*imine_enamine);
-		h15_shift->addExcludePatterns(*nitroso_oxime);
-		h15_shift->addExcludePatterns(*amide_imidic);
-		h15_shift->addExcludePatterns(*lactam_lactim);
-		h15_shift->addExcludePatterns(*nitro_aci);
-*/	
+
 		if (parent->ketoEnol)
 			tautGen.addTautomerizationRule(keto_enol);
+		else
+			h15_shift->addExcludePatterns(*keto_enol);
 
 		if (parent->imineEnamine)
 			tautGen.addTautomerizationRule(imine_enamine);
+		else
+			h15_shift->addExcludePatterns(*imine_enamine);
 
 		if (parent->amideImidicAcid)
 			tautGen.addTautomerizationRule(amide_imidic);
+		else
+			h15_shift->addExcludePatterns(*amide_imidic);
 
 		if (parent->lactamLactim)
 			tautGen.addTautomerizationRule(lactam_lactim);
+		else
+			h15_shift->addExcludePatterns(*lactam_lactim);
 
 		if (parent->nitrosoOxime)
 			tautGen.addTautomerizationRule(nitroso_oxime);
+		else
+			h15_shift->addExcludePatterns(*nitroso_oxime);
 
 		if (parent->keteneYnol)
 			tautGen.addTautomerizationRule(ketene_ynol);
 
 		if (parent->nitroAci)
 			tautGen.addTautomerizationRule(nitro_aci);
+		else
+			h15_shift->addExcludePatterns(*nitro_aci);
 
 		if (parent->phosphinicAcid)
 			tautGen.addTautomerizationRule(posph_acid);
@@ -269,18 +275,18 @@ private:
 
 		initMolecule(taut, false);
 
+		if (parent->regardStereo) {
+			calcCIPPriorities(taut, false);
+			calcAtomCIPConfigurations(taut, false);
+			calcBondCIPConfigurations(taut, false);
+		}
+
 		double score = tautScoreCalc(taut);
 
 		if (parent->mode != STANDARDIZE) {
-			outputMolecule(taut, score);
+			outputMolecule(taut, score, hashCalc.calculate(taut));
 
 		} else if (score >= tautScore) {
-			if (parent->regardStereo) {
-				calcCIPPriorities(taut, false);
-				calcAtomCIPConfigurations(taut, false);
-				calcBondCIPConfigurations(taut, false);
-			}
-
 			Base::uint64 hash = hashCalc.calculate(taut);
 
 			if (score > tautScore || hash > hashCode) {
@@ -306,13 +312,14 @@ private:
 		setAromaticityFlags(molgraph, override);
 	}
 
-	void outputMolecule(CDPL::Chem::MolecularGraph& molgraph, double score) const {
+	void outputMolecule(CDPL::Chem::MolecularGraph& molgraph, double score, CDPL::Base::uint64 hash) {
 		using namespace CDPL;
 		using namespace Chem;
 
 		StringDataBlock::SharedPointer sd(new StringDataBlock());
 
 		sd->addEntry("<Tautomer Score>", boost::lexical_cast<std::string>(score));
+		sd->addEntry("<Tautomer ID>", boost::lexical_cast<std::string>(hash));
 
 		setStructureData(molgraph, sd);
 
@@ -344,7 +351,7 @@ TautGenImpl::TautGenImpl():
 	phosphinicAcid(true), sulfenicAcid(true), genericH13Shift(true),
 	genericH15Shift(true), numThreads(boost::thread::hardware_concurrency()),
 	maxNumTautomers(0),	mode(Mode::TOPOLOGICALLY_UNIQUE), 
-	inputHandler(), outputHandler(), outputWriter()
+	inputHandler(), outputHandler(), outputWriter(), numOutTautomers(0)
 {
 	addOption("input,i", "Input file(s).", 
 			  value<StringList>(&inputFiles)->multitoken()->required());
@@ -655,6 +662,7 @@ void TautGenImpl::printStatistics(std::size_t num_proc_mols, std::size_t num_gen
 	printMessage(INFO, "Statistics:");
 	printMessage(INFO, " Processed Molecules: " + boost::lexical_cast<std::string>(num_proc_mols));
 	printMessage(INFO, " Generated Tautomers: " + boost::lexical_cast<std::string>(num_gen_tauts));
+	printMessage(INFO, " Output Tautomers:    " + boost::lexical_cast<std::string>(numOutTautomers));
 	printMessage(INFO, " Processing Time:     " + AppUtils::formatTimeDuration(proc_time));
 	printMessage(INFO, "");
 }
@@ -728,6 +736,8 @@ void TautGenImpl::doWriteMolecule(const CDPL::Chem::MolecularGraph& mol)
 {
 	if (!outputWriter->write(mol))
 		throw CDPL::Base::IOError("could not write generated tautomer");
+
+	numOutTautomers++;
 }
 
 void TautGenImpl::checkInputFiles() const
@@ -846,6 +856,8 @@ void TautGenImpl::initOutputWriter()
 	outputWriter = output_handler->createWriter(outputFile);
 
 	setSMILESRecordFormatParameter(*outputWriter, "SN");
+	setSMILESWriteCanonicalFormParameter(*outputWriter, true);
+
 	setMultiConfExportParameter(*outputWriter, false);
 }
 

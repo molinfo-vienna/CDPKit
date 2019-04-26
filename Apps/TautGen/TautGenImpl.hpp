@@ -154,6 +154,7 @@ namespace TautGen
 		boost::mutex                   outputMutex;
 		std::string                    errorMessage;
 		Clock::time_point              startTime;
+		std::size_t                    numOutTautomers;
     };
 }
 

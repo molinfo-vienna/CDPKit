@@ -67,6 +67,7 @@ namespace CDPL
 
 		  private:
 			double getAtomTypeScoreIncrement(unsigned int type) const;
+			double getExocyclicBondIncrement(const Bond& bond) const;
 
 			std::size_t getUnsaturatedNeighborCount(const Atom& atom, const Bond& bond, const MolecularGraph& molgraph) const;
 
