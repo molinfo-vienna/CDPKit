@@ -118,6 +118,7 @@ BOOST_PYTHON_MODULE(_pharm)
 	exportParallelPiPiInteractionConstraint();
 	exportCationPiInteractionConstraint();
 	exportHBondingInteractionConstraint();
+	exportInteractionPharmacophoreGenerator();
 
 	exportInteractionScoreCombiner();
 	exportFeatureDistanceScore();
@@ -160,6 +161,7 @@ BOOST_PYTHON_MODULE(_pharm)
 	exportFeatureSetFunctions();
 	exportAttributedGridFunctions();
 	exportControlParameterFunctions();
+	exportUtilityFunctions();
 
 	exportBoostFunctionWrappers();
 

@@ -26,15 +26,25 @@
 
 #include <boost/python.hpp>
 
+#include "CDPL/Config.hpp"
+
 #include "ClassExports.hpp"
 #include "FunctionExports.hpp"
 #include "NamespaceExports.hpp"
 #include "ConverterRegistration.hpp"
 
+#ifdef HAVE_NUMPY
+# include "Math/NumPy.hpp"
+#endif // HAVE_NUMPY
+
 
 BOOST_PYTHON_MODULE(_grid)
 {
 	using namespace CDPLPythonGrid;
+
+#ifdef HAVE_NUMPY
+	CDPLPythonMath::NumPy::init();
+#endif // HAVE_NUMPY
 
 	exportAttributedGrid();
 	exportSpatialGrid();

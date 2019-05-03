@@ -323,7 +323,7 @@ bool Biomol::PDBDataReader::readPDBFile(std::istream& is, Chem::Molecule& mol)
 	}
 
 	checkMandatoryRecords();
-	processAtomSequence(mol, false);
+	processAtomSequence(mol, true);
 
 	if (getCombineInterferingResidueCoordinatesParameter(ioBase))
 		combineInterferingResidueCoordinates(mol);
@@ -981,14 +981,14 @@ void Biomol::PDBDataReader::processAtomSequence(Chem::Molecule& mol, bool chain_
 
 					Atom* res_atom1 = currResidueAtoms[getResTemplateAtomName(bond.getBegin())];
 
-					if (!res_atom1)
+					if (!res_atom1) 
 						continue;
 
 					Atom* res_atom2 = currResidueAtoms[getResTemplateAtomName(bond.getEnd())];
 
 					if (!res_atom2) 
 						continue;
-				
+
 					mol.addBond(mol.getAtomIndex(*res_atom1), mol.getAtomIndex(*res_atom2));
 				}
 			}

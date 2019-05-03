@@ -248,3 +248,39 @@ bool Biomol::matchesResidueInfo(const Chem::MolecularGraph& molgraph, const char
 
     return true;
 }
+
+void Biomol::convertMOL2ToPDBResidueInfo(Chem::MolecularGraph& molgraph, bool overwrite)
+{
+    using namespace Chem;
+
+    for (MolecularGraph::AtomIterator it = molgraph.getAtomsBegin(), end = molgraph.getAtomsEnd(); it != end; ++it) {
+	Atom& atom = *it;
+
+	if (overwrite) {
+	    if (hasMOL2SubstructureName(atom))
+		setResidueCode(atom, getMOL2SubstructureName(atom));
+	    
+	    if (hasMOL2SubstructureID(atom))
+		setResidueSequenceNumber(atom, getMOL2SubstructureID(atom));
+  
+	    if (hasMOL2SubstructureChain(atom))
+		setChainID(atom, getMOL2SubstructureChain(atom));
+  
+	    if (hasMOL2Name(atom))
+		setResidueAtomName(atom, getMOL2Name(atom));
+
+	} else {
+	    if (!hasResidueCode(atom) && hasMOL2SubstructureName(atom))
+		setResidueCode(atom, getMOL2SubstructureName(atom));
+	    
+	    if (!hasResidueSequenceNumber(atom) && hasMOL2SubstructureID(atom))
+		setResidueSequenceNumber(atom, getMOL2SubstructureID(atom));
+  
+	    if (!hasChainID(atom) && hasMOL2SubstructureChain(atom))
+		setChainID(atom, getMOL2SubstructureChain(atom));
+
+	    if (!hasResidueAtomName(atom) && hasMOL2Name(atom))
+		setResidueAtomName(atom, getMOL2Name(atom));
+	}
+    }
+}

@@ -104,6 +104,8 @@ namespace CDPL
 			void findSSSR();
 			void createRingFragments();
 
+			Fragment::SharedPointer createRing(const MolecularGraph& molgraph, PathMessage* msg);
+
 			bool sssrComplete() const;
 
 			PathMessage* allocMessage();
@@ -111,7 +113,7 @@ namespace CDPL
 
 			void freeMessage(PathMessage*);
 
-			bool processCollision(const PathMessage*, const PathMessage*, bool);
+			bool processCollision(const PathMessage*, const PathMessage*, std::size_t, bool);
 			void processRing(PathMessage*);
 			void processEvenRings();
 
@@ -119,18 +121,30 @@ namespace CDPL
 			{
 
 			public:
-				TNode(std::size_t idx): index(idx) {}
+				TNode(std::size_t idx): index(idx), active(true) {}
 
 				bool send(Controller*);
 				bool receive(Controller*);
 
-				void freeMessages(Controller*);
-
 				std::size_t getIndex() const;
+				std::size_t getNumNeighbors() const;
 
-				static void connect(Controller*, TNode*, TNode*, std::size_t, std::size_t, std::size_t);
+				void initMessages(Controller* ctrl, std::size_t max_num_atoms, std::size_t max_num_bonds);
+
+				void compressLinearRingFrags() const;
+
+				bool isActive() const;
+
+				Util::BitSet& getLinearRingFragBondMask();
+
+				static void connect(TNode*, TNode*, std::size_t);
 
 			private:
+				std::size_t disconnect(TNode* nbr_node);
+
+				void collectLinearFragNodes(TNode* coll_node, const TNode* last_node);
+				void setCollectedBondBit(std::size_t idx);
+
 				typedef std::vector<TNode*> NodeList;
 				typedef std::vector<std::size_t> BondIndexList;
 				typedef std::vector<PathMessage*> MessageBuffer;
@@ -140,6 +154,8 @@ namespace CDPL
 				MessageBuffer receiveBuffer;
 				MessageBuffer sendBuffer;
 				std::size_t   index;
+				Util::BitSet  collBondMask;
+				bool          active;
 			};
 
 			class PathMessage
@@ -147,6 +163,12 @@ namespace CDPL
 
 			public:
 				typedef boost::shared_ptr<PathMessage> SharedPointer;
+
+				struct LessCmpFunc : public std::binary_function<const PathMessage*, const PathMessage*, bool>
+				{
+
+					bool operator()(const PathMessage*, const PathMessage*) const;
+				};
 
 				PathMessage() {} 
 				PathMessage(std::size_t, std::size_t, std::size_t, std::size_t); 
@@ -156,7 +178,8 @@ namespace CDPL
 				void copy(const PathMessage*);
 				bool join(const PathMessage*, const PathMessage*);
 
-				void push(std::size_t, std::size_t);
+				void addAtom(std::size_t);
+				void addBond(std::size_t);
 
 				bool containsAtom(std::size_t const);
 				bool containsBond(std::size_t const);
@@ -165,17 +188,19 @@ namespace CDPL
 				std::size_t getFirstBondIndex() const;
 				
 				std::size_t getMaxBondIndex() const;
-				std::size_t getNumBonds() const;
 
-				Fragment::SharedPointer createRing(const MolecularGraph&) const;
+				const Util::BitSet& getAtomMask() const;
+				const Util::BitSet& getBondMask() const;
+
+				void clearFlags();
+
+				void setRemoveFlag();
+				void setEdgeCollisionFlag();
+
+				bool getRemoveFlag() const;
+				bool getEdgeCollisionFlag() const;
 
 				PathMessage& operator^=(const PathMessage&);
-
-				struct LessCmpFunc : public std::binary_function<const PathMessage*, const PathMessage*, bool>
-				{
-
-					bool operator()(const PathMessage*, const PathMessage*) const;
-				};
 
 			private:
 				Util::BitSet atomPath;
@@ -183,6 +208,8 @@ namespace CDPL
 				std::size_t  firstAtomIdx;
 				std::size_t  firstBondIdx;
 				std::size_t  maxBondIdx;
+				bool         removeFlag;
+				bool         edgeCollFlag;
 			};
 
 			struct TestMatrixRowCmpFunc : public std::binary_function<const PathMessage*, const PathMessage*, bool>
@@ -196,7 +223,7 @@ namespace CDPL
 			typedef std::vector<PathMessage::SharedPointer> AllocMessageList;
 			typedef std::set<const PathMessage*, PathMessage::LessCmpFunc> ProcRingSet;
 
-			CyclicSubstructure       cycleSubstruct;
+			CyclicSubstructure       cyclicSubstruct;
 			Fragment                 component;
 			Util::BitSet             visAtomMask;
 			NodeArray                nodes;
@@ -209,6 +236,7 @@ namespace CDPL
 			MessageList              linDepTestMtx;
 			MessageList              sssr;
 			std::size_t              sssrSize;
+			Util::BitSet             ringBondMask;
 		};
 
 		/**

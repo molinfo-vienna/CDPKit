@@ -150,6 +150,7 @@ void CDPLPythonBiomol::exportUtilityFunctions()
 	python::scope().attr("IGNORE_SEQUENCE_NO") = Biomol::IGNORE_SEQUENCE_NO;
 	python::scope().attr("IGNORE_SERIAL_NO") = Biomol::IGNORE_SERIAL_NO;
 
+	python::def("convertMOL2ToPDBResidueInfo", &Biomol::convertMOL2ToPDBResidueInfo, (python::arg("molgraph"), python::arg("override")));
 	python::def("isPDBBackboneAtom", &isPDBBackboneAtomWrapper1, python::arg("atom"));
 	python::def("combineInterferingResidueCoordinates", &Biomol::combineInterferingResidueCoordinates, 
 				(python::arg("mol"), python::arg("max_ctr_dist") = 1.0));

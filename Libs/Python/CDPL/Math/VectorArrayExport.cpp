@@ -26,6 +26,7 @@
 
 #include <boost/python.hpp>
 
+#include "CDPL/Config.hpp"
 #include "CDPL/Math/VectorArray.hpp"
 
 #include "Util/ArrayVisitor.hpp"
@@ -64,6 +65,7 @@ namespace
 #ifdef HAVE_NUMPY
 		static boost::python::object toArray(const ArrayType& va, bool as_vec) {
 			using namespace boost;
+			using namespace CDPLPythonMath;
 
 			if (!NumPy::available())
 				python::object();			
@@ -90,7 +92,7 @@ namespace
 				PyArrayObject* array = reinterpret_cast<PyArrayObject*>(py_obj);
 
 				if (array) {
-					for (std::size_t i = 0, size = mtx.getSize(); i < size; i++)
+					for (std::size_t i = 0, size = va.getSize(); i < size; i++)
 						for (std::size_t j = 0; j < Dim; j++)
 							*static_cast<ValueType*>(PyArray_GETPTR2(array, i, j)) = va[i][j];
 

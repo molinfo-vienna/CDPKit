@@ -67,6 +67,8 @@ namespace CDPL
 		const long IGNORE_SERIAL_NO   = std::numeric_limits<long>::min();
 
 
+		CDPL_BIOMOL_API void convertMOL2ToPDBResidueInfo(Chem::MolecularGraph& molgraph, bool overwrite);
+
 		CDPL_BIOMOL_API bool isPDBBackboneAtom(const Chem::Atom& atom);
 
 		CDPL_BIOMOL_API bool combineInterferingResidueCoordinates(Chem::Molecule& mol, double max_ctr_dist = 1.0);

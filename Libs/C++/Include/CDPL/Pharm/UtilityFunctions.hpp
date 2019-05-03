@@ -1,7 +1,7 @@
 /* -*- mode: c++; c-basic-offset: 4; tab-width: 4; indent-tabs-mode: t -*- */
 
 /* 
- * NumPy.cpp 
+ * UtilityFunctions.hpp 
  *
  * This file is part of the Chemical Data Processing Toolkit
  *
@@ -23,74 +23,40 @@
  * Boston, MA 02111-1307, USA.
  */
 
+/**
+ * \file
+ * \brief Declaration of various utility functions.
+ */
 
-#include <boost/python.hpp>
+#ifndef CDPL_PHARM_UTILITYFUNCTIONS_HPP
+#define CDPL_PHARM_UTILITYFUNCTIONS_HPP
 
-#define ENABLE_IMPORT_ARRAY_FUNCTION
-
-#include "NumPy.hpp"
+#include "CDPL/Pharm/APIPrefix.hpp"
 
 
-namespace
+namespace CDPL 
 {
 
-#if PY_MAJOR_VERSION == 2
-    void
-#else
-    PyObject *
-#endif
-    importArrayWrapper()
-    {
-		import_array();
-
-#if PY_MAJOR_VERSION > 2
-		Py_RETURN_NONE;
-#endif
-    }
-
-    bool MODULE_IMPORTED = false;
-}
-
-
-namespace CDPLPythonMath
-{
-    
-    namespace NumPy
+    namespace Chem
     {
 
-		bool init() 
-		{
-			if (MODULE_IMPORTED)
-				return true;
+	class Molecule;
+    }
 
-			if (PyErr_Occurred())
-				return false;
-
-#if PY_MAJOR_VERSION == 2
-			importArrayWrapper();
-
-			if (PyErr_Occurred()) {
-				PyErr_Clear();
-				return false;
-			}
-#else
-			PyObject* r = importArrayWrapper();
-
-			if (!r) {
-				PyErr_Clear();
-				return false;
-			}
-
-			Py_DECREF(r);
-#endif
-
-			MODULE_IMPORTED = true;
-			return true;
-		}
-
-		bool available()
-		{
-			return MODULE_IMPORTED;
-		}
+    namespace Pharm 
+    {
+	
+	/**
+	 * \addtogroup CDPL_PHARM_UTILITY_FUNCTIONS
+	 * @{
+	 */
+	
+	CDPL_PHARM_API void prepareForPharmacophoreGeneration(Chem::Molecule& mol);
+	
+	/**
+	 * @}
+	 */
     }
 }
+
+#endif // CDPL_PHARM_UTILITYFUNCTIONS_HPP

@@ -1,7 +1,7 @@
 /* -*- mode: c++; c-basic-offset: 4; tab-width: 4; indent-tabs-mode: t -*- */
 
 /* 
- * NumPy.cpp 
+ * UtilityFunctionExport.cpp 
  *
  * This file is part of the Chemical Data Processing Toolkit
  *
@@ -26,71 +26,16 @@
 
 #include <boost/python.hpp>
 
-#define ENABLE_IMPORT_ARRAY_FUNCTION
+#include "CDPL/Pharm/UtilityFunctions.hpp"
+#include "CDPL/Chem/Molecule.hpp"
 
-#include "NumPy.hpp"
+#include "FunctionExports.hpp"
 
 
-namespace
+void CDPLPythonPharm::exportUtilityFunctions()
 {
-
-#if PY_MAJOR_VERSION == 2
-    void
-#else
-    PyObject *
-#endif
-    importArrayWrapper()
-    {
-		import_array();
-
-#if PY_MAJOR_VERSION > 2
-		Py_RETURN_NONE;
-#endif
-    }
-
-    bool MODULE_IMPORTED = false;
-}
-
-
-namespace CDPLPythonMath
-{
-    
-    namespace NumPy
-    {
-
-		bool init() 
-		{
-			if (MODULE_IMPORTED)
-				return true;
-
-			if (PyErr_Occurred())
-				return false;
-
-#if PY_MAJOR_VERSION == 2
-			importArrayWrapper();
-
-			if (PyErr_Occurred()) {
-				PyErr_Clear();
-				return false;
-			}
-#else
-			PyObject* r = importArrayWrapper();
-
-			if (!r) {
-				PyErr_Clear();
-				return false;
-			}
-
-			Py_DECREF(r);
-#endif
-
-			MODULE_IMPORTED = true;
-			return true;
-		}
-
-		bool available()
-		{
-			return MODULE_IMPORTED;
-		}
-    }
+	using namespace boost;
+	using namespace CDPL;
+	
+	python::def("prepareForPharmacophoreGeneration", &Pharm::prepareForPharmacophoreGeneration, python::arg("mol"));
 }

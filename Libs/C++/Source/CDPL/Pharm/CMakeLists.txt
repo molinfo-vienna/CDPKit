@@ -39,6 +39,7 @@ SET(cdpl-pharm_LIB_SRCS
     CationPiInteractionConstraint.cpp
     OrthogonalPiPiInteractionConstraint.cpp
     ParallelPiPiInteractionConstraint.cpp
+    InteractionPharmacophoreGenerator.cpp
 
     InteractionScoreCombiner.cpp
     FeatureDistanceScore.cpp
@@ -97,6 +98,7 @@ SET(cdpl-pharm_LIB_SRCS
     PharmacophoreCreateXVolumesFunctions.cpp
 
     ControlParameterFunctions.cpp
+    UtilityFunctions.cpp
 
     PiPiInteractionUtilities.cpp
     TwoPointPharmacophore.cpp
@@ -155,7 +157,7 @@ SET_TARGET_PROPERTIES(cdpl-pharm-static PROPERTIES
                       COMPILE_DEFINITIONS "CDPL_PHARM_STATIC_LINK;CDPL_CHEM_STATIC_LINK;CDPL_GRID_STATIC_LINK;CDPL_MATH_STATIC_LINK;CDPL_UTIL_STATIC_LINK;CDPL_BASE_STATIC_LINK"
                      )
 
-TARGET_LINK_LIBRARIES(cdpl-pharm-static cdpl-chem-static cdpl-grid-static cdpl-math-static cdpl-util-static cdpl-base-static cdpl-internal-static)
+TARGET_LINK_LIBRARIES(cdpl-pharm-static cdpl-chem-static cdpl-grid-static cdpl-biomol-static cdpl-math-static cdpl-util-static cdpl-base-static cdpl-internal-static)
 
 INSTALL(TARGETS cdpl-pharm-static
         DESTINATION "${CDPKIT_LIBRARY_INSTALL_DIR}" COMPONENT CDPLStaticLibraries
@@ -163,7 +165,7 @@ INSTALL(TARGETS cdpl-pharm-static
 
 ADD_LIBRARY(cdpl-pharm-shared SHARED ${cdpl-pharm_LIB_SRCS})
 
-TARGET_LINK_LIBRARIES(cdpl-pharm-shared cdpl-chem-shared cdpl-grid-shared cdpl-base-shared cdpl-math-shared cdpl-util-shared cdpl-internal-static)
+TARGET_LINK_LIBRARIES(cdpl-pharm-shared cdpl-chem-shared cdpl-grid-shared cdpl-biomol-shared cdpl-base-shared cdpl-math-shared cdpl-util-shared cdpl-internal-static)
 
 IF(APPLE)
   SET_TARGET_PROPERTIES(cdpl-pharm-shared PROPERTIES VERSION "${CDPL_SO_VERSION}"

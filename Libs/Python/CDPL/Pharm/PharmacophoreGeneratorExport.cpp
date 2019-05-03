@@ -67,6 +67,5 @@ void CDPLPythonPharm::exportPharmacophoreGenerator()
 			 (python::arg("self"), python::arg("gen")), python::return_self<>())
 		.add_property("atom3DCoordsFunc", python::make_function(&Pharm::PharmacophoreGenerator::getAtom3DCoordinatesFunction, 
 																python::return_internal_reference<>()),
-						  
 					  &Pharm::PharmacophoreGenerator::setAtom3DCoordinatesFunction);
 }

@@ -1,7 +1,7 @@
 /* -*- mode: c++; c-basic-offset: 4; tab-width: 4; indent-tabs-mode: t -*- */
 
 /* 
- * NumPy.cpp 
+ * UtilityFunctions.cpp 
  *
  * This file is part of the Chemical Data Processing Toolkit
  *
@@ -24,73 +24,35 @@
  */
 
 
-#include <boost/python.hpp>
+#include "StaticInit.hpp"
 
-#define ENABLE_IMPORT_ARRAY_FUNCTION
+#include <algorithm>
 
-#include "NumPy.hpp"
+#include <boost/bind.hpp>
+
+#include "CDPL/Pharm/UtilityFunctions.hpp"
+#include "CDPL/Chem/Molecule.hpp"
+#include "CDPL/Chem/MolecularGraphFunctions.hpp"
+#include "CDPL/Chem/MoleculeFunctions.hpp"
+#include "CDPL/Chem/AtomFunctions.hpp"
+#include "CDPL/Biomol/UtilityFunctions.hpp"
 
 
-namespace
+using namespace CDPL; 
+
+
+void Pharm::prepareForPharmacophoreGeneration(Chem::Molecule& mol)
 {
+    perceiveSSSR(mol, false);
+    setRingFlags(mol, false);
+    calcImplicitHydrogenCounts(mol, false);
+    perceiveHybridizationStates(mol, false);
+    setAromaticityFlags(mol, false);
 
-#if PY_MAJOR_VERSION == 2
-    void
-#else
-    PyObject *
-#endif
-    importArrayWrapper()
-    {
-		import_array();
-
-#if PY_MAJOR_VERSION > 2
-		Py_RETURN_NONE;
-#endif
-    }
-
-    bool MODULE_IMPORTED = false;
-}
-
-
-namespace CDPLPythonMath
-{
-    
-    namespace NumPy
-    {
-
-		bool init() 
-		{
-			if (MODULE_IMPORTED)
-				return true;
-
-			if (PyErr_Occurred())
-				return false;
-
-#if PY_MAJOR_VERSION == 2
-			importArrayWrapper();
-
-			if (PyErr_Occurred()) {
-				PyErr_Clear();
-				return false;
-			}
-#else
-			PyObject* r = importArrayWrapper();
-
-			if (!r) {
-				PyErr_Clear();
-				return false;
-			}
-
-			Py_DECREF(r);
-#endif
-
-			MODULE_IMPORTED = true;
-			return true;
-		}
-
-		bool available()
-		{
-			return MODULE_IMPORTED;
-		}
-    }
+	if (makeHydrogenComplete(mol)) {
+		std::for_each(mol.getAtomsBegin(), mol.getAtomsEnd(), boost::bind(&Chem::setImplicitHydrogenCount, _1, 0));
+	
+		generateHydrogen3DCoordinates(mol);
+		Biomol::setHydrogenResidueSequenceInfo(mol, false);
+	}
 }

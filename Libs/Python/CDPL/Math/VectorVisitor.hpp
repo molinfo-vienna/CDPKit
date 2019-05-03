@@ -34,6 +34,8 @@
 #include <boost/python.hpp>
 #include <boost/python/def_visitor.hpp>
 
+#include "CDPL/Config.hpp"
+
 #include "VectorExpression.hpp"
 #include "MatrixExpression.hpp"
 #include "VectorExpressionAdapter.hpp"

@@ -69,6 +69,7 @@ SET(pharm_MOD_SRCS
     ParallelPiPiInteractionConstraintExport.cpp
     CationPiInteractionConstraintExport.cpp
     HBondingInteractionConstraintExport.cpp
+    InteractionPharmacophoreGeneratorExport.cpp
 
     InteractionScoreCombinerExport.cpp
     FeatureDistanceScoreExport.cpp
@@ -110,6 +111,7 @@ SET(pharm_MOD_SRCS
     FeatureSetFunctionExport.cpp 
     AttributedGridFunctionExport.cpp 
     ControlParameterFunctionExport.cpp 
+    UtilityFunctionExport.cpp 
 
     ToPythonConverterRegistration.cpp
     FromPythonConverterRegistration.cpp

@@ -78,6 +78,7 @@
 #include "CDPL/Pharm/ParallelPiPiInteractionConstraint.hpp"  
 #include "CDPL/Pharm/CationPiInteractionConstraint.hpp"  
 #include "CDPL/Pharm/HBondingInteractionConstraint.hpp"  
+#include "CDPL/Pharm/InteractionPharmacophoreGenerator.hpp"  
 
 #include "CDPL/Pharm/InteractionScoreCombiner.hpp"  
 #include "CDPL/Pharm/FeatureDistanceScore.hpp"  
@@ -120,6 +121,7 @@
 #include "CDPL/Pharm/PharmacophoreRDFDescriptorCalculator.hpp"
 #include "CDPL/Pharm/PharmacophoreAutoCorr3DDescriptorCalculator.hpp"
 
+#include "CDPL/Pharm/UtilityFunctions.hpp"  
 #include "CDPL/Pharm/PharmacophoreFunctions.hpp"  
 #include "CDPL/Pharm/FeatureFunctions.hpp"
 #include "CDPL/Pharm/FeatureContainerFunctions.hpp"

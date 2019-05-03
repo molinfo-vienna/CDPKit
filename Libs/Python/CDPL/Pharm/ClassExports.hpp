@@ -117,6 +117,7 @@ namespace CDPLPythonPharm
 	void exportParallelPiPiInteractionConstraint();
 	void exportCationPiInteractionConstraint();
 	void exportHBondingInteractionConstraint();
+	void exportInteractionPharmacophoreGenerator();
 
 	void exportInteractionScoreCombiner();
 	void exportFeatureDistanceScore();
