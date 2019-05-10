@@ -66,6 +66,7 @@ namespace
 				.def(ConstVectorVisitor<VectorSliceType>("s"))
 				.def(VectorAssignAndSwapVisitor<VectorSliceType>("s"))
 				.def(VectorVisitor<VectorSliceType>("s"))
+				.def(VectorNDArrayAssignVisitor<VectorSliceType>())
 				.def(WrappedDataVisitor<VectorSliceWrapper>())
 				.add_property("start", &VectorSliceType::getStart)
 				.add_property("stride", &VectorSliceType::getStride);

@@ -65,6 +65,7 @@ namespace
 				.def(ConstVectorVisitor<VectorRangeType>("r"))
 				.def(VectorAssignAndSwapVisitor<VectorRangeType>("r"))
 				.def(VectorVisitor<VectorRangeType>("r"))
+				.def(VectorNDArrayAssignVisitor<VectorRangeType>())
 				.def(WrappedDataVisitor<VectorRangeWrapper>())
 				.add_property("start", &VectorRangeType::getStart);
 

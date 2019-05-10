@@ -65,6 +65,7 @@ namespace
 				.def(ConstVectorVisitor<MatrixRowType>("r"))
 				.def(VectorAssignAndSwapVisitor<MatrixRowType>("r"))
 				.def(VectorVisitor<MatrixRowType>("r"))
+				.def(VectorNDArrayAssignVisitor<MatrixRowType>())
 				.def(WrappedDataVisitor<MatrixRowWrapper>())
 				.add_property("index", &MatrixRowType::getIndex);
 

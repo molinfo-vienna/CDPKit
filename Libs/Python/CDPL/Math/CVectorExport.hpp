@@ -64,6 +64,8 @@ namespace CDPLPythonMath
 				.def(AssignFunctionGeneratorVisitor<VectorType, ConstVectorExpression>("e"))
 				.def(ConstVectorVisitor<VectorType>())
 				.def(VectorAssignAndSwapVisitor<VectorType>())
+				.def(VectorNDArrayInitVisitor<VectorType>())
+				.def(VectorNDArrayAssignVisitor<VectorType>())
 				.def(VectorVisitor<VectorType>());
 		}
 	};

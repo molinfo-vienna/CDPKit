@@ -63,6 +63,7 @@ namespace
 				.def(ConstVectorVisitor<HomogenousCoordsAdapterType>("r"))
 				.def(VectorAssignAndSwapVisitor<HomogenousCoordsAdapterType>("r"))
 				.def(VectorVisitor<HomogenousCoordsAdapterType>("a"))
+				.def(VectorNDArrayAssignVisitor<HomogenousCoordsAdapterType>())
 				.def(WrappedDataVisitor<HomogenousCoordsAdapterWrapper>());
 
 			python::def("homog", &homog, python::arg("e"));

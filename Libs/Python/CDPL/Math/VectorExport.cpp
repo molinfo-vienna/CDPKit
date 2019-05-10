@@ -64,6 +64,8 @@ namespace
 				.def(AssignFunctionGeneratorVisitor<VectorType, ConstVectorExpression>("e"))
 				.def(ConstVectorVisitor<VectorType>())
 				.def(VectorAssignAndSwapVisitor<VectorType>())
+				.def(VectorNDArrayInitVisitor<VectorType, true>())
+				.def(VectorNDArrayAssignVisitor<VectorType, true>())
 				.def(VectorVisitor<VectorType>());
 		}
 	};

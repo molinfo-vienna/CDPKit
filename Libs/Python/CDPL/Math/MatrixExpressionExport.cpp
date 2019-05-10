@@ -72,6 +72,7 @@ namespace
 				.def("swap", &swapExpr, (python::arg("self"), python::arg("e")))
 				.def(MatrixAssignAndSwapVisitor<ExpressionType>("e"))
 				.def(AssignFunctionGeneratorVisitor<ExpressionType, ConstMatrixExpression>("e"))
+				.def(MatrixNDArrayAssignVisitor<ExpressionType>())
 				.def(MatrixVisitor<ExpressionType>("e"));
 
 			python::implicitly_convertible<ExpressionPointer, ConstExpressionPointer>();

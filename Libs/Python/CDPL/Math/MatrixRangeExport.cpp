@@ -68,6 +68,7 @@ namespace
 				.def(MatrixAssignAndSwapVisitor<MatrixRangeType>("r"))
 				.def(MatrixVisitor<MatrixRangeType>("r"))
 				.def(WrappedDataVisitor<MatrixRangeWrapper>())
+				.def(MatrixNDArrayAssignVisitor<MatrixRangeType>())
 				.add_property("start1", &MatrixRangeType::getStart1)
 				.add_property("start2", &MatrixRangeType::getStart2);
 

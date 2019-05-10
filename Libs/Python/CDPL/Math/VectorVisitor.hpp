@@ -30,6 +30,7 @@
 #include <string>
 #include <sstream>
 #include <utility>
+#include <memory>
 
 #include <boost/python.hpp>
 #include <boost/python/def_visitor.hpp>
@@ -282,6 +283,187 @@ namespace CDPLPythonMath
 
 		const char* argName;
 	};
+
+#ifdef HAVE_NUMPY
+	template <typename VectorType, bool RESIZE = false>
+	struct VectorNDArrayAssignVisitor : public boost::python::def_visitor<VectorNDArrayAssignVisitor<VectorType, RESIZE> >
+	{
+
+		friend class boost::python::def_visitor_access;
+
+		typedef typename VectorType::ValueType ValueType;
+	
+		template <typename ClassType>
+		void visit(ClassType& cl) const {
+			using namespace boost;
+
+			cl.def("assign", &assign, (python::arg("self"), python::arg("a")));
+		}
+
+		static void assign(VectorType& vec, PyArrayObject* arr) {
+			using namespace CDPL;
+			using namespace boost;
+
+			if (!NumPy::checkSize(arr, vec.getSize())) {
+				PyErr_SetString(PyExc_ValueError, "Vector: NumPy.NDArray size error");
+
+				python::throw_error_already_set();
+			}
+
+			if (!NumPy::checkDataType<ValueType>(arr)) {
+				PyErr_SetString(PyExc_TypeError, "Vector: NumPy.NDArray of incompatible type");
+
+				python::throw_error_already_set();
+			}
+
+			NumPy::copyArray1(vec, arr);
+		}
+	};
+
+	template <typename VectorType>
+	struct VectorNDArrayAssignVisitor<VectorType, true> : public boost::python::def_visitor<VectorNDArrayAssignVisitor<VectorType, true> >
+	{
+
+		friend class boost::python::def_visitor_access;
+
+		typedef typename VectorType::ValueType ValueType;
+	
+		template <typename ClassType>
+		void visit(ClassType& cl) const {
+			using namespace boost;
+
+			cl.def("assign", &assign, (python::arg("self"), python::arg("a")));
+		}
+
+		static void assign(VectorType& vec, PyArrayObject* arr) {
+			using namespace CDPL;
+			using namespace boost;
+
+			if (!NumPy::checkDim(arr, 1)) {
+				PyErr_SetString(PyExc_ValueError, "Vector: NumPy.NDArray dimension error");
+
+				python::throw_error_already_set();
+			}
+
+			if (!NumPy::checkDataType<ValueType>(arr)) {
+				PyErr_SetString(PyExc_TypeError, "Vector: NumPy.NDArray of incompatible type");
+
+				python::throw_error_already_set();
+			}
+
+			NumPy::resizeTarget1(vec, arr);
+			NumPy::copyArray1(vec, arr);
+		}
+	};
+
+	template <typename VectorType, bool RESIZE = false>
+	struct VectorNDArrayInitVisitor : public boost::python::def_visitor<VectorNDArrayInitVisitor<VectorType, RESIZE> >
+	{
+
+		friend class boost::python::def_visitor_access;
+
+		typedef typename VectorType::ValueType ValueType;
+	
+		template <typename ClassType>
+		void visit(ClassType& cl) const {
+			using namespace boost;
+
+			cl.def("__init__", python::make_constructor(&construct, 
+														python::default_call_policies(),
+														(python::arg("a"))));
+		}
+
+		static VectorType* construct(PyArrayObject* arr) {
+			using namespace CDPL;
+			using namespace boost;
+
+			std::auto_ptr<VectorType> vec_ptr(new VectorType());
+
+			if (!NumPy::checkSize(arr, vec_ptr->getSize())) {
+				PyErr_SetString(PyExc_ValueError, "Vector: NumPy.NDArray size error");
+
+				python::throw_error_already_set();
+			}
+
+			if (!NumPy::checkDataType<ValueType>(arr)) {
+				PyErr_SetString(PyExc_TypeError, "Vector: NumPy.NDArray of incompatible type");
+
+				python::throw_error_already_set();
+			}
+
+			NumPy::copyArray1(*vec_ptr, arr);
+
+			return vec_ptr.release();
+		}
+	};
+
+	template <typename VectorType>
+	struct VectorNDArrayInitVisitor<VectorType, true> : public boost::python::def_visitor<VectorNDArrayInitVisitor<VectorType, true> >
+	{
+
+		friend class boost::python::def_visitor_access;
+
+		typedef typename VectorType::ValueType ValueType;
+	
+		template <typename ClassType>
+		void visit(ClassType& cl) const {
+			using namespace boost;
+
+			cl.def("__init__", python::make_constructor(&construct, 
+														python::default_call_policies(),
+														(python::arg("a"))));
+		}
+
+		static VectorType* construct(PyArrayObject* arr) {
+			using namespace CDPL;
+			using namespace boost;
+
+			if (!NumPy::checkDim(arr, 1)) {
+				PyErr_SetString(PyExc_ValueError, "Vector: NumPy.NDArray dimension error");
+
+				python::throw_error_already_set();
+			}
+
+			if (!NumPy::checkDataType<ValueType>(arr)) {
+				PyErr_SetString(PyExc_TypeError, "Vector: NumPy.NDArray of incompatible type");
+
+				python::throw_error_already_set();
+			}
+
+			std::auto_ptr<VectorType> vec_ptr(new VectorType());
+
+			NumPy::resizeTarget1(*vec_ptr, arr);
+			NumPy::copyArray1(*vec_ptr, arr);
+
+			return vec_ptr.release();
+		}
+	};
+
+#else // HAVE_NUMPY
+	template <typename VectorType, bool RESIZE>
+	struct VectorNDArrayAssignVisitor : public boost::python::def_visitor<VectorNDArrayAssignVisitor<VectorType, RESIZE> >
+	{
+
+		friend class boost::python::def_visitor_access;
+
+		typedef typename VectorType::ValueType ValueType;
+	
+		template <typename ClassType>
+		void visit(ClassType& cl) const {}
+	};
+
+	template <typename VectorType, bool RESIZE>
+	struct VectorNDArrayInitVisitor : public boost::python::def_visitor<VectorNDArrayInitVisitor<VectorType, RESIZE> >
+	{
+
+		friend class boost::python::def_visitor_access;
+
+		typedef typename VectorType::ValueType ValueType;
+	
+		template <typename ClassType>
+		void visit(ClassType& cl) const {}
+	};
+#endif // HAVE_NUMPY
 }
 
 #endif // CDPL_PYTHON_MATH_VECTORVISITOR_HPP

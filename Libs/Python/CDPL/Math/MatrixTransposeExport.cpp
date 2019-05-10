@@ -63,6 +63,7 @@ namespace
 				.def(ConstMatrixVisitor<MatrixTransposeType>("mt"))
 				.def(MatrixAssignAndSwapVisitor<MatrixTransposeType>("mt"))
 				.def(MatrixVisitor<MatrixTransposeType>("mt"))
+				.def(MatrixNDArrayAssignVisitor<MatrixTransposeType>())
 				.def(WrappedDataVisitor<MatrixTransposeWrapper>());
 
 			python::def("trans", &trans, python::arg("e"));

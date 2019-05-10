@@ -134,6 +134,8 @@ BOOST_PYTHON_MODULE(_math)
 	registerFromPythonToCMatrixConverters();
 	registerFromPythonToMatrixConverters();
 	registerFromPythonToGridConverters();
+	registerFromPythonToQuaternionConverters();
+	registerFromPythonToVectorArrayConverters();
 	registerFromPythonToExpressionPointerConverters();
 	registerFromPythonToVariantConverters();
 }

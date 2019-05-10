@@ -68,6 +68,8 @@ namespace
 				.def(AssignFunctionGeneratorVisitor<MatrixType, ConstMatrixExpression>("e"))
 				.def(ConstMatrixVisitor<MatrixType>())
 				.def(MatrixAssignAndSwapVisitor<MatrixType>())
+				.def(MatrixNDArrayInitVisitor<MatrixType, true>())
+				.def(MatrixNDArrayAssignVisitor<MatrixType, true>())
 				.def(MatrixVisitor<MatrixType>());
 		}
 	};

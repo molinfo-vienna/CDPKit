@@ -91,4 +91,10 @@ void CDPLPython::exportConfigInfo()
     module.attr("HAVE_BOOST_IOSTREAMS") = false;
 #endif
 
+#ifdef HAVE_NUMPY
+    module.attr("HAVE_NUMPY") = true;
+#else
+    module.attr("HAVE_NUMPY") = false;
+#endif
+
 }

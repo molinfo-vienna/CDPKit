@@ -62,6 +62,8 @@ namespace
 				.def(AssignFunctionGeneratorVisitor<QuaternionType, ConstQuaternionExpression>("e"))
 				.def(ConstQuaternionVisitor<QuaternionType>())
 				.def(QuaternionAssignAndSwapVisitor<QuaternionType>())
+				.def(QuaternionNDArrayInitVisitor<QuaternionType>())
+				.def(QuaternionNDArrayAssignVisitor<QuaternionType>())
 				.def(QuaternionVisitor<QuaternionType>());
 		}
 	};

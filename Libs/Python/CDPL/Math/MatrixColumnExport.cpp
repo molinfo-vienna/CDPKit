@@ -65,6 +65,7 @@ namespace
 				.def(ConstVectorVisitor<MatrixColumnType>("c"))
 				.def(VectorAssignAndSwapVisitor<MatrixColumnType>("c"))
 				.def(VectorVisitor<MatrixColumnType>("c"))
+				.def(VectorNDArrayAssignVisitor<MatrixColumnType>())
 				.def(WrappedDataVisitor<MatrixColumnWrapper>())
 				.add_property("index", &MatrixColumnType::getIndex);
 

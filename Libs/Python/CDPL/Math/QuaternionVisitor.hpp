@@ -35,6 +35,7 @@
 #include <boost/python/def_visitor.hpp>
 
 #include "CDPL/Config.hpp"
+#include "CDPL/Math/QuaternionAdapter.hpp"
 
 #include "QuaternionExpression.hpp"
 #include "QuaternionExpressionAdapter.hpp"
@@ -359,6 +360,113 @@ namespace CDPLPythonMath
 
 		const char* argName;
 	};
+
+#ifdef HAVE_NUMPY
+	template <typename QuaternionType>
+	struct QuaternionNDArrayAssignVisitor : public boost::python::def_visitor<QuaternionNDArrayAssignVisitor<QuaternionType> >
+	{
+
+		friend class boost::python::def_visitor_access;
+
+		typedef typename QuaternionType::ValueType ValueType;
+	
+		template <typename ClassType>
+		void visit(ClassType& cl) const {
+			using namespace boost;
+
+			cl.def("assign", &assign, (python::arg("self"), python::arg("a")));
+		}
+
+		static void assign(QuaternionType& quat, PyArrayObject* arr) {
+			using namespace CDPL;
+			using namespace boost;
+
+			if (!NumPy::checkSize(arr, 4)) {
+				PyErr_SetString(PyExc_ValueError, "Quaternion: NumPy.NDArray size error");
+
+				python::throw_error_already_set();
+			}
+
+			if (!NumPy::checkDataType<ValueType>(arr)) {
+				PyErr_SetString(PyExc_TypeError, "Quaternion: NumPy.NDArray of incompatible type");
+
+				python::throw_error_already_set();
+			}
+
+			Math::QuaternionVectorAdapter<QuaternionType> adapter(quat);
+
+			NumPy::copyArray1(adapter, arr);
+		}
+	};
+
+	template <typename QuaternionType>
+	struct QuaternionNDArrayInitVisitor : public boost::python::def_visitor<QuaternionNDArrayInitVisitor<QuaternionType> >
+	{
+
+		friend class boost::python::def_visitor_access;
+
+		typedef typename QuaternionType::ValueType ValueType;
+	
+		template <typename ClassType>
+		void visit(ClassType& cl) const {
+			using namespace boost;
+
+			cl.def("__init__", python::make_constructor(&construct, 
+														python::default_call_policies(),
+														(python::arg("a"))));
+		}
+
+		static QuaternionType* construct(PyArrayObject* arr) {
+			using namespace CDPL;
+			using namespace boost;
+
+			std::auto_ptr<QuaternionType> quat_ptr(new QuaternionType());
+		
+			if (!NumPy::checkSize(arr, 4)) {
+				PyErr_SetString(PyExc_ValueError, "Quaternion: NumPy.NDArray size error");
+
+				python::throw_error_already_set();
+			}
+
+			if (!NumPy::checkDataType<ValueType>(arr)) {
+				PyErr_SetString(PyExc_TypeError, "Quaternion: NumPy.NDArray of incompatible type");
+
+				python::throw_error_already_set();
+			}
+
+			Math::QuaternionVectorAdapter<QuaternionType> adapter(*quat_ptr);
+
+			NumPy::copyArray1(adapter, arr);
+
+			return quat_ptr.release();
+		}
+	};
+
+#else // HAVE_NUMPY
+	template <typename QuaternionType>
+	struct QuaternionNDArrayAssignVisitor : public boost::python::def_visitor<QuaternionNDArrayAssignVisitor<QuaternionType> >
+	{
+
+		friend class boost::python::def_visitor_access;
+
+		typedef typename QuaternionType::ValueType ValueType;
+	
+		template <typename ClassType>
+		void visit(ClassType& cl) const {}
+	};
+
+	template <typename QuaternionType>
+	struct QuaternionNDArrayInitVisitor : public boost::python::def_visitor<QuaternionNDArrayInitVisitor<QuaternionType> >
+	{
+
+		friend class boost::python::def_visitor_access;
+
+		typedef typename QuaternionType::ValueType ValueType;
+	
+		template <typename ClassType>
+		void visit(ClassType& cl) const {}
+	};
+#endif // HAVE_NUMPY
 }
 
 #endif // CDPL_PYTHON_MATH_QUATERNIONVISITOR_HPP

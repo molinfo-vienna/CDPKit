@@ -101,7 +101,9 @@ SET(math_impl_MOD_SRCS
     FromPythonToCVectorConverterRegistration.cpp
     FromPythonToMatrixConverterRegistration.cpp	
     FromPythonToCMatrixConverterRegistration.cpp	
-    FromPythonToGridConverterRegistration.cpp	
+    FromPythonToQuaternionConverterRegistration.cpp	
+    FromPythonToVectorArrayConverterRegistration.cpp	
+    FromPythonToGridConverterRegistration.cpp
    )
 
 SET(math_MOD_SRCS

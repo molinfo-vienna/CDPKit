@@ -70,6 +70,8 @@ namespace
 				.def(ConstGridContainerVisitor<GridType>())
 				.def(GridAssignAndSwapVisitor<GridType>())
 				.def(GridVisitor<GridType>())
+				.def(GridNDArrayInitVisitor<GridType>())
+				.def(GridNDArrayAssignVisitor<GridType, true>())
 				.def(GridContainerVisitor<GridType>());
 		}
 	};

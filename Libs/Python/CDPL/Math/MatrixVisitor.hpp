@@ -308,6 +308,187 @@ namespace CDPLPythonMath
 
 		const char* argName;
 	};
+
+#ifdef HAVE_NUMPY
+	template <typename MatrixType, bool RESIZE = false>
+	struct MatrixNDArrayAssignVisitor : public boost::python::def_visitor<MatrixNDArrayAssignVisitor<MatrixType, RESIZE> >
+	{
+
+		friend class boost::python::def_visitor_access;
+
+		typedef typename MatrixType::ValueType ValueType;
+	
+		template <typename ClassType>
+		void visit(ClassType& cl) const {
+			using namespace boost;
+
+			cl.def("assign", &assign, (python::arg("self"), python::arg("a")));
+		}
+
+		static void assign(MatrixType& mtx, PyArrayObject* arr) {
+			using namespace CDPL;
+			using namespace boost;
+
+			if (!NumPy::checkSize(arr, mtx.getSize1(), mtx.getSize2())) {
+				PyErr_SetString(PyExc_ValueError, "Matrix: NumPy.NDArray size error");
+
+				python::throw_error_already_set();
+			}
+
+			if (!NumPy::checkDataType<ValueType>(arr)) {
+				PyErr_SetString(PyExc_TypeError, "Matrix: NumPy.NDArray of incompatible type");
+
+				python::throw_error_already_set();
+			}
+
+			NumPy::copyArray2(mtx, arr);
+		}
+	};
+
+	template <typename MatrixType>
+	struct MatrixNDArrayAssignVisitor<MatrixType, true> : public boost::python::def_visitor<MatrixNDArrayAssignVisitor<MatrixType, true> >
+	{
+
+		friend class boost::python::def_visitor_access;
+
+		typedef typename MatrixType::ValueType ValueType;
+	
+		template <typename ClassType>
+		void visit(ClassType& cl) const {
+			using namespace boost;
+
+			cl.def("assign", &assign, (python::arg("self"), python::arg("a")));
+		}
+
+		static void assign(MatrixType& mtx, PyArrayObject* arr) {
+			using namespace CDPL;
+			using namespace boost;
+
+			if (!NumPy::checkDim(arr, 2)) {
+				PyErr_SetString(PyExc_ValueError, "Matrix: NumPy.NDArray dimension error");
+
+				python::throw_error_already_set();
+			}
+
+			if (!NumPy::checkDataType<ValueType>(arr)) {
+				PyErr_SetString(PyExc_TypeError, "Matrix: NumPy.NDArray of incompatible type");
+
+				python::throw_error_already_set();
+			}
+
+			NumPy::resizeTarget2(mtx, arr);
+			NumPy::copyArray2(mtx, arr);
+		}
+	};
+
+	template <typename MatrixType, bool RESIZE = false>
+	struct MatrixNDArrayInitVisitor : public boost::python::def_visitor<MatrixNDArrayInitVisitor<MatrixType, RESIZE> >
+	{
+
+		friend class boost::python::def_visitor_access;
+
+		typedef typename MatrixType::ValueType ValueType;
+	
+		template <typename ClassType>
+		void visit(ClassType& cl) const {
+			using namespace boost;
+
+			cl.def("__init__", python::make_constructor(&construct, 
+														python::default_call_policies(),
+														(python::arg("a"))));
+		}
+
+		static MatrixType* construct(PyArrayObject* arr) {
+			using namespace CDPL;
+			using namespace boost;
+
+			std::auto_ptr<MatrixType> mtx_ptr(new MatrixType());
+
+			if (!NumPy::checkSize(arr, mtx_ptr->getSize1(), mtx_ptr->getSize2())) {
+				PyErr_SetString(PyExc_ValueError, "Matrix: NumPy.NDArray size error");
+
+				python::throw_error_already_set();
+			}
+
+			if (!NumPy::checkDataType<ValueType>(arr)) {
+				PyErr_SetString(PyExc_TypeError, "Matrix: NumPy.NDArray of incompatible type");
+
+				python::throw_error_already_set();
+			}
+
+			NumPy::copyArray2(*mtx_ptr, arr);
+
+			return mtx_ptr.release();
+		}
+	};
+
+	template <typename MatrixType>
+	struct MatrixNDArrayInitVisitor<MatrixType, true> : public boost::python::def_visitor<MatrixNDArrayInitVisitor<MatrixType, true> >
+	{
+
+		friend class boost::python::def_visitor_access;
+
+		typedef typename MatrixType::ValueType ValueType;
+	
+		template <typename ClassType>
+		void visit(ClassType& cl) const {
+			using namespace boost;
+
+			cl.def("__init__", python::make_constructor(&construct, 
+														python::default_call_policies(),
+														(python::arg("a"))));
+		}
+
+		static MatrixType* construct(PyArrayObject* arr) {
+			using namespace CDPL;
+			using namespace boost;
+
+			if (!NumPy::checkDim(arr, 2)) {
+				PyErr_SetString(PyExc_ValueError, "Matrix: NumPy.NDArray dimension error");
+
+				python::throw_error_already_set();
+			}
+
+			if (!NumPy::checkDataType<ValueType>(arr)) {
+				PyErr_SetString(PyExc_TypeError, "Matrix: NumPy.NDArray of incompatible type");
+
+				python::throw_error_already_set();
+			}
+
+			std::auto_ptr<MatrixType> mtx_ptr(new MatrixType());
+
+			NumPy::resizeTarget2(*mtx_ptr, arr);
+			NumPy::copyArray2(*mtx_ptr, arr);
+
+			return mtx_ptr.release();
+		}
+	};
+
+#else // HAVE_NUMPY
+	template <typename MatrixType, bool RESIZE>
+	struct MatrixNDArrayAssignVisitor : public boost::python::def_visitor<MatrixNDArrayAssignVisitor<MatrixType, RESIZE> >
+	{
+
+		friend class boost::python::def_visitor_access;
+
+		typedef typename MatrixType::ValueType ValueType;
+	
+		template <typename ClassType>
+		void visit(ClassType& cl) const {}
+	};
+
+	template <typename MatrixType, bool RESIZE>
+	struct MatrixNDArrayInitVisitor : public boost::python::def_visitor<MatrixNDArrayInitVisitor<MatrixType, RESIZE> >
+	{
+
+		friend class boost::python::def_visitor_access;
+
+		typedef typename MatrixType::ValueType ValueType;
+	
+		template <typename ClassType>
+		void visit(ClassType& cl) const {}
+	};
+#endif // HAVE_NUMPY
 }
 
 #endif // CDPL_PYTHON_MATH_MATRIXVISITOR_HPP

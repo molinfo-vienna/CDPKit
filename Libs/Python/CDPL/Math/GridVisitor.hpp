@@ -346,6 +346,146 @@ namespace CDPLPythonMath
 
 		const char* argName;
 	};
+
+#ifdef HAVE_NUMPY
+	template <typename GridType, bool RESIZE = false>
+	struct GridNDArrayAssignVisitor : public boost::python::def_visitor<GridNDArrayAssignVisitor<GridType, RESIZE> >
+	{
+
+		friend class boost::python::def_visitor_access;
+
+		typedef typename GridType::ValueType ValueType;
+	
+		template <typename ClassType>
+		void visit(ClassType& cl) const {
+			using namespace boost;
+
+			cl.def("assign", &assign, (python::arg("self"), python::arg("a")));
+		}
+
+		static void assign(GridType& grd, PyArrayObject* arr) {
+			using namespace CDPL;
+			using namespace boost;
+
+			if (!NumPy::checkSize(arr, grd.getSize1(), grd.getSize2(), grd.getSize3())) {
+				PyErr_SetString(PyExc_ValueError, "Grid: NumPy.NDArray dimension error");
+
+				python::throw_error_already_set();
+			}
+
+			if (!NumPy::checkDataType<ValueType>(arr)) {
+				PyErr_SetString(PyExc_TypeError, "Grid: NumPy.NDArray of incompatible type");
+
+				python::throw_error_already_set();
+			}
+
+			NumPy::copyArray3(grd, arr);
+		}
+	};
+
+	template <typename GridType>
+	struct GridNDArrayAssignVisitor<GridType, true> : public boost::python::def_visitor<GridNDArrayAssignVisitor<GridType, true> >
+	{
+
+		friend class boost::python::def_visitor_access;
+
+		typedef typename GridType::ValueType ValueType;
+	
+		template <typename ClassType>
+		void visit(ClassType& cl) const {
+			using namespace boost;
+
+			cl.def("assign", &assign, (python::arg("self"), python::arg("a")));
+		}
+
+		static void assign(GridType& grd, PyArrayObject* arr) {
+			using namespace CDPL;
+			using namespace boost;
+
+			if (!NumPy::checkDim(arr, 3)) {
+				PyErr_SetString(PyExc_ValueError, "Grid: NumPy.NDArray dimension error");
+
+				python::throw_error_already_set();
+			}
+
+			if (!NumPy::checkDataType<ValueType>(arr)) {
+				PyErr_SetString(PyExc_TypeError, "Grid: NumPy.NDArray of incompatible type");
+
+				python::throw_error_already_set();
+			}
+
+			NumPy::resizeTarget3(grd, arr);
+			NumPy::copyArray3(grd, arr);
+		}
+	};
+
+	template <typename GridType>
+	struct GridNDArrayInitVisitor : public boost::python::def_visitor<GridNDArrayInitVisitor<GridType> >
+	{
+
+		friend class boost::python::def_visitor_access;
+
+		typedef typename GridType::ValueType ValueType;
+	
+		template <typename ClassType>
+		void visit(ClassType& cl) const {
+			using namespace boost;
+
+			cl.def("__init__", python::make_constructor(&construct, 
+														python::default_call_policies(),
+														(python::arg("a"))));
+		}
+
+		static GridType* construct(PyArrayObject* arr) {
+			using namespace CDPL;
+			using namespace boost;
+
+			if (!NumPy::checkDim(arr, 3)) {
+				PyErr_SetString(PyExc_ValueError, "Grid: NumPy.NDArray dimension error");
+
+				python::throw_error_already_set();
+			}
+
+			if (!NumPy::checkDataType<ValueType>(arr)) {
+				PyErr_SetString(PyExc_TypeError, "Grid: NumPy.NDArray of incompatible type");
+
+				python::throw_error_already_set();
+			}
+
+			std::auto_ptr<GridType> grd_ptr(new GridType());
+
+			NumPy::resizeTarget3(*grd_ptr, arr);
+			NumPy::copyArray3(*grd_ptr, arr);
+
+			return grd_ptr.release();
+		}
+	};
+
+#else // HAVE_NUMPY
+	template <typename GridType, bool RESIZE>
+	struct GridNDArrayAssignVisitor : public boost::python::def_visitor<GridNDArrayAssignVisitor<GridType, RESIZE> >
+	{
+
+		friend class boost::python::def_visitor_access;
+
+		typedef typename GridType::ValueType ValueType;
+	
+		template <typename ClassType>
+		void visit(ClassType& cl) const {}
+	};
+
+	template <typename GridType>
+	struct GridNDArrayInitVisitor : public boost::python::def_visitor<GridNDArrayInitVisitor<GridType> >
+	{
+
+		friend class boost::python::def_visitor_access;
+
+		typedef typename GridType::ValueType ValueType;
+	
+		template <typename ClassType>
+		void visit(ClassType& cl) const {}
+	};
+#endif // HAVE_NUMPY
 }
 
 #endif // CDPL_PYTHON_MATH_GRIDVISITOR_HPP

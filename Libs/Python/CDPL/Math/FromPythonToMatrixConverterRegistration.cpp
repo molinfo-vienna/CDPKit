@@ -27,9 +27,14 @@
 #include <boost/python.hpp>
 #include <boost/python/ssize_t.hpp>
 
+#include "CDPL/Config.hpp"
 #include "CDPL/Math/Matrix.hpp"
 
 #include "ConverterRegistration.hpp"
+
+#ifdef HAVE_NUMPY
+# include "NumPy.hpp"
+#endif
 
 
 namespace
@@ -106,6 +111,57 @@ namespace
 			data->convertible = storage;
 		}
 	};
+
+#ifdef HAVE_NUMPY
+	template <typename MatrixType>
+	struct MatrixFromNDArrayConverter 
+	{
+
+		MatrixFromNDArrayConverter() {
+			using namespace boost;
+
+			python::converter::registry::insert(&convertible, &construct, python::type_id<MatrixType>());
+		}
+
+		static void* convertible(PyObject* obj_ptr) {
+			using namespace boost;
+			using namespace CDPLPythonMath;
+
+			if (!obj_ptr)
+				return 0;
+
+			PyArrayObject* arr = NumPy::castToNDArray(obj_ptr);
+
+			if (!arr)
+				return 0;
+
+			if (!NumPy::checkDim(arr, 2))
+				return 0;
+
+			if (!NumPy::checkDataType<typename MatrixType::ValueType>(arr))
+				return 0;
+			
+			return obj_ptr;
+		}
+
+		static void construct(PyObject* obj_ptr, boost::python::converter::rvalue_from_python_stage1_data* data) {
+			using namespace boost;
+			using namespace CDPLPythonMath;
+
+			void* storage = ((python::converter::rvalue_from_python_storage<MatrixType>*)data)->storage.bytes;
+
+			new (storage) MatrixType();
+
+			MatrixType& mtx = *static_cast<MatrixType*>(storage);
+			PyArrayObject* arr = reinterpret_cast<PyArrayObject*>(obj_ptr);
+
+			NumPy::resizeTarget2(mtx, arr);
+			NumPy::copyArray2(mtx, arr);
+
+			data->convertible = storage;
+		}
+	};
+#endif
 }
 
 
@@ -117,4 +173,11 @@ void CDPLPythonMath::registerFromPythonToMatrixConverters()
 	MatrixFromPySequenceConverter<Math::DMatrix>();
 	MatrixFromPySequenceConverter<Math::LMatrix>();
 	MatrixFromPySequenceConverter<Math::ULMatrix>();
+
+#ifdef HAVE_NUMPY
+	MatrixFromNDArrayConverter<Math::FMatrix>();
+	MatrixFromNDArrayConverter<Math::DMatrix>();
+	MatrixFromNDArrayConverter<Math::LMatrix>();
+	MatrixFromNDArrayConverter<Math::ULMatrix>();
+#endif
 }

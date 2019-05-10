@@ -27,9 +27,14 @@
 #include <boost/python.hpp>
 #include <boost/python/ssize_t.hpp>
 
+#include "CDPL/Config.hpp"
 #include "CDPL/Math/Grid.hpp"
 
 #include "ConverterRegistration.hpp"
+
+#ifdef HAVE_NUMPY
+# include "NumPy.hpp"
+#endif
 
 
 namespace
@@ -129,6 +134,57 @@ namespace
 			data->convertible = storage;
 		}
 	};
+
+#ifdef HAVE_NUMPY
+	template <typename GridType>
+	struct GridFromNDArrayConverter 
+	{
+
+		GridFromNDArrayConverter() {
+			using namespace boost;
+
+			python::converter::registry::insert(&convertible, &construct, python::type_id<GridType>());
+		}
+
+		static void* convertible(PyObject* obj_ptr) {
+			using namespace boost;
+			using namespace CDPLPythonMath;
+
+			if (!obj_ptr)
+				return 0;
+
+			PyArrayObject* arr = NumPy::castToNDArray(obj_ptr);
+
+			if (!arr)
+				return 0;
+
+			if (!NumPy::checkDim(arr, 3))
+				return 0;
+
+			if (!NumPy::checkDataType<typename GridType::ValueType>(arr))
+				return 0;
+			
+			return obj_ptr;
+		}
+
+		static void construct(PyObject* obj_ptr, boost::python::converter::rvalue_from_python_stage1_data* data) {
+			using namespace boost;
+			using namespace CDPLPythonMath;
+
+			void* storage = ((python::converter::rvalue_from_python_storage<GridType>*)data)->storage.bytes;
+
+			new (storage) GridType();
+
+			GridType& grd = *static_cast<GridType*>(storage);
+			PyArrayObject* arr = reinterpret_cast<PyArrayObject*>(obj_ptr);
+
+			NumPy::resizeTarget3(grd, arr);
+			NumPy::copyArray3(grd, arr);
+
+			data->convertible = storage;
+		}
+	};
+#endif
 }
 
 
@@ -138,4 +194,9 @@ void CDPLPythonMath::registerFromPythonToGridConverters()
 
 	GridFromPySequenceConverter<Math::FGrid>();
 	GridFromPySequenceConverter<Math::DGrid>();
+
+#ifdef HAVE_NUMPY	
+	GridFromNDArrayConverter<Math::FGrid>();
+	GridFromNDArrayConverter<Math::DGrid>();
+#endif
 }

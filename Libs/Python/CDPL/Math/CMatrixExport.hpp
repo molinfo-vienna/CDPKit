@@ -65,6 +65,8 @@ namespace CDPLPythonMath
 				.def(AssignFunctionGeneratorVisitor<MatrixType, ConstMatrixExpression>("e"))
 				.def(ConstMatrixVisitor<MatrixType>())
 				.def(MatrixAssignAndSwapVisitor<MatrixType>())
+				.def(MatrixNDArrayInitVisitor<MatrixType>())
+				.def(MatrixNDArrayAssignVisitor<MatrixType>())
 				.def(MatrixVisitor<MatrixType>());
 		}
 	};

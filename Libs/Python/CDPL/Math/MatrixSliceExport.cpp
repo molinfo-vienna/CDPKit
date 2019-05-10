@@ -69,6 +69,7 @@ namespace
 				.def(ConstMatrixVisitor<MatrixSliceType>("s"))
 				.def(MatrixAssignAndSwapVisitor<MatrixSliceType>("s"))
 				.def(MatrixVisitor<MatrixSliceType>("s"))
+				.def(MatrixNDArrayAssignVisitor<MatrixSliceType>())
 				.def(WrappedDataVisitor<MatrixSliceWrapper>())
 				.add_property("start1", &MatrixSliceType::getStart1)
 				.add_property("start2", &MatrixSliceType::getStart2)

@@ -27,9 +27,14 @@
 #include <boost/python.hpp>
 #include <boost/python/ssize_t.hpp>
 
+#include "CDPL/Config.hpp"
 #include "CDPL/Math/Matrix.hpp"
 
 #include "ConverterRegistration.hpp"
+
+#ifdef HAVE_NUMPY
+# include "NumPy.hpp"
+#endif
 
 
 namespace
@@ -101,6 +106,55 @@ namespace
 			data->convertible = storage;
 		}
 	};
+
+#ifdef HAVE_NUMPY
+	template <typename MatrixType>
+	struct CMatrixFromNDArrayConverter 
+	{
+
+		CMatrixFromNDArrayConverter() {
+			using namespace boost;
+
+			python::converter::registry::insert(&convertible, &construct, python::type_id<MatrixType>());
+		}
+
+		static void* convertible(PyObject* obj_ptr) {
+			using namespace boost;
+			using namespace CDPLPythonMath;
+
+			if (!obj_ptr)
+				return 0;
+
+			PyArrayObject* arr = NumPy::castToNDArray(obj_ptr);
+
+			if (!arr)
+				return 0;
+
+			if (!NumPy::checkSize(arr, MatrixType::Size1, MatrixType::Size2))
+				return 0;
+
+			if (!NumPy::checkDataType<typename MatrixType::ValueType>(arr))
+				return 0;
+			
+			return obj_ptr;
+		}
+
+		static void construct(PyObject* obj_ptr, boost::python::converter::rvalue_from_python_stage1_data* data) {
+			using namespace boost;
+			using namespace CDPLPythonMath;
+
+			void* storage = ((python::converter::rvalue_from_python_storage<MatrixType>*)data)->storage.bytes;
+
+			new (storage) MatrixType();
+
+			MatrixType& mtx = *static_cast<MatrixType*>(storage);
+
+			NumPy::copyArray2(mtx, NumPy::castToNDArray(obj_ptr));
+
+			data->convertible = storage;
+		}
+	};
+#endif
 }
 
 
@@ -120,4 +174,19 @@ void CDPLPythonMath::registerFromPythonToCMatrixConverters()
 	CMatrixFromPySequenceConverter<Math::Matrix2UL>();
 	CMatrixFromPySequenceConverter<Math::Matrix3UL>();
 	CMatrixFromPySequenceConverter<Math::Matrix4UL>();
+
+#ifdef HAVE_NUMPY
+	CMatrixFromNDArrayConverter<Math::Matrix2F>();
+	CMatrixFromNDArrayConverter<Math::Matrix3F>();
+	CMatrixFromNDArrayConverter<Math::Matrix4F>();
+	CMatrixFromNDArrayConverter<Math::Matrix2D>();
+	CMatrixFromNDArrayConverter<Math::Matrix3D>();
+	CMatrixFromNDArrayConverter<Math::Matrix4D>();
+	CMatrixFromNDArrayConverter<Math::Matrix2L>();
+	CMatrixFromNDArrayConverter<Math::Matrix3L>();
+	CMatrixFromNDArrayConverter<Math::Matrix4L>();
+	CMatrixFromNDArrayConverter<Math::Matrix2UL>();
+	CMatrixFromNDArrayConverter<Math::Matrix3UL>();
+	CMatrixFromNDArrayConverter<Math::Matrix4UL>();
+#endif
 }

@@ -92,6 +92,7 @@ namespace
 				.def(ConstVectorVisitor<QuaternionAdapterType>("a"))
 				.def(VectorAssignAndSwapVisitor<QuaternionAdapterType>("a"))
 				.def(VectorVisitor<QuaternionAdapterType>("a"))
+				.def(VectorNDArrayAssignVisitor<QuaternionAdapterType>())
 				.def(WrappedDataVisitor<QuaternionAdapterWrapper>());
 		}
 

@@ -24,6 +24,8 @@
  */
 
 
+#include <cstddef>
+
 #include <boost/python.hpp>
 
 #include "CDPL/Config.hpp"
@@ -58,7 +60,9 @@ namespace
 				.def("__eq__", &ArrayType::operator==, (python::arg("self"), python::arg("array")))
 				.def("__ne__", &ArrayType::operator!=, (python::arg("self"), python::arg("array")))
 #ifdef HAVE_NUMPY
+				.def("__init__", python::make_constructor(&construct, python::default_call_policies(), (python::arg("a"))))
 				.def("toArray", &toArray, (python::arg("self"), python::arg("as_vec")))
+				.def("assign", &assign, (python::arg("self"), python::arg("a")))
 #endif
 				;
 		}
@@ -101,6 +105,116 @@ namespace
 			}
 
 			return python::object();			
+		}
+
+		static void assign(ArrayType& va, PyArrayObject* arr) {
+			using namespace CDPL;
+			using namespace boost;
+			using namespace CDPLPythonMath;
+
+			typedef typename ArrayType::ValueType::ValueType ElemValueType;
+
+			if (!NumPy::checkDataType<ElemValueType>(arr)) {
+				PyErr_SetString(PyExc_TypeError, "VectorArray: NumPy.NDArray of incompatible type");
+
+				python::throw_error_already_set();
+			}
+
+			if (NumPy::checkDim(arr, 2)) {
+				npy_intp* dims = PyArray_DIMS(arr);
+
+				if (std::size_t(dims[1]) != ArrayType::ValueType::Size) {
+					PyErr_SetString(PyExc_ValueError, "VectorArray: NumPy.NDArray dimension error");
+
+					python::throw_error_already_set();
+				}
+
+				va.resize(dims[0]);
+
+				for (npy_intp i = 0; i < dims[0]; i++)
+					for (std::size_t j = 0; j < ArrayType::ValueType::Size; j++)
+						va[i][j] = *reinterpret_cast<ElemValueType*>(PyArray_GETPTR2(arr, i, j));
+
+			} else if (NumPy::checkDim(arr, 1)) {
+				npy_intp* dims = PyArray_DIMS(arr);
+	
+				if ((std::size_t(dims[0]) % ArrayType::ValueType::Size) != 0) {
+					PyErr_SetString(PyExc_ValueError, "VectorArray: NumPy.NDArray dimension error");
+
+					python::throw_error_already_set();
+				}
+
+				va.resize(dims[0] / ArrayType::ValueType::Size);
+
+				for (npy_intp i = 0; i < dims[0]; i++)
+					va[i / ArrayType::ValueType::Size][i % ArrayType::ValueType::Size] = *reinterpret_cast<ElemValueType*>(PyArray_GETPTR1(arr, i));
+
+			} else {
+				PyErr_SetString(PyExc_ValueError, "VectorArray: NumPy.NDArray dimension error");
+				
+				python::throw_error_already_set();
+			}
+		}
+
+		static ArrayType* construct(PyArrayObject* arr) {
+			using namespace CDPL;
+			using namespace boost;
+			using namespace CDPLPythonMath;
+
+			typedef typename ArrayType::ValueType::ValueType ElemValueType;
+
+			if (!NumPy::checkDataType<ElemValueType>(arr)) {
+				PyErr_SetString(PyExc_TypeError, "VectorArray: NumPy.NDArray of incompatible type");
+
+				python::throw_error_already_set();
+			}
+
+			if (NumPy::checkDim(arr, 2)) {
+				npy_intp* dims = PyArray_DIMS(arr);
+
+				if (std::size_t(dims[1]) != ArrayType::ValueType::Size) {
+					PyErr_SetString(PyExc_ValueError, "VectorArray: NumPy.NDArray dimension error");
+
+					python::throw_error_already_set();
+				}
+
+				std::auto_ptr<ArrayType> va_ptr(new ArrayType());
+				ArrayType& va = *va_ptr;
+
+				va.resize(dims[0]);
+
+				for (npy_intp i = 0; i < dims[0]; i++)
+					for (std::size_t j = 0; j < ArrayType::ValueType::Size; j++)
+						va[i][j] = *reinterpret_cast<ElemValueType*>(PyArray_GETPTR2(arr, i, j));
+
+				return va_ptr.release();
+			} 
+
+			if (NumPy::checkDim(arr, 1)) {
+				npy_intp* dims = PyArray_DIMS(arr);
+	
+				if ((std::size_t(dims[0]) % ArrayType::ValueType::Size) != 0) {
+					PyErr_SetString(PyExc_ValueError, "VectorArray: NumPy.NDArray dimension error");
+
+					python::throw_error_already_set();
+				}
+
+				std::auto_ptr<ArrayType> va_ptr(new ArrayType());
+				ArrayType& va = *va_ptr;
+
+				va.resize(dims[0] / ArrayType::ValueType::Size);
+
+				for (npy_intp i = 0; i < dims[0]; i++)
+					va[i / ArrayType::ValueType::Size][i % ArrayType::ValueType::Size] = *reinterpret_cast<ElemValueType*>(PyArray_GETPTR1(arr, i));
+
+				return va_ptr.release();
+			} 
+
+			PyErr_SetString(PyExc_ValueError, "VectorArray: NumPy.NDArray dimension error");
+
+			python::throw_error_already_set();
+
+			return 0;
 		}
 #endif
 	};

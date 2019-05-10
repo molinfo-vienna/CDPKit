@@ -27,9 +27,14 @@
 #include <boost/python.hpp>
 #include <boost/python/ssize_t.hpp>
 
+#include "CDPL/Config.hpp"
 #include "CDPL/Math/Vector.hpp"
 
 #include "ConverterRegistration.hpp"
+
+#ifdef HAVE_NUMPY
+# include "NumPy.hpp"
+#endif
 
 
 namespace
@@ -82,6 +87,57 @@ namespace
 			data->convertible = storage;
 		}
 	};
+
+#ifdef HAVE_NUMPY
+	template <typename VectorType>
+	struct VectorFromNDArrayConverter 
+	{
+
+		VectorFromNDArrayConverter() {
+			using namespace boost;
+
+			python::converter::registry::insert(&convertible, &construct, python::type_id<VectorType>());
+		}
+
+		static void* convertible(PyObject* obj_ptr) {
+			using namespace boost;
+			using namespace CDPLPythonMath;
+
+			if (!obj_ptr)
+				return 0;
+
+			PyArrayObject* arr = NumPy::castToNDArray(obj_ptr);
+
+			if (!arr)
+				return 0;
+
+			if (!NumPy::checkDim(arr, 1))
+				return 0;
+
+			if (!NumPy::checkDataType<typename VectorType::ValueType>(arr))
+				return 0;
+			
+			return obj_ptr;
+		}
+
+		static void construct(PyObject* obj_ptr, boost::python::converter::rvalue_from_python_stage1_data* data) {
+			using namespace boost;
+			using namespace CDPLPythonMath;
+
+			void* storage = ((python::converter::rvalue_from_python_storage<VectorType>*)data)->storage.bytes;
+
+			new (storage) VectorType();
+
+			VectorType& vec = *static_cast<VectorType*>(storage);
+			PyArrayObject* arr = reinterpret_cast<PyArrayObject*>(obj_ptr);
+
+			NumPy::resizeTarget1(vec, arr);
+			NumPy::copyArray1(vec, arr);
+
+			data->convertible = storage;
+		}
+	};
+#endif
 }
 
 
@@ -93,4 +149,11 @@ void CDPLPythonMath::registerFromPythonToVectorConverters()
 	VectorFromPySequenceConverter<Math::DVector>();
 	VectorFromPySequenceConverter<Math::LVector>();
 	VectorFromPySequenceConverter<Math::ULVector>();
+
+#ifdef HAVE_NUMPY
+	VectorFromNDArrayConverter<Math::FVector>();
+	VectorFromNDArrayConverter<Math::DVector>();
+	VectorFromNDArrayConverter<Math::LVector>();
+	VectorFromNDArrayConverter<Math::ULVector>();
+#endif
 }

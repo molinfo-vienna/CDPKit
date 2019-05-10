@@ -72,6 +72,7 @@ namespace
 				.def("swap", &swapExpr, (python::arg("self"), python::arg("e")))
 				.def(QuaternionAssignAndSwapVisitor<ExpressionType>("e"))
 				.def(AssignFunctionGeneratorVisitor<ExpressionType, ConstQuaternionExpression>("e"))
+				.def(QuaternionNDArrayAssignVisitor<ExpressionType>())
 				.def(QuaternionVisitor<ExpressionType>("e"));
 
 			python::implicitly_convertible<ExpressionPointer, ConstExpressionPointer>();

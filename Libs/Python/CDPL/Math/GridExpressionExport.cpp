@@ -72,6 +72,7 @@ namespace
 				.def("swap", &swapExpr, (python::arg("self"), python::arg("e")))
 				.def(GridAssignAndSwapVisitor<ExpressionType>("e"))
 				.def(AssignFunctionGeneratorVisitor<ExpressionType, ConstGridExpression>("e"))
+				.def(GridNDArrayAssignVisitor<ExpressionType>())
 				.def(GridVisitor<ExpressionType>("e"));
 
 			python::implicitly_convertible<ExpressionPointer, ConstExpressionPointer>();

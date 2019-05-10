@@ -28,13 +28,15 @@
 #define CDPL_PYTHON_MATH_NUMPY_HPP
 
 #define NPY_NO_DEPRECATED_API NPY_1_7_API_VERSION
-#define PY_ARRAY_UNIQUE_SYMBOL BOOST_NUMPY_ARRAY_API
+#define PY_ARRAY_UNIQUE_SYMBOL CDPL_NUMPY_ARRAY_API
 
 #ifndef ENABLE_IMPORT_ARRAY_FUNCTION
 # define NO_IMPORT_ARRAY
 #endif
 
 #include <numpy/ndarrayobject.h>
+
+#include <cstddef>
 
 
 namespace CDPLPythonMath
@@ -133,6 +135,61 @@ namespace CDPLPythonMath
 
 		bool init(); 
 		bool available(); 
+
+		PyArrayObject* castToNDArray(PyObject* obj);
+
+		template <typename T>
+		bool checkDataType(PyArrayObject* arr) {
+			return (PyArray_EquivTypenums(PyArray_TYPE(arr), DataTypeNum<T>::Value) == NPY_TRUE);
+		}
+
+		bool checkDim(PyArrayObject* arr, std::size_t dim);
+
+		bool checkSize(PyArrayObject* arr, std::size_t size1);
+		bool checkSize(PyArrayObject* arr, std::size_t size1, std::size_t size2);
+		bool checkSize(PyArrayObject* arr, std::size_t size1, std::size_t size2, std::size_t size3);
+
+		template <typename T>
+		void resizeTarget1(T& tgt, PyArrayObject* arr) {
+			npy_intp* dims = PyArray_DIMS(arr);
+
+			tgt.resize(dims[0]);
+		} 
+
+		template <typename T>
+		void resizeTarget2(T& tgt, PyArrayObject* arr) {
+			npy_intp* dims = PyArray_DIMS(arr);
+
+			tgt.resize(dims[0], dims[1]);
+		} 
+
+		template <typename T>
+		void resizeTarget3(T& tgt, PyArrayObject* arr) {
+			npy_intp* dims = PyArray_DIMS(arr);
+
+			tgt.resize(dims[0], dims[1], dims[2]);
+		} 
+
+		template <typename T, typename VT = typename T::ValueType>
+		void copyArray1(T& tgt, PyArrayObject* arr) {
+			for (std::size_t i = 0, size = tgt.getSize(); i < size; i++)
+				tgt(i) = *reinterpret_cast<VT*>(PyArray_GETPTR1(arr, i));
+		}
+
+		template <typename T, typename VT = typename T::ValueType>
+		void copyArray2(T& tgt, PyArrayObject* arr) {
+			for (std::size_t i = 0, size1 = tgt.getSize1(), size2 = tgt.getSize2(); i < size1; i++)
+				for (std::size_t j = 0; j < size2; j++)
+					tgt(i, j) = *reinterpret_cast<VT*>(PyArray_GETPTR2(arr, i, j));
+		}
+
+		template <typename T, typename VT = typename T::ValueType>
+		void copyArray3(T& tgt, PyArrayObject* arr) {
+			for (std::size_t i = 0, size1 = tgt.getSize1(), size2 = tgt.getSize2(), size3 = tgt.getSize3(); i < size1; i++)
+				for (std::size_t j = 0; j < size2; j++)
+					for (std::size_t k = 0; k < size3; k++)
+						tgt(i, j, k) = *reinterpret_cast<VT*>(PyArray_GETPTR3(arr, i, j, k));
+		}
 	}
 }
 
