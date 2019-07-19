@@ -72,6 +72,7 @@ namespace
 				.def(CDPLPythonMath::ConstGridContainerVisitor<MathGridType>())
 				.def(CDPLPythonMath::GridAssignAndSwapVisitor<MathGridType>())
 				.def(CDPLPythonMath::GridVisitor<MathGridType>())
+				.def(CDPLPythonMath::GridNDArrayAssignVisitor<MathGridType, true>())
 				.def(CDPLPythonMath::GridContainerVisitor<MathGridType>());
 		}
     };

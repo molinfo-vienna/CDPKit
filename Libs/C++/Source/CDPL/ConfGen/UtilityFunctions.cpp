@@ -178,11 +178,9 @@ void ConfGen::prepareForConformerGeneration(Chem::Molecule& mol)
 	calcImplicitHydrogenCounts(mol, false);
 	perceiveHybridizationStates(mol, false);
 
-	perceiveComponents(mol, false);
 	perceiveSSSR(mol, false);
 	setRingFlags(mol, false);
 	setAromaticityFlags(mol, false);
-	calcTopologicalDistanceMatrix(mol, false);
 
 	for (Molecule::AtomIterator it = mol.getAtomsBegin(), end = mol.getAtomsEnd(); it != end; ++it) {
 		Atom& atom = *it;
@@ -207,5 +205,10 @@ void ConfGen::prepareForConformerGeneration(Chem::Molecule& mol)
 	if (makeHydrogenComplete(mol)) {
 		calcImplicitHydrogenCounts(mol, true);
 		perceiveComponents(mol, true);
+		calcTopologicalDistanceMatrix(mol, true);
+
+	} else {
+		perceiveComponents(mol, false);
+		calcTopologicalDistanceMatrix(mol, false);
 	}
 }

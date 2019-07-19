@@ -37,6 +37,10 @@
 
 #include "CDPL/ConfGen/SystematicConformerGenerator.hpp"
 #include "CDPL/ConfGen/FragmentConformerGenerator.hpp"
+#include "CDPL/ConfGen/FragmentLibraryEntry.hpp"
+#include "CDPL/ForceField/MMFF94InteractionParameterizer.hpp"
+#include "CDPL/ForceField/MMFF94InteractionData.hpp"
+#include "CDPL/Chem/SmallestSetOfSmallestRings.hpp"
 #include "CDPL/Math/VectorArray.hpp"
 
 #include "FragmentTreeNode.hpp"
@@ -57,6 +61,8 @@ namespace CDPL
 
 			SystematicConformerGeneratorImpl();
 
+			~SystematicConformerGeneratorImpl();
+
 			void applySettings(const Settings& settings);
 
 			const Settings& getSettings() const;
@@ -64,44 +70,86 @@ namespace CDPL
 			Status generate(const Chem::MolecularGraph& molgraph);
 
 		private:
+			class Vec3DArrayDeallocator
+			{
+
+			public:
+				Vec3DArrayDeallocator(SystematicConformerGeneratorImpl* owner, Math::Vector3DArray* array_ptr): 
+					owner(owner), arrayPtr(array_ptr) {}
+
+				~Vec3DArrayDeallocator() {
+					if (arrayPtr)
+						owner->freeVector3DArray(arrayPtr);
+				}
+
+				void release() {
+					arrayPtr = 0;
+				}
+
+			private:
+				SystematicConformerGeneratorImpl* owner;
+				Math::Vector3DArray*              arrayPtr;
+			};
+
 			SystematicConformerGeneratorImpl(const SystematicConformerGeneratorImpl&);
 
 			SystematicConformerGeneratorImpl& operator=(const SystematicConformerGeneratorImpl&);
 
-			void init();
-
 			void freeVector3DArrays();
-
+		
 			void buildTree(const Chem::MolecularGraph& molgraph);
 
-			bool setFragmentCoordinates();
+			void getBuildFragmentNodes(FragmentTreeNode& node);
+			void clearFragmentConformers(FragmentTreeNode& node) const;
 
-			bool timeoutExceeded() const;
+			bool setBuildFragmentCoordinates();
 
-			bool applyExistingCoordinates(FragmentTreeNode& node);
-			bool applyFragmentLibraryCoordinates(FragmentTreeNode& node);
+			bool setExistingCoordinates(FragmentTreeNode& node);
+			bool setFragmentLibraryCoordinates(FragmentTreeNode& node);
 			bool generateFragmentCoordinates(FragmentTreeNode& node);
 
-			void genChainBuildFragmentSubtrees();
+			void distChainBuildFragmentCoordinates(FragmentTreeNode& node, const Math::Vector3DArray& coords, 
+												   bool fix_stereo);
+
+			void fixAtomAndBondConfigurations(FragmentTreeNode& node) const;
+
+			void extractAromRingSubstituentBonds(FragmentTreeNode& node) const;
+			void fixAromRingSubstituentBondLengths(Math::Vector3DArray& coords) const;
+
+			void generateChainBuildFragmentSubtrees();
+
+			void getLibraryFragmentConformation(FragmentTreeNode& node, const Chem::MolecularGraph& lib_frag, 
+												std::size_t conf_idx, Math::Vector3DArray& coords) const;
+
+			void buildAtomIndexMaps(FragmentTreeNode& node) const;
 
 			void getFragmentLinkBonds(const Chem::MolecularGraph& molgraph);
 			void getRotatableBonds(const Chem::MolecularGraph& molgraph);
 
-			Math::Vector3DArray::SharedPointer allocVector3DArray();
-			void freeVector3DArray(const Math::Vector3DArray::SharedPointer& vec_array);
+			Math::Vector3DArray* allocVector3DArray();
+			void freeVector3DArray(Math::Vector3DArray* vec_array);
+
+			bool timeoutExceeded() const;
 
 			typedef FragmentTreeNode::BondList BondList;
-			typedef FragmentTreeNode::NodeList NodeList;
-			typedef std::vector<Math::Vector3DArray::SharedPointer> Vector3DArrayList;
+			typedef FragmentTreeNode::AtomIndexMap AtomIndexMap;
+			typedef std::vector<FragmentTreeNode*> NodeList;
+			typedef std::vector<Math::Vector3DArray::SharedPointer> AllocVector3DArrayList;
+			typedef std::vector<Math::Vector3DArray*> Vector3DArrayList;
 
-			Settings                               settings;
-			FragmentTreeNode                       fragTree;
-			BondList                               bonds;
-			NodeList                               buildFragNodes; 
-			FragmentConformerGenerator             fragConfGen;
-			boost::timer::cpu_timer                timer;
-			Vector3DArrayList                      allocCoordArrays;
-			Vector3DArrayList                      freeCoordArrays;
+			Settings                                        settings;
+			FragmentTreeNode                                fragTree;
+			BondList                                        bondList;
+			NodeList                                        buildFragNodes; 
+			FragmentLibraryEntry                            fragLibEntry;
+			FragmentConformerGenerator                      fragConfGen;
+			boost::timer::cpu_timer                         timer;
+			ForceField::MMFF94InteractionParameterizer      mmff94Parameterizer;
+			ForceField::MMFF94InteractionData               searchdMMFF94ParamData;
+			ForceField::MMFF94InteractionData               buildMMFF94ParamData;
+			Chem::SmallestSetOfSmallestRings::SharedPointer fragSSSR;
+			AllocVector3DArrayList                          allocCoordArrays;
+			Vector3DArrayList                               freeCoordArrays;
 		};
     }
 }

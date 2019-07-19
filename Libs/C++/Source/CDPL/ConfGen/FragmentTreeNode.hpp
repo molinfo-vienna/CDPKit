@@ -36,6 +36,7 @@
 #include <cstddef>
 //#include <iosfwd>
 
+#include "CDPL/Math/VectorArray.hpp"
 #include "CDPL/Util/BitSet.hpp"
 
 
@@ -59,8 +60,8 @@ namespace CDPL
 
 		public:
 			typedef std::vector<const Chem::Bond*> BondList;
-			typedef std::vector<FragmentTreeNode*> NodeList;
-	
+			typedef std::vector<std::size_t> AtomIndexMap;	
+
 			FragmentTreeNode();
 
 			void splitRecursive(const Chem::MolecularGraph& frag, BondList& bonds);
@@ -78,7 +79,13 @@ namespace CDPL
 			FragmentTreeNode* getLeftChild() const;
 			FragmentTreeNode* getRightChild() const;
 
-			void getLeafNodes(NodeList& nodes);
+			void clearConformers();
+
+			void addConformer(Math::Vector3DArray* coords);
+
+			void buildAtomIndexMap();
+
+			const AtomIndexMap& getAtomIndexMap() const;
 
 			//void printTree(std::ostream& os) const;
 
@@ -98,6 +105,7 @@ namespace CDPL
 			
 			typedef std::auto_ptr<FragmentTreeNode> NodePointer;
 			typedef std::auto_ptr<Chem::Fragment> FragmentPointer;
+			typedef std::vector<Math::Vector3DArray*> Vector3DArrayList;
 
 			FragmentTreeNode&           root;
 			const Chem::MolecularGraph* fragment;
@@ -107,6 +115,8 @@ namespace CDPL
 			FragmentPointer             leftFragment;
 			FragmentPointer             rightFragment;
 			unsigned int                fragmentType;
+			AtomIndexMap                atomIdxMap;
+			Vector3DArrayList           conformers;
 		};
     }
 }

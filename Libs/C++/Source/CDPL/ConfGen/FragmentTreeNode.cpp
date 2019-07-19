@@ -27,6 +27,9 @@
 #include "StaticInit.hpp"
 
 #include <algorithm>
+#include <iterator>
+
+#include <boost/bind.hpp>
 
 #include "CDPL/Chem/Fragment.hpp"
 #include "CDPL/Chem/Atom.hpp"
@@ -37,6 +40,7 @@
 
 #include "FragmentTreeNode.hpp"
 
+//#include <iostream>
 //#include "CDPL/Chem/MolecularGraphFunctions.hpp"
 using namespace CDPL;
 
@@ -90,16 +94,29 @@ ConfGen::FragmentTreeNode* ConfGen::FragmentTreeNode::getRightChild() const
 	return rightChild.get();
 }
 
-void ConfGen::FragmentTreeNode::getLeafNodes(NodeList& nodes)
+void ConfGen::FragmentTreeNode::clearConformers()
 {
-	if (splitBond == 0) { 
-		nodes.push_back(this);
-		return;
-	}
-
-	leftChild->getLeafNodes(nodes);
-	rightChild->getLeafNodes(nodes);
+	conformers.clear();
 }
+
+void ConfGen::FragmentTreeNode::addConformer(Math::Vector3DArray* coords)
+{
+	conformers.push_back(coords);
+}
+
+void ConfGen::FragmentTreeNode::buildAtomIndexMap()
+{
+	atomIdxMap.clear();
+
+	std::transform(fragment->getAtomsBegin(), fragment->getAtomsEnd(), std::back_inserter(atomIdxMap),
+				   boost::bind(&Chem::MolecularGraph::getAtomIndex, &root.getFragment(), _1));
+}
+
+const ConfGen::FragmentTreeNode::AtomIndexMap& ConfGen::FragmentTreeNode::getAtomIndexMap() const
+{
+	return atomIdxMap;
+}
+
 /*
 void ConfGen::FragmentTreeNode::printTree(std::ostream& os) const
 {
@@ -146,7 +163,7 @@ void ConfGen::FragmentTreeNode::splitRecursive(const Chem::MolecularGraph& frag,
 		rightChild.reset(new FragmentTreeNode(root));
     } else 
 		rightFragment->clear();
-    
+
     leftFragment->addBond(*splitBond);
     rightFragment->addBond(*splitBond);
 
@@ -235,7 +252,6 @@ std::size_t ConfGen::FragmentTreeNode::getMinMaxTopologicalDistance(const Chem::
 	atom_mask.set(atom2_idx);
 
 	markReachableAtoms(atom1, *fragment, atom_mask, false);
-
 	atom_mask.reset(atom2_idx);
 
 	std::size_t max_dist1 = getMaxTopologicalDistance(atom1, atom_mask);
@@ -245,7 +261,6 @@ std::size_t ConfGen::FragmentTreeNode::getMinMaxTopologicalDistance(const Chem::
 	atom_mask.set(atom2_idx);
 
 	markReachableAtoms(atom2, *fragment, atom_mask, false);
-
 	atom_mask.reset(atom1_idx);
 
 	std::size_t max_dist2 = getMaxTopologicalDistance(atom2, atom_mask);
@@ -258,7 +273,6 @@ std::size_t ConfGen::FragmentTreeNode::getMaxTopologicalDistance(const Chem::Ato
 	using namespace Chem;
 
 	const Math::ULMatrix& dist_mtx = *getTopologicalDistanceMatrix(*root.fragment);
-
 	std::size_t root_atom_idx = root.fragment->getAtomIndex(atom);
 	std::size_t max_atom_dist = 0;
 

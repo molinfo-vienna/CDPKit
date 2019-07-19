@@ -318,7 +318,6 @@ void ConfGen::FragmentConformerGenerator::generateFlexibleRingConformers()
 	double min_energy = 0.0;
 
 	for (std::size_t i = 0; i < num_trials; i++) {
-
 		if (timeoutExceeded()) 
 			break;
 

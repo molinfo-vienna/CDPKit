@@ -40,7 +40,7 @@ using namespace CDPL;
 
 namespace
 {
-
+	
    CDPL_DEFINE_LOOKUP_KEY(CDF_MOLECULE_DATA);
 }
 

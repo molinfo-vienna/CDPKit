@@ -114,7 +114,7 @@ bool ConfGen::CDFFragmentLibraryDataReader::read(std::istream& is, FragmentLibra
 
     if (!skipToRecord(is, header, CDF::FRAGLIB_DATA_RECORD_ID, false, entryInfoBuffer))
 		return false;
-  
+
     readData(is, header.recordDataLength, entryInfoBuffer);
 
     entryInfoBuffer.setIOPointer(0);

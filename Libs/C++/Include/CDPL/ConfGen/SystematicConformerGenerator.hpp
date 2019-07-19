@@ -37,6 +37,7 @@
 #include "CDPL/ConfGen/APIPrefix.hpp"
 #include "CDPL/ConfGen/TorsionLibrary.hpp"
 #include "CDPL/ConfGen/FragmentLibrary.hpp"
+#include "CDPL/ConfGen/ForceFieldType.hpp"
 
 
 namespace CDPL 
@@ -66,8 +67,10 @@ namespace CDPL
 			{
 				
 			public:
-				static const std::size_t  DEF_TIMEOUT             = 60 * 60 * 1000;
-				static const std::size_t  DEF_MAX_FRAG_BUILD_TIME = 10 * 60 * 1000;
+				static const std::size_t  DEF_TIMEOUT                 = 60 * 60 * 1000;
+				static const std::size_t  DEF_MAX_FRAG_BUILD_TIME     = 10 * 60 * 1000;
+				static const unsigned int DEF_SEARCH_FORCE_FIELD_TYPE = ForceFieldType::MMFF94S_NO_ESTAT;
+				static const unsigned int DEF_BUILD_FORCE_FIELD_TYPE  = ForceFieldType::MMFF94S_NO_ESTAT;
 				static const double       DEF_ENERGY_WINDOW;
 
 				Settings();
@@ -96,6 +99,18 @@ namespace CDPL
 
 				std::size_t getMaxFragmentBuildTime() const;
 
+				void setSearchForceFieldType(unsigned int type);
+	    
+				unsigned int getSearchForceFieldType() const;
+
+				void setBuildForceFieldType(unsigned int type);
+	    
+				unsigned int getBuildForceFieldType() const;
+
+				void performStrictAtomTyping(bool strict);
+
+				bool strictAtomTypingPerformed() const;
+
 				void setFragmentLibrary(const FragmentLibrary::SharedPointer& lib);
 
 				const FragmentLibrary::SharedPointer& getFragmentLibrary() const;
@@ -111,6 +126,9 @@ namespace CDPL
 				double                         eWindow;
 				std::size_t                    timeout;
 				std::size_t                    maxFragBuildTime;
+				unsigned int                   searchFFieldType;
+				unsigned int                   buildFFieldType;
+				bool                           strictAtomTyping;
 				FragmentLibrary::SharedPointer fragLib;
 				TorsionLibrary::SharedPointer  torLib;
 			};

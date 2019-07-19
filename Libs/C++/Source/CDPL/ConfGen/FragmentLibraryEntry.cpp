@@ -59,6 +59,9 @@ ConfGen::FragmentLibraryEntry::FragmentLibraryEntry(): hashCode(0)
 ConfGen::FragmentLibraryEntry::FragmentLibraryEntry(const FragmentLibraryEntry& entry):  
 	Chem::MolecularGraph(entry), molecule(entry.molecule), hashCode(entry.hashCode)
 {
+	for (AtomMapping::const_iterator it = entry.atomMapping.begin(), end = entry.atomMapping.end(); it != end; ++it) 
+		atomMapping.push_back(&molecule.getAtom(entry.molecule.getAtomIndex(**it)));
+
 	canonNumGen.setHydrogenCountFunction(boost::bind(&Chem::getExplicitAtomCount, _1, Chem::AtomType::H));
 }
 
@@ -74,6 +77,7 @@ void ConfGen::FragmentLibraryEntry::clear()
     clearProperties();
 
     molecule.clear();
+	atomMapping.clear();
 	hashCode = 0;
 }
 
@@ -205,6 +209,11 @@ ConfGen::FragmentLibraryEntry& ConfGen::FragmentLibraryEntry::operator=(const Fr
 	molecule.operator=(entry.molecule);
 	hashCode = entry.hashCode;
 
+	atomMapping.clear();
+
+	for (AtomMapping::const_iterator it = entry.atomMapping.begin(), end = entry.atomMapping.end(); it != end; ++it) 
+		atomMapping.push_back(&molecule.getAtom(entry.molecule.getAtomIndex(**it)));
+
 	return *this;
 }
 	
@@ -220,6 +229,11 @@ void ConfGen::FragmentLibraryEntry::create(const Chem::MolecularGraph& molgraph)
 	generateCanonicalMolGraph(flex_ring_rsys);
 	calcHashCode(flex_ring_rsys);
 	makeAtomOrderCanonical();
+}
+
+const ConfGen::FragmentLibraryEntry::AtomMapping& ConfGen::FragmentLibraryEntry::getAtomMapping() const
+{
+	return atomMapping;
 }
 
 void ConfGen::FragmentLibraryEntry::copyAtoms(const Chem::MolecularGraph& molgraph)
@@ -253,6 +267,8 @@ void ConfGen::FragmentLibraryEntry::copyAtoms(const Chem::MolecularGraph& molgra
 		}
 
 		Atom& new_atom = molecule.addAtom();
+
+		atomMapping.push_back(&new_atom);
 
 		if (exp_atom_count == 1 && have_arom_ring_nbr) {
 			setType(new_atom, AtomType::H);

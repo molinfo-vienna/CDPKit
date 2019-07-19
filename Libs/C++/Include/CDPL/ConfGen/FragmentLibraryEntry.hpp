@@ -71,6 +71,8 @@ namespace CDPL
 			typedef Chem::BasicMolecule::BondIterator BondIterator;
 			typedef Chem::BasicMolecule::ConstBondIterator ConstBondIterator;
 
+			typedef std::vector<const Chem::Atom*> AtomMapping;
+
 			/**
 			 * \brief Constructs an empty \c %FragmentLibraryEntry instance.
 			 */
@@ -139,7 +141,9 @@ namespace CDPL
 			FragmentLibraryEntry& operator=(const FragmentLibraryEntry& entry);
 
 			void create(const Chem::MolecularGraph& molgraph);
-	
+
+			const AtomMapping& getAtomMapping() const;
+
 		  private:
 			void copyAtoms(const Chem::MolecularGraph& molgraph);
 			bool copyBonds(const Chem::MolecularGraph& molgraph);
@@ -165,6 +169,7 @@ namespace CDPL
 			Chem::CanonicalNumberingGenerator canonNumGen;
 			Util::STArray                     canonNumbers;
 			HashInputData                     hashInputData;
+			AtomMapping                       atomMapping;
 		};
 
 		/**

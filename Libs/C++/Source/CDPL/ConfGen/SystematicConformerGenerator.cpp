@@ -34,14 +34,18 @@ using namespace CDPL;
 
 // Settings
 
-const std::size_t  DEF_TIMEOUT                                                  = 60 * 60 * 1000;
-const std::size_t  DEF_MAX_FRAG_BUILD_TIME                                      = 10 * 60 * 1000;
-const double ConfGen::SystematicConformerGenerator::Settings::DEF_ENERGY_WINDOW = 10.0;
+const std::size_t  ConfGen::SystematicConformerGenerator::Settings::DEF_TIMEOUT;
+const std::size_t  ConfGen::SystematicConformerGenerator::Settings::DEF_MAX_FRAG_BUILD_TIME;
+const unsigned int ConfGen::SystematicConformerGenerator::Settings::DEF_SEARCH_FORCE_FIELD_TYPE;
+const unsigned int ConfGen::SystematicConformerGenerator::Settings::DEF_BUILD_FORCE_FIELD_TYPE;
+const double       ConfGen::SystematicConformerGenerator::Settings::DEF_ENERGY_WINDOW             = 10.0;
 
 
 ConfGen::SystematicConformerGenerator::Settings::Settings(): 
 	hRotors(false), enumRings(true), reuseExistingCoords(false), eWindow(DEF_ENERGY_WINDOW),
-	timeout(DEF_TIMEOUT), maxFragBuildTime(DEF_MAX_FRAG_BUILD_TIME) 
+	timeout(DEF_TIMEOUT), maxFragBuildTime(DEF_MAX_FRAG_BUILD_TIME), searchFFieldType(DEF_SEARCH_FORCE_FIELD_TYPE),
+	buildFFieldType(DEF_BUILD_FORCE_FIELD_TYPE), strictAtomTyping(true),
+	fragLib(FragmentLibrary::get()), torLib(TorsionLibrary::get())
 {}
 
 void ConfGen::SystematicConformerGenerator::Settings::enableHydrogenRotors(bool enable)
@@ -102,6 +106,36 @@ void ConfGen::SystematicConformerGenerator::Settings::setMaxFragmentBuildTime(st
 std::size_t ConfGen::SystematicConformerGenerator::Settings::getMaxFragmentBuildTime() const
 {
 	return maxFragBuildTime;
+}
+
+void ConfGen::SystematicConformerGenerator::Settings::setSearchForceFieldType(unsigned int type)
+{
+	searchFFieldType = type;
+}
+	    
+unsigned int ConfGen::SystematicConformerGenerator::Settings::getSearchForceFieldType() const
+{
+	return searchFFieldType;
+}
+
+void ConfGen::SystematicConformerGenerator::Settings::setBuildForceFieldType(unsigned int type)
+{
+	buildFFieldType = type;
+}
+	    
+unsigned int ConfGen::SystematicConformerGenerator::Settings::getBuildForceFieldType() const
+{
+	return buildFFieldType;
+}
+
+void ConfGen::SystematicConformerGenerator::Settings::performStrictAtomTyping(bool strict)
+{
+	strictAtomTyping = strict;
+}
+
+bool ConfGen::SystematicConformerGenerator::Settings::strictAtomTypingPerformed() const
+{
+	return strictAtomTyping;
 }
 
 void ConfGen::SystematicConformerGenerator::Settings::setFragmentLibrary(const FragmentLibrary::SharedPointer& lib)
