@@ -573,7 +573,7 @@ double Pharm::ScreeningProcessorImpl::calcScore(const SearchHit& hit)
 	return scoringFunction(hit);
 }
 
-bool Pharm::ScreeningProcessorImpl::checkTopologicalMapping(const FeatureMapping& mapping) const
+bool Pharm::ScreeningProcessorImpl::checkTopologicalMapping(const FeaturePairList& mapping) const
 {
 	if (alignedQueryOptFeatures.empty())
 		return true;

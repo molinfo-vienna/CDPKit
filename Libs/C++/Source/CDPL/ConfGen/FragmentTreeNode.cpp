@@ -117,6 +117,11 @@ const ConfGen::FragmentTreeNode::AtomIndexMap& ConfGen::FragmentTreeNode::getAto
 	return atomIdxMap;
 }
 
+ForceField::MMFF94InteractionData& ConfGen::FragmentTreeNode::getMMFF94ParameterData()
+{
+	return mmff94ParamData;
+}
+
 /*
 void ConfGen::FragmentTreeNode::printTree(std::ostream& os) const
 {

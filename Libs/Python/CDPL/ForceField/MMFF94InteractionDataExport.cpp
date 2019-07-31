@@ -73,6 +73,7 @@ void CDPLPythonForceField::exportMMFF94InteractionData()
 			 python::return_internal_reference<>())
 		.def("assign", CDPLPythonBase::copyAssOp(&ForceField::MMFF94InteractionData::operator=),
 			 (python::arg("self"), python::arg("ia_data")), python::return_self<>())
+		.def("swap", &ForceField::MMFF94InteractionData::swap, (python::arg("self"), python::arg("ia_data")))
 		.def(CDPLPythonBase::ObjectIdentityCheckVisitor<ForceField::MMFF94InteractionData>())
 		.add_property("bondStretchingInteractions", 
 					  python::make_function(static_cast<ForceField::MMFF94BondStretchingInteractionData& (ForceField::MMFF94InteractionData::*)()>(

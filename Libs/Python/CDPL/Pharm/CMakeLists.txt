@@ -111,7 +111,6 @@ SET(pharm_MOD_SRCS
     FeatureTypeMatchFunctorExport.cpp
     FeaturePairDistanceMatchFunctorExport.cpp
     TopologicalEntityAlignmentExport.cpp	
-    GeometricalEntityAlignmentExport.cpp
     PharmacophoreAlignmentExport.cpp
     GeometricalFeatureMappingExtractorExport.cpp
     FeaturePositionMatchFunctorExport.cpp

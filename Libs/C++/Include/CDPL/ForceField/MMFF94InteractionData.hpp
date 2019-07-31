@@ -90,6 +90,8 @@ namespace CDPL
 
 			void clear();
 
+			void swap(MMFF94InteractionData& ia_data);
+
 		private:
 			MMFF94BondStretchingInteractionData    bondStretchingData;
 			MMFF94AngleBendingInteractionData      angleBendingData;

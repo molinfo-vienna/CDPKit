@@ -140,7 +140,7 @@ namespace CDPL
 			bool checkGeomAlignment();
 			bool checkXVolumeClashes(std::size_t mol_idx, std::size_t conf_idx);
 
-			bool checkTopologicalMapping(const FeatureMapping& mapping) const;
+			bool checkTopologicalMapping(const FeaturePairList& mapping) const;
 
 			double calcScore(const SearchHit& hit);
 

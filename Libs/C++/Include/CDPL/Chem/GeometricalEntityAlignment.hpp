@@ -189,7 +189,7 @@ namespace CDPL
 			const EntityPairMatchFunction& getEntityPairMatchFunction() const;
 	 
 			/**
-			 * \brief Adds an entity to the specified alignmententity set.
+			 * \brief Adds an entity to the specified alignment entity set.
 			 * \param entity The entity object to add.
 			 * \param first_set If \c true, the entity is added to the first entity set, if \c false to the second one.
 			 */

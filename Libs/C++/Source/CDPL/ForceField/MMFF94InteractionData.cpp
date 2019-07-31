@@ -112,3 +112,14 @@ void ForceField::MMFF94InteractionData::clear()
 	electrostaticData.clear();
 	vanDerWaalsData.clear();
 }
+
+void ForceField::MMFF94InteractionData::swap(MMFF94InteractionData& ia_data)
+{
+	bondStretchingData.swap(ia_data.bondStretchingData);
+	angleBendingData.swap(ia_data.angleBendingData);
+	stretchBendData.swap(ia_data.stretchBendData);
+	outOfPlaneData.swap(ia_data.outOfPlaneData);
+	torsionData.swap(ia_data.torsionData);
+	electrostaticData.swap(ia_data.electrostaticData);
+	vanDerWaalsData.swap(ia_data.vanDerWaalsData);
+}

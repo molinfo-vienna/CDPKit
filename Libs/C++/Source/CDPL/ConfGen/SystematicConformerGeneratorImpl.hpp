@@ -32,8 +32,10 @@
 #define CDPL_CONFGEN_SYSTEMATICCONFORMERGENERATORIMPL_HPP
 
 #include <vector>
+#include <utility>
 
 #include <boost/timer/timer.hpp>
+#include <boost/tuple/tuple.hpp>
 
 #include "CDPL/ConfGen/SystematicConformerGenerator.hpp"
 #include "CDPL/ConfGen/FragmentConformerGenerator.hpp"
@@ -113,18 +115,26 @@ namespace CDPL
 
 			void fixAtomAndBondConfigurations(FragmentTreeNode& node) const;
 
-			void extractAromRingSubstituentBonds(FragmentTreeNode& node) const;
+			void setupAromRingSubstituentBondLengthList(FragmentTreeNode& node);
 			void fixAromRingSubstituentBondLengths(Math::Vector3DArray& coords) const;
 
 			void generateChainBuildFragmentSubtrees();
 
-			void getLibraryFragmentConformation(FragmentTreeNode& node, const Chem::MolecularGraph& lib_frag, 
+			void getLibraryFragmentConformation(const Chem::MolecularGraph& lib_frag, 
 												std::size_t conf_idx, Math::Vector3DArray& coords) const;
 
 			void buildAtomIndexMaps(FragmentTreeNode& node) const;
+			void buildFragmentLibraryEntryAtomIndexMap(const FragmentTreeNode& node);
 
 			void getFragmentLinkBonds(const Chem::MolecularGraph& molgraph);
 			void getRotatableBonds(const Chem::MolecularGraph& molgraph);
+
+			void generateMMFF94ParameterData(const Chem::MolecularGraph& molgraph, unsigned int ff_type, 
+											 ForceField::MMFF94InteractionData& ia_data);
+
+			void setupMMFF94TreeNodeParameterData();
+			void distMMFF94ParameterData(FragmentTreeNode& node);
+			void extractMMFF94ParameterData(FragmentTreeNode& node);
 
 			Math::Vector3DArray* allocVector3DArray();
 			void freeVector3DArray(Math::Vector3DArray* vec_array);
@@ -136,6 +146,10 @@ namespace CDPL
 			typedef std::vector<FragmentTreeNode*> NodeList;
 			typedef std::vector<Math::Vector3DArray::SharedPointer> AllocVector3DArrayList;
 			typedef std::vector<Math::Vector3DArray*> Vector3DArrayList;
+			typedef std::pair<std::size_t, std::size_t> IndexPair;
+			typedef std::vector<IndexPair> IndexPairList;
+			typedef boost::tuple<std::size_t, std::size_t, double> BondLengthDescriptor;
+			typedef std::vector<BondLengthDescriptor> BondLengthDescriptorList;
 
 			Settings                                        settings;
 			FragmentTreeNode                                fragTree;
@@ -143,10 +157,12 @@ namespace CDPL
 			NodeList                                        buildFragNodes; 
 			FragmentLibraryEntry                            fragLibEntry;
 			FragmentConformerGenerator                      fragConfGen;
+			IndexPairList                                   fragLibEntryAtomIdxMap;
+			BondLengthDescriptorList                        aromRingSubstBondLens;
 			boost::timer::cpu_timer                         timer;
 			ForceField::MMFF94InteractionParameterizer      mmff94Parameterizer;
-			ForceField::MMFF94InteractionData               searchdMMFF94ParamData;
-			ForceField::MMFF94InteractionData               buildMMFF94ParamData;
+			ForceField::MMFF94InteractionData               tmpMMFF94ParamData;
+			ForceField::MMFF94InteractionData               fragBuildMMFF94ParamData;
 			Chem::SmallestSetOfSmallestRings::SharedPointer fragSSSR;
 			AllocVector3DArrayList                          allocCoordArrays;
 			Vector3DArrayList                               freeCoordArrays;

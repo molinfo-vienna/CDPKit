@@ -36,6 +36,7 @@
 #include <cstddef>
 //#include <iosfwd>
 
+#include "CDPL/ForceField/MMFF94InteractionData.hpp"
 #include "CDPL/Math/VectorArray.hpp"
 #include "CDPL/Util/BitSet.hpp"
 
@@ -87,6 +88,8 @@ namespace CDPL
 
 			const AtomIndexMap& getAtomIndexMap() const;
 
+			ForceField::MMFF94InteractionData& getMMFF94ParameterData();
+
 			//void printTree(std::ostream& os) const;
 
 		private:
@@ -107,16 +110,17 @@ namespace CDPL
 			typedef std::auto_ptr<Chem::Fragment> FragmentPointer;
 			typedef std::vector<Math::Vector3DArray*> Vector3DArrayList;
 
-			FragmentTreeNode&           root;
-			const Chem::MolecularGraph* fragment;
-			const Chem::Bond*           splitBond;
-			NodePointer                 leftChild;
-			NodePointer                 rightChild;
-			FragmentPointer             leftFragment;
-			FragmentPointer             rightFragment;
-			unsigned int                fragmentType;
-			AtomIndexMap                atomIdxMap;
-			Vector3DArrayList           conformers;
+			FragmentTreeNode&                 root;
+			const Chem::MolecularGraph*       fragment;
+			const Chem::Bond*                 splitBond;
+			NodePointer                       leftChild;
+			NodePointer                       rightChild;
+			FragmentPointer                   leftFragment;
+			FragmentPointer                   rightFragment;
+			unsigned int                      fragmentType;
+			AtomIndexMap                      atomIdxMap;
+			Vector3DArrayList                 conformers;
+			ForceField::MMFF94InteractionData mmff94ParamData;
 		};
     }
 }

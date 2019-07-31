@@ -31,6 +31,7 @@
 #include "CDPL/Pharm/Feature.hpp"
 
 #include "Base/CopyAssOp.hpp"
+#include "Chem/GeometricalEntityAlignmentExport.hpp"
 
 #include "ClassExports.hpp"
 
@@ -40,7 +41,9 @@ void CDPLPythonPharm::exportPharmacophoreAlignment()
     using namespace boost;
     using namespace CDPL;
 
-    python::class_<Pharm::PharmacophoreAlignment, python::bases<Chem::GeometricalEntityAlignment<Pharm::Feature, Pharm::FeatureMapping> >,
+	CDPLPythonChem::GeometricalEntityAlignmentExport<Pharm::Feature, Pharm::FeaturePairList>("GeometricalFeatureAlignment");
+
+    python::class_<Pharm::PharmacophoreAlignment, python::bases<Chem::GeometricalEntityAlignment<Pharm::Feature, Pharm::FeaturePairList> >,
 				   boost::noncopyable>("PharmacophoreAlignment", python::no_init)
 		.def(python::init<bool>((python::arg("self"), python::arg("query_mode"))))
 		.def(python::init<const Pharm::PharmacophoreAlignment&>((python::arg("self"), python::arg("alignment"))))

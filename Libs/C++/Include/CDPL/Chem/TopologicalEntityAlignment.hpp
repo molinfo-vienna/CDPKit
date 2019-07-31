@@ -33,7 +33,6 @@
 
 #include <cstddef>
 #include <vector>
-#include <set>
 #include <utility>
 
 #include <boost/function.hpp>
@@ -69,7 +68,7 @@ namespace CDPL
 			/**
 			 * \brief The container storing the entities to align.
 			 */
-			typedef std::set<const EntityType*> EntitySet;
+			typedef std::vector<const EntityType*> EntitySet;
 
 			/**
 			 * \brief The container storing the entity-mapping of a found alignment solution.
@@ -233,7 +232,7 @@ std::size_t CDPL::Chem::TopologicalEntityAlignment<T, EM>::getNumEntities(bool f
 template <typename T, typename EM>
 void CDPL::Chem::TopologicalEntityAlignment<T, EM>::addEntity(const EntityType& entity, bool first_set)
 {
-	(first_set ? firstEntities : secondEntities).insert(&entity);
+	(first_set ? firstEntities : secondEntities).push_back(&entity);
 	changes = true;
 }
 

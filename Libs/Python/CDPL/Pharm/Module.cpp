@@ -133,7 +133,6 @@ BOOST_PYTHON_MODULE(_pharm)
 	exportDefaultInteractionScoreGridSetCalculator();
 
 	exportTopologicalEntityAlignment();
-	exportGeometricalEntityAlignment();
 	exportPharmacophoreAlignment();
     exportGeometricalFeatureMappingExtractor();
 	exportFeatureTypeMatchFunctor();
