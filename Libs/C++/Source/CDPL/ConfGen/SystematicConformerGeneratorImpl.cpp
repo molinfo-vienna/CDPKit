@@ -27,6 +27,8 @@
 #include "StaticInit.hpp"
 
 #include <algorithm>
+#include <functional>
+#include <iterator>
 
 #include <boost/bind.hpp>
 
@@ -45,7 +47,7 @@
 
 #include "SystematicConformerGeneratorImpl.hpp"
 
-//#include <iostream>
+
 using namespace CDPL;
 
 
@@ -53,11 +55,9 @@ namespace
 {
 
 	template <typename InteractionData>
-	void extractFragmentInteractions2(const InteractionData& src_ia_data, InteractionData& frag_ia_data, InteractionData& non_frag_ia_data, 
-									  const Chem::MolecularGraph& src_molgraph, const Chem::MolecularGraph& frag)
+	void extractFragmentMMFF94InteractionData2(const InteractionData& src_ia_data, InteractionData& frag_ia_data, InteractionData& non_frag_ia_data, 
+											   const Chem::MolecularGraph& src_molgraph, const Chem::MolecularGraph& frag)
 	{
-		using namespace Chem;
-
 		for (typename InteractionData::ConstElementIterator it = src_ia_data.getElementsBegin(), end = src_ia_data.getElementsEnd(); it != end; ++it) {
 			const typename InteractionData::ElementType& params = *it;
 
@@ -71,17 +71,33 @@ namespace
 	}
 
 	template <typename InteractionData>
-	void extractFragmentInteractions3(const InteractionData& src_ia_data, InteractionData& frag_ia_data, InteractionData& non_frag_ia_data, 
-									  const Chem::MolecularGraph& src_molgraph, const Chem::MolecularGraph& frag)
+	void extractFragmentMMFF94InteractionData3(const InteractionData& src_ia_data, InteractionData& frag_ia_data, InteractionData& non_frag_ia_data, 
+											   const Chem::MolecularGraph& src_molgraph, const Chem::MolecularGraph& frag)
 	{
-		using namespace Chem;
-
 		for (typename InteractionData::ConstElementIterator it = src_ia_data.getElementsBegin(), end = src_ia_data.getElementsEnd(); it != end; ++it) {
 			const typename InteractionData::ElementType& params = *it;
 
-			if (frag.containsAtom(src_molgraph.getAtom(params.getTerminalAtom1Index())) &&
-				frag.containsAtom(src_molgraph.getAtom(params.getCenterAtomIndex())) && 
-				frag.containsAtom(src_molgraph.getAtom(params.getTerminalAtom2Index())))
+			if (frag.containsAtom(src_molgraph.getAtom(params.getAtom1Index())) &&
+				frag.containsAtom(src_molgraph.getAtom(params.getAtom2Index())) && 
+				frag.containsAtom(src_molgraph.getAtom(params.getAtom3Index())))
+
+				frag_ia_data.addElement(params);
+			else
+				non_frag_ia_data.addElement(params);
+		}
+	}
+
+	template <typename InteractionData>
+	void extractFragmentMMFF94InteractionData4(const InteractionData& src_ia_data, InteractionData& frag_ia_data, InteractionData& non_frag_ia_data, 
+											   const Chem::MolecularGraph& src_molgraph, const Chem::MolecularGraph& frag)
+	{
+		for (typename InteractionData::ConstElementIterator it = src_ia_data.getElementsBegin(), end = src_ia_data.getElementsEnd(); it != end; ++it) {
+			const typename InteractionData::ElementType& params = *it;
+
+			if (frag.containsAtom(src_molgraph.getAtom(params.getAtom1Index())) &&
+				frag.containsAtom(src_molgraph.getAtom(params.getAtom2Index())) && 
+				frag.containsAtom(src_molgraph.getAtom(params.getAtom3Index())) &&
+				frag.containsAtom(src_molgraph.getAtom(params.getAtom4Index())))
 
 				frag_ia_data.addElement(params);
 			else
@@ -117,18 +133,21 @@ ConfGen::SystematicConformerGeneratorImpl::generate(const Chem::MolecularGraph& 
 	freeVector3DArrays();
 	buildTree(molgraph);
 	buildAtomIndexMaps(fragTree);
-	setupMMFF94TreeNodeParameterData();
-	clearFragmentConformers(fragTree);
+	genConfSearchMMFF94InteractionData();
+	clearNodeConformers(fragTree);
 
 	if (timeoutExceeded())
 		return Status::TIMEOUT_EXCEEDED;
 	
-	if (!setBuildFragmentCoordinates()) {
+	if (!setupBuildFragmentConformers()) {
 		if (timeoutExceeded())
 			return Status::TIMEOUT_EXCEEDED;
 
 		return Status::ERROR;
 	}
+
+	distFragmentMMFF94InteractionData(fragTree);
+	calcLeafNodeConformerEnergies(fragTree);
 
 	return Status::SUCCESS;
 }
@@ -142,14 +161,6 @@ void ConfGen::SystematicConformerGeneratorImpl::freeVector3DArrays()
 							  boost::bind<Math::Vector3DArray*>(&Math::Vector3DArray::SharedPointer::get, _1)));
 }
 
-bool ConfGen::SystematicConformerGeneratorImpl::timeoutExceeded() const
-{
-	if (settings.getTimeout() == 0)
-		return false;
-
-	return (timer.elapsed().wall > (boost::timer::nanosecond_type(settings.getTimeout()) * 1000000));
-}
-
 void ConfGen::SystematicConformerGeneratorImpl::buildTree(const Chem::MolecularGraph& molgraph)
 {
 	buildFragNodes.clear();
@@ -160,7 +171,7 @@ void ConfGen::SystematicConformerGeneratorImpl::buildTree(const Chem::MolecularG
 
 	getBuildFragmentNodes(fragTree);
 
-	generateChainBuildFragmentSubtrees();
+	genChainBuildFragmentSubtrees();
 
 /*
 	std::cerr << "digraph FragmentTree" << std::endl;
@@ -170,6 +181,80 @@ void ConfGen::SystematicConformerGeneratorImpl::buildTree(const Chem::MolecularG
 
 	std::cerr << '}' << std::endl;
 */
+}
+
+void ConfGen::SystematicConformerGeneratorImpl::buildAtomIndexMaps(FragmentTreeNode& node) const
+{
+	FragmentTreeNode::AtomIndexMap& idx_map = node.getAtomIndexMap();
+	
+	idx_map.clear();
+
+	std::transform(node.getFragment().getAtomsBegin(), node.getFragment().getAtomsEnd(), std::back_inserter(idx_map),
+				   boost::bind(&Chem::MolecularGraph::getAtomIndex, &fragTree.getFragment(), _1));
+
+	if (!node.hasChildren())
+		return;
+
+	buildAtomIndexMaps(*node.getLeftChild());
+	buildAtomIndexMaps(*node.getRightChild());
+}
+
+void ConfGen::SystematicConformerGeneratorImpl::genConfSearchMMFF94InteractionData()
+{
+	genMMFF94InteractionData(fragTree.getFragment(), settings.getSearchForceFieldType(), fragTree.getMMFF94InteractionData());
+}
+
+void ConfGen::SystematicConformerGeneratorImpl::clearNodeConformers(FragmentTreeNode& node) const
+{
+	node.clearConformers();
+
+	if (!node.hasChildren())
+		return;
+
+	clearNodeConformers(*node.getLeftChild());
+	clearNodeConformers(*node.getRightChild());
+}
+
+bool ConfGen::SystematicConformerGeneratorImpl::setupBuildFragmentConformers()
+{
+	for (NodeList::const_iterator it = buildFragNodes.begin(), end = buildFragNodes.end(); it != end; ++it) {
+		FragmentTreeNode* node = *it;
+
+		if (settings.existingCoordinatesReused() && 
+			(!settings.ringsEnumerated() || node->getFragmentType() != FragmentType::FLEXIBLE_RING_SYSTEM) && 
+			setExistingCoordinates(*node))
+			continue;
+		
+		fragLibEntry.create(node->getFragment());
+		buildFragmentLibraryEntryAtomIndexMap(*node);
+
+		if (setFragmentLibraryConformers(*node))
+			continue;
+
+		if (!genFragmentConformers(*node))
+			return false;
+	}
+
+	return true;
+}
+
+void ConfGen::SystematicConformerGeneratorImpl::calcLeafNodeConformerEnergies(FragmentTreeNode& node)
+{
+	if (node.hasChildren()) {
+		calcLeafNodeConformerEnergies(*node.getLeftChild());
+		calcLeafNodeConformerEnergies(*node.getRightChild());
+		return;
+	}
+
+	mmff94EnergyCalc.setup(node.getMMFF94InteractionData());
+
+	for (FragmentTreeNode::ConformerIterator it = node.getConformersBegin(), end = node.getConformersEnd(); it != end; ++it) 
+		it->second = mmff94EnergyCalc(*it->first);
+
+	if (node.getNumConformers() > 1)
+		std::sort(node.getConformersBegin(), node.getConformersEnd(), boost::bind(std::less<double>(),
+																				  boost::bind(&FragmentTreeNode::ConfData::second, _1),
+																				  boost::bind(&FragmentTreeNode::ConfData::second, _2)));
 }
 
 void ConfGen::SystematicConformerGeneratorImpl::getBuildFragmentNodes(FragmentTreeNode& node)
@@ -183,38 +268,25 @@ void ConfGen::SystematicConformerGeneratorImpl::getBuildFragmentNodes(FragmentTr
 	getBuildFragmentNodes(*node.getRightChild());
 }
 
-void ConfGen::SystematicConformerGeneratorImpl::clearFragmentConformers(FragmentTreeNode& node) const
+void ConfGen::SystematicConformerGeneratorImpl::genChainBuildFragmentSubtrees()
 {
-	node.clearConformers();
+	using namespace Chem;
 
-	if (!node.hasChildren())
-		return;
-
-	clearFragmentConformers(*node.getLeftChild());
-	clearFragmentConformers(*node.getRightChild());
-}
-
-bool ConfGen::SystematicConformerGeneratorImpl::setBuildFragmentCoordinates()
-{
 	for (NodeList::const_iterator it = buildFragNodes.begin(), end = buildFragNodes.end(); it != end; ++it) {
 		FragmentTreeNode* node = *it;
+		const MolecularGraph& frag = node->getFragment();
+		unsigned int frag_type = perceiveFragmentType(frag);
 
-		if (settings.existingCoordinatesReused() && 
-			(!settings.ringsEnumerated() || node->getFragmentType() != FragmentType::FLEXIBLE_RING_SYSTEM) && 
-			setExistingCoordinates(*node))
-			continue;
-		
-		fragLibEntry.create(node->getFragment());
-		buildFragmentLibraryEntryAtomIndexMap(*node);
+		node->setFragmentType(frag_type);
 
-		if (setFragmentLibraryCoordinates(*node))
+		if (frag_type != FragmentType::CHAIN)
 			continue;
 
-		if (!generateFragmentCoordinates(*node))
-			return false;
+		getRotatableBonds(frag);
+
+		if (!bondList.empty())
+			node->splitRecursive(frag, bondList);
 	}
-
-	return true;
 }
 
 bool ConfGen::SystematicConformerGeneratorImpl::setExistingCoordinates(FragmentTreeNode& node)
@@ -240,6 +312,8 @@ bool ConfGen::SystematicConformerGeneratorImpl::setExistingCoordinates(FragmentT
 		else {
 			node.addConformer(coords);
 			dealloc_guard.release();
+
+			enumNitrogens(node);
 		}
 
 		return true;
@@ -249,7 +323,7 @@ bool ConfGen::SystematicConformerGeneratorImpl::setExistingCoordinates(FragmentT
 	return false;
 }
 
-bool ConfGen::SystematicConformerGeneratorImpl::setFragmentLibraryCoordinates(FragmentTreeNode& node)
+bool ConfGen::SystematicConformerGeneratorImpl::setFragmentLibraryConformers(FragmentTreeNode& node)
 {
 	using namespace Chem;
 
@@ -283,6 +357,8 @@ bool ConfGen::SystematicConformerGeneratorImpl::setFragmentLibraryCoordinates(Fr
 			else {
 				node.addConformer(coords);
 				dealloc_guard.release();
+
+				enumNitrogens(node);
 			}
 
 			return true;
@@ -303,6 +379,8 @@ bool ConfGen::SystematicConformerGeneratorImpl::setFragmentLibraryCoordinates(Fr
 				dealloc_guard.release();
 			}
 
+			enumNitrogens(node);
+
 			return true;
 		}
 	}
@@ -310,7 +388,7 @@ bool ConfGen::SystematicConformerGeneratorImpl::setFragmentLibraryCoordinates(Fr
 	return false;
 }
 
-bool ConfGen::SystematicConformerGeneratorImpl::generateFragmentCoordinates(FragmentTreeNode& node)
+bool ConfGen::SystematicConformerGeneratorImpl::genFragmentConformers(FragmentTreeNode& node)
 {
 	std::size_t frag_build_to = settings.getMaxFragmentBuildTime();
 
@@ -334,9 +412,9 @@ bool ConfGen::SystematicConformerGeneratorImpl::generateFragmentCoordinates(Frag
 	fragSSSR->perceive(fragLibEntry);
 	setSSSR(fragLibEntry, fragSSSR);
 
-	generateMMFF94ParameterData(fragLibEntry, settings.getBuildForceFieldType(), fragBuildMMFF94ParamData);
+	genMMFF94InteractionData(fragLibEntry, settings.getBuildForceFieldType(), fragBuildMMFF94Data);
 
-	fragConfGen.generate(fragLibEntry, fragBuildMMFF94ParamData, node.getFragmentType());
+	fragConfGen.generate(fragLibEntry, fragBuildMMFF94Data, node.getFragmentType());
 
 	std::size_t num_confs = fragConfGen.getNumConformers();
 
@@ -360,6 +438,8 @@ bool ConfGen::SystematicConformerGeneratorImpl::generateFragmentCoordinates(Frag
 		else {
 			node.addConformer(coords);
 			dealloc_guard.release();
+
+			enumNitrogens(node);
 		}
 
 		return true;
@@ -383,6 +463,8 @@ bool ConfGen::SystematicConformerGeneratorImpl::generateFragmentCoordinates(Frag
 		node.addConformer(coords);
 		dealloc_guard.release();
 	}
+
+	enumNitrogens(node);
 
 	return true;
 }
@@ -425,27 +507,8 @@ void ConfGen::SystematicConformerGeneratorImpl::distChainBuildFragmentCoordinate
 
 	if (fix_stereo)
 		fixAtomAndBondConfigurations(node);
-}
 
-void ConfGen::SystematicConformerGeneratorImpl::generateChainBuildFragmentSubtrees()
-{
-	using namespace Chem;
-
-	for (NodeList::const_iterator it = buildFragNodes.begin(), end = buildFragNodes.end(); it != end; ++it) {
-		FragmentTreeNode* node = *it;
-		const MolecularGraph& frag = node->getFragment();
-		unsigned int frag_type = perceiveFragmentType(frag);
-
-		node->setFragmentType(frag_type);
-
-		if (frag_type != FragmentType::CHAIN)
-			continue;
-
-		getRotatableBonds(frag);
-
-		if (!bondList.empty())
-			node->splitRecursive(frag, bondList);
-	}
+	enumNitrogens(node);
 }
 
 void ConfGen::SystematicConformerGeneratorImpl::getLibraryFragmentConformation(const Chem::MolecularGraph& lib_frag, 
@@ -458,11 +521,6 @@ void ConfGen::SystematicConformerGeneratorImpl::getLibraryFragmentConformation(c
 	}
 }
 
-void ConfGen::SystematicConformerGeneratorImpl::fixAtomAndBondConfigurations(FragmentTreeNode& node) const
-{
-	// TODO
-}
-
 void ConfGen::SystematicConformerGeneratorImpl::setupAromRingSubstituentBondLengthList(FragmentTreeNode& node)
 {
 	using namespace Chem;
@@ -470,7 +528,7 @@ void ConfGen::SystematicConformerGeneratorImpl::setupAromRingSubstituentBondLeng
 
 	const MolecularGraph& frag = node.getFragment();
 	const MolecularGraph& root_frag = fragTree.getFragment();
-	const MMFF94BondStretchingInteractionData& bs_params = node.getMMFF94ParameterData().getBondStretchingInteractions();
+	const MMFF94BondStretchingInteractionData& bs_params = fragTree.getMMFF94InteractionData().getBondStretchingInteractions();
 
 	aromRingSubstBondLens.clear();
 
@@ -524,15 +582,17 @@ void ConfGen::SystematicConformerGeneratorImpl::fixAromRingSubstituentBondLength
 	}
 }
 
-void ConfGen::SystematicConformerGeneratorImpl::buildAtomIndexMaps(FragmentTreeNode& node) const
+void ConfGen::SystematicConformerGeneratorImpl::fixAtomAndBondConfigurations(FragmentTreeNode& node) const
 {
-	node.buildAtomIndexMap();
+	// TODO
+}
 
-	if (!node.hasChildren())
+void ConfGen::SystematicConformerGeneratorImpl::enumNitrogens(FragmentTreeNode& node)
+{
+	if (!settings.nitrogensEnumerated())
 		return;
 
-	buildAtomIndexMaps(*node.getLeftChild());
-	buildAtomIndexMaps(*node.getRightChild());
+	// TODO
 }
 
 void ConfGen::SystematicConformerGeneratorImpl::getFragmentLinkBonds(const Chem::MolecularGraph& molgraph)
@@ -580,8 +640,8 @@ void ConfGen::SystematicConformerGeneratorImpl::getRotatableBonds(const Chem::Mo
 	}
 }
 
-void ConfGen::SystematicConformerGeneratorImpl::generateMMFF94ParameterData(const Chem::MolecularGraph& molgraph, unsigned int ff_type, 
-																			ForceField::MMFF94InteractionData& ia_data)
+void ConfGen::SystematicConformerGeneratorImpl::genMMFF94InteractionData(const Chem::MolecularGraph& molgraph, unsigned int ff_type, 
+																		 ForceField::MMFF94InteractionData& ia_data)
 {
  	unsigned int ia_types = ForceField::InteractionType::ALL;
 
@@ -613,24 +673,18 @@ void ConfGen::SystematicConformerGeneratorImpl::generateMMFF94ParameterData(cons
 	mmff94Parameterizer.parameterize(molgraph, ia_data, ia_types);
 }
 
-void ConfGen::SystematicConformerGeneratorImpl::setupMMFF94TreeNodeParameterData()
-{
-	generateMMFF94ParameterData(fragTree.getFragment(), settings.getSearchForceFieldType(), fragTree.getMMFF94ParameterData());
-	distMMFF94ParameterData(fragTree);
-}
-
-void ConfGen::SystematicConformerGeneratorImpl::distMMFF94ParameterData(FragmentTreeNode& node)
+void ConfGen::SystematicConformerGeneratorImpl::distFragmentMMFF94InteractionData(FragmentTreeNode& node)
 {
 	if (node.hasChildren()) {
-		distMMFF94ParameterData(*node.getLeftChild());
-		distMMFF94ParameterData(*node.getRightChild());
+		distFragmentMMFF94InteractionData(*node.getLeftChild());
+		distFragmentMMFF94InteractionData(*node.getRightChild());
 	}
 
 	if (&node != &fragTree)
-		extractMMFF94ParameterData(node);
+		extractFragmentMMFF94InteractionData(node);
 }
 
-void ConfGen::SystematicConformerGeneratorImpl::extractMMFF94ParameterData(FragmentTreeNode& node)
+void ConfGen::SystematicConformerGeneratorImpl::extractFragmentMMFF94InteractionData(FragmentTreeNode& node)
 {
 	using namespace Chem;
 	using namespace ForceField;
@@ -638,58 +692,36 @@ void ConfGen::SystematicConformerGeneratorImpl::extractMMFF94ParameterData(Fragm
 	const MolecularGraph& root_frag = fragTree.getFragment();
 	const MolecularGraph& node_frag = node.getFragment();
 
-	MMFF94InteractionData& root_params = fragTree.getMMFF94ParameterData();
-	MMFF94InteractionData& node_params = node.getMMFF94ParameterData();
+	MMFF94InteractionData& root_ia_data = fragTree.getMMFF94InteractionData();
+	MMFF94InteractionData& node_ia_data = node.getMMFF94InteractionData();
 
-	node_params.clear();
-	tmpMMFF94ParamData.clear();
+	node_ia_data.clear();
+	tmpMMFF94Data.clear();
 
-	extractFragmentInteractions2(root_params.getBondStretchingInteractions(), node_params.getBondStretchingInteractions(), 
-								 tmpMMFF94ParamData.getBondStretchingInteractions(), root_frag, node_frag);
-	extractFragmentInteractions2(root_params.getElectrostaticInteractions(), node_params.getElectrostaticInteractions(), 
-								 tmpMMFF94ParamData.getElectrostaticInteractions(), root_frag, node_frag);
-	extractFragmentInteractions2(root_params.getVanDerWaalsInteractions(), node_params.getVanDerWaalsInteractions(), 
-								 tmpMMFF94ParamData.getVanDerWaalsInteractions(), root_frag, node_frag);
-	extractFragmentInteractions3(root_params.getAngleBendingInteractions(), node_params.getAngleBendingInteractions(), 
-								 tmpMMFF94ParamData.getAngleBendingInteractions(), root_frag, node_frag);
-	extractFragmentInteractions3(root_params.getStretchBendInteractions(), node_params.getStretchBendInteractions(), 
-								 tmpMMFF94ParamData.getStretchBendInteractions(), root_frag, node_frag);
-	
-	const MMFF94OutOfPlaneBendingInteractionData& root_oop_params = root_params.getOutOfPlaneBendingInteractions();
-	MMFF94OutOfPlaneBendingInteractionData& node_oop_params = node_params.getOutOfPlaneBendingInteractions();
-	MMFF94OutOfPlaneBendingInteractionData& tmp_oop_params = tmpMMFF94ParamData.getOutOfPlaneBendingInteractions();
+	extractFragmentMMFF94InteractionData2(root_ia_data.getBondStretchingInteractions(), node_ia_data.getBondStretchingInteractions(), 
+										  tmpMMFF94Data.getBondStretchingInteractions(), root_frag, node_frag);
+	extractFragmentMMFF94InteractionData2(root_ia_data.getElectrostaticInteractions(), node_ia_data.getElectrostaticInteractions(), 
+										  tmpMMFF94Data.getElectrostaticInteractions(), root_frag, node_frag);
+	extractFragmentMMFF94InteractionData2(root_ia_data.getVanDerWaalsInteractions(), node_ia_data.getVanDerWaalsInteractions(), 
+										  tmpMMFF94Data.getVanDerWaalsInteractions(), root_frag, node_frag);
+	extractFragmentMMFF94InteractionData3(root_ia_data.getAngleBendingInteractions(), node_ia_data.getAngleBendingInteractions(), 
+										  tmpMMFF94Data.getAngleBendingInteractions(), root_frag, node_frag);
+	extractFragmentMMFF94InteractionData3(root_ia_data.getStretchBendInteractions(), node_ia_data.getStretchBendInteractions(), 
+										  tmpMMFF94Data.getStretchBendInteractions(), root_frag, node_frag);
+	extractFragmentMMFF94InteractionData4(root_ia_data.getOutOfPlaneBendingInteractions(), node_ia_data.getOutOfPlaneBendingInteractions(), 
+										  tmpMMFF94Data.getOutOfPlaneBendingInteractions(), root_frag, node_frag);
+	extractFragmentMMFF94InteractionData4(root_ia_data.getTorsionInteractions(), node_ia_data.getTorsionInteractions(), 
+										  tmpMMFF94Data.getTorsionInteractions(), root_frag, node_frag);
 
-	for (MMFF94OutOfPlaneBendingInteractionData::ConstElementIterator it = root_oop_params.getElementsBegin(), end = root_oop_params.getElementsEnd(); it != end; ++it) {
-		const MMFF94OutOfPlaneBendingInteraction& params = *it;
+	root_ia_data.swap(tmpMMFF94Data);
+}
 
-		if (node_frag.containsAtom(root_frag.getAtom(params.getTerminalAtom1Index())) &&
-			node_frag.containsAtom(root_frag.getAtom(params.getCenterAtomIndex())) && 
-			node_frag.containsAtom(root_frag.getAtom(params.getTerminalAtom2Index())) &&
-			node_frag.containsAtom(root_frag.getAtom(params.getOutOfPlaneAtomIndex())))
+bool ConfGen::SystematicConformerGeneratorImpl::timeoutExceeded() const
+{
+	if (settings.getTimeout() == 0)
+		return false;
 
-			node_oop_params.addElement(params);
-		else
-			tmp_oop_params.addElement(params);
-	}
-
-	const MMFF94TorsionInteractionData& root_tor_params = root_params.getTorsionInteractions();
-	MMFF94TorsionInteractionData& node_tor_params = node_params.getTorsionInteractions();
-	MMFF94TorsionInteractionData& tmp_tor_params = tmpMMFF94ParamData.getTorsionInteractions();
-
-	for (MMFF94TorsionInteractionData::ConstElementIterator it = root_tor_params.getElementsBegin(), end = root_tor_params.getElementsEnd(); it != end; ++it) {
-		const MMFF94TorsionInteraction& params = *it;
-
-		if (node_frag.containsAtom(root_frag.getAtom(params.getTerminalAtom1Index())) &&
-			node_frag.containsAtom(root_frag.getAtom(params.getCenterAtom1Index())) && 
-			node_frag.containsAtom(root_frag.getAtom(params.getCenterAtom2Index())) &&
-			node_frag.containsAtom(root_frag.getAtom(params.getTerminalAtom2Index())))
-
-			node_tor_params.addElement(params);
-		else
-			tmp_tor_params.addElement(params);
-	}
-
-	root_params.swap(tmpMMFF94ParamData);
+	return (timer.elapsed().wall > (boost::timer::nanosecond_type(settings.getTimeout()) * 1000000));
 }
 
 Math::Vector3DArray* ConfGen::SystematicConformerGeneratorImpl::allocVector3DArray()

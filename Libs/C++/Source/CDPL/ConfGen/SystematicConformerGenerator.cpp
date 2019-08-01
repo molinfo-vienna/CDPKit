@@ -42,7 +42,7 @@ const double       ConfGen::SystematicConformerGenerator::Settings::DEF_ENERGY_W
 
 
 ConfGen::SystematicConformerGenerator::Settings::Settings(): 
-	hRotors(false), enumRings(true), reuseExistingCoords(false), eWindow(DEF_ENERGY_WINDOW),
+	hRotors(false), enumRings(true), enumNitrogens(true), reuseExistingCoords(false), eWindow(DEF_ENERGY_WINDOW),
 	timeout(DEF_TIMEOUT), maxFragBuildTime(DEF_MAX_FRAG_BUILD_TIME), searchFFieldType(DEF_SEARCH_FORCE_FIELD_TYPE),
 	buildFFieldType(DEF_BUILD_FORCE_FIELD_TYPE), strictAtomTyping(true),
 	fragLib(FragmentLibrary::get()), torLib(TorsionLibrary::get())
@@ -66,6 +66,16 @@ void ConfGen::SystematicConformerGenerator::Settings::enumerateRings(bool enumer
 bool ConfGen::SystematicConformerGenerator::Settings::ringsEnumerated() const
 {
 	return enumRings;
+}
+
+void ConfGen::SystematicConformerGenerator::Settings::enumerateNitrogens(bool enumerate)
+{
+	enumNitrogens = enumerate;
+}
+
+bool ConfGen::SystematicConformerGenerator::Settings::nitrogensEnumerated() const
+{
+	return enumNitrogens;
 }
 
 void ConfGen::SystematicConformerGenerator::Settings::reuseExistingCoordinates(bool reuse)

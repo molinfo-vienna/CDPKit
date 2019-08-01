@@ -154,15 +154,15 @@ void ConfGen::RandomConformerGenerator::setup(const Chem::MolecularGraph& molgra
 									ForceField::InteractionType::ALL :
 									ForceField::InteractionType::ALL ^ ForceField::InteractionType::ELECTROSTATIC);
 
-	mmff94Parameterizer.parameterize(molgraph, mmff94ParamData, int_types);
+	mmff94Parameterizer.parameterize(molgraph, mmff94Data, int_types);
 
 	mmff94EnergyCalc.setEnabledInteractionTypes(int_types);
-    mmff94EnergyCalc.setup(mmff94ParamData);
+    mmff94EnergyCalc.setup(mmff94Data);
 
 	mmff94GradientCalc.setEnabledInteractionTypes(int_types);
-    mmff94GradientCalc.setup(mmff94ParamData, molgraph.getNumAtoms());
+    mmff94GradientCalc.setup(mmff94Data, molgraph.getNumAtoms());
 
-    rawCoordsGenerator.setup(molgraph, mmff94ParamData);
+    rawCoordsGenerator.setup(molgraph, mmff94Data);
 	rawCoordsGenerator.setBoxSize(molgraph.getNumBonds() * 2);
 
     gradient.resize(molgraph.getNumAtoms());

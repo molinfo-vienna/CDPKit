@@ -26,11 +26,6 @@
 
 #include "StaticInit.hpp"
 
-#include <algorithm>
-#include <iterator>
-
-#include <boost/bind.hpp>
-
 #include "CDPL/Chem/Fragment.hpp"
 #include "CDPL/Chem/Atom.hpp"
 #include "CDPL/Chem/Bond.hpp"
@@ -99,17 +94,34 @@ void ConfGen::FragmentTreeNode::clearConformers()
 	conformers.clear();
 }
 
-void ConfGen::FragmentTreeNode::addConformer(Math::Vector3DArray* coords)
+void ConfGen::FragmentTreeNode::addConformer(Math::Vector3DArray* coords, double energy)
 {
-	conformers.push_back(coords);
+	conformers.push_back(ConfData(coords, energy));
 }
 
-void ConfGen::FragmentTreeNode::buildAtomIndexMap()
+std::size_t ConfGen::FragmentTreeNode::getNumConformers() const
 {
-	atomIdxMap.clear();
+	return conformers.size();
+}
 
-	std::transform(fragment->getAtomsBegin(), fragment->getAtomsEnd(), std::back_inserter(atomIdxMap),
-				   boost::bind(&Chem::MolecularGraph::getAtomIndex, &root.getFragment(), _1));
+ConfGen::FragmentTreeNode::ConstConformerIterator ConfGen::FragmentTreeNode::getConformersBegin() const
+{
+	return conformers.begin();
+}
+
+ConfGen::FragmentTreeNode::ConstConformerIterator ConfGen::FragmentTreeNode::getConformersEnd() const
+{
+	return conformers.end();
+}
+
+ConfGen::FragmentTreeNode::ConformerIterator ConfGen::FragmentTreeNode::getConformersBegin()
+{
+	return conformers.begin();
+}
+
+ConfGen::FragmentTreeNode::ConformerIterator ConfGen::FragmentTreeNode::getConformersEnd()
+{
+	return conformers.end();
 }
 
 const ConfGen::FragmentTreeNode::AtomIndexMap& ConfGen::FragmentTreeNode::getAtomIndexMap() const
@@ -117,9 +129,14 @@ const ConfGen::FragmentTreeNode::AtomIndexMap& ConfGen::FragmentTreeNode::getAto
 	return atomIdxMap;
 }
 
-ForceField::MMFF94InteractionData& ConfGen::FragmentTreeNode::getMMFF94ParameterData()
+ConfGen::FragmentTreeNode::AtomIndexMap& ConfGen::FragmentTreeNode::getAtomIndexMap()
 {
-	return mmff94ParamData;
+	return atomIdxMap;
+}
+
+ForceField::MMFF94InteractionData& ConfGen::FragmentTreeNode::getMMFF94InteractionData()
+{
+	return mmff94Data;
 }
 
 /*

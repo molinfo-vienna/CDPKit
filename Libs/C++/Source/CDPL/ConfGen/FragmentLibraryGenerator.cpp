@@ -283,9 +283,9 @@ void ConfGen::FragmentLibraryGenerator::processFragment(const Chem::MolecularGra
 
 		setSSSR(fragLibEntry, fragSSSR);
 
-		mmff94Parameterizer.parameterize(fragLibEntry, mmff94ParamData, ia_types);
+		mmff94Parameterizer.parameterize(fragLibEntry, mmff94Data, ia_types);
 
-		fragConfGen.generate(fragLibEntry, mmff94ParamData, perceiveFragmentType(fragLibEntry));
+		fragConfGen.generate(fragLibEntry, mmff94Data, perceiveFragmentType(fragLibEntry));
 
 		std::size_t num_confs = fragConfGen.getNumConformers();
 

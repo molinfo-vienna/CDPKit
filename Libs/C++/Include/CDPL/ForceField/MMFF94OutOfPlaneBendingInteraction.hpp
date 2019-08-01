@@ -71,6 +71,22 @@ namespace CDPL
 			std::size_t getOutOfPlaneAtomIndex() const {
 				return oopAtomIdx;
 			}
+	
+			std::size_t getAtom1Index() const {
+				return termAtom1Idx;
+			}
+
+			std::size_t getAtom2Index() const {
+				return ctrAtomIdx;
+			}
+
+			std::size_t getAtom3Index() const {
+				return termAtom2Idx;
+			}
+
+			std::size_t getAtom4Index() const {
+				return oopAtomIdx;
+			}
 
 			double getForceConstant() const {
 				return forceConst;

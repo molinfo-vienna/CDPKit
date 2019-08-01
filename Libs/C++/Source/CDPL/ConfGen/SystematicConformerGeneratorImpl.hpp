@@ -42,6 +42,7 @@
 #include "CDPL/ConfGen/FragmentLibraryEntry.hpp"
 #include "CDPL/ForceField/MMFF94InteractionParameterizer.hpp"
 #include "CDPL/ForceField/MMFF94InteractionData.hpp"
+#include "CDPL/ForceField/MMFF94EnergyCalculator.hpp"
 #include "CDPL/Chem/SmallestSetOfSmallestRings.hpp"
 #include "CDPL/Math/VectorArray.hpp"
 
@@ -98,43 +99,47 @@ namespace CDPL
 			SystematicConformerGeneratorImpl& operator=(const SystematicConformerGeneratorImpl&);
 
 			void freeVector3DArrays();
-		
+
 			void buildTree(const Chem::MolecularGraph& molgraph);
 
+			void buildAtomIndexMaps(FragmentTreeNode& node) const;
+
+			void genConfSearchMMFF94InteractionData();
+
+			void clearNodeConformers(FragmentTreeNode& node) const;
+			bool setupBuildFragmentConformers();
+
+			void calcLeafNodeConformerEnergies(FragmentTreeNode& node);
+
 			void getBuildFragmentNodes(FragmentTreeNode& node);
-			void clearFragmentConformers(FragmentTreeNode& node) const;
-
-			bool setBuildFragmentCoordinates();
-
+			void genChainBuildFragmentSubtrees();
+			
 			bool setExistingCoordinates(FragmentTreeNode& node);
-			bool setFragmentLibraryCoordinates(FragmentTreeNode& node);
-			bool generateFragmentCoordinates(FragmentTreeNode& node);
+			bool setFragmentLibraryConformers(FragmentTreeNode& node);
+			bool genFragmentConformers(FragmentTreeNode& node);
 
 			void distChainBuildFragmentCoordinates(FragmentTreeNode& node, const Math::Vector3DArray& coords, 
 												   bool fix_stereo);
 
 			void fixAtomAndBondConfigurations(FragmentTreeNode& node) const;
+			void enumNitrogens(FragmentTreeNode& node);
 
 			void setupAromRingSubstituentBondLengthList(FragmentTreeNode& node);
 			void fixAromRingSubstituentBondLengths(Math::Vector3DArray& coords) const;
 
-			void generateChainBuildFragmentSubtrees();
-
 			void getLibraryFragmentConformation(const Chem::MolecularGraph& lib_frag, 
 												std::size_t conf_idx, Math::Vector3DArray& coords) const;
 
-			void buildAtomIndexMaps(FragmentTreeNode& node) const;
 			void buildFragmentLibraryEntryAtomIndexMap(const FragmentTreeNode& node);
 
 			void getFragmentLinkBonds(const Chem::MolecularGraph& molgraph);
 			void getRotatableBonds(const Chem::MolecularGraph& molgraph);
 
-			void generateMMFF94ParameterData(const Chem::MolecularGraph& molgraph, unsigned int ff_type, 
-											 ForceField::MMFF94InteractionData& ia_data);
+			void genMMFF94InteractionData(const Chem::MolecularGraph& molgraph, unsigned int ff_type, 
+										  ForceField::MMFF94InteractionData& ia_data);
 
-			void setupMMFF94TreeNodeParameterData();
-			void distMMFF94ParameterData(FragmentTreeNode& node);
-			void extractMMFF94ParameterData(FragmentTreeNode& node);
+			void distFragmentMMFF94InteractionData(FragmentTreeNode& node);
+			void extractFragmentMMFF94InteractionData(FragmentTreeNode& node);
 
 			Math::Vector3DArray* allocVector3DArray();
 			void freeVector3DArray(Math::Vector3DArray* vec_array);
@@ -161,8 +166,9 @@ namespace CDPL
 			BondLengthDescriptorList                        aromRingSubstBondLens;
 			boost::timer::cpu_timer                         timer;
 			ForceField::MMFF94InteractionParameterizer      mmff94Parameterizer;
-			ForceField::MMFF94InteractionData               tmpMMFF94ParamData;
-			ForceField::MMFF94InteractionData               fragBuildMMFF94ParamData;
+			ForceField::MMFF94InteractionData               tmpMMFF94Data;
+			ForceField::MMFF94InteractionData               fragBuildMMFF94Data;
+			ForceField::MMFF94EnergyCalculator<double>      mmff94EnergyCalc;
 			Chem::SmallestSetOfSmallestRings::SharedPointer fragSSSR;
 			AllocVector3DArrayList                          allocCoordArrays;
 			Vector3DArrayList                               freeCoordArrays;

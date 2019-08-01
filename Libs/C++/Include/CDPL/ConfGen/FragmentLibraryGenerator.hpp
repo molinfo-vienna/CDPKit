@@ -166,7 +166,7 @@ namespace CDPL
 			FragmentList                                    fragList;
 			FragmentConformerGenerator                      fragConfGen;
 			ForceField::MMFF94InteractionParameterizer      mmff94Parameterizer;
-			ForceField::MMFF94InteractionData               mmff94ParamData;
+			ForceField::MMFF94InteractionData               mmff94Data;
 			Chem::SmallestSetOfSmallestRings::SharedPointer fragSSSR;
 		};
 

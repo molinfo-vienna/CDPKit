@@ -74,6 +74,22 @@ namespace CDPL
 				return termAtom2Idx;
 			}
 
+			std::size_t getAtom1Index() const {
+				return termAtom1Idx;
+			}
+
+			std::size_t getAtom2Index() const {
+				return ctrAtom1Idx;
+			}
+	
+			std::size_t getAtom3Index() const {
+				return ctrAtom2Idx;
+			}
+
+			std::size_t getAtom4Index() const {
+				return termAtom2Idx;
+			}
+
 			unsigned int getTorsionTypeIndex() const {
 				return torTypeIdx;
 			}

@@ -68,6 +68,18 @@ namespace CDPL
 				return termAtom2Idx;
 			}
 
+			std::size_t getAtom1Index() const {
+				return termAtom1Idx;
+			}
+
+			std::size_t getAtom2Index() const {
+				return ctrAtomIdx;
+			}
+
+			std::size_t getAtom3Index() const {
+				return termAtom2Idx;
+			}
+
 			unsigned int getAngleTypeIndex() const {
 				return angleTypeIdx;
 			}

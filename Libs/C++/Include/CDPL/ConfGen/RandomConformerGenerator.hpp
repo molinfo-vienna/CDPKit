@@ -139,7 +139,7 @@ namespace CDPL
 			boost::timer::cpu_timer                    timer;
 			double                                     energy;
 			ForceField::MMFF94InteractionParameterizer mmff94Parameterizer;
-			ForceField::MMFF94InteractionData          mmff94ParamData;
+			ForceField::MMFF94InteractionData          mmff94Data;
 			MMFF94EnergyCalculator                     mmff94EnergyCalc;
 			MMFF94GradientCalculator                   mmff94GradientCalc;
 			BFGSMinimizer                              energyMinimizer;

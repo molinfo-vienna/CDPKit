@@ -57,6 +57,10 @@ void CDPLPythonConfGen::exportSystematicConformerGenerator()
 			 (python::arg("self"), python::arg("enumerate")))
 		.def("ringsEnumerated", &ConfGen::SystematicConformerGenerator::Settings::ringsEnumerated, 
 			 python::arg("self"))
+		.def("enumerateNitrogens", &ConfGen::SystematicConformerGenerator::Settings::enumerateNitrogens, 
+			 (python::arg("self"), python::arg("enumerate")))
+		.def("nitrogensEnumerated", &ConfGen::SystematicConformerGenerator::Settings::nitrogensEnumerated, 
+			 python::arg("self"))
 		.def("reuseExistingCoordinates", &ConfGen::SystematicConformerGenerator::Settings::reuseExistingCoordinates, 
 			 (python::arg("self"), python::arg("reuse")))
 		.def("existingCoordinatesReused", &ConfGen::SystematicConformerGenerator::Settings::existingCoordinatesReused, 
@@ -98,6 +102,8 @@ void CDPLPythonConfGen::exportSystematicConformerGenerator()
 					  &ConfGen::SystematicConformerGenerator::Settings::enableHydrogenRotors)
 		.add_property("enumRings", &ConfGen::SystematicConformerGenerator::Settings::ringsEnumerated,
 					  &ConfGen::SystematicConformerGenerator::Settings::enumerateRings)
+		.add_property("enumNitrogens", &ConfGen::SystematicConformerGenerator::Settings::nitrogensEnumerated,
+					  &ConfGen::SystematicConformerGenerator::Settings::enumerateNitrogens)
 		.add_property("reuseExistingCoords", &ConfGen::SystematicConformerGenerator::Settings::existingCoordinatesReused,
 					  &ConfGen::SystematicConformerGenerator::Settings::reuseExistingCoordinates)
 		.add_property("energyWindow", &ConfGen::SystematicConformerGenerator::Settings::getEnergyWindow,

@@ -83,6 +83,10 @@ namespace CDPL
 
 				bool ringsEnumerated() const;
 
+				void enumerateNitrogens(bool enumerate);
+
+				bool nitrogensEnumerated() const;
+
 				void reuseExistingCoordinates(bool reuse);
 
 				bool existingCoordinatesReused() const;
@@ -122,6 +126,7 @@ namespace CDPL
 			private:
 				bool                           hRotors;
 				bool                           enumRings;
+				bool                           enumNitrogens;
 				bool                           reuseExistingCoords;
 				double                         eWindow;
 				std::size_t                    timeout;

@@ -34,6 +34,7 @@
 #include <vector>
 #include <memory>
 #include <cstddef>
+#include <utility>
 //#include <iosfwd>
 
 #include "CDPL/ForceField/MMFF94InteractionData.hpp"
@@ -60,8 +61,17 @@ namespace CDPL
 		{
 
 		public:
+			typedef std::pair<Math::Vector3DArray*, double> ConfData;
+
+		private:
+			typedef std::vector<ConfData> ConfDataArray;
+
+		public:
 			typedef std::vector<const Chem::Bond*> BondList;
 			typedef std::vector<std::size_t> AtomIndexMap;	
+
+			typedef ConfDataArray::const_iterator ConstConformerIterator;
+			typedef ConfDataArray::iterator ConformerIterator;
 
 			FragmentTreeNode();
 
@@ -82,13 +92,21 @@ namespace CDPL
 
 			void clearConformers();
 
-			void addConformer(Math::Vector3DArray* coords);
+			void addConformer(Math::Vector3DArray* coords, double energy = 0.0);
 
-			void buildAtomIndexMap();
+			std::size_t getNumConformers() const;
+
+			ConstConformerIterator getConformersBegin() const;
+			ConstConformerIterator getConformersEnd() const;
+
+			ConformerIterator getConformersBegin();
+			ConformerIterator getConformersEnd();
 
 			const AtomIndexMap& getAtomIndexMap() const;
 
-			ForceField::MMFF94InteractionData& getMMFF94ParameterData();
+			AtomIndexMap& getAtomIndexMap();
+
+			ForceField::MMFF94InteractionData& getMMFF94InteractionData();
 
 			//void printTree(std::ostream& os) const;
 
@@ -108,8 +126,7 @@ namespace CDPL
 			
 			typedef std::auto_ptr<FragmentTreeNode> NodePointer;
 			typedef std::auto_ptr<Chem::Fragment> FragmentPointer;
-			typedef std::vector<Math::Vector3DArray*> Vector3DArrayList;
-
+	
 			FragmentTreeNode&                 root;
 			const Chem::MolecularGraph*       fragment;
 			const Chem::Bond*                 splitBond;
@@ -119,8 +136,8 @@ namespace CDPL
 			FragmentPointer                   rightFragment;
 			unsigned int                      fragmentType;
 			AtomIndexMap                      atomIdxMap;
-			Vector3DArrayList                 conformers;
-			ForceField::MMFF94InteractionData mmff94ParamData;
+			ConfDataArray                     conformers;
+			ForceField::MMFF94InteractionData mmff94Data;
 		};
     }
 }
