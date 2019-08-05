@@ -235,7 +235,7 @@ namespace CDPL
 			using Molecule::operator+=;
 
 			MolecularGraph::SharedPointer clone() const;
-	
+
 			/**
 			 * \brief Replaces the current set of atoms, bonds and properties by a copy of the
 			 *        atoms, bonds and properties of the molecule \a mol.

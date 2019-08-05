@@ -101,7 +101,7 @@ BOOST_AUTO_TEST_CASE(MoleculeTest)
 
 //-----	
 
-	Molecule::SharedPointer mol1_clone_ptr = mol1.clone();
+	Molecule::SharedPointer mol1_clone_ptr = boost::static_pointer_cast<Molecule>(mol1.clone());
 	Molecule& mol1_clone = *mol1_clone_ptr;
 
 	BOOST_CHECK(&mol1 != mol1_clone_ptr.get());
@@ -482,7 +482,7 @@ BOOST_AUTO_TEST_CASE(MoleculeTest)
 
 	BOOST_CHECK(mol1.getProperty<std::string>(prop_key1) == "Molecule 1");
 
-	mol1_clone_ptr = mol1.clone();
+	mol1_clone_ptr = boost::static_pointer_cast<Molecule>(mol1.clone());
 	Molecule& mol1_clone2 = *mol1_clone_ptr;
 
 	BOOST_CHECK(&mol1 != mol1_clone_ptr.get());

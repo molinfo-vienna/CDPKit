@@ -50,7 +50,7 @@
 #if defined(HAVE_BOOST_TIMER) && defined(HAVE_BOOST_CHRONO)
 
 #include "CDPL/ConfGen/RandomConformerGenerator.hpp"
-#include "CDPL/ConfGen/SystematiconformerGenerator.hpp"
+#include "CDPL/ConfGen/SystematicConformerGenerator.hpp"
 #include "CDPL/ConfGen/FragmentConformerGenerator.hpp"
 #include "CDPL/ConfGen/FragmentLibraryGenerator.hpp"
 

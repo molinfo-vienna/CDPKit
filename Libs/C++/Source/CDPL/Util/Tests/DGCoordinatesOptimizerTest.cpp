@@ -61,7 +61,7 @@ BOOST_AUTO_TEST_CASE(DGCoordinatesOptimizerTest)
 	using namespace CDPL;
 	using namespace Util;
 	
-	const std::size_t NUM_POINTS     = 2500;
+	const std::size_t NUM_POINTS     = 1000;
 	const std::size_t MAX_NUM_TRIALS = 20;
 	const double      BOX_SIZE       = 100.0; 
 
@@ -149,6 +149,8 @@ BOOST_AUTO_TEST_CASE(DGCoordinatesOptimizerTest)
 	for (std::size_t i = 0; i < NUM_VOL_CONSTRAINTS; i++) {
 		double orig_vol = calcVolume(VOL_CONSTRAINT_INDS[i], test_points);
 		double opt_vol = calcVolume(VOL_CONSTRAINT_INDS[i], opt_coords);
+
+		BOOST_MESSAGE("orig vol = " << orig_vol << ", opt vol = " << opt_vol);
 		double diff = orig_vol - opt_vol;
 
 		vol_rms_dev += diff * diff;
@@ -156,10 +158,10 @@ BOOST_AUTO_TEST_CASE(DGCoordinatesOptimizerTest)
 
 	vol_rms_dev = std::sqrt(vol_rms_dev / NUM_VOL_CONSTRAINTS);
 
-	BOOST_CHECK(dist_rms_dev < 0.000001);
-	BOOST_CHECK(vol_rms_dev < 0.000001);
-
 	//BOOST_MESSAGE("Solution distance RMSD: " << dist_rms_dev);
 	//BOOST_MESSAGE("Solution volume RMSD: " << vol_rms_dev);
+
+	BOOST_CHECK(dist_rms_dev < 0.000001);
+	BOOST_CHECK(vol_rms_dev < 0.000001);
 }
 

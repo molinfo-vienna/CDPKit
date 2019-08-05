@@ -187,14 +187,21 @@ namespace CDPL
 			AutomorphismGroupSearch(const AutomorphismGroupSearch&);
 
 			AutomorphismGroupSearch& operator=(const AutomorphismGroupSearch&);
+	
+			const MatchExpression<Atom, MolecularGraph>::SharedPointer&
+			getAtomMatchExpression(const Atom& atom) const;
 
+			const MatchExpression<Bond, MolecularGraph>::SharedPointer&
+			getBondMatchExpression(const Bond& bond) const;
+
+			const MatchExpression<MolecularGraph>::SharedPointer&
+			getMolGraphMatchExpression(const MolecularGraph& molgraph) const;
+	
 			class AtomMatchExpression : public MatchExpression<Atom, MolecularGraph>
 			{
 
 			public:
-				typedef boost::shared_ptr<AtomMatchExpression> SharedPointer;
-
-				AtomMatchExpression(AutomorphismGroupSearch* owner): owner(owner), stereoDescr(0) {}
+				AtomMatchExpression(AutomorphismGroupSearch* parent): parent(parent), stereoDescr(0) {}
 
 				bool requiresAtomBondMapping() const;
 
@@ -206,24 +213,22 @@ namespace CDPL
 								const Atom& target_atom, const MolecularGraph& target_molgraph, 
 								const AtomBondMapping& mapping, const Base::Variant& aux_data) const;
 			private:
-				AutomorphismGroupSearch* owner;
-				mutable unsigned int     type;
-				mutable unsigned int     hybState;
-				mutable std::size_t      isotope;
-				mutable std::size_t      hCount;
-				mutable long             charge;
-				mutable bool             aromatic;
-				mutable std::size_t      expBondCount;
-				mutable StereoDescriptor stereoDescr;
+				AutomorphismGroupSearch*       parent;
+				mutable unsigned int           type;
+				mutable unsigned int           hybState;
+				mutable std::size_t            isotope;
+				mutable std::size_t            hCount;
+				mutable long                   charge;
+				mutable bool                   aromatic;
+				mutable std::size_t            expBondCount;
+				mutable StereoDescriptor       stereoDescr;
 			};
 	 
 			class BondMatchExpression : public MatchExpression<Bond, MolecularGraph>
 			{
 			
 			public:
-				typedef boost::shared_ptr<BondMatchExpression> SharedPointer;
-
-				BondMatchExpression(AutomorphismGroupSearch* owner): owner(owner), stereoDescr(0) {}
+				BondMatchExpression(AutomorphismGroupSearch* parent): parent(parent), stereoDescr(0) {}
 			
 				bool requiresAtomBondMapping() const;
 
@@ -235,20 +240,18 @@ namespace CDPL
 								const Bond& target_bond, const MolecularGraph& target_molgraph, 
 								const AtomBondMapping& mapping, const Base::Variant& aux_data) const;
 			private:
-				AutomorphismGroupSearch* owner;
-				mutable std::size_t      order;
-				mutable bool             inRing;
-				mutable bool             aromatic;
-				mutable StereoDescriptor stereoDescr;
+				AutomorphismGroupSearch*       parent;
+				mutable std::size_t            order;
+				mutable bool                   inRing;
+				mutable bool                   aromatic;
+				mutable StereoDescriptor       stereoDescr;
 			};
 
 			class MolGraphMatchExpression : public MatchExpression<MolecularGraph>
 			{
 			
 			public:
-				typedef boost::shared_ptr<MolGraphMatchExpression> SharedPointer;
-
-				MolGraphMatchExpression(const AutomorphismGroupSearch* owner): owner(owner) {}
+				MolGraphMatchExpression(const AutomorphismGroupSearch* parent): parent(parent) {}
 
 				bool requiresAtomBondMapping() const;
 
@@ -261,24 +264,22 @@ namespace CDPL
 								const AtomBondMapping& mapping, const Base::Variant& aux_data) const;
 
 			private:
-				const AutomorphismGroupSearch* owner;
+				const AutomorphismGroupSearch* parent;
 			};
 
-			MatchExpression<Atom, MolecularGraph>::SharedPointer getAtomMatchExpression(const Atom& atom) const;
-			MatchExpression<Bond, MolecularGraph>::SharedPointer getBondMatchExpression(const Bond& bond) const;
-			MatchExpression<MolecularGraph>::SharedPointer getMolGraphMatchExpression(const MolecularGraph& molgraph) const;
-	
-			typedef MatchExpression<MolecularGraph>::SharedPointer MolGraphMatchExpressionPtr;
+			typedef MatchExpression<Atom, MolecularGraph>::SharedPointer AtomMatchExprPtr;
+			typedef MatchExpression<Bond, MolecularGraph>::SharedPointer BondMatchExprPtr;
+			typedef MatchExpression<MolecularGraph>::SharedPointer MolGraphMatchExprPtr;
 
-			SubstructureSearch                     substructSearch;
-			AtomMatchExpression::SharedPointer     atomMatchExpr;
-			BondMatchExpression::SharedPointer     bondMatchExpr;
-			MolGraphMatchExpression::SharedPointer molGraphMatchExpr;
-			bool                                   incIdentityMapping;
-			unsigned int                           atomPropFlags;
-			unsigned int                           bondPropFlags;
-			const Atom*                            currAtom;
-			const Bond*                            currBond;
+			SubstructureSearch   substructSearch;
+			bool                 incIdentityMapping;
+			unsigned int         atomPropFlags;
+			unsigned int         bondPropFlags;
+			AtomMatchExprPtr     atomMatchExpr;
+			BondMatchExprPtr     bondMatchExpr;
+			MolGraphMatchExprPtr molGraphMatchExpr;
+			const Atom*          lastQueryAtom;
+			const Bond*          lastQueryBond;
 		};
 
 		/**

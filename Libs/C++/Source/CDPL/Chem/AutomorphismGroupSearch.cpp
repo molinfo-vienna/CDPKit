@@ -47,9 +47,11 @@ const unsigned int Chem::AutomorphismGroupSearch::DEF_BOND_PROPERTY_FLAGS;
 
 
 Chem::AutomorphismGroupSearch::AutomorphismGroupSearch(unsigned int atom_flags, unsigned int bond_flags):
-    atomMatchExpr(new AtomMatchExpression(this)), bondMatchExpr(new BondMatchExpression(this)), 
-	molGraphMatchExpr(new MolGraphMatchExpression(this)), incIdentityMapping(true), atomPropFlags(atom_flags),
-	bondPropFlags(bond_flags), currAtom(0), currBond(0)
+    incIdentityMapping(true), atomPropFlags(atom_flags), bondPropFlags(bond_flags),
+	atomMatchExpr(new AtomMatchExpression(this)),
+    bondMatchExpr(new BondMatchExpression(this)),
+    molGraphMatchExpr(new MolGraphMatchExpression(this))
+
 {
     substructSearch.setAtomMatchExpressionFunction(boost::bind(&AutomorphismGroupSearch::getAtomMatchExpression, this, _1));
     substructSearch.setBondMatchExpressionFunction(boost::bind(&AutomorphismGroupSearch::getBondMatchExpression, this, _1));
@@ -91,10 +93,10 @@ bool Chem::AutomorphismGroupSearch::identityMappingIncluded() const
 
 bool Chem::AutomorphismGroupSearch::findMappings(const MolecularGraph& molgraph)
 {
-    currAtom = 0;
-    currBond = 0;
+	lastQueryAtom = 0;
+	lastQueryBond = 0;
 
-    substructSearch.setQuery(molgraph);
+	substructSearch.setQuery(molgraph);
 
     return substructSearch.findMappings(molgraph);
 }
@@ -144,19 +146,19 @@ std::size_t Chem::AutomorphismGroupSearch::getMaxNumMappings() const
     return substructSearch.getMaxNumMappings();
 }
 
-Chem::MatchExpression<Chem::Atom, Chem::MolecularGraph>::SharedPointer 
+const Chem::MatchExpression<Chem::Atom, Chem::MolecularGraph>::SharedPointer&
 Chem::AutomorphismGroupSearch::getAtomMatchExpression(const Atom& atom) const
 {
     return atomMatchExpr;
 }
 
-Chem::MatchExpression<Chem::Bond, Chem::MolecularGraph>::SharedPointer 
+const Chem::MatchExpression<Chem::Bond, Chem::MolecularGraph>::SharedPointer& 
 Chem::AutomorphismGroupSearch::getBondMatchExpression(const Bond& bond) const
 {
     return bondMatchExpr;
 }
 
-Chem::MatchExpression<Chem::MolecularGraph>::SharedPointer 
+const Chem::MatchExpression<Chem::MolecularGraph>::SharedPointer&  
 Chem::AutomorphismGroupSearch::getMolGraphMatchExpression(const MolecularGraph& molgraph) const
 {
     return molGraphMatchExpr;
@@ -165,62 +167,61 @@ Chem::AutomorphismGroupSearch::getMolGraphMatchExpression(const MolecularGraph& 
 
 bool Chem::AutomorphismGroupSearch::AtomMatchExpression::requiresAtomBondMapping() const
 {
-	return (owner->atomPropFlags & AtomPropertyFlag::CONFIGURATION);
+	return (parent->atomPropFlags & AtomPropertyFlag::CONFIGURATION);
 }
 
 bool Chem::AutomorphismGroupSearch::AtomMatchExpression::operator()(const Atom& query_atom, const MolecularGraph& query_molgraph, 
 																	const Atom& target_atom, const MolecularGraph& target_molgraph,
 																	const Base::Variant& aux_data) const
 {
-	unsigned int flags = owner->atomPropFlags;
-
-	if (owner->currAtom != &query_atom) {
-		if (flags & AtomPropertyFlag::TYPE)
+	
+	if (parent->lastQueryAtom != &query_atom) {
+		if (parent->atomPropFlags & AtomPropertyFlag::TYPE)
 			type = getType(query_atom);
 	
-		if (flags & AtomPropertyFlag::HYBRIDIZATION_STATE)
+		if (parent->atomPropFlags & AtomPropertyFlag::HYBRIDIZATION_STATE)
 			hybState = getHybridizationState(query_atom);
 
-		if (flags & AtomPropertyFlag::ISOTOPE)
+		if (parent->atomPropFlags & AtomPropertyFlag::ISOTOPE)
 			isotope = getIsotope(query_atom);
  
-		if (flags & AtomPropertyFlag::H_COUNT)
+		if (parent->atomPropFlags & AtomPropertyFlag::H_COUNT)
 			hCount = getBondCount(query_atom, query_molgraph, 1, AtomType::H);
 
-		if (flags & AtomPropertyFlag::FORMAL_CHARGE)
+		if (parent->atomPropFlags & AtomPropertyFlag::FORMAL_CHARGE)
 			charge = getFormalCharge(query_atom);
 
-		if (flags & AtomPropertyFlag::AROMATICITY)
+		if (parent->atomPropFlags & AtomPropertyFlag::AROMATICITY)
 			aromatic = getAromaticityFlag(query_atom);
 
-		if (flags & AtomPropertyFlag::EXPLICIT_BOND_COUNT)
+		if (parent->atomPropFlags & AtomPropertyFlag::EXPLICIT_BOND_COUNT)
 			expBondCount = getExplicitBondCount(query_atom, query_molgraph);
 
-		if (flags & AtomPropertyFlag::CONFIGURATION)
+		if (parent->atomPropFlags & AtomPropertyFlag::CONFIGURATION)
 			stereoDescr = getStereoDescriptor(query_atom);
 
-		owner->currAtom = &query_atom;
+		parent->lastQueryAtom = &query_atom;
 	}
 
-	if ((flags & AtomPropertyFlag::TYPE) && (type != getType(target_atom)))
+	if ((parent->atomPropFlags & AtomPropertyFlag::TYPE) && (type != getType(target_atom)))
 		return false;
 
-	if ((flags & AtomPropertyFlag::TYPE) && (hybState != getHybridizationState(target_atom)))
+	if ((parent->atomPropFlags & AtomPropertyFlag::TYPE) && (hybState != getHybridizationState(target_atom)))
 		return false;
 
-	if ((flags & AtomPropertyFlag::ISOTOPE) && (isotope != getIsotope(target_atom)))
+	if ((parent->atomPropFlags & AtomPropertyFlag::ISOTOPE) && (isotope != getIsotope(target_atom)))
 		return false;
  
-	if ((flags & AtomPropertyFlag::FORMAL_CHARGE) && (charge != getFormalCharge(target_atom)))
+	if ((parent->atomPropFlags & AtomPropertyFlag::FORMAL_CHARGE) && (charge != getFormalCharge(target_atom)))
 		return false;
 
-	if ((flags & AtomPropertyFlag::AROMATICITY) && (aromatic != getAromaticityFlag(target_atom)))
+	if ((parent->atomPropFlags & AtomPropertyFlag::AROMATICITY) && (aromatic != getAromaticityFlag(target_atom)))
 		return false;
 
-	if ((flags & AtomPropertyFlag::EXPLICIT_BOND_COUNT) && (expBondCount != getExplicitBondCount(target_atom, target_molgraph)))
+	if ((parent->atomPropFlags & AtomPropertyFlag::EXPLICIT_BOND_COUNT) && (expBondCount != getExplicitBondCount(target_atom, target_molgraph)))
 		return false;
 
-	if ((flags & AtomPropertyFlag::H_COUNT) && (hCount != getBondCount(target_atom, target_molgraph, 1, AtomType::H)))
+	if ((parent->atomPropFlags & AtomPropertyFlag::H_COUNT) && (hCount != getBondCount(target_atom, target_molgraph, 1, AtomType::H)))
 		return false;
 
     return true;
@@ -230,7 +231,7 @@ bool Chem::AutomorphismGroupSearch::AtomMatchExpression::operator()(const Atom& 
 																	const Atom& target_atom, const MolecularGraph& target_molgraph, 
 																	const AtomBondMapping& mapping, const Base::Variant& aux_data) const
 {
-	if ((owner->atomPropFlags & AtomPropertyFlag::CONFIGURATION) == 0)
+	if ((parent->atomPropFlags & AtomPropertyFlag::CONFIGURATION) == 0)
 		return true;
 
 	return AtomConfigurationMatchExpression(stereoDescr, query_atom, false, false)(query_atom, query_molgraph, target_atom, target_molgraph, 
@@ -240,38 +241,36 @@ bool Chem::AutomorphismGroupSearch::AtomMatchExpression::operator()(const Atom& 
 
 bool Chem::AutomorphismGroupSearch::BondMatchExpression::requiresAtomBondMapping() const
 {
-	return (owner->bondPropFlags & BondPropertyFlag::CONFIGURATION);
+	return (parent->bondPropFlags & BondPropertyFlag::CONFIGURATION);
 }
 
 bool Chem::AutomorphismGroupSearch::BondMatchExpression::operator()(const Bond& query_bond, const MolecularGraph& query_molgraph, 
 																	const Bond& target_bond, const MolecularGraph& target_molgraph, 
 																	const Base::Variant& aux_data) const
 {
-	unsigned int flags = owner->bondPropFlags;
-
- 	if (owner->currBond != &query_bond) {
-		if (flags & BondPropertyFlag::ORDER)
+ 	if (parent->lastQueryBond != &query_bond) {
+		if (parent->bondPropFlags & BondPropertyFlag::ORDER)
 			order = getOrder(query_bond);
 
-		if (flags & BondPropertyFlag::TOPOLOGY)
+		if (parent->bondPropFlags & BondPropertyFlag::TOPOLOGY)
 			inRing = getRingFlag(query_bond);
  
-		if (flags & (BondPropertyFlag::AROMATICITY | BondPropertyFlag::ORDER))
+		if (parent->bondPropFlags & (BondPropertyFlag::AROMATICITY | BondPropertyFlag::ORDER))
 			aromatic = getAromaticityFlag(query_bond);
 
-		if (flags & BondPropertyFlag::CONFIGURATION)
+		if (parent->bondPropFlags & BondPropertyFlag::CONFIGURATION)
 			stereoDescr = getStereoDescriptor(query_bond);
 
-		owner->currBond = &query_bond;
+		parent->lastQueryBond = &query_bond;
 	}
 
-	if ((flags & BondPropertyFlag::TOPOLOGY) && (inRing != getRingFlag(target_bond)))
+	if ((parent->bondPropFlags & BondPropertyFlag::TOPOLOGY) && (inRing != getRingFlag(target_bond)))
 		return false;
 
-	if ((flags & BondPropertyFlag::AROMATICITY) && (aromatic != getAromaticityFlag(target_bond)))
+	if ((parent->bondPropFlags & BondPropertyFlag::AROMATICITY) && (aromatic != getAromaticityFlag(target_bond)))
 		return false;
 
-	if (flags & BondPropertyFlag::ORDER) {
+	if (parent->bondPropFlags & BondPropertyFlag::ORDER) {
 		std::size_t tgt_order = getOrder(target_bond);
 
 		if (aromatic) 
@@ -296,7 +295,7 @@ bool Chem::AutomorphismGroupSearch::BondMatchExpression::operator()(const Bond& 
 																	const Bond& target_bond, const MolecularGraph& target_molgraph, 
 																	const AtomBondMapping& mapping, const Base::Variant& aux_data) const
 {
- 	if (!(owner->bondPropFlags & BondPropertyFlag::CONFIGURATION) == 0)
+ 	if (!(parent->bondPropFlags & BondPropertyFlag::CONFIGURATION) == 0)
 		return true;
 
 	return BondConfigurationMatchExpression(stereoDescr, query_bond, false, false)(query_bond, query_molgraph, target_bond, target_molgraph, 
@@ -306,7 +305,7 @@ bool Chem::AutomorphismGroupSearch::BondMatchExpression::operator()(const Bond& 
 
 bool Chem::AutomorphismGroupSearch::MolGraphMatchExpression::requiresAtomBondMapping() const
 {
-	return !owner->incIdentityMapping;
+	return !parent->incIdentityMapping;
 }
 
 bool Chem::AutomorphismGroupSearch::MolGraphMatchExpression::operator()(const MolecularGraph& query_molgraph, 
@@ -320,7 +319,7 @@ bool Chem::AutomorphismGroupSearch::MolGraphMatchExpression::operator()(const Mo
 																		const MolecularGraph& target_molgraph, 
 																		const AtomBondMapping& mapping, const Base::Variant& aux_data) const
 {
- 	if (owner->incIdentityMapping)
+ 	if (parent->incIdentityMapping)
 		return true;
 
 	const AtomMapping& am = mapping.getAtomMapping();

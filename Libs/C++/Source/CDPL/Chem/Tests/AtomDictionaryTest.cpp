@@ -72,8 +72,9 @@ BOOST_AUTO_TEST_CASE(AtomDictionaryTest) // TODO
 	BOOST_CHECK(AtomDictionary::getType("*") == AtomType::ANY);
 	BOOST_CHECK(AtomDictionary::getType("MH") == AtomType::MH);
 	BOOST_CHECK(AtomDictionary::getType("") == AtomType::UNKNOWN);
-	BOOST_CHECK(AtomDictionary::getType("h") == AtomType::UNKNOWN);
-	BOOST_CHECK(AtomDictionary::getType("fe") == AtomType::UNKNOWN);
+	BOOST_CHECK(AtomDictionary::getType("h", false) == AtomType::H);
+	BOOST_CHECK(AtomDictionary::getType("fe", true) == AtomType::UNKNOWN);
+	BOOST_CHECK(AtomDictionary::getType("fe", false) == AtomType::Fe);
 	BOOST_CHECK(AtomDictionary::getType(" ") == AtomType::UNKNOWN);
 	BOOST_CHECK(AtomDictionary::getType("-") == AtomType::UNKNOWN);
 

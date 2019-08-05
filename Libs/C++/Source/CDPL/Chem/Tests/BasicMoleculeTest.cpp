@@ -100,7 +100,7 @@ BOOST_AUTO_TEST_CASE(BasicMoleculeTest)
 
 //-----	
 
-	Molecule::SharedPointer mol1_clone_ptr = mol1.clone();
+	MolecularGraph::SharedPointer mol1_clone_ptr = mol1.clone();
 	BasicMolecule& mol1_clone = static_cast<BasicMolecule&>(*mol1_clone_ptr);
 
 	BOOST_CHECK(&mol1 != mol1_clone_ptr.get());

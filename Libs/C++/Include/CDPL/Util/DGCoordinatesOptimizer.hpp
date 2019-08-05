@@ -74,7 +74,6 @@ namespace CDPL
 			static const std::size_t COORDS_DIM                  = Dim;
 			static const std::size_t DEF_NUM_CYCLES              = 50;
 			static const std::size_t DEF_CYCLE_STEP_COUNT_FACTOR = 1;
-
 			static const ValueType   DEF_START_LEARNING_RATE;
 			static const ValueType   DEF_LEARNING_RATE_DECREMENT;
 
@@ -531,12 +530,12 @@ CDPL::Util::DGCoordinatesOptimizerBase<Dim, T, Derived>::getDistanceError(const 
 			continue;
 
 		if (dist < lb) {
-			ValueType tmp = (lb * lb - dist_2) / (0.000001 + lb * lb);
+			ValueType tmp = (dist_2 - lb * lb) / (0.000001 + lb * lb);
 
 			error += tmp * tmp;
 
 		} else {
-			ValueType tmp = (ub * ub - dist_2) / (0.000001 + ub * ub);
+			ValueType tmp = (dist_2 - ub * ub) / (0.000001 + ub * ub);
 			
 			error += tmp * tmp;
 		}
@@ -816,12 +815,12 @@ CDPL::Util::DGCoordinatesOptimizer<3, T>::getVolumeError(const CoordsArray& coor
 			continue;
 
 		if (vol < lb) {
-			ValueType tmp = (lb * lb - vol * vol) / (0.000001 + lb * lb);
+			ValueType tmp = (vol - lb);
 
 			error += tmp * tmp;
 
 		} else {
-			ValueType tmp = (ub * ub - vol * vol) / (0.000001 + ub * ub);
+			ValueType tmp = (vol - ub);
 			
 			error += tmp * tmp;
 		}
@@ -881,9 +880,9 @@ void CDPL::Util::DGCoordinatesOptimizer<3, T>::adjCoordsForConstraint(const Volu
 
 	ValueType g_len2_sum = ValueType();
 
-	for (std::size_t i = 0; i < 4; i++)
+	for (std::size_t i = 0; i < 4; i++) 
 		g_len2_sum += g[i][0] * g[i][0] + g[i][1] * g[i][1] + g[i][2] * g[i][2];
-
+	
 	ValueType bound = (vol < lb ? lb : ub);
 	ValueType fact = lambda * (bound - vol) / g_len2_sum;
 

@@ -158,7 +158,6 @@ void CDPLPythonChem::exportMolecule()
 		.def("copy", python::pure_virtual(copyMolGraphFunc), (python::arg("self"), python::arg("molgraph")))
 		.def("append", python::pure_virtual(appendMolFunc), (python::arg("self"), python::arg("mol")))
 		.def("append", python::pure_virtual(appendMolGraphFunc), (python::arg("self"), python::arg("molgraph")))
-		.def("clone", python::pure_virtual(&Chem::Molecule::clone), python::arg("self"))
 		.def("assign", assignMolFunc, (python::arg("self"), python::arg("mol")), python::return_self<>())
 		.def("assign", assignMolGraphFunc, (python::arg("self"), python::arg("molgraph")), python::return_self<>())
 		.def("getAtoms", &createMutableAtomSequence<Chem::Molecule>, python::arg("self"),

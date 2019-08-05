@@ -44,7 +44,7 @@ public:
 private:
 	friend class CDPL::Util::StreamDataReader<std::string, TestStringReader>;
 
-	bool readData(std::istream& is, std::string& str) {
+	bool readData(std::istream& is, std::string& str, bool) {
 		if (moreData(is))
 			return bool(is >> str);
 
