@@ -219,6 +219,12 @@ bool Chem::isInvertibleNitrogen(const Atom& atom, const MolecularGraph& molgraph
 	if (getType(atom) != AtomType::N)
 		return false;
 
+	if (getAromaticityFlag(atom))
+		return false;
+
+	if (getHybridizationState(atom) != HybridizationState::SP3)
+		return false;
+
 	std::size_t bond_count = 0;
 	std::size_t ring_bond_count = 0;
 
@@ -238,23 +244,18 @@ bool Chem::isInvertibleNitrogen(const Atom& atom, const MolecularGraph& molgraph
 		if (getRingFlag(bond) && (++ring_bond_count > 2))
 			return false;
 
-		if (hasAromaticityFlag(nbr_atom) && getAromaticityFlag(nbr_atom))
+		if (getAromaticityFlag(nbr_atom) || isUnsaturated(nbr_atom, molgraph))
 			return false;
 
-		if (hasHybridizationState(nbr_atom)) {
-			switch (getHybridizationState(nbr_atom)) {
+		switch (getHybridizationState(nbr_atom)) {
 
-				case HybridizationState::SP2:
-				case HybridizationState::SP:
-					return false;
+			case HybridizationState::SP2:
+			case HybridizationState::SP:
+				return false;
 
-				default:
-					break;
-			}
+			default:
+				break;
 		} 
-
-		if (isUnsaturated(nbr_atom, molgraph))
-			return false;
 
 		bond_count++;
 	}
@@ -267,7 +268,7 @@ bool Chem::isPlanarNitrogen(const Atom& atom, const MolecularGraph& molgraph)
 	if (getType(atom) != AtomType::N)
 		return false;
 
-	if (hasAromaticityFlag(atom) && getAromaticityFlag(atom))
+	if (getAromaticityFlag(atom))
 		return true;
 
 	std::size_t bond_count = 0;
@@ -283,33 +284,28 @@ bool Chem::isPlanarNitrogen(const Atom& atom, const MolecularGraph& molgraph)
 		if (!molgraph.containsAtom(nbr_atom) || !molgraph.containsBond(bond))
 			continue;
 
-		if (getOrder(bond) > 1)
+		if (getOrder(bond) != 1)
 			return true;
 
-		if (hasAromaticityFlag(nbr_atom) && getAromaticityFlag(nbr_atom)) {
+		if (getAromaticityFlag(nbr_atom) || isUnsaturated(nbr_atom, molgraph)) {
 			unsat_nbrs = true;
 
-		} else if (hasHybridizationState(nbr_atom)) {
+		} else {
 			switch (getHybridizationState(nbr_atom)) {
 
 				case HybridizationState::SP2:
 				case HybridizationState::SP:
 					unsat_nbrs = true;
-					break;
 
 				default:
-					if (isUnsaturated(nbr_atom, molgraph))
-						unsat_nbrs = true;
 					break;
 			}
-
-		} else if (isUnsaturated(nbr_atom, molgraph))
-			unsat_nbrs = true;
-
+		}
+		
 		bond_count++;
 	}
 
-	if (getImplicitHydrogenCount(atom) + bond_count  > 3)
+	if (getImplicitHydrogenCount(atom) + bond_count > 3)
 		return false;
 
 	return unsat_nbrs;

@@ -96,6 +96,9 @@ namespace CDPL
 
 			std::size_t getNumConformers() const;
 
+			const ConfData& getConformer(std::size_t idx) const;
+			ConfData& getConformer(std::size_t idx);
+
 			ConstConformerIterator getConformersBegin() const;
 			ConstConformerIterator getConformersEnd() const;
 

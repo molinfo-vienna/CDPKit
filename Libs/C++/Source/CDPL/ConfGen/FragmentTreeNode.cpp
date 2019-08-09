@@ -104,6 +104,16 @@ std::size_t ConfGen::FragmentTreeNode::getNumConformers() const
 	return conformers.size();
 }
 
+const ConfGen::FragmentTreeNode::ConfData& ConfGen::FragmentTreeNode::getConformer(std::size_t idx) const
+{
+	return conformers[idx];
+}
+
+ConfGen::FragmentTreeNode::ConfData& ConfGen::FragmentTreeNode::getConformer(std::size_t idx)
+{
+	return conformers[idx];
+}
+
 ConfGen::FragmentTreeNode::ConstConformerIterator ConfGen::FragmentTreeNode::getConformersBegin() const
 {
 	return conformers.begin();

@@ -45,12 +45,19 @@
 #include "CDPL/ForceField/MMFF94EnergyCalculator.hpp"
 #include "CDPL/Chem/SmallestSetOfSmallestRings.hpp"
 #include "CDPL/Math/VectorArray.hpp"
+#include "CDPL/Util/BitSet.hpp"
 
 #include "FragmentTreeNode.hpp"
 
 
 namespace CDPL 
 {
+
+	namespace Chem
+	{
+
+		class StereoDescriptor;
+	};
 
     namespace ConfGen 
     {
@@ -119,10 +126,17 @@ namespace CDPL
 			bool genFragmentConformers(FragmentTreeNode& node);
 
 			void distChainBuildFragmentCoordinates(FragmentTreeNode& node, const Math::Vector3DArray& coords, 
-												   bool fix_stereo);
+												   bool fix_configs, bool opt_db_configs);
 
-			void fixAtomAndBondConfigurations(FragmentTreeNode& node) const;
-			void enumNitrogens(FragmentTreeNode& node);
+			void fixAtomConfigurations(FragmentTreeNode& node) const;
+			void fixBondConfigurations(FragmentTreeNode& node, bool opt_only);
+
+			void checkAndCorrectAtomConfiguration(FragmentTreeNode& node, const Chem::Atom& atom, 
+												  const Chem::StereoDescriptor& descr) const;
+			void checkAndCorrectDoubleBondConfiguration(FragmentTreeNode& node, const Chem::Bond& bond, 
+														const Chem::StereoDescriptor& descr);
+
+			void enumNitrogens(FragmentTreeNode& node, bool ring_sys);
 
 			void setupAromRingSubstituentBondLengthList(FragmentTreeNode& node);
 			void fixAromRingSubstituentBondLengths(Math::Vector3DArray& coords) const;
@@ -134,6 +148,14 @@ namespace CDPL
 
 			void getFragmentLinkBonds(const Chem::MolecularGraph& molgraph);
 			void getRotatableBonds(const Chem::MolecularGraph& molgraph);
+
+			const Chem::Atom* getBulkiestDoubleBondSubstituent(const Chem::Atom& atom, const Chem::Atom& excl_atom,
+															   const Chem::MolecularGraph& frag); 
+
+			void calcExtendedAtomConnectivities();
+
+			bool isInvertibleNitrogen(const Chem::Atom& atom, const Chem::MolecularGraph& frag, 
+									  const Math::Vector3DArray& coords) const;
 
 			void genMMFF94InteractionData(const Chem::MolecularGraph& molgraph, unsigned int ff_type, 
 										  ForceField::MMFF94InteractionData& ia_data);
@@ -155,6 +177,7 @@ namespace CDPL
 			typedef std::vector<IndexPair> IndexPairList;
 			typedef boost::tuple<std::size_t, std::size_t, double> BondLengthDescriptor;
 			typedef std::vector<BondLengthDescriptor> BondLengthDescriptorList;
+			typedef std::vector<std::size_t> UIArray;
 
 			Settings                                        settings;
 			FragmentTreeNode                                fragTree;
@@ -164,6 +187,10 @@ namespace CDPL
 			FragmentConformerGenerator                      fragConfGen;
 			IndexPairList                                   fragLibEntryAtomIdxMap;
 			BondLengthDescriptorList                        aromRingSubstBondLens;
+			Util::BitSet                                    reachableAtomMask;
+			Util::BitSet                                    hAtomMask;
+			UIArray                                         extAtomConnectivities;
+			UIArray                                         tmpExtAtomConnectivities;
 			boost::timer::cpu_timer                         timer;
 			ForceField::MMFF94InteractionParameterizer      mmff94Parameterizer;
 			ForceField::MMFF94InteractionData               tmpMMFF94Data;
