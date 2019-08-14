@@ -347,6 +347,16 @@ void Chem::Fragment::reserveMemoryForAtoms(std::size_t num_atoms)
 	atoms.reserve(num_atoms);
 }
 
+void Chem::Fragment::swap(Fragment& frag)
+{
+	Base::PropertyContainer::swap(frag);
+
+	atoms.swap(frag.atoms);
+	bonds.swap(frag.bonds);
+	atomIndices.swap(frag.atomIndices);
+	bondIndices.swap(frag.bondIndices);
+}
+
 void Chem::Fragment::reserveMemoryForBonds(std::size_t num_bonds)
 {
 	bonds.reserve(num_bonds);

@@ -77,6 +77,8 @@ namespace CDPL
 			operator const void*() const;
 			bool operator!() const;
 
+			void close();
+
 		private:
 			std::ifstream stream;
 			std::string   fileName;
@@ -176,6 +178,13 @@ template <typename ReaderImpl, typename DataType>
 bool CDPL::Util::FileDataReader<ReaderImpl, DataType>::operator!() const
 {
     return reader.operator!();
+}
+
+template <typename ReaderImpl, typename DataType>
+void CDPL::Util::FileDataReader<ReaderImpl, DataType>::close()
+{
+	reader.close();
+    stream.close();
 }
 
 #endif // CDPL_UTIL_FILEDATAREADER_HPP

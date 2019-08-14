@@ -32,6 +32,7 @@
 #include "CDPL/Chem/Bond.hpp"
 #include "CDPL/Chem/Atom.hpp"
 #include "CDPL/Chem/AtomType.hpp"
+#include "CDPL/Chem/HybridizationState.hpp"
 
 
 using namespace CDPL;
@@ -87,6 +88,12 @@ bool Chem::isRotatable(const Bond& bond, const MolecularGraph& molgraph, bool h_
 
     const Atom& atom1 = bond.getBegin();
 	const Atom& atom2 = bond.getEnd();
+
+	if (getHybridizationState(atom1) == HybridizationState::SP)
+		return false;
+
+	if (getHybridizationState(atom2) == HybridizationState::SP)
+		return false;
 
 	if (getBondCount(atom1, molgraph) < 2 ) 
 		return false;

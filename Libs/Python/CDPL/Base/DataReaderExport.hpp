@@ -92,6 +92,19 @@ namespace CDPLPythonBase
 
 			return !this->get_override("__bool__")();
 		}
+
+		void close() {
+			if (boost::python::override f = this->get_override("close")) {
+				f();                                                      
+				return;                                                   
+			}                                                             
+                              
+			CDPL::Base::DataReader<T>::close();
+		}
+
+		void closeDef() {
+			CDPL::Base::DataReader<T>::close();
+		}
 	};
 
 	template <typename T>
@@ -119,6 +132,7 @@ namespace CDPLPythonBase
 				.def("getRecordIndex", python::pure_virtual(&ReaderType::getRecordIndex), python::arg("self"))
 				.def("setRecordIndex", python::pure_virtual(&ReaderType::setRecordIndex), (python::arg("self"), python::arg("idx")))
 				.def("getNumRecords", python::pure_virtual(&ReaderType::getNumRecords), python::arg("self"))
+				.def("close", &ReaderType::close, &DataReaderWrapper<T>::closeDef, python::arg("self"))
 				.def("__nonzero__", python::pure_virtual(&nonZero), python::arg("self"))
 				.def("__bool__", python::pure_virtual(&nonZero), python::arg("self"))
 				.add_property("numRecords", &ReaderType::getNumRecords);

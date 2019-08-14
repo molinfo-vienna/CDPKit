@@ -130,12 +130,29 @@ namespace
 	};
 
 	const double INV_NITROGEN_MIN_PLANE_DEVIATION = 10.0;
+	const double MIN_LINEAR_ATOM_GEOMETRY_ANGLE   = 170.0;
+
+/*
+#generic rules
+[*:1][CH2:2][a:3][a:4] 0 180 90 -90 45 -45 135 -135
+
+[*:1]~[C^3H0:2]-[C^3H0,C^3H1:3]~[*:4] 30 -30 150 -150 0 180 90 -90 60 -60 120 -120
+[*:1]~[^3H2:2]-[^3H2:3]~[*:4] 180 60 -60
+[*:1]~[^3:2]-[^3H2:3]~[CH3:4] 180 60 -60
+[*:1]~[^3:2]-[^3:3]~[*:4] 180 60 -60 40 -40 80 -80 -160 160 
+[*:1]~[^2:2]-[^2:3]~[*:4] 30 -30 150 -150 0 180 90 -90 60 -60 120 -120
+
+[*:1]~[^2:2]-[^3:3]~[*:4] 0.0 30.0 -30.0 60.0 -60.0 90.0 -90.0 120.0 -120.0 -150.0 150.0 180.0
+*/
 }
 
 
 ConfGen::SystematicConformerGeneratorImpl::SystematicConformerGeneratorImpl()
 {
 	fragConfGen.reuseExistingCoordinates(false);
+
+	torsionRuleMatcher.reportUniqueMappingsOnly(true);
+	torsionRuleMatcher.stopAtFirstMatchingRule(true);
 }
 
 ConfGen::SystematicConformerGeneratorImpl::~SystematicConformerGeneratorImpl() {}
@@ -154,13 +171,11 @@ ConfGen::SystematicConformerGeneratorImpl::getSettings() const
 ConfGen::SystematicConformerGeneratorImpl::Status 
 ConfGen::SystematicConformerGeneratorImpl::generate(const Chem::MolecularGraph& molgraph)
 {
-	timer.start();	
-	extAtomConnectivities.clear();
-
-	freeVector3DArrays();
+	init();
 	buildTree(molgraph);
 	buildAtomIndexMaps(fragTree);
 	genConfSearchMMFF94InteractionData();
+	distFragmentMMFF94InteractionData(fragTree);
 	clearNodeConformers(fragTree);
 
 	if (timeoutExceeded())
@@ -173,14 +188,16 @@ ConfGen::SystematicConformerGeneratorImpl::generate(const Chem::MolecularGraph& 
 		return Status::ERROR;
 	}
 
-	distFragmentMMFF94InteractionData(fragTree);
 	calcLeafNodeConformerEnergies(fragTree);
+	setupTorsions(fragTree);
 
 	return Status::SUCCESS;
 }
 
-void ConfGen::SystematicConformerGeneratorImpl::freeVector3DArrays()
+void ConfGen::SystematicConformerGeneratorImpl::init()
 {
+	timer.start();	
+	extAtomConnectivities.clear();
 	freeCoordArrays.clear();
 
 	std::for_each(allocCoordArrays.begin(), allocCoordArrays.end(), 
@@ -233,7 +250,7 @@ void ConfGen::SystematicConformerGeneratorImpl::genConfSearchMMFF94InteractionDa
 
 void ConfGen::SystematicConformerGeneratorImpl::clearNodeConformers(FragmentTreeNode& node) const
 {
-	node.clearConformers();
+	node.getConformers().clear();
 
 	if (!node.hasChildren())
 		return;
@@ -275,13 +292,116 @@ void ConfGen::SystematicConformerGeneratorImpl::calcLeafNodeConformerEnergies(Fr
 
 	mmff94EnergyCalc.setup(node.getMMFF94InteractionData());
 
-	for (FragmentTreeNode::ConformerIterator it = node.getConformersBegin(), end = node.getConformersEnd(); it != end; ++it) 
+	for (FragmentTreeNode::ConformerIterator it = node.getConformers().begin(), end = node.getConformers().end(); it != end; ++it) 
 		it->second = mmff94EnergyCalc(*it->first);
 
 	if (node.getNumConformers() > 1)
-		std::sort(node.getConformersBegin(), node.getConformersEnd(), boost::bind(std::less<double>(),
-																				  boost::bind(&FragmentTreeNode::ConfData::second, _1),
-																				  boost::bind(&FragmentTreeNode::ConfData::second, _2)));
+		std::sort(node.getConformers().begin(), node.getConformers().end(), 
+				  boost::bind(std::less<double>(),
+							  boost::bind(&FragmentTreeNode::ConfData::second, _1),
+							  boost::bind(&FragmentTreeNode::ConfData::second, _2)));
+}
+
+void ConfGen::SystematicConformerGeneratorImpl::setupTorsions(FragmentTreeNode& node)
+{
+	using namespace Chem;
+
+	if (!node.hasChildren())
+		return;
+
+	setupTorsions(*node.getLeftChild());
+	setupTorsions(*node.getRightChild());
+
+	node.getTorsionAngles().clear();
+
+	const Atom* const* bond_atoms = node.getSplitBondAtoms();
+	const MolecularGraph& frag = node.getFragment();
+
+	std::size_t bond_count1 = getBondCount(*bond_atoms[0], frag);
+
+	if (bond_count1 < 2) // sanity_check
+		return;
+
+	std::size_t bond_count2 = getBondCount(*bond_atoms[1], frag);
+
+	if (bond_count2 < 2) // sanity_check
+		return;
+
+	if ((bond_count1 == 2 && hasLinearGeometry(*bond_atoms[0], *node.getLeftChild())) ||
+		(bond_count2 == 2 && hasLinearGeometry(*bond_atoms[1], *node.getRightChild())))
+		return;
+
+	const Bond& bond = *node.getSplitBond();
+	std::size_t order = getOrder(bond);
+
+	if (order == 1) {
+		const TorsionRuleMatch* match = getMatchingTorsionRule(bond);
+
+		if (!match) {
+			std::cerr << "No matching torsion rule found for bond " << fragTree.getFragment().getBondIndex(bond) << std::endl;
+			return;
+		}
+		
+		const Atom* const* match_atoms = match->getAtoms();
+
+		if (match_atoms[1] == bond_atoms[0])
+			node.setTorsionReferenceAtoms(match_atoms[0], match_atoms[3]);
+		else
+			node.setTorsionReferenceAtoms(match_atoms[3], match_atoms[0]);
+
+		std::transform(match->getRule().getAnglesBegin(), match->getRule().getAnglesEnd(), std::back_inserter(node.getTorsionAngles()),
+					   boost::bind(&TorsionRule::AngleEntry::getAngle, _1));
+
+		std::cerr << "Found " << match->getRule().getNumAngles() << " torsion angles for bond " << fragTree.getFragment().getBondIndex(bond) << std::endl;
+		return;
+	}
+
+	if (order == 2 && bond_count1 <= 3 && bond_count2 <= 3) {
+		const StereoDescriptor& descr = getStereoDescriptor(bond);
+
+		if ((descr.getConfiguration() == BondConfiguration::CIS || descr.getConfiguration() == BondConfiguration::TRANS) && descr.isValid(bond)) {
+			const Chem::Atom* const* ref_atoms = descr.getReferenceAtoms();
+			bool descr_valid = true;
+	
+			for (std::size_t i = 0; i < 4; i++) {
+				if (!frag.containsAtom(*ref_atoms[i])) {
+					descr_valid = false;
+					break;
+				}
+			}
+
+			if (descr_valid) {
+				if (ref_atoms[1] == bond_atoms[0])
+					node.setTorsionReferenceAtoms(ref_atoms[0], ref_atoms[3]);
+				else
+					node.setTorsionReferenceAtoms(ref_atoms[3], ref_atoms[0]);
+
+				// choose angle that results in desired configuration
+
+				node.getTorsionAngles().push_back(descr.getConfiguration() == BondConfiguration::CIS ? 0.0 : 180.0);
+				return;
+			}
+		} 
+	}
+
+	// choose trans config of bulkiest substituents
+	
+	const Atom* ref_atom1 = getBulkiestSubstituent(*bond_atoms[0], *bond_atoms[1], frag, false);
+	const Atom* ref_atom2 = getBulkiestSubstituent(*bond_atoms[1], *bond_atoms[0], frag, false);
+
+	node.setTorsionReferenceAtoms(ref_atom1, ref_atom2);
+	node.getTorsionAngles().push_back(180.0);
+}
+
+const ConfGen::TorsionRuleMatch* ConfGen::SystematicConformerGeneratorImpl::getMatchingTorsionRule(const Chem::Bond& bond)
+{
+	torsionRuleMatcher.setTorsionLibrary(settings.getTorsionLibrary());
+
+	if (torsionRuleMatcher.findMatches(bond, fragTree.getFragment(), false)) 
+		return &torsionRuleMatcher.getMatch(0); 
+	
+// TODO default rules
+	return 0;
 }
 
 void ConfGen::SystematicConformerGeneratorImpl::getBuildFragmentNodes(FragmentTreeNode& node)
@@ -560,7 +680,7 @@ void ConfGen::SystematicConformerGeneratorImpl::setupAromRingSubstituentBondLeng
 
 	const MolecularGraph& frag = node.getFragment();
 	const MolecularGraph& root_frag = fragTree.getFragment();
-	const MMFF94BondStretchingInteractionData& bs_params = fragTree.getMMFF94InteractionData().getBondStretchingInteractions();
+	const MMFF94BondStretchingInteractionData& bs_params = node.getMMFF94InteractionData().getBondStretchingInteractions();
 
 	aromRingSubstBondLens.clear();
 
@@ -689,12 +809,12 @@ void ConfGen::SystematicConformerGeneratorImpl::fixBondConfigurations(FragmentTr
 		const Atom& atom1 = bond.getBegin();
 		const Atom& atom2 = bond.getEnd();
 	
-		const Atom* subst1_atom = getBulkiestDoubleBondSubstituent(atom1, atom2, frag);
+		const Atom* subst1_atom = getBulkiestSubstituent(atom1, atom2, frag, true);
 
 		if (!subst1_atom)
 			return;
 
-		const Atom* subst2_atom = getBulkiestDoubleBondSubstituent(atom2, atom1, frag);
+		const Atom* subst2_atom = getBulkiestSubstituent(atom2, atom1, frag, true);
 
 		if (!subst2_atom)
 			return;
@@ -710,7 +830,7 @@ void ConfGen::SystematicConformerGeneratorImpl::checkAndCorrectAtomConfiguration
 {
 	using namespace Chem;
 
-	Math::Vector3DArray& coords = *node.getConformer(0).first;
+	Math::Vector3DArray& coords = *node.getConformers().front().first;
 
 	if (calcAtomConfiguration(atom, fragTree.getFragment(), descr, coords) == descr.getConfiguration())
 		return;
@@ -728,7 +848,7 @@ void ConfGen::SystematicConformerGeneratorImpl::checkAndCorrectDoubleBondConfigu
 {
 	using namespace Chem;
 
-	Math::Vector3DArray& coords = *node.getConformer(0).first;
+	Math::Vector3DArray& coords = *node.getConformers().front().first;
 
 	if (calcBondConfiguration(bond, fragTree.getFragment(), descr, coords) == descr.getConfiguration())
 		return;
@@ -783,7 +903,7 @@ void ConfGen::SystematicConformerGeneratorImpl::enumNitrogens(FragmentTreeNode& 
 
 	const MolecularGraph& frag = node.getFragment();
 	const AtomIndexMap& atom_idx_map = node.getAtomIndexMap();
-	Math::Vector3DArray& coords = *node.getConformer(0).first;
+	Math::Vector3DArray& coords = *node.getConformers().front().first;
 
 	if (!ring_sys) {
 		for (MolecularGraph::ConstAtomIterator it = frag.getAtomsBegin(), end = frag.getAtomsEnd(); it != end; ++it) {
@@ -825,7 +945,7 @@ void ConfGen::SystematicConformerGeneratorImpl::enumNitrogens(FragmentTreeNode& 
 
 		const Atom* ring_nbr1 = 0;
 		const Atom* ring_nbr2 = 0;
-		const Atom* chain_nbr = 0;
+		const Atom* subst_nbr = 0;
 
 		Atom::ConstBondIterator b_it = atom.getBondsBegin();
 
@@ -843,45 +963,71 @@ void ConfGen::SystematicConformerGeneratorImpl::enumNitrogens(FragmentTreeNode& 
 					ring_nbr2 = &nbr_atom;
 
 			} else 
-				chain_nbr = &nbr_atom;
+				subst_nbr = &nbr_atom;
 		}
 
-		if (!chain_nbr || !ring_nbr2) // should not happend
+		if (!subst_nbr || !ring_nbr2) // should not happend
 			continue;
 
-		std::size_t atom_idx = frag.getAtomIndex(atom);
+		std::size_t ctr_atom_idx = frag.getAtomIndex(atom);
 		std::size_t ring_nbr1_idx = frag.getAtomIndex(*ring_nbr1);
 		std::size_t ring_nbr2_idx = frag.getAtomIndex(*ring_nbr2);
-		std::size_t chain_nbr_idx = frag.getAtomIndex(*chain_nbr);
+		std::size_t subst_nbr_idx = frag.getAtomIndex(*subst_nbr);
 
 		reachableAtomMask.resize(num_atoms);
 		reachableAtomMask.reset();
-		reachableAtomMask.set(atom_idx);
-		reachableAtomMask.set(chain_nbr_idx);
+		reachableAtomMask.set(ctr_atom_idx);
+		reachableAtomMask.set(subst_nbr_idx);
 
-		markReachableAtoms(*chain_nbr, frag, reachableAtomMask, false);
+		markReachableAtoms(*subst_nbr, frag, reachableAtomMask, false);
 
-		reachableAtomMask.reset(atom_idx);
+		reachableAtomMask.reset(ctr_atom_idx);
+
+		ctr_atom_idx = atom_idx_map[ctr_atom_idx];
+		ring_nbr1_idx = atom_idx_map[ring_nbr1_idx];
+		ring_nbr2_idx = atom_idx_map[ring_nbr2_idx];
 
 		Math::Vector3D ring_nbr1_vec;
 		Math::Vector3D ring_nbr2_vec;
-		Math::Vector3D chan_nbr_vec;
-		Math::Vector3D plane_vec;
+		Math::Vector3D subst_atom_vec;
+		Math::Vector3D plane_normal;
 
 		for (std::size_t i = 0, num_confs = node.getNumConformers(); i < num_confs; i++) {
-			const Math::Vector3DArray& conf = *node.getConformer(i).first;
+			const Math::Vector3DArray& conf = *node.getConformers()[i].first;
 			Math::Vector3DArray* inv_n_conf = allocVector3DArray();
 			Vec3DArrayDeallocator dealloc_guard(this, inv_n_conf);
 
+			const Math::Vector3D& ctr_atom_pos = conf[ctr_atom_idx];
+
+			ring_nbr1_vec.assign(conf[ring_nbr1_idx] - ctr_atom_pos);
+			ring_nbr2_vec.assign(conf[ring_nbr2_idx] - ctr_atom_pos);
+			plane_normal.assign(crossProd(ring_nbr1_vec, ring_nbr2_vec));
+
+			double plane_normal_len = length(plane_normal);
+
+			if (plane_normal_len == 0.0) // sanity check
+				continue;
+
+			plane_normal /= plane_normal_len;
+
 			for (std::size_t j = 0; j < num_atoms; j++) {
-				std::size_t root_atom_idx = atom_idx_map[j];
+				std::size_t curr_atom_idx = atom_idx_map[j];
 
 				if (!reachableAtomMask.test(j)) {
-					(*inv_n_conf)[root_atom_idx].assign(conf[root_atom_idx]);
+					(*inv_n_conf)[curr_atom_idx].assign(conf[curr_atom_idx]);
 					continue;
 				}
 
-				(*inv_n_conf)[root_atom_idx].assign(conf[root_atom_idx]); // TODO
+				const Math::Vector3D& subst_atom_pos = conf[curr_atom_idx];
+
+				subst_atom_vec.assign(subst_atom_pos - ctr_atom_pos);
+
+				double plane_dist = innerProd(plane_normal, subst_atom_vec);
+				Math::Vector3D& inv_n_subst_atom_pos = (*inv_n_conf)[curr_atom_idx];
+
+				inv_n_subst_atom_pos[0] = subst_atom_pos[0] - 2.0 * plane_dist * plane_normal[0];
+				inv_n_subst_atom_pos[1] = subst_atom_pos[1] - 2.0 * plane_dist * plane_normal[1];
+				inv_n_subst_atom_pos[2] = subst_atom_pos[2] - 2.0 * plane_dist * plane_normal[2];
 			}
 
 			node.addConformer(inv_n_conf);
@@ -935,8 +1081,8 @@ void ConfGen::SystematicConformerGeneratorImpl::getRotatableBonds(const Chem::Mo
 	}
 }
 
-const Chem::Atom* ConfGen::SystematicConformerGeneratorImpl::getBulkiestDoubleBondSubstituent(const Chem::Atom& atom, const Chem::Atom& excl_atom, 
-																							  const Chem::MolecularGraph& frag)
+const Chem::Atom* ConfGen::SystematicConformerGeneratorImpl::getBulkiestSubstituent(const Chem::Atom& atom, const Chem::Atom& excl_atom, 
+																					const Chem::MolecularGraph& frag, bool strict)
 {
 	using namespace Chem;
 
@@ -958,7 +1104,7 @@ const Chem::Atom* ConfGen::SystematicConformerGeneratorImpl::getBulkiestDoubleBo
 		if (!frag.containsAtom(nbr_atom) || !frag.containsBond(*b_it))
 			continue;
 
-		if (++bond_cnt > 2)
+		if (++bond_cnt > 2 && strict)
 			return 0;
 
 		std::size_t nbr_ec = extAtomConnectivities[fragTree.getFragment().getAtomIndex(nbr_atom)];
@@ -967,7 +1113,7 @@ const Chem::Atom* ConfGen::SystematicConformerGeneratorImpl::getBulkiestDoubleBo
 			bkst_subst = &nbr_atom;
 			bkst_subst_ec = nbr_ec;
 
-		} else if (bkst_subst_ec == nbr_ec)
+		} else if (strict && (bkst_subst_ec == nbr_ec))
 			return 0;
 	}
 
@@ -1030,6 +1176,11 @@ bool ConfGen::SystematicConformerGeneratorImpl::isInvertibleNitrogen(const Chem:
 	if (getType(atom) != AtomType::N)
 		return false;
 
+	const StereoDescriptor& descr = getStereoDescriptor(atom);
+
+	if (descr.isValid(atom) && (descr.getConfiguration() == AtomConfiguration::R || descr.getConfiguration() == AtomConfiguration::S))
+		return false;
+
 	std::size_t h_bond_count = 0;
 	std::size_t ring_bond_count = 0;
 	std::size_t nbr_atom_indices[3];
@@ -1069,14 +1220,83 @@ bool ConfGen::SystematicConformerGeneratorImpl::isInvertibleNitrogen(const Chem:
 	Math::Vector3D nbr_vec3(coords[nbr_atom_indices[2]] - atom_pos);
 	Math::Vector3D plane_vec(crossProd(nbr_vec1, nbr_vec2));
 
-	double plane_dev_ang = std::abs(std::acos(angleCos(plane_vec, nbr_vec3, length(plane_vec) * length(nbr_vec3))) - M_PI * 0.5) * 180.0 / M_PI;
+	double norm = length(plane_vec) * length(nbr_vec3);
+
+	if (norm == 0.0) // sanity check
+		return false;
+
+	double plane_dev_ang = std::abs(std::acos(angleCos(plane_vec, nbr_vec3, norm)) - M_PI * 0.5) * 180.0 / M_PI;
 
 	return (plane_dev_ang >= INV_NITROGEN_MIN_PLANE_DEVIATION);
+}
+
+bool ConfGen::SystematicConformerGeneratorImpl::hasLinearGeometry(const Chem::Atom& atom, const FragmentTreeNode& node) const
+{
+	using namespace Chem;
+
+	if (!node.getFragment().containsAtom(atom))
+		return false;
+
+	if (node.hasChildren()) 
+		return (hasLinearGeometry(atom, *node.getLeftChild()) || hasLinearGeometry(atom, *node.getRightChild()));
+
+	if (node.getConformers().empty())
+		return false;
+
+	const MolecularGraph& frag = node.getFragment();
+
+	const Atom* nbr_atom1 = 0;
+	const Atom* nbr_atom2 = 0;
+
+	Atom::ConstBondIterator b_it = atom.getBondsBegin();
+
+	for (Atom::ConstAtomIterator a_it = atom.getAtomsBegin(), a_end = atom.getAtomsEnd(); a_it != a_end; ++a_it, ++b_it) {
+		const Atom& nbr_atom = *a_it;
+		const Bond& bond = *b_it;
+
+		if (!frag.containsAtom(nbr_atom) || !frag.containsBond(bond))
+			continue;
+
+		if (!nbr_atom1)
+			nbr_atom1 = &nbr_atom;
+
+		else {
+			if (nbr_atom2)
+				return false;
+
+			nbr_atom2 = &nbr_atom;
+		}
+	}
+
+	if (!nbr_atom2)
+		return false;
+
+	const MolecularGraph& root_frag = fragTree.getFragment();
+
+	std::size_t ctr_atom_idx = root_frag.getAtomIndex(atom);
+	std::size_t nbr_atom1_idx = root_frag.getAtomIndex(*nbr_atom1);
+	std::size_t nbr_atom2_idx = root_frag.getAtomIndex(*nbr_atom2);
+
+	const Math::Vector3DArray& coords = *node.getConformers().front().first;
+
+	Math::Vector3D nbr1_vec(coords[nbr_atom1_idx] - coords[ctr_atom_idx]);
+	Math::Vector3D nbr2_vec(coords[nbr_atom2_idx] - coords[ctr_atom_idx]);
+	
+	double norm = length(nbr1_vec) * length(nbr2_vec);
+
+	if (norm == 0.0) // sanity check
+		return true;
+
+	double angle = std::acos(angleCos(nbr1_vec, nbr2_vec, norm, true)) * 180.0 / M_PI;
+
+	return (angle >= MIN_LINEAR_ATOM_GEOMETRY_ANGLE);
 }
 
 void ConfGen::SystematicConformerGeneratorImpl::genMMFF94InteractionData(const Chem::MolecularGraph& molgraph, unsigned int ff_type, 
 																		 ForceField::MMFF94InteractionData& ia_data)
 {
+	using namespace ForceField;
+
  	unsigned int ia_types = ForceField::InteractionType::ALL;
 
 	switch (ff_type) {
@@ -1090,12 +1310,12 @@ void ConfGen::SystematicConformerGeneratorImpl::genMMFF94InteractionData(const C
 			break;
 
 		case ForceFieldType::MMFF94S_NO_ESTAT:
-			ia_types ^= ForceField::InteractionType::ELECTROSTATIC;
+			ia_types ^= InteractionType::ELECTROSTATIC;
 			mmff94Parameterizer.setStaticParameterDefaults();
 			break;
 
 		case ForceFieldType::MMFF94_NO_ESTAT:
-			ia_types ^= ForceField::InteractionType::ELECTROSTATIC;
+			ia_types ^= InteractionType::ELECTROSTATIC;
 			mmff94Parameterizer.setDynamicParameterDefaults();
 			break;
 

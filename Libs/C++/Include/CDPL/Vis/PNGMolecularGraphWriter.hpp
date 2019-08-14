@@ -31,6 +31,8 @@
 #ifndef CDPL_VIS_PNGMOLECULARGRAPHWRITER_HPP
 #define CDPL_VIS_PNGMOLECULARGRAPHWRITER_HPP
 
+#include <iosfwd>
+
 #include "CDPL/Vis/APIPrefix.hpp"
 #include "CDPL/Vis/ImageWriter.hpp"
 #include "CDPL/Base/DataWriter.hpp"

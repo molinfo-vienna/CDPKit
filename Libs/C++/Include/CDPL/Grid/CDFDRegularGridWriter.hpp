@@ -32,6 +32,7 @@
 #define CDPL_GRID_CDFDREGULARGRIDWRITER_HPP
 
 #include <memory>
+#include <iosfwd>
 
 #include "CDPL/Grid/APIPrefix.hpp"
 #include "CDPL/Grid/RegularGrid.hpp"

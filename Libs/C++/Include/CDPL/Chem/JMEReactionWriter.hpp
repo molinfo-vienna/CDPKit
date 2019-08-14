@@ -32,6 +32,7 @@
 #define CDPL_CHEM_JMEREACTIONWRITER_HPP
 
 #include <memory>
+#include <iosfwd>
 
 #include "CDPL/Chem/APIPrefix.hpp"
 #include "CDPL/Base/DataWriter.hpp"

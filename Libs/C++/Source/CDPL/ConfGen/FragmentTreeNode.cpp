@@ -26,6 +26,8 @@
 
 #include "StaticInit.hpp"
 
+#include <algorithm>
+
 #include "CDPL/Chem/Fragment.hpp"
 #include "CDPL/Chem/Atom.hpp"
 #include "CDPL/Chem/Bond.hpp"
@@ -36,7 +38,6 @@
 #include "FragmentTreeNode.hpp"
 
 //#include <iostream>
-//#include "CDPL/Chem/MolecularGraphFunctions.hpp"
 using namespace CDPL;
 
 
@@ -56,6 +57,22 @@ const Chem::MolecularGraph& ConfGen::FragmentTreeNode::getFragment() const
 const Chem::Bond* ConfGen::FragmentTreeNode::getSplitBond() const
 {
 	return splitBond;
+}
+
+const Chem::Atom* const* ConfGen::FragmentTreeNode::getSplitBondAtoms() const
+{
+	return splitBondAtoms;
+}
+
+const Chem::Atom* const* ConfGen::FragmentTreeNode::getTorsionReferenceAtoms() const
+{
+	return torsionRefAtoms;
+}
+
+void ConfGen::FragmentTreeNode::setTorsionReferenceAtoms(const Chem::Atom* ref_atom1, const Chem::Atom* ref_atom2)
+{
+	torsionRefAtoms[0] = ref_atom1;
+	torsionRefAtoms[1] = ref_atom2;
 }
 
 void ConfGen::FragmentTreeNode::setFragmentType(unsigned int type)
@@ -89,11 +106,6 @@ ConfGen::FragmentTreeNode* ConfGen::FragmentTreeNode::getRightChild() const
 	return rightChild.get();
 }
 
-void ConfGen::FragmentTreeNode::clearConformers()
-{
-	conformers.clear();
-}
-
 void ConfGen::FragmentTreeNode::addConformer(Math::Vector3DArray* coords, double energy)
 {
 	conformers.push_back(ConfData(coords, energy));
@@ -104,34 +116,14 @@ std::size_t ConfGen::FragmentTreeNode::getNumConformers() const
 	return conformers.size();
 }
 
-const ConfGen::FragmentTreeNode::ConfData& ConfGen::FragmentTreeNode::getConformer(std::size_t idx) const
+const ConfGen::FragmentTreeNode::ConfDataArray& ConfGen::FragmentTreeNode::getConformers() const
 {
-	return conformers[idx];
+	return conformers;
 }
 
-ConfGen::FragmentTreeNode::ConfData& ConfGen::FragmentTreeNode::getConformer(std::size_t idx)
+ConfGen::FragmentTreeNode::ConfDataArray& ConfGen::FragmentTreeNode::getConformers()
 {
-	return conformers[idx];
-}
-
-ConfGen::FragmentTreeNode::ConstConformerIterator ConfGen::FragmentTreeNode::getConformersBegin() const
-{
-	return conformers.begin();
-}
-
-ConfGen::FragmentTreeNode::ConstConformerIterator ConfGen::FragmentTreeNode::getConformersEnd() const
-{
-	return conformers.end();
-}
-
-ConfGen::FragmentTreeNode::ConformerIterator ConfGen::FragmentTreeNode::getConformersBegin()
-{
-	return conformers.begin();
-}
-
-ConfGen::FragmentTreeNode::ConformerIterator ConfGen::FragmentTreeNode::getConformersEnd()
-{
-	return conformers.end();
+	return conformers;
 }
 
 const ConfGen::FragmentTreeNode::AtomIndexMap& ConfGen::FragmentTreeNode::getAtomIndexMap() const
@@ -142,6 +134,16 @@ const ConfGen::FragmentTreeNode::AtomIndexMap& ConfGen::FragmentTreeNode::getAto
 ConfGen::FragmentTreeNode::AtomIndexMap& ConfGen::FragmentTreeNode::getAtomIndexMap()
 {
 	return atomIdxMap;
+}
+
+const ConfGen::FragmentTreeNode::TorsionAngleArray& ConfGen::FragmentTreeNode::getTorsionAngles() const
+{
+	return torsionAngles;
+}
+
+ConfGen::FragmentTreeNode::TorsionAngleArray& ConfGen::FragmentTreeNode::getTorsionAngles()
+{
+	return torsionAngles;
 }
 
 ForceField::MMFF94InteractionData& ConfGen::FragmentTreeNode::getMMFF94InteractionData()
@@ -199,11 +201,20 @@ void ConfGen::FragmentTreeNode::splitRecursive(const Chem::MolecularGraph& frag,
     leftFragment->addBond(*splitBond);
     rightFragment->addBond(*splitBond);
 
-    getSubstructure(*leftFragment, splitBond->getBegin());
-    getSubstructure(*rightFragment, splitBond->getEnd());
+	splitBondAtoms[0] = &splitBond->getBegin();
+	splitBondAtoms[1] = &splitBond->getEnd();
+
+    getSubstructure(*leftFragment, *splitBondAtoms[0]);
+    getSubstructure(*rightFragment, *splitBondAtoms[1]);
+
+	if (leftFragment->getNumAtoms() < rightFragment->getNumAtoms()) { // make left fragment always larger or equal to right fragment
+		leftFragment->swap(*rightFragment);
+		std::swap(splitBondAtoms[0], splitBondAtoms[1]);
+	}
 
     leftChild->splitRecursive(*leftFragment, bonds);
     rightChild->splitRecursive(*rightFragment, bonds);
+
 }
 
 void ConfGen::FragmentTreeNode::getSubstructure(Chem::Fragment& substruct, const Chem::Atom& atom) const

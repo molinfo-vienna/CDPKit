@@ -111,6 +111,7 @@ template <typename WriterImpl, typename DataType>
 void CDPL::Util::FileDataWriter<WriterImpl, DataType>::close()
 {
     writer.close();
+	stream.close();
 }
 
 template <typename WriterImpl, typename DataType>

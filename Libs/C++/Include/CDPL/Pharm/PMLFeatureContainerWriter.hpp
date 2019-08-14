@@ -32,6 +32,7 @@
 #define CDPL_PHARM_PMLFEATURECONTAINERWRITER_HPP
 
 #include <memory>
+#include <iosfwd>
 
 #include "CDPL/Pharm/APIPrefix.hpp"
 #include "CDPL/Base/DataWriter.hpp"

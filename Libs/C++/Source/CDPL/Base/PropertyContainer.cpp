@@ -120,6 +120,11 @@ void Base::PropertyContainer::copyProperties(const PropertyContainer& cntnr)
 	properties = cntnr.properties;
 }
 
+void Base::PropertyContainer::swap(PropertyContainer& cntnr)
+{
+	properties.swap(cntnr.properties);
+}
+
 Base::PropertyContainer& Base::PropertyContainer::operator=(const PropertyContainer& cntnr)
 {
 	if (this == &cntnr)

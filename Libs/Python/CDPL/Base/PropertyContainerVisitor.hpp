@@ -99,6 +99,15 @@
                                                                                                     \
 		CDPL::Base::PropertyContainer::addProperties(cntnr);                                        \
 	}                                                                                               \
+                                                                                                    \
+	void swap(CDPL::Base::PropertyContainer& cntnr) {                                               \
+		if (boost::python::override f = this->get_override("swap")) {                               \
+			f(boost::ref(cntnr));                                                                   \
+			return;                                                                                 \
+		}                                                                                           \
+                                                                                                    \
+		CDPL::Base::PropertyContainer::swap(cntnr);                                                 \
+	}                                                                                               \
 	                                                                                                \
 	static void addPropertiesDef(CDPL::Base::PropertyContainer& self, CDPL::Base::PropertyContainer& cntnr) { \
 		if (dynamic_cast<Wrapper*>(boost::addressof(self)))                                         \
@@ -157,6 +166,8 @@ namespace CDPLPythonBase
 				.def("addProperties", &Wrapper::addPropertiesDef,
 					 (python::arg("self"), python::arg("cntnr")))
 				.def("copyProperties", &Wrapper::copyPropertiesDef,
+					 (python::arg("self"), python::arg("cntnr")))
+				.def("swap", &Wrapper::swap,
 					 (python::arg("self"), python::arg("cntnr")));
 		}
 	};

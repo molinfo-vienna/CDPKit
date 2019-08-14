@@ -40,6 +40,7 @@
 #include "CDPL/ConfGen/SystematicConformerGenerator.hpp"
 #include "CDPL/ConfGen/FragmentConformerGenerator.hpp"
 #include "CDPL/ConfGen/FragmentLibraryEntry.hpp"
+#include "CDPL/ConfGen/TorsionRuleMatcher.hpp"
 #include "CDPL/ForceField/MMFF94InteractionParameterizer.hpp"
 #include "CDPL/ForceField/MMFF94InteractionData.hpp"
 #include "CDPL/ForceField/MMFF94EnergyCalculator.hpp"
@@ -105,7 +106,7 @@ namespace CDPL
 
 			SystematicConformerGeneratorImpl& operator=(const SystematicConformerGeneratorImpl&);
 
-			void freeVector3DArrays();
+			void init();
 
 			void buildTree(const Chem::MolecularGraph& molgraph);
 
@@ -117,6 +118,8 @@ namespace CDPL
 			bool setupBuildFragmentConformers();
 
 			void calcLeafNodeConformerEnergies(FragmentTreeNode& node);
+
+			void setupTorsions(FragmentTreeNode& node);
 
 			void getBuildFragmentNodes(FragmentTreeNode& node);
 			void genChainBuildFragmentSubtrees();
@@ -149,13 +152,17 @@ namespace CDPL
 			void getFragmentLinkBonds(const Chem::MolecularGraph& molgraph);
 			void getRotatableBonds(const Chem::MolecularGraph& molgraph);
 
-			const Chem::Atom* getBulkiestDoubleBondSubstituent(const Chem::Atom& atom, const Chem::Atom& excl_atom,
-															   const Chem::MolecularGraph& frag); 
+			const Chem::Atom* getBulkiestSubstituent(const Chem::Atom& atom, const Chem::Atom& excl_atom,
+													 const Chem::MolecularGraph& frag, bool strict); 
+
+			const TorsionRuleMatch* getMatchingTorsionRule(const Chem::Bond& bond);
 
 			void calcExtendedAtomConnectivities();
 
 			bool isInvertibleNitrogen(const Chem::Atom& atom, const Chem::MolecularGraph& frag, 
 									  const Math::Vector3DArray& coords) const;
+
+			bool hasLinearGeometry(const Chem::Atom& atom, const FragmentTreeNode& node) const;
 
 			void genMMFF94InteractionData(const Chem::MolecularGraph& molgraph, unsigned int ff_type, 
 										  ForceField::MMFF94InteractionData& ia_data);
@@ -197,6 +204,7 @@ namespace CDPL
 			ForceField::MMFF94InteractionData               fragBuildMMFF94Data;
 			ForceField::MMFF94EnergyCalculator<double>      mmff94EnergyCalc;
 			Chem::SmallestSetOfSmallestRings::SharedPointer fragSSSR;
+			TorsionRuleMatcher                              torsionRuleMatcher;
 			AllocVector3DArrayList                          allocCoordArrays;
 			Vector3DArrayList                               freeCoordArrays;
 		};

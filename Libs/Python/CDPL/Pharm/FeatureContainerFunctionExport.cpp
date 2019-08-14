@@ -77,6 +77,8 @@ void CDPLPythonPharm::exportFeatureContainerFunctions()
 	python::def("checkExclusionVolumeClash", &checkExclusionVolumeClashWrapper5, 
 				(python::arg("ftr_cntnr"), python::arg("atom_cntnr"), python::arg("coords_func"), 
 				 python::arg("xform"), python::arg("vdw_factor") = 1.0));
+	python::def("transform3DCoordinates", &Pharm::transform3DCoordinates, 
+				(python::arg("cntnr"), python::arg("mtx")));
 	python::def("getFeatureAtoms", &Pharm::getFeatureAtoms, (python::arg("cntnr"), python::arg("atoms"), python::arg("append") = false));
 
 	EXPORT_FTRCONTAINER_FUNCS_COPY_REF(Name, name)

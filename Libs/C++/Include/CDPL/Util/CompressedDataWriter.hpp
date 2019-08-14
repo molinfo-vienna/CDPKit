@@ -53,7 +53,7 @@ namespace CDPL
 		/**
 		 * \brief CompressedDataWriter.
 		 */
-		template <typename WriterImpl, typename DecompStream, typename DataType = typename WriterImpl::DataType>
+		template <typename WriterImpl, typename CompStream, typename DataType = typename WriterImpl::DataType>
 		class CompressedDataWriter : public Base::DataWriter<DataType>
 		{
 
@@ -69,8 +69,8 @@ namespace CDPL
 			bool operator!() const;
 
 		private:
-			DecompStream  stream;
-			WriterImpl    writer;
+			CompStream  stream;
+			WriterImpl  writer;
 		};
 
 		/**
@@ -103,6 +103,7 @@ template <typename WriterImpl, typename DecompStream, typename DataType>
 void CDPL::Util::CompressedDataWriter<WriterImpl, DecompStream, DataType>::close()
 {
     writer.close();
+	stream.close();
 }
 
 template <typename WriterImpl, typename DecompStream, typename DataType>

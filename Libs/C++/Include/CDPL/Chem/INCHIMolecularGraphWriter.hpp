@@ -34,6 +34,7 @@
 #include <vector>
 #include <string>
 #include <cstddef>
+#include <iosfwd>
 
 #include "CDPL/Chem/APIPrefix.hpp"
 #include "CDPL/Base/DataWriter.hpp"

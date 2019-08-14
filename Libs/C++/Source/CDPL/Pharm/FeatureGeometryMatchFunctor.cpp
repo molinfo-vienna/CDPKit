@@ -33,8 +33,7 @@
 #include "CDPL/Pharm/FeatureFunctions.hpp"
 #include "CDPL/Pharm/FeatureGeometry.hpp"
 #include "CDPL/Pharm/FeatureType.hpp"
-#include "CDPL/Math/VectorAdapter.hpp"
-#include "CDPL/Math/VectorProxy.hpp"
+#include "CDPL/Math/MatrixProxy.hpp"
 
 
 using namespace CDPL; 
@@ -109,13 +108,12 @@ double Pharm::FeatureGeometryMatchFunctor::operator()(const Feature& ftr1, const
 			return 1.0;
 	}
 
-	const Math::Vector3D orient2 = getOrientation(ftr2);
+	const Math::Vector3D& orient2 = getOrientation(ftr2);
 	Math::Vector3D trans_or2;
 
-	trans_or2.assign(range(prod(xform, homog(orient2)), 0, 3));
-	trans_or2.minusAssign(range(prod(xform, Math::UnitVector<double>(4, 3)), 0, 3));
+	prod(range(xform, 0, 3, 0, 3), orient2, trans_or2);
 
-	double ang = std::acos(angleCos(getOrientation(ftr1), range(trans_or2, 0, 3), 1.0)) / M_PI * 180.0;
+	double ang = std::acos(angleCos(getOrientation(ftr1), trans_or2, 1.0)) / M_PI * 180.0;
 
 	if (ftr1_geom == FeatureGeometry::PLANE && ang > 90.0) 
 		ang = 180.0 - ang;

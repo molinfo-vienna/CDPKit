@@ -75,6 +75,8 @@ namespace CDPL
 			operator const void*() const;
 			bool operator!() const;
 
+			void close();
+		
 		private:
 			DecompStream  stream;
 			ReaderImpl    reader;
@@ -158,6 +160,13 @@ template <typename ReaderImpl, typename DecompStream, typename DataType>
 bool CDPL::Util::CompressedDataReader<ReaderImpl, DecompStream, DataType>::operator!() const
 {
     return reader.operator!();
+}
+
+template <typename ReaderImpl, typename DecompStream, typename DataType>
+void CDPL::Util::CompressedDataReader<ReaderImpl, DecompStream, DataType>::close()
+{
+    reader.close();
+	stream.close();
 }
 
 #endif // CDPL_UTIL_COMPRESSEDDATAREADER_HPP

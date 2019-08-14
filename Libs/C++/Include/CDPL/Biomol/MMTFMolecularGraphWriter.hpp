@@ -32,6 +32,7 @@
 #define CDPL_BIOMOL_MMTFMOLECULARGRAPHWRITER_HPP
 
 #include <memory>
+#include <iosfwd>
 
 #include "CDPL/Biomol/APIPrefix.hpp"
 #include "CDPL/Base/DataWriter.hpp"

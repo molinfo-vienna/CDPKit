@@ -202,6 +202,11 @@ namespace CDPL
 			 */
 			virtual void copyProperties(const PropertyContainer& cntnr);
 
+			/**
+			 * \brief Exchanges the properties of this container with the properties of the container \a cntnr.
+			 * \param cntnr The container to exchange the properties with.
+			 */
+			virtual void swap(PropertyContainer& cntnr);
 
 		protected:
 			/**

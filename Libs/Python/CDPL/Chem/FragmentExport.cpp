@@ -95,6 +95,7 @@ void CDPLPythonChem::exportFragment()
 		.def("removeBond", removeBondFunc, (python::arg("self"), python::arg("idx")))
 		.def("removeBond", &removeBond, (python::arg("self"), python::arg("bond")))
 		.def("clear", &Chem::Fragment::clear, python::arg("self"))
+		.def("swap", &Chem::Fragment::swap, (python::arg("self"), python::arg("frag")))
 		.def("getAtoms", &createMutableAtomSequence<Chem::Fragment>, python::arg("self"),
 			 python::with_custodian_and_ward_postcall<0, 1>())
 		.def("getBonds", &createMutableBondSequence<Chem::Fragment>, python::arg("self"),

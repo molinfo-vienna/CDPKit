@@ -314,6 +314,13 @@ namespace CDPL
 			 */
 			void clear();
 
+			/**
+			 * \brief Exchanges the atoms, bonds and properties of this fragment with the atoms, bonds and
+			 *        properties of the fragment \a frag.
+			 * \param frag The fragment the atoms, bonds and properties get exchanged with.
+			 */
+			void swap(Fragment& frag);
+
 			void orderAtoms(const AtomCompareFunction& func);
 
 			void orderBonds(const BondCompareFunction& func);

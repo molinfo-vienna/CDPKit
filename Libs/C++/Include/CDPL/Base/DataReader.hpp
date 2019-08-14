@@ -188,6 +188,12 @@ namespace CDPL
 			 */
 			virtual bool operator!() const = 0;
 
+			/**
+			 * \brief Performs a reader specific shutdown operation (if required).
+			 * \throw Base::IOError if an I/O error occurred.
+			 */
+			virtual void close() {}
+
 		protected:
 			/**
 			 * \brief Assignment operator.

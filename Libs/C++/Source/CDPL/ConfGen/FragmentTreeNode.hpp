@@ -62,13 +62,10 @@ namespace CDPL
 
 		public:
 			typedef std::pair<Math::Vector3DArray*, double> ConfData;
-
-		private:
 			typedef std::vector<ConfData> ConfDataArray;
-
-		public:
 			typedef std::vector<const Chem::Bond*> BondList;
 			typedef std::vector<std::size_t> AtomIndexMap;	
+			typedef std::vector<double> TorsionAngleArray;	
 
 			typedef ConfDataArray::const_iterator ConstConformerIterator;
 			typedef ConfDataArray::iterator ConformerIterator;
@@ -81,6 +78,12 @@ namespace CDPL
 
 			const Chem::Bond* getSplitBond() const;
 
+			const Chem::Atom* const* getSplitBondAtoms() const;
+
+			const Chem::Atom* const* getTorsionReferenceAtoms() const;
+
+			void setTorsionReferenceAtoms(const Chem::Atom* ref_atom1, const Chem::Atom* ref_atom2);
+
 			void setFragmentType(unsigned int type);
 
 			unsigned int getFragmentType() const;
@@ -90,26 +93,25 @@ namespace CDPL
 			FragmentTreeNode* getLeftChild() const;
 			FragmentTreeNode* getRightChild() const;
 
-			void clearConformers();
-
 			void addConformer(Math::Vector3DArray* coords, double energy = 0.0);
 
 			std::size_t getNumConformers() const;
 
-			const ConfData& getConformer(std::size_t idx) const;
-			ConfData& getConformer(std::size_t idx);
+			const ConfDataArray& getConformers() const;
 
-			ConstConformerIterator getConformersBegin() const;
-			ConstConformerIterator getConformersEnd() const;
-
-			ConformerIterator getConformersBegin();
-			ConformerIterator getConformersEnd();
+			ConfDataArray& getConformers();
 
 			const AtomIndexMap& getAtomIndexMap() const;
 
 			AtomIndexMap& getAtomIndexMap();
 
+			const TorsionAngleArray& getTorsionAngles() const;
+
+			TorsionAngleArray& getTorsionAngles();
+
 			ForceField::MMFF94InteractionData& getMMFF94InteractionData();
+
+			const ForceField::MMFF94InteractionData& getMMFF94InteractionData() const;
 
 			//void printTree(std::ostream& os) const;
 
@@ -133,6 +135,8 @@ namespace CDPL
 			FragmentTreeNode&                 root;
 			const Chem::MolecularGraph*       fragment;
 			const Chem::Bond*                 splitBond;
+			const Chem::Atom*                 splitBondAtoms[2];
+			const Chem::Atom*                 torsionRefAtoms[2];
 			NodePointer                       leftChild;
 			NodePointer                       rightChild;
 			FragmentPointer                   leftFragment;
@@ -140,6 +144,7 @@ namespace CDPL
 			unsigned int                      fragmentType;
 			AtomIndexMap                      atomIdxMap;
 			ConfDataArray                     conformers;
+			TorsionAngleArray                 torsionAngles;
 			ForceField::MMFF94InteractionData mmff94Data;
 		};
     }

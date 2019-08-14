@@ -114,6 +114,7 @@ SET(cdpl-pharm_LIB_SRCS
     FeatureContainerFeatureTypeHistogramFunction.cpp
     FeatureContainerXVolumeClashTestFunction.cpp
     FeatureContainerGetFeatureAtomsFunction.cpp
+    FeatureContainerTransform3DCoordinatesFunction.cpp
 
     FeatureSetGetFeaturesFunction.cpp
 
