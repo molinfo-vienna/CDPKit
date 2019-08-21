@@ -74,6 +74,24 @@ bool Chem::isHydrogenRotor(const Bond& bond, const MolecularGraph& molgraph)
 	return (getHeavyBondCount(atom1, molgraph) < 2 || getHeavyBondCount(atom2, molgraph) < 2);
 }
 
+bool Chem::isHeteroAtomHydrogenRotor(const Bond& bond, const MolecularGraph& molgraph)
+{
+	if (getOrder(bond) != 1)
+		return false;
+
+	const Atom& atom1 = bond.getBegin();
+	const Atom& atom2 = bond.getEnd();
+
+	if (getBondCount(atom1, molgraph) < 2 ) 
+		return false;
+
+	if (getBondCount(atom2, molgraph) < 2)
+		return false;
+
+	return ((getHeavyBondCount(atom1, molgraph) < 2 && getType(atom1) != AtomType::C) || 
+			(getHeavyBondCount(atom2, molgraph) < 2 && getType(atom2) != AtomType::C));
+}
+
 bool Chem::isRotatable(const Bond& bond, const MolecularGraph& molgraph, bool h_rotors, bool ring_bonds, bool amide_bonds)
 {
     if (getOrder(bond) != 1)
@@ -89,10 +107,7 @@ bool Chem::isRotatable(const Bond& bond, const MolecularGraph& molgraph, bool h_
     const Atom& atom1 = bond.getBegin();
 	const Atom& atom2 = bond.getEnd();
 
-	if (getHybridizationState(atom1) == HybridizationState::SP)
-		return false;
-
-	if (getHybridizationState(atom2) == HybridizationState::SP)
+	if (getHybridizationState(atom1) == HybridizationState::SP && getHybridizationState(atom2) == HybridizationState::SP)
 		return false;
 
 	if (getBondCount(atom1, molgraph) < 2 ) 

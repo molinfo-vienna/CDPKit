@@ -119,6 +119,8 @@ namespace CDPL
 
 			void calcLeafNodeConformerEnergies(FragmentTreeNode& node);
 
+			void genTerminalAtomMask(const Chem::MolecularGraph& molgraph);
+
 			void setupTorsions(FragmentTreeNode& node);
 
 			void getBuildFragmentNodes(FragmentTreeNode& node);
@@ -150,7 +152,7 @@ namespace CDPL
 			void buildFragmentLibraryEntryAtomIndexMap(const FragmentTreeNode& node);
 
 			void getFragmentLinkBonds(const Chem::MolecularGraph& molgraph);
-			void getRotatableBonds(const Chem::MolecularGraph& molgraph);
+			void getRotatableBonds(const Chem::MolecularGraph& frag);
 
 			const Chem::Atom* getBulkiestSubstituent(const Chem::Atom& atom, const Chem::Atom& excl_atom,
 													 const Chem::MolecularGraph& frag, bool strict); 
@@ -163,6 +165,13 @@ namespace CDPL
 									  const Math::Vector3DArray& coords) const;
 
 			bool hasLinearGeometry(const Chem::Atom& atom, const FragmentTreeNode& node) const;
+			bool isPlanarNitrogen(const Chem::Atom& atom, const FragmentTreeNode& node) const;
+
+			const FragmentTreeNode* getLeafNodeWithCoordinates(const Chem::Atom& atom, 
+															   const FragmentTreeNode& node) const;
+
+			std::size_t getRotationalSymmetryOrder(const Chem::Atom& atom, const Chem::Bond& bond, 
+												   const FragmentTreeNode& node) const;
 
 			void genMMFF94InteractionData(const Chem::MolecularGraph& molgraph, unsigned int ff_type, 
 										  ForceField::MMFF94InteractionData& ia_data);
@@ -196,6 +205,7 @@ namespace CDPL
 			BondLengthDescriptorList                        aromRingSubstBondLens;
 			Util::BitSet                                    reachableAtomMask;
 			Util::BitSet                                    hAtomMask;
+			Util::BitSet                                    termAtomMask;
 			UIArray                                         extAtomConnectivities;
 			UIArray                                         tmpExtAtomConnectivities;
 			boost::timer::cpu_timer                         timer;

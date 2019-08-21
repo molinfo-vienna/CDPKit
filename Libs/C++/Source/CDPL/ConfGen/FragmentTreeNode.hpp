@@ -113,6 +113,10 @@ namespace CDPL
 
 			const ForceField::MMFF94InteractionData& getMMFF94InteractionData() const;
 
+			void setKeepAllConformersFlag(bool keep);
+
+			bool getKeepAllConformersFlag() const;
+
 			//void printTree(std::ostream& os) const;
 
 		private:
@@ -137,6 +141,7 @@ namespace CDPL
 			const Chem::Bond*                 splitBond;
 			const Chem::Atom*                 splitBondAtoms[2];
 			const Chem::Atom*                 torsionRefAtoms[2];
+			bool                              keepAllConfsFlag;
 			NodePointer                       leftChild;
 			NodePointer                       rightChild;
 			FragmentPointer                   leftFragment;

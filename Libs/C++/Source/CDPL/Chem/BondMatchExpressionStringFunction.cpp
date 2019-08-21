@@ -202,14 +202,14 @@ namespace
 				order_expr_str.append(TRIPLE_BOND_SYMBOL);
 				list_size++;
 			}
-		}
 
-		if ((order & BondMatchConstraint::AROMATIC) != 0) {
-			if (list_size > 0)
-				order_expr_str.append(OR_LIST_SEPARATOR);
+			if ((order & BondMatchConstraint::AROMATIC) != 0) {
+				if (list_size > 0)
+					order_expr_str.append(OR_LIST_SEPARATOR);
 
-			order_expr_str.append(AROMATIC_BOND_SYMBOL);
-			list_size++;
+				order_expr_str.append(AROMATIC_BOND_SYMBOL);
+				list_size++;
+			}
 		}
 	
 		if (list_size == 0)

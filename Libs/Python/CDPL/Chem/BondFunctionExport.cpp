@@ -108,6 +108,7 @@ namespace
 	MAKE_FUNCTION_WRAPPER2(std::size_t, getNumContainingSSSRRings, CDPL::Chem::Bond&, CDPL::Chem::MolecularGraph&);
 	MAKE_FUNCTION_WRAPPER2(unsigned int, perceiveSybylType, CDPL::Chem::Bond&, CDPL::Chem::MolecularGraph&);
 	MAKE_FUNCTION_WRAPPER2(bool, isHydrogenRotor, CDPL::Chem::Bond&, CDPL::Chem::MolecularGraph&);
+	MAKE_FUNCTION_WRAPPER2(bool, isHeteroAtomHydrogenRotor, CDPL::Chem::Bond&, CDPL::Chem::MolecularGraph&);
 
 	MAKE_FUNCTION_WRAPPER3(void, getContainingFragments, CDPL::Chem::Bond&, CDPL::Chem::FragmentList&, CDPL::Chem::FragmentList&);
 	MAKE_FUNCTION_WRAPPER3(double, calcPolarizability, CDPL::Chem::Bond&, CDPL::Chem::MolecularGraph&, double);
@@ -150,6 +151,7 @@ void CDPLPythonChem::exportBondFunctions()
 				python::with_custodian_and_ward_postcall<0, 1>());
 	python::def("isInRing", &isInRingWrapper2, (python::arg("bond"), python::arg("molgraph")));
 	python::def("isHydrogenRotor", &isHydrogenRotorWrapper2, (python::arg("bond"), python::arg("molgraph")));
+	python::def("isHeteroAtomHydrogenRotor", &isHeteroAtomHydrogenRotorWrapper2, (python::arg("bond"), python::arg("molgraph")));
 
 	python::def("calcCIPConfiguration", &calcCIPConfigurationWrapper2, 
 				(python::arg("bond"), python::arg("molgraph")));

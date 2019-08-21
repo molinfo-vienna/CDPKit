@@ -151,6 +151,16 @@ ForceField::MMFF94InteractionData& ConfGen::FragmentTreeNode::getMMFF94Interacti
 	return mmff94Data;
 }
 
+void ConfGen::FragmentTreeNode::setKeepAllConformersFlag(bool keep)
+{
+	keepAllConfsFlag = keep;
+}
+
+bool ConfGen::FragmentTreeNode::getKeepAllConformersFlag() const
+{
+	return keepAllConfsFlag;
+}
+
 /*
 void ConfGen::FragmentTreeNode::printTree(std::ostream& os) const
 {

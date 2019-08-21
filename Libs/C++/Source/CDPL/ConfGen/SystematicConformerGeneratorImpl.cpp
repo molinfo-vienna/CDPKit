@@ -44,13 +44,16 @@
 #include "CDPL/Chem/AtomContainerFunctions.hpp"
 #include "CDPL/Chem/MolecularGraphFunctions.hpp"
 #include "CDPL/Chem/AtomType.hpp"
+#include "CDPL/Chem/HybridizationState.hpp"
 #include "CDPL/Chem/AtomConfiguration.hpp"
 #include "CDPL/Chem/BondConfiguration.hpp"
 #include "CDPL/ForceField/InteractionType.hpp"
+#include "CDPL/ForceField/UtilityFunctions.hpp"
 #include "CDPL/Math/Quaternion.hpp"
 #include "CDPL/Base/Exceptions.hpp"
 
 #include "SystematicConformerGeneratorImpl.hpp"
+#include "TorsionLibraryDataReader.hpp"
 
 
 using namespace CDPL;
@@ -110,15 +113,16 @@ namespace
 		}
 	}
 
-	class ECClassCountPred : public std::unary_function<std::size_t, bool>
+	class UniqueValueCountPred : public std::unary_function<std::size_t, bool>
 	{
 
 	public:
-		ECClassCountPred(): currEC(~std::size_t(0)) {}
+		UniqueValueCountPred(): first(true) {}
 
-		bool operator()(std::size_t ec) {
-			if (ec != currEC) {
-				currEC = ec;
+		bool operator()(std::size_t value) {
+			if (first || value != currValue) {
+				currValue = value;
+				first = false;
 				return true;
 			}
 
@@ -126,24 +130,110 @@ namespace
 		}
 		 
 	private:
-		std::size_t currEC;
+		bool        first;
+		std::size_t currValue;
 	};
 
-	const double INV_NITROGEN_MIN_PLANE_DEVIATION = 10.0;
-	const double MIN_LINEAR_ATOM_GEOMETRY_ANGLE   = 170.0;
+	const double MAX_PLANAR_ATOM_GEOM_OOP_ANGLE  = 10.0 / 180.0 * M_PI;
+	const double MIN_LINEAR_ATOM_GEOM_BOND_ANGLE = 170.0 / 180.0 * M_PI;
 
-/*
-#generic rules
-[*:1][CH2:2][a:3][a:4] 0 180 90 -90 45 -45 135 -135
+	const char* GENERIC_TORSION_RULES = 
+		"<library name=\"GenericRules\">"
+		" <category name=\"GG\" atomType1=\"*\" atomType2=\"*\">"
+		"  <rule pattern=\"[*:1][CH2:2]-[a:3][a:4]\">"
+        "   <torsions>"
+        "     <angle value=\"0\" tolerance1=\"0\" tolerance2=\"0\" score=\"0\"/>"
+        "     <angle value=\"180\" tolerance1=\"0\" tolerance2=\"0\" score=\"0\"/>"
+        "     <angle value=\"90\" tolerance1=\"0\" tolerance2=\"0\" score=\"0\"/>"
+        "     <angle value=\"-90\" tolerance1=\"0\" tolerance2=\"0\" score=\"0\"/>"
+        "     <angle value=\"45\" tolerance1=\"0\" tolerance2=\"0\" score=\"0\"/>"
+        "     <angle value=\"-45\" tolerance1=\"0\" tolerance2=\"0\" score=\"0\"/>"
+        "     <angle value=\"135\" tolerance1=\"0\" tolerance2=\"0\" score=\"0\"/>"
+        "     <angle value=\"-135\" tolerance1=\"0\" tolerance2=\"0\" score=\"0\"/>"
+        "   </torsions>"
+        "  </rule>"
+		"  <rule pattern=\"[*:1]~[C^3H0:2]-[C^3H0,C^3H1:3]~[*:4]\">"
+        "   <torsions>"
+        "     <angle value=\"30\" tolerance1=\"0\" tolerance2=\"0\" score=\"0\"/>"
+        "     <angle value=\"-30\" tolerance1=\"0\" tolerance2=\"0\" score=\"0\"/>"
+        "     <angle value=\"150\" tolerance1=\"0\" tolerance2=\"0\" score=\"0\"/>"
+        "     <angle value=\"-150\" tolerance1=\"0\" tolerance2=\"0\" score=\"0\"/>"
+        "     <angle value=\"0\" tolerance1=\"0\" tolerance2=\"0\" score=\"0\"/>"
+        "     <angle value=\"180\" tolerance1=\"0\" tolerance2=\"0\" score=\"0\"/>"
+        "     <angle value=\"90\" tolerance1=\"0\" tolerance2=\"0\" score=\"0\"/>"
+        "     <angle value=\"-90\" tolerance1=\"0\" tolerance2=\"0\" score=\"0\"/>"
+        "     <angle value=\"60\" tolerance1=\"0\" tolerance2=\"0\" score=\"0\"/>"
+        "     <angle value=\"-60\" tolerance1=\"0\" tolerance2=\"0\" score=\"0\"/>"
+        "     <angle value=\"120\" tolerance1=\"0\" tolerance2=\"0\" score=\"0\"/>"
+        "     <angle value=\"-120\" tolerance1=\"0\" tolerance2=\"0\" score=\"0\"/>"
+        "   </torsions>"
+        "  </rule>"
+		"  <rule pattern=\"[*,#1:1]~[^3X4:2]-[^3X4H3:3]-[#1:4]\">"
+        "   <torsions>"
+        "     <angle value=\"60\" tolerance1=\"0\" tolerance2=\"0\" score=\"0\"/>"
+        "   </torsions>"
+        "  </rule>"
+		"  <rule pattern=\"[*,#1:1]~[^3X4:2]-[^3X2H1:3]-[#1:4]\">"
+        "   <torsions>"
+        "     <angle value=\"180\" tolerance1=\"0\" tolerance2=\"0\" score=\"0\"/>"
+        "     <angle value=\"60\" tolerance1=\"0\" tolerance2=\"0\" score=\"0\"/>"
+        "     <angle value=\"-60\" tolerance1=\"0\" tolerance2=\"0\" score=\"0\"/>"
+        "   </torsions>"
+        "  </rule>"
+		"  <rule pattern=\"[*,#1:1]~[*:2]-[X2:3]#[X1,X2&H1:4]\">"
+        "   <torsions>"
+        "     <angle value=\"0\" tolerance1=\"0\" tolerance2=\"0\" score=\"0\"/>"
+        "   </torsions>"
+        "  </rule>"
+		"  <rule pattern=\"[*:1]~[^3H2:2]-[^3H2:3]~[*:4]\">"
+        "   <torsions>"
+        "     <angle value=\"180\" tolerance1=\"0\" tolerance2=\"0\" score=\"0\"/>"
+        "     <angle value=\"60\" tolerance1=\"0\" tolerance2=\"0\" score=\"0\"/>"
+        "     <angle value=\"-60\" tolerance1=\"0\" tolerance2=\"0\" score=\"0\"/>"
+        "   </torsions>"
+        "  </rule>"
+		"  <rule pattern=\"[*,#1:1]~[^3:2]-[^3:3]~[*,#1:4]\">"
+        "   <torsions>"
+        "     <angle value=\"40\" tolerance1=\"0\" tolerance2=\"0\" score=\"0\"/>"
+        "     <angle value=\"-40\" tolerance1=\"0\" tolerance2=\"0\" score=\"0\"/>"
+		"     <angle value=\"60\" tolerance1=\"0\" tolerance2=\"0\" score=\"0\"/>"
+        "     <angle value=\"-60\" tolerance1=\"0\" tolerance2=\"0\" score=\"0\"/>"
+		"     <angle value=\"80\" tolerance1=\"0\" tolerance2=\"0\" score=\"0\"/>"
+        "     <angle value=\"-80\" tolerance1=\"0\" tolerance2=\"0\" score=\"0\"/>"
+        "     <angle value=\"-160\" tolerance1=\"0\" tolerance2=\"0\" score=\"0\"/>"
+        "     <angle value=\"160\" tolerance1=\"0\" tolerance2=\"0\" score=\"0\"/>"
+        "     <angle value=\"180\" tolerance1=\"0\" tolerance2=\"0\" score=\"0\"/>"
+        "   </torsions>"
+        "  </rule>"
+		"  <rule pattern=\"[*,#1:1]~[*:2]-[*:3]~[*,#1:4]\">"
+        "   <torsions>"
+        "     <angle value=\"0\" tolerance1=\"0\" tolerance2=\"0\" score=\"0\"/>"
+		"     <angle value=\"30\" tolerance1=\"0\" tolerance2=\"0\" score=\"0\"/>"
+        "     <angle value=\"-30\" tolerance1=\"0\" tolerance2=\"0\" score=\"0\"/>"
+		"     <angle value=\"60\" tolerance1=\"0\" tolerance2=\"0\" score=\"0\"/>"
+        "     <angle value=\"-60\" tolerance1=\"0\" tolerance2=\"0\" score=\"0\"/>"
+		"     <angle value=\"90\" tolerance1=\"0\" tolerance2=\"0\" score=\"0\"/>"
+        "     <angle value=\"-90\" tolerance1=\"0\" tolerance2=\"0\" score=\"0\"/>"
+        "     <angle value=\"120\" tolerance1=\"0\" tolerance2=\"0\" score=\"0\"/>"
+        "     <angle value=\"-120\" tolerance1=\"0\" tolerance2=\"0\" score=\"0\"/>"   
+        "     <angle value=\"150\" tolerance1=\"0\" tolerance2=\"0\" score=\"0\"/>"
+        "     <angle value=\"-150\" tolerance1=\"0\" tolerance2=\"0\" score=\"0\"/>"
+        "     <angle value=\"180\" tolerance1=\"0\" tolerance2=\"0\" score=\"0\"/>"
+        "   </torsions>"
+        "  </rule>"
+		" </category>"
+		"</library>";
 
-[*:1]~[C^3H0:2]-[C^3H0,C^3H1:3]~[*:4] 30 -30 150 -150 0 180 90 -90 60 -60 120 -120
-[*:1]~[^3H2:2]-[^3H2:3]~[*:4] 180 60 -60
-[*:1]~[^3:2]-[^3H2:3]~[CH3:4] 180 60 -60
-[*:1]~[^3:2]-[^3:3]~[*:4] 180 60 -60 40 -40 80 -80 -160 160 
-[*:1]~[^2:2]-[^2:3]~[*:4] 30 -30 150 -150 0 180 90 -90 60 -60 120 -120
+	ConfGen::TorsionLibrary::SharedPointer genericTorLib(new ConfGen::TorsionLibrary());
 
-[*:1]~[^2:2]-[^3:3]~[*:4] 0.0 30.0 -30.0 60.0 -60.0 90.0 -90.0 120.0 -120.0 -150.0 150.0 180.0
-*/
+	struct Init
+    {
+
+		Init() {
+			ConfGen::TorsionLibraryDataReader().read(GENERIC_TORSION_RULES, *genericTorLib);
+		}
+
+    } init;
 }
 
 
@@ -189,6 +279,7 @@ ConfGen::SystematicConformerGeneratorImpl::generate(const Chem::MolecularGraph& 
 	}
 
 	calcLeafNodeConformerEnergies(fragTree);
+	genTerminalAtomMask(molgraph);
 	setupTorsions(fragTree);
 
 	return Status::SUCCESS;
@@ -302,6 +393,20 @@ void ConfGen::SystematicConformerGeneratorImpl::calcLeafNodeConformerEnergies(Fr
 							  boost::bind(&FragmentTreeNode::ConfData::second, _2)));
 }
 
+void ConfGen::SystematicConformerGeneratorImpl::genTerminalAtomMask(const Chem::MolecularGraph& molgraph)
+{
+	using namespace Chem;
+
+	termAtomMask.resize(molgraph.getNumAtoms());
+	termAtomMask.reset();
+
+	std::size_t i = 0;
+
+	for (MolecularGraph::ConstAtomIterator it = molgraph.getAtomsBegin(), end = molgraph.getAtomsEnd(); it != end; ++it, i++)
+		if (getExplicitBondCount(*it, molgraph) == 1)
+			termAtomMask.set(i);
+}
+
 void ConfGen::SystematicConformerGeneratorImpl::setupTorsions(FragmentTreeNode& node)
 {
 	using namespace Chem;
@@ -313,50 +418,56 @@ void ConfGen::SystematicConformerGeneratorImpl::setupTorsions(FragmentTreeNode& 
 	setupTorsions(*node.getRightChild());
 
 	node.getTorsionAngles().clear();
+	node.setTorsionReferenceAtoms(0, 0);
+	node.setKeepAllConformersFlag(true);
 
 	const Atom* const* bond_atoms = node.getSplitBondAtoms();
 	const MolecularGraph& frag = node.getFragment();
 
-	std::size_t bond_count1 = getBondCount(*bond_atoms[0], frag);
+	std::size_t bond_count1 = getExplicitBondCount(*bond_atoms[0], frag);
 
 	if (bond_count1 < 2) // sanity_check
 		return;
 
-	std::size_t bond_count2 = getBondCount(*bond_atoms[1], frag);
+	std::size_t bond_count2 = getExplicitBondCount(*bond_atoms[1], frag);
 
 	if (bond_count2 < 2) // sanity_check
 		return;
 
-	if ((bond_count1 == 2 && hasLinearGeometry(*bond_atoms[0], *node.getLeftChild())) ||
-		(bond_count2 == 2 && hasLinearGeometry(*bond_atoms[1], *node.getRightChild())))
-		return;
+	bool lin_atom_flag1 = (bond_count1 == 2 && hasLinearGeometry(*bond_atoms[0], *node.getLeftChild()));
+	bool lin_atom_flag2 = (bond_count2 == 2 && hasLinearGeometry(*bond_atoms[1], *node.getRightChild()));
 
 	const Bond& bond = *node.getSplitBond();
 	std::size_t order = getOrder(bond);
 
-	if (order == 1) {
+	if (order == 1 && (!lin_atom_flag1 || !lin_atom_flag2)) {
 		const TorsionRuleMatch* match = getMatchingTorsionRule(bond);
 
-		if (!match) {
-			std::cerr << "No matching torsion rule found for bond " << fragTree.getFragment().getBondIndex(bond) << std::endl;
-			return;
+		if (match) {
+			for (TorsionRule::ConstAngleEntryIterator it = match->getRule().getAnglesBegin(), end = match->getRule().getAnglesEnd(); it != end; ++it) {
+				double tor_ang = it->getAngle();
+
+				// normalize angle to range [0, 360)
+
+				if (tor_ang < 0.0)
+					tor_ang = std::fmod(tor_ang, 360.0) + 360.0;
+				else 
+					tor_ang = std::fmod(tor_ang, 360.0);
+
+				node.getTorsionAngles().push_back(tor_ang);
+			}
+
+			if (!node.getTorsionAngles().empty() && !lin_atom_flag1 && !lin_atom_flag2) {
+				const Atom* const* match_atoms = match->getAtoms();
+				
+				if (match_atoms[1] == bond_atoms[0])
+					node.setTorsionReferenceAtoms(match_atoms[0], match_atoms[3]);
+				else
+					node.setTorsionReferenceAtoms(match_atoms[3], match_atoms[0]);
+			}
 		}
-		
-		const Atom* const* match_atoms = match->getAtoms();
 
-		if (match_atoms[1] == bond_atoms[0])
-			node.setTorsionReferenceAtoms(match_atoms[0], match_atoms[3]);
-		else
-			node.setTorsionReferenceAtoms(match_atoms[3], match_atoms[0]);
-
-		std::transform(match->getRule().getAnglesBegin(), match->getRule().getAnglesEnd(), std::back_inserter(node.getTorsionAngles()),
-					   boost::bind(&TorsionRule::AngleEntry::getAngle, _1));
-
-		std::cerr << "Found " << match->getRule().getNumAngles() << " torsion angles for bond " << fragTree.getFragment().getBondIndex(bond) << std::endl;
-		return;
-	}
-
-	if (order == 2 && bond_count1 <= 3 && bond_count2 <= 3) {
+	} else if (order == 2 && bond_count1 <= 3 && bond_count2 <= 3 && !lin_atom_flag1 && !lin_atom_flag2) {
 		const StereoDescriptor& descr = getStereoDescriptor(bond);
 
 		if ((descr.getConfiguration() == BondConfiguration::CIS || descr.getConfiguration() == BondConfiguration::TRANS) && descr.isValid(bond)) {
@@ -381,16 +492,49 @@ void ConfGen::SystematicConformerGeneratorImpl::setupTorsions(FragmentTreeNode& 
 				node.getTorsionAngles().push_back(descr.getConfiguration() == BondConfiguration::CIS ? 0.0 : 180.0);
 				return;
 			}
-		} 
+		}
+		
+		// choose trans configuration of bulkiest substituents
+	
+		node.setTorsionReferenceAtoms(getBulkiestSubstituent(*bond_atoms[0], *bond_atoms[1], frag, false),
+									  getBulkiestSubstituent(*bond_atoms[1], *bond_atoms[0], frag, false));
+		node.getTorsionAngles().push_back(180.0);
+		return;
 	}
 
-	// choose trans config of bulkiest substituents
-	
-	const Atom* ref_atom1 = getBulkiestSubstituent(*bond_atoms[0], *bond_atoms[1], frag, false);
-	const Atom* ref_atom2 = getBulkiestSubstituent(*bond_atoms[1], *bond_atoms[0], frag, false);
+	std::size_t rot_sym_order = std::max(lin_atom_flag1 ? std::size_t(1) : getRotationalSymmetryOrder(*bond_atoms[0], bond, node),
+										 lin_atom_flag2 ? std::size_t(1) : getRotationalSymmetryOrder(*bond_atoms[1], bond, node));
 
-	node.setTorsionReferenceAtoms(ref_atom1, ref_atom2);
-	node.getTorsionAngles().push_back(180.0);
+	if (node.getTorsionAngles().empty()) {
+		// fallback: rotation in 30° steps
+
+		for (std::size_t i = 0, num_angles = 12 / rot_sym_order; i < num_angles; i++)
+			node.getTorsionAngles().push_back(i * 30.0);
+
+		if (!lin_atom_flag1 && !lin_atom_flag2)
+			node.setTorsionReferenceAtoms(getBulkiestSubstituent(*bond_atoms[0], *bond_atoms[1], frag, false),
+										  getBulkiestSubstituent(*bond_atoms[1], *bond_atoms[0], frag, false));
+		
+	} else if (rot_sym_order > 1) {
+		// reduce number of torsion angles due to rotational symmetry
+
+		double ident_rot_ang = 360.0 / rot_sym_order; 
+
+		for (FragmentTreeNode::TorsionAngleArray::iterator it = node.getTorsionAngles().begin(), end = node.getTorsionAngles().end(); it != end; ++it) {
+			double& tor_ang = *it;
+
+			tor_ang = std::fmod(tor_ang, ident_rot_ang);
+		}
+
+		std::sort(node.getTorsionAngles().begin(), node.getTorsionAngles().end());
+		
+		node.getTorsionAngles().erase(std::unique(node.getTorsionAngles().begin(), node.getTorsionAngles().end()), node.getTorsionAngles().end());
+	}
+
+	bool is_h_rotor = (getHeavyBondCount(*bond_atoms[0], frag) == 1 || getHeavyBondCount(*bond_atoms[1], frag) == 1);
+
+	if (is_h_rotor && (!settings.hydrogenRotorsEnabled() || !isHeteroAtomHydrogenRotor(bond, frag)))
+		node.setKeepAllConformersFlag(false);
 }
 
 const ConfGen::TorsionRuleMatch* ConfGen::SystematicConformerGeneratorImpl::getMatchingTorsionRule(const Chem::Bond& bond)
@@ -399,8 +543,12 @@ const ConfGen::TorsionRuleMatch* ConfGen::SystematicConformerGeneratorImpl::getM
 
 	if (torsionRuleMatcher.findMatches(bond, fragTree.getFragment(), false)) 
 		return &torsionRuleMatcher.getMatch(0); 
-	
-// TODO default rules
+
+	torsionRuleMatcher.setTorsionLibrary(genericTorLib);
+
+	if (torsionRuleMatcher.findMatches(bond, fragTree.getFragment(), false)) 
+		return &torsionRuleMatcher.getMatch(0); 
+
 	return 0;
 }
 
@@ -1040,43 +1188,26 @@ void ConfGen::SystematicConformerGeneratorImpl::getFragmentLinkBonds(const Chem:
 {
 	using namespace Chem;
 
-	bool h_rotors = settings.hydrogenRotorsEnabled();
-
 	bondList.clear();
 
 	for (MolecularGraph::ConstBondIterator it = molgraph.getBondsBegin(), end = molgraph.getBondsEnd(); it != end; ++it) {
 		const Bond& bond = *it;
 
-		if (!isFragmentLinkBond(bond, molgraph))
-			continue;
-
-		if (isHydrogenRotor(bond, molgraph)) {
-			const Atom& atom1 = bond.getBegin();
-			const Atom& atom2 = bond.getEnd();
-
-			if (!getRingFlag(atom1) && !getRingFlag(atom2))
-				continue;
-
-			if (!h_rotors && !getAromaticityFlag(atom1) && !getAromaticityFlag(atom2)) 
-				continue;
-		}
-
-		bondList.push_back(&bond);
+		if (isFragmentLinkBond(bond, molgraph))
+			bondList.push_back(&bond);
 	}
 }
 
-void ConfGen::SystematicConformerGeneratorImpl::getRotatableBonds(const Chem::MolecularGraph& molgraph)
+void ConfGen::SystematicConformerGeneratorImpl::getRotatableBonds(const Chem::MolecularGraph& frag)
 {
 	using namespace Chem;
 
 	bondList.clear();	
 
-	bool h_rotors = settings.hydrogenRotorsEnabled();
-
-	for (MolecularGraph::ConstBondIterator it = molgraph.getBondsBegin(), end = molgraph.getBondsEnd(); it != end; ++it) {
+	for (MolecularGraph::ConstBondIterator it = frag.getBondsBegin(), end = frag.getBondsEnd(); it != end; ++it) {
 		const Bond& bond = *it;
 	
-		if (isRotatable(bond, molgraph, h_rotors, false, true)) 
+		if (isRotatable(bond, frag, true, false, true)) 
 			bondList.push_back(&bond);
 	}
 }
@@ -1159,7 +1290,7 @@ void ConfGen::SystematicConformerGeneratorImpl::calcExtendedAtomConnectivities()
 
 		std::sort(tmpExtAtomConnectivities.begin(), tmpExtAtomConnectivities.end());
 
-		std::size_t num_classes = std::count_if(tmpExtAtomConnectivities.begin(), tmpExtAtomConnectivities.end(), ECClassCountPred());
+		std::size_t num_classes = std::count_if(tmpExtAtomConnectivities.begin(), tmpExtAtomConnectivities.end(), UniqueValueCountPred());
 
 		if (num_classes <= last_num_classes) 
 			break;
@@ -1186,6 +1317,7 @@ bool ConfGen::SystematicConformerGeneratorImpl::isInvertibleNitrogen(const Chem:
 	std::size_t nbr_atom_indices[3];
 	std::size_t i = 0;
 
+	const MolecularGraph& root_frag = fragTree.getFragment();
 	Atom::ConstBondIterator b_it = atom.getBondsBegin();
 
 	for (Atom::ConstAtomIterator a_it = atom.getAtomsBegin(), a_end = atom.getAtomsEnd(); a_it != a_end; ++a_it, ++b_it) {
@@ -1207,43 +1339,28 @@ bool ConfGen::SystematicConformerGeneratorImpl::isInvertibleNitrogen(const Chem:
 		if (getType(nbr_atom) == AtomType::H && (++h_bond_count > 1))
 			return false;
 	
-		nbr_atom_indices[i++] = fragTree.getFragment().getAtomIndex(nbr_atom);
+		nbr_atom_indices[i++] = root_frag.getAtomIndex(nbr_atom);
 	}
 
 	if (i != 3)
 		return false;
 
-	const Math::Vector3D& atom_pos = coords[fragTree.getFragment().getAtomIndex(atom)];
+	double oop_angle = ForceField::calcOutOfPlaneAngle<double>(coords[nbr_atom_indices[0]], coords[root_frag.getAtomIndex(atom)],
+															   coords[nbr_atom_indices[1]], coords[nbr_atom_indices[2]]);
 
-	Math::Vector3D nbr_vec1(coords[nbr_atom_indices[0]] - atom_pos);
-	Math::Vector3D nbr_vec2(coords[nbr_atom_indices[1]] - atom_pos);
-	Math::Vector3D nbr_vec3(coords[nbr_atom_indices[2]] - atom_pos);
-	Math::Vector3D plane_vec(crossProd(nbr_vec1, nbr_vec2));
-
-	double norm = length(plane_vec) * length(nbr_vec3);
-
-	if (norm == 0.0) // sanity check
-		return false;
-
-	double plane_dev_ang = std::abs(std::acos(angleCos(plane_vec, nbr_vec3, norm)) - M_PI * 0.5) * 180.0 / M_PI;
-
-	return (plane_dev_ang >= INV_NITROGEN_MIN_PLANE_DEVIATION);
+	return (std::abs(oop_angle) > MAX_PLANAR_ATOM_GEOM_OOP_ANGLE);
 }
 
 bool ConfGen::SystematicConformerGeneratorImpl::hasLinearGeometry(const Chem::Atom& atom, const FragmentTreeNode& node) const
 {
 	using namespace Chem;
 
-	if (!node.getFragment().containsAtom(atom))
+	const FragmentTreeNode* coords_node = getLeafNodeWithCoordinates(atom, node);
+
+	if (!coords_node)
 		return false;
 
-	if (node.hasChildren()) 
-		return (hasLinearGeometry(atom, *node.getLeftChild()) || hasLinearGeometry(atom, *node.getRightChild()));
-
-	if (node.getConformers().empty())
-		return false;
-
-	const MolecularGraph& frag = node.getFragment();
+	const MolecularGraph& frag = coords_node->getFragment();
 
 	const Atom* nbr_atom1 = 0;
 	const Atom* nbr_atom2 = 0;
@@ -1277,19 +1394,137 @@ bool ConfGen::SystematicConformerGeneratorImpl::hasLinearGeometry(const Chem::At
 	std::size_t nbr_atom1_idx = root_frag.getAtomIndex(*nbr_atom1);
 	std::size_t nbr_atom2_idx = root_frag.getAtomIndex(*nbr_atom2);
 
-	const Math::Vector3DArray& coords = *node.getConformers().front().first;
+	const Math::Vector3DArray& coords = *coords_node->getConformers().front().first;
 
-	Math::Vector3D nbr1_vec(coords[nbr_atom1_idx] - coords[ctr_atom_idx]);
-	Math::Vector3D nbr2_vec(coords[nbr_atom2_idx] - coords[ctr_atom_idx]);
+	double bond_angle = ForceField::calcBondAngle<double>(coords[nbr_atom1_idx], coords[ctr_atom_idx], coords[nbr_atom2_idx]);
+
+	return (bond_angle >= MIN_LINEAR_ATOM_GEOM_BOND_ANGLE);
+}
+
+bool ConfGen::SystematicConformerGeneratorImpl::isPlanarNitrogen(const Chem::Atom& atom, const FragmentTreeNode& node) const
+{
+	using namespace Chem;
+
+	if (getType(atom) != AtomType::N)
+		return false;
+
+	const FragmentTreeNode* coords_node = getLeafNodeWithCoordinates(atom, node);
+
+	if (!coords_node)
+		return false;
+
+	const MolecularGraph& frag = coords_node->getFragment();
+
+	std::size_t nbr_atom_indices[3];
+	std::size_t i = 0;
+
+	const MolecularGraph& root_frag = fragTree.getFragment();
+	Atom::ConstBondIterator b_it = atom.getBondsBegin();
+
+	for (Atom::ConstAtomIterator a_it = atom.getAtomsBegin(), a_end = atom.getAtomsEnd(); a_it != a_end; ++a_it, ++b_it) {
+		const Atom& nbr_atom = *a_it;
+		const Bond& bond = *b_it;
+
+		if (!frag.containsAtom(nbr_atom) || !frag.containsBond(bond))
+			continue;
+
+		if (i == 3)
+			return false;
+
+		nbr_atom_indices[i++] = root_frag.getAtomIndex(nbr_atom);
+	}
+
+	if (i != 3)
+		return false;
+
+	const Math::Vector3DArray& coords = *coords_node->getConformers().front().first;
+
+	double oop_angle = ForceField::calcOutOfPlaneAngle<double>(coords[nbr_atom_indices[0]], coords[root_frag.getAtomIndex(atom)],
+															   coords[nbr_atom_indices[1]], coords[nbr_atom_indices[2]]);
+
+	return (std::abs(oop_angle) <= MAX_PLANAR_ATOM_GEOM_OOP_ANGLE);
+}
+
+const ConfGen::FragmentTreeNode* ConfGen::SystematicConformerGeneratorImpl::getLeafNodeWithCoordinates(const Chem::Atom& atom, 
+																									   const FragmentTreeNode& node) const
+{
+	if (!node.getFragment().containsAtom(atom))
+		return 0;
+
+	if (node.hasChildren()) {
+		if (const FragmentTreeNode* found_node = getLeafNodeWithCoordinates(atom, *node.getLeftChild()))
+			return found_node;
+
+		return getLeafNodeWithCoordinates(atom, *node.getRightChild());
+	}
+
+	if (node.getConformers().empty())
+		return 0;
+
+	if (getExplicitBondCount(atom, node.getFragment()) <= 1)
+		return 0;
+		
+	return &node;
+}
+
+std::size_t ConfGen::SystematicConformerGeneratorImpl::getRotationalSymmetryOrder(const Chem::Atom& atom, const Chem::Bond& bond,
+																				  const FragmentTreeNode& node) const
+{
+	using namespace Chem;
+
+	std::size_t nbr_cnt = 0;
+	unsigned int nbr_atom_type = 0;
+	bool first = true;
+
+	const MolecularGraph& root_frag = fragTree.getFragment();
+	const MolecularGraph& frag = node.getFragment();
+	Atom::ConstBondIterator b_it = atom.getBondsBegin();
+
+	for (Atom::ConstAtomIterator a_it = atom.getAtomsBegin(), a_end = atom.getAtomsEnd(); a_it != a_end; ++a_it, ++b_it) {
+		const Atom& nbr_atom = *a_it;
+		const Bond& nbr_bond = *b_it;
+
+		if (!frag.containsAtom(nbr_atom) || !frag.containsBond(nbr_bond))
+			continue;
+
+		nbr_cnt++;
+
+		if (&bond == &nbr_bond)
+			continue;
+
+		if (!termAtomMask.test(root_frag.getAtomIndex(nbr_atom)))
+			return 1;
+
+		if (first) {
+			nbr_atom_type = getType(nbr_atom);
+			first = false;
+			continue;
+		}
+
+		if (getType(nbr_atom) != nbr_atom_type)
+			return 1;
+	}
+
+	switch (getHybridizationState(atom)) {
+
+		case HybridizationState::SP2:
+			if (nbr_cnt != 3)
+				return 1;
+
+			return 2;
+
+		case HybridizationState::SP3:
+			if (nbr_cnt == 4)
+				return 3;
+ 
+			if (nbr_cnt == 3 && isPlanarNitrogen(atom, node))
+				return 2;				
+
+		default:
+			return 1;
+	}
 	
-	double norm = length(nbr1_vec) * length(nbr2_vec);
-
-	if (norm == 0.0) // sanity check
-		return true;
-
-	double angle = std::acos(angleCos(nbr1_vec, nbr2_vec, norm, true)) * 180.0 / M_PI;
-
-	return (angle >= MIN_LINEAR_ATOM_GEOMETRY_ANGLE);
+	return 1;
 }
 
 void ConfGen::SystematicConformerGeneratorImpl::genMMFF94InteractionData(const Chem::MolecularGraph& molgraph, unsigned int ff_type, 

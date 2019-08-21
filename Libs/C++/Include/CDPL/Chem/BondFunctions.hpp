@@ -201,6 +201,8 @@ namespace CDPL
 
 
 		CDPL_CHEM_API bool isHydrogenRotor(const Bond& bond, const MolecularGraph& molgraph);
+
+		CDPL_CHEM_API bool isHeteroAtomHydrogenRotor(const Bond& bond, const MolecularGraph& molgraph);
 		
 		CDPL_CHEM_API bool isRotatable(const Bond& bond, const MolecularGraph& molgraph, bool h_rotors = false, bool ring_bonds = false, bool amide_bonds = false);
 

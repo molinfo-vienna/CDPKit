@@ -687,11 +687,11 @@ bool Chem::SMARTSDataWriter::DFSTreeNode::writeSimpleAtomExpression(std::ostream
 		write_arom_sym = !write_arom_sym;
 
 	switch (getConstraintValue<unsigned int>(*type_constraint, *atom, &getType)) {
-		/*
+		
 		case AtomType::A:
 			os << (write_arom_sym ?  AtomExpression::ANY_AROMATIC_ATOM : AtomExpression::ANY_NON_AROMATIC_ATOM);
 			return true;
-		*/
+		
 		case AtomType::C:
 			os << (write_arom_sym ? 'c' : 'C');
 			return true;
@@ -939,14 +939,17 @@ void Chem::SMARTSDataWriter::DFSTreeNode::writeAtomTypeExpression(const MatchCon
 	if (type_constraint) {
 		atom_type = getConstraintValue<unsigned int>(*type_constraint, *atom, &getType);
 	
-		if (atom_type == AtomType::UNKNOWN || atom_type > AtomType::MAX_ATOMIC_NO) {
+		if (atom_type == AtomType::UNKNOWN || (atom_type > AtomType::MAX_ATOMIC_NO && atom_type != AtomType::A)) {
 			if (!arom_constraint)
 				return;
 
 			type_constraint = 0;
 
 		} else if (!arom_constraint) {
-			writeAtomicNumber(atom_type, type_constraint->getRelation() == MatchConstraint::NOT_EQUAL, expr_str);
+			if (atom_type == AtomType::A)
+				expr_str.push_back(AtomExpression::ANY_ATOM);
+			else
+				writeAtomicNumber(atom_type, type_constraint->getRelation() == MatchConstraint::NOT_EQUAL, expr_str);
 			return;
 		}
 	}
@@ -976,11 +979,11 @@ void Chem::SMARTSDataWriter::DFSTreeNode::writeAtomTypeExpression(const MatchCon
 	}
 	
 	switch (atom_type) {
-		/*
+		
 		case AtomType::A:
 			expr_str.push_back(write_arom_sym ? AtomExpression::ANY_AROMATIC_ATOM : AtomExpression::ANY_NON_AROMATIC_ATOM);
 			return;
-		*/
+		
 		case AtomType::C:
 			expr_str.push_back(write_arom_sym ? 'c' : 'C');
 			return;
@@ -1122,14 +1125,14 @@ bool Chem::SMARTSDataWriter::DFSTreeNode::writeAtomTypeExpression(const MatchCon
 	unsigned int atom_type = getConstraintValue<unsigned int>(*type_constraint, *atom, &getType);
 
 	switch (atom_type) {
-		/*
+		
 		case AtomType::A:
 			if (write_not_prefix)
 				expr_str.push_back(NOT_OPERATOR);
 
 			expr_str.push_back(write_arom_sym ? AtomExpression::ANY_AROMATIC_ATOM : AtomExpression::ANY_NON_AROMATIC_ATOM);
 			return true;
-		*/
+		
 		case AtomType::C:
 			if (write_not_prefix)
 				expr_str.push_back(NOT_OPERATOR);
@@ -2122,17 +2125,17 @@ void Chem::SMARTSDataWriter::DFSTreeEdge::writeOrderExpression(const MatchConstr
 			tmp_expr_str.push_back(BondExpression::TRIPLE_BOND);
 			list_size++;
 		}
+
+		if ((order & BondMatchConstraint::AROMATIC) != 0) {
+			if (list_size > 0)
+				tmp_expr_str.append(list_separator);
+
+			tmp_expr_str.append(prefix);
+			tmp_expr_str.push_back(BondExpression::AROMATIC_BOND);
+			list_size++;
+		}
 	}
 
-	if ((order & BondMatchConstraint::AROMATIC) != 0) {
-		if (list_size > 0)
-			tmp_expr_str.append(list_separator);
-
-		tmp_expr_str.append(prefix);
-		tmp_expr_str.push_back(BondExpression::AROMATIC_BOND);
-		list_size++;
-	}
-	
 	if (tmp_expr_str.find(OR_OPERATOR) != std::string::npos && depth > 2)
 		return;
 
