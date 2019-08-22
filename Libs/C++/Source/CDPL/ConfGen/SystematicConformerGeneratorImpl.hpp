@@ -45,6 +45,7 @@
 #include "CDPL/ForceField/MMFF94InteractionData.hpp"
 #include "CDPL/ForceField/MMFF94EnergyCalculator.hpp"
 #include "CDPL/Chem/SmallestSetOfSmallestRings.hpp"
+#include "CDPL/Chem/AutomorphismGroupSearch.hpp"
 #include "CDPL/Math/VectorArray.hpp"
 #include "CDPL/Util/BitSet.hpp"
 
@@ -81,6 +82,8 @@ namespace CDPL
 			Status generate(const Chem::MolecularGraph& molgraph);
 
 		private:
+			typedef FragmentTreeNode::AtomList AtomList;
+
 			class Vec3DArrayDeallocator
 			{
 
@@ -115,15 +118,19 @@ namespace CDPL
 			void genConfSearchMMFF94InteractionData();
 
 			void clearNodeConformers(FragmentTreeNode& node) const;
+
 			bool setupBuildFragmentConformers();
 
 			void calcLeafNodeConformerEnergies(FragmentTreeNode& node);
 
-			void genTerminalAtomMask(const Chem::MolecularGraph& molgraph);
-
 			void setupTorsions(FragmentTreeNode& node);
 
+			void genAutomorphismMappings();
+
+			bool processAutomorphismMapping(const Chem::MolecularGraph& molgraph, const Chem::AtomBondMapping& mapping);
+
 			void getBuildFragmentNodes(FragmentTreeNode& node);
+
 			void genChainBuildFragmentSubtrees();
 			
 			bool setExistingCoordinates(FragmentTreeNode& node);
@@ -154,8 +161,10 @@ namespace CDPL
 			void getFragmentLinkBonds(const Chem::MolecularGraph& molgraph);
 			void getRotatableBonds(const Chem::MolecularGraph& frag);
 
-			const Chem::Atom* getBulkiestSubstituent(const Chem::Atom& atom, const Chem::Atom& excl_atom,
-													 const Chem::MolecularGraph& frag, bool strict); 
+			const Chem::Atom* getBulkiestDoubleBondSubstituent(const Chem::Atom& atom, const Chem::Atom& db_nbr_atom,
+															   const Chem::MolecularGraph& frag); 
+	
+			const Chem::Atom* getBulkiestSubstituent(const AtomList& subst_atoms); 
 
 			const TorsionRuleMatch* getMatchingTorsionRule(const Chem::Bond& bond);
 
@@ -164,14 +173,17 @@ namespace CDPL
 			bool isInvertibleNitrogen(const Chem::Atom& atom, const Chem::MolecularGraph& frag, 
 									  const Math::Vector3DArray& coords) const;
 
-			bool hasLinearGeometry(const Chem::Atom& atom, const FragmentTreeNode& node) const;
-			bool isPlanarNitrogen(const Chem::Atom& atom, const FragmentTreeNode& node) const;
+			bool hasLinearGeometry(const Chem::Atom& atom, const Chem::Atom& nbr_atom1,  
+								   const Chem::Atom& nbr_atom2, const FragmentTreeNode& node);
+			bool hasPlanarGeometry(const Chem::Atom& atom, const Chem::Atom& nbr_atom1,  
+								   const Chem::Atom& nbr_atom2, const Chem::Atom& nbr_atom3,
+								   const FragmentTreeNode& node);
 
-			const FragmentTreeNode* getLeafNodeWithCoordinates(const Chem::Atom& atom, 
+			const FragmentTreeNode* getLeafNodeWithCoordinates(const Chem::Atom& atom, const AtomList& nbr_atoms,
 															   const FragmentTreeNode& node) const;
 
-			std::size_t getRotationalSymmetryOrder(const Chem::Atom& atom, const Chem::Bond& bond, 
-												   const FragmentTreeNode& node) const;
+			std::size_t getRotationalSymmetryOrder(const Chem::Atom& atom, const Chem::Atom& bond_nbr,
+												   const AtomList& nbr_atoms, const FragmentTreeNode& node);
 
 			void genMMFF94InteractionData(const Chem::MolecularGraph& molgraph, unsigned int ff_type, 
 										  ForceField::MMFF94InteractionData& ia_data);
@@ -197,26 +209,26 @@ namespace CDPL
 
 			Settings                                        settings;
 			FragmentTreeNode                                fragTree;
-			BondList                                        bondList;
+			BondList                                        splitBondList;
+			AtomList                                        tmpAtomList;
 			NodeList                                        buildFragNodes; 
-			FragmentLibraryEntry                            fragLibEntry;
-			FragmentConformerGenerator                      fragConfGen;
-			IndexPairList                                   fragLibEntryAtomIdxMap;
 			BondLengthDescriptorList                        aromRingSubstBondLens;
-			Util::BitSet                                    reachableAtomMask;
 			Util::BitSet                                    hAtomMask;
-			Util::BitSet                                    termAtomMask;
 			UIArray                                         extAtomConnectivities;
 			UIArray                                         tmpExtAtomConnectivities;
-			boost::timer::cpu_timer                         timer;
+			IndexPairList                                   fragLibEntryAtomIdxMap;
+			FragmentLibraryEntry                            fragLibEntry;
+			FragmentConformerGenerator                      fragConfGen;
+			Chem::SmallestSetOfSmallestRings::SharedPointer fragSSSR;	
+			TorsionRuleMatcher                              torsionRuleMatcher;
+			Chem::AutomorphismGroupSearch                   automorphGroupSearch;
 			ForceField::MMFF94InteractionParameterizer      mmff94Parameterizer;
 			ForceField::MMFF94InteractionData               tmpMMFF94Data;
 			ForceField::MMFF94InteractionData               fragBuildMMFF94Data;
 			ForceField::MMFF94EnergyCalculator<double>      mmff94EnergyCalc;
-			Chem::SmallestSetOfSmallestRings::SharedPointer fragSSSR;
-			TorsionRuleMatcher                              torsionRuleMatcher;
 			AllocVector3DArrayList                          allocCoordArrays;
 			Vector3DArrayList                               freeCoordArrays;
+			boost::timer::cpu_timer                         timer;
 		};
     }
 }

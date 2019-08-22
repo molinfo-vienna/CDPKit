@@ -570,7 +570,7 @@ namespace CDPL
 
 
 		template <typename AtomType, typename OutputIterator>
-		std::size_t getConnectedAtoms(AtomType& atom, const MolecularGraph& molgraph, OutputIterator it)
+		std::size_t getConnectedAtoms(AtomType& atom, const MolecularGraph& molgraph, OutputIterator it, AtomType* excl_atom = 0)
 		{
 			typedef typename boost::mpl::if_<boost::is_const<AtomType>, typename AtomType::ConstAtomIterator, typename AtomType::AtomIterator>::type AtomIterator;
 
@@ -578,18 +578,22 @@ namespace CDPL
 			typename AtomType::ConstBondIterator b_it = atom.getBondsBegin();
 			std::size_t count = 0;
 
-			for (AtomIterator a_it = atom.getAtomsBegin(); a_it != atoms_end; ++a_it, ++b_it)
+			for (AtomIterator a_it = atom.getAtomsBegin(); a_it != atoms_end; ++a_it, ++b_it) {
+				if (&(*a_it) == excl_atom)
+					continue;
+
 				if (molgraph.containsAtom(*a_it) && molgraph.containsBond(*b_it)) {
 					*it = &(*a_it);
 					++it;
 					count++;
 				}
+			}
 
 			return count;
 		}
 
 		template <typename AtomType, typename OutputIterator>
-		std::size_t getIncidentBonds(AtomType& atom, const MolecularGraph& molgraph, OutputIterator it)
+		std::size_t getIncidentBonds(AtomType& atom, const MolecularGraph& molgraph, OutputIterator it, AtomType* excl_atom = 0)
 		{
 			typedef typename boost::mpl::if_<boost::is_const<AtomType>, typename AtomType::ConstBondIterator, typename AtomType::BondIterator>::type BondIterator;
 
@@ -597,18 +601,22 @@ namespace CDPL
 			typename AtomType::ConstAtomIterator a_it = atom.getAtomsBegin();
 			std::size_t count = 0;
 
-			for (BondIterator b_it = atom.getBondsBegin(); b_it != bonds_end; ++a_it, ++b_it)
+			for (BondIterator b_it = atom.getBondsBegin(); b_it != bonds_end; ++a_it, ++b_it) {
+				if (&(*a_it) == excl_atom)
+					continue;
+				
 				if (molgraph.containsAtom(*a_it) && molgraph.containsBond(*b_it)) {
 					*it = &(*b_it);
 					++it;
 					count++;
 				}
+			}
 
 			return count;
 		}
 
 		template <typename AtomType, typename AtomOutputIterator, typename BondOutputIterator>
-		std::size_t getConnectedAtomsAndBonds(AtomType& atom, const MolecularGraph& molgraph, AtomOutputIterator ao_it, BondOutputIterator bo_it)
+		std::size_t getConnectedAtomsAndBonds(AtomType& atom, const MolecularGraph& molgraph, AtomOutputIterator ao_it, BondOutputIterator bo_it, AtomType* excl_atom = 0)
 		{
 			typedef typename boost::mpl::if_<boost::is_const<AtomType>, typename AtomType::ConstAtomIterator, typename AtomType::AtomIterator>::type AtomIterator;
 			typedef typename boost::mpl::if_<boost::is_const<AtomType>, typename AtomType::ConstBondIterator, typename AtomType::BondIterator>::type BondIterator;
@@ -617,7 +625,10 @@ namespace CDPL
 			AtomIterator a_it = atom.getAtomsBegin();
 			std::size_t count = 0;
 
-			for (BondIterator b_it = atom.getBondsBegin(); b_it != bonds_end; ++a_it, ++b_it)
+			for (BondIterator b_it = atom.getBondsBegin(); b_it != bonds_end; ++a_it, ++b_it) {
+				if (&(*a_it) == excl_atom)
+					continue;
+
 				if (molgraph.containsAtom(*a_it) && molgraph.containsBond(*b_it)) {
 					*ao_it = &(*a_it);
 					*bo_it = &(*b_it);
@@ -625,6 +636,7 @@ namespace CDPL
 					++bo_it;
 					count++;
 				}
+			}
 
 			return count;
 		}

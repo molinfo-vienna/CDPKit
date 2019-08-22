@@ -222,13 +222,15 @@ namespace
 		return str;
 	}
 
-	std::size_t getConnectedAtomsWrapper(CDPL::Chem::Atom& atom, CDPL::Chem::MolecularGraph& molgraph, boost::python::list& atoms)
+
+	std::size_t getConnectedAtomsWrapper1(CDPL::Chem::Atom& atom, CDPL::Chem::MolecularGraph& molgraph, boost::python::list& atoms, 
+										  CDPL::Chem::Atom* excl_atom)
 	{
 		using namespace CDPL;
 		using namespace Chem;
 
 		std::vector<Atom*> tmp_atoms;
-		std::size_t count = getConnectedAtoms(atom, molgraph, std::back_inserter(tmp_atoms)); 
+		std::size_t count = getConnectedAtoms(atom, molgraph, std::back_inserter(tmp_atoms), excl_atom); 
 		
 		for (std::vector<Atom*>::iterator it = tmp_atoms.begin(), end = tmp_atoms.end(); it != end; ++it)
 			atoms.append(boost::ref(*it));
@@ -236,13 +238,19 @@ namespace
 		return count;
 	}
 
-	std::size_t getIncidentBondsWrapper(CDPL::Chem::Atom& atom, CDPL::Chem::MolecularGraph& molgraph, boost::python::list& bonds)
+	std::size_t getConnectedAtomsWrapper2(CDPL::Chem::Atom& atom, CDPL::Chem::MolecularGraph& molgraph, boost::python::list& atoms)
+	{
+		return getConnectedAtomsWrapper1(atom, molgraph, atoms, 0);
+	}
+
+	std::size_t getIncidentBondsWrapper1(CDPL::Chem::Atom& atom, CDPL::Chem::MolecularGraph& molgraph, boost::python::list& bonds, 
+										CDPL::Chem::Atom* excl_atom)
 	{
 		using namespace CDPL;
 		using namespace Chem;
 
 		std::vector<Bond*> tmp_bonds;
-		std::size_t count = getIncidentBonds(atom, molgraph, std::back_inserter(tmp_bonds)); 
+		std::size_t count = getIncidentBonds(atom, molgraph, std::back_inserter(tmp_bonds), excl_atom); 
 
 		for (std::vector<Bond*>::iterator it = tmp_bonds.begin(), end = tmp_bonds.end(); it != end; ++it)
 			bonds.append(boost::ref(*it));
@@ -250,15 +258,20 @@ namespace
 		return count;
 	}
 
-	std::size_t getConnectedAtomsAndBondsWrapper(CDPL::Chem::Atom& atom, CDPL::Chem::MolecularGraph& molgraph, 
-												 boost::python::list& atoms, boost::python::list& bonds)
+	std::size_t getIncidentBondsWrapper2(CDPL::Chem::Atom& atom, CDPL::Chem::MolecularGraph& molgraph, boost::python::list& bonds)
+	{
+		return getIncidentBondsWrapper1(atom, molgraph, bonds, 0);
+	}
+
+	std::size_t getConnectedAtomsAndBondsWrapper1(CDPL::Chem::Atom& atom, CDPL::Chem::MolecularGraph& molgraph, 
+												 boost::python::list& atoms, boost::python::list& bonds, CDPL::Chem::Atom* excl_atom)
 	{
 		using namespace CDPL;
 		using namespace Chem;
 
 		std::vector<Atom*> tmp_atoms;
 		std::vector<Bond*> tmp_bonds;
-		std::size_t count = getConnectedAtomsAndBonds(atom, molgraph, std::back_inserter(tmp_atoms), std::back_inserter(tmp_bonds)); 
+		std::size_t count = getConnectedAtomsAndBonds(atom, molgraph, std::back_inserter(tmp_atoms), std::back_inserter(tmp_bonds), excl_atom); 
 
 		for (std::vector<Atom*>::iterator it = tmp_atoms.begin(), end = tmp_atoms.end(); it != end; ++it)
 			atoms.append(boost::ref(*it));
@@ -267,6 +280,12 @@ namespace
 			bonds.append(boost::ref(*it));
 
 		return count;
+	}
+
+	std::size_t getConnectedAtomsAndBondsWrapper2(CDPL::Chem::Atom& atom, CDPL::Chem::MolecularGraph& molgraph, 
+												 boost::python::list& atoms, boost::python::list& bonds)
+	{
+		return getConnectedAtomsAndBondsWrapper1(atom, molgraph, atoms, bonds, 0);
 	}
 }
 
@@ -404,11 +423,19 @@ void CDPLPythonChem::exportAtomFunctions()
 	python::def("buildMatchExpressionString", &buildMatchExpressionStringWrapper,
 				(python::arg("atom"), python::arg("molgraph")));
 
-	python::def("getConnectedAtoms", &getConnectedAtomsWrapper,
+	python::def("getConnectedAtoms", &getConnectedAtomsWrapper1,
+				(python::arg("atom"), python::arg("molgraph"), python::arg("atoms"), python::arg("excl_atom")));
+	python::def("getConnectedAtoms", &getConnectedAtomsWrapper2,
 				(python::arg("atom"), python::arg("molgraph"), python::arg("atoms")));
-	python::def("getIncidentBonds", &getIncidentBondsWrapper,
+
+	python::def("getIncidentBonds", &getIncidentBondsWrapper1,
+				(python::arg("atom"), python::arg("molgraph"), python::arg("bonds"), python::arg("excl_atom")));
+	python::def("getIncidentBonds", &getIncidentBondsWrapper2,
 				(python::arg("atom"), python::arg("molgraph"), python::arg("bonds")));
-	python::def("getConnectedAtomsAndBonds", &getConnectedAtomsAndBondsWrapper, 
+
+	python::def("getConnectedAtomsAndBonds", &getConnectedAtomsAndBondsWrapper1, 
+				(python::arg("atom"), python::arg("molgraph"), python::arg("atoms"), python::arg("bonds"), python::arg("excl_atom")));
+	python::def("getConnectedAtomsAndBonds", &getConnectedAtomsAndBondsWrapper2, 
 				(python::arg("atom"), python::arg("molgraph"), python::arg("atoms"), python::arg("bonds")));
 
 	python::def("getMatchConstraints", &getMatchConstraintsWrapper1, python::arg("atom"), 

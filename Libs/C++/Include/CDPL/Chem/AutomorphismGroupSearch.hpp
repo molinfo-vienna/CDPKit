@@ -32,6 +32,7 @@
 #define CDPL_CHEM_AUTOMORPHISMGROUPSEARCH_HPP
 
 #include <boost/shared_ptr.hpp>
+#include <boost/function.hpp>
 
 #include "CDPL/Chem/APIPrefix.hpp"
 #include "CDPL/Chem/SubstructureSearch.hpp"
@@ -85,6 +86,8 @@ namespace CDPL
 			 * \brief A constant random access iterator used to iterate over the stored atom/bond mapping objects.
 			 */
 			typedef SubstructureSearch::ConstMappingIterator ConstMappingIterator;
+
+			typedef boost::function2<bool, const MolecularGraph&, const AtomBondMapping&> MappingCallbackFunction;
 
 			/**
 			 * \brief Constructs and initializes a \c %AutomorphismGroupSearch instance.
@@ -183,6 +186,10 @@ namespace CDPL
 			 */
 			std::size_t getMaxNumMappings() const;
 
+			void setFoundMappingCallback(const MappingCallbackFunction& func);
+
+			const MappingCallbackFunction& getFoundMappingCallback() const;
+
 		  private:
 			AutomorphismGroupSearch(const AutomorphismGroupSearch&);
 
@@ -271,15 +278,16 @@ namespace CDPL
 			typedef MatchExpression<Bond, MolecularGraph>::SharedPointer BondMatchExprPtr;
 			typedef MatchExpression<MolecularGraph>::SharedPointer MolGraphMatchExprPtr;
 
-			SubstructureSearch   substructSearch;
-			bool                 incIdentityMapping;
-			unsigned int         atomPropFlags;
-			unsigned int         bondPropFlags;
-			AtomMatchExprPtr     atomMatchExpr;
-			BondMatchExprPtr     bondMatchExpr;
-			MolGraphMatchExprPtr molGraphMatchExpr;
-			const Atom*          lastQueryAtom;
-			const Bond*          lastQueryBond;
+			SubstructureSearch           substructSearch;
+			bool                         incIdentityMapping;
+			unsigned int                 atomPropFlags;
+			unsigned int                 bondPropFlags;
+			AtomMatchExprPtr             atomMatchExpr;
+			BondMatchExprPtr             bondMatchExpr;
+			MolGraphMatchExprPtr         molGraphMatchExpr;
+			MappingCallbackFunction      mappingCallbackFunc;
+			const Atom*                  lastQueryAtom;
+			const Bond*                  lastQueryBond;
 		};
 
 		/**

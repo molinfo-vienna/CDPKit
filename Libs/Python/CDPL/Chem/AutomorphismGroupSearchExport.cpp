@@ -61,6 +61,10 @@ void CDPLPythonChem::exportAutomorphismGroupSearch()
 		.def("getMaxNumMappings", &Chem::AutomorphismGroupSearch::getMaxNumMappings, python::arg("self"))
 		.def("setMaxNumMappings", &Chem::AutomorphismGroupSearch::setMaxNumMappings, 
 			 (python::arg("self"), python::arg("max_num_mappings")))
+		.def("setFoundMappingCallback", &Chem::AutomorphismGroupSearch::setFoundMappingCallback,
+			 (python::arg("self"), python::arg("func")))
+		.def("getFoundMappingCallback", &Chem::AutomorphismGroupSearch::getFoundMappingCallback,
+			 python::arg("self"), python::return_internal_reference<1>())
 		.add_property("atomPropertyFlags", &Chem::AutomorphismGroupSearch::getAtomPropertyFlags, 
 					  &Chem::AutomorphismGroupSearch::setAtomPropertyFlags)
 		.add_property("bondPropertyFlags", &Chem::AutomorphismGroupSearch::getBondPropertyFlags, 
@@ -70,6 +74,9 @@ void CDPLPythonChem::exportAutomorphismGroupSearch()
 		.add_property("numMappings", &Chem::AutomorphismGroupSearch::getNumMappings)
 		.add_property("maxNumMappings", &Chem::AutomorphismGroupSearch::getMaxNumMappings, 
 					  &Chem::AutomorphismGroupSearch::setMaxNumMappings)
+		.add_property("foundMappingCallback", python::make_function(&Chem::AutomorphismGroupSearch::getFoundMappingCallback, 
+																	python::return_internal_reference<>()),
+					  &Chem::AutomorphismGroupSearch::setFoundMappingCallback)
 		.def("__getitem__", getMappingFunc, (python::arg("self"), python::arg("idx")), 
 			 python::return_internal_reference<1>())
 		.def("__len__", &Chem::AutomorphismGroupSearch::getNumMappings, python::arg("self"));

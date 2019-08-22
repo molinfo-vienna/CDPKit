@@ -37,6 +37,7 @@
 #include "CDPL/Chem/AtomPredicateWrapper.hpp"
 #include "CDPL/Chem/BondPredicateWrapper.hpp"
 #include "CDPL/Chem/MatchExpression.hpp"
+#include "CDPL/Chem/AtomBondMapping.hpp"
 #include "CDPL/Math/Vector.hpp"
 #include "CDPL/Base/IntegerTypes.hpp"
 
@@ -81,6 +82,7 @@ void CDPLPythonChem::exportBoostFunctionWrappers()
     CDPLPythonBase::BoostFunction2Export<boost::function2<double, const Atom&, const Atom&>, Atom&, Atom&>("DoubleAtom2Functor");
     CDPLPythonBase::BoostFunction2Export<boost::function2<Base::uint64, const Atom&, const MolecularGraph&>, Atom&, MolecularGraph&>("UInt64AtomMolecularGraphFunctor");
     CDPLPythonBase::BoostFunction2Export<boost::function2<std::size_t, const Atom&, const MolecularGraph&>, Atom&, MolecularGraph&>("SizeTypeAtomMolecularGraphFunctor");
+	CDPLPythonBase::BoostFunction2Export<boost::function2<bool, const MolecularGraph&, const AtomBondMapping&> >("BoolMolecularGraphAtomBondMappingFunctor");
 
 	CDPLPythonBase::BoostFunction3Export<boost::function3<double, const Math::Vector3D&, const Math::Vector3D&, const Atom&>,
 										 const Math::Vector3D&, const Math::Vector3D&, Atom&>("DoubleVector3D2AtomFunctor");

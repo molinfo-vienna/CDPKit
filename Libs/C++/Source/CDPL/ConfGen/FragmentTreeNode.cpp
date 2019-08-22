@@ -37,17 +37,27 @@
 
 #include "FragmentTreeNode.hpp"
 
-//#include <iostream>
+
 using namespace CDPL;
 
 
 ConfGen::FragmentTreeNode::FragmentTreeNode(): 
-	root(*this), fragment(0), splitBond(0), fragmentType(0) 
+	root(*this), parent(*this), fragment(0), splitBond(0), fragmentType(0) 
 {}
 
-ConfGen::FragmentTreeNode::FragmentTreeNode(FragmentTreeNode& root): 
-	root(root), fragment(0), splitBond(0), fragmentType(0) 
+ConfGen::FragmentTreeNode::FragmentTreeNode(FragmentTreeNode& root, FragmentTreeNode& parent): 
+	root(root), parent(parent), fragment(0), splitBond(0), fragmentType(0) 
 {}
+
+const ConfGen::FragmentTreeNode& ConfGen::FragmentTreeNode::getParent() const
+{
+	return parent;
+}
+
+ConfGen::FragmentTreeNode& ConfGen::FragmentTreeNode::getParent()
+{
+	return parent;
+}
 
 const Chem::MolecularGraph& ConfGen::FragmentTreeNode::getFragment() const
 {
@@ -161,32 +171,26 @@ bool ConfGen::FragmentTreeNode::getKeepAllConformersFlag() const
 	return keepAllConfsFlag;
 }
 
-/*
-void ConfGen::FragmentTreeNode::printTree(std::ostream& os) const
+ConfGen::FragmentTreeNode::AtomList& ConfGen::FragmentTreeNode::getSplitBondAtom1Neighbors()
 {
-	if (splitBond == 0)
-		return;
-
-	std::string left_smi;
-	std::string right_smi;
-	std::string node_smi;
-
-	perceiveComponents(const_cast<Chem::MolecularGraph&>(*fragment), false);
-	generateSMILES(*fragment, node_smi, true);
-
-	perceiveComponents(const_cast<Chem::MolecularGraph&>(*leftChild->fragment), false);
-	perceiveComponents(const_cast<Chem::MolecularGraph&>(*rightChild->fragment), false);
-
-	generateSMILES(*leftChild->fragment, left_smi, true);
-	generateSMILES(*rightChild->fragment, right_smi, true);
-		
-	os << '"' << node_smi << " - " << this << "\" -> \"" << left_smi << " - " << leftChild.get() << '"' << std::endl;
-	os << '"' << node_smi << " - "  << this << "\" -> \"" << right_smi << " - " << rightChild.get() << '"' << std::endl;
-		
-	leftChild->printTree(os);
-	rightChild->printTree(os);
+	return splitBondAtom1Nbrs;
 }
-*/
+
+const ConfGen::FragmentTreeNode::AtomList& ConfGen::FragmentTreeNode::getSplitBondAtom1Neighbors() const
+{
+	return splitBondAtom1Nbrs;
+}
+
+ConfGen::FragmentTreeNode::AtomList& ConfGen::FragmentTreeNode::getSplitBondAtom2Neighbors()
+{
+	return splitBondAtom2Nbrs;
+}
+
+const ConfGen::FragmentTreeNode::AtomList& ConfGen::FragmentTreeNode::getSplitBondAtom2Neighbors() const
+{
+	return splitBondAtom2Nbrs;
+}
+
 void ConfGen::FragmentTreeNode::splitRecursive(const Chem::MolecularGraph& frag, BondList& bonds)
 {
     using namespace Chem;
@@ -198,13 +202,13 @@ void ConfGen::FragmentTreeNode::splitRecursive(const Chem::MolecularGraph& frag,
 
     if (!leftFragment.get()) {
 		leftFragment.reset(new Fragment());
-		leftChild.reset(new FragmentTreeNode(root));
+		leftChild.reset(new FragmentTreeNode(root, *this));
     } else 
 		leftFragment->clear();
 
     if (!rightFragment.get()) {
 		rightFragment.reset(new Fragment());
-		rightChild.reset(new FragmentTreeNode(root));
+		rightChild.reset(new FragmentTreeNode(root, *this));
     } else 
 		rightFragment->clear();
 
@@ -217,14 +221,15 @@ void ConfGen::FragmentTreeNode::splitRecursive(const Chem::MolecularGraph& frag,
     getSubstructure(*leftFragment, *splitBondAtoms[0]);
     getSubstructure(*rightFragment, *splitBondAtoms[1]);
 
-	if (leftFragment->getNumAtoms() < rightFragment->getNumAtoms()) { // make left fragment always larger or equal to right fragment
-		leftFragment->swap(*rightFragment);
+	// ensure left fragment is always larger or equal to right fragment
+
+	if (leftFragment->getNumAtoms() < rightFragment->getNumAtoms()) { 
+ 		leftFragment->swap(*rightFragment);
 		std::swap(splitBondAtoms[0], splitBondAtoms[1]);
 	}
 
     leftChild->splitRecursive(*leftFragment, bonds);
     rightChild->splitRecursive(*rightFragment, bonds);
-
 }
 
 void ConfGen::FragmentTreeNode::getSubstructure(Chem::Fragment& substruct, const Chem::Atom& atom) const

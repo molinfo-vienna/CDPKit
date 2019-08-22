@@ -146,6 +146,16 @@ std::size_t Chem::AutomorphismGroupSearch::getMaxNumMappings() const
     return substructSearch.getMaxNumMappings();
 }
 
+void Chem::AutomorphismGroupSearch::setFoundMappingCallback(const MappingCallbackFunction& func)
+{
+	mappingCallbackFunc = func;
+}
+
+const Chem::AutomorphismGroupSearch::MappingCallbackFunction& Chem::AutomorphismGroupSearch::getFoundMappingCallback() const
+{
+	return mappingCallbackFunc;
+}
+
 const Chem::MatchExpression<Chem::Atom, Chem::MolecularGraph>::SharedPointer&
 Chem::AutomorphismGroupSearch::getAtomMatchExpression(const Atom& atom) const
 {
@@ -305,7 +315,7 @@ bool Chem::AutomorphismGroupSearch::BondMatchExpression::operator()(const Bond& 
 
 bool Chem::AutomorphismGroupSearch::MolGraphMatchExpression::requiresAtomBondMapping() const
 {
-	return !parent->incIdentityMapping;
+	return (!parent->incIdentityMapping || parent->mappingCallbackFunc);
 }
 
 bool Chem::AutomorphismGroupSearch::MolGraphMatchExpression::operator()(const MolecularGraph& query_molgraph, 
@@ -319,13 +329,18 @@ bool Chem::AutomorphismGroupSearch::MolGraphMatchExpression::operator()(const Mo
 																		const MolecularGraph& target_molgraph, 
 																		const AtomBondMapping& mapping, const Base::Variant& aux_data) const
 {
- 	if (parent->incIdentityMapping)
-		return true;
+ 	if (!parent->incIdentityMapping) {
+		const AtomMapping& am = mapping.getAtomMapping();
 
-	const AtomMapping& am = mapping.getAtomMapping();
-
-	return (std::find_if(am.getEntriesBegin(), am.getEntriesEnd(), 
+		if (std::find_if(am.getEntriesBegin(), am.getEntriesEnd(), 
 						 boost::bind(std::not_equal_to<const Atom*>(), 
-									 boost::bind(&AtomMapping::Entry::first, _1), boost::bind(&AtomMapping::Entry::second, _1))) != 
-			am.getEntriesEnd());
+									 boost::bind(&AtomMapping::Entry::first, _1), boost::bind(&AtomMapping::Entry::second, _1))) == 
+			am.getEntriesEnd())
+			return false;
+	}
+
+	if (parent->mappingCallbackFunc)
+		return parent->mappingCallbackFunc(query_molgraph, mapping);
+
+	return true;
 }

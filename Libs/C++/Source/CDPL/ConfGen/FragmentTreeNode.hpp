@@ -35,7 +35,6 @@
 #include <memory>
 #include <cstddef>
 #include <utility>
-//#include <iosfwd>
 
 #include "CDPL/ForceField/MMFF94InteractionData.hpp"
 #include "CDPL/Math/VectorArray.hpp"
@@ -64,6 +63,7 @@ namespace CDPL
 			typedef std::pair<Math::Vector3DArray*, double> ConfData;
 			typedef std::vector<ConfData> ConfDataArray;
 			typedef std::vector<const Chem::Bond*> BondList;
+			typedef std::vector<const Chem::Atom*> AtomList;
 			typedef std::vector<std::size_t> AtomIndexMap;	
 			typedef std::vector<double> TorsionAngleArray;	
 
@@ -71,6 +71,10 @@ namespace CDPL
 			typedef ConfDataArray::iterator ConformerIterator;
 
 			FragmentTreeNode();
+
+			const FragmentTreeNode& getParent() const;
+
+			FragmentTreeNode& getParent();
 
 			void splitRecursive(const Chem::MolecularGraph& frag, BondList& bonds);
 
@@ -117,10 +121,16 @@ namespace CDPL
 
 			bool getKeepAllConformersFlag() const;
 
-			//void printTree(std::ostream& os) const;
+			AtomList& getSplitBondAtom1Neighbors();
+
+			const AtomList& getSplitBondAtom1Neighbors() const;
+
+			AtomList& getSplitBondAtom2Neighbors();
+
+			const AtomList& getSplitBondAtom2Neighbors() const;
 
 		private:
-			FragmentTreeNode(FragmentTreeNode& root); 
+			FragmentTreeNode(FragmentTreeNode& root, FragmentTreeNode& parent); 
 
 			FragmentTreeNode(const FragmentTreeNode&);
 
@@ -137,10 +147,13 @@ namespace CDPL
 			typedef std::auto_ptr<Chem::Fragment> FragmentPointer;
 	
 			FragmentTreeNode&                 root;
+			FragmentTreeNode&                 parent;
 			const Chem::MolecularGraph*       fragment;
 			const Chem::Bond*                 splitBond;
 			const Chem::Atom*                 splitBondAtoms[2];
 			const Chem::Atom*                 torsionRefAtoms[2];
+			AtomList                          splitBondAtom1Nbrs;
+			AtomList                          splitBondAtom2Nbrs;
 			bool                              keepAllConfsFlag;
 			NodePointer                       leftChild;
 			NodePointer                       rightChild;
