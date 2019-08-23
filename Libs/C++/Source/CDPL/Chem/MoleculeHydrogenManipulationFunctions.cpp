@@ -80,13 +80,14 @@ bool Chem::makeOrdinaryHydrogenDeplete(Molecule& mol, unsigned int flags)
 	return changes;
 }
 
-bool Chem::makeHydrogenComplete(Molecule& mol)
+bool Chem::makeHydrogenComplete(Molecule& mol, bool corr_impl_h_count)
 {
 	std::size_t num_atoms = mol.getNumAtoms();
 	bool changes = false;
 
 	for (std::size_t i = 0; i < num_atoms; i++) {
-		std::size_t impl_h_cnt = getImplicitHydrogenCount(mol.getAtom(i));
+		Atom& atom = mol.getAtom(i);
+		std::size_t impl_h_cnt = getImplicitHydrogenCount(atom);
 
 		for (std::size_t j = 0; j < impl_h_cnt; j++) {
 			Atom& new_atom = mol.addAtom();
@@ -99,8 +100,12 @@ bool Chem::makeHydrogenComplete(Molecule& mol)
 			setAromaticityFlag(new_bond, false);
 			setAromaticityFlag(new_atom, false);
 			setHybridizationState(new_atom, HybridizationState::UNKNOWN);
+			setImplicitHydrogenCount(new_atom, 0);
 			changes = true;
-		} 
+		}
+
+		if (corr_impl_h_count && impl_h_cnt > 0)
+			setImplicitHydrogenCount(atom, 0);
 	}
 
 	return changes;

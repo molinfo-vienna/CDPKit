@@ -157,6 +157,9 @@ namespace
 	MAKE_FUNCTION_WRAPPER2(void, calcTopologicalDistanceMatrix, CDPL::Chem::MolecularGraph&, CDPL::Math::SparseULMatrix&)
 
 	MAKE_FUNCTION_WRAPPER3(std::size_t, getRotatableBondCount, CDPL::Chem::MolecularGraph&, bool, bool);
+	MAKE_FUNCTION_WRAPPER3(void, replaceAtomStereoReferenceAtoms, CDPL::Chem::MolecularGraph&, CDPL::Chem::MolecularGraph&, std::size_t)
+
+	MAKE_FUNCTION_WRAPPER4(void, replaceBondStereoReferenceAtoms, CDPL::Chem::MolecularGraph&, CDPL::Chem::MolecularGraph&, std::size_t, std::size_t)
 
 	MAKE_FUNCTION_WRAPPER5(CDPL::Base::uint64, calcHashCode, CDPL::Chem::MolecularGraph&,
 	 					   unsigned int, unsigned int, bool, bool)
@@ -294,6 +297,14 @@ void CDPLPythonChem::exportMolecularGraphFunctions()
 				(python::arg("molgraph"), python::arg("overwrite")));
 	python::def("calcAtomHydrophobicities", &Chem::calcAtomHydrophobicities, 
 				(python::arg("molgraph"), python::arg("overwrite")));
+	python::def("containsMolecularGraph", &Chem::containsMolecularGraph, 
+				(python::arg("molgraph"), python::arg("sub_molgraph"), python::arg("atoms") = true, python::arg("bonds") = true));
+	python::def("getContainingFragments", &Chem::getContainingFragments, 
+				(python::arg("molgraph"), python::arg("frag_list"), python::arg("cont_frag_list"), 
+				 python::arg("append") = false, python::arg("atoms") = true, python::arg("bonds") = true));
+	python::def("getContainedFragments", &Chem::getContainedFragments, 
+				(python::arg("molgraph"), python::arg("frag_list"), python::arg("cont_frag_list"), 
+				 python::arg("append") = false, python::arg("atoms") = true, python::arg("bonds") = true));
 
 	python::def("buildMatchExpression", &buildMatchExpressionWrapper1,
 	 			python::arg("molgraph"), python::with_custodian_and_ward_postcall<0, 1>());
@@ -309,6 +320,16 @@ void CDPLPythonChem::exportMolecularGraphFunctions()
 	 			python::arg("molgraph"), python::with_custodian_and_ward_postcall<0, 1>());
 	python::def("perceiveSSSR", &perceiveSSSRWrapper1,
 	 			python::arg("molgraph"), python::with_custodian_and_ward_postcall<0, 1>());
+	python::def("extractSSSR", static_cast<Chem::FragmentList::SharedPointer (*)(const Chem::MolecularGraph&, const Chem::MolecularGraph&)>(&Chem::extractSSSR),
+	 			(python::arg("src_molgraph"), python::arg("tgt_molgraph")),
+				python::with_custodian_and_ward_postcall<0, 1>());
+	python::def("extractSSSR", static_cast<Chem::FragmentList::SharedPointer (*)(const Chem::MolecularGraph&, Chem::MolecularGraph&, bool)>(&Chem::extractSSSR),
+	 			(python::arg("src_molgraph"), python::arg("tgt_molgraph"), python::arg("overwrite")),
+				python::with_custodian_and_ward_postcall<0, 1>());
+	python::def("transferSSSR", &Chem::transferSSSR,
+	 			(python::arg("src_molgraph"), python::arg("tgt_molgraph")),
+				python::with_custodian_and_ward_postcall<0, 2>());
+
 	python::def("perceiveCyclicSubstructure", &perceiveCyclicSubstructureWrapper1,
 	 			python::arg("molgraph"), python::with_custodian_and_ward_postcall<0, 1>());
 	python::def("perceiveAromaticSubstructure", &perceiveAromaticSubstructureWrapper1,
@@ -338,6 +359,9 @@ void CDPLPythonChem::exportMolecularGraphFunctions()
      python::def("calcTopologicalDistanceMatrix", 
 				 static_cast<Math::ULMatrix::SharedPointer (*)(Chem::MolecularGraph&, bool)>(&Chem::calcTopologicalDistanceMatrix),
 				 (python::arg("molgraph"), python::arg("overwrite")));
+    python::def("extractTopologicalDistanceMatrix", 
+				 static_cast<Math::ULMatrix::SharedPointer (*)(const Chem::MolecularGraph&, Chem::MolecularGraph&, bool)>(&Chem::extractTopologicalDistanceMatrix),
+				 (python::arg("src_molgraph"), python::arg("tgt_molgraph"), python::arg("overwrite")));
  
 	python::def("extractReactionCenter",  &extractReactionCenterWrapper2, 
 				(python::arg("molgraph"), python::arg("rxn_center")),
@@ -354,8 +378,14 @@ void CDPLPythonChem::exportMolecularGraphFunctions()
 				(python::arg("molgraph"), python::arg("mtx")));
     python::def("calcTopologicalDistanceMatrix", static_cast<void (*)(Chem::MolecularGraph&, Math::ULMatrix&)>(&calcTopologicalDistanceMatrixWrapper2), 
 				(python::arg("molgraph"), python::arg("mtx")));
-	python::def("calcTopologicalDistanceMatrix",  static_cast<void (*)(Chem::MolecularGraph&, Math::ULMatrix&)>(&calcTopologicalDistanceMatrixWrapper2), 
+	python::def("calcTopologicalDistanceMatrix",  static_cast<void (*)(Chem::MolecularGraph&, Math::SparseULMatrix&)>(&calcTopologicalDistanceMatrixWrapper2), 
 				(python::arg("molgraph"), python::arg("mtx")));
+    python::def("extractTopologicalDistanceMatrix", static_cast<void (*)(const Chem::MolecularGraph&, const Chem::MolecularGraph&, Math::ULMatrix&)>(&Chem::extractTopologicalDistanceMatrix), 
+				(python::arg("src_molgraph"), python::arg("tgt_molgraph"), python::arg("mtx")));
+	python::def("extractTopologicalDistanceMatrix",  static_cast<void (*)(const Chem::MolecularGraph&, const Chem::MolecularGraph&, Math::SparseULMatrix&)>(&Chem::extractTopologicalDistanceMatrix), 
+				(python::arg("src_molgraph"), python::arg("tgt_molgraph"), python::arg("mtx")));
+
+
  	python::def("calcTopologicalRadius", &calcTopologicalRadiusWrapper1, python::arg("molgraph"));
 	python::def("calcTopologicalDiameter", &calcTopologicalDiameterWrapper1, python::arg("molgraph"));
 	python::def("calcRingComplexity", &calcRingComplexityWrapper1, python::arg("molgraph"));
@@ -428,6 +458,12 @@ void CDPLPythonChem::exportMolecularGraphFunctions()
 	python::def("canonicalize", &canonicalizeWrapper6, 
 				(python::arg("molgraph"),  python::arg("func"), python::arg("atoms") = true, 
 				 python::arg("atom_nbrs") = true, python::arg("bonds") = true, python::arg("bond_atoms") = false));
+
+	python::def("replaceAtomStereoReferenceAtoms", &replaceAtomStereoReferenceAtomsWrapper3,
+				(python::arg("mol_copy"), python::arg("molgraph"), python::arg("atom_idx_offs") = 0));
+	python::def("replaceBondStereoReferenceAtoms", &replaceBondStereoReferenceAtomsWrapper4,
+				(python::arg("mol_copy"), python::arg("molgraph"), python::arg("atom_idx_offs") = 0, 
+				 python::arg("bond_start_idx") = 0));
 
 	EXPORT_MOLGRAPH_FUNCS_COPY_REF_CW(AromaticSubstructure, substruct)
 	EXPORT_MOLGRAPH_FUNCS_COPY_REF_CW(CyclicSubstructure, substruct)

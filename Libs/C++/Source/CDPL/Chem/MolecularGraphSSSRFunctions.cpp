@@ -57,7 +57,54 @@ Chem::FragmentList::SharedPointer Chem::perceiveSSSR(MolecularGraph& molgraph, b
 
 	sssr_ptr->swap(sssr);
 
-	molgraph.setProperty(MolecularGraphProperty::SSSR, sssr_ptr);
+	setSSSR(molgraph, sssr_ptr);
 
 	return sssr_ptr;
+}
+
+Chem::FragmentList::SharedPointer Chem::extractSSSR(const MolecularGraph& src_molgraph, const MolecularGraph& tgt_molgraph)
+{
+	FragmentList::SharedPointer tgt_sssr(new FragmentList());
+	const FragmentList::SharedPointer& src_sssr = getSSSR(src_molgraph);
+
+	getContainingFragments(tgt_molgraph, *src_sssr, *tgt_sssr, true, true, true);
+
+	return tgt_sssr;
+}
+
+Chem::FragmentList::SharedPointer Chem::extractSSSR(const MolecularGraph& src_molgraph, MolecularGraph& tgt_molgraph, bool overwrite)
+{
+	if (!overwrite) {
+		Base::Variant tgt_sssr = tgt_molgraph.getProperty(MolecularGraphProperty::SSSR, false);
+	
+		if (!tgt_sssr.isEmpty())
+			return tgt_sssr.getData<FragmentList::SharedPointer>();
+	}
+
+	FragmentList::SharedPointer tgt_sssr = extractSSSR(src_molgraph, tgt_molgraph);
+
+	setSSSR(tgt_molgraph, tgt_sssr);
+
+	return tgt_sssr;
+}
+
+Chem::FragmentList::SharedPointer Chem::transferSSSR(const MolecularGraph& src_molgraph, MolecularGraph& tgt_molgraph)
+{
+	const FragmentList::SharedPointer& src_sssr = getSSSR(src_molgraph);
+	FragmentList::SharedPointer tgt_sssr(new FragmentList());
+
+	for (FragmentList::ConstElementIterator it = src_sssr->getElementsBegin(), end = src_sssr->getElementsEnd(); it != end; ++it) {
+		const Fragment& src_ring = *it;
+		Fragment::SharedPointer tgt_ring(new Fragment());
+
+		for (Fragment::ConstAtomIterator a_it = src_ring.getAtomsBegin(), a_end = src_ring.getAtomsEnd(); a_it != a_end; ++a_it)
+			tgt_ring->addAtom(tgt_molgraph.getAtom(src_molgraph.getAtomIndex(*a_it)));
+
+		for (Fragment::ConstBondIterator b_it = src_ring.getBondsBegin(), b_end = src_ring.getBondsEnd(); b_it != b_end; ++b_it)
+			tgt_ring->addBond(tgt_molgraph.getBond(src_molgraph.getBondIndex(*b_it)));
+
+		tgt_sssr->addElement(tgt_ring);
+	}
+
+	return tgt_sssr;
 }

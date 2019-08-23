@@ -51,12 +51,6 @@ namespace CDPL
 		 * @{
 		 */
 
-		CDPL_CHEM_API void replaceAtomStereoReferenceAtoms(Molecule& mol_copy, const MolecularGraph& molgraph,
-														   std::size_t atom_idx_offs = 0);
-
-		CDPL_CHEM_API void replaceBondStereoReferenceAtoms(Molecule& mol_copy, const MolecularGraph& molgraph, 
-														   std::size_t atom_idx_offs = 0, std::size_t bond_start_idx = 0);
-
 		/**
 		 * \brief Removes all explicit hydrogen atoms from the molecule \a mol.
 		 * \param mol The molecule for which to remove all explicit hydrogen atoms.
@@ -76,9 +70,11 @@ namespace CDPL
 		/**
 		 * \brief Converts all implicit hydrogens of the molecule \a mol to explicit hydrogen atoms.
 		 * \param mol The molecule that has to be made hydrogen complete.
+		 * \param corr_impl_h_count \c true if the implicit hydrogen count property of the hydrogen completed atoms shall be set to zero,
+		 *                          \c false if the property shall be left unchanged.
 		 * \return \c false if \a mol was not altered, \c true otherwise.
 		 */
-		CDPL_CHEM_API bool makeHydrogenComplete(Molecule& mol);
+		CDPL_CHEM_API bool makeHydrogenComplete(Molecule& mol, bool corr_impl_h_count = true);
 
 		CDPL_CHEM_API bool neutralize(Molecule& mol);
 

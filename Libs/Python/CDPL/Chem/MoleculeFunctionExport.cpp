@@ -30,16 +30,6 @@
 #include "CDPL/Chem/Molecule.hpp"
 
 #include "FunctionExports.hpp"
-#include "FunctionWrapper.hpp"
-
-
-namespace
-{
-
-	MAKE_FUNCTION_WRAPPER3(void, replaceAtomStereoReferenceAtoms, CDPL::Chem::Molecule&, CDPL::Chem::MolecularGraph&, std::size_t)
-
-	MAKE_FUNCTION_WRAPPER4(void, replaceBondStereoReferenceAtoms, CDPL::Chem::Molecule&, CDPL::Chem::MolecularGraph&, std::size_t, std::size_t)
-}
 
 
 void CDPLPythonChem::exportMoleculeFunctions()
@@ -47,15 +37,10 @@ void CDPLPythonChem::exportMoleculeFunctions()
 	using namespace boost;
 	using namespace CDPL;
 
-	python::def("replaceAtomStereoReferenceAtoms", &replaceAtomStereoReferenceAtomsWrapper3,
-				(python::arg("mol_copy"), python::arg("molgraph"), python::arg("atom_idx_offs") = 0));
-	python::def("replaceBondStereoReferenceAtoms", &replaceBondStereoReferenceAtomsWrapper4,
-				(python::arg("mol_copy"), python::arg("molgraph"), python::arg("atom_idx_offs") = 0, 
-				 python::arg("bond_start_idx") = 0));
 	python::def("makeHydrogenDeplete", &Chem::makeHydrogenDeplete, python::arg("mol"));
 	python::def("makeOrdinaryHydrogenDeplete", &Chem::makeOrdinaryHydrogenDeplete, 
 				(python::arg("mol"), python::arg("flags")));
-	python::def("makeHydrogenComplete", &Chem::makeHydrogenComplete, python::arg("mol"));
+	python::def("makeHydrogenComplete", &Chem::makeHydrogenComplete, (python::arg("mol"), python::arg("corr_impl_h_count") = true));
 	python::def("neutralize", &Chem::neutralize, python::arg("mol"));
 	python::def("removeAtomsIf", &Chem::removeAtomsIf, (python::arg("mol"), python::arg("pred")));
 	python::def("removeAtomsIfNot", &Chem::removeAtomsIfNot, (python::arg("mol"), python::arg("pred")));

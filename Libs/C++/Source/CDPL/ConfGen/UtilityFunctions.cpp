@@ -202,13 +202,14 @@ void ConfGen::prepareForConformerGeneration(Chem::Molecule& mol)
 			setStereoDescriptor(bond, calcStereoDescriptor(bond, mol, 1));
 	}
 
-	if (makeHydrogenComplete(mol)) {
-		calcImplicitHydrogenCounts(mol, true);
-		perceiveComponents(mol, true);
+	if (makeHydrogenComplete(mol, true)) {
+		if (hasComponents(mol))
+			perceiveComponents(mol, true);
+
 		calcTopologicalDistanceMatrix(mol, true);
 
 	} else {
-		perceiveComponents(mol, false);
+		//perceiveComponents(mol, false);
 		calcTopologicalDistanceMatrix(mol, false);
 	}
 }

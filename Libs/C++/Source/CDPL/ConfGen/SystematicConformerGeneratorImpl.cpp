@@ -501,10 +501,7 @@ void ConfGen::SystematicConformerGeneratorImpl::setupTorsions(FragmentTreeNode& 
 			}
 		}
 
-		bool is_h_rotor = (order == 1 && (getHeavyBondCount(*bond_atoms[0], frag) == 1 || getHeavyBondCount(*bond_atoms[1], frag) == 1));
-
-		if (is_h_rotor && (!settings.hydrogenRotorsEnabled() || !isHeteroAtomHydrogenRotor(bond, frag)))
-			node.setKeepAllConformersFlag(false);
+//		bool is_h_rotor = (order == 1 && (getHeavyBondCount(*bond_atoms[0], frag) == 1 || getHeavyBondCount(*bond_atoms[1], frag) == 1));
 
 		if (node.getTorsionAngles().empty()) {
 			std::size_t rot_sym_order = std::max(getRotationalSymmetryOrder(*bond_atoms[0], *bond_atoms[1], nbr_atoms1, node),

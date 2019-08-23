@@ -34,7 +34,6 @@
 #include "CDPL/ConfGen/UtilityFunctions.hpp"
 #include "CDPL/Chem/AtomContainerFunctions.hpp"
 #include "CDPL/Chem/MolecularGraphFunctions.hpp"
-#include "CDPL/Chem/MoleculeFunctions.hpp"
 
 
 using namespace CDPL;

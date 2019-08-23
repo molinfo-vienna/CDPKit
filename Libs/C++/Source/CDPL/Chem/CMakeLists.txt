@@ -294,6 +294,8 @@ SET(cdpl-chem_LIB_SRCS
     MolecularGraphSybylAtomTypesFunction.cpp
     MolecularGraphAtomHydrophobicityFunction.cpp 
     MolecularGraphCanonicalizationFunctions.cpp 
+    MolecularGraphFragmentMembershipFunctions.cpp 
+    MolecularGraphReplaceStereoRefAtomsFunctions.cpp  
 
     ReactionPropertyFunctions.cpp
     ReactionMatchConstraintsFunctions.cpp
@@ -307,7 +309,6 @@ SET(cdpl-chem_LIB_SRCS
     ReactionMaxComponentGroupIDFunction.cpp
 
     MoleculeHydrogenManipulationFunctions.cpp
-    MoleculeReplaceStereoRefAtomsFunctions.cpp  
     MoleculeRemoveAtomsFunctions.cpp
     MoleculeNeutralizeFunction.cpp
 

@@ -159,6 +159,29 @@ namespace
 			vis_atoms.reset();
 		}
 	}
+
+	template <typename Mtx>
+	void extractTopologicalDistances(const Chem::MolecularGraph& src_molgraph, const Chem::MolecularGraph& tgt_molgraph, Mtx& mtx)
+	{
+		using namespace Chem;
+
+		const Math::ULMatrix& src_mtx = *getTopologicalDistanceMatrix(src_molgraph);
+		std::size_t num_atoms = tgt_molgraph.getNumAtoms();
+
+        mtx.resize(num_atoms, num_atoms, false);
+        mtx.clear();
+
+		for (std::size_t i = 0; i < num_atoms; i++) {
+			std::size_t src_idx1 = src_molgraph.getAtomIndex(tgt_molgraph.getAtom(i));
+
+			for (std::size_t j = i + 1; j < num_atoms; j++) {
+				std::size_t dist = src_mtx(src_idx1, src_molgraph.getAtomIndex(tgt_molgraph.getAtom(j)));
+
+				mtx(i, j) = dist;
+				mtx(j, i) = dist;
+			}
+		}
+	}
 }
 
 
@@ -221,9 +244,25 @@ Math::ULMatrix::SharedPointer Chem::calcTopologicalDistanceMatrix(MolecularGraph
 
 	Math::ULMatrix::SharedPointer mtx_ptr(new Math::ULMatrix());
 
-	calcTopologicalDistanceMatrix(molgraph, *mtx_ptr);
+	calcTopologicalDistances(molgraph, *mtx_ptr);
+	setTopologicalDistanceMatrix(molgraph, mtx_ptr);
 
-	molgraph.setProperty(MolecularGraphProperty::TOPOLOGICAL_DISTANCE_MATRIX, mtx_ptr);
+	return mtx_ptr;
+}
+
+Math::ULMatrix::SharedPointer Chem::extractTopologicalDistanceMatrix(const MolecularGraph& src_molgraph, MolecularGraph& tgt_molgraph, bool overwrite)
+{
+	if (!overwrite) {
+		Base::Variant mtx_prop = tgt_molgraph.getProperty(MolecularGraphProperty::TOPOLOGICAL_DISTANCE_MATRIX);
+
+		if (!mtx_prop.isEmpty())
+			return mtx_prop.getData<Math::ULMatrix::SharedPointer>();
+	}
+
+	Math::ULMatrix::SharedPointer mtx_ptr(new Math::ULMatrix());
+
+	extractTopologicalDistances(src_molgraph, tgt_molgraph, *mtx_ptr);
+	setTopologicalDistanceMatrix(tgt_molgraph, mtx_ptr);
 
 	return mtx_ptr;
 }
@@ -233,7 +272,17 @@ void Chem::calcTopologicalDistanceMatrix(const MolecularGraph& molgraph, Math::U
 	calcTopologicalDistances(molgraph, mtx);
 }
 
+void Chem::extractTopologicalDistanceMatrix(const MolecularGraph& src_molgraph, const MolecularGraph& tgt_molgraph, Math::ULMatrix& mtx)
+{
+	extractTopologicalDistances(src_molgraph, tgt_molgraph, mtx);
+}
+
 void Chem::calcTopologicalDistanceMatrix(const MolecularGraph& molgraph, Math::SparseULMatrix& mtx)
 {
 	calcTopologicalDistances(molgraph, mtx);
+}
+
+void Chem::extractTopologicalDistanceMatrix(const MolecularGraph& src_molgraph, const MolecularGraph& tgt_molgraph, Math::SparseULMatrix& mtx)
+{
+	extractTopologicalDistances(src_molgraph, tgt_molgraph, mtx);
 }

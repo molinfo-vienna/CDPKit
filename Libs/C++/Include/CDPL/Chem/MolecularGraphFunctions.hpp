@@ -118,6 +118,12 @@ namespace CDPL
 
 		CDPL_CHEM_API FragmentList::SharedPointer perceiveSSSR(MolecularGraph& molgraph, bool overwrite);
 
+		CDPL_CHEM_API FragmentList::SharedPointer extractSSSR(const MolecularGraph& src_molgraph, const MolecularGraph& tgt_molgraph);
+
+		CDPL_CHEM_API FragmentList::SharedPointer extractSSSR(const MolecularGraph& src_molgraph, MolecularGraph& tgt_molgraph, bool overwrite);
+
+		CDPL_CHEM_API FragmentList::SharedPointer transferSSSR(const MolecularGraph& src_molgraph, MolecularGraph& tgt_molgraph);
+
 
 		CDPL_CHEM_API const Fragment::SharedPointer& getCyclicSubstructure(const MolecularGraph& molgraph);
 
@@ -356,6 +362,12 @@ namespace CDPL
 
 		CDPL_CHEM_API void calcTopologicalDistanceMatrix(const MolecularGraph& molgraph, Math::SparseULMatrix& mtx);
 
+		CDPL_CHEM_API Math::ULMatrix::SharedPointer extractTopologicalDistanceMatrix(const MolecularGraph& src_molgraph, MolecularGraph& tgt_molgraph, bool overwrite);
+
+		CDPL_CHEM_API void extractTopologicalDistanceMatrix(const MolecularGraph& src_molgraph, const MolecularGraph& tgt_molgraph, Math::ULMatrix& mtx);
+
+		CDPL_CHEM_API void extractTopologicalDistanceMatrix(const MolecularGraph& src_molgraph, const MolecularGraph& tgt_molgraph, Math::SparseULMatrix& mtx);
+
 
 		CDPL_CHEM_API const Math::DMatrix::SharedPointer& getGeometricalDistanceMatrix(const MolecularGraph& molgraph);
 
@@ -567,6 +579,24 @@ namespace CDPL
 
 		CDPL_CHEM_API void calcAtomHydrophobicities(MolecularGraph& molgraph, bool overwrite);
 		
+
+		CDPL_CHEM_API bool containsMolecularGraph(const MolecularGraph& molgraph, const MolecularGraph& sub_molgraph, 
+												  bool atoms = true, bool bonds = true);
+
+		CDPL_CHEM_API void getContainedFragments(const MolecularGraph& molgraph, const FragmentList& frag_list, 
+												 FragmentList& cont_frag_list, bool append = false, bool atoms = true, 
+												 bool bonds = true);
+
+		CDPL_CHEM_API void getContainingFragments(const MolecularGraph& molgraph, const FragmentList& frag_list, 
+												 FragmentList& cont_frag_list, bool append = false, bool atoms = true, 
+												 bool bonds = true);
+
+		CDPL_CHEM_API void replaceAtomStereoReferenceAtoms(MolecularGraph& molgraph_copy, const MolecularGraph& molgraph,
+														   std::size_t atom_idx_offs = 0);
+
+		CDPL_CHEM_API void replaceBondStereoReferenceAtoms(MolecularGraph& molgraph_copy, const MolecularGraph& molgraph, 
+														   std::size_t atom_idx_offs = 0, std::size_t bond_start_idx = 0);
+
 		/**
 		 * @}
 		 */
