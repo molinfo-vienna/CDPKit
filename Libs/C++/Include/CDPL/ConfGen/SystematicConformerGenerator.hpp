@@ -75,9 +75,9 @@ namespace CDPL
 
 				Settings();
 
-				void enableHydrogenRotors(bool enable);
+				void enumerateHeteroAtomHydrogens(bool enumerate);
 				
-				bool hydrogenRotorsEnabled() const;
+				bool heteroAtomHydrogensEnumerated() const;
 
 				void enumerateRings(bool enumerate);
 
@@ -124,7 +124,7 @@ namespace CDPL
 				const TorsionLibrary::SharedPointer& getTorsionLibrary() const;
 
 			private:
-				bool                           hRotors;
+				bool                           enumHetAtomHydrogens;
 				bool                           enumRings;
 				bool                           enumNitrogens;
 				bool                           reuseExistingCoords;

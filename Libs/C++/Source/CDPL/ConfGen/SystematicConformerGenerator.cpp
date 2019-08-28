@@ -42,20 +42,20 @@ const double       ConfGen::SystematicConformerGenerator::Settings::DEF_ENERGY_W
 
 
 ConfGen::SystematicConformerGenerator::Settings::Settings(): 
-	hRotors(false), enumRings(true), enumNitrogens(true), reuseExistingCoords(false), eWindow(DEF_ENERGY_WINDOW),
+	enumHetAtomHydrogens(false), enumRings(true), enumNitrogens(true), reuseExistingCoords(false), eWindow(DEF_ENERGY_WINDOW),
 	timeout(DEF_TIMEOUT), maxFragBuildTime(DEF_MAX_FRAG_BUILD_TIME), searchFFieldType(DEF_SEARCH_FORCE_FIELD_TYPE),
 	buildFFieldType(DEF_BUILD_FORCE_FIELD_TYPE), strictAtomTyping(true),
 	fragLib(FragmentLibrary::get()), torLib(TorsionLibrary::get())
 {}
 
-void ConfGen::SystematicConformerGenerator::Settings::enableHydrogenRotors(bool enable)
+void ConfGen::SystematicConformerGenerator::Settings::enumerateHeteroAtomHydrogens(bool enumerate)
 {
-	hRotors = enable; 
+	enumHetAtomHydrogens = enumerate; 
 }
 
-bool ConfGen::SystematicConformerGenerator::Settings::hydrogenRotorsEnabled() const
+bool ConfGen::SystematicConformerGenerator::Settings::heteroAtomHydrogensEnumerated() const
 {
-	return hRotors;
+	return enumHetAtomHydrogens;
 }
 
 void ConfGen::SystematicConformerGenerator::Settings::enumerateRings(bool enumerate)

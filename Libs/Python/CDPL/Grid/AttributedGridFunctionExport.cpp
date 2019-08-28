@@ -32,36 +32,12 @@
 #include "FunctionExports.hpp"
 
 
-#define MAKE_ATTRGRID_FUNC_WRAPPERS(TYPE, FUNC_SUFFIX)              \
-TYPE get##FUNC_SUFFIX##Wrapper(CDPL::Grid::AttributedGrid& grid)    \
-{                                                                   \
-	return get##FUNC_SUFFIX(grid);									\
-}                                                                   \
-                                                                    \
-bool has##FUNC_SUFFIX##Wrapper(CDPL::Grid::AttributedGrid& grid)    \
-{                                                                   \
-	return has##FUNC_SUFFIX(grid);									\
-}
-
-#define EXPORT_ATTRGRID_FUNCS_COPY_REF(FUNC_SUFFIX, ARG_NAME)                                             \
-python::def("get"#FUNC_SUFFIX, &get##FUNC_SUFFIX##Wrapper, python::arg("grid"),                           \
-            python::return_value_policy<python::copy_const_reference>());                                 \
-python::def("has"#FUNC_SUFFIX, &has##FUNC_SUFFIX##Wrapper, python::arg("grid"));                          \
+#define EXPORT_ATTRGRID_FUNCS_COPY_REF(FUNC_SUFFIX, ARG_NAME)                                            \
+python::def("get"#FUNC_SUFFIX, &Grid::get##FUNC_SUFFIX, python::arg("grid"),                             \
+            python::return_value_policy<python::copy_const_reference>());                                \
+python::def("has"#FUNC_SUFFIX, &Grid::has##FUNC_SUFFIX, python::arg("grid"));                            \
 python::def("clear"#FUNC_SUFFIX, &Grid::clear##FUNC_SUFFIX, python::arg("grid"));                        \
 python::def("set"#FUNC_SUFFIX, &Grid::set##FUNC_SUFFIX, (python::arg("grid"), python::arg(#ARG_NAME))); 
-
-#define EXPORT_ATTRGRID_FUNCS(FUNC_SUFFIX, ARG_NAME)                                                      \
-python::def("get"#FUNC_SUFFIX, &get##FUNC_SUFFIX##Wrapper, python::arg("grid"));                          \
-python::def("has"#FUNC_SUFFIX, &has##FUNC_SUFFIX##Wrapper, python::arg("grid"));                          \
-python::def("clear"#FUNC_SUFFIX, &Grid::clear##FUNC_SUFFIX, python::arg("grid"));                        \
-python::def("set"#FUNC_SUFFIX, &Grid::set##FUNC_SUFFIX, (python::arg("grid"), python::arg(#ARG_NAME))); 
-
-
-namespace
-{
-
-	MAKE_ATTRGRID_FUNC_WRAPPERS(const std::string&, Name)
-}
 
 
 void CDPLPythonGrid::exportAttributedGridFunctions()

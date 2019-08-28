@@ -109,7 +109,7 @@ namespace CDPL
 
 			SystematicConformerGeneratorImpl& operator=(const SystematicConformerGeneratorImpl&);
 
-			void init();
+			void init(const Chem::MolecularGraph& molgraph);
 
 			void buildTree(const Chem::MolecularGraph& molgraph);
 
@@ -214,6 +214,7 @@ namespace CDPL
 			NodeList                                        buildFragNodes; 
 			BondLengthDescriptorList                        aromRingSubstBondLens;
 			Util::BitSet                                    hAtomMask;
+			Util::BitSet                                    hRotorAtomMask;
 			UIArray                                         extAtomConnectivities;
 			UIArray                                         tmpExtAtomConnectivities;
 			IndexPairList                                   fragLibEntryAtomIdxMap;

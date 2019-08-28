@@ -35,21 +35,10 @@
 #include "FunctionWrapper.hpp"
 
 
-#define MAKE_FTRCONTAINER_FUNC_WRAPPERS(TYPE, FUNC_SUFFIX)          \
-TYPE get##FUNC_SUFFIX##Wrapper(CDPL::Pharm::FeatureContainer& cntnr)\
-{                                                                   \
-	return get##FUNC_SUFFIX(cntnr);                                 \
-}                                                                   \
-                                                                    \
-bool has##FUNC_SUFFIX##Wrapper(CDPL::Pharm::FeatureContainer& cntnr)\
-{                                                                   \
-	return has##FUNC_SUFFIX(cntnr);                                 \
-}
-
 #define EXPORT_FTRCONTAINER_FUNCS_COPY_REF(FUNC_SUFFIX, ARG_NAME)                                             \
-python::def("get"#FUNC_SUFFIX, &get##FUNC_SUFFIX##Wrapper, python::arg("cntnr"),                              \
+python::def("get"#FUNC_SUFFIX, &Pharm::get##FUNC_SUFFIX, python::arg("cntnr"),                                \
             python::return_value_policy<python::copy_const_reference>());                                     \
-python::def("has"#FUNC_SUFFIX, &has##FUNC_SUFFIX##Wrapper, python::arg("cntnr"));                             \
+python::def("has"#FUNC_SUFFIX, &Pharm::has##FUNC_SUFFIX, python::arg("cntnr"));                               \
 python::def("clear"#FUNC_SUFFIX, &Pharm::clear##FUNC_SUFFIX, python::arg("cntnr"));                           \
 python::def("set"#FUNC_SUFFIX, &Pharm::set##FUNC_SUFFIX, (python::arg("cntnr"), python::arg(#ARG_NAME))); 
 
@@ -57,7 +46,6 @@ python::def("set"#FUNC_SUFFIX, &Pharm::set##FUNC_SUFFIX, (python::arg("cntnr"), 
 namespace
 {
 
-	MAKE_FTRCONTAINER_FUNC_WRAPPERS(const std::string&, Name)
 	MAKE_FUNCTION_WRAPPER5(bool, checkExclusionVolumeClash, const CDPL::Pharm::FeatureContainer&, CDPL::Chem::AtomContainer&,
 						   const CDPL::Chem::Atom3DCoordinatesFunction&, const CDPL::Math::Matrix4D&, double);
 }

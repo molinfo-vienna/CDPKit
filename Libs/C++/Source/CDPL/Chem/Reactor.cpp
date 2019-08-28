@@ -354,8 +354,8 @@ Chem::Molecule* Chem::Reactor::copyReactants(const ReactionSite& rxn_site)
 		assert(tgt_prod->getNumAtoms() - prev_num_atoms == reac.getNumAtoms());
 		assert(tgt_prod->getNumBonds() - prev_num_bonds == reac.getNumBonds());
 
-		replaceAtomStereoReferenceAtoms(*tgt_prod, reac, prev_num_atoms);
-		replaceBondStereoReferenceAtoms(*tgt_prod, reac, prev_num_atoms);
+		copyAtomStereoDescriptors(*tgt_prod, reac, prev_num_atoms);
+		copyBondStereoDescriptors(*tgt_prod, reac, prev_num_atoms);
 
 		Molecule::AtomIterator atoms_end = tgt_prod->getAtomsEnd();
 		Molecule::ConstAtomIterator ra_it = reac.getAtomsBegin();

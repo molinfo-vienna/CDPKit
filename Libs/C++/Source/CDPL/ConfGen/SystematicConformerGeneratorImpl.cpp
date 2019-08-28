@@ -247,8 +247,8 @@ ConfGen::SystematicConformerGeneratorImpl::SystematicConformerGeneratorImpl()
 	torsionRuleMatcher.reportUniqueMappingsOnly(true);
 	torsionRuleMatcher.stopAtFirstMatchingRule(true);
 
-	automorphGroupSearch.includeIdentityMapping(false);
-	automorphGroupSearch.setAtomPropertyFlags(AtomPropertyFlag::TYPE | AtomPropertyFlag::FORMAL_CHARGE | 
+	automorphGroupSearch.includeIdentityMapping(true);
+	automorphGroupSearch.setAtomPropertyFlags(AtomPropertyFlag::TYPE | AtomPropertyFlag::FORMAL_CHARGE | AtomPropertyFlag::ISOTOPE | 
 											  AtomPropertyFlag::CONFIGURATION | AtomPropertyFlag::AROMATICITY |
 											  AtomPropertyFlag::EXPLICIT_BOND_COUNT | AtomPropertyFlag::HYBRIDIZATION_STATE);
 	automorphGroupSearch.setFoundMappingCallback(
@@ -271,7 +271,7 @@ ConfGen::SystematicConformerGeneratorImpl::getSettings() const
 ConfGen::SystematicConformerGeneratorImpl::Status 
 ConfGen::SystematicConformerGeneratorImpl::generate(const Chem::MolecularGraph& molgraph)
 {
-	init();
+	init(molgraph);
 
 	buildTree(molgraph);
 	buildAtomIndexMaps(fragTree);
@@ -303,15 +303,20 @@ ConfGen::SystematicConformerGeneratorImpl::generate(const Chem::MolecularGraph& 
 	return Status::SUCCESS;
 }
 
-void ConfGen::SystematicConformerGeneratorImpl::init()
+void ConfGen::SystematicConformerGeneratorImpl::init(const Chem::MolecularGraph& molgraph)
 {
 	timer.start();	
 	extAtomConnectivities.clear();
 	freeCoordArrays.clear();
 
+	hRotorAtomMask.resize(molgraph.getNumAtoms());
+	hRotorAtomMask.reset();
+	
 	std::for_each(allocCoordArrays.begin(), allocCoordArrays.end(), 
 				  boost::bind(&SystematicConformerGeneratorImpl::freeVector3DArray, this, 
 							  boost::bind<Math::Vector3DArray*>(&Math::Vector3DArray::SharedPointer::get, _1)));
+
+	buildAtomTypeMask(molgraph, hAtomMask, Chem::AtomType::H, true);
 }
 
 void ConfGen::SystematicConformerGeneratorImpl::buildTree(const Chem::MolecularGraph& molgraph)
@@ -501,8 +506,18 @@ void ConfGen::SystematicConformerGeneratorImpl::setupTorsions(FragmentTreeNode& 
 			}
 		}
 
-//		bool is_h_rotor = (order == 1 && (getHeavyBondCount(*bond_atoms[0], frag) == 1 || getHeavyBondCount(*bond_atoms[1], frag) == 1));
+		if (order == 1) {
+			const MolecularGraph& root_frag = fragTree.getFragment();
+			
+			if (getHeavyBondCount(*bond_atoms[0], root_frag) == 1)
+				for (AtomList::const_iterator it = nbr_atoms1.begin(), end = nbr_atoms1.end(); it != end; ++it)
+					hRotorAtomMask.set(root_frag.getAtomIndex(**it));
 
+			if (getHeavyBondCount(*bond_atoms[1], root_frag) == 1)
+				for (AtomList::const_iterator it = nbr_atoms2.begin(), end = nbr_atoms2.end(); it != end; ++it)
+					hRotorAtomMask.set(root_frag.getAtomIndex(**it));
+		}
+				
 		if (node.getTorsionAngles().empty()) {
 			std::size_t rot_sym_order = std::max(getRotationalSymmetryOrder(*bond_atoms[0], *bond_atoms[1], nbr_atoms1, node),
 												 getRotationalSymmetryOrder(*bond_atoms[1], *bond_atoms[0], nbr_atoms2, node));
@@ -1282,9 +1297,6 @@ void ConfGen::SystematicConformerGeneratorImpl::calcExtendedAtomConnectivities()
 		return;
 
 	const MolecularGraph& root_frag = fragTree.getFragment();
-
-	buildAtomTypeMask(root_frag, hAtomMask, AtomType::H, true);
-
 	std::size_t num_atoms = root_frag.getNumAtoms();
 	std::size_t last_num_classes = 0;
 
@@ -1465,6 +1477,8 @@ std::size_t ConfGen::SystematicConformerGeneratorImpl::getRotationalSymmetryOrde
 	using namespace Chem;
 
 	unsigned int nbr_atom_type = 0;
+	std::size_t nbr_atom_iso = 0;
+	std::size_t nbr_bond_order = 0;
 	bool first = true;
 
 	const MolecularGraph& root_frag = fragTree.getFragment();
@@ -1477,11 +1491,19 @@ std::size_t ConfGen::SystematicConformerGeneratorImpl::getRotationalSymmetryOrde
 
 		if (first) {
 			nbr_atom_type = getType(nbr_atom);
+			nbr_atom_iso = getIsotope(nbr_atom);
+			nbr_bond_order = getOrder(atom.getBondToAtom(nbr_atom));
 			first = false;
 			continue;
 		}
 
 		if (getType(nbr_atom) != nbr_atom_type)
+			return 1;
+
+		if (getIsotope(nbr_atom) != nbr_atom_iso)
+			return 1;
+
+		if (getOrder(atom.getBondToAtom(nbr_atom)) != nbr_bond_order)
 			return 1;
 	}
 

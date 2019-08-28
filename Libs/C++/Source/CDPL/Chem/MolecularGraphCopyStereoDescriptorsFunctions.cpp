@@ -1,7 +1,7 @@
 /* -*- mode: c++; c-basic-offset: 4; tab-width: 4; indent-tabs-mode: t -*- */
 
 /* 
- * MolecularGraphReplaceStereoRefAtomsFunctions.cpp 
+ * MolecularGraphCopyStereoDescriptorsFunctions.cpp 
  *
  * This file is part of the Chemical Data Processing Toolkit
  *
@@ -37,8 +37,8 @@
 using namespace CDPL; 
 
 
-void Chem::replaceAtomStereoReferenceAtoms(MolecularGraph& molgraph_copy, const MolecularGraph& molgraph,
-										   std::size_t atom_idx_offs)
+void Chem::copyAtomStereoDescriptors(MolecularGraph& molgraph_copy, const MolecularGraph& molgraph,
+									 std::size_t atom_idx_offs)
 {
 	MolecularGraph::AtomIterator atoms_end = molgraph_copy.getAtomsEnd();
 	std::size_t i = 0;
@@ -73,8 +73,8 @@ void Chem::replaceAtomStereoReferenceAtoms(MolecularGraph& molgraph_copy, const 
 	}
 }
 
-void Chem::replaceBondStereoReferenceAtoms(MolecularGraph& molgraph_copy, const MolecularGraph& molgraph, 
-										   std::size_t atom_idx_offs, std::size_t bond_start_idx)
+void Chem::copyBondStereoDescriptors(MolecularGraph& molgraph_copy, const MolecularGraph& molgraph, 
+									 std::size_t atom_idx_offs, std::size_t bond_start_idx)
 {
 	MolecularGraph::BondIterator bonds_end = molgraph_copy.getBondsEnd();
 	std::size_t i = 0;

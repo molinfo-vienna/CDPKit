@@ -88,7 +88,7 @@ Chem::FragmentList::SharedPointer Chem::extractSSSR(const MolecularGraph& src_mo
 	return tgt_sssr;
 }
 
-Chem::FragmentList::SharedPointer Chem::transferSSSR(const MolecularGraph& src_molgraph, MolecularGraph& tgt_molgraph)
+Chem::FragmentList::SharedPointer Chem::copySSSR(const MolecularGraph& src_molgraph, MolecularGraph& tgt_molgraph)
 {
 	const FragmentList::SharedPointer& src_sssr = getSSSR(src_molgraph);
 	FragmentList::SharedPointer tgt_sssr(new FragmentList());

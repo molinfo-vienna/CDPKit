@@ -49,9 +49,9 @@ void CDPLPythonConfGen::exportSystematicConformerGenerator()
 		.def(CDPLPythonBase::ObjectIdentityCheckVisitor<ConfGen::SystematicConformerGenerator::Settings>())
 		.def("assign", CDPLPythonBase::copyAssOp(&ConfGen::SystematicConformerGenerator::Settings::operator=), 
 			 (python::arg("self"), python::arg("settings")), python::return_self<>())
-		.def("enableHydrogenRotors", &ConfGen::SystematicConformerGenerator::Settings::enableHydrogenRotors, 
+		.def("enumerateHeteroAtomHydrogens", &ConfGen::SystematicConformerGenerator::Settings::enumerateHeteroAtomHydrogens, 
 			 (python::arg("self"), python::arg("enable")))
-		.def("hydrogenRotorsEnabled", &ConfGen::SystematicConformerGenerator::Settings::hydrogenRotorsEnabled, 
+		.def("heteroAtomHydrogensEnumerated", &ConfGen::SystematicConformerGenerator::Settings::heteroAtomHydrogensEnumerated, 
 			 python::arg("self"))
 		.def("enumerateRings", &ConfGen::SystematicConformerGenerator::Settings::enumerateRings, 
 			 (python::arg("self"), python::arg("enumerate")))
@@ -98,8 +98,8 @@ void CDPLPythonConfGen::exportSystematicConformerGenerator()
 		.def("getBuildForceFieldType", &ConfGen::SystematicConformerGenerator::Settings::getBuildForceFieldType, 
 			 python::arg("self"))
 
-		.add_property("hydrogenRotors", &ConfGen::SystematicConformerGenerator::Settings::hydrogenRotorsEnabled,
-					  &ConfGen::SystematicConformerGenerator::Settings::enableHydrogenRotors)
+		.add_property("enumHeteroAtomHydrogens", &ConfGen::SystematicConformerGenerator::Settings::heteroAtomHydrogensEnumerated,
+					  &ConfGen::SystematicConformerGenerator::Settings::enumerateHeteroAtomHydrogens)
 		.add_property("enumRings", &ConfGen::SystematicConformerGenerator::Settings::ringsEnumerated,
 					  &ConfGen::SystematicConformerGenerator::Settings::enumerateRings)
 		.add_property("enumNitrogens", &ConfGen::SystematicConformerGenerator::Settings::nitrogensEnumerated,

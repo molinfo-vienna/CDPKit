@@ -150,7 +150,7 @@ BOOST_AUTO_TEST_CASE(DGCoordinatesOptimizerTest)
 		double orig_vol = calcVolume(VOL_CONSTRAINT_INDS[i], test_points);
 		double opt_vol = calcVolume(VOL_CONSTRAINT_INDS[i], opt_coords);
 
-		BOOST_MESSAGE("orig vol = " << orig_vol << ", opt vol = " << opt_vol);
+		//BOOST_MESSAGE("orig vol = " << orig_vol << ", opt vol = " << opt_vol);
 		double diff = orig_vol - opt_vol;
 
 		vol_rms_dev += diff * diff;

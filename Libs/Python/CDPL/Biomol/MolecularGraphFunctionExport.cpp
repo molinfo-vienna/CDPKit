@@ -30,53 +30,20 @@
 #include "CDPL/Chem/MolecularGraph.hpp"
 
 #include "FunctionExports.hpp"
-#include "FunctionWrapper.hpp"
 
-
-#define MAKE_MOLGRAPH_FUNC_WRAPPERS(TYPE, FUNC_SUFFIX)                 \
-TYPE get##FUNC_SUFFIX##Wrapper(CDPL::Chem::MolecularGraph& molgraph)   \
-{                                                                      \
-	return CDPL::Biomol::get##FUNC_SUFFIX(molgraph);				   \
-}                                                                      \
-                                                                       \
-bool has##FUNC_SUFFIX##Wrapper(CDPL::Chem::MolecularGraph& molgraph)   \
-{                                                                      \
-	return CDPL::Biomol::has##FUNC_SUFFIX(molgraph);                   \
-}
 
 #define EXPORT_MOLGRAPH_FUNCS(FUNC_SUFFIX, ARG_NAME)                                                             \
-python::def("get"#FUNC_SUFFIX, &get##FUNC_SUFFIX##Wrapper, python::arg("molgraph"));                             \
-python::def("has"#FUNC_SUFFIX, &has##FUNC_SUFFIX##Wrapper, python::arg("molgraph"));                             \
+python::def("get"#FUNC_SUFFIX, &Biomol::get##FUNC_SUFFIX, python::arg("molgraph"));                              \
+python::def("has"#FUNC_SUFFIX, &Biomol::has##FUNC_SUFFIX, python::arg("molgraph"));                              \
 python::def("clear"#FUNC_SUFFIX, &Biomol::clear##FUNC_SUFFIX, python::arg("molgraph"));                          \
 python::def("set"#FUNC_SUFFIX, &Biomol::set##FUNC_SUFFIX, (python::arg("molgraph"), python::arg(#ARG_NAME))); 
 
 #define EXPORT_MOLGRAPH_FUNCS_COPY_REF(FUNC_SUFFIX, ARG_NAME)                                                    \
-python::def("get"#FUNC_SUFFIX, &get##FUNC_SUFFIX##Wrapper, python::arg("molgraph"),                              \
+python::def("get"#FUNC_SUFFIX, &Biomol::get##FUNC_SUFFIX, python::arg("molgraph"),                               \
             python::return_value_policy<python::copy_const_reference>());                                        \
-python::def("has"#FUNC_SUFFIX, &has##FUNC_SUFFIX##Wrapper, python::arg("molgraph"));                             \
+python::def("has"#FUNC_SUFFIX, &Biomol::has##FUNC_SUFFIX, python::arg("molgraph"));                              \
 python::def("clear"#FUNC_SUFFIX, &Biomol::clear##FUNC_SUFFIX, python::arg("molgraph"));                          \
 python::def("set"#FUNC_SUFFIX, &Biomol::set##FUNC_SUFFIX, (python::arg("molgraph"), python::arg(#ARG_NAME))); 
-
-#define EXPORT_MOLGRAPH_FUNCS_COPY_REF_CW(FUNC_SUFFIX, ARG_NAME)                                                 \
-python::def("get"#FUNC_SUFFIX, &get##FUNC_SUFFIX##Wrapper, python::arg("molgraph"),                              \
-            python::return_value_policy<python::copy_const_reference,                                            \
-			python::with_custodian_and_ward_postcall<0, 1> >());                                                 \
-python::def("has"#FUNC_SUFFIX, &has##FUNC_SUFFIX##Wrapper, python::arg("molgraph"));                             \
-python::def("clear"#FUNC_SUFFIX, &Biomol::clear##FUNC_SUFFIX, python::arg("molgraph"));                          \
-python::def("set"#FUNC_SUFFIX, &Biomol::set##FUNC_SUFFIX, (python::arg("molgraph"), python::arg(#ARG_NAME)),     \
-			python::with_custodian_and_ward<1, 2>());                                                            
-
-
-namespace
-{
-
-	MAKE_MOLGRAPH_FUNC_WRAPPERS(const std::string&, ResidueCode)
-	MAKE_MOLGRAPH_FUNC_WRAPPERS(long, ResidueSequenceNumber)
-	MAKE_MOLGRAPH_FUNC_WRAPPERS(char, ResidueInsertionCode)
-	MAKE_MOLGRAPH_FUNC_WRAPPERS(const std::string&, ChainID)
-	MAKE_MOLGRAPH_FUNC_WRAPPERS(std::size_t, ModelNumber)
-	MAKE_MOLGRAPH_FUNC_WRAPPERS(const CDPL::Biomol::PDBData::SharedPointer&, PDBData)
-}
 
 
 void CDPLPythonBiomol::exportMolecularGraphFunctions()

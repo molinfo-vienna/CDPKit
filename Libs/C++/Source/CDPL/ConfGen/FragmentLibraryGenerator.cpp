@@ -300,8 +300,8 @@ void ConfGen::FragmentLibraryGenerator::processFragment(const Chem::MolecularGra
 	
 			fl_entry->copy(fragLibEntry);
 
-			replaceAtomStereoReferenceAtoms(*fl_entry, fragLibEntry, 0);
-			replaceBondStereoReferenceAtoms(*fl_entry, fragLibEntry, 0, 0);
+			copyAtomStereoDescriptors(*fl_entry, fragLibEntry, 0);
+			copyBondStereoDescriptors(*fl_entry, fragLibEntry, 0, 0);
 
 			fl_entry->clearProperties();
 

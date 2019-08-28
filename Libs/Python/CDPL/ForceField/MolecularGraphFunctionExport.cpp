@@ -30,50 +30,16 @@
 #include "CDPL/ForceField/MolecularGraphFunctions.hpp"
 
 #include "FunctionExports.hpp"
-#include "FunctionWrapper.hpp"
 
-
-#define MAKE_MOLGRAPH_FUNC_WRAPPERS(TYPE, FUNC_SUFFIX)                 \
-TYPE get##FUNC_SUFFIX##Wrapper(CDPL::Chem::MolecularGraph& molgraph)   \
-{                                                                      \
-	return CDPL::ForceField::get##FUNC_SUFFIX(molgraph);               \
-}                                                                      \
-                                                                       \
-bool has##FUNC_SUFFIX##Wrapper(CDPL::Chem::MolecularGraph& molgraph)   \
-{                                                                      \
-	return CDPL::ForceField::has##FUNC_SUFFIX(molgraph);               \
-}
-
-#define EXPORT_MOLGRAPH_FUNCS(FUNC_SUFFIX, ARG_NAME)                                                             \
-python::def("get"#FUNC_SUFFIX, &get##FUNC_SUFFIX##Wrapper, python::arg("molgraph"));                             \
-python::def("has"#FUNC_SUFFIX, &has##FUNC_SUFFIX##Wrapper, python::arg("molgraph"));                             \
-python::def("clear"#FUNC_SUFFIX, &ForceField::clear##FUNC_SUFFIX, python::arg("molgraph"));                      \
-python::def("set"#FUNC_SUFFIX, &ForceField::set##FUNC_SUFFIX, (python::arg("molgraph"), python::arg(#ARG_NAME))); 
-
-#define EXPORT_MOLGRAPH_FUNCS_COPY_REF(FUNC_SUFFIX, ARG_NAME)                                                    \
-python::def("get"#FUNC_SUFFIX, &get##FUNC_SUFFIX##Wrapper, python::arg("molgraph"),                              \
-            python::return_value_policy<python::copy_const_reference>());                                        \
-python::def("has"#FUNC_SUFFIX, &has##FUNC_SUFFIX##Wrapper, python::arg("molgraph"));                             \
-python::def("clear"#FUNC_SUFFIX, &ForceField::clear##FUNC_SUFFIX, python::arg("molgraph"));                      \
-python::def("set"#FUNC_SUFFIX, &ForceField::set##FUNC_SUFFIX, (python::arg("molgraph"), python::arg(#ARG_NAME))); 
 
 #define EXPORT_MOLGRAPH_FUNCS_COPY_REF_CW(FUNC_SUFFIX, ARG_NAME)                                                 \
-python::def("get"#FUNC_SUFFIX, &get##FUNC_SUFFIX##Wrapper, python::arg("molgraph"),                              \
+python::def("get"#FUNC_SUFFIX, &ForceField::get##FUNC_SUFFIX, python::arg("molgraph"),                           \
             python::return_value_policy<python::copy_const_reference,                                            \
 			python::with_custodian_and_ward_postcall<0, 1> >());                                                 \
-python::def("has"#FUNC_SUFFIX, &has##FUNC_SUFFIX##Wrapper, python::arg("molgraph"));                             \
+python::def("has"#FUNC_SUFFIX, &ForceField::has##FUNC_SUFFIX, python::arg("molgraph"));                          \
 python::def("clear"#FUNC_SUFFIX, &ForceField::clear##FUNC_SUFFIX, python::arg("molgraph"));                      \
 python::def("set"#FUNC_SUFFIX, &ForceField::set##FUNC_SUFFIX, (python::arg("molgraph"), python::arg(#ARG_NAME)), \
 			python::with_custodian_and_ward<1, 2>());                                                            
-
-
-namespace
-{
-
-	MAKE_MOLGRAPH_FUNC_WRAPPERS(const CDPL::Chem::FragmentList::SharedPointer&, MMFF94AromaticRings)
-
-	MAKE_FUNCTION_WRAPPER1(CDPL::Chem::FragmentList::SharedPointer, perceiveMMFF94AromaticRings, CDPL::Chem::MolecularGraph&)
-}
 
 
 void CDPLPythonForceField::exportMolecularGraphFunctions()
@@ -81,7 +47,8 @@ void CDPLPythonForceField::exportMolecularGraphFunctions()
 	using namespace boost;
 	using namespace CDPL;
 	
-	python::def("perceiveMMFF94AromaticRings", &perceiveMMFF94AromaticRingsWrapper1, python::arg("molgraph"));
+	python::def("perceiveMMFF94AromaticRings", static_cast<Chem::FragmentList::SharedPointer (*)(const Chem::MolecularGraph&)>(&ForceField::perceiveMMFF94AromaticRings),
+				python::arg("molgraph"));
 	python::def("perceiveMMFF94AromaticRings", static_cast<Chem::FragmentList::SharedPointer (*)(Chem::MolecularGraph&, bool)>(&ForceField::perceiveMMFF94AromaticRings),
 				(python::arg("molgraph"), python::arg("overwrite")));
 

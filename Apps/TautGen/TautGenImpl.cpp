@@ -294,8 +294,8 @@ private:
 				tautScore = score;
 				hashCode = hash;
 
-				replaceAtomStereoReferenceAtoms(stdTautomer, taut, 0);
-				replaceBondStereoReferenceAtoms(stdTautomer, taut, 0, 0);
+				copyAtomStereoDescriptors(stdTautomer, taut, 0);
+				copyBondStereoDescriptors(stdTautomer, taut, 0, 0);
 			}
 		}
 

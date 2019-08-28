@@ -31,38 +31,26 @@
 #include "CDPL/Chem/INCHIReturnCode.hpp"
 
 #include "FunctionExports.hpp"
-#include "FunctionWrapper.hpp"
 
-
-#define MAKE_MOLGRAPH_FUNC_WRAPPERS(TYPE, FUNC_SUFFIX)                 \
-TYPE get##FUNC_SUFFIX##Wrapper(CDPL::Chem::MolecularGraph& molgraph)   \
-{                                                                      \
-	return get##FUNC_SUFFIX(molgraph);                                 \
-}                                                                      \
-                                                                       \
-bool has##FUNC_SUFFIX##Wrapper(CDPL::Chem::MolecularGraph& molgraph)   \
-{                                                                      \
-	return has##FUNC_SUFFIX(molgraph);                                 \
-}
 
 #define EXPORT_MOLGRAPH_FUNCS(FUNC_SUFFIX, ARG_NAME)                                                             \
-python::def("get"#FUNC_SUFFIX, &get##FUNC_SUFFIX##Wrapper, python::arg("molgraph"));                             \
-python::def("has"#FUNC_SUFFIX, &has##FUNC_SUFFIX##Wrapper, python::arg("molgraph"));                             \
+python::def("get"#FUNC_SUFFIX, &Chem::get##FUNC_SUFFIX, python::arg("molgraph"));                                \
+python::def("has"#FUNC_SUFFIX, &Chem::has##FUNC_SUFFIX, python::arg("molgraph"));                                \
 python::def("clear"#FUNC_SUFFIX, &Chem::clear##FUNC_SUFFIX, python::arg("molgraph"));                            \
 python::def("set"#FUNC_SUFFIX, &Chem::set##FUNC_SUFFIX, (python::arg("molgraph"), python::arg(#ARG_NAME))); 
 
 #define EXPORT_MOLGRAPH_FUNCS_COPY_REF(FUNC_SUFFIX, ARG_NAME)                                                    \
-python::def("get"#FUNC_SUFFIX, &get##FUNC_SUFFIX##Wrapper, python::arg("molgraph"),                              \
+python::def("get"#FUNC_SUFFIX, &Chem::get##FUNC_SUFFIX, python::arg("molgraph"),                                 \
             python::return_value_policy<python::copy_const_reference>());                                        \
-python::def("has"#FUNC_SUFFIX, &has##FUNC_SUFFIX##Wrapper, python::arg("molgraph"));                             \
+python::def("has"#FUNC_SUFFIX, &Chem::has##FUNC_SUFFIX, python::arg("molgraph"));                                \
 python::def("clear"#FUNC_SUFFIX, &Chem::clear##FUNC_SUFFIX, python::arg("molgraph"));                            \
 python::def("set"#FUNC_SUFFIX, &Chem::set##FUNC_SUFFIX, (python::arg("molgraph"), python::arg(#ARG_NAME))); 
 
 #define EXPORT_MOLGRAPH_FUNCS_COPY_REF_CW(FUNC_SUFFIX, ARG_NAME)                                                 \
-python::def("get"#FUNC_SUFFIX, &get##FUNC_SUFFIX##Wrapper, python::arg("molgraph"),                              \
+python::def("get"#FUNC_SUFFIX, &Chem::get##FUNC_SUFFIX, python::arg("molgraph"),                                 \
             python::return_value_policy<python::copy_const_reference,                                            \
 			python::with_custodian_and_ward_postcall<0, 1> >());                                                 \
-python::def("has"#FUNC_SUFFIX, &has##FUNC_SUFFIX##Wrapper, python::arg("molgraph"));                             \
+python::def("has"#FUNC_SUFFIX, &Chem::has##FUNC_SUFFIX, python::arg("molgraph"));                                \
 python::def("clear"#FUNC_SUFFIX, &Chem::clear##FUNC_SUFFIX, python::arg("molgraph"));                            \
 python::def("set"#FUNC_SUFFIX, &Chem::set##FUNC_SUFFIX, (python::arg("molgraph"), python::arg(#ARG_NAME)),       \
 			python::with_custodian_and_ward<1, 2>());                                                            
@@ -70,104 +58,6 @@ python::def("set"#FUNC_SUFFIX, &Chem::set##FUNC_SUFFIX, (python::arg("molgraph")
 
 namespace
 {
-
-	MAKE_MOLGRAPH_FUNC_WRAPPERS(const std::string&, Name)
-	MAKE_MOLGRAPH_FUNC_WRAPPERS(const std::string&, MDLUserInitials)
-	MAKE_MOLGRAPH_FUNC_WRAPPERS(const std::string&, MDLProgramName)
-	MAKE_MOLGRAPH_FUNC_WRAPPERS(std::time_t, MDLTimestamp)
-	MAKE_MOLGRAPH_FUNC_WRAPPERS(std::size_t, MDLRegistryNumber)
-	MAKE_MOLGRAPH_FUNC_WRAPPERS(std::size_t, MDLDimensionality)
-	MAKE_MOLGRAPH_FUNC_WRAPPERS(const std::string&, MDLComment)
-	MAKE_MOLGRAPH_FUNC_WRAPPERS(const CDPL::Chem::StringDataBlock::SharedPointer&, StructureData)
-	MAKE_MOLGRAPH_FUNC_WRAPPERS(CDPL::Base::uint64, HashCode)
-	MAKE_MOLGRAPH_FUNC_WRAPPERS(unsigned int, MDLCTABVersion)
-	MAKE_MOLGRAPH_FUNC_WRAPPERS(long, MDLScalingFactor1)
-	MAKE_MOLGRAPH_FUNC_WRAPPERS(double, MDLScalingFactor2)
-	MAKE_MOLGRAPH_FUNC_WRAPPERS(double, MDLEnergy)
-	MAKE_MOLGRAPH_FUNC_WRAPPERS(bool, MDLChiralFlag)
-	MAKE_MOLGRAPH_FUNC_WRAPPERS(double, StoichiometricNumber)
-	MAKE_MOLGRAPH_FUNC_WRAPPERS(const CDPL::Chem::MatchExpression<CDPL::Chem::MolecularGraph>::SharedPointer&, MatchExpression)
-	MAKE_MOLGRAPH_FUNC_WRAPPERS(const CDPL::Chem::FragmentList::SharedPointer&, ComponentGroups)
-	MAKE_MOLGRAPH_FUNC_WRAPPERS(const CDPL::Chem::FragmentList::SharedPointer&, Components)
-	MAKE_MOLGRAPH_FUNC_WRAPPERS(const CDPL::Chem::FragmentList::SharedPointer&, Rings)
-	MAKE_MOLGRAPH_FUNC_WRAPPERS(const CDPL::Chem::FragmentList::SharedPointer&, SSSR)
-	MAKE_MOLGRAPH_FUNC_WRAPPERS(const CDPL::Chem::Fragment::SharedPointer&, CyclicSubstructure)
-	MAKE_MOLGRAPH_FUNC_WRAPPERS(const CDPL::Chem::Fragment::SharedPointer&, AromaticSubstructure)
-	MAKE_MOLGRAPH_FUNC_WRAPPERS(const CDPL::Math::ULMatrix::SharedPointer&, TopologicalDistanceMatrix)
-	MAKE_MOLGRAPH_FUNC_WRAPPERS(const CDPL::Math::DMatrix::SharedPointer&, GeometricalDistanceMatrix)
-	MAKE_MOLGRAPH_FUNC_WRAPPERS(std::size_t, ConformationIndex)
-	MAKE_MOLGRAPH_FUNC_WRAPPERS(const CDPL::Math::DVector::SharedPointer&, ConformationEnergies)
-	MAKE_MOLGRAPH_FUNC_WRAPPERS(unsigned int, MOL2ChargeType)
-	MAKE_MOLGRAPH_FUNC_WRAPPERS(unsigned int, MOL2MoleculeType)
-
-	MAKE_FUNCTION_WRAPPER1(const CDPL::Chem::MatchConstraintList::SharedPointer&, getMatchConstraints, CDPL::Chem::MolecularGraph&)
-	MAKE_FUNCTION_WRAPPER1(bool, hasMatchConstraints, CDPL::Chem::MolecularGraph&)
-	MAKE_FUNCTION_WRAPPER1(CDPL::Chem::MatchExpression<CDPL::Chem::MolecularGraph>::SharedPointer, buildMatchExpression, CDPL::Chem::MolecularGraph&)
-	MAKE_FUNCTION_WRAPPER1(CDPL::Chem::FragmentList::SharedPointer, perceiveComponentGroups, CDPL::Chem::MolecularGraph&)
-	MAKE_FUNCTION_WRAPPER1(CDPL::Chem::FragmentList::SharedPointer, perceiveComponents, CDPL::Chem::MolecularGraph&)
-	MAKE_FUNCTION_WRAPPER1(CDPL::Chem::FragmentList::SharedPointer, perceiveRings, CDPL::Chem::MolecularGraph&)
-	MAKE_FUNCTION_WRAPPER1(CDPL::Chem::FragmentList::SharedPointer, perceiveSSSR, CDPL::Chem::MolecularGraph&)
-	MAKE_FUNCTION_WRAPPER1(CDPL::Chem::FragmentList::SharedPointer, perceiveAromaticRings, CDPL::Chem::MolecularGraph&)
-	MAKE_FUNCTION_WRAPPER1(CDPL::Chem::FragmentList::SharedPointer, extractAromaticSSSRSubset, CDPL::Chem::MolecularGraph&)
-	MAKE_FUNCTION_WRAPPER1(CDPL::Chem::Fragment::SharedPointer, perceiveCyclicSubstructure, CDPL::Chem::MolecularGraph&)
-	MAKE_FUNCTION_WRAPPER1(CDPL::Chem::Fragment::SharedPointer, perceiveAromaticSubstructure, CDPL::Chem::MolecularGraph&)
-	MAKE_FUNCTION_WRAPPER1(std::size_t, calcTopologicalRadius, CDPL::Chem::MolecularGraph&);
-	MAKE_FUNCTION_WRAPPER1(std::size_t, calcTopologicalDiameter, CDPL::Chem::MolecularGraph&);
-	MAKE_FUNCTION_WRAPPER1(double, calcRingComplexity, CDPL::Chem::MolecularGraph&);
-	MAKE_FUNCTION_WRAPPER1(double, calcKierShape1, CDPL::Chem::MolecularGraph&);
-	MAKE_FUNCTION_WRAPPER1(double, calcKierShape2, CDPL::Chem::MolecularGraph&);
-	MAKE_FUNCTION_WRAPPER1(double, calcKierShape3, CDPL::Chem::MolecularGraph&);
-	MAKE_FUNCTION_WRAPPER1(std::size_t, calcWienerIndex, CDPL::Chem::MolecularGraph&);
-	MAKE_FUNCTION_WRAPPER1(double, calcRandicIndex, CDPL::Chem::MolecularGraph&);
-	MAKE_FUNCTION_WRAPPER1(std::size_t, calcZagrebIndex1, CDPL::Chem::MolecularGraph&);
-	MAKE_FUNCTION_WRAPPER1(std::size_t, calcZagrebIndex2, CDPL::Chem::MolecularGraph&);
-	MAKE_FUNCTION_WRAPPER1(std::size_t, calcTotalWalkCount, CDPL::Chem::MolecularGraph&);
-	MAKE_FUNCTION_WRAPPER1(std::size_t, calcCyclomaticNumber, CDPL::Chem::MolecularGraph&);
-	MAKE_FUNCTION_WRAPPER1(std::size_t, getAtomCount, CDPL::Chem::MolecularGraph&);
-	MAKE_FUNCTION_WRAPPER1(std::size_t, getImplicitHydrogenCount, CDPL::Chem::MolecularGraph&);
-	MAKE_FUNCTION_WRAPPER1(std::size_t, getChainAtomCount, CDPL::Chem::MolecularGraph&);
-	MAKE_FUNCTION_WRAPPER1(std::size_t, getHydrogenAcceptorAtomCount, CDPL::Chem::MolecularGraph&);
-	MAKE_FUNCTION_WRAPPER1(std::size_t, getHydrogenDonorAtomCount, CDPL::Chem::MolecularGraph&);
-	MAKE_FUNCTION_WRAPPER1(std::size_t, getCompleteBondCount, CDPL::Chem::MolecularGraph&);
-	MAKE_FUNCTION_WRAPPER1(std::size_t, getBondCount, CDPL::Chem::MolecularGraph&);
-	MAKE_FUNCTION_WRAPPER1(std::size_t, getHydrogenBondCount, CDPL::Chem::MolecularGraph&);
-	MAKE_FUNCTION_WRAPPER1(std::size_t, getChainBondCount, CDPL::Chem::MolecularGraph&);
-	MAKE_FUNCTION_WRAPPER1(std::size_t, getComponentCount, CDPL::Chem::MolecularGraph&);
-	MAKE_FUNCTION_WRAPPER1(double, calcMass, CDPL::Chem::MolecularGraph&);
-	MAKE_FUNCTION_WRAPPER1(double, calcXLogP, CDPL::Chem::MolecularGraph&);
-	MAKE_FUNCTION_WRAPPER1(double, calcLogS, CDPL::Chem::MolecularGraph&);
-	MAKE_FUNCTION_WRAPPER1(double, calcTPSA, CDPL::Chem::MolecularGraph&);
-	MAKE_FUNCTION_WRAPPER1(std::size_t, calcRuleOfFiveScore, CDPL::Chem::MolecularGraph&);
-	MAKE_FUNCTION_WRAPPER1(double, calcMeanPolarizability, CDPL::Chem::MolecularGraph&);
-	MAKE_FUNCTION_WRAPPER1(double, calcMolecularComplexity, CDPL::Chem::MolecularGraph&);
-
-	MAKE_FUNCTION_WRAPPER2(void, extractReactionCenter, CDPL::Chem::MolecularGraph&, CDPL::Chem::Fragment&)
-	MAKE_FUNCTION_WRAPPER2(void, buildAdjacencyMatrix, CDPL::Chem::MolecularGraph&, CDPL::Math::ULMatrix&)
-	MAKE_FUNCTION_WRAPPER2(void, buildIncidenceMatrix, CDPL::Chem::MolecularGraph&, CDPL::Math::ULMatrix&)
-	MAKE_FUNCTION_WRAPPER2(void, buildBondMatrix, CDPL::Chem::MolecularGraph&, CDPL::Math::ULMatrix&)
-	MAKE_FUNCTION_WRAPPER2(void, buildBondElectronMatrix, CDPL::Chem::MolecularGraph&, CDPL::Math::ULMatrix&)
-	MAKE_FUNCTION_WRAPPER2(void, buildBondAtomTypeMatrix, CDPL::Chem::MolecularGraph&, CDPL::Math::ULMatrix&)
-	MAKE_FUNCTION_WRAPPER2(std::size_t, getAtomCount, CDPL::Chem::MolecularGraph&, unsigned int);
-	MAKE_FUNCTION_WRAPPER2(void, calcMassComposition, CDPL::Chem::MolecularGraph&, CDPL::Chem::MassComposition&);
-    MAKE_FUNCTION_WRAPPER2(void, buildElementHistogram, CDPL::Chem::MolecularGraph&, CDPL::Chem::ElementHistogram&);
-	MAKE_FUNCTION_WRAPPER2(std::size_t, getOrdinaryHydrogenCount, CDPL::Chem::MolecularGraph&, unsigned int);
-	MAKE_FUNCTION_WRAPPER2(std::size_t, getExplicitOrdinaryHydrogenCount, CDPL::Chem::MolecularGraph&, unsigned int);
-	MAKE_FUNCTION_WRAPPER2(std::size_t, getBondCount, CDPL::Chem::MolecularGraph&, std::size_t);
-	MAKE_FUNCTION_WRAPPER2(void, calcTopologicalDistanceMatrix, CDPL::Chem::MolecularGraph&, CDPL::Math::ULMatrix&)
-	MAKE_FUNCTION_WRAPPER2(void, calcTopologicalDistanceMatrix, CDPL::Chem::MolecularGraph&, CDPL::Math::SparseULMatrix&)
-
-	MAKE_FUNCTION_WRAPPER3(std::size_t, getRotatableBondCount, CDPL::Chem::MolecularGraph&, bool, bool);
-	MAKE_FUNCTION_WRAPPER3(void, replaceAtomStereoReferenceAtoms, CDPL::Chem::MolecularGraph&, CDPL::Chem::MolecularGraph&, std::size_t)
-
-	MAKE_FUNCTION_WRAPPER4(void, replaceBondStereoReferenceAtoms, CDPL::Chem::MolecularGraph&, CDPL::Chem::MolecularGraph&, std::size_t, std::size_t)
-
-	MAKE_FUNCTION_WRAPPER5(CDPL::Base::uint64, calcHashCode, CDPL::Chem::MolecularGraph&,
-	 					   unsigned int, unsigned int, bool, bool)
-	MAKE_FUNCTION_WRAPPER5(void, canonicalize, CDPL::Chem::MolecularGraph&,
-	 					   bool, bool, bool, bool)
-
-	MAKE_FUNCTION_WRAPPER6(void, canonicalize, CDPL::Chem::MolecularGraph&, const CDPL::Chem::AtomCompareFunction&,
-	 					   bool, bool, bool, bool)
 
 	boost::python::object generateSMILESWrapper(CDPL::Chem::MolecularGraph& molgraph, bool canonical, bool ord_h_deplete,
 												unsigned int atom_flags, unsigned int bond_flags)
@@ -200,20 +90,22 @@ namespace
 		return boost::python::str(inchi_key.c_str());
 	} 
 
-	std::string buildMassCompositionStringWrapper(CDPL::Chem::MolecularGraph& molgraph)
+	boost::python::object buildMassCompositionStringWrapper(CDPL::Chem::MolecularGraph& molgraph)
 	{
 		std::string str;
 
 		buildMassCompositionString(molgraph, str);
-		return str;
+
+		return boost::python::str(str.c_str());
 	}
 
-	std::string buildMolecularFormulaWrapper(CDPL::Chem::MolecularGraph& molgraph)
+	boost::python::object buildMolecularFormulaWrapper(CDPL::Chem::MolecularGraph& molgraph)
 	{
 		std::string str;
 
 		buildMolecularFormula(molgraph, str);
-		return str;
+
+		return boost::python::str(str.c_str());
 	}
 }
 
@@ -306,126 +198,127 @@ void CDPLPythonChem::exportMolecularGraphFunctions()
 				(python::arg("molgraph"), python::arg("frag_list"), python::arg("cont_frag_list"), 
 				 python::arg("append") = false, python::arg("atoms") = true, python::arg("bonds") = true));
 
-	python::def("buildMatchExpression", &buildMatchExpressionWrapper1,
+	python::def("buildMatchExpression", static_cast<Chem::MatchExpression<Chem::MolecularGraph>::SharedPointer (*)(const Chem::MolecularGraph&)>(&Chem::buildMatchExpression),
 	 			python::arg("molgraph"), python::with_custodian_and_ward_postcall<0, 1>());
-	python::def("perceiveComponentGroups", &perceiveComponentGroupsWrapper1,
+	python::def("buildMatchExpression", 
+				static_cast<Chem::MatchExpression<Chem::MolecularGraph>::SharedPointer (*)(Chem::MolecularGraph&, bool)>(&Chem::buildMatchExpression),
+                (python::arg("molgraph"), python::arg("overwrite")), python::with_custodian_and_ward_postcall<0, 1>());
+	python::def("perceiveComponentGroups", static_cast<Chem::FragmentList::SharedPointer (*)(const Chem::MolecularGraph&)>(&Chem::perceiveComponentGroups),
 	 			python::arg("molgraph"), python::with_custodian_and_ward_postcall<0, 1>());
-	python::def("perceiveComponents", &perceiveComponentsWrapper1,
+    python::def("perceiveComponentGroups",
+				static_cast<Chem::FragmentList::SharedPointer (*)(Chem::MolecularGraph&, bool)>(&Chem::perceiveComponentGroups),
+	 			(python::arg("molgraph"), python::arg("overwrite")), python::with_custodian_and_ward_postcall<0, 1>());
+	python::def("perceiveComponents", static_cast<Chem::FragmentList::SharedPointer (*)(const Chem::MolecularGraph&)>(&Chem::perceiveComponents),
 	 			python::arg("molgraph"), python::with_custodian_and_ward_postcall<0, 1>());
-	python::def("perceiveRings", &perceiveRingsWrapper1,
+    python::def("perceiveComponents", 
+				static_cast<Chem::FragmentList::SharedPointer (*)(Chem::MolecularGraph&, bool)>(&Chem::perceiveComponents),
+	 			(python::arg("molgraph"), python::arg("overwrite")), python::with_custodian_and_ward_postcall<0, 1>());
+	python::def("perceiveRings", static_cast<Chem::FragmentList::SharedPointer (*)(const Chem::MolecularGraph&)>(&Chem::perceiveRings),
 	 			python::arg("molgraph"), python::with_custodian_and_ward_postcall<0, 1>());
-	python::def("perceiveAromaticRings", &perceiveAromaticRingsWrapper1,
+    python::def("perceiveRings", 
+				static_cast<Chem::FragmentList::SharedPointer (*)(Chem::MolecularGraph&, bool)>(&Chem::perceiveRings),
+	 			(python::arg("molgraph"), python::arg("overwrite")), python::with_custodian_and_ward_postcall<0, 1>());
+	python::def("perceiveSSSR", static_cast<Chem::FragmentList::SharedPointer (*)(const Chem::MolecularGraph&)>(&Chem::perceiveSSSR),
 	 			python::arg("molgraph"), python::with_custodian_and_ward_postcall<0, 1>());
-	python::def("extractAromaticSSSRSubset", &extractAromaticSSSRSubsetWrapper1,
-	 			python::arg("molgraph"), python::with_custodian_and_ward_postcall<0, 1>());
-	python::def("perceiveSSSR", &perceiveSSSRWrapper1,
-	 			python::arg("molgraph"), python::with_custodian_and_ward_postcall<0, 1>());
-	python::def("extractSSSR", static_cast<Chem::FragmentList::SharedPointer (*)(const Chem::MolecularGraph&, const Chem::MolecularGraph&)>(&Chem::extractSSSR),
+    python::def("perceiveSSSR",
+				static_cast<Chem::FragmentList::SharedPointer (*)(Chem::MolecularGraph&, bool)>(&Chem::perceiveSSSR),
+	 			(python::arg("molgraph"), python::arg("overwrite")), python::with_custodian_and_ward_postcall<0, 1>());
+  	python::def("extractSSSR", static_cast<Chem::FragmentList::SharedPointer (*)(const Chem::MolecularGraph&, const Chem::MolecularGraph&)>(&Chem::extractSSSR),
 	 			(python::arg("src_molgraph"), python::arg("tgt_molgraph")),
 				python::with_custodian_and_ward_postcall<0, 1>());
 	python::def("extractSSSR", static_cast<Chem::FragmentList::SharedPointer (*)(const Chem::MolecularGraph&, Chem::MolecularGraph&, bool)>(&Chem::extractSSSR),
 	 			(python::arg("src_molgraph"), python::arg("tgt_molgraph"), python::arg("overwrite")),
 				python::with_custodian_and_ward_postcall<0, 1>());
-	python::def("transferSSSR", &Chem::transferSSSR,
+	python::def("copySSSR", &Chem::copySSSR,
 	 			(python::arg("src_molgraph"), python::arg("tgt_molgraph")),
 				python::with_custodian_and_ward_postcall<0, 2>());
-
-	python::def("perceiveCyclicSubstructure", &perceiveCyclicSubstructureWrapper1,
+	python::def("perceiveCyclicSubstructure", static_cast<Chem::Fragment::SharedPointer (*)(const Chem::MolecularGraph&)>(&Chem::perceiveCyclicSubstructure),
 	 			python::arg("molgraph"), python::with_custodian_and_ward_postcall<0, 1>());
-	python::def("perceiveAromaticSubstructure", &perceiveAromaticSubstructureWrapper1,
-	 			python::arg("molgraph"), python::with_custodian_and_ward_postcall<0, 1>());
-
-	python::def("buildMatchExpression", 
-				static_cast<Chem::MatchExpression<Chem::MolecularGraph>::SharedPointer (*)(Chem::MolecularGraph&, bool)>(&Chem::buildMatchExpression),
-                (python::arg("molgraph"), python::arg("overwrite")), python::with_custodian_and_ward_postcall<0, 1>());
-    python::def("perceiveComponentGroups",
-				static_cast<Chem::FragmentList::SharedPointer (*)(Chem::MolecularGraph&, bool)>(&Chem::perceiveComponentGroups),
-	 			(python::arg("molgraph"), python::arg("overwrite")), python::with_custodian_and_ward_postcall<0, 1>());
-    python::def("perceiveComponents", 
-				static_cast<Chem::FragmentList::SharedPointer (*)(Chem::MolecularGraph&, bool)>(&Chem::perceiveComponents),
-	 			(python::arg("molgraph"), python::arg("overwrite")), python::with_custodian_and_ward_postcall<0, 1>());
-    python::def("perceiveRings", 
-				static_cast<Chem::FragmentList::SharedPointer (*)(Chem::MolecularGraph&, bool)>(&Chem::perceiveRings),
-	 			(python::arg("molgraph"), python::arg("overwrite")), python::with_custodian_and_ward_postcall<0, 1>());
-    python::def("perceiveSSSR",
-				static_cast<Chem::FragmentList::SharedPointer (*)(Chem::MolecularGraph&, bool)>(&Chem::perceiveSSSR),
-	 			(python::arg("molgraph"), python::arg("overwrite")), python::with_custodian_and_ward_postcall<0, 1>());
-    python::def("perceiveCyclicSubstructure", 
+	python::def("perceiveCyclicSubstructure", 
 				static_cast<Chem::Fragment::SharedPointer (*)(Chem::MolecularGraph&, bool)>(&Chem::perceiveCyclicSubstructure),
 	 			(python::arg("molgraph"), python::arg("overwrite")), python::with_custodian_and_ward_postcall<0, 1>());
+	python::def("perceiveAromaticSubstructure", static_cast<Chem::Fragment::SharedPointer (*)(const Chem::MolecularGraph&)>(&Chem::perceiveAromaticSubstructure),
+	 			python::arg("molgraph"), python::with_custodian_and_ward_postcall<0, 1>());
     python::def("perceiveAromaticSubstructure", 
 				static_cast<Chem::Fragment::SharedPointer (*)(Chem::MolecularGraph&, bool)>(&Chem::perceiveAromaticSubstructure),
 	 			(python::arg("molgraph"), python::arg("overwrite")), python::with_custodian_and_ward_postcall<0, 1>());
-     python::def("calcTopologicalDistanceMatrix", 
-				 static_cast<Math::ULMatrix::SharedPointer (*)(Chem::MolecularGraph&, bool)>(&Chem::calcTopologicalDistanceMatrix),
-				 (python::arg("molgraph"), python::arg("overwrite")));
+	python::def("perceiveAromaticRings", &Chem::perceiveAromaticRings,
+	 			python::arg("molgraph"), python::with_custodian_and_ward_postcall<0, 1>());
+	python::def("extractAromaticSSSRSubset", &Chem::extractAromaticSSSRSubset,
+	 			python::arg("molgraph"), python::with_custodian_and_ward_postcall<0, 1>());
+	python::def("calcTopologicalDistanceMatrix", 
+				static_cast<Math::ULMatrix::SharedPointer (*)(Chem::MolecularGraph&, bool)>(&Chem::calcTopologicalDistanceMatrix),
+				(python::arg("molgraph"), python::arg("overwrite")));
     python::def("extractTopologicalDistanceMatrix", 
-				 static_cast<Math::ULMatrix::SharedPointer (*)(const Chem::MolecularGraph&, Chem::MolecularGraph&, bool)>(&Chem::extractTopologicalDistanceMatrix),
-				 (python::arg("src_molgraph"), python::arg("tgt_molgraph"), python::arg("overwrite")));
+				static_cast<Math::ULMatrix::SharedPointer (*)(const Chem::MolecularGraph&, Chem::MolecularGraph&, bool)>(&Chem::extractTopologicalDistanceMatrix),
+				(python::arg("src_molgraph"), python::arg("tgt_molgraph"), python::arg("overwrite")));
  
-	python::def("extractReactionCenter",  &extractReactionCenterWrapper2, 
+	python::def("extractReactionCenter", &Chem::extractReactionCenter, 
 				(python::arg("molgraph"), python::arg("rxn_center")),
 				python::with_custodian_and_ward<2, 1>());
-    python::def("buildAdjacencyMatrix",  &buildAdjacencyMatrixWrapper2,
+    python::def("buildAdjacencyMatrix", &Chem::buildAdjacencyMatrix,
 				(python::arg("molgraph"), python::arg("mtx")));
-    python::def("buildIncidenceMatrix",  &buildIncidenceMatrixWrapper2,
+    python::def("buildIncidenceMatrix", &Chem::buildIncidenceMatrix,
 				(python::arg("molgraph"), python::arg("mtx")));
-    python::def("buildBondMatrix",  &buildBondMatrixWrapper2, 
+    python::def("buildBondMatrix", &Chem::buildBondMatrix, 
 				(python::arg("molgraph"), python::arg("mtx")));
-    python::def("buildBondAtomTypeMatrix",  &buildBondAtomTypeMatrixWrapper2, 
+    python::def("buildBondAtomTypeMatrix", &Chem::buildBondAtomTypeMatrix, 
 				(python::arg("molgraph"), python::arg("mtx")));
-    python::def("buildBondElectronMatrix",  &buildBondElectronMatrixWrapper2, 
+    python::def("buildBondElectronMatrix", &Chem::buildBondElectronMatrix, 
 				(python::arg("molgraph"), python::arg("mtx")));
-    python::def("calcTopologicalDistanceMatrix", static_cast<void (*)(Chem::MolecularGraph&, Math::ULMatrix&)>(&calcTopologicalDistanceMatrixWrapper2), 
+    python::def("calcTopologicalDistanceMatrix", static_cast<void (*)(const Chem::MolecularGraph&, Math::ULMatrix&)>(&Chem::calcTopologicalDistanceMatrix), 
 				(python::arg("molgraph"), python::arg("mtx")));
-	python::def("calcTopologicalDistanceMatrix",  static_cast<void (*)(Chem::MolecularGraph&, Math::SparseULMatrix&)>(&calcTopologicalDistanceMatrixWrapper2), 
+	python::def("calcTopologicalDistanceMatrix",  static_cast<void (*)(const Chem::MolecularGraph&, Math::SparseULMatrix&)>(&Chem::calcTopologicalDistanceMatrix), 
 				(python::arg("molgraph"), python::arg("mtx")));
     python::def("extractTopologicalDistanceMatrix", static_cast<void (*)(const Chem::MolecularGraph&, const Chem::MolecularGraph&, Math::ULMatrix&)>(&Chem::extractTopologicalDistanceMatrix), 
 				(python::arg("src_molgraph"), python::arg("tgt_molgraph"), python::arg("mtx")));
 	python::def("extractTopologicalDistanceMatrix",  static_cast<void (*)(const Chem::MolecularGraph&, const Chem::MolecularGraph&, Math::SparseULMatrix&)>(&Chem::extractTopologicalDistanceMatrix), 
 				(python::arg("src_molgraph"), python::arg("tgt_molgraph"), python::arg("mtx")));
 
-
- 	python::def("calcTopologicalRadius", &calcTopologicalRadiusWrapper1, python::arg("molgraph"));
-	python::def("calcTopologicalDiameter", &calcTopologicalDiameterWrapper1, python::arg("molgraph"));
-	python::def("calcRingComplexity", &calcRingComplexityWrapper1, python::arg("molgraph"));
-	python::def("calcKierShape1", &calcKierShape1Wrapper1, python::arg("molgraph"));
-	python::def("calcKierShape2", &calcKierShape2Wrapper1, python::arg("molgraph"));
-	python::def("calcKierShape3", &calcKierShape3Wrapper1, python::arg("molgraph"));
-	python::def("calcWienerIndex", &calcWienerIndexWrapper1, python::arg("molgraph"));
-	python::def("calcRandicIndex", &calcRandicIndexWrapper1, python::arg("molgraph"));
-	python::def("calcZagrebIndex1", &calcZagrebIndex1Wrapper1, python::arg("molgraph"));
-	python::def("calcZagrebIndex2", &calcZagrebIndex2Wrapper1, python::arg("molgraph"));
-	python::def("calcTotalWalkCount", &calcTotalWalkCountWrapper1, python::arg("molgraph"));
-	python::def("calcCyclomaticNumber", &calcCyclomaticNumberWrapper1, python::arg("molgraph"));
-	python::def("getAtomCount", &getAtomCountWrapper1, python::arg("molgraph"));
-	python::def("getAtomCount", &getAtomCountWrapper2, (python::arg("molgraph"), python::arg("type")));
-	python::def("getImplicitHydrogenCount", &getImplicitHydrogenCountWrapper1, python::arg("molgraph"));
-	python::def("getOrdinaryHydrogenCount", &getOrdinaryHydrogenCountWrapper2, 
+ 	python::def("calcTopologicalRadius", &Chem::calcTopologicalRadius, python::arg("molgraph"));
+	python::def("calcTopologicalDiameter", &Chem::calcTopologicalDiameter, python::arg("molgraph"));
+	python::def("calcRingComplexity", &Chem::calcRingComplexity, python::arg("molgraph"));
+	python::def("calcKierShape1", &Chem::calcKierShape1, python::arg("molgraph"));
+	python::def("calcKierShape2", &Chem::calcKierShape2, python::arg("molgraph"));
+	python::def("calcKierShape3", &Chem::calcKierShape3, python::arg("molgraph"));
+	python::def("calcWienerIndex", &Chem::calcWienerIndex, python::arg("molgraph"));
+	python::def("calcRandicIndex", &Chem::calcRandicIndex, python::arg("molgraph"));
+	python::def("calcZagrebIndex1", &Chem::calcZagrebIndex1, python::arg("molgraph"));
+	python::def("calcZagrebIndex2", &Chem::calcZagrebIndex2, python::arg("molgraph"));
+	python::def("calcTotalWalkCount", &Chem::calcTotalWalkCount, python::arg("molgraph"));
+	python::def("calcCyclomaticNumber", &Chem::calcCyclomaticNumber, python::arg("molgraph"));
+	python::def("getAtomCount", static_cast<std::size_t (*)(const Chem::MolecularGraph&)>(&Chem::getAtomCount),
+				python::arg("molgraph"));
+	python::def("getAtomCount", static_cast<std::size_t (*)(const Chem::MolecularGraph&, unsigned int)>(&Chem::getAtomCount),
+				(python::arg("molgraph"), python::arg("type")));
+	python::def("getImplicitHydrogenCount", &Chem::getImplicitHydrogenCount, python::arg("molgraph"));
+	python::def("getOrdinaryHydrogenCount", &Chem::getOrdinaryHydrogenCount, 
 				(python::arg("molgraph"), python::arg("flags") = Chem::AtomPropertyFlag::DEFAULT));
-	python::def("getExplicitOrdinaryHydrogenCount", &getExplicitOrdinaryHydrogenCountWrapper2, 
+	python::def("getExplicitOrdinaryHydrogenCount", &Chem::getExplicitOrdinaryHydrogenCount, 
 				(python::arg("molgraph"), python::arg("flags") = Chem::AtomPropertyFlag::DEFAULT));
-	python::def("getChainAtomCount", &getChainAtomCountWrapper1, python::arg("molgraph"));
-	python::def("getHydrogenAcceptorAtomCount", &getHydrogenAcceptorAtomCountWrapper1, python::arg("molgraph"));
-	python::def("getHydrogenDonorAtomCount", &getHydrogenDonorAtomCountWrapper1, python::arg("molgraph"));
-	python::def("getCompleteBondCount", &getCompleteBondCountWrapper1, python::arg("molgraph"));
-	python::def("getBondCount", &getBondCountWrapper1, python::arg("molgraph"));
-	python::def("getBondCount", &getBondCountWrapper2, (python::arg("molgraph"), python::arg("order")));
-	python::def("getHydrogenBondCount", &getHydrogenBondCountWrapper1, python::arg("molgraph"));
-	python::def("getChainBondCount", &getChainBondCountWrapper1, python::arg("molgraph"));
-	python::def("getComponentCount", &getComponentCountWrapper1, python::arg("molgraph"));
-	python::def("calcMass", &calcMassWrapper1, python::arg("molgraph"));
-	python::def("calcMassComposition", &calcMassCompositionWrapper2, 
+	python::def("getChainAtomCount", &Chem::getChainAtomCount, python::arg("molgraph"));
+	python::def("getHydrogenAcceptorAtomCount", &Chem::getHydrogenAcceptorAtomCount, python::arg("molgraph"));
+	python::def("getHydrogenDonorAtomCount", &Chem::getHydrogenDonorAtomCount, python::arg("molgraph"));
+	python::def("getCompleteBondCount", &Chem::getCompleteBondCount, python::arg("molgraph"));
+	python::def("getBondCount", static_cast<std::size_t (*)(const Chem::MolecularGraph&)>(&Chem::getBondCount),
+				python::arg("molgraph"));
+	python::def("getBondCount", static_cast<std::size_t (*)(const Chem::MolecularGraph&, std::size_t)>(&Chem::getBondCount),
+				(python::arg("molgraph"), python::arg("order")));
+	python::def("getHydrogenBondCount", &Chem::getHydrogenBondCount, python::arg("molgraph"));
+	python::def("getChainBondCount", &Chem::getChainBondCount, python::arg("molgraph"));
+	python::def("getComponentCount", &Chem::getComponentCount, python::arg("molgraph"));
+	python::def("calcMass", &Chem::calcMass, python::arg("molgraph"));
+	python::def("calcMassComposition", &Chem::calcMassComposition, 
 				(python::arg("molgraph"), python::arg("comp")));
-	python::def("buildElementHistogram", &buildElementHistogramWrapper2, 
+	python::def("buildElementHistogram", &Chem::buildElementHistogram, 
 				(python::arg("molgraph"), python::arg("hist")));
-	python::def("calcXLogP", &calcXLogPWrapper1, python::arg("molgraph"));
-	python::def("calcLogS", &calcLogSWrapper1, python::arg("molgraph"));
-	python::def("calcTPSA", &calcTPSAWrapper1, python::arg("molgraph"));
-	python::def("calcRuleOfFiveScore", &calcRuleOfFiveScoreWrapper1, python::arg("molgraph"));
-	python::def("calcMeanPolarizability", &calcMeanPolarizabilityWrapper1, python::arg("molgraph"));
-	python::def("calcMolecularComplexity", &calcMolecularComplexityWrapper1, python::arg("molgraph"));
-	python::def("getRotatableBondCount", &getRotatableBondCountWrapper3, 
+	python::def("calcXLogP", &Chem::calcXLogP, python::arg("molgraph"));
+	python::def("calcLogS", &Chem::calcLogS, python::arg("molgraph"));
+	python::def("calcTPSA", &Chem::calcTPSA, python::arg("molgraph"));
+	python::def("calcRuleOfFiveScore", &Chem::calcRuleOfFiveScore, python::arg("molgraph"));
+	python::def("calcMeanPolarizability", &Chem::calcMeanPolarizability, python::arg("molgraph"));
+	python::def("calcMolecularComplexity", &Chem::calcMolecularComplexity, python::arg("molgraph"));
+	python::def("getRotatableBondCount", &Chem::getRotatableBondCount, 
 				(python::arg("molgraph"), python::arg("inc_h_rotors"), python::arg("inc_amide_bonds")));
 
 	python::def("generateINCHI", &generateINCHIWrapper, 
@@ -436,32 +329,32 @@ void CDPLPythonChem::exportMolecularGraphFunctions()
 				(python::arg("molgraph"), python::arg("canonical") = false, 
 				 python::arg("ord_h_deplete") = true, python::arg("atom_flags") = Chem::AtomPropertyFlag::DEFAULT, 
 				 python::arg("bond_flags") = Chem::BondPropertyFlag::DEFAULT));
-	python::def("calcHashCode", &calcHashCodeWrapper5,
+	python::def("calcHashCode", &Chem::calcHashCode,
 				(python::arg("molgraph"), python::arg("atom_flags") = Chem::AtomPropertyFlag::DEFAULT,
 				 python::arg("bond_flags") = Chem::BondPropertyFlag::DEFAULT, 
 				 python::arg("global_stereo") = true, python::arg("ord_h_deplete") = true));
 	python::def("buildMassCompositionString", &buildMassCompositionStringWrapper, python::arg("molgraph"));
 	python::def("buildMolecularFormula", &buildMolecularFormulaWrapper, python::arg("molgraph"));
 
-	python::def("hasMatchConstraints", &hasMatchConstraintsWrapper1, python::arg("molgraph"));
+	python::def("hasMatchConstraints", &Chem::hasMatchConstraints, python::arg("molgraph"));
 	python::def("setMatchConstraints", &Chem::setMatchConstraints, 
 				(python::arg("molgraph"), python::arg("constr")));
 	python::def("clearMatchConstraints", &Chem::clearMatchConstraints, python::arg("molgraph"));
-	python::def("getMatchConstraints", &getMatchConstraintsWrapper1, 
+	python::def("getMatchConstraints", &Chem::getMatchConstraints, 
 				python::arg("molgraph"), python::return_value_policy<python::copy_const_reference, 
 				python::with_custodian_and_ward_postcall<0, 1> >());
 
-	python::def("canonicalize", &canonicalizeWrapper5, 
+	python::def("canonicalize", static_cast<void (*)(Chem::MolecularGraph& molgraph, bool, bool, bool, bool)>(&Chem::canonicalize), 
 				(python::arg("molgraph"), python::arg("atoms") = true, python::arg("atom_nbrs") = true, 
 				 python::arg("bonds") = true, python::arg("bond_atoms") = false));
-
-	python::def("canonicalize", &canonicalizeWrapper6, 
+	python::def("canonicalize", static_cast<void (*)(Chem::MolecularGraph& molgraph, const Chem::AtomCompareFunction&, bool, 
+													 bool, bool, bool)>(&Chem::canonicalize), 
 				(python::arg("molgraph"),  python::arg("func"), python::arg("atoms") = true, 
 				 python::arg("atom_nbrs") = true, python::arg("bonds") = true, python::arg("bond_atoms") = false));
 
-	python::def("replaceAtomStereoReferenceAtoms", &replaceAtomStereoReferenceAtomsWrapper3,
+	python::def("copyAtomStereoDescriptors", &Chem::copyAtomStereoDescriptors,
 				(python::arg("mol_copy"), python::arg("molgraph"), python::arg("atom_idx_offs") = 0));
-	python::def("replaceBondStereoReferenceAtoms", &replaceBondStereoReferenceAtomsWrapper4,
+	python::def("copyBondStereoDescriptors", &Chem::copyBondStereoDescriptors,
 				(python::arg("mol_copy"), python::arg("molgraph"), python::arg("atom_idx_offs") = 0, 
 				 python::arg("bond_start_idx") = 0));
 

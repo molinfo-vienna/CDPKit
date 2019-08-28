@@ -30,7 +30,6 @@
 #include "CDPL/Biomol/AtomFunctions.hpp"
 
 #include "FunctionExports.hpp"
-#include "FunctionWrapper.hpp"
 
 
 #define MAKE_ATOM_FUNC_WRAPPERS(TYPE, FUNC_SUFFIX)                 \

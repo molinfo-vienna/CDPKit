@@ -295,7 +295,7 @@ SET(cdpl-chem_LIB_SRCS
     MolecularGraphAtomHydrophobicityFunction.cpp 
     MolecularGraphCanonicalizationFunctions.cpp 
     MolecularGraphFragmentMembershipFunctions.cpp 
-    MolecularGraphReplaceStereoRefAtomsFunctions.cpp  
+    MolecularGraphCopyStereoDescriptorsFunctions.cpp  
 
     ReactionPropertyFunctions.cpp
     ReactionMatchConstraintsFunctions.cpp
