@@ -64,7 +64,7 @@ namespace CDPL
 			typedef std::vector<ConfData> ConfDataArray;
 			typedef std::vector<const Chem::Bond*> BondList;
 			typedef std::vector<const Chem::Atom*> AtomList;
-			typedef std::vector<std::size_t> AtomIndexMap;	
+			typedef std::vector<std::size_t> IndexArray;
 			typedef std::vector<double> TorsionAngleArray;	
 
 			typedef ConfDataArray::const_iterator ConstConformerIterator;
@@ -105,9 +105,9 @@ namespace CDPL
 
 			ConfDataArray& getConformers();
 
-			const AtomIndexMap& getAtomIndexMap() const;
+			const IndexArray& getRootAtomIndices() const;
 
-			AtomIndexMap& getAtomIndexMap();
+			IndexArray& getRootAtomIndices();
 
 			const TorsionAngleArray& getTorsionAngles() const;
 
@@ -128,6 +128,7 @@ namespace CDPL
 			AtomList& getSplitBondAtom2Neighbors();
 
 			const AtomList& getSplitBondAtom2Neighbors() const;
+
 
 		private:
 			FragmentTreeNode(FragmentTreeNode& root, FragmentTreeNode& parent); 
@@ -160,7 +161,7 @@ namespace CDPL
 			FragmentPointer                   leftFragment;
 			FragmentPointer                   rightFragment;
 			unsigned int                      fragmentType;
-			AtomIndexMap                      atomIdxMap;
+			IndexArray                        rootAtomIndices;
 			ConfDataArray                     conformers;
 			TorsionAngleArray                 torsionAngles;
 			ForceField::MMFF94InteractionData mmff94Data;

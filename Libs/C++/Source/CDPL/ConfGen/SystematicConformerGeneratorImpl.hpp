@@ -36,6 +36,7 @@
 
 #include <boost/timer/timer.hpp>
 #include <boost/tuple/tuple.hpp>
+#include <boost/unordered_map.hpp>
 
 #include "CDPL/ConfGen/SystematicConformerGenerator.hpp"
 #include "CDPL/ConfGen/FragmentConformerGenerator.hpp"
@@ -44,8 +45,10 @@
 #include "CDPL/ForceField/MMFF94InteractionParameterizer.hpp"
 #include "CDPL/ForceField/MMFF94InteractionData.hpp"
 #include "CDPL/ForceField/MMFF94EnergyCalculator.hpp"
+#include "CDPL/Chem/Fragment.hpp"
 #include "CDPL/Chem/SmallestSetOfSmallestRings.hpp"
 #include "CDPL/Chem/AutomorphismGroupSearch.hpp"
+#include "CDPL/Chem/StereoDescriptor.hpp"
 #include "CDPL/Math/VectorArray.hpp"
 #include "CDPL/Util/BitSet.hpp"
 
@@ -54,12 +57,6 @@
 
 namespace CDPL 
 {
-
-	namespace Chem
-	{
-
-		class StereoDescriptor;
-	};
 
     namespace ConfGen 
     {
@@ -82,7 +79,8 @@ namespace CDPL
 			Status generate(const Chem::MolecularGraph& molgraph);
 
 		private:
-			typedef FragmentTreeNode::AtomList AtomList;
+			typedef std::vector<const Chem::Atom*> AtomList;
+			typedef std::vector<std::size_t> IndexArray;
 
 			class Vec3DArrayDeallocator
 			{
@@ -113,7 +111,7 @@ namespace CDPL
 
 			void buildTree(const Chem::MolecularGraph& molgraph);
 
-			void buildAtomIndexMaps(FragmentTreeNode& node) const;
+			void setupRootAtomIndexLists(FragmentTreeNode& node) const;
 
 			void genConfSearchMMFF94InteractionData();
 
@@ -125,9 +123,15 @@ namespace CDPL
 
 			void setupTorsions(FragmentTreeNode& node);
 
-			void genAutomorphismMappings();
+			void getSymmetryMappings();
 
-			bool processAutomorphismMapping(const Chem::MolecularGraph& molgraph, const Chem::AtomBondMapping& mapping);
+			void buildSymmetryMappingSearchMolGraph();
+			void setupSymmetryMappingValidationData();
+		
+			bool processSymmetryMapping(const Chem::MolecularGraph& molgraph, const Chem::AtomBondMapping& mapping);
+			bool checkSymmetryMapping(const Chem::AtomBondMapping& mapping) const;
+
+			IndexArray* createAtomIndexMapping(const Chem::AtomBondMapping& mapping);
 
 			void getBuildFragmentNodes(FragmentTreeNode& node);
 
@@ -171,7 +175,7 @@ namespace CDPL
 			void calcExtendedAtomConnectivities();
 
 			bool isInvertibleNitrogen(const Chem::Atom& atom, const Chem::MolecularGraph& frag, 
-									  const Math::Vector3DArray& coords) const;
+									  const Math::Vector3DArray& coords);
 
 			bool hasLinearGeometry(const Chem::Atom& atom, const Chem::Atom& nbr_atom1,  
 								   const Chem::Atom& nbr_atom2, const FragmentTreeNode& node);
@@ -194,10 +198,15 @@ namespace CDPL
 			Math::Vector3DArray* allocVector3DArray();
 			void freeVector3DArray(Math::Vector3DArray* vec_array);
 
+			IndexArray* allocIndexArray();
+			void freeIndexArray(IndexArray* idx_array);
+
 			bool timeoutExceeded() const;
 
 			typedef FragmentTreeNode::BondList BondList;
-			typedef FragmentTreeNode::AtomIndexMap AtomIndexMap;
+			typedef boost::shared_ptr<IndexArray> IndexArrayPtr;
+			typedef std::vector<IndexArrayPtr> AllocIndexArrayList;
+			typedef std::vector<IndexArray*> IndexArrayList;
 			typedef std::vector<FragmentTreeNode*> NodeList;
 			typedef std::vector<Math::Vector3DArray::SharedPointer> AllocVector3DArrayList;
 			typedef std::vector<Math::Vector3DArray*> Vector3DArrayList;
@@ -206,6 +215,7 @@ namespace CDPL
 			typedef boost::tuple<std::size_t, std::size_t, double> BondLengthDescriptor;
 			typedef std::vector<BondLengthDescriptor> BondLengthDescriptorList;
 			typedef std::vector<std::size_t> UIArray;
+			typedef boost::unordered_map<const Chem::Atom*, Chem::StereoDescriptor> AtomStereoDescriptorMap;
 
 			Settings                                        settings;
 			FragmentTreeNode                                fragTree;
@@ -214,7 +224,7 @@ namespace CDPL
 			NodeList                                        buildFragNodes; 
 			BondLengthDescriptorList                        aromRingSubstBondLens;
 			Util::BitSet                                    hAtomMask;
-			Util::BitSet                                    hRotorAtomMask;
+			Util::BitSet                                    enumNitrogenMask;
 			UIArray                                         extAtomConnectivities;
 			UIArray                                         tmpExtAtomConnectivities;
 			IndexPairList                                   fragLibEntryAtomIdxMap;
@@ -222,13 +232,20 @@ namespace CDPL
 			FragmentConformerGenerator                      fragConfGen;
 			Chem::SmallestSetOfSmallestRings::SharedPointer fragSSSR;	
 			TorsionRuleMatcher                              torsionRuleMatcher;
-			Chem::AutomorphismGroupSearch                   automorphGroupSearch;
+			Util::BitSet                                    symMappingHAtomMask;
+			Chem::Fragment                                  symMappingSearchMolGraph;
+			AtomStereoDescriptorMap                         symMappingAtomStereoDescrs;
+			Chem::AutomorphismGroupSearch                   symMappingSearch;
+			IndexArrayList                                  symMappings;
+			IndexArray                                      symMappingAtomIndices;
 			ForceField::MMFF94InteractionParameterizer      mmff94Parameterizer;
 			ForceField::MMFF94InteractionData               tmpMMFF94Data;
 			ForceField::MMFF94InteractionData               fragBuildMMFF94Data;
 			ForceField::MMFF94EnergyCalculator<double>      mmff94EnergyCalc;
 			AllocVector3DArrayList                          allocCoordArrays;
 			Vector3DArrayList                               freeCoordArrays;
+			AllocIndexArrayList                             allocIndexArrays;
+			IndexArrayList                                  freeIndexArrays;
 			boost::timer::cpu_timer                         timer;
 		};
     }

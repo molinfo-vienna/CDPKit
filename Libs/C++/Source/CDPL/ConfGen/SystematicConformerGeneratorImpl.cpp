@@ -38,7 +38,6 @@
 #include "CDPL/ConfGen/FragmentType.hpp"
 #include "CDPL/Chem/MolecularGraph.hpp"
 #include "CDPL/Chem/Bond.hpp"
-#include "CDPL/Chem/StereoDescriptor.hpp"
 #include "CDPL/Chem/AtomFunctions.hpp"
 #include "CDPL/Chem/BondFunctions.hpp"
 #include "CDPL/Chem/Entity3DFunctions.hpp"
@@ -166,7 +165,7 @@ namespace
         "     <angle value=\"-120\" tolerance1=\"0\" tolerance2=\"0\" score=\"0\"/>"
         "   </torsions>"
         "  </rule>"
-		"  <rule pattern=\"[*,#1:1]~[^3X4:2]-[^3X4H3:3]-[#1:4]\">"
+		"  <rule pattern=\"[*,#1:1]~[^3:2]-[^3X4H3:3]-[#1:4]\">"
         "   <torsions>"
         "     <angle value=\"60\" tolerance1=\"0\" tolerance2=\"0\" score=\"0\"/>"
         "   </torsions>"
@@ -247,12 +246,13 @@ ConfGen::SystematicConformerGeneratorImpl::SystematicConformerGeneratorImpl()
 	torsionRuleMatcher.reportUniqueMappingsOnly(true);
 	torsionRuleMatcher.stopAtFirstMatchingRule(true);
 
-	automorphGroupSearch.includeIdentityMapping(true);
-	automorphGroupSearch.setAtomPropertyFlags(AtomPropertyFlag::TYPE | AtomPropertyFlag::FORMAL_CHARGE | AtomPropertyFlag::ISOTOPE | 
-											  AtomPropertyFlag::CONFIGURATION | AtomPropertyFlag::AROMATICITY |
-											  AtomPropertyFlag::EXPLICIT_BOND_COUNT | AtomPropertyFlag::HYBRIDIZATION_STATE);
-	automorphGroupSearch.setFoundMappingCallback(
-		boost::bind(&ConfGen::SystematicConformerGeneratorImpl::processAutomorphismMapping, this, _1, _2));
+	symMappingSearch.includeIdentityMapping(true);
+	symMappingSearch.setAtomPropertyFlags(AtomPropertyFlag::TYPE | AtomPropertyFlag::FORMAL_CHARGE | AtomPropertyFlag::AROMATICITY |
+										  AtomPropertyFlag::EXPLICIT_BOND_COUNT | AtomPropertyFlag::HYBRIDIZATION_STATE);
+	symMappingSearch.setBondPropertyFlags(BondPropertyFlag::ORDER | BondPropertyFlag::TOPOLOGY |
+										  BondPropertyFlag::AROMATICITY);
+	symMappingSearch.setFoundMappingCallback(
+		boost::bind(&ConfGen::SystematicConformerGeneratorImpl::processSymmetryMapping, this, _1, _2));
 }
 
 ConfGen::SystematicConformerGeneratorImpl::~SystematicConformerGeneratorImpl() {}
@@ -274,7 +274,7 @@ ConfGen::SystematicConformerGeneratorImpl::generate(const Chem::MolecularGraph& 
 	init(molgraph);
 
 	buildTree(molgraph);
-	buildAtomIndexMaps(fragTree);
+	setupRootAtomIndexLists(fragTree);
 	genConfSearchMMFF94InteractionData();
 	distFragmentMMFF94InteractionData(fragTree);
 	clearNodeConformers(fragTree);
@@ -295,7 +295,7 @@ ConfGen::SystematicConformerGeneratorImpl::generate(const Chem::MolecularGraph& 
 	if (timeoutExceeded())
 		return Status::TIMEOUT_EXCEEDED;
 
-	genAutomorphismMappings();
+	getSymmetryMappings();
 
 	if (timeoutExceeded())
 		return Status::TIMEOUT_EXCEEDED;
@@ -308,13 +308,23 @@ void ConfGen::SystematicConformerGeneratorImpl::init(const Chem::MolecularGraph&
 	timer.start();	
 	extAtomConnectivities.clear();
 	freeCoordArrays.clear();
+	freeIndexArrays.clear();
 
-	hRotorAtomMask.resize(molgraph.getNumAtoms());
-	hRotorAtomMask.reset();
+	symMappingHAtomMask.resize(molgraph.getNumAtoms());
+	symMappingHAtomMask.reset();
 	
+	if (settings.nitrogensEnumerated()) {
+		enumNitrogenMask.resize(molgraph.getNumAtoms());
+		enumNitrogenMask.reset();
+	}
+
 	std::for_each(allocCoordArrays.begin(), allocCoordArrays.end(), 
 				  boost::bind(&SystematicConformerGeneratorImpl::freeVector3DArray, this, 
 							  boost::bind<Math::Vector3DArray*>(&Math::Vector3DArray::SharedPointer::get, _1)));
+
+	std::for_each(allocIndexArrays.begin(), allocIndexArrays.end(), 
+				  boost::bind(&SystematicConformerGeneratorImpl::freeIndexArray, this, 
+							  boost::bind<IndexArray*>(&IndexArrayPtr::get, _1)));
 
 	buildAtomTypeMask(molgraph, hAtomMask, Chem::AtomType::H, true);
 }
@@ -332,20 +342,20 @@ void ConfGen::SystematicConformerGeneratorImpl::buildTree(const Chem::MolecularG
 	genChainBuildFragmentSubtrees();
 }
 
-void ConfGen::SystematicConformerGeneratorImpl::buildAtomIndexMaps(FragmentTreeNode& node) const
+void ConfGen::SystematicConformerGeneratorImpl::setupRootAtomIndexLists(FragmentTreeNode& node) const
 {
-	FragmentTreeNode::AtomIndexMap& idx_map = node.getAtomIndexMap();
+	IndexArray& idx_list = node.getRootAtomIndices();
 	
-	idx_map.clear();
+	idx_list.clear();
 
-	std::transform(node.getFragment().getAtomsBegin(), node.getFragment().getAtomsEnd(), std::back_inserter(idx_map),
+	std::transform(node.getFragment().getAtomsBegin(), node.getFragment().getAtomsEnd(), std::back_inserter(idx_list),
 				   boost::bind(&Chem::MolecularGraph::getAtomIndex, &fragTree.getFragment(), _1));
 
 	if (!node.hasChildren())
 		return;
 
-	buildAtomIndexMaps(*node.getLeftChild());
-	buildAtomIndexMaps(*node.getRightChild());
+	setupRootAtomIndexLists(*node.getLeftChild());
+	setupRootAtomIndexLists(*node.getRightChild());
 }
 
 void ConfGen::SystematicConformerGeneratorImpl::genConfSearchMMFF94InteractionData()
@@ -505,19 +515,7 @@ void ConfGen::SystematicConformerGeneratorImpl::setupTorsions(FragmentTreeNode& 
 					node.setTorsionReferenceAtoms(match_atoms[3], match_atoms[0]);
 			}
 		}
-
-		if (order == 1) {
-			const MolecularGraph& root_frag = fragTree.getFragment();
-			
-			if (getHeavyBondCount(*bond_atoms[0], root_frag) == 1)
-				for (AtomList::const_iterator it = nbr_atoms1.begin(), end = nbr_atoms1.end(); it != end; ++it)
-					hRotorAtomMask.set(root_frag.getAtomIndex(**it));
-
-			if (getHeavyBondCount(*bond_atoms[1], root_frag) == 1)
-				for (AtomList::const_iterator it = nbr_atoms2.begin(), end = nbr_atoms2.end(); it != end; ++it)
-					hRotorAtomMask.set(root_frag.getAtomIndex(**it));
-		}
-				
+		
 		if (node.getTorsionAngles().empty()) {
 			std::size_t rot_sym_order = std::max(getRotationalSymmetryOrder(*bond_atoms[0], *bond_atoms[1], nbr_atoms1, node),
 												 getRotationalSymmetryOrder(*bond_atoms[1], *bond_atoms[0], nbr_atoms2, node));
@@ -554,6 +552,20 @@ void ConfGen::SystematicConformerGeneratorImpl::setupTorsions(FragmentTreeNode& 
 		}
 	}
 
+	if (order == 1 && node.getTorsionAngles().size() > 1 && settings.heteroAtomHydrogensEnumerated()) {
+		const MolecularGraph& root_frag = fragTree.getFragment();
+			
+		if (getType(*bond_atoms[0]) != AtomType::C && getHeavyBondCount(*bond_atoms[0], root_frag) == 1) {
+			for (AtomList::const_iterator it = nbr_atoms1.begin(), end = nbr_atoms1.end(); it != end; ++it) 
+					symMappingHAtomMask.set(root_frag.getAtomIndex(**it));
+		}
+
+		if (getType(*bond_atoms[1]) != AtomType::C && getHeavyBondCount(*bond_atoms[1], root_frag) == 1) {
+			for (AtomList::const_iterator it = nbr_atoms2.begin(), end = nbr_atoms2.end(); it != end; ++it) 
+				symMappingHAtomMask.set(root_frag.getAtomIndex(**it));
+		}
+	}
+
 	// check if bond and reference atoms are in an invalid linear arrangement
 
 	if ((node.getTorsionReferenceAtoms()[0] ? hasLinearGeometry(*bond_atoms[0], *bond_atoms[1], *node.getTorsionReferenceAtoms()[0], *node.getLeftChild()) : false) ||
@@ -561,15 +573,141 @@ void ConfGen::SystematicConformerGeneratorImpl::setupTorsions(FragmentTreeNode& 
 		node.setTorsionReferenceAtoms(0, 0);
 }
 
-void ConfGen::SystematicConformerGeneratorImpl::genAutomorphismMappings()
+void ConfGen::SystematicConformerGeneratorImpl::getSymmetryMappings()
 {
-	// TODO
+	buildSymmetryMappingSearchMolGraph();
+	setupSymmetryMappingValidationData();
+
+	symMappings.clear();
+	symMappingSearch.findMappings(symMappingSearchMolGraph);
+
+	std::cerr << "Found " << symMappings.size() << " symmetry mappings....\n";
 }
 
-bool ConfGen::SystematicConformerGeneratorImpl::processAutomorphismMapping(const Chem::MolecularGraph& molgraph, const Chem::AtomBondMapping& mapping)
+void ConfGen::SystematicConformerGeneratorImpl::buildSymmetryMappingSearchMolGraph()
+{
+	using namespace Chem;
+
+	symMappingSearchMolGraph.clear();
+	symMappingAtomIndices.clear();
+
+	const MolecularGraph& root_frag = fragTree.getFragment();
+
+	hAtomMask ^= symMappingHAtomMask;
+
+	for (std::size_t i = 0, num_atoms = root_frag.getNumAtoms(); i < num_atoms; i++) {
+		if (!hAtomMask.test(i)) {
+			symMappingSearchMolGraph.addAtom(root_frag.getAtom(i));
+			symMappingAtomIndices.push_back(i);
+		}
+	}
+
+	for (MolecularGraph::ConstBondIterator it = root_frag.getBondsBegin(), end = root_frag.getBondsEnd(); it != end; ++it) {
+		const Bond& bond = *it;
+
+		if (symMappingSearchMolGraph.containsAtom(bond.getBegin()) && symMappingSearchMolGraph.containsAtom(bond.getEnd()))
+			symMappingSearchMolGraph.addBond(bond);
+	}
+}
+
+void ConfGen::SystematicConformerGeneratorImpl::setupSymmetryMappingValidationData()
+{
+	using namespace Chem;
+
+	symMappingAtomStereoDescrs.clear();
+
+	const MolecularGraph& root_frag = fragTree.getFragment();
+	bool nitrogens_enum = settings.nitrogensEnumerated();
+	std::size_t i = 0;
+
+	for (Fragment::ConstAtomIterator it = symMappingSearchMolGraph.getAtomsBegin(), end = symMappingSearchMolGraph.getAtomsEnd(); it != end; ++it, i++) {
+		const Atom& atom = *it;
+
+		if (nitrogens_enum && enumNitrogenMask.test(symMappingAtomIndices[i]))
+			continue;
+
+		if (getRingFlag(atom))
+			continue;
+
+		if (getHybridizationState(atom) != HybridizationState::SP3)
+			continue;
+
+		tmpAtomList.clear();
+
+		std::size_t nbr_cnt = getConnectedAtoms(atom, symMappingSearchMolGraph, std::back_inserter(tmpAtomList));
+
+		if (nbr_cnt < 3 || nbr_cnt > 4)
+			continue;
+
+		const FragmentTreeNode* coords_node = getLeafNodeWithCoordinates(atom, tmpAtomList, fragTree);
+
+		if (!coords_node)
+			continue;
+
+		const Math::Vector3DArray& coords = *coords_node->getConformers().front().first;
+
+		std::size_t atom_idx = symMappingAtomIndices[i];
+		std::size_t nbr_atom1_idx = root_frag.getAtomIndex(*tmpAtomList[0]);
+		std::size_t nbr_atom2_idx = root_frag.getAtomIndex(*tmpAtomList[1]);
+		std::size_t nbr_atom3_idx = root_frag.getAtomIndex(*tmpAtomList[2]);
+
+		const Math::Vector3D& nbr_atom1_coords = coords[nbr_atom1_idx];
+		const Math::Vector3D& nbr_atom2_coords = coords[nbr_atom2_idx];
+		const Math::Vector3D& nbr_atom3_coords = coords[nbr_atom3_idx];
+		const Math::Vector3D& atom_coords = coords[atom_idx];
+
+		double oop_angle = ForceField::calcOutOfPlaneAngle<double>(nbr_atom1_coords, atom_coords, nbr_atom2_coords, nbr_atom3_coords);
+
+		if (std::abs(oop_angle) <= MAX_PLANAR_ATOM_GEOM_OOP_ANGLE)
+			continue;
+		
+		double vol = innerProd(crossProd(atom_coords - nbr_atom2_coords, atom_coords - nbr_atom1_coords), 
+							   atom_coords - nbr_atom3_coords); 
+		unsigned int config = (vol > 0.0 ? AtomConfiguration::S : vol < 0.0 ? AtomConfiguration::R : AtomConfiguration::NONE);
+
+		if (config == AtomConfiguration::NONE)
+			continue;
+
+		symMappingAtomStereoDescrs.insert(AtomStereoDescriptorMap::value_type(&atom, StereoDescriptor(config, *tmpAtomList[0], *tmpAtomList[1], *tmpAtomList[2])));
+	}
+
+	std::cerr << "Got " << symMappingAtomStereoDescrs.size() << " symmetry mapping check atom stereo descriptors....\n";
+}
+
+bool ConfGen::SystematicConformerGeneratorImpl::processSymmetryMapping(const Chem::MolecularGraph& molgraph, const Chem::AtomBondMapping& mapping)
+{
+	if (!checkSymmetryMapping(mapping))
+		return false;
+
+	symMappings.push_back(createAtomIndexMapping(mapping));
+	return false;
+}
+
+bool ConfGen::SystematicConformerGeneratorImpl::checkSymmetryMapping(const Chem::AtomBondMapping& mapping) const
 {
 	// TODO
-	return false;
+	return true;
+}
+
+ConfGen::SystematicConformerGeneratorImpl::IndexArray* ConfGen::SystematicConformerGeneratorImpl::createAtomIndexMapping(const Chem::AtomBondMapping& mapping)
+{
+	using namespace Chem;
+
+	IndexArray* idx_mapping = allocIndexArray();
+	const AtomMapping& atom_mapping = mapping.getAtomMapping();
+	const MolecularGraph& root_frag = fragTree.getFragment();
+
+	idx_mapping->clear();
+
+	for (Fragment::ConstAtomIterator it = symMappingSearchMolGraph.getAtomsBegin(), end = symMappingSearchMolGraph.getAtomsEnd(); it != end; ++it) {
+		const Atom* mpd_atom = atom_mapping[&*it];
+
+		assert(mpd_atom);
+
+		idx_mapping->push_back(root_frag.getAtomIndex(*mpd_atom));
+	}
+
+	return idx_mapping;
 }
 
 void ConfGen::SystematicConformerGeneratorImpl::getBuildFragmentNodes(FragmentTreeNode& node)
@@ -613,12 +751,12 @@ bool ConfGen::SystematicConformerGeneratorImpl::setExistingCoordinates(FragmentT
 		Vec3DArrayDeallocator dealloc_guard(this, coords);
 
 		const MolecularGraph& frag = node.getFragment();
-		const AtomIndexMap& atom_idx_map = node.getAtomIndexMap();
+		const IndexArray& root_atom_inds = node.getRootAtomIndices();
 
 		for (std::size_t i = 0, num_atoms = frag.getNumAtoms(); i < num_atoms; i++) {
 			const Atom& atom = frag.getAtom(i);
 
-			(*coords)[atom_idx_map[i]] = get3DCoordinates(atom);
+			(*coords)[root_atom_inds[i]] = get3DCoordinates(atom);
 		}
 
 		if (node.getFragmentType() == FragmentType::CHAIN && node.hasChildren())
@@ -789,13 +927,13 @@ void ConfGen::SystematicConformerGeneratorImpl::buildFragmentLibraryEntryAtomInd
 {
 	using namespace Chem;
 
-	const AtomIndexMap& atom_idx_map = node.getAtomIndexMap();
+	const IndexArray& root_atom_inds = node.getRootAtomIndices();
 	const FragmentLibraryEntry::AtomMapping& entry_atom_map = fragLibEntry.getAtomMapping();
 
 	fragLibEntryAtomIdxMap.clear();
 
 	for (std::size_t i = 0, num_atoms = node.getFragment().getNumAtoms(); i < num_atoms; i++)
-		fragLibEntryAtomIdxMap.push_back(IndexPair(fragLibEntry.getAtomIndex(*entry_atom_map[i]), atom_idx_map[i]));
+		fragLibEntryAtomIdxMap.push_back(IndexPair(fragLibEntry.getAtomIndex(*entry_atom_map[i]), root_atom_inds[i]));
 }
 
 void ConfGen::SystematicConformerGeneratorImpl::distChainBuildFragmentCoordinates(FragmentTreeNode& node, const Math::Vector3DArray& coords, 
@@ -807,12 +945,12 @@ void ConfGen::SystematicConformerGeneratorImpl::distChainBuildFragmentCoordinate
 		return;
 	}
 
-	const AtomIndexMap& atom_idx_map = node.getAtomIndexMap();
+	const IndexArray& root_atom_inds = node.getRootAtomIndices();
 
 	Math::Vector3DArray* node_coords = allocVector3DArray();
 	Vec3DArrayDeallocator dealloc_guard(this, node_coords);
 
-	for (AtomIndexMap::const_iterator idx_it = atom_idx_map.begin(), idx_end = atom_idx_map.end(); idx_it != idx_end; ++idx_it) {
+	for (IndexArray::const_iterator idx_it = root_atom_inds.begin(), idx_end = root_atom_inds.end(); idx_it != idx_end; ++idx_it) {
 		std::size_t atom_idx = *idx_it;
 
 		(*node_coords)[atom_idx] = coords[atom_idx];
@@ -1002,11 +1140,11 @@ void ConfGen::SystematicConformerGeneratorImpl::checkAndCorrectAtomConfiguration
 	if (calcAtomConfiguration(atom, fragTree.getFragment(), descr, coords) == descr.getConfiguration())
 		return;
 
-	const AtomIndexMap& atom_idx_map = node.getAtomIndexMap();
+	const IndexArray& root_atom_inds = node.getRootAtomIndices();
 
 	// mirror fragment coordinates in xy-plane
 
-	for (AtomIndexMap::const_iterator it = atom_idx_map.begin(), end = atom_idx_map.end(); it != end; ++it)
+	for (IndexArray::const_iterator it = root_atom_inds.begin(), end = root_atom_inds.end(); it != end; ++it)
 		coords[*it][2] *= -1.0;
 }
 
@@ -1064,11 +1202,12 @@ void ConfGen::SystematicConformerGeneratorImpl::enumNitrogens(FragmentTreeNode& 
 	assert(node.getNumConformers() > 0);
 
 	const MolecularGraph& frag = node.getFragment();
-	const AtomIndexMap& atom_idx_map = node.getAtomIndexMap();
+	const IndexArray& root_atom_inds = node.getRootAtomIndices();
 	Math::Vector3DArray& coords = *node.getConformers().front().first;
+	std::size_t i = 0;
 
 	if (!ring_sys) {
-		for (MolecularGraph::ConstAtomIterator it = frag.getAtomsBegin(), end = frag.getAtomsEnd(); it != end; ++it) {
+		for (MolecularGraph::ConstAtomIterator it = frag.getAtomsBegin(), end = frag.getAtomsEnd(); it != end; ++it, i++) {
 			const Atom& atom = *it;
 
 			if (!isInvertibleNitrogen(atom, frag, coords))
@@ -1079,7 +1218,7 @@ void ConfGen::SystematicConformerGeneratorImpl::enumNitrogens(FragmentTreeNode& 
 
 			// copy and mirror fragment coordinates in xy-plane
 
-			for (AtomIndexMap::const_iterator ai_it = atom_idx_map.begin(), ai_end = atom_idx_map.end(); ai_it != ai_end; ++ai_it) {
+			for (IndexArray::const_iterator ai_it = root_atom_inds.begin(), ai_end = root_atom_inds.end(); ai_it != ai_end; ++ai_it) {
 				std::size_t atom_idx = *ai_it;
 				const Math::Vector3D& orig_atom_pos = coords[atom_idx];
 				Math::Vector3D& new_atom_pos = (*inv_n_coords)[atom_idx];
@@ -1089,6 +1228,8 @@ void ConfGen::SystematicConformerGeneratorImpl::enumNitrogens(FragmentTreeNode& 
 				new_atom_pos[2] = -orig_atom_pos[2];
 			}
 
+			enumNitrogenMask.set(root_atom_inds[i]);
+
 			node.addConformer(inv_n_coords);
 			dealloc_guard.release();
 			return;
@@ -1097,7 +1238,7 @@ void ConfGen::SystematicConformerGeneratorImpl::enumNitrogens(FragmentTreeNode& 
 		return;
 	}
 
-	for (MolecularGraph::ConstAtomIterator it = frag.getAtomsBegin(), end = frag.getAtomsEnd(); it != end; ++it) {
+	for (MolecularGraph::ConstAtomIterator it = frag.getAtomsBegin(), end = frag.getAtomsEnd(); it != end; ++it, i++) {
 		const Atom& atom = *it;
 
 		if (!isInvertibleNitrogen(atom, frag, coords))
@@ -1125,6 +1266,8 @@ void ConfGen::SystematicConformerGeneratorImpl::enumNitrogens(FragmentTreeNode& 
 			} else 
 				subst_nbr = &nbr_atom;
 		}
+
+		enumNitrogenMask.set(root_atom_inds[i]);
 
 		assert(subst_nbr && ring_nbr2);
 		assert(getExplicitBondCount(*subst_nbr, frag) == 1);
@@ -1159,7 +1302,7 @@ void ConfGen::SystematicConformerGeneratorImpl::enumNitrogens(FragmentTreeNode& 
 
 			plane_normal /= plane_normal_len;
 
-			for (AtomIndexMap::const_iterator ai_it = atom_idx_map.begin(), ai_end = atom_idx_map.end(); ai_it != ai_end; ++ai_it) {
+			for (IndexArray::const_iterator ai_it = root_atom_inds.begin(), ai_end = root_atom_inds.end(); ai_it != ai_end; ++ai_it) {
 				std::size_t curr_atom_idx = *ai_it;
 
 				if (curr_atom_idx != subst_nbr_idx) {
@@ -1335,21 +1478,17 @@ void ConfGen::SystematicConformerGeneratorImpl::calcExtendedAtomConnectivities()
 }
 
 bool ConfGen::SystematicConformerGeneratorImpl::isInvertibleNitrogen(const Chem::Atom& atom, const Chem::MolecularGraph& frag, 
-																	 const Math::Vector3DArray& coords) const
+																	 const Math::Vector3DArray& coords)
 {
 	using namespace Chem;
 
 	if (getType(atom) != AtomType::N)
 		return false;
 
-	const StereoDescriptor& descr = getStereoDescriptor(atom);
-
-	if (descr.isValid(atom) && (descr.getConfiguration() == AtomConfiguration::R || descr.getConfiguration() == AtomConfiguration::S))
-		return false;
-
 	std::size_t h_bond_count = 0;
 	std::size_t ring_bond_count = 0;
 	std::size_t nbr_atom_indices[3];
+	std::size_t h_nbr_idx = 0;
 	std::size_t i = 0;
 
 	const MolecularGraph& root_frag = fragTree.getFragment();
@@ -1371,10 +1510,16 @@ bool ConfGen::SystematicConformerGeneratorImpl::isInvertibleNitrogen(const Chem:
 		if (getRingFlag(bond) && (++ring_bond_count > 2))
 			return false;
 
-		if (getType(nbr_atom) == AtomType::H && (++h_bond_count > 1))
-			return false;
-	
-		nbr_atom_indices[i++] = root_frag.getAtomIndex(nbr_atom);
+		std::size_t nbr_atom_idx = root_frag.getAtomIndex(nbr_atom);
+
+		if (hAtomMask.test(nbr_atom_idx)) {
+			if (++h_bond_count > 1)
+				return false;
+
+			h_nbr_idx = nbr_atom_idx;
+		}
+
+		nbr_atom_indices[i++] = nbr_atom_idx;
 	}
 
 	if (i != 3)
@@ -1383,7 +1528,18 @@ bool ConfGen::SystematicConformerGeneratorImpl::isInvertibleNitrogen(const Chem:
 	double oop_angle = ForceField::calcOutOfPlaneAngle<double>(coords[nbr_atom_indices[0]], coords[root_frag.getAtomIndex(atom)],
 															   coords[nbr_atom_indices[1]], coords[nbr_atom_indices[2]]);
 
-	return (std::abs(oop_angle) > MAX_PLANAR_ATOM_GEOM_OOP_ANGLE);
+	if (std::abs(oop_angle) <= MAX_PLANAR_ATOM_GEOM_OOP_ANGLE)
+		return false;
+
+	if 	(h_bond_count > 0) 
+		symMappingHAtomMask.set(h_nbr_idx);
+
+	const StereoDescriptor& descr = getStereoDescriptor(atom);
+
+	if (descr.isValid(atom) && (descr.getConfiguration() == AtomConfiguration::R || descr.getConfiguration() == AtomConfiguration::S))
+		return false;
+
+	return true;
 }
 
 bool ConfGen::SystematicConformerGeneratorImpl::hasLinearGeometry(const Chem::Atom& atom, const Chem::Atom& nbr_atom1,  
@@ -1477,7 +1633,6 @@ std::size_t ConfGen::SystematicConformerGeneratorImpl::getRotationalSymmetryOrde
 	using namespace Chem;
 
 	unsigned int nbr_atom_type = 0;
-	std::size_t nbr_atom_iso = 0;
 	std::size_t nbr_bond_order = 0;
 	bool first = true;
 
@@ -1491,16 +1646,12 @@ std::size_t ConfGen::SystematicConformerGeneratorImpl::getRotationalSymmetryOrde
 
 		if (first) {
 			nbr_atom_type = getType(nbr_atom);
-			nbr_atom_iso = getIsotope(nbr_atom);
 			nbr_bond_order = getOrder(atom.getBondToAtom(nbr_atom));
 			first = false;
 			continue;
 		}
 
 		if (getType(nbr_atom) != nbr_atom_type)
-			return 1;
-
-		if (getIsotope(nbr_atom) != nbr_atom_iso)
 			return 1;
 
 		if (getOrder(atom.getBondToAtom(nbr_atom)) != nbr_bond_order)
@@ -1639,4 +1790,26 @@ Math::Vector3DArray* ConfGen::SystematicConformerGeneratorImpl::allocVector3DArr
 void ConfGen::SystematicConformerGeneratorImpl::freeVector3DArray(Math::Vector3DArray* vec_array)
 {
 	freeCoordArrays.push_back(vec_array);
+}
+
+ConfGen::SystematicConformerGeneratorImpl::IndexArray* ConfGen::SystematicConformerGeneratorImpl::allocIndexArray()
+{
+	if (!freeIndexArrays.empty()) {
+		IndexArray* idx_array = freeIndexArrays.back();
+
+		freeIndexArrays.pop_back();
+
+		return idx_array;
+	}
+
+	IndexArrayPtr idx_array(new IndexArray());
+
+	allocIndexArrays.push_back(idx_array);
+
+	return idx_array.get();
+}
+
+void ConfGen::SystematicConformerGeneratorImpl::freeIndexArray(IndexArray* idx_array)
+{
+	freeIndexArrays.push_back(idx_array);
 }

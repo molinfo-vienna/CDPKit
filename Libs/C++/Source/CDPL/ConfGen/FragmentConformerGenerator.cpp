@@ -88,10 +88,10 @@ ConfGen::FragmentConformerGenerator::FragmentConformerGenerator():
 
 	hCoordsGenerator.undefinedOnly(true);
 
-	automorphGroupSearch.includeIdentityMapping(false);
-	automorphGroupSearch.setAtomPropertyFlags(AtomPropertyFlag::TYPE | AtomPropertyFlag::FORMAL_CHARGE | 
-											  AtomPropertyFlag::CONFIGURATION | AtomPropertyFlag::AROMATICITY |
-											  AtomPropertyFlag::EXPLICIT_BOND_COUNT | AtomPropertyFlag::HYBRIDIZATION_STATE);
+	symMappingSearch.includeIdentityMapping(false);
+	symMappingSearch.setAtomPropertyFlags(AtomPropertyFlag::TYPE | AtomPropertyFlag::FORMAL_CHARGE | 
+										  AtomPropertyFlag::CONFIGURATION | AtomPropertyFlag::AROMATICITY |
+										  AtomPropertyFlag::EXPLICIT_BOND_COUNT | AtomPropertyFlag::HYBRIDIZATION_STATE);
 }
 
 void ConfGen::FragmentConformerGenerator::setMaxNumStructureGenerationTrials(std::size_t max_num)
@@ -301,7 +301,7 @@ void ConfGen::FragmentConformerGenerator::generateFlexibleRingConformers()
 	rawCoordsGenerator.setBoxSize(ordHDepleteAtomMask.count());
 
 	getRingAtomIndices();
-	getAtomSymmetryMappings();
+	getSymmetryMappings();
 
 	double e_window = eWindow;
 	std::size_t num_trials = 0;
@@ -354,20 +354,23 @@ void ConfGen::FragmentConformerGenerator::generateFlexibleRingConformers()
 
 	for (ConfDataArray::const_iterator it = workingConfs.begin(), end = workingConfs.end(); it != end; ++it) {
 		const ConfData& conf = *it;
-		Vec3DArrayDeallocator dealloc_guard(this, conf);
 
 		if (outputConfs.size() >= maxNumOutputConfs) 
-			continue;
+			return;
 
-		if (conf.first > max_energy || !checkRMSD(conf))
+		if (conf.first > max_energy)
+			return;
+
+		if (!checkRMSD(conf)) {
+			freeVector3DArray(conf.second);
 			continue;
+		}
 
 		outputConfs.push_back(conf);
-		dealloc_guard.release();
 
 		const Math::Vector3DArray& coords = *conf.second;
 
-		for (std::size_t mapping_offs = 0, mappings_size = atomSymmetryMappings.size(); 
+		for (std::size_t mapping_offs = 0, mappings_size = symMappings.size(); 
 			 mapping_offs < mappings_size && outputConfs.size() < maxNumOutputConfs; mapping_offs += numAtoms) {
 
 			ConfData sym_conf;
@@ -380,7 +383,7 @@ void ConfGen::FragmentConformerGenerator::generateFlexibleRingConformers()
 			sym_coords.resize(numAtoms);
 
 			for (std::size_t k = 0; k < numAtoms; k++)
-				sym_coords[atomSymmetryMappings[mapping_offs + k]].assign(coords[k]);
+				sym_coords[symMappings[mapping_offs + k]].assign(coords[k]);
 
 			if (!checkRMSD(sym_conf))
 				continue;
@@ -396,13 +399,11 @@ void ConfGen::FragmentConformerGenerator::generateFlexibleRingConformers()
 void ConfGen::FragmentConformerGenerator::init(const Chem::MolecularGraph& molgraph, 
 											   const ForceField::MMFF94InteractionData& ia_data)
 {
-	std::for_each(outputConfs.begin(), outputConfs.end(), 
-				  boost::bind(static_cast<void (FragmentConformerGenerator::*)(const ConfData&)>(
-								  &FragmentConformerGenerator::freeVector3DArray), this, _1));
+	freeCoordArrays.clear();
 
-	std::for_each(ringAtomCoords.begin(), ringAtomCoords.end(), 
-				  boost::bind(static_cast<void (FragmentConformerGenerator::*)(const Math::Vector3DArray::SharedPointer&)>(
-								  &FragmentConformerGenerator::freeVector3DArray), this, _1));
+	std::for_each(allocCoordArrays.begin(), allocCoordArrays.end(), 
+				  boost::bind(&FragmentConformerGenerator::freeVector3DArray, this, 
+							  boost::bind<Math::Vector3DArray*>(&Math::Vector3DArray::SharedPointer::get, _1)));
 
 	outputConfs.clear();
 	workingConfs.clear();
@@ -538,7 +539,7 @@ bool ConfGen::FragmentConformerGenerator::generateRandomConformer(ConfData& conf
 
 bool ConfGen::FragmentConformerGenerator::checkRMSD(const ConfData& conf)
 {
-	Math::Vector3DArray::SharedPointer conf_ha_coords_ptr = getRingAtomCoordinates(conf);
+	Math::Vector3DArray* conf_ha_coords_ptr = getRingAtomCoordinates(conf);
 
 	Vec3DArrayDeallocator dealloc_guard(this, conf_ha_coords_ptr);
 	Math::Vector3DArray& conf_ha_coords = *conf_ha_coords_ptr;
@@ -569,9 +570,9 @@ bool ConfGen::FragmentConformerGenerator::has3DCoordinates(const Chem::Atom& ato
 	return ordHDepleteAtomMask.test(molGraph->getAtomIndex(atom));
 }
 
-Math::Vector3DArray::SharedPointer ConfGen::FragmentConformerGenerator::getRingAtomCoordinates(const ConfData& conf)
+Math::Vector3DArray* ConfGen::FragmentConformerGenerator::getRingAtomCoordinates(const ConfData& conf)
 {
-	Math::Vector3DArray::SharedPointer ha_coords_ptr = allocVector3DArray();
+	Math::Vector3DArray* ha_coords_ptr = allocVector3DArray();
 	
 	Vec3DArrayDeallocator dealloc_guard(this, ha_coords_ptr);
 	const Math::Vector3DArray& coords = *conf.second;
@@ -612,26 +613,26 @@ void ConfGen::FragmentConformerGenerator::getRingAtomIndices()
 	}
 }
 
-void ConfGen::FragmentConformerGenerator::getAtomSymmetryMappings()
+void ConfGen::FragmentConformerGenerator::getSymmetryMappings()
 {
 	using namespace Chem;
 
-	ordHDepleteMolGraph.clear();
+	symMappingSearchMolGraph.clear();
 
 	for (MolecularGraph::ConstBondIterator it = molGraph->getBondsBegin(), end = molGraph->getBondsEnd(); it != end; ++it) {
 		const Bond& bond = *it;
 
 		if (ordHDepleteAtomMask.test(molGraph->getAtomIndex(bond.getBegin())) && ordHDepleteAtomMask.test(molGraph->getAtomIndex(bond.getEnd())))
-			ordHDepleteMolGraph.addBond(bond);
+			symMappingSearchMolGraph.addBond(bond);
 	}
 
-	automorphGroupSearch.findMappings(ordHDepleteMolGraph);
-	atomSymmetryMappings.resize(automorphGroupSearch.getNumMappings() * numAtoms);
+	symMappingSearch.findMappings(symMappingSearchMolGraph);
+	symMappings.resize(symMappingSearch.getNumMappings() * numAtoms);
 
 	std::size_t mapping_offs = 0;
 
-	for (AutomorphismGroupSearch::ConstMappingIterator it = automorphGroupSearch.getMappingsBegin(), 
-			 end = automorphGroupSearch.getMappingsEnd(); it != end; ++it) {
+	for (AutomorphismGroupSearch::ConstMappingIterator it = symMappingSearch.getMappingsBegin(), 
+			 end = symMappingSearch.getMappingsEnd(); it != end; ++it) {
 
 		const AtomMapping& am = it->getAtomMapping();
 		AtomMapping::ConstEntryIterator am_end = am.getEntriesEnd();
@@ -641,7 +642,7 @@ void ConfGen::FragmentConformerGenerator::getAtomSymmetryMappings()
 			const Atom& first_atom = *am_it->first;
 			const Atom& second_atom = *am_it->second;
 
-			atomSymmetryMappings[mapping_offs + molGraph->getAtomIndex(first_atom)] = molGraph->getAtomIndex(second_atom);
+			symMappings[mapping_offs + molGraph->getAtomIndex(first_atom)] = molGraph->getAtomIndex(second_atom);
 
 			if (getType(first_atom) == AtomType::H)
 				continue;
@@ -682,14 +683,14 @@ void ConfGen::FragmentConformerGenerator::getAtomSymmetryMappings()
 			}
 
 			for (std::size_t i = 0; i < nbrHydrogens1.size(); i++)
-				atomSymmetryMappings[mapping_offs + molGraph->getAtomIndex(*nbrHydrogens1[i])] = molGraph->getAtomIndex(*nbrHydrogens2[i]);
+				symMappings[mapping_offs + molGraph->getAtomIndex(*nbrHydrogens1[i])] = molGraph->getAtomIndex(*nbrHydrogens2[i]);
 		}
 
 		if (keep_mapping)
 			mapping_offs += numAtoms;
 	}
 
-	atomSymmetryMappings.resize(mapping_offs);
+	symMappings.resize(mapping_offs);
 }
 
 void ConfGen::FragmentConformerGenerator::getNeighborHydrogens(const Chem::Atom& atom, AtomList& nbr_list) const
@@ -778,30 +779,29 @@ bool ConfGen::FragmentConformerGenerator::timeoutExceeded() const
 	return (timer.elapsed().wall > (boost::timer::nanosecond_type(timeout) * 1000000));
 }
 
-void ConfGen::FragmentConformerGenerator::freeVector3DArray(const ConfData& conf)
+void ConfGen::FragmentConformerGenerator::allocVector3DArray(ConfData& conf_data)
 {
-	freeVector3DArray(conf.second);
+	conf_data.second = allocVector3DArray();
 }
 
-void ConfGen::FragmentConformerGenerator::allocVector3DArray(ConfData& conf)
+void ConfGen::FragmentConformerGenerator::freeVector3DArray(Math::Vector3DArray* vec_array)
 {
-	conf.second = allocVector3DArray();
+	freeCoordArrays.push_back(vec_array);
 }
 
-void ConfGen::FragmentConformerGenerator::freeVector3DArray(const Math::Vector3DArray::SharedPointer& coords_ptr)
+Math::Vector3DArray* ConfGen::FragmentConformerGenerator::allocVector3DArray()
 {
-	coordArrayCache.push_back(coords_ptr);
-}
+	if (!freeCoordArrays.empty()) {
+		Math::Vector3DArray* array_ptr = freeCoordArrays.back();
 
-Math::Vector3DArray::SharedPointer ConfGen::FragmentConformerGenerator::allocVector3DArray()
-{
-	if (!coordArrayCache.empty()) {
-		Math::Vector3DArray::SharedPointer coords_ptr = coordArrayCache.back();
+		freeCoordArrays.pop_back();
 
-		coordArrayCache.pop_back();
-
-		return coords_ptr;
+		return array_ptr;
 	} 
 
-	return Math::Vector3DArray::SharedPointer(new Math::Vector3DArray());
+	Math::Vector3DArray::SharedPointer array_ptr(new Math::Vector3DArray());
+
+	allocCoordArrays.push_back(array_ptr);
+	
+	return array_ptr.get();
 }

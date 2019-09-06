@@ -136,14 +136,14 @@ ConfGen::FragmentTreeNode::ConfDataArray& ConfGen::FragmentTreeNode::getConforme
 	return conformers;
 }
 
-const ConfGen::FragmentTreeNode::AtomIndexMap& ConfGen::FragmentTreeNode::getAtomIndexMap() const
+const ConfGen::FragmentTreeNode::IndexArray& ConfGen::FragmentTreeNode::getRootAtomIndices() const
 {
-	return atomIdxMap;
+	return rootAtomIndices;
 }
 
-ConfGen::FragmentTreeNode::AtomIndexMap& ConfGen::FragmentTreeNode::getAtomIndexMap()
+ConfGen::FragmentTreeNode::IndexArray& ConfGen::FragmentTreeNode::getRootAtomIndices()
 {
-	return atomIdxMap;
+	return rootAtomIndices;
 }
 
 const ConfGen::FragmentTreeNode::TorsionAngleArray& ConfGen::FragmentTreeNode::getTorsionAngles() const
