@@ -1,7 +1,7 @@
 /* -*- mode: c++; c-basic-offset: 4; tab-width: 4; indent-tabs-mode: t -*- */
 
 /* 
- * RandomConformerGenerator.hpp 
+ * Random3DCoordinatesGenerator.hpp 
  *
  * This file is part of the Chemical Data Processing Toolkit
  *
@@ -25,11 +25,11 @@
 
 /**
  * \file
- * \brief Definition of the class CDPL::ConfGen::RandomConformerGenerator.
+ * \brief Definition of the class CDPL::ConfGen::Random3DCoordinatesGenerator.
  */
 
-#ifndef CDPL_CONFGEN_RANDOMCONFORMERGENERATOR_HPP
-#define CDPL_CONFGEN_RANDOMCONFORMERGENERATOR_HPP
+#ifndef CDPL_CONFGEN_RANDOM3DCOORDINATESGENERATOR_HPP
+#define CDPL_CONFGEN_RANDOM3DCOORDINATESGENERATOR_HPP
 
 #include <cstddef>
 
@@ -58,7 +58,7 @@ namespace CDPL
 		 * @{
 		 */
 
-		class CDPL_CONFGEN_API RandomConformerGenerator
+		class CDPL_CONFGEN_API Random3DCoordinatesGenerator
 		{
 
 		public:
@@ -68,17 +68,7 @@ namespace CDPL
 			static const std::size_t  DEF_TIMEOUT                         = 600 * 1000;
 			static const double       DEF_MINIMIZATION_STOP_GRADIENT_NORM;
 
-			enum Status
-			{
-
-			    SUCCESS,
-			    UNINITIALIZED,
-			    MINIMIZATION_ERROR,
-				MAX_NUM_TRIALS_EXCEEDED,
-				TIMEOUT_EXCEEDED
-			};
-
-			RandomConformerGenerator();
+			Random3DCoordinatesGenerator();
 	
 			void regardAtomConfiguration(bool regard);
 
@@ -112,16 +102,16 @@ namespace CDPL
 	
 			unsigned int getForceFieldType() const;
 
-			void setup(const Chem::MolecularGraph& molgraph);
+			unsigned int setup(const Chem::MolecularGraph& molgraph);
 
-			Status generate(Math::Vector3DArray& coords);
+			unsigned int generate(Math::Vector3DArray& coords);
 
 			double getEnergy() const;
 
 		private:
-			RandomConformerGenerator(const RandomConformerGenerator&);
+			Random3DCoordinatesGenerator(const Random3DCoordinatesGenerator&);
 
-			RandomConformerGenerator& operator=(const RandomConformerGenerator&);
+			Random3DCoordinatesGenerator& operator=(const Random3DCoordinatesGenerator&);
 
 			bool timeoutExceeded() const;
 			bool has3DCoordinates(const Chem::Atom& atom) const;
@@ -154,4 +144,4 @@ namespace CDPL
     }
 }
 
-#endif // CDPL_CONFGEN_RANDOMCONFORMERGENERATOR_HPP
+#endif // CDPL_CONFGEN_RANDOM3DCOORDINATESGENERATOR_HPP

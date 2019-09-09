@@ -187,7 +187,7 @@ ConfGen::SystematicConformerGenerator::getSettings() const
 	return impl->getSettings();
 }
 
-ConfGen::SystematicConformerGenerator::Status ConfGen::SystematicConformerGenerator::generate(const Chem::MolecularGraph& molgraph)
+unsigned int ConfGen::SystematicConformerGenerator::generate(const Chem::MolecularGraph& molgraph)
 {
 	return impl->generate(molgraph);
 }

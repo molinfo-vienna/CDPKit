@@ -1,7 +1,7 @@
 /* -*- mode: c++; c-basic-offset: 4; tab-width: 4; indent-tabs-mode: t -*- */
 
 /* 
- * NamespaceExports.hpp 
+ * ExceptionTranslatorRegistration.hpp 
  *
  * This file is part of the Chemical Data Processing Toolkit
  *
@@ -24,16 +24,14 @@
  */
 
 
-#ifndef CDPL_PYTHON_CONFGEN_NAMESPACEEXPORTS_HPP
-#define CDPL_PYTHON_CONFGEN_NAMESPACEEXPORTS_HPP
+#ifndef CDPL_PYTHON_FORCEFIELD_EXCEPTIONTRANSLATORREGISTRATION_HPP
+#define CDPL_PYTHON_FORCEFIELD_EXCEPTIONTRANSLATORREGISTRATION_HPP
 
 
-namespace CDPLPythonConfGen
+namespace CDPLPythonForceField
 {
 
-	void exportFragmentTypes();
-	void exportForceFieldTypes();
-	void exportReturnCodes();
+	void registerExceptionTranslators();
 }
 
-#endif // CDPL_PYTHON_CONFGEN_NAMESPACEEXPORTS_HPP
+#endif // CDPL_PYTHON_FORCEFIELD_EXCEPTIONTRANSLATORREGISTRATION_HPP

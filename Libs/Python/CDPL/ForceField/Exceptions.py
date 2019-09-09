@@ -1,7 +1,7 @@
 # -*- mode: python; tab-width: 4 -*-
 
-##
-# __init__.py  
+## 
+# Exceptions.py 
 #
 # This file is part of the Chemical Data Processing Toolkit
 #
@@ -26,8 +26,16 @@
 
 from __future__ import absolute_import
 
-import CDPL.Math
-import CDPL.Chem
+from . import _forcefield
+import CDPL.Base
 
-from ._forcefield import *
-from .Exceptions import *
+
+class Error(CDPL.Base.Exception):
+    pass
+
+class ParameterizationFailed(Error):
+    pass
+
+
+_forcefield._ExceptionMapping.Error = Error
+_forcefield._ExceptionMapping.ParameterizationFailed = ParameterizationFailed

@@ -38,9 +38,6 @@
 #include "CDPL/ConfGen/FragmentLibraryEntry.hpp"
 #include "CDPL/ConfGen/FragmentList.hpp"
 #include "CDPL/ConfGen/FragmentConformerGenerator.hpp"
-#include "CDPL/ConfGen/ForceFieldType.hpp"
-#include "CDPL/ForceField/MMFF94InteractionParameterizer.hpp"
-#include "CDPL/ForceField/MMFF94InteractionData.hpp"
 #include "CDPL/Chem/SmallestSetOfSmallestRings.hpp"
 #include "CDPL/Chem/Molecule.hpp"
 
@@ -63,8 +60,6 @@ namespace CDPL
 		{
 
 		  public:
-			static const unsigned int DEF_FORCE_FIELD_TYPE = ForceFieldType::MMFF94S_NO_ESTAT;
-
 			typedef boost::function4<void, Base::uint64, const Chem::MolecularGraph&, bool, std::size_t> ProcessingResultCallbackFunction;
 			typedef boost::function2<bool, const Chem::MolecularGraph&, const std::string&> ProcessingErrorCallbackFunction;
 			typedef FragmentConformerGenerator::ProgressCallbackFunction ProgressCallbackFunction;
@@ -159,14 +154,11 @@ namespace CDPL
 			void removeNewLibraryEntry() const;
 
 			FragmentLibrary::SharedPointer                  fragLib;
-			unsigned int                                    forceFieldType;
 			ProcessingResultCallbackFunction                resultCallback;
 			ProcessingErrorCallbackFunction                 errorCallback;
 			FragmentLibraryEntry                            fragLibEntry;
 			FragmentList                                    fragList;
 			FragmentConformerGenerator                      fragConfGen;
-			ForceField::MMFF94InteractionParameterizer      mmff94Parameterizer;
-			ForceField::MMFF94InteractionData               mmff94Data;
 			Chem::SmallestSetOfSmallestRings::SharedPointer fragSSSR;
 		};
 

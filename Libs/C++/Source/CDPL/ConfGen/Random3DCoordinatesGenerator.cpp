@@ -1,7 +1,7 @@
 /* -*- mode: c++; c-basic-offset: 4; tab-width: 4; indent-tabs-mode: t -*- */
 
 /* 
- * RandomConformerGenerator.cpp 
+ * Random3DCoordinatesGenerator.cpp 
  *
  * This file is part of the Chemical Data Processing Toolkit
  *
@@ -29,22 +29,24 @@
 #include <boost/bind.hpp>
 #include <boost/math/special_functions.hpp>
 
-#include "CDPL/ConfGen/RandomConformerGenerator.hpp"
+#include "CDPL/ConfGen/Random3DCoordinatesGenerator.hpp"
+#include "CDPL/ConfGen/ReturnCode.hpp"
 #include "CDPL/ForceField/InteractionType.hpp"
+#include "CDPL/ForceField/Exceptions.hpp"
 #include "CDPL/Chem/MolecularGraph.hpp"
 
 
 using namespace CDPL;
 
 
-const unsigned int ConfGen::RandomConformerGenerator::DEF_FORCE_FIELD_TYPE;
-const std::size_t  ConfGen::RandomConformerGenerator::DEF_MAX_NUM_STRUCTURE_GEN_TRIALS;
-const std::size_t  ConfGen::RandomConformerGenerator::DEF_MAX_NUM_MINIMIZATION_STEPS;
-const std::size_t  ConfGen::RandomConformerGenerator::DEF_TIMEOUT;
-const double       ConfGen::RandomConformerGenerator::DEF_MINIMIZATION_STOP_GRADIENT_NORM = 0.1;
+const unsigned int ConfGen::Random3DCoordinatesGenerator::DEF_FORCE_FIELD_TYPE;
+const std::size_t  ConfGen::Random3DCoordinatesGenerator::DEF_MAX_NUM_STRUCTURE_GEN_TRIALS;
+const std::size_t  ConfGen::Random3DCoordinatesGenerator::DEF_MAX_NUM_MINIMIZATION_STEPS;
+const std::size_t  ConfGen::Random3DCoordinatesGenerator::DEF_TIMEOUT;
+const double       ConfGen::Random3DCoordinatesGenerator::DEF_MINIMIZATION_STOP_GRADIENT_NORM = 0.1;
 
 
-ConfGen::RandomConformerGenerator::RandomConformerGenerator(): 
+ConfGen::Random3DCoordinatesGenerator::Random3DCoordinatesGenerator(): 
     molGraph(0), maxNumStructGenTrials(DEF_MAX_NUM_STRUCTURE_GEN_TRIALS), maxNumMinSteps(DEF_MAX_NUM_MINIMIZATION_STEPS), 
 	minStopGradNorm(DEF_MINIMIZATION_STOP_GRADIENT_NORM), timeout(DEF_TIMEOUT),  
 	energy(0.0), energyMinimizer(boost::ref(mmff94EnergyCalc), boost::ref(mmff94GradientCalc))
@@ -55,83 +57,83 @@ ConfGen::RandomConformerGenerator::RandomConformerGenerator():
 	rawCoordsGenerator.enablePlanarityConstraints(true);
 
 	hCoordsGenerator.undefinedOnly(true);
-	hCoordsGenerator.setAtom3DCoordinatesCheckFunction(boost::bind(&RandomConformerGenerator::has3DCoordinates, this, _1));
+	hCoordsGenerator.setAtom3DCoordinatesCheckFunction(boost::bind(&Random3DCoordinatesGenerator::has3DCoordinates, this, _1));
 
 	performStrictAtomTyping(false);
 	setForceFieldType(DEF_FORCE_FIELD_TYPE);
 }
 
-void ConfGen::RandomConformerGenerator::regardAtomConfiguration(bool regard)
+void ConfGen::Random3DCoordinatesGenerator::regardAtomConfiguration(bool regard)
 {
     rawCoordsGenerator.regardAtomConfiguration(regard);
 }
 
-bool ConfGen::RandomConformerGenerator::atomConfigurationRegarded() const
+bool ConfGen::Random3DCoordinatesGenerator::atomConfigurationRegarded() const
 {
     return rawCoordsGenerator.atomConfigurationRegarded();
 }
 
-void ConfGen::RandomConformerGenerator::regardBondConfiguration(bool regard)
+void ConfGen::Random3DCoordinatesGenerator::regardBondConfiguration(bool regard)
 {
     rawCoordsGenerator.regardBondConfiguration(regard);
 }
 
-bool ConfGen::RandomConformerGenerator::bondConfigurationRegarded() const
+bool ConfGen::Random3DCoordinatesGenerator::bondConfigurationRegarded() const
 {
     return rawCoordsGenerator.bondConfigurationRegarded();
 }
 
-void ConfGen::RandomConformerGenerator::setMaxNumStructureGenerationTrials(std::size_t max_num)
+void ConfGen::Random3DCoordinatesGenerator::setMaxNumStructureGenerationTrials(std::size_t max_num)
 {
 	maxNumStructGenTrials = max_num;
 }
 
-std::size_t ConfGen::RandomConformerGenerator::getMaxNumStructureGenerationTrials() const
+std::size_t ConfGen::Random3DCoordinatesGenerator::getMaxNumStructureGenerationTrials() const
 {
 	return maxNumStructGenTrials;
 }
 
-void ConfGen::RandomConformerGenerator::setMaxNumMinimizationSteps(std::size_t max_num)
+void ConfGen::Random3DCoordinatesGenerator::setMaxNumMinimizationSteps(std::size_t max_num)
 {
 	maxNumMinSteps = max_num;
 }
 
-std::size_t ConfGen::RandomConformerGenerator::getMaxNumMinimizationSteps() const
+std::size_t ConfGen::Random3DCoordinatesGenerator::getMaxNumMinimizationSteps() const
 {
 	return maxNumMinSteps;
 }
 
-void ConfGen::RandomConformerGenerator::setMinimizationStopGradientNorm(double grad_norm)
+void ConfGen::Random3DCoordinatesGenerator::setMinimizationStopGradientNorm(double grad_norm)
 {
 	minStopGradNorm = grad_norm;
 }
 
-double ConfGen::RandomConformerGenerator::getMinimizationStopGradientNorm() const
+double ConfGen::Random3DCoordinatesGenerator::getMinimizationStopGradientNorm() const
 {
 	return minStopGradNorm;
 }
 
-void ConfGen::RandomConformerGenerator::setTimeout(std::size_t mil_secs)
+void ConfGen::Random3DCoordinatesGenerator::setTimeout(std::size_t mil_secs)
 {
 	timeout = mil_secs;
 }
 
-std::size_t ConfGen::RandomConformerGenerator::getTimeout() const
+std::size_t ConfGen::Random3DCoordinatesGenerator::getTimeout() const
 {
 	return timeout;
 }
 
-void ConfGen::RandomConformerGenerator::performStrictAtomTyping(bool strict)
+void ConfGen::Random3DCoordinatesGenerator::performStrictAtomTyping(bool strict)
 {
 	mmff94Parameterizer.performStrictAtomTyping(strict);
 }
 
-bool ConfGen::RandomConformerGenerator::strictAtomTypingPerformed() const
+bool ConfGen::Random3DCoordinatesGenerator::strictAtomTypingPerformed() const
 {
 	return mmff94Parameterizer.strictAtomTypingPerformed();
 }
 
-void ConfGen::RandomConformerGenerator::setForceFieldType(unsigned int type)
+void ConfGen::Random3DCoordinatesGenerator::setForceFieldType(unsigned int type)
 {
 	if (type == ForceFieldType::MMFF94 || type == ForceFieldType::MMFF94_NO_ESTAT)
 		mmff94Parameterizer.setDynamicParameterDefaults();
@@ -141,20 +143,25 @@ void ConfGen::RandomConformerGenerator::setForceFieldType(unsigned int type)
 	forceFieldType = type;
 }
 	
-unsigned int ConfGen::RandomConformerGenerator::getForceFieldType() const
+unsigned int ConfGen::Random3DCoordinatesGenerator::getForceFieldType() const
 {
 	return forceFieldType;
 }
 
-void ConfGen::RandomConformerGenerator::setup(const Chem::MolecularGraph& molgraph) 
+unsigned int ConfGen::Random3DCoordinatesGenerator::setup(const Chem::MolecularGraph& molgraph) 
 {
-    molGraph = &molgraph;
-	
+	molGraph = 0;
+
     const unsigned int int_types = (forceFieldType == ForceFieldType::MMFF94 || forceFieldType == ForceFieldType::MMFF94S ?
 									ForceField::InteractionType::ALL :
 									ForceField::InteractionType::ALL ^ ForceField::InteractionType::ELECTROSTATIC);
 
-	mmff94Parameterizer.parameterize(molgraph, mmff94Data, int_types);
+	try {
+		mmff94Parameterizer.parameterize(molgraph, mmff94Data, int_types);
+
+	} catch (const ForceField::Error& e) {
+		return ReturnCode::FORCEFIELD_SETUP_FAILED;
+	}
 
 	mmff94EnergyCalc.setEnabledInteractionTypes(int_types);
     mmff94EnergyCalc.setup(mmff94Data);
@@ -166,21 +173,28 @@ void ConfGen::RandomConformerGenerator::setup(const Chem::MolecularGraph& molgra
 	rawCoordsGenerator.setBoxSize(molgraph.getNumBonds() * 2);
 
     gradient.resize(molgraph.getNumAtoms());
+
+    molGraph = &molgraph;
+
+	return ReturnCode::SUCCESS;
 }
 
-ConfGen::RandomConformerGenerator::Status ConfGen::RandomConformerGenerator::generate(Math::Vector3DArray& coords)
+unsigned int ConfGen::Random3DCoordinatesGenerator::generate(Math::Vector3DArray& coords)
 {
     if (!molGraph)
-		return UNINITIALIZED;
+		return ReturnCode::UNINITIALIZED;
+
+	if (coords.getSize() != molGraph->getNumAtoms())
+		coords.resize(molGraph->getNumAtoms());
 
 	if (molGraph->getNumAtoms() < 2)
-		return SUCCESS;
+		return ReturnCode::SUCCESS;
 
 	timer.start();
 
 	for (std::size_t i = 0; i < maxNumStructGenTrials; i++) {
 		if (timeoutExceeded())
-			return TIMEOUT_EXCEEDED;
+			return ReturnCode::TIMEOUT_EXCEEDED;
 
 		if (!rawCoordsGenerator.generate(coords)) 
 			continue;
@@ -192,17 +206,17 @@ ConfGen::RandomConformerGenerator::Status ConfGen::RandomConformerGenerator::gen
 
 		for (std::size_t j = 0; maxNumMinSteps == 0 || j < maxNumMinSteps; j++) {
 			if ((j % 50) == 0 && timeoutExceeded())
-				return TIMEOUT_EXCEEDED;
+				return ReturnCode::TIMEOUT_EXCEEDED;
 
 			if (energyMinimizer.iterate(energy, coords.getData(), gradient) != BFGSMinimizer::SUCCESS) {
 				if ((boost::math::isnan)(energy))
-					return MINIMIZATION_ERROR;
+					return ReturnCode::FORCEFIELD_MINIMIZATION_FAILED;
 
 				break;
 			}
 
 			if ((boost::math::isnan)(energy))
-				return MINIMIZATION_ERROR;
+				return ReturnCode::FORCEFIELD_MINIMIZATION_FAILED;
 
 			if (minStopGradNorm >= 0.0 && energyMinimizer.getGradientNorm() <= minStopGradNorm)
 				break;
@@ -214,18 +228,18 @@ ConfGen::RandomConformerGenerator::Status ConfGen::RandomConformerGenerator::gen
 		if (rawCoordsGenerator.bondConfigurationRegarded() && !rawCoordsGenerator.checkBondConfigurations(coords)) 
 			continue;
 		
-		return SUCCESS;
+		return ReturnCode::SUCCESS;
 	}
 
-    return MAX_NUM_TRIALS_EXCEEDED;
+    return ReturnCode::MAX_NUM_TRIALS_EXCEEDED;
 }
 
-double ConfGen::RandomConformerGenerator::getEnergy() const
+double ConfGen::Random3DCoordinatesGenerator::getEnergy() const
 {
     return energy;
 }
 
-bool ConfGen::RandomConformerGenerator::timeoutExceeded() const
+bool ConfGen::Random3DCoordinatesGenerator::timeoutExceeded() const
 {
 	if (timeout == 0)
 		return false;
@@ -233,7 +247,7 @@ bool ConfGen::RandomConformerGenerator::timeoutExceeded() const
 	return (timer.elapsed().wall > (boost::timer::nanosecond_type(timeout) * 1000000));
 }
 
-bool ConfGen::RandomConformerGenerator::has3DCoordinates(const Chem::Atom& atom) const
+bool ConfGen::Random3DCoordinatesGenerator::has3DCoordinates(const Chem::Atom& atom) const
 {
 	return !rawCoordsGenerator.getExcludedHydrogenMask().test(molGraph->getAtomIndex(atom));
 }

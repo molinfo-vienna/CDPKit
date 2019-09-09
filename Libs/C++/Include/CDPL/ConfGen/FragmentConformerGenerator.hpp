@@ -40,6 +40,9 @@
 
 #include "CDPL/ConfGen/APIPrefix.hpp"
 #include "CDPL/ConfGen/Raw3DCoordinatesGenerator.hpp"
+#include "CDPL/ConfGen/ForceFieldType.hpp"
+#include "CDPL/ForceField/MMFF94InteractionParameterizer.hpp"
+#include "CDPL/ForceField/MMFF94InteractionData.hpp"
 #include "CDPL/ForceField/MMFF94EnergyCalculator.hpp"
 #include "CDPL/ForceField/MMFF94GradientCalculator.hpp"
 #include "CDPL/Chem/Hydrogen3DCoordinatesGenerator.hpp"
@@ -75,16 +78,25 @@ namespace CDPL
 			static const std::size_t  DEF_MAX_NUM_RING_CONFORMER_TRIALS   = 2000;
 			static const std::size_t  DEF_RING_CONFORMER_TRIAL_FACTOR     = 20;
 			static const std::size_t  DEF_TIMEOUT                         = 10 * 60 * 1000;
+			static const unsigned int DEF_FORCEFIELD_TYPE                 = ForceFieldType::MMFF94S_NO_ESTAT;
 			static const double       DEF_MINIMIZATION_STOP_GRADIENT_NORM;
 			static const double       DEF_MINIMIZATION_STOP_ENERGY_DELTA;
 			static const double       DEF_ENERGY_WINDOW;
 			static const double       DEF_MIN_RMSD;
-
+	
 			FragmentConformerGenerator();
 	
 			void setMaxNumStructureGenerationTrials(std::size_t max_num);
 
 			std::size_t getMaxNumStructureGenerationTrials() const;
+
+			void setForceFieldType(unsigned int type);
+	    
+			unsigned int getForceFieldType() const;
+
+			void performStrictAtomTyping(bool strict);
+
+			bool strictAtomTypingPerformed() const;
 
 			void setMaxNumMinimizationSteps(std::size_t max_num);
 
@@ -134,8 +146,7 @@ namespace CDPL
 
 			const ProgressCallbackFunction& getProgressCallback() const;
 
-			std::size_t generate(const Chem::MolecularGraph& molgraph, const ForceField::MMFF94InteractionData& ia_data, 
-								 unsigned int frag_type);
+			unsigned int generate(const Chem::MolecularGraph& molgraph, unsigned int frag_type);
 
 			std::size_t getNumConformers() const;
 
@@ -155,14 +166,14 @@ namespace CDPL
 
 			FragmentConformerGenerator& operator=(const FragmentConformerGenerator&);
 
-			void generateSingleConformer();
-			void generateFlexibleRingConformers();
+			unsigned int generateSingleConformer();
+			unsigned int generateFlexibleRingConformers();
 
 			bool outputExistingCoordinates(ConfData& conf);
-			bool generateRandomConformer(ConfData& conf, bool best_opt);
+			unsigned int generateRandomConformer(ConfData& conf, bool best_opt);
 
-			void init(const Chem::MolecularGraph& molgraph, const ForceField::MMFF94InteractionData& ia_data);
-			void initRandomConformerGeneration();
+			void init(const Chem::MolecularGraph& molgraph);
+			bool initRandomConformerGeneration();
 
 			bool checkRMSD(const ConfData& conf);
 			
@@ -215,6 +226,8 @@ namespace CDPL
 
 			typedef ForceField::MMFF94EnergyCalculator<double> MMFF94EnergyCalculator;
 			typedef ForceField::MMFF94GradientCalculator<double> MMFF94GradientCalculator;
+			typedef ForceField::MMFF94InteractionParameterizer MMFF94InteractionParameterizer;
+			typedef ForceField::MMFF94InteractionData MMFF94InteractionData;
 			typedef Math::BFGSMinimizer<Math::Vector3DArray::StorageType, double> BFGSMinimizer; 
 			typedef Math::VectorArrayAlignmentCalculator<Math::Vector3DArray> AlignmentCalculator;
 			typedef std::vector<ConfData> ConfDataArray;
@@ -238,7 +251,9 @@ namespace CDPL
 			boost::timer::cpu_timer                  timer;
 			const Chem::MolecularGraph*              molGraph;
 			std::size_t                              numAtoms;
-			const ForceField::MMFF94InteractionData* mmff94Interactions;   
+			unsigned int                             forceFieldType;
+			MMFF94InteractionParameterizer           mmff94Parameterizer;
+			MMFF94InteractionData                    mmff94Data;
 			MMFF94EnergyCalculator                   mmff94EnergyCalc;
 			MMFF94GradientCalculator                 mmff94GradientCalc;
 			BFGSMinimizer                            energyMinimizer;

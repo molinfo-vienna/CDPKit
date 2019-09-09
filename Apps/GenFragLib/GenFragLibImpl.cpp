@@ -206,7 +206,7 @@ GenFragLibImpl::GenFragLibImpl():
 	timeout(CDPL::ConfGen::FragmentConformerGenerator::DEF_TIMEOUT / 1000), 
 	eWindow(CDPL::ConfGen::FragmentConformerGenerator::DEF_ENERGY_WINDOW), 
 	confGenTrialFactor(CDPL::ConfGen::FragmentConformerGenerator::DEF_RING_CONFORMER_TRIAL_FACTOR), 
-	forceFieldType(CDPL::ConfGen::FragmentLibraryGenerator::DEF_FORCE_FIELD_TYPE), 
+	forceFieldType(CDPL::ConfGen::FragmentConformerGenerator::DEF_FORCEFIELD_TYPE), 
 	useInputCoords(false), strictMMFF94AtomTypes(true), maxLibSize(0), inputHandler(), 
 	fragmentLibPtr(new CDPL::ConfGen::FragmentLibrary())
 {

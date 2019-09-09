@@ -60,6 +60,7 @@ ENDFOREACH(PARAM_FILE)
 SET(cdpl-forcefield_LIB_SRCS
     ${PARAMETER_FILE_STRINGS}
 
+    Exceptions.cpp
     AtomProperty.cpp
     BondProperty.cpp
     MolecularGraphProperty.cpp

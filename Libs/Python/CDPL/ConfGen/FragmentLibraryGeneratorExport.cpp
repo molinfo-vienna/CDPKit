@@ -62,14 +62,6 @@ void CDPLPythonConfGen::exportFragmentLibraryGenerator()
 			 (python::arg("self"), python::arg("func")))
 		.def("getProgressCallback", &ConfGen::FragmentLibraryGenerator::getProgressCallback, 
 			 python::arg("self"), python::return_internal_reference<>())
-		.def("setForceFieldType", &ConfGen::FragmentLibraryGenerator::setForceFieldType,
-			 (python::arg("self"), python::arg("type")))
-		.def("getForceFieldType", &ConfGen::FragmentLibraryGenerator::getForceFieldType,
-			 python::arg("self"))
-		.def("performStrictAtomTyping", &ConfGen::FragmentLibraryGenerator::performStrictAtomTyping,
-			 (python::arg("self"), python::arg("strict")))
-		.def("strictAtomTypingPerformed", &ConfGen::FragmentLibraryGenerator::strictAtomTypingPerformed,
-			 python::arg("self"))
 		.def("setMaxNumStructureGenerationTrials", &ConfGen::FragmentLibraryGenerator::setMaxNumStructureGenerationTrials, 
 			 (python::arg("self"), python::arg("max_num")))
 		.def("getMaxNumStructureGenerationTrials", &ConfGen::FragmentLibraryGenerator::getMaxNumStructureGenerationTrials, 
@@ -120,7 +112,6 @@ void CDPLPythonConfGen::exportFragmentLibraryGenerator()
 			 python::arg("self"))
 		.def("process", &ConfGen::FragmentLibraryGenerator::process, 
 			 (python::arg("self"), python::arg("molgraph")))
-		.def_readonly("DEF_FORCE_FIELD_TYPE", ConfGen::FragmentLibraryGenerator::DEF_FORCE_FIELD_TYPE)
 		.add_property("resultCallback", 
 					  python::make_function(&ConfGen::FragmentLibraryGenerator::getProcessingResultCallback,
 											python::return_internal_reference<>()),
@@ -137,10 +128,6 @@ void CDPLPythonConfGen::exportFragmentLibraryGenerator()
 					  python::make_function(&ConfGen::FragmentLibraryGenerator::getFragmentLibrary,
 											python::return_value_policy<python::copy_const_reference>()),
 					  &ConfGen::FragmentLibraryGenerator::setFragmentLibrary)
-		.add_property("strictAtomTyping", &ConfGen::FragmentLibraryGenerator::strictAtomTypingPerformed,
-					  &ConfGen::FragmentLibraryGenerator::performStrictAtomTyping)
-		.add_property("forceFieldType", &ConfGen::FragmentLibraryGenerator::getForceFieldType,
-					  &ConfGen::FragmentLibraryGenerator::setForceFieldType)
 		.add_property("maxNumStructGenTrials", &ConfGen::FragmentLibraryGenerator::getMaxNumStructureGenerationTrials, 
 					  &ConfGen::FragmentLibraryGenerator::setMaxNumStructureGenerationTrials)
 		.add_property("maxNumMinimizationSteps", &ConfGen::FragmentLibraryGenerator::getMaxNumMinimizationSteps, 

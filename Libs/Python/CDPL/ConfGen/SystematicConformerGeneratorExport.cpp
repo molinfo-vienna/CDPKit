@@ -134,12 +134,6 @@ void CDPLPythonConfGen::exportSystematicConformerGenerator()
 		.def_readonly("DEF_ENERGY_WINDOW", ConfGen::SystematicConformerGenerator::Settings::DEF_ENERGY_WINDOW)
 		;
 
-	python::enum_<ConfGen::SystematicConformerGenerator::Status>("Status")
-		.value("SUCCESS", ConfGen::SystematicConformerGenerator::SUCCESS)
-		.value("ERROR", ConfGen::SystematicConformerGenerator::ERROR)
-		.value("TIMEOUT_EXCEEDED", ConfGen::SystematicConformerGenerator::TIMEOUT_EXCEEDED)
-		.export_values();
-
 	cl
 		.def(python::init<>(python::arg("self")))
 //		.def(python::init<const ConfGen::SystematicConformerGenerator&>((python::arg("self"), python::arg("gen"))))

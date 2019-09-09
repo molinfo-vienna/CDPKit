@@ -34,6 +34,7 @@
 #include "CDPL/ForceField/MolecularGraphFunctions.hpp"
 #include "CDPL/ForceField/AtomFunctions.hpp"
 #include "CDPL/ForceField/BondFunctions.hpp"
+#include "CDPL/ForceField/Exceptions.hpp"
 #include "CDPL/Chem/MolecularGraph.hpp"
 #include "CDPL/Chem/Atom.hpp"
 #include "CDPL/Chem/Bond.hpp"
@@ -42,7 +43,6 @@
 #include "CDPL/Chem/AtomType.hpp"
 #include "CDPL/Chem/HybridizationState.hpp"
 #include "CDPL/Chem/UtilityFunctions.hpp"
-#include "CDPL/Base/Exceptions.hpp"
 
 
 using namespace CDPL; 
@@ -163,8 +163,8 @@ void ForceField::MMFF94TorsionInteractionParameterizer::parameterize(const Chem:
 		const AtomTypePropEntry& ctr_atom1_prop_entry = typePropTable->getEntry(ctr_atom1_type);
 
 		if (!ctr_atom1_prop_entry)
-			throw Base::ItemNotFound("MMFF94TorsionInteractionParameterizer: could not find MMFF94 atom type properties for atom #" + 
-									 boost::lexical_cast<std::string>(ctr_atom1_idx));
+			throw ParameterizationFailed("MMFF94TorsionInteractionParameterizer: could not find MMFF94 atom type properties for atom #" + 
+										 boost::lexical_cast<std::string>(ctr_atom1_idx));
 
 		if (ctr_atom1_prop_entry.formsLinearBondAngle()) // Empirical rule a)
 			continue;
@@ -174,8 +174,8 @@ void ForceField::MMFF94TorsionInteractionParameterizer::parameterize(const Chem:
 		const AtomTypePropEntry& ctr_atom2_prop_entry = typePropTable->getEntry(ctr_atom2_type);
 
 		if (!ctr_atom2_prop_entry)
-			throw Base::ItemNotFound("MMFF94TorsionInteractionParameterizer: could not find MMFF94 atom type properties for atom #" + 
-									 boost::lexical_cast<std::string>(ctr_atom2_idx));
+			throw ParameterizationFailed("MMFF94TorsionInteractionParameterizer: could not find MMFF94 atom type properties for atom #" + 
+										 boost::lexical_cast<std::string>(ctr_atom2_idx));
 
 		if (ctr_atom2_prop_entry.formsLinearBondAngle()) // Empirical rule a)
 			continue;
@@ -251,14 +251,14 @@ bool ForceField::MMFF94TorsionInteractionParameterizer::getParameters(const Chem
 	const unsigned int* term_atom1_param_types = paramTypeMap->getEntry(term_atom1_type).getParameterTypes();
 
 	if (!term_atom1_param_types)
-		throw Base::ItemNotFound("MMFF94TorsionInteractionParameterizer: could not find MMFF94 parameter atom type equivalence list for atom #" + 
-								 boost::lexical_cast<std::string>(molgraph.getAtomIndex(term_atom1)));
+		throw ParameterizationFailed("MMFF94TorsionInteractionParameterizer: could not find MMFF94 parameter atom type equivalence list for atom #" + 
+									 boost::lexical_cast<std::string>(molgraph.getAtomIndex(term_atom1)));
 
 	const unsigned int* term_atom2_param_types = paramTypeMap->getEntry(term_atom2_type).getParameterTypes();
 
 	if (!term_atom2_param_types)
-		throw Base::ItemNotFound("MMFF94TorsionInteractionParameterizer: could not find MMFF94 parameter atom type equivalence list for atom #" + 
-								 boost::lexical_cast<std::string>(molgraph.getAtomIndex(term_atom2)));
+		throw ParameterizationFailed("MMFF94TorsionInteractionParameterizer: could not find MMFF94 parameter atom type equivalence list for atom #" + 
+									 boost::lexical_cast<std::string>(molgraph.getAtomIndex(term_atom2)));
 
 	const ParamEntry* param_entry = &paramTable->getEntry(tor_type_idx, term_atom1_param_types[0], ctr_atom1_type, ctr_atom2_type, term_atom2_param_types[0]);
 

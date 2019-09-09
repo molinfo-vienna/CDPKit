@@ -66,7 +66,7 @@ SET(cdpl-confgen_LIB_SRCS
 IF(Boost_TIMER_FOUND AND Boost_CHRONO_FOUND)
    SET(cdpl-confgen_LIB_SRCS
        ${cdpl-confgen_LIB_SRCS}
-       RandomConformerGenerator.cpp
+       Random3DCoordinatesGenerator.cpp
        SystematicConformerGenerator.cpp
        SystematicConformerGeneratorImpl.cpp
        FragmentConformerGenerator.cpp

@@ -39,22 +39,13 @@
 using namespace CDPL;
 
 
-const unsigned int ConfGen::FragmentLibraryGenerator::DEF_FORCE_FIELD_TYPE;
-
-
 ConfGen::FragmentLibraryGenerator::FragmentLibraryGenerator(): 
 	fragLib(), fragSSSR(new Chem::SmallestSetOfSmallestRings())
-{
-	performStrictAtomTyping(true);
-	setForceFieldType(DEF_FORCE_FIELD_TYPE);
-}
+{}
 
 ConfGen::FragmentLibraryGenerator::FragmentLibraryGenerator(const FragmentLibrary::SharedPointer& lib): 
 	fragLib(lib), fragSSSR(new Chem::SmallestSetOfSmallestRings())
-{
-	performStrictAtomTyping(true);
-	setForceFieldType(DEF_FORCE_FIELD_TYPE);
-}
+{}
 
 void ConfGen::FragmentLibraryGenerator::setFragmentLibrary(const FragmentLibrary::SharedPointer& lib)
 {
@@ -68,27 +59,22 @@ const ConfGen::FragmentLibrary::SharedPointer& ConfGen::FragmentLibraryGenerator
 
 void ConfGen::FragmentLibraryGenerator::setForceFieldType(unsigned int type)
 {
-	if (type == ForceFieldType::MMFF94 || type == ForceFieldType::MMFF94_NO_ESTAT)
-		mmff94Parameterizer.setDynamicParameterDefaults();
-	else
-		mmff94Parameterizer.setStaticParameterDefaults();
-
-	forceFieldType = type;
+	fragConfGen.setForceFieldType(type);
 }
 	    
 unsigned int ConfGen::FragmentLibraryGenerator::getForceFieldType() const
 {
-	return forceFieldType;
+	return fragConfGen.getForceFieldType();
 }
 
 void ConfGen::FragmentLibraryGenerator::performStrictAtomTyping(bool strict)
 {
-	mmff94Parameterizer.performStrictAtomTyping(strict);
+	fragConfGen.performStrictAtomTyping(strict);
 }
 
 bool ConfGen::FragmentLibraryGenerator::strictAtomTypingPerformed() const
 {
-	return mmff94Parameterizer.strictAtomTypingPerformed();
+	return fragConfGen.strictAtomTypingPerformed();
 }
 
 void ConfGen::FragmentLibraryGenerator::setMaxNumStructureGenerationTrials(std::size_t max_num)
@@ -274,18 +260,12 @@ void ConfGen::FragmentLibraryGenerator::processFragment(const Chem::MolecularGra
 		return;
 	
 	try {
-		const unsigned int ia_types = (forceFieldType == ForceFieldType::MMFF94 || forceFieldType == ForceFieldType::MMFF94S ?
-									   ForceField::InteractionType::ALL :
-									   ForceField::InteractionType::ALL ^ ForceField::InteractionType::ELECTROSTATIC);
-
 		fragSSSR->perceive(fragLibEntry);
 
 		setSSSR(fragLibEntry, fragSSSR);
 
-		mmff94Parameterizer.parameterize(fragLibEntry, mmff94Data, ia_types);
-
-		fragConfGen.generate(fragLibEntry, mmff94Data, perceiveFragmentType(fragLibEntry));
-
+		fragConfGen.generate(fragLibEntry, perceiveFragmentType(fragLibEntry));
+		
 		std::size_t num_confs = fragConfGen.getNumConformers();
 
 		if (num_confs == 0) {

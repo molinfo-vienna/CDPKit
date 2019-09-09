@@ -1,7 +1,7 @@
 /* -*- mode: c++; c-basic-offset: 4; tab-width: 4; indent-tabs-mode: t -*- */
 
 /* 
- * NamespaceExports.hpp 
+ * ReturnCodeExport.cpp 
  *
  * This file is part of the Chemical Data Processing Toolkit
  *
@@ -24,16 +24,31 @@
  */
 
 
-#ifndef CDPL_PYTHON_CONFGEN_NAMESPACEEXPORTS_HPP
-#define CDPL_PYTHON_CONFGEN_NAMESPACEEXPORTS_HPP
+#include <boost/python.hpp>
+
+#include "CDPL/ConfGen/ReturnCode.hpp"
+
+#include "NamespaceExports.hpp"
 
 
-namespace CDPLPythonConfGen
+namespace 
 {
 
-	void exportFragmentTypes();
-	void exportForceFieldTypes();
-	void exportReturnCodes();
+	struct ReturnCode {};
 }
 
-#endif // CDPL_PYTHON_CONFGEN_NAMESPACEEXPORTS_HPP
+
+void CDPLPythonConfGen::exportReturnCodes()
+{
+	using namespace boost;
+	using namespace CDPL;
+
+	python::class_<ReturnCode, boost::noncopyable>("ReturnCode", python::no_init)
+		.def_readonly("SUCCESS", &ConfGen::ReturnCode::SUCCESS)
+		.def_readonly("UNINITIALIZED", &ConfGen::ReturnCode::UNINITIALIZED)
+		.def_readonly("FORCEFIELD_SETUP_FAILED", &ConfGen::ReturnCode::FORCEFIELD_SETUP_FAILED)
+		.def_readonly("FORCEFIELD_MINIMIZATION_FAILED", &ConfGen::ReturnCode::FORCEFIELD_MINIMIZATION_FAILED)
+		.def_readonly("MAX_NUM_TRIALS_EXCEEDED", &ConfGen::ReturnCode::MAX_NUM_TRIALS_EXCEEDED)
+		.def_readonly("TIMEOUT_EXCEEDED", &ConfGen::ReturnCode::TIMEOUT_EXCEEDED)
+		.def_readonly("ERROR", &ConfGen::ReturnCode::ERROR);
+}

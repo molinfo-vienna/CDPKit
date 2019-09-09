@@ -30,6 +30,7 @@
 #include "FunctionExports.hpp"
 #include "NamespaceExports.hpp"
 #include "ConverterRegistration.hpp"
+#include "ExceptionTranslatorRegistration.hpp"
 
 
 BOOST_PYTHON_MODULE(_forcefield)
@@ -105,4 +106,5 @@ BOOST_PYTHON_MODULE(_forcefield)
 
 	registerToPythonConverters();
 	registerFromPythonConverters();
+	registerExceptionTranslators();
 }

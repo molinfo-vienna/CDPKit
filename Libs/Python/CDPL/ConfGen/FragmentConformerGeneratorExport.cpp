@@ -54,6 +54,14 @@ void CDPLPythonConfGen::exportFragmentConformerGenerator()
 			 (python::arg("self"), python::arg("max_num")))
 		.def("getMaxNumStructureGenerationTrials", &ConfGen::FragmentConformerGenerator::getMaxNumStructureGenerationTrials, 
 			 python::arg("self"))
+		.def("setForceFieldType", &ConfGen::FragmentConformerGenerator::setForceFieldType,
+			 (python::arg("self"), python::arg("type")))
+		.def("getForceFieldType", &ConfGen::FragmentConformerGenerator::getForceFieldType,
+			 python::arg("self"))
+		.def("performStrictAtomTyping", &ConfGen::FragmentConformerGenerator::performStrictAtomTyping,
+			 (python::arg("self"), python::arg("strict")))
+		.def("strictAtomTypingPerformed", &ConfGen::FragmentConformerGenerator::strictAtomTypingPerformed,
+			 python::arg("self"))
 		.def("setMaxNumMinimizationSteps", &ConfGen::FragmentConformerGenerator::setMaxNumMinimizationSteps, 
 			 (python::arg("self"), python::arg("max_num")))
 		.def("getMaxNumMinimizationSteps", &ConfGen::FragmentConformerGenerator::getMaxNumMinimizationSteps, 
@@ -99,7 +107,7 @@ void CDPLPythonConfGen::exportFragmentConformerGenerator()
 		.def("getMaxNumOutputConformers", &ConfGen::FragmentConformerGenerator::getMaxNumOutputConformers, 
 			 python::arg("self"))
 		.def("generate", &ConfGen::FragmentConformerGenerator::generate, 
-			 (python::arg("self"), python::arg("molgraph"), python::arg("ia_data"), python::arg("frag_type")))
+			 (python::arg("self"), python::arg("molgraph"), python::arg("frag_type")))
 		.def("getExistingCoordinates", &ConfGen::FragmentConformerGenerator::getExistingCoordinates, 
 			 (python::arg("self"), python::arg("molgraph"), python::arg("coords")))
 		.def("getNumConformers", &ConfGen::FragmentConformerGenerator::getNumConformers, python::arg("self"))
@@ -115,6 +123,7 @@ void CDPLPythonConfGen::exportFragmentConformerGenerator()
 		.def_readonly("DEF_RING_CONFORMER_TRIAL_FACTOR", ConfGen::FragmentConformerGenerator::DEF_RING_CONFORMER_TRIAL_FACTOR)
 		.def_readonly("DEF_MINIMIZATION_STOP_GRADIENT_NORM", ConfGen::FragmentConformerGenerator::DEF_MINIMIZATION_STOP_GRADIENT_NORM)
 		.def_readonly("DEF_MINIMIZATION_STOP_ENERGY_DELTA", ConfGen::FragmentConformerGenerator::DEF_MINIMIZATION_STOP_ENERGY_DELTA)
+		.def_readonly("DEF_FORCEFIELD_TYPE", ConfGen::FragmentConformerGenerator::DEF_FORCEFIELD_TYPE)
 		.def_readonly("DEF_ENERGY_WINDOW", ConfGen::FragmentConformerGenerator::DEF_ENERGY_WINDOW)
 		.def_readonly("DEF_MIN_RMSD", ConfGen::FragmentConformerGenerator::DEF_MIN_RMSD)
 		.add_property("progressCallback", 
@@ -124,6 +133,10 @@ void CDPLPythonConfGen::exportFragmentConformerGenerator()
 		.add_property("numConformers", &ConfGen::FragmentConformerGenerator::getNumConformers) 
 		.add_property("maxNumStructGenTrials", &ConfGen::FragmentConformerGenerator::getMaxNumStructureGenerationTrials, 
 					  &ConfGen::FragmentConformerGenerator::setMaxNumStructureGenerationTrials)
+		.add_property("strictAtomTyping", &ConfGen::FragmentConformerGenerator::strictAtomTypingPerformed,
+					  &ConfGen::FragmentConformerGenerator::performStrictAtomTyping)
+		.add_property("forceFieldType", &ConfGen::FragmentConformerGenerator::getForceFieldType,
+					  &ConfGen::FragmentConformerGenerator::setForceFieldType)
 		.add_property("maxNumMinimizationSteps", &ConfGen::FragmentConformerGenerator::getMaxNumMinimizationSteps, 
 					  &ConfGen::FragmentConformerGenerator::setMaxNumMinimizationSteps)
 		.add_property("maxNumOutputConformers", &ConfGen::FragmentConformerGenerator::getMaxNumOutputConformers, 

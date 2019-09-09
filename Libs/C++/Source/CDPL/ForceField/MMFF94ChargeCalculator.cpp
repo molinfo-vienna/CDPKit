@@ -36,12 +36,12 @@
 #include "CDPL/ForceField/MolecularGraphFunctions.hpp"
 #include "CDPL/ForceField/AtomFunctions.hpp"
 #include "CDPL/ForceField/BondFunctions.hpp"
+#include "CDPL/ForceField/Exceptions.hpp"
 #include "CDPL/Chem/FragmentList.hpp"
 #include "CDPL/Chem/Fragment.hpp"
 #include "CDPL/Chem/Atom.hpp"
 #include "CDPL/Chem/Bond.hpp"
 #include "CDPL/Chem/AtomFunctions.hpp"
-#include "CDPL/Base/Exceptions.hpp"
 
 
 using namespace CDPL; 
@@ -279,14 +279,14 @@ void ForceField::MMFF94ChargeCalculator::calcPartialCharges(Util::DArray& charge
 		const PBCIEntry& pbci_entry = partBondChargeIncTable->getEntry(atom_type);
 
 		if (!pbci_entry)
-			throw Base::ItemNotFound("MMFF94ChargeCalculator: could not find MMFF94 partial bond charge increment parameters for atom #" + 
-									 boost::lexical_cast<std::string>(i));
+			throw ParameterizationFailed("MMFF94ChargeCalculator: could not find MMFF94 partial bond charge increment parameters for atom #" + 
+										 boost::lexical_cast<std::string>(i));
 	
 		const TypePropertyEntry& prop_entry = atomTypePropTable->getEntry(atom_type);
 
 		if (!prop_entry)
-			throw Base::ItemNotFound("MMFF94ChargeCalculator: could not find MMFF94 atom type properties for atom #" + 
-									 boost::lexical_cast<std::string>(i));
+			throw ParameterizationFailed("MMFF94ChargeCalculator: could not find MMFF94 atom type properties for atom #" + 
+										 boost::lexical_cast<std::string>(i));
 
         double form_chg_adj_factor = pbci_entry.getFormalChargeAdjustmentFactor(); // uI
         double form_chg = formCharges[i];                                          // q0I
@@ -313,14 +313,14 @@ void ForceField::MMFF94ChargeCalculator::calcPartialCharges(Util::DArray& charge
 			const PBCIEntry& nbr_pbci_entry = partBondChargeIncTable->getEntry(nbr_atom_type);
 
 			if (!nbr_pbci_entry)
-				throw Base::ItemNotFound("MMFF94ChargeCalculator: could not find MMFF94 partial bond charge increment parameters for atom #" + 
-										 boost::lexical_cast<std::string>(nbr_atom_idx));
+				throw ParameterizationFailed("MMFF94ChargeCalculator: could not find MMFF94 partial bond charge increment parameters for atom #" + 
+											 boost::lexical_cast<std::string>(nbr_atom_idx));
 	
 			const TypePropertyEntry& nbr_prop_entry = atomTypePropTable->getEntry(nbr_atom_type);
 
 			if (!nbr_prop_entry)
-				throw Base::ItemNotFound("MMFF94ChargeCalculator: could not find MMFF94 atom type properties for atom #" + 
-										 boost::lexical_cast<std::string>(nbr_atom_idx));
+				throw ParameterizationFailed("MMFF94ChargeCalculator: could not find MMFF94 atom type properties for atom #" + 
+											 boost::lexical_cast<std::string>(nbr_atom_idx));
 
 			double nbr_form_chg = formCharges[nbr_atom_idx];                                   // q0K
 			double nbr_form_chg_adj_factor = nbr_pbci_entry.getFormalChargeAdjustmentFactor(); // uK

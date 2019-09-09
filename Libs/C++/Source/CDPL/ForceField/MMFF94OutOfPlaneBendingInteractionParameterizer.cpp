@@ -34,11 +34,11 @@
 
 #include "CDPL/ForceField/MMFF94OutOfPlaneBendingInteractionParameterizer.hpp"
 #include "CDPL/ForceField/AtomFunctions.hpp"
+#include "CDPL/ForceField/Exceptions.hpp"
 #include "CDPL/Chem/MolecularGraph.hpp"
 #include "CDPL/Chem/Atom.hpp"
 #include "CDPL/Chem/Bond.hpp"
 #include "CDPL/Chem/AtomFunctions.hpp"
-#include "CDPL/Base/Exceptions.hpp"
 
 
 using namespace CDPL; 
@@ -97,8 +97,8 @@ void ForceField::MMFF94OutOfPlaneBendingInteractionParameterizer::parameterize(c
 		const AtomTypePropEntry& ctr_prop_entry = typePropTable->getEntry(ctr_atom_type);
 
 		if (!ctr_prop_entry)
-			throw Base::ItemNotFound("MMFF94OutOfPlaneBendingInteractionParameterizer: could not find MMFF94 atom type properties for atom #" + 
-									 boost::lexical_cast<std::string>(i));
+			throw ParameterizationFailed("MMFF94OutOfPlaneBendingInteractionParameterizer: could not find MMFF94 atom type properties for atom #" + 
+										 boost::lexical_cast<std::string>(i));
 
 		if (ctr_prop_entry.getNumNeighbors() != 3) // only 3-valent atoms are considered
 			continue;
@@ -137,8 +137,8 @@ double ForceField::MMFF94OutOfPlaneBendingInteractionParameterizer::getForceCons
 		nbr_atom_param_types[i] = paramTypeMap->getEntry(nbr_atom_type).getParameterTypes();
 
 		if (!nbr_atom_param_types[i])
-			throw Base::ItemNotFound("MMFF94OutOfPlaneBendingInteractionParameterizer: could not find MMFF94 parameter atom type equivalence list for atom #" + 
-									 boost::lexical_cast<std::string>(molgraph.getAtomIndex(*nbr_atoms[i])));
+			throw ParameterizationFailed("MMFF94OutOfPlaneBendingInteractionParameterizer: could not find MMFF94 parameter atom type equivalence list for atom #" + 
+										 boost::lexical_cast<std::string>(molgraph.getAtomIndex(*nbr_atoms[i])));
 	}
 
 	for (std::size_t i = 0; i < MMFF94PrimaryToParameterAtomTypeMap::Entry::NUM_TYPES; i++) {
@@ -150,7 +150,7 @@ double ForceField::MMFF94OutOfPlaneBendingInteractionParameterizer::getForceCons
 		return param_entry.getForceConstant();
 	}
 
-	throw Base::ItemNotFound("MMFF94OutOfPlaneBendingInteractionParameterizer: could not find MMFF94 parameters for out-of-plane bending interaction centered at atom #" + 
-							 boost::lexical_cast<std::string>(ctr_atom_idx));
+	throw ParameterizationFailed("MMFF94OutOfPlaneBendingInteractionParameterizer: could not find MMFF94 parameters for out-of-plane bending interaction centered at atom #" + 
+								 boost::lexical_cast<std::string>(ctr_atom_idx));
 	return 0.0;
 }

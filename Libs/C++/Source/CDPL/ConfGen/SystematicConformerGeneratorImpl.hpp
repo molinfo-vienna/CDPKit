@@ -66,7 +66,6 @@ namespace CDPL
 
 		public:
 			typedef SystematicConformerGenerator::Settings Settings;
-			typedef SystematicConformerGenerator::Status Status;
 
 			SystematicConformerGeneratorImpl();
 
@@ -76,7 +75,7 @@ namespace CDPL
 
 			const Settings& getSettings() const;
 
-			Status generate(const Chem::MolecularGraph& molgraph);
+			unsigned int generate(const Chem::MolecularGraph& molgraph);
 
 		private:
 			typedef std::vector<const Chem::Atom*> AtomList;
@@ -113,11 +112,11 @@ namespace CDPL
 
 			void setupRootAtomIndexLists(FragmentTreeNode& node) const;
 
-			void genConfSearchMMFF94InteractionData();
+			bool genConfSearchMMFF94InteractionData();
 
 			void clearNodeConformers(FragmentTreeNode& node) const;
 
-			bool setupBuildFragmentConformers();
+			unsigned int setupBuildFragmentConformers();
 
 			void calcLeafNodeConformerEnergies(FragmentTreeNode& node);
 
@@ -139,7 +138,7 @@ namespace CDPL
 			
 			bool setExistingCoordinates(FragmentTreeNode& node);
 			bool setFragmentLibraryConformers(FragmentTreeNode& node);
-			bool genFragmentConformers(FragmentTreeNode& node);
+			unsigned int genFragmentConformers(FragmentTreeNode& node);
 
 			void distChainBuildFragmentCoordinates(FragmentTreeNode& node, const Math::Vector3DArray& coords, 
 												   bool fix_configs, bool opt_db_configs);
@@ -189,7 +188,7 @@ namespace CDPL
 			std::size_t getRotationalSymmetryOrder(const Chem::Atom& atom, const Chem::Atom& bond_nbr,
 												   const AtomList& nbr_atoms, const FragmentTreeNode& node);
 
-			void genMMFF94InteractionData(const Chem::MolecularGraph& molgraph, unsigned int ff_type, 
+			bool genMMFF94InteractionData(const Chem::MolecularGraph& molgraph, unsigned int ff_type, 
 										  ForceField::MMFF94InteractionData& ia_data);
 
 			void distFragmentMMFF94InteractionData(FragmentTreeNode& node);
@@ -240,7 +239,6 @@ namespace CDPL
 			IndexArray                                      symMappingAtomIndices;
 			ForceField::MMFF94InteractionParameterizer      mmff94Parameterizer;
 			ForceField::MMFF94InteractionData               tmpMMFF94Data;
-			ForceField::MMFF94InteractionData               fragBuildMMFF94Data;
 			ForceField::MMFF94EnergyCalculator<double>      mmff94EnergyCalc;
 			AllocVector3DArrayList                          allocCoordArrays;
 			Vector3DArrayList                               freeCoordArrays;

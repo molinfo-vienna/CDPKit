@@ -31,6 +31,7 @@
 #ifndef CDPL_FORCEFIELD_HPP
 #define CDPL_FORCEFIELD_HPP
 
+#include "CDPL/ForceField/Exceptions.hpp"
 #include "CDPL/ForceField/AtomProperty.hpp"
 #include "CDPL/ForceField/BondProperty.hpp"
 #include "CDPL/ForceField/MolecularGraphProperty.hpp"

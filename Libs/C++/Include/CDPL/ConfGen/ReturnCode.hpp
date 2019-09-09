@@ -1,7 +1,7 @@
 /* -*- mode: c++; c-basic-offset: 4; tab-width: 4; indent-tabs-mode: t -*- */
 
 /* 
- * NamespaceExports.hpp 
+ * ReturnCode.hpp 
  *
  * This file is part of the Chemical Data Processing Toolkit
  *
@@ -23,17 +23,51 @@
  * Boston, MA 02111-1307, USA.
  */
 
+/**
+ * \file
+ * \brief Definition of constants in namespace CDPL::Confgen::ReturnCode.
+ */
 
-#ifndef CDPL_PYTHON_CONFGEN_NAMESPACEEXPORTS_HPP
-#define CDPL_PYTHON_CONFGEN_NAMESPACEEXPORTS_HPP
+#ifndef CDPL_CONFGEN_RETURNCODE_HPP
+#define CDPL_CONFGEN_RETURNCODE_HPP
 
 
-namespace CDPLPythonConfGen
+namespace CDPL 
 {
 
-	void exportFragmentTypes();
-	void exportForceFieldTypes();
-	void exportReturnCodes();
+    namespace ConfGen
+    {
+
+	/**
+	 * \addtogroup CDPL_CONFGEN_CONSTANTS
+	 * @{
+	 */
+
+	/**
+	 * \brief Provides constants that are used to describe the result of operations related to conformer generation.
+	 */
+	namespace ReturnCode
+	{
+			
+	    const int SUCCESS                        = 0; 
+
+	    const int UNINITIALIZED                  = 1;
+
+	    const int FORCEFIELD_SETUP_FAILED        = 2;
+
+	    const int FORCEFIELD_MINIMIZATION_FAILED = 3;
+
+	    const int MAX_NUM_TRIALS_EXCEEDED        = 4;
+
+	    const int TIMEOUT_EXCEEDED               = 5;
+
+	    const int ERROR                          = 6;
+	}
+
+	/**
+	 * @}
+	 */
+    }
 }
 
-#endif // CDPL_PYTHON_CONFGEN_NAMESPACEEXPORTS_HPP
+#endif // CDPL_CONFGEN_RETURNCODE_HPP

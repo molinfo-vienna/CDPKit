@@ -102,6 +102,7 @@ SET(forcefield_MOD_SRCS
 
     ToPythonConverterRegistration.cpp
     FromPythonConverterRegistration.cpp
+    ExceptionTranslatorRegistration.cpp
    )
 
 ADD_LIBRARY(_forcefield MODULE ${forcefield_MOD_SRCS})

@@ -36,6 +36,7 @@
 
 #include "CDPL/ConfGen/UtilityFunctions.hpp"
 #include "CDPL/ConfGen/FragmentType.hpp"
+#include "CDPL/ConfGen/ReturnCode.hpp"
 #include "CDPL/Chem/MolecularGraph.hpp"
 #include "CDPL/Chem/Bond.hpp"
 #include "CDPL/Chem/AtomFunctions.hpp"
@@ -49,8 +50,8 @@
 #include "CDPL/Chem/BondConfiguration.hpp"
 #include "CDPL/ForceField/InteractionType.hpp"
 #include "CDPL/ForceField/UtilityFunctions.hpp"
+#include "CDPL/ForceField/Exceptions.hpp"
 #include "CDPL/Math/Quaternion.hpp"
-#include "CDPL/Base/Exceptions.hpp"
 
 #include "SystematicConformerGeneratorImpl.hpp"
 #include "TorsionLibraryDataReader.hpp"
@@ -242,7 +243,7 @@ ConfGen::SystematicConformerGeneratorImpl::SystematicConformerGeneratorImpl()
 	using namespace Chem;
 
 	fragConfGen.reuseExistingCoordinates(false);
-
+	
 	torsionRuleMatcher.reportUniqueMappingsOnly(true);
 	torsionRuleMatcher.stopAtFirstMatchingRule(true);
 
@@ -268,39 +269,39 @@ ConfGen::SystematicConformerGeneratorImpl::getSettings() const
 	return settings;
 }
 
-ConfGen::SystematicConformerGeneratorImpl::Status 
-ConfGen::SystematicConformerGeneratorImpl::generate(const Chem::MolecularGraph& molgraph)
+unsigned int ConfGen::SystematicConformerGeneratorImpl::generate(const Chem::MolecularGraph& molgraph)
 {
 	init(molgraph);
 
 	buildTree(molgraph);
 	setupRootAtomIndexLists(fragTree);
-	genConfSearchMMFF94InteractionData();
+
+	if (!genConfSearchMMFF94InteractionData())
+		return ReturnCode::FORCEFIELD_SETUP_FAILED;
+
 	distFragmentMMFF94InteractionData(fragTree);
 	clearNodeConformers(fragTree);
 
 	if (timeoutExceeded())
-		return Status::TIMEOUT_EXCEEDED;
+		return ReturnCode::TIMEOUT_EXCEEDED;
 	
-	if (!setupBuildFragmentConformers()) {
-		if (timeoutExceeded())
-			return Status::TIMEOUT_EXCEEDED;
+	unsigned int ret_code = setupBuildFragmentConformers();
 
-		return Status::ERROR;
-	}
+	if (ret_code != ReturnCode::SUCCESS)
+		return ret_code;
 
 	calcLeafNodeConformerEnergies(fragTree);
 	setupTorsions(fragTree);
 
 	if (timeoutExceeded())
-		return Status::TIMEOUT_EXCEEDED;
+		return ReturnCode::TIMEOUT_EXCEEDED;
 
 	getSymmetryMappings();
 
 	if (timeoutExceeded())
-		return Status::TIMEOUT_EXCEEDED;
+		return ReturnCode::TIMEOUT_EXCEEDED;
 
-	return Status::SUCCESS;
+	return ReturnCode::SUCCESS;
 }
 
 void ConfGen::SystematicConformerGeneratorImpl::init(const Chem::MolecularGraph& molgraph)
@@ -327,6 +328,9 @@ void ConfGen::SystematicConformerGeneratorImpl::init(const Chem::MolecularGraph&
 							  boost::bind<IndexArray*>(&IndexArrayPtr::get, _1)));
 
 	buildAtomTypeMask(molgraph, hAtomMask, Chem::AtomType::H, true);
+
+	fragConfGen.setForceFieldType(settings.getBuildForceFieldType());
+	fragConfGen.performStrictAtomTyping(settings.strictAtomTypingPerformed());
 }
 
 void ConfGen::SystematicConformerGeneratorImpl::buildTree(const Chem::MolecularGraph& molgraph)
@@ -358,9 +362,9 @@ void ConfGen::SystematicConformerGeneratorImpl::setupRootAtomIndexLists(Fragment
 	setupRootAtomIndexLists(*node.getRightChild());
 }
 
-void ConfGen::SystematicConformerGeneratorImpl::genConfSearchMMFF94InteractionData()
+bool ConfGen::SystematicConformerGeneratorImpl::genConfSearchMMFF94InteractionData()
 {
-	genMMFF94InteractionData(fragTree.getFragment(), settings.getSearchForceFieldType(), fragTree.getMMFF94InteractionData());
+	return genMMFF94InteractionData(fragTree.getFragment(), settings.getSearchForceFieldType(), fragTree.getMMFF94InteractionData());
 }
 
 void ConfGen::SystematicConformerGeneratorImpl::clearNodeConformers(FragmentTreeNode& node) const
@@ -374,7 +378,7 @@ void ConfGen::SystematicConformerGeneratorImpl::clearNodeConformers(FragmentTree
 	clearNodeConformers(*node.getRightChild());
 }
 
-bool ConfGen::SystematicConformerGeneratorImpl::setupBuildFragmentConformers()
+unsigned int ConfGen::SystematicConformerGeneratorImpl::setupBuildFragmentConformers()
 {
 	for (NodeList::const_iterator it = buildFragNodes.begin(), end = buildFragNodes.end(); it != end; ++it) {
 		FragmentTreeNode* node = *it;
@@ -390,11 +394,13 @@ bool ConfGen::SystematicConformerGeneratorImpl::setupBuildFragmentConformers()
 		if (setFragmentLibraryConformers(*node))
 			continue;
 
-		if (!genFragmentConformers(*node))
-			return false;
+		unsigned int ret_code = genFragmentConformers(*node);
+
+		if (ret_code != ReturnCode::SUCCESS)
+			return ret_code;
 	}
 
-	return true;
+	return ReturnCode::SUCCESS;
 }
 
 void ConfGen::SystematicConformerGeneratorImpl::calcLeafNodeConformerEnergies(FragmentTreeNode& node)
@@ -842,7 +848,7 @@ bool ConfGen::SystematicConformerGeneratorImpl::setFragmentLibraryConformers(Fra
 	return false;
 }
 
-bool ConfGen::SystematicConformerGeneratorImpl::genFragmentConformers(FragmentTreeNode& node)
+unsigned int ConfGen::SystematicConformerGeneratorImpl::genFragmentConformers(FragmentTreeNode& node)
 {
 	std::size_t frag_build_to = settings.getMaxFragmentBuildTime();
 
@@ -850,7 +856,7 @@ bool ConfGen::SystematicConformerGeneratorImpl::genFragmentConformers(FragmentTr
 		std::size_t elapsed_time = timer.elapsed().wall / 1000000;
 
 		if (elapsed_time >= settings.getTimeout())
-			return false;
+			return ReturnCode::TIMEOUT_EXCEEDED;
 
 		if (frag_build_to > 0)
 			frag_build_to = std::min(frag_build_to, settings.getTimeout() - elapsed_time);
@@ -866,14 +872,11 @@ bool ConfGen::SystematicConformerGeneratorImpl::genFragmentConformers(FragmentTr
 	fragSSSR->perceive(fragLibEntry);
 	setSSSR(fragLibEntry, fragSSSR);
 
-	genMMFF94InteractionData(fragLibEntry, settings.getBuildForceFieldType(), fragBuildMMFF94Data);
-
-	fragConfGen.generate(fragLibEntry, fragBuildMMFF94Data, node.getFragmentType());
-
+	unsigned int ret_code = fragConfGen.generate(fragLibEntry, node.getFragmentType());
 	std::size_t num_confs = fragConfGen.getNumConformers();
 
 	if (num_confs == 0) 
-		return false;
+		return ret_code;
 
 	if (node.getFragmentType() == FragmentType::CHAIN) {
 		Math::Vector3DArray* coords = allocVector3DArray();
@@ -897,7 +900,7 @@ bool ConfGen::SystematicConformerGeneratorImpl::genFragmentConformers(FragmentTr
 			enumNitrogens(node, false);
 		}
 
-		return true;
+		return ReturnCode::SUCCESS;
 	}
 
 	setupAromRingSubstituentBondLengthList(node);
@@ -920,7 +923,8 @@ bool ConfGen::SystematicConformerGeneratorImpl::genFragmentConformers(FragmentTr
 	}
 
 	enumNitrogens(node, true);
-	return true;
+
+	return ReturnCode::SUCCESS;
 }
 
 void ConfGen::SystematicConformerGeneratorImpl::buildFragmentLibraryEntryAtomIndexMap(const FragmentTreeNode& node)
@@ -1682,7 +1686,7 @@ std::size_t ConfGen::SystematicConformerGeneratorImpl::getRotationalSymmetryOrde
 	return 1;
 }
 
-void ConfGen::SystematicConformerGeneratorImpl::genMMFF94InteractionData(const Chem::MolecularGraph& molgraph, unsigned int ff_type, 
+bool ConfGen::SystematicConformerGeneratorImpl::genMMFF94InteractionData(const Chem::MolecularGraph& molgraph, unsigned int ff_type, 
 																		 ForceField::MMFF94InteractionData& ia_data)
 {
 	using namespace ForceField;
@@ -1714,7 +1718,15 @@ void ConfGen::SystematicConformerGeneratorImpl::genMMFF94InteractionData(const C
 	}
 
 	mmff94Parameterizer.performStrictAtomTyping(settings.strictAtomTypingPerformed());
-	mmff94Parameterizer.parameterize(molgraph, ia_data, ia_types);
+
+	try {
+		mmff94Parameterizer.parameterize(molgraph, ia_data, ia_types);
+		
+	} catch (const ForceField::Error&) {
+		return false;
+	}
+
+	return true;
 }
 
 void ConfGen::SystematicConformerGeneratorImpl::distFragmentMMFF94InteractionData(FragmentTreeNode& node)

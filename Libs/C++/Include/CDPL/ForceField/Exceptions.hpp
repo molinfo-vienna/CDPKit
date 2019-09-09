@@ -1,7 +1,7 @@
 /* -*- mode: c++; c-basic-offset: 4; tab-width: 4; indent-tabs-mode: t -*- */
 
 /* 
- * NamespaceExports.hpp 
+ * Exceptions.hpp 
  *
  * This file is part of the Chemical Data Processing Toolkit
  *
@@ -23,17 +23,51 @@
  * Boston, MA 02111-1307, USA.
  */
 
+/**
+ * \file
+ * \brief Definition of exception classes.
+ */
 
-#ifndef CDPL_PYTHON_CONFGEN_NAMESPACEEXPORTS_HPP
-#define CDPL_PYTHON_CONFGEN_NAMESPACEEXPORTS_HPP
+#ifndef CDPL_FORCEFIELD_EXCEPTIONS_HPP
+#define CDPL_FORCEFIELD_EXCEPTIONS_HPP
+
+#include "CDPL/Base/Exceptions.hpp"
+#include "CDPL/ForceField/APIPrefix.hpp"
 
 
-namespace CDPLPythonConfGen
+namespace CDPL 
 {
 
-	void exportFragmentTypes();
-	void exportForceFieldTypes();
-	void exportReturnCodes();
+    namespace ForceField
+    {
+
+	/**
+	 * \addtogroup CDPL_FORCEFIELD_EXCEPTIONS
+	 * @{
+	 */
+
+	class CDPL_FORCEFIELD_API Error : public Base::Exception
+	{
+
+	  public:
+	    Error(const std::string& msg = "");
+
+	    virtual ~Error() throw();
+	};
+
+	class CDPL_FORCEFIELD_API ParameterizationFailed : public Error
+	{
+
+	  public:
+	    ParameterizationFailed(const std::string& msg = "");
+
+	    virtual ~ParameterizationFailed() throw();
+	};
+
+	/**
+	 * @}
+	 */
+    }
 }
 
-#endif // CDPL_PYTHON_CONFGEN_NAMESPACEEXPORTS_HPP
+#endif // CDPL_FORCEFIELD_EXCEPTIONS_HPP

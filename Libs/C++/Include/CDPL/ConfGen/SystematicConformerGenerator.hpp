@@ -138,21 +138,13 @@ namespace CDPL
 				TorsionLibrary::SharedPointer  torLib;
 			};
 
-			enum Status
-			{
-
-			    SUCCESS,
-				ERROR,
-				TIMEOUT_EXCEEDED
-			};
-
 			SystematicConformerGenerator();
 	
 			void applySettings(const Settings& settings);
 
 			const Settings& getSettings() const;
 
-			Status generate(const Chem::MolecularGraph& molgraph);
+			unsigned int generate(const Chem::MolecularGraph& molgraph);
 
 		private:
 			SystematicConformerGenerator(const SystematicConformerGenerator&);

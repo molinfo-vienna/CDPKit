@@ -32,9 +32,9 @@
 
 #include "CDPL/ForceField/MMFF94VanDerWaalsInteractionParameterizer.hpp"
 #include "CDPL/ForceField/AtomFunctions.hpp"
+#include "CDPL/ForceField/Exceptions.hpp"
 #include "CDPL/Chem/MolecularGraph.hpp"
 #include "CDPL/Chem/AtomFunctions.hpp"
-#include "CDPL/Base/Exceptions.hpp"
 
 
 using namespace CDPL; 
@@ -87,8 +87,8 @@ void ForceField::MMFF94VanDerWaalsInteractionParameterizer::parameterize(const C
 		const ParamEntry& param_entry1 = paramTable->getEntry(typeFunc(atom1));
 
 		if (!param_entry1)
-			throw Base::ItemNotFound("MMFF94VanDerWaalsInteractionParameterizer: could not find MMFF94 van der Waals parameters for atom #" + 
-									 boost::lexical_cast<std::string>(i));
+			throw ParameterizationFailed("MMFF94VanDerWaalsInteractionParameterizer: could not find MMFF94 van der Waals parameters for atom #" + 
+										 boost::lexical_cast<std::string>(i));
 
 		for (std::size_t j = i + 1; j < num_atoms; j++) {
 			const Atom& atom2 = molgraph.getAtom(j);
@@ -103,8 +103,8 @@ void ForceField::MMFF94VanDerWaalsInteractionParameterizer::parameterize(const C
 			const ParamEntry& param_entry2 = paramTable->getEntry(typeFunc(atom2));
 
 			if (!param_entry2)
-				throw Base::ItemNotFound("MMFF94VanDerWaalsInteractionParameterizer: could not find MMFF94 van der Waals parameters for atom #" + 
-										 boost::lexical_cast<std::string>(j));
+				throw ParameterizationFailed("MMFF94VanDerWaalsInteractionParameterizer: could not find MMFF94 van der Waals parameters for atom #" + 
+											 boost::lexical_cast<std::string>(j));
 
 			ia_data.addElement(MMFF94VanDerWaalsInteraction(i, j, param_entry1.getAtomicPolarizability(), param_entry1.getEffectiveElectronNumber(),
 															param_entry1.getFactorA(), param_entry1.getFactorG(), param_entry1.getHDonorAcceptorType(),

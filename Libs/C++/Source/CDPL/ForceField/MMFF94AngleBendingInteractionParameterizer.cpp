@@ -32,12 +32,12 @@
 #include "CDPL/ForceField/MMFF94AngleBendingInteractionParameterizer.hpp"
 #include "CDPL/ForceField/AtomFunctions.hpp"
 #include "CDPL/ForceField/BondFunctions.hpp"
+#include "CDPL/ForceField/Exceptions.hpp"
 #include "CDPL/Chem/MolecularGraph.hpp"
 #include "CDPL/Chem/Atom.hpp"
 #include "CDPL/Chem/Bond.hpp"
 #include "CDPL/Chem/AtomFunctions.hpp"
 #include "CDPL/Chem/AtomType.hpp"
-#include "CDPL/Base/Exceptions.hpp"
 
 
 using namespace CDPL; 
@@ -218,22 +218,22 @@ void ForceField::MMFF94AngleBendingInteractionParameterizer::getParameters(const
 	const AtomTypePropEntry& ctr_prop_entry = typePropTable->getEntry(ctr_atom_type);
 	
 	if (!ctr_prop_entry)
-		throw Base::ItemNotFound("MMFF94AngleBendingInteractionParameterizer: could not find MMFF94 atom type properties for atom #" + 
-								 boost::lexical_cast<std::string>(molgraph.getAtomIndex(ctr_atom)));
+		throw ParameterizationFailed("MMFF94AngleBendingInteractionParameterizer: could not find MMFF94 atom type properties for atom #" + 
+									 boost::lexical_cast<std::string>(molgraph.getAtomIndex(ctr_atom)));
 
 	linear = ctr_prop_entry.formsLinearBondAngle();		  
 
 	const unsigned int* term_atom1_param_types = paramTypeMap->getEntry(term_atom1_type).getParameterTypes();
 
 	if (!term_atom1_param_types)
-		throw Base::ItemNotFound("MMFF94AngleBendingInteractionParameterizer: could not find MMFF94 parameter atom type equivalence list for atom #" + 
-								 boost::lexical_cast<std::string>(molgraph.getAtomIndex(term_atom1)));
+		throw ParameterizationFailed("MMFF94AngleBendingInteractionParameterizer: could not find MMFF94 parameter atom type equivalence list for atom #" + 
+									 boost::lexical_cast<std::string>(molgraph.getAtomIndex(term_atom1)));
 
 	const unsigned int* term_atom2_param_types = paramTypeMap->getEntry(term_atom2_type).getParameterTypes();
 
 	if (!term_atom2_param_types)
-		throw Base::ItemNotFound("MMFF94AngleBendingInteractionParameterizer: could not find MMFF94 parameter atom type equivalence list for atom #" + 
-								 boost::lexical_cast<std::string>(molgraph.getAtomIndex(term_atom2)));
+		throw ParameterizationFailed("MMFF94AngleBendingInteractionParameterizer: could not find MMFF94 parameter atom type equivalence list for atom #" + 
+									 boost::lexical_cast<std::string>(molgraph.getAtomIndex(term_atom2)));
 
 	for (std::size_t i = 0; i < MMFF94PrimaryToParameterAtomTypeMap::Entry::NUM_TYPES - 1; i++) {
 		const ParamEntry& param_entry = paramTable->getEntry(angle_type_idx, term_atom1_param_types[i], ctr_atom_type, term_atom2_param_types[i]);
@@ -313,14 +313,14 @@ void ForceField::MMFF94AngleBendingInteractionParameterizer::getParameters(const
 	const AtomTypePropEntry& term1_prop_entry = typePropTable->getEntry(term_atom1_type);
 	
 	if (!term1_prop_entry)
-		throw Base::ItemNotFound("MMFF94AngleBendingInteractionParameterizer: could not find MMFF94 atom type properties for atom #" + 
-								 boost::lexical_cast<std::string>(molgraph.getAtomIndex(term_atom1)));
+		throw ParameterizationFailed("MMFF94AngleBendingInteractionParameterizer: could not find MMFF94 atom type properties for atom #" + 
+									 boost::lexical_cast<std::string>(molgraph.getAtomIndex(term_atom1)));
 
 	const AtomTypePropEntry& term2_prop_entry = typePropTable->getEntry(term_atom2_type);
 	
 	if (!term2_prop_entry)
-		throw Base::ItemNotFound("MMFF94AngleBendingInteractionParameterizer: could not find MMFF94 atom type properties for atom #" + 
-								 boost::lexical_cast<std::string>(molgraph.getAtomIndex(term_atom2)));
+		throw ParameterizationFailed("MMFF94AngleBendingInteractionParameterizer: could not find MMFF94 atom type properties for atom #" + 
+									 boost::lexical_cast<std::string>(molgraph.getAtomIndex(term_atom2)));
 
     double zI = getEmpiricalRuleZParameter(term1_prop_entry.getAtomicNumber());
     double zK = getEmpiricalRuleZParameter(term2_prop_entry.getAtomicNumber());

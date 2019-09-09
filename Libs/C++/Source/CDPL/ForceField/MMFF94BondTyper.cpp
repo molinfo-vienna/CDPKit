@@ -33,6 +33,7 @@
 #include "CDPL/ForceField/MMFF94BondTyper.hpp"
 #include "CDPL/ForceField/MolecularGraphFunctions.hpp"
 #include "CDPL/ForceField/AtomFunctions.hpp"
+#include "CDPL/ForceField/Exceptions.hpp"
 #include "CDPL/Chem/FragmentList.hpp"
 #include "CDPL/Chem/Fragment.hpp"
 #include "CDPL/Chem/Bond.hpp"
@@ -85,21 +86,21 @@ void ForceField::MMFF94BondTyper::perceiveTypes(const Chem::MolecularGraph& molg
 			const TypePropertyEntry& atom1_props = atomTypePropTable->getEntry(atomTypeFunc(bond.getBegin()));
 
 			if (!atom1_props)
-				throw Base::ItemNotFound("MMFF94BondTyper: could not find MMFF94 atom type properties for atom #" + 
-										 boost::lexical_cast<std::string>(molgraph.getAtomIndex(bond.getBegin())));
+				throw ParameterizationFailed("MMFF94BondTyper: could not find MMFF94 atom type properties for atom #" + 
+											 boost::lexical_cast<std::string>(molgraph.getAtomIndex(bond.getBegin())));
 
 			const TypePropertyEntry& atom2_props = atomTypePropTable->getEntry(atomTypeFunc(bond.getEnd()));
 
 			if (!atom2_props)
-				throw Base::ItemNotFound("MMFF94BondTyper: could not find MMFF94 atom type properties for atom #" + 
-										 boost::lexical_cast<std::string>(molgraph.getAtomIndex(bond.getEnd())));
+				throw ParameterizationFailed("MMFF94BondTyper: could not find MMFF94 atom type properties for atom #" + 
+											 boost::lexical_cast<std::string>(molgraph.getAtomIndex(bond.getEnd())));
 
 			if ((atom1_props.isAromaticAtomType() || atom1_props.formsMultiOrSingleBonds()) && 
 				(atom2_props.isAromaticAtomType() || atom2_props.formsMultiOrSingleBonds())) {
-					if (!containsFragmentWithBond(arom_rings, bond))  {
-						types[i] = 1;
-						continue;
-					}
+				if (!containsFragmentWithBond(arom_rings, bond))  {
+					types[i] = 1;
+					continue;
+				}
 			}
 		}
 
