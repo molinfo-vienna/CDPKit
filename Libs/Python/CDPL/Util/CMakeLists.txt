@@ -36,7 +36,7 @@ SET(util_MOD_SRCS
     BitSetExport.cpp
     ArrayExport.cpp
     BronKerboschAlgorithmExport.cpp
-    DGCoordinatesOptimizerExport.cpp
+    DGCoordinatesGeneratorExport.cpp
 
     ToPythonConverterRegistration.cpp
     FromPythonConverterRegistration.cpp

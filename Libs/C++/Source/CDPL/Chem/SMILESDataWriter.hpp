@@ -37,6 +37,7 @@
 #include <boost/shared_ptr.hpp>
 
 #include "CDPL/Util/Array.hpp"
+#include "CDPL/Util/ObjectStack.hpp"
 
 
 namespace CDPL 
@@ -103,12 +104,15 @@ namespace CDPL
 			std::size_t getRingClosureNumber();
 			void putRingClosureNumber(std::size_t);
 
-			DFSTreeNode* allocNode();
-			void freeNodes();
+			DFSTreeNode* createNode();
+			DFSTreeEdge* createEdge();
 
+			DFSTreeNode* allocNode();
 			DFSTreeEdge* allocEdge();
-			void freeEdges();
 			
+			void freeNodes();
+			void freeEdges();
+
 			struct CtrlParameters
 			{
 
@@ -152,8 +156,6 @@ namespace CDPL
 				typedef boost::shared_ptr<DFSTreeEdge> SharedPointer;
 
 				DFSTreeEdge(SMILESDataWriter&);
-
-				void clear();
 
 				void setBond(const Bond*);
 				const Bond* getBond() const;
@@ -240,17 +242,15 @@ namespace CDPL
 			typedef std::auto_ptr<CanonicalNumberingGenerator> CanonNumberingGeneratorPtr;
 			typedef std::auto_ptr<Fragment> FragmentPtr;
 			typedef std::vector<const Atom*> AtomList;
-			typedef std::vector<DFSTreeNode::SharedPointer> AllocNodeList;
-			typedef std::vector<DFSTreeEdge::SharedPointer> AllocEdgeList;
 			typedef std::vector<DFSTreeNode*> NodeList;
 			typedef std::vector<std::size_t> RingClosureNumberStack;
 			typedef std::vector<std::string> CanonSMILESList;
+			typedef Util::ObjectStack<DFSTreeNode> NodeCache;
+			typedef Util::ObjectStack<DFSTreeEdge> EdgeCache;
 
 			const Base::DataIOBase&     ioBase;
-			AllocNodeList               allocNodes;
-			AllocEdgeList               allocEdges;
-			std::size_t                 freeNodeIndex;
-			std::size_t                 freeEdgeIndex;
+			NodeCache                   nodeCache;
+			EdgeCache                   edgeCache;
 			NodeList                    componentNodes;
 			NodeList                    atomNodeMapping;
 			AtomList                    canonAtomList;

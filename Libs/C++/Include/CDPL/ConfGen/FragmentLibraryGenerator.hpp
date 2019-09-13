@@ -31,12 +31,9 @@
 #ifndef CDPL_CONFGEN_FRAGMENTLIBRARYGENERATOR_HPP
 #define CDPL_CONFGEN_FRAGMENTLIBRARYGENERATOR_HPP
 
-#include <boost/function.hpp>
-
 #include "CDPL/ConfGen/APIPrefix.hpp"
 #include "CDPL/ConfGen/FragmentLibrary.hpp"
 #include "CDPL/ConfGen/FragmentLibraryEntry.hpp"
-#include "CDPL/ConfGen/FragmentList.hpp"
 #include "CDPL/ConfGen/FragmentConformerGenerator.hpp"
 #include "CDPL/Chem/SmallestSetOfSmallestRings.hpp"
 #include "CDPL/Chem/Molecule.hpp"
@@ -60,8 +57,6 @@ namespace CDPL
 		{
 
 		  public:
-			typedef boost::function4<void, Base::uint64, const Chem::MolecularGraph&, bool, std::size_t> ProcessingResultCallbackFunction;
-			typedef boost::function2<bool, const Chem::MolecularGraph&, const std::string&> ProcessingErrorCallbackFunction;
 			typedef FragmentConformerGenerator::ProgressCallbackFunction ProgressCallbackFunction;
 
 			FragmentLibraryGenerator();
@@ -128,36 +123,26 @@ namespace CDPL
 
 			std::size_t getMaxNumOutputConformers() const;
 
-			void setProcessingResultCallback(const ProcessingResultCallbackFunction& func);
-
-			const ProcessingResultCallbackFunction& getProcessingResultCallback();
-	
-			void setProcessingErrorCallback(const ProcessingErrorCallbackFunction& func);
-
-			const ProcessingErrorCallbackFunction& getProcessingErrorCallback();
-
 			void setProgressCallback(const ProgressCallbackFunction& func);
 
 			const ProgressCallbackFunction& getProgressCallback() const;
 
-			void process(const Chem::MolecularGraph& molgraph);
+			unsigned int process(const Chem::MolecularGraph& frag);
 	
+			std::size_t getNumGeneratedConformers() const;
+
+			Base::uint64 getLibraryEntryHashCode() const;
+
 		  private:
 			FragmentLibraryGenerator(const FragmentLibraryGenerator&);
 
 			FragmentLibraryGenerator& operator=(const FragmentLibraryGenerator&);
 
-			void processFragment(const Chem::MolecularGraph& frag);
-
 			Chem::Molecule::SharedPointer addNewLibraryEntry(const Chem::MolecularGraph& frag);
-
 			void removeNewLibraryEntry() const;
 
 			FragmentLibrary::SharedPointer                  fragLib;
-			ProcessingResultCallbackFunction                resultCallback;
-			ProcessingErrorCallbackFunction                 errorCallback;
 			FragmentLibraryEntry                            fragLibEntry;
-			FragmentList                                    fragList;
 			FragmentConformerGenerator                      fragConfGen;
 			Chem::SmallestSetOfSmallestRings::SharedPointer fragSSSR;
 		};

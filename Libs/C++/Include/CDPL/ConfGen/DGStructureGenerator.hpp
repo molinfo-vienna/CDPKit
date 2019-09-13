@@ -1,7 +1,7 @@
 /* -*- mode: c++; c-basic-offset: 4; tab-width: 4; indent-tabs-mode: t -*- */
 
 /* 
- * Raw3DCoordinatesGenerator.hpp 
+ * DGStructureGenerator.hpp 
  *
  * This file is part of the Chemical Data Processing Toolkit
  *
@@ -25,18 +25,18 @@
 
 /**
  * \file
- * \brief Definition of the class CDPL::ConfGen::Raw3DCoordinatesGenerator.
+ * \brief Definition of the class CDPL::ConfGen::DGStructureGenerator.
  */
 
-#ifndef CDPL_CONFGEN_RAW3DCOORDINATESGENERATOR_HPP
-#define CDPL_CONFGEN_RAW3DCOORDINATESGENERATOR_HPP
+#ifndef CDPL_CONFGEN_DGSTRUCTUREGENERATOR_HPP
+#define CDPL_CONFGEN_DGSTRUCTUREGENERATOR_HPP
 
 #include <boost/random/mersenne_twister.hpp>
 #include <boost/random/uniform_real.hpp>
 
 #include "CDPL/ConfGen/APIPrefix.hpp"
 #include "CDPL/ConfGen/DGConstraintGenerator.hpp"
-#include "CDPL/Util/DGCoordinatesOptimizer.hpp"
+#include "CDPL/Util/DGCoordinatesGenerator.hpp"
 #include "CDPL/Math/VectorArray.hpp"
 
 
@@ -51,11 +51,11 @@ namespace CDPL
 		 * @{
 		 */
 
-		class CDPL_CONFGEN_API Raw3DCoordinatesGenerator
+		class CDPL_CONFGEN_API DGStructureGenerator
 		{
 
 		public:
-			Raw3DCoordinatesGenerator();
+			DGStructureGenerator();
 
 			void setBoxSize(double size);
 
@@ -94,8 +94,8 @@ namespace CDPL
 
 			const Chem::MolecularGraph*    molGraph;
 			DGConstraintGenerator          dgConstraintsGen;
-			Util::DG3DCoordinatesOptimizer phase1CoordsGen;
-			Util::DG3DCoordinatesOptimizer phase2CoordsGen;
+			Util::DG3DCoordinatesGenerator phase1CoordsGen;
+			Util::DG3DCoordinatesGenerator phase2CoordsGen;
 			RandNumEngine                  randomEngine;
 			bool                           withPlanConstr;    
 			double                         boxSize;
@@ -107,4 +107,4 @@ namespace CDPL
     }
 }
 
-#endif // CDPL_CONFGEN_RAW3DCOORDINATESGENERATOR_HPP
+#endif // CDPL_CONFGEN_DGSTRUCTUREGENERATOR_HPP

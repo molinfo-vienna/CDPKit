@@ -41,6 +41,7 @@
 #include "CDPL/Chem/AtomBondMapping.hpp"
 #include "CDPL/Chem/SubstructureSearch.hpp"
 #include "CDPL/Util/BitSet.hpp"
+#include "CDPL/Util/ObjectStack.hpp"
 #include "CDPL/Math/Vector.hpp"
 #include "CDPL/Math/Matrix.hpp"
 
@@ -184,10 +185,9 @@ namespace CDPL
 
 			typedef std::vector<IncludePattern> IncludePatternList;
 			typedef std::vector<ExcludePattern> ExcludePatternList;
+			typedef Util::ObjectStack<Util::BitSet> BitSetCache;
 			typedef std::vector<Util::BitSet*> BitSetList;
-			typedef boost::shared_ptr<Util::BitSet> BitSetPtr;
-			typedef std::vector<BitSetPtr> AllocBitSetList;
-	
+
 			void init(const Chem::MolecularGraph& molgraph);
 
 			void getExcludeMatches();
@@ -197,8 +197,6 @@ namespace CDPL
 			void createMatchedAtomMask(const Chem::AtomMapping&, Util::BitSet&, bool) const;
 			bool isContainedInList(const Util::BitSet&, const BitSetList&) const;
 
-			Util::BitSet* allocBitSet();
-
 			const Chem::MolecularGraph* molGraph;
 			IncludePatternList          includePatterns;
 			ExcludePatternList          excludePatterns;
@@ -207,11 +205,10 @@ namespace CDPL
 			AtomList                    posRefAtomList;
 			AtomList                    geomRefAtom1List;
 			AtomList                    geomRefAtom2List;
-			AllocBitSetList             allocBitSets;
-			std::size_t                 freeBitSetIdx;
 			Math::Matrix<double>        svdU;
 			Math::Matrix3D              svdV;
 			Math::Vector3D              svdW;
+			BitSetCache                 bitSetCache;
 		};
 
 		/**

@@ -1,7 +1,7 @@
 /* -*- mode: c++; c-basic-offset: 4; tab-width: 4; indent-tabs-mode: t -*- */
 
 /* 
- * DGCoordinatesOptimizerExport.cpp 
+ * DGCoordinatesGeneratorExport.cpp 
  *
  * This file is part of the Utilical Data Processing Toolkit
  *
@@ -26,7 +26,7 @@
 
 #include <boost/python.hpp>
 
-#include "CDPL/Util/DGCoordinatesOptimizer.hpp"
+#include "CDPL/Util/DGCoordinatesGenerator.hpp"
 #include "CDPL/Math/VectorArray.hpp"
 #include "CDPL/Math/Vector.hpp"
 
@@ -39,61 +39,61 @@
 namespace
 {
 	
-	template <typename OptimizerType>
+	template <typename GeneratorType>
 	struct VolumeConstraintList {
 
-		VolumeConstraintList(OptimizerType& gen): optimizer(gen) {}
+		VolumeConstraintList(GeneratorType& gen): generator(gen) {}
 		
 		std::size_t getSize() const {
-			return optimizer.getNumVolumeConstraints();
+			return generator.getNumVolumeConstraints();
 		}
 
-		typename OptimizerType::VolumeConstraint& getConstraint(std::size_t idx) const {
-			return optimizer.getVolumeConstraint(idx);
+		typename GeneratorType::VolumeConstraint& getConstraint(std::size_t idx) const {
+			return generator.getVolumeConstraint(idx);
 		}
 
 		void removeConstraint(std::size_t idx) {
-			optimizer.removeVolumeConstraint(idx);
+			generator.removeVolumeConstraint(idx);
 		}
 
-		OptimizerType& optimizer;
+		GeneratorType& generator;
 	};
 
-	template <typename OptimizerType>
-	VolumeConstraintList<OptimizerType> createVolumeConstraintList(OptimizerType& gen) 
+	template <typename GeneratorType>
+	VolumeConstraintList<GeneratorType> createVolumeConstraintList(GeneratorType& gen) 
 	{
-		return VolumeConstraintList<OptimizerType>(gen);
+		return VolumeConstraintList<GeneratorType>(gen);
 	}
 
-	template <typename OptimizerType>
+	template <typename GeneratorType>
 	struct DistanceConstraintList {
 
-		DistanceConstraintList(OptimizerType& gen): optimizer(gen) {}
+		DistanceConstraintList(GeneratorType& gen): generator(gen) {}
 		
 		std::size_t getSize() const {
-			return optimizer.getNumDistanceConstraints();
+			return generator.getNumDistanceConstraints();
 		}
 
-		typename OptimizerType::DistanceConstraint& getConstraint(std::size_t idx) const {
-			return optimizer.getDistanceConstraint(idx);
+		typename GeneratorType::DistanceConstraint& getConstraint(std::size_t idx) const {
+			return generator.getDistanceConstraint(idx);
 		}
 
 		void removeConstraint(std::size_t idx) {
-			optimizer.removeDistanceConstraint(idx);
+			generator.removeDistanceConstraint(idx);
 		}
 
-		OptimizerType& optimizer;
+		GeneratorType& generator;
 	};
 
-	template <typename OptimizerType>
-	DistanceConstraintList<OptimizerType> createDistanceConstraintList(OptimizerType& gen) 
+	template <typename GeneratorType>
+	DistanceConstraintList<GeneratorType> createDistanceConstraintList(GeneratorType& gen) 
 	{
-		return DistanceConstraintList<OptimizerType>(gen);
+		return DistanceConstraintList<GeneratorType>(gen);
 	}
 
-	template <typename OptimizerType>
-	class DGCoordinatesOptimizerVisitor : 
-		public boost::python::def_visitor<DGCoordinatesOptimizerVisitor<OptimizerType> >
+	template <typename GeneratorType>
+	class DGCoordinatesGeneratorVisitor : 
+		public boost::python::def_visitor<DGCoordinatesGeneratorVisitor<GeneratorType> >
 	{
 		friend class boost::python::def_visitor_access;
 
@@ -102,9 +102,9 @@ namespace
 			using namespace CDPL;
 			using namespace boost;
 
-			typedef typename OptimizerType::DistanceConstraint DistanceConstraint;
-			typedef typename OptimizerType::ValueType ValueType;
-			typedef DistanceConstraintList<OptimizerType> DistanceConstraintList;
+			typedef typename GeneratorType::DistanceConstraint DistanceConstraint;
+			typedef typename GeneratorType::ValueType ValueType;
+			typedef DistanceConstraintList<GeneratorType> DistanceConstraintList;
 		
 			python::scope scope = cl;
 
@@ -137,75 +137,75 @@ namespace
 
 			cl
 				.def(python::init<>(python::arg("self")))
-				.def(python::init<const OptimizerType&>((python::arg("self"), python::arg("gen"))))
-				.def(CDPLPythonBase::ObjectIdentityCheckVisitor<OptimizerType>())
-				.def("assign", CDPLPythonBase::copyAssOp(&OptimizerType::operator=), 
+				.def(python::init<const GeneratorType&>((python::arg("self"), python::arg("gen"))))
+				.def(CDPLPythonBase::ObjectIdentityCheckVisitor<GeneratorType>())
+				.def("assign", CDPLPythonBase::copyAssOp(&GeneratorType::operator=), 
 					 (python::arg("self"), python::arg("gen")), python::return_self<>())
-				.def("clearDistanceConstraints", &OptimizerType::clearDistanceConstraints, python::arg("self"))
-				.def("getNumDistanceConstraints", &OptimizerType::getNumDistanceConstraints, python::arg("self"))
+				.def("clearDistanceConstraints", &GeneratorType::clearDistanceConstraints, python::arg("self"))
+				.def("getNumDistanceConstraints", &GeneratorType::getNumDistanceConstraints, python::arg("self"))
 				.def("getDistanceConstraint", 
-					 static_cast<DistanceConstraint& (OptimizerType::*)(std::size_t)>(&OptimizerType::getDistanceConstraint),
+					 static_cast<DistanceConstraint& (GeneratorType::*)(std::size_t)>(&GeneratorType::getDistanceConstraint),
 					 (python::arg("self"), python::arg("idx")), python::return_internal_reference<>())
-				.def("addDistanceConstraint", &OptimizerType::addDistanceConstraint, 
+				.def("addDistanceConstraint", &GeneratorType::addDistanceConstraint, 
 					 (python::arg("self"), python::arg("pt1_idx"), python::arg("pt2_idx"), python::arg("lb"), 
 					  python::arg("ub")))
 				.def("removeDistanceConstraint", 
-					 static_cast<void (OptimizerType::*)(std::size_t)>(&OptimizerType::removeDistanceConstraint),
+					 static_cast<void (GeneratorType::*)(std::size_t)>(&GeneratorType::removeDistanceConstraint),
 					 (python::arg("self"), python::arg("idx")))
-				.def("setNumCycles", &OptimizerType::setNumCycles, (python::arg("self"), python::arg("num_cycles")))
-				.def("getNumCycles", &OptimizerType::getNumCycles, python::arg("self"))
-				.def("setCycleStepCountFactor", &OptimizerType::setCycleStepCountFactor, (python::arg("self"), python::arg("fact")))
-				.def("getCycleStepCountFactor", &OptimizerType::getCycleStepCountFactor, python::arg("self"))
-				.def("setStartLearningRate", &OptimizerType::setStartLearningRate, (python::arg("self"), python::arg("rate")))
-				.def("getStartLearningRate", &OptimizerType::getStartLearningRate, python::arg("self"), 
+				.def("setNumCycles", &GeneratorType::setNumCycles, (python::arg("self"), python::arg("num_cycles")))
+				.def("getNumCycles", &GeneratorType::getNumCycles, python::arg("self"))
+				.def("setCycleStepCountFactor", &GeneratorType::setCycleStepCountFactor, (python::arg("self"), python::arg("fact")))
+				.def("getCycleStepCountFactor", &GeneratorType::getCycleStepCountFactor, python::arg("self"))
+				.def("setStartLearningRate", &GeneratorType::setStartLearningRate, (python::arg("self"), python::arg("rate")))
+				.def("getStartLearningRate", &GeneratorType::getStartLearningRate, python::arg("self"), 
 					 python::return_value_policy<python::copy_const_reference>())
-				.def("setLearningRateDecrement", &OptimizerType::setLearningRateDecrement, (python::arg("self"), python::arg("decr")))
-				.def("getLearningRateDecrement", &OptimizerType::getLearningRateDecrement, python::arg("self"), 
+				.def("setLearningRateDecrement", &GeneratorType::setLearningRateDecrement, (python::arg("self"), python::arg("decr")))
+				.def("getLearningRateDecrement", &GeneratorType::getLearningRateDecrement, python::arg("self"), 
 					 python::return_value_policy<python::copy_const_reference>())
-				.def("setRandomSeed", &OptimizerType::setRandomSeed, (python::arg("self"), python::arg("seed")))
-				.def("optimize", 
-					 &OptimizerType::template optimize<Math::VectorArray<Math::CVector<ValueType, OptimizerType::COORDS_DIM> > >, 
+				.def("setRandomSeed", &GeneratorType::setRandomSeed, (python::arg("self"), python::arg("seed")))
+				.def("generate", 
+					 &GeneratorType::template generate<Math::VectorArray<Math::CVector<ValueType, GeneratorType::COORDS_DIM> > >, 
 					 (python::arg("self"), python::arg("num_points"), python::arg("coords")))
 				.def("getDistanceError", 
-					 &OptimizerType::template getDistanceError<Math::VectorArray<Math::CVector<ValueType, OptimizerType::COORDS_DIM> > >, 
+					 &GeneratorType::template getDistanceError<Math::VectorArray<Math::CVector<ValueType, GeneratorType::COORDS_DIM> > >, 
 					 (python::arg("self"), python::arg("coords")))
-				.def_readonly("COORDS_DIM", OptimizerType::COORDS_DIM)
-				.def_readonly("DEF_NUM_CYCLES", OptimizerType::DEF_NUM_CYCLES)
-				.def_readonly("DEF_CYCLE_STEP_COUNT_FACTOR", OptimizerType::DEF_CYCLE_STEP_COUNT_FACTOR)
-				.def_readonly("DEF_START_LEARNING_RATE", OptimizerType::DEF_START_LEARNING_RATE)
-				.def_readonly("DEF_LEARNING_RATE_DECREMENT", OptimizerType::DEF_LEARNING_RATE_DECREMENT)
-				.add_property("numCycles", &OptimizerType::getNumCycles, &OptimizerType::setNumCycles)
-				.add_property("cycleStepCountFactor", &OptimizerType::getCycleStepCountFactor, &OptimizerType::setCycleStepCountFactor)
-				.add_property("startLearningRate", python::make_function(&OptimizerType::getStartLearningRate, 
+				.def_readonly("COORDS_DIM", GeneratorType::COORDS_DIM)
+				.def_readonly("DEF_NUM_CYCLES", GeneratorType::DEF_NUM_CYCLES)
+				.def_readonly("DEF_CYCLE_STEP_COUNT_FACTOR", GeneratorType::DEF_CYCLE_STEP_COUNT_FACTOR)
+				.def_readonly("DEF_START_LEARNING_RATE", GeneratorType::DEF_START_LEARNING_RATE)
+				.def_readonly("DEF_LEARNING_RATE_DECREMENT", GeneratorType::DEF_LEARNING_RATE_DECREMENT)
+				.add_property("numCycles", &GeneratorType::getNumCycles, &GeneratorType::setNumCycles)
+				.add_property("cycleStepCountFactor", &GeneratorType::getCycleStepCountFactor, &GeneratorType::setCycleStepCountFactor)
+				.add_property("startLearningRate", python::make_function(&GeneratorType::getStartLearningRate, 
 																		 python::return_value_policy<python::copy_const_reference>()),
-							  &OptimizerType::setStartLearningRate)
-				.add_property("learningRateDecrement", python::make_function(&OptimizerType::getLearningRateDecrement, 
+							  &GeneratorType::setStartLearningRate)
+				.add_property("learningRateDecrement", python::make_function(&GeneratorType::getLearningRateDecrement, 
 																			 python::return_value_policy<python::copy_const_reference>()),
-							  &OptimizerType::setLearningRateDecrement)
-				.add_property("numDistanceConstraints", &OptimizerType::getNumDistanceConstraints)
-				.add_property("distanceConstraints", python::make_function(&createDistanceConstraintList<OptimizerType>,
+							  &GeneratorType::setLearningRateDecrement)
+				.add_property("numDistanceConstraints", &GeneratorType::getNumDistanceConstraints)
+				.add_property("distanceConstraints", python::make_function(&createDistanceConstraintList<GeneratorType>,
 																		   python::with_custodian_and_ward_postcall<0, 1>()));
 		}
 	};
 }
 
 
-void CDPLPythonUtil::exportDGCoordinatesOptimizer()
+void CDPLPythonUtil::exportDGCoordinatesGenerator()
 {
     using namespace boost;
     using namespace CDPL;
 
-	python::class_<Util::DGCoordinatesOptimizer<2, double> >("DG2DCoordinatesOptimizer", python::no_init)
-		.def(DGCoordinatesOptimizerVisitor<Util::DGCoordinatesOptimizer<2, double> >());
+	python::class_<Util::DGCoordinatesGenerator<2, double> >("DG2DCoordinatesGenerator", python::no_init)
+		.def(DGCoordinatesGeneratorVisitor<Util::DGCoordinatesGenerator<2, double> >());
 
 // 3D specialization
 
-	typedef Util::DGCoordinatesOptimizer<3, double> OptimizerType;
-	typedef OptimizerType::VolumeConstraint VolumeConstraint;
-	typedef OptimizerType::ValueType ValueType;
-	typedef VolumeConstraintList<OptimizerType> VolumeConstraintList;
+	typedef Util::DGCoordinatesGenerator<3, double> GeneratorType;
+	typedef GeneratorType::VolumeConstraint VolumeConstraint;
+	typedef GeneratorType::ValueType ValueType;
+	typedef VolumeConstraintList<GeneratorType> VolumeConstraintList;
 
-	python::class_<OptimizerType> cl("DG3DCoordinatesOptimizer", python::no_init);
+	python::class_<GeneratorType> cl("DG3DCoordinatesGenerator", python::no_init);
 
 	python::scope scope = cl;
 
@@ -240,22 +240,22 @@ void CDPLPythonUtil::exportDGCoordinatesOptimizer()
 		.add_property("upperBound", python::make_function(&VolumeConstraint::getUpperBound, 
 														  python::return_value_policy<python::copy_const_reference>()));
 	cl
-		.def(DGCoordinatesOptimizerVisitor<OptimizerType>())
-		.def("clearVolumeConstraints", &OptimizerType::clearVolumeConstraints, python::arg("self"))
-		.def("getNumVolumeConstraints", &OptimizerType::getNumVolumeConstraints, python::arg("self"))
+		.def(DGCoordinatesGeneratorVisitor<GeneratorType>())
+		.def("clearVolumeConstraints", &GeneratorType::clearVolumeConstraints, python::arg("self"))
+		.def("getNumVolumeConstraints", &GeneratorType::getNumVolumeConstraints, python::arg("self"))
 		.def("getVolumeConstraint", 
-			 static_cast<VolumeConstraint& (OptimizerType::*)(std::size_t)>(&OptimizerType::getVolumeConstraint),
+			 static_cast<VolumeConstraint& (GeneratorType::*)(std::size_t)>(&GeneratorType::getVolumeConstraint),
 			 (python::arg("self"), python::arg("idx")), python::return_internal_reference<>())
-		.def("addVolumeConstraint", &OptimizerType::addVolumeConstraint, 
+		.def("addVolumeConstraint", &GeneratorType::addVolumeConstraint, 
 			 (python::arg("self"), python::arg("pt1_idx"), python::arg("pt2_idx"), python::arg("pt3_idx"), 
 			  python::arg("pt4_idx"), python::arg("lb"), python::arg("ub")))
 		.def("removeVolumeConstraint", 
-			 static_cast<void (OptimizerType::*)(std::size_t)>(&OptimizerType::removeVolumeConstraint),
+			 static_cast<void (GeneratorType::*)(std::size_t)>(&GeneratorType::removeVolumeConstraint),
 			 (python::arg("self"), python::arg("idx")))
 		.def("getVolumeError", 
-					 &OptimizerType::getVolumeError<Math::VectorArray<Math::CVector<ValueType, OptimizerType::COORDS_DIM> > >, 
+					 &GeneratorType::getVolumeError<Math::VectorArray<Math::CVector<ValueType, GeneratorType::COORDS_DIM> > >, 
 					 (python::arg("self"), python::arg("coords")))
-		.add_property("numVolumeConstraints", &OptimizerType::getNumVolumeConstraints)
-		.add_property("volumeConstraints", python::make_function(&createVolumeConstraintList<OptimizerType>,
+		.add_property("numVolumeConstraints", &GeneratorType::getNumVolumeConstraints)
+		.add_property("volumeConstraints", python::make_function(&createVolumeConstraintList<GeneratorType>,
 																 python::with_custodian_and_ward_postcall<0, 1>()));
 }

@@ -34,23 +34,45 @@
 #include "CDPL/Base/Exceptions.hpp"
 
 
+namespace
+{
+
+	const std::size_t MAX_FEATURE_CACHE_SIZE = 1000;
+}
+
+
 using namespace CDPL;
 
 
-Pharm::BasicPharmacophore::BasicPharmacophore() {}
-
-Pharm::BasicPharmacophore::BasicPharmacophore(const BasicPharmacophore& pharm): Pharmacophore(pharm)
+Pharm::BasicPharmacophore::BasicPharmacophore(): 
+	featureCache(boost::bind(&BasicPharmacophore::createFeature, this), &destroyFeature, MAX_FEATURE_CACHE_SIZE)
 {
+	featureCache.setCleanupFunction(&BasicPharmacophore::clearFeature);
+}
+
+Pharm::BasicPharmacophore::BasicPharmacophore(const BasicPharmacophore& pharm): 
+	Pharmacophore(pharm), 
+	featureCache(boost::bind(&BasicPharmacophore::createFeature, this), &destroyFeature, MAX_FEATURE_CACHE_SIZE)
+{
+	featureCache.setCleanupFunction(&BasicPharmacophore::clearFeature);
+
     append(pharm);
 }
 
-Pharm::BasicPharmacophore::BasicPharmacophore(const Pharmacophore& pharm): Pharmacophore(pharm)
+Pharm::BasicPharmacophore::BasicPharmacophore(const Pharmacophore& pharm): 
+	Pharmacophore(pharm),
+	featureCache(boost::bind(&BasicPharmacophore::createFeature, this), &destroyFeature, MAX_FEATURE_CACHE_SIZE)
 {
+	featureCache.setCleanupFunction(&BasicPharmacophore::clearFeature);
+
     append(pharm);
 }
 
-Pharm::BasicPharmacophore::BasicPharmacophore(const FeatureContainer& cntnr)
+Pharm::BasicPharmacophore::BasicPharmacophore(const FeatureContainer& cntnr):
+	featureCache(boost::bind(&BasicPharmacophore::createFeature, this), &destroyFeature, MAX_FEATURE_CACHE_SIZE)
 {
+	featureCache.setCleanupFunction(&BasicPharmacophore::clearFeature);
+
     append(cntnr);
 	copyProperties(cntnr);
 }
@@ -106,10 +128,7 @@ Pharm::BasicFeature& Pharm::BasicPharmacophore::getFeature(std::size_t idx)
 
 Pharm::BasicFeature& Pharm::BasicPharmacophore::addFeature()
 {
-    features.reserve(features.size() + 1);
-    allocFeatures.reserve(allocFeatures.size() + 1);
-
-    BasicFeature* feature = allocFeature();
+	FeaturePointer feature = featureCache.get();
 
     feature->setIndex(features.size());
 
@@ -123,12 +142,6 @@ void Pharm::BasicPharmacophore::removeFeature(std::size_t idx)
     if (idx >= features.size())
 		throw Base::IndexError("BasicPharmacophore: feature index out of bounds");
 
-    BasicFeature* feature = features[idx];
-
-    freeFeatures.reserve(freeFeatures.size() + 1);
-
-    freeFeature(feature);
-
     features.erase(features.begin() + idx);
 
     renumberFeatures(idx);
@@ -136,18 +149,12 @@ void Pharm::BasicPharmacophore::removeFeature(std::size_t idx)
 
 Pharm::BasicPharmacophore::FeatureIterator Pharm::BasicPharmacophore::removeFeature(const FeatureIterator& it)
 {
-    const FeaturePtrList::iterator& base = it.base();
+    const FeatureList::iterator& base = it.base();
 
     if (base < features.begin() || base >= features.end())
 		throw Base::RangeError("BasicPharmacophore: feature iterator out of valid range");
 
-    BasicFeature* feature = *base;
-
-    freeFeatures.reserve(freeFeatures.size() + 1);
-
-    freeFeature(feature);
-
-    FeaturePtrList::iterator rit = features.erase(base);
+    FeatureList::iterator rit = features.erase(base);
 
     renumberFeatures(rit - features.begin());
 
@@ -204,15 +211,11 @@ void Pharm::BasicPharmacophore::copy(const BasicPharmacophore& pharm)
 		return;
 
     features.reserve(pharm.features.size());
-    allocFeatures.reserve(pharm.features.size());
 	
-    FeaturePtrList::const_iterator pharm_features_end = pharm.features.end();
+    FeatureList::const_iterator pharm_features_end = pharm.features.end();
 
-    for (FeaturePtrList::const_iterator it = pharm.features.begin(); it != pharm_features_end; ++it) {
-		const BasicFeature* feature = *it;
-
-		addFeature().copyProperties(*feature); 
-    }
+    for (FeatureList::const_iterator it = pharm.features.begin(); it != pharm_features_end; ++it) 
+		addFeature().copyProperties(**it); 
 }
 
 void Pharm::BasicPharmacophore::copy(const Pharmacophore& pharm)
@@ -242,15 +245,11 @@ void Pharm::BasicPharmacophore::doCopy(const T& pharm)
 		return;
 
     features.reserve(pharm.getNumFeatures());
-    allocFeatures.reserve(pharm.getNumFeatures());
-
+ 
     typename T::ConstFeatureIterator pharm_features_end = pharm.getFeaturesEnd();
 
-    for (typename T::ConstFeatureIterator it = pharm.getFeaturesBegin(); it != pharm_features_end; ++it) { 
-		const Feature& feature = *it;
-
-		addFeature().copyProperties(feature);
-    }
+    for (typename T::ConstFeatureIterator it = pharm.getFeaturesBegin(); it != pharm_features_end; ++it)  
+		addFeature().copyProperties(*it);
 }
 
 void Pharm::BasicPharmacophore::append(const BasicPharmacophore& pharm)
@@ -260,18 +259,12 @@ void Pharm::BasicPharmacophore::append(const BasicPharmacophore& pharm)
     if (pharm_num_features == 0)
 		return;
 
-    std::size_t old_num_features = features.size();
+    features.reserve(features.size() + pharm_num_features);
+ 
+    FeatureList::const_iterator pharm_features_end = pharm.features.end();
 
-    features.reserve(old_num_features + pharm_num_features);
-    allocFeatures.reserve(allocFeatures.size() + pharm_num_features);
-
-    FeaturePtrList::const_iterator pharm_features_end = pharm.features.end();
-
-    for (FeaturePtrList::const_iterator it = pharm.features.begin(); it != pharm_features_end; ++it) {
-		const BasicFeature* feature = *it;
-
-		addFeature().copyProperties(*feature); 
-    }
+    for (FeatureList::const_iterator it = pharm.features.begin(); it != pharm_features_end; ++it) 
+		addFeature().copyProperties(**it); 
 }
 
 void Pharm::BasicPharmacophore::append(const Pharmacophore& pharm)
@@ -292,26 +285,16 @@ void Pharm::BasicPharmacophore::doAppend(const T& pharm)
     if (pharm_num_features == 0)
 		return;
 
-    std::size_t old_num_features = features.size();
-
-    features.reserve(old_num_features + pharm_num_features);
-    allocFeatures.reserve(allocFeatures.size() + pharm_num_features);
-
+    features.reserve(features.size() + pharm_num_features);
+ 
     typename T::ConstFeatureIterator pharm_features_end = pharm.getFeaturesEnd();
 
-    for (typename T::ConstFeatureIterator it = pharm.getFeaturesBegin(); it != pharm_features_end; ++it) {
-		const Feature& feature = *it;
-	
-		addFeature().copyProperties(feature);
-    }
+    for (typename T::ConstFeatureIterator it = pharm.getFeaturesBegin(); it != pharm_features_end; ++it) 
+		addFeature().copyProperties(*it);
 }
 
 void Pharm::BasicPharmacophore::clearFeatures()
 {
-    freeFeatures.reserve(freeFeatures.size() + features.size());
-
-    std::for_each(features.begin(), features.end(), boost::bind(&BasicPharmacophore::freeFeature, this, _1));
-
     features.clear();
 }
 		
@@ -319,10 +302,15 @@ void Pharm::BasicPharmacophore::renumberFeatures(std::size_t idx)
 {
     assert(idx <= features.size());
 
-    FeaturePtrList::iterator features_end = features.end();
+    FeatureList::iterator features_end = features.end();
 
-    for (FeaturePtrList::iterator it = features.begin() + idx; it != features_end; ++it, idx++)
+    for (FeatureList::iterator it = features.begin() + idx; it != features_end; ++it, idx++)
 		(*it)->setIndex(idx);
+}
+
+Pharm::BasicFeature* Pharm::BasicPharmacophore::createFeature()
+{
+    return new BasicFeature(*this);
 }
 
 void Pharm::BasicPharmacophore::destroyFeature(BasicFeature* feature)
@@ -330,29 +318,8 @@ void Pharm::BasicPharmacophore::destroyFeature(BasicFeature* feature)
     delete feature;
 }
 
-Pharm::BasicFeature* Pharm::BasicPharmacophore::allocFeature()
+void Pharm::BasicPharmacophore::clearFeature(BasicFeature& feature)
 {
-    if (freeFeatures.empty()) {
-		SharedFeaturePointer feature_ptr(new BasicFeature(this), &BasicPharmacophore::destroyFeature);
-		allocFeatures.push_back(feature_ptr);
-
-		return feature_ptr.get();
-    }
-
-    BasicFeature* feature = freeFeatures.back();
-
-    feature->clearProperties();
-
-    freeFeatures.pop_back();
-
-    return feature;
-}
-
-void Pharm::BasicPharmacophore::freeFeature(BasicFeature* feature)
-{
-    assert(feature != 0);
-
-    freeFeatures.push_back(feature);
-
-    feature->setIndex(features.max_size());
+	feature.clearProperties();
+	feature.setIndex(~std::size_t(0));
 }

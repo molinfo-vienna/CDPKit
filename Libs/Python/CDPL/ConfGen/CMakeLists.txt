@@ -39,7 +39,7 @@ SET(confgen_MOD_SRCS
     ReturnCodeExport.cpp
 
     DGConstraintGeneratorExport.cpp
-    Raw3DCoordinatesGeneratorExport.cpp
+    DGStructureGeneratorExport.cpp
     FragmentListExport.cpp
     FragmentLibraryEntryExport.cpp
     FragmentLibraryExport.cpp
@@ -60,7 +60,7 @@ SET(confgen_MOD_SRCS
 IF(Boost_TIMER_FOUND AND Boost_CHRONO_FOUND)
   SET(confgen_MOD_SRCS
       ${confgen_MOD_SRCS}
-      Random3DCoordinatesGeneratorExport.cpp
+      RandomStructureGeneratorExport.cpp
       SystematicConformerGeneratorExport.cpp
       FragmentConformerGeneratorExport.cpp
       FragmentLibraryGeneratorExport.cpp

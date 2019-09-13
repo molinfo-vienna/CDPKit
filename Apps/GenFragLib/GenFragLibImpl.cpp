@@ -39,6 +39,8 @@
 #include "CDPL/Chem/MolecularGraphFunctions.hpp"
 #include "CDPL/ConfGen/UtilityFunctions.hpp"
 #include "CDPL/ConfGen/FragmentLibraryGenerator.hpp"
+#include "CDPL/ConfGen/FragmentList.hpp"
+#include "CDPL/ConfGen/ReturnCode.hpp"
 #include "CDPL/Util/FileFunctions.hpp"
 #include "CDPL/Base/DataIOManager.hpp"
 #include "CDPL/Base/Exceptions.hpp"
@@ -82,8 +84,6 @@ public:
 		parent(parent), fragLibGen(parent->fragmentLibPtr), numProcMols(0),
 		numProcFrags(0), numErrorFrags(0), numAddedFrags(0), totalNumConfs(0)  
 	{
-		fragLibGen.setProcessingResultCallback(boost::bind(&FragLibGenerationWorker::fragmentProcessed, this, _1, _2, _3, _4));
-		fragLibGen.setProcessingErrorCallback(boost::bind(&FragLibGenerationWorker::handleError, this, _1, _2));
 		fragLibGen.setProgressCallback(boost::bind(&FragLibGenerationWorker::progress, this));
 		fragLibGen.setEnergyWindow(parent->eWindow);
 		fragLibGen.setMinRMSD(parent->minRMSD);
@@ -98,14 +98,23 @@ public:
 		using namespace CDPL;
 
 		try {
-
 			while (true) {
 				if (!parent->readNextMolecule(molecule))
 					return;
 
 				ConfGen::prepareForConformerGeneration(molecule);
 
-				fragLibGen.process(molecule);
+				fragList.generate(molecule);
+
+				for (ConfGen::FragmentList::ConstElementIterator it = fragList.getElementsBegin(), end = fragList.getElementsEnd(); it != end; ++it) {
+					const Chem::Fragment& frag = *it;
+					unsigned int ret_code = fragLibGen.process(frag);
+
+					if (ret_code == ConfGen::ReturnCode::SUCCESS)
+						fragmentProcessed(frag);
+					else
+						handleError(frag, ret_code);
+				}
 
 				numProcMols++;
 			}
@@ -139,12 +148,15 @@ public:
 	}
 
 private:
-	void fragmentProcessed(CDPL::Base::uint64 hash_code, const CDPL::Chem::MolecularGraph& frag, bool added, std::size_t num_confs) {
+	void fragmentProcessed(const CDPL::Chem::MolecularGraph& frag) {
 		numProcFrags++;
+
+		CDPL::Base::uint64 hash_code = fragLibGen.getLibraryEntryHashCode();
+		std::size_t num_confs = fragLibGen.getNumGeneratedConformers();
 
 		parent->updateOccurrenceCount(hash_code);
 
-		if (added) {
+		if (num_confs != 0) {
 			numAddedFrags++;
 			totalNumConfs += num_confs;
 
@@ -157,13 +169,37 @@ private:
 			parent->printMessage(DEBUG, "Fragment '" + getSMILES(frag) + "': already processed");
 	}
 
-	bool handleError(const CDPL::Chem::MolecularGraph& frag, const std::string& err_msg) {
+	void handleError(const CDPL::Chem::MolecularGraph& frag, unsigned int ret_code) {
+		using namespace CDPL;
+
 		numErrorFrags++;
+
+		std::string err_msg;
+
+		switch (ret_code) {
+
+			case ConfGen::ReturnCode::FORCEFIELD_SETUP_FAILED:
+				err_msg = "Force field setup failed";
+				break;
+
+			case ConfGen::ReturnCode::FORCEFIELD_MINIMIZATION_FAILED:
+				err_msg = "Raw structure minimization failed";
+				break;
+
+			case ConfGen::ReturnCode::MAX_NUM_TRIALS_EXCEEDED:
+				err_msg = "Could not generated conformer within max. number of trials";
+				break;
+
+			case ConfGen::ReturnCode::TIMEOUT_EXCEEDED:
+				err_msg = "Could not generated conformer within timeout period";
+				break;
+
+			default:
+				err_msg = "Unspecified error";	
+		}
 
 		parent->printMessage(ERROR, "Error while processing " + std::string(&frag == &molecule ? "molecule" : "fragment") + 
 							 " '" + getSMILES(frag) + "':\n" + err_msg);
-
-		return true;
 	}
 
 	std::string getSMILES(const CDPL::Chem::MolecularGraph& molgraph) const {
@@ -190,6 +226,7 @@ private:
 	}
 
 	GenFragLibImpl*                         parent;
+	CDPL::ConfGen::FragmentList             fragList;
 	CDPL::ConfGen::FragmentLibraryGenerator fragLibGen;
 	CDPL::Chem::BasicMolecule               molecule;
 	std::size_t                             numProcMols;

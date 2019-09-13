@@ -27,11 +27,14 @@
 #include "StaticInit.hpp"
 
 #include <string>
+#include <exception>
 
 #include <boost/lexical_cast.hpp>
+#include <boost/thread.hpp>
 
 #include "CDPL/ConfGen/FragmentLibraryGenerator.hpp"
 #include "CDPL/ConfGen/UtilityFunctions.hpp"
+#include "CDPL/ConfGen/ReturnCode.hpp"
 #include "CDPL/Chem/AtomContainerFunctions.hpp"
 #include "CDPL/Chem/MolecularGraphFunctions.hpp"
 
@@ -197,28 +200,6 @@ std::size_t ConfGen::FragmentLibraryGenerator::getMaxNumOutputConformers() const
 	return fragConfGen.getMaxNumOutputConformers();
 }
 
-void ConfGen::FragmentLibraryGenerator::setProcessingResultCallback(const ProcessingResultCallbackFunction& func)
-{
-	resultCallback = func;
-}
-
-const ConfGen::FragmentLibraryGenerator::ProcessingResultCallbackFunction& 
-ConfGen::FragmentLibraryGenerator::getProcessingResultCallback()
-{
-	return resultCallback;
-}
-
-void ConfGen::FragmentLibraryGenerator::setProcessingErrorCallback(const ProcessingErrorCallbackFunction& func)
-{
-	errorCallback = func;
-}
-
-const ConfGen::FragmentLibraryGenerator::ProcessingErrorCallbackFunction& 
-ConfGen::FragmentLibraryGenerator::getProcessingErrorCallback()
-{
-	return errorCallback;
-}
-
 void ConfGen::FragmentLibraryGenerator::setProgressCallback(const ProgressCallbackFunction& func)
 {
 	fragConfGen.setProgressCallback(func);
@@ -230,116 +211,77 @@ ConfGen::FragmentLibraryGenerator::getProgressCallback() const
 	return fragConfGen.getProgressCallback();
 }
 
-void ConfGen::FragmentLibraryGenerator::process(const Chem::MolecularGraph& molgraph)
-{
-	if (!fragLib)
-		return;
-
-	try {
-		fragList.generate(molgraph);
-
-	} catch (const std::exception& e) {
-		if (errorCallback && 
-			errorCallback(molgraph, std::string("FragmentLibraryGenerator: could not perform input fragmentation: ") + e.what()))
-			return;
-
-		throw e;
-	}
-
-	for (FragmentList::ConstElementIterator it = fragList.getElementsBegin(), end = fragList.getElementsEnd(); it != end; ++it)
-		processFragment(*it);
-}
-
-void ConfGen::FragmentLibraryGenerator::processFragment(const Chem::MolecularGraph& frag)
+unsigned int ConfGen::FragmentLibraryGenerator::process(const Chem::MolecularGraph& frag)
 {
 	using namespace Chem;
+
+	if (!fragLib)
+		return ReturnCode::FRAGMENT_LIBRARY_NOT_SET;
 
 	Molecule::SharedPointer fl_entry = addNewLibraryEntry(frag);
 
 	if (!fl_entry) 
-		return;
+		return ReturnCode::SUCCESS;
 	
 	try {
 		fragSSSR->perceive(fragLibEntry);
 
 		setSSSR(fragLibEntry, fragSSSR);
 
-		fragConfGen.generate(fragLibEntry, perceiveFragmentType(fragLibEntry));
+		unsigned int ret_code = fragConfGen.generate(fragLibEntry, perceiveFragmentType(fragLibEntry));
 		
-		std::size_t num_confs = fragConfGen.getNumConformers();
-
-		if (num_confs == 0) {
+		if (ret_code != ReturnCode::SUCCESS) {
 			removeNewLibraryEntry();
-
-			if (errorCallback) 
-				errorCallback(fragLibEntry, "FragmentLibraryGenerator: could not generate any conformers");
-
-		} else {
-			for (std::size_t i = 0; i < num_confs; i++)
-				addConformation(fragLibEntry, fragConfGen.getCoordinates(i));
-	
-			fl_entry->copy(fragLibEntry);
-
-			copyAtomStereoDescriptors(*fl_entry, fragLibEntry, 0);
-			copyBondStereoDescriptors(*fl_entry, fragLibEntry, 0, 0);
-
-			fl_entry->clearProperties();
-
-			setName(*fl_entry, boost::lexical_cast<std::string>(fragLibEntry.getHashCode()));
+			return ret_code;
 		}
 
-		if (resultCallback)
-			resultCallback(fragLibEntry.getHashCode(), fragLibEntry, true, num_confs);
+		for (std::size_t i = 0, num_confs = fragConfGen.getNumConformers(); i < num_confs; i++)
+			addConformation(fragLibEntry, fragConfGen.getCoordinates(i));
+	
+		fl_entry->copy(fragLibEntry);
+
+		copyAtomStereoDescriptors(*fl_entry, fragLibEntry, 0);
+		copyBondStereoDescriptors(*fl_entry, fragLibEntry, 0, 0);
+
+		fl_entry->clearProperties();
+
+		setName(*fl_entry, boost::lexical_cast<std::string>(fragLibEntry.getHashCode()));
 
 	} catch (const std::exception& e) {
 		removeNewLibraryEntry();
 
-		if (errorCallback && 
-			errorCallback(fragLibEntry, std::string("FragmentLibraryGenerator: could not generate conformers: ") + e.what()))
-			return;
-
 		throw e;
 	}
+
+	return ReturnCode::SUCCESS;
+}
+
+std::size_t ConfGen::FragmentLibraryGenerator::getNumGeneratedConformers() const
+{
+	return fragConfGen.getNumConformers();
+}
+
+Base::uint64 ConfGen::FragmentLibraryGenerator::getLibraryEntryHashCode() const
+{
+	return fragLibEntry.getHashCode();
 }
 
 Chem::Molecule::SharedPointer ConfGen::FragmentLibraryGenerator::addNewLibraryEntry(const Chem::MolecularGraph& frag)
 {
 	using namespace Chem;
 
-	try {
-		fragLibEntry.create(frag);
+	fragLibEntry.create(frag);
 
-	} catch (const std::exception& e) {
-		if (errorCallback && 
-			errorCallback(frag, std::string("FragmentLibraryGenerator: could not create canonical library fragment: ") + e.what()))
-			return Molecule::SharedPointer();
+	boost::lock_guard<boost::mutex> lock(fragLib->getMutex());
 
-		throw e;
-	}
+	if (fragLib->containsEntry(fragLibEntry.getHashCode())) 
+		return Chem::Molecule::SharedPointer();
 
-	try {
-		boost::lock_guard<boost::mutex> lock(fragLib->getMutex());
+	Molecule::SharedPointer entry_mol(new BasicMolecule());
 
-		if (fragLib->containsEntry(fragLibEntry.getHashCode())) {
-			if (resultCallback)
-				resultCallback(fragLibEntry.getHashCode(), fragLibEntry, false, 0);
+	fragLib->addEntry(fragLibEntry.getHashCode(), entry_mol);
 
-			return Molecule::SharedPointer();
-		}
-
-		Molecule::SharedPointer entry_mol(new BasicMolecule());
-
-		fragLib->addEntry(fragLibEntry.getHashCode(), entry_mol);
-
-		return entry_mol;
-
-	} catch (const std::exception& e) {
-		if (errorCallback && 
-			errorCallback(fragLibEntry, std::string("FragmentLibraryGenerator: could not process canonical library fragment: ") + e.what()))
-			return Molecule::SharedPointer();
-
-		throw e;
-	}
+	return entry_mol;
 }
 
 void ConfGen::FragmentLibraryGenerator::removeNewLibraryEntry() const

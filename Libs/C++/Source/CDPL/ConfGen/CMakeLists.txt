@@ -44,7 +44,9 @@ SET(cdpl-confgen_LIB_SRCS
     ${DATA_FILE_STRINGS}
 
     DGConstraintGenerator.cpp
-    Raw3DCoordinatesGenerator.cpp
+    DGConstraintGeneratorSettings.cpp
+    DGStructureGenerator.cpp
+    DGStructureGeneratorSettings.cpp
     FragmentList.cpp
     FragmentLibraryEntry.cpp
     FragmentLibrary.cpp
@@ -66,7 +68,7 @@ SET(cdpl-confgen_LIB_SRCS
 IF(Boost_TIMER_FOUND AND Boost_CHRONO_FOUND)
    SET(cdpl-confgen_LIB_SRCS
        ${cdpl-confgen_LIB_SRCS}
-       Random3DCoordinatesGenerator.cpp
+       RandomStructureGenerator.cpp
        SystematicConformerGenerator.cpp
        SystematicConformerGeneratorImpl.cpp
        FragmentConformerGenerator.cpp

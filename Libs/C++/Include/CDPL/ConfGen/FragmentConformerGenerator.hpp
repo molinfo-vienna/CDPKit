@@ -39,7 +39,7 @@
 #include <boost/function.hpp>
 
 #include "CDPL/ConfGen/APIPrefix.hpp"
-#include "CDPL/ConfGen/Raw3DCoordinatesGenerator.hpp"
+#include "CDPL/ConfGen/DGStructureGenerator.hpp"
 #include "CDPL/ConfGen/ForceFieldType.hpp"
 #include "CDPL/ForceField/MMFF94InteractionParameterizer.hpp"
 #include "CDPL/ForceField/MMFF94InteractionData.hpp"
@@ -52,6 +52,7 @@
 #include "CDPL/Math/VectorArray.hpp"
 #include "CDPL/Math/VectorArrayAlignmentCalculator.hpp"
 #include "CDPL/Util/BitSet.hpp"
+#include "CDPL/Util/ObjectPool.hpp"
 
 
 namespace CDPL 
@@ -159,7 +160,10 @@ namespace CDPL
 			bool getExistingCoordinates(const Chem::MolecularGraph& molgraph, Math::Vector3DArray& coords);
 
 		  private:
-			typedef std::pair<double, Math::Vector3DArray*> ConfData;
+			typedef Util::ObjectPool<Math::Vector3DArray> VectorArrayCache;
+			typedef VectorArrayCache::SharedObjectPointer VectorArrayPtr;
+			typedef std::vector<VectorArrayPtr> VectorArrayList;
+			typedef std::pair<double, VectorArrayPtr> ConfData;
 			typedef std::vector<const Chem::Atom*> AtomList;
 
 			FragmentConformerGenerator(const FragmentConformerGenerator&);
@@ -177,7 +181,7 @@ namespace CDPL
 
 			bool checkRMSD(const ConfData& conf);
 			
-			Math::Vector3DArray* getRingAtomCoordinates(const ConfData& conf);
+			VectorArrayPtr getRingAtomCoordinates(const ConfData& conf);
 
 			void getRingAtomIndices();
 			void getSymmetryMappings();
@@ -192,37 +196,10 @@ namespace CDPL
 
 			double calcMacrocyclicRingSystemEnergyWindow() const;
 
-			void freeVector3DArray(Math::Vector3DArray* vec_array);
-
-			Math::Vector3DArray* allocVector3DArray();
-			void allocVector3DArray(ConfData& conf_data);
+			void allocVectorArray(ConfData& conf_data);
 
 			bool timeoutExceeded() const;
 			bool has3DCoordinates(const Chem::Atom& atom) const;
-
-			class Vec3DArrayDeallocator
-			{
-
-			public:
-				Vec3DArrayDeallocator(FragmentConformerGenerator* owner, const ConfData& conf): 
-					owner(owner), arrayPtr(conf.second) {}
-
-				Vec3DArrayDeallocator(FragmentConformerGenerator* owner, Math::Vector3DArray* array_ptr): 
-					owner(owner), arrayPtr(array_ptr) {}
-
-				~Vec3DArrayDeallocator() {
-					if (arrayPtr)
-						owner->freeVector3DArray(arrayPtr);
-				}
-
-				void release() {
-					arrayPtr = 0;
-				}
-
-			private:
-				FragmentConformerGenerator* owner;
-				Math::Vector3DArray*        arrayPtr;
-			};
 
 			typedef ForceField::MMFF94EnergyCalculator<double> MMFF94EnergyCalculator;
 			typedef ForceField::MMFF94GradientCalculator<double> MMFF94GradientCalculator;
@@ -231,10 +208,9 @@ namespace CDPL
 			typedef Math::BFGSMinimizer<Math::Vector3DArray::StorageType, double> BFGSMinimizer; 
 			typedef Math::VectorArrayAlignmentCalculator<Math::Vector3DArray> AlignmentCalculator;
 			typedef std::vector<ConfData> ConfDataArray;
-			typedef std::vector<Math::Vector3DArray*> Vector3DArrayList;
-			typedef std::vector<Math::Vector3DArray::SharedPointer> AllocVector3DArrayList;
 			typedef std::vector<std::size_t> IndexList;
 
+			VectorArrayCache                         vecArrayCache;
 			std::size_t                              maxNumStructGenTrials;
 			std::size_t                              maxNumMinSteps;
 			std::size_t                              maxNumOutputConfs;
@@ -257,8 +233,8 @@ namespace CDPL
 			MMFF94EnergyCalculator                   mmff94EnergyCalc;
 			MMFF94GradientCalculator                 mmff94GradientCalc;
 			BFGSMinimizer                            energyMinimizer;
-			Raw3DCoordinatesGenerator                rawCoordsGenerator;
-			Chem::Hydrogen3DCoordinatesGenerator     hCoordsGenerator;
+			DGStructureGenerator                     dgStructGen;
+			Chem::Hydrogen3DCoordinatesGenerator     hCoordsGen;
 			Chem::AutomorphismGroupSearch            symMappingSearch;
 			AlignmentCalculator                      alignmentCalc;
 			Math::Vector3DArray::StorageType         gradient;
@@ -268,11 +244,9 @@ namespace CDPL
 			AtomList                                 nbrHydrogens2;
 			Chem::Fragment                           symMappingSearchMolGraph;
 			Util::BitSet                             ordHDepleteAtomMask;
-			Vector3DArrayList                        ringAtomCoords;
+			VectorArrayList                          ringAtomCoords;
 			ConfDataArray                            outputConfs;
 			ConfDataArray                            workingConfs;
-			Vector3DArrayList                        freeCoordArrays;
-			AllocVector3DArrayList                   allocCoordArrays;
 		};
 
 		/**

@@ -128,11 +128,16 @@ namespace
 	{
 		return calcStereoDescriptor(atom, molgraph, 0);
 	}
+
+	const std::size_t MAX_NODE_CACHE_SIZE = 1000;
+	const std::size_t MAX_EDGE_CACHE_SIZE = 1000;
 }
 
 
 Chem::SMARTSDataWriter::SMARTSDataWriter(const Base::DataIOBase& io_base): 
-	ioBase(io_base), freeNodeIndex(0), freeEdgeIndex(0) {}
+	ioBase(io_base), nodeCache(boost::bind(&SMARTSDataWriter::createNode, this), MAX_NODE_CACHE_SIZE),
+	edgeCache(boost::bind(&SMARTSDataWriter::createEdge, this), MAX_EDGE_CACHE_SIZE)
+{}
 
 bool Chem::SMARTSDataWriter::writeReaction(std::ostream& os, const Reaction& rxn)
 {
@@ -307,10 +312,10 @@ void Chem::SMARTSDataWriter::init()
 {
 	ringClosureNumberStack.clear();
 	componentNodes.clear();
+	nodeCache.putAll();
+	edgeCache.putAll();
 
 	highestRingClosureNumber = 0;
-	freeNodeIndex = 0;
-	freeEdgeIndex = 0;
 }
 
 void Chem::SMARTSDataWriter::buildDFSTree(const MolecularGraph& molgraph, DFSTreeNode* node)
@@ -429,22 +434,21 @@ void Chem::SMARTSDataWriter::putRingClosureNumber(std::size_t no)
 	ringClosureNumberStack.push_back(no);
 }
 
+Chem::SMARTSDataWriter::DFSTreeNode* Chem::SMARTSDataWriter::createNode()
+{
+	return new DFSTreeNode(*this);
+}
+
+Chem::SMARTSDataWriter::DFSTreeEdge* Chem::SMARTSDataWriter::createEdge()
+{
+	return new DFSTreeEdge(*this);
+}
+
 Chem::SMARTSDataWriter::DFSTreeNode* Chem::SMARTSDataWriter::allocNode()
 {
-	DFSTreeNode* node;
+	DFSTreeNode* node = nodeCache.getRaw();
 
-	if (freeNodeIndex == allocNodes.size()) {
-		DFSTreeNode::SharedPointer node_ptr(new DFSTreeNode(*this));
-		allocNodes.push_back(node_ptr);
-
-		node = node_ptr.get();
-		freeNodeIndex++;
-
-	} else {
-		node = allocNodes[freeNodeIndex++].get();
-		node->clear();
-	}
-
+	node->clear();
 	componentNodes.push_back(node);
 
 	return node;
@@ -452,19 +456,7 @@ Chem::SMARTSDataWriter::DFSTreeNode* Chem::SMARTSDataWriter::allocNode()
 
 Chem::SMARTSDataWriter::DFSTreeEdge* Chem::SMARTSDataWriter::allocEdge()
 {
-	DFSTreeEdge* edge;
-
-	if (freeEdgeIndex == allocEdges.size()) {
-		DFSTreeEdge::SharedPointer edge_ptr(new DFSTreeEdge(*this));
-		allocEdges.push_back(edge_ptr);
-
-		edge = edge_ptr.get();
-		freeEdgeIndex++;
-
-	} else 
-		edge = allocEdges[freeEdgeIndex++].get();
-
-	return edge;
+	return edgeCache.getRaw();
 }
 
 void Chem::SMARTSDataWriter::writeSMARTS(std::ostream& os, const MolecularGraph& molgraph)

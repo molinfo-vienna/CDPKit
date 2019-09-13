@@ -36,7 +36,7 @@
 #include "CDPL/Util/Array.hpp"
 #include "CDPL/Util/BitSet.hpp"
 #include "CDPL/Util/BronKerboschAlgorithm.hpp"
-#include "CDPL/Util/DGCoordinatesOptimizer.hpp"
+#include "CDPL/Util/DGCoordinatesGenerator.hpp"
 #include "CDPL/Util/Dereferencer.hpp"
 #include "CDPL/Util/IndexedElementIterator.hpp"
 #include "CDPL/Util/IndirectArray.hpp"
@@ -49,6 +49,8 @@
 #include "CDPL/Util/FileDataReader.hpp"
 #include "CDPL/Util/FileDataWriter.hpp"
 #include "CDPL/Util/DefaultDataInputHandler.hpp"
+#include "CDPL/Util/ObjectPool.hpp"
+#include "CDPL/Util/ObjectStack.hpp"
 
 #if defined(HAVE_BOOST_FILESYSTEM)
 

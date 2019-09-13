@@ -50,14 +50,6 @@ void CDPLPythonConfGen::exportFragmentLibraryGenerator()
 			 (python::arg("self"), python::arg("lib")))
 		.def("getFragmentLibrary", &ConfGen::FragmentLibraryGenerator::getFragmentLibrary, 
 			 python::arg("self"), python::return_value_policy<python::copy_const_reference>())
-		.def("setProcessingResultCallback", &ConfGen::FragmentLibraryGenerator::setProcessingResultCallback, 
-			 (python::arg("self"), python::arg("func")))
-		.def("getProcessingResultCallback", &ConfGen::FragmentLibraryGenerator::getProcessingResultCallback, 
-			 python::arg("self"), python::return_internal_reference<>())
-		.def("setProcessingErrorCallback", &ConfGen::FragmentLibraryGenerator::setProcessingErrorCallback, 
-			 (python::arg("self"), python::arg("func")))
-		.def("getProcessingErrorCallback", &ConfGen::FragmentLibraryGenerator::getProcessingErrorCallback, 
-			 python::arg("self"), python::return_internal_reference<>())
 		.def("setProgressCallback", &ConfGen::FragmentLibraryGenerator::setProgressCallback, 
 			 (python::arg("self"), python::arg("func")))
 		.def("getProgressCallback", &ConfGen::FragmentLibraryGenerator::getProgressCallback, 
@@ -111,15 +103,11 @@ void CDPLPythonConfGen::exportFragmentLibraryGenerator()
 		.def("getMaxNumOutputConformers", &ConfGen::FragmentLibraryGenerator::getMaxNumOutputConformers, 
 			 python::arg("self"))
 		.def("process", &ConfGen::FragmentLibraryGenerator::process, 
-			 (python::arg("self"), python::arg("molgraph")))
-		.add_property("resultCallback", 
-					  python::make_function(&ConfGen::FragmentLibraryGenerator::getProcessingResultCallback,
-											python::return_internal_reference<>()),
-					  &ConfGen::FragmentLibraryGenerator::setProcessingResultCallback)
-		.add_property("errorCallback", 
-					  python::make_function(&ConfGen::FragmentLibraryGenerator::getProcessingErrorCallback,
-											python::return_internal_reference<>()),
-					  &ConfGen::FragmentLibraryGenerator::setProcessingErrorCallback)
+			 (python::arg("self"), python::arg("frag")))
+		.def("getNumGeneratedConformers", &ConfGen::FragmentLibraryGenerator::getNumGeneratedConformers,
+			 python::arg("self"))
+		.def("getLibraryEntryHashCode", &ConfGen::FragmentLibraryGenerator::getLibraryEntryHashCode,
+			 python::arg("self"))
 		.add_property("progressCallback", 
 					  python::make_function(&ConfGen::FragmentLibraryGenerator::getProgressCallback,
 											python::return_internal_reference<>()),
@@ -151,5 +139,7 @@ void CDPLPythonConfGen::exportFragmentLibraryGenerator()
 		.add_property("minNumRingConfTrials", &ConfGen::FragmentLibraryGenerator::getMinNumRingConformerTrials,
 					  &ConfGen::FragmentLibraryGenerator::setMinNumRingConformerTrials)
 		.add_property("minRMSD", &ConfGen::FragmentLibraryGenerator::getMinRMSD,
-					  &ConfGen::FragmentLibraryGenerator::setMinRMSD);
+					  &ConfGen::FragmentLibraryGenerator::setMinRMSD)
+		.add_property("numGeneratedConformers", &ConfGen::FragmentLibraryGenerator::getNumGeneratedConformers)
+		.add_property("libraryEntryHashCode", &ConfGen::FragmentLibraryGenerator::getLibraryEntryHashCode);
 }

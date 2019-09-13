@@ -36,7 +36,7 @@ namespace CDPLPythonUtil
 	void exportBitSet();
 	void exportArrays();
 	void exportBronKerboschAlgorithm();
-	void exportDGCoordinatesOptimizer();
+	void exportDGCoordinatesGenerator();
 
 #if defined(HAVE_BOOST_FILESYSTEM) && defined(HAVE_BOOST_IOSTREAMS)
 

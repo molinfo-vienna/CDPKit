@@ -1,7 +1,7 @@
 /* -*- mode: c++; c-basic-offset: 4; tab-width: 4; indent-tabs-mode: t -*- */
 
 /* 
- * ReturnCodeExport.cpp 
+ * DGStructureGeneratorSettings.hpp 
  *
  * This file is part of the Chemical Data Processing Toolkit
  *
@@ -23,34 +23,54 @@
  * Boston, MA 02111-1307, USA.
  */
 
+/**
+ * \file
+ * \brief Definition of the class CDPL::ConfGen::DGStructureGeneratorSettings.
+ */
 
-#include <boost/python.hpp>
+#ifndef CDPL_CONFGEN_DGSTRUCTUREGENERATORSETTINGS_HPP
+#define CDPL_CONFGEN_DGSTRUCTUREGENERATORSETTINGS_HPP
 
-#include "CDPL/ConfGen/ReturnCode.hpp"
+#include "CDPL/ConfGen/APIPrefix.hpp"
+#include "CDPL/ConfGen/DGConstraintGeneratorSettings.hpp"
 
-#include "NamespaceExports.hpp"
 
-
-namespace 
+namespace CDPL 
 {
 
-	struct ReturnCode {};
+    namespace ConfGen 
+    {
+
+		/**
+		 * \addtogroup CDPL_CONFGEN_DATA_STRUCTURES
+		 * @{
+		 */
+
+		class CDPL_CONFGEN_API DGStructureGeneratorSettings : public DGConstraintGeneratorSettings
+		{
+
+		public:
+			static const DGStructureGeneratorSettings DEFAULT;
+
+			DGStructureGeneratorSettings();
+
+			void setBoxSize(double size);
+
+			double getBoxSize() const;
+
+			void enablePlanarityConstraints(bool enable);
+
+			bool enablePlanarityConstraints() const;
+
+		  private:
+			double  boxSize;
+			bool    planarConstr;
+		};
+
+		/**
+		 * @}
+		 */
+    }
 }
 
-
-void CDPLPythonConfGen::exportReturnCodes()
-{
-	using namespace boost;
-	using namespace CDPL;
-
-	python::class_<ReturnCode, boost::noncopyable>("ReturnCode", python::no_init)
-		.def_readonly("SUCCESS", &ConfGen::ReturnCode::SUCCESS)
-		.def_readonly("UNINITIALIZED", &ConfGen::ReturnCode::UNINITIALIZED)
-		.def_readonly("FORCEFIELD_SETUP_FAILED", &ConfGen::ReturnCode::FORCEFIELD_SETUP_FAILED)
-		.def_readonly("FORCEFIELD_MINIMIZATION_FAILED", &ConfGen::ReturnCode::FORCEFIELD_MINIMIZATION_FAILED)
-		.def_readonly("MAX_NUM_TRIALS_EXCEEDED", &ConfGen::ReturnCode::MAX_NUM_TRIALS_EXCEEDED)
-		.def_readonly("TIMEOUT_EXCEEDED", &ConfGen::ReturnCode::TIMEOUT_EXCEEDED)
-		.def_readonly("FRAGMENT_LIBRARY_NOT_SET", &ConfGen::ReturnCode::FRAGMENT_LIBRARY_NOT_SET)
-		.def_readonly("ERROR", &ConfGen::ReturnCode::ERROR)
-		;
-}
+#endif // CDPL_CONFGEN_DGSTRUCTUREGENERATORSETTINGS_HPP

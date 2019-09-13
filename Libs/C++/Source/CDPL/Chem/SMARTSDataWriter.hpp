@@ -34,6 +34,8 @@
 
 #include <boost/shared_ptr.hpp>
 
+#include "CDPL/Util/ObjectStack.hpp"
+
 
 namespace CDPL 
 {
@@ -82,6 +84,9 @@ namespace CDPL
 
 			std::size_t getRingClosureNumber();
 			void putRingClosureNumber(std::size_t);
+
+			DFSTreeNode* createNode();
+			DFSTreeEdge* createEdge();
 
 			DFSTreeNode* allocNode();
 			DFSTreeEdge* allocEdge();
@@ -220,16 +225,14 @@ namespace CDPL
 
 			typedef boost::shared_ptr<SMARTSDataWriter> SharedPointer;
 
-			typedef std::vector<DFSTreeNode::SharedPointer> AllocNodeList;
-			typedef std::vector<DFSTreeEdge::SharedPointer> AllocEdgeList;
 			typedef std::vector<DFSTreeNode*> NodeList;
 			typedef std::vector<std::size_t> RingClosureNumberStack;
+			typedef Util::ObjectStack<DFSTreeNode> NodeCache;
+			typedef Util::ObjectStack<DFSTreeEdge> EdgeCache;
 
 			const Base::DataIOBase& ioBase;	
-			AllocNodeList           allocNodes;
-			AllocEdgeList           allocEdges;
-			std::size_t             freeNodeIndex;
-			std::size_t             freeEdgeIndex;
+			NodeCache               nodeCache;
+			EdgeCache               edgeCache;
 			NodeList                componentNodes;
 			NodeList                atomNodeMapping;
 			RingClosureNumberStack  ringClosureNumberStack;

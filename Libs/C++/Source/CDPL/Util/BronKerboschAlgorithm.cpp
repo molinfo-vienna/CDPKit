@@ -44,10 +44,10 @@ Util::BronKerboschAlgorithm::BronKerboschAlgorithm(const BronKerboschAlgorithm& 
 	adjMatrix(bka.adjMatrix), nodeDegrees(bka.nodeDegrees)
 {
 	for (StateStack::const_iterator it = bka.states.begin(), end = bka.states.end(); it != end; ++it) {
-		SharedStatePtr state_ptr(new State(**it));
+		State* state = stateCache.getRaw();
 
-		allocStates.push_back(state_ptr);
-		states.push_back(state_ptr.get());
+		*state = **it;
+		states.push_back(state);
 	}
 }
 
@@ -56,11 +56,11 @@ Util::BronKerboschAlgorithm& Util::BronKerboschAlgorithm::operator=(const BronKe
 	adjMatrix = bka.adjMatrix;
 	nodeDegrees = bka.nodeDegrees;
 
-	freeAllStates();
 	states.clear();
+	stateCache.putAll();
 
 	for (StateStack::const_iterator it = bka.states.begin(), end = bka.states.end(); it != end; ++it) {
-		State* state = allocState();
+		State* state = stateCache.getRaw();
 
 		*state = **it;
 		states.push_back(state);
@@ -78,11 +78,11 @@ void Util::BronKerboschAlgorithm::init(const BitSetArray& adj_mtx)
 	std::transform(adj_mtx.getElementsBegin(), adj_mtx.getElementsEnd(), 
 				   std::back_inserter(nodeDegrees), boost::bind(&BitSet::count, _1));
 	
-	freeAllStates();
 	states.clear();
+	stateCache.putAll();
 
 	std::size_t num_nodes = adj_mtx.getSize();
-	State* init_state = allocState();
+	State* init_state = stateCache.getRaw();
 
 	init_state->curr.resize(num_nodes);
 	init_state->curr.reset();
@@ -103,7 +103,7 @@ bool Util::BronKerboschAlgorithm::nextClique(BitSet& clique)
 		if (state->v == 0) {
 			if (state->pool.none() && state->excl.none()) {
 				states.pop_back();
-				freeState(state);
+				stateCache.put();
 
 				clique = state->curr;				
 				return true;
@@ -128,7 +128,7 @@ bool Util::BronKerboschAlgorithm::nextClique(BitSet& clique)
 			if ((*adjMatrix)[state->u].test(state->v))
 				continue;
 		
-			State* new_state = allocState();
+			State* new_state = stateCache.getRaw();
 
 			*new_state = *state;
 			new_state->curr.set(state->v);
@@ -149,37 +149,8 @@ bool Util::BronKerboschAlgorithm::nextClique(BitSet& clique)
 			continue;
 
 		states.pop_back();
-		freeState(state);
+		stateCache.put();
 	}
 
 	return false;
-}
-
-Util::BronKerboschAlgorithm::State* Util::BronKerboschAlgorithm::allocState()
-{
-	if (freeStates.empty()) {
-		SharedStatePtr state_ptr(new State());
-		allocStates.push_back(state_ptr);
-
-		return state_ptr.get();
-	}
-
-	State* state = freeStates.back();
-
-	freeStates.pop_back();
-
-	return state;
-}
-
-void Util::BronKerboschAlgorithm::freeState(State* state)
-{
-	freeStates.push_back(state);
-}
-
-void Util::BronKerboschAlgorithm::freeAllStates()
-{
-	freeStates.clear();
-
-	std::transform(allocStates.begin(), allocStates.end(), 
-				   std::back_inserter(freeStates), boost::bind(&SharedStatePtr::get, _1));
 }

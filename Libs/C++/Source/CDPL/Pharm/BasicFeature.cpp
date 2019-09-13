@@ -33,7 +33,7 @@
 using namespace CDPL;
 
 
-Pharm::BasicFeature::BasicFeature(BasicPharmacophore* pharm): pharmacophore(pharm) {}
+Pharm::BasicFeature::BasicFeature(BasicPharmacophore& pharm): pharm(&pharm) {}
  
 Pharm::BasicFeature::~BasicFeature() {}
 
@@ -44,12 +44,12 @@ std::size_t Pharm::BasicFeature::getIndex() const
 
 const Pharm::Pharmacophore& Pharm::BasicFeature::getPharmacophore() const
 {
-    return *pharmacophore;
+    return *pharm;
 }
 
 Pharm::Pharmacophore& Pharm::BasicFeature::getPharmacophore()
 {
-    return *pharmacophore;
+    return *pharm;
 }
 
 void Pharm::BasicFeature::setIndex(std::size_t idx)
@@ -60,7 +60,7 @@ void Pharm::BasicFeature::setIndex(std::size_t idx)
 Pharm::BasicFeature& Pharm::BasicFeature::operator=(const BasicFeature& feature) 
 {
     if (this == &feature)
-	return *this;
+		return *this;
 
     Feature::operator=(feature);
 

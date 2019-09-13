@@ -73,7 +73,7 @@ namespace CDPL
 			using Feature::operator=;
 
 		  private:
-			BasicFeature(BasicPharmacophore* pharm);
+			BasicFeature(BasicPharmacophore& pharm);
 	    
 			BasicFeature(const BasicFeature& feature);
 
@@ -81,7 +81,7 @@ namespace CDPL
 
 			void setIndex(std::size_t idx);
 
-			BasicPharmacophore* pharmacophore;
+			BasicPharmacophore* pharm;
 			std::size_t         index;
 		};
 

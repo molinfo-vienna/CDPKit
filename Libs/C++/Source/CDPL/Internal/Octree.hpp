@@ -52,7 +52,7 @@
 #include <limits>
 #include <vector>
 
-#include <boost/shared_ptr.hpp>
+#include "CDPL/Util/ObjectStack.hpp"
 
 
 namespace CDPL
@@ -288,10 +288,9 @@ namespace CDPL
 			template <typename Distance>
 			static bool inside(const PointT& query, ScalarT radius, const Octant* octant);
 
-			typedef std::vector<OctantPtr> AllocOctantList;
+			typedef Util::ObjectStack<Octant> OctantCache;
 
-			std::size_t              freeOctantIdx;
-			AllocOctantList          allocOctants;
+			OctantCache              octantCache;
 			std::size_t              bucketSize;
 			ScalarT                  minExtent;
 			Octant*                  rootNode;
@@ -309,7 +308,7 @@ namespace CDPL
 		template <typename PointT, typename ContainerT, typename ScalarT>
 		void Octree<PointT, ContainerT, ScalarT>::initialize(const ContainerT& pts, std::size_t bucket_size, ScalarT min_extent)
 		{
-			freeOctantIdx = 0;
+			octantCache.putAll();
 
 			pointData = &pts;
 			bucketSize = bucket_size;
@@ -369,15 +368,7 @@ namespace CDPL
 		typename Octree<PointT, ContainerT, ScalarT>::Octant* Octree<PointT, ContainerT, ScalarT>::createOctant(ScalarT x, ScalarT y, ScalarT z,
 																												ScalarT extent, std::size_t start_idx,
 																												std::size_t end_idx, std::size_t size) {
-			if (freeOctantIdx >= allocOctants.size()) {
-				allocOctants.reserve(freeOctantIdx + 1);
-
-				OctantPtr octant_ptr(new Octant());
-
-				allocOctants.push_back(octant_ptr);
-			} 
-
-			Octant* octant = allocOctants[freeOctantIdx++].get();
+			Octant* octant = octantCache.getRaw();
 
 			for (std::size_t i = 0; i < 8; i++)
 				octant->child[i] = 0;

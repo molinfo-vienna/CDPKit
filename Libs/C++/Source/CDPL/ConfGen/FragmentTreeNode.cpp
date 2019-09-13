@@ -116,7 +116,7 @@ ConfGen::FragmentTreeNode* ConfGen::FragmentTreeNode::getRightChild() const
 	return rightChild.get();
 }
 
-void ConfGen::FragmentTreeNode::addConformer(Math::Vector3DArray* coords, double energy)
+void ConfGen::FragmentTreeNode::addConformer(const Math::Vector3DArray::SharedPointer& coords, double energy)
 {
 	conformers.push_back(ConfData(coords, energy));
 }

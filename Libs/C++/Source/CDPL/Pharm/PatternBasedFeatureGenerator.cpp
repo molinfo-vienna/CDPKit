@@ -43,13 +43,22 @@
 #include "CDPL/Math/SVDecomposition.hpp"
 
 
+namespace
+{
+
+	const std::size_t MAX_BIT_SET_CACHE_SIZE = 500;
+}
+
+
 using namespace CDPL; 
 
 
-Pharm::PatternBasedFeatureGenerator::PatternBasedFeatureGenerator() {}
+Pharm::PatternBasedFeatureGenerator::PatternBasedFeatureGenerator():
+	bitSetCache(MAX_BIT_SET_CACHE_SIZE)
+{}
 
 Pharm::PatternBasedFeatureGenerator::PatternBasedFeatureGenerator(const PatternBasedFeatureGenerator& gen): 
-	FeatureGenerator(gen)
+	FeatureGenerator(gen), bitSetCache(MAX_BIT_SET_CACHE_SIZE)
 {
 	for (IncludePatternList::const_iterator it = gen.includePatterns.begin(), end = gen.includePatterns.end(); it != end; ++it)
 		includePatterns.push_back(IncludePattern(it->subQuery, it->featureType, it->featureTol, it->featureGeom, it->vectorLength));
@@ -60,7 +69,7 @@ Pharm::PatternBasedFeatureGenerator::PatternBasedFeatureGenerator(const PatternB
 
 Pharm::PatternBasedFeatureGenerator::~PatternBasedFeatureGenerator() {}
 
-	void Pharm::PatternBasedFeatureGenerator::addIncludePattern(const Chem::MolecularGraph::SharedPointer& substruct, 
+void Pharm::PatternBasedFeatureGenerator::addIncludePattern(const Chem::MolecularGraph::SharedPointer& substruct, 
 															unsigned int type, double tol, unsigned int geom,
 															double length)
 {
@@ -103,7 +112,7 @@ void Pharm::PatternBasedFeatureGenerator::generate(const Chem:: MolecularGraph& 
 			const AtomBondMapping& mapping = *m_it;
 
 			if (!atom_mask)
-				atom_mask = allocBitSet();
+				atom_mask = bitSetCache.getRaw();
 
 			createMatchedAtomMask(mapping.getAtomMapping(), *atom_mask, true);
 
@@ -304,7 +313,7 @@ void Pharm::PatternBasedFeatureGenerator::getExcludeMatches()
 		for (SubstructureSearch::ConstMappingIterator m_it = x_ptn.subSearch->getMappingsBegin(), 
 				 m_end = x_ptn.subSearch->getMappingsEnd(); m_it != m_end; ++m_it) {
 
-			Util::BitSet* atom_mask = allocBitSet();
+			Util::BitSet* atom_mask = bitSetCache.getRaw();
 			const AtomMapping& atom_mapping = m_it->getAtomMapping();
 
 			createMatchedAtomMask(atom_mapping, *atom_mask, true);
@@ -358,22 +367,9 @@ void Pharm::PatternBasedFeatureGenerator::createMatchedAtomMask(const Chem::Atom
 void Pharm::PatternBasedFeatureGenerator::init(const Chem::MolecularGraph& molgraph)
 {
     molGraph = &molgraph;
-	freeBitSetIdx = 0;
 
 	includeMatches.clear();
 	excludeMatches.clear();
-}
 
-Util::BitSet* Pharm::PatternBasedFeatureGenerator::allocBitSet()
-{
-	if (freeBitSetIdx == allocBitSets.size()) {
-		BitSetPtr bset_ptr(new Util::BitSet());
-		allocBitSets.push_back(bset_ptr);
-		
-		freeBitSetIdx++;
-
-		return bset_ptr.get();
-	}
-
-	return allocBitSets[freeBitSetIdx++].get();
+	bitSetCache.putAll();
 }

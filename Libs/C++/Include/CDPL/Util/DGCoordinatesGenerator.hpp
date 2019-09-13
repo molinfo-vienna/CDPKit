@@ -1,7 +1,7 @@
 /* -*- mode: c++; c-basic-offset: 4; tab-width: 4; indent-tabs-mode: t -*- */
 
 /* 
- * DGCoordinatesOptimizer.hpp 
+ * DGCoordinatesGenerator.hpp 
  *
  * Copyright (C) 2010-2012 Thomas A. Seidel <thomas.seidel@univie.ac.at>
  *
@@ -23,11 +23,11 @@
 
 /**
  * \file
- * \brief Implementation of a distance geometry based coordinates optimizer.
+ * \brief Implementation of a distance geometry based coordinates generator.
  */
 
-#ifndef CDPL_UTIL_DGCOORDINATESOPTIMIZER_HPP
-#define CDPL_UTIL_DGCOORDINATESOPTIMIZER_HPP
+#ifndef CDPL_UTIL_DGCOORDINATESGENERATOR_HPP
+#define CDPL_UTIL_DGCOORDINATESGENERATOR_HPP
 
 #include <cstddef>
 #include <vector>
@@ -57,7 +57,7 @@ namespace CDPL
 		 *        (and volume) constraints [\ref ASPE].
 		 */
 		template <std::size_t Dim, typename T, typename Derived>
-		class DGCoordinatesOptimizerBase
+		class DGCoordinatesGeneratorBase
 		{
 
 		public:
@@ -139,19 +139,19 @@ namespace CDPL
 			void setRandomSeed(unsigned int seed);
 
 			template <typename CoordsArray>
-			void optimize(std::size_t num_points, CoordsArray& coords);
+			void generate(std::size_t num_points, CoordsArray& coords);
 
 			template <typename CoordsArray>
 			ValueType getDistanceError(const CoordsArray& coords) const;
 
 		protected:
-			DGCoordinatesOptimizerBase();
+			DGCoordinatesGeneratorBase();
 
-			DGCoordinatesOptimizerBase(const DGCoordinatesOptimizerBase& gen);
+			DGCoordinatesGeneratorBase(const DGCoordinatesGeneratorBase& gen);
 
-			~DGCoordinatesOptimizerBase() {}
+			~DGCoordinatesGeneratorBase() {}
 
-			DGCoordinatesOptimizerBase& operator=(const DGCoordinatesOptimizerBase& gen);
+			DGCoordinatesGeneratorBase& operator=(const DGCoordinatesGeneratorBase& gen);
 
 		private:
 			std::size_t getNumVolumeConstraints() const;
@@ -182,39 +182,39 @@ namespace CDPL
 		};
 
 		template <std::size_t Dim, typename T, typename Derived> 
-		const std::size_t DGCoordinatesOptimizerBase<Dim, T, Derived>::COORDS_DIM;
+		const std::size_t DGCoordinatesGeneratorBase<Dim, T, Derived>::COORDS_DIM;
 
 		template <std::size_t Dim, typename T, typename Derived> 
-		const std::size_t DGCoordinatesOptimizerBase<Dim, T, Derived>::DEF_NUM_CYCLES;
+		const std::size_t DGCoordinatesGeneratorBase<Dim, T, Derived>::DEF_NUM_CYCLES;
 
 		template <std::size_t Dim, typename T, typename Derived> 
-		const std::size_t DGCoordinatesOptimizerBase<Dim, T, Derived>::DEF_CYCLE_STEP_COUNT_FACTOR;
+		const std::size_t DGCoordinatesGeneratorBase<Dim, T, Derived>::DEF_CYCLE_STEP_COUNT_FACTOR;
 
 		template <std::size_t Dim, typename T, typename Derived> 
-		const typename DGCoordinatesOptimizerBase<Dim, T, Derived>::ValueType
-		DGCoordinatesOptimizerBase<Dim, T, Derived>::DEF_START_LEARNING_RATE = 1;
+		const typename DGCoordinatesGeneratorBase<Dim, T, Derived>::ValueType
+		DGCoordinatesGeneratorBase<Dim, T, Derived>::DEF_START_LEARNING_RATE = 1;
 
 		template <std::size_t Dim, typename T, typename Derived> 
-		const typename DGCoordinatesOptimizerBase<Dim, T, Derived>::ValueType
-		DGCoordinatesOptimizerBase<Dim, T, Derived>::DEF_LEARNING_RATE_DECREMENT = 0.95 / 50;
+		const typename DGCoordinatesGeneratorBase<Dim, T, Derived>::ValueType
+		DGCoordinatesGeneratorBase<Dim, T, Derived>::DEF_LEARNING_RATE_DECREMENT = 0.95 / 50;
 
 
 		/**
 		 * \brief Generic implementation for generation of coordinates that fulfill user-provided point distance constraints [\ref ASPE].
 		 */
 		template <std::size_t Dim, typename T>
-		class DGCoordinatesOptimizer : public DGCoordinatesOptimizerBase<Dim, T, DGCoordinatesOptimizer<Dim, T> > {};
+		class DGCoordinatesGenerator : public DGCoordinatesGeneratorBase<Dim, T, DGCoordinatesGenerator<Dim, T> > {};
 
 
 		/**
 		 * \brief Specialized implementation for the generation of 3D coordinates that fulfill user-provided point distance and volume constraints [\ref ASPE].
 		 */
 		template <typename T>
-		class DGCoordinatesOptimizer<3, T> : public DGCoordinatesOptimizerBase<3, T, DGCoordinatesOptimizer<3, T> > 
+		class DGCoordinatesGenerator<3, T> : public DGCoordinatesGeneratorBase<3, T, DGCoordinatesGenerator<3, T> > 
 		{
 
-			typedef DGCoordinatesOptimizerBase<3, T, DGCoordinatesOptimizer<3, T> > BaseType;
-			friend class DGCoordinatesOptimizerBase<3, T, DGCoordinatesOptimizer<3, T> >;
+			typedef DGCoordinatesGeneratorBase<3, T, DGCoordinatesGenerator<3, T> > BaseType;
+			friend class DGCoordinatesGeneratorBase<3, T, DGCoordinatesGenerator<3, T> >;
 
 		public:
 			class VolumeConstraint;
@@ -295,7 +295,7 @@ namespace CDPL
 			VolumeConstraintList volConstraints;
 		};
 
-		typedef DGCoordinatesOptimizer<3, double> DG3DCoordinatesOptimizer;
+		typedef DGCoordinatesGenerator<3, double> DG3DCoordinatesGenerator;
 
 		/**
 		 * @}
@@ -305,47 +305,47 @@ namespace CDPL
 
 
 // \cond UNHIDE_DETAILS
-// DGCoordinatesOptimizerBase<Dim, T>::DistanceConstraint implementation
+// DGCoordinatesGeneratorBase<Dim, T>::DistanceConstraint implementation
 
 template <std::size_t Dim, typename T, typename Derived>
-CDPL::Util::DGCoordinatesOptimizerBase<Dim, T, Derived>::DistanceConstraint::DistanceConstraint(std::size_t pt1_idx, std::size_t pt2_idx, 
+CDPL::Util::DGCoordinatesGeneratorBase<Dim, T, Derived>::DistanceConstraint::DistanceConstraint(std::size_t pt1_idx, std::size_t pt2_idx, 
 																								const ValueType& lb, const ValueType& ub):
 	point1Idx(pt1_idx), point2Idx(pt2_idx), lowerBound(lb), upperBound(ub) {}
 
 template <std::size_t Dim, typename T, typename Derived>
-std::size_t CDPL::Util::DGCoordinatesOptimizerBase<Dim, T, Derived>::DistanceConstraint::getPoint1Index() const
+std::size_t CDPL::Util::DGCoordinatesGeneratorBase<Dim, T, Derived>::DistanceConstraint::getPoint1Index() const
 {
 	return point1Idx;
 }
 
 template <std::size_t Dim, typename T, typename Derived>
-std::size_t CDPL::Util::DGCoordinatesOptimizerBase<Dim, T, Derived>::DistanceConstraint::getPoint2Index() const
+std::size_t CDPL::Util::DGCoordinatesGeneratorBase<Dim, T, Derived>::DistanceConstraint::getPoint2Index() const
 {
 	return point2Idx;
 }
 
 template <std::size_t Dim, typename T, typename Derived>
-const T& CDPL::Util::DGCoordinatesOptimizerBase<Dim, T, Derived>::DistanceConstraint::getLowerBound() const
+const T& CDPL::Util::DGCoordinatesGeneratorBase<Dim, T, Derived>::DistanceConstraint::getLowerBound() const
 {
 	return lowerBound;
 }
 
 template <std::size_t Dim, typename T, typename Derived>
-const T& CDPL::Util::DGCoordinatesOptimizerBase<Dim, T, Derived>::DistanceConstraint::getUpperBound() const
+const T& CDPL::Util::DGCoordinatesGeneratorBase<Dim, T, Derived>::DistanceConstraint::getUpperBound() const
 {
 	return upperBound;
 }
 
-// DGCoordinatesOptimizerBase<Dim, T, Derived> implementation
+// DGCoordinatesGeneratorBase<Dim, T, Derived> implementation
 
 template <std::size_t Dim, typename T, typename Derived>
-CDPL::Util::DGCoordinatesOptimizerBase<Dim, T, Derived>::DGCoordinatesOptimizerBase(): 
+CDPL::Util::DGCoordinatesGeneratorBase<Dim, T, Derived>::DGCoordinatesGeneratorBase(): 
 	numCycles(DEF_NUM_CYCLES), cycleStepCountFactor(DEF_CYCLE_STEP_COUNT_FACTOR), startLearningRate(DEF_START_LEARNING_RATE), 
 	learningRateDecr(DEF_LEARNING_RATE_DECREMENT), randomEngine(170375)
 {}
 	
 template <std::size_t Dim, typename T, typename Derived>
-CDPL::Util::DGCoordinatesOptimizerBase<Dim, T, Derived>::DGCoordinatesOptimizerBase(const DGCoordinatesOptimizerBase& gen): 
+CDPL::Util::DGCoordinatesGeneratorBase<Dim, T, Derived>::DGCoordinatesGeneratorBase(const DGCoordinatesGeneratorBase& gen): 
 	numCycles(gen.numCycles), cycleStepCountFactor(gen.cycleStepCountFactor), 
 	startLearningRate(gen.startLearningRate), learningRateDecr(gen.learningRateDecr), 
 	distConstraints(gen.distConstraints),
@@ -353,8 +353,8 @@ CDPL::Util::DGCoordinatesOptimizerBase<Dim, T, Derived>::DGCoordinatesOptimizerB
 {}
 
 template <std::size_t Dim, typename T, typename Derived>
-CDPL::Util::DGCoordinatesOptimizerBase<Dim, T, Derived>& 
-CDPL::Util::DGCoordinatesOptimizerBase<Dim, T, Derived>::operator=(const DGCoordinatesOptimizerBase& gen)
+CDPL::Util::DGCoordinatesGeneratorBase<Dim, T, Derived>& 
+CDPL::Util::DGCoordinatesGeneratorBase<Dim, T, Derived>::operator=(const DGCoordinatesGeneratorBase& gen)
 {
 	if (&gen == this)
 		return *this;
@@ -369,151 +369,151 @@ CDPL::Util::DGCoordinatesOptimizerBase<Dim, T, Derived>::operator=(const DGCoord
 }
 
 template <std::size_t Dim, typename T, typename Derived>
-void CDPL::Util::DGCoordinatesOptimizerBase<Dim, T, Derived>::clearDistanceConstraints()
+void CDPL::Util::DGCoordinatesGeneratorBase<Dim, T, Derived>::clearDistanceConstraints()
 {
 	distConstraints.clear();	
 }
 
 template <std::size_t Dim, typename T, typename Derived>
-void CDPL::Util::DGCoordinatesOptimizerBase<Dim, T, Derived>::addDistanceConstraint(std::size_t pt1_idx, std::size_t pt2_idx, 
+void CDPL::Util::DGCoordinatesGeneratorBase<Dim, T, Derived>::addDistanceConstraint(std::size_t pt1_idx, std::size_t pt2_idx, 
 																					const ValueType& lb, const ValueType& ub)
 {
 	distConstraints.push_back(DistanceConstraint(pt1_idx, pt2_idx, lb, ub));
 }
 
 template <std::size_t Dim, typename T, typename Derived>
-std::size_t CDPL::Util::DGCoordinatesOptimizerBase<Dim, T, Derived>::getNumDistanceConstraints() const
+std::size_t CDPL::Util::DGCoordinatesGeneratorBase<Dim, T, Derived>::getNumDistanceConstraints() const
 {
 	return distConstraints.size();
 }
 
 template <std::size_t Dim, typename T, typename Derived>
-const typename CDPL::Util::DGCoordinatesOptimizerBase<Dim, T, Derived>::DistanceConstraint& 
-CDPL::Util::DGCoordinatesOptimizerBase<Dim, T, Derived>::getDistanceConstraint(std::size_t idx) const
+const typename CDPL::Util::DGCoordinatesGeneratorBase<Dim, T, Derived>::DistanceConstraint& 
+CDPL::Util::DGCoordinatesGeneratorBase<Dim, T, Derived>::getDistanceConstraint(std::size_t idx) const
 {
 	if (idx >= distConstraints.size())
-		throw Base::IndexError("DGCoordinatesOptimizerBase: constraint index out of bounds");
+		throw Base::IndexError("DGCoordinatesGeneratorBase: constraint index out of bounds");
 
 	return distConstraints[idx];
 }
 
 template <std::size_t Dim, typename T, typename Derived>
-typename CDPL::Util::DGCoordinatesOptimizerBase<Dim, T, Derived>::DistanceConstraint& 
-CDPL::Util::DGCoordinatesOptimizerBase<Dim, T, Derived>::getDistanceConstraint(std::size_t idx)
+typename CDPL::Util::DGCoordinatesGeneratorBase<Dim, T, Derived>::DistanceConstraint& 
+CDPL::Util::DGCoordinatesGeneratorBase<Dim, T, Derived>::getDistanceConstraint(std::size_t idx)
 {
 	if (idx >= distConstraints.size())
-		throw Base::IndexError("DGCoordinatesOptimizerBase: constraint index out of bounds");
+		throw Base::IndexError("DGCoordinatesGeneratorBase: constraint index out of bounds");
 
 	return distConstraints[idx];
 }
 
 template <std::size_t Dim, typename T, typename Derived>
-void CDPL::Util::DGCoordinatesOptimizerBase<Dim, T, Derived>::removeDistanceConstraint(std::size_t idx)
+void CDPL::Util::DGCoordinatesGeneratorBase<Dim, T, Derived>::removeDistanceConstraint(std::size_t idx)
 {
 	if (idx >= distConstraints.size())
-		throw Base::IndexError("DGCoordinatesOptimizerBase: constraint index out of bounds");
+		throw Base::IndexError("DGCoordinatesGeneratorBase: constraint index out of bounds");
 
 	distConstraints.erase(distConstraints.begin() + idx);
 }
 
 template <std::size_t Dim, typename T, typename Derived>
-void CDPL::Util::DGCoordinatesOptimizerBase<Dim, T, Derived>::removeDistanceConstraint(const DistanceConstraintIterator& it)
+void CDPL::Util::DGCoordinatesGeneratorBase<Dim, T, Derived>::removeDistanceConstraint(const DistanceConstraintIterator& it)
 {
 	if ((it - distConstraints.begin()) >= distConstraints.size())
-		throw Base::IndexError("DGCoordinatesOptimizerBase: constraint iterator out of bounds");
+		throw Base::IndexError("DGCoordinatesGeneratorBase: constraint iterator out of bounds");
 
 	distConstraints.erase(it);
 }
 
 template <std::size_t Dim, typename T, typename Derived>
-typename CDPL::Util::DGCoordinatesOptimizerBase<Dim, T, Derived>::DistanceConstraintIterator
-CDPL::Util::DGCoordinatesOptimizerBase<Dim, T, Derived>::getDistanceConstraintsBegin()
+typename CDPL::Util::DGCoordinatesGeneratorBase<Dim, T, Derived>::DistanceConstraintIterator
+CDPL::Util::DGCoordinatesGeneratorBase<Dim, T, Derived>::getDistanceConstraintsBegin()
 {
 	return distConstraints.begin();
 }
 
 template <std::size_t Dim, typename T, typename Derived>
-typename CDPL::Util::DGCoordinatesOptimizerBase<Dim, T, Derived>::DistanceConstraintIterator
-CDPL::Util::DGCoordinatesOptimizerBase<Dim, T, Derived>::getDistanceConstraintsEnd()
+typename CDPL::Util::DGCoordinatesGeneratorBase<Dim, T, Derived>::DistanceConstraintIterator
+CDPL::Util::DGCoordinatesGeneratorBase<Dim, T, Derived>::getDistanceConstraintsEnd()
 {
 	return distConstraints.end();
 }
 
 template <std::size_t Dim, typename T, typename Derived>
-typename CDPL::Util::DGCoordinatesOptimizerBase<Dim, T, Derived>::ConstDistanceConstraintIterator
-CDPL::Util::DGCoordinatesOptimizerBase<Dim, T, Derived>::getDistanceConstraintsBegin() const
+typename CDPL::Util::DGCoordinatesGeneratorBase<Dim, T, Derived>::ConstDistanceConstraintIterator
+CDPL::Util::DGCoordinatesGeneratorBase<Dim, T, Derived>::getDistanceConstraintsBegin() const
 {
 	return distConstraints.begin();
 }
 
 template <std::size_t Dim, typename T, typename Derived>
-typename CDPL::Util::DGCoordinatesOptimizerBase<Dim, T, Derived>::ConstDistanceConstraintIterator
-CDPL::Util::DGCoordinatesOptimizerBase<Dim, T, Derived>::getDistanceConstraintsEnd() const
+typename CDPL::Util::DGCoordinatesGeneratorBase<Dim, T, Derived>::ConstDistanceConstraintIterator
+CDPL::Util::DGCoordinatesGeneratorBase<Dim, T, Derived>::getDistanceConstraintsEnd() const
 {
 	return distConstraints.end();
 }
 
 template <std::size_t Dim, typename T, typename Derived>
-void CDPL::Util::DGCoordinatesOptimizerBase<Dim, T, Derived>::setNumCycles(std::size_t num_cycles)
+void CDPL::Util::DGCoordinatesGeneratorBase<Dim, T, Derived>::setNumCycles(std::size_t num_cycles)
 {
 	numCycles = num_cycles;
 }
 
 template <std::size_t Dim, typename T, typename Derived>
-void CDPL::Util::DGCoordinatesOptimizerBase<Dim, T, Derived>::setCycleStepCountFactor(std::size_t fact)
+void CDPL::Util::DGCoordinatesGeneratorBase<Dim, T, Derived>::setCycleStepCountFactor(std::size_t fact)
 {
 	cycleStepCountFactor = fact;
 }
 
 template <std::size_t Dim, typename T, typename Derived>
-void CDPL::Util::DGCoordinatesOptimizerBase<Dim, T, Derived>::setStartLearningRate(const ValueType& rate)
+void CDPL::Util::DGCoordinatesGeneratorBase<Dim, T, Derived>::setStartLearningRate(const ValueType& rate)
 {
 	startLearningRate = rate;
 }
 
 template <std::size_t Dim, typename T, typename Derived>
-void CDPL::Util::DGCoordinatesOptimizerBase<Dim, T, Derived>::setLearningRateDecrement(const ValueType& decr)
+void CDPL::Util::DGCoordinatesGeneratorBase<Dim, T, Derived>::setLearningRateDecrement(const ValueType& decr)
 {
 	learningRateDecr = decr;
 }
 
 template <std::size_t Dim, typename T, typename Derived>
-std::size_t CDPL::Util::DGCoordinatesOptimizerBase<Dim, T, Derived>::getNumCycles() const
+std::size_t CDPL::Util::DGCoordinatesGeneratorBase<Dim, T, Derived>::getNumCycles() const
 {
 	return numCycles;
 }
 
 template <std::size_t Dim, typename T, typename Derived>
-std::size_t CDPL::Util::DGCoordinatesOptimizerBase<Dim, T, Derived>::getCycleStepCountFactor() const
+std::size_t CDPL::Util::DGCoordinatesGeneratorBase<Dim, T, Derived>::getCycleStepCountFactor() const
 {
 	return cycleStepCountFactor;
 }
 
 template <std::size_t Dim, typename T, typename Derived>
-const typename CDPL::Util::DGCoordinatesOptimizerBase<Dim, T, Derived>::ValueType& 
-CDPL::Util::DGCoordinatesOptimizerBase<Dim, T, Derived>::getStartLearningRate() const
+const typename CDPL::Util::DGCoordinatesGeneratorBase<Dim, T, Derived>::ValueType& 
+CDPL::Util::DGCoordinatesGeneratorBase<Dim, T, Derived>::getStartLearningRate() const
 {
 	return startLearningRate;
 }
 
 template <std::size_t Dim, typename T, typename Derived>
-const typename CDPL::Util::DGCoordinatesOptimizerBase<Dim, T, Derived>::ValueType& 
-CDPL::Util::DGCoordinatesOptimizerBase<Dim, T, Derived>::getLearningRateDecrement() const
+const typename CDPL::Util::DGCoordinatesGeneratorBase<Dim, T, Derived>::ValueType& 
+CDPL::Util::DGCoordinatesGeneratorBase<Dim, T, Derived>::getLearningRateDecrement() const
 {
 	return learningRateDecr;
 }
 
 template <std::size_t Dim, typename T, typename Derived>
 void
-CDPL::Util::DGCoordinatesOptimizerBase<Dim, T, Derived>::setRandomSeed(unsigned int seed)
+CDPL::Util::DGCoordinatesGeneratorBase<Dim, T, Derived>::setRandomSeed(unsigned int seed)
 {
 	randomEngine.seed(seed);
 }
 
 template <std::size_t Dim, typename T, typename Derived>
 template <typename CoordsArray>
-typename CDPL::Util::DGCoordinatesOptimizerBase<Dim, T, Derived>::ValueType 
-CDPL::Util::DGCoordinatesOptimizerBase<Dim, T, Derived>::getDistanceError(const CoordsArray& coords) const
+typename CDPL::Util::DGCoordinatesGeneratorBase<Dim, T, Derived>::ValueType 
+CDPL::Util::DGCoordinatesGeneratorBase<Dim, T, Derived>::getDistanceError(const CoordsArray& coords) const
 {
 	ValueType error = ValueType();
 	ValueType pos_diff[Dim];
@@ -546,21 +546,21 @@ CDPL::Util::DGCoordinatesOptimizerBase<Dim, T, Derived>::getDistanceError(const 
 }
 
 template <std::size_t Dim, typename T, typename Derived>
-std::size_t CDPL::Util::DGCoordinatesOptimizerBase<Dim, T, Derived>::getNumVolumeConstraints() const
+std::size_t CDPL::Util::DGCoordinatesGeneratorBase<Dim, T, Derived>::getNumVolumeConstraints() const
 {
 	return 0;
 }
 
 template <std::size_t Dim, typename T, typename Derived>
 template <typename CoordsArray>
-void CDPL::Util::DGCoordinatesOptimizerBase<Dim, T, Derived>::optimize(std::size_t num_points, CoordsArray& coords)
+void CDPL::Util::DGCoordinatesGeneratorBase<Dim, T, Derived>::generate(std::size_t num_points, CoordsArray& coords)
 {
 	embedCoords(num_points, coords);
 }
 
 template <std::size_t Dim, typename T, typename Derived>
 template <typename CoordsArray>
-void CDPL::Util::DGCoordinatesOptimizerBase<Dim, T, Derived>::embedCoords(std::size_t num_points, CoordsArray& coords)
+void CDPL::Util::DGCoordinatesGeneratorBase<Dim, T, Derived>::embedCoords(std::size_t num_points, CoordsArray& coords)
 {
 	std::size_t num_dist_constrs = distConstraints.size();
 	std::size_t num_vol_constrs = static_cast<Derived&>(*this).getNumVolumeConstraints();
@@ -607,7 +607,7 @@ void CDPL::Util::DGCoordinatesOptimizerBase<Dim, T, Derived>::embedCoords(std::s
 
 template <std::size_t Dim, typename T, typename Derived>
 template <typename CoordsArray>
-void CDPL::Util::DGCoordinatesOptimizerBase<Dim, T, Derived>::adjCoordsForDistanceConstraint(CoordsArray& coords, const ValueType& lambda, 
+void CDPL::Util::DGCoordinatesGeneratorBase<Dim, T, Derived>::adjCoordsForDistanceConstraint(CoordsArray& coords, const ValueType& lambda, 
 																							 std::size_t constr_idx) const
 {
 	const DistanceConstraint& constr = distConstraints[constr_idx];
@@ -617,7 +617,7 @@ void CDPL::Util::DGCoordinatesOptimizerBase<Dim, T, Derived>::adjCoordsForDistan
 
 template <std::size_t Dim, typename T, typename Derived>
 template <typename Vec>
-void CDPL::Util::DGCoordinatesOptimizerBase<Dim, T, Derived>::adjCoordsForConstraint(const DistanceConstraint& constr, Vec& pt1_pos, 
+void CDPL::Util::DGCoordinatesGeneratorBase<Dim, T, Derived>::adjCoordsForConstraint(const DistanceConstraint& constr, Vec& pt1_pos, 
 																					 Vec& pt2_pos, const ValueType& lambda) const
 {
 	ValueType pos_diff[Dim];
@@ -642,14 +642,14 @@ void CDPL::Util::DGCoordinatesOptimizerBase<Dim, T, Derived>::adjCoordsForConstr
 
 template <std::size_t Dim, typename T, typename Derived>
 template <typename CoordsArray>
-void CDPL::Util::DGCoordinatesOptimizerBase<Dim, T, Derived>::adjCoordsForVolumeConstraint(CoordsArray& coords, const ValueType& lambda, 
+void CDPL::Util::DGCoordinatesGeneratorBase<Dim, T, Derived>::adjCoordsForVolumeConstraint(CoordsArray& coords, const ValueType& lambda, 
 																						   std::size_t constr_idx) const
 {}
 
 template <std::size_t Dim, typename T, typename Derived>
 template <typename Vec>
-typename CDPL::Util::DGCoordinatesOptimizerBase<Dim, T, Derived>::ValueType 
-CDPL::Util::DGCoordinatesOptimizerBase<Dim, T, Derived>::calcDiffVectorAndSquaredDist(const Vec& pt1_pos, const Vec& pt2_pos, ValueType diff[])
+typename CDPL::Util::DGCoordinatesGeneratorBase<Dim, T, Derived>::ValueType 
+CDPL::Util::DGCoordinatesGeneratorBase<Dim, T, Derived>::calcDiffVectorAndSquaredDist(const Vec& pt1_pos, const Vec& pt2_pos, ValueType diff[])
 {
 	ValueType dist_2 = ValueType();
 
@@ -662,135 +662,135 @@ CDPL::Util::DGCoordinatesOptimizerBase<Dim, T, Derived>::calcDiffVectorAndSquare
 }
 
 
-// DGCoordinatesOptimizer<3, T>::VolumeConstraint implementation
+// DGCoordinatesGenerator<3, T>::VolumeConstraint implementation
 
 template <typename T>
-CDPL::Util::DGCoordinatesOptimizer<3, T>::VolumeConstraint::VolumeConstraint(std::size_t pt1_idx, std::size_t pt2_idx, 
+CDPL::Util::DGCoordinatesGenerator<3, T>::VolumeConstraint::VolumeConstraint(std::size_t pt1_idx, std::size_t pt2_idx, 
 																			 std::size_t pt3_idx, std::size_t pt4_idx, 
 																			 const ValueType& lb, const ValueType& ub): 
 	point1Idx(pt1_idx), point2Idx(pt2_idx), point3Idx(pt3_idx), point4Idx(pt4_idx), lowerBound(lb), upperBound(ub) 
 {}
 
 template <typename T>
-std::size_t CDPL::Util::DGCoordinatesOptimizer<3, T>::VolumeConstraint::getPoint1Index() const
+std::size_t CDPL::Util::DGCoordinatesGenerator<3, T>::VolumeConstraint::getPoint1Index() const
 {
 	return point1Idx;
 }
 
 template <typename T>
-std::size_t CDPL::Util::DGCoordinatesOptimizer<3, T>::VolumeConstraint::getPoint2Index() const
+std::size_t CDPL::Util::DGCoordinatesGenerator<3, T>::VolumeConstraint::getPoint2Index() const
 {
 	return point2Idx;
 }
 
 template <typename T>
-std::size_t CDPL::Util::DGCoordinatesOptimizer<3, T>::VolumeConstraint::getPoint3Index() const
+std::size_t CDPL::Util::DGCoordinatesGenerator<3, T>::VolumeConstraint::getPoint3Index() const
 {
 	return point3Idx;
 }
 
 template <typename T>
-std::size_t CDPL::Util::DGCoordinatesOptimizer<3, T>::VolumeConstraint::getPoint4Index() const
+std::size_t CDPL::Util::DGCoordinatesGenerator<3, T>::VolumeConstraint::getPoint4Index() const
 {
 	return point4Idx;
 }
 
 template <typename T>
-const typename CDPL::Util::DGCoordinatesOptimizer<3, T>::ValueType& 
-CDPL::Util::DGCoordinatesOptimizer<3, T>::VolumeConstraint::getLowerBound() const
+const typename CDPL::Util::DGCoordinatesGenerator<3, T>::ValueType& 
+CDPL::Util::DGCoordinatesGenerator<3, T>::VolumeConstraint::getLowerBound() const
 {
 	return lowerBound;
 }
 
 template <typename T>
-const typename CDPL::Util::DGCoordinatesOptimizer<3, T>::ValueType& 
-CDPL::Util::DGCoordinatesOptimizer<3, T>::VolumeConstraint::getUpperBound() const
+const typename CDPL::Util::DGCoordinatesGenerator<3, T>::ValueType& 
+CDPL::Util::DGCoordinatesGenerator<3, T>::VolumeConstraint::getUpperBound() const
 {
 	return upperBound;
 }
 
 
-// DGCoordinatesOptimizer<3, T> implementation
+// DGCoordinatesGenerator<3, T> implementation
 
 template <typename T>
-void CDPL::Util::DGCoordinatesOptimizer<3, T>::clearVolumeConstraints()
+void CDPL::Util::DGCoordinatesGenerator<3, T>::clearVolumeConstraints()
 {
 	volConstraints.clear();
 }
 
 template <typename T>
-void CDPL::Util::DGCoordinatesOptimizer<3, T>::addVolumeConstraint(std::size_t pt1_idx, std::size_t pt2_idx, std::size_t pt3_idx, 
+void CDPL::Util::DGCoordinatesGenerator<3, T>::addVolumeConstraint(std::size_t pt1_idx, std::size_t pt2_idx, std::size_t pt3_idx, 
 																   std::size_t pt4_idx, const ValueType& lb, const ValueType& ub)
 {
 	volConstraints.push_back(VolumeConstraint(pt1_idx, pt2_idx, pt3_idx, pt4_idx, lb, ub));
 }
 
 template <typename T>
-std::size_t CDPL::Util::DGCoordinatesOptimizer<3, T>::getNumVolumeConstraints() const
+std::size_t CDPL::Util::DGCoordinatesGenerator<3, T>::getNumVolumeConstraints() const
 {
 	return volConstraints.size();
 }
 
 template <typename T>
-typename CDPL::Util::DGCoordinatesOptimizer<3, T>::VolumeConstraint& 
-CDPL::Util::DGCoordinatesOptimizer<3, T>::getVolumeConstraint(std::size_t idx)
+typename CDPL::Util::DGCoordinatesGenerator<3, T>::VolumeConstraint& 
+CDPL::Util::DGCoordinatesGenerator<3, T>::getVolumeConstraint(std::size_t idx)
 {
 	if (idx >= volConstraints.size())
-		throw Base::IndexError("DGCoordinatesOptimizer: constraint index out of bounds");
+		throw Base::IndexError("DGCoordinatesGenerator: constraint index out of bounds");
 
 	return volConstraints[idx];
 }
 
 template <typename T>
-void CDPL::Util::DGCoordinatesOptimizer<3, T>::removeVolumeConstraint(std::size_t idx)
+void CDPL::Util::DGCoordinatesGenerator<3, T>::removeVolumeConstraint(std::size_t idx)
 {
 	if (idx >= volConstraints.size())
-		throw Base::IndexError("DGCoordinatesOptimizer: constraint index out of bounds");
+		throw Base::IndexError("DGCoordinatesGenerator: constraint index out of bounds");
 
 	volConstraints.erase(volConstraints.begin() + idx);
 }
 
 template <typename T>
-void CDPL::Util::DGCoordinatesOptimizer<3, T>::removeVolumeConstraint(const VolumeConstraintIterator& it)
+void CDPL::Util::DGCoordinatesGenerator<3, T>::removeVolumeConstraint(const VolumeConstraintIterator& it)
 {
 	if ((it - volConstraints.begin()) >= volConstraints.size())
-		throw Base::IndexError("DGCoordinatesOptimizer: constraint iterator out of bounds");
+		throw Base::IndexError("DGCoordinatesGenerator: constraint iterator out of bounds");
 
 	volConstraints.erase(it);
 }
 
 template <typename T>
-typename CDPL::Util::DGCoordinatesOptimizer<3, T>::VolumeConstraintIterator
-CDPL::Util::DGCoordinatesOptimizer<3, T>::getVolumeConstraintsBegin()
+typename CDPL::Util::DGCoordinatesGenerator<3, T>::VolumeConstraintIterator
+CDPL::Util::DGCoordinatesGenerator<3, T>::getVolumeConstraintsBegin()
 {
 	return volConstraints.begin();
 }
 
 template <typename T>
-typename CDPL::Util::DGCoordinatesOptimizer<3, T>::VolumeConstraintIterator
-CDPL::Util::DGCoordinatesOptimizer<3, T>::getVolumeConstraintsEnd()
+typename CDPL::Util::DGCoordinatesGenerator<3, T>::VolumeConstraintIterator
+CDPL::Util::DGCoordinatesGenerator<3, T>::getVolumeConstraintsEnd()
 {
 	return volConstraints.end();
 }
 
 template <typename T>
-typename CDPL::Util::DGCoordinatesOptimizer<3, T>::ConstVolumeConstraintIterator
-CDPL::Util::DGCoordinatesOptimizer<3, T>::getVolumeConstraintsBegin() const
+typename CDPL::Util::DGCoordinatesGenerator<3, T>::ConstVolumeConstraintIterator
+CDPL::Util::DGCoordinatesGenerator<3, T>::getVolumeConstraintsBegin() const
 {
 	return volConstraints.begin();
 }
 
 template <typename T>
-typename CDPL::Util::DGCoordinatesOptimizer<3, T>::ConstVolumeConstraintIterator
-CDPL::Util::DGCoordinatesOptimizer<3, T>::getVolumeConstraintsEnd() const
+typename CDPL::Util::DGCoordinatesGenerator<3, T>::ConstVolumeConstraintIterator
+CDPL::Util::DGCoordinatesGenerator<3, T>::getVolumeConstraintsEnd() const
 {
 	return volConstraints.end();
 }
 
 template <typename T>
 template <typename CoordsArray>
-typename CDPL::Util::DGCoordinatesOptimizer<3, T>::ValueType 
-CDPL::Util::DGCoordinatesOptimizer<3, T>::getVolumeError(const CoordsArray& coords) const
+typename CDPL::Util::DGCoordinatesGenerator<3, T>::ValueType 
+CDPL::Util::DGCoordinatesGenerator<3, T>::getVolumeError(const CoordsArray& coords) const
 {
 	ValueType error = ValueType();
 	ValueType v_41[3];
@@ -831,7 +831,7 @@ CDPL::Util::DGCoordinatesOptimizer<3, T>::getVolumeError(const CoordsArray& coor
 
 template <typename T>
 template <typename CoordsArray>
-void CDPL::Util::DGCoordinatesOptimizer<3, T>::adjCoordsForVolumeConstraint(CoordsArray& coords, const ValueType& lambda, std::size_t constr_idx) const
+void CDPL::Util::DGCoordinatesGenerator<3, T>::adjCoordsForVolumeConstraint(CoordsArray& coords, const ValueType& lambda, std::size_t constr_idx) const
 {
 	const VolumeConstraint& constr = volConstraints[constr_idx];
 
@@ -841,7 +841,7 @@ void CDPL::Util::DGCoordinatesOptimizer<3, T>::adjCoordsForVolumeConstraint(Coor
 
 template <typename T>
 template <typename Vec>
-void CDPL::Util::DGCoordinatesOptimizer<3, T>::adjCoordsForConstraint(const VolumeConstraint& constr, Vec& pt1_pos, Vec& pt2_pos, Vec& pt3_pos, 
+void CDPL::Util::DGCoordinatesGenerator<3, T>::adjCoordsForConstraint(const VolumeConstraint& constr, Vec& pt1_pos, Vec& pt2_pos, Vec& pt3_pos, 
 																	  Vec& pt4_pos, const ValueType& lambda) const
 {
 	Vec* pt_pos[4] = { &pt1_pos,  &pt2_pos,  &pt3_pos, &pt4_pos }; 
@@ -893,7 +893,7 @@ void CDPL::Util::DGCoordinatesOptimizer<3, T>::adjCoordsForConstraint(const Volu
 
 template <typename T>
 template <typename Vec>
-void CDPL::Util::DGCoordinatesOptimizer<3, T>::calcDiffVector(const Vec& pt1_pos, const Vec& pt2_pos, ValueType diff[])
+void CDPL::Util::DGCoordinatesGenerator<3, T>::calcDiffVector(const Vec& pt1_pos, const Vec& pt2_pos, ValueType diff[])
 {
 	for (std::size_t i = 0; i < 3; i++)
 		diff[i] = pt2_pos[i] - pt1_pos[i];
@@ -901,4 +901,4 @@ void CDPL::Util::DGCoordinatesOptimizer<3, T>::calcDiffVector(const Vec& pt1_pos
 
 // \endcond
 
-#endif // CDPL_UTIL_DGCOORDINATESOPTIMIZER_HPP
+#endif // CDPL_UTIL_DGCOORDINATESGENERATOR_HPP

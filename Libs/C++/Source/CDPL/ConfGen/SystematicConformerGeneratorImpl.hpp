@@ -51,6 +51,8 @@
 #include "CDPL/Chem/StereoDescriptor.hpp"
 #include "CDPL/Math/VectorArray.hpp"
 #include "CDPL/Util/BitSet.hpp"
+#include "CDPL/Util/ObjectPool.hpp"
+#include "CDPL/Util/ObjectStack.hpp"
 
 #include "FragmentTreeNode.hpp"
 
@@ -80,27 +82,8 @@ namespace CDPL
 		private:
 			typedef std::vector<const Chem::Atom*> AtomList;
 			typedef std::vector<std::size_t> IndexArray;
-
-			class Vec3DArrayDeallocator
-			{
-
-			public:
-				Vec3DArrayDeallocator(SystematicConformerGeneratorImpl* owner, Math::Vector3DArray* array_ptr): 
-					owner(owner), arrayPtr(array_ptr) {}
-
-				~Vec3DArrayDeallocator() {
-					if (arrayPtr)
-						owner->freeVector3DArray(arrayPtr);
-				}
-
-				void release() {
-					arrayPtr = 0;
-				}
-
-			private:
-				SystematicConformerGeneratorImpl* owner;
-				Math::Vector3DArray*              arrayPtr;
-			};
+			typedef Util::ObjectStack<IndexArray> IndexArrayCache;
+			typedef std::vector<IndexArray*> IndexArrayList;
 
 			SystematicConformerGeneratorImpl(const SystematicConformerGeneratorImpl&);
 
@@ -194,21 +177,15 @@ namespace CDPL
 			void distFragmentMMFF94InteractionData(FragmentTreeNode& node);
 			void extractFragmentMMFF94InteractionData(FragmentTreeNode& node);
 
-			Math::Vector3DArray* allocVector3DArray();
-			void freeVector3DArray(Math::Vector3DArray* vec_array);
-
-			IndexArray* allocIndexArray();
-			void freeIndexArray(IndexArray* idx_array);
+			void initVectorArray(Math::Vector3DArray& vec_array) const;
 
 			bool timeoutExceeded() const;
 
 			typedef FragmentTreeNode::BondList BondList;
-			typedef boost::shared_ptr<IndexArray> IndexArrayPtr;
-			typedef std::vector<IndexArrayPtr> AllocIndexArrayList;
-			typedef std::vector<IndexArray*> IndexArrayList;
+			typedef Util::ObjectPool<Math::Vector3DArray> VectorArrayCache;
+			typedef VectorArrayCache::SharedObjectPointer VectorArrayPtr;
+			typedef std::vector<VectorArrayPtr> VectorArrayList;
 			typedef std::vector<FragmentTreeNode*> NodeList;
-			typedef std::vector<Math::Vector3DArray::SharedPointer> AllocVector3DArrayList;
-			typedef std::vector<Math::Vector3DArray*> Vector3DArrayList;
 			typedef std::pair<std::size_t, std::size_t> IndexPair;
 			typedef std::vector<IndexPair> IndexPairList;
 			typedef boost::tuple<std::size_t, std::size_t, double> BondLengthDescriptor;
@@ -216,6 +193,8 @@ namespace CDPL
 			typedef std::vector<std::size_t> UIArray;
 			typedef boost::unordered_map<const Chem::Atom*, Chem::StereoDescriptor> AtomStereoDescriptorMap;
 
+			IndexArrayCache                                 idxArrayCache;
+			VectorArrayCache                                vecArrayCache;
 			Settings                                        settings;
 			FragmentTreeNode                                fragTree;
 			BondList                                        splitBondList;
@@ -240,10 +219,6 @@ namespace CDPL
 			ForceField::MMFF94InteractionParameterizer      mmff94Parameterizer;
 			ForceField::MMFF94InteractionData               tmpMMFF94Data;
 			ForceField::MMFF94EnergyCalculator<double>      mmff94EnergyCalc;
-			AllocVector3DArrayList                          allocCoordArrays;
-			Vector3DArrayList                               freeCoordArrays;
-			AllocIndexArrayList                             allocIndexArrays;
-			IndexArrayList                                  freeIndexArrays;
 			boost::timer::cpu_timer                         timer;
 		};
     }

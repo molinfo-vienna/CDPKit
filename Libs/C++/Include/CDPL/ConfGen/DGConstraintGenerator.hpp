@@ -39,8 +39,9 @@
 #include <boost/tuple/tuple.hpp>
 
 #include "CDPL/ConfGen/APIPrefix.hpp"
+#include "CDPL/ConfGen/DGConstraintGeneratorSettings.hpp"
 #include "CDPL/Chem/StereoDescriptor.hpp"
-#include "CDPL/Util/DGCoordinatesOptimizer.hpp"
+#include "CDPL/Util/DGCoordinatesGenerator.hpp"
 #include "CDPL/Util/BitSet.hpp"
 
 
@@ -116,16 +117,16 @@ namespace CDPL
 			ConstStereoCenterDataIterator getBondStereoCenterDataBegin() const;
 			ConstStereoCenterDataIterator getBondStereoCenterDataEnd() const;
 
-			void addBondLengthConstraints(Util::DG3DCoordinatesOptimizer& coords_gen);
-			void addBondAngleConstraints(Util::DG3DCoordinatesOptimizer& coords_gen);
-			void add14DistanceConstraints(Util::DG3DCoordinatesOptimizer& coords_gen);
-			void addDefaultDistanceConstraints(Util::DG3DCoordinatesOptimizer& coords_gen);
+			void addBondLengthConstraints(Util::DG3DCoordinatesGenerator& coords_gen);
+			void addBondAngleConstraints(Util::DG3DCoordinatesGenerator& coords_gen);
+			void add14DistanceConstraints(Util::DG3DCoordinatesGenerator& coords_gen);
+			void addDefaultDistanceConstraints(Util::DG3DCoordinatesGenerator& coords_gen);
 
-			void addAtomConfigurationConstraints(Util::DG3DCoordinatesOptimizer& coords_gen);
-			void addBondConfigurationConstraints(Util::DG3DCoordinatesOptimizer& coords_gen);
+			void addAtomConfigurationConstraints(Util::DG3DCoordinatesGenerator& coords_gen);
+			void addBondConfigurationConstraints(Util::DG3DCoordinatesGenerator& coords_gen);
 
-			void addAtomPlanarityConstraints(Util::DG3DCoordinatesOptimizer& coords_gen);
-			void addBondPlanarityConstraints(Util::DG3DCoordinatesOptimizer& coords_gen);
+			void addAtomPlanarityConstraints(Util::DG3DCoordinatesGenerator& coords_gen);
+			void addBondPlanarityConstraints(Util::DG3DCoordinatesGenerator& coords_gen);
 
 		  private:
 			void setup(const Chem::MolecularGraph& molgraph, const ForceField::MMFF94InteractionData* ia_data);

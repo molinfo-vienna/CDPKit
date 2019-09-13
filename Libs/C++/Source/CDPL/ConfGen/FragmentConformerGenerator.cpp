@@ -52,7 +52,8 @@
 namespace
 {
 
-	const std::size_t MIN_MACROCYCLE_SIZE = 10;
+	const std::size_t MIN_MACROCYCLE_SIZE         = 10;
+	const std::size_t MAX_VECTOR_ARRAY_CACHE_SIZE = 5000;
 }
 
 
@@ -74,6 +75,7 @@ const double       ConfGen::FragmentConformerGenerator::DEF_MIN_RMSD            
 
 
 ConfGen::FragmentConformerGenerator::FragmentConformerGenerator(): 
+	vecArrayCache(MAX_VECTOR_ARRAY_CACHE_SIZE),
     maxNumStructGenTrials(DEF_MAX_NUM_STRUCTURE_GEN_TRIALS), maxNumMinSteps(DEF_MAX_NUM_MINIMIZATION_STEPS), 
 	maxNumOutputConfs(DEF_MAX_NUM_OUTPUT_CONFORMERS), minStopGradNorm(DEF_MINIMIZATION_STOP_GRADIENT_NORM), 
 	minStopEnergyDelta(DEF_MINIMIZATION_STOP_ENERGY_DELTA), timeout(DEF_TIMEOUT), reuseExistingCoords(false), 
@@ -83,12 +85,12 @@ ConfGen::FragmentConformerGenerator::FragmentConformerGenerator():
 {
 	using namespace Chem;
 
-    rawCoordsGenerator.excludeHydrogens(true);
-    rawCoordsGenerator.regardAtomConfiguration(true);
-    rawCoordsGenerator.regardBondConfiguration(true);
-	rawCoordsGenerator.enablePlanarityConstraints(true);
+    dgStructGen.excludeHydrogens(true);
+    dgStructGen.regardAtomConfiguration(true);
+    dgStructGen.regardBondConfiguration(true);
+	dgStructGen.enablePlanarityConstraints(true);
 
-	hCoordsGenerator.undefinedOnly(true);
+	hCoordsGen.undefinedOnly(true);
 
 	symMappingSearch.includeIdentityMapping(false);
 	symMappingSearch.setAtomPropertyFlags(AtomPropertyFlag::TYPE | AtomPropertyFlag::FORMAL_CHARGE | 
@@ -309,7 +311,7 @@ unsigned int ConfGen::FragmentConformerGenerator::generateSingleConformer()
 	if (!initRandomConformerGeneration())
 		return ReturnCode::FORCEFIELD_SETUP_FAILED;
 
-	rawCoordsGenerator.setBoxSize(ordHDepleteAtomMask.count() * 2);
+	dgStructGen.setBoxSize(ordHDepleteAtomMask.count() * 2);
 
 	unsigned int ret_code = generateRandomConformer(conf, true);
 		
@@ -329,7 +331,7 @@ unsigned int ConfGen::FragmentConformerGenerator::generateFlexibleRingConformers
 	if (!initRandomConformerGeneration())
 		return ReturnCode::FORCEFIELD_SETUP_FAILED;
 
-	rawCoordsGenerator.setBoxSize(ordHDepleteAtomMask.count());
+	dgStructGen.setBoxSize(ordHDepleteAtomMask.count());
 
 	getRingAtomIndices();
 	getSymmetryMappings();
@@ -363,8 +365,6 @@ unsigned int ConfGen::FragmentConformerGenerator::generateFlexibleRingConformers
 		if (generateRandomConformer(conf, false) != ReturnCode::SUCCESS) 
 			continue;
 
-		Vec3DArrayDeallocator dealloc_guard(this, conf);
-
 		if (workingConfs.empty())
 			min_energy = conf.first;
 
@@ -375,7 +375,6 @@ unsigned int ConfGen::FragmentConformerGenerator::generateFlexibleRingConformers
 			min_energy = conf.first;
 
 		workingConfs.push_back(conf);
-		dealloc_guard.release();
 	}
 
 	if (workingConfs.empty()) {
@@ -390,8 +389,8 @@ unsigned int ConfGen::FragmentConformerGenerator::generateFlexibleRingConformers
 
 	double max_energy = workingConfs.front().first + e_window;
 
-	for (ConfDataArray::const_iterator it = workingConfs.begin(), end = workingConfs.end(); it != end; ++it) {
-		const ConfData& conf = *it;
+	for (ConfDataArray::iterator it = workingConfs.begin(), end = workingConfs.end(); it != end; ++it) {
+		ConfData& conf = *it;
 
 		if (outputConfs.size() >= maxNumOutputConfs) 
 			return ReturnCode::SUCCESS;
@@ -400,7 +399,7 @@ unsigned int ConfGen::FragmentConformerGenerator::generateFlexibleRingConformers
 			return ReturnCode::SUCCESS;
 
 		if (!checkRMSD(conf)) {
-			freeVector3DArray(conf.second);
+			conf.second.reset();
 			continue;
 		}
 
@@ -413,9 +412,8 @@ unsigned int ConfGen::FragmentConformerGenerator::generateFlexibleRingConformers
 
 			ConfData sym_conf;
 
-			allocVector3DArray(sym_conf);
+			allocVectorArray(sym_conf);
 
-			Vec3DArrayDeallocator dealloc_guard(this, sym_conf);
 			Math::Vector3DArray& sym_coords = *sym_conf.second;
 
 			sym_coords.resize(numAtoms);
@@ -429,7 +427,6 @@ unsigned int ConfGen::FragmentConformerGenerator::generateFlexibleRingConformers
 			sym_conf.first = conf.first;
 
 			outputConfs.push_back(sym_conf);
-			dealloc_guard.release();
 		}
 	}
 
@@ -438,12 +435,6 @@ unsigned int ConfGen::FragmentConformerGenerator::generateFlexibleRingConformers
 
 void ConfGen::FragmentConformerGenerator::init(const Chem::MolecularGraph& molgraph)
 {
-	freeCoordArrays.clear();
-
-	std::for_each(allocCoordArrays.begin(), allocCoordArrays.end(), 
-				  boost::bind(&FragmentConformerGenerator::freeVector3DArray, this, 
-							  boost::bind<Math::Vector3DArray*>(&Math::Vector3DArray::SharedPointer::get, _1)));
-
 	outputConfs.clear();
 	workingConfs.clear();
 	ringAtomCoords.clear();
@@ -467,14 +458,14 @@ bool ConfGen::FragmentConformerGenerator::initRandomConformerGeneration()
 		return false;
 	}
 
-	rawCoordsGenerator.setup(*molGraph, mmff94Data);
+	dgStructGen.setup(*molGraph, mmff94Data);
 
 	ordHDepleteAtomMask.resize(numAtoms);
-	ordHDepleteAtomMask = rawCoordsGenerator.getExcludedHydrogenMask();
+	ordHDepleteAtomMask = dgStructGen.getExcludedHydrogenMask();
 	ordHDepleteAtomMask.flip();
 
-	hCoordsGenerator.setAtom3DCoordinatesCheckFunction(boost::bind(&FragmentConformerGenerator::has3DCoordinates, this, _1));
-	hCoordsGenerator.setup(*molGraph);
+	hCoordsGen.setAtom3DCoordinatesCheckFunction(boost::bind(&FragmentConformerGenerator::has3DCoordinates, this, _1));
+	hCoordsGen.setup(*molGraph);
 
 	mmff94EnergyCalc.setup(mmff94Data);
 	mmff94GradientCalc.setup(mmff94Data, numAtoms);
@@ -488,16 +479,10 @@ bool ConfGen::FragmentConformerGenerator::outputExistingCoordinates(ConfData& co
 {
 	using namespace Chem;
 
-	allocVector3DArray(conf);
+	allocVectorArray(conf);
 
-	Vec3DArrayDeallocator dealloc_guard(this, conf);
-	Math::Vector3DArray& coords = *conf.second;
-
-	if (getExistingCoordinates(*molGraph, coords)) {
-		dealloc_guard.release();
-		
+	if (getExistingCoordinates(*molGraph, *conf.second)) 
 		return true;
-	}
 	
 	return false;
 }
@@ -526,8 +511,8 @@ bool ConfGen::FragmentConformerGenerator::getExistingCoordinates(const Chem::Mol
 	}
 
 	if (!have_h_atom_coords) { 
-		hCoordsGenerator.setAtom3DCoordinatesCheckFunction(&Chem::has3DCoordinates);
-		hCoordsGenerator.generate(molgraph, coords, false);
+		hCoordsGen.setAtom3DCoordinatesCheckFunction(&Chem::has3DCoordinates);
+		hCoordsGen.generate(molgraph, coords, false);
 	}
 
 	return true;
@@ -535,16 +520,15 @@ bool ConfGen::FragmentConformerGenerator::getExistingCoordinates(const Chem::Mol
 
 unsigned int ConfGen::FragmentConformerGenerator::generateRandomConformer(ConfData& conf, bool best_opt)
 {
-	allocVector3DArray(conf);
+	allocVectorArray(conf);
 
-	Vec3DArrayDeallocator dealloc_guard(this, conf);
 	Math::Vector3DArray& coords = *conf.second;
 
 	for (std::size_t i = 0; i < maxNumStructGenTrials; i++) {
-		if (!rawCoordsGenerator.generate(coords)) 
+		if (!dgStructGen.generate(coords)) 
 			continue;
 
-		hCoordsGenerator.generate(coords, false);
+		hCoordsGen.generate(coords, false);
 		energyMinimizer.setup(coords.getData(), gradient);
 
 		for (std::size_t j = 0; maxNumMinSteps == 0 || j < maxNumMinSteps; j++) {
@@ -572,13 +556,11 @@ unsigned int ConfGen::FragmentConformerGenerator::generateRandomConformer(ConfDa
 				break;
 		}
 
-		if (!rawCoordsGenerator.checkAtomConfigurations(coords)) 
+		if (!dgStructGen.checkAtomConfigurations(coords)) 
 			continue;
 		
-		if (!rawCoordsGenerator.checkBondConfigurations(coords)) 
+		if (!dgStructGen.checkBondConfigurations(coords)) 
 			continue;
-
-		dealloc_guard.release();
 
 		return ReturnCode::SUCCESS;
 	}
@@ -588,13 +570,11 @@ unsigned int ConfGen::FragmentConformerGenerator::generateRandomConformer(ConfDa
 
 bool ConfGen::FragmentConformerGenerator::checkRMSD(const ConfData& conf)
 {
-	Math::Vector3DArray* conf_ha_coords_ptr = getRingAtomCoordinates(conf);
-
-	Vec3DArrayDeallocator dealloc_guard(this, conf_ha_coords_ptr);
+	VectorArrayPtr conf_ha_coords_ptr = getRingAtomCoordinates(conf);
 	Math::Vector3DArray& conf_ha_coords = *conf_ha_coords_ptr;
 	Math::Matrix4D conf_xform;
 
-	for (Vector3DArrayList::const_reverse_iterator it = ringAtomCoords.rbegin(), end = ringAtomCoords.rend(); it != end; ++it) {
+	for (VectorArrayList::const_reverse_iterator it = ringAtomCoords.rbegin(), end = ringAtomCoords.rend(); it != end; ++it) {
 		const Math::Vector3DArray& prev_conf_ha_coords = **it;
 
 		if (!alignmentCalc.calculate(prev_conf_ha_coords, conf_ha_coords, false))
@@ -609,7 +589,6 @@ bool ConfGen::FragmentConformerGenerator::checkRMSD(const ConfData& conf)
 	}
 
 	ringAtomCoords.push_back(conf_ha_coords_ptr);
-	dealloc_guard.release();
 
 	return true;
 }
@@ -619,31 +598,27 @@ bool ConfGen::FragmentConformerGenerator::has3DCoordinates(const Chem::Atom& ato
 	return ordHDepleteAtomMask.test(molGraph->getAtomIndex(atom));
 }
 
-Math::Vector3DArray* ConfGen::FragmentConformerGenerator::getRingAtomCoordinates(const ConfData& conf)
+ConfGen::FragmentConformerGenerator::VectorArrayPtr ConfGen::FragmentConformerGenerator::getRingAtomCoordinates(const ConfData& conf)
 {
-	Math::Vector3DArray* ha_coords_ptr = allocVector3DArray();
-	
-	Vec3DArrayDeallocator dealloc_guard(this, ha_coords_ptr);
-	const Math::Vector3DArray& coords = *conf.second;
+	VectorArrayPtr ha_coords_ptr = vecArrayCache.get();
 	Math::Vector3DArray& ha_coords = *ha_coords_ptr;
+	const Math::Vector3DArray& coords = *conf.second;
 	Math::Vector3D ctr;
+	std::size_t num_ring_atoms = ringAtomIndices.size();
 
-	ha_coords.clear();
+	ha_coords.resize(num_ring_atoms);
 
-	for (IndexList::const_iterator it = ringAtomIndices.begin(), end = ringAtomIndices.end(); it != end; ++it) {
-		const Math::Vector3D& pos = coords[*it];
+	for (std::size_t i = 0; i < num_ring_atoms; i++) {
+		const Math::Vector3D& pos = coords[ringAtomIndices[i]];
 
 		ctr += pos;
-
-		ha_coords.addElement(pos);
+		ha_coords[i] = pos;
 	}
 
-	ctr /= ringAtomIndices.size();
+	ctr /= num_ring_atoms;
 
 	for (Math::Vector3DArray::ElementIterator it = ha_coords.getElementsBegin(), end = ha_coords.getElementsEnd(); it != end; ++it)
 		*it -= ctr;
-
-	dealloc_guard.release();
 
 	return ha_coords_ptr;
 }
@@ -828,29 +803,7 @@ bool ConfGen::FragmentConformerGenerator::timeoutExceeded() const
 	return (timer.elapsed().wall > (boost::timer::nanosecond_type(timeout) * 1000000));
 }
 
-void ConfGen::FragmentConformerGenerator::allocVector3DArray(ConfData& conf_data)
+void ConfGen::FragmentConformerGenerator::allocVectorArray(ConfData& conf_data)
 {
-	conf_data.second = allocVector3DArray();
-}
-
-void ConfGen::FragmentConformerGenerator::freeVector3DArray(Math::Vector3DArray* vec_array)
-{
-	freeCoordArrays.push_back(vec_array);
-}
-
-Math::Vector3DArray* ConfGen::FragmentConformerGenerator::allocVector3DArray()
-{
-	if (!freeCoordArrays.empty()) {
-		Math::Vector3DArray* array_ptr = freeCoordArrays.back();
-
-		freeCoordArrays.pop_back();
-
-		return array_ptr;
-	} 
-
-	Math::Vector3DArray::SharedPointer array_ptr(new Math::Vector3DArray());
-
-	allocCoordArrays.push_back(array_ptr);
-	
-	return array_ptr.get();
+	conf_data.second = vecArrayCache.get();
 }

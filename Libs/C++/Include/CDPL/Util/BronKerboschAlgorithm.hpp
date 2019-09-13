@@ -32,11 +32,10 @@
 #include <cstddef>
 #include <vector>
 
-#include <boost/shared_ptr.hpp>
-
 #include "CDPL/Util/APIPrefix.hpp"
 #include "CDPL/Util/BitSet.hpp"
 #include "CDPL/Util/Array.hpp"
+#include "CDPL/Util/ObjectStack.hpp"
 
 
 namespace CDPL
@@ -79,21 +78,13 @@ namespace CDPL
 				std::size_t u;
 				std::size_t v;
 			};
-		
-			State* allocState();
 
-			void freeState(State* state);
-			void freeAllStates();
-
-			typedef boost::shared_ptr<State> SharedStatePtr;
-			typedef std::vector<SharedStatePtr> AllocStateList;
-			typedef std::vector<State*> StatePtrList;
 			typedef std::vector<std::size_t> NodeDegreeTable;
 			typedef std::vector<State*> StateStack;
+			typedef Util::ObjectStack<State> StateCache;
 
 			const BitSetArray* adjMatrix;
-			AllocStateList     allocStates;
-			StatePtrList       freeStates;
+			StateCache         stateCache;
 			NodeDegreeTable    nodeDegrees;
 			StateStack         states;
 			BitSet             pivotCandSet;

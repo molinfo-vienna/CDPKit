@@ -28,6 +28,7 @@
 
 #include <algorithm>
 #include <iterator>
+#include <functional>
 #include <string>
 
 #include <boost/bind.hpp>
@@ -37,18 +38,35 @@
 #include "CDPL/Base/Exceptions.hpp"
 
 
+namespace
+{
+
+	const std::size_t MAX_COMPONENT_CACHE_SIZE = 100;
+}
+
+
 using namespace CDPL;
 
 
-Chem::BasicReaction::BasicReaction(): agentsStartIdx(0), productsStartIdx(0) {}
-
-Chem::BasicReaction::BasicReaction(const BasicReaction& rxn): Reaction(rxn), agentsStartIdx(0), productsStartIdx(0)
+Chem::BasicReaction::BasicReaction(): 
+	compCache(MAX_COMPONENT_CACHE_SIZE), agentsStartIdx(0), productsStartIdx(0) 
 {
+	compCache.setCleanupFunction(&BasicMolecule::clear);
+}
+
+Chem::BasicReaction::BasicReaction(const BasicReaction& rxn): 
+	Reaction(rxn), compCache(MAX_COMPONENT_CACHE_SIZE), agentsStartIdx(0), productsStartIdx(0)
+{
+	compCache.setCleanupFunction(&BasicMolecule::clear);
+
 	copyComponents(rxn);
 }
 
-Chem::BasicReaction::BasicReaction(const Reaction& rxn): Reaction(rxn), agentsStartIdx(0), productsStartIdx(0)
+Chem::BasicReaction::BasicReaction(const Reaction& rxn): 
+	Reaction(rxn), compCache(MAX_COMPONENT_CACHE_SIZE), agentsStartIdx(0), productsStartIdx(0)
 {
+	compCache.setCleanupFunction(&BasicMolecule::clear);
+
 	copyComponents(rxn);
 }
 
@@ -56,7 +74,8 @@ Chem::BasicReaction::~BasicReaction() {}
 
 unsigned int Chem::BasicReaction::getComponentRole(const Molecule& mol) const
 {
-	ComponentList::const_iterator it = std::find(components.begin(), components.end(), &mol);
+	ComponentList::const_iterator it = std::find_if(components.begin(), components.end(), 
+													boost::bind(std::equal_to<const Molecule*>(), boost::bind(&ComponentPtr::get, _1), &mol));
 
 	if (it == components.end())
 		return ReactionRole::NONE;
@@ -74,7 +93,8 @@ unsigned int Chem::BasicReaction::getComponentRole(const Molecule& mol) const
 
 std::size_t Chem::BasicReaction::getComponentIndex(const Molecule& mol) const
 {
-	ComponentList::const_iterator it = std::find(components.begin(), components.end(), &mol);
+	ComponentList::const_iterator it = std::find_if(components.begin(), components.end(), 
+													boost::bind(std::equal_to<const Molecule*>(), boost::bind(&ComponentPtr::get, _1), &mol));
 
 	if (it == components.end())
 		throw Base::ItemNotFound("BasicReaction: molecule is not a component of this reaction");
@@ -84,7 +104,8 @@ std::size_t Chem::BasicReaction::getComponentIndex(const Molecule& mol) const
 	
 bool Chem::BasicReaction::containsComponent(const Molecule& mol) const
 {
-	return (std::find(components.begin(), components.end(), &mol) != components.end());
+	return (std::find_if(components.begin(), components.end(), 
+						 boost::bind(std::equal_to<const Molecule*>(), boost::bind(&ComponentPtr::get, _1), &mol)) != components.end());
 }
 
 void Chem::BasicReaction::clear()
@@ -336,11 +357,7 @@ void Chem::BasicReaction::removeComponent(std::size_t idx)
 {
 	if (idx >= components.size())
 		throw Base::IndexError("BasicReaction: component index out of bounds");
-
-	BasicMolecule* comp = components[idx];
-
-	freeComponent(comp);
-
+	
 	components.erase(components.begin() + idx);
 
 	if (idx < agentsStartIdx) {
@@ -359,11 +376,6 @@ Chem::BasicReaction::ComponentIterator Chem::BasicReaction::removeComponent(cons
 		throw Base::RangeError("BasicReaction: component iterator out of valid range");
 
 	std::size_t idx = base - components.begin();
-
-	BasicMolecule* comp = *base;
-
-	freeComponent(comp);
-
 	ComponentList::iterator rit = components.erase(base);
 
 	if (idx < agentsStartIdx) {
@@ -574,10 +586,6 @@ void Chem::BasicReaction::removeReactant(std::size_t idx)
 	if (idx >= agentsStartIdx)
 		throw Base::IndexError("BasicReaction: reactant index out of bounds");
 
-	BasicMolecule* comp = components[idx];
-
-	freeComponent(comp);
-
 	components.erase(components.begin() + idx);
 
 	agentsStartIdx--;
@@ -591,10 +599,6 @@ void Chem::BasicReaction::removeAgent(std::size_t idx)
 	if (idx >= productsStartIdx)
 		throw Base::IndexError("BasicReaction: agent index out of bounds");
 
-	BasicMolecule* comp = components[idx];
-
-	freeComponent(comp);
-
 	components.erase(components.begin() + idx);
 
 	productsStartIdx--;
@@ -607,10 +611,6 @@ void Chem::BasicReaction::removeProduct(std::size_t idx)
 	if (idx >= components.size())
 		throw Base::IndexError("BasicReaction: product index out of bounds");
 
-	BasicMolecule* comp = components[idx];
-
-	freeComponent(comp);
-
 	components.erase(components.begin() + idx);
 }
 
@@ -618,11 +618,6 @@ void Chem::BasicReaction::removeReactants()
 {
 	if (agentsStartIdx == 0)
 		return;
-
-	freeComponents.reserve(freeComponents.size() + agentsStartIdx);
-
-	std::for_each(components.begin(), components.begin() + agentsStartIdx, 
-				  boost::bind(&BasicReaction::freeComponent, this, _1));
 
 	components.erase(components.begin(), components.begin() + agentsStartIdx);
 
@@ -635,11 +630,6 @@ void Chem::BasicReaction::removeAgents()
 	if (productsStartIdx - agentsStartIdx == 0)
 		return;
 
-	freeComponents.reserve(freeComponents.size() + productsStartIdx - agentsStartIdx);
-
-	std::for_each(components.begin() + agentsStartIdx, components.begin() + productsStartIdx, 
-				  boost::bind(&BasicReaction::freeComponent, this, _1));
-
 	components.erase(components.begin() + agentsStartIdx, components.begin() + productsStartIdx);
 
 	productsStartIdx = agentsStartIdx;
@@ -649,11 +639,6 @@ void Chem::BasicReaction::removeProducts()
 {
 	if (components.size() - productsStartIdx == 0)
 		return;
-
-	freeComponents.reserve(freeComponents.size() + components.size() - productsStartIdx);
-
-	std::for_each(components.begin() + productsStartIdx, components.end(), 
-				  boost::bind(&BasicReaction::freeComponent, this, _1));
 
 	components.erase(components.begin() + productsStartIdx, components.end());
 }
@@ -678,9 +663,7 @@ Chem::BasicMolecule& Chem::BasicReaction::addComponent(unsigned int role, const 
 
 Chem::BasicMolecule& Chem::BasicReaction::addReactant(const Molecule* mol)
 {
-	components.reserve(components.size() + 1);
-
-	BasicMolecule* comp = allocComponent(mol);
+	ComponentPtr comp = allocComponent(mol);
 
 	components.insert(components.begin() + agentsStartIdx, comp);
 
@@ -692,9 +675,7 @@ Chem::BasicMolecule& Chem::BasicReaction::addReactant(const Molecule* mol)
 
 Chem::BasicMolecule& Chem::BasicReaction::addAgent(const Molecule* mol)
 {
-	components.reserve(components.size() + 1);
-
-	BasicMolecule* comp = allocComponent(mol);
+	ComponentPtr comp = allocComponent(mol);
 
 	components.insert(components.begin() + productsStartIdx, comp);
 
@@ -705,9 +686,7 @@ Chem::BasicMolecule& Chem::BasicReaction::addAgent(const Molecule* mol)
 
 Chem::BasicMolecule& Chem::BasicReaction::addProduct(const Molecule* mol)
 {
-	components.reserve(components.size() + 1);
-
-	BasicMolecule* comp = allocComponent(mol);
+	ComponentPtr comp = allocComponent(mol);
 
 	components.push_back(comp);
 
@@ -716,11 +695,6 @@ Chem::BasicMolecule& Chem::BasicReaction::addProduct(const Molecule* mol)
 
 void Chem::BasicReaction::clearComponents()
 {
-	freeComponents.reserve(freeComponents.size() + components.size());
-
-	std::for_each(components.begin(), components.end(), 
-				  boost::bind(&BasicReaction::freeComponent, this, _1));
-
 	components.clear();
 
 	agentsStartIdx = 0;
@@ -733,12 +707,8 @@ void Chem::BasicReaction::copyComponents(const BasicReaction& rxn)
 
 	ComponentList::const_iterator comps_end = rxn.components.end();
 
-	for (ComponentList::const_iterator it = rxn.components.begin(); it != comps_end; ++it) {
-		const BasicMolecule* comp = *it;
-		BasicMolecule* comp_copy = allocComponent(comp);
-
-		components.push_back(comp_copy);
-	}
+	for (ComponentList::const_iterator it = rxn.components.begin(); it != comps_end; ++it) 
+		components.push_back(allocComponent(it->get()));
 
 	agentsStartIdx = rxn.agentsStartIdx;
 	productsStartIdx = rxn.productsStartIdx;
@@ -750,40 +720,19 @@ void Chem::BasicReaction::copyComponents(const Reaction& rxn)
 
 	Reaction::ConstComponentIterator comps_end = rxn.getComponentsEnd();
 
-	for (Reaction::ConstComponentIterator it = rxn.getComponentsBegin(); it != comps_end; ++it) {
-		const Molecule& comp = *it;
-		BasicMolecule* comp_copy = allocComponent(&comp);
-
-		components.push_back(comp_copy);
-	}
+	for (Reaction::ConstComponentIterator it = rxn.getComponentsBegin(); it != comps_end; ++it) 
+		components.push_back(allocComponent(&*it));
 
 	agentsStartIdx = rxn.getNumComponents(ReactionRole::REACTANT);
 	productsStartIdx = agentsStartIdx + rxn.getNumComponents(ReactionRole::AGENT);
 }
 
-Chem::BasicMolecule* Chem::BasicReaction::allocComponent(const Molecule* mol)
+Chem::BasicReaction::ComponentPtr Chem::BasicReaction::allocComponent(const Molecule* mol)
 {
-	if (freeComponents.empty()) {
-		BasicMolecule::SharedPointer comp_ptr(mol ? new BasicMolecule(*mol) : new BasicMolecule());
-
-		allocComponents.push_back(comp_ptr);
-
-		return comp_ptr.get();
-	}
-
-	BasicMolecule* comp = freeComponents.back();
+	ComponentPtr comp = compCache.get();
 
 	if (mol)
 		comp->copy(*mol);
-	else
-		comp->clear();
-
-	freeComponents.pop_back();
 
 	return comp;
-}
-
-void Chem::BasicReaction::freeComponent(BasicMolecule* comp)
-{
-	freeComponents.push_back(comp);
 }

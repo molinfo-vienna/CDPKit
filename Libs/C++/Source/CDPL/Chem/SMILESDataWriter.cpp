@@ -77,6 +77,9 @@ namespace
 			return (str1.size() > str2.size());
 		}
 	};
+
+	const std::size_t MAX_NODE_CACHE_SIZE = 1000;
+	const std::size_t MAX_EDGE_CACHE_SIZE = 1000;
 }
 
 
@@ -84,7 +87,9 @@ using namespace CDPL;
 
 
 Chem::SMILESDataWriter::SMILESDataWriter(const Base::DataIOBase& io_base): 
-	ioBase(io_base), freeNodeIndex(0), freeEdgeIndex(0) {}
+	ioBase(io_base), nodeCache(boost::bind(&SMILESDataWriter::createNode, this), MAX_NODE_CACHE_SIZE),
+	edgeCache(boost::bind(&SMILESDataWriter::createEdge, this), MAX_EDGE_CACHE_SIZE)
+{}
 
 Chem::SMILESDataWriter::~SMILESDataWriter() {}
 
@@ -790,55 +795,40 @@ void Chem::SMILESDataWriter::putRingClosureNumber(std::size_t no)
 	ringClosureNumberStack.push_back(no);
 }
 
+Chem::SMILESDataWriter::DFSTreeNode* Chem::SMILESDataWriter::createNode()
+{
+	return new DFSTreeNode(*this);
+}
+
+Chem::SMILESDataWriter::DFSTreeEdge* Chem::SMILESDataWriter::createEdge()
+{
+	return new DFSTreeEdge(*this);
+}
+
 Chem::SMILESDataWriter::DFSTreeNode* Chem::SMILESDataWriter::allocNode()
 {
-	DFSTreeNode* node;
+	DFSTreeNode* node = nodeCache.getRaw();
 
-	if (freeNodeIndex == allocNodes.size()) {
-		DFSTreeNode::SharedPointer node_ptr(new DFSTreeNode(*this));
-		allocNodes.push_back(node_ptr);
-
-		node = node_ptr.get();
-		freeNodeIndex++;
-
-	} else {
-		node = allocNodes[freeNodeIndex++].get();
-		node->clear();
-	}
-
+	node->clear();
 	componentNodes.push_back(node);
 
 	return node;
 }
 
+Chem::SMILESDataWriter::DFSTreeEdge* Chem::SMILESDataWriter::allocEdge()
+{
+	return edgeCache.getRaw();
+}
+
 void Chem::SMILESDataWriter::freeNodes()
 {
 	componentNodes.clear();
-	freeNodeIndex = 0;
-}
-
-Chem::SMILESDataWriter::DFSTreeEdge* Chem::SMILESDataWriter::allocEdge()
-{
-	DFSTreeEdge* edge;
-
-	if (freeEdgeIndex == allocEdges.size()) {
-		DFSTreeEdge::SharedPointer edge_ptr(new DFSTreeEdge(*this));
-		allocEdges.push_back(edge_ptr);
-
-		edge = edge_ptr.get();
-		freeEdgeIndex++;
-
-	} else {
-		edge = allocEdges[freeEdgeIndex++].get();
-		edge->clear();
-	}
-
-	return edge;
+	nodeCache.putAll();
 }
 
 void Chem::SMILESDataWriter::freeEdges()
 {
-	freeEdgeIndex = 0;
+	edgeCache.putAll();
 }
 
 
@@ -1216,8 +1206,6 @@ int Chem::SMILESDataWriter::DFSTreeNode::getStereoParity() const
 // -------------------------
 
 Chem::SMILESDataWriter::DFSTreeEdge::DFSTreeEdge(SMILESDataWriter& writer): writer(writer), molGraph(0) {}
-
-void Chem::SMILESDataWriter::DFSTreeEdge::clear() {}
 
 void Chem::SMILESDataWriter::DFSTreeEdge::setBond(const Bond* bnd)
 {

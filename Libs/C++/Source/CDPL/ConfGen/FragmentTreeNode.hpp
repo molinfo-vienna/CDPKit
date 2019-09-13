@@ -60,7 +60,7 @@ namespace CDPL
 		{
 
 		public:
-			typedef std::pair<Math::Vector3DArray*, double> ConfData;
+			typedef std::pair<Math::Vector3DArray::SharedPointer, double> ConfData;
 			typedef std::vector<ConfData> ConfDataArray;
 			typedef std::vector<const Chem::Bond*> BondList;
 			typedef std::vector<const Chem::Atom*> AtomList;
@@ -97,7 +97,7 @@ namespace CDPL
 			FragmentTreeNode* getLeftChild() const;
 			FragmentTreeNode* getRightChild() const;
 
-			void addConformer(Math::Vector3DArray* coords, double energy = 0.0);
+			void addConformer(const Math::Vector3DArray::SharedPointer& coords, double energy = 0.0);
 
 			std::size_t getNumConformers() const;
 

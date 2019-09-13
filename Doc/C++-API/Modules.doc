@@ -430,6 +430,9 @@
 \defgroup CDPL_PHARM_ATTRIBUTED_GRID_FUNCTIONS AttributedGrid Functions
 \ingroup CDPL_PHARM_FUNCTIONS
 
+\defgroup CDPL_PHARM_UTILITY_FUNCTIONS Utility Functions
+\ingroup CDPL_PHARM_FUNCTIONS
+
 
 \defgroup CDPL_FORCEFIELD Molecular Force Fields
 
@@ -455,6 +458,9 @@
 \ingroup CDPL_FORCEFIELD
 
 \defgroup CDPL_FORCEFIELD_DATA_STRUCTURES Data Structures
+\ingroup CDPL_FORCEFIELD
+
+\defgroup CDPL_FORCEFIELD_EXCEPTIONS Exceptions
 \ingroup CDPL_FORCEFIELD
 
 \defgroup CDPL_FORCEFIELD_PARAMETER_TABLES Parameter Lookup Tables

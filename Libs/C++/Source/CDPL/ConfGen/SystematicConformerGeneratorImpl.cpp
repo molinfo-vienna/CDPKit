@@ -235,10 +235,14 @@ namespace
 
 	const double MAX_PLANAR_ATOM_GEOM_OOP_ANGLE  = 10.0 / 180.0 * M_PI;
 	const double MIN_LINEAR_ATOM_GEOM_BOND_ANGLE = 175.0 / 180.0 * M_PI;
+
+	const std::size_t MAX_INDEX_ARRAY_CACHE_SIZE  = 1000;
+	const std::size_t MAX_VECTOR_ARRAY_CACHE_SIZE = 5000;
 }
 
 
-ConfGen::SystematicConformerGeneratorImpl::SystematicConformerGeneratorImpl()
+ConfGen::SystematicConformerGeneratorImpl::SystematicConformerGeneratorImpl(): 
+	idxArrayCache(MAX_INDEX_ARRAY_CACHE_SIZE), vecArrayCache(MAX_VECTOR_ARRAY_CACHE_SIZE)
 {
 	using namespace Chem;
 
@@ -254,6 +258,8 @@ ConfGen::SystematicConformerGeneratorImpl::SystematicConformerGeneratorImpl()
 										  BondPropertyFlag::AROMATICITY);
 	symMappingSearch.setFoundMappingCallback(
 		boost::bind(&ConfGen::SystematicConformerGeneratorImpl::processSymmetryMapping, this, _1, _2));
+
+	vecArrayCache.setInitFunction(boost::bind(&SystematicConformerGeneratorImpl::initVectorArray, this, _1));
 }
 
 ConfGen::SystematicConformerGeneratorImpl::~SystematicConformerGeneratorImpl() {}
@@ -307,9 +313,9 @@ unsigned int ConfGen::SystematicConformerGeneratorImpl::generate(const Chem::Mol
 void ConfGen::SystematicConformerGeneratorImpl::init(const Chem::MolecularGraph& molgraph)
 {
 	timer.start();	
+
 	extAtomConnectivities.clear();
-	freeCoordArrays.clear();
-	freeIndexArrays.clear();
+	idxArrayCache.putAll();
 
 	symMappingHAtomMask.resize(molgraph.getNumAtoms());
 	symMappingHAtomMask.reset();
@@ -318,14 +324,6 @@ void ConfGen::SystematicConformerGeneratorImpl::init(const Chem::MolecularGraph&
 		enumNitrogenMask.resize(molgraph.getNumAtoms());
 		enumNitrogenMask.reset();
 	}
-
-	std::for_each(allocCoordArrays.begin(), allocCoordArrays.end(), 
-				  boost::bind(&SystematicConformerGeneratorImpl::freeVector3DArray, this, 
-							  boost::bind<Math::Vector3DArray*>(&Math::Vector3DArray::SharedPointer::get, _1)));
-
-	std::for_each(allocIndexArrays.begin(), allocIndexArrays.end(), 
-				  boost::bind(&SystematicConformerGeneratorImpl::freeIndexArray, this, 
-							  boost::bind<IndexArray*>(&IndexArrayPtr::get, _1)));
 
 	buildAtomTypeMask(molgraph, hAtomMask, Chem::AtomType::H, true);
 
@@ -699,7 +697,7 @@ ConfGen::SystematicConformerGeneratorImpl::IndexArray* ConfGen::SystematicConfor
 {
 	using namespace Chem;
 
-	IndexArray* idx_mapping = allocIndexArray();
+	IndexArray* idx_mapping = idxArrayCache.getRaw();
 	const AtomMapping& atom_mapping = mapping.getAtomMapping();
 	const MolecularGraph& root_frag = fragTree.getFragment();
 
@@ -753,9 +751,7 @@ bool ConfGen::SystematicConformerGeneratorImpl::setExistingCoordinates(FragmentT
 	using namespace Chem;
 
 	try {
-		Math::Vector3DArray* coords = allocVector3DArray();
-		Vec3DArrayDeallocator dealloc_guard(this, coords);
-
+		VectorArrayPtr coords = vecArrayCache.get();
 		const MolecularGraph& frag = node.getFragment();
 		const IndexArray& root_atom_inds = node.getRootAtomIndices();
 
@@ -770,8 +766,6 @@ bool ConfGen::SystematicConformerGeneratorImpl::setExistingCoordinates(FragmentT
 
 		else {
 			node.addConformer(coords);
-			dealloc_guard.release();
-
 			enumNitrogens(node, node.getFragmentType() != FragmentType::CHAIN);
 		}
 
@@ -805,8 +799,7 @@ bool ConfGen::SystematicConformerGeneratorImpl::setFragmentLibraryConformers(Fra
 	switch (node.getFragmentType()) {
 
 		case FragmentType::CHAIN: {
-			Math::Vector3DArray* coords = allocVector3DArray();
-			Vec3DArrayDeallocator dealloc_guard(this, coords);
+			VectorArrayPtr coords = vecArrayCache.get();
 
 			getLibraryFragmentConformation(*entry_ptr, 0, *coords);
 
@@ -815,7 +808,6 @@ bool ConfGen::SystematicConformerGeneratorImpl::setFragmentLibraryConformers(Fra
 
 			else {
 				node.addConformer(coords);
-				dealloc_guard.release();
 
 				fixAtomConfigurations(node);
 				fixBondConfigurations(node, false);
@@ -830,14 +822,12 @@ bool ConfGen::SystematicConformerGeneratorImpl::setFragmentLibraryConformers(Fra
 			setupAromRingSubstituentBondLengthList(node);
 
 			for (std::size_t  i = 0; i < num_confs; i++) {
-				Math::Vector3DArray* coords = allocVector3DArray();
-				Vec3DArrayDeallocator dealloc_guard(this, coords);
+				VectorArrayPtr coords = vecArrayCache.get();
 
 				getLibraryFragmentConformation(*entry_ptr, i, *coords);
 				fixAromRingSubstituentBondLengths(*coords);
 
 				node.addConformer(coords);
-				dealloc_guard.release();
 			}
 
 			enumNitrogens(node, true);
@@ -879,8 +869,7 @@ unsigned int ConfGen::SystematicConformerGeneratorImpl::genFragmentConformers(Fr
 		return ret_code;
 
 	if (node.getFragmentType() == FragmentType::CHAIN) {
-		Math::Vector3DArray* coords = allocVector3DArray();
-		Vec3DArrayDeallocator dealloc_guard(this, coords);
+		VectorArrayPtr coords = vecArrayCache.get();
 		const Math::Vector3DArray& gen_coords = fragConfGen.getCoordinates(0);
 
 		for (IndexPairList::const_iterator it = fragLibEntryAtomIdxMap.begin(), end = fragLibEntryAtomIdxMap.end(); it != end; ++it) {
@@ -894,7 +883,6 @@ unsigned int ConfGen::SystematicConformerGeneratorImpl::genFragmentConformers(Fr
 
 		else {
 			node.addConformer(coords);
-			dealloc_guard.release();
 
 			fixBondConfigurations(node, true);
 			enumNitrogens(node, false);
@@ -906,8 +894,7 @@ unsigned int ConfGen::SystematicConformerGeneratorImpl::genFragmentConformers(Fr
 	setupAromRingSubstituentBondLengthList(node);
 
 	for (std::size_t i = 0; i < num_confs; i++) {
-		Math::Vector3DArray* coords = allocVector3DArray();
-		Vec3DArrayDeallocator dealloc_guard(this, coords);
+		VectorArrayPtr coords = vecArrayCache.get();
 		const Math::Vector3DArray& gen_coords = fragConfGen.getCoordinates(i);
 
 		for (IndexPairList::const_iterator it = fragLibEntryAtomIdxMap.begin(), end = fragLibEntryAtomIdxMap.end(); it != end; ++it) {
@@ -919,7 +906,6 @@ unsigned int ConfGen::SystematicConformerGeneratorImpl::genFragmentConformers(Fr
 		fixAromRingSubstituentBondLengths(*coords);
 
 		node.addConformer(coords);
-		dealloc_guard.release();
 	}
 
 	enumNitrogens(node, true);
@@ -950,9 +936,7 @@ void ConfGen::SystematicConformerGeneratorImpl::distChainBuildFragmentCoordinate
 	}
 
 	const IndexArray& root_atom_inds = node.getRootAtomIndices();
-
-	Math::Vector3DArray* node_coords = allocVector3DArray();
-	Vec3DArrayDeallocator dealloc_guard(this, node_coords);
+	VectorArrayPtr node_coords = vecArrayCache.get();
 
 	for (IndexArray::const_iterator idx_it = root_atom_inds.begin(), idx_end = root_atom_inds.end(); idx_it != idx_end; ++idx_it) {
 		std::size_t atom_idx = *idx_it;
@@ -961,7 +945,6 @@ void ConfGen::SystematicConformerGeneratorImpl::distChainBuildFragmentCoordinate
 	}
 		
 	node.addConformer(node_coords);
-	dealloc_guard.release();
 
 	if (fix_configs) {
 		fixAtomConfigurations(node);
@@ -1217,8 +1200,7 @@ void ConfGen::SystematicConformerGeneratorImpl::enumNitrogens(FragmentTreeNode& 
 			if (!isInvertibleNitrogen(atom, frag, coords))
 				continue;
 
-			Math::Vector3DArray* inv_n_coords = allocVector3DArray();
-			Vec3DArrayDeallocator dealloc_guard(this, inv_n_coords);
+			VectorArrayPtr inv_n_coords = vecArrayCache.get();
 
 			// copy and mirror fragment coordinates in xy-plane
 
@@ -1233,9 +1215,7 @@ void ConfGen::SystematicConformerGeneratorImpl::enumNitrogens(FragmentTreeNode& 
 			}
 
 			enumNitrogenMask.set(root_atom_inds[i]);
-
 			node.addConformer(inv_n_coords);
-			dealloc_guard.release();
 			return;
 		}
 
@@ -1290,8 +1270,7 @@ void ConfGen::SystematicConformerGeneratorImpl::enumNitrogens(FragmentTreeNode& 
 
 		for (std::size_t i = 0, num_confs = node.getNumConformers(); i < num_confs; i++) {
 			const Math::Vector3DArray& conf = *node.getConformers()[i].first;
-			Math::Vector3DArray* inv_n_conf = allocVector3DArray();
-			Vec3DArrayDeallocator dealloc_guard(this, inv_n_conf);
+			VectorArrayPtr inv_n_conf = vecArrayCache.get();
 
 			const Math::Vector3D& ctr_atom_pos = conf[ctr_atom_idx];
 
@@ -1327,7 +1306,6 @@ void ConfGen::SystematicConformerGeneratorImpl::enumNitrogens(FragmentTreeNode& 
 			}
 
 			node.addConformer(inv_n_conf);
-			dealloc_guard.release();
 		}
 	}
 }
@@ -1780,48 +1758,7 @@ bool ConfGen::SystematicConformerGeneratorImpl::timeoutExceeded() const
 	return (timer.elapsed().wall > (boost::timer::nanosecond_type(settings.getTimeout()) * 1000000));
 }
 
-Math::Vector3DArray* ConfGen::SystematicConformerGeneratorImpl::allocVector3DArray()
+void ConfGen::SystematicConformerGeneratorImpl::initVectorArray(Math::Vector3DArray& vec_array) const
 {
-	if (!freeCoordArrays.empty()) {
-		Math::Vector3DArray* vec_array = freeCoordArrays.back();
-
-		vec_array->resize(fragTree.getFragment().getNumAtoms());
-		freeCoordArrays.pop_back();
-
-		return vec_array;
-	}
-
-	Math::Vector3DArray::SharedPointer vec_array(new Math::Vector3DArray());
-
-	vec_array->resize(fragTree.getFragment().getNumAtoms());
-	allocCoordArrays.push_back(vec_array);
-
-	return vec_array.get();
-}
-
-void ConfGen::SystematicConformerGeneratorImpl::freeVector3DArray(Math::Vector3DArray* vec_array)
-{
-	freeCoordArrays.push_back(vec_array);
-}
-
-ConfGen::SystematicConformerGeneratorImpl::IndexArray* ConfGen::SystematicConformerGeneratorImpl::allocIndexArray()
-{
-	if (!freeIndexArrays.empty()) {
-		IndexArray* idx_array = freeIndexArrays.back();
-
-		freeIndexArrays.pop_back();
-
-		return idx_array;
-	}
-
-	IndexArrayPtr idx_array(new IndexArray());
-
-	allocIndexArrays.push_back(idx_array);
-
-	return idx_array.get();
-}
-
-void ConfGen::SystematicConformerGeneratorImpl::freeIndexArray(IndexArray* idx_array)
-{
-	freeIndexArrays.push_back(idx_array);
+	vec_array.resize(fragTree.getFragment().getNumAtoms());
 }

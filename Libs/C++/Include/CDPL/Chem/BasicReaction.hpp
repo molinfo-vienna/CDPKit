@@ -39,6 +39,7 @@
 #include "CDPL/Chem/APIPrefix.hpp"
 #include "CDPL/Chem/Reaction.hpp"
 #include "CDPL/Chem/BasicMolecule.hpp"
+#include "CDPL/Util/ObjectPool.hpp"
 
 
 namespace CDPL 
@@ -58,7 +59,9 @@ namespace CDPL
 		class CDPL_CHEM_API BasicReaction : public Reaction
 		{
 
-			typedef std::vector<BasicMolecule*> ComponentList;
+			typedef Util::ObjectPool<BasicMolecule> ComponentCache;
+			typedef ComponentCache::SharedObjectPointer ComponentPtr;
+			typedef std::vector<ComponentPtr> ComponentList;
 
 		public:
 			/**	
@@ -224,13 +227,9 @@ namespace CDPL
 			void copyComponents(const BasicReaction& rxn);
 			void copyComponents(const Reaction& rxn);
 
-			BasicMolecule* allocComponent(const Molecule* mol);
-			void freeComponent(BasicMolecule* mol);
-
-			typedef std::vector<BasicMolecule::SharedPointer> AllocComponentList;
-
-			AllocComponentList allocComponents;
-			ComponentList      freeComponents;
+			ComponentPtr allocComponent(const Molecule* mol);
+		
+			ComponentCache     compCache;
 			ComponentList      components;
 			std::size_t        agentsStartIdx;
 			std::size_t        productsStartIdx;

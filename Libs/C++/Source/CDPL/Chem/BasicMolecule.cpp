@@ -216,7 +216,7 @@ Chem::BasicBond& Chem::BasicMolecule::addBond(std::size_t atom1_idx, std::size_t
 	Bond* ex_bond = atom1.findBondToAtom(atom2);
 
 	if (ex_bond)
-		return getBond(ex_bond->getIndex());
+		return static_cast<Chem::BasicBond&>(*ex_bond);
 
 	bonds.reserve(bonds.size() + 1);
 	allocBonds.reserve(allocBonds.size() + 1);

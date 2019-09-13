@@ -34,7 +34,9 @@
 #include "CDPL/Config.hpp"
 
 #include "CDPL/ConfGen/DGConstraintGenerator.hpp"
-#include "CDPL/ConfGen/Raw3DCoordinatesGenerator.hpp"
+#include "CDPL/ConfGen/DGConstraintGeneratorSettings.hpp"
+#include "CDPL/ConfGen/DGStructureGenerator.hpp"
+#include "CDPL/ConfGen/DGStructureGeneratorSettings.hpp"
 #include "CDPL/ConfGen/FragmentList.hpp"
 #include "CDPL/ConfGen/FragmentLibraryEntry.hpp"
 #include "CDPL/ConfGen/FragmentLibrary.hpp"
@@ -50,7 +52,7 @@
 
 #if defined(HAVE_BOOST_TIMER) && defined(HAVE_BOOST_CHRONO)
 
-#include "CDPL/ConfGen/Random3DCoordinatesGenerator.hpp"
+#include "CDPL/ConfGen/RandomStructureGenerator.hpp"
 #include "CDPL/ConfGen/SystematicConformerGenerator.hpp"
 #include "CDPL/ConfGen/FragmentConformerGenerator.hpp"
 #include "CDPL/ConfGen/FragmentLibraryGenerator.hpp"

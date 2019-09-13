@@ -1,7 +1,7 @@
 /* -*- mode: c++; c-basic-offset: 4; tab-width: 4; indent-tabs-mode: t -*- */
 
 /* 
- * ReturnCode.hpp 
+ * DGConstraintGeneratorSettings.hpp 
  *
  * This file is part of the Chemical Data Processing Toolkit
  *
@@ -25,51 +25,58 @@
 
 /**
  * \file
- * \brief Definition of constants in namespace CDPL::Confgen::ReturnCode.
+ * \brief Definition of the class CDPL::ConfGen::DGConstraintGeneratorSettings.
  */
 
-#ifndef CDPL_CONFGEN_RETURNCODE_HPP
-#define CDPL_CONFGEN_RETURNCODE_HPP
+#ifndef CDPL_CONFGEN_DGCONSTRAINTGENERATORSETTINGS_HPP
+#define CDPL_CONFGEN_DGCONSTRAINTGENERATORSETTINGS_HPP
+
+#include "CDPL/ConfGen/APIPrefix.hpp"
 
 
 namespace CDPL 
 {
 
-    namespace ConfGen
+    namespace ConfGen 
     {
 
-	/**
-	 * \addtogroup CDPL_CONFGEN_CONSTANTS
-	 * @{
-	 */
+		/**
+		 * \addtogroup CDPL_CONFGEN_DATA_STRUCTURES
+		 * @{
+		 */
 
-	/**
-	 * \brief Provides constants that are used to describe the result of operations related to conformer generation.
-	 */
-	namespace ReturnCode
-	{
-			
-	    const int SUCCESS                        = 0; 
+		class CDPL_CONFGEN_API DGConstraintGeneratorSettings
+		{
 
-	    const int UNINITIALIZED                  = 1;
+		  public:
+			static const DGConstraintGeneratorSettings DEFAULT;
 
-	    const int FORCEFIELD_SETUP_FAILED        = 2;
+			DGConstraintGeneratorSettings();
 
-	    const int FORCEFIELD_MINIMIZATION_FAILED = 3;
+			virtual ~DGConstraintGeneratorSettings() {}
 
-	    const int MAX_NUM_TRIALS_EXCEEDED        = 4;
+			void excludeHydrogens(bool exclude);
 
-	    const int TIMEOUT_EXCEEDED               = 5;
+			bool excludeHydrogens() const;
 
-	    const int FRAGMENT_LIBRARY_NOT_SET       = 6;
+			void regardAtomConfiguration(bool regard);
 
-	    const int ERROR                          = 10;
-	}
+			bool regardAtomConfiguration() const;
 
-	/**
-	 * @}
-	 */
+			void regardBondConfiguration(bool regard);
+
+			bool regardBondConfiguration() const;
+
+		  private:
+			bool  exclHydrogens;
+			bool  atomConfig;
+			bool  bondConfig;
+		};
+
+		/**
+		 * @}
+		 */
     }
 }
 
-#endif // CDPL_CONFGEN_RETURNCODE_HPP
+#endif // CDPL_CONFGEN_DGCONSTRAINTGENERATORSETTINGS_HPP
