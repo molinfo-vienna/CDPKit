@@ -44,18 +44,31 @@
 #include "CDPL/Internal/AddressOf.hpp"
 
 
+namespace
+{
+	
+	const std::size_t MAX_MAPPING_CACHE_SIZE = 1000;
+}
+
+
 using namespace CDPL;
 
 
 Chem::ReactionSubstructureSearch::ReactionSubstructureSearch(): 
-	query(0), queryChanged(true), initQueryMappingData(true), uniqueMatches(false), 
-	enabledRxnRoles(ReactionRole::REACTANT | ReactionRole::AGENT | ReactionRole::PRODUCT),
-	maxNumMappings(0) {}
-
-Chem::ReactionSubstructureSearch::ReactionSubstructureSearch(const Reaction& query): 
+	query(0), mappingCache(MAX_MAPPING_CACHE_SIZE), queryChanged(true), initQueryMappingData(true),
 	uniqueMatches(false), enabledRxnRoles(ReactionRole::REACTANT | ReactionRole::AGENT | ReactionRole::PRODUCT),
 	maxNumMappings(0) 
 {
+	mappingCache.setCleanupFunction(&AtomBondMapping::clear);
+}
+
+Chem::ReactionSubstructureSearch::ReactionSubstructureSearch(const Reaction& query): 
+	mappingCache(MAX_MAPPING_CACHE_SIZE), uniqueMatches(false), 
+	enabledRxnRoles(ReactionRole::REACTANT | ReactionRole::AGENT | ReactionRole::PRODUCT),
+	maxNumMappings(0) 
+{
+	mappingCache.setCleanupFunction(&AtomBondMapping::clear);
+
 	setQuery(query);
 }
 
@@ -653,8 +666,7 @@ bool Chem::ReactionSubstructureSearch::foundMappingUnique()
 
 void Chem::ReactionSubstructureSearch::freeAtomBondMappings()
 {
-	freeMappingIdx = 0;
-
+	mappingCache.putAll();
 	foundMappings.clear();
 
 	if (uniqueMatches)
@@ -663,21 +675,7 @@ void Chem::ReactionSubstructureSearch::freeAtomBondMappings()
 
 Chem::AtomBondMapping* Chem::ReactionSubstructureSearch::createAtomBondMapping()
 {
-	AtomBondMapping* mapping;
-
-	if (freeMappingIdx == allocMappings.size()) {
-		AtomBondMapping::SharedPointer mapping_ptr(new AtomBondMapping());
-		allocMappings.push_back(mapping_ptr);
-
-		mapping = mapping_ptr.get();
-		freeMappingIdx++;
-
-	} else {
-		mapping = allocMappings[freeMappingIdx++].get();
-
-		mapping->clear();
-	}
-
+	AtomBondMapping* mapping = mappingCache.getRaw();
 	AtomMapping& atom_mapping = mapping->getAtomMapping();
 	BondMapping& bond_mapping = mapping->getBondMapping();
 
@@ -710,7 +708,7 @@ Chem::AtomBondMapping* Chem::ReactionSubstructureSearch::createAtomBondMapping()
 
 void Chem::ReactionSubstructureSearch::freeAtomBondMapping()
 {
-	freeMappingIdx--;
+	mappingCache.put();
 }
 
 

@@ -35,12 +35,22 @@
 #include "CDPL/Internal/RangeGenerator.hpp"
 
 
+namespace
+{
+
+	const std::size_t MAX_EDGE_CACHE_SIZE = 100000;
+}
+
+
 using namespace CDPL;
 
 
-Chem::CompleteRingSet::CompleteRingSet() {}
+Chem::CompleteRingSet::CompleteRingSet():
+	edgeCache(MAX_EDGE_CACHE_SIZE)
+{}
 
-Chem::CompleteRingSet::CompleteRingSet(const MolecularGraph& molgraph)
+Chem::CompleteRingSet::CompleteRingSet(const MolecularGraph& molgraph):
+	edgeCache(MAX_EDGE_CACHE_SIZE)
 {
 	perceive(molgraph);
 }
@@ -62,12 +72,6 @@ void Chem::CompleteRingSet::perceive(const MolecularGraph& molgraph)
 void Chem::CompleteRingSet::init(const MolecularGraph& molgraph)
 {
 	molGraph = &molgraph;
-
-	freeEdges.clear();
-	freeEdges.reserve(allocEdges.size());
-
-	std::transform(allocEdges.begin(), allocEdges.end(), std::back_inserter(freeEdges),
-				   std::mem_fun_ref(&Edge::SharedPointer::get));
 
 	std::size_t num_atoms = molgraph.getNumAtoms();
 
@@ -102,13 +106,13 @@ void Chem::CompleteRingSet::reduce()
 		Node::EdgeIterator edges_end = node->getEdgesEnd();
 
 		for (Node::EdgeIterator it = node->getEdgesBegin(); it != edges_end; ) {
-			Edge* edge1 = *it;
+			const EdgePtr& edge1 = *it;
 			Node* nbr_node1 = edge1->getNeighbor(node);
 
 			Node::EdgeIterator saved_it = it;
 
 			for (Node::EdgeIterator it2 = ++it; it2 != edges_end; ++it2) {
-				const Edge* edge2 = *it2;		
+				const EdgePtr& edge2 = *it2;		
 
 				if (edge1->intersects(edge2))
 					continue;
@@ -116,210 +120,170 @@ void Chem::CompleteRingSet::reduce()
 				Node* nbr_node2 = edge2->getNeighbor(node);
 
 				if (nbr_node1 == nbr_node2) {
-					Edge* rng_edge = allocEdge(edge1, edge2, nbr_node1, nbr_node2, false);
+					EdgePtr rng_edge = allocEdge(edge1, edge2, nbr_node1, nbr_node2, false);
 		
 					addElement(rng_edge->createRing(molGraph));
 					
-					freeEdge(rng_edge);
-
 				} else
 					allocEdge(edge1, edge2, nbr_node1, nbr_node2, true);			
 			}
 		
 			nbr_node1->removeEdge(edge1->getEdgeListIterator(nbr_node1));
-
 			node->removeEdge(saved_it);
-
-			freeEdge(edge1);
 		}
 
 		nodeQueue.pop();
 	}
 }
 
-Chem::CompleteRingSet::Edge* Chem::CompleteRingSet::allocEdge(const Edge* edge1, const Edge* edge2, Node* node1, Node* node2, bool connect)
+Chem::CompleteRingSet::EdgePtr Chem::CompleteRingSet::allocEdge(const EdgePtr& edge1, const EdgePtr& edge2, Node* node1, Node* node2, bool connect)
 {
-	Edge* edge;
+	EdgePtr edge = edgeCache.get();
 
-	if (freeEdges.empty()) {
-		Edge::SharedPointer edge_ptr(new Edge());
-		
-		allocEdges.push_back(edge_ptr);
-
-		edge = edge_ptr.get();
-
-	} else {
-		edge = freeEdges.back();
-		
-		freeEdges.pop_back();
-	}
-
-	edge->init(edge1, edge2, node1, node2, connect);
+	edge->init(edge, edge1, edge2, node1, node2, connect);
 
 	return edge;
 }
 
-Chem::CompleteRingSet::Edge* Chem::CompleteRingSet::allocEdge(const Bond& bond, Node* node1, Node* node2)
+Chem::CompleteRingSet::EdgePtr Chem::CompleteRingSet::allocEdge(const Bond& bond, Node* node1, Node* node2)
 {
-	Edge* edge;
-
-	if (freeEdges.empty()) {
-		Edge::SharedPointer edge_ptr(new Edge(molGraph, bond, node1, node2));
-		
-		allocEdges.push_back(edge_ptr);
-
-		return edge_ptr.get();
-	}
-
-	edge = freeEdges.back();
+	EdgePtr edge = edgeCache.get();
 	
-	edge->init(molGraph, bond, node1, node2);
-	
-	freeEdges.pop_back();
+	edge->init(edge, molGraph, bond, node1, node2);
 
 	return edge;
 }
 
-void Chem::CompleteRingSet::freeEdge(Edge* edge)
+
+void Chem::CompleteRingSet::Edge::init(const EdgePtr& this_edge, const MolecularGraph* molgraph, const Bond& bond, Node* node1, Node* node2)
 {
-	freeEdges.push_back(edge);
+	bondPath.resize(molgraph->getNumBonds());
+	bondPath.reset();
+
+	bondPath.set(molgraph->getBondIndex(bond));
+
+	nodePath.resize(molgraph->getNumAtoms());
+	nodePath.reset();
+
+	nodePath.set(node1->getIndex());
+	nodePath.set(node2->getIndex());
+
+	nodes[0] = node1;
+	nodes[1] = node2;
+
+	edgeListIters[0] = node1->addEdge(this_edge);
+	edgeListIters[1] = node2->addEdge(this_edge);
 }
 
-
-Chem::CompleteRingSet::Edge::Edge(const MolecularGraph* molgraph, const Bond& bond, Node* node1, Node* node2)
+void Chem::CompleteRingSet::Edge::init(const EdgePtr& this_edge, const EdgePtr& edge1, const EdgePtr& edge2, Node* node1, Node* node2, bool connect)
 {
-  init(molgraph, bond, node1, node2);
+	bondPath = edge1->bondPath;
+	bondPath |= edge2->bondPath;
+
+	nodePath = edge1->nodePath;
+	nodePath |= edge2->nodePath;
+
+	nodes[0] = node1;
+	nodes[1] = node2; 
+
+	if (connect) {
+		edgeListIters[0] = node1->addEdge(this_edge);
+		edgeListIters[1] = node2->addEdge(this_edge);
+	}
 }
 
-void Chem::CompleteRingSet::Edge::init(const MolecularGraph* molgraph, const Bond& bond, Node* node1, Node* node2)
+bool Chem::CompleteRingSet::Edge::intersects(const EdgePtr& edge) const
 {
-  bondPath.resize(molgraph->getNumBonds());
-  bondPath.reset();
+	tmpBitMask = bondPath;
+	tmpBitMask &= edge->bondPath;
 
-  bondPath.set(molgraph->getBondIndex(bond));
+	if (tmpBitMask.any())
+		return true;
 
-  nodePath.resize(molgraph->getNumAtoms());
-  nodePath.reset();
+	tmpBitMask = nodePath;
+	tmpBitMask &= edge->nodePath;
 
-  nodePath.set(node1->getIndex());
-  nodePath.set(node2->getIndex());
+	tmpBitMask.reset(nodes[0]->getIndex());
+	tmpBitMask.reset(nodes[1]->getIndex());
+	tmpBitMask.reset(edge->nodes[0]->getIndex());
+	tmpBitMask.reset(edge->nodes[1]->getIndex());
 
-  nodes[0] = node1;
-  nodes[1] = node2;
-
-  edgeListIters[0] = node1->addEdge(this);
-  edgeListIters[1] = node2->addEdge(this);
-}
-
-void Chem::CompleteRingSet::Edge::init(const Edge* edge1, const Edge* edge2, Node* node1, Node* node2, bool connect)
-{
-  bondPath = edge1->bondPath;
-  bondPath |= edge2->bondPath;
-
-  nodePath = edge1->nodePath;
-  nodePath |= edge2->nodePath;
-
-  nodes[0] = node1;
-  nodes[1] = node2; 
-
-  if (connect) {
-    edgeListIters[0] = node1->addEdge(this);
-    edgeListIters[1] = node2->addEdge(this);
-  }
-}
-
-bool Chem::CompleteRingSet::Edge::intersects(const Edge* edge) const
-{
-  tmpBitMask = bondPath;
-  tmpBitMask &= edge->bondPath;
-
-  if (tmpBitMask.any())
-    return true;
-
-  tmpBitMask = nodePath;
-  tmpBitMask &= edge->nodePath;
-
-  tmpBitMask.reset(nodes[0]->getIndex());
-  tmpBitMask.reset(nodes[1]->getIndex());
-  tmpBitMask.reset(edge->nodes[0]->getIndex());
-  tmpBitMask.reset(edge->nodes[1]->getIndex());
-
-  return tmpBitMask.any();
+	return tmpBitMask.any();
 }
 
 Chem::Fragment::SharedPointer Chem::CompleteRingSet::Edge::createRing(const MolecularGraph* molgraph) const
 {
-  Fragment::SharedPointer ring_ptr(new Fragment());
-  Fragment& ring = *ring_ptr;
+	Fragment::SharedPointer ring_ptr(new Fragment());
+	Fragment& ring = *ring_ptr;
 
-  const Atom* atom = &molgraph->getAtom(nodes[0]->getIndex());
+	const Atom* atom = &molgraph->getAtom(nodes[0]->getIndex());
 
-  ring.addAtom(*atom);
+	ring.addAtom(*atom);
 
-  while (true) {
-    Atom::ConstBondIterator bonds_end = atom->getBondsEnd();
-    Atom::ConstBondIterator it = atom->getBondsBegin();
+	while (true) {
+		Atom::ConstBondIterator bonds_end = atom->getBondsEnd();
+		Atom::ConstBondIterator it = atom->getBondsBegin();
 
-    for ( ; it != bonds_end; ++it) {
-      const Bond& bond = *it;
+		for ( ; it != bonds_end; ++it) {
+			const Bond& bond = *it;
 
-      if (!molgraph->containsBond(bond))
-	continue;
+			if (!molgraph->containsBond(bond))
+				continue;
 
-      if (!ring.containsBond(bond) && bondPath.test(molgraph->getBondIndex(bond))) {
-	ring.addBond(bond);
-	atom = &bond.getNeighbor(*atom);
-	break;
-      }
-    }
+			if (!ring.containsBond(bond) && bondPath.test(molgraph->getBondIndex(bond))) {
+				ring.addBond(bond);
+				atom = &bond.getNeighbor(*atom);
+				break;
+			}
+		}
 
-    if (it == bonds_end)
-      break;
-  }
+		if (it == bonds_end)
+			break;
+	}
 
-  return ring_ptr;
+	return ring_ptr;
 }
 
 Chem::CompleteRingSet::Node* Chem::CompleteRingSet::Edge::getNeighbor(const Node* node) const
 {
-  return (nodes[0] == node ? nodes[1] : nodes[0]);
+	return (nodes[0] == node ? nodes[1] : nodes[0]);
 }
 
 const Chem::CompleteRingSet::Node::EdgeIterator& Chem::CompleteRingSet::Edge::getEdgeListIterator(const Node* node) const
 {
-  return (nodes[0] == node ? edgeListIters[0] : edgeListIters[1]);
+	return (nodes[0] == node ? edgeListIters[0] : edgeListIters[1]);
 }
 
 
-Chem::CompleteRingSet::Node::EdgeIterator Chem::CompleteRingSet::Node::addEdge(Edge* edge)
+Chem::CompleteRingSet::Node::EdgeIterator Chem::CompleteRingSet::Node::addEdge(const EdgePtr& edge)
 {
-  edges.push_front(edge);
+	edges.push_front(edge);
 
-  return edges.begin();
+	return edges.begin();
 }
 
 void Chem::CompleteRingSet::Node::removeEdge(const EdgeIterator& it)
 {
-  edges.erase(it);
+	edges.erase(it);
 }
 
 Chem::CompleteRingSet::Node::EdgeIterator Chem::CompleteRingSet::Node::getEdgesBegin()
 {
-  return edges.begin();
+	return edges.begin();
 }
 
 Chem::CompleteRingSet::Node::EdgeIterator Chem::CompleteRingSet::Node::getEdgesEnd()
 {
-  return edges.end();
+	return edges.end();
 }
 
 std::size_t Chem::CompleteRingSet::Node::getIndex() const
 {
-  return index;
+	return index;
 }
    
 			
 bool Chem::CompleteRingSet::Node::GreaterCmpFunc::operator()(const Node* node1, const Node* node2) const 
 {
-  return (node1->edges.size() > node2->edges.size());
+	return (node1->edges.size() > node2->edges.size());
 }

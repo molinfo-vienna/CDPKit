@@ -95,11 +95,7 @@ namespace CDPL
 
 			ObjectPool(std::size_t max_size = 0): 
 				maxSize(max_size), ctorFunc(DefaultConstructor()), dtorFunc(DefaultDestructor()) {}
-
-			template <typename C>
-			ObjectPool(const C& ctor_func, std::size_t max_size = 0): 
-				maxSize(max_size), ctorFunc(ctor_func), dtorFunc(DefaultDestructor()) {}
-
+	
 			template <typename C, typename D>
 			ObjectPool(const C& ctor_func, const D& dtor_func, std::size_t max_size = 0): 
 				maxSize(max_size), ctorFunc(ctor_func), dtorFunc(dtor_func) {}

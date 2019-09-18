@@ -44,6 +44,7 @@
 #include "CDPL/Chem/MolecularGraph.hpp"
 #include "CDPL/Chem/SubstructureSearch.hpp"
 #include "CDPL/Util/BitSet.hpp"
+#include "CDPL/Util/ObjectStack.hpp"
 
 
 namespace CDPL 
@@ -109,7 +110,6 @@ namespace CDPL
 			Atom* getTautomerAtom(Molecule& tautomer, std::size_t ptn_atom_id, const AtomMapping& mapping) const;
 
 			void freeBitSet(Util::BitSet* bset);
-			Util::BitSet* allocBitSet();
 
 			void createMatchedBondMask(const BondMapping& mapping, Util::BitSet& bond_mask) const;
 
@@ -118,8 +118,7 @@ namespace CDPL
 			typedef std::vector<MolecularGraph::SharedPointer> StructPatternList;
 			typedef std::vector<SubstructureSearch::SharedPointer> SubstructureSearchList;
 			typedef std::vector<Util::BitSet*> BitSetList;
-			typedef boost::shared_ptr<Util::BitSet> BitSetPtr;
-			typedef std::vector<BitSetPtr> AllocBitSetList;
+			typedef Util::ObjectStack<Util::BitSet> BitSetCache;
 
 			unsigned int                ruleID;
 			StructPatternList           structPatterns;
@@ -132,8 +131,7 @@ namespace CDPL
 			std::size_t                 currMappingIdx;
 			Util::BitSet                bondMask;
 			BitSetList                  excludeMatches;
-			AllocBitSetList             allocBitSets;
-			std::size_t                 freeBitSetIdx;
+			BitSetCache                 bitSetCache;
 		};
 
 		/**

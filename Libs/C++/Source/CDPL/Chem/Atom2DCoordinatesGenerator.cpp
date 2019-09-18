@@ -124,6 +124,11 @@ namespace
 	const double      COMPONENT_X_SPACING           = DEF_BOND_LENGTH;
 	const double      COMPONENT_Y_SPACING           = DEF_BOND_LENGTH;
 	const std::size_t BACKTRACKING_LIMIT            = 200;
+
+	const std::size_t MAX_EDGE_CACHE_SIZE          = 5000;
+	const std::size_t MAX_ATOM_NODE_CACHE_SIZE     = 5000;
+	const std::size_t MAX_RING_SYS_NODE_CACHE_SIZE = 100;
+	const std::size_t MAX_RING_INFO_CACHE_SIZE     = 200;
 }
 
 
@@ -211,7 +216,15 @@ private:
 };
 
 
-Chem::Atom2DCoordinatesGenerator::Atom2DCoordinatesGenerator(const MolecularGraph& molgraph, Math::Vector2DArray& coords) 
+Chem::Atom2DCoordinatesGenerator::Atom2DCoordinatesGenerator():
+	ringInfoCache(MAX_RING_INFO_CACHE_SIZE), ringSysNodeCache(MAX_RING_SYS_NODE_CACHE_SIZE), 
+	atomNodeCache(MAX_ATOM_NODE_CACHE_SIZE), edgeCache(MAX_EDGE_CACHE_SIZE)
+{
+}
+
+Chem::Atom2DCoordinatesGenerator::Atom2DCoordinatesGenerator(const MolecularGraph& molgraph, Math::Vector2DArray& coords):
+	ringInfoCache(MAX_RING_INFO_CACHE_SIZE), ringSysNodeCache(MAX_RING_SYS_NODE_CACHE_SIZE), 
+	atomNodeCache(MAX_ATOM_NODE_CACHE_SIZE), edgeCache(MAX_EDGE_CACHE_SIZE)
 {
 	generate(molgraph, coords);
 }
@@ -221,7 +234,6 @@ void Chem::Atom2DCoordinatesGenerator::generate(const MolecularGraph& molgraph, 
 	init(molgraph, coords);
 
 	extractRingInformation();
-
 	calcAtomPriorities();
 	calcRingPriorities();
 
@@ -313,10 +325,10 @@ void Chem::Atom2DCoordinatesGenerator::calcAtomPriorities()
 
 void Chem::Atom2DCoordinatesGenerator::calcRingPriorities()
 {
-	RingInfoPtrList::iterator rings_end = ringList.end();
+	RingInfoList::iterator rings_end = ringList.end();
 
-	for (RingInfoPtrList::iterator it = ringList.begin(); it != rings_end; ++it) {
-		RingInfo& ring_info = *it->get();
+	for (RingInfoList::iterator it = ringList.begin(); it != rings_end; ++it) {
+		RingInfo& ring_info = **it;
 		const Fragment& ring_frag = ring_info.getFragment();
 
 		double priority = 0.0;
@@ -426,30 +438,26 @@ void Chem::Atom2DCoordinatesGenerator::createLayoutTree(const Fragment& comp, Ma
 	createAtomNodes(comp, coords);
 
 	freeAllocEdges();
-
 	createBondEdges(comp);
 	createSpiroEdges(comp);
 
 	setAtomNodeChainIDs();
-
 	initNodes();
-
 	createBFSNodeList();
 }
 
 void Chem::Atom2DCoordinatesGenerator::createRingSysNodes(const Fragment& comp, Math::Vector2DArray& coords)
 {
 	freeAllocRingSysNodes();
-
 	tmpRingList.clear();
 
 	std::for_each(comp.getAtomsBegin(), comp.getAtomsEnd(), 
 				  boost::bind(&Util::BitSet::set, &atomMask, 
 							  boost::bind(&MolecularGraph::getAtomIndex, molGraph, _1), true));
 
-	RingInfoPtrList::iterator rings_end = ringList.end();
+	RingInfoList::iterator rings_end = ringList.end();
 
-	for (RingInfoPtrList::iterator it = ringList.begin(); it != rings_end; ) {
+	for (RingInfoList::iterator it = ringList.begin(); it != rings_end; ) {
 		tmpBitMask = (*it)->getAtomMask();
 		tmpBitMask &= atomMask;
 
@@ -461,9 +469,9 @@ void Chem::Atom2DCoordinatesGenerator::createRingSysNodes(const Fragment& comp, 
 			++it;
 	}
 
-	RingInfoPtrList::iterator comp_rings_end = tmpRingList.end();
+	RingInfoList::iterator comp_rings_end = tmpRingList.end();
 
-	for (RingInfoPtrList::iterator it = tmpRingList.begin(); it != comp_rings_end; ) {
+	for (RingInfoList::iterator it = tmpRingList.begin(); it != comp_rings_end; ) {
 		RingSysNode* rsys_node = allocRingSysNode(*it, coords);
 
 		tmpRingList.erase(it++);		
@@ -471,7 +479,7 @@ void Chem::Atom2DCoordinatesGenerator::createRingSysNodes(const Fragment& comp, 
 		while (true) {
 			bool added_ring = false;
 
-			for (RingInfoPtrList::iterator it2 = it; it2 != comp_rings_end; ) {
+			for (RingInfoList::iterator it2 = it; it2 != comp_rings_end; ) {
 				if (rsys_node->addRing(*it2)) {
 					if (it == it2) {
 						tmpRingList.erase(it2++);
@@ -520,8 +528,8 @@ void Chem::Atom2DCoordinatesGenerator::createBondEdges(const Fragment& comp)
 
 	Fragment::ConstBondIterator bonds_end = comp.getBondsEnd();
 
-	RingSysNodePtrList::iterator rsys_list_beg = ringSysNodeList.begin();
-	RingSysNodePtrList::iterator rsys_list_end = ringSysNodeList.end();
+	RingSysNodeList::iterator rsys_list_beg = ringSysNodeList.begin();
+	RingSysNodeList::iterator rsys_list_end = ringSysNodeList.end();
 
 	for (Fragment::ConstBondIterator it = comp.getBondsBegin(); it != bonds_end; ++it) {
 		const Bond* bond = &*it;
@@ -548,13 +556,12 @@ void Chem::Atom2DCoordinatesGenerator::createBondEdges(const Fragment& comp)
 				atomNodeTable[atom2_idx]->addEdge(atom2, edge);
 
 			} else {
-				RingSysNodePtrList::iterator rsys_it = std::find_if(rsys_list_beg, rsys_list_end, 
+				RingSysNodeList::iterator rsys_it = std::find_if(rsys_list_beg, rsys_list_end, 
 																	boost::bind(&RingSysNode::containsAtom, _1, atom2_idx));
 				if (rsys_it == rsys_list_end)
 					continue;
 
-				LGNode* rsys = rsys_it->get();
-
+				LGNode* rsys = *rsys_it;
 				const LGEdge* edge = allocEdge(bond, atomNodeTable[atom1_idx], rsys);
 
 				rsys->addEdge(atom2, edge);
@@ -562,7 +569,7 @@ void Chem::Atom2DCoordinatesGenerator::createBondEdges(const Fragment& comp)
 	
 				while ((rsys_it = std::find_if(++rsys_it, rsys_list_end, 
 											   boost::bind(&RingSysNode::containsAtom, _1, atom2_idx))) != rsys_list_end) {
-					rsys = rsys_it->get();
+					rsys = *rsys_it;
 					edge = allocEdge(bond, atomNodeTable[atom1_idx], rsys);
 
 					rsys->addEdge(atom2, edge);
@@ -570,13 +577,12 @@ void Chem::Atom2DCoordinatesGenerator::createBondEdges(const Fragment& comp)
 			}
 
 		} else if (atomNodeTable[atom2_idx]) {
-			RingSysNodePtrList::iterator rsys_it = std::find_if(rsys_list_beg, rsys_list_end, 
+			RingSysNodeList::iterator rsys_it = std::find_if(rsys_list_beg, rsys_list_end, 
 																boost::bind(&RingSysNode::containsAtom, _1, atom1_idx));
 			if (rsys_it == rsys_list_end)
 				continue;
 
-			LGNode* rsys = rsys_it->get();
-
+			LGNode* rsys = *rsys_it;
 			const LGEdge* edge = allocEdge(bond, atomNodeTable[atom2_idx], rsys);
 
 			rsys->addEdge(atom1, edge);
@@ -584,25 +590,25 @@ void Chem::Atom2DCoordinatesGenerator::createBondEdges(const Fragment& comp)
 
 			while ((rsys_it = std::find_if(++rsys_it, rsys_list_end, 
 										   boost::bind(&RingSysNode::containsAtom, _1, atom1_idx))) != rsys_list_end) {
-				rsys = rsys_it->get();
+				rsys = *rsys_it;
 				edge = allocEdge(bond, atomNodeTable[atom2_idx], rsys);
 
 				rsys->addEdge(atom1, edge);
 			} 
 
 		} else if (!getRingFlag(*bond)) {
-			RingSysNodePtrList::iterator rsys_it1 = std::find_if(rsys_list_beg, rsys_list_end, 
+			RingSysNodeList::iterator rsys_it1 = std::find_if(rsys_list_beg, rsys_list_end, 
 																 boost::bind(&RingSysNode::containsAtom, _1, atom1_idx));
 			if (rsys_it1 == rsys_list_end)
 				continue;
 
-			RingSysNodePtrList::iterator rsys_it2 = std::find_if(rsys_list_beg, rsys_list_end, 
+			RingSysNodeList::iterator rsys_it2 = std::find_if(rsys_list_beg, rsys_list_end, 
 																 boost::bind(&RingSysNode::containsAtom, _1, atom2_idx));
 			if (rsys_it2 == rsys_list_end)
 				continue;
 
-			RingSysNode* rsys1 = rsys_it1->get();
-			RingSysNode* rsys2 = rsys_it2->get();
+			RingSysNode* rsys1 = *rsys_it1;
+			RingSysNode* rsys2 = *rsys_it2;
 
 			const LGEdge* edge = allocEdge(bond, rsys1, rsys2);
 
@@ -611,7 +617,7 @@ void Chem::Atom2DCoordinatesGenerator::createBondEdges(const Fragment& comp)
 
 			while ((rsys_it1 = std::find_if(++rsys_it1, rsys_list_end, 
 											boost::bind(&RingSysNode::containsAtom, _1, atom1_idx))) != rsys_list_end) {
-				RingSysNode* rsys = rsys_it1->get();
+				RingSysNode* rsys = *rsys_it1;
 				edge = allocEdge(bond, rsys, rsys2);
 
 				rsys->addEdge(atom1, edge);
@@ -619,7 +625,7 @@ void Chem::Atom2DCoordinatesGenerator::createBondEdges(const Fragment& comp)
 
 			while ((rsys_it2 = std::find_if(++rsys_it2, rsys_list_end, 
 											boost::bind(&RingSysNode::containsAtom, _1, atom2_idx))) != rsys_list_end) {
-				RingSysNode* rsys = rsys_it2->get();
+				RingSysNode* rsys = *rsys_it2;
 				edge = allocEdge(bond, rsys1, rsys);
 
 				rsys->addEdge(atom2, edge);
@@ -630,14 +636,14 @@ void Chem::Atom2DCoordinatesGenerator::createBondEdges(const Fragment& comp)
 
 void Chem::Atom2DCoordinatesGenerator::createSpiroEdges(const Fragment& comp)
 {
-	RingSysNodePtrList::iterator rsys_list_end = ringSysNodeList.end();
+	RingSysNodeList::iterator rsys_list_end = ringSysNodeList.end();
 
-	for (RingSysNodePtrList::iterator it1 = ringSysNodeList.begin(); it1 != rsys_list_end; ) {
-		RingSysNode* rsys1 = it1->get();
+	for (RingSysNodeList::iterator it1 = ringSysNodeList.begin(); it1 != rsys_list_end; ) {
+		RingSysNode* rsys1 = *it1;
 		const Util::BitSet& atom_mask1 = rsys1->getAtomMask();
 
-		for (RingSysNodePtrList::iterator it2 = ++it1; it2 != rsys_list_end; ++it2) {
-			RingSysNode* rsys2 = it2->get();
+		for (RingSysNodeList::iterator it2 = ++it1; it2 != rsys_list_end; ++it2) {
+			RingSysNode* rsys2 = *it2;
 
 			tmpBitMask = rsys2->getAtomMask();
 			tmpBitMask &= atom_mask1;
@@ -663,16 +669,16 @@ void Chem::Atom2DCoordinatesGenerator::createSpiroEdges(const Fragment& comp)
 
 void Chem::Atom2DCoordinatesGenerator::setAtomNodeChainIDs()
 {
-	AtomNodePtrList::const_iterator atom_nodes_beg = atomNodeList.begin();
-	AtomNodePtrList::const_iterator atom_nodes_end = atomNodeList.end();
+	AtomNodeList::const_iterator atom_nodes_beg = atomNodeList.begin();
+	AtomNodeList::const_iterator atom_nodes_end = atomNodeList.end();
 
 	currAtomNodePath.clear();
 
 	for (std::size_t chain_id = 0; true; chain_id++) {
 		longestAtomNodePath.clear();
 
-		for (AtomNodePtrList::const_iterator it = atom_nodes_beg; it != atom_nodes_end; ++it)
-			findLongestNodePath(it->get(), 0);
+		for (AtomNodeList::const_iterator it = atom_nodes_beg; it != atom_nodes_end; ++it)
+			findLongestNodePath(*it, 0);
 
 		if (longestAtomNodePath.empty())
 			return;
@@ -739,15 +745,15 @@ void Chem::Atom2DCoordinatesGenerator::createBFSNodeList()
 	bfsNodeList.clear();
 
 	if (!ringSysNodeList.empty()) 
-		bfsNodeList.push_back(std::max_element(ringSysNodeList.begin(), ringSysNodeList.end(), 
-											   boost::bind(std::less<double>(), 
-														   boost::bind(&LGNode::getPriority, _1), 
-														   boost::bind(&LGNode::getPriority, _2)))->get());
+		bfsNodeList.push_back(*std::max_element(ringSysNodeList.begin(), ringSysNodeList.end(), 
+												boost::bind(std::less<double>(), 
+															boost::bind(&LGNode::getPriority, _1), 
+															boost::bind(&LGNode::getPriority, _2))));
 	else if (!atomNodeList.empty())  
-		bfsNodeList.push_back(std::max_element(atomNodeList.begin(), atomNodeList.end(), 
-											   boost::bind(std::less<double>(), 
-														   boost::bind(&LGNode::getPriority, _1), 
-														   boost::bind(&LGNode::getPriority, _2)))->get());
+		bfsNodeList.push_back(*std::max_element(atomNodeList.begin(), atomNodeList.end(), 
+												boost::bind(std::less<double>(), 
+															boost::bind(&LGNode::getPriority, _1), 
+															boost::bind(&LGNode::getPriority, _2))));
 	else 
 		return;
 
@@ -817,83 +823,99 @@ bool Chem::Atom2DCoordinatesGenerator::layoutChildNodes(std::size_t depth)
 	return false;
 }
 
-const Chem::Atom2DCoordinatesGenerator::LGEdge* Chem::Atom2DCoordinatesGenerator::allocEdge(const Atom* spiro_ctr, 
-																							LGNode* n1, LGNode* n2)
+Chem::Atom2DCoordinatesGenerator::LGEdge* Chem::Atom2DCoordinatesGenerator::allocEdge(const Atom* spiro_ctr, LGNode* n1, LGNode* n2)
 {
-	LGEdge::SharedPointer edge_ptr(new LGEdge(molGraph, spiro_ctr, n1, n2));
+	LGEdge* edge_ptr = edgeCache.getRaw();
+
+	edge_ptr->init(molGraph, spiro_ctr, n1, n2);
 
 	edgeList.push_back(edge_ptr);
 
-	return edge_ptr.get();
+	return edge_ptr;
 }
 
-const Chem::Atom2DCoordinatesGenerator::LGEdge* Chem::Atom2DCoordinatesGenerator::allocEdge(const Bond* bond, LGNode* n1, 
-																							LGNode* n2)
+Chem::Atom2DCoordinatesGenerator::LGEdge* Chem::Atom2DCoordinatesGenerator::allocEdge(const Bond* bond, LGNode* n1, LGNode* n2)
 {
-	LGEdge::SharedPointer edge_ptr(new LGEdge(molGraph, bond, n1, n2));
+	LGEdge* edge_ptr = edgeCache.getRaw();
+
+	edge_ptr->init(molGraph, bond, n1, n2);
 
 	edgeList.push_back(edge_ptr);
 
-	return edge_ptr.get();
+	return edge_ptr;
 }
 
-const Chem::Atom2DCoordinatesGenerator::RingInfo* Chem::Atom2DCoordinatesGenerator::allocRingInfo(const Fragment& ring)
+Chem::Atom2DCoordinatesGenerator::RingInfo* Chem::Atom2DCoordinatesGenerator::allocRingInfo(const Fragment& ring)
 {
-	RingInfo::SharedPointer ring_info_ptr(new RingInfo(molGraph, ring, numAtoms, numBonds));
+	RingInfo* ring_info_ptr = ringInfoCache.getRaw();
+
+	ring_info_ptr->init(molGraph, ring, numAtoms, numBonds);
 	
 	ringList.push_back(ring_info_ptr);	
 
-	return ring_info_ptr.get();
+	return ring_info_ptr;
 }
 
 Chem::Atom2DCoordinatesGenerator::RingSysNode* 
-Chem::Atom2DCoordinatesGenerator::allocRingSysNode(const RingInfo::SharedPointer& ring_info, Math::Vector2DArray& coords)
+Chem::Atom2DCoordinatesGenerator::allocRingSysNode(const RingInfo* ring_info, Math::Vector2DArray& coords)
 {
-	RingSysNode::SharedPointer node_ptr(new RingSysNode(molGraph, ring_info, coords, procAtomList, procBondList));
+	RingSysNode* node_ptr = ringSysNodeCache.getRaw();
+
+	node_ptr->init(molGraph, ring_info, coords, procAtomList, procBondList);
 	
 	ringSysNodeList.push_back(node_ptr);
 
-	return node_ptr.get();
+	return node_ptr;
 }
 
 Chem::Atom2DCoordinatesGenerator::AtomNode* Chem::Atom2DCoordinatesGenerator::allocAtomNode(const Atom* atom, Math::Vector2DArray& coords)
 {
-	AtomNode::SharedPointer node_ptr(new AtomNode(molGraph, atom, atomPriorityTable[molGraph->getAtomIndex(*atom)],
-												  coords, procAtomList, procBondList));
+	AtomNode* node_ptr = atomNodeCache.getRaw();
+
+	node_ptr->init(molGraph, atom, atomPriorityTable[molGraph->getAtomIndex(*atom)],
+				   coords, procAtomList, procBondList);
 
 	atomNodeList.push_back(node_ptr);
 
-	return node_ptr.get();
+	return node_ptr;
 }
 
 void Chem::Atom2DCoordinatesGenerator::freeAllocEdges()
 {
 	edgeList.clear();
+	edgeCache.putAll();
 }
 
 void Chem::Atom2DCoordinatesGenerator::freeAllocRingInfos()
 {
 	ringList.clear();
+	ringInfoCache.putAll();
 }
 
 void Chem::Atom2DCoordinatesGenerator::freeAllocRingSysNodes()
 {
 	ringSysNodeList.clear();
+	ringSysNodeCache.putAll();
 }
 
 void Chem::Atom2DCoordinatesGenerator::freeAllocAtomNodes()
 {
 	atomNodeList.clear();
+	atomNodeCache.putAll();
 }
 
 // - RingInfo -
 
-Chem::Atom2DCoordinatesGenerator::RingInfo::RingInfo(const MolecularGraph* molgraph, const Fragment& ring_frag, 
-													 std::size_t num_atoms, std::size_t num_bonds): 
-	fragment(ring_frag)
+void Chem::Atom2DCoordinatesGenerator::RingInfo::init(const MolecularGraph* molgraph, const Fragment& ring_frag, 
+													  std::size_t num_atoms, std::size_t num_bonds) 
 {
+	fragment = &ring_frag;
+
 	atomMask.resize(num_atoms);
 	bondMask.resize(num_bonds);
+
+	atomMask.reset();
+	bondMask.reset();
 	
 	std::for_each(ring_frag.getAtomsBegin(), ring_frag.getAtomsEnd(), 
 				  boost::bind(&Util::BitSet::set, &atomMask, boost::bind(&MolecularGraph::getAtomIndex, molgraph, _1), true));
@@ -904,7 +926,7 @@ Chem::Atom2DCoordinatesGenerator::RingInfo::RingInfo(const MolecularGraph* molgr
 
 const Chem::Fragment& Chem::Atom2DCoordinatesGenerator::RingInfo::getFragment() const
 {
-	return fragment;
+	return *fragment;
 }
 
 const Util::BitSet& Chem::Atom2DCoordinatesGenerator::RingInfo::getAtomMask() const
@@ -929,16 +951,32 @@ void Chem::Atom2DCoordinatesGenerator::RingInfo::setPriority(double p)
 
 std::size_t Chem::Atom2DCoordinatesGenerator::RingInfo::getSize() const
 {
-	return fragment.getNumBonds();
+	return fragment->getNumBonds();
 }
 
 // - LGEdge -
 
-Chem::Atom2DCoordinatesGenerator::LGEdge::LGEdge(const MolecularGraph* molgraph, const Atom* spiro_ctr, LGNode* n1, LGNode* n2):
-	molGraph(molgraph), spiroCenter(spiro_ctr), bond(0), node1(n1), node2(n2), type(SPIRO_EDGE), hasConfig(false) {}
+void Chem::Atom2DCoordinatesGenerator::LGEdge::init(const MolecularGraph* molgraph, const Atom* spiro_ctr, LGNode* n1, LGNode* n2)
+{
+	molGraph = molgraph; 
+	spiroCenter = spiro_ctr; 
+	bond = 0; 
+	node1 = n1; 
+	node2 = n2; 
+	type = SPIRO_EDGE; 
+	hasConfig = false; 
+}
 
-Chem::Atom2DCoordinatesGenerator::LGEdge::LGEdge(const MolecularGraph* molgraph, const Bond* bnd, LGNode* n1, LGNode* n2):
-	molGraph(molgraph), spiroCenter(0), bond(bnd), node1(n1), node2(n2), type(BOND_EDGE), hasConfig(initConfigInfo()) {}	
+void Chem::Atom2DCoordinatesGenerator::LGEdge::init(const MolecularGraph* molgraph, const Bond* bnd, LGNode* n1, LGNode* n2)
+{
+	molGraph = molgraph; 
+	spiroCenter = 0; 
+	bond = bnd; 
+	node1 = n1; 
+	node2 = n2; 
+	type = BOND_EDGE; 
+	hasConfig = initConfigInfo(); 
+}	
 
 const Chem::Atom* Chem::Atom2DCoordinatesGenerator::LGEdge::getSpiroCenter() const
 {
@@ -1009,6 +1047,11 @@ bool Chem::Atom2DCoordinatesGenerator::LGEdge::initConfigInfo()
 }
 
 // - LGNode -
+
+void Chem::Atom2DCoordinatesGenerator::LGNode::init(const MolecularGraph* molgraph)
+{
+	molGraph = molgraph;
+}
 
 double Chem::Atom2DCoordinatesGenerator::LGNode::getAngularDemand(const Atom*) const
 {
@@ -1169,18 +1212,40 @@ bool Chem::Atom2DCoordinatesGenerator::LGNode::testAtomBondCollision(std::size_t
 
 // - RingSysNode -
 
-Chem::Atom2DCoordinatesGenerator::RingSysNode::RingSysNode(const MolecularGraph* molgraph, 
-														   const RingInfo::SharedPointer& ring_info_ptr, 
-														   Math::Vector2DArray& out_coords, AtomIndexList& proc_atoms, 
-														   BondList& proc_bonds): 
-	LGNode(molgraph), atomMask(ring_info_ptr->getAtomMask()), bondMask(ring_info_ptr->getBondMask()), 
-	priority(ring_info_ptr->getPriority()), procAtomList(proc_atoms), procBondList(proc_bonds),
-	outputCoords(out_coords), parentEdge(0), rsysLayoutIndex(0) 
+void Chem::Atom2DCoordinatesGenerator::RingSysNode::init(const MolecularGraph* molgraph, 
+														 const RingInfo* ring_info, 
+														 Math::Vector2DArray& out_coords, AtomIndexList& proc_atoms, 
+														 BondList& proc_bonds)
 {
-	ringList.push_back(ring_info_ptr);
-	ringLayoutQueue.push_back(ring_info_ptr.get());
+	LGNode::init(molgraph);
 
-	const Fragment& ring_frag = ring_info_ptr->getFragment();
+	atomMask = ring_info->getAtomMask(); 
+	bondMask = ring_info->getBondMask(); 
+	priority = ring_info->getPriority(); 
+	procAtomList = &proc_atoms; 
+	procBondList = &proc_bonds;
+	outputCoords = &out_coords; 
+	parentEdge = 0; 
+	rsysLayoutIndex = 0; 
+
+	ringList.clear();
+	ringLayoutQueue.clear();
+	ringSegment.clear();
+	edgeListMap.clear();
+	freeSweepMap.clear();
+	atomList.clear();
+	bondList.clear();
+	parentEdgeAtomEdges.clear();
+	childLayouts.clear();
+	childLayoutIndexTable.clear();
+	edgeAtomTable.clear();
+	layoutWeightFactors.clear();
+	layoutEnergyDerivatives.clear();
+
+	ringList.push_back(ring_info);
+	ringLayoutQueue.push_back(ring_info);
+
+	const Fragment& ring_frag = ring_info->getFragment();
 
 	std::transform(ring_frag.getBondsBegin(), ring_frag.getBondsEnd(), std::back_inserter(bondList),
 				   Internal::AddressOf<const Bond>());
@@ -1201,18 +1266,15 @@ bool Chem::Atom2DCoordinatesGenerator::RingSysNode::containsAtom(std::size_t idx
 	return atomMask.test(idx);
 }
 
-bool Chem::Atom2DCoordinatesGenerator::RingSysNode::addRing(RingInfo::SharedPointer& ring_info_ptr)
+bool Chem::Atom2DCoordinatesGenerator::RingSysNode::addRing(const RingInfo* ring_info)
 {
-	const RingInfo& ring_info = *ring_info_ptr;	
-	
 	tmpBitMask = bondMask;
-	tmpBitMask &= ring_info.getBondMask();
+	tmpBitMask &= ring_info->getBondMask();
 
 	if (!tmpBitMask.any())
 		return false;
 
-	const Fragment& ring_frag = ring_info.getFragment();
-
+	const Fragment& ring_frag = ring_info->getFragment();
 	Fragment::ConstBondIterator bonds_end = ring_frag.getBondsEnd();
 
 	for (Fragment::ConstBondIterator it = ring_frag.getBondsBegin(); it != bonds_end; ++it) {
@@ -1222,13 +1284,13 @@ bool Chem::Atom2DCoordinatesGenerator::RingSysNode::addRing(RingInfo::SharedPoin
 			bondList.push_back(bond);
 	}
 
-	bondMask |= ring_info.getBondMask();
-	atomMask |= ring_info.getAtomMask();
+	bondMask |= ring_info->getBondMask();
+	atomMask |= ring_info->getAtomMask();
 
-	ringList.push_back(ring_info_ptr);
-	ringLayoutQueue.push_back(&ring_info);
+	ringList.push_back(ring_info);
+	ringLayoutQueue.push_back(ring_info);
 
-	priority += ring_info.getPriority();
+	priority += ring_info->getPriority();
 
 	return true;
 }
@@ -1242,7 +1304,6 @@ void Chem::Atom2DCoordinatesGenerator::RingSysNode::init()
 {
 	calcCoords();
 	refineLayout();
-
 	calcFreeSweeps();
 }	
 
@@ -1305,7 +1366,7 @@ bool Chem::Atom2DCoordinatesGenerator::RingSysNode::layout(double edge_angle, co
 	assert(parentEdge);
 
 	if (parentEdge->getType() == LGEdge::BOND_EDGE)
-		calcPosition(parent_pos, DEF_BOND_LENGTH, edge_angle, outputCoords[molGraph->getAtomIndex(*parentEdgeAtom)]);
+		calcPosition(parent_pos, DEF_BOND_LENGTH, edge_angle, (*outputCoords)[molGraph->getAtomIndex(*parentEdgeAtom)]);
 
 	parentEdgeAngle = edge_angle;
 	parentPos = parent_pos;
@@ -1328,7 +1389,7 @@ bool Chem::Atom2DCoordinatesGenerator::RingSysNode::layoutChildNodes(std::size_t
 		double rsys_axis_angle = 0.5 * (free_sweep.first + free_sweep.second);
 		double rsys_rot_angle = parentEdgeAngle - rsys_axis_angle + M_PI;
 
-		for (std::size_t saved_num_colls = num_colls, saved_alist_size = procAtomList.size(), saved_blist_size = procBondList.size();
+		for (std::size_t saved_num_colls = num_colls, saved_alist_size = procAtomList->size(), saved_blist_size = procBondList->size();
 			 rsysLayoutIndex < 6; 
 			 rsysLayoutIndex++) { 
 
@@ -1367,8 +1428,8 @@ bool Chem::Atom2DCoordinatesGenerator::RingSysNode::layoutChildNodes(std::size_t
 
 				num_colls = saved_num_colls;
 				
-				procAtomList.resize(saved_alist_size);
-				procBondList.resize(saved_blist_size); 
+				procAtomList->resize(saved_alist_size);
+				procBondList->resize(saved_blist_size); 
 			}
 		}
 
@@ -1505,10 +1566,10 @@ bool Chem::Atom2DCoordinatesGenerator::RingSysNode::layout(std::size_t ctr_atom_
 	transformCoords(ctr_atom_idx, final_ctr_atom_pos, rsys_rot_angle, flip, rsys_axis_angle);
 
 	std::size_t new_num_colls = num_colls
-		+ countAtomCollisions(atomList, procAtomList, outputCoords)
-		+ countBondCollisions(bondList, procBondList, outputCoords) * 2
-		+ countAtomBondCollisions(atomList, procBondList, outputCoords)
-		+ countBondAtomCollisions(bondList, procAtomList, outputCoords);
+		+ countAtomCollisions(atomList, *procAtomList, *outputCoords)
+		+ countBondCollisions(bondList, *procBondList, *outputCoords) * 2
+		+ countAtomBondCollisions(atomList, *procBondList, *outputCoords)
+		+ countBondAtomCollisions(bondList, *procAtomList, *outputCoords);
 
 	if (new_num_colls > max_num_colls)
 		return false;
@@ -1518,8 +1579,8 @@ bool Chem::Atom2DCoordinatesGenerator::RingSysNode::layout(std::size_t ctr_atom_
 	if (parentEdge->getType() == LGEdge::BOND_EDGE) {
 		const Bond* bond = parentEdge->getBond();
 
-		new_num_colls += countBondCollisionsForBond(bond, procBondList, outputCoords) * 2
-			+ countAtomCollisionsForBond(bond, procAtomList, outputCoords);
+		new_num_colls += countBondCollisionsForBond(bond, *procBondList, *outputCoords) * 2
+			+ countAtomCollisionsForBond(bond, *procAtomList, *outputCoords);
 
 		if (new_num_colls > max_num_colls)
 			return false;
@@ -1545,16 +1606,16 @@ bool Chem::Atom2DCoordinatesGenerator::RingSysNode::layoutChildNodes(double pare
 	if (layout_idx < num_child_layouts) {
 		std::size_t atom_idx = molGraph->getAtomIndex(*parentEdgeAtom);
 
-		Math::Vector2D& atom_pos = outputCoords[atom_idx];
+		Math::Vector2D& atom_pos = (*outputCoords)[atom_idx];
 
 		const Bond* parent_edge_bond = parentEdge->getBond();	
 
 		calcPosition(parentPos, bond_length, parent_edge_angle, atom_pos);
 
-		for (std::size_t saved_num_colls = num_colls, saved_alist_size = procAtomList.size(), saved_blist_size = procBondList.size();
+		for (std::size_t saved_num_colls = num_colls, saved_alist_size = procAtomList->size(), saved_blist_size = procBondList->size();
 			 layout_idx < num_child_layouts; 
-			 num_colls = saved_num_colls, procAtomList.resize(saved_alist_size), 
-				 procBondList.resize(saved_blist_size), layout_idx++) {
+			 num_colls = saved_num_colls, procAtomList->resize(saved_alist_size), 
+				 procBondList->resize(saved_blist_size), layout_idx++) {
 
 			NodeLayoutInfoList::const_iterator layout_infos_beg = childLayouts[0][layout_idx].begin();
 			NodeLayoutInfoList::const_iterator layout_infos_end = childLayouts[0][layout_idx].end();
@@ -1571,7 +1632,7 @@ bool Chem::Atom2DCoordinatesGenerator::RingSysNode::layoutChildNodes(double pare
 			if (!layout(atom_idx, atom_pos, rsys_rot_angle, flip, rsys_axis_angle, num_colls, max_num_colls))
 				continue;
 
-			if (!parentEdge->configConstraintFulfilled(outputCoords))
+			if (!parentEdge->configConstraintFulfilled(*outputCoords))
 				continue;
 
 			for (it = layout_infos_beg; it != layout_infos_end; ++it) {
@@ -1612,14 +1673,14 @@ bool Chem::Atom2DCoordinatesGenerator::RingSysNode::layoutChildNodes(std::size_t
 
 	const Atom* atom = edgeAtomTable[depth];
 
-	const Math::Vector2D& atom_pos = outputCoords[molGraph->getAtomIndex(*atom)];
+	const Math::Vector2D& atom_pos = (*outputCoords)[molGraph->getAtomIndex(*atom)];
 
 	std::size_t num_child_layouts = childLayouts[depth].size();
 	std::size_t& layout_idx = childLayoutIndexTable[depth];
 
-	for (std::size_t saved_num_colls = num_colls, saved_alist_size = procAtomList.size(), saved_blist_size = procBondList.size();
+	for (std::size_t saved_num_colls = num_colls, saved_alist_size = procAtomList->size(), saved_blist_size = procBondList->size();
 		 layout_idx < num_child_layouts; 
-		 num_colls = saved_num_colls, procAtomList.resize(saved_alist_size), procBondList.resize(saved_blist_size), layout_idx++) {
+		 num_colls = saved_num_colls, procAtomList->resize(saved_alist_size), procBondList->resize(saved_blist_size), layout_idx++) {
 
 		NodeLayoutInfoList::const_iterator layout_infos_end = childLayouts[depth][layout_idx].end();
 		NodeLayoutInfoList::const_iterator it = childLayouts[depth][layout_idx].begin();
@@ -1748,7 +1809,7 @@ void Chem::Atom2DCoordinatesGenerator::RingSysNode::transformCoords(std::size_t 
 
 			trans_atom_pos += final_ctr_atom_pos;
 
-			outputCoords[atom_idx] = trans_atom_pos;
+			(*outputCoords)[atom_idx] = trans_atom_pos;
 		}		
 
 		rsysAxisAngle = rsys_axis_angle;
@@ -1772,7 +1833,7 @@ void Chem::Atom2DCoordinatesGenerator::RingSysNode::transformCoords(std::size_t 
 
 		trans_atom_pos += final_ctr_atom_pos;
 
-		outputCoords[atom_idx] = trans_atom_pos;
+		(*outputCoords)[atom_idx] = trans_atom_pos;
 	}		
 }
 
@@ -1794,22 +1855,22 @@ void Chem::Atom2DCoordinatesGenerator::RingSysNode::copyCoords()
 	for (AtomIndexList::const_iterator it = atomList.begin(); it != atoms_end; ++it) {
 		std::size_t atom_idx = *it;
 
-		outputCoords[atom_idx] = localCoords[atom_idx];
+		(*outputCoords)[atom_idx] = localCoords[atom_idx];
 	}
 }
 
 void Chem::Atom2DCoordinatesGenerator::RingSysNode::commitAtomAndBondList() const
 {
-	procAtomList.insert(procAtomList.end(), atomList.begin(), atomList.end());
-	procBondList.insert(procBondList.end(), bondList.begin(), bondList.end());
+	procAtomList->insert(procAtomList->end(), atomList.begin(), atomList.end());
+	procBondList->insert(procBondList->end(), bondList.begin(), bondList.end());
 
 	if (parentEdge && parentEdge->getType() == LGEdge::BOND_EDGE)
-		procBondList.push_back(parentEdge->getBond());
+		procBondList->push_back(parentEdge->getBond());
 }
 
 void Chem::Atom2DCoordinatesGenerator::RingSysNode::calcCoords()
 {
-	localCoords.resize(outputCoords.getSize());
+	localCoords.resize(outputCoords->getSize());
 
 	procAtomMask.resize(atomMask.size());
 
@@ -2038,7 +2099,7 @@ void Chem::Atom2DCoordinatesGenerator::RingSysNode::initSpringLayoutParams()
 	const double SPRING_LAYOUT_MIN_WEIGHT_FACTOR = 0.1;
 	const std::size_t REFERENCE_RING_SIZE        = 4;
 
-	std::size_t num_atoms = outputCoords.getSize();
+	std::size_t num_atoms = outputCoords->getSize();
 
 	layoutWeightFactors.assign(num_atoms, 0.0);
 	layoutEnergyDerivatives.resize(num_atoms);
@@ -2075,11 +2136,10 @@ void Chem::Atom2DCoordinatesGenerator::RingSysNode::initSpringLayoutParams()
 		layoutSpringStrengths(atom2_idx, atom1_idx) = 2.0 * SPRING_CONSTANT;
 	}
 
-	RingInfoPtrList::const_iterator rings_end = ringList.end();
+	RingInfoList::const_iterator rings_end = ringList.end();
 
-	for (RingInfoPtrList::const_iterator it = ringList.begin(); it != rings_end; ++it) {
+	for (RingInfoList::const_iterator it = ringList.begin(); it != rings_end; ++it) {
 		const RingInfo& ring_info = **it;
-
 		std::size_t ring_size = ring_info.getSize();
 
 		double sec_angle = M_PI * 2.0 / ring_size;
@@ -2201,7 +2261,7 @@ void Chem::Atom2DCoordinatesGenerator::RingSysNode::performSpringLayout()
 	double last_energy = std::numeric_limits<double>::max();
 	double last_local_energy = std::numeric_limits<double>::max();
 
-	EnergyDerivativeTable p_partials(outputCoords.getSize());
+	EnergyDerivativeTable p_partials(outputCoords->getSize());
 
     for (std::size_t num_outer_iter = 0; 
 		 num_outer_iter < MAX_NUM_OUTER_ITERATIONS && !layoutFinished(true, delta_p, last_energy, last_local_energy); 
@@ -2402,8 +2462,8 @@ void Chem::Atom2DCoordinatesGenerator::RingSysNode::calcFreeSweeps()
 {
 	std::vector<double> bond_angles;
 	
-	RingInfoPtrList::const_iterator rings_beg = ringList.begin();
-	RingInfoPtrList::const_iterator rings_end = ringList.end();
+	RingInfoList::const_iterator rings_beg = ringList.begin();
+	RingInfoList::const_iterator rings_end = ringList.end();
 
 	tmpBitMask.resize(atomMask.size());
 	tmpBitMask.reset();
@@ -2414,8 +2474,8 @@ void Chem::Atom2DCoordinatesGenerator::RingSysNode::calcFreeSweeps()
 		const Atom* atom = it->first;
 		std::size_t atom_idx = molGraph->getAtomIndex(*atom);
 
-		for (RingInfoPtrList::const_iterator r_it = rings_beg; r_it != rings_end; ++r_it) {
-			const RingInfo* ring_info = r_it->get();
+		for (RingInfoList::const_iterator r_it = rings_beg; r_it != rings_end; ++r_it) {
+			const RingInfo* ring_info = *r_it;
 			const Util::BitSet& ring_atom_mask = ring_info->getAtomMask();
 
 			if (!ring_atom_mask.test(atom_idx))
@@ -2513,14 +2573,29 @@ double Chem::Atom2DCoordinatesGenerator::RingSysNode::calcCongestionFactor(const
 
 // - AtomNode -
 
-Chem::Atom2DCoordinatesGenerator::AtomNode::AtomNode(const MolecularGraph* molgraph, const Atom* atom, double p, 
-													 Math::Vector2DArray& out_coords, AtomIndexList& proc_atoms,
-													 BondList& proc_bonds): 
-	LGNode(molgraph), atom(atom), atomIndex(molgraph->getAtomIndex(*atom)), 
-	isHydrogen(Chem::getType(*atom) == AtomType::H), 
-	type(atom->getNumBonds() > 1 ? CHAIN_ATOM : END_ATOM), priority(p), chainID(std::numeric_limits<std::size_t>::max()),
-	procAtomList(proc_atoms), procBondList(proc_bonds), outputCoords(out_coords), chainDirection(UP), parentEdgeAngle(0.0),
-	parentEdge(0), childLayoutIndex(0) {}
+void Chem::Atom2DCoordinatesGenerator::AtomNode::init(const MolecularGraph* molgraph, const Atom* atom, double p, 
+													  Math::Vector2DArray& out_coords, AtomIndexList& proc_atoms,
+													  BondList& proc_bonds)
+{
+	LGNode::init(molgraph);
+
+	this->atom = atom;
+	atomIndex = molgraph->getAtomIndex(*atom);
+	isHydrogen = (Chem::getType(*atom) == AtomType::H);
+	type = (atom->getNumBonds() > 1 ? CHAIN_ATOM : END_ATOM);
+	priority = p;
+	chainID = std::numeric_limits<std::size_t>::max();
+	procAtomList = &proc_atoms;
+	procBondList = &proc_bonds;
+	outputCoords = &out_coords;
+	chainDirection = UP;
+	parentEdgeAngle = 0.0;
+	parentEdge = 0;
+	childLayoutIndex = 0;
+
+	edges.clear();
+	childLayouts.clear();
+}
 
 void Chem::Atom2DCoordinatesGenerator::AtomNode::addEdge(const Atom*, const LGEdge* edge)
 {
@@ -2583,9 +2658,9 @@ void Chem::Atom2DCoordinatesGenerator::AtomNode::setChainID(std::size_t id)
 
 void Chem::Atom2DCoordinatesGenerator::AtomNode::layout()
 {
-	outputCoords[atomIndex].clear();
+	(*outputCoords)[atomIndex].clear();
 
-	procAtomList.push_back(atomIndex);
+	procAtomList->push_back(atomIndex);
 }
 
 bool Chem::Atom2DCoordinatesGenerator::AtomNode::layout(double edge_angle, const Math::Vector2D& parent_pos, std::size_t& num_colls,
@@ -2613,13 +2688,13 @@ bool Chem::Atom2DCoordinatesGenerator::AtomNode::layout(double edge_angle, const
 	if (opt_params.numCollisions > max_num_colls)
 		return false;
 
-	procBondList.push_back(parentEdge->getBond());
-	procAtomList.push_back(atomIndex);
+	procBondList->push_back(parentEdge->getBond());
+	procAtomList->push_back(atomIndex);
 
 	parentEdgeAngle = opt_params.edgeAngle;
 	num_colls = opt_params.numCollisions;
 
-	calcPosition(parent_pos, opt_params.bondLength, opt_params.edgeAngle, outputCoords[atomIndex]);
+	calcPosition(parent_pos, opt_params.bondLength, opt_params.edgeAngle, (*outputCoords)[atomIndex]);
 
 	return true;
 }
@@ -2631,11 +2706,11 @@ bool Chem::Atom2DCoordinatesGenerator::AtomNode::layoutChildNodes(std::size_t& n
 
 	std::size_t num_child_layouts = childLayouts.size();
 
-	const Math::Vector2D& atom_pos = outputCoords[atomIndex];
+	const Math::Vector2D& atom_pos = (*outputCoords)[atomIndex];
 
-	for (std::size_t saved_num_colls = num_colls, saved_alist_size = procAtomList.size(), saved_blist_size = procBondList.size();
+	for (std::size_t saved_num_colls = num_colls, saved_alist_size = procAtomList->size(), saved_blist_size = procBondList->size();
 		 childLayoutIndex < num_child_layouts; 
-		 num_colls = saved_num_colls, procAtomList.resize(saved_alist_size), procBondList.resize(saved_blist_size)) {
+		 num_colls = saved_num_colls, procAtomList->resize(saved_alist_size), procBondList->resize(saved_blist_size)) {
 
 		const NodeLayoutInfoList& layout_infos = childLayouts[childLayoutIndex++];
 
@@ -2652,7 +2727,7 @@ bool Chem::Atom2DCoordinatesGenerator::AtomNode::layoutChildNodes(std::size_t& n
 				break;
 		}
 
-		if (it == layout_infos_end && (!parentEdge || parentEdge->configConstraintFulfilled(outputCoords)))
+		if (it == layout_infos_end && (!parentEdge || parentEdge->configConstraintFulfilled(*outputCoords)))
 			return true;
 	}
 
@@ -2685,14 +2760,14 @@ void Chem::Atom2DCoordinatesGenerator::AtomNode::layout(double edge_angle, doubl
 	if (opt_params.numCollisions <= num_colls)
 		return;
 
-	calcPosition(parent_pos, bond_length, edge_angle, outputCoords[atomIndex]);
+	calcPosition(parent_pos, bond_length, edge_angle, (*outputCoords)[atomIndex]);
 
 	const Bond* parent_edge_bond = parentEdge->getBond();
 
-	num_colls += countAtomCollisionsForAtom(atomIndex, procAtomList, outputCoords)
-		+ countBondCollisionsForBond(parent_edge_bond, procBondList, outputCoords) * 2
-		+ countBondCollisionsForAtom(atomIndex, procBondList, outputCoords)
-		+ countAtomCollisionsForBond(parent_edge_bond, procAtomList, outputCoords);
+	num_colls += countAtomCollisionsForAtom(atomIndex, *procAtomList, *outputCoords)
+		+ countBondCollisionsForBond(parent_edge_bond, *procBondList, *outputCoords) * 2
+		+ countBondCollisionsForAtom(atomIndex, *procBondList, *outputCoords)
+		+ countAtomCollisionsForBond(parent_edge_bond, *procAtomList, *outputCoords);
 
 	if (num_colls >= opt_params.numCollisions) 
 		return;

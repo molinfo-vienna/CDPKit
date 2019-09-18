@@ -89,12 +89,22 @@ namespace
 	const char BOND_IS_REACTION_CENTER_SYMBOL     = '#';
 	const char BOND_NOT_A_REACTION_CENTER_SYMBOL  = 'X';
 	const char DEFAULT_ATOM_SYMBOL                = '?';
+
+	const std::size_t MAX_LINE_CACHE_SIZE          = 10000;
+	const std::size_t MAX_POLYLINE_CACHE_SIZE      = 1000;
+	const std::size_t MAX_POLYGON_CACHE_SIZE       = 1000;
+	const std::size_t MAX_LINE_SEG_LIST_CACHE_SIZE = 1000;
+	const std::size_t MAX_POINT_LIST_CACHE_SIZE    = 1000;
+	const std::size_t MAX_TEXT_LABEL_CACHE_SIZE    = 8000;
 }
 
 
 Vis::StructureView2D::StructureView2D(const Chem::MolecularGraph* molgraph): 
 	parameters(new StructureView2DParameters(*this)), fontMetrics(0), fontMetricsChanged(true), 
-	customGraphicsChanged(true), reactionContext(false), hasAtomCoords(false)
+	customGraphicsChanged(true), reactionContext(false), hasAtomCoords(false),
+	lineCache(MAX_LINE_CACHE_SIZE), polylineCache(MAX_POLYLINE_CACHE_SIZE),
+	polygonCache(MAX_POLYGON_CACHE_SIZE), lineSegListCache(MAX_LINE_SEG_LIST_CACHE_SIZE), 
+	pointListCache(MAX_POINT_LIST_CACHE_SIZE), textLabelCache(MAX_TEXT_LABEL_CACHE_SIZE)
 {
 	setStructure(molgraph);
 }
@@ -102,7 +112,10 @@ Vis::StructureView2D::StructureView2D(const Chem::MolecularGraph* molgraph):
 Vis::StructureView2D::StructureView2D(bool): 
 	parameters(new StructureView2DParameters(*this)), origStructure(0), fontMetrics(0), 
 	structureChanged(true), fontMetricsChanged(true), customGraphicsChanged(true), reactionContext(true), 
-	hasAtomCoords(false) {}
+	hasAtomCoords(false), lineCache(MAX_LINE_CACHE_SIZE), polylineCache(MAX_POLYLINE_CACHE_SIZE),
+	polygonCache(MAX_POLYGON_CACHE_SIZE), lineSegListCache(MAX_LINE_SEG_LIST_CACHE_SIZE), 
+	pointListCache(MAX_POINT_LIST_CACHE_SIZE), textLabelCache(MAX_TEXT_LABEL_CACHE_SIZE) 
+{}
 
 Vis::StructureView2D::~StructureView2D() {}
 
@@ -3119,31 +3132,19 @@ double Vis::StructureView2D::calcOutputSize(double size, const SizeSpecification
 
 void Vis::StructureView2D::freeGraphicsPrimitives()
 {
-	freeLinePrimitiveIdx = 0;
-	freePolylinePrimitiveIdx = 0;
-	freePolygonPrimitiveIdx = 0;
-	freeLineSegListPrimitiveIdx = 0;
-	freePointListPrimitiveIdx = 0;
-	freeTextLabelPrimitiveIdx = 0;
+	lineCache.putAll();
+	polylineCache.putAll();
+	polygonCache.putAll();
+	lineSegListCache.putAll();
+	pointListCache.putAll();
+	textLabelCache.putAll();
 
 	drawList.clear();
 }
 
 Vis::LinePrimitive2D* Vis::StructureView2D::allocLinePrimitive(bool set_pen)
 {
-	LinePrimitive2D* prim;
-
-	if (freeLinePrimitiveIdx < allocLinePrimitives.size()) 
-		prim = allocLinePrimitives[freeLinePrimitiveIdx++].get();
-
-	else {
-		LinePrimitive2D::SharedPointer new_prim_ptr(new LinePrimitive2D());
-
-		allocLinePrimitives.push_back(new_prim_ptr);
-		freeLinePrimitiveIdx++;
-
-		prim = new_prim_ptr.get();
-	}
+	LinePrimitive2D* prim = lineCache.getRaw();
 
 	if (set_pen)
 		prim->setPen(activePen);
@@ -3153,21 +3154,9 @@ Vis::LinePrimitive2D* Vis::StructureView2D::allocLinePrimitive(bool set_pen)
 
 Vis::PolylinePrimitive2D* Vis::StructureView2D::allocPolylinePrimitive()
 {
-	PolylinePrimitive2D* prim;
+	PolylinePrimitive2D* prim = polylineCache.getRaw();
 
-	if (freePolylinePrimitiveIdx < allocPolylinePrimitives.size()) {
-		prim = allocPolylinePrimitives[freePolylinePrimitiveIdx++].get();
-		prim->clear();
-
-	} else {
-		PolylinePrimitive2D::SharedPointer new_prim_ptr(new PolylinePrimitive2D());
-
-		allocPolylinePrimitives.push_back(new_prim_ptr);
-		freePolylinePrimitiveIdx++;
-
-		prim = new_prim_ptr.get();
-	}
-
+	prim->clear();
 	prim->setPen(activePen);
 
 	return prim;
@@ -3175,21 +3164,9 @@ Vis::PolylinePrimitive2D* Vis::StructureView2D::allocPolylinePrimitive()
 
 Vis::PolygonPrimitive2D* Vis::StructureView2D::allocPolygonPrimitive()
 {
-	PolygonPrimitive2D* prim;
+	PolygonPrimitive2D* prim = polygonCache.getRaw();
 
-	if (freePolygonPrimitiveIdx < allocPolygonPrimitives.size()) {
-		prim = allocPolygonPrimitives[freePolygonPrimitiveIdx++].get();
-		prim->clear();
-
-	} else {
-		PolygonPrimitive2D::SharedPointer new_prim_ptr(new PolygonPrimitive2D());
-
-		allocPolygonPrimitives.push_back(new_prim_ptr);
-		freePolygonPrimitiveIdx++;
-
-		prim = new_prim_ptr.get();
-	}
-
+	prim->clear();
 	prim->setPen(activePen);
 	prim->setBrush(activePen.getColor());
 
@@ -3198,21 +3175,9 @@ Vis::PolygonPrimitive2D* Vis::StructureView2D::allocPolygonPrimitive()
 
 Vis::LineSegmentListPrimitive2D* Vis::StructureView2D::allocLineSegListPrimitive()
 {
-	LineSegmentListPrimitive2D* prim;
+	LineSegmentListPrimitive2D* prim = lineSegListCache.getRaw();
 
-	if (freeLineSegListPrimitiveIdx < allocLineSegListPrimitives.size()) {
-		prim = allocLineSegListPrimitives[freeLineSegListPrimitiveIdx++].get();
-		prim->clear();
-
-	} else {
-		LineSegmentListPrimitive2D::SharedPointer new_prim_ptr(new LineSegmentListPrimitive2D());
-
-		allocLineSegListPrimitives.push_back(new_prim_ptr);
-		freeLineSegListPrimitiveIdx++;
-
-		prim = new_prim_ptr.get();
-	}
-
+	prim->clear();
 	prim->setPen(activePen);
 
 	return prim;
@@ -3220,36 +3185,16 @@ Vis::LineSegmentListPrimitive2D* Vis::StructureView2D::allocLineSegListPrimitive
 
 Vis::PointListPrimitive2D* Vis::StructureView2D::allocPointListPrimitive()
 {
-	if (freePointListPrimitiveIdx < allocPointListPrimitives.size()) {
-		PointListPrimitive2D* prim = allocPointListPrimitives[freePointListPrimitiveIdx++].get();
-		prim->clear();
+	PointListPrimitive2D* prim = pointListCache.getRaw();
 
-		return prim;
-	}
+	prim->clear();
 
-	PointListPrimitive2D::SharedPointer new_prim_ptr(new PointListPrimitive2D());
-
-	allocPointListPrimitives.push_back(new_prim_ptr);
-	freePointListPrimitiveIdx++;
-
-	return new_prim_ptr.get();	
+	return prim;
 }
 
 Vis::TextLabelPrimitive2D* Vis::StructureView2D::allocTextLabelPrimitive()
 {
-	TextLabelPrimitive2D* prim;
-
-	if (freeTextLabelPrimitiveIdx < allocTextLabelPrimitives.size()) 
-		prim = allocTextLabelPrimitives[freeTextLabelPrimitiveIdx++].get();
-
-	else {
-		TextLabelPrimitive2D::SharedPointer new_prim_ptr(new TextLabelPrimitive2D());
-
-		allocTextLabelPrimitives.push_back(new_prim_ptr);
-		freeTextLabelPrimitiveIdx++;
-
-		prim = new_prim_ptr.get();
-	}
+	TextLabelPrimitive2D* prim = textLabelCache.getRaw();
 
 	prim->setPen(activePen.getColor());
 
@@ -3258,7 +3203,6 @@ Vis::TextLabelPrimitive2D* Vis::StructureView2D::allocTextLabelPrimitive()
 	
 void Vis::StructureView2D::addCustomGraphics(CustomGraphicsData* gfx_data, bool front)
 {
-	
 	if (front)
 		frontCustomGraphics.push_back(CustomGraphicsDataPtr(gfx_data));
 	else

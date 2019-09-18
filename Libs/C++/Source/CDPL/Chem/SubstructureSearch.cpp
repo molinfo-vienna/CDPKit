@@ -38,6 +38,12 @@
 #include "CDPL/Base/Exceptions.hpp"
 
 
+namespace
+{
+	
+	const std::size_t MAX_MAPPING_CACHE_SIZE = 1000;
+}
+
 using namespace CDPL;
 
 
@@ -46,16 +52,20 @@ Chem::SubstructureSearch::SubstructureSearch():
 	atomMatchExprFunc(static_cast<const AtomMatchExprPtr& (*)(const Atom&)>(&getMatchExpression)), 
 	bondMatchExprFunc(static_cast<const BondMatchExprPtr& (*)(const Bond&)>(&getMatchExpression)), 
 	molGraphMatchExprFunc(static_cast<const MolGraphMatchExprPtr& (*)(const MolecularGraph&)>(&getMatchExpression)),
-	queryChanged(true), initQueryData(true), uniqueMatches(false), 
+	mappingCache(MAX_MAPPING_CACHE_SIZE), queryChanged(true), initQueryData(true), uniqueMatches(false), 
 	numMappedAtoms(0), maxNumMappings(0) 
-{}
+{
+	mappingCache.setCleanupFunction(&AtomBondMapping::clear);
+}
 
 Chem::SubstructureSearch::SubstructureSearch(const MolecularGraph& query): 
 	atomMatchExprFunc(static_cast<const AtomMatchExprPtr& (*)(const Atom&)>(&getMatchExpression)), 
 	bondMatchExprFunc(static_cast<const BondMatchExprPtr& (*)(const Bond&)>(&getMatchExpression)), 
 	molGraphMatchExprFunc(static_cast<const MolGraphMatchExprPtr& (*)(const MolecularGraph&)>(&getMatchExpression)),
-	uniqueMatches(false), numMappedAtoms(0), maxNumMappings(0)
+	mappingCache(MAX_MAPPING_CACHE_SIZE), uniqueMatches(false), numMappedAtoms(0), maxNumMappings(0)
 {
+	mappingCache.setCleanupFunction(&AtomBondMapping::clear);
+
 	setQuery(query);
 }
 
@@ -674,31 +684,21 @@ bool Chem::SubstructureSearch::foundMappingUnique()
 
 void Chem::SubstructureSearch::freeAtomBondMappings()
 {
-	freeMappingIdx = 0;
-
+	mappingCache.putAll();
 	foundMappings.clear();
 
 	if (uniqueMatches)
 		uniqueMappings.clear();
 }
 
+void Chem::SubstructureSearch::freeAtomBondMapping()
+{
+	mappingCache.put();
+}
+
 Chem::AtomBondMapping* Chem::SubstructureSearch::createAtomBondMapping()
 {
-	AtomBondMapping* mapping;
-
-	if (freeMappingIdx == allocMappings.size()) {
-		AtomBondMapping::SharedPointer mapping_ptr(new AtomBondMapping());
-		allocMappings.push_back(mapping_ptr);
-
-		mapping = mapping_ptr.get();
-		freeMappingIdx++;
-
-	} else {
-		mapping = allocMappings[freeMappingIdx++].get();
-
-		mapping->clear();
-	}
-
+	AtomBondMapping* mapping = mappingCache.getRaw();
 	AtomMapping& atom_mapping = mapping->getAtomMapping();
 	BondMapping& bond_mapping = mapping->getBondMapping();
 
@@ -721,11 +721,6 @@ Chem::AtomBondMapping* Chem::SubstructureSearch::createAtomBondMapping()
 	}
 
 	return mapping;
-}
-
-void Chem::SubstructureSearch::freeAtomBondMapping()
-{
-	freeMappingIdx--;
 }
 
 

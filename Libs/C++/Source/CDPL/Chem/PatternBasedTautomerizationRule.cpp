@@ -39,17 +39,24 @@
 #include "CDPL/Chem/Entity3DFunctions.hpp"
 
 
+namespace
+{
+
+	const std::size_t MAX_BITSET_CACHE_SIZE = 1000;
+}
+
+
 using namespace CDPL;
 
 
 Chem::PatternBasedTautomerizationRule::	PatternBasedTautomerizationRule(unsigned int rule_id): 
-	ruleID(rule_id), parentMolGraph(0), currPatternIdx(0), currMappingIdx(0) 
+	ruleID(rule_id), parentMolGraph(0), currPatternIdx(0), currMappingIdx(0), bitSetCache(MAX_BITSET_CACHE_SIZE)
 {}
 
 Chem::PatternBasedTautomerizationRule::PatternBasedTautomerizationRule(const PatternBasedTautomerizationRule& rule):
 	ruleID(rule.ruleID), structPatterns(rule.structPatterns), excludePatterns(rule.excludePatterns), 
 	patternBondChangeLists(rule.patternBondChangeLists), parentMolGraph(0), currPatternIdx(rule.structPatterns.size()),
-	currMappingIdx(0)
+	currMappingIdx(0), bitSetCache(MAX_BITSET_CACHE_SIZE)
 {
 	for (StructPatternList::const_iterator it = structPatterns.begin(), end = structPatterns.end(); it != end; ++it)
 		patternSubSearchList.push_back(SubstructureSearch::SharedPointer(new SubstructureSearch(**it)));
@@ -123,7 +130,7 @@ bool Chem::PatternBasedTautomerizationRule::setup(MolecularGraph& parent_molgrap
 	if (excludePatterns.empty()) 
 		return true;
 
-	freeBitSetIdx = 0;
+	bitSetCache.putAll();
 
 	std::size_t num_parent_bonds = parent_molgraph.getNumBonds();
 
@@ -137,7 +144,7 @@ bool Chem::PatternBasedTautomerizationRule::setup(MolecularGraph& parent_molgrap
 			continue;
 
 		for (SubstructureSearch::ConstMappingIterator m_it = subsearch->getMappingsBegin(), m_end = subsearch->getMappingsEnd(); m_it != m_end; ++m_it) {
-			Util::BitSet* bond_mask = allocBitSet();
+			Util::BitSet* bond_mask = bitSetCache.getRaw();
 
 			bond_mask->resize(num_parent_bonds);
 
@@ -276,18 +283,4 @@ void Chem::PatternBasedTautomerizationRule::createMatchedBondMask(const Chem::Bo
 
 	for (BondMapping::ConstEntryIterator it = mapping.getEntriesBegin(), end = mapping.getEntriesEnd(); it != end; ++it)
 		bond_mask.set(parentMolGraph->getBondIndex(*it->second));
-}
-
-Util::BitSet* Chem::PatternBasedTautomerizationRule::allocBitSet()
-{
-	if (freeBitSetIdx == allocBitSets.size()) {
-		BitSetPtr bset_ptr(new Util::BitSet());
-		allocBitSets.push_back(bset_ptr);
-		
-		freeBitSetIdx++;
-
-		return bset_ptr.get();
-	}
-
-	return allocBitSets[freeBitSetIdx++].get();
 }

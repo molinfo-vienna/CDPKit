@@ -51,12 +51,25 @@
 #include "ReactionView2DParameters.hpp"
 
 
+namespace
+{
+
+	const std::size_t MAX_COMP_VIEW_CACHE_SIZE     = 100;
+	const std::size_t MAX_POLYGON_CACHE_SIZE       = 100;
+	const std::size_t MAX_LINE_SEG_LIST_CACHE_SIZE = 100;
+}
+
+
 using namespace CDPL;
 
 
 Vis::ReactionView2D::ReactionView2D(const Chem::Reaction* rxn): 
-	parameters(new ReactionView2DParameters(*this)), fontMetrics(0), fontMetricsChanged(true)
+	parameters(new ReactionView2DParameters(*this)), fontMetrics(0), fontMetricsChanged(true),
+	compViewCache(MAX_COMP_VIEW_CACHE_SIZE), polygonCache(MAX_POLYGON_CACHE_SIZE), 
+	lineSegListCache(MAX_LINE_SEG_LIST_CACHE_SIZE)
 {
+	compViewCache.setCleanupFunction(boost::bind(&StructureView2D::setParent, _1, 
+												 static_cast<const CDPL::Base::ControlParameterContainer*>(0)));
 	setReaction(rxn);
 }
 
@@ -1108,41 +1121,24 @@ void Vis::ReactionView2D::initPlusSignVisibility()
 
 void Vis::ReactionView2D::freeComponentViews()
 {
-	ComponentViewList::const_iterator views_end = componentViews.end();
-
-	for (ComponentViewList::const_iterator it = componentViews.begin(); it != views_end; ++it)
-		(*it)->setParent(0);
-
-	freeComponentViewIdx = 0;
+	compViewCache.putAll();
 }
 
 void Vis::ReactionView2D::freeGraphicsPrimitives()
 {
-	freePolygonPrimitiveIdx = 0;
-	freeLineSegListPrimitiveIdx = 0;
+	polygonCache.putAll();
+	lineSegListCache.putAll();
 
 	drawList.clear();
 }
 
 Vis::StructureView2D* Vis::ReactionView2D::allocComponentView(const Chem::Molecule& comp)
 {
-	StructureView2D* view;
+	StructureView2D* view = compViewCache.getRaw();
 
-	if (freeComponentViewIdx < allocComponentViews.size()) 
-		view = allocComponentViews[freeComponentViewIdx++].get();
-
-	else {
-		StructureView2D::SharedPointer new_view_ptr(new StructureView2D(true));
-
-		allocComponentViews.push_back(new_view_ptr);
-		freeComponentViewIdx++;
-
-		view = new_view_ptr.get();
-
-		setAlignmentParameter(*view, Alignment::CENTER);
-		setSizeAdjustmentParameter(*view, SizeAdjustment::BEST_FIT);
-	}
-
+	setAlignmentParameter(*view, Alignment::CENTER);
+	setSizeAdjustmentParameter(*view, SizeAdjustment::BEST_FIT);
+	
 	view->setParent(this);
 	view->setFontMetrics(fontMetrics);
 	view->setStructure(&comp);
@@ -1152,40 +1148,18 @@ Vis::StructureView2D* Vis::ReactionView2D::allocComponentView(const Chem::Molecu
 
 Vis::PolygonPrimitive2D* Vis::ReactionView2D::allocPolygonPrimitive()
 {
-	PolygonPrimitive2D* prim;
+	PolygonPrimitive2D* prim = polygonCache.getRaw();
 
-	if (freePolygonPrimitiveIdx < allocPolygonPrimitives.size()) {
-		prim = allocPolygonPrimitives[freePolygonPrimitiveIdx++].get();
-		prim->clear();
-
-	} else {
-		PolygonPrimitive2D::SharedPointer new_prim_ptr(new PolygonPrimitive2D());
-
-		allocPolygonPrimitives.push_back(new_prim_ptr);
-		freePolygonPrimitiveIdx++;
-
-		prim = new_prim_ptr.get();
-	}
+	prim->clear();
 
 	return prim;
 }
 
 Vis::LineSegmentListPrimitive2D* Vis::ReactionView2D::allocLineSegListPrimitive()
 {
-	LineSegmentListPrimitive2D* prim;
+	LineSegmentListPrimitive2D* prim = lineSegListCache.getRaw();
 
-	if (freeLineSegListPrimitiveIdx < allocLineSegListPrimitives.size()) {
-		prim = allocLineSegListPrimitives[freeLineSegListPrimitiveIdx++].get();
-		prim->clear();
-
-	} else {
-		LineSegmentListPrimitive2D::SharedPointer new_prim_ptr(new LineSegmentListPrimitive2D());
-
-		allocLineSegListPrimitives.push_back(new_prim_ptr);
-		freeLineSegListPrimitiveIdx++;
-
-		prim = new_prim_ptr.get();
-	}
+	prim->clear();
 
 	return prim;
 }

@@ -33,7 +33,7 @@
 using namespace CDPL;
 
 
-Pharm::BasicFeature::BasicFeature(BasicPharmacophore& pharm): pharm(&pharm) {}
+Pharm::BasicFeature::BasicFeature(BasicPharmacophore* pharm): pharm(pharm) {}
  
 Pharm::BasicFeature::~BasicFeature() {}
 

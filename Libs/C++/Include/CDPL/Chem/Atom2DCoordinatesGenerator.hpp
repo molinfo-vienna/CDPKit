@@ -38,12 +38,11 @@
 #include <map>
 #include <utility>
 
-#include <boost/shared_ptr.hpp>
-
 #include "CDPL/Chem/APIPrefix.hpp"
 #include "CDPL/Math/VectorArray.hpp"
 #include "CDPL/Math/Matrix.hpp"
 #include "CDPL/Util/BitSet.hpp"
+#include "CDPL/Util/ObjectStack.hpp"
 
 
 namespace CDPL 
@@ -72,7 +71,7 @@ namespace CDPL
 			/**
 			 * \brief Constructs the \c %Atom2DCoordinatesGenerator instance.
 			 */
-			Atom2DCoordinatesGenerator() {}
+			Atom2DCoordinatesGenerator();
 
 			/**
 			 * \brief Constructs the \c %Atom2DCoordinatesGenerator instance and generates 2D-coordinates for
@@ -100,9 +99,7 @@ namespace CDPL
 			{
 
 			public:
-				typedef boost::shared_ptr<RingInfo> SharedPointer;
-
-				RingInfo(const MolecularGraph*, const Fragment&, std::size_t, std::size_t);
+				void init(const MolecularGraph*, const Fragment&, std::size_t, std::size_t);
 
 				const Fragment& getFragment() const;
 
@@ -115,7 +112,7 @@ namespace CDPL
 				std::size_t getSize() const;
 
 			private:
-				const Fragment& fragment;
+				const Fragment* fragment;
 				Util::BitSet    atomMask;
 				Util::BitSet    bondMask;
 				double          priority;
@@ -134,10 +131,8 @@ namespace CDPL
 					SPIRO_EDGE
 				};
 
-				typedef boost::shared_ptr<LGEdge> SharedPointer;
-
-				LGEdge(const MolecularGraph*, const Atom*, LGNode*, LGNode*);
-				LGEdge(const MolecularGraph*, const Bond*, LGNode*, LGNode*);
+				void init(const MolecularGraph*, const Atom*, LGNode*, LGNode*);
+				void init(const MolecularGraph*, const Bond*, LGNode*, LGNode*);
 
 				const Atom* getSpiroCenter() const;
 				const Bond* getBond() const;
@@ -186,11 +181,9 @@ namespace CDPL
 					DOWN
 				};
 
-				typedef boost::shared_ptr<LGNode> SharedPointer;
-
-				LGNode(const MolecularGraph* molgraph): molGraph(molgraph) {}
-
 				virtual ~LGNode() {}
+
+				void init(const MolecularGraph* molgraph);
 
 				virtual void addEdge(const Atom*, const LGEdge*) = 0;
 
@@ -252,24 +245,22 @@ namespace CDPL
 				const MolecularGraph* molGraph;
 			};
 
-			typedef std::list<RingInfo::SharedPointer> RingInfoPtrList;
+			typedef std::list<RingInfo*> RingInfoList;
 			typedef std::vector<const LGEdge*> EdgeList;
 
 			class RingSysNode : public LGNode
 			{
 
 			public:
-				typedef boost::shared_ptr<RingSysNode> SharedPointer;
-
-				RingSysNode(const MolecularGraph*, const RingInfo::SharedPointer&, Math::Vector2DArray&, 
-							AtomIndexList&, BondList&);
+				void init(const MolecularGraph*, const RingInfo*, Math::Vector2DArray&, 
+						  AtomIndexList&, BondList&);
 
 				const Util::BitSet& getAtomMask() const;
 				const Util::BitSet& getBondMask() const;
 
 				bool containsAtom(std::size_t) const;
 
-				bool addRing(RingInfo::SharedPointer&);
+				bool addRing(const RingInfo*);
 
 				void addEdge(const Atom*, const LGEdge*);
 
@@ -333,7 +324,7 @@ namespace CDPL
 				double calcCongestionFactor(const Math::Vector2D&) const;
 				double calcCongestionFactor(const Math::Vector2D&, const Util::BitSet&) const;
 
-				typedef std::vector<RingInfo::SharedPointer> RingInfoPtrList;
+				typedef std::vector<const RingInfo*> RingInfoList;
 				typedef std::list<const RingInfo*> RingLayoutQueue;
 				typedef std::map<const Atom*, EdgeList> EdgeListMap;
 				typedef std::map<const Atom*, AngleRange> AngleRangeMap;
@@ -349,17 +340,17 @@ namespace CDPL
 				Util::BitSet             procAtomMask;
 				Util::BitSet             tmpBitMask;
 				double                   priority;
-				RingInfoPtrList          ringList;
+				RingInfoList             ringList;
 				RingLayoutQueue          ringLayoutQueue;
 				RingSegment              ringSegment;	
 				EdgeListMap              edgeListMap;
 				AngleRangeMap            freeSweepMap;
 				AtomIndexList            atomList;		
 				BondList                 bondList;
-				AtomIndexList&           procAtomList;
-				BondList&                procBondList;
+				AtomIndexList*           procAtomList;
+				BondList*                procBondList;
 				Math::Vector2DArray      localCoords;
-				Math::Vector2DArray&     outputCoords;
+				Math::Vector2DArray*     outputCoords;
 				const LGEdge*            parentEdge;
 				const Atom*              parentEdgeAtom;
 				EdgeList                 parentEdgeAtomEdges;
@@ -382,9 +373,7 @@ namespace CDPL
 			{
 
 			public:
-				typedef boost::shared_ptr<AtomNode> SharedPointer;
-
-				AtomNode(const MolecularGraph*, const Atom*, double, Math::Vector2DArray&, AtomIndexList&, BondList&);
+				void init(const MolecularGraph*, const Atom*, double, Math::Vector2DArray&, AtomIndexList&, BondList&);
 
 				void addEdge(const Atom*, const LGEdge*);
 
@@ -447,9 +436,9 @@ namespace CDPL
 				Type                    type;
 				double                  priority;
 				std::size_t             chainID;
-				AtomIndexList&          procAtomList;
-				BondList&               procBondList;
-				Math::Vector2DArray&    outputCoords;
+				AtomIndexList*          procAtomList;
+				BondList*               procBondList;
+				Math::Vector2DArray*    outputCoords;
 				Direction               chainDirection;
 				double                  parentEdgeAngle;
 				EdgeList                edges;
@@ -494,19 +483,17 @@ namespace CDPL
 			void findLongestNodePath(AtomNode*, const AtomNode*);
 
 			void createBFSNodeList();
-
 			void initNodes() const;
 
 			void layoutNodes();
-
 			bool layoutChildNodes(std::size_t);
 
-			const LGEdge* allocEdge(const Atom*, LGNode*, LGNode*);
-			const LGEdge* allocEdge(const Bond*, LGNode*, LGNode*);
+			LGEdge* allocEdge(const Atom*, LGNode*, LGNode*);
+			LGEdge* allocEdge(const Bond*, LGNode*, LGNode*);
 
-			const RingInfo* allocRingInfo(const Fragment&);
+			RingInfo* allocRingInfo(const Fragment&);
+			RingSysNode* allocRingSysNode(const RingInfo*, Math::Vector2DArray&);
 
-			RingSysNode* allocRingSysNode(const RingInfo::SharedPointer&, Math::Vector2DArray&);
 			AtomNode* allocAtomNode(const Atom*, Math::Vector2DArray&);
 
   			void freeAllocEdges();
@@ -514,21 +501,26 @@ namespace CDPL
   			void freeAllocRingSysNodes();
   			void freeAllocAtomNodes();
 
-			typedef std::vector<RingSysNode::SharedPointer> RingSysNodePtrList;
-			typedef std::vector<AtomNode::SharedPointer> AtomNodePtrList;
-			typedef std::vector<LGEdge::SharedPointer> EdgePtrList;
-			typedef std::vector<AtomNode*> AtomNodeTable;
 			typedef std::vector<AtomNode*> AtomNodeList;
 			typedef std::vector<std::size_t> AtomPriorityTable;
+			typedef Util::ObjectStack<RingInfo> RingInfoCache;
+			typedef Util::ObjectStack<RingSysNode> RingSysNodeCache;
+			typedef Util::ObjectStack<AtomNode> AtomNodeCache;
+			typedef Util::ObjectStack<LGEdge> EdgeCache;
+			typedef std::vector<RingSysNode*> RingSysNodeList;
 
 			const MolecularGraph* molGraph;
-			RingInfoPtrList       ringList;
-			RingSysNodePtrList    ringSysNodeList;
-			AtomNodePtrList       atomNodeList;
-			AtomNodeTable         atomNodeTable;
-			EdgePtrList           edgeList;
-			RingInfoPtrList       tmpRingList;
+			RingInfoCache         ringInfoCache;
+			RingSysNodeCache      ringSysNodeCache;
+			AtomNodeCache         atomNodeCache;
+			EdgeCache             edgeCache;
+			EdgeList              edgeList;
+			RingInfoList          ringList;
+			RingSysNodeList       ringSysNodeList;
+			AtomNodeList          atomNodeList;
+			RingInfoList          tmpRingList;
 			NodeList              bfsNodeList;
+			AtomNodeList          atomNodeTable;
 			AtomNodeList          longestAtomNodePath;
 			AtomNodeList          currAtomNodePath;
 			AtomIndexList         procAtomList;

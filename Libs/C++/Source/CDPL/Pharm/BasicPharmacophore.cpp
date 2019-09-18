@@ -310,7 +310,7 @@ void Pharm::BasicPharmacophore::renumberFeatures(std::size_t idx)
 
 Pharm::BasicFeature* Pharm::BasicPharmacophore::createFeature()
 {
-    return new BasicFeature(*this);
+    return new BasicFeature(this);
 }
 
 void Pharm::BasicPharmacophore::destroyFeature(BasicFeature* feature)

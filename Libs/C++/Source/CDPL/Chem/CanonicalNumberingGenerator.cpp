@@ -42,6 +42,14 @@
 #include "CDPL/Chem/AtomType.hpp"
 
 
+namespace
+{
+
+	const std::size_t MAX_NODE_CACHE_SIZE = 1000;
+	const std::size_t MAX_EDGE_CACHE_SIZE = 1000;
+}
+
+
 using namespace CDPL;
 
 
@@ -50,10 +58,13 @@ const unsigned int Chem::CanonicalNumberingGenerator::DEF_BOND_PROPERTY_FLAGS;
 
 
 Chem::CanonicalNumberingGenerator::CanonicalNumberingGenerator():
+	nodeCache(MAX_NODE_CACHE_SIZE), edgeCache(MAX_EDGE_CACHE_SIZE), 
 	atomPropertyFlags(DEF_ATOM_PROPERTY_FLAGS), bondPropertyFlags(DEF_BOND_PROPERTY_FLAGS), 
-	hCountFunc(boost::bind(&getBondCount, _1, _2, 1, AtomType::H, true)) {}
+	hCountFunc(boost::bind(&getBondCount, _1, _2, 1, AtomType::H, true)) 
+{}
 
 Chem::CanonicalNumberingGenerator::CanonicalNumberingGenerator(const MolecularGraph& molgraph, Util::STArray& numbering):
+	nodeCache(MAX_NODE_CACHE_SIZE), edgeCache(MAX_EDGE_CACHE_SIZE), 
 	atomPropertyFlags(DEF_ATOM_PROPERTY_FLAGS), bondPropertyFlags(DEF_BOND_PROPERTY_FLAGS), 
 	hCountFunc(boost::bind(&getBondCount, _1, _2, 1, AtomType::H, true))
 {
@@ -104,11 +115,14 @@ void Chem::CanonicalNumberingGenerator::init(const MolecularGraph& molgraph, Uti
 	std::size_t num_atoms = molgraph.getNumAtoms();
 	std::size_t num_bonds = molgraph.getNumBonds();
 
+	nodeCache.putAll();
+	edgeCache.putAll();
+
 	allocNodes.clear();
 	allocNodes.reserve(num_atoms);
 
 	allocEdges.clear();
-	allocEdges.reserve(num_bonds);
+	allocEdges.reserve(num_bonds * 2);
 
 	compConnectionTables.clear();
 	canonComponentList.clear();
@@ -167,8 +181,7 @@ void Chem::CanonicalNumberingGenerator::init(const MolecularGraph& molgraph, Uti
 			}
 		}
 
-		AtomNode::SharedPointer atom_node_ptr(new AtomNode(this, &atom, atom_label, allocNodes.size()));
-		allocNodes.push_back(atom_node_ptr);
+		allocNodes.push_back(allocNode(this, &atom, atom_label, allocNodes.size()));
 	}
 
 	std::size_t edge_id = allocEdges.size() / 2;
@@ -183,8 +196,8 @@ void Chem::CanonicalNumberingGenerator::init(const MolecularGraph& molgraph, Uti
 
 		Base::uint64 bond_label = 0;
 
-		AtomNode* atom_node1 = allocNodes[molgraph.getAtomIndex(bond.getBegin())].get();
-		AtomNode* atom_node2 = allocNodes[molgraph.getAtomIndex(bond.getEnd())].get();
+		AtomNode* atom_node1 = allocNodes[molgraph.getAtomIndex(bond.getBegin())];
+		AtomNode* atom_node2 = allocNodes[molgraph.getAtomIndex(bond.getEnd())];
 
 		if (bondPropertyFlags & BondPropertyFlag::AROMATICITY)
 			bond_label = getAromaticityFlag(bond);
@@ -209,14 +222,14 @@ void Chem::CanonicalNumberingGenerator::init(const MolecularGraph& molgraph, Uti
 			}
 		}
 	
-		Edge::SharedPointer edge1_ptr(new Edge(this, &bond, bond_label, atom_node2, edge_id));
-		Edge::SharedPointer edge2_ptr(new Edge(this, &bond, bond_label, atom_node1, edge_id++));
+		Edge* edge1 = allocEdge(this, &bond, bond_label, atom_node2, edge_id);
+		Edge* edge2 = allocEdge(this, &bond, bond_label, atom_node1, edge_id++);
 
-		allocEdges.push_back(edge1_ptr);
-		allocEdges.push_back(edge2_ptr);
+		allocEdges.push_back(edge1);
+		allocEdges.push_back(edge2);
 
-		atom_node1->addEdge(edge1_ptr.get());
-		atom_node2->addEdge(edge2_ptr.get());
+		atom_node1->addEdge(edge1);
+		atom_node2->addEdge(edge2);
 	}
 }
 
@@ -234,7 +247,7 @@ void Chem::CanonicalNumberingGenerator::setup(const MolecularGraph& comp)
 
 	for (MolecularGraph::ConstAtomIterator it = comp.getAtomsBegin(); it != atoms_end; ++it) {
 		const Atom& atom = *it;
-		AtomNode* atom_node = allocNodes[molGraph->getAtomIndex(atom)].get();
+		AtomNode* atom_node = allocNodes[molGraph->getAtomIndex(atom)];
 
 		nodeList.push_back(atom_node);
 	}
@@ -634,6 +647,27 @@ void Chem::CanonicalNumberingGenerator::restoreState()
 	nodeLabelingStack.erase(node_label_stack_end - num_nodes, node_label_stack_end);
 }
 
+Chem::CanonicalNumberingGenerator::AtomNode* 
+Chem::CanonicalNumberingGenerator::allocNode(Generator* generator, const Atom* atom, Base::uint64 label, std::size_t id)
+{
+	AtomNode* node = nodeCache.getRaw();
+
+	node->init(generator, atom, label, id);
+
+	return node;
+}
+
+Chem::CanonicalNumberingGenerator::Edge* 
+Chem::CanonicalNumberingGenerator::allocEdge(const Generator* generator, const Bond* bond, Base::uint64 label,
+											 AtomNode* nbr_node, std::size_t id)
+{
+	Edge* edge = edgeCache.getRaw();
+
+	edge->init(generator, bond, label, nbr_node, id);
+
+	return edge;
+}
+
 
 bool Chem::CanonicalNumberingGenerator::ComponentCmpFunc::operator()(const CanonComponentInfo& info1, 
 																	 const CanonComponentInfo& info2) const
@@ -648,10 +682,26 @@ bool Chem::CanonicalNumberingGenerator::ComponentCmpFunc::operator()(const Canon
 
 //---------
 
-Chem::CanonicalNumberingGenerator::AtomNode::AtomNode(Generator* generator, const Atom* atom, 
-													  Base::uint64 label, std::size_t id):
-	generator(generator), atom(atom), initialLabel(label), label(label), newLabel(label), 
-	id(id), stereoDescr(AtomConfiguration::NONE), configDataValid(false), partOfStereocenterValid(false) {}
+Chem::CanonicalNumberingGenerator::AtomNode::AtomNode(): 
+	stereoDescr(AtomConfiguration::NONE) 
+{}
+
+void Chem::CanonicalNumberingGenerator::AtomNode::init(Generator* generator, const Atom* atom, Base::uint64 label, std::size_t id)
+{
+	this->generator = generator;
+	this->atom = atom;
+	initialLabel = label;
+	this->label = label;
+	newLabel = label;
+	this->id = id;
+	stereoDescr = StereoDescriptor(AtomConfiguration::NONE);
+	configDataValid = false;
+	partOfStereocenterValid = false;
+
+	equivNodeMask.clear();
+	nonEquivNodeMask.clear();
+	edges.clear();
+}
 
 const Chem::Atom* Chem::CanonicalNumberingGenerator::AtomNode::getAtom() const
 {
@@ -905,10 +955,21 @@ bool Chem::CanonicalNumberingGenerator::AtomNode::LessCmpFunc::operator()(const 
 
 //---------
 
-Chem::CanonicalNumberingGenerator::Edge::Edge(const Generator* generator, const Bond* bond, Base::uint64 label, 
-											  AtomNode* nbr_node, std::size_t id):
-	generator(generator), bond(bond), nbrNode(nbr_node), label(label), id(id), stereoDescr(BondConfiguration::NONE),
-	configDataValid(false) {}
+Chem::CanonicalNumberingGenerator::Edge::Edge(): 
+	stereoDescr(BondConfiguration::NONE) 
+{}
+
+void Chem::CanonicalNumberingGenerator::Edge::init(const Generator* generator, const Bond* bond, Base::uint64 label, 
+												   AtomNode* nbr_node, std::size_t id)
+{
+	this->generator = generator; 
+	this->bond = bond; 
+	nbrNode = nbr_node; 
+	this->label = label; 
+	this->id = id; 
+	stereoDescr = StereoDescriptor(BondConfiguration::NONE);
+	configDataValid = false;
+}
 
 Chem::CanonicalNumberingGenerator::AtomNode* Chem::CanonicalNumberingGenerator::Edge::getNeighborNode() const
 {

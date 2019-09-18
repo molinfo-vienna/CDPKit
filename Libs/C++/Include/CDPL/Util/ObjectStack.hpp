@@ -38,6 +38,9 @@
 
 #include <boost/shared_ptr.hpp>
 #include <boost/function.hpp>
+#include <boost/bind.hpp>
+
+#include "CDPL/Util/Dereferencer.hpp"
 
 
 namespace CDPL
@@ -87,11 +90,7 @@ namespace CDPL
 
 			ObjectStack(std::size_t max_pool_size = 0): 
 				maxSize(max_pool_size), freeIndex(0), ctorFunc(DefaultConstructor()), dtorFunc(DefaultDestructor()) {}
-
-			template <typename C>
-			ObjectStack(const C& ctor_func, std::size_t max_pool_size = 0): 
-				maxSize(max_pool_size), freeIndex(0), ctorFunc(ctor_func), dtorFunc(DefaultDestructor()) {}
-
+		
 			template <typename C, typename D>
 			ObjectStack(const C& ctor_func, const D& dtor_func, std::size_t max_pool_size = 0): 
 				maxSize(max_pool_size), freeIndex(0), ctorFunc(ctor_func), dtorFunc(dtor_func) {}
@@ -133,6 +132,9 @@ namespace CDPL
 			}
 
 			void putAll() {
+				if (cleanFunc)
+					std::for_each(allocObjects.begin(), allocObjects.begin() + freeIndex, 
+								  boost::bind(cleanFunc, boost::bind(Util::Dereferencer<SharedObjectPointer, ObjectType&>(), _1)));
 				freeIndex = 0;
 
 				if (maxSize > 0 && allocObjects.size() > maxSize)
@@ -177,7 +179,7 @@ namespace CDPL
 				dtorFunc = stack.dtorFunc;
 				initFunc = stack.initFunc;
 
-				if (maxSize > 0 && allocObjects.size() > maxSize)
+				if (maxSize > 0 && allocObjects.size() > maxSize) 
 					allocObjects.resize(std::max(freeIndex, maxSize));
 
 				return *this;

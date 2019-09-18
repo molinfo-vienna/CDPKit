@@ -34,12 +34,11 @@
 #include <vector>
 #include <functional>
 
-#include <boost/shared_ptr.hpp>
-
 #include "CDPL/Chem/APIPrefix.hpp"
 #include "CDPL/Chem/AtomPropertyFlag.hpp"
 #include "CDPL/Chem/BondPropertyFlag.hpp"
 #include "CDPL/Util/Array.hpp"
+#include "CDPL/Util/ObjectStack.hpp"
 #include "CDPL/Base/IntegerTypes.hpp"
 
 
@@ -177,15 +176,15 @@ namespace CDPL
 
 			class AtomNode;
 
+			AtomNode* allocNode(Base::uint64 class_id);
+
 			typedef std::vector<AtomNode*> NodeList;
 
 			class AtomNode
 			{
 
 			public:
-				typedef boost::shared_ptr<AtomNode> SharedPointer;
-
-				AtomNode(Base::uint64);
+				void clear();
 
 				void addNbrNode(AtomNode*);
 
@@ -200,6 +199,7 @@ namespace CDPL
 				void update();
 
 				std::size_t getSymClassID() const;
+				void setSymClassID(Base::uint64 class_id);
 
 				struct SymClassCmpFunc : public std::binary_function<const AtomNode*, const AtomNode*, bool>
 				{
@@ -224,14 +224,15 @@ namespace CDPL
 				SVMNumberList svmNumberHistory;
 				NodeList      nbrNodes;
 			};
-		 		
-			typedef std::vector<AtomNode::SharedPointer> AllocNodeList;
 
+			typedef Util::ObjectStack<AtomNode> NodeCache;
+
+			NodeCache      nodeCache;
 			unsigned int   atomPropertyFlags;
 			unsigned int   bondPropertyFlags;
 			bool           hComplete;
-			AllocNodeList  allocAtomNodes;
-			AllocNodeList  allocImplHNodes;
+			NodeList       hAtomNodes;
+			NodeList       atomNodes;
 			NodeList       sortedAtomNodes;
 		};
 

@@ -69,9 +69,11 @@ IF(Boost_TIMER_FOUND AND Boost_CHRONO_FOUND)
    SET(cdpl-confgen_LIB_SRCS
        ${cdpl-confgen_LIB_SRCS}
        RandomStructureGenerator.cpp
+       RandomStructureGeneratorSettings.cpp
        SystematicConformerGenerator.cpp
        SystematicConformerGeneratorImpl.cpp
        FragmentConformerGenerator.cpp
+       FragmentConformerGeneratorSettings.cpp
        FragmentLibraryGenerator.cpp
       )	  
 

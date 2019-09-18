@@ -135,8 +135,8 @@ namespace
 
 
 Chem::SMARTSDataWriter::SMARTSDataWriter(const Base::DataIOBase& io_base): 
-	ioBase(io_base), nodeCache(boost::bind(&SMARTSDataWriter::createNode, this), MAX_NODE_CACHE_SIZE),
-	edgeCache(boost::bind(&SMARTSDataWriter::createEdge, this), MAX_EDGE_CACHE_SIZE)
+	ioBase(io_base), nodeCache(boost::bind(&SMARTSDataWriter::createNode, this), NodeCache::DefaultDestructor(), MAX_NODE_CACHE_SIZE),
+	edgeCache(boost::bind(&SMARTSDataWriter::createEdge, this), EdgeCache::DefaultDestructor(), MAX_EDGE_CACHE_SIZE)
 {}
 
 bool Chem::SMARTSDataWriter::writeReaction(std::ostream& os, const Reaction& rxn)

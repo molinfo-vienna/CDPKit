@@ -46,46 +46,29 @@
 #include "CDPL/Internal/SHA1.hpp"
 
 
+namespace
+{
+
+	const std::size_t MAX_MOLECULE_CACHE_SIZE = 5000;
+}
+
+
 using namespace CDPL;
 
 
-class Chem::TautomerGenerator::SafeMoleculePtr
-{
-
-public:
-	SafeMoleculePtr(Molecule* mol, TautomerGenerator* gen): mol(mol), gen(gen) {}
-
-	~SafeMoleculePtr() {
-		if (mol)
-			gen->freeMolecule(mol);
-	}
-
-	Molecule* release() {
-        Molecule* tmp = mol;
-		mol = 0;
-        return tmp;
-	}
-
-	Molecule* get() const {
-		return mol;
-	}
-
-private:
-	SafeMoleculePtr(const SafeMoleculePtr&);
-	SafeMoleculePtr& operator=(const SafeMoleculePtr&);
-
-	Molecule*          mol;
-	TautomerGenerator* gen;
-};
-
-
-Chem::TautomerGenerator::TautomerGenerator(): 
+Chem::TautomerGenerator::TautomerGenerator():
+	molCache(MAX_MOLECULE_CACHE_SIZE),
 	mode(TOPOLOGICALLY_UNIQUE), regStereo(true), regIsotopes(true)
-{}
+{
+	molCache.setCleanupFunction(&BasicMolecule::clear);
+}
 
 Chem::TautomerGenerator::TautomerGenerator(const TautomerGenerator& gen):
+	molCache(MAX_MOLECULE_CACHE_SIZE),
 	callbackFunc(gen.callbackFunc), mode(gen.mode), regStereo(gen.regStereo), regIsotopes(gen.regIsotopes)
 {
+	molCache.setCleanupFunction(&BasicMolecule::clear);
+
 	std::transform(gen.tautRules.begin(), gen.tautRules.end(), std::back_inserter(tautRules), boost::bind(&TautomerizationRule::clone, _1));
 }
 
@@ -101,7 +84,8 @@ Chem::TautomerGenerator& Chem::TautomerGenerator::operator=(const TautomerGenera
 
 	tautRules.clear();
 
-	std::transform(gen.tautRules.begin(), gen.tautRules.end(), std::back_inserter(tautRules), boost::bind(&TautomerizationRule::clone, _1));
+	std::transform(gen.tautRules.begin(), gen.tautRules.end(), std::back_inserter(tautRules), 
+				   boost::bind(&TautomerizationRule::clone, _1));
 
 	return *this;
 }
@@ -192,24 +176,25 @@ void Chem::TautomerGenerator::generate(const MolecularGraph& molgraph)
 		currGeneration.swap(nextGeneration);
 
 		while (!currGeneration.empty()) {
-			SafeMoleculePtr mol(currGeneration.back(), this);
+			MoleculePtr mol = currGeneration.back();
 			currGeneration.pop_back();
 
 			for (TautRuleList::const_iterator r_it = rules_beg; r_it != rules_end; ++r_it) {
 				TautomerizationRule& rule = **r_it;
 
-				if (!rule.setup(*mol.get()))
+				if (!rule.setup(*mol))
 					continue;
 
 				while (true) {
-					SafeMoleculePtr tautomer(allocMolecule(), this);
+					MoleculePtr tautomer = molCache.get();
 
-					if (rule.generate(*tautomer.get())) {
-						if (!addNewTautomer(tautomer.get())) 
+					if (rule.generate(*tautomer)) {
+						if (!addNewTautomer(tautomer)) 
 							continue;
 
-						if (!callbackFunc(*tautomer.release()))
+						if (!callbackFunc(*tautomer))
 							return;
+
 					} else
 						break;
 				}
@@ -221,24 +206,18 @@ void Chem::TautomerGenerator::generate(const MolecularGraph& molgraph)
 bool Chem::TautomerGenerator::init(const MolecularGraph& molgraph)
 {
 	tautHashCodes.clear();
-	freeMolecules.clear();
 	currGeneration.clear();
 	nextGeneration.clear();
-
-	for (AllocMoleculeList::const_iterator it = allocMolecules.begin(), end = allocMolecules.end(); it != end; ++it)
-		freeMolecules.push_back(it->get());
 
 	extractStereoCenters(molgraph);
 	initHashCalculator();
 
-	SafeMoleculePtr mol(allocMolecule(), this);
+	MoleculePtr mol = copyInputMolGraph(molgraph);
 
-	copyInputMolGraph(molgraph, mol.get());
-
-	if (!addNewTautomer(mol.get()))
+	if (!addNewTautomer(mol))
 		return false;
 
-	return callbackFunc(*mol.release());
+	return callbackFunc(*mol);
 }
 
 void Chem::TautomerGenerator::initHashCalculator()
@@ -259,9 +238,9 @@ void Chem::TautomerGenerator::initHashCalculator()
 	hashCalculator.includeGlobalStereoFeatures(regStereo);
 }
 
-void Chem::TautomerGenerator::copyInputMolGraph(const MolecularGraph& molgraph, Molecule* mol_copy) const
+Chem::TautomerGenerator::MoleculePtr Chem::TautomerGenerator::copyInputMolGraph(const MolecularGraph& molgraph)
 {
-	mol_copy->clear();
+	MoleculePtr mol_copy = molCache.get();
 
 	for (MolecularGraph::ConstAtomIterator it = molgraph.getAtomsBegin(), end = molgraph.getAtomsEnd(); it != end; ++it) {
 		const Atom& atom = *it;
@@ -293,6 +272,8 @@ void Chem::TautomerGenerator::copyInputMolGraph(const MolecularGraph& molgraph, 
 	makeHydrogenComplete(*mol_copy);
 
 	std::for_each(mol_copy->getAtomsBegin(), mol_copy->getAtomsEnd(), boost::bind(&setImplicitHydrogenCount, _1, 0));
+
+	return mol_copy;
 }
 
 void Chem::TautomerGenerator::extractStereoCenters(const MolecularGraph& molgraph)
@@ -469,7 +450,7 @@ void Chem::TautomerGenerator::extractBondStereoCenters(const MolecularGraph& mol
 	}
 }
 
-bool Chem::TautomerGenerator::addNewTautomer(Molecule* mol)
+bool Chem::TautomerGenerator::addNewTautomer(const MoleculePtr& mol)
 {
 	if (regStereo) {
 		perceiveHybridizationStates(*mol, true);
@@ -529,7 +510,7 @@ bool Chem::TautomerGenerator::addNewTautomer(Molecule* mol)
 	return false;
 }
 
-Base::uint64 Chem::TautomerGenerator::calcTautomerHashCode(const Molecule& tautomer)
+Base::uint64 Chem::TautomerGenerator::calcTautomerHashCode(const BasicMolecule& tautomer)
 {
 	if (mode == TOPOLOGICALLY_UNIQUE)
 		return hashCalculator.calculate(tautomer);
@@ -538,7 +519,7 @@ Base::uint64 Chem::TautomerGenerator::calcTautomerHashCode(const Molecule& tauto
 
 	tautomerBonds.clear();
 
-	for (Molecule::ConstBondIterator it = tautomer.getBondsBegin(), end = tautomer.getBondsEnd(); it != end; ++it) {
+	for (BasicMolecule::ConstBondIterator it = tautomer.getBondsBegin(), end = tautomer.getBondsEnd(); it != end; ++it) {
 		const Bond& bond = *it;
 
 		if (mode == GEOMETRICALLY_UNIQUE) {
@@ -586,26 +567,4 @@ Base::uint64 Chem::TautomerGenerator::calcTautomerHashCode(const Molecule& tauto
 		hash_code = hash_code ^ (Base::uint64(sha_hash[i]) << ((i % 8) * 8));
 
 	return hash_code;
-}
-
-Chem::Molecule* Chem::TautomerGenerator::allocMolecule()
-{
-    if (!freeMolecules.empty()) {
-		Molecule* mol = freeMolecules.back();
-
-		freeMolecules.pop_back();
-
-		return mol;
-    }
-
-    BasicMolecule::SharedPointer mol_ptr(new BasicMolecule());
-
-    allocMolecules.push_back(mol_ptr);
-
-    return mol_ptr.get();
-}
-			
-void Chem::TautomerGenerator::freeMolecule(Molecule* mol)
-{
-    freeMolecules.push_back(mol);
 }

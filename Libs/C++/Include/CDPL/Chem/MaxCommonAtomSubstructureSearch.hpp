@@ -41,6 +41,7 @@
 #include "CDPL/Chem/AtomBondMapping.hpp"
 #include "CDPL/Chem/MatchExpression.hpp"
 #include "CDPL/Util/BitSet.hpp"
+#include "CDPL/Util/ObjectStack.hpp"
 
 
 namespace CDPL 
@@ -268,7 +269,7 @@ namespace CDPL
 
 			bool buildAssocGraph();
 
-			bool findAGraphCliques(std::size_t);
+			bool findAssocGraphCliques(std::size_t);
 			bool isLegal(const AGNode*);
 
 			bool mappingFound();
@@ -280,12 +281,12 @@ namespace CDPL
 
 			void clearMappings();
 
-			AtomBondMapping* createAtomBondMapping();
 			void freeAtomBondMapping();
-
-			void freeAssocGraph();
 			void freeAtomBondMappings();
-
+			void freeAssocGraph();
+		
+			AtomBondMapping* createAtomBondMapping();
+		
 			class AGEdge;
 
 			AGNode* allocAGNode(const Atom*, const Atom*);
@@ -297,11 +298,6 @@ namespace CDPL
 			{
 
 			public:
-				typedef boost::shared_ptr<AGNode> SharedPointer;
-
-				AGNode(std::size_t idx, const Atom* query_atom, const Atom* assoc_atom): 
-					index(idx), queryAtom(query_atom), assocAtom(assoc_atom) {}
-
 				void setQueryAtom(const Atom*);
 				const Atom* getQueryAtom() const;
 				
@@ -315,6 +311,8 @@ namespace CDPL
 				
 				void clear();
 
+				void setIndex(std::size_t idx);
+
 			private:
 				std::size_t    index;
 				const Atom*    queryAtom;
@@ -327,11 +325,6 @@ namespace CDPL
 			{
 
 			public:
-				typedef boost::shared_ptr<AGEdge> SharedPointer;
-
-				AGEdge(const Bond* query_bond, const Bond* assoc_bond): 
-					queryBond(query_bond), assocBond(assoc_bond) {}
-
 				void setQueryBond(const Bond*);
 				const Bond* getQueryBond() const;
 				
@@ -385,21 +378,18 @@ namespace CDPL
 
 			typedef std::vector<AGNode*> AGraphNodeList;
 			typedef std::vector<AGraphNodeList> AGraphNodeMatrix;
-			typedef std::vector<AGNode::SharedPointer> AllocAGraphNodeList;
-			typedef std::vector<AGEdge::SharedPointer> AllocAGraphEdgeList;
-			typedef std::vector<AtomBondMapping::SharedPointer> AllocABMappingList;
 			typedef std::set<ABMappingMask> UniqueMappingList;
 			typedef std::vector<const Atom*> AtomList;
 			typedef std::vector<const Bond*> BondList;
 			typedef std::vector<MatchExpression<Atom, MolecularGraph>::SharedPointer> AtomMatchExprTable;
 			typedef std::vector<MatchExpression<Bond, MolecularGraph>::SharedPointer> BondMatchExprTable;
+			typedef Util::ObjectStack<AGNode> NodeCache;
+			typedef Util::ObjectStack<AGEdge> EdgeCache;
+			typedef Util::ObjectStack<AtomBondMapping> MappingCache;
 
 			const MolecularGraph*         query;
 			const MolecularGraph*         target;
 			AGraphNodeMatrix              nodeMatrix;
-			AllocAGraphNodeList           allocAGNodes;
-			AllocAGraphEdgeList           allocAGEdges;
-			AllocABMappingList            allocMappings;
 			ABMappingList                 foundMappings;
 			UniqueMappingList             uniqueMappings;
 			AGraphEdgeList                cliqueEdges;
@@ -410,6 +400,9 @@ namespace CDPL
 			MolGraphMatchExprPtr          molGraphMatchExpr;
 			AtomList                      postMappingMatchAtoms;
 			BondList                      postMappingMatchBonds;
+			NodeCache                     nodeCache;
+			EdgeCache                     edgeCache;
+			MappingCache                  mappingCache;
 			bool                          queryChanged;
 			bool                          initQueryData;
 			bool                          uniqueMatches;
@@ -425,9 +418,7 @@ namespace CDPL
 			std::size_t                   minNumNullNodes;
 			std::size_t                   maxNumMappings;
 			std::size_t                   minSubstructureSize;
-			std::size_t                   freeAGEdgeIdx;
-			std::size_t                   freeAGNodeIdx;
-			std::size_t                   freeMappingIdx;		
+			std::size_t                   currNodeIdx;
 		};
 
 		/**

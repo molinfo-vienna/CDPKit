@@ -47,6 +47,7 @@
 #include "CDPL/Vis/PolygonPrimitive2D.hpp"
 #include "CDPL/Vis/LineSegmentListPrimitive2D.hpp"
 #include "CDPL/Math/Vector.hpp"
+#include "CDPL/Util/ObjectStack.hpp"
 
 
 namespace CDPL 
@@ -714,11 +715,9 @@ namespace CDPL
 			typedef std::vector<const GraphicsPrimitive2D*> GraphicsPrimitiveList;
 			typedef std::map<const Chem::MolecularGraph*, Rectangle2D> ComponentBoundsMap;
 			typedef std::vector<Math::Vector2D> Vector2DArray;
-
-			typedef std::vector<StructureView2D::SharedPointer> AllocComponentViewList;
-			typedef std::vector<PolygonPrimitive2D::SharedPointer> AllocPolygonPrimitiveList;
-			typedef std::vector<LineSegmentListPrimitive2D::SharedPointer> AllocLineSegListPrimitiveList;
-
+			typedef Util::ObjectStack<StructureView2D> ComponentViewCache;
+			typedef Util::ObjectStack<PolygonPrimitive2D> PolygonPrimitiveCache;
+			typedef Util::ObjectStack<LineSegmentListPrimitive2D> LineSegListPrimitiveCache;
 			typedef std::auto_ptr<ReactionView2DParameters> ReactionView2DParametersPtr;
 
 			const Chem::Reaction*          reaction;
@@ -756,12 +755,9 @@ namespace CDPL
 			bool                           plusSignsVisible;
 			bool                           reactionChanged;
 			bool                           fontMetricsChanged;
-			AllocComponentViewList         allocComponentViews;
-			AllocPolygonPrimitiveList      allocPolygonPrimitives;
-			AllocLineSegListPrimitiveList  allocLineSegListPrimitives;
-			std::size_t                    freeComponentViewIdx;
-			std::size_t                    freePolygonPrimitiveIdx;
-			std::size_t                    freeLineSegListPrimitiveIdx;
+			ComponentViewCache             compViewCache;
+			PolygonPrimitiveCache          polygonCache;
+			LineSegListPrimitiveCache      lineSegListCache;
 		};
 
 		/**

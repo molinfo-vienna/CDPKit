@@ -39,17 +39,28 @@
 #include "CDPL/Base/Exceptions.hpp"
 
 
+namespace
+{
+	
+	const std::size_t MAX_MAPPING_CACHE_SIZE = 1000;
+}
+
 using namespace CDPL;
 
 
 Chem::CommonConnectedSubstructureSearch::CommonConnectedSubstructureSearch(): 
-	query(0), queryChanged(true), initQueryData(true),
-	uniqueMatches(false), numMappedAtoms(0), maxNumMappings(0), minSubstructureSize(0) 
-{}
-
-Chem::CommonConnectedSubstructureSearch::CommonConnectedSubstructureSearch(const MolecularGraph& query): 
+	query(0), mappingCache(MAX_MAPPING_CACHE_SIZE), queryChanged(true), initQueryData(true),
 	uniqueMatches(false), numMappedAtoms(0), maxNumMappings(0), minSubstructureSize(0) 
 {
+	mappingCache.setCleanupFunction(&AtomBondMapping::clear);
+}
+
+Chem::CommonConnectedSubstructureSearch::CommonConnectedSubstructureSearch(const MolecularGraph& query): 
+	mappingCache(MAX_MAPPING_CACHE_SIZE), uniqueMatches(false), numMappedAtoms(0), 
+	maxNumMappings(0), minSubstructureSize(0) 
+{
+	mappingCache.setCleanupFunction(&AtomBondMapping::clear);
+
 	setQuery(query);
 }
 
@@ -758,8 +769,7 @@ void Chem::CommonConnectedSubstructureSearch::clearMappings()
 
 void Chem::CommonConnectedSubstructureSearch::freeAtomBondMappings() 
 {
-	freeMappingIdx = 0;
-
+	mappingCache.putAll();
 	foundMappings.clear();
 
 	if (uniqueMatches)
@@ -768,21 +778,7 @@ void Chem::CommonConnectedSubstructureSearch::freeAtomBondMappings()
 
 Chem::AtomBondMapping* Chem::CommonConnectedSubstructureSearch::createAtomBondMapping()
 {
-	AtomBondMapping* mapping;
-
-	if (freeMappingIdx == allocMappings.size()) {
-		AtomBondMapping::SharedPointer mapping_ptr(new AtomBondMapping());
-		allocMappings.push_back(mapping_ptr);
-
-		mapping = mapping_ptr.get();
-		freeMappingIdx++;
-
-	} else {
-		mapping = allocMappings[freeMappingIdx++].get();
-
-		mapping->clear();
-	}
-
+	AtomBondMapping* mapping = mappingCache.getRaw();
 	AtomMapping& atom_mapping = mapping->getAtomMapping();
 	BondMapping& bond_mapping = mapping->getBondMapping();
 
@@ -807,7 +803,7 @@ Chem::AtomBondMapping* Chem::CommonConnectedSubstructureSearch::createAtomBondMa
 
 void Chem::CommonConnectedSubstructureSearch::freeAtomBondMapping()
 {
-	freeMappingIdx--;
+	mappingCache.put();
 }
 
 

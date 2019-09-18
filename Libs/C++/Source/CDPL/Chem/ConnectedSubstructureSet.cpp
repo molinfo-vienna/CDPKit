@@ -37,13 +37,22 @@
 #include "CDPL/Chem/AtomFunctions.hpp"
 
 
+namespace
+{
+
+	const std::size_t MAX_SUBSTRUCT_DESCR_CACHE_SIZE = 5000;
+}
+
+
 using namespace CDPL;
 
 
-Chem::ConnectedSubstructureSet::ConnectedSubstructureSet(): currSubstructSize(0), molGraph(0) {}
+Chem::ConnectedSubstructureSet::ConnectedSubstructureSet(): 
+	substructDescrCache(MAX_SUBSTRUCT_DESCR_CACHE_SIZE), currSubstructSize(0), molGraph(0) 
+{}
 
 Chem::ConnectedSubstructureSet::ConnectedSubstructureSet(const MolecularGraph& molgraph): 
-	currSubstructSize(0), molGraph(&molgraph) 
+	substructDescrCache(MAX_SUBSTRUCT_DESCR_CACHE_SIZE), currSubstructSize(0), molGraph(&molgraph) 
 {
 	bondMask.resize(molgraph.getNumBonds());
 }
@@ -79,15 +88,7 @@ void Chem::ConnectedSubstructureSet::reset()
 	currSubstructSize = 0;
 
 	bondMask.reset();
-
 	foundSubstructDescriptors.clear();
-
-	freeSubstructDescriptors.clear();
-	freeSubstructDescriptors.reserve(allocSubstructDescriptors.size());
-
-	std::transform(allocSubstructDescriptors.begin(), allocSubstructDescriptors.end(), 
-				   std::back_inserter(freeSubstructDescriptors),
-				   std::mem_fun_ref(&SubstructDescriptor::SharedPointer::get));
 }
 
 void Chem::ConnectedSubstructureSet::growSubstructDescriptors(std::size_t size)
@@ -95,7 +96,7 @@ void Chem::ConnectedSubstructureSet::growSubstructDescriptors(std::size_t size)
 	if (size < currSubstructSize) 
 		reset();
 
-	typedef std::set<SubstructDescriptor*, SubstructDescriptorLessCmpFunc> UniqueSubstructDescriptorList;
+	typedef std::set<SubstructDescriptorPtr, SubstructDescriptorLessCmpFunc> UniqueSubstructDescriptorList;
 
 	UniqueSubstructDescriptorList grown_substruct_descrs;
 	
@@ -120,13 +121,13 @@ void Chem::ConnectedSubstructureSet::growSubstructDescriptors(std::size_t size)
 		SubstructDescriptorList::const_iterator descr_list_end = foundSubstructDescriptors.end();
 
 		for (SubstructDescriptorList::const_iterator it = foundSubstructDescriptors.begin(); it != descr_list_end; ++it) {
-			SubstructDescriptor* substruct_descr = *it; 
+			const SubstructDescriptorPtr& substruct_descr = *it; 
 
 			while (substruct_descr->grow(bondMask)) {
 				UniqueSubstructDescriptorList::iterator lb = grown_substruct_descrs.lower_bound(substruct_descr);
 
 				if (lb == grown_substruct_descrs.end() || grown_substruct_descrs.key_comp()(substruct_descr, *lb)) {
-					SubstructDescriptor* new_substruct_descr = allocSubstructDescriptor();
+					SubstructDescriptorPtr new_substruct_descr = substructDescrCache.get();
 
 					new_substruct_descr->copy(*substruct_descr);
 					grown_substruct_descrs.insert(lb, new_substruct_descr);
@@ -134,8 +135,6 @@ void Chem::ConnectedSubstructureSet::growSubstructDescriptors(std::size_t size)
 
 				substruct_descr->ungrow();
 			}
-
-			freeSubstructDescriptor(substruct_descr);
 		}
 
 		foundSubstructDescriptors.clear();
@@ -154,51 +153,15 @@ void Chem::ConnectedSubstructureSet::createSubstructFragments()
 		addElement((*it)->createFragment());
 }
 
-Chem::ConnectedSubstructureSet::SubstructDescriptor* Chem::ConnectedSubstructureSet::allocSubstructDescriptor()
+Chem::ConnectedSubstructureSet::SubstructDescriptorPtr Chem::ConnectedSubstructureSet::allocSubstructDescriptor(const Bond& bond)
 {
-	if (freeSubstructDescriptors.empty()) {
-		SubstructDescriptor::SharedPointer substruct_descr_ptr(new SubstructDescriptor());
-		
-		allocSubstructDescriptors.push_back(substruct_descr_ptr);
-
-		return substruct_descr_ptr.get();
-	}
-
-	SubstructDescriptor* substruct_descr = freeSubstructDescriptors.back();
-	freeSubstructDescriptors.pop_back();
-
-	return substruct_descr;
-}
-
-Chem::ConnectedSubstructureSet::SubstructDescriptor* Chem::ConnectedSubstructureSet::allocSubstructDescriptor(const Bond& bond)
-{
-	if (freeSubstructDescriptors.empty()) {
-		SubstructDescriptor::SharedPointer substruct_descr_ptr(new SubstructDescriptor(molGraph, bond));
-		
-		allocSubstructDescriptors.push_back(substruct_descr_ptr);
-
-		return substruct_descr_ptr.get();
-	}
-
-	SubstructDescriptor* substruct_descr = freeSubstructDescriptors.back();
+	SubstructDescriptorPtr substruct_descr = substructDescrCache.get();
 
 	substruct_descr->init(molGraph, bond);
 
-	freeSubstructDescriptors.pop_back();
-
 	return substruct_descr;
 }
 
-void Chem::ConnectedSubstructureSet::freeSubstructDescriptor(SubstructDescriptor* substruct_descr)
-{
-	freeSubstructDescriptors.push_back(substruct_descr);
-}
-
-
-Chem::ConnectedSubstructureSet::SubstructDescriptor::SubstructDescriptor(const MolecularGraph* molgraph, const Bond& bond)
-{
-	init(molgraph, bond);
-}
 
 void Chem::ConnectedSubstructureSet::SubstructDescriptor::init(const MolecularGraph* molgraph, const Bond& bond) 
 {
@@ -369,8 +332,8 @@ bool Chem::ConnectedSubstructureSet::SubstructDescriptor::operator<(const Substr
 }
 
 
-bool Chem::ConnectedSubstructureSet::SubstructDescriptorLessCmpFunc::operator()(const SubstructDescriptor* descr1, 
-																					   const SubstructDescriptor* descr2) const
+bool Chem::ConnectedSubstructureSet::SubstructDescriptorLessCmpFunc::operator()(const SubstructDescriptorPtr& descr1, 
+																				const SubstructDescriptorPtr& descr2) const
 {
 	return (*descr1 < *descr2);
 }

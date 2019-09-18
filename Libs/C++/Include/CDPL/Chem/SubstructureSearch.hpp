@@ -45,6 +45,7 @@
 #include "CDPL/Chem/AtomBondMapping.hpp"
 #include "CDPL/Chem/MatchExpression.hpp"
 #include "CDPL/Util/BitSet.hpp"
+#include "CDPL/Util/ObjectStack.hpp"
 
 
 namespace CDPL 
@@ -312,10 +313,10 @@ namespace CDPL
 			bool foundMappingUnique();
 
 			void freeAtomBondMappings();
-
-			AtomBondMapping* createAtomBondMapping();
 			void freeAtomBondMapping();
 
+			AtomBondMapping* createAtomBondMapping();
+		
 			class ABMappingMask {
 
 			public:
@@ -342,13 +343,13 @@ namespace CDPL
 			typedef std::vector<const Atom*> AtomMappingTable;
 			typedef std::vector<const Bond*> BondMappingTable;
 			typedef std::deque<std::size_t> AtomQueue;
-			typedef std::vector<AtomBondMapping::SharedPointer> AllocABMappingList;
 			typedef std::set<ABMappingMask> UniqueMappingList;
 			typedef std::vector<const Atom*> AtomList;
 			typedef std::vector<const Bond*> BondList;
 			typedef std::vector<AtomMatchExprPtr> AtomMatchExprTable;
 			typedef std::vector<BondMatchExprPtr> BondMatchExprTable;
 			typedef boost::unordered_multimap<std::size_t, std::size_t> MappingConstraintMap;
+			typedef Util::ObjectStack<AtomBondMapping> MappingCache;
 
 			const MolecularGraph*                 query;
 			const MolecularGraph*                 target;
@@ -365,13 +366,13 @@ namespace CDPL
 			Util::BitSet                          queryMappingMask;
 			ABMappingMask                         targetMappingMask;
 			ABMappingList                         foundMappings;
-			AllocABMappingList                    allocMappings;
 			UniqueMappingList                     uniqueMappings;
 			AtomMatchExprTable                    atomMatchExprTable;
 			BondMatchExprTable                    bondMatchExprTable;
 			MolGraphMatchExprPtr                  molGraphMatchExpr;
 			AtomList                              postMappingMatchAtoms;
 			BondList                              postMappingMatchBonds;
+			MappingCache                          mappingCache;
 			bool                                  queryChanged;
 			bool                                  initQueryData;
 			bool                                  uniqueMatches;
@@ -382,7 +383,6 @@ namespace CDPL
 			std::size_t                           numTargetBonds;
 			std::size_t                           numMappedAtoms;
 			std::size_t                           maxNumMappings;
-			std::size_t                           freeMappingIdx;
 		};
 
 		/**

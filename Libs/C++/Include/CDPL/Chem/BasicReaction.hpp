@@ -229,10 +229,10 @@ namespace CDPL
 
 			ComponentPtr allocComponent(const Molecule* mol);
 		
-			ComponentCache     compCache;
-			ComponentList      components;
-			std::size_t        agentsStartIdx;
-			std::size_t        productsStartIdx;
+			ComponentCache compCache;
+			ComponentList  components;
+			std::size_t    agentsStartIdx;
+			std::size_t    productsStartIdx;
 		};
 
 		/**

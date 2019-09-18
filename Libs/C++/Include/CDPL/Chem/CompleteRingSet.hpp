@@ -45,6 +45,7 @@
 #include "CDPL/Chem/APIPrefix.hpp"
 #include "CDPL/Chem/FragmentList.hpp"
 #include "CDPL/Util/BitSet.hpp"
+#include "CDPL/Util/ObjectPool.hpp"
 
 
 namespace CDPL 
@@ -94,25 +95,26 @@ namespace CDPL
 			void perceive(const MolecularGraph& molgraph);
 
 		private:
+			class Edge;
+			class Node;
+
+			typedef Util::ObjectPool<Edge> EdgeCache;
+			typedef EdgeCache::SharedObjectPointer EdgePtr;
+
 			CompleteRingSet(const CompleteRingSet&);
 
 			CompleteRingSet& operator=(const CompleteRingSet&);
 
-			class Edge;
-			class Node;
-
 			void init(const MolecularGraph&);
 			void reduce();
 
-			Edge* allocEdge(const Edge*, const Edge*, Node*, Node*, bool);
-			Edge* allocEdge(const Bond&, Node*, Node*);
-
-			void freeEdge(Edge*);
+			EdgePtr allocEdge(const EdgePtr&, const EdgePtr&, Node*, Node*, bool);
+			EdgePtr allocEdge(const Bond&, Node*, Node*);
 		 
 			class Node
 			{
 
-				typedef std::list<Edge*> EdgeList;
+				typedef std::list<EdgePtr> EdgeList;
 
 			public:
 				typedef EdgeList::iterator EdgeIterator;
@@ -125,7 +127,7 @@ namespace CDPL
 
 				Node(std::size_t idx): index(idx) {}
 
-				EdgeIterator addEdge(Edge*);
+				EdgeIterator addEdge(const EdgePtr&);
 				void removeEdge(const EdgeIterator&);
 
 				EdgeIterator getEdgesBegin();
@@ -142,15 +144,10 @@ namespace CDPL
 			{
 
 			public:
-				typedef boost::shared_ptr<Edge> SharedPointer;
+				void init(const EdgePtr& this_edge, const MolecularGraph*, const Bond&, Node*, Node*);
+				void init(const EdgePtr& this_edge, const EdgePtr&, const EdgePtr&, Node*, Node*, bool);
 
-				Edge() {}
-				Edge(const MolecularGraph*, const Bond&, Node*, Node*);
-
-				void init(const MolecularGraph*, const Bond&, Node*, Node*);
-				void init(const Edge*, const Edge*, Node*, Node*, bool);
-
-				bool intersects(const Edge*) const;
+				bool intersects(const EdgePtr&) const;
 
 				Fragment::SharedPointer createRing(const MolecularGraph*) const;
 		
@@ -167,14 +164,11 @@ namespace CDPL
 		 
 			typedef std::vector<Node> NodeArray;
 			typedef std::priority_queue<Node*, std::vector<Node*>, Node::GreaterCmpFunc> NodeQueue;
-			typedef std::vector<Edge*> EdgeList;
-			typedef std::vector<Edge::SharedPointer> AllocEdgeList;
-
+		
+			EdgeCache                edgeCache;
 			const MolecularGraph*    molGraph;
 			NodeArray                nodes;
 			NodeQueue                nodeQueue;
-			AllocEdgeList            allocEdges;
-			EdgeList                 freeEdges;
 		};
 
 		/**

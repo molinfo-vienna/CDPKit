@@ -40,7 +40,6 @@
 #include <functional>
 #include <utility>
 
-#include <boost/shared_ptr.hpp>
 #include <boost/function.hpp>
 
 #include "CDPL/Chem/APIPrefix.hpp"
@@ -49,6 +48,7 @@
 #include "CDPL/Chem/StereoDescriptor.hpp"
 #include "CDPL/Util/Array.hpp"
 #include "CDPL/Util/BitSet.hpp"
+#include "CDPL/Util/ObjectStack.hpp"
 #include "CDPL/Base/IntegerTypes.hpp"
 
 
@@ -171,6 +171,12 @@ namespace CDPL
 			void generate(const MolecularGraph& molgraph, Util::STArray& numbering);
 
 		private:
+			class AtomNode;
+			class Edge;
+
+			typedef CanonicalNumberingGenerator Generator;
+			typedef std::vector<Edge*> EdgeList;
+
 			CanonicalNumberingGenerator(const CanonicalNumberingGenerator&);
 
 			CanonicalNumberingGenerator& operator=(const CanonicalNumberingGenerator&);
@@ -196,22 +202,20 @@ namespace CDPL
 			void saveState();
 			void restoreState();
 
-			typedef CanonicalNumberingGenerator Generator;
+			AtomNode* allocNode(Generator* generator, const Atom* atom, Base::uint64 label, std::size_t id);
 
-			class Edge;
+			Edge* allocEdge(const Generator* generator, const Bond* bond, Base::uint64 label,
+							AtomNode* nbr_node, std::size_t id);
 
 			class AtomNode
 			{
 
-				typedef std::vector<Edge*> EdgeList;
-
 			public:
-				typedef boost::shared_ptr<AtomNode> SharedPointer;
-
 				typedef EdgeList::const_iterator EdgeIterator;
 
-				AtomNode(Generator* generator, const Atom* atom, 
-						 Base::uint64 label, std::size_t id);
+				AtomNode();
+
+				void init(Generator* generator, const Atom* atom, Base::uint64 label, std::size_t id);
 
 				const Atom* getAtom() const;
 
@@ -278,10 +282,10 @@ namespace CDPL
 			{
 
 			public:
-				typedef boost::shared_ptr<Edge> SharedPointer;
+				Edge();
 
-				Edge(const Generator* generator, const Bond* bond, Base::uint64 label, 
-					 AtomNode* nbr_node, std::size_t id);
+				void init(const Generator* generator, const Bond* bond, Base::uint64 label, 
+						  AtomNode* nbr_node, std::size_t id);
 
 				void appendBondData(ConnectionTable&) const;
 				void appendConfigurationData(const AtomNode* node, ConnectionTable& ctab);
@@ -321,20 +325,22 @@ namespace CDPL
 
 			typedef std::pair<AtomNode*, Base::uint64> NodeLabelingState;
 			typedef std::vector<NodeLabelingState> NodeLabelingStack;
-			typedef std::vector<AtomNode::SharedPointer> AllocNodeList;
-			typedef std::vector<Edge::SharedPointer> AllocEdgeList;
 			typedef std::vector<AtomNode*> NodeList;
 			typedef std::vector<ConnectionTable> ConnectionTableList;
 			typedef std::vector<CanonComponentInfo> CanonComponentList;
+			typedef Util::ObjectStack<AtomNode> NodeCache;
+			typedef Util::ObjectStack<Edge> EdgeCache;
 
+			NodeCache              nodeCache;
+			EdgeCache              edgeCache;
 			unsigned int           atomPropertyFlags;
 			unsigned int           bondPropertyFlags;
 			HydrogenCountFunction  hCountFunc;
 			bool                   foundStereogenicAtoms;
 			bool                   foundStereogenicBonds;
 			const MolecularGraph*  molGraph;
-			AllocNodeList          allocNodes;
-			AllocEdgeList          allocEdges;
+			NodeList               allocNodes;
+			EdgeList               allocEdges;
 			NodeList               nodeList;
 			NodeList               equivNodeStack;
 			NodeLabelingStack      nodeLabelingStack;

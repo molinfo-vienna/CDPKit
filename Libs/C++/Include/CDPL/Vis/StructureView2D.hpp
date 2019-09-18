@@ -53,6 +53,7 @@
 #include "CDPL/Vis/PointListPrimitive2D.hpp"
 #include "CDPL/Vis/TextLabelPrimitive2D.hpp"
 #include "CDPL/Math/VectorArray.hpp"
+#include "CDPL/Util/ObjectStack.hpp"
 
 
 namespace CDPL 
@@ -709,13 +710,12 @@ namespace CDPL
 			typedef std::vector<Rectangle2D> RectangleList;
 			typedef std::vector<RectangleList> RectangleListTable;
 			typedef std::vector<Line2D> BondLineTable;
-
-			typedef std::vector<LinePrimitive2D::SharedPointer> AllocLinePrimitiveList;
-			typedef std::vector<PolylinePrimitive2D::SharedPointer> AllocPolylinePrimitiveList;
-			typedef std::vector<PolygonPrimitive2D::SharedPointer> AllocPolygonPrimitiveList;
-			typedef std::vector<LineSegmentListPrimitive2D::SharedPointer> AllocLineSegListPrimitiveList;
-			typedef std::vector<PointListPrimitive2D::SharedPointer> AllocPointListPrimitiveList;
-			typedef std::vector<TextLabelPrimitive2D::SharedPointer> AllocTextLabelPrimitiveList;
+			typedef Util::ObjectStack<LinePrimitive2D> LinePrimitiveCache;
+			typedef Util::ObjectStack<PolylinePrimitive2D> PolylinePrimitiveCache;
+			typedef Util::ObjectStack<PolygonPrimitive2D> PolygonPrimitiveCache;
+			typedef Util::ObjectStack<LineSegmentListPrimitive2D> LineSegListPrimitiveCache;
+			typedef Util::ObjectStack<PointListPrimitive2D> PointListPrimitiveCache;
+			typedef Util::ObjectStack<TextLabelPrimitive2D> TextLabelPrimitiveCache;
 
 			typedef std::auto_ptr<StructureView2DParameters> StructureView2DParametersPtr;
 			typedef std::auto_ptr<Chem::Fragment> FragmentPtr;
@@ -747,22 +747,16 @@ namespace CDPL
 			Font                               activeLabelFont;
 			Font                               activeSecondaryLabelFont;
 			double                             activeLabelMargin;
-			AllocLinePrimitiveList             allocLinePrimitives;
-			AllocPolylinePrimitiveList         allocPolylinePrimitives;
-			AllocPolygonPrimitiveList          allocPolygonPrimitives;
-			AllocLineSegListPrimitiveList      allocLineSegListPrimitives;
-			AllocPointListPrimitiveList        allocPointListPrimitives;
-			AllocTextLabelPrimitiveList        allocTextLabelPrimitives;
 			CustomGraphicsDataList             backCustomGraphics;
 			CustomGraphicsDataList             frontCustomGraphics;
-			std::size_t                        freeLinePrimitiveIdx;
-			std::size_t                        freePolylinePrimitiveIdx;
-			std::size_t                        freePolygonPrimitiveIdx;
-			std::size_t                        freeLineSegListPrimitiveIdx;
-			std::size_t                        freePointListPrimitiveIdx;
-			std::size_t                        freeTextLabelPrimitiveIdx;
 			bool                               reactionContext;
 			bool                               hasAtomCoords;
+			LinePrimitiveCache                 lineCache;
+			PolylinePrimitiveCache             polylineCache;
+			PolygonPrimitiveCache              polygonCache;
+			LineSegListPrimitiveCache          lineSegListCache;
+			PointListPrimitiveCache            pointListCache;
+			TextLabelPrimitiveCache            textLabelCache;
 		};
 
 		/**

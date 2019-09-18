@@ -35,11 +35,11 @@
 #include <vector>
 #include <functional>
 
-#include <boost/shared_ptr.hpp>
 #include <boost/function.hpp>
 
 #include "CDPL/Chem/APIPrefix.hpp"
 #include "CDPL/Util/Array.hpp"
+#include "CDPL/Util/ObjectStack.hpp"
 
 
 namespace CDPL 
@@ -95,6 +95,8 @@ namespace CDPL
 			void calculate(const MolecularGraph& molgraph, Util::STArray& priorities);
 
 		private:
+			class AtomNode;
+
 			CIPPriorityCalculator(const CIPPriorityCalculator&);
 
 			CIPPriorityCalculator& operator=(const CIPPriorityCalculator&);
@@ -102,7 +104,7 @@ namespace CDPL
 			void init(const MolecularGraph&, Util::STArray&);
 			void determinePriorities(Util::STArray&);
 
-			class AtomNode;
+			AtomNode* allocNode(std::size_t p);
 
 			typedef std::vector<AtomNode*> NodeList;
 
@@ -110,9 +112,7 @@ namespace CDPL
 			{
 
 			public:
-				typedef boost::shared_ptr<AtomNode> SharedPointer;
-
-				AtomNode(std::size_t);
+				void clear();
 
 				void addNbrNode(AtomNode*);
 
@@ -120,6 +120,8 @@ namespace CDPL
 
 				void updateNbrList();
 				void updatePriority();
+
+				void setPriority(std::size_t p);
 
 				std::size_t getPriority() const;
 
@@ -147,10 +149,10 @@ namespace CDPL
 				NodeList       nbrNodes;
 			};
 		 
-			typedef std::vector<AtomNode::SharedPointer> AllocNodeList;
+			typedef Util::ObjectStack<AtomNode> NodeCache;
 
-			AllocNodeList                 allocAtomNodes;
-			AllocNodeList                 allocImplHNodes;
+			NodeCache                     nodeCache;
+			NodeList                      expAtomNodes;
 			NodeList                      atomNodes;
 			ImplicitHydrogenCountFunction implHCountFunc;
 		};

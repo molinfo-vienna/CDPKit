@@ -40,10 +40,11 @@
 #include <boost/shared_ptr.hpp>
 
 #include "CDPL/Chem/APIPrefix.hpp"
-#include "CDPL/Chem/Molecule.hpp"
+#include "CDPL/Chem/BasicMolecule.hpp"
 #include "CDPL/Chem/TautomerizationRule.hpp"
 #include "CDPL/Chem/HashCodeCalculator.hpp"
 #include "CDPL/Base/IntegerTypes.hpp"
+#include "CDPL/Util/ObjectPool.hpp"
 
 
 namespace CDPL 
@@ -121,27 +122,24 @@ namespace CDPL
 			void generate(const MolecularGraph& molgraph);
 
 		  private:
-			class SafeMoleculePtr;
+			typedef Util::ObjectPool<BasicMolecule> MoleculeCache;
+			typedef MoleculeCache::SharedObjectPointer MoleculePtr;
 
 			bool init(const MolecularGraph& molgraph);
 			void initHashCalculator();
 
-			void copyInputMolGraph(const MolecularGraph& molgraph, Molecule* mol_copy) const;
+			MoleculePtr copyInputMolGraph(const MolecularGraph& molgraph);
 
 			void extractStereoCenters(const MolecularGraph& molgraph);
 			void extractAtomStereoCenters(const MolecularGraph& molgraph);
 			void extractBondStereoCenters(const MolecularGraph& molgraph);
 
-			bool addNewTautomer(Molecule* mol);
+			bool addNewTautomer(const MoleculePtr& mol);
 
-			Base::uint64 calcTautomerHashCode(const Molecule& tautomer);
-
-			Molecule* allocMolecule();
-			void freeMolecule(Molecule* mol);
-
+			Base::uint64 calcTautomerHashCode(const BasicMolecule& tautomer);
+		
 			typedef boost::array<std::size_t, 3> BondDescriptor;
-			typedef std::vector<Molecule*> MoleculeList;
-			typedef std::vector<Molecule::SharedPointer> AllocMoleculeList;
+			typedef std::vector<MoleculePtr> MoleculeList;
 			typedef std::vector<TautomerizationRule::SharedPointer> TautRuleList;
 			typedef std::vector<BondDescriptor> BondDescrArray;
 			typedef std::vector<std::size_t> SizeTArray;
@@ -149,6 +147,7 @@ namespace CDPL
 			typedef boost::array<std::size_t, 6> StereoCenter;
 			typedef std::vector<StereoCenter> StereoCenterList;
 
+			MoleculeCache         molCache;
 			CallbackFunction      callbackFunc;
 			Mode                  mode;
 			bool                  regStereo;
@@ -159,8 +158,6 @@ namespace CDPL
 			MoleculeList          nextGeneration;
 			StereoCenterList      atomStereoCenters;
 			StereoCenterList      bondStereoCenters;
-			MoleculeList          freeMolecules;
-			AllocMoleculeList     allocMolecules;
 			HashCodeSet           tautHashCodes;
 			HashCodeCalculator    hashCalculator;
 			BondDescrArray        tautomerBonds;

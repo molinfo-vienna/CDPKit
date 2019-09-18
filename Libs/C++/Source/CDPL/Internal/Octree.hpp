@@ -88,6 +88,8 @@ namespace CDPL
 		class Octree
 		{
 
+			static const std::size_t MAX_OCTANT_CACHE_SIZE = 1000;
+
 		public:
 			/**
 			 * Some generic distances: Manhattan, (squared) Euclidean, and Maximum distance.
@@ -130,11 +132,11 @@ namespace CDPL
 					ScalarT diff2 = p[1] - q[1];
 					ScalarT diff3 = p[2] - q[2];
 
-					return std::pow(diff1, 2) + std::pow(diff2, 2) + std::pow(diff3, 2);
+					return diff1 * diff1 + diff2 * diff2 + diff3 * diff3;
 				}
 
 				static ScalarT norm(ScalarT x, ScalarT y, ScalarT z)	{
-					return std::pow(x, 2) + std::pow(y, 2) + std::pow(z, 2);
+					return x * x + y * y + z * z;
 				}
 
 				static ScalarT sqr(ScalarT r) {
@@ -302,7 +304,10 @@ namespace CDPL
 		// Implementation
 
 		template <typename PointT, typename ContainerT, typename ScalarT>
-		Octree<PointT, ContainerT, ScalarT>::Octree() : rootNode(0), pointData(0) 
+		const std::size_t Octree<PointT, ContainerT, ScalarT>::MAX_OCTANT_CACHE_SIZE;
+
+		template <typename PointT, typename ContainerT, typename ScalarT>
+		Octree<PointT, ContainerT, ScalarT>::Octree() : octantCache(MAX_OCTANT_CACHE_SIZE), rootNode(0), pointData(0) 
 		{}
 
 		template <typename PointT, typename ContainerT, typename ScalarT>

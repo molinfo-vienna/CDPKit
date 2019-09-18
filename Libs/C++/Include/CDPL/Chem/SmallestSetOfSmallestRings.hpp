@@ -45,6 +45,7 @@
 #include "CDPL/Chem/FragmentList.hpp"
 #include "CDPL/Chem/CyclicSubstructure.hpp"
 #include "CDPL/Util/BitSet.hpp"
+#include "CDPL/Util/ObjectPool.hpp"
 
 
 namespace CDPL 
@@ -74,7 +75,7 @@ namespace CDPL
 			/**
 			 * \brief Constructs an empty \c %SmallestSetOfSmallestRings instance.
 			 */
-			SmallestSetOfSmallestRings() {}
+			SmallestSetOfSmallestRings();
 
 			/**
 			 * \brief Constructs a \c %SmallestSetOfSmallestRings instance containing the \e SSSR of the molecular graph \a molgraph.
@@ -89,10 +90,12 @@ namespace CDPL
 			void perceive(const MolecularGraph& molgraph);
 
 		private:
-			typedef SmallestSetOfSmallestRings Controller;
-
-			class TNode;
 			class PathMessage;
+
+			typedef SmallestSetOfSmallestRings Controller;
+			typedef Util::ObjectPool<PathMessage> MessageCache;
+			typedef MessageCache::SharedObjectPointer MessagePtr;
+			typedef std::vector<MessagePtr> MessageList;
 
 			SmallestSetOfSmallestRings(const SmallestSetOfSmallestRings&);
 
@@ -104,17 +107,15 @@ namespace CDPL
 			void findSSSR();
 			void createRingFragments();
 
-			Fragment::SharedPointer createRing(const MolecularGraph& molgraph, PathMessage* msg);
+			Fragment::SharedPointer createRing(const MolecularGraph& molgraph, const MessagePtr& msg);
 
 			bool sssrComplete() const;
 
-			PathMessage* allocMessage();
-			PathMessage* allocMessage(std::size_t, std::size_t, std::size_t, std::size_t);
-
-			void freeMessage(PathMessage*);
-
-			bool processCollision(const PathMessage*, const PathMessage*, std::size_t, bool);
-			void processRing(PathMessage*);
+			MessagePtr allocMessage();
+			MessagePtr allocMessage(std::size_t, std::size_t, std::size_t, std::size_t);
+		
+			bool processCollision(const MessagePtr&, const MessagePtr&, std::size_t, bool);
+			void processRing(const MessagePtr&);
 			void processEvenRings();
 
 			class TNode
@@ -147,12 +148,11 @@ namespace CDPL
 
 				typedef std::vector<TNode*> NodeList;
 				typedef std::vector<std::size_t> BondIndexList;
-				typedef std::vector<PathMessage*> MessageBuffer;
 
 				NodeList      nbrNodes;
 				BondIndexList bondIndices;
-				MessageBuffer receiveBuffer;
-				MessageBuffer sendBuffer;
+				MessageList   receiveBuffer;
+				MessageList   sendBuffer;
 				std::size_t   index;
 				Util::BitSet  collBondMask;
 				bool          active;
@@ -162,21 +162,16 @@ namespace CDPL
 			{
 
 			public:
-				typedef boost::shared_ptr<PathMessage> SharedPointer;
-
-				struct LessCmpFunc : public std::binary_function<const PathMessage*, const PathMessage*, bool>
+				struct LessCmpFunc : public std::binary_function<const MessagePtr, const MessagePtr, bool>
 				{
 
-					bool operator()(const PathMessage*, const PathMessage*) const;
+					bool operator()(const MessagePtr&, const MessagePtr&) const;
 				};
-
-				PathMessage() {} 
-				PathMessage(std::size_t, std::size_t, std::size_t, std::size_t); 
-
+			
 				void init(std::size_t, std::size_t, std::size_t, std::size_t);
 
-				void copy(const PathMessage*);
-				bool join(const PathMessage*, const PathMessage*);
+				void copy(const MessagePtr&);
+				bool join(const MessagePtr&, const MessagePtr&);
 
 				void addAtom(std::size_t);
 				void addBond(std::size_t);
@@ -212,27 +207,24 @@ namespace CDPL
 				bool         edgeCollFlag;
 			};
 
-			struct TestMatrixRowCmpFunc : public std::binary_function<const PathMessage*, const PathMessage*, bool>
+			struct TestMatrixRowCmpFunc : public std::binary_function<const MessagePtr, const MessagePtr, bool>
 			{
 
-				bool operator()(const PathMessage*, const PathMessage*) const;
+				bool operator()(const MessagePtr&, const MessagePtr&) const;
 			};
 
 			typedef std::vector<TNode> NodeArray;
-			typedef std::vector<PathMessage *> MessageList;
-			typedef std::vector<PathMessage::SharedPointer> AllocMessageList;
-			typedef std::set<const PathMessage*, PathMessage::LessCmpFunc> ProcRingSet;
+			typedef std::set<MessagePtr, PathMessage::LessCmpFunc> ProcRingSet;
 
+			MessageCache             msgCache;
 			CyclicSubstructure       cyclicSubstruct;
 			Fragment                 component;
 			Util::BitSet             visAtomMask;
 			NodeArray                nodes;
-			AllocMessageList         allocMessages;
-			MessageList              freeMessages;
 			ProcRingSet              procRings;
 			MessageList              evenRings;
-			PathMessage*             testRing;
-			PathMessage*             linDepTestRing;
+			MessagePtr               testRing;
+			MessagePtr               linDepTestRing;
 			MessageList              linDepTestMtx;
 			MessageList              sssr;
 			std::size_t              sssrSize;

@@ -40,16 +40,32 @@
 #include "CDPL/Base/Exceptions.hpp"
 
 
+namespace
+{
+	
+	const std::size_t MAX_NODE_CACHE_SIZE    = 10000;
+	const std::size_t MAX_EDGE_CACHE_SIZE    = 10000;
+	const std::size_t MAX_MAPPING_CACHE_SIZE = 1000;
+}
+
+
 using namespace CDPL;
 
 
 Chem::MaxCommonAtomSubstructureSearch::MaxCommonAtomSubstructureSearch(): 
-	query(0), queryChanged(true), initQueryData(true), uniqueMatches(false), 
-	currNumNullNodes(0), maxNumMappings(0), minSubstructureSize(0) {}
+	query(0), nodeCache(MAX_NODE_CACHE_SIZE), edgeCache(MAX_EDGE_CACHE_SIZE), 
+	mappingCache(MAX_MAPPING_CACHE_SIZE), queryChanged(true), initQueryData(true), 
+	uniqueMatches(false), currNumNullNodes(0), maxNumMappings(0), minSubstructureSize(0) 
+{
+	mappingCache.setCleanupFunction(&AtomBondMapping::clear);
+}
 
 Chem::MaxCommonAtomSubstructureSearch::MaxCommonAtomSubstructureSearch(const MolecularGraph& query): 
+	nodeCache(MAX_NODE_CACHE_SIZE), edgeCache(MAX_EDGE_CACHE_SIZE), mappingCache(MAX_MAPPING_CACHE_SIZE), 
 	uniqueMatches(false), currNumNullNodes(0), maxNumMappings(0), minSubstructureSize(0)
 {
+	mappingCache.setCleanupFunction(&AtomBondMapping::clear);
+
 	setQuery(query);
 }
 
@@ -64,7 +80,7 @@ bool Chem::MaxCommonAtomSubstructureSearch::mappingExists(const MolecularGraph& 
 
 	saveMappings = false;
 
-	return findAGraphCliques(0);
+	return findAssocGraphCliques(0);
 }
 
 bool Chem::MaxCommonAtomSubstructureSearch::findAllMappings(const MolecularGraph& target)
@@ -77,7 +93,7 @@ bool Chem::MaxCommonAtomSubstructureSearch::findAllMappings(const MolecularGraph
 	saveMappings = true;
 	maxBondMappingsOnly = false;
 
-	findAGraphCliques(0);
+	findAssocGraphCliques(0);
 
 	return !foundMappings.empty();
 }
@@ -92,7 +108,7 @@ bool Chem::MaxCommonAtomSubstructureSearch::findMaxBondMappings(const MolecularG
 	saveMappings = true;
 	maxBondMappingsOnly = true;
 
-	findAGraphCliques(0);
+	findAssocGraphCliques(0);
 
 	return !foundMappings.empty();
 }
@@ -363,7 +379,7 @@ bool Chem::MaxCommonAtomSubstructureSearch::buildAssocGraph()
 
 // Durand-Pasari Algorithm
 
-bool Chem::MaxCommonAtomSubstructureSearch::findAGraphCliques(std::size_t level)
+bool Chem::MaxCommonAtomSubstructureSearch::findAssocGraphCliques(std::size_t level)
 {
 	if (currNumNullNodes > minNumNullNodes)
 		return false;
@@ -387,7 +403,7 @@ bool Chem::MaxCommonAtomSubstructureSearch::findAGraphCliques(std::size_t level)
 
 		cliqueNodes.push_back(node);
 
-		bool exit = findAGraphCliques(level + 1);
+		bool exit = findAssocGraphCliques(level + 1);
 
 		cliqueNodes.pop_back();
 		cliqueEdges.erase(cliqueEdges.begin() + old_num_edges, cliqueEdges.end());
@@ -398,7 +414,7 @@ bool Chem::MaxCommonAtomSubstructureSearch::findAGraphCliques(std::size_t level)
 
 	currNumNullNodes++;
 
-	bool exit = findAGraphCliques(level + 1);
+	bool exit = findAssocGraphCliques(level + 1);
 
 	currNumNullNodes--;
 
@@ -584,21 +600,7 @@ void Chem::MaxCommonAtomSubstructureSearch::clearMappings()
 
 Chem::AtomBondMapping* Chem::MaxCommonAtomSubstructureSearch::createAtomBondMapping()
 {
-	AtomBondMapping* mapping;
-
-	if (freeMappingIdx == allocMappings.size()) {
-		AtomBondMapping::SharedPointer mapping_ptr(new AtomBondMapping());
-		allocMappings.push_back(mapping_ptr);
-
-		mapping = mapping_ptr.get();
-		freeMappingIdx++;		
-
-	} else {
-		mapping = allocMappings[freeMappingIdx++].get();
-
-		mapping->clear();
-	}
-
+	AtomBondMapping* mapping = mappingCache.getRaw();
 	AtomMapping& atom_mapping = mapping->getAtomMapping();
 	BondMapping& bond_mapping = mapping->getBondMapping();
 
@@ -623,66 +625,46 @@ Chem::AtomBondMapping* Chem::MaxCommonAtomSubstructureSearch::createAtomBondMapp
 
 void Chem::MaxCommonAtomSubstructureSearch::freeAtomBondMapping()
 {
-	freeMappingIdx--;
+	mappingCache.put();
 }
 
 Chem::MaxCommonAtomSubstructureSearch::AGNode* Chem::MaxCommonAtomSubstructureSearch::allocAGNode(const Atom* query_atom, const Atom* assoc_atom)
 {
-	AGNode* node;
+	AGNode* node = nodeCache.getRaw();
 
-	if (freeAGNodeIdx == allocAGNodes.size()) {
-		AGNode::SharedPointer node_ptr(new AGNode(freeAGNodeIdx, query_atom, assoc_atom));
-		allocAGNodes.push_back(node_ptr);
-
-		node = node_ptr.get();
-		freeAGNodeIdx++;		
-
-	} else {
-		node = allocAGNodes[freeAGNodeIdx++].get();
-
-		node->setQueryAtom(query_atom);
-		node->setAssocAtom(assoc_atom);
-		node->clear();
-	}
+	node->setQueryAtom(query_atom);
+	node->setAssocAtom(assoc_atom);
+	node->clear();
+	node->setIndex(currNodeIdx++);
 
 	return node;
 }
 
 Chem::MaxCommonAtomSubstructureSearch::AGEdge* Chem::MaxCommonAtomSubstructureSearch::allocAGEdge(const Bond* query_bond, const Bond* assoc_bond)
 {
-	AGEdge* edge;
+	AGEdge* edge = edgeCache.getRaw();
 
-	if (freeAGEdgeIdx == allocAGEdges.size()) {
-		AGEdge::SharedPointer edge_ptr(new AGEdge(query_bond, assoc_bond));
-		allocAGEdges.push_back(edge_ptr);
-
-		edge = edge_ptr.get();
-		freeAGEdgeIdx++;		
-
-	} else {
-		edge = allocAGEdges[freeAGEdgeIdx++].get();
-
-		edge->setQueryBond(query_bond);
-		edge->setAssocBond(assoc_bond);
-	}
+	edge->setQueryBond(query_bond);
+	edge->setAssocBond(assoc_bond);
 
 	return edge;
 }
 
 void Chem::MaxCommonAtomSubstructureSearch::freeAssocGraph() 
 {
-	freeAGNodeIdx = 0;
-	freeAGEdgeIdx = 0;
+	nodeCache.putAll();
+	edgeCache.putAll();
+
+	currNodeIdx = 0;
 }
 
 void Chem::MaxCommonAtomSubstructureSearch::freeAtomBondMappings() 
 {
+	mappingCache.putAll();
 	foundMappings.clear();
 
 	if (uniqueMatches)
 		uniqueMappings.clear();
-
-	freeMappingIdx = 0;
 }
 
 
@@ -741,6 +723,11 @@ const Chem::MaxCommonAtomSubstructureSearch::AGEdge* Chem::MaxCommonAtomSubstruc
 	return (it == bondEdges.end() ? 0 : *it);
 }
 
+void Chem::MaxCommonAtomSubstructureSearch::AGNode::setIndex(std::size_t idx)
+{
+	index = idx;
+}
+	
 void Chem::MaxCommonAtomSubstructureSearch::AGNode::clear()
 {
 	bondEdges.clear();

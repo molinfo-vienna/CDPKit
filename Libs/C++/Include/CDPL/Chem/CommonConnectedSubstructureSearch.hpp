@@ -42,6 +42,7 @@
 #include "CDPL/Chem/AtomBondMapping.hpp"
 #include "CDPL/Chem/MatchExpression.hpp"
 #include "CDPL/Util/BitSet.hpp"
+#include "CDPL/Util/ObjectStack.hpp"
 
 
 namespace CDPL 
@@ -281,10 +282,11 @@ namespace CDPL
 			bool mappingAlreadySeen(const AtomBondMapping*) const;
 
 			void clearMappings();
+
 			void freeAtomBondMappings();
+			void freeAtomBondMapping();
 
 			AtomBondMapping* createAtomBondMapping();
-			void freeAtomBondMapping();
 
 			class ABMappingMask {
 
@@ -325,12 +327,12 @@ namespace CDPL
 			typedef std::vector<std::size_t> AtomIndexList;
 			typedef std::vector<std::size_t> BondMappingStack;
 			typedef std::deque<std::size_t> AtomQueue;
-			typedef std::vector<AtomBondMapping::SharedPointer> AllocABMappingList;
 			typedef std::set<ABMappingMask> UniqueMappingList;
 			typedef std::vector<const Atom*> AtomList;
 			typedef std::vector<const Bond*> BondList;
 			typedef std::vector<MatchExpression<Atom, MolecularGraph>::SharedPointer> AtomMatchExprTable;
 			typedef std::vector<MatchExpression<Bond, MolecularGraph>::SharedPointer> BondMatchExprTable;
+			typedef Util::ObjectStack<AtomBondMapping> MappingCache;
 
 			const MolecularGraph*  query;
 			const MolecularGraph*  target;
@@ -345,13 +347,13 @@ namespace CDPL
 			Util::BitSet           termQueryAtomMask;
 			Util::BitSet           termTargetAtomMask;
 			ABMappingList          foundMappings;
-			AllocABMappingList     allocMappings;
 			UniqueMappingList      uniqueMappings;
 			AtomMatchExprTable     atomMatchExprTable;
 			BondMatchExprTable     bondMatchExprTable;
 			MolGraphMatchExprPtr   molGraphMatchExpr;
 			AtomList               postMappingMatchAtoms;
 			BondList               postMappingMatchBonds;
+			MappingCache           mappingCache;
 			bool                   queryChanged;
 			bool                   initQueryData;
 			bool                   uniqueMatches;
@@ -366,7 +368,6 @@ namespace CDPL
 			std::size_t            maxBondStackSize;
 			std::size_t            maxNumMappings;
 			std::size_t            minSubstructureSize;
-			std::size_t            freeMappingIdx;
 		};
 
 		/**

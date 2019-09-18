@@ -38,15 +38,22 @@
 #include "CDPL/Chem/AtomType.hpp"
 
 
+namespace
+{
+
+	const std::size_t MAX_NODE_CACHE_SIZE = 1000;
+}
+
+
 using namespace CDPL;
 
 
 Chem::CIPPriorityCalculator::CIPPriorityCalculator(): 
-	implHCountFunc(&getImplicitHydrogenCount)
+	nodeCache(MAX_NODE_CACHE_SIZE), implHCountFunc(&getImplicitHydrogenCount)
 {}
 
 Chem::CIPPriorityCalculator::CIPPriorityCalculator(const MolecularGraph& molgraph, Util::STArray& priorities):
-	implHCountFunc(&getImplicitHydrogenCount)
+	nodeCache(MAX_NODE_CACHE_SIZE), implHCountFunc(&getImplicitHydrogenCount)
 {
 	calculate(molgraph, priorities);
 }
@@ -70,16 +77,15 @@ void Chem::CIPPriorityCalculator::calculate(const MolecularGraph& molgraph, Util
 
 void Chem::CIPPriorityCalculator::init(const MolecularGraph& molgraph, Util::STArray& priorities)
 {
+	nodeCache.putAll();
+
 	std::size_t num_atoms = molgraph.getNumAtoms();
-
-	allocAtomNodes.clear();
-	allocAtomNodes.reserve(num_atoms);
-
-	allocImplHNodes.clear();
-	allocImplHNodes.reserve(num_atoms);
 
 	atomNodes.clear();
 	atomNodes.reserve(num_atoms * 2);
+
+	expAtomNodes.clear();
+	expAtomNodes.reserve(num_atoms);
 
 	priorities.clear();
 	priorities.reserve(num_atoms);
@@ -91,18 +97,12 @@ void Chem::CIPPriorityCalculator::init(const MolecularGraph& molgraph, Util::STA
 
 		std::size_t atom_type = getType(atom) % 1024;
 		std::size_t isotope = getIsotope(atom) % 1024;
-
-		AtomNode::SharedPointer atom_node_ptr(new AtomNode(atom_type * 1024 + isotope));
-		allocAtomNodes.push_back(atom_node_ptr);
-
-		AtomNode* atom_node = atom_node_ptr.get();
 		std::size_t impl_h_count = implHCountFunc(atom);
 
-		if (impl_h_count > 0) {
-			AtomNode::SharedPointer h_node_ptr(new AtomNode(AtomType::H * 1024));
-			allocImplHNodes.push_back(h_node_ptr);
+		AtomNode* atom_node = allocNode(atom_type * 1024 + isotope);
 
-			AtomNode* h_node = h_node_ptr.get();
+		if (impl_h_count > 0) {
+			AtomNode* h_node = allocNode(AtomType::H * 1024);
 
 			for (std::size_t i = 0; i < impl_h_count; i++)
 				atom_node->addNbrNode(h_node);
@@ -112,6 +112,7 @@ void Chem::CIPPriorityCalculator::init(const MolecularGraph& molgraph, Util::STA
 			atomNodes.push_back(h_node);
 		}
 
+		expAtomNodes.push_back(atom_node);
 		atomNodes.push_back(atom_node);
 	}
 
@@ -123,8 +124,8 @@ void Chem::CIPPriorityCalculator::init(const MolecularGraph& molgraph, Util::STA
 		if (!molgraph.containsAtom(bond.getBegin()) || !molgraph.containsAtom(bond.getEnd()))
 			continue;
 
-		AtomNode* atom_node1 = allocAtomNodes[molgraph.getAtomIndex(bond.getBegin())].get();
-		AtomNode* atom_node2 = allocAtomNodes[molgraph.getAtomIndex(bond.getEnd())].get();
+		AtomNode* atom_node1 = expAtomNodes[molgraph.getAtomIndex(bond.getBegin())];
+		AtomNode* atom_node2 = expAtomNodes[molgraph.getAtomIndex(bond.getEnd())];
 
 		std::size_t bond_order = getOrder(bond);
 
@@ -165,13 +166,26 @@ void Chem::CIPPriorityCalculator::determinePriorities(Util::STArray& priorities)
 		max_priority = priority;
 	}
 
-	std::for_each(allocAtomNodes.begin(), allocAtomNodes.end(), boost::bind(&Util::STArray::addElement, 
-																			boost::ref(priorities),
-																			boost::bind(&AtomNode::getPriority, _1)));
+	std::for_each(expAtomNodes.begin(), expAtomNodes.end(), boost::bind(&Util::STArray::addElement, 
+																		boost::ref(priorities),
+																		boost::bind(&AtomNode::getPriority, _1)));
+}
+
+Chem::CIPPriorityCalculator::AtomNode* Chem::CIPPriorityCalculator::allocNode(std::size_t p)
+{
+	AtomNode* node = nodeCache.getRaw();
+
+	node->clear();
+	node->setPriority(p);
+
+	return node;
 }
 
 
-Chem::CIPPriorityCalculator::AtomNode::AtomNode(std::size_t p): priority(p) {}
+void Chem::CIPPriorityCalculator::AtomNode::clear()
+{
+	nbrNodes.clear();
+}
 
 void Chem::CIPPriorityCalculator::AtomNode::addNbrNode(AtomNode* nbr_node)
 {
@@ -196,6 +210,11 @@ void Chem::CIPPriorityCalculator::AtomNode::updateNbrList()
 std::size_t Chem::CIPPriorityCalculator::AtomNode::getPriority() const
 {
 	return priority;
+}
+
+void Chem::CIPPriorityCalculator::AtomNode::setPriority(std::size_t p)
+{
+	priority = p;
 }
 
 

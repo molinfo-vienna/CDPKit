@@ -73,7 +73,7 @@ namespace CDPL
 			using Feature::operator=;
 
 		  private:
-			BasicFeature(BasicPharmacophore& pharm);
+			BasicFeature(BasicPharmacophore* pharm);
 	    
 			BasicFeature(const BasicFeature& feature);
 

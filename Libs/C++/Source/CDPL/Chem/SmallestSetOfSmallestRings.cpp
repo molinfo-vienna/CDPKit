@@ -37,11 +37,29 @@
 #include "CDPL/Internal/RangeGenerator.hpp"
 
 
+namespace
+{
+
+	const std::size_t MAX_MESSAGE_CACHE_SIZE = 100000;
+}
+
+
 using namespace CDPL;
 
 
-Chem::SmallestSetOfSmallestRings::SmallestSetOfSmallestRings(const MolecularGraph& molgraph)
+Chem::SmallestSetOfSmallestRings::SmallestSetOfSmallestRings():
+	msgCache(MAX_MESSAGE_CACHE_SIZE)
 {
+	testRing = allocMessage();
+	linDepTestRing = allocMessage();
+}
+
+Chem::SmallestSetOfSmallestRings::SmallestSetOfSmallestRings(const MolecularGraph& molgraph):
+	msgCache(MAX_MESSAGE_CACHE_SIZE)
+{
+	testRing = allocMessage();
+	linDepTestRing = allocMessage();
+
 	perceive(molgraph);
 }
 
@@ -139,14 +157,6 @@ void Chem::SmallestSetOfSmallestRings::init()
 	procRings.clear();
 	evenRings.clear();
 	linDepTestMtx.clear();
-	freeMessages.clear();
-	freeMessages.reserve(allocMessages.size());
-
-	std::transform(allocMessages.begin(), allocMessages.end(), std::back_inserter(freeMessages),
-				   boost::bind(&PathMessage::SharedPointer::get, _1));
-
-	testRing = allocMessage();
-	linDepTestRing = allocMessage();
 
 	std::size_t num_atoms = component.getNumAtoms();
 	std::size_t num_bonds = component.getNumBonds();
@@ -202,7 +212,7 @@ void Chem::SmallestSetOfSmallestRings::findSSSR()
 			}
 
 			if (!new_messages) 
-				throw Base::CalculationFailed("SmallestSetOfSmallestRings: SSSR incomplete");
+				throw Base::CalculationFailed("SmallestSetOfSmallestRings: could not complete SSSR");
 		}
 
 		for (std::size_t i = 0; i < num_nodes; i++) {
@@ -225,7 +235,7 @@ void Chem::SmallestSetOfSmallestRings::createRingFragments()
 		addElement(createRing(component, *it));
 }
 
-Chem::Fragment::SharedPointer Chem::SmallestSetOfSmallestRings::createRing(const MolecularGraph& molgraph, PathMessage* msg)
+Chem::Fragment::SharedPointer Chem::SmallestSetOfSmallestRings::createRing(const MolecularGraph& molgraph, const MessagePtr& msg)
 {
 	Fragment::SharedPointer ring_ptr(new Fragment());
 	Fragment& ring = *ring_ptr;
@@ -276,48 +286,22 @@ bool Chem::SmallestSetOfSmallestRings::sssrComplete() const
 	return (sssr.size() >= sssrSize);
 }
 
-Chem::SmallestSetOfSmallestRings::PathMessage* Chem::SmallestSetOfSmallestRings::allocMessage()
+Chem::SmallestSetOfSmallestRings::MessagePtr Chem::SmallestSetOfSmallestRings::allocMessage()
 {
-	if (freeMessages.empty()) {
-		PathMessage::SharedPointer msg_ptr(new PathMessage());
-		
-		allocMessages.push_back(msg_ptr);
-
-		return msg_ptr.get();
-	}
-
-	PathMessage* msg = freeMessages.back();
-	freeMessages.pop_back();
-
-	return msg;
+	return msgCache.get();
 }
 
-Chem::SmallestSetOfSmallestRings::PathMessage* Chem::SmallestSetOfSmallestRings::allocMessage(std::size_t first_atom_idx, std::size_t first_bond_idx, 
-																							  std::size_t max_num_atoms, std::size_t max_num_bonds)
+Chem::SmallestSetOfSmallestRings::MessagePtr Chem::SmallestSetOfSmallestRings::allocMessage(std::size_t first_atom_idx, std::size_t first_bond_idx, 
+																							std::size_t max_num_atoms, std::size_t max_num_bonds)
 {
-	if (freeMessages.empty()) {
-		PathMessage::SharedPointer msg_ptr(new PathMessage(first_atom_idx, first_bond_idx, max_num_atoms, max_num_bonds));
-		
-		allocMessages.push_back(msg_ptr);
-
-		return msg_ptr.get();
-	}
-
-	PathMessage* msg = freeMessages.back();
+	MessagePtr msg = msgCache.get();
 
 	msg->init(first_atom_idx, first_bond_idx, max_num_atoms, max_num_bonds);
 
-	freeMessages.pop_back();
-
 	return msg;
 }
 
-void Chem::SmallestSetOfSmallestRings::freeMessage(PathMessage* msg)
-{
-	freeMessages.push_back(msg);
-}
-
-bool Chem::SmallestSetOfSmallestRings::processCollision(const PathMessage* msg1, const PathMessage* msg2, std::size_t coll_atom_idx, bool odd)
+bool Chem::SmallestSetOfSmallestRings::processCollision(const MessagePtr& msg1, const MessagePtr& msg2, std::size_t coll_atom_idx, bool odd)
 {
 	if (!testRing->join(msg1, msg2))
 		return false;
@@ -347,10 +331,9 @@ void Chem::SmallestSetOfSmallestRings::processEvenRings()
 	evenRings.clear();
 }
 
-void Chem::SmallestSetOfSmallestRings::processRing(PathMessage* ring)
+void Chem::SmallestSetOfSmallestRings::processRing(const MessagePtr& ring)
 {
 	TestMatrixRowCmpFunc search_func;
-
 	MessageList::iterator mtx_end = linDepTestMtx.end();
 	MessageList::iterator lb = std::lower_bound(linDepTestMtx.begin(), mtx_end, ring, search_func);
 
@@ -386,7 +369,7 @@ bool Chem::SmallestSetOfSmallestRings::TNode::send(Controller* ctrl)
 	bool new_messages = false;
 	
 	for (std::size_t i = 0; i < num_messages; i++) {
-		PathMessage* msg = sendBuffer[i];
+		const MessagePtr& msg = sendBuffer[i];
 
 		for (std::size_t j = 0; j < num_nbr_nodes; j++) {
 			std::size_t bond_idx = bondIndices[j]; 
@@ -394,7 +377,7 @@ bool Chem::SmallestSetOfSmallestRings::TNode::send(Controller* ctrl)
 			if (msg->containsAtom(nbrNodes[j]->index) | msg->containsBond(bond_idx)) // check path collisions
 				continue;
 
-			PathMessage* new_msg = ctrl->allocMessage();		
+			MessagePtr new_msg = ctrl->allocMessage();		
 
 			new_msg->copy(msg);
 			new_msg->addAtom(index);
@@ -403,8 +386,6 @@ bool Chem::SmallestSetOfSmallestRings::TNode::send(Controller* ctrl)
 			new_messages = true;
 			nbrNodes[j]->receiveBuffer.push_back(new_msg);
 		}
-
-		ctrl->freeMessage(msg);
 	}
 
 	sendBuffer.clear();
@@ -414,18 +395,18 @@ bool Chem::SmallestSetOfSmallestRings::TNode::send(Controller* ctrl)
 
 bool Chem::SmallestSetOfSmallestRings::TNode::receive(Controller* ctrl)
 {
-	MessageBuffer::iterator rcv_buf_beg = receiveBuffer.begin();
-	MessageBuffer::iterator rcv_buf_end = receiveBuffer.end();
+	MessageList::iterator rcv_buf_beg = receiveBuffer.begin();
+	MessageList::iterator rcv_buf_end = receiveBuffer.end();
 
 	std::for_each(rcv_buf_beg, rcv_buf_end, boost::bind(&PathMessage::clearFlags, _1));
 
-	for (MessageBuffer::iterator it = rcv_buf_beg; it != rcv_buf_end; ) {
-		PathMessage* msg1 = *it;
+	for (MessageList::iterator it = rcv_buf_beg; it != rcv_buf_end; ) {
+		MessagePtr& msg1 = *it;
 		std::size_t first_atom_idx = msg1->getFirstAtomIndex();
 		std::size_t first_bond_idx = msg1->getFirstBondIndex();
 
-		for (MessageBuffer::iterator it2 = ++it; it2 != rcv_buf_end; ++it2) {
-			PathMessage* msg2 = *it2;
+		for (MessageList::iterator it2 = ++it; it2 != rcv_buf_end; ++it2) {
+			MessagePtr& msg2 = *it2;
 
 			if (first_atom_idx == msg2->getFirstAtomIndex()) {		 // node collision
 				if (first_bond_idx == msg2->getFirstBondIndex()) {   // edge collision 
@@ -450,13 +431,11 @@ bool Chem::SmallestSetOfSmallestRings::TNode::receive(Controller* ctrl)
 
 	sendBuffer.clear();
 
-	for (MessageBuffer::iterator it = rcv_buf_beg; it != rcv_buf_end; ++it) {
-		PathMessage* msg = *it;
+	for (MessageList::iterator it = rcv_buf_beg; it != rcv_buf_end; ++it) {
+		MessagePtr& msg = *it;
 
-		if (msg->getRemoveFlag() && !msg->getEdgeCollisionFlag()) {
-			ctrl->freeMessage(msg);
+		if (msg->getRemoveFlag() && !msg->getEdgeCollisionFlag()) 
 			continue;
-		}
 		
 		sendBuffer.push_back(msg);
 	}
@@ -563,12 +542,6 @@ void Chem::SmallestSetOfSmallestRings::TNode::setCollectedBondBit(std::size_t id
 }
 
 
-Chem::SmallestSetOfSmallestRings::PathMessage::PathMessage(std::size_t first_atom_idx, std::size_t first_bond_idx,
-														   std::size_t max_num_atoms, std::size_t max_num_bonds)
-{
-	init(first_atom_idx, first_bond_idx, max_num_atoms, max_num_bonds);
-} 
-
 void Chem::SmallestSetOfSmallestRings::PathMessage::init(std::size_t first_atom_idx, std::size_t first_bond_idx,
 														 std::size_t max_num_atoms, std::size_t max_num_bonds)
 {
@@ -597,7 +570,7 @@ void Chem::SmallestSetOfSmallestRings::PathMessage::addBond(std::size_t bond_idx
 	maxBondIdx = std::max(maxBondIdx, bond_idx + 1);
 }
 
-void Chem::SmallestSetOfSmallestRings::PathMessage::copy(const PathMessage* msg)
+void Chem::SmallestSetOfSmallestRings::PathMessage::copy(const MessagePtr& msg)
 {
 	atomPath = msg->atomPath;
 	bondPath = msg->bondPath;
@@ -606,7 +579,7 @@ void Chem::SmallestSetOfSmallestRings::PathMessage::copy(const PathMessage* msg)
 	maxBondIdx = msg->maxBondIdx;
 }
 
-bool Chem::SmallestSetOfSmallestRings::PathMessage::join(const PathMessage* msg1, const PathMessage* msg2)
+bool Chem::SmallestSetOfSmallestRings::PathMessage::join(const MessagePtr& msg1, const MessagePtr& msg2)
 {
 	bondPath = msg1->bondPath;
 	bondPath &= msg2->bondPath;
@@ -708,13 +681,13 @@ Chem::SmallestSetOfSmallestRings::PathMessage& Chem::SmallestSetOfSmallestRings:
 }
 
 
-bool Chem::SmallestSetOfSmallestRings::TestMatrixRowCmpFunc::operator()(const PathMessage* msg1, const PathMessage* msg2) const
+bool Chem::SmallestSetOfSmallestRings::TestMatrixRowCmpFunc::operator()(const MessagePtr& msg1, const MessagePtr& msg2) const
 {
 	return (msg1->getMaxBondIndex() > msg2->getMaxBondIndex());
 }
 
 
-bool Chem::SmallestSetOfSmallestRings::PathMessage::LessCmpFunc::operator()(const PathMessage* msg1, const PathMessage* msg2) const
+bool Chem::SmallestSetOfSmallestRings::PathMessage::LessCmpFunc::operator()(const MessagePtr& msg1, const MessagePtr& msg2) const
 {
 	return (msg1->bondPath < msg2->bondPath);
 }

@@ -40,6 +40,7 @@
 #include "CDPL/Chem/Molecule.hpp"
 #include "CDPL/Chem/BasicAtom.hpp"
 #include "CDPL/Chem/BasicBond.hpp"
+#include "CDPL/Util/ObjectPool.hpp"
 
 
 namespace CDPL 
@@ -59,8 +60,12 @@ namespace CDPL
 		class CDPL_CHEM_API BasicMolecule : public Molecule
 		{
 
-			typedef std::vector<BasicAtom*> AtomPtrList;
-			typedef std::vector<BasicBond*> BondPtrList;
+			typedef Util::ObjectPool<BasicAtom> AtomCache;
+			typedef Util::ObjectPool<BasicBond> BondCache;
+			typedef AtomCache::SharedObjectPointer AtomPtr;
+			typedef BondCache::SharedObjectPointer BondPtr;
+			typedef std::vector<AtomPtr> AtomList;
+			typedef std::vector<BondPtr> BondList;
 
 		public:
 			/**	
@@ -68,10 +73,10 @@ namespace CDPL
 			 */
 			typedef boost::shared_ptr<BasicMolecule> SharedPointer;
 		
-			typedef boost::indirect_iterator<AtomPtrList::iterator, BasicAtom> AtomIterator;
-			typedef boost::indirect_iterator<AtomPtrList::const_iterator, const BasicAtom> ConstAtomIterator;
-			typedef boost::indirect_iterator<BondPtrList::iterator, BasicBond> BondIterator;
-			typedef boost::indirect_iterator<BondPtrList::const_iterator, const BasicBond> ConstBondIterator;
+			typedef boost::indirect_iterator<AtomList::iterator, BasicAtom> AtomIterator;
+			typedef boost::indirect_iterator<AtomList::const_iterator, const BasicAtom> ConstAtomIterator;
+			typedef boost::indirect_iterator<BondList::iterator, BasicBond> BondIterator;
+			typedef boost::indirect_iterator<BondList::const_iterator, const BasicBond> ConstBondIterator;
 
 			/**
 			 * \brief Constructs an empty \c %BasicMolecule instance.
@@ -275,27 +280,19 @@ namespace CDPL
 			void renumberAtoms(std::size_t idx);
 			void renumberBonds(std::size_t idx);
 
-			BasicAtom* allocAtom();
-			void freeAtom(BasicAtom* atom);
-
-			BasicBond* allocBond();
-			void freeBond(BasicBond* bond);
+			BasicAtom* createAtom();
+			BasicBond* createBond();
 
 			static void destroyAtom(BasicAtom* atom);
 			static void destroyBond(BasicBond* bond);
 		
-			typedef boost::shared_ptr<BasicAtom> SharedAtomPointer;
-			typedef boost::shared_ptr<BasicBond> SharedBondPointer;
+			static void clearAtom(BasicAtom& atom);
+			static void clearBond(BasicBond& bond);
 
-			typedef std::vector<SharedAtomPointer> AllocAtomList;
-			typedef std::vector<SharedBondPointer> AllocBondList;
-
-			AllocAtomList allocAtoms;
-			AtomPtrList   freeAtoms;
-			AllocBondList allocBonds;
-			BondPtrList   freeBonds;
-			AtomPtrList   atoms;
-			BondPtrList   bonds;
+			AtomCache atomCache;
+			BondCache bondCache;
+			AtomList  atoms;
+			BondList  bonds;
 		};
 
 		/**

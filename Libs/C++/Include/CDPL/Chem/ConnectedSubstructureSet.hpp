@@ -40,6 +40,7 @@
 #include "CDPL/Chem/APIPrefix.hpp"
 #include "CDPL/Chem/FragmentList.hpp"
 #include "CDPL/Util/BitSet.hpp"
+#include "CDPL/Util/ObjectPool.hpp"
 
 
 namespace CDPL 
@@ -109,6 +110,9 @@ namespace CDPL
 
 		private:
 			class SubstructDescriptor;
+		
+			typedef Util::ObjectPool<SubstructDescriptor> SubstructDescriptorCache;
+			typedef SubstructDescriptorCache::SharedObjectPointer SubstructDescriptorPtr;
 
 			ConnectedSubstructureSet(const ConnectedSubstructureSet&);
 
@@ -119,20 +123,12 @@ namespace CDPL
 			void growSubstructDescriptors(std::size_t);
 			void createSubstructFragments();
 
-			SubstructDescriptor* allocSubstructDescriptor();
-			SubstructDescriptor* allocSubstructDescriptor(const Bond&);
-
-			void freeSubstructDescriptor(SubstructDescriptor*);
+			SubstructDescriptorPtr allocSubstructDescriptor(const Bond&);
 
 			class SubstructDescriptor
 			{
 
 			public:
-				typedef boost::shared_ptr<SubstructDescriptor> SharedPointer;
-
-				SubstructDescriptor() {}
-				SubstructDescriptor(const MolecularGraph*, const Bond&);
-
 				void init(const MolecularGraph*, const Bond&);
 
 				bool grow(const Util::BitSet&);
@@ -160,21 +156,19 @@ namespace CDPL
 			};
 
 			struct SubstructDescriptorLessCmpFunc : 
-				public std::binary_function<const SubstructDescriptor*, const SubstructDescriptor*, bool> 
+				public std::binary_function<const SubstructDescriptorPtr, const SubstructDescriptorPtr, bool> 
 			{
 
-				bool operator()(const SubstructDescriptor*, const SubstructDescriptor*) const;
+				bool operator()(const SubstructDescriptorPtr&, const SubstructDescriptorPtr&) const;
 			};
 
-			typedef std::vector<SubstructDescriptor*> SubstructDescriptorList;
-			typedef std::vector<SubstructDescriptor::SharedPointer> AllocSubstructDescriptorList;
+			typedef std::vector<SubstructDescriptorPtr> SubstructDescriptorList;
 
-			AllocSubstructDescriptorList  allocSubstructDescriptors;
-			SubstructDescriptorList       freeSubstructDescriptors;
-			SubstructDescriptorList       foundSubstructDescriptors;
-			Util::BitSet                  bondMask;
-			std::size_t                   currSubstructSize;
-			const MolecularGraph*         molGraph;
+			SubstructDescriptorCache substructDescrCache;
+			SubstructDescriptorList  foundSubstructDescriptors;
+			Util::BitSet             bondMask;
+			std::size_t              currSubstructSize;
+			const MolecularGraph*    molGraph;
 		};
 
 		/**

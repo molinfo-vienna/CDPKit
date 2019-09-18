@@ -87,8 +87,8 @@ using namespace CDPL;
 
 
 Chem::SMILESDataWriter::SMILESDataWriter(const Base::DataIOBase& io_base): 
-	ioBase(io_base), nodeCache(boost::bind(&SMILESDataWriter::createNode, this), MAX_NODE_CACHE_SIZE),
-	edgeCache(boost::bind(&SMILESDataWriter::createEdge, this), MAX_EDGE_CACHE_SIZE)
+	ioBase(io_base), nodeCache(boost::bind(&SMILESDataWriter::createNode, this), NodeCache::DefaultDestructor(), MAX_NODE_CACHE_SIZE),
+	edgeCache(boost::bind(&SMILESDataWriter::createEdge, this), EdgeCache::DefaultDestructor(), MAX_EDGE_CACHE_SIZE)
 {}
 
 Chem::SMILESDataWriter::~SMILESDataWriter() {}
