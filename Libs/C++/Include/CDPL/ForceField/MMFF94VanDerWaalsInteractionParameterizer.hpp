@@ -35,9 +35,9 @@
 
 #include "CDPL/ForceField/APIPrefix.hpp"
 #include "CDPL/ForceField/MMFF94VanDerWaalsInteractionData.hpp"
-#include "CDPL/ForceField/MMFF94PropertyFunctionWrappers.hpp"
-#include "CDPL/ForceField/InteractionFilterFunctionWrappers.hpp"
-#include "CDPL/ForceField/TopologicalAtomDistanceFunctionWrapper.hpp"
+#include "CDPL/ForceField/MMFF94PropertyFunctions.hpp"
+#include "CDPL/ForceField/InteractionFilterFunctions.hpp"
+#include "CDPL/ForceField/TopologicalAtomDistanceFunction.hpp"
 #include "CDPL/ForceField/MMFF94VanDerWaalsParameterTable.hpp"
 
 

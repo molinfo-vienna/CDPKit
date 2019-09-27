@@ -1,7 +1,7 @@
 /* -*- mode: c++; c-basic-offset: 4; tab-width: 4; indent-tabs-mode: t -*- */
 
 /* 
- * FragmentListExport.cpp 
+ * AtomCompareFunction.hpp 
  *
  * This file is part of the Chemical Data Processing Toolkit
  *
@@ -23,25 +23,39 @@
  * Boston, MA 02111-1307, USA.
  */
 
+/**
+ * \file
+ * \brief Type definition of a generic wrapper class for storing user-defined Chem::Atom compare functions.
+ */
 
-#include <boost/python.hpp>
+#ifndef CDPL_CHEM_ATOMCOMPAREFUNCTION_HPP
+#define CDPL_CHEM_ATOMCOMPAREFUNCTION_HPP
 
-#include "CDPL/ConfGen/FragmentList.hpp"
-#include "CDPL/Chem/MolecularGraph.hpp"
-
-#include "ClassExports.hpp"
+#include <boost/function.hpp>
 
 
-void CDPLPythonConfGen::exportFragmentList()
+namespace CDPL 
 {
-	using namespace boost;
-	using namespace CDPL;
 
-	python::class_<ConfGen::FragmentList, ConfGen::FragmentList::SharedPointer, 
-		python::bases<Chem::FragmentList>, boost::noncopyable>("FragmentList", python::no_init)
-		.def(python::init<>(python::arg("self")))
-		.def(python::init<const Chem::MolecularGraph&>((python::arg("self"), python::arg("molgraph")))
-			 [python::with_custodian_and_ward<1, 2>()])
-		.def("generate", &ConfGen::FragmentList::generate, (python::arg("self"), python::arg("molgraph")), 
-			 python::with_custodian_and_ward<1, 2>());
+    namespace Chem
+    {
+
+		class Atom;
+
+		/**
+		 * \addtogroup CDPL_CHEM_DATA_STRUCTURES
+		 * @{
+		 */
+
+		/**
+		 * \brief A generic wrapper class used to store a user-defined atom compare function.
+		 */
+		typedef boost::function2<bool, const Chem::Atom&, const Chem::Atom&> AtomCompareFunction;
+
+		/**
+		 * @}
+		 */
+    }
 }
+
+#endif // CDPL_CHEM_ATOMCOMPAREFUNCTION_HPP

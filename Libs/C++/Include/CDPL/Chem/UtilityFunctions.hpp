@@ -82,6 +82,8 @@ namespace CDPL
 
 		CDPL_CHEM_API bool containsFragmentWithBond(const FragmentList& frag_list, const Bond& bond);
 
+		CDPL_CHEM_API bool containsFragmentWithMinSize(const FragmentList& frag_list, std::size_t min_size);
+
 		/**
 		 * @}
 		 */

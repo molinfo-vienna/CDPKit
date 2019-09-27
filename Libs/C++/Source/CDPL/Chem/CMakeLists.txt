@@ -296,6 +296,7 @@ SET(cdpl-chem_LIB_SRCS
     MolecularGraphCanonicalizationFunctions.cpp 
     MolecularGraphFragmentMembershipFunctions.cpp 
     MolecularGraphCopyStereoDescriptorsFunctions.cpp  
+    MolecularGraphSplitIntoFragmentsFunction.cpp  
 
     ReactionPropertyFunctions.cpp
     ReactionMatchConstraintsFunctions.cpp

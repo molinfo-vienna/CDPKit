@@ -1,7 +1,7 @@
 /* -*- mode: c++; c-basic-offset: 4; tab-width: 4; indent-tabs-mode: t -*- */
 
 /* 
- * MMFF94PropertyFunctionWrappers.hpp 
+ * MMFF94PropertyFunctions.hpp 
  *
  * This file is part of the Chemical Data Processing Toolkit
  *
@@ -29,8 +29,8 @@
  *        for the retrieval of MMFF94 related properties.
  */
 
-#ifndef CDPL_FORCEFIELD_MMFF94PROPERTYFUNCTIONWRAPPERS_HPP
-#define CDPL_FORCEFIELD_MMFF94PROPERTYFUNCTIONWRAPPERS_HPP
+#ifndef CDPL_FORCEFIELD_MMFF94PROPERTYFUNCTIONS_HPP
+#define CDPL_FORCEFIELD_MMFF94PROPERTYFUNCTIONS_HPP
 
 #include <string>
 
@@ -89,4 +89,4 @@ namespace CDPL
     }
 }
 
-#endif // CDPL_FORCEFIELD_MMFF94PROPERTYFUNCTIONWRAPPERS_HPP
+#endif // CDPL_FORCEFIELD_MMFF94PROPERTYFUNCTIONS_HPP

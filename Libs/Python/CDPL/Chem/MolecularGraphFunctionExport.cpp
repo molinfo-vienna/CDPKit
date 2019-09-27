@@ -197,6 +197,9 @@ void CDPLPythonChem::exportMolecularGraphFunctions()
 	python::def("getContainedFragments", &Chem::getContainedFragments, 
 				(python::arg("molgraph"), python::arg("frag_list"), python::arg("cont_frag_list"), 
 				 python::arg("append") = false, python::arg("atoms") = true, python::arg("bonds") = true));
+	python::def("splitIntoFragments", &Chem::splitIntoFragments, 
+				(python::arg("molgraph"), python::arg("frag_list"), python::arg("split_bond_mask"), 
+				 python::arg("append") = false));
 
 	python::def("buildMatchExpression", static_cast<Chem::MatchExpression<Chem::MolecularGraph>::SharedPointer (*)(const Chem::MolecularGraph&)>(&Chem::buildMatchExpression),
 	 			python::arg("molgraph"), python::with_custodian_and_ward_postcall<0, 1>());

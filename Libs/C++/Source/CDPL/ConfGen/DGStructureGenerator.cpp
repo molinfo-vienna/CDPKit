@@ -36,57 +36,17 @@ using namespace CDPL;
 
 
 ConfGen::DGStructureGenerator::DGStructureGenerator(): 
-	molGraph(0), withPlanConstr(true), boxSize(50.0)
+	molGraph(0)
 {}
 
-void ConfGen::DGStructureGenerator::setBoxSize(double size)
+ConfGen::DGStructureGeneratorSettings& ConfGen::DGStructureGenerator::getSettings()
 {
-    boxSize = size;
+	return settings;
 }
 
-double ConfGen::DGStructureGenerator::getBoxSize() const
+const ConfGen::DGStructureGeneratorSettings& ConfGen::DGStructureGenerator::getSettings() const
 {
-    return boxSize;
-}
-
-void ConfGen::DGStructureGenerator::regardAtomConfiguration(bool regard)
-{
-    dgConstraintsGen.regardAtomConfiguration(regard);
-}
-
-bool ConfGen::DGStructureGenerator::atomConfigurationRegarded() const
-{
-    return dgConstraintsGen.atomConfigurationRegarded();
-}
-
-void ConfGen::DGStructureGenerator::regardBondConfiguration(bool regard)
-{
-    dgConstraintsGen.regardBondConfiguration(regard);
-}
-
-bool ConfGen::DGStructureGenerator::bondConfigurationRegarded() const
-{
-    return dgConstraintsGen.bondConfigurationRegarded();
-}
-
-void ConfGen::DGStructureGenerator::excludeHydrogens(bool exclude)
-{
-    dgConstraintsGen.excludeHydrogens(exclude);
-}
-
-bool ConfGen::DGStructureGenerator::hydrogensExcluded() const
-{
-    return dgConstraintsGen.hydrogensExcluded();
-}
-
-void ConfGen::DGStructureGenerator::enablePlanarityConstraints(bool enable)
-{
-	withPlanConstr = enable;
-}
-
-bool ConfGen::DGStructureGenerator::planarityConstraintsEnabled() const
-{
-	return withPlanConstr;
+	return settings;
 }
 
 const Util::BitSet& ConfGen::DGStructureGenerator::getExcludedHydrogenMask() const
@@ -112,7 +72,7 @@ bool ConfGen::DGStructureGenerator::generate(Math::Vector3DArray& coords)
 
 	coords.resize(molGraph->getNumAtoms());
 
-	boost::random::uniform_real_distribution<double> coord_dist(-boxSize * 0.5, boxSize * 0.5);
+	boost::random::uniform_real_distribution<double> coord_dist(-settings.getBoxSize() * 0.5, settings.getBoxSize() * 0.5);
 
 	for (Math::Vector3DArray::ElementIterator it = coords.getElementsBegin(), end = coords.getElementsEnd(); it != end; ++it) {
 		Math::Vector3D& pos = *it;
@@ -124,13 +84,13 @@ bool ConfGen::DGStructureGenerator::generate(Math::Vector3DArray& coords)
 
     phase1CoordsGen.generate(molGraph->getNumAtoms(), coords.getData());
 
-	if (withPlanConstr) 
+	if (settings.enablePlanarityConstraints()) 
 		phase2CoordsGen.generate(molGraph->getNumAtoms(), coords.getData());
 	
-	if (dgConstraintsGen.atomConfigurationRegarded() && !checkAtomConfigurations(coords))
+	if (settings.regardAtomConfiguration() && !checkAtomConfigurations(coords))
 		return false;
 
-	if (dgConstraintsGen.bondConfigurationRegarded() && !checkBondConfigurations(coords))
+	if (settings.regardBondConfiguration() && !checkBondConfigurations(coords))
 		return false;
 
     return true;
@@ -140,6 +100,7 @@ void ConfGen::DGStructureGenerator::setup(const Chem::MolecularGraph& molgraph,
 										  const ForceField::MMFF94InteractionData* ia_data)
 {
     molGraph = &molgraph;
+	dgConstraintsGen.getSettings() = settings;
 
     if (ia_data)
 		dgConstraintsGen.setup(molgraph, *ia_data);
@@ -157,7 +118,7 @@ void ConfGen::DGStructureGenerator::setup(const Chem::MolecularGraph& molgraph,
     dgConstraintsGen.addDefaultDistanceConstraints(phase1CoordsGen);
     dgConstraintsGen.addAtomConfigurationConstraints(phase1CoordsGen);
 
-	if (withPlanConstr) {
+	if (settings.enablePlanarityConstraints()) {
 		phase2CoordsGen = phase1CoordsGen;
 
 		dgConstraintsGen.addAtomPlanarityConstraints(phase2CoordsGen);	 

@@ -37,8 +37,8 @@
 
 #include "CDPL/ForceField/APIPrefix.hpp"
 #include "CDPL/ForceField/MMFF94OutOfPlaneBendingInteractionData.hpp"
-#include "CDPL/ForceField/MMFF94PropertyFunctionWrappers.hpp"
-#include "CDPL/ForceField/InteractionFilterFunctionWrappers.hpp"
+#include "CDPL/ForceField/MMFF94PropertyFunctions.hpp"
+#include "CDPL/ForceField/InteractionFilterFunctions.hpp"
 #include "CDPL/ForceField/MMFF94OutOfPlaneBendingParameterTable.hpp"
 #include "CDPL/ForceField/MMFF94AtomTypePropertyTable.hpp"
 #include "CDPL/ForceField/MMFF94PrimaryToParameterAtomTypeMap.hpp"

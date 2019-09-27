@@ -36,6 +36,7 @@
 #include "CDPL/ConfGen/FragmentConformerGenerator.hpp"
 #include "CDPL/ConfGen/FragmentType.hpp"
 #include "CDPL/ConfGen/ReturnCode.hpp"
+#include "CDPL/ConfGen/UtilityFunctions.hpp"
 #include "CDPL/Chem/AtomType.hpp"
 #include "CDPL/Chem/FragmentList.hpp"
 #include "CDPL/Chem/Atom.hpp"
@@ -44,6 +45,7 @@
 #include "CDPL/Chem/AtomFunctions.hpp"
 #include "CDPL/Chem/BondFunctions.hpp"
 #include "CDPL/Chem/Entity3DFunctions.hpp"
+#include "CDPL/Chem/UtilityFunctions.hpp"
 #include "CDPL/Math/Matrix.hpp"
 #include "CDPL/Math/VectorArrayFunctions.hpp"
 #include "CDPL/ForceField/Exceptions.hpp"
@@ -52,197 +54,43 @@
 namespace
 {
 
-	const std::size_t MIN_MACROCYCLE_SIZE         = 10;
-	const std::size_t MAX_VECTOR_ARRAY_CACHE_SIZE = 5000;
+	const std::size_t MAX_CONF_DATA_CACHE_SIZE     = 5000;
+	const std::size_t MAX_NUM_STRUCTURE_GEN_TRIALS = 10;
 }
 
 
 using namespace CDPL;
 
 
-const std::size_t  ConfGen::FragmentConformerGenerator::DEF_MAX_NUM_STRUCTURE_GEN_TRIALS;
-const std::size_t  ConfGen::FragmentConformerGenerator::DEF_MAX_NUM_MINIMIZATION_STEPS;
-const std::size_t  ConfGen::FragmentConformerGenerator::DEF_MAX_NUM_OUTPUT_CONFORMERS;
-const std::size_t  ConfGen::FragmentConformerGenerator::DEF_MIN_NUM_RING_CONFORMER_TRIALS;
-const std::size_t  ConfGen::FragmentConformerGenerator::DEF_MAX_NUM_RING_CONFORMER_TRIALS;
-const std::size_t  ConfGen::FragmentConformerGenerator::DEF_TIMEOUT;
-const std::size_t  ConfGen::FragmentConformerGenerator::DEF_RING_CONFORMER_TRIAL_FACTOR;
-const unsigned int ConfGen::FragmentConformerGenerator::DEF_FORCEFIELD_TYPE;
-const double       ConfGen::FragmentConformerGenerator::DEF_MINIMIZATION_STOP_GRADIENT_NORM = 0.1;
-const double       ConfGen::FragmentConformerGenerator::DEF_MINIMIZATION_STOP_ENERGY_DELTA  = 0.001;
-const double       ConfGen::FragmentConformerGenerator::DEF_ENERGY_WINDOW                   = 4.0;
-const double       ConfGen::FragmentConformerGenerator::DEF_MIN_RMSD                        = 0.1;
-
 
 ConfGen::FragmentConformerGenerator::FragmentConformerGenerator(): 
-	vecArrayCache(MAX_VECTOR_ARRAY_CACHE_SIZE),
-    maxNumStructGenTrials(DEF_MAX_NUM_STRUCTURE_GEN_TRIALS), maxNumMinSteps(DEF_MAX_NUM_MINIMIZATION_STEPS), 
-	maxNumOutputConfs(DEF_MAX_NUM_OUTPUT_CONFORMERS), minStopGradNorm(DEF_MINIMIZATION_STOP_GRADIENT_NORM), 
-	minStopEnergyDelta(DEF_MINIMIZATION_STOP_ENERGY_DELTA), timeout(DEF_TIMEOUT), reuseExistingCoords(false), 
-	eWindow(DEF_ENERGY_WINDOW), ringConfTrialFactor(DEF_RING_CONFORMER_TRIAL_FACTOR), 
-	minNumRingConfTrials(DEF_MIN_NUM_RING_CONFORMER_TRIALS), maxNumRingConfTrials(DEF_MAX_NUM_RING_CONFORMER_TRIALS),
-	minRMSD(DEF_MIN_RMSD), forceFieldType(DEF_FORCEFIELD_TYPE), energyMinimizer(boost::ref(mmff94EnergyCalc), boost::ref(mmff94GradientCalc))
+	confDataCache(MAX_CONF_DATA_CACHE_SIZE),
+	energyMinimizer(boost::ref(mmff94EnergyCalc), boost::ref(mmff94GradientCalc))
 {
 	using namespace Chem;
 
-    dgStructGen.excludeHydrogens(true);
-    dgStructGen.regardAtomConfiguration(true);
-    dgStructGen.regardBondConfiguration(true);
-	dgStructGen.enablePlanarityConstraints(true);
+    dgStructGen.getSettings().excludeHydrogens(true);
+    dgStructGen.getSettings().regardAtomConfiguration(true);
+    dgStructGen.getSettings().regardBondConfiguration(true);
+	dgStructGen.getSettings().enablePlanarityConstraints(true);
 
 	hCoordsGen.undefinedOnly(true);
+	hCoordsGen.setAtom3DCoordinatesCheckFunction(boost::bind(&FragmentConformerGenerator::has3DCoordinates, this, _1));
 
 	symMappingSearch.includeIdentityMapping(false);
 	symMappingSearch.setAtomPropertyFlags(AtomPropertyFlag::TYPE | AtomPropertyFlag::FORMAL_CHARGE | 
 										  AtomPropertyFlag::CONFIGURATION | AtomPropertyFlag::AROMATICITY |
 										  AtomPropertyFlag::EXPLICIT_BOND_COUNT | AtomPropertyFlag::HYBRIDIZATION_STATE);
-
-	mmff94Parameterizer.performStrictAtomTyping(true);
 }
 
-void ConfGen::FragmentConformerGenerator::setMaxNumStructureGenerationTrials(std::size_t max_num)
+ConfGen::FragmentConformerGeneratorSettings& ConfGen::FragmentConformerGenerator::getSettings()
 {
-	maxNumStructGenTrials = max_num;
+	return settings;
 }
 
-std::size_t ConfGen::FragmentConformerGenerator::getMaxNumStructureGenerationTrials() const
+const ConfGen::FragmentConformerGeneratorSettings& ConfGen::FragmentConformerGenerator::getSettings() const
 {
-	return maxNumStructGenTrials;
-}
-
-void ConfGen::FragmentConformerGenerator::setForceFieldType(unsigned int type)
-{
-	if (type == ForceFieldType::MMFF94 || type == ForceFieldType::MMFF94_NO_ESTAT)
-		mmff94Parameterizer.setDynamicParameterDefaults();
-	else
-		mmff94Parameterizer.setStaticParameterDefaults();
-
-	forceFieldType = type;
-}
-	    
-unsigned int ConfGen::FragmentConformerGenerator::getForceFieldType() const
-{
-	return forceFieldType;
-}
-
-void ConfGen::FragmentConformerGenerator::performStrictAtomTyping(bool strict)
-{
-	mmff94Parameterizer.performStrictAtomTyping(strict);
-}
-
-bool ConfGen::FragmentConformerGenerator::strictAtomTypingPerformed() const
-{
-	return mmff94Parameterizer.strictAtomTypingPerformed();
-}
-
-void ConfGen::FragmentConformerGenerator::setMaxNumMinimizationSteps(std::size_t max_num)
-{
-	maxNumMinSteps = max_num;
-}
-
-std::size_t ConfGen::FragmentConformerGenerator::getMaxNumMinimizationSteps() const
-{
-	return maxNumMinSteps;
-}
-
-void ConfGen::FragmentConformerGenerator::setMinimizationStopGradientNorm(double grad_norm)
-{
-	minStopGradNorm = grad_norm;
-}
-
-double ConfGen::FragmentConformerGenerator::getMinimizationStopGradientNorm() const
-{
-	return minStopGradNorm;
-}
-
-void ConfGen::FragmentConformerGenerator::setMinimizationStopEnergyDelta(double e_delta)
-{
-	minStopEnergyDelta = e_delta;
-}
-
-double ConfGen::FragmentConformerGenerator::getMinimizationStopEnergyDelta() const
-{
-	return minStopEnergyDelta;
-}
-
-void ConfGen::FragmentConformerGenerator::setTimeout(std::size_t mil_secs)
-{
-	timeout = mil_secs;
-}
-
-std::size_t ConfGen::FragmentConformerGenerator::getTimeout() const
-{
-	return timeout;
-}
-	
-void ConfGen::FragmentConformerGenerator::reuseExistingCoordinates(bool reuse)
-{
-	reuseExistingCoords = reuse;
-}
-
-bool ConfGen::FragmentConformerGenerator::existingCoordinatesReused() const
-{
-	return reuseExistingCoords;
-}
-
-void ConfGen::FragmentConformerGenerator::setEnergyWindow(double win_size)
-{
-	eWindow = win_size;
-}
-
-double ConfGen::FragmentConformerGenerator::getEnergyWindow() const
-{
-	return eWindow;
-}
-
-void ConfGen::FragmentConformerGenerator::setRingConformerTrialFactor(std::size_t factor)
-{
-	ringConfTrialFactor = factor;
-}
-
-std::size_t ConfGen::FragmentConformerGenerator::getRingConformerTrialFactor() const
-{
-	return ringConfTrialFactor;
-}
-
-void ConfGen::FragmentConformerGenerator::setMinNumRingConformerTrials(std::size_t min_num)
-{
-	minNumRingConfTrials = min_num;
-}
-
-std::size_t ConfGen::FragmentConformerGenerator::getMinNumRingConformerTrials() const
-{
-	return minNumRingConfTrials;
-}
-
-void ConfGen::FragmentConformerGenerator::setMaxNumRingConformerTrials(std::size_t max_num)
-{
-	maxNumRingConfTrials = max_num;
-}
-
-std::size_t ConfGen::FragmentConformerGenerator::getMaxNumRingConformerTrials() const
-{
-	return maxNumRingConfTrials;
-}
-
-void ConfGen::FragmentConformerGenerator::setMinRMSD(double min_rmsd)
-{
-	minRMSD = min_rmsd;
-}
-
-double ConfGen::FragmentConformerGenerator::getMinRMSD() const
-{
-	return minRMSD;
-}
-
-void ConfGen::FragmentConformerGenerator::setMaxNumOutputConformers(std::size_t max_num)
-{
-	maxNumOutputConfs = max_num;
-}
-
-std::size_t ConfGen::FragmentConformerGenerator::getMaxNumOutputConformers() const
-{
-	return maxNumOutputConfs;
+	return settings;
 }
 
 void ConfGen::FragmentConformerGenerator::setProgressCallback(const ProgressCallbackFunction& func)
@@ -250,15 +98,15 @@ void ConfGen::FragmentConformerGenerator::setProgressCallback(const ProgressCall
 	progCallback = func;
 }
 
-const ConfGen::FragmentConformerGenerator::ProgressCallbackFunction& 
-ConfGen::FragmentConformerGenerator::getProgressCallback() const
+const ConfGen::ProgressCallbackFunction& ConfGen::FragmentConformerGenerator::getProgressCallback() const
 {
 	return progCallback;
 }
 
 unsigned int ConfGen::FragmentConformerGenerator::generate(const Chem::MolecularGraph& molgraph, unsigned int frag_type) 
 {
-	init(molgraph);
+	if (!init(molgraph))
+		return ReturnCode::FORCEFIELD_SETUP_FAILED;
 
 	if (frag_type == FragmentType::FLEXIBLE_RING_SYSTEM)
 		return generateFlexibleRingConformers();
@@ -271,54 +119,35 @@ std::size_t ConfGen::FragmentConformerGenerator::getNumConformers() const
 	return outputConfs.size();
 }
 
-const Math::Vector3DArray& ConfGen::FragmentConformerGenerator::getCoordinates(std::size_t conf_idx) const
+const ConfGen::ConformerData& ConfGen::FragmentConformerGenerator::getConformer(std::size_t conf_idx) const
 {
 	if (conf_idx >= outputConfs.size())
 		throw Base::IndexError("FragmentConformerGenerator: conformer index out of bounds");
 
-	return *outputConfs[conf_idx].second;
+	return *outputConfs[conf_idx];
 }
 
-Math::Vector3DArray& ConfGen::FragmentConformerGenerator::getCoordinates(std::size_t conf_idx)
+ConfGen::FragmentConformerGenerator::ConstConformerIterator ConfGen::FragmentConformerGenerator::getConformersBegin() const
 {
-	if (conf_idx >= outputConfs.size())
-		throw Base::IndexError("FragmentConformerGenerator: conformer index out of bounds");
-
-	return *outputConfs[conf_idx].second;
+    return outputConfs.begin();
 }
 
-double ConfGen::FragmentConformerGenerator::getEnergy(std::size_t conf_idx) const
+ConfGen::FragmentConformerGenerator::ConstConformerIterator ConfGen::FragmentConformerGenerator::getConformersEnd() const
 {
-	if (conf_idx >= outputConfs.size())
-		throw Base::IndexError("FragmentConformerGenerator: conformer index out of bounds");
-
-	return outputConfs[conf_idx].first;
+    return outputConfs.end();
 }
 
 unsigned int ConfGen::FragmentConformerGenerator::generateSingleConformer()
 {
-	ConfData conf;
+	dgStructGen.getSettings().setBoxSize(ordHDepleteAtomMask.count() * 2);
 
-	if (reuseExistingCoords && outputExistingCoordinates(conf)) {
-		outputConfs.push_back(conf);
-
-		if (progCallback)
-			progCallback();
-
-		return ReturnCode::SUCCESS;
-	}
-
-	if (!initRandomConformerGeneration())
-		return ReturnCode::FORCEFIELD_SETUP_FAILED;
-
-	dgStructGen.setBoxSize(ordHDepleteAtomMask.count() * 2);
-
-	unsigned int ret_code = generateRandomConformer(conf, true);
+	ConformerDataPtr conf_data = allocConformerData();
+	unsigned int ret_code = generateRandomConformer(*conf_data);
 		
 	if (ret_code != ReturnCode::SUCCESS)
 		return ret_code;
 
-	outputConfs.push_back(conf);
+	outputConfs.push_back(conf_data);
 
 	if (progCallback)
 		progCallback();
@@ -328,31 +157,32 @@ unsigned int ConfGen::FragmentConformerGenerator::generateSingleConformer()
 
 unsigned int ConfGen::FragmentConformerGenerator::generateFlexibleRingConformers()
 {
-	if (!initRandomConformerGeneration())
-		return ReturnCode::FORCEFIELD_SETUP_FAILED;
-
-	dgStructGen.setBoxSize(ordHDepleteAtomMask.count());
+	dgStructGen.getSettings().setBoxSize(ordHDepleteAtomMask.count());
 
 	getRingAtomIndices();
 	getSymmetryMappings();
 
-	double e_window = eWindow;
-	std::size_t num_trials = 0;
+	std::size_t num_conf_samples = 0;
+	const FragmentConformerGeneratorSettings::RingFragmentSettings* rsys_settings = 0;
 
-	if (isMacrocyclicRingSystem()) {
-		e_window = calcMacrocyclicRingSystemEnergyWindow();
-		num_trials = calcMacrocyclicRingSystemConformerTrials();
+	if (containsFragmentWithMinSize(*getSSSR(*molGraph), settings.getMinMacrocycleSize())) {
+		rsys_settings = &settings.getMacrocycleSettings();
+		num_conf_samples = calcNumMacrocyclicRingSystemConfSamples();
 
-	} else 
-		num_trials = calcStandardRingSystemConformerTrials();
-	
-	num_trials = std::max(minNumRingConfTrials, std::min(maxNumRingConfTrials, num_trials));
+	} else {
+		rsys_settings = &settings.getSmallRingSystemSettings();
+		num_conf_samples = calcNumSmallRingSystemConfSamples();
+	}
 
+	num_conf_samples = std::max(rsys_settings->getMinNumSampledConformers(), std::min(rsys_settings->getMaxNumSampledConformers(), num_conf_samples));
+
+	std::size_t timeout = rsys_settings->getTimeout();
+	double e_window = rsys_settings->getEnergyWindow();
 	double min_energy = 0.0;
 	unsigned int ret_code = ReturnCode::SUCCESS;
 
-	for (std::size_t i = 0; i < num_trials; i++) {
-		if (timeoutExceeded()) {
+	for (std::size_t i = 0; i < num_conf_samples; i++) {
+		if (timeoutExceeded(timeout)) {
 			ret_code = ReturnCode::TIMEOUT_EXCEEDED;
 			break;
 		}
@@ -360,21 +190,23 @@ unsigned int ConfGen::FragmentConformerGenerator::generateFlexibleRingConformers
 		if (progCallback && !progCallback())
 			break;
 
-		ConfData conf;
+		ConformerDataPtr conf_data = allocConformerData();
 
-		if (generateRandomConformer(conf, false) != ReturnCode::SUCCESS) 
+		if (generateRandomConformer(*conf_data) != ReturnCode::SUCCESS) 
 			continue;
+
+		double energy = conf_data->getEnergy();
 
 		if (workingConfs.empty())
-			min_energy = conf.first;
+			min_energy = energy;
 
-		else if (conf.first > (min_energy + e_window))
+		else if (energy > (min_energy + e_window))
 			continue;
 
-		if (conf.first < min_energy)
-			min_energy = conf.first;
+		if (energy < min_energy)
+			min_energy = energy;
 
-		workingConfs.push_back(conf);
+		workingConfs.push_back(conf_data);
 	}
 
 	if (workingConfs.empty()) {
@@ -385,87 +217,79 @@ unsigned int ConfGen::FragmentConformerGenerator::generateFlexibleRingConformers
 	}
 
 	std::sort(workingConfs.begin(), workingConfs.end(), 
-			  boost::bind(std::less<double>(), boost::bind(&ConfData::first, _1), boost::bind(&ConfData::first, _2)));
+			  boost::bind(std::less<double>(), boost::bind(&ConformerData::getEnergy, _1), boost::bind(&ConformerData::getEnergy, _2)));
 
-	double max_energy = workingConfs.front().first + e_window;
+	double max_energy = min_energy + e_window;
+	double rmsd = rsys_settings->getMinRMSD();
+	std::size_t max_num_out_confs = rsys_settings->getMaxNumOutputConformers();
 
-	for (ConfDataArray::iterator it = workingConfs.begin(), end = workingConfs.end(); it != end; ++it) {
-		ConfData& conf = *it;
+	for (ConformerDataArray::iterator it = workingConfs.begin(), end = workingConfs.end(); it != end; ++it) {
+		ConformerDataPtr& conf_data = *it;
+		Math::Vector3DArray& conf_coords = *conf_data;
 
-		if (outputConfs.size() >= maxNumOutputConfs) 
+		if (outputConfs.size() >= max_num_out_confs) 
 			return ReturnCode::SUCCESS;
 
-		if (conf.first > max_energy)
+		if (conf_data->getEnergy() > max_energy)
 			return ReturnCode::SUCCESS;
 
-		if (!checkRMSD(conf)) {
-			conf.second.reset();
+		if (!checkRMSD(conf_coords, rmsd)) {
+			conf_data.reset();
 			continue;
 		}
 
-		outputConfs.push_back(conf);
-
-		const Math::Vector3DArray& coords = *conf.second;
+		outputConfs.push_back(conf_data);
 
 		for (std::size_t mapping_offs = 0, mappings_size = symMappings.size(); 
-			 mapping_offs < mappings_size && outputConfs.size() < maxNumOutputConfs; mapping_offs += numAtoms) {
+			 mapping_offs < mappings_size && outputConfs.size() < max_num_out_confs; mapping_offs += numAtoms) {
 
-			ConfData sym_conf;
+			ConformerDataPtr sym_conf_data = allocConformerData();
+			Math::Vector3DArray& sym_conf_coords = *sym_conf_data;
 
-			allocVectorArray(sym_conf);
-
-			Math::Vector3DArray& sym_coords = *sym_conf.second;
-
-			sym_coords.resize(numAtoms);
+			sym_conf_coords.resize(numAtoms);
 
 			for (std::size_t k = 0; k < numAtoms; k++)
-				sym_coords[symMappings[mapping_offs + k]].assign(coords[k]);
+				sym_conf_coords[symMappings[mapping_offs + k]].assign(conf_coords[k]);
 
-			if (!checkRMSD(sym_conf))
+			if (!checkRMSD(sym_conf_coords, rmsd))
 				continue;
 
-			sym_conf.first = conf.first;
+			sym_conf_data->setEnergy(conf_data->getEnergy());
 
-			outputConfs.push_back(sym_conf);
+			outputConfs.push_back(sym_conf_data);
 		}
 	}
 
 	return ReturnCode::SUCCESS;
 }
 
-void ConfGen::FragmentConformerGenerator::init(const Chem::MolecularGraph& molgraph)
+bool ConfGen::FragmentConformerGenerator::init(const Chem::MolecularGraph& molgraph)
 {
-	outputConfs.clear();
-	workingConfs.clear();
-	ringAtomCoords.clear();
-
 	timer.start();
 
 	molGraph = &molgraph;
 	numAtoms = molgraph.getNumAtoms();
-}
 
-bool ConfGen::FragmentConformerGenerator::initRandomConformerGeneration()
-{
-	const unsigned int ia_types = (forceFieldType == ForceFieldType::MMFF94 || forceFieldType == ForceFieldType::MMFF94S ?
-								   ForceField::InteractionType::ALL :
-								   ForceField::InteractionType::ALL ^ ForceField::InteractionType::ELECTROSTATIC);
+	outputConfs.clear();
+	workingConfs.clear();
+	ringAtomCoords.clear();
+
+	mmff94Parameterizer.strictParameterization(settings.strictForceFieldParameterization());
 
 	try {
-		mmff94Parameterizer.parameterize(*molGraph, mmff94Data, ia_types);
+		parameterizeMMFF94Interactions(molgraph, mmff94Parameterizer, mmff94Data, settings.getForceFieldType());
 
 	} catch (const ForceField::Error&) {
 		return false;
 	}
 
-	dgStructGen.setup(*molGraph, mmff94Data);
+	dgStructGen.setup(molgraph, mmff94Data);
 
 	ordHDepleteAtomMask.resize(numAtoms);
 	ordHDepleteAtomMask = dgStructGen.getExcludedHydrogenMask();
 	ordHDepleteAtomMask.flip();
 
-	hCoordsGen.setAtom3DCoordinatesCheckFunction(boost::bind(&FragmentConformerGenerator::has3DCoordinates, this, _1));
-	hCoordsGen.setup(*molGraph);
+	hCoordsGen.setup(molgraph);
 
 	mmff94EnergyCalc.setup(mmff94Data);
 	mmff94GradientCalc.setup(mmff94Data, numAtoms);
@@ -475,92 +299,42 @@ bool ConfGen::FragmentConformerGenerator::initRandomConformerGeneration()
 	return true;
 }
 
-bool ConfGen::FragmentConformerGenerator::outputExistingCoordinates(ConfData& conf)
+unsigned int ConfGen::FragmentConformerGenerator::generateRandomConformer(ConformerData& conf_data)
 {
-	using namespace Chem;
+	std::size_t max_ref_iters = settings.getMaxNumRefinementIterations();
+	double stop_grad = settings.getRefinementStopGradient();
 
-	allocVectorArray(conf);
-
-	if (getExistingCoordinates(*molGraph, *conf.second)) 
-		return true;
-	
-	return false;
-}
-
-bool ConfGen::FragmentConformerGenerator::getExistingCoordinates(const Chem::MolecularGraph& molgraph, Math::Vector3DArray& coords)
-{
-	using namespace Chem;
-
-	std::size_t num_atoms = molgraph.getNumAtoms();
-	bool have_h_atom_coords = true;
-
-	coords.resize(num_atoms);
-
-	for (std::size_t i = 0; i < num_atoms; i++) {
-		const Atom& atom = molgraph.getAtom(i);
-
-		try {
-			coords[i] = get3DCoordinates(atom);
-
-		} catch (const Base::ItemNotFound& e) {
-			if (getType(atom) != AtomType::H) 
-				return false;
-			
-			have_h_atom_coords = false;
-		}
-	}
-
-	if (!have_h_atom_coords) { 
-		hCoordsGen.setAtom3DCoordinatesCheckFunction(&Chem::has3DCoordinates);
-		hCoordsGen.generate(molgraph, coords, false);
-	}
-
-	return true;
-}
-
-unsigned int ConfGen::FragmentConformerGenerator::generateRandomConformer(ConfData& conf, bool best_opt)
-{
-	allocVectorArray(conf);
-
-	Math::Vector3DArray& coords = *conf.second;
-
-	for (std::size_t i = 0; i < maxNumStructGenTrials; i++) {
-		if (!dgStructGen.generate(coords)) 
+	for (std::size_t i = 0; i < MAX_NUM_STRUCTURE_GEN_TRIALS; i++) {
+		if (!dgStructGen.generate(conf_data)) 
 			continue;
 
-		hCoordsGen.generate(coords, false);
-		energyMinimizer.setup(coords.getData(), gradient);
+		hCoordsGen.generate(conf_data, false);
+		energyMinimizer.setup(conf_data.getData(), gradient);
 
-		for (std::size_t j = 0; maxNumMinSteps == 0 || j < maxNumMinSteps; j++) {
-			if (energyMinimizer.iterate(conf.first, coords.getData(), gradient) != BFGSMinimizer::SUCCESS) {
-				if ((boost::math::isnan)(conf.first))
+		double energy = 0.0;		
+
+		for (std::size_t j = 0; max_ref_iters == 0 || j < max_ref_iters; j++) {
+			if (energyMinimizer.iterate(energy, conf_data.getData(), gradient) != BFGSMinimizer::SUCCESS) {
+				if ((boost::math::isnan)(energy))
 					return ReturnCode::FORCEFIELD_MINIMIZATION_FAILED;
 
 				break;
 			}
 
-			if ((boost::math::isnan)(conf.first))
+			if ((boost::math::isnan)(energy))
 				return ReturnCode::FORCEFIELD_MINIMIZATION_FAILED;
 		
-			if (best_opt && minStopEnergyDelta >= 0.0 && minStopGradNorm >= 0.0) {
-				if (energyMinimizer.getFunctionDelta() <= minStopEnergyDelta && energyMinimizer.getGradientNorm() <= minStopGradNorm)
-					break;
-
-				continue;
-			}
-
-			if (minStopEnergyDelta >= 0.0 && energyMinimizer.getFunctionDelta() <= minStopEnergyDelta)
-				break;
-
-			if (minStopGradNorm >= 0.0 && energyMinimizer.getGradientNorm() <= minStopGradNorm)
+			if (stop_grad >= 0.0 && energyMinimizer.getGradientNorm() <= stop_grad)
 				break;
 		}
 
-		if (!dgStructGen.checkAtomConfigurations(coords)) 
+		if (!dgStructGen.checkAtomConfigurations(conf_data)) 
 			continue;
 		
-		if (!dgStructGen.checkBondConfigurations(coords)) 
+		if (!dgStructGen.checkBondConfigurations(conf_data)) 
 			continue;
+
+		conf_data.setEnergy(energy);
 
 		return ReturnCode::SUCCESS;
 	}
@@ -568,28 +342,27 @@ unsigned int ConfGen::FragmentConformerGenerator::generateRandomConformer(ConfDa
 	return ReturnCode::MAX_NUM_TRIALS_EXCEEDED;
 }
 
-bool ConfGen::FragmentConformerGenerator::checkRMSD(const ConfData& conf)
+bool ConfGen::FragmentConformerGenerator::checkRMSD(const Math::Vector3DArray& conf_coords, double min_rmsd)
 {
-	VectorArrayPtr conf_ha_coords_ptr = getRingAtomCoordinates(conf);
-	Math::Vector3DArray& conf_ha_coords = *conf_ha_coords_ptr;
+	ConformerDataPtr conf_ra_coords_ptr = getRingAtomCoordinates(conf_coords);
+	Math::Vector3DArray& conf_ra_coords = *conf_ra_coords_ptr;
 	Math::Matrix4D conf_xform;
 
-	for (VectorArrayList::const_reverse_iterator it = ringAtomCoords.rbegin(), end = ringAtomCoords.rend(); it != end; ++it) {
-		const Math::Vector3DArray& prev_conf_ha_coords = **it;
+	for (ConformerDataArray::const_reverse_iterator it = ringAtomCoords.rbegin(), end = ringAtomCoords.rend(); it != end; ++it) {
+		const Math::Vector3DArray& prev_conf_ra_coords = **it;
 
-		if (!alignmentCalc.calculate(prev_conf_ha_coords, conf_ha_coords, false))
+		if (!alignmentCalc.calculate(prev_conf_ra_coords, conf_ra_coords, false))
 			return false;
 
 		conf_xform.assign(alignmentCalc.getTransform());
 
-		double rmsd = calcRMSD(prev_conf_ha_coords, conf_ha_coords, conf_xform);
+		double rmsd = calcRMSD(prev_conf_ra_coords, conf_ra_coords, conf_xform);
 
-		if (rmsd < minRMSD)
+		if (rmsd < min_rmsd)
 			return false;
 	}
 
-	ringAtomCoords.push_back(conf_ha_coords_ptr);
-
+	ringAtomCoords.push_back(conf_ra_coords_ptr);
 	return true;
 }
 
@@ -598,29 +371,29 @@ bool ConfGen::FragmentConformerGenerator::has3DCoordinates(const Chem::Atom& ato
 	return ordHDepleteAtomMask.test(molGraph->getAtomIndex(atom));
 }
 
-ConfGen::FragmentConformerGenerator::VectorArrayPtr ConfGen::FragmentConformerGenerator::getRingAtomCoordinates(const ConfData& conf)
+ConfGen::FragmentConformerGenerator::ConformerDataPtr 
+ConfGen::FragmentConformerGenerator::getRingAtomCoordinates(const Math::Vector3DArray& conf_coords)
 {
-	VectorArrayPtr ha_coords_ptr = vecArrayCache.get();
-	Math::Vector3DArray& ha_coords = *ha_coords_ptr;
-	const Math::Vector3DArray& coords = *conf.second;
+	ConformerDataPtr ra_coords_ptr = allocConformerData();
+	Math::Vector3DArray& ra_coords = *ra_coords_ptr;
 	Math::Vector3D ctr;
 	std::size_t num_ring_atoms = ringAtomIndices.size();
 
-	ha_coords.resize(num_ring_atoms);
+	ra_coords.resize(num_ring_atoms);
 
 	for (std::size_t i = 0; i < num_ring_atoms; i++) {
-		const Math::Vector3D& pos = coords[ringAtomIndices[i]];
+		const Math::Vector3D& pos = conf_coords[ringAtomIndices[i]];
 
 		ctr += pos;
-		ha_coords[i] = pos;
+		ra_coords[i] = pos;
 	}
 
 	ctr /= num_ring_atoms;
 
-	for (Math::Vector3DArray::ElementIterator it = ha_coords.getElementsBegin(), end = ha_coords.getElementsEnd(); it != end; ++it)
+	for (Math::Vector3DArray::ElementIterator it = ra_coords.getElementsBegin(), end = ra_coords.getElementsEnd(); it != end; ++it)
 		*it -= ctr;
 
-	return ha_coords_ptr;
+	return ra_coords_ptr;
 }
 
 void ConfGen::FragmentConformerGenerator::getRingAtomIndices()
@@ -741,18 +514,7 @@ void ConfGen::FragmentConformerGenerator::getNeighborHydrogens(const Chem::Atom&
 	}
 }
 
-bool ConfGen::FragmentConformerGenerator::isMacrocyclicRingSystem() const
-{
-	using namespace Chem;
-
-	const FragmentList& sssr = *getSSSR(*molGraph);
-
-	return (std::find_if(sssr.getElementsBegin(), sssr.getElementsEnd(),
-						 boost::bind(std::greater<std::size_t>(), boost::bind(&Fragment::getNumAtoms, _1), MIN_MACROCYCLE_SIZE)) !=
-			sssr.getElementsEnd());
-}
-
-std::size_t ConfGen::FragmentConformerGenerator::calcStandardRingSystemConformerTrials() const
+std::size_t ConfGen::FragmentConformerGenerator::calcNumSmallRingSystemConfSamples() const
 {
 	using namespace Chem;
 
@@ -766,17 +528,12 @@ std::size_t ConfGen::FragmentConformerGenerator::calcStandardRingSystemConformer
 			ring_flex_sum += double(ring.getNumAtoms()) / 6;
 	}
 
-	return (ring_flex_sum * ringConfTrialFactor);
+	return (ring_flex_sum * settings.getSmallRingSystemSamplingFactor());
 }
 
-std::size_t ConfGen::FragmentConformerGenerator::calcMacrocyclicRingSystemConformerTrials() const
+std::size_t ConfGen::FragmentConformerGenerator::calcNumMacrocyclicRingSystemConfSamples() const
 {
 	return std::pow(2, getNumRotatableRingBonds(*molGraph));
-}
-
-double ConfGen::FragmentConformerGenerator::calcMacrocyclicRingSystemEnergyWindow() const
-{
-	return (getNumRotatableRingBonds(*molGraph) * eWindow);
 }
 
 std::size_t ConfGen::FragmentConformerGenerator::getNumRotatableRingBonds(const Chem::MolecularGraph& molgraph) const
@@ -795,7 +552,7 @@ std::size_t ConfGen::FragmentConformerGenerator::getNumRotatableRingBonds(const 
 	return count;
 }
 
-bool ConfGen::FragmentConformerGenerator::timeoutExceeded() const
+bool ConfGen::FragmentConformerGenerator::timeoutExceeded(std::size_t timeout) const
 {
 	if (timeout == 0)
 		return false;
@@ -803,7 +560,11 @@ bool ConfGen::FragmentConformerGenerator::timeoutExceeded() const
 	return (timer.elapsed().wall > (boost::timer::nanosecond_type(timeout) * 1000000));
 }
 
-void ConfGen::FragmentConformerGenerator::allocVectorArray(ConfData& conf_data)
+ConfGen::FragmentConformerGenerator::ConformerDataPtr ConfGen::FragmentConformerGenerator::allocConformerData()
 {
-	conf_data.second = vecArrayCache.get();
+	ConformerDataPtr conf_data = confDataCache.get();
+
+	conf_data->setEnergy(0.0);
+
+	return conf_data;
 }

@@ -1,7 +1,7 @@
 /* -*- mode: c++; c-basic-offset: 4; tab-width: 4; indent-tabs-mode: t -*- */
 
 /* 
- * TopologicalAtomDistanceFunctionWrappes.hpp 
+ * ConformerGenerator.hpp 
  *
  * This file is part of the Chemical Data Processing Toolkit
  *
@@ -25,40 +25,58 @@
 
 /**
  * \file
- * \brief Type definition of generic wrapper class for storing an user-defined
- *        topological atom-pair distance function.
+ * \brief Definition of the class CDPL::ConfGen::ConformerGenerator.
  */
 
-#ifndef CDPL_FORCEFIELD_TOPOLOGICALATOMDISTANCEFUNCTIONWRAPPER_HPP
-#define CDPL_FORCEFIELD_TOPOLOGICALATOMDISTANCEFUNCTIONWRAPPER_HPP
+#ifndef CDPL_CONFGEN_CONFORMERGENERATOR_HPP
+#define CDPL_CONFGEN_CONFORMERGENERATOR_HPP
 
-#include <cstddef>
+#include <memory>
 
-#include <boost/function.hpp>
+#include "CDPL/ConfGen/APIPrefix.hpp"
+#include "CDPL/ConfGen/ConformerGeneratorSettings.hpp"
 
 
 namespace CDPL 
 {
 
-    namespace Chem
-    {
+	namespace Chem
+	{
 
-		class Atom;
 		class MolecularGraph;
-    }
+	}
 
-    namespace ForceField 
+    namespace ConfGen 
     {
+
+		class ConformerGeneratorImpl;
 
 		/**
-		 * \addtogroup CDPL_FORCEFIELD_DATA_STRUCTURES
+		 * \addtogroup CDPL_CONFGEN_GENERATORS
 		 * @{
 		 */
 
-		/**
-		 * \brief A generic wrapper class used to store a user-defined topological atom-pair distance function.
-		 */
-		typedef boost::function3<std::size_t, const Chem::Atom&, const Chem::Atom&, const Chem::MolecularGraph&> TopologicalAtomDistanceFunction;
+		class CDPL_CONFGEN_API ConformerGenerator
+		{
+
+		public:
+			ConformerGenerator();
+	
+			const ConformerGeneratorSettings& getSettings() const;
+
+			ConformerGeneratorSettings& getSettings();
+
+			unsigned int generate(const Chem::MolecularGraph& molgraph);
+
+		private:
+			ConformerGenerator(const ConformerGenerator&);
+
+			ConformerGenerator& operator=(const ConformerGenerator&);
+
+			typedef std::auto_ptr<ConformerGeneratorImpl> ImplementationPointer;
+
+			ImplementationPointer impl;
+		};
 
 		/**
 		 * @}
@@ -66,4 +84,4 @@ namespace CDPL
     }
 }
 
-#endif // CDPL_FORCEFIELD_TOPOLOGICALATOMDISTANCEFUNCTIONWRAPPER_HPP
+#endif // CDPL_CONFGEN_CONFORMERGENERATOR_HPP

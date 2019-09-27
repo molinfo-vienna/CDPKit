@@ -41,7 +41,7 @@
 using namespace CDPL; 
 
 	
-ForceField::MMFF94InteractionParameterizer::MMFF94InteractionParameterizer(bool mmff94s): strictAtomTyping(true)
+ForceField::MMFF94InteractionParameterizer::MMFF94InteractionParameterizer(bool mmff94s): strictParam(true)
 {
 	setPropertyFunctions();
 
@@ -62,7 +62,7 @@ ForceField::MMFF94InteractionParameterizer::MMFF94InteractionParameterizer(const
 	atomTyper(parameterizer.atomTyper),
 	bondTyper(parameterizer.bondTyper),
 	chargeCalculator(parameterizer.chargeCalculator),
-	strictAtomTyping(parameterizer.strictAtomTyping)
+	strictParam(parameterizer.strictParam)
 {
 	setPropertyFunctions();
 }
@@ -221,14 +221,14 @@ void ForceField::MMFF94InteractionParameterizer::setDynamicParameterDefaults()
 	torsionParameterizer.setTorsionParameterTable(MMFF94TorsionParameterTable::get(false));
 }
 
-void ForceField::MMFF94InteractionParameterizer::performStrictAtomTyping(bool strict)
+void ForceField::MMFF94InteractionParameterizer::strictParameterization(bool strict)
 {
-	strictAtomTyping = strict;
+	strictParam = strict;
 }
 
-bool ForceField::MMFF94InteractionParameterizer::strictAtomTypingPerformed() const
+bool ForceField::MMFF94InteractionParameterizer::strictParameterization() const
 {
-	return strictAtomTyping;
+	return strictParam;
 }
 
 void ForceField::MMFF94InteractionParameterizer::parameterize(const Chem::MolecularGraph& molgraph, MMFF94InteractionData& ia_data,
@@ -280,7 +280,7 @@ ForceField::MMFF94InteractionParameterizer& ForceField::MMFF94InteractionParamet
 	atomTyper = parameterizer.atomTyper;
 	bondTyper = parameterizer.bondTyper;
 	chargeCalculator = parameterizer.chargeCalculator;
-	strictAtomTyping = parameterizer.strictAtomTyping;
+	strictParam = parameterizer.strictParam;
 
 	setPropertyFunctions();
 
@@ -403,7 +403,7 @@ void ForceField::MMFF94InteractionParameterizer::setupAtomTypes()
 				throw ParameterizationFailed("MMFF94InteractionParameterizer: encountered invalid MMFF94 type for atom #" + boost::lexical_cast<std::string>(i));
 
 		} else {
-			atomTyper.perceiveTypes(*molGraph, symAtomTypes, numAtomTypes, strictAtomTyping);
+			atomTyper.perceiveTypes(*molGraph, symAtomTypes, numAtomTypes, strictParam);
 
 			for (std::size_t j = 0; j < num_atoms; j++)
 				if (numAtomTypes[j] == 0) 

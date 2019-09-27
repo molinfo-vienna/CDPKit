@@ -42,7 +42,7 @@
 
 #include "CDPL/Pharm/FeatureMapping.hpp"  
 #include "CDPL/Pharm/FeatureTypeHistogram.hpp"  
-#include "CDPL/Pharm/Feature3DCoordinatesFunctionWrapper.hpp"  
+#include "CDPL/Pharm/Feature3DCoordinatesFunction.hpp"  
 
 #include "CDPL/Pharm/FeatureContainerProperty.hpp"  
 #include "CDPL/Pharm/FeatureProperty.hpp"  

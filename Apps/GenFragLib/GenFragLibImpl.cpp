@@ -37,10 +37,11 @@
 #include "CDPL/Chem/BasicMolecule.hpp"
 #include "CDPL/Chem/ControlParameterFunctions.hpp"
 #include "CDPL/Chem/MolecularGraphFunctions.hpp"
+#include "CDPL/Chem/FragmentList.hpp"
 #include "CDPL/ConfGen/UtilityFunctions.hpp"
 #include "CDPL/ConfGen/FragmentLibraryGenerator.hpp"
-#include "CDPL/ConfGen/FragmentList.hpp"
 #include "CDPL/ConfGen/ReturnCode.hpp"
+#include "CDPL/ConfGen/ForceFieldType.hpp"
 #include "CDPL/Util/FileFunctions.hpp"
 #include "CDPL/Base/DataIOManager.hpp"
 #include "CDPL/Base/Exceptions.hpp"
@@ -48,6 +49,18 @@
 #include "Lib/HelperFunctions.hpp"
 
 #include "GenFragLibImpl.hpp"
+
+
+namespace
+{
+
+	const std::size_t  DEF_TIMEOUT                    = 20 * 60;
+	const std::size_t  DEF_SMALL_RSYS_SAMPLING_FACTOR = 20;
+	const double       DEF_MIN_RMSD                   = 0.1;
+	const double       DEF_E_WINDOW                   = 4.0;
+	const unsigned int DEF_FORCE_FIELD_TYPE           = CDPL::ConfGen::ForceFieldType::MMFF94_NO_ESTAT;
+	const bool         DEF_STRICT_FORCE_FIELD_PARAM   = true;
+}
 
 
 using namespace GenFragLib;
@@ -85,17 +98,21 @@ public:
 		numProcFrags(0), numErrorFrags(0), numAddedFrags(0), totalNumConfs(0)  
 	{
 		fragLibGen.setProgressCallback(boost::bind(&FragLibGenerationWorker::progress, this));
-		fragLibGen.setEnergyWindow(parent->eWindow);
-		fragLibGen.setMinRMSD(parent->minRMSD);
-		fragLibGen.setRingConformerTrialFactor(parent->confGenTrialFactor);
-		fragLibGen.setTimeout(parent->timeout * 1000);
-		fragLibGen.reuseExistingCoordinates(parent->useInputCoords);
-		fragLibGen.setForceFieldType(parent->forceFieldType);
-		fragLibGen.performStrictAtomTyping(parent->strictMMFF94AtomTypes);
+
+		CDPL::ConfGen::FragmentConformerGeneratorSettings& settings = fragLibGen.getSettings();
+
+		settings.getSmallRingSystemSettings().setEnergyWindow(parent->eWindow);
+		settings.getSmallRingSystemSettings().setMinRMSD(parent->minRMSD);
+		settings.setSmallRingSystemSamplingFactor(parent->smallRSysSamplingFactor);
+		settings.getSmallRingSystemSettings().setTimeout(parent->timeout * 1000);
+		settings.getMacrocycleSettings().setTimeout(parent->timeout * 1000);
+		settings.setForceFieldType(parent->forceFieldType);
+		settings.strictForceFieldParameterization(parent->strictForceFieldParam);
 	}
 
 	void operator()() {
 		using namespace CDPL;
+		using namespace Chem;
 
 		try {
 			while (true) {
@@ -103,11 +120,12 @@ public:
 					return;
 
 				ConfGen::prepareForConformerGeneration(molecule);
+				ConfGen::buildFragmentLinkBondMask(molecule, fragLinkBondMask);
 
-				fragList.generate(molecule);
+				splitIntoFragments(molecule, fragList, fragLinkBondMask);
 
-				for (ConfGen::FragmentList::ConstElementIterator it = fragList.getElementsBegin(), end = fragList.getElementsEnd(); it != end; ++it) {
-					const Chem::Fragment& frag = *it;
+				for (FragmentList::ConstElementIterator it = fragList.getElementsBegin(), end = fragList.getElementsEnd(); it != end; ++it) {
+					const Fragment& frag = *it;
 					unsigned int ret_code = fragLibGen.process(frag);
 
 					if (ret_code == ConfGen::ReturnCode::SUCCESS)
@@ -226,7 +244,8 @@ private:
 	}
 
 	GenFragLibImpl*                         parent;
-	CDPL::ConfGen::FragmentList             fragList;
+	CDPL::Chem::FragmentList                fragList;
+	CDPL::Util::BitSet                      fragLinkBondMask;
 	CDPL::ConfGen::FragmentLibraryGenerator fragLibGen;
 	CDPL::Chem::BasicMolecule               molecule;
 	std::size_t                             numProcMols;
@@ -239,12 +258,9 @@ private:
 
 GenFragLibImpl::GenFragLibImpl(): 
 	multiThreading(false), numThreads(boost::thread::hardware_concurrency()), 
-	mode(CREATE), minRMSD(CDPL::ConfGen::FragmentConformerGenerator::DEF_MIN_RMSD),
-	timeout(CDPL::ConfGen::FragmentConformerGenerator::DEF_TIMEOUT / 1000), 
-	eWindow(CDPL::ConfGen::FragmentConformerGenerator::DEF_ENERGY_WINDOW), 
-	confGenTrialFactor(CDPL::ConfGen::FragmentConformerGenerator::DEF_RING_CONFORMER_TRIAL_FACTOR), 
-	forceFieldType(CDPL::ConfGen::FragmentConformerGenerator::DEF_FORCEFIELD_TYPE), 
-	useInputCoords(false), strictMMFF94AtomTypes(true), maxLibSize(0), inputHandler(), 
+	mode(CREATE), minRMSD(DEF_MIN_RMSD), timeout(DEF_TIMEOUT), eWindow(DEF_E_WINDOW),
+	smallRSysSamplingFactor(DEF_SMALL_RSYS_SAMPLING_FACTOR), forceFieldType(DEF_FORCE_FIELD_TYPE),
+	strictForceFieldParam(DEF_STRICT_FORCE_FIELD_PARAM), maxLibSize(0), inputHandler(), 
 	fragmentLibPtr(new CDPL::ConfGen::FragmentLibrary())
 {
 	addOption("input,i", "Input file(s).", 
@@ -267,18 +283,16 @@ GenFragLibImpl::GenFragLibImpl():
 			  value<std::size_t>(&timeout));
 	addOption("max-lib-size,x", "Maximum number of output fragments (default: 0, must be >= 0, 0 disables limit, only valid in CREATE mode).",
 			  value<std::size_t>(&maxLibSize));
-	addOption("use-input-coords,u", "If available, use existing input 3D coordinates for chain fragments (default: false).", 
-			  value<bool>(&useInputCoords)->implicit_value(true));
-	addOption("e-window,e", "Output energy window for ring conformers (default: " + 
+	addOption("e-window,e", "Output energy window for small ring system conformers (default: " + 
 			  boost::lexical_cast<std::string>(eWindow) + ", must be > 0).",
 			  value<double>()->notifier(boost::bind(&GenFragLibImpl::setEnergyWindow, this, _1)));
-	addOption("trial-factor,g", "Ring conformer generation trial factor (default: " + 
-			  boost::lexical_cast<std::string>(confGenTrialFactor) + ", must be > 1).",
-			  value<std::size_t>()->notifier(boost::bind(&GenFragLibImpl::setConfGenTrialFactor, this, _1)));
+	addOption("small-rsys-sampling-factor,g", "Small ring system conformer sampling factor (default: " + 
+			  boost::lexical_cast<std::string>(smallRSysSamplingFactor) + ", must be > 1).",
+			  value<std::size_t>()->notifier(boost::bind(&GenFragLibImpl::setSmallRingSystemSamplingFactor, this, _1)));
 	addOption("forcefield,f", "Build force field type (MMFF94, MMFF94_NO_ESTAT, MMFF94S, MMFF94S_NO_ESTAT, default: " + getForceFieldTypeString() + ").", 
 			  value<std::string>()->notifier(boost::bind(&GenFragLibImpl::setForceFieldType, this, _1)));
-	addOption("strict-atom-typing,s", "Perform strict MMFF94 atom typing (default: true).", 
-			  value<bool>(&strictMMFF94AtomTypes)->implicit_value(true));
+	addOption("strict-params,s", "Perform strict MMFF94 parameterization (default: true).", 
+			  value<bool>(&strictForceFieldParam)->implicit_value(strictForceFieldParam));
 
 	addOptionLongDescriptions();
 }
@@ -337,12 +351,12 @@ void GenFragLibImpl::setEnergyWindow(double ewin)
 	eWindow = ewin;
 }
 
-void GenFragLibImpl::setConfGenTrialFactor(std::size_t factor)
+void GenFragLibImpl::setSmallRingSystemSamplingFactor(std::size_t factor)
 {
 	if (factor < 1)
-		throwValidationError("retrial-factor");
+		throwValidationError("small-rsys-sampling-factor");
 
-	confGenTrialFactor = factor;
+	smallRSysSamplingFactor = factor;
 }
 
 void GenFragLibImpl::setForceFieldType(const std::string& type_str)
@@ -768,17 +782,16 @@ void GenFragLibImpl::printOptionSummary()
  	printMessage(VERBOSE, " Mode:                         " + getModeString());
 
 	if (mode != MERGE) {
-		printMessage(VERBOSE, " Multi-threading:              " + std::string(multiThreading ? "Yes" : "No"));
-		printMessage(VERBOSE, " Number of Threads:            " + boost::lexical_cast<std::string>(numThreads));
-		printMessage(VERBOSE, " Input File Format:            " + (inputHandler ? inputHandler->getDataFormat().getName() : std::string("Auto-detect")));
-		printMessage(VERBOSE, " Max. Output Library Size:     " + boost::lexical_cast<std::string>(maxLibSize));
-		printMessage(VERBOSE, " Timeout:                      " + boost::lexical_cast<std::string>(timeout) + "s");
-		printMessage(VERBOSE, " RMSD:                         " + (boost::format("%.4f") % minRMSD).str());
-		printMessage(VERBOSE, " Energy Window:                " + boost::lexical_cast<std::string>(eWindow));
-		printMessage(VERBOSE, " Use Input Coordinates:        " + std::string(useInputCoords ? "Yes" : "No"));
-		printMessage(VERBOSE, " Strict MMFF94 Atom Typing:    " + std::string(strictMMFF94AtomTypes ? "Yes" : "No"));
-		printMessage(VERBOSE, " Ring Conf. Gen. Trial Factor: " + boost::lexical_cast<std::string>(confGenTrialFactor));
-		printMessage(VERBOSE, " Build Force Field Type:       " + getForceFieldTypeString());
+		printMessage(VERBOSE, " Multi-threading:                     " + std::string(multiThreading ? "Yes" : "No"));
+		printMessage(VERBOSE, " Number of Threads:                   " + boost::lexical_cast<std::string>(numThreads));
+		printMessage(VERBOSE, " Input File Format:                   " + (inputHandler ? inputHandler->getDataFormat().getName() : std::string("Auto-detect")));
+		printMessage(VERBOSE, " Max. Output Library Size:            " + boost::lexical_cast<std::string>(maxLibSize));
+		printMessage(VERBOSE, " Timeout:                             " + boost::lexical_cast<std::string>(timeout) + "s");
+		printMessage(VERBOSE, " Min. RMSD:                           " + (boost::format("%.4f") % minRMSD).str());
+		printMessage(VERBOSE, " Energy Window:                       " + boost::lexical_cast<std::string>(eWindow));
+		printMessage(VERBOSE, " Strict Force Field Parameterization: " + std::string(strictForceFieldParam ? "Yes" : "No"));
+		printMessage(VERBOSE, " Small Ring Sys. Sampling Factor:     " + boost::lexical_cast<std::string>(smallRSysSamplingFactor));
+		printMessage(VERBOSE, " Build Force Field Type:              " + getForceFieldTypeString());
 	}
 
 	printMessage(VERBOSE, "");

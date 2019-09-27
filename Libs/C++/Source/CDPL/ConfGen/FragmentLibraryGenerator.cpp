@@ -28,13 +28,16 @@
 
 #include <string>
 #include <exception>
+#include <algorithm>
 
 #include <boost/lexical_cast.hpp>
 #include <boost/thread.hpp>
+#include <boost/bind.hpp>
 
 #include "CDPL/ConfGen/FragmentLibraryGenerator.hpp"
 #include "CDPL/ConfGen/UtilityFunctions.hpp"
 #include "CDPL/ConfGen/ReturnCode.hpp"
+#include "CDPL/ConfGen/FragmentType.hpp"
 #include "CDPL/Chem/AtomContainerFunctions.hpp"
 #include "CDPL/Chem/MolecularGraphFunctions.hpp"
 
@@ -43,11 +46,11 @@ using namespace CDPL;
 
 
 ConfGen::FragmentLibraryGenerator::FragmentLibraryGenerator(): 
-	fragLib(), fragSSSR(new Chem::SmallestSetOfSmallestRings())
+	fragLib(), fragSSSR(new Chem::SmallestSetOfSmallestRings()), numGenConfs(0)
 {}
 
 ConfGen::FragmentLibraryGenerator::FragmentLibraryGenerator(const FragmentLibrary::SharedPointer& lib): 
-	fragLib(lib), fragSSSR(new Chem::SmallestSetOfSmallestRings())
+	fragLib(lib), fragSSSR(new Chem::SmallestSetOfSmallestRings()), numGenConfs(0)
 {}
 
 void ConfGen::FragmentLibraryGenerator::setFragmentLibrary(const FragmentLibrary::SharedPointer& lib)
@@ -60,144 +63,14 @@ const ConfGen::FragmentLibrary::SharedPointer& ConfGen::FragmentLibraryGenerator
 	return fragLib;
 }
 
-void ConfGen::FragmentLibraryGenerator::setForceFieldType(unsigned int type)
+ConfGen::FragmentConformerGeneratorSettings& ConfGen::FragmentLibraryGenerator::getSettings()
 {
-	fragConfGen.setForceFieldType(type);
-}
-	    
-unsigned int ConfGen::FragmentLibraryGenerator::getForceFieldType() const
-{
-	return fragConfGen.getForceFieldType();
+	return fragConfGen.getSettings();
 }
 
-void ConfGen::FragmentLibraryGenerator::performStrictAtomTyping(bool strict)
+const ConfGen::FragmentConformerGeneratorSettings& ConfGen::FragmentLibraryGenerator::getSettings() const
 {
-	fragConfGen.performStrictAtomTyping(strict);
-}
-
-bool ConfGen::FragmentLibraryGenerator::strictAtomTypingPerformed() const
-{
-	return fragConfGen.strictAtomTypingPerformed();
-}
-
-void ConfGen::FragmentLibraryGenerator::setMaxNumStructureGenerationTrials(std::size_t max_num)
-{
-	fragConfGen.setMaxNumStructureGenerationTrials(max_num);
-}
-
-std::size_t ConfGen::FragmentLibraryGenerator::getMaxNumStructureGenerationTrials() const
-{
-	return fragConfGen.getMaxNumStructureGenerationTrials();
-}
-
-void ConfGen::FragmentLibraryGenerator::setMaxNumMinimizationSteps(std::size_t max_num)
-{
-	fragConfGen.setMaxNumMinimizationSteps(max_num);
-}
-
-std::size_t ConfGen::FragmentLibraryGenerator::getMaxNumMinimizationSteps() const
-{
-	return fragConfGen.getMaxNumMinimizationSteps();
-}
-
-void ConfGen::FragmentLibraryGenerator::setMinimizationStopGradientNorm(double grad_norm)
-{
-	fragConfGen.setMinimizationStopGradientNorm(grad_norm);
-}
-
-double ConfGen::FragmentLibraryGenerator::getMinimizationStopGradientNorm() const
-{
-	return fragConfGen.getMinimizationStopGradientNorm();
-}
-
-void ConfGen::FragmentLibraryGenerator::setMinimizationStopEnergyDelta(double e_delta)
-{
-	fragConfGen.setMinimizationStopEnergyDelta(e_delta);
-}
-
-double ConfGen::FragmentLibraryGenerator::getMinimizationStopEnergyDelta() const
-{
-	return fragConfGen.getMinimizationStopEnergyDelta();
-}
-
-void ConfGen::FragmentLibraryGenerator::setTimeout(std::size_t mil_secs)
-{
-	fragConfGen.setTimeout(mil_secs);
-}
-
-std::size_t ConfGen::FragmentLibraryGenerator::getTimeout() const
-{
-	return fragConfGen.getTimeout();
-}
-
-void ConfGen::FragmentLibraryGenerator::reuseExistingCoordinates(bool reuse)
-{
-	fragConfGen.reuseExistingCoordinates(reuse);
-}
-
-bool ConfGen::FragmentLibraryGenerator::existingCoordinatesReused() const
-{
-	return fragConfGen.existingCoordinatesReused();
-}
-
-void ConfGen::FragmentLibraryGenerator::setEnergyWindow(double win_size)
-{
-	fragConfGen.setEnergyWindow(win_size);
-}
-
-double ConfGen::FragmentLibraryGenerator::getEnergyWindow() const
-{
-	return fragConfGen.getEnergyWindow();
-}
-
-void ConfGen::FragmentLibraryGenerator::setRingConformerTrialFactor(std::size_t factor)
-{
-	fragConfGen.setRingConformerTrialFactor(factor);
-}
-
-std::size_t ConfGen::FragmentLibraryGenerator::getRingConformerTrialFactor() const
-{
-	return fragConfGen.getRingConformerTrialFactor();
-}
-
-void ConfGen::FragmentLibraryGenerator::setMinNumRingConformerTrials(std::size_t min_num)
-{
-	fragConfGen.setMinNumRingConformerTrials(min_num);
-}
-
-std::size_t ConfGen::FragmentLibraryGenerator::getMinNumRingConformerTrials() const
-{
-	return fragConfGen.getMinNumRingConformerTrials();
-}
-
-void ConfGen::FragmentLibraryGenerator::setMaxNumRingConformerTrials(std::size_t max_num)
-{
-	fragConfGen.setMaxNumRingConformerTrials(max_num);
-}
-
-std::size_t ConfGen::FragmentLibraryGenerator::getMaxNumRingConformerTrials() const
-{
-	return fragConfGen.getMaxNumRingConformerTrials();
-}
-			
-void ConfGen::FragmentLibraryGenerator::setMinRMSD(double min_rmsd)
-{
-	fragConfGen.setMinRMSD(min_rmsd);
-}
-
-double ConfGen::FragmentLibraryGenerator::getMinRMSD() const
-{
-	return fragConfGen.getMinRMSD();
-}
-
-void ConfGen::FragmentLibraryGenerator::setMaxNumOutputConformers(std::size_t max_num)
-{
-	fragConfGen.setMaxNumOutputConformers(max_num);
-}
-
-std::size_t ConfGen::FragmentLibraryGenerator::getMaxNumOutputConformers() const
-{
-	return fragConfGen.getMaxNumOutputConformers();
+	return fragConfGen.getSettings();
 }
 
 void ConfGen::FragmentLibraryGenerator::setProgressCallback(const ProgressCallbackFunction& func)
@@ -205,7 +78,7 @@ void ConfGen::FragmentLibraryGenerator::setProgressCallback(const ProgressCallba
 	fragConfGen.setProgressCallback(func);
 }
 
-const ConfGen::FragmentLibraryGenerator::ProgressCallbackFunction& 
+const ConfGen::ProgressCallbackFunction& 
 ConfGen::FragmentLibraryGenerator::getProgressCallback() const
 {
 	return fragConfGen.getProgressCallback();
@@ -214,9 +87,12 @@ ConfGen::FragmentLibraryGenerator::getProgressCallback() const
 unsigned int ConfGen::FragmentLibraryGenerator::process(const Chem::MolecularGraph& frag)
 {
 	using namespace Chem;
+	using namespace ConfGen;
 
 	if (!fragLib)
 		return ReturnCode::FRAGMENT_LIBRARY_NOT_SET;
+
+	numGenConfs = 0;
 
 	Molecule::SharedPointer fl_entry = addNewLibraryEntry(frag);
 
@@ -235,9 +111,11 @@ unsigned int ConfGen::FragmentLibraryGenerator::process(const Chem::MolecularGra
 			return ret_code;
 		}
 
-		for (std::size_t i = 0, num_confs = fragConfGen.getNumConformers(); i < num_confs; i++)
-			addConformation(fragLibEntry, fragConfGen.getCoordinates(i));
-	
+		numGenConfs = fragConfGen.getNumConformers();
+
+		std::for_each(fragConfGen.getConformersBegin(), fragConfGen.getConformersEnd(), 
+					  boost::bind(&Chem::addConformation, boost::ref(fragLibEntry), _1));
+
 		fl_entry->copy(fragLibEntry);
 
 		copyAtomStereoDescriptors(*fl_entry, fragLibEntry, 0);
@@ -249,7 +127,6 @@ unsigned int ConfGen::FragmentLibraryGenerator::process(const Chem::MolecularGra
 
 	} catch (const std::exception& e) {
 		removeNewLibraryEntry();
-
 		throw e;
 	}
 
@@ -258,7 +135,7 @@ unsigned int ConfGen::FragmentLibraryGenerator::process(const Chem::MolecularGra
 
 std::size_t ConfGen::FragmentLibraryGenerator::getNumGeneratedConformers() const
 {
-	return fragConfGen.getNumConformers();
+	return numGenConfs;
 }
 
 Base::uint64 ConfGen::FragmentLibraryGenerator::getLibraryEntryHashCode() const

@@ -1,7 +1,7 @@
 /* -*- mode: c++; c-basic-offset: 4; tab-width: 4; indent-tabs-mode: t -*- */
 
 /* 
- * AtomPriorityFunctionWrapper.hpp 
+ * TopologicalAtomDistanceFunction.hpp 
  *
  * This file is part of the Chemical Data Processing Toolkit
  *
@@ -25,11 +25,12 @@
 
 /**
  * \file
- * \brief Type definition of a generic wrapper class for storing user-defined Chem::Atom 3D-coordinates functions.
+ * \brief Type definition of generic wrapper class for storing an user-defined
+ *        topological atom-pair distance function.
  */
 
-#ifndef CDPL_CHEM_ATOMPRIORITYFUNCTIONWRAPPER_HPP
-#define CDPL_CHEM_ATOMPRIORITYFUNCTIONWRAPPER_HPP
+#ifndef CDPL_FORCEFIELD_TOPOLOGICALATOMDISTANCEFUNCTION_HPP
+#define CDPL_FORCEFIELD_TOPOLOGICALATOMDISTANCEFUNCTION_HPP
 
 #include <cstddef>
 
@@ -43,16 +44,21 @@ namespace CDPL
     {
 
 		class Atom;
+		class MolecularGraph;
+    }
+
+    namespace ForceField 
+    {
 
 		/**
-		 * \addtogroup CDPL_CHEM_DATA_STRUCTURES
+		 * \addtogroup CDPL_FORCEFIELD_DATA_STRUCTURES
 		 * @{
 		 */
 
 		/**
-		 * \brief A generic wrapper class used to store a user-defined atom priority function.
+		 * \brief A generic wrapper class used to store a user-defined topological atom-pair distance function.
 		 */
-		typedef boost::function1<std::size_t, const Chem::Atom&> AtomPriorityFunction;
+		typedef boost::function3<std::size_t, const Chem::Atom&, const Chem::Atom&, const Chem::MolecularGraph&> TopologicalAtomDistanceFunction;
 
 		/**
 		 * @}
@@ -60,4 +66,4 @@ namespace CDPL
     }
 }
 
-#endif // CDPL_CHEM_ATOMPRIORITYFUNCTIONWRAPPER_HPP
+#endif // CDPL_FORCEFIELD_TOPOLOGICALATOMDISTANCEFUNCTION_HPP

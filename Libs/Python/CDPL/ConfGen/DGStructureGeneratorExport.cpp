@@ -47,21 +47,6 @@ void CDPLPythonConfGen::exportDGStructureGenerator()
 		.def(CDPLPythonBase::ObjectIdentityCheckVisitor<ConfGen::DGStructureGenerator>())
 		.def("assign", CDPLPythonBase::copyAssOp(&ConfGen::DGStructureGenerator::operator=), 
 			 (python::arg("self"), python::arg("gen")), python::return_self<>())
-		.def("setBoxSize", &ConfGen::DGStructureGenerator::setBoxSize, 
-			 (python::arg("self"), python::arg("size")))
-		.def("getBoxSize", &ConfGen::DGStructureGenerator::getBoxSize, python::arg("self"))
-		.def("excludeHydrogens", &ConfGen::DGStructureGenerator::excludeHydrogens, 
-			 (python::arg("self"), python::arg("exclude")))
-		.def("hydrogensExcluded", &ConfGen::DGStructureGenerator::hydrogensExcluded, python::arg("self"))
-		.def("enablePlanarityConstraints", &ConfGen::DGStructureGenerator::enablePlanarityConstraints, 
-			 (python::arg("self"), python::arg("exclude")))
-		.def("planarityConstraintsEnabled", &ConfGen::DGStructureGenerator::planarityConstraintsEnabled, python::arg("self"))
-		.def("regardAtomConfiguration", &ConfGen::DGStructureGenerator::regardAtomConfiguration, 
-			 (python::arg("self"), python::arg("regard")))
-		.def("atomConfigurationRegarded", &ConfGen::DGStructureGenerator::atomConfigurationRegarded, python::arg("self"))
-		.def("regardBondConfiguration", &ConfGen::DGStructureGenerator::regardBondConfiguration, 
-			 (python::arg("self"), python::arg("regard")))
-		.def("bondConfigurationRegarded", &ConfGen::DGStructureGenerator::bondConfigurationRegarded, python::arg("self"))
 		.def("getExcludedHydrogenMask", &ConfGen::DGStructureGenerator::getExcludedHydrogenMask, python::arg("self"), 
 			 python::return_internal_reference<>())
 		.def("setup", static_cast<void (ConfGen::DGStructureGenerator::*)(const Chem::MolecularGraph&)>
@@ -74,16 +59,14 @@ void CDPLPythonConfGen::exportDGStructureGenerator()
 			 (python::arg("self"), python::arg("coords")))
 		.def("checkBondConfigurations", &ConfGen::DGStructureGenerator::checkBondConfigurations,
 			 (python::arg("self"), python::arg("coords")))
+		.def("getSettings", 
+			 static_cast<ConfGen::DGStructureGeneratorSettings& (ConfGen::DGStructureGenerator::*)()>
+			 (&ConfGen::DGStructureGenerator::getSettings), 
+			 python::arg("self"), python::return_internal_reference<>())
+		.add_property("settings", 
+					  python::make_function(static_cast<ConfGen::DGStructureGeneratorSettings& (ConfGen::DGStructureGenerator::*)()>
+											(&ConfGen::DGStructureGenerator::getSettings),
+											python::return_internal_reference<>()))
 		.add_property("exclHydrogenMask", python::make_function(&ConfGen::DGStructureGenerator::getExcludedHydrogenMask, 
-																python::return_internal_reference<>())) 
-		.add_property("boxSize", &ConfGen::DGStructureGenerator::getBoxSize, 
-					  &ConfGen::DGStructureGenerator::setBoxSize)
-		.add_property("planarityConstraints", &ConfGen::DGStructureGenerator::planarityConstraintsEnabled, 
-					  &ConfGen::DGStructureGenerator::enablePlanarityConstraints)
-		.add_property("exclHydrogens", &ConfGen::DGStructureGenerator::hydrogensExcluded, 
-					  &ConfGen::DGStructureGenerator::excludeHydrogens)
-		.add_property("regardAtomConfig", &ConfGen::DGStructureGenerator::atomConfigurationRegarded, 
-					  &ConfGen::DGStructureGenerator::regardAtomConfiguration)
-		.add_property("regardBondConfig", &ConfGen::DGStructureGenerator::bondConfigurationRegarded, 
-					  &ConfGen::DGStructureGenerator::regardBondConfiguration);
+																python::return_internal_reference<>()));
 }

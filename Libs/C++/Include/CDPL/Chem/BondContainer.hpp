@@ -34,7 +34,7 @@
 #include <cstddef>
 
 #include "CDPL/Chem/APIPrefix.hpp"
-#include "CDPL/Chem/BondCompareFunctionWrapper.hpp"
+#include "CDPL/Chem/BondCompareFunction.hpp"
 #include "CDPL/Util/IndexedElementIterator.hpp"
 
 

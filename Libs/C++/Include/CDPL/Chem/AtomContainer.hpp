@@ -35,7 +35,7 @@
 
 #include "CDPL/Chem/APIPrefix.hpp"
 #include "CDPL/Chem/Entity3DContainer.hpp"
-#include "CDPL/Chem/AtomCompareFunctionWrapper.hpp"
+#include "CDPL/Chem/AtomCompareFunction.hpp"
 #include "CDPL/Util/IndexedElementIterator.hpp"
 
 

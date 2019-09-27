@@ -34,24 +34,34 @@ namespace CDPLPythonConfGen
 {
 
 	void exportDGConstraintGenerator();
+	void exportDGConstraintGeneratorSettings();
 	void exportDGStructureGenerator();
-	void exportFragmentList();
+	void exportDGStructureGeneratorSettings();
 	void exportFragmentLibraryEntry();
 	void exportFragmentLibrary();
+	void exportConformerData();
 	void exportTorsionRule();
 	void exportTorsionCategory();
 	void exportTorsionLibrary();
 	void exportTorsionRuleMatch();
 	void exportTorsionRuleMatcher();
+	void exportTorsionDriverSettings();
+	void exportTorsionDriver();
+	void exportRMSDConformerSelector();
 
 	void exportBoostFunctionWrappers();
 
 #if defined(HAVE_BOOST_TIMER) && defined(HAVE_BOOST_CHRONO)
 
 	void exportRandomStructureGenerator();
-	void exportSystematicConformerGenerator();
+	void exportRandomStructureGeneratorSettings();
+	void exportConformerGenerator();
+	void exportConformerGeneratorSettings();
 	void exportFragmentConformerGenerator();
+	void exportFragmentConformerGeneratorSettings();
 	void exportFragmentLibraryGenerator();
+	void exportFragmentAssemblerSettings();
+	void exportFragmentAssembler();
 
 #endif // defined(HAVE_BOOST_TIMER) && defined(HAVE_BOOST_CHRONO)
 }

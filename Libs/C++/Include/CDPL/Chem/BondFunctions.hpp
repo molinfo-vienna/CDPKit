@@ -37,7 +37,7 @@
 #include "CDPL/Chem/APIPrefix.hpp"
 #include "CDPL/Chem/MatchExpression.hpp"
 #include "CDPL/Chem/MatchConstraintList.hpp"
-#include "CDPL/Chem/AtomPriorityFunctionWrapper.hpp"
+#include "CDPL/Chem/AtomPriorityFunction.hpp"
 #include "CDPL/Chem/FragmentList.hpp"
 #include "CDPL/Math/VectorArray.hpp"
 

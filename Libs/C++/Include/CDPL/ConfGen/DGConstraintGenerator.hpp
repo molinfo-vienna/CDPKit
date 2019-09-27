@@ -85,17 +85,9 @@ namespace CDPL
 
 			DGConstraintGenerator();
 
-			void excludeHydrogens(bool exclude);
+			DGConstraintGeneratorSettings& getSettings();
 
-			bool hydrogensExcluded() const;
-
-			void regardAtomConfiguration(bool regard);
-
-			bool atomConfigurationRegarded() const;
-
-			void regardBondConfiguration(bool regard);
-
-			bool bondConfigurationRegarded() const;
+			const DGConstraintGeneratorSettings& getSettings() const;
 
 			void addAtomStereoCenter(const Chem::Atom& atom, const Chem::StereoDescriptor& descr);
 			void addBondStereoCenter(const Chem::Bond& bond, const Chem::StereoDescriptor& descr);
@@ -179,20 +171,18 @@ namespace CDPL
 			typedef boost::unordered_map<std::pair<std::size_t, std::size_t>, double> BondLengthTable;
 			typedef boost::unordered_map<BondAngleKey, double, BondAngleKeyHash> BondAngleTable;
 
-			const Chem::MolecularGraph* molGraph;
-			bool                        noHydrogens;
-			bool                        regAtomConfig;
-			bool                        regBondConfig;
-			Util::BitSet                hAtomMask;
-			Util::BitSet                procAtomPairMask;
-			Util::BitSet                stereoAtomMask;
-			BondLengthTable             bondLengthTable;
-			BondAngleTable              bondAngleTable;
-			StereoCenterDataArray       atomStereoData;
-			StereoCenterDataArray       bondStereoData;
-			std::size_t                 numAtoms;
-			AtomIndexList               atomIndexList1;
-			AtomIndexList               atomIndexList2;
+			const Chem::MolecularGraph*   molGraph;
+			Util::BitSet                  hAtomMask;
+			Util::BitSet                  procAtomPairMask;
+			Util::BitSet                  stereoAtomMask;
+			BondLengthTable               bondLengthTable;
+			BondAngleTable                bondAngleTable;
+			StereoCenterDataArray         atomStereoData;
+			StereoCenterDataArray         bondStereoData;
+			std::size_t                   numAtoms;
+			AtomIndexList                 atomIndexList1;
+			AtomIndexList                 atomIndexList2;
+			DGConstraintGeneratorSettings settings;
 		};
 
 		/**

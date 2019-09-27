@@ -32,6 +32,7 @@
 #define CDPL_CONFGEN_UTILITYFUNCTIONS_HPP
 
 #include "CDPL/ConfGen/APIPrefix.hpp"
+#include "CDPL/Util/BitSet.hpp"
 
 
 namespace CDPL 
@@ -45,6 +46,13 @@ namespace CDPL
 		class Molecule;
 	}
 
+	namespace ForceField
+	{
+
+		class MMFF94InteractionData;
+		class MMFF94InteractionParameterizer;
+	}
+
 	namespace ConfGen 
 	{
 
@@ -55,9 +63,14 @@ namespace CDPL
 
 		CDPL_CONFGEN_API bool isFragmentLinkBond(const Chem::Bond& bond, const Chem::MolecularGraph& molgraph); 
 
+		CDPL_CONFGEN_API std::size_t buildFragmentLinkBondMask(const Chem::MolecularGraph& molgraph, Util::BitSet& mask, bool reset = true);
+
 		CDPL_CONFGEN_API unsigned int perceiveFragmentType(const Chem::MolecularGraph& molgraph); 
 
 		CDPL_CONFGEN_API void prepareForConformerGeneration(Chem::Molecule& mol); 
+
+		CDPL_CONFGEN_API void parameterizeMMFF94Interactions(const Chem::MolecularGraph& molgraph, ForceField::MMFF94InteractionParameterizer& parameterizer,
+															 ForceField::MMFF94InteractionData& param_data, unsigned int ff_type); 
 		
 		/**
 		 * @}

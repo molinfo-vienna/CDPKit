@@ -32,7 +32,7 @@
 #define CDPL_PHARM_PHARMACOPHOREFUNCTIONS_HPP
 
 #include "CDPL/Pharm/APIPrefix.hpp"
-#include "CDPL/Chem/Atom3DCoordinatesFunctionWrapper.hpp"
+#include "CDPL/Chem/Atom3DCoordinatesFunction.hpp"
 
 
 namespace CDPL 

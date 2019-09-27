@@ -34,7 +34,7 @@
 #include <cstddef>
 
 #include "CDPL/Chem/APIPrefix.hpp"
-#include "CDPL/Chem/AtomPredicateWrapper.hpp"
+#include "CDPL/Chem/AtomPredicate.hpp"
 
 
 namespace CDPL 

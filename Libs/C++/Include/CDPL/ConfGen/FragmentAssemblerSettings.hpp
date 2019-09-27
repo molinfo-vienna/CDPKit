@@ -1,7 +1,7 @@
 /* -*- mode: c++; c-basic-offset: 4; tab-width: 4; indent-tabs-mode: t -*- */
 
 /* 
- * InteractionFilterFunctionWrappers.hpp 
+ * FragmentAssemblerSettings.hpp 
  *
  * This file is part of the Chemical Data Processing Toolkit
  *
@@ -25,43 +25,41 @@
 
 /**
  * \file
- * \brief Type definition of generic wrapper classes for storing user-defined interaction
- *        filtering functions.
+ * \brief Definition of the class CDPL::ConfGen::FragmentAssemblerSettings.
  */
 
-#ifndef CDPL_FORCEFIELD_INTERACTIONFILTERFUNCTIONWRAPPERS_HPP
-#define CDPL_FORCEFIELD_INTERACTIONFILTERFUNCTIONWRAPPERS_HPP
+#ifndef CDPL_CONFGEN_FRAGMENTASSEMBLERSETTINGS_HPP
+#define CDPL_CONFGEN_FRAGMENTASSEMBLERSETTINGS_HPP
 
-#include <boost/function.hpp>
+#include "CDPL/ConfGen/APIPrefix.hpp"
 
 
 namespace CDPL 
 {
 
-    namespace Chem
+    namespace ConfGen 
     {
 
-		class Atom;
-	}
+	/**
+	 * \addtogroup CDPL_CONFGEN_DATA_STRUCTURES
+	 * @{
+	 */
 
-    namespace ForceField 
-    {
+	class CDPL_CONFGEN_API FragmentAssemblerSettings
+	{
 
-		/**
-		 * \addtogroup CDPL_FORCEFIELD_DATA_STRUCTURES
-		 * @{
-		 */
-		
-		typedef boost::function2<bool, const Chem::Atom&, const Chem::Atom&> InteractionFilterFunction2;
+	  public:
+	    static const FragmentAssemblerSettings DEFAULT;
 
-		typedef boost::function3<bool, const Chem::Atom&, const Chem::Atom&, const Chem::Atom&> InteractionFilterFunction3;
+	    FragmentAssemblerSettings();
 
-		typedef boost::function4<bool, const Chem::Atom&, const Chem::Atom&, const Chem::Atom&, const Chem::Atom&> InteractionFilterFunction4;
+	  private:
+	};
 
-		/**
-		 * @}
-		 */
+	/**
+	 * @}
+	 */
     }
 }
 
-#endif // CDPL_FORCEFIELD_INTERACTIONFILTERFUNCTIONWRAPPERS_HPP
+#endif // CDPL_CONFGEN_FRAGMENTASSEMBLERSETTINGS_HPP

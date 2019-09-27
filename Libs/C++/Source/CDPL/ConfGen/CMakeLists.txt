@@ -47,7 +47,6 @@ SET(cdpl-confgen_LIB_SRCS
     DGConstraintGeneratorSettings.cpp
     DGStructureGenerator.cpp
     DGStructureGeneratorSettings.cpp
-    FragmentList.cpp
     FragmentLibraryEntry.cpp
     FragmentLibrary.cpp
     TorsionLibrary.cpp
@@ -55,6 +54,10 @@ SET(cdpl-confgen_LIB_SRCS
     TorsionCategory.cpp
     TorsionRuleMatch.cpp
     TorsionRuleMatcher.cpp
+    RMSDConformerSelector.cpp
+    TorsionDriver.cpp
+    TorsionDriverImpl.cpp
+    TorsionDriverSettings.cpp
 
     CDFFragmentLibraryDataReader.cpp
     CDFFragmentLibraryDataWriter.cpp
@@ -70,12 +73,16 @@ IF(Boost_TIMER_FOUND AND Boost_CHRONO_FOUND)
        ${cdpl-confgen_LIB_SRCS}
        RandomStructureGenerator.cpp
        RandomStructureGeneratorSettings.cpp
-       SystematicConformerGenerator.cpp
-       SystematicConformerGeneratorImpl.cpp
+       ConformerGenerator.cpp
+       ConformerGeneratorImpl.cpp
+       ConformerGeneratorSettings.cpp
        FragmentConformerGenerator.cpp
        FragmentConformerGeneratorSettings.cpp
        FragmentLibraryGenerator.cpp
-      )	  
+       FragmentAssembler.cpp
+       FragmentAssemblerImpl.cpp
+       FragmentAssemblerSettings.cpp
+     )	  
 
    LINK_LIBRARIES(${Boost_TIMER_LIBRARY} ${Boost_CHRONO_LIBRARY})	
 ENDIF(Boost_TIMER_FOUND AND Boost_CHRONO_FOUND)

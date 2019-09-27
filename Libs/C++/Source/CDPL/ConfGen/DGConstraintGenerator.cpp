@@ -70,40 +70,19 @@ std::size_t ConfGen::DGConstraintGenerator::BondAngleKeyHash::operator()(const B
 }
 
 
-ConfGen::DGConstraintGenerator::DGConstraintGenerator():
-    molGraph(0), noHydrogens(true), regAtomConfig(true), regBondConfig(true)
+ConfGen::DGConstraintGenerator::DGConstraintGenerator(): molGraph(0)
 {}
 
-void ConfGen::DGConstraintGenerator::excludeHydrogens(bool exclude)
+ConfGen::DGConstraintGeneratorSettings& ConfGen::DGConstraintGenerator::getSettings()
 {
-    noHydrogens = exclude;
+	return settings;
 }
 
-bool ConfGen::DGConstraintGenerator::hydrogensExcluded() const
+const ConfGen::DGConstraintGeneratorSettings& ConfGen::DGConstraintGenerator::getSettings() const
 {
-    return noHydrogens;
+	return settings;
 }
 
-void ConfGen::DGConstraintGenerator::regardAtomConfiguration(bool regard)
-{
-    regAtomConfig = regard;
-}
-
-bool ConfGen::DGConstraintGenerator::atomConfigurationRegarded() const
-{
-    return regAtomConfig;
-}
-
-void ConfGen::DGConstraintGenerator::regardBondConfiguration(bool regard)
-{
-    regBondConfig = regard;
-}
-
-bool ConfGen::DGConstraintGenerator::bondConfigurationRegarded() const
-{
-    return regBondConfig;
-}
-	
 const Util::BitSet& ConfGen::DGConstraintGenerator::getExcludedHydrogenMask() const
 {
 	return hAtomMask;
@@ -172,14 +151,15 @@ void ConfGen::DGConstraintGenerator::addAtomStereoCenter(const Chem::Atom& atom,
 		return;
 
 	std::size_t num_ref_atoms = descr.getNumReferenceAtoms();
-	
+	bool excl_hs = settings.excludeHydrogens();
+
 	for (std::size_t i = 0; i < num_ref_atoms; i++) {
 		const Atom* ref_atom = descr.getReferenceAtoms()[i];
 
 		if (!molGraph->containsAtom(*ref_atom)) 
 			return;
 
-		if (noHydrogens)
+		if (excl_hs)
 			hAtomMask.reset(molGraph->getAtomIndex(*ref_atom));
 	}
 
@@ -208,7 +188,7 @@ void ConfGen::DGConstraintGenerator::addBondStereoCenter(const Chem::Bond& bond,
 	if (!molGraph->containsAtom(*descr.getReferenceAtoms()[0]) || !molGraph->containsAtom(*descr.getReferenceAtoms()[3]))
 		return;
 
-	if (noHydrogens) {
+	if (settings.excludeHydrogens()) {
 		for (std::size_t i = 0; i < 2; i++) {
 			const Atom& atom = bond.getAtom(i);
 			Atom::ConstBondIterator b_it = atom.getBondsBegin();
@@ -244,10 +224,10 @@ void CDPL::ConfGen::DGConstraintGenerator::setup(const Chem::MolecularGraph& mol
 {
     init(molgraph);
   
-	if (regAtomConfig)
+	if (settings.regardAtomConfiguration())
 		extractAtomStereoCenterData();
 
-	if (regBondConfig)
+	if (settings.regardBondConfiguration())
 		extractBondStereoCenterData();
 
 	assignBondLengths(ia_data);
@@ -300,15 +280,16 @@ void ConfGen::DGConstraintGenerator::addDefaultDistanceConstraints(Util::DG3DCoo
 	double bond_length_sum = std::accumulate(bondLengthTable.begin(), bondLengthTable.end(), double(),
 											 boost::bind(std::plus<double>(), _1,
 														 boost::bind(&BondLengthTable::value_type::second, _2)));
+	bool excl_hs = settings.excludeHydrogens();
 
 	for (std::size_t i = 0; i < numAtoms; i++) {
-		if (noHydrogens && hAtomMask.test(i))
+		if (excl_hs && hAtomMask.test(i))
 			continue;
 
 		double vdw_rad1 = AtomDictionary::getVdWRadius(getType(molGraph->getAtom(i)));
 
 		for (std::size_t j = i + 1; j < numAtoms; j++) {
-			if (noHydrogens && hAtomMask.test(j))
+			if (excl_hs && hAtomMask.test(j))
 				continue;
 
 			if (atomPairProcessed(i, j))
@@ -329,6 +310,8 @@ void ConfGen::DGConstraintGenerator::add14DistanceConstraints(Util::DG3DCoordina
 	if (!molGraph)
 		return;
 
+	bool excl_hs = settings.excludeHydrogens();
+
 	for (MolecularGraph::ConstBondIterator it = molGraph->getBondsBegin(), end = molGraph->getBondsEnd(); it != end; ++it) {
 		const Bond& bond = *it;
 		const Atom& atom1 = bond.getBegin();
@@ -338,7 +321,7 @@ void ConfGen::DGConstraintGenerator::add14DistanceConstraints(Util::DG3DCoordina
 
 		std::size_t atom1_idx = molGraph->getAtomIndex(atom1);
 
-		if (noHydrogens && hAtomMask.test(atom1_idx))
+		if (excl_hs && hAtomMask.test(atom1_idx))
 			continue;
 
 		const Atom& atom2 = bond.getEnd();
@@ -348,7 +331,7 @@ void ConfGen::DGConstraintGenerator::add14DistanceConstraints(Util::DG3DCoordina
 
 		std::size_t atom2_idx = molGraph->getAtomIndex(atom2);
 
-		if (noHydrogens && hAtomMask.test(atom2_idx))
+		if (excl_hs && hAtomMask.test(atom2_idx))
 			continue;
 
 		if (getNeighborAtoms(atom1, atomIndexList1, &atom2) == 0)
@@ -483,11 +466,13 @@ void ConfGen::DGConstraintGenerator::addAtomPlanarityConstraints(Util::DG3DCoord
 	if (!molGraph)
 		return;
 
+	bool excl_hs = settings.excludeHydrogens();
+
 	for (std::size_t i = 0; i < numAtoms; i++) {
-		if (noHydrogens && hAtomMask.test(i))
+		if (excl_hs && hAtomMask.test(i))
 			continue;
 
-		if (regAtomConfig && stereoAtomMask.test(i))
+		if (settings.regardAtomConfiguration() && stereoAtomMask.test(i))
 			continue;
 
 		const Atom& atom = molGraph->getAtom(i);
@@ -509,6 +494,8 @@ void ConfGen::DGConstraintGenerator::addBondPlanarityConstraints(Util::DG3DCoord
 	if (!molGraph)
 		return;
 
+	bool excl_hs = settings.excludeHydrogens();
+
 	for (MolecularGraph::ConstBondIterator it = molGraph->getBondsBegin(), end = molGraph->getBondsEnd(); it != end; ++it) {
 		const Bond& bond = *it;
 		const Atom& atom1 = bond.getBegin();
@@ -518,10 +505,10 @@ void ConfGen::DGConstraintGenerator::addBondPlanarityConstraints(Util::DG3DCoord
 
 		std::size_t atom1_idx = molGraph->getAtomIndex(atom1);
 
-		if (noHydrogens && hAtomMask.test(atom1_idx))
+		if (excl_hs && hAtomMask.test(atom1_idx))
 			continue;
 
-		if (regAtomConfig && stereoAtomMask.test(atom1_idx))
+		if (settings.regardAtomConfiguration() && stereoAtomMask.test(atom1_idx))
 			continue;
 
 		const Atom& atom2 = bond.getEnd();
@@ -531,10 +518,10 @@ void ConfGen::DGConstraintGenerator::addBondPlanarityConstraints(Util::DG3DCoord
 
 		std::size_t atom2_idx = molGraph->getAtomIndex(atom2);
 
-		if (noHydrogens && hAtomMask.test(atom2_idx))
+		if (excl_hs && hAtomMask.test(atom2_idx))
 			continue;
 
-		if (regAtomConfig && stereoAtomMask.test(atom1_idx))
+		if (settings.regardAtomConfiguration() && stereoAtomMask.test(atom1_idx))
 			continue;
 
 		if (!isPlanar(bond))
@@ -579,10 +566,10 @@ void ConfGen::DGConstraintGenerator::init(const Chem::MolecularGraph& molgraph)
 	hAtomMask.resize(numAtoms);
 	hAtomMask.reset();
 
-    if (noHydrogens)
+    if (settings.excludeHydrogens())
 		buildAtomTypeMask(molgraph, hAtomMask, Chem::AtomType::H);
 
-	if (regAtomConfig) {
+	if (settings.regardAtomConfiguration()) {
 		stereoAtomMask.resize(numAtoms);
 		stereoAtomMask.reset();
 	}
@@ -592,6 +579,8 @@ void ConfGen::DGConstraintGenerator::assignBondLengths(const ForceField::MMFF94I
 {
 	using namespace ForceField;
 	using namespace Chem;
+
+	bool excl_hs = settings.excludeHydrogens();
 
 	if (ia_data) {
 		const MMFF94BondStretchingInteractionData& bs_data = ia_data->getBondStretchingInteractions();
@@ -609,7 +598,7 @@ void ConfGen::DGConstraintGenerator::assignBondLengths(const ForceField::MMFF94I
 			if (atom2_idx >= numAtoms)
 				continue;
 		
-			if (noHydrogens && (hAtomMask.test(atom1_idx) || hAtomMask.test(atom2_idx)))
+			if (excl_hs && (hAtomMask.test(atom1_idx) || hAtomMask.test(atom2_idx)))
 				continue;
 
 			setBondLength(atom1_idx, atom2_idx, iactn.getReferenceLength());
@@ -633,7 +622,7 @@ void ConfGen::DGConstraintGenerator::assignBondLengths(const ForceField::MMFF94I
 		std::size_t atom1_idx = molGraph->getAtomIndex(atom1);
 		std::size_t atom2_idx = molGraph->getAtomIndex(atom2);
 
-		if (noHydrogens && (hAtomMask.test(atom1_idx) || hAtomMask.test(atom2_idx)))
+		if (excl_hs && (hAtomMask.test(atom1_idx) || hAtomMask.test(atom2_idx)))
 			continue;
 	
 		if (getBondLength(atom1_idx, atom2_idx) >= 0.0)
@@ -653,6 +642,7 @@ void ConfGen::DGConstraintGenerator::assignBondAngles(const ForceField::MMFF94In
 	using namespace Chem;
 
 	const FragmentList& sssr = *getSSSR(*molGraph);
+	bool excl_hs = settings.excludeHydrogens();
 
 	if (ia_data) {
 		const MMFF94AngleBendingInteractionData& bs_data = ia_data->getAngleBendingInteractions();
@@ -675,7 +665,7 @@ void ConfGen::DGConstraintGenerator::assignBondAngles(const ForceField::MMFF94In
 			if (term_atom2_idx >= numAtoms)
 				continue;
 	
-			if (noHydrogens && (hAtomMask.test(term_atom1_idx) || hAtomMask.test(ctr_atom_idx) || hAtomMask.test(term_atom2_idx)))
+			if (excl_hs && (hAtomMask.test(term_atom1_idx) || hAtomMask.test(ctr_atom_idx) || hAtomMask.test(term_atom2_idx)))
 				continue;
 
 			if (iactn.isLinearAngle())
@@ -688,7 +678,7 @@ void ConfGen::DGConstraintGenerator::assignBondAngles(const ForceField::MMFF94In
 	// Fallback
 
 	for (std::size_t i = 0; i < numAtoms; i++) {
-		if (noHydrogens && hAtomMask.test(i))
+		if (excl_hs && hAtomMask.test(i))
 			continue;
 
 		const Atom& ctr_atom = molGraph->getAtom(i);
@@ -724,7 +714,7 @@ void ConfGen::DGConstraintGenerator::assignBondAngles(const ForceField::MMFF94In
 
 			std::size_t term_atom1_idx = molGraph->getAtomIndex(term_atom1);
 
-			if (noHydrogens && hAtomMask.test(term_atom1_idx))
+			if (excl_hs && hAtomMask.test(term_atom1_idx))
 				continue;
 
 			bool term_bond1_in_ring = (ring_check ? getRingFlag(term_bond1) : false);
@@ -739,7 +729,7 @@ void ConfGen::DGConstraintGenerator::assignBondAngles(const ForceField::MMFF94In
 
 				std::size_t term_atom2_idx = molGraph->getAtomIndex(term_atom2);
 
-				if (noHydrogens && hAtomMask.test(term_atom2_idx))
+				if (excl_hs && hAtomMask.test(term_atom2_idx))
 					continue;
 
 				if (getBondAngle(term_atom1_idx, i, term_atom2_idx) >= 0.0)
@@ -1009,6 +999,7 @@ std::size_t ConfGen::DGConstraintGenerator::getNeighborAtoms(const Chem::Atom& a
 	idx_list.clear();
 
 	Atom::ConstBondIterator b_it = atom.getBondsBegin();
+	bool excl_hs = settings.excludeHydrogens();
 
 	for (Atom::ConstAtomIterator a_it = atom.getAtomsBegin(), a_end = atom.getAtomsEnd(); a_it != a_end; ++a_it, ++b_it) {
 		const Atom& nbr_atom = *a_it;
@@ -1024,7 +1015,7 @@ std::size_t ConfGen::DGConstraintGenerator::getNeighborAtoms(const Chem::Atom& a
 
 		std::size_t atom_idx = molGraph->getAtomIndex(nbr_atom);
 
-		if (noHydrogens && hAtomMask.test(atom_idx))
+		if (excl_hs && hAtomMask.test(atom_idx))
 			continue;
 
 		idx_list.push_back(atom_idx);

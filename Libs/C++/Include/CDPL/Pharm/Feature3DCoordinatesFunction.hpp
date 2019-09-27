@@ -1,7 +1,7 @@
 /* -*- mode: c++; c-basic-offset: 4; tab-width: 4; indent-tabs-mode: t -*- */
 
 /* 
- * BondCompareFunctionWrapper.hpp 
+ * Feature3DCoordinatesFunction.hpp 
  *
  * This file is part of the Chemical Data Processing Toolkit
  *
@@ -25,32 +25,34 @@
 
 /**
  * \file
- * \brief Type definition of a generic wrapper class for storing user-defined Chem::Bond compare functions.
+ * \brief Type definition of a generic wrapper class for storing user-defined Pharm::Feature 3D-coordinates functions.
  */
 
-#ifndef CDPL_CHEM_BONDCOMPAREFUNCTIONWRAPPER_HPP
-#define CDPL_CHEM_BONDCOMPAREFUNCTIONWRAPPER_HPP
+#ifndef CDPL_PHARM_FEATURE3DCOORDINATESFUNCTION_HPP
+#define CDPL_PHARM_FEATURE3DCOORDINATESFUNCTION_HPP
 
 #include <boost/function.hpp>
+
+#include "CDPL/Math/Vector.hpp"
 
 
 namespace CDPL 
 {
 
-    namespace Chem
+    namespace Pharm
     {
 
-		class Bond;
+		class Feature;
 
 		/**
-		 * \addtogroup CDPL_CHEM_DATA_STRUCTURES
+		 * \addtogroup CDPL_PHARM_DATA_STRUCTURES
 		 * @{
 		 */
 
 		/**
-		 * \brief A generic wrapper class used to store a user-defined bond compare function.
+		 * \brief A generic wrapper class used to store a user-defined Pharm::Feature 3D-coordinates function.
 		 */
-		typedef boost::function2<bool, const Chem::Bond&, const Chem::Bond&> BondCompareFunction;
+		typedef boost::function1<const Math::Vector3D&, const Pharm::Feature&> Feature3DCoordinatesFunction;
 
 		/**
 		 * @}
@@ -58,4 +60,4 @@ namespace CDPL
     }
 }
 
-#endif // CDPL_CHEM_BONDCOMPAREFUNCTIONWRAPPER_HPP
+#endif // CDPL_PHARM_FEATURE3DCOORDINATESFUNCTION_HPP

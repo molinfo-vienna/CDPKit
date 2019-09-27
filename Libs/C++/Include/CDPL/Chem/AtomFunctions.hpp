@@ -42,7 +42,7 @@
 #include "CDPL/Chem/MatchConstraintList.hpp"
 #include "CDPL/Chem/FragmentList.hpp"
 #include "CDPL/Chem/AtomPropertyFlag.hpp"
-#include "CDPL/Chem/AtomPriorityFunctionWrapper.hpp"
+#include "CDPL/Chem/AtomPriorityFunction.hpp"
 #include "CDPL/Math/Vector.hpp"
 #include "CDPL/Math/VectorArray.hpp"
 #include "CDPL/Util/BitSet.hpp"

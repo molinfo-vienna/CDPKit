@@ -48,6 +48,7 @@
 #include "CDPL/Chem/ControlParameterDefault.hpp"
 #include "CDPL/Math/Matrix.hpp"
 #include "CDPL/Math/Vector.hpp"
+#include "CDPL/Util/BitSet.hpp"
 #include "CDPL/Base/IntegerTypes.hpp"
 
 
@@ -596,6 +597,10 @@ namespace CDPL
 
 		CDPL_CHEM_API void copyBondStereoDescriptors(MolecularGraph& molgraph_copy, const MolecularGraph& molgraph, 
 													 std::size_t atom_idx_offs = 0, std::size_t bond_start_idx = 0);
+
+
+		CDPL_CHEM_API void splitIntoFragments(const MolecularGraph& molgraph, FragmentList& frag_list, 
+											  const Util::BitSet& split_bond_mask, bool append = false);
 
 		/**
 		 * @}

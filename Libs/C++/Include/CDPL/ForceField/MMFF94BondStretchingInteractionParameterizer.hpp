@@ -35,8 +35,8 @@
 
 #include "CDPL/ForceField/APIPrefix.hpp"
 #include "CDPL/ForceField/MMFF94BondStretchingInteractionData.hpp"
-#include "CDPL/ForceField/MMFF94PropertyFunctionWrappers.hpp"
-#include "CDPL/ForceField/InteractionFilterFunctionWrappers.hpp"
+#include "CDPL/ForceField/MMFF94PropertyFunctions.hpp"
+#include "CDPL/ForceField/InteractionFilterFunctions.hpp"
 #include "CDPL/ForceField/MMFF94BondStretchingParameterTable.hpp"
 #include "CDPL/ForceField/MMFF94BondStretchingRuleParameterTable.hpp"
 #include "CDPL/ForceField/MMFF94AtomTypePropertyTable.hpp"

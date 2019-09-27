@@ -37,7 +37,7 @@
 #include "CDPL/ConfGen/DGConstraintGeneratorSettings.hpp"
 #include "CDPL/ConfGen/DGStructureGenerator.hpp"
 #include "CDPL/ConfGen/DGStructureGeneratorSettings.hpp"
-#include "CDPL/ConfGen/FragmentList.hpp"
+#include "CDPL/ConfGen/ConformerData.hpp"
 #include "CDPL/ConfGen/FragmentLibraryEntry.hpp"
 #include "CDPL/ConfGen/FragmentLibrary.hpp"
 #include "CDPL/ConfGen/TorsionRule.hpp"
@@ -45,7 +45,11 @@
 #include "CDPL/ConfGen/TorsionLibrary.hpp"
 #include "CDPL/ConfGen/TorsionRuleMatch.hpp"
 #include "CDPL/ConfGen/TorsionRuleMatcher.hpp"
+#include "CDPL/ConfGen/RMSDConformerSelector.hpp"
+#include "CDPL/ConfGen/TorsionDriver.hpp"
+#include "CDPL/ConfGen/TorsionDriverSettings.hpp"
 #include "CDPL/ConfGen/UtilityFunctions.hpp"
+#include "CDPL/ConfGen/ProgressCallbackFunction.hpp"
 #include "CDPL/ConfGen/FragmentType.hpp"
 #include "CDPL/ConfGen/ForceFieldType.hpp"
 #include "CDPL/ConfGen/ReturnCode.hpp"
@@ -54,10 +58,13 @@
 
 #include "CDPL/ConfGen/RandomStructureGenerator.hpp"
 #include "CDPL/ConfGen/RandomStructureGeneratorSettings.hpp"
-#include "CDPL/ConfGen/SystematicConformerGenerator.hpp"
+#include "CDPL/ConfGen/ConformerGenerator.hpp"
+#include "CDPL/ConfGen/ConformerGeneratorSettings.hpp"
 #include "CDPL/ConfGen/FragmentConformerGenerator.hpp"
 #include "CDPL/ConfGen/FragmentConformerGeneratorSettings.hpp"
 #include "CDPL/ConfGen/FragmentLibraryGenerator.hpp"
+#include "CDPL/ConfGen/FragmentAssembler.hpp"
+#include "CDPL/ConfGen/FragmentAssemblerSettings.hpp"
 
 #endif // defined(HAVE_BOOST_TIMER) && defined(HAVE_BOOST_CHRONO)
 #endif // CDPL_CONFGEN_HPP

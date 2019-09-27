@@ -71,9 +71,9 @@ std::size_t ConfGen::RandomStructureGeneratorSettings::getMaxNumStructureGenerat
 	return maxNumStructGenTrials;
 }
 
-void ConfGen::RandomStructureGeneratorSettings::setMaxNumRefinementIterations(std::size_t max_num)
+void ConfGen::RandomStructureGeneratorSettings::setMaxNumRefinementIterations(std::size_t max_iter)
 {
-	maxNumRefIters = max_num;
+	maxNumRefIters = max_iter;
 }
 
 std::size_t ConfGen::RandomStructureGeneratorSettings::getMaxNumRefinementIterations() const

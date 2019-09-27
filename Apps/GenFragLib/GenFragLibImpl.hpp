@@ -82,7 +82,7 @@ namespace GenFragLib
 
 		void setRMSD(double rmsd);
 		void setEnergyWindow(double ewin);
-		void setConfGenTrialFactor(std::size_t factor);
+		void setSmallRingSystemSamplingFactor(std::size_t factor);
 		void setForceFieldType(const std::string& type_str);
 		void setMode(const std::string& mode_str);
 		void setInputFormat(const std::string& file_ext);
@@ -138,10 +138,9 @@ namespace GenFragLib
 		double                         minRMSD;
 		std::size_t                    timeout;
 		double                         eWindow;
-		std::size_t                    confGenTrialFactor;
+		std::size_t                    smallRSysSamplingFactor;
 		unsigned int                   forceFieldType;
-		bool                           useInputCoords;
-		bool                           strictMMFF94AtomTypes;
+		bool                           strictForceFieldParam;
 		std::size_t                    maxLibSize;
 		InputHandlerPtr                inputHandler;
 		CompMoleculeReader             inputReader;

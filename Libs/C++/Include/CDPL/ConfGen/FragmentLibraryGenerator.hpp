@@ -57,8 +57,6 @@ namespace CDPL
 		{
 
 		  public:
-			typedef FragmentConformerGenerator::ProgressCallbackFunction ProgressCallbackFunction;
-
 			FragmentLibraryGenerator();
 
 			FragmentLibraryGenerator(const FragmentLibrary::SharedPointer& lib);
@@ -67,61 +65,9 @@ namespace CDPL
 
 			const FragmentLibrary::SharedPointer& getFragmentLibrary() const;
 
-			void setForceFieldType(unsigned int type);
-	    
-			unsigned int getForceFieldType() const;
+			FragmentConformerGeneratorSettings& getSettings();
 
-			void performStrictAtomTyping(bool strict);
-
-			bool strictAtomTypingPerformed() const;
-
-			void setMaxNumStructureGenerationTrials(std::size_t max_num);
-
-			std::size_t getMaxNumStructureGenerationTrials() const;
-
-			void setMaxNumMinimizationSteps(std::size_t max_num);
-
-			std::size_t getMaxNumMinimizationSteps() const;
-
-			void setMinimizationStopGradientNorm(double grad_norm);
-
-			double getMinimizationStopGradientNorm() const;
-
-			void setMinimizationStopEnergyDelta(double e_delta);
-
-			double getMinimizationStopEnergyDelta() const;
-
-			void setTimeout(std::size_t mil_secs);
-
-			std::size_t getTimeout() const;
-
-			void reuseExistingCoordinates(bool reuse);
-
-			bool existingCoordinatesReused() const;
-
-			void setEnergyWindow(double win_size);
-
-			double getEnergyWindow() const;
-
-			void setRingConformerTrialFactor(std::size_t factor);
-
-			std::size_t getRingConformerTrialFactor() const;
-
-			void setMinNumRingConformerTrials(std::size_t min_num);
-
-			std::size_t getMinNumRingConformerTrials() const;
-
-			void setMaxNumRingConformerTrials(std::size_t max_num);
-
-			std::size_t getMaxNumRingConformerTrials() const;
-			
-			void setMinRMSD(double min_rmsd);
-
-			double getMinRMSD() const;
-
-			void setMaxNumOutputConformers(std::size_t max_num);
-
-			std::size_t getMaxNumOutputConformers() const;
+			const FragmentConformerGeneratorSettings& getSettings() const;
 
 			void setProgressCallback(const ProgressCallbackFunction& func);
 
@@ -139,12 +85,14 @@ namespace CDPL
 			FragmentLibraryGenerator& operator=(const FragmentLibraryGenerator&);
 
 			Chem::Molecule::SharedPointer addNewLibraryEntry(const Chem::MolecularGraph& frag);
+
 			void removeNewLibraryEntry() const;
 
 			FragmentLibrary::SharedPointer                  fragLib;
 			FragmentLibraryEntry                            fragLibEntry;
 			FragmentConformerGenerator                      fragConfGen;
 			Chem::SmallestSetOfSmallestRings::SharedPointer fragSSSR;
+			std::size_t                                     numGenConfs;
 		};
 
 		/**

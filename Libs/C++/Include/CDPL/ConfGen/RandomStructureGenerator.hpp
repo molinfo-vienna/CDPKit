@@ -37,7 +37,7 @@
 
 #include "CDPL/ConfGen/APIPrefix.hpp"
 #include "CDPL/ConfGen/DGStructureGenerator.hpp"
-#include "CDPL/ConfGen/ForceFieldType.hpp"
+#include "CDPL/ConfGen/RandomStructureGeneratorSettings.hpp"
 #include "CDPL/ForceField/MMFF94EnergyCalculator.hpp"
 #include "CDPL/ForceField/MMFF94GradientCalculator.hpp"
 #include "CDPL/ForceField/MMFF94InteractionData.hpp"
@@ -62,45 +62,12 @@ namespace CDPL
 		{
 
 		public:
-			static const unsigned int DEF_FORCE_FIELD_TYPE                = ForceFieldType::MMFF94S_NO_ESTAT;
-			static const std::size_t  DEF_MAX_NUM_STRUCTURE_GEN_TRIALS    = 10;
-			static const std::size_t  DEF_MAX_NUM_MINIMIZATION_STEPS      = 0;
-			static const std::size_t  DEF_TIMEOUT                         = 600 * 1000;
-			static const double       DEF_MINIMIZATION_STOP_GRADIENT_NORM;
-
+	
 			RandomStructureGenerator();
 	
-			void regardAtomConfiguration(bool regard);
+			RandomStructureGeneratorSettings& getSettings();
 
-			bool atomConfigurationRegarded() const;
-
-			void regardBondConfiguration(bool regard);
-
-			bool bondConfigurationRegarded() const;
-
-			void setMaxNumStructureGenerationTrials(std::size_t max_num);
-
-			std::size_t getMaxNumStructureGenerationTrials() const;
-
-			void setMaxNumMinimizationSteps(std::size_t max_num);
-
-			std::size_t getMaxNumMinimizationSteps() const;
-
-			void setMinimizationStopGradientNorm(double grad_norm);
-
-			double getMinimizationStopGradientNorm() const;
-
-			void setTimeout(std::size_t mil_secs);
-
-			std::size_t getTimeout() const;
-
-			void performStrictAtomTyping(bool strict);
-
-			bool strictAtomTypingPerformed() const;
-	
-			void setForceFieldType(unsigned int type);
-	
-			unsigned int getForceFieldType() const;
+			const RandomStructureGeneratorSettings& getSettings() const;
 
 			unsigned int setup(const Chem::MolecularGraph& molgraph);
 
@@ -121,11 +88,6 @@ namespace CDPL
 			typedef Math::BFGSMinimizer<Math::Vector3DArray::StorageType, double> BFGSMinimizer; 
 		
 			const Chem::MolecularGraph*                molGraph;
-			std::size_t                                maxNumStructGenTrials;
-			std::size_t                                maxNumMinSteps;
-			double                                     minStopGradNorm;
-			std::size_t                                timeout;
-			unsigned int                               forceFieldType;
 			boost::timer::cpu_timer                    timer;
 			double                                     energy;
 			ForceField::MMFF94InteractionParameterizer mmff94Parameterizer;
@@ -136,6 +98,7 @@ namespace CDPL
 			DGStructureGenerator                       dgStructGen;
 			Chem::Hydrogen3DCoordinatesGenerator       hCoordsGen;
 			Math::Vector3DArray::StorageType           gradient;
+			RandomStructureGeneratorSettings           settings;
 		};
 
 		/**

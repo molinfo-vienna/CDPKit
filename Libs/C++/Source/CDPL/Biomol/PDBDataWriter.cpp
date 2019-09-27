@@ -616,7 +616,8 @@ long Biomol::PDBDataWriter::writeATOMRecord(std::ostream& os, long serial, const
 
 	} else {
 		writeWhitespace(os, 1);
-		writeString(os, 4, name, ("PDBDataWriter: error while writing atom name for " + rec_prefix + " record").c_str());
+		writeString(os, 4, name, ("PDBDataWriter: error while writing atom name for " + rec_prefix + " record").c_str(), 
+					!strictErrorChecking, !strictErrorChecking);
 	}
 
 	const Math::Vector3D* coords_ptr = 0;
@@ -641,7 +642,8 @@ long Biomol::PDBDataWriter::writeATOMRecord(std::ostream& os, long serial, const
 
 	const std::string& res_code = getResidueCode(atom);
 
-	writeString(os, 3, res_code, ("PDBDataWriter: error while writing residue name for " + rec_prefix + " record").c_str());
+	writeString(os, 3, res_code, ("PDBDataWriter: error while writing residue name for " + rec_prefix + " record").c_str(), 
+				!strictErrorChecking, !strictErrorChecking);
 	writeWhitespace(os, 1);
 
 	const std::string& chain_id = getChainID(atom);
@@ -670,7 +672,8 @@ long Biomol::PDBDataWriter::writeATOMRecord(std::ostream& os, long serial, const
 
 	boost::to_upper(symbol);
 
-	writeString(os, 2, symbol, ("PDBDataWriter: error while writing element symbol for " + rec_prefix + " record").c_str(), false, false, true);
+	writeString(os, 2, symbol, ("PDBDataWriter: error while writing element symbol for " + rec_prefix + " record").c_str(), 
+				true, !strictErrorChecking, true);
 
 	if (writeFormCharges) { 
 		long charge = getFormalCharge(atom);
@@ -703,7 +706,8 @@ void Biomol::PDBDataWriter::writeTERRecord(std::ostream& os, long serial, const 
 	writeIntegerNumber(os, 5, checkSerialNumber(serial),
 					   "PDBDataWriter: error while writing serial number for TER record", false);
 	writeWhitespace(os, 6);
-	writeString(os, 3, getResidueCode(atom), "PDBDataWriter: error while writing residue name for TER record");
+	writeString(os, 3, getResidueCode(atom), "PDBDataWriter: error while writing residue name for TER record", 
+				!strictErrorChecking, !strictErrorChecking);
 	writeWhitespace(os, 1);
 
 	const std::string& chain_id = getChainID(atom);

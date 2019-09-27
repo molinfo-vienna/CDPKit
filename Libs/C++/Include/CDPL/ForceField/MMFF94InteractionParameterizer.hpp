@@ -38,7 +38,7 @@
 
 #include "CDPL/ForceField/APIPrefix.hpp"
 #include "CDPL/ForceField/InteractionType.hpp"
-#include "CDPL/ForceField/InteractionFilterFunctionWrappers.hpp"
+#include "CDPL/ForceField/InteractionFilterFunctions.hpp"
 #include "CDPL/ForceField/MMFF94BondStretchingInteractionParameterizer.hpp"
 #include "CDPL/ForceField/MMFF94AngleBendingInteractionParameterizer.hpp"
 #include "CDPL/ForceField/MMFF94StretchBendInteractionParameterizer.hpp"
@@ -156,9 +156,9 @@ namespace CDPL
 
 			void setDynamicParameterDefaults();
 
-			void performStrictAtomTyping(bool strict);
+			void strictParameterization(bool strict);
 	
-			bool strictAtomTypingPerformed() const;
+			bool strictParameterization() const;
 
 			MMFF94InteractionParameterizer& operator=(const MMFF94InteractionParameterizer& parameterizer);
 
@@ -206,7 +206,7 @@ namespace CDPL
 			Util::SArray                                    symAtomTypes;   
 			Util::UIArray                                   bondTypeIndices;   
 			Util::DArray                                    atomCharges;
-			bool                                            strictAtomTyping;
+			bool                                            strictParam;
 			const Chem::MolecularGraph*                     molGraph;
 		};			
     

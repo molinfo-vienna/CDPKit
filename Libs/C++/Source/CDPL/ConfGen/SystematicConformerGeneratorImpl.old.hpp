@@ -73,9 +73,7 @@ namespace CDPL
 
 			~SystematicConformerGeneratorImpl();
 
-			void applySettings(const Settings& settings);
-
-			const Settings& getSettings() const;
+			Settings& getSettings();
 
 			unsigned int generate(const Chem::MolecularGraph& molgraph);
 

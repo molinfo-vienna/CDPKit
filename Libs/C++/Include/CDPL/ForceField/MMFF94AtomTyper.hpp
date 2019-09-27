@@ -43,7 +43,7 @@
 #include "CDPL/ForceField/MMFF94HeavyToHydrogenAtomTypeMap.hpp"
 #include "CDPL/ForceField/MMFF94SymbolicToNumericAtomTypeMap.hpp"
 #include "CDPL/ForceField/MMFF94AtomTypePropertyTable.hpp"
-#include "CDPL/ForceField/MMFF94PropertyFunctionWrappers.hpp"
+#include "CDPL/ForceField/MMFF94PropertyFunctions.hpp"
 #include "CDPL/Chem/PatternAtomTyper.hpp"
 #include "CDPL/Util/Array.hpp"
 

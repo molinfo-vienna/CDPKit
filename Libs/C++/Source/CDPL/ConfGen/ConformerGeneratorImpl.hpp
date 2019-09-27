@@ -1,7 +1,7 @@
 /* -*- mode: c++; c-basic-offset: 4; tab-width: 4; indent-tabs-mode: t -*- */
 
 /* 
- * Atom3DCoordinatesFunctionWrapper.hpp 
+ * ConformerGeneratorImpl.hpp 
  *
  * This file is part of the Chemical Data Processing Toolkit
  *
@@ -25,39 +25,41 @@
 
 /**
  * \file
- * \brief Type definition of a generic wrapper class for storing user-defined Chem::Atom 3D-coordinates functions.
+ * \brief Definition of the class CDPL::ConfGen::ConformerGeneratorImpl.
  */
 
-#ifndef CDPL_CHEM_ATOM3DCOORDINATESFUNCTIONWRAPPER_HPP
-#define CDPL_CHEM_ATOM3DCOORDINATESFUNCTIONWRAPPER_HPP
+#ifndef CDPL_CONFGEN_CONFORMERGENERATORIMPL_HPP
+#define CDPL_CONFGEN_CONFORMERGENERATORIMPL_HPP
 
-#include <boost/function.hpp>
-
-#include "CDPL/Math/Vector.hpp"
+#include "CDPL/ConfGen/ConformerGeneratorSettings.hpp"
 
 
 namespace CDPL 
 {
 
-    namespace Chem
+    namespace ConfGen 
     {
+	
+		class ConformerGeneratorImpl 
+		{
 
-		class Atom;
+		public:
+			ConformerGeneratorImpl();
 
-		/**
-		 * \addtogroup CDPL_CHEM_DATA_STRUCTURES
-		 * @{
-		 */
+			~ConformerGeneratorImpl();
 
-		/**
-		 * \brief A generic wrapper class used to store a user-defined atom 3D-coordinates function.
-		 */
-		typedef boost::function1<const Math::Vector3D&, const Chem::Atom&> Atom3DCoordinatesFunction;
+			ConformerGeneratorSettings& getSettings();
 
-		/**
-		 * @}
-		 */
+			unsigned int generate(const Chem::MolecularGraph& molgraph);
+
+		private:
+			ConformerGeneratorImpl(const ConformerGeneratorImpl&);
+
+			ConformerGeneratorImpl& operator=(const ConformerGeneratorImpl&);
+
+			ConformerGeneratorSettings settings;
+		};
     }
 }
 
-#endif // CDPL_CHEM_ATOM3DCOORDINATESFUNCTIONWRAPPER_HPP
+#endif // CDPL_CONFGEN_CONFORMERGENERATORIMPL_HPP

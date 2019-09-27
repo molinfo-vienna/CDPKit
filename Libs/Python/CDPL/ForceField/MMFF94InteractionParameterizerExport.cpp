@@ -40,6 +40,9 @@ void CDPLPythonForceField::exportMMFF94InteractionParameterizer()
     using namespace boost;
     using namespace CDPL;
 
+	typedef void (ForceField::MMFF94InteractionParameterizer::*SetBoolFunc)(bool);
+	typedef bool (ForceField::MMFF94InteractionParameterizer::*GetBoolFunc)() const;
+
     python::class_<ForceField::MMFF94InteractionParameterizer, ForceField::MMFF94InteractionParameterizer::SharedPointer>("MMFF94InteractionParameterizer", python::no_init)
 		.def(python::init<bool>((python::arg("self"), python::arg("mmff94s") = true)))
 		.def(python::init<const ForceField::MMFF94InteractionParameterizer&>((python::arg("self"), python::arg("parameterizer"))))
@@ -95,13 +98,13 @@ void CDPLPythonForceField::exportMMFF94InteractionParameterizer()
 			 (python::arg("self"), python::arg("table")))
 		.def("setStaticParameterDefaults", &ForceField::MMFF94InteractionParameterizer::setStaticParameterDefaults, python::arg("self"))
 		.def("setDynamicParameterDefaults", &ForceField::MMFF94InteractionParameterizer::setDynamicParameterDefaults, python::arg("self"))
-		.def("performStrictAtomTyping", &ForceField::MMFF94InteractionParameterizer::performStrictAtomTyping, 
+		.def("strictParameterization", SetBoolFunc(&ForceField::MMFF94InteractionParameterizer::strictParameterization), 
 			 (python::arg("self"), python::arg("strict")))
-		.def("strictAtomTypingPerformed", &ForceField::MMFF94InteractionParameterizer::strictAtomTypingPerformed, python::arg("self"))
+		.def("strictParameterization", GetBoolFunc(&ForceField::MMFF94InteractionParameterizer::strictParameterization), python::arg("self"))
 		.def("assign", CDPLPythonBase::copyAssOp(&ForceField::MMFF94InteractionParameterizer::operator=),
 			 (python::arg("self"), python::arg("parameterizer")), python::return_self<>())
 		.def("parameterize", &ForceField::MMFF94InteractionParameterizer::parameterize, 
 			 (python::arg("self"), python::arg("molgraph"), python::arg("ia_data"), python::arg("ia_types") = ForceField::InteractionType::ALL))
-		.add_property("strictAtomTyping", &ForceField::MMFF94InteractionParameterizer::strictAtomTypingPerformed, 
-					  &ForceField::MMFF94InteractionParameterizer::performStrictAtomTyping);
+		.add_property("strictParam", GetBoolFunc(&ForceField::MMFF94InteractionParameterizer::strictParameterization), 
+					  SetBoolFunc(&ForceField::MMFF94InteractionParameterizer::strictParameterization));
 }

@@ -1,7 +1,7 @@
 /* -*- mode: c++; c-basic-offset: 4; tab-width: 4; indent-tabs-mode: t -*- */
 
 /* 
- * AtomPredicateWrapper.hpp 
+ * InteractionFilterFunctions.hpp 
  *
  * This file is part of the Chemical Data Processing Toolkit
  *
@@ -25,11 +25,12 @@
 
 /**
  * \file
- * \brief Type definition of a generic wrapper class for storing user-defined Chem::Atom predicates.
+ * \brief Type definition of generic wrapper classes for storing user-defined interaction
+ *        filtering functions.
  */
 
-#ifndef CDPL_CHEM_ATOMPREDICATEWRAPPER_HPP
-#define CDPL_CHEM_ATOMPREDICATEWRAPPER_HPP
+#ifndef CDPL_FORCEFIELD_INTERACTIONFILTERFUNCTIONS_HPP
+#define CDPL_FORCEFIELD_INTERACTIONFILTERFUNCTIONS_HPP
 
 #include <boost/function.hpp>
 
@@ -41,16 +42,21 @@ namespace CDPL
     {
 
 		class Atom;
+	}
+
+    namespace ForceField 
+    {
 
 		/**
-		 * \addtogroup CDPL_CHEM_DATA_STRUCTURES
+		 * \addtogroup CDPL_FORCEFIELD_DATA_STRUCTURES
 		 * @{
 		 */
+		
+		typedef boost::function2<bool, const Chem::Atom&, const Chem::Atom&> InteractionFilterFunction2;
 
-		/**
-		 * \brief A generic wrapper class used to store a user-defined atom predicate.
-		 */
-		typedef boost::function1<bool, const Chem::Atom&> AtomPredicate;
+		typedef boost::function3<bool, const Chem::Atom&, const Chem::Atom&, const Chem::Atom&> InteractionFilterFunction3;
+
+		typedef boost::function4<bool, const Chem::Atom&, const Chem::Atom&, const Chem::Atom&, const Chem::Atom&> InteractionFilterFunction4;
 
 		/**
 		 * @}
@@ -58,4 +64,4 @@ namespace CDPL
     }
 }
 
-#endif // CDPL_CHEM_ATOMPREDICATEWRAPPER_HPP
+#endif // CDPL_FORCEFIELD_INTERACTIONFILTERFUNCTIONS_HPP

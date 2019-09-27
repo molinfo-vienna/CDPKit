@@ -67,7 +67,7 @@ namespace CDPL
 
 			std::size_t getMaxNumStructureGenerationTrials() const;
 
-			void setMaxNumRefinementIterations(std::size_t max_num);
+			void setMaxNumRefinementIterations(std::size_t max_iter);
 
 			std::size_t getMaxNumRefinementIterations() const;
 

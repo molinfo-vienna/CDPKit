@@ -28,6 +28,7 @@
 
 #include <sstream>
 #include <algorithm>
+#include <functional>
 
 #include <boost/bind.hpp>
 
@@ -458,4 +459,12 @@ bool Chem::containsFragmentWithBond(const FragmentList& frag_list, const Bond& b
 	FragmentList::ConstElementIterator end = frag_list.getElementsEnd();
 
 	return (std::find_if(frag_list.getElementsBegin(), end, boost::bind(&Fragment::containsBond, _1, boost::ref(bond))) != end);
+}
+		
+bool Chem::containsFragmentWithMinSize(const FragmentList& frag_list, std::size_t min_size)
+{
+	FragmentList::ConstElementIterator end = frag_list.getElementsEnd();
+
+	return (std::find_if(frag_list.getElementsBegin(), end, 
+						 boost::bind(std::greater_equal<std::size_t>(), boost::bind(&Fragment::getNumAtoms, _1), min_size)) != end);
 }

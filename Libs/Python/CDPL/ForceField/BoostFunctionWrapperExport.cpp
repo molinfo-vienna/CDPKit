@@ -26,9 +26,9 @@
 
 #include <boost/function.hpp>
 
-#include "CDPL/ForceField/InteractionFilterFunctionWrappers.hpp"
-#include "CDPL/ForceField/TopologicalAtomDistanceFunctionWrapper.hpp"
-#include "CDPL/ForceField/MMFF94PropertyFunctionWrappers.hpp"
+#include "CDPL/ForceField/InteractionFilterFunctions.hpp"
+#include "CDPL/ForceField/TopologicalAtomDistanceFunction.hpp"
+#include "CDPL/ForceField/MMFF94PropertyFunctions.hpp"
 #include "CDPL/Chem/Atom.hpp"
 #include "CDPL/Chem/Bond.hpp"
 #include "CDPL/Chem/MolecularGraph.hpp"

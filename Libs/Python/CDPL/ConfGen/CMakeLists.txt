@@ -39,15 +39,20 @@ SET(confgen_MOD_SRCS
     ReturnCodeExport.cpp
 
     DGConstraintGeneratorExport.cpp
+    DGConstraintGeneratorSettingsExport.cpp
     DGStructureGeneratorExport.cpp
-    FragmentListExport.cpp
+    DGStructureGeneratorSettingsExport.cpp
     FragmentLibraryEntryExport.cpp
     FragmentLibraryExport.cpp
+    ConformerDataExport.cpp
     TorsionRuleExport.cpp
     TorsionCategoryExport.cpp
     TorsionLibraryExport.cpp
     TorsionRuleMatchExport.cpp
     TorsionRuleMatcherExport.cpp
+    TorsionDriverExport.cpp
+    TorsionDriverSettingsExport.cpp
+    RMSDConformerSelectorExport.cpp
 
     UtilityFunctionExport.cpp
 
@@ -61,9 +66,14 @@ IF(Boost_TIMER_FOUND AND Boost_CHRONO_FOUND)
   SET(confgen_MOD_SRCS
       ${confgen_MOD_SRCS}
       RandomStructureGeneratorExport.cpp
-      SystematicConformerGeneratorExport.cpp
+      RandomStructureGeneratorSettingsExport.cpp
+      ConformerGeneratorExport.cpp
+      ConformerGeneratorSettingsExport.cpp
       FragmentConformerGeneratorExport.cpp
+      FragmentConformerGeneratorSettingsExport.cpp
       FragmentLibraryGeneratorExport.cpp
+      FragmentAssemblerExport.cpp
+      FragmentAssemblerSettingsExport.cpp
      )	
 ENDIF(Boost_TIMER_FOUND AND Boost_CHRONO_FOUND)
 

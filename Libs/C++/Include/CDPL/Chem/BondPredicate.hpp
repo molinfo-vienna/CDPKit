@@ -1,7 +1,7 @@
 /* -*- mode: c++; c-basic-offset: 4; tab-width: 4; indent-tabs-mode: t -*- */
 
 /* 
- * AtomCompareFunctionWrapper.hpp 
+ * BondPredicate.hpp 
  *
  * This file is part of the Chemical Data Processing Toolkit
  *
@@ -25,11 +25,11 @@
 
 /**
  * \file
- * \brief Type definition of a generic wrapper class for storing user-defined Chem::Atom compare functions.
+ * \brief Type definition of a generic wrapper class for storing user-defined Chem::Bond predicates.
  */
 
-#ifndef CDPL_CHEM_ATOMCOMPAREFUNCTIONWRAPPER_HPP
-#define CDPL_CHEM_ATOMCOMPAREFUNCTIONWRAPPER_HPP
+#ifndef CDPL_CHEM_BONDPREDICATE_HPP
+#define CDPL_CHEM_BONDPREDICATE_HPP
 
 #include <boost/function.hpp>
 
@@ -40,7 +40,7 @@ namespace CDPL
     namespace Chem
     {
 
-		class Atom;
+		class Bond;
 
 		/**
 		 * \addtogroup CDPL_CHEM_DATA_STRUCTURES
@@ -48,9 +48,9 @@ namespace CDPL
 		 */
 
 		/**
-		 * \brief A generic wrapper class used to store a user-defined atom compare function.
+		 * \brief A generic wrapper class used to store a user-defined bond predicate.
 		 */
-		typedef boost::function2<bool, const Chem::Atom&, const Chem::Atom&> AtomCompareFunction;
+		typedef boost::function1<bool, const Chem::Bond&> BondPredicate;
 
 		/**
 		 * @}
@@ -58,4 +58,4 @@ namespace CDPL
     }
 }
 
-#endif // CDPL_CHEM_ATOMCOMPAREFUNCTIONWRAPPER_HPP
+#endif // CDPL_CHEM_BONDPREDICATE_HPP

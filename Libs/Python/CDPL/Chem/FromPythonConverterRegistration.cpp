@@ -41,7 +41,7 @@
 #include "CDPL/Chem/Atom3DCoordinatesFunctor.hpp"
 #include "CDPL/Chem/AtomConformer3DCoordinatesFunctor.hpp"
 #include "CDPL/Chem/AtomArray3DCoordinatesFunctor.hpp"
-#include "CDPL/Chem/Atom3DCoordinatesFunctionWrapper.hpp"
+#include "CDPL/Chem/Atom3DCoordinatesFunction.hpp"
 #include "CDPL/Chem/GeneralizedBellAtomDensity.hpp"
 #include "CDPL/Chem/AtomDensityGridCalculator.hpp"
 #include "CDPL/Chem/PatternBasedTautomerizationRule.hpp"

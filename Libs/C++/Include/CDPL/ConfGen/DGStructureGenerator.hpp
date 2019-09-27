@@ -36,6 +36,7 @@
 
 #include "CDPL/ConfGen/APIPrefix.hpp"
 #include "CDPL/ConfGen/DGConstraintGenerator.hpp"
+#include "CDPL/ConfGen/DGStructureGeneratorSettings.hpp"
 #include "CDPL/Util/DGCoordinatesGenerator.hpp"
 #include "CDPL/Math/VectorArray.hpp"
 
@@ -57,25 +58,9 @@ namespace CDPL
 		public:
 			DGStructureGenerator();
 
-			void setBoxSize(double size);
+			DGStructureGeneratorSettings& getSettings();
 
-			double getBoxSize() const;
-
-			void regardAtomConfiguration(bool regard);
-
-			bool atomConfigurationRegarded() const;
-
-			void regardBondConfiguration(bool regard);
-
-			bool bondConfigurationRegarded() const;
-
-			void excludeHydrogens(bool exclude);
-
-			bool hydrogensExcluded() const;
-
-			void enablePlanarityConstraints(bool enable);
-
-			bool planarityConstraintsEnabled() const;
+			const DGStructureGeneratorSettings& getSettings() const;
 
 			const Util::BitSet& getExcludedHydrogenMask() const;
 
@@ -97,8 +82,7 @@ namespace CDPL
 			Util::DG3DCoordinatesGenerator phase1CoordsGen;
 			Util::DG3DCoordinatesGenerator phase2CoordsGen;
 			RandNumEngine                  randomEngine;
-			bool                           withPlanConstr;    
-			double                         boxSize;
+			DGStructureGeneratorSettings   settings;
 		};
 
 		/**

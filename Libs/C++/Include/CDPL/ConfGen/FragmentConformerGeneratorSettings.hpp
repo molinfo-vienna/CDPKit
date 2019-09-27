@@ -43,7 +43,7 @@ namespace CDPL
     {
 
 		/**
-		 * \addtogroup CDPL_CONFGEN_HELPERS
+		 * \addtogroup CDPL_CONFGEN_DATA_STRUCTURES
 		 * @{
 		 */
 
@@ -53,23 +53,58 @@ namespace CDPL
 		  public:
 			static const FragmentConformerGeneratorSettings DEFAULT;
 
+			class RingFragmentSettings
+			{
+		
+			public:
+				RingFragmentSettings();
+
+				void setMaxNumSampledConformers(std::size_t max_num);
+
+				std::size_t getMaxNumSampledConformers() const;
+
+				void setMinNumSampledConformers(std::size_t min_num);
+
+				std::size_t getMinNumSampledConformers() const;
+
+				void setTimeout(std::size_t mil_secs);
+
+				std::size_t getTimeout() const;
+
+				void setEnergyWindow(double win_size);
+
+				double getEnergyWindow() const;
+
+				void setMaxNumOutputConformers(std::size_t max_num);
+
+				std::size_t getMaxNumOutputConformers() const;
+
+				void setMinRMSD(double min_rmsd);
+
+				double getMinRMSD() const;
+
+			private:
+				std::size_t maxNumSampledConfs;
+				std::size_t minNumSampledConfs;
+				std::size_t maxNumOutputConfs;
+				std::size_t timeout;				
+				double      eWindow;
+				double      minRMSD;
+			};
+
 			FragmentConformerGeneratorSettings();
 	
 			virtual ~FragmentConformerGeneratorSettings() {}
-
-			void setMaxNumStructureGenerationTrials(std::size_t max_num);
-
-			std::size_t getMaxNumStructureGenerationTrials() const;
 
 			void setForceFieldType(unsigned int type);
 	    
 			unsigned int getForceFieldType() const;
 
-			void strictParameterization(bool strict);
+			void strictForceFieldParameterization(bool strict);
 
-			bool strictParameterization() const;
+			bool strictForceFieldParameterization() const;
 
-			void setMaxNumRefinementIterations(std::size_t max_num);
+			void setMaxNumRefinementIterations(std::size_t max_iter);
 
 			std::size_t getMaxNumRefinementIterations() const;
 
@@ -77,45 +112,31 @@ namespace CDPL
 
 			double getRefinementStopGradient() const;
 
-			void setTimeout(std::size_t mil_secs);
+			void setMinMacrocycleSize(std::size_t min_size);
 
-			std::size_t getTimeout() const;
+			std::size_t getMinMacrocycleSize() const;
 
-			void setEnergyWindow(double win_size);
+			RingFragmentSettings& getMacrocycleSettings();
 
-			double getEnergyWindow() const;
+			const RingFragmentSettings& getMacrocycleSettings() const;
 
-			void setRingConformerTrialFactor(std::size_t factor);
+			RingFragmentSettings& getSmallRingSystemSettings();
 
-			std::size_t getRingConformerTrialFactor() const;
+			const RingFragmentSettings& getSmallRingSystemSettings() const;
 
-			void setMinNumRingConformerTrials(std::size_t min_num);
+			void setSmallRingSystemSamplingFactor(std::size_t factor);
 
-			std::size_t getMinNumRingConformerTrials() const;
-
-			void setMaxNumRingConformerTrials(std::size_t max_num);
-
-			std::size_t getMaxNumRingConformerTrials() const;
-			
-			void setMinRMSD(double min_rmsd);
-
-			double getMinRMSD() const;
-
-			void setMaxNumOutputConformers(std::size_t max_num);
-
-			std::size_t getMaxNumOutputConformers() const;
+			std::size_t getSmallRingSystemSamplingFactor() const;
 
 		  private:
-			std::size_t  maxNumStructGenTrials;
-			std::size_t  maxNumMinIters;
-			std::size_t  maxNumOutputConfs;
-			double       minStopGrad;
-			std::size_t  timeout;
-			double       eWindow;
-			std::size_t  ringConfTrialFactor;
-			std::size_t  maxNumRingConfTrials;
-			double       minRMSD;
-			unsigned int forceFieldType;
+			unsigned int         forceFieldType;
+			bool                 strictParam;
+			std::size_t          maxNumRefIters;
+			double               refStopGrad;
+			std::size_t          minMacrocycleSize;
+			std::size_t          srSamplingFactor;
+			RingFragmentSettings mcSettings;
+			RingFragmentSettings srSettings;
 		};
 
 		/**

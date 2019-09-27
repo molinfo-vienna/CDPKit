@@ -35,7 +35,7 @@
 
 #include "CDPL/Chem/APIPrefix.hpp"
 #include "CDPL/Chem/SubstructureSearch.hpp"
-#include "CDPL/Chem/Atom3DCoordinatesFunctionWrapper.hpp"
+#include "CDPL/Chem/Atom3DCoordinatesFunction.hpp"
 #include "CDPL/Util/Array.hpp"
 
 

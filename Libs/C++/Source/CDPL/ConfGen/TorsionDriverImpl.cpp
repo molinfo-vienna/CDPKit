@@ -1,7 +1,7 @@
 /* -*- mode: c++; c-basic-offset: 4; tab-width: 4; indent-tabs-mode: t -*- */
 
 /* 
- * BondPredicateWrapper.hpp 
+ * TorsionDriverImpl.cpp 
  *
  * This file is part of the Chemical Data Processing Toolkit
  *
@@ -23,39 +23,20 @@
  * Boston, MA 02111-1307, USA.
  */
 
-/**
- * \file
- * \brief Type definition of a generic wrapper class for storing user-defined Chem::Bond predicates.
- */
 
-#ifndef CDPL_CHEM_BONDPREDICATEWRAPPER_HPP
-#define CDPL_CHEM_BONDPREDICATEWRAPPER_HPP
+#include "StaticInit.hpp"
 
-#include <boost/function.hpp>
+#include "TorsionDriverImpl.hpp"
 
 
-namespace CDPL 
+using namespace CDPL;
+
+
+ConfGen::TorsionDriverImpl::TorsionDriverImpl() {} 
+
+ConfGen::TorsionDriverImpl::~TorsionDriverImpl() {}
+
+ConfGen::TorsionDriverSettings& ConfGen::TorsionDriverImpl::getSettings()
 {
-
-    namespace Chem
-    {
-
-		class Bond;
-
-		/**
-		 * \addtogroup CDPL_CHEM_DATA_STRUCTURES
-		 * @{
-		 */
-
-		/**
-		 * \brief A generic wrapper class used to store a user-defined bond predicate.
-		 */
-		typedef boost::function1<bool, const Chem::Bond&> BondPredicate;
-
-		/**
-		 * @}
-		 */
-    }
+	return settings;
 }
-
-#endif // CDPL_CHEM_BONDPREDICATEWRAPPER_HPP

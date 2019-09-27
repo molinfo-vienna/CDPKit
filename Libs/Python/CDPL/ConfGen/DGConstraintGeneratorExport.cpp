@@ -75,15 +75,6 @@ void CDPLPythonConfGen::exportDGConstraintGenerator()
 		.def(CDPLPythonBase::ObjectIdentityCheckVisitor<ConfGen::DGConstraintGenerator>())
 		.def("assign", CDPLPythonBase::copyAssOp(&ConfGen::DGConstraintGenerator::operator=), 
 			 (python::arg("self"), python::arg("gen")), python::return_self<>())
-		.def("excludeHydrogens", &ConfGen::DGConstraintGenerator::excludeHydrogens, 
-			 (python::arg("self"), python::arg("exclude")))
-		.def("hydrogensExcluded", &ConfGen::DGConstraintGenerator::hydrogensExcluded, python::arg("self"))
-		.def("regardAtomConfiguration", &ConfGen::DGConstraintGenerator::regardAtomConfiguration, 
-			 (python::arg("self"), python::arg("regard")))
-		.def("atomConfigurationRegarded", &ConfGen::DGConstraintGenerator::atomConfigurationRegarded, python::arg("self"))
-		.def("regardBondConfiguration", &ConfGen::DGConstraintGenerator::regardBondConfiguration, 
-			 (python::arg("self"), python::arg("regard")))
-		.def("bondConfigurationRegarded", &ConfGen::DGConstraintGenerator::bondConfigurationRegarded, python::arg("self"))
 		.def("getExcludedHydrogenMask", &ConfGen::DGConstraintGenerator::getExcludedHydrogenMask, python::arg("self"), 
 			 python::return_internal_reference<>())
 		.def("addAtomStereoCenter", &addAtomStereoCenter, (python::arg("atom"), python::arg("descr")))
@@ -115,14 +106,16 @@ void CDPLPythonConfGen::exportDGConstraintGenerator()
 			 (python::arg("self"), python::arg("coords_gen")))
 		.def("addBondConfigurationConstraints", &ConfGen::DGConstraintGenerator::addBondConfigurationConstraints, 
 			 (python::arg("self"), python::arg("coords_gen")))
+		.def("getSettings", 
+			 static_cast<ConfGen::DGConstraintGeneratorSettings& (ConfGen::DGConstraintGenerator::*)()>
+			 (&ConfGen::DGConstraintGenerator::getSettings), 
+			 python::arg("self"), python::return_internal_reference<>())
+		.add_property("settings", 
+					  python::make_function(static_cast<ConfGen::DGConstraintGeneratorSettings& (ConfGen::DGConstraintGenerator::*)()>
+											(&ConfGen::DGConstraintGenerator::getSettings),
+											python::return_internal_reference<>()))
 		.add_property("numAtomStereoCenters",  &ConfGen::DGConstraintGenerator::getNumAtomStereoCenters)
 		.add_property("numBondStereoCenters",  &ConfGen::DGConstraintGenerator::getNumBondStereoCenters)
 		.add_property("exclHydrogenMask", python::make_function(&ConfGen::DGConstraintGenerator::getExcludedHydrogenMask, 
-																python::return_internal_reference<>())) 
-		.add_property("exclHydrogens", &ConfGen::DGConstraintGenerator::hydrogensExcluded, 
-					  &ConfGen::DGConstraintGenerator::excludeHydrogens)
-		.add_property("regardAtomConfig", &ConfGen::DGConstraintGenerator::atomConfigurationRegarded, 
-					  &ConfGen::DGConstraintGenerator::regardAtomConfiguration)
-		.add_property("regardBondConfig", &ConfGen::DGConstraintGenerator::bondConfigurationRegarded, 
-					  &ConfGen::DGConstraintGenerator::regardBondConfiguration);
+																python::return_internal_reference<>()));
 }

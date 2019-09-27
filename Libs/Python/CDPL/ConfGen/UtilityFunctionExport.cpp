@@ -29,6 +29,8 @@
 #include "CDPL/ConfGen/UtilityFunctions.hpp"
 #include "CDPL/Chem/Molecule.hpp"
 #include "CDPL/Chem/Bond.hpp"
+#include "CDPL/ForceField/MMFF94InteractionParameterizer.hpp"
+#include "CDPL/ForceField/MMFF94InteractionData.hpp"
 
 #include "FunctionExports.hpp"
 
@@ -49,6 +51,10 @@ void CDPLPythonConfGen::exportUtilityFunctions()
 	using namespace CDPL;
 
 	python::def("isFragmentLinkBond", &isFragmentLinkBond, (python::arg("bond"), python::arg("molgraph"))); 
+	python::def("buildFragmentLinkBondMask", &ConfGen::buildFragmentLinkBondMask, 
+				(python::arg("molgraph"), python::arg("mask"), python::arg("reset") = true));
 	python::def("perceiveFragmentType", &ConfGen::perceiveFragmentType, python::arg("molgraph"));
 	python::def("prepareForConformerGeneration", &ConfGen::prepareForConformerGeneration, python::arg("mol"));
+	python::def("parameterizeMMFF94Interactions", &ConfGen::parameterizeMMFF94Interactions, 
+				(python::arg("molgraph"), python::arg("parameterizer"), python::arg("param_data"), python::arg("ff_type")));
 }

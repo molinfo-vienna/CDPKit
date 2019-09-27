@@ -28,6 +28,10 @@
 
 #include "CDPL/ConfGen/UtilityFunctions.hpp"
 #include "CDPL/ConfGen/FragmentType.hpp"
+#include "CDPL/ConfGen/ForceFieldType.hpp"
+#include "CDPL/ForceField/MMFF94InteractionParameterizer.hpp"
+#include "CDPL/ForceField/MMFF94InteractionData.hpp"
+#include "CDPL/ForceField/InteractionType.hpp"
 #include "CDPL/Chem/Atom.hpp"
 #include "CDPL/Chem/Bond.hpp"
 #include "CDPL/Chem/Molecule.hpp"
@@ -148,6 +152,30 @@ bool ConfGen::isFragmentLinkBond(const Chem::Bond& bond, const Chem::MolecularGr
     return false;
 } 
 
+std::size_t ConfGen::buildFragmentLinkBondMask(const Chem::MolecularGraph& molgraph, Util::BitSet& mask, bool reset)
+{
+    using namespace Chem;
+
+	mask.resize(molgraph.getNumBonds());
+
+	if (reset)
+		mask.reset();
+
+	std::size_t i = 0;
+	std::size_t num_bonds = 0;
+
+	for (MolecularGraph::ConstBondIterator it = molgraph.getBondsBegin(), end = molgraph.getBondsEnd(); it != end; ++it, i++) {
+		const Bond& bond = *it;
+		
+		if (isFragmentLinkBond(bond, molgraph)) {
+			mask.set(i);
+			num_bonds++;
+		}
+	}
+
+	return num_bonds;
+}
+
 unsigned int ConfGen::perceiveFragmentType(const Chem::MolecularGraph& molgraph)
 {
     using namespace Chem;
@@ -213,3 +241,19 @@ void ConfGen::prepareForConformerGeneration(Chem::Molecule& mol)
 		calcTopologicalDistanceMatrix(mol, false);
 	}
 }
+
+void ConfGen::parameterizeMMFF94Interactions(const Chem::MolecularGraph& molgraph, ForceField::MMFF94InteractionParameterizer& parameterizer,
+											 ForceField::MMFF94InteractionData& param_data, unsigned int ff_type)
+{
+	
+	if (ff_type == ForceFieldType::MMFF94 || ff_type == ForceFieldType::MMFF94_NO_ESTAT)
+		parameterizer.setDynamicParameterDefaults();
+	else
+		parameterizer.setStaticParameterDefaults();
+
+    const unsigned int int_types = (ff_type == ForceFieldType::MMFF94 || ff_type == ForceFieldType::MMFF94S ?
+									ForceField::InteractionType::ALL :
+									ForceField::InteractionType::ALL ^ ForceField::InteractionType::ELECTROSTATIC);
+
+	parameterizer.parameterize(molgraph, param_data, int_types);
+} 

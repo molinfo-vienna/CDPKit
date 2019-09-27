@@ -36,23 +36,33 @@ BOOST_PYTHON_MODULE(_confgen)
 {
 	using namespace CDPLPythonConfGen;
 
+	exportDGConstraintGeneratorSettings();
 	exportDGConstraintGenerator();
+	exportDGStructureGeneratorSettings();
 	exportDGStructureGenerator();
-	exportFragmentList();
 	exportFragmentLibraryEntry();
 	exportFragmentLibrary();
+	exportConformerData();
 	exportTorsionRule();
 	exportTorsionCategory();
 	exportTorsionLibrary();
 	exportTorsionRuleMatch();
 	exportTorsionRuleMatcher();
+	exportTorsionDriverSettings();
+	exportTorsionDriver();
+	exportRMSDConformerSelector();
 
 #if defined(HAVE_BOOST_TIMER) && defined(HAVE_BOOST_CHRONO)
 
+	exportRandomStructureGeneratorSettings();
 	exportRandomStructureGenerator();
-	exportSystematicConformerGenerator();
+	exportConformerGeneratorSettings();
+	exportConformerGenerator();
+	exportFragmentConformerGeneratorSettings();
 	exportFragmentConformerGenerator();
 	exportFragmentLibraryGenerator();
+	exportFragmentAssemblerSettings();
+	exportFragmentAssembler();
 
 #endif // defined(HAVE_BOOST_TIMER) && defined(HAVE_BOOST_CHRONO)
 

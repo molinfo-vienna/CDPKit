@@ -264,13 +264,9 @@ ConfGen::SystematicConformerGeneratorImpl::SystematicConformerGeneratorImpl():
 
 ConfGen::SystematicConformerGeneratorImpl::~SystematicConformerGeneratorImpl() {}
 
-void ConfGen::SystematicConformerGeneratorImpl::applySettings(const Settings& settings)
-{
-	this->settings = settings;
-}
 
-const ConfGen::SystematicConformerGeneratorImpl::Settings& 
-ConfGen::SystematicConformerGeneratorImpl::getSettings() const
+ConfGen::SystematicConformerGeneratorImpl::Settings& 
+ConfGen::SystematicConformerGeneratorImpl::getSettings()
 {
 	return settings;
 }

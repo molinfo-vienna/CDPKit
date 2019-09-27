@@ -42,7 +42,7 @@
 #include "CDPL/Biomol/AtomPropertyFlag.hpp"
 #include "CDPL/Chem/MolecularGraph.hpp"
 #include "CDPL/Chem/Atom.hpp"
-#include "CDPL/Chem/Atom3DCoordinatesFunctionWrapper.hpp"
+#include "CDPL/Chem/Atom3DCoordinatesFunction.hpp"
 
 
 namespace CDPL 
