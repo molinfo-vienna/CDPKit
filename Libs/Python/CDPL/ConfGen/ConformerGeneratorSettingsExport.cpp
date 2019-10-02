@@ -100,7 +100,7 @@ void CDPLPythonConfGen::exportConformerGeneratorSettings()
 			 static_cast<ConfGen::FragmentConformerGeneratorSettings& (ConfGen::ConformerGeneratorSettings::*)()>
 			 (&ConfGen::ConformerGeneratorSettings::getFragmentBuildSettings),
 			 python::arg("self"), python::return_internal_reference<>())
-		.def_readonly("DEFAULT", &ConfGen::ConformerGeneratorSettings::DEFAULT)
+		.def_readonly("DEFAULT", ConfGen::ConformerGeneratorSettings::DEFAULT)
 		.add_property("enumHeteroHRotors", GetBoolFunc(&ConfGen::ConformerGeneratorSettings::enumerateHeteroHydrogenRotors),
 					  SetBoolFunc(&ConfGen::ConformerGeneratorSettings::enumerateHeteroHydrogenRotors))
 		.add_property("enumRings", GetBoolFunc(&ConfGen::ConformerGeneratorSettings::enumerateRings),

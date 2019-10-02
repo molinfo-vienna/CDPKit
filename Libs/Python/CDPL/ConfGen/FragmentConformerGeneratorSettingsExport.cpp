@@ -126,7 +126,7 @@ void CDPLPythonConfGen::exportFragmentConformerGeneratorSettings()
 			 (python::arg("self"), python::arg("min_rmsd")))
 		.def("getSmallRingSystemSamplingFactor", &ConfGen::FragmentConformerGeneratorSettings::getSmallRingSystemSamplingFactor, 
 			 python::arg("self"))
-		.def_readonly("DEFAULT", &ConfGen::FragmentConformerGeneratorSettings::DEFAULT)
+		.def_readonly("DEFAULT", ConfGen::FragmentConformerGeneratorSettings::DEFAULT)
 		.add_property("forceFieldType", &ConfGen::FragmentConformerGeneratorSettings::getForceFieldType, 
 					  &ConfGen::FragmentConformerGeneratorSettings::setForceFieldType)
 		.add_property("strictForceFieldParam", GetBoolFunc(&ConfGen::FragmentConformerGeneratorSettings::strictForceFieldParameterization), 

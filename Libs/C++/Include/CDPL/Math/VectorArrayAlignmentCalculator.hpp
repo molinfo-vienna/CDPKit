@@ -42,7 +42,6 @@ namespace CDPL
 	namespace Math
 	{
 
-
 		template <typename VA, typename V = typename VA::ElementType, typename T = typename V::ValueType>
 		class VectorArrayAlignmentCalculator
 		{
@@ -98,10 +97,7 @@ namespace CDPL
 				}
 	
 				SizeType getSize1() const {
-					if (data.isEmpty())
-						return 0;
-
-					return data[0].getSize();
+					return VectorType::Size;
 				}
 
 				SizeType getSize2() const {
@@ -113,10 +109,7 @@ namespace CDPL
 				}
 	
 				SizeType getMaxSize1() const {
-					if (data.isEmpty())
-						return 0;
-
-					return data[0].getMaxSize();
+					return VectorType::Size;
 				}
 
 				SizeType getMaxSize2() const {

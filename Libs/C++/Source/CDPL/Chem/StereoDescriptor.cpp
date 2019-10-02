@@ -47,9 +47,9 @@ namespace
 		std::size_t num_swaps = 0;
 		std::size_t max_num_perms = CDPL::Math::factorial<std::size_t>(num_perm_atoms);
 
-		while (!std::equal(ref_atoms, ref_atoms + cmp_seq_len,  perm_atoms) &&
+		while (!std::equal(ref_atoms, ref_atoms + cmp_seq_len, perm_atoms) &&
 			   (++num_perms < max_num_perms))
-			num_swaps +=Internal::nextPermutation(perm_atoms, perm_atoms + num_perm_atoms);
+			num_swaps += Internal::nextPermutation(perm_atoms, perm_atoms + num_perm_atoms);
 
 		if (num_perms >= max_num_perms)  //	a matching permutation should have been found
 			return 0;

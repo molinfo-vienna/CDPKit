@@ -384,14 +384,14 @@ ConfGen::FragmentConformerGenerator::getRingAtomCoordinates(const Math::Vector3D
 	for (std::size_t i = 0; i < num_ring_atoms; i++) {
 		const Math::Vector3D& pos = conf_coords[ringAtomIndices[i]];
 
-		ctr += pos;
-		ra_coords[i] = pos;
+		ctr.plusAssign(pos);
+		ra_coords[i].assign(pos);
 	}
 
 	ctr /= num_ring_atoms;
 
 	for (Math::Vector3DArray::ElementIterator it = ra_coords.getElementsBegin(), end = ra_coords.getElementsEnd(); it != end; ++it)
-		*it -= ctr;
+		it->minusAssign(ctr);
 
 	return ra_coords_ptr;
 }

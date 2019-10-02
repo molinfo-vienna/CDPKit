@@ -26,14 +26,9 @@
 
 #include "StaticInit.hpp"
 
-#include <algorithm>
-
-#include "CDPL/Chem/Fragment.hpp"
+#include "CDPL/Chem/MolecularGraph.hpp"
 #include "CDPL/Chem/Atom.hpp"
-#include "CDPL/Chem/Bond.hpp"
-#include "CDPL/Chem/MolecularGraphFunctions.hpp"
 #include "CDPL/Chem/AtomFunctions.hpp"
-#include "CDPL/Math/Matrix.hpp"
 
 #include "FragmentTreeNode.hpp"
 
@@ -42,26 +37,28 @@ using namespace CDPL;
 
 
 ConfGen::FragmentTreeNode::FragmentTreeNode(): 
-	root(*this), parent(*this), fragment(0), splitBond(0), fragmentType(0) 
-{}
+	parent(0), splitBond(0), rootFragment(), fragment(0)
+{
+	splitBondAtoms[0] = 0;
+	splitBondAtoms[1] = 0;
 
-ConfGen::FragmentTreeNode::FragmentTreeNode(FragmentTreeNode& root, FragmentTreeNode& parent): 
-	root(root), parent(parent), fragment(0), splitBond(0), fragmentType(0) 
-{}
+	torsionRefAtoms[0] = 0;
+	torsionRefAtoms[1] = 0;
+}
 
-const ConfGen::FragmentTreeNode& ConfGen::FragmentTreeNode::getParent() const
+ConfGen::FragmentTreeNode* ConfGen::FragmentTreeNode::getParent() const
 {
 	return parent;
 }
 
-ConfGen::FragmentTreeNode& ConfGen::FragmentTreeNode::getParent()
+const Chem::MolecularGraph* ConfGen::FragmentTreeNode::getFragment() const
 {
-	return parent;
+	return fragment;
 }
 
-const Chem::MolecularGraph& ConfGen::FragmentTreeNode::getFragment() const
+const Chem::MolecularGraph* ConfGen::FragmentTreeNode::getRootFragment() const
 {
-	return *fragment;
+	return rootFragment;
 }
 
 const Chem::Bond* ConfGen::FragmentTreeNode::getSplitBond() const
@@ -79,71 +76,50 @@ const Chem::Atom* const* ConfGen::FragmentTreeNode::getTorsionReferenceAtoms() c
 	return torsionRefAtoms;
 }
 
-void ConfGen::FragmentTreeNode::setTorsionReferenceAtoms(const Chem::Atom* ref_atom1, const Chem::Atom* ref_atom2)
+void ConfGen::FragmentTreeNode::setTorsionReferenceAtoms(const Chem::Atom* left, const Chem::Atom* right)
 {
-	torsionRefAtoms[0] = ref_atom1;
-	torsionRefAtoms[1] = ref_atom2;
-}
-
-void ConfGen::FragmentTreeNode::setFragmentType(unsigned int type)
-{
-	fragmentType = type;
-}
-
-unsigned int ConfGen::FragmentTreeNode::getFragmentType() const
-{
-	return fragmentType;
+	torsionRefAtoms[0] = left;
+	torsionRefAtoms[1] = right;
 }
 
 bool ConfGen::FragmentTreeNode::hasChildren() const
 {
-	return (splitBond != 0);
+	return (leftChild && rightChild);
 }
 
 ConfGen::FragmentTreeNode* ConfGen::FragmentTreeNode::getLeftChild() const
 {
-	if (splitBond == 0)
-		return 0;
-
-	return leftChild.get();
+	return leftChild;
 }
 
 ConfGen::FragmentTreeNode* ConfGen::FragmentTreeNode::getRightChild() const
 {
-	if (splitBond == 0)
-		return 0;
-
-	return rightChild.get();
+	return rightChild;
 }
 
-void ConfGen::FragmentTreeNode::addConformer(const Math::Vector3DArray::SharedPointer& coords, double energy)
-{
-	conformers.push_back(ConfData(coords, energy));
-}
-
-std::size_t ConfGen::FragmentTreeNode::getNumConformers() const
-{
-	return conformers.size();
-}
-
-const ConfGen::FragmentTreeNode::ConfDataArray& ConfGen::FragmentTreeNode::getConformers() const
+const ConfGen::FragmentTreeNode::ConformerDataArray& ConfGen::FragmentTreeNode::getConformers() const
 {
 	return conformers;
 }
 
-ConfGen::FragmentTreeNode::ConfDataArray& ConfGen::FragmentTreeNode::getConformers()
+ConfGen::FragmentTreeNode::ConformerDataArray& ConfGen::FragmentTreeNode::getConformers()
 {
 	return conformers;
 }
 
-const ConfGen::FragmentTreeNode::IndexArray& ConfGen::FragmentTreeNode::getRootAtomIndices() const
+const ConfGen::FragmentTreeNode::IndexArray& ConfGen::FragmentTreeNode::getAtomIndices() const
 {
-	return rootAtomIndices;
+	return atomIndices;
 }
 
-ConfGen::FragmentTreeNode::IndexArray& ConfGen::FragmentTreeNode::getRootAtomIndices()
+const Util::BitSet& ConfGen::FragmentTreeNode::getAtomMask() const
 {
-	return rootAtomIndices;
+	return atomMask;
+}
+
+const Util::BitSet& ConfGen::FragmentTreeNode::getCoreAtomMask() const
+{
+	return coreAtomMask;
 }
 
 const ConfGen::FragmentTreeNode::TorsionAngleArray& ConfGen::FragmentTreeNode::getTorsionAngles() const
@@ -161,185 +137,84 @@ ForceField::MMFF94InteractionData& ConfGen::FragmentTreeNode::getMMFF94Interacti
 	return mmff94Data;
 }
 
-void ConfGen::FragmentTreeNode::setKeepAllConformersFlag(bool keep)
+const ForceField::MMFF94InteractionData& ConfGen::FragmentTreeNode::getMMFF94InteractionData() const
 {
-	keepAllConfsFlag = keep;
+	return mmff94Data;
 }
 
-bool ConfGen::FragmentTreeNode::getKeepAllConformersFlag() const
+void ConfGen::FragmentTreeNode::setParent(FragmentTreeNode* node)
 {
-	return keepAllConfsFlag;
+	parent = node;
 }
 
-ConfGen::FragmentTreeNode::AtomList& ConfGen::FragmentTreeNode::getSplitBondAtom1Neighbors()
+void ConfGen::FragmentTreeNode::setSplitBond(const Chem::Bond* bond)
 {
-	return splitBondAtom1Nbrs;
+	splitBond = bond;
 }
 
-const ConfGen::FragmentTreeNode::AtomList& ConfGen::FragmentTreeNode::getSplitBondAtom1Neighbors() const
+void ConfGen::FragmentTreeNode::setSplitBondAtoms(const Chem::Atom* left, const Chem::Atom* right)
 {
-	return splitBondAtom1Nbrs;
+	splitBondAtoms[0] = left;
+	splitBondAtoms[1] = right;
 }
 
-ConfGen::FragmentTreeNode::AtomList& ConfGen::FragmentTreeNode::getSplitBondAtom2Neighbors()
+void ConfGen::FragmentTreeNode::setChildren(FragmentTreeNode* left, FragmentTreeNode* right)
 {
-	return splitBondAtom2Nbrs;
+	leftChild = left;
+	rightChild = right;
 }
 
-const ConfGen::FragmentTreeNode::AtomList& ConfGen::FragmentTreeNode::getSplitBondAtom2Neighbors() const
+void ConfGen::FragmentTreeNode::setFragment(const Chem::MolecularGraph* frag)
 {
-	return splitBondAtom2Nbrs;
+	fragment = frag;
 }
 
-void ConfGen::FragmentTreeNode::splitRecursive(const Chem::MolecularGraph& frag, BondList& bonds)
+void ConfGen::FragmentTreeNode::setRootFragment(const Chem::MolecularGraph* frag)
 {
-    using namespace Chem;
+	rootFragment = frag;
+}
 
-    fragment = &frag;
-
-    if (!(splitBond = extractMostCentralBond(bonds)))
+void ConfGen::FragmentTreeNode::initFragmentData()
+{
+	if (!leftChild || !rightChild) // sanity check
 		return;
+		
+	atomMask = leftChild->atomMask;
+	atomMask |= rightChild->atomMask;
 
-    if (!leftFragment.get()) {
-		leftFragment.reset(new Fragment());
-		leftChild.reset(new FragmentTreeNode(root, *this));
-    } else 
-		leftFragment->clear();
+	coreAtomMask = leftChild->coreAtomMask;
+	coreAtomMask |= rightChild->coreAtomMask;
 
-    if (!rightFragment.get()) {
-		rightFragment.reset(new Fragment());
-		rightChild.reset(new FragmentTreeNode(root, *this));
-    } else 
-		rightFragment->clear();
+	atomIndices.clear();
 
-    leftFragment->addBond(*splitBond);
-    rightFragment->addBond(*splitBond);
-
-	splitBondAtoms[0] = &splitBond->getBegin();
-	splitBondAtoms[1] = &splitBond->getEnd();
-
-    getSubstructure(*leftFragment, *splitBondAtoms[0]);
-    getSubstructure(*rightFragment, *splitBondAtoms[1]);
-
-	// ensure left fragment is always larger or equal to right fragment
-
-	if (leftFragment->getNumAtoms() < rightFragment->getNumAtoms()) { 
- 		leftFragment->swap(*rightFragment);
-		std::swap(splitBondAtoms[0], splitBondAtoms[1]);
-	}
-
-    leftChild->splitRecursive(*leftFragment, bonds);
-    rightChild->splitRecursive(*rightFragment, bonds);
+	for (Util::BitSet::size_type i = atomMask.find_first(); i != Util::BitSet::npos; i = atomMask.find_next(i))
+		atomIndices.push_back(i);
 }
 
-void ConfGen::FragmentTreeNode::getSubstructure(Chem::Fragment& substruct, const Chem::Atom& atom) const
-{
-    using namespace Chem;
-
-    Atom::ConstBondIterator b_it = atom.getBondsBegin();
-
-    for (Atom::ConstAtomIterator a_it = atom.getAtomsBegin(), a_end = atom.getAtomsEnd(); a_it != a_end; ++a_it, ++b_it) {
-		const Bond& bond = *b_it;
-
-		if (substruct.containsBond(bond))
-			continue;
-
-		if (!fragment->containsBond(bond))
-			continue;
-
-		const Atom& nbr_atom = *a_it;
-
-		if (!fragment->containsAtom(nbr_atom))
-			continue;
-
-		substruct.addBond(bond);
-
-		getSubstructure(substruct, nbr_atom);
-    } 
-}
-
-const Chem::Bond* ConfGen::FragmentTreeNode::extractMostCentralBond(BondList& bonds) const
-{
-    using namespace Chem;
-
-	if (bonds.empty())
-		return 0;
-
-	Util::BitSet atom_mask(fragment->getNumAtoms());
-	const Bond* mc_bond = 0;
-    std::size_t mc_bond_idx = 0;
-	std::size_t max_top_dist = 0;
-
-    for (std::size_t i = 0, num_bonds = bonds.size(); i < num_bonds; i++) {
-		const Bond* bond = bonds[i];
-
-		if (!fragment->containsBond(*bond))
-			continue;
-
-		std::size_t top_dist = getMinMaxTopologicalDistance(*bond, atom_mask);
-
-		if (!mc_bond || top_dist > max_top_dist) {
-			mc_bond = bond;
-			max_top_dist = top_dist;
-			mc_bond_idx = i;
-		}
-    }
-
-    if (mc_bond != 0) {
-		bonds[mc_bond_idx] = bonds.back();
-		bonds.pop_back();
-
-		return mc_bond;
-    }
-
-    return 0;
-}
-
-std::size_t ConfGen::FragmentTreeNode::getMinMaxTopologicalDistance(const Chem::Bond& bond, Util::BitSet& atom_mask) const
+void ConfGen::FragmentTreeNode::initFragmentData(const Chem::MolecularGraph& frag, const Chem::MolecularGraph& root_frag)
 {
 	using namespace Chem;
 
-	const Atom& atom1 = bond.getBegin();
-	const Atom& atom2 = bond.getEnd();
+	std::size_t num_atoms = root_frag.getNumAtoms();
 
-	std::size_t atom1_idx = fragment->getAtomIndex(atom1);
-	std::size_t atom2_idx = fragment->getAtomIndex(atom2);
+	atomMask.resize(num_atoms);
+	atomMask.reset();
 
-	atom_mask.reset();
-	atom_mask.set(atom1_idx);
-	atom_mask.set(atom2_idx);
+	coreAtomMask.resize(num_atoms);
+	coreAtomMask.reset();
 
-	markReachableAtoms(atom1, *fragment, atom_mask, false);
-	atom_mask.reset(atom2_idx);
+	atomIndices.clear();
 
-	std::size_t max_dist1 = getMaxTopologicalDistance(atom1, atom_mask);
+	for (MolecularGraph::ConstAtomIterator it = frag.getAtomsBegin(), end = frag.getAtomsEnd(); it != end; ++it) {
+		const Atom& atom = *it;
+		std::size_t atom_idx = root_frag.getAtomIndex(atom);
 
-	atom_mask.reset();
-	atom_mask.set(atom1_idx);
-	atom_mask.set(atom2_idx);
+		atomIndices.push_back(atom_idx);
+		atomMask.set(atom_idx);
 
-	markReachableAtoms(atom2, *fragment, atom_mask, false);
-	atom_mask.reset(atom1_idx);
+		if (getExplicitBondCount(atom, frag) == 1 && getExplicitBondCount(atom, root_frag) > 1) // is connected fragment atom?
+			continue;
 
-	std::size_t max_dist2 = getMaxTopologicalDistance(atom2, atom_mask);
-
-	return std::min(max_dist1, max_dist2);
-}
-
-std::size_t ConfGen::FragmentTreeNode::getMaxTopologicalDistance(const Chem::Atom& atom, const Util::BitSet& atom_mask) const
-{
-	using namespace Chem;
-
-	const Math::ULMatrix& dist_mtx = *getTopologicalDistanceMatrix(*root.fragment);
-	std::size_t root_atom_idx = root.fragment->getAtomIndex(atom);
-	std::size_t max_atom_dist = 0;
-
-	for (Util::BitSet::size_type i = atom_mask.find_first(); i != Util::BitSet::npos; i = atom_mask.find_next(i)) {
-		std::size_t dist = dist_mtx(root_atom_idx, root.fragment->getAtomIndex(fragment->getAtom(i)));
-
-		if (dist > max_atom_dist)
-			max_atom_dist = dist;
+		coreAtomMask.set(atom_idx);
 	}
-
-	return max_atom_dist;
 }

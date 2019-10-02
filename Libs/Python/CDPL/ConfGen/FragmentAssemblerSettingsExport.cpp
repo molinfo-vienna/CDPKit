@@ -48,6 +48,6 @@ void CDPLPythonConfGen::exportFragmentAssemblerSettings()
 	.def(CDPLPythonBase::ObjectIdentityCheckVisitor<ConfGen::FragmentAssemblerSettings>())
 	.def("assign", CDPLPythonBase::copyAssOp(&ConfGen::FragmentAssemblerSettings::operator=), 
 	     (python::arg("self"), python::arg("settings")), python::return_self<>())
-	.def_readonly("DEFAULT", &ConfGen::FragmentAssemblerSettings::DEFAULT)
+	.def_readonly("DEFAULT", ConfGen::FragmentAssemblerSettings::DEFAULT)
 	;
 }

@@ -80,7 +80,7 @@ void CDPLPythonConfGen::exportRandomStructureGeneratorSettings()
 			 (python::arg("self"), python::arg("type")))
 		.def("getForceFieldType", &ConfGen::RandomStructureGeneratorSettings::getForceFieldType,
 			 python::arg("self"))
-		.def_readonly("DEFAULT", &ConfGen::RandomStructureGeneratorSettings::DEFAULT)
+		.def_readonly("DEFAULT", ConfGen::RandomStructureGeneratorSettings::DEFAULT)
 
 		.add_property("regardAtomConfig", GetBoolFunc(&ConfGen::RandomStructureGeneratorSettings::regardAtomConfiguration), 
 					  SetBoolFunc(&ConfGen::RandomStructureGeneratorSettings::regardAtomConfiguration))

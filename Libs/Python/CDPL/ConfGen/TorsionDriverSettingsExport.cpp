@@ -48,6 +48,6 @@ void CDPLPythonConfGen::exportTorsionDriverSettings()
 	.def(CDPLPythonBase::ObjectIdentityCheckVisitor<ConfGen::TorsionDriverSettings>())
 	.def("assign", CDPLPythonBase::copyAssOp(&ConfGen::TorsionDriverSettings::operator=), 
 	     (python::arg("self"), python::arg("settings")), python::return_self<>())
-	.def_readonly("DEFAULT", &ConfGen::TorsionDriverSettings::DEFAULT)
+	.def_readonly("DEFAULT", ConfGen::TorsionDriverSettings::DEFAULT)
 	;
 }

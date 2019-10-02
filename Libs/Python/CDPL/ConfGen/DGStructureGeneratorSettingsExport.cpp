@@ -56,7 +56,7 @@ void CDPLPythonConfGen::exportDGStructureGeneratorSettings()
 			 (python::arg("self"), python::arg("enable")))
 		.def("enablePlanarityConstraints", GetBoolFunc(&ConfGen::DGStructureGeneratorSettings::enablePlanarityConstraints), 
 			 python::arg("self"))
-		.def_readonly("DEFAULT", &ConfGen::DGStructureGeneratorSettings::DEFAULT)
+		.def_readonly("DEFAULT_", ConfGen::DGStructureGeneratorSettings::DEFAULT)
 		.add_property("boxSize", &ConfGen::DGStructureGeneratorSettings::getBoxSize, 
 					  &ConfGen::DGStructureGeneratorSettings::setBoxSize)
 		.add_property("planarityConstraints", GetBoolFunc(&ConfGen::DGStructureGeneratorSettings::enablePlanarityConstraints), 

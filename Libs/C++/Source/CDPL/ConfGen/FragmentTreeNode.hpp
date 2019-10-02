@@ -32,23 +32,19 @@
 #define CDPL_CONFGEN_FRAGMENTTREENODE_HPP
 
 #include <vector>
-#include <memory>
-#include <cstddef>
-#include <utility>
 
+#include "CDPL/ConfGen/ConformerData.hpp"
 #include "CDPL/ForceField/MMFF94InteractionData.hpp"
-#include "CDPL/Math/VectorArray.hpp"
 #include "CDPL/Util/BitSet.hpp"
 
 
 namespace CDPL 
 {
- 
+
 	namespace Chem
 	{
 
 		class MolecularGraph;
-		class Fragment;
 		class Atom;
 		class Bond;
 	}
@@ -56,29 +52,22 @@ namespace CDPL
     namespace ConfGen 
     {
 
+		class FragmentTree;
+
 		class FragmentTreeNode
 		{
 
+			friend class FragmentTree;
+
 		public:
-			typedef std::pair<Math::Vector3DArray::SharedPointer, double> ConfData;
-			typedef std::vector<ConfData> ConfDataArray;
-			typedef std::vector<const Chem::Bond*> BondList;
-			typedef std::vector<const Chem::Atom*> AtomList;
+			typedef std::vector<ConformerData::SharedPointer> ConformerDataArray;
 			typedef std::vector<std::size_t> IndexArray;
 			typedef std::vector<double> TorsionAngleArray;	
 
-			typedef ConfDataArray::const_iterator ConstConformerIterator;
-			typedef ConfDataArray::iterator ConformerIterator;
+			FragmentTreeNode* getParent() const;
 
-			FragmentTreeNode();
-
-			const FragmentTreeNode& getParent() const;
-
-			FragmentTreeNode& getParent();
-
-			void splitRecursive(const Chem::MolecularGraph& frag, BondList& bonds);
-
-			const Chem::MolecularGraph& getFragment() const;
+			const Chem::MolecularGraph* getFragment() const;
+			const Chem::MolecularGraph* getRootFragment() const;
 
 			const Chem::Bond* getSplitBond() const;
 
@@ -86,28 +75,22 @@ namespace CDPL
 
 			const Chem::Atom* const* getTorsionReferenceAtoms() const;
 
-			void setTorsionReferenceAtoms(const Chem::Atom* ref_atom1, const Chem::Atom* ref_atom2);
-
-			void setFragmentType(unsigned int type);
-
-			unsigned int getFragmentType() const;
+			void setTorsionReferenceAtoms(const Chem::Atom* left, const Chem::Atom* right);
 
 			bool hasChildren() const;
 
 			FragmentTreeNode* getLeftChild() const;
 			FragmentTreeNode* getRightChild() const;
 
-			void addConformer(const Math::Vector3DArray::SharedPointer& coords, double energy = 0.0);
+			const ConformerDataArray& getConformers() const;
 
-			std::size_t getNumConformers() const;
+			ConformerDataArray& getConformers();
 
-			const ConfDataArray& getConformers() const;
+			const IndexArray& getAtomIndices() const;
 
-			ConfDataArray& getConformers();
+			const Util::BitSet& getAtomMask() const;
 
-			const IndexArray& getRootAtomIndices() const;
-
-			IndexArray& getRootAtomIndices();
+			const Util::BitSet& getCoreAtomMask() const;
 
 			const TorsionAngleArray& getTorsionAngles() const;
 
@@ -117,54 +100,40 @@ namespace CDPL
 
 			const ForceField::MMFF94InteractionData& getMMFF94InteractionData() const;
 
-			void setKeepAllConformersFlag(bool keep);
-
-			bool getKeepAllConformersFlag() const;
-
-			AtomList& getSplitBondAtom1Neighbors();
-
-			const AtomList& getSplitBondAtom1Neighbors() const;
-
-			AtomList& getSplitBondAtom2Neighbors();
-
-			const AtomList& getSplitBondAtom2Neighbors() const;
-
-
 		private:
-			FragmentTreeNode(FragmentTreeNode& root, FragmentTreeNode& parent); 
+			FragmentTreeNode();
 
 			FragmentTreeNode(const FragmentTreeNode&);
 
 			FragmentTreeNode& operator=(const FragmentTreeNode&);
 
-			void getSubstructure(Chem::Fragment& substruct, const Chem::Atom& atom) const;
+			void setParent(FragmentTreeNode* node);
 
-			const Chem::Bond* extractMostCentralBond(BondList& bonds) const;
+			void setChildren(FragmentTreeNode* left, FragmentTreeNode* right);
 
-			std::size_t getMinMaxTopologicalDistance(const Chem::Bond& bond, Util::BitSet& atom_mask) const;
-			std::size_t getMaxTopologicalDistance(const Chem::Atom& atom, const Util::BitSet& atom_mask) const;
+			void setSplitBond(const Chem::Bond* bond);
+			void setSplitBondAtoms(const Chem::Atom* left, const Chem::Atom* right);
+
+			void setFragment(const Chem::MolecularGraph* frag);
+			void setRootFragment(const Chem::MolecularGraph* frag);
+
+			void initFragmentData();
+			void initFragmentData(const Chem::MolecularGraph& frag, const Chem::MolecularGraph& root_frag);
 			
-			typedef std::auto_ptr<FragmentTreeNode> NodePointer;
-			typedef std::auto_ptr<Chem::Fragment> FragmentPointer;
-	
-			FragmentTreeNode&                 root;
-			FragmentTreeNode&                 parent;
-			const Chem::MolecularGraph*       fragment;
-			const Chem::Bond*                 splitBond;
-			const Chem::Atom*                 splitBondAtoms[2];
-			const Chem::Atom*                 torsionRefAtoms[2];
-			AtomList                          splitBondAtom1Nbrs;
-			AtomList                          splitBondAtom2Nbrs;
-			bool                              keepAllConfsFlag;
-			NodePointer                       leftChild;
-			NodePointer                       rightChild;
-			FragmentPointer                   leftFragment;
-			FragmentPointer                   rightFragment;
-			unsigned int                      fragmentType;
-			IndexArray                        rootAtomIndices;
-			ConfDataArray                     conformers;
-			TorsionAngleArray                 torsionAngles;
-			ForceField::MMFF94InteractionData mmff94Data;
+			FragmentTreeNode*                   parent;
+			const Chem::Bond*                   splitBond;
+			const Chem::Atom*                   splitBondAtoms[2];
+			const Chem::Atom*                   torsionRefAtoms[2];
+			FragmentTreeNode*                   leftChild;
+			FragmentTreeNode*                   rightChild;
+			IndexArray                          atomIndices;
+			Util::BitSet                        atomMask;
+			Util::BitSet                        coreAtomMask;
+			const Chem::MolecularGraph*         rootFragment;
+			const Chem::MolecularGraph*         fragment;
+			ConformerDataArray                  conformers;
+			TorsionAngleArray                   torsionAngles;
+			ForceField::MMFF94InteractionData   mmff94Data;
 		};
     }
 }

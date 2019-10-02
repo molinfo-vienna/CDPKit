@@ -43,9 +43,15 @@ void CDPLPythonConfGen::exportRMSDConformerSelector()
 		.def(CDPLPythonBase::ObjectIdentityCheckVisitor<ConfGen::RMSDConformerSelector>())
 		.def("setMinRMSD", &ConfGen::RMSDConformerSelector::setMinRMSD, (python::arg("self"), python::arg("min_rmsd")))
 		.def("getMinRMSD", &ConfGen::RMSDConformerSelector::getMinRMSD, python::arg("self"))
-		.def("setup", &ConfGen::RMSDConformerSelector::setup, 
-			 (python::arg("self"), python::arg("molgraph"), python::arg("atom_mask"), python::arg("stable_config_atom_mask")),
-			 python::with_custodian_and_ward<1, 2>())
+		.def("setup", 
+			 static_cast<void (ConfGen::RMSDConformerSelector::*)(const Chem::MolecularGraph&, const Util::BitSet&, const Util::BitSet&, const Math::Vector3DArray&)>
+			 (&ConfGen::RMSDConformerSelector::setup), 
+			 (python::arg("self"), python::arg("molgraph"), python::arg("atom_mask"), python::arg("stable_config_atom_mask"),
+			  python::arg("coords")), python::with_custodian_and_ward<1, 2>())
+		.def("setup", 
+			 static_cast<void (ConfGen::RMSDConformerSelector::*)(const Chem::MolecularGraph&, const Util::BitSet&)>
+			 (&ConfGen::RMSDConformerSelector::setup), 
+			 (python::arg("self"), python::arg("molgraph"), python::arg("atom_mask")), python::with_custodian_and_ward<1, 2>())
 		.def("process", &ConfGen::RMSDConformerSelector::process, 
 			 (python::arg("self"), python::arg("conf_data")), python::with_custodian_and_ward<1, 2>())
 		.def("clearConformers", &ConfGen::RMSDConformerSelector::clearConformers, python::arg("self"))
@@ -55,5 +61,6 @@ void CDPLPythonConfGen::exportRMSDConformerSelector()
 		.def("__getitem__", &ConfGen::RMSDConformerSelector::getConformer,
 			 (python::arg("self"), python::arg("conf_idx")), python::return_internal_reference<>())
 		.add_property("numConformers", &ConfGen::RMSDConformerSelector::getNumConformers)
+		.add_property("minRMSD", &ConfGen::RMSDConformerSelector::getMinRMSD, &ConfGen::RMSDConformerSelector::setMinRMSD)
 		;
 }

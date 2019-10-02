@@ -39,7 +39,13 @@
 #include "CDPL/ConfGen/APIPrefix.hpp"
 #include "CDPL/ConfGen/ConformerData.hpp"
 #include "CDPL/Chem/Fragment.hpp"
+#include "CDPL/Chem/StereoDescriptor.hpp"
+#include "CDPL/Chem/AutomorphismGroupSearch.hpp"
 #include "CDPL/Util/BitSet.hpp"
+#include "CDPL/Util/ObjectStack.hpp"
+#include "CDPL/Util/ObjectPool.hpp"
+#include "CDPL/Math/VectorArray.hpp"
+#include "CDPL/Math/VectorArrayAlignmentCalculator.hpp"
 
 
 namespace CDPL 
@@ -48,53 +54,87 @@ namespace CDPL
     namespace ConfGen 
     {
 
-	/**
-	 * \addtogroup CDPL_CONFGEN_HELPERS
-	 * @{
-	 */
+		/**
+		 * \addtogroup CDPL_CONFGEN_HELPERS
+		 * @{
+		 */
 
-	class CDPL_CONFGEN_API RMSDConformerSelector
-	{
+		class CDPL_CONFGEN_API RMSDConformerSelector
+		{
 
-	    typedef std::vector<const ConformerData*> ConformerList;
+			typedef std::vector<const ConformerData*> ConformerList;
 
-	  public:
-	    typedef boost::indirect_iterator<ConformerList::const_iterator, const ConformerData> ConstConformerIterator;
+		  public:
+			typedef boost::indirect_iterator<ConformerList::const_iterator, const ConformerData> ConstConformerIterator;
 
-	    RMSDConformerSelector();
+			RMSDConformerSelector();
 	
-	    void setMinRMSD(double min_rmsd);
+			void setMinRMSD(double min_rmsd);
 
-	    double getMinRMSD() const;
+			double getMinRMSD() const;
 	    
-	    void setup(const Chem::MolecularGraph& molgraph, const Util::BitSet& atom_mask, 
-		       const Util::BitSet& stable_config_atom_mask);
+			void setup(const Chem::MolecularGraph& molgraph, const Util::BitSet& atom_mask);
 
-	    bool process(const ConformerData& conf_data);
+			void setup(const Chem::MolecularGraph& molgraph, const Util::BitSet& atom_mask, 
+					   const Util::BitSet& stable_config_atom_mask, const Math::Vector3DArray& coords);
 
-	    void clearConformers();
+			bool process(const ConformerData& conf_data);
 
-	    std::size_t getNumConformers() const;
+			void clearConformers();
 
-	    const ConformerData& getConformer(std::size_t idx) const;
+			std::size_t getNumConformers() const;
 
-	    ConstConformerIterator getConformersBegin() const;
+			const ConformerData& getConformer(std::size_t idx) const;
 
-	    ConstConformerIterator getConformersEnd() const;
+			ConstConformerIterator getConformersBegin() const;
 
-	  private:
-	    RMSDConformerSelector(const RMSDConformerSelector&);
+			ConstConformerIterator getConformersEnd() const;
 
-	    RMSDConformerSelector& operator=(const RMSDConformerSelector&);
+		  private:
+			typedef std::vector<std::size_t> IndexArray;
+			typedef Util::ObjectPool<Math::Vector3DArray> VectorArrayCache;
+			typedef VectorArrayCache::SharedObjectPointer VectorArrayPtr;
 
-	    Chem::Fragment  symMappingMolGraph;
-	    ConformerList   selectedConfs;
-	    double          minRMSD;
-	};
+			RMSDConformerSelector(const RMSDConformerSelector&);
 
-	/**
-	 * @}
-	 */
+			RMSDConformerSelector& operator=(const RMSDConformerSelector&);
+
+			void buildSymMappingSearchMolGraph(const Util::BitSet& atom_mask);
+			void setupSymMappingValidationData(const Util::BitSet& stable_config_atom_mask,
+											   const Math::Vector3DArray& coords);
+		
+			bool processSymMapping(const Chem::MolecularGraph& molgraph, 
+								   const Chem::AtomBondMapping& mapping);
+			bool isValidSymMapping(const Chem::AtomBondMapping& mapping) const;
+
+			VectorArrayPtr buildCoordsArrayForMapping(const IndexArray& mapping, 
+													  const Math::Vector3DArray& conf_coords);
+
+			typedef boost::unordered_map<const Chem::Atom*, Chem::StereoDescriptor> AtomStereoDescriptorMap;
+			typedef std::vector<const Chem::Atom*> AtomList;
+			typedef Util::ObjectStack<IndexArray> IndexArrayCache;
+			typedef std::vector<IndexArray*> IndexArrayList;
+			typedef std::vector<VectorArrayPtr> VectorArrayList;
+			typedef Math::VectorArrayAlignmentCalculator<Math::Vector3DArray> AlignmentCalculator;
+
+			IndexArrayCache               idxArrayCache;
+			VectorArrayCache              vecArrayCache;
+			const Chem::MolecularGraph*   molGraph;
+			Chem::AutomorphismGroupSearch symMappingSearch;
+			Chem::Fragment                symMappingSearchMolGraph;
+			IndexArrayList                symMappings;
+			AtomStereoDescriptorMap       atomStereoDescrs;
+			AlignmentCalculator           alignmentCalc;
+			VectorArrayList               confAlignCoords;
+			VectorArrayList               selectedConfAlignCoords;
+			ConformerList                 selectedConfs;
+			AtomList                      atomNeighbors;
+			double                        minRMSD;
+		};
+
+		/**
+		 * @}
+		 */
     }
 }
 

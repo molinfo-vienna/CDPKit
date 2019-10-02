@@ -60,7 +60,7 @@ void CDPLPythonConfGen::exportDGConstraintGeneratorSettings()
 			 (python::arg("self"), python::arg("regard")))
 		.def("regardBondConfiguration", GetBoolFunc(&ConfGen::DGConstraintGeneratorSettings::regardBondConfiguration), 
 			 python::arg("self"))
-		.def_readonly("DEFAULT", &ConfGen::DGConstraintGeneratorSettings::DEFAULT)
+		.def_readonly("DEFAULT", ConfGen::DGConstraintGeneratorSettings::DEFAULT)
 		.add_property("exclHydrogens", GetBoolFunc(&ConfGen::DGConstraintGeneratorSettings::excludeHydrogens), 
 					  SetBoolFunc(&ConfGen::DGConstraintGeneratorSettings::excludeHydrogens))
 		.add_property("regardAtomConfig", GetBoolFunc(&ConfGen::DGConstraintGeneratorSettings::regardAtomConfiguration), 
