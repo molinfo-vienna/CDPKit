@@ -149,7 +149,7 @@ BOOST_AUTO_TEST_CASE(VectorOutputTest)
 
 	BOOST_CHECK(oss.good());
 
-	BOOST_CHECK_THROW((oss << ThrowingVectorExpression()), std::ostringstream::failure);
+	BOOST_CHECK_THROW((oss << ThrowingVectorExpression()), std::exception);
 	BOOST_CHECK(oss.fail());
 	BOOST_CHECK_EQUAL(oss.str(), "XXXXXXX[4](1.12346e+00,1.12346e+00,-2.12346e+00,1.12346e+00)");
 }
@@ -215,7 +215,7 @@ BOOST_AUTO_TEST_CASE(MatrixOutputTest)
 
 	BOOST_CHECK(oss.good());
 
-	BOOST_CHECK_THROW((oss << ThrowingMatrixExpression()), std::ostringstream::failure);
+	BOOST_CHECK_THROW((oss << ThrowingMatrixExpression()), std::exception);
 	BOOST_CHECK(oss.fail());
 	BOOST_CHECK_EQUAL(oss.str(), "Empty");
 }
@@ -255,7 +255,7 @@ BOOST_AUTO_TEST_CASE(QuaternionOutputTest)
 
 	BOOST_CHECK(oss.good());
 
-	BOOST_CHECK_THROW((oss << ThrowingQuaternionExpression()), std::ostringstream::failure);
+	BOOST_CHECK_THROW((oss << ThrowingQuaternionExpression()), std::exception);
 	BOOST_CHECK(oss.fail());
 	BOOST_CHECK_EQUAL(oss.str(), "(-1.23e+00,1.23e-01,1.00e+00,-7.78e+00)QQQQQQQQQQQQQQQQQQQQQ");
 }

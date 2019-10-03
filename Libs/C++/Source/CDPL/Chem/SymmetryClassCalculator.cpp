@@ -27,6 +27,7 @@
 #include "StaticInit.hpp"
 
 #include <algorithm>
+#include <numeric>
 
 #include <boost/bind.hpp>
 #include <boost/math/special_functions/prime.hpp>

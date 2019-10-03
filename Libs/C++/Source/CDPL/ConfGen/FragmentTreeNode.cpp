@@ -31,9 +31,66 @@
 #include "CDPL/Chem/AtomFunctions.hpp"
 
 #include "FragmentTreeNode.hpp"
+#include "ForceFieldInteractionMasks.hpp"
 
 
 using namespace CDPL;
+
+
+namespace
+{
+
+	template <typename InteractionData>
+	void extractFragmentMMFF94InteractionData2(const InteractionData& src_ia_data, InteractionData& tgt_ia_data,
+											   Util::BitSet& free_ia_mask, const Util::BitSet& tgt_atom_mask)
+	{
+		for (Util::BitSet::size_type i = free_ia_mask.find_first(); i != Util::BitSet::npos; i = free_ia_mask.find_next(i)) {
+			const typename InteractionData::ElementType& params = src_ia_data[i];
+
+			if (tgt_atom_mask.test(params.getAtom1Index()) && 
+				tgt_atom_mask.test(params.getAtom2Index())) {
+
+				tgt_ia_data.addElement(params);
+				free_ia_mask.reset(i);
+			}
+		}
+	}
+
+	template <typename InteractionData>
+	void extractFragmentMMFF94InteractionData3(const InteractionData& src_ia_data, InteractionData& tgt_ia_data,
+											   Util::BitSet& free_ia_mask, const Util::BitSet& tgt_atom_mask)
+	{
+		for (Util::BitSet::size_type i = free_ia_mask.find_first(); i != Util::BitSet::npos; i = free_ia_mask.find_next(i)) {
+			const typename InteractionData::ElementType& params = src_ia_data[i];
+
+			if (tgt_atom_mask.test(params.getAtom1Index()) &&
+				tgt_atom_mask.test(params.getAtom2Index()) && 
+				tgt_atom_mask.test(params.getAtom3Index())) {
+
+				tgt_ia_data.addElement(params);
+				free_ia_mask.reset(i);
+			}
+		}
+	}
+
+	template <typename InteractionData>
+	void extractFragmentMMFF94InteractionData4(const InteractionData& src_ia_data, InteractionData& tgt_ia_data,
+											   Util::BitSet& free_ia_mask, const Util::BitSet& tgt_atom_mask)
+	{
+		for (Util::BitSet::size_type i = free_ia_mask.find_first(); i != Util::BitSet::npos; i = free_ia_mask.find_next(i)) {
+			const typename InteractionData::ElementType& params = src_ia_data[i];
+
+			if (tgt_atom_mask.test(params.getAtom1Index()) &&
+				tgt_atom_mask.test(params.getAtom2Index()) && 
+				tgt_atom_mask.test(params.getAtom3Index()) &&
+				tgt_atom_mask.test(params.getAtom4Index())) {
+
+				tgt_ia_data.addElement(params);
+				free_ia_mask.reset(i);
+			}
+		}
+	}
+}
 
 
 ConfGen::FragmentTreeNode::FragmentTreeNode(): 
@@ -140,6 +197,25 @@ ForceField::MMFF94InteractionData& ConfGen::FragmentTreeNode::getMMFF94Interacti
 const ForceField::MMFF94InteractionData& ConfGen::FragmentTreeNode::getMMFF94InteractionData() const
 {
 	return mmff94Data;
+}
+
+void ConfGen::FragmentTreeNode::extractMMFF94Interactions(const ForceField::MMFF94InteractionData& ia_data,
+														  ForceFieldInteractionMasks& ia_masks)
+{
+	extractFragmentMMFF94InteractionData2(ia_data.getBondStretchingInteractions(), mmff94Data.getBondStretchingInteractions(), 
+										  ia_masks.bondStretching, coreAtomMask);
+	extractFragmentMMFF94InteractionData2(ia_data.getElectrostaticInteractions(), mmff94Data.getElectrostaticInteractions(), 
+										  ia_masks.electrostatic, coreAtomMask);
+	extractFragmentMMFF94InteractionData2(ia_data.getVanDerWaalsInteractions(), mmff94Data.getVanDerWaalsInteractions(), 
+										  ia_masks.vanDerWaals, coreAtomMask);
+	extractFragmentMMFF94InteractionData3(ia_data.getAngleBendingInteractions(), mmff94Data.getAngleBendingInteractions(), 
+										  ia_masks.angleBending, atomMask);
+	extractFragmentMMFF94InteractionData3(ia_data.getStretchBendInteractions(), mmff94Data.getStretchBendInteractions(), 
+										  ia_masks.stretchBend, atomMask);
+	extractFragmentMMFF94InteractionData4(ia_data.getOutOfPlaneBendingInteractions(), mmff94Data.getOutOfPlaneBendingInteractions(), 
+										  ia_masks.outOfPlaneBending, atomMask);
+	extractFragmentMMFF94InteractionData4(ia_data.getTorsionInteractions(), mmff94Data.getTorsionInteractions(), 
+										  ia_masks.torsion, atomMask);
 }
 
 void ConfGen::FragmentTreeNode::setParent(FragmentTreeNode* node)

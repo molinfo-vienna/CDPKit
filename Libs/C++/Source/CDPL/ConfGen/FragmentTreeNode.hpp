@@ -53,6 +53,7 @@ namespace CDPL
     {
 
 		class FragmentTree;
+		class ForceFieldInteractionMasks;
 
 		class FragmentTreeNode
 		{
@@ -100,6 +101,9 @@ namespace CDPL
 
 			const ForceField::MMFF94InteractionData& getMMFF94InteractionData() const;
 
+			void extractMMFF94Interactions(const ForceField::MMFF94InteractionData& ia_data,
+										   ForceFieldInteractionMasks& ia_masks);
+			
 		private:
 			FragmentTreeNode();
 

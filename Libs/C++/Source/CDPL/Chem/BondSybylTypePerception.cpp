@@ -98,7 +98,7 @@ unsigned int Chem::perceiveSybylType(const Bond& bond, const MolecularGraph& mol
     switch (getOrder(bond)) {
 
 		case 1:
-			if (isAmideBond(bond, molgraph))
+			if (::isAmideBond(bond, molgraph))
 				return SybylBondType::AMIDE;
 
 			return SybylBondType::SINGLE;

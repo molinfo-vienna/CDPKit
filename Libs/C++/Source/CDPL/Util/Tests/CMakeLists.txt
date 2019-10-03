@@ -38,7 +38,7 @@ SET(test-suite_SRCS
     PropertyValueTest.cpp
     PropertyValueProductTest.cpp
     BronKerboschAlgorithmTest.cpp
-    DGCoordinatesOptimizerTest.cpp
+    DGCoordinatesGeneratorTest.cpp
    )
 
 ADD_DEFINITIONS(-DBOOST_TEST_DYN_LINK)

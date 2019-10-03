@@ -64,6 +64,7 @@ SET(cdpl-confgen_LIB_SRCS
     TorsionLibraryDataReader.cpp
     FragmentTreeNode.cpp
     FragmentTree.cpp
+    ForceFieldInteractionMasks.cpp
 
     CDFMoleculeDataFunctions.cpp
     UtilityFunctions.cpp
