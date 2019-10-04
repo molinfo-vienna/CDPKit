@@ -31,7 +31,8 @@
 #include "CDPL/Chem/AtomFunctions.hpp"
 
 #include "FragmentTreeNode.hpp"
-#include "ForceFieldInteractionMasks.hpp"
+#include "FragmentTree.hpp"
+#include "ForceFieldInteractionMask.hpp"
 
 
 using namespace CDPL;
@@ -93,8 +94,8 @@ namespace
 }
 
 
-ConfGen::FragmentTreeNode::FragmentTreeNode(): 
-	parent(0), splitBond(0), rootFragment(), fragment(0)
+ConfGen::FragmentTreeNode::FragmentTreeNode(ConfGen::FragmentTree& owner): 
+	owner(owner), parent(0), splitBond(0), splitBondLength(0.0), rootFragment(), fragment(0)
 {
 	splitBondAtoms[0] = 0;
 	splitBondAtoms[1] = 0;
@@ -121,6 +122,16 @@ const Chem::MolecularGraph* ConfGen::FragmentTreeNode::getRootFragment() const
 const Chem::Bond* ConfGen::FragmentTreeNode::getSplitBond() const
 {
 	return splitBond;
+}
+
+void ConfGen::FragmentTreeNode:: setSplitBondLength(double length)
+{
+	splitBondLength = length;
+}
+
+double ConfGen::FragmentTreeNode::getSplitBondLength() const
+{
+	return splitBondLength;
 }
 
 const Chem::Atom* const* ConfGen::FragmentTreeNode::getSplitBondAtoms() const
@@ -200,22 +211,28 @@ const ForceField::MMFF94InteractionData& ConfGen::FragmentTreeNode::getMMFF94Int
 }
 
 void ConfGen::FragmentTreeNode::extractMMFF94Interactions(const ForceField::MMFF94InteractionData& ia_data,
-														  ForceFieldInteractionMasks& ia_masks)
+														  ForceFieldInteractionMask& ia_mask)
 {
+	if (leftChild)
+		leftChild->extractMMFF94Interactions(ia_data, ia_mask);
+
+	if (rightChild)
+		rightChild->extractMMFF94Interactions(ia_data, ia_mask);
+
 	extractFragmentMMFF94InteractionData2(ia_data.getBondStretchingInteractions(), mmff94Data.getBondStretchingInteractions(), 
-										  ia_masks.bondStretching, coreAtomMask);
+										  ia_mask.bondStretching, coreAtomMask);
 	extractFragmentMMFF94InteractionData2(ia_data.getElectrostaticInteractions(), mmff94Data.getElectrostaticInteractions(), 
-										  ia_masks.electrostatic, coreAtomMask);
+										  ia_mask.electrostatic, coreAtomMask);
 	extractFragmentMMFF94InteractionData2(ia_data.getVanDerWaalsInteractions(), mmff94Data.getVanDerWaalsInteractions(), 
-										  ia_masks.vanDerWaals, coreAtomMask);
+										  ia_mask.vanDerWaals, coreAtomMask);
 	extractFragmentMMFF94InteractionData3(ia_data.getAngleBendingInteractions(), mmff94Data.getAngleBendingInteractions(), 
-										  ia_masks.angleBending, atomMask);
+										  ia_mask.angleBending, atomMask);
 	extractFragmentMMFF94InteractionData3(ia_data.getStretchBendInteractions(), mmff94Data.getStretchBendInteractions(), 
-										  ia_masks.stretchBend, atomMask);
+										  ia_mask.stretchBend, atomMask);
 	extractFragmentMMFF94InteractionData4(ia_data.getOutOfPlaneBendingInteractions(), mmff94Data.getOutOfPlaneBendingInteractions(), 
-										  ia_masks.outOfPlaneBending, atomMask);
+										  ia_mask.outOfPlaneBending, atomMask);
 	extractFragmentMMFF94InteractionData4(ia_data.getTorsionInteractions(), mmff94Data.getTorsionInteractions(), 
-										  ia_masks.torsion, atomMask);
+										  ia_mask.torsion, atomMask);
 }
 
 void ConfGen::FragmentTreeNode::setParent(FragmentTreeNode* node)
@@ -252,7 +269,7 @@ void ConfGen::FragmentTreeNode::setRootFragment(const Chem::MolecularGraph* frag
 
 void ConfGen::FragmentTreeNode::initFragmentData()
 {
-	if (!leftChild || !rightChild) // sanity check
+	if (!hasChildren()) // sanity check
 		return;
 		
 	atomMask = leftChild->atomMask;

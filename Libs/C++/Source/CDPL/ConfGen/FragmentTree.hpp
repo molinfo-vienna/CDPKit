@@ -32,11 +32,14 @@
 #define CDPL_CONFGEN_FRAGMENTTREE_HPP
 
 #include <vector>
+#include <cstddef>
 
 #include <boost/unordered_map.hpp>
 
+#include "CDPL/ConfGen/ConformerData.hpp"
 #include "CDPL/Chem/FragmentList.hpp"
 #include "CDPL/Util/ObjectStack.hpp"
+#include "CDPL/Util/ObjectPool.hpp"
 
 
 namespace CDPL 
@@ -50,8 +53,11 @@ namespace CDPL
 		class FragmentTree
 		{
 
+			friend class FragmentTreeNode;
+
+
 		public:
-			FragmentTree();
+			FragmentTree(std::size_t max_conf_data_cache_size);
 
 			~FragmentTree();
 
@@ -64,8 +70,13 @@ namespace CDPL
 			FragmentTreeNode* getRoot() const;
 
 		private:
+			typedef Util::ObjectPool<ConformerData> ConformerDataCache;
+			
 			void generateLeafNodes(const Chem::MolecularGraph& molgraph, const Util::BitSet& split_bond_mask);
 			void buildupTree(const Chem::MolecularGraph& molgraph);
+
+			FragmentTreeNode* createParentNode(FragmentTreeNode* node1, FragmentTreeNode* node2, 
+											   const Chem::MolecularGraph& molgraph, const Chem::Bond* bond);
 
 			const Chem::Bond* findConnectingBond(const Chem::MolecularGraph& molgraph, FragmentTreeNode* node1, 
 												 FragmentTreeNode* node2);
@@ -73,19 +84,23 @@ namespace CDPL
 			void orderLeafNodes();
 			bool compareLeafNodeOrder(FragmentTreeNode* node1, FragmentTreeNode* node2);
 
-			static FragmentTreeNode* createTreeNode();
+			ConformerData::SharedPointer allocConformerData();
+
+			FragmentTreeNode* allocTreeNode(const Chem::MolecularGraph& molgraph);
+			FragmentTreeNode* createTreeNode();
 
 			typedef std::vector<const Chem::Bond*> BondList;
 			typedef Util::ObjectStack<FragmentTreeNode> TreeNodeCache;
 			typedef std::vector<FragmentTreeNode*> TreeNodeList;
-			typedef boost::unordered_map<FragmentTreeNode*, std::size_t> LeafNodeOrderMap;
+			typedef boost::unordered_map<FragmentTreeNode*, std::size_t> TreeNodeOrderMap;
 
-			TreeNodeCache      nodeCache;
-			FragmentTreeNode*  rootNode;
-			Chem::FragmentList fragments;
-			BondList           splitBonds;
-			TreeNodeList       leafNodes;
-			LeafNodeOrderMap   leafNodeOrders;
+			ConformerDataCache         confDataCache;
+			TreeNodeCache              nodeCache;
+			FragmentTreeNode*          rootNode;
+			Chem::FragmentList         fragments;
+			BondList                   splitBonds;
+			TreeNodeList               leafNodes;
+			TreeNodeOrderMap           leafNodeOrders;
 		};
     }
 }
@@ -104,7 +119,7 @@ void CDPL::ConfGen::FragmentTree::build(const CDPL::Chem::MolecularGraph& molgra
 	for (TreeNodeList::const_iterator it = leafNodes.begin(), end = leafNodes.end(); it != end; ++it) {
 		const FragmentTreeNode* node = *it;
 
-		leafNodeOrders.insert(LeafNodeOrderMap::value_type(node, node_order_func(*node)));
+		leafNodeOrders.insert(TreeNodeOrderMap::value_type(node, node_order_func(*node)));
 	}
 
 	orderLeafNodes();

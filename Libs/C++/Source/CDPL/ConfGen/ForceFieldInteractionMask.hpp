@@ -1,7 +1,7 @@
 /* -*- mode: c++; c-basic-offset: 4; tab-width: 4; indent-tabs-mode: t -*- */
 
 /* 
- * ForceFieldInteractionMasks.hpp 
+ * ForceFieldInteractionMask.hpp 
  *
  * This file is part of the Chemical Data Processing Toolkit
  *
@@ -25,11 +25,11 @@
 
 /**
  * \file
- * \brief Definition of the class CDPL::ConfGen::ForceFieldInteractionMasks.
+ * \brief Definition of the class CDPL::ConfGen::ForceFieldInteractionMask.
  */
 
-#ifndef CDPL_CONFGEN_FORCEFIELDINTERACTIONMASKS_HPP
-#define CDPL_CONFGEN_FORCEFIELDINTERACTIONMASKS_HPP
+#ifndef CDPL_CONFGEN_FORCEFIELDINTERACTIONMASK_HPP
+#define CDPL_CONFGEN_FORCEFIELDINTERACTIONMASK_HPP
 
 #include <cstddef>
 
@@ -48,34 +48,15 @@ namespace CDPL
     namespace ConfGen 
     {
 	
-		struct ForceFieldInteractionMasks 
+		struct ForceFieldInteractionMask 
 		{
+
 
 			void init(std::size_t num_bs_ia, std::size_t num_ab_ia, std::size_t num_sb_ia,
 					  std::size_t num_oop_ia, std::size_t num_tor_ia, std::size_t num_vdw_ia,
-					  std::size_t num_els_ia) {
+					  std::size_t num_els_ia);
 
-				bondStretching.resize(num_bs_ia);
-				bondStretching.set();
-
-				angleBending.resize(num_ab_ia);
-				angleBending.set();
-
-				stretchBend.resize(num_sb_ia);
-				stretchBend.set();
-
-				outOfPlaneBending.resize(num_oop_ia);
-				outOfPlaneBending.set();
-
-				torsion.resize(num_tor_ia);
-				torsion.set();
-
-				vanDerWaals.resize(num_vdw_ia);
-				vanDerWaals.set();
-
-				electrostatic.resize(num_els_ia);
-				electrostatic.set();
-			}
+			void init(const ForceField::MMFF94InteractionData& ia_data); 
 			
 			Util::BitSet bondStretching;
 			Util::BitSet angleBending;
@@ -85,9 +66,7 @@ namespace CDPL
 			Util::BitSet vanDerWaals;
 			Util::BitSet electrostatic;
 		};
-
-		void initForceFieldInteractionMasks(const ForceField::MMFF94InteractionData& ia_data, ForceFieldInteractionMasks& ia_masks); 
     }
 }
 
-#endif // CDPL_CONFGEN_FORCEFIELDINTERACTIONMASKS_HPP
+#endif // CDPL_CONFGEN_FORCEFIELDINTERACTIONMASK_HPP

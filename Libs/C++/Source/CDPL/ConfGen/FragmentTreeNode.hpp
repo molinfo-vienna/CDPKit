@@ -53,7 +53,7 @@ namespace CDPL
     {
 
 		class FragmentTree;
-		class ForceFieldInteractionMasks;
+		class ForceFieldInteractionMask;
 
 		class FragmentTreeNode
 		{
@@ -73,6 +73,10 @@ namespace CDPL
 			const Chem::Bond* getSplitBond() const;
 
 			const Chem::Atom* const* getSplitBondAtoms() const;
+
+			void setSplitBondLength(double length);
+
+			double getSplitBondLength() const;
 
 			const Chem::Atom* const* getTorsionReferenceAtoms() const;
 
@@ -102,10 +106,10 @@ namespace CDPL
 			const ForceField::MMFF94InteractionData& getMMFF94InteractionData() const;
 
 			void extractMMFF94Interactions(const ForceField::MMFF94InteractionData& ia_data,
-										   ForceFieldInteractionMasks& ia_masks);
+										   ForceFieldInteractionMask& ia_mask);
 			
 		private:
-			FragmentTreeNode();
+			FragmentTreeNode(FragmentTree& owner);
 
 			FragmentTreeNode(const FragmentTreeNode&);
 
@@ -124,9 +128,11 @@ namespace CDPL
 			void initFragmentData();
 			void initFragmentData(const Chem::MolecularGraph& frag, const Chem::MolecularGraph& root_frag);
 			
+			FragmentTree&                       owner;
 			FragmentTreeNode*                   parent;
 			const Chem::Bond*                   splitBond;
 			const Chem::Atom*                   splitBondAtoms[2];
+			double                              splitBondLength;
 			const Chem::Atom*                   torsionRefAtoms[2];
 			FragmentTreeNode*                   leftChild;
 			FragmentTreeNode*                   rightChild;
