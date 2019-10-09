@@ -32,6 +32,7 @@
 #define CDPL_MATH_VECTORARRAYFUNCTIONS_HPP
 
 #include <cstddef>
+#include <cmath>
 
 #include "CDPL/Math/VectorArray.hpp"
 #include "CDPL/Math/Matrix.hpp"

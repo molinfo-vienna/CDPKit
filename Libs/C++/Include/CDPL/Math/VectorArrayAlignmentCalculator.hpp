@@ -89,7 +89,7 @@ namespace CDPL
 				explicit MatrixVectorArrayAdapter(const VectorArrayType& va): data(va) {}
 
 				Reference operator()(SizeType i, SizeType j) {
-					return data[j][i];
+					return data.getData()[j].getData()[i];
 				}
 
 				ConstReference operator()(SizeType i, SizeType j) const {

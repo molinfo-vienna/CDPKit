@@ -37,3 +37,13 @@ const ConfGen::TorsionDriverSettings ConfGen::TorsionDriverSettings::DEFAULT;
 
 ConfGen::TorsionDriverSettings::TorsionDriverSettings()
 {}
+
+void ConfGen::TorsionDriverSettings::setTorsionLibrary(const TorsionLibrary::SharedPointer& lib)
+{
+	torLib = lib;
+}
+
+const ConfGen::TorsionLibrary::SharedPointer& ConfGen::TorsionDriverSettings::getTorsionLibrary() const
+{
+	return torLib;
+}

@@ -36,6 +36,7 @@
 #include "CDPL/ConfGen/ConformerData.hpp"
 #include "CDPL/ForceField/MMFF94InteractionData.hpp"
 #include "CDPL/Util/BitSet.hpp"
+#include "CDPL/Math/Matrix.hpp"
 
 
 namespace CDPL 
@@ -64,11 +65,12 @@ namespace CDPL
 			typedef std::vector<ConformerData::SharedPointer> ConformerDataArray;
 			typedef std::vector<std::size_t> IndexArray;
 			typedef std::vector<double> TorsionAngleArray;	
+			typedef std::vector<double> DoubleArray;	
 
 			FragmentTreeNode* getParent() const;
 
 			const Chem::MolecularGraph* getFragment() const;
-			const Chem::MolecularGraph* getRootFragment() const;
+			const Chem::MolecularGraph* getRootMolecularGraph() const;
 
 			const Chem::Bond* getSplitBond() const;
 
@@ -94,7 +96,6 @@ namespace CDPL
 			const IndexArray& getAtomIndices() const;
 
 			const Util::BitSet& getAtomMask() const;
-
 			const Util::BitSet& getCoreAtomMask() const;
 
 			const TorsionAngleArray& getTorsionAngles() const;
@@ -108,12 +109,20 @@ namespace CDPL
 			void extractMMFF94Interactions(const ForceField::MMFF94InteractionData& ia_data,
 										   ForceFieldInteractionMask& ia_mask);
 			
+			void clearConformersDownwards();
+			void clearConformersUpwards();
+
+			void generateConformers();
+
 		private:
 			FragmentTreeNode(FragmentTree& owner);
-
 			FragmentTreeNode(const FragmentTreeNode&);
 
 			FragmentTreeNode& operator=(const FragmentTreeNode&);
+
+			void lineupChildConformers();
+			void alignChildConformers();
+			void alignAndRotateChildConformers();
 
 			void setParent(FragmentTreeNode* node);
 
@@ -123,11 +132,41 @@ namespace CDPL
 			void setSplitBondAtoms(const Chem::Atom* left, const Chem::Atom* right);
 
 			void setFragment(const Chem::MolecularGraph* frag);
-			void setRootFragment(const Chem::MolecularGraph* frag);
+			void setRootMolecularGraph(const Chem::MolecularGraph* root_molgraph);
 
 			void initFragmentData();
-			void initFragmentData(const Chem::MolecularGraph& frag, const Chem::MolecularGraph& root_frag);
-			
+			void initFragmentData(const Chem::MolecularGraph& frag, const Chem::MolecularGraph& root_molgraph);
+
+			void clearTorsionDrivingData();
+
+			void calcConformerBounds(Math::Vector3D& min, Math::Vector3D& max, const IndexArray& atom_inds,
+									 const Math::Vector3DArray& coords) const;
+
+			void copyCoordinates(const Math::Vector3DArray& src_coords, const IndexArray& atom_inds, 
+								 Math::Vector3DArray& tgt_coords) const;
+			void copyCoordinates(const Math::Vector3DArray& src_coords, const IndexArray& atom_inds, 
+								 Math::Vector3DArray& tgt_coords, std::size_t excl_atom_idx) const;
+
+			void rotateCoordinates(const Math::Vector3DArray& src_coords, const IndexArray& atom_inds, 
+								   Math::Vector3DArray& tgt_coords, double ang_sin, double ang_cos, 
+								   std::size_t excl_atom_idx) const;
+
+			void alignCoordinates(const Math::Matrix3D& algn_mtx, Math::Vector3DArray& coords, const IndexArray& atom_inds, 
+								  std::size_t ctr_atom_idx, std::size_t excl_atom_idx, double x_disp) const;
+
+			void calcAlignmentMatrix(const Math::Vector3D& bond_vec, const Math::Vector3D& tor_ref_vec, 
+									 Math::Matrix3D& algn_mtx) const;
+
+			bool calcOrthogonalVector(const Math::Vector3D& vec, Math::Vector3D& ortho_vec) const;
+
+			void calcProjectedReferenceVector(const Math::Vector3DArray& coords, std::size_t atom_idx, 
+											  Math::Vector3D& ref_vec) const;
+
+			double calcMMFF94Energy(const Math::Vector3DArray& coords) const;
+			double calcMMFF94Energy(const Math::Vector3DArray& coords, bool& atom_clash) const;
+
+			double calcNonVdWMMFF94Energies(const Math::Vector3DArray& coords) const;
+
 			FragmentTree&                       owner;
 			FragmentTreeNode*                   parent;
 			const Chem::Bond*                   splitBond;
@@ -139,11 +178,14 @@ namespace CDPL
 			IndexArray                          atomIndices;
 			Util::BitSet                        atomMask;
 			Util::BitSet                        coreAtomMask;
-			const Chem::MolecularGraph*         rootFragment;
+			const Chem::MolecularGraph*         rootMolGraph;
 			const Chem::MolecularGraph*         fragment;
 			ConformerDataArray                  conformers;
 			TorsionAngleArray                   torsionAngles;
+			DoubleArray                         torsionAngleCosines;
+			DoubleArray                         torsionAngleSines;
 			ForceField::MMFF94InteractionData   mmff94Data;
+			Math::Vector3DArray                 childConfBounds;
 		};
     }
 }

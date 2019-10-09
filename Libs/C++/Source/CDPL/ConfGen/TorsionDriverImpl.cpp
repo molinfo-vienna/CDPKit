@@ -27,16 +27,64 @@
 #include "StaticInit.hpp"
 
 #include "TorsionDriverImpl.hpp"
+#include "TorsionLibraryDataReader.hpp"
 
 
 using namespace CDPL;
 
 
-ConfGen::TorsionDriverImpl::TorsionDriverImpl() {} 
+namespace
+{
+
+	const char* FALLBACK_TORSION_RULES = 
+		"<library name=\"FallbackRules\">"
+		" <category name=\"GG\" atomType1=\"*\" atomType2=\"*\">"
+		" </category>"
+		"</library>";
+
+	ConfGen::TorsionLibrary::SharedPointer fallbackTorLib(new ConfGen::TorsionLibrary());
+
+	struct Init
+    {
+
+		Init() {
+			ConfGen::TorsionLibraryDataReader().read(FALLBACK_TORSION_RULES, *fallbackTorLib);
+		}
+
+    } init;
+
+	const std::size_t MAX_CONFORMER_DATA_CACHE_SIZE = 5000;
+}
+
+
+ConfGen::TorsionDriverImpl::TorsionDriverImpl(): 
+	fragTree(MAX_CONFORMER_DATA_CACHE_SIZE)
+{} 
 
 ConfGen::TorsionDriverImpl::~TorsionDriverImpl() {}
 
 ConfGen::TorsionDriverSettings& ConfGen::TorsionDriverImpl::getSettings()
 {
 	return settings;
+}
+
+void ConfGen::TorsionDriverImpl::setupTorsions(FragmentTreeNode& node)
+{
+	using namespace Chem;
+
+}
+
+const ConfGen::TorsionRuleMatch* ConfGen::TorsionDriverImpl::getMatchingTorsionRule(const Chem::Bond& bond)
+{
+	torRuleMatcher.setTorsionLibrary(settings.getTorsionLibrary());
+
+	if (torRuleMatcher.findMatches(bond, *rootMolGraph, false)) 
+		return &torRuleMatcher.getMatch(0); 
+
+	torRuleMatcher.setTorsionLibrary(fallbackTorLib);
+
+	if (torRuleMatcher.findMatches(bond, *rootMolGraph, false)) 
+		return &torRuleMatcher.getMatch(0); 
+
+	return 0;
 }

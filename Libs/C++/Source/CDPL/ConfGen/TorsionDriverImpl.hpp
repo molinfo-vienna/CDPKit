@@ -32,6 +32,9 @@
 #define CDPL_CONFGEN_TORSIONDRIVERIMPL_HPP
 
 #include "CDPL/ConfGen/TorsionDriverSettings.hpp"
+#include "CDPL/ConfGen/TorsionRuleMatcher.hpp"
+
+#include "FragmentTree.hpp"
 
 
 namespace CDPL 
@@ -55,7 +58,14 @@ namespace CDPL
 
 			TorsionDriverImpl& operator=(const TorsionDriverImpl&);
 
-			TorsionDriverSettings settings;
+			void setupTorsions(FragmentTreeNode& node);
+
+			const ConfGen::TorsionRuleMatch* getMatchingTorsionRule(const Chem::Bond& bond);
+
+			const Chem::MolecularGraph* rootMolGraph;
+			TorsionDriverSettings       settings;
+			FragmentTree                fragTree;
+			TorsionRuleMatcher          torRuleMatcher;
 		};
     }
 }

@@ -376,6 +376,7 @@ ConfGen::FragmentConformerGenerator::getRingAtomCoordinates(const Math::Vector3D
 {
 	ConformerDataPtr ra_coords_ptr = allocConformerData();
 	Math::Vector3DArray& ra_coords = *ra_coords_ptr;
+	Math::Vector3DArray::StorageType& ra_coords_data = ra_coords.getData();
 	Math::Vector3D ctr;
 	std::size_t num_ring_atoms = ringAtomIndices.size();
 
@@ -385,7 +386,7 @@ ConfGen::FragmentConformerGenerator::getRingAtomCoordinates(const Math::Vector3D
 		const Math::Vector3D& pos = conf_coords[ringAtomIndices[i]];
 
 		ctr.plusAssign(pos);
-		ra_coords[i].assign(pos);
+		ra_coords_data[i].assign(pos);
 	}
 
 	ctr /= num_ring_atoms;

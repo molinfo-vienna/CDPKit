@@ -340,6 +340,7 @@ ConfGen::RMSDConformerSelector::buildCoordsArrayForMapping(const IndexArray& map
 {
 	VectorArrayPtr coords_ptr = vecArrayCache.get();
 	Math::Vector3DArray& coords = *coords_ptr;
+	Math::Vector3DArray::StorageType& coords_data = coords.getData();
 	std::size_t arr_size = mapping.size();
 	Math::Vector3D ctr;
 
@@ -349,7 +350,7 @@ ConfGen::RMSDConformerSelector::buildCoordsArrayForMapping(const IndexArray& map
 		const Math::Vector3D& pos = conf_coords[mapping[i]];
 
 		ctr.plusAssign(pos);
-		coords[i].assign(pos);
+		coords_data[i].assign(pos);
 	}
 
 	ctr /= arr_size;

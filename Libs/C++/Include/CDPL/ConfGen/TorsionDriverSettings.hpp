@@ -32,6 +32,7 @@
 #define CDPL_CONFGEN_TORSIONDRIVERSETTINGS_HPP
 
 #include "CDPL/ConfGen/APIPrefix.hpp"
+#include "CDPL/ConfGen/TorsionLibrary.hpp"
 
 
 namespace CDPL 
@@ -40,25 +41,30 @@ namespace CDPL
     namespace ConfGen 
     {
 
-	/**
-	 * \addtogroup CDPL_CONFGEN_DATA_STRUCTURES
-	 * @{
-	 */
+		/**
+		 * \addtogroup CDPL_CONFGEN_DATA_STRUCTURES
+		 * @{
+		 */
 
-	class CDPL_CONFGEN_API TorsionDriverSettings
-	{
+		class CDPL_CONFGEN_API TorsionDriverSettings
+		{
 
-	  public:
-	    static const TorsionDriverSettings DEFAULT;
+		  public:
+			static const TorsionDriverSettings DEFAULT;
 
-	    TorsionDriverSettings();
+			TorsionDriverSettings();
 
-	  private:
-	};
+			void setTorsionLibrary(const TorsionLibrary::SharedPointer& lib);
 
-	/**
-	 * @}
-	 */
+			const TorsionLibrary::SharedPointer& getTorsionLibrary() const;
+
+		  private:
+			TorsionLibrary::SharedPointer      torLib;
+		};
+
+		/**
+		 * @}
+		 */
     }
 }
 

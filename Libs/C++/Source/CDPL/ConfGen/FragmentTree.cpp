@@ -55,10 +55,11 @@ ConfGen::FragmentTree::FragmentTree(std::size_t max_conf_data_cache_size):
 
 ConfGen::FragmentTree::~FragmentTree() {}
 
-void ConfGen::FragmentTree::build(const Chem::MolecularGraph& molgraph, const Util::BitSet& split_bond_mask)
+void ConfGen::FragmentTree::build(const Chem::MolecularGraph& molgraph, const Chem::MolecularGraph& root_molgraph,
+								  const Util::BitSet& split_bond_mask)
 {
-	generateLeafNodes(molgraph, split_bond_mask);
-	buildupTree(molgraph);
+	generateLeafNodes(molgraph, root_molgraph, split_bond_mask);
+	buildupTree(root_molgraph);
 }
 
 ConfGen::FragmentTreeNode* ConfGen::FragmentTree::getRoot() const
@@ -66,7 +67,8 @@ ConfGen::FragmentTreeNode* ConfGen::FragmentTree::getRoot() const
 	return rootNode;
 }
 
-void ConfGen::FragmentTree::generateLeafNodes(const Chem::MolecularGraph& molgraph, const Util::BitSet& split_bond_mask)
+void ConfGen::FragmentTree::generateLeafNodes(const Chem::MolecularGraph& molgraph, const Chem::MolecularGraph& root_molgraph,
+											  const Util::BitSet& split_bond_mask)
 {
 	rootNode = 0;
 
@@ -81,19 +83,19 @@ void ConfGen::FragmentTree::generateLeafNodes(const Chem::MolecularGraph& molgra
 
 	for (Chem::FragmentList::ConstElementIterator it = fragments.getElementsBegin(), end = fragments.getElementsEnd(); it != end; ++it) {
 		const Chem::Fragment& frag = *it;
-		FragmentTreeNode* node = allocTreeNode(molgraph);
+		FragmentTreeNode* node = allocTreeNode(root_molgraph);
 
 		node->setChildren(0, 0);
 		node->setSplitBond(0);
 		node->setSplitBondAtoms(0, 0);
 		node->setFragment(&frag);
-		node->initFragmentData(frag, molgraph);
+		node->initFragmentData(frag, root_molgraph);
 
 		leafNodes.push_back(node);
 	}
 }
 
-void ConfGen::FragmentTree::buildupTree(const Chem::MolecularGraph& molgraph)
+void ConfGen::FragmentTree::buildupTree(const Chem::MolecularGraph& root_molgraph)
 {
 	if (leafNodes.empty())
 		return;
@@ -106,12 +108,12 @@ void ConfGen::FragmentTree::buildupTree(const Chem::MolecularGraph& molgraph)
 			
 			for (TreeNodeList::iterator it2 = ++it1; it2 != end; ++it2) {
 				FragmentTreeNode* node2 = *it2;
-				const Chem::Bond* bond = findConnectingBond(molgraph, node1, node2);
+				const Chem::Bond* bond = findConnectingBond(root_molgraph, node1, node2);
 
 				if (!bond)
 					continue;
 
-				FragmentTreeNode* node = createParentNode(node1, node2, molgraph, bond);
+				FragmentTreeNode* node = createParentNode(node1, node2, root_molgraph, bond);
 
 				*it2 = node;
 				leafNodes.erase(it1);
@@ -131,13 +133,13 @@ void ConfGen::FragmentTree::buildupTree(const Chem::MolecularGraph& molgraph)
 	rootNode = leafNodes.front();
 
 	for (TreeNodeList::iterator it = leafNodes.begin() + 1, end = leafNodes.end(); it != end; ++it) 
-		rootNode = createParentNode(rootNode, *it, molgraph, 0);
+		rootNode = createParentNode(rootNode, *it, root_molgraph, 0);
 }
 
 ConfGen::FragmentTreeNode* ConfGen::FragmentTree::createParentNode(FragmentTreeNode* node1, FragmentTreeNode* node2, 
-																		 const Chem::MolecularGraph& molgraph, const Chem::Bond* bond)
+																   const Chem::MolecularGraph& root_molgraph, const Chem::Bond* bond)
 {
-	FragmentTreeNode* node = allocTreeNode(molgraph);
+	FragmentTreeNode* node = allocTreeNode(root_molgraph);
 
 	node1->setParent(node);
 	node2->setParent(node);
@@ -157,7 +159,7 @@ ConfGen::FragmentTreeNode* ConfGen::FragmentTree::createParentNode(FragmentTreeN
 		node->setSplitBondAtoms(0, 0);
 
 	else {
-		if (left_child->getCoreAtomMask().test(molgraph.getAtomIndex(bond->getBegin())))
+		if (left_child->getCoreAtomMask().test(root_molgraph.getAtomIndex(bond->getBegin())))
 			node->setSplitBondAtoms(&bond->getBegin(), &bond->getEnd());
 		else
 			node->setSplitBondAtoms(&bond->getEnd(), &bond->getBegin());
@@ -166,7 +168,7 @@ ConfGen::FragmentTreeNode* ConfGen::FragmentTree::createParentNode(FragmentTreeN
 	return node;
 }
 
-const Chem::Bond* ConfGen::FragmentTree::findConnectingBond(const Chem::MolecularGraph& molgraph, FragmentTreeNode* node1, 
+const Chem::Bond* ConfGen::FragmentTree::findConnectingBond(const Chem::MolecularGraph& root_molgraph, FragmentTreeNode* node1, 
 															FragmentTreeNode* node2)
 {
 	const Util::BitSet& node1_atom_mask = node1->getAtomMask();
@@ -175,8 +177,8 @@ const Chem::Bond* ConfGen::FragmentTree::findConnectingBond(const Chem::Molecula
 	for (BondList::iterator it = splitBonds.begin(), end = splitBonds.end(); it != end; ++it) {
 		const Chem::Bond* bond = *it;
 
-		std::size_t atom1_idx = molgraph.getAtomIndex(bond->getBegin());
-		std::size_t atom2_idx = molgraph.getAtomIndex(bond->getEnd());
+		std::size_t atom1_idx = root_molgraph.getAtomIndex(bond->getBegin());
+		std::size_t atom2_idx = root_molgraph.getAtomIndex(bond->getEnd());
 
 		if (node1_atom_mask.test(atom1_idx) && node1_atom_mask.test(atom2_idx) &&
 			node2_atom_mask.test(atom1_idx) && node2_atom_mask.test(atom2_idx)) {
@@ -201,20 +203,23 @@ bool ConfGen::FragmentTree::compareLeafNodeOrder(FragmentTreeNode* node1, Fragme
 
 ConfGen::ConformerData::SharedPointer ConfGen::FragmentTree::allocConformerData()
 {
-	return confDataCache.get();
+	ConformerData::SharedPointer conf_data = confDataCache.get();
+
+	conf_data->resize(rootNode->getRootMolecularGraph()->getNumAtoms());
+
+	return conf_data;
 }
 
-ConfGen::FragmentTreeNode* ConfGen::FragmentTree::allocTreeNode(const Chem::MolecularGraph& molgraph)
+ConfGen::FragmentTreeNode* ConfGen::FragmentTree::allocTreeNode(const Chem::MolecularGraph& root_molgraph)
 {
 	FragmentTreeNode* node = nodeCache.getRaw();
 
 	node->setParent(0);
-	node->setRootFragment(&molgraph);
-	node->setTorsionReferenceAtoms(0, 0);
+	node->setRootMolecularGraph(&root_molgraph);
 	node->getConformers().clear();
-	node->getTorsionAngles().clear();
 	node->getMMFF94InteractionData().clear();
 	node->setSplitBondLength(0.0);
+	node->clearTorsionDrivingData();
 
 	return node;
 }
