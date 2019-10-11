@@ -54,12 +54,17 @@ namespace CDPL
 
 			TorsionDriverSettings();
 
+			void enumerateHeteroHydrogenRotors(bool enumerate);
+				
+			bool enumerateHeteroHydrogenRotors() const;
+
 			void setTorsionLibrary(const TorsionLibrary::SharedPointer& lib);
 
 			const TorsionLibrary::SharedPointer& getTorsionLibrary() const;
 
 		  private:
-			TorsionLibrary::SharedPointer      torLib;
+			bool                          enumHetHRotors;
+			TorsionLibrary::SharedPointer torLib;
 		};
 
 		/**

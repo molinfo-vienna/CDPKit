@@ -63,6 +63,8 @@ namespace CDPL
 
 	    const int FRAGMENT_LIBRARY_NOT_SET       = 6;
 
+	    const int ABORTED                        = 7;
+
 	    const int ERROR                          = 10;
 	}
 

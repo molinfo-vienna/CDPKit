@@ -51,7 +51,7 @@ namespace CDPLPythonChem
 			python::class_<AlignmentType, boost::noncopyable>(name, python::no_init)
 				.def(python::init<>(python::arg("self")))
 				.def(python::init<const AlignmentType&>(
-						 (python::arg("self"), python::arg("alignment"))))
+						 (python::arg("self"), python::arg("alignment")))[python::with_custodian_and_ward<1, 2>()])
 				.def(CDPLPythonBase::ObjectIdentityCheckVisitor<AlignmentType >())	
 				.def("setEntityMatchFunction", &AlignmentType::setEntityMatchFunction, 
 					 (python::arg("self"), python::arg("func")))
@@ -73,7 +73,8 @@ namespace CDPLPythonChem
 					 (python::arg("self"), python::arg("func")))
 				.def("getEntityWeightFunction", &AlignmentType::getEntityWeightFunction, 
 					 python::arg("self"), python::return_internal_reference<>())
-				.def("addEntity", &addEntityFunc, (python::arg("self"), python::arg("entity"), python::arg("first_set")))
+				.def("addEntity", &addEntityFunc, (python::arg("self"), python::arg("entity"), python::arg("first_set")),
+					 python::with_custodian_and_ward<1, 2>())
 				.def("clearEntities", &AlignmentType::clearEntities, 
 					 (python::arg("self"), python::arg("first_set")))
 				.def("getNumEntities", &AlignmentType::getNumEntities, 
@@ -89,7 +90,7 @@ namespace CDPLPythonChem
 				.def("getTransform", &AlignmentType::getTransform,
 					 python::arg("self"), python::return_internal_reference<>())
 				.def("assign", &AlignmentType::operator=, 
-					 (python::arg("self"), python::arg("alignment")), python::return_self<>())
+					 (python::arg("self"), python::arg("alignment")), python::return_self<python::with_custodian_and_ward<1, 2> >())
 				.add_property("minTopologicalMappingSize", &AlignmentType::getMinTopologicalMappingSize,
 					  &AlignmentType::setMinTopologicalMappingSize)
 				.add_property("entityMatchFunction", 

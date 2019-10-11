@@ -40,29 +40,34 @@ using namespace CDPL;
 
 namespace
 {
-	
-   CDPL_DEFINE_LOOKUP_KEY(CDF_MOLECULE_DATA);
+
+	inline const Base::LookupKey& getCDFMoleculeDataKey()
+	{
+		static CDPL_DEFINE_LOOKUP_KEY(CDF_MOLECULE_DATA);
+
+		return CDF_MOLECULE_DATA;
+	}
 }
 
 
 const ConfGen::MoleculeDataPointer& ConfGen::getCDFMoleculeData(const Chem::MolecularGraph& molgraph)
 {
-    return molgraph.getProperty<MoleculeDataPointer>(CDF_MOLECULE_DATA);
+    return molgraph.getProperty<MoleculeDataPointer>(getCDFMoleculeDataKey());
 }
 
 void ConfGen::setCDFMoleculeData(Chem::MolecularGraph& molgraph, const MoleculeDataPointer& data)
 {
-    molgraph.setProperty(CDF_MOLECULE_DATA, data);
+    molgraph.setProperty(getCDFMoleculeDataKey(), data);
 }
 
 void ConfGen::clearCDFMoleculeData(Chem::MolecularGraph& molgraph)
 {
-    molgraph.removeProperty(CDF_MOLECULE_DATA);
+    molgraph.removeProperty(getCDFMoleculeDataKey());
 }
 
 bool ConfGen::hasCDFMoleculeData(const Chem::MolecularGraph& molgraph)
 {
-    return molgraph.isPropertySet(CDF_MOLECULE_DATA);
+    return molgraph.isPropertySet(getCDFMoleculeDataKey());
 }
 
 Chem::MolecularGraph::SharedPointer ConfGen::createMoleculeFromCDFData(const Chem::MolecularGraph& molgraph)

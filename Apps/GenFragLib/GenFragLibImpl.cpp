@@ -113,14 +113,15 @@ public:
 	void operator()() {
 		using namespace CDPL;
 		using namespace Chem;
+		using namespace ConfGen;
 
 		try {
 			while (true) {
 				if (!parent->readNextMolecule(molecule))
 					return;
 
-				ConfGen::prepareForConformerGeneration(molecule);
-				ConfGen::buildFragmentLinkBondMask(molecule, fragLinkBondMask);
+				prepareForConformerGeneration(molecule);
+				buildFragmentLinkBondMask(molecule, fragLinkBondMask);
 
 				splitIntoFragments(molecule, fragList, fragLinkBondMask);
 
@@ -128,7 +129,11 @@ public:
 					const Fragment& frag = *it;
 					unsigned int ret_code = fragLibGen.process(frag);
 
-					if (ret_code == ConfGen::ReturnCode::SUCCESS)
+					if (ret_code == ReturnCode::ABORTED)
+						return;
+
+					if (ret_code == ReturnCode::SUCCESS || 
+						(ret_code == ReturnCode::TIMEOUT_EXCEEDED && fragLibGen.getNumGeneratedConformers() > 0))
 						fragmentProcessed(frag);
 					else
 						handleError(frag, ret_code);
@@ -189,6 +194,7 @@ private:
 
 	void handleError(const CDPL::Chem::MolecularGraph& frag, unsigned int ret_code) {
 		using namespace CDPL;
+		using namespace ConfGen;
 
 		numErrorFrags++;
 
@@ -196,20 +202,20 @@ private:
 
 		switch (ret_code) {
 
-			case ConfGen::ReturnCode::FORCEFIELD_SETUP_FAILED:
+			case ReturnCode::FORCEFIELD_SETUP_FAILED:
 				err_msg = "Force field setup failed";
 				break;
 
-			case ConfGen::ReturnCode::FORCEFIELD_MINIMIZATION_FAILED:
-				err_msg = "Raw structure minimization failed";
+			case ReturnCode::FORCEFIELD_MINIMIZATION_FAILED:
+				err_msg = "Structure refinement failed";
 				break;
 
-			case ConfGen::ReturnCode::MAX_NUM_TRIALS_EXCEEDED:
-				err_msg = "Could not generated conformer within max. number of trials";
+			case ReturnCode::MAX_NUM_TRIALS_EXCEEDED:
+				err_msg = "Could not generate conformers within max. number of trials";
 				break;
 
-			case ConfGen::ReturnCode::TIMEOUT_EXCEEDED:
-				err_msg = "Could not generated conformer within timeout period";
+			case ReturnCode::TIMEOUT_EXCEEDED:
+				err_msg = "Timeout";
 				break;
 
 			default:

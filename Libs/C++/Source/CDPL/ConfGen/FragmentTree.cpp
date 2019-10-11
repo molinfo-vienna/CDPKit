@@ -217,7 +217,7 @@ ConfGen::FragmentTreeNode* ConfGen::FragmentTree::allocTreeNode(const Chem::Mole
 	node->setParent(0);
 	node->setRootMolecularGraph(&root_molgraph);
 	node->getConformers().clear();
-	node->getMMFF94InteractionData().clear();
+	node->getMMFF94Parameters().clear();
 	node->setSplitBondLength(0.0);
 	node->clearTorsionDrivingData();
 

@@ -41,16 +41,7 @@ namespace
         #include "TorsionLibrary.xml.str" 
 		;
 
-    ConfGen::TorsionLibrary::SharedPointer builtinTorLib(new ConfGen::TorsionLibrary());
-
-    struct Init
-    {
-
-		Init() {
-			builtinTorLib->loadDefaults();
-		}
-
-    } init;
+    ConfGen::TorsionLibrary::SharedPointer builtinTorLib;
 }
 
 
@@ -64,10 +55,28 @@ void ConfGen::TorsionLibrary::loadDefaults()
 
 void ConfGen::TorsionLibrary::set(const SharedPointer& lib)
 {
-    defaultLib = (!lib ? builtinTorLib : lib);
+	initBuiltinTorLib();
+
+	defaultLib = (!lib ? builtinTorLib : lib);
 }
 
 const ConfGen::TorsionLibrary::SharedPointer& ConfGen::TorsionLibrary::get()
 {
+	initBuiltinTorLib();
+
     return defaultLib;
+}
+
+void ConfGen::TorsionLibrary::initBuiltinTorLib()
+{
+	static bool initialize = true;
+
+	if (!initialize)
+		return;
+
+	builtinTorLib.reset(new TorsionLibrary());
+	builtinTorLib->loadDefaults();
+
+	defaultLib = builtinTorLib;
+	initialize = false;
 }

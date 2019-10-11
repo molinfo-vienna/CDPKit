@@ -188,7 +188,7 @@ unsigned int ConfGen::FragmentConformerGenerator::generateFlexibleRingConformers
 		}
 
 		if (progCallback && !progCallback())
-			break;
+			return ReturnCode::ABORTED;
 
 		ConformerDataPtr conf_data = allocConformerData();
 
@@ -228,10 +228,10 @@ unsigned int ConfGen::FragmentConformerGenerator::generateFlexibleRingConformers
 		Math::Vector3DArray& conf_coords = *conf_data;
 
 		if (outputConfs.size() >= max_num_out_confs) 
-			return ReturnCode::SUCCESS;
+			return ret_code;
 
 		if (conf_data->getEnergy() > max_energy)
-			return ReturnCode::SUCCESS;
+			return ret_code;
 
 		if (!checkRMSD(conf_coords, rmsd)) {
 			conf_data.reset();
@@ -260,7 +260,7 @@ unsigned int ConfGen::FragmentConformerGenerator::generateFlexibleRingConformers
 		}
 	}
 
-	return ReturnCode::SUCCESS;
+	return ret_code;
 }
 
 bool ConfGen::FragmentConformerGenerator::init(const Chem::MolecularGraph& molgraph)

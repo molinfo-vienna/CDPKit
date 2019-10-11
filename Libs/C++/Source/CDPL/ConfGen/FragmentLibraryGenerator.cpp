@@ -105,13 +105,12 @@ unsigned int ConfGen::FragmentLibraryGenerator::process(const Chem::MolecularGra
 		setSSSR(fragLibEntry, fragSSSR);
 
 		unsigned int ret_code = fragConfGen.generate(fragLibEntry, perceiveFragmentType(fragLibEntry));
+		numGenConfs = fragConfGen.getNumConformers();
 		
-		if (ret_code != ReturnCode::SUCCESS) {
+		if (numGenConfs == 0) {
 			removeNewLibraryEntry();
 			return ret_code;
 		}
-
-		numGenConfs = fragConfGen.getNumConformers();
 
 		std::for_each(fragConfGen.getConformersBegin(), fragConfGen.getConformersEnd(), 
 					  boost::bind(&Chem::addConformation, boost::ref(fragLibEntry), _1));
@@ -124,6 +123,8 @@ unsigned int ConfGen::FragmentLibraryGenerator::process(const Chem::MolecularGra
 		fl_entry->clearProperties();
 
 		setName(*fl_entry, boost::lexical_cast<std::string>(fragLibEntry.getHashCode()));
+
+		return ret_code;
 
 	} catch (const std::exception& e) {
 		removeNewLibraryEntry();

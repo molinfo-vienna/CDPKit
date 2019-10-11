@@ -64,18 +64,11 @@ namespace
 
     Chem::MolecularGraph::SharedPointer NO_ENTRY;
 
-    ConfGen::FragmentLibrary::SharedPointer builtinFragLib(new ConfGen::FragmentLibrary());
-
-	boost::once_flag loadBuiltinFragLibFlag = BOOST_ONCE_INIT;
-
-	void loadBuiltinFragLib()
-	{
-		builtinFragLib->loadDefaults();
-	}
+    ConfGen::FragmentLibrary::SharedPointer builtinFragLib;
 }
 
 
-ConfGen::FragmentLibrary::SharedPointer ConfGen::FragmentLibrary::defaultLib = builtinFragLib;
+ConfGen::FragmentLibrary::SharedPointer ConfGen::FragmentLibrary::defaultLib;
 
 
 ConfGen::FragmentLibrary::FragmentLibrary() {}
@@ -228,12 +221,14 @@ void ConfGen::FragmentLibrary::loadDefaults()
 
 void ConfGen::FragmentLibrary::set(const SharedPointer& lib)
 {
+	initBuiltinFragLib();
+
     defaultLib = (!lib ? builtinFragLib : lib);
 }
 
 const ConfGen::FragmentLibrary::SharedPointer& ConfGen::FragmentLibrary::get()
 {
-	boost::call_once(&loadBuiltinFragLib, loadBuiltinFragLibFlag);
+	initBuiltinFragLib();
 
     return defaultLib;
 }
@@ -248,4 +243,18 @@ ConfGen::FragmentLibrary::Entry& ConfGen::FragmentLibrary::loadMolStructure(Entr
 	entry.second = createMoleculeFromCDFData(*entry.second);
 
 	return entry;
+}
+
+void ConfGen::FragmentLibrary::initBuiltinFragLib()
+{
+	static bool initialize = true;
+
+	if (!initialize)
+		return;
+
+	builtinFragLib.reset(new FragmentLibrary());
+	builtinFragLib->loadDefaults();
+
+	defaultLib = builtinFragLib;
+	initialize = false;
 }

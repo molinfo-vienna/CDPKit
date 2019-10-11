@@ -116,7 +116,9 @@ namespace CDPL
 
 		  private:
 			Entry& loadMolStructure(Entry& entry) const;
-			
+
+			static void initBuiltinFragLib();
+
 			static SharedPointer      defaultLib;
 			mutable HashToFragmentMap hashToFragMap;
 			mutable boost::mutex      mutex;

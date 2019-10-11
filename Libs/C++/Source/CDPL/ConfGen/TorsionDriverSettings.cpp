@@ -35,7 +35,8 @@ using namespace CDPL;
 const ConfGen::TorsionDriverSettings ConfGen::TorsionDriverSettings::DEFAULT;
 
 
-ConfGen::TorsionDriverSettings::TorsionDriverSettings()
+ConfGen::TorsionDriverSettings::TorsionDriverSettings(): 
+	enumHetHRotors(false), torLib(TorsionLibrary::get())
 {}
 
 void ConfGen::TorsionDriverSettings::setTorsionLibrary(const TorsionLibrary::SharedPointer& lib)
@@ -46,4 +47,14 @@ void ConfGen::TorsionDriverSettings::setTorsionLibrary(const TorsionLibrary::Sha
 const ConfGen::TorsionLibrary::SharedPointer& ConfGen::TorsionDriverSettings::getTorsionLibrary() const
 {
 	return torLib;
+}
+
+void ConfGen::TorsionDriverSettings::enumerateHeteroHydrogenRotors(bool enumerate)
+{
+	enumHetHRotors = enumerate;
+}
+				
+bool ConfGen::TorsionDriverSettings::enumerateHeteroHydrogenRotors() const
+{
+	return enumHetHRotors;
 }

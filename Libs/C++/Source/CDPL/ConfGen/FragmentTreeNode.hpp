@@ -36,7 +36,6 @@
 #include "CDPL/ConfGen/ConformerData.hpp"
 #include "CDPL/ForceField/MMFF94InteractionData.hpp"
 #include "CDPL/Util/BitSet.hpp"
-#include "CDPL/Math/Matrix.hpp"
 
 
 namespace CDPL 
@@ -67,7 +66,8 @@ namespace CDPL
 			typedef std::vector<double> TorsionAngleArray;	
 			typedef std::vector<double> DoubleArray;	
 
-			FragmentTreeNode* getParent() const;
+			const FragmentTreeNode* getParent() const;
+			FragmentTreeNode* getParent();
 
 			const Chem::MolecularGraph* getFragment() const;
 			const Chem::MolecularGraph* getRootMolecularGraph() const;
@@ -86,8 +86,11 @@ namespace CDPL
 
 			bool hasChildren() const;
 
-			FragmentTreeNode* getLeftChild() const;
-			FragmentTreeNode* getRightChild() const;
+			const FragmentTreeNode* getLeftChild() const;
+			const FragmentTreeNode* getRightChild() const;
+
+			FragmentTreeNode* getLeftChild();
+			FragmentTreeNode* getRightChild();
 
 			const ConformerDataArray& getConformers() const;
 
@@ -102,15 +105,17 @@ namespace CDPL
 
 			TorsionAngleArray& getTorsionAngles();
 
-			ForceField::MMFF94InteractionData& getMMFF94InteractionData();
+			ForceField::MMFF94InteractionData& getMMFF94Parameters();
 
-			const ForceField::MMFF94InteractionData& getMMFF94InteractionData() const;
+			const ForceField::MMFF94InteractionData& getMMFF94Parameters() const;
 
-			void extractMMFF94Interactions(const ForceField::MMFF94InteractionData& ia_data,
-										   ForceFieldInteractionMask& ia_mask);
+			void distributeMMFF94Parameters(const ForceField::MMFF94InteractionData& ia_data,
+											ForceFieldInteractionMask& ia_mask);
 			
 			void clearConformersDownwards();
 			void clearConformersUpwards();
+			
+			void addConformer(const Math::Vector3DArray& src_coords, bool calc_energy);
 
 			void generateConformers();
 
@@ -121,7 +126,6 @@ namespace CDPL
 			FragmentTreeNode& operator=(const FragmentTreeNode&);
 
 			void lineupChildConformers();
-			void alignChildConformers();
 			void alignAndRotateChildConformers();
 
 			void setParent(FragmentTreeNode* node);
@@ -144,6 +148,7 @@ namespace CDPL
 
 			void copyCoordinates(const Math::Vector3DArray& src_coords, const IndexArray& atom_inds, 
 								 Math::Vector3DArray& tgt_coords) const;
+
 			void copyCoordinates(const Math::Vector3DArray& src_coords, const IndexArray& atom_inds, 
 								 Math::Vector3DArray& tgt_coords, std::size_t excl_atom_idx) const;
 
@@ -151,16 +156,16 @@ namespace CDPL
 								   Math::Vector3DArray& tgt_coords, double ang_sin, double ang_cos, 
 								   std::size_t excl_atom_idx) const;
 
-			void alignCoordinates(const Math::Matrix3D& algn_mtx, Math::Vector3DArray& coords, const IndexArray& atom_inds, 
+			void alignCoordinates(const double almnt_mtx[3][3], Math::Vector3DArray& coords, const IndexArray& atom_inds, 
 								  std::size_t ctr_atom_idx, std::size_t excl_atom_idx, double x_disp) const;
 
 			void calcAlignmentMatrix(const Math::Vector3D& bond_vec, const Math::Vector3D& tor_ref_vec, 
-									 Math::Matrix3D& algn_mtx) const;
+									 double almnt_mtx[3][3], bool check_ref_vec_angle) const;
 
-			bool calcOrthogonalVector(const Math::Vector3D& vec, Math::Vector3D& ortho_vec) const;
+			void calcOrthogonalVector(const Math::Vector3D& vec, Math::Vector3D& ortho_vec) const;
 
-			void calcProjectedReferenceVector(const Math::Vector3DArray& coords, std::size_t atom_idx, 
-											  Math::Vector3D& ref_vec) const;
+			void calcVirtualTorsionReferenceAtomVector(const Math::Vector3DArray& coords, std::size_t atom_idx, 
+													   Math::Vector3D& ref_vec) const;
 
 			double calcMMFF94Energy(const Math::Vector3DArray& coords) const;
 			double calcMMFF94Energy(const Math::Vector3DArray& coords, bool& atom_clash) const;

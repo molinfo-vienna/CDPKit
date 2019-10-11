@@ -61,6 +61,8 @@ namespace CDPL
 			static const SharedPointer& get();
 
 		  private:
+			static void initBuiltinTorLib();
+
 			static SharedPointer defaultLib;
 		};
     

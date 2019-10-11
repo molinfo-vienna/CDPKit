@@ -51,6 +51,7 @@ void CDPLPythonConfGen::exportReturnCodes()
 		.def_readonly("MAX_NUM_TRIALS_EXCEEDED", &ConfGen::ReturnCode::MAX_NUM_TRIALS_EXCEEDED)
 		.def_readonly("TIMEOUT_EXCEEDED", &ConfGen::ReturnCode::TIMEOUT_EXCEEDED)
 		.def_readonly("FRAGMENT_LIBRARY_NOT_SET", &ConfGen::ReturnCode::FRAGMENT_LIBRARY_NOT_SET)
+		.def_readonly("ABORTED", &ConfGen::ReturnCode::ABORTED)
 		.def_readonly("ERROR", &ConfGen::ReturnCode::ERROR)
 		;
 }
