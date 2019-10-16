@@ -104,6 +104,8 @@ namespace CDPL
 		CDPL_CHEM_API void transform3DCoordinates(AtomContainer& cntnr, const Math::Matrix4D& mtx);
 
 
+		CDPL_CHEM_API void clearConformations(AtomContainer& cntnr);
+
 		CDPL_CHEM_API std::size_t getNumConformations(const AtomContainer& cntnr);
 
 		CDPL_CHEM_API void applyConformation(AtomContainer& cntnr, std::size_t conf_idx);	

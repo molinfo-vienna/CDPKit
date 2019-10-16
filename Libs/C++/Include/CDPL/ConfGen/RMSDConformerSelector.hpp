@@ -37,7 +37,7 @@
 #include <boost/iterator/indirect_iterator.hpp>
 
 #include "CDPL/ConfGen/APIPrefix.hpp"
-#include "CDPL/ConfGen/ConformerData.hpp"
+#include "CDPL/ConfGen/ConformerDataArray.hpp"
 #include "CDPL/Chem/Fragment.hpp"
 #include "CDPL/Chem/StereoDescriptor.hpp"
 #include "CDPL/Chem/AutomorphismGroupSearch.hpp"
@@ -62,10 +62,9 @@ namespace CDPL
 		class CDPL_CONFGEN_API RMSDConformerSelector
 		{
 
-			typedef std::vector<const ConformerData*> ConformerList;
-
 		  public:
-			typedef boost::indirect_iterator<ConformerList::const_iterator, const ConformerData> ConstConformerIterator;
+			typedef boost::indirect_iterator<ConformerDataArray::const_iterator, const ConformerData> ConstConformerIterator;
+			typedef boost::indirect_iterator<ConformerDataArray::iterator, ConformerData> ConformerIterator;
 
 			RMSDConformerSelector();
 	
@@ -78,7 +77,7 @@ namespace CDPL
 			void setup(const Chem::MolecularGraph& molgraph, const Util::BitSet& atom_mask, 
 					   const Util::BitSet& stable_config_atom_mask, const Math::Vector3DArray& coords);
 
-			bool process(const ConformerData& conf_data);
+			bool process(const ConformerData::SharedPointer& conf_data);
 
 			void clearConformers();
 
@@ -86,9 +85,15 @@ namespace CDPL
 
 			const ConformerData& getConformer(std::size_t idx) const;
 
+			ConformerData& getConformer(std::size_t idx);
+
 			ConstConformerIterator getConformersBegin() const;
 
 			ConstConformerIterator getConformersEnd() const;
+
+			ConformerIterator getConformersBegin();
+
+			ConformerIterator getConformersEnd();
 
 		  private:
 			typedef std::vector<std::size_t> IndexArray;
@@ -127,7 +132,7 @@ namespace CDPL
 			AlignmentCalculator           alignmentCalc;
 			VectorArrayList               confAlignCoords;
 			VectorArrayList               selectedConfAlignCoords;
-			ConformerList                 selectedConfs;
+			ConformerDataArray            selectedConfs;
 			AtomList                      atomNeighbors;
 			double                        minRMSD;
 		};

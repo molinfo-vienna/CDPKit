@@ -51,12 +51,11 @@ namespace CDPL
 		struct ForceFieldInteractionMask 
 		{
 
-
-			void init(std::size_t num_bs_ia, std::size_t num_ab_ia, std::size_t num_sb_ia,
+			void setup(std::size_t num_bs_ia, std::size_t num_ab_ia, std::size_t num_sb_ia,
 					  std::size_t num_oop_ia, std::size_t num_tor_ia, std::size_t num_vdw_ia,
 					  std::size_t num_els_ia);
 
-			void init(const ForceField::MMFF94InteractionData& ia_data); 
+			void setup(const ForceField::MMFF94InteractionData& ia_data); 
 			
 			Util::BitSet bondStretching;
 			Util::BitSet angleBending;

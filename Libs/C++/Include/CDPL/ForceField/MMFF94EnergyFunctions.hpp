@@ -312,6 +312,44 @@ namespace CDPL
 											  const ValueType& r_IJ, const ValueType& r_IJ_7);
 
 		/**
+		 * \brief Calculates the van der Waals interaction energy \f$ E_{vdW_{ij}} \f$ for the atom pair \e i-j.
+		 *
+		 * \f$ E_{vdW_{ij}} = \varepsilon_{IJ} \: (\frac{1.07 \: R_{IJ}^*}{(R_{ij} + 0.07 \: R_{IJ}^*)})^7 \: (\frac{1.12 \: R_{IJ}^{*^7}}{(R_{ij}^7 + 0.12 \: R_{IJ}^{*^7})} - 2) \;\;\;\; (1) \f$
+		 *
+		 * where<br>
+		 * \f$ R_{ij} \f$ = the interatomic distance (see calcDistance()).<br>
+		 * \f$ R_{II}^* = A_I \: \alpha_I^{PEXP} \;\;\;\; (2) \f$<br>
+		 * \f$ R_{IJ}^* = 0.5 \: (R_{II}^* + R_{JJ}^*) \: (1 + AFACT(1 - \exp(-BFACT \: \gamma_{IJ}^2))) \;\;\;\; (3) \f$<br> 
+		 * \f$ \gamma_{IJ} = \frac{(R_{II}^* - R_{JJ}^*)}{(R_{II}^* + R_{JJ}^*)} \;\;\;\; (4) \f$ <br>
+		 * \f$ \varepsilon_{IJ} = \frac{181.16 \: G_I \: GJ \: \alpha_I \: \alpha_J}{((\alpha_I / N_I)^{1/2} + (\alpha_J / N_J)^{1/2})} \: \frac{1}{R_{IJ}^{*^6}} \;\;\;\; (5) \f$<br>
+		 *
+		 * MMFF employs a "Buffered 14-7" form (eq 1) together with an 
+		 * expression which relates the minimum-energy separation \f$ R_{II}^* \f$ to the 
+		 * atomic polarizability \f$ \alpha_I \f$ (eq 2), a specially formulated combination rule 
+		 * (eqs 3, 4), and a Slater-Kirkwood expression for the well depth \f$ \varepsilon_{IJ} \f$ (eq 5): 
+		 * The first non-comment line in the parameter file "MMFFVDW.PAR" contains five floating 
+		 * point numbers which define the variables \e PEXP, \e AFACT, \e BFACT, \e DARAD, and 
+		 * \e DAEPS, respectively. \e PEXP (currently \e 0.25), \e AFACT (currently \e 0.2) and \e BFACT 
+		 * (currently \e 12.0) are used in the equations shown above; \e DARAD and \e DAEPS 
+		 * are used as follows:
+		 *
+		 * When either \e i or \e j is a hydrogen-bond donor, MMFF uses the simple
+		 * arithmetic mean \f$ 0.5 \: (R_{II}^* + R_{JJ}^*) \f$ instead of eq 3 to obtain \f$ R_{IJ}^* \f$. If the
+		 * \e i-j interaction is a donor-acceptor interaction, MMFF also scales \f$ R_{IJ}^* \f$ as given
+		 * by eq 3 by \e DARAD (currently \e 0.8) and \f$ \varepsilon_{IJ} \f$ as given by eq 5 by \e DAEPS (currently
+		 * \e 0.5). 
+		 *   
+		 * \param r_ij The interatomic distance \f$ R_{ij} \f$ of atom \e i and atom \e j.
+		 * \param e_IJ The precalculated value \f$ \varepsilon_{IJ} \f$.
+		 * \param r_IJ The precalculated value \f$ R_{IJ}^* \f$.
+		 * \param r_IJ_7 The precalculated value \f$ R_{IJ}^{*^7} \f$.
+		 * \return The calculated van der Waals interaction energy \f$ E_{vdW_{ij}} \f$.
+		 */
+		template <typename ValueType>
+		ValueType calcMMFF94VanDerWaalsEnergy(const ValueType& r_ij, const ValueType& e_IJ, 
+											  const ValueType& r_IJ, const ValueType& r_IJ_7);
+
+		/**
 		 * @}
 		 */
     }
@@ -514,7 +552,9 @@ ValueType CDPL::ForceField::calcMMFF94ElectrostaticEnergy(const CoordsVec& atom1
 template <typename ValueType, typename Iter, typename CoordsArray>
 ValueType CDPL::ForceField::calcMMFF94VanDerWaalsEnergy(Iter beg, const Iter& end, const CoordsArray& coords)
 {
-	return Detail::accumMMFF94InteractionEnergies<ValueType>(beg, end, coords, &calcMMFF94VanDerWaalsEnergy<ValueType, CoordsArray>);
+	return Detail::accumMMFF94InteractionEnergies<ValueType>(beg, end, coords, 
+															 static_cast<ValueType (*)(const MMFF94VanDerWaalsInteraction&, const CoordsArray&)>(
+																 &calcMMFF94VanDerWaalsEnergy<ValueType, CoordsArray>));
 }
 
 template <typename ValueType, typename CoordsArray>
@@ -530,6 +570,22 @@ ValueType CDPL::ForceField::calcMMFF94VanDerWaalsEnergy(const CoordsVec& atom1_p
 {
 	ValueType r_ij_2 = calcSquaredDistance<ValueType>(atom1_pos, atom2_pos);
 	ValueType r_ij = std::sqrt(r_ij_2);
+    ValueType r_ij_7 = r_ij_2 * r_ij_2 * r_ij_2 * r_ij;
+    
+    ValueType tmp = ValueType(1.07) * r_IJ / (r_ij + ValueType(0.07) * r_IJ);
+    ValueType tmp_2 = tmp * tmp;
+    ValueType tmp_7 = tmp_2 * tmp_2 * tmp_2 * tmp;
+
+    ValueType e_vdw = e_IJ * tmp_7 * (ValueType(1.12) * r_IJ_7 / (r_ij_7 + ValueType(0.12) * r_IJ_7) - 2);
+
+	return e_vdw;
+}
+
+template <typename ValueType>
+ValueType CDPL::ForceField::calcMMFF94VanDerWaalsEnergy(const ValueType& r_ij, const ValueType& e_IJ, 
+														const ValueType& r_IJ, const ValueType& r_IJ_7)
+{
+	ValueType r_ij_2 = r_ij * r_ij;
     ValueType r_ij_7 = r_ij_2 * r_ij_2 * r_ij_2 * r_ij;
     
     ValueType tmp = ValueType(1.07) * r_IJ / (r_ij + ValueType(0.07) * r_IJ);

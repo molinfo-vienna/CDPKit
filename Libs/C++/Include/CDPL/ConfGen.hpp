@@ -38,6 +38,7 @@
 #include "CDPL/ConfGen/DGStructureGenerator.hpp"
 #include "CDPL/ConfGen/DGStructureGeneratorSettings.hpp"
 #include "CDPL/ConfGen/ConformerData.hpp"
+#include "CDPL/ConfGen/ConformerDataArray.hpp"
 #include "CDPL/ConfGen/FragmentLibraryEntry.hpp"
 #include "CDPL/ConfGen/FragmentLibrary.hpp"
 #include "CDPL/ConfGen/TorsionRule.hpp"

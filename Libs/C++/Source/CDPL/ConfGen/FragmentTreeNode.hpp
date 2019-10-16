@@ -31,9 +31,7 @@
 #ifndef CDPL_CONFGEN_FRAGMENTTREENODE_HPP
 #define CDPL_CONFGEN_FRAGMENTTREENODE_HPP
 
-#include <vector>
-
-#include "CDPL/ConfGen/ConformerData.hpp"
+#include "CDPL/ConfGen/ConformerDataArray.hpp"
 #include "CDPL/ForceField/MMFF94InteractionData.hpp"
 #include "CDPL/Util/BitSet.hpp"
 
@@ -61,7 +59,6 @@ namespace CDPL
 			friend class FragmentTree;
 
 		public:
-			typedef std::vector<ConformerData::SharedPointer> ConformerDataArray;
 			typedef std::vector<std::size_t> IndexArray;
 			typedef std::vector<double> TorsionAngleArray;	
 			typedef std::vector<double> DoubleArray;	
@@ -109,15 +106,15 @@ namespace CDPL
 
 			const ForceField::MMFF94InteractionData& getMMFF94Parameters() const;
 
-			void distributeMMFF94Parameters(const ForceField::MMFF94InteractionData& ia_data,
-											ForceFieldInteractionMask& ia_mask);
+			void distMMFF94Parameters(const ForceField::MMFF94InteractionData& ia_data,
+									  ForceFieldInteractionMask& ia_mask);
 			
 			void clearConformersDownwards();
 			void clearConformersUpwards();
 			
-			void addConformer(const Math::Vector3DArray& src_coords, bool calc_energy);
+			void addConformer(const Math::Vector3DArray& src_coords);
 
-			void generateConformers();
+			unsigned int generateConformers(bool e_ordered);
 
 		private:
 			FragmentTreeNode(FragmentTree& owner);
@@ -125,8 +122,8 @@ namespace CDPL
 
 			FragmentTreeNode& operator=(const FragmentTreeNode&);
 
-			void lineupChildConformers();
-			void alignAndRotateChildConformers();
+			unsigned int lineupChildConformers();
+			unsigned int alignAndRotateChildConformers();
 
 			void setParent(FragmentTreeNode* node);
 

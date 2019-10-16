@@ -65,6 +65,8 @@ namespace CDPL
 
 	    const int ABORTED                        = 7;
 
+	    const int NO_INPUT_COORDINATES           = 8;
+
 	    const int ERROR                          = 10;
 	}
 

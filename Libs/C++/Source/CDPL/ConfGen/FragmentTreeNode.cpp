@@ -27,7 +27,9 @@
 #include "StaticInit.hpp"
 
 #include <cmath>
+#include <algorithm>
 
+#include "CDPL/ConfGen/ReturnCode.hpp"
 #include "CDPL/Chem/MolecularGraph.hpp"
 #include "CDPL/Chem/Atom.hpp"
 #include "CDPL/Chem/Bond.hpp"
@@ -97,9 +99,14 @@ namespace
 		}
 	}
 
-	const double CONFORMER_LINEUP_SPACING        = 4.0;
-	const double ATOM_CLASH_VDW_ENERGY_THRESHOLD = 5.0;
-	const double MAX_TORSION_REF_BOND_ANGLE_COS  = std::cos(5.0 / 180.0 * M_PI);
+	bool compareConformerEnergy(const ConfGen::ConformerData::SharedPointer& conf_data1, 
+								const ConfGen::ConformerData::SharedPointer& conf_data2)
+	{
+		return (conf_data1->getEnergy() < conf_data2->getEnergy());
+	} 
+
+	const double CONFORMER_LINEUP_SPACING       = 4.0;
+	const double MAX_TORSION_REF_BOND_ANGLE_COS = std::cos(2.5 / 180.0 * M_PI);
 }
 
 
@@ -189,12 +196,12 @@ const ConfGen::FragmentTreeNode* ConfGen::FragmentTreeNode::getRightChild() cons
 	return rightChild;
 }
 
-const ConfGen::FragmentTreeNode::ConformerDataArray& ConfGen::FragmentTreeNode::getConformers() const
+const ConfGen::ConformerDataArray& ConfGen::FragmentTreeNode::getConformers() const
 {
 	return conformers;
 }
 
-ConfGen::FragmentTreeNode::ConformerDataArray& ConfGen::FragmentTreeNode::getConformers()
+ConfGen::ConformerDataArray& ConfGen::FragmentTreeNode::getConformers()
 {
 	return conformers;
 }
@@ -234,12 +241,12 @@ const ForceField::MMFF94InteractionData& ConfGen::FragmentTreeNode::getMMFF94Par
 	return mmff94Data;
 }
 
-void ConfGen::FragmentTreeNode::distributeMMFF94Parameters(const ForceField::MMFF94InteractionData& ia_data,
-														   ForceFieldInteractionMask& ia_mask)
+void ConfGen::FragmentTreeNode::distMMFF94Parameters(const ForceField::MMFF94InteractionData& ia_data,
+													 ForceFieldInteractionMask& ia_mask)
 {
 	if (hasChildren()) {
-		leftChild->distributeMMFF94Parameters(ia_data, ia_mask);
-		rightChild->distributeMMFF94Parameters(ia_data, ia_mask);
+		leftChild->distMMFF94Parameters(ia_data, ia_mask);
+		rightChild->distMMFF94Parameters(ia_data, ia_mask);
 	}
 
 	extractFragmentMMFF94InteractionParams2(ia_data.getBondStretchingInteractions(), mmff94Data.getBondStretchingInteractions(), 
@@ -276,32 +283,49 @@ void ConfGen::FragmentTreeNode::clearConformersUpwards()
 		parent->clearConformersUpwards();
 }
 
-void ConfGen::FragmentTreeNode::addConformer(const Math::Vector3DArray& src_coords, bool calc_energy)
+void ConfGen::FragmentTreeNode::addConformer(const Math::Vector3DArray& src_coords)
 {
 	ConformerData::SharedPointer new_conf = owner.allocConformerData();
 
 	copyCoordinates(src_coords, atomIndices, *new_conf);
 
-	new_conf->setEnergy(calc_energy ? calcMMFF94Energy(src_coords) : 0.0);
+	new_conf->setEnergy(calcMMFF94Energy(src_coords));
 
 	conformers.push_back(new_conf);
 }
 
-void ConfGen::FragmentTreeNode::generateConformers()
+unsigned int ConfGen::FragmentTreeNode::generateConformers(bool e_ordered)
 {
-	if (!conformers.empty() || !hasChildren())
-		return;
+	if (conformers.empty()) {
+		if (!hasChildren())
+			return ReturnCode::NO_INPUT_COORDINATES;
 
-	leftChild->generateConformers();
-	rightChild->generateConformers();
+		unsigned int ret_code = leftChild->generateConformers(e_ordered);
 
-	if (!splitBondAtoms[0] || !splitBondAtoms[1])
-		lineupChildConformers();
-	else
-		alignAndRotateChildConformers();
+		if (ret_code != ReturnCode::SUCCESS)
+			return ret_code;
+
+		ret_code = rightChild->generateConformers(e_ordered);
+
+		if (ret_code != ReturnCode::SUCCESS)
+			return ret_code;
+
+		if (!splitBondAtoms[0] || !splitBondAtoms[1])
+			ret_code = lineupChildConformers();
+		else
+			ret_code = alignAndRotateChildConformers();
+
+		if (ret_code != ReturnCode::SUCCESS)
+			return ret_code;
+	}
+
+	if (e_ordered && conformers.size() > 1) 
+		std::sort(conformers.begin(), conformers.end(), &compareConformerEnergy); 
+
+	return ReturnCode::SUCCESS;
 }
 
-void ConfGen::FragmentTreeNode::lineupChildConformers()
+unsigned int ConfGen::FragmentTreeNode::lineupChildConformers()
 {
 	std::size_t num_right_chld_confs = rightChild->conformers.size();
 
@@ -316,6 +340,9 @@ void ConfGen::FragmentTreeNode::lineupChildConformers()
 	Math::Vector3D::ConstPointer left_conf_bbox_max_data = left_conf_bbox_max.getData();
 
 	for (std::size_t i = 0, num_left_chld_confs = leftChild->conformers.size(); i < num_left_chld_confs; i++) {
+		if (!owner.progress())
+			return ReturnCode::ABORTED;
+
 		const ConformerData& left_conf = *leftChild->conformers[i];
 
 		calcConformerBounds(left_conf_bbox_min, left_conf_bbox_max, leftChild->atomIndices, left_conf);
@@ -353,15 +380,17 @@ void ConfGen::FragmentTreeNode::lineupChildConformers()
 			conformers.push_back(new_conf);
 		}
 	}
+
+	return ReturnCode::SUCCESS;
 }
 
-void ConfGen::FragmentTreeNode::alignAndRotateChildConformers()
+unsigned int ConfGen::FragmentTreeNode::alignAndRotateChildConformers()
 {
 	std::size_t num_tor_angles = torsionAngles.size();
 
 	if (num_tor_angles > 0 && torsionAngleSines.empty()) {
 		for (TorsionAngleArray::const_iterator it = torsionAngles.begin(), end = torsionAngles.end(); it != end; ++it) {
-			double angle = M_PI * (*it) / 180.0;
+			double angle = -M_PI * (*it) / 180.0;
 
 			torsionAngleSines.push_back(std::sin(angle));
 			torsionAngleCosines.push_back(std::cos(angle));
@@ -436,7 +465,10 @@ void ConfGen::FragmentTreeNode::alignAndRotateChildConformers()
 		alignCoordinates(almnt_mtx, conf, rightChild->atomIndices, right_atom_idx, left_atom_idx, bond_len);
 	}
 
-	for (std::size_t i = 0, num_left_chld_confs = leftChild->conformers.size(); i < num_left_chld_confs; i++) {
+	for (std::size_t i = 0; i < num_left_chld_confs; i++) {
+		if (!owner.progress())
+			return ReturnCode::ABORTED;
+
 		const ConformerData& left_conf = *leftChild->conformers[i];
 
 		for (std::size_t j = 0; j < num_right_chld_confs; j++) {
@@ -472,6 +504,8 @@ void ConfGen::FragmentTreeNode::alignAndRotateChildConformers()
 			}
 		}
 	}
+
+	return ReturnCode::SUCCESS;
 }
 
 void ConfGen::FragmentTreeNode::setParent(FragmentTreeNode* node)
@@ -508,9 +542,6 @@ void ConfGen::FragmentTreeNode::setRootMolecularGraph(const Chem::MolecularGraph
 
 void ConfGen::FragmentTreeNode::initFragmentData()
 {
-	if (!hasChildren()) // sanity check
-		return;
-		
 	atomMask = leftChild->atomMask;
 	atomMask |= rightChild->atomMask;
 
@@ -676,6 +707,10 @@ void ConfGen::FragmentTreeNode::alignCoordinates(const double almnt_mtx[3][3], M
 	Math::Vector3DArray::StorageType& coords_data = coords.getData();
 	Math::Vector3D::ConstPointer ctr_atom_pos_data = coords_data[ctr_atom_idx].getData();
 
+	double ctr_atom_pos_x = ctr_atom_pos_data[0];
+	double ctr_atom_pos_y = ctr_atom_pos_data[1];
+	double ctr_atom_pos_z = ctr_atom_pos_data[2];
+
 	for (IndexArray::const_iterator it = atom_inds.begin(), end = atom_inds.end(); it != end; ++it) {
 		std::size_t idx = *it;
 
@@ -684,9 +719,9 @@ void ConfGen::FragmentTreeNode::alignCoordinates(const double almnt_mtx[3][3], M
 
 		Math::Vector3D::Pointer atom_pos_data = coords_data[idx].getData();
 
-		double ctrd_x = atom_pos_data[0] - ctr_atom_pos_data[0];
-		double ctrd_y = atom_pos_data[1] - ctr_atom_pos_data[1];
-		double ctrd_z = atom_pos_data[2] - ctr_atom_pos_data[2];
+		double ctrd_x = atom_pos_data[0] - ctr_atom_pos_x;
+		double ctrd_y = atom_pos_data[1] - ctr_atom_pos_y;
+		double ctrd_z = atom_pos_data[2] - ctr_atom_pos_z;
 
 		atom_pos_data[0] = almnt_mtx[0][0] * ctrd_x + almnt_mtx[0][1] * ctrd_y + almnt_mtx[0][2] * ctrd_z + x_disp;
 		atom_pos_data[1] = almnt_mtx[1][0] * ctrd_x + almnt_mtx[1][1] * ctrd_y + almnt_mtx[1][2] * ctrd_z;
@@ -706,8 +741,10 @@ void ConfGen::FragmentTreeNode::calcAlignmentMatrix(const Math::Vector3D& bond_v
 
 		y_axis.assign(crossProd(orth_bond_vec, bond_vec));
 
-	} else
+	} else {
 		y_axis.assign(crossProd(tor_ref_vec, bond_vec));
+		y_axis /= length(y_axis);
+	}
 
 	Math::Vector3D z_axis(crossProd(bond_vec, y_axis));
 
@@ -789,9 +826,12 @@ void ConfGen::FragmentTreeNode::calcVirtualTorsionReferenceAtomVector(const Math
 
 double ConfGen::FragmentTreeNode::calcMMFF94Energy(const Math::Vector3DArray& coords) const
 {
-	return (ForceField::calcMMFF94VanDerWaalsEnergy<double>(mmff94Data.getVanDerWaalsInteractions().getElementsBegin(),
-															mmff94Data.getVanDerWaalsInteractions().getElementsEnd(), 
-															coords.getData()) +
+	using namespace ForceField;
+
+	return (calcMMFF94VanDerWaalsEnergy<double, MMFF94VanDerWaalsInteractionData::ConstElementIterator, Math::Vector3DArray::StorageType>(
+				mmff94Data.getVanDerWaalsInteractions().getElementsBegin(),
+				mmff94Data.getVanDerWaalsInteractions().getElementsEnd(), 
+				coords.getData()) +
 			calcNonVdWMMFF94Energies(coords));
 }
 
@@ -802,19 +842,26 @@ double ConfGen::FragmentTreeNode::calcMMFF94Energy(const Math::Vector3DArray& co
 	atom_clash = false;
 
 	const Math::Vector3DArray::StorageType& coords_data = coords.getData();
+	const FragmentTree::DoubleArray& clash_radii = owner.getAtomClashRadiusTable();
+
 	double vdw_e = 0.0;
 
 	for (MMFF94VanDerWaalsInteractionData::ConstElementIterator it = mmff94Data.getVanDerWaalsInteractions().getElementsBegin(),
 			 end = mmff94Data.getVanDerWaalsInteractions().getElementsEnd(); it != end; ++it) {
 
-		double energy = calcMMFF94VanDerWaalsEnergy<double>(*it, coords_data);
+		const MMFF94VanDerWaalsInteraction& iaction = *it;
+		std::size_t atom1_idx = iaction.getAtom1Index();
+		std::size_t atom2_idx = iaction.getAtom2Index();
 
-		if (energy >= ATOM_CLASH_VDW_ENERGY_THRESHOLD) {
+		double dist = calcDistance<double>(coords_data[atom1_idx], coords_data[atom2_idx]);
+		double clash_dist = clash_radii[atom1_idx] + clash_radii[atom2_idx];
+
+		if (dist <= clash_dist) {
 			atom_clash = true;
 			return 0.0;
 		}
 
-		vdw_e += energy;
+		vdw_e += calcMMFF94VanDerWaalsEnergy(dist, iaction.getEIJ(), iaction.getRIJ(), iaction.getRIJPow7());
 	}
 
 	return (vdw_e +	calcNonVdWMMFF94Energies(coords));

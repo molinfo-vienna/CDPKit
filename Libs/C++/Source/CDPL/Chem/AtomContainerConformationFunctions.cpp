@@ -39,6 +39,11 @@
 using namespace CDPL; 
 
 
+void Chem::clearConformations(AtomContainer& cntnr)
+{
+	std::for_each(cntnr.getAtomsBegin(), cntnr.getAtomsEnd(), &clear3DCoordinatesArray);
+}
+
 std::size_t Chem::getNumConformations(const AtomContainer& cntnr)
 {
 	std::size_t num_confs = std::numeric_limits<std::size_t>::max();

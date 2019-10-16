@@ -31,6 +31,8 @@
 #ifndef CDPL_CONFGEN_UTILITYFUNCTIONS_HPP
 #define CDPL_CONFGEN_UTILITYFUNCTIONS_HPP
 
+#include <cstddef>
+
 #include "CDPL/ConfGen/APIPrefix.hpp"
 #include "CDPL/Util/BitSet.hpp"
 
@@ -63,14 +65,23 @@ namespace CDPL
 
 		CDPL_CONFGEN_API bool isFragmentLinkBond(const Chem::Bond& bond, const Chem::MolecularGraph& molgraph); 
 
-		CDPL_CONFGEN_API std::size_t buildFragmentLinkBondMask(const Chem::MolecularGraph& molgraph, Util::BitSet& mask, bool reset = true);
+		CDPL_CONFGEN_API std::size_t buildFragmentLinkBondMask(const Chem::MolecularGraph& molgraph, Util::BitSet& bond_mask, bool reset = true);
+
+		CDPL_CONFGEN_API bool isRotatableBond(const Chem::Bond& bond, const Chem::MolecularGraph& molgraph, bool het_h_rotors);
+
+		CDPL_CONFGEN_API std::size_t buildRotatableBondMask(const Chem::MolecularGraph& molgraph, Util::BitSet& bond_mask, 
+															bool het_h_rotors, bool reset = true);
+
+		CDPL_CONFGEN_API std::size_t buildRotatableBondMask(const Chem::MolecularGraph& molgraph, const Util::BitSet& excl_bond_mask,
+															Util::BitSet& bond_mask, bool het_h_rotors, bool reset = true);
 
 		CDPL_CONFGEN_API unsigned int perceiveFragmentType(const Chem::MolecularGraph& molgraph); 
 
 		CDPL_CONFGEN_API void prepareForConformerGeneration(Chem::Molecule& mol); 
 
-		CDPL_CONFGEN_API void parameterizeMMFF94Interactions(const Chem::MolecularGraph& molgraph, ForceField::MMFF94InteractionParameterizer& parameterizer,
-															 ForceField::MMFF94InteractionData& param_data, unsigned int ff_type); 
+		CDPL_CONFGEN_API unsigned int parameterizeMMFF94Interactions(const Chem::MolecularGraph& molgraph, 
+																	 ForceField::MMFF94InteractionParameterizer& parameterizer,
+																	 ForceField::MMFF94InteractionData& param_data, unsigned int ff_type); 
 		
 		/**
 		 * @}

@@ -159,6 +159,11 @@ namespace
 	{
 		return CDPL::ForceField::calcMMFF94VanDerWaalsEnergy(atom1_pos, atom2_pos, e_IJ, r_IJ, r_IJ_7);
 	}
+
+	double calcMMFF94VanDerWaalsEnergy4(double r_ij, double e_IJ, double r_IJ, double r_IJ_7)
+	{
+		return CDPL::ForceField::calcMMFF94VanDerWaalsEnergy(r_ij, e_IJ, r_IJ, r_IJ_7);
+	}
 }
 
 
@@ -224,4 +229,6 @@ void CDPLPythonForceField::exportMMFF94EnergyFunctions()
 	python::def("calcMMFF94VanDerWaalsEnergy", &calcMMFF94VanDerWaalsEnergy3,
 				(python::arg("atom1_pos"), python::arg("atom2_pos"), python::arg("e_IJ"), 
 				 python::arg("r_IJ"), python::arg("r_IJ_7")));
+	python::def("calcMMFF94VanDerWaalsEnergy", &calcMMFF94VanDerWaalsEnergy4,
+				(python::arg("r_ij"), python::arg("e_IJ"), python::arg("r_IJ"), python::arg("r_IJ_7")));
 }

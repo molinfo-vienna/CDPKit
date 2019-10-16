@@ -150,11 +150,12 @@ def cleanStructures():
     Chem.setMultiConfExportParameter(writer, False)
     Chem.setMultiConfExportParameter(dwriter, False)
 
-    print('Skipping Molecules to Start Index ' + str(offset), file=sys.stderr)
-    reader.setRecordIndex(offset)
+    if offset > 0:
+        print('Skipping Molecules to Start Index ' + str(offset), file=sys.stderr)
+        reader.setRecordIndex(offset)
+        #print('Finished Setting Record Index', file=sys.stderr)
 
     stats.read = offset
-    #print('Finished Setting Record Index', file=sys.stderr)
     
     while reader.read(mol):
         #print('Processing Molecule ' + str(stats.read)

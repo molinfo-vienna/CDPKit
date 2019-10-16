@@ -31,14 +31,27 @@
 #ifndef CDPL_CONFGEN_TORSIONDRIVER_HPP
 #define CDPL_CONFGEN_TORSIONDRIVER_HPP
 
+#include <cstddef>
 #include <memory>
+
+#include <boost/iterator/indirect_iterator.hpp>
 
 #include "CDPL/ConfGen/APIPrefix.hpp"
 #include "CDPL/ConfGen/TorsionDriverSettings.hpp"
+#include "CDPL/ConfGen/ProgressCallbackFunction.hpp"
+#include "CDPL/ConfGen/ConformerDataArray.hpp"
+#include "CDPL/Util/BitSet.hpp"
+#include "CDPL/Math/VectorArray.hpp"
 
 
 namespace CDPL 
 {
+
+	namespace Chem
+	{
+
+		class MolecularGraph;
+	}
 
     namespace ConfGen 
     {
@@ -54,11 +67,45 @@ namespace CDPL
 		{
 
 		  public:
+			typedef boost::indirect_iterator<ConformerDataArray::const_iterator, const ConformerData> ConstConformerIterator;
+			typedef boost::indirect_iterator<ConformerDataArray::const_iterator, ConformerData> ConformerIterator;
+
 			TorsionDriver();
+
+			~TorsionDriver();
 	
 			const TorsionDriverSettings& getSettings() const;
 
 			TorsionDriverSettings& getSettings();
+
+			unsigned int setup(const Chem::MolecularGraph& molgraph);
+			unsigned int setup(const Chem::MolecularGraph& molgraph, const Util::BitSet& bond_mask, bool is_excl_mask);
+
+			unsigned int clearInputCoordinates();
+			unsigned int clearInputCoordinates(const Util::BitSet& atom_mask);
+
+			unsigned int addInputCoordinates(const Math::Vector3DArray& coords);
+			unsigned int addInputCoordinates(const Math::Vector3DArray& coords, const Util::BitSet& atom_mask);
+
+			void setProgressCallback(const ProgressCallbackFunction& func);
+
+			const ProgressCallbackFunction& getProgressCallback() const;
+
+			unsigned int drive();
+
+			std::size_t getNumConformers() const;
+
+			const ConformerData& getConformer(std::size_t idx) const;
+
+			ConformerData& getConformer(std::size_t idx);
+
+			ConstConformerIterator getConformersBegin() const;
+
+			ConstConformerIterator getConformersEnd() const;
+
+			ConformerIterator getConformersBegin();
+
+			ConformerIterator getConformersEnd();
 
 		  private:
 			TorsionDriver(const TorsionDriver&);

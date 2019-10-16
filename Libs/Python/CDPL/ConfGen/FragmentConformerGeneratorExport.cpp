@@ -53,9 +53,11 @@ void CDPLPythonConfGen::exportFragmentConformerGenerator()
 		.def("generate", &ConfGen::FragmentConformerGenerator::generate, 
 			 (python::arg("self"), python::arg("molgraph"), python::arg("frag_type")))
 		.def("getNumConformers", &ConfGen::FragmentConformerGenerator::getNumConformers, python::arg("self"))
-		.def("getConformer", &ConfGen::FragmentConformerGenerator::getConformer,
+		.def("getConformer", 
+			 static_cast<ConfGen::ConformerData& (ConfGen::FragmentConformerGenerator::*)(std::size_t)>(&ConfGen::FragmentConformerGenerator::getConformer),
 			 (python::arg("self"), python::arg("conf_idx")), python::return_internal_reference<>())
-		.def("__getitem__", &ConfGen::FragmentConformerGenerator::getConformer,
+		.def("__getitem__", 
+			 static_cast<ConfGen::ConformerData& (ConfGen::FragmentConformerGenerator::*)(std::size_t)>(&ConfGen::FragmentConformerGenerator::getConformer),
 			 (python::arg("self"), python::arg("conf_idx")), python::return_internal_reference<>())
 		.def("getSettings", 
 			 static_cast<ConfGen::FragmentConformerGeneratorSettings& (ConfGen::FragmentConformerGenerator::*)()>

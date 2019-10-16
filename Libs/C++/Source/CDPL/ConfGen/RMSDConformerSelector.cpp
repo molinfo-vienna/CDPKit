@@ -102,7 +102,7 @@ void ConfGen::RMSDConformerSelector::setup(const Chem::MolecularGraph& molgraph,
 	setupSymMappingValidationData(stable_config_atom_mask, coords);
 }
 
-bool ConfGen::RMSDConformerSelector::process(const ConformerData& conf_data)
+bool ConfGen::RMSDConformerSelector::process(const ConformerData::SharedPointer& conf_data)
 {
 	if (symMappings.empty()) {
 		symMappingSearch.findMappings(symMappingSearchMolGraph);
@@ -125,7 +125,7 @@ bool ConfGen::RMSDConformerSelector::process(const ConformerData& conf_data)
 
 			for (std::size_t i = 0; i < num_mappings; i++) {
 				if (first_pass) 
-					confAlignCoords.push_back(buildCoordsArrayForMapping(*symMappings[i], conf_data));
+					confAlignCoords.push_back(buildCoordsArrayForMapping(*symMappings[i], *conf_data));
 				
 				if (!alignmentCalc.calculate(sel_conf_algn_coords, *confAlignCoords[i], false)) 
 					return false;
@@ -142,9 +142,9 @@ bool ConfGen::RMSDConformerSelector::process(const ConformerData& conf_data)
 		selectedConfAlignCoords.push_back(confAlignCoords.back());
 
 	} else
-		selectedConfAlignCoords.push_back(buildCoordsArrayForMapping(*symMappings.front(), conf_data));
+		selectedConfAlignCoords.push_back(buildCoordsArrayForMapping(*symMappings.front(), *conf_data));
 
-	selectedConfs.push_back(&conf_data);
+	selectedConfs.push_back(conf_data);
 
 	return true;
 }
@@ -167,12 +167,30 @@ const ConfGen::ConformerData& ConfGen::RMSDConformerSelector::getConformer(std::
     return *selectedConfs[idx];
 }
 
+ConfGen::ConformerData& ConfGen::RMSDConformerSelector::getConformer(std::size_t idx)
+{
+    if (idx >= selectedConfs.size())
+		throw Base::IndexError("RMSDConformerSelector: conformer index out of bounds");
+
+    return *selectedConfs[idx];
+}
+
 ConfGen::RMSDConformerSelector::ConstConformerIterator ConfGen::RMSDConformerSelector::getConformersBegin() const
 {
     return selectedConfs.begin();
 }
 
 ConfGen::RMSDConformerSelector::ConstConformerIterator ConfGen::RMSDConformerSelector::getConformersEnd() const
+{
+    return selectedConfs.end();
+}
+
+ConfGen::RMSDConformerSelector::ConformerIterator ConfGen::RMSDConformerSelector::getConformersBegin()
+{
+    return selectedConfs.begin();
+}
+
+ConfGen::RMSDConformerSelector::ConformerIterator ConfGen::RMSDConformerSelector::getConformersEnd()
 {
     return selectedConfs.end();
 }

@@ -58,12 +58,27 @@ namespace CDPL
 				
 			bool enumerateHeteroHydrogenRotors() const;
 
+			void orderByEnergy(bool order);
+
+			bool orderByEnergy() const;
+
+			void setForceFieldType(unsigned int type);
+	    
+			unsigned int getForceFieldType() const;
+			
+			void strictForceFieldParameterization(bool strict);
+
+			bool strictForceFieldParameterization() const;
+
 			void setTorsionLibrary(const TorsionLibrary::SharedPointer& lib);
 
 			const TorsionLibrary::SharedPointer& getTorsionLibrary() const;
 
 		  private:
 			bool                          enumHetHRotors;
+			bool                          energyOrdered;
+			unsigned int                  forceFieldType;
+			bool                          strictParam;
 			TorsionLibrary::SharedPointer torLib;
 		};
 

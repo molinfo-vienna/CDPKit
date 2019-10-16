@@ -40,19 +40,19 @@ namespace CDPL
     namespace ConfGen
     {
 
-	/**
-	 * \addtogroup CDPL_CONFGEN_DATA_STRUCTURES
-	 * @{
-	 */
+		/**
+		 * \addtogroup CDPL_CONFGEN_DATA_STRUCTURES
+		 * @{
+		 */
 
-	/**
-	 * \brief A generic wrapper class used to store a user-defined progress callback functions.
-	 */
-	typedef boost::function0<bool> ProgressCallbackFunction;
+		/**
+		 * \brief A generic wrapper class used to store a user-defined progress callback functions.
+		 */
+		typedef boost::function0<bool> ProgressCallbackFunction;
 
-	/**
-	 * @}
-	 */
+		/**
+		 * @}
+		 */
     }
 }
 

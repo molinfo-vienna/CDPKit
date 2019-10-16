@@ -27,6 +27,8 @@
 #include "StaticInit.hpp"
 
 #include "CDPL/ConfGen/TorsionDriver.hpp"
+#include "CDPL/ConfGen/ReturnCode.hpp"
+#include "CDPL/Base/Exceptions.hpp"
 
 #include "TorsionDriverImpl.hpp"
 
@@ -36,6 +38,9 @@ using namespace CDPL;
 
 ConfGen::TorsionDriver::TorsionDriver(): 
     impl(new TorsionDriverImpl())
+{}
+
+ConfGen::TorsionDriver::~TorsionDriver()
 {}
 
 const ConfGen::TorsionDriverSettings& 
@@ -48,4 +53,138 @@ ConfGen::TorsionDriverSettings&
 ConfGen::TorsionDriver::getSettings()
 {
     return impl->getSettings();
+}
+
+unsigned int ConfGen::TorsionDriver::setup(const Chem::MolecularGraph& molgraph)
+{
+	impl->setup(molgraph, molgraph);
+
+	if (!impl->setMMFF94Parameters(molgraph))
+		return ReturnCode::FORCEFIELD_SETUP_FAILED;
+
+	return ReturnCode::SUCCESS;
+}
+
+unsigned int ConfGen::TorsionDriver::setup(const Chem::MolecularGraph& molgraph, const Util::BitSet& bond_mask, bool is_excl_mask)
+{
+	impl->setup(molgraph, molgraph, bond_mask, is_excl_mask);
+
+	if (!impl->setMMFF94Parameters(molgraph))
+		return ReturnCode::FORCEFIELD_SETUP_FAILED;
+
+	return ReturnCode::SUCCESS;
+}
+
+unsigned int ConfGen::TorsionDriver::clearInputCoordinates()
+{
+	if (!impl->initialized())
+		return ReturnCode::UNINITIALIZED;
+
+	impl->clearInputCoordinates();
+
+	return ReturnCode::SUCCESS;
+}
+
+unsigned int ConfGen::TorsionDriver::clearInputCoordinates(const Util::BitSet& atom_mask)
+{
+	if (!impl->initialized())
+		return ReturnCode::UNINITIALIZED;
+
+	impl->clearInputCoordinates(atom_mask);
+
+	return ReturnCode::SUCCESS;
+}
+
+unsigned int ConfGen::TorsionDriver::addInputCoordinates(const Math::Vector3DArray& coords)
+{
+	if (!impl->initialized())
+		return ReturnCode::UNINITIALIZED;
+
+	impl->addInputCoordinates(coords);
+
+	return ReturnCode::SUCCESS;
+}
+
+unsigned int ConfGen::TorsionDriver::addInputCoordinates(const Math::Vector3DArray& coords, const Util::BitSet& atom_mask)
+{
+	if (!impl->initialized())
+		return ReturnCode::UNINITIALIZED;
+
+	impl->addInputCoordinates(coords, atom_mask);
+
+	return ReturnCode::SUCCESS;
+}
+
+void ConfGen::TorsionDriver::setProgressCallback(const ProgressCallbackFunction& func)
+{
+	impl->setProgressCallback(func);
+}
+
+const ConfGen::ProgressCallbackFunction& ConfGen::TorsionDriver::getProgressCallback() const
+{
+	return impl->getProgressCallback();
+}
+
+unsigned int ConfGen::TorsionDriver::drive()
+{
+	if (!impl->initialized())
+		return ReturnCode::UNINITIALIZED;
+
+	return impl->drive();
+}
+
+std::size_t ConfGen::TorsionDriver::getNumConformers() const
+{
+	if (!impl->initialized())
+		return 0;
+
+	return impl->getNumConformers();
+}
+
+const ConfGen::ConformerData& ConfGen::TorsionDriver::getConformer(std::size_t idx) const
+{
+	if (idx >= getNumConformers())
+		throw Base::IndexError("TorsionDriver: conformer index out of bounds");
+
+	return impl->getConformer(idx);
+}
+
+ConfGen::ConformerData& ConfGen::TorsionDriver::getConformer(std::size_t idx)
+{
+	if (idx >= getNumConformers())
+		throw Base::IndexError("TorsionDriver: conformer index out of bounds");
+
+	return impl->getConformer(idx);
+}
+
+ConfGen::TorsionDriver::ConstConformerIterator ConfGen::TorsionDriver::getConformersBegin() const
+{
+	if (!impl->initialized())
+		throw Base::OperationFailed("TorsionDriver: uninitialized");
+
+	return impl->getConformersBegin();
+}
+
+ConfGen::TorsionDriver::ConstConformerIterator ConfGen::TorsionDriver::getConformersEnd() const
+{
+	if (!impl->initialized())
+		throw Base::OperationFailed("TorsionDriver: uninitialized");
+
+	return impl->getConformersEnd();
+}
+
+ConfGen::TorsionDriver::ConformerIterator ConfGen::TorsionDriver::getConformersBegin()
+{
+	if (!impl->initialized())
+		throw Base::OperationFailed("TorsionDriver: uninitialized");
+
+	return impl->getConformersBegin();
+}
+
+ConfGen::TorsionDriver::ConformerIterator ConfGen::TorsionDriver::getConformersEnd()
+{
+	if (!impl->initialized())
+		throw Base::OperationFailed("TorsionDriver: uninitialized");
+
+	return impl->getConformersEnd();
 }

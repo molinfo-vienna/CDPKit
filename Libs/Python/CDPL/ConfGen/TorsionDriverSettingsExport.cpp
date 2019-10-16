@@ -38,16 +38,41 @@ void CDPLPythonConfGen::exportTorsionDriverSettings()
 {
     using namespace boost;
     using namespace CDPL;
-/*
-    typedef void (ConfGen::TorsionDriverSettings::*SetBoolFunc)(bool);
-    typedef bool (ConfGen::TorsionDriverSettings::*GetBoolFunc)() const;
-*/
-    python::class_<ConfGen::TorsionDriverSettings>("TorsionDriverSettings", python::no_init)
-	.def(python::init<>(python::arg("self")))
-	.def(python::init<const ConfGen::TorsionDriverSettings&>((python::arg("self"), python::arg("settings"))))
-	.def(CDPLPythonBase::ObjectIdentityCheckVisitor<ConfGen::TorsionDriverSettings>())
-	.def("assign", CDPLPythonBase::copyAssOp(&ConfGen::TorsionDriverSettings::operator=), 
-	     (python::arg("self"), python::arg("settings")), python::return_self<>())
-	.def_readonly("DEFAULT", ConfGen::TorsionDriverSettings::DEFAULT)
-	;
+
+	typedef void (ConfGen::TorsionDriverSettings::*SetBoolFunc)(bool);
+	typedef bool (ConfGen::TorsionDriverSettings::*GetBoolFunc)() const;
+
+	python::class_<ConfGen::TorsionDriverSettings>("TorsionDriverSettings", python::no_init)
+		.def(python::init<>(python::arg("self")))
+		.def(python::init<const ConfGen::TorsionDriverSettings&>((python::arg("self"), python::arg("settings"))))
+		.def(CDPLPythonBase::ObjectIdentityCheckVisitor<ConfGen::TorsionDriverSettings>())
+		.def("assign", CDPLPythonBase::copyAssOp(&ConfGen::TorsionDriverSettings::operator=), 
+			 (python::arg("self"), python::arg("settings")), python::return_self<>())
+		.def("enumerateHeteroHydrogenRotors", SetBoolFunc(&ConfGen::TorsionDriverSettings::enumerateHeteroHydrogenRotors), 
+			 (python::arg("self"), python::arg("enumerate")))
+		.def("enumerateHeteroHydrogenRotors", GetBoolFunc(&ConfGen::TorsionDriverSettings::enumerateHeteroHydrogenRotors), 
+			 python::arg("self"))
+		.def("setForceFieldType", &ConfGen::TorsionDriverSettings::setForceFieldType, 
+			 (python::arg("self"), python::arg("type")))
+		.def("getForceFieldType", &ConfGen::TorsionDriverSettings::getForceFieldType, 
+			 python::arg("self"))
+		.def("strictForceFieldParameterization", SetBoolFunc(&ConfGen::TorsionDriverSettings::strictForceFieldParameterization), 
+			 (python::arg("self"), python::arg("strict")))
+		.def("strictForceFieldParameterization", GetBoolFunc(&ConfGen::TorsionDriverSettings::strictForceFieldParameterization), 
+			 python::arg("self"))
+		.def("setTorsionLibrary", &ConfGen::TorsionDriverSettings::setTorsionLibrary, 
+			 (python::arg("self"), python::arg("lib")))
+		.def("getTorsionLibrary", &ConfGen::TorsionDriverSettings::getTorsionLibrary, 
+			 python::arg("self"), python::return_value_policy<python::copy_const_reference>())
+		.def_readonly("DEFAULT", ConfGen::TorsionDriverSettings::DEFAULT)
+		.add_property("enumHeteroHRotors", GetBoolFunc(&ConfGen::TorsionDriverSettings::enumerateHeteroHydrogenRotors),
+					  SetBoolFunc(&ConfGen::TorsionDriverSettings::enumerateHeteroHydrogenRotors))
+		.add_property("forceFieldType", &ConfGen::TorsionDriverSettings::getForceFieldType, 
+					  &ConfGen::TorsionDriverSettings::setForceFieldType)
+		.add_property("strictForceFieldParam", GetBoolFunc(&ConfGen::TorsionDriverSettings::strictForceFieldParameterization), 
+					  SetBoolFunc(&ConfGen::TorsionDriverSettings::strictForceFieldParameterization))
+		.add_property("torsionLibrary", 
+					  python::make_function(&ConfGen::TorsionDriverSettings::getTorsionLibrary,
+											python::return_value_policy<python::copy_const_reference>()),
+					  &ConfGen::TorsionDriverSettings::setTorsionLibrary);
 }

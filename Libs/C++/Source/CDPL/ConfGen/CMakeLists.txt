@@ -79,6 +79,7 @@ IF(Boost_TIMER_FOUND AND Boost_CHRONO_FOUND)
        ConformerGeneratorImpl.cpp
        ConformerGeneratorSettings.cpp
        FragmentConformerGenerator.cpp
+       FragmentConformerGeneratorImpl.cpp
        FragmentConformerGeneratorSettings.cpp
        FragmentLibraryGenerator.cpp
        FragmentAssembler.cpp
@@ -111,7 +112,7 @@ INSTALL(TARGETS cdpl-confgen-static
 
 ADD_LIBRARY(cdpl-confgen-shared SHARED ${cdpl-confgen_LIB_SRCS})
 
-TARGET_LINK_LIBRARIES(cdpl-confgen-shared cdpl-base-shared cdpl-chem-shared cdpl-math-shared cdpl-util-shared cdpl-forcefield-shared cdpl-internal-static)
+TARGET_LINK_LIBRARIES(cdpl-confgen-shared cdpl-chem-shared cdpl-base-shared cdpl-math-shared cdpl-util-shared cdpl-forcefield-shared cdpl-internal-static)
 
 IF(APPLE)
   SET_TARGET_PROPERTIES(cdpl-confgen-shared PROPERTIES VERSION "${CDPL_SO_VERSION}"

@@ -42,6 +42,11 @@ namespace
 	{
 		return CDPL::ConfGen::isFragmentLinkBond(bond, molgraph);
 	}
+
+	bool isRotatableBond(CDPL::Chem::Bond& bond, const CDPL::Chem::MolecularGraph& molgraph, bool het_h_rotors)
+	{
+		return CDPL::ConfGen::isRotatableBond(bond, molgraph, het_h_rotors);
+	}
 }
 
 
@@ -52,7 +57,15 @@ void CDPLPythonConfGen::exportUtilityFunctions()
 
 	python::def("isFragmentLinkBond", &isFragmentLinkBond, (python::arg("bond"), python::arg("molgraph"))); 
 	python::def("buildFragmentLinkBondMask", &ConfGen::buildFragmentLinkBondMask, 
-				(python::arg("molgraph"), python::arg("mask"), python::arg("reset") = true));
+				(python::arg("molgraph"), python::arg("bond_mask"), python::arg("reset") = true));
+	python::def("isRotatableBond", &isRotatableBond, (python::arg("bond"), python::arg("molgraph"), python::arg("het_h_rotors"))); 
+	python::def("buildRotatableBondMask", 
+				static_cast<std::size_t (*)(const Chem::MolecularGraph&, Util::BitSet&, bool, bool)>(&ConfGen::buildRotatableBondMask), 
+				(python::arg("molgraph"), python::arg("bond_mask"), python::arg("het_h_rotors"), python::arg("reset") = true));
+	python::def("buildRotatableBondMask", 
+				static_cast<std::size_t (*)(const Chem::MolecularGraph&, const Util::BitSet&, Util::BitSet&, bool, bool)>(&ConfGen::buildRotatableBondMask), 
+				(python::arg("molgraph"), python::arg("excl_bond_mask"), python::arg("bond_mask"), python::arg("het_h_rotors"), 
+				 python::arg("reset") = true));
 	python::def("perceiveFragmentType", &ConfGen::perceiveFragmentType, python::arg("molgraph"));
 	python::def("prepareForConformerGeneration", &ConfGen::prepareForConformerGeneration, python::arg("mol"));
 	python::def("parameterizeMMFF94Interactions", &ConfGen::parameterizeMMFF94Interactions, 

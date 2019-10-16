@@ -52,6 +52,7 @@ void CDPLPythonConfGen::exportReturnCodes()
 		.def_readonly("TIMEOUT_EXCEEDED", &ConfGen::ReturnCode::TIMEOUT_EXCEEDED)
 		.def_readonly("FRAGMENT_LIBRARY_NOT_SET", &ConfGen::ReturnCode::FRAGMENT_LIBRARY_NOT_SET)
 		.def_readonly("ABORTED", &ConfGen::ReturnCode::ABORTED)
+		.def_readonly("NO_INPUT_COORDINATES", &ConfGen::ReturnCode::NO_INPUT_COORDINATES)
 		.def_readonly("ERROR", &ConfGen::ReturnCode::ERROR)
 		;
 }

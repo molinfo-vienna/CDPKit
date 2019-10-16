@@ -31,13 +31,12 @@
 #ifndef CDPL_CONFGEN_TORSIONDRIVERIMPL_HPP
 #define CDPL_CONFGEN_TORSIONDRIVERIMPL_HPP
 
-#include <cstddef>
+#include <memory>
 
 #include "CDPL/ConfGen/TorsionDriverSettings.hpp"
 #include "CDPL/ConfGen/TorsionRuleMatcher.hpp"
 #include "CDPL/Chem/SubstructureSearch.hpp"
 #include "CDPL/Util/BitSet.hpp"
-#include "CDPL/Math/VectorArray.hpp"
 
 #include "FragmentTree.hpp"
 
@@ -45,17 +44,11 @@
 namespace CDPL 
 {
 
-	namespace Chem
-	{
-
-		class Atom;
-		class Bond;
-	}
-
 	namespace ForceField
 	{
 
 		class MMFF94InteractionData;
+		class MMFF94InteractionParameterizer;
 	}
 
     namespace ConfGen 
@@ -65,6 +58,8 @@ namespace CDPL
 		{
 
 		public:
+			typedef FragmentTree::ConstConformerIterator ConstConformerIterator;
+
 			TorsionDriverImpl();
 
 			~TorsionDriverImpl();
@@ -76,6 +71,7 @@ namespace CDPL
 					   const Util::BitSet& bond_mask, bool is_excl_mask);
 
 			void setMMFF94Parameters(const ForceField::MMFF94InteractionData& ia_data);
+			bool setMMFF94Parameters(const Chem::MolecularGraph& root_molgraph);
 
 			void clearInputCoordinates();
 			void clearInputCoordinates(const Util::BitSet& atom_mask);
@@ -83,9 +79,22 @@ namespace CDPL
 			void addInputCoordinates(const Math::Vector3DArray& coords);
 			void addInputCoordinates(const Math::Vector3DArray& coords, const Util::BitSet& atom_mask);
 
-			FragmentTreeNode* getFragmentTreeRoot();
+			void setProgressCallback(const ProgressCallbackFunction& func);
 
-			static bool isRotatable(const Chem::Bond& bond, const Chem::MolecularGraph& molgraph, bool het_h_rotors);
+			const ProgressCallbackFunction& getProgressCallback() const;
+
+			unsigned int drive();
+
+			std::size_t getNumConformers() const;
+
+			ConformerData& getConformer(std::size_t idx);
+
+			ConstConformerIterator getConformersBegin() const;
+			ConstConformerIterator getConformersEnd() const;
+
+			FragmentTree& getFragmentTree();
+	
+			bool initialized() const;
 
 		private:
 			TorsionDriverImpl(const TorsionDriverImpl&);
@@ -102,17 +111,16 @@ namespace CDPL
 			const Chem::Atom* getFirstNeighborAtom(const Chem::Atom* ctr_atom, const Chem::Atom* excl_atom,
 												   const FragmentTreeNode* node) const;
 
-			void clearInputCoordinates(FragmentTreeNode* node, const Util::BitSet& atom_mask);
+			typedef std::auto_ptr<ForceField::MMFF94InteractionParameterizer> MMFF94ParameterizerPtr;
+			typedef std::auto_ptr<ForceField::MMFF94InteractionData> MMFF94InteractionDataPtr;
 
-			void addInputCoordinates(FragmentTreeNode* node, const Math::Vector3DArray& coords);
-			void addInputCoordinates(FragmentTreeNode* node, const Math::Vector3DArray& coords, 
-									 const Util::BitSet& atom_mask);
-
-			TorsionDriverSettings    settings;
-			FragmentTree             fragTree;
-			TorsionRuleMatcher       torRuleMatcher;
-			Chem::SubstructureSearch subSearch;
-			Util::BitSet             tmpBitSet;
+			TorsionDriverSettings     settings;
+			FragmentTree              fragTree;
+			TorsionRuleMatcher        torRuleMatcher;
+			Chem::SubstructureSearch  subSearch;
+			MMFF94ParameterizerPtr    mmff94Parameterizer;
+			MMFF94InteractionDataPtr  mmff94Data;
+			Util::BitSet              rotBondMask;
 		};
     }
 }

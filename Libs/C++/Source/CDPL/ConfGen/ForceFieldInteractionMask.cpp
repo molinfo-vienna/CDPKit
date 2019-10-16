@@ -34,7 +34,7 @@
 using namespace CDPL;
 
 
-void ConfGen::ForceFieldInteractionMask::init(std::size_t num_bs_ia, std::size_t num_ab_ia, std::size_t num_sb_ia,
+void ConfGen::ForceFieldInteractionMask::setup(std::size_t num_bs_ia, std::size_t num_ab_ia, std::size_t num_sb_ia,
 											  std::size_t num_oop_ia, std::size_t num_tor_ia, std::size_t num_vdw_ia,
 											  std::size_t num_els_ia) 
 {
@@ -60,13 +60,13 @@ void ConfGen::ForceFieldInteractionMask::init(std::size_t num_bs_ia, std::size_t
 	electrostatic.set();
 }
 
-void ConfGen::ForceFieldInteractionMask::init(const ForceField::MMFF94InteractionData& ia_data)
+void ConfGen::ForceFieldInteractionMask::setup(const ForceField::MMFF94InteractionData& ia_data)
 {
-    init(ia_data.getBondStretchingInteractions().getSize(),
-		 ia_data.getAngleBendingInteractions().getSize(),
-		 ia_data.getStretchBendInteractions().getSize(),
-		 ia_data.getOutOfPlaneBendingInteractions().getSize(),
-		 ia_data.getTorsionInteractions().getSize(),
-		 ia_data.getVanDerWaalsInteractions().getSize(),
-		 ia_data.getElectrostaticInteractions().getSize());
+    setup(ia_data.getBondStretchingInteractions().getSize(),
+		  ia_data.getAngleBendingInteractions().getSize(),
+		  ia_data.getStretchBendInteractions().getSize(),
+		  ia_data.getOutOfPlaneBendingInteractions().getSize(),
+		  ia_data.getTorsionInteractions().getSize(),
+		  ia_data.getVanDerWaalsInteractions().getSize(),
+		  ia_data.getElectrostaticInteractions().getSize());
 }

@@ -116,6 +116,7 @@ void CDPLPythonChem::exportAtomContainerFunctions()
 	python::def("get3DCoordinates", &get3DCoordinatesWrapper4, (python::arg("cntnr"), python::arg("coords"), python::arg("coords_func"), python::arg("append") = false));
 	python::def("set3DCoordinates", &Chem::set3DCoordinates, (python::arg("cntnr"), python::arg("coords")));
 	python::def("transform3DCoordinates", &Chem::transform3DCoordinates, (python::arg("cntnr"), python::arg("mtx")));
+	python::def("clearConformations", &Chem::clearConformations, python::arg("cntnr"));
 	python::def("applyConformation", &Chem::applyConformation, (python::arg("cntnr"), python::arg("conf_idx")));
 	python::def("getConformation", &getConformationWrapper4, (python::arg("cntnr"), python::arg("conf_idx"),python::arg("coords"), python::arg("append") = false));
 	python::def("addConformation", &Chem::addConformation, (python::arg("cntnr"), python::arg("coords")));

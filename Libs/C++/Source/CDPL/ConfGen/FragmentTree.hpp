@@ -31,15 +31,15 @@
 #ifndef CDPL_CONFGEN_FRAGMENTTREE_HPP
 #define CDPL_CONFGEN_FRAGMENTTREE_HPP
 
-#include <vector>
-#include <cstddef>
-
 #include <boost/unordered_map.hpp>
 
-#include "CDPL/ConfGen/ConformerData.hpp"
+#include "CDPL/ConfGen/ConformerDataArray.hpp"
+#include "CDPL/ConfGen/ProgressCallbackFunction.hpp"
 #include "CDPL/Chem/FragmentList.hpp"
 #include "CDPL/Util/ObjectStack.hpp"
 #include "CDPL/Util/ObjectPool.hpp"
+
+#include "ForceFieldInteractionMask.hpp"
 
 
 namespace CDPL 
@@ -56,6 +56,8 @@ namespace CDPL
 			friend class FragmentTreeNode;
 
 		public:
+			typedef ConformerDataArray::const_iterator ConstConformerIterator;
+
 			FragmentTree(std::size_t max_conf_data_cache_size);
 
 			~FragmentTree();
@@ -67,14 +69,44 @@ namespace CDPL
 			void build(const Chem::MolecularGraph& molgraph, const Chem::MolecularGraph& root_molgraph,
 					   const Util::BitSet& split_bond_mask, const NodeOrderFunc& node_order_func);
 
+
+			void setMMFF94Parameters(const ForceField::MMFF94InteractionData& ia_data);
+
+			void clearConformers();
+			void clearConformers(const Util::BitSet& atom_mask);
+
+			void addCoordinates(const Math::Vector3DArray& coords);
+			void addCoordinates(const Math::Vector3DArray& coords, const Util::BitSet& atom_mask);
+
+			unsigned int generateConformers(bool e_ordered);
+
+			std::size_t getNumConformers() const;
+
+			ConformerData& getConformer(std::size_t idx);
+
+			ConstConformerIterator getConformersBegin() const;
+			ConstConformerIterator getConformersEnd() const;
+
+			void setProgressCallback(const ProgressCallbackFunction& func);
+
+			const ProgressCallbackFunction& getProgressCallback() const;
+
 			FragmentTreeNode* getRoot() const;
 
 		private:
-			typedef Util::ObjectPool<ConformerData> ConformerDataCache;
-			
+			typedef std::vector<double> DoubleArray;
+
+			void clearConformers(FragmentTreeNode* node, const Util::BitSet& atom_mask);
+
+			void addCoordinates(FragmentTreeNode* node, const Math::Vector3DArray& coords);
+			void addCoordinates(FragmentTreeNode* node, const Math::Vector3DArray& coords, 
+								const Util::BitSet& atom_mask);
+
 			void generateLeafNodes(const Chem::MolecularGraph& molgraph, const Chem::MolecularGraph& root_molgraph,
 								   const Util::BitSet& split_bond_mask);
 			void buildupTree(const Chem::MolecularGraph& root_molgraph);
+
+			void initAtomClashRadiusTable(const Chem::MolecularGraph& root_molgraph);
 
 			FragmentTreeNode* createParentNode(FragmentTreeNode* node1, FragmentTreeNode* node2, 
 											   const Chem::MolecularGraph& root_molgraph, const Chem::Bond* bond);
@@ -90,6 +122,11 @@ namespace CDPL
 			FragmentTreeNode* allocTreeNode(const Chem::MolecularGraph& root_molgraph);
 			FragmentTreeNode* createTreeNode();
 
+			bool progress() const;
+
+			const DoubleArray& getAtomClashRadiusTable() const;
+
+			typedef Util::ObjectPool<ConformerData> ConformerDataCache;
 			typedef std::vector<const Chem::Bond*> BondList;
 			typedef Util::ObjectStack<FragmentTreeNode> TreeNodeCache;
 			typedef std::vector<FragmentTreeNode*> TreeNodeList;
@@ -102,6 +139,11 @@ namespace CDPL
 			BondList                   splitBonds;
 			TreeNodeList               leafNodes;
 			TreeNodeOrderMap           leafNodeOrders;
+			std::size_t                timeout;
+			ProgressCallbackFunction   progCallback;
+			DoubleArray                clashRadiusTable;
+			Util::BitSet               tmpBitSet;
+			ForceFieldInteractionMask  mmff94InteractionMask;
 		};
     }
 }
@@ -125,6 +167,7 @@ void CDPL::ConfGen::FragmentTree::build(const CDPL::Chem::MolecularGraph& molgra
 
 	orderLeafNodes();
 	buildupTree(root_molgraph);
+	initAtomClashRadiusTable(root_molgraph);
 }
 
 #endif // CDPL_CONFGEN_FRAGMENTTREE_HPP

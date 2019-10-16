@@ -1,7 +1,7 @@
 /* -*- mode: c++; c-basic-offset: 4; tab-width: 4; indent-tabs-mode: t -*- */
 
 /* 
- * FragmentList.hpp 
+ * ConformerDataArray.hpp 
  *
  * This file is part of the Chemical Data Processing Toolkit
  *
@@ -25,49 +25,37 @@
 
 /**
  * \file
- * \brief Definition of the class CDPL::Chem::FragmentList.
+ * \brief Definition of the type CDPL::ConfGen::ConformerDataArray.
  */
 
-#ifndef CDPL_CHEM_FRAGMENTLIST_HPP
-#define CDPL_CHEM_FRAGMENTLIST_HPP
+#ifndef CDPL_CONFGEN_CONFORMERDATAARRAY_HPP
+#define CDPL_CONFGEN_CONFORMERDATAARRAY_HPP
 
-#include <boost/shared_ptr.hpp>
+#include <vector>
 
-#include "CDPL/Chem/APIPrefix.hpp"
-#include "CDPL/Chem/Fragment.hpp"
-#include "CDPL/Util/IndirectArray.hpp"
+#include "CDPL/ConfGen/ConformerData.hpp"
 
 
 namespace CDPL 
 {
 
-	namespace Chem
-	{
+    namespace ConfGen 
+    {
 
 		/**
-		 * \addtogroup CDPL_CHEM_DATA_STRUCTURES
+		 * \addtogroup CDPL_CONFGEN_DATA_STRUCTURES
 		 * @{
 		 */
-		
+
 		/**
-		 * \brief A data type for the storage of Chem::Fragment objects.
+		 * \brief A data type for the storage of dyn. allocated ConfGen::ConformerData objects.
 		 */
-		class CDPL_CHEM_API FragmentList : public Util::IndirectArray<Fragment>
-		{
-
-		  public:
-			typedef boost::shared_ptr<FragmentList> SharedPointer;
-
-		  private:
-			const char* getClassName() const {
-				return "FragmentList";
-			}
-		};
-
+		typedef std::vector<ConformerData::SharedPointer> ConformerDataArray;
+	
 		/**
 		 * @}
 		 */
-	}
+    }
 }
 
-#endif // CDPL_CHEM_FRAGMENTLIST_HPP
+#endif // CDPL_CONFGEN_CONFORMERDATAARRAY_HPP

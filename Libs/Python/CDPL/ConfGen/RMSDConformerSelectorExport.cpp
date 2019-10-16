@@ -56,9 +56,11 @@ void CDPLPythonConfGen::exportRMSDConformerSelector()
 			 (python::arg("self"), python::arg("conf_data")), python::with_custodian_and_ward<1, 2>())
 		.def("clearConformers", &ConfGen::RMSDConformerSelector::clearConformers, python::arg("self"))
 		.def("getNumConformers", &ConfGen::RMSDConformerSelector::getNumConformers, python::arg("self"))
-		.def("getConformer", &ConfGen::RMSDConformerSelector::getConformer,
+		.def("getConformer", 
+			 static_cast<ConfGen::ConformerData& (ConfGen::RMSDConformerSelector::*)(std::size_t)>(&ConfGen::RMSDConformerSelector::getConformer),
 			 (python::arg("self"), python::arg("conf_idx")), python::return_internal_reference<>())
-		.def("__getitem__", &ConfGen::RMSDConformerSelector::getConformer,
+		.def("__getitem__", 
+			 static_cast<ConfGen::ConformerData& (ConfGen::RMSDConformerSelector::*)(std::size_t)>(&ConfGen::RMSDConformerSelector::getConformer),
 			 (python::arg("self"), python::arg("conf_idx")), python::return_internal_reference<>())
 		.add_property("numConformers", &ConfGen::RMSDConformerSelector::getNumConformers)
 		.add_property("minRMSD", &ConfGen::RMSDConformerSelector::getMinRMSD, &ConfGen::RMSDConformerSelector::setMinRMSD)

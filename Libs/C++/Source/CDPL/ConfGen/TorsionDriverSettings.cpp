@@ -27,6 +27,7 @@
 #include "StaticInit.hpp"
 
 #include "CDPL/ConfGen/TorsionDriverSettings.hpp"
+#include "CDPL/ConfGen/ForceFieldType.hpp"
 
 
 using namespace CDPL;
@@ -36,18 +37,9 @@ const ConfGen::TorsionDriverSettings ConfGen::TorsionDriverSettings::DEFAULT;
 
 
 ConfGen::TorsionDriverSettings::TorsionDriverSettings(): 
-	enumHetHRotors(false), torLib(TorsionLibrary::get())
+	enumHetHRotors(false), energyOrdered(true), forceFieldType(ForceFieldType::MMFF94S_NO_ESTAT), 
+	strictParam(true), torLib(TorsionLibrary::get())
 {}
-
-void ConfGen::TorsionDriverSettings::setTorsionLibrary(const TorsionLibrary::SharedPointer& lib)
-{
-	torLib = lib;
-}
-
-const ConfGen::TorsionLibrary::SharedPointer& ConfGen::TorsionDriverSettings::getTorsionLibrary() const
-{
-	return torLib;
-}
 
 void ConfGen::TorsionDriverSettings::enumerateHeteroHydrogenRotors(bool enumerate)
 {
@@ -57,4 +49,44 @@ void ConfGen::TorsionDriverSettings::enumerateHeteroHydrogenRotors(bool enumerat
 bool ConfGen::TorsionDriverSettings::enumerateHeteroHydrogenRotors() const
 {
 	return enumHetHRotors;
+}
+
+void ConfGen::TorsionDriverSettings::orderByEnergy(bool order)
+{
+	energyOrdered = order;
+}
+				
+bool ConfGen::TorsionDriverSettings::orderByEnergy() const
+{
+	return energyOrdered;
+}
+
+void ConfGen::TorsionDriverSettings::setForceFieldType(unsigned int type)
+{
+	forceFieldType = type;
+}
+	    
+unsigned int ConfGen::TorsionDriverSettings::getForceFieldType() const
+{
+	return forceFieldType;
+}
+			
+void ConfGen::TorsionDriverSettings::strictForceFieldParameterization(bool strict)
+{
+	strictParam = strict;
+}
+
+bool ConfGen::TorsionDriverSettings::strictForceFieldParameterization() const
+{
+	return strictParam;
+}
+			
+void ConfGen::TorsionDriverSettings::setTorsionLibrary(const TorsionLibrary::SharedPointer& lib)
+{
+	torLib = lib;
+}
+
+const ConfGen::TorsionLibrary::SharedPointer& ConfGen::TorsionDriverSettings::getTorsionLibrary() const
+{
+	return torLib;
 }
