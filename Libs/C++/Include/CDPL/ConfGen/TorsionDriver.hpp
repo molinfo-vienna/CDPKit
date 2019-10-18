@@ -38,7 +38,7 @@
 
 #include "CDPL/ConfGen/APIPrefix.hpp"
 #include "CDPL/ConfGen/TorsionDriverSettings.hpp"
-#include "CDPL/ConfGen/ProgressCallbackFunction.hpp"
+#include "CDPL/ConfGen/CallbackFunction.hpp"
 #include "CDPL/ConfGen/ConformerDataArray.hpp"
 #include "CDPL/Util/BitSet.hpp"
 #include "CDPL/Math/VectorArray.hpp"
@@ -78,6 +78,14 @@ namespace CDPL
 
 			TorsionDriverSettings& getSettings();
 
+			void setAbortCallback(const CallbackFunction& func);
+
+			const CallbackFunction& getAbortCallback() const;
+
+			void setTimeoutCallback(const CallbackFunction& func);
+
+			const CallbackFunction& getTimeoutCallback() const;
+
 			unsigned int setup(const Chem::MolecularGraph& molgraph);
 			unsigned int setup(const Chem::MolecularGraph& molgraph, const Util::BitSet& bond_mask, bool is_excl_mask);
 
@@ -86,10 +94,6 @@ namespace CDPL
 
 			unsigned int addInputCoordinates(const Math::Vector3DArray& coords);
 			unsigned int addInputCoordinates(const Math::Vector3DArray& coords, const Util::BitSet& atom_mask);
-
-			void setProgressCallback(const ProgressCallbackFunction& func);
-
-			const ProgressCallbackFunction& getProgressCallback() const;
 
 			unsigned int drive();
 

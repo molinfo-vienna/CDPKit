@@ -35,7 +35,6 @@
 #include <boost/bind.hpp>
 
 #include "CDPL/ConfGen/FragmentLibraryGenerator.hpp"
-#include "CDPL/ConfGen/UtilityFunctions.hpp"
 #include "CDPL/ConfGen/ReturnCode.hpp"
 #include "CDPL/ConfGen/FragmentType.hpp"
 #include "CDPL/Chem/AtomContainerFunctions.hpp"
@@ -73,15 +72,24 @@ const ConfGen::FragmentConformerGeneratorSettings& ConfGen::FragmentLibraryGener
 	return fragConfGen.getSettings();
 }
 
-void ConfGen::FragmentLibraryGenerator::setProgressCallback(const ProgressCallbackFunction& func)
+void ConfGen::FragmentLibraryGenerator::setAbortCallback(const CallbackFunction& func)
 {
-	fragConfGen.setProgressCallback(func);
+	fragConfGen.setAbortCallback(func);
 }
 
-const ConfGen::ProgressCallbackFunction& 
-ConfGen::FragmentLibraryGenerator::getProgressCallback() const
+const ConfGen::CallbackFunction& ConfGen::FragmentLibraryGenerator::getAbortCallback() const
 {
-	return fragConfGen.getProgressCallback();
+	return fragConfGen.getAbortCallback();
+}
+
+void ConfGen::FragmentLibraryGenerator::setTimeoutCallback(const CallbackFunction& func)
+{
+	fragConfGen.setTimeoutCallback(func);
+}
+
+const ConfGen::CallbackFunction& ConfGen::FragmentLibraryGenerator::getTimeoutCallback() const
+{
+	return fragConfGen.getTimeoutCallback();
 }
 
 unsigned int ConfGen::FragmentLibraryGenerator::process(const Chem::MolecularGraph& frag)
@@ -104,7 +112,7 @@ unsigned int ConfGen::FragmentLibraryGenerator::process(const Chem::MolecularGra
 
 		setSSSR(fragLibEntry, fragSSSR);
 
-		unsigned int ret_code = fragConfGen.generate(fragLibEntry, perceiveFragmentType(fragLibEntry));
+		unsigned int ret_code = fragConfGen.generate(fragLibEntry);
 		numGenConfs = fragConfGen.getNumConformers();
 		
 		if (numGenConfs == 0) {

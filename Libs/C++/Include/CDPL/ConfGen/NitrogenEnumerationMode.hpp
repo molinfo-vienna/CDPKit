@@ -1,7 +1,7 @@
 /* -*- mode: c++; c-basic-offset: 4; tab-width: 4; indent-tabs-mode: t -*- */
 
 /* 
- * ProgressCallbackFunction.hpp 
+ * NitrogenEnumerationMode.hpp 
  *
  * This file is part of the Chemical Data Processing Toolkit
  *
@@ -25,13 +25,11 @@
 
 /**
  * \file
- * \brief Type definition of a generic wrapper class for storing user-defined progress callback functions.
+ * \brief Definition of constants in namespace CDPL::Confgen::NitrogenEnumerationMode.
  */
 
-#ifndef CDPL_CONFGEN_PROGRESSCALLBACKFUNCTION_HPP
-#define CDPL_CONFGEN_PROGRESSCALLBACKFUNCTION_HPP
-
-#include <boost/function.hpp>
+#ifndef CDPL_CONFGEN_NITROGENENUMERATIONMODE_HPP
+#define CDPL_CONFGEN_NITROGENENUMERATIONMODE_HPP
 
 
 namespace CDPL 
@@ -41,14 +39,22 @@ namespace CDPL
     {
 
 		/**
-		 * \addtogroup CDPL_CONFGEN_DATA_STRUCTURES
+		 * \addtogroup CDPL_CONFGEN_CONSTANTS
 		 * @{
 		 */
 
 		/**
-		 * \brief A generic wrapper class used to store a user-defined progress callback functions.
+		 * \brief Provides constants that are used to specify the mode of invertible nitrogen enumeration.
 		 */
-		typedef boost::function0<bool> ProgressCallbackFunction;
+		namespace NitrogenEnumerationMode
+		{
+			
+			const int NONE               = 0; 
+
+			const int ALL                = 1; 
+
+			const int UNSPECIFIED_STEREO = 2;
+		}
 
 		/**
 		 * @}
@@ -56,4 +62,4 @@ namespace CDPL
     }
 }
 
-#endif // CDPL_CONFGEN_PROGRESSCALLBACKFUNCTION_HPP
+#endif // CDPL_CONFGEN_NITROGENENUMERATIONMODE_HPP

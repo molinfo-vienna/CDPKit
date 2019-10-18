@@ -69,6 +69,7 @@ BOOST_PYTHON_MODULE(_confgen)
 	exportFragmentTypes();
 	exportForceFieldTypes();
 	exportReturnCodes();
+	exportNitrogenEnumerationModes();
 
 	exportUtilityFunctions();
 

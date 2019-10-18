@@ -63,9 +63,13 @@ void CDPLPythonConfGen::exportTorsionDriver()
 		.def ("addInputCoordinates", static_cast<unsigned int (ConfGen::TorsionDriver::*)(const Math::Vector3DArray&, const Util::BitSet&)>(
 				  &ConfGen::TorsionDriver::addInputCoordinates), 
 			  (python::arg("self"), python::arg("coords"), python::arg("atom_mask")))
-		.def("setProgressCallback", &ConfGen::TorsionDriver::setProgressCallback, 
+		.def("setAbortCallback", &ConfGen::TorsionDriver::setAbortCallback, 
 			 (python::arg("self"), python::arg("func")))
-		.def("getProgressCallback", &ConfGen::TorsionDriver::getProgressCallback, 
+		.def("getAbortCallback", &ConfGen::TorsionDriver::getAbortCallback, 
+			 python::arg("self"), python::return_internal_reference<>())
+		.def("setTimeoutCallback", &ConfGen::TorsionDriver::setTimeoutCallback, 
+			 (python::arg("self"), python::arg("func")))
+		.def("getTimeoutCallback", &ConfGen::TorsionDriver::getTimeoutCallback, 
 			 python::arg("self"), python::return_internal_reference<>())
 		.def("drive", &ConfGen::TorsionDriver::drive, python::arg("self"))
 		.def("getNumConformers", &ConfGen::TorsionDriver::getNumConformers, python::arg("self"))
@@ -80,8 +84,12 @@ void CDPLPythonConfGen::exportTorsionDriver()
 					  python::make_function(static_cast<ConfGen::TorsionDriverSettings& (ConfGen::TorsionDriver::*)()>
 											(&ConfGen::TorsionDriver::getSettings),
 											python::return_internal_reference<>()))	
-		.add_property("progressCallback", 
-					  python::make_function(&ConfGen::TorsionDriver::getProgressCallback,
+		.add_property("abortCallback", 
+					  python::make_function(&ConfGen::TorsionDriver::getAbortCallback,
 											python::return_internal_reference<>()),
-					  &ConfGen::TorsionDriver::setProgressCallback);
+					  &ConfGen::TorsionDriver::setAbortCallback)
+		.add_property("timeoutCallback", 
+					  python::make_function(&ConfGen::TorsionDriver::getTimeoutCallback,
+											python::return_internal_reference<>()),
+					  &ConfGen::TorsionDriver::setTimeoutCallback);
 }

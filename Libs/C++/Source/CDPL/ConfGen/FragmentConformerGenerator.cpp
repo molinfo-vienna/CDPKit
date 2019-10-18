@@ -27,6 +27,7 @@
 #include "StaticInit.hpp"
 
 #include "CDPL/ConfGen/FragmentConformerGenerator.hpp"
+#include "CDPL/ConfGen/UtilityFunctions.hpp"
 #include "CDPL/Base/Exceptions.hpp"
 
 #include "FragmentConformerGeneratorImpl.hpp"
@@ -52,14 +53,29 @@ const ConfGen::FragmentConformerGeneratorSettings& ConfGen::FragmentConformerGen
 	return impl->getSettings();
 }
 
-void ConfGen::FragmentConformerGenerator::setProgressCallback(const ProgressCallbackFunction& func)
+void ConfGen::FragmentConformerGenerator::setAbortCallback(const CallbackFunction& func)
 {
-	impl->setProgressCallback(func);
+	impl->setAbortCallback(func);
 }
 
-const ConfGen::ProgressCallbackFunction& ConfGen::FragmentConformerGenerator::getProgressCallback() const
+const ConfGen::CallbackFunction& ConfGen::FragmentConformerGenerator::getAbortCallback() const
 {
-	return impl->getProgressCallback();
+	return impl->getAbortCallback();
+}
+
+void ConfGen::FragmentConformerGenerator::setTimeoutCallback(const CallbackFunction& func)
+{
+	impl->setTimeoutCallback(func);
+}
+
+const ConfGen::CallbackFunction& ConfGen::FragmentConformerGenerator::getTimeoutCallback() const
+{
+	return impl->getTimeoutCallback();
+}
+
+unsigned int ConfGen::FragmentConformerGenerator::generate(const Chem::MolecularGraph& molgraph) 
+{
+	return generate(molgraph, perceiveFragmentType(molgraph));
 }
 
 unsigned int ConfGen::FragmentConformerGenerator::generate(const Chem::MolecularGraph& molgraph, unsigned int frag_type) 

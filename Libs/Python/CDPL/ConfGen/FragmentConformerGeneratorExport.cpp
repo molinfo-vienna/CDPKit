@@ -46,18 +46,30 @@ void CDPLPythonConfGen::exportFragmentConformerGenerator()
 		.def(CDPLPythonBase::ObjectIdentityCheckVisitor<ConfGen::FragmentConformerGenerator>())
 //		.def("assign", CDPLPythonBase::copyAssOp(&ConfGen::FragmentConformerGenerator::operator=), 
 //			 (python::arg("self"), python::arg("gen")), python::return_self<>())
-		.def("setProgressCallback", &ConfGen::FragmentConformerGenerator::setProgressCallback, 
+		.def("setAbortCallback", &ConfGen::FragmentConformerGenerator::setAbortCallback, 
 			 (python::arg("self"), python::arg("func")))
-		.def("getProgressCallback", &ConfGen::FragmentConformerGenerator::getProgressCallback, 
+		.def("getAbortCallback", &ConfGen::FragmentConformerGenerator::getAbortCallback, 
 			 python::arg("self"), python::return_internal_reference<>())
-		.def("generate", &ConfGen::FragmentConformerGenerator::generate, 
+		.def("setTimeoutCallback", &ConfGen::FragmentConformerGenerator::setTimeoutCallback, 
+			 (python::arg("self"), python::arg("func")))
+		.def("getTimeoutCallback", &ConfGen::FragmentConformerGenerator::getTimeoutCallback, 
+			 python::arg("self"), python::return_internal_reference<>())
+		.def("generate", 
+			 static_cast<unsigned int (ConfGen::FragmentConformerGenerator::*) (const Chem::MolecularGraph&)>
+			 (&ConfGen::FragmentConformerGenerator::generate), 
+			 (python::arg("self"), python::arg("molgraph")))
+		.def("generate", 
+			 static_cast<unsigned int (ConfGen::FragmentConformerGenerator::*) (const Chem::MolecularGraph&, unsigned int)>
+			 (&ConfGen::FragmentConformerGenerator::generate), 
 			 (python::arg("self"), python::arg("molgraph"), python::arg("frag_type")))
 		.def("getNumConformers", &ConfGen::FragmentConformerGenerator::getNumConformers, python::arg("self"))
 		.def("getConformer", 
-			 static_cast<ConfGen::ConformerData& (ConfGen::FragmentConformerGenerator::*)(std::size_t)>(&ConfGen::FragmentConformerGenerator::getConformer),
+			 static_cast<ConfGen::ConformerData& (ConfGen::FragmentConformerGenerator::*)(std::size_t)>
+			 (&ConfGen::FragmentConformerGenerator::getConformer),
 			 (python::arg("self"), python::arg("conf_idx")), python::return_internal_reference<>())
 		.def("__getitem__", 
-			 static_cast<ConfGen::ConformerData& (ConfGen::FragmentConformerGenerator::*)(std::size_t)>(&ConfGen::FragmentConformerGenerator::getConformer),
+			 static_cast<ConfGen::ConformerData& (ConfGen::FragmentConformerGenerator::*)(std::size_t)>
+			 (&ConfGen::FragmentConformerGenerator::getConformer),
 			 (python::arg("self"), python::arg("conf_idx")), python::return_internal_reference<>())
 		.def("getSettings", 
 			 static_cast<ConfGen::FragmentConformerGeneratorSettings& (ConfGen::FragmentConformerGenerator::*)()>
@@ -68,8 +80,12 @@ void CDPLPythonConfGen::exportFragmentConformerGenerator()
 					  python::make_function(static_cast<ConfGen::FragmentConformerGeneratorSettings& (ConfGen::FragmentConformerGenerator::*)()>
 											(&ConfGen::FragmentConformerGenerator::getSettings),
 											python::return_internal_reference<>()))
-		.add_property("progressCallback", 
-					  python::make_function(&ConfGen::FragmentConformerGenerator::getProgressCallback,
+		.add_property("abortCallback", 
+					  python::make_function(&ConfGen::FragmentConformerGenerator::getAbortCallback,
 											python::return_internal_reference<>()),
-					  &ConfGen::FragmentConformerGenerator::setProgressCallback);
+					  &ConfGen::FragmentConformerGenerator::setAbortCallback)
+		.add_property("timeoutCallback", 
+					  python::make_function(&ConfGen::FragmentConformerGenerator::getTimeoutCallback,
+											python::return_internal_reference<>()),
+					  &ConfGen::FragmentConformerGenerator::setTimeoutCallback);
 }

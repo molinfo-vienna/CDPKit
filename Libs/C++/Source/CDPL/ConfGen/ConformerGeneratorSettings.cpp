@@ -28,6 +28,7 @@
 
 #include "CDPL/ConfGen/ConformerGeneratorSettings.hpp"
 #include "CDPL/ConfGen/ForceFieldType.hpp"
+#include "CDPL/ConfGen/NitrogenEnumerationMode.hpp"
 
 
 using namespace CDPL;
@@ -37,20 +38,20 @@ const ConfGen::ConformerGeneratorSettings ConfGen::ConformerGeneratorSettings::D
 
 
 ConfGen::ConformerGeneratorSettings::ConformerGeneratorSettings():
-	enumHetHRotors(false), enumRings(true), enumNitrogens(true), useExistingCoords(false), 
-	eWindow(10.0), timeout(30 * 60 * 1000), forceFieldType(ForceFieldType::MMFF94S_NO_ESTAT), 
-	strictParam(true), maxNumOutputConfs(100), minRMSD(0.5), fragLib(FragmentLibrary::get()), 
-	torLib(TorsionLibrary::get()) 
+	sampleHetAtomHs(false), enumRings(true), nitrogenEnumMode(NitrogenEnumerationMode::UNSPECIFIED_STEREO),
+	generateCoords(true), outputSupplCoords(false), eWindow(10.0), timeout(30 * 60 * 1000), 
+	forceFieldType(ForceFieldType::MMFF94S_NO_ESTAT), strictParam(true), maxNumOutputConfs(100), 
+	minRMSD(0.5), fragLib(FragmentLibrary::get()), torLib(TorsionLibrary::get()) 
 {}
 
-void ConfGen::ConformerGeneratorSettings::enumerateHeteroHydrogenRotors(bool enumerate)
+void ConfGen::ConformerGeneratorSettings::sampleHeteroAtomHydrogens(bool sample)
 {
-	enumHetHRotors = enumerate;
+	sampleHetAtomHs = sample;
 }
 				
-bool ConfGen::ConformerGeneratorSettings::enumerateHeteroHydrogenRotors() const
+bool ConfGen::ConformerGeneratorSettings::sampleHeteroAtomHydrogens() const
 {
-	return enumHetHRotors;
+	return sampleHetAtomHs;
 }
 
 void ConfGen::ConformerGeneratorSettings::enumerateRings(bool enumerate)
@@ -58,29 +59,39 @@ void ConfGen::ConformerGeneratorSettings::enumerateRings(bool enumerate)
 	enumRings = enumerate;
 }
 
-bool ConfGen::ConformerGeneratorSettings::ringsEnumerated() const
+bool ConfGen::ConformerGeneratorSettings::enumerateRings() const
 {
 	return enumRings;
 }
 
-void ConfGen::ConformerGeneratorSettings::enumerateNitrogens(bool enumerate)
+void ConfGen::ConformerGeneratorSettings::setNitrogenEnumerationMode(unsigned int mode)
 {
-	enumNitrogens = enumerate;
+	nitrogenEnumMode = mode;
 }
 
-bool ConfGen::ConformerGeneratorSettings::nitrogensEnumerated() const
+unsigned int ConfGen::ConformerGeneratorSettings::getNitrogenEnumerationMode() const
 {
-	return enumNitrogens;
+	return nitrogenEnumMode;
 }
 
-void ConfGen::ConformerGeneratorSettings::useExistingCoordinates(bool use)
+void ConfGen::ConformerGeneratorSettings::generateCoordinates(bool generate)
 {
-	useExistingCoords = use;
+	generateCoords = generate;
 }
 	
-bool ConfGen::ConformerGeneratorSettings::useExistingCoordinates() const
+bool ConfGen::ConformerGeneratorSettings::generateCoordinates() const
 {
-	return useExistingCoords;
+	return generateCoords;
+}
+
+void ConfGen::ConformerGeneratorSettings::outputSuppliedCoordinates(bool output)
+{
+	outputSupplCoords = output;
+}
+	
+bool ConfGen::ConformerGeneratorSettings::outputSuppliedCoordinates() const
+{
+	return outputSupplCoords;
 }
 
 void ConfGen::ConformerGeneratorSettings::setEnergyWindow(double win_size)

@@ -27,6 +27,7 @@
 #include "StaticInit.hpp"
 
 #include "CDPL/ConfGen/FragmentAssembler.hpp"
+#include "CDPL/Base/Exceptions.hpp"
 
 #include "FragmentAssemblerImpl.hpp"
 
@@ -48,4 +49,70 @@ ConfGen::FragmentAssemblerSettings&
 ConfGen::FragmentAssembler::getSettings()
 {
     return impl->getSettings();
+}
+
+void ConfGen::FragmentAssembler::setAbortCallback(const CallbackFunction& func)
+{
+	impl->setAbortCallback(func);
+}
+
+const ConfGen::CallbackFunction& ConfGen::FragmentAssembler::getAbortCallback() const
+{
+	return impl->getAbortCallback();
+}
+
+void ConfGen::FragmentAssembler::setTimeoutCallback(const CallbackFunction& func)
+{
+	impl->setTimeoutCallback(func);
+}
+
+const ConfGen::CallbackFunction& ConfGen::FragmentAssembler::getTimeoutCallback() const
+{
+	return impl->getTimeoutCallback();
+}
+
+unsigned int ConfGen::FragmentAssembler::assemble(const Chem::MolecularGraph& molgraph)
+{
+	return impl->assemble(molgraph);
+}
+		
+std::size_t ConfGen::FragmentAssembler::getNumStructures() const
+{
+	return impl->getNumStructures();
+}
+
+const ConfGen::ConformerData& ConfGen::FragmentAssembler::getStructure(std::size_t idx) const
+{
+	if (idx >= impl->getNumStructures())
+		throw Base::IndexError("FragmentAssembler: structure index out of bounds");
+
+	return impl->getStructure(idx);
+}
+
+ConfGen::ConformerData& ConfGen::FragmentAssembler::getStructure(std::size_t idx)
+{
+	if (idx >= impl->getNumStructures())
+		throw Base::IndexError("FragmentAssembler: structure index out of bounds");
+
+	return impl->getStructure(idx);
+}
+
+ConfGen::FragmentAssembler::ConstStructureIterator ConfGen::FragmentAssembler::getStructuresBegin() const
+{
+	return impl->getStructuresBegin();
+}
+
+ConfGen::FragmentAssembler::ConstStructureIterator ConfGen::FragmentAssembler::getStructuresEnd() const
+{
+	return impl->getStructuresEnd();
+}
+
+ConfGen::FragmentAssembler::StructureIterator ConfGen::FragmentAssembler::getStructuresBegin()
+{
+	return impl->getStructuresBegin();
+}
+
+ConfGen::FragmentAssembler::StructureIterator ConfGen::FragmentAssembler::getStructuresEnd()
+{
+	return impl->getStructuresEnd();
 }

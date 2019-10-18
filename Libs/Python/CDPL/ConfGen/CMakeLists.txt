@@ -37,6 +37,7 @@ SET(confgen_MOD_SRCS
     ForceFieldTypeExport.cpp
     FragmentTypeExport.cpp
     ReturnCodeExport.cpp
+    NitrogenEnumerationModeExport.cpp
 
     DGConstraintGeneratorExport.cpp
     DGConstraintGeneratorSettingsExport.cpp

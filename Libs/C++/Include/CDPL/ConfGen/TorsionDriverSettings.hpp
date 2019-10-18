@@ -54,9 +54,9 @@ namespace CDPL
 
 			TorsionDriverSettings();
 
-			void enumerateHeteroHydrogenRotors(bool enumerate);
+			void sampleHeteroAtomHydrogens(bool sample);
 				
-			bool enumerateHeteroHydrogenRotors() const;
+			bool sampleHeteroAtomHydrogens() const;
 
 			void orderByEnergy(bool order);
 
@@ -75,7 +75,7 @@ namespace CDPL
 			const TorsionLibrary::SharedPointer& getTorsionLibrary() const;
 
 		  private:
-			bool                          enumHetHRotors;
+			bool                          sampleHetAtomHs;
 			bool                          energyOrdered;
 			unsigned int                  forceFieldType;
 			bool                          strictParam;

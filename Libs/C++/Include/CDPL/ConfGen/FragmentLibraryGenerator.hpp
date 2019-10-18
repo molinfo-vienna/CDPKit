@@ -69,9 +69,13 @@ namespace CDPL
 
 			const FragmentConformerGeneratorSettings& getSettings() const;
 
-			void setProgressCallback(const ProgressCallbackFunction& func);
+			void setAbortCallback(const CallbackFunction& func);
 
-			const ProgressCallbackFunction& getProgressCallback() const;
+			const CallbackFunction& getAbortCallback() const;
+
+			void setTimeoutCallback(const CallbackFunction& func);
+
+			const CallbackFunction& getTimeoutCallback() const;
 
 			unsigned int process(const Chem::MolecularGraph& frag);
 	

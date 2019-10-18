@@ -31,6 +31,8 @@
 #ifndef CDPL_CONFGEN_CONFORMERGENERATORSETTINGS_HPP
 #define CDPL_CONFGEN_CONFORMERGENERATORSETTINGS_HPP
 
+#include <cstddef>
+
 #include "CDPL/ConfGen/APIPrefix.hpp"
 #include "CDPL/ConfGen/TorsionLibrary.hpp"
 #include "CDPL/ConfGen/FragmentLibrary.hpp"
@@ -58,21 +60,25 @@ namespace CDPL
 
 			ConformerGeneratorSettings();
 
-			void enumerateHeteroHydrogenRotors(bool enumerate);
+			void sampleHeteroAtomHydrogens(bool sample);
 				
-			bool enumerateHeteroHydrogenRotors() const;
+			bool sampleHeteroAtomHydrogens() const;
 
 			void enumerateRings(bool enumerate);
 
-			bool ringsEnumerated() const;
+			bool enumerateRings() const;
 
-			void enumerateNitrogens(bool enumerate);
+			void setNitrogenEnumerationMode(unsigned int mode);
 
-			bool nitrogensEnumerated() const;
+			unsigned int getNitrogenEnumerationMode() const;
 
-			void useExistingCoordinates(bool use);
+			void generateCoordinates(bool generate);
 	
-			bool useExistingCoordinates() const;
+			bool generateCoordinates() const;
+
+			void outputSuppliedCoordinates(bool output);
+	
+			bool outputSuppliedCoordinates() const;
 
 			void setEnergyWindow(double win_size);
 
@@ -111,10 +117,11 @@ namespace CDPL
 			const FragmentConformerGeneratorSettings& getFragmentBuildSettings() const;
 
 		  private:
-			bool                               enumHetHRotors;
+			bool                               sampleHetAtomHs;
 			bool                               enumRings;
-			bool                               enumNitrogens;
-			bool                               useExistingCoords;
+			unsigned int                       nitrogenEnumMode;
+			bool                               generateCoords;
+			bool                               outputSupplCoords;
 			double                             eWindow;
 			std::size_t                        timeout;
 			unsigned int                       forceFieldType;

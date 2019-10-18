@@ -340,8 +340,11 @@ unsigned int ConfGen::FragmentTreeNode::lineupChildConformers()
 	Math::Vector3D::ConstPointer left_conf_bbox_max_data = left_conf_bbox_max.getData();
 
 	for (std::size_t i = 0, num_left_chld_confs = leftChild->conformers.size(); i < num_left_chld_confs; i++) {
-		if (!owner.progress())
+		if (owner.aborted())
 			return ReturnCode::ABORTED;
+
+		if (owner.timedout())
+			return ReturnCode::TIMEOUT_EXCEEDED;
 
 		const ConformerData& left_conf = *leftChild->conformers[i];
 
@@ -466,8 +469,11 @@ unsigned int ConfGen::FragmentTreeNode::alignAndRotateChildConformers()
 	}
 
 	for (std::size_t i = 0; i < num_left_chld_confs; i++) {
-		if (!owner.progress())
+		if (owner.aborted())
 			return ReturnCode::ABORTED;
+
+		if (owner.timedout())
+			return ReturnCode::TIMEOUT_EXCEEDED;
 
 		const ConformerData& left_conf = *leftChild->conformers[i];
 

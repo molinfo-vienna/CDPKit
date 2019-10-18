@@ -32,6 +32,9 @@
 #define CDPL_CONFGEN_FRAGMENTASSEMBLERSETTINGS_HPP
 
 #include "CDPL/ConfGen/APIPrefix.hpp"
+#include "CDPL/ConfGen/TorsionLibrary.hpp"
+#include "CDPL/ConfGen/FragmentLibrary.hpp"
+#include "CDPL/ConfGen/FragmentConformerGeneratorSettings.hpp"
 
 
 namespace CDPL 
@@ -40,25 +43,70 @@ namespace CDPL
     namespace ConfGen 
     {
 
-	/**
-	 * \addtogroup CDPL_CONFGEN_DATA_STRUCTURES
-	 * @{
-	 */
+		/**
+		 * \addtogroup CDPL_CONFGEN_DATA_STRUCTURES
+		 * @{
+		 */
 
-	class CDPL_CONFGEN_API FragmentAssemblerSettings
-	{
+		class CDPL_CONFGEN_API FragmentAssemblerSettings
+		{
 
-	  public:
-	    static const FragmentAssemblerSettings DEFAULT;
+		  public:
+			static const FragmentAssemblerSettings DEFAULT;
 
-	    FragmentAssemblerSettings();
+			FragmentAssemblerSettings();
+	
+			void enumerateRings(bool enumerate);
 
-	  private:
-	};
+			bool enumerateRings() const;
 
-	/**
-	 * @}
-	 */
+			void setNitrogenEnumerationMode(unsigned int mode);
+
+			unsigned int getNitrogenEnumerationMode() const;
+
+			void generateCoordinates(bool generate);
+	
+			bool generateCoordinates() const;
+
+			void setEnergyWindow(double win_size);
+
+			double getEnergyWindow() const;
+
+			void setForceFieldType(unsigned int type);
+	    
+			unsigned int getForceFieldType() const;
+			
+			void strictForceFieldParameterization(bool strict);
+
+			bool strictForceFieldParameterization() const;
+
+			void setFragmentLibrary(const FragmentLibrary::SharedPointer& lib);
+
+			const FragmentLibrary::SharedPointer& getFragmentLibrary() const;
+
+			void setTorsionLibrary(const TorsionLibrary::SharedPointer& lib);
+
+			const TorsionLibrary::SharedPointer& getTorsionLibrary() const;
+
+			FragmentConformerGeneratorSettings& getFragmentBuildSettings();
+
+			const FragmentConformerGeneratorSettings& getFragmentBuildSettings() const;
+
+		  private:
+			bool                               enumRings;
+			unsigned int                       nitrogenEnumMode;
+			bool                               generateCoords;
+			double                             eWindow;
+			unsigned int                       forceFieldType;
+			bool                               strictParam;
+			FragmentConformerGeneratorSettings fragBuildSettings;
+			FragmentLibrary::SharedPointer     fragLib;
+			TorsionLibrary::SharedPointer      torLib;
+		};
+
+		/**
+		 * @}
+		 */
     }
 }
 

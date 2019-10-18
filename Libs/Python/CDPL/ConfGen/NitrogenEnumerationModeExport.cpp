@@ -1,7 +1,7 @@
 /* -*- mode: c++; c-basic-offset: 4; tab-width: 4; indent-tabs-mode: t -*- */
 
 /* 
- * BoostFunctionWrapperExport.cpp 
+ * NitrogenEnumerationModeExport.cpp 
  *
  * This file is part of the Chemical Data Processing Toolkit
  *
@@ -24,17 +24,27 @@
  */
 
 
-#include "CDPL/ConfGen/CallbackFunction.hpp"
+#include <boost/python.hpp>
 
-#include "Base/BoostFunctionWrapperExport.hpp"
+#include "CDPL/ConfGen/NitrogenEnumerationMode.hpp"
 
-#include "ClassExports.hpp"
+#include "NamespaceExports.hpp"
 
 
-void CDPLPythonConfGen::exportBoostFunctionWrappers()
+namespace 
 {
-    using namespace CDPL;
 
-	CDPLPythonBase::BoostFunction0Export<ConfGen::CallbackFunction>("CallbackFunction");
+	struct NitrogenEnumerationMode {};
+}
 
+
+void CDPLPythonConfGen::exportNitrogenEnumerationModes()
+{
+	using namespace boost;
+	using namespace CDPL;
+
+	python::class_<NitrogenEnumerationMode, boost::noncopyable>("NitrogenEnumerationMode", python::no_init)
+		.def_readonly("NONE", &ConfGen::NitrogenEnumerationMode::NONE)
+		.def_readonly("ALL", &ConfGen::NitrogenEnumerationMode::ALL)
+		.def_readonly("UNSPECIFIED_STEREO", &ConfGen::NitrogenEnumerationMode::UNSPECIFIED_STEREO);
 }

@@ -48,9 +48,9 @@ void CDPLPythonConfGen::exportTorsionDriverSettings()
 		.def(CDPLPythonBase::ObjectIdentityCheckVisitor<ConfGen::TorsionDriverSettings>())
 		.def("assign", CDPLPythonBase::copyAssOp(&ConfGen::TorsionDriverSettings::operator=), 
 			 (python::arg("self"), python::arg("settings")), python::return_self<>())
-		.def("enumerateHeteroHydrogenRotors", SetBoolFunc(&ConfGen::TorsionDriverSettings::enumerateHeteroHydrogenRotors), 
+		.def("sampleHeteroAtomHydrogens", SetBoolFunc(&ConfGen::TorsionDriverSettings::sampleHeteroAtomHydrogens), 
 			 (python::arg("self"), python::arg("enumerate")))
-		.def("enumerateHeteroHydrogenRotors", GetBoolFunc(&ConfGen::TorsionDriverSettings::enumerateHeteroHydrogenRotors), 
+		.def("sampleHeteroAtomHydrogens", GetBoolFunc(&ConfGen::TorsionDriverSettings::sampleHeteroAtomHydrogens), 
 			 python::arg("self"))
 		.def("setForceFieldType", &ConfGen::TorsionDriverSettings::setForceFieldType, 
 			 (python::arg("self"), python::arg("type")))
@@ -65,8 +65,8 @@ void CDPLPythonConfGen::exportTorsionDriverSettings()
 		.def("getTorsionLibrary", &ConfGen::TorsionDriverSettings::getTorsionLibrary, 
 			 python::arg("self"), python::return_value_policy<python::copy_const_reference>())
 		.def_readonly("DEFAULT", ConfGen::TorsionDriverSettings::DEFAULT)
-		.add_property("enumHeteroHRotors", GetBoolFunc(&ConfGen::TorsionDriverSettings::enumerateHeteroHydrogenRotors),
-					  SetBoolFunc(&ConfGen::TorsionDriverSettings::enumerateHeteroHydrogenRotors))
+		.add_property("sampleHetAtomHydrogens", GetBoolFunc(&ConfGen::TorsionDriverSettings::sampleHeteroAtomHydrogens),
+					  SetBoolFunc(&ConfGen::TorsionDriverSettings::sampleHeteroAtomHydrogens))
 		.add_property("forceFieldType", &ConfGen::TorsionDriverSettings::getForceFieldType, 
 					  &ConfGen::TorsionDriverSettings::setForceFieldType)
 		.add_property("strictForceFieldParam", GetBoolFunc(&ConfGen::TorsionDriverSettings::strictForceFieldParameterization), 

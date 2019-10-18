@@ -48,22 +48,28 @@ void CDPLPythonConfGen::exportConformerGeneratorSettings()
 		.def(CDPLPythonBase::ObjectIdentityCheckVisitor<ConfGen::ConformerGeneratorSettings>())
 		.def("assign", CDPLPythonBase::copyAssOp(&ConfGen::ConformerGeneratorSettings::operator=), 
 			 (python::arg("self"), python::arg("settings")), python::return_self<>())
-		.def("enumerateHeteroHydrogenRotors", SetBoolFunc(&ConfGen::ConformerGeneratorSettings::enumerateHeteroHydrogenRotors), 
+		.def("sampleHeteroAtomHydrogens", SetBoolFunc(&ConfGen::ConformerGeneratorSettings::sampleHeteroAtomHydrogens), 
 			 (python::arg("self"), python::arg("enumerate")))
-		.def("enumerateHeteroHydrogenRotors", GetBoolFunc(&ConfGen::ConformerGeneratorSettings::enumerateHeteroHydrogenRotors), 
+		.def("sampleHeteroAtomHydrogens", GetBoolFunc(&ConfGen::ConformerGeneratorSettings::sampleHeteroAtomHydrogens), 
 			 python::arg("self"))
 		.def("enumerateRings", SetBoolFunc(&ConfGen::ConformerGeneratorSettings::enumerateRings), 
 			 (python::arg("self"), python::arg("enumerate")))
 		.def("enumerateRings", GetBoolFunc(&ConfGen::ConformerGeneratorSettings::enumerateRings), 
 			 python::arg("self"))
-		.def("enumerateNitrogens", SetBoolFunc(&ConfGen::ConformerGeneratorSettings::enumerateNitrogens), 
-			 (python::arg("self"), python::arg("enumerate")))
-		.def("enumerateNitrogens", GetBoolFunc(&ConfGen::ConformerGeneratorSettings::enumerateNitrogens), 
+		.def("setNitrogenEnumerationMode", &ConfGen::ConformerGeneratorSettings::setNitrogenEnumerationMode, 
+			 (python::arg("self"), python::arg("mode")))
+		.def("getNitrogenEnumerationMode", &ConfGen::ConformerGeneratorSettings::getNitrogenEnumerationMode, 
 			 python::arg("self"))
-		.def("useExistingCoordinates", SetBoolFunc(&ConfGen::ConformerGeneratorSettings::useExistingCoordinates), 
+		.def("generateCoordinates", SetBoolFunc(&ConfGen::ConformerGeneratorSettings::generateCoordinates), 
 			 (python::arg("self"), python::arg("reuse")))
-		.def("useExistingCoordinates", GetBoolFunc(&ConfGen::ConformerGeneratorSettings::useExistingCoordinates), 
+		.def("generateCoordinates", GetBoolFunc(&ConfGen::ConformerGeneratorSettings::generateCoordinates), 
 			 python::arg("self"))
+
+		.def("outputSuppliedCoordinates", SetBoolFunc(&ConfGen::ConformerGeneratorSettings::outputSuppliedCoordinates), 
+			 (python::arg("self"), python::arg("reuse")))
+		.def("outputSuppliedCoordinates", GetBoolFunc(&ConfGen::ConformerGeneratorSettings::outputSuppliedCoordinates), 
+			 python::arg("self"))
+
 		.def("setEnergyWindow", &ConfGen::ConformerGeneratorSettings::setEnergyWindow, 
 			 (python::arg("self"), python::arg("win_size")))
 		.def("getEnergyWindow", &ConfGen::ConformerGeneratorSettings::getEnergyWindow, 
@@ -101,14 +107,16 @@ void CDPLPythonConfGen::exportConformerGeneratorSettings()
 			 (&ConfGen::ConformerGeneratorSettings::getFragmentBuildSettings),
 			 python::arg("self"), python::return_internal_reference<>())
 		.def_readonly("DEFAULT", ConfGen::ConformerGeneratorSettings::DEFAULT)
-		.add_property("enumHeteroHRotors", GetBoolFunc(&ConfGen::ConformerGeneratorSettings::enumerateHeteroHydrogenRotors),
-					  SetBoolFunc(&ConfGen::ConformerGeneratorSettings::enumerateHeteroHydrogenRotors))
+		.add_property("sampleHetAtomHydrogens", GetBoolFunc(&ConfGen::ConformerGeneratorSettings::sampleHeteroAtomHydrogens),
+					  SetBoolFunc(&ConfGen::ConformerGeneratorSettings::sampleHeteroAtomHydrogens))
 		.add_property("enumRings", GetBoolFunc(&ConfGen::ConformerGeneratorSettings::enumerateRings),
 					  SetBoolFunc(&ConfGen::ConformerGeneratorSettings::enumerateRings))
-		.add_property("enumNitrogens", GetBoolFunc(&ConfGen::ConformerGeneratorSettings::enumerateNitrogens),
-					  SetBoolFunc(&ConfGen::ConformerGeneratorSettings::enumerateNitrogens))
-		.add_property("useExistingCoords", GetBoolFunc(&ConfGen::ConformerGeneratorSettings::useExistingCoordinates),
-					  SetBoolFunc(&ConfGen::ConformerGeneratorSettings::useExistingCoordinates))
+		.add_property("nitrogenEnumMode", &ConfGen::ConformerGeneratorSettings::getNitrogenEnumerationMode,
+					  &ConfGen::ConformerGeneratorSettings::setNitrogenEnumerationMode)
+		.add_property("generateCoords", GetBoolFunc(&ConfGen::ConformerGeneratorSettings::generateCoordinates),
+					  SetBoolFunc(&ConfGen::ConformerGeneratorSettings::generateCoordinates))
+		.add_property("outputSuppliedCoords", GetBoolFunc(&ConfGen::ConformerGeneratorSettings::outputSuppliedCoordinates),
+					  SetBoolFunc(&ConfGen::ConformerGeneratorSettings::outputSuppliedCoordinates))
 		.add_property("energyWindow", &ConfGen::ConformerGeneratorSettings::getEnergyWindow,
 					  &ConfGen::ConformerGeneratorSettings::setEnergyWindow)
 		.add_property("timeout", &ConfGen::ConformerGeneratorSettings::getTimeout,

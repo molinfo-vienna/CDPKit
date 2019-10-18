@@ -45,9 +45,33 @@ void CDPLPythonConfGen::exportFragmentAssembler()
 			 static_cast<ConfGen::FragmentAssemblerSettings& (ConfGen::FragmentAssembler::*)()>
 			 (&ConfGen::FragmentAssembler::getSettings), 
 			 python::arg("self"), python::return_internal_reference<>())
+		.def("setAbortCallback", &ConfGen::FragmentAssembler::setAbortCallback, 
+			 (python::arg("self"), python::arg("func")))
+		.def("getAbortCallback", &ConfGen::FragmentAssembler::getAbortCallback, 
+			 python::arg("self"), python::return_internal_reference<>())
+		.def("setTimeoutCallback", &ConfGen::FragmentAssembler::setTimeoutCallback, 
+			 (python::arg("self"), python::arg("func")))
+		.def("getTimeoutCallback", &ConfGen::FragmentAssembler::getTimeoutCallback, 
+			 python::arg("self"), python::return_internal_reference<>())
+		.def("assemble", &ConfGen::FragmentAssembler::assemble, (python::arg("self"), python::arg("molgraph")))
+		.def("getNumStructures", &ConfGen::FragmentAssembler::getNumStructures, python::arg("self"))
+		.def("getStructure", 
+			 static_cast<ConfGen::ConformerData& (ConfGen::FragmentAssembler::*)(std::size_t)>(&ConfGen::FragmentAssembler::getStructure),
+			 (python::arg("self"), python::arg("conf_idx")), python::return_internal_reference<>())
+		.def("__getitem__", 
+			 static_cast<ConfGen::ConformerData& (ConfGen::FragmentAssembler::*)(std::size_t)>(&ConfGen::FragmentAssembler::getStructure),
+			 (python::arg("self"), python::arg("conf_idx")), python::return_internal_reference<>())
+		.add_property("numStructures", &ConfGen::FragmentAssembler::getNumStructures)
 		.add_property("settings", 
 					  python::make_function(static_cast<ConfGen::FragmentAssemblerSettings& (ConfGen::FragmentAssembler::*)()>
 											(&ConfGen::FragmentAssembler::getSettings),
 											python::return_internal_reference<>()))
-		;
+		.add_property("abortCallback", 
+					  python::make_function(&ConfGen::FragmentAssembler::getAbortCallback,
+											python::return_internal_reference<>()),
+					  &ConfGen::FragmentAssembler::setAbortCallback)
+		.add_property("timeoutCallback", 
+					  python::make_function(&ConfGen::FragmentAssembler::getTimeoutCallback,
+											python::return_internal_reference<>()),
+					  &ConfGen::FragmentAssembler::setTimeoutCallback);
 }

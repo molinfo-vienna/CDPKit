@@ -50,9 +50,13 @@ void CDPLPythonConfGen::exportFragmentLibraryGenerator()
 			 (python::arg("self"), python::arg("lib")))
 		.def("getFragmentLibrary", &ConfGen::FragmentLibraryGenerator::getFragmentLibrary, 
 			 python::arg("self"), python::return_value_policy<python::copy_const_reference>())
-		.def("setProgressCallback", &ConfGen::FragmentLibraryGenerator::setProgressCallback, 
+		.def("setAbortCallback", &ConfGen::FragmentLibraryGenerator::setAbortCallback, 
 			 (python::arg("self"), python::arg("func")))
-		.def("getProgressCallback", &ConfGen::FragmentLibraryGenerator::getProgressCallback, 
+		.def("getAbortCallback", &ConfGen::FragmentLibraryGenerator::getAbortCallback, 
+			 python::arg("self"), python::return_internal_reference<>())
+		.def("setTimeoutCallback", &ConfGen::FragmentLibraryGenerator::setTimeoutCallback, 
+			 (python::arg("self"), python::arg("func")))
+		.def("getTimeoutCallback", &ConfGen::FragmentLibraryGenerator::getTimeoutCallback, 
 			 python::arg("self"), python::return_internal_reference<>())
 		.def("process", &ConfGen::FragmentLibraryGenerator::process, 
 			 (python::arg("self"), python::arg("frag")))
@@ -68,10 +72,14 @@ void CDPLPythonConfGen::exportFragmentLibraryGenerator()
 					  python::make_function(static_cast<ConfGen::FragmentConformerGeneratorSettings& (ConfGen::FragmentLibraryGenerator::*)()>
 											(&ConfGen::FragmentLibraryGenerator::getSettings),
 											python::return_internal_reference<>()))
-		.add_property("progressCallback", 
-					  python::make_function(&ConfGen::FragmentLibraryGenerator::getProgressCallback,
+		.add_property("abortCallback", 
+					  python::make_function(&ConfGen::FragmentLibraryGenerator::getAbortCallback,
 											python::return_internal_reference<>()),
-					  &ConfGen::FragmentLibraryGenerator::setProgressCallback)
+					  &ConfGen::FragmentLibraryGenerator::setAbortCallback)
+		.add_property("timeoutCallback", 
+					  python::make_function(&ConfGen::FragmentLibraryGenerator::getTimeoutCallback,
+											python::return_internal_reference<>()),
+					  &ConfGen::FragmentLibraryGenerator::setTimeoutCallback)
 		.add_property("fragmentLibrary", 
 					  python::make_function(&ConfGen::FragmentLibraryGenerator::getFragmentLibrary,
 											python::return_value_policy<python::copy_const_reference>()),

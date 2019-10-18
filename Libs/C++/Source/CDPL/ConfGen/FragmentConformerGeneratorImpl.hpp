@@ -36,7 +36,7 @@
 #include "CDPL/ConfGen/DGStructureGenerator.hpp"
 #include "CDPL/ConfGen/FragmentConformerGeneratorSettings.hpp"
 #include "CDPL/ConfGen/ConformerDataArray.hpp"
-#include "CDPL/ConfGen/ProgressCallbackFunction.hpp"
+#include "CDPL/ConfGen/CallbackFunction.hpp"
 #include "CDPL/ForceField/MMFF94InteractionParameterizer.hpp"
 #include "CDPL/ForceField/MMFF94InteractionData.hpp"
 #include "CDPL/ForceField/MMFF94EnergyCalculator.hpp"
@@ -68,9 +68,13 @@ namespace CDPL
 
 			const FragmentConformerGeneratorSettings& getSettings() const;
 
-			void setProgressCallback(const ProgressCallbackFunction& func);
+			void setAbortCallback(const CallbackFunction& func);
 
-			const ProgressCallbackFunction& getProgressCallback() const;
+			const CallbackFunction& getAbortCallback() const;
+
+			void setTimeoutCallback(const CallbackFunction& func);
+
+			const CallbackFunction& getTimeoutCallback() const;
 
 			unsigned int generate(const Chem::MolecularGraph& molgraph, unsigned int frag_type);
 
@@ -113,7 +117,7 @@ namespace CDPL
 
 			ConformerDataPtr allocConformerData();
 
-			bool timeoutExceeded(std::size_t timeout) const;
+			bool timedout(std::size_t timeout) const;
 
 			bool has3DCoordinates(const Chem::Atom& atom) const;
 
@@ -126,7 +130,8 @@ namespace CDPL
 			typedef std::vector<std::size_t> IndexList;
 
 			ConformerDataCache                       confDataCache;
-			ProgressCallbackFunction                 progCallback;
+			CallbackFunction                         abortCallback;
+			CallbackFunction                         timeoutCallback;
 			boost::timer::cpu_timer                  timer;
 			const Chem::MolecularGraph*              molGraph;
 			std::size_t                              numAtoms;

@@ -37,7 +37,7 @@
 
 #include "CDPL/ConfGen/APIPrefix.hpp"
 #include "CDPL/ConfGen/ConformerDataArray.hpp"
-#include "CDPL/ConfGen/ProgressCallbackFunction.hpp"
+#include "CDPL/ConfGen/CallbackFunction.hpp"
 #include "CDPL/ConfGen/FragmentConformerGeneratorSettings.hpp"
 
 
@@ -75,9 +75,15 @@ namespace CDPL
 
 			const FragmentConformerGeneratorSettings& getSettings() const;
 
-			void setProgressCallback(const ProgressCallbackFunction& func);
+			void setAbortCallback(const CallbackFunction& func);
 
-			const ProgressCallbackFunction& getProgressCallback() const;
+			const CallbackFunction& getAbortCallback() const;
+
+			void setTimeoutCallback(const CallbackFunction& func);
+
+			const CallbackFunction& getTimeoutCallback() const;
+
+			unsigned int generate(const Chem::MolecularGraph& molgraph);
 
 			unsigned int generate(const Chem::MolecularGraph& molgraph, unsigned int frag_type);
 

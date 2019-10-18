@@ -55,6 +55,26 @@ ConfGen::TorsionDriver::getSettings()
     return impl->getSettings();
 }
 
+void ConfGen::TorsionDriver::setAbortCallback(const CallbackFunction& func)
+{
+	impl->setAbortCallback(func);
+}
+
+const ConfGen::CallbackFunction& ConfGen::TorsionDriver::getAbortCallback() const
+{
+	return impl->getAbortCallback();
+}
+
+void ConfGen::TorsionDriver::setTimeoutCallback(const CallbackFunction& func)
+{
+	impl->setTimeoutCallback(func);
+}
+
+const ConfGen::CallbackFunction& ConfGen::TorsionDriver::getTimeoutCallback() const
+{
+	return impl->getTimeoutCallback();
+}
+
 unsigned int ConfGen::TorsionDriver::setup(const Chem::MolecularGraph& molgraph)
 {
 	impl->setup(molgraph, molgraph);
@@ -113,16 +133,6 @@ unsigned int ConfGen::TorsionDriver::addInputCoordinates(const Math::Vector3DArr
 	impl->addInputCoordinates(coords, atom_mask);
 
 	return ReturnCode::SUCCESS;
-}
-
-void ConfGen::TorsionDriver::setProgressCallback(const ProgressCallbackFunction& func)
-{
-	impl->setProgressCallback(func);
-}
-
-const ConfGen::ProgressCallbackFunction& ConfGen::TorsionDriver::getProgressCallback() const
-{
-	return impl->getProgressCallback();
 }
 
 unsigned int ConfGen::TorsionDriver::drive()

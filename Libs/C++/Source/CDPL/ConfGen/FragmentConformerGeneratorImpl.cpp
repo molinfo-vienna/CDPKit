@@ -94,14 +94,24 @@ const ConfGen::FragmentConformerGeneratorSettings& ConfGen::FragmentConformerGen
 	return settings;
 }
 
-void ConfGen::FragmentConformerGeneratorImpl::setProgressCallback(const ProgressCallbackFunction& func)
+void ConfGen::FragmentConformerGeneratorImpl::setAbortCallback(const CallbackFunction& func)
 {
-	progCallback = func;
+	abortCallback = func;
 }
 
-const ConfGen::ProgressCallbackFunction& ConfGen::FragmentConformerGeneratorImpl::getProgressCallback() const
+const ConfGen::CallbackFunction& ConfGen::FragmentConformerGeneratorImpl::getAbortCallback() const
 {
-	return progCallback;
+	return abortCallback;
+}
+
+void ConfGen::FragmentConformerGeneratorImpl::setTimeoutCallback(const CallbackFunction& func)
+{
+	timeoutCallback = func;
+}
+
+const ConfGen::CallbackFunction& ConfGen::FragmentConformerGeneratorImpl::getTimeoutCallback() const
+{
+	return abortCallback;
 }
 
 unsigned int ConfGen::FragmentConformerGeneratorImpl::generate(const Chem::MolecularGraph& molgraph, unsigned int frag_type) 
@@ -147,8 +157,8 @@ unsigned int ConfGen::FragmentConformerGeneratorImpl::generateSingleConformer()
 
 	outputConfs.push_back(conf_data);
 
-	if (progCallback)
-		progCallback();
+	if (abortCallback && abortCallback())
+		return ReturnCode::ABORTED;
 
 	return ReturnCode::SUCCESS;
 }
@@ -180,12 +190,12 @@ unsigned int ConfGen::FragmentConformerGeneratorImpl::generateFlexibleRingConfor
 	unsigned int ret_code = ReturnCode::SUCCESS;
 
 	for (std::size_t i = 0; i < num_conf_samples; i++) {
-		if (timeoutExceeded(timeout)) {
+		if (timedout(timeout)) {
 			ret_code = ReturnCode::TIMEOUT_EXCEEDED;
 			break;
 		}
 
-		if (progCallback && !progCallback())
+		if (abortCallback && abortCallback())
 			return ReturnCode::ABORTED;
 
 		ConformerDataPtr conf_data = allocConformerData();
@@ -552,8 +562,11 @@ std::size_t ConfGen::FragmentConformerGeneratorImpl::getNumRotatableRingBonds(co
 	return count;
 }
 
-bool ConfGen::FragmentConformerGeneratorImpl::timeoutExceeded(std::size_t timeout) const
+bool ConfGen::FragmentConformerGeneratorImpl::timedout(std::size_t timeout) const
 {
+	if (timeoutCallback && timeoutCallback())
+		return true;
+
 	if (timeout == 0)
 		return false;
 

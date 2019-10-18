@@ -50,10 +50,11 @@
 #include "CDPL/ConfGen/TorsionDriver.hpp"
 #include "CDPL/ConfGen/TorsionDriverSettings.hpp"
 #include "CDPL/ConfGen/UtilityFunctions.hpp"
-#include "CDPL/ConfGen/ProgressCallbackFunction.hpp"
+#include "CDPL/ConfGen/CallbackFunction.hpp"
 #include "CDPL/ConfGen/FragmentType.hpp"
 #include "CDPL/ConfGen/ForceFieldType.hpp"
 #include "CDPL/ConfGen/ReturnCode.hpp"
+#include "CDPL/ConfGen/NitrogenEnumerationMode.hpp"
 
 #if defined(HAVE_BOOST_TIMER) && defined(HAVE_BOOST_CHRONO)
 

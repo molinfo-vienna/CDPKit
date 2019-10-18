@@ -35,10 +35,11 @@
 
 #include "CDPL/ConfGen/TorsionDriverSettings.hpp"
 #include "CDPL/ConfGen/TorsionRuleMatcher.hpp"
+#include "CDPL/ConfGen/ConformerDataArray.hpp"
 #include "CDPL/Chem/SubstructureSearch.hpp"
-#include "CDPL/Util/BitSet.hpp"
 
 #include "FragmentTree.hpp"
+#include "ForceFieldInteractionMask.hpp"
 
 
 namespace CDPL 
@@ -58,7 +59,7 @@ namespace CDPL
 		{
 
 		public:
-			typedef FragmentTree::ConstConformerIterator ConstConformerIterator;
+			typedef ConformerDataArray::const_iterator ConstConformerIterator;
 
 			TorsionDriverImpl();
 
@@ -79,9 +80,13 @@ namespace CDPL
 			void addInputCoordinates(const Math::Vector3DArray& coords);
 			void addInputCoordinates(const Math::Vector3DArray& coords, const Util::BitSet& atom_mask);
 
-			void setProgressCallback(const ProgressCallbackFunction& func);
+			void setAbortCallback(const CallbackFunction& func);
 
-			const ProgressCallbackFunction& getProgressCallback() const;
+			const CallbackFunction& getAbortCallback() const;
+
+			void setTimeoutCallback(const CallbackFunction& func);
+
+			const CallbackFunction& getTimeoutCallback() const;
 
 			unsigned int drive();
 
@@ -100,6 +105,12 @@ namespace CDPL
 			TorsionDriverImpl(const TorsionDriverImpl&);
 
 			TorsionDriverImpl& operator=(const TorsionDriverImpl&);
+
+			void addInputCoordinates(FragmentTreeNode* node, const Math::Vector3DArray& coords);
+			void addInputCoordinates(FragmentTreeNode* node, const Math::Vector3DArray& coords, 
+									 const Util::BitSet& atom_mask);
+
+			void clearInputCoordinates(FragmentTreeNode* node, const Util::BitSet& atom_mask);
 
 			void setupTorsionAngles(FragmentTreeNode* node);
 
@@ -120,7 +131,8 @@ namespace CDPL
 			Chem::SubstructureSearch  subSearch;
 			MMFF94ParameterizerPtr    mmff94Parameterizer;
 			MMFF94InteractionDataPtr  mmff94Data;
-			Util::BitSet              rotBondMask;
+			Util::BitSet              tmpBitSet;
+			ForceFieldInteractionMask mmff94InteractionMask;
 		};
     }
 }

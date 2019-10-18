@@ -43,7 +43,7 @@ namespace
 {
 
 	const std::size_t MAX_TREE_NODE_CACHE_SIZE         = 200;
-	const double      ATOM_CLASH_RADIUS_SCALING_FACTOR = 1.5;
+	const double      ATOM_CLASH_RADIUS_SCALING_FACTOR = 1.3;
 }
 
 
@@ -53,7 +53,7 @@ using namespace CDPL;
 ConfGen::FragmentTree::FragmentTree(std::size_t max_conf_data_cache_size):
 	confDataCache(max_conf_data_cache_size),
 	nodeCache(boost::bind(&FragmentTree::createTreeNode, this), TreeNodeCache::DefaultDestructor(), MAX_TREE_NODE_CACHE_SIZE), 
-	rootNode(0), timeout(0)
+	rootNode(0)
 {}
 
 ConfGen::FragmentTree::~FragmentTree() {}
@@ -66,120 +66,29 @@ void ConfGen::FragmentTree::build(const Chem::MolecularGraph& molgraph, const Ch
 	initAtomClashRadiusTable(root_molgraph);
 }
 
-void ConfGen::FragmentTree::setMMFF94Parameters(const ForceField::MMFF94InteractionData& ia_data)
-{
-	mmff94InteractionMask.setup(ia_data);
-	rootNode->distMMFF94Parameters(ia_data, mmff94InteractionMask);
-}
-
-void ConfGen::FragmentTree::clearConformers()
-{
-	rootNode->clearConformersDownwards();
-}
-
-void ConfGen::FragmentTree::clearConformers(const Util::BitSet& atom_mask)
-{
-	clearConformers(rootNode, atom_mask);
-}
-
-void ConfGen::FragmentTree::addCoordinates(const Math::Vector3DArray& coords)
-{
-	addCoordinates(rootNode, coords);
-}
-
-void ConfGen::FragmentTree::addCoordinates(const Math::Vector3DArray& coords, const Util::BitSet& atom_mask)
-{
-	addCoordinates(rootNode, coords, atom_mask);
-}
-
-unsigned int ConfGen::FragmentTree::generateConformers(bool e_ordered)
-{
-	return rootNode->generateConformers(e_ordered);
-}
-
-std::size_t ConfGen::FragmentTree::getNumConformers() const
-{
-	return rootNode->getConformers().size();
-}
-
-ConfGen::ConformerData& ConfGen::FragmentTree::getConformer(std::size_t idx)
-{
-	return *rootNode->getConformers()[idx];
-}
-
-ConfGen::FragmentTree::ConstConformerIterator ConfGen::FragmentTree::getConformersBegin() const
-{
-    return rootNode->getConformers().begin();
-}
-
-ConfGen::FragmentTree::ConstConformerIterator ConfGen::FragmentTree::getConformersEnd() const
-{
-    return rootNode->getConformers().end();
-}
-
 ConfGen::FragmentTreeNode* ConfGen::FragmentTree::getRoot() const
 {
 	return rootNode;
 }
 
-void ConfGen::FragmentTree::setProgressCallback(const ProgressCallbackFunction& func)
+void ConfGen::FragmentTree::setAbortCallback(const CallbackFunction& func)
 {
-	progCallback = func;
+	abortCallback = func;
 }
 
-const ConfGen::ProgressCallbackFunction& ConfGen::FragmentTree::getProgressCallback() const
+const ConfGen::CallbackFunction& ConfGen::FragmentTree::getAbortCallback() const
 {
-	return progCallback;
+	return abortCallback;
 }
 
-void ConfGen::FragmentTree::clearConformers(FragmentTreeNode* node, const Util::BitSet& atom_mask)
+void ConfGen::FragmentTree::setTimeoutCallback(const CallbackFunction& func)
 {
-	if (node->hasChildren()) {
-		clearConformers(node->getLeftChild(), atom_mask);
-		clearConformers(node->getRightChild(), atom_mask);
-		return;
-	}
-
-	tmpBitSet = node->getCoreAtomMask();
-	tmpBitSet &= atom_mask;
-
-	if (tmpBitSet.any()) 
-		node->clearConformersUpwards();
+	timeoutCallback = func;
 }
 
-void ConfGen::FragmentTree::addCoordinates(FragmentTreeNode* node, const Math::Vector3DArray& coords)
+const ConfGen::CallbackFunction& ConfGen::FragmentTree::getTimeoutCallback() const
 {
-	if (node->hasChildren()) {
-		addCoordinates(node->getLeftChild(), coords);
-		addCoordinates(node->getRightChild(), coords);
-		return;
-	}
-
-	if (node->getParent())
-		node->getParent()->clearConformersUpwards();
-
-	node->addConformer(coords);
-}
-
-void ConfGen::FragmentTree::addCoordinates(FragmentTreeNode* node, const Math::Vector3DArray& coords, 
-												const Util::BitSet& atom_mask)
-{
-	if (node->hasChildren()) {
-		addCoordinates(node->getLeftChild(), coords, atom_mask);
-		addCoordinates(node->getRightChild(), coords, atom_mask);
-		return;
-	}
-
-	tmpBitSet = node->getCoreAtomMask();
-	tmpBitSet &= atom_mask;
-
-	if (!tmpBitSet.any())
-		return;
-
-	if (node->getParent())
-		node->getParent()->clearConformersUpwards();
-
-	node->addConformer(coords);
+	return timeoutCallback;
 }
 
 void ConfGen::FragmentTree::generateLeafNodes(const Chem::MolecularGraph& molgraph, const Chem::MolecularGraph& root_molgraph,
@@ -359,12 +268,20 @@ ConfGen::FragmentTreeNode* ConfGen::FragmentTree::createTreeNode()
 	return new FragmentTreeNode(*this);
 }
 
-bool ConfGen::FragmentTree::progress() const
+bool ConfGen::FragmentTree::aborted() const
 {
-	if (progCallback)
-		return progCallback();
+	if (abortCallback)
+		return abortCallback();
 
-	return true;
+	return false;
+}
+
+bool ConfGen::FragmentTree::timedout() const
+{
+	if (timeoutCallback)
+		return timeoutCallback();
+
+	return false;
 }
 
 const ConfGen::FragmentTree::DoubleArray& ConfGen::FragmentTree::getAtomClashRadiusTable() const

@@ -97,7 +97,7 @@ public:
 		parent(parent), fragLibGen(parent->fragmentLibPtr), numProcMols(0),
 		numProcFrags(0), numErrorFrags(0), numAddedFrags(0), totalNumConfs(0)  
 	{
-		fragLibGen.setProgressCallback(boost::bind(&FragLibGenerationWorker::progress, this));
+		fragLibGen.setAbortCallback(boost::bind(&FragLibGenerationWorker::abort, this));
 
 		CDPL::ConfGen::FragmentConformerGeneratorSettings& settings = fragLibGen.getSettings();
 
@@ -242,11 +242,11 @@ private:
 		}
 	}
 
-	bool progress() const {
+	bool abort() const {
 		if (parent->haveErrorMessage() || GenFragLibImpl::termSignalCaught())
-			return false;
+			return true;
 
-		return true;
+		return false;
 	}
 
 	GenFragLibImpl*                         parent;

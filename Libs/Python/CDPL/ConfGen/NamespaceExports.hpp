@@ -34,6 +34,7 @@ namespace CDPLPythonConfGen
 	void exportFragmentTypes();
 	void exportForceFieldTypes();
 	void exportReturnCodes();
+	void exportNitrogenEnumerationModes();
 }
 
 #endif // CDPL_PYTHON_CONFGEN_NAMESPACEEXPORTS_HPP

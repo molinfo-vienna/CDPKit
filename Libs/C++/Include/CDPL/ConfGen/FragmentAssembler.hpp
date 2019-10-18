@@ -31,14 +31,25 @@
 #ifndef CDPL_CONFGEN_FRAGMENTASSEMBLER_HPP
 #define CDPL_CONFGEN_FRAGMENTASSEMBLER_HPP
 
+#include <cstddef>
 #include <memory>
+
+#include <boost/iterator/indirect_iterator.hpp>
 
 #include "CDPL/ConfGen/APIPrefix.hpp"
 #include "CDPL/ConfGen/FragmentAssemblerSettings.hpp"
+#include "CDPL/ConfGen/ConformerDataArray.hpp"
+#include "CDPL/ConfGen/CallbackFunction.hpp"
 
 
 namespace CDPL 
 {
+
+	namespace Chem
+	{
+
+		class MolecularGraph;
+	}
 
     namespace ConfGen 
     {
@@ -54,11 +65,38 @@ namespace CDPL
 		{
 
 		  public:
+			typedef boost::indirect_iterator<ConformerDataArray::const_iterator, const ConformerData> ConstStructureIterator;
+			typedef boost::indirect_iterator<ConformerDataArray::const_iterator, ConformerData> StructureIterator;
+
 			FragmentAssembler();
 	
 			const FragmentAssemblerSettings& getSettings() const;
 
 			FragmentAssemblerSettings& getSettings();
+
+			void setAbortCallback(const CallbackFunction& func);
+
+			const CallbackFunction& getAbortCallback() const;
+
+			void setTimeoutCallback(const CallbackFunction& func);
+
+			const CallbackFunction& getTimeoutCallback() const;
+
+			unsigned int assemble(const Chem::MolecularGraph& molgraph);
+		
+			std::size_t getNumStructures() const;
+
+			const ConformerData& getStructure(std::size_t idx) const;
+
+			ConformerData& getStructure(std::size_t idx);
+
+			ConstStructureIterator getStructuresBegin() const;
+
+			ConstStructureIterator getStructuresEnd() const;
+
+			StructureIterator getStructuresBegin();
+
+			StructureIterator getStructuresEnd();
 
 		  private:
 			FragmentAssembler(const FragmentAssembler&);

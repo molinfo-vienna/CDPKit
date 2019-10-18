@@ -31,11 +31,30 @@
 #ifndef CDPL_CONFGEN_FRAGMENTASSEMBLERIMPL_HPP
 #define CDPL_CONFGEN_FRAGMENTASSEMBLERIMPL_HPP
 
+#include <memory>
+
 #include "CDPL/ConfGen/FragmentAssemblerSettings.hpp"
+#include "CDPL/ConfGen/TorsionRuleMatcher.hpp"
+#include "CDPL/ConfGen/ConformerDataArray.hpp"
+#include "CDPL/ConfGen/FragmentLibraryEntry.hpp"
+#include "CDPL/ConfGen/ForceFieldInteractionMask.hpp"
+#include "CDPL/Util/ObjectStack.hpp"
+
+#include "FragmentTree.hpp"
+#include "FragmentConformerGeneratorImpl.hpp"
+#include "TorsionDriverImpl.hpp"
+#include "ForceFieldInteractionMask.hpp"
 
 
 namespace CDPL 
 {
+
+	namespace ForceField
+	{
+
+		class MMFF94InteractionData;
+		class MMFF94InteractionParameterizer;
+	}
 
     namespace ConfGen 
     {
@@ -44,18 +63,78 @@ namespace CDPL
 		{
 
 		public:
+			typedef ConformerDataArray::const_iterator ConstStructureIterator;
+
 			FragmentAssemblerImpl();
 
 			~FragmentAssemblerImpl();
 
 			FragmentAssemblerSettings& getSettings();
 
+			void setAbortCallback(const CallbackFunction& func);
+
+			const CallbackFunction& getAbortCallback() const;
+
+			void setTimeoutCallback(const CallbackFunction& func);
+
+			const CallbackFunction& getTimeoutCallback() const;
+
+			unsigned int assemble(const Chem::MolecularGraph& molgraph);
+			unsigned int assemble(const Chem::MolecularGraph& molgraph, 
+								  const ForceField::MMFF94InteractionData& ia_data);
+
+			std::size_t getNumStructures() const;
+
+			ConformerData& getStructure(std::size_t idx);
+
+			ConstStructureIterator getStructuresBegin() const;
+			ConstStructureIterator getStructuresEnd() const;
+
+			FragmentTree& getFragmentTree();
+
 		private:
 			FragmentAssemblerImpl(const FragmentAssemblerImpl&);
 
 			FragmentAssemblerImpl& operator=(const FragmentAssemblerImpl&);
+	
+			void clear();
 
-			FragmentAssemblerSettings settings;
+			void buildFragmentTree(const Chem::MolecularGraph& molgraph);
+			void extractBuildFragments(FragmentTreeNode* node);
+			void setBuildFragmentMMFF94Parameters(const ForceField::MMFF94InteractionData& ia_data);
+			void setFragmentLinkBondLengths(FragmentTreeNode* node, 
+											const ForceField::MMFF94InteractionData& ia_data);
+
+			struct BuildFragmentData
+			{
+
+				FragmentTreeNode*  treeNode;
+				ConformerDataArray conformers;
+			};
+
+			typedef std::auto_ptr<ForceField::MMFF94InteractionParameterizer> MMFF94ParameterizerPtr;
+			typedef std::auto_ptr<ForceField::MMFF94InteractionData> MMFF94InteractionDataPtr;
+
+			typedef Util::ObjectStack<ConformerData> ConformerDataCache;
+			typedef Util::ObjectStack<BuildFragmentData> BuildFragmentDataCache;
+			typedef std::vector<BuildFragmentData*> BuildFragmentList;
+
+			ConformerDataCache             confDataCache;
+			BuildFragmentDataCache         buildFragDataCache;
+			FragmentAssemblerSettings      settings;
+			CallbackFunction               abortCallback;
+			CallbackFunction               timeoutCallback;
+			FragmentTree                   fragTree;
+			BuildFragmentList              buildFrags;
+			TorsionRuleMatcher             torRuleMatcher;
+			FragmentConformerGeneratorImpl fragConfGen;
+			TorsionDriverImpl              torDriver;
+			FragmentLibraryEntry           fragLibEntry;
+			ConformerDataArray             structures;
+			MMFF94ParameterizerPtr         mmff94Parameterizer;
+			MMFF94InteractionDataPtr       mmff94Data;
+			ForceFieldInteractionMask      mmff94InteractionMask;
+			Util::BitSet                   fragLinkBondMask;
 		};
     }
 }

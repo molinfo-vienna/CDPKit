@@ -37,18 +37,18 @@ const ConfGen::TorsionDriverSettings ConfGen::TorsionDriverSettings::DEFAULT;
 
 
 ConfGen::TorsionDriverSettings::TorsionDriverSettings(): 
-	enumHetHRotors(false), energyOrdered(true), forceFieldType(ForceFieldType::MMFF94S_NO_ESTAT), 
+	sampleHetAtomHs(false), energyOrdered(true), forceFieldType(ForceFieldType::MMFF94S_NO_ESTAT), 
 	strictParam(true), torLib(TorsionLibrary::get())
 {}
 
-void ConfGen::TorsionDriverSettings::enumerateHeteroHydrogenRotors(bool enumerate)
+void ConfGen::TorsionDriverSettings::sampleHeteroAtomHydrogens(bool sample)
 {
-	enumHetHRotors = enumerate;
+	sampleHetAtomHs = sample;
 }
 				
-bool ConfGen::TorsionDriverSettings::enumerateHeteroHydrogenRotors() const
+bool ConfGen::TorsionDriverSettings::sampleHeteroAtomHydrogens() const
 {
-	return enumHetHRotors;
+	return sampleHetAtomHs;
 }
 
 void ConfGen::TorsionDriverSettings::orderByEnergy(bool order)
