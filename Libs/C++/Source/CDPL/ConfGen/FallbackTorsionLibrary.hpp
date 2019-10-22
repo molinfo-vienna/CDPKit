@@ -1,7 +1,7 @@
 /* -*- mode: c++; c-basic-offset: 4; tab-width: 4; indent-tabs-mode: t -*- */
 
 /* 
- * ReturnCode.hpp 
+ * FallbackTorsionLibrary.hpp 
  *
  * This file is part of the Chemical Data Processing Toolkit
  *
@@ -25,57 +25,23 @@
 
 /**
  * \file
- * \brief Definition of constants in namespace CDPL::Confgen::ReturnCode.
+ * \brief Declarion of a fallback torsion library retrieval function.
  */
 
-#ifndef CDPL_CONFGEN_RETURNCODE_HPP
-#define CDPL_CONFGEN_RETURNCODE_HPP
+#ifndef CDPL_CONFGEN_FALLBACKTORSIONLIBRARY_HPP
+#define CDPL_CONFGEN_FALLBACKTORSIONLIBRARY_HPP
+
+#include "CDPL/ConfGen/TorsionLibrary.hpp"
 
 
 namespace CDPL 
 {
 
-    namespace ConfGen
+    namespace ConfGen 
     {
-
-	/**
-	 * \addtogroup CDPL_CONFGEN_CONSTANTS
-	 * @{
-	 */
-
-	/**
-	 * \brief Provides constants that are used to describe the result of operations related to conformer generation.
-	 */
-	namespace ReturnCode
-	{
-			
-	    const int SUCCESS                         = 0; 
-
-	    const int UNINITIALIZED                   = 1;
-
-	    const int TIMEOUT                         = 2;
-
-	    const int ABORTED                         = 3;
-
-	    const int FORCEFIELD_SETUP_FAILED         = 4;
-
-	    const int FORCEFIELD_MINIMIZATION_FAILED  = 5;
-
-	    const int FRAGMENT_LIBRARY_NOT_SET        = 6;
- 	
-	    const int FRAGMENT_CONF_GEN_FAILED        = 7;
-
-	    const int FRAGMENT_CONF_GEN_TIMEOUT       = 8;
-
-	    const int TORSION_DRIVING_FAILED          = 9;
-
-	    const int ERROR                           = 10;
-	}
-
-	/**
-	 * @}
-	 */
+	
+	const TorsionLibrary::SharedPointer& getFallbackTorsionLibrary();
     }
 }
 
-#endif // CDPL_CONFGEN_RETURNCODE_HPP
+#endif // CDPL_CONFGEN_FALLBACKTORSIONLIBRARY_HPP

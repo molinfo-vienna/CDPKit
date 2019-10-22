@@ -190,13 +190,16 @@ unsigned int ConfGen::FragmentConformerGeneratorImpl::generateFlexibleRingConfor
 	unsigned int ret_code = ReturnCode::SUCCESS;
 
 	for (std::size_t i = 0; i < num_conf_samples; i++) {
-		if (timedout(timeout)) {
-			ret_code = ReturnCode::TIMEOUT_EXCEEDED;
-			break;
-		}
+		if (timeoutCallback && timeoutCallback())
+			return ReturnCode::TIMEOUT;
 
 		if (abortCallback && abortCallback())
 			return ReturnCode::ABORTED;
+
+		if (timedout(timeout)) {
+			ret_code = ReturnCode::FRAGMENT_CONF_GEN_TIMEOUT;
+			break;
+		}
 
 		ConformerDataPtr conf_data = allocConformerData();
 
@@ -217,13 +220,9 @@ unsigned int ConfGen::FragmentConformerGeneratorImpl::generateFlexibleRingConfor
 		workingConfs.push_back(conf_data);
 	}
 
-	if (workingConfs.empty()) {
-		if (ret_code != ReturnCode::SUCCESS)
-			return ret_code;
-
-		return ReturnCode::MAX_NUM_TRIALS_EXCEEDED;
-	}
-
+	if (workingConfs.empty()) 
+		return ReturnCode::FRAGMENT_CONF_GEN_FAILED;
+	
 	std::sort(workingConfs.begin(), workingConfs.end(), 
 			  boost::bind(std::less<double>(), boost::bind(&ConformerData::getEnergy, _1), boost::bind(&ConformerData::getEnergy, _2)));
 
@@ -348,7 +347,7 @@ unsigned int ConfGen::FragmentConformerGeneratorImpl::generateRandomConformer(Co
 		return ReturnCode::SUCCESS;
 	}
 
-	return ReturnCode::MAX_NUM_TRIALS_EXCEEDED;
+	return ReturnCode::FRAGMENT_CONF_GEN_FAILED;
 }
 
 bool ConfGen::FragmentConformerGeneratorImpl::checkRMSD(const Math::Vector3DArray& conf_coords, double min_rmsd)
@@ -564,9 +563,6 @@ std::size_t ConfGen::FragmentConformerGeneratorImpl::getNumRotatableRingBonds(co
 
 bool ConfGen::FragmentConformerGeneratorImpl::timedout(std::size_t timeout) const
 {
-	if (timeoutCallback && timeoutCallback())
-		return true;
-
 	if (timeout == 0)
 		return false;
 

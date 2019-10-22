@@ -40,6 +40,7 @@
 #include "CDPL/ConfGen/TorsionDriverSettings.hpp"
 #include "CDPL/ConfGen/CallbackFunction.hpp"
 #include "CDPL/ConfGen/ConformerDataArray.hpp"
+#include "CDPL/ConfGen/ConformerData.hpp"
 #include "CDPL/Util/BitSet.hpp"
 #include "CDPL/Math/VectorArray.hpp"
 
@@ -51,6 +52,7 @@ namespace CDPL
 	{
 
 		class MolecularGraph;
+		class Fragment;
 	}
 
     namespace ConfGen 
@@ -87,15 +89,21 @@ namespace CDPL
 			const CallbackFunction& getTimeoutCallback() const;
 
 			unsigned int setup(const Chem::MolecularGraph& molgraph);
-			unsigned int setup(const Chem::MolecularGraph& molgraph, const Util::BitSet& bond_mask, bool is_excl_mask);
+			unsigned int setup(const Chem::MolecularGraph& molgraph, const Util::BitSet& bond_mask);
 
 			unsigned int clearInputCoordinates();
-			unsigned int clearInputCoordinates(const Util::BitSet& atom_mask);
+			unsigned int clearInputCoordinates(std::size_t frag_idx);
 
 			unsigned int addInputCoordinates(const Math::Vector3DArray& coords);
-			unsigned int addInputCoordinates(const Math::Vector3DArray& coords, const Util::BitSet& atom_mask);
+			unsigned int addInputCoordinates(const Math::Vector3DArray& coords, std::size_t frag_idx);
+			unsigned int addInputCoordinates(const ConformerData& conf_data, std::size_t frag_idx);
+			unsigned int addInputCoordinates(const ConformerData::SharedPointer& conf_data, std::size_t frag_idx);
 
-			unsigned int drive();
+			std::size_t getNumFragments() const;
+
+			const Chem::Fragment& getFragment(std::size_t idx) const;
+
+			unsigned int generateConformers();
 
 			std::size_t getNumConformers() const;
 

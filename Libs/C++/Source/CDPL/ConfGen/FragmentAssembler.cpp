@@ -76,43 +76,58 @@ unsigned int ConfGen::FragmentAssembler::assemble(const Chem::MolecularGraph& mo
 	return impl->assemble(molgraph);
 }
 		
-std::size_t ConfGen::FragmentAssembler::getNumStructures() const
+std::size_t ConfGen::FragmentAssembler::getNumConformers() const
 {
-	return impl->getNumStructures();
+	if (!impl->initialized())
+		return 0;
+
+	return impl->getNumConformers();
 }
 
-const ConfGen::ConformerData& ConfGen::FragmentAssembler::getStructure(std::size_t idx) const
+const ConfGen::ConformerData& ConfGen::FragmentAssembler::getConformer(std::size_t idx) const
 {
-	if (idx >= impl->getNumStructures())
-		throw Base::IndexError("FragmentAssembler: structure index out of bounds");
+	if (idx >= impl->getNumConformers())
+		throw Base::IndexError("FragmentAssembler: conformer index out of bounds");
 
-	return impl->getStructure(idx);
+	return impl->getConformer(idx);
 }
 
-ConfGen::ConformerData& ConfGen::FragmentAssembler::getStructure(std::size_t idx)
+ConfGen::ConformerData& ConfGen::FragmentAssembler::getConformer(std::size_t idx)
 {
-	if (idx >= impl->getNumStructures())
-		throw Base::IndexError("FragmentAssembler: structure index out of bounds");
+	if (idx >= impl->getNumConformers())
+		throw Base::IndexError("FragmentAssembler: conformer index out of bounds");
 
-	return impl->getStructure(idx);
+	return impl->getConformer(idx);
 }
 
-ConfGen::FragmentAssembler::ConstStructureIterator ConfGen::FragmentAssembler::getStructuresBegin() const
+ConfGen::FragmentAssembler::ConstConformerIterator ConfGen::FragmentAssembler::getConformersBegin() const
 {
-	return impl->getStructuresBegin();
+	if (!impl->initialized())
+		throw Base::OperationFailed("FragmentAssembler: uninitialized");
+
+	return impl->getConformersBegin();
 }
 
-ConfGen::FragmentAssembler::ConstStructureIterator ConfGen::FragmentAssembler::getStructuresEnd() const
+ConfGen::FragmentAssembler::ConstConformerIterator ConfGen::FragmentAssembler::getConformersEnd() const
 {
-	return impl->getStructuresEnd();
+	if (!impl->initialized())
+		throw Base::OperationFailed("FragmentAssembler: uninitialized");
+
+	return impl->getConformersEnd();
 }
 
-ConfGen::FragmentAssembler::StructureIterator ConfGen::FragmentAssembler::getStructuresBegin()
+ConfGen::FragmentAssembler::ConformerIterator ConfGen::FragmentAssembler::getConformersBegin()
 {
-	return impl->getStructuresBegin();
+	if (!impl->initialized())
+		throw Base::OperationFailed("FragmentAssembler: uninitialized");
+
+	return impl->getConformersBegin();
 }
 
-ConfGen::FragmentAssembler::StructureIterator ConfGen::FragmentAssembler::getStructuresEnd()
+ConfGen::FragmentAssembler::ConformerIterator ConfGen::FragmentAssembler::getConformersEnd()
 {
-	return impl->getStructuresEnd();
+	if (!impl->initialized())
+		throw Base::OperationFailed("FragmentAssembler: uninitialized");
+
+	return impl->getConformersEnd();
 }

@@ -37,6 +37,7 @@
 #include "CDPL/ConfGen/TorsionRuleMatcher.hpp"
 #include "CDPL/ConfGen/ConformerDataArray.hpp"
 #include "CDPL/Chem/SubstructureSearch.hpp"
+#include "CDPL/Chem/FragmentList.hpp"
 
 #include "FragmentTree.hpp"
 #include "ForceFieldInteractionMask.hpp"
@@ -67,18 +68,26 @@ namespace CDPL
 
 			TorsionDriverSettings& getSettings();
 
-			void setup(const Chem::MolecularGraph& molgraph, const Chem::MolecularGraph& root_molgraph);
-			void setup(const Chem::MolecularGraph& molgraph, const Chem::MolecularGraph& root_molgraph, 
-					   const Util::BitSet& bond_mask, bool is_excl_mask);
+			void setup(const Chem::MolecularGraph& molgraph);
+			void setup(const Chem::MolecularGraph& molgraph, const Util::BitSet& bond_mask);
+			void setup(const Chem::FragmentList& frags, const Chem::MolecularGraph& molgraph, const Util::BitSet& bond_mask);
 
 			void setMMFF94Parameters(const ForceField::MMFF94InteractionData& ia_data);
-			bool setMMFF94Parameters(const Chem::MolecularGraph& root_molgraph);
+			bool setMMFF94Parameters(const Chem::MolecularGraph& molgraph);
 
 			void clearInputCoordinates();
-			void clearInputCoordinates(const Util::BitSet& atom_mask);
+			void clearInputCoordinates(std::size_t frag_idx);
 
 			void addInputCoordinates(const Math::Vector3DArray& coords);
-			void addInputCoordinates(const Math::Vector3DArray& coords, const Util::BitSet& atom_mask);
+			void addInputCoordinates(const Math::Vector3DArray& coords, std::size_t frag_idx);
+			void addInputCoordinates(const ConformerData& conf_data, std::size_t frag_idx);
+			void addInputCoordinates(const ConformerData::SharedPointer& conf_data, std::size_t frag_idx);
+
+			std::size_t getNumFragments() const;
+
+			const Chem::Fragment& getFragment(std::size_t idx) const;
+
+			FragmentTreeNode& getFragmentNode(std::size_t idx) const;
 
 			void setAbortCallback(const CallbackFunction& func);
 
@@ -88,7 +97,7 @@ namespace CDPL
 
 			const CallbackFunction& getTimeoutCallback() const;
 
-			unsigned int drive();
+			unsigned int generateConformers();
 
 			std::size_t getNumConformers() const;
 
@@ -96,8 +105,6 @@ namespace CDPL
 
 			ConstConformerIterator getConformersBegin() const;
 			ConstConformerIterator getConformersEnd() const;
-
-			FragmentTree& getFragmentTree();
 	
 			bool initialized() const;
 
@@ -106,13 +113,7 @@ namespace CDPL
 
 			TorsionDriverImpl& operator=(const TorsionDriverImpl&);
 
-			void addInputCoordinates(FragmentTreeNode* node, const Math::Vector3DArray& coords);
-			void addInputCoordinates(FragmentTreeNode* node, const Math::Vector3DArray& coords, 
-									 const Util::BitSet& atom_mask);
-
-			void clearInputCoordinates(FragmentTreeNode* node, const Util::BitSet& atom_mask);
-
-			void setupTorsionAngles(FragmentTreeNode* node);
+			void assignTorsionAngles(FragmentTreeNode* node);
 
 			const ConfGen::TorsionRuleMatch* getMatchingTorsionRule(const Chem::Bond& bond);
 
@@ -129,6 +130,7 @@ namespace CDPL
 			FragmentTree              fragTree;
 			TorsionRuleMatcher        torRuleMatcher;
 			Chem::SubstructureSearch  subSearch;
+			Chem::FragmentList        fragments;
 			MMFF94ParameterizerPtr    mmff94Parameterizer;
 			MMFF94InteractionDataPtr  mmff94Data;
 			Util::BitSet              tmpBitSet;

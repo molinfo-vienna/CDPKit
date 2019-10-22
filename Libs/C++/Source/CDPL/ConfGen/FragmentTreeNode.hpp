@@ -70,13 +70,8 @@ namespace CDPL
 			const Chem::MolecularGraph* getRootMolecularGraph() const;
 
 			const Chem::Bond* getSplitBond() const;
-
 			const Chem::Atom* const* getSplitBondAtoms() const;
-
-			void setSplitBondLength(double length);
-
-			double getSplitBondLength() const;
-
+		
 			const Chem::Atom* const* getTorsionReferenceAtoms() const;
 
 			void setTorsionReferenceAtoms(const Chem::Atom* left, const Chem::Atom* right);
@@ -113,6 +108,7 @@ namespace CDPL
 			void clearConformersUpwards();
 			
 			void addConformer(const Math::Vector3DArray& src_coords);
+			void addConformer(const ConformerData& conf_data);
 
 			unsigned int generateConformers(bool e_ordered);
 
@@ -173,7 +169,6 @@ namespace CDPL
 			FragmentTreeNode*                   parent;
 			const Chem::Bond*                   splitBond;
 			const Chem::Atom*                   splitBondAtoms[2];
-			double                              splitBondLength;
 			const Chem::Atom*                   torsionRefAtoms[2];
 			FragmentTreeNode*                   leftChild;
 			FragmentTreeNode*                   rightChild;

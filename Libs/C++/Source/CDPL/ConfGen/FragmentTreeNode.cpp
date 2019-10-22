@@ -111,7 +111,7 @@ namespace
 
 
 ConfGen::FragmentTreeNode::FragmentTreeNode(ConfGen::FragmentTree& owner): 
-	owner(owner), parent(0), splitBond(0), splitBondLength(0.0), rootMolGraph(), fragment(0)
+	owner(owner), parent(0), splitBond(0), rootMolGraph(), fragment(0)
 {
 	splitBondAtoms[0] = 0;
 	splitBondAtoms[1] = 0;
@@ -143,16 +143,6 @@ const Chem::MolecularGraph* ConfGen::FragmentTreeNode::getRootMolecularGraph() c
 const Chem::Bond* ConfGen::FragmentTreeNode::getSplitBond() const
 {
 	return splitBond;
-}
-
-void ConfGen::FragmentTreeNode:: setSplitBondLength(double length)
-{
-	splitBondLength = length;
-}
-
-double ConfGen::FragmentTreeNode::getSplitBondLength() const
-{
-	return splitBondLength;
 }
 
 const Chem::Atom* const* ConfGen::FragmentTreeNode::getSplitBondAtoms() const
@@ -294,11 +284,22 @@ void ConfGen::FragmentTreeNode::addConformer(const Math::Vector3DArray& src_coor
 	conformers.push_back(new_conf);
 }
 
+void ConfGen::FragmentTreeNode::addConformer(const ConformerData& conf_data)
+{
+	ConformerData::SharedPointer new_conf = owner.allocConformerData();
+
+	copyCoordinates(conf_data, atomIndices, *new_conf);
+
+	new_conf->setEnergy(conf_data.getEnergy());
+
+	conformers.push_back(new_conf);
+}
+
 unsigned int ConfGen::FragmentTreeNode::generateConformers(bool e_ordered)
 {
 	if (conformers.empty()) {
 		if (!hasChildren())
-			return ReturnCode::NO_INPUT_COORDINATES;
+			return ReturnCode::TORSION_DRIVING_FAILED;
 
 		unsigned int ret_code = leftChild->generateConformers(e_ordered);
 
@@ -317,6 +318,9 @@ unsigned int ConfGen::FragmentTreeNode::generateConformers(bool e_ordered)
 
 		if (ret_code != ReturnCode::SUCCESS)
 			return ret_code;
+
+		if (conformers.empty())
+			return ReturnCode::TORSION_DRIVING_FAILED;
 	}
 
 	if (e_ordered && conformers.size() > 1) 
@@ -344,7 +348,7 @@ unsigned int ConfGen::FragmentTreeNode::lineupChildConformers()
 			return ReturnCode::ABORTED;
 
 		if (owner.timedout())
-			return ReturnCode::TIMEOUT_EXCEEDED;
+			return ReturnCode::TIMEOUT;
 
 		const ConformerData& left_conf = *leftChild->conformers[i];
 
@@ -448,9 +452,6 @@ unsigned int ConfGen::FragmentTreeNode::alignAndRotateChildConformers()
 
 		bond_vec /= bond_len;
 
-		if (splitBondLength > 0.0)
-			bond_len = splitBondLength;
-
 		if (torsionRefAtoms[1]) {
 			tor_ref_vec.assign(conf_data[tor_ref_atom_idx]);
 			tor_ref_vec.minusAssign(conf_data[right_atom_idx]);
@@ -473,7 +474,7 @@ unsigned int ConfGen::FragmentTreeNode::alignAndRotateChildConformers()
 			return ReturnCode::ABORTED;
 
 		if (owner.timedout())
-			return ReturnCode::TIMEOUT_EXCEEDED;
+			return ReturnCode::TIMEOUT;
 
 		const ConformerData& left_conf = *leftChild->conformers[i];
 

@@ -65,8 +65,8 @@ namespace CDPL
 		{
 
 		  public:
-			typedef boost::indirect_iterator<ConformerDataArray::const_iterator, const ConformerData> ConstStructureIterator;
-			typedef boost::indirect_iterator<ConformerDataArray::const_iterator, ConformerData> StructureIterator;
+			typedef boost::indirect_iterator<ConformerDataArray::const_iterator, const ConformerData> ConstConformerIterator;
+			typedef boost::indirect_iterator<ConformerDataArray::const_iterator, ConformerData> ConformerIterator;
 
 			FragmentAssembler();
 	
@@ -84,19 +84,19 @@ namespace CDPL
 
 			unsigned int assemble(const Chem::MolecularGraph& molgraph);
 		
-			std::size_t getNumStructures() const;
+			std::size_t getNumConformers() const;
 
-			const ConformerData& getStructure(std::size_t idx) const;
+			const ConformerData& getConformer(std::size_t idx) const;
 
-			ConformerData& getStructure(std::size_t idx);
+			ConformerData& getConformer(std::size_t idx);
 
-			ConstStructureIterator getStructuresBegin() const;
+			ConstConformerIterator getConformersBegin() const;
 
-			ConstStructureIterator getStructuresEnd() const;
+			ConstConformerIterator getConformersEnd() const;
 
-			StructureIterator getStructuresBegin();
+			ConformerIterator getConformersBegin();
 
-			StructureIterator getStructuresEnd();
+			ConformerIterator getConformersEnd();
 
 		  private:
 			FragmentAssembler(const FragmentAssembler&);

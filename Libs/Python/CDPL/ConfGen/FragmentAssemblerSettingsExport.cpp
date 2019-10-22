@@ -60,25 +60,9 @@ void CDPLPythonConfGen::exportFragmentAssemblerSettings()
 			 (python::arg("self"), python::arg("reuse")))
 		.def("generateCoordinates", GetBoolFunc(&ConfGen::FragmentAssemblerSettings::generateCoordinates), 
 			 python::arg("self"))
-		.def("setEnergyWindow", &ConfGen::FragmentAssemblerSettings::setEnergyWindow, 
-			 (python::arg("self"), python::arg("win_size")))
-		.def("getEnergyWindow", &ConfGen::FragmentAssemblerSettings::getEnergyWindow, 
-			 python::arg("self"))
-		.def("setForceFieldType", &ConfGen::FragmentAssemblerSettings::setForceFieldType, 
-			 (python::arg("self"), python::arg("type")))
-		.def("getForceFieldType", &ConfGen::FragmentAssemblerSettings::getForceFieldType, 
-			 python::arg("self"))
-		.def("strictForceFieldParameterization", SetBoolFunc(&ConfGen::FragmentAssemblerSettings::strictForceFieldParameterization), 
-			 (python::arg("self"), python::arg("strict")))
-		.def("strictForceFieldParameterization", GetBoolFunc(&ConfGen::FragmentAssemblerSettings::strictForceFieldParameterization), 
-			 python::arg("self"))
 		.def("setFragmentLibrary", &ConfGen::FragmentAssemblerSettings::setFragmentLibrary, 
 			 (python::arg("self"), python::arg("lib")))
 		.def("getFragmentLibrary", &ConfGen::FragmentAssemblerSettings::getFragmentLibrary, 
-			 python::arg("self"), python::return_value_policy<python::copy_const_reference>())
-		.def("setTorsionLibrary", &ConfGen::FragmentAssemblerSettings::setTorsionLibrary, 
-			 (python::arg("self"), python::arg("lib")))
-		.def("getTorsionLibrary", &ConfGen::FragmentAssemblerSettings::getTorsionLibrary, 
 			 python::arg("self"), python::return_value_policy<python::copy_const_reference>())
 		.def("getFragmentBuildSettings", 
 			 static_cast<ConfGen::FragmentConformerGeneratorSettings& (ConfGen::FragmentAssemblerSettings::*)()>
@@ -91,20 +75,10 @@ void CDPLPythonConfGen::exportFragmentAssemblerSettings()
 					  &ConfGen::FragmentAssemblerSettings::setNitrogenEnumerationMode)
 		.add_property("generateCoords", GetBoolFunc(&ConfGen::FragmentAssemblerSettings::generateCoordinates),
 					  SetBoolFunc(&ConfGen::FragmentAssemblerSettings::generateCoordinates))
-		.add_property("energyWindow", &ConfGen::FragmentAssemblerSettings::getEnergyWindow,
-					  &ConfGen::FragmentAssemblerSettings::setEnergyWindow)
-		.add_property("forceFieldType", &ConfGen::FragmentAssemblerSettings::getForceFieldType, 
-					  &ConfGen::FragmentAssemblerSettings::setForceFieldType)
-		.add_property("strictForceFieldParam", GetBoolFunc(&ConfGen::FragmentAssemblerSettings::strictForceFieldParameterization), 
-					  SetBoolFunc(&ConfGen::FragmentAssemblerSettings::strictForceFieldParameterization))
 		.add_property("fragmentLibrary", 
 					  python::make_function(&ConfGen::FragmentAssemblerSettings::getFragmentLibrary,
 											python::return_value_policy<python::copy_const_reference>()),
 					  &ConfGen::FragmentAssemblerSettings::setFragmentLibrary)
-		.add_property("torsionLibrary", 
-					  python::make_function(&ConfGen::FragmentAssemblerSettings::getTorsionLibrary,
-											python::return_value_policy<python::copy_const_reference>()),
-					  &ConfGen::FragmentAssemblerSettings::setTorsionLibrary)
 		.add_property("fragmentBuildSettings", 
 					  python::make_function(static_cast<ConfGen::FragmentConformerGeneratorSettings& (ConfGen::FragmentAssemblerSettings::*)()>
 											(&ConfGen::FragmentAssemblerSettings::getFragmentBuildSettings),

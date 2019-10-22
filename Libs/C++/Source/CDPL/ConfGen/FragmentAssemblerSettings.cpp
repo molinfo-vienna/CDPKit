@@ -39,8 +39,7 @@ const ConfGen::FragmentAssemblerSettings ConfGen::FragmentAssemblerSettings::DEF
 
 ConfGen::FragmentAssemblerSettings::FragmentAssemblerSettings():
 	enumRings(true), nitrogenEnumMode(NitrogenEnumerationMode::UNSPECIFIED_STEREO),
-	generateCoords(true), eWindow(20.0), forceFieldType(ForceFieldType::MMFF94S_NO_ESTAT),
-	strictParam(true), fragLib(FragmentLibrary::get()), torLib(TorsionLibrary::get()) 
+	generateCoords(true), fragLib(FragmentLibrary::get())
 {}
 
 void ConfGen::FragmentAssemblerSettings::enumerateRings(bool enumerate)
@@ -73,36 +72,6 @@ bool ConfGen::FragmentAssemblerSettings::generateCoordinates() const
 	return generateCoords;
 }
 
-void ConfGen::FragmentAssemblerSettings::setEnergyWindow(double win_size)
-{
-	eWindow = win_size;
-}
-
-double ConfGen::FragmentAssemblerSettings::getEnergyWindow() const
-{
-	return eWindow;
-}
-
-void ConfGen::FragmentAssemblerSettings::setForceFieldType(unsigned int type)
-{
-	forceFieldType = type;
-}
-	    
-unsigned int ConfGen::FragmentAssemblerSettings::getForceFieldType() const
-{
-	return forceFieldType;
-}
-			
-void ConfGen::FragmentAssemblerSettings::strictForceFieldParameterization(bool strict)
-{
-	strictParam = strict;
-}
-
-bool ConfGen::FragmentAssemblerSettings::strictForceFieldParameterization() const
-{
-	return strictParam;
-}
-
 void ConfGen::FragmentAssemblerSettings::setFragmentLibrary(const FragmentLibrary::SharedPointer& lib)
 {
 	fragLib = lib;
@@ -111,16 +80,6 @@ void ConfGen::FragmentAssemblerSettings::setFragmentLibrary(const FragmentLibrar
 const ConfGen::FragmentLibrary::SharedPointer& ConfGen::FragmentAssemblerSettings::getFragmentLibrary() const
 {
 	return fragLib;
-}
-
-void ConfGen::FragmentAssemblerSettings::setTorsionLibrary(const TorsionLibrary::SharedPointer& lib)
-{
-	torLib = lib;
-}
-
-const ConfGen::TorsionLibrary::SharedPointer& ConfGen::FragmentAssemblerSettings::getTorsionLibrary() const
-{
-	return torLib;
 }
 
 ConfGen::FragmentConformerGeneratorSettings& ConfGen::FragmentAssemblerSettings::getFragmentBuildSettings()

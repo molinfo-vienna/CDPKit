@@ -31,18 +31,26 @@
 #ifndef CDPL_CONFGEN_FRAGMENTTREE_HPP
 #define CDPL_CONFGEN_FRAGMENTTREE_HPP
 
-#include <boost/unordered_map.hpp>
+#include <utility>
+#include <vector>
 
 #include "CDPL/ConfGen/ConformerData.hpp"
 #include "CDPL/ConfGen/CallbackFunction.hpp"
-#include "CDPL/Chem/FragmentList.hpp"
 #include "CDPL/Util/ObjectStack.hpp"
 #include "CDPL/Util/ObjectPool.hpp"
+#include "CDPL/Util/BitSet.hpp"
 
 
 namespace CDPL 
 {
 	
+	namespace Chem
+	{
+
+		class FragmentList;
+		class Fragment;
+	}
+
     namespace ConfGen 
     {
 
@@ -57,14 +65,14 @@ namespace CDPL
 			FragmentTree(std::size_t max_conf_data_cache_size);
 
 			~FragmentTree();
-
-			void build(const Chem::MolecularGraph& molgraph, const Chem::MolecularGraph& root_molgraph,
+		
+			void build(const Chem::FragmentList& frags, const Chem::MolecularGraph& molgraph,
 					   const Util::BitSet& split_bond_mask);
 
-			template <typename NodeOrderFunc>
-			void build(const Chem::MolecularGraph& molgraph, const Chem::MolecularGraph& root_molgraph,
-					   const Util::BitSet& split_bond_mask, const NodeOrderFunc& node_order_func);
-		
+			template <typename BondIter>
+			void build(const Chem::FragmentList& frags, const Chem::MolecularGraph& molgraph,
+					   const BondIter& bonds_beg, const BondIter& bonds_end);
+
 			void setAbortCallback(const CallbackFunction& func);
 
 			const CallbackFunction& getAbortCallback() const;
@@ -75,27 +83,30 @@ namespace CDPL
 
 			FragmentTreeNode* getRoot() const;
 
+			std::size_t getNumFragments() const;
+
+			const Chem::Fragment* getFragment(std::size_t idx) const;
+
+			FragmentTreeNode* getFragmentNode(std::size_t idx) const;
+
 		private:
 			typedef std::vector<double> DoubleArray;
 
-			void generateLeafNodes(const Chem::MolecularGraph& molgraph, const Chem::MolecularGraph& root_molgraph,
-								   const Util::BitSet& split_bond_mask);
-			void buildupTree(const Chem::MolecularGraph& root_molgraph);
+			void generateLeafNodes(const Chem::FragmentList& frags, const Chem::MolecularGraph& molgraph);
 
-			void initAtomClashRadiusTable(const Chem::MolecularGraph& root_molgraph);
+			void buildupTree(const Chem::MolecularGraph& molgraph);
+
+			void initAtomClashRadiusTable(const Chem::MolecularGraph& molgraph);
 
 			FragmentTreeNode* createParentNode(FragmentTreeNode* node1, FragmentTreeNode* node2, 
-											   const Chem::MolecularGraph& root_molgraph, const Chem::Bond* bond);
+											   const Chem::MolecularGraph& molgraph, const Chem::Bond* bond);
 
-			const Chem::Bond* findConnectingBond(const Chem::MolecularGraph& root_molgraph, FragmentTreeNode* node1, 
+			const Chem::Bond* findConnectingBond(const Chem::MolecularGraph& molgraph, FragmentTreeNode* node1, 
 												 FragmentTreeNode* node2);
-
-			void orderLeafNodes();
-			bool compareLeafNodeOrder(FragmentTreeNode* node1, FragmentTreeNode* node2);
 
 			ConformerData::SharedPointer allocConformerData();
 
-			FragmentTreeNode* allocTreeNode(const Chem::MolecularGraph& root_molgraph);
+			FragmentTreeNode* allocTreeNode(const Chem::MolecularGraph& molgraph);
 			FragmentTreeNode* createTreeNode();
 
 			bool aborted() const;
@@ -107,15 +118,14 @@ namespace CDPL
 			typedef std::vector<const Chem::Bond*> BondList;
 			typedef Util::ObjectStack<FragmentTreeNode> TreeNodeCache;
 			typedef std::vector<FragmentTreeNode*> TreeNodeList;
-			typedef boost::unordered_map<FragmentTreeNode*, std::size_t> TreeNodeOrderMap;
+			typedef std::vector<std::pair<const Chem::Fragment*, FragmentTreeNode*> > FragmentToNodeMap;
 
 			ConformerDataCache         confDataCache;
 			TreeNodeCache              nodeCache;
 			FragmentTreeNode*          rootNode;
-			Chem::FragmentList         fragments;
 			BondList                   splitBonds;
 			TreeNodeList               leafNodes;
-			TreeNodeOrderMap           leafNodeOrders;
+			FragmentToNodeMap          fragToNodeMap;
 			CallbackFunction           abortCallback;
 			CallbackFunction           timeoutCallback;
 			DoubleArray                clashRadiusTable;
@@ -126,23 +136,16 @@ namespace CDPL
 
 // Implementation
 
-template <typename NodeOrderFunc>
-void CDPL::ConfGen::FragmentTree::build(const CDPL::Chem::MolecularGraph& molgraph, const Chem::MolecularGraph& root_molgraph,
-										const CDPL::Util::BitSet& split_bond_mask, const NodeOrderFunc& node_order_func)
+template <typename BondIter>
+void CDPL::ConfGen::FragmentTree::build(const Chem::FragmentList& frags, const Chem::MolecularGraph& molgraph,
+										const BondIter& bonds_beg, const BondIter& bonds_end)
 {
-	generateLeafNodes(molgraph, root_molgraph, split_bond_mask);
+	splitBonds.clear();
+	splitBonds.insert(splitBonds.end(), bonds_beg, bonds_end);
 
-	leafNodeOrders.clear();
-
-	for (TreeNodeList::const_iterator it = leafNodes.begin(), end = leafNodes.end(); it != end; ++it) {
-		const FragmentTreeNode* node = *it;
-
-		leafNodeOrders.insert(TreeNodeOrderMap::value_type(node, node_order_func(*node)));
-	}
-
-	orderLeafNodes();
-	buildupTree(root_molgraph);
-	initAtomClashRadiusTable(root_molgraph);
+	generateLeafNodes(frags, molgraph);
+	buildupTree(molgraph);
+	initAtomClashRadiusTable(molgraph);
 }
 
 #endif // CDPL_CONFGEN_FRAGMENTTREE_HPP

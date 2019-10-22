@@ -54,14 +54,14 @@ void CDPLPythonConfGen::exportFragmentAssembler()
 		.def("getTimeoutCallback", &ConfGen::FragmentAssembler::getTimeoutCallback, 
 			 python::arg("self"), python::return_internal_reference<>())
 		.def("assemble", &ConfGen::FragmentAssembler::assemble, (python::arg("self"), python::arg("molgraph")))
-		.def("getNumStructures", &ConfGen::FragmentAssembler::getNumStructures, python::arg("self"))
-		.def("getStructure", 
-			 static_cast<ConfGen::ConformerData& (ConfGen::FragmentAssembler::*)(std::size_t)>(&ConfGen::FragmentAssembler::getStructure),
+		.def("getNumConformers", &ConfGen::FragmentAssembler::getNumConformers, python::arg("self"))
+		.def("getConformer", 
+			 static_cast<ConfGen::ConformerData& (ConfGen::FragmentAssembler::*)(std::size_t)>(&ConfGen::FragmentAssembler::getConformer),
 			 (python::arg("self"), python::arg("conf_idx")), python::return_internal_reference<>())
 		.def("__getitem__", 
-			 static_cast<ConfGen::ConformerData& (ConfGen::FragmentAssembler::*)(std::size_t)>(&ConfGen::FragmentAssembler::getStructure),
+			 static_cast<ConfGen::ConformerData& (ConfGen::FragmentAssembler::*)(std::size_t)>(&ConfGen::FragmentAssembler::getConformer),
 			 (python::arg("self"), python::arg("conf_idx")), python::return_internal_reference<>())
-		.add_property("numStructures", &ConfGen::FragmentAssembler::getNumStructures)
+		.add_property("numConformers", &ConfGen::FragmentAssembler::getNumConformers)
 		.add_property("settings", 
 					  python::make_function(static_cast<ConfGen::FragmentAssemblerSettings& (ConfGen::FragmentAssembler::*)()>
 											(&ConfGen::FragmentAssembler::getSettings),

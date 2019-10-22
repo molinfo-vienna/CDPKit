@@ -32,22 +32,28 @@
 #define CDPL_CONFGEN_FRAGMENTASSEMBLERIMPL_HPP
 
 #include <memory>
+#include <utility>
 
 #include "CDPL/ConfGen/FragmentAssemblerSettings.hpp"
 #include "CDPL/ConfGen/TorsionRuleMatcher.hpp"
-#include "CDPL/ConfGen/ConformerDataArray.hpp"
 #include "CDPL/ConfGen/FragmentLibraryEntry.hpp"
-#include "CDPL/ConfGen/ForceFieldInteractionMask.hpp"
+#include "CDPL/ConfGen/ConformerDataArray.hpp"
+#include "CDPL/Chem/FragmentList.hpp"
+#include "CDPL/Chem/SmallestSetOfSmallestRings.hpp"
 #include "CDPL/Util/ObjectStack.hpp"
 
 #include "FragmentTree.hpp"
 #include "FragmentConformerGeneratorImpl.hpp"
-#include "TorsionDriverImpl.hpp"
-#include "ForceFieldInteractionMask.hpp"
 
 
 namespace CDPL 
 {
+
+	namespace Chem
+	{
+
+		class SmallestSetOfSmallestRings;
+	}
 
 	namespace ForceField
 	{
@@ -62,8 +68,10 @@ namespace CDPL
 		class FragmentAssemblerImpl 
 		{
 
+			typedef ForceField::MMFF94InteractionData MMFF94InteractionData;
+
 		public:
-			typedef ConformerDataArray::const_iterator ConstStructureIterator;
+			typedef ConformerDataArray::const_iterator ConstConformerIterator;
 
 			FragmentAssemblerImpl();
 
@@ -79,62 +87,74 @@ namespace CDPL
 
 			const CallbackFunction& getTimeoutCallback() const;
 
+			unsigned int assemble(const Chem::MolecularGraph& molgraph, const Chem::MolecularGraph& parent_molgraph, 
+								  const MMFF94InteractionData& ia_data);
+
 			unsigned int assemble(const Chem::MolecularGraph& molgraph);
-			unsigned int assemble(const Chem::MolecularGraph& molgraph, 
-								  const ForceField::MMFF94InteractionData& ia_data);
+	
+			std::size_t getNumConformers() const;
 
-			std::size_t getNumStructures() const;
+			ConformerData& getConformer(std::size_t idx);
 
-			ConformerData& getStructure(std::size_t idx);
+			ConstConformerIterator getConformersBegin() const;
+			ConstConformerIterator getConformersEnd() const;
 
-			ConstStructureIterator getStructuresBegin() const;
-			ConstStructureIterator getStructuresEnd() const;
-
-			FragmentTree& getFragmentTree();
+			bool initialized();
 
 		private:
 			FragmentAssemblerImpl(const FragmentAssemblerImpl&);
 
 			FragmentAssemblerImpl& operator=(const FragmentAssemblerImpl&);
 	
-			void clear();
+			void init();
+
+			unsigned int doAssemble(const Chem::MolecularGraph& molgraph);
 
 			void buildFragmentTree(const Chem::MolecularGraph& molgraph);
-			void extractBuildFragments(FragmentTreeNode* node);
-			void setBuildFragmentMMFF94Parameters(const ForceField::MMFF94InteractionData& ia_data);
-			void setFragmentLinkBondLengths(FragmentTreeNode* node, 
-											const ForceField::MMFF94InteractionData& ia_data);
 
-			struct BuildFragmentData
-			{
+			unsigned int setupFragmentConformers();
 
-				FragmentTreeNode*  treeNode;
-				ConformerDataArray conformers;
-			};
+			bool transferInputCoordinates(const Chem::Fragment& frag, FragmentTreeNode* node);
+			bool fetchConformersFromFragmentLibrary(unsigned int frag_type, FragmentTreeNode* node);
+			unsigned int generateFragmentConformers(unsigned int frag_type, FragmentTreeNode* node);
 
-			typedef std::auto_ptr<ForceField::MMFF94InteractionParameterizer> MMFF94ParameterizerPtr;
-			typedef std::auto_ptr<ForceField::MMFF94InteractionData> MMFF94InteractionDataPtr;
+			void fixBondLengths(const Chem::Fragment& frag, FragmentTreeNode* node);
+
+			void buildFragmentLibraryEntryAtomIndexMap(const Chem::Fragment& frag, const FragmentTreeNode* frag_node);
+
+			void assignLinkBondTorsions(FragmentTreeNode* node);
+
+			const MMFF94InteractionData* getMMFF94Parameters();
+
+			double getMMFF94BondLength(std::size_t atom1_idx, std::size_t atom2_idx);
+
+			ConformerData::SharedPointer allocConformerData();
 
 			typedef Util::ObjectStack<ConformerData> ConformerDataCache;
-			typedef Util::ObjectStack<BuildFragmentData> BuildFragmentDataCache;
-			typedef std::vector<BuildFragmentData*> BuildFragmentList;
+			typedef std::auto_ptr<ForceField::MMFF94InteractionParameterizer> MMFF94ParameterizerPtr;
+			typedef std::auto_ptr<MMFF94InteractionData> MMFF94InteractionDataPtr;
+			typedef std::vector<const Chem::Bond*> BondList;
+			typedef std::pair<std::size_t, std::size_t> IndexPair;
+			typedef std::vector<IndexPair> IndexPairList;
+			typedef Chem::SmallestSetOfSmallestRings::SharedPointer SmallestSetOfSmallestRingsPtr;
 
 			ConformerDataCache             confDataCache;
-			BuildFragmentDataCache         buildFragDataCache;
 			FragmentAssemblerSettings      settings;
 			CallbackFunction               abortCallback;
 			CallbackFunction               timeoutCallback;
+			const Chem::MolecularGraph*    parentMolGraph; 
+			BondList                       fragLinkBonds;
+			Chem::FragmentList             fragments;
 			FragmentTree                   fragTree;
-			BuildFragmentList              buildFrags;
 			TorsionRuleMatcher             torRuleMatcher;
-			FragmentConformerGeneratorImpl fragConfGen;
-			TorsionDriverImpl              torDriver;
-			FragmentLibraryEntry           fragLibEntry;
-			ConformerDataArray             structures;
 			MMFF94ParameterizerPtr         mmff94Parameterizer;
 			MMFF94InteractionDataPtr       mmff94Data;
-			ForceFieldInteractionMask      mmff94InteractionMask;
+			const MMFF94InteractionData*   usedMMFF94Data;
+			FragmentConformerGeneratorImpl fragConfGen;
+			FragmentLibraryEntry           fragLibEntry;
 			Util::BitSet                   fragLinkBondMask;
+			IndexPairList                  fragLibEntryAtomIdxMap;
+			SmallestSetOfSmallestRingsPtr  fragSSSR;	
 		};
     }
 }

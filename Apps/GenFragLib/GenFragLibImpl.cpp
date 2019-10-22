@@ -132,8 +132,7 @@ public:
 					if (ret_code == ReturnCode::ABORTED)
 						return;
 
-					if (ret_code == ReturnCode::SUCCESS || 
-						(ret_code == ReturnCode::TIMEOUT_EXCEEDED && fragLibGen.getNumGeneratedConformers() > 0))
+					if (ret_code == ReturnCode::SUCCESS || ret_code == ReturnCode::FRAGMENT_CONF_GEN_TIMEOUT)
 						fragmentProcessed(frag);
 					else
 						handleError(frag, ret_code);
@@ -210,12 +209,12 @@ private:
 				err_msg = "Structure refinement failed";
 				break;
 
-			case ReturnCode::MAX_NUM_TRIALS_EXCEEDED:
-				err_msg = "Could not generate conformers within max. number of trials";
+			case ReturnCode::FRAGMENT_CONF_GEN_FAILED:
+				err_msg = "Could not generate any conformers";
 				break;
 
-			case ReturnCode::TIMEOUT_EXCEEDED:
-				err_msg = "Timeout";
+			case ReturnCode::TIMEOUT:
+				err_msg = "Timeout reached";
 				break;
 
 			default:

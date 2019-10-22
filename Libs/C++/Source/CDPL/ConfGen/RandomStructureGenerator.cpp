@@ -105,7 +105,7 @@ unsigned int ConfGen::RandomStructureGenerator::generate(Math::Vector3DArray& co
 
 	for (std::size_t i = 0, max_trials = settings.getMaxNumStructureGenerationTrials(); i < max_trials; i++) {
 		if (timeoutExceeded())
-			return ReturnCode::TIMEOUT_EXCEEDED;
+			return ReturnCode::TIMEOUT;
 
 		if (!dgStructGen.generate(coords)) 
 			continue;
@@ -117,7 +117,7 @@ unsigned int ConfGen::RandomStructureGenerator::generate(Math::Vector3DArray& co
 
 		for (std::size_t j = 0, max_iters = settings.getMaxNumRefinementIterations(); max_iters == 0 || j < max_iters; j++) {
 			if ((j % 50) == 0 && timeoutExceeded())
-				return ReturnCode::TIMEOUT_EXCEEDED;
+				return ReturnCode::TIMEOUT;
 
 			if (energyMinimizer.iterate(energy, coords.getData(), gradient) != BFGSMinimizer::SUCCESS) {
 				if ((boost::math::isnan)(energy))
@@ -142,7 +142,7 @@ unsigned int ConfGen::RandomStructureGenerator::generate(Math::Vector3DArray& co
 		return ReturnCode::SUCCESS;
 	}
 
-    return ReturnCode::MAX_NUM_TRIALS_EXCEEDED;
+    return ReturnCode::ERROR;
 }
 
 double ConfGen::RandomStructureGenerator::getEnergy() const

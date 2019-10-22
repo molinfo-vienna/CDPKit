@@ -33,6 +33,7 @@
 #include "CDPL/ConfGen/ReturnCode.hpp"
 #include "CDPL/Chem/Atom.hpp"
 #include "CDPL/Chem/Bond.hpp"
+#include "CDPL/Chem/MolecularGraphFunctions.hpp"
 #include "CDPL/Chem/AtomFunctions.hpp"
 #include "CDPL/Chem/BondFunctions.hpp"
 #include "CDPL/Chem/UtilityFunctions.hpp"
@@ -43,7 +44,7 @@
 
 #include "TorsionDriverImpl.hpp"
 #include "FragmentTreeNode.hpp"
-#include "TorsionLibraryDataReader.hpp"
+#include "FallbackTorsionLibrary.hpp"
 
 
 using namespace CDPL;
@@ -51,363 +52,6 @@ using namespace CDPL;
 
 namespace
 {
-
-	const char* FALLBACK_TORSION_RULES = 
-		" <library name=\"FallbackRules\">"
-		"  <category name=\"GG\" atomType1=\"*\" atomType2=\"*\">"
-		"   <rule pattern=\"[*,#1:1]~[CX4:2]-[n:3]~[*,#1:4]\">"
-		"    <torsions>"
-        "     <angle value=\"0.0\" tolerance1=\"30.00\" tolerance2=\"30.00\" score=\"3.07\"/>"
-        "     <angle value=\"60.0\" tolerance1=\"30.00\" tolerance2=\"30.00\" score=\"3.55\"/>"
-        "     <angle value=\"120.0\" tolerance1=\"30.00\" tolerance2=\"30.00\" score=\"3.12\"/>"
-        "     <angle value=\"180.0\" tolerance1=\"30.00\" tolerance2=\"30.00\" score=\"3.54\"/>"
-        "     <angle value=\"-60.0\" tolerance1=\"30.00\" tolerance2=\"30.00\" score=\"3.65\"/>"
-        "     <angle value=\"-120.0\" tolerance1=\"30.00\" tolerance2=\"30.00\" score=\"3.1\"/>"
-		"    </torsions>"
-		"   </rule>"
-		"   <rule pattern=\"[*,#1:1]~[CX3:2]-[n:3]~[*,#1:4]\">"
-		"    <torsions>"
-        "     <angle value=\"0.0\" tolerance1=\"20.00\" tolerance2=\"90.00\" score=\"15.81\"/>"
-        "     <angle value=\"180.0\" tolerance1=\"20.00\" tolerance2=\"90.00\" score=\"16.32\"/>"
-		"    </torsions>"
-		"   </rule>"
-		"   <rule pattern=\"[*,#1:1]~[CX4:2]-[CX4:3]~[*,#1:4]\">"
-		"    <torsions>"
-        "     <angle value=\"-60.0\" tolerance1=\"20.00\" tolerance2=\"30.00\" score=\"20.32\"/>"
-        "     <angle value=\"60.0\" tolerance1=\"20.00\" tolerance2=\"30.00\" score=\"20.33\"/>"
-        "     <angle value=\"180.0\" tolerance1=\"20.00\" tolerance2=\"30.00\" score=\"20.6\"/>"
-		"    </torsions>"
-		"   </rule>"
-		"   <rule pattern=\"[*,#1:1]~[CX3:2]-[CX3:3]~[*,#1:4]\">"
-		"    <torsions>"
-        "     <angle value=\"0.0\" tolerance1=\"20.00\" tolerance2=\"30.00\" score=\"30.57\"/>"
-        "     <angle value=\"180.0\" tolerance1=\"20.00\" tolerance2=\"30.00\" score=\"30.57\"/>"
-		"    </torsions>"
-		"   </rule>"
-		"   <rule pattern=\"[*,#1:1]~[CX3:2]-[cX3:3]~[*,#1:4]\">"
-		"    <torsions>"
-        "     <angle value=\"0.0\" tolerance1=\"20.00\" tolerance2=\"90.00\" score=\"13.83\"/>"
-        "     <angle value=\"180.0\" tolerance1=\"20.00\" tolerance2=\"90.00\" score=\"13.79\"/>"
-		"    </torsions>"
-		"   </rule>"
-		"   <rule pattern=\"[*,#1:1]~[cX3:2]-[cX3:3]~[*,#1:4]\">"
-		"    <torsions>"
-        "     <angle value=\"0.0\" tolerance1=\"10.00\" tolerance2=\"90.00\" score=\"7.96\"/>"
-        "     <angle value=\"180.0\" tolerance1=\"10.00\" tolerance2=\"90.00\" score=\"7.93\"/>"
-		"    </torsions>"
-		"   </rule>"
-		"   <rule pattern=\"[*,#1:1]~[CX4:2]-[NX4:3]~[*,#1:4]\">"
-		"    <torsions>"
-        "     <angle value=\"-60.0\" tolerance1=\"20.00\" tolerance2=\"60.00\" score=\"14.81\"/>"
-        "     <angle value=\"60.0\" tolerance1=\"20.00\" tolerance2=\"60.00\" score=\"14.76\"/>"
-        "     <angle value=\"180.0\" tolerance1=\"30.00\" tolerance2=\"60.00\" score=\"14.57\"/>"
-		"    </torsions>"
-		"   </rule>"
-		"   <rule pattern=\"[*,#1:1]~[CX4:2]-[NX3:3]~[*,#1:4]\">"
-		"    <torsions>"
-        "     <angle value=\"60.0\" tolerance1=\"20.00\" tolerance2=\"60.00\" score=\"6.17\"/>"
-        "     <angle value=\"-60.0\" tolerance1=\"20.00\" tolerance2=\"60.00\" score=\"6.27\"/>"
-        "     <angle value=\"180.0\" tolerance1=\"20.00\" tolerance2=\"60.00\" score=\"6.01\"/>"
-		"    </torsions>"
-		"   </rule>"
-		"   <rule pattern=\"[*,#1:1]~[CX3:2]-[NX3:3]~[*,#1:4]\">"
-		"    <torsions>"
-        "     <angle value=\"0.0\" tolerance1=\"30.00\" tolerance2=\"40.00\" score=\"27.02\"/>"
-        "     <angle value=\"180.0\" tolerance1=\"30.00\" tolerance2=\"40.00\" score=\"26.99\"/>"
-		"    </torsions>"
-		"   </rule>"
-		"   <rule pattern=\"[*,#1:1]~[cX3:2]-[NX3:3]~[*,#1:4]\">"
-		"    <torsions>"
-        "     <angle value=\"0.0\" tolerance1=\"30.00\" tolerance2=\"90.00\" score=\"13.75\"/>"
-        "     <angle value=\"180.0\" tolerance1=\"30.00\" tolerance2=\"90.00\" score=\"14.01\"/>"
-		"    </torsions>"
-		"   </rule>"
-		"   <rule pattern=\"[*,#1:1]~[CX3:2]-[NX2:3]~[*,#1:4]\">"
-		"    <torsions>"
-        "     <angle value=\"-90.0\" tolerance1=\"30.00\" tolerance2=\"40.00\" score=\"0.1\"/>"
-        "     <angle value=\"0.0\" tolerance1=\"20.00\" tolerance2=\"40.00\" score=\"40.12\"/>"
-        "     <angle value=\"90.0\" tolerance1=\"30.00\" tolerance2=\"40.00\" score=\"0.13\"/>"
-        "     <angle value=\"180.0\" tolerance1=\"20.00\" tolerance2=\"40.00\" score=\"40.84\"/>"
-		"    </torsions>"
-		"   </rule>"
-		"   <rule pattern=\"[*,#1:1]~[cX3:2]-[NX2:3]~[*,#1:4]\">"
-		"    <torsions>"
-        "     <angle value=\"0.0\" tolerance1=\"20.00\" tolerance2=\"90.00\" score=\"14.13\"/>"
-        "     <angle value=\"180.0\" tolerance1=\"20.00\" tolerance2=\"90.00\" score=\"15.33\"/>"
-		"    </torsions>"
-		"   </rule>"
-		"   <rule pattern=\"[*,#1:1]~[CX3:2]-[nX3:3]~[*,#1:4]\">"
-		"    <torsions>"
-        "     <angle value=\"0.0\" tolerance1=\"30.00\" tolerance2=\"90.00\" score=\"15.81\"/>"
-        "     <angle value=\"180.0\" tolerance1=\"30.00\" tolerance2=\"90.00\" score=\"16.32\"/>"
-		"    </torsions>"
-		"   </rule>"
-		"   <rule pattern=\"[*,#1:1]~[CX4:2]-[OX2:3]~[*,#1:4]\">"
-		"    <torsions>"
-        "     <angle value=\"-60.0\" tolerance1=\"30.00\" tolerance2=\"60.00\" score=\"12.91\"/>"
-        "     <angle value=\"60.0\" tolerance1=\"30.00\" tolerance2=\"60.00\" score=\"12.93\"/>"
-        "     <angle value=\"180.0\" tolerance1=\"30.00\" tolerance2=\"60.00\" score=\"13.29\"/>"
-		"    </torsions>"
-		"   </rule>"
-		"   <rule pattern=\"[*,#1:1]~[CX3:2]-[OX2:3]~[*,#1:4]\">"
-		"    <torsions>"
-        "     <angle value=\"0.0\" tolerance1=\"20.00\" tolerance2=\"30.00\" score=\"35.54\"/>"
-        "     <angle value=\"180.0\" tolerance1=\"20.00\" tolerance2=\"30.00\" score=\"34.44\"/>"
-        "     <angle value=\"60.0\" tolerance1=\"20.00\" tolerance2=\"30.00\" score=\"0.06\"/>"
-        "     <angle value=\"-60.0\" tolerance1=\"20.00\" tolerance2=\"30.00\" score=\"0.07\"/>"
-        "     <angle value=\"120.0\" tolerance1=\"20.00\" tolerance2=\"30.00\" score=\"0.09\"/>"
-        "     <angle value=\"-120.0\" tolerance1=\"20.00\" tolerance2=\"30.00\" score=\"0.07\"/>"
-		"    </torsions>"
-		"   </rule>"
-		"   <rule pattern=\"[*,#1:1]~[cX3:2]-[OX2:3]~[*,#1:4]\">"
-		"    <torsions>"
-        "     <angle value=\"-90.0\" tolerance1=\"20.00\" tolerance2=\"30.00\" score=\"2.43\"/>"
-        "     <angle value=\"0.0\" tolerance1=\"15.00\" tolerance2=\"30.00\" score=\"20.47\"/>"
-        "     <angle value=\"90.0\" tolerance1=\"20.00\" tolerance2=\"30.00\" score=\"2.39\"/>"
-        "     <angle value=\"180.0\" tolerance1=\"15.00\" tolerance2=\"30.00\" score=\"20.85\"/>"
-		"    </torsions>"
-		"   </rule>"
-		"   <rule pattern=\"[*,#1:1]~[CX4:2]-[SX4:3]~[*,#1:4]\">"
-		"    <torsions>"
-        "     <angle value=\"-60.0\" tolerance1=\"20.00\" tolerance2=\"30.00\" score=\"12.72\"/>"
-        "     <angle value=\"60.0\" tolerance1=\"20.00\" tolerance2=\"30.00\" score=\"12.77\"/>"
-        "     <angle value=\"180.0\" tolerance1=\"20.00\" tolerance2=\"30.00\" score=\"12.79\"/>"
-		"    </torsions>"
-		"   </rule>"
-		"   <rule pattern=\"[*,#1:1]~[CX4:2]-[SX3:3]~[*,#1:4]\">"
-		"    <torsions>"
-        "     <angle value=\"-60.0\" tolerance1=\"20.00\" tolerance2=\"30.00\" score=\"12.55\"/>"
-        "     <angle value=\"60.0\" tolerance1=\"20.00\" tolerance2=\"30.00\" score=\"12.59\"/>"
-        "     <angle value=\"180.0\" tolerance1=\"20.00\" tolerance2=\"30.00\" score=\"13.26\"/>"
-		"    </torsions>"
-		"   </rule>"
-		"   <rule pattern=\"[*,#1:1]~[CX3:2]-[SX3:3]~[*,#1:4]\">"
-		"    <torsions>"
-        "     <angle value=\"-120.0\" tolerance1=\"20.00\" tolerance2=\"30.00\" score=\"5.53\"/>"
-        "     <angle value=\"-60.0\" tolerance1=\"20.00\" tolerance2=\"30.00\" score=\"3.61\"/>"
-        "     <angle value=\"60.0\" tolerance1=\"20.00\" tolerance2=\"30.00\" score=\"4.09\"/>"
-        "     <angle value=\"120.0\" tolerance1=\"20.00\" tolerance2=\"30.00\" score=\"3.97\"/>"
-        "     <angle value=\"0.0\" tolerance1=\"20.00\" tolerance2=\"30.00\" score=\"4.09\"/>"
-        "     <angle value=\"180.0\" tolerance1=\"20.00\" tolerance2=\"30.00\" score=\"5.29\"/>"
-		"    </torsions>"
-		"   </rule>"
-		"   <rule pattern=\"[*,#1:1]~[CX4:2]-[SX2:3]~[*,#1:4]\">"
-		"    <torsions>"
-        "     <angle value=\"60.0\" tolerance1=\"30.00\" tolerance2=\"40.00\" score=\"12.79\"/>"
-        "     <angle value=\"-60.0\" tolerance1=\"30.00\" tolerance2=\"40.00\" score=\"12.79\"/>"
-        "     <angle value=\"180.0\" tolerance1=\"30.00\" tolerance2=\"40.00\" score=\"12.54\"/>"
-		"    </torsions>"
-		"   </rule>"
-		"   <rule pattern=\"[*,#1:1]~[CX3:2]-[SX2:3]~[*,#1:4]\">"
-		"    <torsions>"
-        "     <angle value=\"0.0\" tolerance1=\"10.00\" tolerance2=\"90.00\" score=\"16.95\"/>"
-        "     <angle value=\"180.0\" tolerance1=\"10.00\" tolerance2=\"90.00\" score=\"17.62\"/>"
-		"    </torsions>"
-		"   </rule>"
-		"   <rule pattern=\"[*,#1:1]~[cX3:2]-[SX2:3]~[*,#1:4]\">"
-		"    <torsions>"
-        "     <angle value=\"0.0\" tolerance1=\"30.00\" tolerance2=\"45.00\" score=\"10.13\"/>"
-        "     <angle value=\"90.0\" tolerance1=\"30.00\" tolerance2=\"45.00\" score=\"3.39\"/>"
-        "     <angle value=\"-90.0\" tolerance1=\"30.00\" tolerance2=\"45.00\" score=\"3.64\"/>"
-        "     <angle value=\"180.0\" tolerance1=\"30.00\" tolerance2=\"45.00\" score=\"10.71\"/>"
-		"    </torsions>"
-		"   </rule>"
-		"   <rule pattern=\"[*,#1:1]~[CX4:2]-[P:3]~[*,#1:4]\">"
-		"    <torsions>"
-        "     <angle value=\"-60.0\" tolerance1=\"30.00\" tolerance2=\"60.00\" score=\"10.33\"/>"
-        "     <angle value=\"60.0\" tolerance1=\"30.00\" tolerance2=\"60.00\" score=\"10.33\"/>"
-        "     <angle value=\"180.0\" tolerance1=\"30.00\" tolerance2=\"60.00\" score=\"10.42\"/>"
-		"    </torsions>"
-		"   </rule>"
-		"   <rule pattern=\"[*,#1:1]~[NX4:2]-[NX4:3]~[*,#1:4]\">"
-		"    <torsions>"
-        "     <angle value=\"60.0\" tolerance1=\"20.00\" tolerance2=\"20.00\" score=\"0.0\"/>"
-        "     <angle value=\"-60.0\" tolerance1=\"20.00\" tolerance2=\"20.00\" score=\"0.0\"/>"
-        "     <angle value=\"180.0\" tolerance1=\"20.00\" tolerance2=\"20.00\" score=\"33.33\"/>"
-		"    </torsions>"
-		"   </rule>"
-		"   <rule pattern=\"[*,#1:1]~[NX4:2]-[NX3:3]~[*,#1:4]\">"
-		"    <torsions>"
-        "     <angle value=\"-60.0\" tolerance1=\"30.00\" tolerance2=\"30.00\" score=\"5.56\"/>"
-        "     <angle value=\"60.0\" tolerance1=\"30.00\" tolerance2=\"30.00\" score=\"5.56\"/>"
-        "     <angle value=\"180.0\" tolerance1=\"30.00\" tolerance2=\"30.00\" score=\"13.89\"/>"
-        "     <angle value=\"120.0\" tolerance1=\"30.00\" tolerance2=\"30.00\" score=\"5.56\"/>"
-        "     <angle value=\"-120.0\" tolerance1=\"30.00\" tolerance2=\"30.00\" score=\"5.56\"/>"
-		"    </torsions>"
-		"   </rule>"
-		"   <rule pattern=\"[*,#1:1]~[NX3:2]-[NX3:3]~[*,#1:4]\">"
-		"    <torsions>"
-        "     <angle value=\"0.0\" tolerance1=\"30.00\" tolerance2=\"45.00\" score=\"5.93\"/>"
-        "     <angle value=\"90.0\" tolerance1=\"30.00\" tolerance2=\"45.00\" score=\"3.59\"/>"
-        "     <angle value=\"-90.0\" tolerance1=\"30.00\" tolerance2=\"45.00\" score=\"3.4\"/>"
-        "     <angle value=\"180.0\" tolerance1=\"30.00\" tolerance2=\"45.00\" score=\"6.89\"/>"
-		"    </torsions>"
-		"   </rule>"
-		"   <rule pattern=\"[*,#1:1]~[NX3:2]-[NX2:3]~[*,#1:4]\">"
-		"    <torsions>"
-        "     <angle value=\"0.0\" tolerance1=\"20.00\" tolerance2=\"30.00\" score=\"25.32\"/>"
-        "     <angle value=\"180.0\" tolerance1=\"20.00\" tolerance2=\"30.00\" score=\"29.6\"/>"
-		"    </torsions>"
-		"   </rule>"
-		"   <rule pattern=\"[*,#1:1]~[NX3:2]-[nX3:3]~[*,#1:4]\">"
-		"    <torsions>"
-        "     <angle value=\"-90.0\" tolerance1=\"40.00\" tolerance2=\"60.00\" score=\"4.87\"/>"
-        "     <angle value=\"0.0\" tolerance1=\"10.00\" tolerance2=\"20.00\" score=\"3.62\"/>"
-        "     <angle value=\"90.0\" tolerance1=\"40.00\" tolerance2=\"60.00\" score=\"4.56\"/>"
-        "     <angle value=\"180.0\" tolerance1=\"10.00\" tolerance2=\"20.00\" score=\"3.54\"/>"
-		"    </torsions>"
-		"   </rule>"
-		"   <rule pattern=\"[*,#1:1]~[NX2:2]-[NX2:3]~[*,#1:4]\">"
-		"    <torsions>"
-        "     <angle value=\"180.0\" tolerance1=\"40.00\" tolerance2=\"60.00\" score=\"71.33\"/>"
-		"    </torsions>"
-		"   </rule>"
-		"   <rule pattern=\"[*,#1:1]~[nX3:2]-[nX3:3]~[*,#1:4]\">"
-		"    <torsions>"
-        "     <angle value=\"90.0\" tolerance1=\"20.00\" tolerance2=\"30.00\" score=\"19.32\"/>"
-        "     <angle value=\"-90.0\" tolerance1=\"20.00\" tolerance2=\"30.00\" score=\"19.32\"/>"
-		"    </torsions>"
-		"   </rule>"
-		"   <rule pattern=\"[*,#1:1]~[NX3:2]-[OX2:3]~[*,#1:4]\">"
-		"    <torsions>"
-        "     <angle value=\"-110.0\" tolerance1=\"30.00\" tolerance2=\"50.00\" score=\"4.24\"/>"
-        "     <angle value=\"0.0\" tolerance1=\"10.00\" tolerance2=\"20.00\" score=\"18.53\"/>"
-        "     <angle value=\"110.0\" tolerance1=\"30.00\" tolerance2=\"50.00\" score=\"3.71\"/>"
-        "     <angle value=\"180.0\" tolerance1=\"10.00\" tolerance2=\"20.00\" score=\"16.26\"/>"
-		"    </torsions>"
-		"   </rule>"
-		"   <rule pattern=\"[*,#1:1]~[NX2:2]-[OX2:3]~[*,#1:4]\">"
-		"    <torsions>"
-        "     <angle value=\"180.0\" tolerance1=\"15.00\" tolerance2=\"20.00\" score=\"49.69\"/>"
-		"    </torsions>"
-		"   </rule>"
-		"   <rule pattern=\"[*,#1:1]~[nX3:2]-[OX2:3]~[*,#1:4]\">"
-		"    <torsions>"
-        "     <angle value=\"-90.0\" tolerance1=\"20.00\" tolerance2=\"30.00\" score=\"17.83\"/>"
-        "     <angle value=\"90.0\" tolerance1=\"20.00\" tolerance2=\"30.00\" score=\"17.83\"/>"
-		"    </torsions>"
-		"   </rule>"
-		"   <rule pattern=\"[*,#1:1]~[N,n:2]-[S:3]~[*,#1:4]\">"
-		"    <torsions>"
-        "     <angle value=\"0.0\" tolerance1=\"30.00\" tolerance2=\"45.00\" score=\"1.93\"/>"
-        "     <angle value=\"90.0\" tolerance1=\"30.00\" tolerance2=\"45.00\" score=\"2.08\"/>"
-        "     <angle value=\"-90.0\" tolerance1=\"30.00\" tolerance2=\"45.00\" score=\"2.07\"/>"
-        "     <angle value=\"180.0\" tolerance1=\"30.00\" tolerance2=\"45.00\" score=\"8.16\"/>"
-		"    </torsions>"
-		"   </rule>"
-		"   <rule pattern=\"[*,#1:1]~[NX2:2]-[SX4:3]~[*,#1:4]\">"
-		"    <torsions>"
-        "     <angle value=\"0.0\" tolerance1=\"30.00\" tolerance2=\"45.00\" score=\"1.78\"/>"
-        "     <angle value=\"90.0\" tolerance1=\"30.00\" tolerance2=\"45.00\" score=\"2.08\"/>"
-        "     <angle value=\"-90.0\" tolerance1=\"30.00\" tolerance2=\"45.00\" score=\"2.69\"/>"
-        "     <angle value=\"180.0\" tolerance1=\"30.00\" tolerance2=\"45.00\" score=\"8.02\"/>"
-		"    </torsions>"
-		"   </rule>"
-		"   <rule pattern=\"[*,#1:1]~[NX2:2]-[SX2:3]~[*,#1:4]\">"
-		"    <torsions>"
-        "     <angle value=\"0.0\" tolerance1=\"10.00\" tolerance2=\"20.00\" score=\"41.82\"/>"
-        "     <angle value=\"180.0\" tolerance1=\"10.00\" tolerance2=\"20.00\" score=\"31.36\"/>"
-		"    </torsions>"
-		"   </rule>"
-		"   <rule pattern=\"[*,#1:1]~[N,n:2]-[P:3]~[*,#1:4]\">"
-		"    <torsions>"
-        "     <angle value=\"60.0\" tolerance1=\"30.00\" tolerance2=\"60.00\" score=\"4.79\"/>"
-        "     <angle value=\"-60.0\" tolerance1=\"30.00\" tolerance2=\"60.00\" score=\"4.69\"/>"
-        "     <angle value=\"180.0\" tolerance1=\"30.00\" tolerance2=\"60.00\" score=\"5.3\"/>"
-		"    </torsions>"
-		"   </rule>"
-		"   <rule pattern=\"[*,#1:1]~[OX2:2]-[SX4:3]~[*,#1:4]\">"
-		"    <torsions>"
-        "     <angle value=\"60.0\" tolerance1=\"30.00\" tolerance2=\"60.00\" score=\"3.07\"/>"
-        "     <angle value=\"-60.0\" tolerance1=\"30.00\" tolerance2=\"60.00\" score=\"3.4\"/>"
-        "     <angle value=\"180.0\" tolerance1=\"30.00\" tolerance2=\"60.00\" score=\"9.87\"/>"
-		"    </torsions>"
-		"   </rule>"
-		"   <rule pattern=\"[*,#1:1]~[OX2:2]-[SX3:3]~[*,#1:4]\">"
-		"    <torsions>"
-        "     <angle value=\"0.0\" tolerance1=\"10.00\" tolerance2=\"10.00\" score=\"0.0\"/>"
-        "     <angle value=\"70.0\" tolerance1=\"20.00\" tolerance2=\"30.00\" score=\"1.28\"/>"
-        "     <angle value=\"-70.0\" tolerance1=\"20.00\" tolerance2=\"30.00\" score=\"8.97\"/>"
-        "     <angle value=\"180.0\" tolerance1=\"20.00\" tolerance2=\"30.00\" score=\"6.41\"/>"
-		"    </torsions>"
-		"   </rule>"
-		"   <rule pattern=\"[*,#1:1]~[OX2:2]-[SX2:3]~[*,#1:4]\">"
-		"    <torsions>"
-        "     <angle value=\"90.0\" tolerance1=\"20.00\" tolerance2=\"30.00\" score=\"5.00\"/>"
-        "     <angle value=\"-90.0\" tolerance1=\"20.00\" tolerance2=\"30.00\" score=\"15.00\"/>"
-		"    </torsions>"
-		"   </rule>"
-		"   <rule pattern=\"[*,#1:1]~[OX2:2]-[P:3]~[*,#1:4]\">"
-		"    <torsions>"
-        "     <angle value=\"-60.0\" tolerance1=\"40.00\" tolerance2=\"60.00\" score=\"4.61\"/>"
-        "     <angle value=\"60.0\" tolerance1=\"40.00\" tolerance2=\"60.00\" score=\"4.54\"/>"
-        "     <angle value=\"180.0\" tolerance1=\"30.00\" tolerance2=\"60.00\" score=\"7.5\"/>"
-		"    </torsions>"
-		"   </rule>"
-		"   <rule pattern=\"[*,#1:1]~[SX4:2]-[SX2:3]~[*,#1:4]\">"
-		"    <torsions>"
-        "     <angle value=\"-50.0\" tolerance1=\"20.00\" tolerance2=\"30.00\" score=\"2.56\"/>"
-        "     <angle value=\"50.0\" tolerance1=\"20.00\" tolerance2=\"30.00\" score=\"3.42\"/>"
-        "     <angle value=\"180.0\" tolerance1=\"30.00\" tolerance2=\"40.00\" score=\"5.98\"/>"
-		"    </torsions>"
-		"   </rule>"
-		"   <rule pattern=\"[*,#1:1]~[SX3:2]-[SX3:3]~[*,#1:4]\">"
-		"    <torsions>"
-        "     <angle value=\"0.0\" tolerance1=\"10.00\" tolerance2=\"10.00\" score=\"50.0\"/>"
-        "     <angle value=\"90.0\" tolerance1=\"10.00\" tolerance2=\"10.00\" score=\"0.0\"/>"
-        "     <angle value=\"-90.0\" tolerance1=\"10.00\" tolerance2=\"10.00\" score=\"0.0\"/>"
-		"    </torsions>"
-		"   </rule>"
-		"   <rule pattern=\"[*,#1:1]~[SX2:2]-[SX2:3]~[*,#1:4]\">"
-		"    <torsions>"
-        "     <angle value=\"90.0\" tolerance1=\"30.00\" tolerance2=\"30.00\" score=\"17.38\"/>"
-        "     <angle value=\"-90.0\" tolerance1=\"30.00\" tolerance2=\"30.00\" score=\"20.2\"/>"
-		"    </torsions>"
-		"   </rule>"
-		"   <rule pattern=\"[*,#1:1]~[S:2]-[P:3]~[*,#1:4]\">"
-		"    <torsions>"
-        "     <angle value=\"-120.0\" tolerance1=\"30.00\" tolerance2=\"30.00\" score=\"0.94\"/>"
-        "     <angle value=\"-60.0\" tolerance1=\"30.00\" tolerance2=\"30.00\" score=\"5.77\"/>"
-        "     <angle value=\"60.0\" tolerance1=\"30.00\" tolerance2=\"30.00\" score=\"5.77\"/>"
-        "     <angle value=\"120.0\" tolerance1=\"30.00\" tolerance2=\"30.00\" score=\"0.81\"/>"
-        "     <angle value=\"180.0\" tolerance1=\"30.00\" tolerance2=\"30.00\" score=\"12.62\"/>"
-        "     <angle value=\"0.0\" tolerance1=\"20.00\" tolerance2=\"30.00\" score=\"1.88\"/>"
-		"    </torsions>"
-		"   </rule>"
-		"   <rule pattern=\"[*,#1:1]~[P:2]-[P:3]~[*,#1:4]\">"
-		"    <torsions>"
-        "     <angle value=\"-60.0\" tolerance1=\"30.00\" tolerance2=\"60.00\" score=\"4.44\"/>"
-        "     <angle value=\"60.0\" tolerance1=\"30.00\" tolerance2=\"60.00\" score=\"4.81\"/>"
-        "     <angle value=\"180.0\" tolerance1=\"30.00\" tolerance2=\"60.00\" score=\"14.94\"/>"
-		"    </torsions>"
-		"   </rule>"
-		"   <rule pattern=\"[*,#1:1]~[*^3:2]-[*^3:3]~[*,#1:4]\">"
-		"    <torsions>"
-        "     <angle value=\"-60.0\" tolerance1=\"30.00\" tolerance2=\"60.00\" score=\"18.06\"/>"
-        "     <angle value=\"60.0\" tolerance1=\"30.00\" tolerance2=\"60.00\" score=\"18.06\"/>"
-        "     <angle value=\"180.0\" tolerance1=\"30.00\" tolerance2=\"60.00\" score=\"18.41\"/>"
-		"    </torsions>"
-		"   </rule>"
-		"   <rule pattern=\"[*,#1]~[*:2]~[*:3]~[*,#1:4]\">"
-        "    <torsions>"
-        "      <angle value=\"0.0\" tolerance1=\"0.0\" tolerance2=\"0.0\" score=\"0.0\"/>"
-        "      <angle value=\"30.0\" tolerance1=\"0.0\" tolerance2=\"0.0\" score=\"0.0\"/>"
-        "      <angle value=\"60.0\" tolerance1=\"0.0\" tolerance2=\"0.0\" score=\"0.0\"/>"
-        "      <angle value=\"90.0\" tolerance1=\"0.0\" tolerance2=\"0.0\" score=\"0.0\"/>"
-        "      <angle value=\"120.0\" tolerance1=\"0.0\" tolerance2=\"0.0\" score=\"0.0\"/>"
-        "      <angle value=\"150.0\" tolerance1=\"0.0\" tolerance2=\"0.0\" score=\"0.0\"/>"
-        "      <angle value=\"180.0\" tolerance1=\"0.0\" tolerance2=\"0.0\" score=\"0.0\"/>"
-        "      <angle value=\"210.0\" tolerance1=\"0.0\" tolerance2=\"0.0\" score=\"0.0\"/>"
-        "      <angle value=\"240.0\" tolerance1=\"0.0\" tolerance2=\"0.0\" score=\"0.0\"/>"
-        "      <angle value=\"270.0\" tolerance1=\"0.0\" tolerance2=\"0.0\" score=\"0.0\"/>"
-        "      <angle value=\"300.0\" tolerance1=\"0.0\" tolerance2=\"0.0\" score=\"0.0\"/>"
-        "      <angle value=\"330.0\" tolerance1=\"0.0\" tolerance2=\"0.0\" score=\"0.0\"/>"
-        "    </torsions>"
-		"   </rule>"
-		"  </category>"
-		" </library>";
-
-	ConfGen::TorsionLibrary::SharedPointer fallbackTorLib(new ConfGen::TorsionLibrary());
 
 	struct SymmetryPattern
 	{
@@ -420,15 +64,6 @@ namespace
 	    { Chem::parseSMARTS("[*:1]-[c:1]1[cH1][cH1][cH1][cH1][c]1-[*,#1;X1]"), 2 }
 	};
 	
-	struct Init
-    {
-
-		Init() {
-			ConfGen::TorsionLibraryDataReader().read(FALLBACK_TORSION_RULES, *fallbackTorLib);
-		}
-
-    } init;
-
 	const std::size_t MAX_CONF_DATA_CACHE_SIZE = 10000;
 }
 
@@ -444,27 +79,26 @@ ConfGen::TorsionDriverSettings& ConfGen::TorsionDriverImpl::getSettings()
 	return settings;
 }
 
-void ConfGen::TorsionDriverImpl::setup(const Chem::MolecularGraph& molgraph, const Chem::MolecularGraph& root_molgraph)
+void ConfGen::TorsionDriverImpl::setup(const Chem::MolecularGraph& molgraph)
 {
 	buildRotatableBondMask(molgraph, tmpBitSet, settings.sampleHeteroAtomHydrogens(), true);
 	
-	fragTree.build(molgraph, root_molgraph, tmpBitSet);
-
-	setupTorsionAngles(fragTree.getRoot());
+	setup(molgraph, tmpBitSet);
 }
 
-void ConfGen::TorsionDriverImpl::setup(const Chem::MolecularGraph& molgraph, const Chem::MolecularGraph& root_molgraph, 
-									   const Util::BitSet& bond_mask, bool is_excl_mask)
+void ConfGen::TorsionDriverImpl::setup(const Chem::MolecularGraph& molgraph, const Util::BitSet& bond_mask)
 {
-	if (is_excl_mask) {
-		buildRotatableBondMask(molgraph, bond_mask, tmpBitSet, settings.sampleHeteroAtomHydrogens(), true);
-	
-		fragTree.build(molgraph, root_molgraph, tmpBitSet);
+	splitIntoFragments(molgraph, fragments, bond_mask, false);
 
-	} else
-		fragTree.build(molgraph, root_molgraph, tmpBitSet);
+	setup(fragments, molgraph, bond_mask);
+}
 
-	setupTorsionAngles(fragTree.getRoot());
+void ConfGen::TorsionDriverImpl::setup(const Chem::FragmentList& frags, const Chem::MolecularGraph& molgraph, 
+									   const Util::BitSet& bond_mask)
+{
+	fragTree.build(fragments, molgraph, bond_mask);
+
+	assignTorsionAngles(fragTree.getRoot());
 }
 
 void ConfGen::TorsionDriverImpl::setMMFF94Parameters(const ForceField::MMFF94InteractionData& ia_data)
@@ -474,21 +108,23 @@ void ConfGen::TorsionDriverImpl::setMMFF94Parameters(const ForceField::MMFF94Int
 	fragTree.getRoot()->distMMFF94Parameters(ia_data, mmff94InteractionMask);
 }
 
-bool ConfGen::TorsionDriverImpl::setMMFF94Parameters(const Chem::MolecularGraph& root_molgraph)
+bool ConfGen::TorsionDriverImpl::setMMFF94Parameters(const Chem::MolecularGraph& molgraph)
 {
+	using namespace ForceField;
+
 	if (!mmff94Parameterizer.get())
-		mmff94Parameterizer.reset(new ForceField::MMFF94InteractionParameterizer());
+		mmff94Parameterizer.reset(new MMFF94InteractionParameterizer());
 
 	if (!mmff94Data.get())
-		mmff94Data.reset(new ForceField::MMFF94InteractionData());
+		mmff94Data.reset(new MMFF94InteractionData());
 
 	mmff94Parameterizer->strictParameterization(settings.strictForceFieldParameterization());
 
 	try {
-		if (parameterizeMMFF94Interactions(root_molgraph, *mmff94Parameterizer, *mmff94Data, settings.getForceFieldType()) != ReturnCode::SUCCESS)
+		if (parameterizeMMFF94Interactions(molgraph, *mmff94Parameterizer, *mmff94Data, settings.getForceFieldType()) != ReturnCode::SUCCESS)
 			return false;
 
-	} catch (const ForceField::Error&) {
+	} catch (const Error&) {
 		return false;
 	}
 
@@ -501,19 +137,51 @@ void ConfGen::TorsionDriverImpl::clearInputCoordinates()
 	fragTree.getRoot()->clearConformersDownwards();
 }
 
-void ConfGen::TorsionDriverImpl::clearInputCoordinates(const Util::BitSet& atom_mask)
+void ConfGen::TorsionDriverImpl::clearInputCoordinates(std::size_t frag_idx)
 {
-	clearInputCoordinates(fragTree.getRoot(), atom_mask);
+	fragTree.getFragmentNode(frag_idx)->clearConformersUpwards();
 }
 
 void ConfGen::TorsionDriverImpl::addInputCoordinates(const Math::Vector3DArray& coords)
 {
-	addInputCoordinates(fragTree.getRoot(), coords);
+	for (std::size_t i = 0, num_frags = fragTree.getNumFragments(); i < num_frags; i++) {
+		FragmentTreeNode* node = fragTree.getFragmentNode(i);
+
+		node->addConformer(coords);
+		
+		if (node->getParent())
+			node->getParent()->clearConformersUpwards();
+	}
 }
 
-void ConfGen::TorsionDriverImpl::addInputCoordinates(const Math::Vector3DArray& coords, const Util::BitSet& atom_mask)
+void ConfGen::TorsionDriverImpl::addInputCoordinates(const Math::Vector3DArray& coords, std::size_t frag_idx)
 {
-	addInputCoordinates(fragTree.getRoot(), coords, atom_mask);
+	FragmentTreeNode* node = fragTree.getFragmentNode(frag_idx);
+
+	node->addConformer(coords);
+		
+	if (node->getParent())
+		node->getParent()->clearConformersUpwards();
+}
+
+void ConfGen::TorsionDriverImpl::addInputCoordinates(const ConformerData& conf_data, std::size_t frag_idx)
+{
+	FragmentTreeNode* node = fragTree.getFragmentNode(frag_idx);
+
+	node->addConformer(conf_data);
+		
+	if (node->getParent())
+		node->getParent()->clearConformersUpwards();
+}
+
+void ConfGen::TorsionDriverImpl::addInputCoordinates(const ConformerData::SharedPointer& conf_data, std::size_t frag_idx)
+{
+	FragmentTreeNode* node = fragTree.getFragmentNode(frag_idx);
+
+	node->getConformers().push_back(conf_data);
+		
+	if (node->getParent())
+		node->getParent()->clearConformersUpwards();
 }
 
 void ConfGen::TorsionDriverImpl::setAbortCallback(const CallbackFunction& func)
@@ -536,7 +204,22 @@ const ConfGen::CallbackFunction& ConfGen::TorsionDriverImpl::getTimeoutCallback(
 	return fragTree.getTimeoutCallback();
 }
 
-unsigned int ConfGen::TorsionDriverImpl::drive()
+std::size_t ConfGen::TorsionDriverImpl::getNumFragments() const
+{
+	return fragTree.getNumFragments();
+}
+
+const Chem::Fragment& ConfGen::TorsionDriverImpl::getFragment(std::size_t idx) const
+{
+	return *fragTree.getFragment(idx);
+}
+
+ConfGen::FragmentTreeNode& ConfGen::TorsionDriverImpl::getFragmentNode(std::size_t idx) const
+{
+	return *fragTree.getFragmentNode(idx);
+}
+
+unsigned int ConfGen::TorsionDriverImpl::generateConformers()
 {
 	return fragTree.getRoot()->generateConformers(settings.orderByEnergy());
 }
@@ -561,75 +244,20 @@ ConfGen::TorsionDriverImpl::ConstConformerIterator ConfGen::TorsionDriverImpl::g
     return fragTree.getRoot()->getConformers().end();
 }
 
-ConfGen::FragmentTree& ConfGen::TorsionDriverImpl::getFragmentTree()
-{
-	return fragTree;
-}
-
 bool ConfGen::TorsionDriverImpl::initialized() const
 {
 	return fragTree.getRoot();
 }
 
-void ConfGen::TorsionDriverImpl::addInputCoordinates(FragmentTreeNode* node, const Math::Vector3DArray& coords)
-{
-	if (node->hasChildren()) {
-		addInputCoordinates(node->getLeftChild(), coords);
-		addInputCoordinates(node->getRightChild(), coords);
-		return;
-	}
-
-	if (node->getParent())
-		node->getParent()->clearConformersUpwards();
-
-	node->addConformer(coords);
-}
-
-void ConfGen::TorsionDriverImpl::addInputCoordinates(FragmentTreeNode* node, const Math::Vector3DArray& coords, 
-													 const Util::BitSet& atom_mask)
-{
-	if (node->hasChildren()) {
-		addInputCoordinates(node->getLeftChild(), coords, atom_mask);
-		addInputCoordinates(node->getRightChild(), coords, atom_mask);
-		return;
-	}
-
-	tmpBitSet = node->getCoreAtomMask();
-	tmpBitSet &= atom_mask;
-
-	if (!tmpBitSet.any())
-		return;
-
-	if (node->getParent())
-		node->getParent()->clearConformersUpwards();
-
-	node->addConformer(coords);
-}
-
-void ConfGen::TorsionDriverImpl::clearInputCoordinates(FragmentTreeNode* node, const Util::BitSet& atom_mask)
-{
-	if (node->hasChildren()) {
-		clearInputCoordinates(node->getLeftChild(), atom_mask);
-		clearInputCoordinates(node->getRightChild(), atom_mask);
-		return;
-	}
-
-	tmpBitSet = node->getCoreAtomMask();
-	tmpBitSet &= atom_mask;
-
-	if (tmpBitSet.any()) 
-		node->clearConformersUpwards();
-}
-
-void ConfGen::TorsionDriverImpl::setupTorsionAngles(FragmentTreeNode* node)
+void ConfGen::TorsionDriverImpl::assignTorsionAngles(FragmentTreeNode* node)
 {
 	using namespace Chem;
 
 	if (!node->hasChildren())
 		return;
 
-	setupTorsionAngles(node->getLeftChild());
-	setupTorsionAngles(node->getRightChild());
+	assignTorsionAngles(node->getLeftChild());
+	assignTorsionAngles(node->getRightChild());
 
 	const Bond* bond = node->getSplitBond();
 
@@ -704,7 +332,7 @@ const ConfGen::TorsionRuleMatch* ConfGen::TorsionDriverImpl::getMatchingTorsionR
 	if (torRuleMatcher.findMatches(bond, root_molgraph, false)) 
 		return &torRuleMatcher.getMatch(0); 
 	
-	torRuleMatcher.setTorsionLibrary(fallbackTorLib);
+	torRuleMatcher.setTorsionLibrary(getFallbackTorsionLibrary());
 
 	if (torRuleMatcher.findMatches(bond, root_molgraph, false)) 
 		return &torRuleMatcher.getMatch(0); 
