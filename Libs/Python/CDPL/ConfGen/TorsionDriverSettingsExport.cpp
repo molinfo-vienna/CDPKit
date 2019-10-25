@@ -52,6 +52,10 @@ void CDPLPythonConfGen::exportTorsionDriverSettings()
 			 (python::arg("self"), python::arg("enumerate")))
 		.def("sampleHeteroAtomHydrogens", GetBoolFunc(&ConfGen::TorsionDriverSettings::sampleHeteroAtomHydrogens), 
 			 python::arg("self"))
+		.def("orderByEnergy", SetBoolFunc(&ConfGen::TorsionDriverSettings::orderByEnergy), 
+			 (python::arg("self"), python::arg("order")))
+		.def("orderByEnergy", GetBoolFunc(&ConfGen::TorsionDriverSettings::orderByEnergy), 
+			 python::arg("self"))
 		.def("setForceFieldType", &ConfGen::TorsionDriverSettings::setForceFieldType, 
 			 (python::arg("self"), python::arg("type")))
 		.def("getForceFieldType", &ConfGen::TorsionDriverSettings::getForceFieldType, 
@@ -60,10 +64,6 @@ void CDPLPythonConfGen::exportTorsionDriverSettings()
 			 (python::arg("self"), python::arg("strict")))
 		.def("strictForceFieldParameterization", GetBoolFunc(&ConfGen::TorsionDriverSettings::strictForceFieldParameterization), 
 			 python::arg("self"))
-		.def("setTorsionLibrary", &ConfGen::TorsionDriverSettings::setTorsionLibrary, 
-			 (python::arg("self"), python::arg("lib")))
-		.def("getTorsionLibrary", &ConfGen::TorsionDriverSettings::getTorsionLibrary, 
-			 python::arg("self"), python::return_value_policy<python::copy_const_reference>())
 		.def_readonly("DEFAULT", ConfGen::TorsionDriverSettings::DEFAULT)
 		.add_property("sampleHetAtomHydrogens", GetBoolFunc(&ConfGen::TorsionDriverSettings::sampleHeteroAtomHydrogens),
 					  SetBoolFunc(&ConfGen::TorsionDriverSettings::sampleHeteroAtomHydrogens))
@@ -71,8 +71,6 @@ void CDPLPythonConfGen::exportTorsionDriverSettings()
 					  &ConfGen::TorsionDriverSettings::setForceFieldType)
 		.add_property("strictForceFieldParam", GetBoolFunc(&ConfGen::TorsionDriverSettings::strictForceFieldParameterization), 
 					  SetBoolFunc(&ConfGen::TorsionDriverSettings::strictForceFieldParameterization))
-		.add_property("torsionLibrary", 
-					  python::make_function(&ConfGen::TorsionDriverSettings::getTorsionLibrary,
-											python::return_value_policy<python::copy_const_reference>()),
-					  &ConfGen::TorsionDriverSettings::setTorsionLibrary);
+		.add_property("energyOrdered", GetBoolFunc(&ConfGen::TorsionDriverSettings::orderByEnergy),
+					  SetBoolFunc(&ConfGen::TorsionDriverSettings::orderByEnergy));
 }

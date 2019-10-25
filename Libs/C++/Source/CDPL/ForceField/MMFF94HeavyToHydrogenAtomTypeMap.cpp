@@ -31,6 +31,8 @@
 #include <cstring>
 #include <sstream>
 
+#include <boost/thread.hpp>
+
 #if defined(HAVE_BOOST_IOSTREAMS)
 
 #include <boost/iostreams/device/array.hpp>
@@ -52,16 +54,15 @@ namespace
 {
  
     ForceField::MMFF94HeavyToHydrogenAtomTypeMap::SharedPointer builtinMap(new ForceField::MMFF94HeavyToHydrogenAtomTypeMap());
-    const std::string                                           NOT_FOUND;
 
-    struct Init
-    {
+ 	boost::once_flag initBuiltinMapFlag = BOOST_ONCE_INIT;
 
-		Init() {
-			builtinMap->loadDefaults();
-		}
+	void initBuiltinMap() 
+	{
+		builtinMap->loadDefaults();
+	}
 
-    } init;
+    const std::string NOT_FOUND;
 }
 
 
@@ -173,5 +174,7 @@ void ForceField::MMFF94HeavyToHydrogenAtomTypeMap::set(const SharedPointer& map)
 
 const ForceField::MMFF94HeavyToHydrogenAtomTypeMap::SharedPointer& ForceField::MMFF94HeavyToHydrogenAtomTypeMap::get()
 {
-    return defaultMap;
+ 	boost::call_once(&initBuiltinMap, initBuiltinMapFlag);
+
+	return defaultMap;
 }

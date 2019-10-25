@@ -33,6 +33,7 @@
 #include "CDPL/Config.hpp"
 
 #include <boost/bind.hpp>
+#include <boost/thread.hpp>
 
 #if defined(HAVE_BOOST_IOSTREAMS)
 
@@ -57,15 +58,13 @@ namespace
     ForceField::MMFF94OutOfPlaneBendingParameterTable::SharedPointer builtinDynTable(new ForceField::MMFF94OutOfPlaneBendingParameterTable());
     ForceField::MMFF94OutOfPlaneBendingParameterTable::SharedPointer builtinStatTable(new ForceField::MMFF94OutOfPlaneBendingParameterTable());
 
-    struct Init
-    {
+ 	boost::once_flag initBuiltinTablesFlag = BOOST_ONCE_INIT;
 
-		Init() {
-			builtinDynTable->loadDefaults(false);
-			builtinStatTable->loadDefaults(true);
-		}
-
-    } init;
+	void initBuiltinTables() 
+	{ 
+		builtinDynTable->loadDefaults(false);
+		builtinStatTable->loadDefaults(true);
+	}
 
 	Base::uint32 lookupKey(Base::uint32 term_atom1_type, Base::uint32 ctr_atom_type, Base::uint32 term_atom2_type, Base::uint32 oop_atom_type)
 	{
@@ -264,5 +263,7 @@ void ForceField::MMFF94OutOfPlaneBendingParameterTable::set(const SharedPointer&
 
 const ForceField::MMFF94OutOfPlaneBendingParameterTable::SharedPointer& ForceField::MMFF94OutOfPlaneBendingParameterTable::get(bool mmff94s)
 {
-    return (mmff94s ? defaultStatTable : defaultDynTable);
+ 	boost::call_once(&initBuiltinTables, initBuiltinTablesFlag);
+
+	return (mmff94s ? defaultStatTable : defaultDynTable);
 }

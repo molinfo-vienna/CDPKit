@@ -32,6 +32,7 @@
 #include "CDPL/Config.hpp"
 
 #include <boost/bind.hpp>
+#include <boost/thread.hpp>
 
 #if defined(HAVE_BOOST_IOSTREAMS)
 
@@ -55,14 +56,12 @@ namespace
  
     ForceField::MMFF94PartialBondChargeIncrementTable::SharedPointer builtinTable(new ForceField::MMFF94PartialBondChargeIncrementTable());
 
-    struct Init
-    {
+	boost::once_flag initBuiltinTableFlag = BOOST_ONCE_INIT;
 
-		Init() {
-			builtinTable->loadDefaults();
-		}
-
-    } init;
+	void initBuiltinTable() 
+	{
+		builtinTable->loadDefaults();
+	}
 
 	const ForceField::MMFF94PartialBondChargeIncrementTable::Entry NOT_FOUND;
 }
@@ -213,5 +212,7 @@ void ForceField::MMFF94PartialBondChargeIncrementTable::set(const SharedPointer&
 
 const ForceField::MMFF94PartialBondChargeIncrementTable::SharedPointer& ForceField::MMFF94PartialBondChargeIncrementTable::get()
 {
+	boost::call_once(&initBuiltinTable, initBuiltinTableFlag);
+
     return defaultTable;
 }

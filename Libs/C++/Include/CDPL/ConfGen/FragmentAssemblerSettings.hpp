@@ -32,7 +32,6 @@
 #define CDPL_CONFGEN_FRAGMENTASSEMBLERSETTINGS_HPP
 
 #include "CDPL/ConfGen/APIPrefix.hpp"
-#include "CDPL/ConfGen/FragmentLibrary.hpp"
 #include "CDPL/ConfGen/FragmentConformerGeneratorSettings.hpp"
 
 
@@ -67,10 +66,6 @@ namespace CDPL
 	
 			bool generateCoordinates() const;
 
-			void setFragmentLibrary(const FragmentLibrary::SharedPointer& lib);
-
-			const FragmentLibrary::SharedPointer& getFragmentLibrary() const;
-
 			FragmentConformerGeneratorSettings& getFragmentBuildSettings();
 
 			const FragmentConformerGeneratorSettings& getFragmentBuildSettings() const;
@@ -80,7 +75,6 @@ namespace CDPL
 			unsigned int                       nitrogenEnumMode;
 			bool                               generateCoords;
 			FragmentConformerGeneratorSettings fragBuildSettings;
-			FragmentLibrary::SharedPointer     fragLib;
 		};
 
 		/**

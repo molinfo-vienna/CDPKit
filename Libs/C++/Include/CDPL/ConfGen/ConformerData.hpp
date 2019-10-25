@@ -31,6 +31,8 @@
 #ifndef CDPL_CONFGEN_CONFORMERDATA_HPP
 #define CDPL_CONFGEN_CONFORMERDATA_HPP
 
+#include <algorithm>
+
 #include "CDPL/ConfGen/APIPrefix.hpp"
 #include "CDPL/Math/VectorArray.hpp"
 
@@ -63,6 +65,11 @@ namespace CDPL
 
 			double getEnergy() const {
 				return energy;
+			}
+
+			void swap(ConformerData& data) {
+				Math::Vector3DArray::swap(data);
+				std::swap(energy, data.energy);
 			}
 
 		  private:

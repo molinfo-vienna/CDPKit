@@ -42,6 +42,8 @@ void CDPLPythonConfGen::exportConformerData()
 		.def(python::init<>(python::arg("self")))
 		.def(python::init<const ConfGen::ConformerData&>((python::arg("self"), python::arg("data"))))
 		.def(python::init<const Math::Vector3DArray&, double>((python::arg("self"), python::arg("coords"), python::arg("energy") = 0.0)))
+		.def("swap", &ConfGen::ConformerData::swap, 
+			 (python::arg("self"), python::arg("data")))
 		.def("assign", CDPLPythonBase::copyAssOp(&ConfGen::ConformerData::operator=), 
 			 (python::arg("self"), python::arg("data")), python::return_self<>())
 		.def("assign", CDPLPythonBase::copyAssOp(&Math::Vector3DArray::operator=), 

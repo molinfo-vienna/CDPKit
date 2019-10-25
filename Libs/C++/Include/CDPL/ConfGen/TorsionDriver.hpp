@@ -38,11 +38,10 @@
 
 #include "CDPL/ConfGen/APIPrefix.hpp"
 #include "CDPL/ConfGen/TorsionDriverSettings.hpp"
+#include "CDPL/ConfGen/TorsionLibrary.hpp"
 #include "CDPL/ConfGen/CallbackFunction.hpp"
 #include "CDPL/ConfGen/ConformerDataArray.hpp"
-#include "CDPL/ConfGen/ConformerData.hpp"
 #include "CDPL/Util/BitSet.hpp"
-#include "CDPL/Math/VectorArray.hpp"
 
 
 namespace CDPL 
@@ -79,6 +78,10 @@ namespace CDPL
 			const TorsionDriverSettings& getSettings() const;
 
 			TorsionDriverSettings& getSettings();
+
+			void setTorsionLibrary(const TorsionLibrary::SharedPointer& lib);
+
+			const ConfGen::TorsionLibrary::SharedPointer& getTorsionLibrary() const;
 
 			void setAbortCallback(const CallbackFunction& func);
 

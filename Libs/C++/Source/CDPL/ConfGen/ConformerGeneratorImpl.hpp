@@ -37,6 +37,12 @@
 namespace CDPL 
 {
 
+	namespace Chem
+	{
+
+		class MolecularGraph;
+	}
+
     namespace ConfGen 
     {
 	

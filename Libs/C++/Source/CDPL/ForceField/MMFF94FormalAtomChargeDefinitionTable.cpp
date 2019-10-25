@@ -32,6 +32,7 @@
 #include "CDPL/Config.hpp"
 
 #include <boost/bind.hpp>
+#include <boost/thread.hpp>
 
 #if defined(HAVE_BOOST_IOSTREAMS)
 
@@ -55,14 +56,12 @@ namespace
  
     ForceField::MMFF94FormalAtomChargeDefinitionTable::SharedPointer builtinTable(new ForceField::MMFF94FormalAtomChargeDefinitionTable());
 
-    struct Init
-    {
+	boost::once_flag initBuiltinTableFlag = BOOST_ONCE_INIT;
 
-		Init() {
-			builtinTable->loadDefaults();
-		}
-
-    } init;
+	void initBuiltinTable() 
+	{
+		builtinTable->loadDefaults();
+	}
 
     const ForceField::MMFF94FormalAtomChargeDefinitionTable::Entry NOT_FOUND;
 }
@@ -220,5 +219,7 @@ void ForceField::MMFF94FormalAtomChargeDefinitionTable::set(const SharedPointer&
 
 const ForceField::MMFF94FormalAtomChargeDefinitionTable::SharedPointer& ForceField::MMFF94FormalAtomChargeDefinitionTable::get()
 {
+	boost::call_once(&initBuiltinTable, initBuiltinTableFlag);
+
     return defaultTable;
 }

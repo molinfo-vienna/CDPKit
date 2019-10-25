@@ -26,6 +26,8 @@
 
 #include "StaticInit.hpp"
 
+#include <boost/thread.hpp>
+
 #include "CDPL/ConfGen/TorsionLibrary.hpp"
 
 #include "TorsionLibraryDataReader.hpp"
@@ -41,7 +43,14 @@ namespace
         #include "TorsionLibrary.xml.str" 
 		;
 
-    ConfGen::TorsionLibrary::SharedPointer builtinTorLib;
+    ConfGen::TorsionLibrary::SharedPointer builtinTorLib(new ConfGen::TorsionLibrary());
+
+	boost::once_flag initBuiltinTorLibFlag = BOOST_ONCE_INIT;
+
+	void initBuiltinTorLib()
+	{
+		builtinTorLib->loadDefaults();
+	}
 }
 
 
@@ -55,28 +64,13 @@ void ConfGen::TorsionLibrary::loadDefaults()
 
 void ConfGen::TorsionLibrary::set(const SharedPointer& lib)
 {
-	initBuiltinTorLib();
-
-	defaultLib = (!lib ? builtinTorLib : lib);
+ 	defaultLib = (!lib ? builtinTorLib : lib);
 }
 
 const ConfGen::TorsionLibrary::SharedPointer& ConfGen::TorsionLibrary::get()
 {
-	initBuiltinTorLib();
+    boost::call_once(&initBuiltinTorLib, initBuiltinTorLibFlag);
 
     return defaultLib;
 }
 
-void ConfGen::TorsionLibrary::initBuiltinTorLib()
-{
-	static bool initialize = true;
-
-	if (!initialize)
-		return;
-
-	builtinTorLib.reset(new TorsionLibrary());
-	builtinTorLib->loadDefaults();
-
-	defaultLib = builtinTorLib;
-	initialize = false;
-}

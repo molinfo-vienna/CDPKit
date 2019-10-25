@@ -31,6 +31,9 @@
 #ifndef CDPL_CONFGEN_FRAGMENTTREENODE_HPP
 #define CDPL_CONFGEN_FRAGMENTTREENODE_HPP
 
+#include <cstddef>
+#include <vector>
+
 #include "CDPL/ConfGen/ConformerDataArray.hpp"
 #include "CDPL/ForceField/MMFF94InteractionData.hpp"
 #include "CDPL/Util/BitSet.hpp"
@@ -66,9 +69,6 @@ namespace CDPL
 			const FragmentTreeNode* getParent() const;
 			FragmentTreeNode* getParent();
 
-			const Chem::MolecularGraph* getFragment() const;
-			const Chem::MolecularGraph* getRootMolecularGraph() const;
-
 			const Chem::Bond* getSplitBond() const;
 			const Chem::Atom* const* getSplitBondAtoms() const;
 		
@@ -83,11 +83,7 @@ namespace CDPL
 
 			FragmentTreeNode* getLeftChild();
 			FragmentTreeNode* getRightChild();
-
-			const ConformerDataArray& getConformers() const;
-
-			ConformerDataArray& getConformers();
-
+		
 			const IndexArray& getAtomIndices() const;
 
 			const Util::BitSet& getAtomMask() const;
@@ -103,12 +99,19 @@ namespace CDPL
 
 			void distMMFF94Parameters(const ForceField::MMFF94InteractionData& ia_data,
 									  ForceFieldInteractionMask& ia_mask);
+
+			const ConformerDataArray& getConformers() const;
+			ConformerDataArray& getConformers();
+
+			std::size_t getNumConformers() const;
 			
+			void clearConformers();
 			void clearConformersDownwards();
 			void clearConformersUpwards();
 			
 			void addConformer(const Math::Vector3DArray& src_coords);
 			void addConformer(const ConformerData& conf_data);
+			void addConformer(const ConformerData::SharedPointer& conf_data);
 
 			unsigned int generateConformers(bool e_ordered);
 
@@ -127,12 +130,9 @@ namespace CDPL
 
 			void setSplitBond(const Chem::Bond* bond);
 			void setSplitBondAtoms(const Chem::Atom* left, const Chem::Atom* right);
-
-			void setFragment(const Chem::MolecularGraph* frag);
-			void setRootMolecularGraph(const Chem::MolecularGraph* root_molgraph);
-
+		
 			void initFragmentData();
-			void initFragmentData(const Chem::MolecularGraph& frag, const Chem::MolecularGraph& root_molgraph);
+			void initFragmentData(const Chem::MolecularGraph& frag, const Chem::MolecularGraph& molgraph);
 
 			void clearTorsionDrivingData();
 
@@ -175,8 +175,6 @@ namespace CDPL
 			IndexArray                          atomIndices;
 			Util::BitSet                        atomMask;
 			Util::BitSet                        coreAtomMask;
-			const Chem::MolecularGraph*         rootMolGraph;
-			const Chem::MolecularGraph*         fragment;
 			ConformerDataArray                  conformers;
 			TorsionAngleArray                   torsionAngles;
 			DoubleArray                         torsionAngleCosines;

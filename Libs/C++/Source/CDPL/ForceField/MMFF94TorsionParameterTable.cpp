@@ -32,6 +32,7 @@
 #include "CDPL/Config.hpp"
 
 #include <boost/bind.hpp>
+#include <boost/thread.hpp>
 
 #if defined(HAVE_BOOST_IOSTREAMS)
 
@@ -56,15 +57,13 @@ namespace
     ForceField::MMFF94TorsionParameterTable::SharedPointer builtinDynTable(new ForceField::MMFF94TorsionParameterTable());
     ForceField::MMFF94TorsionParameterTable::SharedPointer builtinStatTable(new ForceField::MMFF94TorsionParameterTable());
 
-    struct Init
-    {
+	boost::once_flag initBuiltinTablesFlag = BOOST_ONCE_INIT;
 
-		Init() {
-			builtinDynTable->loadDefaults(false);
-			builtinStatTable->loadDefaults(true);
-		}
-
-    } init;
+	void initBuiltinTables() 
+	{
+		builtinDynTable->loadDefaults(false);
+		builtinStatTable->loadDefaults(true);
+	}
 
 	Base::uint64 lookupKey(Base::uint32 tor_type_idx, Base::uint32 term_atom1_type, Base::uint32 ctr_atom1_type, Base::uint32 ctr_atom2_type, Base::uint32 term_atom2_type)
 	{
@@ -290,5 +289,7 @@ void ForceField::MMFF94TorsionParameterTable::set(const SharedPointer& table, bo
 
 const ForceField::MMFF94TorsionParameterTable::SharedPointer& ForceField::MMFF94TorsionParameterTable::get(bool mmff94s)
 {
-    return (mmff94s ? defaultStatTable : defaultDynTable);
+ 	boost::call_once(&initBuiltinTables, initBuiltinTablesFlag);
+
+	return (mmff94s ? defaultStatTable : defaultDynTable);
 }

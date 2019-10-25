@@ -31,6 +31,8 @@
 #include <cstring>
 #include <sstream>
 
+#include <boost/thread.hpp>
+
 #if defined(HAVE_BOOST_IOSTREAMS)
 
 #include <boost/iostreams/device/array.hpp>
@@ -53,14 +55,12 @@ namespace
  
     ForceField::MMFF94SymbolicToNumericAtomTypeMap::SharedPointer builtinMap(new ForceField::MMFF94SymbolicToNumericAtomTypeMap());
 
-    struct Init
-    {
+	boost::once_flag initBuiltinMapFlag = BOOST_ONCE_INIT;
 
-		Init() {
-			builtinMap->loadDefaults();
-		}
-
-    } init;
+	void initBuiltinMap() 
+	{
+		builtinMap->loadDefaults();
+	}
 }
 
 
@@ -172,5 +172,7 @@ void ForceField::MMFF94SymbolicToNumericAtomTypeMap::set(const SharedPointer& ma
 
 const ForceField::MMFF94SymbolicToNumericAtomTypeMap::SharedPointer& ForceField::MMFF94SymbolicToNumericAtomTypeMap::get()
 {
+	boost::call_once(&initBuiltinMap, initBuiltinMapFlag);
+
     return defaultMap;
 }

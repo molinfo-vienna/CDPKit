@@ -38,6 +38,7 @@
 
 #include "CDPL/ConfGen/APIPrefix.hpp"
 #include "CDPL/ConfGen/FragmentAssemblerSettings.hpp"
+#include "CDPL/ConfGen/FragmentLibrary.hpp"
 #include "CDPL/ConfGen/ConformerDataArray.hpp"
 #include "CDPL/ConfGen/CallbackFunction.hpp"
 
@@ -73,6 +74,10 @@ namespace CDPL
 			const FragmentAssemblerSettings& getSettings() const;
 
 			FragmentAssemblerSettings& getSettings();
+
+			void clearFragmentLibraries();
+
+			void addFragmentLibrary(const FragmentLibrary::SharedPointer& lib);
 
 			void setAbortCallback(const CallbackFunction& func);
 

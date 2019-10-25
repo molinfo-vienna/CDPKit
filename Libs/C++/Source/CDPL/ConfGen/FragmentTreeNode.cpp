@@ -111,7 +111,7 @@ namespace
 
 
 ConfGen::FragmentTreeNode::FragmentTreeNode(ConfGen::FragmentTree& owner): 
-	owner(owner), parent(0), splitBond(0), rootMolGraph(), fragment(0)
+	owner(owner), parent(0), splitBond(0)
 {
 	splitBondAtoms[0] = 0;
 	splitBondAtoms[1] = 0;
@@ -128,16 +128,6 @@ ConfGen::FragmentTreeNode* ConfGen::FragmentTreeNode::getParent()
 const ConfGen::FragmentTreeNode* ConfGen::FragmentTreeNode::getParent() const
 {
 	return parent;
-}
-
-const Chem::MolecularGraph* ConfGen::FragmentTreeNode::getFragment() const
-{
-	return fragment;
-}
-
-const Chem::MolecularGraph* ConfGen::FragmentTreeNode::getRootMolecularGraph() const
-{
-	return rootMolGraph;
 }
 
 const Chem::Bond* ConfGen::FragmentTreeNode::getSplitBond() const
@@ -184,16 +174,6 @@ const ConfGen::FragmentTreeNode* ConfGen::FragmentTreeNode::getLeftChild() const
 const ConfGen::FragmentTreeNode* ConfGen::FragmentTreeNode::getRightChild() const
 {
 	return rightChild;
-}
-
-const ConfGen::ConformerDataArray& ConfGen::FragmentTreeNode::getConformers() const
-{
-	return conformers;
-}
-
-ConfGen::ConformerDataArray& ConfGen::FragmentTreeNode::getConformers()
-{
-	return conformers;
 }
 
 const ConfGen::FragmentTreeNode::IndexArray& ConfGen::FragmentTreeNode::getAtomIndices() const
@@ -255,6 +235,26 @@ void ConfGen::FragmentTreeNode::distMMFF94Parameters(const ForceField::MMFF94Int
 											ia_mask.torsion, atomMask);
 }
 
+const ConfGen::ConformerDataArray& ConfGen::FragmentTreeNode::getConformers() const
+{
+	return conformers;
+}
+
+ConfGen::ConformerDataArray& ConfGen::FragmentTreeNode::getConformers()
+{
+	return conformers;
+}
+
+std::size_t ConfGen::FragmentTreeNode::getNumConformers() const
+{
+	return conformers.size();
+}
+
+void ConfGen::FragmentTreeNode::clearConformers()
+{
+	conformers.clear();
+}
+
 void ConfGen::FragmentTreeNode::clearConformersDownwards()
 {
 	conformers.clear();
@@ -295,6 +295,11 @@ void ConfGen::FragmentTreeNode::addConformer(const ConformerData& conf_data)
 	conformers.push_back(new_conf);
 }
 
+void ConfGen::FragmentTreeNode::addConformer(const ConformerData::SharedPointer& conf_data)
+{
+	conformers.push_back(conf_data);
+}
+
 unsigned int ConfGen::FragmentTreeNode::generateConformers(bool e_ordered)
 {
 	if (conformers.empty()) {
@@ -331,8 +336,10 @@ unsigned int ConfGen::FragmentTreeNode::generateConformers(bool e_ordered)
 
 unsigned int ConfGen::FragmentTreeNode::lineupChildConformers()
 {
+	std::size_t num_left_chld_confs = leftChild->conformers.size();
 	std::size_t num_right_chld_confs = rightChild->conformers.size();
 
+	conformers.reserve(num_left_chld_confs * num_right_chld_confs);
 	childConfBounds.resize(2 * num_right_chld_confs);
 
 	for (std::size_t i = 0; i < num_right_chld_confs; i++)
@@ -343,7 +350,7 @@ unsigned int ConfGen::FragmentTreeNode::lineupChildConformers()
 	Math::Vector3D left_conf_bbox_max;
 	Math::Vector3D::ConstPointer left_conf_bbox_max_data = left_conf_bbox_max.getData();
 
-	for (std::size_t i = 0, num_left_chld_confs = leftChild->conformers.size(); i < num_left_chld_confs; i++) {
+	for (std::size_t i = 0; i < num_left_chld_confs; i++) {
 		if (owner.aborted())
 			return ReturnCode::ABORTED;
 
@@ -404,8 +411,9 @@ unsigned int ConfGen::FragmentTreeNode::alignAndRotateChildConformers()
 		}
 	}
 
-	std::size_t left_atom_idx = rootMolGraph->getAtomIndex(*splitBondAtoms[0]);
-	std::size_t right_atom_idx = rootMolGraph->getAtomIndex(*splitBondAtoms[1]);
+	const Chem::MolecularGraph& molgraph = *owner.getMolecularGraph();
+	std::size_t left_atom_idx = molgraph.getAtomIndex(*splitBondAtoms[0]);
+	std::size_t right_atom_idx = molgraph.getAtomIndex(*splitBondAtoms[1]);
 
 	std::size_t num_left_chld_confs = leftChild->conformers.size();
 	std::size_t num_right_chld_confs = rightChild->conformers.size();
@@ -414,7 +422,9 @@ unsigned int ConfGen::FragmentTreeNode::alignAndRotateChildConformers()
 	Math::Vector3D bond_vec;
 	Math::Vector3D tor_ref_vec;
 
-	for (std::size_t i = 0, tor_ref_atom_idx = torsionRefAtoms[0] ? rootMolGraph->getAtomIndex(*torsionRefAtoms[0]) : 0; i < num_left_chld_confs; i++) {
+	conformers.reserve(num_left_chld_confs * num_right_chld_confs * num_tor_angles);
+
+	for (std::size_t i = 0, tor_ref_atom_idx = torsionRefAtoms[0] ? molgraph.getAtomIndex(*torsionRefAtoms[0]) : 0; i < num_left_chld_confs; i++) {
 		ConformerData& conf = *leftChild->conformers[i];
 		const Math::Vector3DArray::StorageType& conf_data = conf.getData();
 		bool check_ref_vec_angle = true;
@@ -440,7 +450,7 @@ unsigned int ConfGen::FragmentTreeNode::alignAndRotateChildConformers()
 		alignCoordinates(almnt_mtx, conf, leftChild->atomIndices, left_atom_idx, right_atom_idx, 0.0);
 	}
 
-	for (std::size_t i = 0, tor_ref_atom_idx = torsionRefAtoms[1] ? rootMolGraph->getAtomIndex(*torsionRefAtoms[1]) : 0; i < num_right_chld_confs; i++) {
+	for (std::size_t i = 0, tor_ref_atom_idx = torsionRefAtoms[1] ? molgraph.getAtomIndex(*torsionRefAtoms[1]) : 0; i < num_right_chld_confs; i++) {
 		ConformerData& conf = *rightChild->conformers[i];
 		const Math::Vector3DArray::StorageType& conf_data = conf.getData();
 		bool check_ref_vec_angle = true;
@@ -537,16 +547,6 @@ void ConfGen::FragmentTreeNode::setChildren(FragmentTreeNode* left, FragmentTree
 	rightChild = right;
 }
 
-void ConfGen::FragmentTreeNode::setFragment(const Chem::MolecularGraph* frag)
-{
-	fragment = frag;
-}
-
-void ConfGen::FragmentTreeNode::setRootMolecularGraph(const Chem::MolecularGraph* root_molgraph)
-{
-	rootMolGraph = root_molgraph;
-}
-
 void ConfGen::FragmentTreeNode::initFragmentData()
 {
 	atomMask = leftChild->atomMask;
@@ -561,11 +561,11 @@ void ConfGen::FragmentTreeNode::initFragmentData()
 		atomIndices.push_back(i);
 }
 
-void ConfGen::FragmentTreeNode::initFragmentData(const Chem::MolecularGraph& frag, const Chem::MolecularGraph& root_molgraph)
+void ConfGen::FragmentTreeNode::initFragmentData(const Chem::MolecularGraph& frag, const Chem::MolecularGraph& molgraph)
 {
 	using namespace Chem;
 
-	std::size_t num_atoms = root_molgraph.getNumAtoms();
+	std::size_t num_atoms = molgraph.getNumAtoms();
 
 	atomMask.resize(num_atoms);
 	atomMask.reset();
@@ -577,12 +577,12 @@ void ConfGen::FragmentTreeNode::initFragmentData(const Chem::MolecularGraph& fra
 
 	for (MolecularGraph::ConstAtomIterator it = frag.getAtomsBegin(), end = frag.getAtomsEnd(); it != end; ++it) {
 		const Atom& atom = *it;
-		std::size_t atom_idx = root_molgraph.getAtomIndex(atom);
+		std::size_t atom_idx = molgraph.getAtomIndex(atom);
 
 		atomIndices.push_back(atom_idx);
 		atomMask.set(atom_idx);
 
-		if (getExplicitBondCount(atom, frag) == 1 && getExplicitBondCount(atom, root_molgraph) > 1) // is connected fragment atom?
+		if (getExplicitBondCount(atom, frag) == 1 && getExplicitBondCount(atom, molgraph) > 1) // is connected fragment atom?
 			continue;
 
 		coreAtomMask.set(atom_idx);
@@ -807,7 +807,8 @@ void ConfGen::FragmentTreeNode::calcVirtualTorsionReferenceAtomVector(const Math
 	using namespace Chem;
 
 	const Math::Vector3DArray::StorageType& coords_data = coords.getData();
-	const Atom& atom = rootMolGraph->getAtom(atom_idx);
+	const MolecularGraph& molgraph = *owner.getMolecularGraph();
+	const Atom& atom = molgraph.getAtom(atom_idx);
 	const Math::Vector3D& atom_pos = coords_data[atom_idx];
 
 	Atom::ConstBondIterator b_it = atom.getBondsBegin();
@@ -818,10 +819,10 @@ void ConfGen::FragmentTreeNode::calcVirtualTorsionReferenceAtomVector(const Math
 	for (Atom::ConstAtomIterator a_it = atom.getAtomsBegin(), a_end = atom.getAtomsEnd(); a_it != a_end; ++a_it, ++b_it) {
 		const Atom& nbr_atom = *a_it;
 
-		if (!rootMolGraph->containsAtom(nbr_atom) || !rootMolGraph->containsBond(*b_it))
+		if (!molgraph.containsAtom(nbr_atom) || !molgraph.containsBond(*b_it))
 			continue;
 
-		ref_vec.plusAssign(atom_pos - coords_data[rootMolGraph->getAtomIndex(nbr_atom)]);
+		ref_vec.plusAssign(atom_pos - coords_data[molgraph.getAtomIndex(nbr_atom)]);
 		bond_count++;
 	}
 

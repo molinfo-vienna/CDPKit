@@ -32,6 +32,7 @@
 #include "CDPL/Config.hpp"
 
 #include <boost/bind.hpp>
+#include <boost/thread.hpp>
 
 #if defined(HAVE_BOOST_IOSTREAMS)
 
@@ -53,22 +54,20 @@ using namespace CDPL;
 namespace
 {
  
-    ForceField::MMFF94PrimaryToParameterAtomTypeMap::SharedPointer builtinTable(new ForceField::MMFF94PrimaryToParameterAtomTypeMap());
+    ForceField::MMFF94PrimaryToParameterAtomTypeMap::SharedPointer builtinMap(new ForceField::MMFF94PrimaryToParameterAtomTypeMap());
 
-    struct Init
-    {
+ 	boost::once_flag initBuiltinMapFlag = BOOST_ONCE_INIT;
 
-		Init() {
-			builtinTable->loadDefaults();
-		}
-
-    } init;
+	void initBuiltinMap() 
+	{
+		builtinMap->loadDefaults();
+	}
 
 	const ForceField::MMFF94PrimaryToParameterAtomTypeMap::Entry NOT_FOUND;
 }
 
 
-ForceField::MMFF94PrimaryToParameterAtomTypeMap::SharedPointer ForceField::MMFF94PrimaryToParameterAtomTypeMap::defaultTable = builtinTable;
+ForceField::MMFF94PrimaryToParameterAtomTypeMap::SharedPointer ForceField::MMFF94PrimaryToParameterAtomTypeMap::defaultMap = builtinMap;
 
 
 const std::size_t ForceField::MMFF94PrimaryToParameterAtomTypeMap::Entry::NUM_TYPES;
@@ -207,10 +206,12 @@ void ForceField::MMFF94PrimaryToParameterAtomTypeMap::loadDefaults()
 
 void ForceField::MMFF94PrimaryToParameterAtomTypeMap::set(const SharedPointer& table)
 {	
-    defaultTable = (!table ? builtinTable : table);
+    defaultMap = (!table ? builtinMap : table);
 }
 
 const ForceField::MMFF94PrimaryToParameterAtomTypeMap::SharedPointer& ForceField::MMFF94PrimaryToParameterAtomTypeMap::get()
 {
-    return defaultTable;
+ 	boost::call_once(&initBuiltinMap, initBuiltinMapFlag);
+
+	return defaultMap;
 }

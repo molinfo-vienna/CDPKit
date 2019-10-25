@@ -45,6 +45,10 @@ void CDPLPythonConfGen::exportFragmentAssembler()
 			 static_cast<ConfGen::FragmentAssemblerSettings& (ConfGen::FragmentAssembler::*)()>
 			 (&ConfGen::FragmentAssembler::getSettings), 
 			 python::arg("self"), python::return_internal_reference<>())
+		.def("clearFragmentLibraries", &ConfGen::FragmentAssembler::clearFragmentLibraries, 
+			 python::arg("self"))
+		.def("addFragmentLibrary", &ConfGen::FragmentAssembler::addFragmentLibrary, 
+			 (python::arg("self"), python::arg("lib")))
 		.def("setAbortCallback", &ConfGen::FragmentAssembler::setAbortCallback, 
 			 (python::arg("self"), python::arg("func")))
 		.def("getAbortCallback", &ConfGen::FragmentAssembler::getAbortCallback, 

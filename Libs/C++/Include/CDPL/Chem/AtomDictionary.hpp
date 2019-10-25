@@ -323,7 +323,7 @@ namespace CDPL
 			static bool isNobleGas(unsigned int type);
 
 		  private:
-			static SharedPointer dictionary;
+			static SharedPointer defaultDict;
 			EntryLookupTable     entries;
 		};
 	};

@@ -39,7 +39,7 @@ const ConfGen::FragmentAssemblerSettings ConfGen::FragmentAssemblerSettings::DEF
 
 ConfGen::FragmentAssemblerSettings::FragmentAssemblerSettings():
 	enumRings(true), nitrogenEnumMode(NitrogenEnumerationMode::UNSPECIFIED_STEREO),
-	generateCoords(true), fragLib(FragmentLibrary::get())
+	generateCoords(true)
 {}
 
 void ConfGen::FragmentAssemblerSettings::enumerateRings(bool enumerate)
@@ -70,16 +70,6 @@ void ConfGen::FragmentAssemblerSettings::generateCoordinates(bool generate)
 bool ConfGen::FragmentAssemblerSettings::generateCoordinates() const
 {
 	return generateCoords;
-}
-
-void ConfGen::FragmentAssemblerSettings::setFragmentLibrary(const FragmentLibrary::SharedPointer& lib)
-{
-	fragLib = lib;
-}
-
-const ConfGen::FragmentLibrary::SharedPointer& ConfGen::FragmentAssemblerSettings::getFragmentLibrary() const
-{
-	return fragLib;
 }
 
 ConfGen::FragmentConformerGeneratorSettings& ConfGen::FragmentAssemblerSettings::getFragmentBuildSettings()

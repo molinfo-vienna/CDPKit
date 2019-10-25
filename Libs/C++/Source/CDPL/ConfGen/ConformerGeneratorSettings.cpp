@@ -41,7 +41,7 @@ ConfGen::ConformerGeneratorSettings::ConformerGeneratorSettings():
 	sampleHetAtomHs(false), enumRings(true), nitrogenEnumMode(NitrogenEnumerationMode::UNSPECIFIED_STEREO),
 	generateCoords(true), outputSupplCoords(false), eWindow(10.0), timeout(30 * 60 * 1000), 
 	forceFieldType(ForceFieldType::MMFF94S_NO_ESTAT), strictParam(true), maxNumOutputConfs(100), 
-	minRMSD(0.5), fragLib(FragmentLibrary::get()), torLib(TorsionLibrary::get()) 
+	minRMSD(0.5)
 {}
 
 void ConfGen::ConformerGeneratorSettings::sampleHeteroAtomHydrogens(bool sample)
@@ -152,26 +152,6 @@ void ConfGen::ConformerGeneratorSettings::setMinRMSD(double min_rmsd)
 double ConfGen::ConformerGeneratorSettings::getMinRMSD() const
 {
 	return minRMSD;
-}
-
-void ConfGen::ConformerGeneratorSettings::setFragmentLibrary(const FragmentLibrary::SharedPointer& lib)
-{
-	fragLib = lib;
-}
-
-const ConfGen::FragmentLibrary::SharedPointer& ConfGen::ConformerGeneratorSettings::getFragmentLibrary() const
-{
-	return fragLib;
-}
-
-void ConfGen::ConformerGeneratorSettings::setTorsionLibrary(const TorsionLibrary::SharedPointer& lib)
-{
-	torLib = lib;
-}
-
-const ConfGen::TorsionLibrary::SharedPointer& ConfGen::ConformerGeneratorSettings::getTorsionLibrary() const
-{
-	return torLib;
 }
 
 ConfGen::FragmentConformerGeneratorSettings& ConfGen::ConformerGeneratorSettings::getFragmentBuildSettings()

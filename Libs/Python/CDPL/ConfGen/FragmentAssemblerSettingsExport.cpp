@@ -60,10 +60,6 @@ void CDPLPythonConfGen::exportFragmentAssemblerSettings()
 			 (python::arg("self"), python::arg("reuse")))
 		.def("generateCoordinates", GetBoolFunc(&ConfGen::FragmentAssemblerSettings::generateCoordinates), 
 			 python::arg("self"))
-		.def("setFragmentLibrary", &ConfGen::FragmentAssemblerSettings::setFragmentLibrary, 
-			 (python::arg("self"), python::arg("lib")))
-		.def("getFragmentLibrary", &ConfGen::FragmentAssemblerSettings::getFragmentLibrary, 
-			 python::arg("self"), python::return_value_policy<python::copy_const_reference>())
 		.def("getFragmentBuildSettings", 
 			 static_cast<ConfGen::FragmentConformerGeneratorSettings& (ConfGen::FragmentAssemblerSettings::*)()>
 			 (&ConfGen::FragmentAssemblerSettings::getFragmentBuildSettings),
@@ -75,10 +71,6 @@ void CDPLPythonConfGen::exportFragmentAssemblerSettings()
 					  &ConfGen::FragmentAssemblerSettings::setNitrogenEnumerationMode)
 		.add_property("generateCoords", GetBoolFunc(&ConfGen::FragmentAssemblerSettings::generateCoordinates),
 					  SetBoolFunc(&ConfGen::FragmentAssemblerSettings::generateCoordinates))
-		.add_property("fragmentLibrary", 
-					  python::make_function(&ConfGen::FragmentAssemblerSettings::getFragmentLibrary,
-											python::return_value_policy<python::copy_const_reference>()),
-					  &ConfGen::FragmentAssemblerSettings::setFragmentLibrary)
 		.add_property("fragmentBuildSettings", 
 					  python::make_function(static_cast<ConfGen::FragmentConformerGeneratorSettings& (ConfGen::FragmentAssemblerSettings::*)()>
 											(&ConfGen::FragmentAssemblerSettings::getFragmentBuildSettings),

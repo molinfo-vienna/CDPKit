@@ -33,12 +33,13 @@
 
 #include <utility>
 #include <vector>
+#include <cstddef>
 
 #include "CDPL/ConfGen/ConformerData.hpp"
 #include "CDPL/ConfGen/CallbackFunction.hpp"
+#include "CDPL/Chem/Fragment.hpp"
 #include "CDPL/Util/ObjectStack.hpp"
 #include "CDPL/Util/ObjectPool.hpp"
-#include "CDPL/Util/BitSet.hpp"
 
 
 namespace CDPL 
@@ -48,7 +49,6 @@ namespace CDPL
 	{
 
 		class FragmentList;
-		class Fragment;
 	}
 
     namespace ConfGen 
@@ -65,10 +65,7 @@ namespace CDPL
 			FragmentTree(std::size_t max_conf_data_cache_size);
 
 			~FragmentTree();
-		
-			void build(const Chem::FragmentList& frags, const Chem::MolecularGraph& molgraph,
-					   const Util::BitSet& split_bond_mask);
-
+				
 			template <typename BondIter>
 			void build(const Chem::FragmentList& frags, const Chem::MolecularGraph& molgraph,
 					   const BondIter& bonds_beg, const BondIter& bonds_end);
@@ -80,6 +77,8 @@ namespace CDPL
 			void setTimeoutCallback(const CallbackFunction& func);
 
 			const CallbackFunction& getTimeoutCallback() const;
+
+			const Chem::MolecularGraph* getMolecularGraph() const;
 
 			FragmentTreeNode* getRoot() const;
 
@@ -94,19 +93,18 @@ namespace CDPL
 
 			void generateLeafNodes(const Chem::FragmentList& frags, const Chem::MolecularGraph& molgraph);
 
-			void buildupTree(const Chem::MolecularGraph& molgraph);
+			void buildupTree();
 
-			void initAtomClashRadiusTable(const Chem::MolecularGraph& molgraph);
+			void initAtomClashRadiusTable();
 
 			FragmentTreeNode* createParentNode(FragmentTreeNode* node1, FragmentTreeNode* node2, 
-											   const Chem::MolecularGraph& molgraph, const Chem::Bond* bond);
+											   const Chem::Bond* bond);
 
-			const Chem::Bond* findConnectingBond(const Chem::MolecularGraph& molgraph, FragmentTreeNode* node1, 
-												 FragmentTreeNode* node2);
+			const Chem::Bond* findConnectingBond(FragmentTreeNode* node1, FragmentTreeNode* node2);
 
 			ConformerData::SharedPointer allocConformerData();
 
-			FragmentTreeNode* allocTreeNode(const Chem::MolecularGraph& molgraph);
+			FragmentTreeNode* allocTreeNode();
 			FragmentTreeNode* createTreeNode();
 
 			bool aborted() const;
@@ -118,17 +116,18 @@ namespace CDPL
 			typedef std::vector<const Chem::Bond*> BondList;
 			typedef Util::ObjectStack<FragmentTreeNode> TreeNodeCache;
 			typedef std::vector<FragmentTreeNode*> TreeNodeList;
-			typedef std::vector<std::pair<const Chem::Fragment*, FragmentTreeNode*> > FragmentToNodeMap;
+			typedef std::vector<std::pair<Chem::Fragment::SharedPointer, FragmentTreeNode*> > FragmentToNodeMap;
 
-			ConformerDataCache         confDataCache;
-			TreeNodeCache              nodeCache;
-			FragmentTreeNode*          rootNode;
-			BondList                   splitBonds;
-			TreeNodeList               leafNodes;
-			FragmentToNodeMap          fragToNodeMap;
-			CallbackFunction           abortCallback;
-			CallbackFunction           timeoutCallback;
-			DoubleArray                clashRadiusTable;
+			ConformerDataCache          confDataCache;
+			TreeNodeCache               nodeCache;
+			const Chem::MolecularGraph* molGraph;
+			FragmentTreeNode*           rootNode;
+			BondList                    splitBonds;
+			TreeNodeList                leafNodes;
+			FragmentToNodeMap           fragToNodeMap;
+			CallbackFunction            abortCallback;
+			CallbackFunction            timeoutCallback;
+			DoubleArray                 clashRadiusTable;
 		};
     }
 }
@@ -144,8 +143,8 @@ void CDPL::ConfGen::FragmentTree::build(const Chem::FragmentList& frags, const C
 	splitBonds.insert(splitBonds.end(), bonds_beg, bonds_end);
 
 	generateLeafNodes(frags, molgraph);
-	buildupTree(molgraph);
-	initAtomClashRadiusTable(molgraph);
+	buildupTree();
+	initAtomClashRadiusTable();
 }
 
 #endif // CDPL_CONFGEN_FRAGMENTTREE_HPP

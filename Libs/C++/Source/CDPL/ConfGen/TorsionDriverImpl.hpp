@@ -32,12 +32,16 @@
 #define CDPL_CONFGEN_TORSIONDRIVERIMPL_HPP
 
 #include <memory>
+#include <vector>
+#include <cstddef>
 
 #include "CDPL/ConfGen/TorsionDriverSettings.hpp"
+#include "CDPL/ConfGen/TorsionLibrary.hpp"
 #include "CDPL/ConfGen/TorsionRuleMatcher.hpp"
 #include "CDPL/ConfGen/ConformerDataArray.hpp"
 #include "CDPL/Chem/SubstructureSearch.hpp"
 #include "CDPL/Chem/FragmentList.hpp"
+#include "CDPL/Util/BitSet.hpp"
 
 #include "FragmentTree.hpp"
 #include "ForceFieldInteractionMask.hpp"
@@ -67,10 +71,17 @@ namespace CDPL
 			~TorsionDriverImpl();
 
 			TorsionDriverSettings& getSettings();
+			
+			void setTorsionLibrary(const TorsionLibrary::SharedPointer& lib);
+
+			const ConfGen::TorsionLibrary::SharedPointer& getTorsionLibrary() const;
 
 			void setup(const Chem::MolecularGraph& molgraph);
 			void setup(const Chem::MolecularGraph& molgraph, const Util::BitSet& bond_mask);
-			void setup(const Chem::FragmentList& frags, const Chem::MolecularGraph& molgraph, const Util::BitSet& bond_mask);
+
+			template <typename BondIter>
+			void setup(const Chem::FragmentList& frags, const Chem::MolecularGraph& molgraph,
+					   const BondIter& bonds_beg, const BondIter& bonds_end);
 
 			void setMMFF94Parameters(const ForceField::MMFF94InteractionData& ia_data);
 			bool setMMFF94Parameters(const Chem::MolecularGraph& molgraph);
@@ -113,6 +124,9 @@ namespace CDPL
 
 			TorsionDriverImpl& operator=(const TorsionDriverImpl&);
 
+			template <typename ConfData>
+			void doAddInputCoordinates(const ConfData& conf_data, std::size_t frag_idx) const;
+
 			void assignTorsionAngles(FragmentTreeNode* node);
 
 			const ConfGen::TorsionRuleMatch* getMatchingTorsionRule(const Chem::Bond& bond);
@@ -125,18 +139,33 @@ namespace CDPL
 
 			typedef std::auto_ptr<ForceField::MMFF94InteractionParameterizer> MMFF94ParameterizerPtr;
 			typedef std::auto_ptr<ForceField::MMFF94InteractionData> MMFF94InteractionDataPtr;
+			typedef std::vector<const Chem::Bond*> BondList;
 
-			TorsionDriverSettings     settings;
-			FragmentTree              fragTree;
-			TorsionRuleMatcher        torRuleMatcher;
-			Chem::SubstructureSearch  subSearch;
-			Chem::FragmentList        fragments;
-			MMFF94ParameterizerPtr    mmff94Parameterizer;
-			MMFF94InteractionDataPtr  mmff94Data;
-			Util::BitSet              tmpBitSet;
-			ForceFieldInteractionMask mmff94InteractionMask;
+			TorsionDriverSettings         settings;
+			TorsionLibrary::SharedPointer torLib;
+			FragmentTree                  fragTree;
+			TorsionRuleMatcher            torRuleMatcher;
+			Chem::SubstructureSearch      subSearch;
+			Chem::FragmentList            fragments;
+			MMFF94ParameterizerPtr        mmff94Parameterizer;
+			MMFF94InteractionDataPtr      mmff94Data;
+			Util::BitSet                  rotBondMask;
+			BondList                      rotBonds;
+			ForceFieldInteractionMask     mmff94InteractionMask;
 		};
     }
+}
+
+
+// Implementation
+
+template <typename BondIter>
+void CDPL::ConfGen::TorsionDriverImpl::setup(const Chem::FragmentList& frags, const Chem::MolecularGraph& molgraph,
+											 const BondIter& bonds_beg, const BondIter& bonds_end)
+{
+	fragTree.build(frags, molgraph, bonds_beg, bonds_end);
+
+	assignTorsionAngles(fragTree.getRoot());
 }
 
 #endif // CDPL_CONFGEN_TORSIONDRIVERIMPL_HPP

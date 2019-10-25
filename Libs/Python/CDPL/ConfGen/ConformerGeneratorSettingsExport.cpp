@@ -64,12 +64,10 @@ void CDPLPythonConfGen::exportConformerGeneratorSettings()
 			 (python::arg("self"), python::arg("reuse")))
 		.def("generateCoordinates", GetBoolFunc(&ConfGen::ConformerGeneratorSettings::generateCoordinates), 
 			 python::arg("self"))
-
 		.def("outputSuppliedCoordinates", SetBoolFunc(&ConfGen::ConformerGeneratorSettings::outputSuppliedCoordinates), 
 			 (python::arg("self"), python::arg("reuse")))
 		.def("outputSuppliedCoordinates", GetBoolFunc(&ConfGen::ConformerGeneratorSettings::outputSuppliedCoordinates), 
 			 python::arg("self"))
-
 		.def("setEnergyWindow", &ConfGen::ConformerGeneratorSettings::setEnergyWindow, 
 			 (python::arg("self"), python::arg("win_size")))
 		.def("getEnergyWindow", &ConfGen::ConformerGeneratorSettings::getEnergyWindow, 
@@ -94,14 +92,6 @@ void CDPLPythonConfGen::exportConformerGeneratorSettings()
 			 (python::arg("self"), python::arg("min_rmsd")))
 		.def("getMinRMSD", &ConfGen::ConformerGeneratorSettings::getMinRMSD, 
 			 python::arg("self"))
-		.def("setFragmentLibrary", &ConfGen::ConformerGeneratorSettings::setFragmentLibrary, 
-			 (python::arg("self"), python::arg("lib")))
-		.def("getFragmentLibrary", &ConfGen::ConformerGeneratorSettings::getFragmentLibrary, 
-			 python::arg("self"), python::return_value_policy<python::copy_const_reference>())
-		.def("setTorsionLibrary", &ConfGen::ConformerGeneratorSettings::setTorsionLibrary, 
-			 (python::arg("self"), python::arg("lib")))
-		.def("getTorsionLibrary", &ConfGen::ConformerGeneratorSettings::getTorsionLibrary, 
-			 python::arg("self"), python::return_value_policy<python::copy_const_reference>())
 		.def("getFragmentBuildSettings", 
 			 static_cast<ConfGen::FragmentConformerGeneratorSettings& (ConfGen::ConformerGeneratorSettings::*)()>
 			 (&ConfGen::ConformerGeneratorSettings::getFragmentBuildSettings),
@@ -129,14 +119,6 @@ void CDPLPythonConfGen::exportConformerGeneratorSettings()
 					  &ConfGen::ConformerGeneratorSettings::setMaxNumOutputConformers)
 		.add_property("minRMSD", &ConfGen::ConformerGeneratorSettings::getMinRMSD, 
 					  &ConfGen::ConformerGeneratorSettings::setMinRMSD)
-		.add_property("fragmentLibrary", 
-					  python::make_function(&ConfGen::ConformerGeneratorSettings::getFragmentLibrary,
-											python::return_value_policy<python::copy_const_reference>()),
-					  &ConfGen::ConformerGeneratorSettings::setFragmentLibrary)
-		.add_property("torsionLibrary", 
-					  python::make_function(&ConfGen::ConformerGeneratorSettings::getTorsionLibrary,
-											python::return_value_policy<python::copy_const_reference>()),
-					  &ConfGen::ConformerGeneratorSettings::setTorsionLibrary)
 		.add_property("fragmentBuildSettings", 
 					  python::make_function(static_cast<ConfGen::FragmentConformerGeneratorSettings& (ConfGen::ConformerGeneratorSettings::*)()>
 											(&ConfGen::ConformerGeneratorSettings::getFragmentBuildSettings),

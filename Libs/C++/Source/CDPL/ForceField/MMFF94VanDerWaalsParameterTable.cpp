@@ -32,6 +32,7 @@
 #include "CDPL/Config.hpp"
 
 #include <boost/bind.hpp>
+#include <boost/thread.hpp>
 
 #if defined(HAVE_BOOST_IOSTREAMS)
 
@@ -55,14 +56,12 @@ namespace
  
     ForceField::MMFF94VanDerWaalsParameterTable::SharedPointer builtinTable(new ForceField::MMFF94VanDerWaalsParameterTable());
 
-    struct Init
-    {
+ 	boost::once_flag initBuiltinTableFlag = BOOST_ONCE_INIT;
 
-		Init() {
-			builtinTable->loadDefaults();
-		}
-
-    } init;
+	void initBuiltinTable() 
+	{
+		builtinTable->loadDefaults();
+	}
 
 	const ForceField::MMFF94VanDerWaalsParameterTable::Entry NOT_FOUND;
 }
@@ -330,5 +329,7 @@ void ForceField::MMFF94VanDerWaalsParameterTable::set(const SharedPointer& table
 
 const ForceField::MMFF94VanDerWaalsParameterTable::SharedPointer& ForceField::MMFF94VanDerWaalsParameterTable::get()
 {
+	boost::call_once(&initBuiltinTable, initBuiltinTableFlag);
+
     return defaultTable;
 }

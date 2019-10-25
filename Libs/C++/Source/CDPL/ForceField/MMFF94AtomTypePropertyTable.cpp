@@ -32,6 +32,7 @@
 #include "CDPL/Config.hpp"
 
 #include <boost/bind.hpp>
+#include <boost/thread.hpp>
 
 #if defined(HAVE_BOOST_IOSTREAMS)
 
@@ -55,14 +56,12 @@ namespace
  
     ForceField::MMFF94AtomTypePropertyTable::SharedPointer builtinTable(new ForceField::MMFF94AtomTypePropertyTable());
 
-    struct Init
-    {
+	boost::once_flag initBuiltinTableFlag = BOOST_ONCE_INIT;
 
-		Init() {
-			builtinTable->loadDefaults();
-		}
-
-    } init;
+	void initBuiltinTable() 
+	{
+		builtinTable->loadDefaults();
+	}
 
 	const ForceField::MMFF94AtomTypePropertyTable::Entry NOT_FOUND;
 }
@@ -266,5 +265,7 @@ void ForceField::MMFF94AtomTypePropertyTable::set(const SharedPointer& table)
 
 const ForceField::MMFF94AtomTypePropertyTable::SharedPointer& ForceField::MMFF94AtomTypePropertyTable::get()
 {
+	boost::call_once(&initBuiltinTable, initBuiltinTableFlag);
+
     return defaultTable;
 }

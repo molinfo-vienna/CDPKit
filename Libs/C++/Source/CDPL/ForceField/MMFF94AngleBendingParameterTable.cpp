@@ -32,6 +32,7 @@
 #include "CDPL/Config.hpp"
 
 #include <boost/bind.hpp>
+#include <boost/thread.hpp>
 
 #if defined(HAVE_BOOST_IOSTREAMS)
 
@@ -55,14 +56,12 @@ namespace
  
     ForceField::MMFF94AngleBendingParameterTable::SharedPointer builtinTable(new ForceField::MMFF94AngleBendingParameterTable());
 
-    struct Init
-    {
+	boost::once_flag initBuiltinTableFlag = BOOST_ONCE_INIT;
 
-		Init() {
-			builtinTable->loadDefaults();
-		}
-
-    } init;
+	void initBuiltinTable() 
+	{
+		builtinTable->loadDefaults();
+	}
 
 	Base::uint32 lookupKey(Base::uint32 angle_type_idx, Base::uint32 term_atom1_type, Base::uint32 ctr_atom_type, Base::uint32 term_atom2_type)
 	{
@@ -251,5 +250,7 @@ void ForceField::MMFF94AngleBendingParameterTable::set(const SharedPointer& tabl
 
 const ForceField::MMFF94AngleBendingParameterTable::SharedPointer& ForceField::MMFF94AngleBendingParameterTable::get()
 {
+	boost::call_once(&initBuiltinTable, initBuiltinTableFlag);
+
     return defaultTable;
 }

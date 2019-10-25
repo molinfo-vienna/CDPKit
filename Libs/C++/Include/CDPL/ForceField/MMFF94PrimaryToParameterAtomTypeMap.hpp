@@ -124,7 +124,7 @@ namespace CDPL
 			static const SharedPointer& get();
 
 		  private:
-			static SharedPointer defaultTable;
+			static SharedPointer defaultMap;
 			DataStorage          entries;
 		};
     

@@ -38,7 +38,7 @@ const ConfGen::TorsionDriverSettings ConfGen::TorsionDriverSettings::DEFAULT;
 
 ConfGen::TorsionDriverSettings::TorsionDriverSettings(): 
 	sampleHetAtomHs(false), energyOrdered(true), forceFieldType(ForceFieldType::MMFF94S_NO_ESTAT), 
-	strictParam(true), torLib(TorsionLibrary::get())
+	strictParam(true)
 {}
 
 void ConfGen::TorsionDriverSettings::sampleHeteroAtomHydrogens(bool sample)
@@ -79,14 +79,4 @@ void ConfGen::TorsionDriverSettings::strictForceFieldParameterization(bool stric
 bool ConfGen::TorsionDriverSettings::strictForceFieldParameterization() const
 {
 	return strictParam;
-}
-			
-void ConfGen::TorsionDriverSettings::setTorsionLibrary(const TorsionLibrary::SharedPointer& lib)
-{
-	torLib = lib;
-}
-
-const ConfGen::TorsionLibrary::SharedPointer& ConfGen::TorsionDriverSettings::getTorsionLibrary() const
-{
-	return torLib;
 }

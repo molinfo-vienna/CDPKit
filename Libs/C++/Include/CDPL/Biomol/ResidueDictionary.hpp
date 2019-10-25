@@ -144,7 +144,7 @@ namespace CDPL
 			static Chem::MolecularGraph::SharedPointer getStructure(const std::string& code);
 
 		  private:
-			static SharedPointer dictionary;
+			static SharedPointer defaultDict;
 			EntryLookupTable     entries;
 		};
 

@@ -69,9 +69,12 @@ namespace
     ResCodeToDataEntryMap                    resCodeToDataEntryMap;
 	StructureCache                           resStructureCache;
 	Biomol::ResidueDictionary::SharedPointer builtinDictionary(new Biomol::ResidueDictionary());
-	boost::mutex                             loadStructureMutex;
 
-	const Biomol::ResidueDictionary::Entry DEF_ENTRY;
+	boost::mutex                             loadStructureMutex;
+	boost::once_flag                         initBuiltinDictionaryFlag     = BOOST_ONCE_INIT;
+	boost::once_flag                         initResCodeToDataEntryMapFlag = BOOST_ONCE_INIT;
+
+	const Biomol::ResidueDictionary::Entry   DEF_ENTRY;
 
 #if defined(HAVE_BOOST_IOSTREAMS)
 
@@ -97,20 +100,26 @@ namespace
 	{
 
 		Init() {
-			using namespace Biomol;
-			using namespace ResidueDictionaryData;
-
 			stdResidueSet.insert(&stdResidueList[0], &stdResidueList[sizeof(stdResidueList) / sizeof(const char*)]);
-			builtinDictionary->loadDefaults();
-
-			for (std::size_t i = 0; i < NUM_RESIDUE_ENTRIES; i++) {
-				const ResidueDataEntry& entry = residueData[i];
-
-				resCodeToDataEntryMap.insert(ResCodeToDataEntryMap::value_type(entry.code, &entry));
-			}
 		}
 
 	} init;
+
+	void initBuiltinDictionary()
+	{
+		builtinDictionary->loadDefaults();
+	}
+
+	void initResCodeToDataEntryMap()
+	{
+		using namespace Biomol::ResidueDictionaryData;
+
+		for (std::size_t i = 0; i < NUM_RESIDUE_ENTRIES; i++) {
+			const ResidueDataEntry& entry = residueData[i];
+
+			resCodeToDataEntryMap.insert(ResCodeToDataEntryMap::value_type(entry.code, &entry));
+		}
+	}
 
 	Chem::MolecularGraph::SharedPointer loadResidueStructure(const std::string& code)
 	{
@@ -177,7 +186,7 @@ namespace
 }
 
 
-Biomol::ResidueDictionary::SharedPointer Biomol::ResidueDictionary::dictionary = builtinDictionary;
+Biomol::ResidueDictionary::SharedPointer Biomol::ResidueDictionary::defaultDict = builtinDictionary;
 
 
 Biomol::ResidueDictionary::Entry::Entry(const std::string& code, const std::string& rep_code, const std::string& rep_by_code, bool obsolete,
@@ -280,6 +289,8 @@ void Biomol::ResidueDictionary::loadDefaults()
 {
 	using namespace ResidueDictionaryData;
 
+	boost::call_once(&initResCodeToDataEntryMap, initResCodeToDataEntryMapFlag);
+
 	Entry::StructureRetrievalFunction struc_ret_func(&loadResidueStructure);
 
 	for (std::size_t i = 0; i < NUM_RESIDUE_ENTRIES; i++) {
@@ -294,12 +305,14 @@ void Biomol::ResidueDictionary::loadDefaults()
 
 void Biomol::ResidueDictionary::set(const SharedPointer& dict)
 {
-	dictionary = (!dict ? builtinDictionary : dict);
+	defaultDict = (!dict ? builtinDictionary : dict);
 }
 
 const Biomol::ResidueDictionary::SharedPointer& Biomol::ResidueDictionary::get()
 {
-    return dictionary;
+	boost::call_once(&initBuiltinDictionary, initBuiltinDictionaryFlag);
+
+    return defaultDict;
 }
 
 bool Biomol::ResidueDictionary::isStdResidue(const std::string& code)
@@ -309,42 +322,42 @@ bool Biomol::ResidueDictionary::isStdResidue(const std::string& code)
 
 unsigned int Biomol::ResidueDictionary::getType(const std::string& code)
 {	
-	const Entry& entry = dictionary->getEntry(code);
+	const Entry& entry = get()->getEntry(code);
 
 	return entry.getType();
 }
 
 const std::string& Biomol::ResidueDictionary::getName(const std::string& code)
 {
-	const Entry& entry = dictionary->getEntry(code);
+	const Entry& entry = get()->getEntry(code);
 
 	return entry.getName();
 }
 
 Chem::MolecularGraph::SharedPointer Biomol::ResidueDictionary::getStructure(const std::string& code)
 {
-	const Entry& entry = dictionary->getEntry(code);
+	const Entry& entry = get()->getEntry(code);
 
 	return entry.getStructure();
 }
 
 const std::string& Biomol::ResidueDictionary::getReplacedCode(const std::string& code)
 {
-	const Entry& entry = dictionary->getEntry(code);
+	const Entry& entry = get()->getEntry(code);
 
 	return entry.getReplacedCode();
 }
 
 const std::string& Biomol::ResidueDictionary::getReplacedByCode(const std::string& code)
 {
-	const Entry& entry = dictionary->getEntry(code);
+	const Entry& entry = get()->getEntry(code);
 
 	return entry.getReplacedByCode();
 }
 
 bool Biomol::ResidueDictionary::isObsolete(const std::string& code)
 {
-	const Entry& entry = dictionary->getEntry(code);
+	const Entry& entry = get()->getEntry(code);
 
 	return entry.isObsolete();
 }

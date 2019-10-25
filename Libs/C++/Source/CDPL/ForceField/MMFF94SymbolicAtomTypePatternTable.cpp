@@ -31,6 +31,8 @@
 #include <cstring>
 #include <sstream>
 
+#include <boost/thread.hpp>
+
 #if defined(HAVE_BOOST_IOSTREAMS)
 
 #include <boost/iostreams/device/array.hpp>
@@ -56,14 +58,12 @@ namespace
  
     ForceField::MMFF94SymbolicAtomTypePatternTable::SharedPointer builtinTable(new ForceField::MMFF94SymbolicAtomTypePatternTable());
 
-    struct Init
-    {
+	boost::once_flag initBuiltinTableFlag = BOOST_ONCE_INIT;
 
-		Init() {
-			builtinTable->loadDefaults();
-		}
-
-    } init;
+	void initBuiltinTable() 
+	{
+		builtinTable->loadDefaults();
+	}
 }
 
 
@@ -220,5 +220,7 @@ void ForceField::MMFF94SymbolicAtomTypePatternTable::set(const SharedPointer& ta
 
 const ForceField::MMFF94SymbolicAtomTypePatternTable::SharedPointer& ForceField::MMFF94SymbolicAtomTypePatternTable::get()
 {
+	boost::call_once(&initBuiltinTable, initBuiltinTableFlag);
+
     return defaultTable;
 }

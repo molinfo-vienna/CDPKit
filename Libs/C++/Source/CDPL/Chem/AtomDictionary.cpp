@@ -564,7 +564,7 @@ namespace
 }
 
 
-Chem::AtomDictionary::SharedPointer Chem::AtomDictionary::dictionary = builtinDictionary;
+Chem::AtomDictionary::SharedPointer Chem::AtomDictionary::defaultDict = builtinDictionary;
 
 
 Chem::AtomDictionary::Entry::Entry():
@@ -766,28 +766,28 @@ void Chem::AtomDictionary::loadDefaults()
 
 void Chem::AtomDictionary::set(const SharedPointer& dict)
 {
-	dictionary = (!dict ? builtinDictionary : dict);
+	defaultDict = (!dict ? builtinDictionary : dict);
 }
 
 const Chem::AtomDictionary::SharedPointer& Chem::AtomDictionary::get()
 {
-    return dictionary;
+    return defaultDict;
 }
 
 const std::string& Chem::AtomDictionary::getSymbol(unsigned int type, std::size_t iso) 
 {
-    return dictionary->getEntry(type, iso).getSymbol();
+    return defaultDict->getEntry(type, iso).getSymbol();
 }
 
 const std::string& Chem::AtomDictionary::getName(unsigned int type, std::size_t iso) 
 {
-    return dictionary->getEntry(type, iso).getName();
+    return defaultDict->getEntry(type, iso).getName();
 }
 
 unsigned int Chem::AtomDictionary::getType(const std::string& sym, bool strict) 
 {
 	if (strict) {
-		for (EntryLookupTable::const_iterator it = dictionary->entries.begin(), end = dictionary->entries.end(); it != end; ++it)
+		for (EntryLookupTable::const_iterator it = defaultDict->entries.begin(), end = defaultDict->entries.end(); it != end; ++it)
 			if (it->second.getSymbol() == sym)
 				return it->first.first;
 
@@ -799,7 +799,7 @@ unsigned int Chem::AtomDictionary::getType(const std::string& sym, bool strict)
 
 	boost::to_upper(uc_arg_sym);
 
-	for (EntryLookupTable::const_iterator it = dictionary->entries.begin(), end = dictionary->entries.end(); it != end; ++it) {
+	for (EntryLookupTable::const_iterator it = defaultDict->entries.begin(), end = defaultDict->entries.end(); it != end; ++it) {
 		uc_dict_sym = it->second.getSymbol();
 
 		boost::to_upper(uc_dict_sym);
@@ -813,17 +813,17 @@ unsigned int Chem::AtomDictionary::getType(const std::string& sym, bool strict)
 
 std::size_t Chem::AtomDictionary::getMostAbundantIsotope(unsigned int type) 
 {
-    return dictionary->getEntry(type, 0).getMostAbundantIsotope();
+    return defaultDict->getEntry(type, 0).getMostAbundantIsotope();
 }
 
 std::size_t Chem::AtomDictionary::getIUPACGroup(unsigned int type) 
 {
-    return dictionary->getEntry(type, 0).getIUPACGroup();
+    return defaultDict->getEntry(type, 0).getIUPACGroup();
 }
 
 double Chem::AtomDictionary::getAtomicWeight(unsigned int type, std::size_t iso) 
 {
-    const Entry& entry = dictionary->getEntry(type, 0);
+    const Entry& entry = defaultDict->getEntry(type, 0);
 
     if (iso == 0)
 		return entry.getAverageWeight();
@@ -839,29 +839,29 @@ double Chem::AtomDictionary::getAtomicWeight(unsigned int type, std::size_t iso)
 
 const Util::STArray& Chem::AtomDictionary::getValenceStates(unsigned int type)
 {
-    return dictionary->getEntry(type, 0).getValenceStates();
+    return defaultDict->getEntry(type, 0).getValenceStates();
 }
 
 std::size_t Chem::AtomDictionary::getNumValenceElectrons(unsigned int type)
 {	
-    std::size_t iupac_group = dictionary->getEntry(type, 0).getIUPACGroup();
+    std::size_t iupac_group = defaultDict->getEntry(type, 0).getIUPACGroup();
 
     return (iupac_group < 3 ? iupac_group : iupac_group > 12 ? iupac_group - 10 : iupac_group);
 }
 
 double Chem::AtomDictionary::getVdWRadius(unsigned int type) 
 {
-    return dictionary->getEntry(type, 0).getVdWRadius();
+    return defaultDict->getEntry(type, 0).getVdWRadius();
 }
 
 double Chem::AtomDictionary::getCovalentRadius(unsigned int type, std::size_t order) 
 {
-    return dictionary->getEntry(type, 0).getCovalentRadius(order);
+    return defaultDict->getEntry(type, 0).getCovalentRadius(order);
 }
 
 double Chem::AtomDictionary::getAllredRochowElectronegativity(unsigned int type) 
 {
-    return dictionary->getEntry(type, 0).getAllredRochowElectronegativity();
+    return defaultDict->getEntry(type, 0).getAllredRochowElectronegativity();
 }
 
 bool Chem::AtomDictionary::isChemicalElement(unsigned int type) 
@@ -871,41 +871,41 @@ bool Chem::AtomDictionary::isChemicalElement(unsigned int type)
 
 bool Chem::AtomDictionary::isMainGroupElement(unsigned int type) 
 {
-    std::size_t iupac_group = dictionary->getEntry(type, 0).getIUPACGroup();
+    std::size_t iupac_group = defaultDict->getEntry(type, 0).getIUPACGroup();
 
     return (iupac_group > 0 && (iupac_group < 3 || iupac_group > 12));
 }
 
 bool Chem::AtomDictionary::isTransitionMetal(unsigned int type) 
 {
-    std::size_t iupac_group = dictionary->getEntry(type, 0).getIUPACGroup();
+    std::size_t iupac_group = defaultDict->getEntry(type, 0).getIUPACGroup();
 
     return (iupac_group >= 3 && iupac_group <= 12);
 }
 
 bool Chem::AtomDictionary::isMetal(unsigned int type) 
 {
-    return dictionary->getEntry(type, 0).isMetal();
+    return defaultDict->getEntry(type, 0).isMetal();
 }
 
 bool Chem::AtomDictionary::isSemiMetal(unsigned int type) 
 {
-    const Entry& entry = dictionary->getEntry(type, 0);
+    const Entry& entry = defaultDict->getEntry(type, 0);
 
     return (entry.isMetal() && entry.isNonMetal());
 }
 
 bool Chem::AtomDictionary::isNonMetal(unsigned int type) 
 {
-    return dictionary->getEntry(type, 0).isNonMetal();
+    return defaultDict->getEntry(type, 0).isNonMetal();
 }
 
 bool Chem::AtomDictionary::isHalogen(unsigned int type) 
 {
-    return (dictionary->getEntry(type, 0).getIUPACGroup() == 17);
+    return (defaultDict->getEntry(type, 0).getIUPACGroup() == 17);
 }
 
 bool Chem::AtomDictionary::isNobleGas(unsigned int type) 
 {
-    return (dictionary->getEntry(type, 0).getIUPACGroup() == 18);
+    return (defaultDict->getEntry(type, 0).getIUPACGroup() == 18);
 }

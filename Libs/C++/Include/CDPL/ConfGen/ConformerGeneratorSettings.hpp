@@ -34,8 +34,6 @@
 #include <cstddef>
 
 #include "CDPL/ConfGen/APIPrefix.hpp"
-#include "CDPL/ConfGen/TorsionLibrary.hpp"
-#include "CDPL/ConfGen/FragmentLibrary.hpp"
 #include "CDPL/ConfGen/FragmentConformerGeneratorSettings.hpp"
 
 
@@ -103,15 +101,7 @@ namespace CDPL
 			void setMinRMSD(double min_rmsd);
 
 			double getMinRMSD() const;
-
-			void setFragmentLibrary(const FragmentLibrary::SharedPointer& lib);
-
-			const FragmentLibrary::SharedPointer& getFragmentLibrary() const;
-
-			void setTorsionLibrary(const TorsionLibrary::SharedPointer& lib);
-
-			const TorsionLibrary::SharedPointer& getTorsionLibrary() const;
-
+		
 			FragmentConformerGeneratorSettings& getFragmentBuildSettings();
 
 			const FragmentConformerGeneratorSettings& getFragmentBuildSettings() const;
@@ -129,8 +119,6 @@ namespace CDPL
 			std::size_t                        maxNumOutputConfs;
 			double                             minRMSD;
 			FragmentConformerGeneratorSettings fragBuildSettings;
-			FragmentLibrary::SharedPointer     fragLib;
-			TorsionLibrary::SharedPointer      torLib;
 		};
 	};
 

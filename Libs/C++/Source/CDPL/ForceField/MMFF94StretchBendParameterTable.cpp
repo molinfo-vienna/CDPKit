@@ -32,6 +32,7 @@
 #include "CDPL/Config.hpp"
 
 #include <boost/bind.hpp>
+#include <boost/thread.hpp>
 
 #if defined(HAVE_BOOST_IOSTREAMS)
 
@@ -55,14 +56,12 @@ namespace
  
     ForceField::MMFF94StretchBendParameterTable::SharedPointer builtinTable(new ForceField::MMFF94StretchBendParameterTable());
 
-    struct Init
-    {
+ 	boost::once_flag initBuiltinTableFlag = BOOST_ONCE_INIT;
 
-		Init() {
-			builtinTable->loadDefaults();
-		}
-
-    } init;
+	void initBuiltinTable() 
+	{
+		builtinTable->loadDefaults();
+	}
 
 	Base::uint32 lookupKey(Base::uint32 sb_type_idx, Base::uint32 term_atom1_type, Base::uint32 ctr_atom_type, Base::uint32 term_atom2_type)
 	{
@@ -251,5 +250,7 @@ void ForceField::MMFF94StretchBendParameterTable::set(const SharedPointer& table
 
 const ForceField::MMFF94StretchBendParameterTable::SharedPointer& ForceField::MMFF94StretchBendParameterTable::get()
 {
+	boost::call_once(&initBuiltinTable, initBuiltinTableFlag);
+
     return defaultTable;
 }

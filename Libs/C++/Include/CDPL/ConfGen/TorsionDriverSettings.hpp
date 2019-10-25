@@ -32,7 +32,6 @@
 #define CDPL_CONFGEN_TORSIONDRIVERSETTINGS_HPP
 
 #include "CDPL/ConfGen/APIPrefix.hpp"
-#include "CDPL/ConfGen/TorsionLibrary.hpp"
 
 
 namespace CDPL 
@@ -70,16 +69,11 @@ namespace CDPL
 
 			bool strictForceFieldParameterization() const;
 
-			void setTorsionLibrary(const TorsionLibrary::SharedPointer& lib);
-
-			const TorsionLibrary::SharedPointer& getTorsionLibrary() const;
-
 		  private:
-			bool                          sampleHetAtomHs;
-			bool                          energyOrdered;
-			unsigned int                  forceFieldType;
-			bool                          strictParam;
-			TorsionLibrary::SharedPointer torLib;
+			bool         sampleHetAtomHs;
+			bool         energyOrdered;
+			unsigned int forceFieldType;
+			bool         strictParam;
 		};
 
 		/**

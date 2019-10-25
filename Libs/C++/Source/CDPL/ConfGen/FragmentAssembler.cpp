@@ -51,6 +51,16 @@ ConfGen::FragmentAssembler::getSettings()
     return impl->getSettings();
 }
 
+void ConfGen::FragmentAssembler::clearFragmentLibraries()
+{
+	impl->clearFragmentLibraries();
+}
+
+void ConfGen::FragmentAssembler::addFragmentLibrary(const FragmentLibrary::SharedPointer& lib)
+{
+	impl->addFragmentLibrary(lib);
+}
+
 void ConfGen::FragmentAssembler::setAbortCallback(const CallbackFunction& func)
 {
 	impl->setAbortCallback(func);
