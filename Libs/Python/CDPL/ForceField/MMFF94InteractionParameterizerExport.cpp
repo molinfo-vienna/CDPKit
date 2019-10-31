@@ -44,7 +44,7 @@ void CDPLPythonForceField::exportMMFF94InteractionParameterizer()
 	typedef bool (ForceField::MMFF94InteractionParameterizer::*GetBoolFunc)() const;
 
     python::class_<ForceField::MMFF94InteractionParameterizer, ForceField::MMFF94InteractionParameterizer::SharedPointer>("MMFF94InteractionParameterizer", python::no_init)
-		.def(python::init<bool>((python::arg("self"), python::arg("mmff94s") = true)))
+		.def(python::init<bool>((python::arg("self"), python::arg("param_set") = ForceField::MMFF94ParameterSet::STATIC)))
 		.def(python::init<const ForceField::MMFF94InteractionParameterizer&>((python::arg("self"), python::arg("parameterizer"))))
 		.def(CDPLPythonBase::ObjectIdentityCheckVisitor<ForceField::MMFF94InteractionParameterizer>())	
 		.def("setBondStretchingFilterFunction", &ForceField::MMFF94InteractionParameterizer::setBondStretchingFilterFunction, 
@@ -96,8 +96,7 @@ void CDPLPythonForceField::exportMMFF94InteractionParameterizer()
 			 (python::arg("self"), python::arg("table")))
 		.def("setVanDerWaalsParameterTable", &ForceField::MMFF94InteractionParameterizer::setVanDerWaalsParameterTable, 
 			 (python::arg("self"), python::arg("table")))
-		.def("setStaticParameterDefaults", &ForceField::MMFF94InteractionParameterizer::setStaticParameterDefaults, python::arg("self"))
-		.def("setDynamicParameterDefaults", &ForceField::MMFF94InteractionParameterizer::setDynamicParameterDefaults, python::arg("self"))
+		.def("useParameterSet", &ForceField::MMFF94InteractionParameterizer::useParameterSet, (python::arg("self"), python::arg("param_set")))
 		.def("strictParameterization", SetBoolFunc(&ForceField::MMFF94InteractionParameterizer::strictParameterization), 
 			 (python::arg("self"), python::arg("strict")))
 		.def("strictParameterization", GetBoolFunc(&ForceField::MMFF94InteractionParameterizer::strictParameterization), python::arg("self"))

@@ -156,6 +156,19 @@ bool ConfGen::FragmentTreeNode::hasChildren() const
 	return (leftChild && rightChild);
 }
 
+bool ConfGen::FragmentTreeNode::containsAtom(const Chem::Atom& atom) const
+{
+	if (!owner.getMolecularGraph())
+		return false;
+
+	try {
+		return atomMask.test(owner.getMolecularGraph()->getAtomIndex(atom));
+
+	} catch (const Base::Exception& e) {}
+
+	return false;
+}
+
 ConfGen::FragmentTreeNode* ConfGen::FragmentTreeNode::getLeftChild()
 {
 	return leftChild;
@@ -303,8 +316,12 @@ void ConfGen::FragmentTreeNode::addConformer(const ConformerData::SharedPointer&
 unsigned int ConfGen::FragmentTreeNode::generateConformers(bool e_ordered)
 {
 	if (conformers.empty()) {
-		if (!hasChildren())
+		if (!hasChildren()) {
+			if (atomIndices.empty())
+				return ReturnCode::SUCCESS;
+
 			return ReturnCode::TORSION_DRIVING_FAILED;
+		}
 
 		unsigned int ret_code = leftChild->generateConformers(e_ordered);
 

@@ -129,11 +129,11 @@ namespace CDPL
 
 			void load(std::istream& is);
 
-			void loadDefaults(bool mmff94s);
+			void loadDefaults(unsigned int param_set);
 
-			static void set(const SharedPointer& table, bool mmff94s);
+			static void set(const SharedPointer& table, unsigned int param_set);
 
-			static const SharedPointer& get(bool mmff94s);
+			static const SharedPointer& get(unsigned int param_set);
 
 		  private:
 			static SharedPointer defaultDynTable;

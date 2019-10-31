@@ -105,7 +105,7 @@ unsigned int ConfGen::FragmentLibraryGenerator::process(const Chem::MolecularGra
 	Molecule::SharedPointer fl_entry = addNewLibraryEntry(frag);
 
 	if (!fl_entry) 
-		return ReturnCode::SUCCESS;
+		return ReturnCode::FRAGMENT_ALREADY_PROCESSED;
 	
 	try {
 		fragSSSR->perceive(fragLibEntry);

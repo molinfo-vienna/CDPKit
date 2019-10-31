@@ -67,9 +67,11 @@ namespace CDPL
 
 	    const int FRAGMENT_CONF_GEN_TIMEOUT       = 8;
 
-	    const int TORSION_DRIVING_FAILED          = 9;
+	    const int FRAGMENT_ALREADY_PROCESSED      = 9;
 
-	    const int ERROR                           = 10;
+	    const int TORSION_DRIVING_FAILED          = 10;
+
+	    const int ERROR                           = 11;
 	}
 
 	/**

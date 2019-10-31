@@ -39,6 +39,7 @@
 #include "CDPL/ForceField/APIPrefix.hpp"
 #include "CDPL/ForceField/InteractionType.hpp"
 #include "CDPL/ForceField/InteractionFilterFunctions.hpp"
+#include "CDPL/ForceField/MMFF94ParameterSet.hpp"
 #include "CDPL/ForceField/MMFF94BondStretchingInteractionParameterizer.hpp"
 #include "CDPL/ForceField/MMFF94AngleBendingInteractionParameterizer.hpp"
 #include "CDPL/ForceField/MMFF94StretchBendInteractionParameterizer.hpp"
@@ -98,7 +99,7 @@ namespace CDPL
 		  public:
 			typedef boost::shared_ptr<MMFF94InteractionParameterizer> SharedPointer;
 
-			MMFF94InteractionParameterizer(bool mmff94s = true);
+			MMFF94InteractionParameterizer(unsigned int param_set = MMFF94ParameterSet::STATIC);
 
 			MMFF94InteractionParameterizer(const MMFF94InteractionParameterizer& parameterizer);
 
@@ -152,9 +153,7 @@ namespace CDPL
 
 			void setVanDerWaalsParameterTable(const MMFF94VanDerWaalsParameterTable::SharedPointer& table);
 
-			void setStaticParameterDefaults();
-
-			void setDynamicParameterDefaults();
+			void useParameterSet(unsigned int param_set);
 
 			void strictParameterization(bool strict);
 	

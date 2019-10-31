@@ -43,6 +43,7 @@
 #endif // defined(HAVE_BOOST_IOSTREAMS)
 
 #include "CDPL/ForceField/MMFF94OutOfPlaneBendingParameterTable.hpp"
+#include "CDPL/ForceField/MMFF94ParameterSet.hpp"
 #include "CDPL/Base/Exceptions.hpp"
 
 #include "MMFF94ParameterData.hpp"
@@ -223,9 +224,9 @@ void ForceField::MMFF94OutOfPlaneBendingParameterTable::load(std::istream& is)
     }
 }
 
-void ForceField::MMFF94OutOfPlaneBendingParameterTable::loadDefaults(bool mmff94s)
+void ForceField::MMFF94OutOfPlaneBendingParameterTable::loadDefaults(unsigned int param_set)
 {
-	if (mmff94s) {
+	if (param_set == MMFF94ParameterSet::STATIC) {
 #if defined(HAVE_BOOST_IOSTREAMS)
 
 		boost::iostreams::stream<boost::iostreams::array_source> is(MMFF94ParameterData::STATIC_OUT_OF_PLANE_BENDING_PARAMETERS, 
@@ -253,17 +254,17 @@ void ForceField::MMFF94OutOfPlaneBendingParameterTable::loadDefaults(bool mmff94
 	}
 }
 
-void ForceField::MMFF94OutOfPlaneBendingParameterTable::set(const SharedPointer& table, bool mmff94s)
+void ForceField::MMFF94OutOfPlaneBendingParameterTable::set(const SharedPointer& table, unsigned int param_set)
 {	
-	if (mmff94s) 
+	if (param_set == MMFF94ParameterSet::STATIC) 
 		defaultStatTable = (!table ? builtinStatTable : table);
 	else
 		defaultDynTable = (!table ? builtinDynTable : table);
 }
 
-const ForceField::MMFF94OutOfPlaneBendingParameterTable::SharedPointer& ForceField::MMFF94OutOfPlaneBendingParameterTable::get(bool mmff94s)
+const ForceField::MMFF94OutOfPlaneBendingParameterTable::SharedPointer& ForceField::MMFF94OutOfPlaneBendingParameterTable::get(unsigned int param_set)
 {
  	boost::call_once(&initBuiltinTables, initBuiltinTablesFlag);
 
-	return (mmff94s ? defaultStatTable : defaultDynTable);
+	return (param_set == MMFF94ParameterSet::STATIC ? defaultStatTable : defaultDynTable);
 }

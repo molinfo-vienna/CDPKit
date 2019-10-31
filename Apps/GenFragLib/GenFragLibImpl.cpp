@@ -60,6 +60,7 @@ namespace
 	const double       DEF_E_WINDOW                   = 4.0;
 	const unsigned int DEF_FORCE_FIELD_TYPE           = CDPL::ConfGen::ForceFieldType::MMFF94_NO_ESTAT;
 	const bool         DEF_STRICT_FORCE_FIELD_PARAM   = true;
+	const bool         DEF_PRESERVE_BONDING_GEOM      = true;
 }
 
 
@@ -108,6 +109,7 @@ public:
 		settings.getMacrocycleSettings().setTimeout(parent->timeout * 1000);
 		settings.setForceFieldType(parent->forceFieldType);
 		settings.strictForceFieldParameterization(parent->strictForceFieldParam);
+		settings.preserveInputBondingGeometries(parent->presBondingGeom);
 	}
 
 	void operator()() {
@@ -129,13 +131,20 @@ public:
 					const Fragment& frag = *it;
 					unsigned int ret_code = fragLibGen.process(frag);
 
-					if (ret_code == ReturnCode::ABORTED)
-						return;
+					switch (ret_code) {
 
-					if (ret_code == ReturnCode::SUCCESS || ret_code == ReturnCode::FRAGMENT_CONF_GEN_TIMEOUT)
-						fragmentProcessed(frag);
-					else
-						handleError(frag, ret_code);
+						case ReturnCode::ABORTED:
+							return;
+
+						case ReturnCode::SUCCESS:
+						case ReturnCode::FRAGMENT_CONF_GEN_TIMEOUT:
+						case ReturnCode::FRAGMENT_ALREADY_PROCESSED:
+							fragmentProcessed(frag, ret_code);
+							break;
+
+						default:
+							handleError(frag, ret_code);
+					}
 				}
 
 				numProcMols++;
@@ -170,7 +179,9 @@ public:
 	}
 
 private:
-	void fragmentProcessed(const CDPL::Chem::MolecularGraph& frag) {
+	void fragmentProcessed(const CDPL::Chem::MolecularGraph& frag, unsigned int ret_code) {
+		using namespace CDPL::ConfGen;
+
 		numProcFrags++;
 
 		CDPL::Base::uint64 hash_code = fragLibGen.getLibraryEntryHashCode();
@@ -178,7 +189,7 @@ private:
 
 		parent->updateOccurrenceCount(hash_code);
 
-		if (num_confs != 0) {
+		if (ret_code == ReturnCode::SUCCESS || ret_code == ReturnCode::FRAGMENT_CONF_GEN_TIMEOUT) {
 			numAddedFrags++;
 			totalNumConfs += num_confs;
 
@@ -214,7 +225,7 @@ private:
 				break;
 
 			case ReturnCode::TIMEOUT:
-				err_msg = "Timeout reached";
+				err_msg = "Timeout exceeded";
 				break;
 
 			default:
@@ -265,8 +276,8 @@ GenFragLibImpl::GenFragLibImpl():
 	multiThreading(false), numThreads(boost::thread::hardware_concurrency()), 
 	mode(CREATE), minRMSD(DEF_MIN_RMSD), timeout(DEF_TIMEOUT), eWindow(DEF_E_WINDOW),
 	smallRSysSamplingFactor(DEF_SMALL_RSYS_SAMPLING_FACTOR), forceFieldType(DEF_FORCE_FIELD_TYPE),
-	strictForceFieldParam(DEF_STRICT_FORCE_FIELD_PARAM), maxLibSize(0), inputHandler(), 
-	fragmentLibPtr(new CDPL::ConfGen::FragmentLibrary())
+	strictForceFieldParam(DEF_STRICT_FORCE_FIELD_PARAM), presBondingGeom(DEF_PRESERVE_BONDING_GEOM),
+	maxLibSize(0), inputHandler(), fragmentLibPtr(new CDPL::ConfGen::FragmentLibrary())
 {
 	addOption("input,i", "Input file(s).", 
 			  value<StringList>(&inputFiles)->multitoken()->required());
@@ -298,6 +309,8 @@ GenFragLibImpl::GenFragLibImpl():
 			  value<std::string>()->notifier(boost::bind(&GenFragLibImpl::setForceFieldType, this, _1)));
 	addOption("strict-params,s", "Perform strict MMFF94 parameterization (default: true).", 
 			  value<bool>(&strictForceFieldParam)->implicit_value(strictForceFieldParam));
+	addOption("pres-bonding-geom,b", "Preserve input bond lengths and angles (default: true).", 
+			  value<bool>(&presBondingGeom)->implicit_value(presBondingGeom));
 
 	addOptionLongDescriptions();
 }
@@ -797,6 +810,7 @@ void GenFragLibImpl::printOptionSummary()
 		printMessage(VERBOSE, " Strict Force Field Parameterization: " + std::string(strictForceFieldParam ? "Yes" : "No"));
 		printMessage(VERBOSE, " Small Ring Sys. Sampling Factor:     " + boost::lexical_cast<std::string>(smallRSysSamplingFactor));
 		printMessage(VERBOSE, " Build Force Field Type:              " + getForceFieldTypeString());
+		printMessage(VERBOSE, " Preserve Input Bonding Geometries:   " + std::string(presBondingGeom ? "Yes" : "No"));
 	}
 
 	printMessage(VERBOSE, "");

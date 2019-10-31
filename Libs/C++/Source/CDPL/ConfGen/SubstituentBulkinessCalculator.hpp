@@ -1,7 +1,7 @@
 /* -*- mode: c++; c-basic-offset: 4; tab-width: 4; indent-tabs-mode: t -*- */
 
 /* 
- * NamespaceExports.hpp 
+ * SubstituentBulkinessCalculator.hpp
  *
  * This file is part of the Chemical Data Processing Toolkit
  *
@@ -23,20 +23,50 @@
  * Boston, MA 02111-1307, USA.
  */
 
+/**
+ * \file
+ * \brief Definition of the class CDPL::ConfGen::SubstituentBulkinessCalculator.
+ */
 
-#ifndef CDPL_PYTHON_FORCEFIELD_NAMESPACEEXPORTS_HPP
-#define CDPL_PYTHON_FORCEFIELD_NAMESPACEEXPORTS_HPP
+#ifndef CDPL_CONFGEN_SUBSTITUENTBULKINESSCALCULATOR_HPP
+#define CDPL_CONFGEN_SUBSTITUENTBULKINESSCALCULATOR_HPP
+
+#include <cstddef>
+#include <vector>
+
+#include "CDPL/Util/BitSet.hpp"
 
 
-namespace CDPLPythonForceField
+namespace CDPL 
 {
 
-	void exportInteractionTypes();
-	void exportMMFF94ParameterSets();
+    namespace Chem
+    {
 
-	void exportAtomProperties();
-	void exportBondProperties();
-	void exportMolecularGraphProperties();
+		class MolecularGraph;
+    }
+	
+    namespace ConfGen 
+    {
+	
+		class SubstituentBulkinessCalculator 
+		{
+
+		public:
+			void calculate(const Chem::MolecularGraph& molgraph);
+
+			std::size_t operator[](std::size_t i) const {
+				return ecArray[i];
+			}
+
+		private:
+			typedef std::vector<std::size_t> ECArray;
+
+			ECArray      ecArray;	
+			ECArray      tmpECArray;	
+			Util::BitSet hAtomMask;
+		};
+    }
 }
 
-#endif // CDPL_PYTHON_FORCEFIELD_NAMESPACEEXPORTS_HPP
+#endif // CDPL_CONFGEN_SUBSTITUENTBULKINESSCALCULATOR_HPP

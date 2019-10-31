@@ -39,7 +39,7 @@ const ConfGen::FragmentAssemblerSettings ConfGen::FragmentAssemblerSettings::DEF
 
 ConfGen::FragmentAssemblerSettings::FragmentAssemblerSettings():
 	enumRings(true), nitrogenEnumMode(NitrogenEnumerationMode::UNSPECIFIED_STEREO),
-	generateCoords(true)
+	fromScratch(true)
 {}
 
 void ConfGen::FragmentAssemblerSettings::enumerateRings(bool enumerate)
@@ -62,14 +62,14 @@ unsigned int ConfGen::FragmentAssemblerSettings::getNitrogenEnumerationMode() co
 	return nitrogenEnumMode;
 }
 
-void ConfGen::FragmentAssemblerSettings::generateCoordinates(bool generate)
+void ConfGen::FragmentAssemblerSettings::generateCoordinatesFromScratch(bool generate)
 {
-	generateCoords = generate;
+	fromScratch = generate;
 }
 	
-bool ConfGen::FragmentAssemblerSettings::generateCoordinates() const
+bool ConfGen::FragmentAssemblerSettings::generateCoordinatesFromScratch() const
 {
-	return generateCoords;
+	return fromScratch;
 }
 
 ConfGen::FragmentConformerGeneratorSettings& ConfGen::FragmentAssemblerSettings::getFragmentBuildSettings()

@@ -42,6 +42,7 @@
 #endif // defined(HAVE_BOOST_IOSTREAMS)
 
 #include "CDPL/ForceField/MMFF94TorsionParameterTable.hpp"
+#include "CDPL/ForceField/MMFF94ParameterSet.hpp"
 #include "CDPL/Base/Exceptions.hpp"
 
 #include "MMFF94ParameterData.hpp"
@@ -249,9 +250,9 @@ void ForceField::MMFF94TorsionParameterTable::load(std::istream& is)
     }
 }
 
-void ForceField::MMFF94TorsionParameterTable::loadDefaults(bool mmff94s)
+void ForceField::MMFF94TorsionParameterTable::loadDefaults(unsigned int param_set)
 {
-	if (mmff94s) {
+	if (param_set == MMFF94ParameterSet::STATIC) {
 #if defined(HAVE_BOOST_IOSTREAMS)
 
 		boost::iostreams::stream<boost::iostreams::array_source> is(MMFF94ParameterData::STATIC_TORSION_PARAMETERS, 
@@ -279,17 +280,17 @@ void ForceField::MMFF94TorsionParameterTable::loadDefaults(bool mmff94s)
 	}
 }
 
-void ForceField::MMFF94TorsionParameterTable::set(const SharedPointer& table, bool mmff94s)
+void ForceField::MMFF94TorsionParameterTable::set(const SharedPointer& table, unsigned int param_set)
 {	
-	if (mmff94s) 
+	if (param_set == MMFF94ParameterSet::STATIC) 
 		defaultStatTable = (!table ? builtinStatTable : table);
 	else
 		defaultDynTable = (!table ? builtinDynTable : table);
 }
 
-const ForceField::MMFF94TorsionParameterTable::SharedPointer& ForceField::MMFF94TorsionParameterTable::get(bool mmff94s)
+const ForceField::MMFF94TorsionParameterTable::SharedPointer& ForceField::MMFF94TorsionParameterTable::get(unsigned int param_set)
 {
  	boost::call_once(&initBuiltinTables, initBuiltinTablesFlag);
 
-	return (mmff94s ? defaultStatTable : defaultDynTable);
+	return (param_set == MMFF94ParameterSet::STATIC ? defaultStatTable : defaultDynTable);
 }

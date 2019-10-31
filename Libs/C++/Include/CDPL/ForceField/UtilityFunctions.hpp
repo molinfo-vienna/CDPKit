@@ -164,6 +164,30 @@ namespace CDPL
 		ValueType calcBondAngleCos(const CoordsVec& term_atom1_pos, const CoordsVec& ctr_atom_pos, const CoordsVec& term_atom2_pos);
 
 		/**
+		 * \brief Calculates the \e cosine of the bond angle \f$ \vartheta_{ijk} \f$ between the two bonds \e i-j and \e j-k.
+		 *
+		 * \f$ \cos(\vartheta_{ijk}) = \frac{\vec{v_{ij}} \cdot \vec{v_{jk}}}{|\vec{v_{ij}}| \: |\vec{v_{jk}}|} \f$<br>
+		 *
+		 * where<br>
+		 * \f$ \vec{v_{ij}} = \vec{p_j} - \vec{p_i} \f$<br>
+		 * \f$ \vec{v_{jk}} = \vec{p_k} - \vec{p_j} \f$<br>
+		 *
+		 * \f$ \vec{p_i} \f$ = coordinates of atom \e i.<br>
+		 * \f$ \vec{p_j} \f$ = coordinates of atom \e j.<br>
+		 * \f$ \vec{p_k} \f$ = coordinates of atom \e k.<br>
+		 *
+		 * \param term_atom1_pos The position \f$ \vec{p_i} \f$ of the terminal atom \e i.
+		 * \param ctr_atom_pos The position \f$ \vec{p_j} \f$ of the central atom \e j.
+		 * \param term_atom2_pos The position \f$ \vec{p_k} \f$ of the terminal atom \e k.
+		 * \param r_ij The length of the bond between atom \e i and \e j.
+		 * \param r_jk The length of the bond between atom \e j and \e k.
+		 * \return The calculated cosine of the bond angle \f$ \vartheta_{ijk} \f$.
+		 */
+		template <typename ValueType, typename CoordsVec>
+		ValueType calcBondAngleCos(const CoordsVec& term_atom1_pos, const CoordsVec& ctr_atom_pos, const CoordsVec& term_atom2_pos,
+								   const ValueType& r_ij, const ValueType& r_jk);
+
+		/**
 		 * \brief Calculates the bond angle \f$ \vartheta_{ijk} \f$ between the two bonds \e i-j and \e j-k.
 		 *
 		 * \f$ \vartheta_{ijk} = \arccos(\frac{\vec{v_{ij}} \cdot \vec{v_{jk}}}{|\vec{v_{ij}}| \: |\vec{v_{jk}}|}) \f$<br>
@@ -183,6 +207,30 @@ namespace CDPL
 		 */
 		template <typename ValueType, typename CoordsVec>
 		ValueType calcBondAngle(const CoordsVec& term_atom1_pos, const CoordsVec& ctr_atom_pos, const CoordsVec& term_atom2_pos);
+
+		/**
+		 * \brief Calculates the bond angle \f$ \vartheta_{ijk} \f$ between the two bonds \e i-j and \e j-k.
+		 *
+		 * \f$ \vartheta_{ijk} = \arccos(\frac{\vec{v_{ij}} \cdot \vec{v_{jk}}}{|\vec{v_{ij}}| \: |\vec{v_{jk}}|}) \f$<br>
+		 *
+		 * where<br>
+		 * \f$ \vec{v_{ij}} = \vec{p_j} - \vec{p_i} \f$<br>
+		 * \f$ \vec{v_{jk}} = \vec{p_k} - \vec{p_j} \f$<br>
+		 *
+		 * \f$ \vec{p_i} \f$ = coordinates of atom \e i.<br>
+		 * \f$ \vec{p_j} \f$ = coordinates of atom \e j.<br>
+		 * \f$ \vec{p_k} \f$ = coordinates of atom \e k.<br>
+		 *
+		 * \param term_atom1_pos The position \f$ \vec{p_i} \f$ of the terminal atom \e i.
+		 * \param ctr_atom_pos The position \f$ \vec{p_j} \f$ of the central atom \e j.
+		 * \param term_atom2_pos The position \f$ \vec{p_k} \f$ of the terminal atom \e k.
+		 * \param r_ij The length of the bond between atom \e i and \e j.
+		 * \param r_jk The length of the bond between atom \e j and \e k.
+		 * \return The calculated bond angle \f$ \vartheta_{ijk} \f$.
+		 */
+		template <typename ValueType, typename CoordsVec>
+		ValueType calcBondAngle(const CoordsVec& term_atom1_pos, const CoordsVec& ctr_atom_pos, const CoordsVec& term_atom2_pos,
+								const ValueType& r_ij, const ValueType& r_jk);
 	
 		/**
 		 * \brief Calculates the out-of-plane angle \f$ \chi_{ijk;l} \f$ between the bond \e j-l and the plane defined by the atoms \e i-j-k.
@@ -209,6 +257,34 @@ namespace CDPL
 		template <typename ValueType, typename CoordsVec>	
 		ValueType calcOutOfPlaneAngle(const CoordsVec& term_atom1_pos, const CoordsVec& ctr_atom_pos, 
 									  const CoordsVec& term_atom2_pos, const CoordsVec& oop_atom_pos);
+
+		/**
+		 * \brief Calculates the out-of-plane angle \f$ \chi_{ijk;l} \f$ between the bond \e j-l and the plane defined by the atoms \e i-j-k.
+		 *
+		 * \f$ \chi_{ijk;l} = \frac{\pi}{2} - \arccos(\frac{\vec{n_{ijk}} \cdot \vec{v_{jl}}}{|\vec{n_{ijk}}| \: |\vec{v_{jl}}|}) \f$<br>
+		 *
+		 * where<br>
+		 * \f$ \vec{v_{ji}} = \vec{p_i} - \vec{p_j} \f$<br>
+		 * \f$ \vec{v_{jk}} = \vec{p_k} - \vec{p_j} \f$<br>
+		 * \f$ \vec{v_{jl}} = \vec{p_l} - \vec{p_j} \f$<br>
+		 * \f$ \vec{n_{ijk}} = \vec{v_{ji}} \times \vec{v_{jk}} \f$<br>
+		 *
+		 * \f$ \vec{p_i} \f$ = coordinates of atom \e i.<br>
+		 * \f$ \vec{p_j} \f$ = coordinates of atom \e j.<br>
+		 * \f$ \vec{p_k} \f$ = coordinates of atom \e k.<br>
+		 * \f$ \vec{p_l} \f$ = coordinates of atom \e l.<br>
+		 *
+		 * \param term_atom1_pos The position \f$ \vec{p_i} \f$ of the terminal atom \e i.
+		 * \param ctr_atom_pos The position \f$ \vec{p_j} \f$ of the central atom \e j.
+		 * \param term_atom2_pos The position \f$ \vec{p_k} \f$ of the terminal atom \e k.
+		 * \param oop_atom_pos The position \f$ \vec{p_l} \f$ of the out-of-plane atom \e l.
+		 * \param r_jl The length of the bond between atom \e j and atom \e l.
+		 * \return The calculated out-of-plane angle \f$ \chi_{ijk;l} \f$.
+		 */
+		template <typename ValueType, typename CoordsVec>	
+		ValueType calcOutOfPlaneAngle(const CoordsVec& term_atom1_pos, const CoordsVec& ctr_atom_pos, 
+									  const CoordsVec& term_atom2_pos, const CoordsVec& oop_atom_pos,
+									  const ValueType& r_jl);
 
 		/**
 		 * \brief Calculates the \e cosine of the dihedral angle \f$ \Phi_{ijkl} \f$ between the planes defined by the atom triplets \e i-j-k and \e j-k-l.
@@ -587,9 +663,29 @@ ValueType CDPL::ForceField::calcBondAngleCos(const CoordsVec& term_atom1_pos, co
 }
 
 template <typename ValueType, typename CoordsVec>
+ValueType CDPL::ForceField::calcBondAngleCos(const CoordsVec& term_atom1_pos, const CoordsVec& ctr_atom_pos, const CoordsVec& term_atom2_pos,
+											 const ValueType& r_ij, const ValueType& r_jk)
+{
+	ValueType bond_vec1[3];
+    ValueType bond_vec2[3];
+
+	Detail::subVectors(ctr_atom_pos, term_atom1_pos, bond_vec1);
+	Detail::subVectors(ctr_atom_pos, term_atom2_pos, bond_vec2);
+
+	return Detail::clampCosine(Detail::calcDotProduct<ValueType>(bond_vec1, bond_vec2) / (r_ij * r_jk));
+}
+
+template <typename ValueType, typename CoordsVec>
 ValueType CDPL::ForceField::calcBondAngle(const CoordsVec& term_atom1_pos, const CoordsVec& ctr_atom_pos, const CoordsVec& term_atom2_pos)
 {
     return std::acos(calcBondAngleCos<ValueType>(term_atom1_pos, ctr_atom_pos, term_atom2_pos));
+}
+
+template <typename ValueType, typename CoordsVec>
+ValueType CDPL::ForceField::calcBondAngle(const CoordsVec& term_atom1_pos, const CoordsVec& ctr_atom_pos, const CoordsVec& term_atom2_pos,
+										  const ValueType& r_ij, const ValueType& r_jk)
+{
+    return std::acos(calcBondAngleCos<ValueType>(term_atom1_pos, ctr_atom_pos, term_atom2_pos, r_ij, r_jk));
 }
 
 template <typename ValueType, typename CoordsVec>
@@ -609,6 +705,27 @@ ValueType CDPL::ForceField::calcOutOfPlaneAngle(const CoordsVec& term_atom1_pos,
 	ValueType pn_len = std::sqrt(Detail::calcDotProduct<ValueType>(plane_normal, plane_normal));
 	ValueType oop_bnd_len = std::sqrt(Detail::calcDotProduct<ValueType>(oop_bond_vec, oop_bond_vec));
 	ValueType ang_cos = Detail::clampCosine(Detail::calcDotProduct<ValueType>(plane_normal, oop_bond_vec) / (pn_len * oop_bnd_len));
+
+	return (ValueType(M_PI * 0.5) - std::acos(ang_cos));
+}
+
+template <typename ValueType, typename CoordsVec>
+ValueType CDPL::ForceField::calcOutOfPlaneAngle(const CoordsVec& term_atom1_pos, const CoordsVec& ctr_atom_pos, 
+												const CoordsVec& term_atom2_pos, const CoordsVec& oop_atom_pos, 
+												const ValueType& r_jl)
+{
+	ValueType term_bond1_vec[3];
+    ValueType term_bond2_vec[3];
+    ValueType oop_bond_vec[3];
+    ValueType plane_normal[3];
+
+	Detail::subVectors(ctr_atom_pos, term_atom1_pos, term_bond1_vec);
+	Detail::subVectors(ctr_atom_pos, term_atom2_pos, term_bond2_vec);
+	Detail::subVectors(ctr_atom_pos, oop_atom_pos, oop_bond_vec);
+	Detail::calcCrossProduct(term_bond1_vec, term_bond2_vec, plane_normal);
+
+	ValueType pn_len = std::sqrt(Detail::calcDotProduct<ValueType>(plane_normal, plane_normal));
+	ValueType ang_cos = Detail::clampCosine(Detail::calcDotProduct<ValueType>(plane_normal, oop_bond_vec) / (pn_len * r_jl));
 
 	return (ValueType(M_PI * 0.5) - std::acos(ang_cos));
 }

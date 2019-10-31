@@ -103,89 +103,56 @@ unsigned int ConfGen::TorsionDriver::setup(const Chem::MolecularGraph& molgraph,
 	return ReturnCode::SUCCESS;
 }
 
-unsigned int ConfGen::TorsionDriver::clearInputCoordinates()
+void ConfGen::TorsionDriver::clearInputCoordinates()
 {
-	if (!impl->initialized())
-		return ReturnCode::UNINITIALIZED;
-
 	impl->clearInputCoordinates();
-
-	return ReturnCode::SUCCESS;
 }
 
-unsigned int ConfGen::TorsionDriver::clearInputCoordinates(std::size_t frag_idx)
+void ConfGen::TorsionDriver::clearInputCoordinates(std::size_t frag_idx)
 {
-	if (!impl->initialized())
-		return ReturnCode::UNINITIALIZED;
-
-	if (frag_idx < impl->getNumFragments())
-		impl->clearInputCoordinates(frag_idx);
-	else
+	if (frag_idx >= impl->getNumFragments())
 		throw Base::IndexError("TorsionDriver: fragment index out of bounds");
 
-	return ReturnCode::SUCCESS;
+	impl->clearInputCoordinates(frag_idx);
 }
 
-unsigned int ConfGen::TorsionDriver::addInputCoordinates(const Math::Vector3DArray& coords)
+void ConfGen::TorsionDriver::addInputCoordinates(const Math::Vector3DArray& coords)
 {
-	if (!impl->initialized())
-		return ReturnCode::UNINITIALIZED;
-
 	impl->addInputCoordinates(coords);
-
-	return ReturnCode::SUCCESS;
 }
 
-unsigned int ConfGen::TorsionDriver::addInputCoordinates(const Math::Vector3DArray& coords, std::size_t frag_idx)
+void ConfGen::TorsionDriver::addInputCoordinates(const Math::Vector3DArray& coords, std::size_t frag_idx)
 {
-	if (!impl->initialized())
-		return ReturnCode::UNINITIALIZED;
-
-	if (frag_idx < impl->getNumFragments())
-		impl->addInputCoordinates(coords, frag_idx);
-	else
+	if (frag_idx >= impl->getNumFragments())
 		throw Base::IndexError("TorsionDriver: fragment index out of bounds");
 
-	return ReturnCode::SUCCESS;
+	impl->addInputCoordinates(coords, frag_idx);
 }
 
-unsigned int ConfGen::TorsionDriver::addInputCoordinates(const ConformerData& conf_data, std::size_t frag_idx)
+void ConfGen::TorsionDriver::addInputCoordinates(const ConformerData& conf_data, std::size_t frag_idx)
 {
-	if (!impl->initialized())
-		return ReturnCode::UNINITIALIZED;
-
-	if (frag_idx < impl->getNumFragments())
-		impl->addInputCoordinates(conf_data, frag_idx);
-	else
+	if (frag_idx >= impl->getNumFragments())
 		throw Base::IndexError("TorsionDriver: fragment index out of bounds");
 
-	return ReturnCode::SUCCESS;
+	impl->addInputCoordinates(conf_data, frag_idx);
 }
 
-unsigned int ConfGen::TorsionDriver::addInputCoordinates(const ConformerData::SharedPointer& conf_data, std::size_t frag_idx)
+void ConfGen::TorsionDriver::addInputCoordinates(const ConformerData::SharedPointer& conf_data, std::size_t frag_idx)
 {
-	if (!impl->initialized())
-		return ReturnCode::UNINITIALIZED;
-
-	if (frag_idx < impl->getNumFragments())
-		impl->addInputCoordinates(conf_data, frag_idx);
-	else
+	if (frag_idx >= impl->getNumFragments())
 		throw Base::IndexError("TorsionDriver: fragment index out of bounds");
 
-	return ReturnCode::SUCCESS;
+	impl->addInputCoordinates(conf_data, frag_idx);
 }
 
 std::size_t ConfGen::TorsionDriver::getNumFragments() const
 {
-	if (!impl->initialized())
-		return 0;
-
 	return impl->getNumFragments();
 }
 
 const Chem::Fragment& ConfGen::TorsionDriver::getFragment(std::size_t idx) const
 {
-	if (idx >= getNumFragments())
+	if (idx >= impl->getNumFragments())
 		throw Base::IndexError("TorsionDriver: fragment index out of bounds");
 
 	return impl->getFragment(idx);
@@ -193,23 +160,17 @@ const Chem::Fragment& ConfGen::TorsionDriver::getFragment(std::size_t idx) const
 
 unsigned int ConfGen::TorsionDriver::generateConformers()
 {
-	if (!impl->initialized())
-		return ReturnCode::UNINITIALIZED;
-
 	return impl->generateConformers();
 }
 
 std::size_t ConfGen::TorsionDriver::getNumConformers() const
 {
-	if (!impl->initialized())
-		return 0;
-
 	return impl->getNumConformers();
 }
 
 const ConfGen::ConformerData& ConfGen::TorsionDriver::getConformer(std::size_t idx) const
 {
-	if (idx >= getNumConformers())
+	if (idx >= impl->getNumConformers())
 		throw Base::IndexError("TorsionDriver: conformer index out of bounds");
 
 	return impl->getConformer(idx);
@@ -217,7 +178,7 @@ const ConfGen::ConformerData& ConfGen::TorsionDriver::getConformer(std::size_t i
 
 ConfGen::ConformerData& ConfGen::TorsionDriver::getConformer(std::size_t idx)
 {
-	if (idx >= getNumConformers())
+	if (idx >= impl->getNumConformers())
 		throw Base::IndexError("TorsionDriver: conformer index out of bounds");
 
 	return impl->getConformer(idx);
@@ -225,32 +186,20 @@ ConfGen::ConformerData& ConfGen::TorsionDriver::getConformer(std::size_t idx)
 
 ConfGen::TorsionDriver::ConstConformerIterator ConfGen::TorsionDriver::getConformersBegin() const
 {
-	if (!impl->initialized())
-		throw Base::OperationFailed("TorsionDriver: uninitialized");
-
 	return impl->getConformersBegin();
 }
 
 ConfGen::TorsionDriver::ConstConformerIterator ConfGen::TorsionDriver::getConformersEnd() const
 {
-	if (!impl->initialized())
-		throw Base::OperationFailed("TorsionDriver: uninitialized");
-
 	return impl->getConformersEnd();
 }
 
 ConfGen::TorsionDriver::ConformerIterator ConfGen::TorsionDriver::getConformersBegin()
 {
-	if (!impl->initialized())
-		throw Base::OperationFailed("TorsionDriver: uninitialized");
-
 	return impl->getConformersBegin();
 }
 
 ConfGen::TorsionDriver::ConformerIterator ConfGen::TorsionDriver::getConformersEnd()
 {
-	if (!impl->initialized())
-		throw Base::OperationFailed("TorsionDriver: uninitialized");
-
 	return impl->getConformersEnd();
 }

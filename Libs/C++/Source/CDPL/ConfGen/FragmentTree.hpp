@@ -91,9 +91,11 @@ namespace CDPL
 		private:
 			typedef std::vector<double> DoubleArray;
 
-			void generateLeafNodes(const Chem::FragmentList& frags, const Chem::MolecularGraph& molgraph);
+			FragmentTree(const FragmentTree&);
 
-			void buildupTree();
+			FragmentTree& operator=(const FragmentTree&);
+
+			void buildTree(const Chem::FragmentList& frags, const Chem::MolecularGraph& molgraph);
 
 			void initAtomClashRadiusTable();
 
@@ -142,8 +144,7 @@ void CDPL::ConfGen::FragmentTree::build(const Chem::FragmentList& frags, const C
 	splitBonds.clear();
 	splitBonds.insert(splitBonds.end(), bonds_beg, bonds_end);
 
-	generateLeafNodes(frags, molgraph);
-	buildupTree();
+	buildTree(frags, molgraph);
 	initAtomClashRadiusTable();
 }
 

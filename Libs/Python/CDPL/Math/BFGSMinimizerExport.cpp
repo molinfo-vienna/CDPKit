@@ -69,9 +69,9 @@ namespace
 				.def("getFunctionValue", &MinimizerType::getFunctionValue, python::arg("self"))
 				.def("getNumIterations", &MinimizerType::getNumIterations, python::arg("self"))
 				.def("getStatus", &MinimizerType::getStatus, python::arg("self"))
-				.def("minimizes", &minimize, 
+				.def("minimize", &minimize, 
 					 (python::arg("self"), python::arg("x"), python::arg("g"), python::arg("max_iter"), 
-					  python::arg("do_setup") = true))
+					  python::arg("g_norm"), python::arg("delta_f"), python::arg("do_setup") = true))
 				.def("setup", &MinimizerType::setup, 
 					 (python::arg("self"), python::arg("x"), python::arg("g"), python::arg("step_size") = 0.1, 
 					  python::arg("tol") = 0.01))
@@ -84,10 +84,10 @@ namespace
 		}
 
 		static typename MinimizerType::Status minimize(MinimizerType& minimizer, ArrayType& x, ArrayType& g, 
-													   std::size_t max_iter, bool call_setup) {
-			FuncValueType g_norm(0), delta_f(0);
-
-			return minimizer.minimize(x, g, g_norm, delta_f, call_setup);
+													   std::size_t max_iter, const FuncValueType& g_norm, 
+													   const FuncValueType& delta_f, bool call_setup) {
+	
+			return minimizer.minimize(x, g, max_iter, g_norm, delta_f, call_setup);
 		}
 
 		static boost::python::tuple iterate(MinimizerType& minimizer, const FuncValueType& f, ArrayType& x, 

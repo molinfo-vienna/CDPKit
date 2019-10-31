@@ -59,6 +59,12 @@ namespace
 		return CDPL::ForceField::calcMMFF94BondStretchingEnergy(atom1_pos, atom2_pos, force_const, ref_length);
 	}
 
+	double calcMMFF94BondStretchingEnergy4(double r_ij, double force_const, double ref_length)
+	{
+		return CDPL::ForceField::calcMMFF94BondStretchingEnergy(r_ij, force_const, ref_length);
+	}
+
+
 	double calcMMFF94AngleBendingEnergy1(const CDPL::ForceField::MMFF94AngleBendingInteractionData& ia_data, const CDPL::Math::Vector3DArray& coords)
 	{
 		return CDPL::ForceField::calcMMFF94AngleBendingEnergy<double>(ia_data.getElementsBegin(), ia_data.getElementsEnd(), coords);
@@ -74,6 +80,13 @@ namespace
 	{
 		return CDPL::ForceField::calcMMFF94AngleBendingEnergy(term_atom1_pos, ctr_atom_pos, term_atom2_pos, linear, force_const, ref_angle);
 	}
+
+	double calcMMFF94AngleBendingEnergy4(const CDPL::Math::Vector3D& term_atom1_pos, const CDPL::Math::Vector3D& ctr_atom_pos, 
+										 const CDPL::Math::Vector3D& term_atom2_pos, double r_ij, double r_jk, bool linear, double force_const, double ref_angle)
+	{
+		return CDPL::ForceField::calcMMFF94AngleBendingEnergy(term_atom1_pos, ctr_atom_pos, term_atom2_pos, r_ij, r_jk, linear, force_const, ref_angle);
+	}
+
 
 	double calcMMFF94StretchBendEnergy1(const CDPL::ForceField::MMFF94StretchBendInteractionData& ia_data, const CDPL::Math::Vector3DArray& coords)
 	{
@@ -93,6 +106,15 @@ namespace
 															 ref_angle, ref_length1, ref_length2);
 	}
 
+	double calcMMFF94StretchBendEnergy4(const CDPL::Math::Vector3D& term_atom1_pos, const CDPL::Math::Vector3D& ctr_atom_pos, 
+										const CDPL::Math::Vector3D& term_atom2_pos, double r_ij, double r_jk, double ijk_force_const, double kji_force_const, 
+										double ref_angle, double ref_length1, double ref_length2)
+	{
+		return CDPL::ForceField::calcMMFF94StretchBendEnergy(term_atom1_pos, ctr_atom_pos, term_atom2_pos, r_ij, r_jk, ijk_force_const, kji_force_const,
+															 ref_angle, ref_length1, ref_length2);
+	}
+
+
 	double calcMMFF94OutOfPlaneBendingEnergy1(const CDPL::ForceField::MMFF94OutOfPlaneBendingInteractionData& ia_data, const CDPL::Math::Vector3DArray& coords)
 	{
 		return CDPL::ForceField::calcMMFF94OutOfPlaneBendingEnergy<double>(ia_data.getElementsBegin(), ia_data.getElementsEnd(), coords);
@@ -109,6 +131,14 @@ namespace
 	{
 		return CDPL::ForceField::calcMMFF94OutOfPlaneBendingEnergy(term_atom1_pos, ctr_atom_pos, term_atom2_pos, oop_atom_pos, force_const);
 	}
+
+	double calcMMFF94OutOfPlaneBendingEnergy4(const CDPL::Math::Vector3D& term_atom1_pos, const CDPL::Math::Vector3D& ctr_atom_pos, 
+											  const CDPL::Math::Vector3D& term_atom2_pos, const CDPL::Math::Vector3D& oop_atom_pos, 
+											  double r_jl, double force_const)
+	{
+		return CDPL::ForceField::calcMMFF94OutOfPlaneBendingEnergy(term_atom1_pos, ctr_atom_pos, term_atom2_pos, oop_atom_pos, r_jl, force_const);
+	}
+
 
 	double calcMMFF94TorsionEnergy1(const CDPL::ForceField::MMFF94TorsionInteractionData& ia_data, const CDPL::Math::Vector3DArray& coords)
 	{
@@ -144,6 +174,13 @@ namespace
 		return CDPL::ForceField::calcMMFF94ElectrostaticEnergy(atom1_pos, atom2_pos, atom1_chg, atom2_chg, scale_fact, de_const, dist_expo);
 	}
 
+	double calcMMFF94ElectrostaticEnergy4(double r_ij, double atom1_chg,
+										  double atom2_chg, double scale_fact, double de_const, double dist_expo)
+	{
+		return CDPL::ForceField::calcMMFF94ElectrostaticEnergy(r_ij, atom1_chg, atom2_chg, scale_fact, de_const, dist_expo);
+	}
+
+
 	double calcMMFF94VanDerWaalsEnergy1(const CDPL::ForceField::MMFF94VanDerWaalsInteractionData& ia_data, const CDPL::Math::Vector3DArray& coords)
 	{
 		return CDPL::ForceField::calcMMFF94VanDerWaalsEnergy<double>(ia_data.getElementsBegin(), ia_data.getElementsEnd(), coords);
@@ -178,6 +215,8 @@ void CDPLPythonForceField::exportMMFF94EnergyFunctions()
 				(python::arg("iaction"), python::arg("coords")));
 	python::def("calcMMFF94BondStretchingEnergy", &calcMMFF94BondStretchingEnergy3,
 				(python::arg("atom1_pos"), python::arg("atom2_pos"), python::arg("force_const"), python::arg("ref_length")));
+	python::def("calcMMFF94BondStretchingEnergy", &calcMMFF94BondStretchingEnergy4,
+				(python::arg("r_ij"), python::arg("force_const"), python::arg("ref_length")));
 
 	python::def("calcMMFF94AngleBendingEnergy", &calcMMFF94AngleBendingEnergy1,
 				(python::arg("ia_data"), python::arg("coords")));
@@ -186,6 +225,10 @@ void CDPLPythonForceField::exportMMFF94EnergyFunctions()
 	python::def("calcMMFF94AngleBendingEnergy", &calcMMFF94AngleBendingEnergy3,
 				(python::arg("term_atom1_pos"), python::arg("ctr_atom_pos"), python::arg("term_atom2_pos"), 
 				 python::arg("linear"), python::arg("force_const"), python::arg("ref_angle")));
+	python::def("calcMMFF94AngleBendingEnergy", &calcMMFF94AngleBendingEnergy4,
+				(python::arg("term_atom1_pos"), python::arg("ctr_atom_pos"), python::arg("term_atom2_pos"), 
+				 python::arg("r_ij"), python::arg("r_jk"), python::arg("linear"), python::arg("force_const"),
+				 python::arg("ref_angle")));
 
 	python::def("calcMMFF94StretchBendEnergy", &calcMMFF94StretchBendEnergy1,
 				(python::arg("ia_data"), python::arg("coords")));
@@ -195,6 +238,10 @@ void CDPLPythonForceField::exportMMFF94EnergyFunctions()
 				(python::arg("term_atom1_pos"), python::arg("ctr_atom_pos"), python::arg("term_atom2_pos"), 
 				 python::arg("ijk_force_const"), python::arg("kji_force_const"), python::arg("ref_angle"),
 				 python::arg("ref_length1"),  python::arg("ref_length2")));
+	python::def("calcMMFF94StretchBendEnergy", &calcMMFF94StretchBendEnergy4,
+				(python::arg("term_atom1_pos"), python::arg("ctr_atom_pos"), python::arg("term_atom2_pos"), 
+				 python::arg("r_ij"), python::arg("r_jk"), python::arg("ijk_force_const"), python::arg("kji_force_const"),
+				 python::arg("ref_angle"), python::arg("ref_length1"),  python::arg("ref_length2")));
 
 	python::def("calcMMFF94OutOfPlaneBendingEnergy", &calcMMFF94OutOfPlaneBendingEnergy1,
 				(python::arg("ia_data"), python::arg("coords")));
@@ -203,6 +250,9 @@ void CDPLPythonForceField::exportMMFF94EnergyFunctions()
 	python::def("calcMMFF94OutOfPlaneBendingEnergy", &calcMMFF94OutOfPlaneBendingEnergy3,
 				(python::arg("term_atom1_pos"), python::arg("ctr_atom_pos"), python::arg("term_atom2_pos"), 
 				 python::arg("oop_atom_pos"), python::arg("force_const")));
+	python::def("calcMMFF94OutOfPlaneBendingEnergy", &calcMMFF94OutOfPlaneBendingEnergy4,
+				(python::arg("term_atom1_pos"), python::arg("ctr_atom_pos"), python::arg("term_atom2_pos"), 
+				 python::arg("oop_atom_pos"), python::arg("r_jl"), python::arg("force_const")));
 
 	python::def("calcMMFF94TorsionEnergy", &calcMMFF94TorsionEnergy1,
 				(python::arg("ia_data"), python::arg("coords")));
@@ -221,6 +271,9 @@ void CDPLPythonForceField::exportMMFF94EnergyFunctions()
 				(python::arg("atom1_pos"), python::arg("atom2_pos"), python::arg("atom1_chg"), 
 				 python::arg("atom2_chg"), python::arg("scale_fact"), python::arg("de_const"),
 				 python::arg("dist_expo")));
+	python::def("calcMMFF94ElectrostaticEnergy", &calcMMFF94ElectrostaticEnergy4,
+				(python::arg("r_ij"), python::arg("atom1_chg"), python::arg("atom2_chg"), 
+				 python::arg("scale_fact"), python::arg("de_const"), python::arg("dist_expo")));
 
 	python::def("calcMMFF94VanDerWaalsEnergy", &calcMMFF94VanDerWaalsEnergy1,
 				(python::arg("ia_data"), python::arg("coords")));

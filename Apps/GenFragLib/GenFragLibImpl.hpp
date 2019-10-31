@@ -141,6 +141,7 @@ namespace GenFragLib
 		std::size_t                    smallRSysSamplingFactor;
 		unsigned int                   forceFieldType;
 		bool                           strictForceFieldParam;
+		bool                           presBondingGeom;
 		std::size_t                    maxLibSize;
 		InputHandlerPtr                inputHandler;
 		CompMoleculeReader             inputReader;

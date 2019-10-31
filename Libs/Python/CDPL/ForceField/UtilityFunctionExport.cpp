@@ -73,17 +73,30 @@ void CDPLPythonForceField::exportUtilityFunctions()
 				(python::arg("term_atom1_pos"), python::arg("ctr_atom_pos"), python::arg("term_atom2_pos")));
 	python::def("calcBondLengthsAndAngle", &calcBondLengthsAndAngle, 
 				(python::arg("term_atom1_pos"), python::arg("ctr_atom_pos"), python::arg("term_atom2_pos")));
-	python::def("calcBondAngleCos", &ForceField::calcBondAngleCos<double, Math::Vector3D>, 
+	python::def("calcBondAngleCos", 
+				static_cast<double (*)(const Math::Vector3D&, const Math::Vector3D&, const Math::Vector3D&, const double&, const double&)>
+				(&ForceField::calcBondAngleCos<double, Math::Vector3D>), 
+				(python::arg("term_atom1_pos"), python::arg("ctr_atom_pos"), python::arg("term_atom2_pos"), python::arg("r_ij"), python::arg("r_jk")));
+	python::def("calcBondAngleCos", 
+				static_cast<double (*)(const Math::Vector3D&, const Math::Vector3D&, const Math::Vector3D&)>
+				(&ForceField::calcBondAngleCos<double, Math::Vector3D>), 
 				(python::arg("term_atom1_pos"), python::arg("ctr_atom_pos"), python::arg("term_atom2_pos")));
-	python::def("calcBondAngle", &ForceField::calcBondAngle<double, Math::Vector3D>, 
+	python::def("calcBondAngle", static_cast<double (*)(const Math::Vector3D&, const Math::Vector3D&, const Math::Vector3D&, const double&, const double&)>
+				(&ForceField::calcBondAngle<double, Math::Vector3D>), 
+				(python::arg("term_atom1_pos"), python::arg("ctr_atom_pos"), python::arg("term_atom2_pos"), python::arg("r_ij"), python::arg("r_jk")));
+	python::def("calcBondAngle", static_cast<double (*)(const Math::Vector3D&, const Math::Vector3D&, const Math::Vector3D&)>
+				(&ForceField::calcBondAngle<double, Math::Vector3D>), 
 				(python::arg("term_atom1_pos"), python::arg("ctr_atom_pos"), python::arg("term_atom2_pos")));
-	python::def("calcOutOfPlaneAngle", &ForceField::calcOutOfPlaneAngle<double, Math::Vector3D>, 
+	python::def("calcOutOfPlaneAngle", static_cast<double (*)(const Math::Vector3D&, const Math::Vector3D&, const Math::Vector3D&, const Math::Vector3D&, const double&)>
+				(&ForceField::calcOutOfPlaneAngle<double, Math::Vector3D>), 
 				(python::arg("term_atom1_pos"), python::arg("ctr_atom_pos"), python::arg("term_atom2_pos"), 
-				 python::arg("oop_atom_pos")));
+				 python::arg("oop_atom_pos"), python::arg("r_jl")));
+	python::def("calcOutOfPlaneAngle", static_cast<double (*)(const Math::Vector3D&, const Math::Vector3D&, const Math::Vector3D&, const Math::Vector3D&)>
+				(&ForceField::calcOutOfPlaneAngle<double, Math::Vector3D>), 
+				(python::arg("term_atom1_pos"), python::arg("ctr_atom_pos"), python::arg("term_atom2_pos"), python::arg("oop_atom_pos")));
 	python::def("calcDihedralAngleCos", &ForceField::calcDihedralAngleCos<double, Math::Vector3D>, 
 				(python::arg("term_atom1_pos"), python::arg("ctr_atom1_pos"), python::arg("ctr_atom2_pos"),
 				 python::arg("term_atom2_pos")));
-
 	python::def("calcDistanceDerivatives", &ForceField::calcDistanceDerivatives<double, Math::Vector3D, Math::Vector3D>, 
 				(python::arg("atom1_pos"), python::arg("atom2_pos"), python::arg("atom1_deriv"), python::arg("atom2_deriv")));
 	python::def("calcBondAngleCosDerivatives", &ForceField::calcBondAngleCosDerivatives<double, Math::Vector3D, Math::Vector3D>, 

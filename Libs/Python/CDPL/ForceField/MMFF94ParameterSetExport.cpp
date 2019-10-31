@@ -1,7 +1,7 @@
 /* -*- mode: c++; c-basic-offset: 4; tab-width: 4; indent-tabs-mode: t -*- */
 
 /* 
- * NamespaceExports.hpp 
+ * MMFF94ParameterSetExport.cpp 
  *
  * This file is part of the Chemical Data Processing Toolkit
  *
@@ -24,19 +24,26 @@
  */
 
 
-#ifndef CDPL_PYTHON_FORCEFIELD_NAMESPACEEXPORTS_HPP
-#define CDPL_PYTHON_FORCEFIELD_NAMESPACEEXPORTS_HPP
+#include <boost/python.hpp>
+
+#include "CDPL/ForceField/MMFF94ParameterSet.hpp"
+
+#include "NamespaceExports.hpp"
 
 
-namespace CDPLPythonForceField
+namespace 
 {
 
-	void exportInteractionTypes();
-	void exportMMFF94ParameterSets();
-
-	void exportAtomProperties();
-	void exportBondProperties();
-	void exportMolecularGraphProperties();
+	struct MMFF94ParameterSet {};
 }
 
-#endif // CDPL_PYTHON_FORCEFIELD_NAMESPACEEXPORTS_HPP
+
+void CDPLPythonForceField::exportMMFF94ParameterSets()
+{
+	using namespace boost;
+	using namespace CDPL;
+
+	python::class_<MMFF94ParameterSet, boost::noncopyable>("MMFF94ParameterSet", python::no_init)
+		.def_readonly("DYNAMIC", &ForceField::MMFF94ParameterSet::DYNAMIC)
+		.def_readonly("STATIC", &ForceField::MMFF94ParameterSet::STATIC);
+}

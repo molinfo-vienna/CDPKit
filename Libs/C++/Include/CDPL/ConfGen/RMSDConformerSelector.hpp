@@ -31,13 +31,9 @@
 #ifndef CDPL_CONFGEN_RMSDCONFORMERSELECTOR_HPP
 #define CDPL_CONFGEN_RMSDCONFORMERSELECTOR_HPP
 
-#include <cstddef>
 #include <vector>
 
-#include <boost/iterator/indirect_iterator.hpp>
-
 #include "CDPL/ConfGen/APIPrefix.hpp"
-#include "CDPL/ConfGen/ConformerDataArray.hpp"
 #include "CDPL/Chem/Fragment.hpp"
 #include "CDPL/Chem/StereoDescriptor.hpp"
 #include "CDPL/Chem/AutomorphismGroupSearch.hpp"
@@ -63,9 +59,6 @@ namespace CDPL
 		{
 
 		  public:
-			typedef boost::indirect_iterator<ConformerDataArray::const_iterator, const ConformerData> ConstConformerIterator;
-			typedef boost::indirect_iterator<ConformerDataArray::iterator, ConformerData> ConformerIterator;
-
 			RMSDConformerSelector();
 	
 			void setMinRMSD(double min_rmsd);
@@ -77,23 +70,7 @@ namespace CDPL
 			void setup(const Chem::MolecularGraph& molgraph, const Util::BitSet& atom_mask, 
 					   const Util::BitSet& stable_config_atom_mask, const Math::Vector3DArray& coords);
 
-			bool process(const ConformerData::SharedPointer& conf_data);
-
-			void clearConformers();
-
-			std::size_t getNumConformers() const;
-
-			const ConformerData& getConformer(std::size_t idx) const;
-
-			ConformerData& getConformer(std::size_t idx);
-
-			ConstConformerIterator getConformersBegin() const;
-
-			ConstConformerIterator getConformersEnd() const;
-
-			ConformerIterator getConformersBegin();
-
-			ConformerIterator getConformersEnd();
+			bool selected(const Math::Vector3DArray& conf_coords);
 
 		  private:
 			typedef std::vector<std::size_t> IndexArray;
@@ -106,7 +83,7 @@ namespace CDPL
 
 			void buildSymMappingSearchMolGraph(const Util::BitSet& atom_mask);
 			void setupSymMappingValidationData(const Util::BitSet& stable_config_atom_mask,
-											   const Math::Vector3DArray& coords);
+											   const Math::Vector3DArray& conf_coords);
 		
 			bool processSymMapping(const Chem::MolecularGraph& molgraph, 
 								   const Chem::AtomBondMapping& mapping);
@@ -132,7 +109,6 @@ namespace CDPL
 			AlignmentCalculator           alignmentCalc;
 			VectorArrayList               confAlignCoords;
 			VectorArrayList               selectedConfAlignCoords;
-			ConformerDataArray            selectedConfs;
 			AtomList                      atomNeighbors;
 			double                        minRMSD;
 		};

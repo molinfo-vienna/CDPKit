@@ -100,8 +100,15 @@ namespace CDPL
 
 			unsigned int generateRandomConformer(ConformerData& conf);
 
-			bool init(const Chem::MolecularGraph& molgraph);
-		
+			bool init(const Chem::MolecularGraph& molgraph, unsigned int frag_type);
+
+			void applyInputBondLengthsAndAngles(const Chem::MolecularGraph& molgraph);
+
+			double getBondLength(std::size_t atom1_idx, std::size_t atom2_idx, 
+								 const Chem::MolecularGraph& molgraph) const;
+			double getBondAngle(std::size_t term_atom1_idx, std::size_t ctr_atom_idx, 
+								std::size_t term_atom2_idx, const Chem::MolecularGraph& molgraph) const;
+
 			bool checkRMSD(const Math::Vector3DArray& conf_coords, double min_rmsd);
 			
 			ConformerDataPtr getRingAtomCoordinates(const Math::Vector3DArray& conf_coords);

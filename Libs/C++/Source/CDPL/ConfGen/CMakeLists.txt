@@ -65,6 +65,7 @@ SET(cdpl-confgen_LIB_SRCS
     FallbackTorsionLibrary.cpp
     FragmentTreeNode.cpp
     FragmentTree.cpp
+    SubstituentBulkinessCalculator.cpp
     ForceFieldInteractionMask.cpp
 
     CDFMoleculeDataFunctions.cpp

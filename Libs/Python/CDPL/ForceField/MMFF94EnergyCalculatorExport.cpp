@@ -30,7 +30,6 @@
 #include "CDPL/Math/VectorArray.hpp"
 
 #include "Base/ObjectIdentityCheckVisitor.hpp"
-#include "Base/CopyAssOp.hpp"
 
 #include "ClassExports.hpp"
 
@@ -41,17 +40,21 @@ void CDPLPythonForceField::exportMMFF94EnergyCalculator()
     using namespace CDPL;
 
 	typedef ForceField::MMFF94EnergyCalculator<double> CalculatorType;
+	typedef void (CalculatorType::*SetBoolFunc)(bool);
+	typedef bool (CalculatorType::*GetBoolFunc)() const;
 
     python::class_<CalculatorType>("MMFF94EnergyCalculator", python::no_init)
 		.def(python::init<>(python::arg("self")))
 		.def(python::init<const CalculatorType&>((python::arg("self"), python::arg("calculator"))))
-		.def(python::init<const ForceField::MMFF94InteractionData&>((python::arg("self"), python::arg("ia_data"))))
+		.def(python::init<const ForceField::MMFF94InteractionData&, std::size_t>((python::arg("self"), python::arg("ia_data"), 
+																				  python::arg("num_atoms"))))
 		.def(CDPLPythonBase::ObjectIdentityCheckVisitor<CalculatorType>())
-		.def("assign", CDPLPythonBase::copyAssOp(&CalculatorType::operator=),
-			 (python::arg("self"), python::arg("calculator")), python::return_self<>())
+		.def("assign", &CalculatorType::operator=, (python::arg("self"), python::arg("calculator")), python::return_self<>())
 		.def("setEnabledInteractionTypes", &CalculatorType::setEnabledInteractionTypes, (python::arg("self"), python::arg("types")))
 		.def("getEnabledInteractionTypes", &CalculatorType::getEnabledInteractionTypes, python::arg("self"))
-		.def("setup", &CalculatorType::setup, (python::arg("self"), python::arg("ia_data")))
+		.def("setup", &CalculatorType::setup, (python::arg("self"), python::arg("ia_data"), python::arg("num_atoms")))
+		.def("enableSpeedOptimizations", SetBoolFunc(&CalculatorType::enableSpeedOptimizations), (python::arg("self"), python::arg("enable")))
+		.def("enableSpeedOptimizations", GetBoolFunc(&CalculatorType::enableSpeedOptimizations), python::arg("self"))
 		.def("__call__", &CalculatorType::operator()<Math::Vector3DArray>, (python::arg("self"), python::arg("coords")),
 			 python::return_value_policy<python::copy_const_reference>())
 		.def("getTotalEnergy", &CalculatorType::getTotalEnergy, python::arg("self"),
@@ -70,6 +73,8 @@ void CDPLPythonForceField::exportMMFF94EnergyCalculator()
 			 python::return_value_policy<python::copy_const_reference>())
 		.def("getVanDerWaalsEnergy", &CalculatorType::getVanDerWaalsEnergy, python::arg("self"),
 			 python::return_value_policy<python::copy_const_reference>())
+		.add_property("speedOptimizations", GetBoolFunc(&CalculatorType::enableSpeedOptimizations), 
+					  SetBoolFunc(&CalculatorType::enableSpeedOptimizations))
 		.add_property("enabledInteractionTypes", &CalculatorType::getEnabledInteractionTypes, 
 					  &CalculatorType::setEnabledInteractionTypes)
 		.add_property("totalEnergy", python::make_function(&CalculatorType::getTotalEnergy,

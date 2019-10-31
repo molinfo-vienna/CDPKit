@@ -103,8 +103,9 @@ double ConfGen::FragmentConformerGeneratorSettings::RingFragmentSettings::getMin
 
 
 ConfGen::FragmentConformerGeneratorSettings::FragmentConformerGeneratorSettings():
-	forceFieldType(ForceFieldType::MMFF94S_NO_ESTAT), strictParam(true), maxNumRefIters(0),
-	refStopGrad(0.1), minMacrocycleSize(10), srSamplingFactor(20) 
+	preserveBondGeom(true), forceFieldType(ForceFieldType::MMFF94S_NO_ESTAT), 
+	strictParam(true), maxNumRefIters(0), refStopGrad(0.1), minMacrocycleSize(10), 
+	srSamplingFactor(20) 
 {
 	srSettings.setMaxNumSampledConformers(2000);
 	srSettings.setMinNumSampledConformers(30);
@@ -119,6 +120,16 @@ ConfGen::FragmentConformerGeneratorSettings::FragmentConformerGeneratorSettings(
 	mcSettings.setEnergyWindow(20.0);
 	mcSettings.setMaxNumOutputConformers(1000);
 	mcSettings.setMinRMSD(0.1);
+}
+
+void ConfGen::FragmentConformerGeneratorSettings::preserveInputBondingGeometries(bool preserve)
+{
+	preserveBondGeom = preserve;
+}
+
+bool ConfGen::FragmentConformerGeneratorSettings::preserveInputBondingGeometries() const
+{
+	return preserveBondGeom;
 }
 
 void ConfGen::FragmentConformerGeneratorSettings::setForceFieldType(unsigned int type)

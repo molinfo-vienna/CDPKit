@@ -59,22 +59,22 @@ void CDPLPythonConfGen::exportTorsionDriver()
 		.def("setup", static_cast<unsigned int (ConfGen::TorsionDriver::*)(const Chem::MolecularGraph&)>(
 				 &ConfGen::TorsionDriver::setup), 
 			 (python::arg("self"), python::arg("molgraph")), python::with_custodian_and_ward<1, 2>())
-		.def ("clearInputCoordinates", static_cast<unsigned int (ConfGen::TorsionDriver::*)()>(
+		.def ("clearInputCoordinates", static_cast<void (ConfGen::TorsionDriver::*)()>(
 				  &ConfGen::TorsionDriver::clearInputCoordinates), 
 			  python::arg("self"))
-		.def ("clearInputCoordinates", static_cast<unsigned int (ConfGen::TorsionDriver::*)(std::size_t)>(
+		.def ("clearInputCoordinates", static_cast<void (ConfGen::TorsionDriver::*)(std::size_t)>(
 				  &ConfGen::TorsionDriver::clearInputCoordinates), 
 			  (python::arg("self"), python::arg("frag_idx")))
-		.def ("addInputCoordinates", static_cast<unsigned int (ConfGen::TorsionDriver::*)(const Math::Vector3DArray&)>(
+		.def ("addInputCoordinates", static_cast<void (ConfGen::TorsionDriver::*)(const Math::Vector3DArray&)>(
 				  &ConfGen::TorsionDriver::addInputCoordinates), 
 			  (python::arg("self"), python::arg("coords")))
-		.def ("addInputCoordinates", static_cast<unsigned int (ConfGen::TorsionDriver::*)(const Math::Vector3DArray&, std::size_t)>(
+		.def ("addInputCoordinates", static_cast<void (ConfGen::TorsionDriver::*)(const Math::Vector3DArray&, std::size_t)>(
 				  &ConfGen::TorsionDriver::addInputCoordinates), 
 			  (python::arg("self"), python::arg("coords"), python::arg("frag_idx")))
-		.def ("addInputCoordinates", static_cast<unsigned int (ConfGen::TorsionDriver::*)(const ConfGen::ConformerData&, std::size_t)>(
+		.def ("addInputCoordinates", static_cast<void (ConfGen::TorsionDriver::*)(const ConfGen::ConformerData&, std::size_t)>(
 				  &ConfGen::TorsionDriver::addInputCoordinates), 
 			  (python::arg("self"), python::arg("conf_data"), python::arg("frag_idx")))
-		.def ("addInputCoordinates", static_cast<unsigned int (ConfGen::TorsionDriver::*)(const ConfGen::ConformerData::SharedPointer&, std::size_t)>(
+		.def ("addInputCoordinates", static_cast<void (ConfGen::TorsionDriver::*)(const ConfGen::ConformerData::SharedPointer&, std::size_t)>(
 				  &ConfGen::TorsionDriver::addInputCoordinates), 
 			  (python::arg("self"), python::arg("conf_data"), python::arg("frag_idx")))
 		.def("setAbortCallback", &ConfGen::TorsionDriver::setAbortCallback, 

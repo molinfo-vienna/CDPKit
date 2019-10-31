@@ -62,9 +62,9 @@ namespace CDPL
 
 			unsigned int getNitrogenEnumerationMode() const;
 
-			void generateCoordinates(bool generate);
+			void generateCoordinatesFromScratch(bool generate);
 	
-			bool generateCoordinates() const;
+			bool generateCoordinatesFromScratch() const;
 
 			FragmentConformerGeneratorSettings& getFragmentBuildSettings();
 
@@ -73,7 +73,7 @@ namespace CDPL
 		  private:
 			bool                               enumRings;
 			unsigned int                       nitrogenEnumMode;
-			bool                               generateCoords;
+			bool                               fromScratch;
 			FragmentConformerGeneratorSettings fragBuildSettings;
 		};
 

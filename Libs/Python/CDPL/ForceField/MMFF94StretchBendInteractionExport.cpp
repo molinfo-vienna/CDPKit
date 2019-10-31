@@ -55,8 +55,14 @@ void CDPLPythonForceField::exportMMFF94StretchBendInteraction()
 		.def("getIJKForceConstant", &ForceField::MMFF94StretchBendInteraction::getIJKForceConstant, python::arg("self"))
 		.def("getKJIForceConstant", &ForceField::MMFF94StretchBendInteraction::getKJIForceConstant, python::arg("self"))
 		.def("getReferenceAngle", &ForceField::MMFF94StretchBendInteraction::getReferenceAngle, python::arg("self"))
+		.def("setReferenceAngle", &ForceField::MMFF94StretchBendInteraction::setReferenceAngle, 
+			 (python::arg("self"), python::arg("angle")))
 		.def("getReferenceLength1", &ForceField::MMFF94StretchBendInteraction::getReferenceLength1, python::arg("self"))
+		.def("setReferenceLength1", &ForceField::MMFF94StretchBendInteraction::setReferenceLength2, 
+			 (python::arg("self"), python::arg("length")))
 		.def("getReferenceLength2", &ForceField::MMFF94StretchBendInteraction::getReferenceLength2, python::arg("self"))
+		.def("setReferenceLength2", &ForceField::MMFF94StretchBendInteraction::setReferenceLength2, 
+			 (python::arg("self"), python::arg("length")))
 		.def("assign", CDPLPythonBase::copyAssOp(&ForceField::MMFF94StretchBendInteraction::operator=),
 			 (python::arg("self"), python::arg("iactn")), python::return_self<>())
 		.def(CDPLPythonBase::ObjectIdentityCheckVisitor<ForceField::MMFF94StretchBendInteraction>())
@@ -67,9 +73,12 @@ void CDPLPythonForceField::exportMMFF94StretchBendInteraction()
 		.add_property("atom2Index", &ForceField::MMFF94StretchBendInteraction::getAtom2Index)
 		.add_property("atom3Index", &ForceField::MMFF94StretchBendInteraction::getAtom3Index)
 		.add_property("stretchBendTypeIndex", &ForceField::MMFF94StretchBendInteraction::getStretchBendTypeIndex)
-		.add_property("referenceAngle", &ForceField::MMFF94StretchBendInteraction::getReferenceAngle)
-		.add_property("referenceLength1", &ForceField::MMFF94StretchBendInteraction::getReferenceLength1)
-		.add_property("referenceLength2", &ForceField::MMFF94StretchBendInteraction::getReferenceLength2)
+		.add_property("referenceAngle", &ForceField::MMFF94StretchBendInteraction::getReferenceAngle,
+					  &ForceField::MMFF94StretchBendInteraction::setReferenceAngle)
+		.add_property("referenceLength1", &ForceField::MMFF94StretchBendInteraction::getReferenceLength1, 
+					  &ForceField::MMFF94StretchBendInteraction::setReferenceLength1)
+		.add_property("referenceLength2", &ForceField::MMFF94StretchBendInteraction::getReferenceLength2, 
+					  &ForceField::MMFF94StretchBendInteraction::setReferenceLength2)
 		.add_property("ijkForceConstant", &ForceField::MMFF94StretchBendInteraction::getIJKForceConstant)
 		.add_property("kjiForceConstant", &ForceField::MMFF94StretchBendInteraction::getKJIForceConstant);
 }

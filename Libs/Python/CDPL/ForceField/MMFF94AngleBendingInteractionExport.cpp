@@ -54,6 +54,8 @@ void CDPLPythonForceField::exportMMFF94AngleBendingInteraction()
 		.def("isLinearAngle", &ForceField::MMFF94AngleBendingInteraction::isLinearAngle, python::arg("self"))
 		.def("getForceConstant", &ForceField::MMFF94AngleBendingInteraction::getForceConstant, python::arg("self"))
 		.def("getReferenceAngle", &ForceField::MMFF94AngleBendingInteraction::getReferenceAngle, python::arg("self"))
+		.def("setReferenceAngle", &ForceField::MMFF94AngleBendingInteraction::setReferenceAngle, 
+			 (python::arg("self"), python::arg("angle")))
 		.def("assign", CDPLPythonBase::copyAssOp(&ForceField::MMFF94AngleBendingInteraction::operator=),
 			 (python::arg("self"), python::arg("iactn")), python::return_self<>())
 		.def(CDPLPythonBase::ObjectIdentityCheckVisitor<ForceField::MMFF94AngleBendingInteraction>())
@@ -66,5 +68,6 @@ void CDPLPythonForceField::exportMMFF94AngleBendingInteraction()
 		.add_property("angleTypeIndex", &ForceField::MMFF94AngleBendingInteraction::getAngleTypeIndex)
 		.add_property("linear", &ForceField::MMFF94AngleBendingInteraction::isLinearAngle)
 		.add_property("forceConstant", &ForceField::MMFF94AngleBendingInteraction::getForceConstant)
-		.add_property("referenceAngle", &ForceField::MMFF94AngleBendingInteraction::getReferenceAngle);
+		.add_property("referenceAngle", &ForceField::MMFF94AngleBendingInteraction::getReferenceAngle,
+					  &ForceField::MMFF94AngleBendingInteraction::setReferenceAngle);
 }

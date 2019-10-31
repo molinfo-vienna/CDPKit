@@ -96,6 +96,10 @@ namespace CDPL
 	
 			virtual ~FragmentConformerGeneratorSettings() {}
 
+			void preserveInputBondingGeometries(bool preserve);
+
+			bool preserveInputBondingGeometries() const;
+
 			void setForceFieldType(unsigned int type);
 	    
 			unsigned int getForceFieldType() const;
@@ -129,6 +133,7 @@ namespace CDPL
 			std::size_t getSmallRingSystemSamplingFactor() const;
 
 		  private:
+			bool                 preserveBondGeom;
 			unsigned int         forceFieldType;
 			bool                 strictParam;
 			std::size_t          maxNumRefIters;

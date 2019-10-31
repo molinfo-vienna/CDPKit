@@ -96,6 +96,10 @@ namespace CDPL
 				return refAngle;
 			}
 
+			void setReferenceAngle(double angle) {
+				refAngle = angle;
+			}
+
 		  private:
 			std::size_t  termAtom1Idx;
 			std::size_t  ctrAtomIdx;

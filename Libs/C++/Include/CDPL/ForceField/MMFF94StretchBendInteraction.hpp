@@ -98,12 +98,24 @@ namespace CDPL
 				return refAngle;
 			}
 
+			void setReferenceAngle(double angle) {
+				refAngle = angle;
+			}
+
 			double getReferenceLength1() const {
 				return refLength1;
 			}
 
+			void setReferenceLength1(double length) {
+				refLength1 = length;
+			}
+
 			double getReferenceLength2() const {
 				return refLength2;
+			}
+
+			void setReferenceLength2(double length) {
+				refLength2 = length;
 			}
 
 		  private:

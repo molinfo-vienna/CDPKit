@@ -94,6 +94,10 @@ void CDPLPythonConfGen::exportFragmentConformerGeneratorSettings()
 		.def(CDPLPythonBase::ObjectIdentityCheckVisitor<ConfGen::FragmentConformerGeneratorSettings>())
 		.def("assign", CDPLPythonBase::copyAssOp(&ConfGen::FragmentConformerGeneratorSettings::operator=), 
 			 (python::arg("self"), python::arg("settings")), python::return_self<>())
+		.def("preserveInputBondingGeometries", SetBoolFunc(&ConfGen::FragmentConformerGeneratorSettings::preserveInputBondingGeometries), 
+			 (python::arg("self"), python::arg("preserve")))
+		.def("preserveInputBondingGeometries", GetBoolFunc(&ConfGen::FragmentConformerGeneratorSettings::preserveInputBondingGeometries), 
+			 python::arg("self"))
 		.def("setForceFieldType", &ConfGen::FragmentConformerGeneratorSettings::setForceFieldType, 
 			 (python::arg("self"), python::arg("type")))
 		.def("getForceFieldType", &ConfGen::FragmentConformerGeneratorSettings::getForceFieldType, 
@@ -127,6 +131,8 @@ void CDPLPythonConfGen::exportFragmentConformerGeneratorSettings()
 		.def("getSmallRingSystemSamplingFactor", &ConfGen::FragmentConformerGeneratorSettings::getSmallRingSystemSamplingFactor, 
 			 python::arg("self"))
 		.def_readonly("DEFAULT", ConfGen::FragmentConformerGeneratorSettings::DEFAULT)
+		.add_property("preserveInputBondingGeom", GetBoolFunc(&ConfGen::FragmentConformerGeneratorSettings::preserveInputBondingGeometries), 
+					  SetBoolFunc(&ConfGen::FragmentConformerGeneratorSettings::preserveInputBondingGeometries))
 		.add_property("forceFieldType", &ConfGen::FragmentConformerGeneratorSettings::getForceFieldType, 
 					  &ConfGen::FragmentConformerGeneratorSettings::setForceFieldType)
 		.add_property("strictForceFieldParam", GetBoolFunc(&ConfGen::FragmentConformerGeneratorSettings::strictForceFieldParameterization), 

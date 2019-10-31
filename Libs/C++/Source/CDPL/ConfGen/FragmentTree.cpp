@@ -53,8 +53,10 @@ using namespace CDPL;
 ConfGen::FragmentTree::FragmentTree(std::size_t max_conf_data_cache_size):
 	confDataCache(max_conf_data_cache_size),
 	nodeCache(boost::bind(&FragmentTree::createTreeNode, this), TreeNodeCache::DefaultDestructor(), MAX_TREE_NODE_CACHE_SIZE), 
-	molGraph(0), rootNode(0)
-{}
+	molGraph(0)
+{
+	rootNode = nodeCache.getRaw();
+}
 
 ConfGen::FragmentTree::~FragmentTree() {}
 
@@ -104,16 +106,29 @@ ConfGen::FragmentTreeNode* ConfGen::FragmentTree::getFragmentNode(std::size_t id
 	return fragToNodeMap[idx].second;
 }
 
-void ConfGen::FragmentTree::generateLeafNodes(const Chem::FragmentList& frags, const Chem::MolecularGraph& molgraph)
+void ConfGen::FragmentTree::buildTree(const Chem::FragmentList& frags, const Chem::MolecularGraph& molgraph)
 {
 	using namespace Chem;
 
-	rootNode = 0;
 	molGraph = &molgraph;
 
-	leafNodes.clear();
 	nodeCache.putAll();
 	fragToNodeMap.clear();
+
+	if (frags.isEmpty()) {
+		rootNode = allocTreeNode();
+
+		rootNode->setChildren(0, 0);
+		rootNode->setSplitBond(0);
+		rootNode->setSplitBondAtoms(0, 0);
+		rootNode->atomIndices.clear();
+		rootNode->atomMask.resize(molgraph.getNumAtoms());
+		rootNode->atomMask.reset();
+		rootNode->coreAtomMask = rootNode->atomMask;
+		return;
+	}
+
+	leafNodes.clear();
 
 	for (FragmentList::BaseType::ConstElementIterator it = frags.FragmentList::BaseType::getElementsBegin(),
 			 end = frags.FragmentList::BaseType::getElementsEnd(); it != end; ++it) {
@@ -129,12 +144,6 @@ void ConfGen::FragmentTree::generateLeafNodes(const Chem::FragmentList& frags, c
 		leafNodes.push_back(node);
 		fragToNodeMap.push_back(std::make_pair(frag, node));
 	}
-}
-
-void ConfGen::FragmentTree::buildupTree()
-{
-	if (leafNodes.empty())
-		return;
 
 	while (leafNodes.size() > 1) {
 		bool found_pair = false;

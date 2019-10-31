@@ -88,9 +88,6 @@ unsigned int ConfGen::FragmentAssembler::assemble(const Chem::MolecularGraph& mo
 		
 std::size_t ConfGen::FragmentAssembler::getNumConformers() const
 {
-	if (!impl->initialized())
-		return 0;
-
 	return impl->getNumConformers();
 }
 
@@ -112,32 +109,20 @@ ConfGen::ConformerData& ConfGen::FragmentAssembler::getConformer(std::size_t idx
 
 ConfGen::FragmentAssembler::ConstConformerIterator ConfGen::FragmentAssembler::getConformersBegin() const
 {
-	if (!impl->initialized())
-		throw Base::OperationFailed("FragmentAssembler: uninitialized");
-
 	return impl->getConformersBegin();
 }
 
 ConfGen::FragmentAssembler::ConstConformerIterator ConfGen::FragmentAssembler::getConformersEnd() const
 {
-	if (!impl->initialized())
-		throw Base::OperationFailed("FragmentAssembler: uninitialized");
-
 	return impl->getConformersEnd();
 }
 
 ConfGen::FragmentAssembler::ConformerIterator ConfGen::FragmentAssembler::getConformersBegin()
 {
-	if (!impl->initialized())
-		throw Base::OperationFailed("FragmentAssembler: uninitialized");
-
 	return impl->getConformersBegin();
 }
 
 ConfGen::FragmentAssembler::ConformerIterator ConfGen::FragmentAssembler::getConformersEnd()
 {
-	if (!impl->initialized())
-		throw Base::OperationFailed("FragmentAssembler: uninitialized");
-
 	return impl->getConformersEnd();
 }

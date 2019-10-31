@@ -117,8 +117,6 @@ namespace CDPL
 			ConstConformerIterator getConformersBegin() const;
 			ConstConformerIterator getConformersEnd() const;
 	
-			bool initialized() const;
-
 		private:
 			TorsionDriverImpl(const TorsionDriverImpl&);
 

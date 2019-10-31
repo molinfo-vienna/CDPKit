@@ -74,6 +74,10 @@ namespace CDPL
 			double getReferenceLength() const {
 				return refLength;
 			}
+	
+			void setReferenceLength(double length) {
+				refLength = length;
+			}
 
 		  private:
 			std::size_t  atom1Idx;

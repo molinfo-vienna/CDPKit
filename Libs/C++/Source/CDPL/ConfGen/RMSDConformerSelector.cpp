@@ -29,6 +29,7 @@
 #include <cmath>
 #include <algorithm>
 #include <cassert>
+#include <cstddef>
 
 #include <boost/bind.hpp>
 
@@ -91,7 +92,6 @@ void ConfGen::RMSDConformerSelector::setup(const Chem::MolecularGraph& molgraph,
 	idxArrayCache.putAll();
 	confAlignCoords.clear();
 	selectedConfAlignCoords.clear();
-	selectedConfs.clear();
 	symMappings.clear();
 }
 
@@ -102,7 +102,7 @@ void ConfGen::RMSDConformerSelector::setup(const Chem::MolecularGraph& molgraph,
 	setupSymMappingValidationData(stable_config_atom_mask, coords);
 }
 
-bool ConfGen::RMSDConformerSelector::process(const ConformerData::SharedPointer& conf_data)
+bool ConfGen::RMSDConformerSelector::selected(const Math::Vector3DArray& conf_coords)
 {
 	if (symMappings.empty()) {
 		symMappingSearch.findMappings(symMappingSearchMolGraph);
@@ -111,7 +111,7 @@ bool ConfGen::RMSDConformerSelector::process(const ConformerData::SharedPointer&
 			throw Base::OperationFailed("RMSDConformerSelector: could not perceive molecular graph automorphism group");
 	}
 
-	if (!selectedConfs.empty()) {
+	if (!selectedConfAlignCoords.empty()) {
 		std::size_t num_mappings = symMappings.size();
 		bool first_pass = true;
 		Math::Matrix4D conf_xform;
@@ -125,7 +125,7 @@ bool ConfGen::RMSDConformerSelector::process(const ConformerData::SharedPointer&
 
 			for (std::size_t i = 0; i < num_mappings; i++) {
 				if (first_pass) 
-					confAlignCoords.push_back(buildCoordsArrayForMapping(*symMappings[i], *conf_data));
+					confAlignCoords.push_back(buildCoordsArrayForMapping(*symMappings[i], conf_coords));
 				
 				if (!alignmentCalc.calculate(sel_conf_algn_coords, *confAlignCoords[i], false)) 
 					return false;
@@ -142,57 +142,9 @@ bool ConfGen::RMSDConformerSelector::process(const ConformerData::SharedPointer&
 		selectedConfAlignCoords.push_back(confAlignCoords.back());
 
 	} else
-		selectedConfAlignCoords.push_back(buildCoordsArrayForMapping(*symMappings.front(), *conf_data));
-
-	selectedConfs.push_back(conf_data);
+		selectedConfAlignCoords.push_back(buildCoordsArrayForMapping(*symMappings.front(), conf_coords));
 
 	return true;
-}
-
-void ConfGen::RMSDConformerSelector::clearConformers()
-{
-    selectedConfs.clear();
-}
-
-std::size_t ConfGen::RMSDConformerSelector::getNumConformers() const
-{
-    return selectedConfs.size();
-}
-
-const ConfGen::ConformerData& ConfGen::RMSDConformerSelector::getConformer(std::size_t idx) const
-{
-    if (idx >= selectedConfs.size())
-		throw Base::IndexError("RMSDConformerSelector: conformer index out of bounds");
-
-    return *selectedConfs[idx];
-}
-
-ConfGen::ConformerData& ConfGen::RMSDConformerSelector::getConformer(std::size_t idx)
-{
-    if (idx >= selectedConfs.size())
-		throw Base::IndexError("RMSDConformerSelector: conformer index out of bounds");
-
-    return *selectedConfs[idx];
-}
-
-ConfGen::RMSDConformerSelector::ConstConformerIterator ConfGen::RMSDConformerSelector::getConformersBegin() const
-{
-    return selectedConfs.begin();
-}
-
-ConfGen::RMSDConformerSelector::ConstConformerIterator ConfGen::RMSDConformerSelector::getConformersEnd() const
-{
-    return selectedConfs.end();
-}
-
-ConfGen::RMSDConformerSelector::ConformerIterator ConfGen::RMSDConformerSelector::getConformersBegin()
-{
-    return selectedConfs.begin();
-}
-
-ConfGen::RMSDConformerSelector::ConformerIterator ConfGen::RMSDConformerSelector::getConformersEnd()
-{
-    return selectedConfs.end();
 }
 
 void ConfGen::RMSDConformerSelector::buildSymMappingSearchMolGraph(const Util::BitSet& atom_mask)
@@ -213,7 +165,7 @@ void ConfGen::RMSDConformerSelector::buildSymMappingSearchMolGraph(const Util::B
 }
 
 void ConfGen::RMSDConformerSelector::setupSymMappingValidationData(const Util::BitSet& stable_config_atom_mask,
-																   const Math::Vector3DArray& coords)
+																   const Math::Vector3DArray& conf_coords)
 {
 	using namespace Chem;
 
@@ -237,10 +189,10 @@ void ConfGen::RMSDConformerSelector::setupSymMappingValidationData(const Util::B
 		std::size_t nbr_atom3_idx = molGraph->getAtomIndex(*atomNeighbors[2]);
 		std::size_t nbr_atom4_idx = (nbr_cnt == 4 ? molGraph->getAtomIndex(*atomNeighbors[3]) : i);
 
-		const Math::Vector3D& nbr_atom1_coords = coords[nbr_atom1_idx];
-		const Math::Vector3D& nbr_atom2_coords = coords[nbr_atom2_idx];
-		const Math::Vector3D& nbr_atom3_coords = coords[nbr_atom3_idx];
-		const Math::Vector3D& nbr_atom4_coords = coords[nbr_atom4_idx];
+		const Math::Vector3D& nbr_atom1_coords = conf_coords[nbr_atom1_idx];
+		const Math::Vector3D& nbr_atom2_coords = conf_coords[nbr_atom2_idx];
+		const Math::Vector3D& nbr_atom3_coords = conf_coords[nbr_atom3_idx];
+		const Math::Vector3D& nbr_atom4_coords = conf_coords[nbr_atom4_idx];
 
 		if (nbr_cnt == 3) {
 			double oop_angle = ForceField::calcOutOfPlaneAngle<double>(nbr_atom1_coords, nbr_atom4_coords, nbr_atom2_coords, nbr_atom3_coords);

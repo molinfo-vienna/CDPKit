@@ -50,6 +50,7 @@
 #include "FragmentAssemblerImpl.hpp"
 #include "FragmentTreeNode.hpp"
 #include "TorsionLibraryDataReader.hpp"
+#include "FallbackTorsionLibrary.hpp"
 
 
 using namespace CDPL;
@@ -58,15 +59,43 @@ using namespace CDPL;
 namespace
 {
 
-	const std::size_t MAX_TREE_CONF_DATA_CACHE_SIZE = 100;
-	const std::size_t MAX_CONF_DATA_CACHE_SIZE      = 5000;
+   const char* ASSEMBLER_TORSION_RULES = 
+	   " <library name=\"FragmentAssemblerRules\">"
+	   "  <category name=\"GG\" atomType1=\"*\" atomType2=\"*\">"
+	   "   <rule pattern=\"[*,#1:1]~[*X3:2]=[*X2:3]=[*X3]~[*,#1:4]\">"
+	   "    <torsions>"
+	   "     <angle value=\"90.0\" tolerance1=\"0.0\" tolerance2=\"0.0\" score=\"0.0\"/>"
+	   "    </torsions>"
+	   "   </rule>"
+	   "   <rule pattern=\"[*,#1:1]~[*X3:2]=[*X2:3]=[*X2]=[*X3]~[*,#1:4]\">"
+	   "    <torsions>"
+	   "     <angle value=\"0.0\" tolerance1=\"0.0\" tolerance2=\"0.0\" score=\"0.0\"/>"
+	   "    </torsions>"
+	   "   </rule>"
+	   "  </category"
+	   " </library>";
+
+    ConfGen::TorsionLibrary::SharedPointer assemblerTorLib(new ConfGen::TorsionLibrary());
+
+	struct Init {
+
+
+		Init() {
+			ConfGen::TorsionLibraryDataReader().read(ASSEMBLER_TORSION_RULES, *assemblerTorLib);
+		}
+	};
+
+	const std::size_t MAX_TREE_CONF_DATA_CACHE_SIZE       = 10000;
+	const std::size_t MAX_CHAIN_TREE_CONF_DATA_CACHE_SIZE = 100;
+	const std::size_t MAX_CONF_DATA_CACHE_SIZE            = 5000;
 
 	const double MAX_PLANAR_ATOM_GEOM_OOP_ANGLE     = 15.0 / 180.0 * M_PI;
 }
 
 
 ConfGen::FragmentAssemblerImpl::FragmentAssemblerImpl():
-	confDataCache(MAX_CONF_DATA_CACHE_SIZE), fragTree(MAX_TREE_CONF_DATA_CACHE_SIZE)
+	confDataCache(MAX_CONF_DATA_CACHE_SIZE), fragTree(MAX_TREE_CONF_DATA_CACHE_SIZE), 
+	chainFragTree(MAX_CHAIN_TREE_CONF_DATA_CACHE_SIZE)
 {
 	fragLibs.push_back(FragmentLibrary::get());
 } 
@@ -116,9 +145,11 @@ const ConfGen::CallbackFunction& ConfGen::FragmentAssemblerImpl::getTimeoutCallb
 
 unsigned int ConfGen::FragmentAssemblerImpl::assemble(const Chem::MolecularGraph& molgraph, 
 													  const Chem::MolecularGraph& parent_molgraph, 
-													  const MMFF94InteractionData& ia_data)
+													  const MMFF94InteractionData& ia_data,
+													  bool recalc_subst_blks)
 {
 	usedMMFF94Data = &ia_data;
+	recalcSubstBlks = recalc_subst_blks;
 
 	return doAssemble(molgraph, parent_molgraph);
 }
@@ -126,6 +157,7 @@ unsigned int ConfGen::FragmentAssemblerImpl::assemble(const Chem::MolecularGraph
 unsigned int ConfGen::FragmentAssemblerImpl::assemble(const Chem::MolecularGraph& molgraph)
 {
 	usedMMFF94Data = 0;
+	recalcSubstBlks = true;
 
 	return doAssemble(molgraph, molgraph);
 }
@@ -150,13 +182,10 @@ ConfGen::FragmentAssemblerImpl::ConstConformerIterator ConfGen::FragmentAssemble
 	return fragTree.getRoot()->getConformers().end();
 }
 
-bool ConfGen::FragmentAssemblerImpl::initialized()
-{
-	return fragTree.getRoot();
-}
-
 void ConfGen::FragmentAssemblerImpl::init(const Chem::MolecularGraph& parent_molgraph)
 {
+	fragConfGen.getSettings() = settings.getFragmentBuildSettings();
+
 	confDataCache.putAll();
 
 	invertibleNMask.resize(parent_molgraph.getNumAtoms());
@@ -232,12 +261,13 @@ unsigned int ConfGen::FragmentAssemblerImpl::setupFragmentConformers()
 		const Fragment& frag = *fragTree.getFragment(i); 
 		FragmentTreeNode* frag_node = fragTree.getFragmentNode(i); 
 		unsigned int frag_type = perceiveFragmentType(frag);
-		
-		if (!(!settings.generateCoordinates() && 
+
+		if (!(!settings.generateCoordinatesFromScratch() && 
 			  (!settings.enumerateRings() || frag_type != FragmentType::FLEXIBLE_RING_SYSTEM) && 
 			  transferInputCoordinates(frag_type, frag, frag_node))) {
 
 			fragLibEntry.create(frag);
+
 			buildFragmentLibraryEntryAtomIndexMap(frag, frag_node);
 
 			if (!fetchConformersFromFragmentLibrary(frag_type, frag, frag_node)) {
@@ -437,7 +467,432 @@ void ConfGen::FragmentAssemblerImpl::fixBondLengths(const Chem::Fragment& frag, 
 void ConfGen::FragmentAssemblerImpl::postprocChainFragment(bool fix_stereo, bool opt_db_stereo, 
 														   const Chem::Fragment& frag, FragmentTreeNode* node)
 {
-	// TODO
+	using namespace Chem;
+
+	fragSplitBonds.clear();
+	fragSplitBondMask.resize(frag.getNumBonds());
+	fragSplitBondMask.reset();
+
+	bool have_inv_n = (getInvertibleNitrogens(frag, node) > 0);
+	const MolecularGraph& parent_molgraph = *fragTree.getMolecularGraph();
+	
+	if (have_inv_n)
+		for (Util::BitSet::size_type i = invertedNMask.find_first(); i != Util::BitSet::npos; i = invertedNMask.find_next(i))
+			getNeighborSplitBonds(parent_molgraph.getAtom(i), frag);
+
+	bool need_atom_config_changes = false;
+	bool need_bond_config_changes = false;
+
+	if (fix_stereo)
+		need_atom_config_changes = checkChainAtomConfigurations(have_inv_n, frag, node);
+
+	if (fix_stereo || opt_db_stereo) 
+		need_bond_config_changes = checkChainBondConfigurations(fix_stereo, opt_db_stereo, frag, node);
+
+	if (fragSplitBonds.empty()) {
+		if (need_atom_config_changes)
+			mirrorCoordinates(*node->getConformers().front(), node);
+
+		else if (have_inv_n)
+			copyAndMirrorCoordinates(*node->getConformers().front(), node);
+
+		return;
+	}
+
+	splitIntoFragments(frag, fragments, fragSplitBondMask, false);
+	chainFragTree.build(fragments, parent_molgraph, fragSplitBonds.begin(), fragSplitBonds.end());
+
+	const ConformerData::SharedPointer& conf = node->getConformers().front();
+
+	for (std::size_t i = 0, num_frags = chainFragTree.getNumFragments(); i < num_frags; i++) {
+		FragmentTreeNode* frag_node = chainFragTree.getFragmentNode(i); 
+
+		if (need_atom_config_changes) {
+			tmpBitSet = frag_node->getCoreAtomMask();
+			tmpBitSet &= atomConfigChgMask;
+
+			if (tmpBitSet.any()) {
+				copyAndMirrorCoordinates(*conf, frag_node);
+				continue;
+			}
+		} 
+
+		if (have_inv_n) {
+			tmpBitSet = frag_node->getCoreAtomMask();
+			tmpBitSet &= invertedNMask;
+
+			if (tmpBitSet.any()) {
+				frag_node->addConformer(*conf);
+				copyAndMirrorCoordinates(*conf, frag_node);
+				continue;
+			}
+		}
+
+		frag_node->addConformer(*conf);
+	}
+
+	assignChainSplitBondTorsions(need_bond_config_changes, *conf, chainFragTree.getRoot());
+
+	chainFragTree.getRoot()->generateConformers(false);
+
+	bool first_conf = true;
+
+	for (std::size_t i = 0, num_gen_confs = chainFragTree.getRoot()->getNumConformers(); i < num_gen_confs; i++) {
+		const ConformerData::SharedPointer& gen_conf = chainFragTree.getRoot()->getConformers()[i];
+
+		if (first_conf) {
+			conf->swap(*gen_conf);
+			first_conf = false;
+			continue;
+		}
+
+		ConformerData::SharedPointer new_conf = allocConformerData();
+
+		new_conf->swap(*gen_conf);
+		node->addConformer(new_conf);
+	}
+}
+
+bool ConfGen::FragmentAssemblerImpl::checkChainAtomConfigurations(bool have_inv_n, const Chem::Fragment& frag, FragmentTreeNode* node)
+{
+	using namespace Chem;
+
+	const Math::Vector3DArray& coords = *node->getConformers().front();
+	const MolecularGraph& parent_molgraph = *fragTree.getMolecularGraph();
+	bool need_config_changes = false;
+
+	atomConfigChgMask.resize(parent_molgraph.getNumAtoms());
+	atomConfigChgMask.reset();
+
+	const FragmentTreeNode::IndexArray& atom_inds = node->getAtomIndices();
+
+	for (std::size_t i = 0, num_atoms = frag.getNumAtoms(); i < num_atoms; i++) {
+		if (have_inv_n && invertedNMask.test(atom_inds[i]))
+			continue;
+
+		const Atom& atom = frag.getAtom(i);
+				
+		if (!isStereoCenter(atom, frag, false))
+			continue;
+
+		const StereoDescriptor& descr = getStereoDescriptor(atom);
+		unsigned int config = descr.getConfiguration();
+
+		if (config != AtomConfiguration::R && config != AtomConfiguration::S)
+			continue;
+
+		if (!descr.isValid(atom))
+			continue;
+
+		std::size_t num_ref_atoms = descr.getNumReferenceAtoms();
+		const Chem::Atom* const* ref_atoms = descr.getReferenceAtoms();
+		bool descr_valid = true;
+
+		for (std::size_t i = 0; i < num_ref_atoms; i++) {
+			if (!frag.containsAtom(*ref_atoms[i])) {
+				descr_valid = false;
+				break;
+			}
+		}
+
+		if (!descr_valid)
+			continue;
+
+		if (calcAtomConfiguration(atom, parent_molgraph, descr, coords) == config) 
+			continue;
+			
+		atomConfigChgMask.set(atom_inds[i]);
+		need_config_changes = true;
+
+		getNeighborSplitBonds(atom, frag);
+	}
+
+	return need_config_changes;
+}
+
+bool ConfGen::FragmentAssemblerImpl::checkChainBondConfigurations(bool check_stereo, bool opt_stereo, 
+																  const Chem::Fragment& frag, FragmentTreeNode* node)
+{
+	using namespace Chem;
+
+	const Math::Vector3DArray& coords = *node->getConformers().front();
+	const MolecularGraph& parent_molgraph = *fragTree.getMolecularGraph();
+	bool need_config_changes = false;
+
+	bondConfigChgMask.resize(parent_molgraph.getNumBonds());
+	bondConfigChgMask.reset();
+
+	for (std::size_t i = 0, num_bonds = frag.getNumBonds(); i < num_bonds; i++) {
+		const Bond& bond = frag.getBond(i);
+
+		if (!isStereoCenter(bond, frag, false, 0))
+			continue;
+
+		const StereoDescriptor& descr = getStereoDescriptor(bond);
+		unsigned int config = descr.getConfiguration();
+
+		if ((config == BondConfiguration::CIS || config == BondConfiguration::TRANS) && descr.isValid(bond)) {
+			const Atom* const* ref_atoms = descr.getReferenceAtoms();
+			bool descr_valid = true;
+	
+			for (std::size_t i = 0; i < 4; i++) {
+				if (!frag.containsAtom(*ref_atoms[i])) {
+					descr_valid = false;
+					break;
+				}
+			}
+
+			if (descr_valid) {
+				if (check_stereo) {
+					if (calcBondConfiguration(bond, parent_molgraph, descr, coords) == config)
+						continue;
+
+					fragSplitBonds.push_back(&bond);
+					fragSplitBondMask.set(i);
+					bondConfigChgMask.set(parent_molgraph.getBondIndex(bond));
+					need_config_changes = true;
+				}
+
+				continue;
+			}
+		} 
+
+		if (!opt_stereo)
+			continue;
+
+		// choose trans config of bulkiest substituents
+
+		const Atom& atom1 = bond.getBegin();
+		const Atom& atom2 = bond.getEnd();
+	
+		const Atom* subst1_atom = getBulkiestDoubleBondSubstituent(atom1, atom2, frag);
+
+		if (!subst1_atom)
+			continue;
+
+		const Atom* subst2_atom = getBulkiestDoubleBondSubstituent(atom2, atom1, frag);
+
+		if (!subst2_atom)
+			continue;
+
+		if (calcBondConfiguration(bond, parent_molgraph, 
+								  StereoDescriptor(BondConfiguration::TRANS, *subst1_atom, atom1, atom2, *subst2_atom), 
+								  coords) == BondConfiguration::TRANS)
+			continue;
+
+		fragSplitBonds.push_back(&bond);
+		fragSplitBondMask.set(i);
+		bondConfigChgMask.set(parent_molgraph.getBondIndex(bond));
+		need_config_changes = true;
+	}
+
+	return need_config_changes;
+}
+
+void ConfGen::FragmentAssemblerImpl::getNeighborSplitBonds(const Chem::Atom& atom, const Chem::Fragment& frag)
+{
+	using namespace Chem;
+
+	Atom::ConstBondIterator b_it = atom.getBondsBegin();
+
+	for (Atom::ConstAtomIterator a_it = atom.getAtomsBegin(), a_end = atom.getAtomsEnd(); a_it != a_end; ++a_it, ++b_it) {
+		const Atom& nbr_atom = *a_it;
+		const Bond& bond = *b_it;
+
+		if (!frag.containsAtom(nbr_atom) || !frag.containsBond(bond))
+			continue;
+
+		if (getHeavyBondCount(nbr_atom, frag) < 2)
+			continue;
+
+		fragSplitBonds.push_back(&bond);
+		fragSplitBondMask.set(frag.getBondIndex(bond));
+	} 
+}
+
+const Chem::Atom* ConfGen::FragmentAssemblerImpl::getBulkiestDoubleBondSubstituent(const Chem::Atom& atom, const Chem::Atom& db_nbr_atom, 
+																				   const Chem::Fragment& frag)
+{
+	using namespace Chem;
+
+	Atom::ConstAtomIterator atoms_end = atom.getAtomsEnd();
+	Atom::ConstBondIterator b_it = atom.getBondsBegin();
+
+	const Atom* bkst_subst = 0;
+	std::size_t bkst_subst_bks = 0;
+	std::size_t bond_cnt = 0;
+
+	for (Atom::ConstAtomIterator a_it = atom.getAtomsBegin(); a_it != atoms_end; ++a_it, ++b_it) {
+		const Atom& nbr_atom = *a_it;
+
+		if (&nbr_atom == &db_nbr_atom)
+			continue;
+
+		if (!frag.containsAtom(nbr_atom) || !frag.containsBond(*b_it))
+			continue;
+
+		if (++bond_cnt > 2)
+			return 0;
+
+		std::size_t nbr_bks = getSubstituentBulkiness(nbr_atom);
+
+		if (!bkst_subst || nbr_bks > bkst_subst_bks) {
+			bkst_subst = &nbr_atom;
+			bkst_subst_bks = nbr_bks;
+
+		} else if (bkst_subst_bks == nbr_bks)
+			return 0;
+	}
+
+	return bkst_subst;
+}
+
+const Chem::Atom* ConfGen::FragmentAssemblerImpl::getBulkiestSubstituent(const Chem::Atom& atom, const Chem::Atom& excl_atom, 
+																		 FragmentTreeNode* node)
+{
+	using namespace Chem;
+
+	Atom::ConstAtomIterator atoms_end = atom.getAtomsEnd();
+	Atom::ConstBondIterator b_it = atom.getBondsBegin();
+	const MolecularGraph& parent_molgraph = *fragTree.getMolecularGraph();
+
+	const Atom* bkst_subst = 0;
+	std::size_t bkst_subst_bks = 0;
+
+	for (Atom::ConstAtomIterator a_it = atom.getAtomsBegin(); a_it != atoms_end; ++a_it, ++b_it) {
+		const Atom& nbr_atom = *a_it;
+
+		if (&nbr_atom == &excl_atom)
+			continue;
+
+		if (!node->containsAtom(nbr_atom))
+			continue;
+
+		if (!parent_molgraph.containsBond(*b_it))
+			continue;
+
+		std::size_t nbr_bks = getSubstituentBulkiness(nbr_atom);
+
+		if (!bkst_subst || nbr_bks > bkst_subst_bks) {
+			bkst_subst = &nbr_atom;
+			bkst_subst_bks = nbr_bks;
+
+		} else if (bkst_subst_bks == nbr_bks)
+			return 0;
+	}
+
+	return bkst_subst;
+}
+
+std::size_t ConfGen::FragmentAssemblerImpl::getSubstituentBulkiness(const Chem::Atom& atom)
+{
+	const Chem::MolecularGraph& parent_molgraph = *fragTree.getMolecularGraph();
+
+	if (recalcSubstBlks) {
+		substBulkCalc.calculate(parent_molgraph);
+		recalcSubstBlks = false;
+	}
+
+	return substBulkCalc[parent_molgraph.getAtomIndex(atom)];
+}
+
+void ConfGen::FragmentAssemblerImpl::mirrorCoordinates(Math::Vector3DArray& coords, FragmentTreeNode* node) const
+{
+	Math::Vector3DArray::StorageType& coords_data = coords.getData();
+	const FragmentTreeNode::IndexArray& atom_inds = node->getAtomIndices();
+
+	for (FragmentTreeNode::IndexArray::const_iterator it = atom_inds.begin(), end = atom_inds.end(); it != end; ++it) 
+		coords_data[*it].getData()[2] *= -1.0;
+}
+
+void ConfGen::FragmentAssemblerImpl::copyAndMirrorCoordinates(const Math::Vector3DArray& coords, FragmentTreeNode* node)
+{
+	const Math::Vector3DArray::StorageType& coords_data = coords.getData();
+	const FragmentTreeNode::IndexArray& atom_inds = node->getAtomIndices();
+
+	ConformerData::SharedPointer mirr_coords = allocConformerData();
+	Math::Vector3DArray::StorageType& mirr_coords_data = mirr_coords->getData();
+
+	for (FragmentTreeNode::IndexArray::const_iterator it = atom_inds.begin(), end = atom_inds.end(); it != end; ++it) {
+		std::size_t idx = *it;
+		Math::Vector3D::ConstPointer pos_data = coords_data[idx].getData();
+		Math::Vector3D::Pointer mirr_pos_data = mirr_coords_data[idx].getData();
+
+		mirr_pos_data[0] = pos_data[0];
+		mirr_pos_data[1] = pos_data[1];
+		mirr_pos_data[2] = -pos_data[2];
+	}
+
+	node->addConformer(mirr_coords);
+}
+
+void ConfGen::FragmentAssemblerImpl::assignChainSplitBondTorsions(bool bond_config_changes, const Math::Vector3DArray& coords, 
+																  FragmentTreeNode* node) const
+{
+	using namespace Chem;
+
+	if (!node->hasChildren())
+		return;
+
+	assignChainSplitBondTorsions(bond_config_changes, coords, node->getLeftChild());
+	assignChainSplitBondTorsions(bond_config_changes, coords, node->getRightChild());
+
+	const Bond* bond = node->getSplitBond();
+
+	if (!bond)
+		return;
+
+	const Atom* const* bond_atoms = node->getSplitBondAtoms();
+	const Atom* ref_atom1 = getFirstNeighborAtom(bond_atoms[0], bond_atoms[1], node);
+
+	if (!ref_atom1)
+		return;
+
+	const Atom* ref_atom2 = getFirstNeighborAtom(bond_atoms[1], bond_atoms[0], node);
+
+	if (!ref_atom2)
+		return;
+
+	node->setTorsionReferenceAtoms(ref_atom1, ref_atom2);
+
+	const MolecularGraph& parent_molgraph = *fragTree.getMolecularGraph();
+	const Math::Vector3DArray::StorageType& coords_data = coords.getData();
+
+	double tor_angle = std::acos(ForceField::calcDihedralAngleCos<double>(coords_data[parent_molgraph.getAtomIndex(*ref_atom1)].getData(),
+																		  coords_data[parent_molgraph.getAtomIndex(*bond_atoms[0])].getData(), 
+																		  coords_data[parent_molgraph.getAtomIndex(*bond_atoms[1])].getData(), 
+																		  coords_data[parent_molgraph.getAtomIndex(*ref_atom2)].getData()));
+
+	FragmentTreeNode::TorsionAngleArray& tor_angles = node->getTorsionAngles();
+
+	if (bond_config_changes && bondConfigChgMask.test(parent_molgraph.getBondIndex(*bond)))
+		tor_angles.push_back(tor_angle * 180.0 / M_PI + 180.0);
+	else
+		tor_angles.push_back(-tor_angle * 180.0 / M_PI + 180.0);
+}
+
+const Chem::Atom* ConfGen::FragmentAssemblerImpl::getFirstNeighborAtom(const Chem::Atom* ctr_atom, const Chem::Atom* excl_atom,
+																	   const FragmentTreeNode* node) const
+{
+	using namespace Chem;
+
+	Atom::ConstBondIterator b_it = ctr_atom->getBondsBegin();
+	const MolecularGraph& parent_molgraph = *fragTree.getMolecularGraph();
+
+	for (Atom::ConstAtomIterator a_it = ctr_atom->getAtomsBegin(), a_end = ctr_atom->getAtomsEnd(); a_it != a_end; ++a_it, ++b_it) {
+		const Atom& nbr_atom = *a_it;
+
+		if (excl_atom == &nbr_atom)
+			continue;
+
+		if (!parent_molgraph.containsBond(*b_it))
+			continue;
+
+		if (node->containsAtom(nbr_atom))
+			return &nbr_atom;
+	}
+
+	return 0;
 }
 
 void ConfGen::FragmentAssemblerImpl::enumRingFragmentNitrogens(const Chem::Fragment& frag, FragmentTreeNode* node)
@@ -457,7 +912,7 @@ void ConfGen::FragmentAssemblerImpl::enumRingFragmentNitrogens(const Chem::Fragm
 	Math::Vector3D::ConstPointer plane_normal_data = plane_normal.getData();
 
 	for (Util::BitSet::size_type i = invertedNMask.find_first(); i != Util::BitSet::npos; i = invertedNMask.find_next(i)) {
-		const Atom& atom = frag.getAtom(i);
+		const Atom& atom = parent_molgraph.getAtom(i);
 		const Atom* ring_nbr1 = 0;
 		const Atom* ring_nbr2 = 0;
 		const Atom* subst_nbr = 0;
@@ -484,14 +939,13 @@ void ConfGen::FragmentAssemblerImpl::enumRingFragmentNitrogens(const Chem::Fragm
 		if (!subst_nbr || !ring_nbr2) // sanity check
 			continue;
 
-		std::size_t ctr_atom_idx = atom_inds[i];
 		std::size_t ring_nbr1_idx = parent_molgraph.getAtomIndex(*ring_nbr1);
 		std::size_t ring_nbr2_idx = parent_molgraph.getAtomIndex(*ring_nbr2);
 		std::size_t subst_nbr_idx = parent_molgraph.getAtomIndex(*subst_nbr);
 
 		for (std::size_t j = 0, num_confs = node->getNumConformers(); j < num_confs; j++) {
 			const Math::Vector3DArray::StorageType& conf_coords_data = node->getConformers()[j]->getData();
-			const Math::Vector3D& ctr_atom_pos = conf_coords_data[ctr_atom_idx];
+			const Math::Vector3D& ctr_atom_pos = conf_coords_data[i];
 
 			ring_nbr1_vec.assign(conf_coords_data[ring_nbr1_idx] - ctr_atom_pos);
 			ring_nbr2_vec.assign(conf_coords_data[ring_nbr2_idx] - ctr_atom_pos);
@@ -543,18 +997,17 @@ std::size_t ConfGen::FragmentAssemblerImpl::getInvertibleNitrogens(const Chem::F
 	if (n_enum_mode == NitrogenEnumerationMode::NONE)
 		return 0;
 
-	std::size_t num_atoms = frag.getNumAtoms();
-
-	invertedNMask.resize(num_atoms);
-	invertedNMask.reset();
-
 	const Math::Vector3DArray::StorageType& coords_data = node->getConformers().front()->getData();
 	const Util::BitSet& core_atom_mask = node->getCoreAtomMask();
 	const FragmentTreeNode::IndexArray& atom_inds = node->getAtomIndices();
+	const MolecularGraph& parent_molgraph = *fragTree.getMolecularGraph();
+
+	invertedNMask.resize(parent_molgraph.getNumAtoms());
+	invertedNMask.reset();
 
 	std::size_t inv_n_cnt = 0;
 
-	for (std::size_t i = 0; i < num_atoms; i++) {
+	for (std::size_t i = 0, num_atoms = frag.getNumAtoms(); i < num_atoms; i++) {
 		std::size_t parent_atom_idx = atom_inds[i];
 
 		if (!core_atom_mask.test(parent_atom_idx))
@@ -593,14 +1046,14 @@ std::size_t ConfGen::FragmentAssemblerImpl::getInvertibleNitrogens(const Chem::F
 			if (getType(nbr_atom) == AtomType::H && (++h_bond_count > 1))
 				break;
 
-			nbr_atom_indices[j++] = fragTree.getMolecularGraph()->getAtomIndex(nbr_atom);
+			nbr_atom_indices[j++] = parent_molgraph.getAtomIndex(nbr_atom);
 		}
 
 		if (j != 3)
 			continue;
 
-		double oop_angle = ForceField::calcOutOfPlaneAngle<double>(coords_data[nbr_atom_indices[0]], coords_data[parent_atom_idx],
-																   coords_data[nbr_atom_indices[1]], coords_data[nbr_atom_indices[2]]);
+		double oop_angle = ForceField::calcOutOfPlaneAngle<double>(coords_data[nbr_atom_indices[0]].getData(), coords_data[parent_atom_idx].getData(),
+																   coords_data[nbr_atom_indices[1]].getData(), coords_data[nbr_atom_indices[2]].getData());
 
 		if (std::abs(oop_angle) <= MAX_PLANAR_ATOM_GEOM_OOP_ANGLE)
 			continue;
@@ -609,12 +1062,26 @@ std::size_t ConfGen::FragmentAssemblerImpl::getInvertibleNitrogens(const Chem::F
 
 		if (n_enum_mode == NitrogenEnumerationMode::UNSPECIFIED_STEREO) {
 			const StereoDescriptor& descr = getStereoDescriptor(atom);
+			unsigned int config = descr.getConfiguration();
 
-			if (descr.isValid(atom) && (descr.getConfiguration() == AtomConfiguration::R || descr.getConfiguration() == AtomConfiguration::S))
-				continue;
+			if (descr.isValid(atom) && (config == AtomConfiguration::R || config == AtomConfiguration::S)) {
+				std::size_t num_ref_atoms = descr.getNumReferenceAtoms();
+				const Chem::Atom* const* ref_atoms = descr.getReferenceAtoms();
+				bool descr_valid = true;
+
+				for (std::size_t j = 0; j < num_ref_atoms; j++) {
+					if (!frag.containsAtom(*ref_atoms[j])) {
+						descr_valid = false;
+						break;
+					}
+				}
+
+				if (descr_valid)
+					continue;
+			}
 		}
 
-		invertedNMask.set(i);
+		invertedNMask.set(parent_atom_idx);
 		inv_n_cnt++;
 	}
 
@@ -635,7 +1102,100 @@ void ConfGen::FragmentAssemblerImpl::buildFragmentLibraryEntryAtomIndexMap(const
 
 void ConfGen::FragmentAssemblerImpl::assignLinkBondTorsions(FragmentTreeNode* node) 
 {
-	// TODO
+	using namespace Chem;
+
+	if (!node->hasChildren())
+		return;
+
+	assignLinkBondTorsions(node->getLeftChild());
+	assignLinkBondTorsions(node->getRightChild());
+
+	const Bond* bond = node->getSplitBond();
+
+	if (!bond)
+		return;
+
+	const Atom* const* bond_atoms = node->getSplitBondAtoms();
+	FragmentTreeNode::TorsionAngleArray& tor_angles = node->getTorsionAngles();
+
+	const TorsionRuleMatch* match = getMatchingTorsionRule(*bond);
+
+	if (match && match->getRule().getNumAngles() > 0) {
+		tor_angles.push_back(match->getRule().getAngle(0).getAngle());
+
+		const Atom* const* match_atoms = match->getAtoms();
+				
+		if (match_atoms[1] == bond_atoms[0])
+			node->setTorsionReferenceAtoms(match_atoms[0], match_atoms[3]);
+		else
+			node->setTorsionReferenceAtoms(match_atoms[3], match_atoms[0]);
+	
+		return;
+	}
+
+	const MolecularGraph& parent_molgraph = *fragTree.getMolecularGraph();
+
+	if (isStereoCenter(*bond, parent_molgraph, false, 0)) {
+		// torsion setup for stereo double bonds
+
+		const StereoDescriptor& descr = getStereoDescriptor(*bond);
+		const Atom* const* ref_atoms = descr.getReferenceAtoms();
+		unsigned int config = descr.getConfiguration();
+		bool descr_valid = true;
+
+		if ((config == BondConfiguration::CIS || config == BondConfiguration::TRANS) && descr.isValid(*bond)) {
+			for (std::size_t i = 0; i < 4; i++) {
+				if (!node->containsAtom(*ref_atoms[i])) {
+					descr_valid = false;
+					break;
+				}
+			}
+		
+			if (descr_valid) {
+				// choose angle that results in desired configuration
+
+				if (ref_atoms[1] == bond_atoms[0])
+					node->setTorsionReferenceAtoms(ref_atoms[0], ref_atoms[3]);
+				else
+					node->setTorsionReferenceAtoms(ref_atoms[3], ref_atoms[0]);
+
+				tor_angles.push_back(config == BondConfiguration::CIS ? 0.0 : 180.0);
+				return;
+			}
+		} 
+	}
+
+	// choose trans configuration of bulkiest substituents
+
+	const Atom* ref_atom1 = getBulkiestSubstituent(*bond_atoms[0], *bond_atoms[1], node);
+
+	if (!ref_atom1)
+		return;
+
+	const Atom* ref_atom2 = getBulkiestSubstituent(*bond_atoms[1], *bond_atoms[0], node);
+
+	if (!ref_atom2)
+		return;
+
+	node->setTorsionReferenceAtoms(ref_atom1, ref_atom2);
+	tor_angles.push_back(180.0);
+}
+
+const ConfGen::TorsionRuleMatch* ConfGen::FragmentAssemblerImpl::getMatchingTorsionRule(const Chem::Bond& bond)
+{
+	const Chem::MolecularGraph& molgraph = *fragTree.getMolecularGraph();
+
+	torRuleMatcher.setTorsionLibrary(assemblerTorLib);
+
+	if (torRuleMatcher.findMatches(bond, molgraph, false)) 
+		return &torRuleMatcher.getMatch(0); 
+	
+	torRuleMatcher.setTorsionLibrary(getFallbackTorsionLibrary());
+
+	if (torRuleMatcher.findMatches(bond, molgraph, false)) 
+		return &torRuleMatcher.getMatch(0); 
+
+	return 0;
 }
 
 const ForceField::MMFF94InteractionData* ConfGen::FragmentAssemblerImpl::getMMFF94Parameters()

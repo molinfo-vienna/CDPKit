@@ -41,14 +41,10 @@
 using namespace CDPL; 
 
 	
-ForceField::MMFF94InteractionParameterizer::MMFF94InteractionParameterizer(bool mmff94s): strictParam(true)
+ForceField::MMFF94InteractionParameterizer::MMFF94InteractionParameterizer(unsigned int param_set): strictParam(true)
 {
 	setPropertyFunctions();
-
-	if (mmff94s)
-		setStaticParameterDefaults();
-	else
-		setDynamicParameterDefaults();
+	useParameterSet(param_set);
 }
 
 ForceField::MMFF94InteractionParameterizer::MMFF94InteractionParameterizer(const MMFF94InteractionParameterizer& parameterizer):
@@ -209,16 +205,10 @@ void ForceField::MMFF94InteractionParameterizer::setVanDerWaalsParameterTable(co
 	vanDerWaalsParameterizer.setVanDerWaalsParameterTable(table);
 }
 
-void ForceField::MMFF94InteractionParameterizer::setStaticParameterDefaults()
+void ForceField::MMFF94InteractionParameterizer::useParameterSet(unsigned int param_set)
 {
-	outOfPlaneParameterizer.setOutOfPlaneBendingParameterTable(MMFF94OutOfPlaneBendingParameterTable::get(true));
-	torsionParameterizer.setTorsionParameterTable(MMFF94TorsionParameterTable::get(true));
-}
-
-void ForceField::MMFF94InteractionParameterizer::setDynamicParameterDefaults()
-{
-	outOfPlaneParameterizer.setOutOfPlaneBendingParameterTable(MMFF94OutOfPlaneBendingParameterTable::get(false));
-	torsionParameterizer.setTorsionParameterTable(MMFF94TorsionParameterTable::get(false));
+	outOfPlaneParameterizer.setOutOfPlaneBendingParameterTable(MMFF94OutOfPlaneBendingParameterTable::get(param_set));
+	torsionParameterizer.setTorsionParameterTable(MMFF94TorsionParameterTable::get(param_set));
 }
 
 void ForceField::MMFF94InteractionParameterizer::strictParameterization(bool strict)

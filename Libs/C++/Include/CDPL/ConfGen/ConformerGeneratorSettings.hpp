@@ -70,9 +70,9 @@ namespace CDPL
 
 			unsigned int getNitrogenEnumerationMode() const;
 
-			void generateCoordinates(bool generate);
+			void generateCoordinatesFromScratch(bool generate);
 	
-			bool generateCoordinates() const;
+			bool generateCoordinatesFromScratch() const;
 
 			void outputSuppliedCoordinates(bool output);
 	
@@ -110,7 +110,7 @@ namespace CDPL
 			bool                               sampleHetAtomHs;
 			bool                               enumRings;
 			unsigned int                       nitrogenEnumMode;
-			bool                               generateCoords;
+			bool                               fromScratch;
 			bool                               outputSupplCoords;
 			double                             eWindow;
 			std::size_t                        timeout;

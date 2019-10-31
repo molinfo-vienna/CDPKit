@@ -1,7 +1,7 @@
 /* -*- mode: c++; c-basic-offset: 4; tab-width: 4; indent-tabs-mode: t -*- */
 
 /* 
- * NamespaceExports.hpp 
+ * MMFF94ParameterSet.hpp 
  *
  * This file is part of the Chemical Data Processing Toolkit
  *
@@ -23,20 +23,40 @@
  * Boston, MA 02111-1307, USA.
  */
 
+/**
+ * \file
+ * \brief Definition of constants in namespace CDPL::ForceField::MMFF94ParameterSet.
+ */
 
-#ifndef CDPL_PYTHON_FORCEFIELD_NAMESPACEEXPORTS_HPP
-#define CDPL_PYTHON_FORCEFIELD_NAMESPACEEXPORTS_HPP
+#ifndef CDPL_FORCEFIELD_MMFF94PARAMETERSET_HPP
+#define CDPL_FORCEFIELD_MMFF94PARAMETERSET_HPP
 
 
-namespace CDPLPythonForceField
+namespace CDPL
 {
 
-	void exportInteractionTypes();
-	void exportMMFF94ParameterSets();
+    namespace ForceField
+    {
 
-	void exportAtomProperties();
-	void exportBondProperties();
-	void exportMolecularGraphProperties();
+		/**
+		 * \addtogroup CDPL_FORCEFIELD_CONSTANTS
+		 * @{
+		 */
+
+		/**
+		 * \brief Provides flags for the specification of the MMFF94 parameter set to use.
+		 */
+		namespace MMFF94ParameterSet
+		{
+
+			const unsigned int DYNAMIC  = 0;
+			const unsigned int STATIC   = 1;
+		}
+
+		/**
+		 * @}
+		 */
+    }
 }
 
-#endif // CDPL_PYTHON_FORCEFIELD_NAMESPACEEXPORTS_HPP
+#endif // CDPL_FORCEFIELD_MMFF94PARAMETERSET_HPP

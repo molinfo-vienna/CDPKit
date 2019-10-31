@@ -60,9 +60,9 @@ void CDPLPythonConfGen::exportConformerGeneratorSettings()
 			 (python::arg("self"), python::arg("mode")))
 		.def("getNitrogenEnumerationMode", &ConfGen::ConformerGeneratorSettings::getNitrogenEnumerationMode, 
 			 python::arg("self"))
-		.def("generateCoordinates", SetBoolFunc(&ConfGen::ConformerGeneratorSettings::generateCoordinates), 
+		.def("generateCoordinatesFromScratch", SetBoolFunc(&ConfGen::ConformerGeneratorSettings::generateCoordinatesFromScratch), 
 			 (python::arg("self"), python::arg("reuse")))
-		.def("generateCoordinates", GetBoolFunc(&ConfGen::ConformerGeneratorSettings::generateCoordinates), 
+		.def("generateCoordinatesFromScratch", GetBoolFunc(&ConfGen::ConformerGeneratorSettings::generateCoordinatesFromScratch), 
 			 python::arg("self"))
 		.def("outputSuppliedCoordinates", SetBoolFunc(&ConfGen::ConformerGeneratorSettings::outputSuppliedCoordinates), 
 			 (python::arg("self"), python::arg("reuse")))
@@ -103,8 +103,8 @@ void CDPLPythonConfGen::exportConformerGeneratorSettings()
 					  SetBoolFunc(&ConfGen::ConformerGeneratorSettings::enumerateRings))
 		.add_property("nitrogenEnumMode", &ConfGen::ConformerGeneratorSettings::getNitrogenEnumerationMode,
 					  &ConfGen::ConformerGeneratorSettings::setNitrogenEnumerationMode)
-		.add_property("generateCoords", GetBoolFunc(&ConfGen::ConformerGeneratorSettings::generateCoordinates),
-					  SetBoolFunc(&ConfGen::ConformerGeneratorSettings::generateCoordinates))
+		.add_property("genCoordsFromScratch", GetBoolFunc(&ConfGen::ConformerGeneratorSettings::generateCoordinatesFromScratch),
+					  SetBoolFunc(&ConfGen::ConformerGeneratorSettings::generateCoordinatesFromScratch))
 		.add_property("outputSuppliedCoords", GetBoolFunc(&ConfGen::ConformerGeneratorSettings::outputSuppliedCoordinates),
 					  SetBoolFunc(&ConfGen::ConformerGeneratorSettings::outputSuppliedCoordinates))
 		.add_property("energyWindow", &ConfGen::ConformerGeneratorSettings::getEnergyWindow,

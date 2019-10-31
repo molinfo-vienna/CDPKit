@@ -78,6 +78,8 @@ namespace CDPL
 
 			bool hasChildren() const;
 
+			bool containsAtom(const Chem::Atom& atom) const;
+
 			const FragmentTreeNode* getLeftChild() const;
 			const FragmentTreeNode* getRightChild() const;
 

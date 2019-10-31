@@ -77,14 +77,14 @@ void CDPLPythonForceField::exportMMFF94TorsionParameterTable()
 		.def("getNumEntries", &ForceField::MMFF94TorsionParameterTable::getNumEntries, python::arg("self")) 
 		.def("getEntries", &getEntries, python::arg("self")) 
 		.def("load", &ForceField::MMFF94TorsionParameterTable::load, (python::arg("self"), python::arg("is"))) 
-		.def("loadDefaults", &ForceField::MMFF94TorsionParameterTable::loadDefaults, python::arg("self")) 
+		.def("loadDefaults", &ForceField::MMFF94TorsionParameterTable::loadDefaults, (python::arg("self"), python::arg("param_set"))) 
 		.def("assign", CDPLPythonBase::copyAssOp(&ForceField::MMFF94TorsionParameterTable::operator=), 
 			 (python::arg("self"), python::arg("table")), python::return_self<>())
 		.add_property("numEntries", &ForceField::MMFF94TorsionParameterTable::getNumEntries)
 		.add_property("entries", python::make_function(&getEntries))
-		.def("set", &ForceField::MMFF94TorsionParameterTable::set, (python::arg("table"), python::arg("mmff94s")))
+		.def("set", &ForceField::MMFF94TorsionParameterTable::set, (python::arg("table"), python::arg("param_set")))
 		.staticmethod("set")
-		.def("get", &ForceField::MMFF94TorsionParameterTable::get, python::arg("mmff94s"),
+		.def("get", &ForceField::MMFF94TorsionParameterTable::get, python::arg("param_set"),
 			 python::return_value_policy<python::copy_const_reference>())
 		.staticmethod("get");
 

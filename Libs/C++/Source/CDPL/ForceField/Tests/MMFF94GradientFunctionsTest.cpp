@@ -115,9 +115,11 @@ BOOST_AUTO_TEST_CASE(MMFF94BondStretchingGradientFunctionTest)
 								"): grad. func. energy " << grad_energy << " != " << energy);
 			
 			calcNumericalGradient(iaction, coords, iaction.getAtom1Index(), num_atom1_grad, 
-								  &ForceField::calcMMFF94BondStretchingEnergy<double, Math::Vector3DArray>);
+								  static_cast<double (*)(const ForceField::MMFF94BondStretchingInteraction&, const Math::Vector3DArray&)>
+								  (&ForceField::calcMMFF94BondStretchingEnergy<double, Math::Vector3DArray>));
 			calcNumericalGradient(iaction, coords, iaction.getAtom2Index(), num_atom2_grad, 
-								  &ForceField::calcMMFF94BondStretchingEnergy<double, Math::Vector3DArray>);
+								  static_cast<double (*)(const ForceField::MMFF94BondStretchingInteraction&, const Math::Vector3DArray&)>
+								  (&ForceField::calcMMFF94BondStretchingEnergy<double, Math::Vector3DArray>));
 
 			double max_diff = std::max(normInf(num_atom1_grad - grad[iaction.getAtom1Index()]), normInf(num_atom2_grad - grad[iaction.getAtom2Index()]));
 
@@ -174,12 +176,14 @@ BOOST_AUTO_TEST_CASE(MMFF94AngleBendingGradientFunctionTest)
 								"): grad. func. energy " << grad_energy << " != " << energy);
 
 			calcNumericalGradient(iaction, coords, iaction.getTerminalAtom1Index(), num_term_atom1_grad, 
-								  &ForceField::calcMMFF94AngleBendingEnergy<double, Math::Vector3DArray>);
+								  static_cast<double (*)(const ForceField::MMFF94AngleBendingInteraction&, const Math::Vector3DArray&)>
+								  (&ForceField::calcMMFF94AngleBendingEnergy<double, Math::Vector3DArray>));
 			calcNumericalGradient(iaction, coords, iaction.getTerminalAtom2Index(), num_term_atom2_grad, 
-								  &ForceField::calcMMFF94AngleBendingEnergy<double, Math::Vector3DArray>);
+								  static_cast<double (*)(const ForceField::MMFF94AngleBendingInteraction&, const Math::Vector3DArray&)>
+								  (&ForceField::calcMMFF94AngleBendingEnergy<double, Math::Vector3DArray>));
 			calcNumericalGradient(iaction, coords, iaction.getCenterAtomIndex(), num_ctr_atom_grad, 
-								  &ForceField::calcMMFF94AngleBendingEnergy<double, Math::Vector3DArray>);
-
+								  static_cast<double (*)(const ForceField::MMFF94AngleBendingInteraction&, const Math::Vector3DArray&)>
+								  (&ForceField::calcMMFF94AngleBendingEnergy<double, Math::Vector3DArray>));
 			
 			double max_diff = std::max(std::max(normInf(num_term_atom1_grad - grad[iaction.getTerminalAtom1Index()]), normInf(num_term_atom2_grad - grad[iaction.getTerminalAtom2Index()])),
 									   normInf(num_ctr_atom_grad - grad[iaction.getCenterAtomIndex()]));
@@ -244,12 +248,14 @@ BOOST_AUTO_TEST_CASE(MMFF94StretchBendGradientFunctionTest)
 								"): grad. func. energy " << grad_energy << " != " << energy);
 
 			calcNumericalGradient(iaction, coords, iaction.getTerminalAtom1Index(), num_term_atom1_grad, 
-								  &ForceField::calcMMFF94StretchBendEnergy<double, Math::Vector3DArray>);
+								  static_cast<double (*)(const ForceField::MMFF94StretchBendInteraction&, const Math::Vector3DArray&)>
+								  (&ForceField::calcMMFF94StretchBendEnergy<double, Math::Vector3DArray>));
 			calcNumericalGradient(iaction, coords, iaction.getTerminalAtom2Index(), num_term_atom2_grad, 
-								  &ForceField::calcMMFF94StretchBendEnergy<double, Math::Vector3DArray>);
+								  static_cast<double (*)(const ForceField::MMFF94StretchBendInteraction&, const Math::Vector3DArray&)>
+								  (&ForceField::calcMMFF94StretchBendEnergy<double, Math::Vector3DArray>));
 			calcNumericalGradient(iaction, coords, iaction.getCenterAtomIndex(), num_ctr_atom_grad, 
-								  &ForceField::calcMMFF94StretchBendEnergy<double, Math::Vector3DArray>);
-
+								  static_cast<double (*)(const ForceField::MMFF94StretchBendInteraction&, const Math::Vector3DArray&)>
+								  (&ForceField::calcMMFF94StretchBendEnergy<double, Math::Vector3DArray>));
 			
 			double max_diff = std::max(std::max(normInf(num_term_atom1_grad - grad[iaction.getTerminalAtom1Index()]), normInf(num_term_atom2_grad - grad[iaction.getTerminalAtom2Index()])),
 									   normInf(num_ctr_atom_grad - grad[iaction.getCenterAtomIndex()]));
@@ -316,13 +322,17 @@ BOOST_AUTO_TEST_CASE(MMFF94OutOfPlaneBendingGradientFunctionTest)
 									"): grad. func. energy " << grad_energy << " != " << energy);
 
 				calcNumericalGradient(iaction, coords, iaction.getTerminalAtom1Index(), num_term_atom1_grad, 
-									  &ForceField::calcMMFF94OutOfPlaneBendingEnergy<double, Math::Vector3DArray>);
+									  static_cast<double (*)(const ForceField::MMFF94OutOfPlaneBendingInteraction&, const Math::Vector3DArray&)>
+									  (&ForceField::calcMMFF94OutOfPlaneBendingEnergy<double, Math::Vector3DArray>));
 				calcNumericalGradient(iaction, coords, iaction.getTerminalAtom2Index(), num_term_atom2_grad, 
-									  &ForceField::calcMMFF94OutOfPlaneBendingEnergy<double, Math::Vector3DArray>);
+									  static_cast<double (*)(const ForceField::MMFF94OutOfPlaneBendingInteraction&, const Math::Vector3DArray&)>
+									  (&ForceField::calcMMFF94OutOfPlaneBendingEnergy<double, Math::Vector3DArray>));
 				calcNumericalGradient(iaction, coords, iaction.getCenterAtomIndex(), num_ctr_atom_grad, 
-									  &ForceField::calcMMFF94OutOfPlaneBendingEnergy<double, Math::Vector3DArray>);
+									  static_cast<double (*)(const ForceField::MMFF94OutOfPlaneBendingInteraction&, const Math::Vector3DArray&)>
+									  (&ForceField::calcMMFF94OutOfPlaneBendingEnergy<double, Math::Vector3DArray>));
 				calcNumericalGradient(iaction, coords, iaction.getOutOfPlaneAtomIndex(), num_oop_atom_grad, 
-									  &ForceField::calcMMFF94OutOfPlaneBendingEnergy<double, Math::Vector3DArray>);
+									  static_cast<double (*)(const ForceField::MMFF94OutOfPlaneBendingInteraction&, const Math::Vector3DArray&)>
+									  (&ForceField::calcMMFF94OutOfPlaneBendingEnergy<double, Math::Vector3DArray>));
 			
 				double max_diff = std::max(
 					std::max(normInf(num_term_atom1_grad - grad[iaction.getTerminalAtom1Index()]), normInf(num_term_atom2_grad - grad[iaction.getTerminalAtom2Index()])),
@@ -457,9 +467,11 @@ BOOST_AUTO_TEST_CASE(MMFF94VanDerWaalsGradientFunctionTest)
 								"): grad. func. energy " << grad_energy << " != " << energy);
 			
 			calcNumericalGradient(iaction, coords, iaction.getAtom1Index(), num_atom1_grad, 
-								  &ForceField::calcMMFF94VanDerWaalsEnergy<double, Math::Vector3DArray>);
+								  static_cast<double (*)(const ForceField::MMFF94VanDerWaalsInteraction&, const Math::Vector3DArray&)>
+								  (&ForceField::calcMMFF94VanDerWaalsEnergy<double, Math::Vector3DArray>));
 			calcNumericalGradient(iaction, coords, iaction.getAtom2Index(), num_atom2_grad, 
-								  &ForceField::calcMMFF94VanDerWaalsEnergy<double, Math::Vector3DArray>);
+								  static_cast<double (*)(const ForceField::MMFF94VanDerWaalsInteraction&, const Math::Vector3DArray&)>
+								  (&ForceField::calcMMFF94VanDerWaalsEnergy<double, Math::Vector3DArray>));
 
 			double max_diff = std::max(normInf(num_atom1_grad - grad[iaction.getAtom1Index()]), normInf(num_atom2_grad - grad[iaction.getAtom2Index()]));
 
@@ -515,9 +527,11 @@ BOOST_AUTO_TEST_CASE(MMFF94ElectrostaticGradientFunctionTest)
 								"): grad. func. energy " << grad_energy << " != " << energy);
 			
 			calcNumericalGradient(iaction, coords, iaction.getAtom1Index(), num_atom1_grad, 
-								  &ForceField::calcMMFF94ElectrostaticEnergy<double, Math::Vector3DArray>);
+								  static_cast<double (*)(const ForceField::MMFF94ElectrostaticInteraction&, const Math::Vector3DArray&)>
+								  (&ForceField::calcMMFF94ElectrostaticEnergy<double, Math::Vector3DArray>));
 			calcNumericalGradient(iaction, coords, iaction.getAtom2Index(), num_atom2_grad, 
-								  &ForceField::calcMMFF94ElectrostaticEnergy<double, Math::Vector3DArray>);
+								  static_cast<double (*)(const ForceField::MMFF94ElectrostaticInteraction&, const Math::Vector3DArray&)>
+								  (&ForceField::calcMMFF94ElectrostaticEnergy<double, Math::Vector3DArray>));
 
 			double max_diff = std::max(normInf(num_atom1_grad - grad[iaction.getAtom1Index()]), normInf(num_atom2_grad - grad[iaction.getAtom2Index()]));
 

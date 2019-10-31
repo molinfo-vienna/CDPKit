@@ -72,7 +72,7 @@ unsigned int ConfGen::RandomStructureGenerator::setup(const Chem::MolecularGraph
 		return ReturnCode::FORCEFIELD_SETUP_FAILED;
 	}
 
-    mmff94EnergyCalc.setup(mmff94Data);
+    mmff94EnergyCalc.setup(mmff94Data, molgraph.getNumAtoms());
     mmff94GradientCalc.setup(mmff94Data, molgraph.getNumAtoms());
 
 	dgStructGen.getSettings().regardAtomConfiguration(settings.regardAtomConfiguration());

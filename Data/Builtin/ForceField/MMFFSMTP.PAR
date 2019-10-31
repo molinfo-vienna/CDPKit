@@ -30,7 +30,7 @@
     [#5:2]                                               CR
 
 *   Carbon 
-    [#6X2:1]                                             CSP     SPECIAL ENTRY FOR CONFGEN: SP CARBON
+    [#6H1X2:1]                                           CSP     SPECIAL ENTRY FOR CONFGEN: SP CARBON
     [cX1:1]                                              C=C     SPECIAL ENTRY FOR CONFGEN: AROMATIC CARBON
 
     [#6X4:1]                                             CR      ALKYL CARBON, SP3
@@ -71,6 +71,10 @@
 *   Oxygen
     [#8X2:1]                                             -O-     GENERAL DIVALENT O
     [#8X2:1]-[#6]                                        OR      ALCOHOL OR ETHER OXYGEN
+
+    [#8X2:1]-[cX1]                           		 OC=C    SPECIAL ENTRY FOR CONFGEN: ENOLIC OR PHENOLIC OXYGEN
+    [#8X2:1]-[#6X3H2]                                    OC=C    SPECIAL ENTRY FOR CONFGEN: ENOLIC OR PHENOLIC OXYGEN
+
     [#8X2:1]-[#6X3]=[#7]                                 OC=N    DIVALENT OXYGEN 
     [#8X2:1]-[#6X3]=[#6]                                 OC=C    ENOLIC OR PHENOLIC OXYGEN
     [#8X2:1]-[#6X3]=[#8]                                 OC=O    ESTER OR CARBOXYLIC ACID -O-
@@ -117,17 +121,18 @@
 *   [o:1]                                                OFUR    AROMATIC OXYGEN AS IN FURAN
 
 *   Nitrogen
-    [#7X1:1]                                             NSP     SPECIAL ENTRY FOR CONFGEN: SP NITROGEN
-    [#7X1:1]=[*]                                         =N=     SPECIAL ENTRY FOR CONFGEN: SP NITROGEN
-    [#7X2:1]                                             N=C     SPECIAL ENTRY FOR CONFGEN: SP2 NITROGEN
-    [nX1:1]                                              N=C     SPECIAL ENTRY FOR CONFGEN: AROMATIC NITROGEN
+    [#7X1+0:1]-[*]                                       NSP     SPECIAL ENTRY FOR CONFGEN: SP NITROGEN
+    [#7X1+0:1]=[*]                                       =N=     SPECIAL ENTRY FOR CONFGEN: SP NITROGEN
+    [#7X2H1+0:1]                                         N=C     SPECIAL ENTRY FOR CONFGEN: SP2 NITROGEN
+    [nX1:1]                                              NPYL    SPECIAL ENTRY FOR CONFGEN: AROMATIC NITROGEN
 
     [#7X3:1]-[#7]=[#6]                                   NN=C    NITROGEN IN N-N=C
     [#7X3v3:1]                                           NR      NITROGEN IN ALIPHATIC AMINES
     [#7X4v4+:1]                                          NR+     QUATERNARY NITROGEN, SP3, POSITIVELY CHARGED
 
-    [#7X3R:1]-[#6X3H2]                                   NC=C    SPECIAL ENTRY FOR CONFGEN: RING NITROGEN BONDED TO SP2 CARBON
-    [#7X3R:1]-[cX1]                                      NC=C    SPECIAL ENTRY FOR CONFGEN: RING NITROGEN BONDED TO AROMATIC CARBON
+    [#7X3:1]-[#7X2H1+0]                                  NN=C    SPECIAL ENTRY FOR CONFGEN: NITROGEN BONDED TO SP2 NITROGEN
+    [#7X3:1]-[#6X3H2]                                    NC=C    SPECIAL ENTRY FOR CONFGEN: NITROGEN BONDED TO SP2 CARBON
+    [#7X3:1]-[aX1]                                       NC=C    SPECIAL ENTRY FOR CONFGEN: NITROGEN BONDED TO AROMATIC ATOM
 
     [#7X2:1]=[#6]                                        N=C     NITROGEN IN IMINES
     [#7X2:1]=[#7]                                        N=N     NITROGEN IN AZO COMPOUNDS
@@ -137,6 +142,9 @@
     [#7X3:1]-[#6X3]=[#15]                                NC=P    NITROGEN IN N-C=P
     [#7X3:1]-[#6]=[#16]                                  NC=S    NITROGEN IN N-C=S, THIOAMIDE
     [#7X3:1]-[#6X2]#[#6]                                 NC%C    NITROGEN ATTACHED TO C-C TRIPLE BOND
+
+    [#7X3:1]-[#6H1X2]                                    NC%C    SPECIAL ENTRY FOR CONFGEN: NITROGEN ATTACHED TO SP3 CARBON
+
     [#7X3:1]-[#6]=[#8]                                   NC=O    NITROGEN IN AMIDES
     [#7X1:1]#[*]                                         NSP     NITROGEN, TRIPLE BONDED
     [#7X2-:1]-[#6,#16]                                   NM      DEPROTONATED SULFONAMIDE N-; FORMAL CHARGE=-1

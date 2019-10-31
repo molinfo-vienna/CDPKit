@@ -249,11 +249,6 @@ ConfGen::TorsionDriverImpl::ConstConformerIterator ConfGen::TorsionDriverImpl::g
     return fragTree.getRoot()->getConformers().end();
 }
 
-bool ConfGen::TorsionDriverImpl::initialized() const
-{
-	return fragTree.getRoot();
-}
-
 template <typename ConfData>
 void ConfGen::TorsionDriverImpl::doAddInputCoordinates(const ConfData& conf_data, std::size_t frag_idx) const
 {
@@ -318,7 +313,10 @@ void ConfGen::TorsionDriverImpl::assignTorsionAngles(FragmentTreeNode* node)
 			tor_angles.push_back(i * 30.0);
 
 		node->setTorsionReferenceAtoms(getFirstNeighborAtom(bond_atoms[0], bond_atoms[1], node), 
-									  getFirstNeighborAtom(bond_atoms[1], bond_atoms[0], node));
+									   getFirstNeighborAtom(bond_atoms[1], bond_atoms[0], node));
+
+		if (!node->getTorsionReferenceAtoms()[0] || !node->getTorsionReferenceAtoms()[1])
+			node->setTorsionReferenceAtoms(0, 0);
 
 	} else if (tor_angles.size() > 1) {
 		std::size_t rot_sym = getRotationalSymmetry(*bond);
@@ -466,15 +464,19 @@ const Chem::Atom* ConfGen::TorsionDriverImpl::getFirstNeighborAtom(const Chem::A
 {
 	using namespace Chem;
 
-	const MolecularGraph& molgraph = *fragTree.getMolecularGraph();
+	Atom::ConstBondIterator b_it = ctr_atom->getBondsBegin();
+	const MolecularGraph& parent_molgraph = *fragTree.getMolecularGraph();
 
-	for (Atom::ConstAtomIterator it = ctr_atom->getAtomsBegin(), end = ctr_atom->getAtomsEnd(); it != end; ++it) {
-		const Atom& nbr_atom = *it;
+	for (Atom::ConstAtomIterator a_it = ctr_atom->getAtomsBegin(), a_end = ctr_atom->getAtomsEnd(); a_it != a_end; ++a_it, ++b_it) {
+		const Atom& nbr_atom = *a_it;
 
 		if (excl_atom == &nbr_atom)
 			continue;
 
-		if (node->getAtomMask().test(molgraph.getAtomIndex(nbr_atom)))
+		if (!parent_molgraph.containsBond(*b_it))
+			continue;
+
+		if (node->containsAtom(nbr_atom))
 			return &nbr_atom;
 	}
 

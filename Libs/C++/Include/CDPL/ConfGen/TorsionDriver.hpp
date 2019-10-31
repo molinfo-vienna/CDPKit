@@ -94,13 +94,13 @@ namespace CDPL
 			unsigned int setup(const Chem::MolecularGraph& molgraph);
 			unsigned int setup(const Chem::MolecularGraph& molgraph, const Util::BitSet& bond_mask);
 
-			unsigned int clearInputCoordinates();
-			unsigned int clearInputCoordinates(std::size_t frag_idx);
+			void clearInputCoordinates();
+			void clearInputCoordinates(std::size_t frag_idx);
 
-			unsigned int addInputCoordinates(const Math::Vector3DArray& coords);
-			unsigned int addInputCoordinates(const Math::Vector3DArray& coords, std::size_t frag_idx);
-			unsigned int addInputCoordinates(const ConformerData& conf_data, std::size_t frag_idx);
-			unsigned int addInputCoordinates(const ConformerData::SharedPointer& conf_data, std::size_t frag_idx);
+			void addInputCoordinates(const Math::Vector3DArray& coords);
+			void addInputCoordinates(const Math::Vector3DArray& coords, std::size_t frag_idx);
+			void addInputCoordinates(const ConformerData& conf_data, std::size_t frag_idx);
+			void addInputCoordinates(const ConformerData::SharedPointer& conf_data, std::size_t frag_idx);
 
 			std::size_t getNumFragments() const;
 
