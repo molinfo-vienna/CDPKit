@@ -32,6 +32,7 @@
 #define CDPL_FORCEFIELD_GRADIENTVECTORTRAITS_HPP
 
 #include <cstddef>
+#include <vector>
 
 #include "CDPL/Math/VectorArray.hpp"
 
@@ -74,6 +75,21 @@ namespace CDPL
 
 			static void clear(VectorType& g, std::size_t num_elem) {
 				for (typename VectorType::ElementIterator it = g.getElementsBegin(), end = g.getElementsBegin() + num_elem; it != end; ++it)
+					it->clear(ValueType());
+			}
+		};
+
+		template <typename V>
+		struct GradientVectorTraits<std::vector<V> >
+		{
+	
+			typedef std::vector<V> VectorType;
+			typedef V ElementType;
+			typedef typename V::ValueType ValueType;
+			typedef typename VectorType::size_type SizeType;
+
+			static void clear(VectorType& g, std::size_t num_elem) {
+				for (typename std::vector<V>::iterator it = g.begin(), end = g.begin() + num_elem; it != end; ++it)
 					it->clear(ValueType());
 			}
 		};

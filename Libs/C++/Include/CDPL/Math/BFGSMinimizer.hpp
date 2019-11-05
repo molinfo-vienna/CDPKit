@@ -66,7 +66,7 @@ namespace CDPL
 
 			enum Status { 
 
-				SUCCESS            = 0, // general success indicator
+			    SUCCESS            = 0, // general success indicator
 				NO_PROGRESS        = 1, // no more progress towards solution
 				ITER_LIMIT_REACHED = 2, // the maximum number of minimization iterations has been reached
 				GNORM_REACHED      = 4, // the specified gradient norm has been reached
@@ -74,7 +74,7 @@ namespace CDPL
 			};
 
 			BFGSMinimizer(const ObjectiveFunction& func, const GradientFunction& grad_func): 
-				rho(0.01), tau1(9), tau2(0.05), tau3(0.5), order(3), func(func), gradFunc(grad_func), status(SUCCESS) {}
+				rho(0.01), tau1(9), tau2(0.05), tau3(0.5), order(3), sigma(0.1), func(func), gradFunc(grad_func), status(SUCCESS) {}
 
 			ValueType getGradientNorm() const {
 				return g0Norm;
@@ -106,7 +106,7 @@ namespace CDPL
 				for (std::size_t i = 0; max_iter == 0 || i < max_iter; i++) {
 					status = iterate(fValue, x, g);
 
-					if (status != SUCCESS)
+					if (status != SUCCESS) 
 						return status;
 
 					if (g_norm >= ValueType(0) && g0Norm <= g_norm)
@@ -115,7 +115,7 @@ namespace CDPL
 					if (delta_f >= ValueType(0) && deltaF <= delta_f)
 						status = Status(status | DELTAF_REACHED);
 
-					if (status != SUCCESS)
+					if (status != SUCCESS) 
 						return status;
 				}
 
@@ -123,7 +123,7 @@ namespace CDPL
 			}
 
 			ValueType setup(const VariableArrayType& x, VariableArrayType& g,
-							const ValueType& step_size = 0.1, const ValueType& tol = 0.01) {
+							const ValueType& step_size = 0.001, const ValueType& tol = 0.15) {
 				numIter = 0;
 				step = step_size;
 				deltaF = ValueType(0);
@@ -176,9 +176,9 @@ namespace CDPL
 
 				Status status = minimize(alpha1, alpha);
 
-				if (status != SUCCESS)
+				if (status != SUCCESS) 
 					return status;
-			
+
 				updatePosition(alpha, x, f, g);
   
 				deltaF = f - f0;
@@ -348,11 +348,10 @@ namespace CDPL
 					f = getF(alpha);
 					return;
 				}
-
+				
 				moveTo(alpha);
   
 				fAlpha = gradFunc(xAlpha, gAlpha);
-
 				fCacheKey = alpha;
 				gCacheKey = alpha;
 				
@@ -400,7 +399,7 @@ namespace CDPL
 			}
 
 			std::size_t solveQuadratic(const ValueType& a, const ValueType& b, const ValueType& c, 
-														ValueType& x0, ValueType& x1) const {
+									   ValueType& x0, ValueType& x1) const {
 
 				ValueType disc = b * b - 4 * a * c;
 
@@ -453,7 +452,7 @@ namespace CDPL
 			 * polynomial is q(x) = f0 + fp0 * z + (f1 - f0 - fp0) * z^2
 			 */
 			ValueType interpolateQuadratic(const ValueType& f0, const ValueType& fp0, const ValueType& f1, 
-															const ValueType& zl, const ValueType& zh) const {
+										   const ValueType& zl, const ValueType& zh) const {
 		
 				ValueType fl = f0 + zl * (fp0 + zl * (f1 - f0 - fp0));
 				ValueType fh = f0 + zh * (fp0 + zh * (f1 - f0 - fp0));
@@ -493,13 +492,13 @@ namespace CDPL
 			 * where eta = 3 * (f1 - f0) - 2 * fp0 - fp1, xi = fp0 + fp1 - 2 * (f1 - f0). 
 			 */
 			ValueType cubic(const ValueType& c0, const ValueType& c1, const ValueType& c2, 
-											 const ValueType& c3, const ValueType& z) const {
+							const ValueType& c3, const ValueType& z) const {
 
 				return c0 + z * (c1 + z * (c2 + z * c3));
 			}
 
 			void checkExtremum(const ValueType& c0, const ValueType& c1, const ValueType& c2, 
-												const ValueType& c3, const ValueType& z, ValueType& zmin, ValueType& fmin) const {
+							   const ValueType& c3, const ValueType& z, ValueType& zmin, ValueType& fmin) const {
 				/* could make an early return by testing curvature > 0 for minimum */
 
 				ValueType y = cubic(c0, c1, c2, c3, z);
@@ -541,8 +540,8 @@ namespace CDPL
 			}
 
 			ValueType interpolate(const ValueType& a, const ValueType& fa, const ValueType& fpa,
-												   const ValueType& b, const ValueType& fb, const ValueType& fpb, 
-												   const ValueType& xmin, const ValueType& xmax) const {
+								  const ValueType& b, const ValueType& fb, const ValueType& fpb, 
+								  const ValueType& xmin, const ValueType& xmax) const {
 				/* Map [a, b] to [0, 1] */
 
 				ValueType zmin = (xmin - a) / (b - a);
@@ -588,7 +587,6 @@ namespace CDPL
 				std::size_t i = 0;
 
 				while (i++ < num_brack_iter) {
-					ValueType tmp_fpalpha = getDF(alpha);
 					falpha = getF(alpha);
 
 					/* Fletcher's rho test */
@@ -603,7 +601,7 @@ namespace CDPL
 						break;                /* goto sectioning */
 					}
 
-					fpalpha = tmp_fpalpha;//getDF(alpha);
+					fpalpha = getDF(alpha);
 
 					/* Fletcher's sigma test */
 
@@ -645,7 +643,6 @@ namespace CDPL
 					ValueType upper = b - tau3 * delta;
         
 					alpha = interpolate(a, fa, fpa, b, fb, fpb, lower, upper);
-					ValueType tmp_fpalpha = getDF(alpha);
 					falpha = getF(alpha);
 
 					if ((a - alpha) * fpa <= std::numeric_limits<ValueType>::epsilon()) {
@@ -660,7 +657,7 @@ namespace CDPL
 						fpb = std::numeric_limits<ValueType>::quiet_NaN();
 
 					} else {
-						fpalpha = tmp_fpalpha;//getDF(alpha);
+						fpalpha = getDF(alpha);
 
 						if (TypeTraits<ValueType>::abs(fpalpha) <= -sigma * fp0) {
 							alpha_new = alpha;

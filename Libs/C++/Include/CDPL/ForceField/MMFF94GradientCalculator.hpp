@@ -37,6 +37,7 @@
 #include "CDPL/ForceField/MMFF94GradientFunctions.hpp"
 #include "CDPL/ForceField/InteractionType.hpp"
 #include "CDPL/ForceField/GradientVectorTraits.hpp"
+#include "CDPL/Util/BitSet.hpp"
 
 
 namespace CDPL 
@@ -84,6 +85,12 @@ namespace CDPL
 
 			const ValueType& getVanDerWaalsEnergy() const;
 
+			const Util::BitSet& getFixedAtomMask() const;
+
+			void setFixedAtomMask(const Util::BitSet& mask);
+
+			void resetFixedAtomMask();
+
 		private:
 			const MMFF94InteractionData* interactionData;
 			std::size_t                  numAtoms;
@@ -96,6 +103,7 @@ namespace CDPL
 			ValueType                    electrostaticEnergy;
 			ValueType                    vanDerWaalsEnergy;
 			unsigned int                 interactionTypes;
+			Util::BitSet                 fixedAtomMask;
 		};
 
 		/**
@@ -145,6 +153,8 @@ template <typename ValueType>
 template <typename CoordsArray, typename GradVector>
 const ValueType& CDPL::ForceField::MMFF94GradientCalculator<ValueType>::operator()(const CoordsArray& coords, GradVector& grad)
 {
+	GradientVectorTraits<GradVector>::clear(grad, numAtoms);
+
 	if (!interactionData) {
 		totalEnergy = ValueType();
 		bondStretchingEnergy = ValueType();
@@ -157,8 +167,6 @@ const ValueType& CDPL::ForceField::MMFF94GradientCalculator<ValueType>::operator
 
 		return totalEnergy;
 	}
-
-	GradientVectorTraits<GradVector>::clear(grad, numAtoms);
 
 	totalEnergy = ValueType();
 
@@ -225,6 +233,10 @@ const ValueType& CDPL::ForceField::MMFF94GradientCalculator<ValueType>::operator
 	} else 
 		vanDerWaalsEnergy = ValueType();
 
+	if (!fixedAtomMask.empty()) 
+		for (Util::BitSet::size_type i = fixedAtomMask.find_first(); i != Util::BitSet::npos; i = fixedAtomMask.find_next(i))
+			grad[i].clear(ValueType());
+	
     return totalEnergy;
 }
 
@@ -274,6 +286,24 @@ template <typename ValueType>
 const ValueType& CDPL::ForceField::MMFF94GradientCalculator<ValueType>::getVanDerWaalsEnergy() const
 {
     return vanDerWaalsEnergy;
+}
+
+template <typename ValueType>
+const CDPL::Util::BitSet& CDPL::ForceField::MMFF94GradientCalculator<ValueType>::getFixedAtomMask() const
+{
+	return fixedAtomMask;
+}
+
+template <typename ValueType>
+void CDPL::ForceField::MMFF94GradientCalculator<ValueType>::setFixedAtomMask(const Util::BitSet& mask)
+{
+	fixedAtomMask = mask;
+}
+
+template <typename ValueType>
+void CDPL::ForceField::MMFF94GradientCalculator<ValueType>::resetFixedAtomMask()
+{
+	fixedAtomMask.clear();
 }
 
 // \endcond

@@ -135,10 +135,11 @@ namespace CDPL
 				T ssq = T(1);
 
 				for (typename ArrayType::ConstElementIterator it = a.getElementsBegin(), end = a.getElementsEnd(); it != end; ++it) {
-					const VectorType& vx = *it;
+					const typename VectorType::ConstPointer vx = it->getData();
+					typename VectorType::SizeType dim = it->getSize();
 
-					for (typename VectorType::SizeType i = 0, dim = vx.getSize(); i < dim; i++) {
-						const ValueType& x = vx(i);
+					for (typename VectorType::SizeType i = 0; i < dim; i++) {
+						const ValueType& x = vx[i];
 
 						if (x != ValueType()) {
 							const typename TypeTraits<ValueType>::RealType ax = TypeTraits<ValueType>::abs(x);
@@ -160,9 +161,14 @@ namespace CDPL
 			template <typename T>
 			static void axpy(const T& alpha, const ArrayType& x, ArrayType& y) {
 				typename ArrayType::ElementIterator it2 = y.getElementsBegin();
+				VectorType tmp;
 
-				for (typename ArrayType::ConstElementIterator it1 = x.getElementsBegin(), end1 = x.getElementsEnd(); it1 != end1; ++it1, ++it2)
-					it2->plusAssign(alpha * *it1);
+				for (typename ArrayType::ConstElementIterator it1 = x.getElementsBegin(), end1 = x.getElementsEnd(); it1 != end1; ++it1, ++it2) {
+					tmp.assign(*it1);
+					tmp *= alpha;
+
+					it2->plusAssign(tmp);
+				}
 			}
 			
 			static void clear(ArrayType& a) {
@@ -171,13 +177,7 @@ namespace CDPL
 			}
 
 			static void assign(ArrayType& a1, const ArrayType& a2) {
-				if (a1.getSize() != a2.getSize())
-					a1.resize(a2.getSize());
-
-				typename ArrayType::ConstElementIterator it2 = a2.getElementsBegin();
-
-				for (typename ArrayType::ElementIterator it1 = a1.getElementsBegin(), end1 = a1.getElementsEnd(); it1 != end1; ++it1, ++it2)
-					it1->assign(*it2);
+				a1 = a2;
 			}
 
 			template <typename T>
@@ -220,10 +220,11 @@ namespace CDPL
 				T ssq = T(1);
 
 				for (typename ArrayType::const_iterator it = a.begin(), end = a.end(); it != end; ++it) {
-					const VectorType& vx = *it;
+					const typename VectorType::ConstPointer vx = it->getData();
+					typename VectorType::SizeType dim = it->getSize();
 
-					for (typename VectorType::SizeType i = 0, dim = vx.getSize(); i < dim; i++) {
-						const ValueType& x = vx(i);
+					for (typename VectorType::SizeType i = 0; i < dim; i++) {
+						const ValueType& x = vx[i];
 
 						if (x != ValueType()) {
 							const typename TypeTraits<ValueType>::RealType ax = TypeTraits<ValueType>::abs(x);
@@ -248,7 +249,7 @@ namespace CDPL
 				VectorType tmp;
 
 				for (typename ArrayType::const_iterator it1 = x.begin(), end1 = x.end(); it1 != end1; ++it1, ++it2) {
-					tmp = *it1;
+					tmp.assign(*it1);
 					tmp *= alpha;
 
 					it2->plusAssign(tmp);
@@ -261,12 +262,7 @@ namespace CDPL
 			}
 
 			static void assign(ArrayType& a1, const ArrayType& a2) {
-				if (a1.size() != a2.size())
-					a1.resize(a2.size());
-
-                typename ArrayType::const_iterator it2 = a2.begin();
-
-				for (typename ArrayType::iterator it1 = a1.begin(), end1 = a1.end(); it1 != end1; ++it1, ++it2)                                                                                                                                                  *it1 = *it2;
+				a1 = a2;
 			}
 
 			template <typename T>

@@ -73,8 +73,8 @@ namespace
 					 (python::arg("self"), python::arg("x"), python::arg("g"), python::arg("max_iter"), 
 					  python::arg("g_norm"), python::arg("delta_f"), python::arg("do_setup") = true))
 				.def("setup", &MinimizerType::setup, 
-					 (python::arg("self"), python::arg("x"), python::arg("g"), python::arg("step_size") = 0.1, 
-					  python::arg("tol") = 0.01))
+					 (python::arg("self"), python::arg("x"), python::arg("g"), python::arg("step_size") = 0.001, 
+					  python::arg("tol") = 0.15))
 				.def("iterate", &iterate, (python::arg("self"), python::arg("f"), python::arg("x"), python::arg("g")))
 				.add_property("gradientNorm", &MinimizerType::getGradientNorm)
 				.add_property("functionDelta", &MinimizerType::getFunctionDelta)

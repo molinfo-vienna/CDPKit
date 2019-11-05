@@ -83,8 +83,6 @@ ConfGen::FragmentConformerGeneratorImpl::FragmentConformerGeneratorImpl():
 	symMappingSearch.setAtomPropertyFlags(AtomPropertyFlag::TYPE | AtomPropertyFlag::FORMAL_CHARGE | 
 										  AtomPropertyFlag::CONFIGURATION | AtomPropertyFlag::AROMATICITY |
 										  AtomPropertyFlag::EXPLICIT_BOND_COUNT | AtomPropertyFlag::HYBRIDIZATION_STATE);
-
-    mmff94EnergyCalc.enableSpeedOptimizations(true);
 }
 
 ConfGen::FragmentConformerGeneratorSettings& ConfGen::FragmentConformerGeneratorImpl::getSettings()
@@ -119,16 +117,21 @@ const ConfGen::CallbackFunction& ConfGen::FragmentConformerGeneratorImpl::getTim
 
 unsigned int ConfGen::FragmentConformerGeneratorImpl::generate(const Chem::MolecularGraph& molgraph, unsigned int frag_type) 
 {
-	if (!init(molgraph, frag_type))
-		return ReturnCode::FORCEFIELD_SETUP_FAILED;
+	init(molgraph);
 
 	if (numAtoms == 0)
 		return ReturnCode::SUCCESS;
 
+	if (!setupForceField())
+		return ReturnCode::FORCEFIELD_SETUP_FAILED;
+
 	if (frag_type == FragmentType::FLEXIBLE_RING_SYSTEM)
 		return generateFlexibleRingConformers();
 	
-	return generateSingleConformer();
+	if (settings.preserveInputBondingGeometries() && !generateConformerFromInputCoordinates())
+		return generateSingleConformer();
+
+	return ReturnCode::SUCCESS;
 }
 
 std::size_t ConfGen::FragmentConformerGeneratorImpl::getNumConformers() const
@@ -151,8 +154,121 @@ ConfGen::FragmentConformerGeneratorImpl::ConstConformerIterator ConfGen::Fragmen
     return outputConfs.end();
 }
 
+void ConfGen::FragmentConformerGeneratorImpl::init(const Chem::MolecularGraph& molgraph)
+{
+	timer.start();
+
+	molGraph = &molgraph;
+	numAtoms = molgraph.getNumAtoms();
+
+	outputConfs.clear();
+	workingConfs.clear();
+	ringAtomCoords.clear();
+}
+
+bool ConfGen::FragmentConformerGeneratorImpl::generateConformerFromInputCoordinates()
+{
+	using namespace Chem;
+
+	ConformerDataPtr conf_data = allocConformerData();
+
+	conf_data->resize(numAtoms);
+
+	ordHDepleteAtomMask.resize(numAtoms);
+	ordHDepleteAtomMask.set();
+
+	Math::Vector3DArray::StorageType& coords_data = conf_data->getData();
+	bool coords_compl = true;
+
+	for (std::size_t i = 0; i < numAtoms; i++) {
+		const Atom& atom = molGraph->getAtom(i);
+
+		try {
+			coords_data[i].assign(get3DCoordinates(atom));
+
+		} catch (const Base::ItemNotFound&) {
+			if (getType(atom) != AtomType::H)
+				return false;
+
+			ordHDepleteAtomMask.reset(i);
+			coords_compl = false;
+		}
+	} 
+
+	if (!coords_compl) {
+		hCoordsGen.setup(*molGraph);
+		hCoordsGen.generate(*conf_data, false);
+
+		mmff94GradientCalc.setFixedAtomMask(ordHDepleteAtomMask);
+
+		energyMinimizer.setup(coords_data, gradient);
+
+		std::size_t max_ref_iters = settings.getMaxNumRefinementIterations();
+		double stop_grad = settings.getRefinementStopGradient();
+		double energy = 0.0;
+
+		for (std::size_t j = 0; max_ref_iters == 0 || j < max_ref_iters; j++) {
+			if (energyMinimizer.iterate(energy, coords_data, gradient) != BFGSMinimizer::SUCCESS) {
+				if ((boost::math::isnan)(energy))
+					return false;
+
+				break;
+			}
+
+			if ((boost::math::isnan)(energy))
+				return false;
+		
+			if (stop_grad >= 0.0 && energyMinimizer.getGradientNorm() <= stop_grad)
+				break;
+		}
+
+		conf_data->setEnergy(energy);
+
+	} else
+		conf_data->setEnergy(mmff94EnergyCalc(coords_data));
+
+	outputConfs.push_back(conf_data);
+	
+	return true;
+}
+
+bool ConfGen::FragmentConformerGeneratorImpl::setupForceField()
+{
+	mmff94Parameterizer.strictParameterization(settings.strictForceFieldParameterization());
+
+	try {
+		if (parameterizeMMFF94Interactions(*molGraph, mmff94Parameterizer, mmff94Data, settings.getForceFieldType()) != ReturnCode::SUCCESS)
+			return false;
+
+	} catch (const ForceField::Error&) {
+		return false;
+	}
+
+	mmff94EnergyCalc.setup(mmff94Data);
+	mmff94GradientCalc.setup(mmff94Data, numAtoms);
+
+    gradient.resize(numAtoms);
+
+	return true;
+}
+
+void ConfGen::FragmentConformerGeneratorImpl::setupRandomConformerGeneration()
+{
+	dgStructGen.setup(*molGraph, mmff94Data);
+
+	ordHDepleteAtomMask.resize(numAtoms);
+	ordHDepleteAtomMask = dgStructGen.getExcludedHydrogenMask();
+	ordHDepleteAtomMask.flip();
+
+	hCoordsGen.setup(*molGraph);
+
+	mmff94GradientCalc.resetFixedAtomMask();
+}
+
 unsigned int ConfGen::FragmentConformerGeneratorImpl::generateSingleConformer()
 {
+	setupRandomConformerGeneration();
+
 	dgStructGen.getSettings().setBoxSize(ordHDepleteAtomMask.count() * 2);
 
 	ConformerDataPtr conf_data = allocConformerData();
@@ -171,6 +287,8 @@ unsigned int ConfGen::FragmentConformerGeneratorImpl::generateSingleConformer()
 
 unsigned int ConfGen::FragmentConformerGeneratorImpl::generateFlexibleRingConformers()
 {
+	setupRandomConformerGeneration();
+
 	dgStructGen.getSettings().setBoxSize(ordHDepleteAtomMask.count());
 
 	getRingAtomIndices();
@@ -274,151 +392,6 @@ unsigned int ConfGen::FragmentConformerGeneratorImpl::generateFlexibleRingConfor
 	}
 
 	return ret_code;
-}
-
-bool ConfGen::FragmentConformerGeneratorImpl::init(const Chem::MolecularGraph& molgraph, unsigned int frag_type)
-{
-	timer.start();
-
-	molGraph = &molgraph;
-	numAtoms = molgraph.getNumAtoms();
-
-	outputConfs.clear();
-	workingConfs.clear();
-	ringAtomCoords.clear();
-
-	if (numAtoms == 0)
-		return true;
-
-	mmff94Parameterizer.strictParameterization(settings.strictForceFieldParameterization());
-
-	try {
-		if (parameterizeMMFF94Interactions(molgraph, mmff94Parameterizer, mmff94Data, settings.getForceFieldType()) != ReturnCode::SUCCESS)
-			return false;
-
-	} catch (const ForceField::Error&) {
-		return false;
-	}
-
-	if (frag_type != FragmentType::FLEXIBLE_RING_SYSTEM && settings.preserveInputBondingGeometries())
-		applyInputBondLengthsAndAngles(molgraph);
-
-	dgStructGen.setup(molgraph, mmff94Data);
-
-	ordHDepleteAtomMask.resize(numAtoms);
-	ordHDepleteAtomMask = dgStructGen.getExcludedHydrogenMask();
-	ordHDepleteAtomMask.flip();
-
-	hCoordsGen.setup(molgraph);
-
-	mmff94EnergyCalc.setup(mmff94Data, numAtoms);
-	mmff94GradientCalc.setup(mmff94Data, numAtoms);
-
-    gradient.resize(numAtoms);
-
-	return true;
-}
-
-void ConfGen::FragmentConformerGeneratorImpl::applyInputBondLengthsAndAngles(const Chem::MolecularGraph& molgraph)
-{
-	using namespace ForceField;
-
-	for (MMFF94BondStretchingInteractionData::ElementIterator it = mmff94Data.getBondStretchingInteractions().getElementsBegin(),
-			 end =  mmff94Data.getBondStretchingInteractions().getElementsEnd(); it != end; ++it) {
-	
-		MMFF94BondStretchingInteraction& ia = *it;
-
-		double bond_len = getBondLength(ia.getAtom1Index(), ia.getAtom2Index(), molgraph);
-
-		if (bond_len > 0.0)
-			ia.setReferenceLength(bond_len);
-	}
-
-	for (MMFF94AngleBendingInteractionData::ElementIterator it = mmff94Data.getAngleBendingInteractions().getElementsBegin(),
-			 end =  mmff94Data.getAngleBendingInteractions().getElementsEnd(); it != end; ++it) {
-	
-		MMFF94AngleBendingInteraction& ia = *it;
-
-		double bond_ang = getBondAngle(ia.getTerminalAtom1Index(), ia.getCenterAtomIndex(), ia.getTerminalAtom2Index(), molgraph);
-
-		if (bond_ang > 0.0)
-			ia.setReferenceAngle(bond_ang);
-	}
-
-	for (MMFF94StretchBendInteractionData::ElementIterator it = mmff94Data.getStretchBendInteractions().getElementsBegin(),
-			 end =  mmff94Data.getStretchBendInteractions().getElementsEnd(); it != end; ++it) {
-	
-		MMFF94StretchBendInteraction& ia = *it;
-
-		double bond_ang = getBondAngle(ia.getTerminalAtom1Index(), ia.getCenterAtomIndex(), ia.getTerminalAtom2Index(), molgraph);
-
-		if (bond_ang > 0.0)
-			ia.setReferenceAngle(bond_ang);
-
-		double bond_len = getBondLength(ia.getTerminalAtom1Index(), ia.getCenterAtomIndex(), molgraph);
-
-		if (bond_len > 0.0)
-			ia.setReferenceLength1(bond_len);
-
-		bond_len = getBondLength(ia.getTerminalAtom2Index(), ia.getCenterAtomIndex(), molgraph);
-
-		if (bond_len > 0.0)
-			ia.setReferenceLength2(bond_len);
-	}
-}
-
-double ConfGen::FragmentConformerGeneratorImpl::getBondLength(std::size_t atom1_idx, std::size_t atom2_idx, 
-															  const Chem::MolecularGraph& molgraph) const
-{
-	using namespace Chem;
-	using namespace ForceField;
-
-	const Atom& atom1 = molgraph.getAtom(atom1_idx);
-	const Atom& atom2 = molgraph.getAtom(atom2_idx);
-
-	if (getType(atom1) == AtomType::H) {
-		if (getAromaticityFlag(atom2))
-			return -1.0;
-
-	} else if (getType(atom2) == AtomType::H) {
-		if (getAromaticityFlag(atom1))
-			return -1.0;
-	}
-
-	try {
-		return calcDistance<double>(get3DCoordinates(atom1).getData(), get3DCoordinates(atom2).getData());
-
-	} catch (const Base::ItemNotFound& e) {}
-
-	return -1.0;
-}
-
-double ConfGen::FragmentConformerGeneratorImpl::getBondAngle(std::size_t term_atom1_idx, std::size_t ctr_atom_idx, 
-															 std::size_t term_atom2_idx, const Chem::MolecularGraph& molgraph) const
-{
-	using namespace Chem;
-	using namespace ForceField;
-
-	const Atom& term_atom1 = molgraph.getAtom(term_atom1_idx);
-	const Atom& ctr_atom = molgraph.getAtom(ctr_atom_idx);
-	const Atom& term_atom2 = molgraph.getAtom(term_atom2_idx);
-
-	if (getType(term_atom1) == AtomType::H) {
-		if (getAromaticityFlag(ctr_atom))
-			return -1.0;
-
-	} else if (getType(term_atom2) == AtomType::H) {
-		if (getAromaticityFlag(ctr_atom))
-			return -1.0;
-	}
-
-	try {
-		return (180.0 * calcBondAngle<double>(get3DCoordinates(term_atom1).getData(), get3DCoordinates(ctr_atom).getData(), 
-											  get3DCoordinates(term_atom2).getData()) / M_PI);
-
-	} catch (const Base::ItemNotFound& e) {}
-
-	return -1.0;
 }
 
 unsigned int ConfGen::FragmentConformerGeneratorImpl::generateRandomConformer(ConformerData& conf_data)

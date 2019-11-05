@@ -546,8 +546,8 @@ ValueType CDPL::ForceField::calcMMFF94AngleBendingGradient(const CoordsVec& term
 
 	ValueType a_ijk_cos = calcBondAngleCosDerivatives<ValueType>(term_atom1_pos, ctr_atom_pos, term_atom2_pos,
 																 ac_term1_grad, ac_ctr_grad, ac_term2_grad);
-    ValueType grad_fact = 1;
-    double e_a = 0;
+    ValueType grad_fact = ValueType(1);
+    ValueType e_a = ValueType(0);
     
     if (linear) {
 		grad_fact = ValueType(143.9325) * force_const;
@@ -556,11 +556,12 @@ ValueType CDPL::ForceField::calcMMFF94AngleBendingGradient(const CoordsVec& term
     } else {
 		ValueType a_ijk_cos_2 = a_ijk_cos * a_ijk_cos;
 		ValueType a_ijk = std::acos(a_ijk_cos);
+		ValueType div = std::sqrt(1 - a_ijk_cos_2);
 
-       	if (a_ijk_cos_2 > 0.999999)
-			a_ijk_cos_2 = 0.999999;
+		if (div < ValueType(0.0000001))
+			div = ValueType(0.0000001);
 
-		grad_fact = force_const / std::sqrt(1 - a_ijk_cos_2) * 
+		grad_fact = force_const / div * 
 			(a_ijk * (ValueType(86.58992538) * a_ijk - ValueType(143.9313616)) - 
 			 ref_angle * (ValueType(3.022558594) * a_ijk - ValueType(0.02637679965) * ref_angle - ValueType(2.512076157)));
 
@@ -615,17 +616,19 @@ ValueType CDPL::ForceField::calcMMFF94StretchBendGradient(const CoordsVec& term_
 	ValueType a_ijk_cos_2 = a_ijk_cos * a_ijk_cos;
 	ValueType a_ijk = std::acos(a_ijk_cos);
 
-	if (a_ijk_cos_2 > 0.999999)
-		a_ijk_cos_2 = 0.999999;
-
 	ValueType dr_ij = r_ij - ref_length1;
 	ValueType dr_kj = r_kj - ref_length2;
 	ValueType da_ijk = a_ijk * ValueType(180 / M_PI) - ref_angle;
-    
-    ValueType a_ijk_grad_fact = ValueType(-180 * 2.5121 / M_PI) / std::sqrt(1 - a_ijk_cos_2) * (dr_ij * ijk_force_const + dr_kj * kji_force_const);
+	ValueType div = std::sqrt(1 - a_ijk_cos_2);
+
+	if (div < ValueType(0.0000001))
+		div = ValueType(0.0000001);
+
+    ValueType a_ijk_grad_fact = ValueType(-180 * 2.5121 / M_PI) / div * (dr_ij * ijk_force_const + dr_kj * kji_force_const);
+
 	ValueType r_ij_grad_fact = ValueType(2.5121) * da_ijk * ijk_force_const;
 	ValueType r_kj_grad_fact = ValueType(2.5121) * da_ijk * kji_force_const;
-    
+  
 	Detail::scaleAddVector(dist_term1_grad, r_ij_grad_fact, term_atom1_grad);
 	Detail::scaleAddVector(ac_term1_grad, a_ijk_grad_fact, term_atom1_grad);
 
@@ -672,9 +675,12 @@ ValueType CDPL::ForceField::calcMMFF94OutOfPlaneBendingGradient(const CoordsVec&
     ValueType chi_ijkl_cos = calcOutOfPlaneAngleCosDerivatives<ValueType>(term_atom1_pos, ctr_atom_pos, term_atom2_pos, oop_atom_pos, 
 																		  ac_term1_grad, ac_ctr_grad, ac_term2_grad, ac_oop_grad);
 	ValueType chi_ijkl = ValueType(M_PI * 0.5) - std::acos(chi_ijkl_cos);
+	ValueType div = std::sqrt(1 - chi_ijkl_cos * chi_ijkl_cos);
 
-    ValueType grad_fact = ValueType(0.043844 * 180 * 180) / std::sqrt(1 - chi_ijkl_cos * chi_ijkl_cos) *
-		ValueType(1 / (M_PI * M_PI)) * force_const * chi_ijkl;
+	if (div < ValueType(0.0000001))
+		div = ValueType(0.0000001);
+
+    ValueType grad_fact = ValueType(0.043844 * 180 * 180) / div * ValueType(1 / (M_PI * M_PI)) * force_const * chi_ijkl;
     
 	Detail::scaleAddVector(ac_term1_grad, grad_fact, term_atom1_grad);
 	Detail::scaleAddVector(ac_ctr_grad, grad_fact, ctr_atom_grad);
@@ -721,11 +727,12 @@ ValueType CDPL::ForceField::calcMMFF94TorsionGradient(const CoordsVec& term_atom
 																   ac_term1_grad, ac_ctr1_grad, ac_ctr2_grad, ac_term2_grad); 
 	ValueType phi = std::acos(phi_cos);
 	ValueType phi_cos_2 = phi_cos * phi_cos;
+	ValueType div = std::sqrt(1 - phi_cos_2);
 
-	if (phi_cos_2 >= ValueType(1))
-		phi_cos_2 = ValueType(0.999999999);
-      
-    ValueType grad_fact = -ValueType(1) / std::sqrt(1 - phi_cos_2) *
+	if (div < ValueType(0.0000001))
+		div = ValueType(0.0000001);
+
+    ValueType grad_fact = ValueType(-1) / div *
 		(tor_param2 * std::sin(2 * phi)  - 
 		 ValueType(0.5) * tor_param1 * std::sin(phi) - 
 		 ValueType(1.5) * tor_param3 * std::sin(3 * phi));

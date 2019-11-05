@@ -56,12 +56,12 @@ namespace
 	double calcMMFF94BondStretchingEnergy3(const CDPL::Math::Vector3D& atom1_pos, const CDPL::Math::Vector3D& atom2_pos, 
 										   double force_const, double ref_length)
 	{
-		return CDPL::ForceField::calcMMFF94BondStretchingEnergy(atom1_pos, atom2_pos, force_const, ref_length);
+		return CDPL::ForceField::calcMMFF94BondStretchingEnergy<double>(atom1_pos, atom2_pos, force_const, ref_length);
 	}
 
 	double calcMMFF94BondStretchingEnergy4(double r_ij, double force_const, double ref_length)
 	{
-		return CDPL::ForceField::calcMMFF94BondStretchingEnergy(r_ij, force_const, ref_length);
+		return CDPL::ForceField::calcMMFF94BondStretchingEnergy<double>(r_ij, force_const, ref_length);
 	}
 
 
@@ -78,13 +78,13 @@ namespace
 	double calcMMFF94AngleBendingEnergy3(const CDPL::Math::Vector3D& term_atom1_pos, const CDPL::Math::Vector3D& ctr_atom_pos, 
 										 const CDPL::Math::Vector3D& term_atom2_pos, bool linear, double force_const, double ref_angle)
 	{
-		return CDPL::ForceField::calcMMFF94AngleBendingEnergy(term_atom1_pos, ctr_atom_pos, term_atom2_pos, linear, force_const, ref_angle);
+		return CDPL::ForceField::calcMMFF94AngleBendingEnergy<double>(term_atom1_pos, ctr_atom_pos, term_atom2_pos, linear, force_const, ref_angle);
 	}
 
 	double calcMMFF94AngleBendingEnergy4(const CDPL::Math::Vector3D& term_atom1_pos, const CDPL::Math::Vector3D& ctr_atom_pos, 
 										 const CDPL::Math::Vector3D& term_atom2_pos, double r_ij, double r_jk, bool linear, double force_const, double ref_angle)
 	{
-		return CDPL::ForceField::calcMMFF94AngleBendingEnergy(term_atom1_pos, ctr_atom_pos, term_atom2_pos, r_ij, r_jk, linear, force_const, ref_angle);
+		return CDPL::ForceField::calcMMFF94AngleBendingEnergy<double>(term_atom1_pos, ctr_atom_pos, term_atom2_pos, r_ij, r_jk, linear, force_const, ref_angle);
 	}
 
 
@@ -102,16 +102,16 @@ namespace
 										const CDPL::Math::Vector3D& term_atom2_pos, double ijk_force_const, double kji_force_const, 
 										double ref_angle, double ref_length1, double ref_length2)
 	{
-		return CDPL::ForceField::calcMMFF94StretchBendEnergy(term_atom1_pos, ctr_atom_pos, term_atom2_pos, ijk_force_const, kji_force_const,
-															 ref_angle, ref_length1, ref_length2);
+		return CDPL::ForceField::calcMMFF94StretchBendEnergy<double>(term_atom1_pos, ctr_atom_pos, term_atom2_pos, ijk_force_const, kji_force_const,
+																	 ref_angle, ref_length1, ref_length2);
 	}
 
 	double calcMMFF94StretchBendEnergy4(const CDPL::Math::Vector3D& term_atom1_pos, const CDPL::Math::Vector3D& ctr_atom_pos, 
 										const CDPL::Math::Vector3D& term_atom2_pos, double r_ij, double r_jk, double ijk_force_const, double kji_force_const, 
 										double ref_angle, double ref_length1, double ref_length2)
 	{
-		return CDPL::ForceField::calcMMFF94StretchBendEnergy(term_atom1_pos, ctr_atom_pos, term_atom2_pos, r_ij, r_jk, ijk_force_const, kji_force_const,
-															 ref_angle, ref_length1, ref_length2);
+		return CDPL::ForceField::calcMMFF94StretchBendEnergy<double>(term_atom1_pos, ctr_atom_pos, term_atom2_pos, r_ij, r_jk, ijk_force_const, kji_force_const,
+																	 ref_angle, ref_length1, ref_length2);
 	}
 
 
@@ -129,14 +129,14 @@ namespace
 											  const CDPL::Math::Vector3D& term_atom2_pos, const CDPL::Math::Vector3D& oop_atom_pos, 
 											  double force_const)
 	{
-		return CDPL::ForceField::calcMMFF94OutOfPlaneBendingEnergy(term_atom1_pos, ctr_atom_pos, term_atom2_pos, oop_atom_pos, force_const);
+		return CDPL::ForceField::calcMMFF94OutOfPlaneBendingEnergy<double>(term_atom1_pos, ctr_atom_pos, term_atom2_pos, oop_atom_pos, force_const);
 	}
 
 	double calcMMFF94OutOfPlaneBendingEnergy4(const CDPL::Math::Vector3D& term_atom1_pos, const CDPL::Math::Vector3D& ctr_atom_pos, 
 											  const CDPL::Math::Vector3D& term_atom2_pos, const CDPL::Math::Vector3D& oop_atom_pos, 
 											  double r_jl, double force_const)
 	{
-		return CDPL::ForceField::calcMMFF94OutOfPlaneBendingEnergy(term_atom1_pos, ctr_atom_pos, term_atom2_pos, oop_atom_pos, r_jl, force_const);
+		return CDPL::ForceField::calcMMFF94OutOfPlaneBendingEnergy<double>(term_atom1_pos, ctr_atom_pos, term_atom2_pos, oop_atom_pos, r_jl, force_const);
 	}
 
 
@@ -154,8 +154,8 @@ namespace
 									const CDPL::Math::Vector3D& ctr_atom2_pos, const CDPL::Math::Vector3D& term_atom2_pos, 
 									double tor_param1, double tor_param2, double tor_param3)
 	{
-		return CDPL::ForceField::calcMMFF94TorsionEnergy(term_atom1_pos, ctr_atom1_pos, ctr_atom2_pos, term_atom2_pos, 
-														 tor_param1, tor_param2, tor_param3);
+		return CDPL::ForceField::calcMMFF94TorsionEnergy<double>(term_atom1_pos, ctr_atom1_pos, ctr_atom2_pos, term_atom2_pos, 
+																 tor_param1, tor_param2, tor_param3);
 	}
 
 	double calcMMFF94ElectrostaticEnergy1(const CDPL::ForceField::MMFF94ElectrostaticInteractionData& ia_data, const CDPL::Math::Vector3DArray& coords)
@@ -171,13 +171,13 @@ namespace
 	double calcMMFF94ElectrostaticEnergy3(const CDPL::Math::Vector3D& atom1_pos, const CDPL::Math::Vector3D& atom2_pos, double atom1_chg,
 										  double atom2_chg, double scale_fact, double de_const, double dist_expo)
 	{
-		return CDPL::ForceField::calcMMFF94ElectrostaticEnergy(atom1_pos, atom2_pos, atom1_chg, atom2_chg, scale_fact, de_const, dist_expo);
+		return CDPL::ForceField::calcMMFF94ElectrostaticEnergy<double>(atom1_pos, atom2_pos, atom1_chg, atom2_chg, scale_fact, de_const, dist_expo);
 	}
 
 	double calcMMFF94ElectrostaticEnergy4(double r_ij, double atom1_chg,
 										  double atom2_chg, double scale_fact, double de_const, double dist_expo)
 	{
-		return CDPL::ForceField::calcMMFF94ElectrostaticEnergy(r_ij, atom1_chg, atom2_chg, scale_fact, de_const, dist_expo);
+		return CDPL::ForceField::calcMMFF94ElectrostaticEnergy<double>(r_ij, atom1_chg, atom2_chg, scale_fact, de_const, dist_expo);
 	}
 
 
@@ -194,12 +194,12 @@ namespace
 	double calcMMFF94VanDerWaalsEnergy3(const CDPL::Math::Vector3D& atom1_pos, const CDPL::Math::Vector3D& atom2_pos, double e_IJ,
 										double r_IJ, double r_IJ_7)
 	{
-		return CDPL::ForceField::calcMMFF94VanDerWaalsEnergy(atom1_pos, atom2_pos, e_IJ, r_IJ, r_IJ_7);
+		return CDPL::ForceField::calcMMFF94VanDerWaalsEnergy<double>(atom1_pos, atom2_pos, e_IJ, r_IJ, r_IJ_7);
 	}
 
 	double calcMMFF94VanDerWaalsEnergy4(double r_ij, double e_IJ, double r_IJ, double r_IJ_7)
 	{
-		return CDPL::ForceField::calcMMFF94VanDerWaalsEnergy(r_ij, e_IJ, r_IJ, r_IJ_7);
+		return CDPL::ForceField::calcMMFF94VanDerWaalsEnergy<double>(r_ij, e_IJ, r_IJ, r_IJ_7);
 	}
 }
 

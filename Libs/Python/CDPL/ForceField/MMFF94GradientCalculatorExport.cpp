@@ -72,6 +72,10 @@ void CDPLPythonForceField::exportMMFF94GradientCalculator()
 			 python::return_value_policy<python::copy_const_reference>())
 		.def("getVanDerWaalsEnergy", &CalculatorType::getVanDerWaalsEnergy, python::arg("self"),
 			 python::return_value_policy<python::copy_const_reference>())
+		.def("setFixedAtomMask", &CalculatorType::setFixedAtomMask, (python::arg("self"), python::arg("mask")))
+		.def("resetFixedAtomMask", &CalculatorType::resetFixedAtomMask, python::arg("self"))
+		.def("getFixedAtomMask", &CalculatorType::getFixedAtomMask, python::arg("self"),
+			 python::return_internal_reference<>())
 		.add_property("enabledInteractionTypes", &CalculatorType::getEnabledInteractionTypes, 
 					  &CalculatorType::setEnabledInteractionTypes)
 		.add_property("totalEnergy", python::make_function(&CalculatorType::getTotalEnergy,
@@ -89,5 +93,7 @@ void CDPLPythonForceField::exportMMFF94GradientCalculator()
 		.add_property("electrostaticEnergy", python::make_function(&CalculatorType::getElectrostaticEnergy,
 																   python::return_value_policy<python::copy_const_reference>()))
 		.add_property("vanDerWaalsEnergy", python::make_function(&CalculatorType::getVanDerWaalsEnergy,
-																 python::return_value_policy<python::copy_const_reference>()));
+																 python::return_value_policy<python::copy_const_reference>()))
+		.add_property("fixedAtomMask", python::make_function(&CalculatorType::getFixedAtomMask,
+															 python::return_internal_reference<>()));
 }

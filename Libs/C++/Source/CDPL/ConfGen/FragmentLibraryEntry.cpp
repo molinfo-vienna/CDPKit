@@ -275,6 +275,10 @@ void ConfGen::FragmentLibraryEntry::copyAtoms(const Chem::MolecularGraph& molgra
 			setAromaticityFlag(new_atom, false);
 			setRingFlag(new_atom, false);
 			setHybridizationState(new_atom, HybridizationState::UNKNOWN);
+
+			if (atom_type == AtomType::H && has3DCoordinates(atom))
+				set3DCoordinates(new_atom, get3DCoordinates(atom));
+
 			continue;
 		} 
 

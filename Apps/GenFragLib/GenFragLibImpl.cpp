@@ -796,8 +796,8 @@ void GenFragLibImpl::printOptionSummary()
 	for (StringList::const_iterator it = ++inputFiles.begin(), end = inputFiles.end(); it != end; ++it)
 		printMessage(VERBOSE, std::string(31, ' ') + *it);
 
-	printMessage(VERBOSE, " Output File:                  " + outputFile);
- 	printMessage(VERBOSE, " Mode:                         " + getModeString());
+	printMessage(VERBOSE,     " Output File:                         " + outputFile);
+ 	printMessage(VERBOSE,     " Mode:                                " + getModeString());
 
 	if (mode != MERGE) {
 		printMessage(VERBOSE, " Multi-threading:                     " + std::string(multiThreading ? "Yes" : "No"));

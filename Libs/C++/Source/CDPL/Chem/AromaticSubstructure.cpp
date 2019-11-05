@@ -43,7 +43,7 @@ using namespace CDPL;
 namespace
 {
 
-	const std::size_t MAX_NUM_UNIQUE_RING_SYSTEMS = 300000;
+	const std::size_t MAX_NUM_UNIQUE_RING_SYSTEMS = 50000;
 }
 
 
@@ -210,7 +210,13 @@ void Chem::AromaticSubstructure::fuseRings()
 				continue;
 
 			fuseRings(ring_descr1, ring_descr2, next_rdlist);
+
+			if (uniqueRingSet.size() > MAX_NUM_UNIQUE_RING_SYSTEMS) 
+				break;
 		}
+
+		if (uniqueRingSet.size() > MAX_NUM_UNIQUE_RING_SYSTEMS) 
+			break;
 	}
 
 	finished = next_rdlist.empty();
