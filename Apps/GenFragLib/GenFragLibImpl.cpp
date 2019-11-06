@@ -55,9 +55,9 @@ namespace
 {
 
 	const std::size_t  DEF_TIMEOUT                    = 20 * 60;
-	const std::size_t  DEF_SMALL_RSYS_SAMPLING_FACTOR = 20;
+	const std::size_t  DEF_SMALL_RSYS_SAMPLING_FACTOR = 4;
 	const double       DEF_MIN_RMSD                   = 0.1;
-	const double       DEF_E_WINDOW                   = 4.0;
+	const double       DEF_E_WINDOW                   = 6.0;
 	const unsigned int DEF_FORCE_FIELD_TYPE           = CDPL::ConfGen::ForceFieldType::MMFF94_NO_ESTAT;
 	const bool         DEF_STRICT_FORCE_FIELD_PARAM   = true;
 	const bool         DEF_PRESERVE_BONDING_GEOM      = true;
@@ -233,7 +233,7 @@ private:
 		}
 
 		parent->printMessage(ERROR, "Error while processing " + std::string(&frag == &molecule ? "molecule" : "fragment") + 
-							 " '" + getSMILES(frag) + "':\n" + err_msg);
+							 " '" + getSMILES(frag) + "': " + err_msg);
 	}
 
 	std::string getSMILES(const CDPL::Chem::MolecularGraph& molgraph) const {
@@ -292,7 +292,7 @@ GenFragLibImpl::GenFragLibImpl():
 	addOption("input-format,I", "Input file format (default: auto-detect from file extension).", 
 			  value<std::string>()->notifier(boost::bind(&GenFragLibImpl::setInputFormat, this, _1)));
 	addOption("rmsd,r", "Minimum RMSD of two conformations to be considered dissimilar (default: " + 
-			  boost::lexical_cast<std::string>(minRMSD) + ", must be >= 0).",
+			  (boost::format("%.4f") % minRMSD).str() + ", must be >= 0).",
 			  value<double>()->notifier(boost::bind(&GenFragLibImpl::setRMSD, this, _1)));
 	addOption("timeout,T", "Time in seconds after which fragment conformer generation will be stopped (default: " + 
 			  boost::lexical_cast<std::string>(timeout) + ", must be >= 0, 0 disables timeout).",
@@ -791,10 +791,10 @@ void GenFragLibImpl::printMessage(VerbosityLevel level, const std::string& msg, 
 void GenFragLibImpl::printOptionSummary()
 {
 	printMessage(VERBOSE, "Option Summary:");
-	printMessage(VERBOSE, " Input File(s):                " + inputFiles[0]);
+	printMessage(VERBOSE,     " Input File(s):                       " + inputFiles[0]);
 	
 	for (StringList::const_iterator it = ++inputFiles.begin(), end = inputFiles.end(); it != end; ++it)
-		printMessage(VERBOSE, std::string(31, ' ') + *it);
+		printMessage(VERBOSE, std::string(38, ' ') + *it);
 
 	printMessage(VERBOSE,     " Output File:                         " + outputFile);
  	printMessage(VERBOSE,     " Mode:                                " + getModeString());

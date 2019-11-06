@@ -32,18 +32,26 @@ import CDPL.Chem as Chem
 
 
 REMOVE_FLUORINATED = True
+#REMOVE_FLUORINATED = False
 FLUOR_ATOM_COUNT = 9
 MIN_HEAVY_ATOM_COUNT = 5
-VALID_ATOM_TYPES = [Chem.AtomType.H, Chem.AtomType.C, Chem.AtomType.F, Chem.AtomType.Cl, Chem.AtomType.Br, Chem.AtomType.I, Chem.AtomType.N, Chem.AtomType.O, Chem.AtomType.S, Chem.AtomType.Se, Chem.AtomType.P, Chem.AtomType.Pt, Chem.AtomType.As, Chem.AtomType.Si]    
+#VALID_ATOM_TYPES = [Chem.AtomType.H, Chem.AtomType.C, Chem.AtomType.F, Chem.AtomType.Cl, Chem.AtomType.Br, Chem.AtomType.I, Chem.AtomType.N, Chem.AtomType.O, Chem.AtomType.S, Chem.AtomType.Se, Chem.AtomType.P, Chem.AtomType.Pt, Chem.AtomType.As, Chem.AtomType.Si]    
+VALID_ATOM_TYPES = [Chem.AtomType.H, Chem.AtomType.C, Chem.AtomType.F, Chem.AtomType.Cl, Chem.AtomType.Br, Chem.AtomType.I, Chem.AtomType.N, Chem.AtomType.O, Chem.AtomType.S, Chem.AtomType.P, Chem.AtomType.Si]    
 CARBON_ATOMS_MANDATORY = True
-NEUTRALIZE = True
+#NEUTRALIZE = True
+NEUTRALIZE = False
 KEEP_ONLY_LARGEST_COMP = True
+PRINT_SMILES = True
+#PRINT_SMILES = False
 
 
 class Stats:
     pass
 
 def generateSMILES(mol):
+    if not PRINT_SMILES:
+        return ''
+
     try:
         return Chem.generateSMILES(mol)
     except:

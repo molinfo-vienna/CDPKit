@@ -101,7 +101,7 @@ namespace CDPL
 
 			void setupRandomConformerGeneration();
 
-			bool generateConformerFromInputCoordinates();
+			bool generateConformerFromInputCoordinates(ConformerDataArray& conf_array);
 
 			unsigned int generateSingleConformer();
 			unsigned int generateFlexibleRingConformers();
@@ -156,7 +156,7 @@ namespace CDPL
 			AtomList                                 nbrHydrogens1;
 			AtomList                                 nbrHydrogens2;
 			Chem::Fragment                           symMappingSearchMolGraph;
-			Util::BitSet                             ordHDepleteAtomMask;
+			Util::BitSet                             coreAtomMask;
 			ConformerDataArray                       ringAtomCoords;
 			ConformerDataArray                       outputConfs;
 			ConformerDataArray                       workingConfs;
