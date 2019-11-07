@@ -409,8 +409,11 @@ bool PSDScreenImpl::collectHit(const SearchHit& hit, double score)
 	if (termSignalCaught())
 		return false;
 
+	if (haveErrorMessage())
+		return false;
+
 	if (multiThreading) {
-		boost::lock_guard<boost::mutex> lock(mutex);
+		boost::lock_guard<boost::mutex> lock(collHitMutex);
 
 		return doCollectHit(hit, score);
 	}
@@ -420,9 +423,6 @@ bool PSDScreenImpl::collectHit(const SearchHit& hit, double score)
 
 bool PSDScreenImpl::doCollectHit(const SearchHit& hit, double score)
 {
-	if (!errorMessage.empty())
-		return false;
-
 	try {
 		if (maxNumHits > 0 && numHits >= maxNumHits)
 			return false;
@@ -432,10 +432,10 @@ bool PSDScreenImpl::doCollectHit(const SearchHit& hit, double score)
 		return (*hitCollector)(hit, score);
 
 	} catch (const std::exception& e) {
-		errorMessage = std::string("collecting search hit failed: ") + e.what();
+		setErrorMessage(std::string("collecting search hit failed: ") + e.what());
 
 	} catch (...) {
-		errorMessage = "collecting search hit failed";
+		setErrorMessage("collecting search hit failed");
 	}
 
 	return false;

@@ -148,6 +148,7 @@ namespace GenFragLib
 		FragmentLibrary::SharedPointer fragmentLibPtr;
 		FragmentFrequencyMap           fragmentOccCounts;
 		boost::mutex                   mutex;
+		boost::mutex                   molReadMutex;
 		std::string                    errorMessage;
 		Clock::time_point              startTime;
     };

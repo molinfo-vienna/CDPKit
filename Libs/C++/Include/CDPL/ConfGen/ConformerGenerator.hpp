@@ -33,8 +33,13 @@
 
 #include <memory>
 
+#include <boost/iterator/indirect_iterator.hpp>
+
 #include "CDPL/ConfGen/APIPrefix.hpp"
+#include "CDPL/ConfGen/ConformerDataArray.hpp"
+#include "CDPL/ConfGen/CallbackFunction.hpp"
 #include "CDPL/ConfGen/ConformerGeneratorSettings.hpp"
+#include "CDPL/ConfGen/FragmentLibrary.hpp"
 
 
 namespace CDPL 
@@ -60,13 +65,44 @@ namespace CDPL
 		{
 
 		public:
+			typedef boost::indirect_iterator<ConformerDataArray::const_iterator, const ConformerData> ConstConformerIterator;
+			typedef boost::indirect_iterator<ConformerDataArray::const_iterator, ConformerData> ConformerIterator;
+
 			ConformerGenerator();
-	
+		
+			~ConformerGenerator();
+
 			const ConformerGeneratorSettings& getSettings() const;
 
 			ConformerGeneratorSettings& getSettings();
 
+			void clearFragmentLibraries();
+
+			void addFragmentLibrary(const FragmentLibrary::SharedPointer& lib);
+
+			void setAbortCallback(const CallbackFunction& func);
+
+			const CallbackFunction& getAbortCallback() const;
+
+			void setTimeoutCallback(const CallbackFunction& func);
+
+			const CallbackFunction& getTimeoutCallback() const;
+			
 			unsigned int generate(const Chem::MolecularGraph& molgraph);
+
+			std::size_t getNumConformers() const;
+
+			const ConformerData& getConformer(std::size_t idx) const;
+
+			ConformerData& getConformer(std::size_t idx);
+
+			ConstConformerIterator getConformersBegin() const;
+
+			ConstConformerIterator getConformersEnd() const;
+
+			ConformerIterator getConformersBegin();
+
+			ConformerIterator getConformersEnd();
 
 		private:
 			ConformerGenerator(const ConformerGenerator&);

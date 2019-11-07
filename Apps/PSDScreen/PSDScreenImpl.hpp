@@ -152,6 +152,7 @@ namespace PSDScreen
 		QueryReaderPtr           queryPharmReader;
 		HitCollectorPtr          hitCollector;
 		boost::mutex             mutex;
+		boost::mutex             collHitMutex;
 		std::string              errorMessage;
 		Clock::time_point        startTime;
 		std::size_t              numQueryPharms;

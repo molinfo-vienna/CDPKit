@@ -118,6 +118,7 @@ namespace PSDCreate
 		InputHandlerPtr        inputHandler;
 		CompMoleculeReader     inputReader;   
 		boost::mutex           mutex;
+		boost::mutex           molReadMutex;
 		std::string            errorMessage;
 		bool                   addSourceFileProp;
 		Clock::time_point      startTime;

@@ -445,8 +445,11 @@ bool PSDCreateImpl::readNextMolecule(CDPL::Chem::Molecule& mol)
 	if (termSignalCaught())
 		return false;
 
+	if (haveErrorMessage())
+		return false;
+
 	if (multiThreading) {
-		boost::lock_guard<boost::mutex> lock(mutex);
+		boost::lock_guard<boost::mutex> lock(molReadMutex);
 
 		return doReadNextMolecule(mol);
 	}
@@ -456,9 +459,6 @@ bool PSDCreateImpl::readNextMolecule(CDPL::Chem::Molecule& mol)
 
 bool PSDCreateImpl::doReadNextMolecule(CDPL::Chem::Molecule& mol)
 {
-	if (!errorMessage.empty())
-		return false;
-
 	while (true) {
 		try {
 			if (inputReader.getRecordIndex() >= inputReader.getNumRecords()) 

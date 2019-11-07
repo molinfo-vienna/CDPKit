@@ -38,6 +38,9 @@ ConfGen::ConformerGenerator::ConformerGenerator():
 	impl(new ConformerGeneratorImpl())
 {}
 
+ConfGen::ConformerGenerator::~ConformerGenerator() 
+{}
+
 const ConfGen::ConformerGeneratorSettings& 
 ConfGen::ConformerGenerator::getSettings() const
 {
@@ -50,7 +53,78 @@ ConfGen::ConformerGenerator::getSettings()
 	return impl->getSettings();
 }
 
+void ConfGen::ConformerGenerator::clearFragmentLibraries()
+{
+	impl->clearFragmentLibraries();
+}
+
+void ConfGen::ConformerGenerator::addFragmentLibrary(const FragmentLibrary::SharedPointer& lib)
+{
+	impl->addFragmentLibrary(lib);
+}
+
+void ConfGen::ConformerGenerator::setAbortCallback(const CallbackFunction& func)
+{
+	impl->setAbortCallback(func);
+}
+
+const ConfGen::CallbackFunction& ConfGen::ConformerGenerator::getAbortCallback() const
+{
+	return impl->getAbortCallback();
+}
+
+void ConfGen::ConformerGenerator::setTimeoutCallback(const CallbackFunction& func)
+{
+	impl->setTimeoutCallback(func);
+}
+
+const ConfGen::CallbackFunction& ConfGen::ConformerGenerator::getTimeoutCallback() const
+{
+	return impl->getTimeoutCallback();
+}
+
 unsigned int ConfGen::ConformerGenerator::generate(const Chem::MolecularGraph& molgraph)
 {
 	return impl->generate(molgraph);
+}
+
+std::size_t ConfGen::ConformerGenerator::getNumConformers() const
+{
+	return impl->getNumConformers();
+}
+
+const ConfGen::ConformerData& ConfGen::ConformerGenerator::getConformer(std::size_t idx) const
+{
+	if (idx >= impl->getNumConformers())
+		throw Base::IndexError("ConformerGenerator: conformer index out of bounds");
+
+	return impl->getConformer(idx);
+}
+
+ConfGen::ConformerData& ConfGen::ConformerGenerator::getConformer(std::size_t idx)
+{
+	if (idx >= impl->getNumConformers())
+		throw Base::IndexError("ConformerGenerator: conformer index out of bounds");
+
+	return impl->getConformer(idx);
+}
+
+ConfGen::ConformerGenerator::ConstConformerIterator ConfGen::ConformerGenerator::getConformersBegin() const
+{
+    return impl->getConformersBegin();
+}
+
+ConfGen::ConformerGenerator::ConstConformerIterator ConfGen::ConformerGenerator::getConformersEnd() const
+{
+    return impl->getConformersEnd();
+}
+
+ConfGen::ConformerGenerator::ConformerIterator ConfGen::ConformerGenerator::getConformersBegin()
+{
+    return impl->getConformersBegin();
+}
+
+ConfGen::ConformerGenerator::ConformerIterator ConfGen::ConformerGenerator::getConformersEnd()
+{
+    return impl->getConformersEnd();
 }

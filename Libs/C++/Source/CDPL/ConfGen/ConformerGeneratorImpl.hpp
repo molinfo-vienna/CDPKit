@@ -31,17 +31,19 @@
 #ifndef CDPL_CONFGEN_CONFORMERGENERATORIMPL_HPP
 #define CDPL_CONFGEN_CONFORMERGENERATORIMPL_HPP
 
+#include <boost/timer/timer.hpp>
+
 #include "CDPL/ConfGen/ConformerGeneratorSettings.hpp"
+#include "CDPL/ConfGen/ConformerDataArray.hpp"
+#include "CDPL/ConfGen/CallbackFunction.hpp"
+#include "CDPL/Util/ObjectPool.hpp"
+
+#include "TorsionDriverImpl.hpp"
+#include "FragmentAssemblerImpl.hpp"
 
 
 namespace CDPL 
 {
-
-	namespace Chem
-	{
-
-		class MolecularGraph;
-	}
 
     namespace ConfGen 
     {
@@ -50,19 +52,50 @@ namespace CDPL
 		{
 
 		public:
+			typedef ConformerDataArray::const_iterator ConstConformerIterator;
+
 			ConformerGeneratorImpl();
 
 			~ConformerGeneratorImpl();
 
 			ConformerGeneratorSettings& getSettings();
 
+			void clearFragmentLibraries();
+
+			void addFragmentLibrary(const FragmentLibrary::SharedPointer& lib);
+
+			void setAbortCallback(const CallbackFunction& func);
+
+			const CallbackFunction& getAbortCallback() const;
+
+			void setTimeoutCallback(const CallbackFunction& func);
+
+			const CallbackFunction& getTimeoutCallback() const;
+
 			unsigned int generate(const Chem::MolecularGraph& molgraph);
+
+			std::size_t getNumConformers() const;
+
+			ConformerData& getConformer(std::size_t idx);
+
+			ConstConformerIterator getConformersBegin() const;
+
+			ConstConformerIterator getConformersEnd() const;
 
 		private:
 			ConformerGeneratorImpl(const ConformerGeneratorImpl&);
 
 			ConformerGeneratorImpl& operator=(const ConformerGeneratorImpl&);
 
+			typedef Util::ObjectPool<ConformerData> ConformerDataCache;
+
+			ConformerDataCache         confDataCache;
+			ConformerDataArray         outputConfs;
+			CallbackFunction           abortCallback;
+			CallbackFunction           timeoutCallback;
+			boost::timer::cpu_timer    timer;
+			TorsionDriverImpl          torDriver;
+			FragmentAssemblerImpl      fragAssembler;
 			ConformerGeneratorSettings settings;
 		};
     }

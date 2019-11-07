@@ -33,9 +33,9 @@
 
 #include <boost/timer/timer.hpp>
 
-#include "CDPL/ConfGen/DGStructureGenerator.hpp"
 #include "CDPL/ConfGen/FragmentConformerGeneratorSettings.hpp"
 #include "CDPL/ConfGen/ConformerDataArray.hpp"
+#include "CDPL/ConfGen/DGStructureGenerator.hpp"
 #include "CDPL/ConfGen/CallbackFunction.hpp"
 #include "CDPL/ForceField/MMFF94InteractionParameterizer.hpp"
 #include "CDPL/ForceField/MMFF94InteractionData.hpp"

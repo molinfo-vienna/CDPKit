@@ -110,7 +110,7 @@ ConfGen::FragmentConformerGeneratorSettings::FragmentConformerGeneratorSettings(
 	srSettings.setMaxNumSampledConformers(2000);
 	srSettings.setMinNumSampledConformers(30);
 	srSettings.setTimeout(60 * 1000);
-	srSettings.setEnergyWindow(6.0);
+	srSettings.setEnergyWindow(8.0);
 	srSettings.setMaxNumOutputConformers(1000);
 	srSettings.setMinRMSD(0.1);
 

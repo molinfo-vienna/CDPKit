@@ -57,7 +57,7 @@ namespace
 	const std::size_t  DEF_TIMEOUT                    = 20 * 60;
 	const std::size_t  DEF_SMALL_RSYS_SAMPLING_FACTOR = 4;
 	const double       DEF_MIN_RMSD                   = 0.1;
-	const double       DEF_E_WINDOW                   = 6.0;
+	const double       DEF_E_WINDOW                   = 8.0;
 	const unsigned int DEF_FORCE_FIELD_TYPE           = CDPL::ConfGen::ForceFieldType::MMFF94_NO_ESTAT;
 	const bool         DEF_STRICT_FORCE_FIELD_PARAM   = true;
 	const bool         DEF_PRESERVE_BONDING_GEOM      = true;
@@ -713,8 +713,11 @@ bool GenFragLibImpl::readNextMolecule(CDPL::Chem::Molecule& mol)
 	if (termSignalCaught())
 		return false;
 
+	if (haveErrorMessage())
+		return false;
+
 	if (multiThreading) {
-		boost::lock_guard<boost::mutex> lock(mutex);
+		boost::lock_guard<boost::mutex> lock(molReadMutex);
 
 		return doReadNextMolecule(mol);
 	}
@@ -724,20 +727,17 @@ bool GenFragLibImpl::readNextMolecule(CDPL::Chem::Molecule& mol)
 
 bool GenFragLibImpl::doReadNextMolecule(CDPL::Chem::Molecule& mol)
 {
-	if (!errorMessage.empty())
-		return false;
-
 	while (true) {
 		try {
 			if (inputReader.getRecordIndex() >= inputReader.getNumRecords()) 
 				return false;
 
-			CmdLineBase::printMessage(DEBUG, "Starting to process molecule " + boost::lexical_cast<std::string>(inputReader.getRecordIndex() + 1) + '/' +
-									  boost::lexical_cast<std::string>(inputReader.getNumRecords()) + "...");
+			printMessage(DEBUG, "Starting to process molecule " + boost::lexical_cast<std::string>(inputReader.getRecordIndex() + 1) + '/' +
+						 boost::lexical_cast<std::string>(inputReader.getNumRecords()) + "...");
 
 			if (!inputReader.read(mol)) {
-				CmdLineBase::printMessage(ERROR, "Reading molecule " + boost::lexical_cast<std::string>(inputReader.getRecordIndex() + 1) + '/' +
-										  boost::lexical_cast<std::string>(inputReader.getNumRecords()) + " failed");			
+				printMessage(ERROR, "Reading molecule " + boost::lexical_cast<std::string>(inputReader.getRecordIndex() + 1) + '/' +
+							 boost::lexical_cast<std::string>(inputReader.getNumRecords()) + " failed");			
 				
 				inputReader.setRecordIndex(inputReader.getRecordIndex() + 1);
 				return false;
@@ -747,13 +747,13 @@ bool GenFragLibImpl::doReadNextMolecule(CDPL::Chem::Molecule& mol)
 			return true;
 
 		} catch (const std::exception& e) {
-			CmdLineBase::printMessage(ERROR, "Error while reading molecule " + boost::lexical_cast<std::string>(inputReader.getRecordIndex() + 1) + '/' +
-									  boost::lexical_cast<std::string>(inputReader.getNumRecords()) + ": " + e.what());
+			printMessage(ERROR, "Error while reading molecule " + boost::lexical_cast<std::string>(inputReader.getRecordIndex() + 1) + '/' +
+						 boost::lexical_cast<std::string>(inputReader.getNumRecords()) + ": " + e.what());
 
 
 		} catch (...) {
-			CmdLineBase::printMessage(ERROR, "Error while reading molecule " + boost::lexical_cast<std::string>(inputReader.getRecordIndex() + 1) + '/' +
-									  boost::lexical_cast<std::string>(inputReader.getNumRecords()));
+			printMessage(ERROR, "Error while reading molecule " + boost::lexical_cast<std::string>(inputReader.getRecordIndex() + 1) + '/' +
+						 boost::lexical_cast<std::string>(inputReader.getNumRecords()));
 		}
 
 		inputReader.setRecordIndex(inputReader.getRecordIndex() + 1);

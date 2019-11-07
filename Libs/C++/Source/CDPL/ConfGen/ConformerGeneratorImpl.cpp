@@ -43,7 +43,63 @@ ConfGen::ConformerGeneratorSettings& ConfGen::ConformerGeneratorImpl::getSetting
 	return settings;
 }
 
+void ConfGen::ConformerGeneratorImpl::clearFragmentLibraries()
+{
+	fragAssembler.clearFragmentLibraries();
+}
+
+void ConfGen::ConformerGeneratorImpl::addFragmentLibrary(const FragmentLibrary::SharedPointer& lib)
+{
+	fragAssembler.addFragmentLibrary(lib);
+}
+
+void ConfGen::ConformerGeneratorImpl::setAbortCallback(const CallbackFunction& func)
+{
+	abortCallback = func;
+
+	fragAssembler.setAbortCallback(func);
+	torDriver.setAbortCallback(func);
+}
+
+const ConfGen::CallbackFunction& ConfGen::ConformerGeneratorImpl::getAbortCallback() const
+{
+	return abortCallback;
+}
+
+void ConfGen::ConformerGeneratorImpl::setTimeoutCallback(const CallbackFunction& func)
+{
+	timeoutCallback = func;
+
+	fragAssembler.setTimeoutCallback(func);
+	torDriver.setTimeoutCallback(func);
+}
+
+const ConfGen::CallbackFunction& ConfGen::ConformerGeneratorImpl::getTimeoutCallback() const
+{
+	return timeoutCallback;
+}
+
 unsigned int ConfGen::ConformerGeneratorImpl::generate(const Chem::MolecularGraph& molgraph)
 {
 	return ReturnCode::SUCCESS;
+}
+
+std::size_t ConfGen::ConformerGeneratorImpl::getNumConformers() const
+{
+	return outputConfs.size();
+}
+
+ConfGen::ConformerData& ConfGen::ConformerGeneratorImpl::getConformer(std::size_t idx)
+{
+	return *outputConfs[idx];
+}
+
+ConfGen::ConformerGeneratorImpl::ConstConformerIterator ConfGen::ConformerGeneratorImpl::getConformersBegin() const
+{
+	return outputConfs.begin();
+}
+
+ConfGen::ConformerGeneratorImpl::ConstConformerIterator ConfGen::ConformerGeneratorImpl::getConformersEnd() const
+{
+	return outputConfs.end();
 }

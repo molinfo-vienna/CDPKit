@@ -151,7 +151,8 @@ namespace TautGen
 		OutputHandlerPtr               outputHandler;
 		MoleculeWriterPtr              outputWriter;
 		boost::mutex                   mutex;
-		boost::mutex                   outputMutex;
+		boost::mutex                   readMolMutex;
+		boost::mutex                   writeMolMutex;
 		std::string                    errorMessage;
 		Clock::time_point              startTime;
 		std::size_t                    numOutTautomers;

@@ -44,14 +44,15 @@ void CDPLPythonForceField::exportMMFF94EnergyCalculator()
 
     python::class_<CalculatorType>("MMFF94EnergyCalculator", python::no_init)
 		.def(python::init<>(python::arg("self")))
-		.def(python::init<const CalculatorType&>((python::arg("self"), python::arg("calculator"))))
+		.def(python::init<const CalculatorType&>((python::arg("self"), python::arg("calculator")))[python::with_custodian_and_ward<1, 2>()])
 		.def(python::init<const ForceField::MMFF94InteractionData&>((python::arg("self"), python::arg("ia_data"))))
 		.def(CDPLPythonBase::ObjectIdentityCheckVisitor<CalculatorType>())
 		.def("assign", CDPLPythonBase::copyAssOp(&CalculatorType::operator=),
-			 (python::arg("self"), python::arg("calculator")), python::return_self<>())
+			 (python::arg("self"), python::arg("calculator")), python::return_self<python::with_custodian_and_ward<1, 2> >())
 		.def("setEnabledInteractionTypes", &CalculatorType::setEnabledInteractionTypes, (python::arg("self"), python::arg("types")))
 		.def("getEnabledInteractionTypes", &CalculatorType::getEnabledInteractionTypes, python::arg("self"))
-		.def("setup", &CalculatorType::setup, (python::arg("self"), python::arg("ia_data")))
+		.def("setup", &CalculatorType::setup, (python::arg("self"), python::arg("ia_data")), 
+			 python::with_custodian_and_ward<1, 2>())
 		.def("__call__", &CalculatorType::operator()<Math::Vector3DArray>, (python::arg("self"), python::arg("coords")),
 			 python::return_value_policy<python::copy_const_reference>())
 		.def("getTotalEnergy", &CalculatorType::getTotalEnergy, python::arg("self"),
@@ -87,5 +88,5 @@ void CDPLPythonForceField::exportMMFF94EnergyCalculator()
 		.add_property("electrostaticEnergy", python::make_function(&CalculatorType::getElectrostaticEnergy,
 																   python::return_value_policy<python::copy_const_reference>()))
 		.add_property("vanDerWaalsEnergy", python::make_function(&CalculatorType::getVanDerWaalsEnergy,
-		python::return_value_policy<python::copy_const_reference>()));
+																 python::return_value_policy<python::copy_const_reference>()));
 }
