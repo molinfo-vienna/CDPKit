@@ -117,6 +117,8 @@ namespace CDPL
 
 			unsigned int generateConformers(bool e_ordered);
 
+			double calcMMFF94Energy(const Math::Vector3DArray& coords) const;
+
 		private:
 			FragmentTreeNode(FragmentTree& owner);
 			FragmentTreeNode(const FragmentTreeNode&);
@@ -162,7 +164,6 @@ namespace CDPL
 			void calcVirtualTorsionReferenceAtomVector(const Math::Vector3DArray& coords, std::size_t atom_idx, 
 													   Math::Vector3D& ref_vec) const;
 
-			double calcMMFF94Energy(const Math::Vector3DArray& coords) const;
 			double calcMMFF94Energy(const Math::Vector3DArray& coords, bool& atom_clash) const;
 
 			double calcNonVdWMMFF94Energies(const Math::Vector3DArray& coords) const;

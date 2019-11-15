@@ -117,7 +117,7 @@ namespace CDPL
 			void buildFragmentTree(const Chem::MolecularGraph& molgraph, 
 								   const Chem::MolecularGraph& parent_molgraph);
 
-			unsigned int setupFragmentConformers();
+			unsigned int getFragmentConformers();
 
 			bool transferInputCoordinates(unsigned int frag_type, const Chem::Fragment& frag, 
 										  FragmentTreeNode* node);

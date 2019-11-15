@@ -160,7 +160,8 @@ void CDPLPythonChem::exportMolecularGraphFunctions()
 	python::def("perceiveBondOrders", &Chem::perceiveBondOrders, 
 				(python::arg("molgraph"), python::arg("overwrite")));
 	python::def("perceiveAtomStereoCenters", &Chem::perceiveAtomStereoCenters, 
-				(python::arg("molgraph"), python::arg("overwrite"), python::arg("check_cip_sym") = true));
+				(python::arg("molgraph"), python::arg("overwrite"), python::arg("check_cip_sym") = true, 
+				 python::arg("check_acyclic_subst_sym_only") = false));
 	python::def("perceiveBondStereoCenters", &Chem::perceiveBondStereoCenters,
 				(python::arg("molgraph"), python::arg("overwrite"), python::arg("check_cip_sym") = true, python::arg("min_ring_size") = 8));
 	python::def("calcMDLParities", &Chem::calcMDLParities,
@@ -380,7 +381,7 @@ void CDPLPythonChem::exportMolecularGraphFunctions()
 	EXPORT_MOLGRAPH_FUNCS(MDLChiralFlag, flag)
 	EXPORT_MOLGRAPH_FUNCS(StoichiometricNumber, num)
 	EXPORT_MOLGRAPH_FUNCS(ConformationIndex, index)
-	EXPORT_MOLGRAPH_FUNCS_COPY_REF(ConformationEnergies, energies)
+	EXPORT_MOLGRAPH_FUNCS_COPY_REF(ConformerEnergies, energies)
 	EXPORT_MOLGRAPH_FUNCS(HashCode, hash_code)
 	EXPORT_MOLGRAPH_FUNCS_COPY_REF(MDLComment, comment)
 	EXPORT_MOLGRAPH_FUNCS_COPY_REF(StructureData, data)

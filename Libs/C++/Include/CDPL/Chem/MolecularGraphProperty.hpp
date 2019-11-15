@@ -75,7 +75,7 @@ namespace CDPL
 			extern CDPL_CHEM_API const Base::LookupKey STOICHIOMETRIC_NUMBER;
 
 			extern CDPL_CHEM_API const Base::LookupKey CONFORMATION_INDEX;
-			extern CDPL_CHEM_API const Base::LookupKey CONFORMATION_ENERGIES;
+			extern CDPL_CHEM_API const Base::LookupKey CONFORMER_ENERGIES;
 
 			extern CDPL_CHEM_API const Base::LookupKey STRUCTURE_DATA;
 

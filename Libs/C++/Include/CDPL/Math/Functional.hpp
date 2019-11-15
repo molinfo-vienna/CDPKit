@@ -1425,7 +1425,7 @@ namespace CDPL
 					// vr1 = (a2 + b2 - c2 - d2) * v1 + (2bc - 2ad) * v2 + (2bd + 2ac) * v3
 					ValueType t1 = e1().getC1() * e1().getC1() + e1().getC2() * e1().getC2() - e1().getC3() * e1().getC3() - e1().getC4() * e1().getC4();
 					ValueType t2 = ValueType(2) * (e1().getC2() * e1().getC3() - e1().getC1() * e1().getC4());
-					ValueType t3 = ValueType(2) * (e1().getC2() * e1().getC4() + e1().getC1() * e1().getC4());
+					ValueType t3 = ValueType(2) * (e1().getC2() * e1().getC4() + e1().getC1() * e1().getC3());
 
 					return (t1 * e2()(0) + t2 * e2()(1) + t3 * e2()(2));
 				}

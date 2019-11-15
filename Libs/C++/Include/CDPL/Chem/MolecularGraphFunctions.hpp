@@ -176,13 +176,13 @@ namespace CDPL
 		CDPL_CHEM_API bool hasConformationIndex(const MolecularGraph& molgraph);
 
 
- 		CDPL_CHEM_API const Math::DVector::SharedPointer& getConformationEnergies(const MolecularGraph& molgraph);
+ 		CDPL_CHEM_API const Math::DVector::SharedPointer& getConformerEnergies(const MolecularGraph& molgraph);
 
-		CDPL_CHEM_API void setConformationEnergies(MolecularGraph& molgraph, const Math::DVector::SharedPointer& energies);
+		CDPL_CHEM_API void setConformerEnergies(MolecularGraph& molgraph, const Math::DVector::SharedPointer& energies);
 
-		CDPL_CHEM_API void clearConformationEnergies(MolecularGraph& molgraph);
+		CDPL_CHEM_API void clearConformerEnergies(MolecularGraph& molgraph);
 
-		CDPL_CHEM_API bool hasConformationEnergies(const MolecularGraph& molgraph);
+		CDPL_CHEM_API bool hasConformerEnergies(const MolecularGraph& molgraph);
 
 
 		CDPL_CHEM_API Base::uint64 getHashCode(const MolecularGraph& molgraph);
@@ -535,7 +535,8 @@ namespace CDPL
 
 		CDPL_CHEM_API void kekulizeBonds(MolecularGraph& molgraph);
 
-		CDPL_CHEM_API void perceiveAtomStereoCenters(MolecularGraph& molgraph, bool overwrite, bool check_cip_sym = true);
+		CDPL_CHEM_API void perceiveAtomStereoCenters(MolecularGraph& molgraph, bool overwrite, 
+													 bool check_cip_sym = true, bool check_acyclic_subst_sym_only = false);
 
 		CDPL_CHEM_API void perceiveBondStereoCenters(MolecularGraph& molgraph, bool overwrite, bool check_cip_sym = true,
 													 std::size_t min_ring_size = 8);

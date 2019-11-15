@@ -502,6 +502,14 @@ void Chem::CDFDataReader::readMoleculeProperties(Molecule& mol, Internal::ByteBu
 				setConformationIndex(mol, size_val);
 				continue;
 
+			case CDF::MolecularGraphProperty::CONFORMER_ENERGIES: {
+				Math::DVector::SharedPointer dvec_ptr(new Math::DVector());
+
+				getVectorProperty(prop_spec, *dvec_ptr, bbuf);
+				setConformerEnergies(mol, dvec_ptr);
+				continue;
+			}
+
 			case CDF::MolecularGraphProperty::STRUCTURE_DATA:
 				setStructureData(mol, readStringData(prop_spec, bbuf));
 				continue;

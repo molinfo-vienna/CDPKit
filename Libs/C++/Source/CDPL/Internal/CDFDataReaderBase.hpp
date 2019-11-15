@@ -75,6 +75,9 @@ namespace CDPL
 			void getStringProperty(CDF::PropertySpec prop_spec, std::string& str, ByteBuffer& bbuf) const;
 
 			template <typename Vec>
+			void getVectorProperty(CDF::PropertySpec prop_spec, Vec& vec, ByteBuffer& bbuf) const;
+
+			template <typename Vec>
 			void getCVectorProperty(CDF::PropertySpec prop_spec, Vec& vec, ByteBuffer& bbuf) const;
 
 			template <typename Vec>
@@ -149,6 +152,34 @@ void CDPL::Internal::CDFDataReaderBase::getFloatProperty(CDF::PropertySpec prop_
 	}
 
 	bbuf.getFloat(value);
+}
+
+template <typename Vec>
+void CDPL::Internal::CDFDataReaderBase::getVectorProperty(CDF::PropertySpec prop_spec, Vec& vec, ByteBuffer& bbuf) const
+{
+	std::size_t len = extractPropertyValueLength(prop_spec);
+	CDF::SizeType vec_size;
+
+	bbuf.getInt(vec_size);
+	vec.resize(vec_size);
+
+	if (len != sizeof(typename Vec::ValueType)) {
+		if (len == sizeof(float)) {
+			float tmp;
+
+			for (CDF::SizeType i = 0; i < vec_size; i++) {
+				bbuf.getFloat(tmp);
+				vec[i] = tmp;
+			}
+
+			return;
+		}
+
+		throw Base::IOError("CDFDataReaderBase: float property read error, output type size mismatch");
+	}
+
+	for (CDF::SizeType i = 0; i < vec_size; i++)
+		bbuf.getFloat(vec[i]);
 }
 
 template <typename Vec>

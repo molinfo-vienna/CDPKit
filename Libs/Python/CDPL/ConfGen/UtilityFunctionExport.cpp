@@ -67,7 +67,8 @@ void CDPLPythonConfGen::exportUtilityFunctions()
 				(python::arg("molgraph"), python::arg("excl_bond_mask"), python::arg("bond_mask"), python::arg("het_h_rotors"), 
 				 python::arg("reset") = true));
 	python::def("perceiveFragmentType", &ConfGen::perceiveFragmentType, python::arg("molgraph"));
-	python::def("prepareForConformerGeneration", &ConfGen::prepareForConformerGeneration, python::arg("mol"));
+	python::def("prepareForConformerGeneration", &ConfGen::prepareForConformerGeneration, 
+				(python::arg("mol"), python::arg("canonicalize") = false));
 	python::def("parameterizeMMFF94Interactions", &ConfGen::parameterizeMMFF94Interactions, 
 				(python::arg("molgraph"), python::arg("parameterizer"), python::arg("param_data"), python::arg("ff_type")));
 }

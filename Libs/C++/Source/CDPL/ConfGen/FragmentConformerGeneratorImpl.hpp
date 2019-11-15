@@ -88,7 +88,6 @@ namespace CDPL
 
 		  private:
 			typedef Util::ObjectPool<ConformerData> ConformerDataCache;
-			typedef ConformerDataCache::SharedObjectPointer ConformerDataPtr;
 			typedef std::vector<const Chem::Atom*> AtomList;
 
 			FragmentConformerGeneratorImpl(const FragmentConformerGeneratorImpl&);
@@ -106,11 +105,14 @@ namespace CDPL
 			unsigned int generateSingleConformer();
 			unsigned int generateFlexibleRingConformers();
 
+			void addSymmetryMappingConformers(const ConformerData& conf_data, double rmsd, std::size_t max_num_out_confs);
+			void addMirroredConformer(const ConformerData& conf_data, double rmsd, std::size_t max_num_out_confs);
+
 			unsigned int generateRandomConformer(ConformerData& conf);
 
 			bool checkRMSD(const Math::Vector3DArray& conf_coords, double min_rmsd);
 			
-			ConformerDataPtr getRingAtomCoordinates(const Math::Vector3DArray& conf_coords);
+			ConformerData::SharedPointer getRingAtomCoordinates(const Math::Vector3DArray& conf_coords);
 
 			void getRingAtomIndices();
 			void getSymmetryMappings();
@@ -121,7 +123,7 @@ namespace CDPL
 
 			std::size_t getNumRotatableRingBonds(const Chem::MolecularGraph& molgraph) const;
 
-			ConformerDataPtr allocConformerData();
+			ConformerData::SharedPointer allocConformerData();
 
 			bool timedout(std::size_t timeout) const;
 

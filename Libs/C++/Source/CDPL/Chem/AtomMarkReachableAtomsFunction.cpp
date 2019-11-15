@@ -37,11 +37,15 @@ using namespace CDPL;
 
 void Chem::markReachableAtoms(const Atom& atom, const MolecularGraph& molgraph, Util::BitSet& atom_mask, bool reset)
 {
-    if (reset) {
-		atom_mask.resize(molgraph.getNumAtoms());
+	std::size_t num_atoms = molgraph.getNumAtoms();
+
+	if (atom_mask.size() < num_atoms)
+		atom_mask.resize(num_atoms);
+
+    if (reset)
 		atom_mask.reset();
-		atom_mask.set(molgraph.getAtomIndex(atom));
-    }
+
+	atom_mask.set(molgraph.getAtomIndex(atom));
 
     Atom::ConstBondIterator b_it = atom.getBondsBegin();
 

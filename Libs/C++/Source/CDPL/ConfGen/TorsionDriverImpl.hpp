@@ -83,6 +83,7 @@ namespace CDPL
 			void setup(const Chem::FragmentList& frags, const Chem::MolecularGraph& molgraph,
 					   const BondIter& bonds_beg, const BondIter& bonds_end);
 
+			void setMMFF94Parameters(const ForceField::MMFF94InteractionData& ia_data, ForceFieldInteractionMask& ia_mask);
 			void setMMFF94Parameters(const ForceField::MMFF94InteractionData& ia_data);
 			bool setMMFF94Parameters(const Chem::MolecularGraph& molgraph);
 

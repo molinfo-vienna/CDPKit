@@ -38,7 +38,7 @@ const ConfGen::FragmentConformerGeneratorSettings ConfGen::FragmentConformerGene
 
 ConfGen::FragmentConformerGeneratorSettings::RingFragmentSettings::RingFragmentSettings():
 	maxNumSampledConfs(2000), minNumSampledConfs(30), maxNumOutputConfs(1000),
-	timeout(0), eWindow(4.0), minRMSD(0.1)
+	timeout(0), eWindow(8.0), minRMSD(0.1)
 {}
 
 void ConfGen::FragmentConformerGeneratorSettings::RingFragmentSettings::setMaxNumSampledConformers(std::size_t max_num)
@@ -103,20 +103,20 @@ double ConfGen::FragmentConformerGeneratorSettings::RingFragmentSettings::getMin
 
 
 ConfGen::FragmentConformerGeneratorSettings::FragmentConformerGeneratorSettings():
-	preserveBondGeom(true), forceFieldType(ForceFieldType::MMFF94S_NO_ESTAT), 
+	preserveBondGeom(false), forceFieldType(ForceFieldType::MMFF94S_NO_ESTAT), 
 	strictParam(true), maxNumRefIters(0), refStopGrad(0.1), minMacrocycleSize(10), 
 	srSamplingFactor(4) 
 {
-	srSettings.setMaxNumSampledConformers(2000);
+	srSettings.setMaxNumSampledConformers(1000);
 	srSettings.setMinNumSampledConformers(30);
-	srSettings.setTimeout(60 * 1000);
-	srSettings.setEnergyWindow(8.0);
+	srSettings.setTimeout(30 * 1000);
+	srSettings.setEnergyWindow(6.0);
 	srSettings.setMaxNumOutputConformers(1000);
 	srSettings.setMinRMSD(0.1);
 
 	mcSettings.setMaxNumSampledConformers(2000);
 	mcSettings.setMinNumSampledConformers(30);
-	mcSettings.setTimeout(20 * 60 * 1000);
+	mcSettings.setTimeout(10 * 60 * 1000);
 	mcSettings.setEnergyWindow(20.0);
 	mcSettings.setMaxNumOutputConformers(1000);
 	mcSettings.setMinRMSD(0.1);

@@ -31,15 +31,24 @@
 #ifndef CDPL_CONFGEN_CONFORMERGENERATORIMPL_HPP
 #define CDPL_CONFGEN_CONFORMERGENERATORIMPL_HPP
 
+#include <vector>
+#include <cstddef>
+
 #include <boost/timer/timer.hpp>
 
 #include "CDPL/ConfGen/ConformerGeneratorSettings.hpp"
 #include "CDPL/ConfGen/ConformerDataArray.hpp"
 #include "CDPL/ConfGen/CallbackFunction.hpp"
+#include "CDPL/Chem/FragmentList.hpp"
+#include "CDPL/ForceField/MMFF94InteractionParameterizer.hpp"
+#include "CDPL/ForceField/MMFF94InteractionData.hpp"
 #include "CDPL/Util/ObjectPool.hpp"
+#include "CDPL/Util/ObjectStack.hpp"
+#include "CDPL/Util/BitSet.hpp"
 
 #include "TorsionDriverImpl.hpp"
 #include "FragmentAssemblerImpl.hpp"
+#include "ForceFieldInteractionMask.hpp"
 
 
 namespace CDPL 
@@ -83,20 +92,81 @@ namespace CDPL
 			ConstConformerIterator getConformersEnd() const;
 
 		private:
+			struct FragmentConfCombination;
+
 			ConformerGeneratorImpl(const ConformerGeneratorImpl&);
 
 			ConformerGeneratorImpl& operator=(const ConformerGeneratorImpl&);
 
-			typedef Util::ObjectPool<ConformerData> ConformerDataCache;
+			void init(const Chem::MolecularGraph& molgraph);
 
-			ConformerDataCache         confDataCache;
-			ConformerDataArray         outputConfs;
-			CallbackFunction           abortCallback;
-			CallbackFunction           timeoutCallback;
-			boost::timer::cpu_timer    timer;
-			TorsionDriverImpl          torDriver;
-			FragmentAssemblerImpl      fragAssembler;
-			ConformerGeneratorSettings settings;
+			void splitIntoTorsionFragments();
+			
+			bool setupMMFF94Parameters();
+			
+			unsigned int generateFragmentConformers();
+			
+			void generateFragmentConformerCombinations();
+			void generateFragmentConformerCombinations(std::size_t frag_idx, double comb_energy);
+
+			static bool compFragmentConfCombinationEnergy(const FragmentConfCombination* comb1, 
+														  const FragmentConfCombination* comb2);
+
+			bool timedout() const;
+
+			typedef std::vector<std::size_t> UIntArray;
+
+			struct FragmentConfData
+			{
+
+				Chem::Fragment::SharedPointer fragment;
+				ConformerDataArray            conformers;
+				std::size_t                   lastConfIndex;
+
+				void clear() {
+					conformers.clear();
+					fragment.reset();
+				}
+			};
+
+			struct FragmentConfCombination
+			{
+
+				UIntArray   confIndices;
+				double      energy;
+				bool        valid;
+			};
+
+			typedef Util::ObjectStack<FragmentConfData> FragmentConfDataCache;
+			typedef Util::ObjectStack<FragmentConfCombination> FragmentConfCombinationCache;
+			typedef Util::ObjectPool<ConformerData> ConformerDataCache;
+			typedef ForceField::MMFF94InteractionData MMFF94InteractionData;
+			typedef ForceField::MMFF94InteractionParameterizer MMFF94Parameterizer;
+			typedef std::vector<const Chem::Bond*> BondList;
+			typedef std::vector<FragmentConfData*> FragmentConfDataList;
+			typedef std::vector<FragmentConfCombination*> FragmentConfCombinationList;
+			
+			ConformerDataCache           confDataCache;
+			FragmentConfDataCache        fragConfDataCache;
+			FragmentConfCombinationCache fragConfCombCache;
+			ConformerGeneratorSettings   settings;
+			const Chem::MolecularGraph*  molGraph;
+			ConformerDataArray           outputConfs;
+			CallbackFunction             abortCallback;
+			CallbackFunction             timeoutCallback;
+			boost::timer::cpu_timer      timer;
+			TorsionDriverImpl            torDriver;
+			FragmentAssemblerImpl        fragAssembler;
+			MMFF94Parameterizer          mmff94Parameterizer;
+			MMFF94InteractionData        mmff94Data;
+			ForceFieldInteractionMask    mmff94InteractionMask;
+			BondList                     torDriveBonds;
+			BondList                     fragSplitBonds;
+			Chem::FragmentList           fragments;
+			Util::BitSet                 splitBondMask;
+			FragmentConfDataList         torFragConfDataList;
+			FragmentConfCombinationList  torFragConfCombList;
+			UIntArray                    currConfComb;
 		};
     }
 }

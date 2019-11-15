@@ -294,6 +294,9 @@ void Chem::CDFDataWriter::outputMolGraphProperties(const MolecularGraph& molgrap
 	if (hasConformationIndex(molgraph))
 		putIntProperty(CDF::MolecularGraphProperty::CONFORMATION_INDEX, boost::numeric_cast<CDF::SizeType>(getConformationIndex(molgraph)), bbuf);
 
+	if (hasConformerEnergies(molgraph))
+		putVectorProperty(CDF::MolecularGraphProperty::CONFORMER_ENERGIES, *getConformerEnergies(molgraph), bbuf);
+
 	if (hasStructureData(molgraph))
 		putStringData(CDF::MolecularGraphProperty::STRUCTURE_DATA, getStructureData(molgraph), bbuf);
 

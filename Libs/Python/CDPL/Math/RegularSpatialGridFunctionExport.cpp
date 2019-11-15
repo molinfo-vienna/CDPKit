@@ -38,7 +38,7 @@ namespace
 	template <typename T>
 	T interpolateTrilinear(const CDPL::Math::RegularSpatialGrid<T>& grid, const CDPL::Math::CVector<T, 3>& pos, bool local_pos)
 	{
-		return interpolateTrilinear(grid, pos, local_pos);
+		return CDPL::Math::interpolateTrilinear(grid, pos, local_pos);
 	}
 }
 

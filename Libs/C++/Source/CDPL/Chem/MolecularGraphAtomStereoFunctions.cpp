@@ -35,7 +35,7 @@
 using namespace CDPL; 
 
 
-void Chem::perceiveAtomStereoCenters(MolecularGraph& molgraph, bool overwrite, bool check_cip_sym)
+void Chem::perceiveAtomStereoCenters(MolecularGraph& molgraph, bool overwrite, bool check_cip_sym, bool check_acyclic_subst_sym_only)
 {
 	MolecularGraph::AtomIterator atoms_end = molgraph.getAtomsEnd();
 
@@ -45,7 +45,7 @@ void Chem::perceiveAtomStereoCenters(MolecularGraph& molgraph, bool overwrite, b
 		if (!overwrite && hasStereoCenterFlag(atom))
 			continue;
 
-		setStereoCenterFlag(atom, isStereoCenter(atom, molgraph, check_cip_sym));
+		setStereoCenterFlag(atom, isStereoCenter(atom, molgraph, check_cip_sym, check_acyclic_subst_sym_only));
 	}
 }
 

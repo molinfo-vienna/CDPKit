@@ -65,6 +65,16 @@ void ConfGen::DGStructureGenerator::setup(const Chem::MolecularGraph& molgraph)
     setup(molgraph, 0);
 }
 
+std::size_t ConfGen::DGStructureGenerator::getNumAtomStereoCenters() const
+{
+	return dgConstraintsGen.getNumAtomStereoCenters();
+}
+
+std::size_t ConfGen::DGStructureGenerator::getNumBondStereoCenters() const
+{
+	return dgConstraintsGen.getNumBondStereoCenters();
+}
+
 bool ConfGen::DGStructureGenerator::generate(Math::Vector3DArray& coords)
 {
     if (!molGraph)

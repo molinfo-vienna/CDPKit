@@ -72,6 +72,7 @@ void CDPLPythonConfGen::exportConformerGenerator()
 		.def("__getitem__", 
 			 static_cast<ConfGen::ConformerData& (ConfGen::ConformerGenerator::*)(std::size_t)>(&ConfGen::ConformerGenerator::getConformer),
 			 (python::arg("self"), python::arg("conf_idx")), python::return_internal_reference<>())
+		.add_property("numConformers", &ConfGen::ConformerGenerator::getNumConformers)
 		.add_property("settings", 
 					  python::make_function(static_cast<ConfGen::ConformerGeneratorSettings& (ConfGen::ConformerGenerator::*)()>
 											(&ConfGen::ConformerGenerator::getSettings),

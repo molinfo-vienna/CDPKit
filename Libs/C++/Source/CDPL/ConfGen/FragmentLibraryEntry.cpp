@@ -303,7 +303,7 @@ void ConfGen::FragmentLibraryEntry::copyAtoms(const Chem::MolecularGraph& molgra
 		setAromaticityFlag(new_atom, arom_flag);
 		setHybridizationState(new_atom, hyb_state);
 	
-		if (arom_flag || (atom_type != AtomType::N && atom_type != AtomType::C) || exp_atom_count != 1)
+		if (arom_flag || (atom_type != AtomType::N && atom_type != AtomType::C && atom_type != AtomType::S) || exp_atom_count != 1)
 			continue;
 		
 		if (hyb_state == HybridizationState::SP) {
@@ -438,25 +438,26 @@ void ConfGen::FragmentLibraryEntry::hydrogenize()
 	for (std::size_t i = 0, num_atoms = molecule.getNumAtoms(); i < num_atoms; i++) {
 		Atom& atom = molecule.getAtom(i);
 
-		setImplicitHydrogenCount(atom, 0);
+		if (!(atom.getNumBonds() == 1 && getAromaticityFlag(atom))) {
+			std::size_t impl_h_cnt = calcImplicitHydrogenCount(atom, molecule);
 
-		if (atom.getNumBonds() == 1 && getAromaticityFlag(atom))
-			continue;
-		
-		for (std::size_t j = 0, impl_h_cnt = calcImplicitHydrogenCount(atom, molecule); j < impl_h_cnt; j++) {
-			Atom& new_h_atom = molecule.addAtom();
-			Bond& new_h_bond = molecule.addBond(i, molecule.getAtomIndex(new_h_atom));
+			for (std::size_t j = 0; j < impl_h_cnt; j++) {
+				Atom& new_h_atom = molecule.addAtom();
+				Bond& new_h_bond = molecule.addBond(i, molecule.getAtomIndex(new_h_atom));
 
-			setType(new_h_atom, AtomType::H);
-			setRingFlag(new_h_atom, false);
-			setAromaticityFlag(new_h_atom, false);
-			setHybridizationState(new_h_atom, HybridizationState::UNKNOWN);
-			setImplicitHydrogenCount(new_h_atom, 0);
+				setType(new_h_atom, AtomType::H);
+				setRingFlag(new_h_atom, false);
+				setAromaticityFlag(new_h_atom, false);
+				setHybridizationState(new_h_atom, HybridizationState::UNKNOWN);
+				setImplicitHydrogenCount(new_h_atom, 0);
 
-			setOrder(new_h_bond, 1);
-			setRingFlag(new_h_bond, false);
-			setAromaticityFlag(new_h_bond, false);
+				setOrder(new_h_bond, 1);
+				setRingFlag(new_h_bond, false);
+				setAromaticityFlag(new_h_bond, false);
+			}
 		}
+
+		setImplicitHydrogenCount(atom, 0);
 	}
 }
 

@@ -27,6 +27,7 @@
 #include "StaticInit.hpp"
 
 #include "CDPL/Chem/AtomFunctions.hpp"
+#include "CDPL/Chem/BondFunctions.hpp"
 #include "CDPL/Chem/Atom.hpp"
 #include "CDPL/Chem/Bond.hpp"
 #include "CDPL/Chem/AtomType.hpp"
@@ -37,7 +38,7 @@
 using namespace CDPL; 
 
 
-bool Chem::isStereoCenter(const Atom& atom, const MolecularGraph& molgraph, bool check_cip_sym)
+bool Chem::isStereoCenter(const Atom& atom, const MolecularGraph& molgraph, bool check_cip_sym, bool check_acyclic_subst_sym_only)
 {
 	if (getAromaticityFlag(atom))
 		return false;
@@ -70,6 +71,9 @@ bool Chem::isStereoCenter(const Atom& atom, const MolecularGraph& molgraph, bool
 
 	for (Atom::ConstAtomIterator a_it = atom.getAtomsBegin(); a_it != atoms_end; ++a_it, ++b_it) {
 		if (molgraph.containsAtom(*a_it) && molgraph.containsBond(*b_it)) {
+			if (check_acyclic_subst_sym_only && getRingFlag(*b_it))
+				continue;
+
 			cip_priorities[num_bonds] = getCIPPriority(*a_it);
 
 			for (std::size_t j = 0; j < num_bonds; j++)

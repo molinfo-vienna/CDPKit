@@ -28,7 +28,6 @@
 
 #include <cmath>
 #include <algorithm>
-#include <functional>
 
 #include <boost/bind.hpp>
 #include <boost/math/special_functions.hpp>
@@ -53,16 +52,21 @@
 #include "FragmentConformerGeneratorImpl.hpp"
 
 
+using namespace CDPL;
+
+
 namespace
 {
+
+	bool compareConformerEnergy(const ConfGen::ConformerData::SharedPointer& conf_data1, 
+								const ConfGen::ConformerData::SharedPointer& conf_data2)
+	{
+		return (conf_data1->getEnergy() < conf_data2->getEnergy());
+	} 
 
 	const std::size_t MAX_CONF_DATA_CACHE_SIZE     = 5000;
 	const std::size_t MAX_NUM_STRUCTURE_GEN_TRIALS = 10;
 }
-
-
-using namespace CDPL;
-
 
 
 ConfGen::FragmentConformerGeneratorImpl::FragmentConformerGeneratorImpl(): 
@@ -167,7 +171,7 @@ bool ConfGen::FragmentConformerGeneratorImpl::generateConformerFromInputCoordina
 {
 	using namespace Chem;
 
-	ConformerDataPtr conf_data = allocConformerData();
+	ConformerData::SharedPointer conf_data = allocConformerData();
 
 	conf_data->resize(numAtoms);
 
@@ -269,7 +273,7 @@ unsigned int ConfGen::FragmentConformerGeneratorImpl::generateSingleConformer()
 
 		dgStructGen.getSettings().setBoxSize(coreAtomMask.count() * 2);
 
-		ConformerDataPtr conf_data = allocConformerData();
+		ConformerData::SharedPointer conf_data = allocConformerData();
 		unsigned int ret_code = generateRandomConformer(*conf_data);
 		
 		if (ret_code != ReturnCode::SUCCESS)
@@ -330,7 +334,7 @@ unsigned int ConfGen::FragmentConformerGeneratorImpl::generateFlexibleRingConfor
 			break;
 		}
 
-		ConformerDataPtr conf_data = allocConformerData();
+		ConformerData::SharedPointer conf_data = allocConformerData();
 
 		if (generateRandomConformer(*conf_data) != ReturnCode::SUCCESS) 
 			continue;
@@ -351,52 +355,86 @@ unsigned int ConfGen::FragmentConformerGeneratorImpl::generateFlexibleRingConfor
 
 	if (workingConfs.empty()) 
 		return ReturnCode::FRAGMENT_CONF_GEN_FAILED;
-	
-	std::sort(workingConfs.begin(), workingConfs.end(), 
-			  boost::bind(std::less<double>(), boost::bind(&ConformerData::getEnergy, _1), boost::bind(&ConformerData::getEnergy, _2)));
 
-	double max_energy = min_energy + e_window;
-	double rmsd = rsys_settings->getMinRMSD();
+	std::sort(workingConfs.begin(), workingConfs.end(), &compareConformerEnergy);
+
 	std::size_t max_num_out_confs = rsys_settings->getMaxNumOutputConformers();
+	double rmsd = rsys_settings->getMinRMSD();
+	double max_energy = min_energy + e_window;
 
-	for (ConformerDataArray::iterator it = workingConfs.begin(), end = workingConfs.end(); it != end; ++it) {
-		ConformerDataPtr& conf_data = *it;
-		Math::Vector3DArray& conf_coords = *conf_data;
+	for (ConformerDataArray::iterator it = workingConfs.begin(), end = workingConfs.end(); 
+		 it != end && outputConfs.size() < max_num_out_confs; ++it) {
 
-		if (outputConfs.size() >= max_num_out_confs) 
-			return ret_code;
+		ConformerData::SharedPointer& conf_data = *it;
 
 		if (conf_data->getEnergy() > max_energy)
-			return ret_code;
+			break;
 
-		if (!checkRMSD(conf_coords, rmsd)) {
-			conf_data.reset();
-			continue;
-		}
+		addSymmetryMappingConformers(*conf_data, rmsd, max_num_out_confs);
+		addMirroredConformer(*conf_data, rmsd, max_num_out_confs);
 
-		outputConfs.push_back(conf_data);
-
-		for (std::size_t mapping_offs = 0, mappings_size = symMappings.size(); 
-			 mapping_offs < mappings_size && outputConfs.size() < max_num_out_confs; mapping_offs += numAtoms) {
-
-			ConformerDataPtr sym_conf_data = allocConformerData();
-			Math::Vector3DArray& sym_conf_coords = *sym_conf_data;
-
-			sym_conf_coords.resize(numAtoms);
-
-			for (std::size_t k = 0; k < numAtoms; k++)
-				sym_conf_coords[symMappings[mapping_offs + k]].assign(conf_coords[k]);
-
-			if (!checkRMSD(sym_conf_coords, rmsd))
-				continue;
-
-			sym_conf_data->setEnergy(conf_data->getEnergy());
-
-			outputConfs.push_back(sym_conf_data);
+		if (outputConfs.size() < max_num_out_confs) {
+			if (!checkRMSD(*conf_data, rmsd)) 
+				conf_data.reset();
+			else
+				outputConfs.push_back(conf_data);
 		}
 	}
 
 	return ret_code;
+}
+
+void ConfGen::FragmentConformerGeneratorImpl::addSymmetryMappingConformers(const ConformerData& conf_data, double rmsd, std::size_t max_num_out_confs)
+{
+	const Math::Vector3DArray::StorageType& conf_coords_data = conf_data.getData();
+
+	for (std::size_t mapping_offs = 0, mappings_size = symMappings.size(); 
+		 mapping_offs < mappings_size && outputConfs.size() < max_num_out_confs; mapping_offs += numAtoms) {
+
+		ConformerData::SharedPointer mpd_conf_data = allocConformerData();
+		Math::Vector3DArray::StorageType& mpd_conf_coords_data = mpd_conf_data->getData();
+
+		mpd_conf_data->resize(numAtoms);
+
+		for (std::size_t i = 0; i < numAtoms; i++)
+			mpd_conf_coords_data[symMappings[mapping_offs + i]].assign(conf_coords_data[i]);
+
+		if (checkRMSD(*mpd_conf_data, rmsd)) {
+			mpd_conf_data->setEnergy(conf_data.getEnergy());
+
+			outputConfs.push_back(mpd_conf_data);
+		}
+
+		addMirroredConformer(*mpd_conf_data, rmsd, max_num_out_confs);
+	}
+}
+
+void ConfGen::FragmentConformerGeneratorImpl::addMirroredConformer(const ConformerData& conf_data, double rmsd, std::size_t max_num_out_confs)
+{
+	if (dgStructGen.getNumAtomStereoCenters() != 0 || outputConfs.size() >= max_num_out_confs)
+		return;
+
+	ConformerData::SharedPointer mirr_conf_data = allocConformerData();
+	Math::Vector3DArray::StorageType& mirr_conf_coords_data = mirr_conf_data->getData();
+	const Math::Vector3DArray::StorageType& conf_coords_data = conf_data.getData();
+
+	mirr_conf_data->resize(numAtoms);
+
+	for (std::size_t i = 0; i < numAtoms; i++) {
+		Math::Vector3D::Pointer mirr_atom_pos = mirr_conf_coords_data[i].getData();
+		Math::Vector3D::ConstPointer orig_atom_pos = conf_coords_data[i].getData();
+
+		mirr_atom_pos[0] = orig_atom_pos[0];
+		mirr_atom_pos[1] = orig_atom_pos[1];
+		mirr_atom_pos[2] = -orig_atom_pos[2];
+	}
+
+	if (!checkRMSD(*mirr_conf_data, rmsd))
+		return;
+
+	mirr_conf_data->setEnergy(conf_data.getEnergy());
+
+	outputConfs.push_back(mirr_conf_data);
 }
 
 unsigned int ConfGen::FragmentConformerGeneratorImpl::generateRandomConformer(ConformerData& conf_data)
@@ -444,7 +482,7 @@ unsigned int ConfGen::FragmentConformerGeneratorImpl::generateRandomConformer(Co
 
 bool ConfGen::FragmentConformerGeneratorImpl::checkRMSD(const Math::Vector3DArray& conf_coords, double min_rmsd)
 {
-	ConformerDataPtr conf_ra_coords_ptr = getRingAtomCoordinates(conf_coords);
+	ConformerData::SharedPointer conf_ra_coords_ptr = getRingAtomCoordinates(conf_coords);
 	Math::Vector3DArray& conf_ra_coords = *conf_ra_coords_ptr;
 	Math::Matrix4D conf_xform;
 
@@ -471,10 +509,10 @@ bool ConfGen::FragmentConformerGeneratorImpl::has3DCoordinates(const Chem::Atom&
 	return coreAtomMask.test(molGraph->getAtomIndex(atom));
 }
 
-ConfGen::FragmentConformerGeneratorImpl::ConformerDataPtr 
+ConfGen::ConformerData::SharedPointer 
 ConfGen::FragmentConformerGeneratorImpl::getRingAtomCoordinates(const Math::Vector3DArray& conf_coords)
 {
-	ConformerDataPtr ra_coords_ptr = allocConformerData();
+	ConformerData::SharedPointer ra_coords_ptr = allocConformerData();
 	Math::Vector3DArray& ra_coords = *ra_coords_ptr;
 	Math::Vector3DArray::StorageType& ra_coords_data = ra_coords.getData();
 	Math::Vector3D ctr;
@@ -662,9 +700,9 @@ bool ConfGen::FragmentConformerGeneratorImpl::timedout(std::size_t timeout) cons
 	return (timer.elapsed().wall > (boost::timer::nanosecond_type(timeout) * 1000000));
 }
 
-ConfGen::FragmentConformerGeneratorImpl::ConformerDataPtr ConfGen::FragmentConformerGeneratorImpl::allocConformerData()
+ConfGen::ConformerData::SharedPointer ConfGen::FragmentConformerGeneratorImpl::allocConformerData()
 {
-	ConformerDataPtr conf_data = confDataCache.get();
+	ConformerData::SharedPointer conf_data = confDataCache.get();
 
 	conf_data->setEnergy(0.0);
 

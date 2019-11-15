@@ -23,11 +23,6 @@
  * Boston, MA 02111-1307, USA.
  */
 
-/**
- * \file
- * \brief Declarion of a fallback torsion library retrieval function.
- */
-
 #ifndef CDPL_CONFGEN_FALLBACKTORSIONLIBRARY_HPP
 #define CDPL_CONFGEN_FALLBACKTORSIONLIBRARY_HPP
 

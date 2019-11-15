@@ -55,6 +55,8 @@ void CDPLPythonConfGen::exportDGStructureGenerator()
 			 (&ConfGen::DGStructureGenerator::setup), 
 			 (python::arg("self"), python::arg("molgraph"), python::arg("ia_data")))
 		.def("generate", &ConfGen::DGStructureGenerator::generate, (python::arg("self"), python::arg("coords")))
+		.def("getNumAtomStereoCenters", &ConfGen::DGStructureGenerator::getNumAtomStereoCenters, python::arg("self"))
+		.def("getNumBondStereoCenters", &ConfGen::DGStructureGenerator::getNumBondStereoCenters, python::arg("self"))
 		.def("checkAtomConfigurations", &ConfGen::DGStructureGenerator::checkAtomConfigurations,
 			 (python::arg("self"), python::arg("coords")))
 		.def("checkBondConfigurations", &ConfGen::DGStructureGenerator::checkBondConfigurations,
@@ -63,6 +65,8 @@ void CDPLPythonConfGen::exportDGStructureGenerator()
 			 static_cast<ConfGen::DGStructureGeneratorSettings& (ConfGen::DGStructureGenerator::*)()>
 			 (&ConfGen::DGStructureGenerator::getSettings), 
 			 python::arg("self"), python::return_internal_reference<>())
+		.add_property("numAtomStereoCenters",  &ConfGen::DGStructureGenerator::getNumAtomStereoCenters)
+		.add_property("numBondStereoCenters",  &ConfGen::DGStructureGenerator::getNumBondStereoCenters)
 		.add_property("settings", 
 					  python::make_function(static_cast<ConfGen::DGStructureGeneratorSettings& (ConfGen::DGStructureGenerator::*)()>
 											(&ConfGen::DGStructureGenerator::getSettings),

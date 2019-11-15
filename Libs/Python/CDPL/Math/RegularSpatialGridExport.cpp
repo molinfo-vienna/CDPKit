@@ -170,25 +170,25 @@ namespace
 		}
 
 		template <typename T>
-		static bool containsLocalPointExpr(GridType& usg, const typename CDPLPythonMath::ConstVectorExpression<T>::SharedPointer& pos) {
-			return usg.containsLocalPoint(*pos);
+		static bool containsLocalPointExpr(GridType& grid, const typename CDPLPythonMath::ConstVectorExpression<T>::SharedPointer& pos) {
+			return grid.containsLocalPoint(*pos);
 		}
 
 		template <typename T>
-		static bool containsPointExpr(GridType& usg, const typename CDPLPythonMath::ConstVectorExpression<T>::SharedPointer& pos) {
-			return usg.containsPoint(*pos);
+		static bool containsPointExpr(GridType& grid, const typename CDPLPythonMath::ConstVectorExpression<T>::SharedPointer& pos) {
+			return grid.containsPoint(*pos);
 		}
 
 		template <typename T>
-		static bool getLocalContainingCellExpr(GridType& usg, const typename CDPLPythonMath::ConstVectorExpression<T>::SharedPointer& pos, 
+		static bool getLocalContainingCellExpr(GridType& grid, const typename CDPLPythonMath::ConstVectorExpression<T>::SharedPointer& pos, 
 											   boost::python::object& indices) {
-			return usg.getLocalContainingCell(*pos, indices);
+			return grid.getLocalContainingCell(*pos, indices);
 		}
 
 		template <typename T>
-		static bool getContainingCellExpr(GridType& usg, const typename CDPLPythonMath::ConstVectorExpression<T>::SharedPointer& pos, 
+		static bool getContainingCellExpr(GridType& grid, const typename CDPLPythonMath::ConstVectorExpression<T>::SharedPointer& pos, 
 										  boost::python::object& indices) {
-			return usg.getContainingCell(*pos, indices);
+			return grid.getContainingCell(*pos, indices);
 		}
     };
 }       

@@ -46,6 +46,7 @@
 #include "CDPL/ForceField/UtilityFunctions.hpp"
 #include "CDPL/ForceField/MMFF94InteractionParameterizer.hpp"
 #include "CDPL/ForceField/MMFF94InteractionData.hpp"
+#include "CDPL/Math/Quaternion.hpp"
 
 #include "FragmentAssemblerImpl.hpp"
 #include "FragmentTreeNode.hpp"
@@ -78,7 +79,6 @@ namespace
     ConfGen::TorsionLibrary::SharedPointer assemblerTorLib(new ConfGen::TorsionLibrary());
 
 	struct Init {
-
 
 		Init() {
 			ConfGen::TorsionLibraryDataReader().read(ASSEMBLER_TORSION_RULES, *assemblerTorLib);
@@ -199,7 +199,7 @@ unsigned int ConfGen::FragmentAssemblerImpl::doAssemble(const Chem::MolecularGra
 	buildFragmentTree(molgraph, parent_molgraph);
 
 	try {
-		unsigned int ret_code = setupFragmentConformers();
+		unsigned int ret_code = getFragmentConformers();
 		
 		if (ret_code != ReturnCode::SUCCESS)
 			return ret_code;
@@ -224,8 +224,6 @@ void ConfGen::FragmentAssemblerImpl::buildFragmentTree(const Chem::MolecularGrap
 	fragSplitBondMask.reset();
 	fragSplitBonds.clear();
 
-	bool enum_n = (settings.getNitrogenEnumerationMode() != NitrogenEnumerationMode::NONE);
-
 	for (std::size_t i = 0; i < num_bonds; i++) {
 		const Bond& bond = molgraph.getBond(i);
 
@@ -235,15 +233,9 @@ void ConfGen::FragmentAssemblerImpl::buildFragmentTree(const Chem::MolecularGrap
 		const Atom& atom1 = bond.getBegin();
 		const Atom& atom2 = bond.getEnd();
 
-		if (!getAromaticityFlag(atom1) && !getAromaticityFlag(atom2) && isHydrogenRotor(bond, molgraph)) {
-			if (!enum_n)
-				continue;
-	
-			if (!(getRingFlag(atom1) && getType(atom1) == AtomType::N) &&
-				!(getRingFlag(atom2) && getType(atom2) == AtomType::N))
-				continue;
-		}
-
+		if (!getAromaticityFlag(atom1) && !getAromaticityFlag(atom2) && isHydrogenRotor(bond, molgraph))
+			continue;
+		
 		fragSplitBondMask.set(i);
 		fragSplitBonds.push_back(&bond);
 	}
@@ -253,7 +245,7 @@ void ConfGen::FragmentAssemblerImpl::buildFragmentTree(const Chem::MolecularGrap
 	fragTree.build(fragments, parent_molgraph, fragSplitBonds.begin(), fragSplitBonds.end());
 }
 
-unsigned int ConfGen::FragmentAssemblerImpl::setupFragmentConformers() 
+unsigned int ConfGen::FragmentAssemblerImpl::getFragmentConformers() 
 {
 	using namespace Chem;
 
@@ -341,6 +333,22 @@ bool ConfGen::FragmentAssemblerImpl::fetchConformersFromFragmentLibrary(unsigned
 		if (frag_type == FragmentType::CHAIN)
 			num_confs = 1;
 
+		else if (frag_type == FragmentType::FLEXIBLE_RING_SYSTEM && !settings.enumerateRings()) {
+			if (hasConformerEnergies(*entry_ptr)) {
+				const Math::DVector& energies = *getConformerEnergies(*entry_ptr);
+				double lowest_e = energies[0];
+
+				for (std::size_t i = 1; i < num_confs; i++) {
+					if (energies[i] > lowest_e) {
+						num_confs = i;
+						break;
+					}
+				}
+
+			} else
+				num_confs = 1;
+		}
+
 		ConformerDataArray& node_confs = node->getConformers();
 
 		node_confs.reserve(num_confs);
@@ -385,8 +393,20 @@ unsigned int ConfGen::FragmentAssemblerImpl::generateFragmentConformers(unsigned
 		return ret_code;
 
 	node->getConformers().reserve(fragConfGen.getNumConformers());
+	std::size_t num_confs = fragConfGen.getNumConformers();
 
-	for (std::size_t i = 0, num_confs = fragConfGen.getNumConformers(); i < num_confs; i++) {
+	if (frag_type == FragmentType::FLEXIBLE_RING_SYSTEM && !settings.enumerateRings()) {
+		double lowest_e = fragConfGen.getConformer(0).getEnergy();
+
+		for (std::size_t i = 1; i < num_confs; i++) {
+			if (fragConfGen.getConformer(i).getEnergy() > lowest_e) {
+				num_confs = i;
+				break;
+			}
+		}
+	}
+
+	for (std::size_t i = 0; i < num_confs; i++) {
 		ConformerData::SharedPointer conf_data = allocConformerData();
 		Math::Vector3DArray::StorageType& conf_coords_data = conf_data->getData();
 		const Math::Vector3DArray::StorageType& gen_conf_coords_data = fragConfGen.getConformer(i).getData();
@@ -899,17 +919,21 @@ void ConfGen::FragmentAssemblerImpl::enumRingFragmentNitrogens(const Chem::Fragm
 {
 	using namespace Chem;
 
-	if (getInvertibleNitrogens(frag, node) == 0)
+	if (getInvertibleNitrogens(frag, node) == 0) 
 		return;
 
 	const MolecularGraph& parent_molgraph = *fragTree.getMolecularGraph();
 	const FragmentTreeNode::IndexArray& atom_inds = node->getAtomIndices();
 
-	Math::Vector3D ring_nbr1_vec;
-	Math::Vector3D ring_nbr2_vec;
+	Math::Vector3D ring_atom1_vec;
+	Math::Vector3D ring_atom2_vec;
 	Math::Vector3D subst_atom_vec;
 	Math::Vector3D plane_normal;
-	Math::Vector3D::ConstPointer plane_normal_data = plane_normal.getData();
+	Math::Vector3D rot_axis;
+	Math::DQuaternion rot_quat;
+	std::size_t num_atoms = atom_inds.size();
+
+	tmpBitSet.resize(num_atoms);
 
 	for (Util::BitSet::size_type i = invertedNMask.find_first(); i != Util::BitSet::npos; i = invertedNMask.find_next(i)) {
 		const Atom& atom = parent_molgraph.getAtom(i);
@@ -939,6 +963,15 @@ void ConfGen::FragmentAssemblerImpl::enumRingFragmentNitrogens(const Chem::Fragm
 		if (!subst_nbr || !ring_nbr2) // sanity check
 			continue;
 
+		std::size_t atom_idx = frag.getAtomIndex(atom);
+
+		tmpBitSet.reset();
+		tmpBitSet.set(atom_idx);
+
+		markReachableAtoms(*subst_nbr, frag, tmpBitSet, false);
+
+		tmpBitSet.reset(atom_idx);
+
 		std::size_t ring_nbr1_idx = parent_molgraph.getAtomIndex(*ring_nbr1);
 		std::size_t ring_nbr2_idx = parent_molgraph.getAtomIndex(*ring_nbr2);
 		std::size_t subst_nbr_idx = parent_molgraph.getAtomIndex(*subst_nbr);
@@ -946,41 +979,54 @@ void ConfGen::FragmentAssemblerImpl::enumRingFragmentNitrogens(const Chem::Fragm
 		for (std::size_t j = 0, num_confs = node->getNumConformers(); j < num_confs; j++) {
 			const Math::Vector3DArray::StorageType& conf_coords_data = node->getConformers()[j]->getData();
 			const Math::Vector3D& ctr_atom_pos = conf_coords_data[i];
+			
+			ring_atom1_vec.assign(conf_coords_data[ring_nbr1_idx] - ctr_atom_pos);
+			ring_atom2_vec.assign(conf_coords_data[ring_nbr2_idx] - ctr_atom_pos);
+			plane_normal.assign(crossProd(ring_atom1_vec, ring_atom2_vec));
 
-			ring_nbr1_vec.assign(conf_coords_data[ring_nbr1_idx] - ctr_atom_pos);
-			ring_nbr2_vec.assign(conf_coords_data[ring_nbr2_idx] - ctr_atom_pos);
-			plane_normal.assign(crossProd(ring_nbr1_vec, ring_nbr2_vec));
+			double plane_normal_norm = length(plane_normal);
 
-			double plane_normal_len = length(plane_normal);
-
-			if (plane_normal_len == 0.0) // sanity check
+			if (plane_normal_norm == 0.0) // sanity check
 				continue;
 
-			plane_normal /= plane_normal_len;
+			subst_atom_vec.assign(conf_coords_data[subst_nbr_idx] - ctr_atom_pos);
+
+			double subst_atom_vec_norm = length(subst_atom_vec);
+
+			if (subst_atom_vec_norm == 0.0) // sanity check
+				continue;
+
+			double oop_angle = M_PI * 0.5 - std::acos(angleCos(subst_atom_vec, plane_normal, plane_normal_norm * subst_atom_vec_norm, true));
+
+			rot_axis.assign(crossProd(subst_atom_vec, plane_normal));
+
+			double rot_axis_norm = length(rot_axis);
+
+			if (rot_axis_norm == 0.0) // sanity check
+				continue;
+
+			double cos_w2 = std::cos(-oop_angle);
+			double sin_w2 = std::sin(-oop_angle);
+
+			rot_quat.set(cos_w2, sin_w2 * rot_axis[0] / rot_axis_norm, sin_w2 * rot_axis[1] / rot_axis_norm, 
+						 sin_w2 * rot_axis[2] / rot_axis_norm); // rotate by -2 * oop_angle
 
 			ConformerData::SharedPointer inv_n_conf = allocConformerData();
 			Math::Vector3DArray::StorageType& inv_n_conf_coords_data = inv_n_conf->getData();
 
-			for (FragmentTreeNode::IndexArray::const_iterator ai_it = atom_inds.begin(), ai_end = atom_inds.end(); ai_it != ai_end; ++ai_it) {
-				std::size_t curr_atom_idx = *ai_it;
+			for (std::size_t k = 0; k < num_atoms; k++) {
+				atom_idx = atom_inds[k];
 
-				if (curr_atom_idx != subst_nbr_idx) {
-					inv_n_conf_coords_data[curr_atom_idx].assign(conf_coords_data[curr_atom_idx]);
+				if (!tmpBitSet.test(k)) {
+					inv_n_conf_coords_data[atom_idx].assign(conf_coords_data[atom_idx]);
 					continue;
 				}
 
-				const Math::Vector3D& subst_atom_pos = conf_coords_data[curr_atom_idx];
+				const Math::Vector3D& subst_atom_pos = conf_coords_data[atom_idx];
 
 				subst_atom_vec.assign(subst_atom_pos - ctr_atom_pos);
 
-				double plane_dist = innerProd(plane_normal, subst_atom_vec);
-
-				Math::Vector3D::ConstPointer subst_atom_pos_data = subst_atom_pos.getData();
-				Math::Vector3D::Pointer inv_n_subst_atom_pos_data = inv_n_conf_coords_data[curr_atom_idx].getData();
-
-				inv_n_subst_atom_pos_data[0] = subst_atom_pos_data[0] - 2.0 * plane_dist * plane_normal_data[0];
-				inv_n_subst_atom_pos_data[1] = subst_atom_pos_data[1] - 2.0 * plane_dist * plane_normal_data[1];
-				inv_n_subst_atom_pos_data[2] = subst_atom_pos_data[2] - 2.0 * plane_dist * plane_normal_data[2];
+				inv_n_conf_coords_data[atom_idx].assign(rotate(rot_quat, subst_atom_vec) + ctr_atom_pos);
 			}
 
 			node->addConformer(inv_n_conf);
@@ -1040,7 +1086,7 @@ std::size_t ConfGen::FragmentAssemblerImpl::getInvertibleNitrogens(const Chem::F
 			if (getOrder(bond) != 1)
 				break;
 
-			if (getRingFlag(bond) && (++ring_bond_count > 2))
+			if (getRingFlag(bond) && ++ring_bond_count > 2)
 				break;
 
 			if (getType(nbr_atom) == AtomType::H && (++h_bond_count > 1))
@@ -1055,7 +1101,7 @@ std::size_t ConfGen::FragmentAssemblerImpl::getInvertibleNitrogens(const Chem::F
 		double oop_angle = ForceField::calcOutOfPlaneAngle<double>(coords_data[nbr_atom_indices[0]].getData(), coords_data[parent_atom_idx].getData(),
 																   coords_data[nbr_atom_indices[1]].getData(), coords_data[nbr_atom_indices[2]].getData());
 
-		if (std::abs(oop_angle) <= MAX_PLANAR_ATOM_GEOM_OOP_ANGLE)
+		if (std::abs(oop_angle) <= MAX_PLANAR_ATOM_GEOM_OOP_ANGLE) 
 			continue;
 
 		invertibleNMask.set(parent_atom_idx);

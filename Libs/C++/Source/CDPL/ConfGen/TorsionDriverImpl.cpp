@@ -61,7 +61,9 @@ namespace
 	};
 
 	SymmetryPattern SYMMETRY_PATTERN_LIST[] = {
-	    { Chem::parseSMARTS("[*:1]-[c:1]1[cH1][cH1][cH1][cH1][c]1-[*,#1;X1]"), 2 }
+  	    { Chem::parseSMARTS("[*:1]-[c:1]1[cH1][cH1][cH1][cH1][c]1-[*,#1;X1]"), 2 },
+	    { Chem::parseSMARTS("[*:1]-[*X2:1]#[*X2]-[*,#1;X1]"), 360 },
+	    { Chem::parseSMARTS("[*:1]-[*X2:1]#[*X1]"), 360 }
 	};
 	
 	const std::size_t MAX_CONF_DATA_CACHE_SIZE = 10000;
@@ -119,6 +121,11 @@ void ConfGen::TorsionDriverImpl::setup(const Chem::MolecularGraph& molgraph, con
 
 	splitIntoFragments(molgraph, fragments, bond_mask, false);
 	setup(fragments, molgraph, rotBonds.begin(), rotBonds.end());
+}
+
+void ConfGen::TorsionDriverImpl::setMMFF94Parameters(const ForceField::MMFF94InteractionData& ia_data, ForceFieldInteractionMask& ia_mask)
+{
+	fragTree.getRoot()->distMMFF94Parameters(ia_data, ia_mask);
 }
 
 void ConfGen::TorsionDriverImpl::setMMFF94Parameters(const ForceField::MMFF94InteractionData& ia_data)
@@ -322,17 +329,22 @@ void ConfGen::TorsionDriverImpl::assignTorsionAngles(FragmentTreeNode* node)
 		std::size_t rot_sym = getRotationalSymmetry(*bond);
 
 		if (rot_sym > 1) {	// reduce number of torsion angles due to rotational symmetry
-			double ident_rot_ang = 360.0 / rot_sym; 
+			if (rot_sym == 360) {
+				tor_angles.resize(1);
 
-			for (FragmentTreeNode::TorsionAngleArray::iterator it = tor_angles.begin(), end = tor_angles.end(); it != end; ++it) {
-				double& tor_ang = *it;
+			} else {
+				double ident_rot_ang = 360.0 / rot_sym; 
 
-				tor_ang = std::fmod(tor_ang, ident_rot_ang);
-			}
+				for (FragmentTreeNode::TorsionAngleArray::iterator it = tor_angles.begin(), end = tor_angles.end(); it != end; ++it) {
+					double& tor_ang = *it;
 
-			std::sort(tor_angles.begin(), tor_angles.end());
+					tor_ang = std::fmod(tor_ang, ident_rot_ang);
+				}
+
+				std::sort(tor_angles.begin(), tor_angles.end());
 		
-			tor_angles.erase(std::unique(tor_angles.begin(), tor_angles.end()), tor_angles.end());
+				tor_angles.erase(std::unique(tor_angles.begin(), tor_angles.end()), tor_angles.end());
+			}
 		}
 	}
 }

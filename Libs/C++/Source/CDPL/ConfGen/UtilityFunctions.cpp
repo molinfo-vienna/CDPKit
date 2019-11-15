@@ -73,8 +73,8 @@ namespace
 		return false;
     }
 
-    bool hasOnlyCarbonOrHydrogenNeighbors(const Chem::Atom& atom, const Chem::MolecularGraph& molgraph, const Chem::Bond& x_bond)
-    {
+	bool isLonePairAcceptorGroupCenter(const Chem::Atom& atom, const Chem::MolecularGraph& molgraph, const Chem::Bond& x_bond)
+	{
 		using namespace Chem;
 
 		Atom::ConstBondIterator b_it = atom.getBondsBegin();
@@ -93,21 +93,62 @@ namespace
 			if (!molgraph.containsAtom(nbr_atom))
 				continue;
  
+			if (getOrder(nbr_bond) <= 1)
+				continue;
+
 			switch (getType(nbr_atom)) {
 
-				case AtomType::H:
-				case AtomType::C:
-					continue;
-
-				default:
-					return false;
+				case AtomType::N:
+				case AtomType::O:
+				case AtomType::S:
+				case AtomType::Se:
+					return true;
 			}
 		}
 
-		return true;
+		return false;
+	}
+
+ 	bool hasSingleBondedRingHetAtomNbr(const Chem::Atom& atom, const Chem::MolecularGraph& molgraph, const Chem::Bond& x_bond)
+    {
+		using namespace Chem;
+
+		Atom::ConstBondIterator b_it = atom.getBondsBegin();
+
+		for (Atom::ConstAtomIterator a_it = atom.getAtomsBegin(), a_end = atom.getAtomsEnd(); a_it != a_end; ++a_it, ++b_it) {
+			const Bond& nbr_bond = *b_it;
+
+			if (&nbr_bond == &x_bond)
+				continue;
+
+			if (!molgraph.containsBond(nbr_bond))
+				continue;
+
+			const Atom& nbr_atom = *a_it;
+
+			if (!molgraph.containsAtom(nbr_atom))
+				continue;
+
+			if (!getRingFlag(nbr_atom))
+				continue;
+
+			if (getOrder(nbr_bond) != 1)
+				continue;
+
+			switch (getType(nbr_atom)) {
+
+				case AtomType::N:
+				case AtomType::O:
+				case AtomType::S:
+				case AtomType::Se:
+				case AtomType::P:
+					return true;
+			}
+		}
+
+		return false;
     }
 }
-
 
 bool ConfGen::isFragmentLinkBond(const Chem::Bond& bond, const Chem::MolecularGraph& molgraph)
 {
@@ -128,54 +169,65 @@ bool ConfGen::isFragmentLinkBond(const Chem::Bond& bond, const Chem::MolecularGr
 	if (atom2_type == AtomType::H)
 		return false;
 
-    if (getRingFlag(atom1)) 
-		return (getBondCount(atom2, molgraph) > 1);
+	if (getExplicitBondCount(atom1, molgraph) <= 1 || getExplicitBondCount(atom2, molgraph) <= 1)
+		return false;
+	
+	std::size_t order = getOrder(bond);
+
+    if (getRingFlag(atom1)) {
+		if (getRingFlag(atom2))
+			return true;
+
+		return (order != 1 || atom1_type == AtomType::C || atom2_type != AtomType::C || !isLonePairAcceptorGroupCenter(atom2, molgraph, bond));
+	}
 
     if (getRingFlag(atom2))
-		return (getBondCount(atom1, molgraph) > 1);
+		return (order != 1 || atom2_type == AtomType::C || atom1_type != AtomType::C || !isLonePairAcceptorGroupCenter(atom1, molgraph, bond));
 
-    if (getOrder(bond) != 1)
+	if (order != 1)
 		return false;
 
     if (atom1_type == AtomType::C) {
-		if (!isSplitHeteroAtom(atom2_type))
+		if (atom2_type == AtomType::C)  
+			return ((isLonePairAcceptorGroupCenter(atom1, molgraph, bond) && hasSingleBondedRingHetAtomNbr(atom1, molgraph, bond)) ||
+					(isLonePairAcceptorGroupCenter(atom2, molgraph, bond) && hasSingleBondedRingHetAtomNbr(atom2, molgraph, bond)));
+
+		else if (!isSplitHeteroAtom(atom2_type))
 			return false;
 
-		return hasOnlyCarbonOrHydrogenNeighbors(atom1, molgraph, bond);
+		return !isLonePairAcceptorGroupCenter(atom1, molgraph, bond);
     }
 
-    if (atom2_type == AtomType::C) {
-		if (!isSplitHeteroAtom(atom1_type))
-			return false;
+	if (atom2_type != AtomType::C)  
+		return false;
 
-		return hasOnlyCarbonOrHydrogenNeighbors(atom2, molgraph, bond);
-	}
+	if (!isSplitHeteroAtom(atom1_type))
+		return false;
 
-    return false;
-} 
+	return !isLonePairAcceptorGroupCenter(atom2, molgraph, bond);
+}
 
 std::size_t ConfGen::buildFragmentLinkBondMask(const Chem::MolecularGraph& molgraph, Util::BitSet& bond_mask, bool reset)
 {
     using namespace Chem;
 
-	bond_mask.resize(molgraph.getNumBonds());
+	std::size_t num_bonds = molgraph.getNumBonds();
+	std::size_t num_lnk_bonds = 0;
+
+	if (bond_mask.size() < num_bonds)
+		bond_mask.resize(num_bonds);
 
 	if (reset)
 		bond_mask.reset();
 
-	std::size_t i = 0;
-	std::size_t num_bonds = 0;
-
-	for (MolecularGraph::ConstBondIterator it = molgraph.getBondsBegin(), end = molgraph.getBondsEnd(); it != end; ++it, i++) {
-		const Bond& bond = *it;
-		
-		if (isFragmentLinkBond(bond, molgraph)) {
+	for (std::size_t i = 0; i < num_bonds; i++) {
+		if (isFragmentLinkBond(molgraph.getBond(i), molgraph)) {
 			bond_mask.set(i);
-			num_bonds++;
+			num_lnk_bonds++;
 		}
 	}
 
-	return num_bonds;
+	return num_lnk_bonds;
 }
 
 bool ConfGen::isRotatableBond(const Chem::Bond& bond, const Chem::MolecularGraph& molgraph, bool het_h_rotors)
@@ -220,11 +272,12 @@ std::size_t ConfGen::buildRotatableBondMask(const Chem::MolecularGraph& molgraph
 	std::size_t num_bonds = molgraph.getNumBonds();
 	std::size_t num_rot_bonds = 0;
 
-	if (reset) {
+	if (bond_mask.size() < num_bonds)
 		bond_mask.resize(num_bonds);
-		bond_mask.reset();
-	}
 
+	if (reset) 
+		bond_mask.reset();
+	
 	for (std::size_t i = 0; i < num_bonds; i++) {
 		if (isRotatableBond(molgraph.getBond(i), molgraph, het_h_rotors)) {
 			bond_mask.set(i);
@@ -243,8 +296,11 @@ std::size_t ConfGen::buildRotatableBondMask(const Chem::MolecularGraph& molgraph
 	std::size_t num_bonds = molgraph.getNumBonds();
 	std::size_t num_rot_bonds = 0;
 
-	bond_mask.resize(num_bonds);
-	bond_mask.reset();
+	if (bond_mask.size() < num_bonds)
+		bond_mask.resize(num_bonds);
+	
+	if (reset)
+		bond_mask.reset();
 
 	for (std::size_t i = 0; i < num_bonds; i++) {
 		if (excl_bond_mask.test(i))
@@ -282,7 +338,7 @@ unsigned int ConfGen::perceiveFragmentType(const Chem::MolecularGraph& molgraph)
 	return FragmentType::CHAIN;
 }
 
-void ConfGen::prepareForConformerGeneration(Chem::Molecule& mol)
+void ConfGen::prepareForConformerGeneration(Chem::Molecule& mol, bool canon)
 {
 	using namespace Chem;
 
@@ -293,35 +349,44 @@ void ConfGen::prepareForConformerGeneration(Chem::Molecule& mol)
 	setRingFlags(mol, false);
 	setAromaticityFlags(mol, false);
 
+	if (makeHydrogenComplete(mol, true)) {
+		if (hasComponents(mol))
+			perceiveComponents(mol, true);
+
+		calcTopologicalDistanceMatrix(mol, true);
+		calcCIPPriorities(mol, true);
+
+	} else {
+		calcCIPPriorities(mol, false);
+		calcTopologicalDistanceMatrix(mol, false);
+	}
+
 	for (Molecule::AtomIterator it = mol.getAtomsBegin(), end = mol.getAtomsEnd(); it != end; ++it) {
 		Atom& atom = *it;
 
-		if (!isStereoCenter(atom, mol, false)) 
+		if (!isStereoCenter(atom, mol, true, false)) 
 			setStereoDescriptor(atom, StereoDescriptor(AtomConfiguration::NONE));
 
-		else if ((!hasStereoDescriptor(atom) || getStereoDescriptor(atom).getConfiguration() == AtomConfiguration::UNDEF) && !isInvertibleNitrogen(atom, mol)) 
+		else if ((!hasStereoDescriptor(atom) || getStereoDescriptor(atom).getConfiguration() == AtomConfiguration::UNDEF) &&
+				 !isInvertibleNitrogen(atom, mol)) {
+
 			setStereoDescriptor(atom, calcStereoDescriptor(atom, mol, 1));
+		}
 	}
 
 	for (Molecule::BondIterator it = mol.getBondsBegin(), end = mol.getBondsEnd(); it != end; ++it) {
 		Bond& bond = *it;
 
-		if (!isStereoCenter(bond, mol, false)) 
+		if (!isStereoCenter(bond, mol, true)) 
 			setStereoDescriptor(bond, StereoDescriptor(BondConfiguration::NONE));
 		
 		else if (!hasStereoDescriptor(bond) || getStereoDescriptor(bond).getConfiguration() == AtomConfiguration::UNDEF)
 			setStereoDescriptor(bond, calcStereoDescriptor(bond, mol, 1));
 	}
 
-	if (makeHydrogenComplete(mol, true)) {
-		if (hasComponents(mol))
-			perceiveComponents(mol, true);
-
-		calcTopologicalDistanceMatrix(mol, true);
-
-	} else {
-		//perceiveComponents(mol, false);
-		calcTopologicalDistanceMatrix(mol, false);
+	if (canon) {
+		generateCanonicalNumbering(mol, false);
+		canonicalize(mol, true, true, true, true);
 	}
 }
 

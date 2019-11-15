@@ -28,17 +28,16 @@
 
 #include <string>
 #include <exception>
-#include <algorithm>
 
 #include <boost/lexical_cast.hpp>
 #include <boost/thread.hpp>
-#include <boost/bind.hpp>
 
 #include "CDPL/ConfGen/FragmentLibraryGenerator.hpp"
 #include "CDPL/ConfGen/ReturnCode.hpp"
 #include "CDPL/ConfGen/FragmentType.hpp"
 #include "CDPL/Chem/AtomContainerFunctions.hpp"
 #include "CDPL/Chem/MolecularGraphFunctions.hpp"
+#include "CDPL/Math/Vector.hpp"
 
 
 using namespace CDPL;
@@ -120,17 +119,23 @@ unsigned int ConfGen::FragmentLibraryGenerator::process(const Chem::MolecularGra
 			return ret_code;
 		}
 
-		std::for_each(fragConfGen.getConformersBegin(), fragConfGen.getConformersEnd(), 
-					  boost::bind(&Chem::addConformation, boost::ref(fragLibEntry), _1));
-
 		fl_entry->copy(fragLibEntry);
+		fl_entry->clearProperties();
+
+		Math::DVector::SharedPointer conf_energies(new Math::DVector(numGenConfs));
+
+		for (std::size_t i = 0; i < numGenConfs; i++) {
+			const ConformerData& conf_data = fragConfGen.getConformer(i);
+
+			addConformation(*fl_entry, conf_data);
+			(*conf_energies)(i) = conf_data.getEnergy();
+		}
+
+		setConformerEnergies(*fl_entry, conf_energies);
+		setName(*fl_entry, boost::lexical_cast<std::string>(fragLibEntry.getHashCode()));
 
 		copyAtomStereoDescriptors(*fl_entry, fragLibEntry, 0);
 		copyBondStereoDescriptors(*fl_entry, fragLibEntry, 0, 0);
-
-		fl_entry->clearProperties();
-
-		setName(*fl_entry, boost::lexical_cast<std::string>(fragLibEntry.getHashCode()));
 
 		return ret_code;
 

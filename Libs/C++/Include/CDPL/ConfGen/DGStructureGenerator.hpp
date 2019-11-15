@@ -31,6 +31,8 @@
 #ifndef CDPL_CONFGEN_DGSTRUCTUREGENERATOR_HPP
 #define CDPL_CONFGEN_DGSTRUCTUREGENERATOR_HPP
 
+#include <cstddef>
+
 #include <boost/random/mersenne_twister.hpp>
 #include <boost/random/uniform_real.hpp>
 
@@ -71,6 +73,9 @@ namespace CDPL
 
 			bool checkAtomConfigurations(Math::Vector3DArray& coords) const;
 			bool checkBondConfigurations(Math::Vector3DArray& coords) const;
+
+			std::size_t getNumAtomStereoCenters() const;
+			std::size_t getNumBondStereoCenters() const;
 
 		private:
 			void setup(const Chem::MolecularGraph& molgraph, const ForceField::MMFF94InteractionData* ia_data);

@@ -77,7 +77,7 @@ namespace CDPL
 
 		CDPL_CONFGEN_API unsigned int perceiveFragmentType(const Chem::MolecularGraph& molgraph); 
 
-		CDPL_CONFGEN_API void prepareForConformerGeneration(Chem::Molecule& mol); 
+		CDPL_CONFGEN_API void prepareForConformerGeneration(Chem::Molecule& mol, bool canonicalize = false); 
 
 		CDPL_CONFGEN_API unsigned int parameterizeMMFF94Interactions(const Chem::MolecularGraph& molgraph, 
 																	 ForceField::MMFF94InteractionParameterizer& parameterizer,

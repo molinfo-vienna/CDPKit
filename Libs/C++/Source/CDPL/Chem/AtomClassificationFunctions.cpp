@@ -244,7 +244,7 @@ bool Chem::isInvertibleNitrogen(const Atom& atom, const MolecularGraph& molgraph
 		if (getRingFlag(bond) && (++ring_bond_count > 2))
 			return false;
 
-		if (getAromaticityFlag(nbr_atom) || isUnsaturated(nbr_atom, molgraph))
+		if (getAromaticityFlag(nbr_atom)/* || isUnsaturated(nbr_atom, molgraph)*/)
 			return false;
 
 		switch (getHybridizationState(nbr_atom)) {
@@ -287,7 +287,7 @@ bool Chem::isPlanarNitrogen(const Atom& atom, const MolecularGraph& molgraph)
 		if (getOrder(bond) != 1)
 			return true;
 
-		if (getAromaticityFlag(nbr_atom) || isUnsaturated(nbr_atom, molgraph)) {
+		if (getAromaticityFlag(nbr_atom)/* || isUnsaturated(nbr_atom, molgraph)*/) {
 			unsat_nbrs = true;
 
 		} else {

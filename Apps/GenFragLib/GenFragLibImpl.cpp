@@ -55,12 +55,12 @@ namespace
 {
 
 	const std::size_t  DEF_TIMEOUT                    = 20 * 60;
-	const std::size_t  DEF_SMALL_RSYS_SAMPLING_FACTOR = 4;
+	const std::size_t  DEF_SMALL_RSYS_SAMPLING_FACTOR = 8;
 	const double       DEF_MIN_RMSD                   = 0.1;
-	const double       DEF_E_WINDOW                   = 8.0;
-	const unsigned int DEF_FORCE_FIELD_TYPE           = CDPL::ConfGen::ForceFieldType::MMFF94_NO_ESTAT;
+	const double       DEF_E_WINDOW                   = 6.0;
+	const unsigned int DEF_FORCE_FIELD_TYPE           = CDPL::ConfGen::ForceFieldType::MMFF94S_NO_ESTAT;
 	const bool         DEF_STRICT_FORCE_FIELD_PARAM   = true;
-	const bool         DEF_PRESERVE_BONDING_GEOM      = true;
+	const bool         DEF_PRESERVE_BONDING_GEOM      = false;
 }
 
 
@@ -308,9 +308,9 @@ GenFragLibImpl::GenFragLibImpl():
 	addOption("forcefield,f", "Build force field type (MMFF94, MMFF94_NO_ESTAT, MMFF94S, MMFF94S_NO_ESTAT, default: " + getForceFieldTypeString() + ").", 
 			  value<std::string>()->notifier(boost::bind(&GenFragLibImpl::setForceFieldType, this, _1)));
 	addOption("strict-params,s", "Perform strict MMFF94 parameterization (default: true).", 
-			  value<bool>(&strictForceFieldParam)->implicit_value(strictForceFieldParam));
-	addOption("pres-bonding-geom,b", "Preserve input bond lengths and angles (default: true).", 
-			  value<bool>(&presBondingGeom)->implicit_value(presBondingGeom));
+			  value<bool>(&strictForceFieldParam)->implicit_value(true));
+	addOption("pres-bonding-geom,b", "Preserve input bond lengths and angles (default: false).", 
+			  value<bool>(&presBondingGeom)->implicit_value(true));
 
 	addOptionLongDescriptions();
 }

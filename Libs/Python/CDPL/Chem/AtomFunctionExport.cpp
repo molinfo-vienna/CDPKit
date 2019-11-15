@@ -189,7 +189,6 @@ namespace
 	MAKE_FUNCTION_WRAPPER2(bool, isPlanarNitrogen, CDPL::Chem::Atom&, CDPL::Chem::MolecularGraph&);
 	MAKE_FUNCTION_WRAPPER2(bool, isInvertibleNitrogen, CDPL::Chem::Atom&, CDPL::Chem::MolecularGraph&);
 
-	MAKE_FUNCTION_WRAPPER3(bool, isStereoCenter, CDPL::Chem::Atom&, CDPL::Chem::MolecularGraph&, bool);
 	MAKE_FUNCTION_WRAPPER3(unsigned int, calcCIPConfiguration, CDPL::Chem::Atom&, CDPL::Chem::MolecularGraph&, const CDPL::Chem::AtomPriorityFunction&);
 	MAKE_FUNCTION_WRAPPER3(std::size_t, getExplicitBondCount, CDPL::Chem::Atom&, CDPL::Chem::MolecularGraph&, std::size_t);
 	MAKE_FUNCTION_WRAPPER3(bool, isInRingOfSize, CDPL::Chem::Atom&, CDPL::Chem::MolecularGraph&, std::size_t);
@@ -202,6 +201,7 @@ namespace
 	MAKE_FUNCTION_WRAPPER3(double, calcEffectivePolarizability, CDPL::Chem::Atom&, CDPL::Chem::MolecularGraph&, double);
 	MAKE_FUNCTION_WRAPPER3(std::size_t, getTopologicalDistance, CDPL::Chem::Atom&, CDPL::Chem::Atom&, CDPL::Chem::MolecularGraph&);
 
+	MAKE_FUNCTION_WRAPPER4(bool, isStereoCenter, CDPL::Chem::Atom&, CDPL::Chem::MolecularGraph&, bool, bool);
 	MAKE_FUNCTION_WRAPPER4(bool, isCarbonylLikeAtom, CDPL::Chem::Atom&, CDPL::Chem::MolecularGraph&, bool, bool);
 	MAKE_FUNCTION_WRAPPER4(bool, isAmideCenterAtom, CDPL::Chem::Atom&, CDPL::Chem::MolecularGraph&, bool, bool);
 	MAKE_FUNCTION_WRAPPER4(bool, isAmideNitrogen, CDPL::Chem::Atom&, CDPL::Chem::MolecularGraph&, bool, bool);
@@ -375,8 +375,6 @@ void CDPLPythonChem::exportAtomFunctions()
 	python::def("getTopologicalDistance", &getTopologicalDistanceWrapper3, 
 				(python::arg("atom1"), python::arg("atom2"), python::arg("molgraph")));
 
-	python::def("isStereoCenter", &isStereoCenterWrapper3, 
-				(python::arg("atom"), python::arg("molgraph"), python::arg("check_cip_sym") = true));
 	python::def("calcCIPConfiguration", &calcCIPConfigurationWrapper3, 
 				(python::arg("atom"), python::arg("molgraph"), python::arg("cip_pri_func")));
 	python::def("getExplicitBondCount", &getExplicitBondCountWrapper3,
@@ -400,6 +398,9 @@ void CDPLPythonChem::exportAtomFunctions()
 	python::def("calcEffectivePolarizability", &calcEffectivePolarizabilityWrapper3, 
 				(python::arg("atom"), python::arg("molgraph"), python::arg("damping") = 0.75));
 
+	python::def("isStereoCenter", &isStereoCenterWrapper4, 
+				(python::arg("atom"), python::arg("molgraph"), python::arg("check_cip_sym") = true, 
+				 python::arg("check_acyclic_subst_sym_only") = false));
 	python::def("isCarbonylLikeAtom", &isCarbonylLikeAtomWrapper4, 
 				(python::arg("atom"), python::arg("molgraph"), python::arg("c_only") = false, python::arg("db_o_only") = false));
 	python::def("isAmideCenterAtom", &isAmideCenterAtomWrapper4, 

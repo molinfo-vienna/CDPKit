@@ -119,7 +119,7 @@ void ChOx::initData(CDPL::Chem::Molecule& mol)
 	setAromaticityFlags(mol, false);
 	calcCIPPriorities(mol, false);
 
-	perceiveAtomStereoCenters(mol, false);
+	perceiveAtomStereoCenters(mol, false, true, false);
 	perceiveBondStereoCenters(mol, false);
 
 	for (Molecule::AtomIterator it = mol.getAtomsBegin(), end = mol.getAtomsEnd(); it != end; ++it) {

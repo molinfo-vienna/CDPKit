@@ -37,11 +37,11 @@ std::size_t Chem::buildAtomTypeMask(const Chem::AtomContainer& cntnr, Util::BitS
 {
 	std::size_t num_atoms = cntnr.getNumAtoms();
 
-	if (reset)
-		mask.reset();
-
 	if (mask.size() < num_atoms)
 		mask.resize(num_atoms);
+
+	if (reset)
+		mask.reset();
 
 	std::size_t num_bits = 0;
 
