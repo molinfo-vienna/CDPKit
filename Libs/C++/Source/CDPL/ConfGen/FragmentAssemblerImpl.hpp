@@ -126,17 +126,17 @@ namespace CDPL
 			unsigned int generateFragmentConformers(unsigned int frag_type, const Chem::Fragment& frag, 
 													FragmentTreeNode* node);
 
-			void fixBondLengths(const Chem::Fragment& frag, FragmentTreeNode* node);
-
 			void postprocChainFragment(bool fix_stereo, bool opt_db_stereo, 
 									   const Chem::Fragment& frag, FragmentTreeNode* node);
 
-			bool checkChainAtomConfigurations(bool have_inv_n, const Chem::Fragment& frag, 
-											  FragmentTreeNode* node);
-			bool checkChainBondConfigurations(bool check_stereo, bool opt_stereo, 
-											  const Chem::Fragment& frag, FragmentTreeNode* node);
-
-			void getNeighborSplitBonds(const Chem::Atom& atom, const Chem::Fragment& frag);
+			void fixChainAtomConfigurations(bool have_inv_n, const Chem::Fragment& frag, 
+											FragmentTreeNode* node);
+			void fixChainBondConfigurations(bool fix_stereo, bool opt_stereo, 
+											const Chem::Fragment& frag, FragmentTreeNode* node);
+	
+			void enumChainFragmentNitrogens(const Chem::Fragment& frag, FragmentTreeNode* node);
+	
+			void fixBondLengths(const Chem::Fragment& frag, FragmentTreeNode* node);
 
 			const Chem::Atom* getBulkiestDoubleBondSubstituent(const Chem::Atom& atom, const Chem::Atom& db_nbr_atom, 
 															   const Chem::Fragment& frag);
@@ -145,16 +145,11 @@ namespace CDPL
 
 			std::size_t getSubstituentBulkiness(const Chem::Atom& atom);
 
-			void mirrorCoordinates(Math::Vector3DArray& coords, FragmentTreeNode* node) const;
-			void copyAndMirrorCoordinates(const Math::Vector3DArray& coords, FragmentTreeNode* node);
-
-			void assignChainSplitBondTorsions(bool bond_config_changes, const Math::Vector3DArray& coords,
-											  FragmentTreeNode* node) const;
-
-			const Chem::Atom* getFirstNeighborAtom(const Chem::Atom* ctr_atom, const Chem::Atom* excl_atom,
-												   const FragmentTreeNode* node) const;
-
 			void enumRingFragmentNitrogens(const Chem::Fragment& frag, FragmentTreeNode* node);
+
+			void invertConfiguration(const Chem::Atom& ctr_atom, const Chem::Atom& fixed_atom1, const Chem::Atom& fixed_atom2, 
+									 const Chem::Atom& inv_atom, const Chem::Fragment& frag, FragmentTreeNode* node, bool inplace);
+			void invertConfiguration(const Chem::Bond& bond, const Chem::Fragment& frag, FragmentTreeNode* node);
 
 			std::size_t getInvertibleNitrogens(const Chem::Fragment& frag, FragmentTreeNode* node);
 
@@ -187,10 +182,8 @@ namespace CDPL
 			CallbackFunction                  abortCallback;
 			CallbackFunction                  timeoutCallback;
 			BondList                          fragSplitBonds;
-			Util::BitSet                      fragSplitBondMask;
 			Chem::FragmentList                fragments;
 			FragmentTree                      fragTree;
-			FragmentTree                      chainFragTree;
 			TorsionRuleMatcher                torRuleMatcher;
 			SubstituentBulkinessCalculator    substBulkCalc;
 			bool                              recalcSubstBlks;
@@ -203,8 +196,6 @@ namespace CDPL
 			SmallestSetOfSmallestRingsPtr     fragSSSR;
 			Util::BitSet                      invertibleNMask;
 			Util::BitSet                      invertedNMask;
-			Util::BitSet                      atomConfigChgMask;
-			Util::BitSet                      bondConfigChgMask;
 			Util::BitSet                      tmpBitSet;
 		};
     }

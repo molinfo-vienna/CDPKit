@@ -55,7 +55,7 @@ namespace
 {
 
 	const std::size_t  DEF_TIMEOUT                    = 20 * 60;
-	const std::size_t  DEF_SMALL_RSYS_SAMPLING_FACTOR = 8;
+	const std::size_t  DEF_SMALL_RSYS_SAMPLING_FACTOR = 12;
 	const double       DEF_MIN_RMSD                   = 0.1;
 	const double       DEF_E_WINDOW                   = 6.0;
 	const unsigned int DEF_FORCE_FIELD_TYPE           = CDPL::ConfGen::ForceFieldType::MMFF94S_NO_ESTAT;
@@ -106,7 +106,9 @@ public:
 		settings.getSmallRingSystemSettings().setMinRMSD(parent->minRMSD);
 		settings.setSmallRingSystemSamplingFactor(parent->smallRSysSamplingFactor);
 		settings.getSmallRingSystemSettings().setTimeout(parent->timeout * 1000);
+
 		settings.getMacrocycleSettings().setTimeout(parent->timeout * 1000);
+
 		settings.setForceFieldType(parent->forceFieldType);
 		settings.strictForceFieldParameterization(parent->strictForceFieldParam);
 		settings.preserveInputBondingGeometries(parent->presBondingGeom);
@@ -801,7 +803,7 @@ void GenFragLibImpl::printOptionSummary()
 
 	if (mode != MERGE) {
 		printMessage(VERBOSE, " Multi-threading:                     " + std::string(multiThreading ? "Yes" : "No"));
-		printMessage(VERBOSE, " Number of Threads:                   " + boost::lexical_cast<std::string>(numThreads));
+		printMessage(VERBOSE, " Number of Threads:                   " + (multiThreading ? boost::lexical_cast<std::string>(numThreads) : std::string("1")));
 		printMessage(VERBOSE, " Input File Format:                   " + (inputHandler ? inputHandler->getDataFormat().getName() : std::string("Auto-detect")));
 		printMessage(VERBOSE, " Max. Output Library Size:            " + boost::lexical_cast<std::string>(maxLibSize));
 		printMessage(VERBOSE, " Timeout:                             " + boost::lexical_cast<std::string>(timeout) + "s");

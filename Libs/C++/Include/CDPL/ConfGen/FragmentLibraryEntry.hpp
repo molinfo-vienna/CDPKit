@@ -32,12 +32,12 @@
 #define CDPL_CONFGEN_FRAGMENTLIBRARYENTRY_HPP
 
 #include <vector>
+#include <cstddef>
 
 #include <boost/shared_ptr.hpp>
 
 #include "CDPL/ConfGen/APIPrefix.hpp"
 #include "CDPL/Chem/BasicMolecule.hpp"
-#include "CDPL/Chem/Fragment.hpp"
 #include "CDPL/Chem/CanonicalNumberingGenerator.hpp"
 #include "CDPL/Util/Array.hpp"
 #include "CDPL/Base/IntegerTypes.hpp"
@@ -150,22 +150,15 @@ namespace CDPL
 
 			void fixStereoDescriptors(const Chem::MolecularGraph& molgraph);
 			void hydrogenize();
-			void generateCanonicalMolGraph(bool stereo);
+			void canonicalize(bool stereo);
 			void calcHashCode(bool stereo);
-			void makeAtomOrderCanonical();
 
 			bool compareCanonNumber(const Chem::Atom& atom1, const Chem::Atom& atom2) const;
-			bool compareAtomPointerIndex(const Chem::Atom* atom1, const Chem::Atom* atom2) const;
-			bool compareAtomIndex(const Chem::Atom& atom1, const Chem::Atom& atom2) const;
-			bool compareBondAtomIndices(const Chem::Bond& bond1, const Chem::Bond& bond2) const;
-
-			const Chem::Atom* getNeighborWithLowestIndex(const Chem::Atom* atom, const Chem::Atom* x_atom) const;
-
+		
 			typedef std::vector<Base::uint32> HashInputData;
 
 			Chem::BasicMolecule               molecule;
 			Base::uint64                      hashCode;
-			Chem::Fragment                    canonMolGraph;
 			Chem::CanonicalNumberingGenerator canonNumGen;
 			Util::STArray                     canonNumbers;
 			HashInputData                     hashInputData;

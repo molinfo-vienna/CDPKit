@@ -105,17 +105,17 @@ double ConfGen::FragmentConformerGeneratorSettings::RingFragmentSettings::getMin
 ConfGen::FragmentConformerGeneratorSettings::FragmentConformerGeneratorSettings():
 	preserveBondGeom(false), forceFieldType(ForceFieldType::MMFF94S_NO_ESTAT), 
 	strictParam(true), maxNumRefIters(0), refStopGrad(0.1), minMacrocycleSize(10), 
-	srSamplingFactor(4) 
+	srSamplingFactor(6) 
 {
 	srSettings.setMaxNumSampledConformers(1000);
-	srSettings.setMinNumSampledConformers(30);
+	srSettings.setMinNumSampledConformers(50);
 	srSettings.setTimeout(30 * 1000);
 	srSettings.setEnergyWindow(6.0);
 	srSettings.setMaxNumOutputConformers(1000);
 	srSettings.setMinRMSD(0.1);
 
 	mcSettings.setMaxNumSampledConformers(2000);
-	mcSettings.setMinNumSampledConformers(30);
+	mcSettings.setMinNumSampledConformers(100);
 	mcSettings.setTimeout(10 * 60 * 1000);
 	mcSettings.setEnergyWindow(20.0);
 	mcSettings.setMaxNumOutputConformers(1000);

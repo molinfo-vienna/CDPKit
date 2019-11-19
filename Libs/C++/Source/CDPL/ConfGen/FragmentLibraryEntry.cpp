@@ -51,6 +51,51 @@
 using namespace CDPL;
 
 
+namespace
+{
+
+	bool compareAtomIndex(const Chem::Atom& atom1, const Chem::Atom& atom2)
+	{
+		return (atom1.getIndex() < atom2.getIndex());
+	}
+
+	bool comparePointerAtomIndex(const Chem::Atom* atom1, const Chem::Atom* atom2)
+	{
+		return (atom1->getIndex() < atom2->getIndex());
+	}
+
+	bool compareBondAtomIndices(const Chem::Bond& bond1, const Chem::Bond& bond2)
+	{
+		std::size_t bond1_beg_idx = bond1.getBegin().getIndex();
+		std::size_t bond2_beg_idx = bond2.getBegin().getIndex();
+
+		if (bond1_beg_idx < bond2_beg_idx)
+			return true;
+
+		if (bond1_beg_idx > bond2_beg_idx)
+			return false;
+	
+		return (bond1.getEnd().getIndex() < bond2.getEnd().getIndex());
+	}
+
+	const Chem::Atom* getNeighborWithLowestIndex(const Chem::Atom* atom, const Chem::Atom* x_atom)
+	{
+		using namespace Chem;
+
+		for (Atom::ConstAtomIterator it = atom->getAtomsBegin(), end = atom->getAtomsBegin(); it != end; ++it) {
+			const Atom* nbr = &*it;
+
+			if (nbr == x_atom)
+				continue;
+
+			return nbr;
+		}
+
+		return 0;
+	}
+}
+
+
 ConfGen::FragmentLibraryEntry::FragmentLibraryEntry(): hashCode(0)
 {
 	canonNumGen.setHydrogenCountFunction(boost::bind(&Chem::getExplicitAtomCount, _1, Chem::AtomType::H));
@@ -226,9 +271,8 @@ void ConfGen::FragmentLibraryEntry::create(const Chem::MolecularGraph& molgraph)
 
 	fixStereoDescriptors(molgraph);
 	hydrogenize();
-	generateCanonicalMolGraph(flex_ring_rsys);
+	canonicalize(flex_ring_rsys);
 	calcHashCode(flex_ring_rsys);
-	makeAtomOrderCanonical();
 }
 
 const ConfGen::FragmentLibraryEntry::AtomMapping& ConfGen::FragmentLibraryEntry::getAtomMapping() const
@@ -461,49 +505,9 @@ void ConfGen::FragmentLibraryEntry::hydrogenize()
 	}
 }
 
-void ConfGen::FragmentLibraryEntry::generateCanonicalMolGraph(bool stereo)
+void ConfGen::FragmentLibraryEntry::canonicalize(bool stereo)
 {
 	using namespace Chem;
-
-	canonMolGraph.clear();
-
-	for (BasicMolecule::ConstAtomIterator it = molecule.getAtomsBegin(), end = molecule.getAtomsEnd(); it != end; ++it) {
-		const Atom& atom = *it;
-
-		if (getType(atom) == AtomType::H)
-			continue;
-
-		canonMolGraph.addAtom(atom);
-
-		if (!stereo || !hasStereoDescriptor(atom))
-			continue;
-
-		for (Atom::ConstAtomIterator a_it = atom.getAtomsBegin(), a_end = atom.getAtomsEnd(); a_it != a_end; ++a_it)
-			canonMolGraph.addAtom(*a_it);
-	}
-
-	if (stereo) {
-		for (BasicMolecule::ConstBondIterator it = molecule.getBondsBegin(), end = molecule.getBondsEnd(); it != end; ++it) {
-			const Bond& bond = *it;
-
-			if (!hasStereoDescriptor(bond)) 
-				continue;
-
-			for (std::size_t i = 0; i < 2; i++) {
-				const Atom& atom = bond.getAtom(i);
-
-				for (Atom::ConstAtomIterator a_it = atom.getAtomsBegin(), a_end = atom.getAtomsEnd(); a_it != a_end; ++a_it)
-					canonMolGraph.addAtom(*a_it);
-			}
-		}
-	}
-
-	for (BasicMolecule::ConstBondIterator it = molecule.getBondsBegin(), end = molecule.getBondsEnd(); it != end; ++it) {
-		const Bond& bond = *it;
-
-		if (canonMolGraph.containsAtom(bond.getBegin()) && canonMolGraph.containsAtom(bond.getEnd()))
-			canonMolGraph.addBond(bond);
-	}
 
 	if (stereo) {
 		canonNumGen.setAtomPropertyFlags(AtomPropertyFlag::TYPE | AtomPropertyFlag::FORMAL_CHARGE |
@@ -517,10 +521,17 @@ void ConfGen::FragmentLibraryEntry::generateCanonicalMolGraph(bool stereo)
 		canonNumGen.setBondPropertyFlags(BondPropertyFlag::ORDER | BondPropertyFlag::AROMATICITY);
 	}
 
-	canonNumGen.generate(canonMolGraph, canonNumbers);
+	canonNumGen.generate(molecule, canonNumbers);
 
-	canonMolGraph.orderAtoms(boost::bind(&FragmentLibraryEntry::compareCanonNumber, this, _1, _2));
-	canonMolGraph.orderBonds(boost::bind(&FragmentLibraryEntry::compareBondAtomIndices, this, _1, _2));
+	molecule.orderAtoms(boost::bind(&FragmentLibraryEntry::compareCanonNumber, this, _1, _2));
+
+	std::for_each(molecule.getAtomsBegin(), molecule.getAtomsEnd(), 
+				  boost::bind(&Atom::orderAtoms, _1, &compareAtomIndex));
+
+	std::for_each(molecule.getBondsBegin(), molecule.getBondsEnd(), 
+				  boost::bind(&Bond::orderAtoms, _1, &compareAtomIndex));
+
+	molecule.orderBonds(&compareBondAtomIndices);
 }
 
 void ConfGen::FragmentLibraryEntry::calcHashCode(bool stereo)
@@ -528,9 +539,9 @@ void ConfGen::FragmentLibraryEntry::calcHashCode(bool stereo)
 	using namespace Chem;
 
 	hashInputData.clear();
-	hashInputData.push_back(canonMolGraph.getNumAtoms());
+	hashInputData.push_back(molecule.getNumAtoms());
 
-	for (Fragment::ConstAtomIterator it = canonMolGraph.getAtomsBegin(), end = canonMolGraph.getAtomsEnd(); it != end; ++it) {
+	for (BasicMolecule::ConstAtomIterator it = molecule.getAtomsBegin(), end = molecule.getAtomsEnd(); it != end; ++it) {
 		const Atom& atom = *it;
 
 		hashInputData.push_back(getType(atom));
@@ -539,14 +550,9 @@ void ConfGen::FragmentLibraryEntry::calcHashCode(bool stereo)
 		hashInputData.push_back(getExplicitAtomCount(atom, AtomType::H));
 
 		if (stereo && hasStereoDescriptor(atom)) {
-			std::size_t num_nbrs = atom.getNumAtoms();
-			const Atom* nbr_atoms[4] = { &atom.getAtom(0), &atom.getAtom(1), &atom.getAtom(2), (num_nbrs == 4 ? &atom.getAtom(3) : static_cast<const Atom*>(0)) };
-
-			std::sort(nbr_atoms, nbr_atoms + num_nbrs, boost::bind(&FragmentLibraryEntry::compareAtomPointerIndex, this, _1, _2));
-
 			const StereoDescriptor& descr = getStereoDescriptor(atom);
-			unsigned int perm_pty = (num_nbrs == 3 ? descr.getPermutationParity(*nbr_atoms[0], *nbr_atoms[1], *nbr_atoms[2]) :
-									 descr.getPermutationParity(*nbr_atoms[0], *nbr_atoms[1], *nbr_atoms[2], *nbr_atoms[3]));
+			unsigned int perm_pty = (atom.getNumAtoms() == 3 ? descr.getPermutationParity(atom.getAtom(0), atom.getAtom(1), atom.getAtom(2)) :
+									 descr.getPermutationParity(atom.getAtom(0), atom.getAtom(1), atom.getAtom(2), atom.getAtom(3)));
 
 			if (perm_pty == 2) {
 				hashInputData.push_back(descr.getConfiguration());
@@ -562,22 +568,13 @@ void ConfGen::FragmentLibraryEntry::calcHashCode(bool stereo)
 		hashInputData.push_back(AtomConfiguration::NONE);
 	}
 
-	hashInputData.push_back(canonMolGraph.getNumBonds());
+	hashInputData.push_back(molecule.getNumBonds());
 
-	for (Fragment::ConstBondIterator it = canonMolGraph.getBondsBegin(), end = canonMolGraph.getBondsEnd(); it != end; ++it) {
+	for (BasicMolecule::ConstBondIterator it = molecule.getBondsBegin(), end = molecule.getBondsEnd(); it != end; ++it) {
 		const Bond& bond = *it;
 
-		std::size_t atom1_idx = canonMolGraph.getAtomIndex(bond.getBegin());
-		std::size_t atom2_idx = canonMolGraph.getAtomIndex(bond.getEnd());
-
-		if (atom2_idx < atom1_idx) {
-			hashInputData.push_back(atom2_idx);
-			hashInputData.push_back(atom1_idx);
-
-		} else {
-			hashInputData.push_back(atom1_idx);
-			hashInputData.push_back(atom2_idx);
-		}
+		hashInputData.push_back(bond.getBegin().getIndex());
+		hashInputData.push_back(bond.getEnd().getIndex());
 
 		if (getAromaticityFlag(bond))
 			hashInputData.push_back(4);
@@ -617,66 +614,7 @@ void ConfGen::FragmentLibraryEntry::calcHashCode(bool stereo)
 		hashCode = hashCode ^ (Base::uint64(sha_hash[i]) << ((i % 8) * 8));
 }
 
-void ConfGen::FragmentLibraryEntry::makeAtomOrderCanonical()
-{
-	using namespace Chem;
-
-	for (std::size_t i = 0, num_atoms = canonMolGraph.getNumAtoms(); i < num_atoms; i++) {
-		const Atom& atom = canonMolGraph.getAtom(i);
-
-		for (Atom::ConstAtomIterator it = atom.getAtomsBegin(), end = atom.getAtomsEnd(); it != end; ++it)
-			if (!canonMolGraph.containsAtom(*it))
-				canonMolGraph.addAtom(*it);
-	}
-
-	molecule.orderAtoms(boost::bind(&FragmentLibraryEntry::compareAtomIndex, this, _1, _2));
-}
-
 bool ConfGen::FragmentLibraryEntry::compareCanonNumber(const Chem::Atom& atom1, const Chem::Atom& atom2) const
 {
-	return (canonNumbers[canonMolGraph.getAtomIndex(atom1)] < canonNumbers[canonMolGraph.getAtomIndex(atom2)]);
-}
-
-bool ConfGen::FragmentLibraryEntry::compareAtomPointerIndex(const Chem::Atom* atom1, const Chem::Atom* atom2) const
-{
-	return (canonMolGraph.getAtomIndex(*atom1) < canonMolGraph.getAtomIndex(*atom2));
-}
-
-bool ConfGen::FragmentLibraryEntry::compareAtomIndex(const Chem::Atom& atom1, const Chem::Atom& atom2) const
-{
-	return (canonMolGraph.getAtomIndex(atom1) < canonMolGraph.getAtomIndex(atom2));
-}
-
-bool ConfGen::FragmentLibraryEntry::compareBondAtomIndices(const Chem::Bond& bond1, const Chem::Bond& bond2) const
-{
-	std::size_t num_bonds = canonMolGraph.getNumBonds();
-	std::size_t atom_inds[2][2] = { { canonMolGraph.getAtomIndex(bond1.getBegin()), canonMolGraph.getAtomIndex(bond1.getEnd()) }, 
-									{ canonMolGraph.getAtomIndex(bond2.getBegin()), canonMolGraph.getAtomIndex(bond2.getEnd()) } };
-
-	if (atom_inds[0][1] < atom_inds[0][0])
-		std::swap(atom_inds[0][0], atom_inds[0][1]);
-
-	if (atom_inds[1][1] < atom_inds[1][0])
-		std::swap(atom_inds[1][0], atom_inds[1][1]);
-
-	return ((atom_inds[0][0] * num_bonds + atom_inds[0][1]) < (atom_inds[1][0] * num_bonds + atom_inds[1][1]));
-}
-
-const Chem::Atom* ConfGen::FragmentLibraryEntry::getNeighborWithLowestIndex(const Chem::Atom* atom, const Chem::Atom* x_atom) const
-{
-	using namespace Chem;
-
-	const Atom* li_nbr = 0;
-
-	for (Atom::ConstAtomIterator it = atom->getAtomsBegin(), end = atom->getAtomsBegin(); it != end; ++it) {
-		const Atom* nbr = &*it;
-
-		if (nbr == x_atom)
-			continue;
-
-		if (!li_nbr || canonMolGraph.getAtomIndex(*nbr) < canonMolGraph.getAtomIndex(*li_nbr))
-			li_nbr = nbr;
-	}
-
-	return li_nbr;
+	return (canonNumbers[atom1.getIndex()] < canonNumbers[atom2.getIndex()]);
 }
