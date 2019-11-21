@@ -198,7 +198,7 @@ unsigned int ConfGen::FragmentAssemblerImpl::doAssemble(const Chem::MolecularGra
 
 	try {
 		unsigned int ret_code = getFragmentConformers();
-		
+
 		if (ret_code != ReturnCode::SUCCESS)
 			return ret_code;
 
@@ -268,11 +268,10 @@ unsigned int ConfGen::FragmentAssemblerImpl::getFragmentConformers()
 			}
 		}
 
-		if (abortCallback && abortCallback())
-			return ReturnCode::ABORTED;
+		unsigned int ret_code = invokeCallbacks();
 
-		if (timeoutCallback && timeoutCallback())
-			return ReturnCode::TIMEOUT;	
+		if (ret_code != ReturnCode::SUCCESS)
+			return ret_code;
 	}
 
 	return ReturnCode::SUCCESS;
@@ -1172,4 +1171,15 @@ ConfGen::ConformerData::SharedPointer ConfGen::FragmentAssemblerImpl::allocConfo
 	conf_data->setEnergy(0.0);
 
 	return conf_data;
+}
+
+unsigned int ConfGen::FragmentAssemblerImpl::invokeCallbacks() const
+{
+	if (abortCallback && abortCallback())
+		return ReturnCode::ABORTED;
+
+	if (timeoutCallback && timeoutCallback())
+		return ReturnCode::TIMEOUT;	
+
+	return ReturnCode::SUCCESS;
 }

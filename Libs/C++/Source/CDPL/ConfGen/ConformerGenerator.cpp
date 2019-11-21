@@ -63,6 +63,16 @@ void ConfGen::ConformerGenerator::addFragmentLibrary(const FragmentLibrary::Shar
 	impl->addFragmentLibrary(lib);
 }
 
+void ConfGen::ConformerGenerator::setTorsionLibrary(const TorsionLibrary::SharedPointer& lib)
+{
+	impl->setTorsionLibrary(lib);
+}
+
+const ConfGen::TorsionLibrary::SharedPointer& ConfGen::ConformerGenerator::getTorsionLibrary() const
+{
+	return impl->getTorsionLibrary();
+}
+
 void ConfGen::ConformerGenerator::setAbortCallback(const CallbackFunction& func)
 {
 	impl->setAbortCallback(func);

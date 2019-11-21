@@ -64,7 +64,7 @@ namespace
 		return (conf_data1->getEnergy() < conf_data2->getEnergy());
 	} 
 
-	const std::size_t MAX_CONF_DATA_CACHE_SIZE     = 5000;
+	const std::size_t MAX_CONF_DATA_CACHE_SIZE     = 10000;
 	const std::size_t MAX_NUM_STRUCTURE_GEN_TRIALS = 10;
 }
 
@@ -275,20 +275,14 @@ unsigned int ConfGen::FragmentConformerGeneratorImpl::generateSingleConformer()
 
 		ConformerData::SharedPointer conf_data = allocConformerData();
 		unsigned int ret_code = generateRandomConformer(*conf_data);
-		
+
 		if (ret_code != ReturnCode::SUCCESS)
 			return ret_code;
 
 		outputConfs.push_back(conf_data);
 	}
 
-	if (timeoutCallback && timeoutCallback())
-			return ReturnCode::TIMEOUT;
-
-	if (abortCallback && abortCallback())
-		return ReturnCode::ABORTED;
-
-	return ReturnCode::SUCCESS;
+	return invokeCallbacks();
 }
 
 unsigned int ConfGen::FragmentConformerGeneratorImpl::generateFlexibleRingConformers()
@@ -323,11 +317,8 @@ unsigned int ConfGen::FragmentConformerGeneratorImpl::generateFlexibleRingConfor
 	unsigned int ret_code = ReturnCode::SUCCESS;
 
 	for (std::size_t i = 0; i < num_conf_samples; i++) {
-		if (timeoutCallback && timeoutCallback())
-			return ReturnCode::TIMEOUT;
-
-		if (abortCallback && abortCallback())
-			return ReturnCode::ABORTED;
+		if ((ret_code = invokeCallbacks()) != ReturnCode::SUCCESS)
+			return ret_code;
 
 		if (timedout(timeout)) {
 			ret_code = ReturnCode::FRAGMENT_CONF_GEN_TIMEOUT;
@@ -692,6 +683,17 @@ std::size_t ConfGen::FragmentConformerGeneratorImpl::getNumRotatableRingBonds(co
 	return count;
 }
 
+unsigned int ConfGen::FragmentConformerGeneratorImpl::invokeCallbacks() const
+{
+	if (timeoutCallback && timeoutCallback())
+		return ReturnCode::TIMEOUT;
+
+	if (abortCallback && abortCallback())
+		return ReturnCode::ABORTED;
+
+	return ReturnCode::SUCCESS;
+}
+
 bool ConfGen::FragmentConformerGeneratorImpl::timedout(std::size_t timeout) const
 {
 	if (timeout == 0)
@@ -708,3 +710,4 @@ ConfGen::ConformerData::SharedPointer ConfGen::FragmentConformerGeneratorImpl::a
 
 	return conf_data;
 }
+

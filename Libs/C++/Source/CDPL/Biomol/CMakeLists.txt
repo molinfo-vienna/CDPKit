@@ -26,7 +26,7 @@
 INCLUDE_DIRECTORIES("${CMAKE_CURRENT_SOURCE_DIR}" "${CDPL_SOURCE_DIR}" "${CMAKE_CURRENT_BINARY_DIR}" "${CDPKIT_EXTERNAL_DIR}/MessagePack" "${CDPKIT_EXTERNAL_DIR}/MMTF")
 
 ADD_CUSTOM_COMMAND(OUTPUT "ResidueDictionaryStructureData.cdf.str"
-		   COMMAND "${PYTHON_EXECUTABLE}" "${CDPKIT_PYTHON_SCRIPTS_DIR}/FileDataToCString.py" 
+		   COMMAND "${PYTHON_EXECUTABLE}" "${CDPKIT_PYTHON_SCRIPTS_DIR}/DataFileToCString.py" 
 		   "${CDPKIT_BUILTIN_DATA_DIR}/Biomol/ResidueDictionaryStructureData.cdf" 
 		   "ResidueDictionaryStructureData.cdf.str"
 		   DEPENDS "${CDPKIT_BUILTIN_DATA_DIR}/Biomol/ResidueDictionaryStructureData.cdf" 

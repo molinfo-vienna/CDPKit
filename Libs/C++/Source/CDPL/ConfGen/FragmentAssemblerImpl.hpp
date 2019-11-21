@@ -166,6 +166,8 @@ namespace CDPL
 
 			ConformerData::SharedPointer allocConformerData();
 
+			unsigned int invokeCallbacks() const;
+
 			typedef Util::ObjectStack<ConformerData> ConformerDataCache;
 			typedef std::auto_ptr<ForceField::MMFF94InteractionParameterizer> MMFF94ParameterizerPtr;
 			typedef std::auto_ptr<MMFF94InteractionData> MMFF94InteractionDataPtr;

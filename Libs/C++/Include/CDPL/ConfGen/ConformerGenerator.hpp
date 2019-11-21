@@ -40,6 +40,7 @@
 #include "CDPL/ConfGen/CallbackFunction.hpp"
 #include "CDPL/ConfGen/ConformerGeneratorSettings.hpp"
 #include "CDPL/ConfGen/FragmentLibrary.hpp"
+#include "CDPL/ConfGen/TorsionLibrary.hpp"
 
 
 namespace CDPL 
@@ -79,6 +80,10 @@ namespace CDPL
 			void clearFragmentLibraries();
 
 			void addFragmentLibrary(const FragmentLibrary::SharedPointer& lib);
+
+			void setTorsionLibrary(const TorsionLibrary::SharedPointer& lib);
+
+			const TorsionLibrary::SharedPointer& getTorsionLibrary() const;
 
 			void setAbortCallback(const CallbackFunction& func);
 

@@ -125,6 +125,7 @@ namespace CDPL
 
 			ConformerData::SharedPointer allocConformerData();
 
+			unsigned int invokeCallbacks() const;
 			bool timedout(std::size_t timeout) const;
 
 			bool has3DCoordinates(const Chem::Atom& atom) const;

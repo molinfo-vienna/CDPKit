@@ -99,7 +99,7 @@ void CDPLPythonConfGen::exportTorsionDriver()
 											(&ConfGen::TorsionDriver::getSettings),
 											python::return_internal_reference<>()))	
 		.add_property("torsionLibrary", 
-				  python::make_function(&ConfGen::TorsionDriver::getTorsionLibrary,
+					  python::make_function(&ConfGen::TorsionDriver::getTorsionLibrary,
 											python::return_value_policy<python::copy_const_reference>()),
 					  &ConfGen::TorsionDriver::setTorsionLibrary)
 		.add_property("abortCallback", 

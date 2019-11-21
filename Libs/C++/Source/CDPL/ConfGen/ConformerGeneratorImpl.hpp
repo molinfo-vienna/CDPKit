@@ -73,6 +73,10 @@ namespace CDPL
 
 			void addFragmentLibrary(const FragmentLibrary::SharedPointer& lib);
 
+			void setTorsionLibrary(const TorsionLibrary::SharedPointer& lib);
+
+			const TorsionLibrary::SharedPointer& getTorsionLibrary() const;
+
 			void setAbortCallback(const CallbackFunction& func);
 
 			const CallbackFunction& getAbortCallback() const;
@@ -92,6 +96,7 @@ namespace CDPL
 			ConstConformerIterator getConformersEnd() const;
 
 		private:
+			struct FragmentConfData;
 			struct FragmentConfCombination;
 
 			ConformerGeneratorImpl(const ConformerGeneratorImpl&);
@@ -109,9 +114,19 @@ namespace CDPL
 			void generateFragmentConformerCombinations();
 			void generateFragmentConformerCombinations(std::size_t frag_idx, double comb_energy);
 
+			void calcFragmentConformerChangeFrequencies() const;
+			std::size_t calcFragmentConformerChangeFrequency(std::size_t frag_idx) const;
+
+			void setupTorsionDriver();
+
+			unsigned int generateConformers();
+
 			static bool compFragmentConfCombinationEnergy(const FragmentConfCombination* comb1, 
 														  const FragmentConfCombination* comb2);
+			static bool compFragmentConfChangeFrequency(const FragmentConfData* conf_data1, 
+														const FragmentConfData* conf_data2);
 
+			unsigned int invokeCallbacks() const;
 			bool timedout() const;
 
 			typedef std::vector<std::size_t> UIntArray;
@@ -121,7 +136,9 @@ namespace CDPL
 
 				Chem::Fragment::SharedPointer fragment;
 				ConformerDataArray            conformers;
-				std::size_t                   lastConfIndex;
+				std::size_t                   lastConfIdx;
+				std::size_t                   confChangeFreq;
+				std::size_t                   torDriverFragIdx;
 
 				void clear() {
 					conformers.clear();
@@ -165,6 +182,7 @@ namespace CDPL
 			Chem::FragmentList           fragments;
 			Util::BitSet                 splitBondMask;
 			FragmentConfDataList         torFragConfDataList;
+			FragmentConfDataList         sortedTorFragConfDataList;
 			FragmentConfCombinationList  torFragConfCombList;
 			UIntArray                    currConfComb;
 		};

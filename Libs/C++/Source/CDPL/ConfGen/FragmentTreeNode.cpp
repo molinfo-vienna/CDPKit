@@ -497,11 +497,10 @@ unsigned int ConfGen::FragmentTreeNode::alignAndRotateChildConformers()
 	}
 
 	for (std::size_t i = 0; i < num_left_chld_confs; i++) {
-		if (owner.aborted())
-			return ReturnCode::ABORTED;
+		unsigned int ret_code = invokeCallbacks();
 
-		if (owner.timedout())
-			return ReturnCode::TIMEOUT;
+		if (ret_code != ReturnCode::SUCCESS)
+			return ret_code;
 
 		const ConformerData& left_conf = *leftChild->conformers[i];
 
@@ -916,4 +915,15 @@ double ConfGen::FragmentTreeNode::calcNonVdWMMFF94Energies(const Math::Vector3DA
 			calcMMFF94ElectrostaticEnergy<double>(mmff94Data.getElectrostaticInteractions().getElementsBegin(),
 												  mmff94Data.getElectrostaticInteractions().getElementsEnd(), 
 												  coords_data));
+}
+
+unsigned int ConfGen::FragmentTreeNode::invokeCallbacks() const
+{
+	if (owner.aborted())
+		return ReturnCode::ABORTED;
+
+	if (owner.timedout())
+		return ReturnCode::TIMEOUT;
+
+	return ReturnCode::SUCCESS;
 }

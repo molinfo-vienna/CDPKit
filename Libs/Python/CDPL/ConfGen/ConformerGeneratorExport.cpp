@@ -56,6 +56,10 @@ void CDPLPythonConfGen::exportConformerGenerator()
 			 python::arg("self"))
 		.def("addFragmentLibrary", &ConfGen::ConformerGenerator::addFragmentLibrary, 
 			 (python::arg("self"), python::arg("lib")))
+		.def("setTorsionLibrary", &ConfGen::ConformerGenerator::setTorsionLibrary, 
+			 (python::arg("self"), python::arg("lib")))
+		.def("getTorsionLibrary", &ConfGen::ConformerGenerator::getTorsionLibrary, 
+			 python::arg("self"), python::return_value_policy<python::copy_const_reference>())
 		.def("setAbortCallback", &ConfGen::ConformerGenerator::setAbortCallback, 
 			 (python::arg("self"), python::arg("func")))
 		.def("getAbortCallback", &ConfGen::ConformerGenerator::getAbortCallback, 
@@ -77,6 +81,10 @@ void CDPLPythonConfGen::exportConformerGenerator()
 					  python::make_function(static_cast<ConfGen::ConformerGeneratorSettings& (ConfGen::ConformerGenerator::*)()>
 											(&ConfGen::ConformerGenerator::getSettings),
 											python::return_internal_reference<>()))
+		.add_property("torsionLibrary", 
+					  python::make_function(&ConfGen::ConformerGenerator::getTorsionLibrary,
+											python::return_value_policy<python::copy_const_reference>()),
+					  &ConfGen::ConformerGenerator::setTorsionLibrary)
 		.add_property("abortCallback", 
 					  python::make_function(&ConfGen::ConformerGenerator::getAbortCallback,
 											python::return_internal_reference<>()),

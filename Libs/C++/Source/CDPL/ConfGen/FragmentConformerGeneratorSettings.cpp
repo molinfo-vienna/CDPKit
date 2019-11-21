@@ -37,8 +37,8 @@ const ConfGen::FragmentConformerGeneratorSettings ConfGen::FragmentConformerGene
 
 
 ConfGen::FragmentConformerGeneratorSettings::RingFragmentSettings::RingFragmentSettings():
-	maxNumSampledConfs(2000), minNumSampledConfs(30), maxNumOutputConfs(1000),
-	timeout(0), eWindow(8.0), minRMSD(0.1)
+	maxNumSampledConfs(2000), minNumSampledConfs(40), maxNumOutputConfs(1000),
+	timeout(0), eWindow(6.0), minRMSD(0.1)
 {}
 
 void ConfGen::FragmentConformerGeneratorSettings::RingFragmentSettings::setMaxNumSampledConformers(std::size_t max_num)
@@ -108,7 +108,7 @@ ConfGen::FragmentConformerGeneratorSettings::FragmentConformerGeneratorSettings(
 	srSamplingFactor(6) 
 {
 	srSettings.setMaxNumSampledConformers(1000);
-	srSettings.setMinNumSampledConformers(50);
+	srSettings.setMinNumSampledConformers(40);
 	srSettings.setTimeout(30 * 1000);
 	srSettings.setEnergyWindow(6.0);
 	srSettings.setMaxNumOutputConformers(1000);

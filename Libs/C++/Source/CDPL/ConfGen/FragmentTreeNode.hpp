@@ -168,6 +168,8 @@ namespace CDPL
 
 			double calcNonVdWMMFF94Energies(const Math::Vector3DArray& coords) const;
 
+			unsigned int invokeCallbacks() const;
+
 			FragmentTree&                       owner;
 			FragmentTreeNode*                   parent;
 			const Chem::Bond*                   splitBond;

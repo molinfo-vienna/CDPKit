@@ -54,7 +54,7 @@ namespace
 
 	const std::size_t MAX_CONF_DATA_CACHE_SIZE              = 20000;
 	const std::size_t MAX_FRAG_CONF_DATA_CACHE_SIZE         = 100;
-	const std::size_t MAX_FRAG_CONF_COMBINATION_CACHE_SIZE  = 20000;
+	const std::size_t MAX_FRAG_CONF_COMBINATION_CACHE_SIZE  = 10000;
 }
 
 
@@ -90,6 +90,16 @@ void ConfGen::ConformerGeneratorImpl::addFragmentLibrary(const FragmentLibrary::
 	fragAssembler.addFragmentLibrary(lib);
 }
 
+void ConfGen::ConformerGeneratorImpl::setTorsionLibrary(const TorsionLibrary::SharedPointer& lib)
+{
+	torDriver.setTorsionLibrary(lib);
+}
+
+const ConfGen::TorsionLibrary::SharedPointer& ConfGen::ConformerGeneratorImpl::getTorsionLibrary() const
+{
+	return torDriver.getTorsionLibrary();
+}
+
 void ConfGen::ConformerGeneratorImpl::setAbortCallback(const CallbackFunction& func)
 {
 	abortCallback = func;
@@ -123,17 +133,20 @@ unsigned int ConfGen::ConformerGeneratorImpl::generate(const Chem::MolecularGrap
 		return ReturnCode::FORCEFIELD_SETUP_FAILED;
 
 	unsigned int ret_code = generateFragmentConformers();
-		
+
 	if (ret_code != ReturnCode::SUCCESS)
 		return ret_code;
 
 	generateFragmentConformerCombinations();
 
-	if (abortCallback && abortCallback())
-		return ReturnCode::ABORTED;
+	if ((ret_code = invokeCallbacks()) != ReturnCode::SUCCESS)
+		return ret_code;
 
-	if (timeoutCallback && timeoutCallback())
-		return ReturnCode::TIMEOUT;	
+	calcFragmentConformerChangeFrequencies();
+	setupTorsionDriver();
+
+	if ((ret_code = generateConformers()) != ReturnCode::SUCCESS)
+		return ret_code;
 
 	return ReturnCode::SUCCESS;
 }
@@ -167,6 +180,8 @@ void ConfGen::ConformerGeneratorImpl::init(const Chem::MolecularGraph& molgraph)
 
 	fragConfDataCache.putAll();
 	fragConfCombCache.putAll();
+
+	outputConfs.clear();
 
 	timer.start();
 }
@@ -298,7 +313,7 @@ unsigned int ConfGen::ConformerGeneratorImpl::generateFragmentConformers()
 				if (ret_code != ReturnCode::SUCCESS)
 					return ret_code;
 
-				for (FragmentAssemblerImpl::ConstConformerIterator td_conf_it = torDriver.getConformersBegin(), td_conf_end = torDriver.getConformersEnd();
+				for (TorsionDriverImpl::ConstConformerIterator td_conf_it = torDriver.getConformersBegin(), td_conf_end = torDriver.getConformersEnd();
 					 td_conf_it != td_conf_end; ++td_conf_it) {
 
 					ConformerData& td_conf_data = **td_conf_it;
@@ -312,7 +327,7 @@ unsigned int ConfGen::ConformerGeneratorImpl::generateFragmentConformers()
 
 		std::sort(frag_conf_data->conformers.begin(), frag_conf_data->conformers.end(), &compareConformerEnergy); 
 
-		frag_conf_data->lastConfIndex = frag_conf_data->conformers.size();
+		frag_conf_data->lastConfIdx = frag_conf_data->conformers.size();
 	}
 
 	return ReturnCode::SUCCESS;
@@ -351,10 +366,129 @@ void ConfGen::ConformerGeneratorImpl::generateFragmentConformerCombinations(std:
 	}
 }
 
+void ConfGen::ConformerGeneratorImpl::calcFragmentConformerChangeFrequencies() const
+{
+	for (std::size_t i = 0, num_frags = torFragConfDataList.size(); i < num_frags; i++)
+		torFragConfDataList[i]->confChangeFreq = calcFragmentConformerChangeFrequency(i);
+}
+
+std::size_t ConfGen::ConformerGeneratorImpl::calcFragmentConformerChangeFrequency(std::size_t frag_idx) const
+{
+	std::size_t freq = 0;
+	std::size_t last_conf_idx = 0;
+
+	for (FragmentConfCombinationList::const_iterator it = torFragConfCombList.begin(), end = torFragConfCombList.end(); it != end; ++it) {
+		if (freq == 0 || (*it)->confIndices[frag_idx] != last_conf_idx) {
+			last_conf_idx = (*it)->confIndices[frag_idx];
+			freq++;
+		}
+	}
+
+	return freq;
+}
+
+void ConfGen::ConformerGeneratorImpl::setupTorsionDriver()
+{
+	fragments.clear();
+	sortedTorFragConfDataList.clear();
+
+	sortedTorFragConfDataList = torFragConfDataList;
+
+	std::sort(sortedTorFragConfDataList.begin(), sortedTorFragConfDataList.end(), &compFragmentConfChangeFrequency);
+
+	for (std::size_t i = 0, num_frags = sortedTorFragConfDataList.size(); i < num_frags; i++) {
+		sortedTorFragConfDataList[i]->torDriverFragIdx = i;
+		fragments.addElement(sortedTorFragConfDataList[i]->fragment);
+	}
+
+	torDriver.setup(fragments, *molGraph, torDriveBonds.begin(), torDriveBonds.end());
+	torDriver.setMMFF94Parameters(mmff94Data, mmff94InteractionMask);
+}
+
+unsigned int ConfGen::ConformerGeneratorImpl::generateConformers()
+{
+	double min_energy = 0.0;
+	double e_window = settings.getEnergyWindow();
+
+	std::size_t num_frags = torFragConfDataList.size();
+	bool first = true;
+
+	for (FragmentConfCombinationList::const_iterator comb_it = torFragConfCombList.begin(), combs_end = torFragConfCombList.end(); comb_it != combs_end; ++comb_it) {
+		const FragmentConfCombination* comb = *comb_it;
+
+		for (std::size_t i = 0; i < num_frags; i++) {
+			FragmentConfData* conf_data = torFragConfDataList[i];
+			std::size_t next_conf_idx = comb->confIndices[i];
+
+			if (conf_data->lastConfIdx != next_conf_idx) {
+				torDriver.clearInputCoordinates(conf_data->torDriverFragIdx);
+				torDriver.addInputCoordinates(conf_data->conformers[next_conf_idx], conf_data->torDriverFragIdx);
+
+				conf_data->lastConfIdx = next_conf_idx;
+			}
+		}
+
+		unsigned int ret_code = torDriver.generateConformers();
+
+		if (ret_code == ReturnCode::TIMEOUT || ret_code == ReturnCode::ABORTED)
+			return ret_code;
+
+		if (ret_code != ReturnCode::SUCCESS)
+			continue;
+
+		for (TorsionDriverImpl::ConstConformerIterator conf_it = torDriver.getConformersBegin(), confs_end = torDriver.getConformersEnd();
+			 conf_it != confs_end; ++conf_it) {
+			
+			ConformerData& conf_data = **conf_it;
+			double energy = conf_data.getEnergy();
+			
+			if (first) {
+				min_energy = energy;
+				first = false;
+
+			} else if (energy > (min_energy + e_window))
+				continue;
+
+			if (energy < min_energy)
+				min_energy = energy; 
+			
+			ConformerData::SharedPointer conf_data_copy = confDataCache.get();
+
+			conf_data_copy->swap(conf_data);
+			outputConfs.push_back(conf_data_copy);
+
+			// TODO
+		}
+
+		break;	// TODO
+	}
+
+	// TODO
+
+	return ReturnCode::SUCCESS;
+}
+
 bool ConfGen::ConformerGeneratorImpl::compFragmentConfCombinationEnergy(const FragmentConfCombination* comb1, 
 																		const FragmentConfCombination* comb2)
 {
 	return (comb1->energy < comb2->energy);
+}
+
+bool ConfGen::ConformerGeneratorImpl::compFragmentConfChangeFrequency(const FragmentConfData* conf_data1, 
+																	  const FragmentConfData* conf_data2)
+{
+	return (conf_data1->confChangeFreq < conf_data2->confChangeFreq);
+}
+
+unsigned int ConfGen::ConformerGeneratorImpl::invokeCallbacks() const
+{
+	if (abortCallback && abortCallback())
+		return ReturnCode::ABORTED;
+
+	if (timedout())
+		return ReturnCode::TIMEOUT;	
+
+	return ReturnCode::SUCCESS;
 }
 
 bool ConfGen::ConformerGeneratorImpl::timedout() const
