@@ -96,6 +96,10 @@ ConfGen::FragmentAssemblerImpl::FragmentAssemblerImpl():
 	confDataCache(MAX_CONF_DATA_CACHE_SIZE), fragTree(MAX_TREE_CONF_DATA_CACHE_SIZE)
 {
 	fragLibs.push_back(FragmentLibrary::get());
+
+	torRuleMatcher.findUniqueMappingsOnly(true);
+	torRuleMatcher.findAllRuleMappings(false);
+	torRuleMatcher.stopAtFirstMatchingRule(true);
 } 
 
 ConfGen::FragmentAssemblerImpl::~FragmentAssemblerImpl() {}
@@ -147,17 +151,15 @@ unsigned int ConfGen::FragmentAssemblerImpl::assemble(const Chem::MolecularGraph
 													  bool recalc_subst_blks)
 {
 	usedMMFF94Data = &ia_data;
-	recalcSubstBlks = recalc_subst_blks;
 
-	return doAssemble(molgraph, parent_molgraph);
+	return doAssemble(molgraph, parent_molgraph, recalc_subst_blks);
 }
 
 unsigned int ConfGen::FragmentAssemblerImpl::assemble(const Chem::MolecularGraph& molgraph)
 {
 	usedMMFF94Data = 0;
-	recalcSubstBlks = true;
 
-	return doAssemble(molgraph, molgraph);
+	return doAssemble(molgraph, molgraph, true);
 }
 
 std::size_t ConfGen::FragmentAssemblerImpl::getNumConformers() const
@@ -191,10 +193,15 @@ void ConfGen::FragmentAssemblerImpl::init(const Chem::MolecularGraph& parent_mol
 }
 
 unsigned int ConfGen::FragmentAssemblerImpl::doAssemble(const Chem::MolecularGraph& molgraph, 
-														const Chem::MolecularGraph& parent_molgraph)
+														const Chem::MolecularGraph& parent_molgraph,
+														bool recalc_subst_blks)
 {
 	init(parent_molgraph);
+
 	buildFragmentTree(molgraph, parent_molgraph);
+
+	if (recalc_subst_blks)
+		substBulkCalc.calculate(molgraph);
 
 	try {
 		unsigned int ret_code = getFragmentConformers();
@@ -485,7 +492,7 @@ void ConfGen::FragmentAssemblerImpl::postprocChainFragment(bool fix_stereo, bool
 														   const Chem::Fragment& frag, FragmentTreeNode* node)
 {
 	bool have_inv_n = (getInvertibleNitrogens(frag, node) > 0);
-	
+
 	if (fix_stereo)
 		fixChainAtomConfigurations(have_inv_n, frag, node);
 
@@ -714,14 +721,7 @@ const Chem::Atom* ConfGen::FragmentAssemblerImpl::getBulkiestSubstituent(const C
 
 std::size_t ConfGen::FragmentAssemblerImpl::getSubstituentBulkiness(const Chem::Atom& atom)
 {
-	const Chem::MolecularGraph& parent_molgraph = *fragTree.getMolecularGraph();
-
-	if (recalcSubstBlks) {
-		substBulkCalc.calculate(parent_molgraph);
-		recalcSubstBlks = false;
-	}
-
-	return substBulkCalc[parent_molgraph.getAtomIndex(atom)];
+	return substBulkCalc[fragTree.getMolecularGraph()->getAtomIndex(atom)];
 }
 
 void ConfGen::FragmentAssemblerImpl::enumRingFragmentNitrogens(const Chem::Fragment& frag, FragmentTreeNode* node)

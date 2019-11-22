@@ -51,20 +51,23 @@ void CDPLPythonConfGen::exportTorsionRuleMatcher()
     using namespace boost;
     using namespace CDPL;
 
-   	python::scope scope = python::class_<ConfGen::TorsionRuleMatcher, boost::noncopyable>("TorsionRuleMatcher", python::no_init)
+	typedef void (ConfGen::TorsionRuleMatcher::*SetBoolFunc)(bool);
+	typedef bool (ConfGen::TorsionRuleMatcher::*GetBoolFunc)() const;
+
+   	python::class_<ConfGen::TorsionRuleMatcher, boost::noncopyable>("TorsionRuleMatcher", python::no_init)
 		.def(python::init<>(python::arg("self")))
 		.def(python::init<const ConfGen::TorsionLibrary::SharedPointer&>((python::arg("self"), python::arg("lib"))))
-		.def("reportUniqueMappingsOnly", &ConfGen::TorsionRuleMatcher::reportUniqueMappingsOnly, 
+		.def("findUniqueMappingsOnly", SetBoolFunc(&ConfGen::TorsionRuleMatcher::findUniqueMappingsOnly), 
 			 (python::arg("self"), python::arg("unique")))
-		.def("onlyUniqueMappingsReported", &ConfGen::TorsionRuleMatcher::onlyUniqueMappingsReported, 
+		.def("findUniqueMappingsOnly", GetBoolFunc(&ConfGen::TorsionRuleMatcher::findUniqueMappingsOnly), 
 			 python::arg("self"))
-		.def("reportAllRuleMappings", &ConfGen::TorsionRuleMatcher::reportAllRuleMappings, 
+		.def("findAllRuleMappings", SetBoolFunc(&ConfGen::TorsionRuleMatcher::findAllRuleMappings), 
 			 (python::arg("self"), python::arg("all")))
-		.def("allRuleMappingsReported", &ConfGen::TorsionRuleMatcher::allRuleMappingsReported, 
+		.def("findAllRuleMappings", GetBoolFunc(&ConfGen::TorsionRuleMatcher::findAllRuleMappings), 
 			 python::arg("self"))
-		.def("stopAtFirstMatchingRule", &ConfGen::TorsionRuleMatcher::stopAtFirstMatchingRule, 
+		.def("stopAtFirstMatchingRule", SetBoolFunc(&ConfGen::TorsionRuleMatcher::stopAtFirstMatchingRule), 
 			 (python::arg("self"), python::arg("stop")))
-		.def("stoppedAtFirstMatchingRule", &ConfGen::TorsionRuleMatcher::stoppedAtFirstMatchingRule, 
+		.def("stopAtFirstMatchingRule", GetBoolFunc(&ConfGen::TorsionRuleMatcher::stopAtFirstMatchingRule), 
 			 python::arg("self"))
 		.def("setTorsionLibrary", &ConfGen::TorsionRuleMatcher::setTorsionLibrary, 
 			 (python::arg("self"), python::arg("lib")))
@@ -82,12 +85,12 @@ void CDPLPythonConfGen::exportTorsionRuleMatcher()
 			 python::return_internal_reference<1>())
 		.def("__len__", &ConfGen::TorsionRuleMatcher::getNumMatches, python::arg("self"))
 		.add_property("numMatches", &ConfGen::TorsionRuleMatcher::getNumMatches)
-		.add_property("uniqueMappingsOnly", &ConfGen::TorsionRuleMatcher::onlyUniqueMappingsReported,
-					  &ConfGen::TorsionRuleMatcher::reportUniqueMappingsOnly)
-		.add_property("allRuleMappings", &ConfGen::TorsionRuleMatcher::allRuleMappingsReported,
-					  &ConfGen::TorsionRuleMatcher::reportAllRuleMappings)
-		.add_property("onlyFirstMatchingRule", &ConfGen::TorsionRuleMatcher::stoppedAtFirstMatchingRule, 
-					  &ConfGen::TorsionRuleMatcher::stopAtFirstMatchingRule)
+		.add_property("uniqueMappingsOnly", GetBoolFunc(&ConfGen::TorsionRuleMatcher::findUniqueMappingsOnly),
+					  SetBoolFunc(&ConfGen::TorsionRuleMatcher::findUniqueMappingsOnly))
+		.add_property("allRuleMappings", GetBoolFunc(&ConfGen::TorsionRuleMatcher::findAllRuleMappings),
+					  SetBoolFunc(&ConfGen::TorsionRuleMatcher::findAllRuleMappings))
+		.add_property("onlyFirstMatchingRule", GetBoolFunc(&ConfGen::TorsionRuleMatcher::stopAtFirstMatchingRule), 
+					  SetBoolFunc(&ConfGen::TorsionRuleMatcher::stopAtFirstMatchingRule))
 		.add_property("torsionLibrary", 
 					  python::make_function(&ConfGen::TorsionRuleMatcher::getTorsionLibrary,
 											python::return_value_policy<python::copy_const_reference>()),

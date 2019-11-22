@@ -39,9 +39,9 @@
 using namespace CDPL;
 
 
-ConfGen::TorsionRuleMatcher::TorsionRuleMatcher(): uniqueMappingsOnly(true), stopAtFirstRule(true)
+ConfGen::TorsionRuleMatcher::TorsionRuleMatcher(): uniqueMappingsOnly(true), stopAtFirstRule(true) 
 {
-	reportAllRuleMappings(false);
+	findAllRuleMappings(false);
 	
 	subSearch.uniqueMappingsOnly(false);
 }
@@ -49,22 +49,22 @@ ConfGen::TorsionRuleMatcher::TorsionRuleMatcher(): uniqueMappingsOnly(true), sto
 ConfGen::TorsionRuleMatcher::TorsionRuleMatcher(const TorsionLibrary::SharedPointer& lib):
 	torLib(lib), uniqueMappingsOnly(true), stopAtFirstRule(true)
 {
-	reportAllRuleMappings(false);
+	findAllRuleMappings(false);
 
 	subSearch.uniqueMappingsOnly(false);
 }
 
-void ConfGen::TorsionRuleMatcher::reportUniqueMappingsOnly(bool unique)
+void ConfGen::TorsionRuleMatcher::findUniqueMappingsOnly(bool unique)
 {
 	uniqueMappingsOnly = unique;
 }
 
-bool ConfGen::TorsionRuleMatcher::onlyUniqueMappingsReported() const
+bool ConfGen::TorsionRuleMatcher::findUniqueMappingsOnly() const
 {
 	return uniqueMappingsOnly;
 }
 
-void ConfGen::TorsionRuleMatcher::reportAllRuleMappings(bool all)
+void ConfGen::TorsionRuleMatcher::findAllRuleMappings(bool all)
 {
 	if (all)
 		subSearch.setMaxNumMappings(0);
@@ -72,7 +72,7 @@ void ConfGen::TorsionRuleMatcher::reportAllRuleMappings(bool all)
 		subSearch.setMaxNumMappings(1);
 }
 
-bool ConfGen::TorsionRuleMatcher::allRuleMappingsReported() const
+bool ConfGen::TorsionRuleMatcher::findAllRuleMappings() const
 {
 	return (subSearch.getMaxNumMappings() == 0);
 }
@@ -82,7 +82,7 @@ void ConfGen::TorsionRuleMatcher::stopAtFirstMatchingRule(bool stop)
 	stopAtFirstRule = stop;
 }
 
-bool ConfGen::TorsionRuleMatcher::stoppedAtFirstMatchingRule() const
+bool ConfGen::TorsionRuleMatcher::stopAtFirstMatchingRule() const
 {
 	return stopAtFirstRule;
 }

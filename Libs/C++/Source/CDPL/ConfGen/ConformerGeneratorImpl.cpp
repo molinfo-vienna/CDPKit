@@ -143,6 +143,7 @@ unsigned int ConfGen::ConformerGeneratorImpl::generate(const Chem::MolecularGrap
 		return ret_code;
 
 	calcFragmentConformerChangeFrequencies();
+
 	setupTorsionDriver();
 
 	if ((ret_code = generateConformers()) != ReturnCode::SUCCESS)
@@ -310,8 +311,17 @@ unsigned int ConfGen::ConformerGeneratorImpl::generateFragmentConformers()
 
 				ret_code = torDriver.generateConformers();
 
-				if (ret_code != ReturnCode::SUCCESS)
+				if (ret_code != ReturnCode::SUCCESS) {
+					if (ret_code == ReturnCode::TORSION_DRIVING_FAILED) {
+						ConformerData::SharedPointer final_conf_data = confDataCache.get();
+
+						final_conf_data->swap(fa_conf_data);
+						frag_conf_data->conformers.push_back(final_conf_data);
+						continue;
+					}
+
 					return ret_code;
+				}
 
 				for (TorsionDriverImpl::ConstConformerIterator td_conf_it = torDriver.getConformersBegin(), td_conf_end = torDriver.getConformersEnd();
 					 td_conf_it != td_conf_end; ++td_conf_it) {

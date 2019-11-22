@@ -128,7 +128,7 @@ namespace CDPL
 
 			void assignTorsionAngles(FragmentTreeNode* node);
 
-			const ConfGen::TorsionRuleMatch* getMatchingTorsionRule(const Chem::Bond& bond);
+			const ConfGen::TorsionRuleMatch* getMatchingTorsionRule(const Chem::Bond& bond, std::size_t& alter_offs);
 
 			std::size_t getRotationalSymmetry(const Chem::Bond& bond);
 			std::size_t getRotationalSymmetry(const Chem::Atom& atom, const Chem::Bond& bond) const;
@@ -148,6 +148,8 @@ namespace CDPL
 			Chem::FragmentList            fragments;
 			MMFF94ParameterizerPtr        mmff94Parameterizer;
 			MMFF94InteractionDataPtr      mmff94Data;
+			Util::BitSet                  torRefAtomMask1;
+			Util::BitSet                  torRefAtomMask2;
 			Util::BitSet                  rotBondMask;
 			BondList                      rotBonds;
 			ForceFieldInteractionMask     mmff94InteractionMask;

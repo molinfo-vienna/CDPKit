@@ -374,7 +374,7 @@ namespace
         "     <angle value=\"180.0\" tolerance1=\"30.00\" tolerance2=\"60.00\" score=\"18.41\"/>"
 		"    </torsions>"
 		"   </rule>"
-		"   <rule pattern=\"[*,#1]~[*:2]~[*:3]~[*,#1:4]\">"
+		"   <rule pattern=\"[*,#1]~[*:2]-[*:3]~[*,#1:4]\">"
         "    <torsions>"
         "      <angle value=\"0.0\" tolerance1=\"0.0\" tolerance2=\"0.0\" score=\"0.0\"/>"
         "      <angle value=\"30.0\" tolerance1=\"0.0\" tolerance2=\"0.0\" score=\"0.0\"/>"

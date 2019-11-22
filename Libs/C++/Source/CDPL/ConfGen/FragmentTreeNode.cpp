@@ -237,7 +237,7 @@ void ConfGen::FragmentTreeNode::distMMFF94Parameters(const ForceField::MMFF94Int
 	extractFragmentMMFF94InteractionParams2(ia_data.getElectrostaticInteractions(), mmff94Data.getElectrostaticInteractions(), 
 											ia_mask.electrostatic, coreAtomMask);
 	extractFragmentMMFF94InteractionParams2(ia_data.getVanDerWaalsInteractions(), mmff94Data.getVanDerWaalsInteractions(), 
-											ia_mask.vanDerWaals, coreAtomMask);
+											ia_mask.vanDerWaals, atomMask);
 	extractFragmentMMFF94InteractionParams3(ia_data.getAngleBendingInteractions(), mmff94Data.getAngleBendingInteractions(), 
 											ia_mask.angleBending, atomMask);
 	extractFragmentMMFF94InteractionParams3(ia_data.getStretchBendInteractions(), mmff94Data.getStretchBendInteractions(), 

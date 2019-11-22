@@ -1349,25 +1349,25 @@
   </category>
 
   <category name="SN" atomType1="S" atomType2="N">
-    <rule pattern="[!#1:1][$(S(=O)=O):2]!@[v3+0:3]@[Cr3]">
+    <rule pattern="[!#1:1][$(S(=O)=O):2]!@[v3X3+0:3]@[Cr3]">
       <torsions>
         <angle value="-50.0" tolerance1="20.00" tolerance2="40.00" score="6.67"/>
         <angle value="50.0" tolerance1="20.00" tolerance2="40.00" score="10.0"/>
         <angle value="180.0" tolerance1="10.00" tolerance2="20.00" score="2.38"/>
       </torsions>
     </rule>
-    <rule pattern="[C:1][$(S(=O)=O):2]!@[v3+0:3]">
+    <rule pattern="[C:1][$(S(=O)=O):2]!@[v3X3+0:3]">
       <torsions>
         <angle value="180.0" tolerance1="20.00" tolerance2="30.00" score="33.55"/>
         <angle value="0.0" tolerance1="20.00" tolerance2="30.00" score="5.54"/>
       </torsions>
     </rule>
-    <rule pattern="[c:1][$(S(=O)=O):2]!@[v3+0:3]">
+    <rule pattern="[c:1][$(S(=O)=O):2]!@[v3X3+0:3]">
       <torsions>
         <angle value="180.0" tolerance1="20.00" tolerance2="25.00" score="38.25"/>
       </torsions>
     </rule>
-    <rule pattern="[!#1:1][$(S(=O)=O):2]!@[v3+0:3]">
+    <rule pattern="[!#1:1][$(S(=O)=O):2]!@[v3X3+0:3]">
       <torsions>
         <angle value="180.0" tolerance1="20.00" tolerance2="30.00" score="37.51"/>
         <angle value="40.0" tolerance1="20.00" tolerance2="30.00" score="0.88"/>

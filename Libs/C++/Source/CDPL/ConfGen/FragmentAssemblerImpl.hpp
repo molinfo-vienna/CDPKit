@@ -112,7 +112,8 @@ namespace CDPL
 			void init(const Chem::MolecularGraph& parent_molgraph);
 
 			unsigned int doAssemble(const Chem::MolecularGraph& molgraph, 
-									const Chem::MolecularGraph& parent_molgraph);
+									const Chem::MolecularGraph& parent_molgraph,
+									bool recalc_subst_blks);
 
 			void buildFragmentTree(const Chem::MolecularGraph& molgraph, 
 								   const Chem::MolecularGraph& parent_molgraph);
@@ -188,7 +189,6 @@ namespace CDPL
 			FragmentTree                      fragTree;
 			TorsionRuleMatcher                torRuleMatcher;
 			SubstituentBulkinessCalculator    substBulkCalc;
-			bool                              recalcSubstBlks;
 			MMFF94ParameterizerPtr            mmff94Parameterizer;
 			MMFF94InteractionDataPtr          mmff94Data;
 			const MMFF94InteractionData*      usedMMFF94Data;

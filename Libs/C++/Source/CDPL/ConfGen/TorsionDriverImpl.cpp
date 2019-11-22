@@ -61,7 +61,7 @@ namespace
 	};
 
 	SymmetryPattern SYMMETRY_PATTERN_LIST[] = {
-  	    { Chem::parseSMARTS("[*:1]-[c:1]1[cH1][cH1][cH1][cH1][c]1-[*,#1;X1]"), 2 },
+  	    { Chem::parseSMARTS("[*:1]-[c:1]1[cH1][cH1][c](-[*,#1;X1])[cH1][cH1]1"), 2 },
 	    { Chem::parseSMARTS("[*:1]-[*X2:1]#[*X2]-[*,#1;X1]"), 360 },
 	    { Chem::parseSMARTS("[*:1]-[*X2:1]#[*X1]"), 360 }
 	};
@@ -72,7 +72,11 @@ namespace
 
 ConfGen::TorsionDriverImpl::TorsionDriverImpl(): 
 	torLib(TorsionLibrary::get()), fragTree(MAX_CONF_DATA_CACHE_SIZE)
-{} 
+{
+	torRuleMatcher.findUniqueMappingsOnly(true);
+	torRuleMatcher.findAllRuleMappings(true);
+	torRuleMatcher.stopAtFirstMatchingRule(true);
+} 
 
 ConfGen::TorsionDriverImpl::~TorsionDriverImpl() {}
 
@@ -284,21 +288,22 @@ void ConfGen::TorsionDriverImpl::assignTorsionAngles(FragmentTreeNode* node)
 
 	const Atom* const* bond_atoms = node->getSplitBondAtoms();
 	FragmentTreeNode::TorsionAngleArray& tor_angles = node->getTorsionAngles();
+	std::size_t alter_offs = 0.0;
 
-	const TorsionRuleMatch* match = getMatchingTorsionRule(*bond);
+	const TorsionRuleMatch* match = getMatchingTorsionRule(*bond, alter_offs);
 
 	if (match) {
 		for (TorsionRule::ConstAngleEntryIterator it = match->getRule().getAnglesBegin(), end = match->getRule().getAnglesEnd(); it != end; ++it) {
 			double tor_ang = it->getAngle();
 
-			// normalize angle to range [0, 360)
+			for (std::size_t i = 0, num_alters = (alter_offs == 0 ? std::size_t(1) : 360 / alter_offs); i < num_alters; i++, tor_ang += alter_offs) { 
+				// normalize angle to range [0, 360)
 
-			if (tor_ang < 0.0)
-				tor_ang = std::fmod(tor_ang, 360.0) + 360.0;
-			else 
-				tor_ang = std::fmod(tor_ang, 360.0);
-
-			tor_angles.push_back(tor_ang);
+				if (tor_ang < 0.0)
+					tor_angles.push_back(std::fmod(tor_ang, 360.0) + 360.0);
+				else 
+					tor_angles.push_back(std::fmod(tor_ang, 360.0));
+			}
 		}
 
 		if (!tor_angles.empty()) {
@@ -316,7 +321,7 @@ void ConfGen::TorsionDriverImpl::assignTorsionAngles(FragmentTreeNode* node)
 
 		std::size_t rot_sym = getRotationalSymmetry(*bond);
 
-		for (std::size_t i = 0, num_angles = 12 / rot_sym; i < num_angles; i++)
+		for (std::size_t i = 0, num_angles = 12 / rot_sym; i < num_angles; i++) 
 			tor_angles.push_back(i * 30.0);
 
 		node->setTorsionReferenceAtoms(getFirstNeighborAtom(bond_atoms[0], bond_atoms[1], node), 
@@ -328,44 +333,124 @@ void ConfGen::TorsionDriverImpl::assignTorsionAngles(FragmentTreeNode* node)
 	} else if (tor_angles.size() > 1) {
 		std::size_t rot_sym = getRotationalSymmetry(*bond);
 
-		if (rot_sym > 1) {	// reduce number of torsion angles due to rotational symmetry
-			if (rot_sym == 360) {
-				tor_angles.resize(1);
+		if (rot_sym == 360) {
+			tor_angles.resize(1);
 
-			} else {
-				double ident_rot_ang = 360.0 / rot_sym; 
+		} else {
+			double ident_rot_ang = 360.0 / rot_sym; 
 
-				for (FragmentTreeNode::TorsionAngleArray::iterator it = tor_angles.begin(), end = tor_angles.end(); it != end; ++it) {
-					double& tor_ang = *it;
+			for (FragmentTreeNode::TorsionAngleArray::iterator it = tor_angles.begin(), end = tor_angles.end(); it != end; ++it) {
+				double& tor_ang = *it;
 
-					tor_ang = std::fmod(tor_ang, ident_rot_ang);
-				}
-
-				std::sort(tor_angles.begin(), tor_angles.end());
-		
-				tor_angles.erase(std::unique(tor_angles.begin(), tor_angles.end()), tor_angles.end());
+				tor_ang = std::fmod(tor_ang, ident_rot_ang);
 			}
+
+			std::sort(tor_angles.begin(), tor_angles.end());
+		
+			tor_angles.erase(std::unique(tor_angles.begin(), tor_angles.end()), tor_angles.end());
 		}
 	}
 }
 
-const ConfGen::TorsionRuleMatch* ConfGen::TorsionDriverImpl::getMatchingTorsionRule(const Chem::Bond& bond)
+const ConfGen::TorsionRuleMatch* ConfGen::TorsionDriverImpl::getMatchingTorsionRule(const Chem::Bond& bond, std::size_t& alter_offs)
 {
-	const Chem::MolecularGraph& molgraph = *fragTree.getMolecularGraph();
+	using namespace Chem;
+
+	const MolecularGraph& molgraph = *fragTree.getMolecularGraph();
+	bool have_matches = false;
 
 	if (torLib) {
 		torRuleMatcher.setTorsionLibrary(torLib);
 
-		if (torRuleMatcher.findMatches(bond, molgraph, false)) 
-			return &torRuleMatcher.getMatch(0); 
+		have_matches = torRuleMatcher.findMatches(bond, molgraph, false);
 	}
 
-	torRuleMatcher.setTorsionLibrary(getFallbackTorsionLibrary());
+	if (!have_matches) {
+		torRuleMatcher.setTorsionLibrary(getFallbackTorsionLibrary());
 
-	if (torRuleMatcher.findMatches(bond, molgraph, false)) 
-		return &torRuleMatcher.getMatch(0); 
+		have_matches = torRuleMatcher.findMatches(bond, molgraph, false); 
+	}
+	
+	if (!have_matches)
+		return 0;
 
-	return 0;
+	if (torRuleMatcher.getNumMatches() > 1) {
+		std::size_t num_atoms = molgraph.getNumAtoms();
+
+		torRefAtomMask1.resize(num_atoms);
+		torRefAtomMask1.reset();
+		torRefAtomMask2.resize(num_atoms);
+		torRefAtomMask2.reset();
+
+		for (TorsionRuleMatcher::ConstMatchIterator it = torRuleMatcher.getMatchesBegin(), end = torRuleMatcher.getMatchesEnd(); it != end; ++it) {
+			const TorsionRuleMatch& match = *it;
+			const Atom* const* match_atoms = match.getAtoms(); 
+
+			if (match_atoms[1] == &bond.getBegin()) {
+				if (match_atoms[0])
+					torRefAtomMask1.set(molgraph.getAtomIndex(*match_atoms[0]));
+
+				if (match_atoms[3])
+					torRefAtomMask2.set(molgraph.getAtomIndex(*match_atoms[3]));
+
+			} else {
+				if (match_atoms[0])
+					torRefAtomMask2.set(molgraph.getAtomIndex(*match_atoms[0]));
+
+				if (match_atoms[3])
+					torRefAtomMask1.set(molgraph.getAtomIndex(*match_atoms[3]));
+			}
+		}
+
+		alter_offs = 360;
+
+		if (torRefAtomMask1.count() > 1) {
+
+			switch (getHybridizationState(bond.getBegin())) {
+				
+				case HybridizationState::SP3:
+					alter_offs = 120;
+					break;
+
+				case HybridizationState::SP2:
+					alter_offs = 180;
+
+				case HybridizationState::SP:
+					break;
+
+				default:
+					alter_offs = 60;
+					break;
+			}
+		}
+
+		if (alter_offs > 60 && torRefAtomMask2.count() > 1) {
+
+			switch (getHybridizationState(bond.getEnd())) {
+				
+				case HybridizationState::SP3:
+					alter_offs = 120;
+					break;
+
+				case HybridizationState::SP2:
+					if (alter_offs > 120)
+						alter_offs = 180;
+					else
+						alter_offs = 60;
+
+				case HybridizationState::SP:
+					break;
+
+				default:
+					alter_offs = 60;
+					break;
+			}
+		}
+
+	} else
+		alter_offs = 0;
+
+	return &torRuleMatcher.getMatch(0); 
 }
 
 std::size_t ConfGen::TorsionDriverImpl::getRotationalSymmetry(const Chem::Bond& bond)
@@ -400,7 +485,7 @@ std::size_t ConfGen::TorsionDriverImpl::getRotationalSymmetry(const Chem::Bond& 
 		subSearch.addBondMappingConstraint(ptn_bond_idx, node_bond_idx);
 		subSearch.setQuery(ptn);
 	
-		if (subSearch.findMappings(molgraph)) 
+		if (subSearch.findMappings(molgraph))
 			return SYMMETRY_PATTERN_LIST[i].symmetry;
 	}
 

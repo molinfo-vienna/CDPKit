@@ -62,17 +62,17 @@ namespace CDPL
 
 			TorsionRuleMatcher(const TorsionLibrary::SharedPointer& lib);
 
-			void reportUniqueMappingsOnly(bool unique);
+			void findUniqueMappingsOnly(bool unique);
 
-			bool onlyUniqueMappingsReported() const;
+			bool findUniqueMappingsOnly() const;
 
-			void reportAllRuleMappings(bool all);
+			void findAllRuleMappings(bool all);
 
-			bool allRuleMappingsReported() const;
+			bool findAllRuleMappings() const;
 
 			void stopAtFirstMatchingRule(bool stop);
 
-			bool stoppedAtFirstMatchingRule() const;
+			bool stopAtFirstMatchingRule() const;
 
 			void setTorsionLibrary(const TorsionLibrary::SharedPointer& lib);
 
@@ -85,10 +85,10 @@ namespace CDPL
 			std::size_t getNumMatches() const;
 
 			/**
-			 * \brief Returns a \c const reference to the stored torsion rule match at index \a idx.
-			 * \param idx The zero-based index of the torsion rule match to return.
-			 * \return A \c const reference to the torsion rule match at index \a idx.
-			 * \throw Base::IndexError if no torsion rulematches are available or \a idx is not in the range [0, getNumMatches() - 1].
+			 * \brief Returns a \c const reference to the stored torsion rule match object at index \a idx.
+			 * \param idx The zero-based index of the torsion rule match object to return.
+			 * \return A \c const reference to the torsion rule match object at index \a idx.
+			 * \throw Base::IndexError if no torsion rule matches are available or \a idx is not in the range [0, getNumMatches() - 1].
 			 */
 			const TorsionRuleMatch& getMatch(std::size_t idx) const;
 
