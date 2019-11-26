@@ -154,7 +154,7 @@ namespace CDPL
 								   std::size_t excl_atom_idx) const;
 
 			void alignCoordinates(const double almnt_mtx[3][3], Math::Vector3DArray& coords, const IndexArray& atom_inds, 
-								  std::size_t ctr_atom_idx, std::size_t excl_atom_idx, double x_disp) const;
+								  std::size_t ctr_atom_idx, double x_disp) const;
 
 			void calcAlignmentMatrix(const Math::Vector3D& bond_vec, const Math::Vector3D& tor_ref_vec, 
 									 double almnt_mtx[3][3], bool check_ref_vec_angle) const;

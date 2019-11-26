@@ -95,6 +95,11 @@ namespace CDPL
 			void addInputCoordinates(const ConformerData& conf_data, std::size_t frag_idx);
 			void addInputCoordinates(const ConformerData::SharedPointer& conf_data, std::size_t frag_idx);
 
+			void setInputCoordinates(const Math::Vector3DArray& coords);
+			void setInputCoordinates(const Math::Vector3DArray& coords, std::size_t frag_idx);
+			void setInputCoordinates(const ConformerData& conf_data, std::size_t frag_idx);
+			void setInputCoordinates(const ConformerData::SharedPointer& conf_data, std::size_t frag_idx);
+
 			std::size_t getNumFragments() const;
 
 			const Chem::Fragment& getFragment(std::size_t idx) const;
@@ -128,7 +133,7 @@ namespace CDPL
 
 			void assignTorsionAngles(FragmentTreeNode* node);
 
-			const ConfGen::TorsionRuleMatch* getMatchingTorsionRule(const Chem::Bond& bond, std::size_t& alter_offs);
+			const ConfGen::TorsionRuleMatch* getMatchingTorsionRule(const Chem::Bond& bond);
 
 			std::size_t getRotationalSymmetry(const Chem::Bond& bond);
 			std::size_t getRotationalSymmetry(const Chem::Atom& atom, const Chem::Bond& bond) const;

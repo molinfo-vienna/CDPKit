@@ -55,6 +55,6 @@ void CDPLPythonConfGen::exportReturnCodes()
 		.def_readonly("FRAGMENT_CONF_GEN_TIMEOUT", &ConfGen::ReturnCode::FRAGMENT_CONF_GEN_TIMEOUT)
 		.def_readonly("FRAGMENT_ALREADY_PROCESSED", &ConfGen::ReturnCode::FRAGMENT_ALREADY_PROCESSED)
 		.def_readonly("TORSION_DRIVING_FAILED", &ConfGen::ReturnCode::TORSION_DRIVING_FAILED)
-		.def_readonly("ERROR", &ConfGen::ReturnCode::ERROR)
+		.def_readonly("CONF_GEN_FAILED", &ConfGen::ReturnCode::CONF_GEN_FAILED)
 		;
 }

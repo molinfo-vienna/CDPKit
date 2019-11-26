@@ -105,6 +105,23 @@ namespace
 		return (conf_data1->getEnergy() < conf_data2->getEnergy());
 	} 
 
+	bool isZero(double v)
+	{
+		return (std::abs(v) < 0.00001);
+	}
+
+	bool isIdentityTransform(const double mtx[3][3])
+	{
+		return (isZero(mtx[0][0] - 1.0) && isZero(mtx[0][1]) && isZero(mtx[0][2]) &&
+				isZero(mtx[1][0]) && isZero(mtx[1][1] - 1.0) && isZero(mtx[1][2]) &&
+				isZero(mtx[2][0]) && isZero(mtx[2][1]) && isZero(mtx[2][2] - 1.0));
+	}
+
+	bool isZeroVector(Math::Vector3D::ConstPointer vec)
+	{
+		return (isZero(vec[0]) && isZero(vec[1]) && isZero(vec[2]));
+	}
+
 	const double CONFORMER_LINEUP_SPACING       = 4.0;
 	const double MAX_TORSION_REF_BOND_ANGLE_COS = std::cos(2.5 / 180.0 * M_PI);
 }
@@ -464,7 +481,11 @@ unsigned int ConfGen::FragmentTreeNode::alignAndRotateChildConformers()
 		}
 
 		calcAlignmentMatrix(bond_vec, tor_ref_vec, almnt_mtx, check_ref_vec_angle);
-		alignCoordinates(almnt_mtx, conf, leftChild->atomIndices, left_atom_idx, right_atom_idx, 0.0);
+
+		if (isZeroVector(conf_data[left_atom_idx].getData()) && isIdentityTransform(almnt_mtx))
+			continue;
+
+		alignCoordinates(almnt_mtx, conf, leftChild->atomIndices, left_atom_idx, 0.0);
 	}
 
 	for (std::size_t i = 0, tor_ref_atom_idx = torsionRefAtoms[1] ? molgraph.getAtomIndex(*torsionRefAtoms[1]) : 0; i < num_right_chld_confs; i++) {
@@ -493,7 +514,13 @@ unsigned int ConfGen::FragmentTreeNode::alignAndRotateChildConformers()
 		}
 
 		calcAlignmentMatrix(bond_vec, tor_ref_vec, almnt_mtx, check_ref_vec_angle);
-		alignCoordinates(almnt_mtx, conf, rightChild->atomIndices, right_atom_idx, left_atom_idx, bond_len);
+
+		Math::Vector3D::ConstPointer right_atom_pos = conf_data[right_atom_idx].getData();
+
+		if (isZero(right_atom_pos[0] - bond_len) && isZero(right_atom_pos[1]) && isZero(right_atom_pos[2]) && isIdentityTransform(almnt_mtx)) 
+			continue;
+
+		alignCoordinates(almnt_mtx, conf, rightChild->atomIndices, right_atom_idx, bond_len);
 	}
 
 	for (std::size_t i = 0; i < num_left_chld_confs; i++) {
@@ -723,7 +750,7 @@ void ConfGen::FragmentTreeNode::rotateCoordinates(const Math::Vector3DArray& src
 }
 
 void ConfGen::FragmentTreeNode::alignCoordinates(const double almnt_mtx[3][3], Math::Vector3DArray& coords, const IndexArray& atom_inds, 
-												 std::size_t ctr_atom_idx, std::size_t excl_atom_idx, double x_disp) const
+												 std::size_t ctr_atom_idx, double x_disp) const
 {
 	// align split bond to x-axis 
 
@@ -736,10 +763,6 @@ void ConfGen::FragmentTreeNode::alignCoordinates(const double almnt_mtx[3][3], M
 
 	for (IndexArray::const_iterator it = atom_inds.begin(), end = atom_inds.end(); it != end; ++it) {
 		std::size_t idx = *it;
-
-		if (idx == excl_atom_idx)
-			continue;
-
 		Math::Vector3D::Pointer atom_pos_data = coords_data[idx].getData();
 
 		double ctrd_x = atom_pos_data[0] - ctr_atom_pos_x;

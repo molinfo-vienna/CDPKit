@@ -142,7 +142,7 @@ unsigned int ConfGen::RandomStructureGenerator::generate(Math::Vector3DArray& co
 		return ReturnCode::SUCCESS;
 	}
 
-    return ReturnCode::ERROR;
+    return ReturnCode::CONF_GEN_FAILED;
 }
 
 double ConfGen::RandomStructureGenerator::getEnergy() const

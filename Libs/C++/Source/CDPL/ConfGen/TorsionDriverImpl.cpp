@@ -185,6 +185,17 @@ void ConfGen::TorsionDriverImpl::addInputCoordinates(const Math::Vector3DArray& 
 	}
 }
 
+void ConfGen::TorsionDriverImpl::setInputCoordinates(const Math::Vector3DArray& coords)
+{
+	fragTree.getRoot()->clearConformersDownwards();
+
+	for (std::size_t i = 0, num_frags = fragTree.getNumFragments(); i < num_frags; i++) {
+		FragmentTreeNode* node = fragTree.getFragmentNode(i);
+
+		node->addConformer(coords);
+	}
+}
+
 void ConfGen::TorsionDriverImpl::addInputCoordinates(const Math::Vector3DArray& coords, std::size_t frag_idx)
 {
 	doAddInputCoordinates(coords, frag_idx);
@@ -197,6 +208,27 @@ void ConfGen::TorsionDriverImpl::addInputCoordinates(const ConformerData& conf_d
 
 void ConfGen::TorsionDriverImpl::addInputCoordinates(const ConformerData::SharedPointer& conf_data, std::size_t frag_idx)
 {
+	doAddInputCoordinates(conf_data, frag_idx);
+}
+
+void ConfGen::TorsionDriverImpl::setInputCoordinates(const Math::Vector3DArray& coords, std::size_t frag_idx)
+{
+	fragTree.getFragmentNode(frag_idx)->clearConformers();
+
+	doAddInputCoordinates(coords, frag_idx);
+}
+
+void ConfGen::TorsionDriverImpl::setInputCoordinates(const ConformerData& conf_data, std::size_t frag_idx)
+{
+	fragTree.getFragmentNode(frag_idx)->clearConformers();
+
+	doAddInputCoordinates(conf_data, frag_idx);
+}
+
+void ConfGen::TorsionDriverImpl::setInputCoordinates(const ConformerData::SharedPointer& conf_data, std::size_t frag_idx)
+{
+	fragTree.getFragmentNode(frag_idx)->clearConformers();
+
 	doAddInputCoordinates(conf_data, frag_idx);
 }
 
@@ -288,22 +320,19 @@ void ConfGen::TorsionDriverImpl::assignTorsionAngles(FragmentTreeNode* node)
 
 	const Atom* const* bond_atoms = node->getSplitBondAtoms();
 	FragmentTreeNode::TorsionAngleArray& tor_angles = node->getTorsionAngles();
-	std::size_t alter_offs = 0.0;
 
-	const TorsionRuleMatch* match = getMatchingTorsionRule(*bond, alter_offs);
+	const TorsionRuleMatch* match = getMatchingTorsionRule(*bond);
 
 	if (match) {
 		for (TorsionRule::ConstAngleEntryIterator it = match->getRule().getAnglesBegin(), end = match->getRule().getAnglesEnd(); it != end; ++it) {
 			double tor_ang = it->getAngle();
 
-			for (std::size_t i = 0, num_alters = (alter_offs == 0 ? std::size_t(1) : 360 / alter_offs); i < num_alters; i++, tor_ang += alter_offs) { 
-				// normalize angle to range [0, 360)
+			// normalize angle to range [0, 360)
 
-				if (tor_ang < 0.0)
-					tor_angles.push_back(std::fmod(tor_ang, 360.0) + 360.0);
-				else 
-					tor_angles.push_back(std::fmod(tor_ang, 360.0));
-			}
+			if (tor_ang < 0.0)
+				tor_angles.push_back(std::fmod(tor_ang, 360.0) + 360.0);
+			else 
+				tor_angles.push_back(std::fmod(tor_ang, 360.0));
 		}
 
 		if (!tor_angles.empty()) {
@@ -352,7 +381,7 @@ void ConfGen::TorsionDriverImpl::assignTorsionAngles(FragmentTreeNode* node)
 	}
 }
 
-const ConfGen::TorsionRuleMatch* ConfGen::TorsionDriverImpl::getMatchingTorsionRule(const Chem::Bond& bond, std::size_t& alter_offs)
+const ConfGen::TorsionRuleMatch* ConfGen::TorsionDriverImpl::getMatchingTorsionRule(const Chem::Bond& bond)
 {
 	using namespace Chem;
 
@@ -373,82 +402,6 @@ const ConfGen::TorsionRuleMatch* ConfGen::TorsionDriverImpl::getMatchingTorsionR
 	
 	if (!have_matches)
 		return 0;
-
-	if (torRuleMatcher.getNumMatches() > 1) {
-		std::size_t num_atoms = molgraph.getNumAtoms();
-
-		torRefAtomMask1.resize(num_atoms);
-		torRefAtomMask1.reset();
-		torRefAtomMask2.resize(num_atoms);
-		torRefAtomMask2.reset();
-
-		for (TorsionRuleMatcher::ConstMatchIterator it = torRuleMatcher.getMatchesBegin(), end = torRuleMatcher.getMatchesEnd(); it != end; ++it) {
-			const TorsionRuleMatch& match = *it;
-			const Atom* const* match_atoms = match.getAtoms(); 
-
-			if (match_atoms[1] == &bond.getBegin()) {
-				if (match_atoms[0])
-					torRefAtomMask1.set(molgraph.getAtomIndex(*match_atoms[0]));
-
-				if (match_atoms[3])
-					torRefAtomMask2.set(molgraph.getAtomIndex(*match_atoms[3]));
-
-			} else {
-				if (match_atoms[0])
-					torRefAtomMask2.set(molgraph.getAtomIndex(*match_atoms[0]));
-
-				if (match_atoms[3])
-					torRefAtomMask1.set(molgraph.getAtomIndex(*match_atoms[3]));
-			}
-		}
-
-		alter_offs = 360;
-
-		if (torRefAtomMask1.count() > 1) {
-
-			switch (getHybridizationState(bond.getBegin())) {
-				
-				case HybridizationState::SP3:
-					alter_offs = 120;
-					break;
-
-				case HybridizationState::SP2:
-					alter_offs = 180;
-
-				case HybridizationState::SP:
-					break;
-
-				default:
-					alter_offs = 60;
-					break;
-			}
-		}
-
-		if (alter_offs > 60 && torRefAtomMask2.count() > 1) {
-
-			switch (getHybridizationState(bond.getEnd())) {
-				
-				case HybridizationState::SP3:
-					alter_offs = 120;
-					break;
-
-				case HybridizationState::SP2:
-					if (alter_offs > 120)
-						alter_offs = 180;
-					else
-						alter_offs = 60;
-
-				case HybridizationState::SP:
-					break;
-
-				default:
-					alter_offs = 60;
-					break;
-			}
-		}
-
-	} else
-		alter_offs = 0;
 
 	return &torRuleMatcher.getMatch(0); 
 }

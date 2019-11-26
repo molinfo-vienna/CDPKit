@@ -33,6 +33,7 @@
 
 #include <vector>
 #include <cstddef>
+#include <memory>
 
 #include <boost/timer/timer.hpp>
 
@@ -57,6 +58,8 @@ namespace CDPL
     namespace ConfGen 
     {
 	
+		class RMSDConformerSelector;
+
 		class ConformerGeneratorImpl 
 		{
 
@@ -121,6 +124,10 @@ namespace CDPL
 
 			unsigned int generateConformers();
 
+			unsigned int selectOutputConformers();
+
+			double getMMFF94BondLength(std::size_t atom1_idx, std::size_t atom2_idx) const;
+
 			static bool compFragmentConfCombinationEnergy(const FragmentConfCombination* comb1, 
 														  const FragmentConfCombination* comb2);
 			static bool compFragmentConfChangeFrequency(const FragmentConfData* conf_data1, 
@@ -162,16 +169,20 @@ namespace CDPL
 			typedef std::vector<const Chem::Bond*> BondList;
 			typedef std::vector<FragmentConfData*> FragmentConfDataList;
 			typedef std::vector<FragmentConfCombination*> FragmentConfCombinationList;
-			
+			typedef std::auto_ptr<RMSDConformerSelector> RMSDConformerSelectorPtr;
+
 			ConformerDataCache           confDataCache;
 			FragmentConfDataCache        fragConfDataCache;
 			FragmentConfCombinationCache fragConfCombCache;
 			ConformerGeneratorSettings   settings;
 			const Chem::MolecularGraph*  molGraph;
+			ConformerDataArray           workingConfs;
+			ConformerDataArray           tmpWorkingConfs;
 			ConformerDataArray           outputConfs;
 			CallbackFunction             abortCallback;
 			CallbackFunction             timeoutCallback;
 			boost::timer::cpu_timer      timer;
+			RMSDConformerSelectorPtr     confSelector;
 			TorsionDriverImpl            torDriver;
 			FragmentAssemblerImpl        fragAssembler;
 			MMFF94Parameterizer          mmff94Parameterizer;
@@ -180,7 +191,7 @@ namespace CDPL
 			BondList                     torDriveBonds;
 			BondList                     fragSplitBonds;
 			Chem::FragmentList           fragments;
-			Util::BitSet                 splitBondMask;
+			Util::BitSet                 tmpBitSet;
 			FragmentConfDataList         torFragConfDataList;
 			FragmentConfDataList         sortedTorFragConfDataList;
 			FragmentConfCombinationList  torFragConfCombList;

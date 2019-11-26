@@ -41,12 +41,8 @@
 #include "CDPL/Chem/AtomType.hpp"
 #include "CDPL/Chem/AtomConfiguration.hpp"
 #include "CDPL/Chem/BondConfiguration.hpp"
-#include "CDPL/ForceField/Exceptions.hpp"
-#include "CDPL/ForceField/InteractionType.hpp"
-#include "CDPL/ForceField/UtilityFunctions.hpp"
-#include "CDPL/ForceField/MMFF94InteractionParameterizer.hpp"
-#include "CDPL/ForceField/MMFF94InteractionData.hpp"
 #include "CDPL/Math/Quaternion.hpp"
+#include "CDPL/ForceField/Exceptions.hpp"
 
 #include "FragmentAssemblerImpl.hpp"
 #include "FragmentTreeNode.hpp"
@@ -145,21 +141,14 @@ const ConfGen::CallbackFunction& ConfGen::FragmentAssemblerImpl::getTimeoutCallb
 	return timeoutCallback;
 }
 
-unsigned int ConfGen::FragmentAssemblerImpl::assemble(const Chem::MolecularGraph& molgraph, 
-													  const Chem::MolecularGraph& parent_molgraph, 
-													  const MMFF94InteractionData& ia_data,
-													  bool recalc_subst_blks)
+void ConfGen::FragmentAssemblerImpl::setBondLengthFunction(const BondLengthFunction& func)
 {
-	usedMMFF94Data = &ia_data;
-
-	return doAssemble(molgraph, parent_molgraph, recalc_subst_blks);
+	bondLengthFunc = func;
 }
 
-unsigned int ConfGen::FragmentAssemblerImpl::assemble(const Chem::MolecularGraph& molgraph)
+const ConfGen::FragmentAssemblerImpl::BondLengthFunction& ConfGen::FragmentAssemblerImpl::getBondLengthFunction() const
 {
-	usedMMFF94Data = 0;
-
-	return doAssemble(molgraph, molgraph, true);
+	return bondLengthFunc;
 }
 
 std::size_t ConfGen::FragmentAssemblerImpl::getNumConformers() const
@@ -182,6 +171,22 @@ ConfGen::FragmentAssemblerImpl::ConstConformerIterator ConfGen::FragmentAssemble
 	return fragTree.getRoot()->getConformers().end();
 }
 
+unsigned int ConfGen::FragmentAssemblerImpl::assemble(const Chem::MolecularGraph& molgraph, 
+													  const Chem::MolecularGraph& parent_molgraph)
+{
+	init(parent_molgraph);
+	buildFragmentTree(molgraph, parent_molgraph);
+
+	unsigned int ret_code = getFragmentConformers();
+
+	if (ret_code != ReturnCode::SUCCESS)
+		return ret_code;
+
+	assignLinkBondTorsions(fragTree.getRoot());
+
+	return fragTree.getRoot()->generateConformers(false);
+}
+
 void ConfGen::FragmentAssemblerImpl::init(const Chem::MolecularGraph& parent_molgraph)
 {
 	fragConfGen.getSettings() = settings.getFragmentBuildSettings();
@@ -190,32 +195,6 @@ void ConfGen::FragmentAssemblerImpl::init(const Chem::MolecularGraph& parent_mol
 
 	invertibleNMask.resize(parent_molgraph.getNumAtoms());
 	invertibleNMask.reset();
-}
-
-unsigned int ConfGen::FragmentAssemblerImpl::doAssemble(const Chem::MolecularGraph& molgraph, 
-														const Chem::MolecularGraph& parent_molgraph,
-														bool recalc_subst_blks)
-{
-	init(parent_molgraph);
-
-	buildFragmentTree(molgraph, parent_molgraph);
-
-	if (recalc_subst_blks)
-		substBulkCalc.calculate(molgraph);
-
-	try {
-		unsigned int ret_code = getFragmentConformers();
-
-		if (ret_code != ReturnCode::SUCCESS)
-			return ret_code;
-
-	} catch (const ForceField::Error&) {
-		return ReturnCode::FORCEFIELD_SETUP_FAILED;
-	}
-
-	assignLinkBondTorsions(fragTree.getRoot());
-
-	return fragTree.getRoot()->generateConformers(false);
 }
 
 void ConfGen::FragmentAssemblerImpl::buildFragmentTree(const Chem::MolecularGraph& molgraph, 
@@ -253,6 +232,18 @@ void ConfGen::FragmentAssemblerImpl::buildFragmentTree(const Chem::MolecularGrap
 unsigned int ConfGen::FragmentAssemblerImpl::getFragmentConformers() 
 {
 	using namespace Chem;
+
+	if (!bondLengthFunc) {
+		if (!bondLengthTable.get()) 
+			bondLengthTable.reset(new MMFF94BondLengthTable());
+
+		try {
+			bondLengthTable->setup(*fragTree.getMolecularGraph(), settings.getFragmentBuildSettings().strictForceFieldParameterization());
+
+		} catch (const ForceField::Error&) {
+			return ReturnCode::FORCEFIELD_SETUP_FAILED;
+		}
+	}
 
 	for (std::size_t i = 0, num_frags = fragTree.getNumFragments(); i < num_frags; i++) {
 		const Fragment& frag = *fragTree.getFragment(i); 
@@ -301,7 +292,7 @@ bool ConfGen::FragmentAssemblerImpl::transferInputCoordinates(unsigned int frag_
 		node->addConformer(coords);
 
 		if (frag_type == FragmentType::CHAIN)
-			postprocChainFragment(false, false, frag, node);
+			postprocChainFragment(false, frag, node);
 
 		else if (frag_type == FragmentType::FLEXIBLE_RING_SYSTEM)
 			enumRingFragmentNitrogens(frag, node);
@@ -371,7 +362,7 @@ bool ConfGen::FragmentAssemblerImpl::fetchConformersFromFragmentLibrary(unsigned
 		fixBondLengths(frag, node);
 
 		if (frag_type == FragmentType::CHAIN)
-			postprocChainFragment(true, true, frag, node);
+			postprocChainFragment(true, frag, node);
 
 		else if (frag_type == FragmentType::FLEXIBLE_RING_SYSTEM)
 			enumRingFragmentNitrogens(frag, node);
@@ -427,7 +418,7 @@ unsigned int ConfGen::FragmentAssemblerImpl::generateFragmentConformers(unsigned
 	fixBondLengths(frag, node);
 
 	if (frag_type == FragmentType::CHAIN)
-		postprocChainFragment(false, true, frag, node);
+		postprocChainFragment(false, frag, node);
 
 	else if (frag_type == FragmentType::FLEXIBLE_RING_SYSTEM)
 		enumRingFragmentNitrogens(frag, node);
@@ -473,7 +464,7 @@ void ConfGen::FragmentAssemblerImpl::fixBondLengths(const Chem::Fragment& frag, 
 				std::swap(atom1_idx, atom2_idx);
 		}
 
-		double bond_len = getMMFF94BondLength(atom1_idx, atom2_idx);
+		double bond_len = getBondLength(atom1_idx, atom2_idx);
 
 		if (bond_len <= 0.0)
 			continue;
@@ -488,16 +479,14 @@ void ConfGen::FragmentAssemblerImpl::fixBondLengths(const Chem::Fragment& frag, 
 	}
 }
 
-void ConfGen::FragmentAssemblerImpl::postprocChainFragment(bool fix_stereo, bool opt_db_stereo, 
-														   const Chem::Fragment& frag, FragmentTreeNode* node)
+void ConfGen::FragmentAssemblerImpl::postprocChainFragment(bool fix_stereo, const Chem::Fragment& frag, FragmentTreeNode* node)
 {
 	bool have_inv_n = (getInvertibleNitrogens(frag, node) > 0);
 
-	if (fix_stereo)
+	if (fix_stereo) {
 		fixChainAtomConfigurations(have_inv_n, frag, node);
-
-	if (fix_stereo || opt_db_stereo) 
-		fixChainBondConfigurations(fix_stereo, opt_db_stereo, frag, node);
+		fixChainBondConfigurations(frag, node);
+	}
 
 	if (have_inv_n)
 		enumChainFragmentNitrogens(frag, node);
@@ -554,8 +543,7 @@ void ConfGen::FragmentAssemblerImpl::fixChainAtomConfigurations(bool have_inv_n,
 	}
 }
 
-void ConfGen::FragmentAssemblerImpl::fixChainBondConfigurations(bool fix_stereo, bool opt_stereo, 
-																const Chem::Fragment& frag, FragmentTreeNode* node)
+void ConfGen::FragmentAssemblerImpl::fixChainBondConfigurations(const Chem::Fragment& frag, FragmentTreeNode* node)
 {
 	using namespace Chem;
 
@@ -571,47 +559,29 @@ void ConfGen::FragmentAssemblerImpl::fixChainBondConfigurations(bool fix_stereo,
 		const StereoDescriptor& descr = getStereoDescriptor(bond);
 		unsigned int config = descr.getConfiguration();
 
-		if ((config == BondConfiguration::CIS || config == BondConfiguration::TRANS) && descr.isValid(bond)) {
-			const Atom* const* ref_atoms = descr.getReferenceAtoms();
-			bool descr_valid = true;
+		if (config != BondConfiguration::CIS && config != BondConfiguration::TRANS)
+			continue;
+			
+		if (!descr.isValid(bond)) 
+			continue;
+
+		const Atom* const* ref_atoms = descr.getReferenceAtoms();
+		bool descr_valid = true;
 	
-			for (std::size_t i = 0; i < 4; i++) {
-				if (!frag.containsAtom(*ref_atoms[i])) {
-					descr_valid = false;
-					break;
-				}
+		for (std::size_t i = 0; i < 4; i++) {
+			if (!frag.containsAtom(*ref_atoms[i])) {
+				descr_valid = false;
+				break;
 			}
+		}
 
-			if (descr_valid) {
-				if (fix_stereo && calcBondConfiguration(bond, parent_molgraph, descr, coords) != config)
-					invertConfiguration(bond, frag, node);
-
-				continue;
-			}
-		} 
-
-		if (!opt_stereo)
+		if (!descr_valid) 
 			continue;
 
-		// choose trans config of bulkiest substituents
-
-		const Atom& atom1 = bond.getBegin();
-		const Atom& atom2 = bond.getEnd();
-	
-		const Atom* subst1_atom = getBulkiestDoubleBondSubstituent(atom1, atom2, frag);
-
-		if (!subst1_atom)
+		if (calcBondConfiguration(bond, parent_molgraph, descr, coords) == config)
 			continue;
 
-		const Atom* subst2_atom = getBulkiestDoubleBondSubstituent(atom2, atom1, frag);
-
-		if (!subst2_atom)
-			continue;
-
-		if (calcBondConfiguration(bond, parent_molgraph, 
-								  StereoDescriptor(BondConfiguration::TRANS, *subst1_atom, atom1, atom2, *subst2_atom), 
-								  coords) != BondConfiguration::TRANS)
-			invertConfiguration(bond, frag, node);
+		invertConfiguration(bond, frag, node);
 	}
 }
 
@@ -643,85 +613,6 @@ void ConfGen::FragmentAssemblerImpl::enumChainFragmentNitrogens(const Chem::Frag
 
 		invertConfiguration(atom, *nbr_atoms[0], *nbr_atoms[1], *nbr_atoms[2], frag, node, false);
 	}
-}
-
-const Chem::Atom* ConfGen::FragmentAssemblerImpl::getBulkiestDoubleBondSubstituent(const Chem::Atom& atom, const Chem::Atom& db_nbr_atom, 
-																				   const Chem::Fragment& frag)
-{
-	using namespace Chem;
-
-	Atom::ConstAtomIterator atoms_end = atom.getAtomsEnd();
-	Atom::ConstBondIterator b_it = atom.getBondsBegin();
-
-	const Atom* bkst_subst = 0;
-	std::size_t bkst_subst_bks = 0;
-	std::size_t bond_cnt = 0;
-
-	for (Atom::ConstAtomIterator a_it = atom.getAtomsBegin(); a_it != atoms_end; ++a_it, ++b_it) {
-		const Atom& nbr_atom = *a_it;
-
-		if (&nbr_atom == &db_nbr_atom)
-			continue;
-
-		if (!frag.containsAtom(nbr_atom) || !frag.containsBond(*b_it))
-			continue;
-
-		if (++bond_cnt > 2)
-			return 0;
-
-		std::size_t nbr_bks = getSubstituentBulkiness(nbr_atom);
-
-		if (!bkst_subst || nbr_bks > bkst_subst_bks) {
-			bkst_subst = &nbr_atom;
-			bkst_subst_bks = nbr_bks;
-
-		} else if (bkst_subst_bks == nbr_bks)
-			return 0;
-	}
-
-	return bkst_subst;
-}
-
-const Chem::Atom* ConfGen::FragmentAssemblerImpl::getBulkiestSubstituent(const Chem::Atom& atom, const Chem::Atom& excl_atom, 
-																		 FragmentTreeNode* node)
-{
-	using namespace Chem;
-
-	Atom::ConstAtomIterator atoms_end = atom.getAtomsEnd();
-	Atom::ConstBondIterator b_it = atom.getBondsBegin();
-	const MolecularGraph& parent_molgraph = *fragTree.getMolecularGraph();
-
-	const Atom* bkst_subst = 0;
-	std::size_t bkst_subst_bks = 0;
-
-	for (Atom::ConstAtomIterator a_it = atom.getAtomsBegin(); a_it != atoms_end; ++a_it, ++b_it) {
-		const Atom& nbr_atom = *a_it;
-
-		if (&nbr_atom == &excl_atom)
-			continue;
-
-		if (!node->containsAtom(nbr_atom))
-			continue;
-
-		if (!parent_molgraph.containsBond(*b_it))
-			continue;
-
-		std::size_t nbr_bks = getSubstituentBulkiness(nbr_atom);
-
-		if (!bkst_subst || nbr_bks > bkst_subst_bks) {
-			bkst_subst = &nbr_atom;
-			bkst_subst_bks = nbr_bks;
-
-		} else if (bkst_subst_bks == nbr_bks)
-			return 0;
-	}
-
-	return bkst_subst;
-}
-
-std::size_t ConfGen::FragmentAssemblerImpl::getSubstituentBulkiness(const Chem::Atom& atom)
-{
-	return substBulkCalc[fragTree.getMolecularGraph()->getAtomIndex(atom)];
 }
 
 void ConfGen::FragmentAssemblerImpl::enumRingFragmentNitrogens(const Chem::Fragment& frag, FragmentTreeNode* node)
@@ -1090,14 +981,14 @@ void ConfGen::FragmentAssemblerImpl::assignLinkBondTorsions(FragmentTreeNode* no
 		} 
 	}
 
-	// choose trans configuration of bulkiest substituents
+	// choose trans configuration of arbitrary substituent atoms
 
-	const Atom* ref_atom1 = getBulkiestSubstituent(*bond_atoms[0], *bond_atoms[1], node);
+	const Atom* ref_atom1 = getNeighborAtom(*bond_atoms[0], *bond_atoms[1], node);
 
 	if (!ref_atom1)
 		return;
 
-	const Atom* ref_atom2 = getBulkiestSubstituent(*bond_atoms[1], *bond_atoms[0], node);
+	const Atom* ref_atom2 = getNeighborAtom(*bond_atoms[1], *bond_atoms[0], node);
 
 	if (!ref_atom2)
 		return;
@@ -1123,44 +1014,39 @@ const ConfGen::TorsionRuleMatch* ConfGen::FragmentAssemblerImpl::getMatchingTors
 	return 0;
 }
 
-const ForceField::MMFF94InteractionData* ConfGen::FragmentAssemblerImpl::getMMFF94Parameters()
+double ConfGen::FragmentAssemblerImpl::getBondLength(std::size_t atom1_idx, std::size_t atom2_idx)
 {
-	using namespace ForceField;
+	if (bondLengthFunc)
+		return bondLengthFunc(atom1_idx, atom2_idx);
 
-	if (usedMMFF94Data)
-		return usedMMFF94Data;
-
-	if (!mmff94Parameterizer.get())
-		mmff94Parameterizer.reset(new MMFF94InteractionParameterizer());
-
-	if (!mmff94Data.get())
-		mmff94Data.reset(new MMFF94InteractionData());
-
-	mmff94Parameterizer->strictParameterization(settings.getFragmentBuildSettings().strictForceFieldParameterization());
-	mmff94Parameterizer->parameterize(*fragTree.getMolecularGraph(), *mmff94Data, InteractionType::BOND_STRETCHING);
-
-	usedMMFF94Data = mmff94Data.get();
-
-	return usedMMFF94Data;
+	return bondLengthTable->get(atom1_idx, atom2_idx);
 }
 
-double ConfGen::FragmentAssemblerImpl::getMMFF94BondLength(std::size_t atom1_idx, std::size_t atom2_idx)
+const Chem::Atom* ConfGen::FragmentAssemblerImpl::getNeighborAtom(const Chem::Atom& atom, const Chem::Atom& excl_atom, 
+																  FragmentTreeNode* node) const
 {
-	using namespace ForceField;
+	using namespace Chem;
 
-	const MMFF94BondStretchingInteractionData& bs_ia_data = getMMFF94Parameters()->getBondStretchingInteractions();
+	const MolecularGraph& molgraph = *fragTree.getMolecularGraph();
+	Atom::ConstAtomIterator atoms_end = atom.getAtomsEnd();
+	Atom::ConstBondIterator b_it = atom.getBondsBegin();
 
-	for (MMFF94BondStretchingInteractionData::ConstElementIterator it = bs_ia_data.getElementsBegin(), 
-			 end = bs_ia_data.getElementsEnd(); it != end; ++it) { 
+	for (Atom::ConstAtomIterator a_it = atom.getAtomsBegin(); a_it != atoms_end; ++a_it, ++b_it) {
+		const Atom& nbr_atom = *a_it;
 
-		const MMFF94BondStretchingInteraction& params = *it;
+		if (&nbr_atom == &excl_atom)
+			continue;
 
-		if ((params.getAtom1Index() == atom1_idx && params.getAtom2Index() == atom2_idx) ||
-			(params.getAtom1Index() == atom2_idx && params.getAtom2Index() == atom1_idx)) 
-			return params.getReferenceLength();
+		if (!node->containsAtom(nbr_atom))
+			continue;
+
+		if (!molgraph.containsBond(*b_it))
+			continue;
+
+		return &nbr_atom;
 	}
 
-	return 0.0;
+	return 0;
 }
 
 ConfGen::ConformerData::SharedPointer ConfGen::FragmentAssemblerImpl::allocConformerData()

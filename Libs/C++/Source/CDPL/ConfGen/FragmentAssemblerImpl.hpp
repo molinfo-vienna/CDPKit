@@ -36,6 +36,8 @@
 #include <vector>
 #include <cstddef>
 
+#include <boost/function.hpp>
+
 #include "CDPL/ConfGen/FragmentAssemblerSettings.hpp"
 #include "CDPL/ConfGen/TorsionRuleMatcher.hpp"
 #include "CDPL/ConfGen/FragmentLibraryEntry.hpp"
@@ -48,18 +50,11 @@
 
 #include "FragmentTree.hpp"
 #include "FragmentConformerGeneratorImpl.hpp"
-#include "SubstituentBulkinessCalculator.hpp"
+#include "MMFF94BondLengthTable.hpp"
 
 
 namespace CDPL 
 {
-
-	namespace ForceField
-	{
-
-		class MMFF94InteractionData;
-		class MMFF94InteractionParameterizer;
-	}
 
     namespace ConfGen 
     {
@@ -71,6 +66,8 @@ namespace CDPL
 
 		public:
 			typedef ConformerDataArray::const_iterator ConstConformerIterator;
+
+			typedef boost::function2<double, std::size_t, std::size_t> BondLengthFunction;
 
 			FragmentAssemblerImpl();
 
@@ -90,13 +87,13 @@ namespace CDPL
 
 			const CallbackFunction& getTimeoutCallback() const;
 
-			unsigned int assemble(const Chem::MolecularGraph& molgraph, 
-								  const Chem::MolecularGraph& parent_molgraph, 
-								  const MMFF94InteractionData& ia_data,
-								  bool recalc_subst_blks = true);
+			void setBondLengthFunction(const BondLengthFunction& func);
 
-			unsigned int assemble(const Chem::MolecularGraph& molgraph);
-	
+			const BondLengthFunction& getBondLengthFunction() const;
+
+			unsigned int assemble(const Chem::MolecularGraph& molgraph, 
+								  const Chem::MolecularGraph& parent_molgraph);
+
 			std::size_t getNumConformers() const;
 
 			ConformerData& getConformer(std::size_t idx);
@@ -111,10 +108,6 @@ namespace CDPL
 	
 			void init(const Chem::MolecularGraph& parent_molgraph);
 
-			unsigned int doAssemble(const Chem::MolecularGraph& molgraph, 
-									const Chem::MolecularGraph& parent_molgraph,
-									bool recalc_subst_blks);
-
 			void buildFragmentTree(const Chem::MolecularGraph& molgraph, 
 								   const Chem::MolecularGraph& parent_molgraph);
 
@@ -127,24 +120,15 @@ namespace CDPL
 			unsigned int generateFragmentConformers(unsigned int frag_type, const Chem::Fragment& frag, 
 													FragmentTreeNode* node);
 
-			void postprocChainFragment(bool fix_stereo, bool opt_db_stereo, 
-									   const Chem::Fragment& frag, FragmentTreeNode* node);
+			void postprocChainFragment(bool fix_stereo, const Chem::Fragment& frag, FragmentTreeNode* node);
 
 			void fixChainAtomConfigurations(bool have_inv_n, const Chem::Fragment& frag, 
 											FragmentTreeNode* node);
-			void fixChainBondConfigurations(bool fix_stereo, bool opt_stereo, 
-											const Chem::Fragment& frag, FragmentTreeNode* node);
+			void fixChainBondConfigurations(const Chem::Fragment& frag, FragmentTreeNode* node);
 	
 			void enumChainFragmentNitrogens(const Chem::Fragment& frag, FragmentTreeNode* node);
 	
 			void fixBondLengths(const Chem::Fragment& frag, FragmentTreeNode* node);
-
-			const Chem::Atom* getBulkiestDoubleBondSubstituent(const Chem::Atom& atom, const Chem::Atom& db_nbr_atom, 
-															   const Chem::Fragment& frag);
-			const Chem::Atom* getBulkiestSubstituent(const Chem::Atom& atom, const Chem::Atom& excl_atom, 
-													 FragmentTreeNode* node);
-
-			std::size_t getSubstituentBulkiness(const Chem::Atom& atom);
 
 			void enumRingFragmentNitrogens(const Chem::Fragment& frag, FragmentTreeNode* node);
 
@@ -161,41 +145,38 @@ namespace CDPL
 
 			const TorsionRuleMatch* getMatchingTorsionRule(const Chem::Bond& bond);
 
-			const MMFF94InteractionData* getMMFF94Parameters();
+			double getBondLength(std::size_t atom1_idx, std::size_t atom2_idx);
 
-			double getMMFF94BondLength(std::size_t atom1_idx, std::size_t atom2_idx);
+			const Chem::Atom* getNeighborAtom(const Chem::Atom& atom, const Chem::Atom& excl_atom,
+											  FragmentTreeNode* node) const;
 
 			ConformerData::SharedPointer allocConformerData();
 
 			unsigned int invokeCallbacks() const;
 
 			typedef Util::ObjectStack<ConformerData> ConformerDataCache;
-			typedef std::auto_ptr<ForceField::MMFF94InteractionParameterizer> MMFF94ParameterizerPtr;
-			typedef std::auto_ptr<MMFF94InteractionData> MMFF94InteractionDataPtr;
-			typedef std::auto_ptr<SubstituentBulkinessCalculator> SubstituentBulkinessCalculatorPtr;
 			typedef std::vector<const Chem::Bond*> BondList;
 			typedef std::pair<std::size_t, std::size_t> IndexPair;
 			typedef std::vector<IndexPair> IndexPairList;
 			typedef std::vector<FragmentLibrary::SharedPointer> FragmentLibraryList;
 			typedef Chem::SmallestSetOfSmallestRings::SharedPointer SmallestSetOfSmallestRingsPtr;
+			typedef std::auto_ptr<MMFF94BondLengthTable> BondLengthTablePtr;
 
 			ConformerDataCache                confDataCache;
 			FragmentAssemblerSettings         settings;
 			FragmentLibraryList               fragLibs;
 			CallbackFunction                  abortCallback;
 			CallbackFunction                  timeoutCallback;
+			BondLengthFunction                bondLengthFunc;
 			BondList                          fragSplitBonds;
 			Chem::FragmentList                fragments;
 			FragmentTree                      fragTree;
 			TorsionRuleMatcher                torRuleMatcher;
-			SubstituentBulkinessCalculator    substBulkCalc;
-			MMFF94ParameterizerPtr            mmff94Parameterizer;
-			MMFF94InteractionDataPtr          mmff94Data;
-			const MMFF94InteractionData*      usedMMFF94Data;
 			FragmentConformerGeneratorImpl    fragConfGen;
 			FragmentLibraryEntry              fragLibEntry;
 			IndexPairList                     fragLibEntryAtomIdxMap;
 			SmallestSetOfSmallestRingsPtr     fragSSSR;
+			BondLengthTablePtr                bondLengthTable;
 			Util::BitSet                      invertibleNMask;
 			Util::BitSet                      invertedNMask;
 			Util::BitSet                      tmpBitSet;

@@ -66,6 +66,7 @@ SET(cdpl-confgen_LIB_SRCS
     FragmentTreeNode.cpp
     FragmentTree.cpp
     SubstituentBulkinessCalculator.cpp
+    MMFF94BondLengthTable.cpp
     ForceFieldInteractionMask.cpp
 
     CDFMoleculeDataFunctions.cpp

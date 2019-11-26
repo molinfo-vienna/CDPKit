@@ -83,7 +83,7 @@ const ConfGen::CallbackFunction& ConfGen::FragmentAssembler::getTimeoutCallback(
 
 unsigned int ConfGen::FragmentAssembler::assemble(const Chem::MolecularGraph& molgraph)
 {
-	return impl->assemble(molgraph);
+	return impl->assemble(molgraph, molgraph);
 }
 		
 std::size_t ConfGen::FragmentAssembler::getNumConformers() const
