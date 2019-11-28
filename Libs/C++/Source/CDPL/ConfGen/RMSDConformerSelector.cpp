@@ -134,12 +134,12 @@ bool ConfGen::RMSDConformerSelector::selected(const Math::Vector3DArray& conf_co
 
 				double rmsd = calcRMSD(sel_conf_algn_coords, *confAlignCoords[i], conf_xform);
 
-				if (rmsd < minRMSD)
+				if (rmsd < minRMSD) 
 					return false;
 			}
 		}
 
-		selectedConfAlignCoords.push_back(confAlignCoords.back());
+		selectedConfAlignCoords.push_back(confAlignCoords.front());
 
 	} else
 		selectedConfAlignCoords.push_back(buildCoordsArrayForMapping(*symMappings.front(), conf_coords));
@@ -289,7 +289,7 @@ bool ConfGen::RMSDConformerSelector::isValidSymMapping(const Chem::AtomBondMappi
 		switch (perm_parity) {
 
 			case 1:
-				if (atom_stereo.getConfiguration() == mpd_atom_stereo.getConfiguration())
+				if (atom_stereo.getConfiguration() == mpd_atom_stereo.getConfiguration()) 
 					return false;
 				break;
 

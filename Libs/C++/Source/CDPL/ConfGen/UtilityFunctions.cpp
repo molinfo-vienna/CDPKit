@@ -26,6 +26,8 @@
 
 #include "StaticInit.hpp"
 
+#include <memory>
+
 #include "CDPL/ConfGen/UtilityFunctions.hpp"
 #include "CDPL/ConfGen/FragmentType.hpp"
 #include "CDPL/ConfGen/ForceFieldType.hpp"
@@ -398,8 +400,7 @@ void ConfGen::prepareForConformerGeneration(Chem::Molecule& mol, bool canon)
 		}
 	}
 
-	SubstituentBulkinessCalculator blks_calc;
-	bool calc_blks = true;
+	std::auto_ptr<SubstituentBulkinessCalculator> blks_calc;
 
 	for (Molecule::BondIterator it = mol.getBondsBegin(), end = mol.getBondsEnd(); it != end; ++it) {
 		Bond& bond = *it;
@@ -414,17 +415,17 @@ void ConfGen::prepareForConformerGeneration(Chem::Molecule& mol, bool canon)
 				setStereoDescriptor(bond, descr);
 
 			else {
-				if (calc_blks) {
-					blks_calc.calculate(mol);
-					calc_blks = false;
+				if (!blks_calc.get()) {
+					blks_calc.reset(new SubstituentBulkinessCalculator());
+					blks_calc->calculate(mol);
 				}
 
-				const Atom* ref_atom1 = getBulkiestDoubleBondSubstituent(bond.getBegin(), bond.getEnd(), blks_calc);
+				const Atom* ref_atom1 = getBulkiestDoubleBondSubstituent(bond.getBegin(), bond.getEnd(), *blks_calc);
 
 				if (!ref_atom1)
 					continue;
 
-				const Atom* ref_atom2 = getBulkiestDoubleBondSubstituent(bond.getEnd(), bond.getBegin(), blks_calc);
+				const Atom* ref_atom2 = getBulkiestDoubleBondSubstituent(bond.getEnd(), bond.getBegin(), *blks_calc);
 
 				if (!ref_atom2)
 					continue;
@@ -438,10 +439,20 @@ void ConfGen::prepareForConformerGeneration(Chem::Molecule& mol, bool canon)
 	if (canon) {
 		generateCanonicalNumbering(mol, false);
 		canonicalize(mol, true, true, true, true);
+		perceiveSSSR(mol, true);
 	}
 
 	calcTopologicalDistanceMatrix(mol, canon || added_hs);
 	perceiveComponents(mol, canon || added_hs);
+
+	FragmentList& comps = *getComponents(mol);
+
+	for (FragmentList::ElementIterator it = comps.getElementsBegin(), end = comps.getElementsEnd(); it != end; ++it) {
+		Fragment& comp = *it;
+
+		extractTopologicalDistanceMatrix(mol, comp, true);
+		extractSSSR(mol, comp, true);
+	}
 }
 
 unsigned int ConfGen::parameterizeMMFF94Interactions(const Chem::MolecularGraph& molgraph, ForceField::MMFF94InteractionParameterizer& parameterizer,

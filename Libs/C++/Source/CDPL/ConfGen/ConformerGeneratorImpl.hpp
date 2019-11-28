@@ -114,13 +114,8 @@ namespace CDPL
 			
 			unsigned int generateFragmentConformers();
 			
-			void generateFragmentConformerCombinations();
+			unsigned int generateFragmentConformerCombinations();
 			void generateFragmentConformerCombinations(std::size_t frag_idx, double comb_energy);
-
-			void calcFragmentConformerChangeFrequencies() const;
-			std::size_t calcFragmentConformerChangeFrequency(std::size_t frag_idx) const;
-
-			void setupTorsionDriver();
 
 			unsigned int generateConformers();
 
@@ -130,8 +125,8 @@ namespace CDPL
 
 			static bool compFragmentConfCombinationEnergy(const FragmentConfCombination* comb1, 
 														  const FragmentConfCombination* comb2);
-			static bool compFragmentConfChangeFrequency(const FragmentConfData* conf_data1, 
-														const FragmentConfData* conf_data2);
+			static bool compFragmentConfCount(const FragmentConfData* conf_data1, 
+											  const FragmentConfData* conf_data2);
 
 			unsigned int invokeCallbacks() const;
 			bool timedout() const;
@@ -144,8 +139,7 @@ namespace CDPL
 				Chem::Fragment::SharedPointer fragment;
 				ConformerDataArray            conformers;
 				std::size_t                   lastConfIdx;
-				std::size_t                   confChangeFreq;
-				std::size_t                   torDriverFragIdx;
+				bool                          isFlexRingSys;
 
 				void clear() {
 					conformers.clear();
@@ -192,8 +186,9 @@ namespace CDPL
 			BondList                     fragSplitBonds;
 			Chem::FragmentList           fragments;
 			Util::BitSet                 tmpBitSet;
+			Util::BitSet                 invertibleNMask;
+			Util::BitSet                 fixedAtomConfigMask;
 			FragmentConfDataList         torFragConfDataList;
-			FragmentConfDataList         sortedTorFragConfDataList;
 			FragmentConfCombinationList  torFragConfCombList;
 			UIntArray                    currConfComb;
 		};

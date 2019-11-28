@@ -89,7 +89,8 @@ namespace
 
 
 ConfGen::FragmentAssemblerImpl::FragmentAssemblerImpl():
-	confDataCache(MAX_CONF_DATA_CACHE_SIZE), fragTree(MAX_TREE_CONF_DATA_CACHE_SIZE)
+	confDataCache(MAX_CONF_DATA_CACHE_SIZE), fragTree(MAX_TREE_CONF_DATA_CACHE_SIZE), 
+	foundFlexRSys(false)
 {
 	fragLibs.push_back(FragmentLibrary::get());
 
@@ -171,6 +172,16 @@ ConfGen::FragmentAssemblerImpl::ConstConformerIterator ConfGen::FragmentAssemble
 	return fragTree.getRoot()->getConformers().end();
 }
 
+const Util::BitSet& ConfGen::FragmentAssemblerImpl::getInvertibleNitrogenMask() const
+{
+	return invertibleNMask;
+}
+			
+bool ConfGen::FragmentAssemblerImpl::foundFlexibleRingSystem() const
+{
+	return foundFlexRSys;
+}
+
 unsigned int ConfGen::FragmentAssemblerImpl::assemble(const Chem::MolecularGraph& molgraph, 
 													  const Chem::MolecularGraph& parent_molgraph)
 {
@@ -195,6 +206,8 @@ void ConfGen::FragmentAssemblerImpl::init(const Chem::MolecularGraph& parent_mol
 
 	invertibleNMask.resize(parent_molgraph.getNumAtoms());
 	invertibleNMask.reset();
+
+	foundFlexRSys = false;
 }
 
 void ConfGen::FragmentAssemblerImpl::buildFragmentTree(const Chem::MolecularGraph& molgraph, 
@@ -249,6 +262,9 @@ unsigned int ConfGen::FragmentAssemblerImpl::getFragmentConformers()
 		const Fragment& frag = *fragTree.getFragment(i); 
 		FragmentTreeNode* frag_node = fragTree.getFragmentNode(i); 
 		unsigned int frag_type = perceiveFragmentType(frag);
+
+		if (frag_type == FragmentType::FLEXIBLE_RING_SYSTEM)
+			foundFlexRSys = true;
 
 		if (!(!settings.generateCoordinatesFromScratch() && 
 			  (!settings.enumerateRings() || frag_type != FragmentType::FLEXIBLE_RING_SYSTEM) && 
