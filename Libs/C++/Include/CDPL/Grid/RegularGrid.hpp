@@ -59,7 +59,7 @@ namespace CDPL
 			typedef typename SpatialGrid<T, CVT>::CoordinatesValueType CoordinatesValueType;
 			typedef typename SpatialGrid<T, CVT>::CoordinatesType CoordinatesType;
 			typedef typename Math::RegularSpatialGrid<T, CVT>::GridDataType GridDataType;
-
+	
 			RegularGrid(const CoordinatesValueType& xs, const CoordinatesValueType& ys, const CoordinatesValueType& zs): Math::RegularSpatialGrid<T, CVT>(xs, ys, zs) {}
 
 			RegularGrid(const GridDataType& data, const CoordinatesValueType& xs, const CoordinatesValueType& ys, const CoordinatesValueType& zs): Math::RegularSpatialGrid<T, CVT>(data, xs, ys, zs) {}

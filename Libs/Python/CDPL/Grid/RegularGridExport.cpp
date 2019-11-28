@@ -51,6 +51,7 @@ namespace
 			typedef typename GridType::CoordinatesValueType CoordinatesValueType;
 			typedef typename GridType::GridDataType GridDataType;
 			typedef Math::RegularSpatialGrid<ValueType, ValueType> MathGridType;
+			typedef typename MathGridType::SSizeType SSizeType;
 
 			python::class_<GridType, typename GridType::SharedPointer, python::bases<Grid::SpatialGrid<ValueType, ValueType>, MathGridType> >(name, python::no_init)
 				.def(python::init<const GridType&>((python::arg("self"), python::arg("grid"))))
@@ -62,7 +63,7 @@ namespace
 						 (python::arg("self"), python::arg("xs"), python::arg("ys"), python::arg("zs"))))
 				.def(python::init<const CoordinatesValueType&>(
 						 (python::arg("self"), python::arg("s"))))
-				.def("getCoordinates", static_cast<void (GridType::*)(std::size_t, std::size_t, std::size_t, python::object&) const>(&GridType::template getCoordinates<python::object>), 
+				.def("getCoordinates", static_cast<void (GridType::*)(SSizeType, SSizeType, SSizeType, python::object&) const>(&GridType::template getCoordinates<python::object>), 
 					 (python::arg("self"), python::arg("i"), python::arg("j"), python::arg("k"), python::arg("coords"))) 
 				.def("getCoordinates", static_cast<void (GridType::*)(std::size_t, python::object&) const>(&GridType::template getCoordinates<python::object>), 
 					 (python::arg("self"), python::arg("i"), python::arg("coords"))) 

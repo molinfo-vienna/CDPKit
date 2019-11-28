@@ -51,12 +51,22 @@ namespace
 			using namespace CDPL;
 
 			typedef typename GridType::SizeType SizeType;
+			typedef typename GridType::SSizeType SSizeType;
 			typedef typename GridType::ValueType ValueType;
 			typedef typename GridType::GridDataType GridDataType;
 			typedef typename GridType::CoordinatesValueType CoordinatesValueType;
 			typedef typename GridType::CoordinatesTransformType CoordinatesTransformType;
 
-			python::class_<GridType, typename GridType::SharedPointer>(name, python::no_init)
+			python::class_<GridType, typename GridType::SharedPointer> cls(name, python::no_init);
+
+			python::scope scope = cls;
+
+			python::enum_<typename GridType::DataMode>("DataMode")
+				.value("CELL", GridType::CELL)
+				.value("POINT", GridType::POINT)
+				.export_values();
+
+			cls
 				.def(python::init<const GridType&>((python::arg("self"), python::arg("grid"))))
 				.def(python::init<const GridDataType&, const CoordinatesValueType&, const CoordinatesValueType&, const CoordinatesValueType&>(
 						 (python::arg("self"), python::arg("data"), python::arg("xs"), python::arg("ys"), python::arg("zs"))))
@@ -87,12 +97,15 @@ namespace
 					 (python::arg("self"), python::arg("xform")))
 				.def("getCoordinatesTransform", &GridType::getCoordinatesTransform, python::arg("self"), 
 					 python::return_internal_reference<>())
-				.def("getCoordinates", static_cast<void (GridType::*)(SizeType, SizeType, SizeType, python::object&) const>(&GridType::template getCoordinates<python::object>), 
+				.def("getCoordinates", static_cast<void (GridType::*)(SSizeType, SSizeType, SSizeType, python::object&) const>(&GridType::template getCoordinates<python::object>), 
 					 (python::arg("self"), python::arg("i"), python::arg("j"), python::arg("k"), python::arg("coords"))) 
 				.def("getCoordinates", static_cast<void (GridType::*)(SizeType, python::object&) const>(&GridType::template getCoordinates<python::object>), 
 					 (python::arg("self"), python::arg("i"), python::arg("coords"))) 
-				.def("getLocalCoordinates", &GridType::template getLocalCoordinates<python::object>, 
+				.def("getLocalCoordinates", static_cast<void (GridType::*)(SSizeType, SSizeType, SSizeType, python::object&) const>(&GridType::template getLocalCoordinates<python::object>), 
 					 (python::arg("self"), python::arg("i"), python::arg("j"), python::arg("k"), python::arg("coords"))) 
+				.def("getLocalCoordinates", static_cast<void (GridType::*)(const Math::CVector<CoordinatesValueType, 3>&, python::object&) const>
+					 (&GridType::template getLocalCoordinates<Math::CVector<CoordinatesValueType, 3>, python::object>), 
+					 (python::arg("self"), python::arg("world_coords"), python::arg("local_coords"))) 
 				.def("containsPoint", &GridType::template containsPoint<Math::Vector3F>, 
 					 (python::arg("self"), python::arg("pos"))) 
 				.def("containsPoint", &containsPointExpr<float>, (python::arg("self"), python::arg("pos"))) 
@@ -141,7 +154,7 @@ namespace
 					 (python::arg("self"), python::arg("pos"), python::arg("indices")))
 				.def("getLocalContainingCell", &getLocalContainingCellExpr<long>,
 					 (python::arg("self"), python::arg("pos"), python::arg("indices")))
-					.def("getContainingCell", &GridType::template getContainingCell<Math::Vector3UL, python::object>,
+					 .def("getContainingCell", &GridType::template getContainingCell<Math::Vector3UL, python::object>,
 					 (python::arg("self"), python::arg("pos"), python::arg("indices")))
 				.def("getContainingCell", &getContainingCellExpr<unsigned long>,
 					 (python::arg("self"), python::arg("pos"), python::arg("indices")))
@@ -180,15 +193,15 @@ namespace
 		}
 
 		template <typename T>
-		static bool getLocalContainingCellExpr(GridType& grid, const typename CDPLPythonMath::ConstVectorExpression<T>::SharedPointer& pos, 
+		static void getLocalContainingCellExpr(GridType& grid, const typename CDPLPythonMath::ConstVectorExpression<T>::SharedPointer& pos, 
 											   boost::python::object& indices) {
-			return grid.getLocalContainingCell(*pos, indices);
+			grid.getLocalContainingCell(*pos, indices);
 		}
 
 		template <typename T>
-		static bool getContainingCellExpr(GridType& grid, const typename CDPLPythonMath::ConstVectorExpression<T>::SharedPointer& pos, 
+		static void getContainingCellExpr(GridType& grid, const typename CDPLPythonMath::ConstVectorExpression<T>::SharedPointer& pos, 
 										  boost::python::object& indices) {
-			return grid.getContainingCell(*pos, indices);
+			grid.getContainingCell(*pos, indices);
 		}
     };
 }       

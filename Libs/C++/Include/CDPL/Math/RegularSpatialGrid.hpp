@@ -102,6 +102,7 @@ namespace CDPL
 											 typename GD::Reference>::type Reference;
 			typedef typename GD::ConstReference ConstReference;
 			typedef typename GD::SizeType SizeType;
+			typedef std::ptrdiff_t SSizeType;
 			typedef typename GD::DifferenceType DifferenceType;
 			typedef SelfType ClosureType;
 			typedef const SelfType ConstClosureType;
@@ -218,15 +219,24 @@ namespace CDPL
 			}
 
 			CoordinatesValueType getXExtent() const {
-				return (data.getSize1() * xStep); 
+				if (dataMode == POINT)
+					return (data.getSize1() * xStep); 
+
+				return ((data.getSize1() <= 1 ? SizeType(0) : (data.getSize1() - 1)) * xStep); 
 			}
 
 			CoordinatesValueType getYExtent() const {
-				return (data.getSize2() * yStep); 
+				if (dataMode == POINT)
+					return (data.getSize2() * yStep); 
+
+				return ((data.getSize2() <= 1 ? SizeType(0) : (data.getSize2() - 1)) * yStep); 
 			}
 
 			CoordinatesValueType getZExtent() const {
-				return (data.getSize3() * zStep); 
+				if (dataMode == POINT)
+					return (data.getSize3() * zStep); 
+
+				return ((data.getSize3() <= 1 ? SizeType(0) : (data.getSize3() - 1)) * zStep); 
 			}
 
 			template <typename V>
@@ -240,7 +250,7 @@ namespace CDPL
 			}
 			
 			template <typename V>
-			void getCoordinates(SizeType i, SizeType j, SizeType k, V& coords) const {
+			void getCoordinates(SSizeType i, SSizeType j, SSizeType k, V& coords) const {
 				CVector<CoordinatesValueType, 4> local_coords;
 				
 				getLocalCoordinates(i, j, k, local_coords);
@@ -255,81 +265,80 @@ namespace CDPL
 			}
 
 			template <typename V>
-			void getLocalCoordinates(SizeType i, SizeType j, SizeType k, V& coords) const {
-				coords[0] = i * xStep + (xStep - getXExtent()) / 2;
-				coords[1] = j * yStep + (yStep - getYExtent()) / 2;
-				coords[2] = k * zStep + (zStep - getZExtent()) / 2;
+			void getLocalCoordinates(SSizeType i, SSizeType j, SSizeType k, V& coords) const {
+				if (dataMode == POINT) {
+					coords[0] = i * xStep + (xStep - getXExtent()) * CoordinatesValueType(0.5);
+					coords[1] = j * yStep + (yStep - getYExtent()) * CoordinatesValueType(0.5);
+					coords[2] = k * zStep + (zStep - getZExtent()) * CoordinatesValueType(0.5);
+					return;
+				}
+
+				coords[0] = i * xStep - getXExtent() * CoordinatesValueType(0.5);
+				coords[1] = j * yStep - getYExtent() * CoordinatesValueType(0.5);
+				coords[2] = k * zStep - getZExtent() * CoordinatesValueType(0.5);
+			}
+
+			template <typename V1, typename V2>
+			void getLocalCoordinates(const V1& world_coords, V2& local_coords) const {
+				CVector<CoordinatesValueType, 4> tmp_local_coords;
+
+				transformToLocalCoordinates(world_coords, tmp_local_coords);
+
+				local_coords[0] = tmp_local_coords[0];
+				local_coords[1] = tmp_local_coords[1];
+				local_coords[2] = tmp_local_coords[2];
 			}
 
 			template <typename V>
 			bool containsPoint(const V& pos) const {
 				CVector<CoordinatesValueType, 4> local_coords;
 
-				getLocalCoordinates(pos, local_coords);
+				transformToLocalCoordinates(pos, local_coords);
 				
 				return containsLocalPoint(local_coords);
 			}
 
 			template <typename V>
 			bool containsLocalPoint(const V& pos) const {
-				if (std::abs(CoordinatesValueType(pos[0])) > (getXExtent() / 2))
+				if (CoordinatesValueType(pos[0]) >= (getXExtent() * CoordinatesValueType(0.5)))
 					return false;
 
-				if (std::abs(CoordinatesValueType(pos[1])) > (getYExtent() / 2))
+				if (CoordinatesValueType(pos[1]) >= (getYExtent() * CoordinatesValueType(0.5)))
 					return false;
 
-				if (std::abs(CoordinatesValueType(pos[2])) > (getZExtent() / 2))
+				if (CoordinatesValueType(pos[2]) >= (getZExtent() * CoordinatesValueType(0.5)))
+					return false;
+				
+				if (CoordinatesValueType(pos[0]) < (-getXExtent() * CoordinatesValueType(0.5)))
+					return false;
+
+				if (CoordinatesValueType(pos[1]) < (-getYExtent() * CoordinatesValueType(0.5)))
+					return false;
+
+				if (CoordinatesValueType(pos[2]) < (-getZExtent() * CoordinatesValueType(0.5)))
 					return false;
 
 				return true;
 			}
 
 			template <typename V1, typename V2>
-			bool getContainingCell(const V1& pos, V2& indices) const {
+			void getContainingCell(const V1& pos, V2& indices) const {
 				CVector<CoordinatesValueType, 4> local_coords;
 
-				getLocalCoordinates(pos, local_coords);
+				transformToLocalCoordinates(pos, local_coords);
 
-				return getLocalContainingCell(local_coords, indices);
+				getLocalContainingCell(local_coords, indices);
 			}
 
 			template <typename V1, typename V2>
-			bool getLocalContainingCell(const V1& pos, V2& indices) const {
-				CoordinatesValueType x = pos[0] + getXExtent() / 2;
+			void getLocalContainingCell(const V1& pos, V2& indices) const {
+				CoordinatesValueType x = pos[0] + getXExtent() * CoordinatesValueType(0.5);
+				CoordinatesValueType y = pos[1] + getYExtent() * CoordinatesValueType(0.5);
+				CoordinatesValueType z = pos[2] + getZExtent() * CoordinatesValueType(0.5);
 
-				if (x < CoordinatesValueType(0))
-					return false;
-
-				CoordinatesValueType y = pos[1] + getYExtent() / 2;
-
-				if (y < CoordinatesValueType(0))
-					return false;
-
-				CoordinatesValueType z = pos[2] + getZExtent() / 2;
-
-				if (z < CoordinatesValueType(0))
-					return false;
-
-				SizeType i = std::floor(x / xStep); 
-
-				if (i >= data.getSize1())
-					return false;
-
-				SizeType j = std::floor(y / yStep); 
-
-				if (j >= data.getSize2())
-					return false;
-
-				SizeType k = std::floor(z / zStep); 
-
-				if (k >= data.getSize3())
-					return false;
-
-				indices[0] = i;
-				indices[1] = j;
-				indices[2] = k;
-
-				return true;
+				indices[0] = SSizeType(std::floor(x / xStep)); 
+				indices[1] = SSizeType(std::floor(y / yStep)); 
+				indices[2] = SSizeType(std::floor(z / zStep)); 
 			}
 
 			bool isEmpty() const {
@@ -437,7 +446,7 @@ namespace CDPL
 
 		private:
 			template <typename V1, typename V2>
-			void getLocalCoordinates(const V1& coords, V2& local_coords) const {
+			void transformToLocalCoordinates(const V1& coords, V2& local_coords) const {
 				CVector<CoordinatesValueType, 4> world_coords;
 				
 				world_coords(0) = coords[0];
@@ -460,44 +469,100 @@ namespace CDPL
 		template <typename T, typename C, typename GD, typename XF, typename V> 
 		T interpolateTrilinear(const RegularSpatialGrid<T, C, GD, XF>& grid, const V& pos, bool local_pos)
 		{
-			typename GD::SizeType inds[3];
+			typedef RegularSpatialGrid<T, C, GD, XF> GridType;
+
+			typedef typename GridType::CoordinatesValueType CoordinatesValueType;
+			typedef typename GridType::SSizeType SSizeType;
+			typedef typename GridType::ValueType ValueType;
+
+			if (grid.isEmpty())
+				return CoordinatesValueType();
+
+			CoordinatesValueType loc_pos[3];
 
 			if (local_pos) {
-				if (!grid.getLocalContainingCell(pos, inds))
-					return T();
+				loc_pos[0] = pos[0];
+				loc_pos[1] = pos[1];
+				loc_pos[2] = pos[2];
+
+			} else 
+				grid.getLocalCoordinates(pos, loc_pos);
+
+			SSizeType inds[3];
+
+			grid.getLocalContainingCell(loc_pos, inds);
+			
+			CoordinatesValueType xyz0[3];
+
+			grid.getLocalCoordinates(inds[0], inds[1], inds[2], xyz0);
+
+			SSizeType inds_p1[3];
+
+			if (grid.getDataMode() == GridType::POINT) {
+				bool recalc_xyz0 = false;
+
+				if (loc_pos[0] < xyz0[0]) {
+					inds_p1[0] = inds[0];
+					inds[0] -= 1; 
+					recalc_xyz0 = true;
+
+				} else
+					inds_p1[0] = inds[0] + 1;
+
+				if (loc_pos[1] < xyz0[1]) {
+					inds_p1[1] = inds[1];
+					inds[1] -= 1; 
+					recalc_xyz0 = true;
+
+				} else
+					inds_p1[1] = inds[1] + 1;
+
+				if (loc_pos[2] < xyz0[2]) {
+					inds_p1[2] = inds[2];
+					inds[2] -= 1; 
+					recalc_xyz0 = true;
+
+				} else
+					inds_p1[2] = inds[2] + 1;
+
+				if (recalc_xyz0)
+					grid.getLocalCoordinates(inds[0], inds[1], inds[2], xyz0);
 
 			} else {
-				if (!grid.getContainingCell(pos, inds))
-					return T();
+				inds_p1[0] = inds[0] + 1;
+				inds_p1[1] = inds[1] + 1;
+				inds_p1[2] = inds[2] + 1;
 			}
 
-			if (inds[0] + 1 >= grid.getSize1() || inds[1] + 1 >= grid.getSize2() || inds[2] + 1 >= grid.getSize3())
-				return T();
+			inds[0] = std::max(SSizeType(0), inds[0]);
+			inds[1] = std::max(SSizeType(0), inds[1]);
+			inds[2] = std::max(SSizeType(0), inds[2]);
+		
+			inds[0] = std::min(SSizeType(grid.getSize1() - 1), inds[0]);
+			inds[1] = std::min(SSizeType(grid.getSize2() - 1), inds[1]);
+			inds[2] = std::min(SSizeType(grid.getSize3() - 1), inds[2]);
+		
+			inds_p1[0] = std::max(SSizeType(0), inds_p1[0]);
+			inds_p1[1] = std::max(SSizeType(0), inds_p1[1]);
+			inds_p1[2] = std::max(SSizeType(0), inds_p1[2]);
+		
+			inds_p1[0] = std::min(SSizeType(grid.getSize1() - 1), inds_p1[0]);
+			inds_p1[1] = std::min(SSizeType(grid.getSize2() - 1), inds_p1[1]);
+			inds_p1[2] = std::min(SSizeType(grid.getSize3() - 1), inds_p1[2]);
+		
+			CoordinatesValueType xd = (loc_pos[0] - xyz0[0]) / grid.getXStepSize();
+			CoordinatesValueType yd = (loc_pos[1] - xyz0[1]) / grid.getYStepSize();
+			CoordinatesValueType zd = (loc_pos[2] - xyz0[2]) / grid.getZStepSize();
 
-			C xyz0[3];
+			ValueType c00 = grid(inds[0], inds[1], inds[2]) * (1 - xd) + grid(inds_p1[0], inds[1], inds[2]) * xd;
+			ValueType c01 = grid(inds[0], inds[1], inds_p1[2]) * (1 - xd) + grid(inds_p1[0], inds[1], inds_p1[2]) * xd;
+			ValueType c10 = grid(inds[0], inds_p1[1], inds[2]) * (1 - xd) + grid(inds_p1[0], inds_p1[1], inds[2]) * xd;
+			ValueType c11 = grid(inds[0], inds_p1[1], inds_p1[2]) * (1 - xd) + grid(inds_p1[0], inds_p1[1], inds_p1[2]) * xd;
 
-			if (local_pos) 
-				grid.getLocalCoordinates(inds[0], inds[1], inds[2], xyz0);
-			else
-				grid.getCoordinates(inds[0], inds[1], inds[2], xyz0);
+			ValueType c0 = c00 * (1 - yd) + c10 * yd;
+			ValueType c1 = c01 * (1 - yd) + c11 * yd;
 
-			C x1 = xyz0[0] + grid.getXStepSize();
-			C y1 = xyz0[1] + grid.getYStepSize();
-			C z1 = xyz0[2] + grid.getZStepSize();
-
-			C xd = (pos[0] - xyz0[0]) / (x1 - xyz0[0]);
-			C yd = (pos[1] - xyz0[1]) / (y1 - xyz0[1]);
-			C zd = (pos[2] - xyz0[2]) / (z1 - xyz0[2]);
-
-			T c00 = grid(inds[0], inds[1], inds[2]) * (1 - xd) + grid(inds[0] + 1, inds[1], inds[2]) * xd;
-			T c01 = grid(inds[0], inds[1], inds[2] + 1) * (1 - xd) + grid(inds[0] + 1, inds[1], inds[2] + 1) * xd;
-			T c10 = grid(inds[0], inds[1] + 1, inds[2]) * (1 - xd) + grid(inds[0] + 1, inds[1] + 1, inds[2]) * xd;
-			T c11 = grid(inds[0], inds[1] + 1, inds[2] + 1) * (1 - xd) + grid(inds[0] + 1, inds[1] + 1, inds[2] + 1) * xd;
-
-			T c0 = c00 * (1 - yd) + c10 * yd;
-			T c1 = c01 * (1 - yd) + c11 * yd;
-
-			T c = c0 * (1 - zd) + c1 * zd;
+			ValueType c = c0 * (1 - zd) + c1 * zd;
 
 			return c;
 		}
