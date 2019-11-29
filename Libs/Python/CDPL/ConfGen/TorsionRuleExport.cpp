@@ -45,6 +45,9 @@ void CDPLPythonConfGen::exportTorsionRule()
 		.def(CDPLPythonBase::ObjectIdentityCheckVisitor<ConfGen::TorsionRule>())	
 		.def("assign", CDPLPythonBase::copyAssOp(&ConfGen::TorsionRule::operator=), 
 			 (python::arg("self"), python::arg("rule")), python::return_self<>())
+		.def("getMatchPatternString", &ConfGen::TorsionRule::getMatchPatternString, python::arg("self"), 
+			 python::return_value_policy<python::copy_const_reference>())
+		.def("setMatchPatternString", &ConfGen::TorsionRule::setMatchPatternString, (python::arg("self"), python::arg("ptn_str")))
 		.def("getMatchPattern", &ConfGen::TorsionRule::getMatchPattern, python::arg("self"), 
 			 python::return_value_policy<python::copy_const_reference>())
 		.def("setMatchPattern", &ConfGen::TorsionRule::setMatchPattern, (python::arg("self"), python::arg("ptn")))
@@ -67,6 +70,10 @@ void CDPLPythonConfGen::exportTorsionRule()
 		.def("clear", &ConfGen::TorsionRule::clear, python::arg("self"))
 		.def("swap", &ConfGen::TorsionRule::swap, (python::arg("self"), python::arg("rule")))
 		.add_property("numAngles", &ConfGen::TorsionRule::getNumAngles)
+		.add_property("matchPatternString", 
+					  python::make_function(&ConfGen::TorsionRule::getMatchPatternString, 
+											python::return_value_policy<python::copy_const_reference>()),
+					  &ConfGen::TorsionRule::setMatchPatternString)
 		.add_property("matchPattern", 
 					  python::make_function(&ConfGen::TorsionRule::getMatchPattern, 
 											python::return_value_policy<python::copy_const_reference>()),

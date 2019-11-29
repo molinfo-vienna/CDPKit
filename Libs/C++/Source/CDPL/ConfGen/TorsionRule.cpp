@@ -33,6 +33,16 @@
 using namespace CDPL;
 
 
+const std::string& ConfGen::TorsionRule::getMatchPatternString() const
+{
+	return matchPatternStr;
+}
+
+void ConfGen::TorsionRule::setMatchPatternString(const std::string& ptn_str)
+{
+	matchPatternStr = ptn_str;
+}
+
 const Chem::MolecularGraph::SharedPointer& ConfGen::TorsionRule::getMatchPattern() const
 {
 	return matchPattern;

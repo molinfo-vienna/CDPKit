@@ -31,6 +31,8 @@
 #ifndef CDPL_CONFGEN_TORSIONLIBRARY_HPP
 #define CDPL_CONFGEN_TORSIONLIBRARY_HPP
 
+#include <iosfwd>
+
 #include <boost/shared_ptr.hpp>
 
 #include "CDPL/ConfGen/APIPrefix.hpp"
@@ -54,6 +56,10 @@ namespace CDPL
 		  public:
 			typedef boost::shared_ptr<TorsionLibrary> SharedPointer;
 	
+			void load(std::istream& is);
+
+			void save(std::ostream& os) const;
+
 			void loadDefaults();
 
 			static void set(const SharedPointer& lib);

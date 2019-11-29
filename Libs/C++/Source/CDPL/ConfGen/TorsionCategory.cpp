@@ -50,6 +50,16 @@ void ConfGen::TorsionCategory::setName(const std::string& name)
 	this->name = name;
 }
 
+const std::string& ConfGen::TorsionCategory::getMatchPatternString() const
+{
+	return matchPatternStr;
+}
+
+void ConfGen::TorsionCategory::setMatchPatternString(const std::string& ptn_str)
+{
+	matchPatternStr = ptn_str;
+}
+
 const Chem::MolecularGraph::SharedPointer& ConfGen::TorsionCategory::getMatchPattern() const
 {
 	return matchPattern;

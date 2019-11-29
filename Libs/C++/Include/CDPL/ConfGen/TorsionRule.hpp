@@ -33,6 +33,7 @@
 
 #include <vector>
 #include <cstddef>
+#include <string>
 
 #include "CDPL/ConfGen/APIPrefix.hpp"
 #include "CDPL/Chem/MolecularGraph.hpp"
@@ -92,6 +93,10 @@ namespace CDPL
 			typedef AngleEntryList::iterator AngleEntryIterator;
 			typedef AngleEntryList::const_iterator ConstAngleEntryIterator;
 
+			const std::string& getMatchPatternString() const;
+
+			void setMatchPatternString(const std::string& ptn_str);
+
 			const Chem::MolecularGraph::SharedPointer& getMatchPattern() const;
 
 			void setMatchPattern(const Chem::MolecularGraph::SharedPointer& ptn);
@@ -123,6 +128,7 @@ namespace CDPL
 		  private:
 			void checkAngleIndex(std::size_t idx, bool it) const;
 
+			std::string                         matchPatternStr;
 			Chem::MolecularGraph::SharedPointer matchPattern;
 			AngleEntryList                      angles;
 		};

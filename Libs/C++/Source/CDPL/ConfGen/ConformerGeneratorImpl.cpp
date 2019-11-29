@@ -416,11 +416,14 @@ unsigned int ConfGen::ConformerGeneratorImpl::generateConformers()
 	torDriver.setup(fragments, *molGraph, torDriveBonds.begin(), torDriveBonds.end());
 	torDriver.setMMFF94Parameters(mmff94Data, mmff94InteractionMask);
 
+	std::size_t num_frags = torFragConfDataList.size();
+
+	bool lock_flex_rsys = (!settings.enumerateRings() && 
+						   (std::find_if(torFragConfDataList.begin(), torFragConfDataList.end(), 
+										 boost::bind(&FragmentConfData::isFlexRingSys, _1)) != torFragConfDataList.end()));
 	double min_energy = 0.0;
 	double min_comb_energy = 0.0;
 	double e_window = settings.getEnergyWindow();
-
-	std::size_t num_frags = torFragConfDataList.size();
 
 	for (FragmentConfCombinationList::const_iterator comb_it = torFragConfCombList.begin(), combs_end = torFragConfCombList.end(); comb_it != combs_end; ++comb_it) {
 		const FragmentConfCombination* comb = *comb_it;
@@ -449,6 +452,23 @@ unsigned int ConfGen::ConformerGeneratorImpl::generateConformers()
 
 		if (ret_code != ReturnCode::SUCCESS)
 			continue;
+
+		if (lock_flex_rsys) {
+			for (FragmentConfCombinationList::const_iterator comb_it2 = comb_it + 1; comb_it2 != combs_end; ++comb_it2) {
+				FragmentConfCombination* next_comb = *comb_it2;
+
+				for (std::size_t i = 0; i < num_frags; i++) {
+					FragmentConfData* conf_data = torFragConfDataList[i];
+
+					if (conf_data->isFlexRingSys && next_comb->confIndices[i] != comb->confIndices[i]) {
+						next_comb->valid = false;
+						break;
+					}
+				}
+			}
+
+			lock_flex_rsys = false;
+		}
 
 		bool new_min_energy = false;
 
@@ -541,8 +561,9 @@ unsigned int ConfGen::ConformerGeneratorImpl::selectOutputConformers()
 	
 	double max_energy = workingConfs.front()->getEnergy() + settings.getEnergyWindow();
 	std::size_t max_num_confs = settings.getMaxNumOutputConformers();
+	bool reorder_out_confs = false;
 
-	if (settings.outputSuppliedCoordinates()) {
+	if (settings.outputSuppliedCoordinates() && max_num_confs > 0) {
 		ConformerData::SharedPointer ipt_conf_data = confDataCache.get();
 
 		try {
@@ -553,6 +574,8 @@ unsigned int ConfGen::ConformerGeneratorImpl::selectOutputConformers()
 			outputConfs.push_back(ipt_conf_data);
 
 			confSelector->selected(*ipt_conf_data);
+
+			reorder_out_confs = true;
 
 		} catch (const Base::Exception&) {}
 	}
@@ -568,6 +591,9 @@ unsigned int ConfGen::ConformerGeneratorImpl::selectOutputConformers()
 		if (confSelector->selected(*conf_data))
 			outputConfs.push_back(conf_data);
 	}
+
+	if (reorder_out_confs)
+		std::sort(outputConfs.begin(), outputConfs.end(), &compareConformerEnergy); 
 
 	return invokeCallbacks();
 }

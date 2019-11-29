@@ -104,6 +104,9 @@ void CDPLPythonConfGen::exportTorsionCategory()
 		.def(CDPLPythonBase::ObjectIdentityCheckVisitor<ConfGen::TorsionCategory>())	
 		.def("assign", CDPLPythonBase::copyAssOp(&ConfGen::TorsionCategory::operator=), 
 			 (python::arg("self"), python::arg("cat")), python::return_self<>())
+		.def("getMatchPatternString", &ConfGen::TorsionCategory::getMatchPatternString, python::arg("self"), 
+			 python::return_value_policy<python::copy_const_reference>())
+		.def("setMatchPatternString", &ConfGen::TorsionCategory::setMatchPatternString, (python::arg("self"), python::arg("ptn_str")))
 		.def("getMatchPattern", &ConfGen::TorsionCategory::getMatchPattern, python::arg("self"), 
 			 python::return_value_policy<python::copy_const_reference>())
 		.def("setMatchPattern", &ConfGen::TorsionCategory::setMatchPattern, (python::arg("self"), python::arg("ptn")))
@@ -146,6 +149,10 @@ void CDPLPythonConfGen::exportTorsionCategory()
 		.add_property("numCategories", &ConfGen::TorsionCategory::getNumCategories)
 		.add_property("bondAtom1Type", &ConfGen::TorsionCategory::getBondAtom1Type, &ConfGen::TorsionCategory::setBondAtom1Type)
 		.add_property("bondAtom2Type", &ConfGen::TorsionCategory::getBondAtom2Type, &ConfGen::TorsionCategory::setBondAtom2Type)
+		.add_property("matchPatternString", 
+					  python::make_function(&ConfGen::TorsionCategory::getMatchPatternString, 
+											python::return_value_policy<python::copy_const_reference>()),
+					  &ConfGen::TorsionCategory::setMatchPatternString)
 		.add_property("matchPattern", python::make_function(&ConfGen::TorsionCategory::getMatchPattern, 
 															python::return_value_policy<python::copy_const_reference>()),
 					  &ConfGen::TorsionCategory::setMatchPattern)

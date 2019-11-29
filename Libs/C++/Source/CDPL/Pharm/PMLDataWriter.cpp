@@ -27,6 +27,7 @@
 #include "StaticInit.hpp"
 
 #include <ostream>
+#include <iomanip>
 #include <map>
 
 #include <boost/lexical_cast.hpp>

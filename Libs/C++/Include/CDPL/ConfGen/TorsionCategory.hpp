@@ -70,6 +70,10 @@ namespace CDPL
 			const std::string& getName() const;
 
 			void setName(const std::string& name);
+	
+			const std::string& getMatchPatternString() const;
+
+			void setMatchPatternString(const std::string& ptn_str);
 
 			const Chem::MolecularGraph::SharedPointer& getMatchPattern() const;
 
@@ -137,6 +141,7 @@ namespace CDPL
 			void checkRuleIndex(std::size_t idx, bool it) const;
 
 			std::string                         name;      
+			std::string                         matchPatternStr;
 			Chem::MolecularGraph::SharedPointer matchPattern;
 			unsigned int                        bondAtom1Type;
 			unsigned int                        bondAtom2Type;

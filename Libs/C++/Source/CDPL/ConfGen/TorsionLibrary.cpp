@@ -29,8 +29,10 @@
 #include <boost/thread.hpp>
 
 #include "CDPL/ConfGen/TorsionLibrary.hpp"
+#include "CDPL/Base/Exceptions.hpp"
 
 #include "TorsionLibraryDataReader.hpp"
+#include "TorsionLibraryDataWriter.hpp"
 
 
 using namespace CDPL;
@@ -56,6 +58,17 @@ namespace
 
 ConfGen::TorsionLibrary::SharedPointer ConfGen::TorsionLibrary::defaultLib = builtinTorLib;
 
+
+void ConfGen::TorsionLibrary::load(std::istream& is)
+{
+	TorsionLibraryDataReader().read(is, *this);
+}
+
+void ConfGen::TorsionLibrary::save(std::ostream& os) const
+{
+	if (!TorsionLibraryDataWriter().write(os, *this))
+		throw Base::IOError("TorsionLibrary: unspecified error while saving torsion library");
+}
 
 void ConfGen::TorsionLibrary::loadDefaults()
 {

@@ -62,6 +62,7 @@ SET(cdpl-confgen_LIB_SRCS
     CDFFragmentLibraryDataReader.cpp
     CDFFragmentLibraryDataWriter.cpp
     TorsionLibraryDataReader.cpp
+    TorsionLibraryDataWriter.cpp
     FallbackTorsionLibrary.cpp
     FragmentTreeNode.cpp
     FragmentTree.cpp
