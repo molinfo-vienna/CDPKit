@@ -275,6 +275,7 @@ unsigned int ConfGen::ConformerGeneratorImpl::generateFragmentConformers()
 	fa_settings.getFragmentBuildSettings() = settings.getFragmentBuildSettings();
 	fa_settings.enumerateRings(settings.enumerateRings());
 	fa_settings.setNitrogenEnumerationMode(settings.getNitrogenEnumerationMode());
+	fa_settings.generateCoordinatesFromScratch(settings.generateCoordinatesFromScratch());
 
 	for (FragmentConfDataList::const_iterator it = torFragConfDataList.begin(), end = torFragConfDataList.end(); it != end; ++it) {
 		FragmentConfData* frag_conf_data = *it;
@@ -450,7 +451,7 @@ unsigned int ConfGen::ConformerGeneratorImpl::generateConformers()
 		if (ret_code == ReturnCode::TIMEOUT || ret_code == ReturnCode::ABORTED)
 			return ret_code;
 
-		if (ret_code != ReturnCode::SUCCESS)
+		if (ret_code != ReturnCode::SUCCESS) 
 			continue;
 
 		if (lock_flex_rsys) {
@@ -545,7 +546,7 @@ unsigned int ConfGen::ConformerGeneratorImpl::selectOutputConformers()
 		if (getHeavyBondCount(atom1, *molGraph) == 1)
 			setNeighborAtomBits(atom1, *molGraph, tmpBitSet);
 
-		const Atom& atom2 = bond.getBegin();
+		const Atom& atom2 = bond.getEnd();
 
 		if (getHeavyBondCount(atom2, *molGraph) == 1)
 			setNeighborAtomBits(atom2, *molGraph, tmpBitSet);

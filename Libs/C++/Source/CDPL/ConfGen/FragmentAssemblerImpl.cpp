@@ -29,6 +29,8 @@
 #include <algorithm>
 #include <cmath>
 
+#include <boost/bind.hpp>
+
 #include "CDPL/ConfGen/UtilityFunctions.hpp"
 #include "CDPL/ConfGen/ReturnCode.hpp"
 #include "CDPL/ConfGen/NitrogenEnumerationMode.hpp"
@@ -80,6 +82,11 @@ namespace
 			ConfGen::TorsionLibraryDataReader().read(ASSEMBLER_TORSION_RULES, *assemblerTorLib);
 		}
 	};
+
+	bool compTorsionAngleEntryScore(const ConfGen::TorsionRule::AngleEntry& entry1, const ConfGen::TorsionRule::AngleEntry& entry2)
+	{
+		return (entry1.getScore() < entry2.getScore());
+	} 
 
 	const std::size_t MAX_TREE_CONF_DATA_CACHE_SIZE = 10000;
 	const std::size_t MAX_CONF_DATA_CACHE_SIZE      = 5000;
@@ -315,7 +322,7 @@ bool ConfGen::FragmentAssemblerImpl::transferInputCoordinates(unsigned int frag_
 
 		return true;
 
-	} catch (const Base::ItemNotFound& e) {
+	} catch (const Base::ItemNotFound& e) { 
 		confDataCache.put();
 	}
 
@@ -360,19 +367,17 @@ bool ConfGen::FragmentAssemblerImpl::fetchConformersFromFragmentLibrary(unsigned
 				num_confs = 1;
 		}
 
-		ConformerDataArray& node_confs = node->getConformers();
-
-		node_confs.reserve(num_confs);
+		node->getConformers().reserve(num_confs);
 
 		for (std::size_t i = 0; i < num_confs; i++)
-			node_confs.push_back(allocConformerData());
+			node->addConformer(allocConformerData());
 
 		for (IndexPairList::const_iterator it = fragLibEntryAtomIdxMap.begin(), end = fragLibEntryAtomIdxMap.end(); it != end; ++it) {
 			const IndexPair& idx_mapping = *it;
 			const Math::Vector3DArray::StorageType& atom_coords_data = get3DCoordinatesArray(entry_ptr->getAtom(idx_mapping.first))->getData();
 
 			for (std::size_t i = 0; i < num_confs; i++)
-				node_confs[i]->getData()[idx_mapping.second].assign(atom_coords_data[i]);
+				node->getConformers()[i]->getData()[idx_mapping.second].assign(atom_coords_data[i]);
 		}
 
 		fixBondLengths(frag, node);
@@ -953,7 +958,9 @@ void ConfGen::FragmentAssemblerImpl::assignLinkBondTorsions(FragmentTreeNode* no
 	const TorsionRuleMatch* match = getMatchingTorsionRule(*bond);
 
 	if (match && match->getRule().getNumAngles() > 0) {
-		tor_angles.push_back(match->getRule().getAngle(0).getAngle());
+		TorsionRule::ConstAngleEntryIterator it = std::max_element(match->getRule().getAnglesBegin(), match->getRule().getAnglesEnd(),
+																   boost::bind(&compTorsionAngleEntryScore, _1, _2));
+		tor_angles.push_back(it->getAngle());
 
 		const Atom* const* match_atoms = match->getAtoms();
 				

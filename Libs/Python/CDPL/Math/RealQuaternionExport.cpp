@@ -68,9 +68,13 @@ namespace
 				 	 (python::arg("self"), python::arg("t")), python::return_self<>())
 				.def("__idiv__", ScalarArgFuncType(&QuaternionType::template operator/=<ValueType>), 
 				 	 (python::arg("self"), python::arg("t")), python::return_self<>())
+				.def("__itruediv__", ScalarArgFuncType(&QuaternionType::template operator/=<ValueType>), 
+				 	 (python::arg("self"), python::arg("t")), python::return_self<>())
 				.def("__imul__", &QuaternionType::template operator*=<QuaternionType>, 
 				 	 (python::arg("self"), python::arg("q")), python::return_self<>())
 				.def("__idiv__", &QuaternionType::template operator/=<QuaternionType>, 
+					 (python::arg("self"), python::arg("q")), python::return_self<>())
+				.def("__itruediv__", &QuaternionType::template operator/=<QuaternionType>, 
 					 (python::arg("self"), python::arg("q")), python::return_self<>())
 				.def(CDPLPythonBase::ObjectIdentityCheckVisitor<QuaternionType>())
 				.def(ConstQuaternionVisitor<QuaternionType>())

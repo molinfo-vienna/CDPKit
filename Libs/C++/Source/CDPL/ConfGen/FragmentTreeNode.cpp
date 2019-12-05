@@ -35,6 +35,7 @@
 #include "CDPL/Chem/Bond.hpp"
 #include "CDPL/Chem/AtomFunctions.hpp"
 #include "CDPL/Chem/UtilityFunctions.hpp"
+#include "CDPL/ForceField/UtilityFunctions.hpp"
 #include "CDPL/ForceField/MMFF94EnergyFunctions.hpp"
 
 #include "FragmentTreeNode.hpp"
@@ -105,30 +106,14 @@ namespace
 		return (conf_data1->getEnergy() < conf_data2->getEnergy());
 	} 
 
-	bool isZero(double v)
-	{
-		return (std::abs(v) < 0.00001);
-	}
-
-	bool isIdentityTransform(const double mtx[3][3])
-	{
-		return (isZero(mtx[0][0] - 1.0) && isZero(mtx[0][1]) && isZero(mtx[0][2]) &&
-				isZero(mtx[1][0]) && isZero(mtx[1][1] - 1.0) && isZero(mtx[1][2]) &&
-				isZero(mtx[2][0]) && isZero(mtx[2][1]) && isZero(mtx[2][2] - 1.0));
-	}
-
-	bool isZeroVector(Math::Vector3D::ConstPointer vec)
-	{
-		return (isZero(vec[0]) && isZero(vec[1]) && isZero(vec[2]));
-	}
-
 	const double CONFORMER_LINEUP_SPACING       = 4.0;
 	const double MAX_TORSION_REF_BOND_ANGLE_COS = std::cos(2.5 / 180.0 * M_PI);
+	const double MAX_PLANAR_ATOM_GEOM_OOP_ANGLE = 10.0 / 180.0 * M_PI;
 }
 
 
 ConfGen::FragmentTreeNode::FragmentTreeNode(ConfGen::FragmentTree& owner): 
-	owner(owner), parent(0), splitBond(0)
+	owner(owner), parent(0), splitBond(0), changed(true)
 {
 	splitBondAtoms[0] = 0;
 	splitBondAtoms[1] = 0;
@@ -283,11 +268,13 @@ std::size_t ConfGen::FragmentTreeNode::getNumConformers() const
 void ConfGen::FragmentTreeNode::clearConformers()
 {
 	conformers.clear();
+	changed = true;
 }
 
 void ConfGen::FragmentTreeNode::clearConformersDownwards()
 {
 	conformers.clear();
+	changed = true;
 
 	if (hasChildren()) {
 		leftChild->clearConformersDownwards();
@@ -298,6 +285,7 @@ void ConfGen::FragmentTreeNode::clearConformersDownwards()
 void ConfGen::FragmentTreeNode::clearConformersUpwards()
 {
 	conformers.clear();
+	changed = true;
 
 	if (parent)
 		parent->clearConformersUpwards();
@@ -312,6 +300,7 @@ void ConfGen::FragmentTreeNode::addConformer(const Math::Vector3DArray& src_coor
 	new_conf->setEnergy(calcMMFF94Energy(src_coords));
 
 	conformers.push_back(new_conf);
+	changed = true;
 }
 
 void ConfGen::FragmentTreeNode::addConformer(const ConformerData& conf_data)
@@ -323,11 +312,13 @@ void ConfGen::FragmentTreeNode::addConformer(const ConformerData& conf_data)
 	new_conf->setEnergy(conf_data.getEnergy());
 
 	conformers.push_back(new_conf);
+	changed = true;
 }
 
 void ConfGen::FragmentTreeNode::addConformer(const ConformerData::SharedPointer& conf_data)
 {
 	conformers.push_back(conf_data);
+	changed = true;
 }
 
 unsigned int ConfGen::FragmentTreeNode::generateConformers(bool e_ordered)
@@ -355,6 +346,8 @@ unsigned int ConfGen::FragmentTreeNode::generateConformers(bool e_ordered)
 		else
 			ret_code = alignAndRotateChildConformers();
 
+		changed = true;
+
 		if (ret_code != ReturnCode::SUCCESS)
 			return ret_code;
 
@@ -362,7 +355,7 @@ unsigned int ConfGen::FragmentTreeNode::generateConformers(bool e_ordered)
 			return ReturnCode::TORSION_DRIVING_FAILED;
 	}
 
-	if (e_ordered && conformers.size() > 1) 
+	if (changed && e_ordered && conformers.size() > 1) 
 		std::sort(conformers.begin(), conformers.end(), &compareConformerEnergy); 
 
 	return ReturnCode::SUCCESS;
@@ -458,70 +451,71 @@ unsigned int ConfGen::FragmentTreeNode::alignAndRotateChildConformers()
 
 	conformers.reserve(num_left_chld_confs * num_right_chld_confs * num_tor_angles);
 
-	for (std::size_t i = 0, tor_ref_atom_idx = torsionRefAtoms[0] ? molgraph.getAtomIndex(*torsionRefAtoms[0]) : 0; i < num_left_chld_confs; i++) {
-		ConformerData& conf = *leftChild->conformers[i];
-		const Math::Vector3DArray::StorageType& conf_data = conf.getData();
-		bool check_ref_vec_angle = true;
+	if (leftChild->changed) {
+		for (std::size_t i = 0, tor_ref_atom_idx = torsionRefAtoms[0] ? molgraph.getAtomIndex(*torsionRefAtoms[0]) : 0; i < num_left_chld_confs; i++) {
+			ConformerData& conf = *leftChild->conformers[i];
+			const Math::Vector3DArray::StorageType& conf_data = conf.getData();
+			bool check_ref_vec_angle = true;
 
-		bond_vec.assign(conf_data[right_atom_idx]);
-		bond_vec.minusAssign(conf_data[left_atom_idx]);
-		bond_vec /= length(bond_vec);
+			bond_vec.assign(conf_data[right_atom_idx]);
+			bond_vec.minusAssign(conf_data[left_atom_idx]);
+			bond_vec /= length(bond_vec);
 
-		if (torsionRefAtoms[0]) {
-			tor_ref_vec.assign(conf_data[tor_ref_atom_idx]);
-			tor_ref_vec.minusAssign(conf_data[left_atom_idx]);
-			tor_ref_vec /= length(tor_ref_vec);
+			if (torsionRefAtoms[0]) {
+				tor_ref_vec.assign(conf_data[tor_ref_atom_idx]);
+				tor_ref_vec.minusAssign(conf_data[left_atom_idx]);
+				tor_ref_vec /= length(tor_ref_vec);
 		
-		} else if (torsionRefAtoms[1])
-			calcVirtualTorsionReferenceAtomVector(conf, left_atom_idx, tor_ref_vec);
+			} else if (torsionRefAtoms[1])
+				calcVirtualTorsionReferenceAtomVector(conf, left_atom_idx, tor_ref_vec);
 
-		else {
-			calcOrthogonalVector(bond_vec, tor_ref_vec);
-			check_ref_vec_angle = false;
+			else {
+				calcOrthogonalVector(bond_vec, tor_ref_vec);
+				check_ref_vec_angle = false;
+			}
+
+			calcAlignmentMatrix(bond_vec, tor_ref_vec, almnt_mtx, check_ref_vec_angle);
+			alignCoordinates(almnt_mtx, conf, leftChild->atomIndices, left_atom_idx, 0.0);
 		}
 
-		calcAlignmentMatrix(bond_vec, tor_ref_vec, almnt_mtx, check_ref_vec_angle);
-
-		if (isZeroVector(conf_data[left_atom_idx].getData()) && isIdentityTransform(almnt_mtx))
-			continue;
-
-		alignCoordinates(almnt_mtx, conf, leftChild->atomIndices, left_atom_idx, 0.0);
+		leftChild->changed = false;
 	}
 
-	for (std::size_t i = 0, tor_ref_atom_idx = torsionRefAtoms[1] ? molgraph.getAtomIndex(*torsionRefAtoms[1]) : 0; i < num_right_chld_confs; i++) {
-		ConformerData& conf = *rightChild->conformers[i];
-		const Math::Vector3DArray::StorageType& conf_data = conf.getData();
-		bool check_ref_vec_angle = true;
+	if (rightChild->changed) {
+		for (std::size_t i = 0, tor_ref_atom_idx = torsionRefAtoms[1] ? molgraph.getAtomIndex(*torsionRefAtoms[1]) : 0; i < num_right_chld_confs; i++) {
+			ConformerData& conf = *rightChild->conformers[i];
+			const Math::Vector3DArray::StorageType& conf_data = conf.getData();
+			bool check_ref_vec_angle = true;
 
-		bond_vec.assign(conf_data[right_atom_idx]);
-		bond_vec.minusAssign(conf_data[left_atom_idx]);
+			bond_vec.assign(conf_data[right_atom_idx]);
+			bond_vec.minusAssign(conf_data[left_atom_idx]);
 
-		double bond_len = length(bond_vec);
+			double bond_len = length(bond_vec);
 
-		bond_vec /= bond_len;
+			bond_vec /= bond_len;
 
-		if (torsionRefAtoms[1]) {
-			tor_ref_vec.assign(conf_data[tor_ref_atom_idx]);
-			tor_ref_vec.minusAssign(conf_data[right_atom_idx]);
-			tor_ref_vec /= length(tor_ref_vec);
+			if (torsionRefAtoms[1]) {
+				tor_ref_vec.assign(conf_data[tor_ref_atom_idx]);
+				tor_ref_vec.minusAssign(conf_data[right_atom_idx]);
+				tor_ref_vec /= length(tor_ref_vec);
 
-		} else if (torsionRefAtoms[0])
-			calcVirtualTorsionReferenceAtomVector(conf, right_atom_idx, tor_ref_vec);
+			} else if (torsionRefAtoms[0])
+				calcVirtualTorsionReferenceAtomVector(conf, right_atom_idx, tor_ref_vec);
 
-		else {
-			calcOrthogonalVector(bond_vec, tor_ref_vec);
-			check_ref_vec_angle = false;
+			else {
+				calcOrthogonalVector(bond_vec, tor_ref_vec);
+				check_ref_vec_angle = false;
+			}
+
+			calcAlignmentMatrix(bond_vec, tor_ref_vec, almnt_mtx, check_ref_vec_angle);
+			alignCoordinates(almnt_mtx, conf, rightChild->atomIndices, right_atom_idx, bond_len);
 		}
 
-		calcAlignmentMatrix(bond_vec, tor_ref_vec, almnt_mtx, check_ref_vec_angle);
-
-		Math::Vector3D::ConstPointer right_atom_pos = conf_data[right_atom_idx].getData();
-
-		if (isZero(right_atom_pos[0] - bond_len) && isZero(right_atom_pos[1]) && isZero(right_atom_pos[2]) && isIdentityTransform(almnt_mtx)) 
-			continue;
-
-		alignCoordinates(almnt_mtx, conf, rightChild->atomIndices, right_atom_idx, bond_len);
+		rightChild->changed = false;
 	}
+
+	ConformerData::SharedPointer new_conf;
+	bool new_left_conf = false;
 
 	for (std::size_t i = 0; i < num_left_chld_confs; i++) {
 		unsigned int ret_code = invokeCallbacks();
@@ -530,6 +524,7 @@ unsigned int ConfGen::FragmentTreeNode::alignAndRotateChildConformers()
 			return ret_code;
 
 		const ConformerData& left_conf = *leftChild->conformers[i];
+		new_left_conf = true;
 
 		for (std::size_t j = 0; j < num_right_chld_confs; j++) {
 			const ConformerData& right_conf = *rightChild->conformers[j];
@@ -546,9 +541,16 @@ unsigned int ConfGen::FragmentTreeNode::alignAndRotateChildConformers()
 
 			} else {
 				for (std::size_t k = 0; k < num_tor_angles; k++) {
-					ConformerData::SharedPointer new_conf = owner.allocConformerData();
+					if (!new_conf) {
+						new_conf = owner.allocConformerData();
 
-					copyCoordinates(left_conf, leftChild->atomIndices, *new_conf, right_atom_idx);
+						copyCoordinates(left_conf, leftChild->atomIndices, *new_conf, right_atom_idx);
+
+					} else if (new_left_conf) 
+						copyCoordinates(left_conf, leftChild->atomIndices, *new_conf, right_atom_idx);
+					
+					new_left_conf = false;
+
 					rotateCoordinates(right_conf, rightChild->atomIndices, *new_conf, 
 									  torsionAngleSines[k], torsionAngleCosines[k], left_atom_idx);
 
@@ -559,6 +561,7 @@ unsigned int ConfGen::FragmentTreeNode::alignAndRotateChildConformers()
 						new_conf->setEnergy(left_conf.getEnergy() + right_conf.getEnergy() + node_ia_energy);
 
 						conformers.push_back(new_conf);
+						new_conf.reset();
 					}
 				}
 			}
@@ -852,17 +855,32 @@ void ConfGen::FragmentTreeNode::calcVirtualTorsionReferenceAtomVector(const Math
 
 	Atom::ConstBondIterator b_it = atom.getBondsBegin();
 	std::size_t bond_count = 0;
+	std::size_t nbr_atom_inds[3];
 
-	ref_vec.clear();
-
-	for (Atom::ConstAtomIterator a_it = atom.getAtomsBegin(), a_end = atom.getAtomsEnd(); a_it != a_end; ++a_it, ++b_it) {
+	for (Atom::ConstAtomIterator a_it = atom.getAtomsBegin(), a_end = atom.getAtomsEnd(); a_it != a_end && bond_count < 3; ++a_it, ++b_it) {
 		const Atom& nbr_atom = *a_it;
 
 		if (!molgraph.containsAtom(nbr_atom) || !molgraph.containsBond(*b_it))
 			continue;
 
-		ref_vec.plusAssign(atom_pos - coords_data[molgraph.getAtomIndex(nbr_atom)]);
-		bond_count++;
+		nbr_atom_inds[bond_count++] = molgraph.getAtomIndex(nbr_atom);
+	}
+
+	// check for planarity
+
+	if (bond_count == 3 && 
+		ForceField::calcOutOfPlaneAngle<double>(coords_data[nbr_atom_inds[0]], atom_pos, 
+												coords_data[nbr_atom_inds[1]], coords_data[nbr_atom_inds[2]]) <= MAX_PLANAR_ATOM_GEOM_OOP_ANGLE) {
+
+		ref_vec.assign(crossProd(coords_data[nbr_atom_inds[0]] - atom_pos, coords_data[nbr_atom_inds[1]] - atom_pos));
+
+	} else { // non-planar case
+		ref_vec.clear();
+
+		for (std::size_t i = 0; i < bond_count; i++) {
+			ref_vec.plusAssign(atom_pos);
+			ref_vec.minusAssign(coords_data[nbr_atom_inds[i]]);
+		}
 	}
 
 	double ref_vec_len = length(ref_vec);

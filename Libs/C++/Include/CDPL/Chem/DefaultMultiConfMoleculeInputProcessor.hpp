@@ -59,10 +59,10 @@ namespace CDPL
 			
 			static const unsigned int DEF_ATOM_PROPERTY_FLAGS = 
 				AtomPropertyFlag::TYPE | AtomPropertyFlag::ISOTOPE |
-				AtomPropertyFlag::FORMAL_CHARGE | AtomPropertyFlag::CONFIGURATION;
+				AtomPropertyFlag::FORMAL_CHARGE;
 
             static const unsigned int DEF_BOND_PROPERTY_FLAGS = 
-				BondPropertyFlag::ORDER | BondPropertyFlag::CONFIGURATION;
+				BondPropertyFlag::ORDER;
 
 			DefaultMultiConfMoleculeInputProcessor(bool comp_names = false, unsigned int atom_flags = DEF_ATOM_PROPERTY_FLAGS, unsigned int bond_flags = DEF_BOND_PROPERTY_FLAGS);
 			

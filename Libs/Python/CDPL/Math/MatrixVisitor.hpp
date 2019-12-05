@@ -97,6 +97,7 @@ namespace CDPLPythonMath
 				.def("__mul__", &mulOperatorMtxExpr, (python::arg("self"), python::arg("e")))
 				.def("__mul__", &mulOperatorVecExpr, (python::arg("self"), python::arg("e")))
 				.def("__div__", &divOperator, (python::arg("self"), python::arg("t")))
+				.def("__truediv__", &divOperator, (python::arg("self"), python::arg("t")))
 				.def("__rmul__", &rmulOperator, (python::arg("self"), python::arg("t")))
 #ifdef HAVE_NUMPY
 				.def("toArray", &toArray, python::arg("self"))
@@ -264,6 +265,8 @@ namespace CDPLPythonMath
 				.def("__imul__", &imulOperator, (python::arg("self"), python::arg("t")),
 					 python::return_self<>())
 				.def("__idiv__", &idivOperator, (python::arg("self"), python::arg("t")),
+					 python::return_self<>())
+				.def("__itruediv__", &idivOperator, (python::arg("self"), python::arg("t")),
 					 python::return_self<>());
 		}
 

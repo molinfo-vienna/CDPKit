@@ -43,7 +43,7 @@ namespace
 {
 
 	const std::size_t MAX_TREE_NODE_CACHE_SIZE         = 200;
-	const double      ATOM_CLASH_RADIUS_SCALING_FACTOR = 1.25;
+	const double      ATOM_CLASH_RADIUS_SCALING_FACTOR = 1.2;
 }
 
 
@@ -55,6 +55,8 @@ ConfGen::FragmentTree::FragmentTree(std::size_t max_conf_data_cache_size):
 	nodeCache(boost::bind(&FragmentTree::createTreeNode, this), TreeNodeCache::DefaultDestructor(), MAX_TREE_NODE_CACHE_SIZE), 
 	molGraph(0)
 {
+	nodeCache.setCleanupFunction(boost::bind(&FragmentTreeNode::clearConformers, _1));
+
 	rootNode = nodeCache.getRaw();
 }
 
@@ -161,8 +163,8 @@ void ConfGen::FragmentTree::buildTree(const Chem::FragmentList& frags, const Che
 				FragmentTreeNode* node = createParentNode(node1, node2, bond);
 				
 				found_pair = true;
-				*it2 = node;
-				leafNodes.erase(it1);
+				*it1 = node;
+				leafNodes.erase(it2);
 				break;
 			}
 
@@ -207,7 +209,7 @@ ConfGen::FragmentTreeNode* ConfGen::FragmentTree::createParentNode(FragmentTreeN
 	FragmentTreeNode* left_child = node1;
 	FragmentTreeNode* right_child = node2;
 
-	if (left_child->getAtomIndices().size() < right_child->getAtomIndices().size())
+	if (left_child->getAtomIndices().size() > right_child->getAtomIndices().size())
 		std::swap(left_child, right_child);
 
 	node->setChildren(left_child, right_child);
@@ -264,7 +266,7 @@ ConfGen::FragmentTreeNode* ConfGen::FragmentTree::allocTreeNode()
 	FragmentTreeNode* node = nodeCache.getRaw();
 
 	node->setParent(0);
-	node->getConformers().clear();
+	node->clearConformers();
 	node->getMMFF94Parameters().clear();
 	node->clearTorsionDrivingData();
 

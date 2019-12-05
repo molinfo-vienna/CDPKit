@@ -118,7 +118,7 @@ namespace CDPL
 			unsigned int generateConformers(bool e_ordered);
 
 			double calcMMFF94Energy(const Math::Vector3DArray& coords) const;
-
+		
 		private:
 			FragmentTreeNode(FragmentTree& owner);
 			FragmentTreeNode(const FragmentTreeNode&);
@@ -186,6 +186,7 @@ namespace CDPL
 			DoubleArray                         torsionAngleSines;
 			ForceField::MMFF94InteractionData   mmff94Data;
 			Math::Vector3DArray                 childConfBounds;
+			bool                                changed;
 		};
     }
 }

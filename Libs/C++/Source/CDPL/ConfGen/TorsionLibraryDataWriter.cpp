@@ -49,7 +49,7 @@ bool ConfGen::TorsionLibraryDataWriter::write(std::ostream& os, const TorsionLib
 {
   	using namespace TorsionLibraryFormatData;
 
-	os << std::fixed << std::boolalpha;
+	os << std::fixed << std::setprecision(2) << std::boolalpha;
 
 	writeStartTag(os, 0, LIBRARY_TAG, false);
 	writeAttribute(os, CATEGORY_NAME_ATTR, lib.getName(), true, false);

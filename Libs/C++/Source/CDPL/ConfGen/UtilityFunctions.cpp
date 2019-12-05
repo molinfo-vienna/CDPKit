@@ -296,7 +296,7 @@ bool ConfGen::isRotatableBond(const Chem::Bond& bond, const Chem::MolecularGraph
 	if (!het_h_rotors)
 		return false;
 
- 	return ((atom1_is_h_rot && getType(atom1) != AtomType::C) || (atom2_is_h_rot && getType(atom1) != AtomType::C));
+ 	return ((atom1_is_h_rot && getType(atom1) != AtomType::C) || (atom2_is_h_rot && getType(atom2) != AtomType::C));
 }
 
 std::size_t ConfGen::buildRotatableBondMask(const Chem::MolecularGraph& molgraph, Util::BitSet& bond_mask, 

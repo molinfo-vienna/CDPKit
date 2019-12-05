@@ -85,6 +85,7 @@ namespace CDPLPythonMath
 				.def("__rmul__", &rmulOperator, (python::arg("self"), python::arg("t")))
 				.def("__mul__", &mulOperatorExpr, (python::arg("self"), python::arg("e")))
 				.def("__div__", &divOperator, (python::arg("self"), python::arg("t")))
+				.def("__truediv__", &divOperator, (python::arg("self"), python::arg("t")))
 				.def("__rdiv__", &rdivOperator, (python::arg("self"), python::arg("t")))
 				.def("__div__", &divOperatorExpr, (python::arg("self"), python::arg("e")))
 #ifdef HAVE_NUMPY
@@ -276,6 +277,8 @@ namespace CDPLPythonMath
 					 (python::arg("self"), python::arg("t")), python::return_self<>())
 				.def("__idiv__", &idivOperator, 
 					 (python::arg("self"), python::arg("t")), python::return_self<>())
+				.def("__itruediv__", &idivOperator, 
+					 (python::arg("self"), python::arg("t")), python::return_self<>())
 				.def("__iadd__", &iaddOperatorQuat, (python::arg("self"), python::arg(argName)), 
 					 python::return_self<>())
 				.def("__isub__", &isubOperatorQuat, (python::arg("self"), python::arg(argName)), 
@@ -284,6 +287,8 @@ namespace CDPLPythonMath
 					 (python::arg("self"), python::arg(argName)), python::return_self<>())
 				.def("__idiv__", &idivOperatorQuat, 
 					 (python::arg("self"), python::arg(argName)), python::return_self<>())
+				.def("__itruediv__", &idivOperatorQuat, 
+					 (python::arg("self"), python::arg(argName)), python::return_self<>())
 				.def("__iadd__", &iaddOperatorQuatExpr, (python::arg("self"), python::arg("q")),
 					 python::return_self<>())
 				.def("__isub__", &isubOperatorQuatExpr, (python::arg("self"), python::arg("q")),
@@ -291,6 +296,8 @@ namespace CDPLPythonMath
 				.def("__imul__", &imulOperatorQuatExpr, (python::arg("self"), python::arg("q")), 
 					 python::return_self<>())
 				.def("__idiv__", &idivOperatorQuatExpr, (python::arg("self"), python::arg("q")),
+					 python::return_self<>())
+				.def("__itruediv__", &idivOperatorQuatExpr, (python::arg("self"), python::arg("q")),
 					 python::return_self<>());
 		}
 

@@ -286,7 +286,7 @@ void ConfGen::DGConstraintGenerator::addDefaultDistanceConstraints(Util::DG3DCoo
 		if (excl_hs && hAtomMask.test(i))
 			continue;
 
-		double vdw_rad1 = AtomDictionary::getVdWRadius(getType(molGraph->getAtom(i)));
+		double cov_rad1 = AtomDictionary::getCovalentRadius(getType(molGraph->getAtom(i)));
 
 		for (std::size_t j = i + 1; j < numAtoms; j++) {
 			if (excl_hs && hAtomMask.test(j))
@@ -295,9 +295,9 @@ void ConfGen::DGConstraintGenerator::addDefaultDistanceConstraints(Util::DG3DCoo
 			if (atomPairProcessed(i, j))
 				continue;
 
-			double vdw_rad2 = AtomDictionary::getVdWRadius(getType(molGraph->getAtom(j)));
+			double cov_rad2 = AtomDictionary::getCovalentRadius(getType(molGraph->getAtom(j)));
 
-			coords_gen.addDistanceConstraint(i, j, (vdw_rad1 + vdw_rad2), bond_length_sum);
+			coords_gen.addDistanceConstraint(i, j, (cov_rad1 + cov_rad2) * 1.5, bond_length_sum);
 			markAtomPairProcessed(i, j);
 		}
 	}

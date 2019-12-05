@@ -38,12 +38,12 @@
 #include "CDPL/Chem/BondFunctions.hpp"
 #include "CDPL/Chem/UtilityFunctions.hpp"
 #include "CDPL/Chem/HybridizationState.hpp"
+#include "CDPL/Chem/AtomType.hpp"
 #include "CDPL/ForceField/MMFF94InteractionParameterizer.hpp"
 #include "CDPL/ForceField/MMFF94InteractionData.hpp"
 #include "CDPL/ForceField/Exceptions.hpp"
 
 #include "TorsionDriverImpl.hpp"
-#include "FragmentTreeNode.hpp"
 #include "FallbackTorsionLibrary.hpp"
 
 
@@ -139,9 +139,11 @@ void ConfGen::TorsionDriverImpl::setMMFF94Parameters(const ForceField::MMFF94Int
 	fragTree.getRoot()->distMMFF94Parameters(ia_data, mmff94InteractionMask);
 }
 
-bool ConfGen::TorsionDriverImpl::setMMFF94Parameters(const Chem::MolecularGraph& molgraph)
+bool ConfGen::TorsionDriverImpl::setMMFF94Parameters()
 {
 	using namespace ForceField;
+
+	const Chem::MolecularGraph& molgraph = *fragTree.getMolecularGraph();
 
 	if (!mmff94Parameterizer.get())
 		mmff94Parameterizer.reset(new MMFF94InteractionParameterizer());
@@ -321,20 +323,9 @@ void ConfGen::TorsionDriverImpl::assignTorsionAngles(FragmentTreeNode* node)
 	const Atom* const* bond_atoms = node->getSplitBondAtoms();
 	FragmentTreeNode::TorsionAngleArray& tor_angles = node->getTorsionAngles();
 
-	const TorsionRuleMatch* match = getMatchingTorsionRule(*bond);
+	const TorsionRuleMatch* match = getTorsionRuleAngles(*bond, tor_angles);
 
 	if (match) {
-		for (TorsionRule::ConstAngleEntryIterator it = match->getRule().getAnglesBegin(), end = match->getRule().getAnglesEnd(); it != end; ++it) {
-			double tor_ang = it->getAngle();
-
-			// normalize angle to range [0, 360)
-
-			if (tor_ang < 0.0)
-				tor_angles.push_back(std::fmod(tor_ang, 360.0) + 360.0);
-			else 
-				tor_angles.push_back(std::fmod(tor_ang, 360.0));
-		}
-
 		if (!tor_angles.empty()) {
 			const Atom* const* match_atoms = match->getAtoms();
 				
@@ -381,7 +372,7 @@ void ConfGen::TorsionDriverImpl::assignTorsionAngles(FragmentTreeNode* node)
 	}
 }
 
-const ConfGen::TorsionRuleMatch* ConfGen::TorsionDriverImpl::getMatchingTorsionRule(const Chem::Bond& bond)
+const ConfGen::TorsionRuleMatch* ConfGen::TorsionDriverImpl::getTorsionRuleAngles(const Chem::Bond& bond, FragmentTreeNode::DoubleArray& tor_angles)
 {
 	using namespace Chem;
 
@@ -403,7 +394,107 @@ const ConfGen::TorsionRuleMatch* ConfGen::TorsionDriverImpl::getMatchingTorsionR
 	if (!have_matches)
 		return 0;
 
-	return &torRuleMatcher.getMatch(0); 
+	bool alter_120 = false;
+	bool alter_180 = false;
+
+	const TorsionRuleMatch& match = torRuleMatcher.getMatch(0);
+	const TorsionRule& rule = match.getRule();
+
+	if (torRuleMatcher.getNumMatches() > 1) {
+		for (std::size_t i = 0; i < 2; i++) {
+			const Atom& atom = bond.getAtom(i);
+
+			if (haveUniqueTorsionReferenceAtom(atom))
+				continue;
+
+			switch (getTorsionAngleIncrement(atom)) {
+
+				case 120:
+					alter_120 = true;
+					continue;
+
+				case 180:
+					alter_180 = true;
+
+				default:
+					continue;
+			}
+		}
+	}
+
+	for (TorsionRule::ConstAngleEntryIterator it = rule.getAnglesBegin(), end = rule.getAnglesEnd(); it != end; ++it) {
+		double angle = it->getAngle();
+
+		// normalize angle to range [0, 360)
+
+		if (angle < 0.0)
+			angle = std::fmod(angle, 360.0) + 360.0;
+		else 
+			angle = std::fmod(angle, 360.0);
+			
+		tor_angles.push_back(angle);
+
+		if (alter_120) {
+			tor_angles.push_back(std::fmod(angle + 120.0, 360.0));
+			tor_angles.push_back(std::fmod(angle + 240.0, 360.0));
+		}
+
+		if (alter_180)
+			tor_angles.push_back(std::fmod(angle + 180.0, 360.0));
+	}
+
+	return &match; 
+}
+
+bool ConfGen::TorsionDriverImpl::haveUniqueTorsionReferenceAtom(const Chem::Atom& atom) const
+{
+	using namespace Chem;
+
+	const Atom* ref_atom = 0;
+
+	for (TorsionRuleMatcher::ConstMatchIterator it = torRuleMatcher.getMatchesBegin(), end = torRuleMatcher.getMatchesEnd(); it != end; ++it) {
+		const TorsionRuleMatch& match = *it;
+
+		if (match.getAtoms()[1] == &atom) {
+			if (ref_atom && match.getAtoms()[0] != ref_atom)
+				return false;
+
+			ref_atom = match.getAtoms()[0];
+
+		} else {
+			if (ref_atom && match.getAtoms()[3] != ref_atom)
+				return false;
+
+			ref_atom = match.getAtoms()[3];
+		}
+	}
+
+	return true;
+}
+
+std::size_t ConfGen::TorsionDriverImpl::getTorsionAngleIncrement(const Chem::Atom& atom) const
+{
+	using namespace Chem;
+
+	if (getAromaticityFlag(atom))
+		return 180;
+
+	switch (getHybridizationState(atom)) {
+
+		case HybridizationState::SP3:
+			if (getType(atom) == AtomType::N && isPlanarNitrogen(atom, *fragTree.getMolecularGraph()))
+				return 180;
+
+			return 120;
+
+		case HybridizationState::SP2:
+			return 180;
+
+		default:
+			break;
+	}
+
+	return 0;
 }
 
 std::size_t ConfGen::TorsionDriverImpl::getRotationalSymmetry(const Chem::Bond& bond)
@@ -412,7 +503,6 @@ std::size_t ConfGen::TorsionDriverImpl::getRotationalSymmetry(const Chem::Bond& 
 
 	std::size_t simple_sym = std::max(getRotationalSymmetry(bond.getBegin(), bond),
 									  getRotationalSymmetry(bond.getEnd(), bond));
-
 	if (simple_sym > 1)
 		return simple_sym;
 

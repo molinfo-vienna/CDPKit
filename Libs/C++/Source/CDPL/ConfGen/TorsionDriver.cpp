@@ -87,7 +87,7 @@ unsigned int ConfGen::TorsionDriver::setup(const Chem::MolecularGraph& molgraph)
 {
 	impl->setup(molgraph);
 
-	if (!impl->setMMFF94Parameters(molgraph))
+	if (!impl->setMMFF94Parameters())
 		return ReturnCode::FORCEFIELD_SETUP_FAILED;
 
 	return ReturnCode::SUCCESS;
@@ -97,7 +97,7 @@ unsigned int ConfGen::TorsionDriver::setup(const Chem::MolecularGraph& molgraph,
 {
 	impl->setup(molgraph, bond_mask);
 
-	if (!impl->setMMFF94Parameters(molgraph))
+	if (!impl->setMMFF94Parameters())
 		return ReturnCode::FORCEFIELD_SETUP_FAILED;
 
 	return ReturnCode::SUCCESS;

@@ -44,6 +44,7 @@
 #include "CDPL/Util/BitSet.hpp"
 
 #include "FragmentTree.hpp"
+#include "FragmentTreeNode.hpp"
 #include "ForceFieldInteractionMask.hpp"
 
 
@@ -85,7 +86,7 @@ namespace CDPL
 
 			void setMMFF94Parameters(const ForceField::MMFF94InteractionData& ia_data, ForceFieldInteractionMask& ia_mask);
 			void setMMFF94Parameters(const ForceField::MMFF94InteractionData& ia_data);
-			bool setMMFF94Parameters(const Chem::MolecularGraph& molgraph);
+			bool setMMFF94Parameters();
 
 			void clearInputCoordinates();
 			void clearInputCoordinates(std::size_t frag_idx);
@@ -133,7 +134,11 @@ namespace CDPL
 
 			void assignTorsionAngles(FragmentTreeNode* node);
 
-			const ConfGen::TorsionRuleMatch* getMatchingTorsionRule(const Chem::Bond& bond);
+			const ConfGen::TorsionRuleMatch* getTorsionRuleAngles(const Chem::Bond& bond, FragmentTreeNode::DoubleArray& tor_angles);
+
+			bool haveUniqueTorsionReferenceAtom(const Chem::Atom& atom) const;
+
+			std::size_t getTorsionAngleIncrement(const Chem::Atom& atom) const;
 
 			std::size_t getRotationalSymmetry(const Chem::Bond& bond);
 			std::size_t getRotationalSymmetry(const Chem::Atom& atom, const Chem::Bond& bond) const;
@@ -153,8 +158,6 @@ namespace CDPL
 			Chem::FragmentList            fragments;
 			MMFF94ParameterizerPtr        mmff94Parameterizer;
 			MMFF94InteractionDataPtr      mmff94Data;
-			Util::BitSet                  torRefAtomMask1;
-			Util::BitSet                  torRefAtomMask2;
 			Util::BitSet                  rotBondMask;
 			BondList                      rotBonds;
 			ForceFieldInteractionMask     mmff94InteractionMask;
