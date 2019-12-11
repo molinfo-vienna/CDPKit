@@ -44,9 +44,10 @@
 #include "CDPL/ForceField/Exceptions.hpp"
 
 #include "TorsionDriverImpl.hpp"
+#include "FragmentTreeNode.hpp"
 #include "FallbackTorsionLibrary.hpp"
 
-
+//#include <iostream>
 using namespace CDPL;
 
 
@@ -65,7 +66,44 @@ namespace
 	    { Chem::parseSMARTS("[*:1]-[*X2:1]#[*X2]-[*,#1;X1]"), 360 },
 	    { Chem::parseSMARTS("[*:1]-[*X2:1]#[*X1]"), 360 }
 	};
-	
+
+	double normalizeAngle(double angle)
+	{
+		// normalize angle to range [0, 360)
+
+		if (angle < 0.0)
+			return std::fmod(angle, 360.0) + 360.0;
+
+		return std::fmod(angle, 360.0);
+	}
+
+	const double MIN_TORSION_ANGLE_DISTANCE = 20.0;
+
+	bool containsCloseTorsionAngle(double angle, const ConfGen::TorsionRule& rule)
+	{
+		for (ConfGen::TorsionRule::ConstAngleEntryIterator it = rule.getAnglesBegin(), end = rule.getAnglesEnd(); it != end; ++it) {
+			double rule_angle = normalizeAngle(it->getAngle());
+			double MIN_TORSION_ANGLE_DISTANCE = it->getTolerance1();
+
+			if (angle < rule_angle) {
+				if ((rule_angle - angle) < MIN_TORSION_ANGLE_DISTANCE)
+					return true;
+				
+				if ((angle + 360.0 - rule_angle) < MIN_TORSION_ANGLE_DISTANCE)
+					return true;
+				
+			} else {
+				if ((angle - rule_angle) < MIN_TORSION_ANGLE_DISTANCE)
+					return true;
+				
+				if ((rule_angle + 360.0 - angle) < MIN_TORSION_ANGLE_DISTANCE)
+					return true;
+			}
+		}
+
+		return false;
+	}
+
 	const std::size_t MAX_CONF_DATA_CACHE_SIZE = 10000;
 }
 
@@ -151,10 +189,9 @@ bool ConfGen::TorsionDriverImpl::setMMFF94Parameters()
 	if (!mmff94Data.get())
 		mmff94Data.reset(new MMFF94InteractionData());
 
-	mmff94Parameterizer->strictParameterization(settings.strictForceFieldParameterization());
-
 	try {
-		if (parameterizeMMFF94Interactions(molgraph, *mmff94Parameterizer, *mmff94Data, settings.getForceFieldType()) != ReturnCode::SUCCESS)
+		if (parameterizeMMFF94Interactions(molgraph, *mmff94Parameterizer, *mmff94Data, settings.getForceFieldType(),
+										   settings.strictForceFieldParameterization()) != ReturnCode::SUCCESS)
 			return false;
 
 	} catch (const Error&) {
@@ -271,7 +308,15 @@ ConfGen::FragmentTreeNode& ConfGen::TorsionDriverImpl::getFragmentNode(std::size
 
 unsigned int ConfGen::TorsionDriverImpl::generateConformers()
 {
-	return fragTree.getRoot()->generateConformers(settings.orderByEnergy());
+	unsigned int ret_code = fragTree.getRoot()->generateConformers();
+
+	if (ret_code != ReturnCode::SUCCESS)
+		return ret_code;
+
+	if (settings.orderByEnergy())
+		fragTree.getRoot()->orderConformersByEnergy();
+	
+	return ReturnCode::SUCCESS;
 }
 
 std::size_t ConfGen::TorsionDriverImpl::getNumConformers() const
@@ -281,7 +326,7 @@ std::size_t ConfGen::TorsionDriverImpl::getNumConformers() const
 
 ConfGen::ConformerData& ConfGen::TorsionDriverImpl::getConformer(std::size_t idx)
 {
-	return *fragTree.getRoot()->getConformers()[idx];
+	return fragTree.getRoot()->getConformer(idx);
 }
 
 ConfGen::TorsionDriverImpl::ConstConformerIterator ConfGen::TorsionDriverImpl::getConformersBegin() const
@@ -321,28 +366,24 @@ void ConfGen::TorsionDriverImpl::assignTorsionAngles(FragmentTreeNode* node)
 		return;
 
 	const Atom* const* bond_atoms = node->getSplitBondAtoms();
-	FragmentTreeNode::TorsionAngleArray& tor_angles = node->getTorsionAngles();
+	const TorsionRuleMatch* match = getTorsionRuleAngles(*bond, node);
 
-	const TorsionRuleMatch* match = getTorsionRuleAngles(*bond, tor_angles);
-
-	if (match) {
-		if (!tor_angles.empty()) {
-			const Atom* const* match_atoms = match->getAtoms();
+	if (match && node->getNumTorsionAngles() != 0) {
+		const Atom* const* match_atoms = match->getAtoms();
 				
-			if (match_atoms[1] == bond_atoms[0])
-				node->setTorsionReferenceAtoms(match_atoms[0], match_atoms[3]);
-			else
-				node->setTorsionReferenceAtoms(match_atoms[3], match_atoms[0]);
-		}
+		if (match_atoms[1] == bond_atoms[0])
+			node->setTorsionReferenceAtoms(match_atoms[0], match_atoms[3]);
+		else
+			node->setTorsionReferenceAtoms(match_atoms[3], match_atoms[0]);
 	}
 		
-	if (tor_angles.empty()) {
+	if (node->getNumTorsionAngles() == 0) {
 		// fallback: rotation in 30° steps
 
 		std::size_t rot_sym = getRotationalSymmetry(*bond);
 
 		for (std::size_t i = 0, num_angles = 12 / rot_sym; i < num_angles; i++) 
-			tor_angles.push_back(i * 30.0);
+			node->addTorsionAngle(i * 30.0, 0.0);
 
 		node->setTorsionReferenceAtoms(getFirstNeighborAtom(bond_atoms[0], bond_atoms[1], node), 
 									   getFirstNeighborAtom(bond_atoms[1], bond_atoms[0], node));
@@ -350,29 +391,11 @@ void ConfGen::TorsionDriverImpl::assignTorsionAngles(FragmentTreeNode* node)
 		if (!node->getTorsionReferenceAtoms()[0] || !node->getTorsionReferenceAtoms()[1])
 			node->setTorsionReferenceAtoms(0, 0);
 
-	} else if (tor_angles.size() > 1) {
-		std::size_t rot_sym = getRotationalSymmetry(*bond);
-
-		if (rot_sym == 360) {
-			tor_angles.resize(1);
-
-		} else {
-			double ident_rot_ang = 360.0 / rot_sym; 
-
-			for (FragmentTreeNode::TorsionAngleArray::iterator it = tor_angles.begin(), end = tor_angles.end(); it != end; ++it) {
-				double& tor_ang = *it;
-
-				tor_ang = std::fmod(tor_ang, ident_rot_ang);
-			}
-
-			std::sort(tor_angles.begin(), tor_angles.end());
-		
-			tor_angles.erase(std::unique(tor_angles.begin(), tor_angles.end()), tor_angles.end());
-		}
-	}
+	} else if (node->getNumTorsionAngles() > 1) 
+		node->pruneTorsionAngles(getRotationalSymmetry(*bond));
 }
 
-const ConfGen::TorsionRuleMatch* ConfGen::TorsionDriverImpl::getTorsionRuleAngles(const Chem::Bond& bond, FragmentTreeNode::DoubleArray& tor_angles)
+const ConfGen::TorsionRuleMatch* ConfGen::TorsionDriverImpl::getTorsionRuleAngles(const Chem::Bond& bond, FragmentTreeNode* node)
 {
 	using namespace Chem;
 
@@ -423,26 +446,38 @@ const ConfGen::TorsionRuleMatch* ConfGen::TorsionDriverImpl::getTorsionRuleAngle
 	}
 
 	for (TorsionRule::ConstAngleEntryIterator it = rule.getAnglesBegin(), end = rule.getAnglesEnd(); it != end; ++it) {
-		double angle = it->getAngle();
-
-		// normalize angle to range [0, 360)
-
-		if (angle < 0.0)
-			angle = std::fmod(angle, 360.0) + 360.0;
-		else 
-			angle = std::fmod(angle, 360.0);
+		double angle = normalizeAngle(it->getAngle());
+		double tol = it->getTolerance1();
 			
-		tor_angles.push_back(angle);
+		node->addTorsionAngle(angle, tol);
 
 		if (alter_120) {
-			tor_angles.push_back(std::fmod(angle + 120.0, 360.0));
-			tor_angles.push_back(std::fmod(angle + 240.0, 360.0));
+			double alt_ang = std::fmod(angle + 120.0, 360.0);
+
+			if (!containsCloseTorsionAngle(alt_ang, rule))
+				node->addTorsionAngle(alt_ang, tol);
+
+			alt_ang = std::fmod(angle + 240.0, 360.0);
+
+			if (!containsCloseTorsionAngle(alt_ang, rule))
+				node->addTorsionAngle(alt_ang, tol);
 		}
 
-		if (alter_180)
-			tor_angles.push_back(std::fmod(angle + 180.0, 360.0));
-	}
+		if (alter_180) {
+			double alt_ang = std::fmod(angle + 180.0, 360.0);
 
+			if (!containsCloseTorsionAngle(alt_ang, rule))
+				node->addTorsionAngle(alt_ang, tol);
+		}
+	}
+/*
+	std::cerr << rule.getMatchPatternString() << ": ";
+
+	for (std::size_t i = 0; i < node->getNumTorsionAngles(); i++) 
+		std::cerr << node->getTorsionAngles()[i].first << " ";
+		
+	std::cerr << std::endl;
+*/	
 	return &match; 
 }
 

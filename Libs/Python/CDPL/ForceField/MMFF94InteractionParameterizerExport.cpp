@@ -40,9 +40,6 @@ void CDPLPythonForceField::exportMMFF94InteractionParameterizer()
     using namespace boost;
     using namespace CDPL;
 
-	typedef void (ForceField::MMFF94InteractionParameterizer::*SetBoolFunc)(bool);
-	typedef bool (ForceField::MMFF94InteractionParameterizer::*GetBoolFunc)() const;
-
     python::class_<ForceField::MMFF94InteractionParameterizer, ForceField::MMFF94InteractionParameterizer::SharedPointer>("MMFF94InteractionParameterizer", python::no_init)
 		.def(python::init<bool>((python::arg("self"), python::arg("param_set") = ForceField::MMFF94ParameterSet::STATIC)))
 		.def(python::init<const ForceField::MMFF94InteractionParameterizer&>((python::arg("self"), python::arg("parameterizer"))))
@@ -61,7 +58,8 @@ void CDPLPythonForceField::exportMMFF94InteractionParameterizer()
 			 (python::arg("self"), python::arg("func"))) 
 		.def("setVanDerWaalsFilterFunction", &ForceField::MMFF94InteractionParameterizer::setVanDerWaalsFilterFunction, 
 			 (python::arg("self"), python::arg("func"))) 
-		.def("clearFilterFunctions", &ForceField::MMFF94InteractionParameterizer::clearFilterFunctions, python::arg("self"))
+		.def("clearFilterFunctions", &ForceField::MMFF94InteractionParameterizer::clearFilterFunctions, 
+			 python::arg("self"))
 		.def("setSymbolicAtomTypePatternTable", &ForceField::MMFF94InteractionParameterizer::setSymbolicAtomTypePatternTable, 
 			 (python::arg("self"), python::arg("table")))
 		.def("setHeavyToHydrogenAtomTypeMap", &ForceField::MMFF94InteractionParameterizer::setHeavyToHydrogenAtomTypeMap, 
@@ -96,14 +94,11 @@ void CDPLPythonForceField::exportMMFF94InteractionParameterizer()
 			 (python::arg("self"), python::arg("table")))
 		.def("setVanDerWaalsParameterTable", &ForceField::MMFF94InteractionParameterizer::setVanDerWaalsParameterTable, 
 			 (python::arg("self"), python::arg("table")))
-		.def("useParameterSet", &ForceField::MMFF94InteractionParameterizer::useParameterSet, (python::arg("self"), python::arg("param_set")))
-		.def("strictParameterization", SetBoolFunc(&ForceField::MMFF94InteractionParameterizer::strictParameterization), 
-			 (python::arg("self"), python::arg("strict")))
-		.def("strictParameterization", GetBoolFunc(&ForceField::MMFF94InteractionParameterizer::strictParameterization), python::arg("self"))
+		.def("setParameterSet", &ForceField::MMFF94InteractionParameterizer::setParameterSet, 
+			 (python::arg("self"), python::arg("param_set")))
 		.def("assign", CDPLPythonBase::copyAssOp(&ForceField::MMFF94InteractionParameterizer::operator=),
 			 (python::arg("self"), python::arg("parameterizer")), python::return_self<>())
 		.def("parameterize", &ForceField::MMFF94InteractionParameterizer::parameterize, 
-			 (python::arg("self"), python::arg("molgraph"), python::arg("ia_data"), python::arg("ia_types") = ForceField::InteractionType::ALL))
-		.add_property("strictParam", GetBoolFunc(&ForceField::MMFF94InteractionParameterizer::strictParameterization), 
-					  SetBoolFunc(&ForceField::MMFF94InteractionParameterizer::strictParameterization));
+			 (python::arg("self"), python::arg("molgraph"), python::arg("ia_data"), 
+			  python::arg("ia_types") = ForceField::InteractionType::ALL, python::arg("strict") = true));
 }

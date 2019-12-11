@@ -153,16 +153,12 @@ namespace CDPL
 
 			void setVanDerWaalsParameterTable(const MMFF94VanDerWaalsParameterTable::SharedPointer& table);
 
-			void useParameterSet(unsigned int param_set);
-
-			void strictParameterization(bool strict);
-	
-			bool strictParameterization() const;
+			void setParameterSet(unsigned int param_set);
 
 			MMFF94InteractionParameterizer& operator=(const MMFF94InteractionParameterizer& parameterizer);
 
 			void parameterize(const Chem::MolecularGraph& molgraph, MMFF94InteractionData& ia_data,
-							  unsigned int ia_types = InteractionType::ALL);
+							  unsigned int ia_types = InteractionType::ALL, bool strict = true);
 
 		  private:
 			void setPropertyFunctions();
@@ -180,9 +176,9 @@ namespace CDPL
 			std::size_t getTopologicalDistance(const Chem::Atom& atom1, const Chem::Atom& atom2, 
 											   const Chem::MolecularGraph& molgraph) const;
 
-			void setup(const Chem::MolecularGraph& molgraph, unsigned int ia_types);
+			void setup(const Chem::MolecularGraph& molgraph, unsigned int ia_types, bool strict);
 			void setupAromaticRingSet();
-			void setupAtomTypes();
+			void setupAtomTypes(bool strict);
 			void setupBondTypeIndices();
 			void setupAtomCharges();
 			void setupTopDistances();
@@ -205,7 +201,6 @@ namespace CDPL
 			Util::SArray                                    symAtomTypes;   
 			Util::UIArray                                   bondTypeIndices;   
 			Util::DArray                                    atomCharges;
-			bool                                            strictParam;
 			const Chem::MolecularGraph*                     molGraph;
 		};			
     

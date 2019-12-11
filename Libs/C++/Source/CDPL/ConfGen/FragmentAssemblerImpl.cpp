@@ -35,6 +35,7 @@
 #include "CDPL/ConfGen/ReturnCode.hpp"
 #include "CDPL/ConfGen/NitrogenEnumerationMode.hpp"
 #include "CDPL/ConfGen/FragmentType.hpp"
+#include "CDPL/ConfGen/TorsionLibrary.hpp"
 #include "CDPL/Chem/MolecularGraphFunctions.hpp"
 #include "CDPL/Chem/AtomContainerFunctions.hpp"
 #include "CDPL/Chem/Entity3DFunctions.hpp"
@@ -58,8 +59,8 @@ using namespace CDPL;
 namespace
 {
 
-   const char* ASSEMBLER_TORSION_RULES = 
-	   " <library name=\"FragmentAssemblerRules\">"
+   const char* ASSEMBLER_TOR_LIB_DATA = 
+	   " <library name=\"FragmentAssemblerTorsionLibrary\">"
 	   "  <category name=\"GG\" atomType1=\"*\" atomType2=\"*\">"
 	   "   <rule pattern=\"[*,#1:1]~[*X3:2]=[*X2:3]=[*X3]~[*,#1:4]\">"
 	   "    <torsions>"
@@ -79,7 +80,7 @@ namespace
 	struct Init {
 
 		Init() {
-			ConfGen::TorsionLibraryDataReader().read(ASSEMBLER_TORSION_RULES, *assemblerTorLib);
+			ConfGen::TorsionLibraryDataReader().read(ASSEMBLER_TOR_LIB_DATA, *assemblerTorLib);
 		}
 	};
 
@@ -166,7 +167,7 @@ std::size_t ConfGen::FragmentAssemblerImpl::getNumConformers() const
 
 ConfGen::ConformerData& ConfGen::FragmentAssemblerImpl::getConformer(std::size_t idx)
 {
-	return *fragTree.getRoot()->getConformers()[idx];
+	return fragTree.getRoot()->getConformer(idx);
 }
 
 ConfGen::FragmentAssemblerImpl::ConstConformerIterator ConfGen::FragmentAssemblerImpl::getConformersBegin() const
@@ -202,7 +203,7 @@ unsigned int ConfGen::FragmentAssemblerImpl::assemble(const Chem::MolecularGraph
 
 	assignLinkBondTorsions(fragTree.getRoot());
 
-	return fragTree.getRoot()->generateConformers(false);
+	return fragTree.getRoot()->generateConformers();
 }
 
 void ConfGen::FragmentAssemblerImpl::init(const Chem::MolecularGraph& parent_molgraph)
@@ -367,8 +368,6 @@ bool ConfGen::FragmentAssemblerImpl::fetchConformersFromFragmentLibrary(unsigned
 				num_confs = 1;
 		}
 
-		node->getConformers().reserve(num_confs);
-
 		for (std::size_t i = 0; i < num_confs; i++)
 			node->addConformer(allocConformerData());
 
@@ -408,7 +407,6 @@ unsigned int ConfGen::FragmentAssemblerImpl::generateFragmentConformers(unsigned
 	if (ret_code != ReturnCode::SUCCESS && ret_code != ReturnCode::FRAGMENT_CONF_GEN_TIMEOUT) 
 		return ret_code;
 
-	node->getConformers().reserve(fragConfGen.getNumConformers());
 	std::size_t num_confs = fragConfGen.getNumConformers();
 
 	if (frag_type == FragmentType::FLEXIBLE_RING_SYSTEM && !settings.enumerateRings()) {
@@ -453,8 +451,8 @@ void ConfGen::FragmentAssemblerImpl::fixBondLengths(const Chem::Fragment& frag, 
 
 	const Util::BitSet& core_atom_mask = node->getCoreAtomMask();
 
-	ConformerDataArray::iterator confs_beg = node->getConformers().begin();
-	ConformerDataArray::iterator confs_end = node->getConformers().end();
+	ConformerDataArray::const_iterator confs_beg = node->getConformers().begin();
+	ConformerDataArray::const_iterator confs_end = node->getConformers().end();
 
 	for (Fragment::ConstBondIterator it = frag.getBondsBegin(), end = frag.getBondsEnd(); it != end; ++it) {
 		const Bond& bond = *it;
@@ -490,7 +488,7 @@ void ConfGen::FragmentAssemblerImpl::fixBondLengths(const Chem::Fragment& frag, 
 		if (bond_len <= 0.0)
 			continue;
 
-		for (ConformerDataArray::iterator conf_it = confs_beg; conf_it != confs_end; ++conf_it) {
+		for (ConformerDataArray::const_iterator conf_it = confs_beg; conf_it != confs_end; ++conf_it) {
 			Math::Vector3DArray::StorageType& conf_coords_data = (*conf_it)->getData();
 
 			conf_coords_data[atom2_idx].minusAssign(conf_coords_data[atom1_idx]);
@@ -765,10 +763,7 @@ void ConfGen::FragmentAssemblerImpl::invertConfiguration(const Chem::Atom& ctr_a
 			node->addConformer(inv_conf);
 
 		} else {
-			for (std::size_t j = 0; j < num_atoms; j++) {
-				if (!tmpBitSet.test(j)) 
-					continue;
-
+			for (Util::BitSet::size_type j = tmpBitSet.find_first(); j != Util::BitSet::npos; j = tmpBitSet.find_next(j)) {
 				Math::Vector3D& subst_atom_pos = conf_coords_data[atom_inds[j]];
 
 				inv_atom_vec.assign(subst_atom_pos - ctr_atom_pos);
@@ -813,13 +808,10 @@ void ConfGen::FragmentAssemblerImpl::invertConfiguration(const Chem::Bond& bond,
 
 		rot_quat.set(0.0, rot_axis[0] / rot_axis_norm, rot_axis[1] / rot_axis_norm, rot_axis[2] / rot_axis_norm); // rotate by 180°
 
-		for (std::size_t j = 0; j < num_atoms; j++) {
-			if (!tmpBitSet.test(j)) 
-				continue;
-
+		for (Util::BitSet::size_type j = tmpBitSet.find_first(); j != Util::BitSet::npos; j = tmpBitSet.find_next(j)) {
 			Math::Vector3D& subst_atom_pos = conf_coords_data[atom_inds[j]];
 
-			subst_atom_vec.assign(subst_atom_vec - bond_atom2_pos);
+			subst_atom_vec.assign(subst_atom_pos - bond_atom2_pos);
 			subst_atom_pos.assign(rotate(rot_quat, subst_atom_vec) + bond_atom2_pos);
 		}
 	}
@@ -953,14 +945,12 @@ void ConfGen::FragmentAssemblerImpl::assignLinkBondTorsions(FragmentTreeNode* no
 		return;
 
 	const Atom* const* bond_atoms = node->getSplitBondAtoms();
-	FragmentTreeNode::TorsionAngleArray& tor_angles = node->getTorsionAngles();
-
 	const TorsionRuleMatch* match = getMatchingTorsionRule(*bond);
 
 	if (match && match->getRule().getNumAngles() > 0) {
 		TorsionRule::ConstAngleEntryIterator it = std::max_element(match->getRule().getAnglesBegin(), match->getRule().getAnglesEnd(),
 																   boost::bind(&compTorsionAngleEntryScore, _1, _2));
-		tor_angles.push_back(it->getAngle());
+		node->addTorsionAngle(it->getAngle(), 0.0);
 
 		const Atom* const* match_atoms = match->getAtoms();
 				
@@ -998,7 +988,7 @@ void ConfGen::FragmentAssemblerImpl::assignLinkBondTorsions(FragmentTreeNode* no
 				else
 					node->setTorsionReferenceAtoms(ref_atoms[3], ref_atoms[0]);
 
-				tor_angles.push_back(config == BondConfiguration::CIS ? 0.0 : 180.0);
+				node->addTorsionAngle(config == BondConfiguration::CIS ? 0.0 : 180.0, 0.0);
 				return;
 			}
 		} 
@@ -1017,7 +1007,7 @@ void ConfGen::FragmentAssemblerImpl::assignLinkBondTorsions(FragmentTreeNode* no
 		return;
 
 	node->setTorsionReferenceAtoms(ref_atom1, ref_atom2);
-	tor_angles.push_back(180.0);
+	node->addTorsionAngle(180.0, 0.0);
 }
 
 const ConfGen::TorsionRuleMatch* ConfGen::FragmentAssemblerImpl::getMatchingTorsionRule(const Chem::Bond& bond)
@@ -1028,7 +1018,12 @@ const ConfGen::TorsionRuleMatch* ConfGen::FragmentAssemblerImpl::getMatchingTors
 
 	if (torRuleMatcher.findMatches(bond, molgraph, false)) 
 		return &torRuleMatcher.getMatch(0); 
-	
+
+	torRuleMatcher.setTorsionLibrary(TorsionLibrary::get());
+
+	if (torRuleMatcher.findMatches(bond, molgraph, false)) 
+		return &torRuleMatcher.getMatch(0); 
+
 	torRuleMatcher.setTorsionLibrary(getFallbackTorsionLibrary());
 
 	if (torRuleMatcher.findMatches(bond, molgraph, false)) 

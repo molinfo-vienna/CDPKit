@@ -44,7 +44,6 @@
 #include "CDPL/Util/BitSet.hpp"
 
 #include "FragmentTree.hpp"
-#include "FragmentTreeNode.hpp"
 #include "ForceFieldInteractionMask.hpp"
 
 
@@ -134,7 +133,7 @@ namespace CDPL
 
 			void assignTorsionAngles(FragmentTreeNode* node);
 
-			const ConfGen::TorsionRuleMatch* getTorsionRuleAngles(const Chem::Bond& bond, FragmentTreeNode::DoubleArray& tor_angles);
+			const ConfGen::TorsionRuleMatch* getTorsionRuleAngles(const Chem::Bond& bond, FragmentTreeNode* node);
 
 			bool haveUniqueTorsionReferenceAtom(const Chem::Atom& atom) const;
 

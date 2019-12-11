@@ -235,10 +235,9 @@ bool ConfGen::FragmentConformerGeneratorImpl::generateConformerFromInputCoordina
 
 bool ConfGen::FragmentConformerGeneratorImpl::setupForceField()
 {
-	mmff94Parameterizer.strictParameterization(settings.strictForceFieldParameterization());
-
 	try {
-		if (parameterizeMMFF94Interactions(*molGraph, mmff94Parameterizer, mmff94Data, settings.getForceFieldType()) != ReturnCode::SUCCESS)
+		if (parameterizeMMFF94Interactions(*molGraph, mmff94Parameterizer, mmff94Data, settings.getForceFieldType(),
+										   settings.strictForceFieldParameterization()) != ReturnCode::SUCCESS)
 			return false;
 
 	} catch (const ForceField::Error&) {

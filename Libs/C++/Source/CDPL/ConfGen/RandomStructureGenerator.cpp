@@ -63,10 +63,10 @@ unsigned int ConfGen::RandomStructureGenerator::setup(const Chem::MolecularGraph
 {
 	molGraph = 0;
 
-	mmff94Parameterizer.strictParameterization(settings.strictForceFieldParameterization());
-
 	try {
-		parameterizeMMFF94Interactions(molgraph, mmff94Parameterizer, mmff94Data, settings.getForceFieldType());
+		if (parameterizeMMFF94Interactions(molgraph, mmff94Parameterizer, mmff94Data, settings.getForceFieldType(),
+										   settings.strictForceFieldParameterization()) != ReturnCode::SUCCESS)
+			return ReturnCode::FORCEFIELD_SETUP_FAILED;
 
 	} catch (const ForceField::Error& e) {
 		return ReturnCode::FORCEFIELD_SETUP_FAILED;

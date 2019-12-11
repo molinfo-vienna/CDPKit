@@ -33,6 +33,7 @@
 
 #include <cstddef>
 #include <vector>
+#include <utility>
 
 #include "CDPL/ConfGen/ConformerDataArray.hpp"
 #include "CDPL/ForceField/MMFF94InteractionData.hpp"
@@ -63,8 +64,8 @@ namespace CDPL
 
 		public:
 			typedef std::vector<std::size_t> IndexArray;
-			typedef std::vector<double> TorsionAngleArray;	
-			typedef std::vector<double> DoubleArray;	
+			typedef std::pair<double, double> TorsionAngle;
+			typedef std::vector<TorsionAngle> TorsionAngleArray;	
 
 			const FragmentTreeNode* getParent() const;
 			FragmentTreeNode* getParent();
@@ -93,7 +94,11 @@ namespace CDPL
 
 			const TorsionAngleArray& getTorsionAngles() const;
 
-			TorsionAngleArray& getTorsionAngles();
+			void addTorsionAngle(double angle, double tol);
+
+			void pruneTorsionAngles(std::size_t rot_sym);
+
+			std::size_t getNumTorsionAngles() const;
 
 			ForceField::MMFF94InteractionData& getMMFF94Parameters();
 
@@ -103,10 +108,13 @@ namespace CDPL
 									  ForceFieldInteractionMask& ia_mask);
 
 			const ConformerDataArray& getConformers() const;
-			ConformerDataArray& getConformers();
 
 			std::size_t getNumConformers() const;
+
+			ConformerData& getConformer(std::size_t idx) const;
 			
+			void orderConformersByEnergy();
+
 			void clearConformers();
 			void clearConformersDownwards();
 			void clearConformersUpwards();
@@ -115,7 +123,7 @@ namespace CDPL
 			void addConformer(const ConformerData& conf_data);
 			void addConformer(const ConformerData::SharedPointer& conf_data);
 
-			unsigned int generateConformers(bool e_ordered);
+			unsigned int generateConformers();
 
 			double calcMMFF94Energy(const Math::Vector3DArray& coords) const;
 		
@@ -125,8 +133,8 @@ namespace CDPL
 
 			FragmentTreeNode& operator=(const FragmentTreeNode&);
 
-			unsigned int lineupChildConformers();
-			unsigned int alignAndRotateChildConformers();
+			void lineupChildConformers();
+			void alignAndRotateChildConformers();
 
 			void setParent(FragmentTreeNode* node);
 
@@ -140,7 +148,7 @@ namespace CDPL
 
 			void clearTorsionDrivingData();
 
-			void calcConformerBounds(Math::Vector3D& min, Math::Vector3D& max, const IndexArray& atom_inds,
+			void calcConformerBounds(double min[3], double max[3], const IndexArray& atom_inds,
 									 const Math::Vector3DArray& coords) const;
 
 			void copyCoordinates(const Math::Vector3DArray& src_coords, const IndexArray& atom_inds, 
@@ -170,6 +178,8 @@ namespace CDPL
 
 			unsigned int invokeCallbacks() const;
 
+			typedef std::vector<double> DoubleArray;
+
 			FragmentTree&                       owner;
 			FragmentTreeNode*                   parent;
 			const Chem::Bond*                   splitBond;
@@ -185,7 +195,6 @@ namespace CDPL
 			DoubleArray                         torsionAngleCosines;
 			DoubleArray                         torsionAngleSines;
 			ForceField::MMFF94InteractionData   mmff94Data;
-			Math::Vector3DArray                 childConfBounds;
 			bool                                changed;
 		};
     }

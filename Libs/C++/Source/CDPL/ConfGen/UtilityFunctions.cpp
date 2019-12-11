@@ -456,7 +456,7 @@ void ConfGen::prepareForConformerGeneration(Chem::Molecule& mol, bool canon)
 }
 
 unsigned int ConfGen::parameterizeMMFF94Interactions(const Chem::MolecularGraph& molgraph, ForceField::MMFF94InteractionParameterizer& parameterizer,
-											 ForceField::MMFF94InteractionData& param_data, unsigned int ff_type)
+													 ForceField::MMFF94InteractionData& param_data, unsigned int ff_type, bool strict)
 {
 	using namespace ForceField;
 
@@ -465,20 +465,20 @@ unsigned int ConfGen::parameterizeMMFF94Interactions(const Chem::MolecularGraph&
 	switch (ff_type) {
 
 		case ForceFieldType::MMFF94:
-			parameterizer.useParameterSet(MMFF94ParameterSet::DYNAMIC);
+			parameterizer.setParameterSet(MMFF94ParameterSet::DYNAMIC);
 			break;
 
 		case ForceFieldType::MMFF94S:
-			parameterizer.useParameterSet(MMFF94ParameterSet::STATIC);
+			parameterizer.setParameterSet(MMFF94ParameterSet::STATIC);
 			break;
 
 		case ForceFieldType::MMFF94_NO_ESTAT:
-			parameterizer.useParameterSet(MMFF94ParameterSet::DYNAMIC);
+			parameterizer.setParameterSet(MMFF94ParameterSet::DYNAMIC);
 			int_types = InteractionType::ALL ^ InteractionType::ELECTROSTATIC;
 			break;
 
 		case ForceFieldType::MMFF94S_NO_ESTAT:
-			parameterizer.useParameterSet(MMFF94ParameterSet::STATIC);
+			parameterizer.setParameterSet(MMFF94ParameterSet::STATIC);
 			int_types = InteractionType::ALL ^ InteractionType::ELECTROSTATIC;
 			break;
 
@@ -487,7 +487,7 @@ unsigned int ConfGen::parameterizeMMFF94Interactions(const Chem::MolecularGraph&
 			
 	}	
 
-	parameterizer.parameterize(molgraph, param_data, int_types);
+	parameterizer.parameterize(molgraph, param_data, int_types, strict);
 
 	return ReturnCode::SUCCESS;
 } 

@@ -34,6 +34,7 @@
 #include <vector>
 #include <cstddef>
 #include <memory>
+#include <utility>
 
 #include <boost/timer/timer.hpp>
 
@@ -100,11 +101,23 @@ namespace CDPL
 
 		private:
 			struct FragmentConfData;
-			struct FragmentConfCombination;
+			struct ConfCombinationData;
 
+			typedef Util::ObjectPool<FragmentConfData> FragmentConfDataCache;
+			typedef FragmentConfDataCache::SharedObjectPointer FragmentConfDataPtr;
+
+		
 			ConformerGeneratorImpl(const ConformerGeneratorImpl&);
 
 			ConformerGeneratorImpl& operator=(const ConformerGeneratorImpl&);
+
+			unsigned int generateConformers(const Chem::MolecularGraph& molgraph, const Chem::FragmentList& comps);
+	
+			unsigned int combineComponentConformers(const Chem::MolecularGraph& molgraph, bool have_full_ipt_coords);
+
+			void calcConformerBounds(double min[3], double max[3], const Math::Vector3DArray& coords) const;
+
+			unsigned int generateConformers(const Chem::MolecularGraph& molgraph);
 
 			void init(const Chem::MolecularGraph& molgraph);
 
@@ -115,18 +128,19 @@ namespace CDPL
 			unsigned int generateFragmentConformers();
 			
 			unsigned int generateFragmentConformerCombinations();
+		
 			void generateFragmentConformerCombinations(std::size_t frag_idx, double comb_energy);
 
-			unsigned int generateConformers();
+			unsigned int generateOutputConformers();
 
-			unsigned int selectOutputConformers();
+			bool selectOutputConformers();
 
 			double getMMFF94BondLength(std::size_t atom1_idx, std::size_t atom2_idx) const;
 
-			static bool compFragmentConfCombinationEnergy(const FragmentConfCombination* comb1, 
-														  const FragmentConfCombination* comb2);
-			static bool compFragmentConfCount(const FragmentConfData* conf_data1, 
-											  const FragmentConfData* conf_data2);
+			static bool compareConfCombinationEnergy(const ConfCombinationData* comb1, 
+													 const ConfCombinationData* comb2);
+			static bool compareFragmentConfCount(const FragmentConfDataPtr& conf_data1, 
+												 const FragmentConfDataPtr& conf_data2);
 
 			unsigned int invokeCallbacks() const;
 			bool timedout() const;
@@ -140,6 +154,7 @@ namespace CDPL
 				ConformerDataArray            conformers;
 				std::size_t                   lastConfIdx;
 				bool                          isFlexRingSys;
+				bool                          haveInputCoords;
 
 				void clear() {
 					conformers.clear();
@@ -147,7 +162,7 @@ namespace CDPL
 				}
 			};
 
-			struct FragmentConfCombination
+			struct ConfCombinationData
 			{
 
 				UIntArray   confIndices;
@@ -155,19 +170,19 @@ namespace CDPL
 				bool        valid;
 			};
 
-			typedef Util::ObjectStack<FragmentConfData> FragmentConfDataCache;
-			typedef Util::ObjectStack<FragmentConfCombination> FragmentConfCombinationCache;
+
+			typedef Util::ObjectStack<ConfCombinationData> ConfCombinationDataCache;
 			typedef Util::ObjectPool<ConformerData> ConformerDataCache;
+			typedef std::vector<FragmentConfDataPtr> FragmentConfDataList;
 			typedef ForceField::MMFF94InteractionData MMFF94InteractionData;
 			typedef ForceField::MMFF94InteractionParameterizer MMFF94Parameterizer;
 			typedef std::vector<const Chem::Bond*> BondList;
-			typedef std::vector<FragmentConfData*> FragmentConfDataList;
-			typedef std::vector<FragmentConfCombination*> FragmentConfCombinationList;
+			typedef std::vector<ConfCombinationData*> ConfCombinationDataList;
 			typedef std::auto_ptr<RMSDConformerSelector> RMSDConformerSelectorPtr;
 
 			ConformerDataCache           confDataCache;
 			FragmentConfDataCache        fragConfDataCache;
-			FragmentConfCombinationCache fragConfCombCache;
+			ConfCombinationDataCache     confCombDataCache;
 			ConformerGeneratorSettings   settings;
 			const Chem::MolecularGraph*  molGraph;
 			ConformerDataArray           workingConfs;
@@ -188,9 +203,11 @@ namespace CDPL
 			Util::BitSet                 tmpBitSet;
 			Util::BitSet                 invertibleNMask;
 			Util::BitSet                 fixedAtomConfigMask;
-			FragmentConfDataList         torFragConfDataList;
-			FragmentConfCombinationList  torFragConfCombList;
+			FragmentConfDataList         compConfData;
+			FragmentConfDataList         torFragConfData;
+			ConfCombinationDataList      torFragConfCombData;
 			UIntArray                    currConfComb;
+			UIntArray                    parentAtomInds; 
 		};
     }
 }

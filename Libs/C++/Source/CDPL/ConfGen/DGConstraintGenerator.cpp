@@ -297,7 +297,7 @@ void ConfGen::DGConstraintGenerator::addDefaultDistanceConstraints(Util::DG3DCoo
 
 			double cov_rad2 = AtomDictionary::getCovalentRadius(getType(molGraph->getAtom(j)));
 
-			coords_gen.addDistanceConstraint(i, j, (cov_rad1 + cov_rad2) * 1.5, bond_length_sum);
+			coords_gen.addDistanceConstraint(i, j, cov_rad1 + cov_rad2 + 0.5, bond_length_sum);
 			markAtomPairProcessed(i, j);
 		}
 	}

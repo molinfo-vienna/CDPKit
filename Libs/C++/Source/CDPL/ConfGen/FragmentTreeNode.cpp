@@ -100,6 +100,16 @@ namespace
 		}
 	}
 
+	bool compareTorsionAngles(const ConfGen::FragmentTreeNode::TorsionAngle& ang1, const ConfGen::FragmentTreeNode::TorsionAngle& ang2)
+	{
+		return (ang1.first < ang2.first);
+	}
+
+	bool torsionAnglesEqual(const ConfGen::FragmentTreeNode::TorsionAngle& ang1, const ConfGen::FragmentTreeNode::TorsionAngle& ang2)
+	{
+		return (std::abs(ang1.first - ang2.first) < 1.0);
+	}
+
 	bool compareConformerEnergy(const ConfGen::ConformerData::SharedPointer& conf_data1, 
 								const ConfGen::ConformerData::SharedPointer& conf_data2)
 	{
@@ -211,9 +221,34 @@ const ConfGen::FragmentTreeNode::TorsionAngleArray& ConfGen::FragmentTreeNode::g
 	return torsionAngles;
 }
 
-ConfGen::FragmentTreeNode::TorsionAngleArray& ConfGen::FragmentTreeNode::getTorsionAngles()
+void ConfGen::FragmentTreeNode::addTorsionAngle(double angle, double tol)
 {
-	return torsionAngles;
+	torsionAngles.push_back(TorsionAngle(angle, tol));
+}
+
+void ConfGen::FragmentTreeNode::pruneTorsionAngles(std::size_t rot_sym)
+{
+	if (rot_sym == 360) {
+		torsionAngles.resize(1);
+
+	} else {
+		double ident_rot_ang = 360.0 / rot_sym; 
+
+		for (TorsionAngleArray::iterator it = torsionAngles.begin(), end = torsionAngles.end(); it != end; ++it) {
+			double& tor_ang = it->first;
+
+			tor_ang = std::fmod(tor_ang, ident_rot_ang);
+		}
+
+		std::sort(torsionAngles.begin(), torsionAngles.end(), &compareTorsionAngles);
+		
+		torsionAngles.erase(std::unique(torsionAngles.begin(), torsionAngles.end(), &torsionAnglesEqual), torsionAngles.end());
+	}
+}
+
+std::size_t ConfGen::FragmentTreeNode::getNumTorsionAngles() const
+{
+	return torsionAngles.size();
 }
 
 ForceField::MMFF94InteractionData& ConfGen::FragmentTreeNode::getMMFF94Parameters()
@@ -255,14 +290,19 @@ const ConfGen::ConformerDataArray& ConfGen::FragmentTreeNode::getConformers() co
 	return conformers;
 }
 
-ConfGen::ConformerDataArray& ConfGen::FragmentTreeNode::getConformers()
-{
-	return conformers;
-}
-
 std::size_t ConfGen::FragmentTreeNode::getNumConformers() const
 {
 	return conformers.size();
+}
+
+ConfGen::ConformerData& ConfGen::FragmentTreeNode::getConformer(std::size_t idx) const
+{
+	return *conformers[idx];
+}
+
+void ConfGen::FragmentTreeNode::orderConformersByEnergy()
+{
+	std::sort(conformers.begin(), conformers.end(), &compareConformerEnergy);
 }
 
 void ConfGen::FragmentTreeNode::clearConformers()
@@ -321,120 +361,113 @@ void ConfGen::FragmentTreeNode::addConformer(const ConformerData::SharedPointer&
 	changed = true;
 }
 
-unsigned int ConfGen::FragmentTreeNode::generateConformers(bool e_ordered)
+unsigned int ConfGen::FragmentTreeNode::generateConformers()
 {
-	if (conformers.empty()) {
-		if (!hasChildren()) {
-			if (atomIndices.empty())
-				return ReturnCode::SUCCESS;
+	if (!conformers.empty())
+		return ReturnCode::SUCCESS;
+ 
+	if (!hasChildren()) {
+		if (atomIndices.empty())
+			return ReturnCode::SUCCESS;
 
-			return ReturnCode::TORSION_DRIVING_FAILED;
-		}
-
-		unsigned int ret_code = leftChild->generateConformers(e_ordered);
-
-		if (ret_code != ReturnCode::SUCCESS)
-			return ret_code;
-
-		ret_code = rightChild->generateConformers(e_ordered);
-
-		if (ret_code != ReturnCode::SUCCESS)
-			return ret_code;
-
-		if (!splitBondAtoms[0] || !splitBondAtoms[1])
-			ret_code = lineupChildConformers();
-		else
-			ret_code = alignAndRotateChildConformers();
-
-		changed = true;
-
-		if (ret_code != ReturnCode::SUCCESS)
-			return ret_code;
-
-		if (conformers.empty())
-			return ReturnCode::TORSION_DRIVING_FAILED;
+		return ReturnCode::TORSION_DRIVING_FAILED;
 	}
 
-	if (changed && e_ordered && conformers.size() > 1) 
-		std::sort(conformers.begin(), conformers.end(), &compareConformerEnergy); 
+	unsigned int ret_code = leftChild->generateConformers();
 
-	return ReturnCode::SUCCESS;
+	if (ret_code != ReturnCode::SUCCESS)
+		return ret_code;
+
+	ret_code = rightChild->generateConformers();
+
+	if (ret_code != ReturnCode::SUCCESS)
+		return ret_code;
+
+	if (!splitBondAtoms[0] || !splitBondAtoms[1])
+		lineupChildConformers();
+	else
+		alignAndRotateChildConformers();
+
+	changed = true;
+
+	if (conformers.empty())
+		return ReturnCode::TORSION_DRIVING_FAILED;
+
+	return invokeCallbacks();
 }
 
-unsigned int ConfGen::FragmentTreeNode::lineupChildConformers()
+void ConfGen::FragmentTreeNode::lineupChildConformers()
 {
 	std::size_t num_left_chld_confs = leftChild->conformers.size();
 	std::size_t num_right_chld_confs = rightChild->conformers.size();
+	std::size_t num_opt_confs = std::max(num_left_chld_confs, num_right_chld_confs);
 
-	conformers.reserve(num_left_chld_confs * num_right_chld_confs);
-	childConfBounds.resize(2 * num_right_chld_confs);
+	conformers.reserve(num_opt_confs);
 
-	for (std::size_t i = 0; i < num_right_chld_confs; i++)
-		calcConformerBounds(childConfBounds[i], childConfBounds[num_right_chld_confs + i], rightChild->atomIndices, *rightChild->conformers[i]);
+	double left_bbox_min[3];
+	double left_bbox_max[3];
+	double right_bbox_min[3];
+	double right_bbox_max[3];
 
-	Math::Vector3D left_conf_bbox_min;
-	Math::Vector3D::ConstPointer left_conf_bbox_min_data = left_conf_bbox_min.getData();
-	Math::Vector3D left_conf_bbox_max;
-	Math::Vector3D::ConstPointer left_conf_bbox_max_data = left_conf_bbox_max.getData();
+	for (std::size_t i = 0; i < num_opt_confs; i++) {
+		const ConformerData& left_conf = *leftChild->conformers[std::min(num_left_chld_confs - 1, i)];
+		const ConformerData& right_conf = *rightChild->conformers[std::min(num_right_chld_confs - 1, i)];
 
-	for (std::size_t i = 0; i < num_left_chld_confs; i++) {
-		if (owner.aborted())
-			return ReturnCode::ABORTED;
+		calcConformerBounds(left_bbox_min, left_bbox_max, leftChild->atomIndices, left_conf);
+		calcConformerBounds(right_bbox_min, right_bbox_max, rightChild->atomIndices, right_conf);
 
-		if (owner.timedout())
-			return ReturnCode::TIMEOUT;
+		double right_conf_trans[3] = {
+		    left_bbox_max[0] + CONFORMER_LINEUP_SPACING - right_bbox_min[0],
+			(left_bbox_max[1] + left_bbox_min[1]) * 0.5 - (right_bbox_max[1] + left_bbox_min[1]) * 0.5,
+			(left_bbox_max[2] + left_bbox_min[2]) * 0.5 - (right_bbox_max[2] + left_bbox_min[2]) * 0.5
+		};
 
-		const ConformerData& left_conf = *leftChild->conformers[i];
+		ConformerData::SharedPointer new_conf = owner.allocConformerData();
+		Math::Vector3DArray::StorageType& new_conf_data = new_conf->getData();
+		const Math::Vector3DArray::StorageType& right_conf_data = right_conf.getData();
 
-		calcConformerBounds(left_conf_bbox_min, left_conf_bbox_max, leftChild->atomIndices, left_conf);
+		copyCoordinates(left_conf, leftChild->atomIndices, *new_conf);
 
-		for (std::size_t j = 0; j < num_right_chld_confs; j++) {
-			Math::Vector3D::ConstPointer right_conf_bbox_min_data = childConfBounds[j].getData();
-			Math::Vector3D::ConstPointer right_conf_bbox_max_data = childConfBounds[num_right_chld_confs + j].getData();
+		for (IndexArray::const_iterator it = rightChild->atomIndices.begin(), end = rightChild->atomIndices.end(); it != end; ++it) {
+			std::size_t idx = *it;
+			Math::Vector3D::ConstPointer atom_pos_data = right_conf_data[idx].getData();
+			Math::Vector3D::Pointer new_atom_pos_data = new_conf_data[idx].getData();
 
-			double conf_trans[3] = {
-			    left_conf_bbox_max_data[0] + CONFORMER_LINEUP_SPACING - right_conf_bbox_min_data[0],
-				(left_conf_bbox_max_data[1] + left_conf_bbox_min_data[1]) * 0.5 - (right_conf_bbox_max_data[1] + left_conf_bbox_min_data[1]) * 0.5,
-				(left_conf_bbox_max_data[2] + left_conf_bbox_min_data[2]) * 0.5 - (right_conf_bbox_max_data[2] + left_conf_bbox_min_data[2]) * 0.5
-			};
-
-			ConformerData::SharedPointer new_conf = owner.allocConformerData();
-
-			copyCoordinates(left_conf, leftChild->atomIndices, *new_conf);
-
-			const ConformerData& right_conf = *rightChild->conformers[j];
-			const Math::Vector3DArray::StorageType& right_conf_data = right_conf.getData();
-			Math::Vector3DArray::StorageType& new_conf_data = new_conf->getData();
-
-			for (IndexArray::const_iterator it = rightChild->atomIndices.begin(), end = rightChild->atomIndices.end(); it != end; ++it) {
-				std::size_t idx = *it;
-				Math::Vector3D::ConstPointer atom_pos_data = right_conf_data[idx].getData();
-				Math::Vector3D::Pointer new_atom_pos_data = new_conf_data[idx].getData();
-
-				new_atom_pos_data[0] = atom_pos_data[0] + conf_trans[0];
-				new_atom_pos_data[1] = atom_pos_data[1] + conf_trans[1];
-				new_atom_pos_data[2] = atom_pos_data[2] + conf_trans[2];
-			}
-
-			new_conf->setEnergy(left_conf.getEnergy() + right_conf.getEnergy());
-
-			conformers.push_back(new_conf);
+			new_atom_pos_data[0] = atom_pos_data[0] + right_conf_trans[0];
+			new_atom_pos_data[1] = atom_pos_data[1] + right_conf_trans[1];
+			new_atom_pos_data[2] = atom_pos_data[2] + right_conf_trans[2];
 		}
-	}
 
-	return ReturnCode::SUCCESS;
+		new_conf->setEnergy(left_conf.getEnergy() + right_conf.getEnergy());
+		
+		conformers.push_back(new_conf);
+	}
 }
 
-unsigned int ConfGen::FragmentTreeNode::alignAndRotateChildConformers()
+void ConfGen::FragmentTreeNode::alignAndRotateChildConformers()
 {
 	std::size_t num_tor_angles = torsionAngles.size();
 
 	if (num_tor_angles > 0 && torsionAngleSines.empty()) {
 		for (TorsionAngleArray::const_iterator it = torsionAngles.begin(), end = torsionAngles.end(); it != end; ++it) {
-			double angle = -M_PI * (*it) / 180.0;
+			double angle = M_PI * (it->first) / 180.0;
+			double tol = M_PI * (it->second) / 180.0;
 
 			torsionAngleSines.push_back(std::sin(angle));
 			torsionAngleCosines.push_back(std::cos(angle));
+
+			if (tol > 0.0) {
+				torsionAngleSines.push_back(std::sin(angle + tol));
+				torsionAngleSines.push_back(std::sin(angle - tol));
+				torsionAngleCosines.push_back(std::cos(angle + tol));
+				torsionAngleCosines.push_back(std::cos(angle - tol));
+
+			} else {
+				torsionAngleSines.push_back(torsionAngleSines.back());
+				torsionAngleSines.push_back(torsionAngleSines.back());
+				torsionAngleCosines.push_back(torsionAngleCosines.back());
+				torsionAngleCosines.push_back(torsionAngleCosines.back());
+			}
 		}
 	}
 
@@ -518,11 +551,6 @@ unsigned int ConfGen::FragmentTreeNode::alignAndRotateChildConformers()
 	bool new_left_conf = false;
 
 	for (std::size_t i = 0; i < num_left_chld_confs; i++) {
-		unsigned int ret_code = invokeCallbacks();
-
-		if (ret_code != ReturnCode::SUCCESS)
-			return ret_code;
-
 		const ConformerData& left_conf = *leftChild->conformers[i];
 		new_left_conf = true;
 
@@ -541,34 +569,35 @@ unsigned int ConfGen::FragmentTreeNode::alignAndRotateChildConformers()
 
 			} else {
 				for (std::size_t k = 0; k < num_tor_angles; k++) {
-					if (!new_conf) {
-						new_conf = owner.allocConformerData();
+					for (std::size_t l = 0, num_alt = (torsionAngles[k].second > 0.0 ? 3 : 1); l < num_alt; l++) {
+						if (!new_conf) {
+							new_conf = owner.allocConformerData();
 
-						copyCoordinates(left_conf, leftChild->atomIndices, *new_conf, right_atom_idx);
+							copyCoordinates(left_conf, leftChild->atomIndices, *new_conf, right_atom_idx);
 
-					} else if (new_left_conf) 
-						copyCoordinates(left_conf, leftChild->atomIndices, *new_conf, right_atom_idx);
+						} else if (new_left_conf) 
+							copyCoordinates(left_conf, leftChild->atomIndices, *new_conf, right_atom_idx);
 					
-					new_left_conf = false;
+						new_left_conf = false;
 
-					rotateCoordinates(right_conf, rightChild->atomIndices, *new_conf, 
-									  torsionAngleSines[k], torsionAngleCosines[k], left_atom_idx);
+						rotateCoordinates(right_conf, rightChild->atomIndices, *new_conf, 
+										  torsionAngleSines[k * 3 + l], torsionAngleCosines[k * 3 + l], left_atom_idx);
 
-					bool atom_clash = false;
-					double node_ia_energy = calcMMFF94Energy(*new_conf, atom_clash);
+						bool atom_clash = false;
+						double node_ia_energy = calcMMFF94Energy(*new_conf, atom_clash);
 
-					if (!atom_clash) {
-						new_conf->setEnergy(left_conf.getEnergy() + right_conf.getEnergy() + node_ia_energy);
+						if (!atom_clash) {
+							new_conf->setEnergy(left_conf.getEnergy() + right_conf.getEnergy() + node_ia_energy);
 
-						conformers.push_back(new_conf);
-						new_conf.reset();
+							conformers.push_back(new_conf);
+							new_conf.reset();
+							break;
+						}
 					}
 				}
 			}
 		}
 	}
-
-	return ReturnCode::SUCCESS;
 }
 
 void ConfGen::FragmentTreeNode::setParent(FragmentTreeNode* node)
@@ -645,11 +674,9 @@ void ConfGen::FragmentTreeNode::clearTorsionDrivingData()
 	torsionRefAtoms[1] = 0;
 }
 
-void ConfGen::FragmentTreeNode::calcConformerBounds(Math::Vector3D& min, Math::Vector3D& max, const IndexArray& atom_inds, 
+void ConfGen::FragmentTreeNode::calcConformerBounds(double min[3], double max[3], const IndexArray& atom_inds, 
 													const Math::Vector3DArray& coords) const
 {
-	Math::Vector3D::Pointer min_data = min.getData();
-	Math::Vector3D::Pointer max_data = max.getData();
 	const Math::Vector3DArray::StorageType& coords_data = coords.getData();
 
 	bool init = true;
@@ -658,35 +685,35 @@ void ConfGen::FragmentTreeNode::calcConformerBounds(Math::Vector3D& min, Math::V
 		Math::Vector3D::ConstPointer atom_pos_data = coords_data[*it].getData();
 
 		if (init) {
-			min_data[0] = atom_pos_data[0];
-			min_data[1] = atom_pos_data[1];
-			min_data[2] = atom_pos_data[2];
+			min[0] = atom_pos_data[0];
+			min[1] = atom_pos_data[1];
+			min[2] = atom_pos_data[2];
 
-			max_data[0] = atom_pos_data[0];
-			max_data[1] = atom_pos_data[1];
-			max_data[2] = atom_pos_data[2];
+			max[0] = atom_pos_data[0];
+			max[1] = atom_pos_data[1];
+			max[2] = atom_pos_data[2];
 		
 			init = false;
 			continue;
 		}
 
-		if (atom_pos_data[0] > max_data[0])
-			max_data[0] = atom_pos_data[0];
+		if (atom_pos_data[0] > max[0])
+			max[0] = atom_pos_data[0];
 
-		else if (atom_pos_data[0] < min_data[0])
-			min_data[0] = atom_pos_data[0];
+		else if (atom_pos_data[0] < min[0])
+			min[0] = atom_pos_data[0];
 
-		if (atom_pos_data[1] > max_data[1])
-			max_data[1] = atom_pos_data[1];
+		if (atom_pos_data[1] > max[1])
+			max[1] = atom_pos_data[1];
 
-		else if (atom_pos_data[1] < min_data[1])
-			min_data[1] = atom_pos_data[1];
+		else if (atom_pos_data[1] < min[1])
+			min[1] = atom_pos_data[1];
 
-		if (atom_pos_data[2] > max_data[2])
-			max_data[2] = atom_pos_data[2];
+		if (atom_pos_data[2] > max[2])
+			max[2] = atom_pos_data[2];
 			
-		else if (atom_pos_data[2] < min_data[2])
-			min_data[2] = atom_pos_data[2];
+		else if (atom_pos_data[2] < min[2])
+			min[2] = atom_pos_data[2];
 	}
 } 
 

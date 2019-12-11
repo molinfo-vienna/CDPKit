@@ -70,5 +70,6 @@ void CDPLPythonConfGen::exportUtilityFunctions()
 	python::def("prepareForConformerGeneration", &ConfGen::prepareForConformerGeneration, 
 				(python::arg("mol"), python::arg("canonicalize") = false));
 	python::def("parameterizeMMFF94Interactions", &ConfGen::parameterizeMMFF94Interactions, 
-				(python::arg("molgraph"), python::arg("parameterizer"), python::arg("param_data"), python::arg("ff_type")));
+				(python::arg("molgraph"), python::arg("parameterizer"), python::arg("param_data"), 
+				 python::arg("ff_type"), python::arg("strict")));
 }

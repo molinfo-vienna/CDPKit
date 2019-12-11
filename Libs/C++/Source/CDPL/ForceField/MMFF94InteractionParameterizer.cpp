@@ -41,10 +41,10 @@
 using namespace CDPL; 
 
 	
-ForceField::MMFF94InteractionParameterizer::MMFF94InteractionParameterizer(unsigned int param_set): strictParam(true)
+ForceField::MMFF94InteractionParameterizer::MMFF94InteractionParameterizer(unsigned int param_set)
 {
 	setPropertyFunctions();
-	useParameterSet(param_set);
+	setParameterSet(param_set);
 }
 
 ForceField::MMFF94InteractionParameterizer::MMFF94InteractionParameterizer(const MMFF94InteractionParameterizer& parameterizer):
@@ -57,8 +57,7 @@ ForceField::MMFF94InteractionParameterizer::MMFF94InteractionParameterizer(const
 	electrostaticParameterizer(parameterizer.electrostaticParameterizer),
 	atomTyper(parameterizer.atomTyper),
 	bondTyper(parameterizer.bondTyper),
-	chargeCalculator(parameterizer.chargeCalculator),
-	strictParam(parameterizer.strictParam)
+	chargeCalculator(parameterizer.chargeCalculator)
 {
 	setPropertyFunctions();
 }
@@ -205,26 +204,16 @@ void ForceField::MMFF94InteractionParameterizer::setVanDerWaalsParameterTable(co
 	vanDerWaalsParameterizer.setVanDerWaalsParameterTable(table);
 }
 
-void ForceField::MMFF94InteractionParameterizer::useParameterSet(unsigned int param_set)
+void ForceField::MMFF94InteractionParameterizer::setParameterSet(unsigned int param_set)
 {
 	outOfPlaneParameterizer.setOutOfPlaneBendingParameterTable(MMFF94OutOfPlaneBendingParameterTable::get(param_set));
 	torsionParameterizer.setTorsionParameterTable(MMFF94TorsionParameterTable::get(param_set));
 }
 
-void ForceField::MMFF94InteractionParameterizer::strictParameterization(bool strict)
-{
-	strictParam = strict;
-}
-
-bool ForceField::MMFF94InteractionParameterizer::strictParameterization() const
-{
-	return strictParam;
-}
-
 void ForceField::MMFF94InteractionParameterizer::parameterize(const Chem::MolecularGraph& molgraph, MMFF94InteractionData& ia_data,
-															  unsigned int ia_types)
+															  unsigned int ia_types, bool strict)
 {
-	setup(molgraph, ia_types);
+	setup(molgraph, ia_types, strict);
 
 	if ((ia_types & InteractionType::BOND_STRETCHING) || (ia_types & InteractionType::STRETCH_BEND))
 		bondStretchingParameterizer.parameterize(molgraph, ia_data.getBondStretchingInteractions());
@@ -270,7 +259,6 @@ ForceField::MMFF94InteractionParameterizer& ForceField::MMFF94InteractionParamet
 	atomTyper = parameterizer.atomTyper;
 	bondTyper = parameterizer.bondTyper;
 	chargeCalculator = parameterizer.chargeCalculator;
-	strictParam = parameterizer.strictParam;
 
 	setPropertyFunctions();
 
@@ -344,12 +332,12 @@ std::size_t ForceField::MMFF94InteractionParameterizer::getTopologicalDistance(c
 	return (*usedTopDistMatrix)(molgraph.getAtomIndex(atom1), molgraph.getAtomIndex(atom2));
 } 
 
-void ForceField::MMFF94InteractionParameterizer::setup(const Chem::MolecularGraph& molgraph, unsigned int ia_types)
+void ForceField::MMFF94InteractionParameterizer::setup(const Chem::MolecularGraph& molgraph, unsigned int ia_types, bool strict)
 {
 	molGraph = &molgraph;
 
 	setupAromaticRingSet();
-	setupAtomTypes();
+	setupAtomTypes(strict);
 	setupBondTypeIndices();
 
 	if ((ia_types & InteractionType::ELECTROSTATIC) || (ia_types & InteractionType::VAN_DER_WAALS))
@@ -373,7 +361,7 @@ void ForceField::MMFF94InteractionParameterizer::setupAromaticRingSet()
 	}
 }
 
-void ForceField::MMFF94InteractionParameterizer::setupAtomTypes()
+void ForceField::MMFF94InteractionParameterizer::setupAtomTypes(bool strict)
 {
 	using namespace Chem;
 
@@ -389,15 +377,17 @@ void ForceField::MMFF94InteractionParameterizer::setupAtomTypes()
 			numAtomTypes[i] = getMMFF94NumericType(atom);
 			symAtomTypes[i] = getMMFF94SymbolicType(atom);
 
-			if (numAtomTypes[i] == 0)
+			if (strict && numAtomTypes[i] == 0)
 				throw ParameterizationFailed("MMFF94InteractionParameterizer: encountered invalid MMFF94 type for atom #" + boost::lexical_cast<std::string>(i));
 
 		} else {
-			atomTyper.perceiveTypes(*molGraph, symAtomTypes, numAtomTypes, strictParam);
+			atomTyper.perceiveTypes(*molGraph, symAtomTypes, numAtomTypes, strict);
 
-			for (std::size_t j = 0; j < num_atoms; j++)
-				if (numAtomTypes[j] == 0) 
-					throw ParameterizationFailed("MMFF94InteractionParameterizer: could not determine MMFF94 type of atom #" + boost::lexical_cast<std::string>(j));
+			if (strict) {
+				for (std::size_t j = 0; j < num_atoms; j++)
+					if (numAtomTypes[j] == 0) 
+						throw ParameterizationFailed("MMFF94InteractionParameterizer: could not determine MMFF94 type of atom #" + boost::lexical_cast<std::string>(j));
+			}
 
 			return;
 		}

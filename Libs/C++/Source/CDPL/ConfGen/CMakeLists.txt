@@ -26,7 +26,8 @@
 INCLUDE_DIRECTORIES("${CMAKE_CURRENT_SOURCE_DIR}" "${CDPL_SOURCE_DIR}" "${CMAKE_CURRENT_BINARY_DIR}" "${CDPKIT_EXTERNAL_DIR}")
 
 SET(DATA_FILES
-    TorsionLibrary.xml
+    DefaultTorsionLibrary.xml
+    FallbackTorsionLibrary.xml
     FragmentLibrary.cdf
    )
 

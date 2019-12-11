@@ -67,7 +67,7 @@ Chem::FragmentList::SharedPointer Chem::extractSSSR(const MolecularGraph& src_mo
 	FragmentList::SharedPointer tgt_sssr(new FragmentList());
 	const FragmentList::SharedPointer& src_sssr = getSSSR(src_molgraph);
 
-	getContainingFragments(tgt_molgraph, *src_sssr, *tgt_sssr, true, true, true);
+	getContainedFragments(tgt_molgraph, *src_sssr, *tgt_sssr, true, true, true);
 
 	return tgt_sssr;
 }

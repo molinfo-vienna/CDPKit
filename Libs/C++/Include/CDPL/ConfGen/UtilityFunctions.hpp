@@ -81,7 +81,8 @@ namespace CDPL
 
 		CDPL_CONFGEN_API unsigned int parameterizeMMFF94Interactions(const Chem::MolecularGraph& molgraph, 
 																	 ForceField::MMFF94InteractionParameterizer& parameterizer,
-																	 ForceField::MMFF94InteractionData& param_data, unsigned int ff_type); 
+																	 ForceField::MMFF94InteractionData& param_data, unsigned int ff_type,
+																	 bool strict); 
 		
 		/**
 		 * @}

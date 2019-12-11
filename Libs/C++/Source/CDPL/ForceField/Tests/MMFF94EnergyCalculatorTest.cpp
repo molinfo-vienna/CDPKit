@@ -57,9 +57,9 @@ BOOST_AUTO_TEST_CASE(MMFF94EnergyCalculatorTest)
 		const MMFF94TestData::MoleculeList& mols = (stat ? MMFF94TestData::STAT_TEST_MOLECULES : MMFF94TestData::DYN_TEST_MOLECULES);
 
 		if (stat)
-			parameterizer.useParameterSet(ForceField::MMFF94ParameterSet::STATIC);
+			parameterizer.setParameterSet(ForceField::MMFF94ParameterSet::STATIC);
 		else
-			parameterizer.useParameterSet(ForceField::MMFF94ParameterSet::DYNAMIC);
+			parameterizer.setParameterSet(ForceField::MMFF94ParameterSet::DYNAMIC);
 
 		for (std::size_t mol_idx = 0; mol_idx < mols.size(); mol_idx++) {
 			const Chem::Molecule& mol = *mols[mol_idx];
@@ -71,7 +71,7 @@ BOOST_AUTO_TEST_CASE(MMFF94EnergyCalculatorTest)
 			get3DCoordinates(mol, coords);
 
 			parameterizer.parameterize(mol, ia_data);
-			calculator.setup(ia_data, mol.getNumAtoms());
+			calculator.setup(ia_data);
 
 			double energy = calculator(coords);
 		

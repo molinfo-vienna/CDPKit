@@ -39,7 +39,7 @@ const ConfGen::ConformerGeneratorSettings ConfGen::ConformerGeneratorSettings::D
 
 ConfGen::ConformerGeneratorSettings::ConformerGeneratorSettings():
 	sampleHetAtomHs(false), enumRings(true), nitrogenEnumMode(NitrogenEnumerationMode::UNSPECIFIED_STEREO),
-	fromScratch(true), outputSupplCoords(false), eWindow(10.0), timeout(30 * 60 * 1000), 
+	fromScratch(true), incInputCoords(false), eWindow(10.0), timeout(30 * 60 * 1000), 
 	forceFieldType(ForceFieldType::MMFF94S_NO_ESTAT), strictParam(true), maxNumOutputConfs(100), 
 	minRMSD(0.5)
 {}
@@ -84,14 +84,14 @@ bool ConfGen::ConformerGeneratorSettings::generateCoordinatesFromScratch() const
 	return fromScratch;
 }
 
-void ConfGen::ConformerGeneratorSettings::outputSuppliedCoordinates(bool output)
+void ConfGen::ConformerGeneratorSettings::includeInputCoordinates(bool include)
 {
-	outputSupplCoords = output;
+	incInputCoords = include;
 }
 	
-bool ConfGen::ConformerGeneratorSettings::outputSuppliedCoordinates() const
+bool ConfGen::ConformerGeneratorSettings::includeInputCoordinates() const
 {
-	return outputSupplCoords;
+	return incInputCoords;
 }
 
 void ConfGen::ConformerGeneratorSettings::setEnergyWindow(double win_size)

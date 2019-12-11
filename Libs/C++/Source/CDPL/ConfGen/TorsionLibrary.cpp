@@ -41,22 +41,22 @@ using namespace CDPL;
 namespace
 {
 
-	const char* BUILTIN_TOR_LIB_DATA =                 
-        #include "TorsionLibrary.xml.str" 
+	const char* DEFAULT_TOR_LIB_DATA =                 
+        #include "DefaultTorsionLibrary.xml.str" 
 		;
 
-    ConfGen::TorsionLibrary::SharedPointer builtinTorLib(new ConfGen::TorsionLibrary());
+    ConfGen::TorsionLibrary::SharedPointer defaultTorLib(new ConfGen::TorsionLibrary());
 
-	boost::once_flag initBuiltinTorLibFlag = BOOST_ONCE_INIT;
+	boost::once_flag initDefaultTorLibFlag = BOOST_ONCE_INIT;
 
-	void initBuiltinTorLib()
+	void initDefaultTorLib()
 	{
-		builtinTorLib->loadDefaults();
+		defaultTorLib->loadDefaults();
 	}
 }
 
 
-ConfGen::TorsionLibrary::SharedPointer ConfGen::TorsionLibrary::defaultLib = builtinTorLib;
+ConfGen::TorsionLibrary::SharedPointer ConfGen::TorsionLibrary::defaultLib = defaultTorLib;
 
 
 void ConfGen::TorsionLibrary::load(std::istream& is)
@@ -72,17 +72,17 @@ void ConfGen::TorsionLibrary::save(std::ostream& os) const
 
 void ConfGen::TorsionLibrary::loadDefaults()
 {
-	TorsionLibraryDataReader().read(BUILTIN_TOR_LIB_DATA, *this);
+	TorsionLibraryDataReader().read(DEFAULT_TOR_LIB_DATA, *this);
 }
 
 void ConfGen::TorsionLibrary::set(const SharedPointer& lib)
 {
- 	defaultLib = (!lib ? builtinTorLib : lib);
+ 	defaultLib = (!lib ? defaultTorLib : lib);
 }
 
 const ConfGen::TorsionLibrary::SharedPointer& ConfGen::TorsionLibrary::get()
 {
-    boost::call_once(&initBuiltinTorLib, initBuiltinTorLibFlag);
+    boost::call_once(&initDefaultTorLib, initDefaultTorLibFlag);
 
     return defaultLib;
 }

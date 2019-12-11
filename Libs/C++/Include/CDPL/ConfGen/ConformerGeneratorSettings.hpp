@@ -74,9 +74,9 @@ namespace CDPL
 	
 			bool generateCoordinatesFromScratch() const;
 
-			void outputSuppliedCoordinates(bool output);
+			void includeInputCoordinates(bool include);
 	
-			bool outputSuppliedCoordinates() const;
+			bool includeInputCoordinates() const;
 
 			void setEnergyWindow(double win_size);
 
@@ -111,7 +111,7 @@ namespace CDPL
 			bool                               enumRings;
 			unsigned int                       nitrogenEnumMode;
 			bool                               fromScratch;
-			bool                               outputSupplCoords;
+			bool                               incInputCoords;
 			double                             eWindow;
 			std::size_t                        timeout;
 			unsigned int                       forceFieldType;

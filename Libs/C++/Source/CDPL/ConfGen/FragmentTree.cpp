@@ -42,8 +42,8 @@
 namespace
 {
 
-	const std::size_t MAX_TREE_NODE_CACHE_SIZE         = 200;
-	const double      ATOM_CLASH_RADIUS_SCALING_FACTOR = 1.2;
+	const std::size_t MAX_TREE_NODE_CACHE_SIZE  = 200;
+	const double      NO_CLASH_MIN_ATOM_SPACING = 0.25;
 }
 
 
@@ -194,7 +194,7 @@ void ConfGen::FragmentTree::initAtomClashRadiusTable()
 		if (radius <= 0.0)
 			clashRadiusTable[i] = 0.5;
 		else
-			clashRadiusTable[i] = radius * ATOM_CLASH_RADIUS_SCALING_FACTOR;
+			clashRadiusTable[i] = radius + NO_CLASH_MIN_ATOM_SPACING * 0.5;
 	}
 }
 

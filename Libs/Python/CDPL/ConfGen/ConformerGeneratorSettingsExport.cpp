@@ -49,7 +49,7 @@ void CDPLPythonConfGen::exportConformerGeneratorSettings()
 		.def("assign", CDPLPythonBase::copyAssOp(&ConfGen::ConformerGeneratorSettings::operator=), 
 			 (python::arg("self"), python::arg("settings")), python::return_self<>())
 		.def("sampleHeteroAtomHydrogens", SetBoolFunc(&ConfGen::ConformerGeneratorSettings::sampleHeteroAtomHydrogens), 
-			 (python::arg("self"), python::arg("enumerate")))
+			 (python::arg("self"), python::arg("sample")))
 		.def("sampleHeteroAtomHydrogens", GetBoolFunc(&ConfGen::ConformerGeneratorSettings::sampleHeteroAtomHydrogens), 
 			 python::arg("self"))
 		.def("enumerateRings", SetBoolFunc(&ConfGen::ConformerGeneratorSettings::enumerateRings), 
@@ -61,12 +61,12 @@ void CDPLPythonConfGen::exportConformerGeneratorSettings()
 		.def("getNitrogenEnumerationMode", &ConfGen::ConformerGeneratorSettings::getNitrogenEnumerationMode, 
 			 python::arg("self"))
 		.def("generateCoordinatesFromScratch", SetBoolFunc(&ConfGen::ConformerGeneratorSettings::generateCoordinatesFromScratch), 
-			 (python::arg("self"), python::arg("reuse")))
+			 (python::arg("self"), python::arg("generate")))
 		.def("generateCoordinatesFromScratch", GetBoolFunc(&ConfGen::ConformerGeneratorSettings::generateCoordinatesFromScratch), 
 			 python::arg("self"))
-		.def("outputSuppliedCoordinates", SetBoolFunc(&ConfGen::ConformerGeneratorSettings::outputSuppliedCoordinates), 
-			 (python::arg("self"), python::arg("reuse")))
-		.def("outputSuppliedCoordinates", GetBoolFunc(&ConfGen::ConformerGeneratorSettings::outputSuppliedCoordinates), 
+		.def("includeInputCoordinates", SetBoolFunc(&ConfGen::ConformerGeneratorSettings::includeInputCoordinates), 
+			 (python::arg("self"), python::arg("include")))
+		.def("includeInputCoordinates", GetBoolFunc(&ConfGen::ConformerGeneratorSettings::includeInputCoordinates), 
 			 python::arg("self"))
 		.def("setEnergyWindow", &ConfGen::ConformerGeneratorSettings::setEnergyWindow, 
 			 (python::arg("self"), python::arg("win_size")))
@@ -105,8 +105,8 @@ void CDPLPythonConfGen::exportConformerGeneratorSettings()
 					  &ConfGen::ConformerGeneratorSettings::setNitrogenEnumerationMode)
 		.add_property("genCoordsFromScratch", GetBoolFunc(&ConfGen::ConformerGeneratorSettings::generateCoordinatesFromScratch),
 					  SetBoolFunc(&ConfGen::ConformerGeneratorSettings::generateCoordinatesFromScratch))
-		.add_property("outputSuppliedCoords", GetBoolFunc(&ConfGen::ConformerGeneratorSettings::outputSuppliedCoordinates),
-					  SetBoolFunc(&ConfGen::ConformerGeneratorSettings::outputSuppliedCoordinates))
+		.add_property("includeInputCoords", GetBoolFunc(&ConfGen::ConformerGeneratorSettings::includeInputCoordinates),
+					  SetBoolFunc(&ConfGen::ConformerGeneratorSettings::includeInputCoordinates))
 		.add_property("energyWindow", &ConfGen::ConformerGeneratorSettings::getEnergyWindow,
 					  &ConfGen::ConformerGeneratorSettings::setEnergyWindow)
 		.add_property("timeout", &ConfGen::ConformerGeneratorSettings::getTimeout,
