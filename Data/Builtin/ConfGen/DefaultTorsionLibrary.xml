@@ -1459,9 +1459,6 @@
 	  <angle value="0.0" tolerance1="30.00" tolerance2="0.00" score="3.05"/>
         </torsions>
       </rule>
-      
-      <!-- STOPPED HERE -->
-      
       <rule pattern="[!#1:1][CX4:2]!@[NX3;v3+0:3][!#1:4]">
         <torsions>
           <angle value="-70.0" tolerance1="30.00" tolerance2="40.00" score="8.92"/>
@@ -1495,19 +1492,31 @@
         <angle value="-50.0" tolerance1="20.00" tolerance2="40.00" score="6.67"/>
         <angle value="50.0" tolerance1="20.00" tolerance2="40.00" score="10.0"/>
         <angle value="180.0" tolerance1="10.00" tolerance2="20.00" score="2.38"/>
+	<!-- added -->
+	<angle value="140.0" tolerance1="30.00" tolerance2="0.00" score="10.71"/>
+	<angle value="-140.0" tolerance1="30.00" tolerance2="0.00" score="10.71"/>
       </torsions>
     </rule>
     <rule pattern="[C:1][$(S(=O)=O):2]!@[v3X3+0:3]">
       <torsions>
         <angle value="180.0" tolerance1="20.00" tolerance2="30.00" score="33.55"/>
         <angle value="0.0" tolerance1="20.00" tolerance2="30.00" score="5.54"/>
+	<!-- added -->
+	<angle value="50.0" tolerance1="30.00" tolerance2="0.00" score="3.44"/>
+	<angle value="-50.0" tolerance1="30.00" tolerance2="0.00" score="3.44"/>
+	<angle value="150.0" tolerance1="30.00" tolerance2="0.00" score="4.38"/>
+	<angle value="-150.0" tolerance1="30.00" tolerance2="0.00" score="4.38"/>
       </torsions>
     </rule>
     <rule pattern="[c:1][$(S(=O)=O):2]!@[v3X3+0:3]">
       <torsions>
         <angle value="180.0" tolerance1="20.00" tolerance2="25.00" score="38.25"/>
 	<!-- added -->
-        <angle value="0.0" tolerance1="20.00" tolerance2="0.00" score="0.0"/>
+        <angle value="0.0" tolerance1="30.00" tolerance2="0.00" score="4.0"/>
+	<angle value="60.0" tolerance1="30.00" tolerance2="0.00" score="3.15"/>
+	<angle value="-60.0" tolerance1="30.00" tolerance2="0.00" score="3.15"/>
+	<angle value="120.0" tolerance1="30.00" tolerance2="0.00" score="3.32"/>
+	<angle value="-120.0" tolerance1="30.00" tolerance2="0.00" score="3.32"/>
       </torsions>
     </rule>
     <rule pattern="[!#1:1][$(S(=O)=O):2]!@[v3X3+0:3]">
@@ -1515,6 +1524,8 @@
         <angle value="180.0" tolerance1="20.00" tolerance2="30.00" score="37.51"/>
         <angle value="40.0" tolerance1="20.00" tolerance2="30.00" score="0.88"/>
         <angle value="-40.0" tolerance1="20.00" tolerance2="30.00" score="1.11"/>
+	<!-- added -->
+        <angle value="0.0" tolerance1="20.00" tolerance2="0.00" score="3.0"/>
       </torsions>
     </rule>
     <rule pattern="[!#1:1][$(S(=O)=O):2]!@[nX3:3]([aH1])[aH1:4]">
@@ -1537,14 +1548,19 @@
     </rule>
     <rule pattern="[c:1][S:2](=O)(=O)!@[NX2H0-:3]-[*:4]">
       <torsions>
-        <angle value="-80.0" tolerance1="20.00" tolerance2="30.00" score="0"/>
-        <angle value="80.0" tolerance1="20.00" tolerance2="30.00" score="0"/>
+        <!--angle value="-80.0" tolerance1="20.00" tolerance2="30.00" score="0"/-->
+        <!--angle value="80.0" tolerance1="20.00" tolerance2="30.00" score="0"/-->
+	<!-- replaced -->
+        <angle value="60.0" tolerance1="30.00" tolerance2="0.00" score="13.33"/>
+        <angle value="-60.0" tolerance1="30.00" tolerance2="0.00" score="13.33"/>
       </torsions>
     </rule>
     <rule pattern="[*,#1:1][$(S(=O)=O):2]!@[NX3H0r:3][*:4]">
       <torsions>
         <angle value="-90.0" tolerance1="30.00" tolerance2="40.00" score="4.86"/>
         <angle value="90.0" tolerance1="30.00" tolerance2="40.00" score="4.86"/>
+	<!-- added -->
+	<angle value="180.0" tolerance1="30.00" tolerance2="0.00" score="6.00"/>
       </torsions>
     </rule>
     <rule pattern="[C:1][$(S(=O)=O):2]!@[NX3H1:3][c:4]">
@@ -1613,10 +1629,13 @@
     <category name="" pattern="[C:2][S:3]">
       <rule pattern="[!#1:1][CX3:2]!@[SX2:3][!#1:4]">
         <torsions>
-          <angle value="-60.0" tolerance1="30.00" tolerance2="40.00" score="3.57"/>
+          <!--angle value="-60.0" tolerance1="30.00" tolerance2="40.00" score="3.57"/-->
           <angle value="0.0" tolerance1="10.00" tolerance2="20.00" score="5.41"/>
-          <angle value="60.0" tolerance1="30.00" tolerance2="40.00" score="4.06"/>
+          <!--angle value="60.0" tolerance1="30.00" tolerance2="40.00" score="4.06"/-->
           <angle value="180.0" tolerance1="10.00" tolerance2="20.00" score="28.25"/>
+	  <!-- replaced -->
+          <angle value="80.0" tolerance1="20.00" tolerance2="0.00" score="2.07"/>
+          <angle value="-80.0" tolerance1="20.00" tolerance2="0.00" score="2.07"/>
         </torsions>
       </rule>
       <rule pattern="[!#1:1][CX4:2]!@[SX2:3][!#1:4]">
@@ -1713,6 +1732,8 @@
         <torsions>
           <angle value="-90.0" tolerance1="30.00" tolerance2="50.00" score="12.52"/>
           <angle value="90.0" tolerance1="30.00" tolerance2="50.00" score="12.82"/>
+	  <!-- added -->
+	  <angle value="0.0" tolerance1="30.00" tolerance2="0.00" score="1.76"/>
         </torsions>
       </rule>
       <rule pattern="[aH0:1][c:2]([aH1])!@[SX4:3][!#1:4]">
@@ -1720,12 +1741,19 @@
           <angle value="-70.0" tolerance1="20.00" tolerance2="50.00" score="15.04"/>
           <angle value="70.0" tolerance1="20.00" tolerance2="50.00" score="10.42"/>
           <angle value="180.0" tolerance1="10.00" tolerance2="20.00" score="1.45"/>
-        </torsions>
+	</torsions>
       </rule>
       <rule pattern="[aH0:1][c:2]([aH0])!@[SX4:3][!#1:4]">
         <torsions>
           <angle value="-90.0" tolerance1="40.00" tolerance2="50.00" score="9.26"/>
           <angle value="90.0" tolerance1="40.00" tolerance2="50.00" score="12.11"/>
+	  <!-- addedd -->
+	  <angle value="60.0" tolerance1="30.00" tolerance2="0.00" score="6.99"/>
+	  <angle value="-60.0" tolerance1="30.00" tolerance2="0.00" score="6.99"/>
+	  <angle value="120.0" tolerance1="30.00" tolerance2="0.00" score="5.90"/>
+	  <angle value="-120.0" tolerance1="30.00" tolerance2="0.00" score="5.90"/>
+	  <angle value="180.0" tolerance1="30.00" tolerance2="0.00" score="1.86"/>
+	  <angle value="0.0" tolerance1="30.00" tolerance2="0.00" score="2.17"/>
         </torsions>
       </rule>
       <rule pattern="[!#1:1][c:2]!@[SX4:3][!#1:4]">
@@ -1751,6 +1779,8 @@
       <rule pattern="[O:1]=[CX3:2]([NH1])!@[CH2:3][C:4]">
         <torsions>
           <angle value="0.0" tolerance1="70.00" tolerance2="120.00" score="11.71"/>
+	  <!-- added -->
+          <angle value="180.0" tolerance1="20.00" tolerance2="0.00" score="1.28"/>
         </torsions>
       </rule>
       <rule pattern="[$([CX3]([C])([#1])):1]=[CX3:2]([C])!@[CH2:3][C:4]">
@@ -1760,12 +1790,19 @@
           <angle value="90.0" tolerance1="15.00" tolerance2="20.00" score="3.02"/>
           <angle value="-90.0" tolerance1="15.00" tolerance2="20.00" score="3.45"/>
           <angle value="120.0" tolerance1="10.00" tolerance2="10.00" score="5.6"/>
+	  <!-- added -->
+	  <angle value="180.0" tolerance1="20.00" tolerance2="0.00" score="6.55"/>
         </torsions>
       </rule>
       <rule pattern="[$([CX3]([C])([#1])):1]=[CX3:2]([#1])!@[CH1:3](C)[C:4]">
         <torsions>
           <angle value="-120.0" tolerance1="20.00" tolerance2="30.00" score="15.69"/>
           <angle value="120.0" tolerance1="20.00" tolerance2="30.00" score="17.15"/>
+	  <!-- added -->
+	  <angle value="180.0" tolerance1="20.00" tolerance2="0.00" score="9.42"/>
+	  <angle value="0.0" tolerance1="20.00" tolerance2="0.00" score="3.25"/>
+	  <angle value="60.0" tolerance1="20.00" tolerance2="0.00" score="4.55"/>
+	  <angle value="-60.0" tolerance1="20.00" tolerance2="0.00" score="4.55"/>
         </torsions>
       </rule>
       <rule pattern="[$([CX3]([C])([#1])):1]=[CX3:2]([#1])!@[CH2:3][C:4]">
@@ -1791,10 +1828,15 @@
       </rule>
       <rule pattern="[O:1]=[C:2]([O-])!@[CX4H1:3][#1:4]">
         <torsions>
-          <angle value="-140.0" tolerance1="30.00" tolerance2="55.00" score="10.53"/>
-          <angle value="-40.0" tolerance1="30.00" tolerance2="40.00" score="2.11"/>
-          <angle value="40.0" tolerance1="30.00" tolerance2="40.00" score="4.46"/>
-          <angle value="140.0" tolerance1="30.00" tolerance2="55.00" score="2.73"/>
+          <!--angle value="-140.0" tolerance1="30.00" tolerance2="55.00" score="10.53"/-->
+          <!--angle value="-40.0" tolerance1="30.00" tolerance2="40.00" score="2.11"/-->
+          <!--angle value="40.0" tolerance1="30.00" tolerance2="40.00" score="4.46"/-->
+          <!--angle value="140.0" tolerance1="30.00" tolerance2="55.00" score="2.73"/-->
+	  <!-- replaced -->
+	  <angle value="135.0" tolerance1="30.00" tolerance2="0.00" score="4.0"/>
+	  <angle value="-135.0" tolerance1="30.00" tolerance2="0.00" score="4.0"/>
+          <angle value="50.0" tolerance1="30.00" tolerance2="0.00" score="3.5"/>
+          <angle value="-50.0" tolerance1="30.00" tolerance2="0.00" score="3.5"/>
         </torsions>
       </rule>
       <rule pattern="[CX3H2:1]=[CX3:2]!@[CX3:3]=[C:4]">
@@ -1802,6 +1844,10 @@
           <angle value="-60.0" tolerance1="20.00" tolerance2="40.00" score="3.66"/>
           <angle value="60.0" tolerance1="20.00" tolerance2="40.00" score="1.22"/>
           <angle value="180.0" tolerance1="20.00" tolerance2="30.00" score="40.85"/>
+	  <!-- added -->
+          <angle value="0.0" tolerance1="20.00" tolerance2="0.00" score="5.92"/>
+          <angle value="120.0" tolerance1="20.00" tolerance2="0.00" score="3.0"/>
+          <angle value="-120.0" tolerance1="20.00" tolerance2="0.00" score="3.0"/>
         </torsions>
       </rule>
       <rule pattern="[CX3:1]=[CX3:2]!@[CH2:3][OX2:4]">
@@ -1809,6 +1855,8 @@
           <angle value="-120.0" tolerance1="30.00" tolerance2="50.00" score="9.31"/>
           <angle value="0.0" tolerance1="20.00" tolerance2="50.00" score="15.42"/>
           <angle value="120.0" tolerance1="30.00" tolerance2="50.00" score="6.41"/>
+	  <!-- added -->
+          <angle value="180.0" tolerance1="20.00" tolerance2="0.00" score="4.14"/>
         </torsions>
       </rule>
       <rule pattern="[CX3:1]=[CX3:2]!@[CH1:3](C)[C:4]">
@@ -1818,6 +1866,8 @@
           <angle value="120.0" tolerance1="20.00" tolerance2="30.00" score="10.68"/>
           <angle value="60.0" tolerance1="20.00" tolerance2="30.00" score="1.59"/>
           <angle value="-60.0" tolerance1="20.00" tolerance2="30.00" score="1.49"/>
+	  <!-- added -->
+          <angle value="180.0" tolerance1="20.00" tolerance2="0.00" score="1.18"/>
         </torsions>
       </rule>
       <rule pattern="[CX3:1]=[CX3:2]!@[CH2:3][C:4]">
@@ -1825,13 +1875,19 @@
           <angle value="-120.0" tolerance1="40.00" tolerance2="60.00" score="8.67"/>
           <angle value="0.0" tolerance1="20.00" tolerance2="30.00" score="3.58"/>
           <angle value="120.0" tolerance1="40.00" tolerance2="60.00" score="8.8"/>
+	  <!-- added -->
+          <angle value="180.0" tolerance1="20.00" tolerance2="0.00" score="10.03"/>
         </torsions>
       </rule>
       <rule pattern="[CX3:1]=[CX3:2]!@[CH2:3][c:4]">
         <torsions>
-          <angle value="-120.0" tolerance1="40.00" tolerance2="60.00" score="11.64"/>
+          <!--angle value="-120.0" tolerance1="40.00" tolerance2="60.00" score="11.64"/-->
           <angle value="0.0" tolerance1="20.00" tolerance2="40.00" score="5.29"/>
-          <angle value="120.0" tolerance1="40.00" tolerance2="60.00" score="10.58"/>
+          <!--angle value="120.0" tolerance1="40.00" tolerance2="60.00" score="10.58"/-->
+	  <!-- replaced -->
+          <angle value="100.0" tolerance1="30.00" tolerance2="0.00" score="11.03"/>
+          <angle value="-100.0" tolerance1="30.00" tolerance2="0.00" score="11.03"/>
+          <angle value="180.0" tolerance1="20.00" tolerance2="0.00" score="2.20"/>
         </torsions>
       </rule>
       <rule pattern="[CX3:1]=[CX3:2]!@[CH2:3][!#1:4]">
@@ -1839,6 +1895,8 @@
           <angle value="-120.0" tolerance1="30.00" tolerance2="40.00" score="9.0"/>
           <angle value="0.0" tolerance1="15.00" tolerance2="20.00" score="6.27"/>
           <angle value="120.0" tolerance1="30.00" tolerance2="40.00" score="8.71"/>
+	  <!-- added -->
+          <angle value="180.0" tolerance1="20.00" tolerance2="0.00" score="13.02"/>
         </torsions>
       </rule>
       <rule pattern="[O:1]=[CX3:2](O)!@[CX3:3]([$([NH1,NH2,CH2])])=[O:4]">
@@ -1852,6 +1910,8 @@
           <angle value="-110.0" tolerance1="20.00" tolerance2="30.00" score="3.63"/>
           <angle value="110.0" tolerance1="20.00" tolerance2="30.00" score="3.98"/>
           <angle value="180.0" tolerance1="20.00" tolerance2="40.00" score="38.58"/>
+	  <!-- added -->
+          <angle value="0.0" tolerance1="20.00" tolerance2="0.00" score="16.56"/>
         </torsions>
       </rule>
       <rule pattern="[CX3R:1]=[CX3R:2]!@[CX3:3]=[CX3:4]">
@@ -1896,6 +1956,9 @@
           <angle value="-60.0" tolerance1="20.00" tolerance2="30.00" score="7.25"/>
           <angle value="60.0" tolerance1="20.00" tolerance2="30.00" score="3.62"/>
           <angle value="180.0" tolerance1="10.00" tolerance2="20.00" score="15.38"/>
+	  <!-- added -->
+	  <angle value="120.0" tolerance1="20.00" tolerance2="25.00" score="3.7"/>
+          <angle value="-120.0" tolerance1="20.00" tolerance2="30.00" score="3.7"/>
         </torsions>
       </rule>
       <rule pattern="[CX3:1]=[CX3:2]!@[CX3:3]=[CX3:4]">
@@ -2007,8 +2070,12 @@
         <rule pattern="[NH1:1][CX4:2]!@[CX3:3]=[O:4]">
           <torsions>
             <angle value="-140.0" tolerance1="30.00" tolerance2="40.00" score="4.17"/>
-            <angle value="0.0" tolerance1="50.00" tolerance2="80.00" score="6.87"/>
+            <angle value="0.0" tolerance1="15.00" tolerance2="80.00" score="6.87"/>
             <angle value="140.0" tolerance1="30.00" tolerance2="40.00" score="8.78"/>
+	    <!-- added -->
+            <angle value="30.0" tolerance1="30.00" tolerance2="0.00" score="7.12"/>
+            <angle value="-30.0" tolerance1="30.00" tolerance2="0.00" score="7.12"/>
+	    <angle value="180.0" tolerance1="30.00" tolerance2="0.00" score="3.53"/>
           </torsions>
         </rule>
         <rule pattern="[O:1][CX4:2]!@[CX3:3]=[O:4]">
@@ -2022,8 +2089,10 @@
             <angle value="0.0" tolerance1="60.00" tolerance2="90.00" score="7.52"/>
             <angle value="180.0" tolerance1="60.00" tolerance2="90.00" score="3.27"/>
 	    <!-- added -->
-            <angle value="60.0" tolerance1="20.00" tolerance2="0.00" score="0.0"/>
-            <angle value="-60.0" tolerance1="20.00" tolerance2="0.00" score="0.0"/>
+            <angle value="40.0" tolerance1="20.00" tolerance2="0.00" score="3.9"/>
+            <angle value="-40.0" tolerance1="20.00" tolerance2="0.00" score="3.9"/>
+	    <angle value="150.0" tolerance1="20.00" tolerance2="0.00" score="3.61"/>
+            <angle value="-150.0" tolerance1="20.00" tolerance2="0.00" score="3.61"/>
           </torsions>
         </rule>
         <rule pattern="[C:1][CX4H2:2]!@[CX3:3]=[O:4]">
@@ -2033,10 +2102,13 @@
         </rule>
         <rule pattern="[c:1][CX4H2:2]!@[CX3:3]=[O:4]">
           <torsions>
-            <angle value="-80.0" tolerance1="30.00" tolerance2="40.00" score="3.13"/>
+            <!--angle value="-80.0" tolerance1="30.00" tolerance2="40.00" score="3.13"/-->
             <angle value="0.0" tolerance1="30.00" tolerance2="35.00" score="11.54"/>
-            <angle value="80.0" tolerance1="30.00" tolerance2="45.00" score="2.28"/>
+            <!--angle value="80.0" tolerance1="30.00" tolerance2="45.00" score="2.28"/-->
             <angle value="180.0" tolerance1="20.00" tolerance2="30.00" score="1.0"/>
+	    <!-- replaced -->
+            <angle value="90.0" tolerance1="30.00" tolerance2="0.00" score="5.16"/>
+            <angle value="-90.0" tolerance1="30.00" tolerance2="0.00" score="5.16"/>
           </torsions>
         </rule>
         <rule pattern="[!#1:1][CX4H2:2]!@[CX3:3]=[O:4]">
@@ -2049,9 +2121,12 @@
         </rule>
         <rule pattern="[c:1][CX4:2]!@[CX3:3]=[O:4]">
           <torsions>
-            <angle value="-100.0" tolerance1="40.00" tolerance2="80.00" score="7.23"/>
+            <!--angle value="-100.0" tolerance1="40.00" tolerance2="80.00" score="7.23"/-->
             <angle value="0.0" tolerance1="20.00" tolerance2="20.00" score="3.88"/>
-            <angle value="100.0" tolerance1="40.00" tolerance2="80.00" score="5.94"/>
+            <!--angle value="100.0" tolerance1="40.00" tolerance2="80.00" score="5.94"/-->
+	    <!-- replaced -->
+            <angle value="140.0" tolerance1="40.00" tolerance2="0.00" score="8.13"/>
+            <angle value="-140.0" tolerance1="40.00" tolerance2="0.00" score="8.13"/>
           </torsions>
         </rule>
         <rule pattern="[C:1][CX4:2]!@[CX3:3]=[O:4]">
@@ -2063,9 +2138,14 @@
         </rule>
         <rule pattern="[!#1:1][CX4:2]!@[CX3:3]=[O:4]">
           <torsions>
-            <angle value="-110.0" tolerance1="50.00" tolerance2="55.00" score="3.16"/>
+            <!--angle value="-110.0" tolerance1="50.00" tolerance2="55.00" score="3.16"/-->
             <angle value="0.0" tolerance1="47.50" tolerance2="47.50" score="6.61"/>
-            <angle value="110.0" tolerance1="50.00" tolerance2="62.50" score="3.43"/>
+            <!--angle value="110.0" tolerance1="50.00" tolerance2="62.50" score="3.43"/-->
+	    <!-- replaced -->
+            <angle value="120.0" tolerance1="50.00" tolerance2="62.50" score="4.89"/>
+            <angle value="-120.0" tolerance1="50.00" tolerance2="62.50" score="4.89"/>
+	    <!-- added -->
+            <angle value="180.0" tolerance1="30.00" tolerance2="0.0" score="3.95"/>
           </torsions>
         </rule>
         <rule pattern="[c:1][CX4:2]!@[CX3:3][C:4]">
@@ -2079,9 +2159,12 @@
         </rule>
         <rule pattern="[C:1][CX4:2]!@[CX3:3][c:4]">
           <torsions>
-            <angle value="-70.0" tolerance1="20.00" tolerance2="30.00" score="5.06"/>
-            <angle value="70.0" tolerance1="20.00" tolerance2="30.00" score="4.23"/>
+            <!--angle value="-70.0" tolerance1="20.00" tolerance2="30.00" score="5.06"/-->
+            <!--angle value="70.0" tolerance1="20.00" tolerance2="30.00" score="4.23"/-->
             <angle value="180.0" tolerance1="30.00" tolerance2="80.00" score="10.89"/>
+	    <!-- replaced -->
+            <angle value="80.0" tolerance1="30.00" tolerance2="0.00" score="9.01"/>
+            <angle value="-80.0" tolerance1="30.00" tolerance2="0.00" score="9.01"/>
           </torsions>
         </rule>
         <rule pattern="[c:1][CX4:2]!@[CX3:3][c:4]">
@@ -2089,6 +2172,8 @@
             <angle value="-80.0" tolerance1="30.00" tolerance2="40.00" score="7.35"/>
             <angle value="80.0" tolerance1="30.00" tolerance2="40.00" score="7.35"/>
             <angle value="180.0" tolerance1="20.00" tolerance2="30.00" score="6.47"/>
+	    <!-- added -->
+            <angle value="0.0" tolerance1="20.00" tolerance2="0.00" score="5.88"/>
           </torsions>
         </rule>
         <rule pattern="[C:1][CX4:2]!@[CX3:3][C:4]">
@@ -2096,6 +2181,8 @@
             <angle value="-60.0" tolerance1="30.00" tolerance2="60.00" score="7.48"/>
             <angle value="60.0" tolerance1="30.00" tolerance2="60.00" score="7.65"/>
             <angle value="180.0" tolerance1="40.00" tolerance2="60.00" score="8.46"/>
+	    <!-- added -->
+            <angle value="0.0" tolerance1="20.00" tolerance2="0.00" score="1.45"/>
           </torsions>
         </rule>
         <rule pattern="[!#1:1][CX4:2]!@[CX3H0:3][!#1:4]">
@@ -2135,6 +2222,8 @@
           <angle value="-30.0" tolerance1="15.00" tolerance2="17.50" score="5.88"/>
           <angle value="0.0" tolerance1="10.00" tolerance2="11.25" score="36.03"/>
           <angle value="30.0" tolerance1="15.00" tolerance2="18.75" score="3.68"/>
+	  <!-- added -->
+          <angle value="180.0" tolerance1="20.00" tolerance2="0.00" score="12.00"/>
         </torsions>
       </rule>
       <rule pattern="[nH0:1][c;r6:2]([nH0])!@[c;r6:3]([nH0])[nH0:4]">
@@ -2181,9 +2270,12 @@
       <rule pattern="[cH0:1][c:2]([cH1])!@[c:3]([cH0:4])[cH1]">
         <torsions>
           <angle value="-120.0" tolerance1="20.00" tolerance2="30.00" score="5.24"/>
-          <angle value="-65.0" tolerance1="20.00" tolerance2="25.00" score="8.14"/>
-          <angle value="65.0" tolerance1="20.00" tolerance2="25.00" score="8.68"/>
+          <!--angle value="-65.0" tolerance1="20.00" tolerance2="25.00" score="8.14"/-->
+          <!--angle value="65.0" tolerance1="20.00" tolerance2="25.00" score="8.68"/-->
           <angle value="120.0" tolerance1="20.00" tolerance2="30.00" score="4.52"/>
+	  <!-- replaced -->
+	  <angle value="60.0" tolerance1="20.00" tolerance2="0.00" score="10.44"/>
+	  <angle value="-60.0" tolerance1="20.00" tolerance2="0.00" score="10.44"/>
         </torsions>
       </rule>
       <rule pattern="[cH0:1][c:2]([cH0])!@[c:3]([cH1:4])[cH1]">
@@ -2198,6 +2290,9 @@
           <angle value="-50.0" tolerance1="20.00" tolerance2="25.00" score="9.36"/>
           <angle value="50.0" tolerance1="20.00" tolerance2="25.00" score="9.09"/>
           <angle value="130.0" tolerance1="20.00" tolerance2="30.00" score="9.61"/>
+	  <!-- added -->
+          <angle value="0.0" tolerance1="20.00" tolerance2="0.00" score="2.11"/>
+	  <angle value="180.0" tolerance1="20.00" tolerance2="0.00" score="2.21"/>
         </torsions>
       </rule>
       <rule pattern="[cH1:1][c:2]([cH1])!@[c:3]([cH1:4])[cH1]">
@@ -2234,6 +2329,8 @@
           <angle value="180.0" tolerance1="20.00" tolerance2="25.00" score="8.93"/>
           <angle value="70.0" tolerance1="20.00" tolerance2="30.00" score="0.0"/>
           <angle value="-70.0" tolerance1="20.00" tolerance2="30.00" score="0.34"/>
+	  <!-- added -->
+          <angle value="0.0" tolerance1="20.00" tolerance2="0.00" score="3.57"/>
         </torsions>
       </rule>
       <rule pattern="[nX2H0:1][$([c;r6](c[OH])):2]!@[$([c;r6](c[OH])):3][nX2H0:4]">
@@ -2273,14 +2370,27 @@
           <angle value="-90.0" tolerance1="40.00" tolerance2="45.00" score="5.5"/>
           <angle value="0.0" tolerance1="20.00" tolerance2="45.00" score="10.47"/>
           <angle value="90.0" tolerance1="40.00" tolerance2="45.00" score="3.4"/>
+	  <!-- added -->
+	  <angle value="30.0" tolerance1="20.00" tolerance2="0.00" score="5.81"/>
+	  <angle value="-30.0" tolerance1="20.00" tolerance2="0.00" score="5.81"/>
+	  <angle value="120.0" tolerance1="20.00" tolerance2="0.00" score="11.24"/>
+	  <angle value="-120.0" tolerance1="20.00" tolerance2="0.00" score="11.24"/>
         </torsions>
       </rule>
       <rule pattern="[c:1][c:2]!@[c:3]([cH0])[nX2H0:4]">
         <torsions>
-          <angle value="-140.0" tolerance1="20.00" tolerance2="40.00" score="4.87"/>
-          <angle value="-40.0" tolerance1="20.00" tolerance2="40.00" score="6.74"/>
-          <angle value="40.0" tolerance1="20.00" tolerance2="40.00" score="6.12"/>
-          <angle value="140.0" tolerance1="20.00" tolerance2="40.00" score="5.74"/>
+          <!--angle value="-140.0" tolerance1="20.00" tolerance2="40.00" score="4.87"/-->
+          <!--angle value="-40.0" tolerance1="20.00" tolerance2="40.00" score="6.74"/-->
+          <!--angle value="40.0" tolerance1="20.00" tolerance2="40.00" score="6.12"/-->
+          <!--angle value="140.0" tolerance1="20.00" tolerance2="40.00" score="5.74"/-->
+	  <!-- replaced -->
+	  <angle value="50.0" tolerance1="20.00" tolerance2="0.00" score="8.23"/>
+	  <angle value="-50.0" tolerance1="20.00" tolerance2="0.00" score="8.23"/>
+	  <angle value="130.0" tolerance1="20.00" tolerance2="0.00" score="7.21"/>
+	  <angle value="-130.0" tolerance1="20.00" tolerance2="0.00" score="7.21"/>
+	  <!-- added -->
+	  <angle value="0.0" tolerance1="20.00" tolerance2="0.00" score="2.40"/>
+	  <angle value="180.0" tolerance1="20.00" tolerance2="0.00" score="2.22"/>
         </torsions>
       </rule>
       <rule pattern="[c:1][c:2]([cH0])!@[c:3][nX2H0:4]">
@@ -2299,18 +2409,30 @@
       </rule>
       <rule pattern="[c:1][c;r5:2]!@[c;r5:3][c:4]">
         <torsions>
-          <angle value="-110.0" tolerance1="20.00" tolerance2="40.00" score="1.36"/>
+          <!--angle value="-110.0" tolerance1="20.00" tolerance2="40.00" score="1.36"/-->
           <angle value="0.0" tolerance1="50.00" tolerance2="70.00" score="5.96"/>
-          <angle value="110.0" tolerance1="20.00" tolerance2="40.00" score="0.77"/>
+          <!--angle value="110.0" tolerance1="20.00" tolerance2="40.00" score="0.77"/-->
           <angle value="180.0" tolerance1="20.00" tolerance2="30.00" score="29.9"/>
-        </torsions>
+	  <!-- replaced -->
+          <angle value="140.0" tolerance1="30.00" tolerance2="0.00" score="8.33"/>
+          <angle value="-140.0" tolerance1="30.00" tolerance2="0.00" score="8.33"/>
+	  <!-- added -->
+          <angle value="40.0" tolerance1="30.00" tolerance2="0.00" score="6.94"/>
+          <angle value="-40.0" tolerance1="30.00" tolerance2="0.00" score="6.94"/>
+	</torsions>
       </rule>
       <rule pattern="[c:1][c;r6:2]!@[c;r5:3][c:4]">
         <torsions>
-          <angle value="-140.0" tolerance1="30.00" tolerance2="40.00" score="3.64"/>
+          <!--angle value="-140.0" tolerance1="30.00" tolerance2="40.00" score="3.64"/-->
           <angle value="-50.0" tolerance1="40.00" tolerance2="50.00" score="3.32"/>
           <angle value="50.0" tolerance1="40.00" tolerance2="50.00" score="3.48"/>
-          <angle value="140.0" tolerance1="30.00" tolerance2="40.00" score="3.47"/>
+          <!--angle value="140.0" tolerance1="30.00" tolerance2="40.00" score="3.47"/-->
+	  <!-- replaced -->
+          <angle value="130.0" tolerance1="30.00" tolerance2="0.00" score="6.18"/>
+          <angle value="-130.0" tolerance1="30.00" tolerance2="0.00" score="6.18"/>
+	  <!-- added -->
+	  <angle value="0.0" tolerance1="10.00" tolerance2="0.00" score="3.18"/>
+	  <angle value="180.0" tolerance1="10.00" tolerance2="0.00" score="3.53"/>
         </torsions>
       </rule>
       <rule pattern="[c:1][c;r6:2]!@[c;r6:3][cH0:4]">
@@ -2325,6 +2447,11 @@
           <angle value="0.0" tolerance1="10.00" tolerance2="10.00" score="2.87"/>
           <angle value="90.0" tolerance1="50.00" tolerance2="75.00" score="4.14"/>
           <angle value="180.0" tolerance1="10.00" tolerance2="15.00" score="3.95"/>
+	  <!-- added -->
+	  <angle value="50.0" tolerance1="20.00" tolerance2="0.00" score="9.62"/>
+	  <angle value="-50.0" tolerance1="20.00" tolerance2="0.00" score="9.62"/>
+	  <angle value="130.0" tolerance1="20.00" tolerance2="0.00" score="4.81"/>
+	  <angle value="-130.0" tolerance1="20.00" tolerance2="0.00" score="4.81"/>
         </torsions>
       </rule>
       <rule pattern="[c:1][c:2]!@[c:3][c:4]">
@@ -2416,9 +2543,14 @@
         </rule>
         <rule pattern="[cH0:1][c:2]!@[CX4H2:3][N,O,S:4]">
           <torsions>
-            <angle value="-90.0" tolerance1="50.00" tolerance2="60.00" score="7.94"/>
-            <angle value="90.0" tolerance1="50.00" tolerance2="60.00" score="7.77"/>
+            <!--angle value="-90.0" tolerance1="50.00" tolerance2="60.00" score="7.94"/-->
+            <!--angle value="90.0" tolerance1="50.00" tolerance2="60.00" score="7.77"/-->
             <angle value="180.0" tolerance1="20.00" tolerance2="30.00" score="6.16"/>
+	    <!-- added -->
+            <angle value="0.0" tolerance1="20.00" tolerance2="0.00" score="3.21"/>
+	    <!-- replaced -->
+            <angle value="70.0" tolerance1="40.00" tolerance2="0.00" score="6.66"/>
+            <angle value="-70.0" tolerance1="40.00" tolerance2="0.00" score="6.66"/>
           </torsions>
         </rule>
         <rule pattern="[cH0:1][c:2]!@[CX4H2:3][!#1:4]">
@@ -2448,8 +2580,13 @@
             <angle value="-60.0" tolerance1="20.00" tolerance2="20.00" score="5.13"/>
             <angle value="60.0" tolerance1="20.00" tolerance2="20.00" score="4.43"/>
             <angle value="130.0" tolerance1="30.00" tolerance2="50.00" score="6.07"/>
+	    <!-- added -->
+            <angle value="180.0" tolerance1="20.00" tolerance2="0.00" score="5.49"/>
           </torsions>
         </rule>
+
+    <!-- STOPPED HERE -->
+
         <rule pattern="[cH0:1][c:2]!@[CX4H1:3][N,O,S:4]">
           <torsions>
             <angle value="-150.0" tolerance1="30.00" tolerance2="40.00" score="4.61"/>
