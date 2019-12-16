@@ -622,7 +622,7 @@ namespace
 		// vr1 = (a2 + b2 - c2 - d2) * v1 + (2bc - 2ad) * v2 + (2bd + 2ac) * v3
 		ResultType vr1 = (q.getC1() * q.getC1() + q.getC2() * q.getC2() - q.getC3() * q.getC3() - q.getC4() * q.getC4()) * v(0) +
 			(ResultType(2) * (q.getC2() * q.getC3() - q.getC1() * q.getC4())) * v(1) +
-			(ResultType(2) * (q.getC2() * q.getC4() + q.getC1() * q.getC4())) * v(2);
+			(ResultType(2) * (q.getC2() * q.getC4() + q.getC1() * q.getC3())) * v(2);
 
 		// vr2 = (2bc + 2ad) * v1 + (a2 - b2 + c2 - d2) * v2 + (2cd - 2ab) * v3
 		ResultType vr2 = (ResultType(2) * (q.getC2() * q.getC3() + q.getC1() * q.getC4())) * v(0) +

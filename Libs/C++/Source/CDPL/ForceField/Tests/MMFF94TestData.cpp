@@ -65,6 +65,8 @@ namespace
 		}
 
 		perceiveSSSR(mol, false);
+		setRingFlags(mol, false);
+		setAromaticityFlags(mol, false);
 		calcTopologicalDistanceMatrix(mol, false);
 		perceiveMMFF94AromaticRings(mol, false);
 		assignMMFF94AtomTypes(mol, true, false);
