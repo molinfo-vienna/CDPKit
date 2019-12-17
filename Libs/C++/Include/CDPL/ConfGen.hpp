@@ -53,6 +53,7 @@
 #include "CDPL/ConfGen/CallbackFunction.hpp"
 #include "CDPL/ConfGen/FragmentType.hpp"
 #include "CDPL/ConfGen/ForceFieldType.hpp"
+#include "CDPL/ConfGen/ConformerSamplingMode.hpp"
 #include "CDPL/ConfGen/ReturnCode.hpp"
 #include "CDPL/ConfGen/NitrogenEnumerationMode.hpp"
 

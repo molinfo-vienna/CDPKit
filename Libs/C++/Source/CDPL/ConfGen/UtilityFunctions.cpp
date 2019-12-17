@@ -382,10 +382,7 @@ void ConfGen::prepareForConformerGeneration(Chem::Molecule& mol, bool canon)
 	perceiveSSSR(mol, false);
 	setRingFlags(mol, false);
 	setAromaticityFlags(mol, false);
-
-	bool added_hs = makeHydrogenComplete(mol, true);
-
-	calcCIPPriorities(mol, added_hs);
+	calcCIPPriorities(mol, false);
 
 	for (Molecule::AtomIterator it = mol.getAtomsBegin(), end = mol.getAtomsEnd(); it != end; ++it) {
 		Atom& atom = *it;
@@ -435,6 +432,8 @@ void ConfGen::prepareForConformerGeneration(Chem::Molecule& mol, bool canon)
 			}
 		}
 	}
+
+	bool added_hs = makeHydrogenComplete(mol, true);
 
 	if (canon) {
 		generateCanonicalNumbering(mol, false);

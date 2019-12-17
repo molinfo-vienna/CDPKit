@@ -48,6 +48,10 @@ void CDPLPythonConfGen::exportConformerGeneratorSettings()
 		.def(CDPLPythonBase::ObjectIdentityCheckVisitor<ConfGen::ConformerGeneratorSettings>())
 		.def("assign", CDPLPythonBase::copyAssOp(&ConfGen::ConformerGeneratorSettings::operator=), 
 			 (python::arg("self"), python::arg("settings")), python::return_self<>())
+		.def("setConformerSamplingMode", &ConfGen::ConformerGeneratorSettings::setConformerSamplingMode, 
+			 (python::arg("self"), python::arg("mode")))
+		.def("getConformerSamplingMode", &ConfGen::ConformerGeneratorSettings::getConformerSamplingMode, 
+			 python::arg("self"))
 		.def("sampleHeteroAtomHydrogens", SetBoolFunc(&ConfGen::ConformerGeneratorSettings::sampleHeteroAtomHydrogens), 
 			 (python::arg("self"), python::arg("sample")))
 		.def("sampleHeteroAtomHydrogens", GetBoolFunc(&ConfGen::ConformerGeneratorSettings::sampleHeteroAtomHydrogens), 
@@ -92,11 +96,21 @@ void CDPLPythonConfGen::exportConformerGeneratorSettings()
 			 (python::arg("self"), python::arg("min_rmsd")))
 		.def("getMinRMSD", &ConfGen::ConformerGeneratorSettings::getMinRMSD, 
 			 python::arg("self"))
+		.def("setMaxNumRefinementIterations", &ConfGen::ConformerGeneratorSettings::setMaxNumRefinementIterations, 
+			 (python::arg("self"), python::arg("max_num")))
+		.def("getMaxNumRefinementIterations", &ConfGen::ConformerGeneratorSettings::getMaxNumRefinementIterations, 
+			 python::arg("self"))
+		.def("setRefinementStopGradient", &ConfGen::ConformerGeneratorSettings::setRefinementStopGradient, 
+			 (python::arg("self"), python::arg("grad_norm")))
+		.def("getRefinementStopGradient", &ConfGen::ConformerGeneratorSettings::getRefinementStopGradient, 
+			 python::arg("self"))
 		.def("getFragmentBuildSettings", 
 			 static_cast<ConfGen::FragmentConformerGeneratorSettings& (ConfGen::ConformerGeneratorSettings::*)()>
 			 (&ConfGen::ConformerGeneratorSettings::getFragmentBuildSettings),
 			 python::arg("self"), python::return_internal_reference<>())
 		.def_readonly("DEFAULT", ConfGen::ConformerGeneratorSettings::DEFAULT)
+		.add_property("confSamplingMode", &ConfGen::ConformerGeneratorSettings::getConformerSamplingMode,
+					  &ConfGen::ConformerGeneratorSettings::setConformerSamplingMode)
 		.add_property("sampleHetAtomHydrogens", GetBoolFunc(&ConfGen::ConformerGeneratorSettings::sampleHeteroAtomHydrogens),
 					  SetBoolFunc(&ConfGen::ConformerGeneratorSettings::sampleHeteroAtomHydrogens))
 		.add_property("enumRings", GetBoolFunc(&ConfGen::ConformerGeneratorSettings::enumerateRings),
@@ -119,6 +133,10 @@ void CDPLPythonConfGen::exportConformerGeneratorSettings()
 					  &ConfGen::ConformerGeneratorSettings::setMaxNumOutputConformers)
 		.add_property("minRMSD", &ConfGen::ConformerGeneratorSettings::getMinRMSD, 
 					  &ConfGen::ConformerGeneratorSettings::setMinRMSD)
+		.add_property("maxNumRefinementIterations", &ConfGen::ConformerGeneratorSettings::getMaxNumRefinementIterations, 
+					  &ConfGen::ConformerGeneratorSettings::setMaxNumRefinementIterations)
+		.add_property("refinementStopGradient", &ConfGen::ConformerGeneratorSettings::getRefinementStopGradient,
+					  &ConfGen::ConformerGeneratorSettings::setRefinementStopGradient)
 		.add_property("fragmentBuildSettings", 
 					  python::make_function(static_cast<ConfGen::FragmentConformerGeneratorSettings& (ConfGen::ConformerGeneratorSettings::*)()>
 											(&ConfGen::ConformerGeneratorSettings::getFragmentBuildSettings),

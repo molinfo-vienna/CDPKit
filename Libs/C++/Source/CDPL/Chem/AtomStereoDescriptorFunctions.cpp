@@ -175,7 +175,7 @@ Chem::StereoDescriptor Chem::calcStereoDescriptor(const Atom& atom, const Molecu
 			return makeStereoDescriptor(AtomConfiguration::NONE, atom, molgraph);
 	}
 
-    if (num_bonds == 3) 
+	if (num_bonds == 3) 
 		ligands[3] = Ligand(&atom, static_cast<const Bond*>(0));
 
     if (dim != 2) {

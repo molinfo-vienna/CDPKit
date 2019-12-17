@@ -43,7 +43,7 @@ namespace
 {
 
 	const std::size_t MAX_TREE_NODE_CACHE_SIZE  = 200;
-	const double      NO_CLASH_MIN_ATOM_SPACING = 0.2;
+	const double      NO_CLASH_MIN_ATOM_SPACING = 0.3;
 }
 
 

@@ -86,6 +86,8 @@ namespace CDPL
 
 			ConstConformerIterator getConformersEnd() const;
 
+			bool generateConformerFromInputCoordinates(const Chem::MolecularGraph& molgraph);
+
 		  private:
 			typedef Util::ObjectPool<ConformerData> ConformerDataCache;
 			typedef std::vector<const Chem::Atom*> AtomList;
@@ -96,11 +98,11 @@ namespace CDPL
 
 			void init(const Chem::MolecularGraph& molgraph);
 
+			bool generateConformerFromInputCoordinates(ConformerDataArray& conf_array);
+
 			bool setupForceField();
 
 			void setupRandomConformerGeneration();
-
-			bool generateConformerFromInputCoordinates(ConformerDataArray& conf_array);
 
 			unsigned int generateSingleConformer();
 			unsigned int generateFlexibleRingConformers();
@@ -153,7 +155,7 @@ namespace CDPL
 			Chem::Hydrogen3DCoordinatesGenerator     hCoordsGen;
 			Chem::AutomorphismGroupSearch            symMappingSearch;
 			AlignmentCalculator                      alignmentCalc;
-			Math::Vector3DArray::StorageType         gradient;
+			Math::Vector3DArray::StorageType         energyGradient;
 			IndexList                                ringAtomIndices;
 			IndexList                                symMappings;
 			AtomList                                 nbrHydrogens1;

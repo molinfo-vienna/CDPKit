@@ -33,7 +33,6 @@
 
 #include <vector>
 #include <cstddef>
-#include <memory>
 #include <utility>
 
 #include <boost/timer/timer.hpp>
@@ -41,9 +40,15 @@
 #include "CDPL/ConfGen/ConformerGeneratorSettings.hpp"
 #include "CDPL/ConfGen/ConformerDataArray.hpp"
 #include "CDPL/ConfGen/CallbackFunction.hpp"
+#include "CDPL/ConfGen/RMSDConformerSelector.hpp"
+#include "CDPL/ConfGen/DGStructureGenerator.hpp"
 #include "CDPL/Chem/FragmentList.hpp"
+#include "CDPL/Chem/Hydrogen3DCoordinatesGenerator.hpp"
 #include "CDPL/ForceField/MMFF94InteractionParameterizer.hpp"
 #include "CDPL/ForceField/MMFF94InteractionData.hpp"
+#include "CDPL/ForceField/MMFF94EnergyCalculator.hpp"
+#include "CDPL/ForceField/MMFF94GradientCalculator.hpp"
+#include "CDPL/Math/BFGSMinimizer.hpp"
 #include "CDPL/Util/ObjectPool.hpp"
 #include "CDPL/Util/ObjectStack.hpp"
 #include "CDPL/Util/BitSet.hpp"
@@ -58,8 +63,6 @@ namespace CDPL
 
     namespace ConfGen 
     {
-	
-		class RMSDConformerSelector;
 
 		class ConformerGeneratorImpl 
 		{
@@ -105,7 +108,6 @@ namespace CDPL
 
 			typedef Util::ObjectPool<FragmentConfData> FragmentConfDataCache;
 			typedef FragmentConfDataCache::SharedObjectPointer FragmentConfDataPtr;
-
 		
 			ConformerGeneratorImpl(const ConformerGeneratorImpl&);
 
@@ -120,6 +122,8 @@ namespace CDPL
 			unsigned int generateConformers(const Chem::MolecularGraph& molgraph);
 
 			void init(const Chem::MolecularGraph& molgraph);
+
+			ConformerData::SharedPointer getInputCoordinates();
 
 			void splitIntoTorsionFragments();
 			
@@ -136,6 +140,8 @@ namespace CDPL
 			bool selectOutputConformers();
 
 			double getMMFF94BondLength(std::size_t atom1_idx, std::size_t atom2_idx) const;
+
+			bool has3DCoordinates(const Chem::Atom& atom) const;
 
 			static bool compareConfCombinationEnergy(const ConfCombinationData* comb1, 
 													 const ConfCombinationData* comb2);
@@ -170,44 +176,52 @@ namespace CDPL
 				bool        valid;
 			};
 
-
 			typedef Util::ObjectStack<ConfCombinationData> ConfCombinationDataCache;
 			typedef Util::ObjectPool<ConformerData> ConformerDataCache;
 			typedef std::vector<FragmentConfDataPtr> FragmentConfDataList;
 			typedef ForceField::MMFF94InteractionData MMFF94InteractionData;
 			typedef ForceField::MMFF94InteractionParameterizer MMFF94Parameterizer;
+			typedef ForceField::MMFF94EnergyCalculator<double> MMFF94EnergyCalculator;
+			typedef ForceField::MMFF94GradientCalculator<double> MMFF94GradientCalculator;
 			typedef std::vector<const Chem::Bond*> BondList;
 			typedef std::vector<ConfCombinationData*> ConfCombinationDataList;
-			typedef std::auto_ptr<RMSDConformerSelector> RMSDConformerSelectorPtr;
+			typedef Math::BFGSMinimizer<Math::Vector3DArray::StorageType, double> BFGSMinimizer; 
 
-			ConformerDataCache           confDataCache;
-			FragmentConfDataCache        fragConfDataCache;
-			ConfCombinationDataCache     confCombDataCache;
-			ConformerGeneratorSettings   settings;
-			const Chem::MolecularGraph*  molGraph;
-			ConformerDataArray           workingConfs;
-			ConformerDataArray           tmpWorkingConfs;
-			ConformerDataArray           outputConfs;
-			CallbackFunction             abortCallback;
-			CallbackFunction             timeoutCallback;
-			boost::timer::cpu_timer      timer;
-			RMSDConformerSelectorPtr     confSelector;
-			TorsionDriverImpl            torDriver;
-			FragmentAssemblerImpl        fragAssembler;
-			MMFF94Parameterizer          mmff94Parameterizer;
-			MMFF94InteractionData        mmff94Data;
-			ForceFieldInteractionMask    mmff94InteractionMask;
-			BondList                     torDriveBonds;
-			BondList                     fragSplitBonds;
-			Chem::FragmentList           fragments;
-			Util::BitSet                 tmpBitSet;
-			Util::BitSet                 invertibleNMask;
-			Util::BitSet                 fixedAtomConfigMask;
-			FragmentConfDataList         compConfData;
-			FragmentConfDataList         torFragConfData;
-			ConfCombinationDataList      torFragConfCombData;
-			UIntArray                    currConfComb;
-			UIntArray                    parentAtomInds; 
+			ConformerDataCache                   confDataCache;
+			FragmentConfDataCache                fragConfDataCache;
+			ConfCombinationDataCache             confCombDataCache;
+			ConformerGeneratorSettings           settings;
+			const Chem::MolecularGraph*          molGraph;
+			ConformerDataArray                   workingConfs;
+			ConformerDataArray                   tmpWorkingConfs;
+			ConformerDataArray                   outputConfs;
+			CallbackFunction                     abortCallback;
+			CallbackFunction                     timeoutCallback;
+			boost::timer::cpu_timer              timer;
+			RMSDConformerSelector                confSelector;
+			TorsionDriverImpl                    torDriver;
+			FragmentAssemblerImpl                fragAssembler;
+			DGStructureGenerator                 dgStructGen;
+			MMFF94Parameterizer                  mmff94Parameterizer;
+			MMFF94InteractionData                mmff94Data;
+			ForceFieldInteractionMask            mmff94InteractionMask;
+			MMFF94EnergyCalculator               mmff94EnergyCalc;
+			MMFF94GradientCalculator             mmff94GradientCalc;
+			BFGSMinimizer                        energyMinimizer;
+			Chem::Hydrogen3DCoordinatesGenerator hCoordsGen;
+			BondList                             torDriveBonds;
+			BondList                             fragSplitBonds;
+			Chem::FragmentList                   fragments;
+			Util::BitSet                         tmpBitSet;
+			Util::BitSet                         coreAtomMask;
+			Util::BitSet                         invertibleNMask;
+			Util::BitSet                         fixedAtomConfigMask;
+			FragmentConfDataList                 compConfData;
+			FragmentConfDataList                 torFragConfData;
+			ConfCombinationDataList              torFragConfCombData;
+			UIntArray                            currConfComb;
+			UIntArray                            parentAtomInds; 
+			Math::Vector3DArray::StorageType     energyGradient;
 		};
     }
 }

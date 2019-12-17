@@ -117,12 +117,17 @@ namespace CDPL
 
 			unsigned int getFragmentConformers();
 
-			bool transferInputCoordinates(unsigned int frag_type, const Chem::Fragment& frag, 
-										  FragmentTreeNode* node);
+			bool copyInputCoordinates(unsigned int frag_type, const Chem::Fragment& frag, 
+									  FragmentTreeNode* node);
 			bool fetchConformersFromFragmentLibrary(unsigned int frag_type, const Chem::Fragment& frag, 
 													FragmentTreeNode* node);
 			unsigned int generateFragmentConformers(unsigned int frag_type, const Chem::Fragment& frag, 
 													FragmentTreeNode* node);
+
+			void initFragmentLibraryEntry(const Chem::Fragment& frag, FragmentTreeNode* frag_node) ;
+
+			void buildFragmentLibraryEntryAtomIndexMap(const Chem::Fragment& frag, 
+													   const FragmentTreeNode* frag_node);
 
 			void postprocChainFragment(bool fix_stereo, const Chem::Fragment& frag, FragmentTreeNode* node);
 
@@ -141,10 +146,7 @@ namespace CDPL
 			void invertConfiguration(const Chem::Bond& bond, const Chem::Fragment& frag, FragmentTreeNode* node);
 
 			std::size_t getInvertibleNitrogens(const Chem::Fragment& frag, FragmentTreeNode* node);
-
-			void buildFragmentLibraryEntryAtomIndexMap(const Chem::Fragment& frag, 
-													   const FragmentTreeNode* frag_node);
-
+	
 			void assignLinkBondTorsions(FragmentTreeNode* node);
 
 			const TorsionRuleMatch* getMatchingTorsionRule(const Chem::Bond& bond);

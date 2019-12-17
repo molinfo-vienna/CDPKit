@@ -1,7 +1,7 @@
 /* -*- mode: c++; c-basic-offset: 4; tab-width: 4; indent-tabs-mode: t -*- */
 
 /* 
- * NamespaceExports.hpp 
+ * ConformerSamplingMode.hpp 
  *
  * This file is part of the Chemical Data Processing Toolkit
  *
@@ -23,19 +23,41 @@
  * Boston, MA 02111-1307, USA.
  */
 
+/**
+ * \file
+ * \brief Definition of constants in namespace CDPL::ConfGen::ConformerSamplingMode.
+ */
 
-#ifndef CDPL_PYTHON_CONFGEN_NAMESPACEEXPORTS_HPP
-#define CDPL_PYTHON_CONFGEN_NAMESPACEEXPORTS_HPP
+#ifndef CDPL_CONFGEN_CONFORMERSAMPLINGMODE_HPP
+#define CDPL_CONFGEN_CONFORMERSAMPLINGMODE_HPP
 
 
-namespace CDPLPythonConfGen
+namespace CDPL 
 {
 
-	void exportFragmentTypes();
-	void exportForceFieldTypes();
-	void exportReturnCodes();
-	void exportNitrogenEnumerationModes();
-	void exportConformerSamplingModes();
+    namespace ConfGen
+    {
+
+	/**
+	 * \addtogroup CDPL_CONFGEN_CONSTANTS
+	 * @{
+	 */
+
+	/**
+	 * \brief Provides constants used to specify the employed conformer sampling method.
+	 */
+	namespace ConformerSamplingMode
+	{
+					
+	    const unsigned int AUTO       = 0;
+	    const unsigned int SYSTEMATIC = 1;
+	    const unsigned int STOCHASTIC = 2;
+	}
+
+	/**
+	 * @}
+	 */
+    }
 }
 
-#endif // CDPL_PYTHON_CONFGEN_NAMESPACEEXPORTS_HPP
+#endif // CDPL_CONFGEN_CONFORMERSAMPLINGMODE_HPP

@@ -155,6 +155,16 @@ ConfGen::FragmentConformerGeneratorImpl::ConstConformerIterator ConfGen::Fragmen
     return outputConfs.end();
 }
 
+bool ConfGen::FragmentConformerGeneratorImpl::generateConformerFromInputCoordinates(const Chem::MolecularGraph& molgraph)
+{
+	init(molgraph);
+
+	if (!setupForceField())
+		return false;
+
+	return generateConformerFromInputCoordinates(outputConfs);
+}
+
 void ConfGen::FragmentConformerGeneratorImpl::init(const Chem::MolecularGraph& molgraph)
 {
 	timer.start();
@@ -171,21 +181,21 @@ bool ConfGen::FragmentConformerGeneratorImpl::generateConformerFromInputCoordina
 {
 	using namespace Chem;
 
-	ConformerData::SharedPointer conf_data = allocConformerData();
+	ConformerData::SharedPointer ipt_coords = allocConformerData();
 
-	conf_data->resize(numAtoms);
+	ipt_coords->resize(numAtoms);
 
 	coreAtomMask.resize(numAtoms);
 	coreAtomMask.set();
 
-	Math::Vector3DArray::StorageType& coords_data = conf_data->getData();
+	Math::Vector3DArray::StorageType& ipt_coords_data = ipt_coords->getData();
 	bool coords_compl = true;
 
 	for (std::size_t i = 0; i < numAtoms; i++) {
 		const Atom& atom = molGraph->getAtom(i);
 
 		try {
-			coords_data[i].assign(get3DCoordinates(atom));
+			ipt_coords_data[i].assign(get3DCoordinates(atom));
 
 		} catch (const Base::ItemNotFound&) {
 			if (getType(atom) != AtomType::H)
@@ -198,18 +208,18 @@ bool ConfGen::FragmentConformerGeneratorImpl::generateConformerFromInputCoordina
 
 	if (!coords_compl) {
 		hCoordsGen.setup(*molGraph);
-		hCoordsGen.generate(*conf_data, false);
+		hCoordsGen.generate(*ipt_coords, false);
 
 		mmff94GradientCalc.setFixedAtomMask(coreAtomMask);
 
-		energyMinimizer.setup(coords_data, gradient);
+		energyMinimizer.setup(ipt_coords_data, energyGradient);
 
 		std::size_t max_ref_iters = settings.getMaxNumRefinementIterations();
 		double stop_grad = settings.getRefinementStopGradient();
 		double energy = 0.0;
 
 		for (std::size_t j = 0; max_ref_iters == 0 || j < max_ref_iters; j++) {
-			if (energyMinimizer.iterate(energy, coords_data, gradient) != BFGSMinimizer::SUCCESS) {
+			if (energyMinimizer.iterate(energy, ipt_coords_data, energyGradient) != BFGSMinimizer::SUCCESS) {
 				if ((boost::math::isnan)(energy))
 					return false;
 
@@ -223,12 +233,12 @@ bool ConfGen::FragmentConformerGeneratorImpl::generateConformerFromInputCoordina
 				break;
 		}
 
-		conf_data->setEnergy(energy);
+		ipt_coords->setEnergy(energy);
 
 	} else
-		conf_data->setEnergy(mmff94EnergyCalc(coords_data));
+		ipt_coords->setEnergy(mmff94EnergyCalc(ipt_coords_data));
 
-	conf_array.push_back(conf_data);
+	conf_array.push_back(ipt_coords);
 	
 	return true;
 }
@@ -247,7 +257,7 @@ bool ConfGen::FragmentConformerGeneratorImpl::setupForceField()
 	mmff94EnergyCalc.setup(mmff94Data);
 	mmff94GradientCalc.setup(mmff94Data, numAtoms);
 
-    gradient.resize(numAtoms);
+    energyGradient.resize(numAtoms);
 
 	return true;
 }
@@ -437,12 +447,12 @@ unsigned int ConfGen::FragmentConformerGeneratorImpl::generateRandomConformer(Co
 			continue;
 
 		hCoordsGen.generate(conf_data, false);
-		energyMinimizer.setup(conf_data.getData(), gradient);
+		energyMinimizer.setup(conf_data.getData(), energyGradient);
 
 		double energy = 0.0;		
 
 		for (std::size_t j = 0; max_ref_iters == 0 || j < max_ref_iters; j++) {
-			if (energyMinimizer.iterate(energy, conf_data.getData(), gradient) != BFGSMinimizer::SUCCESS) {
+			if (energyMinimizer.iterate(energy, conf_data.getData(), energyGradient) != BFGSMinimizer::SUCCESS) {
 				if ((boost::math::isnan)(energy))
 					return ReturnCode::FORCEFIELD_MINIMIZATION_FAILED;
 

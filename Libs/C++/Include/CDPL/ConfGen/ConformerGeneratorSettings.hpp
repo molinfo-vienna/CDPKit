@@ -58,6 +58,10 @@ namespace CDPL
 
 			ConformerGeneratorSettings();
 
+			void setConformerSamplingMode(unsigned int mode);
+
+			unsigned int getConformerSamplingMode() const;
+
 			void sampleHeteroAtomHydrogens(bool sample);
 				
 			bool sampleHeteroAtomHydrogens() const;
@@ -101,12 +105,21 @@ namespace CDPL
 			void setMinRMSD(double min_rmsd);
 
 			double getMinRMSD() const;
-		
+
+			void setMaxNumRefinementIterations(std::size_t max_iter);
+
+			std::size_t getMaxNumRefinementIterations() const;
+
+			void setRefinementStopGradient(double grad_norm);
+
+			double getRefinementStopGradient() const;
+
 			FragmentConformerGeneratorSettings& getFragmentBuildSettings();
 
 			const FragmentConformerGeneratorSettings& getFragmentBuildSettings() const;
 
 		  private:
+			unsigned int                       confSamplingMode;
 			bool                               sampleHetAtomHs;
 			bool                               enumRings;
 			unsigned int                       nitrogenEnumMode;
@@ -118,6 +131,8 @@ namespace CDPL
 			bool                               strictParam;
 			std::size_t                        maxNumOutputConfs;
 			double                             minRMSD;
+			std::size_t                        maxNumRefIters;
+			double                             refStopGrad;
 			FragmentConformerGeneratorSettings fragBuildSettings;
 		};
 	};

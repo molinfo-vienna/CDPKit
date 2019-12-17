@@ -29,6 +29,7 @@
 #include "CDPL/ConfGen/ConformerGeneratorSettings.hpp"
 #include "CDPL/ConfGen/ForceFieldType.hpp"
 #include "CDPL/ConfGen/NitrogenEnumerationMode.hpp"
+#include "CDPL/ConfGen/ConformerSamplingMode.hpp"
 
 
 using namespace CDPL;
@@ -38,11 +39,22 @@ const ConfGen::ConformerGeneratorSettings ConfGen::ConformerGeneratorSettings::D
 
 
 ConfGen::ConformerGeneratorSettings::ConformerGeneratorSettings():
-	sampleHetAtomHs(false), enumRings(true), nitrogenEnumMode(NitrogenEnumerationMode::UNSPECIFIED_STEREO),
+	confSamplingMode(ConformerSamplingMode::AUTO), sampleHetAtomHs(false), enumRings(true),
+	nitrogenEnumMode(NitrogenEnumerationMode::UNSPECIFIED_STEREO),
 	fromScratch(true), incInputCoords(false), eWindow(10.0), timeout(30 * 60 * 1000), 
 	forceFieldType(ForceFieldType::MMFF94S_NO_ESTAT), strictParam(true), maxNumOutputConfs(100), 
-	minRMSD(0.5)
+	minRMSD(0.5), maxNumRefIters(0), refStopGrad(0.1)
 {}
+
+void ConfGen::ConformerGeneratorSettings::setConformerSamplingMode(unsigned int mode)
+{
+	confSamplingMode = mode;
+}
+
+unsigned int ConfGen::ConformerGeneratorSettings::getConformerSamplingMode() const
+{
+	return confSamplingMode;
+}
 
 void ConfGen::ConformerGeneratorSettings::sampleHeteroAtomHydrogens(bool sample)
 {
@@ -152,6 +164,26 @@ void ConfGen::ConformerGeneratorSettings::setMinRMSD(double min_rmsd)
 double ConfGen::ConformerGeneratorSettings::getMinRMSD() const
 {
 	return minRMSD;
+}
+
+void ConfGen::ConformerGeneratorSettings::setMaxNumRefinementIterations(std::size_t max_iter)
+{
+	maxNumRefIters = max_iter;
+}
+
+std::size_t ConfGen::ConformerGeneratorSettings::getMaxNumRefinementIterations() const
+{
+	return maxNumRefIters;
+}
+
+void ConfGen::ConformerGeneratorSettings::setRefinementStopGradient(double grad_norm)
+{
+	refStopGrad = grad_norm;
+}
+
+double ConfGen::ConformerGeneratorSettings::getRefinementStopGradient() const
+{
+	return refStopGrad;
 }
 
 ConfGen::FragmentConformerGeneratorSettings& ConfGen::ConformerGeneratorSettings::getFragmentBuildSettings()

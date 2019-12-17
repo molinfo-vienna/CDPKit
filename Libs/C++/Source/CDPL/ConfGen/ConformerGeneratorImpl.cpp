@@ -30,13 +30,13 @@
 #include <iterator>
 
 #include <boost/bind.hpp>
+#include <boost/math/special_functions.hpp>
 
 #include "CDPL/ConfGen/UtilityFunctions.hpp"
 #include "CDPL/ConfGen/ReturnCode.hpp"
-#include "CDPL/ConfGen/RMSDConformerSelector.hpp"
 #include "CDPL/Chem/MolecularGraphFunctions.hpp"
 #include "CDPL/Chem/AtomFunctions.hpp"
-#include "CDPL/Chem/AtomContainerFunctions.hpp"
+#include "CDPL/Chem/Entity3DFunctions.hpp"
 #include "CDPL/Chem/AtomType.hpp"
 #include "CDPL/ForceField/MMFF94EnergyCalculator.hpp"
 #include "CDPL/ForceField/Exceptions.hpp"
@@ -87,7 +87,8 @@ namespace
 
 ConfGen::ConformerGeneratorImpl::ConformerGeneratorImpl():
 	confDataCache(MAX_CONF_DATA_CACHE_SIZE), fragConfDataCache(MAX_FRAG_CONF_DATA_CACHE_SIZE),
-	confCombDataCache(MAX_FRAG_CONF_COMBINATION_CACHE_SIZE)
+	confCombDataCache(MAX_FRAG_CONF_COMBINATION_CACHE_SIZE),
+	energyMinimizer(boost::ref(mmff94EnergyCalc), boost::ref(mmff94GradientCalc))
 {
 	fragAssembler.setTimeoutCallback(boost::bind(&ConformerGeneratorImpl::timedout, this));
 	fragAssembler.setBondLengthFunction(boost::bind(&ConformerGeneratorImpl::getMMFF94BondLength, this, _1, _2));
@@ -100,6 +101,16 @@ ConfGen::ConformerGeneratorImpl::ConformerGeneratorImpl():
 	td_settings.orderByEnergy(false);
 
 	fragConfDataCache.setCleanupFunction(boost::bind(&FragmentConfData::clear, _1));
+
+	hCoordsGen.undefinedOnly(true);
+	hCoordsGen.setAtom3DCoordinatesCheckFunction(boost::bind(&ConformerGeneratorImpl::has3DCoordinates, this, _1));
+
+	DGStructureGeneratorSettings& dg_settings = dgStructGen.getSettings();
+
+	dg_settings.excludeHydrogens(true);
+    dg_settings.regardAtomConfiguration(true);
+    dg_settings.regardBondConfiguration(true);
+	dg_settings.enablePlanarityConstraints(true);
 } 
 
 ConfGen::ConformerGeneratorImpl::~ConformerGeneratorImpl() {}
@@ -167,7 +178,7 @@ unsigned int ConfGen::ConformerGeneratorImpl::generate(const Chem::MolecularGrap
 	timer.start();
 	compConfData.clear();
 
-	//if (comps.getSize() == 1) {
+	if (comps.getSize() == 1) {
 		unsigned int ret_code = generateConformers(molgraph);
 
 		if (ret_code != ReturnCode::SUCCESS)
@@ -177,9 +188,9 @@ unsigned int ConfGen::ConformerGeneratorImpl::generate(const Chem::MolecularGrap
 			std::sort(outputConfs.begin(), outputConfs.end(), &compareConformerEnergy);
 
 		return invokeCallbacks();
-		//}
+	}
 
-	//return generateConformers(molgraph, comps);
+	return generateConformers(molgraph, comps);
 }
 
 std::size_t ConfGen::ConformerGeneratorImpl::getNumConformers() const
@@ -390,6 +401,72 @@ void ConfGen::ConformerGeneratorImpl::init(const Chem::MolecularGraph& molgraph)
 
 	invertibleNMask.resize(molgraph.getNumAtoms());
 	invertibleNMask.reset();
+}
+
+ConfGen::ConformerData::SharedPointer ConfGen::ConformerGeneratorImpl::getInputCoordinates()
+{
+	using namespace Chem;
+
+	ConformerData::SharedPointer ipt_coords = confDataCache.get();
+	Math::Vector3DArray::StorageType& ipt_coords_data = ipt_coords->getData();
+	std::size_t num_atoms = molGraph->getNumAtoms();
+
+	ipt_coords->resize(num_atoms);
+
+	coreAtomMask.resize(num_atoms);
+	coreAtomMask.set();
+
+	bool coords_compl = true;
+
+	for (std::size_t i = 0; i < num_atoms; i++) {
+		const Atom& atom = molGraph->getAtom(i);
+
+		try {
+			ipt_coords_data[i].assign(get3DCoordinates(atom));
+
+		} catch (const Base::ItemNotFound&) {
+			if (getType(atom) != AtomType::H)
+				return ConformerData::SharedPointer();
+
+			coreAtomMask.reset(i);
+			coords_compl = false;
+		}
+	} 
+
+	if (!coords_compl) {
+		hCoordsGen.setup(*molGraph);
+		hCoordsGen.generate(*ipt_coords, false);
+
+		mmff94GradientCalc.setFixedAtomMask(coreAtomMask);
+
+		energyMinimizer.setup(ipt_coords_data, energyGradient);
+		energyGradient.resize(num_atoms);
+
+		std::size_t max_ref_iters = settings.getMaxNumRefinementIterations();
+		double stop_grad = settings.getRefinementStopGradient();
+		double energy = 0.0;
+
+		for (std::size_t j = 0; max_ref_iters == 0 || j < max_ref_iters; j++) {
+			if (energyMinimizer.iterate(energy, ipt_coords_data, energyGradient) != BFGSMinimizer::SUCCESS) {
+				if ((boost::math::isnan)(energy))
+					return ConformerData::SharedPointer();
+
+				break;
+			}
+
+			if ((boost::math::isnan)(energy))
+				return ConformerData::SharedPointer();
+		
+			if (stop_grad >= 0.0 && energyMinimizer.getGradientNorm() <= stop_grad)
+				break;
+		}
+
+		ipt_coords->setEnergy(energy);
+
+	} else
+		ipt_coords->setEnergy(mmff94EnergyCalc(ipt_coords_data));
+
+	return ipt_coords;
 }
 
 void ConfGen::ConformerGeneratorImpl::splitIntoTorsionFragments()
@@ -734,31 +811,22 @@ bool ConfGen::ConformerGeneratorImpl::selectOutputConformers()
 
 	std::sort(workingConfs.begin(), workingConfs.end(), &compareConformerEnergy); 
 
-	if (!confSelector.get())
-		confSelector.reset(new RMSDConformerSelector());
-
-	confSelector->setMinRMSD(settings.getMinRMSD());
-	confSelector->setup(*molGraph, tmpBitSet, fixedAtomConfigMask, *workingConfs.front());
+	confSelector.setMinRMSD(settings.getMinRMSD());
+	confSelector.setup(*molGraph, tmpBitSet, fixedAtomConfigMask, *workingConfs.front());
 	
 	double max_energy = workingConfs.front()->getEnergy() + settings.getEnergyWindow();
 	std::size_t max_num_confs = settings.getMaxNumOutputConformers();
 	bool have_ipt_coords = false;
 
 	if (settings.includeInputCoordinates()) {
-		ConformerData::SharedPointer ipt_conf_data = confDataCache.get();
+		ConformerData::SharedPointer ipt_coords = getInputCoordinates();
 
-		try {
-			get3DCoordinates(*molGraph, *ipt_conf_data);
-
-			ipt_conf_data->setEnergy(ForceField::MMFF94EnergyCalculator<double>(mmff94Data)(*ipt_conf_data));
-
-			outputConfs.push_back(ipt_conf_data);
-
-			confSelector->selected(*ipt_conf_data);
+		if (ipt_coords) {
+			outputConfs.push_back(ipt_coords);
+			confSelector.selected(*ipt_coords);
 
 			have_ipt_coords = true;
-
-		} catch (const Base::Exception&) {}
+		}
 	}
 
 	for (ConformerDataArray::const_iterator it = workingConfs.begin(), end = workingConfs.end(); 
@@ -769,7 +837,7 @@ bool ConfGen::ConformerGeneratorImpl::selectOutputConformers()
 		if (conf_data->getEnergy() > max_energy)
 			break;
 
-		if (confSelector->selected(*conf_data))
+		if (confSelector.selected(*conf_data))
 			outputConfs.push_back(conf_data);
 	}
 
@@ -793,6 +861,11 @@ double ConfGen::ConformerGeneratorImpl::getMMFF94BondLength(std::size_t atom1_id
 	}
 
 	return 0.0;
+}
+		
+bool ConfGen::ConformerGeneratorImpl::has3DCoordinates(const Chem::Atom& atom) const
+{
+	return coreAtomMask.test(molGraph->getAtomIndex(atom));
 }
 
 bool ConfGen::ConformerGeneratorImpl::compareConfCombinationEnergy(const ConfCombinationData* comb1, 

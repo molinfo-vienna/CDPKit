@@ -84,8 +84,8 @@
       <rule pattern="[C:1][CH2:2]!@[O:3][CX4:4]">
         <torsions>
           <angle value="180.0" tolerance1="30.00" tolerance2="40.00" score="35.33"/>
-          <angle value="90.0" tolerance1="20.00" tolerance2="30.00" score="1.48"/>
-          <angle value="-90.0" tolerance1="20.00" tolerance2="30.00" score="0.92"/>
+          <angle value="60.0" tolerance1="20.00" tolerance2="30.00" score="1.48"/>
+          <angle value="-60.0" tolerance1="20.00" tolerance2="30.00" score="0.92"/>
         </torsions>
       </rule>
       <rule pattern="[*,#1:1][CX4:2]!@[O:3][$([CX3](=[!O])):4]">
@@ -312,6 +312,9 @@
       <rule pattern="[cH0:1][c:2]([cH1])!@[O:3][C:4]">
         <torsions>
           <angle value="180.0" tolerance1="20.00" tolerance2="25.00" score="48.83"/>
+	  <!-- added -->
+	  <angle value="90.0" tolerance1="20.00" tolerance2="0.00" score="0.0"/>
+          <angle value="-90.0" tolerance1="20.00" tolerance2="0.00" score="0.0"/>
         </torsions>
       </rule>
       <rule pattern="[cH1:1][c:2]([cH1])!@[O:3][C:4]">
@@ -828,6 +831,9 @@
       <rule pattern="[$(C=O):1][NX3H1:2]!@[CX4H1:3][#1:4]">
         <torsions>
           <angle value="0.0" tolerance1="60.00" tolerance2="80.00" score="8.23"/>
+	  <!-- added -->
+	  <angle value="30.0" tolerance1="20.00" tolerance2="0.00" score="0.0"/>
+	  <angle value="-30.0" tolerance1="20.00" tolerance2="0.00" score="0.0"/>
         </torsions>
       </rule>
       <rule pattern="[$(C=O):1][NX3H0:2]!@[CX4H0:3][C:4]">
@@ -2134,6 +2140,10 @@
             <angle value="-120.0" tolerance1="60.00" tolerance2="60.00" score="3.42"/>
             <angle value="0.0" tolerance1="60.00" tolerance2="60.00" score="5.62"/>
             <angle value="120.0" tolerance1="60.00" tolerance2="60.00" score="3.76"/>
+	    <!-- added -->
+            <angle value="180.0" tolerance1="20.00" tolerance2="0.0" score="0.0"/>
+            <angle value="60.0" tolerance1="20.00" tolerance2="0.0" score="0.0"/>
+            <angle value="-60.0" tolerance1="20.00" tolerance2="0.0" score="0.0"/>
           </torsions>
         </rule>
         <rule pattern="[!#1:1][CX4:2]!@[CX3:3]=[O:4]">

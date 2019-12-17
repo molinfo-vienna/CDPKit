@@ -38,6 +38,7 @@ SET(confgen_MOD_SRCS
     FragmentTypeExport.cpp
     ReturnCodeExport.cpp
     NitrogenEnumerationModeExport.cpp
+    ConformerSamplingModeExport.cpp
 
     DGConstraintGeneratorExport.cpp
     DGConstraintGeneratorSettingsExport.cpp

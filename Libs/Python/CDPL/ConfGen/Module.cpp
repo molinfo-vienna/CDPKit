@@ -70,6 +70,7 @@ BOOST_PYTHON_MODULE(_confgen)
 	exportForceFieldTypes();
 	exportReturnCodes();
 	exportNitrogenEnumerationModes();
+	exportConformerSamplingModes();
 
 	exportUtilityFunctions();
 

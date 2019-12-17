@@ -1,7 +1,7 @@
 /* -*- mode: c++; c-basic-offset: 4; tab-width: 4; indent-tabs-mode: t -*- */
 
 /* 
- * NamespaceExports.hpp 
+ * ConformerSamplingModeExport.cpp 
  *
  * This file is part of the Chemical Data Processing Toolkit
  *
@@ -24,18 +24,27 @@
  */
 
 
-#ifndef CDPL_PYTHON_CONFGEN_NAMESPACEEXPORTS_HPP
-#define CDPL_PYTHON_CONFGEN_NAMESPACEEXPORTS_HPP
+#include <boost/python.hpp>
+
+#include "CDPL/ConfGen/ConformerSamplingMode.hpp"
+
+#include "NamespaceExports.hpp"
 
 
-namespace CDPLPythonConfGen
+namespace 
 {
 
-	void exportFragmentTypes();
-	void exportForceFieldTypes();
-	void exportReturnCodes();
-	void exportNitrogenEnumerationModes();
-	void exportConformerSamplingModes();
+	struct ConformerSamplingMode {};
 }
 
-#endif // CDPL_PYTHON_CONFGEN_NAMESPACEEXPORTS_HPP
+
+void CDPLPythonConfGen::exportConformerSamplingModes()
+{
+	using namespace boost;
+	using namespace CDPL;
+
+	python::class_<ConformerSamplingMode, boost::noncopyable>("ConformerSamplingMode", python::no_init)
+		.def_readonly("NONE", &ConfGen::ConformerSamplingMode::AUTO)
+		.def_readonly("SYSTEMATIC", &ConfGen::ConformerSamplingMode::SYSTEMATIC)
+		.def_readonly("STOCHASTIC", &ConfGen::ConformerSamplingMode::STOCHASTIC);
+}
