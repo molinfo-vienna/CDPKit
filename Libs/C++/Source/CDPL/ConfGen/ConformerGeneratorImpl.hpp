@@ -121,7 +121,15 @@ namespace CDPL
 
 			unsigned int generateConformers(const Chem::MolecularGraph& molgraph);
 
+			unsigned int generateConformersSystematic();
+
+			unsigned int generateConformersStochastic();
+
+			bool determineSamplingMode();
+
 			void init(const Chem::MolecularGraph& molgraph);
+
+			bool generateHydrogenCoordsAndMinimize(ConformerData& conf_data);
 
 			ConformerData::SharedPointer getInputCoordinates();
 
@@ -201,7 +209,7 @@ namespace CDPL
 			RMSDConformerSelector                confSelector;
 			TorsionDriverImpl                    torDriver;
 			FragmentAssemblerImpl                fragAssembler;
-			DGStructureGenerator                 dgStructGen;
+			DGStructureGenerator                 dgStructureGen;
 			MMFF94Parameterizer                  mmff94Parameterizer;
 			MMFF94InteractionData                mmff94Data;
 			ForceFieldInteractionMask            mmff94InteractionMask;
@@ -222,6 +230,7 @@ namespace CDPL
 			UIntArray                            currConfComb;
 			UIntArray                            parentAtomInds; 
 			Math::Vector3DArray::StorageType     energyGradient;
+			bool                                 inStochasticMode;
 		};
     }
 }

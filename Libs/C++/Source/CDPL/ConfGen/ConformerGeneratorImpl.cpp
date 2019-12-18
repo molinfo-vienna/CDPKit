@@ -34,9 +34,11 @@
 
 #include "CDPL/ConfGen/UtilityFunctions.hpp"
 #include "CDPL/ConfGen/ReturnCode.hpp"
+#include "CDPL/ConfGen/ConformerSamplingMode.hpp"
 #include "CDPL/Chem/MolecularGraphFunctions.hpp"
 #include "CDPL/Chem/AtomFunctions.hpp"
 #include "CDPL/Chem/Entity3DFunctions.hpp"
+#include "CDPL/Chem/UtilityFunctions.hpp"
 #include "CDPL/Chem/AtomType.hpp"
 #include "CDPL/ForceField/MMFF94EnergyCalculator.hpp"
 #include "CDPL/ForceField/Exceptions.hpp"
@@ -80,8 +82,11 @@ namespace
 
 	const std::size_t MAX_CONF_DATA_CACHE_SIZE              = 20000;
 	const std::size_t MAX_FRAG_CONF_DATA_CACHE_SIZE         = 100;
-	const std::size_t MAX_FRAG_CONF_COMBINATION_CACHE_SIZE  = 10000;
+	const std::size_t MAX_FRAG_CONF_COMBINATION_CACHE_SIZE  = 20000;
 	const double      COMP_CONFORMER_SPACING                = 4.0;
+	const std::size_t MAX_NUM_STRUCTURE_GEN_TRIALS          = 10;
+
+	const std::size_t CONV_STRUCTURE_GEN_TRIALS             = 100;
 }
 
 
@@ -105,7 +110,7 @@ ConfGen::ConformerGeneratorImpl::ConformerGeneratorImpl():
 	hCoordsGen.undefinedOnly(true);
 	hCoordsGen.setAtom3DCoordinatesCheckFunction(boost::bind(&ConformerGeneratorImpl::has3DCoordinates, this, _1));
 
-	DGStructureGeneratorSettings& dg_settings = dgStructGen.getSettings();
+	DGStructureGeneratorSettings& dg_settings = dgStructureGen.getSettings();
 
 	dg_settings.excludeHydrogens(true);
     dg_settings.regardAtomConfiguration(true);
@@ -371,10 +376,18 @@ unsigned int ConfGen::ConformerGeneratorImpl::generateConformers(const Chem::Mol
 	if (molgraph.getNumAtoms() == 0)
 		return ReturnCode::SUCCESS;
 
-	splitIntoTorsionFragments();
-
 	if (!setupMMFF94Parameters())
 		return ReturnCode::FORCEFIELD_SETUP_FAILED;
+
+	if (determineSamplingMode())
+		return generateConformersStochastic();
+
+	return generateConformersSystematic();
+}
+
+unsigned int ConfGen::ConformerGeneratorImpl::generateConformersSystematic()
+{
+	splitIntoTorsionFragments();
 
 	unsigned int ret_code = generateFragmentConformers();
 
@@ -385,6 +398,123 @@ unsigned int ConfGen::ConformerGeneratorImpl::generateConformers(const Chem::Mol
 		return ret_code;
 
 	return generateOutputConformers();
+}
+
+unsigned int ConfGen::ConformerGeneratorImpl::generateConformersStochastic()
+{
+	std::size_t num_atoms = molGraph->getNumAtoms();
+
+	dgStructureGen.setup(*molGraph, mmff94Data);
+
+	coreAtomMask = dgStructureGen.getExcludedHydrogenMask();
+	coreAtomMask.flip();
+
+	dgStructureGen.getSettings().setBoxSize(coreAtomMask.count() * 2);
+
+	hCoordsGen.setup(*molGraph);
+
+	mmff94EnergyCalc.setup(mmff94Data);
+
+	mmff94GradientCalc.setup(mmff94Data, num_atoms);
+	mmff94GradientCalc.resetFixedAtomMask();
+
+	energyGradient.resize(num_atoms);
+
+	double e_window = settings.getEnergyWindow();
+	double min_energy = 0.0;
+	ConformerData::SharedPointer conf_data_ptr;
+
+	std::size_t last_min_iter_count = 0;
+
+	for (std::size_t i = 0, num_conf_samples = settings.getMaxNumSampledConformers(); i < num_conf_samples && last_min_iter_count <= CONV_STRUCTURE_GEN_TRIALS; 
+		 i++, last_min_iter_count++) {
+
+		unsigned int ret_code = invokeCallbacks();
+
+		if (ret_code != ReturnCode::SUCCESS) {
+			if (ret_code == ReturnCode::TIMEOUT)
+				break;
+
+			return ret_code;
+		}
+
+		if (!conf_data_ptr) {
+			conf_data_ptr = confDataCache.get();
+			conf_data_ptr->resize(num_atoms);
+		}
+
+		ConformerData& conf_data = *conf_data_ptr;
+		bool gen_valid_conf = false;
+
+		for (std::size_t j = 0; j < MAX_NUM_STRUCTURE_GEN_TRIALS; j++) {
+			if (!dgStructureGen.generate(conf_data)) 
+				continue;
+
+			if (!generateHydrogenCoordsAndMinimize(conf_data))
+				continue;
+
+			if (!dgStructureGen.checkAtomConfigurations(conf_data)) 
+				continue;
+
+			if (!dgStructureGen.checkBondConfigurations(conf_data)) 
+				continue;
+
+			gen_valid_conf = true;
+			break;
+		}
+
+		if (!gen_valid_conf)
+			continue;
+
+		double energy = conf_data.getEnergy();
+
+		if (workingConfs.empty())
+			min_energy = energy;
+
+		else if (energy > (min_energy + e_window)) 
+			continue;
+		
+		if (energy < min_energy) { 
+			last_min_iter_count = 0;
+			min_energy = energy;
+
+			for (ConformerDataArray::const_iterator it = workingConfs.begin(), end = workingConfs.end(); it != end; ++it) {
+				const ConformerData::SharedPointer& conf = *it;
+
+				if (conf->getEnergy() > (min_energy + e_window))
+					continue;
+
+				tmpWorkingConfs.push_back(conf);
+			} 
+
+			workingConfs.swap(tmpWorkingConfs);
+			tmpWorkingConfs.clear();
+		} else
+
+		workingConfs.push_back(conf_data_ptr);
+		conf_data_ptr.reset();	
+	}
+
+	return (workingConfs.empty() ? ReturnCode::CONF_GEN_FAILED : ReturnCode::SUCCESS);
+}
+
+bool ConfGen::ConformerGeneratorImpl::determineSamplingMode()
+{
+	switch (settings.getConformerSamplingMode()) {
+
+		case ConformerSamplingMode::STOCHASTIC:
+			inStochasticMode = true;
+			return true;
+
+		case ConformerSamplingMode::SYSTEMATIC:
+			inStochasticMode = false;
+			return false;
+
+		default: 
+			break;
+	}
+
+	return (inStochasticMode = Chem::containsFragmentWithMinSize(*getSSSR(*molGraph), settings.getMinMacrocycleSize()));
 }
 
 void ConfGen::ConformerGeneratorImpl::init(const Chem::MolecularGraph& molgraph)
@@ -401,6 +531,37 @@ void ConfGen::ConformerGeneratorImpl::init(const Chem::MolecularGraph& molgraph)
 
 	invertibleNMask.resize(molgraph.getNumAtoms());
 	invertibleNMask.reset();
+}
+
+bool ConfGen::ConformerGeneratorImpl::generateHydrogenCoordsAndMinimize(ConformerData& conf_data)
+{
+	hCoordsGen.generate(conf_data, false);
+
+	Math::Vector3DArray::StorageType& conf_coords_data = conf_data.getData();
+	std::size_t max_ref_iters = settings.getMaxNumRefinementIterations();
+	double stop_grad = settings.getRefinementStopGradient();
+	double energy = 0.0;
+
+	energyMinimizer.setup(conf_coords_data, energyGradient);
+
+	for (std::size_t j = 0; max_ref_iters == 0 || j < max_ref_iters; j++) {
+		if (energyMinimizer.iterate(energy, conf_coords_data, energyGradient) != BFGSMinimizer::SUCCESS) {
+			if ((boost::math::isnan)(energy))
+				return false;
+
+			break;
+		}
+
+		if ((boost::math::isnan)(energy))
+			return false;
+		
+		if (stop_grad >= 0.0 && energyMinimizer.getGradientNorm() <= stop_grad)
+			break;
+	}
+
+	conf_data.setEnergy(energy);
+
+	return true;
 }
 
 ConfGen::ConformerData::SharedPointer ConfGen::ConformerGeneratorImpl::getInputCoordinates()
@@ -433,35 +594,18 @@ ConfGen::ConformerData::SharedPointer ConfGen::ConformerGeneratorImpl::getInputC
 		}
 	} 
 
+	mmff94EnergyCalc.setup(mmff94Data);
+
 	if (!coords_compl) {
-		hCoordsGen.setup(*molGraph);
-		hCoordsGen.generate(*ipt_coords, false);
-
 		mmff94GradientCalc.setFixedAtomMask(coreAtomMask);
+		mmff94GradientCalc.setup(mmff94Data, num_atoms);
 
-		energyMinimizer.setup(ipt_coords_data, energyGradient);
 		energyGradient.resize(num_atoms);
 
-		std::size_t max_ref_iters = settings.getMaxNumRefinementIterations();
-		double stop_grad = settings.getRefinementStopGradient();
-		double energy = 0.0;
+		hCoordsGen.setup(*molGraph);
 
-		for (std::size_t j = 0; max_ref_iters == 0 || j < max_ref_iters; j++) {
-			if (energyMinimizer.iterate(energy, ipt_coords_data, energyGradient) != BFGSMinimizer::SUCCESS) {
-				if ((boost::math::isnan)(energy))
-					return ConformerData::SharedPointer();
-
-				break;
-			}
-
-			if ((boost::math::isnan)(energy))
-				return ConformerData::SharedPointer();
-		
-			if (stop_grad >= 0.0 && energyMinimizer.getGradientNorm() <= stop_grad)
-				break;
-		}
-
-		ipt_coords->setEnergy(energy);
+		if (!generateHydrogenCoordsAndMinimize(*ipt_coords))
+			return ConformerData::SharedPointer();
 
 	} else
 		ipt_coords->setEnergy(mmff94EnergyCalc(ipt_coords_data));
@@ -781,32 +925,65 @@ bool ConfGen::ConformerGeneratorImpl::selectOutputConformers()
 	fixedAtomConfigMask.resize(num_atoms);
 	fixedAtomConfigMask.reset();
 
-	for (std::size_t i = 0; i < num_atoms; i++) {
-		if (getType(molGraph->getAtom(i)) == AtomType::H)
-			continue;
+	if (inStochasticMode) {
+		for (std::size_t i = 0; i < num_atoms; i++) {
+			const Atom& atom = molGraph->getAtom(i);
+
+			if (getType(atom) == AtomType::H)
+				continue;
+
+			tmpBitSet.set(i);
+		}
+
+		for (DGConstraintGenerator::ConstStereoCenterDataIterator it = dgStructureGen.getConstraintGenerator().getAtomStereoCenterDataBegin(),
+				 end = dgStructureGen.getConstraintGenerator().getAtomStereoCenterDataEnd(); it != end; ++it) 
+			fixedAtomConfigMask.set(it->first);
+
+		if (settings.sampleHeteroAtomHydrogens()) {
+			for (MolecularGraph::ConstBondIterator it = molGraph->getBondsBegin(), end = molGraph->getBondsEnd(); it != end; ++it) {
+				const Bond& bond = *it;
+				const Atom& atom1 = bond.getBegin();
+				unsigned int atom1_type = getType(atom1);
+
+				if (atom1_type != AtomType::C && atom1_type != AtomType::H && getExplicitBondCount(atom1, *molGraph) > 1 && getHeavyBondCount(atom1, *molGraph) == 1)
+					setNeighborAtomBits(atom1, *molGraph, tmpBitSet);
+
+				const Atom& atom2 = bond.getEnd();
+				unsigned int atom2_type = getType(atom2);
+
+				if (atom2_type != AtomType::C && atom2_type != AtomType::H && getExplicitBondCount(atom2, *molGraph) > 1 && getHeavyBondCount(atom2, *molGraph) == 1)
+					setNeighborAtomBits(atom2, *molGraph, tmpBitSet);
+			}
+		}
+
+	} else {
+		for (std::size_t i = 0; i < num_atoms; i++) {
+			const Atom& atom = molGraph->getAtom(i);
+
+			if (getType(atom) == AtomType::H)
+				continue;
  
-		tmpBitSet.set(i);
+			tmpBitSet.set(i);
 
-		const Atom& atom = molGraph->getAtom(i);
+			if (invertibleNMask.test(i)) 
+				setNeighborAtomBits(atom, *molGraph, tmpBitSet);
 
-		if (invertibleNMask.test(i)) 
-			setNeighborAtomBits(atom, *molGraph, tmpBitSet);
+			else if (!getRingFlag(atom)) 
+				fixedAtomConfigMask.set(i);
+		}
 
-		else if (!getRingFlag(atom)) 
-			fixedAtomConfigMask.set(i);
-	}
+		for (BondList::const_iterator it = torDriveBonds.begin(), end = torDriveBonds.end(); it != end; ++it) {
+			const Bond& bond = **it;
+			const Atom& atom1 = bond.getBegin();
 
-	for (BondList::const_iterator it = torDriveBonds.begin(), end = torDriveBonds.end(); it != end; ++it) {
-		const Bond& bond = **it;
-		const Atom& atom1 = bond.getBegin();
+			if (getHeavyBondCount(atom1, *molGraph) == 1)
+				setNeighborAtomBits(atom1, *molGraph, tmpBitSet);
 
-		if (getHeavyBondCount(atom1, *molGraph) == 1)
-			setNeighborAtomBits(atom1, *molGraph, tmpBitSet);
+			const Atom& atom2 = bond.getEnd();
 
-		const Atom& atom2 = bond.getEnd();
-
-		if (getHeavyBondCount(atom2, *molGraph) == 1)
-			setNeighborAtomBits(atom2, *molGraph, tmpBitSet);
+			if (getHeavyBondCount(atom2, *molGraph) == 1)
+				setNeighborAtomBits(atom2, *molGraph, tmpBitSet);
+		}
 	}
 
 	std::sort(workingConfs.begin(), workingConfs.end(), &compareConformerEnergy); 

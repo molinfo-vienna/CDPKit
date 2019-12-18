@@ -114,6 +114,14 @@ namespace CDPL
 
 			double getRefinementStopGradient() const;
 
+			void setMaxNumSampledConformers(std::size_t max_num);
+
+			std::size_t getMaxNumSampledConformers() const;
+
+			void setMinMacrocycleSize(std::size_t min_size);
+
+			std::size_t getMinMacrocycleSize() const;
+
 			FragmentConformerGeneratorSettings& getFragmentBuildSettings();
 
 			const FragmentConformerGeneratorSettings& getFragmentBuildSettings() const;
@@ -133,6 +141,8 @@ namespace CDPL
 			double                             minRMSD;
 			std::size_t                        maxNumRefIters;
 			double                             refStopGrad;
+			std::size_t                        maxNumSampledConfs;
+			std::size_t                        minMacrocycleSize;
 			FragmentConformerGeneratorSettings fragBuildSettings;
 		};
 	};

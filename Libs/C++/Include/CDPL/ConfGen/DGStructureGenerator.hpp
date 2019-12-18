@@ -77,6 +77,8 @@ namespace CDPL
 			std::size_t getNumAtomStereoCenters() const;
 			std::size_t getNumBondStereoCenters() const;
 
+			const DGConstraintGenerator& getConstraintGenerator() const;
+
 		private:
 			void setup(const Chem::MolecularGraph& molgraph, const ForceField::MMFF94InteractionData* ia_data);
 

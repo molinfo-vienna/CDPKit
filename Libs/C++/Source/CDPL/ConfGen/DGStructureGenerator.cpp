@@ -169,3 +169,8 @@ bool ConfGen::DGStructureGenerator::checkBondConfigurations(Math::Vector3DArray&
 
 	return true;
 }
+
+const ConfGen::DGConstraintGenerator& ConfGen::DGStructureGenerator::getConstraintGenerator() const
+{
+	return dgConstraintsGen;
+}

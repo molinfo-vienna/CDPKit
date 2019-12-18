@@ -328,6 +328,7 @@ bool ConfGen::FragmentAssemblerImpl::copyInputCoordinates(unsigned int frag_type
 	ConformerData::SharedPointer coords = allocConformerData();
 	Math::Vector3DArray::StorageType& coords_data = coords->getData();
 	FragmentTreeNode::IndexArray atom_inds = node->getAtomIndices();
+	bool fix_bond_lens = false;
 
 	for (std::size_t i = 0, num_atoms = atom_inds.size(); i < num_atoms; i++) {
 		try {
@@ -351,11 +352,15 @@ bool ConfGen::FragmentAssemblerImpl::copyInputCoordinates(unsigned int frag_type
 				coords_data[idx_mapping.second].assign(entry_coords_data[idx_mapping.first]);
 			}
 
+			fix_bond_lens = true;
 			break;
 		}
 	}
 
 	node->addConformer(coords);
+	
+	if (fix_bond_lens)
+		fixBondLengths(frag, node);
 	
 	if (frag_type == FragmentType::CHAIN)
 		postprocChainFragment(false, frag, node);

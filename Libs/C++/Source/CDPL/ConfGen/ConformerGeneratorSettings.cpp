@@ -43,7 +43,8 @@ ConfGen::ConformerGeneratorSettings::ConformerGeneratorSettings():
 	nitrogenEnumMode(NitrogenEnumerationMode::UNSPECIFIED_STEREO),
 	fromScratch(true), incInputCoords(false), eWindow(10.0), timeout(30 * 60 * 1000), 
 	forceFieldType(ForceFieldType::MMFF94S_NO_ESTAT), strictParam(true), maxNumOutputConfs(100), 
-	minRMSD(0.5), maxNumRefIters(0), refStopGrad(0.1)
+	minRMSD(0.5), maxNumRefIters(0), refStopGrad(0.25), maxNumSampledConfs(15000),
+	minMacrocycleSize(14)
 {}
 
 void ConfGen::ConformerGeneratorSettings::setConformerSamplingMode(unsigned int mode)
@@ -184,6 +185,26 @@ void ConfGen::ConformerGeneratorSettings::setRefinementStopGradient(double grad_
 double ConfGen::ConformerGeneratorSettings::getRefinementStopGradient() const
 {
 	return refStopGrad;
+}
+
+void ConfGen::ConformerGeneratorSettings::setMaxNumSampledConformers(std::size_t max_num)
+{
+	maxNumSampledConfs = max_num;
+}
+
+std::size_t ConfGen::ConformerGeneratorSettings::getMaxNumSampledConformers() const
+{
+	return maxNumSampledConfs;
+}
+
+void ConfGen::ConformerGeneratorSettings::setMinMacrocycleSize(std::size_t min_size)
+{
+	minMacrocycleSize = min_size;
+}
+
+std::size_t ConfGen::ConformerGeneratorSettings::getMinMacrocycleSize() const
+{
+	return minMacrocycleSize;
 }
 
 ConfGen::FragmentConformerGeneratorSettings& ConfGen::ConformerGeneratorSettings::getFragmentBuildSettings()

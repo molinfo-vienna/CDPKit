@@ -65,12 +65,16 @@ void CDPLPythonConfGen::exportDGStructureGenerator()
 			 static_cast<ConfGen::DGStructureGeneratorSettings& (ConfGen::DGStructureGenerator::*)()>
 			 (&ConfGen::DGStructureGenerator::getSettings), 
 			 python::arg("self"), python::return_internal_reference<>())
+		.def("getConstraintGenerator", &ConfGen::DGStructureGenerator::getConstraintGenerator, 
+			 python::arg("self"), python::return_internal_reference<>())
 		.add_property("numAtomStereoCenters",  &ConfGen::DGStructureGenerator::getNumAtomStereoCenters)
 		.add_property("numBondStereoCenters",  &ConfGen::DGStructureGenerator::getNumBondStereoCenters)
 		.add_property("settings", 
 					  python::make_function(static_cast<ConfGen::DGStructureGeneratorSettings& (ConfGen::DGStructureGenerator::*)()>
 											(&ConfGen::DGStructureGenerator::getSettings),
 											python::return_internal_reference<>()))
+		.add_property("constraintGenerator", python::make_function(&ConfGen::DGStructureGenerator::getConstraintGenerator, 
+																   python::return_internal_reference<>()))
 		.add_property("exclHydrogenMask", python::make_function(&ConfGen::DGStructureGenerator::getExcludedHydrogenMask, 
 																python::return_internal_reference<>()));
 }

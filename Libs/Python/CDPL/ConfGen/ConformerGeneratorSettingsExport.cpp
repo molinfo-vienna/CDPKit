@@ -104,6 +104,14 @@ void CDPLPythonConfGen::exportConformerGeneratorSettings()
 			 (python::arg("self"), python::arg("grad_norm")))
 		.def("getRefinementStopGradient", &ConfGen::ConformerGeneratorSettings::getRefinementStopGradient, 
 			 python::arg("self"))
+		.def("setMaxNumSampledConformers", &ConfGen::ConformerGeneratorSettings::setMaxNumSampledConformers, 
+			 (python::arg("self"), python::arg("max_num")))
+		.def("getMaxNumSampledConformers", &ConfGen::ConformerGeneratorSettings::getMaxNumSampledConformers, 
+			 python::arg("self"))
+		.def("setMinMacrocycleSize", &ConfGen::ConformerGeneratorSettings::setMinMacrocycleSize, 
+			 (python::arg("self"), python::arg("max_size")))
+		.def("getMinMacrocycleSize", &ConfGen::ConformerGeneratorSettings::getMinMacrocycleSize, 
+			 python::arg("self"))
 		.def("getFragmentBuildSettings", 
 			 static_cast<ConfGen::FragmentConformerGeneratorSettings& (ConfGen::ConformerGeneratorSettings::*)()>
 			 (&ConfGen::ConformerGeneratorSettings::getFragmentBuildSettings),
@@ -137,6 +145,10 @@ void CDPLPythonConfGen::exportConformerGeneratorSettings()
 					  &ConfGen::ConformerGeneratorSettings::setMaxNumRefinementIterations)
 		.add_property("refinementStopGradient", &ConfGen::ConformerGeneratorSettings::getRefinementStopGradient,
 					  &ConfGen::ConformerGeneratorSettings::setRefinementStopGradient)
+		.add_property("maxNumSampledConformers", &ConfGen::ConformerGeneratorSettings::getMaxNumSampledConformers, 
+					  &ConfGen::ConformerGeneratorSettings::setMaxNumSampledConformers)
+		.add_property("minMacrocycleSize", &ConfGen::ConformerGeneratorSettings::getMinMacrocycleSize, 
+					  &ConfGen::ConformerGeneratorSettings::setMinMacrocycleSize)
 		.add_property("fragmentBuildSettings", 
 					  python::make_function(static_cast<ConfGen::FragmentConformerGeneratorSettings& (ConfGen::ConformerGeneratorSettings::*)()>
 											(&ConfGen::ConformerGeneratorSettings::getFragmentBuildSettings),

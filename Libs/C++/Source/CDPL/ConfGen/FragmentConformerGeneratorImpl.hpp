@@ -31,6 +31,9 @@
 #ifndef CDPL_CONFGEN_FRAGMENTCONFORMERGENERATORIMPL_HPP
 #define CDPL_CONFGEN_FRAGMENTCONFORMERGENERATORIMPL_HPP
 
+#include <vector>
+#include <cstddef>
+
 #include <boost/timer/timer.hpp>
 
 #include "CDPL/ConfGen/FragmentConformerGeneratorSettings.hpp"
@@ -104,10 +107,12 @@ namespace CDPL
 
 			void setupRandomConformerGeneration();
 
+			bool generateHydrogenCoordsAndMinimize(ConformerData& conf_data);
+
 			unsigned int generateSingleConformer();
 			unsigned int generateFlexibleRingConformers();
 
-			void addSymmetryMappingConformers(const ConformerData& conf_data, double rmsd, std::size_t max_num_out_confs);
+			void addSymmetryMappedConformers(const ConformerData& conf_data, double rmsd, std::size_t max_num_out_confs);
 			void addMirroredConformer(const ConformerData& conf_data, double rmsd, std::size_t max_num_out_confs);
 
 			unsigned int generateRandomConformer(ConformerData& conf);
@@ -151,7 +156,7 @@ namespace CDPL
 			MMFF94EnergyCalculator                   mmff94EnergyCalc;
 			MMFF94GradientCalculator                 mmff94GradientCalc;
 			BFGSMinimizer                            energyMinimizer;
-			DGStructureGenerator                     dgStructGen;
+			DGStructureGenerator                     dgStructureGen;
 			Chem::Hydrogen3DCoordinatesGenerator     hCoordsGen;
 			Chem::AutomorphismGroupSearch            symMappingSearch;
 			AlignmentCalculator                      alignmentCalc;

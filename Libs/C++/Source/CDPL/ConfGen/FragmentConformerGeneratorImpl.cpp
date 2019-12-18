@@ -75,10 +75,12 @@ ConfGen::FragmentConformerGeneratorImpl::FragmentConformerGeneratorImpl():
 {
 	using namespace Chem;
 
-    dgStructGen.getSettings().excludeHydrogens(true);
-    dgStructGen.getSettings().regardAtomConfiguration(true);
-    dgStructGen.getSettings().regardBondConfiguration(true);
-	dgStructGen.getSettings().enablePlanarityConstraints(true);
+	DGStructureGeneratorSettings& dg_settings = dgStructureGen.getSettings();
+
+    dg_settings.excludeHydrogens(true);
+    dg_settings.regardAtomConfiguration(true);
+    dg_settings.regardBondConfiguration(true);
+	dg_settings.enablePlanarityConstraints(true);
 
 	hCoordsGen.undefinedOnly(true);
 	hCoordsGen.setAtom3DCoordinatesCheckFunction(boost::bind(&FragmentConformerGeneratorImpl::has3DCoordinates, this, _1));
@@ -208,32 +210,10 @@ bool ConfGen::FragmentConformerGeneratorImpl::generateConformerFromInputCoordina
 
 	if (!coords_compl) {
 		hCoordsGen.setup(*molGraph);
-		hCoordsGen.generate(*ipt_coords, false);
-
 		mmff94GradientCalc.setFixedAtomMask(coreAtomMask);
-
-		energyMinimizer.setup(ipt_coords_data, energyGradient);
-
-		std::size_t max_ref_iters = settings.getMaxNumRefinementIterations();
-		double stop_grad = settings.getRefinementStopGradient();
-		double energy = 0.0;
-
-		for (std::size_t j = 0; max_ref_iters == 0 || j < max_ref_iters; j++) {
-			if (energyMinimizer.iterate(energy, ipt_coords_data, energyGradient) != BFGSMinimizer::SUCCESS) {
-				if ((boost::math::isnan)(energy))
-					return false;
-
-				break;
-			}
-
-			if ((boost::math::isnan)(energy))
-				return false;
 		
-			if (stop_grad >= 0.0 && energyMinimizer.getGradientNorm() <= stop_grad)
-				break;
-		}
-
-		ipt_coords->setEnergy(energy);
+		if (!generateHydrogenCoordsAndMinimize(*ipt_coords))
+			return false;
 
 	} else
 		ipt_coords->setEnergy(mmff94EnergyCalc(ipt_coords_data));
@@ -264,10 +244,9 @@ bool ConfGen::FragmentConformerGeneratorImpl::setupForceField()
 
 void ConfGen::FragmentConformerGeneratorImpl::setupRandomConformerGeneration()
 {
-	dgStructGen.setup(*molGraph, mmff94Data);
+	dgStructureGen.setup(*molGraph, mmff94Data);
 
-	coreAtomMask.resize(numAtoms);
-	coreAtomMask = dgStructGen.getExcludedHydrogenMask();
+	coreAtomMask = dgStructureGen.getExcludedHydrogenMask();
 	coreAtomMask.flip();
 
 	hCoordsGen.setup(*molGraph);
@@ -280,7 +259,7 @@ unsigned int ConfGen::FragmentConformerGeneratorImpl::generateSingleConformer()
 	if (!settings.preserveInputBondingGeometries() || !generateConformerFromInputCoordinates(outputConfs)) {
 		setupRandomConformerGeneration();
 
-		dgStructGen.getSettings().setBoxSize(coreAtomMask.count() * 2);
+		dgStructureGen.getSettings().setBoxSize(coreAtomMask.count() * 2);
 
 		ConformerData::SharedPointer conf_data = allocConformerData();
 		unsigned int ret_code = generateRandomConformer(*conf_data);
@@ -301,7 +280,7 @@ unsigned int ConfGen::FragmentConformerGeneratorImpl::generateFlexibleRingConfor
 
 	setupRandomConformerGeneration();
 
-	dgStructGen.getSettings().setBoxSize(coreAtomMask.count());
+	dgStructureGen.getSettings().setBoxSize(coreAtomMask.count());
 
 	getRingAtomIndices();
 	getSymmetryMappings();
@@ -324,6 +303,7 @@ unsigned int ConfGen::FragmentConformerGeneratorImpl::generateFlexibleRingConfor
 	double e_window = rsys_settings->getEnergyWindow();
 	double min_energy = (workingConfs.empty() ? 0.0 : workingConfs.front()->getEnergy());
 	unsigned int ret_code = ReturnCode::SUCCESS;
+	ConformerData::SharedPointer conf_data;
 
 	for (std::size_t i = 0; i < num_conf_samples; i++) {
 		if ((ret_code = invokeCallbacks()) != ReturnCode::SUCCESS)
@@ -334,7 +314,8 @@ unsigned int ConfGen::FragmentConformerGeneratorImpl::generateFlexibleRingConfor
 			break;
 		}
 
-		ConformerData::SharedPointer conf_data = allocConformerData();
+		if (!conf_data)
+			conf_data = allocConformerData();
 
 		if (generateRandomConformer(*conf_data) != ReturnCode::SUCCESS) 
 			continue;
@@ -351,6 +332,7 @@ unsigned int ConfGen::FragmentConformerGeneratorImpl::generateFlexibleRingConfor
 			min_energy = energy;
 
 		workingConfs.push_back(conf_data);
+		conf_data.reset();
 	}
 
 	if (workingConfs.empty()) 
@@ -370,7 +352,7 @@ unsigned int ConfGen::FragmentConformerGeneratorImpl::generateFlexibleRingConfor
 		if (conf_data->getEnergy() > max_energy)
 			break;
 
-		addSymmetryMappingConformers(*conf_data, rmsd, max_num_out_confs);
+		addSymmetryMappedConformers(*conf_data, rmsd, max_num_out_confs);
 		addMirroredConformer(*conf_data, rmsd, max_num_out_confs);
 
 		if (outputConfs.size() < max_num_out_confs) {
@@ -384,7 +366,7 @@ unsigned int ConfGen::FragmentConformerGeneratorImpl::generateFlexibleRingConfor
 	return ret_code;
 }
 
-void ConfGen::FragmentConformerGeneratorImpl::addSymmetryMappingConformers(const ConformerData& conf_data, double rmsd, std::size_t max_num_out_confs)
+void ConfGen::FragmentConformerGeneratorImpl::addSymmetryMappedConformers(const ConformerData& conf_data, double rmsd, std::size_t max_num_out_confs)
 {
 	const Math::Vector3DArray::StorageType& conf_coords_data = conf_data.getData();
 
@@ -411,7 +393,7 @@ void ConfGen::FragmentConformerGeneratorImpl::addSymmetryMappingConformers(const
 
 void ConfGen::FragmentConformerGeneratorImpl::addMirroredConformer(const ConformerData& conf_data, double rmsd, std::size_t max_num_out_confs)
 {
-	if (dgStructGen.getNumAtomStereoCenters() != 0 || outputConfs.size() >= max_num_out_confs)
+	if (dgStructureGen.getNumAtomStereoCenters() != 0 || outputConfs.size() >= max_num_out_confs)
 		return;
 
 	ConformerData::SharedPointer mirr_conf_data = allocConformerData();
@@ -437,42 +419,51 @@ void ConfGen::FragmentConformerGeneratorImpl::addMirroredConformer(const Conform
 	outputConfs.push_back(mirr_conf_data);
 }
 
-unsigned int ConfGen::FragmentConformerGeneratorImpl::generateRandomConformer(ConformerData& conf_data)
+bool ConfGen::FragmentConformerGeneratorImpl::generateHydrogenCoordsAndMinimize(ConformerData& conf_data)
 {
 	std::size_t max_ref_iters = settings.getMaxNumRefinementIterations();
 	double stop_grad = settings.getRefinementStopGradient();
+	Math::Vector3DArray::StorageType& conf_coords_data = conf_data.getData();
 
-	for (std::size_t i = 0; i < MAX_NUM_STRUCTURE_GEN_TRIALS; i++) {
-		if (!dgStructGen.generate(conf_data)) 
-			continue;
+	hCoordsGen.generate(conf_data, false);
+	energyMinimizer.setup(conf_coords_data, energyGradient);
 
-		hCoordsGen.generate(conf_data, false);
-		energyMinimizer.setup(conf_data.getData(), energyGradient);
+	double energy = 0.0;		
 
-		double energy = 0.0;		
-
-		for (std::size_t j = 0; max_ref_iters == 0 || j < max_ref_iters; j++) {
-			if (energyMinimizer.iterate(energy, conf_data.getData(), energyGradient) != BFGSMinimizer::SUCCESS) {
-				if ((boost::math::isnan)(energy))
-					return ReturnCode::FORCEFIELD_MINIMIZATION_FAILED;
-
-				break;
-			}
-
+	for (std::size_t i = 0; max_ref_iters == 0 || i < max_ref_iters; i++) {
+		if (energyMinimizer.iterate(energy, conf_coords_data, energyGradient) != BFGSMinimizer::SUCCESS) {
 			if ((boost::math::isnan)(energy))
-				return ReturnCode::FORCEFIELD_MINIMIZATION_FAILED;
-		
-			if (stop_grad >= 0.0 && energyMinimizer.getGradientNorm() <= stop_grad)
-				break;
+				return false;
+
+			break;
 		}
+		
+		if ((boost::math::isnan)(energy))
+			return false;
+		
+		if (stop_grad >= 0.0 && energyMinimizer.getGradientNorm() <= stop_grad)
+			break;
+	}
 
-		if (!dgStructGen.checkAtomConfigurations(conf_data)) 
+	conf_data.setEnergy(energy);
+
+	return true;
+}
+
+unsigned int ConfGen::FragmentConformerGeneratorImpl::generateRandomConformer(ConformerData& conf_data)
+{
+	for (std::size_t i = 0; i < MAX_NUM_STRUCTURE_GEN_TRIALS; i++) {
+		if (!dgStructureGen.generate(conf_data)) 
+			continue;
+
+		if (!generateHydrogenCoordsAndMinimize(conf_data))
+			return ReturnCode::FORCEFIELD_MINIMIZATION_FAILED;
+
+		if (!dgStructureGen.checkAtomConfigurations(conf_data)) 
 			continue;
 		
-		if (!dgStructGen.checkBondConfigurations(conf_data)) 
+		if (!dgStructureGen.checkBondConfigurations(conf_data)) 
 			continue;
-
-		conf_data.setEnergy(energy);
 
 		return ReturnCode::SUCCESS;
 	}
