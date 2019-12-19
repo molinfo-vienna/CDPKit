@@ -67,8 +67,8 @@ SET(confgen_MOD_SRCS
 IF(Boost_TIMER_FOUND AND Boost_CHRONO_FOUND)
   SET(confgen_MOD_SRCS
       ${confgen_MOD_SRCS}
-      RandomStructureGeneratorExport.cpp
-      RandomStructureGeneratorSettingsExport.cpp
+      StructureGeneratorExport.cpp
+      StructureGeneratorSettingsExport.cpp
       ConformerGeneratorExport.cpp
       ConformerGeneratorSettingsExport.cpp
       FragmentConformerGeneratorExport.cpp

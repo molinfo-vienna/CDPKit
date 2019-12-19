@@ -85,8 +85,6 @@ namespace
 	const std::size_t MAX_FRAG_CONF_COMBINATION_CACHE_SIZE  = 20000;
 	const double      COMP_CONFORMER_SPACING                = 4.0;
 	const std::size_t MAX_NUM_STRUCTURE_GEN_TRIALS          = 10;
-
-	const std::size_t CONV_STRUCTURE_GEN_TRIALS             = 100;
 }
 
 
@@ -168,7 +166,7 @@ const ConfGen::CallbackFunction& ConfGen::ConformerGeneratorImpl::getTimeoutCall
 	return timeoutCallback;
 }
 
-unsigned int ConfGen::ConformerGeneratorImpl::generate(const Chem::MolecularGraph& molgraph)
+unsigned int ConfGen::ConformerGeneratorImpl::generate(const Chem::MolecularGraph& molgraph, bool struct_gen_only)
 {
 	using namespace Chem;
 
@@ -180,22 +178,21 @@ unsigned int ConfGen::ConformerGeneratorImpl::generate(const Chem::MolecularGrap
 		return ReturnCode::SUCCESS;
 	}
 
-	timer.start();
 	compConfData.clear();
 
 	if (comps.getSize() == 1) {
-		unsigned int ret_code = generateConformers(molgraph);
+		unsigned int ret_code = generateConformers(molgraph, struct_gen_only);
 
-		if (ret_code != ReturnCode::SUCCESS)
+		if (ret_code != ReturnCode::SUCCESS) 
 			return ret_code;
 
-		if (selectOutputConformers())
+		if (selectOutputConformers(struct_gen_only) && outputConfs.size() > 1)
 			std::sort(outputConfs.begin(), outputConfs.end(), &compareConformerEnergy);
 
-		return invokeCallbacks();
+		return (outputConfs.empty() ? ReturnCode::CONF_GEN_FAILED : ReturnCode::SUCCESS);
 	}
 
-	return generateConformers(molgraph, comps);
+	return generateConformers(molgraph, comps, struct_gen_only);
 }
 
 std::size_t ConfGen::ConformerGeneratorImpl::getNumConformers() const
@@ -218,7 +215,7 @@ ConfGen::ConformerGeneratorImpl::ConstConformerIterator ConfGen::ConformerGenera
 	return outputConfs.end();
 }
 
-unsigned int ConfGen::ConformerGeneratorImpl::generateConformers(const Chem::MolecularGraph& molgraph, const Chem::FragmentList& comps)
+unsigned int ConfGen::ConformerGeneratorImpl::generateConformers(const Chem::MolecularGraph& molgraph, const Chem::FragmentList& comps, bool struct_gen_only)
 {
 	using namespace Chem;
 
@@ -230,14 +227,14 @@ unsigned int ConfGen::ConformerGeneratorImpl::generateConformers(const Chem::Mol
 		if (comp->getNumAtoms() == 0) // sanity check
 			continue;
 
-		unsigned int ret_code = generateConformers(*comp);
+		unsigned int ret_code = generateConformers(*comp, struct_gen_only);
 
 		if (ret_code != ReturnCode::SUCCESS) 
 			return ret_code;
 
 		FragmentConfDataPtr comp_conf_data = fragConfDataCache.get();
 
-		comp_conf_data->haveInputCoords = selectOutputConformers();
+		comp_conf_data->haveInputCoords = selectOutputConformers(struct_gen_only);
 		comp_conf_data->fragment = comp;
 		comp_conf_data->conformers.swap(outputConfs);
 
@@ -326,7 +323,7 @@ unsigned int ConfGen::ConformerGeneratorImpl::combineComponentConformers(const C
 	if (have_full_ipt_coords)
 		std::sort(outputConfs.begin(), outputConfs.end(), &compareConformerEnergy);
 
-	return invokeCallbacks();
+	return (outputConfs.empty() ? ReturnCode::CONF_GEN_FAILED : ReturnCode::SUCCESS);
 }
 
 void ConfGen::ConformerGeneratorImpl::calcConformerBounds(double min[3], double max[3], const Math::Vector3DArray& coords) const
@@ -369,7 +366,7 @@ void ConfGen::ConformerGeneratorImpl::calcConformerBounds(double min[3], double 
 	}
 } 
 
-unsigned int ConfGen::ConformerGeneratorImpl::generateConformers(const Chem::MolecularGraph& molgraph)
+unsigned int ConfGen::ConformerGeneratorImpl::generateConformers(const Chem::MolecularGraph& molgraph, bool struct_gen_only)
 {
 	init(molgraph);
 
@@ -409,7 +406,7 @@ unsigned int ConfGen::ConformerGeneratorImpl::generateConformersStochastic()
 	coreAtomMask = dgStructureGen.getExcludedHydrogenMask();
 	coreAtomMask.flip();
 
-	dgStructureGen.getSettings().setBoxSize(coreAtomMask.count() * 2);
+	dgStructureGen.getSettings().setBoxSize(coreAtomMask.count() * 2.0);
 
 	hCoordsGen.setup(*molGraph);
 
@@ -426,8 +423,8 @@ unsigned int ConfGen::ConformerGeneratorImpl::generateConformersStochastic()
 
 	std::size_t last_min_iter_count = 0;
 
-	for (std::size_t i = 0, num_conf_samples = settings.getMaxNumSampledConformers(); i < num_conf_samples && last_min_iter_count <= CONV_STRUCTURE_GEN_TRIALS; 
-		 i++, last_min_iter_count++) {
+	for (std::size_t i = 0, num_conf_samples = settings.getMaxNumSampledConformers(), conv_iter_count = settings.getConvergenceIterationCount(); 
+		 i < num_conf_samples && last_min_iter_count <= conv_iter_count; i++, last_min_iter_count++) {
 
 		unsigned int ret_code = invokeCallbacks();
 
@@ -531,6 +528,8 @@ void ConfGen::ConformerGeneratorImpl::init(const Chem::MolecularGraph& molgraph)
 
 	invertibleNMask.resize(molgraph.getNumAtoms());
 	invertibleNMask.reset();
+
+	timer.start();
 }
 
 bool ConfGen::ConformerGeneratorImpl::generateHydrogenCoordsAndMinimize(ConformerData& conf_data)
@@ -913,7 +912,7 @@ unsigned int ConfGen::ConformerGeneratorImpl::generateOutputConformers()
 	return (workingConfs.empty() ? ReturnCode::CONF_GEN_FAILED : ReturnCode::SUCCESS);
 }
 
-bool ConfGen::ConformerGeneratorImpl::selectOutputConformers()
+bool ConfGen::ConformerGeneratorImpl::selectOutputConformers(bool struct_gen_only)
 {
 	using namespace Chem;
 

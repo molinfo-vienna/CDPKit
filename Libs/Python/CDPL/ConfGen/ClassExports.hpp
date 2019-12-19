@@ -53,8 +53,8 @@ namespace CDPLPythonConfGen
 
 #if defined(HAVE_BOOST_TIMER) && defined(HAVE_BOOST_CHRONO)
 
-	void exportRandomStructureGenerator();
-	void exportRandomStructureGeneratorSettings();
+	void exportStructureGenerator();
+	void exportStructureGeneratorSettings();
 	void exportConformerGenerator();
 	void exportConformerGeneratorSettings();
 	void exportFragmentConformerGenerator();

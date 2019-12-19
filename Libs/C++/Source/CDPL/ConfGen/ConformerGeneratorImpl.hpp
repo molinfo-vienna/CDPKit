@@ -92,7 +92,7 @@ namespace CDPL
 
 			const CallbackFunction& getTimeoutCallback() const;
 
-			unsigned int generate(const Chem::MolecularGraph& molgraph);
+			unsigned int generate(const Chem::MolecularGraph& molgraph, bool struct_gen_only);
 
 			std::size_t getNumConformers() const;
 
@@ -113,13 +113,13 @@ namespace CDPL
 
 			ConformerGeneratorImpl& operator=(const ConformerGeneratorImpl&);
 
-			unsigned int generateConformers(const Chem::MolecularGraph& molgraph, const Chem::FragmentList& comps);
+			unsigned int generateConformers(const Chem::MolecularGraph& molgraph, const Chem::FragmentList& comps, bool struct_gen_only);
 	
 			unsigned int combineComponentConformers(const Chem::MolecularGraph& molgraph, bool have_full_ipt_coords);
 
 			void calcConformerBounds(double min[3], double max[3], const Math::Vector3DArray& coords) const;
 
-			unsigned int generateConformers(const Chem::MolecularGraph& molgraph);
+			unsigned int generateConformers(const Chem::MolecularGraph& molgraph, bool struct_gen_only);
 
 			unsigned int generateConformersSystematic();
 
@@ -145,7 +145,7 @@ namespace CDPL
 
 			unsigned int generateOutputConformers();
 
-			bool selectOutputConformers();
+			bool selectOutputConformers(bool struct_gen_only);
 
 			double getMMFF94BondLength(std::size_t atom1_idx, std::size_t atom2_idx) const;
 

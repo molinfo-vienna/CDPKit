@@ -153,8 +153,6 @@ namespace CDPL
 			bool isPlanar(const Chem::Atom& atom) const;
 			bool isPlanar(const Chem::Bond& bond) const;
 
-			bool hasNeighborWithDoubleBond(const Chem::Atom& atom) const;
-
 			typedef std::vector<std::size_t> AtomIndexList;
 
 			std::size_t getNeighborAtoms(const Chem::Atom& atom, AtomIndexList& idx_list,

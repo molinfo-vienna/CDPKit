@@ -95,7 +95,7 @@ const ConfGen::CallbackFunction& ConfGen::ConformerGenerator::getTimeoutCallback
 
 unsigned int ConfGen::ConformerGenerator::generate(const Chem::MolecularGraph& molgraph)
 {
-	return impl->generate(molgraph);
+	return impl->generate(molgraph, false);
 }
 
 std::size_t ConfGen::ConformerGenerator::getNumConformers() const

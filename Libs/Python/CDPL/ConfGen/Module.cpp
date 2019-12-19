@@ -54,8 +54,8 @@ BOOST_PYTHON_MODULE(_confgen)
 
 #if defined(HAVE_BOOST_TIMER) && defined(HAVE_BOOST_CHRONO)
 
-	exportRandomStructureGeneratorSettings();
-	exportRandomStructureGenerator();
+	exportStructureGeneratorSettings();
+	exportStructureGenerator();
 	exportConformerGeneratorSettings();
 	exportConformerGenerator();
 	exportFragmentConformerGeneratorSettings();

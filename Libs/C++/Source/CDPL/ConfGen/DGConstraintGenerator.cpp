@@ -297,7 +297,7 @@ void ConfGen::DGConstraintGenerator::addDefaultDistanceConstraints(Util::DG3DCoo
 
 			double cov_rad2 = AtomDictionary::getCovalentRadius(getType(molGraph->getAtom(j)));
 
-			coords_gen.addDistanceConstraint(i, j, cov_rad1 + cov_rad2 + 0.5, bond_length_sum);
+			coords_gen.addDistanceConstraint(i, j, cov_rad1 + cov_rad2 + 1.5, bond_length_sum);
 			markAtomPairProcessed(i, j);
 		}
 	}
@@ -543,7 +543,7 @@ void ConfGen::DGConstraintGenerator::addBondPlanarityConstraints(Util::DG3DCoord
 			for (std::size_t j = 0; j < num_nbrs2; j++) {
 				std::size_t nbr_atom2_idx = atomIndexList2[j];
 
-				coords_gen.addVolumeConstraint(nbr_atom1_idx, atom1_idx, atom2_idx, nbr_atom2_idx, 0.0, 0.0);
+				coords_gen.addVolumeConstraint(atom1_idx, nbr_atom1_idx, nbr_atom2_idx, atom2_idx, 0.0, 0.0);
 			}
 		}
 	}
@@ -926,12 +926,7 @@ bool ConfGen::DGConstraintGenerator::isPlanar(const Chem::Atom& atom) const
 	if (getAromaticityFlag(atom))
 		return true;
 
-	unsigned int atom_type = getType(atom);
-
-	if ((atom_type == AtomType::N || atom_type == AtomType::O || atom_type == AtomType::S) && hasNeighborWithDoubleBond(atom))
-		return true;
-
-	return false;
+	return isPlanarNitrogen(atom, *molGraph);
 }
 
 bool ConfGen::DGConstraintGenerator::isPlanar(const Chem::Bond& bond) const
@@ -949,47 +944,11 @@ bool ConfGen::DGConstraintGenerator::isPlanar(const Chem::Bond& bond) const
 	const Atom& atom1 = bond.getBegin();
 	const Atom& atom2 = bond.getEnd();
 
-	if (order == 2 && (getHybridizationState(atom1) == HybridizationState::SP2 || getAromaticityFlag(atom1)) &&
-		(getHybridizationState(atom2) == HybridizationState::SP2 || getAromaticityFlag(atom2)))
-		return true;
+	if (order == 2)
+		return ((getHybridizationState(atom1) == HybridizationState::SP2 || getAromaticityFlag(atom1)) &&
+				(getHybridizationState(atom2) == HybridizationState::SP2 || getAromaticityFlag(atom2)));
 
-	if (order == 1) {
-		unsigned int atom_type = getType(atom1);
-	
-		if ((atom_type == AtomType::N || atom_type == AtomType::O || atom_type == AtomType::S) && 
-			(getAromaticityFlag(atom2) || (getHybridizationState(atom2) == HybridizationState::SP2 && getExplicitBondCount(atom2, *molGraph, 2, AtomType::HET, false) == 1)))
-			return true;
-
-		atom_type = getType(atom2);
-
-		if ((atom_type == AtomType::N || atom_type == AtomType::O || atom_type == AtomType::S) && 
-			(getAromaticityFlag(atom1) || (getHybridizationState(atom1) == HybridizationState::SP2 && getExplicitBondCount(atom1, *molGraph, 2, AtomType::HET, false) == 1)))
-			return true;
-	}
-
-	return false;
-}
-
-bool ConfGen::DGConstraintGenerator::hasNeighborWithDoubleBond(const Chem::Atom& atom) const
-{
-	using namespace Chem;
-
-	Atom::ConstBondIterator b_it = atom.getBondsBegin();
-
-	for (Atom::ConstAtomIterator a_it = atom.getAtomsBegin(), a_end = atom.getAtomsEnd(); a_it != a_end; ++a_it, ++b_it) {
-		const Atom& nbr_atom = *a_it;
-
-		if (!molGraph->containsAtom(nbr_atom))
-			continue;
-
-		if (!molGraph->containsBond(*b_it))
-			continue;
-
-		if (isUnsaturated(nbr_atom, *molGraph))
-			return true;
-	}
-
-	return false;
+	return isAmideBond(bond, *molGraph, true, false);
 }
 
 std::size_t ConfGen::DGConstraintGenerator::getNeighborAtoms(const Chem::Atom& atom, AtomIndexList& idx_list, const Chem::Atom* x_atom) const

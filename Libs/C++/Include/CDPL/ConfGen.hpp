@@ -59,8 +59,8 @@
 
 #if defined(HAVE_BOOST_TIMER) && defined(HAVE_BOOST_CHRONO)
 
-#include "CDPL/ConfGen/RandomStructureGenerator.hpp"
-#include "CDPL/ConfGen/RandomStructureGeneratorSettings.hpp"
+#include "CDPL/ConfGen/StructureGenerator.hpp"
+#include "CDPL/ConfGen/StructureGeneratorSettings.hpp"
 #include "CDPL/ConfGen/ConformerGenerator.hpp"
 #include "CDPL/ConfGen/ConformerGeneratorSettings.hpp"
 #include "CDPL/ConfGen/FragmentConformerGenerator.hpp"

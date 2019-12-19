@@ -37,7 +37,12 @@ using namespace CDPL;
 
 ConfGen::DGStructureGenerator::DGStructureGenerator(): 
 	molGraph(0)
-{}
+{
+	phase1CoordsGen.setNumCycles(70);
+	phase1CoordsGen.setCycleStepCountFactor(1.3);
+	phase1CoordsGen.setStartLearningRate(1.0);
+	phase1CoordsGen.setLearningRateDecrement(0.9 / 70);
+}
 
 ConfGen::DGStructureGeneratorSettings& ConfGen::DGStructureGenerator::getSettings()
 {

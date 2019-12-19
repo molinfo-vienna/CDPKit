@@ -78,8 +78,8 @@ SET(cdpl-confgen_LIB_SRCS
 IF(Boost_TIMER_FOUND AND Boost_CHRONO_FOUND)
    SET(cdpl-confgen_LIB_SRCS
        ${cdpl-confgen_LIB_SRCS}
-       RandomStructureGenerator.cpp
-       RandomStructureGeneratorSettings.cpp
+       StructureGenerator.cpp
+       StructureGeneratorSettings.cpp
        ConformerGenerator.cpp
        ConformerGeneratorImpl.cpp
        ConformerGeneratorSettings.cpp

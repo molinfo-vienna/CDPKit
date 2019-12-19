@@ -41,10 +41,10 @@ const ConfGen::ConformerGeneratorSettings ConfGen::ConformerGeneratorSettings::D
 ConfGen::ConformerGeneratorSettings::ConformerGeneratorSettings():
 	confSamplingMode(ConformerSamplingMode::AUTO), sampleHetAtomHs(false), enumRings(true),
 	nitrogenEnumMode(NitrogenEnumerationMode::UNSPECIFIED_STEREO),
-	fromScratch(true), incInputCoords(false), eWindow(10.0), timeout(30 * 60 * 1000), 
+	fromScratch(true), incInputCoords(false), eWindow(10.0), timeout(60 * 60 * 1000), 
 	forceFieldType(ForceFieldType::MMFF94S_NO_ESTAT), strictParam(true), maxNumOutputConfs(100), 
-	minRMSD(0.5), maxNumRefIters(0), refStopGrad(0.25), maxNumSampledConfs(15000),
-	minMacrocycleSize(14)
+	minRMSD(0.5), maxNumRefIters(0), refStopGrad(0.25), maxNumSampledConfs(10000),
+	convIterCount(300), minMacrocycleSize(14)
 {}
 
 void ConfGen::ConformerGeneratorSettings::setConformerSamplingMode(unsigned int mode)
@@ -195,6 +195,16 @@ void ConfGen::ConformerGeneratorSettings::setMaxNumSampledConformers(std::size_t
 std::size_t ConfGen::ConformerGeneratorSettings::getMaxNumSampledConformers() const
 {
 	return maxNumSampledConfs;
+}
+
+void ConfGen::ConformerGeneratorSettings::setConvergenceIterationCount(std::size_t count)
+{
+	convIterCount = count;
+}
+
+std::size_t ConfGen::ConformerGeneratorSettings::getConvergenceIterationCount() const
+{
+	return convIterCount;
 }
 
 void ConfGen::ConformerGeneratorSettings::setMinMacrocycleSize(std::size_t min_size)
