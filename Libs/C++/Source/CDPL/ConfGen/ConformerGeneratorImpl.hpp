@@ -121,9 +121,9 @@ namespace CDPL
 
 			unsigned int generateConformers(const Chem::MolecularGraph& molgraph, bool struct_gen_only);
 
-			unsigned int generateConformersSystematic();
+			unsigned int generateConformersSystematic(bool struct_gen_only);
 
-			unsigned int generateConformersStochastic();
+			unsigned int generateConformersStochastic(bool struct_gen_only);
 
 			bool determineSamplingMode();
 
@@ -143,7 +143,7 @@ namespace CDPL
 		
 			void generateFragmentConformerCombinations(std::size_t frag_idx, double comb_energy);
 
-			unsigned int generateOutputConformers();
+			unsigned int generateOutputConformers(bool struct_gen_only);
 
 			bool selectOutputConformers(bool struct_gen_only);
 
@@ -156,6 +156,8 @@ namespace CDPL
 			static bool compareFragmentConfCount(const FragmentConfDataPtr& conf_data1, 
 												 const FragmentConfDataPtr& conf_data2);
 
+			void orderConformersByEnergy(ConformerDataArray& confs) const;
+
 			unsigned int invokeCallbacks() const;
 			bool timedout() const;
 
@@ -167,7 +169,6 @@ namespace CDPL
 				Chem::Fragment::SharedPointer fragment;
 				ConformerDataArray            conformers;
 				std::size_t                   lastConfIdx;
-				bool                          isFlexRingSys;
 				bool                          haveInputCoords;
 
 				void clear() {
@@ -181,7 +182,6 @@ namespace CDPL
 
 				UIntArray   confIndices;
 				double      energy;
-				bool        valid;
 			};
 
 			typedef Util::ObjectStack<ConfCombinationData> ConfCombinationDataCache;

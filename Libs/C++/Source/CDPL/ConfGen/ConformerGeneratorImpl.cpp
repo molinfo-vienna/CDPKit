@@ -186,8 +186,8 @@ unsigned int ConfGen::ConformerGeneratorImpl::generate(const Chem::MolecularGrap
 		if (ret_code != ReturnCode::SUCCESS) 
 			return ret_code;
 
-		if (selectOutputConformers(struct_gen_only) && outputConfs.size() > 1)
-			std::sort(outputConfs.begin(), outputConfs.end(), &compareConformerEnergy);
+		if (selectOutputConformers(struct_gen_only))
+			orderConformersByEnergy(outputConfs);
 
 		return (outputConfs.empty() ? ReturnCode::CONF_GEN_FAILED : ReturnCode::SUCCESS);
 	}
@@ -263,7 +263,7 @@ unsigned int ConfGen::ConformerGeneratorImpl::combineComponentConformers(const C
 					   boost::bind(&MolecularGraph::getAtomIndex, &molgraph, _1));
 
 		if (!have_full_ipt_coords && comp_conf_data.haveInputCoords)
-			std::sort(comp_conf_data.conformers.begin(), comp_conf_data.conformers.end(), &compareConformerEnergy);
+			orderConformersByEnergy(comp_conf_data.conformers);
 
 		if (comp_conf_data.conformers.size() > max_num_confs)
 			max_num_confs = comp_conf_data.conformers.size();
@@ -321,7 +321,7 @@ unsigned int ConfGen::ConformerGeneratorImpl::combineComponentConformers(const C
 	}
 
 	if (have_full_ipt_coords)
-		std::sort(outputConfs.begin(), outputConfs.end(), &compareConformerEnergy);
+		orderConformersByEnergy(outputConfs);
 
 	return (outputConfs.empty() ? ReturnCode::CONF_GEN_FAILED : ReturnCode::SUCCESS);
 }
@@ -376,13 +376,22 @@ unsigned int ConfGen::ConformerGeneratorImpl::generateConformers(const Chem::Mol
 	if (!setupMMFF94Parameters())
 		return ReturnCode::FORCEFIELD_SETUP_FAILED;
 
-	if (determineSamplingMode())
-		return generateConformersStochastic();
+	if (struct_gen_only && !settings.generateCoordinatesFromScratch()) {
+		ConformerData::SharedPointer ipt_coords = getInputCoordinates();
 
-	return generateConformersSystematic();
+		if (ipt_coords) {
+			outputConfs.push_back(ipt_coords);
+			return ReturnCode::SUCCESS;
+		}
+	}
+
+	if (determineSamplingMode())
+		return generateConformersStochastic(struct_gen_only);
+
+	return generateConformersSystematic(struct_gen_only);
 }
 
-unsigned int ConfGen::ConformerGeneratorImpl::generateConformersSystematic()
+unsigned int ConfGen::ConformerGeneratorImpl::generateConformersSystematic(bool struct_gen_only)
 {
 	splitIntoTorsionFragments();
 
@@ -394,10 +403,10 @@ unsigned int ConfGen::ConformerGeneratorImpl::generateConformersSystematic()
 	if ((ret_code = generateFragmentConformerCombinations()) != ReturnCode::SUCCESS)
 		return ret_code;
 
-	return generateOutputConformers();
+	return generateOutputConformers(struct_gen_only);
 }
 
-unsigned int ConfGen::ConformerGeneratorImpl::generateConformersStochastic()
+unsigned int ConfGen::ConformerGeneratorImpl::generateConformersStochastic(bool struct_gen_only)
 {
 	std::size_t num_atoms = molGraph->getNumAtoms();
 
@@ -421,10 +430,8 @@ unsigned int ConfGen::ConformerGeneratorImpl::generateConformersStochastic()
 	double min_energy = 0.0;
 	ConformerData::SharedPointer conf_data_ptr;
 
-	std::size_t last_min_iter_count = 0;
-
-	for (std::size_t i = 0, num_conf_samples = settings.getMaxNumSampledConformers(), conv_iter_count = settings.getConvergenceIterationCount(); 
-		 i < num_conf_samples && last_min_iter_count <= conv_iter_count; i++, last_min_iter_count++) {
+	for (std::size_t i = 0, num_conf_samples = settings.getMaxNumSampledConformers(), conv_iter_count = settings.getConvergenceIterationCount(), last_min_iter_count = 0; 
+		 i < num_conf_samples && last_min_iter_count <= conv_iter_count; i++) {
 
 		unsigned int ret_code = invokeCallbacks();
 
@@ -463,6 +470,13 @@ unsigned int ConfGen::ConformerGeneratorImpl::generateConformersStochastic()
 		if (!gen_valid_conf)
 			continue;
 
+		if (struct_gen_only) {
+			workingConfs.push_back(conf_data_ptr);
+			return ReturnCode::SUCCESS;
+		}
+
+		last_min_iter_count++;
+
 		double energy = conf_data.getEnergy();
 
 		if (workingConfs.empty())
@@ -471,7 +485,7 @@ unsigned int ConfGen::ConformerGeneratorImpl::generateConformersStochastic()
 		else if (energy > (min_energy + e_window)) 
 			continue;
 		
-		if (energy < min_energy) { 
+		else if (energy < min_energy) { 
 			last_min_iter_count = 0;
 			min_energy = energy;
 
@@ -486,7 +500,7 @@ unsigned int ConfGen::ConformerGeneratorImpl::generateConformersStochastic()
 
 			workingConfs.swap(tmpWorkingConfs);
 			tmpWorkingConfs.clear();
-		} else
+		}
 
 		workingConfs.push_back(conf_data_ptr);
 		conf_data_ptr.reset();	
@@ -684,7 +698,6 @@ unsigned int ConfGen::ConformerGeneratorImpl::generateFragmentConformers()
 		if (ret_code != ReturnCode::SUCCESS)
 			return ret_code;
 
-		frag_conf_data.isFlexRingSys = fragAssembler.foundFlexibleRingSystem();
 		invertibleNMask |= fragAssembler.getInvertibleNitrogenMask();
 
 		std::size_t num_bonds = frag.getNumBonds();
@@ -762,7 +775,7 @@ unsigned int ConfGen::ConformerGeneratorImpl::generateFragmentConformers()
 			}
 		}
 
-		std::sort(frag_conf_data.conformers.begin(), frag_conf_data.conformers.end(), &compareConformerEnergy); 
+		orderConformersByEnergy(frag_conf_data.conformers); 
 
 		frag_conf_data.lastConfIdx = frag_conf_data.conformers.size();
 	}
@@ -788,7 +801,6 @@ void ConfGen::ConformerGeneratorImpl::generateFragmentConformerCombinations(std:
 	if (torFragConfData.size() <= frag_idx) {
 		ConfCombinationData* frag_conf_comb = confCombDataCache.getRaw();
 
-		frag_conf_comb->valid = true;
 		frag_conf_comb->energy = comb_energy;
 		frag_conf_comb->confIndices = currConfComb;
 
@@ -807,7 +819,7 @@ void ConfGen::ConformerGeneratorImpl::generateFragmentConformerCombinations(std:
 	}
 }
 
-unsigned int ConfGen::ConformerGeneratorImpl::generateOutputConformers()
+unsigned int ConfGen::ConformerGeneratorImpl::generateOutputConformers(bool struct_gen_only)
 {
 	fragments.clear();
 
@@ -818,19 +830,12 @@ unsigned int ConfGen::ConformerGeneratorImpl::generateOutputConformers()
 	torDriver.setMMFF94Parameters(mmff94Data, mmff94InteractionMask);
 
 	std::size_t num_frags = torFragConfData.size();
-
-	bool lock_flex_rsys = (!settings.enumerateRings() && 
-						   (std::find_if(torFragConfData.begin(), torFragConfData.end(), 
-										 boost::bind(&FragmentConfData::isFlexRingSys, _1)) != torFragConfData.end()));
 	double min_energy = 0.0;
 	double min_comb_energy = 0.0;
 	double e_window = settings.getEnergyWindow();
 
 	for (ConfCombinationDataList::const_iterator comb_it = torFragConfCombData.begin(), combs_end = torFragConfCombData.end(); comb_it != combs_end; ++comb_it) {
 		const ConfCombinationData& comb = **comb_it;
-
-		if (!comb.valid)
-			continue;
 
 		if (!workingConfs.empty() && comb.energy > (min_comb_energy + e_window))
 			break;
@@ -853,60 +858,45 @@ unsigned int ConfGen::ConformerGeneratorImpl::generateOutputConformers()
 
 		if (ret_code != ReturnCode::SUCCESS) 
 			continue;
-
-		if (lock_flex_rsys) {
-			for (ConfCombinationDataList::const_iterator comb_it2 = comb_it + 1; comb_it2 != combs_end; ++comb_it2) {
-				ConfCombinationData& next_comb = **comb_it2;
-
-				for (std::size_t i = 0; i < num_frags; i++) {
-					const FragmentConfData& conf_data = *torFragConfData[i];
-
-					if (conf_data.isFlexRingSys && next_comb.confIndices[i] != comb.confIndices[i]) {
-						next_comb.valid = false;
-						break;
-					}
-				}
-			}
-
-			lock_flex_rsys = false;
-		}
-
-		bool new_min_energy = false;
-
+	
 		for (TorsionDriverImpl::ConstConformerIterator conf_it = torDriver.getConformersBegin(), confs_end = torDriver.getConformersEnd();
 			 conf_it != confs_end; ++conf_it) {
 			
 			ConformerData& conf_data = **conf_it;
 			double energy = conf_data.getEnergy();
 			
-			if (workingConfs.empty() || energy < min_energy) {
+			if (workingConfs.empty()) {
 				min_energy = energy;
 				min_comb_energy = comb.energy;
-				new_min_energy = !workingConfs.empty();
 
 			} else if (energy > (min_energy + e_window))
 				continue;
-			  
+
+			else if (energy < min_energy) {
+				min_energy = energy;
+				min_comb_energy = comb.energy;
+
+				for (ConformerDataArray::const_iterator it = workingConfs.begin(), end = workingConfs.end(); it != end; ++it) {
+					const ConformerData::SharedPointer& conf_data = *it;
+
+					if (conf_data->getEnergy() > (min_energy + e_window))
+						continue;
+
+					tmpWorkingConfs.push_back(conf_data);
+				} 
+
+				workingConfs.swap(tmpWorkingConfs);
+				tmpWorkingConfs.clear();
+			}
+
 			ConformerData::SharedPointer conf_data_copy = confDataCache.get();
 
 			conf_data_copy->swap(conf_data);
 			workingConfs.push_back(conf_data_copy);
 		}
 
-		if (!new_min_energy)
-			continue;
-
-		for (ConformerDataArray::const_iterator it = workingConfs.begin(), end = workingConfs.end(); it != end; ++it) {
-			const ConformerData::SharedPointer& conf_data = *it;
-
-			if (conf_data->getEnergy() > (min_energy + e_window))
-				continue;
-
-			tmpWorkingConfs.push_back(conf_data);
-		} 
-
-		workingConfs.swap(tmpWorkingConfs);
-		tmpWorkingConfs.clear();
+		if (struct_gen_only && !workingConfs.empty())
+			return ReturnCode::SUCCESS;
 	}
 
 	return (workingConfs.empty() ? ReturnCode::CONF_GEN_FAILED : ReturnCode::SUCCESS);
@@ -915,6 +905,19 @@ unsigned int ConfGen::ConformerGeneratorImpl::generateOutputConformers()
 bool ConfGen::ConformerGeneratorImpl::selectOutputConformers(bool struct_gen_only)
 {
 	using namespace Chem;
+
+	if (struct_gen_only) {
+		if (!outputConfs.empty())
+			return true;
+
+		if (!workingConfs.empty()) {
+			orderConformersByEnergy(workingConfs); 
+			
+			outputConfs.push_back(workingConfs.front());
+		}
+
+		return false;
+	}
 
 	std::size_t num_atoms = molGraph->getNumAtoms();
 
@@ -985,7 +988,7 @@ bool ConfGen::ConformerGeneratorImpl::selectOutputConformers(bool struct_gen_onl
 		}
 	}
 
-	std::sort(workingConfs.begin(), workingConfs.end(), &compareConformerEnergy); 
+	orderConformersByEnergy(workingConfs); 
 
 	confSelector.setMinRMSD(settings.getMinRMSD());
 	confSelector.setup(*molGraph, tmpBitSet, fixedAtomConfigMask, *workingConfs.front());
@@ -1054,6 +1057,14 @@ bool ConfGen::ConformerGeneratorImpl::compareFragmentConfCount(const FragmentCon
 															   const FragmentConfDataPtr& conf_data2)
 {
 	return (conf_data1->conformers.size() < conf_data2->conformers.size());
+}
+
+void ConfGen::ConformerGeneratorImpl::orderConformersByEnergy(ConformerDataArray& confs) const
+{
+	if (confs.size() < 2)
+		return;
+
+	std::sort(confs.begin(), confs.end(), &compareConformerEnergy); 
 }
 
 unsigned int ConfGen::ConformerGeneratorImpl::invokeCallbacks() const
