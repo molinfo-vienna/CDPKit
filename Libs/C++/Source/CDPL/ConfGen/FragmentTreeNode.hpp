@@ -37,6 +37,7 @@
 
 #include "CDPL/ConfGen/ConformerDataArray.hpp"
 #include "CDPL/ForceField/MMFF94InteractionData.hpp"
+#include "CDPL/ForceField/MMFF94EnergyCalculator.hpp"
 #include "CDPL/Util/BitSet.hpp"
 
 
@@ -123,9 +124,9 @@ namespace CDPL
 			void addConformer(const ConformerData& conf_data);
 			void addConformer(const ConformerData::SharedPointer& conf_data);
 
-			unsigned int generateConformers();
+			unsigned int generateConformers(double e_window = 0.0, bool exhaustive = false);
 
-			double calcMMFF94Energy(const Math::Vector3DArray& coords) const;
+			double calcMMFF94Energy(const Math::Vector3DArray& coords);
 		
 		private:
 			FragmentTreeNode(FragmentTree& owner);
@@ -133,8 +134,10 @@ namespace CDPL
 
 			FragmentTreeNode& operator=(const FragmentTreeNode&);
 
-			void lineupChildConformers();
-			void alignAndRotateChildConformers();
+			void lineupChildConformers(double e_window);
+			void alignAndRotateChildConformers(double e_window, bool exhaustive);
+
+			void removeOutOfWindowConformers(double max_energy);
 
 			void setParent(FragmentTreeNode* node);
 
@@ -172,30 +175,30 @@ namespace CDPL
 			void calcVirtualTorsionReferenceAtomVector(const Math::Vector3DArray& coords, std::size_t atom_idx, 
 													   Math::Vector3D& ref_vec) const;
 
-			double calcMMFF94Energy(const Math::Vector3DArray& coords, bool& atom_clash) const;
-
-			double calcNonVdWMMFF94Energies(const Math::Vector3DArray& coords) const;
-
 			unsigned int invokeCallbacks() const;
 
 			typedef std::vector<double> DoubleArray;
+			typedef ForceField::MMFF94InteractionData MMFF94InteractionData;
+			typedef ForceField::MMFF94EnergyCalculator<double> MMFF94EnergyCalculator;
 
-			FragmentTree&                       owner;
-			FragmentTreeNode*                   parent;
-			const Chem::Bond*                   splitBond;
-			const Chem::Atom*                   splitBondAtoms[2];
-			const Chem::Atom*                   torsionRefAtoms[2];
-			FragmentTreeNode*                   leftChild;
-			FragmentTreeNode*                   rightChild;
-			IndexArray                          atomIndices;
-			Util::BitSet                        atomMask;
-			Util::BitSet                        coreAtomMask;
-			ConformerDataArray                  conformers;
-			TorsionAngleArray                   torsionAngles;
-			DoubleArray                         torsionAngleCosines;
-			DoubleArray                         torsionAngleSines;
-			ForceField::MMFF94InteractionData   mmff94Data;
-			bool                                changed;
+			FragmentTree&           owner;
+			FragmentTreeNode*       parent;
+			const Chem::Bond*       splitBond;
+			const Chem::Atom*       splitBondAtoms[2];
+			const Chem::Atom*       torsionRefAtoms[2];
+			FragmentTreeNode*       leftChild;
+			FragmentTreeNode*       rightChild;
+			IndexArray              atomIndices;
+			Util::BitSet            atomMask;
+			Util::BitSet            coreAtomMask;
+			ConformerDataArray      conformers;
+			ConformerDataArray      tmpConformers;
+			TorsionAngleArray       torsionAngles;
+			DoubleArray             torsionAngleCosines;
+			DoubleArray             torsionAngleSines;
+			MMFF94InteractionData   mmff94Data;
+			MMFF94EnergyCalculator  mmff94EnergyCalc;
+			bool                    changed;
 		};
     }
 }

@@ -64,6 +64,10 @@ namespace CDPL
 				
 			bool sampleHeteroAtomHydrogens() const;
 
+			void sampleAngleToleranceRanges(bool sample);
+				
+			bool sampleAngleToleranceRanges() const;
+
 			void enumerateRings(bool enumerate);
 
 			bool enumerateRings() const;
@@ -131,6 +135,7 @@ namespace CDPL
 		  private:
 			unsigned int                       confSamplingMode;
 			bool                               sampleHetAtomHs;
+			bool                               sampleTolRanges;
 			bool                               enumRings;
 			unsigned int                       nitrogenEnumMode;
 			bool                               fromScratch;

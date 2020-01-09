@@ -89,15 +89,11 @@ namespace CDPL
 			FragmentTreeNode* getFragmentNode(std::size_t idx) const;
 
 		private:
-			typedef std::vector<double> DoubleArray;
-
 			FragmentTree(const FragmentTree&);
 
 			FragmentTree& operator=(const FragmentTree&);
 
 			void buildTree(const Chem::FragmentList& frags, const Chem::MolecularGraph& molgraph);
-
-			void initAtomClashRadiusTable();
 
 			FragmentTreeNode* createParentNode(FragmentTreeNode* node1, FragmentTreeNode* node2, 
 											   const Chem::Bond* bond);
@@ -111,8 +107,6 @@ namespace CDPL
 
 			bool aborted() const;
 			bool timedout() const;
-
-			const DoubleArray& getAtomClashRadiusTable() const;
 
 			typedef Util::ObjectPool<ConformerData> ConformerDataCache;
 			typedef std::vector<const Chem::Bond*> BondList;
@@ -129,7 +123,6 @@ namespace CDPL
 			FragmentToNodeMap           fragToNodeMap;
 			CallbackFunction            abortCallback;
 			CallbackFunction            timeoutCallback;
-			DoubleArray                 clashRadiusTable;
 		};
     }
 }
@@ -145,7 +138,6 @@ void CDPL::ConfGen::FragmentTree::build(const Chem::FragmentList& frags, const C
 	splitBonds.insert(splitBonds.end(), bonds_beg, bonds_end);
 
 	buildTree(frags, molgraph);
-	initAtomClashRadiusTable();
 }
 
 #endif // CDPL_CONFGEN_FRAGMENTTREE_HPP

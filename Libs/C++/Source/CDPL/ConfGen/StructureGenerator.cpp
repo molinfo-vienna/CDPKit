@@ -45,9 +45,11 @@ ConfGen::StructureGenerator::StructureGenerator():
 	cg_settings.setConformerSamplingMode(ConformerSamplingMode::AUTO);
 	cg_settings.setNitrogenEnumerationMode(NitrogenEnumerationMode::UNSPECIFIED_STEREO);
 	cg_settings.sampleHeteroAtomHydrogens(false);
-	cg_settings.enumerateRings(true);
+	cg_settings.sampleAngleToleranceRanges(true);
+	cg_settings.enumerateRings(false);
 	cg_settings.includeInputCoordinates(false);
 	cg_settings.setMaxNumOutputConformers(1);
+	cg_settings.setEnergyWindow(10.0);
 }
 
 ConfGen::StructureGenerator::~StructureGenerator() 
@@ -131,11 +133,11 @@ unsigned int ConfGen::StructureGenerator::doGenerate(const Chem::MolecularGraph&
 
 	unsigned int ret_code = impl->generate(molgraph, true);
 
-	if (ret_code != ReturnCode::SUCCESS)
+	if (ret_code != ReturnCode::SUCCESS && ret_code != ReturnCode::TIMEOUT)
 		return ret_code;
 
 	if (impl->getNumConformers() > 0)
 		coords.swap(impl->getConformer(0));
 
-	return ReturnCode::SUCCESS;
+	return ret_code;
 }

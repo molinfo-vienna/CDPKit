@@ -115,7 +115,7 @@ namespace CDPL
 
 			unsigned int generateConformers(const Chem::MolecularGraph& molgraph, const Chem::FragmentList& comps, bool struct_gen_only);
 	
-			unsigned int combineComponentConformers(const Chem::MolecularGraph& molgraph, bool have_full_ipt_coords);
+			void combineComponentConformers(const Chem::MolecularGraph& molgraph, bool have_full_ipt_coords);
 
 			void calcConformerBounds(double min[3], double max[3], const Math::Vector3DArray& coords) const;
 
@@ -139,7 +139,7 @@ namespace CDPL
 			
 			unsigned int generateFragmentConformers();
 			
-			unsigned int generateFragmentConformerCombinations();
+			unsigned int generateFragmentConformerCombinations(bool struct_gen_only);
 		
 			void generateFragmentConformerCombinations(std::size_t frag_idx, double comb_energy);
 

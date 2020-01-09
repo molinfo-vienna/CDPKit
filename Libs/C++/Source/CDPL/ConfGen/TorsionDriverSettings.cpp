@@ -37,8 +37,8 @@ const ConfGen::TorsionDriverSettings ConfGen::TorsionDriverSettings::DEFAULT;
 
 
 ConfGen::TorsionDriverSettings::TorsionDriverSettings(): 
-	sampleHetAtomHs(false), energyOrdered(true), forceFieldType(ForceFieldType::MMFF94S_NO_ESTAT), 
-	strictParam(true)
+	sampleHetAtomHs(false), sampleTolRanges(false), energyOrdered(true), eWindow(0.0),
+	forceFieldType(ForceFieldType::MMFF94S_NO_ESTAT), strictParam(true)
 {}
 
 void ConfGen::TorsionDriverSettings::sampleHeteroAtomHydrogens(bool sample)
@@ -51,6 +51,16 @@ bool ConfGen::TorsionDriverSettings::sampleHeteroAtomHydrogens() const
 	return sampleHetAtomHs;
 }
 
+void ConfGen::TorsionDriverSettings::sampleAngleToleranceRanges(bool sample)
+{
+	sampleTolRanges = sample;
+}
+				
+bool ConfGen::TorsionDriverSettings::sampleAngleToleranceRanges() const
+{
+	return sampleTolRanges;
+}
+
 void ConfGen::TorsionDriverSettings::orderByEnergy(bool order)
 {
 	energyOrdered = order;
@@ -59,6 +69,16 @@ void ConfGen::TorsionDriverSettings::orderByEnergy(bool order)
 bool ConfGen::TorsionDriverSettings::orderByEnergy() const
 {
 	return energyOrdered;
+}
+
+void ConfGen::TorsionDriverSettings::setEnergyWindow(double win_size)
+{
+	eWindow = win_size;
+}
+
+double ConfGen::TorsionDriverSettings::getEnergyWindow() const
+{
+	return eWindow;
 }
 
 void ConfGen::TorsionDriverSettings::setForceFieldType(unsigned int type)

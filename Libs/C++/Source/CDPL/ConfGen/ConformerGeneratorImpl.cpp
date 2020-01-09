@@ -97,7 +97,7 @@ ConfGen::ConformerGeneratorImpl::ConformerGeneratorImpl():
 	fragAssembler.setBondLengthFunction(boost::bind(&ConformerGeneratorImpl::getMMFF94BondLength, this, _1, _2));
 
 	torDriver.setTimeoutCallback(boost::bind(&ConformerGeneratorImpl::timedout, this));
-
+	
 	TorsionDriverSettings& td_settings = torDriver.getSettings();
 
 	td_settings.sampleHeteroAtomHydrogens(false);
@@ -183,13 +183,13 @@ unsigned int ConfGen::ConformerGeneratorImpl::generate(const Chem::MolecularGrap
 	if (comps.getSize() == 1) {
 		unsigned int ret_code = generateConformers(molgraph, struct_gen_only);
 
-		if (ret_code != ReturnCode::SUCCESS) 
+		if (ret_code != ReturnCode::SUCCESS && ret_code != ReturnCode::TIMEOUT) 
 			return ret_code;
 
 		if (selectOutputConformers(struct_gen_only))
 			orderConformersByEnergy(outputConfs);
 
-		return (outputConfs.empty() ? ReturnCode::CONF_GEN_FAILED : ReturnCode::SUCCESS);
+		return ret_code;
 	}
 
 	return generateConformers(molgraph, comps, struct_gen_only);
@@ -220,6 +220,7 @@ unsigned int ConfGen::ConformerGeneratorImpl::generateConformers(const Chem::Mol
 	using namespace Chem;
 
 	bool have_full_ipt_coords = true;
+	bool have_timeout = false;
 
 	for (FragmentList::BaseType::ConstElementIterator it = comps.BaseType::getElementsBegin(), end = comps.BaseType::getElementsEnd(); it != end; ++it) {
 		const Fragment::SharedPointer& comp = *it;
@@ -229,7 +230,10 @@ unsigned int ConfGen::ConformerGeneratorImpl::generateConformers(const Chem::Mol
 
 		unsigned int ret_code = generateConformers(*comp, struct_gen_only);
 
-		if (ret_code != ReturnCode::SUCCESS) 
+		if (ret_code == ReturnCode::TIMEOUT)
+			have_timeout = true;
+
+		else if (ret_code != ReturnCode::SUCCESS) 
 			return ret_code;
 
 		FragmentConfDataPtr comp_conf_data = fragConfDataCache.get();
@@ -243,10 +247,18 @@ unsigned int ConfGen::ConformerGeneratorImpl::generateConformers(const Chem::Mol
 		compConfData.push_back(comp_conf_data);
 	}
 
-	return combineComponentConformers(molgraph, have_full_ipt_coords);
+	combineComponentConformers(molgraph, have_full_ipt_coords);
+
+	if (outputConfs.empty())
+		return ReturnCode::CONF_GEN_FAILED;
+
+	if (have_timeout)
+		return ReturnCode::TIMEOUT;
+
+	return ReturnCode::SUCCESS;
 }
 
-unsigned int ConfGen::ConformerGeneratorImpl::combineComponentConformers(const Chem::MolecularGraph& molgraph, bool have_full_ipt_coords)
+void ConfGen::ConformerGeneratorImpl::combineComponentConformers(const Chem::MolecularGraph& molgraph, bool have_full_ipt_coords)
 {
 	using namespace Chem;
 
@@ -322,8 +334,6 @@ unsigned int ConfGen::ConformerGeneratorImpl::combineComponentConformers(const C
 
 	if (have_full_ipt_coords)
 		orderConformersByEnergy(outputConfs);
-
-	return (outputConfs.empty() ? ReturnCode::CONF_GEN_FAILED : ReturnCode::SUCCESS);
 }
 
 void ConfGen::ConformerGeneratorImpl::calcConformerBounds(double min[3], double max[3], const Math::Vector3DArray& coords) const
@@ -393,6 +403,9 @@ unsigned int ConfGen::ConformerGeneratorImpl::generateConformers(const Chem::Mol
 
 unsigned int ConfGen::ConformerGeneratorImpl::generateConformersSystematic(bool struct_gen_only)
 {
+	torDriver.getSettings().setEnergyWindow(settings.getEnergyWindow());
+	torDriver.getSettings().sampleAngleToleranceRanges(settings.sampleAngleToleranceRanges());
+
 	splitIntoTorsionFragments();
 
 	unsigned int ret_code = generateFragmentConformers();
@@ -400,9 +413,9 @@ unsigned int ConfGen::ConformerGeneratorImpl::generateConformersSystematic(bool 
 	if (ret_code != ReturnCode::SUCCESS)
 		return ret_code;
 
-	if ((ret_code = generateFragmentConformerCombinations()) != ReturnCode::SUCCESS)
+	if ((ret_code = generateFragmentConformerCombinations(struct_gen_only)) != ReturnCode::SUCCESS) 
 		return ret_code;
-
+	
 	return generateOutputConformers(struct_gen_only);
 }
 
@@ -429,13 +442,12 @@ unsigned int ConfGen::ConformerGeneratorImpl::generateConformersStochastic(bool 
 	double e_window = settings.getEnergyWindow();
 	double min_energy = 0.0;
 	ConformerData::SharedPointer conf_data_ptr;
+	unsigned int ret_code = ReturnCode::SUCCESS;
 
 	for (std::size_t i = 0, num_conf_samples = settings.getMaxNumSampledConformers(), conv_iter_count = settings.getConvergenceIterationCount(), last_min_iter_count = 0; 
 		 i < num_conf_samples && last_min_iter_count <= conv_iter_count; i++) {
 
-		unsigned int ret_code = invokeCallbacks();
-
-		if (ret_code != ReturnCode::SUCCESS) {
+		if ((ret_code = invokeCallbacks()) != ReturnCode::SUCCESS) {
 			if (ret_code == ReturnCode::TIMEOUT)
 				break;
 
@@ -506,7 +518,7 @@ unsigned int ConfGen::ConformerGeneratorImpl::generateConformersStochastic(bool 
 		conf_data_ptr.reset();	
 	}
 
-	return (workingConfs.empty() ? ReturnCode::CONF_GEN_FAILED : ReturnCode::SUCCESS);
+	return (workingConfs.empty() ? ReturnCode::CONF_GEN_FAILED : ret_code);
 }
 
 bool ConfGen::ConformerGeneratorImpl::determineSamplingMode()
@@ -690,13 +702,19 @@ unsigned int ConfGen::ConformerGeneratorImpl::generateFragmentConformers()
 	fa_settings.setNitrogenEnumerationMode(settings.getNitrogenEnumerationMode());
 	fa_settings.generateCoordinatesFromScratch(settings.generateCoordinatesFromScratch());
 
+	double e_window = settings.getEnergyWindow();
+
 	for (FragmentConfDataList::const_iterator it = torFragConfData.begin(), end = torFragConfData.end(); it != end; ++it) {
 		FragmentConfData& frag_conf_data = **it;
 		const Fragment& frag = *frag_conf_data.fragment;
 		unsigned int ret_code = fragAssembler.assemble(frag, *molGraph);
 
-		if (ret_code != ReturnCode::SUCCESS)
+		if (ret_code != ReturnCode::SUCCESS) {
+			if (ret_code == ReturnCode::TIMEOUT)
+				return ReturnCode::CONF_GEN_FAILED;
+
 			return ret_code;
+		}
 
 		invertibleNMask |= fragAssembler.getInvertibleNitrogenMask();
 
@@ -726,17 +744,27 @@ unsigned int ConfGen::ConformerGeneratorImpl::generateFragmentConformers()
 		torDriver.setup(fragments, *molGraph, fragSplitBonds.begin(), fragSplitBonds.end());
 		torDriver.setMMFF94Parameters(mmff94Data, mmff94InteractionMask);
 
+		double min_energy = 0.0;
+
 		if (fragSplitBonds.empty()) {
-			const FragmentTreeNode& frag_node = torDriver.getFragmentNode(0);
+			FragmentTreeNode& frag_node = torDriver.getFragmentNode(0);
 
 			for (FragmentAssemblerImpl::ConstConformerIterator conf_it = fragAssembler.getConformersBegin(), conf_end = fragAssembler.getConformersEnd();
 				 conf_it != conf_end; ++conf_it) {
 
 				ConformerData& conf_data = **conf_it;
+				double energy = frag_node.calcMMFF94Energy(conf_data);
+
+				if (frag_conf_data.conformers.empty() || energy < min_energy)
+					min_energy = energy;
+
+				else if (energy > (min_energy + e_window))
+					continue;
+
 				ConformerData::SharedPointer final_conf_data = confDataCache.get();
 
 				final_conf_data->swap(conf_data);
-				final_conf_data->setEnergy(frag_node.calcMMFF94Energy(*final_conf_data));
+				final_conf_data->setEnergy(energy);
 
 				frag_conf_data.conformers.push_back(final_conf_data);
 			}
@@ -752,13 +780,8 @@ unsigned int ConfGen::ConformerGeneratorImpl::generateFragmentConformers()
 				ret_code = torDriver.generateConformers();
 
 				if (ret_code != ReturnCode::SUCCESS) {
-					if (ret_code == ReturnCode::TORSION_DRIVING_FAILED) {
-						ConformerData::SharedPointer final_conf_data = confDataCache.get();
-
-						final_conf_data->swap(fa_conf_data);
-						frag_conf_data.conformers.push_back(final_conf_data);
-						continue;
-					}
+					if (ret_code == ReturnCode::TIMEOUT)
+						return ReturnCode::CONF_GEN_FAILED;
 
 					return ret_code;
 				}
@@ -767,6 +790,14 @@ unsigned int ConfGen::ConformerGeneratorImpl::generateFragmentConformers()
 					 td_conf_it != td_conf_end; ++td_conf_it) {
 
 					ConformerData& td_conf_data = **td_conf_it;
+					double energy = td_conf_data.getEnergy();
+
+					if (frag_conf_data.conformers.empty() || energy < min_energy)
+						min_energy = energy;
+
+					else if (energy > (min_energy + e_window))
+						continue;
+
 					ConformerData::SharedPointer final_conf_data = confDataCache.get();
 
 					final_conf_data->swap(td_conf_data);
@@ -775,7 +806,21 @@ unsigned int ConfGen::ConformerGeneratorImpl::generateFragmentConformers()
 			}
 		}
 
-		orderConformersByEnergy(frag_conf_data.conformers); 
+		if (frag_conf_data.conformers.size() > 1) {
+			double max_energy = min_energy + e_window;
+
+			for (ConformerDataArray::const_iterator conf_it = frag_conf_data.conformers.begin(), confs_end = frag_conf_data.conformers.end(); conf_it != confs_end; ++conf_it) {
+				const ConformerData::SharedPointer& conf_data = *conf_it;
+
+				if (conf_data->getEnergy() <= max_energy)
+					tmpWorkingConfs.push_back(conf_data);
+			}
+				
+			frag_conf_data.conformers.swap(tmpWorkingConfs);
+			tmpWorkingConfs.clear();
+
+			orderConformersByEnergy(frag_conf_data.conformers); 
+		}
 
 		frag_conf_data.lastConfIdx = frag_conf_data.conformers.size();
 	}
@@ -785,15 +830,31 @@ unsigned int ConfGen::ConformerGeneratorImpl::generateFragmentConformers()
 	return ReturnCode::SUCCESS;
 }
 			
-unsigned int ConfGen::ConformerGeneratorImpl::generateFragmentConformerCombinations()
+unsigned int ConfGen::ConformerGeneratorImpl::generateFragmentConformerCombinations(bool struct_gen_only)
 {
+	if (struct_gen_only) {
+		ConfCombinationData* frag_conf_comb = confCombDataCache.getRaw();
+
+		frag_conf_comb->energy = 0.0;
+		frag_conf_comb->confIndices.assign(torFragConfData.size(), 0);
+
+		torFragConfCombData.push_back(frag_conf_comb);
+
+		return ReturnCode::SUCCESS;
+	}
+
 	currConfComb.clear();
 
 	generateFragmentConformerCombinations(0, 0.0);
 
 	std::sort(torFragConfCombData.begin(), torFragConfCombData.end(), &compareConfCombinationEnergy);
 
-	return invokeCallbacks();
+	unsigned int ret_code = invokeCallbacks();
+
+	if (ret_code == ReturnCode::TIMEOUT)
+		return ReturnCode::CONF_GEN_FAILED;
+
+	return ret_code;
 }
 
 void ConfGen::ConformerGeneratorImpl::generateFragmentConformerCombinations(std::size_t frag_idx, double comb_energy)
@@ -833,6 +894,7 @@ unsigned int ConfGen::ConformerGeneratorImpl::generateOutputConformers(bool stru
 	double min_energy = 0.0;
 	double min_comb_energy = 0.0;
 	double e_window = settings.getEnergyWindow();
+	bool have_timeout = false;
 
 	for (ConfCombinationDataList::const_iterator comb_it = torFragConfCombData.begin(), combs_end = torFragConfCombData.end(); comb_it != combs_end; ++comb_it) {
 		const ConfCombinationData& comb = **comb_it;
@@ -853,7 +915,12 @@ unsigned int ConfGen::ConformerGeneratorImpl::generateOutputConformers(bool stru
 
 		unsigned int ret_code = torDriver.generateConformers();
 
-		if (ret_code == ReturnCode::TIMEOUT || ret_code == ReturnCode::ABORTED)
+		if (ret_code == ReturnCode::TIMEOUT) {
+			have_timeout = true;
+			break;
+		} 
+
+		if (ret_code == ReturnCode::ABORTED)
 			return ret_code;
 
 		if (ret_code != ReturnCode::SUCCESS) 
@@ -899,7 +966,13 @@ unsigned int ConfGen::ConformerGeneratorImpl::generateOutputConformers(bool stru
 			return ReturnCode::SUCCESS;
 	}
 
-	return (workingConfs.empty() ? ReturnCode::CONF_GEN_FAILED : ReturnCode::SUCCESS);
+	if (workingConfs.empty())
+		return ReturnCode::CONF_GEN_FAILED;
+
+	if (have_timeout)
+		return ReturnCode::TIMEOUT;
+
+	return ReturnCode::SUCCESS;
 }
 
 bool ConfGen::ConformerGeneratorImpl::selectOutputConformers(bool struct_gen_only)

@@ -308,7 +308,7 @@ ConfGen::FragmentTreeNode& ConfGen::TorsionDriverImpl::getFragmentNode(std::size
 
 unsigned int ConfGen::TorsionDriverImpl::generateConformers()
 {
-	unsigned int ret_code = fragTree.getRoot()->generateConformers();
+	unsigned int ret_code = fragTree.getRoot()->generateConformers(settings.getEnergyWindow(), settings.sampleAngleToleranceRanges());
 
 	if (ret_code != ReturnCode::SUCCESS)
 		return ret_code;

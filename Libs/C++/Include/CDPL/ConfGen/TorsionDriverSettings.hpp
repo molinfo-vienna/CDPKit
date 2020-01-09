@@ -57,9 +57,17 @@ namespace CDPL
 				
 			bool sampleHeteroAtomHydrogens() const;
 
+			void sampleAngleToleranceRanges(bool sample);
+				
+			bool sampleAngleToleranceRanges() const;
+
 			void orderByEnergy(bool order);
 
 			bool orderByEnergy() const;
+
+			void setEnergyWindow(double win_size);
+
+			double getEnergyWindow() const;
 
 			void setForceFieldType(unsigned int type);
 	    
@@ -71,7 +79,9 @@ namespace CDPL
 
 		  private:
 			bool         sampleHetAtomHs;
+			bool         sampleTolRanges;
 			bool         energyOrdered;
+			double       eWindow;
 			unsigned int forceFieldType;
 			bool         strictParam;
 		};

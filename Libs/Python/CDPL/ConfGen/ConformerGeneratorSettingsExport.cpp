@@ -56,6 +56,10 @@ void CDPLPythonConfGen::exportConformerGeneratorSettings()
 			 (python::arg("self"), python::arg("sample")))
 		.def("sampleHeteroAtomHydrogens", GetBoolFunc(&ConfGen::ConformerGeneratorSettings::sampleHeteroAtomHydrogens), 
 			 python::arg("self"))
+		.def("sampleAngleToleranceRanges", SetBoolFunc(&ConfGen::ConformerGeneratorSettings::sampleAngleToleranceRanges), 
+			 (python::arg("self"), python::arg("sample")))
+		.def("sampleAngleToleranceRanges", GetBoolFunc(&ConfGen::ConformerGeneratorSettings::sampleAngleToleranceRanges), 
+			 python::arg("self"))
 		.def("enumerateRings", SetBoolFunc(&ConfGen::ConformerGeneratorSettings::enumerateRings), 
 			 (python::arg("self"), python::arg("enumerate")))
 		.def("enumerateRings", GetBoolFunc(&ConfGen::ConformerGeneratorSettings::enumerateRings), 
@@ -125,6 +129,8 @@ void CDPLPythonConfGen::exportConformerGeneratorSettings()
 					  &ConfGen::ConformerGeneratorSettings::setConformerSamplingMode)
 		.add_property("sampleHetAtomHydrogens", GetBoolFunc(&ConfGen::ConformerGeneratorSettings::sampleHeteroAtomHydrogens),
 					  SetBoolFunc(&ConfGen::ConformerGeneratorSettings::sampleHeteroAtomHydrogens))
+		.add_property("sampleAngleTolRanges", GetBoolFunc(&ConfGen::ConformerGeneratorSettings::sampleAngleToleranceRanges),
+					  SetBoolFunc(&ConfGen::ConformerGeneratorSettings::sampleAngleToleranceRanges))
 		.add_property("enumRings", GetBoolFunc(&ConfGen::ConformerGeneratorSettings::enumerateRings),
 					  SetBoolFunc(&ConfGen::ConformerGeneratorSettings::enumerateRings))
 		.add_property("nitrogenEnumMode", &ConfGen::ConformerGeneratorSettings::getNitrogenEnumerationMode,

@@ -245,6 +245,7 @@ void ConfGen::DGConstraintGenerator::addBondLengthConstraints(Util::DG3DCoordina
 			continue;
 
 		coords_gen.addDistanceConstraint(atom1_idx, atom2_idx, bond_len, bond_len);
+
 		markAtomPairProcessed(atom1_idx, atom2_idx);
 	}
 }
@@ -266,6 +267,9 @@ void ConfGen::DGConstraintGenerator::addBondAngleConstraints(Util::DG3DCoordinat
 		double dist = calc13AtomDistance(bond1_len, bond2_len, angle);
 
 		coords_gen.addDistanceConstraint(atom1_idx, atom3_idx, dist, dist);
+		coords_gen.addDistanceConstraint(atom1_idx, atom3_idx, dist, dist); // overemphasize for less distored structures
+		coords_gen.addDistanceConstraint(atom1_idx, atom3_idx, dist, dist);
+
 		markAtomPairProcessed(atom1_idx, atom3_idx);
 	}
 }
@@ -298,6 +302,7 @@ void ConfGen::DGConstraintGenerator::addDefaultDistanceConstraints(Util::DG3DCoo
 			double cov_rad2 = AtomDictionary::getCovalentRadius(getType(molGraph->getAtom(j)));
 
 			coords_gen.addDistanceConstraint(i, j, cov_rad1 + cov_rad2 + 1.5, bond_length_sum);
+
 			markAtomPairProcessed(i, j);
 		}
 	}
@@ -368,6 +373,7 @@ void ConfGen::DGConstraintGenerator::add14DistanceConstraints(Util::DG3DCoordina
 				double trans_dist = calcTrans14AtomDistance(nbr_bond1_len, bond_len, nbr_bond2_len, nbr_bond1_angle, nbr_bond2_angle);				
 
 				coords_gen.addDistanceConstraint(nbr_atom1_idx, nbr_atom2_idx, cis_dist, trans_dist);
+
 				markAtomPairProcessed(nbr_atom1_idx, nbr_atom2_idx);
 			}
 		}
@@ -391,6 +397,7 @@ void ConfGen::DGConstraintGenerator::addAtomConfigurationConstraints(Util::DG3DC
 		std::size_t atom_idx = it->first;
 
 		stereoAtomMask.set(atom_idx);
+
 		coords_gen.addVolumeConstraint(molGraph->getAtomIndex(*descr.getReferenceAtoms()[0]),
 									   molGraph->getAtomIndex(*descr.getReferenceAtoms()[1]),
 									   molGraph->getAtomIndex(*descr.getReferenceAtoms()[2]),
@@ -453,6 +460,7 @@ void ConfGen::DGConstraintGenerator::addBondConfigurationConstraints(Util::DG3DC
 					nbr_atom_dist = calcTrans14AtomDistance(nbr_bond1_len, bond_len, nbr_bond2_len, nbr_bond1_angle, nbr_bond2_angle);
 
 				coords_gen.addDistanceConstraint(nbr_atom1_idx, nbr_atom2_idx, nbr_atom_dist, nbr_atom_dist);
+
 				markAtomPairProcessed(nbr_atom1_idx, nbr_atom2_idx);
 			}
 		}

@@ -39,8 +39,8 @@ const ConfGen::ConformerGeneratorSettings ConfGen::ConformerGeneratorSettings::D
 
 
 ConfGen::ConformerGeneratorSettings::ConformerGeneratorSettings():
-	confSamplingMode(ConformerSamplingMode::AUTO), sampleHetAtomHs(false), enumRings(true),
-	nitrogenEnumMode(NitrogenEnumerationMode::UNSPECIFIED_STEREO),
+	confSamplingMode(ConformerSamplingMode::AUTO), sampleHetAtomHs(false), sampleTolRanges(false), 
+	enumRings(true), nitrogenEnumMode(NitrogenEnumerationMode::UNSPECIFIED_STEREO),
 	fromScratch(true), incInputCoords(false), eWindow(10.0), timeout(60 * 60 * 1000), 
 	forceFieldType(ForceFieldType::MMFF94S_NO_ESTAT), strictParam(true), maxNumOutputConfs(100), 
 	minRMSD(0.5), maxNumRefIters(0), refStopGrad(0.25), maxNumSampledConfs(10000),
@@ -65,6 +65,16 @@ void ConfGen::ConformerGeneratorSettings::sampleHeteroAtomHydrogens(bool sample)
 bool ConfGen::ConformerGeneratorSettings::sampleHeteroAtomHydrogens() const
 {
 	return sampleHetAtomHs;
+}
+
+void ConfGen::ConformerGeneratorSettings::sampleAngleToleranceRanges(bool sample)
+{
+	sampleTolRanges = sample;
+}
+				
+bool ConfGen::ConformerGeneratorSettings::sampleAngleToleranceRanges() const
+{
+	return sampleTolRanges;
 }
 
 void ConfGen::ConformerGeneratorSettings::enumerateRings(bool enumerate)

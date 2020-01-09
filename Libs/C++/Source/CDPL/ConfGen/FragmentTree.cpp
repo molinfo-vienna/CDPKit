@@ -31,8 +31,6 @@
 #include <boost/bind.hpp>
 
 #include "CDPL/Chem/Bond.hpp"
-#include "CDPL/Chem/AtomFunctions.hpp"
-#include "CDPL/Chem/AtomDictionary.hpp"
 #include "CDPL/Chem/FragmentList.hpp"
 
 #include "FragmentTree.hpp"
@@ -43,7 +41,6 @@ namespace
 {
 
 	const std::size_t MAX_TREE_NODE_CACHE_SIZE  = 200;
-	const double      NO_CLASH_MIN_ATOM_SPACING = 0.3;
 }
 
 
@@ -182,22 +179,6 @@ void ConfGen::FragmentTree::buildTree(const Chem::FragmentList& frags, const Che
 		rootNode = createParentNode(rootNode, *it, 0);
 }
 
-void ConfGen::FragmentTree::initAtomClashRadiusTable()
-{
-	std::size_t num_atoms = molGraph->getNumAtoms();
-
-	clashRadiusTable.resize(num_atoms);
-	
-	for (std::size_t i = 0; i < num_atoms; i++) {
-		double radius = Chem::AtomDictionary::getCovalentRadius(getType(molGraph->getAtom(i)), 1);
-
-		if (radius <= 0.0)
-			clashRadiusTable[i] = 0.5;
-		else
-			clashRadiusTable[i] = radius + NO_CLASH_MIN_ATOM_SPACING * 0.5;
-	}
-}
-
 ConfGen::FragmentTreeNode* ConfGen::FragmentTree::createParentNode(FragmentTreeNode* node1, FragmentTreeNode* node2, 
 																   const Chem::Bond* bond)
 {
@@ -292,9 +273,4 @@ bool ConfGen::FragmentTree::timedout() const
 		return timeoutCallback();
 
 	return false;
-}
-
-const ConfGen::FragmentTree::DoubleArray& ConfGen::FragmentTree::getAtomClashRadiusTable() const
-{
-	return clashRadiusTable;
 }

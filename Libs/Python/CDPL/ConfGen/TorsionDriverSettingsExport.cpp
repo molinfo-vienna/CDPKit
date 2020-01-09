@@ -49,12 +49,20 @@ void CDPLPythonConfGen::exportTorsionDriverSettings()
 		.def("assign", CDPLPythonBase::copyAssOp(&ConfGen::TorsionDriverSettings::operator=), 
 			 (python::arg("self"), python::arg("settings")), python::return_self<>())
 		.def("sampleHeteroAtomHydrogens", SetBoolFunc(&ConfGen::TorsionDriverSettings::sampleHeteroAtomHydrogens), 
-			 (python::arg("self"), python::arg("enumerate")))
+			 (python::arg("self"), python::arg("sample")))
 		.def("sampleHeteroAtomHydrogens", GetBoolFunc(&ConfGen::TorsionDriverSettings::sampleHeteroAtomHydrogens), 
+			 python::arg("self"))
+		.def("sampleAngleToleranceRanges", SetBoolFunc(&ConfGen::TorsionDriverSettings::sampleAngleToleranceRanges), 
+			 (python::arg("self"), python::arg("sample")))
+		.def("sampleAngleToleranceRanges", GetBoolFunc(&ConfGen::TorsionDriverSettings::sampleAngleToleranceRanges), 
 			 python::arg("self"))
 		.def("orderByEnergy", SetBoolFunc(&ConfGen::TorsionDriverSettings::orderByEnergy), 
 			 (python::arg("self"), python::arg("order")))
 		.def("orderByEnergy", GetBoolFunc(&ConfGen::TorsionDriverSettings::orderByEnergy), 
+			 python::arg("self"))
+		.def("setEnergyWindow", &ConfGen::TorsionDriverSettings::setEnergyWindow, 
+			 (python::arg("self"), python::arg("win_size")))
+		.def("getEnergyWindow", &ConfGen::TorsionDriverSettings::getEnergyWindow, 
 			 python::arg("self"))
 		.def("setForceFieldType", &ConfGen::TorsionDriverSettings::setForceFieldType, 
 			 (python::arg("self"), python::arg("type")))
@@ -67,10 +75,14 @@ void CDPLPythonConfGen::exportTorsionDriverSettings()
 		.def_readonly("DEFAULT", ConfGen::TorsionDriverSettings::DEFAULT)
 		.add_property("sampleHetAtomHydrogens", GetBoolFunc(&ConfGen::TorsionDriverSettings::sampleHeteroAtomHydrogens),
 					  SetBoolFunc(&ConfGen::TorsionDriverSettings::sampleHeteroAtomHydrogens))
+		.add_property("sampleAngleTolRanges", GetBoolFunc(&ConfGen::TorsionDriverSettings::sampleAngleToleranceRanges),
+					  SetBoolFunc(&ConfGen::TorsionDriverSettings::sampleAngleToleranceRanges))
 		.add_property("forceFieldType", &ConfGen::TorsionDriverSettings::getForceFieldType, 
 					  &ConfGen::TorsionDriverSettings::setForceFieldType)
 		.add_property("strictForceFieldParam", GetBoolFunc(&ConfGen::TorsionDriverSettings::strictForceFieldParameterization), 
 					  SetBoolFunc(&ConfGen::TorsionDriverSettings::strictForceFieldParameterization))
 		.add_property("energyOrdered", GetBoolFunc(&ConfGen::TorsionDriverSettings::orderByEnergy),
-					  SetBoolFunc(&ConfGen::TorsionDriverSettings::orderByEnergy));
+					  SetBoolFunc(&ConfGen::TorsionDriverSettings::orderByEnergy))
+		.add_property("energyWindow", &ConfGen::TorsionDriverSettings::getEnergyWindow,
+					  &ConfGen::TorsionDriverSettings::setEnergyWindow);
 }
