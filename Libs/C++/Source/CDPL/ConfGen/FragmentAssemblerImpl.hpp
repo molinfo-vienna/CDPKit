@@ -103,8 +103,6 @@ namespace CDPL
 
 			const Util::BitSet& getInvertibleNitrogenMask() const;
 
-			bool foundFlexibleRingSystem() const;
-
 		private:
 			FragmentAssemblerImpl(const FragmentAssemblerImpl&);
 
@@ -186,7 +184,6 @@ namespace CDPL
 			Util::BitSet                      invertibleNMask;
 			Util::BitSet                      invertedNMask;
 			Util::BitSet                      tmpBitSet;
-			bool                              foundFlexRSys;
 		};
     }
 }

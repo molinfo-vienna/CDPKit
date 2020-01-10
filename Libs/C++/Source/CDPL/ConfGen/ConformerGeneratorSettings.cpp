@@ -45,7 +45,11 @@ ConfGen::ConformerGeneratorSettings::ConformerGeneratorSettings():
 	forceFieldType(ForceFieldType::MMFF94S_NO_ESTAT), strictParam(true), maxNumOutputConfs(100), 
 	minRMSD(0.5), maxNumRefIters(0), refStopGrad(0.25), maxNumSampledConfs(10000),
 	convIterCount(300), minMacrocycleSize(14)
-{}
+{
+	fragBuildSettings.getSmallRingSystemSettings().setMinNumSampledConformers(30);
+	fragBuildSettings.setSmallRingSystemSamplingFactor(4); 
+	fragBuildSettings.setRefinementStopGradient(0.25);
+}
 
 void ConfGen::ConformerGeneratorSettings::setConformerSamplingMode(unsigned int mode)
 {

@@ -45,7 +45,7 @@ ConfGen::StructureGenerator::StructureGenerator():
 	cg_settings.setConformerSamplingMode(ConformerSamplingMode::AUTO);
 	cg_settings.setNitrogenEnumerationMode(NitrogenEnumerationMode::UNSPECIFIED_STEREO);
 	cg_settings.sampleHeteroAtomHydrogens(false);
-	cg_settings.sampleAngleToleranceRanges(true);
+	cg_settings.sampleAngleToleranceRanges(false);
 	cg_settings.enumerateRings(false);
 	cg_settings.includeInputCoordinates(false);
 	cg_settings.setMaxNumOutputConformers(1);

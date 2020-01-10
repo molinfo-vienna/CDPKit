@@ -462,30 +462,7 @@ void ConfGen::FragmentTreeNode::lineupChildConformers(double e_window)
 
 void ConfGen::FragmentTreeNode::alignAndRotateChildConformers(double e_window, bool exhaustive)
 {
-	std::size_t num_tor_angles = torsionAngles.size();
-
-	if (num_tor_angles > 0 && torsionAngleSines.empty()) {
-		for (TorsionAngleArray::const_iterator it = torsionAngles.begin(), end = torsionAngles.end(); it != end; ++it) {
-			double angle = M_PI * (it->first) / 180.0;
-			double tol = M_PI * (it->second) / 180.0;
-
-			torsionAngleSines.push_back(std::sin(angle));
-			torsionAngleCosines.push_back(std::cos(angle));
-
-			if (tol > 0.0) {
-				torsionAngleSines.push_back(std::sin(angle + tol));
-				torsionAngleSines.push_back(std::sin(angle - tol));
-				torsionAngleCosines.push_back(std::cos(angle + tol));
-				torsionAngleCosines.push_back(std::cos(angle - tol));
-
-			} else {
-				torsionAngleSines.push_back(torsionAngleSines.back());
-				torsionAngleSines.push_back(torsionAngleSines.back());
-				torsionAngleCosines.push_back(torsionAngleCosines.back());
-				torsionAngleCosines.push_back(torsionAngleCosines.back());
-			}
-		}
-	}
+	initTorsionAngleData();
 
 	const Chem::MolecularGraph& molgraph = *owner.getMolecularGraph();
 	std::size_t left_atom_idx = molgraph.getAtomIndex(*splitBondAtoms[0]);
@@ -498,7 +475,7 @@ void ConfGen::FragmentTreeNode::alignAndRotateChildConformers(double e_window, b
 	Math::Vector3D bond_vec;
 	Math::Vector3D tor_ref_vec;
 
-	conformers.reserve(num_left_chld_confs * num_right_chld_confs * num_tor_angles);
+	conformers.reserve(num_left_chld_confs * num_right_chld_confs);
 
 	if (leftChild->changed) {
 		for (std::size_t i = 0, tor_ref_atom_idx = torsionRefAtoms[0] ? molgraph.getAtomIndex(*torsionRefAtoms[0]) : 0; i < num_left_chld_confs; i++) {
@@ -566,6 +543,7 @@ void ConfGen::FragmentTreeNode::alignAndRotateChildConformers(double e_window, b
 	ConformerData::SharedPointer new_conf;
 	ConformerData::SharedPointer tmp_conf = owner.allocConformerData();
 	double min_energy = 0.0;
+	std::size_t num_tor_angles = torsionAngles.size();
 
 	for (std::size_t i = 0; i < num_left_chld_confs; i++) {
 		const ConformerData& left_conf = *leftChild->conformers[i];
@@ -594,13 +572,13 @@ void ConfGen::FragmentTreeNode::alignAndRotateChildConformers(double e_window, b
 
 			} else {
 				for (std::size_t k = 0; k < num_tor_angles; k++) {
-					for (std::size_t l = 0, num_alt = (torsionAngles[k].second > 0.0 && exhaustive ? 3 : 1); l < num_alt; l++) {
+					for (std::size_t l = 0, num_alt = (exhaustive && torsionAngles[k].second != 0.0 ? 3 : 1); l < num_alt; l++) {
 						copyCoordinates(left_conf, leftChild->atomIndices, *tmp_conf, right_atom_idx);
 						rotateCoordinates(right_conf, rightChild->atomIndices, *tmp_conf, 
 										  torsionAngleSines[k * 3 + l], torsionAngleCosines[k * 3 + l], left_atom_idx);
 
 						double energy = conf_energy_sum + calcMMFF94Energy(*tmp_conf);
-					
+
 						if (l > 0 && new_conf->getEnergy() <= energy) 
 							continue;
 
@@ -628,6 +606,38 @@ void ConfGen::FragmentTreeNode::alignAndRotateChildConformers(double e_window, b
 
 	if (e_window > 0.0)
 		removeOutOfWindowConformers(min_energy + e_window);
+}
+
+void ConfGen::FragmentTreeNode::initTorsionAngleData()
+{
+	if (!torsionAngleSines.empty())
+		return;
+
+	for (TorsionAngleArray::const_iterator it = torsionAngles.begin(), end = torsionAngles.end(); it != end; ++it) {
+		double angle = M_PI * (it->first) / 180.0;
+
+		torsionAngleSines.push_back(std::sin(angle));
+		torsionAngleCosines.push_back(std::cos(angle));
+
+		double tol = M_PI * (it->second) / 180.0;
+
+		if (tol != 0.0) {
+			double alt_angle = angle + tol;
+
+			for (std::size_t i = 0; i < 2; i++) {
+				torsionAngleSines.push_back(std::sin(alt_angle));
+				torsionAngleCosines.push_back(std::cos(alt_angle));
+
+				alt_angle = angle - tol;
+			}
+
+		} else {
+			for (std::size_t i = 0; i < 2; i++) {
+				torsionAngleSines.push_back(torsionAngleSines.back());
+				torsionAngleCosines.push_back(torsionAngleCosines.back());
+			}
+		}
+	}
 }
 
 void ConfGen::FragmentTreeNode::removeOutOfWindowConformers(double max_energy)

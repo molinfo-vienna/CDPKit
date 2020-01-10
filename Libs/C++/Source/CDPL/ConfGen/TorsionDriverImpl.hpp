@@ -135,16 +135,11 @@ namespace CDPL
 
 			const ConfGen::TorsionRuleMatch* getTorsionRuleAngles(const Chem::Bond& bond, FragmentTreeNode* node);
 
-			bool haveUniqueTorsionReferenceAtom(const Chem::Atom& atom) const;
-
-			std::size_t getTorsionAngleIncrement(const Chem::Atom& atom) const;
-
 			std::size_t getRotationalSymmetry(const Chem::Bond& bond);
-			std::size_t getRotationalSymmetry(const Chem::Atom& atom, const Chem::Bond& bond) const;
 
 			const Chem::Atom* getFirstNeighborAtom(const Chem::Atom* ctr_atom, const Chem::Atom* excl_atom,
 												   const FragmentTreeNode* node) const;
-
+	
 			typedef std::auto_ptr<ForceField::MMFF94InteractionParameterizer> MMFF94ParameterizerPtr;
 			typedef std::auto_ptr<ForceField::MMFF94InteractionData> MMFF94InteractionDataPtr;
 			typedef std::vector<const Chem::Bond*> BondList;

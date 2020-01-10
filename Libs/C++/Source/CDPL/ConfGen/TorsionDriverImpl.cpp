@@ -35,10 +35,7 @@
 #include "CDPL/Chem/Bond.hpp"
 #include "CDPL/Chem/MolecularGraphFunctions.hpp"
 #include "CDPL/Chem/AtomFunctions.hpp"
-#include "CDPL/Chem/BondFunctions.hpp"
 #include "CDPL/Chem/UtilityFunctions.hpp"
-#include "CDPL/Chem/HybridizationState.hpp"
-#include "CDPL/Chem/AtomType.hpp"
 #include "CDPL/ForceField/MMFF94InteractionParameterizer.hpp"
 #include "CDPL/ForceField/MMFF94InteractionData.hpp"
 #include "CDPL/ForceField/Exceptions.hpp"
@@ -62,8 +59,28 @@ namespace
 	};
 
 	SymmetryPattern SYMMETRY_PATTERN_LIST[] = {
-  	    { Chem::parseSMARTS("[*:1]-[c:1]1[cH1][cH1][c](-[*,#1;X1])[cH1][cH1]1"), 2 },
-	    { Chem::parseSMARTS("[*:1]-[*X2:1]#[*X2]-[*,#1;X1]"), 360 },
+  	    { Chem::parseSMARTS("[*:1]-[*X4^3:1](-[#1])(-[#1])-[#1]"), 3 },
+  	    { Chem::parseSMARTS("[*:1]-[*X4^3:1](-[F])(-[F])-[F]"), 3 },
+  	    { Chem::parseSMARTS("[*:1]-[*X4^3:1](-[Cl])(-[Cl])-[Cl]"), 3 },
+  	    { Chem::parseSMARTS("[*:1]-[*X4^3:1](-[Br])(-[Br])-[Br]"), 3 },
+  	    { Chem::parseSMARTS("[*:1]-[*X4^3:1](-[I])(-[I])-[I]"), 3 },
+  	    { Chem::parseSMARTS("[*:1]-[*X4^3:1](-[CH3])(-[CH3])-[CH3]"), 3 },
+
+  	    { Chem::parseSMARTS("[CH3]-[NX3:1](-[CH3])-[CX3:1](=O)-[#1,*]"), 2 },
+  	    { Chem::parseSMARTS("[#1]-[NX3:1](-[#1])-[CX3:1](=O)-[#1,*]"), 2 },
+
+  	    { Chem::parseSMARTS("[*:1]-[a:1]1[c](-[#1])[c](-[#1])[c](-[#1])[c]1(-[#1])"), 2 },
+  	    { Chem::parseSMARTS("[*:1]-[a:1]1[c](-[#1])[nX2][nX2][c]1(-[#1])"), 2 },
+  	    { Chem::parseSMARTS("[*:1]-[a:1]1[nX2][c](-[#1])[c](-[#1])[nX2]1"), 2 },
+  	    { Chem::parseSMARTS("[*:1]-[a:1]1[nX2][nX2][nX2][nX2]1"), 2 },
+
+  	    { Chem::parseSMARTS("[*:1]-[a:1]1[c](-[#1])[c](-[#1])[a](-[#1,*X1,CH3])[c](-[#1])[c]1(-[#1])"), 2 },
+  	    { Chem::parseSMARTS("[*:1]-[a:1]1[c](-[#1])[nX2][a](-[#1,*X1,CH3])[nX2][c]1(-[#1])"), 2 },
+  	    { Chem::parseSMARTS("[*:1]-[a:1]1[c](-[#1])[c](-[#1])[aX2][c](-[#1])[c]1(-[#1])"), 2 },
+  	    { Chem::parseSMARTS("[*:1]-[a:1]1[nX2][c](-[#1])[a](-[#1,*X1,CH3])[c](-[#1])[nX2]1"), 2 },
+  	    { Chem::parseSMARTS("[*:1]-[a:1]1[nX2][c](-[#1])[aX2][c](-[#1])[nX2]1"), 2 },
+
+	    { Chem::parseSMARTS("[*:1]-[*X2:1]#[*X2]-[#1,*X1,CH3]"), 360 },
 	    { Chem::parseSMARTS("[*:1]-[*X2:1]#[*X1]"), 360 }
 	};
 
@@ -77,33 +94,6 @@ namespace
 		return std::fmod(angle, 360.0);
 	}
 
-	const double MIN_TORSION_ANGLE_DISTANCE = 20.0;
-
-	bool containsCloseTorsionAngle(double angle, const ConfGen::TorsionRule& rule)
-	{
-		for (ConfGen::TorsionRule::ConstAngleEntryIterator it = rule.getAnglesBegin(), end = rule.getAnglesEnd(); it != end; ++it) {
-			double rule_angle = normalizeAngle(it->getAngle());
-			double MIN_TORSION_ANGLE_DISTANCE = it->getTolerance1();
-
-			if (angle < rule_angle) {
-				if ((rule_angle - angle) < MIN_TORSION_ANGLE_DISTANCE)
-					return true;
-				
-				if ((angle + 360.0 - rule_angle) < MIN_TORSION_ANGLE_DISTANCE)
-					return true;
-				
-			} else {
-				if ((angle - rule_angle) < MIN_TORSION_ANGLE_DISTANCE)
-					return true;
-				
-				if ((rule_angle + 360.0 - angle) < MIN_TORSION_ANGLE_DISTANCE)
-					return true;
-			}
-		}
-
-		return false;
-	}
-
 	const std::size_t MAX_CONF_DATA_CACHE_SIZE = 10000;
 }
 
@@ -112,8 +102,10 @@ ConfGen::TorsionDriverImpl::TorsionDriverImpl():
 	torLib(TorsionLibrary::get()), fragTree(MAX_CONF_DATA_CACHE_SIZE)
 {
 	torRuleMatcher.findUniqueMappingsOnly(true);
-	torRuleMatcher.findAllRuleMappings(true);
+	torRuleMatcher.findAllRuleMappings(false);
 	torRuleMatcher.stopAtFirstMatchingRule(true);
+
+	subSearch.uniqueMappingsOnly(true);
 } 
 
 ConfGen::TorsionDriverImpl::~TorsionDriverImpl() {}
@@ -400,76 +392,28 @@ const ConfGen::TorsionRuleMatch* ConfGen::TorsionDriverImpl::getTorsionRuleAngle
 	using namespace Chem;
 
 	const MolecularGraph& molgraph = *fragTree.getMolecularGraph();
-	bool have_matches = false;
+	const TorsionRuleMatch* match = 0;
 
 	if (torLib) {
 		torRuleMatcher.setTorsionLibrary(torLib);
 
-		have_matches = torRuleMatcher.findMatches(bond, molgraph, false);
-	}
+		if (torRuleMatcher.findMatches(bond, molgraph, false))
+			match = &torRuleMatcher.getMatch(0);
+	} 
 
-	if (!have_matches) {
+	if (!match) {
 		torRuleMatcher.setTorsionLibrary(getFallbackTorsionLibrary());
 
-		have_matches = torRuleMatcher.findMatches(bond, molgraph, false); 
-	}
-	
-	if (!have_matches)
-		return 0;
+		if (!torRuleMatcher.findMatches(bond, molgraph, false))
+			return 0;
 
-	bool alter_120 = false;
-	bool alter_180 = false;
-
-	const TorsionRuleMatch& match = torRuleMatcher.getMatch(0);
-	const TorsionRule& rule = match.getRule();
-
-	if (torRuleMatcher.getNumMatches() > 1) {
-		for (std::size_t i = 0; i < 2; i++) {
-			const Atom& atom = bond.getAtom(i);
-
-			if (haveUniqueTorsionReferenceAtom(atom))
-				continue;
-
-			switch (getTorsionAngleIncrement(atom)) {
-
-				case 120:
-					alter_120 = true;
-					continue;
-
-				case 180:
-					alter_180 = true;
-
-				default:
-					continue;
-			}
-		}
+		match = &torRuleMatcher.getMatch(0);
 	}
 
-	for (TorsionRule::ConstAngleEntryIterator it = rule.getAnglesBegin(), end = rule.getAnglesEnd(); it != end; ++it) {
-		double angle = normalizeAngle(it->getAngle());
-		double tol = it->getTolerance1();
-			
-		node->addTorsionAngle(angle, tol);
+	const TorsionRule& rule = match->getRule();
 
-		if (alter_120) {
-			double alt_ang = std::fmod(angle + 120.0, 360.0);
-
-			if (!containsCloseTorsionAngle(alt_ang, rule))
-				node->addTorsionAngle(alt_ang, tol);
-
-			alt_ang = std::fmod(angle + 240.0, 360.0);
-
-			if (!containsCloseTorsionAngle(alt_ang, rule))
-				node->addTorsionAngle(alt_ang, tol);
-		}
-
-		if (alter_180) {
-			double alt_ang = std::fmod(angle + 180.0, 360.0);
-
-			if (!containsCloseTorsionAngle(alt_ang, rule))
-				node->addTorsionAngle(alt_ang, tol);
-		}
-	}
+	for (TorsionRule::ConstAngleEntryIterator it = rule.getAnglesBegin(), end = rule.getAnglesEnd(); it != end; ++it)
+		node->addTorsionAngle(normalizeAngle(it->getAngle()), it->getTolerance1());
 /*
 	std::cerr << rule.getMatchPatternString() << ": ";
 
@@ -477,69 +421,13 @@ const ConfGen::TorsionRuleMatch* ConfGen::TorsionDriverImpl::getTorsionRuleAngle
 		std::cerr << node->getTorsionAngles()[i].first << " ";
 		
 	std::cerr << std::endl;
-*/	
-	return &match; 
-}
-
-bool ConfGen::TorsionDriverImpl::haveUniqueTorsionReferenceAtom(const Chem::Atom& atom) const
-{
-	using namespace Chem;
-
-	const Atom* ref_atom = 0;
-
-	for (TorsionRuleMatcher::ConstMatchIterator it = torRuleMatcher.getMatchesBegin(), end = torRuleMatcher.getMatchesEnd(); it != end; ++it) {
-		const TorsionRuleMatch& match = *it;
-
-		if (match.getAtoms()[1] == &atom) {
-			if (ref_atom && match.getAtoms()[0] != ref_atom)
-				return false;
-
-			ref_atom = match.getAtoms()[0];
-
-		} else {
-			if (ref_atom && match.getAtoms()[3] != ref_atom)
-				return false;
-
-			ref_atom = match.getAtoms()[3];
-		}
-	}
-
-	return true;
-}
-
-std::size_t ConfGen::TorsionDriverImpl::getTorsionAngleIncrement(const Chem::Atom& atom) const
-{
-	using namespace Chem;
-
-	if (getAromaticityFlag(atom))
-		return 180;
-
-	switch (getHybridizationState(atom)) {
-
-		case HybridizationState::SP3:
-			if (getType(atom) == AtomType::N && isPlanarNitrogen(atom, *fragTree.getMolecularGraph()))
-				return 180;
-
-			return 120;
-
-		case HybridizationState::SP2:
-			return 180;
-
-		default:
-			break;
-	}
-
-	return 0;
+*/
+	return match; 
 }
 
 std::size_t ConfGen::TorsionDriverImpl::getRotationalSymmetry(const Chem::Bond& bond)
 {
 	using namespace Chem;
-
-	std::size_t simple_sym = std::max(getRotationalSymmetry(bond.getBegin(), bond),
-									  getRotationalSymmetry(bond.getEnd(), bond));
-	if (simple_sym > 1)
-		return simple_sym;
 
 	const MolecularGraph& molgraph = *fragTree.getMolecularGraph();
 	std::size_t node_bond_idx = molgraph.getBondIndex(bond);
@@ -563,74 +451,12 @@ std::size_t ConfGen::TorsionDriverImpl::getRotationalSymmetry(const Chem::Bond& 
 		subSearch.addBondMappingConstraint(ptn_bond_idx, node_bond_idx);
 		subSearch.setQuery(ptn);
 	
-		if (subSearch.findMappings(molgraph))
-			return SYMMETRY_PATTERN_LIST[i].symmetry;
+		if (!subSearch.mappingExists(molgraph)) 
+			continue;
+
+		return SYMMETRY_PATTERN_LIST[i].symmetry;
 	}
 
-	return 1;
-}
-
-std::size_t ConfGen::TorsionDriverImpl::getRotationalSymmetry(const Chem::Atom& atom, const Chem::Bond& bond) const
-{
-	using namespace Chem;
-
-	unsigned int nbr_atom_type = 0;
-	std::size_t nbr_bond_order = 0;
-	std::size_t nbr_count = 0;
-	bool first = true;
-
-	const MolecularGraph& molgraph = *fragTree.getMolecularGraph();
-	Atom::ConstBondIterator b_it = atom.getBondsBegin();
-
-	for (Atom::ConstAtomIterator a_it = atom.getAtomsBegin(), a_end = atom.getAtomsEnd(); a_it != a_end; ++a_it, ++b_it) {
-		const Bond& nbr_bond = *b_it;
-	
-		if (&nbr_bond == &bond)
-			continue;
-
-		if (!molgraph.containsBond(nbr_bond))
-			continue;
-
-		const Atom& nbr_atom = *a_it;
-
-		if (!molgraph.containsAtom(nbr_atom))
-			continue;
-
-		if (getExplicitBondCount(nbr_atom, molgraph) != 1)
-			return 1;
-
-		nbr_count++;
-
-		if (first) {
-			nbr_atom_type = getType(nbr_atom);
-			nbr_bond_order = getOrder(atom.getBondToAtom(nbr_atom));
-			first = false;
-			continue;
-		}
-
-		if (getType(nbr_atom) != nbr_atom_type)
-			return 1;
-
-		if (getOrder(atom.getBondToAtom(nbr_atom)) != nbr_bond_order)
-			return 1;
-	}
-
-	switch (getHybridizationState(atom)) {
-
-		case HybridizationState::SP2:
-			if (nbr_count != 2)
-				return 1;
-
-			return 2;
-
-		case HybridizationState::SP3:
-			if (nbr_count == 3)
-				return 3;
- 		
-		default:
-			return 1;
-	}
-	
 	return 1;
 }
 

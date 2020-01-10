@@ -137,10 +137,10 @@ namespace CDPL
 			void lineupChildConformers(double e_window);
 			void alignAndRotateChildConformers(double e_window, bool exhaustive);
 
+			void initTorsionAngleData();
 			void removeOutOfWindowConformers(double max_energy);
 
 			void setParent(FragmentTreeNode* node);
-
 			void setChildren(FragmentTreeNode* left, FragmentTreeNode* right);
 
 			void setSplitBond(const Chem::Bond* bond);

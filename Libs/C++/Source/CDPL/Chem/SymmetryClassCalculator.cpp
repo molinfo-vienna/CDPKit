@@ -38,6 +38,8 @@
 #include "CDPL/Chem/AtomFunctions.hpp"
 #include "CDPL/Chem/BondFunctions.hpp"
 #include "CDPL/Chem/AtomType.hpp"
+#include "CDPL/Chem/AtomConfiguration.hpp"
+#include "CDPL/Chem/BondConfiguration.hpp"
 
 
 namespace
@@ -110,6 +112,7 @@ void Chem::SymmetryClassCalculator::init(const MolecularGraph& molgraph, Util::S
 	const std::size_t ISO_PRIME_TAB_IDX = ATOMIC_NO_PRIME_TAB_IDX + AtomType::MAX_TYPE + 1; 
 	const std::size_t CHARGE_PRIME_TAB_IDX = ISO_PRIME_TAB_IDX + 3 * AtomType::MAX_TYPE; 
 	const std::size_t AROMATICITY_PRIME_TAB_IDX = CHARGE_PRIME_TAB_IDX + 20; 
+	const std::size_t CONFIG_PRIME_TAB_IDX = AROMATICITY_PRIME_TAB_IDX + 1; 
 
 	const Base::uint64 IMPL_H_INIT_SYM_CLASS_ID = 1 
 		* (atomPropertyFlags & AtomPropertyFlag::TYPE ? boost::math::prime(ATOMIC_NO_PRIME_TAB_IDX + 1) : 1)
@@ -164,6 +167,22 @@ void Chem::SymmetryClassCalculator::init(const MolecularGraph& molgraph, Util::S
 				init_sym_class_id *= boost::math::prime(AROMATICITY_PRIME_TAB_IDX);
 		}
 
+		if ((atomPropertyFlags & AtomPropertyFlag::CIP_CONFIGURATION) && hasCIPConfiguration(atom)) {
+
+			switch (getCIPConfiguration(atom)) {
+					
+				case AtomConfiguration::R:
+					init_sym_class_id *= boost::math::prime(CONFIG_PRIME_TAB_IDX);
+					break;
+
+				case AtomConfiguration::S:
+					init_sym_class_id *= boost::math::prime(CONFIG_PRIME_TAB_IDX + 1);
+
+				default:
+					break;
+			}
+		}
+
 		AtomNode* atom_node = allocNode(init_sym_class_id);
 
 		if (hComplete) {
@@ -196,6 +215,25 @@ void Chem::SymmetryClassCalculator::init(const MolecularGraph& molgraph, Util::S
 
 		AtomNode* atom_node1 = atomNodes[molgraph.getAtomIndex(bond.getBegin())];
 		AtomNode* atom_node2 = atomNodes[molgraph.getAtomIndex(bond.getEnd())];
+
+		if ((bondPropertyFlags & BondPropertyFlag::CIP_CONFIGURATION) && hasCIPConfiguration(bond)) {
+
+			switch (getCIPConfiguration(bond)) {
+
+				case BondConfiguration::CIS:
+					atom_node1->setSymClassID(atom_node1->getSymClassID() * boost::math::prime(CONFIG_PRIME_TAB_IDX + 2));
+					atom_node2->setSymClassID(atom_node2->getSymClassID() * boost::math::prime(CONFIG_PRIME_TAB_IDX + 2));
+					break;
+
+				case BondConfiguration::TRANS:
+					atom_node1->setSymClassID(atom_node1->getSymClassID() * boost::math::prime(CONFIG_PRIME_TAB_IDX + 3));
+					atom_node2->setSymClassID(atom_node2->getSymClassID() * boost::math::prime(CONFIG_PRIME_TAB_IDX + 3));
+
+				default:
+					break;
+			}
+		}
+	
 		std::size_t bond_order = 1;
 
 		if (bondPropertyFlags & BondPropertyFlag::ORDER)
@@ -282,7 +320,7 @@ void Chem::SymmetryClassCalculator::perceiveSymClasses(const MolecularGraph& mol
 		max_num_classes = num_classes;
 	}
 
-	std::for_each(atomNodes.begin(), atomNodes.end() + molgraph.getNumAtoms(), 
+	std::for_each(atomNodes.begin(), atomNodes.begin() + molgraph.getNumAtoms(), 
 				  boost::bind(&Util::STArray::addElement, boost::ref(class_ids), boost::bind(&AtomNode::getSymClassID, _1)));
 }
 
