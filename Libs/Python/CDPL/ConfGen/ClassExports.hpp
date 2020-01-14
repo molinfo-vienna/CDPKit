@@ -48,19 +48,19 @@ namespace CDPLPythonConfGen
 	void exportTorsionDriverSettings();
 	void exportTorsionDriver();
 	void exportRMSDConformerSelector();
+	void exportStructureGeneratorSettings();
+	void exportConformerGeneratorSettings();
+	void exportFragmentConformerGeneratorSettings();
+	void exportFragmentAssemblerSettings();
 
 	void exportBoostFunctionWrappers();
 
 #if defined(HAVE_BOOST_TIMER) && defined(HAVE_BOOST_CHRONO)
 
 	void exportStructureGenerator();
-	void exportStructureGeneratorSettings();
 	void exportConformerGenerator();
-	void exportConformerGeneratorSettings();
 	void exportFragmentConformerGenerator();
-	void exportFragmentConformerGeneratorSettings();
 	void exportFragmentLibraryGenerator();
-	void exportFragmentAssemblerSettings();
 	void exportFragmentAssembler();
 
 #endif // defined(HAVE_BOOST_TIMER) && defined(HAVE_BOOST_CHRONO)

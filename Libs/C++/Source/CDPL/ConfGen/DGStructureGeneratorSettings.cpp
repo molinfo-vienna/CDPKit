@@ -32,9 +32,6 @@
 using namespace CDPL;
 
 
-const ConfGen::DGStructureGeneratorSettings ConfGen::DGStructureGeneratorSettings::DEFAULT;
-
-
 ConfGen::DGStructureGeneratorSettings::DGStructureGeneratorSettings(): 
 	boxSize(50.0), planarConstr(true)
 {}

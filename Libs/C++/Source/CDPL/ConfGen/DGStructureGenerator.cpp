@@ -36,7 +36,7 @@ using namespace CDPL;
 
 
 ConfGen::DGStructureGenerator::DGStructureGenerator(): 
-	molGraph(0)
+	molGraph(0), settings(DGStructureGeneratorSettings::DEFAULT)
 {
 	phase1CoordsGen.setNumCycles(70);
 	phase1CoordsGen.setCycleStepCountFactor(1.3);

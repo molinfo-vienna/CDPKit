@@ -30,6 +30,7 @@
 #include <cmath>
 
 #include <boost/bind.hpp>
+#include <boost/thread.hpp>
 
 #include "CDPL/ConfGen/UtilityFunctions.hpp"
 #include "CDPL/ConfGen/ReturnCode.hpp"
@@ -51,6 +52,7 @@
 #include "FragmentTreeNode.hpp"
 #include "TorsionLibraryDataReader.hpp"
 #include "FallbackTorsionLibrary.hpp"
+#include "FragmentConformerCache.hpp"
 
 
 using namespace CDPL;
@@ -97,7 +99,8 @@ namespace
 
 
 ConfGen::FragmentAssemblerImpl::FragmentAssemblerImpl():
-	confDataCache(MAX_CONF_DATA_CACHE_SIZE), fragTree(MAX_TREE_CONF_DATA_CACHE_SIZE)
+	confDataCache(MAX_CONF_DATA_CACHE_SIZE), settings(FragmentAssemblerSettings::DEFAULT),
+	fragTree(MAX_TREE_CONF_DATA_CACHE_SIZE)
 {
 	fragLibs.push_back(FragmentLibrary::get());
 
@@ -423,27 +426,27 @@ bool ConfGen::FragmentAssemblerImpl::fetchConformersFromFragmentLibrary(unsigned
 	return false;
 }
 
-unsigned int ConfGen::FragmentAssemblerImpl::generateFragmentConformers(unsigned int frag_type, const Chem::Fragment& frag, 
-																		FragmentTreeNode* node)
+bool ConfGen::FragmentAssemblerImpl::fetchConformersFromFragmentCache(unsigned int frag_type, FragmentTreeNode* node)
 {
-	if (!fragSSSR)
-		fragSSSR.reset(new Chem::SmallestSetOfSmallestRings());
+	boost::lock_guard<boost::mutex> cache_lock(FragmentConformerCache::getMutex());
+	const ConformerDataArray* cache_confs = FragmentConformerCache::getEntry(fragLibEntry.getHashCode());
 
-	fragSSSR->perceive(fragLibEntry);
-	setSSSR(fragLibEntry, fragSSSR);
+	if (!cache_confs)
+		return false;
 
-	unsigned int ret_code = fragConfGen.generate(fragLibEntry, frag_type);
+	std::size_t num_confs = cache_confs->size();
 
-	if (ret_code != ReturnCode::SUCCESS && ret_code != ReturnCode::FRAGMENT_CONF_GEN_TIMEOUT) 
-		return ret_code;
+	if (num_confs == 0)
+		return false;
 
-	std::size_t num_confs = fragConfGen.getNumConformers();
+	if (cache_confs->front()->size() != fragLibEntry.getNumAtoms())  // sanity check
+		return false;
 
 	if (frag_type == FragmentType::FLEXIBLE_RING_SYSTEM && !settings.enumerateRings()) {
-		double lowest_e = fragConfGen.getConformer(0).getEnergy();
+		double lowest_e = (*cache_confs)[0]->getEnergy();
 
 		for (std::size_t i = 1; i < num_confs; i++) {
-			if (fragConfGen.getConformer(i).getEnergy() > lowest_e) {
+			if ((*cache_confs)[i]->getEnergy() > lowest_e) {
 				num_confs = i;
 				break;
 			}
@@ -453,15 +456,65 @@ unsigned int ConfGen::FragmentAssemblerImpl::generateFragmentConformers(unsigned
 	for (std::size_t i = 0; i < num_confs; i++) {
 		ConformerData::SharedPointer conf_data = allocConformerData();
 		Math::Vector3DArray::StorageType& conf_coords_data = conf_data->getData();
-		const Math::Vector3DArray::StorageType& gen_conf_coords_data = fragConfGen.getConformer(i).getData();
+		const Math::Vector3DArray::StorageType& cache_conf_coords_data = (*cache_confs)[i]->getData();
 
 		for (IndexPairList::const_iterator it = fragLibEntryAtomIdxMap.begin(), end = fragLibEntryAtomIdxMap.end(); it != end; ++it) {
 			const IndexPair& idx_mapping = *it;
 
-			conf_coords_data[idx_mapping.second].assign(gen_conf_coords_data[idx_mapping.first]);
+			conf_coords_data[idx_mapping.second].assign(cache_conf_coords_data[idx_mapping.first]);
 		}
 
 		node->addConformer(conf_data);
+	}
+
+	return true;
+}
+
+unsigned int ConfGen::FragmentAssemblerImpl::generateFragmentConformers(unsigned int frag_type, const Chem::Fragment& frag, 
+																		FragmentTreeNode* node)
+{
+	if (!fetchConformersFromFragmentCache(frag_type, node)) {
+		if (!fragSSSR)
+			fragSSSR.reset(new Chem::SmallestSetOfSmallestRings());
+
+		fragSSSR->perceive(fragLibEntry);
+		setSSSR(fragLibEntry, fragSSSR);
+
+		unsigned int ret_code = fragConfGen.generate(fragLibEntry, frag_type);
+
+		if (ret_code != ReturnCode::SUCCESS && ret_code != ReturnCode::FRAGMENT_CONF_GEN_TIMEOUT) 
+			return ret_code;
+
+		std::size_t num_confs = fragConfGen.getNumConformers();
+
+		if (frag_type == FragmentType::FLEXIBLE_RING_SYSTEM && !settings.enumerateRings()) {
+			double lowest_e = fragConfGen.getConformer(0).getEnergy();
+
+			for (std::size_t i = 1; i < num_confs; i++) {
+				if (fragConfGen.getConformer(i).getEnergy() > lowest_e) {
+					num_confs = i;
+					break;
+				}
+			}
+		}
+
+		for (std::size_t i = 0; i < num_confs; i++) {
+			ConformerData::SharedPointer conf_data = allocConformerData();
+			Math::Vector3DArray::StorageType& conf_coords_data = conf_data->getData();
+			const Math::Vector3DArray::StorageType& gen_conf_coords_data = fragConfGen.getConformer(i).getData();
+
+			for (IndexPairList::const_iterator it = fragLibEntryAtomIdxMap.begin(), end = fragLibEntryAtomIdxMap.end(); it != end; ++it) {
+				const IndexPair& idx_mapping = *it;
+
+				conf_coords_data[idx_mapping.second].assign(gen_conf_coords_data[idx_mapping.first]);
+			}
+
+			node->addConformer(conf_data);
+		}
+
+		boost::lock_guard<boost::mutex> cache_lock(FragmentConformerCache::getMutex());
+
+		FragmentConformerCache::addEntry(fragLibEntry.getHashCode(), fragConfGen.getConformersBegin(), fragConfGen.getConformersEnd());
 	}
 
 	fixBondLengths(frag, node);

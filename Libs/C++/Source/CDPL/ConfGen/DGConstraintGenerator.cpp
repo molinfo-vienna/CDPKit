@@ -70,7 +70,8 @@ std::size_t ConfGen::DGConstraintGenerator::BondAngleKeyHash::operator()(const B
 }
 
 
-ConfGen::DGConstraintGenerator::DGConstraintGenerator(): molGraph(0)
+ConfGen::DGConstraintGenerator::DGConstraintGenerator(): 
+	molGraph(0), settings(DGConstraintGeneratorSettings::DEFAULT) 
 {}
 
 ConfGen::DGConstraintGeneratorSettings& ConfGen::DGConstraintGenerator::getSettings()

@@ -55,6 +55,10 @@ SET(confgen_MOD_SRCS
     TorsionDriverExport.cpp
     TorsionDriverSettingsExport.cpp
     RMSDConformerSelectorExport.cpp
+    StructureGeneratorSettingsExport.cpp
+    ConformerGeneratorSettingsExport.cpp
+    FragmentConformerGeneratorSettingsExport.cpp
+    FragmentAssemblerSettingsExport.cpp
 
     UtilityFunctionExport.cpp
 
@@ -68,14 +72,10 @@ IF(Boost_TIMER_FOUND AND Boost_CHRONO_FOUND)
   SET(confgen_MOD_SRCS
       ${confgen_MOD_SRCS}
       StructureGeneratorExport.cpp
-      StructureGeneratorSettingsExport.cpp
       ConformerGeneratorExport.cpp
-      ConformerGeneratorSettingsExport.cpp
       FragmentConformerGeneratorExport.cpp
-      FragmentConformerGeneratorSettingsExport.cpp
       FragmentLibraryGeneratorExport.cpp
       FragmentAssemblerExport.cpp
-      FragmentAssemblerSettingsExport.cpp
      )	
 ENDIF(Boost_TIMER_FOUND AND Boost_CHRONO_FOUND)
 

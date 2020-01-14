@@ -33,9 +33,6 @@
 using namespace CDPL;
 
 
-const ConfGen::TorsionDriverSettings ConfGen::TorsionDriverSettings::DEFAULT;
-
-
 ConfGen::TorsionDriverSettings::TorsionDriverSettings(): 
 	sampleHetAtomHs(false), sampleTolRanges(false), energyOrdered(true), eWindow(0.0),
 	forceFieldType(ForceFieldType::MMFF94S_NO_ESTAT), strictParam(true)

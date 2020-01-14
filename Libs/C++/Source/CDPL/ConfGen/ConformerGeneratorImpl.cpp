@@ -90,7 +90,7 @@ namespace
 
 ConfGen::ConformerGeneratorImpl::ConformerGeneratorImpl():
 	confDataCache(MAX_CONF_DATA_CACHE_SIZE), fragConfDataCache(MAX_FRAG_CONF_DATA_CACHE_SIZE),
-	confCombDataCache(MAX_FRAG_CONF_COMBINATION_CACHE_SIZE),
+	confCombDataCache(MAX_FRAG_CONF_COMBINATION_CACHE_SIZE), settings(ConformerGeneratorSettings::DEFAULT),
 	energyMinimizer(boost::ref(mmff94EnergyCalc), boost::ref(mmff94GradientCalc))
 {
 	fragAssembler.setTimeoutCallback(boost::bind(&ConformerGeneratorImpl::timedout, this));

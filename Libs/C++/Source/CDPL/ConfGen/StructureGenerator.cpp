@@ -38,7 +38,7 @@ using namespace CDPL;
 
 
 ConfGen::StructureGenerator::StructureGenerator(): 
-	impl(new ConformerGeneratorImpl())
+	impl(new ConformerGeneratorImpl()), settings(StructureGeneratorSettings::DEFAULT)
 {
 	ConformerGeneratorSettings& cg_settings = impl->getSettings();
 

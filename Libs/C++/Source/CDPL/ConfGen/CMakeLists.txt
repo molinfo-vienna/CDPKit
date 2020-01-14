@@ -45,9 +45,7 @@ SET(cdpl-confgen_LIB_SRCS
     ${DATA_FILE_STRINGS}
 
     DGConstraintGenerator.cpp
-    DGConstraintGeneratorSettings.cpp
     DGStructureGenerator.cpp
-    DGStructureGeneratorSettings.cpp
     FragmentLibraryEntry.cpp
     FragmentLibrary.cpp
     TorsionLibrary.cpp
@@ -58,17 +56,31 @@ SET(cdpl-confgen_LIB_SRCS
     RMSDConformerSelector.cpp
     TorsionDriver.cpp
     TorsionDriverImpl.cpp
+
+    DGStructureGeneratorSettings.cpp
+    DGConstraintGeneratorSettings.cpp
+    ConformerGeneratorSettings.cpp
+    StructureGeneratorSettings.cpp
     TorsionDriverSettings.cpp
+    FragmentConformerGeneratorSettings.cpp
+    FragmentAssemblerSettings.cpp
+    SettingsPresets.cpp
 
     CDFFragmentLibraryDataReader.cpp
     CDFFragmentLibraryDataWriter.cpp
     TorsionLibraryDataReader.cpp
     TorsionLibraryDataWriter.cpp
+
     FallbackTorsionLibrary.cpp
+
     FragmentTreeNode.cpp
     FragmentTree.cpp
+
+    FragmentConformerCache.cpp
+
     SubstituentBulkinessCalculator.cpp
     MMFF94BondLengthTable.cpp
+
     ForceFieldInteractionMask.cpp
 
     CDFMoleculeDataFunctions.cpp
@@ -79,17 +91,13 @@ IF(Boost_TIMER_FOUND AND Boost_CHRONO_FOUND)
    SET(cdpl-confgen_LIB_SRCS
        ${cdpl-confgen_LIB_SRCS}
        StructureGenerator.cpp
-       StructureGeneratorSettings.cpp
        ConformerGenerator.cpp
        ConformerGeneratorImpl.cpp
-       ConformerGeneratorSettings.cpp
        FragmentConformerGenerator.cpp
        FragmentConformerGeneratorImpl.cpp
-       FragmentConformerGeneratorSettings.cpp
        FragmentLibraryGenerator.cpp
        FragmentAssembler.cpp
        FragmentAssemblerImpl.cpp
-       FragmentAssemblerSettings.cpp
      )	  
 
    LINK_LIBRARIES(${Boost_TIMER_LIBRARY} ${Boost_CHRONO_LIBRARY})	

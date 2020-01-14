@@ -131,6 +131,8 @@ void CDPLPythonConfGen::exportFragmentConformerGeneratorSettings()
 		.def("getSmallRingSystemSamplingFactor", &ConfGen::FragmentConformerGeneratorSettings::getSmallRingSystemSamplingFactor, 
 			 python::arg("self"))
 		.def_readonly("DEFAULT", ConfGen::FragmentConformerGeneratorSettings::DEFAULT)
+		.def_readonly("FAST", ConfGen::FragmentConformerGeneratorSettings::FAST)
+		.def_readonly("EXHAUSTIVE", ConfGen::FragmentConformerGeneratorSettings::EXHAUSTIVE)
 		.add_property("preserveInputBondingGeom", GetBoolFunc(&ConfGen::FragmentConformerGeneratorSettings::preserveInputBondingGeometries), 
 					  SetBoolFunc(&ConfGen::FragmentConformerGeneratorSettings::preserveInputBondingGeometries))
 		.add_property("forceFieldType", &ConfGen::FragmentConformerGeneratorSettings::getForceFieldType, 

@@ -51,17 +51,17 @@ BOOST_PYTHON_MODULE(_confgen)
 	exportTorsionDriverSettings();
 	exportTorsionDriver();
 	exportRMSDConformerSelector();
+	exportStructureGeneratorSettings();
+	exportConformerGeneratorSettings();
+	exportFragmentConformerGeneratorSettings();
+	exportFragmentAssemblerSettings();
 
 #if defined(HAVE_BOOST_TIMER) && defined(HAVE_BOOST_CHRONO)
 
-	exportStructureGeneratorSettings();
 	exportStructureGenerator();
-	exportConformerGeneratorSettings();
 	exportConformerGenerator();
-	exportFragmentConformerGeneratorSettings();
 	exportFragmentConformerGenerator();
 	exportFragmentLibraryGenerator();
-	exportFragmentAssemblerSettings();
 	exportFragmentAssembler();
 
 #endif // defined(HAVE_BOOST_TIMER) && defined(HAVE_BOOST_CHRONO)

@@ -33,9 +33,6 @@
 using namespace CDPL;
 
 
-const ConfGen::StructureGeneratorSettings ConfGen::StructureGeneratorSettings::DEFAULT;
-
-
 ConfGen::StructureGeneratorSettings::StructureGeneratorSettings():
 	fromScratch(true), timeout(5 * 60 * 1000), 
 	forceFieldType(ForceFieldType::MMFF94S_NO_ESTAT), strictParam(true), 

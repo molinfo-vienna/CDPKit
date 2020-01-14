@@ -99,7 +99,8 @@ namespace
 
 
 ConfGen::TorsionDriverImpl::TorsionDriverImpl(): 
-	torLib(TorsionLibrary::get()), fragTree(MAX_CONF_DATA_CACHE_SIZE)
+	settings(TorsionDriverSettings::DEFAULT), torLib(TorsionLibrary::get()), 
+	fragTree(MAX_CONF_DATA_CACHE_SIZE)
 {
 	torRuleMatcher.findUniqueMappingsOnly(true);
 	torRuleMatcher.findAllRuleMappings(false);

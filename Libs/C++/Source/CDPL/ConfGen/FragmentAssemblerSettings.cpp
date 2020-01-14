@@ -34,9 +34,6 @@
 using namespace CDPL;
 
 
-const ConfGen::FragmentAssemblerSettings ConfGen::FragmentAssemblerSettings::DEFAULT;
-
-
 ConfGen::FragmentAssemblerSettings::FragmentAssemblerSettings():
 	enumRings(true), nitrogenEnumMode(NitrogenEnumerationMode::UNSPECIFIED_STEREO),
 	fromScratch(true)

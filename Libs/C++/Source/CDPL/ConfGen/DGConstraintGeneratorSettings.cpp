@@ -32,9 +32,6 @@
 using namespace CDPL;
 
 
-const ConfGen::DGConstraintGeneratorSettings ConfGen::DGConstraintGeneratorSettings::DEFAULT;
-
-
 ConfGen::DGConstraintGeneratorSettings::DGConstraintGeneratorSettings():
     exclHydrogens(true), atomConfig(true), bondConfig(true)
 {}

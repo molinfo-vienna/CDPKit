@@ -54,6 +54,14 @@ namespace CDPL
 		  public:
 			static const ConformerGeneratorSettings DEFAULT;
 
+			static const ConformerGeneratorSettings SMALL_SET_DIVERSE;
+			static const ConformerGeneratorSettings MEDIUM_SET_DIVERSE;
+			static const ConformerGeneratorSettings LARGE_SET_DIVERSE;
+
+			static const ConformerGeneratorSettings SMALL_SET_DENSE;
+			static const ConformerGeneratorSettings MEDIUM_SET_DENSE;
+			static const ConformerGeneratorSettings LARGE_SET_DENSE;
+
 			ConformerGeneratorSettings();
 
 			void setConformerSamplingMode(unsigned int mode);

@@ -33,9 +33,6 @@
 using namespace CDPL;
 
 
-const ConfGen::FragmentConformerGeneratorSettings ConfGen::FragmentConformerGeneratorSettings::DEFAULT;
-
-
 ConfGen::FragmentConformerGeneratorSettings::RingFragmentSettings::RingFragmentSettings():
 	maxNumSampledConfs(2000), minNumSampledConfs(40), maxNumOutputConfs(1000),
 	timeout(0), eWindow(6.0), minRMSD(0.1)

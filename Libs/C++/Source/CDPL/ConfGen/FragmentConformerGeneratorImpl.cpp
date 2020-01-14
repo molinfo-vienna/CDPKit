@@ -71,7 +71,8 @@ namespace
 
 ConfGen::FragmentConformerGeneratorImpl::FragmentConformerGeneratorImpl(): 
 	confDataCache(MAX_CONF_DATA_CACHE_SIZE),
-	energyMinimizer(boost::ref(mmff94EnergyCalc), boost::ref(mmff94GradientCalc))
+	energyMinimizer(boost::ref(mmff94EnergyCalc), boost::ref(mmff94GradientCalc)),
+	settings(FragmentConformerGeneratorSettings::DEFAULT)
 {
 	using namespace Chem;
 

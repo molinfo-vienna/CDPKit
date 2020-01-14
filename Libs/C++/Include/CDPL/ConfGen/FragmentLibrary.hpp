@@ -42,6 +42,7 @@
 
 #include "CDPL/ConfGen/APIPrefix.hpp"
 #include "CDPL/Chem/MolecularGraph.hpp"
+#include "CDPL/Base/IntegerTypes.hpp"
 
 
 namespace CDPL 

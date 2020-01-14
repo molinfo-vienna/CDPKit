@@ -34,9 +34,7 @@
 #include "CDPL/Config.hpp"
 
 #include "CDPL/ConfGen/DGConstraintGenerator.hpp"
-#include "CDPL/ConfGen/DGConstraintGeneratorSettings.hpp"
 #include "CDPL/ConfGen/DGStructureGenerator.hpp"
-#include "CDPL/ConfGen/DGStructureGeneratorSettings.hpp"
 #include "CDPL/ConfGen/ConformerData.hpp"
 #include "CDPL/ConfGen/ConformerDataArray.hpp"
 #include "CDPL/ConfGen/FragmentLibraryEntry.hpp"
@@ -48,7 +46,6 @@
 #include "CDPL/ConfGen/TorsionRuleMatcher.hpp"
 #include "CDPL/ConfGen/RMSDConformerSelector.hpp"
 #include "CDPL/ConfGen/TorsionDriver.hpp"
-#include "CDPL/ConfGen/TorsionDriverSettings.hpp"
 #include "CDPL/ConfGen/UtilityFunctions.hpp"
 #include "CDPL/ConfGen/CallbackFunction.hpp"
 #include "CDPL/ConfGen/FragmentType.hpp"
@@ -56,18 +53,21 @@
 #include "CDPL/ConfGen/ConformerSamplingMode.hpp"
 #include "CDPL/ConfGen/ReturnCode.hpp"
 #include "CDPL/ConfGen/NitrogenEnumerationMode.hpp"
+#include "CDPL/ConfGen/TorsionDriverSettings.hpp"
+#include "CDPL/ConfGen/DGConstraintGeneratorSettings.hpp"
+#include "CDPL/ConfGen/DGStructureGeneratorSettings.hpp"
+#include "CDPL/ConfGen/StructureGeneratorSettings.hpp"
+#include "CDPL/ConfGen/ConformerGeneratorSettings.hpp"
+#include "CDPL/ConfGen/FragmentConformerGeneratorSettings.hpp"
+#include "CDPL/ConfGen/FragmentAssemblerSettings.hpp"
 
 #if defined(HAVE_BOOST_TIMER) && defined(HAVE_BOOST_CHRONO)
 
 #include "CDPL/ConfGen/StructureGenerator.hpp"
-#include "CDPL/ConfGen/StructureGeneratorSettings.hpp"
 #include "CDPL/ConfGen/ConformerGenerator.hpp"
-#include "CDPL/ConfGen/ConformerGeneratorSettings.hpp"
 #include "CDPL/ConfGen/FragmentConformerGenerator.hpp"
-#include "CDPL/ConfGen/FragmentConformerGeneratorSettings.hpp"
 #include "CDPL/ConfGen/FragmentLibraryGenerator.hpp"
 #include "CDPL/ConfGen/FragmentAssembler.hpp"
-#include "CDPL/ConfGen/FragmentAssemblerSettings.hpp"
 
 #endif // defined(HAVE_BOOST_TIMER) && defined(HAVE_BOOST_CHRONO)
 #endif // CDPL_CONFGEN_HPP

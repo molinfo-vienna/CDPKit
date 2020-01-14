@@ -125,6 +125,12 @@ void CDPLPythonConfGen::exportConformerGeneratorSettings()
 			 (&ConfGen::ConformerGeneratorSettings::getFragmentBuildSettings),
 			 python::arg("self"), python::return_internal_reference<>())
 		.def_readonly("DEFAULT", ConfGen::ConformerGeneratorSettings::DEFAULT)
+		.def_readonly("SMALL_SET_DIVERSE", ConfGen::ConformerGeneratorSettings::SMALL_SET_DIVERSE)
+		.def_readonly("MEDIUM_SET_DIVERSE", ConfGen::ConformerGeneratorSettings::MEDIUM_SET_DIVERSE)
+		.def_readonly("LARGE_SET_DIVERSE", ConfGen::ConformerGeneratorSettings::LARGE_SET_DIVERSE)
+		.def_readonly("SMALL_SET_DENSE", ConfGen::ConformerGeneratorSettings::SMALL_SET_DENSE)
+		.def_readonly("MEDIUM_SET_DENSE", ConfGen::ConformerGeneratorSettings::MEDIUM_SET_DENSE)
+		.def_readonly("LARGE_SET_DENSE", ConfGen::ConformerGeneratorSettings::LARGE_SET_DENSE)
 		.add_property("confSamplingMode", &ConfGen::ConformerGeneratorSettings::getConformerSamplingMode,
 					  &ConfGen::ConformerGeneratorSettings::setConformerSamplingMode)
 		.add_property("sampleHetAtomHydrogens", GetBoolFunc(&ConfGen::ConformerGeneratorSettings::sampleHeteroAtomHydrogens),

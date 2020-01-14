@@ -52,6 +52,8 @@ namespace CDPL
 
 		  public:
 			static const FragmentConformerGeneratorSettings DEFAULT;
+			static const FragmentConformerGeneratorSettings FAST;
+			static const FragmentConformerGeneratorSettings EXHAUSTIVE;
 
 			class RingFragmentSettings
 			{
