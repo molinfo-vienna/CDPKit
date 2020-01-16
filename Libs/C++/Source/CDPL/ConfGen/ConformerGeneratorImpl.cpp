@@ -32,7 +32,9 @@
 #include <boost/bind.hpp>
 #include <boost/math/special_functions.hpp>
 
-#include "CDPL/ConfGen/UtilityFunctions.hpp"
+#include "CDPL/ConfGen/BondFunctions.hpp"
+#include "CDPL/ConfGen/MolecularGraphFunctions.hpp"
+#include "CDPL/ConfGen/MoleculeFunctions.hpp"
 #include "CDPL/ConfGen/ReturnCode.hpp"
 #include "CDPL/ConfGen/ConformerSamplingMode.hpp"
 #include "CDPL/Chem/MolecularGraphFunctions.hpp"
@@ -193,6 +195,11 @@ unsigned int ConfGen::ConformerGeneratorImpl::generate(const Chem::MolecularGrap
 	}
 
 	return generateConformers(molgraph, comps, struct_gen_only);
+}
+
+void ConfGen::ConformerGeneratorImpl::setConformers(Chem::MolecularGraph& molgraph) const
+{
+	ConfGen::setConformers(molgraph, outputConfs);
 }
 
 std::size_t ConfGen::ConformerGeneratorImpl::getNumConformers() const

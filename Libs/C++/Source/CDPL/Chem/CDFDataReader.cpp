@@ -503,10 +503,10 @@ void Chem::CDFDataReader::readMoleculeProperties(Molecule& mol, Internal::ByteBu
 				continue;
 
 			case CDF::MolecularGraphProperty::CONFORMER_ENERGIES: {
-				Math::DVector::SharedPointer dvec_ptr(new Math::DVector());
+				Util::DArray::SharedPointer array_ptr(new Util::DArray());
 
-				getVectorProperty(prop_spec, *dvec_ptr, bbuf);
-				setConformerEnergies(mol, dvec_ptr);
+				getFloatArrayProperty(prop_spec, *array_ptr, bbuf);
+				setConformerEnergies(mol, array_ptr);
 				continue;
 			}
 

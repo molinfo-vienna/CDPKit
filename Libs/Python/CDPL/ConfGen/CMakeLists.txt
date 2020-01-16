@@ -60,7 +60,9 @@ SET(confgen_MOD_SRCS
     FragmentConformerGeneratorSettingsExport.cpp
     FragmentAssemblerSettingsExport.cpp
 
-    UtilityFunctionExport.cpp
+    BondFunctionExport.cpp
+    MolecularGraphFunctionExport.cpp
+    MoleculeFunctionExport.cpp
 
     BoostFunctionWrapperExport.cpp
    

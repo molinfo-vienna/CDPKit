@@ -509,9 +509,9 @@
 \ingroup CDPL_FORCEFIELD_FUNCTIONS
 
 
-\defgroup CDPL_CONFGEN Molecule Conformer Generation
+\defgroup CDPL_CONFGEN Molecule Conformer and 3D Coordinates Generation
 
-\defgroup CDPL_CONFGEN_GENERATORS Conformer Generator Classes
+\defgroup CDPL_CONFGEN_GENERATORS Generator Classes
 \ingroup CDPL_CONFGEN
 
 \defgroup CDPL_CONFGEN_DATA_STRUCTURES Data Structures
@@ -519,6 +519,15 @@
 
 \defgroup CDPL_CONFGEN_FUNCTIONS Free Functions
 \ingroup CDPL_CONFGEN
+
+\defgroup CDPL_CONFGEN_BOND_FUNCTIONS Bond Functions
+\ingroup CDPL_CONFGEN_FUNCTIONS
+
+\defgroup CDPL_CONFGEN_MOLECULAR_GRAPH_FUNCTIONS MolecularGraph Functions
+\ingroup CDPL_CONFGEN_FUNCTIONS
+
+\defgroup CDPL_CONFGEN_MOLECULE_FUNCTIONS Molecule Functions
+\ingroup CDPL_CONFGEN_FUNCTIONS
 
 \defgroup CDPL_CONFGEN_CONSTANTS Flags and Constants
 \ingroup CDPL_CONFGEN

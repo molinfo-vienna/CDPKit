@@ -34,7 +34,8 @@
 
 #include "CDPL/ConfGen/FragmentType.hpp"
 #include "CDPL/ConfGen/ReturnCode.hpp"
-#include "CDPL/ConfGen/UtilityFunctions.hpp"
+#include "CDPL/ConfGen/BondFunctions.hpp"
+#include "CDPL/ConfGen/MolecularGraphFunctions.hpp"
 #include "CDPL/Chem/AtomType.hpp"
 #include "CDPL/Chem/FragmentList.hpp"
 #include "CDPL/Chem/Atom.hpp"
@@ -136,6 +137,11 @@ unsigned int ConfGen::FragmentConformerGeneratorImpl::generate(const Chem::Molec
 		return generateFlexibleRingConformers();
 	
 	return generateSingleConformer();
+}
+
+void ConfGen::FragmentConformerGeneratorImpl::setConformers(Chem::MolecularGraph& molgraph) const
+{
+	ConfGen::setConformers(molgraph, outputConfs);
 }
 
 std::size_t ConfGen::FragmentConformerGeneratorImpl::getNumConformers() const

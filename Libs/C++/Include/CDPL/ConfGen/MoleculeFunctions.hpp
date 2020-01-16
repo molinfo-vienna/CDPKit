@@ -1,7 +1,7 @@
 /* -*- mode: c++; c-basic-offset: 4; tab-width: 4; indent-tabs-mode: t -*- */
 
 /* 
- * UtilityFunctions.hpp 
+ * MoleculeFunctions.hpp 
  *
  * This file is part of the Chemical Data Processing Toolkit
  *
@@ -25,38 +25,39 @@
 
 /**
  * \file
- * \brief Declaration of various utility functions.
+ * \brief Declaration of functions that operate on Chem::Molecule instances.
  */
 
-#ifndef CDPL_PHARM_UTILITYFUNCTIONS_HPP
-#define CDPL_PHARM_UTILITYFUNCTIONS_HPP
+#ifndef CDPL_CONFGEN_MOLECULEFUNCTIONS_HPP
+#define CDPL_CONFGEN_MOLECULEFUNCTIONS_HPP
 
-#include "CDPL/Pharm/APIPrefix.hpp"
+#include "CDPL/ConfGen/APIPrefix.hpp"
 
 
 namespace CDPL 
 {
 
-    namespace Chem
-    {
+	namespace Chem
+	{
 
 		class Molecule;
-    }
+	}
 
-    namespace Pharm 
-    {
-	
+	namespace ConfGen 
+	{
+
 		/**
-		 * \addtogroup CDPL_PHARM_UTILITY_FUNCTIONS
+		 * \addtogroup CDPL_CONFGEN_MOLECULE_FUNCTIONS
 		 * @{
 		 */
-	
-		CDPL_PHARM_API void prepareForPharmacophoreGeneration(Chem::Molecule& mol);
-	
+
+		CDPL_CONFGEN_API void prepareForConformerGeneration(Chem::Molecule& mol, bool canonicalize = false); 
+		
 		/**
 		 * @}
 		 */
-    }
+	}
 }
 
-#endif // CDPL_PHARM_UTILITYFUNCTIONS_HPP
+#endif // CDPL_CONFGEN_MOLECULEFUNCTIONS_HPP
+ 

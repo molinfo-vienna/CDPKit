@@ -84,7 +84,9 @@ SET(cdpl-confgen_LIB_SRCS
     ForceFieldInteractionMask.cpp
 
     CDFMoleculeDataFunctions.cpp
-    UtilityFunctions.cpp
+    BondFunctions.cpp
+    MolecularGraphFunctions.cpp
+    MoleculeFunctions.cpp
    )
 
 IF(Boost_TIMER_FOUND AND Boost_CHRONO_FOUND)

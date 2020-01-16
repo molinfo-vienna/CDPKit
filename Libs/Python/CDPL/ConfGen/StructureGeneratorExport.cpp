@@ -66,16 +66,18 @@ void CDPLPythonConfGen::exportStructureGenerator()
 			 (python::arg("self"), python::arg("func")))
 		.def("getTimeoutCallback", &ConfGen::StructureGenerator::getTimeoutCallback, 
 			 python::arg("self"), python::return_internal_reference<>())
-		.def("generate", static_cast<unsigned int (ConfGen::StructureGenerator::*)
-			 (const Chem::MolecularGraph&, ConfGen::ConformerData&)>(&ConfGen::StructureGenerator::generate),
-			 (python::arg("self"), python::arg("molgraph"), python::arg("conf_data")))
-		.def("generate", static_cast<unsigned int (ConfGen::StructureGenerator::*)
-			 (const Chem::MolecularGraph&, Math::Vector3DArray&)>(&ConfGen::StructureGenerator::generate),
-			 (python::arg("self"), python::arg("molgraph"), python::arg("coords")))
+		.def("generate", &ConfGen::StructureGenerator::generate,
+			 (python::arg("self"), python::arg("molgraph")))
+		.def("setCoordinates", &ConfGen::StructureGenerator::setCoordinates,
+			 (python::arg("self"), python::arg("molgraph")))
+		.def("getCoordinates", &ConfGen::StructureGenerator::getCoordinates,
+			 python::arg("self"), python::return_internal_reference<>())
 		.add_property("settings", 
 					  python::make_function(static_cast<ConfGen::StructureGeneratorSettings& (ConfGen::StructureGenerator::*)()>
 											(&ConfGen::StructureGenerator::getSettings),
 											python::return_internal_reference<>()))
+		.add_property("coordinates", python::make_function(&ConfGen::StructureGenerator::getCoordinates,
+														   python::return_internal_reference<>()))
 		.add_property("torsionLibrary", 
 					  python::make_function(&ConfGen::StructureGenerator::getTorsionLibrary,
 											python::return_value_policy<python::copy_const_reference>()),

@@ -29,7 +29,8 @@
 #include <algorithm>
 #include <cmath>
 
-#include "CDPL/ConfGen/UtilityFunctions.hpp"
+#include "CDPL/ConfGen/MolecularGraphFunctions.hpp"
+#include "CDPL/ConfGen/BondFunctions.hpp"
 #include "CDPL/ConfGen/ReturnCode.hpp"
 #include "CDPL/Chem/Atom.hpp"
 #include "CDPL/Chem/Bond.hpp"

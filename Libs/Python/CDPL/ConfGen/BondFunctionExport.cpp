@@ -1,7 +1,7 @@
 /* -*- mode: c++; c-basic-offset: 4; tab-width: 4; indent-tabs-mode: t -*- */
 
 /* 
- * UtilityFunctions.hpp 
+ * BondFunctionExport.cpp 
  *
  * This file is part of the Chemical Data Processing Toolkit
  *
@@ -23,40 +23,36 @@
  * Boston, MA 02111-1307, USA.
  */
 
-/**
- * \file
- * \brief Declaration of various utility functions.
- */
 
-#ifndef CDPL_PHARM_UTILITYFUNCTIONS_HPP
-#define CDPL_PHARM_UTILITYFUNCTIONS_HPP
+#include <boost/python.hpp>
 
-#include "CDPL/Pharm/APIPrefix.hpp"
+#include "CDPL/ConfGen/BondFunctions.hpp"
+#include "CDPL/Chem/Bond.hpp"
+#include "CDPL/Chem/MolecularGraph.hpp"
+
+#include "FunctionExports.hpp"
 
 
-namespace CDPL 
+namespace
 {
 
-    namespace Chem
-    {
+	bool isFragmentLinkBond(CDPL::Chem::Bond& bond, const CDPL::Chem::MolecularGraph& molgraph)
+	{
+		return CDPL::ConfGen::isFragmentLinkBond(bond, molgraph);
+	}
 
-		class Molecule;
-    }
-
-    namespace Pharm 
-    {
-	
-		/**
-		 * \addtogroup CDPL_PHARM_UTILITY_FUNCTIONS
-		 * @{
-		 */
-	
-		CDPL_PHARM_API void prepareForPharmacophoreGeneration(Chem::Molecule& mol);
-	
-		/**
-		 * @}
-		 */
-    }
+	bool isRotatableBond(CDPL::Chem::Bond& bond, const CDPL::Chem::MolecularGraph& molgraph, bool het_h_rotors)
+	{
+		return CDPL::ConfGen::isRotatableBond(bond, molgraph, het_h_rotors);
+	}
 }
 
-#endif // CDPL_PHARM_UTILITYFUNCTIONS_HPP
+
+void CDPLPythonConfGen::exportBondFunctions()
+{
+	using namespace boost;
+	using namespace CDPL;
+
+	python::def("isFragmentLinkBond", &isFragmentLinkBond, (python::arg("bond"), python::arg("molgraph"))); 
+	python::def("isRotatableBond", &isRotatableBond, (python::arg("bond"), python::arg("molgraph"), python::arg("het_h_rotors"))); 
+}

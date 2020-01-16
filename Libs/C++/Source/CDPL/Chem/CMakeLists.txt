@@ -187,7 +187,7 @@ SET(cdpl-chem_LIB_SRCS
     AtomContainerCoordinatesFunctions.cpp
     AtomContainerMaxAtomMappingIDFunction.cpp
     AtomContainerMaxComponentGroupIDFunction.cpp
-    AtomContainerConformationFunctions.cpp
+    AtomContainerConformerFunctions.cpp
     AtomContainerAtomTypeMaskFunction.cpp
     AtomContainerCopyAtomsFunctions.cpp
     AtomContainerBoundingBoxFunctions.cpp
@@ -297,6 +297,7 @@ SET(cdpl-chem_LIB_SRCS
     MolecularGraphFragmentMembershipFunctions.cpp 
     MolecularGraphCopyStereoDescriptorsFunctions.cpp  
     MolecularGraphSplitIntoFragmentsFunction.cpp  
+    MolecularGraphConformerFunctions.cpp
 
     ReactionPropertyFunctions.cpp
     ReactionMatchConstraintsFunctions.cpp

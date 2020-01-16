@@ -62,6 +62,8 @@ void CDPLPythonConfGen::exportFragmentConformerGenerator()
 			 static_cast<unsigned int (ConfGen::FragmentConformerGenerator::*) (const Chem::MolecularGraph&, unsigned int)>
 			 (&ConfGen::FragmentConformerGenerator::generate), 
 			 (python::arg("self"), python::arg("molgraph"), python::arg("frag_type")))
+		.def("setConformers", &ConfGen::FragmentConformerGenerator::setConformers,
+			 (python::arg("self"), python::arg("molgraph")))
 		.def("getNumConformers", &ConfGen::FragmentConformerGenerator::getNumConformers, python::arg("self"))
 		.def("getConformer", 
 			 static_cast<ConfGen::ConformerData& (ConfGen::FragmentConformerGenerator::*)(std::size_t)>

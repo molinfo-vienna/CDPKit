@@ -1,7 +1,7 @@
 /* -*- mode: c++; c-basic-offset: 4; tab-width: 4; indent-tabs-mode: t -*- */
 
 /* 
- * UtilityFunctions.hpp 
+ * MoleculeFunctionExport.cpp 
  *
  * This file is part of the Chemical Data Processing Toolkit
  *
@@ -23,40 +23,20 @@
  * Boston, MA 02111-1307, USA.
  */
 
-/**
- * \file
- * \brief Declaration of various utility functions.
- */
 
-#ifndef CDPL_PHARM_UTILITYFUNCTIONS_HPP
-#define CDPL_PHARM_UTILITYFUNCTIONS_HPP
+#include <boost/python.hpp>
 
-#include "CDPL/Pharm/APIPrefix.hpp"
+#include "CDPL/ConfGen/MoleculeFunctions.hpp"
+#include "CDPL/Chem/Molecule.hpp"
+
+#include "FunctionExports.hpp"
 
 
-namespace CDPL 
+void CDPLPythonConfGen::exportMoleculeFunctions()
 {
+	using namespace boost;
+	using namespace CDPL;
 
-    namespace Chem
-    {
-
-		class Molecule;
-    }
-
-    namespace Pharm 
-    {
-	
-		/**
-		 * \addtogroup CDPL_PHARM_UTILITY_FUNCTIONS
-		 * @{
-		 */
-	
-		CDPL_PHARM_API void prepareForPharmacophoreGeneration(Chem::Molecule& mol);
-	
-		/**
-		 * @}
-		 */
-    }
+	python::def("prepareForConformerGeneration", &ConfGen::prepareForConformerGeneration, 
+				(python::arg("mol"), python::arg("canonicalize") = false));
 }
-
-#endif // CDPL_PHARM_UTILITYFUNCTIONS_HPP

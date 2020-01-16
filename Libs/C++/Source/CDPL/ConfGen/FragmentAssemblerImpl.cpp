@@ -32,7 +32,8 @@
 #include <boost/bind.hpp>
 #include <boost/thread.hpp>
 
-#include "CDPL/ConfGen/UtilityFunctions.hpp"
+#include "CDPL/ConfGen/BondFunctions.hpp"
+#include "CDPL/ConfGen/MolecularGraphFunctions.hpp"
 #include "CDPL/ConfGen/ReturnCode.hpp"
 #include "CDPL/ConfGen/NitrogenEnumerationMode.hpp"
 #include "CDPL/ConfGen/FragmentType.hpp"
@@ -274,7 +275,7 @@ unsigned int ConfGen::FragmentAssemblerImpl::getFragmentConformers()
 
 			initFragmentLibraryEntry(frag, frag_node);
 
-			if (!fetchConformersFromFragmentLibrary(frag_type, frag, frag_node)) {
+			if (!fetchConformersFromFragmentLibrary(frag_type, frag, frag_node) && !fetchConformersFromFragmentCache(frag_type, frag, frag_node)) {
 				unsigned int ret_code = generateFragmentConformers(frag_type, frag, frag_node);
 
 				if (ret_code != ReturnCode::SUCCESS)
@@ -387,7 +388,7 @@ bool ConfGen::FragmentAssemblerImpl::fetchConformersFromFragmentLibrary(unsigned
 
 		else if (frag_type == FragmentType::FLEXIBLE_RING_SYSTEM && !settings.enumerateRings()) {
 			if (hasConformerEnergies(*entry_ptr)) {
-				const Math::DVector& energies = *getConformerEnergies(*entry_ptr);
+				const Util::DArray& energies = *getConformerEnergies(*entry_ptr);
 				double lowest_e = energies[0];
 
 				for (std::size_t i = 1; i < num_confs; i++) {
@@ -426,7 +427,8 @@ bool ConfGen::FragmentAssemblerImpl::fetchConformersFromFragmentLibrary(unsigned
 	return false;
 }
 
-bool ConfGen::FragmentAssemblerImpl::fetchConformersFromFragmentCache(unsigned int frag_type, FragmentTreeNode* node)
+bool ConfGen::FragmentAssemblerImpl::fetchConformersFromFragmentCache(unsigned int frag_type, const Chem::Fragment& frag, 
+																	  FragmentTreeNode* node)
 {
 	boost::lock_guard<boost::mutex> cache_lock(FragmentConformerCache::getMutex());
 	const ConformerDataArray* cache_confs = FragmentConformerCache::getEntry(fragLibEntry.getHashCode());
@@ -467,55 +469,61 @@ bool ConfGen::FragmentAssemblerImpl::fetchConformersFromFragmentCache(unsigned i
 		node->addConformer(conf_data);
 	}
 
+	fixBondLengths(frag, node);
+
+	if (frag_type == FragmentType::CHAIN)
+		postprocChainFragment(true, frag, node);
+
+	else if (frag_type == FragmentType::FLEXIBLE_RING_SYSTEM)
+		enumRingFragmentNitrogens(frag, node);
+
 	return true;
 }
 
 unsigned int ConfGen::FragmentAssemblerImpl::generateFragmentConformers(unsigned int frag_type, const Chem::Fragment& frag, 
 																		FragmentTreeNode* node)
 {
-	if (!fetchConformersFromFragmentCache(frag_type, node)) {
-		if (!fragSSSR)
-			fragSSSR.reset(new Chem::SmallestSetOfSmallestRings());
+	if (!fragSSSR)
+		fragSSSR.reset(new Chem::SmallestSetOfSmallestRings());
 
-		fragSSSR->perceive(fragLibEntry);
-		setSSSR(fragLibEntry, fragSSSR);
+	fragSSSR->perceive(fragLibEntry);
+	setSSSR(fragLibEntry, fragSSSR);
 
-		unsigned int ret_code = fragConfGen.generate(fragLibEntry, frag_type);
+	unsigned int ret_code = fragConfGen.generate(fragLibEntry, frag_type);
 
-		if (ret_code != ReturnCode::SUCCESS && ret_code != ReturnCode::FRAGMENT_CONF_GEN_TIMEOUT) 
-			return ret_code;
+	if (ret_code != ReturnCode::SUCCESS && ret_code != ReturnCode::FRAGMENT_CONF_GEN_TIMEOUT) 
+		return ret_code;
 
-		std::size_t num_confs = fragConfGen.getNumConformers();
+	std::size_t num_confs = fragConfGen.getNumConformers();
 
-		if (frag_type == FragmentType::FLEXIBLE_RING_SYSTEM && !settings.enumerateRings()) {
-			double lowest_e = fragConfGen.getConformer(0).getEnergy();
+	if (frag_type == FragmentType::FLEXIBLE_RING_SYSTEM && !settings.enumerateRings()) {
+		double lowest_e = fragConfGen.getConformer(0).getEnergy();
 
-			for (std::size_t i = 1; i < num_confs; i++) {
-				if (fragConfGen.getConformer(i).getEnergy() > lowest_e) {
-					num_confs = i;
-					break;
-				}
+		for (std::size_t i = 1; i < num_confs; i++) {
+			if (fragConfGen.getConformer(i).getEnergy() > lowest_e) {
+				num_confs = i;
+				break;
 			}
 		}
-
-		for (std::size_t i = 0; i < num_confs; i++) {
-			ConformerData::SharedPointer conf_data = allocConformerData();
-			Math::Vector3DArray::StorageType& conf_coords_data = conf_data->getData();
-			const Math::Vector3DArray::StorageType& gen_conf_coords_data = fragConfGen.getConformer(i).getData();
-
-			for (IndexPairList::const_iterator it = fragLibEntryAtomIdxMap.begin(), end = fragLibEntryAtomIdxMap.end(); it != end; ++it) {
-				const IndexPair& idx_mapping = *it;
-
-				conf_coords_data[idx_mapping.second].assign(gen_conf_coords_data[idx_mapping.first]);
-			}
-
-			node->addConformer(conf_data);
-		}
-
-		boost::lock_guard<boost::mutex> cache_lock(FragmentConformerCache::getMutex());
-
-		FragmentConformerCache::addEntry(fragLibEntry.getHashCode(), fragConfGen.getConformersBegin(), fragConfGen.getConformersEnd());
 	}
+
+	for (std::size_t i = 0; i < num_confs; i++) {
+		ConformerData::SharedPointer conf_data = allocConformerData();
+		Math::Vector3DArray::StorageType& conf_coords_data = conf_data->getData();
+		const Math::Vector3DArray::StorageType& gen_conf_coords_data = fragConfGen.getConformer(i).getData();
+
+		for (IndexPairList::const_iterator it = fragLibEntryAtomIdxMap.begin(), end = fragLibEntryAtomIdxMap.end(); it != end; ++it) {
+			const IndexPair& idx_mapping = *it;
+
+			conf_coords_data[idx_mapping.second].assign(gen_conf_coords_data[idx_mapping.first]);
+		}
+
+		node->addConformer(conf_data);
+	}
+
+	boost::lock_guard<boost::mutex> cache_lock(FragmentConformerCache::getMutex());
+
+	FragmentConformerCache::addEntry(fragLibEntry.getHashCode(), fragConfGen.getConformersBegin(), fragConfGen.getConformersEnd());
 
 	fixBondLengths(frag, node);
 

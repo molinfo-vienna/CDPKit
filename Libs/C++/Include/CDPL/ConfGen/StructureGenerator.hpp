@@ -88,22 +88,22 @@ namespace CDPL
 
 			const CallbackFunction& getTimeoutCallback() const;
 			
-			unsigned int generate(const Chem::MolecularGraph& molgraph, ConformerData& conf_data);
+			unsigned int generate(const Chem::MolecularGraph& molgraph);
 
-			unsigned int generate(const Chem::MolecularGraph& molgraph, Math::Vector3DArray& coords);
+			void setCoordinates(Chem::MolecularGraph& molgraph) const;
+
+			const ConformerData& getCoordinates() const;
 
 		private:
 			StructureGenerator(const StructureGenerator&);
 
 			StructureGenerator& operator=(const StructureGenerator&);
 
-			template <typename VecArrayType>
-			unsigned int doGenerate(const Chem::MolecularGraph& molgraph, VecArrayType& coords);
-
 			typedef std::auto_ptr<ConformerGeneratorImpl> ImplementationPointer;
 
 			ImplementationPointer      impl;
 			StructureGeneratorSettings settings;
+			ConformerData              coordinates;
 		};
 
 		/**

@@ -72,9 +72,12 @@ namespace CDPL
 			template <typename T>
 			void getFloatProperty(CDF::PropertySpec prop_spec, T& value, ByteBuffer& bbuf) const;
 
+			template <typename Array>
+			void getFloatArrayProperty(CDF::PropertySpec prop_spec, Array& array, ByteBuffer& bbuf) const;
+
 			void getStringProperty(CDF::PropertySpec prop_spec, std::string& str, ByteBuffer& bbuf) const;
 
-			template <typename Vec>
+			template <typename Vec, typename ValueType = typename Vec::ValueType>
 			void getVectorProperty(CDF::PropertySpec prop_spec, Vec& vec, ByteBuffer& bbuf) const;
 
 			template <typename Vec>
@@ -154,7 +157,18 @@ void CDPL::Internal::CDFDataReaderBase::getFloatProperty(CDF::PropertySpec prop_
 	bbuf.getFloat(value);
 }
 
-template <typename Vec>
+template <typename Array>
+void CDPL::Internal::CDFDataReaderBase::getFloatArrayProperty(CDF::PropertySpec prop_spec, Array& array, ByteBuffer& bbuf) const
+{
+	try {
+		getVectorProperty<Array, typename Array::ElementType>(prop_spec, array, bbuf);
+
+	} catch (const Base::IOError&) {
+		throw Base::IOError("CDFDataReaderBase: float array property read error, output type size mismatch");
+	}
+}
+
+template <typename Vec, typename ValueType>
 void CDPL::Internal::CDFDataReaderBase::getVectorProperty(CDF::PropertySpec prop_spec, Vec& vec, ByteBuffer& bbuf) const
 {
 	std::size_t len = extractPropertyValueLength(prop_spec);
@@ -163,7 +177,7 @@ void CDPL::Internal::CDFDataReaderBase::getVectorProperty(CDF::PropertySpec prop
 	bbuf.getInt(vec_size);
 	vec.resize(vec_size);
 
-	if (len != sizeof(typename Vec::ValueType)) {
+	if (len != sizeof(ValueType)) {
 		if (len == sizeof(float)) {
 			float tmp;
 
@@ -175,7 +189,7 @@ void CDPL::Internal::CDFDataReaderBase::getVectorProperty(CDF::PropertySpec prop
 			return;
 		}
 
-		throw Base::IOError("CDFDataReaderBase: float property read error, output type size mismatch");
+		throw Base::IOError("CDFDataReaderBase: float vector property read error, output type size mismatch");
 	}
 
 	for (CDF::SizeType i = 0; i < vec_size; i++)
@@ -199,7 +213,7 @@ void CDPL::Internal::CDFDataReaderBase::getCVectorProperty(CDF::PropertySpec pro
 			return;
 		}
 
-		throw Base::IOError("CDFDataReaderBase: float property read error, output type size mismatch");
+		throw Base::IOError("CDFDataReaderBase: float vector property read error, output type size mismatch");
 	}
 
 	for (std::size_t i = 0; i < Vec::Size; i++)

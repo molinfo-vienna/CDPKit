@@ -62,11 +62,14 @@ namespace CDPL
 			template <typename T>
 			void putFloatProperty(unsigned int prop_id, const T& value, ByteBuffer& bbuf) const;
 
+			template <typename Array>
+			void putFloatArrayProperty(unsigned int prop_id, const Array& array, ByteBuffer& bbuf) const;
+
 			void putStringProperty(unsigned int prop_id, const std::string& str, ByteBuffer& bbuf) const;
 
-            template <typename Vec>
+            template <typename Vec, typename ValueType = typename Vec::ValueType>
 			void putVectorProperty(unsigned int prop_id, const Vec& vec, ByteBuffer& bbuf) const;
-
+ 
             template <typename Vec>
 			void putCVectorProperty(unsigned int prop_id, const Vec& vec, ByteBuffer& bbuf) const;
 
@@ -140,7 +143,13 @@ void CDPL::Internal::CDFDataWriterBase::putFloatProperty(unsigned int prop_id, c
 	bbuf.putFloat(value);
 }
 
-template <typename Vec>
+template <typename Array>
+void CDPL::Internal::CDFDataWriterBase::putFloatArrayProperty(unsigned int prop_id, const Array& array, ByteBuffer& bbuf) const
+{
+	putVectorProperty<Array, typename Array::ElementType>(prop_id, array, bbuf);
+}
+
+template <typename Vec, typename ValueType>
 void CDPL::Internal::CDFDataWriterBase::putVectorProperty(unsigned int prop_id, const Vec& vec, ByteBuffer& bbuf) const
 {
 	if (singlePrecFloats) {
@@ -156,12 +165,10 @@ void CDPL::Internal::CDFDataWriterBase::putVectorProperty(unsigned int prop_id, 
 		return;
 	}
  
-    typedef typename Vec::ValueType T;
-
-    BOOST_STATIC_ASSERT_MSG((sizeof(T) - 1) < (1 << CDF::NUM_PROP_VALUE_LENGTH_BITS), 
+    BOOST_STATIC_ASSERT_MSG((sizeof(ValueType) - 1) < (1 << CDF::NUM_PROP_VALUE_LENGTH_BITS), 
 							"CDFDataWriterBase: maximum size of primitive IO data type exceeded");
 
-	bbuf.putInt(composePropertySpec(prop_id, sizeof(T)), false);
+	bbuf.putInt(composePropertySpec(prop_id, sizeof(ValueType)), false);
 	bbuf.putInt(boost::numeric_cast<CDF::SizeType>(vec.getSize()), false);
 
 	for (std::size_t i = 0; i < vec.getSize(); i++)

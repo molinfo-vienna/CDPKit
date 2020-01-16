@@ -119,8 +119,8 @@ namespace CDPL
 									  FragmentTreeNode* node);
 			bool fetchConformersFromFragmentLibrary(unsigned int frag_type, const Chem::Fragment& frag, 
 													FragmentTreeNode* node);
-			bool fetchConformersFromFragmentCache(unsigned int frag_type, FragmentTreeNode* node);
-
+			bool fetchConformersFromFragmentCache(unsigned int frag_type, const Chem::Fragment& frag,
+												  FragmentTreeNode* node);
 			unsigned int generateFragmentConformers(unsigned int frag_type, const Chem::Fragment& frag, 
 													FragmentTreeNode* node);
 

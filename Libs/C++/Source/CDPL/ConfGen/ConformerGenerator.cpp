@@ -98,6 +98,11 @@ unsigned int ConfGen::ConformerGenerator::generate(const Chem::MolecularGraph& m
 	return impl->generate(molgraph, false);
 }
 
+void ConfGen::ConformerGenerator::setConformers(Chem::MolecularGraph& molgraph) const
+{
+	impl->setConformers(molgraph);
+}
+
 std::size_t ConfGen::ConformerGenerator::getNumConformers() const
 {
 	return impl->getNumConformers();

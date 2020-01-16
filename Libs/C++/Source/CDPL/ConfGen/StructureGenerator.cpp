@@ -30,6 +30,7 @@
 #include "CDPL/ConfGen/ReturnCode.hpp"
 #include "CDPL/ConfGen/NitrogenEnumerationMode.hpp"
 #include "CDPL/ConfGen/ConformerSamplingMode.hpp"
+#include "CDPL/Chem/AtomContainerFunctions.hpp"
 
 #include "ConformerGeneratorImpl.hpp"
 
@@ -107,18 +108,7 @@ const ConfGen::CallbackFunction& ConfGen::StructureGenerator::getTimeoutCallback
 	return impl->getTimeoutCallback();
 }
 
-unsigned int ConfGen::StructureGenerator::generate(const Chem::MolecularGraph& molgraph, ConformerData& conf_data)
-{
-	return doGenerate(molgraph, conf_data);
-}
-
-unsigned int ConfGen::StructureGenerator::generate(const Chem::MolecularGraph& molgraph, Math::Vector3DArray& coords)
-{
-	return doGenerate(molgraph, coords);
-}
-
-template <typename VecArrayType>
-unsigned int ConfGen::StructureGenerator::doGenerate(const Chem::MolecularGraph& molgraph, VecArrayType& coords)
+unsigned int ConfGen::StructureGenerator::generate(const Chem::MolecularGraph& molgraph)
 {
 	ConformerGeneratorSettings& cg_settings = impl->getSettings();
 
@@ -137,7 +127,22 @@ unsigned int ConfGen::StructureGenerator::doGenerate(const Chem::MolecularGraph&
 		return ret_code;
 
 	if (impl->getNumConformers() > 0)
-		coords.swap(impl->getConformer(0));
+		coordinates.swap(impl->getConformer(0));
+
+	else {
+		coordinates.clear();
+		coordinates.setEnergy(0.0);
+	}
 
 	return ret_code;
+}
+
+void ConfGen::StructureGenerator::setCoordinates(Chem::MolecularGraph& molgraph) const
+{
+	set3DCoordinates(molgraph, coordinates);
+}
+
+const ConfGen::ConformerData& ConfGen::StructureGenerator::getCoordinates() const
+{
+	return coordinates;
 }

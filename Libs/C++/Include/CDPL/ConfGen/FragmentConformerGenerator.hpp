@@ -87,6 +87,8 @@ namespace CDPL
 
 			unsigned int generate(const Chem::MolecularGraph& molgraph, unsigned int frag_type);
 
+			void setConformers(Chem::MolecularGraph& molgraph) const;
+
 			std::size_t getNumConformers() const;
 
 			const ConformerData& getConformer(std::size_t idx) const;

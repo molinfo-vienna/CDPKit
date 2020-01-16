@@ -362,6 +362,13 @@ void CDPLPythonChem::exportMolecularGraphFunctions()
 				(python::arg("mol_copy"), python::arg("molgraph"), python::arg("atom_idx_offs") = 0, 
 				 python::arg("bond_start_idx") = 0));
 
+	python::def("setConformation", &Chem::setConformation,
+				(python::arg("molgraph"), python::arg("conf_idx"), python::arg("coords"), python::arg("energy")));
+	python::def("addConformation", &Chem::addConformation,
+				(python::arg("molgraph"), python::arg("coords"), python::arg("energy")));
+	python::def("getConformationEnergy", &Chem::getConformationEnergy,
+				(python::arg("molgraph"), python::arg("conf_idx")));
+
 	EXPORT_MOLGRAPH_FUNCS_COPY_REF_CW(AromaticSubstructure, substruct)
 	EXPORT_MOLGRAPH_FUNCS_COPY_REF_CW(CyclicSubstructure, substruct)
 	EXPORT_MOLGRAPH_FUNCS_COPY_REF_CW(SSSR, sssr)

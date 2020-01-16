@@ -1,7 +1,7 @@
 /* -*- mode: c++; c-basic-offset: 4; tab-width: 4; indent-tabs-mode: t -*- */
 
 /* 
- * UtilityFunctions.hpp 
+ * MolecularGraphFunctions.hpp 
  *
  * This file is part of the Chemical Data Processing Toolkit
  *
@@ -25,15 +25,16 @@
 
 /**
  * \file
- * \brief Declaration of miscellaneous utility functions.
+ * \brief Declaration of functions that operate on Chem::MolecularGraph instances.
  */
 
-#ifndef CDPL_CONFGEN_UTILITYFUNCTIONS_HPP
-#define CDPL_CONFGEN_UTILITYFUNCTIONS_HPP
+#ifndef CDPL_CONFGEN_MOLECULARGRAPHFUNCTIONS_HPP
+#define CDPL_CONFGEN_MOLECULARGRAPHFUNCTIONS_HPP
 
 #include <cstddef>
 
 #include "CDPL/ConfGen/APIPrefix.hpp"
+#include "CDPL/ConfGen/ConformerDataArray.hpp"
 #include "CDPL/Util/BitSet.hpp"
 
 
@@ -43,9 +44,7 @@ namespace CDPL
 	namespace Chem
 	{
 
-		class Bond;
 		class MolecularGraph;
-		class Molecule;
 	}
 
 	namespace ForceField
@@ -59,15 +58,11 @@ namespace CDPL
 	{
 
 		/**
-		 * \addtogroup CDPL_CONFGEN_FUNCTIONS
+		 * \addtogroup CDPL_CONFGEN_MOLECULAR_GRAPH_FUNCTIONS
 		 * @{
 		 */
 
-		CDPL_CONFGEN_API bool isFragmentLinkBond(const Chem::Bond& bond, const Chem::MolecularGraph& molgraph); 
-
 		CDPL_CONFGEN_API std::size_t buildFragmentLinkBondMask(const Chem::MolecularGraph& molgraph, Util::BitSet& bond_mask, bool reset = true);
-
-		CDPL_CONFGEN_API bool isRotatableBond(const Chem::Bond& bond, const Chem::MolecularGraph& molgraph, bool het_h_rotors);
 
 		CDPL_CONFGEN_API std::size_t buildRotatableBondMask(const Chem::MolecularGraph& molgraph, Util::BitSet& bond_mask, 
 															bool het_h_rotors, bool reset = true);
@@ -77,12 +72,12 @@ namespace CDPL
 
 		CDPL_CONFGEN_API unsigned int perceiveFragmentType(const Chem::MolecularGraph& molgraph); 
 
-		CDPL_CONFGEN_API void prepareForConformerGeneration(Chem::Molecule& mol, bool canonicalize = false); 
-
 		CDPL_CONFGEN_API unsigned int parameterizeMMFF94Interactions(const Chem::MolecularGraph& molgraph, 
 																	 ForceField::MMFF94InteractionParameterizer& parameterizer,
 																	 ForceField::MMFF94InteractionData& param_data, unsigned int ff_type,
 																	 bool strict); 
+
+		CDPL_CONFGEN_API void setConformers(Chem::MolecularGraph& molgraph, const ConformerDataArray& conf_array);
 		
 		/**
 		 * @}
@@ -90,5 +85,5 @@ namespace CDPL
 	}
 }
 
-#endif // CDPL_CONFGEN_UTILITYFUNCTIONS_HPP
+#endif // CDPL_CONFGEN_MOLECULARGRAPHFUNCTIONS_HPP
  

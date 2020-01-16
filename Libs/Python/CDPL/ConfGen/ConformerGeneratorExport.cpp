@@ -69,6 +69,8 @@ void CDPLPythonConfGen::exportConformerGenerator()
 		.def("getTimeoutCallback", &ConfGen::ConformerGenerator::getTimeoutCallback, 
 			 python::arg("self"), python::return_internal_reference<>())
 		.def("generate", &ConfGen::ConformerGenerator::generate, (python::arg("self"), python::arg("molgraph")))
+		.def("setConformers", &ConfGen::ConformerGenerator::setConformers,
+			 (python::arg("self"), python::arg("molgraph")))
 		.def("getNumConformers", &ConfGen::ConformerGenerator::getNumConformers, python::arg("self"))
 		.def("getConformer", 
 			 static_cast<ConfGen::ConformerData& (ConfGen::ConformerGenerator::*)(std::size_t)>(&ConfGen::ConformerGenerator::getConformer),

@@ -41,40 +41,39 @@ using namespace CDPL;
 namespace
 {
 
-    ConfGen::FragmentConformerGeneratorSettings FAST;
-    ConfGen::FragmentConformerGeneratorSettings EXHAUSTIVE;
+    ConfGen::FragmentConformerGeneratorSettings FRAG_CONF_GEN_FAST;
+    ConfGen::FragmentConformerGeneratorSettings FRAG_CONF_GEN_EXHAUSTIVE;
 
-    ConfGen::ConformerGeneratorSettings SMALL_SET_DIVERSE;
-    ConfGen::ConformerGeneratorSettings MEDIUM_SET_DIVERSE;
-    ConfGen::ConformerGeneratorSettings LARGE_SET_DIVERSE;
-
-    ConfGen::ConformerGeneratorSettings SMALL_SET_DENSE;
-    ConfGen::ConformerGeneratorSettings MEDIUM_SET_DENSE;
-    ConfGen::ConformerGeneratorSettings LARGE_SET_DENSE;
+    ConfGen::ConformerGeneratorSettings CONF_GEN_SMALL_SET_DIVERSE;
+    ConfGen::ConformerGeneratorSettings CONF_GEN_MEDIUM_SET_DIVERSE;
+    ConfGen::ConformerGeneratorSettings CONF_GEN_LARGE_SET_DIVERSE;
+    ConfGen::ConformerGeneratorSettings CONF_GEN_SMALL_SET_DENSE;
+    ConfGen::ConformerGeneratorSettings CONF_GEN_MEDIUM_SET_DENSE;
+    ConfGen::ConformerGeneratorSettings CONF_GEN_LARGE_SET_DENSE;
 
     struct Init {
 
-	Init() {
-	    // TODO
-	}
+		Init() {
+			// TODO
+		}
 
     } init;
 }
 
 
-const ConfGen::FragmentConformerGeneratorSettings ConfGen::FragmentConformerGeneratorSettings::DEFAULT    = EXHAUSTIVE;
-const ConfGen::FragmentConformerGeneratorSettings ConfGen::FragmentConformerGeneratorSettings::FAST       = FAST;
-const ConfGen::FragmentConformerGeneratorSettings ConfGen::FragmentConformerGeneratorSettings::EXHAUSTIVE = EXHAUSTIVE;
+const ConfGen::FragmentConformerGeneratorSettings ConfGen::FragmentConformerGeneratorSettings::FAST       = FRAG_CONF_GEN_FAST;
+const ConfGen::FragmentConformerGeneratorSettings ConfGen::FragmentConformerGeneratorSettings::EXHAUSTIVE = FRAG_CONF_GEN_EXHAUSTIVE;
+const ConfGen::FragmentConformerGeneratorSettings ConfGen::FragmentConformerGeneratorSettings::DEFAULT    = FRAG_CONF_GEN_EXHAUSTIVE;
 
 const ConfGen::FragmentAssemblerSettings ConfGen::FragmentAssemblerSettings::DEFAULT;
 
-const ConfGen::ConformerGeneratorSettings ConfGen::ConformerGeneratorSettings::DEFAULT             = MEDIUM_SET_DIVERSE;
-const ConfGen::ConformerGeneratorSettings ConfGen::ConformerGeneratorSettings::SMALL_SET_DIVERSE   = SMALL_SET_DIVERSE;
-const ConfGen::ConformerGeneratorSettings ConfGen::ConformerGeneratorSettings::MEDIUM_SET_DIVERSE  = MEDIUM_SET_DIVERSE;
-const ConfGen::ConformerGeneratorSettings ConfGen::ConformerGeneratorSettings::LARGE_SET_DIVERSE   = LARGE_SET_DIVERSE;
-const ConfGen::ConformerGeneratorSettings ConfGen::ConformerGeneratorSettings::SMALL_SET_DENSE     = SMALL_SET_DENSE;
-const ConfGen::ConformerGeneratorSettings ConfGen::ConformerGeneratorSettings::MEDIUM_SET_DENSE    = MEDIUM_SET_DENSE;
-const ConfGen::ConformerGeneratorSettings ConfGen::ConformerGeneratorSettings::LARGE_SET_DENSE     = LARGE_SET_DENSE;
+const ConfGen::ConformerGeneratorSettings ConfGen::ConformerGeneratorSettings::SMALL_SET_DIVERSE   = CONF_GEN_SMALL_SET_DIVERSE;
+const ConfGen::ConformerGeneratorSettings ConfGen::ConformerGeneratorSettings::MEDIUM_SET_DIVERSE  = CONF_GEN_MEDIUM_SET_DIVERSE;
+const ConfGen::ConformerGeneratorSettings ConfGen::ConformerGeneratorSettings::LARGE_SET_DIVERSE   = CONF_GEN_LARGE_SET_DIVERSE;
+const ConfGen::ConformerGeneratorSettings ConfGen::ConformerGeneratorSettings::SMALL_SET_DENSE     = CONF_GEN_SMALL_SET_DENSE;
+const ConfGen::ConformerGeneratorSettings ConfGen::ConformerGeneratorSettings::MEDIUM_SET_DENSE    = CONF_GEN_MEDIUM_SET_DENSE;
+const ConfGen::ConformerGeneratorSettings ConfGen::ConformerGeneratorSettings::LARGE_SET_DENSE     = CONF_GEN_LARGE_SET_DENSE;
+const ConfGen::ConformerGeneratorSettings ConfGen::ConformerGeneratorSettings::DEFAULT             = CONF_GEN_MEDIUM_SET_DIVERSE;
 
 const ConfGen::StructureGeneratorSettings ConfGen::StructureGeneratorSettings::DEFAULT;
 

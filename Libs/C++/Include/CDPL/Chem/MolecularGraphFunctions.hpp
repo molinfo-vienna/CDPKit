@@ -48,6 +48,7 @@
 #include "CDPL/Chem/ControlParameterDefault.hpp"
 #include "CDPL/Math/Matrix.hpp"
 #include "CDPL/Math/Vector.hpp"
+#include "CDPL/Math/VectorArray.hpp"
 #include "CDPL/Util/BitSet.hpp"
 #include "CDPL/Base/IntegerTypes.hpp"
 
@@ -176,13 +177,20 @@ namespace CDPL
 		CDPL_CHEM_API bool hasConformationIndex(const MolecularGraph& molgraph);
 
 
- 		CDPL_CHEM_API const Math::DVector::SharedPointer& getConformerEnergies(const MolecularGraph& molgraph);
+ 		CDPL_CHEM_API const Util::DArray::SharedPointer& getConformerEnergies(const MolecularGraph& molgraph);
 
-		CDPL_CHEM_API void setConformerEnergies(MolecularGraph& molgraph, const Math::DVector::SharedPointer& energies);
+		CDPL_CHEM_API void setConformerEnergies(MolecularGraph& molgraph, const Util::DArray::SharedPointer& energies);
 
 		CDPL_CHEM_API void clearConformerEnergies(MolecularGraph& molgraph);
 
 		CDPL_CHEM_API bool hasConformerEnergies(const MolecularGraph& molgraph);
+
+
+		CDPL_CHEM_API void setConformation(MolecularGraph& molgraph, std::size_t conf_idx, const Math::Vector3DArray& coords, double energy);
+
+		CDPL_CHEM_API void addConformation(MolecularGraph& molgraph, const Math::Vector3DArray& coords, double energy);
+
+		CDPL_CHEM_API double getConformationEnergy(const MolecularGraph& molgraph, std::size_t conf_idx);
 
 
 		CDPL_CHEM_API Base::uint64 getHashCode(const MolecularGraph& molgraph);

@@ -1,7 +1,7 @@
 /* -*- mode: c++; c-basic-offset: 4; tab-width: 4; indent-tabs-mode: t -*- */
 
 /* 
- * UtilityFunctionExport.cpp 
+ * MolecularGraphFunctionExport.cpp 
  *
  * This file is part of the Chemical Data Processing Toolkit
  *
@@ -26,39 +26,21 @@
 
 #include <boost/python.hpp>
 
-#include "CDPL/ConfGen/UtilityFunctions.hpp"
-#include "CDPL/Chem/Molecule.hpp"
-#include "CDPL/Chem/Bond.hpp"
+#include "CDPL/ConfGen/MolecularGraphFunctions.hpp"
+#include "CDPL/Chem/MolecularGraph.hpp"
 #include "CDPL/ForceField/MMFF94InteractionParameterizer.hpp"
 #include "CDPL/ForceField/MMFF94InteractionData.hpp"
 
 #include "FunctionExports.hpp"
 
 
-namespace
-{
-
-	bool isFragmentLinkBond(CDPL::Chem::Bond& bond, const CDPL::Chem::MolecularGraph& molgraph)
-	{
-		return CDPL::ConfGen::isFragmentLinkBond(bond, molgraph);
-	}
-
-	bool isRotatableBond(CDPL::Chem::Bond& bond, const CDPL::Chem::MolecularGraph& molgraph, bool het_h_rotors)
-	{
-		return CDPL::ConfGen::isRotatableBond(bond, molgraph, het_h_rotors);
-	}
-}
-
-
-void CDPLPythonConfGen::exportUtilityFunctions()
+void CDPLPythonConfGen::exportMolecularGraphFunctions()
 {
 	using namespace boost;
 	using namespace CDPL;
 
-	python::def("isFragmentLinkBond", &isFragmentLinkBond, (python::arg("bond"), python::arg("molgraph"))); 
 	python::def("buildFragmentLinkBondMask", &ConfGen::buildFragmentLinkBondMask, 
 				(python::arg("molgraph"), python::arg("bond_mask"), python::arg("reset") = true));
-	python::def("isRotatableBond", &isRotatableBond, (python::arg("bond"), python::arg("molgraph"), python::arg("het_h_rotors"))); 
 	python::def("buildRotatableBondMask", 
 				static_cast<std::size_t (*)(const Chem::MolecularGraph&, Util::BitSet&, bool, bool)>(&ConfGen::buildRotatableBondMask), 
 				(python::arg("molgraph"), python::arg("bond_mask"), python::arg("het_h_rotors"), python::arg("reset") = true));
@@ -67,8 +49,6 @@ void CDPLPythonConfGen::exportUtilityFunctions()
 				(python::arg("molgraph"), python::arg("excl_bond_mask"), python::arg("bond_mask"), python::arg("het_h_rotors"), 
 				 python::arg("reset") = true));
 	python::def("perceiveFragmentType", &ConfGen::perceiveFragmentType, python::arg("molgraph"));
-	python::def("prepareForConformerGeneration", &ConfGen::prepareForConformerGeneration, 
-				(python::arg("mol"), python::arg("canonicalize") = false));
 	python::def("parameterizeMMFF94Interactions", &ConfGen::parameterizeMMFF94Interactions, 
 				(python::arg("molgraph"), python::arg("parameterizer"), python::arg("param_data"), 
 				 python::arg("ff_type"), python::arg("strict")));

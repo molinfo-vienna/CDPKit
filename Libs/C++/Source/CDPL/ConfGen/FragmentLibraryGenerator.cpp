@@ -35,9 +35,7 @@
 #include "CDPL/ConfGen/FragmentLibraryGenerator.hpp"
 #include "CDPL/ConfGen/ReturnCode.hpp"
 #include "CDPL/ConfGen/FragmentType.hpp"
-#include "CDPL/Chem/AtomContainerFunctions.hpp"
 #include "CDPL/Chem/MolecularGraphFunctions.hpp"
-#include "CDPL/Math/Vector.hpp"
 
 
 using namespace CDPL;
@@ -122,16 +120,7 @@ unsigned int ConfGen::FragmentLibraryGenerator::process(const Chem::MolecularGra
 		fl_entry->copy(fragLibEntry);
 		fl_entry->clearProperties();
 
-		Math::DVector::SharedPointer conf_energies(new Math::DVector(numGenConfs));
-
-		for (std::size_t i = 0; i < numGenConfs; i++) {
-			const ConformerData& conf_data = fragConfGen.getConformer(i);
-
-			addConformation(*fl_entry, conf_data);
-			(*conf_energies)(i) = conf_data.getEnergy();
-		}
-
-		setConformerEnergies(*fl_entry, conf_energies);
+		fragConfGen.setConformers(*fl_entry);
 		setName(*fl_entry, boost::lexical_cast<std::string>(fragLibEntry.getHashCode()));
 
 		copyAtomStereoDescriptors(*fl_entry, fragLibEntry, 0);

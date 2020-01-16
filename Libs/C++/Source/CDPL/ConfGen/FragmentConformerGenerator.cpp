@@ -27,7 +27,7 @@
 #include "StaticInit.hpp"
 
 #include "CDPL/ConfGen/FragmentConformerGenerator.hpp"
-#include "CDPL/ConfGen/UtilityFunctions.hpp"
+#include "CDPL/ConfGen/MolecularGraphFunctions.hpp"
 #include "CDPL/Base/Exceptions.hpp"
 
 #include "FragmentConformerGeneratorImpl.hpp"
@@ -76,6 +76,11 @@ const ConfGen::CallbackFunction& ConfGen::FragmentConformerGenerator::getTimeout
 unsigned int ConfGen::FragmentConformerGenerator::generate(const Chem::MolecularGraph& molgraph) 
 {
 	return generate(molgraph, perceiveFragmentType(molgraph));
+}
+
+void ConfGen::FragmentConformerGenerator::setConformers(Chem::MolecularGraph& molgraph) const
+{
+	impl->setConformers(molgraph);
 }
 
 unsigned int ConfGen::FragmentConformerGenerator::generate(const Chem::MolecularGraph& molgraph, unsigned int frag_type) 

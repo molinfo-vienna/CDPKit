@@ -1,7 +1,7 @@
 /* -*- mode: c++; c-basic-offset: 4; tab-width: 4; indent-tabs-mode: t -*- */
 
 /* 
- * UtilityFunctions.hpp 
+ * BondFunctions.hpp 
  *
  * This file is part of the Chemical Data Processing Toolkit
  *
@@ -25,38 +25,42 @@
 
 /**
  * \file
- * \brief Declaration of various utility functions.
+ * \brief Declaration of functions that operate on Chem::Bond instances.
  */
 
-#ifndef CDPL_PHARM_UTILITYFUNCTIONS_HPP
-#define CDPL_PHARM_UTILITYFUNCTIONS_HPP
+#ifndef CDPL_CONFGEN_BONDFUNCTIONS_HPP
+#define CDPL_CONFGEN_BONDFUNCTIONS_HPP
 
-#include "CDPL/Pharm/APIPrefix.hpp"
+#include "CDPL/ConfGen/APIPrefix.hpp"
 
 
 namespace CDPL 
 {
 
-    namespace Chem
-    {
+	namespace Chem
+	{
 
-		class Molecule;
-    }
+		class Bond;
+		class MolecularGraph;
+	}
 
-    namespace Pharm 
-    {
-	
+	namespace ConfGen 
+	{
+
 		/**
-		 * \addtogroup CDPL_PHARM_UTILITY_FUNCTIONS
+		 * \addtogroup CDPL_CONFGEN_BOND_FUNCTIONS
 		 * @{
 		 */
-	
-		CDPL_PHARM_API void prepareForPharmacophoreGeneration(Chem::Molecule& mol);
-	
+
+		CDPL_CONFGEN_API bool isFragmentLinkBond(const Chem::Bond& bond, const Chem::MolecularGraph& molgraph); 
+
+		CDPL_CONFGEN_API bool isRotatableBond(const Chem::Bond& bond, const Chem::MolecularGraph& molgraph, bool het_h_rotors);
+
 		/**
 		 * @}
 		 */
-    }
+	}
 }
 
-#endif // CDPL_PHARM_UTILITYFUNCTIONS_HPP
+#endif // CDPL_CONFGEN_BONDFUNCTIONS_HPP
+ 
