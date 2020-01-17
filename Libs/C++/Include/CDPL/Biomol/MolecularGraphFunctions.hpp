@@ -36,6 +36,9 @@
 
 #include "CDPL/Biomol/APIPrefix.hpp"
 #include "CDPL/Biomol/PDBData.hpp"
+#include "CDPL/Biomol/ProcessingFlags.hpp"
+#include "CDPL/Chem/Atom3DCoordinatesFunction.hpp"
+#include "CDPL/Biomol/AtomPropertyFlag.hpp"
 
 
 namespace CDPL 
@@ -45,6 +48,7 @@ namespace CDPL
 	{
 	
 		class MolecularGraph;
+		class Fragment;
 	}
 
 	namespace Biomol 
@@ -107,6 +111,29 @@ namespace CDPL
 		CDPL_BIOMOL_API void clearPDBData(Chem::MolecularGraph& molgraph);
 	
 		CDPL_BIOMOL_API bool hasPDBData(const Chem::MolecularGraph& molgraph);
+
+
+		CDPL_BIOMOL_API void convertMOL2ToPDBResidueInfo(Chem::MolecularGraph& molgraph, bool overwrite);
+
+		CDPL_BIOMOL_API void extractResidueSubstructures(const Chem::MolecularGraph& molgraph, const Chem::MolecularGraph& parent_molgraph, Chem::Fragment& res_substructs, 
+														 bool cnctd_only = false, unsigned int flags = AtomPropertyFlag::DEFAULT, bool append = false);
+		
+		CDPL_BIOMOL_API void extractProximalAtoms(const Chem::MolecularGraph& core, const Chem::MolecularGraph& macromol, Chem::Fragment& env_atoms, 
+												  double max_dist, bool inc_core_atoms = false, bool append = false);
+
+		CDPL_BIOMOL_API void extractProximalAtoms(const Chem::MolecularGraph& core, const Chem::MolecularGraph& macromol, Chem::Fragment& env_atoms, 
+												  const Chem::Atom3DCoordinatesFunction& coords_func, double max_dist, bool inc_core_atoms = false, bool append = false);
+
+		CDPL_BIOMOL_API void extractEnvironmentResidues(const Chem::MolecularGraph& core, const Chem::MolecularGraph& macromol, Chem::Fragment& env_residues, 
+														double max_dist, bool append = false);
+
+		CDPL_BIOMOL_API void extractEnvironmentResidues(const Chem::MolecularGraph& core, const Chem::MolecularGraph& macromol, Chem::Fragment& env_residues, 
+														const Chem::Atom3DCoordinatesFunction& coords_func, double max_dist, bool append = false);
+
+		CDPL_BIOMOL_API void setHydrogenResidueSequenceInfo(Chem::MolecularGraph& molgraph, bool overwrite, unsigned int flags = AtomPropertyFlag::DEFAULT);
+
+		CDPL_BIOMOL_API bool matchesResidueInfo(const Chem::MolecularGraph& molgraph, const char* res_code = 0, const char* chain_id = 0, long res_seq_no = IGNORE_SEQUENCE_NO,
+												char ins_code = 0, std::size_t model_no = 0);
 
 		/**
 		 * @}

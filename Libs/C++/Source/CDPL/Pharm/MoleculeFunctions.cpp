@@ -1,7 +1,7 @@
 /* -*- mode: c++; c-basic-offset: 4; tab-width: 4; indent-tabs-mode: t -*- */
 
 /* 
- * UtilityFunctions.hpp 
+ * MoleculeFunctions.cpp 
  *
  * This file is part of the Chemical Data Processing Toolkit
  *
@@ -23,40 +23,37 @@
  * Boston, MA 02111-1307, USA.
  */
 
-/**
- * \file
- * \brief Declaration of various utility functions.
- */
 
-#ifndef CDPL_PHARM_UTILITYFUNCTIONS_HPP
-#define CDPL_PHARM_UTILITYFUNCTIONS_HPP
+#include "StaticInit.hpp"
 
-#include "CDPL/Pharm/APIPrefix.hpp"
+#include <algorithm>
+
+#include <boost/bind.hpp>
+
+#include "CDPL/Pharm/MoleculeFunctions.hpp"
+#include "CDPL/Chem/Molecule.hpp"
+#include "CDPL/Chem/Atom.hpp"
+#include "CDPL/Chem/MolecularGraphFunctions.hpp"
+#include "CDPL/Chem/MoleculeFunctions.hpp"
+#include "CDPL/Chem/AtomFunctions.hpp"
+#include "CDPL/Biomol/MolecularGraphFunctions.hpp"
 
 
-namespace CDPL 
+using namespace CDPL; 
+
+
+void Pharm::prepareForPharmacophoreGeneration(Chem::Molecule& mol)
 {
+    perceiveSSSR(mol, false);
+    setRingFlags(mol, false);
+    calcImplicitHydrogenCounts(mol, false);
+    perceiveHybridizationStates(mol, false);
+    setAromaticityFlags(mol, false);
 
-    namespace Chem
-    {
-
-		class Molecule;
-    }
-
-    namespace Pharm 
-    {
+	if (makeHydrogenComplete(mol)) {
+		std::for_each(mol.getAtomsBegin(), mol.getAtomsEnd(), boost::bind(&Chem::setImplicitHydrogenCount, _1, 0));
 	
-		/**
-		 * \addtogroup CDPL_PHARM_UTILITY_FUNCTIONS
-		 * @{
-		 */
-	
-		CDPL_PHARM_API void prepareForPharmacophoreGeneration(Chem::Molecule& mol);
-	
-		/**
-		 * @}
-		 */
-    }
+		generateHydrogen3DCoordinates(mol);
+		Biomol::setHydrogenResidueSequenceInfo(mol, false);
+	}
 }
-
-#endif // CDPL_PHARM_UTILITYFUNCTIONS_HPP

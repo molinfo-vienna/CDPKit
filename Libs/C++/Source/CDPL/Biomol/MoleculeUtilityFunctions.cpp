@@ -34,7 +34,7 @@
 #include <cstddef>
 #include <limits>
 
-#include "CDPL/Biomol/UtilityFunctions.hpp"
+#include "CDPL/Biomol/MoleculeFunctions.hpp"
 #include "CDPL/Biomol/AtomFunctions.hpp"
 #include "CDPL/Chem/AtomContainerFunctions.hpp"
 #include "CDPL/Chem/Molecule.hpp"

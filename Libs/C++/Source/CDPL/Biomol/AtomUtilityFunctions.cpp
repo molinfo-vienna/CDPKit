@@ -26,8 +26,9 @@
 
 #include "StaticInit.hpp"
 
-#include "CDPL/Biomol/UtilityFunctions.hpp"
+#include "CDPL/Biomol/AtomFunctions.hpp"
 #include "CDPL/Biomol/ResidueDictionary.hpp"
+#include "CDPL/Chem/Atom.hpp"
 #include "CDPL/Chem/Bond.hpp"
 #include "CDPL/Chem/Fragment.hpp"
 

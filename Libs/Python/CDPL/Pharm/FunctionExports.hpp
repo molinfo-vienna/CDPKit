@@ -37,7 +37,7 @@ namespace CDPLPythonPharm
 	void exportFeatureSetFunctions();
 	void exportAttributedGridFunctions();
 	void exportControlParameterFunctions();
-	void exportUtilityFunctions();
+	void exportMoleculeFunctions();
 }
 
 #endif // CDPL_PYTHON_PHARM_FUNCTIONEXPORTS_HPP

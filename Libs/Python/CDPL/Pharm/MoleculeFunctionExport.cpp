@@ -1,7 +1,7 @@
 /* -*- mode: c++; c-basic-offset: 4; tab-width: 4; indent-tabs-mode: t -*- */
 
 /* 
- * UtilityFunctionExport.cpp 
+ * MoleculeFunctionExport.cpp 
  *
  * This file is part of the Chemical Data Processing Toolkit
  *
@@ -26,13 +26,13 @@
 
 #include <boost/python.hpp>
 
-#include "CDPL/Pharm/UtilityFunctions.hpp"
+#include "CDPL/Pharm/MoleculeFunctions.hpp"
 #include "CDPL/Chem/Molecule.hpp"
 
 #include "FunctionExports.hpp"
 
 
-void CDPLPythonPharm::exportUtilityFunctions()
+void CDPLPythonPharm::exportMoleculeFunctions()
 {
 	using namespace boost;
 	using namespace CDPL;

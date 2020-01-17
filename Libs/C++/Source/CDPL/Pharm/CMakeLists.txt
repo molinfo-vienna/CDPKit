@@ -124,7 +124,7 @@ SET(cdpl-pharm_LIB_SRCS
     PharmacophoreCreateXVolumesFunctions.cpp
 
     ControlParameterFunctions.cpp
-    UtilityFunctions.cpp
+    MoleculeFunctions.cpp
 
     PiPiInteractionUtilities.cpp
     TwoPointPharmacophore.cpp

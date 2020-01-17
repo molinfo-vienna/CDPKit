@@ -1,7 +1,7 @@
 /* -*- mode: c++; c-basic-offset: 4; tab-width: 4; indent-tabs-mode: t -*- */
 
 /* 
- * NamespaceExports.hpp 
+ * MoleculeFunctionExport.cpp 
  *
  * This file is part of the Chemical Data Processing Toolkit
  *
@@ -24,27 +24,19 @@
  */
 
 
-#ifndef CDPL_PYTHON_BIOMOL_NAMESPACEEXPORTS_HPP
-#define CDPL_PYTHON_BIOMOL_NAMESPACEEXPORTS_HPP
+#include <boost/python.hpp>
+
+#include "CDPL/Biomol/MoleculeFunctions.hpp"
+#include "CDPL/Chem/Molecule.hpp"
+
+#include "FunctionExports.hpp"
 
 
-namespace CDPLPythonBiomol
+void CDPLPythonBiomol::exportMoleculeFunctions()
 {
+    using namespace boost;
+    using namespace CDPL;
 
-	void exportAtomPropertyFlags();
-	void exportResidueTypes();
-	void exportProcessingFlags();
-	void exportPDBFormatVersions();
-
-	void exportAtomProperties();
-	void exportMolecularGraphProperties();
-	void exportAtomPropertyDefaults();
-	void exportMolecularGraphPropertyDefaults();
-
-	void exportControlParameters();
-	void exportControlParameterDefaults();
-
-	void exportDataFormats();
+	python::def("combineInterferingResidueCoordinates", &Biomol::combineInterferingResidueCoordinates, 
+				(python::arg("mol"), python::arg("max_ctr_dist") = 1.0));
 }
-
-#endif // CDPL_PYTHON_BIOMOL_NAMESPACEEXPORTS_HPP

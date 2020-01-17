@@ -68,10 +68,12 @@ BOOST_PYTHON_MODULE(_biomol)
 
 	exportAtomPropertyFlags();
 	exportResidueTypes();
+	exportProcessingFlags();
 	exportPDBFormatVersions();
 
 	exportAtomFunctions();
 	exportMolecularGraphFunctions();
+	exportMoleculeFunctions();
 	exportControlParameterFunctions();
 	exportUtilityFunctions();
 

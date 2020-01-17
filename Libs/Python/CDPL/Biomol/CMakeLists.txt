@@ -62,11 +62,13 @@ SET(biomol_MOD_SRCS
     ControlParameterDefaultExport.cpp 
     AtomPropertyFlagExport.cpp
     ResidueTypeExport.cpp
+    ProcessingFlagsExport.cpp
     PDBFormatVersionExport.cpp
     DataFormatExport.cpp
 
     AtomFunctionExport.cpp
     MolecularGraphFunctionExport.cpp
+    MoleculeFunctionExport.cpp
     ControlParameterFunctionExport.cpp 
     UtilityFunctionExport.cpp 
 

@@ -1,7 +1,7 @@
 /* -*- mode: c++; c-basic-offset: 4; tab-width: 4; indent-tabs-mode: t -*- */
 
 /* 
- * UtilityFunctions.cpp 
+ * MoleculeFunctions.hpp 
  *
  * This file is part of the Chemical Data Processing Toolkit
  *
@@ -23,36 +23,41 @@
  * Boston, MA 02111-1307, USA.
  */
 
+/**
+ * \file
+ * \brief Declaration of functions that operate on Chem::Molecule instances.
+ */
 
-#include "StaticInit.hpp"
+#ifndef CDPL_BIOMOL_MOLECULEFUNCTIONS_HPP
+#define CDPL_BIOMOL_MOLECULEFUNCTIONS_HPP
 
-#include <algorithm>
-
-#include <boost/bind.hpp>
-
-#include "CDPL/Pharm/UtilityFunctions.hpp"
-#include "CDPL/Chem/Molecule.hpp"
-#include "CDPL/Chem/MolecularGraphFunctions.hpp"
-#include "CDPL/Chem/MoleculeFunctions.hpp"
-#include "CDPL/Chem/AtomFunctions.hpp"
-#include "CDPL/Biomol/UtilityFunctions.hpp"
+#include "CDPL/Biomol/APIPrefix.hpp"
 
 
-using namespace CDPL; 
-
-
-void Pharm::prepareForPharmacophoreGeneration(Chem::Molecule& mol)
+namespace CDPL 
 {
-    perceiveSSSR(mol, false);
-    setRingFlags(mol, false);
-    calcImplicitHydrogenCounts(mol, false);
-    perceiveHybridizationStates(mol, false);
-    setAromaticityFlags(mol, false);
 
-	if (makeHydrogenComplete(mol)) {
-		std::for_each(mol.getAtomsBegin(), mol.getAtomsEnd(), boost::bind(&Chem::setImplicitHydrogenCount, _1, 0));
+	namespace Chem
+	{
 	
-		generateHydrogen3DCoordinates(mol);
-		Biomol::setHydrogenResidueSequenceInfo(mol, false);
+		class Molecule;
+	}
+
+	namespace Biomol 
+	{
+
+		/**
+		 * \addtogroup CDPL_BIOMOL_MOLECULE_FUNCTIONS
+		 * @{
+		 */
+
+		CDPL_BIOMOL_API bool combineInterferingResidueCoordinates(Chem::Molecule& mol, double max_ctr_dist = 1.0);
+
+		/**
+		 * @}
+		 */
 	}
 }
+
+#endif // CDPL_BIOMOL_MOLECULEFUNCTIONS_HPP
+ 

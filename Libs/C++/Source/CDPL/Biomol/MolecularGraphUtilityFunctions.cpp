@@ -29,9 +29,12 @@
 
 #include <algorithm>
 
-#include "CDPL/Biomol/UtilityFunctions.hpp"
+#include <boost/bind.hpp>
+
+#include "CDPL/Biomol/MolecularGraphFunctions.hpp"
 #include "CDPL/Biomol/AtomFunctions.hpp"
 #include "CDPL/Biomol/ResidueDictionary.hpp"
+#include "CDPL/Chem/Atom.hpp"
 #include "CDPL/Chem/Bond.hpp"
 #include "CDPL/Chem/AtomFunctions.hpp"
 #include "CDPL/Chem/Entity3DFunctions.hpp"
@@ -42,6 +45,17 @@
 
 using namespace CDPL; 
 
+
+void Biomol::extractResidueSubstructures(const Chem::MolecularGraph& molgraph, const Chem::MolecularGraph& parent_molgraph, 
+					 Chem::Fragment& res_substructs, bool cnctd_only, unsigned int flags, bool append)
+{
+    if (!append)
+	res_substructs.clear();
+
+    std::for_each(molgraph.getAtomsBegin(), molgraph.getAtomsEnd(), 
+		  boost::bind(&extractResidueSubstructure, _1, boost::ref(parent_molgraph), boost::ref(res_substructs),
+			      cnctd_only, flags, true));
+}
 
 void Biomol::extractProximalAtoms(const Chem::MolecularGraph& core, const Chem::MolecularGraph& macromol, 
 				  Chem::Fragment& env_atoms, double max_dist, bool inc_core_atoms, bool append)

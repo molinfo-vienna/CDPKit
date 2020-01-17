@@ -35,6 +35,8 @@
 #include <string>
 
 #include "CDPL/Biomol/APIPrefix.hpp"
+#include "CDPL/Biomol/ProcessingFlags.hpp"
+#include "CDPL/Biomol/AtomPropertyFlag.hpp"
 
 
 namespace CDPL 
@@ -44,6 +46,8 @@ namespace CDPL
 	{
 
 		class Atom;
+		class MolecularGraph;
+		class Fragment;
 	}
 
 	namespace Biomol 
@@ -179,6 +183,16 @@ namespace CDPL
 
 		CDPL_BIOMOL_API bool hasBFactor(const Chem::Atom& atom);
 
+
+		CDPL_BIOMOL_API bool isPDBBackboneAtom(const Chem::Atom& atom);
+
+		CDPL_BIOMOL_API bool matchesResidueInfo(const Chem::Atom& atom, const char* res_code = 0, const char* chain_id = 0, long res_seq_no = IGNORE_SEQUENCE_NO,
+												char ins_code = 0, std::size_t model_no = 0, const char* atom_name = 0, long serial_no = IGNORE_SERIAL_NO);
+
+		CDPL_BIOMOL_API bool areInSameResidue(const Chem::Atom& atom1, const Chem::Atom& atom2, unsigned int flags = AtomPropertyFlag::DEFAULT);
+
+		CDPL_BIOMOL_API void extractResidueSubstructure(const Chem::Atom& atom, const Chem::MolecularGraph& molgraph, Chem::Fragment& res_substruct, 
+														bool cnctd_only = false, unsigned int flags = AtomPropertyFlag::DEFAULT, bool append = false);
 		/**
 		 * @}
 		 */

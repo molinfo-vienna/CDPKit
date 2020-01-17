@@ -334,6 +334,9 @@
 \defgroup CDPL_BIOMOL_MOLECULAR_GRAPH_FUNCTIONS MolecularGraph Functions
 \ingroup CDPL_BIOMOL_FUNCTIONS
 
+\defgroup CDPL_BIOMOL_MOLECULE_FUNCTIONS Molecule Functions
+\ingroup CDPL_BIOMOL_FUNCTIONS
+
 \defgroup CDPL_BIOMOL_UTILITY_FUNCTIONS Utility Functions
 \ingroup CDPL_BIOMOL_FUNCTIONS
 
@@ -430,7 +433,7 @@
 \defgroup CDPL_PHARM_ATTRIBUTED_GRID_FUNCTIONS AttributedGrid Functions
 \ingroup CDPL_PHARM_FUNCTIONS
 
-\defgroup CDPL_PHARM_UTILITY_FUNCTIONS Utility Functions
+\defgroup CDPL_PHARM_MOLECULE_FUNCTIONS Molecule Functions
 \ingroup CDPL_PHARM_FUNCTIONS
 
 

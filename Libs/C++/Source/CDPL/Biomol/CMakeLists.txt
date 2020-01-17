@@ -70,7 +70,6 @@ SET(cdpl-biomol_LIB_SRCS
     ControlParameterFunctions.cpp
 
     AtomUtilityFunctions.cpp
-    AtomContainerUtilityFunctions.cpp
     MolecularGraphUtilityFunctions.cpp
     MoleculeUtilityFunctions.cpp
    )

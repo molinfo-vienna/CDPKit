@@ -1,7 +1,7 @@
 /* -*- mode: c++; c-basic-offset: 4; tab-width: 4; indent-tabs-mode: t -*- */
 
 /* 
- * NamespaceExports.hpp 
+ * MoleculeFunctions.hpp 
  *
  * This file is part of the Chemical Data Processing Toolkit
  *
@@ -23,28 +23,40 @@
  * Boston, MA 02111-1307, USA.
  */
 
+/**
+ * \file
+ * \brief Declaration of functions that operate on Chem::Molecule instances.
+ */
 
-#ifndef CDPL_PYTHON_BIOMOL_NAMESPACEEXPORTS_HPP
-#define CDPL_PYTHON_BIOMOL_NAMESPACEEXPORTS_HPP
+#ifndef CDPL_PHARM_MOLECULEFUNCTIONS_HPP
+#define CDPL_PHARM_MOLECULEFUNCTIONS_HPP
+
+#include "CDPL/Pharm/APIPrefix.hpp"
 
 
-namespace CDPLPythonBiomol
+namespace CDPL 
 {
 
-	void exportAtomPropertyFlags();
-	void exportResidueTypes();
-	void exportProcessingFlags();
-	void exportPDBFormatVersions();
+    namespace Chem
+    {
 
-	void exportAtomProperties();
-	void exportMolecularGraphProperties();
-	void exportAtomPropertyDefaults();
-	void exportMolecularGraphPropertyDefaults();
+		class Molecule;
+    }
 
-	void exportControlParameters();
-	void exportControlParameterDefaults();
-
-	void exportDataFormats();
+    namespace Pharm 
+    {
+	
+		/**
+		 * \addtogroup CDPL_PHARM_MOLECULE_FUNCTIONS
+		 * @{
+		 */
+	
+		CDPL_PHARM_API void prepareForPharmacophoreGeneration(Chem::Molecule& mol);
+	
+		/**
+		 * @}
+		 */
+    }
 }
 
-#endif // CDPL_PYTHON_BIOMOL_NAMESPACEEXPORTS_HPP
+#endif // CDPL_PHARM_MOLECULEFUNCTIONS_HPP

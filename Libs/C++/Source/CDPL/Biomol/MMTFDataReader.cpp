@@ -34,6 +34,7 @@
 
 #include "CDPL/Biomol/AtomFunctions.hpp"
 #include "CDPL/Biomol/MolecularGraphFunctions.hpp"
+#include "CDPL/Biomol/MoleculeFunctions.hpp"
 #include "CDPL/Biomol/ControlParameterFunctions.hpp"
 #include "CDPL/Biomol/UtilityFunctions.hpp"
 #include "CDPL/Biomol/PDBData.hpp"

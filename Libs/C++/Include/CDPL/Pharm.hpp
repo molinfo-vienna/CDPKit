@@ -121,7 +121,7 @@
 #include "CDPL/Pharm/PharmacophoreRDFDescriptorCalculator.hpp"
 #include "CDPL/Pharm/PharmacophoreAutoCorr3DDescriptorCalculator.hpp"
 
-#include "CDPL/Pharm/UtilityFunctions.hpp"  
+#include "CDPL/Pharm/MoleculeFunctions.hpp"  
 #include "CDPL/Pharm/PharmacophoreFunctions.hpp"  
 #include "CDPL/Pharm/FeatureFunctions.hpp"
 #include "CDPL/Pharm/FeatureContainerFunctions.hpp"

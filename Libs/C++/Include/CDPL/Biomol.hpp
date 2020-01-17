@@ -42,6 +42,7 @@
 #include "CDPL/Biomol/AtomPropertyFlag.hpp"
 #include "CDPL/Biomol/PDBFormatVersion.hpp"
 #include "CDPL/Biomol/ResidueType.hpp"
+#include "CDPL/Biomol/ProcessingFlags.hpp"
 #include "CDPL/Biomol/DataFormat.hpp"
 #include "CDPL/Biomol/ControlParameter.hpp"
 #include "CDPL/Biomol/ControlParameterDefault.hpp"
@@ -68,6 +69,7 @@
 
 #include "CDPL/Biomol/AtomFunctions.hpp"
 #include "CDPL/Biomol/MolecularGraphFunctions.hpp"
+#include "CDPL/Biomol/MoleculeFunctions.hpp"
 #include "CDPL/Biomol/UtilityFunctions.hpp"
 
 #if defined(HAVE_BOOST_FILESYSTEM) && defined(HAVE_BOOST_IOSTREAMS)

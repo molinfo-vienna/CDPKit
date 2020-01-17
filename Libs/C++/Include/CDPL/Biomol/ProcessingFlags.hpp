@@ -1,7 +1,7 @@
 /* -*- mode: c++; c-basic-offset: 4; tab-width: 4; indent-tabs-mode: t -*- */
 
 /* 
- * NamespaceExports.hpp 
+ * ProcessingFlags.hpp 
  *
  * This file is part of the Chemical Data Processing Toolkit
  *
@@ -23,28 +23,36 @@
  * Boston, MA 02111-1307, USA.
  */
 
+/**
+ * \file
+ * \brief Definition of flags for serial and residue sequence number processing.
+ */
 
-#ifndef CDPL_PYTHON_BIOMOL_NAMESPACEEXPORTS_HPP
-#define CDPL_PYTHON_BIOMOL_NAMESPACEEXPORTS_HPP
+#ifndef CDPL_BIOMOL_PROCESSINGFLAGS_HPP
+#define CDPL_BIOMOL_PROCESSINGFLAGS_HPP
+
+#include <limits>
 
 
-namespace CDPLPythonBiomol
+namespace CDPL 
 {
 
-	void exportAtomPropertyFlags();
-	void exportResidueTypes();
-	void exportProcessingFlags();
-	void exportPDBFormatVersions();
+    namespace Biomol 
+    {
 
-	void exportAtomProperties();
-	void exportMolecularGraphProperties();
-	void exportAtomPropertyDefaults();
-	void exportMolecularGraphPropertyDefaults();
+	/**
+	 * \addtogroup CDPL_BIOMOL_CONSTANTS
+	 * @{
+	 */
 
-	void exportControlParameters();
-	void exportControlParameterDefaults();
+	const long IGNORE_SEQUENCE_NO = std::numeric_limits<long>::min();
+	const long IGNORE_SERIAL_NO   = std::numeric_limits<long>::min();
 
-	void exportDataFormats();
+	/**
+	 * @}
+	 */
+    }
 }
 
-#endif // CDPL_PYTHON_BIOMOL_NAMESPACEEXPORTS_HPP
+#endif // CDPL_BIOMOL_PROCESSINGFLAGS_HPP
+ 

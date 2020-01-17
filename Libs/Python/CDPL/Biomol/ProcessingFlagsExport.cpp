@@ -1,7 +1,7 @@
 /* -*- mode: c++; c-basic-offset: 4; tab-width: 4; indent-tabs-mode: t -*- */
 
 /* 
- * NamespaceExports.hpp 
+ * ProcessingFlagsExport.cpp 
  *
  * This file is part of the Chemical Data Processing Toolkit
  *
@@ -24,27 +24,18 @@
  */
 
 
-#ifndef CDPL_PYTHON_BIOMOL_NAMESPACEEXPORTS_HPP
-#define CDPL_PYTHON_BIOMOL_NAMESPACEEXPORTS_HPP
+#include <boost/python.hpp>
+
+#include "CDPL/Biomol/ProcessingFlags.hpp"
+
+#include "NamespaceExports.hpp"
 
 
-namespace CDPLPythonBiomol
+void CDPLPythonBiomol::exportProcessingFlags()
 {
+    using namespace boost;
+    using namespace CDPL;
 
-	void exportAtomPropertyFlags();
-	void exportResidueTypes();
-	void exportProcessingFlags();
-	void exportPDBFormatVersions();
-
-	void exportAtomProperties();
-	void exportMolecularGraphProperties();
-	void exportAtomPropertyDefaults();
-	void exportMolecularGraphPropertyDefaults();
-
-	void exportControlParameters();
-	void exportControlParameterDefaults();
-
-	void exportDataFormats();
+    python::scope().attr("IGNORE_SEQUENCE_NO") = Biomol::IGNORE_SEQUENCE_NO;
+    python::scope().attr("IGNORE_SERIAL_NO") = Biomol::IGNORE_SERIAL_NO;
 }
-
-#endif // CDPL_PYTHON_BIOMOL_NAMESPACEEXPORTS_HPP
