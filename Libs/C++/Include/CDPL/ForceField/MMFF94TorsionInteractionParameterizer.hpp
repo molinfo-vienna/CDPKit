@@ -72,7 +72,8 @@ namespace CDPL
 			MMFF94TorsionInteractionParameterizer();
 
 			MMFF94TorsionInteractionParameterizer(const Chem::MolecularGraph& molgraph, 
-												  MMFF94TorsionInteractionData& ia_data);
+												  MMFF94TorsionInteractionData& ia_data,
+												  bool strict);
 
 			void setFilterFunction(const InteractionFilterFunction4& func); 
 
@@ -80,7 +81,7 @@ namespace CDPL
 
 			void setBondTypeIndexFunction(const MMFF94BondTypeIndexFunction& func); 
 
-			void setAromaticRingSetFunction(const MMFF94AromaticRingSetFunction& func);
+			void setAromaticRingSetFunction(const MMFF94RingSetFunction& func);
 
 			void setTorsionParameterTable(const MMFF94TorsionParameterTable::SharedPointer& table);
 
@@ -88,7 +89,7 @@ namespace CDPL
 
 			void setParameterAtomTypeMap(const MMFF94PrimaryToParameterAtomTypeMap::SharedPointer& map);
 
-			void parameterize(const Chem::MolecularGraph& molgraph, MMFF94TorsionInteractionData& ia_data);
+			void parameterize(const Chem::MolecularGraph& molgraph, MMFF94TorsionInteractionData& ia_data, bool strict);
 
 		  private:
 			typedef MMFF94AtomTypePropertyTable::Entry AtomTypePropEntry;
@@ -113,7 +114,7 @@ namespace CDPL
 			InteractionFilterFunction4                          filterFunc;
 			MMFF94NumericAtomTypeFunction                       atomTypeFunc;	
 			MMFF94BondTypeIndexFunction                         bondTypeIdxFunc;	
-			MMFF94AromaticRingSetFunction                       aromRingSetFunc;
+			MMFF94RingSetFunction                               aromRingSetFunc;
 			MMFF94TorsionParameterTable::SharedPointer          paramTable;
 			MMFF94AtomTypePropertyTable::SharedPointer          typePropTable;
 			MMFF94PrimaryToParameterAtomTypeMap::SharedPointer  paramTypeMap;

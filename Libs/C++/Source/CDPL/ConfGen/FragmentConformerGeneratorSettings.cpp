@@ -28,6 +28,7 @@
 
 #include "CDPL/ConfGen/FragmentConformerGeneratorSettings.hpp"
 #include "CDPL/ConfGen/ForceFieldType.hpp"
+#include "CDPL/ForceField/MMFF94ElectrostaticInteractionParameterizer.hpp"
 
 
 using namespace CDPL;
@@ -100,9 +101,10 @@ double ConfGen::FragmentConformerGeneratorSettings::RingFragmentSettings::getMin
 
 
 ConfGen::FragmentConformerGeneratorSettings::FragmentConformerGeneratorSettings():
-	preserveBondGeom(false), forceFieldType(ForceFieldType::MMFF94S_NO_ESTAT), 
-	strictParam(true), maxNumRefIters(0), refStopGrad(0.1), minMacrocycleSize(10), 
-	srSamplingFactor(6) 
+	preserveBondGeom(false), forceFieldType(ForceFieldType::MMFF94S_EXT_NO_ESTAT), strictParam(true), 
+	dielectricConst(ForceField::MMFF94ElectrostaticInteractionParameterizer::DEF_DIELECTRIC_CONSTANT),
+	distExponent(ForceField::MMFF94ElectrostaticInteractionParameterizer::DEF_DISTANCE_EXPONENT),
+	maxNumRefIters(0), refStopGrad(0.1), minMacrocycleSize(10), srSamplingFactor(6) 
 {
 	srSettings.setMaxNumSampledConformers(1000);
 	srSettings.setMinNumSampledConformers(40);
@@ -147,6 +149,26 @@ void ConfGen::FragmentConformerGeneratorSettings::strictForceFieldParameterizati
 bool ConfGen::FragmentConformerGeneratorSettings::strictForceFieldParameterization() const
 {
 	return strictParam;
+}
+
+void ConfGen::FragmentConformerGeneratorSettings::setDielectricConstant(double de_const)
+{
+	dielectricConst = de_const;
+}
+
+double ConfGen::FragmentConformerGeneratorSettings::getDielectricConstant() const
+{
+	return dielectricConst;
+}
+
+void ConfGen::FragmentConformerGeneratorSettings::setDistanceExponent(double exponent)
+{
+	distExponent = exponent;
+}
+
+double ConfGen::FragmentConformerGeneratorSettings::getDistanceExponent() const
+{
+	return distExponent;
 }
 
 void ConfGen::FragmentConformerGeneratorSettings::setMaxNumRefinementIterations(std::size_t max_iter)

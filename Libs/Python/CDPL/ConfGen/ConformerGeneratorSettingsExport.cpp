@@ -92,6 +92,14 @@ void CDPLPythonConfGen::exportConformerGeneratorSettings()
 			 (python::arg("self"), python::arg("strict")))
 		.def("strictForceFieldParameterization", GetBoolFunc(&ConfGen::ConformerGeneratorSettings::strictForceFieldParameterization), 
 			 python::arg("self"))
+		.def("setDielectricConstant", &ConfGen::ConformerGeneratorSettings::setDielectricConstant, 
+			 (python::arg("self"), python::arg("de_const")))
+		.def("getDielectricConstant", &ConfGen::ConformerGeneratorSettings::getDielectricConstant, 
+			 python::arg("self"))
+		.def("setDistanceExponent", &ConfGen::ConformerGeneratorSettings::setDistanceExponent, 
+			 (python::arg("self"), python::arg("dist_expo")))
+		.def("getDistanceExponent", &ConfGen::ConformerGeneratorSettings::getDistanceExponent, 
+			 python::arg("self"))
 		.def("setMaxNumOutputConformers", &ConfGen::ConformerGeneratorSettings::setMaxNumOutputConformers, 
 			 (python::arg("self"), python::arg("max_num")))
 		.def("getMaxNumOutputConformers", &ConfGen::ConformerGeneratorSettings::getMaxNumOutputConformers, 
@@ -153,6 +161,10 @@ void CDPLPythonConfGen::exportConformerGeneratorSettings()
 					  &ConfGen::ConformerGeneratorSettings::setForceFieldType)
 		.add_property("strictForceFieldParam", GetBoolFunc(&ConfGen::ConformerGeneratorSettings::strictForceFieldParameterization), 
 					  SetBoolFunc(&ConfGen::ConformerGeneratorSettings::strictForceFieldParameterization))
+		.add_property("dielectricConstant", &ConfGen::ConformerGeneratorSettings::getDielectricConstant, 
+					  &ConfGen::ConformerGeneratorSettings::setDielectricConstant)
+		.add_property("distanceExponent", &ConfGen::ConformerGeneratorSettings::getDistanceExponent, 
+					  &ConfGen::ConformerGeneratorSettings::setDistanceExponent)
 		.add_property("maxNumOutputConformers", &ConfGen::ConformerGeneratorSettings::getMaxNumOutputConformers, 
 					  &ConfGen::ConformerGeneratorSettings::setMaxNumOutputConformers)
 		.add_property("minRMSD", &ConfGen::ConformerGeneratorSettings::getMinRMSD, 

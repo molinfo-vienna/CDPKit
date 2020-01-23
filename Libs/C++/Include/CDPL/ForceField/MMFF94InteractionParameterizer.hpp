@@ -119,6 +119,8 @@ namespace CDPL
 
 			void clearFilterFunctions();
 
+			void setSSSRFunction(const MMFF94RingSetFunction& func); 
+
 			void setSymbolicAtomTypePatternTable(const MMFF94SymbolicAtomTypePatternTable::SharedPointer& table);
 
 			void setHeavyToHydrogenAtomTypeMap(const MMFF94HeavyToHydrogenAtomTypeMap::SharedPointer& map);
@@ -152,6 +154,10 @@ namespace CDPL
 			void setTorsionParameterTable(const MMFF94TorsionParameterTable::SharedPointer& table);
 
 			void setVanDerWaalsParameterTable(const MMFF94VanDerWaalsParameterTable::SharedPointer& table);
+
+			void setDielectricConstant(double de_const);
+
+			void setDistanceExponent(double dist_expo);
 
 			void setParameterSet(unsigned int param_set);
 
@@ -193,6 +199,7 @@ namespace CDPL
 			MMFF94AtomTyper                                 atomTyper;
 			MMFF94BondTyper                                 bondTyper;
 			MMFF94ChargeCalculator                          chargeCalculator;
+			MMFF94RingSetFunction                           sssrFunc;
 			MMFF94AromaticSSSRSubset::SharedPointer         aromRings;
 			Chem::FragmentList::SharedPointer               usedAromRings;
 			Math::ULMatrix::SharedPointer                   topDistMatrix;

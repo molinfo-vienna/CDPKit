@@ -30,6 +30,7 @@
 #include "CDPL/ConfGen/ForceFieldType.hpp"
 #include "CDPL/ConfGen/NitrogenEnumerationMode.hpp"
 #include "CDPL/ConfGen/ConformerSamplingMode.hpp"
+#include "CDPL/ForceField/MMFF94ElectrostaticInteractionParameterizer.hpp"
 
 
 using namespace CDPL;
@@ -39,8 +40,10 @@ ConfGen::ConformerGeneratorSettings::ConformerGeneratorSettings():
 	confSamplingMode(ConformerSamplingMode::AUTO), sampleHetAtomHs(false), sampleTolRanges(false), 
 	enumRings(true), nitrogenEnumMode(NitrogenEnumerationMode::UNSPECIFIED_STEREO),
 	fromScratch(true), incInputCoords(false), eWindow(10.0), timeout(60 * 60 * 1000), 
-	forceFieldType(ForceFieldType::MMFF94S_NO_ESTAT), strictParam(true), maxNumOutputConfs(100), 
-	minRMSD(0.5), maxNumRefIters(0), refStopGrad(0.25), maxNumSampledConfs(10000),
+	forceFieldType(ForceFieldType::MMFF94S_EXT_NO_ESTAT), strictParam(true), 
+	dielectricConst(ForceField::MMFF94ElectrostaticInteractionParameterizer::DEF_DIELECTRIC_CONSTANT),
+	distExponent(ForceField::MMFF94ElectrostaticInteractionParameterizer::DEF_DISTANCE_EXPONENT),
+	maxNumOutputConfs(100), minRMSD(0.5), maxNumRefIters(0), refStopGrad(0.25), maxNumSampledConfs(10000),
 	convIterCount(300), minMacrocycleSize(14)
 {}
 
@@ -154,6 +157,26 @@ bool ConfGen::ConformerGeneratorSettings::strictForceFieldParameterization() con
 	return strictParam;
 }
 			
+void ConfGen::ConformerGeneratorSettings::setDielectricConstant(double de_const)
+{
+	dielectricConst = de_const;
+}
+
+double ConfGen::ConformerGeneratorSettings::getDielectricConstant() const
+{
+	return dielectricConst;
+}
+
+void ConfGen::ConformerGeneratorSettings::setDistanceExponent(double exponent)
+{
+	distExponent = exponent;
+}
+
+double ConfGen::ConformerGeneratorSettings::getDistanceExponent() const
+{
+	return distExponent;
+}
+
 void ConfGen::ConformerGeneratorSettings::setMaxNumOutputConformers(std::size_t max_num)
 {
 	maxNumOutputConfs = max_num;

@@ -47,5 +47,7 @@ void CDPLPythonConfGen::exportForceFieldTypes()
 		.def_readonly("MMFF94", &ConfGen::ForceFieldType::MMFF94)
 		.def_readonly("MMFF94_NO_ESTAT", &ConfGen::ForceFieldType::MMFF94_NO_ESTAT)
 		.def_readonly("MMFF94S", &ConfGen::ForceFieldType::MMFF94S)
-		.def_readonly("MMFF94S_NO_ESTAT", &ConfGen::ForceFieldType::MMFF94S_NO_ESTAT);
+		.def_readonly("MMFF94S_NO_ESTAT", &ConfGen::ForceFieldType::MMFF94S_NO_ESTAT)
+		.def_readonly("MMFF94S_EXT", &ConfGen::ForceFieldType::MMFF94S_EXT)
+		.def_readonly("MMFF94S_EXT_NO_ESTAT", &ConfGen::ForceFieldType::MMFF94S_EXT_NO_ESTAT);
 }

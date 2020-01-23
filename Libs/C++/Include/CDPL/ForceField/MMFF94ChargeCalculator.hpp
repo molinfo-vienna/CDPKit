@@ -81,7 +81,7 @@ namespace CDPL
 
 			void setFormalChargeDefinitionTable(const MMFF94FormalAtomChargeDefinitionTable::SharedPointer& table);
 
-			void setAromaticRingSetFunction(const MMFF94AromaticRingSetFunction& func);
+			void setAromaticRingSetFunction(const MMFF94RingSetFunction& func);
 
 			void setNumericAtomTypeFunction(const MMFF94NumericAtomTypeFunction& func);
 
@@ -150,7 +150,7 @@ namespace CDPL
 			MMFF94PartialBondChargeIncrementTable::SharedPointer partBondChargeIncTable;
 			MMFF94AtomTypePropertyTable::SharedPointer           atomTypePropTable;
 			MMFF94FormalAtomChargeDefinitionTable::SharedPointer formChargeDefTable;
-			MMFF94AromaticRingSetFunction                        aromRingSetFunc;
+			MMFF94RingSetFunction                                aromRingSetFunc;
 			MMFF94NumericAtomTypeFunction                        numAtomTypeFunc;
 			MMFF94SymbolicAtomTypeFunction                       symAtomTypeFunc;
 			MMFF94BondTypeIndexFunction                          bondTypeIdxFunc;

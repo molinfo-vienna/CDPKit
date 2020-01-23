@@ -41,11 +41,12 @@ using namespace CDPL;
 
 
 ForceField::MMFF94VanDerWaalsInteractionParameterizer::MMFF94VanDerWaalsInteractionParameterizer(const Chem::MolecularGraph& molgraph, 
-																								 MMFF94VanDerWaalsInteractionData& ia_data):
+																								 MMFF94VanDerWaalsInteractionData& ia_data, 
+																								 bool strict):
 	filterFunc(), typeFunc(&getMMFF94NumericType), distFunc(&Chem::getTopologicalDistance),
 	paramTable(MMFF94VanDerWaalsParameterTable::get())
 {
-    parameterize(molgraph, ia_data);
+    parameterize(molgraph, ia_data, strict);
 }
 
 ForceField::MMFF94VanDerWaalsInteractionParameterizer::MMFF94VanDerWaalsInteractionParameterizer() :
@@ -74,7 +75,7 @@ void ForceField::MMFF94VanDerWaalsInteractionParameterizer::setVanDerWaalsParame
 }
 
 void ForceField::MMFF94VanDerWaalsInteractionParameterizer::parameterize(const Chem::MolecularGraph& molgraph, 
-																		 MMFF94VanDerWaalsInteractionData& ia_data)
+																		 MMFF94VanDerWaalsInteractionData& ia_data, bool strict)
 {
 	using namespace Chem;
 

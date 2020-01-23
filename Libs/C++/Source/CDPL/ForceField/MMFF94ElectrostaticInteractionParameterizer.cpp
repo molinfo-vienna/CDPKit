@@ -40,11 +40,12 @@ const double ForceField::MMFF94ElectrostaticInteractionParameterizer::DEF_DIELEC
 
 
 ForceField::MMFF94ElectrostaticInteractionParameterizer::MMFF94ElectrostaticInteractionParameterizer(const Chem::MolecularGraph& molgraph, 
-																									 MMFF94ElectrostaticInteractionData& ia_data):
+																									 MMFF94ElectrostaticInteractionData& ia_data,
+																									 bool strict):
 	filterFunc(), chargeFunc(&getMMFF94Charge), distFunc(&Chem::getTopologicalDistance), 
 	deConst(DEF_DIELECTRIC_CONSTANT), distExpo(DEF_DISTANCE_EXPONENT)
 {
-    parameterize(molgraph, ia_data);
+    parameterize(molgraph, ia_data, strict);
 }
 
 ForceField::MMFF94ElectrostaticInteractionParameterizer::MMFF94ElectrostaticInteractionParameterizer():
@@ -78,7 +79,7 @@ void ForceField::MMFF94ElectrostaticInteractionParameterizer::setDistanceExponen
 } 
 
 void ForceField::MMFF94ElectrostaticInteractionParameterizer::parameterize(const Chem::MolecularGraph& molgraph, 
-																		   MMFF94ElectrostaticInteractionData& ia_data)
+																		   MMFF94ElectrostaticInteractionData& ia_data, bool strict)
 {
 	using namespace Chem;
 

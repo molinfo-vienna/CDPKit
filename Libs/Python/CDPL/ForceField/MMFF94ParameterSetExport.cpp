@@ -45,5 +45,6 @@ void CDPLPythonForceField::exportMMFF94ParameterSets()
 
 	python::class_<MMFF94ParameterSet, boost::noncopyable>("MMFF94ParameterSet", python::no_init)
 		.def_readonly("DYNAMIC", &ForceField::MMFF94ParameterSet::DYNAMIC)
-		.def_readonly("STATIC", &ForceField::MMFF94ParameterSet::STATIC);
+		.def_readonly("STATIC", &ForceField::MMFF94ParameterSet::STATIC)
+		.def_readonly("STATIC_EXT", &ForceField::MMFF94ParameterSet::STATIC_EXT);
 }

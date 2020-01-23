@@ -41,11 +41,12 @@ using namespace CDPL;
 
 
 ForceField::MMFF94StretchBendInteractionParameterizer::MMFF94StretchBendInteractionParameterizer(const Chem::MolecularGraph& molgraph, const MMFF94BondStretchingInteractionData& bs_ia_data, 
-																								 const MMFF94AngleBendingInteractionData& ab_ia_data, MMFF94StretchBendInteractionData& ia_data):
+																								 const MMFF94AngleBendingInteractionData& ab_ia_data, MMFF94StretchBendInteractionData& ia_data,
+																								 bool strict):
 	filterFunc(), atomTypeFunc(&getMMFF94NumericType), paramTable(MMFF94StretchBendParameterTable::get()), 
 	defParamTable(MMFF94DefaultStretchBendParameterTable::get()), typePropTable(MMFF94AtomTypePropertyTable::get())
 {
-	parameterize(molgraph, bs_ia_data, ab_ia_data, ia_data);
+	parameterize(molgraph, bs_ia_data, ab_ia_data, ia_data, strict);
 }
 
 ForceField::MMFF94StretchBendInteractionParameterizer::MMFF94StretchBendInteractionParameterizer() :
@@ -79,7 +80,8 @@ void ForceField::MMFF94StretchBendInteractionParameterizer::setAtomTypePropertyT
 }
 
 void ForceField::MMFF94StretchBendInteractionParameterizer::parameterize(const Chem::MolecularGraph& molgraph, const MMFF94BondStretchingInteractionData& bs_ia_data, 
-																		 const MMFF94AngleBendingInteractionData& ab_ia_data, MMFF94StretchBendInteractionData& ia_data)
+																		 const MMFF94AngleBendingInteractionData& ab_ia_data, MMFF94StretchBendInteractionData& ia_data, 
+																		 bool strict)
 {
 	using namespace Chem;
 

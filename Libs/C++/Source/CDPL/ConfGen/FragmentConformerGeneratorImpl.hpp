@@ -42,7 +42,6 @@
 #include "CDPL/ConfGen/CallbackFunction.hpp"
 #include "CDPL/ForceField/MMFF94InteractionParameterizer.hpp"
 #include "CDPL/ForceField/MMFF94InteractionData.hpp"
-#include "CDPL/ForceField/MMFF94EnergyCalculator.hpp"
 #include "CDPL/ForceField/MMFF94GradientCalculator.hpp"
 #include "CDPL/Chem/Hydrogen3DCoordinatesGenerator.hpp"
 #include "CDPL/Chem/AutomorphismGroupSearch.hpp"
@@ -127,7 +126,7 @@ namespace CDPL
 			void getSymmetryMappings();
 			void getNeighborHydrogens(const Chem::Atom& atom, AtomList& nbr_list) const;
 
-			std::size_t calcNumSmallRingSystemConfSamples() const;
+			std::size_t calcNumSmallRingSystemConfSamples();
 			std::size_t calcNumMacrocyclicRingSystemConfSamples() const;
 
 			std::size_t getNumRotatableRingBonds(const Chem::MolecularGraph& molgraph) const;
@@ -139,7 +138,6 @@ namespace CDPL
 
 			bool has3DCoordinates(const Chem::Atom& atom) const;
 
-			typedef ForceField::MMFF94EnergyCalculator<double> MMFF94EnergyCalculator;
 			typedef ForceField::MMFF94GradientCalculator<double> MMFF94GradientCalculator;
 			typedef ForceField::MMFF94InteractionParameterizer MMFF94InteractionParameterizer;
 			typedef ForceField::MMFF94InteractionData MMFF94InteractionData;
@@ -147,32 +145,31 @@ namespace CDPL
 			typedef Math::VectorArrayAlignmentCalculator<Math::Vector3DArray> AlignmentCalculator;
 			typedef std::vector<std::size_t> IndexList;
 
-			ConformerDataCache                       confDataCache;
-			CallbackFunction                         abortCallback;
-			CallbackFunction                         timeoutCallback;
-			boost::timer::cpu_timer                  timer;
-			const Chem::MolecularGraph*              molGraph;
-			std::size_t                              numAtoms;
-			MMFF94InteractionParameterizer           mmff94Parameterizer;
-			MMFF94InteractionData                    mmff94Data;
-			MMFF94EnergyCalculator                   mmff94EnergyCalc;
-			MMFF94GradientCalculator                 mmff94GradientCalc;
-			BFGSMinimizer                            energyMinimizer;
-			DGStructureGenerator                     dgStructureGen;
-			Chem::Hydrogen3DCoordinatesGenerator     hCoordsGen;
-			Chem::AutomorphismGroupSearch            symMappingSearch;
-			AlignmentCalculator                      alignmentCalc;
-			Math::Vector3DArray::StorageType         energyGradient;
-			IndexList                                ringAtomIndices;
-			IndexList                                symMappings;
-			AtomList                                 nbrHydrogens1;
-			AtomList                                 nbrHydrogens2;
-			Chem::Fragment                           symMappingSearchMolGraph;
-			Util::BitSet                             coreAtomMask;
-			ConformerDataArray                       ringAtomCoords;
-			ConformerDataArray                       outputConfs;
-			ConformerDataArray                       workingConfs;
-			FragmentConformerGeneratorSettings       settings;
+			ConformerDataCache                     confDataCache;
+			CallbackFunction                       abortCallback;
+			CallbackFunction                       timeoutCallback;
+			boost::timer::cpu_timer                timer;
+			const Chem::MolecularGraph*            molGraph;
+			std::size_t                            numAtoms;
+			MMFF94InteractionParameterizer         mmff94Parameterizer;
+			MMFF94InteractionData                  mmff94Data;
+			MMFF94GradientCalculator               mmff94GradientCalc;
+			BFGSMinimizer                          energyMinimizer;
+			DGStructureGenerator                   dgStructureGen;
+			Chem::Hydrogen3DCoordinatesGenerator   hCoordsGen;
+			Chem::AutomorphismGroupSearch          symMappingSearch;
+			AlignmentCalculator                    alignmentCalc;
+			Math::Vector3DArray::StorageType       energyGradient;
+			IndexList                              ringAtomIndices;
+			IndexList                              symMappings;
+			AtomList                               nbrHydrogens1;
+			AtomList                               nbrHydrogens2;
+			Chem::Fragment                         symMappingSearchMolGraph;
+			Util::BitSet                           coreAtomMask;
+			ConformerDataArray                     ringAtomCoords;
+			ConformerDataArray                     outputConfs;
+			ConformerDataArray                     workingConfs;
+			FragmentConformerGeneratorSettings     settings;
 		};
     }
 }

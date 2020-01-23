@@ -104,7 +104,7 @@ void ForceField::MMFF94ChargeCalculator::setFormalChargeDefinitionTable(const MM
 	formChargeDefTable = table;
 }
 
-void ForceField::MMFF94ChargeCalculator::setAromaticRingSetFunction(const MMFF94AromaticRingSetFunction& func)
+void ForceField::MMFF94ChargeCalculator::setAromaticRingSetFunction(const MMFF94RingSetFunction& func)
 {
 	aromRingSetFunc = func;
 }

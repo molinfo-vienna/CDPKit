@@ -76,7 +76,8 @@ namespace CDPL
 			MMFF94AngleBendingInteractionParameterizer();
 
 			MMFF94AngleBendingInteractionParameterizer(const Chem::MolecularGraph& molgraph, 
-													   MMFF94AngleBendingInteractionData& ia_data);
+													   MMFF94AngleBendingInteractionData& ia_data,
+													   bool strict);
 
 			void setFilterFunction(const InteractionFilterFunction3& func); 
 
@@ -84,7 +85,7 @@ namespace CDPL
 
 			void setBondTypeIndexFunction(const MMFF94BondTypeIndexFunction& func); 
 
-			void setAromaticRingSetFunction(const MMFF94AromaticRingSetFunction& func);
+			void setAromaticRingSetFunction(const MMFF94RingSetFunction& func);
 
 			void setBondStretchingParameterTable(const MMFF94BondStretchingParameterTable::SharedPointer& table);
 
@@ -96,12 +97,12 @@ namespace CDPL
 
 			void setParameterAtomTypeMap(const MMFF94PrimaryToParameterAtomTypeMap::SharedPointer& map);
 
-			void parameterize(const Chem::MolecularGraph& molgraph, MMFF94AngleBendingInteractionData& ia_data);
+			void parameterize(const Chem::MolecularGraph& molgraph, MMFF94AngleBendingInteractionData& ia_data, bool strict);
 
 		  private:
 			void getParameters(const Chem::MolecularGraph& molgraph, const Chem::Atom& term_atom1, const Chem::Atom& ctr_atom, 
 							   const Chem::Atom& term_atom2, const Chem::Bond& term_atom1_bnd, const Chem::Bond& term_atom2_bnd,
-							   unsigned int& angle_type_idx, bool& linear, double& force_const, double& ref_angle) const;
+							   unsigned int& angle_type_idx, bool& linear, double& force_const, double& ref_angle, bool strict) const;
 
 			std::size_t getSizeOfContaining3Or4Ring(const Chem::MolecularGraph& molgraph, const Chem::Atom& term_atom1, 
 													const Chem::Atom& ctr_atom, const Chem::Atom& term_atom2) const;
@@ -140,7 +141,7 @@ namespace CDPL
 			MMFF94AngleBendingParameterTable::SharedPointer       paramTable;
 			MMFF94AtomTypePropertyTable::SharedPointer            typePropTable;
 			MMFF94PrimaryToParameterAtomTypeMap::SharedPointer    paramTypeMap;
-			MMFF94BondStretchingInteractionParameterizer               bsParameterizer;
+			MMFF94BondStretchingInteractionParameterizer          bsParameterizer;
 			AtomList                                              nbrAtoms;
 			BondList                                              nbrBonds;
 		};			

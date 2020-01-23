@@ -45,11 +45,12 @@ using namespace CDPL;
 
 
 ForceField::MMFF94OutOfPlaneBendingInteractionParameterizer::MMFF94OutOfPlaneBendingInteractionParameterizer(const Chem::MolecularGraph& molgraph, 
-																											 MMFF94OutOfPlaneBendingInteractionData& ia_data):
+																											 MMFF94OutOfPlaneBendingInteractionData& ia_data,
+																											 bool strict):
 	filterFunc(), atomTypeFunc(&getMMFF94NumericType), paramTable(MMFF94OutOfPlaneBendingParameterTable::get(true)),
 	typePropTable(MMFF94AtomTypePropertyTable::get()), paramTypeMap(MMFF94PrimaryToParameterAtomTypeMap::get())
 {
-    parameterize(molgraph, ia_data);
+    parameterize(molgraph, ia_data, strict);
 }
 
 ForceField::MMFF94OutOfPlaneBendingInteractionParameterizer::MMFF94OutOfPlaneBendingInteractionParameterizer():
@@ -83,7 +84,8 @@ void ForceField::MMFF94OutOfPlaneBendingInteractionParameterizer::setAtomTypePro
 	typePropTable = table;
 }
 
-void ForceField::MMFF94OutOfPlaneBendingInteractionParameterizer::parameterize(const Chem::MolecularGraph& molgraph, MMFF94OutOfPlaneBendingInteractionData& ia_data)
+void ForceField::MMFF94OutOfPlaneBendingInteractionParameterizer::parameterize(const Chem::MolecularGraph& molgraph, MMFF94OutOfPlaneBendingInteractionData& ia_data,
+																			   bool strict)
 {
 	using namespace Chem;
 

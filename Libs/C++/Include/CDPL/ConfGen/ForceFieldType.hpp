@@ -54,6 +54,8 @@ namespace CDPL
 			const unsigned int MMFF94_NO_ESTAT       = 1;
 			const unsigned int MMFF94S               = 2;
 			const unsigned int MMFF94S_NO_ESTAT      = 3;
+			const unsigned int MMFF94S_EXT           = 4;
+			const unsigned int MMFF94S_EXT_NO_ESTAT  = 5;
 		}
 
 		/**

@@ -49,8 +49,9 @@ namespace CDPL
 		namespace MMFF94ParameterSet
 		{
 
-			const unsigned int DYNAMIC  = 0;
-			const unsigned int STATIC   = 1;
+			const unsigned int DYNAMIC    = 0;
+			const unsigned int STATIC     = 1;
+			const unsigned int STATIC_EXT = 2;
 		}
 
 		/**

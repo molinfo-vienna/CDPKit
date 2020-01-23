@@ -59,7 +59,7 @@ namespace
 	const std::size_t  DEF_SMALL_RSYS_SAMPLING_FACTOR = 12;
 	const double       DEF_MIN_RMSD                   = 0.1;
 	const double       DEF_E_WINDOW                   = 6.0;
-	const unsigned int DEF_FORCE_FIELD_TYPE           = CDPL::ConfGen::ForceFieldType::MMFF94S_NO_ESTAT;
+	const unsigned int DEF_FORCE_FIELD_TYPE           = CDPL::ConfGen::ForceFieldType::MMFF94S_EXT_NO_ESTAT;
 	const bool         DEF_STRICT_FORCE_FIELD_PARAM   = true;
 	const bool         DEF_PRESERVE_BONDING_GEOM      = false;
 }
@@ -132,7 +132,7 @@ public:
 
 				for (FragmentList::ConstElementIterator it = fragList.getElementsBegin(), end = fragList.getElementsEnd(); it != end; ++it) {
 					const Fragment& frag = *it;
-					unsigned int ret_code = fragLibGen.process(frag);
+					unsigned int ret_code = fragLibGen.process(frag, molecule);
 
 					switch (ret_code) {
 
@@ -308,7 +308,7 @@ GenFragLibImpl::GenFragLibImpl():
 	addOption("small-rsys-sampling-factor,g", "Small ring system conformer sampling factor (default: " + 
 			  boost::lexical_cast<std::string>(smallRSysSamplingFactor) + ", must be > 1).",
 			  value<std::size_t>()->notifier(boost::bind(&GenFragLibImpl::setSmallRingSystemSamplingFactor, this, _1)));
-	addOption("forcefield,f", "Build force field type (MMFF94, MMFF94_NO_ESTAT, MMFF94S, MMFF94S_NO_ESTAT, default: " + getForceFieldTypeString() + ").", 
+	addOption("forcefield,f", "Build force field type (MMFF94, MMFF94_NO_ESTAT, MMFF94S, MMFF94S_EXT, MMFF94S_NO_ESTAT, MMFF94S_EXT_NO_ESTAT, default: " + getForceFieldTypeString() + ").", 
 			  value<std::string>()->notifier(boost::bind(&GenFragLibImpl::setForceFieldType, this, _1)));
 	addOption("strict-params,s", "Perform strict MMFF94 parameterization (default: true).", 
 			  value<bool>(&strictForceFieldParam)->implicit_value(true));
@@ -394,8 +394,12 @@ void GenFragLibImpl::setForceFieldType(const std::string& type_str)
 		forceFieldType= ForceFieldType::MMFF94_NO_ESTAT;
 	else if (uc_type == "MMFF94S")
 		forceFieldType= ForceFieldType::MMFF94S;
+	else if (uc_type == "MMFF94S_EXT")
+		forceFieldType= ForceFieldType::MMFF94S_EXT;
 	else if (uc_type == "MMFF94S_NO_ESTAT")
 		forceFieldType= ForceFieldType::MMFF94S_NO_ESTAT;
+	else if (uc_type == "MMFF94S_EXT_NO_ESTAT")
+		forceFieldType= ForceFieldType::MMFF94S_EXT_NO_ESTAT;
 	else
 		throwValidationError("forcefield");
 }
@@ -905,9 +909,15 @@ std::string GenFragLibImpl::getForceFieldTypeString() const
 
 	if (forceFieldType == ForceFieldType::MMFF94S)
 		return "MMFF94S";
+
+	if (forceFieldType == ForceFieldType::MMFF94S_EXT)
+		return "MMFF94S_EXT";
 	
 	if (forceFieldType == ForceFieldType::MMFF94S_NO_ESTAT)
 		return "MMFF94S_NO_ESTAT";
+
+	if (forceFieldType == ForceFieldType::MMFF94S_EXT_NO_ESTAT)
+		return "MMFF94S_EXT_NO_ESTAT";
 	
 	return "UNKNOWN";
 }

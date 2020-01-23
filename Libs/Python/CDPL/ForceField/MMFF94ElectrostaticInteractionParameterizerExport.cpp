@@ -43,8 +43,8 @@ void CDPLPythonForceField::exportMMFF94ElectrostaticInteractionParameterizer()
 				   ForceField::MMFF94ElectrostaticInteractionParameterizer::SharedPointer>("MMFF94ElectrostaticInteractionParameterizer", python::no_init)
 		.def(python::init<>(python::arg("self")))
 		.def(python::init<const ForceField::MMFF94ElectrostaticInteractionParameterizer&>((python::arg("self"), python::arg("parameterizer"))))
-		.def(python::init<const Chem::MolecularGraph&, ForceField::MMFF94ElectrostaticInteractionData&>(
-				 (python::arg("self"), python::arg("molgraph"), python::arg("ia_data"))))
+		.def(python::init<const Chem::MolecularGraph&, ForceField::MMFF94ElectrostaticInteractionData&, bool>(
+				 (python::arg("self"), python::arg("molgraph"), python::arg("ia_data"), python::arg("strict"))))
 		.def(CDPLPythonBase::ObjectIdentityCheckVisitor<ForceField::MMFF94ElectrostaticInteractionParameterizer>())	
 		.def("setFilterFunction", &ForceField::MMFF94ElectrostaticInteractionParameterizer::setFilterFunction, 
 			 (python::arg("self"), python::arg("func"))) 
@@ -59,5 +59,5 @@ void CDPLPythonForceField::exportMMFF94ElectrostaticInteractionParameterizer()
 		.def("assign", CDPLPythonBase::copyAssOp(&ForceField::MMFF94ElectrostaticInteractionParameterizer::operator=),
 			 (python::arg("self"), python::arg("parameterizer")), python::return_self<>())
 		.def("parameterize", &ForceField::MMFF94ElectrostaticInteractionParameterizer::parameterize, 
-			 (python::arg("self"), python::arg("molgraph"), python::arg("ia_data")));
+			 (python::arg("self"), python::arg("molgraph"), python::arg("ia_data"), python::arg("strict")));
 }

@@ -97,11 +97,12 @@ namespace
 
 
 ForceField::MMFF94AngleBendingInteractionParameterizer::MMFF94AngleBendingInteractionParameterizer(const Chem::MolecularGraph& molgraph, 
-																								   MMFF94AngleBendingInteractionData& ia_data):
+																								   MMFF94AngleBendingInteractionData& ia_data,
+																								   bool strict):
 	filterFunc(), atomTypeFunc(&getMMFF94NumericType), bondTypeIdxFunc(&getMMFF94TypeIndex), paramTable(MMFF94AngleBendingParameterTable::get()),
 	typePropTable(MMFF94AtomTypePropertyTable::get()), paramTypeMap(MMFF94PrimaryToParameterAtomTypeMap::get())
 {
-    parameterize(molgraph, ia_data);
+    parameterize(molgraph, ia_data, strict);
 }
 
 ForceField::MMFF94AngleBendingInteractionParameterizer::MMFF94AngleBendingInteractionParameterizer():
@@ -128,7 +129,7 @@ void ForceField::MMFF94AngleBendingInteractionParameterizer::setBondTypeIndexFun
 	bsParameterizer.setBondTypeIndexFunction(func);
 }  
 
-void ForceField::MMFF94AngleBendingInteractionParameterizer::setAromaticRingSetFunction(const MMFF94AromaticRingSetFunction& func)
+void ForceField::MMFF94AngleBendingInteractionParameterizer::setAromaticRingSetFunction(const MMFF94RingSetFunction& func)
 {
 	bsParameterizer.setAromaticRingSetFunction(func);
 }
@@ -161,7 +162,7 @@ void ForceField::MMFF94AngleBendingInteractionParameterizer::setParameterAtomTyp
 }
 
 void ForceField::MMFF94AngleBendingInteractionParameterizer::parameterize(const Chem::MolecularGraph& molgraph, 
-																		  MMFF94AngleBendingInteractionData& ia_data)
+																		  MMFF94AngleBendingInteractionData& ia_data, bool strict)
 {
 	using namespace Chem;
 
@@ -192,7 +193,7 @@ void ForceField::MMFF94AngleBendingInteractionParameterizer::parameterize(const 
 				bool linear = false;
 
 				getParameters(molgraph, term_atom1, ctr_atom, term_atom2, term_atom1_bnd, *nbrBonds[k], 
-							  angle_type_idx, linear, force_const, ref_angle);
+							  angle_type_idx, linear, force_const, ref_angle, strict);
 
 				ia_data.addElement(MMFF94AngleBendingInteraction(term_atom1_idx, i, molgraph.getAtomIndex(term_atom2), 
 																 angle_type_idx, linear, force_const, ref_angle));
@@ -203,7 +204,7 @@ void ForceField::MMFF94AngleBendingInteractionParameterizer::parameterize(const 
 
 void ForceField::MMFF94AngleBendingInteractionParameterizer::getParameters(const Chem::MolecularGraph& molgraph, const Chem::Atom& term_atom1, const Chem::Atom& ctr_atom, 
 																		   const Chem::Atom& term_atom2, const Chem::Bond& term_atom1_bnd, const Chem::Bond& term_atom2_bnd,
-																		   unsigned int& angle_type_idx, bool& linear, double& force_const, double& ref_angle) const
+																		   unsigned int& angle_type_idx, bool& linear, double& force_const, double& ref_angle, bool strict) const
 {
 	typedef MMFF94AngleBendingParameterTable::Entry ParamEntry;
 	typedef MMFF94AtomTypePropertyTable::Entry AtomTypePropEntry;
@@ -330,8 +331,8 @@ void ForceField::MMFF94AngleBendingInteractionParameterizer::getParameters(const
     double r0JK = 0.0;
 	unsigned int tmp = 0;
 
-	bsParameterizer.getParameters(molgraph, term_atom1_bnd, tmp, force_const, r0IJ);
-	bsParameterizer.getParameters(molgraph, term_atom2_bnd, tmp, force_const, r0JK);
+	bsParameterizer.getParameters(molgraph, term_atom1_bnd, tmp, force_const, r0IJ, strict);
+	bsParameterizer.getParameters(molgraph, term_atom2_bnd, tmp, force_const, r0JK, strict);
 
     double d = (r0IJ - r0JK) * (r0IJ - r0JK) / ((r0IJ + r0JK) * (r0IJ + r0JK));
 	double ref_ang_rad = M_PI * ref_angle / 180.0;

@@ -91,53 +91,12 @@ namespace
 				case AtomType::N:
 				case AtomType::O:
 				case AtomType::S:
-				case AtomType::Se:
 					return true;
 			}
 		}
 
 		return false;
 	}
-
- 	bool hasSingleBondedRingHetAtomNbr(const Chem::Atom& atom, const Chem::MolecularGraph& molgraph, const Chem::Bond& x_bond)
-    {
-		using namespace Chem;
-
-		Atom::ConstBondIterator b_it = atom.getBondsBegin();
-
-		for (Atom::ConstAtomIterator a_it = atom.getAtomsBegin(), a_end = atom.getAtomsEnd(); a_it != a_end; ++a_it, ++b_it) {
-			const Bond& nbr_bond = *b_it;
-
-			if (&nbr_bond == &x_bond)
-				continue;
-
-			if (!molgraph.containsBond(nbr_bond))
-				continue;
-
-			const Atom& nbr_atom = *a_it;
-
-			if (!molgraph.containsAtom(nbr_atom))
-				continue;
-
-			if (!getRingFlag(nbr_atom))
-				continue;
-
-			if (getOrder(nbr_bond) != 1)
-				continue;
-
-			switch (getType(nbr_atom)) {
-
-				case AtomType::N:
-				case AtomType::O:
-				case AtomType::S:
-				case AtomType::Se:
-				case AtomType::P:
-					return true;
-			}
-		}
-
-		return false;
-    }
 }
 
 bool ConfGen::isFragmentLinkBond(const Chem::Bond& bond, const Chem::MolecularGraph& molgraph)
@@ -164,28 +123,17 @@ bool ConfGen::isFragmentLinkBond(const Chem::Bond& bond, const Chem::MolecularGr
 	
 	std::size_t order = getOrder(bond);
 
-    if (getRingFlag(atom1)) {
-		if (getRingFlag(atom2))
-			return true;
-
-		return (order != 1 || atom1_type == AtomType::C || atom2_type != AtomType::C || !isLonePairAcceptorGroupCenter(atom2, molgraph, bond));
-	}
-
-    if (getRingFlag(atom2))
-		return (order != 1 || atom2_type == AtomType::C || atom1_type != AtomType::C || !isLonePairAcceptorGroupCenter(atom1, molgraph, bond));
+    if (getRingFlag(atom1) || getRingFlag(atom2))
+		return true;
 
 	if (order != 1)
 		return false;
 
     if (atom1_type == AtomType::C) {
-		if (atom2_type == AtomType::C)  
-			return ((isLonePairAcceptorGroupCenter(atom1, molgraph, bond) && hasSingleBondedRingHetAtomNbr(atom1, molgraph, bond)) ||
-					(isLonePairAcceptorGroupCenter(atom2, molgraph, bond) && hasSingleBondedRingHetAtomNbr(atom2, molgraph, bond)));
-
-		else if (!isSplitHeteroAtom(atom2_type))
+		if (!isSplitHeteroAtom(atom2_type))
 			return false;
 
-		return !isLonePairAcceptorGroupCenter(atom1, molgraph, bond);
+		return (!isLonePairAcceptorGroupCenter(atom1, molgraph, bond) && !isLonePairAcceptorGroupCenter(atom2, molgraph, bond));
     }
 
 	if (atom2_type != AtomType::C)  
@@ -194,7 +142,7 @@ bool ConfGen::isFragmentLinkBond(const Chem::Bond& bond, const Chem::MolecularGr
 	if (!isSplitHeteroAtom(atom1_type))
 		return false;
 
-	return !isLonePairAcceptorGroupCenter(atom2, molgraph, bond);
+	return (!isLonePairAcceptorGroupCenter(atom1, molgraph, bond) && !isLonePairAcceptorGroupCenter(atom2, molgraph, bond));
 }
 
 bool ConfGen::isRotatableBond(const Chem::Bond& bond, const Chem::MolecularGraph& molgraph, bool het_h_rotors)

@@ -81,8 +81,9 @@ namespace CDPL
 			/**
 			 * \brief Constructs a \c %FragmentLibraryEntry instance that contains the relevant atoms and bonds of the molecular graph \a molgraph.
 			 * \param molgraph The molecular graph for which to generate the fragments.
+			 * \param parent The parent molecular graph the fragment is coming from.
 			 */
-			FragmentLibraryEntry(const Chem::MolecularGraph& molgraph);
+			FragmentLibraryEntry(const Chem::MolecularGraph& molgraph, const Chem::MolecularGraph& parent);
 		
 			FragmentLibraryEntry(const FragmentLibraryEntry& entry);
 
@@ -140,12 +141,12 @@ namespace CDPL
 
 			FragmentLibraryEntry& operator=(const FragmentLibraryEntry& entry);
 
-			void create(const Chem::MolecularGraph& molgraph);
+			void create(const Chem::MolecularGraph& molgraph, const Chem::MolecularGraph& parent);
 
 			const AtomMapping& getAtomMapping() const;
 
 		  private:
-			void copyAtoms(const Chem::MolecularGraph& molgraph);
+			void copyAtoms(const Chem::MolecularGraph& molgraph, const Chem::MolecularGraph& parent);
 			bool copyBonds(const Chem::MolecularGraph& molgraph);
 
 			void fixStereoDescriptors(const Chem::MolecularGraph& molgraph);

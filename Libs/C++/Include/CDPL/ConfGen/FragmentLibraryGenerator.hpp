@@ -77,7 +77,7 @@ namespace CDPL
 
 			const CallbackFunction& getTimeoutCallback() const;
 
-			unsigned int process(const Chem::MolecularGraph& frag);
+			unsigned int process(const Chem::MolecularGraph& frag, const Chem::MolecularGraph& parent);
 	
 			std::size_t getNumGeneratedConformers() const;
 
@@ -88,7 +88,7 @@ namespace CDPL
 
 			FragmentLibraryGenerator& operator=(const FragmentLibraryGenerator&);
 
-			Chem::Molecule::SharedPointer addNewLibraryEntry(const Chem::MolecularGraph& frag);
+			Chem::Molecule::SharedPointer addNewLibraryEntry(const Chem::MolecularGraph& frag, const Chem::MolecularGraph& parent);
 
 			void removeNewLibraryEntry() const;
 

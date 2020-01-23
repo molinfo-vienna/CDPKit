@@ -64,6 +64,14 @@ void CDPLPythonConfGen::exportStructureGeneratorSettings()
 			 (python::arg("self"), python::arg("strict")))
 		.def("strictForceFieldParameterization", GetBoolFunc(&ConfGen::StructureGeneratorSettings::strictForceFieldParameterization), 
 			 python::arg("self"))
+		.def("setDielectricConstant", &ConfGen::StructureGeneratorSettings::setDielectricConstant, 
+			 (python::arg("self"), python::arg("de_const")))
+		.def("getDielectricConstant", &ConfGen::StructureGeneratorSettings::getDielectricConstant, 
+			 python::arg("self"))
+		.def("setDistanceExponent", &ConfGen::StructureGeneratorSettings::setDistanceExponent, 
+			 (python::arg("self"), python::arg("dist_expo")))
+		.def("getDistanceExponent", &ConfGen::StructureGeneratorSettings::getDistanceExponent, 
+			 python::arg("self"))
 		.def("setMaxNumRefinementIterations", &ConfGen::StructureGeneratorSettings::setMaxNumRefinementIterations, 
 			 (python::arg("self"), python::arg("max_num")))
 		.def("getMaxNumRefinementIterations", &ConfGen::StructureGeneratorSettings::getMaxNumRefinementIterations, 
@@ -89,6 +97,10 @@ void CDPLPythonConfGen::exportStructureGeneratorSettings()
 					  &ConfGen::StructureGeneratorSettings::setForceFieldType)
 		.add_property("strictForceFieldParam", GetBoolFunc(&ConfGen::StructureGeneratorSettings::strictForceFieldParameterization), 
 					  SetBoolFunc(&ConfGen::StructureGeneratorSettings::strictForceFieldParameterization))
+		.add_property("dielectricConstant", &ConfGen::StructureGeneratorSettings::getDielectricConstant, 
+					  &ConfGen::StructureGeneratorSettings::setDielectricConstant)
+		.add_property("distanceExponent", &ConfGen::StructureGeneratorSettings::getDistanceExponent, 
+					  &ConfGen::StructureGeneratorSettings::setDistanceExponent)
 		.add_property("maxNumRefinementIterations", &ConfGen::StructureGeneratorSettings::getMaxNumRefinementIterations, 
 					  &ConfGen::StructureGeneratorSettings::setMaxNumRefinementIterations)
 		.add_property("refinementStopGradient", &ConfGen::StructureGeneratorSettings::getRefinementStopGradient,

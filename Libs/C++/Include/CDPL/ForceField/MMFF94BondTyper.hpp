@@ -64,7 +64,7 @@ namespace CDPL
 
 			void setAtomTypePropertyTable(const MMFF94AtomTypePropertyTable::SharedPointer& table);
 
-			void setAromaticRingSetFunction(const MMFF94AromaticRingSetFunction& func);
+			void setAromaticRingSetFunction(const MMFF94RingSetFunction& func);
 
 			void setAtomTypeFunction(const MMFF94NumericAtomTypeFunction& func);
 	
@@ -87,7 +87,7 @@ namespace CDPL
 			typedef MMFF94AtomTypePropertyTable::Entry TypePropertyEntry;
 
 			MMFF94AtomTypePropertyTable::SharedPointer atomTypePropTable;
-			MMFF94AromaticRingSetFunction              aromRingSetFunc;
+			MMFF94RingSetFunction                      aromRingSetFunc;
 			MMFF94NumericAtomTypeFunction              atomTypeFunc;
 		};
     

@@ -58,13 +58,17 @@ namespace
  
     ForceField::MMFF94OutOfPlaneBendingParameterTable::SharedPointer builtinDynTable(new ForceField::MMFF94OutOfPlaneBendingParameterTable());
     ForceField::MMFF94OutOfPlaneBendingParameterTable::SharedPointer builtinStatTable(new ForceField::MMFF94OutOfPlaneBendingParameterTable());
+    ForceField::MMFF94OutOfPlaneBendingParameterTable::SharedPointer builtinStatExtTable(new ForceField::MMFF94OutOfPlaneBendingParameterTable());
 
  	boost::once_flag initBuiltinTablesFlag = BOOST_ONCE_INIT;
 
 	void initBuiltinTables() 
 	{ 
-		builtinDynTable->loadDefaults(false);
-		builtinStatTable->loadDefaults(true);
+		using namespace ForceField;
+
+		builtinDynTable->loadDefaults(MMFF94ParameterSet::DYNAMIC);
+		builtinStatTable->loadDefaults(MMFF94ParameterSet::STATIC);
+		builtinStatExtTable->loadDefaults(MMFF94ParameterSet::STATIC_EXT);
 	}
 
 	Base::uint32 lookupKey(Base::uint32 term_atom1_type, Base::uint32 ctr_atom_type, Base::uint32 term_atom2_type, Base::uint32 oop_atom_type)
@@ -80,8 +84,9 @@ namespace
 }
 
 
-ForceField::MMFF94OutOfPlaneBendingParameterTable::SharedPointer ForceField::MMFF94OutOfPlaneBendingParameterTable::defaultDynTable  = builtinDynTable;
-ForceField::MMFF94OutOfPlaneBendingParameterTable::SharedPointer ForceField::MMFF94OutOfPlaneBendingParameterTable::defaultStatTable = builtinStatTable;
+ForceField::MMFF94OutOfPlaneBendingParameterTable::SharedPointer ForceField::MMFF94OutOfPlaneBendingParameterTable::defaultDynTable     = builtinDynTable;
+ForceField::MMFF94OutOfPlaneBendingParameterTable::SharedPointer ForceField::MMFF94OutOfPlaneBendingParameterTable::defaultStatTable    = builtinStatTable;
+ForceField::MMFF94OutOfPlaneBendingParameterTable::SharedPointer ForceField::MMFF94OutOfPlaneBendingParameterTable::defaultStatExtTable = builtinStatExtTable;
 
 
 ForceField::MMFF94OutOfPlaneBendingParameterTable::Entry::Entry():
@@ -239,6 +244,19 @@ void ForceField::MMFF94OutOfPlaneBendingParameterTable::loadDefaults(unsigned in
 
 		load(is);
 
+	} else	if (param_set == MMFF94ParameterSet::STATIC_EXT) {
+#if defined(HAVE_BOOST_IOSTREAMS)
+
+		boost::iostreams::stream<boost::iostreams::array_source> is(MMFF94ParameterData::STATIC_EXT_OUT_OF_PLANE_BENDING_PARAMETERS, 
+																	std::strlen(MMFF94ParameterData::STATIC_EXT_OUT_OF_PLANE_BENDING_PARAMETERS));
+#else // defined(HAVE_BOOST_IOSTREAMS)
+
+		std::istringstream is(std::string(MMFF94ParameterData::STATIC_OUT_OF_PLANE_BENDING_PARAMETERS));
+
+#endif // defined(HAVE_BOOST_IOSTREAMS)
+
+		load(is);
+
 	} else {
 #if defined(HAVE_BOOST_IOSTREAMS)
 
@@ -256,15 +274,36 @@ void ForceField::MMFF94OutOfPlaneBendingParameterTable::loadDefaults(unsigned in
 
 void ForceField::MMFF94OutOfPlaneBendingParameterTable::set(const SharedPointer& table, unsigned int param_set)
 {	
-	if (param_set == MMFF94ParameterSet::STATIC) 
-		defaultStatTable = (!table ? builtinStatTable : table);
-	else
-		defaultDynTable = (!table ? builtinDynTable : table);
+	switch (param_set) {
+		
+		case MMFF94ParameterSet::STATIC:
+			defaultStatTable = (!table ? builtinStatTable : table);
+			return;
+
+		case MMFF94ParameterSet::STATIC_EXT:
+			defaultStatExtTable = (!table ? builtinStatExtTable : table);
+			return;
+
+		default:
+			defaultDynTable = (!table ? builtinDynTable : table);
+	}
 }
 
 const ForceField::MMFF94OutOfPlaneBendingParameterTable::SharedPointer& ForceField::MMFF94OutOfPlaneBendingParameterTable::get(unsigned int param_set)
 {
  	boost::call_once(&initBuiltinTables, initBuiltinTablesFlag);
 
-	return (param_set == MMFF94ParameterSet::STATIC ? defaultStatTable : defaultDynTable);
+	switch (param_set) {
+		
+		case MMFF94ParameterSet::STATIC:
+			return defaultStatTable;
+
+		case MMFF94ParameterSet::STATIC_EXT:
+			return defaultStatExtTable;
+
+		default:
+			break;
+	}
+
+	return defaultDynTable;
 }

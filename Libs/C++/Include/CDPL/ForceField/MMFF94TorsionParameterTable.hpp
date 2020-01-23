@@ -147,6 +147,7 @@ namespace CDPL
 		  private:
 			static SharedPointer defaultDynTable;
 			static SharedPointer defaultStatTable;
+			static SharedPointer defaultStatExtTable;
 			DataStorage          entries;
 		};
     

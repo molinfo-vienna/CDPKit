@@ -93,7 +93,7 @@ namespace
 ConfGen::ConformerGeneratorImpl::ConformerGeneratorImpl():
 	confDataCache(MAX_CONF_DATA_CACHE_SIZE), fragConfDataCache(MAX_FRAG_CONF_DATA_CACHE_SIZE),
 	confCombDataCache(MAX_FRAG_CONF_COMBINATION_CACHE_SIZE), settings(ConformerGeneratorSettings::DEFAULT),
-	energyMinimizer(boost::ref(mmff94EnergyCalc), boost::ref(mmff94GradientCalc))
+	energyMinimizer(boost::ref(mmff94GradientCalc), boost::ref(mmff94GradientCalc))
 {
 	fragAssembler.setTimeoutCallback(boost::bind(&ConformerGeneratorImpl::timedout, this));
 	fragAssembler.setBondLengthFunction(boost::bind(&ConformerGeneratorImpl::getMMFF94BondLength, this, _1, _2));
@@ -135,14 +135,14 @@ void ConfGen::ConformerGeneratorImpl::addFragmentLibrary(const FragmentLibrary::
 	fragAssembler.addFragmentLibrary(lib);
 }
 
-void ConfGen::ConformerGeneratorImpl::setTorsionLibrary(const TorsionLibrary::SharedPointer& lib)
+void ConfGen::ConformerGeneratorImpl::clearTorsionLibraries()
 {
-	torDriver.setTorsionLibrary(lib);
+	torDriver.clearTorsionLibraries();
 }
 
-const ConfGen::TorsionLibrary::SharedPointer& ConfGen::ConformerGeneratorImpl::getTorsionLibrary() const
+void ConfGen::ConformerGeneratorImpl::addTorsionLibrary(const TorsionLibrary::SharedPointer& lib)
 {
-	return torDriver.getTorsionLibrary();
+	torDriver.addTorsionLibrary(lib);
 }
 
 void ConfGen::ConformerGeneratorImpl::setAbortCallback(const CallbackFunction& func)
@@ -439,8 +439,6 @@ unsigned int ConfGen::ConformerGeneratorImpl::generateConformersStochastic(bool 
 
 	hCoordsGen.setup(*molGraph);
 
-	mmff94EnergyCalc.setup(mmff94Data);
-
 	mmff94GradientCalc.setup(mmff94Data, num_atoms);
 	mmff94GradientCalc.resetFixedAtomMask();
 
@@ -626,21 +624,18 @@ ConfGen::ConformerData::SharedPointer ConfGen::ConformerGeneratorImpl::getInputC
 		}
 	} 
 
-	mmff94EnergyCalc.setup(mmff94Data);
+	mmff94GradientCalc.setup(mmff94Data, num_atoms);
 
 	if (!coords_compl) {
 		mmff94GradientCalc.setFixedAtomMask(coreAtomMask);
-		mmff94GradientCalc.setup(mmff94Data, num_atoms);
-
 		energyGradient.resize(num_atoms);
-
 		hCoordsGen.setup(*molGraph);
 
 		if (!generateHydrogenCoordsAndMinimize(*ipt_coords))
 			return ConformerData::SharedPointer();
 
 	} else
-		ipt_coords->setEnergy(mmff94EnergyCalc(ipt_coords_data));
+		ipt_coords->setEnergy(mmff94GradientCalc(ipt_coords_data));
 
 	return ipt_coords;
 }
@@ -687,7 +682,8 @@ bool ConfGen::ConformerGeneratorImpl::setupMMFF94Parameters()
 {
 	try {
 		if (parameterizeMMFF94Interactions(*molGraph, mmff94Parameterizer, mmff94Data, settings.getForceFieldType(), 
-										   settings.strictForceFieldParameterization()) == ReturnCode::SUCCESS) {
+										   settings.strictForceFieldParameterization(), settings.getDielectricConstant(),
+										   settings.getDistanceExponent()) == ReturnCode::SUCCESS) {
 
 			mmff94InteractionMask.setup(mmff94Data);
 			return true;

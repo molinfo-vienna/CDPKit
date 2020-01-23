@@ -93,6 +93,38 @@ namespace
 
 		return 0;
 	}
+
+	bool isLonePairAcceptorGroupCenter(const Chem::Atom& atom, const Chem::MolecularGraph& molgraph)
+	{
+		using namespace Chem;
+
+		Atom::ConstBondIterator b_it = atom.getBondsBegin();
+
+		for (Atom::ConstAtomIterator a_it = atom.getAtomsBegin(), a_end = atom.getAtomsEnd(); a_it != a_end; ++a_it, ++b_it) {
+			const Bond& nbr_bond = *b_it;
+		
+			if (!molgraph.containsBond(nbr_bond))
+				continue;
+
+			const Atom& nbr_atom = *a_it;
+
+			if (!molgraph.containsAtom(nbr_atom))
+				continue;
+ 
+			if (getOrder(nbr_bond) <= 1)
+				continue;
+
+			switch (getType(nbr_atom)) {
+
+				case AtomType::N:
+				case AtomType::O:
+				case AtomType::S:
+					return true;
+			}
+		}
+
+		return false;
+	}
 }
 
 
@@ -110,11 +142,11 @@ ConfGen::FragmentLibraryEntry::FragmentLibraryEntry(const FragmentLibraryEntry& 
 	canonNumGen.setHydrogenCountFunction(boost::bind(&Chem::getExplicitAtomCount, _1, Chem::AtomType::H));
 }
 
-ConfGen::FragmentLibraryEntry::FragmentLibraryEntry(const Chem::MolecularGraph& molgraph)
+ConfGen::FragmentLibraryEntry::FragmentLibraryEntry(const Chem::MolecularGraph& molgraph, const Chem::MolecularGraph& parent)
 {
 	canonNumGen.setHydrogenCountFunction(boost::bind(&Chem::getExplicitAtomCount, _1, Chem::AtomType::H));
 
-    create(molgraph);
+    create(molgraph, parent);
 }
 
 void ConfGen::FragmentLibraryEntry::clear()
@@ -262,10 +294,10 @@ ConfGen::FragmentLibraryEntry& ConfGen::FragmentLibraryEntry::operator=(const Fr
 	return *this;
 }
 	
-void ConfGen::FragmentLibraryEntry::create(const Chem::MolecularGraph& molgraph)
+void ConfGen::FragmentLibraryEntry::create(const Chem::MolecularGraph& molgraph, const Chem::MolecularGraph& parent)
 {
     clear();
-	copyAtoms(molgraph);
+	copyAtoms(molgraph, parent);
 
 	bool flex_ring_rsys = copyBonds(molgraph);
 
@@ -280,7 +312,7 @@ const ConfGen::FragmentLibraryEntry::AtomMapping& ConfGen::FragmentLibraryEntry:
 	return atomMapping;
 }
 
-void ConfGen::FragmentLibraryEntry::copyAtoms(const Chem::MolecularGraph& molgraph)
+void ConfGen::FragmentLibraryEntry::copyAtoms(const Chem::MolecularGraph& molgraph, const Chem::MolecularGraph& parent)
 {
     using namespace Chem;
  
@@ -361,14 +393,29 @@ void ConfGen::FragmentLibraryEntry::copyAtoms(const Chem::MolecularGraph& molgra
 				setUnpairedElectronCount(new_atom, 1);
 
 		} else if (hyb_state == HybridizationState::SP2) {
-			setFormalCharge(new_atom, 0);
-
 			std::size_t exp_val = calcExplicitValence(atom, molgraph);
 
-			if (exp_val == 1)
+			if (exp_val == 1) {
+				if (atom_type == AtomType::C && isLonePairAcceptorGroupCenter(atom, parent) && 
+					getExplicitAtomCount(atom, molgraph, AtomType::N, true) == 1) {
+
+					setFormalCharge(new_atom, 1);
+					continue;
+				}
+
 				setUnpairedElectronCount(new_atom, 1);
-			else if (exp_val == 2)
+
+			} else if (exp_val == 2) 
 				setUnpairedElectronCount(new_atom, 0);
+			
+			setFormalCharge(new_atom, 0);
+
+		} else if (atom_type == AtomType::S && hyb_state == HybridizationState::SP3 && 
+				   calcExplicitValence(atom, molgraph) == 1 && getExplicitAtomCount(atom, molgraph, AtomType::N, true) == 1 &&
+				   isLonePairAcceptorGroupCenter(atom, parent)) {
+			
+			setFormalCharge(new_atom, 0);
+			setImplicitHydrogenCount(new_atom, 3);
 		}
 	}
 }
@@ -483,7 +530,7 @@ void ConfGen::FragmentLibraryEntry::hydrogenize()
 		Atom& atom = molecule.getAtom(i);
 
 		if (!(atom.getNumBonds() == 1 && getAromaticityFlag(atom))) {
-			std::size_t impl_h_cnt = calcImplicitHydrogenCount(atom, molecule);
+			std::size_t impl_h_cnt = (hasImplicitHydrogenCount(atom) ? getImplicitHydrogenCount(atom) : calcImplicitHydrogenCount(atom, molecule));
 
 			for (std::size_t j = 0; j < impl_h_cnt; j++) {
 				Atom& new_h_atom = molecule.addAtom();

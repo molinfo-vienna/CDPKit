@@ -42,6 +42,10 @@ void CDPLPythonForceField::exportMMFF94AromaticSSSRSubset()
 		.def(python::init<>(python::arg("self")))
 		.def(python::init<const Chem::MolecularGraph&>((python::arg("self"), python::arg("molgraph")))
 			 [python::with_custodian_and_ward<1, 2>()])
-		.def("extract", &ForceField::MMFF94AromaticSSSRSubset::extract, (python::arg("self"), python::arg("molgraph")), 
+		.def("extract", static_cast<void (ForceField::MMFF94AromaticSSSRSubset::*)(const Chem::MolecularGraph&)>
+			 (&ForceField::MMFF94AromaticSSSRSubset::extract), (python::arg("self"), python::arg("molgraph")), 
+			 python::with_custodian_and_ward<1, 2>())
+		.def("extract", static_cast<void (ForceField::MMFF94AromaticSSSRSubset::*)(const Chem::MolecularGraph&, const Chem::FragmentList&)>
+			 (&ForceField::MMFF94AromaticSSSRSubset::extract), (python::arg("self"), python::arg("molgraph"), python::arg("sssr")), 
 			 python::with_custodian_and_ward<1, 2>());
 }

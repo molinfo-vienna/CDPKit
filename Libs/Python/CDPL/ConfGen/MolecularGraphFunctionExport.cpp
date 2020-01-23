@@ -50,6 +50,6 @@ void CDPLPythonConfGen::exportMolecularGraphFunctions()
 				 python::arg("reset") = true));
 	python::def("perceiveFragmentType", &ConfGen::perceiveFragmentType, python::arg("molgraph"));
 	python::def("parameterizeMMFF94Interactions", &ConfGen::parameterizeMMFF94Interactions, 
-				(python::arg("molgraph"), python::arg("parameterizer"), python::arg("param_data"), 
-				 python::arg("ff_type"), python::arg("strict")));
+				(python::arg("molgraph"), python::arg("parameterizer"), python::arg("param_data"), python::arg("ff_type"), 
+				 python::arg("strict"), python::arg("estat_de_const"), python::arg("estat_dist_expo")));
 }

@@ -86,7 +86,7 @@ namespace CDPL
 
 			void setAtomTypePropertyTable(const MMFF94AtomTypePropertyTable::SharedPointer& table);
 
-			void setAromaticRingSetFunction(const MMFF94AromaticRingSetFunction& func);
+			void setAromaticRingSetFunction(const MMFF94RingSetFunction& func);
 		
 			void perceiveTypes(const Chem::MolecularGraph& molgraph, Util::SArray& sym_types, Util::UIArray& num_types, bool strict = true);
 
@@ -119,7 +119,7 @@ namespace CDPL
 			MMFF94HeavyToHydrogenAtomTypeMap::SharedPointer      hydTypeMap;
 			MMFF94SymbolicToNumericAtomTypeMap::SharedPointer    numTypeMap;
 			MMFF94AtomTypePropertyTable::SharedPointer           atomTypePropTable;
-			MMFF94AromaticRingSetFunction                        aromRingSetFunc;
+			MMFF94RingSetFunction                                aromRingSetFunc;
 			const Chem::MolecularGraph*                          molGraph;
 			Util::SArray*                                        symTypes;
 			RingList                                             aromRings;

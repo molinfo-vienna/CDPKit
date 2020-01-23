@@ -81,9 +81,9 @@ namespace CDPL
 
 			void addFragmentLibrary(const FragmentLibrary::SharedPointer& lib);
 
-			void setTorsionLibrary(const TorsionLibrary::SharedPointer& lib);
+			void clearTorsionLibraries();
 
-			const TorsionLibrary::SharedPointer& getTorsionLibrary() const;
+			void addTorsionLibrary(const TorsionLibrary::SharedPointer& lib);
 
 			void setAbortCallback(const CallbackFunction& func);
 

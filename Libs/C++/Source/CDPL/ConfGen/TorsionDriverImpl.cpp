@@ -100,9 +100,10 @@ namespace
 
 
 ConfGen::TorsionDriverImpl::TorsionDriverImpl(): 
-	settings(TorsionDriverSettings::DEFAULT), torLib(TorsionLibrary::get()), 
-	fragTree(MAX_CONF_DATA_CACHE_SIZE)
+	settings(TorsionDriverSettings::DEFAULT), fragTree(MAX_CONF_DATA_CACHE_SIZE)
 {
+	torLibs.push_back(TorsionLibrary::get());
+
 	torRuleMatcher.findUniqueMappingsOnly(true);
 	torRuleMatcher.findAllRuleMappings(false);
 	torRuleMatcher.stopAtFirstMatchingRule(true);
@@ -116,15 +117,15 @@ ConfGen::TorsionDriverSettings& ConfGen::TorsionDriverImpl::getSettings()
 {
 	return settings;
 }
-			
-void ConfGen::TorsionDriverImpl::setTorsionLibrary(const TorsionLibrary::SharedPointer& lib)
+
+void ConfGen::TorsionDriverImpl::clearTorsionLibraries()
 {
-	torLib = lib;
+	torLibs.clear();
 }
 
-const ConfGen::TorsionLibrary::SharedPointer& ConfGen::TorsionDriverImpl::getTorsionLibrary() const
+void ConfGen::TorsionDriverImpl::addTorsionLibrary(const TorsionLibrary::SharedPointer& lib)
 {
-	return torLib;
+	torLibs.push_back(lib);
 }
 
 void ConfGen::TorsionDriverImpl::setup(const Chem::MolecularGraph& molgraph)
@@ -185,7 +186,8 @@ bool ConfGen::TorsionDriverImpl::setMMFF94Parameters()
 
 	try {
 		if (parameterizeMMFF94Interactions(molgraph, *mmff94Parameterizer, *mmff94Data, settings.getForceFieldType(),
-										   settings.strictForceFieldParameterization()) != ReturnCode::SUCCESS)
+										   settings.strictForceFieldParameterization(), settings.getDielectricConstant(),
+										   settings.getDistanceExponent()) != ReturnCode::SUCCESS)
 			return false;
 
 	} catch (const Error&) {
@@ -396,11 +398,13 @@ const ConfGen::TorsionRuleMatch* ConfGen::TorsionDriverImpl::getTorsionRuleAngle
 	const MolecularGraph& molgraph = *fragTree.getMolecularGraph();
 	const TorsionRuleMatch* match = 0;
 
-	if (torLib) {
-		torRuleMatcher.setTorsionLibrary(torLib);
+	for (TorsionLibraryList::const_reverse_iterator it = torLibs.rbegin(), end = torLibs.rend(); it != end; ++it) {
+		torRuleMatcher.setTorsionLibrary(*it);
 
-		if (torRuleMatcher.findMatches(bond, molgraph, false))
+		if (torRuleMatcher.findMatches(bond, molgraph, false)) {
 			match = &torRuleMatcher.getMatch(0);
+			break;
+		}
 	} 
 
 	if (!match) {

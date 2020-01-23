@@ -71,7 +71,8 @@ namespace CDPL
 			MMFF94OutOfPlaneBendingInteractionParameterizer();
 
 			MMFF94OutOfPlaneBendingInteractionParameterizer(const Chem::MolecularGraph& molgraph, 
-															MMFF94OutOfPlaneBendingInteractionData& ia_data);
+															MMFF94OutOfPlaneBendingInteractionData& ia_data,
+															bool strict);
 
 			void setFilterFunction(const InteractionFilterFunction4& func); 
 
@@ -83,7 +84,7 @@ namespace CDPL
 
 			void setParameterAtomTypeMap(const MMFF94PrimaryToParameterAtomTypeMap::SharedPointer& map);
 
-			void parameterize(const Chem::MolecularGraph& molgraph, MMFF94OutOfPlaneBendingInteractionData& ia_data);
+			void parameterize(const Chem::MolecularGraph& molgraph, MMFF94OutOfPlaneBendingInteractionData& ia_data, bool strict);
 
 		  private:
 			typedef std::vector<const Chem::Atom*> AtomList;

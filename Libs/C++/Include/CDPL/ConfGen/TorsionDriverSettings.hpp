@@ -77,6 +77,14 @@ namespace CDPL
 
 			bool strictForceFieldParameterization() const;
 
+			void setDielectricConstant(double de_const);
+
+			double getDielectricConstant() const;
+
+			void setDistanceExponent(double exponent);
+
+			double getDistanceExponent() const;
+
 		  private:
 			bool         sampleHetAtomHs;
 			bool         sampleTolRanges;
@@ -84,6 +92,8 @@ namespace CDPL
 			double       eWindow;
 			unsigned int forceFieldType;
 			bool         strictParam;
+			double       dielectricConst;
+			double       distExponent;
 		};
 
 		/**

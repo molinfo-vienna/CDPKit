@@ -44,8 +44,10 @@ namespace CDPL
 			extern const char* DEFAULT_STRETCH_BEND_PARAMETERS;
 			extern const char* OUT_OF_PLANE_BENDING_PARAMETERS;
 			extern const char* STATIC_OUT_OF_PLANE_BENDING_PARAMETERS;
+			extern const char* STATIC_EXT_OUT_OF_PLANE_BENDING_PARAMETERS;
 			extern const char* TORSION_PARAMETERS;
 			extern const char* STATIC_TORSION_PARAMETERS;
+			extern const char* STATIC_EXT_TORSION_PARAMETERS; 
 			extern const char* VAN_DER_WAALS_PARAMETERS;
 
 			extern const char* SYMBOLIC_ATOM_TYPE_PATTERNS;

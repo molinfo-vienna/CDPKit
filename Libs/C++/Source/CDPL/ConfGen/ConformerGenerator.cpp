@@ -63,14 +63,14 @@ void ConfGen::ConformerGenerator::addFragmentLibrary(const FragmentLibrary::Shar
 	impl->addFragmentLibrary(lib);
 }
 
-void ConfGen::ConformerGenerator::setTorsionLibrary(const TorsionLibrary::SharedPointer& lib)
+void ConfGen::ConformerGenerator::clearTorsionLibraries()
 {
-	impl->setTorsionLibrary(lib);
+	impl->clearTorsionLibraries();
 }
 
-const ConfGen::TorsionLibrary::SharedPointer& ConfGen::ConformerGenerator::getTorsionLibrary() const
+void ConfGen::ConformerGenerator::addTorsionLibrary(const TorsionLibrary::SharedPointer& lib)
 {
-	return impl->getTorsionLibrary();
+	impl->addTorsionLibrary(lib);
 }
 
 void ConfGen::ConformerGenerator::setAbortCallback(const CallbackFunction& func)

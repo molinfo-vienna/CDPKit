@@ -72,7 +72,7 @@ namespace
 
 ConfGen::FragmentConformerGeneratorImpl::FragmentConformerGeneratorImpl(): 
 	confDataCache(MAX_CONF_DATA_CACHE_SIZE),
-	energyMinimizer(boost::ref(mmff94EnergyCalc), boost::ref(mmff94GradientCalc)),
+	energyMinimizer(boost::ref(mmff94GradientCalc), boost::ref(mmff94GradientCalc)),
 	settings(FragmentConformerGeneratorSettings::DEFAULT)
 {
 	using namespace Chem;
@@ -223,10 +223,10 @@ bool ConfGen::FragmentConformerGeneratorImpl::generateConformerFromInputCoordina
 			return false;
 
 	} else
-		ipt_coords->setEnergy(mmff94EnergyCalc(ipt_coords_data));
+		ipt_coords->setEnergy(mmff94GradientCalc(ipt_coords_data));
 
 	conf_array.push_back(ipt_coords);
-	
+
 	return true;
 }
 
@@ -234,16 +234,15 @@ bool ConfGen::FragmentConformerGeneratorImpl::setupForceField()
 {
 	try {
 		if (parameterizeMMFF94Interactions(*molGraph, mmff94Parameterizer, mmff94Data, settings.getForceFieldType(),
-										   settings.strictForceFieldParameterization()) != ReturnCode::SUCCESS)
+										   settings.strictForceFieldParameterization(), settings.getDielectricConstant(),
+										   settings.getDistanceExponent()) != ReturnCode::SUCCESS)
 			return false;
 
 	} catch (const ForceField::Error&) {
 		return false;
 	}
 
-	mmff94EnergyCalc.setup(mmff94Data);
 	mmff94GradientCalc.setup(mmff94Data, numAtoms);
-
     energyGradient.resize(numAtoms);
 
 	return true;
@@ -265,7 +264,6 @@ unsigned int ConfGen::FragmentConformerGeneratorImpl::generateSingleConformer()
 {
 	if (!settings.preserveInputBondingGeometries() || !generateConformerFromInputCoordinates(outputConfs)) {
 		setupRandomConformerGeneration();
-
 		dgStructureGen.getSettings().setBoxSize(coreAtomMask.count() * 2);
 
 		ConformerData::SharedPointer conf_data = allocConformerData();
@@ -651,7 +649,7 @@ void ConfGen::FragmentConformerGeneratorImpl::getNeighborHydrogens(const Chem::A
 	}
 }
 
-std::size_t ConfGen::FragmentConformerGeneratorImpl::calcNumSmallRingSystemConfSamples() const
+std::size_t ConfGen::FragmentConformerGeneratorImpl::calcNumSmallRingSystemConfSamples()
 {
 	using namespace Chem;
 
@@ -717,4 +715,3 @@ ConfGen::ConformerData::SharedPointer ConfGen::FragmentConformerGeneratorImpl::a
 
 	return conf_data;
 }
-

@@ -295,7 +295,7 @@ unsigned int ConfGen::FragmentAssemblerImpl::getFragmentConformers()
 void ConfGen::FragmentAssemblerImpl::initFragmentLibraryEntry(const Chem::Fragment& frag, FragmentTreeNode* frag_node) 
 {
 	if (fragLibEntry.getNumAtoms() == 0) {
-		fragLibEntry.create(frag);
+		fragLibEntry.create(frag, *fragTree.getMolecularGraph());
 
 		buildFragmentLibraryEntryAtomIndexMap(frag, frag_node);
 	}

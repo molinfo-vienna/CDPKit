@@ -94,12 +94,13 @@ namespace
 
 
 ForceField::MMFF94TorsionInteractionParameterizer::MMFF94TorsionInteractionParameterizer(const Chem::MolecularGraph& molgraph, 
-																						 MMFF94TorsionInteractionData& ia_data):
+																						 MMFF94TorsionInteractionData& ia_data,
+																						 bool strict):
 	filterFunc(), atomTypeFunc(&getMMFF94NumericType), bondTypeIdxFunc(&getMMFF94TypeIndex), 
 	aromRingSetFunc(&getMMFF94AromaticRings), paramTable(MMFF94TorsionParameterTable::get(true)),
 	typePropTable(MMFF94AtomTypePropertyTable::get()), paramTypeMap(MMFF94PrimaryToParameterAtomTypeMap::get())
 {
-    parameterize(molgraph, ia_data);
+    parameterize(molgraph, ia_data, strict);
 }
 
 ForceField::MMFF94TorsionInteractionParameterizer::MMFF94TorsionInteractionParameterizer():
@@ -123,7 +124,7 @@ void ForceField::MMFF94TorsionInteractionParameterizer::setBondTypeIndexFunction
 	bondTypeIdxFunc = func;
 }  
 
-void ForceField::MMFF94TorsionInteractionParameterizer::setAromaticRingSetFunction(const MMFF94AromaticRingSetFunction& func)
+void ForceField::MMFF94TorsionInteractionParameterizer::setAromaticRingSetFunction(const MMFF94RingSetFunction& func)
 {
 	aromRingSetFunc = func;
 }
@@ -144,7 +145,7 @@ void ForceField::MMFF94TorsionInteractionParameterizer::setParameterAtomTypeMap(
 }
 
 void ForceField::MMFF94TorsionInteractionParameterizer::parameterize(const Chem::MolecularGraph& molgraph, 
-																	 MMFF94TorsionInteractionData& ia_data)
+																	 MMFF94TorsionInteractionData& ia_data, bool strict)
 {
 	using namespace Chem;
 
@@ -268,8 +269,9 @@ bool ForceField::MMFF94TorsionInteractionParameterizer::getParameters(const Chem
 		if (!(*param_entry)) {
 			param_entry = &paramTable->getEntry(tor_type_idx, term_atom1_param_types[3], ctr_atom1_type, ctr_atom2_type, term_atom2_param_types[1]);
 
-			if (!(*param_entry))
+			if (!(*param_entry)) {
 				param_entry = &paramTable->getEntry(tor_type_idx, term_atom1_param_types[3], ctr_atom1_type, ctr_atom2_type, term_atom2_param_types[3]);
+			}
 		}
 	}
 	

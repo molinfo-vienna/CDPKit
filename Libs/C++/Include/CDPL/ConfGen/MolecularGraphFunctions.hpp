@@ -75,7 +75,7 @@ namespace CDPL
 		CDPL_CONFGEN_API unsigned int parameterizeMMFF94Interactions(const Chem::MolecularGraph& molgraph, 
 																	 ForceField::MMFF94InteractionParameterizer& parameterizer,
 																	 ForceField::MMFF94InteractionData& param_data, unsigned int ff_type,
-																	 bool strict); 
+																	 bool strict, double estat_de_const, double estat_dist_expo); 
 
 		CDPL_CONFGEN_API void setConformers(Chem::MolecularGraph& molgraph, const ConformerDataArray& conf_array);
 		

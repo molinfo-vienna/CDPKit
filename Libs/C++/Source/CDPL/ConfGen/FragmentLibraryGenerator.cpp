@@ -89,7 +89,7 @@ const ConfGen::CallbackFunction& ConfGen::FragmentLibraryGenerator::getTimeoutCa
 	return fragConfGen.getTimeoutCallback();
 }
 
-unsigned int ConfGen::FragmentLibraryGenerator::process(const Chem::MolecularGraph& frag)
+unsigned int ConfGen::FragmentLibraryGenerator::process(const Chem::MolecularGraph& frag, const Chem::MolecularGraph& parent)
 {
 	using namespace Chem;
 	using namespace ConfGen;
@@ -99,7 +99,7 @@ unsigned int ConfGen::FragmentLibraryGenerator::process(const Chem::MolecularGra
 
 	numGenConfs = 0;
 
-	Molecule::SharedPointer fl_entry = addNewLibraryEntry(frag);
+	Molecule::SharedPointer fl_entry = addNewLibraryEntry(frag, parent);
 
 	if (!fl_entry) 
 		return ReturnCode::FRAGMENT_ALREADY_PROCESSED;
@@ -146,11 +146,11 @@ Base::uint64 ConfGen::FragmentLibraryGenerator::getLibraryEntryHashCode() const
 	return fragLibEntry.getHashCode();
 }
 
-Chem::Molecule::SharedPointer ConfGen::FragmentLibraryGenerator::addNewLibraryEntry(const Chem::MolecularGraph& frag)
+Chem::Molecule::SharedPointer ConfGen::FragmentLibraryGenerator::addNewLibraryEntry(const Chem::MolecularGraph& frag, const Chem::MolecularGraph& parent)
 {
 	using namespace Chem;
 
-	fragLibEntry.create(frag);
+	fragLibEntry.create(frag, parent);
 
 	boost::lock_guard<boost::mutex> lock(fragLib->getMutex());
 

@@ -54,10 +54,10 @@ void CDPLPythonConfGen::exportStructureGenerator()
 			 python::arg("self"))
 		.def("addFragmentLibrary", &ConfGen::StructureGenerator::addFragmentLibrary, 
 			 (python::arg("self"), python::arg("lib")))
-		.def("setTorsionLibrary", &ConfGen::StructureGenerator::setTorsionLibrary, 
+		.def("clearTorsionLibraries", &ConfGen::StructureGenerator::clearTorsionLibraries, 
+			 python::arg("self"))
+		.def("addTorsionLibrary", &ConfGen::StructureGenerator::addTorsionLibrary, 
 			 (python::arg("self"), python::arg("lib")))
-		.def("getTorsionLibrary", &ConfGen::StructureGenerator::getTorsionLibrary, 
-			 python::arg("self"), python::return_value_policy<python::copy_const_reference>())
 		.def("setAbortCallback", &ConfGen::StructureGenerator::setAbortCallback, 
 			 (python::arg("self"), python::arg("func")))
 		.def("getAbortCallback", &ConfGen::StructureGenerator::getAbortCallback, 
@@ -78,10 +78,6 @@ void CDPLPythonConfGen::exportStructureGenerator()
 											python::return_internal_reference<>()))
 		.add_property("coordinates", python::make_function(&ConfGen::StructureGenerator::getCoordinates,
 														   python::return_internal_reference<>()))
-		.add_property("torsionLibrary", 
-					  python::make_function(&ConfGen::StructureGenerator::getTorsionLibrary,
-											python::return_value_policy<python::copy_const_reference>()),
-					  &ConfGen::StructureGenerator::setTorsionLibrary)
 		.add_property("abortCallback", 
 					  python::make_function(&ConfGen::StructureGenerator::getAbortCallback,
 											python::return_internal_reference<>()),

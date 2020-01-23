@@ -46,13 +46,18 @@ ForceField::MMFF94AromaticSSSRSubset::MMFF94AromaticSSSRSubset(const Chem::Molec
 
 void ForceField::MMFF94AromaticSSSRSubset::extract(const Chem::MolecularGraph& molgraph)
 {
+    extract(molgraph, *getSSSR(molgraph));
+}
+
+void ForceField::MMFF94AromaticSSSRSubset::extract(const Chem::MolecularGraph& molgraph, const Chem::FragmentList& sssr)
+{
     clear();
 
     if (molgraph.getNumAtoms() == 0 || molgraph.getNumBonds() == 0)
 		return;
 
 	init(molgraph);
-    perceiveAromaticRings();
+    perceiveAromaticRings(sssr);
 }
 
 void ForceField::MMFF94AromaticSSSRSubset::init(const Chem::MolecularGraph& molgraph)
@@ -65,13 +70,13 @@ void ForceField::MMFF94AromaticSSSRSubset::init(const Chem::MolecularGraph& molg
 	molGraph = &molgraph;
 }
 
-void ForceField::MMFF94AromaticSSSRSubset::perceiveAromaticRings()
+void ForceField::MMFF94AromaticSSSRSubset::perceiveAromaticRings(const Chem::FragmentList& sssr)
 {
     using namespace Chem;
 
-    const FragmentList::BaseType& sssr = *getSSSR(*molGraph);
+    for (FragmentList::BaseType::ConstElementIterator it = sssr.FragmentList::BaseType::getElementsBegin(), 
+			 end = sssr.FragmentList::BaseType::getElementsEnd(); it != end; ++it) {
 
-    for (FragmentList::BaseType::ConstElementIterator it = sssr.getElementsBegin(), end = sssr.getElementsEnd(); it != end; ++it) {
 		const Fragment::SharedPointer& ring = *it;
 		std::size_t r_size = ring->getNumAtoms();
 

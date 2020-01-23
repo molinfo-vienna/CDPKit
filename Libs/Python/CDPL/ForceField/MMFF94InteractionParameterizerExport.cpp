@@ -41,7 +41,7 @@ void CDPLPythonForceField::exportMMFF94InteractionParameterizer()
     using namespace CDPL;
 
     python::class_<ForceField::MMFF94InteractionParameterizer, ForceField::MMFF94InteractionParameterizer::SharedPointer>("MMFF94InteractionParameterizer", python::no_init)
-		.def(python::init<bool>((python::arg("self"), python::arg("param_set") = ForceField::MMFF94ParameterSet::STATIC)))
+		.def(python::init<unsigned int>((python::arg("self"), python::arg("param_set") = ForceField::MMFF94ParameterSet::STATIC)))
 		.def(python::init<const ForceField::MMFF94InteractionParameterizer&>((python::arg("self"), python::arg("parameterizer"))))
 		.def(CDPLPythonBase::ObjectIdentityCheckVisitor<ForceField::MMFF94InteractionParameterizer>())	
 		.def("setBondStretchingFilterFunction", &ForceField::MMFF94InteractionParameterizer::setBondStretchingFilterFunction, 
@@ -60,6 +60,8 @@ void CDPLPythonForceField::exportMMFF94InteractionParameterizer()
 			 (python::arg("self"), python::arg("func"))) 
 		.def("clearFilterFunctions", &ForceField::MMFF94InteractionParameterizer::clearFilterFunctions, 
 			 python::arg("self"))
+		.def("setSSSRFunction", &ForceField::MMFF94InteractionParameterizer::setSSSRFunction, 
+			 (python::arg("self"), python::arg("func"))) 
 		.def("setSymbolicAtomTypePatternTable", &ForceField::MMFF94InteractionParameterizer::setSymbolicAtomTypePatternTable, 
 			 (python::arg("self"), python::arg("table")))
 		.def("setHeavyToHydrogenAtomTypeMap", &ForceField::MMFF94InteractionParameterizer::setHeavyToHydrogenAtomTypeMap, 
@@ -94,6 +96,10 @@ void CDPLPythonForceField::exportMMFF94InteractionParameterizer()
 			 (python::arg("self"), python::arg("table")))
 		.def("setVanDerWaalsParameterTable", &ForceField::MMFF94InteractionParameterizer::setVanDerWaalsParameterTable, 
 			 (python::arg("self"), python::arg("table")))
+		.def("setDielectricConstant", &ForceField::MMFF94InteractionParameterizer::setDielectricConstant, 
+			 (python::arg("self"), python::arg("de_const")))
+		.def("setDistanceExponent", &ForceField::MMFF94InteractionParameterizer::setDistanceExponent, 
+			 (python::arg("self"), python::arg("dist_expo")))
 		.def("setParameterSet", &ForceField::MMFF94InteractionParameterizer::setParameterSet, 
 			 (python::arg("self"), python::arg("param_set")))
 		.def("assign", CDPLPythonBase::copyAssOp(&ForceField::MMFF94InteractionParameterizer::operator=),

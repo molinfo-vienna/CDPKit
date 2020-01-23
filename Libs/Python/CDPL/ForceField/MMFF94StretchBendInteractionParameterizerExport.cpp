@@ -44,8 +44,9 @@ void CDPLPythonForceField::exportMMFF94StretchBendInteractionParameterizer()
 		.def(python::init<>(python::arg("self")))
 		.def(python::init<const ForceField::MMFF94StretchBendInteractionParameterizer&>((python::arg("self"), python::arg("parameterizer"))))
 		.def(python::init<const Chem::MolecularGraph&, const ForceField::MMFF94BondStretchingInteractionData&, 
-			 const ForceField::MMFF94AngleBendingInteractionData&, ForceField::MMFF94StretchBendInteractionData&>(
-				 (python::arg("self"), python::arg("molgraph"), python::arg("bs_ia_data"), python::arg("ab_ia_data"), python::arg("ia_data"))))
+			 const ForceField::MMFF94AngleBendingInteractionData&, ForceField::MMFF94StretchBendInteractionData&, bool>(
+				 (python::arg("self"), python::arg("molgraph"), python::arg("bs_ia_data"), python::arg("ab_ia_data"), 
+				  python::arg("ia_data"), python::arg("strict"))))
 		.def(CDPLPythonBase::ObjectIdentityCheckVisitor<ForceField::MMFF94StretchBendInteractionParameterizer>())	
 		.def("setFilterFunction", &ForceField::MMFF94StretchBendInteractionParameterizer::setFilterFunction, 
 			 (python::arg("self"), python::arg("func"))) 
@@ -60,5 +61,6 @@ void CDPLPythonForceField::exportMMFF94StretchBendInteractionParameterizer()
 		.def("assign", CDPLPythonBase::copyAssOp(&ForceField::MMFF94StretchBendInteractionParameterizer::operator=),
 			 (python::arg("self"), python::arg("parameterizer")), python::return_self<>())
 		.def("parameterize", &ForceField::MMFF94StretchBendInteractionParameterizer::parameterize, 
-			 (python::arg("self"), python::arg("molgraph"), python::arg("bs_ia_data"), python::arg("ab_ia_data"), python::arg("ia_data")));
+			 (python::arg("self"), python::arg("molgraph"), python::arg("bs_ia_data"), python::arg("ab_ia_data"), 
+			  python::arg("ia_data"), python::arg("strict")));
 }

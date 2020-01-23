@@ -45,10 +45,10 @@ void CDPLPythonConfGen::exportTorsionDriver()
 			 static_cast<ConfGen::TorsionDriverSettings& (ConfGen::TorsionDriver::*)()>
 			 (&ConfGen::TorsionDriver::getSettings), 
 			 python::arg("self"), python::return_internal_reference<>())
-		.def("setTorsionLibrary", &ConfGen::TorsionDriver::setTorsionLibrary, 
+		.def("clearTorsionLibraries", &ConfGen::TorsionDriver::clearTorsionLibraries, 
+			 python::arg("self"))
+		.def("addTorsionLibrary", &ConfGen::TorsionDriver::addTorsionLibrary, 
 			 (python::arg("self"), python::arg("lib")))
-		.def("getTorsionLibrary", &ConfGen::TorsionDriver::getTorsionLibrary, 
-			 python::arg("self"), python::return_value_policy<python::copy_const_reference>())
 		.def("setup", static_cast<unsigned int (ConfGen::TorsionDriver::*)(const Chem::MolecularGraph&)>(
 				 &ConfGen::TorsionDriver::setup), 
 			 (python::arg("self"), python::arg("molgraph")))
@@ -98,10 +98,6 @@ void CDPLPythonConfGen::exportTorsionDriver()
 					  python::make_function(static_cast<ConfGen::TorsionDriverSettings& (ConfGen::TorsionDriver::*)()>
 											(&ConfGen::TorsionDriver::getSettings),
 											python::return_internal_reference<>()))	
-		.add_property("torsionLibrary", 
-					  python::make_function(&ConfGen::TorsionDriver::getTorsionLibrary,
-											python::return_value_policy<python::copy_const_reference>()),
-					  &ConfGen::TorsionDriver::setTorsionLibrary)
 		.add_property("abortCallback", 
 					  python::make_function(&ConfGen::TorsionDriver::getAbortCallback,
 											python::return_internal_reference<>()),

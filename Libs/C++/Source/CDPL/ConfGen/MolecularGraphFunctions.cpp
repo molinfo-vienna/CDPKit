@@ -182,7 +182,8 @@ void ConfGen::setConformers(Chem::MolecularGraph& molgraph, const ConformerDataA
 }
 
 unsigned int ConfGen::parameterizeMMFF94Interactions(const Chem::MolecularGraph& molgraph, ForceField::MMFF94InteractionParameterizer& parameterizer,
-													 ForceField::MMFF94InteractionData& param_data, unsigned int ff_type, bool strict)
+													 ForceField::MMFF94InteractionData& param_data, unsigned int ff_type, bool strict, 
+													 double estat_de_const, double estat_dist_expo)
 {
 	using namespace ForceField;
 
@@ -198,6 +199,10 @@ unsigned int ConfGen::parameterizeMMFF94Interactions(const Chem::MolecularGraph&
 			parameterizer.setParameterSet(MMFF94ParameterSet::STATIC);
 			break;
 
+		case ForceFieldType::MMFF94S_EXT:
+			parameterizer.setParameterSet(MMFF94ParameterSet::STATIC_EXT);
+			break;
+
 		case ForceFieldType::MMFF94_NO_ESTAT:
 			parameterizer.setParameterSet(MMFF94ParameterSet::DYNAMIC);
 			int_types = InteractionType::ALL ^ InteractionType::ELECTROSTATIC;
@@ -208,11 +213,18 @@ unsigned int ConfGen::parameterizeMMFF94Interactions(const Chem::MolecularGraph&
 			int_types = InteractionType::ALL ^ InteractionType::ELECTROSTATIC;
 			break;
 
+		case ForceFieldType::MMFF94S_EXT_NO_ESTAT:
+			parameterizer.setParameterSet(MMFF94ParameterSet::STATIC_EXT);
+			int_types = InteractionType::ALL ^ InteractionType::ELECTROSTATIC;
+			break;
+
 		default:
 			return ReturnCode::FORCEFIELD_SETUP_FAILED;
 			
 	}	
 
+	parameterizer.setDielectricConstant(estat_de_const);
+	parameterizer.setDistanceExponent(estat_dist_expo);
 	parameterizer.parameterize(molgraph, param_data, int_types, strict);
 
 	return ReturnCode::SUCCESS;

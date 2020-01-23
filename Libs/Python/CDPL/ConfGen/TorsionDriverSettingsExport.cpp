@@ -72,6 +72,14 @@ void CDPLPythonConfGen::exportTorsionDriverSettings()
 			 (python::arg("self"), python::arg("strict")))
 		.def("strictForceFieldParameterization", GetBoolFunc(&ConfGen::TorsionDriverSettings::strictForceFieldParameterization), 
 			 python::arg("self"))
+		.def("setDielectricConstant", &ConfGen::TorsionDriverSettings::setDielectricConstant, 
+			 (python::arg("self"), python::arg("de_const")))
+		.def("getDielectricConstant", &ConfGen::TorsionDriverSettings::getDielectricConstant, 
+			 python::arg("self"))
+		.def("setDistanceExponent", &ConfGen::TorsionDriverSettings::setDistanceExponent, 
+			 (python::arg("self"), python::arg("dist_expo")))
+		.def("getDistanceExponent", &ConfGen::TorsionDriverSettings::getDistanceExponent, 
+			 python::arg("self"))
 		.def_readonly("DEFAULT", ConfGen::TorsionDriverSettings::DEFAULT)
 		.add_property("sampleHetAtomHydrogens", GetBoolFunc(&ConfGen::TorsionDriverSettings::sampleHeteroAtomHydrogens),
 					  SetBoolFunc(&ConfGen::TorsionDriverSettings::sampleHeteroAtomHydrogens))
@@ -81,6 +89,10 @@ void CDPLPythonConfGen::exportTorsionDriverSettings()
 					  &ConfGen::TorsionDriverSettings::setForceFieldType)
 		.add_property("strictForceFieldParam", GetBoolFunc(&ConfGen::TorsionDriverSettings::strictForceFieldParameterization), 
 					  SetBoolFunc(&ConfGen::TorsionDriverSettings::strictForceFieldParameterization))
+		.add_property("dielectricConstant", &ConfGen::TorsionDriverSettings::getDielectricConstant, 
+					  &ConfGen::TorsionDriverSettings::setDielectricConstant)
+		.add_property("distanceExponent", &ConfGen::TorsionDriverSettings::getDistanceExponent, 
+					  &ConfGen::TorsionDriverSettings::setDistanceExponent)
 		.add_property("energyOrdered", GetBoolFunc(&ConfGen::TorsionDriverSettings::orderByEnergy),
 					  SetBoolFunc(&ConfGen::TorsionDriverSettings::orderByEnergy))
 		.add_property("energyWindow", &ConfGen::TorsionDriverSettings::getEnergyWindow,

@@ -79,9 +79,9 @@ namespace CDPL
 
 			TorsionDriverSettings& getSettings();
 
-			void setTorsionLibrary(const TorsionLibrary::SharedPointer& lib);
+			void clearTorsionLibraries();
 
-			const ConfGen::TorsionLibrary::SharedPointer& getTorsionLibrary() const;
+			void addTorsionLibrary(const TorsionLibrary::SharedPointer& lib);
 
 			void setAbortCallback(const CallbackFunction& func);
 

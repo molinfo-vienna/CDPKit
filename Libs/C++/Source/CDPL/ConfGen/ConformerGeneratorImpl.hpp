@@ -46,7 +46,6 @@
 #include "CDPL/Chem/Hydrogen3DCoordinatesGenerator.hpp"
 #include "CDPL/ForceField/MMFF94InteractionParameterizer.hpp"
 #include "CDPL/ForceField/MMFF94InteractionData.hpp"
-#include "CDPL/ForceField/MMFF94EnergyCalculator.hpp"
 #include "CDPL/ForceField/MMFF94GradientCalculator.hpp"
 #include "CDPL/Math/BFGSMinimizer.hpp"
 #include "CDPL/Util/ObjectPool.hpp"
@@ -80,9 +79,9 @@ namespace CDPL
 
 			void addFragmentLibrary(const FragmentLibrary::SharedPointer& lib);
 
-			void setTorsionLibrary(const TorsionLibrary::SharedPointer& lib);
+			void clearTorsionLibraries();
 
-			const TorsionLibrary::SharedPointer& getTorsionLibrary() const;
+			void addTorsionLibrary(const TorsionLibrary::SharedPointer& lib);
 
 			void setAbortCallback(const CallbackFunction& func);
 
@@ -191,7 +190,6 @@ namespace CDPL
 			typedef std::vector<FragmentConfDataPtr> FragmentConfDataList;
 			typedef ForceField::MMFF94InteractionData MMFF94InteractionData;
 			typedef ForceField::MMFF94InteractionParameterizer MMFF94Parameterizer;
-			typedef ForceField::MMFF94EnergyCalculator<double> MMFF94EnergyCalculator;
 			typedef ForceField::MMFF94GradientCalculator<double> MMFF94GradientCalculator;
 			typedef std::vector<const Chem::Bond*> BondList;
 			typedef std::vector<ConfCombinationData*> ConfCombinationDataList;
@@ -215,7 +213,6 @@ namespace CDPL
 			MMFF94Parameterizer                  mmff94Parameterizer;
 			MMFF94InteractionData                mmff94Data;
 			ForceFieldInteractionMask            mmff94InteractionMask;
-			MMFF94EnergyCalculator               mmff94EnergyCalc;
 			MMFF94GradientCalculator             mmff94GradientCalc;
 			BFGSMinimizer                        energyMinimizer;
 			Chem::Hydrogen3DCoordinatesGenerator hCoordsGen;

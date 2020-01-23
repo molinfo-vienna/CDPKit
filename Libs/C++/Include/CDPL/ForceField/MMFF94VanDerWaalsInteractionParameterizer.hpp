@@ -67,7 +67,8 @@ namespace CDPL
 			MMFF94VanDerWaalsInteractionParameterizer();
 
 			MMFF94VanDerWaalsInteractionParameterizer(const Chem::MolecularGraph& molgraph, 
-													  MMFF94VanDerWaalsInteractionData& ia_data);
+													  MMFF94VanDerWaalsInteractionData& ia_data,
+													  bool strict);
 
 			void setFilterFunction(const InteractionFilterFunction2& func); 
 
@@ -77,7 +78,7 @@ namespace CDPL
 
 			void setVanDerWaalsParameterTable(const MMFF94VanDerWaalsParameterTable::SharedPointer& table);
 
-			void parameterize(const Chem::MolecularGraph& molgraph, MMFF94VanDerWaalsInteractionData& ia_data);
+			void parameterize(const Chem::MolecularGraph& molgraph, MMFF94VanDerWaalsInteractionData& ia_data, bool strict);
 
 		  private:
 			InteractionFilterFunction2                     filterFunc;

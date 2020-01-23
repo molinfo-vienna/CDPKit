@@ -50,8 +50,8 @@ void CDPLPythonForceField::exportBoostFunctionWrappers()
 										 python::return_internal_reference<> >("MMFF94SymbolicAtomTypeFunction");
 	CDPLPythonBase::BoostFunction1Export<MMFF94AtomChargeFunction, Atom&>("MMFF94AtomChargeFunction");
 	CDPLPythonBase::BoostFunction1Export<MMFF94BondTypeIndexFunction, Bond&>("MMFF94BondTypeIndexFunction");
-	CDPLPythonBase::BoostFunction1Export<MMFF94AromaticRingSetFunction, MolecularGraph&, 
-										 python::return_value_policy<python::copy_const_reference> >("MMFF94AromaticRingSetFunction");
+	CDPLPythonBase::BoostFunction1Export<MMFF94RingSetFunction, MolecularGraph&, 
+										 python::return_value_policy<python::copy_const_reference> >("MMFF94RingSetFunction");
 
 	CDPLPythonBase::BoostFunction2Export<InteractionFilterFunction2, Atom&, Atom&>("InteractionFilterFunction2");
 	CDPLPythonBase::BoostFunction3Export<InteractionFilterFunction3, Atom&, Atom&, Atom&>("InteractionFilterFunction3");

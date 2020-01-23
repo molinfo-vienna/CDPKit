@@ -77,7 +77,7 @@ void ConfGen::MMFF94BondLengthTable::setup(const Chem::MolecularGraph& molgraph,
     bondTypeIndices.resize(num_bonds);
     bondTyper.perceiveTypes(molgraph, bondTypeIndices);
 
-    bondStretchingParameterizer.parameterize(molgraph, bondStretchingParams);
+    bondStretchingParameterizer.parameterize(molgraph, bondStretchingParams, strict_param);
 }
 
 double ConfGen::MMFF94BondLengthTable::get(std::size_t atom1_idx, std::size_t atom2_idx) const

@@ -107,7 +107,15 @@ namespace CDPL
 			void strictForceFieldParameterization(bool strict);
 
 			bool strictForceFieldParameterization() const;
-			
+
+			void setDielectricConstant(double de_const);
+
+			double getDielectricConstant() const;
+
+			void setDistanceExponent(double exponent);
+
+			double getDistanceExponent() const;
+
 			void setMaxNumOutputConformers(std::size_t max_num);
 
 			std::size_t getMaxNumOutputConformers() const;
@@ -152,6 +160,8 @@ namespace CDPL
 			std::size_t                        timeout;
 			unsigned int                       forceFieldType;
 			bool                               strictParam;
+			double                             dielectricConst;
+			double                             distExponent;
 			std::size_t                        maxNumOutputConfs;
 			double                             minRMSD;
 			std::size_t                        maxNumRefIters;

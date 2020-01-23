@@ -43,8 +43,8 @@ void CDPLPythonForceField::exportMMFF94BondStretchingInteractionParameterizer()
 				   ForceField::MMFF94BondStretchingInteractionParameterizer::SharedPointer>("MMFF94BondStretchingInteractionParameterizer", python::no_init)
 		.def(python::init<>(python::arg("self")))
 		.def(python::init<const ForceField::MMFF94BondStretchingInteractionParameterizer&>((python::arg("self"), python::arg("parameterizer"))))
-		.def(python::init<const Chem::MolecularGraph&, ForceField::MMFF94BondStretchingInteractionData&>(
-				 (python::arg("self"), python::arg("molgraph"), python::arg("ia_data"))))
+		.def(python::init<const Chem::MolecularGraph&, ForceField::MMFF94BondStretchingInteractionData&, bool>(
+				 (python::arg("self"), python::arg("molgraph"), python::arg("ia_data"), python::arg("strict"))))
 		.def(CDPLPythonBase::ObjectIdentityCheckVisitor<ForceField::MMFF94BondStretchingInteractionParameterizer>())	
 		.def("setFilterFunction", &ForceField::MMFF94BondStretchingInteractionParameterizer::setFilterFunction, 
 			 (python::arg("self"), python::arg("func"))) 
@@ -63,5 +63,5 @@ void CDPLPythonForceField::exportMMFF94BondStretchingInteractionParameterizer()
 		.def("assign", CDPLPythonBase::copyAssOp(&ForceField::MMFF94BondStretchingInteractionParameterizer::operator=),
 			 (python::arg("self"), python::arg("parameterizer")), python::return_self<>())
 		.def("parameterize", &ForceField::MMFF94BondStretchingInteractionParameterizer::parameterize, 
-			 (python::arg("self"), python::arg("molgraph"), python::arg("ia_data")));
+			 (python::arg("self"), python::arg("molgraph"), python::arg("ia_data"), python::arg("strict")));
 }

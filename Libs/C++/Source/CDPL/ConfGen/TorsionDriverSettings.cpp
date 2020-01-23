@@ -28,6 +28,7 @@
 
 #include "CDPL/ConfGen/TorsionDriverSettings.hpp"
 #include "CDPL/ConfGen/ForceFieldType.hpp"
+#include "CDPL/ForceField/MMFF94ElectrostaticInteractionParameterizer.hpp"
 
 
 using namespace CDPL;
@@ -35,7 +36,9 @@ using namespace CDPL;
 
 ConfGen::TorsionDriverSettings::TorsionDriverSettings(): 
 	sampleHetAtomHs(false), sampleTolRanges(false), energyOrdered(true), eWindow(0.0),
-	forceFieldType(ForceFieldType::MMFF94S_NO_ESTAT), strictParam(true)
+	forceFieldType(ForceFieldType::MMFF94S_EXT_NO_ESTAT), strictParam(true),
+	dielectricConst(ForceField::MMFF94ElectrostaticInteractionParameterizer::DEF_DIELECTRIC_CONSTANT),
+	distExponent(ForceField::MMFF94ElectrostaticInteractionParameterizer::DEF_DISTANCE_EXPONENT)
 {}
 
 void ConfGen::TorsionDriverSettings::sampleHeteroAtomHydrogens(bool sample)
@@ -96,4 +99,24 @@ void ConfGen::TorsionDriverSettings::strictForceFieldParameterization(bool stric
 bool ConfGen::TorsionDriverSettings::strictForceFieldParameterization() const
 {
 	return strictParam;
+}
+
+void ConfGen::TorsionDriverSettings::setDielectricConstant(double de_const)
+{
+	dielectricConst = de_const;
+}
+
+double ConfGen::TorsionDriverSettings::getDielectricConstant() const
+{
+	return dielectricConst;
+}
+
+void ConfGen::TorsionDriverSettings::setDistanceExponent(double exponent)
+{
+	distExponent = exponent;
+}
+
+double ConfGen::TorsionDriverSettings::getDistanceExponent() const
+{
+	return distExponent;
 }

@@ -69,7 +69,8 @@ namespace CDPL
 			 MMFF94BondStretchingInteractionParameterizer();
 
 			 MMFF94BondStretchingInteractionParameterizer(const Chem::MolecularGraph& molgraph, 
-														  MMFF94BondStretchingInteractionData& ia_data);
+														  MMFF94BondStretchingInteractionData& ia_data, 
+														  bool strict);
 
 			 void setFilterFunction(const InteractionFilterFunction2& func); 
 
@@ -77,7 +78,7 @@ namespace CDPL
 
 			 void setBondTypeIndexFunction(const MMFF94BondTypeIndexFunction& func); 
 
-			 void setAromaticRingSetFunction(const MMFF94AromaticRingSetFunction& func);
+			 void setAromaticRingSetFunction(const MMFF94RingSetFunction& func);
 
 			 void setBondStretchingParameterTable(const MMFF94BondStretchingParameterTable::SharedPointer& table);
 
@@ -85,10 +86,10 @@ namespace CDPL
 
 			 void setAtomTypePropertyTable(const MMFF94AtomTypePropertyTable::SharedPointer& table);
 
-			 void parameterize(const Chem::MolecularGraph& molgraph, MMFF94BondStretchingInteractionData& ia_data);
+			 void parameterize(const Chem::MolecularGraph& molgraph, MMFF94BondStretchingInteractionData& ia_data, bool strict);
 
 			 void getParameters(const Chem::MolecularGraph& molgraph, const Chem::Bond& bond, 
-								unsigned int& bond_type_idx, double& force_const, double& ref_length) const;
+								unsigned int& bond_type_idx, double& force_const, double& ref_length, bool strict) const;
 
 		  private:
 			 typedef MMFF94AtomTypePropertyTable::Entry AtomTypePropEntry;
@@ -100,7 +101,7 @@ namespace CDPL
 			 InteractionFilterFunction2                            filterFunc;
 			 MMFF94NumericAtomTypeFunction                         atomTypeFunc;	
 			 MMFF94BondTypeIndexFunction                           bondTypeIdxFunc;	
-			 MMFF94AromaticRingSetFunction                         aromRingSetFunc;
+			 MMFF94RingSetFunction                                 aromRingSetFunc;
 			 MMFF94BondStretchingParameterTable::SharedPointer     paramTable;
 			 MMFF94BondStretchingRuleParameterTable::SharedPointer ruleParamTable;
 			 MMFF94AtomTypePropertyTable::SharedPointer            typePropTable;

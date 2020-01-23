@@ -54,6 +54,9 @@ void CDPLPythonForceField::exportMMFF94GradientCalculator()
 		.def("getEnabledInteractionTypes", &CalculatorType::getEnabledInteractionTypes, python::arg("self"))
 		.def("setup", &CalculatorType::setup, (python::arg("self"), python::arg("ia_data"), python::arg("num_atoms")),
 			 python::with_custodian_and_ward<1, 2>())
+		.def("__call__", &CalculatorType::operator()<Math::Vector3DArray>, 
+			 (python::arg("self"), python::arg("coords")),
+			 python::return_value_policy<python::copy_const_reference>())
 		.def("__call__", &CalculatorType::operator()<Math::Vector3DArray, Math::Vector3DArray>, 
 			 (python::arg("self"), python::arg("coords"), python::arg("grad")),
 			 python::return_value_policy<python::copy_const_reference>())

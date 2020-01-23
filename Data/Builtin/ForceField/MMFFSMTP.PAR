@@ -32,13 +32,13 @@
 *   Carbon 
     [#6H1X2:1]                                           CSP     SPECIAL ENTRY FOR CONFGEN: SP CARBON
     [cX1:1]                                              C=C     SPECIAL ENTRY FOR CONFGEN: AROMATIC CARBON
-
     [#6X4:1]                                             CR      ALKYL CARBON, SP3
     [#6X3:1]                                             CSP2    GENERIC SP2 CARBON
+    [#6H2X3+0:1]                                         C=ON    SPECIAL ENTRY FOR CONFGEN: AMIDE CARBONYL CARBON
     [#6X3:1]=[#6]                                        C=C     VINYLIC CARBON, SP2
-    [#6X4r4:1]                                           CR4R    CARBON IN 4-MEMBERED RINGS
-    [#6X4r3:1]                                           CR3R    CARBON IN A 3-MEMBERED RING
-    [#6X3r4:1]                                           CE4R    OLEFINIC CARBON IN 4-MEMBERED RINGS
+    [#6X4:1]1~[*]~[*]~[*]1                               CR4R    CARBON IN 4-MEMBERED RINGS
+    [#6X4:1]1~[*]~[*]1                                   CR3R    CARBON IN A 3-MEMBERED RING
+    [#6X3:1]1~[*]~[*]~[*]1                               CE4R    OLEFINIC CARBON IN 4-MEMBERED RINGS
     [#6X3:1]=[#7]                                        C=N     SP2 CARBON IN C=N
     [#6X3:1]=[#8]                                        C=O     GENERAL CARBONYL CARBON
     [#6X3:1](=[#16])                                     C=S     THIOESTER CARBON, DOUBLY BONDED TO S
@@ -71,10 +71,8 @@
 *   Oxygen
     [#8X2:1]                                             -O-     GENERAL DIVALENT O
     [#8X2:1]-[#6]                                        OR      ALCOHOL OR ETHER OXYGEN
-
     [#8X2:1]-[cX1]                           		 OC=C    SPECIAL ENTRY FOR CONFGEN: ENOLIC OR PHENOLIC OXYGEN
     [#8X2:1]-[#6X3H2]                                    OC=C    SPECIAL ENTRY FOR CONFGEN: ENOLIC OR PHENOLIC OXYGEN
-
     [#8X2:1]-[#6X3]=[#7]                                 OC=N    DIVALENT OXYGEN 
     [#8X2:1]-[#6X3]=[#6]                                 OC=C    ENOLIC OR PHENOLIC OXYGEN
     [#8X2:1]-[#6X3]=[#8]                                 OC=O    ESTER OR CARBOXYLIC ACID -O-
@@ -106,6 +104,7 @@
     [#8X1:1]-,=[#7X3](-,=[#8X1])-,=[#8X1]                O3N     NITRATE ANION OXYGEN
     [#8X1:1]-,=[#16X4]                                   O-S     SINGLE TERMINAL OXYGEN ON TETRACOORD SULFUR
     [#8X1:1]-,=[#16]-,=[#8X1]                            O2S     TERMINAL O-S IN SULFONES AND SULFONAMIDES
+    [#1X1:1]-[#16X4H3+0]-[#7X3]                          O2S     SPECIAL ENTRY FOR CONFGEN: TERMINAL O-S IN SULFONES AND SULFONAMIDES
     [#8X1:1]-,=[#16](-,=[#8X1])-,=[#8X1]                 O3S     TERMINAL O IN SULFONATES
     [#8X1:1]-,=[#16](-,=[#8X1])(-,=[#8X1])-,=[#8X1]      O4S     TERMINAL O IN SO4(-3)
     [#8X1:1]-,=[#16]-,=[#16X1]                           OSMS    TERM O IN THIOSULFINATE ANION - FORMAL CHARGE=-0.5
@@ -125,15 +124,12 @@
     [#7X1+0:1]=[*]                                       =N=     SPECIAL ENTRY FOR CONFGEN: SP NITROGEN
     [#7X2H1+0:1]                                         N=C     SPECIAL ENTRY FOR CONFGEN: SP2 NITROGEN
     [nX1:1]                                              NPYL    SPECIAL ENTRY FOR CONFGEN: AROMATIC NITROGEN
-
     [#7X3:1]-[#7]=[#6]                                   NN=C    NITROGEN IN N-N=C
     [#7X3v3:1]                                           NR      NITROGEN IN ALIPHATIC AMINES
     [#7X4v4+:1]                                          NR+     QUATERNARY NITROGEN, SP3, POSITIVELY CHARGED
-
     [#7X3:1]-[#7X2H1+0]                                  NN=C    SPECIAL ENTRY FOR CONFGEN: NITROGEN BONDED TO SP2 NITROGEN
     [#7X3:1]-[#6X3H2]                                    NC=C    SPECIAL ENTRY FOR CONFGEN: NITROGEN BONDED TO SP2 CARBON
     [#7X3:1]-[aX1]                                       NC=C    SPECIAL ENTRY FOR CONFGEN: NITROGEN BONDED TO AROMATIC ATOM
-
     [#7X2:1]=[#6]                                        N=C     NITROGEN IN IMINES
     [#7X2:1]=[#7]                                        N=N     NITROGEN IN AZO COMPOUNDS
     [#7X3:1]-[#7]=[#7]                                   NN=N    NITROGEN IN N-N=N
@@ -142,10 +138,10 @@
     [#7X3:1]-[#6X3]=[#15]                                NC=P    NITROGEN IN N-C=P
     [#7X3:1]-[#6]=[#16]                                  NC=S    NITROGEN IN N-C=S, THIOAMIDE
     [#7X3:1]-[#6X2]#[#6]                                 NC%C    NITROGEN ATTACHED TO C-C TRIPLE BOND
-
     [#7X3:1]-[#6H1X2]                                    NC%C    SPECIAL ENTRY FOR CONFGEN: NITROGEN ATTACHED TO SP3 CARBON
-
+    [#7X3:1]-[#16X4H3+0]                                 NSO2    SPECIAL ENTRY FOR CONFGEN: NITROGEN IN SULFONAMIDES
     [#7X3:1]-[#6]=[#8]                                   NC=O    NITROGEN IN AMIDES
+    [#7X3:1]-[#6X3H2+1]                                  NC=O    SPECIAL ENTRY FOR CONFGEN: NITROGEN IN AMIDES
     [#7X1:1]#[*]                                         NSP     NITROGEN, TRIPLE BONDED
     [#7X2-:1]-[#6,#16]                                   NM      DEPROTONATED SULFONAMIDE N-; FORMAL CHARGE=-1
     [#7X2-:1]-[#16](-,=[#8X1])(-,=[!#8])-,=[!#8]         NSO     DIVALENT NITROGEN REPLACING MONOVALENT O IN SO2 GROUP
@@ -202,6 +198,7 @@
 *   n1:[nX2-:1]:n:n:c1                                   N5M     NEGATIVELY CHARGED N IN, E.G, TRI- OR TETRAZOLE ANION
 
 *   Sulfur
+    [#16X4H3+0:1]                                        SO2N    SPECIAL ENTRY FOR CONFGEN: SULFUR IN SULFONAMIDES
     [#16X2:1]                                            S       SULFUR IN THIOETHERS AND MERCAPTANS
     [#16X1:1]=[#6]                                       S=C     TERMINAL SULFUR DOUBLY BONDED TO CARBON
     [#16X3:1]=[#8]                                       S=O     SULFUR IN SULFOXIDES

@@ -41,7 +41,7 @@
 using namespace CDPL; 
 
 	
-ForceField::MMFF94InteractionParameterizer::MMFF94InteractionParameterizer(unsigned int param_set)
+ForceField::MMFF94InteractionParameterizer::MMFF94InteractionParameterizer(unsigned int param_set): sssrFunc(&Chem::getSSSR)
 {
 	setPropertyFunctions();
 	setParameterSet(param_set);
@@ -57,7 +57,8 @@ ForceField::MMFF94InteractionParameterizer::MMFF94InteractionParameterizer(const
 	electrostaticParameterizer(parameterizer.electrostaticParameterizer),
 	atomTyper(parameterizer.atomTyper),
 	bondTyper(parameterizer.bondTyper),
-	chargeCalculator(parameterizer.chargeCalculator)
+	chargeCalculator(parameterizer.chargeCalculator),
+	sssrFunc(&Chem::getSSSR)
 {
 	setPropertyFunctions();
 }
@@ -106,6 +107,11 @@ void ForceField::MMFF94InteractionParameterizer::clearFilterFunctions()
 	torsionParameterizer.setFilterFunction(InteractionFilterFunction4());
 	vanDerWaalsParameterizer.setFilterFunction(InteractionFilterFunction2());
 	electrostaticParameterizer.setFilterFunction(InteractionFilterFunction2());
+}
+
+void ForceField::MMFF94InteractionParameterizer::setSSSRFunction(const MMFF94RingSetFunction& func)
+{
+	sssrFunc = func;
 }
 
 void ForceField::MMFF94InteractionParameterizer::setSymbolicAtomTypePatternTable(const MMFF94SymbolicAtomTypePatternTable::SharedPointer& table)
@@ -204,6 +210,16 @@ void ForceField::MMFF94InteractionParameterizer::setVanDerWaalsParameterTable(co
 	vanDerWaalsParameterizer.setVanDerWaalsParameterTable(table);
 }
 
+void ForceField::MMFF94InteractionParameterizer::setDielectricConstant(double de_const)
+{
+	electrostaticParameterizer.setDielectricConstant(de_const);
+} 
+
+void ForceField::MMFF94InteractionParameterizer::setDistanceExponent(double dist_expo)
+{
+	electrostaticParameterizer.setDistanceExponent(dist_expo);
+} 
+
 void ForceField::MMFF94InteractionParameterizer::setParameterSet(unsigned int param_set)
 {
 	outOfPlaneParameterizer.setOutOfPlaneBendingParameterTable(MMFF94OutOfPlaneBendingParameterTable::get(param_set));
@@ -216,14 +232,14 @@ void ForceField::MMFF94InteractionParameterizer::parameterize(const Chem::Molecu
 	setup(molgraph, ia_types, strict);
 
 	if ((ia_types & InteractionType::BOND_STRETCHING) || (ia_types & InteractionType::STRETCH_BEND))
-		bondStretchingParameterizer.parameterize(molgraph, ia_data.getBondStretchingInteractions());
+		bondStretchingParameterizer.parameterize(molgraph, ia_data.getBondStretchingInteractions(), strict);
 
 	if ((ia_types & InteractionType::ANGLE_BENDING) || (ia_types & InteractionType::STRETCH_BEND))
-		angleBendingParameterizer.parameterize(molgraph, ia_data.getAngleBendingInteractions());
+		angleBendingParameterizer.parameterize(molgraph, ia_data.getAngleBendingInteractions(), strict);
 
 	if (ia_types & InteractionType::STRETCH_BEND)
 		stretchBendParameterizer.parameterize(molgraph, ia_data.getBondStretchingInteractions(), 
-											  ia_data.getAngleBendingInteractions(), ia_data.getStretchBendInteractions());
+											  ia_data.getAngleBendingInteractions(), ia_data.getStretchBendInteractions(), strict);
 
 	if (!(ia_types & InteractionType::BOND_STRETCHING))
 		ia_data.getBondStretchingInteractions().clear();
@@ -232,16 +248,16 @@ void ForceField::MMFF94InteractionParameterizer::parameterize(const Chem::Molecu
 		ia_data.getAngleBendingInteractions().clear();
 
 	if (ia_types & InteractionType::OUT_OF_PLANE_BENDING)
-		outOfPlaneParameterizer.parameterize(molgraph, ia_data.getOutOfPlaneBendingInteractions());
+		outOfPlaneParameterizer.parameterize(molgraph, ia_data.getOutOfPlaneBendingInteractions(), strict);
 
 	if (ia_types & InteractionType::TORSION)
-		torsionParameterizer.parameterize(molgraph, ia_data.getTorsionInteractions());
+		torsionParameterizer.parameterize(molgraph, ia_data.getTorsionInteractions(), strict);
 
 	if (ia_types & InteractionType::ELECTROSTATIC)
-		electrostaticParameterizer.parameterize(molgraph, ia_data.getElectrostaticInteractions());
+		electrostaticParameterizer.parameterize(molgraph, ia_data.getElectrostaticInteractions(), strict);
 
 	if (ia_types & InteractionType::VAN_DER_WAALS)
-		vanDerWaalsParameterizer.parameterize(molgraph, ia_data.getVanDerWaalsInteractions());
+		vanDerWaalsParameterizer.parameterize(molgraph, ia_data.getVanDerWaalsInteractions(), strict);
 }
 
 ForceField::MMFF94InteractionParameterizer& ForceField::MMFF94InteractionParameterizer::operator=(const MMFF94InteractionParameterizer& parameterizer)
@@ -259,7 +275,7 @@ ForceField::MMFF94InteractionParameterizer& ForceField::MMFF94InteractionParamet
 	atomTyper = parameterizer.atomTyper;
 	bondTyper = parameterizer.bondTyper;
 	chargeCalculator = parameterizer.chargeCalculator;
-
+	
 	setPropertyFunctions();
 
 	return *this;
@@ -356,7 +372,7 @@ void ForceField::MMFF94InteractionParameterizer::setupAromaticRingSet()
 		if (!aromRings)
 			aromRings = MMFF94AromaticSSSRSubset::SharedPointer(new MMFF94AromaticSSSRSubset());
 
-		aromRings->extract(*molGraph);
+		aromRings->extract(*molGraph, *sssrFunc(*molGraph));
 		usedAromRings = aromRings;
 	}
 }

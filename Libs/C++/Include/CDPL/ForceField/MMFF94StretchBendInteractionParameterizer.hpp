@@ -75,7 +75,8 @@ namespace CDPL
 			MMFF94StretchBendInteractionParameterizer();
 
 			MMFF94StretchBendInteractionParameterizer(const Chem::MolecularGraph& molgraph, const MMFF94BondStretchingInteractionData& bs_ia_data, 
-													  const MMFF94AngleBendingInteractionData& ab_ia_data, MMFF94StretchBendInteractionData& ia_data);
+													  const MMFF94AngleBendingInteractionData& ab_ia_data, MMFF94StretchBendInteractionData& ia_data,
+													  bool strict);
 
 			void setFilterFunction(const InteractionFilterFunction3& func); 
 
@@ -88,7 +89,7 @@ namespace CDPL
 			void setAtomTypePropertyTable(const MMFF94AtomTypePropertyTable::SharedPointer& table);
 
 			void parameterize(const Chem::MolecularGraph& molgraph, const MMFF94BondStretchingInteractionData& bs_ia_data, 
-							  const MMFF94AngleBendingInteractionData& ab_ia_data, MMFF94StretchBendInteractionData& ia_data);
+							  const MMFF94AngleBendingInteractionData& ab_ia_data, MMFF94StretchBendInteractionData& ia_data, bool strict);
 
 		  private:
 			void initBondStretchingParamLookupTable(const MMFF94BondStretchingInteractionData& bs_ia_data);

@@ -79,9 +79,9 @@ namespace CDPL
 		typedef boost::function1<unsigned int, const Chem::Bond&> MMFF94BondTypeIndexFunction;
 
 		/**
-		 * \brief A generic wrapper class used to store a user-defined MMFF94 aromatic ring set function.
+		 * \brief A generic wrapper class used to store a user-defined MMFF94 ring set function.
 		 */
-		typedef boost::function1<const Chem::FragmentList::SharedPointer&, const Chem::MolecularGraph&> MMFF94AromaticRingSetFunction;
+		typedef boost::function1<const Chem::FragmentList::SharedPointer&, const Chem::MolecularGraph&> MMFF94RingSetFunction;
 
 		/**
 		 * @}

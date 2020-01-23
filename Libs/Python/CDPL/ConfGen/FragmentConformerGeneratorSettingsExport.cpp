@@ -106,6 +106,14 @@ void CDPLPythonConfGen::exportFragmentConformerGeneratorSettings()
 			 (python::arg("self"), python::arg("strict")))
 		.def("strictForceFieldParameterization", GetBoolFunc(&ConfGen::FragmentConformerGeneratorSettings::strictForceFieldParameterization), 
 			 python::arg("self"))
+		.def("setDielectricConstant", &ConfGen::FragmentConformerGeneratorSettings::setDielectricConstant, 
+			 (python::arg("self"), python::arg("de_const")))
+		.def("getDielectricConstant", &ConfGen::FragmentConformerGeneratorSettings::getDielectricConstant, 
+			 python::arg("self"))
+		.def("setDistanceExponent", &ConfGen::FragmentConformerGeneratorSettings::setDistanceExponent, 
+			 (python::arg("self"), python::arg("dist_expo")))
+		.def("getDistanceExponent", &ConfGen::FragmentConformerGeneratorSettings::getDistanceExponent, 
+			 python::arg("self"))
 		.def("setMaxNumRefinementIterations", &ConfGen::FragmentConformerGeneratorSettings::setMaxNumRefinementIterations, 
 			 (python::arg("self"), python::arg("max_num")))
 		.def("getMaxNumRefinementIterations", &ConfGen::FragmentConformerGeneratorSettings::getMaxNumRefinementIterations, 
@@ -139,6 +147,10 @@ void CDPLPythonConfGen::exportFragmentConformerGeneratorSettings()
 					  &ConfGen::FragmentConformerGeneratorSettings::setForceFieldType)
 		.add_property("strictForceFieldParam", GetBoolFunc(&ConfGen::FragmentConformerGeneratorSettings::strictForceFieldParameterization), 
 					  SetBoolFunc(&ConfGen::FragmentConformerGeneratorSettings::strictForceFieldParameterization))
+		.add_property("dielectricConstant", &ConfGen::FragmentConformerGeneratorSettings::getDielectricConstant, 
+					  &ConfGen::FragmentConformerGeneratorSettings::setDielectricConstant)
+		.add_property("distanceExponent", &ConfGen::FragmentConformerGeneratorSettings::getDistanceExponent, 
+					  &ConfGen::FragmentConformerGeneratorSettings::setDistanceExponent)
 		.add_property("maxNumRefinementIterations", &ConfGen::FragmentConformerGeneratorSettings::getMaxNumRefinementIterations, 
 					  &ConfGen::FragmentConformerGeneratorSettings::setMaxNumRefinementIterations)
 		.add_property("minimizationStopGradientNorm", &ConfGen::FragmentConformerGeneratorSettings::getRefinementStopGradient,

@@ -69,7 +69,8 @@ namespace CDPL
 			MMFF94ElectrostaticInteractionParameterizer();
 
 			MMFF94ElectrostaticInteractionParameterizer(const Chem::MolecularGraph& molgraph, 
-														MMFF94ElectrostaticInteractionData& ia_data);
+														MMFF94ElectrostaticInteractionData& ia_data,
+														bool strict);
 
 			void setFilterFunction(const InteractionFilterFunction2& func); 
 
@@ -81,7 +82,7 @@ namespace CDPL
 
 			void setDistanceExponent(double dist_expo);
 
-			void parameterize(const Chem::MolecularGraph& molgraph, MMFF94ElectrostaticInteractionData& ia_data);
+			void parameterize(const Chem::MolecularGraph& molgraph, MMFF94ElectrostaticInteractionData& ia_data, bool strict);
 
 		  private:
 			InteractionFilterFunction2      filterFunc;

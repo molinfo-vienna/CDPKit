@@ -171,12 +171,13 @@ namespace
 
 
 ForceField::MMFF94BondStretchingInteractionParameterizer::MMFF94BondStretchingInteractionParameterizer(const Chem::MolecularGraph& molgraph, 
-																									   MMFF94BondStretchingInteractionData& ia_data):
+																									   MMFF94BondStretchingInteractionData& ia_data,
+																									   bool strict):
 	filterFunc(), atomTypeFunc(&getMMFF94NumericType), bondTypeIdxFunc(&getMMFF94TypeIndex), aromRingSetFunc(&getMMFF94AromaticRings),
 	paramTable(MMFF94BondStretchingParameterTable::get()), ruleParamTable(MMFF94BondStretchingRuleParameterTable::get()),
 	typePropTable(MMFF94AtomTypePropertyTable::get())
 {
-    parameterize(molgraph, ia_data);
+    parameterize(molgraph, ia_data, strict);
 }
 
 ForceField::MMFF94BondStretchingInteractionParameterizer::MMFF94BondStretchingInteractionParameterizer():
@@ -200,7 +201,7 @@ void ForceField::MMFF94BondStretchingInteractionParameterizer::setBondTypeIndexF
 	bondTypeIdxFunc = func;
 }  
 
-void ForceField::MMFF94BondStretchingInteractionParameterizer::setAromaticRingSetFunction(const MMFF94AromaticRingSetFunction& func)
+void ForceField::MMFF94BondStretchingInteractionParameterizer::setAromaticRingSetFunction(const MMFF94RingSetFunction& func)
 {
 	aromRingSetFunc = func;
 }
@@ -221,7 +222,7 @@ void ForceField::MMFF94BondStretchingInteractionParameterizer::setAtomTypeProper
 }
 
 void ForceField::MMFF94BondStretchingInteractionParameterizer::parameterize(const Chem::MolecularGraph& molgraph, 
-																			MMFF94BondStretchingInteractionData& ia_data)
+																			MMFF94BondStretchingInteractionData& ia_data, bool strict)
 {
 	using namespace Chem;
 
@@ -246,7 +247,7 @@ void ForceField::MMFF94BondStretchingInteractionParameterizer::parameterize(cons
 		double ref_length = 0.0;
 		double force_const = 0.0;
 
-		getParameters(molgraph, bond, bond_type_idx, force_const, ref_length);
+		getParameters(molgraph, bond, bond_type_idx, force_const, ref_length, strict);
 	
 		ia_data.addElement(MMFF94BondStretchingInteraction(molgraph.getAtomIndex(atom1), molgraph.getAtomIndex(atom2), 
 														   bond_type_idx, force_const, ref_length));
@@ -254,7 +255,8 @@ void ForceField::MMFF94BondStretchingInteractionParameterizer::parameterize(cons
 }
 
 void ForceField::MMFF94BondStretchingInteractionParameterizer::getParameters(const Chem::MolecularGraph& molgraph, const Chem::Bond& bond, 
-																			 unsigned int& bond_type_idx, double& force_const, double& ref_length) const
+																			 unsigned int& bond_type_idx, double& force_const, double& ref_length, 
+																			 bool strict) const
 {
 	typedef MMFF94BondStretchingParameterTable::Entry ParamEntry;
 	typedef MMFF94BondStretchingRuleParameterTable::Entry RuleParamEntry;

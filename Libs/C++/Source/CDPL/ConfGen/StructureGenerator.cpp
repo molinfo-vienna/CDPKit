@@ -78,14 +78,14 @@ void ConfGen::StructureGenerator::addFragmentLibrary(const FragmentLibrary::Shar
 	impl->addFragmentLibrary(lib);
 }
 
-void ConfGen::StructureGenerator::setTorsionLibrary(const TorsionLibrary::SharedPointer& lib)
+void ConfGen::StructureGenerator::clearTorsionLibraries()
 {
-	impl->setTorsionLibrary(lib);
+	impl->clearTorsionLibraries();
 }
 
-const ConfGen::TorsionLibrary::SharedPointer& ConfGen::StructureGenerator::getTorsionLibrary() const
+void ConfGen::StructureGenerator::addTorsionLibrary(const TorsionLibrary::SharedPointer& lib)
 {
-	return impl->getTorsionLibrary();
+	impl->addTorsionLibrary(lib);
 }
 
 void ConfGen::StructureGenerator::setAbortCallback(const CallbackFunction& func)
@@ -118,6 +118,8 @@ unsigned int ConfGen::StructureGenerator::generate(const Chem::MolecularGraph& m
 	cg_settings.setMinMacrocycleSize(settings.getMinMacrocycleSize());
 	cg_settings.setForceFieldType(settings.getForceFieldType());
 	cg_settings.strictForceFieldParameterization(settings.strictForceFieldParameterization());
+	cg_settings.setDielectricConstant(settings.getDielectricConstant());
+	cg_settings.setDistanceExponent(settings.getDistanceExponent());
 	cg_settings.setTimeout(settings.getTimeout());
 	cg_settings.generateCoordinatesFromScratch(settings.generateCoordinatesFromScratch());
 

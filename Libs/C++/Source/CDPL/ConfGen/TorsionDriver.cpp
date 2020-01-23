@@ -53,14 +53,14 @@ ConfGen::TorsionDriverSettings& ConfGen::TorsionDriver::getSettings()
     return impl->getSettings();
 }
 
-void ConfGen::TorsionDriver::setTorsionLibrary(const TorsionLibrary::SharedPointer& lib)
+void ConfGen::TorsionDriver::clearTorsionLibraries()
 {
-	impl->setTorsionLibrary(lib);
+	impl->clearTorsionLibraries();
 }
 
-const ConfGen::TorsionLibrary::SharedPointer& ConfGen::TorsionDriver::getTorsionLibrary() const
+void ConfGen::TorsionDriver::addTorsionLibrary(const TorsionLibrary::SharedPointer& lib)
 {
-	return impl->getTorsionLibrary();
+	impl->addTorsionLibrary(lib);
 }
 
 void ConfGen::TorsionDriver::setAbortCallback(const CallbackFunction& func)

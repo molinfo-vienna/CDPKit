@@ -100,7 +100,7 @@ void ForceField::MMFF94AtomTyper::setAtomTypePropertyTable(const MMFF94AtomTypeP
 	atomTypePropTable = table;
 }
 
-void ForceField::MMFF94AtomTyper::setAromaticRingSetFunction(const MMFF94AromaticRingSetFunction& func)
+void ForceField::MMFF94AtomTyper::setAromaticRingSetFunction(const MMFF94RingSetFunction& func)
 {
 	aromRingSetFunc = func;
 }

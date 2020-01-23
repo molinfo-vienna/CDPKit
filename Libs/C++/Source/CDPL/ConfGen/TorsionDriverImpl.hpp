@@ -71,10 +71,10 @@ namespace CDPL
 			~TorsionDriverImpl();
 
 			TorsionDriverSettings& getSettings();
-			
-			void setTorsionLibrary(const TorsionLibrary::SharedPointer& lib);
 
-			const ConfGen::TorsionLibrary::SharedPointer& getTorsionLibrary() const;
+			void clearTorsionLibraries();
+
+			void addTorsionLibrary(const TorsionLibrary::SharedPointer& lib);
 
 			void setup(const Chem::MolecularGraph& molgraph);
 			void setup(const Chem::MolecularGraph& molgraph, const Util::BitSet& bond_mask);
@@ -143,9 +143,10 @@ namespace CDPL
 			typedef std::auto_ptr<ForceField::MMFF94InteractionParameterizer> MMFF94ParameterizerPtr;
 			typedef std::auto_ptr<ForceField::MMFF94InteractionData> MMFF94InteractionDataPtr;
 			typedef std::vector<const Chem::Bond*> BondList;
+			typedef std::vector<TorsionLibrary::SharedPointer> TorsionLibraryList;
 
 			TorsionDriverSettings         settings;
-			TorsionLibrary::SharedPointer torLib;
+			TorsionLibraryList            torLibs;
 			FragmentTree                  fragTree;
 			TorsionRuleMatcher            torRuleMatcher;
 			Chem::SubstructureSearch      subSearch;

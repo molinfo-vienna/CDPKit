@@ -93,12 +93,12 @@ void CDPLPythonConfGen::exportFragmentLibraryEntry()
 
 	cl
 		.def(python::init<>(python::arg("self")))
-		.def(python::init<const Chem::MolecularGraph&>((python::arg("self"), python::arg("molgraph"))))
+		.def(python::init<const Chem::MolecularGraph&, const Chem::MolecularGraph&>((python::arg("self"), python::arg("molgraph"), python::arg("parent"))))
 		.def(python::init<const ConfGen::FragmentLibraryEntry&>((python::arg("self"), python::arg("entry"))))
 		.def(CDPLPythonBase::ObjectIdentityCheckVisitor<ConfGen::FragmentLibraryEntry>())	
 		.def("assign", &ConfGen::FragmentLibraryEntry::operator=, (python::arg("self"), python::arg("entry")),
 			 python::return_self<>())
-		.def("create", &ConfGen::FragmentLibraryEntry::create, (python::arg("self"), python::arg("molgraph")))
+		.def("create", &ConfGen::FragmentLibraryEntry::create, (python::arg("self"), python::arg("molgraph"), python::arg("parent")))
 		.def("getHashCode", &ConfGen::FragmentLibraryEntry::getHashCode, python::arg("self"),
 			 python::return_value_policy<python::copy_const_reference>())
 		.def("clear", &ConfGen::FragmentLibraryEntry::clear, python::arg("self"))

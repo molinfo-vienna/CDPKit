@@ -28,6 +28,7 @@
 
 #include "CDPL/ConfGen/StructureGeneratorSettings.hpp"
 #include "CDPL/ConfGen/ForceFieldType.hpp"
+#include "CDPL/ForceField/MMFF94ElectrostaticInteractionParameterizer.hpp"
 
 
 using namespace CDPL;
@@ -36,6 +37,8 @@ using namespace CDPL;
 ConfGen::StructureGeneratorSettings::StructureGeneratorSettings():
 	fromScratch(true), timeout(5 * 60 * 1000), 
 	forceFieldType(ForceFieldType::MMFF94S_NO_ESTAT), strictParam(true), 
+	dielectricConst(ForceField::MMFF94ElectrostaticInteractionParameterizer::DEF_DIELECTRIC_CONSTANT),
+	distExponent(ForceField::MMFF94ElectrostaticInteractionParameterizer::DEF_DISTANCE_EXPONENT),
 	maxNumRefIters(0), refStopGrad(0.25), minMacrocycleSize(14)
 {}
 
@@ -77,6 +80,26 @@ void ConfGen::StructureGeneratorSettings::strictForceFieldParameterization(bool 
 bool ConfGen::StructureGeneratorSettings::strictForceFieldParameterization() const
 {
 	return strictParam;
+}
+
+void ConfGen::StructureGeneratorSettings::setDielectricConstant(double de_const)
+{
+	dielectricConst = de_const;
+}
+
+double ConfGen::StructureGeneratorSettings::getDielectricConstant() const
+{
+	return dielectricConst;
+}
+
+void ConfGen::StructureGeneratorSettings::setDistanceExponent(double exponent)
+{
+	distExponent = exponent;
+}
+
+double ConfGen::StructureGeneratorSettings::getDistanceExponent() const
+{
+	return distExponent;
 }
 
 void ConfGen::StructureGeneratorSettings::setMaxNumRefinementIterations(std::size_t max_iter)
