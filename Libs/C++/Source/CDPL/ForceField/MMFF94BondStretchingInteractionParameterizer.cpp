@@ -50,13 +50,13 @@ using namespace CDPL;
 namespace
 {
 
-	double covRadiusTable[Chem::AtomType::MAX_TYPE + 1] = { 0.0 };
-	double elnegTable[Chem::AtomType::MAX_TYPE + 1]     = { 0.0 };
+	double covRadiusTable[Chem::AtomType::MAX_TYPE + 1] = { 0.77 };
+	double elnegTable[Chem::AtomType::MAX_TYPE + 1]     = { 2.50 };
 
 	double getCovalentRadius(unsigned int atomic_no)
 	{
 		if (atomic_no > Chem::AtomType::MAX_TYPE)
-			return 0.0;
+			return covRadiusTable[Chem::AtomType::C];
 
 		return covRadiusTable[atomic_no];
 	}
@@ -64,7 +64,7 @@ namespace
 	double getElectronegativity(unsigned int atomic_no)
 	{
 		if (atomic_no > Chem::AtomType::MAX_TYPE)
-			return 0.0;
+			return elnegTable[Chem::AtomType::C];
 
 		return elnegTable[atomic_no];
 	}
@@ -167,6 +167,8 @@ namespace
 		}
 
 	} init;
+
+	const unsigned int FALLBACK_ATOM_TYPE = 1;
 }
 
 
@@ -247,8 +249,16 @@ void ForceField::MMFF94BondStretchingInteractionParameterizer::parameterize(cons
 		double ref_length = 0.0;
 		double force_const = 0.0;
 
-		getParameters(molgraph, bond, bond_type_idx, force_const, ref_length, strict);
-	
+		try {
+			getParameters(molgraph, bond, bond_type_idx, force_const, ref_length, strict);
+
+		} catch (const ParameterizationFailed& e) {
+			if (strict)
+				throw e;
+
+			getParameters(molgraph, bond, bond_type_idx, FALLBACK_ATOM_TYPE, FALLBACK_ATOM_TYPE, force_const, ref_length);
+		}
+
 		ia_data.addElement(MMFF94BondStretchingInteraction(molgraph.getAtomIndex(atom1), molgraph.getAtomIndex(atom2), 
 														   bond_type_idx, force_const, ref_length));
 	}
@@ -258,13 +268,28 @@ void ForceField::MMFF94BondStretchingInteractionParameterizer::getParameters(con
 																			 unsigned int& bond_type_idx, double& force_const, double& ref_length, 
 																			 bool strict) const
 {
-	typedef MMFF94BondStretchingParameterTable::Entry ParamEntry;
-	typedef MMFF94BondStretchingRuleParameterTable::Entry RuleParamEntry;
-
 	unsigned int atom1_type = atomTypeFunc(bond.getBegin());
 	unsigned int atom2_type = atomTypeFunc(bond.getEnd());
 
+	if (!strict) {
+		if (atom1_type == 0)
+			atom1_type = FALLBACK_ATOM_TYPE;
+
+		if (atom2_type == 0)
+			atom2_type = FALLBACK_ATOM_TYPE;
+	}
+
 	bond_type_idx = bondTypeIdxFunc(bond);
+
+	getParameters(molgraph, bond, bond_type_idx, atom1_type, atom2_type, force_const, ref_length);
+}
+
+void ForceField::MMFF94BondStretchingInteractionParameterizer::getParameters(const Chem::MolecularGraph& molgraph, const Chem::Bond& bond, 
+																			 unsigned int bond_type_idx, unsigned int atom1_type, unsigned int atom2_type, 
+																			 double& force_const, double& ref_length) const
+{
+	typedef MMFF94BondStretchingParameterTable::Entry ParamEntry;
+	typedef MMFF94BondStretchingRuleParameterTable::Entry RuleParamEntry;
 
 	const ParamEntry& param_entry = paramTable->getEntry(bond_type_idx, atom1_type, atom2_type);
 

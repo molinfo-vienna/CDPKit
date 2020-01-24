@@ -483,11 +483,7 @@ bool ConfGen::FragmentAssemblerImpl::fetchConformersFromFragmentCache(unsigned i
 unsigned int ConfGen::FragmentAssemblerImpl::generateFragmentConformers(unsigned int frag_type, const Chem::Fragment& frag, 
 																		FragmentTreeNode* node)
 {
-	if (!fragSSSR)
-		fragSSSR.reset(new Chem::SmallestSetOfSmallestRings());
-
-	fragSSSR->perceive(fragLibEntry);
-	setSSSR(fragLibEntry, fragSSSR);
+	fragLibEntry.perceiveSSSR();
 
 	unsigned int ret_code = fragConfGen.generate(fragLibEntry, frag_type);
 

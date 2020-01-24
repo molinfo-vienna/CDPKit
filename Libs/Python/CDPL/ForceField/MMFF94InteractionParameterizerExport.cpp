@@ -60,8 +60,6 @@ void CDPLPythonForceField::exportMMFF94InteractionParameterizer()
 			 (python::arg("self"), python::arg("func"))) 
 		.def("clearFilterFunctions", &ForceField::MMFF94InteractionParameterizer::clearFilterFunctions, 
 			 python::arg("self"))
-		.def("setSSSRFunction", &ForceField::MMFF94InteractionParameterizer::setSSSRFunction, 
-			 (python::arg("self"), python::arg("func"))) 
 		.def("setSymbolicAtomTypePatternTable", &ForceField::MMFF94InteractionParameterizer::setSymbolicAtomTypePatternTable, 
 			 (python::arg("self"), python::arg("table")))
 		.def("setHeavyToHydrogenAtomTypeMap", &ForceField::MMFF94InteractionParameterizer::setHeavyToHydrogenAtomTypeMap, 

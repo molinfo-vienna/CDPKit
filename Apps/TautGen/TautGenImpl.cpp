@@ -702,7 +702,7 @@ bool TautGenImpl::doReadNextMolecule(CDPL::Chem::Molecule& mol)
 				return false;
 			}
 
-			printProgress("Processing molecules...        ", double(inputReader.getRecordIndex()) / inputReader.getNumRecords());
+			printProgress("Processing Molecules...        ", double(inputReader.getRecordIndex()) / inputReader.getNumRecords());
 			return true;
 
 		} catch (const std::exception& e) {

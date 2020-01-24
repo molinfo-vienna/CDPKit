@@ -78,7 +78,6 @@ namespace CDPL
     namespace Chem
     {
 
-		class MolecularGraph;
 		class Atom;
 		class Bond;
     }
@@ -118,8 +117,6 @@ namespace CDPL
 			void setVanDerWaalsFilterFunction(const InteractionFilterFunction2& func); 
 
 			void clearFilterFunctions();
-
-			void setSSSRFunction(const MMFF94RingSetFunction& func); 
 
 			void setSymbolicAtomTypePatternTable(const MMFF94SymbolicAtomTypePatternTable::SharedPointer& table);
 
@@ -183,10 +180,11 @@ namespace CDPL
 											   const Chem::MolecularGraph& molgraph) const;
 
 			void setup(const Chem::MolecularGraph& molgraph, unsigned int ia_types, bool strict);
+
 			void setupAromaticRingSet();
 			void setupAtomTypes(bool strict);
-			void setupBondTypeIndices();
-			void setupAtomCharges();
+			void setupBondTypeIndices(bool strict);
+			void setupAtomCharges(bool strict);
 			void setupTopDistances();
 
 			MMFF94BondStretchingInteractionParameterizer    bondStretchingParameterizer;
@@ -199,7 +197,6 @@ namespace CDPL
 			MMFF94AtomTyper                                 atomTyper;
 			MMFF94BondTyper                                 bondTyper;
 			MMFF94ChargeCalculator                          chargeCalculator;
-			MMFF94RingSetFunction                           sssrFunc;
 			MMFF94AromaticSSSRSubset::SharedPointer         aromRings;
 			Chem::FragmentList::SharedPointer               usedAromRings;
 			Math::ULMatrix::SharedPointer                   topDistMatrix;

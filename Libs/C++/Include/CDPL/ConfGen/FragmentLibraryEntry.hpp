@@ -39,6 +39,7 @@
 #include "CDPL/ConfGen/APIPrefix.hpp"
 #include "CDPL/Chem/BasicMolecule.hpp"
 #include "CDPL/Chem/CanonicalNumberingGenerator.hpp"
+#include "CDPL/Chem/SmallestSetOfSmallestRings.hpp"
 #include "CDPL/Util/Array.hpp"
 #include "CDPL/Base/IntegerTypes.hpp"
 
@@ -145,6 +146,8 @@ namespace CDPL
 
 			const AtomMapping& getAtomMapping() const;
 
+			void perceiveSSSR();
+
 		  private:
 			void copyAtoms(const Chem::MolecularGraph& molgraph, const Chem::MolecularGraph& parent);
 			bool copyBonds(const Chem::MolecularGraph& molgraph);
@@ -157,10 +160,12 @@ namespace CDPL
 			bool compareCanonNumber(const Chem::Atom& atom1, const Chem::Atom& atom2) const;
 		
 			typedef std::vector<Base::uint32> HashInputData;
+			typedef Chem::SmallestSetOfSmallestRings::SharedPointer SmallestSetOfSmallestRingsPtr;
 
 			Chem::BasicMolecule               molecule;
 			Base::uint64                      hashCode;
 			Chem::CanonicalNumberingGenerator canonNumGen;
+			SmallestSetOfSmallestRingsPtr     sssr;
 			Util::STArray                     canonNumbers;
 			HashInputData                     hashInputData;
 			AtomMapping                       atomMapping;

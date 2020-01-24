@@ -35,7 +35,6 @@
 #include "CDPL/ConfGen/FragmentLibrary.hpp"
 #include "CDPL/ConfGen/FragmentLibraryEntry.hpp"
 #include "CDPL/ConfGen/FragmentConformerGenerator.hpp"
-#include "CDPL/Chem/SmallestSetOfSmallestRings.hpp"
 #include "CDPL/Chem/Molecule.hpp"
 
 
@@ -92,11 +91,10 @@ namespace CDPL
 
 			void removeNewLibraryEntry() const;
 
-			FragmentLibrary::SharedPointer                  fragLib;
-			FragmentLibraryEntry                            fragLibEntry;
-			FragmentConformerGenerator                      fragConfGen;
-			Chem::SmallestSetOfSmallestRings::SharedPointer fragSSSR;
-			std::size_t                                     numGenConfs;
+			FragmentLibrary::SharedPointer fragLib;
+			FragmentLibraryEntry           fragLibEntry;
+			FragmentConformerGenerator     fragConfGen;
+			std::size_t                    numGenConfs;
 		};
 
 		/**

@@ -44,11 +44,11 @@
 using namespace CDPL; 
 
 
-ForceField::MMFF94BondTyper::MMFF94BondTyper(const Chem::MolecularGraph& molgraph, Util::UIArray& types):
+ForceField::MMFF94BondTyper::MMFF94BondTyper(const Chem::MolecularGraph& molgraph, Util::UIArray& types, bool strict):
     atomTypePropTable(MMFF94AtomTypePropertyTable::get()), aromRingSetFunc(&getMMFF94AromaticRings), atomTypeFunc(&getMMFF94NumericType)
 	
 {
-    perceiveTypes(molgraph, types);
+    perceiveTypes(molgraph, types, strict);
 }
 
 ForceField::MMFF94BondTyper::MMFF94BondTyper(): 
@@ -70,7 +70,7 @@ void ForceField::MMFF94BondTyper::setAtomTypeFunction(const MMFF94NumericAtomTyp
     atomTypeFunc = func;
 }
 		
-void ForceField::MMFF94BondTyper::perceiveTypes(const Chem::MolecularGraph& molgraph, Util::UIArray& types)
+void ForceField::MMFF94BondTyper::perceiveTypes(const Chem::MolecularGraph& molgraph, Util::UIArray& types, bool strict)
 {
     using namespace Chem;
 
@@ -85,19 +85,27 @@ void ForceField::MMFF94BondTyper::perceiveTypes(const Chem::MolecularGraph& molg
 		if (getOrder(bond) == 1) {
 			const TypePropertyEntry& atom1_props = atomTypePropTable->getEntry(atomTypeFunc(bond.getBegin()));
 
-			if (!atom1_props)
-				throw ParameterizationFailed("MMFF94BondTyper: could not find MMFF94 atom type properties for atom #" + 
-											 boost::lexical_cast<std::string>(molgraph.getAtomIndex(bond.getBegin())));
+			if (!atom1_props) {
+				if (strict)
+					throw ParameterizationFailed("MMFF94BondTyper: could not find MMFF94 atom type properties for atom #" + 
+												 boost::lexical_cast<std::string>(molgraph.getAtomIndex(bond.getBegin())));
+				types[i] = 0;
+				continue;
+			}
 
 			const TypePropertyEntry& atom2_props = atomTypePropTable->getEntry(atomTypeFunc(bond.getEnd()));
 
-			if (!atom2_props)
-				throw ParameterizationFailed("MMFF94BondTyper: could not find MMFF94 atom type properties for atom #" + 
-											 boost::lexical_cast<std::string>(molgraph.getAtomIndex(bond.getEnd())));
+			if (!atom2_props) {
+				if (strict)
+					throw ParameterizationFailed("MMFF94BondTyper: could not find MMFF94 atom type properties for atom #" + 
+												 boost::lexical_cast<std::string>(molgraph.getAtomIndex(bond.getEnd())));
+				types[i] = 0;
+				continue;
+			}
 
 			if ((atom1_props.isAromaticAtomType() || atom1_props.formsMultiOrSingleBonds()) && 
 				(atom2_props.isAromaticAtomType() || atom2_props.formsMultiOrSingleBonds())) {
-				if (!containsFragmentWithBond(arom_rings, bond))  {
+				if (!containsFragmentWithBond(arom_rings, bond)) { 
 					types[i] = 1;
 					continue;
 				}

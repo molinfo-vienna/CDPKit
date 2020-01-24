@@ -41,7 +41,7 @@
 using namespace CDPL; 
 
 	
-ForceField::MMFF94InteractionParameterizer::MMFF94InteractionParameterizer(unsigned int param_set): sssrFunc(&Chem::getSSSR)
+ForceField::MMFF94InteractionParameterizer::MMFF94InteractionParameterizer(unsigned int param_set)
 {
 	setPropertyFunctions();
 	setParameterSet(param_set);
@@ -57,8 +57,7 @@ ForceField::MMFF94InteractionParameterizer::MMFF94InteractionParameterizer(const
 	electrostaticParameterizer(parameterizer.electrostaticParameterizer),
 	atomTyper(parameterizer.atomTyper),
 	bondTyper(parameterizer.bondTyper),
-	chargeCalculator(parameterizer.chargeCalculator),
-	sssrFunc(&Chem::getSSSR)
+	chargeCalculator(parameterizer.chargeCalculator)
 {
 	setPropertyFunctions();
 }
@@ -107,11 +106,6 @@ void ForceField::MMFF94InteractionParameterizer::clearFilterFunctions()
 	torsionParameterizer.setFilterFunction(InteractionFilterFunction4());
 	vanDerWaalsParameterizer.setFilterFunction(InteractionFilterFunction2());
 	electrostaticParameterizer.setFilterFunction(InteractionFilterFunction2());
-}
-
-void ForceField::MMFF94InteractionParameterizer::setSSSRFunction(const MMFF94RingSetFunction& func)
-{
-	sssrFunc = func;
 }
 
 void ForceField::MMFF94InteractionParameterizer::setSymbolicAtomTypePatternTable(const MMFF94SymbolicAtomTypePatternTable::SharedPointer& table)
@@ -354,13 +348,13 @@ void ForceField::MMFF94InteractionParameterizer::setup(const Chem::MolecularGrap
 
 	setupAromaticRingSet();
 	setupAtomTypes(strict);
-	setupBondTypeIndices();
+	setupBondTypeIndices(strict);
 
 	if ((ia_types & InteractionType::ELECTROSTATIC) || (ia_types & InteractionType::VAN_DER_WAALS))
 		setupTopDistances();
 
 	if (ia_types & InteractionType::ELECTROSTATIC)
-		setupAtomCharges();
+		setupAtomCharges(strict);
 }
 
 void ForceField::MMFF94InteractionParameterizer::setupAromaticRingSet()
@@ -372,7 +366,7 @@ void ForceField::MMFF94InteractionParameterizer::setupAromaticRingSet()
 		if (!aromRings)
 			aromRings = MMFF94AromaticSSSRSubset::SharedPointer(new MMFF94AromaticSSSRSubset());
 
-		aromRings->extract(*molGraph, *sssrFunc(*molGraph));
+		aromRings->extract(*molGraph);
 		usedAromRings = aromRings;
 	}
 }
@@ -410,7 +404,7 @@ void ForceField::MMFF94InteractionParameterizer::setupAtomTypes(bool strict)
 	}
 }
 
-void ForceField::MMFF94InteractionParameterizer::setupBondTypeIndices()
+void ForceField::MMFF94InteractionParameterizer::setupBondTypeIndices(bool strict)
 {
 	using namespace Chem;
 
@@ -425,13 +419,13 @@ void ForceField::MMFF94InteractionParameterizer::setupBondTypeIndices()
 			bondTypeIndices[i] = getMMFF94TypeIndex(bond);
 
 		} else {
-			bondTyper.perceiveTypes(*molGraph, bondTypeIndices);
+			bondTyper.perceiveTypes(*molGraph, bondTypeIndices, strict);
 			return;
 		}
 	}
 }
 
-void ForceField::MMFF94InteractionParameterizer::setupAtomCharges()
+void ForceField::MMFF94InteractionParameterizer::setupAtomCharges(bool strict)
 {
 	using namespace Chem;
 
@@ -446,7 +440,7 @@ void ForceField::MMFF94InteractionParameterizer::setupAtomCharges()
 			atomCharges[i] = getMMFF94Charge(atom);
 
 		else {
-			chargeCalculator.calculate(*molGraph, atomCharges);
+			chargeCalculator.calculate(*molGraph, atomCharges, strict);
 			return;
 		}
 	}

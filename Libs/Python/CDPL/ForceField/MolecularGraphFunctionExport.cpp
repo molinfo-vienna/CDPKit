@@ -55,9 +55,9 @@ void CDPLPythonForceField::exportMolecularGraphFunctions()
 	python::def("assignMMFF94AtomTypes", &ForceField::assignMMFF94AtomTypes, 
 				(python::arg("molgraph"), python::arg("strict"), python::arg("overwrite")));
 	python::def("assignMMFF94BondTypeIndices", &ForceField::assignMMFF94BondTypeIndices, 
-				(python::arg("molgraph"), python::arg("overwrite")));
+				(python::arg("molgraph"), python::arg("strict"), python::arg("overwrite")));
 	python::def("calcMMFF94AtomCharges", &ForceField::calcMMFF94AtomCharges, 
-				(python::arg("molgraph"), python::arg("overwrite")));
+				(python::arg("molgraph"), python::arg("strict"), python::arg("overwrite")));
 
 	EXPORT_MOLGRAPH_FUNCS_COPY_REF_CW(MMFF94AromaticRings, rings)
 }

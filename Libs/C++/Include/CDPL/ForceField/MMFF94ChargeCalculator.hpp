@@ -71,7 +71,7 @@ namespace CDPL
 
 			MMFF94ChargeCalculator();
 
-			MMFF94ChargeCalculator(const Chem::MolecularGraph& molgraph, Util::DArray& charges);
+			MMFF94ChargeCalculator(const Chem::MolecularGraph& molgraph, Util::DArray& charges, bool strict);
 
 			void setBondChargeIncrementTable(const MMFF94BondChargeIncrementTable::SharedPointer& table);
 
@@ -123,8 +123,9 @@ namespace CDPL
 			 * 
 			 * \param molgraph The molecular graph for which to calculate partial atomic charges.
 			 * \param charges The output array storing the calculated partial charges.
+			 * \param strict If \c true, strict parameterization will be peformed that might fail.
 			 */
-			void calculate(const Chem::MolecularGraph& molgraph, Util::DArray& charges);
+			void calculate(const Chem::MolecularGraph& molgraph, Util::DArray& charges, bool strict);
 
 			const Util::DArray& getFormalCharges() const;
 
@@ -142,7 +143,7 @@ namespace CDPL
 			void distFormalNeighborCharges(const Chem::Atom& atom, const FormChargeDefEntry& entry);
 			void distFormalAromAtomCharges(const Chem::Atom& atom, const FormChargeDefEntry& entry);
 
-			void calcPartialCharges(Util::DArray& charges) const;
+			void calcPartialCharges(Util::DArray& charges, bool strict) const;
 			double getBondChargeIncrement(unsigned int bnd_type_idx, unsigned int atom_type1, unsigned int atom_type2, 
 										  const PBCIEntry& pbci_entry1, const PBCIEntry& pbci_entry2) const;
 

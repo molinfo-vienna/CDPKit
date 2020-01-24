@@ -93,38 +93,6 @@ namespace
 
 		return 0;
 	}
-
-	bool isLonePairAcceptorGroupCenter(const Chem::Atom& atom, const Chem::MolecularGraph& molgraph)
-	{
-		using namespace Chem;
-
-		Atom::ConstBondIterator b_it = atom.getBondsBegin();
-
-		for (Atom::ConstAtomIterator a_it = atom.getAtomsBegin(), a_end = atom.getAtomsEnd(); a_it != a_end; ++a_it, ++b_it) {
-			const Bond& nbr_bond = *b_it;
-		
-			if (!molgraph.containsBond(nbr_bond))
-				continue;
-
-			const Atom& nbr_atom = *a_it;
-
-			if (!molgraph.containsAtom(nbr_atom))
-				continue;
- 
-			if (getOrder(nbr_bond) <= 1)
-				continue;
-
-			switch (getType(nbr_atom)) {
-
-				case AtomType::N:
-				case AtomType::O:
-				case AtomType::S:
-					return true;
-			}
-		}
-
-		return false;
-	}
 }
 
 
@@ -312,6 +280,15 @@ const ConfGen::FragmentLibraryEntry::AtomMapping& ConfGen::FragmentLibraryEntry:
 	return atomMapping;
 }
 
+void ConfGen::FragmentLibraryEntry::perceiveSSSR()
+{
+	if (!sssr)
+		sssr.reset(new Chem::SmallestSetOfSmallestRings());
+
+	sssr->perceive(*this);
+	setSSSR(*this, sssr);
+}
+
 void ConfGen::FragmentLibraryEntry::copyAtoms(const Chem::MolecularGraph& molgraph, const Chem::MolecularGraph& parent)
 {
     using namespace Chem;
@@ -396,8 +373,10 @@ void ConfGen::FragmentLibraryEntry::copyAtoms(const Chem::MolecularGraph& molgra
 			std::size_t exp_val = calcExplicitValence(atom, molgraph);
 
 			if (exp_val == 1) {
-				if (atom_type == AtomType::C && isLonePairAcceptorGroupCenter(atom, parent) && 
-					getExplicitAtomCount(atom, molgraph, AtomType::N, true) == 1) {
+				if (atom_type == AtomType::C &&  
+					getExplicitAtomCount(atom, molgraph, AtomType::N, true) == 1 &&
+					getExplicitBondCount(atom, parent) == 3 &&
+					getExplicitBondCount(atom, parent, 2, AtomType::O, true) == 1) {
 
 					setFormalCharge(new_atom, 1);
 					continue;
@@ -411,8 +390,10 @@ void ConfGen::FragmentLibraryEntry::copyAtoms(const Chem::MolecularGraph& molgra
 			setFormalCharge(new_atom, 0);
 
 		} else if (atom_type == AtomType::S && hyb_state == HybridizationState::SP3 && 
-				   calcExplicitValence(atom, molgraph) == 1 && getExplicitAtomCount(atom, molgraph, AtomType::N, true) == 1 &&
-				   isLonePairAcceptorGroupCenter(atom, parent)) {
+				   calcExplicitValence(atom, molgraph) == 1 && 
+				   getExplicitAtomCount(atom, molgraph, AtomType::N, true) == 1 &&
+				   getExplicitBondCount(atom, parent) == 4 &&
+				   getExplicitBondCount(atom, parent, 2, AtomType::O, true) >= 2) {
 			
 			setFormalCharge(new_atom, 0);
 			setImplicitHydrogenCount(new_atom, 3);

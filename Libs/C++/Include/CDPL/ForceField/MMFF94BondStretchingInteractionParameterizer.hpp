@@ -94,6 +94,10 @@ namespace CDPL
 		  private:
 			 typedef MMFF94AtomTypePropertyTable::Entry AtomTypePropEntry;
 
+			 void getParameters(const Chem::MolecularGraph& molgraph, const Chem::Bond& bond, 
+								unsigned int bond_type_idx, unsigned int atom1_type, unsigned int atom2_type, 
+								double& force_const, double& ref_length) const;
+
 			 double calcReferenceBondLength(const Chem::MolecularGraph& molgraph, const Chem::Bond& bond, 
 											const AtomTypePropEntry& type1_prop_entry,
 											const AtomTypePropEntry& type2_prop_entry) const;

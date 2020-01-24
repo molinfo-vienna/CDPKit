@@ -44,7 +44,7 @@ void CDPLPythonForceField::exportMMFF94AtomTyper()
 		.def(python::init<const ForceField::MMFF94AtomTyper&>((python::arg("self"), python::arg("typer"))))
 		.def(python::init<const Chem::MolecularGraph&, Util::SArray&, Util::UIArray&, bool>(
 				 (python::arg("self"), python::arg("molgraph"), python::arg("sym_types"), 
-				  python::arg("num_types"), python::arg("strict") = true)))
+				  python::arg("num_types"), python::arg("strict"))))
 		.def(CDPLPythonBase::ObjectIdentityCheckVisitor<ForceField::MMFF94AtomTyper>())	
 		.def("setSymbolicAtomTypePatternTable", &ForceField::MMFF94AtomTyper::setSymbolicAtomTypePatternTable, 
 			 (python::arg("self"), python::arg("table")))
@@ -62,5 +62,5 @@ void CDPLPythonForceField::exportMMFF94AtomTyper()
 			 (python::arg("self"), python::arg("parameterizer")), python::return_self<>())
 		.def("perceiveTypes", &ForceField::MMFF94AtomTyper::perceiveTypes, 
 			 (python::arg("self"), python::arg("molgraph"), python::arg("sym_types"), 
-			  python::arg("num_types"), python::arg("strict") = true));
+			  python::arg("num_types"), python::arg("strict")));
 }

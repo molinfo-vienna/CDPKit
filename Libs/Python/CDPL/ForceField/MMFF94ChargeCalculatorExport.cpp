@@ -42,8 +42,8 @@ void CDPLPythonForceField::exportMMFF94ChargeCalculator()
     python::class_<ForceField::MMFF94ChargeCalculator, ForceField::MMFF94ChargeCalculator::SharedPointer>("MMFF94ChargeCalculator", python::no_init)
 		.def(python::init<>(python::arg("self")))
 		.def(python::init<const ForceField::MMFF94ChargeCalculator&>((python::arg("self"), python::arg("calculator"))))
-		.def(python::init<const Chem::MolecularGraph&, Util::DArray&>(
-				 (python::arg("self"), python::arg("molgraph"), python::arg("charges"))))
+		.def(python::init<const Chem::MolecularGraph&, Util::DArray&, bool>(
+				 (python::arg("self"), python::arg("molgraph"), python::arg("charges"), python::arg("strict"))))
 		.def(CDPLPythonBase::ObjectIdentityCheckVisitor<ForceField::MMFF94ChargeCalculator>())	
 		.def("setAromaticRingSetFunction", &ForceField::MMFF94ChargeCalculator::setAromaticRingSetFunction, 
 			 (python::arg("self"), python::arg("func"))) 
@@ -64,7 +64,7 @@ void CDPLPythonForceField::exportMMFF94ChargeCalculator()
 		.def("assign", CDPLPythonBase::copyAssOp(&ForceField::MMFF94ChargeCalculator::operator=),
 			 (python::arg("self"), python::arg("parameterizer")), python::return_self<>())
 		.def("calculate", &ForceField::MMFF94ChargeCalculator::calculate, 
-			 (python::arg("self"), python::arg("molgraph"), python::arg("charges")))
+			 (python::arg("self"), python::arg("molgraph"), python::arg("charges"), python::arg("strict")))
 		.def("getFormalCharges", &ForceField::MMFF94ChargeCalculator::getFormalCharges, python::arg("self"),
 			 python::return_internal_reference<>())
 		.def("formalCharges", python::make_function(&ForceField::MMFF94ChargeCalculator::getFormalCharges,

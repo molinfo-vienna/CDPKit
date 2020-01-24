@@ -60,7 +60,7 @@ namespace CDPL
 		  public:
 			MMFF94BondTyper();
 
-			MMFF94BondTyper(const Chem::MolecularGraph& molgraph, Util::UIArray& types);
+			MMFF94BondTyper(const Chem::MolecularGraph& molgraph, Util::UIArray& types, bool strict);
 
 			void setAtomTypePropertyTable(const MMFF94AtomTypePropertyTable::SharedPointer& table);
 
@@ -80,8 +80,9 @@ namespace CDPL
 			 * 
 			 * \param molgraph The molecular graph for which to assign bond type indices
 			 * \param types The output array storing the determined bond type indices.
+			 * \param strict If \c true, strict parameterization will be peformed that might fail.
 			 */
-			void perceiveTypes(const Chem::MolecularGraph& molgraph, Util::UIArray& types);
+			void perceiveTypes(const Chem::MolecularGraph& molgraph, Util::UIArray& types, bool strict);
 
 		  private:
 			typedef MMFF94AtomTypePropertyTable::Entry TypePropertyEntry;

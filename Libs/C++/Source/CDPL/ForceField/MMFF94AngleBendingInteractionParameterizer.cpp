@@ -46,13 +46,13 @@ using namespace CDPL;
 namespace
 {
 	
-	double empRuleZParamTable[Chem::AtomType::MAX_TYPE + 1] = { 0.0 };
-	double empRuleCParamTable[Chem::AtomType::MAX_TYPE + 1] = { 0.0 };
+	double empRuleZParamTable[Chem::AtomType::MAX_TYPE + 1] = { 2.494 };
+	double empRuleCParamTable[Chem::AtomType::MAX_TYPE + 1] = { 1.016 };
 
 	double getEmpiricalRuleZParameter(unsigned int atomic_no)
 	{
 		if (atomic_no > Chem::AtomType::MAX_TYPE)
-			return 0.0;
+			return empRuleZParamTable[Chem::AtomType::C];
 
 		return empRuleZParamTable[atomic_no];
 	}
@@ -60,7 +60,7 @@ namespace
 	double getEmpiricalRuleCParameter(unsigned int atomic_no)
 	{
 		if (atomic_no > Chem::AtomType::MAX_TYPE)
-			return 0.0;
+			return empRuleCParamTable[Chem::AtomType::C];
 
 		return empRuleCParamTable[atomic_no];
 	}
@@ -93,6 +93,8 @@ namespace
 		}
 
 	} init;
+
+	const unsigned int FALLBACK_ATOM_TYPE = 1;
 }
 
 
@@ -192,8 +194,17 @@ void ForceField::MMFF94AngleBendingInteractionParameterizer::parameterize(const 
 				unsigned int angle_type_idx = 0;
 				bool linear = false;
 
-				getParameters(molgraph, term_atom1, ctr_atom, term_atom2, term_atom1_bnd, *nbrBonds[k], 
-							  angle_type_idx, linear, force_const, ref_angle, strict);
+				try {
+					getParameters(molgraph, term_atom1, ctr_atom, term_atom2, term_atom1_bnd, *nbrBonds[k], 
+								  angle_type_idx, linear, force_const, ref_angle, strict);
+
+				} catch (const ParameterizationFailed& e) {
+					if (strict)
+						throw e;
+					
+					getParameters(molgraph, term_atom1, FALLBACK_ATOM_TYPE, ctr_atom, FALLBACK_ATOM_TYPE, term_atom2, FALLBACK_ATOM_TYPE,
+								  term_atom1_bnd, *nbrBonds[k], angle_type_idx, linear, force_const, ref_angle, strict);
+				}
 
 				ia_data.addElement(MMFF94AngleBendingInteraction(term_atom1_idx, i, molgraph.getAtomIndex(term_atom2), 
 																 angle_type_idx, linear, force_const, ref_angle));
@@ -206,12 +217,32 @@ void ForceField::MMFF94AngleBendingInteractionParameterizer::getParameters(const
 																		   const Chem::Atom& term_atom2, const Chem::Bond& term_atom1_bnd, const Chem::Bond& term_atom2_bnd,
 																		   unsigned int& angle_type_idx, bool& linear, double& force_const, double& ref_angle, bool strict) const
 {
-	typedef MMFF94AngleBendingParameterTable::Entry ParamEntry;
-	typedef MMFF94AtomTypePropertyTable::Entry AtomTypePropEntry;
-
 	unsigned int term_atom1_type = atomTypeFunc(term_atom1);
 	unsigned int ctr_atom_type = atomTypeFunc(ctr_atom);
 	unsigned int term_atom2_type = atomTypeFunc(term_atom2);
+
+	if (!strict) {
+		if (term_atom1_type == 0)
+			term_atom1_type = FALLBACK_ATOM_TYPE;
+
+		if (term_atom2_type == 0)
+			term_atom2_type = FALLBACK_ATOM_TYPE;
+
+		if (ctr_atom_type == 0)
+			ctr_atom_type = FALLBACK_ATOM_TYPE;
+	}
+
+	getParameters(molgraph, term_atom1, term_atom1_type, ctr_atom, ctr_atom_type, term_atom2, term_atom2_type, term_atom1_bnd, term_atom2_bnd, 
+				  angle_type_idx, linear, force_const, ref_angle, strict);
+}
+
+void ForceField::MMFF94AngleBendingInteractionParameterizer::getParameters(const Chem::MolecularGraph& molgraph, const Chem::Atom& term_atom1, unsigned int term_atom1_type, const Chem::Atom& ctr_atom, 
+																		   unsigned int ctr_atom_type, const Chem::Atom& term_atom2, unsigned int term_atom2_type, const Chem::Bond& term_atom1_bnd,
+																		   const Chem::Bond& term_atom2_bnd, unsigned int& angle_type_idx, bool& linear, double& force_const, double& ref_angle, bool strict) const
+{
+	typedef MMFF94AngleBendingParameterTable::Entry ParamEntry;
+	typedef MMFF94AtomTypePropertyTable::Entry AtomTypePropEntry;
+
 	std::size_t r_size = getSizeOfContaining3Or4Ring(molgraph, term_atom1, ctr_atom, term_atom2);
 
 	angle_type_idx = getAngleTypeIndex(term_atom1_bnd, term_atom2_bnd, r_size);

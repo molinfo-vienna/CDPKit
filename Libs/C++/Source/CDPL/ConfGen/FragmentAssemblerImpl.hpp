@@ -44,7 +44,6 @@
 #include "CDPL/ConfGen/FragmentLibrary.hpp"
 #include "CDPL/ConfGen/ConformerDataArray.hpp"
 #include "CDPL/Chem/FragmentList.hpp"
-#include "CDPL/Chem/SmallestSetOfSmallestRings.hpp"
 #include "CDPL/Util/ObjectStack.hpp"
 #include "CDPL/Util/BitSet.hpp"
 
@@ -165,7 +164,6 @@ namespace CDPL
 			typedef std::pair<std::size_t, std::size_t> IndexPair;
 			typedef std::vector<IndexPair> IndexPairList;
 			typedef std::vector<FragmentLibrary::SharedPointer> FragmentLibraryList;
-			typedef Chem::SmallestSetOfSmallestRings::SharedPointer SmallestSetOfSmallestRingsPtr;
 			typedef std::auto_ptr<MMFF94BondLengthTable> BondLengthTablePtr;
 
 			ConformerDataCache                confDataCache;
@@ -181,7 +179,6 @@ namespace CDPL
 			FragmentConformerGeneratorImpl    fragConfGen;
 			FragmentLibraryEntry              fragLibEntry;
 			IndexPairList                     fragLibEntryAtomIdxMap;
-			SmallestSetOfSmallestRingsPtr     fragSSSR;
 			BondLengthTablePtr                bondLengthTable;
 			Util::BitSet                      invertibleNMask;
 			Util::BitSet                      invertedNMask;

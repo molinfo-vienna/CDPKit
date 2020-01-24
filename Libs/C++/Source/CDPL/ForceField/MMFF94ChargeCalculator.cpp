@@ -65,16 +65,18 @@ namespace
 
 		return false;
 	}
+
+	const unsigned int FALLBACK_ATOM_TYPE = 1;
 }
 
 
-ForceField::MMFF94ChargeCalculator::MMFF94ChargeCalculator(const Chem::MolecularGraph& molgraph, Util::DArray& charges):
+ForceField::MMFF94ChargeCalculator::MMFF94ChargeCalculator(const Chem::MolecularGraph& molgraph, Util::DArray& charges, bool strict):
     bondChargeIncTable(MMFF94BondChargeIncrementTable::get()), partBondChargeIncTable(MMFF94PartialBondChargeIncrementTable::get()),
 	atomTypePropTable(MMFF94AtomTypePropertyTable::get()), formChargeDefTable(MMFF94FormalAtomChargeDefinitionTable::get()),
 	aromRingSetFunc(&getMMFF94AromaticRings), numAtomTypeFunc(&getMMFF94NumericType), symAtomTypeFunc(&getMMFF94SymbolicType), 
 	bondTypeIdxFunc(getMMFF94TypeIndex)
 {
-	calculate(molgraph, charges);
+	calculate(molgraph, charges, strict);
 }
 
 ForceField::MMFF94ChargeCalculator::MMFF94ChargeCalculator(): 
@@ -124,12 +126,12 @@ void ForceField::MMFF94ChargeCalculator::setBondTypeIndexFunction(const MMFF94Bo
 	bondTypeIdxFunc = func;
 }
 
-void ForceField::MMFF94ChargeCalculator::calculate(const Chem::MolecularGraph& molgraph, Util::DArray& charges)
+void ForceField::MMFF94ChargeCalculator::calculate(const Chem::MolecularGraph& molgraph, Util::DArray& charges, bool strict)
 {
 	init(molgraph, charges);
 
 	assignFormalCharges();
-	calcPartialCharges(charges);
+	calcPartialCharges(charges, strict);
 }
 
 const Util::DArray& ForceField::MMFF94ChargeCalculator::getFormalCharges() const
@@ -268,7 +270,7 @@ void ForceField::MMFF94ChargeCalculator::distFormalNeighborCharges(const Chem::A
 	}
 }
 
-void ForceField::MMFF94ChargeCalculator::calcPartialCharges(Util::DArray& charges) const
+void ForceField::MMFF94ChargeCalculator::calcPartialCharges(Util::DArray& charges, bool strict) const
 {
 	using namespace Chem;
 
@@ -276,21 +278,30 @@ void ForceField::MMFF94ChargeCalculator::calcPartialCharges(Util::DArray& charge
 		const Atom& atom = molGraph->getAtom(i);
         unsigned int atom_type = numAtomTypeFunc(atom);
 
-		const PBCIEntry& pbci_entry = partBondChargeIncTable->getEntry(atom_type);
+		if (!strict && atom_type == 0)
+			atom_type = FALLBACK_ATOM_TYPE;
 
-		if (!pbci_entry)
+		const PBCIEntry* pbci_entry = &partBondChargeIncTable->getEntry(atom_type);
+
+		if (!(*pbci_entry) && !strict)
+			pbci_entry = &partBondChargeIncTable->getEntry(FALLBACK_ATOM_TYPE);
+
+		if (!(*pbci_entry))
 			throw ParameterizationFailed("MMFF94ChargeCalculator: could not find MMFF94 partial bond charge increment parameters for atom #" + 
 										 boost::lexical_cast<std::string>(i));
 	
-		const TypePropertyEntry& prop_entry = atomTypePropTable->getEntry(atom_type);
+		const TypePropertyEntry* prop_entry = &atomTypePropTable->getEntry(atom_type);
 
-		if (!prop_entry)
+		if (!(*prop_entry) && !strict)
+			prop_entry = &atomTypePropTable->getEntry(FALLBACK_ATOM_TYPE);
+
+		if (!(*prop_entry))
 			throw ParameterizationFailed("MMFF94ChargeCalculator: could not find MMFF94 atom type properties for atom #" + 
 										 boost::lexical_cast<std::string>(i));
 
-        double form_chg_adj_factor = pbci_entry.getFormalChargeAdjustmentFactor(); // uI
-        double form_chg = formCharges[i];                                          // q0I
-		std::size_t num_mand_nbrs = prop_entry.getNumNeighbors();                  // MI
+        double form_chg_adj_factor = pbci_entry->getFormalChargeAdjustmentFactor(); // uI
+        double form_chg = formCharges[i];                                           // q0I
+		std::size_t num_mand_nbrs = prop_entry->getNumNeighbors();                  // MI
 
         double charge = (1.0 - num_mand_nbrs * form_chg_adj_factor) * form_chg;    // (1 - MI * uI) * q0I
 
@@ -310,25 +321,34 @@ void ForceField::MMFF94ChargeCalculator::calcPartialCharges(Util::DArray& charge
 			std::size_t nbr_atom_idx = molGraph->getAtomIndex(nbr_atom);
 			unsigned int nbr_atom_type = numAtomTypeFunc(nbr_atom);
 
-			const PBCIEntry& nbr_pbci_entry = partBondChargeIncTable->getEntry(nbr_atom_type);
+			if (!strict && nbr_atom_type == 0)
+				nbr_atom_type = FALLBACK_ATOM_TYPE;
 
-			if (!nbr_pbci_entry)
+			const PBCIEntry* nbr_pbci_entry = &partBondChargeIncTable->getEntry(nbr_atom_type);
+
+			if (!(*nbr_pbci_entry) && !strict)
+				nbr_pbci_entry = &partBondChargeIncTable->getEntry(FALLBACK_ATOM_TYPE);
+
+			if (!(*nbr_pbci_entry))
 				throw ParameterizationFailed("MMFF94ChargeCalculator: could not find MMFF94 partial bond charge increment parameters for atom #" + 
 											 boost::lexical_cast<std::string>(nbr_atom_idx));
 	
-			const TypePropertyEntry& nbr_prop_entry = atomTypePropTable->getEntry(nbr_atom_type);
+			const TypePropertyEntry* nbr_prop_entry = &atomTypePropTable->getEntry(nbr_atom_type);
 
-			if (!nbr_prop_entry)
+			if (!(*nbr_prop_entry) && !strict)
+				nbr_prop_entry = &atomTypePropTable->getEntry(FALLBACK_ATOM_TYPE);
+
+			if (!(*nbr_prop_entry))
 				throw ParameterizationFailed("MMFF94ChargeCalculator: could not find MMFF94 atom type properties for atom #" + 
 											 boost::lexical_cast<std::string>(nbr_atom_idx));
 
-			double nbr_form_chg = formCharges[nbr_atom_idx];                                   // q0K
-			double nbr_form_chg_adj_factor = nbr_pbci_entry.getFormalChargeAdjustmentFactor(); // uK
+			double nbr_form_chg = formCharges[nbr_atom_idx];                                    // q0K
+			double nbr_form_chg_adj_factor = nbr_pbci_entry->getFormalChargeAdjustmentFactor(); // uK
 
-			charge += nbr_form_chg_adj_factor * nbr_form_chg;                                  // qi += uK * q0K
+			charge += nbr_form_chg_adj_factor * nbr_form_chg;                                   // qi += uK * q0K
 				
 			double bond_chg_inc = getBondChargeIncrement(bondTypeIdxFunc(nbr_bond), nbr_atom_type, atom_type, 
-														 nbr_pbci_entry, pbci_entry);                            // wKI
+														 *nbr_pbci_entry, *pbci_entry);                          // wKI
 			charge += bond_chg_inc;                                                                              // qi += wKI
 		}
 

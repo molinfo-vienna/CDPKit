@@ -172,16 +172,23 @@ bool Chem::isCarbonylLikeAtom(const Atom& atom, const MolecularGraph& molgraph, 
 			return false;
 	}
 
+	if (type == AtomType::C) {
+		if (getExplicitBondCount(atom, molgraph, 2, AtomType::O, true) == 1)
+			return true;
+		
+		if (db_o_only)
+			return false;
+
+		return (getExplicitBondCount(atom, molgraph, 2, AtomType::S, true) == 1);
+	}
+
 	if (getExplicitBondCount(atom, molgraph, 2, AtomType::O, true) > 0)
 		return true;
 
 	if (db_o_only)
 		return false;
 
-	if (type != AtomType::S && getExplicitBondCount(atom, molgraph, 2, AtomType::S, true) > 0)
-		return true;
-
-	return false;
+	return (type != AtomType::S && getExplicitBondCount(atom, molgraph, 2, AtomType::S, true) > 0);
 }
 
 bool Chem::isAmideCenterAtom(const Atom& atom, const MolecularGraph& molgraph, bool c_only, bool db_o_only)

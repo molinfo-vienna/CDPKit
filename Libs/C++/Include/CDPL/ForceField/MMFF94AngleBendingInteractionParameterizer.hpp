@@ -104,6 +104,10 @@ namespace CDPL
 							   const Chem::Atom& term_atom2, const Chem::Bond& term_atom1_bnd, const Chem::Bond& term_atom2_bnd,
 							   unsigned int& angle_type_idx, bool& linear, double& force_const, double& ref_angle, bool strict) const;
 
+			void getParameters(const Chem::MolecularGraph& molgraph, const Chem::Atom& term_atom1, unsigned int term_atom1_type, const Chem::Atom& ctr_atom, 
+							   unsigned int ctr_atom_type, const Chem::Atom& term_atom2, unsigned int term_atom2_type, const Chem::Bond& term_atom1_bnd,
+							   const Chem::Bond& term_atom2_bnd, unsigned int& angle_type_idx, bool& linear, double& force_const, double& ref_angle, bool strict) const;
+
 			std::size_t getSizeOfContaining3Or4Ring(const Chem::MolecularGraph& molgraph, const Chem::Atom& term_atom1, 
 													const Chem::Atom& ctr_atom, const Chem::Atom& term_atom2) const;
 

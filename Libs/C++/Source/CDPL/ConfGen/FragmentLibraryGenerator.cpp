@@ -42,11 +42,11 @@ using namespace CDPL;
 
 
 ConfGen::FragmentLibraryGenerator::FragmentLibraryGenerator(): 
-	fragLib(), fragSSSR(new Chem::SmallestSetOfSmallestRings()), numGenConfs(0)
+	fragLib(), numGenConfs(0)
 {}
 
 ConfGen::FragmentLibraryGenerator::FragmentLibraryGenerator(const FragmentLibrary::SharedPointer& lib): 
-	fragLib(lib), fragSSSR(new Chem::SmallestSetOfSmallestRings()), numGenConfs(0)
+	fragLib(lib), numGenConfs(0)
 {}
 
 void ConfGen::FragmentLibraryGenerator::setFragmentLibrary(const FragmentLibrary::SharedPointer& lib)
@@ -105,9 +105,7 @@ unsigned int ConfGen::FragmentLibraryGenerator::process(const Chem::MolecularGra
 		return ReturnCode::FRAGMENT_ALREADY_PROCESSED;
 	
 	try {
-		fragSSSR->perceive(fragLibEntry);
-
-		setSSSR(fragLibEntry, fragSSSR);
+		fragLibEntry.perceiveSSSR();
 
 		unsigned int ret_code = fragConfGen.generate(fragLibEntry);
 		numGenConfs = fragConfGen.getNumConformers();
