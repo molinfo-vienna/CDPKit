@@ -747,8 +747,6 @@ unsigned int ConfGen::ConformerGeneratorImpl::generateFragmentConformers()
 		torDriver.setup(fragments, *molGraph, fragSplitBonds.begin(), fragSplitBonds.end());
 		torDriver.setMMFF94Parameters(mmff94Data, mmff94InteractionMask);
 
-		double min_energy = 0.0;
-
 		if (fragSplitBonds.empty()) {
 			FragmentTreeNode& frag_node = torDriver.getFragmentNode(0);
 
@@ -757,13 +755,6 @@ unsigned int ConfGen::ConformerGeneratorImpl::generateFragmentConformers()
 
 				ConformerData& conf_data = **conf_it;
 				double energy = frag_node.calcMMFF94Energy(conf_data);
-
-				if (frag_conf_data.conformers.empty() || energy < min_energy)
-					min_energy = energy;
-
-				else if (energy > (min_energy + e_window))
-					continue;
-
 				ConformerData::SharedPointer final_conf_data = confDataCache.get();
 
 				final_conf_data->swap(conf_data);
@@ -773,6 +764,8 @@ unsigned int ConfGen::ConformerGeneratorImpl::generateFragmentConformers()
 			}
 
 		} else {
+			double min_energy = 0.0;
+
 			for (FragmentAssemblerImpl::ConstConformerIterator fa_conf_it = fragAssembler.getConformersBegin(), fa_conf_end = fragAssembler.getConformersEnd();
 				 fa_conf_it != fa_conf_end; ++fa_conf_it) {
 
@@ -807,23 +800,23 @@ unsigned int ConfGen::ConformerGeneratorImpl::generateFragmentConformers()
 					frag_conf_data.conformers.push_back(final_conf_data);
 				}
 			}
-		}
 
-		if (frag_conf_data.conformers.size() > 1) {
-			double max_energy = min_energy + e_window;
+			if (frag_conf_data.conformers.size() > 1) {
+				double max_energy = min_energy + e_window;
 
-			for (ConformerDataArray::const_iterator conf_it = frag_conf_data.conformers.begin(), confs_end = frag_conf_data.conformers.end(); conf_it != confs_end; ++conf_it) {
-				const ConformerData::SharedPointer& conf_data = *conf_it;
+				for (ConformerDataArray::const_iterator conf_it = frag_conf_data.conformers.begin(), confs_end = frag_conf_data.conformers.end(); conf_it != confs_end; ++conf_it) {
+					const ConformerData::SharedPointer& conf_data = *conf_it;
 
-				if (conf_data->getEnergy() <= max_energy)
-					tmpWorkingConfs.push_back(conf_data);
-			}
+					if (conf_data->getEnergy() <= max_energy)
+						tmpWorkingConfs.push_back(conf_data);
+				}
 				
-			frag_conf_data.conformers.swap(tmpWorkingConfs);
-			tmpWorkingConfs.clear();
-
-			orderConformersByEnergy(frag_conf_data.conformers); 
+				frag_conf_data.conformers.swap(tmpWorkingConfs);
+				tmpWorkingConfs.clear();
+			}
 		}
+
+		orderConformersByEnergy(frag_conf_data.conformers); 
 
 		frag_conf_data.lastConfIdx = frag_conf_data.conformers.size();
 	}

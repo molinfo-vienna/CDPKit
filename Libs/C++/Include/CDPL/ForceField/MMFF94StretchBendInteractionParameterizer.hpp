@@ -96,9 +96,13 @@ namespace CDPL
 
 			void getBondStretchingParameters(std::size_t atom1_idx, std::size_t atom2_idx, unsigned int& bond_type_idx, double& ref_length) const;
 
+			void getStretchBendParameters(const Chem::MolecularGraph& molgraph, const Chem::Atom& term_atom1, unsigned int term_atom1_type, const Chem::Atom& ctr_atom, unsigned int ctr_atom_type, 
+										  const Chem::Atom& term_atom2, unsigned int term_atom2_type, unsigned int bond_type_idx1, unsigned int bond_type_idx2,
+										  unsigned int angle_type_idx, unsigned int& sb_type_idx, double& ijk_force_const, double& kji_force_const) const;
+
 			void getStretchBendParameters(const Chem::MolecularGraph& molgraph, const Chem::Atom& term_atom1, const Chem::Atom& ctr_atom, 
 										  const Chem::Atom& term_atom2, unsigned int bond_type_idx1, unsigned int bond_type_idx2,
-										  unsigned int angle_type_idx, unsigned int& sb_type_idx, double& ijk_force_const, double& kji_force_const) const; 
+										  unsigned int angle_type_idx, unsigned int& sb_type_idx, double& ijk_force_const, double& kji_force_const, bool strict) const; 
 
  			/**
 			 * \brief Returns the stretch bend type index SBT[IJK].

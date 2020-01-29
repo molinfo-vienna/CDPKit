@@ -53,13 +53,13 @@ namespace CDPL
 		  public:
 			static const FragmentConformerGeneratorSettings DEFAULT;
 			static const FragmentConformerGeneratorSettings FAST;
-			static const FragmentConformerGeneratorSettings EXHAUSTIVE;
+			static const FragmentConformerGeneratorSettings THOROUGH;
 
-			class RingFragmentSettings
+			class FragmentSettings
 			{
 		
 			public:
-				RingFragmentSettings();
+				FragmentSettings();
 
 				void setMaxNumSampledConformers(std::size_t max_num);
 
@@ -130,13 +130,17 @@ namespace CDPL
 
 			std::size_t getMinMacrocycleSize() const;
 
-			RingFragmentSettings& getMacrocycleSettings();
+			FragmentSettings& getChainSettings();
 
-			const RingFragmentSettings& getMacrocycleSettings() const;
+			const FragmentSettings& getChainSettings() const;
 
-			RingFragmentSettings& getSmallRingSystemSettings();
+			FragmentSettings& getMacrocycleSettings();
 
-			const RingFragmentSettings& getSmallRingSystemSettings() const;
+			const FragmentSettings& getMacrocycleSettings() const;
+
+			FragmentSettings& getSmallRingSystemSettings();
+
+			const FragmentSettings& getSmallRingSystemSettings() const;
 
 			void setSmallRingSystemSamplingFactor(std::size_t factor);
 
@@ -152,8 +156,9 @@ namespace CDPL
 			double               refStopGrad;
 			std::size_t          minMacrocycleSize;
 			std::size_t          srSamplingFactor;
-			RingFragmentSettings mcSettings;
-			RingFragmentSettings srSettings;
+			FragmentSettings     chainSettings;
+			FragmentSettings     mcSettings;
+			FragmentSettings     srSettings;
 		};
 
 		/**

@@ -70,7 +70,7 @@ namespace
 		calcTopologicalDistanceMatrix(mol, false);
 		perceiveMMFF94AromaticRings(mol, false);
 		assignMMFF94AtomTypes(mol, true, false);
-		assignMMFF94BondTypeIndices(mol, false);
+		assignMMFF94BondTypeIndices(mol, true, false);
 	}
 
 	void readTestMolecules(const std::string& fname, MMFF94TestData::MoleculeList& mol_list)

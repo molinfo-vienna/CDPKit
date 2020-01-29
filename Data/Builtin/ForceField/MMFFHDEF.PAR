@@ -28,6 +28,7 @@
   C=P     HC
   CSP     HC
   =C=     HC
+  CS=O    HC    ! ADDED ENTRY FOR CONFGEN FRAGMENTS
   OR      HOR
   OC=O    HOCO
   OC=C    HOCC

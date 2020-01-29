@@ -53,7 +53,7 @@ BOOST_AUTO_TEST_CASE(MMFF94AngleBendingInteractionParameterizerTest)
 
 		BOOST_CHECK(MMFF94TestData::DYN_LOG_READER.getAngleBendingInteractions(mol_name, ia_data));
 
-		parameterizer.parameterize(mol, found_ia_data);
+		parameterizer.parameterize(mol, found_ia_data, true);
 
 		BOOST_CHECK_MESSAGE(found_ia_data.getSize() == ia_data.size(), "Angle bending interaction count mismatch for molecule #" << mol_idx << " (" << mol_name << "): " <<
 							found_ia_data.getSize() << " != " << ia_data.size());

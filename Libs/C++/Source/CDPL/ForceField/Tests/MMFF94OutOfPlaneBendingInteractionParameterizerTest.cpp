@@ -58,7 +58,7 @@ namespace
 
 			BOOST_CHECK(log_reader.getOutOfPlaneBendingInteractions(mol_name, ia_data));
 
-			parameterizer.parameterize(mol, found_ia_data);
+			parameterizer.parameterize(mol, found_ia_data, true);
 
 			BOOST_CHECK_MESSAGE(found_ia_data.getSize() == ia_data.size(), "Out-Of-Plane bending interaction count mismatch for molecule #" << mol_idx << " (" << mol_name << "): " <<
 								found_ia_data.getSize() << " != " << ia_data.size());

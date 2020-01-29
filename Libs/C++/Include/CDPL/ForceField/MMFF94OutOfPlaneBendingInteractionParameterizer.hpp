@@ -90,7 +90,10 @@ namespace CDPL
 			typedef std::vector<const Chem::Atom*> AtomList;
 			
 			double getForceConstant(const Chem::MolecularGraph& molgraph, unsigned int ctr_atom_type, 
-									std::size_t ctr_atom_idx, const AtomList& nbr_atoms) const;
+									std::size_t ctr_atom_idx, const AtomList& nbr_atoms, bool strict) const;
+
+			double getForceConstant(const Chem::MolecularGraph& molgraph, unsigned int ctr_atom_type, 
+									std::size_t ctr_atom_idx, unsigned int nbr_atom_types[3], const AtomList& nbr_atoms) const;
 
 			InteractionFilterFunction4                            filterFunc;
 			MMFF94NumericAtomTypeFunction                         atomTypeFunc;	

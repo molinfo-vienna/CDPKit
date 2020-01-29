@@ -44,6 +44,13 @@
 using namespace CDPL; 
 
 
+namespace
+{
+
+	const unsigned int FALLBACK_ATOM_TYPE = 1;
+}
+
+
 ForceField::MMFF94OutOfPlaneBendingInteractionParameterizer::MMFF94OutOfPlaneBendingInteractionParameterizer(const Chem::MolecularGraph& molgraph, 
 																											 MMFF94OutOfPlaneBendingInteractionData& ia_data,
 																											 bool strict):
@@ -98,10 +105,14 @@ void ForceField::MMFF94OutOfPlaneBendingInteractionParameterizer::parameterize(c
 		unsigned int ctr_atom_type = atomTypeFunc(ctr_atom);
 		const AtomTypePropEntry& ctr_prop_entry = typePropTable->getEntry(ctr_atom_type);
 
-		if (!ctr_prop_entry)
+		if (!ctr_prop_entry) {
+			if (!strict) 
+				continue;
+
 			throw ParameterizationFailed("MMFF94OutOfPlaneBendingInteractionParameterizer: could not find MMFF94 atom type properties for atom #" + 
 										 boost::lexical_cast<std::string>(i));
-
+		}
+		
 		if (ctr_prop_entry.getNumNeighbors() != 3) // only 3-valent atoms are considered
 			continue;
 
@@ -114,8 +125,20 @@ void ForceField::MMFF94OutOfPlaneBendingInteractionParameterizer::parameterize(c
 		if (filterFunc && !filterFunc(*nbrAtoms[0], ctr_atom, *nbrAtoms[1], *nbrAtoms[2]))
 			continue;
 
-		double force_const = getForceConstant(molgraph, ctr_atom_type, i, nbrAtoms);
+		double force_const;
 		std::size_t nbr_atom_idcs[3];
+
+		try {
+			force_const = getForceConstant(molgraph, ctr_atom_type, i, nbrAtoms, strict);
+
+		} catch (const ParameterizationFailed& e) {
+			if (strict)
+				throw e;
+
+			unsigned int nbr_atom_types[3] = { FALLBACK_ATOM_TYPE, FALLBACK_ATOM_TYPE, FALLBACK_ATOM_TYPE };
+
+			force_const = getForceConstant(molgraph, ctr_atom_type, i, nbr_atom_types, nbrAtoms);
+		}
 
 		for (std::size_t j = 0; j < 3; j++)
 			nbr_atom_idcs[j] = molgraph.getAtomIndex(*nbrAtoms[j]);
@@ -127,16 +150,29 @@ void ForceField::MMFF94OutOfPlaneBendingInteractionParameterizer::parameterize(c
 }
 
 double ForceField::MMFF94OutOfPlaneBendingInteractionParameterizer::getForceConstant(const Chem::MolecularGraph& molgraph, unsigned int ctr_atom_type, 
-																					 std::size_t ctr_atom_idx, const AtomList& nbr_atoms) const
+																					 std::size_t ctr_atom_idx, const AtomList& nbr_atoms, bool strict) const
+{
+	unsigned int nbr_atom_types[3];
+
+	for (std::size_t i = 0; i < 3; i++) {
+		 nbr_atom_types[i] = atomTypeFunc(*nbr_atoms[i]);
+
+		 if (!strict && nbr_atom_types[i] == 0)
+			 nbr_atom_types[i] = FALLBACK_ATOM_TYPE;
+	}
+
+	return getForceConstant(molgraph, ctr_atom_type, ctr_atom_idx, nbr_atom_types, nbr_atoms);
+}
+
+double ForceField::MMFF94OutOfPlaneBendingInteractionParameterizer::getForceConstant(const Chem::MolecularGraph& molgraph, unsigned int ctr_atom_type, 
+																					 std::size_t ctr_atom_idx, unsigned int nbr_atom_types[3], const AtomList& nbr_atoms) const
 {
 	typedef MMFF94OutOfPlaneBendingParameterTable::Entry ParamEntry;
 
 	const unsigned int* nbr_atom_param_types[3];
 
 	for (std::size_t i = 0; i < 3; i++) {
-		unsigned int nbr_atom_type = atomTypeFunc(*nbr_atoms[i]);
-
-		nbr_atom_param_types[i] = paramTypeMap->getEntry(nbr_atom_type).getParameterTypes();
+		nbr_atom_param_types[i] = paramTypeMap->getEntry(nbr_atom_types[i]).getParameterTypes();
 
 		if (!nbr_atom_param_types[i])
 			throw ParameterizationFailed("MMFF94OutOfPlaneBendingInteractionParameterizer: could not find MMFF94 parameter atom type equivalence list for atom #" + 

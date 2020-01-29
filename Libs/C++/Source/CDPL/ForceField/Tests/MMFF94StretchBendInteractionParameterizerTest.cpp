@@ -60,9 +60,9 @@ BOOST_AUTO_TEST_CASE(MMFF94StretchBendInteractionParameterizerTest)
 
 		BOOST_CHECK(MMFF94TestData::DYN_LOG_READER.getStretchBendInteractions(mol_name, ia_data));
 
-		bs_parameterizer.parameterize(mol, bs_ia_data);
-		ab_parameterizer.parameterize(mol, ab_ia_data);
-		sb_parameterizer.parameterize(mol, bs_ia_data, ab_ia_data, found_ia_data);
+		bs_parameterizer.parameterize(mol, bs_ia_data, true);
+		ab_parameterizer.parameterize(mol, ab_ia_data, true);
+		sb_parameterizer.parameterize(mol, bs_ia_data, ab_ia_data, found_ia_data, true);
 
 		for (std::size_t i = 0; i < ia_data.size(); i++) {
 			bool iaction_found = false;

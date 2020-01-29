@@ -40,6 +40,13 @@
 using namespace CDPL; 
 
 
+namespace
+{
+
+	const unsigned int FALLBACK_ATOM_TYPE = 1;
+}
+
+
 ForceField::MMFF94StretchBendInteractionParameterizer::MMFF94StretchBendInteractionParameterizer(const Chem::MolecularGraph& molgraph, const MMFF94BondStretchingInteractionData& bs_ia_data, 
 																								 const MMFF94AngleBendingInteractionData& ab_ia_data, MMFF94StretchBendInteractionData& ia_data,
 																								 bool strict):
@@ -119,8 +126,17 @@ void ForceField::MMFF94StretchBendInteractionParameterizer::parameterize(const C
 		double kji_force_const = 0.0;
 		unsigned int sb_type_idx = 0;
 
-		getStretchBendParameters(molgraph, term_atom1, ctr_atom, term_atom2, bond_type_idx1, bond_type_idx2, 
-								 ab_int.getAngleTypeIndex(), sb_type_idx, ijk_force_const, kji_force_const);
+		try {
+			getStretchBendParameters(molgraph, term_atom1, ctr_atom, term_atom2, bond_type_idx1, bond_type_idx2, 
+									 ab_int.getAngleTypeIndex(), sb_type_idx, ijk_force_const, kji_force_const, strict);
+
+		} catch (const ParameterizationFailed& e) {
+			if (strict)
+				throw e;
+
+			getStretchBendParameters(molgraph, term_atom1, FALLBACK_ATOM_TYPE, ctr_atom, FALLBACK_ATOM_TYPE, term_atom2, FALLBACK_ATOM_TYPE, bond_type_idx1, bond_type_idx2, 
+									 ab_int.getAngleTypeIndex(), sb_type_idx, ijk_force_const, kji_force_const);
+		}
 
 		if (ijk_force_const != 0.0 || kji_force_const != 0.0)
 			ia_data.addElement(MMFF94StretchBendInteraction(term_atom1_idx, ctr_atom_idx, term_atom2_idx, sb_type_idx, ab_int.getReferenceAngle(),
@@ -159,17 +175,36 @@ void ForceField::MMFF94StretchBendInteractionParameterizer::getBondStretchingPar
 	bond_type_idx = it->second->getBondTypeIndex();
 	ref_length = it->second->getReferenceLength();
 }
-			
+
 void ForceField::MMFF94StretchBendInteractionParameterizer::getStretchBendParameters(const Chem::MolecularGraph& molgraph, const Chem::Atom& term_atom1, const Chem::Atom& ctr_atom, 
 																					 const Chem::Atom& term_atom2, unsigned int bond_type_idx1, unsigned int bond_type_idx2,
+																					 unsigned int angle_type_idx, unsigned int& sb_type_idx, double& ijk_force_const, double& kji_force_const, bool strict) const
+{
+	unsigned int ctr_atom_type = atomTypeFunc(ctr_atom);
+	unsigned int term_atom1_type = atomTypeFunc(term_atom1);
+	unsigned int term_atom2_type = atomTypeFunc(term_atom2);
+
+	if (!strict) {
+		if (ctr_atom_type == 0)
+			ctr_atom_type = FALLBACK_ATOM_TYPE;
+
+		if (term_atom1_type == 0)
+			term_atom1_type = FALLBACK_ATOM_TYPE;
+
+		if (term_atom2_type == 0)
+			term_atom2_type = FALLBACK_ATOM_TYPE;
+	}
+
+	getStretchBendParameters(molgraph, term_atom1, term_atom1_type, ctr_atom, ctr_atom_type, term_atom2, term_atom2_type, bond_type_idx1, bond_type_idx2, 
+							 angle_type_idx, sb_type_idx, ijk_force_const, kji_force_const);
+}
+
+void ForceField::MMFF94StretchBendInteractionParameterizer::getStretchBendParameters(const Chem::MolecularGraph& molgraph, const Chem::Atom& term_atom1, unsigned int term_atom1_type, const Chem::Atom& ctr_atom, unsigned int ctr_atom_type, 
+																					 const Chem::Atom& term_atom2, unsigned int term_atom2_type, unsigned int bond_type_idx1, unsigned int bond_type_idx2,
 																					 unsigned int angle_type_idx, unsigned int& sb_type_idx, double& ijk_force_const, double& kji_force_const) const
 {
 	typedef MMFF94StretchBendParameterTable::Entry ParamEntry;
 	typedef MMFF94DefaultStretchBendParameterTable::Entry DefParamEntry;
-
-	unsigned int ctr_atom_type = atomTypeFunc(ctr_atom);
-	unsigned int term_atom1_type = atomTypeFunc(term_atom1);
-	unsigned int term_atom2_type = atomTypeFunc(term_atom2);
 
 	if (term_atom1_type > term_atom2_type)
 		sb_type_idx = getStretchBendTypeIndex(term_atom1_type == term_atom2_type, bond_type_idx2, bond_type_idx1, angle_type_idx);

@@ -42,48 +42,48 @@ void CDPLPythonConfGen::exportFragmentConformerGeneratorSettings()
 	python::class_<ConfGen::FragmentConformerGeneratorSettings> cl("FragmentConformerGeneratorSettings", python::no_init);
 	python::scope scope = cl;
 
-	python::class_<ConfGen::FragmentConformerGeneratorSettings::RingFragmentSettings>("RingFragmentSettings")
+	python::class_<ConfGen::FragmentConformerGeneratorSettings::FragmentSettings>("FragmentSettings")
 		.def(python::init<>(python::arg("self")))
-		.def(python::init<const ConfGen::FragmentConformerGeneratorSettings::RingFragmentSettings&>((python::arg("self"), python::arg("settings"))))
-		.def(CDPLPythonBase::ObjectIdentityCheckVisitor<ConfGen::FragmentConformerGeneratorSettings::RingFragmentSettings>())
-		.def("assign", CDPLPythonBase::copyAssOp(&ConfGen::FragmentConformerGeneratorSettings::RingFragmentSettings::operator=), 
+		.def(python::init<const ConfGen::FragmentConformerGeneratorSettings::FragmentSettings&>((python::arg("self"), python::arg("settings"))))
+		.def(CDPLPythonBase::ObjectIdentityCheckVisitor<ConfGen::FragmentConformerGeneratorSettings::FragmentSettings>())
+		.def("assign", CDPLPythonBase::copyAssOp(&ConfGen::FragmentConformerGeneratorSettings::FragmentSettings::operator=), 
 			 (python::arg("self"), python::arg("settings")), python::return_self<>())
-		.def("setMaxNumSampledConformers", &ConfGen::FragmentConformerGeneratorSettings::RingFragmentSettings::setMaxNumSampledConformers, 
+		.def("setMaxNumSampledConformers", &ConfGen::FragmentConformerGeneratorSettings::FragmentSettings::setMaxNumSampledConformers, 
 			 (python::arg("self"), python::arg("max_num")))
-		.def("getMaxNumSampledConformers", &ConfGen::FragmentConformerGeneratorSettings::RingFragmentSettings::getMaxNumSampledConformers, 
+		.def("getMaxNumSampledConformers", &ConfGen::FragmentConformerGeneratorSettings::FragmentSettings::getMaxNumSampledConformers, 
 			 python::arg("self"))
-		.def("setMinNumSampledConformers", &ConfGen::FragmentConformerGeneratorSettings::RingFragmentSettings::setMinNumSampledConformers, 
+		.def("setMinNumSampledConformers", &ConfGen::FragmentConformerGeneratorSettings::FragmentSettings::setMinNumSampledConformers, 
 			 (python::arg("self"), python::arg("min_num")))
-		.def("getMinNumSampledConformers", &ConfGen::FragmentConformerGeneratorSettings::RingFragmentSettings::getMinNumSampledConformers, 
+		.def("getMinNumSampledConformers", &ConfGen::FragmentConformerGeneratorSettings::FragmentSettings::getMinNumSampledConformers, 
 			 python::arg("self"))
-		.def("setTimeout", &ConfGen::FragmentConformerGeneratorSettings::RingFragmentSettings::setTimeout, 
+		.def("setTimeout", &ConfGen::FragmentConformerGeneratorSettings::FragmentSettings::setTimeout, 
 			 (python::arg("self"), python::arg("mil_secs")))
-		.def("getTimeout", &ConfGen::FragmentConformerGeneratorSettings::RingFragmentSettings::getTimeout, 
+		.def("getTimeout", &ConfGen::FragmentConformerGeneratorSettings::FragmentSettings::getTimeout, 
 			 python::arg("self"))
-		.def("setEnergyWindow", &ConfGen::FragmentConformerGeneratorSettings::RingFragmentSettings::setEnergyWindow, 
+		.def("setEnergyWindow", &ConfGen::FragmentConformerGeneratorSettings::FragmentSettings::setEnergyWindow, 
 			 (python::arg("self"), python::arg("win_size")))
-		.def("getEnergyWindow", &ConfGen::FragmentConformerGeneratorSettings::RingFragmentSettings::getEnergyWindow, 
+		.def("getEnergyWindow", &ConfGen::FragmentConformerGeneratorSettings::FragmentSettings::getEnergyWindow, 
 			 python::arg("self"))
-		.def("setMaxNumOutputConformers", &ConfGen::FragmentConformerGeneratorSettings::RingFragmentSettings::setMaxNumOutputConformers, 
+		.def("setMaxNumOutputConformers", &ConfGen::FragmentConformerGeneratorSettings::FragmentSettings::setMaxNumOutputConformers, 
 			 (python::arg("self"), python::arg("max_num")))
-		.def("getMaxNumOutputConformers", &ConfGen::FragmentConformerGeneratorSettings::RingFragmentSettings::getMaxNumOutputConformers, 
+		.def("getMaxNumOutputConformers", &ConfGen::FragmentConformerGeneratorSettings::FragmentSettings::getMaxNumOutputConformers, 
 			 python::arg("self"))
-		.def("setMinRMSD", &ConfGen::FragmentConformerGeneratorSettings::RingFragmentSettings::setMinRMSD, 
+		.def("setMinRMSD", &ConfGen::FragmentConformerGeneratorSettings::FragmentSettings::setMinRMSD, 
 			 (python::arg("self"), python::arg("min_rmsd")))
-		.def("getMinRMSD", &ConfGen::FragmentConformerGeneratorSettings::RingFragmentSettings::getMinRMSD, 
+		.def("getMinRMSD", &ConfGen::FragmentConformerGeneratorSettings::FragmentSettings::getMinRMSD, 
 			 python::arg("self"))
-		.add_property("maxNumSampledConformers", &ConfGen::FragmentConformerGeneratorSettings::RingFragmentSettings::getMaxNumSampledConformers, 
-					  &ConfGen::FragmentConformerGeneratorSettings::RingFragmentSettings::setMaxNumSampledConformers)
-		.add_property("minNumSampledConformers", &ConfGen::FragmentConformerGeneratorSettings::RingFragmentSettings::getMinNumSampledConformers, 
-					  &ConfGen::FragmentConformerGeneratorSettings::RingFragmentSettings::setMinNumSampledConformers)
-		.add_property("timeout", &ConfGen::FragmentConformerGeneratorSettings::RingFragmentSettings::getTimeout,
-					  &ConfGen::FragmentConformerGeneratorSettings::RingFragmentSettings::setTimeout)
-		.add_property("energyWindow", &ConfGen::FragmentConformerGeneratorSettings::RingFragmentSettings::getEnergyWindow,
-					  &ConfGen::FragmentConformerGeneratorSettings::RingFragmentSettings::setEnergyWindow)
-		.add_property("maxNumOutputConformers", &ConfGen::FragmentConformerGeneratorSettings::RingFragmentSettings::getMaxNumOutputConformers, 
-					  &ConfGen::FragmentConformerGeneratorSettings::RingFragmentSettings::setMaxNumOutputConformers)
-		.add_property("minRMSD", &ConfGen::FragmentConformerGeneratorSettings::RingFragmentSettings::getMinRMSD, 
-					  &ConfGen::FragmentConformerGeneratorSettings::RingFragmentSettings::setMinRMSD);
+		.add_property("maxNumSampledConformers", &ConfGen::FragmentConformerGeneratorSettings::FragmentSettings::getMaxNumSampledConformers, 
+					  &ConfGen::FragmentConformerGeneratorSettings::FragmentSettings::setMaxNumSampledConformers)
+		.add_property("minNumSampledConformers", &ConfGen::FragmentConformerGeneratorSettings::FragmentSettings::getMinNumSampledConformers, 
+					  &ConfGen::FragmentConformerGeneratorSettings::FragmentSettings::setMinNumSampledConformers)
+		.add_property("timeout", &ConfGen::FragmentConformerGeneratorSettings::FragmentSettings::getTimeout,
+					  &ConfGen::FragmentConformerGeneratorSettings::FragmentSettings::setTimeout)
+		.add_property("energyWindow", &ConfGen::FragmentConformerGeneratorSettings::FragmentSettings::getEnergyWindow,
+					  &ConfGen::FragmentConformerGeneratorSettings::FragmentSettings::setEnergyWindow)
+		.add_property("maxNumOutputConformers", &ConfGen::FragmentConformerGeneratorSettings::FragmentSettings::getMaxNumOutputConformers, 
+					  &ConfGen::FragmentConformerGeneratorSettings::FragmentSettings::setMaxNumOutputConformers)
+		.add_property("minRMSD", &ConfGen::FragmentConformerGeneratorSettings::FragmentSettings::getMinRMSD, 
+					  &ConfGen::FragmentConformerGeneratorSettings::FragmentSettings::setMinRMSD);
 
 	typedef void (ConfGen::FragmentConformerGeneratorSettings::*SetBoolFunc)(bool);
 	typedef bool (ConfGen::FragmentConformerGeneratorSettings::*GetBoolFunc)() const;
@@ -126,12 +126,16 @@ void CDPLPythonConfGen::exportFragmentConformerGeneratorSettings()
 			 (python::arg("self"), python::arg("max_size")))
 		.def("getMinMacrocycleSize", &ConfGen::FragmentConformerGeneratorSettings::getMinMacrocycleSize, 
 			 python::arg("self"))
+		.def("getChainSettings", 
+			 static_cast<ConfGen::FragmentConformerGeneratorSettings::FragmentSettings& (ConfGen::FragmentConformerGeneratorSettings::*)()>
+			 (&ConfGen::FragmentConformerGeneratorSettings::getChainSettings),
+			 python::arg("self"), python::return_internal_reference<>())
 		.def("getMacrocycleSettings", 
-			 static_cast<ConfGen::FragmentConformerGeneratorSettings::RingFragmentSettings& (ConfGen::FragmentConformerGeneratorSettings::*)()>
+			 static_cast<ConfGen::FragmentConformerGeneratorSettings::FragmentSettings& (ConfGen::FragmentConformerGeneratorSettings::*)()>
 			 (&ConfGen::FragmentConformerGeneratorSettings::getMacrocycleSettings),
 			 python::arg("self"), python::return_internal_reference<>())
 		.def("getSmallRingSystemSettings", 
-			 static_cast<ConfGen::FragmentConformerGeneratorSettings::RingFragmentSettings& (ConfGen::FragmentConformerGeneratorSettings::*)()>
+			 static_cast<ConfGen::FragmentConformerGeneratorSettings::FragmentSettings& (ConfGen::FragmentConformerGeneratorSettings::*)()>
 			 (&ConfGen::FragmentConformerGeneratorSettings::getSmallRingSystemSettings),
 			 python::arg("self"), python::return_internal_reference<>())
 		.def("setSmallRingSystemSamplingFactor", &ConfGen::FragmentConformerGeneratorSettings::setSmallRingSystemSamplingFactor, 
@@ -140,7 +144,7 @@ void CDPLPythonConfGen::exportFragmentConformerGeneratorSettings()
 			 python::arg("self"))
 		.def_readonly("DEFAULT", ConfGen::FragmentConformerGeneratorSettings::DEFAULT)
 		.def_readonly("FAST", ConfGen::FragmentConformerGeneratorSettings::FAST)
-		.def_readonly("EXHAUSTIVE", ConfGen::FragmentConformerGeneratorSettings::EXHAUSTIVE)
+		.def_readonly("THOROUGH", ConfGen::FragmentConformerGeneratorSettings::THOROUGH)
 		.add_property("preserveInputBondingGeom", GetBoolFunc(&ConfGen::FragmentConformerGeneratorSettings::preserveInputBondingGeometries), 
 					  SetBoolFunc(&ConfGen::FragmentConformerGeneratorSettings::preserveInputBondingGeometries))
 		.add_property("forceFieldType", &ConfGen::FragmentConformerGeneratorSettings::getForceFieldType, 
@@ -157,12 +161,16 @@ void CDPLPythonConfGen::exportFragmentConformerGeneratorSettings()
 					  &ConfGen::FragmentConformerGeneratorSettings::setRefinementStopGradient)
 		.add_property("minMacrocycleSize", &ConfGen::FragmentConformerGeneratorSettings::getMinMacrocycleSize, 
 					  &ConfGen::FragmentConformerGeneratorSettings::setMinMacrocycleSize)
+		.add_property("chainSettings", 
+					  python::make_function(static_cast<ConfGen::FragmentConformerGeneratorSettings::FragmentSettings& (ConfGen::FragmentConformerGeneratorSettings::*)()>
+											(&ConfGen::FragmentConformerGeneratorSettings::getChainSettings),
+											python::return_internal_reference<>()))
 		.add_property("macrocycleSettings", 
-					  python::make_function(static_cast<ConfGen::FragmentConformerGeneratorSettings::RingFragmentSettings& (ConfGen::FragmentConformerGeneratorSettings::*)()>
+					  python::make_function(static_cast<ConfGen::FragmentConformerGeneratorSettings::FragmentSettings& (ConfGen::FragmentConformerGeneratorSettings::*)()>
 											(&ConfGen::FragmentConformerGeneratorSettings::getMacrocycleSettings),
 											python::return_internal_reference<>()))
 		.add_property("smallRingSysSettings", 
-					  python::make_function(static_cast<ConfGen::FragmentConformerGeneratorSettings::RingFragmentSettings& (ConfGen::FragmentConformerGeneratorSettings::*)()>
+					  python::make_function(static_cast<ConfGen::FragmentConformerGeneratorSettings::FragmentSettings& (ConfGen::FragmentConformerGeneratorSettings::*)()>
 											(&ConfGen::FragmentConformerGeneratorSettings::getSmallRingSystemSettings),
 											python::return_internal_reference<>()))
 		.add_property("smallRingSysSamplingFactor", &ConfGen::FragmentConformerGeneratorSettings::getSmallRingSystemSamplingFactor, 

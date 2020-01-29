@@ -92,7 +92,7 @@ BOOST_AUTO_TEST_CASE(MMFF94BondStretchingGradientFunctionTest)
     for (std::size_t mol_idx = 0; mol_idx < MMFF94TestData::DYN_TEST_MOLECULES.size(); mol_idx++) {
 		const Chem::Molecule& mol = *MMFF94TestData::DYN_TEST_MOLECULES[mol_idx];
 
-		parameterizer.parameterize(mol, found_ia_data);
+		parameterizer.parameterize(mol, found_ia_data, true);
 	
 		coords.clear();
 		get3DCoordinates(mol, coords);
@@ -151,7 +151,7 @@ BOOST_AUTO_TEST_CASE(MMFF94AngleBendingGradientFunctionTest)
     for (std::size_t mol_idx = 0; mol_idx < MMFF94TestData::DYN_TEST_MOLECULES.size(); mol_idx++) {
 		const Chem::Molecule& mol = *MMFF94TestData::DYN_TEST_MOLECULES[mol_idx];
 	
-		parameterizer.parameterize(mol, found_ia_data);
+		parameterizer.parameterize(mol, found_ia_data, true);
 
 		coords.clear();
 		get3DCoordinates(mol, coords);
@@ -221,9 +221,9 @@ BOOST_AUTO_TEST_CASE(MMFF94StretchBendGradientFunctionTest)
     for (std::size_t mol_idx = 0; mol_idx < MMFF94TestData::DYN_TEST_MOLECULES.size(); mol_idx++) {
 		const Chem::Molecule& mol = *MMFF94TestData::DYN_TEST_MOLECULES[mol_idx];
 
-		bs_parameterizer.parameterize(mol, bs_ia_data);
-		ab_parameterizer.parameterize(mol, ab_ia_data);
-		sb_parameterizer.parameterize(mol, bs_ia_data, ab_ia_data, found_ia_data);
+		bs_parameterizer.parameterize(mol, bs_ia_data, true);
+		ab_parameterizer.parameterize(mol, ab_ia_data, true);
+		sb_parameterizer.parameterize(mol, bs_ia_data, ab_ia_data, found_ia_data, true);
 
 		coords.clear();
 		get3DCoordinates(mol, coords);
@@ -295,7 +295,7 @@ BOOST_AUTO_TEST_CASE(MMFF94OutOfPlaneBendingGradientFunctionTest)
 		for (std::size_t mol_idx = 0; mol_idx < mols.size(); mol_idx++) {
 			const Chem::Molecule& mol = *mols[mol_idx];
 
-			parameterizer.parameterize(mol, found_ia_data);
+			parameterizer.parameterize(mol, found_ia_data, true);
 
 			coords.clear();
 			get3DCoordinates(mol, coords);
@@ -375,7 +375,7 @@ BOOST_AUTO_TEST_CASE(MMFF94TorsionGradientFunctionTest)
 		for (std::size_t mol_idx = 0; mol_idx <	mols.size(); mol_idx++) {
 			const Chem::Molecule& mol =	*mols[mol_idx];
 
-			parameterizer.parameterize(mol, found_ia_data);
+			parameterizer.parameterize(mol, found_ia_data, true);
 
 			coords.clear();
 			get3DCoordinates(mol, coords);
@@ -444,7 +444,7 @@ BOOST_AUTO_TEST_CASE(MMFF94VanDerWaalsGradientFunctionTest)
     for (std::size_t mol_idx = 0; mol_idx < MMFF94TestData::DYN_TEST_MOLECULES.size(); mol_idx++) {
 		const Chem::Molecule& mol = *MMFF94TestData::DYN_TEST_MOLECULES[mol_idx];
 
-		parameterizer.parameterize(mol, found_ia_data);
+		parameterizer.parameterize(mol, found_ia_data, true);
 
 		coords.clear();
 		get3DCoordinates(mol, coords);
@@ -502,9 +502,9 @@ BOOST_AUTO_TEST_CASE(MMFF94ElectrostaticGradientFunctionTest)
     for (std::size_t mol_idx = 0; mol_idx < MMFF94TestData::DYN_TEST_MOLECULES.size(); mol_idx++) {
 		Chem::Molecule& mol = *MMFF94TestData::DYN_TEST_MOLECULES[mol_idx];
 
-		ForceField::calcMMFF94AtomCharges(mol, false);
+		ForceField::calcMMFF94AtomCharges(mol, true, false);
 
-		parameterizer.parameterize(mol, found_ia_data);
+		parameterizer.parameterize(mol, found_ia_data, true);
 
 		coords.clear();
 		get3DCoordinates(mol, coords);

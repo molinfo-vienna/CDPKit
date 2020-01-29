@@ -110,7 +110,8 @@ namespace CDPL
 
 			bool generateHydrogenCoordsAndMinimize(ConformerData& conf_data);
 
-			unsigned int generateSingleConformer();
+			unsigned int generateChainConformer();
+			unsigned int generateRigidRingConformer();
 			unsigned int generateFlexibleRingConformers();
 
 			void addSymmetryMappedConformers(const ConformerData& conf_data, double rmsd, std::size_t max_num_out_confs);
@@ -126,7 +127,8 @@ namespace CDPL
 			void getSymmetryMappings();
 			void getNeighborHydrogens(const Chem::Atom& atom, AtomList& nbr_list) const;
 
-			std::size_t calcNumSmallRingSystemConfSamples();
+			std::size_t calcNumChainConfSamples() const;
+			std::size_t calcNumSmallRingSystemConfSamples() const;
 			std::size_t calcNumMacrocyclicRingSystemConfSamples() const;
 
 			std::size_t getNumRotatableRingBonds(const Chem::MolecularGraph& molgraph) const;

@@ -57,7 +57,7 @@ BOOST_AUTO_TEST_CASE(MMFF94ChargeCalculatorTest)
 		BOOST_CHECK(MMFF94TestData::DYN_LOG_READER.getFormalAtomCharges(mol_name, form_charges));
 		BOOST_CHECK_EQUAL(form_charges.size(), mol.getNumAtoms());
 
-		charge_calc.calculate(mol, calc_charges);
+		charge_calc.calculate(mol, calc_charges, true);
 
 		for (std::size_t i = 0; i < mol.getNumAtoms(); i++) {
 			double correct_charge = form_charges[i];

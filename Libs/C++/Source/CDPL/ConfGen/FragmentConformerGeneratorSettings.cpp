@@ -34,67 +34,67 @@
 using namespace CDPL;
 
 
-ConfGen::FragmentConformerGeneratorSettings::RingFragmentSettings::RingFragmentSettings():
+ConfGen::FragmentConformerGeneratorSettings::FragmentSettings::FragmentSettings():
 	maxNumSampledConfs(2000), minNumSampledConfs(40), maxNumOutputConfs(1000),
-	timeout(0), eWindow(6.0), minRMSD(0.1)
+	timeout(0), eWindow(8.0), minRMSD(0.1)
 {}
 
-void ConfGen::FragmentConformerGeneratorSettings::RingFragmentSettings::setMaxNumSampledConformers(std::size_t max_num)
+void ConfGen::FragmentConformerGeneratorSettings::FragmentSettings::setMaxNumSampledConformers(std::size_t max_num)
 {
 	maxNumSampledConfs = max_num;
 }
 
-std::size_t ConfGen::FragmentConformerGeneratorSettings::RingFragmentSettings::getMaxNumSampledConformers() const
+std::size_t ConfGen::FragmentConformerGeneratorSettings::FragmentSettings::getMaxNumSampledConformers() const
 {
 	return maxNumSampledConfs;
 }
 
-void ConfGen::FragmentConformerGeneratorSettings::RingFragmentSettings::setMinNumSampledConformers(std::size_t min_num)
+void ConfGen::FragmentConformerGeneratorSettings::FragmentSettings::setMinNumSampledConformers(std::size_t min_num)
 {
 	minNumSampledConfs = min_num;
 }
 
-std::size_t ConfGen::FragmentConformerGeneratorSettings::RingFragmentSettings::getMinNumSampledConformers() const
+std::size_t ConfGen::FragmentConformerGeneratorSettings::FragmentSettings::getMinNumSampledConformers() const
 {
 	return minNumSampledConfs;
 }
 
-void ConfGen::FragmentConformerGeneratorSettings::RingFragmentSettings::setTimeout(std::size_t mil_secs)
+void ConfGen::FragmentConformerGeneratorSettings::FragmentSettings::setTimeout(std::size_t mil_secs)
 {
 	timeout = mil_secs;
 }
 
-std::size_t ConfGen::FragmentConformerGeneratorSettings::RingFragmentSettings::getTimeout() const
+std::size_t ConfGen::FragmentConformerGeneratorSettings::FragmentSettings::getTimeout() const
 {
 	return timeout;
 }
 
-void ConfGen::FragmentConformerGeneratorSettings::RingFragmentSettings::setEnergyWindow(double win_size)
+void ConfGen::FragmentConformerGeneratorSettings::FragmentSettings::setEnergyWindow(double win_size)
 {
 	eWindow = win_size;
 }
 
-double ConfGen::FragmentConformerGeneratorSettings::RingFragmentSettings::getEnergyWindow() const
+double ConfGen::FragmentConformerGeneratorSettings::FragmentSettings::getEnergyWindow() const
 {
 	return eWindow;
 }
 
-void ConfGen::FragmentConformerGeneratorSettings::RingFragmentSettings::setMaxNumOutputConformers(std::size_t max_num)
+void ConfGen::FragmentConformerGeneratorSettings::FragmentSettings::setMaxNumOutputConformers(std::size_t max_num)
 {
 	maxNumOutputConfs = max_num;
 }
 
-std::size_t ConfGen::FragmentConformerGeneratorSettings::RingFragmentSettings::getMaxNumOutputConformers() const
+std::size_t ConfGen::FragmentConformerGeneratorSettings::FragmentSettings::getMaxNumOutputConformers() const
 {
 	return maxNumOutputConfs;
 }
 
-void ConfGen::FragmentConformerGeneratorSettings::RingFragmentSettings::setMinRMSD(double min_rmsd)
+void ConfGen::FragmentConformerGeneratorSettings::FragmentSettings::setMinRMSD(double min_rmsd)
 {
 	minRMSD = min_rmsd;
 }
 
-double ConfGen::FragmentConformerGeneratorSettings::RingFragmentSettings::getMinRMSD() const
+double ConfGen::FragmentConformerGeneratorSettings::FragmentSettings::getMinRMSD() const
 {
 	return minRMSD;
 }
@@ -106,17 +106,24 @@ ConfGen::FragmentConformerGeneratorSettings::FragmentConformerGeneratorSettings(
 	distExponent(ForceField::MMFF94ElectrostaticInteractionParameterizer::DEF_DISTANCE_EXPONENT),
 	maxNumRefIters(0), refStopGrad(0.1), minMacrocycleSize(10), srSamplingFactor(6) 
 {
+	chainSettings.setMaxNumSampledConformers(100);
+	chainSettings.setMinNumSampledConformers(20);
+	chainSettings.setTimeout(400 * 1000);
+	chainSettings.setEnergyWindow(8.0);
+	chainSettings.setMaxNumOutputConformers(1);
+	chainSettings.setMinRMSD(0.1);
+
 	srSettings.setMaxNumSampledConformers(1000);
-	srSettings.setMinNumSampledConformers(40);
-	srSettings.setTimeout(30 * 1000);
-	srSettings.setEnergyWindow(6.0);
+	srSettings.setMinNumSampledConformers(30);
+	srSettings.setTimeout(400 * 1000);
+	srSettings.setEnergyWindow(8.0);
 	srSettings.setMaxNumOutputConformers(1000);
 	srSettings.setMinRMSD(0.1);
 
 	mcSettings.setMaxNumSampledConformers(2000);
 	mcSettings.setMinNumSampledConformers(100);
-	mcSettings.setTimeout(10 * 60 * 1000);
-	mcSettings.setEnergyWindow(20.0);
+	mcSettings.setTimeout(1800 * 1000);
+	mcSettings.setEnergyWindow(25.0);
 	mcSettings.setMaxNumOutputConformers(1000);
 	mcSettings.setMinRMSD(0.1);
 }
@@ -201,25 +208,37 @@ std::size_t ConfGen::FragmentConformerGeneratorSettings::getMinMacrocycleSize() 
 	return minMacrocycleSize;
 }
 
-ConfGen::FragmentConformerGeneratorSettings::RingFragmentSettings& 
+ConfGen::FragmentConformerGeneratorSettings::FragmentSettings& 
+ConfGen::FragmentConformerGeneratorSettings::getChainSettings()
+{
+	return chainSettings;
+}
+
+const ConfGen::FragmentConformerGeneratorSettings::FragmentSettings& 
+ConfGen::FragmentConformerGeneratorSettings::getChainSettings() const
+{
+	return chainSettings;
+}
+
+ConfGen::FragmentConformerGeneratorSettings::FragmentSettings& 
 ConfGen::FragmentConformerGeneratorSettings::getMacrocycleSettings()
 {
 	return mcSettings;
 }
 
-const ConfGen::FragmentConformerGeneratorSettings::RingFragmentSettings& 
+const ConfGen::FragmentConformerGeneratorSettings::FragmentSettings& 
 ConfGen::FragmentConformerGeneratorSettings::getMacrocycleSettings() const
 {
 	return mcSettings;
 }
 
-ConfGen::FragmentConformerGeneratorSettings::RingFragmentSettings& 
+ConfGen::FragmentConformerGeneratorSettings::FragmentSettings& 
 ConfGen::FragmentConformerGeneratorSettings::getSmallRingSystemSettings()
 {
 	return srSettings;
 }
 
-const ConfGen::FragmentConformerGeneratorSettings::RingFragmentSettings& 
+const ConfGen::FragmentConformerGeneratorSettings::FragmentSettings& 
 ConfGen::FragmentConformerGeneratorSettings::getSmallRingSystemSettings() const
 {
 	return srSettings;

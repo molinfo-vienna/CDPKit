@@ -90,6 +90,8 @@ namespace
 		}
 
 	} init;
+
+	const unsigned int FALLBACK_ATOM_TYPE = 1;
 }
 
 
@@ -161,24 +163,42 @@ void ForceField::MMFF94TorsionInteractionParameterizer::parameterize(const Chem:
 
 		std::size_t ctr_atom1_idx = molgraph.getAtomIndex(ctr_atom1);
 		unsigned int ctr_atom1_type = atomTypeFunc(ctr_atom1);
-		const AtomTypePropEntry& ctr_atom1_prop_entry = typePropTable->getEntry(ctr_atom1_type);
 
-		if (!ctr_atom1_prop_entry)
+		if (!strict && ctr_atom1_type == 0)
+			ctr_atom1_type = FALLBACK_ATOM_TYPE;
+
+		const AtomTypePropEntry* ctr_atom1_prop_entry = &typePropTable->getEntry(ctr_atom1_type);
+
+		if (!(*ctr_atom1_prop_entry) && !strict) {
+			ctr_atom1_type = FALLBACK_ATOM_TYPE;
+			ctr_atom1_prop_entry = &typePropTable->getEntry(ctr_atom1_type);
+		} 
+
+		if (!(*ctr_atom1_prop_entry)) 
 			throw ParameterizationFailed("MMFF94TorsionInteractionParameterizer: could not find MMFF94 atom type properties for atom #" + 
 										 boost::lexical_cast<std::string>(ctr_atom1_idx));
 
-		if (ctr_atom1_prop_entry.formsLinearBondAngle()) // Empirical rule a)
+		if (ctr_atom1_prop_entry->formsLinearBondAngle()) // Empirical rule a)
 			continue;
 
 		std::size_t ctr_atom2_idx = molgraph.getAtomIndex(ctr_atom2);
 		unsigned int ctr_atom2_type = atomTypeFunc(ctr_atom2);
-		const AtomTypePropEntry& ctr_atom2_prop_entry = typePropTable->getEntry(ctr_atom2_type);
 
-		if (!ctr_atom2_prop_entry)
+		if (!strict && ctr_atom2_type == 0)
+			ctr_atom2_type = FALLBACK_ATOM_TYPE;
+
+		const AtomTypePropEntry* ctr_atom2_prop_entry = &typePropTable->getEntry(ctr_atom2_type);
+
+		if (!(*ctr_atom2_prop_entry) && !strict) {
+			ctr_atom2_type = FALLBACK_ATOM_TYPE;
+			ctr_atom2_prop_entry = &typePropTable->getEntry(ctr_atom2_type);
+		} 
+
+		if (!(*ctr_atom2_prop_entry))
 			throw ParameterizationFailed("MMFF94TorsionInteractionParameterizer: could not find MMFF94 atom type properties for atom #" + 
 										 boost::lexical_cast<std::string>(ctr_atom2_idx));
 
-		if (ctr_atom2_prop_entry.formsLinearBondAngle()) // Empirical rule a)
+		if (ctr_atom2_prop_entry->formsLinearBondAngle()) // Empirical rule a)
 			continue;
 
 		nbrAtoms1.clear();
@@ -211,6 +231,9 @@ void ForceField::MMFF94TorsionInteractionParameterizer::parameterize(const Chem:
 			unsigned int term_atom1_type = atomTypeFunc(*nbrAtoms1[i]);
 			unsigned int term_bond1_type_idx = bondTypeIdxFunc(*nbrBonds1[i]);
 
+			if (!strict && term_atom1_type == 0)
+				term_atom1_type = FALLBACK_ATOM_TYPE;
+
 			for (std::size_t j = 0; j < num_nbrs2; j++) {
 				if (nbrAtoms2[j] == &ctr_atom1)
 					continue;
@@ -221,6 +244,10 @@ void ForceField::MMFF94TorsionInteractionParameterizer::parameterize(const Chem:
 				std::size_t term_atom2_idx = molgraph.getAtomIndex(*nbrAtoms2[j]);
 				unsigned int term_atom2_type = atomTypeFunc(*nbrAtoms2[j]);
 				unsigned int term_bond2_type_idx = bondTypeIdxFunc(*nbrBonds2[j]);
+
+				if (!strict && term_atom2_type == 0)
+					term_atom2_type = FALLBACK_ATOM_TYPE;
+
 				unsigned int tor_type_idx = getTorsionTypeIndex(molgraph, *nbrAtoms1[i], ctr_atom1, ctr_atom2, *nbrAtoms2[j], ctr_bond,
 																term_atom1_type, ctr_atom1_type, ctr_atom2_type, term_atom2_type,
 																term_bond1_type_idx, ctr_bond_type_idx, term_bond2_type_idx);
@@ -228,11 +255,24 @@ void ForceField::MMFF94TorsionInteractionParameterizer::parameterize(const Chem:
 				double tor_param2 = 0.0;
 				double tor_param3 = 0.0;
 							
-				if (getParameters(molgraph, *nbrAtoms1[i], ctr_atom1, ctr_atom2, *nbrAtoms2[j], ctr_bond, term_atom1_type, ctr_atom1_type, 
-								  ctr_atom2_type, term_atom2_type, tor_type_idx, ctr_atom1_prop_entry, ctr_atom2_prop_entry, tor_param1,
-								  tor_param2, tor_param3))
-					ia_data.addElement(MMFF94TorsionInteraction(term_atom1_idx, ctr_atom1_idx, ctr_atom2_idx, term_atom2_idx, tor_type_idx,
-																tor_param1, tor_param2, tor_param3));
+				try {
+					if (!getParameters(molgraph, *nbrAtoms1[i], ctr_atom1, ctr_atom2, *nbrAtoms2[j], ctr_bond, term_atom1_type, ctr_atom1_type, 
+									   ctr_atom2_type, term_atom2_type, tor_type_idx, *ctr_atom1_prop_entry, *ctr_atom2_prop_entry, tor_param1,
+									   tor_param2, tor_param3))
+						continue;
+
+				} catch (const ParameterizationFailed& e) {
+					if (strict) 
+						throw e;
+
+					if (!getParameters(molgraph, *nbrAtoms1[i], ctr_atom1, ctr_atom2, *nbrAtoms2[j], ctr_bond, FALLBACK_ATOM_TYPE, ctr_atom1_type, 
+									   ctr_atom2_type, FALLBACK_ATOM_TYPE, tor_type_idx, *ctr_atom1_prop_entry, *ctr_atom2_prop_entry, tor_param1,
+									   tor_param2, tor_param3))
+						continue;
+				}
+
+				ia_data.addElement(MMFF94TorsionInteraction(term_atom1_idx, ctr_atom1_idx, ctr_atom2_idx, term_atom2_idx, tor_type_idx,
+															tor_param1, tor_param2, tor_param3));
 			}
 		}
 	}

@@ -68,7 +68,7 @@ BOOST_AUTO_TEST_CASE(MMFF94BondStretchingEnergyFunctionTest)
 
 		BOOST_CHECK(MMFF94TestData::DYN_LOG_READER.getBondStretchingInteractions(mol_name, ia_data));
 
-		parameterizer.parameterize(mol, found_ia_data);
+		parameterizer.parameterize(mol, found_ia_data, true);
 
 		BOOST_CHECK_MESSAGE(found_ia_data.getSize() == ia_data.size(), "Bond stretching interaction count mismatch for molecule #" << mol_idx << " (" << mol_name << "): " <<
 							found_ia_data.getSize() << " != " << ia_data.size());
@@ -136,7 +136,7 @@ BOOST_AUTO_TEST_CASE(MMFF94AngleBendingEnergyFunctionTest)
 
 		BOOST_CHECK(MMFF94TestData::DYN_LOG_READER.getAngleBendingInteractions(mol_name, ia_data));
 
-		parameterizer.parameterize(mol, found_ia_data);
+		parameterizer.parameterize(mol, found_ia_data, true);
 
 		BOOST_CHECK_MESSAGE(found_ia_data.getSize() == ia_data.size(), "Angle bending interaction count mismatch for molecule #" << mol_idx << " (" << mol_name << "): " <<
 							found_ia_data.getSize() << " != " << ia_data.size());
@@ -230,9 +230,9 @@ BOOST_AUTO_TEST_CASE(MMFF94StretchBendEnergyFunctionTest)
 			}
 		}
 
-		bs_parameterizer.parameterize(mol, bs_ia_data);
-		ab_parameterizer.parameterize(mol, ab_ia_data);
-		sb_parameterizer.parameterize(mol, bs_ia_data, ab_ia_data, found_ia_data);
+		bs_parameterizer.parameterize(mol, bs_ia_data, true);
+		ab_parameterizer.parameterize(mol, ab_ia_data, true);
+		sb_parameterizer.parameterize(mol, bs_ia_data, ab_ia_data, found_ia_data, true);
 
 		BOOST_CHECK_MESSAGE(found_ia_data.getSize() == ia_data.size(), "Stretch-bend interaction count mismatch for molecule #" << mol_idx << " (" << mol_name << "): " <<
 							found_ia_data.getSize() << " != " << ia_data.size());
@@ -314,7 +314,7 @@ BOOST_AUTO_TEST_CASE(MMFF94OutOfPlaneBendingEnergyFunctionTest)
 
 			BOOST_CHECK(log_reader.getOutOfPlaneBendingInteractions(mol_name, ia_data));
 
-			parameterizer.parameterize(mol, found_ia_data);
+			parameterizer.parameterize(mol, found_ia_data, true);
 
 			BOOST_CHECK_MESSAGE(found_ia_data.getSize() == ia_data.size(), "Out-Of-Plane bending interaction count mismatch for molecule #" << mol_idx << " (" << mol_name << "): " <<
 								found_ia_data.getSize() << " != " << ia_data.size());
@@ -404,7 +404,7 @@ BOOST_AUTO_TEST_CASE(MMFF94TorsionEnergyFunctionTest)
 
 			BOOST_CHECK(log_reader.getTorsionInteractions(mol_name, ia_data));
 
-			parameterizer.parameterize(mol, found_ia_data);
+			parameterizer.parameterize(mol, found_ia_data, true);
 
 			BOOST_CHECK_MESSAGE(found_ia_data.getSize() == ia_data.size(), "Torsion interaction count mismatch for molecule #" << mol_idx << " (" << mol_name << "): " <<
 								found_ia_data.getSize() << " != " << ia_data.size());
@@ -484,7 +484,7 @@ BOOST_AUTO_TEST_CASE(MMFF94VanDerWaalsEnergyFunctionTest)
 
 		BOOST_CHECK(MMFF94TestData::DYN_LOG_READER.getVanDerWaalsInteractions(mol_name, ia_data));
 
-		parameterizer.parameterize(mol, found_ia_data);
+		parameterizer.parameterize(mol, found_ia_data, true);
 
 		//BOOST_CHECK_MESSAGE(found_ia_data.getSize() == ia_data.size(), "Van der Waals interaction count mismatch for molecule #" << mol_idx << " (" << mol_name << "): " <<
 		//					found_ia_data.getSize() << " != " << ia_data.size());
@@ -552,9 +552,9 @@ BOOST_AUTO_TEST_CASE(MMFF94ElectrostaticEnergyFunctionTest)
 
 		BOOST_CHECK(MMFF94TestData::DYN_LOG_READER.getEnergies(mol_name, energies));
 
-		ForceField::calcMMFF94AtomCharges(mol, false);
+		ForceField::calcMMFF94AtomCharges(mol, true, false);
 
-		parameterizer.parameterize(mol, found_ia_data);
+		parameterizer.parameterize(mol, found_ia_data, true);
 	
 		coords.clear();
 		get3DCoordinates(mol, coords);

@@ -133,10 +133,19 @@ unsigned int ConfGen::FragmentConformerGeneratorImpl::generate(const Chem::Molec
 	if (!setupForceField())
 		return ReturnCode::FORCEFIELD_SETUP_FAILED;
 
-	if (frag_type == FragmentType::FLEXIBLE_RING_SYSTEM)
-		return generateFlexibleRingConformers();
+	switch (frag_type) {
+
+		case FragmentType::FLEXIBLE_RING_SYSTEM:
+			return generateFlexibleRingConformers();
 	
-	return generateSingleConformer();
+		case FragmentType::CHAIN:
+			return generateChainConformer();
+
+		default:
+			break;
+	}
+
+	return generateRigidRingConformer();
 }
 
 void ConfGen::FragmentConformerGeneratorImpl::setConformers(Chem::MolecularGraph& molgraph) const
@@ -260,11 +269,11 @@ void ConfGen::FragmentConformerGeneratorImpl::setupRandomConformerGeneration()
 	mmff94GradientCalc.resetFixedAtomMask();
 }
 
-unsigned int ConfGen::FragmentConformerGeneratorImpl::generateSingleConformer()
+unsigned int ConfGen::FragmentConformerGeneratorImpl::generateRigidRingConformer()
 {
 	if (!settings.preserveInputBondingGeometries() || !generateConformerFromInputCoordinates(outputConfs)) {
 		setupRandomConformerGeneration();
-		dgStructureGen.getSettings().setBoxSize(coreAtomMask.count() * 2);
+		dgStructureGen.getSettings().setBoxSize(coreAtomMask.count());
 
 		ConformerData::SharedPointer conf_data = allocConformerData();
 		unsigned int ret_code = generateRandomConformer(*conf_data);
@@ -278,20 +287,75 @@ unsigned int ConfGen::FragmentConformerGeneratorImpl::generateSingleConformer()
 	return invokeCallbacks();
 }
 
+unsigned int ConfGen::FragmentConformerGeneratorImpl::generateChainConformer()
+{
+	if (settings.preserveInputBondingGeometries() && generateConformerFromInputCoordinates(outputConfs))
+		return invokeCallbacks();
+
+	setupRandomConformerGeneration();
+	dgStructureGen.getSettings().setBoxSize(coreAtomMask.count() * 2);
+
+	const FragmentConformerGeneratorSettings::FragmentSettings& chain_settings = settings.getChainSettings();
+
+	std::size_t num_conf_samples = calcNumChainConfSamples();
+
+	if (num_conf_samples == 0)
+		num_conf_samples = 1;
+	else
+		num_conf_samples = std::max(chain_settings.getMinNumSampledConformers(), 
+									std::min(chain_settings.getMaxNumSampledConformers(), num_conf_samples));
+
+	std::size_t timeout = chain_settings.getTimeout();
+	double min_energy = 0.0;
+	unsigned int ret_code = ReturnCode::SUCCESS;
+	ConformerData::SharedPointer conf_data;
+
+	for (std::size_t i = 0; i < num_conf_samples; i++) {
+		if ((ret_code = invokeCallbacks()) != ReturnCode::SUCCESS)
+			return ret_code;
+
+		if (timedout(timeout)) {
+			ret_code = ReturnCode::FRAGMENT_CONF_GEN_TIMEOUT;
+			break;
+		}
+
+		if (!conf_data)
+			conf_data = allocConformerData();
+
+		if (generateRandomConformer(*conf_data) != ReturnCode::SUCCESS) 
+			continue;
+
+		double energy = conf_data->getEnergy();
+
+		if (outputConfs.empty() || energy < min_energy)
+			min_energy = energy;
+
+		else continue;
+
+		outputConfs.clear();
+		outputConfs.push_back(conf_data);
+		conf_data.reset();
+	}
+
+	if (outputConfs.empty()) 
+		return ReturnCode::FRAGMENT_CONF_GEN_FAILED;
+
+	return ret_code;
+}
+
 unsigned int ConfGen::FragmentConformerGeneratorImpl::generateFlexibleRingConformers()
 {
 	if (settings.preserveInputBondingGeometries())
 		generateConformerFromInputCoordinates(workingConfs);
 
 	setupRandomConformerGeneration();
-
 	dgStructureGen.getSettings().setBoxSize(coreAtomMask.count());
 
 	getRingAtomIndices();
 	getSymmetryMappings();
 
 	std::size_t num_conf_samples = 0;
-	const FragmentConformerGeneratorSettings::RingFragmentSettings* rsys_settings = 0;
+	const FragmentConformerGeneratorSettings::FragmentSettings* rsys_settings = 0;
 
 	if (containsFragmentWithMinSize(*getSSSR(*molGraph), settings.getMinMacrocycleSize())) {
 		rsys_settings = &settings.getMacrocycleSettings();
@@ -302,7 +366,8 @@ unsigned int ConfGen::FragmentConformerGeneratorImpl::generateFlexibleRingConfor
 		num_conf_samples = calcNumSmallRingSystemConfSamples();
 	}
 
-	num_conf_samples = std::max(rsys_settings->getMinNumSampledConformers(), std::min(rsys_settings->getMaxNumSampledConformers(), num_conf_samples));
+	num_conf_samples = std::max(rsys_settings->getMinNumSampledConformers(), 
+								std::min(rsys_settings->getMaxNumSampledConformers(), num_conf_samples));
 
 	std::size_t timeout = rsys_settings->getTimeout();
 	double e_window = rsys_settings->getEnergyWindow();
@@ -327,14 +392,11 @@ unsigned int ConfGen::FragmentConformerGeneratorImpl::generateFlexibleRingConfor
 
 		double energy = conf_data->getEnergy();
 
-		if (workingConfs.empty())
+		if (workingConfs.empty() || energy < min_energy)
 			min_energy = energy;
 
 		else if (energy > (min_energy + e_window))
 			continue;
-
-		if (energy < min_energy)
-			min_energy = energy;
 
 		workingConfs.push_back(conf_data);
 		conf_data.reset();
@@ -649,22 +711,30 @@ void ConfGen::FragmentConformerGeneratorImpl::getNeighborHydrogens(const Chem::A
 	}
 }
 
-std::size_t ConfGen::FragmentConformerGeneratorImpl::calcNumSmallRingSystemConfSamples()
+std::size_t ConfGen::FragmentConformerGeneratorImpl::calcNumChainConfSamples() const
 {
 	using namespace Chem;
 
-	std::size_t rot_bond_sum = 0.0;
+	std::size_t count = 0;
+
+	for (MolecularGraph::ConstBondIterator it = molGraph->getBondsBegin(), end = molGraph->getBondsEnd(); it != end; ++it) 
+		if (isRotatableBond(*it, *molGraph, false))
+			count++;
+
+	return std::pow(3, count);
+}
+
+std::size_t ConfGen::FragmentConformerGeneratorImpl::calcNumSmallRingSystemConfSamples() const
+{
+	using namespace Chem;
+
+	std::size_t rot_bond_sum = 0;
 	const FragmentList& sssr = *getSSSR(*molGraph);
 
-	for (FragmentList::ConstElementIterator it = sssr.getElementsBegin(), end = sssr.getElementsEnd(); it != end; ++it) {
-		const Fragment& ring = *it;
-
-		rot_bond_sum += getNumRotatableRingBonds(ring);
-		//ring_flex_sum += double(ring.getNumAtoms()) / 6;
-	}
+	for (FragmentList::ConstElementIterator it = sssr.getElementsBegin(), end = sssr.getElementsEnd(); it != end; ++it) 
+		rot_bond_sum += getNumRotatableRingBonds(*it);
 
 	return (rot_bond_sum * settings.getSmallRingSystemSamplingFactor());
-	//return (ring_flex_sum * settings.getSmallRingSystemSamplingFactor());
 }
 
 std::size_t ConfGen::FragmentConformerGeneratorImpl::calcNumMacrocyclicRingSystemConfSamples() const

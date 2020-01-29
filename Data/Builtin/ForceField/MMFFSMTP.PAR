@@ -146,8 +146,11 @@
     [#7X2-:1]-[#6,#16]                                   NM      DEPROTONATED SULFONAMIDE N-; FORMAL CHARGE=-1
     [#7X2-:1]-[#16](-,=[#8X1])(-,=[!#8])-,=[!#8]         NSO     DIVALENT NITROGEN REPLACING MONOVALENT O IN SO2 GROUP
     [#7X2:1]=[#16](-,=[#8X1])(-,=[!#8])-,=[!#8]          NSO     DIVALENT NITROGEN REPLACING MONOVALENT O IN SO2 GROUP
+    [#7X2:1](=[!#6])-[#16](-,=[#8X1])-,=[#8X1]           NSO2    NITROGEN IN SULFONAMIDES
     [#7X3:1]-[#16](-,=[#8X1])-,=[#8X1]                   NSO2    NITROGEN IN SULFONAMIDES
-    [#7v3:1](=[#16])-[#16](-,=[#8X1])-,=[#8X1]           NSO2    NITROGEN IN SULFONAMIDES
+    [#7X2:1](=[#16])-[#16](-,=[#8X1])-,=[#8X1]           NSO2    NITROGEN IN SULFONAMIDES
+    [#7X2:1]=[#16](-,=[#8v2])-,=[#8v2]                   NSO2    NITROGEN IN SULFONAMIDES
+    [#7X2:1]=[#16](-[#7X3])-[*]                          NSO2    NITROGEN IN SULFONAMIDES
     [#7X3:1]-[#16](-,=[#8X1])(-,=[#8X1])-,=[#8]          NSO3    NITROGEN IN SULFONAMIDES, THREE O'S ON S
     [#7X3:1]-[#15](-,=[#8X1])-,=[#8X1]                   NPO2    NITROGEN IN PHOSPHONAMIDES
     [#7X3:1]-[#15](-,=[#8X1])(-,=[#8X1])-,=[#8]          NPO3    NITROGEN IN PHOSPHONAMIDES, THREE O'S ON P
@@ -166,7 +169,7 @@
     [#7X3+:1]=[#6X3](-[#7X3+0])-[#7X3]                   NGD+    GUANIDINIUM-TYPE NITROGEN - FORMAL CHARGE=1/3
     [#7X3+0:1]-[#6X3](=[#7X3+])-[#7X3]                   NGD+    GUANIDINIUM-TYPE NITROGEN - FORMAL CHARGE=1/3
     [#7X3:1]-[#6X3](=[#7X3+])-[#7X3+0]                   NGD+    GUANIDINIUM-TYPE NITROGEN - FORMAL CHARGE=1/3
-    [#7X2:1]#[#6X1]                                      NR%     ISONITRILE NITROGEN [FC = 0] OR DIAZO NITROGEN [FC = 1]
+    [#7X2:1]#[#6]                                        NR%     ISONITRILE NITROGEN [FC = 0] OR DIAZO NITROGEN [FC = 1]
     [#7X2:1]#[#7X1]                                      NR%     ISONITRILE NITROGEN [FC = 0] OR DIAZO NITROGEN [FC = 1]
     [#7X3+:1]-[#8X1]                                     N2OX    SP2-HYDRIDIZED N-OXIDE NITROGEN
     [#7X4+:1]-[#8X1]                                     N3OX    SP3-HYDRIDIZED N-OXIDE NITROGEN
@@ -202,7 +205,7 @@
     [#16X2:1]                                            S       SULFUR IN THIOETHERS AND MERCAPTANS
     [#16X1:1]=[#6]                                       S=C     TERMINAL SULFUR DOUBLY BONDED TO CARBON
     [#16X3:1]=[#8]                                       S=O     SULFUR IN SULFOXIDES
-    [#16X3:1]=[#7]                                       >S=N    SULFUR, TRICOORD, DOUBLY BONDED TO N
+    [#16;X1,X3:1]=[#7]                                   >S=N    SULFUR, TRICOORD, DOUBLY BONDED TO N
     [#16X4:1](=,-[#8])=,-[#8]                            SO2     SULFUR IN SULFONES 
     [#16X4:1](=,-[#7,#8])-,=[#7]                         SNO     SULFUR IN NITROGEN ANALOG OF A SULFONE
     [#16X4:1](=,-[#8])(=,-[#8])-,=[#7]                   SO2N    SULFUR IN SULFONAMIDES
