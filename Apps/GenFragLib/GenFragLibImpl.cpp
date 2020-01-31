@@ -52,19 +52,6 @@
 #include "GenFragLibImpl.hpp"
 
 
-namespace
-{
-
-	const std::size_t  DEF_TIMEOUT                    = 20 * 60;
-	const std::size_t  DEF_SMALL_RSYS_SAMPLING_FACTOR = 12;
-	const double       DEF_MIN_RMSD                   = 0.1;
-	const double       DEF_E_WINDOW                   = 6.0;
-	const unsigned int DEF_FORCE_FIELD_TYPE           = CDPL::ConfGen::ForceFieldType::MMFF94S_EXT_NO_ESTAT;
-	const bool         DEF_STRICT_FORCE_FIELD_PARAM   = true;
-	const bool         DEF_PRESERVE_BONDING_GEOM      = false;
-}
-
-
 using namespace GenFragLib;
 
 
@@ -100,19 +87,7 @@ public:
 		numProcFrags(0), numErrorFrags(0), numAddedFrags(0), totalNumConfs(0)  
 	{
 		fragLibGen.setAbortCallback(boost::bind(&FragLibGenerationWorker::abort, this));
-
-		CDPL::ConfGen::FragmentConformerGeneratorSettings& settings = fragLibGen.getSettings();
-
-		settings.getSmallRingSystemSettings().setEnergyWindow(parent->eWindow);
-		settings.getSmallRingSystemSettings().setMinRMSD(parent->minRMSD);
-		settings.setSmallRingSystemSamplingFactor(parent->smallRSysSamplingFactor);
-		settings.getSmallRingSystemSettings().setTimeout(parent->timeout * 1000);
-
-		settings.getMacrocycleSettings().setTimeout(parent->timeout * 1000);
-
-		settings.setForceFieldType(parent->forceFieldType);
-		settings.strictForceFieldParameterization(parent->strictForceFieldParam);
-		settings.preserveInputBondingGeometries(parent->presBondingGeom);
+		fragLibGen.getSettings() = parent->settings;
 	}
 
 	void operator()() {
@@ -277,9 +252,7 @@ private:
 
 GenFragLibImpl::GenFragLibImpl(): 
 	multiThreading(false), numThreads(boost::thread::hardware_concurrency()), 
-	mode(CREATE), minRMSD(DEF_MIN_RMSD), timeout(DEF_TIMEOUT), eWindow(DEF_E_WINDOW),
-	smallRSysSamplingFactor(DEF_SMALL_RSYS_SAMPLING_FACTOR), forceFieldType(DEF_FORCE_FIELD_TYPE),
-	strictForceFieldParam(DEF_STRICT_FORCE_FIELD_PARAM), presBondingGeom(DEF_PRESERVE_BONDING_GEOM),
+	mode(CREATE), settings(ConformerGeneratorSettings::THOROUGH), preset("THOROUGH"),
 	maxLibSize(0), inputHandler(), fragmentLibPtr(new CDPL::ConfGen::FragmentLibrary())
 {
 	addOption("input,i", "Input file(s).", 
@@ -294,26 +267,28 @@ GenFragLibImpl::GenFragLibImpl():
 			  value<unsigned int>()->notifier(boost::bind(&GenFragLibImpl::setMaxNumThreads, this, _1)));
 	addOption("input-format,I", "Input file format (default: auto-detect from file extension).", 
 			  value<std::string>()->notifier(boost::bind(&GenFragLibImpl::setInputFormat, this, _1)));
-	addOption("rmsd,r", "Minimum RMSD of two conformations to be considered dissimilar (default: " + 
-			  (boost::format("%.4f") % minRMSD).str() + ", must be >= 0).",
+	addOption("preset,P", "Preset to apply (FAST, THROUGH, default: THOROUGH).", 
+			  value<std::string>()->notifier(boost::bind(&GenFragLibImpl::applyPreset, this, _1)));
+	addOption("rmsd,r", "Minimum RMSD of two small ring system conformations to be considered dissimilar (default: " + 
+			  (boost::format("%.4f") % settings.getSmallRingSystemSettings().getMinRMSD()).str() + ", must be >= 0).",
 			  value<double>()->notifier(boost::bind(&GenFragLibImpl::setRMSD, this, _1)));
 	addOption("timeout,T", "Time in seconds after which fragment conformer generation will be stopped (default: " + 
-			  boost::lexical_cast<std::string>(timeout) + ", must be >= 0, 0 disables timeout).",
-			  value<std::size_t>(&timeout));
+			  boost::lexical_cast<std::string>(settings.getMacrocycleSettings().getTimeout()) + ", must be >= 0, 0 disables timeout).",
+			  value<std::size_t>()->notifier(boost::bind(&GenFragLibImpl::setTimeout, this, _1)));
 	addOption("max-lib-size,x", "Maximum number of output fragments (default: 0, must be >= 0, 0 disables limit, only valid in CREATE mode).",
 			  value<std::size_t>(&maxLibSize));
 	addOption("e-window,e", "Output energy window for small ring system conformers (default: " + 
-			  boost::lexical_cast<std::string>(eWindow) + ", must be > 0).",
+			  boost::lexical_cast<std::string>(settings.getSmallRingSystemSettings().getEnergyWindow()) + ", must be >= 0).",
 			  value<double>()->notifier(boost::bind(&GenFragLibImpl::setEnergyWindow, this, _1)));
 	addOption("small-rsys-sampling-factor,g", "Small ring system conformer sampling factor (default: " + 
-			  boost::lexical_cast<std::string>(smallRSysSamplingFactor) + ", must be > 1).",
+			  boost::lexical_cast<std::string>(settings.getSmallRingSystemSamplingFactor()) + ", must be > 1).",
 			  value<std::size_t>()->notifier(boost::bind(&GenFragLibImpl::setSmallRingSystemSamplingFactor, this, _1)));
 	addOption("forcefield,f", "Build force field type (MMFF94, MMFF94_NO_ESTAT, MMFF94S, MMFF94S_EXT, MMFF94S_NO_ESTAT, MMFF94S_EXT_NO_ESTAT, default: " + getForceFieldTypeString() + ").", 
 			  value<std::string>()->notifier(boost::bind(&GenFragLibImpl::setForceFieldType, this, _1)));
 	addOption("strict-params,s", "Perform strict MMFF94 parameterization (default: true).", 
-			  value<bool>(&strictForceFieldParam)->implicit_value(true));
+			  value<bool>()->implicit_value(true)->notifier(boost::bind(&GenFragLibImpl::setStrictParameterization, this, _1)));
 	addOption("pres-bonding-geom,b", "Preserve input bond lengths and angles (default: false).", 
-			  value<bool>(&presBondingGeom)->implicit_value(true));
+			  value<bool>()->implicit_value(true)->notifier(boost::bind(&GenFragLibImpl::setPreserveBondingGeometry, this, _1)));
 
 	addOptionLongDescriptions();
 }
@@ -356,20 +331,52 @@ void GenFragLibImpl::addOptionLongDescriptions()
 							 "(because missing, misleading or not supported).");
 }
 
+void GenFragLibImpl::applyPreset(const std::string& pres_str)
+{
+	std::string pres = pres_str;
+	boost::to_upper(pres);
+
+	if (pres == "FAST")
+		settings = ConformerGeneratorSettings::FAST;
+	else if (pres == "THOROUGH")
+		settings = ConformerGeneratorSettings::THOROUGH;
+	else
+		throwValidationError("preset");
+
+	preset = pres;
+}
+
+void GenFragLibImpl::setTimeout(std::size_t timeout)
+{
+	settings.getSmallRingSystemSettings().setTimeout(timeout * 1000);
+	settings.getMacrocycleSettings().setTimeout(timeout * 1000);
+	settings.getChainSettings().setTimeout(timeout * 1000);
+}
+
+void GenFragLibImpl::setStrictParameterization(bool strict)
+{
+	settings.strictForceFieldParameterization(strict);
+}
+
+void GenFragLibImpl::setPreserveBondingGeometry(bool preserve)
+{
+	settings.preserveInputBondingGeometries(preserve);
+}
+
 void GenFragLibImpl::setRMSD(double rmsd)
 {
 	if (rmsd < 0)
 		throwValidationError("rmsd");
 
-	minRMSD = rmsd;
+	settings.getSmallRingSystemSettings().setMinRMSD(rmsd);
 }
 
 void GenFragLibImpl::setEnergyWindow(double ewin)
 {
-	if (ewin <= 0)
+	if (ewin < 0)
 		throwValidationError("e-window");
 
-	eWindow = ewin;
+	settings.getSmallRingSystemSettings().setEnergyWindow(ewin);
 }
 
 void GenFragLibImpl::setSmallRingSystemSamplingFactor(std::size_t factor)
@@ -377,7 +384,7 @@ void GenFragLibImpl::setSmallRingSystemSamplingFactor(std::size_t factor)
 	if (factor < 1)
 		throwValidationError("small-rsys-sampling-factor");
 
-	smallRSysSamplingFactor = factor;
+	settings.setSmallRingSystemSamplingFactor(factor);
 }
 
 void GenFragLibImpl::setForceFieldType(const std::string& type_str)
@@ -389,17 +396,17 @@ void GenFragLibImpl::setForceFieldType(const std::string& type_str)
 	boost::to_upper(uc_type);
 
 	if (uc_type == "MMFF94")
-		forceFieldType= ForceFieldType::MMFF94;
+		settings.setForceFieldType(ForceFieldType::MMFF94);
 	else if (uc_type == "MMFF94_NO_ESTAT")
-		forceFieldType= ForceFieldType::MMFF94_NO_ESTAT;
+		settings.setForceFieldType(ForceFieldType::MMFF94_NO_ESTAT);
 	else if (uc_type == "MMFF94S")
-		forceFieldType= ForceFieldType::MMFF94S;
+		settings.setForceFieldType(ForceFieldType::MMFF94S);
 	else if (uc_type == "MMFF94S_EXT")
-		forceFieldType= ForceFieldType::MMFF94S_EXT;
+		settings.setForceFieldType(ForceFieldType::MMFF94S_EXT);
 	else if (uc_type == "MMFF94S_NO_ESTAT")
-		forceFieldType= ForceFieldType::MMFF94S_NO_ESTAT;
+		settings.setForceFieldType(ForceFieldType::MMFF94S_NO_ESTAT);
 	else if (uc_type == "MMFF94S_EXT_NO_ESTAT")
-		forceFieldType= ForceFieldType::MMFF94S_EXT_NO_ESTAT;
+		settings.setForceFieldType(ForceFieldType::MMFF94S_EXT_NO_ESTAT);
 	else
 		throwValidationError("forcefield");
 }
@@ -505,7 +512,7 @@ void GenFragLibImpl::mergeFragmentLibraries()
 
 		std::size_t old_num_frags = fragmentLibPtr->getNumEntries();
 
-		printMessage(INFO, "Adding fragments to output library...");
+		printMessage(INFO, "Adding Fragments to Output Library...");
 
 		fragmentLibPtr->addEntries(input_lib);
 
@@ -611,7 +618,7 @@ void GenFragLibImpl::loadFragmentLibrary(const std::string& fname, FragmentLibra
 	if (!is) 
 		throw Base::IOError("opening fragment library '" + fname + "' failed");
 	
-	printMessage(INFO, "Loading fragments from library '" + fname + "'...");
+	printMessage(INFO, "Loading Fragments from Library '" + fname + "'...");
 
 	lib.clear();
 	lib.load(is);
@@ -650,7 +657,7 @@ int GenFragLibImpl::saveFragmentLibrary()
 	if (!os)
 		throw Base::IOError("opening output fragment library '" + outputFile + "' failed");
 
-	printMessage(INFO, "Saving fragments to library '" + outputFile + "'...");
+	printMessage(INFO, "Saving Fragments to Library '" + outputFile + "'...");
 
 	if (mode == CREATE && maxLibSize > 0) {
 		typedef std::pair<Base::uint64, std::size_t> HashCodeOccCountPair;
@@ -739,7 +746,7 @@ bool GenFragLibImpl::doReadNextMolecule(CDPL::Chem::Molecule& mol)
 			if (inputReader.getRecordIndex() >= inputReader.getNumRecords()) 
 				return false;
 
-			printMessage(DEBUG, "Starting to process molecule " + boost::lexical_cast<std::string>(inputReader.getRecordIndex() + 1) + '/' +
+			printMessage(DEBUG, "Starting to process Molecule " + boost::lexical_cast<std::string>(inputReader.getRecordIndex() + 1) + '/' +
 						 boost::lexical_cast<std::string>(inputReader.getNumRecords()) + "...");
 
 			if (!inputReader.read(mol)) {
@@ -805,19 +812,20 @@ void GenFragLibImpl::printOptionSummary()
 
 	printMessage(VERBOSE,     " Output File:                         " + outputFile);
  	printMessage(VERBOSE,     " Mode:                                " + getModeString());
+ 	printMessage(VERBOSE,     " Preset:                              " + preset);
 
 	if (mode != MERGE) {
 		printMessage(VERBOSE, " Multi-threading:                     " + std::string(multiThreading ? "Yes" : "No"));
 		printMessage(VERBOSE, " Number of Threads:                   " + (multiThreading ? boost::lexical_cast<std::string>(numThreads) : std::string("1")));
 		printMessage(VERBOSE, " Input File Format:                   " + (inputHandler ? inputHandler->getDataFormat().getName() : std::string("Auto-detect")));
 		printMessage(VERBOSE, " Max. Output Library Size:            " + boost::lexical_cast<std::string>(maxLibSize));
-		printMessage(VERBOSE, " Timeout:                             " + boost::lexical_cast<std::string>(timeout) + "s");
-		printMessage(VERBOSE, " Min. RMSD:                           " + (boost::format("%.4f") % minRMSD).str());
-		printMessage(VERBOSE, " Energy Window:                       " + boost::lexical_cast<std::string>(eWindow));
-		printMessage(VERBOSE, " Strict Force Field Parameterization: " + std::string(strictForceFieldParam ? "Yes" : "No"));
-		printMessage(VERBOSE, " Small Ring Sys. Sampling Factor:     " + boost::lexical_cast<std::string>(smallRSysSamplingFactor));
+		printMessage(VERBOSE, " Timeout:                             " + boost::lexical_cast<std::string>(settings.getMacrocycleSettings().getTimeout() / 1000) + "s");
+		printMessage(VERBOSE, " Min. RMSD:                           " + (boost::format("%.4f") % settings.getMacrocycleSettings().getMinRMSD()).str());
+		printMessage(VERBOSE, " Energy Window:                       " + boost::lexical_cast<std::string>(settings.getSmallRingSystemSettings().getEnergyWindow()));
+		printMessage(VERBOSE, " Strict Force Field Parameterization: " + std::string(settings.strictForceFieldParameterization() ? "Yes" : "No"));
+		printMessage(VERBOSE, " Small Ring Sys. Sampling Factor:     " + boost::lexical_cast<std::string>(settings.getSmallRingSystemSamplingFactor()));
 		printMessage(VERBOSE, " Build Force Field Type:              " + getForceFieldTypeString());
-		printMessage(VERBOSE, " Preserve Input Bonding Geometries:   " + std::string(presBondingGeom ? "Yes" : "No"));
+		printMessage(VERBOSE, " Preserve Input Bonding Geometries:   " + std::string(settings.preserveInputBondingGeometries() ? "Yes" : "No"));
 	}
 
 	printMessage(VERBOSE, "");
@@ -901,22 +909,24 @@ std::string GenFragLibImpl::getForceFieldTypeString() const
 	using namespace CDPL;
 	using namespace ConfGen;
 
-	if (forceFieldType == ForceFieldType::MMFF94)
+	unsigned int ff_type = settings.getForceFieldType();
+
+	if (ff_type == ForceFieldType::MMFF94)
 		return "MMFF94";
 	
-	if (forceFieldType == ForceFieldType::MMFF94_NO_ESTAT)
+	if (ff_type == ForceFieldType::MMFF94_NO_ESTAT)
 		return "MMFF94_NO_ESTAT";
 
-	if (forceFieldType == ForceFieldType::MMFF94S)
+	if (ff_type == ForceFieldType::MMFF94S)
 		return "MMFF94S";
 
-	if (forceFieldType == ForceFieldType::MMFF94S_EXT)
+	if (ff_type == ForceFieldType::MMFF94S_EXT)
 		return "MMFF94S_EXT";
 	
-	if (forceFieldType == ForceFieldType::MMFF94S_NO_ESTAT)
+	if (ff_type == ForceFieldType::MMFF94S_NO_ESTAT)
 		return "MMFF94S_NO_ESTAT";
 
-	if (forceFieldType == ForceFieldType::MMFF94S_EXT_NO_ESTAT)
+	if (ff_type == ForceFieldType::MMFF94S_EXT_NO_ESTAT)
 		return "MMFF94S_EXT_NO_ESTAT";
 	
 	return "UNKNOWN";

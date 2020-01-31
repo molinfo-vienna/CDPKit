@@ -136,6 +136,21 @@ namespace CDPL
 			extern CDPL_CHEM_API const unsigned int MDL_CTAB_VERSION;
 
 			/**
+			 * \brief Default setting (= \c false) for the control-parameter Chem::ControlParameter::MDL_OUTPUT_CONF_ENERGY_TO_ENERGY_FIELD.
+			 */
+			extern CDPL_CHEM_API const bool MDL_OUTPUT_CONF_ENERGY_TO_ENERGY_FIELD;
+
+			/**
+			 * \brief Default setting (= \c false) for the control-parameter Chem::ControlParameter::MDL_OUTPUT_CONF_ENERGY_AS_SD_ENTRY.
+			 */
+			extern CDPL_CHEM_API const bool MDL_OUTPUT_CONF_ENERGY_AS_SD_ENTRY;
+
+			/**
+			 * \brief Default setting (= \c "<Energy>") for the control-parameter Chem::ControlParameter::MDL_CONF_ENERGY_SD_TAG.
+			 */
+			extern CDPL_CHEM_API const std::string MDL_CONF_ENERGY_SD_TAG;
+
+			/**
 			 * \brief Default setting (= \c %MDLDataFormatVersion::UNDEF) for the control-parameter Chem::ControlParameter::MDL_RXN_FILE_VERSION.
 			 */
 			extern CDPL_CHEM_API const unsigned int MDL_RXN_FILE_VERSION;
@@ -223,6 +238,11 @@ namespace CDPL
 			 */
 			extern CDPL_CHEM_API const MultiConfMoleculeInputProcessor::SharedPointer MULTI_CONF_INPUT_PROCESSOR;
 
+			/**
+			 * \brief Default setting (= \c false) for the control-parameter Chem::ControlParameter::OUTPUT_CONF_ENERGY_AS_COMMENT.
+			 */
+			extern CDPL_CHEM_API const bool OUTPUT_CONF_ENERGY_AS_COMMENT;
+	
 			extern CDPL_CHEM_API const bool CDF_WRITE_SINGLE_PRECISION_FLOATS;
 
 			extern CDPL_CHEM_API const bool MOL2_ENABLE_EXTENDED_ATOM_TYPES;

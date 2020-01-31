@@ -105,11 +105,13 @@ namespace
 			chain_settings->setMaxNumSampledConformers(200);
 			chain_settings->setMinNumSampledConformers(40);
 			chain_settings->setEnergyWindow(6.0);
+			chain_settings->setTimeout(1800 * 1000);
 
 			sr_settings = &FRAG_CONF_GEN_THOROUGH.getSmallRingSystemSettings();
 
 			sr_settings->setMinNumSampledConformers(50);
 			sr_settings->setEnergyWindow(6.0);
+			sr_settings->setTimeout(1800 * 1000);
 
 			//----------------
 

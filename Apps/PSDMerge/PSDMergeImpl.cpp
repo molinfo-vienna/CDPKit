@@ -149,8 +149,8 @@ int PSDMergeImpl::mergeDatabases()
 	if (termSignalCaught())
 		return EXIT_FAILURE;
 
-	printMessage(INFO, " - Found " + boost::lexical_cast<std::string>(num_mols) + " Molecules/" +
-				 boost::lexical_cast<std::string>(num_pharms) + " Pharmacophores");
+	printMessage(INFO, " - Found " + boost::lexical_cast<std::string>(num_mols) + " molecules/" +
+				 boost::lexical_cast<std::string>(num_pharms) + " pharmacophores");
 	printMessage(INFO, "");
 
 	Pharm::PSDScreeningDBCreator db_creator(outputDatabase, creationMode, !dropDuplicates);

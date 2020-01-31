@@ -2296,7 +2296,9 @@ std::size_t Vis::StructureView2D::getHydrogenCount(const Chem::Atom& atom) const
 	}
 
 	try {
-		return calcImplicitHydrogenCount(atom, *structure);
+		return (getExplicitAtomCount(atom, *origStructure, AtomType::H) - 
+				getExplicitAtomCount(atom, *structure, AtomType::H) + 
+				calcImplicitHydrogenCount(atom, *origStructure));
 
 	} catch (const Base::Exception& e) {
 		return 0;

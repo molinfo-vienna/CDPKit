@@ -122,12 +122,19 @@ bool Chem::MOL2DataWriter::writeMolecularGraph(std::ostream& os, const Molecular
 	} else {
 		coordsDim = 3;
 
-		for (std::size_t i = 0; i < num_confs; i++) {
-			confCoordinates.clear();
+		Util::DArray::SharedPointer conf_energies;
 
-			getConformation(molgraph, i, confCoordinates);
+		if (writeConfEnergyComment && hasConformerEnergies(molgraph))
+			conf_energies = getConformerEnergies(molgraph);
+
+		for (std::size_t i = 0; i < num_confs; i++) {
+			getConformation(molgraph, i, confCoordinates, false);
 
 			writeMoleculeRecord(os, molgraph);
+
+			if (writeConfEnergyComment && conf_energies && conf_energies->getSize() > i)
+				writeConformerEnergyComment(os, (*conf_energies)[i]);
+
 			writeAtomSection(os, molgraph);
 			writeBondSection(os, molgraph);
 			writeSubstructSection(os);
@@ -141,13 +148,14 @@ void Chem::MOL2DataWriter::init(std::ostream& os)
 {
 	os.imbue(std::locale::classic());
 
-	strictErrorChecking = getStrictErrorCheckingParameter(ioBase);
-	multiConfExport     = getMultiConfExportParameter(ioBase);
-	extendedAtomTypes   = getMOL2EnableExtendedAtomTypesParameter(ioBase);
-	aromaticBondTypes   = getMOL2EnableAromaticBondTypesParameter(ioBase);
-	atomChargeType      = getMOL2ChargeTypeParameter(ioBase);
-	moleculeType        = getMOL2MoleculeTypeParameter(ioBase);
-	outputSubstructs    = getMOL2OutputSubstructuresParameter(ioBase);
+	strictErrorChecking    = getStrictErrorCheckingParameter(ioBase);
+	multiConfExport        = getMultiConfExportParameter(ioBase);
+	extendedAtomTypes      = getMOL2EnableExtendedAtomTypesParameter(ioBase);
+	aromaticBondTypes      = getMOL2EnableAromaticBondTypesParameter(ioBase);
+	atomChargeType         = getMOL2ChargeTypeParameter(ioBase);
+	moleculeType           = getMOL2MoleculeTypeParameter(ioBase);
+	outputSubstructs       = getMOL2OutputSubstructuresParameter(ioBase);
+	writeConfEnergyComment = (multiConfExport && getOutputConfEnergyAsCommentParameter(ioBase));
 
 	os << std::fixed << std::showpoint;
 }
@@ -248,6 +256,12 @@ void Chem::MOL2DataWriter::writeMoleculeRecord(std::ostream& os, const Molecular
 	os << getChargeTypeString(molgraph) << MOL2::END_OF_LINE;
 	os << MOL2::END_OF_LINE;
 	os << MOL2::END_OF_LINE;
+}
+
+void Chem::MOL2DataWriter::writeConformerEnergyComment(std::ostream& os, double energy)
+{
+	os << MOL2::COMMENT_RTI << MOL2::END_OF_LINE;
+	os << energy << MOL2::END_OF_LINE;
 }
 
 void Chem::MOL2DataWriter::writeAtomSection(std::ostream& os, const MolecularGraph& molgraph)

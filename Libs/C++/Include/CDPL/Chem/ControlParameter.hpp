@@ -219,6 +219,12 @@ namespace CDPL
 			 */
 			extern CDPL_CHEM_API const Base::LookupKey MDL_TRUNCATE_LINES;
 
+			extern CDPL_CHEM_API const Base::LookupKey MDL_OUTPUT_CONF_ENERGY_TO_ENERGY_FIELD;
+
+			extern CDPL_CHEM_API const Base::LookupKey MDL_OUTPUT_CONF_ENERGY_AS_SD_ENTRY;
+
+			extern CDPL_CHEM_API const Base::LookupKey MDL_CONF_ENERGY_SD_TAG;
+
 			/**
 			 * \brief Specifies whether to check if data lines exceed the maximum allowed line length when reading or writing data
 			 *        in a <em>MDL</em> [\ref CTFILE] format.
@@ -452,6 +458,8 @@ namespace CDPL
 			 */
 			extern CDPL_CHEM_API const Base::LookupKey MULTI_CONF_EXPORT;
 		
+			extern CDPL_CHEM_API const Base::LookupKey OUTPUT_CONF_ENERGY_AS_COMMENT;
+
 			/**
 			 * \brief Specifies an instance of Chem::MultiConfMoleculeInputProcessor that implements the logic of
 			 *        multi-conformer molecule detection and conformational data processing.

@@ -62,6 +62,9 @@ namespace CDPL
 			const bool MDL_UPDATE_TIMESTAMP                                                 = false;
 			const unsigned int MDL_CTAB_VERSION                                             = MDLDataFormatVersion::UNDEF;
 			const unsigned int MDL_RXN_FILE_VERSION                                         = MDLDataFormatVersion::UNDEF;
+			const bool MDL_OUTPUT_CONF_ENERGY_TO_ENERGY_FIELD                               = false;
+			const bool MDL_OUTPUT_CONF_ENERGY_AS_SD_ENTRY                                   = false;
+			const std::string MDL_CONF_ENERGY_SD_TAG                                        = "<Energy>";
 
 			const std::string SMILES_RECORD_FORMAT                                          = "S";
 			const bool SMILES_WRITE_CANONICAL_FORM                                          = false;
@@ -80,6 +83,7 @@ namespace CDPL
 			const bool MULTI_CONF_IMPORT                                                    = true;
 			const bool MULTI_CONF_EXPORT                                                    = true;
 			const MultiConfMoleculeInputProcessor::SharedPointer MULTI_CONF_INPUT_PROCESSOR = MultiConfMoleculeInputProcessor::SharedPointer(new DefaultMultiConfMoleculeInputProcessor());
+			const bool OUTPUT_CONF_ENERGY_AS_COMMENT                                        = false;
 
 			const bool CDF_WRITE_SINGLE_PRECISION_FLOATS                                    = true;
 

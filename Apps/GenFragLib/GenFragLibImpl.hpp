@@ -36,6 +36,7 @@
 #include <boost/unordered_map.hpp>
 
 #include "CDPL/ConfGen/FragmentLibrary.hpp"
+#include "CDPL/ConfGen/FragmentConformerGeneratorSettings.hpp"
 #include "CDPL/Util/CompoundDataReader.hpp"
 #include "CDPL/Base/DataInputHandler.hpp"
 
@@ -80,6 +81,10 @@ namespace GenFragLib
 		const char* getProgCopyright() const;
 		const char* getProgAboutText() const;
 
+		void applyPreset(const std::string& pres_str);
+		void setTimeout(std::size_t timeout);
+		void setStrictParameterization(bool strict);
+		void setPreserveBondingGeometry(bool preserve);
 		void setRMSD(double rmsd);
 		void setEnergyWindow(double ewin);
 		void setSmallRingSystemSamplingFactor(std::size_t factor);
@@ -129,19 +134,15 @@ namespace GenFragLib
 		typedef CDPL::Base::DataReader<CDPL::Chem::Molecule> MoleculeReader;
 		typedef CDPL::Util::CompoundDataReader<CDPL::Chem::Molecule> CompMoleculeReader;
 		typedef boost::chrono::system_clock Clock;
+		typedef CDPL::ConfGen::FragmentConformerGeneratorSettings ConformerGeneratorSettings;
 
 		StringList                     inputFiles;
 		std::string                    outputFile;
 		bool                           multiThreading;
 		std::size_t                    numThreads;
 		Mode                           mode;
-		double                         minRMSD;
-		std::size_t                    timeout;
-		double                         eWindow;
-		std::size_t                    smallRSysSamplingFactor;
-		unsigned int                   forceFieldType;
-		bool                           strictForceFieldParam;
-		bool                           presBondingGeom;
+		ConformerGeneratorSettings     settings;
+		std::string                    preset;
 		std::size_t                    maxLibSize;
 		InputHandlerPtr                inputHandler;
 		CompMoleculeReader             inputReader;

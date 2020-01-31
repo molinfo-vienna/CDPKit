@@ -52,6 +52,7 @@ namespace CDPL
 			const std::string EMPTY_STRING_FIELD = "****";
 
 			const std::string MOLECULE_RTI       = "@<TRIPOS>MOLECULE";
+			const std::string COMMENT_RTI        = "@<TRIPOS>COMMENT";
 			const std::string ATOM_RTI           = "@<TRIPOS>ATOM";
 			const std::string BOND_RTI           = "@<TRIPOS>BOND";
 			const std::string SUBSTRUCTURE_RTI   = "@<TRIPOS>SUBSTRUCTURE";

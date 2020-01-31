@@ -2489,7 +2489,7 @@
     </category>
     <category name="" pattern="[c:2][C:3]">
       <!-- added special rule for arom. methyl substituents -->
-      <rule pattern="[a;X2:1][a:2]!@[CX4H3:3][#1:4]">
+      <rule pattern="[aX2:1][a:2]!@[CX4H3:3][#1:4]">
         <torsions>
           <angle value="0.0" tolerance1="30.00" tolerance2="30.00" score="0.0"/>
         </torsions>

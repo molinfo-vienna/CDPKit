@@ -33,9 +33,11 @@
 #include <ostream>
 #include <ios>
 #include <iterator>
+#include <limits>
 #include <cassert>
 
 #include <boost/date_time/posix_time/posix_time.hpp>
+#include <boost/math/special_functions.hpp>
 #include <boost/bind.hpp>
 #include <boost/tokenizer.hpp>
 #include <boost/lexical_cast.hpp>
@@ -226,10 +228,19 @@ bool Chem::MDLDataWriter::writeMolecularGraph(std::ostream& os, const MolecularG
 	} else {
 		coordsDim = 3;
 
-		for (std::size_t i = 0; i < num_confs; i++) {
-			confCoordinates.clear();
-			getConformation(molgraph, i, confCoordinates);
+		Util::DArray::SharedPointer conf_energies;
 
+		if ((writeConfEnergySDEntry || writeConfEnergyComment || writeConfEnergyField) && hasConformerEnergies(molgraph))
+			conf_energies = getConformerEnergies(molgraph);
+
+		for (std::size_t i = 0; i < num_confs; i++) {
+			getConformation(molgraph, i, confCoordinates, false);
+
+			if (conf_energies && conf_energies->getSize() > i)
+				confEnergy = (*conf_energies)[i];
+			else
+				confEnergy = std::numeric_limits<double>::quiet_NaN();
+			
 			writeMOLHeaderBlock(os, molgraph);
 			writeMOLCTab(os, molgraph);
 			writeMOLEndTag(os);
@@ -277,15 +288,21 @@ bool Chem::MDLDataWriter::writeRDFileRecord(std::ostream& os, const Reaction& rx
 
 void Chem::MDLDataWriter::init(std::ostream& os, bool rxn_mode)
 {
-	strictErrorChecking     =  getStrictErrorCheckingParameter(ioBase); 
-	bondMemberSwapStereoFix =  getBondMemberSwapStereoFixParameter(ioBase); 
-	trimStrings             =  getMDLTrimStringsParameter(ioBase); 
-	trimLines               =  getMDLTrimLinesParameter(ioBase); 
-	truncateStrings         =  getMDLTruncateStringsParameter(ioBase); 
-	truncateLines           =  getMDLTruncateLinesParameter(ioBase); 
-	ignoreParity            =  getMDLIgnoreParityParameter(ioBase); 
-	checkLineLength         =  getCheckLineLengthParameter(ioBase); 
-	multiConfExport         =  (!rxn_mode && getMultiConfExportParameter(ioBase));
+	strictErrorChecking     = getStrictErrorCheckingParameter(ioBase); 
+	bondMemberSwapStereoFix = getBondMemberSwapStereoFixParameter(ioBase); 
+	trimStrings             = getMDLTrimStringsParameter(ioBase); 
+	trimLines               = getMDLTrimLinesParameter(ioBase); 
+	truncateStrings         = getMDLTruncateStringsParameter(ioBase); 
+	truncateLines           = getMDLTruncateLinesParameter(ioBase); 
+	ignoreParity            = getMDLIgnoreParityParameter(ioBase); 
+	checkLineLength         = getCheckLineLengthParameter(ioBase); 
+	multiConfExport         = (!rxn_mode && getMultiConfExportParameter(ioBase));
+	writeConfEnergyField    = (multiConfExport && getMDLOutputConfEnergyToEnergyFieldParameter(ioBase));
+	writeConfEnergySDEntry  = (multiConfExport && getMDLOutputConfEnergyAsSDEntryParameter(ioBase));
+	writeConfEnergyComment  = (multiConfExport && getOutputConfEnergyAsCommentParameter(ioBase));
+
+	if (writeConfEnergySDEntry)
+		confEnergySDTag = getMDLConfEnergySDTagParameter(ioBase);
 
 	os.imbue(std::locale::classic());
 }
@@ -367,7 +384,7 @@ void Chem::MDLDataWriter::writeMOLHeaderBlock(std::ostream& os, const MolecularG
 
 	writeFloatNumber(os, 10, 5, scaling_fac2, "MDLDataWriter: error while writing scaling factor2 to molfile header block");
 
-	double energy = getMDLEnergy(molgraph);
+	double energy = (writeConfEnergyField && multiConfExport ? (boost::math::isnan(confEnergy) ? 0.0 : confEnergy) : getMDLEnergy(molgraph));
 
 	writeFloatNumber(os, 12, 5, energy, "MDLDataWriter: error while writing energy to molfile header block");
 
@@ -384,10 +401,15 @@ void Chem::MDLDataWriter::writeMOLHeaderBlock(std::ostream& os, const MolecularG
 
 	// Header line 3
 
-	const std::string& comment = getMDLComment(molgraph);
+	if (writeConfEnergyComment && multiConfExport) {
+		if (!boost::math::isnan(confEnergy))
+			os << confEnergy;
 
-	writeMDLLine(os, comment, "MDLDataWriter: error while writing comment line to molfile header block", 
-				 checkLineLength, trimLines, truncateLines);
+		writeMDLEOL(os);
+
+	} else 
+		writeMDLLine(os, getMDLComment(molgraph), "MDLDataWriter: error while writing comment line to molfile header block", 
+					 checkLineLength, trimLines, truncateLines);
 }
 
 void Chem::MDLDataWriter::writeMOLCTab(std::ostream& os, const MolecularGraph& molgraph)
@@ -1579,6 +1601,19 @@ void Chem::MDLDataWriter::writeSDFData(std::ostream& os, const MolecularGraph& m
 	using namespace Internal;
 	using namespace MDL;
 
+	std::size_t prefix_length = SDFile::DATA_HEADER_PREFIX.length();
+
+	if (writeConfEnergySDEntry && multiConfExport && !boost::math::isnan(confEnergy)) {
+		writeString(os, prefix_length + 1, SDFile::DATA_HEADER_PREFIX, 
+					"MDLDataWriter: error while writing structure data header prefix"); 
+		writeMDLLine(os, confEnergySDTag, "MDLDataWriter: error while writing header for conformer energy structure data item", 
+					 checkLineLength, false, truncateLines, MDL::MAX_LINE_LENGTH - prefix_length);	
+		
+		os << confEnergy; 
+		writeMDLEOL(os);
+		writeMDLEOL(os);
+	}
+
 	const char line_sep[] = { MDL::END_OF_LINE, 0 };
 
 	if (!hasStructureData(molgraph)) {
@@ -1593,9 +1628,7 @@ void Chem::MDLDataWriter::writeSDFData(std::ostream& os, const MolecularGraph& m
 
 	for (StringDataBlock::ConstElementIterator it = data.getElementsBegin(); it != entries_end; ++it) {
 		const StringDataBlockEntry& entry = *it;
-
 		const std::string& header = entry.getHeader();
-		std::size_t prefix_length = SDFile::DATA_HEADER_PREFIX.length();
 
 		if (!header.empty() && !std::isspace(header[0], std::locale::classic()))
 			prefix_length++;

@@ -203,6 +203,11 @@ namespace CDPL
 			bool                    checkLineLength;
 			bool                    rdfHeaderWritten;
 			bool                    multiConfExport;
+			bool                    writeConfEnergySDEntry;
+			bool                    writeConfEnergyComment;
+			bool                    writeConfEnergyField;
+			std::string             confEnergySDTag;
+			double                  confEnergy;
 			Math::Vector3DArray     confCoordinates;
 		};
 	}

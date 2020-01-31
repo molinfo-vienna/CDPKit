@@ -182,6 +182,33 @@ namespace CDPL
 		CDPL_CHEM_API void clearMDLRXNFileVersionParameter(Base::ControlParameterContainer& cntnr);
 
 
+		CDPL_CHEM_API bool getMDLOutputConfEnergyToEnergyFieldParameter(const Base::ControlParameterContainer& cntnr);
+
+		CDPL_CHEM_API void setMDLOutputConfEnergyToEnergyFieldParameter(Base::ControlParameterContainer& cntnr, bool output);
+
+		CDPL_CHEM_API bool hasMDLOutputConfEnergyToEnergyFieldParameter(const Base::ControlParameterContainer& cntnr);
+
+		CDPL_CHEM_API void clearMDLOutputConfEnergyToEnergyFieldParameter(Base::ControlParameterContainer& cntnr);
+
+
+		CDPL_CHEM_API bool getMDLOutputConfEnergyAsSDEntryParameter(const Base::ControlParameterContainer& cntnr);
+
+		CDPL_CHEM_API void setMDLOutputConfEnergyAsSDEntryParameter(Base::ControlParameterContainer& cntnr, bool output);
+
+		CDPL_CHEM_API bool hasMDLOutputConfEnergyAsSDEntryParameter(const Base::ControlParameterContainer& cntnr);
+
+		CDPL_CHEM_API void clearMDLOutputConfEnergyAsSDEntryParameter(Base::ControlParameterContainer& cntnr);
+
+
+		CDPL_CHEM_API const std::string& getMDLConfEnergySDTagParameter(const Base::ControlParameterContainer& cntnr);
+
+		CDPL_CHEM_API void setMDLConfEnergySDTagParameter(Base::ControlParameterContainer& cntnr, const std::string& tag);
+
+		CDPL_CHEM_API bool hasMDLConfEnergySDTagParameter(const Base::ControlParameterContainer& cntnr);
+
+		CDPL_CHEM_API void clearMDLConfEnergySDTagParameter(Base::ControlParameterContainer& cntnr);
+
+
 		CDPL_CHEM_API bool getJMESeparateComponentsParameter(const Base::ControlParameterContainer& cntnr);
 
 		CDPL_CHEM_API void setJMESeparateComponentsParameter(Base::ControlParameterContainer& cntnr, bool separate);
@@ -342,6 +369,15 @@ namespace CDPL
 		CDPL_CHEM_API bool hasMultiConfExportParameter(const Base::ControlParameterContainer& cntnr);
 
 		CDPL_CHEM_API void clearMultiConfExportParameter(Base::ControlParameterContainer& cntnr);
+
+
+		CDPL_CHEM_API bool getOutputConfEnergyAsCommentParameter(const Base::ControlParameterContainer& cntnr);
+
+		CDPL_CHEM_API void setOutputConfEnergyAsCommentParameter(Base::ControlParameterContainer& cntnr, bool output);
+
+		CDPL_CHEM_API bool hasOutputConfEnergyAsCommentParameter(const Base::ControlParameterContainer& cntnr);
+
+		CDPL_CHEM_API void clearOutputConfEnergyAsCommentParameter(Base::ControlParameterContainer& cntnr);
 
 
 		CDPL_CHEM_API const MultiConfMoleculeInputProcessor::SharedPointer& getMultiConfInputProcessorParameter(const Base::ControlParameterContainer& cntnr);

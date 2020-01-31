@@ -691,7 +691,7 @@ bool TautGenImpl::doReadNextMolecule(CDPL::Chem::Molecule& mol)
 			if (inputReader.getRecordIndex() >= inputReader.getNumRecords()) 
 				return false;
 
-			printMessage(DEBUG, "Starting to process molecule " + boost::lexical_cast<std::string>(inputReader.getRecordIndex() + 1) + '/' +
+			printMessage(DEBUG, "Starting to process Molecule " + boost::lexical_cast<std::string>(inputReader.getRecordIndex() + 1) + '/' +
 						 boost::lexical_cast<std::string>(inputReader.getNumRecords()) + "...");
 
 			if (!inputReader.read(mol)) {
