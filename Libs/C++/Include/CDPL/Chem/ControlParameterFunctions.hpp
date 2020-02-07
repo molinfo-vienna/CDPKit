@@ -380,6 +380,15 @@ namespace CDPL
 		CDPL_CHEM_API void clearOutputConfEnergyAsCommentParameter(Base::ControlParameterContainer& cntnr);
 
 
+		CDPL_CHEM_API const std::string& getConfIndexNameSuffixPatternParameter(const Base::ControlParameterContainer& cntnr);
+
+		CDPL_CHEM_API void setConfIndexNameSuffixPatternParameter(Base::ControlParameterContainer& cntnr, const std::string& pattern);
+
+		CDPL_CHEM_API bool hasConfIndexNameSuffixPatternParameter(const Base::ControlParameterContainer& cntnr);
+
+		CDPL_CHEM_API void clearConfIndexNameSuffixPatternParameter(Base::ControlParameterContainer& cntnr);
+
+
 		CDPL_CHEM_API const MultiConfMoleculeInputProcessor::SharedPointer& getMultiConfInputProcessorParameter(const Base::ControlParameterContainer& cntnr);
 
 		CDPL_CHEM_API void setMultiConfInputProcessorParameter(Base::ControlParameterContainer& cntnr, const MultiConfMoleculeInputProcessor::SharedPointer& proc);

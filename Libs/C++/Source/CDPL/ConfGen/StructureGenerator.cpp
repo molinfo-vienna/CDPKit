@@ -108,6 +108,16 @@ const ConfGen::CallbackFunction& ConfGen::StructureGenerator::getTimeoutCallback
 	return impl->getTimeoutCallback();
 }
 
+void ConfGen::StructureGenerator::setLogMessageCallback(const LogMessageCallbackFunction& func)
+{
+	impl->setLogMessageCallback(func);
+}
+
+const ConfGen::LogMessageCallbackFunction& ConfGen::StructureGenerator::getLogMessageCallback() const
+{
+	return impl->getLogMessageCallback();
+}
+
 unsigned int ConfGen::StructureGenerator::generate(const Chem::MolecularGraph& molgraph)
 {
 	ConformerGeneratorSettings& cg_settings = impl->getSettings();

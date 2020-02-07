@@ -1,7 +1,7 @@
 /* -*- mode: c++; c-basic-offset: 4; tab-width: 4; indent-tabs-mode: t -*- */
 
 /* 
- * BoostFunctionWrapperExport.cpp 
+ * Main.cpp
  *
  * This file is part of the Chemical Data Processing Toolkit
  *
@@ -24,19 +24,10 @@
  */
 
 
-#include "CDPL/ConfGen/CallbackFunction.hpp"
-#include "CDPL/ConfGen/LogMessageCallbackFunction.hpp"
-
-#include "Base/BoostFunctionWrapperExport.hpp"
-
-#include "ClassExports.hpp"
+#include "ConfGenImpl.hpp"
 
 
-void CDPLPythonConfGen::exportBoostFunctionWrappers()
+int main(int argc, char* argv[])
 {
-    using namespace CDPL;
-
-	CDPLPythonBase::BoostFunction0Export<ConfGen::CallbackFunction>("CallbackFunction");
-
-	CDPLPythonBase::BoostFunction1Export<ConfGen::LogMessageCallbackFunction>("LogMessageCallbackFunction");
+    return ConfGen::ConfGenImpl().run(argc, argv);
 }

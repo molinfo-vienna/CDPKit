@@ -83,6 +83,16 @@ const ConfGen::CallbackFunction& ConfGen::TorsionDriver::getTimeoutCallback() co
 	return impl->getTimeoutCallback();
 }
 
+void ConfGen::TorsionDriver::setLogMessageCallback(const LogMessageCallbackFunction& func)
+{
+	impl->setLogMessageCallback(func);
+}
+
+const ConfGen::LogMessageCallbackFunction& ConfGen::TorsionDriver::getLogMessageCallback() const
+{
+	return impl->getLogMessageCallback();
+}
+
 unsigned int ConfGen::TorsionDriver::setup(const Chem::MolecularGraph& molgraph)
 {
 	impl->setup(molgraph);

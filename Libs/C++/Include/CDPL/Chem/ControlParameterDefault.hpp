@@ -242,7 +242,9 @@ namespace CDPL
 			 * \brief Default setting (= \c false) for the control-parameter Chem::ControlParameter::OUTPUT_CONF_ENERGY_AS_COMMENT.
 			 */
 			extern CDPL_CHEM_API const bool OUTPUT_CONF_ENERGY_AS_COMMENT;
-	
+
+			extern CDPL_CHEM_API const std::string CONF_INDEX_NAME_SUFFIX_PATTERN;
+
 			extern CDPL_CHEM_API const bool CDF_WRITE_SINGLE_PRECISION_FLOATS;
 
 			extern CDPL_CHEM_API const bool MOL2_ENABLE_EXTENDED_ATOM_TYPES;

@@ -54,6 +54,10 @@ void CDPLPythonConfGen::exportFragmentConformerGenerator()
 			 (python::arg("self"), python::arg("func")))
 		.def("getTimeoutCallback", &ConfGen::FragmentConformerGenerator::getTimeoutCallback, 
 			 python::arg("self"), python::return_internal_reference<>())
+		.def("setLogMessageCallback", &ConfGen::FragmentConformerGenerator::setLogMessageCallback, 
+			 (python::arg("self"), python::arg("func")))
+		.def("getLogMessageCallback", &ConfGen::FragmentConformerGenerator::getLogMessageCallback, 
+			 python::arg("self"), python::return_internal_reference<>())
 		.def("generate", 
 			 static_cast<unsigned int (ConfGen::FragmentConformerGenerator::*) (const Chem::MolecularGraph&)>
 			 (&ConfGen::FragmentConformerGenerator::generate), 
@@ -89,5 +93,9 @@ void CDPLPythonConfGen::exportFragmentConformerGenerator()
 		.add_property("timeoutCallback", 
 					  python::make_function(&ConfGen::FragmentConformerGenerator::getTimeoutCallback,
 											python::return_internal_reference<>()),
-					  &ConfGen::FragmentConformerGenerator::setTimeoutCallback);
+					  &ConfGen::FragmentConformerGenerator::setTimeoutCallback)
+		.add_property("logMessageCallback", 
+					  python::make_function(&ConfGen::FragmentConformerGenerator::getLogMessageCallback,
+											python::return_internal_reference<>()),
+					  &ConfGen::FragmentConformerGenerator::setLogMessageCallback);
 }

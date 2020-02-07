@@ -84,6 +84,7 @@ namespace CDPL
 			const bool MULTI_CONF_EXPORT                                                    = true;
 			const MultiConfMoleculeInputProcessor::SharedPointer MULTI_CONF_INPUT_PROCESSOR = MultiConfMoleculeInputProcessor::SharedPointer(new DefaultMultiConfMoleculeInputProcessor());
 			const bool OUTPUT_CONF_ENERGY_AS_COMMENT                                        = false;
+			const std::string CONF_INDEX_NAME_SUFFIX_PATTERN                                = "";
 
 			const bool CDF_WRITE_SINGLE_PRECISION_FLOATS                                    = true;
 

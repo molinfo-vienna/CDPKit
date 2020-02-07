@@ -460,6 +460,8 @@ namespace CDPL
 		
 			extern CDPL_CHEM_API const Base::LookupKey OUTPUT_CONF_ENERGY_AS_COMMENT;
 
+			extern CDPL_CHEM_API const Base::LookupKey CONF_INDEX_NAME_SUFFIX_PATTERN;
+
 			/**
 			 * \brief Specifies an instance of Chem::MultiConfMoleculeInputProcessor that implements the logic of
 			 *        multi-conformer molecule detection and conformational data processing.

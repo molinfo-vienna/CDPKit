@@ -50,6 +50,7 @@
 #include "CDPL/ConfGen/MoleculeFunctions.hpp"
 #include "CDPL/ConfGen/MolecularGraphFunctions.hpp"
 #include "CDPL/ConfGen/CallbackFunction.hpp"
+#include "CDPL/ConfGen/LogMessageCallbackFunction.hpp"
 #include "CDPL/ConfGen/FragmentType.hpp"
 #include "CDPL/ConfGen/ForceFieldType.hpp"
 #include "CDPL/ConfGen/ConformerSamplingMode.hpp"

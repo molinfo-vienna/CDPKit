@@ -86,6 +86,10 @@ namespace CDPL
 
 			const CallbackFunction& getTimeoutCallback() const;
 
+			void setLogMessageCallback(const LogMessageCallbackFunction& func);
+
+			const LogMessageCallbackFunction& getLogMessageCallback() const;
+
 			void setBondLengthFunction(const BondLengthFunction& func);
 
 			const BondLengthFunction& getBondLengthFunction() const;
@@ -171,6 +175,7 @@ namespace CDPL
 			FragmentLibraryList               fragLibs;
 			CallbackFunction                  abortCallback;
 			CallbackFunction                  timeoutCallback;
+			LogMessageCallbackFunction        logCallback;
 			BondLengthFunction                bondLengthFunc;
 			BondList                          fragSplitBonds;
 			Chem::FragmentList                fragments;

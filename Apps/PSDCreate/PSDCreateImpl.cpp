@@ -91,9 +91,10 @@ struct PSDCreateImpl::MergeDBsProgressCallback
 	double         scale;
 };
 
-struct PSDCreateImpl::DBCreationWorker
+class PSDCreateImpl::DBCreationWorker
 {
 
+public:
 	typedef CDPL::Pharm::ScreeningDBCreator::SharedPointer ScrenningDBCreatorPtr;
 
 	DBCreationWorker(PSDCreateImpl* parent, const ScrenningDBCreatorPtr& db_creator):
@@ -101,38 +102,58 @@ struct PSDCreateImpl::DBCreationWorker
 
 	void operator()() {
 		try {
-			CDPL::Chem::BasicMolecule mol;
-
-			while (parent->readNextMolecule(mol)) {
-				perceiveComponents(mol, false);
-				perceiveSSSR(mol, false);
-				setRingFlags(mol, false);
-				calcImplicitHydrogenCounts(mol, false);
-				perceiveHybridizationStates(mol, false);
-				setAromaticityFlags(mol, false);
-				calcCIPPriorities(mol, false);
-				calcAtomCIPConfigurations(mol, false);
-				calcBondCIPConfigurations(mol, false);
-
-				dbCreator->process(mol);
-			}
-
+			while (processNextMolecule());
+			
 		} catch (const std::exception& e) {
-			parent->setErrorMessage(std::string("error while creating database: ") + e.what());
+			parent->setErrorMessage(std::string("unexpected exception while creating database: ") + e.what());
 
 		} catch (...) {
-			parent->setErrorMessage("error while creating database");
+			parent->setErrorMessage("unexpected exception while creating database");
 		}
 	}
 
-	PSDCreateImpl*        parent;
-	ScrenningDBCreatorPtr dbCreator;
+private:
+	bool processNextMolecule() {
+		std::size_t rec_idx = parent->readNextMolecule(molecule);
+
+		if (!rec_idx)
+			return false;
+				
+		try {
+			perceiveComponents(molecule, false);
+			perceiveSSSR(molecule, false);
+			setRingFlags(molecule, false);
+			calcImplicitHydrogenCounts(molecule, false);
+			perceiveHybridizationStates(molecule, false);
+			setAromaticityFlags(molecule, false);
+			calcCIPPriorities(molecule, false);
+			calcAtomCIPConfigurations(molecule, false);
+			calcBondCIPConfigurations(molecule, false);
+
+			if (!dbCreator->process(molecule))
+				parent->printMessage(VERBOSE, "Dropped duplicate molecule " + parent->createMoleculeIdentifier(rec_idx, molecule));
+
+			return true;
+
+		} catch (const std::exception& e) {
+			parent->setErrorMessage("unexpected exception while processing molecule " + parent->createMoleculeIdentifier(rec_idx, molecule) + ": " + e.what());
+
+		} catch (...) {
+			parent->setErrorMessage("unexpected exception while processing molecule " + parent->createMoleculeIdentifier(rec_idx, molecule));
+		}
+
+		return false;
+	}
+
+	PSDCreateImpl*            parent;
+	ScrenningDBCreatorPtr     dbCreator;
+	CDPL::Chem::BasicMolecule molecule;
 };
 
 
 PSDCreateImpl::PSDCreateImpl(): 
-	dropDuplicates(false), multiThreading(false), numThreads(boost::thread::hardware_concurrency()), 
-	creationMode(CDPL::Pharm::ScreeningDBCreator::CREATE), inputHandler(), addSourceFileProp(false)
+	dropDuplicates(false), numThreads(0), creationMode(CDPL::Pharm::ScreeningDBCreator::CREATE), 
+	inputHandler(), addSourceFileProp(false)
 {
 	addOption("input,i", "Input file(s).", 
 			  value<StringList>(&inputFiles)->multitoken()->required());
@@ -142,10 +163,10 @@ PSDCreateImpl::PSDCreateImpl():
 			  value<std::string>()->notifier(boost::bind(&PSDCreateImpl::setCreationMode, this, _1)));
 	addOption("drop-duplicates,d", "Drop duplicate molecules (default: false).", 
 			  value<bool>(&dropDuplicates)->implicit_value(true));
-	addOption("multi-threading,t", "Enable multi-threaded processing (default: false).", 
-			  value<bool>(&multiThreading)->implicit_value(true));
-	addOption("num-threads,n", "Number of parallel threads (default: " + boost::lexical_cast<std::string>(numThreads) + " threads, must be > 0).", 
-			  value<unsigned int>()->notifier(boost::bind(&PSDCreateImpl::setMaxNumThreads, this, _1)));
+	addOption("num-threads,t", "Number of parallel execution threads (default: no multithreading, implicit value: " +
+			  boost::lexical_cast<std::string>(boost::thread::hardware_concurrency()) + 
+			  " threads, must be >= 0, 0 disables multithreading).", 
+			  value<std::size_t>(&numThreads)->implicit_value(boost::thread::hardware_concurrency()));
 	addOption("input-format,I", "Input file format (default: auto-detect from file extension).", 
 			  value<std::string>()->notifier(boost::bind(&PSDCreateImpl::setInputFormat, this, _1)));
 	addOption("tmp-file-dir,T", "Temporary file directory (default: '" + boost::filesystem::temp_directory_path().string() + "')", 
@@ -225,14 +246,6 @@ void PSDCreateImpl::setInputFormat(const std::string& file_ext)
 		throwValidationError("input-format");
 }
 
-void PSDCreateImpl::setMaxNumThreads(unsigned int num_threads)
-{
-	if (num_threads < 1)
-		throwValidationError("num-threads");
-
-	numThreads = num_threads;
-}
-
 void PSDCreateImpl::setTmpFileDirectory(const std::string& dir_path)
 {
 	namespace bfs = boost::filesystem;
@@ -273,7 +286,7 @@ int PSDCreateImpl::process()
 	} else
 		printMessage(INFO, "Creating Database(s)...");
 
-	if (multiThreading)
+	if (numThreads > 0)
 		processMultiThreaded();
 	else
 		processSingleThreaded();
@@ -406,7 +419,7 @@ void PSDCreateImpl::processMultiThreaded()
 
 void PSDCreateImpl::setErrorMessage(const std::string& msg)
 {
-	if (multiThreading) {
+	if (numThreads > 0) {
 		boost::lock_guard<boost::mutex> lock(mutex);
 
 		if (errorMessage.empty())
@@ -420,7 +433,7 @@ void PSDCreateImpl::setErrorMessage(const std::string& msg)
 
 bool PSDCreateImpl::haveErrorMessage()
 {
-	if (multiThreading) {
+	if (numThreads > 0) {
 		boost::lock_guard<boost::mutex> lock(mutex);
 		return !errorMessage.empty();
 	}
@@ -440,15 +453,15 @@ void PSDCreateImpl::printStatistics(std::size_t num_proc, std::size_t num_rej,
 	printMessage(INFO, " Processing Time:     " + AppUtils::formatTimeDuration(proc_time));
 }
 
-bool PSDCreateImpl::readNextMolecule(CDPL::Chem::Molecule& mol)
+std::size_t PSDCreateImpl::readNextMolecule(CDPL::Chem::Molecule& mol)
 {
 	if (termSignalCaught())
-		return false;
+		return 0;
 
 	if (haveErrorMessage())
-		return false;
+		return 0;
 
-	if (multiThreading) {
+	if (numThreads > 0) {
 		boost::lock_guard<boost::mutex> lock(molReadMutex);
 
 		return doReadNextMolecule(mol);
@@ -457,22 +470,18 @@ bool PSDCreateImpl::readNextMolecule(CDPL::Chem::Molecule& mol)
 	return doReadNextMolecule(mol);
 }
 
-bool PSDCreateImpl::doReadNextMolecule(CDPL::Chem::Molecule& mol)
+std::size_t PSDCreateImpl::doReadNextMolecule(CDPL::Chem::Molecule& mol)
 {
 	while (true) {
 		try {
 			if (inputReader.getRecordIndex() >= inputReader.getNumRecords()) 
-				return false;
-
-			printMessage(DEBUG, "Starting to process molecule " + boost::lexical_cast<std::string>(inputReader.getRecordIndex() + 1) +  '/' +
-						 boost::lexical_cast<std::string>(inputReader.getNumRecords()) + "...");
+				return 0;
 
 			if (!inputReader.read(mol)) {
-				printMessage(ERROR, "Reading molecule " + boost::lexical_cast<std::string>(inputReader.getRecordIndex() + 1) + '/' +
-							 boost::lexical_cast<std::string>(inputReader.getNumRecords()) + " failed");			
+				printMessage(ERROR, "Reading molecule " + createMoleculeIdentifier(inputReader.getRecordIndex() + 1) + " failed");			
 				
 				inputReader.setRecordIndex(inputReader.getRecordIndex() + 1);
-				return false;
+				continue;
 			}
 
 			if (addSourceFileProp) {
@@ -487,27 +496,26 @@ bool PSDCreateImpl::doReadNextMolecule(CDPL::Chem::Molecule& mol)
 
 			std::string msg;
 
-			if (!multiThreading)
+			if (numThreads == 0)
 				msg = "Creating Database...           ";
 			else
 				msg = "Creating Temporary Databases...";
 
 			printProgress(msg, double(inputReader.getRecordIndex()) / inputReader.getNumRecords());
-			return true;
+
+			return inputReader.getRecordIndex();
 
 		} catch (const std::exception& e) {
-			printMessage(ERROR, "Error while reading molecule " + boost::lexical_cast<std::string>(inputReader.getRecordIndex() + 1) + '/' +
-						 boost::lexical_cast<std::string>(inputReader.getNumRecords()) + ": " + e.what());
+			printMessage(ERROR, "Error while reading molecule " + createMoleculeIdentifier(inputReader.getRecordIndex() + 1) + ": " + e.what());
 
 		} catch (...) {
-			printMessage(ERROR, "Error while reading molecule " + boost::lexical_cast<std::string>(inputReader.getRecordIndex() + 1) + '/' +
-						 boost::lexical_cast<std::string>(inputReader.getNumRecords()));
+			printMessage(ERROR, "Unspecified error while reading molecule " + createMoleculeIdentifier(inputReader.getRecordIndex() + 1));
 		}
 
 		inputReader.setRecordIndex(inputReader.getRecordIndex() + 1);
 	}
 
-	return false;
+	return 0;
 }
 
 void PSDCreateImpl::checkInputFiles() const
@@ -538,8 +546,11 @@ void PSDCreateImpl::printOptionSummary()
 	printMessage(VERBOSE, " Output Database:          " + outputDatabase);
  	printMessage(VERBOSE, " Creation Mode:            " + getCreationModeString());
  	printMessage(VERBOSE, " Drop Duplicates:          " + std::string(dropDuplicates ? "Yes" : "No"));
-	printMessage(VERBOSE, " Multi-threading:          " + std::string(multiThreading ? "Yes" : "No"));
-	printMessage(VERBOSE, " Number of Threads:        " + boost::lexical_cast<std::string>(numThreads));
+	printMessage(VERBOSE, " Multithreading:           " + std::string(numThreads > 0 ? "Yes" : "No"));
+
+	if (numThreads > 0)
+		printMessage(VERBOSE, " Number of Threads:        " + boost::lexical_cast<std::string>(numThreads));
+
 	printMessage(VERBOSE, " Input File Format:        " + (inputHandler ? inputHandler->getDataFormat().getName() : std::string("Auto-detect")));
  	printMessage(VERBOSE, " Add Source-File Property: " + std::string(addSourceFileProp ? "Yes" : "No"));
 
@@ -616,4 +627,17 @@ std::string PSDCreateImpl::getCreationModeString() const
 		return "UPDATE";
 	
 	return "UNKNOWN";
+}
+
+std::string PSDCreateImpl::createMoleculeIdentifier(std::size_t rec_idx, const CDPL::Chem::Molecule& mol)
+{
+	if (!getName(mol).empty())
+		return ('\'' + getName(mol) + "' (" + createMoleculeIdentifier(rec_idx) + ')');
+
+	return createMoleculeIdentifier(rec_idx);
+}
+
+std::string PSDCreateImpl::createMoleculeIdentifier(std::size_t rec_idx)
+{
+	return (boost::lexical_cast<std::string>(rec_idx) + '/' + boost::lexical_cast<std::string>(inputReader.getNumRecords()));
 }

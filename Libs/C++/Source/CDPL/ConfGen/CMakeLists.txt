@@ -87,6 +87,7 @@ SET(cdpl-confgen_LIB_SRCS
     BondFunctions.cpp
     MolecularGraphFunctions.cpp
     MoleculeFunctions.cpp
+    UtilityFunctions.cpp
    )
 
 IF(Boost_TIMER_FOUND AND Boost_CHRONO_FOUND)

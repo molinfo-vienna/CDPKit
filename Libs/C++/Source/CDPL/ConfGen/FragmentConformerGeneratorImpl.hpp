@@ -40,6 +40,7 @@
 #include "CDPL/ConfGen/ConformerDataArray.hpp"
 #include "CDPL/ConfGen/DGStructureGenerator.hpp"
 #include "CDPL/ConfGen/CallbackFunction.hpp"
+#include "CDPL/ConfGen/LogMessageCallbackFunction.hpp"
 #include "CDPL/ForceField/MMFF94InteractionParameterizer.hpp"
 #include "CDPL/ForceField/MMFF94InteractionData.hpp"
 #include "CDPL/ForceField/MMFF94GradientCalculator.hpp"
@@ -77,6 +78,10 @@ namespace CDPL
 			void setTimeoutCallback(const CallbackFunction& func);
 
 			const CallbackFunction& getTimeoutCallback() const;
+
+			void setLogMessageCallback(const LogMessageCallbackFunction& func);
+
+			const LogMessageCallbackFunction& getLogMessageCallback() const;
 
 			unsigned int generate(const Chem::MolecularGraph& molgraph, unsigned int frag_type);
 
@@ -150,6 +155,7 @@ namespace CDPL
 			ConformerDataCache                     confDataCache;
 			CallbackFunction                       abortCallback;
 			CallbackFunction                       timeoutCallback;
+			LogMessageCallbackFunction             logCallback;
 			boost::timer::cpu_timer                timer;
 			const Chem::MolecularGraph*            molGraph;
 			std::size_t                            numAtoms;

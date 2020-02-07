@@ -1,7 +1,7 @@
 /* -*- mode: c++; c-basic-offset: 4; tab-width: 4; indent-tabs-mode: t -*- */
 
 /* 
- * PSDCreateImpl.hpp
+ * ConfGenImpl.hpp
  *
  * This file is part of the Chemical Data Processing Toolkit
  *
@@ -24,8 +24,8 @@
  */
 
 
-#ifndef PSDCREATE_PSDCREATEIMPL_HPP
-#define PSDCREATE_PSDCREATEIMPL_HPP
+#ifndef CONFGEN_CONFGENIMPL_HPP
+#define CONFGEN_CONFGENIMPL_HPP
 
 #include <cstddef>
 #include <vector>
@@ -34,9 +34,11 @@
 #include <boost/thread.hpp>
 #include <boost/chrono/chrono.hpp>
 
-#include "CDPL/Pharm/ScreeningDBCreator.hpp"
 #include "CDPL/Util/CompoundDataReader.hpp"
+#include "CDPL/Base/DataWriter.hpp"
 #include "CDPL/Base/DataInputHandler.hpp"
+#include "CDPL/Base/DataOutputHandler.hpp"
+#include "CDPL/ConfGen/ConformerGeneratorSettings.hpp"
 
 #include "Lib/CmdLineBase.hpp"
 
@@ -48,30 +50,33 @@ namespace CDPL
 	{
 
 		class Molecule;
+		class MolecularGraph;
 	}
 }
 
 
-namespace PSDCreate
+namespace ConfGen
 {
 
-    class PSDCreateImpl : public AppUtils::CmdLineBase
+    class ConfGenImpl : public AppUtils::CmdLineBase
     {
 
     public:
-		PSDCreateImpl();
+		ConfGenImpl();
 
     private:
+		typedef CDPL::Base::DataOutputHandler<CDPL::Chem::MolecularGraph> OutputHandler;
 		typedef CDPL::Base::DataInputHandler<CDPL::Chem::Molecule> InputHandler;
 		typedef InputHandler::SharedPointer InputHandlerPtr;
+		typedef OutputHandler::SharedPointer OutputHandlerPtr;
 
 		const char* getProgName() const;
 		const char* getProgCopyright() const;
 		const char* getProgAboutText() const;
 
-		void setCreationMode(const std::string& mode);
 		void setInputFormat(const std::string& file_ext);
-		void setTmpFileDirectory(const std::string& dir_path);
+		void setOutputFormat(const std::string& file_ext);
+		void setNumThreads(std::size_t num_threads);
 
 		int process();
 
@@ -81,49 +86,54 @@ namespace PSDCreate
 		std::size_t readNextMolecule(CDPL::Chem::Molecule& mol);
 		std::size_t doReadNextMolecule(CDPL::Chem::Molecule& mol);
 
+		void writeMolecule(const CDPL::Chem::MolecularGraph& mol);
+		void doWriteMolecule(const CDPL::Chem::MolecularGraph& mol);
+
 		void setErrorMessage(const std::string& msg);
 		bool haveErrorMessage();
 
-		void printStatistics(std::size_t num_proc, std::size_t num_rej, 
-							 std::size_t num_del, std::size_t num_ins,
-							 std::size_t proc_time);
+		void printMessage(VerbosityLevel level, const std::string& msg, bool nl = true, bool file_only = false);
+
+		void printStatistics(std::size_t num_proc_mols, std::size_t num_failed_mols, std::size_t num_gen_confs, std::size_t proc_time);
 
 		void checkInputFiles() const;
 		void printOptionSummary();
 		void initInputReader();
-
-		std::string getCreationModeString() const;
+		void initOutputWriter();
 
 		std::string createMoleculeIdentifier(std::size_t rec_idx, const CDPL::Chem::Molecule& mol);
 		std::string createMoleculeIdentifier(std::size_t rec_idx);
 
 		InputHandlerPtr getInputHandler(const std::string& file_path) const;
+		OutputHandlerPtr getOutputHandler(const std::string& file_path) const;
 
 		void addOptionLongDescriptions();
 
-		struct InputScanProgressCallback;
-		struct MergeDBsProgressCallback;
-		struct DBCreationWorker;
+		class InputScanProgressCallback;
+		class ConformerGenerationWorker;
 
 		typedef std::vector<std::string> StringList;
-		typedef CDPL::Pharm::ScreeningDBCreator::Mode CreationMode;
 		typedef CDPL::Base::DataReader<CDPL::Chem::Molecule> MoleculeReader;
 		typedef CDPL::Util::CompoundDataReader<CDPL::Chem::Molecule> CompMoleculeReader;
+		typedef CDPL::Base::DataWriter<CDPL::Chem::MolecularGraph>::SharedPointer MoleculeWriterPtr;
 		typedef boost::chrono::system_clock Clock;
+		typedef CDPL::ConfGen::ConformerGeneratorSettings ConformerGeneratorSettings;
 
-		StringList             inputFiles;
-		std::string            outputDatabase;
-		bool                   dropDuplicates;
-		std::size_t            numThreads;
-		CreationMode           creationMode;
-		InputHandlerPtr        inputHandler;
-		CompMoleculeReader     inputReader;   
-		boost::mutex           mutex;
-		boost::mutex           molReadMutex;
-		std::string            errorMessage;
-		bool                   addSourceFileProp;
-		Clock::time_point      startTime;
+		StringList                     inputFiles;
+		std::string                    outputFile;
+		std::size_t                    numThreads;
+		ConformerGeneratorSettings     settings;
+		bool                           canonicalize;
+		InputHandlerPtr                inputHandler;
+		CompMoleculeReader             inputReader;
+		OutputHandlerPtr               outputHandler;
+		MoleculeWriterPtr              outputWriter;
+		boost::mutex                   mutex;
+		boost::mutex                   readMolMutex;
+		boost::mutex                   writeMolMutex;
+		std::string                    errorMessage;
+		Clock::time_point              startTime;
     };
 }
 
-#endif // PSDCREATE_PSDCREATEIMPL_HPP
+#endif // CONFGEN_CONFGENIMPL_HPP

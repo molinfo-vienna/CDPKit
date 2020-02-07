@@ -91,16 +91,17 @@ struct PSDScreenImpl::ScreeningWorker
 				if (PSDScreenImpl::termSignalCaught() || parent->haveErrorMessage())
 					return;
 
-				query_pharm.clear();
-				parent->getQueryPharmacophore(queryIndex, query_pharm);
+				if (!parent->getQueryPharmacophore(queryIndex, query_pharm))
+					return;
 				
 				scr_proc.searchDB(query_pharm, startMolIndex, endMolIndex);
 			}
+
 		} catch (const std::exception& e) {
-			parent->setErrorMessage(std::string("error while screening database: ") + e.what());
+			parent->setErrorMessage("unexpected exception while screening database '" + parent->screeningDB + "':" + e.what());
 
 		} catch (...) {
-			parent->setErrorMessage("unspecified error while screening database");
+			parent->setErrorMessage("unexpected exception while screening database '" + parent->screeningDB + '\'');
 		}
 	}
 
@@ -156,10 +157,11 @@ struct PSDScreenImpl::ScreeningWorker
 
 PSDScreenImpl::PSDScreenImpl(): 
 	checkXVols(true), alignConfs(true), bestAlignments(false), outputScore(true), outputMolIndex(false), 
-	outputConfIndex(false), outputDBName(false), outputPharmName(false), outputPharmIndex(false), multiThreading(false), 
-	numThreads(boost::thread::hardware_concurrency()), startMolIndex(0), endMolIndex(0), maxOmittedFtrs(0),
+	outputConfIndex(false), outputDBName(false), outputPharmName(false), outputPharmIndex(false),  
+	numThreads(0), startMolIndex(0), endMolIndex(0), maxOmittedFtrs(0),
 	matchingMode(CDPL::Pharm::ScreeningProcessor::FIRST_MATCHING_CONF), hitOutputHandler(), 
-	queryInputHandler(), numQueryPharms(0), numDBMolecules(0), numDBPharms(0), numHits(0), maxNumHits(0), lastProgValue(-1)
+	queryInputHandler(), numQueryPharms(0), numDBMolecules(0), numDBPharms(0), numHits(0), maxNumHits(0),
+	lastProgValue(-1)
 {
 	addOption("database,d", "Screening database file.", 
 			  value<std::string>(&screeningDB)->required());
@@ -174,7 +176,7 @@ PSDScreenImpl::PSDScreenImpl():
 	addOption("end-index,e", "Screening range end molecule index (zero-based and not included"
 			  " in screening!, default: one after last molecule).", 
 			  value<std::size_t>(&endMolIndex)->default_value(0));
-	addOption("max-num-hits,X", "Maxmimum number of hits to report (default: no limit).", 
+	addOption("max-num-hits,n", "Maxmimum number of hits to report (default: no limit).", 
 			  value<std::size_t>(&maxNumHits)->default_value(0));
 	addOption("max-omitted,M", "Maximum number of allowed unmatched features.", 
 			  value<std::size_t>(&maxOmittedFtrs)->default_value(0));
@@ -196,11 +198,10 @@ PSDScreenImpl::PSDScreenImpl():
 			  value<bool>(&outputPharmName)->implicit_value(true));
 	addOption("output-pharm-index,P", "Output query pharmacophore index property for hit molecule (default: false).", 
 			  value<bool>(&outputPharmIndex)->implicit_value(true));
-	addOption("multi-threading,t", "Enable multi-threaded processing (default: false).", 
-			  value<bool>(&multiThreading)->implicit_value(true));
-	addOption("num-threads,n", "Number of parallel threads (default: " 
-			  + boost::lexical_cast<std::string>(numThreads) + " threads, must be > 0).", 
-			  value<unsigned int>()->notifier(boost::bind(&PSDScreenImpl::setMaxNumThreads, this, _1)));
+	addOption("num-threads,t", "Number of parallel execution threads (default: no multithreading, implicit value: " +
+			  boost::lexical_cast<std::string>(boost::thread::hardware_concurrency()) + 
+			  " threads, must be >= 0, 0 disables multithreading).", 
+			  value<std::size_t>(&numThreads)->implicit_value(boost::thread::hardware_concurrency()));
 	addOption("output-format,O", "Hit molecule output file format (default: auto-detect from file extension).", 
 			  value<std::string>()->notifier(boost::bind(&PSDScreenImpl::setHitOutputFormat, this, _1)));
 	addOption("query-format,Q", "Query pharmacophore input file format (default: auto-detect from file extension).", 
@@ -291,14 +292,6 @@ void PSDScreenImpl::setQueryInputFormat(const std::string& file_ext)
 		throwValidationError("query-format");
 }
 
-void PSDScreenImpl::setMaxNumThreads(unsigned int num_threads)
-{
-	if (num_threads < 1)
-		throwValidationError("num-threads");
-
-	numThreads = num_threads;
-}
-
 void PSDScreenImpl::setMatchingMode(const std::string& mode)
 {
 	using namespace CDPL::Pharm;
@@ -338,7 +331,7 @@ int PSDScreenImpl::process()
 	if (termSignalCaught())
 		return EXIT_FAILURE;
 
-	if (multiThreading)
+	if (numThreads > 0)
 		processMultiThreaded();
 	else
 		processSingleThreaded();
@@ -412,7 +405,7 @@ bool PSDScreenImpl::collectHit(const SearchHit& hit, double score)
 	if (haveErrorMessage())
 		return false;
 
-	if (multiThreading) {
+	if (numThreads > 0) {
 		boost::lock_guard<boost::mutex> lock(collHitMutex);
 
 		return doCollectHit(hit, score);
@@ -429,16 +422,22 @@ bool PSDScreenImpl::doCollectHit(const SearchHit& hit, double score)
 
 		numHits++;
 
+		printMessage(VERBOSE, "Found matching molecule '" + getName(hit.getHitMolecule()) + 
+					 "' - DB: '" + hit.getHitProvider().getDBAccessor().getDatabaseName() + 
+					 "', Mol. Index: " + boost::lexical_cast<std::string>(hit.getHitMoleculeIndex()) + 
+					 ", Conf. Index: " + boost::lexical_cast<std::string>(hit.getHitConformationIndex()) +
+					 ", Score: " + boost::lexical_cast<std::string>(score));
+
 		return (*hitCollector)(hit, score);
 
 	} catch (const std::exception& e) {
-		setErrorMessage(std::string("collecting search hit failed: ") + e.what());
+		printMessage(ERROR, std::string("Collecting hit molecule failed: ") + e.what());
 
 	} catch (...) {
-		setErrorMessage("collecting search hit failed");
+		printMessage(ERROR, "Collecting hit molecule failed");
 	}
 
-	return false;
+	return true;
 }
 
 bool PSDScreenImpl::getQueryPharmacophore(std::size_t idx, CDPL::Pharm::Pharmacophore& pharm)
@@ -446,7 +445,7 @@ bool PSDScreenImpl::getQueryPharmacophore(std::size_t idx, CDPL::Pharm::Pharmaco
 	if (termSignalCaught())
 		return false;
 
-	if (multiThreading) {
+	if (numThreads > 0) {
 		boost::lock_guard<boost::mutex> lock(mutex);
 
 		return doGetQueryPharmacophore(idx, pharm);
@@ -478,7 +477,7 @@ bool PSDScreenImpl::printProgress(std::size_t worker_idx, double progress)
 	if (!progressEnabled())
 		return true;
 
-	if (multiThreading) {
+	if (numThreads > 0) {
 		boost::lock_guard<boost::mutex> lock(mutex);
 
 		return doPrintProgress(worker_idx, progress);
@@ -521,7 +520,7 @@ bool PSDScreenImpl::doPrintProgress(std::size_t worker_idx, double progress)
 
 void PSDScreenImpl::setErrorMessage(const std::string& msg)
 {
-	if (multiThreading) {
+	if (numThreads > 0) {
 		boost::lock_guard<boost::mutex> lock(mutex);
 
 		if (errorMessage.empty())
@@ -535,7 +534,7 @@ void PSDScreenImpl::setErrorMessage(const std::string& msg)
 
 bool PSDScreenImpl::haveErrorMessage()
 {
-	if (multiThreading) {
+	if (numThreads > 0) {
 		boost::lock_guard<boost::mutex> lock(mutex);
 		return !errorMessage.empty();
 	}
@@ -607,8 +606,11 @@ void PSDScreenImpl::printOptionSummary()
  	printMessage(VERBOSE, " Output DB-Name Property:      " + std::string(outputDBName ? "Yes" : "No"));
  	printMessage(VERBOSE, " Output Pharm. Name Property:  " + std::string(outputPharmName ? "Yes" : "No"));
  	printMessage(VERBOSE, " Output Pharm. Index Property: " + std::string(outputPharmIndex ? "Yes" : "No"));
-	printMessage(VERBOSE, " Multi-threading:              " + std::string(multiThreading ? "Yes" : "No"));
-	printMessage(VERBOSE, " Number of Threads:            " + boost::lexical_cast<std::string>(numThreads));
+	printMessage(VERBOSE, " Multithreading:               " + std::string(numThreads > 0 ? "Yes" : "No"));
+
+	if (numThreads > 0)
+		printMessage(VERBOSE, " Number of Threads:            " + boost::lexical_cast<std::string>(numThreads));
+
 	printMessage(VERBOSE, " Hit Output File Format:       " + (hitOutputHandler ? hitOutputHandler->getDataFormat().getName() : std::string("Auto-detect")));
 	printMessage(VERBOSE, " Query Input File Format:      " + (queryInputHandler ? queryInputHandler->getDataFormat().getName() : std::string("Auto-detect")));
 	printMessage(VERBOSE, "");

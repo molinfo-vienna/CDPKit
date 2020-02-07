@@ -41,6 +41,7 @@
 #include "CDPL/ConfGen/FragmentLibrary.hpp"
 #include "CDPL/ConfGen/ConformerDataArray.hpp"
 #include "CDPL/ConfGen/CallbackFunction.hpp"
+#include "CDPL/ConfGen/LogMessageCallbackFunction.hpp"
 
 
 namespace CDPL 
@@ -86,6 +87,10 @@ namespace CDPL
 			void setTimeoutCallback(const CallbackFunction& func);
 
 			const CallbackFunction& getTimeoutCallback() const;
+
+			void setLogMessageCallback(const LogMessageCallbackFunction& func);
+
+			const LogMessageCallbackFunction& getLogMessageCallback() const;
 
 			unsigned int assemble(const Chem::MolecularGraph& molgraph);
 		

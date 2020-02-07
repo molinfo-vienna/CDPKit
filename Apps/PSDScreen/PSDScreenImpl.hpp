@@ -86,7 +86,6 @@ namespace PSDScreen
 
 		void setHitOutputFormat(const std::string& file_ext);
 		void setQueryInputFormat(const std::string& file_ext);
-		void setMaxNumThreads(unsigned int num_threads);
 		void setMatchingMode(const std::string& mode);
 
 		int process();
@@ -140,7 +139,6 @@ namespace PSDScreen
 		bool                     outputDBName;
 		bool                     outputPharmName;
 		bool                     outputPharmIndex;
-		bool                     multiThreading;
 		std::size_t              numThreads;
 		std::size_t              startMolIndex;
 		std::size_t              endMolIndex;

@@ -29,6 +29,8 @@
 #include <algorithm>
 #include <cmath>
 
+#include <boost/lexical_cast.hpp>
+
 #include "CDPL/ConfGen/MolecularGraphFunctions.hpp"
 #include "CDPL/ConfGen/BondFunctions.hpp"
 #include "CDPL/ConfGen/ReturnCode.hpp"
@@ -45,7 +47,7 @@
 #include "FragmentTreeNode.hpp"
 #include "FallbackTorsionLibrary.hpp"
 
-//#include <iostream>
+
 using namespace CDPL;
 
 
@@ -187,15 +189,18 @@ bool ConfGen::TorsionDriverImpl::setMMFF94Parameters()
 	try {
 		if (parameterizeMMFF94Interactions(molgraph, *mmff94Parameterizer, *mmff94Data, settings.getForceFieldType(),
 										   settings.strictForceFieldParameterization(), settings.getDielectricConstant(),
-										   settings.getDistanceExponent()) != ReturnCode::SUCCESS)
-			return false;
+										   settings.getDistanceExponent()) == ReturnCode::SUCCESS) {
 
-	} catch (const Error&) {
-		return false;
-	}
+			setMMFF94Parameters(*mmff94Data);		
+			return true;
+		}
 
-	setMMFF94Parameters(*mmff94Data);
-	return true;
+	} catch (const Error&) {}
+
+	if (logCallback)
+		logCallback("Force field setup failed!\n");
+
+	return false;
 }
 
 void ConfGen::TorsionDriverImpl::clearInputCoordinates()
@@ -287,6 +292,16 @@ const ConfGen::CallbackFunction& ConfGen::TorsionDriverImpl::getTimeoutCallback(
 	return fragTree.getTimeoutCallback();
 }
 
+void ConfGen::TorsionDriverImpl::setLogMessageCallback(const LogMessageCallbackFunction& func)
+{
+	logCallback = func;
+}
+
+const ConfGen::LogMessageCallbackFunction& ConfGen::TorsionDriverImpl::getLogMessageCallback() const
+{
+	return logCallback;
+}
+
 std::size_t ConfGen::TorsionDriverImpl::getNumFragments() const
 {
 	return fragTree.getNumFragments();
@@ -373,10 +388,22 @@ void ConfGen::TorsionDriverImpl::assignTorsionAngles(FragmentTreeNode* node)
 			node->setTorsionReferenceAtoms(match_atoms[3], match_atoms[0]);
 	}
 		
+	if (logCallback) {
+		logCallback("Torsion angle assignment for bond #" + boost::lexical_cast<std::string>(fragTree.getMolecularGraph()->getBondIndex(*bond)) + ":\n");
+
+		if (match)
+			logCallback(" Matching rule: " + match->getRule().getMatchPatternString() + '\n');
+		else
+			logCallback(" No matching rule found - fallback to 30° grid search!\n");
+	}
+
 	if (node->getNumTorsionAngles() == 0) {
 		// fallback: rotation in 30° steps
 
 		std::size_t rot_sym = getRotationalSymmetry(*bond);
+
+		if (logCallback && rot_sym > 1)
+			logCallback(" Symmetry: C" + boost::lexical_cast<std::string>(rot_sym) + '\n');
 
 		for (std::size_t i = 0, num_angles = 12 / rot_sym; i < num_angles; i++) 
 			node->addTorsionAngle(i * 30.0, 0.0);
@@ -387,8 +414,23 @@ void ConfGen::TorsionDriverImpl::assignTorsionAngles(FragmentTreeNode* node)
 		if (!node->getTorsionReferenceAtoms()[0] || !node->getTorsionReferenceAtoms()[1])
 			node->setTorsionReferenceAtoms(0, 0);
 
-	} else if (node->getNumTorsionAngles() > 1) 
-		node->pruneTorsionAngles(getRotationalSymmetry(*bond));
+	} else if (node->getNumTorsionAngles() > 1) {
+		std::size_t rot_sym = getRotationalSymmetry(*bond);
+
+		if (logCallback && rot_sym > 1)
+			logCallback(" Symmetry: C" + boost::lexical_cast<std::string>(rot_sym) + '\n');
+
+		node->pruneTorsionAngles(rot_sym);
+	}
+
+	if (logCallback) {
+		logCallback(" Angles: ");
+
+		for (FragmentTreeNode::TorsionAngleArray::const_iterator it = node->getTorsionAngles().begin(), end = node->getTorsionAngles().end(); it != end; ++it)
+			logCallback(boost::lexical_cast<std::string>(it->first) + '(' + boost::lexical_cast<std::string>(it->second) + ") ");
+
+		logCallback("\n");
+	}
 }
 
 const ConfGen::TorsionRuleMatch* ConfGen::TorsionDriverImpl::getTorsionRuleAngles(const Chem::Bond& bond, FragmentTreeNode* node)
@@ -420,14 +462,7 @@ const ConfGen::TorsionRuleMatch* ConfGen::TorsionDriverImpl::getTorsionRuleAngle
 
 	for (TorsionRule::ConstAngleEntryIterator it = rule.getAnglesBegin(), end = rule.getAnglesEnd(); it != end; ++it)
 		node->addTorsionAngle(normalizeAngle(it->getAngle()), it->getTolerance1());
-/*
-	std::cerr << rule.getMatchPatternString() << ": ";
 
-	for (std::size_t i = 0; i < node->getNumTorsionAngles(); i++) 
-		std::cerr << node->getTorsionAngles()[i].first << " ";
-		
-	std::cerr << std::endl;
-*/
 	return match; 
 }
 

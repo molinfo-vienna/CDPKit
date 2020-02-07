@@ -89,6 +89,16 @@ const ConfGen::CallbackFunction& ConfGen::FragmentLibraryGenerator::getTimeoutCa
 	return fragConfGen.getTimeoutCallback();
 }
 
+void ConfGen::FragmentLibraryGenerator::setLogMessageCallback(const LogMessageCallbackFunction& func)
+{
+	fragConfGen.setLogMessageCallback(func);
+}
+
+const ConfGen::LogMessageCallbackFunction& ConfGen::FragmentLibraryGenerator::getLogMessageCallback() const
+{
+	return fragConfGen.getLogMessageCallback();
+}
+
 unsigned int ConfGen::FragmentLibraryGenerator::process(const Chem::MolecularGraph& frag, const Chem::MolecularGraph& parent)
 {
 	using namespace Chem;

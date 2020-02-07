@@ -130,7 +130,7 @@ bool Chem::MOL2DataWriter::writeMolecularGraph(std::ostream& os, const Molecular
 		for (std::size_t i = 0; i < num_confs; i++) {
 			getConformation(molgraph, i, confCoordinates, false);
 
-			writeMoleculeRecord(os, molgraph);
+			writeMoleculeRecord(os, molgraph, i);
 
 			if (writeConfEnergyComment && conf_energies && conf_energies->getSize() > i)
 				writeConformerEnergyComment(os, (*conf_energies)[i]);
@@ -156,6 +156,9 @@ void Chem::MOL2DataWriter::init(std::ostream& os)
 	moleculeType           = getMOL2MoleculeTypeParameter(ioBase);
 	outputSubstructs       = getMOL2OutputSubstructuresParameter(ioBase);
 	writeConfEnergyComment = (multiConfExport && getOutputConfEnergyAsCommentParameter(ioBase));
+
+	if (multiConfExport)
+		confIdxSuffixPattern = getConfIndexNameSuffixPatternParameter(ioBase);
 
 	os << std::fixed << std::showpoint;
 }
@@ -229,7 +232,7 @@ void Chem::MOL2DataWriter::initSubstructureData(const MolecularGraph& molgraph)
 	}  
 }
 
-void Chem::MOL2DataWriter::writeMoleculeRecord(std::ostream& os, const MolecularGraph& molgraph)
+void Chem::MOL2DataWriter::writeMoleculeRecord(std::ostream& os, const MolecularGraph& molgraph, std::size_t conf_idx)
 {
 	initSubstructureData(molgraph);
 
@@ -241,16 +244,22 @@ void Chem::MOL2DataWriter::writeMoleculeRecord(std::ostream& os, const Molecular
 		if (name_prop[name_prop.length() - 1] == MOL2::LINE_CONT_MARKER) {
 			std::string new_name = name_prop;
 
-			boost::algorithm::trim_right_if(new_name, IsLineContMarker());
+			boost::trim_right_if(new_name, IsLineContMarker());
 
-			os << new_name << MOL2::END_OF_LINE;
+			os << new_name;
 
 		} else
-			os << name_prop << MOL2::END_OF_LINE;
+			os << name_prop;
+	}
 
-	} else
-		os << MOL2::END_OF_LINE;
+	if (multiConfExport && !confIdxSuffixPattern.empty()) {
+		std::string suffix = boost::replace_all_copy(confIdxSuffixPattern, "%I%", boost::lexical_cast<std::string>(conf_idx));
 
+		if (suffix != confIdxSuffixPattern) 
+			os << suffix;
+	}
+
+	os << MOL2::END_OF_LINE;
 	os << molgraph.getNumAtoms() << ' ' << getCompleteBondCount(molgraph) << ' ' << substructData.size() << " 0 0" << MOL2::END_OF_LINE;
 	os << getMoleculeTypeString(molgraph) << MOL2::END_OF_LINE;
 	os << getChargeTypeString(molgraph) << MOL2::END_OF_LINE;

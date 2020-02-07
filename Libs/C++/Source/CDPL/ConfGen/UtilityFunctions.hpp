@@ -1,7 +1,7 @@
 /* -*- mode: c++; c-basic-offset: 4; tab-width: 4; indent-tabs-mode: t -*- */
 
 /* 
- * BoostFunctionWrapperExport.cpp 
+ * UtilityFunctions.hpp 
  *
  * This file is part of the Chemical Data Processing Toolkit
  *
@@ -23,20 +23,36 @@
  * Boston, MA 02111-1307, USA.
  */
 
+/**
+ * \file
+ * \brief Declaration of internal utility functions.
+ */
 
-#include "CDPL/ConfGen/CallbackFunction.hpp"
-#include "CDPL/ConfGen/LogMessageCallbackFunction.hpp"
+#ifndef CDPL_CONFGEN_UTILITYFUNCTIONS_HPP
+#define CDPL_CONFGEN_UTILITYFUNCTIONS_HPP
 
-#include "Base/BoostFunctionWrapperExport.hpp"
-
-#include "ClassExports.hpp"
+#include <string>
 
 
-void CDPLPythonConfGen::exportBoostFunctionWrappers()
+namespace CDPL 
 {
-    using namespace CDPL;
 
-	CDPLPythonBase::BoostFunction0Export<ConfGen::CallbackFunction>("CallbackFunction");
+    namespace Chem
+    {
 
-	CDPLPythonBase::BoostFunction1Export<ConfGen::LogMessageCallbackFunction>("LogMessageCallbackFunction");
+	class MolecularGraph;
+    }
+
+    namespace ConfGen 
+    {
+
+	std::string fragmentTypeToString(unsigned int frag_type, bool human); 
+
+	std::string getSMILES(Chem::MolecularGraph& molgraph);
+
+	std::string getSMILES(const Chem::MolecularGraph& molgraph);
+    }
 }
+
+#endif // CDPL_CONFGEN_UTILITYFUNCTIONS_HPP
+ 

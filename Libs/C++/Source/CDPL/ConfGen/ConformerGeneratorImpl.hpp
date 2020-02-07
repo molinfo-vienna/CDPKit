@@ -91,6 +91,10 @@ namespace CDPL
 
 			const CallbackFunction& getTimeoutCallback() const;
 
+			void setLogMessageCallback(const LogMessageCallbackFunction& func);
+
+			const LogMessageCallbackFunction& getLogMessageCallback() const;
+
 			unsigned int generate(const Chem::MolecularGraph& molgraph, bool struct_gen_only);
 
 			void setConformers(Chem::MolecularGraph& molgraph) const;
@@ -120,7 +124,7 @@ namespace CDPL
 
 			void calcConformerBounds(double min[3], double max[3], const Math::Vector3DArray& coords) const;
 
-			unsigned int generateConformers(const Chem::MolecularGraph& molgraph, bool struct_gen_only);
+			unsigned int generateConformers(const Chem::MolecularGraph& molgraph, bool struct_gen_only, bool start_timer);
 
 			unsigned int generateConformersSystematic(bool struct_gen_only);
 
@@ -128,7 +132,7 @@ namespace CDPL
 
 			bool determineSamplingMode();
 
-			void init(const Chem::MolecularGraph& molgraph);
+			void init(const Chem::MolecularGraph& molgraph, bool start_timer);
 
 			bool generateHydrogenCoordsAndMinimize(ConformerData& conf_data);
 
@@ -205,6 +209,7 @@ namespace CDPL
 			ConformerDataArray                   outputConfs;
 			CallbackFunction                     abortCallback;
 			CallbackFunction                     timeoutCallback;
+			LogMessageCallbackFunction           logCallback;
 			boost::timer::cpu_timer              timer;
 			RMSDConformerSelector                confSelector;
 			TorsionDriverImpl                    torDriver;

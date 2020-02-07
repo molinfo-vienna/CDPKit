@@ -76,6 +76,10 @@ namespace CDPL
 
 			const CallbackFunction& getTimeoutCallback() const;
 
+			void setLogMessageCallback(const LogMessageCallbackFunction& func);
+
+			const LogMessageCallbackFunction& getLogMessageCallback() const;
+
 			unsigned int process(const Chem::MolecularGraph& frag, const Chem::MolecularGraph& parent);
 	
 			std::size_t getNumGeneratedConformers() const;

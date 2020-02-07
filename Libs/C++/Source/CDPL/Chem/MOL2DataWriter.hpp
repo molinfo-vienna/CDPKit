@@ -67,7 +67,7 @@ namespace CDPL
 			void getAtomCoordsDim(const MolecularGraph& molgraph);
 			void initSubstructureData(const MolecularGraph& molgraph);
 
-			void writeMoleculeRecord(std::ostream& os, const MolecularGraph& molgraph);
+			void writeMoleculeRecord(std::ostream& os, const MolecularGraph& molgraph, std::size_t conf_idx = 0);
 			void writeConformerEnergyComment(std::ostream& os, double energy);
 			void writeAtomSection(std::ostream& os, const MolecularGraph& molgraph);
 			void writeBondSection(std::ostream& os, const MolecularGraph& molgraph) const;
@@ -104,6 +104,7 @@ namespace CDPL
 			unsigned int            atomChargeType;
 			unsigned int            moleculeType;
 			bool                    writeConfEnergyComment;
+			std::string             confIdxSuffixPattern;
 			std::size_t             coordsDim;
 			Math::Vector3DArray     confCoordinates;
 			StringToSizeMap         atomSymbolCounts;

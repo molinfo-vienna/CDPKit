@@ -28,6 +28,7 @@
 #include <functional>
 #include <iterator>
 #include <fstream>
+#include <sstream>
 
 #include <boost/algorithm/string.hpp>
 #include <boost/bind.hpp>
@@ -91,48 +92,14 @@ public:
 	}
 
 	void operator()() {
-		using namespace CDPL;
-		using namespace Chem;
-		using namespace ConfGen;
-
 		try {
-			while (true) {
-				if (!parent->readNextMolecule(molecule))
-					return;
-
-				prepareForConformerGeneration(molecule);
-				buildFragmentLinkBondMask(molecule, fragLinkBondMask);
-
-				splitIntoFragments(molecule, fragList, fragLinkBondMask);
-
-				for (FragmentList::ConstElementIterator it = fragList.getElementsBegin(), end = fragList.getElementsEnd(); it != end; ++it) {
-					const Fragment& frag = *it;
-					unsigned int ret_code = fragLibGen.process(frag, molecule);
-
-					switch (ret_code) {
-
-						case ReturnCode::ABORTED:
-							return;
-
-						case ReturnCode::SUCCESS:
-						case ReturnCode::FRAGMENT_CONF_GEN_TIMEOUT:
-						case ReturnCode::FRAGMENT_ALREADY_PROCESSED:
-							fragmentProcessed(frag, ret_code);
-							break;
-
-						default:
-							handleError(frag, ret_code);
-					}
-				}
-
-				numProcMols++;
-			}
-
+			while (processNextMolecule());
+			
 		} catch (const std::exception& e) {
-			parent->setErrorMessage(std::string("error while processing molecule: ") + e.what());
+			parent->setErrorMessage(std::string("unexpected exception while creating fragment library: ") + e.what());
 
 		} catch (...) {
-			parent->setErrorMessage("unspecified error while processing molecule");
+			parent->setErrorMessage("unexpected exception while creating fragment library");
 		}
 	}
 
@@ -157,7 +124,68 @@ public:
 	}
 
 private:
-	void fragmentProcessed(const CDPL::Chem::MolecularGraph& frag, unsigned int ret_code) {
+	bool processNextMolecule() {
+		using namespace CDPL;
+		using namespace Chem;
+		using namespace ConfGen;
+
+		std::size_t rec_idx = parent->readNextMolecule(molecule);
+
+		if (!rec_idx)
+			return false;
+
+		try {
+			logRecordStream.str(std::string());
+			verbLevel = parent->getVerbosityLevel();
+
+			if (verbLevel >= DEBUG) 
+				logRecordStream << "- Molecule " << parent->createMoleculeIdentifier(rec_idx, molecule) << ':' << std::endl;
+
+			prepareForConformerGeneration(molecule);
+			buildFragmentLinkBondMask(molecule, fragLinkBondMask);
+
+			splitIntoFragments(molecule, fragList, fragLinkBondMask);
+
+			for (FragmentList::ConstElementIterator it = fragList.getElementsBegin(), end = fragList.getElementsEnd(); it != end; ++it) {
+				const Fragment& frag = *it;
+				unsigned int ret_code = fragLibGen.process(frag, molecule);
+
+				switch (ret_code) {
+
+					case ReturnCode::ABORTED:
+						return false;
+							
+					case ReturnCode::SUCCESS:
+					case ReturnCode::FRAGMENT_CONF_GEN_TIMEOUT:
+					case ReturnCode::FRAGMENT_ALREADY_PROCESSED:
+						fragmentProcessed(frag, ret_code);
+						break;
+							
+					default:
+						handleError(frag, ret_code);
+				}
+			}
+
+			std::string log_rec = logRecordStream.str();
+
+			if (!log_rec.empty()) 
+				parent->printMessage(verbLevel, log_rec, false);
+
+			numProcMols++;
+			
+			return true;
+
+		} catch (const std::exception& e) {
+			parent->setErrorMessage("unexpected exception while processing molecule " + parent->createMoleculeIdentifier(rec_idx, molecule) + ": " + e.what());
+
+		} catch (...) {
+			parent->setErrorMessage("unexpected exception while processing molecule " + parent->createMoleculeIdentifier(rec_idx, molecule));
+		}
+
+		return false;
+	}
+
+	void fragmentProcessed( const CDPL::Chem::MolecularGraph& frag, unsigned int ret_code) {
 		using namespace CDPL::ConfGen;
 
 		numProcFrags++;
@@ -171,13 +199,11 @@ private:
 			numAddedFrags++;
 			totalNumConfs += num_confs;
 
-			if (parent->getVerbosityLevel() >= VERBOSE) {
-				parent->printMessage(VERBOSE, "Fragment '" + getSMILES(frag) + "': " + boost::lexical_cast<std::string>(num_confs) + 
-									 (num_confs == 1 ? " Conf." : " Confs."));
-			}
-
+			if (parent->getVerbosityLevel() >= VERBOSE) 
+				logRecordStream << "Fragment " << getSMILES(frag) << ": " << num_confs << (num_confs == 1 ? " Conf." : " Confs.") << std::endl;
+			
 		} else if (parent->getVerbosityLevel() >= DEBUG) 
-			parent->printMessage(DEBUG, "Fragment '" + getSMILES(frag) + "': already processed");
+			  logRecordStream << "Fragment " << getSMILES(frag) << ": already processed" << std::endl;
 	}
 
 	void handleError(const CDPL::Chem::MolecularGraph& frag, unsigned int ret_code) {
@@ -186,32 +212,37 @@ private:
 
 		numErrorFrags++;
 
+		if (parent->getVerbosityLevel() < ERROR)
+			return;
+
+		verbLevel = ERROR;
+
 		std::string err_msg;
 
 		switch (ret_code) {
 
 			case ReturnCode::FORCEFIELD_SETUP_FAILED:
-				err_msg = "Force field setup failed";
+				err_msg = "force field setup failed";
 				break;
 
 			case ReturnCode::FORCEFIELD_MINIMIZATION_FAILED:
-				err_msg = "Structure refinement failed";
+				err_msg = "structure refinement failed";
 				break;
 
 			case ReturnCode::FRAGMENT_CONF_GEN_FAILED:
-				err_msg = "Could not generate any conformers";
+				err_msg = "could not generate any conformers";
 				break;
 
 			case ReturnCode::TIMEOUT:
-				err_msg = "Timeout exceeded";
+				err_msg = "timeout exceeded";
 				break;
 
 			default:
-				err_msg = "Unspecified error";	
+				logRecordStream << "Unspecified error while processing fragment " << getSMILES(frag) << std::endl;
+				return;
 		}
 
-		parent->printMessage(ERROR, "Error while processing " + std::string(&frag == &molecule ? "molecule" : "fragment") + 
-							 " '" + getSMILES(frag) + "': " + err_msg);
+		logRecordStream << "Error while processing fragment " << getSMILES(frag) << ": " << err_msg << std::endl;
 	}
 
 	std::string getSMILES(const CDPL::Chem::MolecularGraph& molgraph) const {
@@ -242,6 +273,8 @@ private:
 	CDPL::Util::BitSet                      fragLinkBondMask;
 	CDPL::ConfGen::FragmentLibraryGenerator fragLibGen;
 	CDPL::Chem::BasicMolecule               molecule;
+	std::stringstream                       logRecordStream;
+	VerbosityLevel                          verbLevel;
 	std::size_t                             numProcMols;
 	std::size_t                             numProcFrags;
 	std::size_t                             numErrorFrags;
@@ -251,8 +284,7 @@ private:
 
 
 GenFragLibImpl::GenFragLibImpl(): 
-	multiThreading(false), numThreads(boost::thread::hardware_concurrency()), 
-	mode(CREATE), settings(ConformerGeneratorSettings::THOROUGH), preset("THOROUGH"),
+	numThreads(0), mode(CREATE), settings(ConformerGeneratorSettings::THOROUGH), preset("THOROUGH"),
 	maxLibSize(0), inputHandler(), fragmentLibPtr(new CDPL::ConfGen::FragmentLibrary())
 {
 	addOption("input,i", "Input file(s).", 
@@ -261,10 +293,10 @@ GenFragLibImpl::GenFragLibImpl():
 			  value<std::string>(&outputFile)->required());
 	addOption("mode,m", "Processing mode (CREATE, UPDATE, MERGE default: CREATE).", 
 			  value<std::string>()->notifier(boost::bind(&GenFragLibImpl::setMode, this, _1)));
-	addOption("multi-threading,t", "Enable multi-threaded processing (default: false).", 
-			  value<bool>(&multiThreading)->implicit_value(true));
-	addOption("num-threads,n", "Number of parallel threads (default: " + boost::lexical_cast<std::string>(numThreads) + " threads, must be > 0).", 
-			  value<unsigned int>()->notifier(boost::bind(&GenFragLibImpl::setMaxNumThreads, this, _1)));
+	addOption("num-threads,t", "Number of parallel execution threads (default: no multithreading, implicit value: " +
+			  boost::lexical_cast<std::string>(boost::thread::hardware_concurrency()) + 
+			  " threads, must be >= 0, 0 disables multithreading).", 
+			  value<std::size_t>(&numThreads)->implicit_value(boost::thread::hardware_concurrency()));
 	addOption("input-format,I", "Input file format (default: auto-detect from file extension).", 
 			  value<std::string>()->notifier(boost::bind(&GenFragLibImpl::setInputFormat, this, _1)));
 	addOption("preset,P", "Preset to apply (FAST, THROUGH, default: THOROUGH).", 
@@ -275,7 +307,7 @@ GenFragLibImpl::GenFragLibImpl():
 	addOption("timeout,T", "Time in seconds after which fragment conformer generation will be stopped (default: " + 
 			  boost::lexical_cast<std::string>(settings.getMacrocycleSettings().getTimeout()) + ", must be >= 0, 0 disables timeout).",
 			  value<std::size_t>()->notifier(boost::bind(&GenFragLibImpl::setTimeout, this, _1)));
-	addOption("max-lib-size,x", "Maximum number of output fragments (default: 0, must be >= 0, 0 disables limit, only valid in CREATE mode).",
+	addOption("max-lib-size,n", "Maximum number of output fragments (default: 0, must be >= 0, 0 disables limit, only valid in CREATE mode).",
 			  value<std::size_t>(&maxLibSize));
 	addOption("e-window,e", "Output energy window for small ring system conformers (default: " + 
 			  boost::lexical_cast<std::string>(settings.getSmallRingSystemSettings().getEnergyWindow()) + ", must be >= 0).",
@@ -441,14 +473,6 @@ void GenFragLibImpl::setInputFormat(const std::string& file_ext)
 		throwValidationError("input-format");
 }
 
-void GenFragLibImpl::setMaxNumThreads(unsigned int num_threads)
-{
-	if (num_threads < 1)
-		throwValidationError("num-threads");
-
-	numThreads = num_threads;
-}
-
 int GenFragLibImpl::process()
 {
 	startTime = Clock::now();
@@ -480,7 +504,7 @@ int GenFragLibImpl::process()
 		} else
 			printMessage(INFO, "Processing Input Molecules...");
 
-		if (multiThreading)
+		if (numThreads > 0)
 			processMultiThreaded();
 		else
 			processSingleThreaded();
@@ -638,7 +662,7 @@ void GenFragLibImpl::updateOccurrenceCount(CDPL::Base::uint64 hash_code)
 	if (maxLibSize == 0)
 		return;
 
-	if (multiThreading) {
+	if (numThreads > 0) {
 		boost::lock_guard<boost::mutex> lock(mutex);
 
 		fragmentOccCounts[hash_code]++;
@@ -678,16 +702,16 @@ int GenFragLibImpl::saveFragmentLibrary()
 	fragmentLibPtr->save(os);
 
 	if (!os)
-		throw Base::IOError("saving fragments failed");
+		throw Base::IOError("saving fragments to library '" + outputFile + "' failed");
 
-	printMessage(INFO, " - Saved " + boost::lexical_cast<std::string>(fragmentLibPtr->getNumEntries()) + " fragments");
+	printMessage(INFO, " - Saved " + boost::lexical_cast<std::string>(fragmentLibPtr->getNumEntries()) + " fragments", false);
 
 	return EXIT_SUCCESS;
 }
 
 void GenFragLibImpl::setErrorMessage(const std::string& msg)
 {
-	if (multiThreading) {
+	if (numThreads > 0) {
 		boost::lock_guard<boost::mutex> lock(mutex);
 
 		if (errorMessage.empty())
@@ -701,7 +725,7 @@ void GenFragLibImpl::setErrorMessage(const std::string& msg)
 
 bool GenFragLibImpl::haveErrorMessage()
 {
-	if (multiThreading) {
+	if (numThreads > 0) {
 		boost::lock_guard<boost::mutex> lock(mutex);
 		return !errorMessage.empty();
 	}
@@ -722,15 +746,15 @@ void GenFragLibImpl::printStatistics(std::size_t num_proc_mols, std::size_t num_
 	printMessage(INFO, "");
 }
 
-bool GenFragLibImpl::readNextMolecule(CDPL::Chem::Molecule& mol)
+std::size_t GenFragLibImpl::readNextMolecule(CDPL::Chem::Molecule& mol)
 {
 	if (termSignalCaught())
-		return false;
+		return 0;
 
 	if (haveErrorMessage())
-		return false;
+		return 0;
 
-	if (multiThreading) {
+	if (numThreads > 0) {
 		boost::lock_guard<boost::mutex> lock(molReadMutex);
 
 		return doReadNextMolecule(mol);
@@ -739,41 +763,35 @@ bool GenFragLibImpl::readNextMolecule(CDPL::Chem::Molecule& mol)
 	return doReadNextMolecule(mol);
 }
 
-bool GenFragLibImpl::doReadNextMolecule(CDPL::Chem::Molecule& mol)
+std::size_t GenFragLibImpl::doReadNextMolecule(CDPL::Chem::Molecule& mol)
 {
 	while (true) {
 		try {
 			if (inputReader.getRecordIndex() >= inputReader.getNumRecords()) 
-				return false;
-
-			printMessage(DEBUG, "Starting to process Molecule " + boost::lexical_cast<std::string>(inputReader.getRecordIndex() + 1) + '/' +
-						 boost::lexical_cast<std::string>(inputReader.getNumRecords()) + "...");
+				return 0;
 
 			if (!inputReader.read(mol)) {
-				printMessage(ERROR, "Reading molecule " + boost::lexical_cast<std::string>(inputReader.getRecordIndex() + 1) + '/' +
-							 boost::lexical_cast<std::string>(inputReader.getNumRecords()) + " failed");			
+				printMessage(ERROR, "Reading molecule " + createMoleculeIdentifier(inputReader.getRecordIndex() + 1) + " failed");			
 				
 				inputReader.setRecordIndex(inputReader.getRecordIndex() + 1);
-				return false;
+				continue;
 			}
 
 			printProgress("Processing Molecules...        ", double(inputReader.getRecordIndex()) / inputReader.getNumRecords());
-			return true;
+
+			return inputReader.getRecordIndex();
 
 		} catch (const std::exception& e) {
-			printMessage(ERROR, "Error while reading molecule " + boost::lexical_cast<std::string>(inputReader.getRecordIndex() + 1) + '/' +
-						 boost::lexical_cast<std::string>(inputReader.getNumRecords()) + ": " + e.what());
-
+			printMessage(ERROR, "Error while reading molecule " + createMoleculeIdentifier(inputReader.getRecordIndex() + 1) + ": " + e.what());
 
 		} catch (...) {
-			printMessage(ERROR, "Error while reading molecule " + boost::lexical_cast<std::string>(inputReader.getRecordIndex() + 1) + '/' +
-						 boost::lexical_cast<std::string>(inputReader.getNumRecords()));
+			printMessage(ERROR, "Unspecified error while reading molecule " + createMoleculeIdentifier(inputReader.getRecordIndex() + 1));
 		}
 
 		inputReader.setRecordIndex(inputReader.getRecordIndex() + 1);
 	}
 
-	return false;
+	return 0;
 }
 
 void GenFragLibImpl::checkInputFiles() const
@@ -792,7 +810,7 @@ void GenFragLibImpl::checkInputFiles() const
 
 void GenFragLibImpl::printMessage(VerbosityLevel level, const std::string& msg, bool nl, bool file_only)
 {
-	if (!multiThreading) {
+	if (numThreads == 0) {
 		CmdLineBase::printMessage(level, msg, nl, file_only);
 		return;
 	}
@@ -815,8 +833,11 @@ void GenFragLibImpl::printOptionSummary()
  	printMessage(VERBOSE,     " Preset:                              " + preset);
 
 	if (mode != MERGE) {
-		printMessage(VERBOSE, " Multi-threading:                     " + std::string(multiThreading ? "Yes" : "No"));
-		printMessage(VERBOSE, " Number of Threads:                   " + (multiThreading ? boost::lexical_cast<std::string>(numThreads) : std::string("1")));
+		printMessage(VERBOSE, " Multithreading:                      " + std::string(numThreads > 0 ? "Yes" : "No"));
+
+		if (numThreads > 0)
+			printMessage(VERBOSE, " Number of Threads:                   " + boost::lexical_cast<std::string>(numThreads));
+
 		printMessage(VERBOSE, " Input File Format:                   " + (inputHandler ? inputHandler->getDataFormat().getName() : std::string("Auto-detect")));
 		printMessage(VERBOSE, " Max. Output Library Size:            " + boost::lexical_cast<std::string>(maxLibSize));
 		printMessage(VERBOSE, " Timeout:                             " + boost::lexical_cast<std::string>(settings.getMacrocycleSettings().getTimeout() / 1000) + "s");
@@ -930,4 +951,17 @@ std::string GenFragLibImpl::getForceFieldTypeString() const
 		return "MMFF94S_EXT_NO_ESTAT";
 	
 	return "UNKNOWN";
+}
+
+std::string GenFragLibImpl::createMoleculeIdentifier(std::size_t rec_idx, const CDPL::Chem::Molecule& mol)
+{
+	if (!getName(mol).empty())
+		return ('\'' + getName(mol) + "' (" + createMoleculeIdentifier(rec_idx) + ')');
+
+	return createMoleculeIdentifier(rec_idx);
+}
+
+std::string GenFragLibImpl::createMoleculeIdentifier(std::size_t rec_idx)
+{
+	return (boost::lexical_cast<std::string>(rec_idx) + '/' + boost::lexical_cast<std::string>(inputReader.getNumRecords()));
 }

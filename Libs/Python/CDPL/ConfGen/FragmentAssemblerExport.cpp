@@ -57,6 +57,10 @@ void CDPLPythonConfGen::exportFragmentAssembler()
 			 (python::arg("self"), python::arg("func")))
 		.def("getTimeoutCallback", &ConfGen::FragmentAssembler::getTimeoutCallback, 
 			 python::arg("self"), python::return_internal_reference<>())
+		.def("setLogMessageCallback", &ConfGen::FragmentAssembler::setLogMessageCallback, 
+			 (python::arg("self"), python::arg("func")))
+		.def("getLogMessageCallback", &ConfGen::FragmentAssembler::getLogMessageCallback, 
+			 python::arg("self"), python::return_internal_reference<>())
 		.def("assemble", &ConfGen::FragmentAssembler::assemble, (python::arg("self"), python::arg("molgraph")))
 		.def("getNumConformers", &ConfGen::FragmentAssembler::getNumConformers, python::arg("self"))
 		.def("getConformer", 
@@ -77,5 +81,9 @@ void CDPLPythonConfGen::exportFragmentAssembler()
 		.add_property("timeoutCallback", 
 					  python::make_function(&ConfGen::FragmentAssembler::getTimeoutCallback,
 											python::return_internal_reference<>()),
-					  &ConfGen::FragmentAssembler::setTimeoutCallback);
+					  &ConfGen::FragmentAssembler::setTimeoutCallback)
+		.add_property("logMessageCallback", 
+					  python::make_function(&ConfGen::FragmentAssembler::getLogMessageCallback,
+											python::return_internal_reference<>()),
+					  &ConfGen::FragmentAssembler::setLogMessageCallback);
 }

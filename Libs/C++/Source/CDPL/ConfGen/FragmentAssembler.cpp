@@ -81,6 +81,16 @@ const ConfGen::CallbackFunction& ConfGen::FragmentAssembler::getTimeoutCallback(
 	return impl->getTimeoutCallback();
 }
 
+void ConfGen::FragmentAssembler::setLogMessageCallback(const LogMessageCallbackFunction& func)
+{
+	impl->setLogMessageCallback(func);
+}
+
+const ConfGen::LogMessageCallbackFunction& ConfGen::FragmentAssembler::getLogMessageCallback() const
+{
+	return impl->getLogMessageCallback();
+}
+
 unsigned int ConfGen::FragmentAssembler::assemble(const Chem::MolecularGraph& molgraph)
 {
 	return impl->assemble(molgraph, molgraph);

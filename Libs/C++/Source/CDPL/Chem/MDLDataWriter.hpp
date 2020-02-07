@@ -71,7 +71,7 @@ namespace CDPL
 
 			void getAtomCoordsDim(const MolecularGraph&);
 
-			void writeMOLHeaderBlock(std::ostream&, const MolecularGraph&) const;
+			void writeMOLHeaderBlock(std::ostream&, const MolecularGraph&, std::size_t = 0) const;
 			void writeMOLCTab(std::ostream&, const MolecularGraph&);
 			void writeMOLEndTag(std::ostream&) const;
 
@@ -207,6 +207,7 @@ namespace CDPL
 			bool                    writeConfEnergyComment;
 			bool                    writeConfEnergyField;
 			std::string             confEnergySDTag;
+			std::string             confIdxSuffixPattern;
 			double                  confEnergy;
 			Math::Vector3DArray     confCoordinates;
 		};

@@ -76,7 +76,7 @@ CmdLineBase::CmdLineBase():
 			  value<std::string>()->implicit_value("SHORT"));
 	addOption("version,V", "Print version information and exit.");
 	addOption("verbosity,v", "Verbosity level of information output (QUIET, ERROR, INFO, VERBOSE, DEBUG, default: INFO).", 
-			  value<std::string>()->notifier(boost::bind(&CmdLineBase::setVerbosityLevel, this, _1)));
+			  value<std::string>()->notifier(boost::bind(&CmdLineBase::setVerbosityLevel, this, _1))->implicit_value("VERBOSE"));
 	addOption("config,c", "Use file with program options.", 
 			  value<std::string>());
 	addOption("log-file,l", "Redirect text-output to file.", 

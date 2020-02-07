@@ -47,6 +47,7 @@
 
 #include "ConformerGeneratorImpl.hpp"
 #include "FragmentTreeNode.hpp"
+#include "UtilityFunctions.hpp"
 
 
 using namespace CDPL;
@@ -168,6 +169,19 @@ const ConfGen::CallbackFunction& ConfGen::ConformerGeneratorImpl::getTimeoutCall
 	return timeoutCallback;
 }
 
+void ConfGen::ConformerGeneratorImpl::setLogMessageCallback(const LogMessageCallbackFunction& func)
+{
+	logCallback = func;
+
+	torDriver.setLogMessageCallback(func);
+	fragAssembler.setLogMessageCallback(func);
+}
+
+const ConfGen::LogMessageCallbackFunction& ConfGen::ConformerGeneratorImpl::getLogMessageCallback() const
+{
+	return logCallback;
+}
+
 unsigned int ConfGen::ConformerGeneratorImpl::generate(const Chem::MolecularGraph& molgraph, bool struct_gen_only)
 {
 	using namespace Chem;
@@ -177,13 +191,19 @@ unsigned int ConfGen::ConformerGeneratorImpl::generate(const Chem::MolecularGrap
 	if (molgraph.getNumAtoms() == 0 || settings.getMaxNumOutputConformers() == 0 || comps.isEmpty()) {
 		outputConfs.clear();
 
+		if (logCallback)
+			logCallback("Input molecular graph is empty!\n");
+
 		return ReturnCode::SUCCESS;
 	}
 
 	compConfData.clear();
 
 	if (comps.getSize() == 1) {
-		unsigned int ret_code = generateConformers(molgraph, struct_gen_only);
+		if (logCallback)
+			logCallback("Found 1 molecular graph component\n");
+
+		unsigned int ret_code = generateConformers(molgraph, struct_gen_only, true);
 
 		if (ret_code != ReturnCode::SUCCESS && ret_code != ReturnCode::TIMEOUT) 
 			return ret_code;
@@ -226,21 +246,34 @@ unsigned int ConfGen::ConformerGeneratorImpl::generateConformers(const Chem::Mol
 {
 	using namespace Chem;
 
+	if (logCallback)
+		logCallback("Found " + boost::lexical_cast<std::string>(comps.getSize()) + " molecular graph components\n");
+
 	bool have_full_ipt_coords = true;
 	bool have_timeout = false;
 
-	for (FragmentList::BaseType::ConstElementIterator it = comps.BaseType::getElementsBegin(), end = comps.BaseType::getElementsEnd(); it != end; ++it) {
-		const Fragment::SharedPointer& comp = *it;
+	for (std::size_t i = 0, num_comps = comps.getSize(); i < num_comps; i++) {
+		const Fragment::SharedPointer& comp = comps.getBase()[i];
 
 		if (comp->getNumAtoms() == 0) // sanity check
 			continue;
 
-		unsigned int ret_code = generateConformers(*comp, struct_gen_only);
+		if (logCallback)
+			logCallback("Generating conformers for component " + boost::lexical_cast<std::string>(i) + "...\n");
 
-		if (ret_code == ReturnCode::TIMEOUT)
+		unsigned int ret_code = generateConformers(*comp, struct_gen_only, i == 0);
+
+		if (ret_code == ReturnCode::TIMEOUT) {
+			if (i < (num_comps - 1)) {
+				if (logCallback)
+					logCallback("Time limit exceeded!\n");
+
+				return ReturnCode::CONF_GEN_FAILED;
+			}
+
 			have_timeout = true;
 
-		else if (ret_code != ReturnCode::SUCCESS) 
+		} else if (ret_code != ReturnCode::SUCCESS) 
 			return ret_code;
 
 		FragmentConfDataPtr comp_conf_data = fragConfDataCache.get();
@@ -383,9 +416,9 @@ void ConfGen::ConformerGeneratorImpl::calcConformerBounds(double min[3], double 
 	}
 } 
 
-unsigned int ConfGen::ConformerGeneratorImpl::generateConformers(const Chem::MolecularGraph& molgraph, bool struct_gen_only)
+unsigned int ConfGen::ConformerGeneratorImpl::generateConformers(const Chem::MolecularGraph& molgraph, bool struct_gen_only, bool start_timer)
 {
-	init(molgraph);
+	init(molgraph, start_timer);
 
 	if (molgraph.getNumAtoms() == 0)
 		return ReturnCode::SUCCESS;
@@ -402,8 +435,16 @@ unsigned int ConfGen::ConformerGeneratorImpl::generateConformers(const Chem::Mol
 		}
 	}
 
-	if (determineSamplingMode())
+	if (determineSamplingMode()) {
+
+		if (logCallback)
+			logCallback("Sampling mode: stochastic\n");
+
 		return generateConformersStochastic(struct_gen_only);
+	}
+
+	if (logCallback)
+		logCallback("Sampling mode: systematic\n");
 
 	return generateConformersSystematic(struct_gen_only);
 }
@@ -523,6 +564,9 @@ unsigned int ConfGen::ConformerGeneratorImpl::generateConformersStochastic(bool 
 		conf_data_ptr.reset();	
 	}
 
+	if (logCallback && ret_code == ReturnCode::TIMEOUT && workingConfs.empty())
+		logCallback("Time limit exceeded!\n");
+
 	return (workingConfs.empty() ? ReturnCode::CONF_GEN_FAILED : ret_code);
 }
 
@@ -545,7 +589,7 @@ bool ConfGen::ConformerGeneratorImpl::determineSamplingMode()
 	return (inStochasticMode = Chem::containsFragmentWithMinSize(*getSSSR(*molGraph), settings.getMinMacrocycleSize()));
 }
 
-void ConfGen::ConformerGeneratorImpl::init(const Chem::MolecularGraph& molgraph)
+void ConfGen::ConformerGeneratorImpl::init(const Chem::MolecularGraph& molgraph, bool start_timer)
 {
 	molGraph = &molgraph;
 
@@ -560,7 +604,8 @@ void ConfGen::ConformerGeneratorImpl::init(const Chem::MolecularGraph& molgraph)
 	invertibleNMask.resize(molgraph.getNumAtoms());
 	invertibleNMask.reset();
 
-	timer.start();
+	if (start_timer)
+		timer.start();
 }
 
 bool ConfGen::ConformerGeneratorImpl::generateHydrogenCoordsAndMinimize(ConformerData& conf_data)
@@ -676,6 +721,9 @@ void ConfGen::ConformerGeneratorImpl::splitIntoTorsionFragments()
 
 		torFragConfData.push_back(frag_conf_data);
 	}
+
+	if (logCallback)
+		logCallback("Found " + boost::lexical_cast<std::string>(torFragConfData.size()) + " torsion fragment(s)\n");
 }
 
 bool ConfGen::ConformerGeneratorImpl::setupMMFF94Parameters()
@@ -690,6 +738,9 @@ bool ConfGen::ConformerGeneratorImpl::setupMMFF94Parameters()
 		}
 
 	} catch (const ForceField::Error&) {}
+
+	if (logCallback)
+		logCallback("Force field setup failed!\n");
 
 	return false;
 }
@@ -709,12 +760,20 @@ unsigned int ConfGen::ConformerGeneratorImpl::generateFragmentConformers()
 
 	for (FragmentConfDataList::const_iterator it = torFragConfData.begin(), end = torFragConfData.end(); it != end; ++it) {
 		FragmentConfData& frag_conf_data = **it;
-		const Fragment& frag = *frag_conf_data.fragment;
+		Fragment& frag = *frag_conf_data.fragment;
+
+		if (logCallback)
+			logCallback("Generating conformers for torsion fragment " + getSMILES(frag) + "...\n");
+
 		unsigned int ret_code = fragAssembler.assemble(frag, *molGraph);
 
 		if (ret_code != ReturnCode::SUCCESS) {
-			if (ret_code == ReturnCode::TIMEOUT)
+			if (ret_code == ReturnCode::TIMEOUT) {
+				if (logCallback)
+					logCallback("Time limit exceeded!\n");
+
 				return ReturnCode::CONF_GEN_FAILED;
+			}
 
 			return ret_code;
 		}
@@ -743,6 +802,9 @@ unsigned int ConfGen::ConformerGeneratorImpl::generateFragmentConformers()
 
 		} else 
 			Chem::splitIntoFragments(frag, fragments, tmpBitSet, false);
+
+		if (logCallback && !fragSplitBonds.empty())
+			logCallback("Found " + boost::lexical_cast<std::string>(fragSplitBonds.size()) + " rotatable fragment bond(s), performing torsion driving...\n");
 
 		torDriver.setup(fragments, *molGraph, fragSplitBonds.begin(), fragSplitBonds.end());
 		torDriver.setMMFF94Parameters(mmff94Data, mmff94InteractionMask);
@@ -776,8 +838,12 @@ unsigned int ConfGen::ConformerGeneratorImpl::generateFragmentConformers()
 				ret_code = torDriver.generateConformers();
 
 				if (ret_code != ReturnCode::SUCCESS) {
-					if (ret_code == ReturnCode::TIMEOUT)
+					if (ret_code == ReturnCode::TIMEOUT) {
+						if (logCallback)
+							logCallback("Time limit exceeded!\n");
+
 						return ReturnCode::CONF_GEN_FAILED;
+					}
 
 					return ret_code;
 				}
@@ -818,6 +884,9 @@ unsigned int ConfGen::ConformerGeneratorImpl::generateFragmentConformers()
 
 		orderConformersByEnergy(frag_conf_data.conformers); 
 
+		if (logCallback)
+			logCallback("Obtained " + boost::lexical_cast<std::string>(frag_conf_data.conformers.size()) + " fragment conformer(s)\n");
+
 		frag_conf_data.lastConfIdx = frag_conf_data.conformers.size();
 	}
 
@@ -847,8 +916,12 @@ unsigned int ConfGen::ConformerGeneratorImpl::generateFragmentConformerCombinati
 
 	unsigned int ret_code = invokeCallbacks();
 
-	if (ret_code == ReturnCode::TIMEOUT)
+	if (ret_code == ReturnCode::TIMEOUT) {
+		if (logCallback)
+			logCallback("Time limit exceeded!\n");
+
 		return ReturnCode::CONF_GEN_FAILED;
+	}
 
 	return ret_code;
 }
@@ -961,6 +1034,9 @@ unsigned int ConfGen::ConformerGeneratorImpl::generateOutputConformers(bool stru
 		if (struct_gen_only && !workingConfs.empty())
 			return ReturnCode::SUCCESS;
 	}
+
+	if (logCallback && have_timeout && workingConfs.empty())
+		logCallback("Time limit exceeded!\n");
 
 	if (workingConfs.empty())
 		return ReturnCode::CONF_GEN_FAILED;

@@ -85,6 +85,10 @@ void CDPLPythonConfGen::exportTorsionDriver()
 			 (python::arg("self"), python::arg("func")))
 		.def("getTimeoutCallback", &ConfGen::TorsionDriver::getTimeoutCallback, 
 			 python::arg("self"), python::return_internal_reference<>())
+		.def("setLogMessageCallback", &ConfGen::TorsionDriver::setLogMessageCallback, 
+			 (python::arg("self"), python::arg("func")))
+		.def("getLogMessageCallback", &ConfGen::TorsionDriver::getLogMessageCallback, 
+			 python::arg("self"), python::return_internal_reference<>())
 		.def("generateConformers", &ConfGen::TorsionDriver::generateConformers, python::arg("self"))
 		.def("getNumConformers", &ConfGen::TorsionDriver::getNumConformers, python::arg("self"))
 		.def("getConformer", 
@@ -106,5 +110,9 @@ void CDPLPythonConfGen::exportTorsionDriver()
 		.add_property("timeoutCallback", 
 					  python::make_function(&ConfGen::TorsionDriver::getTimeoutCallback,
 											python::return_internal_reference<>()),
-					  &ConfGen::TorsionDriver::setTimeoutCallback);
+					  &ConfGen::TorsionDriver::setTimeoutCallback)
+		.add_property("logMessageCallback", 
+					  python::make_function(&ConfGen::TorsionDriver::getLogMessageCallback,
+											python::return_internal_reference<>()),
+					  &ConfGen::TorsionDriver::setLogMessageCallback);
 }

@@ -28,9 +28,11 @@
 
 #include <algorithm>
 #include <cmath>
+#include <string>
 
 #include <boost/bind.hpp>
 #include <boost/thread.hpp>
+#include <boost/lexical_cast.hpp>
 
 #include "CDPL/ConfGen/BondFunctions.hpp"
 #include "CDPL/ConfGen/MolecularGraphFunctions.hpp"
@@ -54,6 +56,7 @@
 #include "TorsionLibraryDataReader.hpp"
 #include "FallbackTorsionLibrary.hpp"
 #include "FragmentConformerCache.hpp"
+#include "UtilityFunctions.hpp"
 
 
 using namespace CDPL;
@@ -153,6 +156,16 @@ const ConfGen::CallbackFunction& ConfGen::FragmentAssemblerImpl::getTimeoutCallb
 	return timeoutCallback;
 }
 
+void ConfGen::FragmentAssemblerImpl::setLogMessageCallback(const LogMessageCallbackFunction& func)
+{
+	logCallback = func;
+}
+
+const ConfGen::LogMessageCallbackFunction& ConfGen::FragmentAssemblerImpl::getLogMessageCallback() const
+{
+	return logCallback;
+}
+
 void ConfGen::FragmentAssemblerImpl::setBondLengthFunction(const BondLengthFunction& func)
 {
 	bondLengthFunc = func;
@@ -243,6 +256,9 @@ void ConfGen::FragmentAssemblerImpl::buildFragmentTree(const Chem::MolecularGrap
 
 	splitIntoFragments(molgraph, fragments, tmpBitSet, false);
 
+	if (logCallback)
+		logCallback("Molecular graph split into " + boost::lexical_cast<std::string>(fragments.getSize()) + " build fragment(s)\n");
+
 	fragTree.build(fragments, parent_molgraph, fragSplitBonds.begin(), fragSplitBonds.end());
 }
 
@@ -258,6 +274,9 @@ unsigned int ConfGen::FragmentAssemblerImpl::getFragmentConformers()
 			bondLengthTable->setup(*fragTree.getMolecularGraph(), settings.getFragmentBuildSettings().strictForceFieldParameterization());
 
 		} catch (const ForceField::Error&) {
+			if (logCallback)
+				logCallback("Setup of MMFF94 bond length table failed!\n");
+
 			return ReturnCode::FORCEFIELD_SETUP_FAILED;
 		}
 	}
@@ -269,6 +288,16 @@ unsigned int ConfGen::FragmentAssemblerImpl::getFragmentConformers()
 
 		fragLibEntry.clear();
 
+		if (logCallback) {
+			initFragmentLibraryEntry(frag, frag_node);
+
+			fragLibEntry.perceiveSSSR();
+			perceiveComponents(fragLibEntry, true);
+
+			logCallback("Build fragment " + getSMILES(fragLibEntry) + ":\n");
+			logCallback(" Type: " + fragmentTypeToString(frag_type, true) + '\n');
+		}
+
 		if (!(!settings.generateCoordinatesFromScratch() && 
 			  (!settings.enumerateRings() || frag_type != FragmentType::FLEXIBLE_RING_SYSTEM) && 
 			  copyInputCoordinates(frag_type, frag, frag_node))) {
@@ -278,15 +307,26 @@ unsigned int ConfGen::FragmentAssemblerImpl::getFragmentConformers()
 			if (!fetchConformersFromFragmentLibrary(frag_type, frag, frag_node) && !fetchConformersFromFragmentCache(frag_type, frag, frag_node)) {
 				unsigned int ret_code = generateFragmentConformers(frag_type, frag, frag_node);
 
-				if (ret_code != ReturnCode::SUCCESS)
+				if (ret_code != ReturnCode::SUCCESS) {
+					if (logCallback)
+						logCallback(" Coordinates generation failed!\n");
+
 					return ret_code;
+				}
 			}
 		}
 
 		unsigned int ret_code = invokeCallbacks();
 
-		if (ret_code != ReturnCode::SUCCESS)
+		if (ret_code != ReturnCode::SUCCESS) {
+			if (logCallback)
+				logCallback(" Processing terminated!\n");
+
 			return ret_code;
+		}
+
+		if (logCallback) 
+			logCallback(" Num. conformers: " + boost::lexical_cast<std::string>(frag_node->getNumConformers()) + '\n');
 	}
 
 	return ReturnCode::SUCCESS;
@@ -361,6 +401,9 @@ bool ConfGen::FragmentAssemblerImpl::copyInputCoordinates(unsigned int frag_type
 	else if (frag_type == FragmentType::FLEXIBLE_RING_SYSTEM)
 		enumRingFragmentNitrogens(frag, node);
 
+	if (logCallback)
+		logCallback(" Coordinates source: input\n");
+
 	return true;
 }
 
@@ -421,6 +464,9 @@ bool ConfGen::FragmentAssemblerImpl::fetchConformersFromFragmentLibrary(unsigned
 		else if (frag_type == FragmentType::FLEXIBLE_RING_SYSTEM)
 			enumRingFragmentNitrogens(frag, node);
 
+		if (logCallback)
+			logCallback(" Coordinates source: fragment library\n");
+
 		return true;
 	}
 
@@ -477,6 +523,9 @@ bool ConfGen::FragmentAssemblerImpl::fetchConformersFromFragmentCache(unsigned i
 	else if (frag_type == FragmentType::FLEXIBLE_RING_SYSTEM)
 		enumRingFragmentNitrogens(frag, node);
 
+	if (logCallback)
+		logCallback(" Coordinates source: dynamic cache\n");
+
 	return true;
 }
 
@@ -528,6 +577,9 @@ unsigned int ConfGen::FragmentAssemblerImpl::generateFragmentConformers(unsigned
 
 	else if (frag_type == FragmentType::FLEXIBLE_RING_SYSTEM)
 		enumRingFragmentNitrogens(frag, node);
+
+	if (logCallback)
+		logCallback(" Coordinates source: generated\n");
 
 	return ReturnCode::SUCCESS;
 }
@@ -1000,6 +1052,9 @@ std::size_t ConfGen::FragmentAssemblerImpl::getInvertibleNitrogens(const Chem::F
 		invertedNMask.set(parent_atom_idx);
 		inv_n_cnt++;
 	}
+
+	if (logCallback)
+		logCallback(" Num. inv. nitrogens: " + boost::lexical_cast<std::string>(inv_n_cnt) + '\n');
 
 	return inv_n_cnt;
 }

@@ -58,6 +58,10 @@ void CDPLPythonConfGen::exportFragmentLibraryGenerator()
 			 (python::arg("self"), python::arg("func")))
 		.def("getTimeoutCallback", &ConfGen::FragmentLibraryGenerator::getTimeoutCallback, 
 			 python::arg("self"), python::return_internal_reference<>())
+		.def("setLogMessageCallback", &ConfGen::FragmentLibraryGenerator::setLogMessageCallback, 
+			 (python::arg("self"), python::arg("func")))
+		.def("getLogMessageCallback", &ConfGen::FragmentLibraryGenerator::getLogMessageCallback, 
+			 python::arg("self"), python::return_internal_reference<>())
 		.def("process", &ConfGen::FragmentLibraryGenerator::process, 
 			 (python::arg("self"), python::arg("frag")))
 		.def("getNumGeneratedConformers", &ConfGen::FragmentLibraryGenerator::getNumGeneratedConformers,
@@ -85,5 +89,9 @@ void CDPLPythonConfGen::exportFragmentLibraryGenerator()
 											python::return_value_policy<python::copy_const_reference>()),
 					  &ConfGen::FragmentLibraryGenerator::setFragmentLibrary)
 		.add_property("numGeneratedConformers", &ConfGen::FragmentLibraryGenerator::getNumGeneratedConformers)
-		.add_property("libraryEntryHashCode", &ConfGen::FragmentLibraryGenerator::getLibraryEntryHashCode);
+		.add_property("libraryEntryHashCode", &ConfGen::FragmentLibraryGenerator::getLibraryEntryHashCode)
+		.add_property("logMessageCallback", 
+					  python::make_function(&ConfGen::FragmentLibraryGenerator::getLogMessageCallback,
+											python::return_internal_reference<>()),
+					  &ConfGen::FragmentLibraryGenerator::setLogMessageCallback);
 }

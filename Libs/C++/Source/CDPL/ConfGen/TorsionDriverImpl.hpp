@@ -39,6 +39,7 @@
 #include "CDPL/ConfGen/TorsionLibrary.hpp"
 #include "CDPL/ConfGen/TorsionRuleMatcher.hpp"
 #include "CDPL/ConfGen/ConformerDataArray.hpp"
+#include "CDPL/ConfGen/LogMessageCallbackFunction.hpp"
 #include "CDPL/Chem/SubstructureSearch.hpp"
 #include "CDPL/Chem/FragmentList.hpp"
 #include "CDPL/Util/BitSet.hpp"
@@ -114,6 +115,10 @@ namespace CDPL
 
 			const CallbackFunction& getTimeoutCallback() const;
 
+			void setLogMessageCallback(const LogMessageCallbackFunction& func);
+
+			const LogMessageCallbackFunction& getLogMessageCallback() const;
+
 			unsigned int generateConformers();
 
 			std::size_t getNumConformers() const;
@@ -156,6 +161,7 @@ namespace CDPL
 			Util::BitSet                  rotBondMask;
 			BondList                      rotBonds;
 			ForceFieldInteractionMask     mmff94InteractionMask;
+			LogMessageCallbackFunction    logCallback;
 		};
     }
 }

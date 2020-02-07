@@ -282,6 +282,9 @@ const ConfGen::FragmentLibraryEntry::AtomMapping& ConfGen::FragmentLibraryEntry:
 
 void ConfGen::FragmentLibraryEntry::perceiveSSSR()
 {
+	if (hasSSSR(*this))
+		return;
+
 	if (!sssr)
 		sssr.reset(new Chem::SmallestSetOfSmallestRings());
 

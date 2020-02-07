@@ -93,6 +93,16 @@ const ConfGen::CallbackFunction& ConfGen::ConformerGenerator::getTimeoutCallback
 	return impl->getTimeoutCallback();
 }
 
+void ConfGen::ConformerGenerator::setLogMessageCallback(const LogMessageCallbackFunction& func)
+{
+	impl->setLogMessageCallback(func);
+}
+
+const ConfGen::LogMessageCallbackFunction& ConfGen::ConformerGenerator::getLogMessageCallback() const
+{
+	return impl->getLogMessageCallback();
+}
+
 unsigned int ConfGen::ConformerGenerator::generate(const Chem::MolecularGraph& molgraph)
 {
 	return impl->generate(molgraph, false);

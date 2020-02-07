@@ -91,7 +91,6 @@ namespace GenFragLib
 		void setForceFieldType(const std::string& type_str);
 		void setMode(const std::string& mode_str);
 		void setInputFormat(const std::string& file_ext);
-		void setMaxNumThreads(unsigned int num_threads);
 
 		int process();
 
@@ -102,8 +101,8 @@ namespace GenFragLib
 		void loadFragmentLibrary(const std::string& fname, FragmentLibrary& lib);
 		int saveFragmentLibrary();
 
-		bool readNextMolecule(CDPL::Chem::Molecule& mol);
-		bool doReadNextMolecule(CDPL::Chem::Molecule& mol);
+		std::size_t readNextMolecule(CDPL::Chem::Molecule& mol);
+		std::size_t doReadNextMolecule(CDPL::Chem::Molecule& mol);
 
 		void updateOccurrenceCount(CDPL::Base::uint64 hash_code);
 
@@ -122,6 +121,9 @@ namespace GenFragLib
 		std::string getModeString() const;
 		std::string getForceFieldTypeString() const;
 
+		std::string createMoleculeIdentifier(std::size_t rec_idx, const CDPL::Chem::Molecule& mol);
+		std::string createMoleculeIdentifier(std::size_t rec_idx);
+
 		InputHandlerPtr getInputHandler(const std::string& file_path) const;
 
 		void addOptionLongDescriptions();
@@ -138,7 +140,6 @@ namespace GenFragLib
 
 		StringList                     inputFiles;
 		std::string                    outputFile;
-		bool                           multiThreading;
 		std::size_t                    numThreads;
 		Mode                           mode;
 		ConformerGeneratorSettings     settings;

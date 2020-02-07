@@ -117,52 +117,16 @@ public:
 	}
 
 	void operator()() {
-		using namespace CDPL;
-
 		try {
 			init();
-
-			while (true) {
-				if (!parent->readNextMolecule(molecule))
-					return;
-
-				if (parent->neutralize)
-					Chem::neutralize(molecule);
-
-				if (parent->regardStereo) {
-					calcImplicitHydrogenCounts(molecule, false);
-		
-					initMolecule(molecule, false);
-				
-					calcAtomStereoDescriptors(molecule, false);
-					calcBondStereoDescriptors(molecule, false);
-				}
-
-				numGenMolTauts = 0;
-				tautScore = -1.0;
-
-				tautGen.generate(molecule);
-
-				if (parent->mode == STANDARDIZE && numGenMolTauts > 0) {
-					perceiveComponents(stdTautomer, true);
-					perceiveSSSR(stdTautomer, true);
-
-					outputMolecule(stdTautomer, tautScore, hashCode);
-				}
-
-				if (parent->getVerbosityLevel() >= VERBOSE) {
-					parent->printMessage(VERBOSE, "Generated " + boost::lexical_cast<std::string>(numGenMolTauts) + 
-										 (numGenMolTauts == 1 ? " tautomer" : " tautomers") + " for molecule '" + getName(molecule) + "'");
-				}
-
-				numProcMols++;
-			}
-
+	
+			while (processNextMolecule());
+	
 		} catch (const std::exception& e) {
-			parent->setErrorMessage(std::string("error while processing molecule: ") + e.what());
+			parent->setErrorMessage(std::string("unexpected exception while generating tautomers: ") + e.what());
 
 		} catch (...) {
-			parent->setErrorMessage("unspecified error while processing molecule");
+			parent->setErrorMessage("unexpected exception while generating tautomers");
 		}
 	}
 
@@ -263,6 +227,53 @@ private:
 			tautGen.addTautomerizationRule(h15_shift);
 	}
 
+	bool processNextMolecule() {
+		std::size_t rec_idx = parent->readNextMolecule(molecule);
+
+		if (!rec_idx)
+			return false;
+
+		try {
+			if (parent->neutralize)
+				CDPL::Chem::neutralize(molecule);
+
+			if (parent->regardStereo) {
+				calcImplicitHydrogenCounts(molecule, false);
+		
+				initMolecule(molecule, false);
+				
+				calcAtomStereoDescriptors(molecule, false);
+				calcBondStereoDescriptors(molecule, false);
+			}
+
+			numGenMolTauts = 0;
+			tautScore = -1.0;
+
+			tautGen.generate(molecule);
+
+			if (parent->mode == STANDARDIZE && numGenMolTauts > 0) {
+				perceiveComponents(stdTautomer, true);
+				perceiveSSSR(stdTautomer, true);
+
+				outputMolecule(stdTautomer, tautScore, hashCode);
+			}
+
+			parent->printMessage(VERBOSE, "Molecule " + parent->createMoleculeIdentifier(rec_idx, molecule) + ": " +
+								 boost::lexical_cast<std::string>(numGenMolTauts) + (numGenMolTauts == 1 ? " tautomer" : " tautomers"));
+			numProcMols++;
+
+			return true;
+
+		} catch (const std::exception& e) {
+			parent->setErrorMessage("unexpected exception while processing molecule " + parent->createMoleculeIdentifier(rec_idx, molecule) + ": " + e.what());
+
+		} catch (...) {
+			parent->setErrorMessage("unexpected exception while processing molecule " + parent->createMoleculeIdentifier(rec_idx, molecule));
+		}
+
+		return false;
+	}
+
 	bool tautomerGenerated(CDPL::Chem::MolecularGraph& taut) {
 		using namespace CDPL;
 		using namespace Chem;
@@ -345,12 +356,11 @@ private:
 
 
 TautGenImpl::TautGenImpl(): 
-	multiThreading(false), regardStereo(true), regardIsotopes(true), neutralize(false), 
-	ketoEnol(true), imineEnamine(true), nitrosoOxime(true), amideImidicAcid(true),
-	lactamLactim(true), keteneYnol(true), nitroAci(true),
-	phosphinicAcid(true), sulfenicAcid(true), genericH13Shift(true),
-	genericH15Shift(true), numThreads(boost::thread::hardware_concurrency()),
-	maxNumTautomers(0),	mode(Mode::TOPOLOGICALLY_UNIQUE), 
+	regardStereo(true), regardIsotopes(true), neutralize(false), ketoEnol(true), 
+	imineEnamine(true), nitrosoOxime(true), amideImidicAcid(true),
+	lactamLactim(true), keteneYnol(true), nitroAci(true), phosphinicAcid(true),
+	sulfenicAcid(true), genericH13Shift(true), genericH15Shift(true),
+	numThreads(0), maxNumTautomers(0), mode(Mode::TOPOLOGICALLY_UNIQUE), 
 	inputHandler(), outputHandler(), outputWriter(), numOutTautomers(0)
 {
 	addOption("input,i", "Input file(s).", 
@@ -359,10 +369,10 @@ TautGenImpl::TautGenImpl():
 			  value<std::string>(&outputFile)->required());
 	addOption("mode,m", "Tautomer generation mode (STANDARDIZE, TOP_UNIQUE, GEO_UNIQUE, EXHAUSTIVE default: TOP_UNIQUE).", 
 			  value<std::string>()->notifier(boost::bind(&TautGenImpl::setMode, this, _1)));
-	addOption("multi-threading,t", "Enable multi-threaded processing (default: false).", 
-			  value<bool>(&multiThreading)->implicit_value(true));
-	addOption("num-threads,n", "Number of parallel threads (default: " + boost::lexical_cast<std::string>(numThreads) + " threads, must be > 0).", 
-			  value<unsigned int>()->notifier(boost::bind(&TautGenImpl::setMaxNumThreads, this, _1)));
+	addOption("num-threads,t", "Number of parallel execution threads (default: no multithreading, implicit value: " +
+			  boost::lexical_cast<std::string>(boost::thread::hardware_concurrency()) + 
+			  " threads, must be >= 0, 0 disables multithreading).", 
+			  value<std::size_t>(&numThreads)->implicit_value(boost::thread::hardware_concurrency()));
 	addOption("input-format,I", "Input file format (default: auto-detect from file extension).", 
 			  value<std::string>()->notifier(boost::bind(&TautGenImpl::setInputFormat, this, _1)));
 	addOption("output-format,O", "Output file format (default: auto-detect from file extension).", 
@@ -373,7 +383,7 @@ TautGenImpl::TautGenImpl():
 			  value<bool>(&regardIsotopes)->implicit_value(true));
 	addOption("neutralize,z", "Neutralize molecule before generating tautomers (default: false).", 
 			  value<bool>(&neutralize)->implicit_value(true));
-	addOption("max-num-tautomers,x", "Maximum number of output tautomers for each molecule (default: 0, must be >= 0, 0 disables limit).",
+	addOption("max-num-tautomers,n", "Maximum number of output tautomers for each molecule (default: 0, must be >= 0, 0 disables limit).",
 			  value<std::size_t>(&maxNumTautomers));
 	addOption("keto-enol", "Enable keto <-> enol tautomerization (default: true).", 
 			  value<bool>(&ketoEnol)->implicit_value(true));
@@ -506,14 +516,6 @@ void TautGenImpl::setOutputFormat(const std::string& file_ext)
 		throwValidationError("output-format");
 }
 
-void TautGenImpl::setMaxNumThreads(unsigned int num_threads)
-{
-	if (num_threads < 1)
-		throwValidationError("num-threads");
-
-	numThreads = num_threads;
-}
-
 int TautGenImpl::process()
 {
 	startTime = Clock::now();
@@ -536,7 +538,7 @@ int TautGenImpl::process()
 	} else
 		printMessage(INFO, "Processing Input Molecules...");
 
-	if (multiThreading)
+	if (numThreads > 0)
 		processMultiThreaded();
 	else
 		processSingleThreaded();
@@ -635,7 +637,7 @@ void TautGenImpl::processMultiThreaded()
 
 void TautGenImpl::setErrorMessage(const std::string& msg)
 {
-	if (multiThreading) {
+	if (numThreads > 0) {
 		boost::lock_guard<boost::mutex> lock(mutex);
 
 		if (errorMessage.empty())
@@ -649,7 +651,7 @@ void TautGenImpl::setErrorMessage(const std::string& msg)
 
 bool TautGenImpl::haveErrorMessage()
 {
-	if (multiThreading) {
+	if (numThreads > 0) {
 		boost::lock_guard<boost::mutex> lock(mutex);
 		return !errorMessage.empty();
 	}
@@ -667,15 +669,15 @@ void TautGenImpl::printStatistics(std::size_t num_proc_mols, std::size_t num_gen
 	printMessage(INFO, "");
 }
 
-bool TautGenImpl::readNextMolecule(CDPL::Chem::Molecule& mol)
+std::size_t TautGenImpl::readNextMolecule(CDPL::Chem::Molecule& mol)
 {
 	if (termSignalCaught())
-		return false;
+		return 0;
 
 	if (haveErrorMessage())
-		return false;
+		return 0;
 
-	if (multiThreading) {
+	if (numThreads > 0) {
 		boost::lock_guard<boost::mutex> lock(readMolMutex);
 
 		return doReadNextMolecule(mol);
@@ -684,46 +686,40 @@ bool TautGenImpl::readNextMolecule(CDPL::Chem::Molecule& mol)
 	return doReadNextMolecule(mol);
 }
 
-bool TautGenImpl::doReadNextMolecule(CDPL::Chem::Molecule& mol)
+std::size_t TautGenImpl::doReadNextMolecule(CDPL::Chem::Molecule& mol)
 {
 	while (true) {
 		try {
 			if (inputReader.getRecordIndex() >= inputReader.getNumRecords()) 
-				return false;
-
-			printMessage(DEBUG, "Starting to process Molecule " + boost::lexical_cast<std::string>(inputReader.getRecordIndex() + 1) + '/' +
-						 boost::lexical_cast<std::string>(inputReader.getNumRecords()) + "...");
+				return 0;
 
 			if (!inputReader.read(mol)) {
-				printMessage(ERROR, "Reading molecule " + boost::lexical_cast<std::string>(inputReader.getRecordIndex() + 1) + '/' +
-							 boost::lexical_cast<std::string>(inputReader.getNumRecords()) + " failed");			
+				printMessage(ERROR, "Reading molecule " + createMoleculeIdentifier(inputReader.getRecordIndex() + 1) + " failed");			
 				
 				inputReader.setRecordIndex(inputReader.getRecordIndex() + 1);
-				return false;
+				continue;
 			}
 
 			printProgress("Processing Molecules...        ", double(inputReader.getRecordIndex()) / inputReader.getNumRecords());
-			return true;
+
+			return inputReader.getRecordIndex();
 
 		} catch (const std::exception& e) {
-			printMessage(ERROR, "Error while reading molecule " + boost::lexical_cast<std::string>(inputReader.getRecordIndex() + 1) + '/' +
-						 boost::lexical_cast<std::string>(inputReader.getNumRecords()) + ": " + e.what());
-
+			printMessage(ERROR, "Error while reading molecule " + createMoleculeIdentifier(inputReader.getRecordIndex() + 1) + ": " + e.what());
 
 		} catch (...) {
-			printMessage(ERROR, "Error while reading molecule " + boost::lexical_cast<std::string>(inputReader.getRecordIndex() + 1) + '/' +
-						 boost::lexical_cast<std::string>(inputReader.getNumRecords()));
+			printMessage(ERROR, "Unspecified error while reading molecule " + createMoleculeIdentifier(inputReader.getRecordIndex() + 1));
 		}
 
 		inputReader.setRecordIndex(inputReader.getRecordIndex() + 1);
 	}
 
-	return false;
+	return 0;
 }
 
 void TautGenImpl::writeMolecule(const CDPL::Chem::MolecularGraph& mol)
 {
-	if (multiThreading) {
+	if (numThreads > 0) {
 		boost::lock_guard<boost::mutex> lock(writeMolMutex);
 
 		doWriteMolecule(mol);
@@ -753,7 +749,7 @@ void TautGenImpl::checkInputFiles() const
 
 void TautGenImpl::printMessage(VerbosityLevel level, const std::string& msg, bool nl, bool file_only)
 {
-	if (!multiThreading) {
+	if (numThreads == 0) {
 		CmdLineBase::printMessage(level, msg, nl, file_only);
 		return;
 	}
@@ -773,8 +769,11 @@ void TautGenImpl::printOptionSummary()
 
 	printMessage(VERBOSE, " Output File:                       " + outputFile);
  	printMessage(VERBOSE, " Mode:                              " + getModeString());
-	printMessage(VERBOSE, " Multi-threading:                   " + std::string(multiThreading ? "Yes" : "No"));
-	printMessage(VERBOSE, " Number of Threads:                 " + boost::lexical_cast<std::string>(numThreads));
+	printMessage(VERBOSE, " Multithreading:                    " + std::string(numThreads > 0 ? "Yes" : "No"));
+
+	if (numThreads > 0)
+		printMessage(VERBOSE, " Number of Threads:                 " + boost::lexical_cast<std::string>(numThreads));
+
 	printMessage(VERBOSE, " Input File Format:                 " + (inputHandler ? inputHandler->getDataFormat().getName() : std::string("Auto-detect")));
 	printMessage(VERBOSE, " Output File Format:                " + (outputHandler ? outputHandler->getDataFormat().getName() : std::string("Auto-detect")));
 	printMessage(VERBOSE, " Stereochemistry Aware:             " + std::string(regardStereo ? "Yes" : "No"));
@@ -894,4 +893,17 @@ std::string TautGenImpl::getModeString() const
 		return "EXHAUSTIVE";
 	
 	return "UNKNOWN";
+}
+
+std::string TautGenImpl::createMoleculeIdentifier(std::size_t rec_idx, const CDPL::Chem::Molecule& mol)
+{
+	if (!getName(mol).empty())
+		return ('\'' + getName(mol) + "' (" + createMoleculeIdentifier(rec_idx) + ')');
+
+	return createMoleculeIdentifier(rec_idx);
+}
+
+std::string TautGenImpl::createMoleculeIdentifier(std::size_t rec_idx)
+{
+	return (boost::lexical_cast<std::string>(rec_idx) + '/' + boost::lexical_cast<std::string>(inputReader.getNumRecords()));
 }

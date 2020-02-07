@@ -68,6 +68,10 @@ void CDPLPythonConfGen::exportConformerGenerator()
 			 (python::arg("self"), python::arg("func")))
 		.def("getTimeoutCallback", &ConfGen::ConformerGenerator::getTimeoutCallback, 
 			 python::arg("self"), python::return_internal_reference<>())
+		.def("setLogMessageCallback", &ConfGen::ConformerGenerator::setLogMessageCallback, 
+			 (python::arg("self"), python::arg("func")))
+		.def("getLogMessageCallback", &ConfGen::ConformerGenerator::getLogMessageCallback, 
+			 python::arg("self"), python::return_internal_reference<>())
 		.def("generate", &ConfGen::ConformerGenerator::generate, (python::arg("self"), python::arg("molgraph")))
 		.def("setConformers", &ConfGen::ConformerGenerator::setConformers,
 			 (python::arg("self"), python::arg("molgraph")))
@@ -90,5 +94,9 @@ void CDPLPythonConfGen::exportConformerGenerator()
 		.add_property("timeoutCallback", 
 					  python::make_function(&ConfGen::ConformerGenerator::getTimeoutCallback,
 											python::return_internal_reference<>()),
-					  &ConfGen::ConformerGenerator::setTimeoutCallback);
+					  &ConfGen::ConformerGenerator::setTimeoutCallback)
+		.add_property("logMessageCallback", 
+					  python::make_function(&ConfGen::ConformerGenerator::getLogMessageCallback,
+											python::return_internal_reference<>()),
+					  &ConfGen::ConformerGenerator::setLogMessageCallback);
 }

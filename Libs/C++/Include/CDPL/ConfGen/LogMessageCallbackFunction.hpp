@@ -1,7 +1,7 @@
 /* -*- mode: c++; c-basic-offset: 4; tab-width: 4; indent-tabs-mode: t -*- */
 
 /* 
- * BoostFunctionWrapperExport.cpp 
+ * LogMessageCallbackFunction.hpp 
  *
  * This file is part of the Chemical Data Processing Toolkit
  *
@@ -23,20 +23,39 @@
  * Boston, MA 02111-1307, USA.
  */
 
+/**
+ * \file
+ * \brief Type definition of a generic wrapper class for storing user-defined log message callback functions.
+ */
 
-#include "CDPL/ConfGen/CallbackFunction.hpp"
-#include "CDPL/ConfGen/LogMessageCallbackFunction.hpp"
+#ifndef CDPL_CONFGEN_LOGMESSAGECALLBACKFUNCTION_HPP
+#define CDPL_CONFGEN_LOGMESSAGECALLBACKFUNCTION_HPP
 
-#include "Base/BoostFunctionWrapperExport.hpp"
+#include <string>
 
-#include "ClassExports.hpp"
+#include <boost/function.hpp>
 
 
-void CDPLPythonConfGen::exportBoostFunctionWrappers()
+namespace CDPL 
 {
-    using namespace CDPL;
 
-	CDPLPythonBase::BoostFunction0Export<ConfGen::CallbackFunction>("CallbackFunction");
+    namespace ConfGen
+    {
 
-	CDPLPythonBase::BoostFunction1Export<ConfGen::LogMessageCallbackFunction>("LogMessageCallbackFunction");
+		/**
+		 * \addtogroup CDPL_CONFGEN_DATA_STRUCTURES
+		 * @{
+		 */
+
+		/**
+		 * \brief A generic wrapper class used to store a user-defined callback functions.
+		 */
+		typedef boost::function1<void, const std::string&> LogMessageCallbackFunction;
+
+		/**
+		 * @}
+		 */
+    }
 }
+
+#endif // CDPL_CONFGEN_LOGMESSAGECALLBACKFUNCTION_HPP

@@ -85,15 +85,14 @@ namespace TautGen
 		void setMode(const std::string& mode_str);
 		void setInputFormat(const std::string& file_ext);
 		void setOutputFormat(const std::string& file_ext);
-		void setMaxNumThreads(unsigned int num_threads);
 
 		int process();
 
 		void processSingleThreaded();
 		void processMultiThreaded();
 
-		bool readNextMolecule(CDPL::Chem::Molecule& mol);
-		bool doReadNextMolecule(CDPL::Chem::Molecule& mol);
+		std::size_t readNextMolecule(CDPL::Chem::Molecule& mol);
+		std::size_t doReadNextMolecule(CDPL::Chem::Molecule& mol);
 
 		void writeMolecule(const CDPL::Chem::MolecularGraph& mol);
 		void doWriteMolecule(const CDPL::Chem::MolecularGraph& mol);
@@ -111,7 +110,10 @@ namespace TautGen
 		void initOutputWriter();
 
 		std::string getModeString() const;
-	
+
+		std::string createMoleculeIdentifier(std::size_t rec_idx, const CDPL::Chem::Molecule& mol);
+		std::string createMoleculeIdentifier(std::size_t rec_idx);
+
 		InputHandlerPtr getInputHandler(const std::string& file_path) const;
 		OutputHandlerPtr getOutputHandler(const std::string& file_path) const;
 
@@ -128,7 +130,6 @@ namespace TautGen
 
 		StringList                     inputFiles;
 		std::string                    outputFile;
-		bool                           multiThreading;
 		bool                           regardStereo;
 		bool                           regardIsotopes;
 		bool                           neutralize;

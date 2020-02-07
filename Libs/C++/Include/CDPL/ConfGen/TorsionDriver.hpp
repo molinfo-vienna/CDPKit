@@ -40,6 +40,7 @@
 #include "CDPL/ConfGen/TorsionDriverSettings.hpp"
 #include "CDPL/ConfGen/TorsionLibrary.hpp"
 #include "CDPL/ConfGen/CallbackFunction.hpp"
+#include "CDPL/ConfGen/LogMessageCallbackFunction.hpp"
 #include "CDPL/ConfGen/ConformerDataArray.hpp"
 #include "CDPL/Util/BitSet.hpp"
 
@@ -90,6 +91,10 @@ namespace CDPL
 			void setTimeoutCallback(const CallbackFunction& func);
 
 			const CallbackFunction& getTimeoutCallback() const;
+
+			void setLogMessageCallback(const LogMessageCallbackFunction& func);
+
+			const LogMessageCallbackFunction& getLogMessageCallback() const;
 
 			unsigned int setup(const Chem::MolecularGraph& molgraph);
 			unsigned int setup(const Chem::MolecularGraph& molgraph, const Util::BitSet& bond_mask);

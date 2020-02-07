@@ -38,6 +38,7 @@
 
 #include <boost/date_time/posix_time/posix_time.hpp>
 #include <boost/math/special_functions.hpp>
+#include <boost/algorithm/string.hpp>
 #include <boost/bind.hpp>
 #include <boost/tokenizer.hpp>
 #include <boost/lexical_cast.hpp>
@@ -241,7 +242,7 @@ bool Chem::MDLDataWriter::writeMolecularGraph(std::ostream& os, const MolecularG
 			else
 				confEnergy = std::numeric_limits<double>::quiet_NaN();
 			
-			writeMOLHeaderBlock(os, molgraph);
+			writeMOLHeaderBlock(os, molgraph, i);
 			writeMOLCTab(os, molgraph);
 			writeMOLEndTag(os);
 
@@ -301,6 +302,9 @@ void Chem::MDLDataWriter::init(std::ostream& os, bool rxn_mode)
 	writeConfEnergySDEntry  = (multiConfExport && getMDLOutputConfEnergyAsSDEntryParameter(ioBase));
 	writeConfEnergyComment  = (multiConfExport && getOutputConfEnergyAsCommentParameter(ioBase));
 
+	if (multiConfExport)
+		confIdxSuffixPattern = getConfIndexNameSuffixPatternParameter(ioBase);
+
 	if (writeConfEnergySDEntry)
 		confEnergySDTag = getMDLConfEnergySDTagParameter(ioBase);
 
@@ -327,7 +331,7 @@ void Chem::MDLDataWriter::getAtomCoordsDim(const MolecularGraph& molgraph)
 		coordsDim = 0;
 }
 
-void Chem::MDLDataWriter::writeMOLHeaderBlock(std::ostream& os, const MolecularGraph& molgraph) const
+void Chem::MDLDataWriter::writeMOLHeaderBlock(std::ostream& os, const MolecularGraph& molgraph, std::size_t conf_idx) const
 {
 	using namespace Internal;
 	using namespace MDL::MOLFile;
@@ -336,8 +340,20 @@ void Chem::MDLDataWriter::writeMOLHeaderBlock(std::ostream& os, const MolecularG
 
 	const std::string& mol_name = getName(molgraph);
 
-	writeMDLLine(os, mol_name, "MDLDataWriter: error while writing structure name to molfile header block", 
-				 checkLineLength, trimLines, truncateLines);
+	if (!multiConfExport || confIdxSuffixPattern.empty())
+		writeMDLLine(os, mol_name, "MDLDataWriter: error while writing structure name to molfile header block", 
+					 checkLineLength, trimLines, truncateLines);
+
+	else {
+		std::string mol_name_with_suffix(mol_name);
+		std::string suffix = boost::replace_all_copy(confIdxSuffixPattern, "%I%", boost::lexical_cast<std::string>(conf_idx));
+
+		if (suffix != confIdxSuffixPattern) 
+			mol_name_with_suffix.append(suffix);
+		
+		writeMDLLine(os, mol_name_with_suffix, "MDLDataWriter: error while writing structure name to molfile header block", 
+					 checkLineLength, trimLines, truncateLines);
+	}
 
 	// Header line 2
 
