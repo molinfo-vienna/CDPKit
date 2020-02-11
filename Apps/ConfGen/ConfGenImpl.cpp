@@ -44,6 +44,7 @@
 #include "CDPL/ConfGen/FragmentLibraryGenerator.hpp"
 #include "CDPL/ConfGen/ReturnCode.hpp"
 #include "CDPL/ConfGen/ForceFieldType.hpp"
+#include "CDPL/ConfGen/ConformerSamplingMode.hpp"
 #include "CDPL/Util/FileFunctions.hpp"
 #include "CDPL/Base/DataIOManager.hpp"
 #include "CDPL/Base/Exceptions.hpp"
@@ -84,13 +85,14 @@ class ConfGenImpl::ConformerGenerationWorker
 
 public:
 	ConformerGenerationWorker(ConfGenImpl* parent):
-		parent(parent), numProcMols(0),	numFailedMols(0), numGenConfs(0) {
+		parent(parent), verbLevel(parent->getVerbosityLevel()), numProcMols(0),
+		numFailedMols(0), numGenConfs(0) {
 
 		confGen.setAbortCallback(boost::bind(&ConformerGenerationWorker::abort, this));
 		confGen.getSettings() = parent->settings;
 
 		if (parent->getVerbosityLevel() >= DEBUG)  
-			confGen.setLogMessageCallback(boost::bind(&ConformerGenerationWorker::addToLogRecord, this, _1));
+			confGen.setLogMessageCallback(boost::bind(&ConformerGenerationWorker::appendToLogRecord, this, _1));
 	}
 
 	void operator()() {
@@ -121,18 +123,19 @@ private:
 	bool processNextMolecule() {
 		using namespace CDPL::ConfGen;
 
+		timer.start();
+
 		std::size_t rec_idx = parent->readNextMolecule(molecule);
 
 		if (!rec_idx)
 			return false;
 
 		try {
-			timer.start();
 			logRecordStream.str(std::string());
-			verbLevel = parent->getVerbosityLevel();
 
 			if (verbLevel >= DEBUG) 
-				logRecordStream << std::endl << "- Molecule " << parent->createMoleculeIdentifier(rec_idx, molecule) << ':' << std::endl;	
+				logRecordStream << std::endl << "- Molecule " << 
+					parent->createMoleculeIdentifier(rec_idx, molecule) << ':' << std::endl;	
 
 			prepareForConformerGeneration(molecule, parent->canonicalize);
 
@@ -162,10 +165,12 @@ private:
 			return true;
 
 		} catch (const std::exception& e) {
-			parent->setErrorMessage("unexpected exception while processing molecule " + parent->createMoleculeIdentifier(rec_idx, molecule) + ": " + e.what());
+			parent->setErrorMessage("unexpected exception while processing molecule " + 
+									parent->createMoleculeIdentifier(rec_idx, molecule) + ": " + e.what());
 
 		} catch (...) {
-			parent->setErrorMessage("unexpected exception while processing molecule " + parent->createMoleculeIdentifier(rec_idx, molecule));
+			parent->setErrorMessage("unexpected exception while processing molecule " + 
+									parent->createMoleculeIdentifier(rec_idx, molecule));
 		}
 
 		return false;
@@ -174,19 +179,19 @@ private:
 	void outputConformers(std::size_t rec_idx, unsigned int ret_code) {
 		using namespace CDPL::ConfGen;
 
+		setMDLDimensionality(molecule, 3);
+
 		std::size_t num_confs = confGen.getNumConformers();
 
 		if (verbLevel == VERBOSE || (verbLevel == INFO && ret_code == ReturnCode::TIMEOUT)) {
 			logRecordStream << "Molecule " << parent->createMoleculeIdentifier(rec_idx, molecule) << ": " << 
-				num_confs << (num_confs == 1 ? " Conf., " : " Confs., ") << timer.format(3, "%w") << 's';
+				num_confs << (num_confs == 1 ? " conf., " : " confs., ") << timer.format(3, "%w") << 's';
 
 			if (ret_code == ReturnCode::TIMEOUT)
-				logRecordStream << ", timeout exceeded";
+				logRecordStream << " (time limit exceeded)";
 
 			logRecordStream << std::endl;
 		}
-
-		setMDLDimensionality(molecule, 3);
 
 		confGen.setConformers(molecule);
 
@@ -202,8 +207,6 @@ private:
 
 		if (verbLevel < ERROR || verbLevel >= DEBUG)
 			return;
-
-		verbLevel = ERROR;
 
 		std::string err_msg;
 
@@ -222,14 +225,14 @@ private:
 				break;
 
 			default:
-				logRecordStream << "Unspecified error while processing molecule " << parent->createMoleculeIdentifier(rec_idx, molecule) << std::endl;
-				return;
+				err_msg = "unspecified error";
+				break;
 		}
 
-		logRecordStream << "Error while processing molecule " << parent->createMoleculeIdentifier(rec_idx, molecule) << ": " << err_msg << std::endl;
+		logRecordStream << "Molecule " << parent->createMoleculeIdentifier(rec_idx, molecule) << ": " << err_msg << std::endl; 
 	}
 
-	void addToLogRecord(const std::string& msg) {
+	void appendToLogRecord(const std::string& msg) {
 		logRecordStream << msg;
 	}
 
@@ -256,11 +259,13 @@ private:
 
 ConfGenImpl::ConfGenImpl(): 
 	numThreads(0), settings(ConformerGeneratorSettings::MEDIUM_SET_DIVERSE), 
-	inputHandler(), outputHandler(), outputWriter()
+	confGenPreset("MEDIUM_SET_DIVERSE"), fragBuildPreset("FAST"),
+	canonicalize(false), inputHandler(), outputHandler(), outputWriter(), 
+	failedOutputHandler(), failedOutputWriter()
 {
 	addOption("input,i", "Input file(s).", 
 			  value<StringList>(&inputFiles)->multitoken()->required());
-	addOption("output,o", "Output fragment library file.", 
+	addOption("output,o", "Output file.", 
 			  value<std::string>(&outputFile)->required());
 	addOption("num-threads,t", "Number of parallel execution threads (default: no multithreading, implicit value: " +
 			  boost::lexical_cast<std::string>(boost::thread::hardware_concurrency()) + 
@@ -270,6 +275,29 @@ ConfGenImpl::ConfGenImpl():
 			  value<std::string>()->notifier(boost::bind(&ConfGenImpl::setInputFormat, this, _1)));
 	addOption("output-format,O", "Output file format (default: auto-detect from file extension).", 
 			  value<std::string>()->notifier(boost::bind(&ConfGenImpl::setOutputFormat, this, _1)));
+	addOption("conf-gen-preset,S", "Conformer generation preset to use (SMALL_SET_DIVERSE, MEDIUM_SET_DIVERSE, " 
+			  "LARGE_SET_DIVERSE, SMALL_SET_DENSE, MEDIUM_SET_DENSE, LARGE_SET_DENSE, default: MEDIUM_SET_DIVERSE).", 
+			  value<std::string>()->notifier(boost::bind(&ConfGenImpl::applyConfGenPreset, this, _1)));
+	addOption("frag-build-preset,F", "Fragment build preset to use (FAST, THOROUGH, default: FAST).", 
+			  value<std::string>()->notifier(boost::bind(&ConfGenImpl::applyFragBuildPreset, this, _1)));
+	addOption("rmsd,r", "Minimum RMSD for output conformer selection (default: " + 
+			  (boost::format("%.4f") % settings.getMinRMSD()).str() + ", must be >= 0).",
+			  value<double>()->notifier(boost::bind(&ConfGenImpl::setRMSD, this, _1)));
+	addOption("timeout,T", "Time in seconds after which conformer generation will be stopped (default: " + 
+			  boost::lexical_cast<std::string>(settings.getTimeout() / 1000) + "s, must be >= 0, 0 disables timeout).",
+			  value<std::size_t>()->notifier(boost::bind(&ConfGenImpl::setTimeout, this, _1)));
+	addOption("max-num_confs,n", "Maximum number of output conformers per molecule (default: " + 
+			  boost::lexical_cast<std::string>(settings.getMaxNumOutputConformers()) + ", must be >= 0, 0 disables limit).",
+			  value<std::size_t>()->notifier(boost::bind(&ConfGenImpl::setMaxNumConfs, this, _1)));
+	addOption("e-window,e", "Output energy window for generated conformers (default: " + 
+			  boost::lexical_cast<std::string>(settings.getEnergyWindow()) + ", must be >= 0).",
+			  value<double>()->notifier(boost::bind(&ConfGenImpl::setEnergyWindow, this, _1)));
+	addOption("search-forcefield,f", "Conformer search force field type (MMFF94, MMFF94_NO_ESTAT, MMFF94S, MMFF94S_EXT, MMFF94S_NO_ESTAT, MMFF94S_EXT_NO_ESTAT, default: " +
+			  getForceFieldTypeString(settings.getForceFieldType()) + ").", value<std::string>()->notifier(boost::bind(&ConfGenImpl::setForceFieldType, this, _1)));
+	addOption("strict-param,s", "Perform strict MMFF94 parameterization (default: true).", 
+			  value<bool>()->implicit_value(true)->notifier(boost::bind(&ConfGenImpl::setStrictParameterization, this, _1)));
+	addOption("sampling-mode,m", "Conformer sampling mode (AUTO, STOCHASTIC, SYSTEMATIC default: " + getSamplingModeString() + ").", 
+			  value<std::string>()->notifier(boost::bind(&ConfGenImpl::setSamplingMode, this, _1)));
 	addOption("canonicalize,C", "Canonicalize input molecules (default: false).", 
 			  value<bool>(&canonicalize)->implicit_value(true));
 
@@ -338,6 +366,117 @@ void ConfGenImpl::addOptionLongDescriptions()
 							 "\nNote that only storage formats make sense that allow to store atom 3D-coordinates!");
 }
 
+void ConfGenImpl::applyConfGenPreset(const std::string& pres_str)
+{
+	using namespace CDPL::ConfGen;
+
+	std::string pres = pres_str;
+	boost::to_upper(pres);
+
+	if (pres == "SMALL_SET_DIVERSE")
+		settings = ConformerGeneratorSettings::SMALL_SET_DIVERSE;
+	else if (pres == "MEDIUM_SET_DIVERSE")
+		settings = ConformerGeneratorSettings::MEDIUM_SET_DIVERSE;
+	else if (pres == "LARGE_SET_DIVERSE")
+		settings = ConformerGeneratorSettings::LARGE_SET_DIVERSE;
+	else if (pres == "SMALL_SET_DENSE")
+		settings = ConformerGeneratorSettings::SMALL_SET_DENSE;
+	else if (pres == "MEDIUM_SET_DENSE")
+		settings = ConformerGeneratorSettings::MEDIUM_SET_DENSE;
+	else if (pres == "LARGE_SET_DENSE")
+		settings = ConformerGeneratorSettings::LARGE_SET_DENSE;
+	else 
+		throwValidationError("conf-gen-preset");
+
+	confGenPreset = pres;
+}
+
+void ConfGenImpl::applyFragBuildPreset(const std::string& pres_str)
+{
+	std::string pres = pres_str;
+	boost::to_upper(pres);
+
+	if (pres == "FAST")
+		settings.getFragmentBuildSettings() = FragmentConformerGeneratorSettings::FAST;
+	else if (pres == "THOROUGH")
+		settings.getFragmentBuildSettings() = FragmentConformerGeneratorSettings::THOROUGH;
+	else
+		throwValidationError("frag-build-preset");
+
+	fragBuildPreset = pres;
+}
+
+void ConfGenImpl::setSamplingMode(const std::string& mode_str)
+{
+	using namespace CDPL::ConfGen;
+
+	std::string smpl_mode = mode_str;
+	boost::to_upper(smpl_mode);
+
+	if (smpl_mode == "AUTO")
+		settings.setConformerSamplingMode(ConformerSamplingMode::AUTO);
+	else if (smpl_mode == "SYSTEMATIC")
+		settings.setConformerSamplingMode(ConformerSamplingMode::SYSTEMATIC);
+	else if (smpl_mode == "STOCHASTIC")
+		settings.setConformerSamplingMode(ConformerSamplingMode::STOCHASTIC);
+	else
+		throwValidationError("sampling-mode");
+}
+
+void ConfGenImpl::setTimeout(std::size_t timeout)
+{
+	settings.setTimeout(timeout * 1000);
+}
+
+void ConfGenImpl::setStrictParameterization(bool strict)
+{
+	settings.strictForceFieldParameterization(strict);
+}
+
+void ConfGenImpl::setForceFieldType(const std::string& type_str)
+{
+	using namespace CDPL::ConfGen;
+
+	std::string uc_type = type_str;
+	boost::to_upper(uc_type);
+
+	if (uc_type == "MMFF94")
+		settings.setForceFieldType(ForceFieldType::MMFF94);
+	else if (uc_type == "MMFF94_NO_ESTAT")
+		settings.setForceFieldType(ForceFieldType::MMFF94_NO_ESTAT);
+	else if (uc_type == "MMFF94S")
+		settings.setForceFieldType(ForceFieldType::MMFF94S);
+	else if (uc_type == "MMFF94S_EXT")
+		settings.setForceFieldType(ForceFieldType::MMFF94S_EXT);
+	else if (uc_type == "MMFF94S_NO_ESTAT")
+		settings.setForceFieldType(ForceFieldType::MMFF94S_NO_ESTAT);
+	else if (uc_type == "MMFF94S_EXT_NO_ESTAT")
+		settings.setForceFieldType(ForceFieldType::MMFF94S_EXT_NO_ESTAT);
+	else
+		throwValidationError("forcefield");
+}
+
+void ConfGenImpl::setRMSD(double rmsd)
+{
+	if (rmsd < 0)
+		throwValidationError("rmsd");
+
+	settings.setMinRMSD(rmsd);
+}
+
+void ConfGenImpl::setEnergyWindow(double ewin)
+{
+	if (ewin < 0)
+		throwValidationError("e-window");
+
+	settings.setEnergyWindow(ewin);
+}
+
+void ConfGenImpl::setMaxNumConfs(std::size_t max_confs)
+{
+	settings.setMaxNumOutputConformers( max_confs);
+}
+
 void ConfGenImpl::setInputFormat(const std::string& file_ext)
 {
 	using namespace CDPL;
@@ -364,13 +503,6 @@ void ConfGenImpl::setOutputFormat(const std::string& file_ext)
 		throwValidationError("output-format");
 }
 
-void ConfGenImpl::setNumThreads(std::size_t num_threads)
-{
-	std::cerr << "num_threads = " << std::endl;
-
-	numThreads = num_threads;
-}
-
 int ConfGenImpl::process()
 {
 	startTime = Clock::now();
@@ -382,7 +514,7 @@ int ConfGenImpl::process()
 	printOptionSummary();
 
 	initInputReader();
-	initOutputWriter();
+	initOutputWriters();
 
 	if (termSignalCaught())
 		return EXIT_FAILURE;
@@ -617,19 +749,30 @@ void ConfGenImpl::printMessage(VerbosityLevel level, const std::string& msg, boo
 void ConfGenImpl::printOptionSummary()
 {
 	printMessage(VERBOSE, "Option Summary:");
-	printMessage(VERBOSE, " Input File(s):                     " + inputFiles[0]);
+	printMessage(VERBOSE, " Input File(s):                       " + inputFiles[0]);
 	
 	for (StringList::const_iterator it = ++inputFiles.begin(), end = inputFiles.end(); it != end; ++it)
-		printMessage(VERBOSE, std::string(36, ' ') + *it);
+		printMessage(VERBOSE, std::string(38, ' ') + *it);
 
-	printMessage(VERBOSE, " Output File:                       " + outputFile);
-	printMessage(VERBOSE, " Multithreading:                    " + std::string(numThreads > 0 ? "Yes" : "No"));
+	printMessage(VERBOSE, " Output File:                         " + outputFile);
+	printMessage(VERBOSE, " Failed Molecule Output File:         " + (failedFile.empty() ? std::string("None") : failedFile));
+ 	printMessage(VERBOSE, " Conformer Generation Preset:         " + confGenPreset);
+ 	printMessage(VERBOSE, " Fragment Build Preset:               " + fragBuildPreset);
+ 	printMessage(VERBOSE, " Conformer Sampling Mode:             " + getSamplingModeString());
+	printMessage(VERBOSE, " Max. Num. Output Conformers:         " + boost::lexical_cast<std::string>(settings.getMaxNumOutputConformers()));
+	printMessage(VERBOSE, " Timeout:                             " + boost::lexical_cast<std::string>(settings.getTimeout() / 1000) + "s");
+	printMessage(VERBOSE, " Min. RMSD:                           " + (boost::format("%.4f") % settings.getMinRMSD()).str());
+	printMessage(VERBOSE, " Energy Window:                       " + boost::lexical_cast<std::string>(settings.getEnergyWindow()));
+	printMessage(VERBOSE, " Strict Force Field Parameterization: " + std::string(settings.strictForceFieldParameterization() ? "Yes" : "No"));
+	printMessage(VERBOSE, " Search Force Field Type:             " + getForceFieldTypeString(settings.getForceFieldType()));
+	printMessage(VERBOSE, " Canonicalize Input Molecules:        " + std::string(canonicalize ? "Yes" : "No"));
+	printMessage(VERBOSE, " Multithreading:                      " + std::string(numThreads > 0 ? "Yes" : "No"));
 
 	if (numThreads > 0)
-		printMessage(VERBOSE, " Number of Threads:                 " + boost::lexical_cast<std::string>(numThreads));
+		printMessage(VERBOSE, " Number of Threads:                   " + boost::lexical_cast<std::string>(numThreads));
 
-	printMessage(VERBOSE, " Input File Format:                 " + (inputHandler ? inputHandler->getDataFormat().getName() : std::string("Auto-detect")));
-	printMessage(VERBOSE, " Output File Format:                " + (outputHandler ? outputHandler->getDataFormat().getName() : std::string("Auto-detect")));
+	printMessage(VERBOSE, " Input File Format:                   " + (inputHandler ? inputHandler->getDataFormat().getName() : std::string("Auto-detect")));
+	printMessage(VERBOSE, " Output File Format:                  " + (outputHandler ? outputHandler->getDataFormat().getName() : std::string("Auto-detect")));
 	printMessage(VERBOSE, "");
 }
 
@@ -682,7 +825,7 @@ void ConfGenImpl::initInputReader()
 	printMessage(INFO, "");
 }
 
-void ConfGenImpl::initOutputWriter()
+void ConfGenImpl::initOutputWriters()
 {
 	using namespace CDPL;
 
@@ -710,6 +853,49 @@ ConfGenImpl::OutputHandlerPtr ConfGenImpl::getOutputHandler(const std::string& f
 		return outputHandler;
 
 	return AppUtils::getOutputHandler<CDPL::Chem::MolecularGraph>(file_path);
+}
+
+std::string ConfGenImpl::getForceFieldTypeString(unsigned int ff_type) const
+{
+	using namespace CDPL::ConfGen;
+
+	if (ff_type == ForceFieldType::MMFF94)
+		return "MMFF94";
+	
+	if (ff_type == ForceFieldType::MMFF94_NO_ESTAT)
+		return "MMFF94_NO_ESTAT";
+
+	if (ff_type == ForceFieldType::MMFF94S)
+		return "MMFF94S";
+
+	if (ff_type == ForceFieldType::MMFF94S_EXT)
+		return "MMFF94S_EXT";
+	
+	if (ff_type == ForceFieldType::MMFF94S_NO_ESTAT)
+		return "MMFF94S_NO_ESTAT";
+
+	if (ff_type == ForceFieldType::MMFF94S_EXT_NO_ESTAT)
+		return "MMFF94S_EXT_NO_ESTAT";
+	
+	return "UNKNOWN";
+}
+
+std::string ConfGenImpl::getSamplingModeString() const
+{
+	using namespace CDPL::ConfGen;
+
+	unsigned int mode = settings.getConformerSamplingMode();
+
+	if (mode == ConformerSamplingMode::AUTO)
+		return "AUTO";
+	
+	if (mode == ConformerSamplingMode::SYSTEMATIC)
+		return "SYSTEMATIC";
+
+	if (mode == ConformerSamplingMode::STOCHASTIC)
+		return "STOCHASTIC";
+	
+	return "UNKNOWN";
 }
 
 std::string ConfGenImpl::createMoleculeIdentifier(std::size_t rec_idx, const CDPL::Chem::Molecule& mol)

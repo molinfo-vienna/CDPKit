@@ -64,7 +64,9 @@ namespace CDPL
 			void setMinRMSD(double min_rmsd);
 
 			double getMinRMSD() const;
-	    
+
+			std::size_t getNumSymmetryMappings() const;
+
 			void setup(const Chem::MolecularGraph& molgraph, const Util::BitSet& atom_mask);
 
 			void setup(const Chem::MolecularGraph& molgraph, const Util::BitSet& atom_mask, 

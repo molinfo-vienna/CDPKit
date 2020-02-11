@@ -195,10 +195,13 @@ bool ConfGen::TorsionDriverImpl::setMMFF94Parameters()
 			return true;
 		}
 
-	} catch (const Error&) {}
+		if (logCallback)
+			logCallback("Force field setup failed!\n");
 
-	if (logCallback)
-		logCallback("Force field setup failed!\n");
+	} catch (const Error& e) {
+		if (logCallback)
+			logCallback("Force field setup failed: " + std::string(e.what()) + '\n');
+	}
 
 	return false;
 }

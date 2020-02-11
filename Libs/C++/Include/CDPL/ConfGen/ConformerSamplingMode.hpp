@@ -38,25 +38,25 @@ namespace CDPL
     namespace ConfGen
     {
 
-	/**
-	 * \addtogroup CDPL_CONFGEN_CONSTANTS
-	 * @{
-	 */
+		/**
+		 * \addtogroup CDPL_CONFGEN_CONSTANTS
+		 * @{
+		 */
 
-	/**
-	 * \brief Provides constants used to specify the employed conformer sampling method.
-	 */
-	namespace ConformerSamplingMode
-	{
+		/**
+		 * \brief Provides constants used to specify the employed conformer sampling method.
+		 */
+		namespace ConformerSamplingMode
+		{
 					
-	    const unsigned int AUTO       = 0;
-	    const unsigned int SYSTEMATIC = 1;
-	    const unsigned int STOCHASTIC = 2;
-	}
+			const unsigned int AUTO       = 0;
+			const unsigned int SYSTEMATIC = 1;
+			const unsigned int STOCHASTIC = 2;
+		}
 
-	/**
-	 * @}
-	 */
+		/**
+		 * @}
+		 */
     }
 }
 

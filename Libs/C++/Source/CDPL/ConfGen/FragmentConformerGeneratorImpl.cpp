@@ -30,6 +30,8 @@
 #include <algorithm>
 
 #include <boost/bind.hpp>
+#include <boost/lexical_cast.hpp>
+#include <boost/format.hpp>
 #include <boost/math/special_functions.hpp>
 
 #include "CDPL/ConfGen/FragmentType.hpp"
@@ -51,6 +53,7 @@
 #include "CDPL/ForceField/Exceptions.hpp"
 
 #include "FragmentConformerGeneratorImpl.hpp"
+#include "UtilityFunctions.hpp"
 
 
 using namespace CDPL;
@@ -137,25 +140,44 @@ unsigned int ConfGen::FragmentConformerGeneratorImpl::generate(const Chem::Molec
 {
 	init(molgraph);
 
-	if (numAtoms == 0)
-		return ReturnCode::SUCCESS;
+	unsigned int ret_code = ReturnCode::SUCCESS;
 
-	if (!setupForceField())
-		return ReturnCode::FORCEFIELD_SETUP_FAILED;
+	if (numAtoms == 0) {
+		if (logCallback)
+			logCallback("Input fragment without atoms!\n");
 
-	switch (frag_type) {
+	} else {
+		if (!setupForceField())
+			ret_code = ReturnCode::FORCEFIELD_SETUP_FAILED;
 
-		case FragmentType::FLEXIBLE_RING_SYSTEM:
-			return generateFlexibleRingConformers();
+		else {
+			switch (frag_type) {
+
+				case FragmentType::FLEXIBLE_RING_SYSTEM:
+					ret_code = generateFlexibleRingConformers();
+					break;
 	
-		case FragmentType::CHAIN:
-			return generateChainConformer();
+				case FragmentType::CHAIN:
+					ret_code = generateChainConformer();
+					break;
 
-		default:
-			break;
+				default:
+					ret_code = generateRigidRingConformer();
+					break;
+			}
+		}
 	}
 
-	return generateRigidRingConformer();
+	if (logCallback) {
+		logCallback("Conformer generation finished with return code " + returnCodeToString(ret_code) + '\n');
+		logCallback("Processing time: " + timer.format(3, "%w") + "s\n");
+		logCallback("Num. output conformers: " + boost::lexical_cast<std::string>(outputConfs.size()) + '\n');
+
+		if (outputConfs.size() > 1)
+			logCallback("Energy range: " + (boost::format("%.4f") % (outputConfs.back()->getEnergy() - outputConfs.front()->getEnergy())).str() + '\n');
+	}
+
+	return ret_code;
 }
 
 void ConfGen::FragmentConformerGeneratorImpl::setConformers(Chem::MolecularGraph& molgraph) const
@@ -237,12 +259,23 @@ bool ConfGen::FragmentConformerGeneratorImpl::generateConformerFromInputCoordina
 	if (!coords_compl) {
 		hCoordsGen.setup(*molGraph);
 		mmff94GradientCalc.setFixedAtomMask(coreAtomMask);
-		
-		if (!generateHydrogenCoordsAndMinimize(*ipt_coords))
-			return false;
 
-	} else
+		if (logCallback)
+			logCallback("Reusing fragment input cooordinates, generating missing hydrogen coordinates\n");
+
+		if (!generateHydrogenCoordsAndMinimize(*ipt_coords)) {
+			if (logCallback)
+				logCallback("Generation of hydrogen coordinates failed!\n");
+
+			return false;
+		}
+
+	} else {
+		if (logCallback)
+			logCallback("Reusing fragment input cooordinates\n");
+
 		ipt_coords->setEnergy(mmff94GradientCalc(ipt_coords_data));
+	}
 
 	conf_array.push_back(ipt_coords);
 
@@ -254,10 +287,18 @@ bool ConfGen::FragmentConformerGeneratorImpl::setupForceField()
 	try {
 		if (parameterizeMMFF94Interactions(*molGraph, mmff94Parameterizer, mmff94Data, settings.getForceFieldType(),
 										   settings.strictForceFieldParameterization(), settings.getDielectricConstant(),
-										   settings.getDistanceExponent()) != ReturnCode::SUCCESS)
-			return false;
+										   settings.getDistanceExponent()) != ReturnCode::SUCCESS) {
 
-	} catch (const ForceField::Error&) {
+			if (logCallback)
+				logCallback("Force field setup failed!\n");
+
+			return false;
+		}
+
+	} catch (const ForceField::Error& e) {
+		if (logCallback)
+			logCallback("Force field setup failed: " + std::string(e.what()) + '\n');
+
 		return false;
 	}
 
@@ -282,14 +323,21 @@ void ConfGen::FragmentConformerGeneratorImpl::setupRandomConformerGeneration()
 unsigned int ConfGen::FragmentConformerGeneratorImpl::generateRigidRingConformer()
 {
 	if (!settings.preserveInputBondingGeometries() || !generateConformerFromInputCoordinates(outputConfs)) {
+		if (logCallback)
+			logCallback("Generating rigid ring system coordinates...\n");
+
 		setupRandomConformerGeneration();
 		dgStructureGen.getSettings().setBoxSize(coreAtomMask.count());
 
 		ConformerData::SharedPointer conf_data = allocConformerData();
 		unsigned int ret_code = generateRandomConformer(*conf_data);
 
-		if (ret_code != ReturnCode::SUCCESS)
+		if (ret_code != ReturnCode::SUCCESS) {
+			if (logCallback)
+				logCallback("Could not generate any conformers!\n");
+
 			return ret_code;
+		}
 
 		outputConfs.push_back(conf_data);
 	}
@@ -301,6 +349,9 @@ unsigned int ConfGen::FragmentConformerGeneratorImpl::generateChainConformer()
 {
 	if (settings.preserveInputBondingGeometries() && generateConformerFromInputCoordinates(outputConfs))
 		return invokeCallbacks();
+
+	if (logCallback)
+		logCallback("Generating chain conformers...\n");
 
 	setupRandomConformerGeneration();
 	dgStructureGen.getSettings().setBoxSize(coreAtomMask.count() * 2);
@@ -314,6 +365,9 @@ unsigned int ConfGen::FragmentConformerGeneratorImpl::generateChainConformer()
 	else
 		num_conf_samples = std::max(chain_settings.getMinNumSampledConformers(), 
 									std::min(chain_settings.getMaxNumSampledConformers(), num_conf_samples));
+
+	if (logCallback)
+		logCallback("Max. num. sampled conformers: " + boost::lexical_cast<std::string>(num_conf_samples) + '\n');
 
 	std::size_t timeout = chain_settings.getTimeout();
 	double min_energy = 0.0;
@@ -347,8 +401,12 @@ unsigned int ConfGen::FragmentConformerGeneratorImpl::generateChainConformer()
 		conf_data.reset();
 	}
 
-	if (outputConfs.empty()) 
+	if (outputConfs.empty()) {
+		if (logCallback)
+			logCallback("Could not generate any conformers!\n");
+
 		return ReturnCode::FRAGMENT_CONF_GEN_FAILED;
+	}
 
 	return ret_code;
 }
@@ -357,6 +415,9 @@ unsigned int ConfGen::FragmentConformerGeneratorImpl::generateFlexibleRingConfor
 {
 	if (settings.preserveInputBondingGeometries())
 		generateConformerFromInputCoordinates(workingConfs);
+
+	if (logCallback)
+		logCallback("Generating flexible ring system conformers...\n");
 
 	setupRandomConformerGeneration();
 	dgStructureGen.getSettings().setBoxSize(coreAtomMask.count());
@@ -371,13 +432,22 @@ unsigned int ConfGen::FragmentConformerGeneratorImpl::generateFlexibleRingConfor
 		rsys_settings = &settings.getMacrocycleSettings();
 		num_conf_samples = calcNumMacrocyclicRingSystemConfSamples();
 
+		if (logCallback)
+			logCallback("Used settings: macrocycle\n");
+
 	} else {
 		rsys_settings = &settings.getSmallRingSystemSettings();
 		num_conf_samples = calcNumSmallRingSystemConfSamples();
+
+		if (logCallback)
+			logCallback("Used settings: small ring system\n");
 	}
 
 	num_conf_samples = std::max(rsys_settings->getMinNumSampledConformers(), 
 								std::min(rsys_settings->getMaxNumSampledConformers(), num_conf_samples));
+
+	if (logCallback)
+		logCallback("Max. num. sampled conformers: " + boost::lexical_cast<std::string>(num_conf_samples) + '\n');
 
 	std::size_t timeout = rsys_settings->getTimeout();
 	double e_window = rsys_settings->getEnergyWindow();
@@ -412,8 +482,12 @@ unsigned int ConfGen::FragmentConformerGeneratorImpl::generateFlexibleRingConfor
 		conf_data.reset();
 	}
 
-	if (workingConfs.empty()) 
+	if (workingConfs.empty()) {
+		if (logCallback)
+			logCallback("Could not generate any conformers!\n");
+
 		return ReturnCode::FRAGMENT_CONF_GEN_FAILED;
+	}
 
 	std::sort(workingConfs.begin(), workingConfs.end(), &compareConformerEnergy);
 
@@ -421,6 +495,10 @@ unsigned int ConfGen::FragmentConformerGeneratorImpl::generateFlexibleRingConfor
 	double rmsd = rsys_settings->getMinRMSD();
 	double max_energy = min_energy + e_window;
 
+	if (logCallback) 
+		logCallback("Performing output conformer selection (min. RMSD: " + (boost::format("%.4f") % rmsd).str() + 
+					", num. top. sym. mappings: " + boost::lexical_cast<std::string>(symMappings.size()) + ")...\n");
+	
 	for (ConformerDataArray::iterator it = workingConfs.begin(), end = workingConfs.end(); 
 		 it != end && outputConfs.size() < max_num_out_confs; ++it) {
 

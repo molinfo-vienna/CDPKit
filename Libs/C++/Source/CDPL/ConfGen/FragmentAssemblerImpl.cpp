@@ -256,9 +256,6 @@ void ConfGen::FragmentAssemblerImpl::buildFragmentTree(const Chem::MolecularGrap
 
 	splitIntoFragments(molgraph, fragments, tmpBitSet, false);
 
-	if (logCallback)
-		logCallback("Molecular graph split into " + boost::lexical_cast<std::string>(fragments.getSize()) + " build fragment(s)\n");
-
 	fragTree.build(fragments, parent_molgraph, fragSplitBonds.begin(), fragSplitBonds.end());
 }
 
@@ -273,9 +270,9 @@ unsigned int ConfGen::FragmentAssemblerImpl::getFragmentConformers()
 		try {
 			bondLengthTable->setup(*fragTree.getMolecularGraph(), settings.getFragmentBuildSettings().strictForceFieldParameterization());
 
-		} catch (const ForceField::Error&) {
+		} catch (const ForceField::Error& e) {
 			if (logCallback)
-				logCallback("Setup of MMFF94 bond length table failed!\n");
+				logCallback("Setup of MMFF94 bond-length table failed: " + std::string(e.what()) + '\n');
 
 			return ReturnCode::FORCEFIELD_SETUP_FAILED;
 		}
@@ -465,7 +462,7 @@ bool ConfGen::FragmentAssemblerImpl::fetchConformersFromFragmentLibrary(unsigned
 			enumRingFragmentNitrogens(frag, node);
 
 		if (logCallback)
-			logCallback(" Coordinates source: fragment library\n");
+			logCallback(" Coordinates source: library\n");
 
 		return true;
 	}
@@ -524,7 +521,7 @@ bool ConfGen::FragmentAssemblerImpl::fetchConformersFromFragmentCache(unsigned i
 		enumRingFragmentNitrogens(frag, node);
 
 	if (logCallback)
-		logCallback(" Coordinates source: dynamic cache\n");
+		logCallback(" Coordinates source: cache\n");
 
 	return true;
 }

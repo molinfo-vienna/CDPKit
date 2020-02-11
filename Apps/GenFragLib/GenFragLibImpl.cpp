@@ -84,11 +84,14 @@ class GenFragLibImpl::FragLibGenerationWorker
 
 public:
 	FragLibGenerationWorker(GenFragLibImpl* parent):
-		parent(parent), fragLibGen(parent->fragmentLibPtr), numProcMols(0),
-		numProcFrags(0), numErrorFrags(0), numAddedFrags(0), totalNumConfs(0)  
+		parent(parent), fragLibGen(parent->fragmentLibPtr), verbLevel(parent->getVerbosityLevel()),
+		numProcMols(0), numProcFrags(0), numErrorFrags(0), numAddedFrags(0), totalNumConfs(0)  
 	{
 		fragLibGen.setAbortCallback(boost::bind(&FragLibGenerationWorker::abort, this));
 		fragLibGen.getSettings() = parent->settings;
+
+		if (parent->getVerbosityLevel() >= DEBUG)  
+			fragLibGen.setLogMessageCallback(boost::bind(&FragLibGenerationWorker::appendToLogRecord, this, _1));
 	}
 
 	void operator()() {
@@ -136,10 +139,9 @@ private:
 
 		try {
 			logRecordStream.str(std::string());
-			verbLevel = parent->getVerbosityLevel();
 
 			if (verbLevel >= DEBUG) 
-				logRecordStream << "- Molecule " << parent->createMoleculeIdentifier(rec_idx, molecule) << ':' << std::endl;
+				logRecordStream << std::endl << "- Molecule " << parent->createMoleculeIdentifier(rec_idx, molecule) << ':' << std::endl;
 
 			prepareForConformerGeneration(molecule);
 			buildFragmentLinkBondMask(molecule, fragLinkBondMask);
@@ -148,6 +150,10 @@ private:
 
 			for (FragmentList::ConstElementIterator it = fragList.getElementsBegin(), end = fragList.getElementsEnd(); it != end; ++it) {
 				const Fragment& frag = *it;
+
+				if (verbLevel >= DEBUG) 
+					logRecordStream << "Fragment " << getSMILES(frag) << ':' << std::endl;
+
 				unsigned int ret_code = fragLibGen.process(frag, molecule);
 
 				switch (ret_code) {
@@ -176,10 +182,12 @@ private:
 			return true;
 
 		} catch (const std::exception& e) {
-			parent->setErrorMessage("unexpected exception while processing molecule " + parent->createMoleculeIdentifier(rec_idx, molecule) + ": " + e.what());
+			parent->setErrorMessage("unexpected exception while processing molecule " + 
+									parent->createMoleculeIdentifier(rec_idx, molecule) + ": " + e.what());
 
 		} catch (...) {
-			parent->setErrorMessage("unexpected exception while processing molecule " + parent->createMoleculeIdentifier(rec_idx, molecule));
+			parent->setErrorMessage("unexpected exception while processing molecule " + 
+									parent->createMoleculeIdentifier(rec_idx, molecule));
 		}
 
 		return false;
@@ -199,11 +207,15 @@ private:
 			numAddedFrags++;
 			totalNumConfs += num_confs;
 
-			if (parent->getVerbosityLevel() >= VERBOSE) 
-				logRecordStream << "Fragment " << getSMILES(frag) << ": " << num_confs << (num_confs == 1 ? " Conf." : " Confs.") << std::endl;
+			if (verbLevel == VERBOSE) 
+				logRecordStream << "Fragment " << getSMILES(frag) << ": " << 
+					num_confs << (num_confs == 1 ? " conf." : " confs.") << std::endl;
 			
-		} else if (parent->getVerbosityLevel() >= DEBUG) 
-			  logRecordStream << "Fragment " << getSMILES(frag) << ": already processed" << std::endl;
+		} else if (verbLevel == VERBOSE) 
+			logRecordStream << "Fragment " << getSMILES(frag) << ": already in library" << std::endl;
+
+		else if (verbLevel >= DEBUG) 
+			logRecordStream << " Already in library!" << std::endl;
 	}
 
 	void handleError(const CDPL::Chem::MolecularGraph& frag, unsigned int ret_code) {
@@ -212,10 +224,8 @@ private:
 
 		numErrorFrags++;
 
-		if (parent->getVerbosityLevel() < ERROR)
+		if (verbLevel < ERROR || verbLevel >= DEBUG)
 			return;
-
-		verbLevel = ERROR;
 
 		std::string err_msg;
 
@@ -234,15 +244,15 @@ private:
 				break;
 
 			case ReturnCode::TIMEOUT:
-				err_msg = "timeout exceeded";
+				err_msg = "time limit exceeded";
 				break;
 
 			default:
-				logRecordStream << "Unspecified error while processing fragment " << getSMILES(frag) << std::endl;
-				return;
+				err_msg = "unspecified error";
+				break;
 		}
 
-		logRecordStream << "Error while processing fragment " << getSMILES(frag) << ": " << err_msg << std::endl;
+		logRecordStream << "Fragment " << getSMILES(frag) << ": " << err_msg << std::endl;
 	}
 
 	std::string getSMILES(const CDPL::Chem::MolecularGraph& molgraph) const {
@@ -259,6 +269,10 @@ private:
 		} catch (const std::exception& e) {
 			return "????";
 		}
+	}
+
+	void appendToLogRecord(const std::string& msg) {
+		logRecordStream << ' ' << msg;
 	}
 
 	bool abort() const {
@@ -299,13 +313,13 @@ GenFragLibImpl::GenFragLibImpl():
 			  value<std::size_t>(&numThreads)->implicit_value(boost::thread::hardware_concurrency()));
 	addOption("input-format,I", "Input file format (default: auto-detect from file extension).", 
 			  value<std::string>()->notifier(boost::bind(&GenFragLibImpl::setInputFormat, this, _1)));
-	addOption("preset,P", "Preset to apply (FAST, THROUGH, default: THOROUGH).", 
+	addOption("preset,F", "Fragment conformer generation preset to use (FAST, THROUGH, default: THOROUGH).", 
 			  value<std::string>()->notifier(boost::bind(&GenFragLibImpl::applyPreset, this, _1)));
 	addOption("rmsd,r", "Minimum RMSD of two small ring system conformations to be considered dissimilar (default: " + 
 			  (boost::format("%.4f") % settings.getSmallRingSystemSettings().getMinRMSD()).str() + ", must be >= 0).",
 			  value<double>()->notifier(boost::bind(&GenFragLibImpl::setRMSD, this, _1)));
 	addOption("timeout,T", "Time in seconds after which fragment conformer generation will be stopped (default: " + 
-			  boost::lexical_cast<std::string>(settings.getMacrocycleSettings().getTimeout()) + ", must be >= 0, 0 disables timeout).",
+			  boost::lexical_cast<std::string>(settings.getMacrocycleSettings().getTimeout() / 1000) + "s, must be >= 0, 0 disables timeout).",
 			  value<std::size_t>()->notifier(boost::bind(&GenFragLibImpl::setTimeout, this, _1)));
 	addOption("max-lib-size,n", "Maximum number of output fragments (default: 0, must be >= 0, 0 disables limit, only valid in CREATE mode).",
 			  value<std::size_t>(&maxLibSize));
@@ -317,7 +331,7 @@ GenFragLibImpl::GenFragLibImpl():
 			  value<std::size_t>()->notifier(boost::bind(&GenFragLibImpl::setSmallRingSystemSamplingFactor, this, _1)));
 	addOption("forcefield,f", "Build force field type (MMFF94, MMFF94_NO_ESTAT, MMFF94S, MMFF94S_EXT, MMFF94S_NO_ESTAT, MMFF94S_EXT_NO_ESTAT, default: " + getForceFieldTypeString() + ").", 
 			  value<std::string>()->notifier(boost::bind(&GenFragLibImpl::setForceFieldType, this, _1)));
-	addOption("strict-params,s", "Perform strict MMFF94 parameterization (default: true).", 
+	addOption("strict-param,s", "Perform strict MMFF94 parameterization (default: true).", 
 			  value<bool>()->implicit_value(true)->notifier(boost::bind(&GenFragLibImpl::setStrictParameterization, this, _1)));
 	addOption("pres-bonding-geom,b", "Preserve input bond lengths and angles (default: false).", 
 			  value<bool>()->implicit_value(true)->notifier(boost::bind(&GenFragLibImpl::setPreserveBondingGeometry, this, _1)));
@@ -844,8 +858,8 @@ void GenFragLibImpl::printOptionSummary()
 		printMessage(VERBOSE, " Min. RMSD:                           " + (boost::format("%.4f") % settings.getMacrocycleSettings().getMinRMSD()).str());
 		printMessage(VERBOSE, " Energy Window:                       " + boost::lexical_cast<std::string>(settings.getSmallRingSystemSettings().getEnergyWindow()));
 		printMessage(VERBOSE, " Strict Force Field Parameterization: " + std::string(settings.strictForceFieldParameterization() ? "Yes" : "No"));
-		printMessage(VERBOSE, " Small Ring Sys. Sampling Factor:     " + boost::lexical_cast<std::string>(settings.getSmallRingSystemSamplingFactor()));
 		printMessage(VERBOSE, " Build Force Field Type:              " + getForceFieldTypeString());
+		printMessage(VERBOSE, " Small Ring Sys. Sampling Factor:     " + boost::lexical_cast<std::string>(settings.getSmallRingSystemSamplingFactor()));
 		printMessage(VERBOSE, " Preserve Input Bonding Geometries:   " + std::string(settings.preserveInputBondingGeometries() ? "Yes" : "No"));
 	}
 

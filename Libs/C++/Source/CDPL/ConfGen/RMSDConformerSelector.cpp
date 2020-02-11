@@ -102,6 +102,11 @@ void ConfGen::RMSDConformerSelector::setup(const Chem::MolecularGraph& molgraph,
 	setupSymMappingValidationData(stable_config_atom_mask, coords);
 }
 
+std::size_t ConfGen::RMSDConformerSelector::getNumSymmetryMappings() const 
+{
+	return symMappings.size();
+}
+
 bool ConfGen::RMSDConformerSelector::selected(const Math::Vector3DArray& conf_coords)
 {
 	if (symMappings.empty()) {

@@ -40,17 +40,19 @@ namespace CDPL
     namespace Chem
     {
 
-	class MolecularGraph;
+		class MolecularGraph;
     }
 
     namespace ConfGen 
     {
 
-	std::string fragmentTypeToString(unsigned int frag_type, bool human); 
+		std::string fragmentTypeToString(unsigned int frag_type, bool human); 
 
-	std::string getSMILES(Chem::MolecularGraph& molgraph);
+		std::string returnCodeToString(unsigned int ret_code); 
 
-	std::string getSMILES(const Chem::MolecularGraph& molgraph);
+		std::string getSMILES(Chem::MolecularGraph& molgraph);
+
+		std::string getSMILES(const Chem::MolecularGraph& molgraph);
     }
 }
 

@@ -30,6 +30,8 @@
 #include <iterator>
 
 #include <boost/bind.hpp>
+#include <boost/format.hpp>
+#include <boost/lexical_cast.hpp>
 #include <boost/math/special_functions.hpp>
 
 #include "CDPL/ConfGen/BondFunctions.hpp"
@@ -187,34 +189,46 @@ unsigned int ConfGen::ConformerGeneratorImpl::generate(const Chem::MolecularGrap
 	using namespace Chem;
 
 	const FragmentList& comps = *getComponents(molgraph);
+	unsigned int ret_code = ReturnCode::SUCCESS;
 
-	if (molgraph.getNumAtoms() == 0 || settings.getMaxNumOutputConformers() == 0 || comps.isEmpty()) {
+	if (molgraph.getNumAtoms() == 0 || comps.isEmpty()) {
 		outputConfs.clear();
 
 		if (logCallback)
-			logCallback("Input molecular graph is empty!\n");
+			logCallback("Input molecular graph without atoms!\n");
 
-		return ReturnCode::SUCCESS;
+	} else {
+		compConfData.clear();
+
+		if (comps.getSize() == 1) {
+			if (logCallback)
+				logCallback("Found 1 molecular graph component\n");
+
+			ret_code = generateConformers(molgraph, struct_gen_only, true);
+
+			if (ret_code == ReturnCode::SUCCESS || ret_code == ReturnCode::TIMEOUT) 
+				if (selectOutputConformers(struct_gen_only))
+					orderConformersByEnergy(outputConfs);
+
+		} else
+			ret_code = generateConformers(molgraph, comps, struct_gen_only);
 	}
 
-	compConfData.clear();
+	if (logCallback) {
+		logCallback(std::string(struct_gen_only ? "Structure" : "Conformer") + " generation finished with return code " + returnCodeToString(ret_code) + '\n');
 
-	if (comps.getSize() == 1) {
-		if (logCallback)
-			logCallback("Found 1 molecular graph component\n");
+		if (!struct_gen_only) {
+			logCallback("Processing time: " + timer.format(3, "%w") + "s\n");
 
-		unsigned int ret_code = generateConformers(molgraph, struct_gen_only, true);
-
-		if (ret_code != ReturnCode::SUCCESS && ret_code != ReturnCode::TIMEOUT) 
-			return ret_code;
-
-		if (selectOutputConformers(struct_gen_only))
-			orderConformersByEnergy(outputConfs);
-
-		return ret_code;
+			if (!outputConfs.empty()) {
+				logCallback("Num. output conformers: " + boost::lexical_cast<std::string>(outputConfs.size()) + '\n');
+				logCallback("Min. energy: " + (boost::format("%.4f") % outputConfs.front()->getEnergy()).str() + '\n');
+				logCallback("Max. energy: " + (boost::format("%.4f") % outputConfs.back()->getEnergy()).str() + '\n');
+			}
+		}
 	}
 
-	return generateConformers(molgraph, comps, struct_gen_only);
+	return ret_code;
 }
 
 void ConfGen::ConformerGeneratorImpl::setConformers(Chem::MolecularGraph& molgraph) const
@@ -301,6 +315,9 @@ unsigned int ConfGen::ConformerGeneratorImpl::generateConformers(const Chem::Mol
 void ConfGen::ConformerGeneratorImpl::combineComponentConformers(const Chem::MolecularGraph& molgraph, bool have_full_ipt_coords)
 {
 	using namespace Chem;
+
+	if (logCallback)
+		logCallback("Combining molecular graph component conformers...\n");
 
 	outputConfs.clear();
 	parentAtomInds.clear();
@@ -436,7 +453,6 @@ unsigned int ConfGen::ConformerGeneratorImpl::generateConformers(const Chem::Mol
 	}
 
 	if (determineSamplingMode()) {
-
 		if (logCallback)
 			logCallback("Sampling mode: stochastic\n");
 
@@ -489,8 +505,12 @@ unsigned int ConfGen::ConformerGeneratorImpl::generateConformersStochastic(bool 
 	double min_energy = 0.0;
 	ConformerData::SharedPointer conf_data_ptr;
 	unsigned int ret_code = ReturnCode::SUCCESS;
+	std::size_t i = 0;
 
-	for (std::size_t i = 0, num_conf_samples = settings.getMaxNumSampledConformers(), conv_iter_count = settings.getConvergenceIterationCount(), last_min_iter_count = 0; 
+	if (logCallback) 
+		logCallback("Performing stochastic conformer sampling...\n");
+
+	for (std::size_t num_conf_samples = settings.getMaxNumSampledConformers(), conv_iter_count = settings.getConvergenceIterationCount(), last_min_iter_count = 0; 
 		 i < num_conf_samples && last_min_iter_count <= conv_iter_count; i++) {
 
 		if ((ret_code = invokeCallbacks()) != ReturnCode::SUCCESS) {
@@ -563,6 +583,9 @@ unsigned int ConfGen::ConformerGeneratorImpl::generateConformersStochastic(bool 
 		workingConfs.push_back(conf_data_ptr);
 		conf_data_ptr.reset();	
 	}
+
+	if (logCallback) 
+		logCallback("Stochastic conformer sampling terminated after " + boost::lexical_cast<std::string>(i) + " iteration(s)\n");
 
 	if (logCallback && ret_code == ReturnCode::TIMEOUT && workingConfs.empty())
 		logCallback("Time limit exceeded!\n");
@@ -676,11 +699,22 @@ ConfGen::ConformerData::SharedPointer ConfGen::ConformerGeneratorImpl::getInputC
 		energyGradient.resize(num_atoms);
 		hCoordsGen.setup(*molGraph);
 
-		if (!generateHydrogenCoordsAndMinimize(*ipt_coords))
-			return ConformerData::SharedPointer();
+		if (logCallback)
+			logCallback("Using provided input coordinates, generating missing hydrogen coordinates\n");
 
-	} else
+		if (!generateHydrogenCoordsAndMinimize(*ipt_coords)) {
+			if (logCallback)
+				logCallback("Generation of hydrogen coordinates failed!\n");
+
+			return ConformerData::SharedPointer();
+		}
+
+	} else {
+		if (logCallback)
+			logCallback("Using provided input coordinates\n");
+
 		ipt_coords->setEnergy(mmff94GradientCalc(ipt_coords_data));
+	}
 
 	return ipt_coords;
 }
@@ -723,7 +757,7 @@ void ConfGen::ConformerGeneratorImpl::splitIntoTorsionFragments()
 	}
 
 	if (logCallback)
-		logCallback("Found " + boost::lexical_cast<std::string>(torFragConfData.size()) + " torsion fragment(s)\n");
+		logCallback("Structure decomposed into " + boost::lexical_cast<std::string>(torFragConfData.size()) + " torsion fragment(s)\n");
 }
 
 bool ConfGen::ConformerGeneratorImpl::setupMMFF94Parameters()
@@ -737,10 +771,13 @@ bool ConfGen::ConformerGeneratorImpl::setupMMFF94Parameters()
 			return true;
 		}
 
-	} catch (const ForceField::Error&) {}
+		if (logCallback)
+			logCallback("Force field setup failed!\n");
 
-	if (logCallback)
-		logCallback("Force field setup failed!\n");
+	} catch (const ForceField::Error& e) {
+		if (logCallback)
+			logCallback("Force field setup failed: " + std::string(e.what()) + '\n');
+	}
 
 	return false;
 }
@@ -883,11 +920,10 @@ unsigned int ConfGen::ConformerGeneratorImpl::generateFragmentConformers()
 		}
 
 		orderConformersByEnergy(frag_conf_data.conformers); 
+		frag_conf_data.lastConfIdx = frag_conf_data.conformers.size();
 
 		if (logCallback)
-			logCallback("Obtained " + boost::lexical_cast<std::string>(frag_conf_data.conformers.size()) + " fragment conformer(s)\n");
-
-		frag_conf_data.lastConfIdx = frag_conf_data.conformers.size();
+			logCallback("Generated " + boost::lexical_cast<std::string>(frag_conf_data.lastConfIdx) + " torsion fragment conformer(s)\n");
 	}
 
 	std::sort(torFragConfData.begin(), torFragConfData.end(), &compareFragmentConfCount);
@@ -923,6 +959,13 @@ unsigned int ConfGen::ConformerGeneratorImpl::generateFragmentConformerCombinati
 		return ReturnCode::CONF_GEN_FAILED;
 	}
 
+	if (logCallback) {
+		logCallback("Generated " + boost::lexical_cast<std::string>(torFragConfCombData.size()) + 
+					" fragment conformer combinations (min. energy: " + 
+					(boost::format("%.4f") % torFragConfCombData.front()->energy).str() + 
+					", max. energy: " + (boost::format("%.4f") % torFragConfCombData.back()->energy).str() + ")\n");
+	}
+
 	return ret_code;
 }
 
@@ -951,6 +994,9 @@ void ConfGen::ConformerGeneratorImpl::generateFragmentConformerCombinations(std:
 
 unsigned int ConfGen::ConformerGeneratorImpl::generateOutputConformers(bool struct_gen_only)
 {
+	if (logCallback) 
+		logCallback("Generating output conformers...\n");
+	
 	fragments.clear();
 
 	for (FragmentConfDataList::const_iterator it = torFragConfData.begin(), end = torFragConfData.end(); it != end; ++it) 
@@ -968,8 +1014,12 @@ unsigned int ConfGen::ConformerGeneratorImpl::generateOutputConformers(bool stru
 	for (ConfCombinationDataList::const_iterator comb_it = torFragConfCombData.begin(), combs_end = torFragConfCombData.end(); comb_it != combs_end; ++comb_it) {
 		const ConfCombinationData& comb = **comb_it;
 
-		if (!workingConfs.empty() && comb.energy > (min_comb_energy + e_window))
+		if (!workingConfs.empty() && comb.energy > (min_comb_energy + e_window)) {
+			if (logCallback) 
+				logCallback("Generation finished after " + boost::lexical_cast<std::string>(comb_it - torFragConfCombData.begin()) + " processed fragment confomer combination(s)\n");
+
 			break;
+		}
 
 		for (std::size_t i = 0; i < num_frags; i++) {
 			FragmentConfData& conf_data = *torFragConfData[i];
@@ -1040,6 +1090,9 @@ unsigned int ConfGen::ConformerGeneratorImpl::generateOutputConformers(bool stru
 
 	if (workingConfs.empty())
 		return ReturnCode::CONF_GEN_FAILED;
+
+	if (logCallback) 
+		logCallback("Generated " + boost::lexical_cast<std::string>(workingConfs.size()) + " candidate conformer(s)\n");
 
 	if (have_timeout)
 		return ReturnCode::TIMEOUT;
@@ -1137,7 +1190,7 @@ bool ConfGen::ConformerGeneratorImpl::selectOutputConformers(bool struct_gen_onl
 
 	confSelector.setMinRMSD(settings.getMinRMSD());
 	confSelector.setup(*molGraph, tmpBitSet, fixedAtomConfigMask, *workingConfs.front());
-	
+
 	double max_energy = workingConfs.front()->getEnergy() + settings.getEnergyWindow();
 	std::size_t max_num_confs = settings.getMaxNumOutputConformers();
 	bool have_ipt_coords = false;
@@ -1154,7 +1207,7 @@ bool ConfGen::ConformerGeneratorImpl::selectOutputConformers(bool struct_gen_onl
 	}
 
 	for (ConformerDataArray::const_iterator it = workingConfs.begin(), end = workingConfs.end(); 
-		 it != end && outputConfs.size() < max_num_confs; ++it) {
+		 it != end && (max_num_confs == 0 || outputConfs.size() < max_num_confs); ++it) {
 
 		const ConformerData::SharedPointer& conf_data = *it;
 
@@ -1163,6 +1216,12 @@ bool ConfGen::ConformerGeneratorImpl::selectOutputConformers(bool struct_gen_onl
 
 		if (confSelector.selected(*conf_data))
 			outputConfs.push_back(conf_data);
+	}
+
+	if (logCallback) {
+		logCallback("Performing output conformer selection (min. RMSD: " + (boost::format("%.4f") % settings.getMinRMSD()).str() + 
+					", num. top. sym. mappings: " + boost::lexical_cast<std::string>(confSelector.getNumSymmetryMappings()) + ")...\n");
+		logCallback("Selected " +  boost::lexical_cast<std::string>(outputConfs.size()) + " conformer(s)\n"); 
 	}
 
 	return have_ipt_coords;

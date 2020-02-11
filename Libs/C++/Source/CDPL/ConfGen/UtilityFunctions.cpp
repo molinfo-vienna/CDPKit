@@ -25,6 +25,7 @@
 
 
 #include "CDPL/ConfGen/FragmentType.hpp"
+#include "CDPL/ConfGen/ReturnCode.hpp"
 #include "CDPL/Chem/MolecularGraphFunctions.hpp"
 
 #include "UtilityFunctions.hpp"
@@ -37,20 +38,67 @@ std::string ConfGen::fragmentTypeToString(unsigned int frag_type, bool human)
 {
     switch (frag_type) {
 
-	case FragmentType::CHAIN:
-	    return (human ? "chain" : "CHAIN");
+		case FragmentType::CHAIN:
+			return (human ? "chain" : "CHAIN");
 
-	case FragmentType::FLEXIBLE_RING_SYSTEM:
-	    return (human ? "flexible ring system" : "FLEXIBLE_RING_SYSTEM");
+		case FragmentType::FLEXIBLE_RING_SYSTEM:
+			return (human ? "flexible ring system" : "FLEXIBLE_RING_SYSTEM");
 
-	case FragmentType::RIGID_RING_SYSTEM:
-	    return (human ? "rigid ring system" : "RIGID_RING_SYSTEM");
+		case FragmentType::RIGID_RING_SYSTEM:
+			return (human ? "rigid ring system" : "RIGID_RING_SYSTEM");
 
-	default:
-	    break;
+		default:
+			break;
     }
 
     return (human ? "unknown" : "UNKNOWN");
+}
+
+std::string ConfGen::returnCodeToString(unsigned int ret_code)
+{
+	switch (ret_code) {
+
+	    case ReturnCode::SUCCESS:
+			return "SUCCESS";
+
+	    case ReturnCode::UNINITIALIZED:
+			return "UNINITIALIZED";
+
+	    case ReturnCode::TIMEOUT:
+			return "TIMEOUT";
+
+	    case ReturnCode::ABORTED:
+			return "ABORTED";
+
+	    case ReturnCode::FORCEFIELD_SETUP_FAILED:
+			return "FORCEFIELD_SETUP_FAILED";
+
+	    case ReturnCode::FORCEFIELD_MINIMIZATION_FAILED:
+			return "FORCEFIELD_MINIMIZATION_FAILED";
+
+	    case ReturnCode::FRAGMENT_LIBRARY_NOT_SET:
+			return "FRAGMENT_LIBRARY_NOT_SET";
+ 	
+	    case ReturnCode::FRAGMENT_CONF_GEN_FAILED:
+			return "FRAGMENT_CONF_GEN_FAILED";
+
+	    case ReturnCode::FRAGMENT_CONF_GEN_TIMEOUT:
+			return "FRAGMENT_CONF_GEN_TIMEOUT";
+
+	    case ReturnCode::FRAGMENT_ALREADY_PROCESSED:
+			return "FRAGMENT_ALREADY_PROCESSED";
+
+	    case ReturnCode::TORSION_DRIVING_FAILED:
+			return "TORSION_DRIVING_FAILED";
+
+	    case ReturnCode::CONF_GEN_FAILED:
+			return "CONF_GEN_FAILED";
+
+		default:
+			break;
+	}
+
+    return "UNKNOWN";
 }
 
 std::string ConfGen::getSMILES(Chem::MolecularGraph& molgraph)
@@ -61,7 +109,7 @@ std::string ConfGen::getSMILES(Chem::MolecularGraph& molgraph)
     std::string smiles;
 
     if (generateSMILES(molgraph, smiles, false))
-	return smiles;
+		return smiles;
 
     return "";
 }
@@ -71,7 +119,7 @@ std::string ConfGen::getSMILES(const Chem::MolecularGraph& molgraph)
     std::string smiles;
 
     if (generateSMILES(molgraph, smiles, false))
-	return smiles;
+		return smiles;
 
     return "";
 }

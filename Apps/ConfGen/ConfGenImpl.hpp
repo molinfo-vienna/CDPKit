@@ -74,9 +74,17 @@ namespace ConfGen
 		const char* getProgCopyright() const;
 		const char* getProgAboutText() const;
 
+		void applyConfGenPreset(const std::string& pres_str);
+		void applyFragBuildPreset(const std::string& pres_str);
+		void setSamplingMode(const std::string& mode_str);
+		void setTimeout(std::size_t timeout);
+		void setStrictParameterization(bool strict);
+		void setForceFieldType(const std::string& type_str);
+		void setRMSD(double rmsd);
+		void setEnergyWindow(double ewin);
+		void setMaxNumConfs(std::size_t max_confs);
 		void setInputFormat(const std::string& file_ext);
 		void setOutputFormat(const std::string& file_ext);
-		void setNumThreads(std::size_t num_threads);
 
 		int process();
 
@@ -99,7 +107,10 @@ namespace ConfGen
 		void checkInputFiles() const;
 		void printOptionSummary();
 		void initInputReader();
-		void initOutputWriter();
+		void initOutputWriters();
+
+		std::string getForceFieldTypeString(unsigned int ff_type) const;
+		std::string getSamplingModeString() const;
 
 		std::string createMoleculeIdentifier(std::size_t rec_idx, const CDPL::Chem::Molecule& mol);
 		std::string createMoleculeIdentifier(std::size_t rec_idx);
@@ -118,16 +129,22 @@ namespace ConfGen
 		typedef CDPL::Base::DataWriter<CDPL::Chem::MolecularGraph>::SharedPointer MoleculeWriterPtr;
 		typedef boost::chrono::system_clock Clock;
 		typedef CDPL::ConfGen::ConformerGeneratorSettings ConformerGeneratorSettings;
+		typedef CDPL::ConfGen::FragmentConformerGeneratorSettings FragmentConformerGeneratorSettings;
 
 		StringList                     inputFiles;
 		std::string                    outputFile;
+		std::string                    failedFile;
 		std::size_t                    numThreads;
 		ConformerGeneratorSettings     settings;
+		std::string                    confGenPreset;              
+		std::string                    fragBuildPreset;              
 		bool                           canonicalize;
 		InputHandlerPtr                inputHandler;
 		CompMoleculeReader             inputReader;
 		OutputHandlerPtr               outputHandler;
 		MoleculeWriterPtr              outputWriter;
+		OutputHandlerPtr               failedOutputHandler;
+		MoleculeWriterPtr              failedOutputWriter;
 		boost::mutex                   mutex;
 		boost::mutex                   readMolMutex;
 		boost::mutex                   writeMolMutex;
