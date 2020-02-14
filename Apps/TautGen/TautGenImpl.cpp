@@ -745,6 +745,11 @@ void TautGenImpl::checkInputFiles() const
 															 boost::bind(Util::fileExists, _1)));
 	if (it != inputFiles.end())
 		throw Base::IOError("file '" + *it + "' does not exist");
+
+	if (std::find_if(inputFiles.begin(), inputFiles.end(),
+					 boost::bind(Util::checkIfSameFile, boost::ref(outputFile),
+								 _1)) != inputFiles.end())
+		throw Base::ValueError("output file must not occur in list of input files");
 }
 
 void TautGenImpl::printMessage(VerbosityLevel level, const std::string& msg, bool nl, bool file_only)

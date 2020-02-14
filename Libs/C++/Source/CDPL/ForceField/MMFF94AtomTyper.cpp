@@ -225,10 +225,7 @@ void ForceField::MMFF94AtomTyper::assignHydrogenAtomTypes()
 			if (getType(nbr_atom) != AtomType::H)
 				continue;
 
-			std::size_t nbr_idx = molGraph->getAtomIndex(nbr_atom);
-
-			if ((*symTypes)[nbr_idx].empty())
-				(*symTypes)[nbr_idx] = h_type;
+			(*symTypes)[molGraph->getAtomIndex(nbr_atom)] = h_type;
 		}
 	}
 }

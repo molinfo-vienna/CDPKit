@@ -118,14 +118,30 @@ ConfGen::TorsionRule& ConfGen::TorsionCategory::addRule(const TorsionRule& rule)
 	return rules.back();
 }
 
-std::size_t ConfGen::TorsionCategory::getNumCategories() const
+std::size_t ConfGen::TorsionCategory::getNumCategories(bool recursive) const
 {
-	return categories.size();
+	if (!recursive)
+		return categories.size();
+
+	std::size_t num_cats = categories.size();
+
+	for (ConstCategoryIterator it = categories.begin(), end = categories.end(); it != end; ++it)
+		num_cats += it->getNumCategories(true);
+
+	return num_cats;
 }
 
-std::size_t ConfGen::TorsionCategory::getNumRules() const
+std::size_t ConfGen::TorsionCategory::getNumRules(bool recursive) const
 {
-	return rules.size();
+	if (!recursive)
+		return rules.size();
+
+	std::size_t num_rules = rules.size();
+
+	for (ConstCategoryIterator it = categories.begin(), end = categories.end(); it != end; ++it)
+		num_rules += it->getNumRules(true);
+
+	return num_rules;
 }
 
 ConfGen::TorsionCategory& ConfGen::TorsionCategory::getCategory(std::size_t idx)

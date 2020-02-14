@@ -39,6 +39,8 @@
 #include "CDPL/Base/DataInputHandler.hpp"
 #include "CDPL/Base/DataOutputHandler.hpp"
 #include "CDPL/ConfGen/ConformerGeneratorSettings.hpp"
+#include "CDPL/ConfGen/TorsionLibrary.hpp"
+#include "CDPL/ConfGen/FragmentLibrary.hpp"
 
 #include "Lib/CmdLineBase.hpp"
 
@@ -78,13 +80,32 @@ namespace ConfGen
 		void applyFragBuildPreset(const std::string& pres_str);
 		void setSamplingMode(const std::string& mode_str);
 		void setTimeout(std::size_t timeout);
+		void setDielectricConst(double de_const);
+		void setDistExponent(double exp);
+		void setMaxNumSampledConfs(std::size_t max_confs);
+		void setConvergenceIterCount(std::size_t iter_count);
+		void setMinMacrocycleSize(std::size_t min_size);
+		void setRefStopGradient(double g_norm);
+		void setMaxNumRefIterations(std::size_t num_iter);
 		void setStrictParameterization(bool strict);
-		void setForceFieldType(const std::string& type_str);
+		void setSearchForceFieldType(const std::string& type_str);
+		void setBuildForceFieldType(const std::string& type_str);
 		void setRMSD(double rmsd);
 		void setEnergyWindow(double ewin);
+		void setNitrogenEnumMode(const std::string& mode_str);
+		void setEnumRings(bool enumerate);
+		void setSampleHetAtomHydrogens(bool sample);
+		void setSampleAngleTolRanges(bool sample);
+		void setIncludeInput(bool include);
+		void setGenerateFromScratch(bool from_scratch);
 		void setMaxNumConfs(std::size_t max_confs);
 		void setInputFormat(const std::string& file_ext);
 		void setOutputFormat(const std::string& file_ext);
+		void setFailedOutputFormat(const std::string& file_ext);
+		void addTorsionLib(const std::string& lib_file);
+		void setTorsionLib(const std::string& lib_file);
+		void addFragmentLib(const std::string& lib_file);
+		void setFragmentLib(const std::string& lib_file);
 
 		int process();
 
@@ -94,8 +115,8 @@ namespace ConfGen
 		std::size_t readNextMolecule(CDPL::Chem::Molecule& mol);
 		std::size_t doReadNextMolecule(CDPL::Chem::Molecule& mol);
 
-		void writeMolecule(const CDPL::Chem::MolecularGraph& mol);
-		void doWriteMolecule(const CDPL::Chem::MolecularGraph& mol);
+		void writeMolecule(const CDPL::Chem::MolecularGraph& mol, bool failed);
+		void doWriteMolecule(const CDPL::Chem::MolecularGraph& mol, bool failed);
 
 		void setErrorMessage(const std::string& msg);
 		bool haveErrorMessage();
@@ -106,17 +127,23 @@ namespace ConfGen
 
 		void checkInputFiles() const;
 		void printOptionSummary();
+		void loadTorsionLibrary();
+		void loadFragmentLibrary();
 		void initInputReader();
 		void initOutputWriters();
 
+		unsigned int stringToForceFieldType(const std::string& type_str, const char* opt);
+
 		std::string getForceFieldTypeString(unsigned int ff_type) const;
 		std::string getSamplingModeString() const;
+		std::string getNitrogenEnumModeString() const;
 
 		std::string createMoleculeIdentifier(std::size_t rec_idx, const CDPL::Chem::Molecule& mol);
 		std::string createMoleculeIdentifier(std::size_t rec_idx);
 
 		InputHandlerPtr getInputHandler(const std::string& file_path) const;
 		OutputHandlerPtr getOutputHandler(const std::string& file_path) const;
+		OutputHandlerPtr getFailedOutputHandler(const std::string& file_path) const;
 
 		void addOptionLongDescriptions();
 
@@ -130,6 +157,8 @@ namespace ConfGen
 		typedef boost::chrono::system_clock Clock;
 		typedef CDPL::ConfGen::ConformerGeneratorSettings ConformerGeneratorSettings;
 		typedef CDPL::ConfGen::FragmentConformerGeneratorSettings FragmentConformerGeneratorSettings;
+		typedef CDPL::ConfGen::TorsionLibrary::SharedPointer TorsionLibraryPtr;
+		typedef CDPL::ConfGen::FragmentLibrary::SharedPointer FragmentLibraryPtr;
 
 		StringList                     inputFiles;
 		std::string                    outputFile;
@@ -139,6 +168,17 @@ namespace ConfGen
 		std::string                    confGenPreset;              
 		std::string                    fragBuildPreset;              
 		bool                           canonicalize;
+		bool                           energySDEntry;
+		bool                           energyComment;
+		bool                           confIndexSuffix;
+		bool                           hardTimeout;
+		long                           maxNumRotorBonds;
+		std::string                    torsionLibName;
+		TorsionLibraryPtr              torsionLib;
+		bool                           replaceBuiltinTorLib;
+		std::string                    fragmentLibName;
+		FragmentLibraryPtr             fragmentLib;
+		bool                           replaceBuiltinFragLib;
 		InputHandlerPtr                inputHandler;
 		CompMoleculeReader             inputReader;
 		OutputHandlerPtr               outputHandler;

@@ -95,9 +95,9 @@ namespace CDPL
 
 			TorsionRule& addRule(const TorsionRule& rule);
 
-			std::size_t getNumCategories() const;
+			std::size_t getNumCategories(bool recursive = false) const;
 
-			std::size_t getNumRules() const;
+			std::size_t getNumRules(bool recursive = false) const;
 
 			TorsionCategory& getCategory(std::size_t idx);
 

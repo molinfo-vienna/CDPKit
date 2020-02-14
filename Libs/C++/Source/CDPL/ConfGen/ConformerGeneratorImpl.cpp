@@ -511,7 +511,7 @@ unsigned int ConfGen::ConformerGeneratorImpl::generateConformersStochastic(bool 
 		logCallback("Performing stochastic conformer sampling...\n");
 
 	for (std::size_t num_conf_samples = settings.getMaxNumSampledConformers(), conv_iter_count = settings.getConvergenceIterationCount(), last_min_iter_count = 0; 
-		 i < num_conf_samples && last_min_iter_count <= conv_iter_count; i++) {
+		 (num_conf_samples == 0 || i < num_conf_samples) && last_min_iter_count <= conv_iter_count; i++) {
 
 		if ((ret_code = invokeCallbacks()) != ReturnCode::SUCCESS) {
 			if (ret_code == ReturnCode::TIMEOUT)

@@ -120,6 +120,20 @@ std::size_t ConfGen::buildRotatableBondMask(const Chem::MolecularGraph& molgraph
 	return num_rot_bonds;
 }
 
+std::size_t ConfGen::getRotatableBondCount(const Chem::MolecularGraph& molgraph, bool het_h_rotors)
+{
+	using namespace Chem;
+
+	std::size_t num_bonds = molgraph.getNumBonds();
+	std::size_t num_rot_bonds = 0;
+
+	for (std::size_t i = 0; i < num_bonds; i++) 
+		if (isRotatableBond(molgraph.getBond(i), molgraph, het_h_rotors)) 
+			num_rot_bonds++;
+
+	return num_rot_bonds;
+}
+
 unsigned int ConfGen::perceiveFragmentType(const Chem::MolecularGraph& molgraph)
 {
     using namespace Chem;

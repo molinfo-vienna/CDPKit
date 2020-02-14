@@ -117,7 +117,7 @@ void CDPLPythonConfGen::exportTorsionCategory()
 		.def("getName", &ConfGen::TorsionCategory::getName, python::arg("self"), 
 			 python::return_value_policy<python::copy_const_reference>())
 		.def("setName", &ConfGen::TorsionCategory::setName, (python::arg("self"), python::arg("name")))
-		.def("getNumRules", &ConfGen::TorsionCategory::getNumRules, python::arg("self"))
+		.def("getNumRules", &ConfGen::TorsionCategory::getNumRules, (python::arg("self"), python::arg("recursive") = false))
 		.def("getRule",static_cast<ConfGen::TorsionRule& (ConfGen::TorsionCategory::*)(std::size_t)>(
 				 &ConfGen::TorsionCategory::getRule), (python::arg("self"), python::arg("idx")),
 			 python::return_internal_reference<>())
@@ -129,7 +129,7 @@ void CDPLPythonConfGen::exportTorsionCategory()
 		.def("addRule", static_cast<ConfGen::TorsionRule& (ConfGen::TorsionCategory::*)()>(&ConfGen::TorsionCategory::addRule), 
 			 python::arg("self"), python::return_internal_reference<>())
 		.def("getRules", &createRuleSequence, python::arg("self"), python::with_custodian_and_ward_postcall<0, 1>())
-		.def("getNumCategories", &ConfGen::TorsionCategory::getNumCategories, python::arg("self"))
+		.def("getNumCategories", &ConfGen::TorsionCategory::getNumCategories, (python::arg("self"), python::arg("recursive") = false))
 		.def("getCategory",static_cast<ConfGen::TorsionCategory& (ConfGen::TorsionCategory::*)(std::size_t)>(
 				 &ConfGen::TorsionCategory::getCategory), (python::arg("self"), python::arg("idx")),
 			 python::return_internal_reference<>())
