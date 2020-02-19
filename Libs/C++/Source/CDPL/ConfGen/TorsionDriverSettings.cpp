@@ -35,7 +35,7 @@ using namespace CDPL;
 
 
 ConfGen::TorsionDriverSettings::TorsionDriverSettings(): 
-	sampleHetAtomHs(false), sampleTolRanges(false), energyOrdered(true), eWindow(0.0),
+	sampleHetAtomHs(false), sampleTolRanges(false), energyOrdered(true), eWindow(0.0), maxPoolSize(10000),
 	forceFieldType(ForceFieldType::MMFF94S_EXT_NO_ESTAT), strictParam(true),
 	dielectricConst(ForceField::MMFF94ElectrostaticInteractionParameterizer::DEF_DIELECTRIC_CONSTANT),
 	distExponent(ForceField::MMFF94ElectrostaticInteractionParameterizer::DEF_DISTANCE_EXPONENT)
@@ -79,6 +79,16 @@ void ConfGen::TorsionDriverSettings::setEnergyWindow(double win_size)
 double ConfGen::TorsionDriverSettings::getEnergyWindow() const
 {
 	return eWindow;
+}
+
+void ConfGen::TorsionDriverSettings::setMaxPoolSize(std::size_t max_size)
+{
+	maxPoolSize = max_size;
+}
+
+std::size_t ConfGen::TorsionDriverSettings::getMaxPoolSize() const
+{
+	return maxPoolSize;
 }
 
 void ConfGen::TorsionDriverSettings::setForceFieldType(unsigned int type)

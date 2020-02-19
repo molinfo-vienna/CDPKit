@@ -149,7 +149,7 @@ void Chem::SMILESDataWriter::init(std::ostream& os, bool rxn_context)
 	ctrlParameters.recordFormat           =  getSMILESRecordFormatParameter(ioBase); 
 
 	if (ctrlParameters.recordFormat != "S" && ctrlParameters.recordFormat != "SN")
-		throw Base::IOError("SMILESDataWriter: invalid smiles record format control-parameter");
+		throw Base::IOError("SMILESDataWriter: invalid smiles record format control-parameter '" + ctrlParameters.recordFormat + '\'');
 
 	os.imbue(std::locale::classic());
 

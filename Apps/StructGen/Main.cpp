@@ -1,7 +1,7 @@
 /* -*- mode: c++; c-basic-offset: 4; tab-width: 4; indent-tabs-mode: t -*- */
 
 /* 
- * ConformerSamplingModeExport.cpp 
+ * Main.cpp
  *
  * This file is part of the Chemical Data Processing Toolkit
  *
@@ -24,27 +24,10 @@
  */
 
 
-#include <boost/python.hpp>
-
-#include "CDPL/ConfGen/ConformerSamplingMode.hpp"
-
-#include "NamespaceExports.hpp"
+#include "StructGenImpl.hpp"
 
 
-namespace 
+int main(int argc, char* argv[])
 {
-
-	struct ConformerSamplingMode {};
-}
-
-
-void CDPLPythonConfGen::exportConformerSamplingModes()
-{
-	using namespace boost;
-	using namespace CDPL;
-
-	python::class_<ConformerSamplingMode, boost::noncopyable>("ConformerSamplingMode", python::no_init)
-		.def_readonly("AUTO", &ConfGen::ConformerSamplingMode::AUTO)
-		.def_readonly("SYSTEMATIC", &ConfGen::ConformerSamplingMode::SYSTEMATIC)
-		.def_readonly("STOCHASTIC", &ConfGen::ConformerSamplingMode::STOCHASTIC);
+    return StructGen::StructGenImpl().run(argc, argv);
 }

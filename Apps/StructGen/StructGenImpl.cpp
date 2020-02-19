@@ -1,7 +1,7 @@
 /* -*- mode: c++; c-basic-offset: 4; tab-width: 4; indent-tabs-mode: t -*- */
 
 /* 
- * ConfGenImpl.cpp
+ * StructGenImpl.cpp
  *
  * This file is part of the Chemical Data Processing Toolkit
  *
@@ -39,12 +39,12 @@
 #include "CDPL/Chem/Fragment.hpp"
 #include "CDPL/Chem/ControlParameterFunctions.hpp"
 #include "CDPL/Chem/MolecularGraphFunctions.hpp"
-#include "CDPL/ConfGen/ConformerGenerator.hpp"
+#include "CDPL/ConfGen/StructureGenerator.hpp"
 #include "CDPL/ConfGen/MoleculeFunctions.hpp"
 #include "CDPL/ConfGen/MolecularGraphFunctions.hpp"
 #include "CDPL/ConfGen/ReturnCode.hpp"
 #include "CDPL/ConfGen/ForceFieldType.hpp"
-#include "CDPL/ConfGen/ConformerSamplingMode.hpp"
+#include "CDPL/ConfGen/StructureGenerationMode.hpp"
 #include "CDPL/ConfGen/NitrogenEnumerationMode.hpp"
 #include "CDPL/Util/FileFunctions.hpp"
 #include "CDPL/Base/DataIOManager.hpp"
@@ -52,61 +52,60 @@
 
 #include "Lib/HelperFunctions.hpp"
 
-#include "ConfGenImpl.hpp"
+#include "StructGenImpl.hpp"
 
 
-using namespace ConfGen;
+using namespace StructGen;
 
 
-class ConfGenImpl::InputScanProgressCallback
+class StructGenImpl::InputScanProgressCallback
 {
 
 public:
 	class Terminated : public std::exception {};
 
-	InputScanProgressCallback(ConfGenImpl* parent, double offset, double scale): 
+	InputScanProgressCallback(StructGenImpl* parent, double offset, double scale): 
 		parent(parent), offset(offset), scale(scale) {}
 
 	void operator()(const CDPL::Base::DataIOBase&, double progress) const {
-		if (ConfGenImpl::termSignalCaught())
+		if (StructGenImpl::termSignalCaught())
 			throw Terminated();
 
 		parent->printProgress("Scanning Input File(s)...      ", offset + scale * progress);
 	}
 
 private:
-	ConfGenImpl* parent;
-	double       offset;
-	double       scale;
+	StructGenImpl* parent;
+	double         offset;
+	double         scale;
 };
 
 
-class ConfGenImpl::ConformerGenerationWorker
+class StructGenImpl::StructureGenerationWorker
 {
 
 public:
-	ConformerGenerationWorker(ConfGenImpl* parent):
-		parent(parent), verbLevel(parent->getVerbosityLevel()), numProcMols(0),
-		numFailedMols(0), numGenConfs(0) {
+	StructureGenerationWorker(StructGenImpl* parent):
+		parent(parent), verbLevel(parent->getVerbosityLevel()), numProcMols(0), numFailedMols(0) {
 
-		confGen.setAbortCallback(boost::bind(&ConformerGenerationWorker::abort, this));
-		confGen.getSettings() = parent->settings;
+		structGen.setAbortCallback(boost::bind(&StructureGenerationWorker::abort, this));
+		structGen.getSettings() = parent->settings;
 
 		if (parent->getVerbosityLevel() >= DEBUG)  
-			confGen.setLogMessageCallback(boost::bind(&ConformerGenerationWorker::appendToLogRecord, this, _1));
+			structGen.setLogMessageCallback(boost::bind(&StructureGenerationWorker::appendToLogRecord, this, _1));
 
 		if (parent->torsionLib) {
 			if (parent->replaceBuiltinTorLib)
-				confGen.clearTorsionLibraries();
+				structGen.clearTorsionLibraries();
 
-			confGen.addTorsionLibrary(parent->torsionLib);
+			structGen.addTorsionLibrary(parent->torsionLib);
 		}
 
 		if (parent->fragmentLib) {
 			if (parent->replaceBuiltinFragLib)
-				confGen.clearFragmentLibraries();
+				structGen.clearFragmentLibraries();
 
-			confGen.addFragmentLibrary(parent->fragmentLib);
+			structGen.addFragmentLibrary(parent->fragmentLib);
 		}
 	}
 
@@ -130,10 +129,6 @@ public:
 		return numFailedMols;
 	}
 
-	std::size_t getNumGenConformers() const {
-		return numGenConfs;
-	}
-
 private:
 	bool processNextMolecule() {
 		using namespace CDPL::ConfGen;
@@ -152,34 +147,32 @@ private:
 				logRecordStream << std::endl << "- Molecule " << 
 					parent->createMoleculeIdentifier(rec_idx, molecule) << ':' << std::endl;	
 
-			if (parent->failedOutputWriter)
+			if (parent->failedOutputWriter) 
 				origMolecule = molecule;
 
 			prepareForConformerGeneration(molecule, parent->canonicalize);
-			
-			if (checkRotorBondCount(rec_idx)) {
-				unsigned int ret_code = confGen.generate(molecule);
+					
+			unsigned int ret_code = structGen.generate(molecule);
 
-				switch (ret_code) {
+			switch (ret_code) {
 
-					case ReturnCode::ABORTED:
-						return false;
+				case ReturnCode::ABORTED:
+					return false;
 
-					case ReturnCode::TIMEOUT:
-						if (parent->hardTimeout) {
-							handleError(rec_idx, ret_code);
-							break;
-						}
-
-					case ReturnCode::SUCCESS:
-						outputConformers(rec_idx, ret_code);
-						break;
-
-					default:
+				case ReturnCode::TIMEOUT:
+					if (parent->hardTimeout) {
 						handleError(rec_idx, ret_code);
-				}
-			}
+						break;
+					}
 
+				case ReturnCode::SUCCESS:
+					outputConformers(rec_idx, ret_code);
+					break;
+
+				default:
+					handleError(rec_idx, ret_code);
+			}
+		
 			std::string log_rec = logRecordStream.str();
 
 			if (!log_rec.empty()) 
@@ -201,39 +194,14 @@ private:
 		return false;
 	}
 
-	bool checkRotorBondCount(std::size_t rec_idx) {
-		using namespace CDPL::ConfGen;
-
-		if (parent->maxNumRotorBonds < 0)
-			return true;
-
-		if (getRotatableBondCount(molecule, confGen.getSettings().sampleHeteroAtomHydrogens()) <= std::size_t(parent->maxNumRotorBonds))
-			return true;
-
-		if (verbLevel >= DEBUG) 
-			logRecordStream << "Maximum allowed rotatable bond count exceeded!" << std::endl;
-
-		else if (verbLevel >= ERROR) 
-			logRecordStream << "Molecule " << parent->createMoleculeIdentifier(rec_idx, molecule) << ": maximum allowed rotatable bound count exceeded" << std::endl; 
-
-		numFailedMols++;
-
-		if (parent->failedOutputWriter)
-			parent->writeMolecule(origMolecule, true);
-
-		return false;
-	}
-
 	void outputConformers(std::size_t rec_idx, unsigned int ret_code) {
 		using namespace CDPL::ConfGen;
 
 		setMDLDimensionality(molecule, 3);
 
-		std::size_t num_confs = confGen.getNumConformers();
-
 		if (verbLevel == VERBOSE || (verbLevel == INFO && ret_code == ReturnCode::TIMEOUT)) {
-			logRecordStream << "Molecule " << parent->createMoleculeIdentifier(rec_idx, molecule) << ": " << 
-				num_confs << (num_confs == 1 ? " conf., " : " confs., ") << timer.format(3, "%w") << 's';
+			logRecordStream << "Molecule " << parent->createMoleculeIdentifier(rec_idx, molecule) << ": Success, " << 
+				timer.format(3, "%w") << 's';
 
 			if (ret_code == ReturnCode::TIMEOUT)
 				logRecordStream << " (time limit exceeded)";
@@ -241,11 +209,9 @@ private:
 			logRecordStream << std::endl;
 		}
 
-		confGen.setConformers(molecule);
+		structGen.setCoordinates(molecule);
 
 		parent->writeMolecule(molecule, false);
-
-		numGenConfs += num_confs;
 	}
 
 	void handleError(std::size_t rec_idx, unsigned int ret_code) {
@@ -273,7 +239,7 @@ private:
 
 		if (verbLevel >= DEBUG) {
 			if (parent->hardTimeout)
-				logRecordStream << "Conformer generation failed due to hard timeout setting!" << std::endl;
+				logRecordStream << "Structure generation failed due to hard timeout setting!" << std::endl;
 			
 			return;
 		}
@@ -291,11 +257,11 @@ private:
 				break;
 
 			case ReturnCode::CONF_GEN_FAILED:
-				err_msg = "could not generate any conformers";
+				err_msg = "could not generate 3D-structure";
 				break;
-		
+
 			case ReturnCode::FRAGMENT_CONF_GEN_FAILED:
-				err_msg = "fragment conformer generation failed";
+				err_msg = "fragment build failed";
 				break;
 
 			case ReturnCode::TIMEOUT:
@@ -315,7 +281,7 @@ private:
 	}
 
 	bool abort() const {
-		if (parent->haveErrorMessage() || ConfGenImpl::termSignalCaught())
+		if (parent->haveErrorMessage() || StructGenImpl::termSignalCaught())
 			return true;
 
 		return false;
@@ -323,8 +289,8 @@ private:
 
 	typedef boost::chrono::system_clock Clock;
 
-	ConfGenImpl*                         parent;
-	CDPL::ConfGen::ConformerGenerator    confGen;
+	StructGenImpl*                       parent;
+	CDPL::ConfGen::StructureGenerator    structGen;
 	CDPL::Chem::BasicMolecule            molecule;
 	CDPL::Chem::Fragment                 origMolecule;
 	std::stringstream                    logRecordStream;
@@ -332,16 +298,16 @@ private:
 	boost::timer::cpu_timer              timer;
 	std::size_t                          numProcMols;
 	std::size_t                          numFailedMols;
-	std::size_t                          numGenConfs;
 };
 
 
-ConfGenImpl::ConfGenImpl(): 
-	numThreads(0), settings(ConformerGeneratorSettings::MEDIUM_SET_DIVERSE), 
-	confGenPreset("MEDIUM_SET_DIVERSE"), fragBuildPreset("FAST"), canonicalize(false), energySDEntry(false), 
-	energyComment(false), confIndexSuffix(false), hardTimeout(false), maxNumRotorBonds(-1), torsionLib(), fragmentLib(),
-	inputHandler(), outputHandler(), outputWriter(), failedOutputHandler(), failedOutputWriter()
+StructGenImpl::StructGenImpl(): 
+	numThreads(0), fragBuildPreset("FAST"), canonicalize(false),
+	hardTimeout(false), torsionLib(), fragmentLib(), inputHandler(), 
+	outputHandler(), outputWriter(), failedOutputHandler(), failedOutputWriter()
 {
+	settings.getFragmentBuildSettings() =  CDPL::ConfGen::FragmentConformerGeneratorSettings::FAST;
+
 	addOption("input,i", "Input file(s).", 
 			  value<StringList>(&inputFiles)->multitoken()->required());
 	addOption("output,o", "Output file.", 
@@ -352,119 +318,79 @@ ConfGenImpl::ConfGenImpl():
 			  boost::lexical_cast<std::string>(boost::thread::hardware_concurrency()) + 
 			  " threads, must be >= 0, 0 disables multithreading).", 
 			  value<std::size_t>(&numThreads)->implicit_value(boost::thread::hardware_concurrency()));
-	addOption("conf-gen-preset,C", "Conformer generation preset to use (SMALL_SET_DIVERSE, MEDIUM_SET_DIVERSE, " 
-			  "LARGE_SET_DIVERSE, SMALL_SET_DENSE, MEDIUM_SET_DENSE, LARGE_SET_DENSE, default: MEDIUM_SET_DIVERSE).", 
-			  value<std::string>()->notifier(boost::bind(&ConfGenImpl::applyConfGenPreset, this, _1)));
-	addOption("mode,m", "Conformer sampling mode (AUTO, STOCHASTIC, SYSTEMATIC, default: " + getSamplingModeString() + ").", 
-			  value<std::string>()->notifier(boost::bind(&ConfGenImpl::setSamplingMode, this, _1)));
-	addOption("e-window,e", "Output energy window for generated conformers (default: " + 
-			  boost::lexical_cast<std::string>(settings.getEnergyWindow()) + ", must be >= 0).",
-			  value<double>()->notifier(boost::bind(&ConfGenImpl::setEnergyWindow, this, _1)));
-	addOption("rmsd,r", "Minimum RMSD for output conformer selection (default: " + 
-			  (boost::format("%.4f") % settings.getMinRMSD()).str() + ", must be >= 0).",
-			  value<double>()->notifier(boost::bind(&ConfGenImpl::setRMSD, this, _1)));
-	addOption("max-num-out-confs,n", "Maximum number of output conformers per molecule (default: " + 
-			  boost::lexical_cast<std::string>(settings.getMaxNumOutputConformers()) + ", must be >= 0, 0 disables limit).",
-			  value<std::size_t>()->notifier(boost::bind(&ConfGenImpl::setMaxNumConfs, this, _1)));
-	addOption("nitrogen-enum-mode,N", "Invertible nitrogen enumeration mode (NONE, ALL, UNSPECIFIED, default: " + 
-			  getNitrogenEnumModeString() + ").", value<std::string>()->notifier(boost::bind(&ConfGenImpl::setNitrogenEnumMode, this, _1)));
-	addOption("enum-rings,R", "Enumerate ring conformers (only effective in systematic sampling, default: true).", 
-			  value<bool>()->implicit_value(true)->notifier(boost::bind(&ConfGenImpl::setEnumRings, this, _1)));
-	addOption("sample-het-hydrogens,H", "Perform torsion sampling for hydrogens on hetero atoms (default: false).", 
-			  value<bool>()->implicit_value(true)->notifier(boost::bind(&ConfGenImpl::setSampleHetAtomHydrogens, this, _1)));
+	addOption("mode,m", "Structure generation method to use (AUTO, DG, FRAGMENT, default: " + getGenerationModeString() + ").", 
+			  value<std::string>()->notifier(boost::bind(&StructGenImpl::setGenerationMode, this, _1)));
 	addOption("sample-angle-tol-ranges,A", "Additionally evaluate conformers generated for angles at the boundaries of the first "
-			  "torsion angle tolerance range (only effective in systematic sampling, default: false).", 
-			  value<bool>()->implicit_value(true)->notifier(boost::bind(&ConfGenImpl::setSampleAngleTolRanges, this, _1)));
-	addOption("include-input,u", "Include original input structure in output conformers (default: false).", 
-			  value<bool>()->implicit_value(true)->notifier(boost::bind(&ConfGenImpl::setIncludeInput, this, _1)));
+			  "torsion angle tolerance range (only effective in systematic sampling, default: true).", 
+			  value<bool>()->implicit_value(true)->notifier(boost::bind(&StructGenImpl::setSampleAngleTolRanges, this, _1)));
 	addOption("from-scratch,S", "Discard input 3D-coordinates and generate structures from scratch (default: true).", 
-			  value<bool>()->implicit_value(true)->notifier(boost::bind(&ConfGenImpl::setGenerateFromScratch, this, _1)));
-	addOption("search-force-field,d", "Conformer search force field (MMFF94, MMFF94_NO_ESTAT, "
+			  value<bool>()->implicit_value(true)->notifier(boost::bind(&StructGenImpl::setGenerateFromScratch, this, _1)));
+	addOption("force-field,d", "Force field used for structure refinement and conformer energy evaluation(MMFF94, MMFF94_NO_ESTAT, "
 			  "MMFF94S, MMFF94S_EXT, MMFF94S_NO_ESTAT, MMFF94S_EXT_NO_ESTAT, default: " +
 			  getForceFieldTypeString(settings.getForceFieldType()) + ").", 
-			  value<std::string>()->notifier(boost::bind(&ConfGenImpl::setSearchForceFieldType, this, _1)));
+			  value<std::string>()->notifier(boost::bind(&StructGenImpl::setForceFieldType, this, _1)));
 	addOption("strict-param,s", "Perform strict MMFF94 parameterization (default: true).", 
-			  value<bool>()->implicit_value(true)->notifier(boost::bind(&ConfGenImpl::setStrictParameterization, this, _1)));
+			  value<bool>()->implicit_value(true)->notifier(boost::bind(&StructGenImpl::setStrictParameterization, this, _1)));
 	addOption("dielectric-const,D", "Dielectric constant used for the calculation of electrostatic interaction energies (default: " +
 			  (boost::format("%.4f") % settings.getDielectricConstant()).str() + ").", 
-			  value<double>()->notifier(boost::bind(&ConfGenImpl::setDielectricConst, this, _1)));
+			  value<double>()->notifier(boost::bind(&StructGenImpl::setDielectricConst, this, _1)));
 	addOption("dist-exponent,E", "Distance exponent used for the calculation of electrostatic interaction energies (default: " +
 			  (boost::format("%.4f") % settings.getDistanceExponent()).str() + ").", 
-			  value<double>()->notifier(boost::bind(&ConfGenImpl::setDistExponent, this, _1)));
-	addOption("timeout,T", "Time in seconds after which molecule conformer generation will be stopped (default: " + 
+			  value<double>()->notifier(boost::bind(&StructGenImpl::setDistExponent, this, _1)));
+	addOption("timeout,T", "Time in seconds after which structure generation will be stopped (default: " + 
 			  boost::lexical_cast<std::string>(settings.getTimeout() / 1000) + "s, must be >= 0, 0 disables timeout).",
-			  value<std::size_t>()->notifier(boost::bind(&ConfGenImpl::setTimeout, this, _1)));
-	addOption("max-num-rot-bonds,X", "Maximum number of allowed rotatable bonds, exceeding this limit causes molecule conf. generation to fail (default: " +
-			  boost::lexical_cast<std::string>(maxNumRotorBonds) + ", negative values disable limit).", 
-			  value<long>(&maxNumRotorBonds));
-	addOption("max-num-sampled-confs,x", "Maximum number of sampled conformers (only effective in stochastic sampling, default: " +
-			  boost::lexical_cast<std::string>(settings.getMaxNumSampledConformers()) + ", must be >= 0, 0 disables limit).", 
-			  value<std::size_t>()->notifier(boost::bind(&ConfGenImpl::setMaxNumSampledConfs, this, _1)));
-	addOption("conv-iter-count,y", "Number of non energetic minimum conformers that have to be generated in succession to "
-			  " consider convergence to be reached and cause conformer sampling to terminate (only effective in stochastic sampling, default: " +
-			  boost::lexical_cast<std::string>(settings.getConvergenceIterationCount()) + ", must be > 0).", 
-			  value<std::size_t>()->notifier(boost::bind(&ConfGenImpl::setConvergenceIterCount, this, _1)));
-	addOption("min-macrocycle-size,Z", "Minimum ring size that triggers a preference for stochastic sampling "
+			  value<std::size_t>()->notifier(boost::bind(&StructGenImpl::setTimeout, this, _1)));
+	addOption("min-macrocycle-size,Z", "Minimum ring size that triggers a preference for distance geometry based structure generation "
 			  "(only effective in sampling mode AUTO, default: " +
 			  boost::lexical_cast<std::string>(settings.getMinMacrocycleSize()) + ", must be > 0).", 
-			  value<std::size_t>()->notifier(boost::bind(&ConfGenImpl::setMinMacrocycleSize, this, _1)));
-	addOption("ref-stop-gradient,P", "Energy gradient norm at which force field structure refinement stops (only effective in stochastic sampling, default: " +
+			  value<std::size_t>()->notifier(boost::bind(&StructGenImpl::setMinMacrocycleSize, this, _1)));
+	addOption("ref-stop-gradient,P", "Energy gradient norm at which force field structure refinement stops (only effective in distance geometry based structure generation, default: " +
 			  (boost::format("%.4f") % settings.getRefinementStopGradient()).str() + ", must be >= 0, 0 disables limit).", 
-			  value<double>()->notifier(boost::bind(&ConfGenImpl::setRefStopGradient, this, _1)));
-	addOption("max-ref-iter,w", "Maximum number of force field structure refinement iterations (only effective in stochastic sampling, default: " +
+			  value<double>()->notifier(boost::bind(&StructGenImpl::setRefStopGradient, this, _1)));
+	addOption("max-ref-iter,w", "Maximum number of force field structure refinement iterations (only effective in distance geometry based structure generation, default: " +
 			  boost::lexical_cast<std::string>(settings.getMaxNumRefinementIterations()) + ", must be >= 0, 0 disables limit).", 
-			  value<std::size_t>()->notifier(boost::bind(&ConfGenImpl::setMaxNumRefIterations, this, _1)));
-	addOption("add-tor-lib,k", "Torsion library to be used in addition to the built-in library (only effective in systematic sampling).",
-			  value<std::string>()->notifier(boost::bind(&ConfGenImpl::addTorsionLib, this, _1)));
-	addOption("set-tor-lib,K", "Torsion library used as a replacement for the built-in library (only effective in systematic sampling).",
-			  value<std::string>()->notifier(boost::bind(&ConfGenImpl::setTorsionLib, this, _1)));
-	addOption("frag-build-preset,B", "Fragment build preset to use (FAST, THOROUGH, only effective in systematic sampling, default: FAST).", 
-			  value<std::string>()->notifier(boost::bind(&ConfGenImpl::applyFragBuildPreset, this, _1)));
-	addOption("build-force-field,b", "Fragment build force field (MMFF94, MMFF94_NO_ESTAT, MMFF94S, "
-			  "MMFF94S_EXT, MMFF94S_NO_ESTAT, MMFF94S_EXT_NO_ESTAT, only effective in systematic sampling, default: " +
-			  getForceFieldTypeString(settings.getFragmentBuildSettings().getForceFieldType()) + ").", 
-			  value<std::string>()->notifier(boost::bind(&ConfGenImpl::setBuildForceFieldType, this, _1)));
-	addOption("add-frag-lib,g", "Fragment library to be used in addition to the built-in library (only effective in systematic sampling).",
-			  value<std::string>()->notifier(boost::bind(&ConfGenImpl::addFragmentLib, this, _1)));
-	addOption("set-frag-lib,G", "Fragment library used as a replacement for the built-in library (only effective in systematic sampling).",
-			  value<std::string>()->notifier(boost::bind(&ConfGenImpl::setFragmentLib, this, _1)));
+			  value<std::size_t>()->notifier(boost::bind(&StructGenImpl::setMaxNumRefIterations, this, _1)));
+	addOption("add-tor-lib,k", "Torsion library to be used in addition to the built-in library (only effective in fragment based structure generation).",
+			  value<std::string>()->notifier(boost::bind(&StructGenImpl::addTorsionLib, this, _1)));
+	addOption("set-tor-lib,K", "Torsion library used as a replacement for the built-in library (only effective in fragment based structure generation).",
+			  value<std::string>()->notifier(boost::bind(&StructGenImpl::setTorsionLib, this, _1)));
+	addOption("frag-build-preset,B", "Fragment build preset to use (FAST, THOROUGH, only effective in fragment based structure generation, default: FAST).", 
+			  value<std::string>()->notifier(boost::bind(&StructGenImpl::applyFragBuildPreset, this, _1)));
+	addOption("add-frag-lib,g", "Fragment library to be used in addition to the built-in library (only effective in fragment based structure generation).",
+			  value<std::string>()->notifier(boost::bind(&StructGenImpl::addFragmentLib, this, _1)));
+	addOption("set-frag-lib,G", "Fragment library used as a replacement for the built-in library (only effective in fragment based structure generation).",
+			  value<std::string>()->notifier(boost::bind(&StructGenImpl::setFragmentLib, this, _1)));
 	addOption("canonicalize,z", "Canonicalize input molecules (default: false).", 
 			  value<bool>(&canonicalize)->implicit_value(true));
-	addOption("hard-timeout,U", "Specifies that exceeding the time limit shall be considered as an error and cause molecule "
-			  "conformer generation to fail (default: false).", 
+	addOption("hard-timeout,U", "Specifies that exceeding the time limit shall be considered as an error and cause "
+			  "structure generation to fail (default: false).", 
 			  value<bool>(&hardTimeout)->implicit_value(true));
-	addOption("energy-sd-entry,Y", "Output conformer energy in the structure data section of SD-files (default: false).", 
-			  value<bool>(&energySDEntry)->implicit_value(true));
-	addOption("energy-comment,M", "Output conformer energy in the comment field (if supported by output format, default: false).", 
-			  value<bool>(&energyComment)->implicit_value(true));
-	addOption("conf-idx-suffix,W", "Append conformer index to the title of multiconf. output molecules (default: false).", 
-			  value<bool>(&confIndexSuffix)->implicit_value(true));
 	addOption("input-format,I", "Input file format (default: auto-detect from file extension).", 
-			  value<std::string>()->notifier(boost::bind(&ConfGenImpl::setInputFormat, this, _1)));
+			  value<std::string>()->notifier(boost::bind(&StructGenImpl::setInputFormat, this, _1)));
 	addOption("output-format,O", "Output file format (default: auto-detect from file extension).", 
-			  value<std::string>()->notifier(boost::bind(&ConfGenImpl::setOutputFormat, this, _1)));
+			  value<std::string>()->notifier(boost::bind(&StructGenImpl::setOutputFormat, this, _1)));
 	addOption("failed-format,F", "Failed molecule output file format (default: auto-detect from file extension).", 
-			  value<std::string>()->notifier(boost::bind(&ConfGenImpl::setFailedOutputFormat, this, _1)));
+			  value<std::string>()->notifier(boost::bind(&StructGenImpl::setFailedOutputFormat, this, _1)));
 
 	addOptionLongDescriptions();
 }
 
-const char* ConfGenImpl::getProgName() const
+const char* StructGenImpl::getProgName() const
 {
-    return "ConfGen";
+    return "StructGen";
 }
 
-const char* ConfGenImpl::getProgCopyright() const
+const char* StructGenImpl::getProgCopyright() const
 {
     return "Thomas A. Seidel";
 }
 
-const char* ConfGenImpl::getProgAboutText() const
+const char* StructGenImpl::getProgAboutText() const
 {
-	return "Performs conformer generation for a set of input molecules.";
+	return "Performs 3D structure generation for a set of input molecules.";
 }
 
-void ConfGenImpl::addOptionLongDescriptions()
+void StructGenImpl::addOptionLongDescriptions()
 {
 	StringList formats;
 	std::string formats_str = "Supported Input Formats:\n";
@@ -513,41 +439,16 @@ void ConfGenImpl::addOptionLongDescriptions()
 	formats_str.pop_back();
 
 	addOptionLongDescription("output", 
-							 "Specifies the output file where the generated conformers will be stored.\n\n" +
+							 "Specifies the output file where the generated structures will be stored.\n\n" +
 							 formats_str +
 							 "\nNote that only storage formats make sense that allow to store atom 3D-coordinates!");
 
 	addOptionLongDescription("failed", 
-							 "Specifies the output file for molecules where conformer generation failed.\n\n" +
+							 "Specifies the output file for molecules where structure generation failed.\n\n" +
 							 formats_str);
 }
 
-void ConfGenImpl::applyConfGenPreset(const std::string& pres_str)
-{
-	using namespace CDPL::ConfGen;
-
-	std::string pres = pres_str;
-	boost::to_upper(pres);
-
-	if (pres == "SMALL_SET_DIVERSE")
-		settings = ConformerGeneratorSettings::SMALL_SET_DIVERSE;
-	else if (pres == "MEDIUM_SET_DIVERSE")
-		settings = ConformerGeneratorSettings::MEDIUM_SET_DIVERSE;
-	else if (pres == "LARGE_SET_DIVERSE")
-		settings = ConformerGeneratorSettings::LARGE_SET_DIVERSE;
-	else if (pres == "SMALL_SET_DENSE")
-		settings = ConformerGeneratorSettings::SMALL_SET_DENSE;
-	else if (pres == "MEDIUM_SET_DENSE")
-		settings = ConformerGeneratorSettings::MEDIUM_SET_DENSE;
-	else if (pres == "LARGE_SET_DENSE")
-		settings = ConformerGeneratorSettings::LARGE_SET_DENSE;
-	else 
-		throwValidationError("conf-gen-preset");
-
-	confGenPreset = pres;
-}
-
-void ConfGenImpl::applyFragBuildPreset(const std::string& pres_str)
+void StructGenImpl::applyFragBuildPreset(const std::string& pres_str)
 {
 	std::string pres = pres_str;
 	boost::to_upper(pres);
@@ -562,7 +463,7 @@ void ConfGenImpl::applyFragBuildPreset(const std::string& pres_str)
 	fragBuildPreset = pres;
 }
 
-void ConfGenImpl::setSamplingMode(const std::string& mode_str)
+void StructGenImpl::setGenerationMode(const std::string& mode_str)
 {
 	using namespace CDPL::ConfGen;
 
@@ -570,44 +471,31 @@ void ConfGenImpl::setSamplingMode(const std::string& mode_str)
 	boost::to_upper(smpl_mode);
 
 	if (smpl_mode == "AUTO")
-		settings.setSamplingMode(ConformerSamplingMode::AUTO);
-	else if (smpl_mode == "SYSTEMATIC")
-		settings.setSamplingMode(ConformerSamplingMode::SYSTEMATIC);
-	else if (smpl_mode == "STOCHASTIC")
-		settings.setSamplingMode(ConformerSamplingMode::STOCHASTIC);
+		settings.setGenerationMode(StructureGenerationMode::AUTO);
+	else if (smpl_mode == "FRAGMENT")
+		settings.setGenerationMode(StructureGenerationMode::FRAGMENT);
+	else if (smpl_mode == "DG")
+		settings.setGenerationMode(StructureGenerationMode::DISTANCE_GEOMETRY);
 	else
 		throwValidationError("mode");
 }
 
-void ConfGenImpl::setTimeout(std::size_t timeout)
+void StructGenImpl::setTimeout(std::size_t timeout)
 {
 	settings.setTimeout(timeout * 1000);
 }
 
-void ConfGenImpl::setDielectricConst(double de_const)
+void StructGenImpl::setDielectricConst(double de_const)
 {
 	settings.setDielectricConstant(de_const);
 }
 
-void ConfGenImpl::setDistExponent(double exp)
+void StructGenImpl::setDistExponent(double exp)
 {
 	settings.setDistanceExponent(exp);
 }
 
-void ConfGenImpl::setMaxNumSampledConfs(std::size_t max_confs)
-{
-	settings.setMaxNumSampledConformers(max_confs);
-}
-
-void ConfGenImpl::setConvergenceIterCount(std::size_t iter_count)
-{
-	if (iter_count == 0)
-		throwValidationError("conv-iter-count");
-
-	settings.setConvergenceIterationCount(iter_count);
-}
-
-void ConfGenImpl::setMinMacrocycleSize(std::size_t min_size)
+void StructGenImpl::setMinMacrocycleSize(std::size_t min_size)
 {
 	if (min_size == 0)
 		throwValidationError("min-macrocycle-size");
@@ -615,7 +503,7 @@ void ConfGenImpl::setMinMacrocycleSize(std::size_t min_size)
 	settings.setMinMacrocycleSize(min_size);
 }
 
-void ConfGenImpl::setRefStopGradient(double g_norm)
+void StructGenImpl::setRefStopGradient(double g_norm)
 {
 	if (g_norm < 0.0)
 		throwValidationError("ref-stop-gradient");
@@ -623,91 +511,36 @@ void ConfGenImpl::setRefStopGradient(double g_norm)
 	settings.setRefinementStopGradient(g_norm);
 }
 
-void ConfGenImpl::setMaxNumRefIterations(std::size_t num_iter)
+void StructGenImpl::setMaxNumRefIterations(std::size_t num_iter)
 {
 	settings.setMaxNumRefinementIterations(num_iter);
 }
 
-void ConfGenImpl::setStrictParameterization(bool strict)
+void StructGenImpl::setStrictParameterization(bool strict)
 {
 	settings.strictForceFieldParameterization(strict);
 	settings.getFragmentBuildSettings().strictForceFieldParameterization(strict);
 }
 
-void ConfGenImpl::setSearchForceFieldType(const std::string& type_str)
+void StructGenImpl::setForceFieldType(const std::string& type_str)
 {
-	settings.setForceFieldType(stringToForceFieldType(type_str, "search-force-field"));
+	unsigned int ff_type = stringToForceFieldType(type_str);
+
+	settings.setForceFieldType(ff_type);
+	settings.getFragmentBuildSettings().setForceFieldType(ff_type);
 }
 
-void ConfGenImpl::setBuildForceFieldType(const std::string& type_str)
-{
-	settings.getFragmentBuildSettings().setForceFieldType(stringToForceFieldType(type_str, "build-force-field"));
-}
-
-void ConfGenImpl::setRMSD(double rmsd)
-{
-	if (rmsd < 0)
-		throwValidationError("rmsd");
-
-	settings.setMinRMSD(rmsd);
-}
-
-void ConfGenImpl::setEnergyWindow(double ewin)
-{
-	if (ewin < 0)
-		throwValidationError("e-window");
-
-	settings.setEnergyWindow(ewin);
-}
-
-void ConfGenImpl::setMaxNumConfs(std::size_t max_confs)
-{
-	settings.setMaxNumOutputConformers( max_confs);
-}
-
-void ConfGenImpl::setNitrogenEnumMode(const std::string& mode_str)
-{
-	using namespace CDPL::ConfGen;
-
-	std::string uc_mode = mode_str;
-	boost::to_upper(uc_mode);
-
-	if (uc_mode == "NONE")
-		settings.setNitrogenEnumerationMode(NitrogenEnumerationMode::NONE);
-	else if (uc_mode == "ALL")
-		settings.setNitrogenEnumerationMode(NitrogenEnumerationMode::ALL);
-	else if (uc_mode == "UNSPECIFIED")
-		settings.setNitrogenEnumerationMode(NitrogenEnumerationMode::UNSPECIFIED_STEREO);
-	else
-		throwValidationError("nitrogen-enum-mode");
-}
-
-void ConfGenImpl::setEnumRings(bool enumerate)
-{
-	settings.enumerateRings(enumerate);
-}
-
-void ConfGenImpl::setSampleHetAtomHydrogens(bool sample)
-{
-	settings.sampleHeteroAtomHydrogens(sample);
-}
-
-void ConfGenImpl::setSampleAngleTolRanges(bool sample)
+void StructGenImpl::setSampleAngleTolRanges(bool sample)
 {
 	settings.sampleAngleToleranceRanges(sample);
 }
 
-void ConfGenImpl::setIncludeInput(bool include)
-{
-	settings.includeInputCoordinates(include);
-}
-
-void ConfGenImpl::setGenerateFromScratch(bool from_scratch)
+void StructGenImpl::setGenerateFromScratch(bool from_scratch)
 {
 	settings.generateCoordinatesFromScratch(from_scratch);
 }
 
-void ConfGenImpl::setInputFormat(const std::string& file_ext)
+void StructGenImpl::setInputFormat(const std::string& file_ext)
 {
 	using namespace CDPL;
 
@@ -720,7 +553,7 @@ void ConfGenImpl::setInputFormat(const std::string& file_ext)
 		throwValidationError("input-format");
 }
 
-void ConfGenImpl::setOutputFormat(const std::string& file_ext)
+void StructGenImpl::setOutputFormat(const std::string& file_ext)
 {
 	using namespace CDPL;
 
@@ -733,7 +566,7 @@ void ConfGenImpl::setOutputFormat(const std::string& file_ext)
 		throwValidationError("output-format");
 }
 
-void ConfGenImpl::setFailedOutputFormat(const std::string& file_ext)
+void StructGenImpl::setFailedOutputFormat(const std::string& file_ext)
 {
 	using namespace CDPL;
 
@@ -746,31 +579,31 @@ void ConfGenImpl::setFailedOutputFormat(const std::string& file_ext)
 		throwValidationError("failed-output-format");
 }
 
-void ConfGenImpl::addTorsionLib(const std::string& lib_file)
+void StructGenImpl::addTorsionLib(const std::string& lib_file)
 {
 	torsionLibName = lib_file;
 	replaceBuiltinTorLib = false;
 }
 
-void ConfGenImpl::setTorsionLib(const std::string& lib_file)
+void StructGenImpl::setTorsionLib(const std::string& lib_file)
 {
 	torsionLibName = lib_file;
 	replaceBuiltinTorLib = true;
 }
 
-void ConfGenImpl::addFragmentLib(const std::string& lib_file)
+void StructGenImpl::addFragmentLib(const std::string& lib_file)
 {
 	fragmentLibName = lib_file;
 	replaceBuiltinFragLib = false;
 }
 
-void ConfGenImpl::setFragmentLib(const std::string& lib_file)
+void StructGenImpl::setFragmentLib(const std::string& lib_file)
 {
 	fragmentLibName = lib_file;
 	replaceBuiltinFragLib = true;
 }
 
-int ConfGenImpl::process()
+int StructGenImpl::process()
 {
 	startTime = Clock::now();
 
@@ -815,11 +648,11 @@ int ConfGenImpl::process()
 	return EXIT_SUCCESS;
 }
 
-void ConfGenImpl::processSingleThreaded()
+void StructGenImpl::processSingleThreaded()
 {
 	using namespace CDPL;
 
-	ConformerGenerationWorker worker(this);
+	StructureGenerationWorker worker(this);
 
 	worker();
 
@@ -831,28 +664,28 @@ void ConfGenImpl::processSingleThreaded()
 	if (termSignalCaught())
 		return;
 
-	printStatistics(worker.getNumProcMolecules(), worker.getNumFailedMolecules(), worker.getNumGenConformers(),
+	printStatistics(worker.getNumProcMolecules(), worker.getNumFailedMolecules(),
 					boost::chrono::duration_cast<boost::chrono::duration<std::size_t> >(Clock::now() - startTime).count());
 }
 
-void ConfGenImpl::processMultiThreaded()
+void StructGenImpl::processMultiThreaded()
 {
 	using namespace CDPL;
 
-	typedef boost::shared_ptr<ConformerGenerationWorker> ConformerGenerationWorkerPtr;
-	typedef std::vector<ConformerGenerationWorkerPtr> ConformerGenerationWorkerList;
+	typedef boost::shared_ptr<StructureGenerationWorker> StructureGenerationWorkerPtr;
+	typedef std::vector<StructureGenerationWorkerPtr> StructureGenerationWorkerList;
 
 	boost::thread_group thread_grp;
-	ConformerGenerationWorkerList worker_list;
+	StructureGenerationWorkerList worker_list;
 
 	try {
 		for (std::size_t i = 0; i < numThreads; i++) {
 			if (termSignalCaught())
 				break;
 
-			ConformerGenerationWorkerPtr worker_ptr(new ConformerGenerationWorker(this));
+			StructureGenerationWorkerPtr worker_ptr(new StructureGenerationWorker(this));
 
-			thread_grp.create_thread(boost::bind(&ConformerGenerationWorker::operator(), worker_ptr));
+			thread_grp.create_thread(boost::bind(&StructureGenerationWorker::operator(), worker_ptr));
 			worker_list.push_back(worker_ptr);
 		}
 
@@ -883,22 +716,20 @@ void ConfGenImpl::processMultiThreaded()
 	
 	std::size_t num_proc_mols = 0;
 	std::size_t num_failed_mols = 0;
-	std::size_t num_gen_confs = 0;
 
 	for (std::size_t i = 0; i < numThreads; i++) {
-		const ConformerGenerationWorker& worker = *worker_list[i];
+		const StructureGenerationWorker& worker = *worker_list[i];
 
 		num_proc_mols += worker.getNumProcMolecules();
 		num_failed_mols += worker.getNumFailedMolecules();
-		num_gen_confs += worker.getNumGenConformers();
 	}
 
-	printStatistics(num_proc_mols, num_failed_mols, num_gen_confs,
+	printStatistics(num_proc_mols, num_failed_mols,
 					boost::chrono::duration_cast<boost::chrono::duration<std::size_t> >(Clock::now() - startTime).count());
 
 }
 
-void ConfGenImpl::setErrorMessage(const std::string& msg)
+void StructGenImpl::setErrorMessage(const std::string& msg)
 {
 	if (numThreads > 0) {
 		boost::lock_guard<boost::mutex> lock(mutex);
@@ -912,7 +743,7 @@ void ConfGenImpl::setErrorMessage(const std::string& msg)
 		errorMessage = msg;
 }
 
-bool ConfGenImpl::haveErrorMessage()
+bool StructGenImpl::haveErrorMessage()
 {
 	if (numThreads > 0) {
 		boost::lock_guard<boost::mutex> lock(mutex);
@@ -922,12 +753,11 @@ bool ConfGenImpl::haveErrorMessage()
 	return !errorMessage.empty();
 }
 
-void ConfGenImpl::printStatistics(std::size_t num_proc_mols, std::size_t num_failed_mols, std::size_t num_gen_confs, std::size_t proc_time)
+void StructGenImpl::printStatistics(std::size_t num_proc_mols, std::size_t num_failed_mols, std::size_t proc_time)
 {
 	printMessage(INFO, "Statistics:");
 	printMessage(INFO, " Processed Molecules:  " + boost::lexical_cast<std::string>(num_proc_mols));
 	printMessage(INFO, " Molecules Failed:     " + boost::lexical_cast<std::string>(num_failed_mols));
-	printMessage(INFO, " Generated Conformers: " + boost::lexical_cast<std::string>(num_gen_confs));
 
 	if (num_proc_mols > 0)
 		printMessage(INFO, " Processing Time:      " + AppUtils::formatTimeDuration(proc_time) + 
@@ -938,7 +768,7 @@ void ConfGenImpl::printStatistics(std::size_t num_proc_mols, std::size_t num_fai
 	printMessage(INFO, "");
 }
 
-std::size_t ConfGenImpl::readNextMolecule(CDPL::Chem::Molecule& mol)
+std::size_t StructGenImpl::readNextMolecule(CDPL::Chem::Molecule& mol)
 {
 	if (termSignalCaught())
 		return 0;
@@ -955,7 +785,7 @@ std::size_t ConfGenImpl::readNextMolecule(CDPL::Chem::Molecule& mol)
 	return doReadNextMolecule(mol);
 }
 
-std::size_t ConfGenImpl::doReadNextMolecule(CDPL::Chem::Molecule& mol)
+std::size_t StructGenImpl::doReadNextMolecule(CDPL::Chem::Molecule& mol)
 {
 	while (true) {
 		try {
@@ -986,7 +816,7 @@ std::size_t ConfGenImpl::doReadNextMolecule(CDPL::Chem::Molecule& mol)
 	return 0;
 }
 
-void ConfGenImpl::writeMolecule(const CDPL::Chem::MolecularGraph& mol, bool failed)
+void StructGenImpl::writeMolecule(const CDPL::Chem::MolecularGraph& mol, bool failed)
 {
 	if (numThreads > 0) {
 		boost::lock_guard<boost::mutex> lock(writeMolMutex);
@@ -997,7 +827,7 @@ void ConfGenImpl::writeMolecule(const CDPL::Chem::MolecularGraph& mol, bool fail
 		doWriteMolecule(mol, failed);
 }
 
-void ConfGenImpl::doWriteMolecule(const CDPL::Chem::MolecularGraph& mol, bool failed)
+void StructGenImpl::doWriteMolecule(const CDPL::Chem::MolecularGraph& mol, bool failed)
 {
 	if (failed) {
 		if (!failedOutputWriter->write(mol))
@@ -1010,7 +840,7 @@ void ConfGenImpl::doWriteMolecule(const CDPL::Chem::MolecularGraph& mol, bool fa
 		throw CDPL::Base::IOError("could not write generated conformers");
 }
 
-void ConfGenImpl::checkInputFiles() const
+void StructGenImpl::checkInputFiles() const
 {
 	using namespace CDPL;
 
@@ -1037,7 +867,7 @@ void ConfGenImpl::checkInputFiles() const
 		throw Base::IOError("fragment library file '" + fragmentLibName + "' does not exist");
 }
 
-void ConfGenImpl::printMessage(VerbosityLevel level, const std::string& msg, bool nl, bool file_only)
+void StructGenImpl::printMessage(VerbosityLevel level, const std::string& msg, bool nl, bool file_only)
 {
 	if (numThreads == 0) {
 		CmdLineBase::printMessage(level, msg, nl, file_only);
@@ -1049,7 +879,7 @@ void ConfGenImpl::printMessage(VerbosityLevel level, const std::string& msg, boo
 	CmdLineBase::printMessage(level, msg, nl, file_only);
 }
 
-void ConfGenImpl::printOptionSummary()
+void StructGenImpl::printOptionSummary()
 {
 	printMessage(VERBOSE, "Option Summary:");
 	printMessage(VERBOSE, " Input File(s):                       " + inputFiles[0]);
@@ -1059,31 +889,19 @@ void ConfGenImpl::printOptionSummary()
 
 	printMessage(VERBOSE, " Output File:                         " + outputFile);
 	printMessage(VERBOSE, " Failed Molecule Output File:         " + (failedFile.empty() ? std::string("None") : failedFile));
- 	printMessage(VERBOSE, " Conformer Generation Preset:         " + confGenPreset);
  	printMessage(VERBOSE, " Fragment Build Preset:               " + fragBuildPreset);
- 	printMessage(VERBOSE, " Conformer Sampling Mode:             " + getSamplingModeString());
-	printMessage(VERBOSE, " Max. Num. Output Conformers:         " + boost::lexical_cast<std::string>(settings.getMaxNumOutputConformers()));
-	printMessage(VERBOSE, " Min. RMSD:                           " + (boost::format("%.4f") % settings.getMinRMSD()).str());
-	printMessage(VERBOSE, " Energy Window:                       " + boost::lexical_cast<std::string>(settings.getEnergyWindow()));
- 	printMessage(VERBOSE, " Nitrogen Enumeration Mode:           " + getNitrogenEnumModeString());
- 	printMessage(VERBOSE, " Enumerate Ring Conformers:           " + std::string(settings.enumerateRings() ? "Yes" : "No"));
- 	printMessage(VERBOSE, " Sample Hetero Atom Hydrogens:        " + std::string(settings.sampleHeteroAtomHydrogens() ? "Yes" : "No"));
+ 	printMessage(VERBOSE, " Structure Generation Mode:           " + getGenerationModeString());
  	printMessage(VERBOSE, " Sample Whole Tor. Angle Tol. Range:  " + std::string(settings.sampleAngleToleranceRanges() ? "Yes" : "No"));
- 	printMessage(VERBOSE, " Include Input Structure:             " + std::string(settings.includeInputCoordinates() ? "Yes" : "No"));
  	printMessage(VERBOSE, " Generate Coordinates From Scratch:   " + std::string(settings.generateCoordinatesFromScratch() ? "Yes" : "No"));
-	printMessage(VERBOSE, " Search Force Field Type:             " + getForceFieldTypeString(settings.getForceFieldType()));
-	printMessage(VERBOSE, " Build Force Field Type:              " + getForceFieldTypeString(settings.getFragmentBuildSettings().getForceFieldType()));
+	printMessage(VERBOSE, " Force Field Type:                    " + getForceFieldTypeString(settings.getForceFieldType()));
 	printMessage(VERBOSE, " Strict Force Field Parameterization: " + std::string(settings.strictForceFieldParameterization() ? "Yes" : "No"));
 	printMessage(VERBOSE, " Dielectric Constant:                 " + (boost::format("%.4f") % settings.getDielectricConstant()).str());
 	printMessage(VERBOSE, " Distance Exponent:                   " + (boost::format("%.4f") % settings.getDistanceExponent()).str());
-	printMessage(VERBOSE, " Max. Num. Sampled Conformers:        " + boost::lexical_cast<std::string>(settings.getMaxNumSampledConformers()));
-	printMessage(VERBOSE, " Convergence Iteration Count:         " + boost::lexical_cast<std::string>(settings.getConvergenceIterationCount()));
 	printMessage(VERBOSE, " Min. Macrocycle Size:                " + boost::lexical_cast<std::string>(settings.getMinMacrocycleSize()));
 	printMessage(VERBOSE, " Refinement Stop Gradient:            " + (boost::format("%.4f") % settings.getRefinementStopGradient()).str());
 	printMessage(VERBOSE, " Max. Num. Refinement Iterations:     " + boost::lexical_cast<std::string>(settings.getMaxNumRefinementIterations()));
 	printMessage(VERBOSE, " Timeout:                             " + boost::lexical_cast<std::string>(settings.getTimeout() / 1000) + "s");
  	printMessage(VERBOSE, " Hard Timeout:                        " + std::string(hardTimeout ? "Yes" : "No"));
-	printMessage(VERBOSE, " Max. Num. Allowed Rotatable Bonds:   " + (maxNumRotorBonds < 0 ? std::string("No Limit") : boost::lexical_cast<std::string>(maxNumRotorBonds)));
 	printMessage(VERBOSE, " Multithreading:                      " + std::string(numThreads > 0 ? "Yes" : "No"));
 
 	if (numThreads > 0)
@@ -1095,13 +913,10 @@ void ConfGenImpl::printOptionSummary()
 	printMessage(VERBOSE, " Output File Format:                  " + (outputHandler ? outputHandler->getDataFormat().getName() : std::string("Auto-detect")));
 	printMessage(VERBOSE, " Failed Molecule File Format:         " + (failedOutputHandler ? failedOutputHandler->getDataFormat().getName() : std::string("Auto-detect")));
 	printMessage(VERBOSE, " Canonicalize Input Molecules:        " + std::string(canonicalize ? "Yes" : "No"));
-	printMessage(VERBOSE, " Output Conf. Energy SD-Entry:        " + std::string(energySDEntry ? "Yes" : "No"));
-	printMessage(VERBOSE, " Output Conf. Energy Comment:         " + std::string(energyComment ? "Yes" : "No"));
-	printMessage(VERBOSE, " Append Conf. Index to Mol. Title:    " + std::string(confIndexSuffix ? "Yes" : "No"));
 	printMessage(VERBOSE, "");
 }
 
-void ConfGenImpl::loadTorsionLibrary()
+void StructGenImpl::loadTorsionLibrary()
 {
 	using namespace CDPL;
 	using namespace CDPL::ConfGen;
@@ -1119,7 +934,7 @@ void ConfGenImpl::loadTorsionLibrary()
 	torsionLib.reset(new TorsionLibrary());
 	torsionLib->load(is);
 
-	if (ConfGenImpl::termSignalCaught())
+	if (StructGenImpl::termSignalCaught())
 		return;
 
 	if (!is)
@@ -1130,7 +945,7 @@ void ConfGenImpl::loadTorsionLibrary()
 	printMessage(INFO, "");
 }
 
-void ConfGenImpl::loadFragmentLibrary()
+void StructGenImpl::loadFragmentLibrary()
 {
 	using namespace CDPL;
 	using namespace CDPL::ConfGen;
@@ -1148,7 +963,7 @@ void ConfGenImpl::loadFragmentLibrary()
 	fragmentLib.reset(new FragmentLibrary());
 	fragmentLib->load(is);
 
-	if (ConfGenImpl::termSignalCaught())
+	if (StructGenImpl::termSignalCaught())
 		return;
 
 	if (!is)
@@ -1158,7 +973,7 @@ void ConfGenImpl::loadFragmentLibrary()
 	printMessage(INFO, "");
 }
 
-void ConfGenImpl::initInputReader()
+void StructGenImpl::initInputReader()
 {
 	using namespace CDPL;
 
@@ -1200,14 +1015,14 @@ void ConfGenImpl::initInputReader()
 		reader_ptr->unregisterIOCallback(cb_id);
 	}
 
-	if (ConfGenImpl::termSignalCaught())
+	if (StructGenImpl::termSignalCaught())
 		return;
 
 	printMessage(INFO, " - Found " + boost::lexical_cast<std::string>(inputReader.getNumRecords()) + " input molecule(s)");
 	printMessage(INFO, "");
 }
 
-void ConfGenImpl::initOutputWriters()
+void StructGenImpl::initOutputWriters()
 {
 	using namespace CDPL;
 
@@ -1218,13 +1033,8 @@ void ConfGenImpl::initOutputWriters()
 
 	outputWriter = output_handler->createWriter(outputFile);
 
-	setMultiConfExportParameter(*outputWriter, true);
-	setMDLOutputConfEnergyAsSDEntryParameter(*outputWriter, energySDEntry);
-	setOutputConfEnergyAsCommentParameter(*outputWriter, energyComment);
+	setMultiConfExportParameter(*outputWriter, false);
 	setSMILESRecordFormatParameter(*outputWriter, "SN");
-
-	if (confIndexSuffix)
-		setConfIndexNameSuffixPatternParameter(*outputWriter," %I%");
 
 	if (!failedFile.empty()) {
 		output_handler = getFailedOutputHandler(failedFile);
@@ -1239,7 +1049,7 @@ void ConfGenImpl::initOutputWriters()
 	}
 }
 
-ConfGenImpl::InputHandlerPtr ConfGenImpl::getInputHandler(const std::string& file_path) const
+StructGenImpl::InputHandlerPtr StructGenImpl::getInputHandler(const std::string& file_path) const
 {
 	if (inputHandler)
 		return inputHandler;
@@ -1247,7 +1057,7 @@ ConfGenImpl::InputHandlerPtr ConfGenImpl::getInputHandler(const std::string& fil
 	return AppUtils::getInputHandler<CDPL::Chem::Molecule>(file_path);
 }
 
-ConfGenImpl::OutputHandlerPtr ConfGenImpl::getOutputHandler(const std::string& file_path) const
+StructGenImpl::OutputHandlerPtr StructGenImpl::getOutputHandler(const std::string& file_path) const
 {
 	if (outputHandler)
 		return outputHandler;
@@ -1255,7 +1065,7 @@ ConfGenImpl::OutputHandlerPtr ConfGenImpl::getOutputHandler(const std::string& f
 	return AppUtils::getOutputHandler<CDPL::Chem::MolecularGraph>(file_path);
 }
 
-ConfGenImpl::OutputHandlerPtr ConfGenImpl::getFailedOutputHandler(const std::string& file_path) const
+StructGenImpl::OutputHandlerPtr StructGenImpl::getFailedOutputHandler(const std::string& file_path) const
 {
 	if (failedOutputHandler)
 		return failedOutputHandler;
@@ -1263,7 +1073,7 @@ ConfGenImpl::OutputHandlerPtr ConfGenImpl::getFailedOutputHandler(const std::str
 	return AppUtils::getOutputHandler<CDPL::Chem::MolecularGraph>(file_path);
 }
 
-unsigned int ConfGenImpl::stringToForceFieldType(const std::string& type_str, const char* opt)
+unsigned int StructGenImpl::stringToForceFieldType(const std::string& type_str)
 {
 	using namespace CDPL::ConfGen;
 
@@ -1283,12 +1093,12 @@ unsigned int ConfGenImpl::stringToForceFieldType(const std::string& type_str, co
 	else if (uc_type == "MMFF94S_EXT_NO_ESTAT")
 		return ForceFieldType::MMFF94S_EXT_NO_ESTAT;
 	else
-		throwValidationError(opt);
+		throwValidationError("force-field");
 
 	return ForceFieldType::MMFF94S_EXT_NO_ESTAT;
 }
 
-std::string ConfGenImpl::getForceFieldTypeString(unsigned int ff_type) const
+std::string StructGenImpl::getForceFieldTypeString(unsigned int ff_type) const
 {
 	using namespace CDPL::ConfGen;
 
@@ -1313,43 +1123,25 @@ std::string ConfGenImpl::getForceFieldTypeString(unsigned int ff_type) const
 	return "UNKNOWN";
 }
 
-std::string ConfGenImpl::getSamplingModeString() const
+std::string StructGenImpl::getGenerationModeString() const
 {
 	using namespace CDPL::ConfGen;
 
-	unsigned int mode = settings.getSamplingMode();
+	unsigned int mode = settings.getGenerationMode();
 
-	if (mode == ConformerSamplingMode::AUTO)
+	if (mode == StructureGenerationMode::AUTO)
 		return "AUTO";
 	
-	if (mode == ConformerSamplingMode::SYSTEMATIC)
-		return "SYSTEMATIC";
+	if (mode == StructureGenerationMode::FRAGMENT)
+		return "FRAGMENT";
 
-	if (mode == ConformerSamplingMode::STOCHASTIC)
-		return "STOCHASTIC";
+	if (mode == StructureGenerationMode::DISTANCE_GEOMETRY)
+		return "DG";
 	
 	return "UNKNOWN";
 }
 
-std::string ConfGenImpl::getNitrogenEnumModeString() const
-{
-	using namespace CDPL::ConfGen;
-
-	unsigned int mode = settings.getNitrogenEnumerationMode();
-
-	if (mode == NitrogenEnumerationMode::NONE)
-		return "NONE";
-	
-	if (mode == NitrogenEnumerationMode::ALL)
-		return "ALL";
-
-	if (mode == NitrogenEnumerationMode::UNSPECIFIED_STEREO)
-		return "UNSPECIFIED";
-	
-	return "UNKNOWN";
-}
-
-std::string ConfGenImpl::createMoleculeIdentifier(std::size_t rec_idx, const CDPL::Chem::Molecule& mol)
+std::string StructGenImpl::createMoleculeIdentifier(std::size_t rec_idx, const CDPL::Chem::Molecule& mol)
 {
 	if (!getName(mol).empty())
 		return ('\'' + getName(mol) + "' (" + createMoleculeIdentifier(rec_idx) + ')');
@@ -1357,7 +1149,7 @@ std::string ConfGenImpl::createMoleculeIdentifier(std::size_t rec_idx, const CDP
 	return createMoleculeIdentifier(rec_idx);
 }
 
-std::string ConfGenImpl::createMoleculeIdentifier(std::size_t rec_idx)
+std::string StructGenImpl::createMoleculeIdentifier(std::size_t rec_idx)
 {
 	return (boost::lexical_cast<std::string>(rec_idx) + '/' + boost::lexical_cast<std::string>(inputReader.getNumRecords()));
 }

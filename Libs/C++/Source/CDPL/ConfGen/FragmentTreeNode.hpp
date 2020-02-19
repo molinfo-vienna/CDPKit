@@ -124,7 +124,7 @@ namespace CDPL
 			void addConformer(const ConformerData& conf_data);
 			void addConformer(const ConformerData::SharedPointer& conf_data);
 
-			unsigned int generateConformers(double e_window = 0.0, bool exhaustive = false);
+			unsigned int generateConformers(double e_window = 0.0, bool exhaustive = false, std::size_t max_pool_size = 0);
 
 			double calcMMFF94Energy(const Math::Vector3DArray& coords);
 		

@@ -142,9 +142,9 @@ namespace CDPL
 			
 			bool setupMMFF94Parameters();
 			
-			unsigned int generateFragmentConformers();
+			unsigned int generateFragmentConformers(bool struct_gen_only);
 			
-			unsigned int generateFragmentConformerCombinations(bool struct_gen_only);
+			unsigned int generateFragmentConformerCombinations();
 		
 			void generateFragmentConformerCombinations(std::size_t frag_idx, double comb_energy);
 

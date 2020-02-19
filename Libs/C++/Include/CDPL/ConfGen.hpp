@@ -54,6 +54,7 @@
 #include "CDPL/ConfGen/FragmentType.hpp"
 #include "CDPL/ConfGen/ForceFieldType.hpp"
 #include "CDPL/ConfGen/ConformerSamplingMode.hpp"
+#include "CDPL/ConfGen/StructureGenerationMode.hpp"
 #include "CDPL/ConfGen/ReturnCode.hpp"
 #include "CDPL/ConfGen/NitrogenEnumerationMode.hpp"
 #include "CDPL/ConfGen/TorsionDriverSettings.hpp"

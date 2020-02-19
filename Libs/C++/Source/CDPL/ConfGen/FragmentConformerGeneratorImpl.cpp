@@ -308,8 +308,11 @@ bool ConfGen::FragmentConformerGeneratorImpl::setupForceField()
 	return true;
 }
 
-void ConfGen::FragmentConformerGeneratorImpl::setupRandomConformerGeneration()
+void ConfGen::FragmentConformerGeneratorImpl::setupRandomConformerGeneration(bool reg_stereo)
 {
+	dgStructureGen.getSettings().regardAtomConfiguration(reg_stereo);
+	dgStructureGen.getSettings().regardBondConfiguration(reg_stereo);
+
 	dgStructureGen.setup(*molGraph, mmff94Data);
 
 	coreAtomMask = dgStructureGen.getExcludedHydrogenMask();
@@ -326,7 +329,7 @@ unsigned int ConfGen::FragmentConformerGeneratorImpl::generateRigidRingConformer
 		if (logCallback)
 			logCallback("Generating rigid ring system coordinates...\n");
 
-		setupRandomConformerGeneration();
+		setupRandomConformerGeneration(true);
 		dgStructureGen.getSettings().setBoxSize(coreAtomMask.count());
 
 		ConformerData::SharedPointer conf_data = allocConformerData();
@@ -353,7 +356,7 @@ unsigned int ConfGen::FragmentConformerGeneratorImpl::generateChainConformer()
 	if (logCallback)
 		logCallback("Generating chain conformers...\n");
 
-	setupRandomConformerGeneration();
+	setupRandomConformerGeneration(false);
 	dgStructureGen.getSettings().setBoxSize(coreAtomMask.count() * 2);
 
 	const FragmentConformerGeneratorSettings::FragmentSettings& chain_settings = settings.getChainSettings();
@@ -388,7 +391,7 @@ unsigned int ConfGen::FragmentConformerGeneratorImpl::generateChainConformer()
 
 		if (generateRandomConformer(*conf_data) != ReturnCode::SUCCESS) 
 			continue;
-
+		
 		double energy = conf_data->getEnergy();
 
 		if (outputConfs.empty() || energy < min_energy)
@@ -419,7 +422,7 @@ unsigned int ConfGen::FragmentConformerGeneratorImpl::generateFlexibleRingConfor
 	if (logCallback)
 		logCallback("Generating flexible ring system conformers...\n");
 
-	setupRandomConformerGeneration();
+	setupRandomConformerGeneration(true);
 	dgStructureGen.getSettings().setBoxSize(coreAtomMask.count());
 
 	getRingAtomIndices();
@@ -587,15 +590,15 @@ bool ConfGen::FragmentConformerGeneratorImpl::generateHydrogenCoordsAndMinimize(
 
 	for (std::size_t i = 0; max_ref_iters == 0 || i < max_ref_iters; i++) {
 		if (energyMinimizer.iterate(energy, conf_coords_data, energyGradient) != BFGSMinimizer::SUCCESS) {
-			if ((boost::math::isnan)(energy))
+			if ((boost::math::isnan)(energy)) 
 				return false;
 
 			break;
 		}
-		
-		if ((boost::math::isnan)(energy))
+	
+		if ((boost::math::isnan)(energy)) 
 			return false;
-		
+
 		if (stop_grad >= 0.0 && energyMinimizer.getGradientNorm() <= stop_grad)
 			break;
 	}
@@ -610,13 +613,13 @@ unsigned int ConfGen::FragmentConformerGeneratorImpl::generateRandomConformer(Co
 	for (std::size_t i = 0; i < MAX_NUM_STRUCTURE_GEN_TRIALS; i++) {
 		if (!dgStructureGen.generate(conf_data)) 
 			continue;
-
+		
 		if (!generateHydrogenCoordsAndMinimize(conf_data))
 			return ReturnCode::FORCEFIELD_MINIMIZATION_FAILED;
 
 		if (!dgStructureGen.checkAtomConfigurations(conf_data)) 
 			continue;
-		
+
 		if (!dgStructureGen.checkBondConfigurations(conf_data)) 
 			continue;
 

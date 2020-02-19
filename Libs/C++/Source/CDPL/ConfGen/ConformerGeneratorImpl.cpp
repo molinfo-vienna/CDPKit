@@ -90,6 +90,7 @@ namespace
 	const std::size_t MAX_FRAG_CONF_COMBINATION_CACHE_SIZE  = 20000;
 	const double      COMP_CONFORMER_SPACING                = 4.0;
 	const std::size_t MAX_NUM_STRUCTURE_GEN_TRIALS          = 10;
+	const std::size_t MAX_NUM_STRUCTURE_GEN_FAILS           = 100;
 }
 
 
@@ -216,15 +217,12 @@ unsigned int ConfGen::ConformerGeneratorImpl::generate(const Chem::MolecularGrap
 
 	if (logCallback) {
 		logCallback(std::string(struct_gen_only ? "Structure" : "Conformer") + " generation finished with return code " + returnCodeToString(ret_code) + '\n');
+		logCallback("Processing time: " + timer.format(3, "%w") + "s\n");
 
-		if (!struct_gen_only) {
-			logCallback("Processing time: " + timer.format(3, "%w") + "s\n");
-
-			if (!outputConfs.empty()) {
-				logCallback("Num. output conformers: " + boost::lexical_cast<std::string>(outputConfs.size()) + '\n');
-				logCallback("Min. energy: " + (boost::format("%.4f") % outputConfs.front()->getEnergy()).str() + '\n');
-				logCallback("Max. energy: " + (boost::format("%.4f") % outputConfs.back()->getEnergy()).str() + '\n');
-			}
+		if (!struct_gen_only && !outputConfs.empty()) {
+			logCallback("Num. output conformers: " + boost::lexical_cast<std::string>(outputConfs.size()) + '\n');
+			logCallback("Min. energy: " + (boost::format("%.4f") % outputConfs.front()->getEnergy()).str() + '\n');
+			logCallback("Max. energy: " + (boost::format("%.4f") % outputConfs.back()->getEnergy()).str() + '\n');
 		}
 	}
 
@@ -454,30 +452,33 @@ unsigned int ConfGen::ConformerGeneratorImpl::generateConformers(const Chem::Mol
 
 	if (determineSamplingMode()) {
 		if (logCallback)
-			logCallback("Sampling mode: stochastic\n");
+			logCallback(struct_gen_only ? "Generation mode: distance geometry based\n" : "Sampling mode: stochastic\n");
 
 		return generateConformersStochastic(struct_gen_only);
 	}
 
 	if (logCallback)
-		logCallback("Sampling mode: systematic\n");
+		logCallback(struct_gen_only ? "Generation mode: fragment based\n" : "Sampling mode: systematic\n");
 
 	return generateConformersSystematic(struct_gen_only);
 }
 
 unsigned int ConfGen::ConformerGeneratorImpl::generateConformersSystematic(bool struct_gen_only)
 {
-	torDriver.getSettings().setEnergyWindow(settings.getEnergyWindow());
-	torDriver.getSettings().sampleAngleToleranceRanges(settings.sampleAngleToleranceRanges());
+	TorsionDriverSettings& td_settings = torDriver.getSettings();
+
+	td_settings.setMaxPoolSize(settings.getMaxPoolSize());
+	td_settings.setEnergyWindow(settings.getEnergyWindow());
+	td_settings.sampleAngleToleranceRanges(settings.sampleAngleToleranceRanges());
 
 	splitIntoTorsionFragments();
 
-	unsigned int ret_code = generateFragmentConformers();
+	unsigned int ret_code = generateFragmentConformers(struct_gen_only);
 
 	if (ret_code != ReturnCode::SUCCESS)
 		return ret_code;
 
-	if ((ret_code = generateFragmentConformerCombinations(struct_gen_only)) != ReturnCode::SUCCESS) 
+	if ((ret_code = generateFragmentConformerCombinations()) != ReturnCode::SUCCESS) 
 		return ret_code;
 	
 	return generateOutputConformers(struct_gen_only);
@@ -506,11 +507,11 @@ unsigned int ConfGen::ConformerGeneratorImpl::generateConformersStochastic(bool 
 	ConformerData::SharedPointer conf_data_ptr;
 	unsigned int ret_code = ReturnCode::SUCCESS;
 	std::size_t i = 0;
-
+	
 	if (logCallback) 
-		logCallback("Performing stochastic conformer sampling...\n");
+		logCallback(struct_gen_only ? "Performing distance geometry based structure generation...\n" : "Performing stochastic conformer sampling...\n");
 
-	for (std::size_t num_conf_samples = settings.getMaxNumSampledConformers(), conv_iter_count = settings.getConvergenceIterationCount(), last_min_iter_count = 0; 
+	for (std::size_t num_conf_samples = settings.getMaxNumSampledConformers(), conv_iter_count = settings.getConvergenceIterationCount(), last_min_iter_count = 0, num_struct_gen_fails = 0; 
 		 (num_conf_samples == 0 || i < num_conf_samples) && last_min_iter_count <= conv_iter_count; i++) {
 
 		if ((ret_code = invokeCallbacks()) != ReturnCode::SUCCESS) {
@@ -526,9 +527,9 @@ unsigned int ConfGen::ConformerGeneratorImpl::generateConformersStochastic(bool 
 		}
 
 		ConformerData& conf_data = *conf_data_ptr;
-		bool gen_valid_conf = false;
+		std::size_t j = 0;
 
-		for (std::size_t j = 0; j < MAX_NUM_STRUCTURE_GEN_TRIALS; j++) {
+		for ( ; j < MAX_NUM_STRUCTURE_GEN_TRIALS; j++) {
 			if (!dgStructureGen.generate(conf_data)) 
 				continue;
 
@@ -541,18 +542,22 @@ unsigned int ConfGen::ConformerGeneratorImpl::generateConformersStochastic(bool 
 			if (!dgStructureGen.checkBondConfigurations(conf_data)) 
 				continue;
 
-			gen_valid_conf = true;
 			break;
 		}
 
-		if (!gen_valid_conf)
-			continue;
+		if (j == MAX_NUM_STRUCTURE_GEN_TRIALS) {
+			if (++num_struct_gen_fails == MAX_NUM_STRUCTURE_GEN_FAILS) {
+				if (logCallback) 
+					logCallback("Could not generate any valid structure after " + boost::lexical_cast<std::string>(num_struct_gen_fails) + 
+								" consecutive trials - giving up!\n");
 
-		if (struct_gen_only) {
-			workingConfs.push_back(conf_data_ptr);
-			return ReturnCode::SUCCESS;
+				break;
+			}
+
+			continue;
 		}
 
+		num_struct_gen_fails = 0;
 		last_min_iter_count++;
 
 		double energy = conf_data.getEnergy();
@@ -585,7 +590,8 @@ unsigned int ConfGen::ConformerGeneratorImpl::generateConformersStochastic(bool 
 	}
 
 	if (logCallback) 
-		logCallback("Stochastic conformer sampling terminated after " + boost::lexical_cast<std::string>(i) + " iteration(s)\n");
+		logCallback((struct_gen_only ? "Distance geometry structure generation terminated after " : "Stochastic conformer sampling terminated after ") +
+					boost::lexical_cast<std::string>(i) + " iteration(s)\n");
 
 	if (logCallback && ret_code == ReturnCode::TIMEOUT && workingConfs.empty())
 		logCallback("Time limit exceeded!\n");
@@ -595,7 +601,7 @@ unsigned int ConfGen::ConformerGeneratorImpl::generateConformersStochastic(bool 
 
 bool ConfGen::ConformerGeneratorImpl::determineSamplingMode()
 {
-	switch (settings.getConformerSamplingMode()) {
+	switch (settings.getSamplingMode()) {
 
 		case ConformerSamplingMode::STOCHASTIC:
 			inStochasticMode = true;
@@ -644,13 +650,13 @@ bool ConfGen::ConformerGeneratorImpl::generateHydrogenCoordsAndMinimize(Conforme
 
 	for (std::size_t j = 0; max_ref_iters == 0 || j < max_ref_iters; j++) {
 		if (energyMinimizer.iterate(energy, conf_coords_data, energyGradient) != BFGSMinimizer::SUCCESS) {
-			if ((boost::math::isnan)(energy))
+			if ((boost::math::isnan)(energy)) 
 				return false;
 
 			break;
 		}
 
-		if ((boost::math::isnan)(energy))
+		if ((boost::math::isnan)(energy)) 
 			return false;
 		
 		if (stop_grad >= 0.0 && energyMinimizer.getGradientNorm() <= stop_grad)
@@ -782,7 +788,7 @@ bool ConfGen::ConformerGeneratorImpl::setupMMFF94Parameters()
 	return false;
 }
 
-unsigned int ConfGen::ConformerGeneratorImpl::generateFragmentConformers()
+unsigned int ConfGen::ConformerGeneratorImpl::generateFragmentConformers(bool struct_gen_only)
 {
 	using namespace Chem;
 
@@ -885,22 +891,44 @@ unsigned int ConfGen::ConformerGeneratorImpl::generateFragmentConformers()
 					return ret_code;
 				}
 
-				for (TorsionDriverImpl::ConstConformerIterator td_conf_it = torDriver.getConformersBegin(), td_conf_end = torDriver.getConformersEnd();
-					 td_conf_it != td_conf_end; ++td_conf_it) {
+				if (struct_gen_only) {
+					TorsionDriverImpl::ConstConformerIterator min_e_conf = std::min_element(torDriver.getConformersBegin(), torDriver.getConformersEnd(), 
+																							&compareConformerEnergy);
 
-					ConformerData& td_conf_data = **td_conf_it;
-					double energy = td_conf_data.getEnergy();
+					if (min_e_conf != torDriver.getConformersEnd()) {
+						ConformerData& conf_data = **min_e_conf;
+						double energy = conf_data.getEnergy();
 
-					if (frag_conf_data.conformers.empty() || energy < min_energy)
-						min_energy = energy;
+						if (frag_conf_data.conformers.empty() || energy < min_energy)
+							min_energy = energy;
 
-					else if (energy > (min_energy + e_window))
-						continue;
+						else if (energy > (min_energy + e_window))
+							continue;
 
-					ConformerData::SharedPointer final_conf_data = confDataCache.get();
+						ConformerData::SharedPointer final_conf_data = confDataCache.get();
 
-					final_conf_data->swap(td_conf_data);
-					frag_conf_data.conformers.push_back(final_conf_data);
+						final_conf_data->swap(conf_data);
+						frag_conf_data.conformers.push_back(final_conf_data);
+					}
+
+				} else {
+					for (TorsionDriverImpl::ConstConformerIterator td_conf_it = torDriver.getConformersBegin(), td_conf_end = torDriver.getConformersEnd();
+						 td_conf_it != td_conf_end; ++td_conf_it) {
+
+						ConformerData& td_conf_data = **td_conf_it;
+						double energy = td_conf_data.getEnergy();
+
+						if (frag_conf_data.conformers.empty() || energy < min_energy)
+							min_energy = energy;
+
+						else if (energy > (min_energy + e_window))
+							continue;
+
+						ConformerData::SharedPointer final_conf_data = confDataCache.get();
+
+						final_conf_data->swap(td_conf_data);
+						frag_conf_data.conformers.push_back(final_conf_data);
+					}
 				}
 			}
 
@@ -920,6 +948,10 @@ unsigned int ConfGen::ConformerGeneratorImpl::generateFragmentConformers()
 		}
 
 		orderConformersByEnergy(frag_conf_data.conformers); 
+
+		if (settings.getMaxPoolSize() > 0 && frag_conf_data.conformers.size() > settings.getMaxPoolSize())
+			frag_conf_data.conformers.resize(settings.getMaxPoolSize());
+
 		frag_conf_data.lastConfIdx = frag_conf_data.conformers.size();
 
 		if (logCallback)
@@ -931,19 +963,8 @@ unsigned int ConfGen::ConformerGeneratorImpl::generateFragmentConformers()
 	return ReturnCode::SUCCESS;
 }
 			
-unsigned int ConfGen::ConformerGeneratorImpl::generateFragmentConformerCombinations(bool struct_gen_only)
+unsigned int ConfGen::ConformerGeneratorImpl::generateFragmentConformerCombinations()
 {
-	if (struct_gen_only) {
-		ConfCombinationData* frag_conf_comb = confCombDataCache.getRaw();
-
-		frag_conf_comb->energy = 0.0;
-		frag_conf_comb->confIndices.assign(torFragConfData.size(), 0);
-
-		torFragConfCombData.push_back(frag_conf_comb);
-
-		return ReturnCode::SUCCESS;
-	}
-
 	currConfComb.clear();
 
 	generateFragmentConformerCombinations(0, 0.0);
@@ -961,7 +982,7 @@ unsigned int ConfGen::ConformerGeneratorImpl::generateFragmentConformerCombinati
 
 	if (logCallback) {
 		logCallback("Generated " + boost::lexical_cast<std::string>(torFragConfCombData.size()) + 
-					" fragment conformer combinations (min. energy: " + 
+					" fragment conformer combination(s) (min. energy: " + 
 					(boost::format("%.4f") % torFragConfCombData.front()->energy).str() + 
 					", max. energy: " + (boost::format("%.4f") % torFragConfCombData.back()->energy).str() + ")\n");
 	}
@@ -995,7 +1016,7 @@ void ConfGen::ConformerGeneratorImpl::generateFragmentConformerCombinations(std:
 unsigned int ConfGen::ConformerGeneratorImpl::generateOutputConformers(bool struct_gen_only)
 {
 	if (logCallback) 
-		logCallback("Generating output conformers...\n");
+		logCallback(struct_gen_only ? "Generating output structure...\n" : "Generating output conformers...\n");
 	
 	fragments.clear();
 
@@ -1081,8 +1102,10 @@ unsigned int ConfGen::ConformerGeneratorImpl::generateOutputConformers(bool stru
 			workingConfs.push_back(conf_data_copy);
 		}
 
-		if (struct_gen_only && !workingConfs.empty())
-			return ReturnCode::SUCCESS;
+		if (settings.getMaxPoolSize() > 0 && workingConfs.size() > settings.getMaxPoolSize()) {
+			orderConformersByEnergy(workingConfs); 
+			workingConfs.resize(settings.getMaxPoolSize());
+		}
 	}
 
 	if (logCallback && have_timeout && workingConfs.empty())
@@ -1110,8 +1133,10 @@ bool ConfGen::ConformerGeneratorImpl::selectOutputConformers(bool struct_gen_onl
 
 		if (!workingConfs.empty()) {
 			orderConformersByEnergy(workingConfs); 
-			
 			outputConfs.push_back(workingConfs.front());
+
+			if (logCallback)
+				logCallback("Selected conformer with lowest energy of " + (boost::format("%.4f") % outputConfs.front()->getEnergy()).str() + '\n');
 		}
 
 		return false;

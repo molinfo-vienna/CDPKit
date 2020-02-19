@@ -71,6 +71,7 @@ BOOST_PYTHON_MODULE(_confgen)
 	exportReturnCodes();
 	exportNitrogenEnumerationModes();
 	exportConformerSamplingModes();
+	exportStructureGenerationModes();
 
 	exportBondFunctions();
 	exportMolecularGraphFunctions();

@@ -64,9 +64,9 @@ namespace CDPL
 
 			ConformerGeneratorSettings();
 
-			void setConformerSamplingMode(unsigned int mode);
+			void setSamplingMode(unsigned int mode);
 
-			unsigned int getConformerSamplingMode() const;
+			unsigned int getSamplingMode() const;
 
 			void sampleHeteroAtomHydrogens(bool sample);
 				
@@ -95,6 +95,10 @@ namespace CDPL
 			void setEnergyWindow(double win_size);
 
 			double getEnergyWindow() const;
+
+			void setMaxPoolSize(std::size_t max_size);
+
+			std::size_t getMaxPoolSize() const;
 
 			void setTimeout(std::size_t mil_secs);
 
@@ -149,7 +153,7 @@ namespace CDPL
 			const FragmentConformerGeneratorSettings& getFragmentBuildSettings() const;
 
 		  private:
-			unsigned int                       confSamplingMode;
+			unsigned int                       samplingMode;
 			bool                               sampleHetAtomHs;
 			bool                               sampleTolRanges;
 			bool                               enumRings;
@@ -157,6 +161,7 @@ namespace CDPL
 			bool                               fromScratch;
 			bool                               incInputCoords;
 			double                             eWindow;
+			std::size_t                        maxPoolSize;
 			std::size_t                        timeout;
 			unsigned int                       forceFieldType;
 			bool                               strictParam;

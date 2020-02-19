@@ -48,9 +48,9 @@ void CDPLPythonConfGen::exportConformerGeneratorSettings()
 		.def(CDPLPythonBase::ObjectIdentityCheckVisitor<ConfGen::ConformerGeneratorSettings>())
 		.def("assign", CDPLPythonBase::copyAssOp(&ConfGen::ConformerGeneratorSettings::operator=), 
 			 (python::arg("self"), python::arg("settings")), python::return_self<>())
-		.def("setConformerSamplingMode", &ConfGen::ConformerGeneratorSettings::setConformerSamplingMode, 
+		.def("setSamplingMode", &ConfGen::ConformerGeneratorSettings::setSamplingMode, 
 			 (python::arg("self"), python::arg("mode")))
-		.def("getConformerSamplingMode", &ConfGen::ConformerGeneratorSettings::getConformerSamplingMode, 
+		.def("getSamplingMode", &ConfGen::ConformerGeneratorSettings::getSamplingMode, 
 			 python::arg("self"))
 		.def("sampleHeteroAtomHydrogens", SetBoolFunc(&ConfGen::ConformerGeneratorSettings::sampleHeteroAtomHydrogens), 
 			 (python::arg("self"), python::arg("sample")))
@@ -79,6 +79,10 @@ void CDPLPythonConfGen::exportConformerGeneratorSettings()
 		.def("setEnergyWindow", &ConfGen::ConformerGeneratorSettings::setEnergyWindow, 
 			 (python::arg("self"), python::arg("win_size")))
 		.def("getEnergyWindow", &ConfGen::ConformerGeneratorSettings::getEnergyWindow, 
+			 python::arg("self"))
+		.def("setMaxPoolSize", &ConfGen::ConformerGeneratorSettings::setMaxPoolSize, 
+			 (python::arg("self"), python::arg("max_size")))
+		.def("getMaxPoolSize", &ConfGen::ConformerGeneratorSettings::getMaxPoolSize, 
 			 python::arg("self"))
 		.def("setTimeout", &ConfGen::ConformerGeneratorSettings::setTimeout, 
 			 (python::arg("self"), python::arg("mil_secs")))
@@ -139,8 +143,8 @@ void CDPLPythonConfGen::exportConformerGeneratorSettings()
 		.def_readonly("SMALL_SET_DENSE", ConfGen::ConformerGeneratorSettings::SMALL_SET_DENSE)
 		.def_readonly("MEDIUM_SET_DENSE", ConfGen::ConformerGeneratorSettings::MEDIUM_SET_DENSE)
 		.def_readonly("LARGE_SET_DENSE", ConfGen::ConformerGeneratorSettings::LARGE_SET_DENSE)
-		.add_property("confSamplingMode", &ConfGen::ConformerGeneratorSettings::getConformerSamplingMode,
-					  &ConfGen::ConformerGeneratorSettings::setConformerSamplingMode)
+		.add_property("samplingMode", &ConfGen::ConformerGeneratorSettings::getSamplingMode,
+					  &ConfGen::ConformerGeneratorSettings::setSamplingMode)
 		.add_property("sampleHetAtomHydrogens", GetBoolFunc(&ConfGen::ConformerGeneratorSettings::sampleHeteroAtomHydrogens),
 					  SetBoolFunc(&ConfGen::ConformerGeneratorSettings::sampleHeteroAtomHydrogens))
 		.add_property("sampleAngleTolRanges", GetBoolFunc(&ConfGen::ConformerGeneratorSettings::sampleAngleToleranceRanges),
@@ -155,6 +159,8 @@ void CDPLPythonConfGen::exportConformerGeneratorSettings()
 					  SetBoolFunc(&ConfGen::ConformerGeneratorSettings::includeInputCoordinates))
 		.add_property("energyWindow", &ConfGen::ConformerGeneratorSettings::getEnergyWindow,
 					  &ConfGen::ConformerGeneratorSettings::setEnergyWindow)
+		.add_property("maxPoolSize", &ConfGen::ConformerGeneratorSettings::getMaxPoolSize,
+					  &ConfGen::ConformerGeneratorSettings::setMaxPoolSize)
 		.add_property("timeout", &ConfGen::ConformerGeneratorSettings::getTimeout,
 					  &ConfGen::ConformerGeneratorSettings::setTimeout)
 		.add_property("forceFieldType", &ConfGen::ConformerGeneratorSettings::getForceFieldType, 

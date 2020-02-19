@@ -28,6 +28,7 @@
 
 #include "CDPL/ConfGen/StructureGeneratorSettings.hpp"
 #include "CDPL/ConfGen/ForceFieldType.hpp"
+#include "CDPL/ConfGen/StructureGenerationMode.hpp"
 #include "CDPL/ForceField/MMFF94ElectrostaticInteractionParameterizer.hpp"
 
 
@@ -35,12 +36,23 @@ using namespace CDPL;
 
 
 ConfGen::StructureGeneratorSettings::StructureGeneratorSettings():
-	fromScratch(true), timeout(5 * 60 * 1000), 
-	forceFieldType(ForceFieldType::MMFF94S_NO_ESTAT), strictParam(true), 
+	generationMode(StructureGenerationMode::AUTO), fromScratch(true), sampleTolRanges(true), 
+	timeout(20 * 60 * 1000), forceFieldType(ForceFieldType::MMFF94S_EXT_NO_ESTAT), strictParam(true), 
 	dielectricConst(ForceField::MMFF94ElectrostaticInteractionParameterizer::DEF_DIELECTRIC_CONSTANT),
 	distExponent(ForceField::MMFF94ElectrostaticInteractionParameterizer::DEF_DISTANCE_EXPONENT),
-	maxNumRefIters(0), refStopGrad(0.25), minMacrocycleSize(14)
+	maxNumRefIters(0), refStopGrad(0.25), maxNumSampledConfs(50), convIterCount(10), 
+	minMacrocycleSize(10)
 {}
+
+void ConfGen::StructureGeneratorSettings::setGenerationMode(unsigned int mode)
+{
+	generationMode = mode;
+}
+
+unsigned int ConfGen::StructureGeneratorSettings::getGenerationMode() const
+{
+	return generationMode;
+}
 
 void ConfGen::StructureGeneratorSettings::generateCoordinatesFromScratch(bool generate)
 {
@@ -50,6 +62,16 @@ void ConfGen::StructureGeneratorSettings::generateCoordinatesFromScratch(bool ge
 bool ConfGen::StructureGeneratorSettings::generateCoordinatesFromScratch() const
 {
 	return fromScratch;
+}
+
+void ConfGen::StructureGeneratorSettings::sampleAngleToleranceRanges(bool sample)
+{
+	sampleTolRanges = sample;
+}
+				
+bool ConfGen::StructureGeneratorSettings::sampleAngleToleranceRanges() const
+{
+	return sampleTolRanges;
 }
 
 void ConfGen::StructureGeneratorSettings::setTimeout(std::size_t mil_secs)
@@ -120,6 +142,26 @@ void ConfGen::StructureGeneratorSettings::setRefinementStopGradient(double grad_
 double ConfGen::StructureGeneratorSettings::getRefinementStopGradient() const
 {
 	return refStopGrad;
+}
+
+void ConfGen::StructureGeneratorSettings::setMaxNumSampledConformers(std::size_t max_num)
+{
+	maxNumSampledConfs = max_num;
+}
+
+std::size_t ConfGen::StructureGeneratorSettings::getMaxNumSampledConformers() const
+{
+	return maxNumSampledConfs;
+}
+
+void ConfGen::StructureGeneratorSettings::setConvergenceIterationCount(std::size_t count)
+{
+	convIterCount = count;
+}
+
+std::size_t ConfGen::StructureGeneratorSettings::getConvergenceIterationCount() const
+{
+	return convIterCount;
 }
 
 void ConfGen::StructureGeneratorSettings::setMinMacrocycleSize(std::size_t min_size)

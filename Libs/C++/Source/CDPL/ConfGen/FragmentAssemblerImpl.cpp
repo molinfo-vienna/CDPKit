@@ -49,6 +49,7 @@
 #include "CDPL/Chem/AtomConfiguration.hpp"
 #include "CDPL/Chem/BondConfiguration.hpp"
 #include "CDPL/Math/Quaternion.hpp"
+#include "CDPL/ForceField/UtilityFunctions.hpp"
 #include "CDPL/ForceField/Exceptions.hpp"
 
 #include "FragmentAssemblerImpl.hpp"
@@ -570,7 +571,7 @@ unsigned int ConfGen::FragmentAssemblerImpl::generateFragmentConformers(unsigned
 	fixBondLengths(frag, node);
 
 	if (frag_type == FragmentType::CHAIN)
-		postprocChainFragment(false, frag, node);
+		postprocChainFragment(true, frag, node);
 
 	else if (frag_type == FragmentType::FLEXIBLE_RING_SYSTEM)
 		enumRingFragmentNitrogens(frag, node);
@@ -716,7 +717,7 @@ void ConfGen::FragmentAssemblerImpl::fixChainBondConfigurations(const Chem::Frag
 
 		if (config != BondConfiguration::CIS && config != BondConfiguration::TRANS)
 			continue;
-			
+
 		if (!descr.isValid(bond)) 
 			continue;
 
@@ -933,9 +934,9 @@ void ConfGen::FragmentAssemblerImpl::invertConfiguration(const Chem::Bond& bond,
 	for (std::size_t i = 0, num_confs = node->getNumConformers(); i < num_confs; i++) {
 		const ConformerData::SharedPointer& conf_data = node->getConformers()[i];
 		Math::Vector3DArray::StorageType& conf_coords_data = conf_data->getData();
-		const Math::Vector3D& bond_atom2_pos = conf_coords_data[bond_atom2_idx];
+		const Math::Vector3D& bond_atom2_pos = conf_coords_data[atom_inds[bond_atom2_idx]];
 			
-		rot_axis.assign(bond_atom2_pos - conf_coords_data[bond_atom1_idx]);
+		rot_axis.assign(bond_atom2_pos - conf_coords_data[atom_inds[bond_atom1_idx]]);
 
 		double rot_axis_norm = length(rot_axis);
 

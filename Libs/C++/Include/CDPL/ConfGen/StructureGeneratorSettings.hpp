@@ -56,10 +56,18 @@ namespace CDPL
 
 			StructureGeneratorSettings();
 
+			void setGenerationMode(unsigned int mode);
+
+			unsigned int getGenerationMode() const;
+
 			void generateCoordinatesFromScratch(bool generate);
 	
 			bool generateCoordinatesFromScratch() const;
 		
+			void sampleAngleToleranceRanges(bool sample);
+				
+			bool sampleAngleToleranceRanges() const;
+
 			void setTimeout(std::size_t mil_secs);
 
 			std::size_t getTimeout() const;
@@ -90,6 +98,12 @@ namespace CDPL
 
 			void setMaxNumSampledConformers(std::size_t max_num);
 
+			std::size_t getMaxNumSampledConformers() const;
+
+			void setConvergenceIterationCount(std::size_t count);
+
+			std::size_t getConvergenceIterationCount() const;
+
 			void setMinMacrocycleSize(std::size_t min_size);
 
 			std::size_t getMinMacrocycleSize() const;
@@ -99,7 +113,9 @@ namespace CDPL
 			const FragmentConformerGeneratorSettings& getFragmentBuildSettings() const;
 
 		  private:
+			unsigned int                       generationMode;
 			bool                               fromScratch;
+			bool                               sampleTolRanges;
 			std::size_t                        timeout;
 			unsigned int                       forceFieldType;
 			bool                               strictParam;
@@ -107,6 +123,8 @@ namespace CDPL
 			double                             distExponent;
 			std::size_t                        maxNumRefIters;
 			double                             refStopGrad;
+			std::size_t                        maxNumSampledConfs;
+			std::size_t                        convIterCount;
 			std::size_t                        minMacrocycleSize;
 			FragmentConformerGeneratorSettings fragBuildSettings;
 		};

@@ -111,7 +111,7 @@ namespace CDPL
 
 			bool setupForceField();
 
-			void setupRandomConformerGeneration();
+			void setupRandomConformerGeneration(bool reg_stereo);
 
 			bool generateHydrogenCoordsAndMinimize(ConformerData& conf_data);
 

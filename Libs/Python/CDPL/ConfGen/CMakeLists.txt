@@ -39,6 +39,7 @@ SET(confgen_MOD_SRCS
     ReturnCodeExport.cpp
     NitrogenEnumerationModeExport.cpp
     ConformerSamplingModeExport.cpp
+    StructureGenerationModeExport.cpp
 
     DGConstraintGeneratorExport.cpp
     DGConstraintGeneratorSettingsExport.cpp

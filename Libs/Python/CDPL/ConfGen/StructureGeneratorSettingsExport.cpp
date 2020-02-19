@@ -48,9 +48,17 @@ void CDPLPythonConfGen::exportStructureGeneratorSettings()
 		.def(CDPLPythonBase::ObjectIdentityCheckVisitor<ConfGen::StructureGeneratorSettings>())
 		.def("assign", CDPLPythonBase::copyAssOp(&ConfGen::StructureGeneratorSettings::operator=), 
 			 (python::arg("self"), python::arg("settings")), python::return_self<>())
+		.def("setGenerationMode", &ConfGen::StructureGeneratorSettings::setGenerationMode, 
+			 (python::arg("self"), python::arg("mode")))
+		.def("getGenerationMode", &ConfGen::StructureGeneratorSettings::getGenerationMode, 
+			 python::arg("self"))
 		.def("generateCoordinatesFromScratch", SetBoolFunc(&ConfGen::StructureGeneratorSettings::generateCoordinatesFromScratch), 
 			 (python::arg("self"), python::arg("generate")))
 		.def("generateCoordinatesFromScratch", GetBoolFunc(&ConfGen::StructureGeneratorSettings::generateCoordinatesFromScratch), 
+			 python::arg("self"))
+		.def("sampleAngleToleranceRanges", SetBoolFunc(&ConfGen::StructureGeneratorSettings::sampleAngleToleranceRanges), 
+			 (python::arg("self"), python::arg("sample")))
+		.def("sampleAngleToleranceRanges", GetBoolFunc(&ConfGen::StructureGeneratorSettings::sampleAngleToleranceRanges), 
 			 python::arg("self"))
 		.def("setTimeout", &ConfGen::StructureGeneratorSettings::setTimeout, 
 			 (python::arg("self"), python::arg("mil_secs")))
@@ -84,13 +92,25 @@ void CDPLPythonConfGen::exportStructureGeneratorSettings()
 			 (python::arg("self"), python::arg("max_size")))
 		.def("getMinMacrocycleSize", &ConfGen::StructureGeneratorSettings::getMinMacrocycleSize, 
 			 python::arg("self"))
+		.def("setMaxNumSampledConformers", &ConfGen::StructureGeneratorSettings::setMaxNumSampledConformers, 
+			 (python::arg("self"), python::arg("max_num")))
+		.def("getMaxNumSampledConformers", &ConfGen::StructureGeneratorSettings::getMaxNumSampledConformers, 
+			 python::arg("self"))
+		.def("setConvergenceIterationCount", &ConfGen::StructureGeneratorSettings::setConvergenceIterationCount, 
+			 (python::arg("self"), python::arg("count")))
+		.def("getConvergenceIterationCount", &ConfGen::StructureGeneratorSettings::getConvergenceIterationCount, 
+			 python::arg("self"))
 		.def("getFragmentBuildSettings", 
 			 static_cast<ConfGen::FragmentConformerGeneratorSettings& (ConfGen::StructureGeneratorSettings::*)()>
 			 (&ConfGen::StructureGeneratorSettings::getFragmentBuildSettings),
 			 python::arg("self"), python::return_internal_reference<>())
 		.def_readonly("DEFAULT", ConfGen::StructureGeneratorSettings::DEFAULT)
+		.add_property("generationMode", &ConfGen::StructureGeneratorSettings::getGenerationMode,
+					  &ConfGen::StructureGeneratorSettings::setGenerationMode)
 		.add_property("genCoordsFromScratch", GetBoolFunc(&ConfGen::StructureGeneratorSettings::generateCoordinatesFromScratch),
 					  SetBoolFunc(&ConfGen::StructureGeneratorSettings::generateCoordinatesFromScratch))
+		.add_property("sampleAngleTolRanges", GetBoolFunc(&ConfGen::StructureGeneratorSettings::sampleAngleToleranceRanges),
+					  SetBoolFunc(&ConfGen::StructureGeneratorSettings::sampleAngleToleranceRanges))
 		.add_property("timeout", &ConfGen::StructureGeneratorSettings::getTimeout,
 					  &ConfGen::StructureGeneratorSettings::setTimeout)
 		.add_property("forceFieldType", &ConfGen::StructureGeneratorSettings::getForceFieldType, 
@@ -107,6 +127,10 @@ void CDPLPythonConfGen::exportStructureGeneratorSettings()
 					  &ConfGen::StructureGeneratorSettings::setRefinementStopGradient)
 		.add_property("minMacrocycleSize", &ConfGen::StructureGeneratorSettings::getMinMacrocycleSize, 
 					  &ConfGen::StructureGeneratorSettings::setMinMacrocycleSize)
+		.add_property("maxNumSampledConformers", &ConfGen::StructureGeneratorSettings::getMaxNumSampledConformers, 
+					  &ConfGen::StructureGeneratorSettings::setMaxNumSampledConformers)
+		.add_property("convergenceIterationCount", &ConfGen::StructureGeneratorSettings::getConvergenceIterationCount, 
+					  &ConfGen::StructureGeneratorSettings::setConvergenceIterationCount)
 		.add_property("fragmentBuildSettings", 
 					  python::make_function(static_cast<ConfGen::FragmentConformerGeneratorSettings& (ConfGen::StructureGeneratorSettings::*)()>
 											(&ConfGen::StructureGeneratorSettings::getFragmentBuildSettings),

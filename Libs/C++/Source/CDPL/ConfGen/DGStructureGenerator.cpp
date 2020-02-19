@@ -149,12 +149,14 @@ void ConfGen::DGStructureGenerator::setup(const Chem::MolecularGraph& molgraph,
 
 bool ConfGen::DGStructureGenerator::checkAtomConfigurations(Math::Vector3DArray& coords) const
 {
+	using namespace Chem;
+
 	for (DGConstraintGenerator::ConstStereoCenterDataIterator it = dgConstraintsGen.getAtomStereoCenterDataBegin(),
 			 end = dgConstraintsGen.getAtomStereoCenterDataEnd(); it != end; ++it) {
 
 		const DGConstraintGenerator::StereoCenterData& sc_data = *it;
 
-		if (calcAtomConfiguration(molGraph->getAtom(sc_data.first), *molGraph, sc_data.second, coords) != sc_data.second.getConfiguration())
+		if (calcAtomConfiguration(molGraph->getAtom(sc_data.first), *molGraph, sc_data.second, coords) != sc_data.second.getConfiguration()) 
 			return false;
 	}
 

@@ -29,6 +29,7 @@
 #include <iterator>
 #include <cstddef>
 #include <cmath>
+#include <algorithm>
 
 #include "CDPL/ForceField/MMFF94TorsionInteractionParameterizer.hpp"
 #include "CDPL/ForceField/MolecularGraphFunctions.hpp"
@@ -51,13 +52,13 @@ using namespace CDPL;
 namespace
 {
 	
-	double empRuleUParamTable[Chem::AtomType::MAX_TYPE + 1] = { 0.0 };
-	double empRuleVParamTable[Chem::AtomType::MAX_TYPE + 1] = { 0.0 };
+	double empRuleUParamTable[Chem::AtomType::MAX_TYPE + 1];
+	double empRuleVParamTable[Chem::AtomType::MAX_TYPE + 1];
 
 	double getEmpiricalRuleUParameter(unsigned int atomic_no)
 	{
 		if (atomic_no > Chem::AtomType::MAX_TYPE)
-			return 0.0;
+			return empRuleUParamTable[Chem::AtomType::C];
 
 		return empRuleUParamTable[atomic_no];
 	}
@@ -65,7 +66,7 @@ namespace
 	double getEmpiricalRuleVParameter(unsigned int atomic_no)
 	{
 		if (atomic_no > Chem::AtomType::MAX_TYPE)
-			return 0.0;
+			empRuleVParamTable[Chem::AtomType::C];
 
 		return empRuleVParamTable[atomic_no];
 	}
@@ -74,14 +75,20 @@ namespace
 	{
 		
 		Init() {
-			empRuleUParamTable[Chem::AtomType::C]  = 2.0;
+			for (std::size_t i = 0; i < Chem::AtomType::MAX_TYPE + 1; i++)
+				empRuleUParamTable[i] = 2.0;
+
+			//empRuleUParamTable[Chem::AtomType::C]  = 2.0;
 			empRuleUParamTable[Chem::AtomType::N]  = 2.0;
 			empRuleUParamTable[Chem::AtomType::O]  = 2.0;
 			empRuleUParamTable[Chem::AtomType::Si] = 1.25;
 			empRuleUParamTable[Chem::AtomType::P]  = 1.25;
 			empRuleUParamTable[Chem::AtomType::S]  = 1.25;
 
-			empRuleVParamTable[Chem::AtomType::C]  = 2.12;
+			for (std::size_t i = 0; i < Chem::AtomType::MAX_TYPE + 1; i++)
+				empRuleVParamTable[i] = 2.12;
+
+			//empRuleVParamTable[Chem::AtomType::C]  = 2.12;
 			empRuleVParamTable[Chem::AtomType::N]  = 1.50;
 			empRuleVParamTable[Chem::AtomType::O]  = 0.2;
 			empRuleVParamTable[Chem::AtomType::Si] = 1.22;
@@ -466,9 +473,15 @@ bool ForceField::MMFF94TorsionInteractionParameterizer::getParameters(const Chem
 	}
 
 	// Rule h2)
+ 
+	std::size_t num_ctr_atom1_nbrs = std::max(ctr_atom1_prop_entry.getNumNeighbors(), getBondCount(ctr_atom1, molgraph));
+	std::size_t num_ctr_atom2_nbrs = std::max(ctr_atom2_prop_entry.getNumNeighbors(), getBondCount(ctr_atom2, molgraph));
 
-	tor_param3 = std::sqrt(getEmpiricalRuleVParameter(ctr_atomic_no1) * getEmpiricalRuleVParameter(ctr_atomic_no2))
-		/ ((ctr_atom1_prop_entry.getNumNeighbors() - 1) * (ctr_atom2_prop_entry.getNumNeighbors() - 1));
+	if (num_ctr_atom1_nbrs <= 1 || num_ctr_atom2_nbrs <= 1)
+		return false;
+
+	tor_param3 = std::sqrt(getEmpiricalRuleVParameter(ctr_atomic_no1) * getEmpiricalRuleVParameter(ctr_atomic_no2)) /
+		((num_ctr_atom1_nbrs - 1) * (num_ctr_atom2_nbrs - 1));
 
 	return true;
 }

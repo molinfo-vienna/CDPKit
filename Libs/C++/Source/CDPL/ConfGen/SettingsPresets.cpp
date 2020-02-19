@@ -116,7 +116,7 @@ namespace
 			//----------------
 
 			CONF_GEN_SMALL_SET_DIVERSE.getFragmentBuildSettings() = FRAG_CONF_GEN_FAST;
-			CONF_GEN_SMALL_SET_DIVERSE.setConformerSamplingMode(ConformerSamplingMode::AUTO);
+			CONF_GEN_SMALL_SET_DIVERSE.setSamplingMode(ConformerSamplingMode::AUTO);
 			CONF_GEN_SMALL_SET_DIVERSE.sampleHeteroAtomHydrogens(false);
 			CONF_GEN_SMALL_SET_DIVERSE.sampleAngleToleranceRanges(false);
 			CONF_GEN_SMALL_SET_DIVERSE.enumerateRings(true);

@@ -333,6 +333,12 @@ GenFragLibImpl::GenFragLibImpl():
 			  value<std::string>()->notifier(boost::bind(&GenFragLibImpl::setForceFieldType, this, _1)));
 	addOption("strict-param,s", "Perform strict MMFF94 parameterization (default: true).", 
 			  value<bool>()->implicit_value(true)->notifier(boost::bind(&GenFragLibImpl::setStrictParameterization, this, _1)));
+	addOption("dielectric-const,D", "Dielectric constant used for the calculation of electrostatic interaction energies (default: " +
+			  (boost::format("%.4f") % settings.getDielectricConstant()).str() + ").", 
+			  value<double>()->notifier(boost::bind(&GenFragLibImpl::setDielectricConst, this, _1)));
+	addOption("dist-exponent,E", "Distance exponent used for the calculation of electrostatic interaction energies (default: " +
+			  (boost::format("%.4f") % settings.getDistanceExponent()).str() + ").", 
+			  value<double>()->notifier(boost::bind(&GenFragLibImpl::setDistExponent, this, _1)));
 	addOption("pres-bonding-geom,b", "Preserve input bond lengths and angles (default: false).", 
 			  value<bool>()->implicit_value(true)->notifier(boost::bind(&GenFragLibImpl::setPreserveBondingGeometry, this, _1)));
 
@@ -455,6 +461,16 @@ void GenFragLibImpl::setForceFieldType(const std::string& type_str)
 		settings.setForceFieldType(ForceFieldType::MMFF94S_EXT_NO_ESTAT);
 	else
 		throwValidationError("forcefield");
+}
+
+void GenFragLibImpl::setDielectricConst(double de_const)
+{
+	settings.setDielectricConstant(de_const);
+}
+
+void GenFragLibImpl::setDistExponent(double exp)
+{
+	settings.setDistanceExponent(exp);
 }
 
 void GenFragLibImpl::setMode(const std::string& mode_str)
@@ -859,6 +875,8 @@ void GenFragLibImpl::printOptionSummary()
 		printMessage(VERBOSE, " Energy Window:                       " + boost::lexical_cast<std::string>(settings.getSmallRingSystemSettings().getEnergyWindow()));
 		printMessage(VERBOSE, " Strict Force Field Parameterization: " + std::string(settings.strictForceFieldParameterization() ? "Yes" : "No"));
 		printMessage(VERBOSE, " Build Force Field:                   " + getForceFieldTypeString());
+		printMessage(VERBOSE, " Dielectric Constant:                 " + (boost::format("%.4f") % settings.getDielectricConstant()).str());
+		printMessage(VERBOSE, " Distance Exponent:                   " + (boost::format("%.4f") % settings.getDistanceExponent()).str());
 		printMessage(VERBOSE, " Small Ring Sys. Sampling Factor:     " + boost::lexical_cast<std::string>(settings.getSmallRingSystemSamplingFactor()));
 		printMessage(VERBOSE, " Preserve Input Bonding Geometries:   " + std::string(settings.preserveInputBondingGeometries() ? "Yes" : "No"));
 	}

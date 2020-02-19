@@ -362,7 +362,7 @@ void ConfGen::FragmentTreeNode::addConformer(const ConformerData::SharedPointer&
 	changed = true;
 }
 
-unsigned int ConfGen::FragmentTreeNode::generateConformers(double e_window, bool exhaustive)
+unsigned int ConfGen::FragmentTreeNode::generateConformers(double e_window, bool exhaustive, std::size_t max_pool_size)
 {
 	if (!conformers.empty())
 		return ReturnCode::SUCCESS;
@@ -374,12 +374,12 @@ unsigned int ConfGen::FragmentTreeNode::generateConformers(double e_window, bool
 		return ReturnCode::TORSION_DRIVING_FAILED;
 	}
 
-	unsigned int ret_code = leftChild->generateConformers(e_window, exhaustive);
+	unsigned int ret_code = leftChild->generateConformers(e_window, exhaustive, max_pool_size);
 
 	if (ret_code != ReturnCode::SUCCESS)
 		return ret_code;
 
-	ret_code = rightChild->generateConformers(e_window, exhaustive);
+	ret_code = rightChild->generateConformers(e_window, exhaustive, max_pool_size);
 
 	if (ret_code != ReturnCode::SUCCESS)
 		return ret_code;
@@ -395,6 +395,11 @@ unsigned int ConfGen::FragmentTreeNode::generateConformers(double e_window, bool
 
 	if (conformers.empty())
 		return ReturnCode::TORSION_DRIVING_FAILED;
+
+	if (max_pool_size > 0 && conformers.size() > max_pool_size) {
+		orderConformersByEnergy();
+		conformers.resize(max_pool_size);
+	}
 
 	return invokeCallbacks();
 }
@@ -412,8 +417,10 @@ void ConfGen::FragmentTreeNode::lineupChildConformers(double e_window)
 	double right_bbox_min[3];
 	double right_bbox_max[3];
 
-	leftChild->orderConformersByEnergy();
-	rightChild->orderConformersByEnergy();
+	if (e_window > 0.0) {
+		leftChild->orderConformersByEnergy();
+		rightChild->orderConformersByEnergy();
+	}
 
 	double min_energy = 0.0;
 

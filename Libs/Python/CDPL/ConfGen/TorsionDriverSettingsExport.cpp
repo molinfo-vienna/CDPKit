@@ -64,6 +64,10 @@ void CDPLPythonConfGen::exportTorsionDriverSettings()
 			 (python::arg("self"), python::arg("win_size")))
 		.def("getEnergyWindow", &ConfGen::TorsionDriverSettings::getEnergyWindow, 
 			 python::arg("self"))
+		.def("setMaxPoolSize", &ConfGen::TorsionDriverSettings::setMaxPoolSize, 
+			 (python::arg("self"), python::arg("max_size")))
+		.def("getMaxPoolSize", &ConfGen::TorsionDriverSettings::getMaxPoolSize, 
+			 python::arg("self"))
 		.def("setForceFieldType", &ConfGen::TorsionDriverSettings::setForceFieldType, 
 			 (python::arg("self"), python::arg("type")))
 		.def("getForceFieldType", &ConfGen::TorsionDriverSettings::getForceFieldType, 
@@ -96,5 +100,7 @@ void CDPLPythonConfGen::exportTorsionDriverSettings()
 		.add_property("energyOrdered", GetBoolFunc(&ConfGen::TorsionDriverSettings::orderByEnergy),
 					  SetBoolFunc(&ConfGen::TorsionDriverSettings::orderByEnergy))
 		.add_property("energyWindow", &ConfGen::TorsionDriverSettings::getEnergyWindow,
-					  &ConfGen::TorsionDriverSettings::setEnergyWindow);
+					  &ConfGen::TorsionDriverSettings::setEnergyWindow)
+		.add_property("maxPoolSize", &ConfGen::TorsionDriverSettings::getMaxPoolSize,
+					  &ConfGen::TorsionDriverSettings::setMaxPoolSize);
 }

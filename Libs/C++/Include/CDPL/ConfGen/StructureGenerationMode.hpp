@@ -1,7 +1,7 @@
 /* -*- mode: c++; c-basic-offset: 4; tab-width: 4; indent-tabs-mode: t -*- */
 
 /* 
- * ConformerSamplingModeExport.cpp 
+ * StructureGenerationMode.hpp 
  *
  * This file is part of the Chemical Data Processing Toolkit
  *
@@ -23,28 +23,41 @@
  * Boston, MA 02111-1307, USA.
  */
 
+/**
+ * \file
+ * \brief Definition of constants in namespace CDPL::ConfGen::StructureGenerationMode.
+ */
 
-#include <boost/python.hpp>
-
-#include "CDPL/ConfGen/ConformerSamplingMode.hpp"
-
-#include "NamespaceExports.hpp"
+#ifndef CDPL_CONFGEN_STRUCTUREGENERATIONMODE_HPP
+#define CDPL_CONFGEN_STRUCTUREGENERATIONMODE_HPP
 
 
-namespace 
+namespace CDPL 
 {
 
-	struct ConformerSamplingMode {};
+    namespace ConfGen
+    {
+
+		/**
+		 * \addtogroup CDPL_CONFGEN_CONSTANTS
+		 * @{
+		 */
+
+		/**
+		 * \brief Provides constants used to specify the employed structure generation method.
+		 */
+		namespace StructureGenerationMode
+		{
+					
+			const unsigned int AUTO              = 0;
+			const unsigned int FRAGMENT          = 1;
+			const unsigned int DISTANCE_GEOMETRY = 2;
+		}
+
+		/**
+		 * @}
+		 */
+    }
 }
 
-
-void CDPLPythonConfGen::exportConformerSamplingModes()
-{
-	using namespace boost;
-	using namespace CDPL;
-
-	python::class_<ConformerSamplingMode, boost::noncopyable>("ConformerSamplingMode", python::no_init)
-		.def_readonly("AUTO", &ConfGen::ConformerSamplingMode::AUTO)
-		.def_readonly("SYSTEMATIC", &ConfGen::ConformerSamplingMode::SYSTEMATIC)
-		.def_readonly("STOCHASTIC", &ConfGen::ConformerSamplingMode::STOCHASTIC);
-}
+#endif // CDPL_CONFGEN_STRUCTUREGENERATIONMODE_HPP

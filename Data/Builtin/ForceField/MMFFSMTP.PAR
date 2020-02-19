@@ -139,7 +139,6 @@
     [#7X3:1]-[#6]=[#16]                                  NC=S    NITROGEN IN N-C=S, THIOAMIDE
     [#7X3:1]-[#6X2]#[#6]                                 NC%C    NITROGEN ATTACHED TO C-C TRIPLE BOND
     [#7X3:1]-[#6H1X2]                                    NC%C    SPECIAL ENTRY FOR CONFGEN: NITROGEN ATTACHED TO SP3 CARBON
-    [#7X3:1]-[#16X4H3+0]                                 NSO2    SPECIAL ENTRY FOR CONFGEN: NITROGEN IN SULFONAMIDES
     [#7X3:1]-[#6]=[#8]                                   NC=O    NITROGEN IN AMIDES
     [#7X3:1]-[#6X3H2+1]                                  NC=O    SPECIAL ENTRY FOR CONFGEN: NITROGEN IN AMIDES
     [#7X1:1]#[*]                                         NSP     NITROGEN, TRIPLE BONDED
@@ -175,6 +174,7 @@
     [#7X4+:1]-[#8X1]                                     N3OX    SP3-HYDRIDIZED N-OXIDE NITROGEN
     [#7X3:1](-,=[#8X1])-,=[#8X1]                         NO2     NITRO GROUP NITROGEN
     [#7X3:1](-,=[#8X1])(-,=[#8X1])-[#8]                  NO3     NITRATE GROUP NITROGEN
+    [#7X3:1]-[#16X4H3+0]                                 NSO2    SPECIAL ENTRY FOR CONFGEN: NITROGEN IN SULFONAMIDES
 *   [n:1]1:a:a:a:a:a1                                    NPYD    NITROGEN, AS IN PYRIDINE
 *   [nX3v4+:1]1:a:a:a:a:a1                               NPD+    PYRIDINIUM-TYPE NITROGEN - FORMAL CHARGE=1
 *   [nX3v4+:1]1(-[#8X1-]):a:a:a:a:a1                     NPOX    PYRIDINE N-OXIDE NITROGEN

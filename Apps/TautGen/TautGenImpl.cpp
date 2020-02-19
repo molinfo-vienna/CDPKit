@@ -861,7 +861,6 @@ void TautGenImpl::initOutputWriter()
 
 	setSMILESRecordFormatParameter(*outputWriter, "SN");
 	setSMILESWriteCanonicalFormParameter(*outputWriter, true);
-
 	setMultiConfExportParameter(*outputWriter, false);
 }
 

@@ -31,6 +31,8 @@
 #ifndef CDPL_CONFGEN_TORSIONDRIVERSETTINGS_HPP
 #define CDPL_CONFGEN_TORSIONDRIVERSETTINGS_HPP
 
+#include <cstddef>
+
 #include "CDPL/ConfGen/APIPrefix.hpp"
 
 
@@ -69,6 +71,10 @@ namespace CDPL
 
 			double getEnergyWindow() const;
 
+			void setMaxPoolSize(std::size_t max_size);
+
+			std::size_t getMaxPoolSize() const;
+
 			void setForceFieldType(unsigned int type);
 	    
 			unsigned int getForceFieldType() const;
@@ -90,6 +96,7 @@ namespace CDPL
 			bool         sampleTolRanges;
 			bool         energyOrdered;
 			double       eWindow;
+			std::size_t  maxPoolSize;
 			unsigned int forceFieldType;
 			bool         strictParam;
 			double       dielectricConst;

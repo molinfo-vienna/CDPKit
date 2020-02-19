@@ -50,7 +50,7 @@ using namespace CDPL;
 namespace
 {
 
-	double covRadiusTable[Chem::AtomType::MAX_TYPE + 1] = { 0.77 };
+	double covRadiusTable[Chem::AtomType::MAX_TYPE + 1];
 	double elnegTable[Chem::AtomType::MAX_TYPE + 1]     = { 2.50 };
 
 	double getCovalentRadius(unsigned int atomic_no)
@@ -75,11 +75,14 @@ namespace
 		Init() {
 			// Definition of covalent radii as used in MMFF94
 
+			for (std::size_t i = 0; i < Chem::AtomType::MAX_TYPE + 1; i++)
+				covRadiusTable[i] = 0.77;
+	
 			covRadiusTable[Chem::AtomType::H]  = 0.33;
 			covRadiusTable[Chem::AtomType::Li] = 1.34;
 			covRadiusTable[Chem::AtomType::Be] = 0.90;
 			covRadiusTable[Chem::AtomType::B]  = 0.81;
-			covRadiusTable[Chem::AtomType::C]  = 0.77;
+			//covRadiusTable[Chem::AtomType::C]  = 0.77;
 			covRadiusTable[Chem::AtomType::N]  = 0.7287;
 			covRadiusTable[Chem::AtomType::O]  = 0.72;
 			covRadiusTable[Chem::AtomType::F]  = 0.7385;
@@ -115,11 +118,14 @@ namespace
 
 			// Definition of Allred Rochow electronegativities as used in MMFF94
 
+			for (std::size_t i = 0; i < Chem::AtomType::MAX_TYPE + 1; i++)
+				elnegTable[i] = 2.50;
+
 			elnegTable[Chem::AtomType::H]  = 2.20;
 			elnegTable[Chem::AtomType::Li] = 0.97;
 			elnegTable[Chem::AtomType::Be] = 1.47;
 			elnegTable[Chem::AtomType::B]  = 2.01;
-			elnegTable[Chem::AtomType::C]  = 2.50;
+			//elnegTable[Chem::AtomType::C]  = 2.50;
 			elnegTable[Chem::AtomType::N]  = 3.07;
 			elnegTable[Chem::AtomType::O]  = 3.50;
 			elnegTable[Chem::AtomType::F]  = 4.10;

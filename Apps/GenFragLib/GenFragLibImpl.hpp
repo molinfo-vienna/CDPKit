@@ -84,6 +84,8 @@ namespace GenFragLib
 		void applyPreset(const std::string& pres_str);
 		void setTimeout(std::size_t timeout);
 		void setStrictParameterization(bool strict);
+		void setDielectricConst(double de_const);
+		void setDistExponent(double exp);
 		void setPreserveBondingGeometry(bool preserve);
 		void setRMSD(double rmsd);
 		void setEnergyWindow(double ewin);

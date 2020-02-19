@@ -29,6 +29,7 @@
 #include "CDPL/ConfGen/StructureGenerator.hpp"
 #include "CDPL/ConfGen/ReturnCode.hpp"
 #include "CDPL/ConfGen/NitrogenEnumerationMode.hpp"
+#include "CDPL/ConfGen/StructureGenerationMode.hpp"
 #include "CDPL/ConfGen/ConformerSamplingMode.hpp"
 #include "CDPL/Chem/AtomContainerFunctions.hpp"
 
@@ -43,14 +44,13 @@ ConfGen::StructureGenerator::StructureGenerator():
 {
 	ConformerGeneratorSettings& cg_settings = impl->getSettings();
 
-	cg_settings.setConformerSamplingMode(ConformerSamplingMode::AUTO);
 	cg_settings.setNitrogenEnumerationMode(NitrogenEnumerationMode::UNSPECIFIED_STEREO);
 	cg_settings.sampleHeteroAtomHydrogens(false);
-	cg_settings.sampleAngleToleranceRanges(true);
 	cg_settings.enumerateRings(false);
 	cg_settings.includeInputCoordinates(false);
 	cg_settings.setMaxNumOutputConformers(1);
 	cg_settings.setEnergyWindow(10.0);
+	cg_settings.setMaxPoolSize(100);
 }
 
 ConfGen::StructureGenerator::~StructureGenerator() 
@@ -124,7 +124,10 @@ unsigned int ConfGen::StructureGenerator::generate(const Chem::MolecularGraph& m
 
 	cg_settings.getFragmentBuildSettings() = settings.getFragmentBuildSettings();
 	cg_settings.setMaxNumRefinementIterations(settings.getMaxNumRefinementIterations());
+	cg_settings.sampleAngleToleranceRanges(settings.sampleAngleToleranceRanges());
 	cg_settings.setRefinementStopGradient(settings.getRefinementStopGradient());
+	cg_settings.setMaxNumSampledConformers(settings.getMaxNumSampledConformers());
+	cg_settings.setConvergenceIterationCount(settings.getConvergenceIterationCount());
 	cg_settings.setMinMacrocycleSize(settings.getMinMacrocycleSize());
 	cg_settings.setForceFieldType(settings.getForceFieldType());
 	cg_settings.strictForceFieldParameterization(settings.strictForceFieldParameterization());
@@ -132,6 +135,20 @@ unsigned int ConfGen::StructureGenerator::generate(const Chem::MolecularGraph& m
 	cg_settings.setDistanceExponent(settings.getDistanceExponent());
 	cg_settings.setTimeout(settings.getTimeout());
 	cg_settings.generateCoordinatesFromScratch(settings.generateCoordinatesFromScratch());
+
+	switch (settings.getGenerationMode()) {
+
+		case StructureGenerationMode::FRAGMENT:
+			cg_settings.setSamplingMode(ConformerSamplingMode::SYSTEMATIC);
+			break;
+
+		case StructureGenerationMode::DISTANCE_GEOMETRY:
+			cg_settings.setSamplingMode(ConformerSamplingMode::STOCHASTIC);
+			break;
+
+		default:
+			cg_settings.setSamplingMode(ConformerSamplingMode::AUTO);
+	}
 
 	unsigned int ret_code = impl->generate(molgraph, true);
 

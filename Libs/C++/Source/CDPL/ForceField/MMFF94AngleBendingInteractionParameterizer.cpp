@@ -46,8 +46,8 @@ using namespace CDPL;
 namespace
 {
 	
-	double empRuleZParamTable[Chem::AtomType::MAX_TYPE + 1] = { 2.494 };
-	double empRuleCParamTable[Chem::AtomType::MAX_TYPE + 1] = { 1.016 };
+	double empRuleZParamTable[Chem::AtomType::MAX_TYPE + 1];
+	double empRuleCParamTable[Chem::AtomType::MAX_TYPE + 1];
 
 	double getEmpiricalRuleZParameter(unsigned int atomic_no)
 	{
@@ -69,8 +69,11 @@ namespace
 	{
 		
 		Init() {
+			for (std::size_t i = 0; i < Chem::AtomType::MAX_TYPE + 1; i++)
+				empRuleZParamTable[i] = 2.494;
+
 			empRuleZParamTable[Chem::AtomType::H]  = 1.395;
-			empRuleZParamTable[Chem::AtomType::C]  = 2.494;
+			//empRuleZParamTable[Chem::AtomType::C]  = 2.494;
 			empRuleZParamTable[Chem::AtomType::N]  = 2.711;
 			empRuleZParamTable[Chem::AtomType::O]  = 3.045;
 			empRuleZParamTable[Chem::AtomType::F]  = 2.847;
@@ -81,8 +84,11 @@ namespace
 			empRuleZParamTable[Chem::AtomType::Br] = 3.017;
 			empRuleZParamTable[Chem::AtomType::I]  = 3.086;
 
+			for (std::size_t i = 0; i < Chem::AtomType::MAX_TYPE + 1; i++)
+				empRuleCParamTable[i] = 1.016;
+
 			empRuleCParamTable[Chem::AtomType::B]  = 0.704;
-			empRuleCParamTable[Chem::AtomType::C]  = 1.016;
+			//empRuleCParamTable[Chem::AtomType::C]  = 1.016;
 			empRuleCParamTable[Chem::AtomType::N]  = 1.113;
 			empRuleCParamTable[Chem::AtomType::O]  = 1.337;
 			empRuleCParamTable[Chem::AtomType::Si] = 0.811;

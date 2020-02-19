@@ -1,7 +1,7 @@
 /* -*- mode: c++; c-basic-offset: 4; tab-width: 4; indent-tabs-mode: t -*- */
 
 /* 
- * ConformerSamplingModeExport.cpp 
+ * StructureGenerationModeExport.cpp 
  *
  * This file is part of the Chemical Data Processing Toolkit
  *
@@ -26,7 +26,7 @@
 
 #include <boost/python.hpp>
 
-#include "CDPL/ConfGen/ConformerSamplingMode.hpp"
+#include "CDPL/ConfGen/StructureGenerationMode.hpp"
 
 #include "NamespaceExports.hpp"
 
@@ -34,17 +34,17 @@
 namespace 
 {
 
-	struct ConformerSamplingMode {};
+	struct StructureGenerationMode {};
 }
 
 
-void CDPLPythonConfGen::exportConformerSamplingModes()
+void CDPLPythonConfGen::exportStructureGenerationModes()
 {
 	using namespace boost;
 	using namespace CDPL;
 
-	python::class_<ConformerSamplingMode, boost::noncopyable>("ConformerSamplingMode", python::no_init)
-		.def_readonly("AUTO", &ConfGen::ConformerSamplingMode::AUTO)
-		.def_readonly("SYSTEMATIC", &ConfGen::ConformerSamplingMode::SYSTEMATIC)
-		.def_readonly("STOCHASTIC", &ConfGen::ConformerSamplingMode::STOCHASTIC);
+	python::class_<StructureGenerationMode, boost::noncopyable>("StructureGenerationMode", python::no_init)
+		.def_readonly("AUTO", &ConfGen::StructureGenerationMode::AUTO)
+		.def_readonly("FRAGMENT", &ConfGen::StructureGenerationMode::FRAGMENT)
+		.def_readonly("DISTANCE_GEOMETRY", &ConfGen::StructureGenerationMode::DISTANCE_GEOMETRY);
 }

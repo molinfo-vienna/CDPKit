@@ -37,9 +37,9 @@ using namespace CDPL;
 
 
 ConfGen::ConformerGeneratorSettings::ConformerGeneratorSettings():
-	confSamplingMode(ConformerSamplingMode::AUTO), sampleHetAtomHs(false), sampleTolRanges(false), 
+	samplingMode(ConformerSamplingMode::AUTO), sampleHetAtomHs(false), sampleTolRanges(false), 
 	enumRings(true), nitrogenEnumMode(NitrogenEnumerationMode::UNSPECIFIED_STEREO),
-	fromScratch(true), incInputCoords(false), eWindow(10.0), timeout(60 * 60 * 1000), 
+	fromScratch(true), incInputCoords(false), eWindow(10.0), maxPoolSize(10000), timeout(60 * 60 * 1000), 
 	forceFieldType(ForceFieldType::MMFF94S_EXT_NO_ESTAT), strictParam(true), 
 	dielectricConst(ForceField::MMFF94ElectrostaticInteractionParameterizer::DEF_DIELECTRIC_CONSTANT),
 	distExponent(ForceField::MMFF94ElectrostaticInteractionParameterizer::DEF_DISTANCE_EXPONENT),
@@ -47,14 +47,14 @@ ConfGen::ConformerGeneratorSettings::ConformerGeneratorSettings():
 	convIterCount(300), minMacrocycleSize(14)
 {}
 
-void ConfGen::ConformerGeneratorSettings::setConformerSamplingMode(unsigned int mode)
+void ConfGen::ConformerGeneratorSettings::setSamplingMode(unsigned int mode)
 {
-	confSamplingMode = mode;
+	samplingMode = mode;
 }
 
-unsigned int ConfGen::ConformerGeneratorSettings::getConformerSamplingMode() const
+unsigned int ConfGen::ConformerGeneratorSettings::getSamplingMode() const
 {
-	return confSamplingMode;
+	return samplingMode;
 }
 
 void ConfGen::ConformerGeneratorSettings::sampleHeteroAtomHydrogens(bool sample)
@@ -125,6 +125,16 @@ void ConfGen::ConformerGeneratorSettings::setEnergyWindow(double win_size)
 double ConfGen::ConformerGeneratorSettings::getEnergyWindow() const
 {
 	return eWindow;
+}
+
+void ConfGen::ConformerGeneratorSettings::setMaxPoolSize(std::size_t max_size)
+{
+	maxPoolSize = max_size;
+}
+
+std::size_t ConfGen::ConformerGeneratorSettings::getMaxPoolSize() const
+{
+	return maxPoolSize;
 }
 
 void ConfGen::ConformerGeneratorSettings::setTimeout(std::size_t mil_secs)
