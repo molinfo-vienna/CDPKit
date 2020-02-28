@@ -136,8 +136,6 @@ namespace CDPL
 			std::size_t calcNumSmallRingSystemConfSamples() const;
 			std::size_t calcNumMacrocyclicRingSystemConfSamples() const;
 
-			std::size_t getNumRotatableRingBonds(const Chem::MolecularGraph& molgraph) const;
-
 			ConformerData::SharedPointer allocConformerData();
 
 			unsigned int invokeCallbacks() const;

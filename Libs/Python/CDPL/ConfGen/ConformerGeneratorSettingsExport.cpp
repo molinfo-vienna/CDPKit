@@ -128,9 +128,9 @@ void CDPLPythonConfGen::exportConformerGeneratorSettings()
 			 (python::arg("self"), python::arg("count")))
 		.def("getConvergenceIterationCount", &ConfGen::ConformerGeneratorSettings::getConvergenceIterationCount, 
 			 python::arg("self"))
-		.def("setMinMacrocycleSize", &ConfGen::ConformerGeneratorSettings::setMinMacrocycleSize, 
+		.def("setMacrocycleRotorBondCountThreshold", &ConfGen::ConformerGeneratorSettings::setMacrocycleRotorBondCountThreshold, 
 			 (python::arg("self"), python::arg("max_size")))
-		.def("getMinMacrocycleSize", &ConfGen::ConformerGeneratorSettings::getMinMacrocycleSize, 
+		.def("getMacrocycleRotorBondCountThreshold", &ConfGen::ConformerGeneratorSettings::getMacrocycleRotorBondCountThreshold, 
 			 python::arg("self"))
 		.def("getFragmentBuildSettings", 
 			 static_cast<ConfGen::FragmentConformerGeneratorSettings& (ConfGen::ConformerGeneratorSettings::*)()>
@@ -183,8 +183,8 @@ void CDPLPythonConfGen::exportConformerGeneratorSettings()
 					  &ConfGen::ConformerGeneratorSettings::setMaxNumSampledConformers)
 		.add_property("convergenceIterationCount", &ConfGen::ConformerGeneratorSettings::getConvergenceIterationCount, 
 					  &ConfGen::ConformerGeneratorSettings::setConvergenceIterationCount)
-		.add_property("minMacrocycleSize", &ConfGen::ConformerGeneratorSettings::getMinMacrocycleSize, 
-					  &ConfGen::ConformerGeneratorSettings::setMinMacrocycleSize)
+		.add_property("macrocycleRotorBondCountThresh", &ConfGen::ConformerGeneratorSettings::getMacrocycleRotorBondCountThreshold, 
+					  &ConfGen::ConformerGeneratorSettings::setMacrocycleRotorBondCountThreshold)
 		.add_property("fragmentBuildSettings", 
 					  python::make_function(static_cast<ConfGen::FragmentConformerGeneratorSettings& (ConfGen::ConformerGeneratorSettings::*)()>
 											(&ConfGen::ConformerGeneratorSettings::getFragmentBuildSettings),

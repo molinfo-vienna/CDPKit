@@ -32,6 +32,7 @@
 #define CDPL_CONFGEN_UTILITYFUNCTIONS_HPP
 
 #include <string>
+#include <cstddef>
 
 
 namespace CDPL 
@@ -41,6 +42,8 @@ namespace CDPL
     {
 
 		class MolecularGraph;
+		class BondContainer;
+		class FragmentList;
     }
 
     namespace ConfGen 
@@ -53,6 +56,10 @@ namespace CDPL
 		std::string getSMILES(Chem::MolecularGraph& molgraph);
 
 		std::string getSMILES(const Chem::MolecularGraph& molgraph);
+
+		std::size_t getNonAromaticSingleBondCount(const Chem::BondContainer& cntnr);
+
+		std::size_t getMaxNonAromaticSingleBondCount(const Chem::FragmentList& frags);
     }
 }
 

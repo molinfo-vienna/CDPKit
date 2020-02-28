@@ -104,7 +104,7 @@ ConfGen::FragmentConformerGeneratorSettings::FragmentConformerGeneratorSettings(
 	preserveBondGeom(false), forceFieldType(ForceFieldType::MMFF94S_EXT_NO_ESTAT), strictParam(true), 
 	dielectricConst(ForceField::MMFF94ElectrostaticInteractionParameterizer::DEF_DIELECTRIC_CONSTANT),
 	distExponent(ForceField::MMFF94ElectrostaticInteractionParameterizer::DEF_DISTANCE_EXPONENT),
-	maxNumRefIters(0), refStopGrad(0.1), minMacrocycleSize(10), srSamplingFactor(6) 
+	maxNumRefIters(0), refStopGrad(0.1), mcRotorBondCountThresh(10), srSamplingFactor(6) 
 {
 	chainSettings.setMaxNumSampledConformers(100);
 	chainSettings.setMinNumSampledConformers(20);
@@ -198,14 +198,14 @@ double ConfGen::FragmentConformerGeneratorSettings::getRefinementStopGradient() 
 	return refStopGrad;
 }
 
-void ConfGen::FragmentConformerGeneratorSettings::setMinMacrocycleSize(std::size_t min_size)
+void ConfGen::FragmentConformerGeneratorSettings::setMacrocycleRotorBondCountThreshold(std::size_t min_count)
 {
-	minMacrocycleSize = min_size;
+	mcRotorBondCountThresh = min_count;
 }
 
-std::size_t ConfGen::FragmentConformerGeneratorSettings::getMinMacrocycleSize() const
+std::size_t ConfGen::FragmentConformerGeneratorSettings::getMacrocycleRotorBondCountThreshold() const
 {
-	return minMacrocycleSize;
+	return mcRotorBondCountThresh;
 }
 
 ConfGen::FragmentConformerGeneratorSettings::FragmentSettings& 

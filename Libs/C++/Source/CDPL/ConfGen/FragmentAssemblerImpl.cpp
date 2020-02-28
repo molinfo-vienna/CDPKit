@@ -294,6 +294,7 @@ unsigned int ConfGen::FragmentAssemblerImpl::getFragmentConformers()
 
 			logCallback("Build fragment " + getSMILES(fragLibEntry) + ":\n");
 			logCallback(" Type: " + fragmentTypeToString(frag_type, true) + '\n');
+			logCallback(" Hash Code: " + boost::lexical_cast<std::string>(fragLibEntry.getHashCode()) + "\n");
 		}
 
 		if (!(!settings.generateCoordinatesFromScratch() && 

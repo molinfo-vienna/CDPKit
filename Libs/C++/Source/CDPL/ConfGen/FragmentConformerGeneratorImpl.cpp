@@ -44,9 +44,7 @@
 #include "CDPL/Chem/Bond.hpp"
 #include "CDPL/Chem/MolecularGraphFunctions.hpp"
 #include "CDPL/Chem/AtomFunctions.hpp"
-#include "CDPL/Chem/BondFunctions.hpp"
 #include "CDPL/Chem/Entity3DFunctions.hpp"
-#include "CDPL/Chem/UtilityFunctions.hpp"
 #include "CDPL/Math/Matrix.hpp"
 #include "CDPL/Math/VectorArrayFunctions.hpp"
 #include "CDPL/ForceField/UtilityFunctions.hpp"
@@ -428,12 +426,11 @@ unsigned int ConfGen::FragmentConformerGeneratorImpl::generateFlexibleRingConfor
 	getRingAtomIndices();
 	getSymmetryMappings();
 
-	std::size_t num_conf_samples = 0;
 	const FragmentConformerGeneratorSettings::FragmentSettings* rsys_settings = 0;
+	std::size_t num_conf_samples = calcNumMacrocyclicRingSystemConfSamples(); 
 
-	if (containsFragmentWithMinSize(*getSSSR(*molGraph), settings.getMinMacrocycleSize())) {
+	if (num_conf_samples > 0) {
 		rsys_settings = &settings.getMacrocycleSettings();
-		num_conf_samples = calcNumMacrocyclicRingSystemConfSamples();
 
 		if (logCallback)
 			logCallback("Used settings: macrocycle\n");
@@ -823,30 +820,19 @@ std::size_t ConfGen::FragmentConformerGeneratorImpl::calcNumSmallRingSystemConfS
 	const FragmentList& sssr = *getSSSR(*molGraph);
 
 	for (FragmentList::ConstElementIterator it = sssr.getElementsBegin(), end = sssr.getElementsEnd(); it != end; ++it) 
-		rot_bond_sum += getNumRotatableRingBonds(*it);
+		rot_bond_sum += getNonAromaticSingleBondCount(*it);
 
 	return (rot_bond_sum * settings.getSmallRingSystemSamplingFactor());
 }
 
 std::size_t ConfGen::FragmentConformerGeneratorImpl::calcNumMacrocyclicRingSystemConfSamples() const
 {
-	return std::pow(2, getNumRotatableRingBonds(*molGraph));
-}
+	std::size_t max_rot_bnd_cnt = getMaxNonAromaticSingleBondCount(*getSSSR(*molGraph));
 
-std::size_t ConfGen::FragmentConformerGeneratorImpl::getNumRotatableRingBonds(const Chem::MolecularGraph& molgraph) const
-{
-	using namespace Chem;
+	if (max_rot_bnd_cnt < settings.getMacrocycleRotorBondCountThreshold())
+		return 0;
 
-	std::size_t count = 0;
-
-	for (MolecularGraph::ConstBondIterator it = molgraph.getBondsBegin(), end = molgraph.getBondsEnd(); it != end; ++it) {
-		const Bond& bond = *it;
-
-		if (getRingFlag(bond) && !getAromaticityFlag(bond) && getOrder(bond) == 1)
-			count++;
-	}
-
-	return count;
+	return std::pow(2, max_rot_bnd_cnt);
 }
 
 unsigned int ConfGen::FragmentConformerGeneratorImpl::invokeCallbacks() const

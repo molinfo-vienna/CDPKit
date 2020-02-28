@@ -64,7 +64,7 @@ namespace
 			FRAG_CONF_GEN_FAST.strictForceFieldParameterization(true);
 			FRAG_CONF_GEN_FAST.setMaxNumRefinementIterations(0);
 			FRAG_CONF_GEN_FAST.setRefinementStopGradient(0.25);
-			FRAG_CONF_GEN_FAST.setMinMacrocycleSize(10);
+			FRAG_CONF_GEN_FAST.setMacrocycleRotorBondCountThreshold(10);
 			FRAG_CONF_GEN_FAST.setSmallRingSystemSamplingFactor(6);
 
 			FragmentConformerGeneratorSettings::FragmentSettings* chain_settings = &FRAG_CONF_GEN_FAST.getChainSettings();
@@ -128,7 +128,7 @@ namespace
 			CONF_GEN_SMALL_SET_DIVERSE.strictForceFieldParameterization(true);
 			CONF_GEN_SMALL_SET_DIVERSE.setMaxNumRefinementIterations(0);
 			CONF_GEN_SMALL_SET_DIVERSE.setRefinementStopGradient(0.25);
-			CONF_GEN_SMALL_SET_DIVERSE.setMinMacrocycleSize(14);
+			CONF_GEN_SMALL_SET_DIVERSE.setMacrocycleRotorBondCountThreshold(10);
 			CONF_GEN_SMALL_SET_DIVERSE.setConvergenceIterationCount(300);
 			CONF_GEN_SMALL_SET_DIVERSE.setMaxNumSampledConformers(10000);
 			CONF_GEN_SMALL_SET_DIVERSE.setEnergyWindow(10.0);

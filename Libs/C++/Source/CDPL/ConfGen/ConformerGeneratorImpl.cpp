@@ -42,7 +42,6 @@
 #include "CDPL/Chem/MolecularGraphFunctions.hpp"
 #include "CDPL/Chem/AtomFunctions.hpp"
 #include "CDPL/Chem/Entity3DFunctions.hpp"
-#include "CDPL/Chem/UtilityFunctions.hpp"
 #include "CDPL/Chem/AtomType.hpp"
 #include "CDPL/ForceField/MMFF94EnergyCalculator.hpp"
 #include "CDPL/ForceField/Exceptions.hpp"
@@ -615,7 +614,8 @@ bool ConfGen::ConformerGeneratorImpl::determineSamplingMode()
 			break;
 	}
 
-	return (inStochasticMode = Chem::containsFragmentWithMinSize(*getSSSR(*molGraph), settings.getMinMacrocycleSize()));
+	return (inStochasticMode = (getMaxNonAromaticSingleBondCount(*getSSSR(*molGraph)) >= 
+								settings.getMacrocycleRotorBondCountThreshold()));
 }
 
 void ConfGen::ConformerGeneratorImpl::init(const Chem::MolecularGraph& molgraph, bool start_timer)

@@ -202,7 +202,7 @@
 
 *   Sulfur
     [#16X4H3+0:1]                                        SO2N    SPECIAL ENTRY FOR CONFGEN: SULFUR IN SULFONAMIDES
-    [#16X2:1]                                            S       SULFUR IN THIOETHERS AND MERCAPTANS
+    [#16;X2,X3:1]                                        S       SULFUR IN THIOETHERS AND MERCAPTANS
     [#16X1:1]=[#6]                                       S=C     TERMINAL SULFUR DOUBLY BONDED TO CARBON
     [#16X3:1]=[#8]                                       S=O     SULFUR IN SULFOXIDES
     [#16;X1,X3:1]=[#7]                                   >S=N    SULFUR, TRICOORD, DOUBLY BONDED TO N

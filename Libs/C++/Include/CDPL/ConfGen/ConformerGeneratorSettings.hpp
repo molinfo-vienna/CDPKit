@@ -144,9 +144,9 @@ namespace CDPL
 
 			std::size_t getConvergenceIterationCount() const;
 
-			void setMinMacrocycleSize(std::size_t min_size);
+			void setMacrocycleRotorBondCountThreshold(std::size_t min_count);
 
-			std::size_t getMinMacrocycleSize() const;
+			std::size_t getMacrocycleRotorBondCountThreshold() const;
 
 			FragmentConformerGeneratorSettings& getFragmentBuildSettings();
 
@@ -173,7 +173,7 @@ namespace CDPL
 			double                             refStopGrad;
 			std::size_t                        maxNumSampledConfs;
 			std::size_t                        convIterCount;
-			std::size_t                        minMacrocycleSize;
+			std::size_t                        mcRotorBondCountThresh;
 			FragmentConformerGeneratorSettings fragBuildSettings;
 		};
 	};

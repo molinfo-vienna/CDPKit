@@ -340,10 +340,10 @@ StructGenImpl::StructGenImpl():
 	addOption("timeout,T", "Time in seconds after which structure generation will be stopped (default: " + 
 			  boost::lexical_cast<std::string>(settings.getTimeout() / 1000) + "s, must be >= 0, 0 disables timeout).",
 			  value<std::size_t>()->notifier(boost::bind(&StructGenImpl::setTimeout, this, _1)));
-	addOption("min-macrocycle-size,Z", "Minimum ring size that triggers a preference for distance geometry based structure generation "
+	addOption("mc-rot-bond-count-thresh,Z", "Minimum number of rotatable bonds in a ring that triggers a preference for distance geometry based structure generation "
 			  "(only effective in sampling mode AUTO, default: " +
-			  boost::lexical_cast<std::string>(settings.getMinMacrocycleSize()) + ", must be > 0).", 
-			  value<std::size_t>()->notifier(boost::bind(&StructGenImpl::setMinMacrocycleSize, this, _1)));
+			  boost::lexical_cast<std::string>(settings.getMacrocycleRotorBondCountThreshold()) + ", must be > 0).", 
+			  value<std::size_t>()->notifier(boost::bind(&StructGenImpl::setMacrocycleRotorBondCountThreshold, this, _1)));
 	addOption("ref-stop-gradient,P", "Energy gradient norm at which force field structure refinement stops (only effective in distance geometry based structure generation, default: " +
 			  (boost::format("%.4f") % settings.getRefinementStopGradient()).str() + ", must be >= 0, 0 disables limit).", 
 			  value<double>()->notifier(boost::bind(&StructGenImpl::setRefStopGradient, this, _1)));
@@ -495,12 +495,12 @@ void StructGenImpl::setDistExponent(double exp)
 	settings.setDistanceExponent(exp);
 }
 
-void StructGenImpl::setMinMacrocycleSize(std::size_t min_size)
+void StructGenImpl::setMacrocycleRotorBondCountThreshold(std::size_t min_count)
 {
-	if (min_size == 0)
-		throwValidationError("min-macrocycle-size");
+	if (min_count == 0)
+		throwValidationError("mc-rot-bond-count-thresh");
 
-	settings.setMinMacrocycleSize(min_size);
+	settings.setMacrocycleRotorBondCountThreshold(min_count);
 }
 
 void StructGenImpl::setRefStopGradient(double g_norm)
@@ -761,7 +761,7 @@ void StructGenImpl::printStatistics(std::size_t num_proc_mols, std::size_t num_f
 
 	if (num_proc_mols > 0)
 		printMessage(INFO, " Processing Time:      " + AppUtils::formatTimeDuration(proc_time) + 
-					 " (" + (boost::format("%.4f") % (double(proc_time) / num_proc_mols)).str() + "s/Mol.");
+					 " (" + (boost::format("%.3f") % (double(proc_time) / num_proc_mols)).str() + " s/Mol.)");
 	else
 		printMessage(INFO, " Processing Time:      " + AppUtils::formatTimeDuration(proc_time));
 
@@ -897,7 +897,7 @@ void StructGenImpl::printOptionSummary()
 	printMessage(VERBOSE, " Strict Force Field Parameterization: " + std::string(settings.strictForceFieldParameterization() ? "Yes" : "No"));
 	printMessage(VERBOSE, " Dielectric Constant:                 " + (boost::format("%.4f") % settings.getDielectricConstant()).str());
 	printMessage(VERBOSE, " Distance Exponent:                   " + (boost::format("%.4f") % settings.getDistanceExponent()).str());
-	printMessage(VERBOSE, " Min. Macrocycle Size:                " + boost::lexical_cast<std::string>(settings.getMinMacrocycleSize()));
+	printMessage(VERBOSE, " Macrocycle Rot. Bond Count Theshold: " + boost::lexical_cast<std::string>(settings.getMacrocycleRotorBondCountThreshold()));
 	printMessage(VERBOSE, " Refinement Stop Gradient:            " + (boost::format("%.4f") % settings.getRefinementStopGradient()).str());
 	printMessage(VERBOSE, " Max. Num. Refinement Iterations:     " + boost::lexical_cast<std::string>(settings.getMaxNumRefinementIterations()));
 	printMessage(VERBOSE, " Timeout:                             " + boost::lexical_cast<std::string>(settings.getTimeout() / 1000) + "s");

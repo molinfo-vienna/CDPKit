@@ -24,9 +24,15 @@
  */
 
 
+#include <algorithm>
+
 #include "CDPL/ConfGen/FragmentType.hpp"
 #include "CDPL/ConfGen/ReturnCode.hpp"
 #include "CDPL/Chem/MolecularGraphFunctions.hpp"
+#include "CDPL/Chem/FragmentList.hpp"
+#include "CDPL/Chem/BondContainer.hpp"
+#include "CDPL/Chem/Bond.hpp"
+#include "CDPL/Chem/BondFunctions.hpp"
 
 #include "UtilityFunctions.hpp"
 
@@ -122,4 +128,29 @@ std::string ConfGen::getSMILES(const Chem::MolecularGraph& molgraph)
 		return smiles;
 
     return "";
+}
+
+std::size_t ConfGen::getNonAromaticSingleBondCount(const Chem::BondContainer& cntnr)
+{
+	using namespace Chem;
+
+	std::size_t count = 0;
+
+	for (BondContainer::ConstBondIterator it = cntnr.getBondsBegin(), end = cntnr.getBondsEnd(); it != end; ++it)
+		if (getOrder(*it) == 1 && !getAromaticityFlag(*it))
+			count++;
+
+	return count;
+}
+
+std::size_t ConfGen::getMaxNonAromaticSingleBondCount(const Chem::FragmentList& frags)
+{
+	using namespace Chem;
+
+	std::size_t max_count = 0;
+
+	for (FragmentList::ConstElementIterator it =  frags.getElementsBegin(), end = frags.getElementsEnd(); it != end; ++it)
+		max_count = std::max(max_count, getNonAromaticSingleBondCount(*it));
+
+	return max_count;
 }

@@ -122,9 +122,9 @@ void CDPLPythonConfGen::exportFragmentConformerGeneratorSettings()
 			 (python::arg("self"), python::arg("grad_norm")))
 		.def("getRefinementStopGradient", &ConfGen::FragmentConformerGeneratorSettings::getRefinementStopGradient, 
 			 python::arg("self"))
-		.def("setMinMacrocycleSize", &ConfGen::FragmentConformerGeneratorSettings::setMinMacrocycleSize, 
+		.def("setMacrocycleRotorBondCountThreshold", &ConfGen::FragmentConformerGeneratorSettings::setMacrocycleRotorBondCountThreshold, 
 			 (python::arg("self"), python::arg("max_size")))
-		.def("getMinMacrocycleSize", &ConfGen::FragmentConformerGeneratorSettings::getMinMacrocycleSize, 
+		.def("getMacrocycleRotorBondCountThreshold", &ConfGen::FragmentConformerGeneratorSettings::getMacrocycleRotorBondCountThreshold, 
 			 python::arg("self"))
 		.def("getChainSettings", 
 			 static_cast<ConfGen::FragmentConformerGeneratorSettings::FragmentSettings& (ConfGen::FragmentConformerGeneratorSettings::*)()>
@@ -159,8 +159,8 @@ void CDPLPythonConfGen::exportFragmentConformerGeneratorSettings()
 					  &ConfGen::FragmentConformerGeneratorSettings::setMaxNumRefinementIterations)
 		.add_property("minimizationStopGradientNorm", &ConfGen::FragmentConformerGeneratorSettings::getRefinementStopGradient,
 					  &ConfGen::FragmentConformerGeneratorSettings::setRefinementStopGradient)
-		.add_property("minMacrocycleSize", &ConfGen::FragmentConformerGeneratorSettings::getMinMacrocycleSize, 
-					  &ConfGen::FragmentConformerGeneratorSettings::setMinMacrocycleSize)
+		.add_property("macrocycleRotorBondCountThresh", &ConfGen::FragmentConformerGeneratorSettings::getMacrocycleRotorBondCountThreshold, 
+					  &ConfGen::FragmentConformerGeneratorSettings::setMacrocycleRotorBondCountThreshold)
 		.add_property("chainSettings", 
 					  python::make_function(static_cast<ConfGen::FragmentConformerGeneratorSettings::FragmentSettings& (ConfGen::FragmentConformerGeneratorSettings::*)()>
 											(&ConfGen::FragmentConformerGeneratorSettings::getChainSettings),

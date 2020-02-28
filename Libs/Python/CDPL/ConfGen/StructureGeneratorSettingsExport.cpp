@@ -88,9 +88,9 @@ void CDPLPythonConfGen::exportStructureGeneratorSettings()
 			 (python::arg("self"), python::arg("grad_norm")))
 		.def("getRefinementStopGradient", &ConfGen::StructureGeneratorSettings::getRefinementStopGradient, 
 			 python::arg("self"))
-		.def("setMinMacrocycleSize", &ConfGen::StructureGeneratorSettings::setMinMacrocycleSize, 
+		.def("setMacrocycleRotorBondCountThreshold", &ConfGen::StructureGeneratorSettings::setMacrocycleRotorBondCountThreshold, 
 			 (python::arg("self"), python::arg("max_size")))
-		.def("getMinMacrocycleSize", &ConfGen::StructureGeneratorSettings::getMinMacrocycleSize, 
+		.def("getMacrocycleRotorBondCountThreshold", &ConfGen::StructureGeneratorSettings::getMacrocycleRotorBondCountThreshold, 
 			 python::arg("self"))
 		.def("setMaxNumSampledConformers", &ConfGen::StructureGeneratorSettings::setMaxNumSampledConformers, 
 			 (python::arg("self"), python::arg("max_num")))
@@ -125,8 +125,8 @@ void CDPLPythonConfGen::exportStructureGeneratorSettings()
 					  &ConfGen::StructureGeneratorSettings::setMaxNumRefinementIterations)
 		.add_property("refinementStopGradient", &ConfGen::StructureGeneratorSettings::getRefinementStopGradient,
 					  &ConfGen::StructureGeneratorSettings::setRefinementStopGradient)
-		.add_property("minMacrocycleSize", &ConfGen::StructureGeneratorSettings::getMinMacrocycleSize, 
-					  &ConfGen::StructureGeneratorSettings::setMinMacrocycleSize)
+		.add_property("macrocycleRotorBondCountThresh", &ConfGen::StructureGeneratorSettings::getMacrocycleRotorBondCountThreshold, 
+					  &ConfGen::StructureGeneratorSettings::setMacrocycleRotorBondCountThreshold)
 		.add_property("maxNumSampledConformers", &ConfGen::StructureGeneratorSettings::getMaxNumSampledConformers, 
 					  &ConfGen::StructureGeneratorSettings::setMaxNumSampledConformers)
 		.add_property("convergenceIterationCount", &ConfGen::StructureGeneratorSettings::getConvergenceIterationCount, 

@@ -404,10 +404,10 @@ ConfGenImpl::ConfGenImpl():
 			  " consider convergence to be reached and cause conformer sampling to terminate (only effective in stochastic sampling, default: " +
 			  boost::lexical_cast<std::string>(settings.getConvergenceIterationCount()) + ", must be > 0).", 
 			  value<std::size_t>()->notifier(boost::bind(&ConfGenImpl::setConvergenceIterCount, this, _1)));
-	addOption("min-macrocycle-size,Z", "Minimum ring size that triggers a preference for stochastic sampling "
+	addOption("mc-rot-bond-count-thresh,Z", "Minimum number of rotatable bonds in a ring that triggers a preference for stochastic sampling "
 			  "(only effective in sampling mode AUTO, default: " +
-			  boost::lexical_cast<std::string>(settings.getMinMacrocycleSize()) + ", must be > 0).", 
-			  value<std::size_t>()->notifier(boost::bind(&ConfGenImpl::setMinMacrocycleSize, this, _1)));
+			  boost::lexical_cast<std::string>(settings.getMacrocycleRotorBondCountThreshold()) + ", must be > 0).", 
+			  value<std::size_t>()->notifier(boost::bind(&ConfGenImpl::setMacrocycleRotorBondCountThreshold, this, _1)));
 	addOption("ref-stop-gradient,P", "Energy gradient norm at which force field structure refinement stops (only effective in stochastic sampling, default: " +
 			  (boost::format("%.4f") % settings.getRefinementStopGradient()).str() + ", must be >= 0, 0 disables limit).", 
 			  value<double>()->notifier(boost::bind(&ConfGenImpl::setRefStopGradient, this, _1)));
@@ -607,12 +607,12 @@ void ConfGenImpl::setConvergenceIterCount(std::size_t iter_count)
 	settings.setConvergenceIterationCount(iter_count);
 }
 
-void ConfGenImpl::setMinMacrocycleSize(std::size_t min_size)
+void ConfGenImpl::setMacrocycleRotorBondCountThreshold(std::size_t min_count)
 {
-	if (min_size == 0)
-		throwValidationError("min-macrocycle-size");
+	if (min_count == 0)
+		throwValidationError("mc-rot-bond-count-thresh");
 
-	settings.setMinMacrocycleSize(min_size);
+	settings.setMacrocycleRotorBondCountThreshold(min_count);
 }
 
 void ConfGenImpl::setRefStopGradient(double g_norm)
@@ -927,11 +927,16 @@ void ConfGenImpl::printStatistics(std::size_t num_proc_mols, std::size_t num_fai
 	printMessage(INFO, "Statistics:");
 	printMessage(INFO, " Processed Molecules:  " + boost::lexical_cast<std::string>(num_proc_mols));
 	printMessage(INFO, " Molecules Failed:     " + boost::lexical_cast<std::string>(num_failed_mols));
-	printMessage(INFO, " Generated Conformers: " + boost::lexical_cast<std::string>(num_gen_confs));
 
-	if (num_proc_mols > 0)
+	if ((num_proc_mols - num_failed_mols) > 0) 
+		printMessage(INFO, " Generated Conformers: " + boost::lexical_cast<std::string>(num_gen_confs) + 
+					 " (" + (boost::format("%.2f") % (double(num_gen_confs) / (num_proc_mols - num_failed_mols))).str() + " Confs./Mol.)");
+	else
+		printMessage(INFO, " Generated Conformers: " + boost::lexical_cast<std::string>(num_gen_confs));
+
+	if (num_proc_mols > 0) 
 		printMessage(INFO, " Processing Time:      " + AppUtils::formatTimeDuration(proc_time) + 
-					 " (" + (boost::format("%.4f") % (double(proc_time) / num_proc_mols)).str() + "s/Mol.");
+					 " (" + (boost::format("%.3f") % (double(proc_time) / num_proc_mols)).str() + " s/Mol.)");
 	else
 		printMessage(INFO, " Processing Time:      " + AppUtils::formatTimeDuration(proc_time));
 
@@ -1078,7 +1083,7 @@ void ConfGenImpl::printOptionSummary()
 	printMessage(VERBOSE, " Distance Exponent:                   " + (boost::format("%.4f") % settings.getDistanceExponent()).str());
 	printMessage(VERBOSE, " Max. Num. Sampled Conformers:        " + boost::lexical_cast<std::string>(settings.getMaxNumSampledConformers()));
 	printMessage(VERBOSE, " Convergence Iteration Count:         " + boost::lexical_cast<std::string>(settings.getConvergenceIterationCount()));
-	printMessage(VERBOSE, " Min. Macrocycle Size:                " + boost::lexical_cast<std::string>(settings.getMinMacrocycleSize()));
+	printMessage(VERBOSE, " Macrocycle Rot. Bond Count Theshold: " + boost::lexical_cast<std::string>(settings.getMacrocycleRotorBondCountThreshold()));
 	printMessage(VERBOSE, " Refinement Stop Gradient:            " + (boost::format("%.4f") % settings.getRefinementStopGradient()).str());
 	printMessage(VERBOSE, " Max. Num. Refinement Iterations:     " + boost::lexical_cast<std::string>(settings.getMaxNumRefinementIterations()));
 	printMessage(VERBOSE, " Timeout:                             " + boost::lexical_cast<std::string>(settings.getTimeout() / 1000) + "s");

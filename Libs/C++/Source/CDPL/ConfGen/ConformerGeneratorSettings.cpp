@@ -44,7 +44,7 @@ ConfGen::ConformerGeneratorSettings::ConformerGeneratorSettings():
 	dielectricConst(ForceField::MMFF94ElectrostaticInteractionParameterizer::DEF_DIELECTRIC_CONSTANT),
 	distExponent(ForceField::MMFF94ElectrostaticInteractionParameterizer::DEF_DISTANCE_EXPONENT),
 	maxNumOutputConfs(100), minRMSD(0.5), maxNumRefIters(0), refStopGrad(0.25), maxNumSampledConfs(10000),
-	convIterCount(300), minMacrocycleSize(14)
+	convIterCount(300), mcRotorBondCountThresh(10)
 {}
 
 void ConfGen::ConformerGeneratorSettings::setSamplingMode(unsigned int mode)
@@ -247,14 +247,14 @@ std::size_t ConfGen::ConformerGeneratorSettings::getConvergenceIterationCount() 
 	return convIterCount;
 }
 
-void ConfGen::ConformerGeneratorSettings::setMinMacrocycleSize(std::size_t min_size)
+void ConfGen::ConformerGeneratorSettings::setMacrocycleRotorBondCountThreshold(std::size_t min_count)
 {
-	minMacrocycleSize = min_size;
+	mcRotorBondCountThresh = min_count;
 }
 
-std::size_t ConfGen::ConformerGeneratorSettings::getMinMacrocycleSize() const
+std::size_t ConfGen::ConformerGeneratorSettings::getMacrocycleRotorBondCountThreshold() const
 {
-	return minMacrocycleSize;
+	return mcRotorBondCountThresh;
 }
 
 ConfGen::FragmentConformerGeneratorSettings& ConfGen::ConformerGeneratorSettings::getFragmentBuildSettings()

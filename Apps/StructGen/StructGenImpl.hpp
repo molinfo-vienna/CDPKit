@@ -82,7 +82,7 @@ namespace StructGen
 		void setDielectricConst(double de_const);
 		void setDistExponent(double exp);
 		void setConvergenceIterCount(std::size_t iter_count);
-		void setMinMacrocycleSize(std::size_t min_size);
+		void setMacrocycleRotorBondCountThreshold(std::size_t min_count);
 		void setRefStopGradient(double g_norm);
 		void setMaxNumRefIterations(std::size_t num_iter);
 		void setStrictParameterization(bool strict);

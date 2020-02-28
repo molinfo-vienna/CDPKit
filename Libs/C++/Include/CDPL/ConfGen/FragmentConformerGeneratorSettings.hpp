@@ -126,9 +126,9 @@ namespace CDPL
 
 			double getRefinementStopGradient() const;
 
-			void setMinMacrocycleSize(std::size_t min_size);
+			void setMacrocycleRotorBondCountThreshold(std::size_t min_count);
 
-			std::size_t getMinMacrocycleSize() const;
+			std::size_t getMacrocycleRotorBondCountThreshold() const;
 
 			FragmentSettings& getChainSettings();
 
@@ -154,7 +154,7 @@ namespace CDPL
 			double               distExponent;
 			std::size_t          maxNumRefIters;
 			double               refStopGrad;
-			std::size_t          minMacrocycleSize;
+			std::size_t          mcRotorBondCountThresh;
 			std::size_t          srSamplingFactor;
 			FragmentSettings     chainSettings;
 			FragmentSettings     mcSettings;
