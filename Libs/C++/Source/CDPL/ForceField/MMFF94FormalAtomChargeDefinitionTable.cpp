@@ -5,7 +5,7 @@
  *
  * This file is part of the Chemical Data Processing Toolkit
  *
- * Copyright (C) 2003-2010 Thomas A. Seidel <thomas.seidel@univie.ac.at>
+ * Copyright (C) 2003-2020 Thomas A. Seidel <thomas.seidel@univie.ac.at>
  *
  * This library is free software; you can redistribute it and/or
  * modify it under the terms of the GNU Lesser General Public
