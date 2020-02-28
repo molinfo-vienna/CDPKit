@@ -27,6 +27,7 @@
 #include "StaticInit.hpp"
 
 #include <algorithm>
+#include <functional>
 
 #include <boost/bind.hpp>
 
@@ -72,6 +73,7 @@ void Chem::SmallestSetOfSmallestRings::perceive(const MolecularGraph& molgraph)
 	visAtomMask.reset();
 
 	std::size_t i = 0;
+	std::size_t comp_count = 0;
 	Fragment::ConstAtomIterator atoms_end = cyclicSubstruct.getAtomsEnd();
 
 	for (Fragment::ConstAtomIterator it = cyclicSubstruct.getAtomsBegin(); it != atoms_end; ++it, i++) {
@@ -85,6 +87,7 @@ void Chem::SmallestSetOfSmallestRings::perceive(const MolecularGraph& molgraph)
 			visitComponentAtom(atom);
 
 			sssrSize = component.getNumBonds() + 1 - component.getNumAtoms();
+			comp_count++;
 
 			if (sssrSize == 1) {
 				const Atom* r_atom = &atom;
@@ -123,6 +126,10 @@ void Chem::SmallestSetOfSmallestRings::perceive(const MolecularGraph& molgraph)
 			createRingFragments();
 		}
 	}
+
+	if (comp_count > 1)
+		std::sort(this->BaseType::getElementsBegin(), this->BaseType::getElementsEnd(), 
+				  boost::bind(std::less<std::size_t>(), boost::bind(&Fragment::getNumAtoms, _1), boost::bind(&Fragment::getNumAtoms, _2)));
 }
 
 void Chem::SmallestSetOfSmallestRings::visitComponentAtom(const Atom& atom)
@@ -177,23 +184,8 @@ void Chem::SmallestSetOfSmallestRings::init()
 		TNode::connect(&node1, &node2, bond_idx);
 	}
 
-	for (NodeArray::iterator it = nodes.begin(), end = nodes.end(); it != end; ++it) {
-		TNode& node = *it;
-
-		if (node.getNumNeighbors() <= 2)
-			continue;
-
-		node.compressLinearRingFrags();
-	}
-
-	for (NodeArray::iterator it = nodes.begin(), end = nodes.end(); it != end; ++it) {
-		TNode& node = *it;
-
-		if (!node.isActive()) 
-			continue;
-
-		node.initMessages(this, num_atoms, num_bonds);
-	}
+	for (NodeArray::iterator it = nodes.begin(), end = nodes.end(); it != end; ++it) 
+		it->initMessages(this, num_atoms, num_bonds);
 }
 
 void Chem::SmallestSetOfSmallestRings::findSSSR()
@@ -204,24 +196,16 @@ void Chem::SmallestSetOfSmallestRings::findSSSR()
 		if (!first_cycle) {
 			bool new_messages = false;
 		
-			for (std::size_t i = 0; i < num_nodes; i++) {
-				if (!nodes[i].isActive())
-					continue;
-
+			for (std::size_t i = 0; i < num_nodes; i++)
 				new_messages |= nodes[i].send(this);
-			}
 
 			if (!new_messages) 
 				throw Base::CalculationFailed("SmallestSetOfSmallestRings: could not complete SSSR");
 		}
 
-		for (std::size_t i = 0; i < num_nodes; i++) {
-			if (!nodes[i].isActive())
-				continue;
-
+		for (std::size_t i = 0; i < num_nodes; i++)
 			if (nodes[i].receive(this))
 				return;
-		}
 
 		processEvenRings();
 	}
@@ -242,20 +226,8 @@ Chem::Fragment::SharedPointer Chem::SmallestSetOfSmallestRings::createRing(const
 	const Atom* atom = &molgraph.getAtom(msg->getFirstAtomIndex());
 
 	ring_ptr->addAtom(*atom);
-	ringBondMask = msg->getBondMask();
 
-	const Util::BitSet& atom_mask = msg->getAtomMask();
-
-	for (std::size_t i = atom_mask.find_first(); i != Util::BitSet::npos; i = atom_mask.find_next(i)) {
-		Util::BitSet& lin_frag_bonds = nodes[i].getLinearRingFragBondMask();
-
-		if (lin_frag_bonds.empty())
-			continue;
- 
-		lin_frag_bonds.resize(ringBondMask.size());
-
-		ringBondMask |= lin_frag_bonds;
-	}
+	const Util::BitSet& bond_mask = msg->getBondMask();
 
 	while (true) {
 		Atom::ConstBondIterator bonds_end = atom->getBondsEnd();
@@ -267,7 +239,7 @@ Chem::Fragment::SharedPointer Chem::SmallestSetOfSmallestRings::createRing(const
 			if (!molgraph.containsBond(bond))
 				continue;
 			
-			if (!ring.containsBond(bond) && ringBondMask.test(molgraph.getBondIndex(bond))) {
+			if (!ring.containsBond(bond) && bond_mask.test(molgraph.getBondIndex(bond))) {
 				ring.addBond(bond);
 				atom = &bond.getNeighbor(*atom);
 				break;
@@ -464,26 +436,6 @@ void Chem::SmallestSetOfSmallestRings::TNode::initMessages(Controller* ctrl, std
 	}
 }
 
-void Chem::SmallestSetOfSmallestRings::TNode::compressLinearRingFrags() const
-{
-	for (NodeList::const_iterator it = nbrNodes.begin(), end = nbrNodes.end(); it != end; ++it) {
-		TNode* nbr_node = *it;
-
-		if (nbr_node->nbrNodes.size() <= 2)
-			nbr_node->collectLinearFragNodes(nbr_node, this);
-	}
-}
-
-bool Chem::SmallestSetOfSmallestRings::TNode::isActive() const
-{
-	return active;
-}
-
-Util::BitSet& Chem::SmallestSetOfSmallestRings::TNode::getLinearRingFragBondMask()
-{
-	return collBondMask;
-}
-
 void Chem::SmallestSetOfSmallestRings::TNode::connect(TNode* node1, TNode* node2, std::size_t bond_idx)
 {
 	node1->nbrNodes.push_back(node2);
@@ -491,54 +443,6 @@ void Chem::SmallestSetOfSmallestRings::TNode::connect(TNode* node1, TNode* node2
 
 	node1->bondIndices.push_back(bond_idx);
 	node2->bondIndices.push_back(bond_idx);
-}
-
-std::size_t Chem::SmallestSetOfSmallestRings::TNode::disconnect(TNode* nbr_node)
-{
-	for (std::size_t i = 0, num_nbrs = nbrNodes.size(); i < num_nbrs; i++) {
-		if (nbrNodes[i] != nbr_node)
-			continue;
- 
-		nbrNodes.erase(nbrNodes.begin() + i);
-
-		std::size_t bond_idx = bondIndices[i];
-
-		bondIndices.erase(bondIndices.begin() + i);
-
-		return bond_idx;
-	}
-
-	return 0;
-}
-
-void Chem::SmallestSetOfSmallestRings::TNode::collectLinearFragNodes(TNode* coll_node, const TNode* last_node)
-{
-	std::size_t next_nbr_idx = (nbrNodes[0] == last_node ? 1 : 0);
-	TNode* next_nbr_node = nbrNodes[next_nbr_idx];
-
-	if (next_nbr_node->nbrNodes.size() > 2) {
-		if (coll_node == this)
-			return;
-
-		connect(coll_node, next_nbr_node, next_nbr_node->disconnect(this));
-
-	} else {
-		if (coll_node == this)
-			setCollectedBondBit(disconnect(next_nbr_node));
-		else
-			coll_node->setCollectedBondBit(bondIndices[next_nbr_idx]);
-
-		next_nbr_node->active = false;
-		next_nbr_node->collectLinearFragNodes(coll_node, this);
-	}
-}
-
-void Chem::SmallestSetOfSmallestRings::TNode::setCollectedBondBit(std::size_t idx)
-{
-	if (idx >= collBondMask.size())
-		collBondMask.resize(idx + 1);
-
-	collBondMask.set(idx);
 }
 
 

@@ -122,7 +122,7 @@ namespace CDPL
 			{
 
 			public:
-				TNode(std::size_t idx): index(idx), active(true) {}
+				TNode(std::size_t idx): index(idx) {}
 
 				bool send(Controller*);
 				bool receive(Controller*);
@@ -132,20 +132,9 @@ namespace CDPL
 
 				void initMessages(Controller* ctrl, std::size_t max_num_atoms, std::size_t max_num_bonds);
 
-				void compressLinearRingFrags() const;
-
-				bool isActive() const;
-
-				Util::BitSet& getLinearRingFragBondMask();
-
 				static void connect(TNode*, TNode*, std::size_t);
 
 			private:
-				std::size_t disconnect(TNode* nbr_node);
-
-				void collectLinearFragNodes(TNode* coll_node, const TNode* last_node);
-				void setCollectedBondBit(std::size_t idx);
-
 				typedef std::vector<TNode*> NodeList;
 				typedef std::vector<std::size_t> BondIndexList;
 
@@ -154,8 +143,6 @@ namespace CDPL
 				MessageList   receiveBuffer;
 				MessageList   sendBuffer;
 				std::size_t   index;
-				Util::BitSet  collBondMask;
-				bool          active;
 			};
 
 			class PathMessage
@@ -228,7 +215,6 @@ namespace CDPL
 			MessageList              linDepTestMtx;
 			MessageList              sssr;
 			std::size_t              sssrSize;
-			Util::BitSet             ringBondMask;
 		};
 
 		/**
