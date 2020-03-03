@@ -346,7 +346,7 @@ ConfGenImpl::ConfGenImpl():
 			  value<StringList>(&inputFiles)->multitoken()->required());
 	addOption("output,o", "Output file.", 
 			  value<std::string>(&outputFile)->required());
-	addOption("failed,f", "Failed molecule output file.", 
+	addOption("failed,f", "Failed molecule output file.",
 			  value<std::string>(&failedFile));
 	addOption("num-threads,t", "Number of parallel execution threads (default: no multithreading, implicit value: " +
 			  boost::lexical_cast<std::string>(boost::thread::hardware_concurrency()) + 
@@ -397,6 +397,9 @@ ConfGenImpl::ConfGenImpl():
 	addOption("max-num-rot-bonds,X", "Maximum number of allowed rotatable bonds, exceeding this limit causes molecule conf. generation to fail (default: " +
 			  boost::lexical_cast<std::string>(maxNumRotorBonds) + ", negative values disable limit).", 
 			  value<long>(&maxNumRotorBonds));
+	addOption("max-pool-size,L", "Puts an upper limit on the number of generated output conformer candidates (only effective in systematic sampling, default: " +
+			  boost::lexical_cast<std::string>(settings.getMaxPoolSize()) + ", must be >= 0, 0 disables limit).", 
+			  value<std::size_t>()->notifier(boost::bind(&ConfGenImpl::setMaxPoolSize, this, _1)));
 	addOption("max-num-sampled-confs,x", "Maximum number of sampled conformers (only effective in stochastic sampling, default: " +
 			  boost::lexical_cast<std::string>(settings.getMaxNumSampledConformers()) + ", must be >= 0, 0 disables limit).", 
 			  value<std::size_t>()->notifier(boost::bind(&ConfGenImpl::setMaxNumSampledConfs, this, _1)));
@@ -597,6 +600,11 @@ void ConfGenImpl::setDistExponent(double exp)
 void ConfGenImpl::setMaxNumSampledConfs(std::size_t max_confs)
 {
 	settings.setMaxNumSampledConformers(max_confs);
+}
+
+void ConfGenImpl::setMaxPoolSize(std::size_t max_confs)
+{
+	settings.setMaxPoolSize(max_confs);
 }
 
 void ConfGenImpl::setConvergenceIterCount(std::size_t iter_count)
@@ -1081,6 +1089,7 @@ void ConfGenImpl::printOptionSummary()
 	printMessage(VERBOSE, " Strict Force Field Parameterization: " + std::string(settings.strictForceFieldParameterization() ? "Yes" : "No"));
 	printMessage(VERBOSE, " Dielectric Constant:                 " + (boost::format("%.4f") % settings.getDielectricConstant()).str());
 	printMessage(VERBOSE, " Distance Exponent:                   " + (boost::format("%.4f") % settings.getDistanceExponent()).str());
+	printMessage(VERBOSE, " Max. Pool Size:                      " + boost::lexical_cast<std::string>(settings.getMaxPoolSize()));
 	printMessage(VERBOSE, " Max. Num. Sampled Conformers:        " + boost::lexical_cast<std::string>(settings.getMaxNumSampledConformers()));
 	printMessage(VERBOSE, " Convergence Iteration Count:         " + boost::lexical_cast<std::string>(settings.getConvergenceIterationCount()));
 	printMessage(VERBOSE, " Macrocycle Rot. Bond Count Theshold: " + boost::lexical_cast<std::string>(settings.getMacrocycleRotorBondCountThreshold()));

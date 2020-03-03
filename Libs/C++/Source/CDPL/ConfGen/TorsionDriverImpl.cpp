@@ -46,6 +46,7 @@
 #include "TorsionDriverImpl.hpp"
 #include "FragmentTreeNode.hpp"
 #include "FallbackTorsionLibrary.hpp"
+#include "UtilityFunctions.hpp"
 
 
 using namespace CDPL;
@@ -87,17 +88,19 @@ namespace
 	    { Chem::parseSMARTS("[*:1]-[*X2:1]#[*X1]"), 360 }
 	};
 
-	double normalizeAngle(double angle)
+	const std::size_t MAX_CONF_DATA_CACHE_SIZE   = 10000;
+	const double      MIN_TORSION_ANGLE_DISTANCE = 30.0;
+
+	bool hasAngleWithinDistance(double angle, const ConfGen::FragmentTreeNode::DoubleArray& angles, double dist)
 	{
-		// normalize angle to range [0, 360)
+		using namespace ConfGen;
 
-		if (angle < 0.0)
-			return std::fmod(angle, 360.0) + 360.0;
+		for (FragmentTreeNode::DoubleArray::const_iterator it = angles.begin(), end = angles.end(); it != end; ++it)
+			if (getAbsoluteAngleDistance(angle, *it) < dist)
+				return true;
 
-		return std::fmod(angle, 360.0);
+		return false;
 	}
-
-	const std::size_t MAX_CONF_DATA_CACHE_SIZE = 10000;
 }
 
 
@@ -322,7 +325,7 @@ ConfGen::FragmentTreeNode& ConfGen::TorsionDriverImpl::getFragmentNode(std::size
 
 unsigned int ConfGen::TorsionDriverImpl::generateConformers()
 {
-	unsigned int ret_code = fragTree.getRoot()->generateConformers(settings.getEnergyWindow(), settings.sampleAngleToleranceRanges(), settings.getMaxPoolSize());
+	unsigned int ret_code = fragTree.getRoot()->generateConformers(settings.getEnergyWindow(), settings.getMaxPoolSize());
 
 	if (ret_code != ReturnCode::SUCCESS)
 		return ret_code;
@@ -379,8 +382,9 @@ void ConfGen::TorsionDriverImpl::assignTorsionAngles(FragmentTreeNode* node)
 	if (!bond)
 		return;
 
+	std::size_t rot_sym = getRotationalSymmetry(*bond);
 	const Atom* const* bond_atoms = node->getSplitBondAtoms();
-	const TorsionRuleMatch* match = getTorsionRuleAngles(*bond, node);
+	const TorsionRuleMatch* match = getTorsionRuleAngles(*bond, node, rot_sym);
 
 	if (match && node->getNumTorsionAngles() != 0) {
 		const Atom* const* match_atoms = match->getAtoms();
@@ -403,13 +407,8 @@ void ConfGen::TorsionDriverImpl::assignTorsionAngles(FragmentTreeNode* node)
 	if (node->getNumTorsionAngles() == 0) {
 		// fallback: rotation in 30° steps
 
-		std::size_t rot_sym = getRotationalSymmetry(*bond);
-
-		if (logCallback && rot_sym > 1)
-			logCallback(" Symmetry: C" + boost::lexical_cast<std::string>(rot_sym) + '\n');
-
 		for (std::size_t i = 0, num_angles = 12 / rot_sym; i < num_angles; i++) 
-			node->addTorsionAngle(i * 30.0, 0.0);
+			node->addTorsionAngle(i * 30.0);
 
 		node->setTorsionReferenceAtoms(getFirstNeighborAtom(bond_atoms[0], bond_atoms[1], node), 
 									   getFirstNeighborAtom(bond_atoms[1], bond_atoms[0], node));
@@ -417,26 +416,21 @@ void ConfGen::TorsionDriverImpl::assignTorsionAngles(FragmentTreeNode* node)
 		if (!node->getTorsionReferenceAtoms()[0] || !node->getTorsionReferenceAtoms()[1])
 			node->setTorsionReferenceAtoms(0, 0);
 
-	} else if (node->getNumTorsionAngles() > 1) {
-		std::size_t rot_sym = getRotationalSymmetry(*bond);
-
-		if (logCallback && rot_sym > 1)
-			logCallback(" Symmetry: C" + boost::lexical_cast<std::string>(rot_sym) + '\n');
-
-		node->pruneTorsionAngles(rot_sym);
-	}
+	} else if (node->getNumTorsionAngles() > 1)
+		node->removeDuplicateTorsionAngles();
 
 	if (logCallback) {
+		logCallback(" Symmetry: C" + boost::lexical_cast<std::string>(rot_sym) + '\n');
 		logCallback(" Angles: ");
 
-		for (FragmentTreeNode::TorsionAngleArray::const_iterator it = node->getTorsionAngles().begin(), end = node->getTorsionAngles().end(); it != end; ++it)
-			logCallback(boost::lexical_cast<std::string>(it->first) + '(' + boost::lexical_cast<std::string>(it->second) + ") ");
+		for (FragmentTreeNode::DoubleArray::const_iterator it = node->getTorsionAngles().begin(), end = node->getTorsionAngles().end(); it != end; ++it)
+			logCallback(boost::lexical_cast<std::string>(*it) + ' ');
 
 		logCallback("\n");
 	}
 }
 
-const ConfGen::TorsionRuleMatch* ConfGen::TorsionDriverImpl::getTorsionRuleAngles(const Chem::Bond& bond, FragmentTreeNode* node)
+const ConfGen::TorsionRuleMatch* ConfGen::TorsionDriverImpl::getTorsionRuleAngles(const Chem::Bond& bond, FragmentTreeNode* node, std::size_t rot_sym)
 {
 	using namespace Chem;
 
@@ -461,10 +455,29 @@ const ConfGen::TorsionRuleMatch* ConfGen::TorsionDriverImpl::getTorsionRuleAngle
 		match = &torRuleMatcher.getMatch(0);
 	}
 
+	double ident_rot = 360.0 / rot_sym;
 	const TorsionRule& rule = match->getRule();
 
 	for (TorsionRule::ConstAngleEntryIterator it = rule.getAnglesBegin(), end = rule.getAnglesEnd(); it != end; ++it)
-		node->addTorsionAngle(normalizeAngle(it->getAngle()), it->getTolerance1());
+		node->addTorsionAngle(std::fmod(normalizeAngle(it->getAngle()), ident_rot));
+
+	if (settings.sampleAngleToleranceRanges()) {
+		for (TorsionRule::ConstAngleEntryIterator it = rule.getAnglesBegin(), end = rule.getAnglesEnd(); it != end; ++it) {
+			double tol = it->getTolerance1();
+
+			if (tol >= MIN_TORSION_ANGLE_DISTANCE) {
+				double angle = std::fmod(normalizeAngle(it->getAngle() + tol), ident_rot);
+
+				if (!hasAngleWithinDistance(angle, node->getTorsionAngles(), MIN_TORSION_ANGLE_DISTANCE))
+					node->addTorsionAngle(angle);
+
+				angle = std::fmod(normalizeAngle(it->getAngle() - tol), ident_rot);
+
+				if (!hasAngleWithinDistance(angle, node->getTorsionAngles(), MIN_TORSION_ANGLE_DISTANCE))
+					node->addTorsionAngle(angle);
+			}
+		}
+	}
 
 	return match; 
 }

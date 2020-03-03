@@ -1079,7 +1079,7 @@ void ConfGen::FragmentAssemblerImpl::assignLinkBondTorsions(FragmentTreeNode* no
 	if (match && match->getRule().getNumAngles() > 0) {
 		TorsionRule::ConstAngleEntryIterator it = std::max_element(match->getRule().getAnglesBegin(), match->getRule().getAnglesEnd(),
 																   boost::bind(&compTorsionAngleEntryScore, _1, _2));
-		node->addTorsionAngle(it->getAngle(), 0.0);
+		node->addTorsionAngle(it->getAngle());
 
 		const Atom* const* match_atoms = match->getAtoms();
 				
@@ -1117,7 +1117,7 @@ void ConfGen::FragmentAssemblerImpl::assignLinkBondTorsions(FragmentTreeNode* no
 				else
 					node->setTorsionReferenceAtoms(ref_atoms[3], ref_atoms[0]);
 
-				node->addTorsionAngle(config == BondConfiguration::CIS ? 0.0 : 180.0, 0.0);
+				node->addTorsionAngle(config == BondConfiguration::CIS ? 0.0 : 180.0);
 				return;
 			}
 		} 
@@ -1136,7 +1136,7 @@ void ConfGen::FragmentAssemblerImpl::assignLinkBondTorsions(FragmentTreeNode* no
 		return;
 
 	node->setTorsionReferenceAtoms(ref_atom1, ref_atom2);
-	node->addTorsionAngle(180.0, 0.0);
+	node->addTorsionAngle(180.0);
 }
 
 const ConfGen::TorsionRuleMatch* ConfGen::FragmentAssemblerImpl::getMatchingTorsionRule(const Chem::Bond& bond)

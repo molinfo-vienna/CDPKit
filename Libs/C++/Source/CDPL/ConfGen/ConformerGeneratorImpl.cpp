@@ -468,7 +468,6 @@ unsigned int ConfGen::ConformerGeneratorImpl::generateConformersSystematic(bool 
 
 	td_settings.setMaxPoolSize(settings.getMaxPoolSize());
 	td_settings.setEnergyWindow(settings.getEnergyWindow());
-	td_settings.sampleAngleToleranceRanges(settings.sampleAngleToleranceRanges());
 
 	splitIntoTorsionFragments();
 
@@ -549,7 +548,6 @@ unsigned int ConfGen::ConformerGeneratorImpl::generateConformersStochastic(bool 
 				if (logCallback) 
 					logCallback("Could not generate any valid structure after " + boost::lexical_cast<std::string>(num_struct_gen_fails) + 
 								" consecutive trials - giving up!\n");
-
 				break;
 			}
 
@@ -792,6 +790,8 @@ unsigned int ConfGen::ConformerGeneratorImpl::generateFragmentConformers(bool st
 {
 	using namespace Chem;
 
+	torDriver.getSettings().sampleAngleToleranceRanges(false);
+
 	FragmentAssemblerSettings& fa_settings = fragAssembler.getSettings();
 
 	fa_settings.getFragmentBuildSettings() = settings.getFragmentBuildSettings();
@@ -993,6 +993,9 @@ unsigned int ConfGen::ConformerGeneratorImpl::generateFragmentConformerCombinati
 void ConfGen::ConformerGeneratorImpl::generateFragmentConformerCombinations(std::size_t frag_idx, double comb_energy)
 {
 	if (torFragConfData.size() <= frag_idx) {
+		if (!torFragConfCombData.empty() && (comb_energy > (torFragConfCombData.front()->energy + settings.getEnergyWindow() * 1.5)))
+			return;
+
 		ConfCombinationData* frag_conf_comb = confCombDataCache.getRaw();
 
 		frag_conf_comb->energy = comb_energy;
@@ -1023,6 +1026,7 @@ unsigned int ConfGen::ConformerGeneratorImpl::generateOutputConformers(bool stru
 	for (FragmentConfDataList::const_iterator it = torFragConfData.begin(), end = torFragConfData.end(); it != end; ++it) 
 		fragments.addElement((*it)->fragment);
 
+	torDriver.getSettings().sampleAngleToleranceRanges(settings.sampleAngleToleranceRanges());
 	torDriver.setup(fragments, *molGraph, torDriveBonds.begin(), torDriveBonds.end());
 	torDriver.setMMFF94Parameters(mmff94Data, mmff94InteractionMask);
 
@@ -1066,6 +1070,8 @@ unsigned int ConfGen::ConformerGeneratorImpl::generateOutputConformers(bool stru
 		if (ret_code != ReturnCode::SUCCESS) 
 			continue;
 	
+		bool new_min_energy = false;
+
 		for (TorsionDriverImpl::ConstConformerIterator conf_it = torDriver.getConformersBegin(), confs_end = torDriver.getConformersEnd();
 			 conf_it != confs_end; ++conf_it) {
 			
@@ -1082,18 +1088,7 @@ unsigned int ConfGen::ConformerGeneratorImpl::generateOutputConformers(bool stru
 			else if (energy < min_energy) {
 				min_energy = energy;
 				min_comb_energy = comb.energy;
-
-				for (ConformerDataArray::const_iterator it = workingConfs.begin(), end = workingConfs.end(); it != end; ++it) {
-					const ConformerData::SharedPointer& conf_data = *it;
-
-					if (conf_data->getEnergy() > (min_energy + e_window))
-						continue;
-
-					tmpWorkingConfs.push_back(conf_data);
-				} 
-
-				workingConfs.swap(tmpWorkingConfs);
-				tmpWorkingConfs.clear();
+				new_min_energy = true;
 			}
 
 			ConformerData::SharedPointer conf_data_copy = confDataCache.get();
@@ -1102,10 +1097,22 @@ unsigned int ConfGen::ConformerGeneratorImpl::generateOutputConformers(bool stru
 			workingConfs.push_back(conf_data_copy);
 		}
 
-		if (settings.getMaxPoolSize() > 0 && workingConfs.size() > settings.getMaxPoolSize()) {
-			orderConformersByEnergy(workingConfs); 
-			workingConfs.resize(settings.getMaxPoolSize());
+		if (new_min_energy) {
+			for (ConformerDataArray::const_iterator it = workingConfs.begin(), end = workingConfs.end(); it != end; ++it) {
+				const ConformerData::SharedPointer& conf_data = *it;
+
+				if (conf_data->getEnergy() > (min_energy + e_window))
+					continue;
+
+				tmpWorkingConfs.push_back(conf_data);
+			} 
+
+			workingConfs.swap(tmpWorkingConfs);
+			tmpWorkingConfs.clear();
 		}
+
+		if (settings.getMaxPoolSize() > 0 && workingConfs.size() >= settings.getMaxPoolSize())
+			break;
 	}
 
 	if (logCallback && have_timeout && workingConfs.empty())

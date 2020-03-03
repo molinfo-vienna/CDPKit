@@ -40,6 +40,7 @@
 #include "FragmentTreeNode.hpp"
 #include "FragmentTree.hpp"
 #include "ForceFieldInteractionMask.hpp"
+#include "UtilityFunctions.hpp"
 
 
 using namespace CDPL;
@@ -99,14 +100,9 @@ namespace
 		}
 	}
 
-	bool compareTorsionAngles(const ConfGen::FragmentTreeNode::TorsionAngle& ang1, const ConfGen::FragmentTreeNode::TorsionAngle& ang2)
+	bool torsionAnglesEqual(double ang1, double ang2)
 	{
-		return (ang1.first < ang2.first);
-	}
-
-	bool torsionAnglesEqual(const ConfGen::FragmentTreeNode::TorsionAngle& ang1, const ConfGen::FragmentTreeNode::TorsionAngle& ang2)
-	{
-		return (std::abs(ang1.first - ang2.first) < 1.0);
+		return (ConfGen::getAbsoluteAngleDistance(ang1, ang2) < 1.0);
 	}
 
 	bool compareConformerEnergy(const ConfGen::ConformerData::SharedPointer& conf_data1, 
@@ -215,34 +211,21 @@ const Util::BitSet& ConfGen::FragmentTreeNode::getCoreAtomMask() const
 	return coreAtomMask;
 }
 
-const ConfGen::FragmentTreeNode::TorsionAngleArray& ConfGen::FragmentTreeNode::getTorsionAngles() const
+const ConfGen::FragmentTreeNode::DoubleArray& ConfGen::FragmentTreeNode::getTorsionAngles() const
 {
 	return torsionAngles;
 }
 
-void ConfGen::FragmentTreeNode::addTorsionAngle(double angle, double tol)
+void ConfGen::FragmentTreeNode::addTorsionAngle(double angle)
 {
-	torsionAngles.push_back(TorsionAngle(angle, tol));
+	torsionAngles.push_back(angle);
 }
 
-void ConfGen::FragmentTreeNode::pruneTorsionAngles(std::size_t rot_sym)
+void ConfGen::FragmentTreeNode::removeDuplicateTorsionAngles()
 {
-	if (rot_sym == 360) {
-		torsionAngles.resize(1);
-
-	} else {
-		double ident_rot_ang = 360.0 / rot_sym; 
-
-		for (TorsionAngleArray::iterator it = torsionAngles.begin(), end = torsionAngles.end(); it != end; ++it) {
-			double& tor_ang = it->first;
-
-			tor_ang = std::fmod(tor_ang, ident_rot_ang);
-		}
-
-		std::sort(torsionAngles.begin(), torsionAngles.end(), &compareTorsionAngles);
+	std::sort(torsionAngles.begin(), torsionAngles.end());
 		
-		torsionAngles.erase(std::unique(torsionAngles.begin(), torsionAngles.end(), &torsionAnglesEqual), torsionAngles.end());
-	}
+	torsionAngles.erase(std::unique(torsionAngles.begin(), torsionAngles.end(), &torsionAnglesEqual), torsionAngles.end());
 }
 
 std::size_t ConfGen::FragmentTreeNode::getNumTorsionAngles() const
@@ -362,7 +345,7 @@ void ConfGen::FragmentTreeNode::addConformer(const ConformerData::SharedPointer&
 	changed = true;
 }
 
-unsigned int ConfGen::FragmentTreeNode::generateConformers(double e_window, bool exhaustive, std::size_t max_pool_size)
+unsigned int ConfGen::FragmentTreeNode::generateConformers(double e_window, std::size_t max_pool_size)
 {
 	if (!conformers.empty())
 		return ReturnCode::SUCCESS;
@@ -374,12 +357,12 @@ unsigned int ConfGen::FragmentTreeNode::generateConformers(double e_window, bool
 		return ReturnCode::TORSION_DRIVING_FAILED;
 	}
 
-	unsigned int ret_code = leftChild->generateConformers(e_window, exhaustive, max_pool_size);
+	unsigned int ret_code = leftChild->generateConformers(e_window, max_pool_size);
 
 	if (ret_code != ReturnCode::SUCCESS)
 		return ret_code;
 
-	ret_code = rightChild->generateConformers(e_window, exhaustive, max_pool_size);
+	ret_code = rightChild->generateConformers(e_window, max_pool_size);
 
 	if (ret_code != ReturnCode::SUCCESS)
 		return ret_code;
@@ -389,7 +372,7 @@ unsigned int ConfGen::FragmentTreeNode::generateConformers(double e_window, bool
 	if (!splitBondAtoms[0] || !splitBondAtoms[1])
 		lineupChildConformers(e_window);
 	else
-		alignAndRotateChildConformers(e_window, exhaustive);
+		alignAndRotateChildConformers(e_window);
 
 	changed = true;
 
@@ -467,7 +450,7 @@ void ConfGen::FragmentTreeNode::lineupChildConformers(double e_window)
 	}
 }
 
-void ConfGen::FragmentTreeNode::alignAndRotateChildConformers(double e_window, bool exhaustive)
+void ConfGen::FragmentTreeNode::alignAndRotateChildConformers(double e_window)
 {
 	initTorsionAngleData();
 
@@ -548,7 +531,6 @@ void ConfGen::FragmentTreeNode::alignAndRotateChildConformers(double e_window, b
 	}
 
 	ConformerData::SharedPointer new_conf;
-	ConformerData::SharedPointer tmp_conf = owner.allocConformerData();
 	double min_energy = 0.0;
 	std::size_t num_tor_angles = torsionAngles.size();
 
@@ -556,6 +538,9 @@ void ConfGen::FragmentTreeNode::alignAndRotateChildConformers(double e_window, b
 		const ConformerData& left_conf = *leftChild->conformers[i];
 		double left_conf_energy = left_conf.getEnergy();
 
+		if (new_conf) 
+			copyCoordinates(left_conf, leftChild->atomIndices, *new_conf, right_atom_idx);
+		
 		for (std::size_t j = 0; j < num_right_chld_confs; j++) {
 			const ConformerData& right_conf = *rightChild->conformers[j];
 			double conf_energy_sum = left_conf_energy + right_conf.getEnergy();
@@ -579,32 +564,28 @@ void ConfGen::FragmentTreeNode::alignAndRotateChildConformers(double e_window, b
 
 			} else {
 				for (std::size_t k = 0; k < num_tor_angles; k++) {
-					for (std::size_t l = 0, num_alt = (exhaustive && torsionAngles[k].second != 0.0 ? 3 : 1); l < num_alt; l++) {
-						copyCoordinates(left_conf, leftChild->atomIndices, *tmp_conf, right_atom_idx);
-						rotateCoordinates(right_conf, rightChild->atomIndices, *tmp_conf, 
-										  torsionAngleSines[k * 3 + l], torsionAngleCosines[k * 3 + l], left_atom_idx);
-
-						double energy = conf_energy_sum + calcMMFF94Energy(*tmp_conf);
-
-						if (l > 0 && new_conf->getEnergy() <= energy) 
-							continue;
-
-						if (!new_conf) 
-							new_conf = owner.allocConformerData();
+					if (!new_conf) {
+						new_conf = owner.allocConformerData();
 						
-						new_conf.swap(tmp_conf);
-						new_conf->setEnergy(energy);
+						copyCoordinates(left_conf, leftChild->atomIndices, *new_conf, right_atom_idx);
 					}
+
+					rotateCoordinates(right_conf, rightChild->atomIndices, *new_conf, 
+										  torsionAngleSines[k], torsionAngleCosines[k], left_atom_idx);
+
+					double energy = conf_energy_sum + calcMMFF94Energy(*new_conf);
 
 					if (e_window > 0.0) {
-						if (conformers.empty() || new_conf->getEnergy() < min_energy) 
-							min_energy = new_conf->getEnergy();
+						if (conformers.empty() || energy < min_energy) 
+							min_energy = energy;
 						
-						else if (new_conf->getEnergy() > (min_energy + e_window)) 
+						else if (energy > (min_energy + e_window)) 
 							continue;
 					}
 
+					new_conf->setEnergy(energy);
 					conformers.push_back(new_conf);
+
 					new_conf.reset();
 				}
 			}
@@ -620,30 +601,11 @@ void ConfGen::FragmentTreeNode::initTorsionAngleData()
 	if (!torsionAngleSines.empty())
 		return;
 
-	for (TorsionAngleArray::const_iterator it = torsionAngles.begin(), end = torsionAngles.end(); it != end; ++it) {
-		double angle = M_PI * (it->first) / 180.0;
+	for (DoubleArray::const_iterator it = torsionAngles.begin(), end = torsionAngles.end(); it != end; ++it) {
+		double angle = M_PI * (*it) / 180.0;
 
 		torsionAngleSines.push_back(std::sin(angle));
 		torsionAngleCosines.push_back(std::cos(angle));
-
-		double tol = M_PI * (it->second) / 180.0;
-
-		if (tol != 0.0) {
-			double alt_angle = angle + tol;
-
-			for (std::size_t i = 0; i < 2; i++) {
-				torsionAngleSines.push_back(std::sin(alt_angle));
-				torsionAngleCosines.push_back(std::cos(alt_angle));
-
-				alt_angle = angle - tol;
-			}
-
-		} else {
-			for (std::size_t i = 0; i < 2; i++) {
-				torsionAngleSines.push_back(torsionAngleSines.back());
-				torsionAngleCosines.push_back(torsionAngleCosines.back());
-			}
-		}
 	}
 }
 

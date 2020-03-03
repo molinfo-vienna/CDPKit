@@ -99,6 +99,7 @@ namespace ConfGen
 		void setIncludeInput(bool include);
 		void setGenerateFromScratch(bool from_scratch);
 		void setMaxNumConfs(std::size_t max_confs);
+		void setMaxPoolSize(std::size_t max_confs);
 		void setInputFormat(const std::string& file_ext);
 		void setOutputFormat(const std::string& file_ext);
 		void setFailedOutputFormat(const std::string& file_ext);

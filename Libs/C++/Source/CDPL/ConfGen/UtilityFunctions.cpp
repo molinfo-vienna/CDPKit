@@ -25,6 +25,7 @@
 
 
 #include <algorithm>
+#include <cmath>
 
 #include "CDPL/ConfGen/FragmentType.hpp"
 #include "CDPL/ConfGen/ReturnCode.hpp"
@@ -153,4 +154,25 @@ std::size_t ConfGen::getMaxNonAromaticSingleBondCount(const Chem::FragmentList& 
 		max_count = std::max(max_count, getNonAromaticSingleBondCount(*it));
 
 	return max_count;
+}
+
+double ConfGen::normalizeAngle(double angle)
+{
+	// normalize angle to range [0, 360)
+	
+	if (angle < 0.0)
+		return std::fmod(angle, 360.0) + 360.0;
+
+	return std::fmod(angle, 360.0);
+}
+
+double ConfGen::getAbsoluteAngleDistance(double angle1, double angle2)
+{
+	angle1 = normalizeAngle(angle1);
+	angle2 = normalizeAngle(angle2);
+
+	if (angle1 < angle2) 
+		return std::min(angle2 - angle1, angle1 + 360.0 - angle2);
+
+	return std::min(angle1 - angle2, angle2 + 360.0 - angle1);
 }

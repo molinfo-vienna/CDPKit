@@ -138,7 +138,7 @@ namespace CDPL
 
 			void assignTorsionAngles(FragmentTreeNode* node);
 
-			const ConfGen::TorsionRuleMatch* getTorsionRuleAngles(const Chem::Bond& bond, FragmentTreeNode* node);
+			const ConfGen::TorsionRuleMatch* getTorsionRuleAngles(const Chem::Bond& bond, FragmentTreeNode* node, std::size_t rot_sym);
 
 			std::size_t getRotationalSymmetry(const Chem::Bond& bond);
 

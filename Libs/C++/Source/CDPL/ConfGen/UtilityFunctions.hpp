@@ -60,6 +60,10 @@ namespace CDPL
 		std::size_t getNonAromaticSingleBondCount(const Chem::BondContainer& cntnr);
 
 		std::size_t getMaxNonAromaticSingleBondCount(const Chem::FragmentList& frags);
+
+		double normalizeAngle(double angle);
+
+		double getAbsoluteAngleDistance(double angle1, double angle2);
     }
 }
 

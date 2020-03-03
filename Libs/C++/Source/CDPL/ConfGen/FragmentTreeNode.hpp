@@ -33,7 +33,6 @@
 
 #include <cstddef>
 #include <vector>
-#include <utility>
 
 #include "CDPL/ConfGen/ConformerDataArray.hpp"
 #include "CDPL/ForceField/MMFF94InteractionData.hpp"
@@ -65,8 +64,7 @@ namespace CDPL
 
 		public:
 			typedef std::vector<std::size_t> IndexArray;
-			typedef std::pair<double, double> TorsionAngle;
-			typedef std::vector<TorsionAngle> TorsionAngleArray;	
+			typedef std::vector<double> DoubleArray;	
 
 			const FragmentTreeNode* getParent() const;
 			FragmentTreeNode* getParent();
@@ -93,11 +91,11 @@ namespace CDPL
 			const Util::BitSet& getAtomMask() const;
 			const Util::BitSet& getCoreAtomMask() const;
 
-			const TorsionAngleArray& getTorsionAngles() const;
+			const DoubleArray& getTorsionAngles() const;
 
-			void addTorsionAngle(double angle, double tol);
+			void addTorsionAngle(double angle);
 
-			void pruneTorsionAngles(std::size_t rot_sym);
+			void removeDuplicateTorsionAngles();
 
 			std::size_t getNumTorsionAngles() const;
 
@@ -124,7 +122,7 @@ namespace CDPL
 			void addConformer(const ConformerData& conf_data);
 			void addConformer(const ConformerData::SharedPointer& conf_data);
 
-			unsigned int generateConformers(double e_window = 0.0, bool exhaustive = false, std::size_t max_pool_size = 0);
+			unsigned int generateConformers(double e_window = 0.0, std::size_t max_pool_size = 0);
 
 			double calcMMFF94Energy(const Math::Vector3DArray& coords);
 		
@@ -135,7 +133,7 @@ namespace CDPL
 			FragmentTreeNode& operator=(const FragmentTreeNode&);
 
 			void lineupChildConformers(double e_window);
-			void alignAndRotateChildConformers(double e_window, bool exhaustive);
+			void alignAndRotateChildConformers(double e_window);
 
 			void initTorsionAngleData();
 			void removeOutOfWindowConformers(double max_energy);
@@ -177,7 +175,6 @@ namespace CDPL
 
 			unsigned int invokeCallbacks() const;
 
-			typedef std::vector<double> DoubleArray;
 			typedef ForceField::MMFF94InteractionData MMFF94InteractionData;
 			typedef ForceField::MMFF94EnergyCalculator<double> MMFF94EnergyCalculator;
 
@@ -193,7 +190,7 @@ namespace CDPL
 			Util::BitSet            coreAtomMask;
 			ConformerDataArray      conformers;
 			ConformerDataArray      tmpConformers;
-			TorsionAngleArray       torsionAngles;
+			DoubleArray             torsionAngles;
 			DoubleArray             torsionAngleCosines;
 			DoubleArray             torsionAngleSines;
 			MMFF94InteractionData   mmff94Data;
