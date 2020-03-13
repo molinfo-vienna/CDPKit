@@ -80,6 +80,7 @@ SET(cdpl-confgen_LIB_SRCS
 
     SubstituentBulkinessCalculator.cpp
     MMFF94BondLengthTable.cpp
+    ConformerDuplicateChecker.cpp
 
     ForceFieldInteractionMask.cpp
 

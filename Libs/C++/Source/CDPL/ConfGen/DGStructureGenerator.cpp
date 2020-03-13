@@ -90,7 +90,7 @@ bool ConfGen::DGStructureGenerator::generate(Math::Vector3DArray& coords)
 	boost::random::uniform_real_distribution<double> coord_dist(-settings.getBoxSize() * 0.5, settings.getBoxSize() * 0.5);
 
 	for (Math::Vector3DArray::ElementIterator it = coords.getElementsBegin(), end = coords.getElementsEnd(); it != end; ++it) {
-		Math::Vector3D& pos = *it;
+		Math::Vector3D::Pointer pos = it->getData();
 
 		pos[0] = coord_dist(randomEngine);
 		pos[1] = coord_dist(randomEngine);
@@ -132,6 +132,8 @@ void ConfGen::DGStructureGenerator::setup(const Chem::MolecularGraph& molgraph,
     dgConstraintsGen.add14DistanceConstraints(phase1CoordsGen);
     dgConstraintsGen.addDefaultDistanceConstraints(phase1CoordsGen);
     dgConstraintsGen.addAtomConfigurationConstraints(phase1CoordsGen);
+    
+    phase1CoordsGen.orderDistanceConstraints();
 
 	if (settings.enablePlanarityConstraints()) {
 		phase2CoordsGen = phase1CoordsGen;

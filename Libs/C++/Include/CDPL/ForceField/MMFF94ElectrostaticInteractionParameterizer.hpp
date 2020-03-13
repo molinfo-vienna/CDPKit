@@ -63,6 +63,7 @@ namespace CDPL
 		  public:
 			static const double DEF_DISTANCE_EXPONENT;
 			static const double DEF_DIELECTRIC_CONSTANT;
+			static const double DIELECTRIC_CONSTANT_WATER;
 
 			typedef boost::shared_ptr<MMFF94ElectrostaticInteractionParameterizer> SharedPointer;
 

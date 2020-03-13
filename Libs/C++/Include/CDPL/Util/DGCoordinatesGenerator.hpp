@@ -91,6 +91,8 @@ namespace CDPL
 
 				const ValueType& getUpperBound() const;
 
+				bool operator<(const DistanceConstraint& constr) const;
+
 			private:
 				std::size_t point1Idx;
 				std::size_t point2Idx;
@@ -143,6 +145,8 @@ namespace CDPL
 
 			template <typename CoordsArray>
 			ValueType getDistanceError(const CoordsArray& coords) const;
+
+			void orderDistanceConstraints();
 
 		protected:
 			DGCoordinatesGeneratorBase();
@@ -336,6 +340,19 @@ const T& CDPL::Util::DGCoordinatesGeneratorBase<Dim, T, Derived>::DistanceConstr
 	return upperBound;
 }
 
+template <std::size_t Dim, typename T, typename Derived>
+bool CDPL::Util::DGCoordinatesGeneratorBase<Dim, T, Derived>::DistanceConstraint::operator<(const DistanceConstraint& constr) const
+{
+	if (point1Idx < constr.point1Idx)
+		return true;
+
+	if (point1Idx == constr.point1Idx)
+		return (point2Idx < constr.point2Idx);
+
+	return false;
+}
+
+
 // DGCoordinatesGeneratorBase<Dim, T, Derived> implementation
 
 template <std::size_t Dim, typename T, typename Derived>
@@ -364,6 +381,7 @@ CDPL::Util::DGCoordinatesGeneratorBase<Dim, T, Derived>::operator=(const DGCoord
 	startLearningRate = gen.startLearningRate;
 	learningRateDecr = gen.learningRateDecr;
 	distConstraints = gen.distConstraints;
+	randomEngine = gen.randomEngine;
 
 	return *this;
 }
@@ -552,6 +570,12 @@ std::size_t CDPL::Util::DGCoordinatesGeneratorBase<Dim, T, Derived>::getNumVolum
 }
 
 template <std::size_t Dim, typename T, typename Derived>
+void CDPL::Util::DGCoordinatesGeneratorBase<Dim, T, Derived>::orderDistanceConstraints()
+{
+	std::sort(distConstraints.begin(), distConstraints.end());
+}
+
+template <std::size_t Dim, typename T, typename Derived>
 template <typename CoordsArray>
 void CDPL::Util::DGCoordinatesGeneratorBase<Dim, T, Derived>::generate(std::size_t num_points, CoordsArray& coords)
 {
@@ -572,7 +596,7 @@ void CDPL::Util::DGCoordinatesGeneratorBase<Dim, T, Derived>::embedCoords(std::s
 	ValueType lambda = startLearningRate;
 
 	if (num_dist_constrs > 0 && num_vol_constrs > 0) {
-		boost::random::uniform_int_distribution<std::size_t> constr_sd(0, num_dist_constrs  + num_vol_constrs - 1);
+		boost::random::uniform_int_distribution<std::size_t> constr_sd(0, num_dist_constrs + num_vol_constrs - 1);
 
 		for (std::size_t i = 0; i < numCycles; i++, lambda -= learningRateDecr) {
 			for (std::size_t j = 0; j < num_steps; j++) {

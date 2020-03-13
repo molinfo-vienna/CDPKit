@@ -372,17 +372,21 @@ ConfGenImpl::ConfGenImpl():
 			  value<bool>()->implicit_value(true)->notifier(boost::bind(&ConfGenImpl::setEnumRings, this, _1)));
 	addOption("sample-het-hydrogens,H", "Perform torsion sampling for hydrogens on hetero atoms (default: false).", 
 			  value<bool>()->implicit_value(true)->notifier(boost::bind(&ConfGenImpl::setSampleHetAtomHydrogens, this, _1)));
-	addOption("sample-angle-tol-ranges,A", "Additionally evaluate conformers generated for angles at the boundaries of the first "
+	addOption("tol-range-sampling,A", "Additionally generate conformers for angles at the boundaries of the first "
 			  "torsion angle tolerance range (only effective in systematic sampling, default: false).", 
 			  value<bool>()->implicit_value(true)->notifier(boost::bind(&ConfGenImpl::setSampleAngleTolRanges, this, _1)));
 	addOption("include-input,u", "Include original input structure in output conformers (default: false).", 
 			  value<bool>()->implicit_value(true)->notifier(boost::bind(&ConfGenImpl::setIncludeInput, this, _1)));
 	addOption("from-scratch,S", "Discard input 3D-coordinates and generate structures from scratch (default: true).", 
 			  value<bool>()->implicit_value(true)->notifier(boost::bind(&ConfGenImpl::setGenerateFromScratch, this, _1)));
-	addOption("search-force-field,d", "Conformer search force field (MMFF94, MMFF94_NO_ESTAT, "
+	addOption("systematic-search-force-field,d", "Search force field used in systematic smapling (MMFF94, MMFF94_NO_ESTAT, "
 			  "MMFF94S, MMFF94S_EXT, MMFF94S_NO_ESTAT, MMFF94S_EXT_NO_ESTAT, default: " +
-			  getForceFieldTypeString(settings.getForceFieldType()) + ").", 
-			  value<std::string>()->notifier(boost::bind(&ConfGenImpl::setSearchForceFieldType, this, _1)));
+			  getForceFieldTypeString(settings.getForceFieldTypeSystematic()) + ").", 
+			  value<std::string>()->notifier(boost::bind(&ConfGenImpl::setSystematicSearchForceFieldType, this, _1)));
+	addOption("stochastic-search-force-field,q", "Search force field used in stochastic smapling (MMFF94, MMFF94_NO_ESTAT, "
+			  "MMFF94S, MMFF94S_EXT, MMFF94S_NO_ESTAT, MMFF94S_EXT_NO_ESTAT, default: " +
+			  getForceFieldTypeString(settings.getForceFieldTypeStochastic()) + ").", 
+			  value<std::string>()->notifier(boost::bind(&ConfGenImpl::setStochasticSearchForceFieldType, this, _1)));
 	addOption("strict-param,s", "Perform strict MMFF94 parameterization (default: true).", 
 			  value<bool>()->implicit_value(true)->notifier(boost::bind(&ConfGenImpl::setStrictParameterization, this, _1)));
 	addOption("dielectric-const,D", "Dielectric constant used for the calculation of electrostatic interaction energies (default: " +
@@ -464,7 +468,17 @@ const char* ConfGenImpl::getProgCopyright() const
 
 const char* ConfGenImpl::getProgAboutText() const
 {
-	return "Performs conformer generation for a set of input molecules.";
+	return "Performs high-quality conformer generation for a set of input molecules.\n\n"
+		"Built-in torsion rules are based on the torsion library jointly developed by the\n"
+		"University of Hamburg, Center for Bioinformatics, Hamburg, Germany and\n"
+		"F. Hoffmann-La-Roche Ltd., Basel, Switzerland.\n\n"
+		"References:\n"
+		" -  Schaerfer, C., Schulz-Gasch, T., Ehrlich, H.C., Guba, W., Rarey, M.,\n"
+		"    Stahl, M. (2013). Torsion Angle Preferences in Drug-like Chemical Space:\n"
+		"    A Comprehensive Guide. Journal of Medicinal Chemistry, 56(6):2016-28.\n"
+		" -  Guba, W., Meyder, A., Rarey, M., and Hert, J. (2015). Torsion Library Reloaded:\n"
+		"    A New Version of Expert-Derived SMARTS Rules for Assessing Conformations of\n"
+		"    Small Molecules. Journal of Chemical Information and Modeling, 56(1):1-5.";
 }
 
 void ConfGenImpl::addOptionLongDescriptions()
@@ -642,9 +656,14 @@ void ConfGenImpl::setStrictParameterization(bool strict)
 	settings.getFragmentBuildSettings().strictForceFieldParameterization(strict);
 }
 
-void ConfGenImpl::setSearchForceFieldType(const std::string& type_str)
+void ConfGenImpl::setSystematicSearchForceFieldType(const std::string& type_str)
 {
-	settings.setForceFieldType(stringToForceFieldType(type_str, "search-force-field"));
+	settings.setForceFieldTypeSystematic(stringToForceFieldType(type_str, "systematic-search-force-field"));
+}
+
+void ConfGenImpl::setStochasticSearchForceFieldType(const std::string& type_str)
+{
+	settings.setForceFieldTypeSystematic(stringToForceFieldType(type_str, "stochastic-search-force-field"));
 }
 
 void ConfGenImpl::setBuildForceFieldType(const std::string& type_str)
@@ -1084,7 +1103,8 @@ void ConfGenImpl::printOptionSummary()
  	printMessage(VERBOSE, " Sample Whole Tor. Angle Tol. Range:  " + std::string(settings.sampleAngleToleranceRanges() ? "Yes" : "No"));
  	printMessage(VERBOSE, " Include Input Structure:             " + std::string(settings.includeInputCoordinates() ? "Yes" : "No"));
  	printMessage(VERBOSE, " Generate Coordinates From Scratch:   " + std::string(settings.generateCoordinatesFromScratch() ? "Yes" : "No"));
-	printMessage(VERBOSE, " Search Force Field Type:             " + getForceFieldTypeString(settings.getForceFieldType()));
+	printMessage(VERBOSE, " Systematic Search Force Field Type:  " + getForceFieldTypeString(settings.getForceFieldTypeSystematic()));
+	printMessage(VERBOSE, " Stochastic Search Force Field Type:  " + getForceFieldTypeString(settings.getForceFieldTypeStochastic()));
 	printMessage(VERBOSE, " Build Force Field Type:              " + getForceFieldTypeString(settings.getFragmentBuildSettings().getForceFieldType()));
 	printMessage(VERBOSE, " Strict Force Field Parameterization: " + std::string(settings.strictForceFieldParameterization() ? "Yes" : "No"));
 	printMessage(VERBOSE, " Dielectric Constant:                 " + (boost::format("%.4f") % settings.getDielectricConstant()).str());

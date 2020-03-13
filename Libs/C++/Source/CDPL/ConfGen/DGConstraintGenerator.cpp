@@ -58,9 +58,19 @@
 using namespace CDPL;
 
 
+std::size_t ConfGen::DGConstraintGenerator::BondLengthKeyHash::operator()(const BondLengthKey& k) const 
+{
+	std::size_t hash = 0;
+
+	boost::hash_combine(hash, k.first);
+	boost::hash_combine(hash, k.second);
+
+	return hash;
+}
+
 std::size_t ConfGen::DGConstraintGenerator::BondAngleKeyHash::operator()(const BondAngleKey& k) const 
 {
-	size_t hash = 0;
+	std::size_t hash = 0;
 
 	boost::hash_combine(hash, k.get<0>());
 	boost::hash_combine(hash, k.get<1>());
@@ -573,7 +583,6 @@ void ConfGen::DGConstraintGenerator::init(const Chem::MolecularGraph& molgraph)
 	procAtomPairMask.reset();
 
 	hAtomMask.resize(numAtoms);
-	hAtomMask.reset();
 
     if (settings.excludeHydrogens())
 		buildAtomTypeMask(molgraph, hAtomMask, Chem::AtomType::H);
@@ -606,7 +615,7 @@ void ConfGen::DGConstraintGenerator::assignBondLengths(const ForceField::MMFF94I
 
 			if (atom2_idx >= numAtoms)
 				continue;
-		
+
 			if (excl_hs && (hAtomMask.test(atom1_idx) || hAtomMask.test(atom2_idx)))
 				continue;
 
@@ -798,7 +807,7 @@ void ConfGen::DGConstraintGenerator::setBondLength(std::size_t atom1_idx, std::s
 	if (atom1_idx > atom2_idx)
 		std::swap(atom1_idx, atom2_idx);
 
-	bondLengthTable[std::make_pair(atom1_idx, atom2_idx)] = length;
+	bondLengthTable[BondLengthKey(atom1_idx, atom2_idx)] = length;
 }
 
 double ConfGen::DGConstraintGenerator::getBondLength(std::size_t atom1_idx, std::size_t atom2_idx) const
@@ -806,7 +815,7 @@ double ConfGen::DGConstraintGenerator::getBondLength(std::size_t atom1_idx, std:
 	if (atom1_idx > atom2_idx)
 		std::swap(atom1_idx, atom2_idx);
 
-	BondLengthTable::const_iterator it = bondLengthTable.find(std::make_pair(atom1_idx, atom2_idx));
+	BondLengthTable::const_iterator it = bondLengthTable.find(BondLengthKey(atom1_idx, atom2_idx));
 
 	if (it == bondLengthTable.end())
 		return -1.0;

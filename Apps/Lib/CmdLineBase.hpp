@@ -142,7 +142,7 @@ namespace AppUtils
 		std::ofstream      logFile;
 		bool               showProgress;
 		std::size_t        progressBarLen;
-		int                lastProgressValue;
+		long               lastProgressValue;
 		Clock::time_point  progressStartTime;
 		bool               inProgressLine;
 		bool               inNewLine;

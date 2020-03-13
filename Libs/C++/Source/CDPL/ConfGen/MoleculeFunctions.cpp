@@ -98,7 +98,7 @@ void ConfGen::prepareForConformerGeneration(Chem::Molecule& mol, bool canon)
 
 		if (!isStereoCenter(atom, mol, true, false)) 
 			setStereoDescriptor(atom, StereoDescriptor(AtomConfiguration::NONE));
-
+		
 		else if ((!hasStereoDescriptor(atom) || getStereoDescriptor(atom).getConfiguration() == AtomConfiguration::UNDEF) &&
 				 !isInvertibleNitrogen(atom, mol) && !isAmideNitrogen(atom, mol, false, false) && !isPlanarNitrogen(atom, mol)) 
 			setStereoDescriptor(atom, calcStereoDescriptor(atom, mol, 1));

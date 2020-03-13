@@ -417,6 +417,8 @@ unsigned int ConfGen::FragmentConformerGeneratorImpl::generateFlexibleRingConfor
 	if (settings.preserveInputBondingGeometries())
 		generateConformerFromInputCoordinates(workingConfs);
 
+	bool have_input_conf = !workingConfs.empty();
+
 	if (logCallback)
 		logCallback("Generating flexible ring system conformers...\n");
 
@@ -451,7 +453,7 @@ unsigned int ConfGen::FragmentConformerGeneratorImpl::generateFlexibleRingConfor
 
 	std::size_t timeout = rsys_settings->getTimeout();
 	double e_window = rsys_settings->getEnergyWindow();
-	double min_energy = (workingConfs.empty() ? 0.0 : workingConfs.front()->getEnergy());
+	double min_energy = 0.0;//(!have_input_conf ? 0.0 : workingConfs.front()->getEnergy());
 	unsigned int ret_code = ReturnCode::SUCCESS;
 	ConformerData::SharedPointer conf_data;
 
@@ -489,7 +491,10 @@ unsigned int ConfGen::FragmentConformerGeneratorImpl::generateFlexibleRingConfor
 		return ReturnCode::FRAGMENT_CONF_GEN_FAILED;
 	}
 
-	std::sort(workingConfs.begin(), workingConfs.end(), &compareConformerEnergy);
+	if (have_input_conf)
+		std::sort(workingConfs.begin() + 1, workingConfs.end(), &compareConformerEnergy);
+	else
+		std::sort(workingConfs.begin(), workingConfs.end(), &compareConformerEnergy);
 
 	std::size_t max_num_out_confs = rsys_settings->getMaxNumOutputConformers();
 	double rmsd = rsys_settings->getMinRMSD();
@@ -504,7 +509,7 @@ unsigned int ConfGen::FragmentConformerGeneratorImpl::generateFlexibleRingConfor
 
 		ConformerData::SharedPointer& conf_data = *it;
 
-		if (conf_data->getEnergy() > max_energy)
+		if (!have_input_conf && conf_data->getEnergy() > max_energy)
 			break;
 
 		addSymmetryMappedConformers(*conf_data, rmsd, max_num_out_confs);
@@ -515,6 +520,11 @@ unsigned int ConfGen::FragmentConformerGeneratorImpl::generateFlexibleRingConfor
 				conf_data.reset();
 			else
 				outputConfs.push_back(conf_data);
+		}
+
+		if (have_input_conf) {
+			ringAtomCoords.clear();
+			have_input_conf = false;
 		}
 	}
 

@@ -71,10 +71,14 @@ namespace CDPL
 			void setTimeout(std::size_t mil_secs);
 
 			std::size_t getTimeout() const;
-
-			void setForceFieldType(unsigned int type);
+			
+			void setFragmentModeForceFieldType(unsigned int type);
 	    
-			unsigned int getForceFieldType() const;
+			unsigned int getFragmentModeForceFieldType() const;
+
+			void setDGModeForceFieldType(unsigned int type);
+	    
+			unsigned int getDGModeForceFieldType() const;
 			
 			void strictForceFieldParameterization(bool strict);
 
@@ -117,7 +121,8 @@ namespace CDPL
 			bool                               fromScratch;
 			bool                               sampleTolRanges;
 			std::size_t                        timeout;
-			unsigned int                       forceFieldType;
+			unsigned int                       fragModeForceFieldType;
+			unsigned int                       dgModeForceFieldType;
 			bool                               strictParam;
 			double                             dielectricConst;
 			double                             distExponent;

@@ -37,8 +37,9 @@ using namespace CDPL;
 
 ConfGen::StructureGeneratorSettings::StructureGeneratorSettings():
 	generationMode(StructureGenerationMode::AUTO), fromScratch(true), sampleTolRanges(true), 
-	timeout(20 * 60 * 1000), forceFieldType(ForceFieldType::MMFF94S_EXT_NO_ESTAT), strictParam(true), 
-	dielectricConst(ForceField::MMFF94ElectrostaticInteractionParameterizer::DEF_DIELECTRIC_CONSTANT),
+	timeout(20 * 60 * 1000), fragModeForceFieldType(ForceFieldType::MMFF94S_NO_ESTAT), 
+	dgModeForceFieldType(ForceFieldType::MMFF94S), strictParam(true), 
+	dielectricConst(ForceField::MMFF94ElectrostaticInteractionParameterizer::DIELECTRIC_CONSTANT_WATER),
 	distExponent(ForceField::MMFF94ElectrostaticInteractionParameterizer::DEF_DISTANCE_EXPONENT),
 	maxNumRefIters(0), refStopGrad(0.25), maxNumSampledConfs(50), convIterCount(10), 
 	mcRotorBondCountThresh(10)
@@ -83,17 +84,27 @@ std::size_t ConfGen::StructureGeneratorSettings::getTimeout() const
 {
 	return timeout;
 }
-
-void ConfGen::StructureGeneratorSettings::setForceFieldType(unsigned int type)
+		
+void ConfGen::StructureGeneratorSettings::setFragmentModeForceFieldType(unsigned int type)
 {
-	forceFieldType = type;
+	fragModeForceFieldType = type;
 }
 	    
-unsigned int ConfGen::StructureGeneratorSettings::getForceFieldType() const
+unsigned int ConfGen::StructureGeneratorSettings::getFragmentModeForceFieldType() const
 {
-	return forceFieldType;
+	return fragModeForceFieldType;
 }
-			
+
+void ConfGen::StructureGeneratorSettings::setDGModeForceFieldType(unsigned int type)
+{
+	dgModeForceFieldType = type;
+}
+		    
+unsigned int ConfGen::StructureGeneratorSettings::getDGModeForceFieldType() const
+{
+	return dgModeForceFieldType;
+}
+    
 void ConfGen::StructureGeneratorSettings::strictForceFieldParameterization(bool strict)
 {
 	strictParam = strict;

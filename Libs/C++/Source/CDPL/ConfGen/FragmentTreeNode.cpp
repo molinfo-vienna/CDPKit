@@ -538,7 +538,7 @@ void ConfGen::FragmentTreeNode::alignAndRotateChildConformers(double e_window)
 		const ConformerData& left_conf = *leftChild->conformers[i];
 		double left_conf_energy = left_conf.getEnergy();
 
-		if (new_conf) 
+		if (num_tor_angles > 0 && new_conf) 
 			copyCoordinates(left_conf, leftChild->atomIndices, *new_conf, right_atom_idx);
 		
 		for (std::size_t j = 0; j < num_right_chld_confs; j++) {

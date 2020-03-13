@@ -278,7 +278,7 @@ void CmdLineBase::printProgress(const std::string& prefix, double progress)
 	if (progress <= 0.0) 
 		return;
 	
-	int curr_prog_value = progress * 1000;
+	long curr_prog_value = progress * 10000;
 
 	if (curr_prog_value <= lastProgressValue)
 		return;
@@ -289,8 +289,8 @@ void CmdLineBase::printProgress(const std::string& prefix, double progress)
 	if (logStreamPtr == &std::cerr && !inProgressLine && !inNewLine)
 		std::cerr << std::endl;
 
-	std::cerr << prefix << std::fixed << std::setw(7) << std::setprecision(1) 
-			  << (double(lastProgressValue) / 10) 
+	std::cerr << prefix << std::fixed << std::setw(7) << std::setprecision(2) 
+			  << (double(lastProgressValue) / 100) 
 			  << "% [" << std::setfill('=') << std::setw(curr_prog_bar_len) << "" 
 			  << std::setfill(' ') << std::setw(progressBarLen - curr_prog_bar_len + 1) << "]";
 

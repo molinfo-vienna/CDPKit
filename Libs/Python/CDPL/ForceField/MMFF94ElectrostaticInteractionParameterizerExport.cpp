@@ -59,5 +59,8 @@ void CDPLPythonForceField::exportMMFF94ElectrostaticInteractionParameterizer()
 		.def("assign", CDPLPythonBase::copyAssOp(&ForceField::MMFF94ElectrostaticInteractionParameterizer::operator=),
 			 (python::arg("self"), python::arg("parameterizer")), python::return_self<>())
 		.def("parameterize", &ForceField::MMFF94ElectrostaticInteractionParameterizer::parameterize, 
-			 (python::arg("self"), python::arg("molgraph"), python::arg("ia_data"), python::arg("strict")));
+			 (python::arg("self"), python::arg("molgraph"), python::arg("ia_data"), python::arg("strict")))
+		.def_readonly("DEF_DISTANCE_EXPONENT", ForceField::MMFF94ElectrostaticInteractionParameterizer::DEF_DISTANCE_EXPONENT)
+		.def_readonly("DEF_DIELECTRIC_CONSTANT", ForceField::MMFF94ElectrostaticInteractionParameterizer::DEF_DIELECTRIC_CONSTANT)
+		.def_readonly("DIELECTRIC_CONSTANT_WATER", ForceField::MMFF94ElectrostaticInteractionParameterizer::DIELECTRIC_CONSTANT_WATER);
 }

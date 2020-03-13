@@ -36,8 +36,8 @@ using namespace CDPL;
 
 ConfGen::TorsionDriverSettings::TorsionDriverSettings(): 
 	sampleHetAtomHs(false), sampleTolRanges(false), energyOrdered(true), eWindow(0.0), maxPoolSize(10000),
-	forceFieldType(ForceFieldType::MMFF94S_EXT_NO_ESTAT), strictParam(true),
-	dielectricConst(ForceField::MMFF94ElectrostaticInteractionParameterizer::DEF_DIELECTRIC_CONSTANT),
+	forceFieldType(ForceFieldType::MMFF94S_NO_ESTAT), strictParam(true),
+	dielectricConst(ForceField::MMFF94ElectrostaticInteractionParameterizer::DIELECTRIC_CONSTANT_WATER),
 	distExponent(ForceField::MMFF94ElectrostaticInteractionParameterizer::DEF_DISTANCE_EXPONENT)
 {}
 

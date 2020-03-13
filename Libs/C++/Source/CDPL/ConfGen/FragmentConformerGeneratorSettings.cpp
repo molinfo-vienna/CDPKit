@@ -101,7 +101,7 @@ double ConfGen::FragmentConformerGeneratorSettings::FragmentSettings::getMinRMSD
 
 
 ConfGen::FragmentConformerGeneratorSettings::FragmentConformerGeneratorSettings():
-	preserveBondGeom(false), forceFieldType(ForceFieldType::MMFF94S_EXT_NO_ESTAT), strictParam(true), 
+	preserveBondGeom(false), forceFieldType(ForceFieldType::MMFF94S_NO_ESTAT), strictParam(true), 
 	dielectricConst(ForceField::MMFF94ElectrostaticInteractionParameterizer::DEF_DIELECTRIC_CONSTANT),
 	distExponent(ForceField::MMFF94ElectrostaticInteractionParameterizer::DEF_DISTANCE_EXPONENT),
 	maxNumRefIters(0), refStopGrad(0.1), mcRotorBondCountThresh(10), srSamplingFactor(6) 
@@ -109,7 +109,7 @@ ConfGen::FragmentConformerGeneratorSettings::FragmentConformerGeneratorSettings(
 	chainSettings.setMaxNumSampledConformers(100);
 	chainSettings.setMinNumSampledConformers(20);
 	chainSettings.setTimeout(400 * 1000);
-	chainSettings.setEnergyWindow(8.0);
+	chainSettings.setEnergyWindow(2.0);
 	chainSettings.setMaxNumOutputConformers(1);
 	chainSettings.setMinRMSD(0.1);
 

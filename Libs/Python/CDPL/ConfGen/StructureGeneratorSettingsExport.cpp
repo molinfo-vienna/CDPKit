@@ -64,9 +64,13 @@ void CDPLPythonConfGen::exportStructureGeneratorSettings()
 			 (python::arg("self"), python::arg("mil_secs")))
 		.def("getTimeout", &ConfGen::StructureGeneratorSettings::getTimeout, 
 			 python::arg("self"))
-		.def("setForceFieldType", &ConfGen::StructureGeneratorSettings::setForceFieldType, 
+		.def("setFragmentModeForceFieldType", &ConfGen::StructureGeneratorSettings::setFragmentModeForceFieldType, 
 			 (python::arg("self"), python::arg("type")))
-		.def("getForceFieldType", &ConfGen::StructureGeneratorSettings::getForceFieldType, 
+		.def("getFragmentModeForceFieldType", &ConfGen::StructureGeneratorSettings::getFragmentModeForceFieldType, 
+			 python::arg("self"))
+		.def("setDGModeForceFieldType", &ConfGen::StructureGeneratorSettings::setDGModeForceFieldType, 
+			 (python::arg("self"), python::arg("type")))
+		.def("getDGModeForceFieldType", &ConfGen::StructureGeneratorSettings::getDGModeForceFieldType, 
 			 python::arg("self"))
 		.def("strictForceFieldParameterization", SetBoolFunc(&ConfGen::StructureGeneratorSettings::strictForceFieldParameterization), 
 			 (python::arg("self"), python::arg("strict")))
@@ -113,8 +117,10 @@ void CDPLPythonConfGen::exportStructureGeneratorSettings()
 					  SetBoolFunc(&ConfGen::StructureGeneratorSettings::sampleAngleToleranceRanges))
 		.add_property("timeout", &ConfGen::StructureGeneratorSettings::getTimeout,
 					  &ConfGen::StructureGeneratorSettings::setTimeout)
-		.add_property("forceFieldType", &ConfGen::StructureGeneratorSettings::getForceFieldType, 
-					  &ConfGen::StructureGeneratorSettings::setForceFieldType)
+		.add_property("fragModeForceFieldType", &ConfGen::StructureGeneratorSettings::getFragmentModeForceFieldType, 
+					  &ConfGen::StructureGeneratorSettings::setFragmentModeForceFieldType)
+		.add_property("dgModeForceFieldType", &ConfGen::StructureGeneratorSettings::getDGModeForceFieldType, 
+					  &ConfGen::StructureGeneratorSettings::setDGModeForceFieldType)
 		.add_property("strictForceFieldParam", GetBoolFunc(&ConfGen::StructureGeneratorSettings::strictForceFieldParameterization), 
 					  SetBoolFunc(&ConfGen::StructureGeneratorSettings::strictForceFieldParameterization))
 		.add_property("dielectricConstant", &ConfGen::StructureGeneratorSettings::getDielectricConstant, 

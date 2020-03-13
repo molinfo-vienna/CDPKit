@@ -88,9 +88,13 @@ void CDPLPythonConfGen::exportConformerGeneratorSettings()
 			 (python::arg("self"), python::arg("mil_secs")))
 		.def("getTimeout", &ConfGen::ConformerGeneratorSettings::getTimeout, 
 			 python::arg("self"))
-		.def("setForceFieldType", &ConfGen::ConformerGeneratorSettings::setForceFieldType, 
+		.def("setForceFieldTypeSystematic", &ConfGen::ConformerGeneratorSettings::setForceFieldTypeSystematic, 
 			 (python::arg("self"), python::arg("type")))
-		.def("getForceFieldType", &ConfGen::ConformerGeneratorSettings::getForceFieldType, 
+		.def("getForceFieldTypeSystematic", &ConfGen::ConformerGeneratorSettings::getForceFieldTypeSystematic, 
+			 python::arg("self"))
+		.def("setForceFieldTypeStochastic", &ConfGen::ConformerGeneratorSettings::setForceFieldTypeStochastic, 
+			 (python::arg("self"), python::arg("type")))
+		.def("getForceFieldTypeStochastic", &ConfGen::ConformerGeneratorSettings::getForceFieldTypeStochastic, 
 			 python::arg("self"))
 		.def("strictForceFieldParameterization", SetBoolFunc(&ConfGen::ConformerGeneratorSettings::strictForceFieldParameterization), 
 			 (python::arg("self"), python::arg("strict")))
@@ -163,8 +167,10 @@ void CDPLPythonConfGen::exportConformerGeneratorSettings()
 					  &ConfGen::ConformerGeneratorSettings::setMaxPoolSize)
 		.add_property("timeout", &ConfGen::ConformerGeneratorSettings::getTimeout,
 					  &ConfGen::ConformerGeneratorSettings::setTimeout)
-		.add_property("forceFieldType", &ConfGen::ConformerGeneratorSettings::getForceFieldType, 
-					  &ConfGen::ConformerGeneratorSettings::setForceFieldType)
+		.add_property("forceFieldTypeSystematic", &ConfGen::ConformerGeneratorSettings::getForceFieldTypeSystematic, 
+					  &ConfGen::ConformerGeneratorSettings::setForceFieldTypeSystematic)
+		.add_property("forceFieldTypeStochastic", &ConfGen::ConformerGeneratorSettings::getForceFieldTypeStochastic, 
+					  &ConfGen::ConformerGeneratorSettings::setForceFieldTypeStochastic)
 		.add_property("strictForceFieldParam", GetBoolFunc(&ConfGen::ConformerGeneratorSettings::strictForceFieldParameterization), 
 					  SetBoolFunc(&ConfGen::ConformerGeneratorSettings::strictForceFieldParameterization))
 		.add_property("dielectricConstant", &ConfGen::ConformerGeneratorSettings::getDielectricConstant, 

@@ -37,14 +37,14 @@ using namespace CDPL;
 
 
 ConfGen::ConformerGeneratorSettings::ConformerGeneratorSettings():
-	samplingMode(ConformerSamplingMode::AUTO), sampleHetAtomHs(false), sampleTolRanges(false), 
+	samplingMode(ConformerSamplingMode::AUTO), sampleHetAtomHs(false), sampleTolRanges(true), 
 	enumRings(true), nitrogenEnumMode(NitrogenEnumerationMode::UNSPECIFIED_STEREO),
 	fromScratch(true), incInputCoords(false), eWindow(10.0), maxPoolSize(10000), timeout(60 * 60 * 1000), 
-	forceFieldType(ForceFieldType::MMFF94S_EXT_NO_ESTAT), strictParam(true), 
-	dielectricConst(ForceField::MMFF94ElectrostaticInteractionParameterizer::DEF_DIELECTRIC_CONSTANT),
+	forceFieldTypeSys(ForceFieldType::MMFF94S_NO_ESTAT), forceFieldTypeStoch(ForceFieldType::MMFF94S), strictParam(true), 
+	dielectricConst(ForceField::MMFF94ElectrostaticInteractionParameterizer::DIELECTRIC_CONSTANT_WATER),
 	distExponent(ForceField::MMFF94ElectrostaticInteractionParameterizer::DEF_DISTANCE_EXPONENT),
-	maxNumOutputConfs(100), minRMSD(0.5), maxNumRefIters(0), refStopGrad(0.25), maxNumSampledConfs(10000),
-	convIterCount(300), mcRotorBondCountThresh(10)
+	maxNumOutputConfs(100), minRMSD(0.5), maxNumRefIters(0), refStopGrad(0.25), maxNumSampledConfs(2000),
+	convIterCount(100), mcRotorBondCountThresh(10)
 {}
 
 void ConfGen::ConformerGeneratorSettings::setSamplingMode(unsigned int mode)
@@ -147,14 +147,24 @@ std::size_t ConfGen::ConformerGeneratorSettings::getTimeout() const
 	return timeout;
 }
 
-void ConfGen::ConformerGeneratorSettings::setForceFieldType(unsigned int type)
+void ConfGen::ConformerGeneratorSettings::setForceFieldTypeSystematic(unsigned int type)
 {
-	forceFieldType = type;
+	forceFieldTypeSys = type;
 }
 	    
-unsigned int ConfGen::ConformerGeneratorSettings::getForceFieldType() const
+unsigned int ConfGen::ConformerGeneratorSettings::getForceFieldTypeSystematic() const
 {
-	return forceFieldType;
+	return forceFieldTypeSys;
+}
+
+void ConfGen::ConformerGeneratorSettings::setForceFieldTypeStochastic(unsigned int type)
+{
+	forceFieldTypeStoch = type;
+}
+	    
+unsigned int ConfGen::ConformerGeneratorSettings::getForceFieldTypeStochastic() const
+{
+	return forceFieldTypeStoch;
 }
 			
 void ConfGen::ConformerGeneratorSettings::strictForceFieldParameterization(bool strict)

@@ -55,6 +55,7 @@
 #include "TorsionDriverImpl.hpp"
 #include "FragmentAssemblerImpl.hpp"
 #include "ForceFieldInteractionMask.hpp"
+#include "ConformerDuplicateChecker.hpp"
 
 
 namespace CDPL 
@@ -140,7 +141,7 @@ namespace CDPL
 
 			void splitIntoTorsionFragments();
 			
-			bool setupMMFF94Parameters();
+			bool setupMMFF94Parameters(unsigned int ff_type);
 			
 			unsigned int generateFragmentConformers(bool struct_gen_only);
 			
@@ -221,6 +222,7 @@ namespace CDPL
 			MMFF94GradientCalculator             mmff94GradientCalc;
 			BFGSMinimizer                        energyMinimizer;
 			Chem::Hydrogen3DCoordinatesGenerator hCoordsGen;
+			ConformerDuplicateChecker            confDupChecker;
 			BondList                             torDriveBonds;
 			BondList                             fragSplitBonds;
 			Chem::FragmentList                   fragments;

@@ -123,25 +123,27 @@ bool Chem::DefaultMultiConfMoleculeInputProcessor::isConformation(MolecularGraph
 		} 
 	}
 
-	for (MolecularGraph::ConstAtomIterator tgt_it = tgt_molgraph.getAtomsBegin(), 
-			 conf_it = conf_molgraph.getAtomsBegin(), tgt_end = tgt_molgraph.getAtomsEnd();
-		 tgt_it != tgt_end; ++tgt_it, ++conf_it) {
+	if (atomFlags) {
+		for (MolecularGraph::ConstAtomIterator tgt_it = tgt_molgraph.getAtomsBegin(), 
+				 conf_it = conf_molgraph.getAtomsBegin(), tgt_end = tgt_molgraph.getAtomsEnd();
+			 tgt_it != tgt_end; ++tgt_it, ++conf_it) {
 
-		const Atom& tgt_atom = *tgt_it;
-		const Atom& conf_atom = *conf_it;
+			const Atom& tgt_atom = *tgt_it;
+			const Atom& conf_atom = *conf_it;
 
-		if ((atomFlags & AtomPropertyFlag::TYPE) && getType(tgt_atom) != getType(conf_atom))
-			return false;
+			if ((atomFlags & AtomPropertyFlag::TYPE) && getType(tgt_atom) != getType(conf_atom))
+				return false;
 
-		if ((atomFlags & AtomPropertyFlag::FORMAL_CHARGE) && getFormalCharge(tgt_atom) != getFormalCharge(conf_atom))
-			return false;
+			if ((atomFlags & AtomPropertyFlag::FORMAL_CHARGE) && getFormalCharge(tgt_atom) != getFormalCharge(conf_atom))
+				return false;
 
-		if ((atomFlags & AtomPropertyFlag::ISOTOPE) && getIsotope(tgt_atom) != getIsotope(conf_atom))
-			return false;
+			if ((atomFlags & AtomPropertyFlag::ISOTOPE) && getIsotope(tgt_atom) != getIsotope(conf_atom))
+				return false;
 
-		if ((atomFlags & AtomPropertyFlag::CONFIGURATION) && getStereoCenterFlag(tgt_atom) &&
-			(getCIPConfiguration(tgt_atom) != getCIPConfiguration(conf_atom)))
-			return false;
+			if ((atomFlags & AtomPropertyFlag::CONFIGURATION) && getStereoCenterFlag(tgt_atom) &&
+				(getCIPConfiguration(tgt_atom) != getCIPConfiguration(conf_atom)))
+				return false;
+		}
 	}
 
 	for (MolecularGraph::ConstBondIterator tgt_it = tgt_molgraph.getBondsBegin(), 

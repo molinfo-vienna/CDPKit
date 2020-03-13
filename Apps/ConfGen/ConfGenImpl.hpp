@@ -88,7 +88,8 @@ namespace ConfGen
 		void setRefStopGradient(double g_norm);
 		void setMaxNumRefIterations(std::size_t num_iter);
 		void setStrictParameterization(bool strict);
-		void setSearchForceFieldType(const std::string& type_str);
+		void setSystematicSearchForceFieldType(const std::string& type_str);
+		void setStochasticSearchForceFieldType(const std::string& type_str);
 		void setBuildForceFieldType(const std::string& type_str);
 		void setRMSD(double rmsd);
 		void setEnergyWindow(double ewin);

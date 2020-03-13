@@ -60,7 +60,7 @@ namespace
 			using namespace ConfGen;
 
 			FRAG_CONF_GEN_FAST.preserveInputBondingGeometries(false);
-			FRAG_CONF_GEN_FAST.setForceFieldType(ForceFieldType::MMFF94S_EXT_NO_ESTAT);
+			FRAG_CONF_GEN_FAST.setForceFieldType(ForceFieldType::MMFF94S_NO_ESTAT);
 			FRAG_CONF_GEN_FAST.strictForceFieldParameterization(true);
 			FRAG_CONF_GEN_FAST.setMaxNumRefinementIterations(0);
 			FRAG_CONF_GEN_FAST.setRefinementStopGradient(0.25);
@@ -81,7 +81,7 @@ namespace
 			sr_settings->setMaxNumSampledConformers(1000);
 			sr_settings->setMinNumSampledConformers(30);
 			sr_settings->setMaxNumOutputConformers(1000);
-			sr_settings->setTimeout(400 * 1000);
+			sr_settings->setTimeout(800 * 1000);
 			sr_settings->setEnergyWindow(8.0);
 			sr_settings->setMinRMSD(0.1);
 
@@ -98,19 +98,19 @@ namespace
 
 			FRAG_CONF_GEN_THOROUGH = FRAG_CONF_GEN_FAST;
 			FRAG_CONF_GEN_THOROUGH.setRefinementStopGradient(0.1);
-			FRAG_CONF_GEN_THOROUGH.setSmallRingSystemSamplingFactor(14);
+			FRAG_CONF_GEN_THOROUGH.setSmallRingSystemSamplingFactor(20);
 
 			chain_settings = &FRAG_CONF_GEN_THOROUGH.getChainSettings();
 
 			chain_settings->setMaxNumSampledConformers(200);
 			chain_settings->setMinNumSampledConformers(40);
-			chain_settings->setEnergyWindow(6.0);
+			chain_settings->setEnergyWindow(2.0);
 			chain_settings->setTimeout(1800 * 1000);
 
 			sr_settings = &FRAG_CONF_GEN_THOROUGH.getSmallRingSystemSettings();
 
 			sr_settings->setMinNumSampledConformers(50);
-			sr_settings->setEnergyWindow(6.0);
+			//sr_settings->setEnergyWindow(6.0);
 			sr_settings->setTimeout(1800 * 1000);
 
 			//----------------
@@ -124,13 +124,14 @@ namespace
 			CONF_GEN_SMALL_SET_DIVERSE.generateCoordinatesFromScratch(true);
 			CONF_GEN_SMALL_SET_DIVERSE.includeInputCoordinates(false);
 			CONF_GEN_SMALL_SET_DIVERSE.setTimeout(60 * 60 * 1000);
-			CONF_GEN_SMALL_SET_DIVERSE.setForceFieldType(ForceFieldType::MMFF94S_EXT_NO_ESTAT);
+			CONF_GEN_SMALL_SET_DIVERSE.setForceFieldTypeSystematic(ForceFieldType::MMFF94S_NO_ESTAT);
+			CONF_GEN_SMALL_SET_DIVERSE.setForceFieldTypeStochastic(ForceFieldType::MMFF94S);
 			CONF_GEN_SMALL_SET_DIVERSE.strictForceFieldParameterization(true);
 			CONF_GEN_SMALL_SET_DIVERSE.setMaxNumRefinementIterations(0);
 			CONF_GEN_SMALL_SET_DIVERSE.setRefinementStopGradient(0.25);
 			CONF_GEN_SMALL_SET_DIVERSE.setMacrocycleRotorBondCountThreshold(10);
-			CONF_GEN_SMALL_SET_DIVERSE.setConvergenceIterationCount(300);
-			CONF_GEN_SMALL_SET_DIVERSE.setMaxNumSampledConformers(10000);
+			CONF_GEN_SMALL_SET_DIVERSE.setConvergenceIterationCount(100);
+			CONF_GEN_SMALL_SET_DIVERSE.setMaxNumSampledConformers(2000);
 			CONF_GEN_SMALL_SET_DIVERSE.setEnergyWindow(10.0);
 			CONF_GEN_SMALL_SET_DIVERSE.setMaxNumOutputConformers(50);
 			CONF_GEN_SMALL_SET_DIVERSE.setMinRMSD(0.5);

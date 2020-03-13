@@ -158,6 +158,7 @@ namespace CDPL
 			std::size_t getNeighborAtoms(const Chem::Atom& atom, AtomIndexList& idx_list,
 										 const Chem::Atom* x_atom = 0) const;
 
+			typedef std::pair<std::size_t, std::size_t> BondLengthKey;
 			typedef boost::tuple<std::size_t, std::size_t, std::size_t> BondAngleKey;
 
 			struct BondAngleKeyHash : public std::unary_function<BondAngleKey, std::size_t>
@@ -166,7 +167,13 @@ namespace CDPL
 				std::size_t operator()(const BondAngleKey& k) const;
 			};
 
-			typedef boost::unordered_map<std::pair<std::size_t, std::size_t>, double> BondLengthTable;
+			struct BondLengthKeyHash : public std::unary_function<BondLengthKey, std::size_t>
+			{
+
+				std::size_t operator()(const BondLengthKey& k) const;
+			};
+
+			typedef boost::unordered_map<BondLengthKey, double, BondLengthKeyHash> BondLengthTable;
 			typedef boost::unordered_map<BondAngleKey, double, BondAngleKeyHash> BondAngleTable;
 
 			const Chem::MolecularGraph*   molGraph;

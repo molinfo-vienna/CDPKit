@@ -104,9 +104,13 @@ namespace CDPL
 
 			std::size_t getTimeout() const;
 
-			void setForceFieldType(unsigned int type);
+			void setForceFieldTypeSystematic(unsigned int type);
 	    
-			unsigned int getForceFieldType() const;
+			unsigned int getForceFieldTypeSystematic() const;
+
+			void setForceFieldTypeStochastic(unsigned int type);
+	    
+			unsigned int getForceFieldTypeStochastic() const;
 			
 			void strictForceFieldParameterization(bool strict);
 
@@ -163,7 +167,8 @@ namespace CDPL
 			double                             eWindow;
 			std::size_t                        maxPoolSize;
 			std::size_t                        timeout;
-			unsigned int                       forceFieldType;
+			unsigned int                       forceFieldTypeSys;
+			unsigned int                       forceFieldTypeStoch;
 			bool                               strictParam;
 			double                             dielectricConst;
 			double                             distExponent;

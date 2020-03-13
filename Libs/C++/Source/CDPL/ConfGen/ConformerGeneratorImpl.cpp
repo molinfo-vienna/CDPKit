@@ -84,19 +84,21 @@ namespace
 		}
 	}
 
-	const std::size_t MAX_CONF_DATA_CACHE_SIZE              = 20000;
-	const std::size_t MAX_FRAG_CONF_DATA_CACHE_SIZE         = 100;
-	const std::size_t MAX_FRAG_CONF_COMBINATION_CACHE_SIZE  = 20000;
-	const double      COMP_CONFORMER_SPACING                = 4.0;
-	const std::size_t MAX_NUM_STRUCTURE_GEN_TRIALS          = 10;
-	const std::size_t MAX_NUM_STRUCTURE_GEN_FAILS           = 100;
+	const std::size_t MAX_CONF_DATA_CACHE_SIZE               = 20000;
+	const std::size_t MAX_FRAG_CONF_DATA_CACHE_SIZE          = 100;
+	const std::size_t MAX_FRAG_CONF_COMBINATION_CACHE_SIZE   = 100000;
+	const double      COMP_CONFORMER_SPACING                 = 4.0;
+	const std::size_t MAX_NUM_STRUCTURE_GEN_TRIALS           = 10;
+	const std::size_t MAX_NUM_STRUCTURE_GEN_FAILS            = 100;
+	const std::size_t MAX_FRAG_CONF_COMBINATIONS             = 100000;
+	const double      FRAG_CONF_COMBINATIONS_E_WINDOW_FACTOR = 1.5;
 }
 
 
 ConfGen::ConformerGeneratorImpl::ConformerGeneratorImpl():
 	confDataCache(MAX_CONF_DATA_CACHE_SIZE), fragConfDataCache(MAX_FRAG_CONF_DATA_CACHE_SIZE),
 	confCombDataCache(MAX_FRAG_CONF_COMBINATION_CACHE_SIZE), settings(ConformerGeneratorSettings::DEFAULT),
-	energyMinimizer(boost::ref(mmff94GradientCalc), boost::ref(mmff94GradientCalc))
+	energyMinimizer(boost::ref(mmff94GradientCalc), boost::ref(mmff94GradientCalc)), confDupChecker(mmff94Data.getTorsionInteractions())
 {
 	fragAssembler.setTimeoutCallback(boost::bind(&ConformerGeneratorImpl::timedout, this));
 	fragAssembler.setBondLengthFunction(boost::bind(&ConformerGeneratorImpl::getMMFF94BondLength, this, _1, _2));
@@ -437,7 +439,9 @@ unsigned int ConfGen::ConformerGeneratorImpl::generateConformers(const Chem::Mol
 	if (molgraph.getNumAtoms() == 0)
 		return ReturnCode::SUCCESS;
 
-	if (!setupMMFF94Parameters())
+	bool stochastic = determineSamplingMode();
+
+	if (!setupMMFF94Parameters(stochastic ? settings.getForceFieldTypeStochastic() : settings.getForceFieldTypeSystematic()))
 		return ReturnCode::FORCEFIELD_SETUP_FAILED;
 
 	if (struct_gen_only && !settings.generateCoordinatesFromScratch()) {
@@ -449,7 +453,7 @@ unsigned int ConfGen::ConformerGeneratorImpl::generateConformers(const Chem::Mol
 		}
 	}
 
-	if (determineSamplingMode()) {
+	if (stochastic) {
 		if (logCallback)
 			logCallback(struct_gen_only ? "Generation mode: distance geometry based\n" : "Sampling mode: stochastic\n");
 
@@ -499,6 +503,7 @@ unsigned int ConfGen::ConformerGeneratorImpl::generateConformersStochastic(bool 
 	mmff94GradientCalc.resetFixedAtomMask();
 
 	energyGradient.resize(num_atoms);
+	confDupChecker.reset();
 
 	double e_window = settings.getEnergyWindow();
 	double min_energy = 0.0;
@@ -510,7 +515,7 @@ unsigned int ConfGen::ConformerGeneratorImpl::generateConformersStochastic(bool 
 		logCallback(struct_gen_only ? "Performing distance geometry based structure generation...\n" : "Performing stochastic conformer sampling...\n");
 
 	for (std::size_t num_conf_samples = settings.getMaxNumSampledConformers(), conv_iter_count = settings.getConvergenceIterationCount(), last_min_iter_count = 0, num_struct_gen_fails = 0; 
-		 (num_conf_samples == 0 || i < num_conf_samples) && last_min_iter_count <= conv_iter_count; i++) {
+		 (num_conf_samples == 0 || i < num_conf_samples) && last_min_iter_count <= conv_iter_count; ) {
 
 		if ((ret_code = invokeCallbacks()) != ReturnCode::SUCCESS) {
 			if (ret_code == ReturnCode::TIMEOUT)
@@ -555,36 +560,38 @@ unsigned int ConfGen::ConformerGeneratorImpl::generateConformersStochastic(bool 
 		}
 
 		num_struct_gen_fails = 0;
-		last_min_iter_count++;
+		i++;
+
+		if (confDupChecker.isDuplicate(conf_data)) {
+			last_min_iter_count++;
+			continue;
+		}
+
+		last_min_iter_count = 0;
 
 		double energy = conf_data.getEnergy();
 
-		if (workingConfs.empty())
+		if (workingConfs.empty() || energy < min_energy)
 			min_energy = energy;
 
 		else if (energy > (min_energy + e_window)) 
 			continue;
 		
-		else if (energy < min_energy) { 
-			last_min_iter_count = 0;
-			min_energy = energy;
-
-			for (ConformerDataArray::const_iterator it = workingConfs.begin(), end = workingConfs.end(); it != end; ++it) {
-				const ConformerData::SharedPointer& conf = *it;
-
-				if (conf->getEnergy() > (min_energy + e_window))
-					continue;
-
-				tmpWorkingConfs.push_back(conf);
-			} 
-
-			workingConfs.swap(tmpWorkingConfs);
-			tmpWorkingConfs.clear();
-		}
-
 		workingConfs.push_back(conf_data_ptr);
 		conf_data_ptr.reset();	
 	}
+
+	for (ConformerDataArray::const_iterator it = workingConfs.begin(), end = workingConfs.end(); it != end; ++it) {
+		const ConformerData::SharedPointer& conf = *it;
+
+		if (conf->getEnergy() > (min_energy + e_window))
+			continue;
+
+		tmpWorkingConfs.push_back(conf);
+	} 
+
+	workingConfs.swap(tmpWorkingConfs);
+	tmpWorkingConfs.clear();
 
 	if (logCallback) 
 		logCallback((struct_gen_only ? "Distance geometry structure generation terminated after " : "Stochastic conformer sampling terminated after ") +
@@ -764,10 +771,10 @@ void ConfGen::ConformerGeneratorImpl::splitIntoTorsionFragments()
 		logCallback("Structure decomposed into " + boost::lexical_cast<std::string>(torFragConfData.size()) + " torsion fragment(s)\n");
 }
 
-bool ConfGen::ConformerGeneratorImpl::setupMMFF94Parameters()
+bool ConfGen::ConformerGeneratorImpl::setupMMFF94Parameters(unsigned int ff_type)
 {
 	try {
-		if (parameterizeMMFF94Interactions(*molGraph, mmff94Parameterizer, mmff94Data, settings.getForceFieldType(), 
+		if (parameterizeMMFF94Interactions(*molGraph, mmff94Parameterizer, mmff94Data, ff_type, 
 										   settings.strictForceFieldParameterization(), settings.getDielectricConstant(),
 										   settings.getDistanceExponent()) == ReturnCode::SUCCESS) {
 
@@ -993,7 +1000,8 @@ unsigned int ConfGen::ConformerGeneratorImpl::generateFragmentConformerCombinati
 void ConfGen::ConformerGeneratorImpl::generateFragmentConformerCombinations(std::size_t frag_idx, double comb_energy)
 {
 	if (torFragConfData.size() <= frag_idx) {
-		if (!torFragConfCombData.empty() && (comb_energy > (torFragConfCombData.front()->energy + settings.getEnergyWindow() * 1.5)))
+		if (!torFragConfCombData.empty() && (torFragConfCombData.size() >= MAX_FRAG_CONF_COMBINATIONS ||
+											 comb_energy > (torFragConfCombData.front()->energy + settings.getEnergyWindow() * FRAG_CONF_COMBINATIONS_E_WINDOW_FACTOR)))
 			return;
 
 		ConfCombinationData* frag_conf_comb = confCombDataCache.getRaw();
@@ -1011,15 +1019,18 @@ void ConfGen::ConformerGeneratorImpl::generateFragmentConformerCombinations(std:
 		currConfComb.push_back(i);
 
 		generateFragmentConformerCombinations(frag_idx + 1, comb_energy + frag_conf_data.conformers[i]->getEnergy());
-		
+
 		currConfComb.pop_back();
+
+		if (torFragConfCombData.size() >= MAX_FRAG_CONF_COMBINATIONS)
+			return;
 	}
 }
 
 unsigned int ConfGen::ConformerGeneratorImpl::generateOutputConformers(bool struct_gen_only)
 {
 	if (logCallback) 
-		logCallback(struct_gen_only ? "Generating output structure...\n" : "Generating output conformers...\n");
+		logCallback(struct_gen_only ? "Generating output structure candidates...\n" : "Generating output conformer candidates...\n");
 	
 	fragments.clear();
 
@@ -1122,7 +1133,7 @@ unsigned int ConfGen::ConformerGeneratorImpl::generateOutputConformers(bool stru
 		return ReturnCode::CONF_GEN_FAILED;
 
 	if (logCallback) 
-		logCallback("Generated " + boost::lexical_cast<std::string>(workingConfs.size()) + " candidate conformer(s)\n");
+		logCallback("Generated " + boost::lexical_cast<std::string>(workingConfs.size()) + (struct_gen_only ? " output structure candidate(s)\n" : " output conformer candidate(s)\n"));
 
 	if (have_timeout)
 		return ReturnCode::TIMEOUT;
@@ -1143,7 +1154,7 @@ bool ConfGen::ConformerGeneratorImpl::selectOutputConformers(bool struct_gen_onl
 			outputConfs.push_back(workingConfs.front());
 
 			if (logCallback)
-				logCallback("Selected conformer with lowest energy of " + (boost::format("%.4f") % outputConfs.front()->getEnergy()).str() + '\n');
+				logCallback("Selected structure with lowest energy of " + (boost::format("%.4f") % outputConfs.front()->getEnergy()).str() + '\n');
 		}
 
 		return false;

@@ -286,16 +286,7 @@ bool Chem::AutomorphismGroupSearch::BondMatchExpression::operator()(const Bond& 
 		if (aromatic) 
 			return (tgt_order == 1 || tgt_order == 2 || tgt_order == 3);
 
-		else switch (order) {
-
-				case 1:
-				case 2:
-				case 3:
-					return (order == tgt_order || getAromaticityFlag(target_bond));
-
-				default:
-					return (order == tgt_order);	
-			}
+		return (order == tgt_order || getAromaticityFlag(target_bond));
 	}
 
 	return true;

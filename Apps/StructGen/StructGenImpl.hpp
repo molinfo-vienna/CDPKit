@@ -86,7 +86,8 @@ namespace StructGen
 		void setRefStopGradient(double g_norm);
 		void setMaxNumRefIterations(std::size_t num_iter);
 		void setStrictParameterization(bool strict);
-		void setForceFieldType(const std::string& type_str);
+		void setFragBasedForceFieldType(const std::string& type_str);
+		void setDGBasedForceFieldType(const std::string& type_str);
 		void setSampleAngleTolRanges(bool sample);
 		void setGenerateFromScratch(bool from_scratch);
 		void setInputFormat(const std::string& file_ext);
@@ -122,7 +123,7 @@ namespace StructGen
 		void initInputReader();
 		void initOutputWriters();
 
-		unsigned int stringToForceFieldType(const std::string& type_str);
+		unsigned int stringToForceFieldType(const std::string& type_str, const char* opt);
 
 		std::string getForceFieldTypeString(unsigned int ff_type) const;
 		std::string getGenerationModeString() const;

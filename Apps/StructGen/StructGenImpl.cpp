@@ -320,15 +320,19 @@ StructGenImpl::StructGenImpl():
 			  value<std::size_t>(&numThreads)->implicit_value(boost::thread::hardware_concurrency()));
 	addOption("mode,m", "Structure generation method to use (AUTO, DG, FRAGMENT, default: " + getGenerationModeString() + ").", 
 			  value<std::string>()->notifier(boost::bind(&StructGenImpl::setGenerationMode, this, _1)));
-	addOption("sample-angle-tol-ranges,A", "Additionally evaluate conformers generated for angles at the boundaries of the first "
+	addOption("tol-range-sampling,A", "Additionally generate conformers for angles at the boundaries of the first "
 			  "torsion angle tolerance range (only effective in systematic sampling, default: true).", 
 			  value<bool>()->implicit_value(true)->notifier(boost::bind(&StructGenImpl::setSampleAngleTolRanges, this, _1)));
 	addOption("from-scratch,S", "Discard input 3D-coordinates and generate structures from scratch (default: true).", 
 			  value<bool>()->implicit_value(true)->notifier(boost::bind(&StructGenImpl::setGenerateFromScratch, this, _1)));
-	addOption("force-field,d", "Force field used for structure refinement and conformer energy evaluation(MMFF94, MMFF94_NO_ESTAT, "
+	addOption("frag-force-field,d", "Force field used for fragment based structure generation (MMFF94, MMFF94_NO_ESTAT, "
 			  "MMFF94S, MMFF94S_EXT, MMFF94S_NO_ESTAT, MMFF94S_EXT_NO_ESTAT, default: " +
-			  getForceFieldTypeString(settings.getForceFieldType()) + ").", 
-			  value<std::string>()->notifier(boost::bind(&StructGenImpl::setForceFieldType, this, _1)));
+			  getForceFieldTypeString(settings.getFragmentModeForceFieldType()) + ").", 
+			  value<std::string>()->notifier(boost::bind(&StructGenImpl::setFragBasedForceFieldType, this, _1)));
+	addOption("dg-force-field,q", "Force field used for distance geometry based based structure generation (MMFF94, MMFF94_NO_ESTAT, "
+			  "MMFF94S, MMFF94S_EXT, MMFF94S_NO_ESTAT, MMFF94S_EXT_NO_ESTAT, default: " +
+			  getForceFieldTypeString(settings.getDGModeForceFieldType()) + ").", 
+			  value<std::string>()->notifier(boost::bind(&StructGenImpl::setDGBasedForceFieldType, this, _1)));
 	addOption("strict-param,s", "Perform strict MMFF94 parameterization (default: true).", 
 			  value<bool>()->implicit_value(true)->notifier(boost::bind(&StructGenImpl::setStrictParameterization, this, _1)));
 	addOption("dielectric-const,D", "Dielectric constant used for the calculation of electrostatic interaction energies (default: " +
@@ -387,7 +391,17 @@ const char* StructGenImpl::getProgCopyright() const
 
 const char* StructGenImpl::getProgAboutText() const
 {
-	return "Performs 3D structure generation for a set of input molecules.";
+	return "Performs 3D structure generation for a set of input molecules.\n\n"
+		"Built-in torsion rules are based on the torsion library jointly developed by the\n"
+		"University of Hamburg, Center for Bioinformatics, Hamburg, Germany and\n"
+		"F. Hoffmann-La-Roche Ltd., Basel, Switzerland.\n\n"
+		"References:\n"
+		" -  Schaerfer, C., Schulz-Gasch, T., Ehrlich, H.C., Guba, W., Rarey, M.,\n"
+		"    Stahl, M. (2013). Torsion Angle Preferences in Drug-like Chemical Space:\n"
+		"    A Comprehensive Guide. Journal of Medicinal Chemistry, 56(6):2016-28.\n"
+		" -  Guba, W., Meyder, A., Rarey, M., and Hert, J. (2015). Torsion Library Reloaded:\n"
+		"    A New Version of Expert-Derived SMARTS Rules for Assessing Conformations of\n"
+		"    Small Molecules. Journal of Chemical Information and Modeling, 56(1):1-5.";
 }
 
 void StructGenImpl::addOptionLongDescriptions()
@@ -522,12 +536,19 @@ void StructGenImpl::setStrictParameterization(bool strict)
 	settings.getFragmentBuildSettings().strictForceFieldParameterization(strict);
 }
 
-void StructGenImpl::setForceFieldType(const std::string& type_str)
+void StructGenImpl::setFragBasedForceFieldType(const std::string& type_str)
 {
-	unsigned int ff_type = stringToForceFieldType(type_str);
+	unsigned int ff_type = stringToForceFieldType(type_str, "frag-force-field");
 
-	settings.setForceFieldType(ff_type);
+	settings.setFragmentModeForceFieldType(ff_type);
 	settings.getFragmentBuildSettings().setForceFieldType(ff_type);
+}
+
+void StructGenImpl::setDGBasedForceFieldType(const std::string& type_str)
+{
+	unsigned int ff_type = stringToForceFieldType(type_str, "dg-force-field");
+
+	settings.setDGModeForceFieldType(ff_type);
 }
 
 void StructGenImpl::setSampleAngleTolRanges(bool sample)
@@ -893,7 +914,8 @@ void StructGenImpl::printOptionSummary()
  	printMessage(VERBOSE, " Structure Generation Mode:           " + getGenerationModeString());
  	printMessage(VERBOSE, " Sample Whole Tor. Angle Tol. Range:  " + std::string(settings.sampleAngleToleranceRanges() ? "Yes" : "No"));
  	printMessage(VERBOSE, " Generate Coordinates From Scratch:   " + std::string(settings.generateCoordinatesFromScratch() ? "Yes" : "No"));
-	printMessage(VERBOSE, " Force Field Type:                    " + getForceFieldTypeString(settings.getForceFieldType()));
+	printMessage(VERBOSE, " Fragment Mode Force Field Type:      " + getForceFieldTypeString(settings.getFragmentModeForceFieldType()));
+	printMessage(VERBOSE, " Dist. Geom. Mode Force Field Type:   " + getForceFieldTypeString(settings.getDGModeForceFieldType()));
 	printMessage(VERBOSE, " Strict Force Field Parameterization: " + std::string(settings.strictForceFieldParameterization() ? "Yes" : "No"));
 	printMessage(VERBOSE, " Dielectric Constant:                 " + (boost::format("%.4f") % settings.getDielectricConstant()).str());
 	printMessage(VERBOSE, " Distance Exponent:                   " + (boost::format("%.4f") % settings.getDistanceExponent()).str());
@@ -1073,7 +1095,7 @@ StructGenImpl::OutputHandlerPtr StructGenImpl::getFailedOutputHandler(const std:
 	return AppUtils::getOutputHandler<CDPL::Chem::MolecularGraph>(file_path);
 }
 
-unsigned int StructGenImpl::stringToForceFieldType(const std::string& type_str)
+unsigned int StructGenImpl::stringToForceFieldType(const std::string& type_str, const char* opt)
 {
 	using namespace CDPL::ConfGen;
 
@@ -1093,7 +1115,7 @@ unsigned int StructGenImpl::stringToForceFieldType(const std::string& type_str)
 	else if (uc_type == "MMFF94S_EXT_NO_ESTAT")
 		return ForceFieldType::MMFF94S_EXT_NO_ESTAT;
 	else
-		throwValidationError("force-field");
+		throwValidationError(opt);
 
 	return ForceFieldType::MMFF94S_EXT_NO_ESTAT;
 }
