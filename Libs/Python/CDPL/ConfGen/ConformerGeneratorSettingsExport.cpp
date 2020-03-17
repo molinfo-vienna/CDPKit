@@ -120,17 +120,17 @@ void CDPLPythonConfGen::exportConformerGeneratorSettings()
 			 (python::arg("self"), python::arg("max_num")))
 		.def("getMaxNumRefinementIterations", &ConfGen::ConformerGeneratorSettings::getMaxNumRefinementIterations, 
 			 python::arg("self"))
-		.def("setRefinementStopGradient", &ConfGen::ConformerGeneratorSettings::setRefinementStopGradient, 
-			 (python::arg("self"), python::arg("grad_norm")))
-		.def("getRefinementStopGradient", &ConfGen::ConformerGeneratorSettings::getRefinementStopGradient, 
+		.def("setRefinementStopGradient", &ConfGen::ConformerGeneratorSettings::setRefinementTolerance, 
+			 (python::arg("self"), python::arg("tol")))
+		.def("getRefinementTolerance", &ConfGen::ConformerGeneratorSettings::getRefinementTolerance, 
 			 python::arg("self"))
 		.def("setMaxNumSampledConformers", &ConfGen::ConformerGeneratorSettings::setMaxNumSampledConformers, 
 			 (python::arg("self"), python::arg("max_num")))
 		.def("getMaxNumSampledConformers", &ConfGen::ConformerGeneratorSettings::getMaxNumSampledConformers, 
 			 python::arg("self"))
-		.def("setConvergenceIterationCount", &ConfGen::ConformerGeneratorSettings::setConvergenceIterationCount, 
-			 (python::arg("self"), python::arg("count")))
-		.def("getConvergenceIterationCount", &ConfGen::ConformerGeneratorSettings::getConvergenceIterationCount, 
+		.def("setConvergenceCheckCycleSize", &ConfGen::ConformerGeneratorSettings::setConvergenceCheckCycleSize, 
+			 (python::arg("self"), python::arg("size")))
+		.def("getConvergenceCheckCycleSize", &ConfGen::ConformerGeneratorSettings::getConvergenceCheckCycleSize, 
 			 python::arg("self"))
 		.def("setMacrocycleRotorBondCountThreshold", &ConfGen::ConformerGeneratorSettings::setMacrocycleRotorBondCountThreshold, 
 			 (python::arg("self"), python::arg("max_size")))
@@ -183,12 +183,12 @@ void CDPLPythonConfGen::exportConformerGeneratorSettings()
 					  &ConfGen::ConformerGeneratorSettings::setMinRMSD)
 		.add_property("maxNumRefinementIterations", &ConfGen::ConformerGeneratorSettings::getMaxNumRefinementIterations, 
 					  &ConfGen::ConformerGeneratorSettings::setMaxNumRefinementIterations)
-		.add_property("refinementStopGradient", &ConfGen::ConformerGeneratorSettings::getRefinementStopGradient,
-					  &ConfGen::ConformerGeneratorSettings::setRefinementStopGradient)
+		.add_property("refinementTolerance", &ConfGen::ConformerGeneratorSettings::getRefinementTolerance,
+					  &ConfGen::ConformerGeneratorSettings::setRefinementTolerance)
 		.add_property("maxNumSampledConformers", &ConfGen::ConformerGeneratorSettings::getMaxNumSampledConformers, 
 					  &ConfGen::ConformerGeneratorSettings::setMaxNumSampledConformers)
-		.add_property("convergenceIterationCount", &ConfGen::ConformerGeneratorSettings::getConvergenceIterationCount, 
-					  &ConfGen::ConformerGeneratorSettings::setConvergenceIterationCount)
+		.add_property("convCheckCycleSize", &ConfGen::ConformerGeneratorSettings::getConvergenceCheckCycleSize, 
+					  &ConfGen::ConformerGeneratorSettings::setConvergenceCheckCycleSize)
 		.add_property("macrocycleRotorBondCountThresh", &ConfGen::ConformerGeneratorSettings::getMacrocycleRotorBondCountThreshold, 
 					  &ConfGen::ConformerGeneratorSettings::setMacrocycleRotorBondCountThreshold)
 		.add_property("fragmentBuildSettings", 

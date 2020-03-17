@@ -125,9 +125,9 @@ unsigned int ConfGen::StructureGenerator::generate(const Chem::MolecularGraph& m
 	cg_settings.getFragmentBuildSettings() = settings.getFragmentBuildSettings();
 	cg_settings.setMaxNumRefinementIterations(settings.getMaxNumRefinementIterations());
 	cg_settings.sampleAngleToleranceRanges(settings.sampleAngleToleranceRanges());
-	cg_settings.setRefinementStopGradient(settings.getRefinementStopGradient());
+	cg_settings.setRefinementTolerance(settings.getRefinementTolerance());
 	cg_settings.setMaxNumSampledConformers(settings.getMaxNumSampledConformers());
-	cg_settings.setConvergenceIterationCount(settings.getConvergenceIterationCount());
+	cg_settings.setConvergenceCheckCycleSize(settings.getConvergenceCheckCycleSize());
 	cg_settings.setMacrocycleRotorBondCountThreshold(settings.getMacrocycleRotorBondCountThreshold());
 	cg_settings.setForceFieldTypeSystematic(settings.getFragmentModeForceFieldType());
 	cg_settings.setForceFieldTypeStochastic(settings.getDGModeForceFieldType());

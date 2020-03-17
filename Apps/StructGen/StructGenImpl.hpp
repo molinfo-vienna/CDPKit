@@ -83,7 +83,7 @@ namespace StructGen
 		void setDistExponent(double exp);
 		void setConvergenceIterCount(std::size_t iter_count);
 		void setMacrocycleRotorBondCountThreshold(std::size_t min_count);
-		void setRefStopGradient(double g_norm);
+		void setRefTolerance(double tol);
 		void setMaxNumRefIterations(std::size_t num_iter);
 		void setStrictParameterization(bool strict);
 		void setFragBasedForceFieldType(const std::string& type_str);

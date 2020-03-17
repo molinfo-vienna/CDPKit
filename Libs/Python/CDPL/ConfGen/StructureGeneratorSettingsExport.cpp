@@ -88,9 +88,9 @@ void CDPLPythonConfGen::exportStructureGeneratorSettings()
 			 (python::arg("self"), python::arg("max_num")))
 		.def("getMaxNumRefinementIterations", &ConfGen::StructureGeneratorSettings::getMaxNumRefinementIterations, 
 			 python::arg("self"))
-		.def("setRefinementStopGradient", &ConfGen::StructureGeneratorSettings::setRefinementStopGradient, 
-			 (python::arg("self"), python::arg("grad_norm")))
-		.def("getRefinementStopGradient", &ConfGen::StructureGeneratorSettings::getRefinementStopGradient, 
+		.def("setRefinementTolerance", &ConfGen::StructureGeneratorSettings::setRefinementTolerance, 
+			 (python::arg("self"), python::arg("tol")))
+		.def("getRefinementTolerance", &ConfGen::StructureGeneratorSettings::getRefinementTolerance, 
 			 python::arg("self"))
 		.def("setMacrocycleRotorBondCountThreshold", &ConfGen::StructureGeneratorSettings::setMacrocycleRotorBondCountThreshold, 
 			 (python::arg("self"), python::arg("max_size")))
@@ -100,9 +100,9 @@ void CDPLPythonConfGen::exportStructureGeneratorSettings()
 			 (python::arg("self"), python::arg("max_num")))
 		.def("getMaxNumSampledConformers", &ConfGen::StructureGeneratorSettings::getMaxNumSampledConformers, 
 			 python::arg("self"))
-		.def("setConvergenceIterationCount", &ConfGen::StructureGeneratorSettings::setConvergenceIterationCount, 
-			 (python::arg("self"), python::arg("count")))
-		.def("getConvergenceIterationCount", &ConfGen::StructureGeneratorSettings::getConvergenceIterationCount, 
+		.def("setConvergenceCheckCycleSize", &ConfGen::StructureGeneratorSettings::setConvergenceCheckCycleSize, 
+			 (python::arg("self"), python::arg("size")))
+		.def("getConvergenceCheckCycleSize", &ConfGen::StructureGeneratorSettings::getConvergenceCheckCycleSize, 
 			 python::arg("self"))
 		.def("getFragmentBuildSettings", 
 			 static_cast<ConfGen::FragmentConformerGeneratorSettings& (ConfGen::StructureGeneratorSettings::*)()>
@@ -129,14 +129,14 @@ void CDPLPythonConfGen::exportStructureGeneratorSettings()
 					  &ConfGen::StructureGeneratorSettings::setDistanceExponent)
 		.add_property("maxNumRefinementIterations", &ConfGen::StructureGeneratorSettings::getMaxNumRefinementIterations, 
 					  &ConfGen::StructureGeneratorSettings::setMaxNumRefinementIterations)
-		.add_property("refinementStopGradient", &ConfGen::StructureGeneratorSettings::getRefinementStopGradient,
-					  &ConfGen::StructureGeneratorSettings::setRefinementStopGradient)
+		.add_property("refinementTolerance", &ConfGen::StructureGeneratorSettings::getRefinementTolerance,
+					  &ConfGen::StructureGeneratorSettings::setRefinementTolerance)
 		.add_property("macrocycleRotorBondCountThresh", &ConfGen::StructureGeneratorSettings::getMacrocycleRotorBondCountThreshold, 
 					  &ConfGen::StructureGeneratorSettings::setMacrocycleRotorBondCountThreshold)
 		.add_property("maxNumSampledConformers", &ConfGen::StructureGeneratorSettings::getMaxNumSampledConformers, 
 					  &ConfGen::StructureGeneratorSettings::setMaxNumSampledConformers)
-		.add_property("convergenceIterationCount", &ConfGen::StructureGeneratorSettings::getConvergenceIterationCount, 
-					  &ConfGen::StructureGeneratorSettings::setConvergenceIterationCount)
+		.add_property("convCheckCycleSize", &ConfGen::StructureGeneratorSettings::getConvergenceCheckCycleSize, 
+					  &ConfGen::StructureGeneratorSettings::setConvergenceCheckCycleSize)
 		.add_property("fragmentBuildSettings", 
 					  python::make_function(static_cast<ConfGen::FragmentConformerGeneratorSettings& (ConfGen::StructureGeneratorSettings::*)()>
 											(&ConfGen::StructureGeneratorSettings::getFragmentBuildSettings),

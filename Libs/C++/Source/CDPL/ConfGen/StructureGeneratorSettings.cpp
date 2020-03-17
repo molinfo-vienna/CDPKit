@@ -41,7 +41,7 @@ ConfGen::StructureGeneratorSettings::StructureGeneratorSettings():
 	dgModeForceFieldType(ForceFieldType::MMFF94S), strictParam(true), 
 	dielectricConst(ForceField::MMFF94ElectrostaticInteractionParameterizer::DIELECTRIC_CONSTANT_WATER),
 	distExponent(ForceField::MMFF94ElectrostaticInteractionParameterizer::DEF_DISTANCE_EXPONENT),
-	maxNumRefIters(0), refStopGrad(0.25), maxNumSampledConfs(50), convIterCount(10), 
+	maxNumRefIters(0), refTolerance(0.001), maxNumSampledConfs(50), convCheckCycleSize(10), 
 	mcRotorBondCountThresh(10)
 {}
 
@@ -145,14 +145,14 @@ std::size_t ConfGen::StructureGeneratorSettings::getMaxNumRefinementIterations()
 	return maxNumRefIters;
 }
 
-void ConfGen::StructureGeneratorSettings::setRefinementStopGradient(double grad_norm)
+void ConfGen::StructureGeneratorSettings::setRefinementTolerance(double tol)
 {
-	refStopGrad = grad_norm;
+	refTolerance = tol;
 }
 
-double ConfGen::StructureGeneratorSettings::getRefinementStopGradient() const
+double ConfGen::StructureGeneratorSettings::getRefinementTolerance() const
 {
-	return refStopGrad;
+	return refTolerance;
 }
 
 void ConfGen::StructureGeneratorSettings::setMaxNumSampledConformers(std::size_t max_num)
@@ -165,14 +165,14 @@ std::size_t ConfGen::StructureGeneratorSettings::getMaxNumSampledConformers() co
 	return maxNumSampledConfs;
 }
 
-void ConfGen::StructureGeneratorSettings::setConvergenceIterationCount(std::size_t count)
+void ConfGen::StructureGeneratorSettings::setConvergenceCheckCycleSize(std::size_t size)
 {
-	convIterCount = count;
+	convCheckCycleSize = size;
 }
 
-std::size_t ConfGen::StructureGeneratorSettings::getConvergenceIterationCount() const
+std::size_t ConfGen::StructureGeneratorSettings::getConvergenceCheckCycleSize() const
 {
-	return convIterCount;
+	return convCheckCycleSize;
 }
 
 void ConfGen::StructureGeneratorSettings::setMacrocycleRotorBondCountThreshold(std::size_t min_count)

@@ -128,9 +128,9 @@ namespace
 			CONF_GEN_SMALL_SET_DIVERSE.setForceFieldTypeStochastic(ForceFieldType::MMFF94S);
 			CONF_GEN_SMALL_SET_DIVERSE.strictForceFieldParameterization(true);
 			CONF_GEN_SMALL_SET_DIVERSE.setMaxNumRefinementIterations(0);
-			CONF_GEN_SMALL_SET_DIVERSE.setRefinementStopGradient(0.25);
+			CONF_GEN_SMALL_SET_DIVERSE.setRefinementTolerance(0.001);
 			CONF_GEN_SMALL_SET_DIVERSE.setMacrocycleRotorBondCountThreshold(10);
-			CONF_GEN_SMALL_SET_DIVERSE.setConvergenceIterationCount(100);
+			CONF_GEN_SMALL_SET_DIVERSE.setConvergenceCheckCycleSize(100);
 			CONF_GEN_SMALL_SET_DIVERSE.setMaxNumSampledConformers(2000);
 			CONF_GEN_SMALL_SET_DIVERSE.setEnergyWindow(10.0);
 			CONF_GEN_SMALL_SET_DIVERSE.setMaxNumOutputConformers(50);

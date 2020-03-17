@@ -49,57 +49,6 @@ using namespace CDPL;
 namespace
 {
 
-	template <typename InteractionData>
-	void extractFragmentMMFF94InteractionParams2(const InteractionData& src_ia_data, InteractionData& tgt_ia_data,
-												 Util::BitSet& free_ia_mask, const Util::BitSet& tgt_atom_mask)
-	{
-		for (Util::BitSet::size_type i = free_ia_mask.find_first(); i != Util::BitSet::npos; i = free_ia_mask.find_next(i)) {
-			const typename InteractionData::ElementType& params = src_ia_data[i];
-
-			if (tgt_atom_mask.test(params.getAtom1Index()) && 
-				tgt_atom_mask.test(params.getAtom2Index())) {
-
-				tgt_ia_data.addElement(params);
-				free_ia_mask.reset(i);
-			}
-		}
-	}
-
-	template <typename InteractionData>
-	void extractFragmentMMFF94InteractionParams3(const InteractionData& src_ia_data, InteractionData& tgt_ia_data,
-												 Util::BitSet& free_ia_mask, const Util::BitSet& tgt_atom_mask)
-	{
-		for (Util::BitSet::size_type i = free_ia_mask.find_first(); i != Util::BitSet::npos; i = free_ia_mask.find_next(i)) {
-			const typename InteractionData::ElementType& params = src_ia_data[i];
-
-			if (tgt_atom_mask.test(params.getAtom1Index()) &&
-				tgt_atom_mask.test(params.getAtom2Index()) && 
-				tgt_atom_mask.test(params.getAtom3Index())) {
-
-				tgt_ia_data.addElement(params);
-				free_ia_mask.reset(i);
-			}
-		}
-	}
-
-	template <typename InteractionData>
-	void extractFragmentMMFF94InteractionParams4(const InteractionData& src_ia_data, InteractionData& tgt_ia_data,
-												 Util::BitSet& free_ia_mask, const Util::BitSet& tgt_atom_mask)
-	{
-		for (Util::BitSet::size_type i = free_ia_mask.find_first(); i != Util::BitSet::npos; i = free_ia_mask.find_next(i)) {
-			const typename InteractionData::ElementType& params = src_ia_data[i];
-
-			if (tgt_atom_mask.test(params.getAtom1Index()) &&
-				tgt_atom_mask.test(params.getAtom2Index()) && 
-				tgt_atom_mask.test(params.getAtom3Index()) &&
-				tgt_atom_mask.test(params.getAtom4Index())) {
-
-				tgt_ia_data.addElement(params);
-				free_ia_mask.reset(i);
-			}
-		}
-	}
-
 	bool torsionAnglesEqual(double ang1, double ang2)
 	{
 		return (ConfGen::getAbsoluteAngleDistance(ang1, ang2) < 1.0);

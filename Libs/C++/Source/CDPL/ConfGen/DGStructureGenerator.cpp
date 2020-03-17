@@ -85,12 +85,18 @@ bool ConfGen::DGStructureGenerator::generate(Math::Vector3DArray& coords)
     if (!molGraph)
 		return false;
 
-	coords.resize(molGraph->getNumAtoms());
+	std::size_t num_atoms = molGraph->getNumAtoms();
+	const Util::BitSet& x_h_mask = dgConstraintsGen.getExcludedHydrogenMask();
+
+	coords.resize(num_atoms);
 
 	boost::random::uniform_real_distribution<double> coord_dist(-settings.getBoxSize() * 0.5, settings.getBoxSize() * 0.5);
 
-	for (Math::Vector3DArray::ElementIterator it = coords.getElementsBegin(), end = coords.getElementsEnd(); it != end; ++it) {
-		Math::Vector3D::Pointer pos = it->getData();
+	for (std::size_t i = 0; i < num_atoms; i++) {
+		if (x_h_mask.test(i))
+			continue;
+		
+		Math::Vector3D::Pointer pos = coords[i].getData();
 
 		pos[0] = coord_dist(randomEngine);
 		pos[1] = coord_dist(randomEngine);

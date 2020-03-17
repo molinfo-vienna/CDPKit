@@ -83,9 +83,9 @@ namespace ConfGen
 		void setDielectricConst(double de_const);
 		void setDistExponent(double exp);
 		void setMaxNumSampledConfs(std::size_t max_confs);
-		void setConvergenceIterCount(std::size_t iter_count);
+		void setConvergenceCheckCycleSize(std::size_t size);
 		void setMacrocycleRotorBondCountThreshold(std::size_t min_count);
-		void setRefStopGradient(double g_norm);
+		void setRefTolerance(double tol);
 		void setMaxNumRefIterations(std::size_t num_iter);
 		void setStrictParameterization(bool strict);
 		void setSystematicSearchForceFieldType(const std::string& type_str);

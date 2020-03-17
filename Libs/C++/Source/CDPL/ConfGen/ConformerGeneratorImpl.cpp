@@ -92,13 +92,14 @@ namespace
 	const std::size_t MAX_NUM_STRUCTURE_GEN_FAILS            = 100;
 	const std::size_t MAX_FRAG_CONF_COMBINATIONS             = 100000;
 	const double      FRAG_CONF_COMBINATIONS_E_WINDOW_FACTOR = 1.5;
+	const double      CONF_DUPLICATE_ENERGY_TOLERANCE        = 0.01;
 }
 
 
 ConfGen::ConformerGeneratorImpl::ConformerGeneratorImpl():
 	confDataCache(MAX_CONF_DATA_CACHE_SIZE), fragConfDataCache(MAX_FRAG_CONF_DATA_CACHE_SIZE),
 	confCombDataCache(MAX_FRAG_CONF_COMBINATION_CACHE_SIZE), settings(ConformerGeneratorSettings::DEFAULT),
-	energyMinimizer(boost::ref(mmff94GradientCalc), boost::ref(mmff94GradientCalc)), confDupChecker(mmff94Data.getTorsionInteractions())
+	energyMinimizer(boost::ref(mmff94GradientCalc), boost::ref(mmff94GradientCalc))
 {
 	fragAssembler.setTimeoutCallback(boost::bind(&ConformerGeneratorImpl::timedout, this));
 	fragAssembler.setBondLengthFunction(boost::bind(&ConformerGeneratorImpl::getMMFF94BondLength, this, _1, _2));
@@ -495,7 +496,7 @@ unsigned int ConfGen::ConformerGeneratorImpl::generateConformersStochastic(bool 
 	coreAtomMask = dgStructureGen.getExcludedHydrogenMask();
 	coreAtomMask.flip();
 
-	dgStructureGen.getSettings().setBoxSize(coreAtomMask.count() * 2.0);
+	dgStructureGen.getSettings().setBoxSize(coreAtomMask.size() * 0.5);
 
 	hCoordsGen.setup(*molGraph);
 
@@ -503,20 +504,22 @@ unsigned int ConfGen::ConformerGeneratorImpl::generateConformersStochastic(bool 
 	mmff94GradientCalc.resetFixedAtomMask();
 
 	energyGradient.resize(num_atoms);
-	confDupChecker.reset();
-
+	
 	double e_window = settings.getEnergyWindow();
 	double min_energy = 0.0;
 	ConformerData::SharedPointer conf_data_ptr;
 	unsigned int ret_code = ReturnCode::SUCCESS;
+	std::size_t conv_cycle_size = settings.getConvergenceCheckCycleSize();
+	std::size_t max_num_conf_samples = settings.getMaxNumSampledConformers();
 	std::size_t i = 0;
-	
+	std::size_t num_new_unique_confs = 0;
+	std::size_t last_unique_conf_count = 0;
+	std::size_t num_struct_gen_fails = 0;
+			
 	if (logCallback) 
 		logCallback(struct_gen_only ? "Performing distance geometry based structure generation...\n" : "Performing stochastic conformer sampling...\n");
 
-	for (std::size_t num_conf_samples = settings.getMaxNumSampledConformers(), conv_iter_count = settings.getConvergenceIterationCount(), last_min_iter_count = 0, num_struct_gen_fails = 0; 
-		 (num_conf_samples == 0 || i < num_conf_samples) && last_min_iter_count <= conv_iter_count; ) {
-
+	while (max_num_conf_samples == 0 || i < max_num_conf_samples) {
 		if ((ret_code = invokeCallbacks()) != ReturnCode::SUCCESS) {
 			if (ret_code == ReturnCode::TIMEOUT)
 				break;
@@ -561,26 +564,30 @@ unsigned int ConfGen::ConformerGeneratorImpl::generateConformersStochastic(bool 
 
 		num_struct_gen_fails = 0;
 		i++;
-
-		if (confDupChecker.isDuplicate(conf_data)) {
-			last_min_iter_count++;
-			continue;
-		}
-
-		last_min_iter_count = 0;
-
+		
 		double energy = conf_data.getEnergy();
 
 		if (workingConfs.empty() || energy < min_energy)
 			min_energy = energy;
 
-		else if (energy > (min_energy + e_window)) 
-			continue;
+		if (energy <= min_energy + e_window) {
+			workingConfs.push_back(conf_data_ptr);
+			conf_data_ptr.reset();
+		}
 		
-		workingConfs.push_back(conf_data_ptr);
-		conf_data_ptr.reset();	
-	}
+		if (i % conv_cycle_size == 0) {
+			removeWorkingConfDuplicates();
 
+			num_new_unique_confs = workingConfs.size() - last_unique_conf_count;
+			last_unique_conf_count = workingConfs.size();
+			
+			if (num_new_unique_confs == 0)
+				break;
+
+			//std::cerr << num_new_unique_confs << " new confs generated\n";
+		}
+	}
+	
 	for (ConformerDataArray::const_iterator it = workingConfs.begin(), end = workingConfs.end(); it != end; ++it) {
 		const ConformerData::SharedPointer& conf = *it;
 
@@ -588,19 +595,46 @@ unsigned int ConfGen::ConformerGeneratorImpl::generateConformersStochastic(bool 
 			continue;
 
 		tmpWorkingConfs.push_back(conf);
+	}
+
+	workingConfs.swap(tmpWorkingConfs);
+	tmpWorkingConfs.clear();
+				
+	if (logCallback) {
+		logCallback((struct_gen_only ? "Distance geometry based structure generation terminated after " : "Stochastic conformer sampling terminated after ") +
+					boost::lexical_cast<std::string>(i) + " iteration(s)\n");
+
+		if (!struct_gen_only) {
+			logCallback("Generated " + boost::lexical_cast<std::string>(workingConfs.size()) + " conformer(s) within energy window\n");
+			logCallback((boost::format("%.1f") % (100.0 * double(conv_cycle_size - num_new_unique_confs) / conv_cycle_size)).str() + "% convergence reached\n");
+		}
+
+	
+		if (ret_code == ReturnCode::TIMEOUT && workingConfs.empty())
+			logCallback("Time limit exceeded!\n");
+	}
+	
+	return (workingConfs.empty() ? ReturnCode::CONF_GEN_FAILED : ret_code);
+}
+
+void ConfGen::ConformerGeneratorImpl::removeWorkingConfDuplicates()
+{
+	double last_energy = 0.0;
+	
+	orderConformersByEnergy(workingConfs); 
+	
+	for (ConformerDataArray::const_iterator it = workingConfs.begin(), end = workingConfs.end(); it != end; ++it) {
+		const ConformerData::SharedPointer& conf = *it;
+
+		if (!tmpWorkingConfs.empty() && ((conf->getEnergy() - last_energy) <= CONF_DUPLICATE_ENERGY_TOLERANCE))
+			continue;
+
+		last_energy = conf->getEnergy();
+		tmpWorkingConfs.push_back(conf);
 	} 
 
 	workingConfs.swap(tmpWorkingConfs);
 	tmpWorkingConfs.clear();
-
-	if (logCallback) 
-		logCallback((struct_gen_only ? "Distance geometry structure generation terminated after " : "Stochastic conformer sampling terminated after ") +
-					boost::lexical_cast<std::string>(i) + " iteration(s)\n");
-
-	if (logCallback && ret_code == ReturnCode::TIMEOUT && workingConfs.empty())
-		logCallback("Time limit exceeded!\n");
-
-	return (workingConfs.empty() ? ReturnCode::CONF_GEN_FAILED : ret_code);
 }
 
 bool ConfGen::ConformerGeneratorImpl::determineSamplingMode()
@@ -648,10 +682,10 @@ bool ConfGen::ConformerGeneratorImpl::generateHydrogenCoordsAndMinimize(Conforme
 
 	Math::Vector3DArray::StorageType& conf_coords_data = conf_data.getData();
 	std::size_t max_ref_iters = settings.getMaxNumRefinementIterations();
-	double stop_grad = settings.getRefinementStopGradient();
+	double ref_tol = settings.getRefinementTolerance();
 	double energy = 0.0;
 
-	energyMinimizer.setup(conf_coords_data, energyGradient);
+	energyMinimizer.setup(conf_coords_data, energyGradient, 0.001, 0.25);
 
 	for (std::size_t j = 0; max_ref_iters == 0 || j < max_ref_iters; j++) {
 		if (energyMinimizer.iterate(energy, conf_coords_data, energyGradient) != BFGSMinimizer::SUCCESS) {
@@ -664,7 +698,7 @@ bool ConfGen::ConformerGeneratorImpl::generateHydrogenCoordsAndMinimize(Conforme
 		if ((boost::math::isnan)(energy)) 
 			return false;
 		
-		if (stop_grad >= 0.0 && energyMinimizer.getGradientNorm() <= stop_grad)
+		if (energyMinimizer.getFunctionDelta() < ref_tol)
 			break;
 	}
 

@@ -43,8 +43,8 @@ ConfGen::ConformerGeneratorSettings::ConformerGeneratorSettings():
 	forceFieldTypeSys(ForceFieldType::MMFF94S_NO_ESTAT), forceFieldTypeStoch(ForceFieldType::MMFF94S), strictParam(true), 
 	dielectricConst(ForceField::MMFF94ElectrostaticInteractionParameterizer::DIELECTRIC_CONSTANT_WATER),
 	distExponent(ForceField::MMFF94ElectrostaticInteractionParameterizer::DEF_DISTANCE_EXPONENT),
-	maxNumOutputConfs(100), minRMSD(0.5), maxNumRefIters(0), refStopGrad(0.25), maxNumSampledConfs(2000),
-	convIterCount(100), mcRotorBondCountThresh(10)
+	maxNumOutputConfs(100), minRMSD(0.5), maxNumRefIters(0), refTolerance(0.001), maxNumSampledConfs(2000),
+	convCheckCycleSize(100), mcRotorBondCountThresh(10)
 {}
 
 void ConfGen::ConformerGeneratorSettings::setSamplingMode(unsigned int mode)
@@ -227,14 +227,14 @@ std::size_t ConfGen::ConformerGeneratorSettings::getMaxNumRefinementIterations()
 	return maxNumRefIters;
 }
 
-void ConfGen::ConformerGeneratorSettings::setRefinementStopGradient(double grad_norm)
+void ConfGen::ConformerGeneratorSettings::setRefinementTolerance(double tol)
 {
-	refStopGrad = grad_norm;
+	refTolerance = tol;
 }
 
-double ConfGen::ConformerGeneratorSettings::getRefinementStopGradient() const
+double ConfGen::ConformerGeneratorSettings::getRefinementTolerance() const
 {
-	return refStopGrad;
+	return refTolerance;
 }
 
 void ConfGen::ConformerGeneratorSettings::setMaxNumSampledConformers(std::size_t max_num)
@@ -247,14 +247,14 @@ std::size_t ConfGen::ConformerGeneratorSettings::getMaxNumSampledConformers() co
 	return maxNumSampledConfs;
 }
 
-void ConfGen::ConformerGeneratorSettings::setConvergenceIterationCount(std::size_t count)
+void ConfGen::ConformerGeneratorSettings::setConvergenceCheckCycleSize(std::size_t size)
 {
-	convIterCount = count;
+	convCheckCycleSize = size;
 }
 
-std::size_t ConfGen::ConformerGeneratorSettings::getConvergenceIterationCount() const
+std::size_t ConfGen::ConformerGeneratorSettings::getConvergenceCheckCycleSize() const
 {
-	return convIterCount;
+	return convCheckCycleSize;
 }
 
 void ConfGen::ConformerGeneratorSettings::setMacrocycleRotorBondCountThreshold(std::size_t min_count)

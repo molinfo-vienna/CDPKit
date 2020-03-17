@@ -96,17 +96,17 @@ namespace CDPL
 
 			std::size_t getMaxNumRefinementIterations() const;
 
-			void setRefinementStopGradient(double grad_norm);
+			void setRefinementTolerance(double tol);
 
-			double getRefinementStopGradient() const;
+			double getRefinementTolerance() const;
 
 			void setMaxNumSampledConformers(std::size_t max_num);
 
 			std::size_t getMaxNumSampledConformers() const;
 
-			void setConvergenceIterationCount(std::size_t count);
+			void setConvergenceCheckCycleSize(std::size_t size);
 
-			std::size_t getConvergenceIterationCount() const;
+			std::size_t getConvergenceCheckCycleSize() const;
 
 			void setMacrocycleRotorBondCountThreshold(std::size_t min_count);
 
@@ -127,9 +127,9 @@ namespace CDPL
 			double                             dielectricConst;
 			double                             distExponent;
 			std::size_t                        maxNumRefIters;
-			double                             refStopGrad;
+			double                             refTolerance;
 			std::size_t                        maxNumSampledConfs;
-			std::size_t                        convIterCount;
+			std::size_t                        convCheckCycleSize;
 			std::size_t                        mcRotorBondCountThresh;
 			FragmentConformerGeneratorSettings fragBuildSettings;
 		};

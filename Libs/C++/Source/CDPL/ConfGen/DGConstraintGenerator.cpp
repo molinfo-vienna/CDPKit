@@ -280,6 +280,8 @@ void ConfGen::DGConstraintGenerator::addBondAngleConstraints(Util::DG3DCoordinat
 		coords_gen.addDistanceConstraint(atom1_idx, atom3_idx, dist, dist);
 		coords_gen.addDistanceConstraint(atom1_idx, atom3_idx, dist, dist); // overemphasize for less distored structures
 		coords_gen.addDistanceConstraint(atom1_idx, atom3_idx, dist, dist);
+		coords_gen.addDistanceConstraint(atom1_idx, atom3_idx, dist, dist); 
+		coords_gen.addDistanceConstraint(atom1_idx, atom3_idx, dist, dist);
 
 		markAtomPairProcessed(atom1_idx, atom3_idx);
 	}

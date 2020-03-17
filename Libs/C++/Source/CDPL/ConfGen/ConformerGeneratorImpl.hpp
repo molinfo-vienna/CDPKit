@@ -55,7 +55,6 @@
 #include "TorsionDriverImpl.hpp"
 #include "FragmentAssemblerImpl.hpp"
 #include "ForceFieldInteractionMask.hpp"
-#include "ConformerDuplicateChecker.hpp"
 
 
 namespace CDPL 
@@ -131,6 +130,8 @@ namespace CDPL
 
 			unsigned int generateConformersStochastic(bool struct_gen_only);
 
+			void removeWorkingConfDuplicates();
+			
 			bool determineSamplingMode();
 
 			void init(const Chem::MolecularGraph& molgraph, bool start_timer);
@@ -222,7 +223,6 @@ namespace CDPL
 			MMFF94GradientCalculator             mmff94GradientCalc;
 			BFGSMinimizer                        energyMinimizer;
 			Chem::Hydrogen3DCoordinatesGenerator hCoordsGen;
-			ConformerDuplicateChecker            confDupChecker;
 			BondList                             torDriveBonds;
 			BondList                             fragSplitBonds;
 			Chem::FragmentList                   fragments;
