@@ -583,8 +583,6 @@ unsigned int ConfGen::ConformerGeneratorImpl::generateConformersStochastic(bool 
 			
 			if (num_new_unique_confs == 0)
 				break;
-
-			//std::cerr << num_new_unique_confs << " new confs generated\n";
 		}
 	}
 	
