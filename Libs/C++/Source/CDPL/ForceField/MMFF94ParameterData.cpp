@@ -73,8 +73,8 @@ const char* MMFF94ParameterData::STATIC_TORSION_PARAMETERS =
 #include "MMFFSTOR.PAR.str" 
 ;
 
-const char* MMFF94ParameterData::STATIC_EXT_TORSION_PARAMETERS =              
-#include "MMFFSXTOR.PAR.str" 
+const char* MMFF94ParameterData::STATIC_REF_TORSION_PARAMETERS =              
+#include "MMFFSRTOR.PAR.str" 
 ;
 
 const char* MMFF94ParameterData::VAN_DER_WAALS_PARAMETERS = 

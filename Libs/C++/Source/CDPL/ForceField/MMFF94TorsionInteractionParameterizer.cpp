@@ -66,7 +66,7 @@ namespace
 	double getEmpiricalRuleVParameter(unsigned int atomic_no)
 	{
 		if (atomic_no > Chem::AtomType::MAX_TYPE)
-			empRuleVParamTable[Chem::AtomType::C];
+			return empRuleVParamTable[Chem::AtomType::C];
 
 		return empRuleVParamTable[atomic_no];
 	}

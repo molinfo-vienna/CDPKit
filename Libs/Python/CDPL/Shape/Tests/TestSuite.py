@@ -1,7 +1,7 @@
-# -*- mode: CMake -*-
+# -*- mode: python; tab-width: 4 -*-
 
 ##
-# CMakeLists.txt  
+# TestSuite.py  
 #
 # This file is part of the Chemical Data Processing Toolkit
 #
@@ -23,15 +23,12 @@
 # Boston, MA 02111-1307, USA.
 ##
 
-ADD_SUBDIRECTORY(Base) 
-ADD_SUBDIRECTORY(Util) 
-ADD_SUBDIRECTORY(Math) 
-ADD_SUBDIRECTORY(Chem) 
-ADD_SUBDIRECTORY(Vis) 
-ADD_SUBDIRECTORY(Biomol) 
-ADD_SUBDIRECTORY(Pharm) 
-ADD_SUBDIRECTORY(ForceField) 
-ADD_SUBDIRECTORY(Grid) 
-ADD_SUBDIRECTORY(ConfGen)
-ADD_SUBDIRECTORY(Shape) 
-ADD_SUBDIRECTORY(Internal) 
+
+import unittest
+
+
+test_suite = unittest.TestSuite()
+
+#test_suite.addTests(unittest.defaultTestLoader.loadTestsFromName(""))
+
+unittest.TextTestRunner(verbosity=2).run(test_suite)

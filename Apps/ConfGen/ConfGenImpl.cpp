@@ -380,11 +380,11 @@ ConfGenImpl::ConfGenImpl():
 	addOption("from-scratch,S", "Discard input 3D-coordinates and generate structures from scratch (default: true).", 
 			  value<bool>()->implicit_value(true)->notifier(boost::bind(&ConfGenImpl::setGenerateFromScratch, this, _1)));
 	addOption("systematic-search-force-field,d", "Search force field used in systematic smapling (MMFF94, MMFF94_NO_ESTAT, "
-			  "MMFF94S, MMFF94S_EXT, MMFF94S_NO_ESTAT, MMFF94S_EXT_NO_ESTAT, default: " +
+			  "MMFF94S, MMFF94S_XOOP, MMFF94S_RTOR, MMFF94S_RTOR_XOOP, MMFF94S_NO_ESTAT, MMFF94S_XOOP_NO_ESTAT, MMFF94S_RTOR_NO_ESTAT, MMFF94S_RTOR_XOOP_NO_ESTAT, default: " +
 			  getForceFieldTypeString(settings.getForceFieldTypeSystematic()) + ").", 
 			  value<std::string>()->notifier(boost::bind(&ConfGenImpl::setSystematicSearchForceFieldType, this, _1)));
 	addOption("stochastic-search-force-field,q", "Search force field used in stochastic smapling (MMFF94, MMFF94_NO_ESTAT, "
-			  "MMFF94S, MMFF94S_EXT, MMFF94S_NO_ESTAT, MMFF94S_EXT_NO_ESTAT, default: " +
+			  "MMFF94S, MMFF94S_XOOP, MMFF94S_RTOR, MMFF94S_RTOR_XOOP, MMFF94S_NO_ESTAT, MMFF94S_XOOP_NO_ESTAT, MMFF94S_RTOR_NO_ESTAT, MMFF94S_RTOR_XOOP_NO_ESTAT, default: " +
 			  getForceFieldTypeString(settings.getForceFieldTypeStochastic()) + ").", 
 			  value<std::string>()->notifier(boost::bind(&ConfGenImpl::setStochasticSearchForceFieldType, this, _1)));
 	addOption("strict-param,s", "Perform strict MMFF94 parameterization (default: true).", 
@@ -428,7 +428,8 @@ ConfGenImpl::ConfGenImpl():
 	addOption("frag-build-preset,B", "Fragment build preset to use (FAST, THOROUGH, only effective in systematic sampling, default: FAST).", 
 			  value<std::string>()->notifier(boost::bind(&ConfGenImpl::applyFragBuildPreset, this, _1)));
 	addOption("build-force-field,b", "Fragment build force field (MMFF94, MMFF94_NO_ESTAT, MMFF94S, "
-			  "MMFF94S_EXT, MMFF94S_NO_ESTAT, MMFF94S_EXT_NO_ESTAT, only effective in systematic sampling, default: " +
+			  "MMFF94S_XOOP, MMFF94S_RTOR, MMFF94S_RTOR_XOOP, MMFF94S_NO_ESTAT, MMFF94S_XOOP_NO_ESTAT, MMFF94S_RTOR_NO_ESTAT, "
+			  "MMFF94S_RTOR_XOOP_NO_ESTAT, only effective in systematic sampling, default: " +
 			  getForceFieldTypeString(settings.getFragmentBuildSettings().getForceFieldType()) + ").", 
 			  value<std::string>()->notifier(boost::bind(&ConfGenImpl::setBuildForceFieldType, this, _1)));
 	addOption("add-frag-lib,g", "Fragment library to be used in addition to the built-in library (only effective in systematic sampling).",
@@ -1310,16 +1311,24 @@ unsigned int ConfGenImpl::stringToForceFieldType(const std::string& type_str, co
 		return ForceFieldType::MMFF94_NO_ESTAT;
 	else if (uc_type == "MMFF94S")
 		return ForceFieldType::MMFF94S;
-	else if (uc_type == "MMFF94S_EXT")
-		return ForceFieldType::MMFF94S_EXT;
+	else if (uc_type == "MMFF94S_XOOP")
+		return ForceFieldType::MMFF94S_XOOP;
+	else if (uc_type == "MMFF94S_RTOR")
+		return ForceFieldType::MMFF94S_RTOR;
+	else if (uc_type == "MMFF94S_RTOR_XOOP")
+		return ForceFieldType::MMFF94S_RTOR_XOOP;
 	else if (uc_type == "MMFF94S_NO_ESTAT")
 		return ForceFieldType::MMFF94S_NO_ESTAT;
-	else if (uc_type == "MMFF94S_EXT_NO_ESTAT")
-		return ForceFieldType::MMFF94S_EXT_NO_ESTAT;
+	else if (uc_type == "MMFF94S_XOOP_NO_ESTAT")
+		return ForceFieldType::MMFF94S_XOOP_NO_ESTAT;
+	else if (uc_type == "MMFF94S_RTOR_NO_ESTAT")
+		return ForceFieldType::MMFF94S_RTOR_NO_ESTAT;
+	else if (uc_type == "MMFF94S_RTOR_XOOP_NO_ESTAT")
+		return ForceFieldType::MMFF94S_RTOR_XOOP_NO_ESTAT;
 	else
 		throwValidationError(opt);
 
-	return ForceFieldType::MMFF94S_EXT_NO_ESTAT;
+	return ForceFieldType::MMFF94S_XOOP_NO_ESTAT;
 }
 
 std::string ConfGenImpl::getForceFieldTypeString(unsigned int ff_type) const
@@ -1335,15 +1344,27 @@ std::string ConfGenImpl::getForceFieldTypeString(unsigned int ff_type) const
 	if (ff_type == ForceFieldType::MMFF94S)
 		return "MMFF94S";
 
-	if (ff_type == ForceFieldType::MMFF94S_EXT)
-		return "MMFF94S_EXT";
-	
+	if (ff_type == ForceFieldType::MMFF94S_XOOP)
+		return "MMFF94S_XOOP";
+
+	if (ff_type == ForceFieldType::MMFF94S_RTOR)
+		return "MMFF94S_RTOR";
+
+	if (ff_type == ForceFieldType::MMFF94S_RTOR_XOOP)
+		return "MMFF94S_RTOR_XOOP";
+
 	if (ff_type == ForceFieldType::MMFF94S_NO_ESTAT)
 		return "MMFF94S_NO_ESTAT";
 
-	if (ff_type == ForceFieldType::MMFF94S_EXT_NO_ESTAT)
-		return "MMFF94S_EXT_NO_ESTAT";
-	
+	if (ff_type == ForceFieldType::MMFF94S_XOOP_NO_ESTAT)
+		return "MMFF94S_XOOP_NO_ESTAT";
+
+	if (ff_type == ForceFieldType::MMFF94S_RTOR_NO_ESTAT)
+		return "MMFF94S_RTOR_NO_ESTAT";
+
+	if (ff_type == ForceFieldType::MMFF94S_RTOR_XOOP_NO_ESTAT)
+		return "MMFF94S_RTOR_XOOP_NO_ESTAT";
+
 	return "UNKNOWN";
 }
 

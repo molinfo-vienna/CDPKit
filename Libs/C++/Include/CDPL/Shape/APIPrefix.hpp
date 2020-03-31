@@ -1,7 +1,7 @@
 /* -*- mode: c++; c-basic-offset: 4; tab-width: 4; indent-tabs-mode: t -*- */
 
 /* 
- * MMFF94ParameterSetExport.cpp 
+ * APIPrefix.hpp 
  *
  * This file is part of the Chemical Data Processing Toolkit
  *
@@ -23,30 +23,28 @@
  * Boston, MA 02111-1307, USA.
  */
 
+/**
+ * \file
+ * \brief Definition of the preprocessor macro \ref CDPL_SHAPE_API.
+ */
 
-#include <boost/python.hpp>
+#ifndef CDPL_SHAPE_APIPREFIX_HPP
+#define CDPL_SHAPE_APIPREFIX_HPP
 
-#include "CDPL/ForceField/MMFF94ParameterSet.hpp"
+#ifdef CDPL_SHAPE_STATIC_LINK
+#  define CDPL_SHAPE_API
+#else // CDPL_SHAPE_STATIC_LINK
+#  include "CDPL/APIPrefix.hpp"
+#  ifdef cdpl_shape_shared_EXPORTS
+#    define CDPL_SHAPE_API CDPL_API_EXPORT
+#  else // cdpl_shape_shared_EXPORTS
+#    define CDPL_SHAPE_API CDPL_API_IMPORT
+#  endif // cdpl_shape_shared_EXPORTS
+#endif // CDPL_SHAPE_STATIC_LINK
 
-#include "NamespaceExports.hpp"
+/**
+ * \def CDPL_SHAPE_API
+ * \brief Tells the compiler/linker which classes, functions and variables are part of the library API.
+ */
 
-
-namespace 
-{
-
-	struct MMFF94ParameterSet {};
-}
-
-
-void CDPLPythonForceField::exportMMFF94ParameterSets()
-{
-	using namespace boost;
-	using namespace CDPL;
-
-	python::class_<MMFF94ParameterSet, boost::noncopyable>("MMFF94ParameterSet", python::no_init)
-		.def_readonly("DYNAMIC", &ForceField::MMFF94ParameterSet::DYNAMIC)
-		.def_readonly("STATIC", &ForceField::MMFF94ParameterSet::STATIC)
-		.def_readonly("STATIC_XOOP", &ForceField::MMFF94ParameterSet::STATIC_XOOP)
-		.def_readonly("STATIC_RTOR", &ForceField::MMFF94ParameterSet::STATIC_RTOR)
-		.def_readonly("STATIC_RTOR_XOOP", &ForceField::MMFF94ParameterSet::STATIC_RTOR_XOOP);
-}
+#endif // CDPL_SHAPE_APIPREFIX_HPP

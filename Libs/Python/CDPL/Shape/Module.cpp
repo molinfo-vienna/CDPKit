@@ -1,7 +1,7 @@
 /* -*- mode: c++; c-basic-offset: 4; tab-width: 4; indent-tabs-mode: t -*- */
 
 /* 
- * MMFF94ParameterSetExport.cpp 
+ * Module.cpp 
  *
  * This file is part of the Chemical Data Processing Toolkit
  *
@@ -26,27 +26,13 @@
 
 #include <boost/python.hpp>
 
-#include "CDPL/ForceField/MMFF94ParameterSet.hpp"
-
+#include "ClassExports.hpp"
+#include "FunctionExports.hpp"
 #include "NamespaceExports.hpp"
 
 
-namespace 
+BOOST_PYTHON_MODULE(_shape)
 {
+	using namespace CDPLPythonShape;
 
-	struct MMFF94ParameterSet {};
-}
-
-
-void CDPLPythonForceField::exportMMFF94ParameterSets()
-{
-	using namespace boost;
-	using namespace CDPL;
-
-	python::class_<MMFF94ParameterSet, boost::noncopyable>("MMFF94ParameterSet", python::no_init)
-		.def_readonly("DYNAMIC", &ForceField::MMFF94ParameterSet::DYNAMIC)
-		.def_readonly("STATIC", &ForceField::MMFF94ParameterSet::STATIC)
-		.def_readonly("STATIC_XOOP", &ForceField::MMFF94ParameterSet::STATIC_XOOP)
-		.def_readonly("STATIC_RTOR", &ForceField::MMFF94ParameterSet::STATIC_RTOR)
-		.def_readonly("STATIC_RTOR_XOOP", &ForceField::MMFF94ParameterSet::STATIC_RTOR_XOOP);
 }

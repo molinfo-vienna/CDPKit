@@ -2,10 +2,11 @@
 *   Copyright (c) Merck and Co., Inc., 1994,1995,1996,1997,1998,1999
 *                         All Rights Reserved
 *
-* MMFF94s_EXT OUT-OF-PLANE PARAMETERS
+* MMFF94s_XOOP OUT-OF-PLANE PARAMETERS
 * C94  - CORE MMFF94 parameter, from fits to HF/6-31G* 2nd D's
 * C94S - CORE MMFF94s parameter,adjusted to promote planarity
 * #C94 - Value adjusted from CORE MMFF94 value
+* 94SX - Extended MMFF94s parameter, adjusted to promote planarity
 *
 *   MMFF  atom types     koop    Source
     0    2    0    0     0.020   *-2-*-* C94 DEF
@@ -74,12 +75,12 @@
    23   39   63   63    -0.014   C94
    23   39   63   65     0.021   C94
    23   39   65   65     0.062   C94
-    0   40    0    0     0.15    C94S EXT
+    0   40    0    0     0.15    94SX
     0   41    0    0     0.180   *-41-*-* C94 DEF
     1   41   32   32     0.178   C94
     2   41   32   32     0.161   C94
     5   41   32   32     0.158   C94
-    0   43    0    0     0.15   C94S EXT.
+    0   43    0    0     0.15    94SX
     0   45    0    0     0.150   *-45-*-* E94 DEF
     0   49    0    0     0.000   *-49-*-* E94 DEF
    50   49   50   50     0.000   #C94

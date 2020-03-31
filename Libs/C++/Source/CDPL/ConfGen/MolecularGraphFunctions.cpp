@@ -213,8 +213,16 @@ unsigned int ConfGen::parameterizeMMFF94Interactions(const Chem::MolecularGraph&
 			parameterizer.setParameterSet(MMFF94ParameterSet::STATIC);
 			break;
 
-		case ForceFieldType::MMFF94S_EXT:
-			parameterizer.setParameterSet(MMFF94ParameterSet::STATIC_EXT);
+		case ForceFieldType::MMFF94S_XOOP:
+			parameterizer.setParameterSet(MMFF94ParameterSet::STATIC_XOOP);
+			break;
+
+		case ForceFieldType::MMFF94S_RTOR:
+			parameterizer.setParameterSet(MMFF94ParameterSet::STATIC_RTOR);
+			break;
+
+		case ForceFieldType::MMFF94S_RTOR_XOOP:
+			parameterizer.setParameterSet(MMFF94ParameterSet::STATIC_RTOR_XOOP);
 			break;
 
 		case ForceFieldType::MMFF94_NO_ESTAT:
@@ -227,8 +235,18 @@ unsigned int ConfGen::parameterizeMMFF94Interactions(const Chem::MolecularGraph&
 			int_types = InteractionType::ALL ^ InteractionType::ELECTROSTATIC;
 			break;
 
-		case ForceFieldType::MMFF94S_EXT_NO_ESTAT:
-			parameterizer.setParameterSet(MMFF94ParameterSet::STATIC_EXT);
+		case ForceFieldType::MMFF94S_XOOP_NO_ESTAT:
+			parameterizer.setParameterSet(MMFF94ParameterSet::STATIC_XOOP);
+			int_types = InteractionType::ALL ^ InteractionType::ELECTROSTATIC;
+			break;
+
+		case ForceFieldType::MMFF94S_RTOR_NO_ESTAT:
+			parameterizer.setParameterSet(MMFF94ParameterSet::STATIC_RTOR);
+			int_types = InteractionType::ALL ^ InteractionType::ELECTROSTATIC;
+			break;
+
+		case ForceFieldType::MMFF94S_RTOR_XOOP_NO_ESTAT:
+			parameterizer.setParameterSet(MMFF94ParameterSet::STATIC_RTOR_XOOP);
 			int_types = InteractionType::ALL ^ InteractionType::ELECTROSTATIC;
 			break;
 

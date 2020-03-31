@@ -50,12 +50,16 @@ namespace CDPL
 		namespace ForceFieldType
 		{
 					
-			const unsigned int MMFF94                = 0;
-			const unsigned int MMFF94_NO_ESTAT       = 1;
-			const unsigned int MMFF94S               = 2;
-			const unsigned int MMFF94S_NO_ESTAT      = 3;
-			const unsigned int MMFF94S_EXT           = 4;
-			const unsigned int MMFF94S_EXT_NO_ESTAT  = 5;
+			const unsigned int MMFF94                     = 0;
+			const unsigned int MMFF94_NO_ESTAT            = 1;
+			const unsigned int MMFF94S                    = 2;
+			const unsigned int MMFF94S_NO_ESTAT           = 3;
+			const unsigned int MMFF94S_XOOP               = 4;
+			const unsigned int MMFF94S_XOOP_NO_ESTAT      = 5;
+			const unsigned int MMFF94S_RTOR               = 6;
+			const unsigned int MMFF94S_RTOR_NO_ESTAT      = 7;
+			const unsigned int MMFF94S_RTOR_XOOP          = 8;
+			const unsigned int MMFF94S_RTOR_XOOP_NO_ESTAT = 9;
 		}
 
 		/**

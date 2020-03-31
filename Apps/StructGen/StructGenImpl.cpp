@@ -326,11 +326,11 @@ StructGenImpl::StructGenImpl():
 	addOption("from-scratch,S", "Discard input 3D-coordinates and generate structures from scratch (default: true).", 
 			  value<bool>()->implicit_value(true)->notifier(boost::bind(&StructGenImpl::setGenerateFromScratch, this, _1)));
 	addOption("frag-force-field,d", "Force field used for fragment based structure generation (MMFF94, MMFF94_NO_ESTAT, "
-			  "MMFF94S, MMFF94S_EXT, MMFF94S_NO_ESTAT, MMFF94S_EXT_NO_ESTAT, default: " +
+			  "MMFF94S, MMFF94S_XOOP, MMFF94S_RTOR, MMFF94S_RTOR_XOOP, MMFF94S_NO_ESTAT, MMFF94S_XOOP_NO_ESTAT, MMFF94S_RTOR_NO_ESTAT, MMFF94S_RTOR_XOOP_NO_ESTAT, default: " +
 			  getForceFieldTypeString(settings.getFragmentModeForceFieldType()) + ").", 
 			  value<std::string>()->notifier(boost::bind(&StructGenImpl::setFragBasedForceFieldType, this, _1)));
 	addOption("dg-force-field,q", "Force field used for distance geometry based based structure generation (MMFF94, MMFF94_NO_ESTAT, "
-			  "MMFF94S, MMFF94S_EXT, MMFF94S_NO_ESTAT, MMFF94S_EXT_NO_ESTAT, default: " +
+			  "MMFF94S, MMFF94S_XOOP, MMFF94S_RTOR, MMFF94S_RTOR_XOOP, MMFF94S_NO_ESTAT, MMFF94S_XOOP_NO_ESTAT, MMFF94S_RTOR_NO_ESTAT, MMFF94S_RTOR_XOOP_NO_ESTAT, default: " +
 			  getForceFieldTypeString(settings.getDGModeForceFieldType()) + ").", 
 			  value<std::string>()->notifier(boost::bind(&StructGenImpl::setDGBasedForceFieldType, this, _1)));
 	addOption("strict-param,s", "Perform strict MMFF94 parameterization (default: true).", 
@@ -1108,16 +1108,24 @@ unsigned int StructGenImpl::stringToForceFieldType(const std::string& type_str, 
 		return ForceFieldType::MMFF94_NO_ESTAT;
 	else if (uc_type == "MMFF94S")
 		return ForceFieldType::MMFF94S;
-	else if (uc_type == "MMFF94S_EXT")
-		return ForceFieldType::MMFF94S_EXT;
+	else if (uc_type == "MMFF94S_XOOP")
+		return ForceFieldType::MMFF94S_XOOP;
+	else if (uc_type == "MMFF94S_RTOR")
+		return ForceFieldType::MMFF94S_RTOR;
+	else if (uc_type == "MMFF94S_RTOR_XOOP")
+		return ForceFieldType::MMFF94S_RTOR_XOOP;
 	else if (uc_type == "MMFF94S_NO_ESTAT")
 		return ForceFieldType::MMFF94S_NO_ESTAT;
-	else if (uc_type == "MMFF94S_EXT_NO_ESTAT")
-		return ForceFieldType::MMFF94S_EXT_NO_ESTAT;
+	else if (uc_type == "MMFF94S_XOOP_NO_ESTAT")
+		return ForceFieldType::MMFF94S_XOOP_NO_ESTAT;
+	else if (uc_type == "MMFF94S_RTOR_NO_ESTAT")
+		return ForceFieldType::MMFF94S_RTOR_NO_ESTAT;
+	else if (uc_type == "MMFF94S_RTOR_XOOP_NO_ESTAT")
+		return ForceFieldType::MMFF94S_RTOR_XOOP_NO_ESTAT;
 	else
 		throwValidationError(opt);
 
-	return ForceFieldType::MMFF94S_EXT_NO_ESTAT;
+	return ForceFieldType::MMFF94S_XOOP_NO_ESTAT;
 }
 
 std::string StructGenImpl::getForceFieldTypeString(unsigned int ff_type) const
@@ -1133,15 +1141,27 @@ std::string StructGenImpl::getForceFieldTypeString(unsigned int ff_type) const
 	if (ff_type == ForceFieldType::MMFF94S)
 		return "MMFF94S";
 
-	if (ff_type == ForceFieldType::MMFF94S_EXT)
-		return "MMFF94S_EXT";
+	if (ff_type == ForceFieldType::MMFF94S_XOOP)
+		return "MMFF94S_XOOP";
+
+	if (ff_type == ForceFieldType::MMFF94S_RTOR)
+		return "MMFF94S_RTOR";
+
+	if (ff_type == ForceFieldType::MMFF94S_RTOR_XOOP)
+		return "MMFF94S_RTOR_XOOP";
 	
 	if (ff_type == ForceFieldType::MMFF94S_NO_ESTAT)
 		return "MMFF94S_NO_ESTAT";
 
-	if (ff_type == ForceFieldType::MMFF94S_EXT_NO_ESTAT)
-		return "MMFF94S_EXT_NO_ESTAT";
-	
+	if (ff_type == ForceFieldType::MMFF94S_XOOP_NO_ESTAT)
+		return "MMFF94S_XOOP_NO_ESTAT";
+
+	if (ff_type == ForceFieldType::MMFF94S_RTOR_NO_ESTAT)
+		return "MMFF94S_RTOR_NO_ESTAT";
+
+	if (ff_type == ForceFieldType::MMFF94S_RTOR_XOOP_NO_ESTAT)
+		return "MMFF94S_RTOR_XOOP_NO_ESTAT";
+
 	return "UNKNOWN";
 }
 
