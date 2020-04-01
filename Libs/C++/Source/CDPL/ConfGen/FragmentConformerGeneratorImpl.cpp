@@ -415,9 +415,7 @@ unsigned int ConfGen::FragmentConformerGeneratorImpl::generateChainConformer()
 unsigned int ConfGen::FragmentConformerGeneratorImpl::generateFlexibleRingConformers()
 {
 	if (settings.preserveInputBondingGeometries())
-		generateConformerFromInputCoordinates(workingConfs);
-
-	bool have_input_conf = !workingConfs.empty();
+		generateConformerFromInputCoordinates(outputConfs);
 
 	if (logCallback)
 		logCallback("Generating flexible ring system conformers...\n");
@@ -453,7 +451,7 @@ unsigned int ConfGen::FragmentConformerGeneratorImpl::generateFlexibleRingConfor
 
 	std::size_t timeout = rsys_settings->getTimeout();
 	double e_window = rsys_settings->getEnergyWindow();
-	double min_energy = 0.0;//(!have_input_conf ? 0.0 : workingConfs.front()->getEnergy());
+	double min_energy = 0.0;
 	unsigned int ret_code = ReturnCode::SUCCESS;
 	ConformerData::SharedPointer conf_data;
 
@@ -484,16 +482,21 @@ unsigned int ConfGen::FragmentConformerGeneratorImpl::generateFlexibleRingConfor
 		conf_data.reset();
 	}
 
-	if (workingConfs.empty()) {
+	if (workingConfs.empty() && outputConfs.empty()) {
 		if (logCallback)
 			logCallback("Could not generate any conformers!\n");
 
 		return ReturnCode::FRAGMENT_CONF_GEN_FAILED;
 	}
 
-	if (have_input_conf)
+	if (!outputConfs.empty()) {
+		workingConfs.push_back(outputConfs.front());
+		workingConfs.front().swap(workingConfs.back());
+		outputConfs.clear();
+		
 		std::sort(workingConfs.begin() + 1, workingConfs.end(), &compareConformerEnergy);
-	else
+
+	} else
 		std::sort(workingConfs.begin(), workingConfs.end(), &compareConformerEnergy);
 
 	std::size_t max_num_out_confs = rsys_settings->getMaxNumOutputConformers();
@@ -509,23 +512,14 @@ unsigned int ConfGen::FragmentConformerGeneratorImpl::generateFlexibleRingConfor
 
 		ConformerData::SharedPointer& conf_data = *it;
 
-		if (!have_input_conf && conf_data->getEnergy() > max_energy)
+		if (!outputConfs.empty() && conf_data->getEnergy() > max_energy)
 			break;
 
+		if (checkRMSD(*conf_data, rmsd)) 
+			outputConfs.push_back(conf_data);
+			
 		addSymmetryMappedConformers(*conf_data, rmsd, max_num_out_confs);
 		addMirroredConformer(*conf_data, rmsd, max_num_out_confs);
-
-		if (outputConfs.size() < max_num_out_confs) {
-			if (!checkRMSD(*conf_data, rmsd)) 
-				conf_data.reset();
-			else
-				outputConfs.push_back(conf_data);
-		}
-
-		if (have_input_conf) {
-			ringAtomCoords.clear();
-			have_input_conf = false;
-		}
 	}
 
 	return ret_code;

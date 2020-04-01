@@ -23,10 +23,25 @@
 # Boston, MA 02111-1307, USA.
 ##
 
-IF(Qt5Gui_FOUND AND Qt5Widgets_FOUND AND Qt5PrintSupport_FOUND)
-  ADD_SUBDIRECTORY(ChOx) 
-ENDIF(Qt5Gui_FOUND AND Qt5Widgets_FOUND AND Qt5PrintSupport_FOUND)
+INCLUDE_DIRECTORIES("${CMAKE_CURRENT_SOURCE_DIR}" "${APPS_SOURCE_DIR}")
 
-IF(Boost_PROGRAM_OPTIONS_FOUND AND Boost_FILESYSTEM_FOUND AND Boost_CHRONO_FOUND)
-  ADD_SUBDIRECTORY(CmdLine) 
-ENDIF(Boost_PROGRAM_OPTIONS_FOUND AND Boost_FILESYSTEM_FOUND AND Boost_CHRONO_FOUND)
+SET(psdinfo_SRCS
+    Main.cpp
+    PSDInfoImpl.cpp
+   )
+
+ADD_EXECUTABLE(psdinfo ${psdinfo_SRCS})
+
+SET_TARGET_PROPERTIES(psdinfo PROPERTIES INSTALL_RPATH "${CDPKIT_EXECUTABLE_INSTALL_RPATH}")
+
+SET(BINARY_INPUT_FILE "${CMAKE_CURRENT_BINARY_DIR}/psdinfo")
+CONFIGURE_FILE("${CDPKIT_CMAKE_SCRIPTS_DIR}/InstallExternalRuntimeDependencies.cmake.in" 
+               "${CMAKE_CURRENT_BINARY_DIR}/InstallExternalRuntimeDependencies.cmake" 
+               @ONLY
+              )
+
+INSTALL(SCRIPT "${CMAKE_CURRENT_BINARY_DIR}/InstallExternalRuntimeDependencies.cmake")
+
+TARGET_LINK_LIBRARIES(psdinfo cmdline-lib-static cdpl-pharm-shared cdpl-util-shared)
+
+INSTALL(TARGETS psdinfo DESTINATION "${CDPKIT_EXECUTABLE_INSTALL_DIR}" COMPONENT Applications)

@@ -23,10 +23,18 @@
 # Boston, MA 02111-1307, USA.
 ##
 
-IF(Qt5Gui_FOUND AND Qt5Widgets_FOUND AND Qt5PrintSupport_FOUND)
-  ADD_SUBDIRECTORY(ChOx) 
-ENDIF(Qt5Gui_FOUND AND Qt5Widgets_FOUND AND Qt5PrintSupport_FOUND)
+INCLUDE_DIRECTORIES("${CMAKE_CURRENT_SOURCE_DIR}")
 
-IF(Boost_PROGRAM_OPTIONS_FOUND AND Boost_FILESYSTEM_FOUND AND Boost_CHRONO_FOUND)
-  ADD_SUBDIRECTORY(CmdLine) 
-ENDIF(Boost_PROGRAM_OPTIONS_FOUND AND Boost_FILESYSTEM_FOUND AND Boost_CHRONO_FOUND)
+SET(cmdline-lib_LIB_SRCS
+    CmdLineBase.cpp
+    HelperFunctions.cpp
+   )
+
+LINK_LIBRARIES(${Boost_PROGRAM_OPTIONS_LIBRARY} ${Boost_CHRONO_LIBRARY} ${Boost_ATOMIC_LIBRARY})
+
+ADD_LIBRARY(cmdline-lib-static STATIC ${cmdline-lib_LIB_SRCS})
+
+SET_TARGET_PROPERTIES(cmdline-lib-static PROPERTIES 
+                      OUTPUT_NAME cmdline-lib
+                      CLEAN_DIRECT_OUTPUT 1
+                     )
