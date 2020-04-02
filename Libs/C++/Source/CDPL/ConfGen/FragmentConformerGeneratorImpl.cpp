@@ -833,7 +833,7 @@ std::size_t ConfGen::FragmentConformerGeneratorImpl::calcNumMacrocyclicRingSyste
 {
 	std::size_t max_rot_bnd_cnt = getMaxNonAromaticSingleBondCount(*getSSSR(*molGraph));
 
-	if (max_rot_bnd_cnt < settings.getMacrocycleRotorBondCountThreshold())
+	if (max_rot_bnd_cnt <= settings.getMacrocycleRotorBondCountThreshold())
 		return 0;
 
 	return std::pow(2, max_rot_bnd_cnt);

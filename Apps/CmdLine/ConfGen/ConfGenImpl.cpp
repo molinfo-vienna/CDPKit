@@ -412,7 +412,7 @@ ConfGenImpl::ConfGenImpl():
 			  " consider convergence to be reached (only effective in stochastic sampling, default: " +
 			  boost::lexical_cast<std::string>(settings.getConvergenceCheckCycleSize()) + ", must be > 0).", 
 			  value<std::size_t>()->notifier(boost::bind(&ConfGenImpl::setConvergenceCheckCycleSize, this, _1)));
-	addOption("mc-rot-bond-count-thresh,Z", "Minimum number of rotatable bonds in a ring that triggers a preference for stochastic sampling "
+	addOption("mc-rot-bond-count-thresh,Z", "Number of rotatable bonds in a ring above which stochastic sampling will be performed"
 			  "(only effective in sampling mode AUTO, default: " +
 			  boost::lexical_cast<std::string>(settings.getMacrocycleRotorBondCountThreshold()) + ", must be > 0).", 
 			  value<std::size_t>()->notifier(boost::bind(&ConfGenImpl::setMacrocycleRotorBondCountThreshold, this, _1)));

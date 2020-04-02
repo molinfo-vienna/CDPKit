@@ -322,7 +322,7 @@ StructGenImpl::StructGenImpl():
 	addOption("mode,m", "Structure generation method to use (AUTO, DG, FRAGMENT, default: " + getGenerationModeString() + ").", 
 			  value<std::string>()->notifier(boost::bind(&StructGenImpl::setGenerationMode, this, _1)));
 	addOption("tol-range-sampling,A", "Additionally generate conformers for angles at the boundaries of the first "
-			  "torsion angle tolerance range (only effective in systematic sampling, default: true).", 
+			  "torsion angle tolerance range (only effective for fragment based structure generation, default: true).", 
 			  value<bool>()->implicit_value(true)->notifier(boost::bind(&StructGenImpl::setSampleAngleTolRanges, this, _1)));
 	addOption("from-scratch,S", "Discard input 3D-coordinates and generate structures from scratch (default: true).", 
 			  value<bool>()->implicit_value(true)->notifier(boost::bind(&StructGenImpl::setGenerateFromScratch, this, _1)));
@@ -330,7 +330,7 @@ StructGenImpl::StructGenImpl():
 			  "MMFF94S, MMFF94S_XOOP, MMFF94S_RTOR, MMFF94S_RTOR_XOOP, MMFF94S_NO_ESTAT, MMFF94S_XOOP_NO_ESTAT, MMFF94S_RTOR_NO_ESTAT, MMFF94S_RTOR_XOOP_NO_ESTAT, default: " +
 			  ConfGen::getForceFieldTypeString(settings.getFragmentModeForceFieldType()) + ").", 
 			  value<std::string>()->notifier(boost::bind(&StructGenImpl::setFragBasedForceFieldType, this, _1)));
-	addOption("dg-force-field,q", "Force field used for distance geometry based based structure generation (MMFF94, MMFF94_NO_ESTAT, "
+	addOption("dg-force-field,q", "Force field used for distance geometry based structure generation (MMFF94, MMFF94_NO_ESTAT, "
 			  "MMFF94S, MMFF94S_XOOP, MMFF94S_RTOR, MMFF94S_RTOR_XOOP, MMFF94S_NO_ESTAT, MMFF94S_XOOP_NO_ESTAT, MMFF94S_RTOR_NO_ESTAT, MMFF94S_RTOR_XOOP_NO_ESTAT, default: " +
 			  ConfGen::getForceFieldTypeString(settings.getDGModeForceFieldType()) + ").", 
 			  value<std::string>()->notifier(boost::bind(&StructGenImpl::setDGBasedForceFieldType, this, _1)));
@@ -345,8 +345,8 @@ StructGenImpl::StructGenImpl():
 	addOption("timeout,T", "Time in seconds after which structure generation will be stopped (default: " + 
 			  boost::lexical_cast<std::string>(settings.getTimeout() / 1000) + "s, must be >= 0, 0 disables timeout).",
 			  value<std::size_t>()->notifier(boost::bind(&StructGenImpl::setTimeout, this, _1)));
-	addOption("mc-rot-bond-count-thresh,Z", "Minimum number of rotatable bonds in a ring that triggers a preference for distance geometry based structure generation "
-			  "(only effective in sampling mode AUTO, default: " +
+	addOption("mc-rot-bond-count-thresh,Z", "Number of rotatable bonds in a ring above which distance geometry based structure generation will be performed"
+			  "(only effective in generation mode AUTO, default: " +
 			  boost::lexical_cast<std::string>(settings.getMacrocycleRotorBondCountThreshold()) + ", must be > 0).", 
 			  value<std::size_t>()->notifier(boost::bind(&StructGenImpl::setMacrocycleRotorBondCountThreshold, this, _1)));
 	addOption("ref-tol,P", "Energy tolerance at which force field structure refinement stops (only effective in distance geometry based structure generation, default: " +
@@ -355,15 +355,15 @@ StructGenImpl::StructGenImpl():
 	addOption("max-ref-iter,w", "Maximum number of force field structure refinement iterations (only effective in distance geometry based structure generation, default: " +
 			  boost::lexical_cast<std::string>(settings.getMaxNumRefinementIterations()) + ", must be >= 0, 0 disables limit).", 
 			  value<std::size_t>()->notifier(boost::bind(&StructGenImpl::setMaxNumRefIterations, this, _1)));
-	addOption("add-tor-lib,k", "Torsion library to be used in addition to the built-in library (only effective in fragment based structure generation).",
+	addOption("add-tor-lib,k", "Torsion library to be used in addition to the built-in library (only effective for fragment based structure generation).",
 			  value<std::string>()->notifier(boost::bind(&StructGenImpl::addTorsionLib, this, _1)));
-	addOption("set-tor-lib,K", "Torsion library used as a replacement for the built-in library (only effective in fragment based structure generation).",
+	addOption("set-tor-lib,K", "Torsion library used as a replacement for the built-in library (only effective for fragment based structure generation).",
 			  value<std::string>()->notifier(boost::bind(&StructGenImpl::setTorsionLib, this, _1)));
-	addOption("frag-build-preset,B", "Fragment build preset to use (FAST, THOROUGH, only effective in fragment based structure generation, default: FAST).", 
+	addOption("frag-build-preset,B", "Fragment build preset to use (FAST, THOROUGH, only effective for fragment based structure generation, default: FAST).", 
 			  value<std::string>()->notifier(boost::bind(&StructGenImpl::applyFragBuildPreset, this, _1)));
-	addOption("add-frag-lib,g", "Fragment library to be used in addition to the built-in library (only effective in fragment based structure generation).",
+	addOption("add-frag-lib,g", "Fragment library to be used in addition to the built-in library (only effective for fragment based structure generation).",
 			  value<std::string>()->notifier(boost::bind(&StructGenImpl::addFragmentLib, this, _1)));
-	addOption("set-frag-lib,G", "Fragment library used as a replacement for the built-in library (only effective in fragment based structure generation).",
+	addOption("set-frag-lib,G", "Fragment library used as a replacement for the built-in library (only effective for fragment based structure generation).",
 			  value<std::string>()->notifier(boost::bind(&StructGenImpl::setFragmentLib, this, _1)));
 	addOption("canonicalize,z", "Canonicalize input molecules (default: false).", 
 			  value<bool>(&canonicalize)->implicit_value(true));

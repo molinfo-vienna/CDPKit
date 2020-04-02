@@ -651,7 +651,7 @@ bool ConfGen::ConformerGeneratorImpl::determineSamplingMode()
 			break;
 	}
 
-	return (inStochasticMode = (getMaxNonAromaticSingleBondCount(*getSSSR(*molGraph)) >= 
+	return (inStochasticMode = (getMaxNonAromaticSingleBondCount(*getSSSR(*molGraph)) >
 								settings.getMacrocycleRotorBondCountThreshold()));
 }
 
