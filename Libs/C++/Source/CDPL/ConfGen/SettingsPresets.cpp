@@ -60,7 +60,7 @@ namespace
 			using namespace ConfGen;
 
 			FRAG_CONF_GEN_FAST.preserveInputBondingGeometries(false);
-			FRAG_CONF_GEN_FAST.setForceFieldType(ForceFieldType::MMFF94S_NO_ESTAT);
+			FRAG_CONF_GEN_FAST.setForceFieldType(ForceFieldType::MMFF94S_RTOR_NO_ESTAT);
 			FRAG_CONF_GEN_FAST.strictForceFieldParameterization(true);
 			FRAG_CONF_GEN_FAST.setMaxNumRefinementIterations(0);
 			FRAG_CONF_GEN_FAST.setRefinementStopGradient(0.25);
@@ -124,8 +124,8 @@ namespace
 			CONF_GEN_SMALL_SET_DIVERSE.generateCoordinatesFromScratch(true);
 			CONF_GEN_SMALL_SET_DIVERSE.includeInputCoordinates(false);
 			CONF_GEN_SMALL_SET_DIVERSE.setTimeout(60 * 60 * 1000);
-			CONF_GEN_SMALL_SET_DIVERSE.setForceFieldTypeSystematic(ForceFieldType::MMFF94S_NO_ESTAT);
-			CONF_GEN_SMALL_SET_DIVERSE.setForceFieldTypeStochastic(ForceFieldType::MMFF94S);
+			CONF_GEN_SMALL_SET_DIVERSE.setForceFieldTypeSystematic(ForceFieldType::MMFF94S_RTOR_NO_ESTAT);
+			CONF_GEN_SMALL_SET_DIVERSE.setForceFieldTypeStochastic(ForceFieldType::MMFF94S_RTOR);
 			CONF_GEN_SMALL_SET_DIVERSE.strictForceFieldParameterization(true);
 			CONF_GEN_SMALL_SET_DIVERSE.setMaxNumRefinementIterations(0);
 			CONF_GEN_SMALL_SET_DIVERSE.setRefinementTolerance(0.001);

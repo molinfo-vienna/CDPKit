@@ -26,7 +26,10 @@
 INCLUDE_DIRECTORIES("${CMAKE_CURRENT_SOURCE_DIR}")
 
 SET(cdpl-shape_LIB_SRCS
-    Empty.cpp
+    GaussianShape.cpp
+    GaussianShapeFunction.cpp
+
+    GaussianProductList.cpp
    )
 
 ADD_LIBRARY(cdpl-shape-static STATIC ${cdpl-shape_LIB_SRCS})
@@ -34,10 +37,10 @@ ADD_LIBRARY(cdpl-shape-static STATIC ${cdpl-shape_LIB_SRCS})
 SET_TARGET_PROPERTIES(cdpl-shape-static PROPERTIES 
                       OUTPUT_NAME cdpl-shape
                       CLEAN_DIRECT_OUTPUT 1
-                      COMPILE_DEFINITIONS "CDPL_SHAPE_STATIC_LINK;CDPL_BASE_STATIC_LINK;CDPL_CHEM_STATIC_LINK;CDPL_MATH_STATIC_LINK"
+                      COMPILE_DEFINITIONS "CDPL_SHAPE_STATIC_LINK;CDPL_BASE_STATIC_LINK;CDPL_UTIL_STATIC_LINK;CDPL_MATH_STATIC_LINK"
                      )
 
-TARGET_LINK_LIBRARIES(cdpl-shape-static cdpl-base-static cdpl-chem-static cdpl-math-static)
+TARGET_LINK_LIBRARIES(cdpl-shape-static cdpl-base-static cdpl-util-static cdpl-math-static)
 
 INSTALL(TARGETS cdpl-shape-static
         DESTINATION "${CDPKIT_LIBRARY_INSTALL_DIR}" COMPONENT CDPLStaticLibraries
@@ -45,7 +48,7 @@ INSTALL(TARGETS cdpl-shape-static
 
 ADD_LIBRARY(cdpl-shape-shared SHARED ${cdpl-shape_LIB_SRCS})
 
-TARGET_LINK_LIBRARIES(cdpl-shape-shared cdpl-chem-shared cdpl-base-shared cdpl-math-shared)
+TARGET_LINK_LIBRARIES(cdpl-shape-shared cdpl-base-shared cdpl-util-shared cdpl-math-shared)
 
 IF(APPLE)
   SET_TARGET_PROPERTIES(cdpl-shape-shared PROPERTIES VERSION "${CDPL_SO_VERSION}"

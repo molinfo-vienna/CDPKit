@@ -33,4 +33,7 @@
 
 #include "CDPL/Config.hpp"
 
+#include "CDPL/Shape/GaussianShape.hpp"
+#include "CDPL/Shape/GaussianShapeFunction.hpp"
+
 #endif // CDPL_SHAPE_HPP

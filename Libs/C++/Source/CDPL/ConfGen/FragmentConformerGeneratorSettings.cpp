@@ -101,7 +101,7 @@ double ConfGen::FragmentConformerGeneratorSettings::FragmentSettings::getMinRMSD
 
 
 ConfGen::FragmentConformerGeneratorSettings::FragmentConformerGeneratorSettings():
-	preserveBondGeom(false), forceFieldType(ForceFieldType::MMFF94S_NO_ESTAT), strictParam(true), 
+	preserveBondGeom(false), forceFieldType(ForceFieldType::MMFF94S_RTOR_NO_ESTAT), strictParam(true), 
 	dielectricConst(ForceField::MMFF94ElectrostaticInteractionParameterizer::DEF_DIELECTRIC_CONSTANT),
 	distExponent(ForceField::MMFF94ElectrostaticInteractionParameterizer::DEF_DISTANCE_EXPONENT),
 	maxNumRefIters(0), refStopGrad(0.1), mcRotorBondCountThresh(10), srSamplingFactor(6) 

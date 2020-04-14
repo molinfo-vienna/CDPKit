@@ -539,18 +539,18 @@
 \ingroup CDPL_CONFGEN
 
 
-\defgroup CDPL_SHAPE Shape Alignment and Similarity
+\defgroup CDPL_SHAPE Shape Representation, Alignment and Similarity
 
 \defgroup CDPL_SHAPE_DATA_STRUCTURES Data Structures
+\ingroup CDPL_SHAPE
+
+\defgroup CDPL_SHAPE_FUNCTORS Functor Classes
 \ingroup CDPL_SHAPE
 
 \defgroup CDPL_SHAPE_FUNCTIONS Free Functions
 \ingroup CDPL_SHAPE
 
 \defgroup CDPL_SHAPE_CONSTANTS Flags and Constants
-\ingroup CDPL_SHAPE
-
-\defgroup CDPL_SHAPE_HELPERS Implementation Helper Classes
 \ingroup CDPL_SHAPE
 
 

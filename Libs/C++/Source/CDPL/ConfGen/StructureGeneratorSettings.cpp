@@ -37,7 +37,7 @@ using namespace CDPL;
 
 ConfGen::StructureGeneratorSettings::StructureGeneratorSettings():
 	generationMode(StructureGenerationMode::AUTO), fromScratch(true), sampleTolRanges(true), 
-	timeout(20 * 60 * 1000), fragModeForceFieldType(ForceFieldType::MMFF94S_NO_ESTAT), 
+	timeout(20 * 60 * 1000), fragModeForceFieldType(ForceFieldType::MMFF94S_RTOR_NO_ESTAT), 
 	dgModeForceFieldType(ForceFieldType::MMFF94S), strictParam(true), 
 	dielectricConst(ForceField::MMFF94ElectrostaticInteractionParameterizer::DIELECTRIC_CONSTANT_WATER),
 	distExponent(ForceField::MMFF94ElectrostaticInteractionParameterizer::DEF_DISTANCE_EXPONENT),

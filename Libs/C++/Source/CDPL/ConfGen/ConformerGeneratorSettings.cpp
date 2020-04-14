@@ -40,7 +40,7 @@ ConfGen::ConformerGeneratorSettings::ConformerGeneratorSettings():
 	samplingMode(ConformerSamplingMode::AUTO), sampleHetAtomHs(false), sampleTolRanges(true), 
 	enumRings(true), nitrogenEnumMode(NitrogenEnumerationMode::UNSPECIFIED_STEREO),
 	fromScratch(true), incInputCoords(false), eWindow(10.0), maxPoolSize(10000), timeout(60 * 60 * 1000), 
-	forceFieldTypeSys(ForceFieldType::MMFF94S_NO_ESTAT), forceFieldTypeStoch(ForceFieldType::MMFF94S), strictParam(true), 
+	forceFieldTypeSys(ForceFieldType::MMFF94S_RTOR_NO_ESTAT), forceFieldTypeStoch(ForceFieldType::MMFF94S_RTOR), strictParam(true), 
 	dielectricConst(ForceField::MMFF94ElectrostaticInteractionParameterizer::DIELECTRIC_CONSTANT_WATER),
 	distExponent(ForceField::MMFF94ElectrostaticInteractionParameterizer::DEF_DISTANCE_EXPONENT),
 	maxNumOutputConfs(100), minRMSD(0.5), maxNumRefIters(0), refTolerance(0.001), maxNumSampledConfs(2000),
