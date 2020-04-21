@@ -1,7 +1,7 @@
 /* -*- mode: c++; c-basic-offset: 4; tab-width: 4; indent-tabs-mode: t -*- */
 
 /* 
- * Module.cpp 
+ * Utilities.hpp 
  *
  * This file is part of the Chemical Data Processing Toolkit
  *
@@ -23,21 +23,35 @@
  * Boston, MA 02111-1307, USA.
  */
 
+#ifndef CDPL_SHAPE_UTILITIES_HPP
+#define CDPL_SHAPE_UTILITIES_HPP
 
-#include <boost/python.hpp>
-
-#include "ClassExports.hpp"
-#include "FunctionExports.hpp"
-#include "NamespaceExports.hpp"
+#include "CDPL/Math/Vector.hpp"
+#include "CDPL/Math/Matrix.hpp"
 
 
-BOOST_PYTHON_MODULE(_shape)
+namespace CDPL 
 {
-	using namespace CDPLPythonShape;
 
-	exportGaussianShape();
-	exportGaussianShapeFunction();
-	exportGaussianShapeOverlapFunction();
+    namespace Shape
+    {
 
-	exportUtilityFunctions();
+		inline double calcSquaredDistance(Math::Vector3D::ConstPointer vec1, Math::Vector3D::ConstPointer vec2)
+		{
+			double dx = vec1[0] - vec2[0];
+			double dy = vec1[1] - vec2[1];
+			double dz = vec1[2] - vec2[2];
+
+			return (dx * dx + dy * dy + dz * dz);
+		}
+	
+		inline void transform(Math::Vector3D::Pointer tgt_vec, Math::Matrix4D::ConstArrayPointer xform, Math::Vector3D::ConstPointer src_vec)
+		{
+			tgt_vec[0] = xform[0][0] * src_vec[0] + xform[0][1] * src_vec[1] + xform[0][2] * src_vec[2] + xform[0][3];
+			tgt_vec[1] = xform[1][0] * src_vec[0] + xform[1][1] * src_vec[1] + xform[1][2] * src_vec[2] + xform[1][3];
+			tgt_vec[2] = xform[2][0] * src_vec[0] + xform[2][1] * src_vec[1] + xform[2][2] * src_vec[2] + xform[2][3];
+		}
+    }
 }
+
+#endif // CDPL_SHAPE_UTILITIES_HPP

@@ -36,6 +36,7 @@
 #include "CDPL/Chem/AtomType.hpp"
 #include "CDPL/Chem/MoleculeFunctions.hpp"
 #include "CDPL/Chem/MolecularGraphFunctions.hpp"
+#include "CDPL/Chem/SDFMoleculeReader.hpp"
 #include "CDPL/Biomol/PDBMoleculeReader.hpp"
 #include "CDPL/Biomol/AtomFunctions.hpp"
 #include "CDPL/Util/FileDataReader.hpp"
@@ -101,7 +102,7 @@ namespace
 	{
 		using namespace Biomol;
 		
-		Util::FileDataReader<PDBMoleculeReader> mol_reader(fname);
+		Util::FileDataReader<PDBMoleculeReader> mol_reader(std::getenv("CDPKIT_TEST_DATA_DIR") + std::string("/") + fname);
 
 		if (!mol_reader.read(mol))
 			return false;
@@ -124,6 +125,15 @@ namespace
 */		
 		return true;
 	}
+	
+	bool readSDFMolecule(const std::string& fname, Chem::Molecule& mol)
+	{
+		using namespace Chem;
+		
+		Util::FileDataReader<SDFMoleculeReader> mol_reader(std::getenv("CDPKIT_TEST_DATA_DIR") + std::string("/") + fname);
+
+		return mol_reader.read(mol);
+	}
 
 	struct Init
 	{
@@ -133,14 +143,23 @@ namespace
 
 			BasicMolecule mol;
 			
-			if (readPDBMolecule(std::getenv("CDPKIT_TEST_DATA_DIR") + std::string("/1crn.pdb"), mol))
+			if (readPDBMolecule("1crn.pdb", mol))
 				nameToShapeMap["1crn"] = generateMoleculeShape(mol);
 
-			if (readPDBMolecule(std::getenv("CDPKIT_TEST_DATA_DIR") + std::string("/2ins.pdb"), mol))
+			if (readPDBMolecule("2ins.pdb", mol))
 				nameToShapeMap["2ins"] = generateMoleculeShape(mol);
 
-			if (readPDBMolecule(std::getenv("CDPKIT_TEST_DATA_DIR") + std::string("/3app.pdb"), mol))
+			if (readPDBMolecule("3app.pdb", mol))
 				nameToShapeMap["3app"] = generateMoleculeShape(mol);
+
+			if (readSDFMolecule("1dwc_MIT.sdf", mol))
+				nameToShapeMap["1dwc_MIT"] = generateMoleculeShape(mol);
+
+			if (readSDFMolecule("1tmn_0ZN.sdf", mol))
+				nameToShapeMap["1tmn_0ZN"] = generateMoleculeShape(mol);
+
+			if (readSDFMolecule("4phv_VAC.sdf", mol))
+				nameToShapeMap["4phv_VAC"] = generateMoleculeShape(mol);
 		}
 
 	} init;

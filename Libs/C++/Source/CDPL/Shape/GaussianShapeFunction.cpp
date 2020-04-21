@@ -26,17 +26,79 @@
  
 #include "StaticInit.hpp"
 
+#include <algorithm>
+#include <cmath>
+
+#include <boost/bind.hpp>
+
 #include "CDPL/Shape/GaussianShapeFunction.hpp"
 
 #include "GaussianProductList.hpp"
 #include "GaussianProduct.hpp"
+#include "Utilities.hpp"
 
 
 using namespace CDPL;
 
 
+namespace
+{
+
+	void addCentroidContrib(const Shape::GaussianProduct* prod_term, Math::Vector3D::Pointer ctr)
+	{
+		Math::Vector3D::ConstPointer prod_ctr = prod_term->getCenter().getData();
+		double vol = prod_term->getVolume();
+
+		if (prod_term->hasOddOrder()) {
+			ctr[0] += vol * prod_ctr[0];
+			ctr[1] += vol * prod_ctr[1];
+			ctr[2] += vol * prod_ctr[2];
+
+		} else {
+			ctr[0] -= vol * prod_ctr[0];
+			ctr[1] -= vol * prod_ctr[1];
+			ctr[2] -= vol * prod_ctr[2];
+		}
+	}
+
+	void addQuadTensorContrib(const Shape::GaussianProduct* prod_term, Math::Vector3D::ConstPointer shape_ctr, Math::Matrix3D::ArrayPointer tensor)
+	{
+		Math::Vector3D::ConstPointer prod_ctr = prod_term->getCenter().getData();
+		double vol = prod_term->getVolume();
+		double diag_const = 1.0 / (2.0 * prod_term->getDelta());
+		double trans_prod_ctr[3] = { prod_ctr[0] - shape_ctr[0], prod_ctr[1] - shape_ctr[1], prod_ctr[2] - shape_ctr[2] };
+		
+		if (prod_term->hasOddOrder()) {
+			tensor[0][1] += trans_prod_ctr[0] * trans_prod_ctr[1] * vol;
+			tensor[0][2] += trans_prod_ctr[0] * trans_prod_ctr[2] * vol;
+			tensor[1][2] += trans_prod_ctr[1] * trans_prod_ctr[2] * vol;
+
+			tensor[0][0] += (trans_prod_ctr[0] * trans_prod_ctr[0] + diag_const) * vol;
+			tensor[1][1] += (trans_prod_ctr[1] * trans_prod_ctr[1] + diag_const) * vol;
+			tensor[2][2] += (trans_prod_ctr[2] * trans_prod_ctr[2] + diag_const) * vol;
+
+		} else {
+			tensor[0][1] -= trans_prod_ctr[0] * trans_prod_ctr[1] * vol;
+			tensor[0][2] -= trans_prod_ctr[0] * trans_prod_ctr[2] * vol;
+			tensor[1][2] -= trans_prod_ctr[1] * trans_prod_ctr[2] * vol;
+
+			tensor[0][0] -= (trans_prod_ctr[0] * trans_prod_ctr[0] + diag_const) * vol;
+			tensor[1][1] -= (trans_prod_ctr[1] * trans_prod_ctr[1] + diag_const) * vol;
+			tensor[2][2] -= (trans_prod_ctr[2] * trans_prod_ctr[2] + diag_const) * vol;
+		}
+	}
+
+	void copyUpperToLower(Math::Matrix3D::ArrayPointer mtx)
+	{
+		mtx[1][0] = mtx[0][1];
+		mtx[2][0] = mtx[0][2];
+		mtx[2][1] = mtx[1][2];
+	}
+}
+
+
 const std::size_t Shape::GaussianShapeFunction::DEF_MAX_PRODUCT_ORDER;
-const double      Shape::GaussianShapeFunction::DEF_DISTANCE_CUTOFF = -0.3;
+const double      Shape::GaussianShapeFunction::DEF_DISTANCE_CUTOFF = 0.0;
 
 
 Shape::GaussianShapeFunction::GaussianShapeFunction():
@@ -56,7 +118,7 @@ Shape::GaussianShapeFunction::GaussianShapeFunction(const GaussianShape& shape):
 	prodList->setMaxOrder(DEF_MAX_PRODUCT_ORDER);
 	prodList->setDistanceCutoff(DEF_DISTANCE_CUTOFF);
 	
-    setup(shape);
+    setShape(shape);
 }
 
 Shape::GaussianShapeFunction::~GaussianShapeFunction() {}
@@ -81,11 +143,34 @@ double Shape::GaussianShapeFunction::getDistanceCutoff() const
 	return prodList->getDistanceCutoff();
 }
 
-void Shape::GaussianShapeFunction::setup(const GaussianShape& shape)
+void Shape::GaussianShapeFunction::setShape(const GaussianShape& shape)
 {
 	this->shape = &shape;
 	
 	prodList->setup(shape);
+}
+
+const Shape::GaussianShape* Shape::GaussianShapeFunction::getShape() const
+{
+	return shape;
+}
+
+double Shape::GaussianShapeFunction::calcDensity(const Math::Vector3D& pos) const
+{
+	Math::Vector3D::ConstPointer pos_data = pos.getData();
+	double density = 0.0;
+
+	for (GaussianProductList::ConstProductIterator p_it = prodList->getProductsBegin(), p_end = prodList->getProductsEnd(); p_it != p_end; ++p_it) {
+		const GaussianProduct* prod = *p_it;
+		double contrib = prod->getWeightFactor() * prod->getProductFactor() * std::exp(-prod->getDelta() * calcSquaredDistance(pos_data, prod->getCenter().getData()));
+		
+		if (prod->hasOddOrder())
+			density += contrib;
+		else
+			density -= contrib;
+	}
+
+	return density;
 }
 
 double Shape::GaussianShapeFunction::calcVolume() const
@@ -100,7 +185,7 @@ double Shape::GaussianShapeFunction::calcSurfaceArea() const
 	for (GaussianProductList::ConstProductIterator p_it = prodList->getProductsBegin(), p_end = prodList->getProductsEnd(); p_it != p_end; ++p_it) {
 		const GaussianProduct* prod = *p_it;
 
-		if (prod->getNumFactors() == 0) {
+		if (prod->getNumFactors() == 1) {
 			area += 3.0 * prod->getVolume() / prod->getRadius();
 			continue;
 		}
@@ -111,14 +196,9 @@ double Shape::GaussianShapeFunction::calcSurfaceArea() const
 		
 		for (GaussianProduct::ConstFactorIterator f_it = prod->getFactorsBegin(), f_end = prod->getFactorsEnd(); f_it != f_end; ++f_it) {
 			const GaussianProduct* prod_factor = *f_it;
-			Math::Vector3D::ConstPointer prod_factor_ctr = prod_factor->getCenter().getData();
-
-			double dx = prod_factor_ctr[0] - prod_ctr[0];
-			double dy = prod_factor_ctr[1] - prod_ctr[1];
-			double dz = prod_factor_ctr[2] - prod_ctr[2];
 			double r = prod_factor->getRadius();
 			
-			tmp += prod_factor->getKappa() * (delta_const + dx * dx + dy * dy + dz * dz) / (r * r * r);
+			tmp += prod_factor->getKappa() * (delta_const + calcSquaredDistance(prod_factor->getCenter().getData(), prod_ctr)) / (r * r * r);
 		}
 
 		if (prod->hasOddOrder())
@@ -137,7 +217,7 @@ double Shape::GaussianShapeFunction::calcSurfaceArea(std::size_t elem_idx) const
 	for (GaussianProductList::ConstProductIterator p_it = prodList->getProductsBegin(), p_end = prodList->getProductsEnd(); p_it != p_end; ++p_it) {
 		const GaussianProduct* prod = *p_it;
 
-		if (prod->getNumFactors() == 0) {
+		if (prod->getNumFactors() == 1) {
 			if (prod->getIndex() != elem_idx)
 				continue;
 			
@@ -155,14 +235,9 @@ double Shape::GaussianShapeFunction::calcSurfaceArea(std::size_t elem_idx) const
 			if (prod_factor->getIndex() != elem_idx)
 				continue;
 			
-			Math::Vector3D::ConstPointer prod_factor_ctr = prod_factor->getCenter().getData();
-
-			double dx = prod_factor_ctr[0] - prod_ctr[0];
-			double dy = prod_factor_ctr[1] - prod_ctr[1];
-			double dz = prod_factor_ctr[2] - prod_ctr[2];
 			double r = prod_factor->getRadius();
 			
-			tmp += prod_factor->getKappa() * (delta_const + dx * dx + dy * dy + dz * dz) / (r * r * r);
+			tmp += prod_factor->getKappa() * (delta_const + calcSquaredDistance(prod_factor->getCenter().getData(), prod_ctr)) / (r * r * r);
 		}
 
 		if (prod->hasOddOrder())
@@ -174,6 +249,30 @@ double Shape::GaussianShapeFunction::calcSurfaceArea(std::size_t elem_idx) const
 	return area;
 }
 
+void Shape::GaussianShapeFunction::calcCentroid(Math::Vector3D& ctr) const
+{
+	ctr.clear();
+
+	std::for_each(prodList->getProductsBegin(), prodList->getProductsEnd(),
+				  boost::bind(&addCentroidContrib, _1, ctr.getData()));
+
+	ctr /= prodList->getVolume();
+}
+
+void Shape::GaussianShapeFunction::calcQuadrupoleTensor(const Math::Vector3D& ctr, Math::Matrix3D& quad_tensor) const
+{
+	Math::Matrix3D::ArrayPointer tensor_data = quad_tensor.getData();
+	
+	quad_tensor.clear();
+
+	std::for_each(prodList->getProductsBegin(), prodList->getProductsEnd(),
+				  boost::bind(&addQuadTensorContrib, _1, ctr.getData(), tensor_data));
+
+	copyUpperToLower(tensor_data);
+
+	quad_tensor /= prodList->getVolume();
+}
+
 Shape::GaussianShapeFunction& Shape::GaussianShapeFunction::operator=(const GaussianShapeFunction& func)
 {
 	if (this == &func)
@@ -183,4 +282,9 @@ Shape::GaussianShapeFunction& Shape::GaussianShapeFunction::operator=(const Gaus
 	*prodList = *func.prodList;
 
 	return * this;
+}
+
+const Shape::GaussianProductList* Shape::GaussianShapeFunction::getProductList() const
+{
+	return prodList.get();
 }

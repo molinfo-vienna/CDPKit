@@ -49,7 +49,8 @@ namespace CDPL
 
 		class GaussianShape;
 		class GaussianProductList;
-
+		class GaussianShapeOverlapFunction;
+		
 		/**
 		 * \addtogroup CDPL_SHAPE_FUNCTORS
 		 * @{
@@ -80,8 +81,12 @@ namespace CDPL
 
 			double getDistanceCutoff() const;
 			
-			void setup(const GaussianShape& shape);
+			void setShape(const GaussianShape& shape);
 
+			const GaussianShape* getShape() const;
+			
+			double calcDensity(const Math::Vector3D& pos) const;
+			
 			double calcVolume() const;
 
 			double calcSurfaceArea() const;
@@ -90,13 +95,15 @@ namespace CDPL
 
 			void calcCentroid(Math::Vector3D& ctr) const;
 
-			void calcQuadrupoleTensor(Math::Matrix3D& tensor) const;
-
-			void calcPrincipalAxes(Math::Vector3D& ctr, Math::Matrix3D& axes, Math::Vector3D& extents) const;
+			void calcQuadrupoleTensor(const Math::Vector3D& ctr, Math::Matrix3D& quad_tensor) const;
 			
 			GaussianShapeFunction& operator=(const GaussianShapeFunction& func);
 			
 		  private:
+			friend class GaussianShapeOverlapFunction;
+			
+			const GaussianProductList* getProductList() const;
+			
 			typedef std::auto_ptr<GaussianProductList> ProductListPtr;
 
 			const GaussianShape* shape;

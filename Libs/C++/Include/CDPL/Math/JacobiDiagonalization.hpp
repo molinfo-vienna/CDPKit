@@ -114,8 +114,8 @@ bool CDPL::Math::jacobiDiagonalize(MatrixExpression<M1>& a, VectorExpression<V>&
 
 	CDPL_MATH_CHECK(n == a().getSize2() && n > 0 && SizeType(d().getSize()) >= n, "Preconditions violated",  Base::SizeError);
 
-	Vector<ValueType> b(n);
-	Vector<ValueType> z(n);
+	typename VectorTemporaryTraits<V>::Type b(n);
+	typename VectorTemporaryTraits<V>::Type z(n);
 
 	v().assign(IdentityMatrix<ValueType>(n, n));
 
@@ -164,7 +164,7 @@ bool CDPL::Math::jacobiDiagonalize(MatrixExpression<M1>& a, VectorExpression<V>&
 							t = -t;
 					}
 					
-					ValueType c = 1 / sqrt(1 + t * t);
+					ValueType c = 1 / TypeTraits<ValueType>::sqrt(1 + t * t);
 					ValueType s = t * c;
 					ValueType tau = s / (1 + c);
 					h = t * a()(ip, iq);

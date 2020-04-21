@@ -75,12 +75,16 @@ namespace CDPL
 			
 			void setup(const GaussianShape& shape);
 			
+			const GaussianProduct* getProduct(std::size_t idx) const;
+
 			ConstProductIterator getProductsBegin() const;
 
 			ConstProductIterator getProductsEnd() const;
 
 			std::size_t getNumProducts() const;
 
+			std::size_t getNumShapeElements() const;
+			
 			double getVolume() const;
 			
 		  private:
@@ -103,8 +107,14 @@ namespace CDPL
 			GaussianProduct*     currProduct;
 			ProductList          products;
 			double               volume;
+			std::size_t          numElements;
 		};
     }
+	
+	inline const Shape::GaussianProduct* Shape::GaussianProductList::getProduct(std::size_t idx) const
+	{
+		return products[idx];
+	}
 }
 
 #endif // CDPL_SHAPE_GAUSSIANPRODUCTLIST_HPP

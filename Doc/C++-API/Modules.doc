@@ -544,7 +544,7 @@
 \defgroup CDPL_SHAPE_DATA_STRUCTURES Data Structures
 \ingroup CDPL_SHAPE
 
-\defgroup CDPL_SHAPE_FUNCTORS Functor Classes
+\defgroup CDPL_SHAPE_FUNCTORS Shape Functor Classes
 \ingroup CDPL_SHAPE
 
 \defgroup CDPL_SHAPE_FUNCTIONS Free Functions

@@ -1,7 +1,7 @@
 /* -*- mode: c++; c-basic-offset: 4; tab-width: 4; indent-tabs-mode: t -*- */
 
 /* 
- * Module.cpp 
+ * UtilityFunctionExport.cpp 
  *
  * This file is part of the Chemical Data Processing Toolkit
  *
@@ -26,18 +26,18 @@
 
 #include <boost/python.hpp>
 
-#include "ClassExports.hpp"
+#include "CDPL/Shape/UtilityFunctions.hpp"
+
 #include "FunctionExports.hpp"
-#include "NamespaceExports.hpp"
 
 
-BOOST_PYTHON_MODULE(_shape)
+void CDPLPythonShape::exportUtilityFunctions()
 {
-	using namespace CDPLPythonShape;
+	using namespace boost;
+	using namespace CDPL;
 
-	exportGaussianShape();
-	exportGaussianShapeFunction();
-	exportGaussianShapeOverlapFunction();
-
-	exportUtilityFunctions();
+	python::def("calcQuadrupoleTensorEigenDecomposition", &Shape::calcQuadrupoleTensorEigenDecomposition,
+				(python::arg("quad_tensor"), python::arg("eigen_vecs"), python::arg("eigen_vals")));
+	python::def("calcPrincipalAxes", &Shape::calcPrincipalAxes,
+				(python::arg("quad_tensor"), python::arg("x_axis"), python::arg("y_axis"), python::arg("z_axis"), python::arg("shape_dims")));
 }

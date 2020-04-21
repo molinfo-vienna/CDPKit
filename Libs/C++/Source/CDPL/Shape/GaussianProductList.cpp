@@ -32,6 +32,7 @@
 
 #include "GaussianProductList.hpp"
 #include "GaussianProduct.hpp"
+#include "Utilities.hpp"
 
 
 using namespace CDPL;
@@ -40,24 +41,12 @@ using namespace CDPL;
 namespace
 {
 
-    double calcDistance(const Shape::GaussianShape::Element& elem1, const Shape::GaussianShape::Element& elem2)
-    {
-		Math::Vector3D::ConstPointer elem1_pos = elem1.getPosition().getData();
-		Math::Vector3D::ConstPointer elem2_pos = elem2.getPosition().getData();
-
-		double dx = elem1_pos[0] - elem2_pos[0];
-		double dy = elem1_pos[1] - elem2_pos[1];
-		double dz = elem1_pos[2] - elem2_pos[2];
-
-		return std::sqrt(dx * dx + dy * dy + dz * dz);
-    }
-
     const std::size_t MAX_PRODUCT_CACHE_SIZE = 100000;
 }
 
 
 Shape::GaussianProductList::GaussianProductList():
-    prodCache(MAX_PRODUCT_CACHE_SIZE), maxOrder(6), distCutoff(0.0), volume(0.0)
+    prodCache(MAX_PRODUCT_CACHE_SIZE), maxOrder(6), distCutoff(0.0), volume(0.0), numElements(0)
 {}
 
 Shape::GaussianProductList::GaussianProductList(const GaussianProductList& prod_list):
@@ -67,7 +56,7 @@ Shape::GaussianProductList::GaussianProductList(const GaussianProductList& prod_
 }
 
 Shape::GaussianProductList::GaussianProductList(const GaussianShape& shape):
-    prodCache(MAX_PRODUCT_CACHE_SIZE), maxOrder(6), distCutoff(0.0), volume(0.0)
+    prodCache(MAX_PRODUCT_CACHE_SIZE), maxOrder(6), distCutoff(0.0)
 {
     setup(shape);
 }
@@ -105,19 +94,19 @@ Shape::GaussianProductList& Shape::GaussianProductList::operator=(const Gaussian
 
 void Shape::GaussianProductList::setup(const GaussianShape& shape)
 {
-	std::size_t num_elem = shape.getNumElements();
+	numElements = shape.getNumElements();
 
-    if (elemNbrLists.size() < num_elem)
-		elemNbrLists.resize(num_elem);
+    if (elemNbrLists.size() < numElements)
+		elemNbrLists.resize(numElements);
 
-    if (elemAdjMatrix.size() < num_elem)
-		elemAdjMatrix.resize(num_elem);
+    if (elemAdjMatrix.size() < numElements)
+		elemAdjMatrix.resize(numElements);
 
-    for (std::size_t i = 0; i < num_elem; i++)
-		if (elemAdjMatrix[i].size() < num_elem)
-			elemAdjMatrix[i].resize(num_elem);
+    for (std::size_t i = 0; i < numElements; i++)
+		if (elemAdjMatrix[i].size() < numElements)
+			elemAdjMatrix[i].resize(numElements);
   
-    for (std::size_t i = 0; i < num_elem; i++) {
+    for (std::size_t i = 0; i < numElements; i++) {
 		NeighborList& nbr_list = elemNbrLists[i];
 		const GaussianShape::Element& elem1 = shape.getElement(i);
 		double elem1_rad_eps = elem1.getRadius() + distCutoff;
@@ -126,10 +115,12 @@ void Shape::GaussianProductList::setup(const GaussianShape& shape)
 		nbr_list.clear();
 		elemAdjMatrix[i].reset(i);
 	
-		for (std::size_t j = i + 1; j < num_elem; j++) {
+		for (std::size_t j = i + 1; j < numElements; j++) {
 			const GaussianShape::Element& elem2 = shape.getElement(j);
 
-			if (elem1_col != elem2.getColor() || calcDistance(elem1, elem2) > (elem1_rad_eps + elem2.getRadius())) {
+			if (elem1_col != elem2.getColor() ||
+				std::sqrt(calcSquaredDistance(elem1.getPosition().getData(), elem2.getPosition().getData())) > (elem1_rad_eps + elem2.getRadius())) {
+					
 				elemAdjMatrix[i].reset(j);
 				elemAdjMatrix[j].reset(i);
 				continue;
@@ -146,7 +137,7 @@ void Shape::GaussianProductList::setup(const GaussianShape& shape)
 	
 	volume = 0.0;
 	
-    for (std::size_t i = 0; i < num_elem; i++) {
+    for (std::size_t i = 0; i < numElements; i++) {
 		GaussianProduct* prod = prodCache.getRaw();
 
 		prod->init(shape.getElement(i));
@@ -163,10 +154,10 @@ void Shape::GaussianProductList::setup(const GaussianShape& shape)
 	currProduct = prodCache.getRaw();
     currProduct->clearFactors();
     
-    for (std::size_t i = 0; i < num_elem; i++)
+    for (std::size_t i = 0; i < numElements; i++)
 		generateProducts(i);
 }
-			
+
 Shape::GaussianProductList::ConstProductIterator Shape::GaussianProductList::getProductsBegin() const
 {
     return products.begin();
@@ -180,6 +171,11 @@ Shape::GaussianProductList::ConstProductIterator Shape::GaussianProductList::get
 std::size_t Shape::GaussianProductList::getNumProducts() const
 {
     return products.size();
+}
+
+std::size_t Shape::GaussianProductList::getNumShapeElements() const
+{
+	return numElements;
 }
 
 double Shape::GaussianProductList::getVolume() const
@@ -198,6 +194,7 @@ void Shape::GaussianProductList::generateProducts(std::size_t elem_idx)
 
 		new_prod->copyFactors(*currProduct); 
 		new_prod->init();
+		new_prod->setIndex(products.size());
 
 		if (new_prod->hasOddOrder())
 			volume += new_prod->getVolume();
@@ -240,6 +237,7 @@ void Shape::GaussianProductList::copy(const GaussianProductList& prod_list)
 	maxOrder = prod_list.maxOrder;
 	distCutoff = prod_list.distCutoff;
 	volume = prod_list.volume;
+	numElements = prod_list.numElements;
 	
 	products.clear();
 	products.reserve(prod_list.products.size());
@@ -249,12 +247,12 @@ void Shape::GaussianProductList::copy(const GaussianProductList& prod_list)
 		const GaussianProduct* prod = *it;
 		GaussianProduct* prod_copy = prodCache.getRaw();
 
+		products.push_back(prod_copy);
+				
 		prod_copy->copyData(*prod);
 		prod_copy->clearFactors();
 		
 		for (GaussianProduct::ConstFactorIterator f_it = prod->getFactorsBegin(), f_end = prod->getFactorsEnd(); f_it != f_end; ++f_it)
 			prod_copy->addFactor(products[(*f_it)->getIndex()]);
-		
-		products.push_back(prod_copy);
 	}
 }

@@ -29,6 +29,7 @@ SET(test-suite_SRCS
     Main.cpp
     ConvenienceHeaderTest.cpp
     GaussianShapeFunctionTest.cpp
+    GaussianShapeOverlapFunctionTest.cpp
     TestData.cpp
     )
 

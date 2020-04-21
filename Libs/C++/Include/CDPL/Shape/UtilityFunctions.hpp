@@ -1,7 +1,7 @@
 /* -*- mode: c++; c-basic-offset: 4; tab-width: 4; indent-tabs-mode: t -*- */
 
 /* 
- * Module.cpp 
+ * UtilityFunctions.hpp 
  *
  * This file is part of the Chemical Data Processing Toolkit
  *
@@ -23,21 +23,40 @@
  * Boston, MA 02111-1307, USA.
  */
 
+/**
+ * \file
+ * \brief Declaration of miscellaneous utility functions.
+ */
 
-#include <boost/python.hpp>
+#ifndef CDPL_SHAPE_UTILITYFUNCTIONS_HPP
+#define CDPL_SHAPE_UTILITYFUNCTIONS_HPP
 
-#include "ClassExports.hpp"
-#include "FunctionExports.hpp"
-#include "NamespaceExports.hpp"
+#include "CDPL/Shape/APIPrefix.hpp"
+#include "CDPL/Math/Vector.hpp"
+#include "CDPL/Math/Matrix.hpp"
 
 
-BOOST_PYTHON_MODULE(_shape)
+namespace CDPL 
 {
-	using namespace CDPLPythonShape;
 
-	exportGaussianShape();
-	exportGaussianShapeFunction();
-	exportGaussianShapeOverlapFunction();
+    namespace Shape
+    {
 
-	exportUtilityFunctions();
+		/**
+		 * \addtogroup CDPL_SHAPE_FUNCTIONS
+		 * @{
+		 */
+	
+		CDPL_SHAPE_API void calcQuadrupoleTensorEigenDecomposition(const Math::Matrix3D& quad_tensor, Math::Matrix3D& eigen_vecs,
+																   Math::Vector3D& eigen_vals);
+
+		CDPL_SHAPE_API void calcPrincipalAxes(const Math::Matrix3D& quad_tensor, Math::Vector3D& x_axis, Math::Vector3D& y_axis,
+											  Math::Vector3D& z_axis, Math::Vector3D& shape_dims);
+			
+		/**
+		 * @}
+		 */
+    }
 }
+
+#endif // CDPL_SHAPE_UTILITYFUNCTIONS_HPP

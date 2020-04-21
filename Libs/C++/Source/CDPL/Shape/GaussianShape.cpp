@@ -33,6 +33,11 @@
 using namespace CDPL;
 
 
+void Shape::GaussianShape::clear()
+{
+    elements.clear();
+}
+
 void Shape::GaussianShape::addElement(const Math::Vector3D& pos, double radius, std::size_t color, double hardness)
 {
     elements.push_back(Element(pos, radius, color, hardness));
@@ -46,7 +51,7 @@ void Shape::GaussianShape::addElement(const Element& elem)
 void Shape::GaussianShape::removeElement(std::size_t idx)
 {
     if (idx >= elements.size())
-	throw Base::IndexError("GaussianShape: element index out of bounds");
+		throw Base::IndexError("GaussianShape: element index out of bounds");
 
     elements.erase(elements.begin() + idx);
 }
@@ -59,7 +64,7 @@ std::size_t Shape::GaussianShape::getNumElements() const
 const Shape::GaussianShape::Element& Shape::GaussianShape::getElement(std::size_t idx) const
 {
     if (idx >= elements.size())
-	throw Base::IndexError("GaussianShape: element index out of bounds");
+		throw Base::IndexError("GaussianShape: element index out of bounds");
 
     return elements[idx];
 }
@@ -67,7 +72,7 @@ const Shape::GaussianShape::Element& Shape::GaussianShape::getElement(std::size_
 Shape::GaussianShape::Element& Shape::GaussianShape::getElement(std::size_t idx)
 {
     if (idx >= elements.size())
-	throw Base::IndexError("GaussianShape: element index out of bounds");
+		throw Base::IndexError("GaussianShape: element index out of bounds");
 
     return elements[idx];
 }

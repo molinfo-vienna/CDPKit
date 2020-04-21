@@ -33,6 +33,11 @@ ENDFOREACH(PYTHON_FILE)
 
 SET(shape_MOD_SRCS
     Module.cpp
+    GaussianShapeExport.cpp
+    GaussianShapeFunctionExport.cpp
+    GaussianShapeOverlapFunctionExport.cpp
+  
+    UtilityFunctionExport.cpp
    )
 
 ADD_LIBRARY(_shape MODULE ${shape_MOD_SRCS})

@@ -35,5 +35,7 @@
 
 #include "CDPL/Shape/GaussianShape.hpp"
 #include "CDPL/Shape/GaussianShapeFunction.hpp"
+#include "CDPL/Shape/GaussianShapeOverlapFunction.hpp"
+#include "CDPL/Shape/UtilityFunctions.hpp"
 
 #endif // CDPL_SHAPE_HPP

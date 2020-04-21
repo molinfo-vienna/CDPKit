@@ -31,6 +31,7 @@
 namespace CDPLPythonShape
 {
 
+	void exportUtilityFunctions();
 }
 
 #endif // CDPL_PYTHON_SHAPE_FUNCTIONEXPORTS_HPP

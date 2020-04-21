@@ -39,6 +39,8 @@
 
 #include "CDPL/Shape/GaussianShape.hpp"
 
+#include "Utilities.hpp"
+
 
 namespace CDPL 
 {
@@ -106,7 +108,7 @@ namespace CDPL
 			double getProductFactor() const;
 
 			double getVolume() const;
-			
+
 		  private:
 			std::size_t    index;
 			std::size_t    color;
@@ -136,7 +138,8 @@ inline CDPL::Shape::GaussianProduct::GaussianProduct():
 inline void CDPL::Shape::GaussianProduct::init(const GaussianShape::Element& elem)
 {
 	factors.clear();
-
+	factors.push_back(this);
+	
 	center.assign(elem.getPosition());
 	color = elem.getColor();
 	prodFactorExp = 0.0;
@@ -149,7 +152,7 @@ inline void CDPL::Shape::GaussianProduct::init(const GaussianShape::Element& ele
 	radius = elem.getRadius();
 	delta = kappa / (radius * radius);
 	volumeFactor = M_PI / delta;
-	volumeFactor = volumeFactor * std::sqrt(volumeFactor);
+	volumeFactor *= std::sqrt(volumeFactor);
 	volume = weightFactor * volumeFactor;
 	oddOrder = true;
 }
@@ -160,15 +163,13 @@ inline void CDPL::Shape::GaussianProduct::init()
 	prodFactorExp = 0.0;
 	delta = 0.0;
 	kappa = 0.0;
-	radius = 0.0;
+	//radius = 0.0;
 	color = (factors.empty() ? std::size_t(0) : factors.front()->color);
 	
 	Math::Vector3D::Pointer ctr_data = center.getData();
 
-	ctr_data[0] = 0.0;
-	ctr_data[1] = 0.0;
-	ctr_data[2] = 0.0;
-
+	center.clear();
+	
 	for (FactorList::const_iterator it1 = factors.begin(), end = factors.end(); it1 != end; ) {
 		const GaussianProduct* factor1 = *it1;
 		double fact1_delta = factor1->delta;
@@ -184,27 +185,17 @@ inline void CDPL::Shape::GaussianProduct::init()
 
 		++it1;
 		
-		for (FactorList::const_iterator it2 = it1; it2 != end; ++it2) {
-			const GaussianProduct* factor2 = *it2;
-			Math::Vector3D::ConstPointer fact2_ctr_data = factor2->center.getData();
-
-			double dx = fact2_ctr_data[0] - fact1_ctr_data[0];
-			double dy = fact2_ctr_data[1] - fact1_ctr_data[1];
-			double dz = fact2_ctr_data[2] - fact1_ctr_data[2];
-			
-			prodFactorExp += (dx * dx + dy * dy + dz * dz) * fact1_delta * factor2->delta;
-		}
+		for (FactorList::const_iterator it2 = it1; it2 != end; ++it2)
+			prodFactorExp += calcSquaredDistance((*it2)->center.getData(), fact1_ctr_data) * fact1_delta * (*it2)->delta;
 	}
 
-	ctr_data[0] /= delta;
-	ctr_data[1] /= delta;
-	ctr_data[2] /= delta;
-
+	center /= delta;
 	prodFactorExp /= delta;
 	prodFactor = std::exp(-prodFactorExp);
 	volumeFactor = M_PI / delta;
-	volumeFactor = volumeFactor * std::sqrt(volumeFactor);
+	volumeFactor *= std::sqrt(volumeFactor);
 	volume = weightFactor * prodFactor * volumeFactor;
+	radius = std::pow(3.0 * volume / (4.0 * M_PI), 1.0 / 3.0);
 	oddOrder = (factors.size() % 2);
 }
 
