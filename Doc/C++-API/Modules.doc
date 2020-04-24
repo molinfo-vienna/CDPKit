@@ -544,13 +544,19 @@
 \defgroup CDPL_SHAPE_DATA_STRUCTURES Data Structures
 \ingroup CDPL_SHAPE
 
-\defgroup CDPL_SHAPE_FUNCTORS Shape Functor Classes
+\defgroup CDPL_SHAPE_FUNCTORS Shape Property and Overlap Calculation
+\ingroup CDPL_SHAPE
+
+\defgroup CDPL_SHAPE_ALIGNMENT Shape Alignment
 \ingroup CDPL_SHAPE
 
 \defgroup CDPL_SHAPE_FUNCTIONS Free Functions
 \ingroup CDPL_SHAPE
 
 \defgroup CDPL_SHAPE_CONSTANTS Flags and Constants
+\ingroup CDPL_SHAPE
+
+\defgroup CDPL_SHAPE_HELPERS Implementation Helper Classes
 \ingroup CDPL_SHAPE
 
 

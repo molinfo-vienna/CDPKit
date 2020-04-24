@@ -31,6 +31,8 @@ SET(cdpl-shape_LIB_SRCS
     GaussianShape.cpp
     GaussianShapeFunction.cpp
     GaussianShapeOverlapFunction.cpp
+    GaussianShapeAlignment.cpp
+    GaussianShapeAlignmentFunction.cpp
 
     UtilityFunctions.cpp
     

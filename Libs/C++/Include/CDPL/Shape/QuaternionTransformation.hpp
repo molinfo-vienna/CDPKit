@@ -1,7 +1,7 @@
 /* -*- mode: c++; c-basic-offset: 4; tab-width: 4; indent-tabs-mode: t -*- */
 
 /* 
- * Shape.hpp 
+ * QuaternionTransformation.hpp 
  *
  * This file is part of the Chemical Data Processing Toolkit
  *
@@ -25,20 +25,32 @@
 
 /**
  * \file
- * \brief A convenience header including everything that is defined in namespace CDPL::Shape.
+ * \brief Definition of the type CDPL::Shape::QuaternionTransformation.
  */
 
-#ifndef CDPL_SHAPE_HPP
-#define CDPL_SHAPE_HPP
+#ifndef CDPL_SHAPE_QUATERNIONTRANSFORMATION_HPP
+#define CDPL_SHAPE_QUATERNIONTRANSFORMATION_HPP
 
-#include "CDPL/Config.hpp"
+#include "CDPL/Math/Vector.hpp"
 
-#include "CDPL/Shape/GaussianShape.hpp"
-#include "CDPL/Shape/GaussianShapeFunction.hpp"
-#include "CDPL/Shape/GaussianShapeOverlapFunction.hpp"
-#include "CDPL/Shape/GaussianShapeAlignment.hpp"
-#include "CDPL/Shape/GaussianShapeAlignmentFunction.hpp"
-#include "CDPL/Shape/QuaternionTransformation.hpp"
-#include "CDPL/Shape/UtilityFunctions.hpp"
 
-#endif // CDPL_SHAPE_HPP
+namespace CDPL 
+{
+
+    namespace Shape
+    {
+
+	/**
+	 * \addtogroup CDPL_SHAPE_DATA_STRUCTURES
+	 * @{
+	 */
+		
+	typedef Math::CVector<double, 7> QuaternionTransformation;
+	
+	/**
+	 * @}
+	 */
+    }
+}
+
+#endif // CDPL_SHAPE_QUATERNIONTRANSFORMATION_HPP

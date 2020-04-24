@@ -74,7 +74,7 @@ namespace CDPL
 			GaussianProductList& operator=(const GaussianProductList& prod_list);
 			
 			void setup(const GaussianShape& shape);
-			
+
 			const GaussianProduct* getProduct(std::size_t idx) const;
 
 			ConstProductIterator getProductsBegin() const;

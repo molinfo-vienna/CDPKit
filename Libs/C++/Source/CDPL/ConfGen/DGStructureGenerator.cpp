@@ -26,6 +26,8 @@
  
 #include "StaticInit.hpp"
 
+#include <boost/random/uniform_real.hpp>
+
 #include "CDPL/ConfGen/DGStructureGenerator.hpp"
 #include "CDPL/Chem/MolecularGraph.hpp"
 #include "CDPL/Chem/AtomFunctions.hpp"

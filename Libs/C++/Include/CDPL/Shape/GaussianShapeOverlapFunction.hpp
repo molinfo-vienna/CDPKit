@@ -37,7 +37,6 @@
 #include <boost/shared_ptr.hpp>
 
 #include "CDPL/Shape/APIPrefix.hpp"
-#include "CDPL/Shape/GaussianShapeFunction.hpp"
 #include "CDPL/Math/Vector.hpp"
 #include "CDPL/Math/VectorArray.hpp"
 #include "CDPL/Math/Matrix.hpp"
@@ -49,6 +48,7 @@ namespace CDPL
     namespace Shape
     {
 
+		class GaussianShapeFunction;
 		class GaussianProductList;
 		
 		/**
@@ -66,25 +66,24 @@ namespace CDPL
 
 			GaussianShapeOverlapFunction(const GaussianShapeOverlapFunction& func);
 			
-			GaussianShapeOverlapFunction(const GaussianShape& ref_shape, const GaussianShape& ovl_shape);
+			GaussianShapeOverlapFunction(const GaussianShapeFunction& ref_shape_func,
+										 const GaussianShapeFunction& ovl_shape_func);
 
 			~GaussianShapeOverlapFunction();
 
-			void setShape(const GaussianShape& shape, bool is_ref);
+			void setShapeFunction(const GaussianShapeFunction& func, bool is_ref);
 
-			const GaussianShapeFunction& getShapeFunction(bool ref) const;
+			const GaussianShapeFunction* getShapeFunction(bool ref) const;
 		
-			void setMaxOrder(std::size_t max_order);
+			void enableProximityOptimization(bool enable);
 
-			std::size_t getMaxOrder() const;
+			bool proximityOptimizationEnabled() const;
 
-			void setDistanceCutoff(double cutoff);
+			void useFastExpFunction(bool use);
 
-			double getDistanceCutoff() const;
+			bool fastExpFunctionUsed() const;
 
-			void exactCalculations(bool exact);
-
-			bool exactCalculations() const;
+			double calcSelfOverlap(bool ref) const;
 			
 			double calcOverlap() const;
 
@@ -95,6 +94,8 @@ namespace CDPL
 			GaussianShapeOverlapFunction& operator=(const GaussianShapeOverlapFunction& func);
 			
 		  private:
+			bool checkShapeFuncsNotNull() const;
+
 			void prepareOverlapCalc(const Math::Matrix4D& xform);
 			void prepareGradientCalc(const Math::Matrix4D& xform, Math::Vector3DArray& grad);
 			
@@ -104,10 +105,11 @@ namespace CDPL
 
 			typedef std::vector<Math::Vector3D> GaussianProductCenterArray; 
 			
-			GaussianShapeFunction        refShapeFunc;
-			GaussianShapeFunction        ovlShapeFunc;
+			const GaussianShapeFunction* refShapeFunc;
+			const GaussianShapeFunction* ovlShapeFunc;
 			GaussianProductCenterArray   prodCenters;
-			bool                         exact;
+			bool                         proximityCheck;
+			bool                         fastExp;
 		};
 
 		/**

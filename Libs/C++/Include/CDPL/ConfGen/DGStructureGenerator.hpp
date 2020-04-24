@@ -34,7 +34,6 @@
 #include <cstddef>
 
 #include <boost/random/mersenne_twister.hpp>
-#include <boost/random/uniform_real.hpp>
 
 #include "CDPL/ConfGen/APIPrefix.hpp"
 #include "CDPL/ConfGen/DGConstraintGenerator.hpp"

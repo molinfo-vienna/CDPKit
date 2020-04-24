@@ -59,7 +59,8 @@ void CDPLPythonShape::exportGaussianShapeFunction()
 		.def("calcCentroid", &Shape::GaussianShapeFunction::calcCentroid, (python::arg("self"), python::arg("ctr")))
 		.def("calcQuadrupoleTensor", &Shape::GaussianShapeFunction::calcQuadrupoleTensor,
 			 (python::arg("self"), python::arg("ctr"), python::arg("quad_tensor")))
-		.add_property("shape", python::make_function(&Shape::GaussianShapeFunction::getShape, python::return_internal_reference<>()))
+		.add_property("shape", python::make_function(&Shape::GaussianShapeFunction::getShape, python::return_internal_reference<>()),
+					  python::make_function(&Shape::GaussianShapeFunction::setShape, python::with_custodian_and_ward<1, 2>()))
 		.add_property("volume", &Shape::GaussianShapeFunction::calcVolume)
 		.add_property("surfaceArea", static_cast<double (Shape::GaussianShapeFunction::*)() const>(&Shape::GaussianShapeFunction::calcSurfaceArea))
 		.add_property("maxOrder", &Shape::GaussianShapeFunction::getMaxOrder, &Shape::GaussianShapeFunction::setMaxOrder)

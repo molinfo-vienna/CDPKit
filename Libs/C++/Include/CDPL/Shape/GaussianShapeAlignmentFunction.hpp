@@ -1,7 +1,7 @@
 /* -*- mode: c++; c-basic-offset: 4; tab-width: 4; indent-tabs-mode: t -*- */
 
 /* 
- * UtilityFunctions.hpp 
+ * GaussianShapeAlignmentFunction.hpp 
  *
  * This file is part of the Chemical Data Processing Toolkit
  *
@@ -25,16 +25,15 @@
 
 /**
  * \file
- * \brief Declaration of miscellaneous utility functions.
+ * \brief Definition of the class CDPL::Shape::GaussianShapeAlignmentFunction.
  */
 
-#ifndef CDPL_SHAPE_UTILITYFUNCTIONS_HPP
-#define CDPL_SHAPE_UTILITYFUNCTIONS_HPP
+#ifndef CDPL_SHAPE_GAUSSIANSHAPEALIGNMENTFUNCTION_HPP
+#define CDPL_SHAPE_GAUSSIANSHAPEALIGNMENTFUNCTION_HPP
 
 #include "CDPL/Shape/APIPrefix.hpp"
 #include "CDPL/Shape/QuaternionTransformation.hpp"
-#include "CDPL/Math/Vector.hpp"
-#include "CDPL/Math/Matrix.hpp"
+#include "CDPL/Math/VectorArray.hpp"
 
 
 namespace CDPL 
@@ -43,25 +42,37 @@ namespace CDPL
     namespace Shape
     {
 
+		class GaussianShapeOverlapFunction;
+		
 		/**
-		 * \addtogroup CDPL_SHAPE_FUNCTIONS
+		 * \addtogroup CDPL_SHAPE_HELPERS
 		 * @{
 		 */
-	
-		CDPL_SHAPE_API void calcQuadrupoleTensorEigenDecomposition(const Math::Matrix3D& quad_tensor, Math::Matrix3D& eigen_vecs,
-																   Math::Vector3D& eigen_vals);
 
-		CDPL_SHAPE_API void calcPrincipalAxes(const Math::Matrix3D& quad_tensor, Math::Vector3D& x_axis, Math::Vector3D& y_axis,
-											  Math::Vector3D& z_axis, Math::Vector3D& shape_dims);
+		class CDPL_SHAPE_API GaussianShapeAlignmentFunction
+		{
+			
+		  public:
+			GaussianShapeAlignmentFunction(GaussianShapeOverlapFunction& func);
 
-		CDPL_SHAPE_API void matrixToQuaternion(const Math::Matrix4D& mtx, QuaternionTransformation& quat);
+			double operator()(const QuaternionTransformation& xform_quat) const;
 
-		CDPL_SHAPE_API void quaternionToMatrix(const QuaternionTransformation& quat, Math::Matrix4D& mtx);
-				
+			double operator()(const QuaternionTransformation& xform_quat, QuaternionTransformation& grad);
+
+		  private:
+			double calcShapeOverlapGradient(const QuaternionTransformation& xform_quat,
+											QuaternionTransformation::Pointer grad_data);
+			double calcQuaternionNonUnityPenalityGradient(QuaternionTransformation::ConstPointer xform_quat_data,
+														  QuaternionTransformation::Pointer grad_data) const;
+
+			GaussianShapeOverlapFunction* overlapFunc;
+			Math::Vector3DArray           coordsGradient;
+		};
+
 		/**
 		 * @}
 		 */
     }
 }
 
-#endif // CDPL_SHAPE_UTILITYFUNCTIONS_HPP
+#endif // CDPL_SHAPE_GAUSSIANSHAPEALIGNMENTFUNCTION_HPP

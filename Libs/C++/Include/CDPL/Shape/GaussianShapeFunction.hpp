@@ -84,7 +84,7 @@ namespace CDPL
 			void setShape(const GaussianShape& shape);
 
 			const GaussianShape* getShape() const;
-			
+		
 			double calcDensity(const Math::Vector3D& pos) const;
 			
 			double calcVolume() const;

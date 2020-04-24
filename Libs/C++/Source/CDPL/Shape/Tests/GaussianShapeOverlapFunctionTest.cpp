@@ -44,7 +44,7 @@ namespace
 		for (std::size_t i = 0; i < grad.getSize(); i++)
 			rms += innerProd(grad[i], grad[i]);
 
-		return (std::sqrt(rms / grad.getSize()));
+		return (std::sqrt(rms / (grad.getSize() * 3)));
 	}
 }
 
@@ -54,96 +54,106 @@ BOOST_AUTO_TEST_CASE(GaussianShapeOverlapFunctionTest)
     using namespace CDPL;
     using namespace Shape;
 	
-	GaussianShapeOverlapFunction overlap_func(*TestData::getShapeData("1dwc_MIT", 2.7), *TestData::getShapeData("1dwc_MIT", 2.7));
-	
-	BOOST_TEST_MESSAGE("1dwc_MIT shape volume: " << overlap_func.getShapeFunction(true).calcVolume());
-	BOOST_TEST_MESSAGE("1dwc_MIT shape overlap: " << overlap_func.calcOverlap());
-
-	overlap_func.setShape(*TestData::getShapeData("4phv_VAC", 2.7), true);
-	overlap_func.setShape(*TestData::getShapeData("4phv_VAC", 2.7), false);
-
-	BOOST_TEST_MESSAGE("4phv_VAC shape volume: " << overlap_func.getShapeFunction(true).calcVolume());
-	BOOST_TEST_MESSAGE("4phv_VAC shape overlap: " << overlap_func.calcOverlap());
-
-	overlap_func.setShape(*TestData::getShapeData("1tmn_0ZN", 2.7), true);
-	overlap_func.setShape(*TestData::getShapeData("1tmn_0ZN", 2.7), false);
-
-	BOOST_TEST_MESSAGE("1tmn_0ZN shape volume: " << overlap_func.getShapeFunction(true).calcVolume());
-	BOOST_TEST_MESSAGE("1tmn_0ZN shape overlap: " << overlap_func.calcOverlap());
-	BOOST_TEST_MESSAGE("1tmn_0ZN shape xform overlap: " << overlap_func.calcOverlap(Math::IdentityMatrix<double>(4, 4)));
-
-	//
-
+	GaussianShapeOverlapFunction overlap_func;
+	GaussianShapeFunction shape_func1, shape_func2;
 	Math::Vector3DArray overlap_grad;
 
-	double overlap = overlap_func.calcOverlapGradient(Math::IdentityMatrix<double>(4, 4), overlap_grad);
+	shape_func1.setShape(*TestData::getShapeData("1dwc_MIT", 2.7));
+	shape_func2 = shape_func1;
+	
+	overlap_func.setShapeFunction(shape_func1, true);
+	overlap_func.setShapeFunction(shape_func2, false);
+	overlap_func.enableProximityOptimization(false);
+	overlap_func.useFastExpFunction(false);
 
-	BOOST_TEST_MESSAGE("grad. overlap: " << overlap);
-	BOOST_TEST_MESSAGE("anal. grad. RMS: " << calcGradientRMS(overlap_grad));
-/*
-	Math::Vector3DArray num_overlap_grad;
-	std::size_t num_elem = shape_func2.getShape()->getNumElements();
+	BOOST_CHECK_CLOSE(overlap_func.calcOverlap(), 341.132, 0.001);
+	BOOST_CHECK_CLOSE(overlap_func.calcOverlap(Math::IdentityMatrix<double>(4, 4)), 341.132, 0.001);
+	BOOST_CHECK_CLOSE(overlap_func.calcOverlapGradient(Math::IdentityMatrix<double>(4, 4), overlap_grad), 341.132, 0.001);
+	BOOST_CHECK_CLOSE(overlap_func.calcSelfOverlap(true), 341.132, 0.001);
+	BOOST_CHECK_CLOSE(overlap_func.calcSelfOverlap(false), 341.132, 0.001);
 
-	num_overlap_grad.resize(num_elem);
+	overlap_func.enableProximityOptimization(true);
+	overlap_func.useFastExpFunction(true);
 
-	for (std::size_t i = 0; i < num_elem; i++) {
-		Math::Vector3D& grad = num_overlap_grad[i];
+	BOOST_CHECK_CLOSE(overlap_func.calcOverlap(), 347.114, 0.001);
+	BOOST_CHECK_CLOSE(overlap_func.calcOverlap(Math::IdentityMatrix<double>(4, 4)), 347.114, 0.001);
+	BOOST_CHECK_CLOSE(overlap_func.calcOverlapGradient(Math::IdentityMatrix<double>(4, 4), overlap_grad), 347.114, 0.001);
+	BOOST_CHECK_CLOSE(overlap_func.calcSelfOverlap(true), 347.114, 0.001);
+	BOOST_CHECK_CLOSE(overlap_func.calcSelfOverlap(false), 347.114, 0.001);
+
+//-
+	
+	shape_func1.setShape(*TestData::getShapeData("4phv_VAC", 2.7));
+	shape_func2 = shape_func1;
+	
+	overlap_func.setShapeFunction(shape_func1, true);
+	overlap_func.setShapeFunction(shape_func2, false);
+	overlap_func.enableProximityOptimization(false);
+	overlap_func.useFastExpFunction(false);
+	
+	BOOST_CHECK_CLOSE(overlap_func.calcOverlap(), 431.894, 0.001);
+
+	overlap_func.enableProximityOptimization(true);
+	overlap_func.useFastExpFunction(true);
+
+	BOOST_CHECK_CLOSE(overlap_func.calcOverlap(), 439.375, 0.001);
+
+//-
+	
+	shape_func1.setShape(*TestData::getShapeData("1tmn_0ZN", 2.7));
+	shape_func2 = shape_func1;
+	
+	overlap_func.setShapeFunction(shape_func1, true);
+	overlap_func.setShapeFunction(shape_func2, false);
+	overlap_func.enableProximityOptimization(false);
+	overlap_func.useFastExpFunction(false);
+
+	BOOST_CHECK_CLOSE(overlap_func.calcOverlap(), 335.628, 0.001);
+	BOOST_CHECK_CLOSE(overlap_func.calcOverlap(Math::TranslationMatrix<double>(4, 1.0, 0.0, 0.0)), 277.618, 0.001);
+	
+	overlap_func.enableProximityOptimization(true);
+	overlap_func.useFastExpFunction(true);
+
+	BOOST_CHECK_CLOSE(overlap_func.calcOverlap(), 337.4, 0.001);
+	BOOST_CHECK_CLOSE(overlap_func.calcOverlap(Math::TranslationMatrix<double>(4, 1.0, 0.0, 0.0)), 274.306, 0.001);
+	
+//-
+
+	overlap_func.useFastExpFunction(false);
+
+	BOOST_CHECK(overlap_func.calcOverlapGradient(Math::IdentityMatrix<double>(4, 4), overlap_grad) == overlap_func.calcOverlap());
+
+	//Math::Vector3DArray num_overlap_grad;
+	//num_overlap_grad.resize(overlap_grad.getSize());
+
+	for (std::size_t i = 0, num_elem = shape_func2.getShape()->getNumElements(); i < num_elem; i++) {
 		GaussianShape::Element& elem = const_cast<GaussianShape::Element&>(shape_func2.getShape()->getElement(i));
+		Math::Vector3D elem_pos = elem.getPosition();
+		
+		for (std::size_t j = 0; j < 3; j++) {
+			Math::Vector3D tmp = elem_pos;
 
-		elem.setPosition(elem.getPosition() + Math::vec(0.00001, 0.0, 0.0));
+			tmp[j] += 0.00001;
+			
+			elem.setPosition(tmp);
+			shape_func2.setShape(*shape_func2.getShape());
 
-		shape_func2.setShape(*shape_func2.getShape());
-		overlap_func.setShapeFunction2(shape_func2);
+			double num_grad = overlap_func.calcOverlap();
 
-		overlap = overlap_func.calcOverlap();
+			tmp[j] -= 0.00002;
 
-		elem.setPosition(elem.getPosition() + Math::vec(-2 * 0.00001, 0.0, 0.0));
+			elem.setPosition(tmp);
+			shape_func2.setShape(*shape_func2.getShape());
 
-		shape_func2.setShape(*shape_func2.getShape());
-		overlap_func.setShapeFunction2(shape_func2);
+			num_grad = (num_grad - overlap_func.calcOverlap()) / 0.00002;
+			
+			BOOST_CHECK_CLOSE(overlap_grad[i][j], num_grad, 0.01);
 
-		overlap -= overlap_func.calcOverlap();
+			elem.setPosition(elem_pos);
 
-		grad[0] = overlap / (2 * 0.00001);
-		elem.setPosition(elem.getPosition() + Math::vec(0.00001, 0.0, 0.0));
-
-//
-		elem.setPosition(elem.getPosition() + Math::vec(0.0, 0.00001, 0.0));
-
-		shape_func2.setShape(*shape_func2.getShape());
-		overlap_func.setShapeFunction2(shape_func2);
-
-		overlap = overlap_func.calcOverlap();
-
-		elem.setPosition(elem.getPosition() + Math::vec(0.0, -2 * 0.00001, 0.0));
-
-		shape_func2.setShape(*shape_func2.getShape());
-		overlap_func.setShapeFunction2(shape_func2);
-
-		overlap -= overlap_func.calcOverlap();
-
-		grad[1] = overlap / (2 * 0.00001);
-		elem.setPosition(elem.getPosition() + Math::vec(0.0, 0.00001, 0.0));
-		   
-//
-		elem.setPosition(elem.getPosition() + Math::vec(0.0, 0.0, 0.00001));
-
-		shape_func2.setShape(*shape_func2.getShape());
-		overlap_func.setShapeFunction2(shape_func2);
-
-		overlap = overlap_func.calcOverlap();
-
-		elem.setPosition(elem.getPosition() + Math::vec(0.0, 0.0, -2 * 0.00001));
-
-		shape_func2.setShape(*shape_func2.getShape());
-		overlap_func.setShapeFunction2(shape_func2);
-
-		overlap -= overlap_func.calcOverlap();
-
-		grad[2] = overlap / (2 * 0.00001);
-		elem.setPosition(elem.getPosition() + Math::vec(0.0, 0.0, 0.00001));
+			//num_overlap_grad[i][j] = num_grad;
+		}
 	}
 
-	BOOST_TEST_MESSAGE("num. grad. RMS: " << calcGradientRMS(num_overlap_grad));
-*/
+	BOOST_CHECK_CLOSE(calcGradientRMS(overlap_grad), 2.73076, 0.001);
 }

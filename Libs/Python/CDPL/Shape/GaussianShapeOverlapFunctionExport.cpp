@@ -27,7 +27,7 @@
 #include <boost/python.hpp>
 
 #include "CDPL/Shape/GaussianShapeOverlapFunction.hpp"
-#include "CDPL/Shape/GaussianShape.hpp"
+#include "CDPL/Shape/GaussianShapeFunction.hpp"
 
 #include "Base/ObjectIdentityCheckVisitor.hpp"
 
@@ -41,29 +41,28 @@ void CDPLPythonShape::exportGaussianShapeOverlapFunction()
 
     python::class_<Shape::GaussianShapeOverlapFunction, Shape::GaussianShapeOverlapFunction::SharedPointer>("GaussianShapeOverlapFunction", python::no_init)
 		.def(python::init<>(python::arg("self")))
-		.def(python::init<const Shape::GaussianShape&, const Shape::GaussianShape&>((python::arg("self"), python::arg("ref_shape"), python::arg("ovl_shape")))
+		.def(python::init<const Shape::GaussianShapeFunction&, const Shape::GaussianShapeFunction&>
+			 ((python::arg("self"), python::arg("ref_shape_func"), python::arg("ovl_shape_func")))
 			 [python::with_custodian_and_ward<1, 2, python::with_custodian_and_ward<1, 3> >()])
 		.def(python::init<const Shape::GaussianShapeOverlapFunction&>((python::arg("self"), python::arg("func")))[python::with_custodian_and_ward<1, 2>()])
 		.def(CDPLPythonBase::ObjectIdentityCheckVisitor<Shape::GaussianShapeOverlapFunction>())
-		.def("assign", &Shape::GaussianShapeOverlapFunction::operator=, (python::arg("self"), python::arg("func")), python::return_self<python::with_custodian_and_ward<1, 2> >())
-		.def("setShape", &Shape::GaussianShapeOverlapFunction::setShape, (python::arg("self"), python::arg("shape"), python::arg("is_ref")), python::with_custodian_and_ward<1, 2>())
-		.def("getShapeFunction", &Shape::GaussianShapeOverlapFunction::getShapeFunction, (python::arg("self"), python::arg("ref")), python::return_internal_reference<>())
-		.def("setMaxOrder", &Shape::GaussianShapeOverlapFunction::setMaxOrder, (python::arg("self"), python::arg("max_order")))
-		.def("getMaxOrder", &Shape::GaussianShapeOverlapFunction::getMaxOrder, python::arg("self"))
-		.def("setDistanceCutoff", &Shape::GaussianShapeOverlapFunction::setDistanceCutoff, (python::arg("self"), python::arg("cutoff")))
-		.def("getDistanceCutoff", &Shape::GaussianShapeOverlapFunction::getDistanceCutoff, python::arg("self"))
-		.def("exactCalculations", static_cast<void (Shape::GaussianShapeOverlapFunction::*)(bool)>(&Shape::GaussianShapeOverlapFunction::exactCalculations),
-			 (python::arg("self"), python::arg("exact")))
-		.def("exactCalculations", static_cast<bool (Shape::GaussianShapeOverlapFunction::*)() const>(&Shape::GaussianShapeOverlapFunction::exactCalculations),
-			 python::arg("self"))
+		.def("assign", &Shape::GaussianShapeOverlapFunction::operator=, (python::arg("self"), python::arg("func")),
+			 python::return_self<python::with_custodian_and_ward<1, 2> >())
+		.def("setShapeFunction", &Shape::GaussianShapeOverlapFunction::setShapeFunction,
+			 (python::arg("self"), python::arg("func"), python::arg("is_ref")), python::with_custodian_and_ward<1, 2>())
+		.def("getShapeFunction", &Shape::GaussianShapeOverlapFunction::getShapeFunction,
+			 (python::arg("self"), python::arg("ref")), python::return_internal_reference<>())
+		.def("enableProximityOptimization", &Shape::GaussianShapeOverlapFunction::enableProximityOptimization, (python::arg("self"), python::arg("enable")))
+		.def("proximityOptimizationEnabled", &Shape::GaussianShapeOverlapFunction::proximityOptimizationEnabled, python::arg("self"))
+		.def("useFastExpFunction", &Shape::GaussianShapeOverlapFunction::useFastExpFunction, (python::arg("self"), python::arg("use")))
+		.def("fastExpFunctionUsed", &Shape::GaussianShapeOverlapFunction::fastExpFunctionUsed, python::arg("self"))
+		.def("calcSelfOverlap", &Shape::GaussianShapeOverlapFunction::calcSelfOverlap, (python::arg("self"), python::arg("ref")))
 		.def("calcOverlap", static_cast<double (Shape::GaussianShapeOverlapFunction::*)() const>(&Shape::GaussianShapeOverlapFunction::calcOverlap),
 			 python::arg("self"))
 		.def("calcOverlap", static_cast<double (Shape::GaussianShapeOverlapFunction::*)(const Math::Matrix4D&)>(&Shape::GaussianShapeOverlapFunction::calcOverlap),
 			 (python::arg("self"), python::arg("xform")))
 		.def("calcOverlapGradient", static_cast<double (Shape::GaussianShapeOverlapFunction::*)(const Math::Matrix4D&, Math::Vector3DArray&)>(
 				 &Shape::GaussianShapeOverlapFunction::calcOverlapGradient), (python::arg("self"), python::arg("xform"), python::arg("grad")))
-		.add_property("exactCalc", static_cast<bool (Shape::GaussianShapeOverlapFunction::*)() const>(&Shape::GaussianShapeOverlapFunction::exactCalculations),
-					  static_cast<void (Shape::GaussianShapeOverlapFunction::*)(bool)>(&Shape::GaussianShapeOverlapFunction::exactCalculations))
-		.add_property("maxOrder", &Shape::GaussianShapeOverlapFunction::getMaxOrder, &Shape::GaussianShapeOverlapFunction::setMaxOrder)
-		.add_property("distCutoff", &Shape::GaussianShapeOverlapFunction::getDistanceCutoff, &Shape::GaussianShapeOverlapFunction::setDistanceCutoff);
+		.add_property("proximityOptimization", &Shape::GaussianShapeOverlapFunction::proximityOptimizationEnabled, &Shape::GaussianShapeOverlapFunction::enableProximityOptimization)
+		.add_property("fastExpFunction", &Shape::GaussianShapeOverlapFunction::fastExpFunctionUsed, &Shape::GaussianShapeOverlapFunction::useFastExpFunction);
 }
