@@ -34,6 +34,6 @@ BOOST_AUTO_TEST_CASE(GaussianShapeAlignmentTest)
     using namespace CDPL;
     using namespace Shape;
 	
-	GaussianShapeAlignment alignment;
+	//GaussianShapeAlignment alignment;
 
 }

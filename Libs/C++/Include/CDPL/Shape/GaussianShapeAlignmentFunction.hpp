@@ -53,20 +53,22 @@ namespace CDPL
 		{
 			
 		  public:
+			static const double DEF_QUATERNION_UNITY_DEVIATION_PENALTY_FACTOR;
+				
 			GaussianShapeAlignmentFunction(GaussianShapeOverlapFunction& func);
 
+			void setQuaternionUnityDeviationPenaltyFactor(double factor);
+						
+			double getQuaternionUnityDeviationPenaltyFactor() const;
+			
 			double operator()(const QuaternionTransformation& xform_quat) const;
 
 			double operator()(const QuaternionTransformation& xform_quat, QuaternionTransformation& grad);
 
 		  private:
-			double calcShapeOverlapGradient(const QuaternionTransformation& xform_quat,
-											QuaternionTransformation::Pointer grad_data);
-			double calcQuaternionNonUnityPenalityGradient(QuaternionTransformation::ConstPointer xform_quat_data,
-														  QuaternionTransformation::Pointer grad_data) const;
-
 			GaussianShapeOverlapFunction* overlapFunc;
 			Math::Vector3DArray           coordsGradient;
+			double                        quatPenaltyFactor;
 		};
 
 		/**

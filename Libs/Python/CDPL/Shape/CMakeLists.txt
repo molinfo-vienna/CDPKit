@@ -36,6 +36,8 @@ SET(shape_MOD_SRCS
     GaussianShapeExport.cpp
     GaussianShapeFunctionExport.cpp
     GaussianShapeOverlapFunctionExport.cpp
+    ExactGaussianShapeOverlapFunctionExport.cpp
+    FastGaussianShapeOverlapFunctionExport.cpp
   
     UtilityFunctionExport.cpp
    )

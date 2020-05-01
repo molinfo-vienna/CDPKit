@@ -25,12 +25,12 @@
 
 INCLUDE_DIRECTORIES("${CMAKE_CURRENT_SOURCE_DIR}" "${CDPKIT_EXTERNAL_DIR}")
 
-SET(CMAKE_CXX_FLAGS_RELEASE "${CMAKE_CXX_FLAGS_RELEASE} -ffast-math")
-
 SET(cdpl-shape_LIB_SRCS
     GaussianShape.cpp
     GaussianShapeFunction.cpp
     GaussianShapeOverlapFunction.cpp
+    ExactGaussianShapeOverlapFunction.cpp
+    FastGaussianShapeOverlapFunction.cpp
     GaussianShapeAlignment.cpp
     GaussianShapeAlignmentFunction.cpp
 

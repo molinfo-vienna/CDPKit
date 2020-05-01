@@ -57,11 +57,9 @@ namespace CDPL
 		  public:
 			typedef boost::shared_ptr<GaussianShapeAlignment> SharedPointer;
 			
-			GaussianShapeAlignment();
+			GaussianShapeAlignment(GaussianShapeOverlapFunction& overlap_func);
 
-			GaussianShapeAlignment(const GaussianShapeAlignment& alignment);
-			
-			GaussianShapeAlignment(const GaussianShapeFunction& func);
+			GaussianShapeAlignment(GaussianShapeOverlapFunction& overlap_func, const GaussianShapeFunction& ref_shape_func);
 
 			~GaussianShapeAlignment();
 
@@ -70,13 +68,15 @@ namespace CDPL
 			const GaussianShapeFunction* getReferenceShapeFunction() const;
 		
 			void align(const GaussianShapeFunction& func);
-			
-			GaussianShapeAlignment& operator=(const GaussianShapeAlignment& alignment);
-			
+						
 		  private:
+			GaussianShapeAlignment(const GaussianShapeAlignment& alignment);
+
+			GaussianShapeAlignment& operator=(const GaussianShapeAlignment& alignment);
+
 			typedef Math::BFGSMinimizer<QuaternionTransformation> BFGSMinimizer;
 			
-			GaussianShapeOverlapFunction   overlapFunc;
+			GaussianShapeOverlapFunction*  overlapFunc;
 			GaussianShapeAlignmentFunction alignmentFunc;
 			BFGSMinimizer                  minimizer;
 		};

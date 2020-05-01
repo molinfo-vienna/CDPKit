@@ -1,7 +1,7 @@
 /* -*- mode: c++; c-basic-offset: 4; tab-width: 4; indent-tabs-mode: t -*- */
 
 /* 
- * Shape.hpp 
+ * ExactGaussianShapeOverlapFunctionExport.cpp 
  *
  * This file is part of the Chemical Data Processing Toolkit
  *
@@ -23,24 +23,25 @@
  * Boston, MA 02111-1307, USA.
  */
 
-/**
- * \file
- * \brief A convenience header including everything that is defined in namespace CDPL::Shape.
- */
 
-#ifndef CDPL_SHAPE_HPP
-#define CDPL_SHAPE_HPP
+#include <boost/python.hpp>
 
-#include "CDPL/Config.hpp"
-
-#include "CDPL/Shape/GaussianShape.hpp"
-#include "CDPL/Shape/GaussianShapeFunction.hpp"
-#include "CDPL/Shape/GaussianShapeOverlapFunction.hpp"
 #include "CDPL/Shape/ExactGaussianShapeOverlapFunction.hpp"
-#include "CDPL/Shape/FastGaussianShapeOverlapFunction.hpp"
-#include "CDPL/Shape/GaussianShapeAlignment.hpp"
-#include "CDPL/Shape/GaussianShapeAlignmentFunction.hpp"
-#include "CDPL/Shape/QuaternionTransformation.hpp"
-#include "CDPL/Shape/UtilityFunctions.hpp"
+#include "CDPL/Shape/GaussianShapeFunction.hpp"
 
-#endif // CDPL_SHAPE_HPP
+#include "ClassExports.hpp"
+
+
+void CDPLPythonShape::exportExactGaussianShapeOverlapFunction()
+{
+    using namespace boost;
+    using namespace CDPL;
+
+    python::class_<Shape::ExactGaussianShapeOverlapFunction, Shape::ExactGaussianShapeOverlapFunction::SharedPointer,
+				   python::bases<Shape::GaussianShapeOverlapFunction> >("ExactGaussianShapeOverlapFunction", python::no_init)
+		.def(python::init<>(python::arg("self")))
+		.def(python::init<const Shape::GaussianShapeFunction&, const Shape::GaussianShapeFunction&>
+			 ((python::arg("self"), python::arg("ref_shape_func"), python::arg("ovl_shape_func")))
+			 [python::with_custodian_and_ward<1, 2, python::with_custodian_and_ward<1, 3> >()])
+		.def(python::init<const Shape::ExactGaussianShapeOverlapFunction&>((python::arg("self"), python::arg("func")))[python::with_custodian_and_ward<1, 2>()]);
+}

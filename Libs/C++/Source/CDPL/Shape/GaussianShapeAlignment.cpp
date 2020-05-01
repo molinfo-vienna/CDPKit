@@ -32,43 +32,28 @@
 using namespace CDPL;
 
 
-Shape::GaussianShapeAlignment::GaussianShapeAlignment():
-	alignmentFunc(overlapFunc), minimizer(boost::ref(alignmentFunc), boost::ref(alignmentFunc))
+Shape::GaussianShapeAlignment::GaussianShapeAlignment(GaussianShapeOverlapFunction& overlap_func):
+	overlapFunc(&overlap_func), alignmentFunc(overlap_func), minimizer(boost::ref(alignmentFunc), boost::ref(alignmentFunc))
 {}
 
-Shape::GaussianShapeAlignment::GaussianShapeAlignment(const GaussianShapeAlignment& alignment):
-    overlapFunc(alignment.overlapFunc), alignmentFunc(overlapFunc),
-	minimizer(boost::ref(alignmentFunc), boost::ref(alignmentFunc))
-{}
-
-Shape::GaussianShapeAlignment::GaussianShapeAlignment(const GaussianShapeFunction& func):
-	alignmentFunc(overlapFunc), minimizer(boost::ref(alignmentFunc), boost::ref(alignmentFunc))
+Shape::GaussianShapeAlignment::GaussianShapeAlignment(GaussianShapeOverlapFunction& overlap_func, const GaussianShapeFunction& ref_shape_func):
+	overlapFunc(&overlap_func), alignmentFunc(overlap_func), minimizer(boost::ref(alignmentFunc), boost::ref(alignmentFunc))
 {
-   setReferenceShapeFunction(func);
+   setReferenceShapeFunction(ref_shape_func);
 }
 
 Shape::GaussianShapeAlignment::~GaussianShapeAlignment() {}
 
 void Shape::GaussianShapeAlignment::setReferenceShapeFunction(const GaussianShapeFunction& func)
 {
-    overlapFunc.setShapeFunction(func, true);
+    overlapFunc->setShapeFunction(func, true);
 }
 
 const Shape::GaussianShapeFunction* Shape::GaussianShapeAlignment::getReferenceShapeFunction() const
 {
-    return overlapFunc.getShapeFunction(true);
+    return overlapFunc->getShapeFunction(true);
 }
 
 void Shape::GaussianShapeAlignment::align(const GaussianShapeFunction& func)
 {
-}
-
-Shape::GaussianShapeAlignment& Shape::GaussianShapeAlignment::operator=(const GaussianShapeAlignment& alignment)
-{
-    if (this == &alignment)
-		return *this;
-	
-    overlapFunc = alignment.overlapFunc;
-  
-    return *this;
 }

@@ -69,29 +69,24 @@ namespace CDPL
 			GaussianShapeOverlapFunction(const GaussianShapeFunction& ref_shape_func,
 										 const GaussianShapeFunction& ovl_shape_func);
 
-			~GaussianShapeOverlapFunction();
+			virtual ~GaussianShapeOverlapFunction();
 
 			void setShapeFunction(const GaussianShapeFunction& func, bool is_ref);
 
 			const GaussianShapeFunction* getShapeFunction(bool ref) const;
-		
-			void enableProximityOptimization(bool enable);
-
-			bool proximityOptimizationEnabled() const;
-
-			void useFastExpFunction(bool use);
-
-			bool fastExpFunctionUsed() const;
 
 			double calcSelfOverlap(bool ref) const;
 			
 			double calcOverlap() const;
 
-			double calcOverlap(const Math::Matrix4D& xform);
+			double calcOverlap(const Math::Matrix4D& xform, bool rigid_xform = true);
 
-			double calcOverlapGradient(const Math::Matrix4D& xform, Math::Vector3DArray& grad);
+			double calcOverlapGradient(const Math::Matrix4D& xform, Math::Vector3DArray& grad, bool rigid_xform = true);
 			
 			GaussianShapeOverlapFunction& operator=(const GaussianShapeOverlapFunction& func);
+
+		  protected:
+			typedef std::vector<Math::Vector3D> GaussianProductCenterArray; 
 			
 		  private:
 			bool checkShapeFuncsNotNull() const;
@@ -99,17 +94,15 @@ namespace CDPL
 			void prepareOverlapCalc(const Math::Matrix4D& xform);
 			void prepareGradientCalc(const Math::Matrix4D& xform, Math::Vector3DArray& grad);
 			
-			double calcOverlap(const GaussianProductList* prod_list1, const GaussianProductList* prod_list2,
-							   bool orig_centers) const;
-			double calcOverlapGradient(Math::Vector3DArray& grad) const;
+			virtual double calcOverlapImpl(const GaussianProductList* prod_list1, const GaussianProductList* prod_list2,
+										   const GaussianProductCenterArray& trans_prod_ctrs, bool orig_centers, bool rigid_xform) const = 0;
+			virtual double calcOverlapGradientImpl(const GaussianProductList* prod_list1, const GaussianProductList* prod_list2,
+												   const GaussianProductCenterArray& trans_prod_ctrs, Math::Vector3DArray::StorageType& grad,
+												   bool rigid_xform) const = 0;
 
-			typedef std::vector<Math::Vector3D> GaussianProductCenterArray; 
-			
 			const GaussianShapeFunction* refShapeFunc;
 			const GaussianShapeFunction* ovlShapeFunc;
 			GaussianProductCenterArray   prodCenters;
-			bool                         proximityCheck;
-			bool                         fastExp;
 		};
 
 		/**
