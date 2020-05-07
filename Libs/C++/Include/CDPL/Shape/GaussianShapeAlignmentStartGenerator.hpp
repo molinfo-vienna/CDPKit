@@ -1,7 +1,7 @@
 /* -*- mode: c++; c-basic-offset: 4; tab-width: 4; indent-tabs-mode: t -*- */
 
 /* 
- * Shape.hpp 
+ * GaussianShapeAlignmentStartGenerator.hpp 
  *
  * This file is part of the Chemical Data Processing Toolkit
  *
@@ -25,26 +25,50 @@
 
 /**
  * \file
- * \brief A convenience header including everything that is defined in namespace CDPL::Shape.
+ * \brief Definition of the class CDPL::Shape::GaussianShapeAlignmentStartGenerator.
  */
 
-#ifndef CDPL_SHAPE_HPP
-#define CDPL_SHAPE_HPP
+#ifndef CDPL_SHAPE_GAUSSIANSHAPEALIGNMENTSTARTGENERATOR_HPP
+#define CDPL_SHAPE_GAUSSIANSHAPEALIGNMENTSTARTGENERATOR_HPP
 
-#include "CDPL/Shape/GaussianShape.hpp"
+#include <cstddef>
+
+#include "CDPL/Shape/APIPrefix.hpp"
 #include "CDPL/Shape/QuaternionTransformation.hpp"
 
-#include "CDPL/Shape/GaussianShapeFunction.hpp"
-#include "CDPL/Shape/GaussianShapeOverlapFunction.hpp"
-#include "CDPL/Shape/ExactGaussianShapeOverlapFunction.hpp"
-#include "CDPL/Shape/FastGaussianShapeOverlapFunction.hpp"
-#include "CDPL/Shape/GaussianShapeAlignmentFunction.hpp"
 
-#include "CDPL/Shape/GaussianShapeAlignment.hpp"
-#include "CDPL/Shape/GaussianShapeAlignmentStartGenerator.hpp"
-#include "CDPL/Shape/PrincipalAxesAlignmentStartGenerator.hpp"
+namespace CDPL 
+{
 
-#include "CDPL/Shape/GaussianShapeFunctions.hpp"
-#include "CDPL/Shape/UtilityFunctions.hpp"
+    namespace Shape
+    {
 
-#endif // CDPL_SHAPE_HPP
+		class GaussianShapeFunction;
+		
+		/**
+		 * \addtogroup CDPL_SHAPE_ALIGNMENT
+		 * @{
+		 */
+
+		class CDPL_SHAPE_API GaussianShapeAlignmentStartGenerator
+		{
+			
+		  public:
+			virtual ~GaussianShapeAlignmentStartGenerator() {}
+
+			virtual void setup(const GaussianShapeFunction& ref_shape_func) = 0;
+
+			virtual bool generate(const GaussianShapeFunction& func) = 0;
+			
+			virtual std::size_t getNumStartTransforms() const = 0;
+
+			virtual const QuaternionTransformation& getStartTransform(std::size_t idx) const = 0;
+		};
+
+		/**
+		 * @}
+		 */
+    }
+}
+
+#endif // CDPL_SHAPE_GAUSSIANSHAPEALIGNMENTSTARTGENERATOR_HPP

@@ -32,6 +32,7 @@ namespace CDPLPythonShape
 {
 
 	void exportUtilityFunctions();
+	void exportGaussianShapeFunctions();
 }
 
 #endif // CDPL_PYTHON_SHAPE_FUNCTIONEXPORTS_HPP

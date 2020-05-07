@@ -40,6 +40,11 @@ BOOST_PYTHON_MODULE(_shape)
 	exportGaussianShapeOverlapFunction();
 	exportExactGaussianShapeOverlapFunction();
 	exportFastGaussianShapeOverlapFunction();
+	exportGaussianShapeAlignmentFunction();
+	exportGaussianShapeAlignmentStartGenerator();
+	exportPrincipalAxesAlignmentStartGenerator();
+	exportGaussianShapeAlignment();
 	
 	exportUtilityFunctions();
+	exportGaussianShapeFunctions();
 }

@@ -38,8 +38,13 @@ SET(shape_MOD_SRCS
     GaussianShapeOverlapFunctionExport.cpp
     ExactGaussianShapeOverlapFunctionExport.cpp
     FastGaussianShapeOverlapFunctionExport.cpp
-  
+    GaussianShapeAlignmentFunctionExport.cpp
+    GaussianShapeAlignmentStartGeneratorExport.cpp
+    PrincipalAxesAlignmentStartGeneratorExport.cpp
+    GaussianShapeAlignmentExport.cpp
+    
     UtilityFunctionExport.cpp
+    GaussianShapeFunctionsExport.cpp
    )
 
 ADD_LIBRARY(_shape MODULE ${shape_MOD_SRCS})

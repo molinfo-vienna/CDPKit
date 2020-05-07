@@ -140,3 +140,16 @@ void Shape::GaussianShapeOverlapFunction::prepareGradientCalc(const Math::Matrix
 
 	grad.assign(ovlShapeFunc->getProductList()->getNumShapeElements(), Math::Vector3D());
 }
+
+double Shape::GaussianShapeOverlapFunction::calcOverlapImpl(const GaussianProductList* prod_list1, const GaussianProductList* prod_list2,
+															const GaussianProductCenterArray& trans_prod_ctrs, bool orig_centers, bool rigid_xform) const
+{
+	return 0.0;
+}
+
+double Shape::GaussianShapeOverlapFunction::calcOverlapGradientImpl(const GaussianProductList* prod_list1, const GaussianProductList* prod_list2,
+																	const GaussianProductCenterArray& trans_prod_ctrs, Math::Vector3DArray::StorageType& grad,
+																	bool rigid_xform) const
+{
+	return 0.0;
+}

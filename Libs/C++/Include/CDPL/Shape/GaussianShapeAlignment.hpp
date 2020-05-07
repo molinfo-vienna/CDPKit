@@ -31,12 +31,16 @@
 #ifndef CDPL_SHAPE_GAUSSIANSHAPEALIGNMENT_HPP
 #define CDPL_SHAPE_GAUSSIANSHAPEALIGNMENT_HPP
 
+#include <cstddef>
+#include <vector>
+
 #include <boost/shared_ptr.hpp>
 
 #include "CDPL/Shape/APIPrefix.hpp"
-#include "CDPL/Shape/GaussianShapeOverlapFunction.hpp"
+#include "CDPL/Shape/ExactGaussianShapeOverlapFunction.hpp"
+#include "CDPL/Shape/PrincipalAxesAlignmentStartGenerator.hpp"
 #include "CDPL/Shape/GaussianShapeAlignmentFunction.hpp"
-#include "CDPL/Shape/QuaternionTransformation.hpp"
+#include "CDPL/Math/Matrix.hpp"
 #include "CDPL/Math/BFGSMinimizer.hpp"
 
 
@@ -53,21 +57,67 @@ namespace CDPL
 
 		class CDPL_SHAPE_API GaussianShapeAlignment
 		{
+
+		  public:
+			class Result
+			{
+
+			public:
+				Result(const Math::Matrix4D& xform, double overlap):
+					transform(xform), overlap(overlap) {}
+
+				const Math::Matrix4D& getTransform() const {
+					return transform;
+				}
+
+				double getOverlap() const {
+					return overlap;
+				}
+				
+			private:
+				Math::Matrix4D transform;
+				double         overlap;
+			};
+
+		  private:
+			typedef std::vector<Result> ResultList;
 			
 		  public:
+			typedef ResultList::const_iterator ConstResultIterator;
+				
 			typedef boost::shared_ptr<GaussianShapeAlignment> SharedPointer;
-			
+
+			GaussianShapeAlignment();
+
+			GaussianShapeAlignment(const GaussianShapeFunction& ref_shape_func);
+		
 			GaussianShapeAlignment(GaussianShapeOverlapFunction& overlap_func);
 
 			GaussianShapeAlignment(GaussianShapeOverlapFunction& overlap_func, const GaussianShapeFunction& ref_shape_func);
 
 			~GaussianShapeAlignment();
 
+			void setOverlapFunction(GaussianShapeOverlapFunction& func);
+			
+			GaussianShapeOverlapFunction& getOverlapFunction() const;
+
+			void setStartGenerator(PrincipalAxesAlignmentStartGenerator& gen);
+			
+			GaussianShapeAlignmentStartGenerator& getStartGenerator() const;
+			
 			void setReferenceShapeFunction(const GaussianShapeFunction& func);
 
 			const GaussianShapeFunction* getReferenceShapeFunction() const;
 		
-			void align(const GaussianShapeFunction& func);
+			bool align(const GaussianShapeFunction& func);
+
+			std::size_t getNumResults() const;
+
+			const Result& getResult(std::size_t idx) const;
+
+			ConstResultIterator getResultsBegin() const;
+
+			ConstResultIterator getResultsEnd() const;
 						
 		  private:
 			GaussianShapeAlignment(const GaussianShapeAlignment& alignment);
@@ -75,10 +125,15 @@ namespace CDPL
 			GaussianShapeAlignment& operator=(const GaussianShapeAlignment& alignment);
 
 			typedef Math::BFGSMinimizer<QuaternionTransformation> BFGSMinimizer;
-			
-			GaussianShapeOverlapFunction*  overlapFunc;
-			GaussianShapeAlignmentFunction alignmentFunc;
-			BFGSMinimizer                  minimizer;
+
+			ExactGaussianShapeOverlapFunction     defOverlapFunc;
+			PrincipalAxesAlignmentStartGenerator  defStartGen;
+			GaussianShapeOverlapFunction*         overlapFunc;
+			GaussianShapeAlignmentStartGenerator* startGen;
+			const GaussianShapeFunction*          refShapeFunc;
+			GaussianShapeAlignmentFunction        alignmentFunc;
+			BFGSMinimizer                         minimizer;
+			ResultList                            results;
 		};
 
 		/**

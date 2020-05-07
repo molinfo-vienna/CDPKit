@@ -36,6 +36,10 @@ namespace CDPLPythonShape
 	void exportGaussianShapeOverlapFunction();
 	void exportExactGaussianShapeOverlapFunction();
 	void exportFastGaussianShapeOverlapFunction();
+	void exportGaussianShapeAlignmentFunction();
+	void exportGaussianShapeAlignmentStartGenerator();
+	void exportPrincipalAxesAlignmentStartGenerator();
+	void exportGaussianShapeAlignment();
 }
 
 #endif // CDPL_PYTHON_SHAPE_CLASSEXPORTS_HPP

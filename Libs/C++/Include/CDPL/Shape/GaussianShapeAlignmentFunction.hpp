@@ -55,8 +55,14 @@ namespace CDPL
 		  public:
 			static const double DEF_QUATERNION_UNITY_DEVIATION_PENALTY_FACTOR;
 				
+			GaussianShapeAlignmentFunction();
+
 			GaussianShapeAlignmentFunction(GaussianShapeOverlapFunction& func);
 
+			void setOverlapFunction(GaussianShapeOverlapFunction& func);
+
+			GaussianShapeOverlapFunction* getOverlapFunction() const;
+			
 			void setQuaternionUnityDeviationPenaltyFactor(double factor);
 						
 			double getQuaternionUnityDeviationPenaltyFactor() const;

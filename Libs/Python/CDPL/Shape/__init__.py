@@ -27,6 +27,9 @@
 from __future__ import absolute_import
 
 import CDPL.Math
+import CDPL.Chem
+import CDPL.Pharm
 
 from ._shape import *
 
+QuaternionTransformation = CDPL.Math.Vector7D;

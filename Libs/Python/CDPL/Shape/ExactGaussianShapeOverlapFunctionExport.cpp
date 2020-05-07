@@ -43,5 +43,7 @@ void CDPLPythonShape::exportExactGaussianShapeOverlapFunction()
 		.def(python::init<const Shape::GaussianShapeFunction&, const Shape::GaussianShapeFunction&>
 			 ((python::arg("self"), python::arg("ref_shape_func"), python::arg("ovl_shape_func")))
 			 [python::with_custodian_and_ward<1, 2, python::with_custodian_and_ward<1, 3> >()])
-		.def(python::init<const Shape::ExactGaussianShapeOverlapFunction&>((python::arg("self"), python::arg("func")))[python::with_custodian_and_ward<1, 2>()]);
+		.def(python::init<const Shape::ExactGaussianShapeOverlapFunction&>((python::arg("self"), python::arg("func")))[python::with_custodian_and_ward<1, 2>()])
+		.def("assign", &Shape::ExactGaussianShapeOverlapFunction::operator=, (python::arg("self"), python::arg("func")),
+			 python::return_self<python::with_custodian_and_ward<1, 2> >());
 }

@@ -1,7 +1,7 @@
 /* -*- mode: c++; c-basic-offset: 4; tab-width: 4; indent-tabs-mode: t -*- */
 
 /* 
- * QuaternionTransformation.hpp 
+ * PrincipalAxesAlignmentStartGenerator.hpp 
  *
  * This file is part of the Chemical Data Processing Toolkit
  *
@@ -25,13 +25,17 @@
 
 /**
  * \file
- * \brief Definition of the type CDPL::Shape::QuaternionTransformation.
+ * \brief Definition of the class CDPL::Shape::PrincipalAxesAlignmentStartGenerator.
  */
 
-#ifndef CDPL_SHAPE_QUATERNIONTRANSFORMATION_HPP
-#define CDPL_SHAPE_QUATERNIONTRANSFORMATION_HPP
+#ifndef CDPL_SHAPE_PRINCIPALAXESALIGNMENTSTARTGENERATOR_HPP
+#define CDPL_SHAPE_PRINCIPALAXESALIGNMENTSTARTGENERATOR_HPP
 
-#include "CDPL/Math/Vector.hpp"
+#include <vector>
+
+#include "CDPL/Shape/APIPrefix.hpp"
+#include "CDPL/Shape/GaussianShapeAlignmentStartGenerator.hpp"
+#include "CDPL/Math/Matrix.hpp"
 
 
 namespace CDPL 
@@ -41,16 +45,35 @@ namespace CDPL
     {
 
 		/**
-		 * \addtogroup CDPL_SHAPE_DATA_STRUCTURES
+		 * \addtogroup CDPL_SHAPE_ALIGNMENT
 		 * @{
 		 */
-		
-		typedef Math::CVector<double, 7> QuaternionTransformation;
-	
+
+		class CDPL_SHAPE_API PrincipalAxesAlignmentStartGenerator : public GaussianShapeAlignmentStartGenerator
+		{
+			
+		  public:
+			PrincipalAxesAlignmentStartGenerator();
+			
+			void setup(const GaussianShapeFunction& ref_shape_func);
+
+			bool generate(const GaussianShapeFunction& func);
+			
+			std::size_t getNumStartTransforms() const;
+
+			const QuaternionTransformation& getStartTransform(std::size_t idx) const;
+
+		  private:
+			typedef std::vector<QuaternionTransformation> StartTransformList;
+
+			Math::Matrix4D     toRefTransform;
+			StartTransformList startTransforms;
+		};
+
 		/**
 		 * @}
 		 */
     }
 }
 
-#endif // CDPL_SHAPE_QUATERNIONTRANSFORMATION_HPP
+#endif // CDPL_SHAPE_PRINCIPALAXESALIGNMENTSTARTGENERATOR_HPP

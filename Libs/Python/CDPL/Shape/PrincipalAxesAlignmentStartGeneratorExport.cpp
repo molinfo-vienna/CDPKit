@@ -1,7 +1,7 @@
 /* -*- mode: c++; c-basic-offset: 4; tab-width: 4; indent-tabs-mode: t -*- */
 
 /* 
- * CVectorExport3.cpp 
+ * PrincipalAxesAlignmentStartGeneratorExport.cpp 
  *
  * This file is part of the Chemical Data Processing Toolkit
  *
@@ -24,17 +24,24 @@
  */
 
 
-#include "CVectorExport.hpp"
+#include <boost/python.hpp>
+
+#include "CDPL/Shape/PrincipalAxesAlignmentStartGenerator.hpp"
+
+#include "Base/CopyAssOp.hpp"
+
+#include "ClassExports.hpp"
 
 
-void CDPLPythonMath::exportCVectorTypes3()
+void CDPLPythonShape::exportPrincipalAxesAlignmentStartGenerator()
 {
-	using namespace CDPL;
+    using namespace boost;
+    using namespace CDPL;
 
-	CVectorExport<Math::Vector4F>("Vector4F");
-	CVectorExport<Math::Vector4D>("Vector4D");
-	CVectorExport<Math::Vector4L>("Vector4L");
-	CVectorExport<Math::Vector4UL>("Vector4UL");
-
-	CVectorExport<Math::CVector<double, 7> >("Vector7D");
+    python::class_<Shape::PrincipalAxesAlignmentStartGenerator, python::bases<Shape::GaussianShapeAlignmentStartGenerator> >
+		("PrincipalAxesAlignmentStartGenerator", python::no_init)
+		.def(python::init<>(python::arg("self")))
+		.def(python::init<const Shape::PrincipalAxesAlignmentStartGenerator&>((python::arg("self"), python::arg("gen"))))
+		.def("assign", CDPLPythonBase::copyAssOp(&Shape::PrincipalAxesAlignmentStartGenerator::operator=),
+			 (python::arg("self"), python::arg("gen")), python::return_self<>());
 }

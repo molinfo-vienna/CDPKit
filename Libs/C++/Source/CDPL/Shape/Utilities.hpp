@@ -26,6 +26,7 @@
 #ifndef CDPL_SHAPE_UTILITIES_HPP
 #define CDPL_SHAPE_UTILITIES_HPP
 
+#include "CDPL/Shape/QuaternionTransformation.hpp"
 #include "CDPL/Math/Vector.hpp"
 #include "CDPL/Math/Matrix.hpp"
 
@@ -50,6 +51,24 @@ namespace CDPL
 			tgt_vec[0] = xform[0][0] * src_vec[0] + xform[0][1] * src_vec[1] + xform[0][2] * src_vec[2] + xform[0][3];
 			tgt_vec[1] = xform[1][0] * src_vec[0] + xform[1][1] * src_vec[1] + xform[1][2] * src_vec[2] + xform[1][3];
 			tgt_vec[2] = xform[2][0] * src_vec[0] + xform[2][1] * src_vec[1] + xform[2][2] * src_vec[2] + xform[2][3];
+		}
+
+		inline bool normalize(QuaternionTransformation& xform)
+		{
+			QuaternionTransformation::Pointer xform_data = xform.getData();
+			
+			double len = std::sqrt(xform_data[0] * xform_data[0] + xform_data[1] * xform_data[1] +
+								   xform_data[2] * xform_data[2] + xform_data[3] * xform_data[3]);
+
+			if (len == 0.0)
+				return false;
+			
+			xform_data[0] /= len;
+			xform_data[1] /= len;
+			xform_data[2] /= len;
+			xform_data[3] /= len;
+
+			return true;
 		}
     }
 }

@@ -39,12 +39,26 @@
 using namespace CDPL;
 
 
-const double Shape::GaussianShapeAlignmentFunction::DEF_QUATERNION_UNITY_DEVIATION_PENALTY_FACTOR = 1000.0;
+const double Shape::GaussianShapeAlignmentFunction::DEF_QUATERNION_UNITY_DEVIATION_PENALTY_FACTOR = 1000000.0;
 
+
+Shape::GaussianShapeAlignmentFunction::GaussianShapeAlignmentFunction():
+	overlapFunc(0), quatPenaltyFactor(DEF_QUATERNION_UNITY_DEVIATION_PENALTY_FACTOR)
+{}
 
 Shape::GaussianShapeAlignmentFunction::GaussianShapeAlignmentFunction(GaussianShapeOverlapFunction& func):
 	overlapFunc(&func), quatPenaltyFactor(DEF_QUATERNION_UNITY_DEVIATION_PENALTY_FACTOR)
 {}
+
+void Shape::GaussianShapeAlignmentFunction::setOverlapFunction(GaussianShapeOverlapFunction& func)
+{
+	overlapFunc = &func;
+}
+
+Shape::GaussianShapeOverlapFunction* Shape::GaussianShapeAlignmentFunction::getOverlapFunction() const
+{
+	return overlapFunc;
+}
 
 void Shape::GaussianShapeAlignmentFunction::setQuaternionUnityDeviationPenaltyFactor(double factor)
 {
@@ -58,6 +72,9 @@ double Shape::GaussianShapeAlignmentFunction::getQuaternionUnityDeviationPenalty
 
 double Shape::GaussianShapeAlignmentFunction::operator()(const QuaternionTransformation& xform_quat) const
 {
+	if (!overlapFunc)
+		return 0.0;
+	
 	QuaternionTransformation::ConstPointer xform_quat_data = xform_quat.getData();
 	Math::Matrix4D xform_mtx;
 	
@@ -74,6 +91,9 @@ double Shape::GaussianShapeAlignmentFunction::operator()(const QuaternionTransfo
 double Shape::GaussianShapeAlignmentFunction::operator()(const QuaternionTransformation& xform_quat, QuaternionTransformation& grad)
 {
 	grad.clear();
+
+	if (!overlapFunc)
+		return 0.0;
 
 	const GaussianShapeFunction* shape_func = overlapFunc->getShapeFunction(false);
 
@@ -116,7 +136,7 @@ double Shape::GaussianShapeAlignmentFunction::operator()(const QuaternionTransfo
 			pos_grad[0] * (-xform_quat_data[3] * elem_pos[0] - xform_quat_data[0] * elem_pos[1] + xform_quat_data[1] * elem_pos[2]) +
 			pos_grad[1] * ( xform_quat_data[0] * elem_pos[0] - xform_quat_data[3] * elem_pos[1] + xform_quat_data[2] * elem_pos[2]) +
 			pos_grad[2] * ( xform_quat_data[1] * elem_pos[0] + xform_quat_data[2] * elem_pos[1] + xform_quat_data[3] * elem_pos[2]);
-
+		
 		grad_data[4] -= pos_grad[0];
 		grad_data[5] -= pos_grad[1];
 		grad_data[6] -= pos_grad[2];

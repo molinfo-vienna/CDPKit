@@ -92,6 +92,8 @@ BOOST_AUTO_TEST_CASE(GaussianShapeAlignmentFunctionTest)
 		
 		xform[i] += 0.000001;
 
+		BOOST_TEST_MESSAGE("num grad " << i << ": " << num_grad << ", anal grad: " << xform_grad[i]);
+		
 		BOOST_CHECK_SMALL(std::abs(xform_grad[i] - num_grad), 0.001);
 	}
 

@@ -53,6 +53,13 @@ Shape::ExactGaussianShapeOverlapFunction::ExactGaussianShapeOverlapFunction(cons
 
 Shape::ExactGaussianShapeOverlapFunction::~ExactGaussianShapeOverlapFunction() {}
 
+Shape::ExactGaussianShapeOverlapFunction& Shape::ExactGaussianShapeOverlapFunction::operator=(const ExactGaussianShapeOverlapFunction& func)
+{
+	GaussianShapeOverlapFunction::operator=(func);
+
+	return *this;
+}
+
 double Shape::ExactGaussianShapeOverlapFunction::calcOverlapImpl(const GaussianProductList* prod_list1, const GaussianProductList* prod_list2,
 																 const GaussianProductCenterArray& trans_prod_ctrs, bool orig_centers, bool rigid_xform) const
 {
@@ -63,10 +70,15 @@ double Shape::ExactGaussianShapeOverlapFunction::calcOverlapImpl(const GaussianP
 		double prod1_delta = prod1->getDelta();
 		double prod1_weight = prod1->getWeightFactor();
 		bool prod1_odd = prod1->hasOddOrder();
+		std::size_t prod1_color = prod1->getColor();
 		Math::Vector3D::ConstPointer prod1_ctr = prod1->getCenter().getData();
 
 		for (GaussianProductList::ConstProductIterator p_it2 = prod_list2->getProductsBegin(), p_end2 = prod_list2->getProductsEnd(); p_it2 != p_end2; ++p_it2) {
 			const GaussianProduct* prod2 = *p_it2;
+
+			if (prod2->getColor() != prod1_color) // TODO
+				continue;
+			
 			double prod_fact_exp = prod1_delta * prod1->getProductFactorExponent();
 
 			for (GaussianProduct::ConstFactorIterator f_it1 = prod1->getFactorsBegin(), f_end1 = prod1->getFactorsEnd(); f_it1 != f_end1; ++f_it1) {
@@ -121,10 +133,15 @@ double Shape::ExactGaussianShapeOverlapFunction::calcOverlapGradientImpl(const G
 		double prod1_delta = prod1->getDelta();
 		double prod1_weight = prod1->getWeightFactor();
 		bool prod1_odd = prod1->hasOddOrder();
+		std::size_t prod1_color = prod1->getColor();
 		Math::Vector3D::ConstPointer prod1_ctr = prod1->getCenter().getData();
 
 		for (GaussianProductList::ConstProductIterator p_it2 = prod_list2->getProductsBegin(), p_end2 = prod_list2->getProductsEnd(); p_it2 != p_end2; ++p_it2) {
 			const GaussianProduct* prod2 = *p_it2;
+
+			if (prod2->getColor() != prod1_color) // TODO
+				continue;
+			
 			Math::Vector3D::ConstPointer prod2_ctr = trans_prod_ctrs[prod2->getIndex()].getData();
 			double prod_fact_exp = prod1_delta * prod1->getProductFactorExponent();
 

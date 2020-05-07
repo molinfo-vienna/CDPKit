@@ -40,4 +40,6 @@ void CDPLPythonShape::exportUtilityFunctions()
 				(python::arg("quad_tensor"), python::arg("eigen_vecs"), python::arg("eigen_vals")));
 	python::def("calcPrincipalAxes", &Shape::calcPrincipalAxes,
 				(python::arg("quad_tensor"), python::arg("x_axis"), python::arg("y_axis"), python::arg("z_axis"), python::arg("shape_dims")));
+	python::def("matrixToQuaternion", &Shape::matrixToQuaternion, (python::arg("mtx"), python::arg("quat")));
+	python::def("quaternionToMatrix", &Shape::quaternionToMatrix, (python::arg("quat"), python::arg("mtx")));
 }

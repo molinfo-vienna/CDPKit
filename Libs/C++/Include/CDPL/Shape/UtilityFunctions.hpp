@@ -57,7 +57,7 @@ namespace CDPL
 		CDPL_SHAPE_API void matrixToQuaternion(const Math::Matrix4D& mtx, QuaternionTransformation& quat);
 
 		CDPL_SHAPE_API void quaternionToMatrix(const QuaternionTransformation& quat, Math::Matrix4D& mtx);
-				
+
 		/**
 		 * @}
 		 */

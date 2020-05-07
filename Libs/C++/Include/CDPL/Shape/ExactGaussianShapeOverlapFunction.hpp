@@ -62,7 +62,9 @@ namespace CDPL
 											  const GaussianShapeFunction& ovl_shape_func);
 
 			~ExactGaussianShapeOverlapFunction();
-		
+
+			ExactGaussianShapeOverlapFunction& operator=(const ExactGaussianShapeOverlapFunction& func);
+				
 		  private:
 			double calcOverlapImpl(const GaussianProductList* prod_list1, const GaussianProductList* prod_list2,
 								   const GaussianProductCenterArray& trans_prod_ctrs, bool orig_centers, bool rigid_xform) const;
