@@ -44,76 +44,27 @@ namespace
 		typedef boost::shared_ptr<GaussianShapeOverlapFunctionWrapper> SharedPointer;
 
 		void setShapeFunction(const CDPL::Shape::GaussianShapeFunction& func, bool is_ref) {
-			if (boost::python::override f = this->get_override("setShapeFunction")) {
-				f(boost::ref(func), is_ref);
-				return;
-			}
-
-			CDPL::Shape::GaussianShapeOverlapFunction::setShapeFunction(func, is_ref);
-		}
-
-		void setShapeFunctionDef(const CDPL::Shape::GaussianShapeFunction& func, bool is_ref) {
-			CDPL::Shape::GaussianShapeOverlapFunction::setShapeFunction(func, is_ref);
+			this->get_override("setShapeFunction")(boost::ref(func), is_ref);
 		}
 
 		const CDPL::Shape::GaussianShapeFunction* getShapeFunction(bool ref) const {
-			if (boost::python::override f = this->get_override("getShapeFunction")) {
-				return f(ref);
-			}
-
-			return CDPL::Shape::GaussianShapeOverlapFunction::getShapeFunction(ref);
-		}
-
-		const CDPL::Shape::GaussianShapeFunction* getShapeFunctionDef(bool ref) const {
-			return CDPL::Shape::GaussianShapeOverlapFunction::getShapeFunction(ref);
+			return this->get_override("getShapeFunction")(ref);
 		}
 
 		double calcSelfOverlap(bool ref) const {
-			if (boost::python::override f = this->get_override("calcSelfOverlap")) {
-				return f(ref);
-			}
-
-			return CDPL::Shape::GaussianShapeOverlapFunction::calcSelfOverlap(ref);
-		}
-
-		double calcSelfOverlapDef(bool ref) const {
-			return CDPL::Shape::GaussianShapeOverlapFunction::calcSelfOverlap(ref);
+			return this->get_override("calcSelfOverlap")(ref);
 		}
 			
 		double calcOverlap() const {
-			if (boost::python::override f = this->get_override("calcOverlap")) {
-				return f();
-			}
-
-			return CDPL::Shape::GaussianShapeOverlapFunction::calcOverlap();
+			return this->get_override("calcOverlap")();
 		}
 		
-		double calcOverlapDef1() const {
-			return CDPL::Shape::GaussianShapeOverlapFunction::calcOverlap();
-		}
-		
-		double calcOverlap(const CDPL::Math::Matrix4D& xform, bool rigid_xform) {
-			if (boost::python::override f = this->get_override("calcOverlap")) {
-				return f(boost::ref(xform), rigid_xform);
-			}
-
-			return CDPL::Shape::GaussianShapeOverlapFunction::calcOverlap(xform, rigid_xform);
-		}
-		
-		double calcOverlapDef2(const CDPL::Math::Matrix4D& xform, bool rigid_xform) {
-			return CDPL::Shape::GaussianShapeOverlapFunction::calcOverlap(xform, rigid_xform);
+		double calcOverlap(const CDPL::Math::Vector3DArray& coords) const {
+			return this->get_override("calcOverlap")(boost::ref(coords));
 		}
 
-		double calcOverlapGradient(const CDPL::Math::Matrix4D& xform, CDPL::Math::Vector3DArray& grad, bool rigid_xform) {
-			if (boost::python::override f = this->get_override("calcOverlapGradient")) {
-				return f(boost::ref(xform), boost::ref(grad), rigid_xform);
-			}
-
-			return CDPL::Shape::GaussianShapeOverlapFunction::calcOverlapGradient(xform, grad, rigid_xform);
-		}
-
-		double calcOverlapGradientDef(const CDPL::Math::Matrix4D& xform, CDPL::Math::Vector3DArray& grad, bool rigid_xform) {
-			return CDPL::Shape::GaussianShapeOverlapFunction::calcOverlapGradient(xform, grad, rigid_xform);
+		double calcOverlapGradient(const CDPL::Math::Vector3DArray& coords, CDPL::Math::Vector3DArray& grad) const {
+			return this->get_override("calcOverlapGradient")(boost::ref(coords), boost::ref(grad));
 		}
 	};
 }
@@ -124,22 +75,23 @@ void CDPLPythonShape::exportGaussianShapeOverlapFunction()
     using namespace boost;
     using namespace CDPL;
 
-    python::class_<GaussianShapeOverlapFunctionWrapper, GaussianShapeOverlapFunctionWrapper::SharedPointer, boost::noncopyable>("GaussianShapeOverlapFunction", python::no_init)
+    python::class_<GaussianShapeOverlapFunctionWrapper, GaussianShapeOverlapFunctionWrapper::SharedPointer,
+				   boost::noncopyable>("GaussianShapeOverlapFunction", python::no_init)
 		.def(python::init<>(python::arg("self")))
 		.def(CDPLPythonBase::ObjectIdentityCheckVisitor<Shape::GaussianShapeOverlapFunction>())
-		.def("setShapeFunction", &Shape::GaussianShapeOverlapFunction::setShapeFunction, &GaussianShapeOverlapFunctionWrapper::setShapeFunctionDef,
+		.def("setShapeFunction", python::pure_virtual(&Shape::GaussianShapeOverlapFunction::setShapeFunction),
 			 (python::arg("self"), python::arg("func"), python::arg("is_ref")), python::with_custodian_and_ward<1, 2>())
-		.def("getShapeFunction", &Shape::GaussianShapeOverlapFunction::getShapeFunction, &GaussianShapeOverlapFunctionWrapper::getShapeFunctionDef,
+		.def("getShapeFunction", python::pure_virtual(&Shape::GaussianShapeOverlapFunction::getShapeFunction),
 			 (python::arg("self"), python::arg("ref")), python::return_internal_reference<>())
-		.def("calcSelfOverlap", &Shape::GaussianShapeOverlapFunction::calcSelfOverlap,  &GaussianShapeOverlapFunctionWrapper::calcSelfOverlapDef,
+		.def("calcSelfOverlap", python::pure_virtual(&Shape::GaussianShapeOverlapFunction::calcSelfOverlap),
 			 (python::arg("self"), python::arg("ref")))
-		.def("calcOverlap", static_cast<double (Shape::GaussianShapeOverlapFunction::*)() const>(&Shape::GaussianShapeOverlapFunction::calcOverlap),
-			 &GaussianShapeOverlapFunctionWrapper::calcOverlapDef1,
+		.def("calcOverlap", python::pure_virtual(static_cast<double (Shape::GaussianShapeOverlapFunction::*)() const>
+												 (&Shape::GaussianShapeOverlapFunction::calcOverlap)),
 			 python::arg("self"))
-		.def("calcOverlap",static_cast<double (Shape::GaussianShapeOverlapFunction::*)(const Math::Matrix4D&, bool)>(&Shape::GaussianShapeOverlapFunction::calcOverlap),
-			 &GaussianShapeOverlapFunctionWrapper::calcOverlapDef2,
-			 (python::arg("self"), python::arg("xform"), python::arg("rigid_xform") = true))
-		.def("calcOverlapGradient", static_cast<double (Shape::GaussianShapeOverlapFunction::*)(const Math::Matrix4D&, Math::Vector3DArray&, bool)>(
-				 &Shape::GaussianShapeOverlapFunction::calcOverlapGradient), &GaussianShapeOverlapFunctionWrapper::calcOverlapGradientDef,
-			 (python::arg("self"), python::arg("xform"), python::arg("grad"), python::arg("rigid_xform") = true));
+		.def("calcOverlap", python::pure_virtual(static_cast<double (Shape::GaussianShapeOverlapFunction::*)(const Math::Vector3DArray&) const>
+												 (&Shape::GaussianShapeOverlapFunction::calcOverlap)),
+			 (python::arg("self"), python::arg("coords")))
+		.def("calcOverlapGradient", python::pure_virtual(static_cast<double (Shape::GaussianShapeOverlapFunction::*)(const Math::Vector3DArray&, Math::Vector3DArray&) const>
+														 (&Shape::GaussianShapeOverlapFunction::calcOverlapGradient)),
+			 (python::arg("self"), python::arg("coords"), python::arg("grad")));
 }

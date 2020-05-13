@@ -51,6 +51,8 @@ void CDPLPythonShape::exportGaussianShapeFunction()
 		.def("getMaxOrder", &Shape::GaussianShapeFunction::getMaxOrder, python::arg("self"))
 		.def("setDistanceCutoff", &Shape::GaussianShapeFunction::setDistanceCutoff, (python::arg("self"), python::arg("cutoff")))
 		.def("getDistanceCutoff", &Shape::GaussianShapeFunction::getDistanceCutoff, python::arg("self"))
+		.def("transform", &Shape::GaussianShapeFunction::transform, (python::arg("self"), python::arg("xform")))
+		.def("reset", &Shape::GaussianShapeFunction::reset, python::arg("self"))
 		.def("calcDensity", &Shape::GaussianShapeFunction::calcDensity, (python::arg("self"), python::arg("pos")))
 		.def("calcSurfaceArea", static_cast<double (Shape::GaussianShapeFunction::*)() const>(&Shape::GaussianShapeFunction::calcSurfaceArea),
 			 python::arg("self"))

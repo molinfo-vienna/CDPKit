@@ -49,7 +49,8 @@ namespace CDPL
 
 		class GaussianShape;
 		class GaussianProductList;
-		class GaussianShapeOverlapFunction;
+		class ExactGaussianShapeOverlapFunction;
+		class FastGaussianShapeOverlapFunction;
 		
 		/**
 		 * \addtogroup CDPL_SHAPE_FUNCTORS
@@ -84,7 +85,11 @@ namespace CDPL
 			void setShape(const GaussianShape& shape);
 
 			const GaussianShape* getShape() const;
-		
+
+			void transform(const Math::Matrix4D& xform);
+
+			void reset();
+			
 			double calcDensity(const Math::Vector3D& pos) const;
 			
 			double calcVolume() const;
@@ -100,7 +105,8 @@ namespace CDPL
 			GaussianShapeFunction& operator=(const GaussianShapeFunction& func);
 			
 		  private:
-			friend class GaussianShapeOverlapFunction;
+			friend class FastGaussianShapeOverlapFunction;
+			friend class ExactGaussianShapeOverlapFunction;
 			
 			const GaussianProductList* getProductList() const;
 			

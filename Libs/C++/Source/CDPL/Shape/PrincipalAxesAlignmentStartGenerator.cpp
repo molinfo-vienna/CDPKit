@@ -56,95 +56,127 @@ namespace
 }
 
 
-Shape::PrincipalAxesAlignmentStartGenerator::PrincipalAxesAlignmentStartGenerator():
-	toRefTransform(Math::IdentityMatrix<double>(4, 4))
+Shape::PrincipalAxesAlignmentStartGenerator::PrincipalAxesAlignmentStartGenerator()
 {}
 
-void Shape::PrincipalAxesAlignmentStartGenerator::setup(const GaussianShapeFunction& ref_shape_func)
+void Shape::PrincipalAxesAlignmentStartGenerator::setup(GaussianShapeFunction& ref_shape_func, Math::Matrix4D& to_ref_xform)
 {
 	if (!ref_shape_func.getShape() || ref_shape_func.getShape()->getNumElements() == 0) { // sanity check
-		toRefTransform.assign(Math::IdentityMatrix<double>(4, 4));
+		to_ref_xform.assign(Math::IdentityMatrix<double>(4, 4));
 		return;
 	}
+
+	ref_shape_func.reset();
 	
 	Math::Vector3D ctr, x_axis, y_axis, z_axis, shape_dims;
 
 	calcAlignmentAxes(ref_shape_func, ctr, x_axis, y_axis, z_axis, shape_dims);
 
-	Math::Matrix4D::ArrayPointer ref_xform_data = toRefTransform.getData();
+	Math::Matrix4D::ArrayPointer xform_data = to_ref_xform.getData();
 	
-	ref_xform_data[0][0] = x_axis(0);
-	ref_xform_data[1][0] = x_axis(1);
-	ref_xform_data[2][0] = x_axis(2);
+	xform_data[0][0] = x_axis(0);
+	xform_data[1][0] = x_axis(1);
+	xform_data[2][0] = x_axis(2);
 
-	ref_xform_data[0][1] = y_axis(0);
-	ref_xform_data[1][1] = y_axis(1);
-	ref_xform_data[2][1] = y_axis(2);
+	xform_data[0][1] = y_axis(0);
+	xform_data[1][1] = y_axis(1);
+	xform_data[2][1] = y_axis(2);
 
-	ref_xform_data[0][2] = z_axis(0);
-	ref_xform_data[1][2] = z_axis(1);
-	ref_xform_data[2][2] = z_axis(2);
+	xform_data[0][2] = z_axis(0);
+	xform_data[1][2] = z_axis(1);
+	xform_data[2][2] = z_axis(2);
 
-	ref_xform_data[0][3] = ctr(0);
-	ref_xform_data[1][3] = ctr(1);
-	ref_xform_data[2][3] = ctr(2);	
+	xform_data[0][3] = ctr(0);
+	xform_data[1][3] = ctr(1);
+	xform_data[2][3] = ctr(2);
+
+	xform_data[3][0] = 0.0;
+	xform_data[3][1] = 0.0;
+	xform_data[3][2] = 0.0;
+	xform_data[3][3] = 1.0;
+
+	Math::Matrix4D to_ctr_xform;
+	xform_data = to_ctr_xform.getData();
+
+	xform_data[0][0] = x_axis(0);
+	xform_data[0][1] = x_axis(1);
+	xform_data[0][2] = x_axis(2);
+	
+	xform_data[1][0] = y_axis(0);
+	xform_data[1][1] = y_axis(1);
+	xform_data[1][2] = y_axis(2);
+	
+	xform_data[2][0] = z_axis(0);
+	xform_data[2][1] = z_axis(1);
+	xform_data[2][2] = z_axis(2);
+	
+	xform_data[3][3] = 1.0;
+
+	to_ctr_xform = to_ctr_xform * Math::TranslationMatrix<double>(4, -ctr(0), -ctr(1), -ctr(2));
+
+	ref_shape_func.transform(to_ctr_xform);
 }
 
-bool Shape::PrincipalAxesAlignmentStartGenerator::generate(const GaussianShapeFunction& func)
+bool Shape::PrincipalAxesAlignmentStartGenerator::generate(const GaussianShapeFunction& aligned_shape_func, Math::Matrix4D& ctr_xform)
 {
 	startTransforms.clear();
 
-	if (!func.getShape() || func.getShape()->getNumElements() == 0) // sanity check
+	if (!aligned_shape_func.getShape() || aligned_shape_func.getShape()->getNumElements() == 0) // sanity check
 		return false;
 
 	Math::Vector3D ctr, x_axis, y_axis, z_axis, shape_dims;
 
-	calcAlignmentAxes(func, ctr, x_axis, y_axis, z_axis, shape_dims);
+	calcAlignmentAxes(aligned_shape_func, ctr, x_axis, y_axis, z_axis, shape_dims);
+
+	Math::Matrix4D::ArrayPointer xform_data = ctr_xform.getData();
+
+	xform_data[0][0] = x_axis(0);
+	xform_data[0][1] = x_axis(1);
+	xform_data[0][2] = x_axis(2);
+	xform_data[0][3] = 0.0;
 	
-	Math::Matrix4D to_orig_xform;
-	Math::Matrix4D::ArrayPointer to_orig_xform_data = to_orig_xform.getData();
+	xform_data[1][0] = y_axis(0);
+	xform_data[1][1] = y_axis(1);
+	xform_data[1][2] = y_axis(2);
+	xform_data[1][3] = 0.0;
+	
+	xform_data[2][0] = z_axis(0);
+	xform_data[2][1] = z_axis(1);
+	xform_data[2][2] = z_axis(2);
+	xform_data[2][3] = 0.0;
+	
+	xform_data[3][0] = 0.0;
+	xform_data[3][1] = 0.0;
+	xform_data[3][2] = 0.0;
+	xform_data[3][3] = 1.0;
 
-	to_orig_xform_data[0][0] = x_axis(0);
-	to_orig_xform_data[0][1] = x_axis(1);
-	to_orig_xform_data[0][2] = x_axis(2);
-
-	to_orig_xform_data[1][0] = y_axis(0);
-	to_orig_xform_data[1][1] = y_axis(1);
-	to_orig_xform_data[1][2] = y_axis(2);
-
-	to_orig_xform_data[2][0] = z_axis(0);
-	to_orig_xform_data[2][1] = z_axis(1);
-	to_orig_xform_data[2][2] = z_axis(2);
-
-	to_orig_xform_data[3][3] = 1.0;
-
-	to_orig_xform = to_orig_xform * Math::TranslationMatrix<double>(4, -ctr(0), -ctr(1), -ctr(2));
+	ctr_xform = ctr_xform * Math::TranslationMatrix<double>(4, -ctr(0), -ctr(1), -ctr(2));
 
 	QuaternionTransformation start_xform_quat;
-	Math::Matrix4D start_xform_mtx(toRefTransform * to_orig_xform);
 
-	matrixToQuaternion(start_xform_mtx, start_xform_quat);
+	start_xform_quat[0] = 1.0;
+
 	startTransforms.push_back(start_xform_quat);
 
 	//
 	
-	start_xform_mtx.assign(toRefTransform * Math::RotationMatrix<double>(4, M_PI, 1.0, 0.0, 0.0) * to_orig_xform);
+	start_xform_quat[0] = 0.0;
+	start_xform_quat[1] = 1.0;
 
-	matrixToQuaternion(start_xform_mtx, start_xform_quat);
 	startTransforms.push_back(start_xform_quat);
 
 	//
+	
+	start_xform_quat[1] = 0.0;
+	start_xform_quat[2] = 1.0;
 
-	start_xform_mtx.assign(toRefTransform * Math::RotationMatrix<double>(4, M_PI, 0.0, 1.0, 0.0) * to_orig_xform);
-
-	matrixToQuaternion(start_xform_mtx, start_xform_quat);
 	startTransforms.push_back(start_xform_quat);
 	
 	//
 
-	start_xform_mtx.assign(toRefTransform * Math::RotationMatrix<double>(4, M_PI, 0.0, 0.0, 1.0) * to_orig_xform);
+	start_xform_quat[2] = 0.0;
+	start_xform_quat[3] = 1.0;
 
-	matrixToQuaternion(start_xform_mtx, start_xform_quat);
 	startTransforms.push_back(start_xform_quat);
 
 	return true;

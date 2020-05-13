@@ -43,6 +43,8 @@ namespace CDPL
     namespace Shape
     {
 
+		class GaussianProductList;
+		
 		/**
 		 * \addtogroup CDPL_SHAPE_FUNCTORS
 		 * @{
@@ -63,14 +65,31 @@ namespace CDPL
 
 			~ExactGaussianShapeOverlapFunction();
 
+			void setShapeFunction(const GaussianShapeFunction& func, bool is_ref);
+
+			const GaussianShapeFunction* getShapeFunction(bool ref) const;
+
+			double calcSelfOverlap(bool ref) const;
+			
+			double calcOverlap() const;
+
+			double calcOverlap(const Math::Vector3DArray& coords) const;
+
+			double calcOverlapGradient(const Math::Vector3DArray& coords, Math::Vector3DArray& grad) const;
+
 			ExactGaussianShapeOverlapFunction& operator=(const ExactGaussianShapeOverlapFunction& func);
 				
 		  private:
-			double calcOverlapImpl(const GaussianProductList* prod_list1, const GaussianProductList* prod_list2,
-								   const GaussianProductCenterArray& trans_prod_ctrs, bool orig_centers, bool rigid_xform) const;
-			double calcOverlapGradientImpl(const GaussianProductList* prod_list1, const GaussianProductList* prod_list2,
-										   const GaussianProductCenterArray& trans_prod_ctrs, Math::Vector3DArray::StorageType& grad,
-										   bool rigid_xform) const;
+			bool checkShapeFuncsNotNull() const;
+
+			double calcOverlap(const GaussianProductList* ref_prod_list, const GaussianProductList* ovl_prod_list) const;
+			double calcOverlap(const GaussianProductList* ref_prod_list, const GaussianProductList* ovl_prod_list,
+							   const Math::Vector3DArray& coords) const;
+			double calcOverlapGradient(const GaussianProductList* ref_prod_list, const GaussianProductList* ovl_prod_list,
+									   const Math::Vector3DArray& coords, Math::Vector3DArray& grad) const;
+
+			const GaussianShapeFunction* refShapeFunc;
+			const GaussianShapeFunction* ovlShapeFunc;
 		};
 
 		/**

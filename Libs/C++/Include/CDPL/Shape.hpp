@@ -38,7 +38,6 @@
 #include "CDPL/Shape/GaussianShapeOverlapFunction.hpp"
 #include "CDPL/Shape/ExactGaussianShapeOverlapFunction.hpp"
 #include "CDPL/Shape/FastGaussianShapeOverlapFunction.hpp"
-#include "CDPL/Shape/GaussianShapeAlignmentFunction.hpp"
 
 #include "CDPL/Shape/GaussianShapeAlignment.hpp"
 #include "CDPL/Shape/GaussianShapeAlignmentStartGenerator.hpp"

@@ -36,13 +36,16 @@ BOOST_PYTHON_MODULE(_shape)
 	using namespace CDPLPythonShape;
 
 	exportGaussianShape();
+
 	exportGaussianShapeFunction();
 	exportGaussianShapeOverlapFunction();
+
 	exportExactGaussianShapeOverlapFunction();
 	exportFastGaussianShapeOverlapFunction();
-	exportGaussianShapeAlignmentFunction();
+
 	exportGaussianShapeAlignmentStartGenerator();
 	exportPrincipalAxesAlignmentStartGenerator();
+
 	exportGaussianShapeAlignment();
 	
 	exportUtilityFunctions();

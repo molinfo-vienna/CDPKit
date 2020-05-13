@@ -38,7 +38,6 @@ SET(shape_MOD_SRCS
     GaussianShapeOverlapFunctionExport.cpp
     ExactGaussianShapeOverlapFunctionExport.cpp
     FastGaussianShapeOverlapFunctionExport.cpp
-    GaussianShapeAlignmentFunctionExport.cpp
     GaussianShapeAlignmentStartGeneratorExport.cpp
     PrincipalAxesAlignmentStartGeneratorExport.cpp
     GaussianShapeAlignmentExport.cpp

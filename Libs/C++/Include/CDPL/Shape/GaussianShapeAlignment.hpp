@@ -39,8 +39,9 @@
 #include "CDPL/Shape/APIPrefix.hpp"
 #include "CDPL/Shape/ExactGaussianShapeOverlapFunction.hpp"
 #include "CDPL/Shape/PrincipalAxesAlignmentStartGenerator.hpp"
-#include "CDPL/Shape/GaussianShapeAlignmentFunction.hpp"
+#include "CDPL/Shape/QuaternionTransformation.hpp"
 #include "CDPL/Math/Matrix.hpp"
+#include "CDPL/Math/VectorArray.hpp"
 #include "CDPL/Math/BFGSMinimizer.hpp"
 
 
@@ -89,11 +90,11 @@ namespace CDPL
 
 			GaussianShapeAlignment();
 
-			GaussianShapeAlignment(const GaussianShapeFunction& ref_shape_func);
+			GaussianShapeAlignment(GaussianShapeFunction& ref_shape_func);
 		
 			GaussianShapeAlignment(GaussianShapeOverlapFunction& overlap_func);
 
-			GaussianShapeAlignment(GaussianShapeOverlapFunction& overlap_func, const GaussianShapeFunction& ref_shape_func);
+			GaussianShapeAlignment(GaussianShapeOverlapFunction& overlap_func, GaussianShapeFunction& ref_shape_func);
 
 			~GaussianShapeAlignment();
 
@@ -105,9 +106,9 @@ namespace CDPL
 			
 			GaussianShapeAlignmentStartGenerator& getStartGenerator() const;
 			
-			void setReferenceShapeFunction(const GaussianShapeFunction& func);
+			void setReferenceShapeFunction(GaussianShapeFunction& func);
 
-			const GaussianShapeFunction* getReferenceShapeFunction() const;
+			GaussianShapeFunction* getReferenceShapeFunction() const;
 		
 			bool align(const GaussianShapeFunction& func);
 
@@ -124,14 +125,20 @@ namespace CDPL
 
 			GaussianShapeAlignment& operator=(const GaussianShapeAlignment& alignment);
 
+			double calcAlignmentFunctionValue(const QuaternionTransformation& xform_quat);
+			double calcAlignmentFunctionGradient(const QuaternionTransformation& xform_quat, QuaternionTransformation& xform_grad);
+			
 			typedef Math::BFGSMinimizer<QuaternionTransformation> BFGSMinimizer;
 
 			ExactGaussianShapeOverlapFunction     defOverlapFunc;
 			PrincipalAxesAlignmentStartGenerator  defStartGen;
 			GaussianShapeOverlapFunction*         overlapFunc;
 			GaussianShapeAlignmentStartGenerator* startGen;
-			const GaussianShapeFunction*          refShapeFunc;
-			GaussianShapeAlignmentFunction        alignmentFunc;
+			GaussianShapeFunction*                refShapeFunc;
+			Math::Matrix4D                        toRefPoseXForm;
+			Math::Vector3DArray                   startCoords;
+			Math::Vector3DArray                   transCoords;
+			Math::Vector3DArray                   coordsGradient;
 			BFGSMinimizer                         minimizer;
 			ResultList                            results;
 		};

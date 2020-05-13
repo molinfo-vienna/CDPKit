@@ -41,12 +41,12 @@ namespace
 		CDPL::Shape::GaussianShapeAlignmentStartGenerator, boost::python::wrapper<CDPL::Shape::GaussianShapeAlignmentStartGenerator> 
 	{
 
-		void setup(const CDPL::Shape::GaussianShapeFunction& func) {
-			this->get_override("setup")(boost::ref(func));
+		void setup(CDPL::Shape::GaussianShapeFunction& ref_shape_func, CDPL::Math::Matrix4D& to_ref_xform) {
+			this->get_override("setup")(boost::ref(ref_shape_func), boost::ref(to_ref_xform));
 		}
 
-		bool generate(const CDPL::Shape::GaussianShapeFunction& func) {
-			return this->get_override("generate")(boost::ref(func));
+		bool generate(const CDPL::Shape::GaussianShapeFunction& aligned_shape_func, CDPL::Math::Matrix4D& ctr_xform) {
+			return this->get_override("generate")(boost::ref(aligned_shape_func), boost::ref(ctr_xform));
 		}
 			
 		std::size_t getNumStartTransforms() const {
@@ -69,9 +69,9 @@ void CDPLPythonShape::exportGaussianShapeAlignmentStartGenerator()
 		.def(python::init<>(python::arg("self")))
 		.def(CDPLPythonBase::ObjectIdentityCheckVisitor<Shape::GaussianShapeAlignmentStartGenerator>())
 		.def("setup", python::pure_virtual(&Shape::GaussianShapeAlignmentStartGenerator::setup),
-			 (python::arg("self"), python::arg("func")))
+			 (python::arg("self"), python::arg("ref_shape_func"), python::arg("to_ref_xform")))
 		.def("generate", python::pure_virtual(&Shape::GaussianShapeAlignmentStartGenerator::generate),
-			 python::arg("self"))
+			 (python::arg("self"), python::arg("aligned_shape_func"), python::arg("ctr_xform")))
 		.def("getNumStartTransforms", python::pure_virtual(&Shape::GaussianShapeAlignmentStartGenerator::getNumStartTransforms),
 			 python::arg("self"))
 		.def("getStartTransform", python::pure_virtual(&Shape::GaussianShapeAlignmentStartGenerator::getStartTransform),

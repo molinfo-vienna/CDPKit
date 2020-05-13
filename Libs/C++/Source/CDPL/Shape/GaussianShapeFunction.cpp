@@ -48,7 +48,7 @@ namespace
 	{
 		Math::Vector3D::ConstPointer prod_ctr = prod_term->getCenter().getData();
 		double vol = prod_term->getVolume();
-
+		
 		if (prod_term->hasOddOrder()) {
 			ctr[0] += vol * prod_ctr[0];
 			ctr[1] += vol * prod_ctr[1];
@@ -67,7 +67,7 @@ namespace
 		double vol = prod_term->getVolume();
 		double diag_const = 1.0 / (2.0 * prod_term->getDelta());
 		double trans_prod_ctr[3] = { prod_ctr[0] - shape_ctr[0], prod_ctr[1] - shape_ctr[1], prod_ctr[2] - shape_ctr[2] };
-		
+
 		if (prod_term->hasOddOrder()) {
 			tensor[0][1] += trans_prod_ctr[0] * trans_prod_ctr[1] * vol;
 			tensor[0][2] += trans_prod_ctr[0] * trans_prod_ctr[2] * vol;
@@ -153,6 +153,32 @@ void Shape::GaussianShapeFunction::setShape(const GaussianShape& shape)
 const Shape::GaussianShape* Shape::GaussianShapeFunction::getShape() const
 {
 	return shape;
+}
+
+void Shape::GaussianShapeFunction::transform(const Math::Matrix4D& xform)
+{
+	Math::Matrix4D::ConstArrayPointer xform_data = xform.getData();
+	
+	for (GaussianProductList::ConstProductIterator p_it = prodList->getProductsBegin(), p_end = prodList->getProductsEnd(); p_it != p_end; ++p_it) {
+		GaussianProduct* prod = *p_it;
+
+		if (prod->getNumFactors() == 1)
+			Shape::transform(prod->getCenter().getData(), xform_data, shape->getElement(prod->getIndex()).getPosition().getData());
+		else
+			prod->init();
+	}
+}
+
+void Shape::GaussianShapeFunction::reset()
+{
+	for (GaussianProductList::ConstProductIterator p_it = prodList->getProductsBegin(), p_end = prodList->getProductsEnd(); p_it != p_end; ++p_it) {
+		GaussianProduct* prod = *p_it;
+
+		if (prod->getNumFactors() == 1)
+			prod->init(shape->getElement(prod->getIndex()));
+		else
+			prod->init();
+	}
 }
 
 double Shape::GaussianShapeFunction::calcDensity(const Math::Vector3D& pos) const
@@ -269,7 +295,7 @@ void Shape::GaussianShapeFunction::calcQuadrupoleTensor(const Math::Vector3D& ct
 				  boost::bind(&addQuadTensorContrib, _1, ctr.getData(), tensor_data));
 
 	copyUpperToLower(tensor_data);
-
+	
 	quad_tensor /= prodList->getVolume();
 }
 

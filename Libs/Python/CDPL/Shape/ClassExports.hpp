@@ -32,11 +32,13 @@ namespace CDPLPythonShape
 {
 
 	void exportGaussianShape();
+	
 	void exportGaussianShapeFunction();
+
 	void exportGaussianShapeOverlapFunction();
 	void exportExactGaussianShapeOverlapFunction();
 	void exportFastGaussianShapeOverlapFunction();
-	void exportGaussianShapeAlignmentFunction();
+
 	void exportGaussianShapeAlignmentStartGenerator();
 	void exportPrincipalAxesAlignmentStartGenerator();
 	void exportGaussianShapeAlignment();

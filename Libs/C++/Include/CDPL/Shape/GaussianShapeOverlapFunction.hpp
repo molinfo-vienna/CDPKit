@@ -31,15 +31,10 @@
 #ifndef CDPL_SHAPE_GAUSSIANSHAPEOVERLAPFUNCTION_HPP
 #define CDPL_SHAPE_GAUSSIANSHAPEOVERLAPFUNCTION_HPP
 
-#include <cstddef>
-#include <vector>
-
 #include <boost/shared_ptr.hpp>
 
 #include "CDPL/Shape/APIPrefix.hpp"
-#include "CDPL/Math/Vector.hpp"
 #include "CDPL/Math/VectorArray.hpp"
-#include "CDPL/Math/Matrix.hpp"
 
 
 namespace CDPL 
@@ -49,7 +44,6 @@ namespace CDPL
     {
 
 		class GaussianShapeFunction;
-		class GaussianProductList;
 		
 		/**
 		 * \addtogroup CDPL_SHAPE_FUNCTORS
@@ -62,47 +56,28 @@ namespace CDPL
 		  public:
 			typedef boost::shared_ptr<GaussianShapeOverlapFunction> SharedPointer;
 
-			virtual ~GaussianShapeOverlapFunction();
+			virtual ~GaussianShapeOverlapFunction() {}
 
-			virtual void setShapeFunction(const GaussianShapeFunction& func, bool is_ref);
+			virtual void setShapeFunction(const GaussianShapeFunction& func, bool is_ref) = 0;
 
-			virtual const GaussianShapeFunction* getShapeFunction(bool ref) const;
+			virtual const GaussianShapeFunction* getShapeFunction(bool ref) const = 0;
 
-			virtual double calcSelfOverlap(bool ref) const;
+			virtual double calcSelfOverlap(bool ref) const = 0;
 			
-			virtual double calcOverlap() const;
+			virtual double calcOverlap() const = 0;
 
-			virtual double calcOverlap(const Math::Matrix4D& xform, bool rigid_xform = true);
+			virtual double calcOverlap(const Math::Vector3DArray& coords) const = 0;
 
-			virtual double calcOverlapGradient(const Math::Matrix4D& xform, Math::Vector3DArray& grad, bool rigid_xform = true);
+			virtual double calcOverlapGradient(const Math::Vector3DArray& coords, Math::Vector3DArray& grad) const = 0;
 
 		  protected:
-			typedef std::vector<Math::Vector3D> GaussianProductCenterArray; 
+			GaussianShapeOverlapFunction() {}
 
-			GaussianShapeOverlapFunction();
+			GaussianShapeOverlapFunction(const GaussianShapeOverlapFunction& func) {}
 
-			GaussianShapeOverlapFunction(const GaussianShapeOverlapFunction& func);
-			
-			GaussianShapeOverlapFunction(const GaussianShapeFunction& ref_shape_func,
-										 const GaussianShapeFunction& ovl_shape_func);
-
-			GaussianShapeOverlapFunction& operator=(const GaussianShapeOverlapFunction& func);
-
-		  private:
-			bool checkShapeFuncsNotNull() const;
-
-			void prepareOverlapCalc(const Math::Matrix4D& xform);
-			void prepareGradientCalc(const Math::Matrix4D& xform, Math::Vector3DArray& grad);
-			
-			virtual double calcOverlapImpl(const GaussianProductList* prod_list1, const GaussianProductList* prod_list2,
-										   const GaussianProductCenterArray& trans_prod_ctrs, bool orig_centers, bool rigid_xform) const;
-			virtual double calcOverlapGradientImpl(const GaussianProductList* prod_list1, const GaussianProductList* prod_list2,
-												   const GaussianProductCenterArray& trans_prod_ctrs, Math::Vector3DArray::StorageType& grad,
-												   bool rigid_xform) const;
-
-			const GaussianShapeFunction* refShapeFunc;
-			const GaussianShapeFunction* ovlShapeFunc;
-			GaussianProductCenterArray   prodCenters;
+			GaussianShapeOverlapFunction& operator=(const GaussianShapeOverlapFunction& func) {
+				return *this;
+			}
 		};
 
 		/**

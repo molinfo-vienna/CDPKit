@@ -35,6 +35,7 @@
 #include "CDPL/Math/AffineTransform.hpp"
 
 #include "TestData.hpp"
+#include "../Utilities.hpp"
 
 
 namespace
@@ -61,9 +62,12 @@ BOOST_AUTO_TEST_CASE(GaussianShapeOverlapFunctionTest)
 	FastGaussianShapeOverlapFunction fast_overlap_func;
 	GaussianShapeFunction shape_func1, shape_func2;
 	Math::Vector3DArray overlap_grad;
-
+	Math::Vector3DArray shape_elem_coords;
+	
 	shape_func1.setShape(*TestData::getShapeData("1dwc_MIT", 2.7));
 	shape_func2 = shape_func1;
+
+	getCoordinates(*shape_func2.getShape(), shape_elem_coords);
 	
 	exact_overlap_func.setShapeFunction(shape_func1, true);
 	exact_overlap_func.setShapeFunction(shape_func2, false);
@@ -71,14 +75,14 @@ BOOST_AUTO_TEST_CASE(GaussianShapeOverlapFunctionTest)
 	fast_overlap_func.setShapeFunction(shape_func2, false);
 
 	BOOST_CHECK_CLOSE(exact_overlap_func.calcOverlap(), 341.132, 0.001);
-	BOOST_CHECK_CLOSE(exact_overlap_func.calcOverlap(Math::IdentityMatrix<double>(4, 4)), 341.132, 0.001);
-	BOOST_CHECK_CLOSE(exact_overlap_func.calcOverlapGradient(Math::IdentityMatrix<double>(4, 4), overlap_grad), 341.132, 0.001);
+	BOOST_CHECK_CLOSE(exact_overlap_func.calcOverlap(shape_elem_coords), 341.132, 0.001);
+	BOOST_CHECK_CLOSE(exact_overlap_func.calcOverlapGradient(shape_elem_coords, overlap_grad), 341.132, 0.001);
 	BOOST_CHECK_CLOSE(exact_overlap_func.calcSelfOverlap(true), 341.132, 0.001);
 	BOOST_CHECK_CLOSE(exact_overlap_func.calcSelfOverlap(false), 341.132, 0.001);
 
 	BOOST_CHECK_CLOSE(fast_overlap_func.calcOverlap(), 340.0125, 0.001);
-	BOOST_CHECK_CLOSE(fast_overlap_func.calcOverlap(Math::IdentityMatrix<double>(4, 4)), 340.0125, 0.001);
-	BOOST_CHECK_CLOSE(fast_overlap_func.calcOverlapGradient(Math::IdentityMatrix<double>(4, 4), overlap_grad), 340.0125, 0.001);
+	BOOST_CHECK_CLOSE(fast_overlap_func.calcOverlap(shape_elem_coords), 340.0125, 0.001);
+	BOOST_CHECK_CLOSE(fast_overlap_func.calcOverlapGradient(shape_elem_coords, overlap_grad), 340.0125, 0.001);
 	BOOST_CHECK_CLOSE(fast_overlap_func.calcSelfOverlap(true), 340.0125, 0.001);
 	BOOST_CHECK_CLOSE(fast_overlap_func.calcSelfOverlap(false), 340.0125, 0.001);
 
@@ -86,35 +90,47 @@ BOOST_AUTO_TEST_CASE(GaussianShapeOverlapFunctionTest)
 	
 	shape_func1.setShape(*TestData::getShapeData("4phv_VAC", 2.7));
 	shape_func2 = shape_func1;
-	
+
+	getCoordinates(*shape_func2.getShape(), shape_elem_coords);
+
 	exact_overlap_func.setShapeFunction(shape_func1, true);
 	exact_overlap_func.setShapeFunction(shape_func2, false);
 	fast_overlap_func.setShapeFunction(shape_func1, true);
 	fast_overlap_func.setShapeFunction(shape_func2, false);
 
 	BOOST_CHECK_CLOSE(exact_overlap_func.calcOverlap(), 431.894, 0.001);
+	BOOST_CHECK_CLOSE(exact_overlap_func.calcOverlap(shape_elem_coords), 431.894, 0.001);
 
 	BOOST_CHECK_CLOSE(fast_overlap_func.calcOverlap(), 431.5642, 0.001);
+	BOOST_CHECK_CLOSE(fast_overlap_func.calcOverlap(shape_elem_coords), 431.5642, 0.001);
 
 //-
 	
 	shape_func1.setShape(*TestData::getShapeData("1tmn_0ZN", 2.7));
 	shape_func2 = shape_func1;
-	
+
+	getCoordinates(*shape_func2.getShape(), shape_elem_coords);
+
 	exact_overlap_func.setShapeFunction(shape_func1, true);
 	exact_overlap_func.setShapeFunction(shape_func2, false);
 	fast_overlap_func.setShapeFunction(shape_func1, true);
 	fast_overlap_func.setShapeFunction(shape_func2, false);
 
+	Math::Vector3DArray trans_shape_elem_coords;
+
+	trans_shape_elem_coords.resize(shape_elem_coords.getSize());
+
+	transform(trans_shape_elem_coords, Math::TranslationMatrix<double>(4, 1.0, 0.0, 0.0), shape_elem_coords);
+	
 	BOOST_CHECK_CLOSE(exact_overlap_func.calcOverlap(), 335.628, 0.001);
-	BOOST_CHECK_CLOSE(exact_overlap_func.calcOverlap(Math::TranslationMatrix<double>(4, 1.0, 0.0, 0.0)), 277.618, 0.001);
+	BOOST_CHECK_CLOSE(exact_overlap_func.calcOverlap(trans_shape_elem_coords), 277.618, 0.001);
 	
 	BOOST_CHECK_CLOSE(fast_overlap_func.calcOverlap(), 335.5454, 0.001);
-	BOOST_CHECK_CLOSE(fast_overlap_func.calcOverlap(Math::TranslationMatrix<double>(4, 1.0, 0.0, 0.0)), 277.9066, 0.001);
+	BOOST_CHECK_CLOSE(fast_overlap_func.calcOverlap(trans_shape_elem_coords), 278.3367, 0.001);
 	
 //-
 
-	BOOST_CHECK(exact_overlap_func.calcOverlapGradient(Math::IdentityMatrix<double>(4, 4), overlap_grad) == exact_overlap_func.calcOverlap());
+	BOOST_CHECK_CLOSE(exact_overlap_func.calcOverlapGradient(shape_elem_coords, overlap_grad), exact_overlap_func.calcOverlap(), 0.000001);
 
 	for (std::size_t i = 0, num_elem = shape_func2.getShape()->getNumElements(); i < num_elem; i++) {
 		GaussianShape::Element& elem = const_cast<GaussianShape::Element&>(shape_func2.getShape()->getElement(i));
@@ -149,7 +165,7 @@ BOOST_AUTO_TEST_CASE(GaussianShapeOverlapFunctionTest)
 
 	fast_overlap_func.fastExpFunction(false);
 	
-	BOOST_CHECK(fast_overlap_func.calcOverlapGradient(Math::IdentityMatrix<double>(4, 4), overlap_grad) == fast_overlap_func.calcOverlap());
+	BOOST_CHECK_CLOSE(fast_overlap_func.calcOverlapGradient(shape_elem_coords, overlap_grad), fast_overlap_func.calcOverlap(), 0.0001);
 
 	for (std::size_t i = 0, num_elem = shape_func2.getShape()->getNumElements(); i < num_elem; i++) {
 		GaussianShape::Element& elem = const_cast<GaussianShape::Element&>(shape_func2.getShape()->getElement(i));

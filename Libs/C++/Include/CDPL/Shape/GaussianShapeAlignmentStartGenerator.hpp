@@ -35,6 +35,7 @@
 
 #include "CDPL/Shape/APIPrefix.hpp"
 #include "CDPL/Shape/QuaternionTransformation.hpp"
+#include "CDPL/Math/Matrix.hpp"
 
 
 namespace CDPL 
@@ -56,9 +57,9 @@ namespace CDPL
 		  public:
 			virtual ~GaussianShapeAlignmentStartGenerator() {}
 
-			virtual void setup(const GaussianShapeFunction& ref_shape_func) = 0;
+			virtual void setup(GaussianShapeFunction& ref_shape_func, Math::Matrix4D& to_ref_xform) = 0;
 
-			virtual bool generate(const GaussianShapeFunction& func) = 0;
+			virtual bool generate(const GaussianShapeFunction& aligned_shape_func, Math::Matrix4D& ctr_xform) = 0;
 			
 			virtual std::size_t getNumStartTransforms() const = 0;
 
