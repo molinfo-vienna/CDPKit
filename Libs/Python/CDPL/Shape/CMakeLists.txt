@@ -41,6 +41,8 @@ SET(shape_MOD_SRCS
     GaussianShapeAlignmentStartGeneratorExport.cpp
     PrincipalAxesAlignmentStartGeneratorExport.cpp
     GaussianShapeAlignmentExport.cpp
+
+    SymmetryClassExport.cpp
     
     UtilityFunctionExport.cpp
     GaussianShapeFunctionsExport.cpp

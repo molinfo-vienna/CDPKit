@@ -35,6 +35,8 @@
 
 #include "CDPL/Shape/APIPrefix.hpp"
 #include "CDPL/Shape/GaussianShapeAlignmentStartGenerator.hpp"
+#include "CDPL/Math/Vector.hpp"
+#include "CDPL/Math/QuaternionExpression.hpp"
 
 
 namespace CDPL 
@@ -53,10 +55,10 @@ namespace CDPL
 			
 		  public:
 			PrincipalAxesAlignmentStartGenerator();
-			
-			void setup(GaussianShapeFunction& ref_shape_func, Math::Matrix4D& to_ref_xform);
+				
+			void setReference(const GaussianShapeFunction& ref_shape_func, unsigned int sym_class);
 
-			bool generate(const GaussianShapeFunction& aligned_shape_func, Math::Matrix4D& ctr_xform);
+			bool generate(const GaussianShapeFunction& aligned_shape_func, unsigned int sym_class);
 			
 			std::size_t getNumStartTransforms() const;
 
@@ -65,7 +67,11 @@ namespace CDPL
 		  private:
 			typedef std::vector<QuaternionTransformation> StartTransformList;
 
+			template <typename QE>
+			void addStartTransform(const Math::QuaternionExpression<QE>& rot_quat);
+		
 			StartTransformList startTransforms;
+			unsigned int       refAxesSwapFlags;
 		};
 
 		/**

@@ -51,8 +51,7 @@ void CDPLPythonShape::exportGaussianShapeFunction()
 		.def("getMaxOrder", &Shape::GaussianShapeFunction::getMaxOrder, python::arg("self"))
 		.def("setDistanceCutoff", &Shape::GaussianShapeFunction::setDistanceCutoff, (python::arg("self"), python::arg("cutoff")))
 		.def("getDistanceCutoff", &Shape::GaussianShapeFunction::getDistanceCutoff, python::arg("self"))
-		.def("transform", &Shape::GaussianShapeFunction::transform, (python::arg("self"), python::arg("xform")))
-		.def("reset", &Shape::GaussianShapeFunction::reset, python::arg("self"))
+		.def("update", &Shape::GaussianShapeFunction::update, python::arg("self"))
 		.def("calcDensity", &Shape::GaussianShapeFunction::calcDensity, (python::arg("self"), python::arg("pos")))
 		.def("calcSurfaceArea", static_cast<double (Shape::GaussianShapeFunction::*)() const>(&Shape::GaussianShapeFunction::calcSurfaceArea),
 			 python::arg("self"))
@@ -61,6 +60,8 @@ void CDPLPythonShape::exportGaussianShapeFunction()
 		.def("calcCentroid", &Shape::GaussianShapeFunction::calcCentroid, (python::arg("self"), python::arg("ctr")))
 		.def("calcQuadrupoleTensor", &Shape::GaussianShapeFunction::calcQuadrupoleTensor,
 			 (python::arg("self"), python::arg("ctr"), python::arg("quad_tensor")))
+		.def_readonly("DEF_MAX_PRODUCT_ORDER", &Shape::GaussianShapeFunction::DEF_MAX_PRODUCT_ORDER)
+		.def_readonly("DEF_DISTANCE_CUTOFF", &Shape::GaussianShapeFunction::DEF_DISTANCE_CUTOFF)
 		.add_property("shape", python::make_function(&Shape::GaussianShapeFunction::getShape, python::return_internal_reference<>()),
 					  python::make_function(&Shape::GaussianShapeFunction::setShape, python::with_custodian_and_ward<1, 2>()))
 		.add_property("volume", &Shape::GaussianShapeFunction::calcVolume)

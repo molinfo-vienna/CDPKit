@@ -43,6 +43,8 @@
 #include "CDPL/Shape/GaussianShapeAlignmentStartGenerator.hpp"
 #include "CDPL/Shape/PrincipalAxesAlignmentStartGenerator.hpp"
 
+#include "CDPL/Shape/SymmetryClass.hpp"
+
 #include "CDPL/Shape/GaussianShapeFunctions.hpp"
 #include "CDPL/Shape/UtilityFunctions.hpp"
 

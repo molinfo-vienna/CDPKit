@@ -43,6 +43,8 @@ namespace CDPL
     namespace Shape
     {
 
+		class GaussianShapeFunction;
+		
 		/**
 		 * \addtogroup CDPL_SHAPE_FUNCTIONS
 		 * @{
@@ -52,8 +54,13 @@ namespace CDPL
 																   Math::Vector3D& eigen_vals);
 
 		CDPL_SHAPE_API void calcPrincipalAxes(const Math::Matrix3D& quad_tensor, Math::Vector3D& x_axis, Math::Vector3D& y_axis,
-											  Math::Vector3D& z_axis, Math::Vector3D& shape_dims);
+											  Math::Vector3D& z_axis, Math::Vector3D& moments);
 
+		CDPL_SHAPE_API unsigned int perceiveSymmetryClass(const Math::Vector3D& moments, double eq_thresh = 0.15);
+		
+		CDPL_SHAPE_API unsigned int calcCenterAlignmentTransforms(const Shape::GaussianShapeFunction& func, Math::Matrix4D& to_ctr_xform,
+																  Math::Matrix4D& from_ctr_xform, double mom_eq_thresh = 0.15);
+		
 		CDPL_SHAPE_API void matrixToQuaternion(const Math::Matrix4D& mtx, QuaternionTransformation& quat);
 
 		CDPL_SHAPE_API void quaternionToMatrix(const QuaternionTransformation& quat, Math::Matrix4D& mtx);

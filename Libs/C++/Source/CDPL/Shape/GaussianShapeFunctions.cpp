@@ -28,6 +28,9 @@
 
 #include "CDPL/Shape/GaussianShapeFunctions.hpp"
 #include "CDPL/Shape/GaussianShape.hpp"
+#include "CDPL/Shape/GaussianShapeFunction.hpp"
+#include "CDPL/Shape/UtilityFunctions.hpp"
+#include "CDPL/Shape/SymmetryClass.hpp"
 #include "CDPL/Chem/AtomContainer.hpp"
 #include "CDPL/Chem/Atom.hpp"
 #include "CDPL/Chem/AtomFunctions.hpp"
@@ -38,6 +41,8 @@
 #include "CDPL/Pharm/Feature.hpp"
 #include "CDPL/Pharm/FeatureFunctions.hpp"
 #include "CDPL/Pharm/FeatureType.hpp"
+
+#include "Utilities.hpp"
 
 
 using namespace CDPL;
@@ -107,4 +112,37 @@ void Shape::generateGaussianShape(const Pharm::FeatureContainer& features, Gauss
 				shape.addElement(get3DCoordinates(feature), 1.0, feature_type + 1, p);
 		}
 	}
+}
+
+void Shape::transform(GaussianShape& shape, const Math::Matrix4D& xform)
+{
+	Math::Vector3D xf_pos;
+	Math::Vector3D::Pointer xf_pos_data = xf_pos.getData();
+	Math::Matrix4D::ConstArrayPointer xform_data = xform.getData();
+	
+	for (GaussianShape::ElementIterator it = shape.getElementsBegin(), end = shape.getElementsEnd(); it != end; ++it) {
+		GaussianShape::Element& elem = *it;
+
+		transform(xf_pos_data, xform_data, elem.getPosition().getData());
+		elem.setPosition(xf_pos);
+	}
+}
+
+unsigned int Shape::prepareForAlignment(GaussianShape& shape, GaussianShapeFunction& func, Math::Matrix4D& xform,
+										bool is_ref, double mom_eq_thresh)
+{
+	Math::Matrix4D to_ctr_xform;
+	Math::Matrix4D from_ctr_xform;
+
+	unsigned int sym_class = calcCenterAlignmentTransforms(func, to_ctr_xform, from_ctr_xform, mom_eq_thresh);
+
+	if (sym_class == SymmetryClass::UNDEF)
+		return SymmetryClass::UNDEF;
+
+	transform(shape, to_ctr_xform);
+	func.update();
+		
+	xform.assign(is_ref ? from_ctr_xform : to_ctr_xform);
+	
+	return sym_class;
 }

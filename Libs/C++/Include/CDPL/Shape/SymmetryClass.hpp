@@ -1,7 +1,7 @@
 /* -*- mode: c++; c-basic-offset: 4; tab-width: 4; indent-tabs-mode: t -*- */
 
 /* 
- * Module.cpp 
+ * SymmetryClass.hpp 
  *
  * This file is part of the Chemical Data Processing Toolkit
  *
@@ -23,33 +23,45 @@
  * Boston, MA 02111-1307, USA.
  */
 
+/**
+ * \file
+ * \brief Definition of constants in namespace CDPL::Shape::SymmetryClass.
+ */
 
-#include <boost/python.hpp>
-
-#include "ClassExports.hpp"
-#include "FunctionExports.hpp"
-#include "NamespaceExports.hpp"
+#ifndef CDPL_SHAPE_SYMMETRYCLASS_HPP
+#define CDPL_SHAPE_SYMMETRYCLASS_HPP
 
 
-BOOST_PYTHON_MODULE(_shape)
+namespace CDPL 
 {
-	using namespace CDPLPythonShape;
 
-	exportGaussianShape();
+    namespace Shape
+    {
 
-	exportGaussianShapeFunction();
-	exportGaussianShapeOverlapFunction();
-
-	exportExactGaussianShapeOverlapFunction();
-	exportFastGaussianShapeOverlapFunction();
-
-	exportGaussianShapeAlignmentStartGenerator();
-	exportPrincipalAxesAlignmentStartGenerator();
-
-	exportGaussianShapeAlignment();
-
-	exportSymmetryClasses();
+	/**
+	 * \addtogroup CDPL_SHAPE_CONSTANTS
+	 * @{
+	 */
 	
-	exportUtilityFunctions();
-	exportGaussianShapeFunctions();
+	namespace SymmetryClass
+	{
+			
+
+	    const unsigned int UNDEF       = 0;
+
+	    const unsigned int ASYMMETRIC  = 1;
+
+	    const unsigned int OBLATE      = 2;
+
+	    const unsigned int PROLATE     = 3;
+
+	    const unsigned int SPHERICAL   = 4;
+	}
+
+	/**
+	 * @}
+	 */
+    }
 }
+
+#endif // CDPL_SHAPE_SYMMETRYCLASS_HPP

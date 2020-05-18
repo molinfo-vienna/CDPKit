@@ -1,7 +1,7 @@
 /* -*- mode: c++; c-basic-offset: 4; tab-width: 4; indent-tabs-mode: t -*- */
 
 /* 
- * Module.cpp 
+ * SymmetryClassExport.cpp 
  *
  * This file is part of the Chemical Data Processing Toolkit
  *
@@ -26,30 +26,27 @@
 
 #include <boost/python.hpp>
 
-#include "ClassExports.hpp"
-#include "FunctionExports.hpp"
+#include "CDPL/Shape/SymmetryClass.hpp"
+
 #include "NamespaceExports.hpp"
 
 
-BOOST_PYTHON_MODULE(_shape)
+namespace 
 {
-	using namespace CDPLPythonShape;
 
-	exportGaussianShape();
+    struct SymmetryClass {};
+}
 
-	exportGaussianShapeFunction();
-	exportGaussianShapeOverlapFunction();
 
-	exportExactGaussianShapeOverlapFunction();
-	exportFastGaussianShapeOverlapFunction();
+void CDPLPythonShape::exportSymmetryClasses()
+{
+    using namespace boost;
+    using namespace CDPL;
 
-	exportGaussianShapeAlignmentStartGenerator();
-	exportPrincipalAxesAlignmentStartGenerator();
-
-	exportGaussianShapeAlignment();
-
-	exportSymmetryClasses();
-	
-	exportUtilityFunctions();
-	exportGaussianShapeFunctions();
+    python::class_<SymmetryClass, boost::noncopyable>("SymmetryClass", python::no_init)
+	.def_readonly("UNDEF", &Shape::SymmetryClass::UNDEF)
+	.def_readonly("ASYMMETRIC", &Shape::SymmetryClass::ASYMMETRIC)
+	.def_readonly("OBLATE", &Shape::SymmetryClass::OBLATE)
+	.def_readonly("PROLATE", &Shape::SymmetryClass::PROLATE)
+	.def_readonly("SPHERICAL", &Shape::SymmetryClass::SPHERICAL);
 }

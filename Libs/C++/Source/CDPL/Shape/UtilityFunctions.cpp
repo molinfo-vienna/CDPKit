@@ -30,8 +30,12 @@
 #include <algorithm>
 
 #include "CDPL/Shape/UtilityFunctions.hpp"
+#include "CDPL/Shape/GaussianShape.hpp"
+#include "CDPL/Shape/GaussianShapeFunction.hpp"
+#include "CDPL/Shape/SymmetryClass.hpp"
 #include "CDPL/Math/JacobiDiagonalization.hpp"
 #include "CDPL/Math/MatrixProxy.hpp"
+#include "CDPL/Math/AffineTransform.hpp"
 
 
 using namespace CDPL;
@@ -46,25 +50,27 @@ void Shape::calcQuadrupoleTensorEigenDecomposition(const Math::Matrix3D& quad_te
 }
 
 void Shape::calcPrincipalAxes(const Math::Matrix3D& quad_tensor, Math::Vector3D& x_axis, Math::Vector3D& y_axis,
-			      Math::Vector3D& z_axis, Math::Vector3D& shape_dims)
+			      Math::Vector3D& z_axis, Math::Vector3D& moments)
 {
     Math::Matrix3D eigen_vecs;
 	
-    calcQuadrupoleTensorEigenDecomposition(quad_tensor, eigen_vecs, shape_dims);
+    calcQuadrupoleTensorEigenDecomposition(quad_tensor, eigen_vecs, moments);
 
-    Math::Vector3D::Pointer shape_dims_data = shape_dims.getData();
-    std::pair<double, int> ordered_shape_dims[3] = { std::make_pair(shape_dims_data[0], 0),
-						     std::make_pair(shape_dims_data[1], 1),
-						     std::make_pair(shape_dims_data[2], 2) };
+    Math::Vector3D::Pointer moments_data = moments.getData();
+    std::pair<double, int> ordered_moments[3] = {
+	    std::make_pair(moments_data[0], 0),
+		std::make_pair(moments_data[1], 1),
+		std::make_pair(moments_data[2], 2)
+	};
 
-    std::sort(ordered_shape_dims, ordered_shape_dims + 3);
+    std::sort(ordered_moments, ordered_moments + 3);
 
-    shape_dims_data[0] = ordered_shape_dims[2].first;
-    shape_dims_data[1] = ordered_shape_dims[1].first;
-    shape_dims_data[2] = ordered_shape_dims[0].first;
+    moments_data[0] = ordered_moments[2].first;
+    moments_data[1] = ordered_moments[1].first;
+    moments_data[2] = ordered_moments[0].first;
 	
-    x_axis.assign(column(eigen_vecs, ordered_shape_dims[2].second));
-    y_axis.assign(column(eigen_vecs, ordered_shape_dims[1].second));
+    x_axis.assign(column(eigen_vecs, ordered_moments[2].second));
+    y_axis.assign(column(eigen_vecs, ordered_moments[1].second));
     z_axis.assign(crossProd(x_axis, y_axis));
     y_axis.assign(crossProd(z_axis, x_axis));
 
@@ -72,7 +78,104 @@ void Shape::calcPrincipalAxes(const Math::Matrix3D& quad_tensor, Math::Vector3D&
     y_axis /= length(y_axis);
     z_axis /= length(z_axis);
 }
-			
+
+unsigned int Shape::perceiveSymmetryClass(const Math::Vector3D& moments, double eq_thresh)
+{
+	unsigned int sym_flags = 0;
+
+	for (std::size_t i = 0; i < 2; i++)
+		if (((moments[i] - moments[i + 1]) / moments[i]) <= eq_thresh)
+			sym_flags |= (1 << i);
+
+	switch (sym_flags) {
+
+		case 0:
+			return SymmetryClass::ASYMMETRIC;
+
+		case 0b01:
+			return SymmetryClass::PROLATE;
+
+		case 0b10:
+			return SymmetryClass::OBLATE;
+
+		case 0b11:
+			return SymmetryClass::SPHERICAL;
+
+		default:
+			break;
+	}
+
+	return SymmetryClass::UNDEF;
+}
+
+unsigned int Shape::calcCenterAlignmentTransforms(const Shape::GaussianShapeFunction& func, Math::Matrix4D& to_ctr_xform,
+												  Math::Matrix4D& from_ctr_xform, double mom_eq_thresh)
+{
+	if (!func.getShape() || func.getShape()->getNumElements() == 0) { // sanity check
+		to_ctr_xform.assign(Math::IdentityMatrix<double>(4, 4));
+		from_ctr_xform.assign(Math::IdentityMatrix<double>(4, 4));
+
+		return SymmetryClass::UNDEF;
+	}
+
+	Math::Vector3D ctr, x_axis, y_axis, z_axis, moments;
+	Math::Matrix3D quad_tensor;
+
+	func.calcCentroid(ctr);
+	func.calcQuadrupoleTensor(ctr, quad_tensor);
+
+	calcPrincipalAxes(quad_tensor, x_axis, y_axis, z_axis, moments);
+	
+	Math::Matrix4D::ArrayPointer xform_data = from_ctr_xform.getData();
+	
+	xform_data[0][0] = x_axis(0);
+	xform_data[1][0] = x_axis(1);
+	xform_data[2][0] = x_axis(2);
+	
+	xform_data[0][1] = y_axis(0);
+	xform_data[1][1] = y_axis(1);
+	xform_data[2][1] = y_axis(2);
+	
+	xform_data[0][2] = z_axis(0);
+	xform_data[1][2] = z_axis(1);
+	xform_data[2][2] = z_axis(2);
+
+	xform_data[0][3] = ctr(0);
+	xform_data[1][3] = ctr(1);
+	xform_data[2][3] = ctr(2);
+
+	xform_data[3][0] = 0.0;
+	xform_data[3][1] = 0.0;
+	xform_data[3][2] = 0.0;
+	xform_data[3][3] = 1.0;
+
+	xform_data = to_ctr_xform.getData();
+
+	xform_data[0][0] = x_axis(0);
+	xform_data[0][1] = x_axis(1);
+	xform_data[0][2] = x_axis(2);
+	xform_data[0][3] = 0.0;
+	
+	xform_data[1][0] = y_axis(0);
+	xform_data[1][1] = y_axis(1);
+	xform_data[1][2] = y_axis(2);
+	xform_data[1][3] = 0.0;
+	
+	xform_data[2][0] = z_axis(0);
+	xform_data[2][1] = z_axis(1);
+	xform_data[2][2] = z_axis(2);
+	xform_data[2][3] = 0.0;
+
+	xform_data[3][0] = 0.0;
+	xform_data[3][1] = 0.0;
+	xform_data[3][2] = 0.0;
+	xform_data[3][3] = 1.0;
+
+	to_ctr_xform = to_ctr_xform * Math::TranslationMatrix<double>(4, -ctr(0), -ctr(1), -ctr(2));
+
+	return perceiveSymmetryClass(moments, mom_eq_thresh);
+}
+	
 void Shape::matrixToQuaternion(const Math::Matrix4D& mtx, QuaternionTransformation& quat)
 {
     Math::Matrix4D::ConstArrayPointer mtx_data = mtx.getData();

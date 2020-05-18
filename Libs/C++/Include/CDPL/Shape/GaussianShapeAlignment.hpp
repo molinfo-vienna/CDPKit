@@ -90,11 +90,7 @@ namespace CDPL
 
 			GaussianShapeAlignment();
 
-			GaussianShapeAlignment(GaussianShapeFunction& ref_shape_func);
-		
-			GaussianShapeAlignment(GaussianShapeOverlapFunction& overlap_func);
-
-			GaussianShapeAlignment(GaussianShapeOverlapFunction& overlap_func, GaussianShapeFunction& ref_shape_func);
+			GaussianShapeAlignment(const GaussianShapeFunction& ref_shape_func, unsigned int sym_class);
 
 			~GaussianShapeAlignment();
 
@@ -106,11 +102,11 @@ namespace CDPL
 			
 			GaussianShapeAlignmentStartGenerator& getStartGenerator() const;
 			
-			void setReferenceShapeFunction(GaussianShapeFunction& func);
+			void setReferenceShapeFunction(const GaussianShapeFunction& func, unsigned int sym_class);
 
-			GaussianShapeFunction* getReferenceShapeFunction() const;
+			const GaussianShapeFunction* getReferenceShapeFunction() const;
 		
-			bool align(const GaussianShapeFunction& func);
+			bool align(const GaussianShapeFunction& func, unsigned int sym_class);
 
 			std::size_t getNumResults() const;
 
@@ -134,11 +130,11 @@ namespace CDPL
 			PrincipalAxesAlignmentStartGenerator  defStartGen;
 			GaussianShapeOverlapFunction*         overlapFunc;
 			GaussianShapeAlignmentStartGenerator* startGen;
-			GaussianShapeFunction*                refShapeFunc;
-			Math::Matrix4D                        toRefPoseXForm;
-			Math::Vector3DArray                   startCoords;
-			Math::Vector3DArray                   transCoords;
-			Math::Vector3DArray                   coordsGradient;
+			const GaussianShapeFunction*          refShapeFunc;
+			unsigned int                          refShapeSymClass;
+			Math::Vector3DArray                   startPoseCoords;
+			Math::Vector3DArray                   optPoseCoords;
+			Math::Vector3DArray                   optPoseCoordsGrad;
 			BFGSMinimizer                         minimizer;
 			ResultList                            results;
 		};

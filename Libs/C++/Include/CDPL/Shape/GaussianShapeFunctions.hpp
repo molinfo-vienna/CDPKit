@@ -32,6 +32,7 @@
 #define CDPL_SHAPE_GAUSSIANSHAPEFUNCTIONS_HPP
 
 #include "CDPL/Shape/APIPrefix.hpp"
+#include "CDPL/Math/Matrix.hpp"
 
 
 namespace CDPL 
@@ -53,6 +54,7 @@ namespace CDPL
     {
 
 		class GaussianShape;
+		class GaussianShapeFunction;
 		
 		/**
 		 * \addtogroup CDPL_SHAPE_FUNCTIONS
@@ -63,8 +65,12 @@ namespace CDPL
 												  bool append = false, bool inc_h = false, bool all_carbon = false, double p = 2.7);
 
 		CDPL_SHAPE_API void generateGaussianShape(const Pharm::FeatureContainer& features, GaussianShape& shape,
-												  bool append = false, double radius = -1.0, bool inc_xv = false, double p = 3.5);
+												  bool append = false, double radius = -1.0, bool inc_xv = false, double p = 5.0);
+
+		CDPL_SHAPE_API void transform(GaussianShape& shape, const Math::Matrix4D& xform);
 		
+		CDPL_SHAPE_API unsigned int prepareForAlignment(GaussianShape& shape, GaussianShapeFunction& func, Math::Matrix4D& xform,
+														bool is_ref, double mom_eq_thresh = 0.15);
 		/**
 		 * @}
 		 */

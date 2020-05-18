@@ -86,9 +86,7 @@ namespace CDPL
 
 			const GaussianShape* getShape() const;
 
-			void transform(const Math::Matrix4D& xform);
-
-			void reset();
+			void update();
 			
 			double calcDensity(const Math::Vector3D& pos) const;
 			

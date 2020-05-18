@@ -33,6 +33,7 @@
 #include "CDPL/Shape/GaussianShapeFunction.hpp"
 #include "CDPL/Shape/GaussianShape.hpp"
 #include "CDPL/Shape/UtilityFunctions.hpp"
+#include "CDPL/Shape/SymmetryClass.hpp"
 #include "CDPL/Base/Exceptions.hpp"
 
 #include "Utilities.hpp"
@@ -49,31 +50,17 @@ namespace
 
 
 Shape::GaussianShapeAlignment::GaussianShapeAlignment():
-	overlapFunc(&defOverlapFunc), startGen(&defStartGen), refShapeFunc(0),
+	overlapFunc(&defOverlapFunc), startGen(&defStartGen), refShapeFunc(0), refShapeSymClass(SymmetryClass::UNDEF),
 	minimizer(boost::bind(&GaussianShapeAlignment::calcAlignmentFunctionValue, this, _1),
 			  boost::bind(&GaussianShapeAlignment::calcAlignmentFunctionGradient, this, _1, _2))
 {}
 
-Shape::GaussianShapeAlignment::GaussianShapeAlignment(GaussianShapeFunction& ref_shape_func):
+Shape::GaussianShapeAlignment::GaussianShapeAlignment(const GaussianShapeFunction& ref_shape_func, unsigned int sym_class):
 	overlapFunc(&defOverlapFunc), startGen(&defStartGen),
 	minimizer(boost::bind(&GaussianShapeAlignment::calcAlignmentFunctionValue, this, _1),
 			  boost::bind(&GaussianShapeAlignment::calcAlignmentFunctionGradient, this, _1, _2))
 {
-   setReferenceShapeFunction(ref_shape_func);
-}
-
-Shape::GaussianShapeAlignment::GaussianShapeAlignment(GaussianShapeOverlapFunction& overlap_func):
-	overlapFunc(&overlap_func), startGen(&defStartGen), refShapeFunc(0),
-	minimizer(boost::bind(&GaussianShapeAlignment::calcAlignmentFunctionValue, this, _1),
-			  boost::bind(&GaussianShapeAlignment::calcAlignmentFunctionGradient, this, _1, _2))
-{}
-
-Shape::GaussianShapeAlignment::GaussianShapeAlignment(GaussianShapeOverlapFunction& overlap_func, GaussianShapeFunction& ref_shape_func):
-	overlapFunc(&overlap_func), startGen(&defStartGen),
-	minimizer(boost::bind(&GaussianShapeAlignment::calcAlignmentFunctionValue, this, _1),
-			  boost::bind(&GaussianShapeAlignment::calcAlignmentFunctionGradient, this, _1, _2))
-{
-   setReferenceShapeFunction(ref_shape_func);
+   setReferenceShapeFunction(ref_shape_func,  sym_class);
 }
 
 Shape::GaussianShapeAlignment::~GaussianShapeAlignment() {}
@@ -96,7 +83,7 @@ void Shape::GaussianShapeAlignment::setStartGenerator(PrincipalAxesAlignmentStar
 	startGen = &gen;
 
 	if (refShapeFunc)
-		startGen->setup(*refShapeFunc, toRefPoseXForm);
+		startGen->setReference(*refShapeFunc, refShapeSymClass);
 }
 			
 Shape::GaussianShapeAlignmentStartGenerator& Shape::GaussianShapeAlignment::getStartGenerator() const
@@ -104,20 +91,21 @@ Shape::GaussianShapeAlignmentStartGenerator& Shape::GaussianShapeAlignment::getS
 	return *startGen;
 }
 
-void Shape::GaussianShapeAlignment::setReferenceShapeFunction(GaussianShapeFunction& func)
+void Shape::GaussianShapeAlignment::setReferenceShapeFunction(const GaussianShapeFunction& func, unsigned int sym_class)
 {
 	refShapeFunc = &func;
+	refShapeSymClass = sym_class;
 	
     overlapFunc->setShapeFunction(func, true);
-	startGen->setup(func, toRefPoseXForm);
+	startGen->setReference(*refShapeFunc, refShapeSymClass);
 }
 
-Shape::GaussianShapeFunction* Shape::GaussianShapeAlignment::getReferenceShapeFunction() const
+const Shape::GaussianShapeFunction* Shape::GaussianShapeAlignment::getReferenceShapeFunction() const
 {
     return refShapeFunc;
 }
 
-bool Shape::GaussianShapeAlignment::align(const GaussianShapeFunction& func)
+bool Shape::GaussianShapeAlignment::align(const GaussianShapeFunction& func, unsigned int sym_class)
 {
 	results.clear();
 
@@ -127,18 +115,12 @@ bool Shape::GaussianShapeAlignment::align(const GaussianShapeFunction& func)
 	if (!func.getShape() || func.getShape()->getNumElements() == 0)
 		return false;
 
-	Math::Matrix4D ctr_xform;
-	
-	if (!startGen->generate(func, ctr_xform))
+	if (!startGen->generate(func, sym_class))
 		return false;
 
-	getCoordinates(*func.getShape(), startCoords);
+	getCoordinates(*func.getShape(), startPoseCoords);
 
-	transCoords.resize(startCoords.getSize());
-
-	transform(transCoords, ctr_xform, startCoords);
-
-	transCoords.swap(startCoords);
+	optPoseCoords.resize(startPoseCoords.getSize());
 	
 	std::size_t num_starts = startGen->getNumStartTransforms();
 	
@@ -159,13 +141,9 @@ bool Shape::GaussianShapeAlignment::align(const GaussianShapeFunction& func)
 	    if (boost::math::isfinite(minimizer.getFunctionValue())) {  // sanity check
 			normalize(opt_xform);
 			quaternionToMatrix(opt_xform, opt_xform_mtx);
-			transform(transCoords, opt_xform_mtx, startCoords);
+			transform(optPoseCoords, opt_xform_mtx, startPoseCoords);
 
-			double opt_overlap = overlapFunc->calcOverlap(transCoords);
-	
-			opt_xform_mtx = toRefPoseXForm * opt_xform_mtx * ctr_xform;
-		
-			results.push_back(Result(opt_xform_mtx, opt_overlap));
+			results.push_back(Result(opt_xform_mtx, overlapFunc->calcOverlap(optPoseCoords)));
 		}
 	}
 	
@@ -206,9 +184,9 @@ double Shape::GaussianShapeAlignment::calcAlignmentFunctionValue(const Quaternio
 	quat_non_unity_pen *= 0.5 * QUATERNION_UNITY_DEVIATION_PENALTY_FACTOR * quat_non_unity_pen;
 
 	quaternionToMatrix(xform_quat, xform_mtx);
-	transform(transCoords, xform_mtx, startCoords);
+	transform(optPoseCoords, xform_mtx, startPoseCoords);
 	
-	return (quat_non_unity_pen - overlapFunc->calcOverlap(transCoords));	
+	return (quat_non_unity_pen - overlapFunc->calcOverlap(optPoseCoords));	
 }
 */
 double Shape::GaussianShapeAlignment::calcAlignmentFunctionValue(const QuaternionTransformation& xform_quat)
@@ -233,9 +211,9 @@ double Shape::GaussianShapeAlignment::calcAlignmentFunctionValue(const Quaternio
 		norm_xform_quat_data[i] = xform_quat_data[i];
 		
 	quaternionToMatrix(norm_xform_quat, xform_mtx);
-	transform(transCoords, xform_mtx, startCoords);
+	transform(optPoseCoords, xform_mtx, startPoseCoords);
 
-	return (quat_non_unity_pen - overlapFunc->calcOverlap(transCoords));
+	return (quat_non_unity_pen - overlapFunc->calcOverlap(optPoseCoords));
 }
 /*
 double Shape::GaussianShapeAlignment::calcAlignmentFunctionGradient(const QuaternionTransformation& xform_quat, QuaternionTransformation& xform_quat_grad)
@@ -247,13 +225,13 @@ double Shape::GaussianShapeAlignment::calcAlignmentFunctionGradient(const Quater
 	Math::Matrix4D xform_mtx;
 
 	quaternionToMatrix(xform_quat, xform_mtx);
-	transform(transCoords, xform_mtx, startCoords);
+	transform(optPoseCoords, xform_mtx, startPoseCoords);
 
-	double neg_overlap = -overlapFunc->calcOverlapGradient(transCoords, coordsGradient);
+	double neg_overlap = -overlapFunc->calcOverlapGradient(optPoseCoords, optPoseCoordsGrad);
 
-	for (std::size_t i = 0, num_elem = startCoords.getSize(); i < num_elem; i++) {
-		const Math::Vector3D::ConstPointer elem_pos = startCoords[i].getData();
-		const Math::Vector3D::ConstPointer pos_grad = coordsGradient[i].getData();
+	for (std::size_t i = 0, num_elem = startPoseCoords.getSize(); i < num_elem; i++) {
+		const Math::Vector3D::ConstPointer elem_pos = startPoseCoords[i].getData();
+		const Math::Vector3D::ConstPointer pos_grad = optPoseCoordsGrad[i].getData();
 		
 		grad_data[0] +=
 			pos_grad[0] * ( xform_quat_data[0] * elem_pos[0] - xform_quat_data[3] * elem_pos[1] + xform_quat_data[2] * elem_pos[2]) +
@@ -314,9 +292,9 @@ double Shape::GaussianShapeAlignment::calcAlignmentFunctionGradient(const Quater
 		norm_xform_quat_data[i] = xform_quat_data[i];
 		
 	quaternionToMatrix(norm_xform_quat, xform_mtx);
-	transform(transCoords, xform_mtx, startCoords);
+	transform(optPoseCoords, xform_mtx, startPoseCoords);
 
-	double neg_overlap = -overlapFunc->calcOverlapGradient(transCoords, coordsGradient);
+	double neg_overlap = -overlapFunc->calcOverlapGradient(optPoseCoords, optPoseCoordsGrad);
 
 	double dq1[3][3] = { { xform_quat_data[0], -xform_quat_data[3],  xform_quat_data[2] },
 						 { xform_quat_data[3],  xform_quat_data[0], -xform_quat_data[1] },
@@ -342,9 +320,9 @@ double Shape::GaussianShapeAlignment::calcAlignmentFunctionGradient(const Quater
 			dq4[i][j] = (dq4[i][j] - xform_mtx_data[i][j] * xform_quat_data[3]) * inv_quat_norm_sqrd;
 		}
 	
-	for (std::size_t i = 0, num_elem = startCoords.getSize(); i < num_elem; i++) {
-		const Math::Vector3D::ConstPointer elem_pos = startCoords[i].getData();
-		const Math::Vector3D::ConstPointer pos_grad = coordsGradient[i].getData();
+	for (std::size_t i = 0, num_elem = startPoseCoords.getSize(); i < num_elem; i++) {
+		const Math::Vector3D::ConstPointer elem_pos = startPoseCoords[i].getData();
+		const Math::Vector3D::ConstPointer pos_grad = optPoseCoordsGrad[i].getData();
 		
 		grad_data[0] +=
 			pos_grad[0] * ( dq1[0][0] * elem_pos[0] + dq1[0][1] * elem_pos[1] + dq1[0][2] * elem_pos[2]) +
