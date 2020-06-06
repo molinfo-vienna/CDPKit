@@ -97,10 +97,32 @@ namespace CDPL
 			bool checkShapeFuncsNotNull() const;
 		
 			double calcOverlap(const GaussianProductList* ref_prod_list, const GaussianProductList* ovl_prod_list) const;
+			double calcOverlapExact(const GaussianProductList* ref_prod_list, const GaussianProductList* ovl_prod_list) const;
+			double calcOverlapFastExp(const GaussianProductList* ref_prod_list, const GaussianProductList* ovl_prod_list) const;
+			double calcOverlapProxCheck(const GaussianProductList* ref_prod_list, const GaussianProductList* ovl_prod_list) const;
+			double calcOverlapFastExpProxCheck(const GaussianProductList* ref_prod_list, const GaussianProductList* ovl_prod_list) const;
+			
 			double calcOverlap(const GaussianProductList* ref_prod_list, const GaussianProductList* ovl_prod_list,
 							   const Math::Vector3DArray& coords) const;
+			double calcOverlapExact(const GaussianProductList* ref_prod_list, const GaussianProductList* ovl_prod_list,
+									const Math::Vector3DArray& coords) const;
+			double calcOverlapFastExp(const GaussianProductList* ref_prod_list, const GaussianProductList* ovl_prod_list,
+									  const Math::Vector3DArray& coords) const;
+			double calcOverlapProxCheck(const GaussianProductList* ref_prod_list, const GaussianProductList* ovl_prod_list,
+										const Math::Vector3DArray& coords) const;
+			double calcOverlapFastExpProxCheck(const GaussianProductList* ref_prod_list, const GaussianProductList* ovl_prod_list,
+											   const Math::Vector3DArray& coords) const;
+			
 			double calcOverlapGradient(const GaussianProductList* ref_prod_list, const GaussianProductList* ovl_prod_list,
 									   const Math::Vector3DArray& coords, Math::Vector3DArray& grad) const;
+			double calcOverlapGradientExact(const GaussianProductList* ref_prod_list, const GaussianProductList* ovl_prod_list,
+											const Math::Vector3DArray& coords, Math::Vector3DArray& grad) const;
+			double calcOverlapGradientFastExp(const GaussianProductList* ref_prod_list, const GaussianProductList* ovl_prod_list,
+											  const Math::Vector3DArray& coords, Math::Vector3DArray& grad) const;
+			double calcOverlapGradientProxCheck(const GaussianProductList* ref_prod_list, const GaussianProductList* ovl_prod_list,
+												const Math::Vector3DArray& coords, Math::Vector3DArray& grad) const;
+			double calcOverlapGradientFastExpProxCheck(const GaussianProductList* ref_prod_list, const GaussianProductList* ovl_prod_list,
+													   const Math::Vector3DArray& coords, Math::Vector3DArray& grad) const;
 
 			const GaussianShapeFunction* refShapeFunc;
 			const GaussianShapeFunction* ovlShapeFunc;

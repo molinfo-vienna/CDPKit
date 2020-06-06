@@ -700,7 +700,7 @@ std::size_t TautGenImpl::doReadNextMolecule(CDPL::Chem::Molecule& mol)
 				continue;
 			}
 
-			printProgress("Processing Molecules...        ", double(inputReader.getRecordIndex()) / inputReader.getNumRecords());
+			printProgress("Generating Tautomers...        ", double(inputReader.getRecordIndex()) / inputReader.getNumRecords());
 
 			return inputReader.getRecordIndex();
 

@@ -322,11 +322,11 @@ double Shape::ExactGaussianShapeOverlapFunction::calcOverlapGradient(const Gauss
 				std::size_t fact_idx = prod_fact->getIndex();
 				Math::Vector3D::ConstPointer fact_ctr = coords_data[fact_idx].getData();
 				Math::Vector3D::Pointer fact_grad = grad_data[fact_idx].getData();
-				double mul_factor = -prod_fact->getDelta() * 2.0 * overlap_contrib;
+				double grad_factor = -prod_fact->getDelta() * 2.0 * overlap_contrib;
 			
-				fact_grad[0] += mul_factor * (fact_ctr[0] - inters_prod_ctr_data[0]);
-				fact_grad[1] += mul_factor * (fact_ctr[1] - inters_prod_ctr_data[1]);
-				fact_grad[2] += mul_factor * (fact_ctr[2] - inters_prod_ctr_data[2]);
+				fact_grad[0] += grad_factor * (fact_ctr[0] - inters_prod_ctr_data[0]);
+				fact_grad[1] += grad_factor * (fact_ctr[1] - inters_prod_ctr_data[1]);
+				fact_grad[2] += grad_factor * (fact_ctr[2] - inters_prod_ctr_data[2]);
 			}
 		}
 	}

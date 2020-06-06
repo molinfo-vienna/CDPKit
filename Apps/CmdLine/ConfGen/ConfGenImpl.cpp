@@ -1003,7 +1003,7 @@ std::size_t ConfGenImpl::doReadNextMolecule(CDPL::Chem::Molecule& mol)
 				continue;
 			}
 
-			printProgress("Processing Molecules...        ", double(inputReader.getRecordIndex()) / inputReader.getNumRecords());
+			printProgress("Generating Conformers...        ", double(inputReader.getRecordIndex()) / inputReader.getNumRecords());
 
 			return inputReader.getRecordIndex();
 
