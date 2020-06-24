@@ -313,6 +313,7 @@
 #include "CDPL/Chem/SulfenicAcidTautomerization.hpp"  
 #include "CDPL/Chem/GenericHydrogen13ShiftTautomerization.hpp"  
 #include "CDPL/Chem/GenericHydrogen15ShiftTautomerization.hpp"  
+#include "CDPL/Chem/FragmentGenerator.hpp"  
 
 #include "CDPL/Chem/TopologicalEntityAlignment.hpp"
 #include "CDPL/Chem/GeometricalEntityAlignment.hpp"

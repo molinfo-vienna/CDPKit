@@ -127,6 +127,7 @@ SET(cdpl-chem_LIB_SRCS
     SulfenicAcidTautomerization.cpp  
     GenericHydrogen13ShiftTautomerization.cpp  
     GenericHydrogen15ShiftTautomerization.cpp  
+    FragmentGenerator.cpp
 
     CompleteRingSet.cpp
     AromaticRingSet.cpp
