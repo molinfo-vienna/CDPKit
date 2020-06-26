@@ -31,11 +31,15 @@
 #ifndef CDPL_CHEM_FRAGMENTGENERATOR_HPP
 #define CDPL_CHEM_FRAGMENTGENERATOR_HPP
 
+#include <cstddef>
+#include <vector>
+
 #include <boost/shared_ptr.hpp>
 
 #include "CDPL/Chem/APIPrefix.hpp"
 #include "CDPL/Chem/MolecularGraph.hpp"
 #include "CDPL/Chem/FragmentList.hpp"
+#include "CDPL/Util/BitSet.hpp"
 
 
 namespace CDPL 
@@ -58,8 +62,99 @@ namespace CDPL
 		  public:
 			typedef boost::shared_ptr<FragmentGenerator> SharedPointer;
 
-			class FragmentationRule 
+			class FragmentationRule
 			{
+
+			public:
+				FragmentationRule(const MolecularGraph::SharedPointer& match_ptn, unsigned int rule_id, unsigned int atom1_type, unsigned int atom2_type);
+
+				const MolecularGraph::SharedPointer& getMatchPattern() const;
+
+				void setMatchPattern(const MolecularGraph::SharedPointer& ptn);
+
+				unsigned int getRuleID() const;
+
+				void setRuleID( unsigned int rule_id);
+
+				unsigned int getAtom1Type() const;
+
+				void setAtom1Type(unsigned int atom1_type);
+
+				unsigned int getAtom2Type() const;
+
+				void setAtom2Type(unsigned int atom2_type);
+				
+			private:
+				MolecularGraph::SharedPointer matchPtn;
+				unsigned int                  ruleID;
+				unsigned int                  atom1Type;
+				unsigned int                  atom2Type;
+			};
+			
+			class ExcludePattern
+			{
+
+			public:
+				ExcludePattern(const MolecularGraph::SharedPointer& match_ptn, unsigned int rule_id);
+
+				ExcludePattern(const MolecularGraph::SharedPointer& match_ptn);
+
+				const MolecularGraph::SharedPointer& getMatchPattern() const;
+
+				void setMatchPattern(const MolecularGraph::SharedPointer& ptn);
+
+				unsigned int getRuleID() const;
+
+				void setRuleID( unsigned int rule_id);
+
+				bool isGeneric() const;
+
+				void setGeneric(bool gen);
+				
+			private:
+				MolecularGraph::SharedPointer matchPtn;
+				unsigned int                  ruleID;
+				bool                          generic;
+			};
+
+			class FragmentLink
+			{
+
+			public:
+				FragmentLink(std::size_t frag1_idx, std::size_t frag2_idx, const Bond& bond,
+							 unsigned int rule_id, unsigned int atom1_type, unsigned int atom2_type);
+
+				std::size_t getFragment1Index() const;
+
+				void setFragment1Index(std::size_t frag1_idx);
+
+				std::size_t getFragment2Index() const;
+
+				void setFragment2Index(std::size_t frag2_idx);
+				
+				const Bond& getBond() const;
+
+				void setBond(const Bond& bond);
+				
+				unsigned int getRuleID() const;
+
+				void setRuleID( unsigned int rule_id);
+
+				unsigned int getAtom1Type() const;
+
+				void setAtom1Type(unsigned int atom1_type);
+
+				unsigned int getAtom2Type() const;
+
+				void setAtom2Type(unsigned int atom2_type);
+				
+			private:
+				std::size_t  frag1Idx;
+				std::size_t  frag2Idx;
+				const Bond*  bond;
+				unsigned int ruleID;
+				unsigned int atom1Type;
+				unsigned int atom2Type;
 			};
 
 			/**
@@ -73,17 +168,56 @@ namespace CDPL
 
 			FragmentGenerator& operator=(const FragmentGenerator& gen);
 
+			void addFragmentationRule(const MolecularGraph::SharedPointer& match_ptn, unsigned int rule_id,
+									  unsigned int atom1_type, unsigned int atom2_type);
+
 			void addFragmentationRule(const FragmentationRule& rule);
 
 			const FragmentationRule& getFragmentationRule(std::size_t idx) const;
+
+			FragmentationRule& getFragmentationRule(std::size_t idx);
 
 			void removeFragmentationRule(std::size_t idx);
 
 			std::size_t getNumFragmentationRules() const;
 
-			void generate(const MolecularGraph& molgraph, FragmentList& frags);
+			void clearFragmentationRules();
 
+			void addExcludePattern(const MolecularGraph::SharedPointer& match_ptn, unsigned int rule_id);
+
+			void addExcludePattern(const MolecularGraph::SharedPointer& match_ptn);
+
+			void addExcludePattern(const ExcludePattern& excl_ptn);
+
+			const ExcludePattern& getExcludePattern(std::size_t idx) const;
+
+			ExcludePattern& getExcludePattern(std::size_t idx);
+
+			void removeExcludePattern(std::size_t idx);
+
+			std::size_t getNumExcludePatterns() const;
+
+			void clearExcludePatterns();
+
+			void generate(const MolecularGraph& molgraph, FragmentList& frags, bool append = false);
+
+			std::size_t getNumFragmentLinks() const;
+
+			const FragmentLink& getFragmentLink(std::size_t idx) const;
+			
 		  private:
+			void init(const MolecularGraph& molgraph);
+			
+			typedef std::vector<FragmentationRule> FragmentationRuleList;
+			typedef std::vector<ExcludePattern> ExcludePatternList;
+			typedef std::vector<FragmentLink> FragmentLinkList;
+			
+			FragmentationRuleList fragRules;
+			ExcludePatternList    exclPatterns;
+			bool                  incSplitBonds;
+			bool                  genFragLinks;
+			Util::BitSet          splitBondMask;
+			FragmentLinkList      fragLinks;
 		};
 
 		/**
