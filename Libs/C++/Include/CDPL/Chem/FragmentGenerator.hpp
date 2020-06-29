@@ -33,12 +33,14 @@
 
 #include <cstddef>
 #include <vector>
+#include <utility>
 
 #include <boost/shared_ptr.hpp>
 
 #include "CDPL/Chem/APIPrefix.hpp"
 #include "CDPL/Chem/MolecularGraph.hpp"
 #include "CDPL/Chem/FragmentList.hpp"
+#include "CDPL/Chem/SubstructureSearch.hpp"
 #include "CDPL/Util/BitSet.hpp"
 
 
@@ -66,15 +68,15 @@ namespace CDPL
 			{
 
 			public:
-				FragmentationRule(const MolecularGraph::SharedPointer& match_ptn, unsigned int rule_id, unsigned int atom1_type, unsigned int atom2_type);
+				FragmentationRule(const MolecularGraph::SharedPointer& match_ptn, unsigned int id, unsigned int atom1_type, unsigned int atom2_type);
 
 				const MolecularGraph::SharedPointer& getMatchPattern() const;
 
 				void setMatchPattern(const MolecularGraph::SharedPointer& ptn);
 
-				unsigned int getRuleID() const;
+				unsigned int getID() const;
 
-				void setRuleID( unsigned int rule_id);
+				void setID(unsigned int id);
 
 				unsigned int getAtom1Type() const;
 
@@ -86,7 +88,7 @@ namespace CDPL
 				
 			private:
 				MolecularGraph::SharedPointer matchPtn;
-				unsigned int                  ruleID;
+				unsigned int                  id;
 				unsigned int                  atom1Type;
 				unsigned int                  atom2Type;
 			};
@@ -199,6 +201,14 @@ namespace CDPL
 
 			void clearExcludePatterns();
 
+			bool includeSplitBonds() const;
+
+			void includeSplitBonds(bool include);
+
+			bool generateFragmentLinkInfo() const;
+
+			void generateFragmentLinkInfo(bool generate);
+				
 			void generate(const MolecularGraph& molgraph, FragmentList& frags, bool append = false);
 
 			std::size_t getNumFragmentLinks() const;
@@ -206,17 +216,37 @@ namespace CDPL
 			const FragmentLink& getFragmentLink(std::size_t idx) const;
 			
 		  private:
+			typedef std::pair<const Atom*, const Atom*> AtomPair;
+			
 			void init(const MolecularGraph& molgraph);
+
+			void processFragRuleMatches(const MolecularGraph& molgraph, const FragmentationRule& rule);
+			void processExcludePattern(const MolecularGraph& molgraph, const ExcludePattern& ptn);
+			void splitIntoFragments(const MolecularGraph& molgraph, FragmentList& frags);
+
+			AtomPair getMarkedAtoms(const MolecularGraph& ptn) const;
+
+			struct SplitBondData
+			{
+
+				const Bond*  bond;
+				unsigned int ruleID;
+				unsigned int atom1Type;
+				unsigned int atom2Type;
+			};
 			
 			typedef std::vector<FragmentationRule> FragmentationRuleList;
 			typedef std::vector<ExcludePattern> ExcludePatternList;
 			typedef std::vector<FragmentLink> FragmentLinkList;
+			typedef std::vector<SplitBondData> SplitBondDataArray;
 			
 			FragmentationRuleList fragRules;
 			ExcludePatternList    exclPatterns;
+			SubstructureSearch    subSearch;
 			bool                  incSplitBonds;
-			bool                  genFragLinks;
+			bool                  genFragLinkInfo;
 			Util::BitSet          splitBondMask;
+			SplitBondDataArray    splitBondData;
 			FragmentLinkList      fragLinks;
 		};
 
