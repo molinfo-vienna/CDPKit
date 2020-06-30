@@ -155,7 +155,8 @@ BOOST_PYTHON_MODULE(_chem)
     exportSulfenicAcidTautomerization();  
     exportGenericHydrogen13ShiftTautomerization();  
     exportGenericHydrogen15ShiftTautomerization();  
-
+	exportFragmentGenerator();
+	
 	exportMoleculeReader();
 	exportMoleculeWriter();
 	exportMolecularGraphReader();

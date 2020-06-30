@@ -148,7 +148,8 @@ SET(chem_MOD_SRCS
     SulfenicAcidTautomerizationExport.cpp  
     GenericHydrogen13ShiftTautomerizationExport.cpp  
     GenericHydrogen15ShiftTautomerizationExport.cpp  
-
+    FragmentGeneratorExport.cpp
+    
     MoleculeIOManagerExport.cpp 
     MolecularGraphIOManagerExport.cpp 
     ReactionIOManagerExport.cpp 

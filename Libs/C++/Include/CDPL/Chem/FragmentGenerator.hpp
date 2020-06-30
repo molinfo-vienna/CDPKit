@@ -33,9 +33,9 @@
 
 #include <cstddef>
 #include <vector>
-#include <utility>
 
 #include <boost/shared_ptr.hpp>
+#include <boost/function.hpp>
 
 #include "CDPL/Chem/APIPrefix.hpp"
 #include "CDPL/Chem/MolecularGraph.hpp"
@@ -64,6 +64,8 @@ namespace CDPL
 		  public:
 			typedef boost::shared_ptr<FragmentGenerator> SharedPointer;
 
+			typedef boost::function1<bool, const MolecularGraph&> FragmentFilterFunction;
+			
 			class FragmentationRule
 			{
 
@@ -128,28 +130,16 @@ namespace CDPL
 
 				std::size_t getFragment1Index() const;
 
-				void setFragment1Index(std::size_t frag1_idx);
-
 				std::size_t getFragment2Index() const;
 
-				void setFragment2Index(std::size_t frag2_idx);
-				
 				const Bond& getBond() const;
 
-				void setBond(const Bond& bond);
-				
 				unsigned int getRuleID() const;
-
-				void setRuleID( unsigned int rule_id);
 
 				unsigned int getAtom1Type() const;
 
-				void setAtom1Type(unsigned int atom1_type);
-
 				unsigned int getAtom2Type() const;
-
-				void setAtom2Type(unsigned int atom2_type);
-				
+			
 			private:
 				std::size_t  frag1Idx;
 				std::size_t  frag2Idx;
@@ -159,6 +149,20 @@ namespace CDPL
 				unsigned int atom2Type;
 			};
 
+		  private:
+			typedef std::vector<FragmentationRule> FragmentationRuleList;
+			typedef std::vector<ExcludePattern> ExcludePatternList;
+			typedef std::vector<FragmentLink> FragmentLinkList;
+
+		  public:
+			typedef FragmentationRuleList::const_iterator ConstFragmentationRuleIterator;
+			typedef FragmentationRuleList::iterator FragmentationRuleIterator;
+
+			typedef ExcludePatternList::const_iterator ConstExcludePatternIterator;
+			typedef ExcludePatternList::iterator ExcludePatternIterator;
+
+			typedef FragmentLinkList::const_iterator ConstFragmentLinkIterator;
+						
 			/**
 			 * \brief Constructs the \c %FragmentGenerator instance.
 			 */
@@ -179,6 +183,14 @@ namespace CDPL
 
 			FragmentationRule& getFragmentationRule(std::size_t idx);
 
+			ConstFragmentationRuleIterator getFragmentationRulesBegin() const;
+
+			ConstFragmentationRuleIterator getFragmentationRulesEnd() const;
+
+			FragmentationRuleIterator getFragmentationRulesBegin();
+
+			FragmentationRuleIterator getFragmentationRulesEnd();
+			
 			void removeFragmentationRule(std::size_t idx);
 
 			std::size_t getNumFragmentationRules() const;
@@ -195,6 +207,14 @@ namespace CDPL
 
 			ExcludePattern& getExcludePattern(std::size_t idx);
 
+			ConstExcludePatternIterator getExcludePatternsBegin() const;
+
+			ConstExcludePatternIterator getExcludePatternsEnd() const;
+
+			ExcludePatternIterator getExcludePatternsBegin();
+
+			ExcludePatternIterator getExcludePatternsEnd();
+
 			void removeExcludePattern(std::size_t idx);
 
 			std::size_t getNumExcludePatterns() const;
@@ -208,24 +228,32 @@ namespace CDPL
 			bool generateFragmentLinkInfo() const;
 
 			void generateFragmentLinkInfo(bool generate);
-				
-			void generate(const MolecularGraph& molgraph, FragmentList& frags, bool append = false);
+
+			const FragmentFilterFunction& getFragmentFilterFunction() const;
+
+			void setFragmentFilterFunction(const FragmentFilterFunction& func);
+		
+			void generate(const MolecularGraph& molgraph, FragmentList& frag_list, bool append = false);
 
 			std::size_t getNumFragmentLinks() const;
 
 			const FragmentLink& getFragmentLink(std::size_t idx) const;
-			
+
+			ConstFragmentLinkIterator getFragmentLinksBegin() const;
+
+			ConstFragmentLinkIterator getFragmentLinksEnd() const;
+
 		  private:
-			typedef std::pair<const Atom*, const Atom*> AtomPair;
-			
 			void init(const MolecularGraph& molgraph);
 
 			void processFragRuleMatches(const MolecularGraph& molgraph, const FragmentationRule& rule);
-			void processExcludePattern(const MolecularGraph& molgraph, const ExcludePattern& ptn);
-			void splitIntoFragments(const MolecularGraph& molgraph, FragmentList& frags);
+			void processExcludePatternMatches(const MolecularGraph& molgraph, const ExcludePattern& ptn);
+			void splitIntoFragments(const MolecularGraph& molgraph, FragmentList& frag_list, bool append);
+			void growFragment(const Chem::Atom& atom, const Chem::MolecularGraph& molgraph, Chem::Fragment& frag);
 
-			AtomPair getMarkedAtoms(const MolecularGraph& ptn) const;
-
+			std::size_t findContainingFragment(const Chem::Atom& atom, const FragmentList& frag_list,
+											   std::size_t start_idx) const;
+			
 			struct SplitBondData
 			{
 
@@ -235,19 +263,18 @@ namespace CDPL
 				unsigned int atom2Type;
 			};
 			
-			typedef std::vector<FragmentationRule> FragmentationRuleList;
-			typedef std::vector<ExcludePattern> ExcludePatternList;
-			typedef std::vector<FragmentLink> FragmentLinkList;
 			typedef std::vector<SplitBondData> SplitBondDataArray;
 			
-			FragmentationRuleList fragRules;
-			ExcludePatternList    exclPatterns;
-			SubstructureSearch    subSearch;
-			bool                  incSplitBonds;
-			bool                  genFragLinkInfo;
-			Util::BitSet          splitBondMask;
-			SplitBondDataArray    splitBondData;
-			FragmentLinkList      fragLinks;
+			FragmentationRuleList  fragRules;
+			ExcludePatternList     exclPatterns;
+			FragmentLinkList       fragLinks;
+			bool                   incSplitBonds;
+			bool                   genFragLinkInfo;
+			FragmentFilterFunction fragFilterFunc;
+			SubstructureSearch     subSearch;
+			Util::BitSet           splitBondMask;
+			Util::BitSet           visAtomMask;
+			SplitBondDataArray     splitBondData;
 		};
 
 		/**
