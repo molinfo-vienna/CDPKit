@@ -70,7 +70,7 @@ namespace CDPL
 			{
 
 			public:
-				FragmentationRule(const MolecularGraph::SharedPointer& match_ptn, unsigned int id, unsigned int atom1_type, unsigned int atom2_type);
+				FragmentationRule(const MolecularGraph::SharedPointer& match_ptn, unsigned int id);
 
 				const MolecularGraph::SharedPointer& getMatchPattern() const;
 
@@ -79,20 +79,10 @@ namespace CDPL
 				unsigned int getID() const;
 
 				void setID(unsigned int id);
-
-				unsigned int getAtom1Type() const;
-
-				void setAtom1Type(unsigned int atom1_type);
-
-				unsigned int getAtom2Type() const;
-
-				void setAtom2Type(unsigned int atom2_type);
 				
 			private:
 				MolecularGraph::SharedPointer matchPtn;
 				unsigned int                  id;
-				unsigned int                  atom1Type;
-				unsigned int                  atom2Type;
 			};
 			
 			class ExcludePattern
@@ -109,11 +99,11 @@ namespace CDPL
 
 				unsigned int getRuleID() const;
 
-				void setRuleID( unsigned int rule_id);
+				void setRuleID(unsigned int id);
 
 				bool isGeneric() const;
 
-				void setGeneric(bool gen);
+				void setGeneric(bool generic);
 				
 			private:
 				MolecularGraph::SharedPointer matchPtn;
@@ -126,7 +116,7 @@ namespace CDPL
 
 			public:
 				FragmentLink(std::size_t frag1_idx, std::size_t frag2_idx, const Bond& bond,
-							 unsigned int rule_id, unsigned int atom1_type, unsigned int atom2_type);
+							 unsigned int rule_id, unsigned int atom1_label, unsigned int atom2_label);
 
 				std::size_t getFragment1Index() const;
 
@@ -136,17 +126,17 @@ namespace CDPL
 
 				unsigned int getRuleID() const;
 
-				unsigned int getAtom1Type() const;
+				unsigned int getAtom1Label() const;
 
-				unsigned int getAtom2Type() const;
+				unsigned int getAtom2Label() const;
 			
 			private:
 				std::size_t  frag1Idx;
 				std::size_t  frag2Idx;
 				const Bond*  bond;
 				unsigned int ruleID;
-				unsigned int atom1Type;
-				unsigned int atom2Type;
+				unsigned int atom1Label;
+				unsigned int atom2Label;
 			};
 
 		  private:
@@ -174,8 +164,7 @@ namespace CDPL
 
 			FragmentGenerator& operator=(const FragmentGenerator& gen);
 
-			void addFragmentationRule(const MolecularGraph::SharedPointer& match_ptn, unsigned int rule_id,
-									  unsigned int atom1_type, unsigned int atom2_type);
+			void addFragmentationRule(const MolecularGraph::SharedPointer& match_ptn, unsigned int rule_id);
 
 			void addFragmentationRule(const FragmentationRule& rule);
 
@@ -225,10 +214,6 @@ namespace CDPL
 
 			void includeSplitBonds(bool include);
 
-			bool generateFragmentLinkInfo() const;
-
-			void generateFragmentLinkInfo(bool generate);
-
 			const FragmentFilterFunction& getFragmentFilterFunction() const;
 
 			void setFragmentFilterFunction(const FragmentFilterFunction& func);
@@ -259,8 +244,8 @@ namespace CDPL
 
 				const Bond*  bond;
 				unsigned int ruleID;
-				unsigned int atom1Type;
-				unsigned int atom2Type;
+				unsigned int atom1Label;
+				unsigned int atom2Label;
 			};
 			
 			typedef std::vector<SplitBondData> SplitBondDataArray;
@@ -269,7 +254,6 @@ namespace CDPL
 			ExcludePatternList     exclPatterns;
 			FragmentLinkList       fragLinks;
 			bool                   incSplitBonds;
-			bool                   genFragLinkInfo;
 			FragmentFilterFunction fragFilterFunc;
 			SubstructureSearch     subSearch;
 			Util::BitSet           splitBondMask;

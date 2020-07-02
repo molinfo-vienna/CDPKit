@@ -297,6 +297,7 @@
 #include "CDPL/Chem/AtomHydrophobicityCalculator.hpp"  
 #include "CDPL/Chem/BuriednessScore.hpp"  
 #include "CDPL/Chem/BuriednessGridCalculator.hpp"  
+
 #include "CDPL/Chem/TautomerScore.hpp"  
 #include "CDPL/Chem/TautomerGenerator.hpp"  
 #include "CDPL/Chem/DefaultTautomerGenerator.hpp"  
@@ -313,7 +314,11 @@
 #include "CDPL/Chem/SulfenicAcidTautomerization.hpp"  
 #include "CDPL/Chem/GenericHydrogen13ShiftTautomerization.hpp"  
 #include "CDPL/Chem/GenericHydrogen15ShiftTautomerization.hpp"  
+
 #include "CDPL/Chem/FragmentGenerator.hpp"  
+#include "CDPL/Chem/RECAPRuleID.hpp"  
+#include "CDPL/Chem/RECAPAtomLabel.hpp"  
+#include "CDPL/Chem/RECAPFragmentGenerator.hpp"  
 
 #include "CDPL/Chem/TopologicalEntityAlignment.hpp"
 #include "CDPL/Chem/GeometricalEntityAlignment.hpp"

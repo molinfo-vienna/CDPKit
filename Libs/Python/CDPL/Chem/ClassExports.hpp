@@ -152,7 +152,9 @@ namespace CDPLPythonChem
     void exportSulfenicAcidTautomerization();  
     void exportGenericHydrogen13ShiftTautomerization();  
     void exportGenericHydrogen15ShiftTautomerization();  
+
 	void exportFragmentGenerator();
+	void exportRECAPFragmentGenerator();
 	
 	void exportMoleculeReader();
 	void exportMoleculeWriter();

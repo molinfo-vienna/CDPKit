@@ -40,10 +40,8 @@
 using namespace CDPL;
 
 
-Chem::FragmentGenerator::FragmentationRule::FragmentationRule(const MolecularGraph::SharedPointer& match_ptn,
-															  unsigned int id, unsigned int atom1_type,
-															  unsigned int atom2_type):
-	matchPtn(match_ptn), id(id), atom1Type(atom1_type), atom2Type(atom2_type)
+Chem::FragmentGenerator::FragmentationRule::FragmentationRule(const MolecularGraph::SharedPointer& match_ptn, unsigned int id):
+	matchPtn(match_ptn), id(id)
 {}
 
 const Chem::MolecularGraph::SharedPointer& Chem::FragmentGenerator::FragmentationRule::getMatchPattern() const
@@ -64,26 +62,6 @@ unsigned int Chem::FragmentGenerator::FragmentationRule::getID() const
 void Chem::FragmentGenerator::FragmentationRule::setID(unsigned int id)
 {
 	this->id = id;
-}
-
-unsigned int Chem::FragmentGenerator::FragmentationRule::getAtom1Type() const
-{
-	return atom1Type;
-}
-
-void Chem::FragmentGenerator::FragmentationRule::setAtom1Type(unsigned int atom1_type)
-{
-	atom1Type = atom1_type;
-}
-
-unsigned int Chem::FragmentGenerator::FragmentationRule::getAtom2Type() const
-{
-	return atom2Type;
-}
-
-void Chem::FragmentGenerator::FragmentationRule::setAtom2Type(unsigned int atom2_type)
-{
-	atom2Type = atom2_type;
 }
 	
 	
@@ -110,9 +88,9 @@ unsigned int Chem::FragmentGenerator::ExcludePattern::getRuleID() const
 	return ruleID;
 }
 
-void Chem::FragmentGenerator::ExcludePattern::setRuleID( unsigned int rule_id)
+void Chem::FragmentGenerator::ExcludePattern::setRuleID( unsigned int id)
 {
-	ruleID = rule_id;
+	ruleID = id;
 }
 
 bool Chem::FragmentGenerator::ExcludePattern::isGeneric() const
@@ -127,8 +105,8 @@ void Chem::FragmentGenerator::ExcludePattern::setGeneric(bool gen)
 				
 		
 Chem::FragmentGenerator::FragmentLink::FragmentLink(std::size_t frag1_idx, std::size_t frag2_idx, const Bond& bond,
-													unsigned int rule_id, unsigned int atom1_type, unsigned int atom2_type):
-	frag1Idx(frag1_idx), frag2Idx(frag2_idx), bond(&bond), ruleID(rule_id), atom1Type(atom1_type), atom2Type(atom2_type)
+													unsigned int rule_id, unsigned int atom1_label, unsigned int atom2_label):
+	frag1Idx(frag1_idx), frag2Idx(frag2_idx), bond(&bond), ruleID(rule_id), atom1Label(atom1_label), atom2Label(atom2_label)
 {}
 
 std::size_t Chem::FragmentGenerator::FragmentLink::getFragment1Index() const
@@ -151,26 +129,25 @@ unsigned int Chem::FragmentGenerator::FragmentLink::getRuleID() const
 	return ruleID;
 }
 
-unsigned int Chem::FragmentGenerator::FragmentLink::getAtom1Type() const
+unsigned int Chem::FragmentGenerator::FragmentLink::getAtom1Label() const
 {
-	return atom1Type;
+	return atom1Label;
 }
 
-unsigned int Chem::FragmentGenerator::FragmentLink::getAtom2Type() const
+unsigned int Chem::FragmentGenerator::FragmentLink::getAtom2Label() const
 {
-	return atom2Type;
+	return atom2Label;
 }
 			   
 	
-Chem::FragmentGenerator::FragmentGenerator(): incSplitBonds(true), genFragLinkInfo(true)
+Chem::FragmentGenerator::FragmentGenerator(): incSplitBonds(true)
 {
 	subSearch.uniqueMappingsOnly(false);
 }
 
 Chem::FragmentGenerator::FragmentGenerator(const FragmentGenerator& gen):
 	fragRules(gen.fragRules), exclPatterns(gen.exclPatterns), fragLinks(gen.fragLinks),
-	incSplitBonds(gen.incSplitBonds), genFragLinkInfo(gen.genFragLinkInfo),
-	fragFilterFunc(gen.fragFilterFunc)
+	incSplitBonds(gen.incSplitBonds), fragFilterFunc(gen.fragFilterFunc)
 {
 	subSearch.uniqueMappingsOnly(false);
 }
@@ -184,16 +161,14 @@ Chem::FragmentGenerator& Chem::FragmentGenerator::operator=(const FragmentGenera
 	exclPatterns = gen.exclPatterns;
 	fragLinks = gen.fragLinks;
 	incSplitBonds = gen.incSplitBonds;
-	genFragLinkInfo = gen.genFragLinkInfo;
 	fragFilterFunc = gen.fragFilterFunc;
 	
 	return *this;
 }
 
-void Chem::FragmentGenerator::addFragmentationRule(const MolecularGraph::SharedPointer& match_ptn, unsigned int rule_id,
-												   unsigned int atom1_type, unsigned int atom2_type)
+void Chem::FragmentGenerator::addFragmentationRule(const MolecularGraph::SharedPointer& match_ptn, unsigned int rule_id)
 {
-	fragRules.push_back(FragmentationRule(match_ptn, rule_id, atom1_type, atom2_type));
+	fragRules.push_back(FragmentationRule(match_ptn, rule_id));
 }
 
 void Chem::FragmentGenerator::addFragmentationRule(const FragmentationRule& rule)
@@ -334,16 +309,6 @@ void Chem::FragmentGenerator::includeSplitBonds(bool include)
 	incSplitBonds = include;
 }
 
-bool Chem::FragmentGenerator::generateFragmentLinkInfo() const
-{
-	return genFragLinkInfo;
-}
-
-void Chem::FragmentGenerator::generateFragmentLinkInfo(bool generate)
-{
-	genFragLinkInfo = generate;
-}
-
 const Chem::FragmentGenerator::FragmentFilterFunction& Chem::FragmentGenerator::getFragmentFilterFunction() const
 {
 	return fragFilterFunc;
@@ -413,8 +378,6 @@ void Chem::FragmentGenerator::processFragRuleMatches(const MolecularGraph& molgr
 		return;
 
 	unsigned int rule_id = rule.getID();
-	unsigned int atom1_type = rule.getAtom1Type();
-	unsigned int atom2_type = rule.getAtom2Type();
 	
 	for (SubstructureSearch::ConstMappingIterator it1 = subSearch.getMappingsBegin(), end1 = subSearch.getMappingsEnd(); it1 != end1; ++it1) {
 		const AtomBondMapping& mapping = *it1;
@@ -433,9 +396,9 @@ void Chem::FragmentGenerator::processFragRuleMatches(const MolecularGraph& molgr
 			if (!hasAtomMappingID(*ptn_atom1) || !hasAtomMappingID(*ptn_atom2))
 				continue;
 
-			if (getAtomMappingID(*ptn_atom2) < getAtomMappingID(*ptn_atom1))
-				std::swap(ptn_atom1, ptn_atom2);
-			
+			unsigned int atom1_label = getAtomMappingID(*ptn_atom1);
+			unsigned int atom2_label = getAtomMappingID(*ptn_atom2);
+		
 			const Atom* mpd_atom1 = atom_mapping[ptn_atom1];
 
 			if (!mpd_atom1) // sanity check
@@ -449,12 +412,12 @@ void Chem::FragmentGenerator::processFragRuleMatches(const MolecularGraph& molgr
 			std::size_t mpd_bond_idx = molgraph.getBondIndex(*bond_mpg_entry.second);
 
 			if (&bond_mpg_entry.second->getBegin() == mpd_atom1 && &bond_mpg_entry.second->getEnd() == mpd_atom2) {
-				splitBondData[mpd_bond_idx].atom1Type = atom1_type;
-				splitBondData[mpd_bond_idx].atom2Type = atom2_type;
+				splitBondData[mpd_bond_idx].atom1Label = atom1_label;
+				splitBondData[mpd_bond_idx].atom2Label = atom2_label;
 			
 			} else if (&bond_mpg_entry.second->getEnd() == mpd_atom1 && &bond_mpg_entry.second->getBegin() == mpd_atom2) {
-				splitBondData[mpd_bond_idx].atom1Type = atom2_type;
-				splitBondData[mpd_bond_idx].atom2Type = atom1_type;
+				splitBondData[mpd_bond_idx].atom1Label = atom2_label;
+				splitBondData[mpd_bond_idx].atom2Label = atom1_label;
 
 			} else
 				continue;
@@ -548,9 +511,6 @@ void Chem::FragmentGenerator::splitIntoFragments(const MolecularGraph& molgraph,
 		}
     }
 
-	if (!genFragLinkInfo && !incSplitBonds)
-		return;
-
 	std::size_t frag_list_size = frag_list.getSize();
 	
 	for (Util::BitSet::size_type bond_idx = splitBondMask.find_first(); bond_idx != Util::BitSet::npos; bond_idx = splitBondMask.find_next(bond_idx)) {
@@ -558,17 +518,21 @@ void Chem::FragmentGenerator::splitIntoFragments(const MolecularGraph& molgraph,
 		std::size_t frag1_idx = findContainingFragment(bond.getBegin(), frag_list, new_frags_start_idx);
 		std::size_t frag2_idx = findContainingFragment(bond.getEnd(), frag_list, new_frags_start_idx);
 
-		if (incSplitBonds) {
-			if (frag1_idx != frag_list_size)
-				frag_list.getElement(frag1_idx).addBond(bond);
+		fragLinks.push_back(FragmentLink(frag1_idx, frag2_idx, bond, splitBondData[bond_idx].ruleID,
+										 splitBondData[bond_idx].atom1Label, splitBondData[bond_idx].atom2Label));
+	}
 
-			if (frag2_idx != frag_list_size)
-				frag_list.getElement(frag2_idx).addBond(bond);
-		}
-		
-		if (genFragLinkInfo)
-			fragLinks.push_back(FragmentLink(frag1_idx, frag2_idx, bond, splitBondData[bond_idx].ruleID,
-											 splitBondData[bond_idx].atom1Type, splitBondData[bond_idx].atom2Type));
+	if (!incSplitBonds)
+		return;
+
+	for (ConstFragmentLinkIterator it = fragLinks.begin(), end = fragLinks.end(); it != end; ++it) {
+		const FragmentLink& link = *it;
+
+		if (link.getFragment1Index() < frag_list_size) 
+			frag_list[link.getFragment1Index()].addBond(link.getBond());
+
+		if (link.getFragment2Index() < frag_list_size) 
+			frag_list[link.getFragment2Index()].addBond(link.getBond());
 	}
 }
 

@@ -112,6 +112,7 @@ SET(cdpl-chem_LIB_SRCS
     MaxCommonBondSubstructureSearch.cpp
     AutomorphismGroupSearch.cpp
     Reactor.cpp
+
     TautomerScore.cpp
     TautomerGenerator.cpp
     DefaultTautomerGenerator.cpp
@@ -127,7 +128,9 @@ SET(cdpl-chem_LIB_SRCS
     SulfenicAcidTautomerization.cpp  
     GenericHydrogen13ShiftTautomerization.cpp  
     GenericHydrogen15ShiftTautomerization.cpp  
+
     FragmentGenerator.cpp
+    RECAPFragmentGenerator.cpp
 
     CompleteRingSet.cpp
     AromaticRingSet.cpp

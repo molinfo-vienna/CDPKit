@@ -54,6 +54,8 @@ namespace CDPLPythonChem
 	void exportMOL2MoleculeTypes();
 	void exportMOL2ChargeTypes();
 	void exportTautomerizationTypes();
+	void exportRECAPRuleIDs();
+	void exportRECAPAtomLabels();
 
 	void exportEntity3DProperties();
 	void exportAtomProperties();

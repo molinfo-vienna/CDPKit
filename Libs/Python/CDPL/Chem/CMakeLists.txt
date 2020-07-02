@@ -149,6 +149,7 @@ SET(chem_MOD_SRCS
     GenericHydrogen13ShiftTautomerizationExport.cpp  
     GenericHydrogen15ShiftTautomerizationExport.cpp  
     FragmentGeneratorExport.cpp
+    RECAPFragmentGeneratorExport.cpp
     
     MoleculeIOManagerExport.cpp 
     MolecularGraphIOManagerExport.cpp 
@@ -258,6 +259,8 @@ SET(chem_MOD_SRCS
     MOL2MoleculeTypeExport.cpp 
     MOL2ChargeTypeExport.cpp 
     TautomerizationTypeExport.cpp 
+    RECAPRuleIDExport.cpp 
+    RECAPAtomLabelExport.cpp 
 
     ControlParameterFunctionExport.cpp 
     UtilityFunctionExport.cpp 

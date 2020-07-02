@@ -156,7 +156,8 @@ BOOST_PYTHON_MODULE(_chem)
     exportGenericHydrogen13ShiftTautomerization();  
     exportGenericHydrogen15ShiftTautomerization();  
 	exportFragmentGenerator();
-	
+	exportRECAPFragmentGenerator();
+
 	exportMoleculeReader();
 	exportMoleculeWriter();
 	exportMolecularGraphReader();
@@ -269,6 +270,8 @@ BOOST_PYTHON_MODULE(_chem)
 	exportMOL2MoleculeTypes();
 	exportMOL2ChargeTypes();
 	exportTautomerizationTypes();
+	exportRECAPRuleIDs();
+	exportRECAPAtomLabels();
 
 	exportControlParameterFunctions();
 	exportUtilityFunctions();

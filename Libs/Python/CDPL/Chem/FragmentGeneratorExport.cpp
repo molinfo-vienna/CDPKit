@@ -27,6 +27,7 @@
 #include <boost/python.hpp>
 
 #include "CDPL/Chem/FragmentGenerator.hpp"
+#include "CDPL/Chem/Bond.hpp"
 
 #include "Base/ObjectIdentityCheckVisitor.hpp"
 #include "Base/CopyAssOp.hpp"
@@ -44,37 +45,97 @@ void CDPLPythonChem::exportFragmentGenerator()
 
     python::scope scope = cl;
 
-	python::class_<Chem::FragmentGenerator::FragmentationRule,
-				   boost::noncopyable>("FragmentationRuler", python::no_init)
+	python::class_<Chem::FragmentGenerator::FragmentationRule, boost::noncopyable>("FragmentationRuler", python::no_init)
+		.def(python::init<Chem::FragmentGenerator::FragmentationRule>((python::arg("self"), python::arg("rule"))))
+		.def(python::init<const Chem::MolecularGraph::SharedPointer&, unsigned int>(
+				 (python::arg("self"), python::arg("match_ptn"), python::arg("id"))))
 		.def(CDPLPythonBase::ObjectIdentityCheckVisitor<Chem::FragmentGenerator::FragmentationRule>())
 		.def("assign", CDPLPythonBase::copyAssOp(&Chem::FragmentGenerator::FragmentationRule::operator=), 
 			 (python::arg("self"), python::arg("rule")), python::return_self<>())
-		;
+		.def("getMatchPattern", &Chem::FragmentGenerator::FragmentationRule::getMatchPattern,
+			 python::arg("self"), python::return_value_policy<python::copy_const_reference>())
+		.def("setMatchPattern", &Chem::FragmentGenerator::FragmentationRule::setMatchPattern,
+			 (python::arg("self"), python::arg("ptn")))
+		.def("getID", &Chem::FragmentGenerator::FragmentationRule::getID,
+			 python::arg("self"))
+		.def("setID", &Chem::FragmentGenerator::FragmentationRule::setID,
+			 (python::arg("self"), python::arg("id")))
+		.add_property("matchPattern", 
+					  python::make_function(&Chem::FragmentGenerator::FragmentationRule::getMatchPattern,
+											python::return_value_policy<python::copy_const_reference>()),
+					  &Chem::FragmentGenerator::FragmentationRule::setMatchPattern)
+		.add_property("id", &Chem::FragmentGenerator::FragmentationRule::getID, 
+					  &Chem::FragmentGenerator::FragmentationRule::setID);
 
-	python::class_<Chem::FragmentGenerator::ExcludePattern,
-				   boost::noncopyable>("ExcludePatternr", python::no_init)
+	python::class_<Chem::FragmentGenerator::ExcludePattern, boost::noncopyable>("ExcludePattern", python::no_init)
+		.def(python::init<Chem::FragmentGenerator::ExcludePattern>((python::arg("self"), python::arg("excl_ptn"))))
+		.def(python::init<const Chem::MolecularGraph::SharedPointer&, unsigned int>(
+				 (python::arg("self"), python::arg("match_ptn"), python::arg("rule_id"))))
+		.def(python::init<const Chem::MolecularGraph::SharedPointer&>(
+				 (python::arg("self"), python::arg("match_ptn"))))
 		.def(CDPLPythonBase::ObjectIdentityCheckVisitor<Chem::FragmentGenerator::ExcludePattern>())
 		.def("assign", CDPLPythonBase::copyAssOp(&Chem::FragmentGenerator::ExcludePattern::operator=), 
-			 (python::arg("self"), python::arg("pattern")), python::return_self<>())
-		;
+			 (python::arg("self"), python::arg("excl_ptn")), python::return_self<>())
+		.def("getMatchPattern", &Chem::FragmentGenerator::ExcludePattern::getMatchPattern,
+			 python::arg("self"), python::return_value_policy<python::copy_const_reference>())
+		.def("setMatchPattern", &Chem::FragmentGenerator::ExcludePattern::setMatchPattern,
+			 (python::arg("self"), python::arg("ptn")))
+		.def("getRuleID", &Chem::FragmentGenerator::ExcludePattern::getRuleID,
+			 python::arg("self"))
+		.def("setRuleID", &Chem::FragmentGenerator::ExcludePattern::setRuleID,
+			 (python::arg("self"), python::arg("id")))
+		.def("isGeneric", &Chem::FragmentGenerator::ExcludePattern::isGeneric,
+			 python::arg("self"))
+		.def("setGeneric", &Chem::FragmentGenerator::ExcludePattern::setGeneric,
+			 (python::arg("self"), python::arg("generic")))
+		.add_property("matchPattern", 
+					  python::make_function(&Chem::FragmentGenerator::ExcludePattern::getMatchPattern,
+											python::return_value_policy<python::copy_const_reference>()),
+					  &Chem::FragmentGenerator::ExcludePattern::setMatchPattern)
+		.add_property("ruleID", &Chem::FragmentGenerator::ExcludePattern::getRuleID, 
+					  &Chem::FragmentGenerator::ExcludePattern::setRuleID)
+		.add_property("generic", &Chem::FragmentGenerator::ExcludePattern::isGeneric, 
+					  &Chem::FragmentGenerator::ExcludePattern::setGeneric);
 
-	python::class_<Chem::FragmentGenerator::FragmentLink,
-				   boost::noncopyable>("FragmentLinkr", python::no_init)
+	python::class_<Chem::FragmentGenerator::FragmentLink, boost::noncopyable>("FragmentLink", python::no_init)
+		.def(python::init<Chem::FragmentGenerator::FragmentLink>((python::arg("self"), python::arg("link")))[python::with_custodian_and_ward<1, 2>()])
+		.def(python::init<std::size_t, std::size_t, Chem::Bond&, unsigned int, unsigned int, unsigned int>(
+				 (python::arg("self"), python::arg("frag1_idx"), python::arg("frag2_idx"), python::arg("bond"), 
+				  python::arg("rule_id"), python::arg("atom1_label"), python::arg("atom2_label")))
+			 [python::with_custodian_and_ward<1, 4>()])
 		.def(CDPLPythonBase::ObjectIdentityCheckVisitor<Chem::FragmentGenerator::FragmentLink>())
 		.def("assign", CDPLPythonBase::copyAssOp(&Chem::FragmentGenerator::FragmentLink::operator=), 
-			 (python::arg("self"), python::arg("link")), python::return_self<>())
-		;
+			 (python::arg("self"), python::arg("link")), python::return_self<python::with_custodian_and_ward<1, 2> >())
+		.def("getFragment1Index", &Chem::FragmentGenerator::FragmentLink::getFragment1Index,
+			 python::arg("self"))
+		.def("getFragment2Index", &Chem::FragmentGenerator::FragmentLink::getFragment2Index,
+			 python::arg("self"))
+		.def("getBond", &Chem::FragmentGenerator::FragmentLink::getBond,
+			 python::arg("self"), python::return_internal_reference<>())
+		.def("getRuleID", &Chem::FragmentGenerator::FragmentLink::getRuleID,
+			 python::arg("self"))
+		.def("getAtom1Label", &Chem::FragmentGenerator::FragmentLink::getAtom1Label,
+			 python::arg("self"))
+		.def("getAtom2Label", &Chem::FragmentGenerator::FragmentLink::getAtom2Label,
+			 python::arg("self"))
+		.add_property("fragment1Index", &Chem::FragmentGenerator::FragmentLink::getFragment1Index)
+		.add_property("fragment2Index", &Chem::FragmentGenerator::FragmentLink::getFragment2Index)
+		.add_property("bond", python::make_function(&Chem::FragmentGenerator::FragmentLink::getBond,
+													python::return_internal_reference<>()))
+		.add_property("ruleID", &Chem::FragmentGenerator::FragmentLink::getRuleID)
+		.add_property("atom1Label", &Chem::FragmentGenerator::FragmentLink::getAtom1Label)
+		.add_property("atom2Label", &Chem::FragmentGenerator::FragmentLink::getAtom2Label);
 	
     cl
 		.def(python::init<>(python::arg("self")))
-		.def(python::init<Chem::FragmentGenerator>((python::arg("self"), python::arg("gen"))))
+		.def(python::init<Chem::FragmentGenerator>((python::arg("self"), python::arg("gen")))[python::with_custodian_and_ward<1, 2>()])
 		.def(CDPLPythonBase::ObjectIdentityCheckVisitor<Chem::FragmentGenerator>())
 		.def("assign", &Chem::FragmentGenerator::operator=, 
-			 (python::arg("self"), python::arg("gen")), python::return_self<>())
+			 (python::arg("self"), python::arg("gen")), python::return_self<python::with_custodian_and_ward<1, 2> >())
 		.def("addFragmentationRule",
-			 static_cast<void (Chem::FragmentGenerator::*)(const Chem::MolecularGraph::SharedPointer&, unsigned int, unsigned int, unsigned int)>
+			 static_cast<void (Chem::FragmentGenerator::*)(const Chem::MolecularGraph::SharedPointer&, unsigned int)>
 			 (&Chem::FragmentGenerator::addFragmentationRule), 
-			 (python::arg("self"), python::arg("match_ptn"), python::arg("rule_id"), python::arg("atom1_type"), python::arg("atom2_type")))
+			 (python::arg("self"), python::arg("match_ptn"), python::arg("rule_id")))
 		.def("addFragmentationRule",
 			 static_cast<void (Chem::FragmentGenerator::*)(const Chem::FragmentGenerator::FragmentationRule&)>
 			 (&Chem::FragmentGenerator::addFragmentationRule), 
@@ -127,12 +188,6 @@ void CDPLPythonChem::exportFragmentGenerator()
 		.def("includeSplitBonds",
 			 static_cast<void (Chem::FragmentGenerator::*)(bool)>(&Chem::FragmentGenerator::includeSplitBonds), 
 			 (python::arg("self"), python::arg("include")))
-		.def("generateFragmentLinkInfo",
-			 static_cast<bool (Chem::FragmentGenerator::*)() const>(&Chem::FragmentGenerator::generateFragmentLinkInfo), 
-			 python::arg("self"))
-		.def("generateFragmentLinkInfo",
-			 static_cast<void (Chem::FragmentGenerator::*)(bool)>(&Chem::FragmentGenerator::generateFragmentLinkInfo), 
-			 (python::arg("self"), python::arg("generate")))
 		.add_property("fragmentFilterFunction",
 					  python::make_function(&Chem::FragmentGenerator::getFragmentFilterFunction,
 											python::return_internal_reference<>()),
@@ -140,9 +195,6 @@ void CDPLPythonChem::exportFragmentGenerator()
 		.add_property("incSplitBonds",
 					  static_cast<bool (Chem::FragmentGenerator::*)() const>(&Chem::FragmentGenerator::includeSplitBonds),
 					  static_cast<void (Chem::FragmentGenerator::*)(bool)>(&Chem::FragmentGenerator::includeSplitBonds))
-		.add_property("genFragmentLinkInfo",
-					  static_cast<bool (Chem::FragmentGenerator::*)() const>(&Chem::FragmentGenerator::generateFragmentLinkInfo),
-					  static_cast<void (Chem::FragmentGenerator::*)(bool)>(&Chem::FragmentGenerator::generateFragmentLinkInfo))
 		.add_property("numFragmentationRules", &Chem::FragmentGenerator::getNumFragmentationRules)
 		.add_property("numExcludePatterns", &Chem::FragmentGenerator::getNumExcludePatterns)
 		.add_property("numFragmentLinks", &Chem::FragmentGenerator::getNumFragmentLinks);
