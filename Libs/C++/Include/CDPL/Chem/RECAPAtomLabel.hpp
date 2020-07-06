@@ -44,7 +44,7 @@ namespace CDPL
 	 */
 
 	/**
-	 * \brief Provides constants for the labeling of atoms in bonds matched by a RECAP rule.
+	 * \brief Provides constants for the labeling of atoms in bonds matched by a RECAP fragmentation rule.
 	 * \see [\ref RECAP]
 	 */
 	namespace RECAPAtomLabel 

@@ -56,6 +56,8 @@ namespace CDPLPythonChem
 	void exportTautomerizationTypes();
 	void exportRECAPRuleIDs();
 	void exportRECAPAtomLabels();
+	void exportBRICSRuleIDs();
+	void exportBRICSAtomLabels();
 
 	void exportEntity3DProperties();
 	void exportAtomProperties();

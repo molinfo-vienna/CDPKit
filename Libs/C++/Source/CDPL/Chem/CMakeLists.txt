@@ -131,6 +131,7 @@ SET(cdpl-chem_LIB_SRCS
 
     FragmentGenerator.cpp
     RECAPFragmentGenerator.cpp
+    BRICSFragmentGenerator.cpp
 
     CompleteRingSet.cpp
     AromaticRingSet.cpp

@@ -26,8 +26,6 @@
  
 #include "StaticInit.hpp"
 
-#include <string>
-
 #include <boost/lexical_cast.hpp>
 #include <boost/thread.hpp>
 
@@ -42,34 +40,6 @@ using namespace CDPL;
 
 namespace
 {
-
-	const std::string AMIDE_PATTERN_STR                  = "[#7v3X3:" + boost::lexical_cast<std::string>(Chem::RECAPAtomLabel::AMIDE_N) + 
-		                                                   "](-[#1,#6])(-[#6])-!@[C:" + boost::lexical_cast<std::string>(Chem::RECAPAtomLabel::AMIDE_C) + "](=O)-[#6,#1]";
-	const std::string ESTER_PATTERN_STR                  = "[OX2:" + boost::lexical_cast<std::string>(Chem::RECAPAtomLabel::ESTER_O) + 
-		                                                   "](-[#6])-!@[C:" + boost::lexical_cast<std::string>(Chem::RECAPAtomLabel::ESTER_C) + "](=O)-[#6,#1]";
-	const std::string AMINE_PATTERN_STR                  = "[NX3v3:" + boost::lexical_cast<std::string>(Chem::RECAPAtomLabel::AMINE_N) + 
-		                                                   "](-[#1,#6])(-[#6])-!@[C!R:" + boost::lexical_cast<std::string>(Chem::RECAPAtomLabel::AMINE_C) + "]";
-	const std::string UREA_PATTERN_STR                   = "[#7v3X3:" + boost::lexical_cast<std::string>(Chem::RECAPAtomLabel::UREA_N) + 
-		                                                   "](-[#1,#6])(-[#6])-!@[C:" + boost::lexical_cast<std::string>(Chem::RECAPAtomLabel::UREA_C) + "](=O)-[#7]";
-	const std::string ETHER_PATTERN_STR                  = "[OX2:" + boost::lexical_cast<std::string>(Chem::RECAPAtomLabel::ETHER_O) + 
-		                                                   "](-[#6])-!@[C!R:" + boost::lexical_cast<std::string>(Chem::RECAPAtomLabel::ETHER_C) + "]";
-	const std::string OLEFIN_PATTERN_STR                 = "[CX3:" + boost::lexical_cast<std::string>(Chem::RECAPAtomLabel::OLEFIN_C) + 
-		                                                   "](-[#1,#6])(-[#6])=!@[CX3:" + boost::lexical_cast<std::string>(Chem::RECAPAtomLabel::OLEFIN_C) + "](-[#1,#6])(-[#6])";
-	const std::string QUARTERNARY_N_PATTERN_STR          = "[NX4+1:" + boost::lexical_cast<std::string>(Chem::RECAPAtomLabel::QUARTERNARY_N_N) + 
-		                                                   "](-[#1,#6])(-[#1,#6])(-[#6])-!@[CX4!R:" + boost::lexical_cast<std::string>(Chem::RECAPAtomLabel::QUARTERNARY_N_C) + "]";
-	const std::string AROMATIC_N_ALIPHATIC_C_PATTERN_STR = "[n:" + boost::lexical_cast<std::string>(Chem::RECAPAtomLabel::AROMATIC_N_ALIPHATIC_C_N) +
-		                                                   "]-!@[CX4:" + boost::lexical_cast<std::string>(Chem::RECAPAtomLabel::AROMATIC_N_ALIPHATIC_C_C) + "]";
-	const std::string LACTAM_N_ALIPHATIC_C_PATTERN_STR   = "[Nv3X3R:" + boost::lexical_cast<std::string>(Chem::RECAPAtomLabel::LACTAM_N_ALIPHATIC_C_N) + 
-                                                           "](-@[#6R])(-!@[CX4!R:" + boost::lexical_cast<std::string>(Chem::RECAPAtomLabel::LACTAM_N_ALIPHATIC_C_C) + "])-@[CR](=O)(-@[#6R])";
-	const std::string AROMATIC_C_AROMATIC_C_PATTERN_STR  = "[c:" + boost::lexical_cast<std::string>(Chem::RECAPAtomLabel::AROMATIC_C_AROMATIC_C_C) +
-		                                                   "]-!@[c:" + boost::lexical_cast<std::string>(Chem::RECAPAtomLabel::AROMATIC_C_AROMATIC_C_C) + "]";
-	const std::string SULFONAMIDE_PATTERN_STR            = "[#7v3X3:" + boost::lexical_cast<std::string>(Chem::RECAPAtomLabel::SULFONAMIDE_N) + 
-		                                                   "](-[#1,#6])(-[#6])-!@[S:" + boost::lexical_cast<std::string>(Chem::RECAPAtomLabel::SULFONAMIDE_S) + "](=O)(=O)-[#6,#1]";
-
-	const std::string METHYL_X_PATTERN_STR               = "[*:1]-[CH3:1]";
-	const std::string ETHYL_X_PATTERN_STR                = "[*:1]-[CH2:1]-[CH3]";
-	const std::string PROPYL_X_PATTERN_STR               = "[*:1]-[CH2:1]-[CH2]-[CH3]";
-	const std::string BUTYL_X_PATTERN_STR                = "[*:1]-[CH2:1]-[CH2]-[CH2]-[CH3]";
 
 	Chem::Molecule::SharedPointer amidePattern;
 	Chem::Molecule::SharedPointer esterPattern;
@@ -90,24 +60,31 @@ namespace
 
 	boost::once_flag initPatternsFlag = BOOST_ONCE_INIT;
 
+	inline std::string str(unsigned int label)
+	{
+		return boost::lexical_cast<std::string>(label);
+	}
+
 	void initPatterns() 
 	{
-		amidePattern = Chem::parseSMARTS(AMIDE_PATTERN_STR);
-		esterPattern = Chem::parseSMARTS(ESTER_PATTERN_STR);
-		aminePattern = Chem::parseSMARTS(AMINE_PATTERN_STR);
-		ureaPattern = Chem::parseSMARTS(UREA_PATTERN_STR);
-		etherPattern = Chem::parseSMARTS(ETHER_PATTERN_STR);
-		olefinPattern = Chem::parseSMARTS(OLEFIN_PATTERN_STR);
-		quarternaryNPattern = Chem::parseSMARTS(QUARTERNARY_N_PATTERN_STR);
-		aromaticNAliphaticCPattern = Chem::parseSMARTS(AROMATIC_N_ALIPHATIC_C_PATTERN_STR);
-		lactamNAliphaticCPattern = Chem::parseSMARTS(LACTAM_N_ALIPHATIC_C_PATTERN_STR);
-		aromaticCAromaticCPattern = Chem::parseSMARTS(AROMATIC_C_AROMATIC_C_PATTERN_STR);
-		sulfonamidePattern = Chem::parseSMARTS(SULFONAMIDE_PATTERN_STR);
+		using namespace Chem;
 
-		methylXPattern = Chem::parseSMARTS(METHYL_X_PATTERN_STR);
-		ethylXPattern = Chem::parseSMARTS(ETHYL_X_PATTERN_STR);
-		propylXPattern = Chem::parseSMARTS(PROPYL_X_PATTERN_STR);
-		butylXPattern = Chem::parseSMARTS(BUTYL_X_PATTERN_STR);
+		amidePattern = parseSMARTS("[#7v3X3:" + str(RECAPAtomLabel::AMIDE_N) + "](-[#1,#6])(-[#6])-!@[C:" + str(RECAPAtomLabel::AMIDE_C) + "](=O)-[#6,#1]");
+		esterPattern = parseSMARTS("[OX2:" + str(RECAPAtomLabel::ESTER_O) + "](-[#6])-!@[C:" + str(RECAPAtomLabel::ESTER_C) + "](=O)-[#6,#1]");
+		aminePattern = parseSMARTS("[NX3v3:" + str(RECAPAtomLabel::AMINE_N) + "](-[#1,#6])(-[#6])-!@[C!R:" + str(RECAPAtomLabel::AMINE_C) + "]");
+		ureaPattern = parseSMARTS("[#7v3X3:" + str(RECAPAtomLabel::UREA_N) + "](-[#1,#6])(-[#6])-!@[C:" + str(RECAPAtomLabel::UREA_C) + "](=O)-[#7]");
+		etherPattern = parseSMARTS("[OX2:" + str(RECAPAtomLabel::ETHER_O) + "](-[#6])-!@[C!R:" + str(RECAPAtomLabel::ETHER_C) + "]");
+		olefinPattern = parseSMARTS("[CX3:" + str(RECAPAtomLabel::OLEFIN_C) + "](-[#1,#6])(-[#6])=!@[CX3:" + str(RECAPAtomLabel::OLEFIN_C) + "](-[#1,#6])(-[#6])");
+		quarternaryNPattern = parseSMARTS("[NX4+1:" + str(RECAPAtomLabel::QUARTERNARY_N_N) + "](-[#1,#6])(-[#1,#6])(-[#6])-!@[CX4!R:" + str(RECAPAtomLabel::QUARTERNARY_N_C) + "]");
+		aromaticNAliphaticCPattern = parseSMARTS("[n:" + str(RECAPAtomLabel::AROMATIC_N_ALIPHATIC_C_N) + "]-!@[CX4:" + str(RECAPAtomLabel::AROMATIC_N_ALIPHATIC_C_C) + "]");
+		lactamNAliphaticCPattern = parseSMARTS("[Nv3X3R:" + str(RECAPAtomLabel::LACTAM_N_ALIPHATIC_C_N) + "](-@[#6R])(-!@[CX4!R:" + str(RECAPAtomLabel::LACTAM_N_ALIPHATIC_C_C) + "])-@[CR](=O)(-@[#6R])");
+		aromaticCAromaticCPattern = parseSMARTS("[c:" + str(RECAPAtomLabel::AROMATIC_C_AROMATIC_C_C) + "]-!@[c:" + str(RECAPAtomLabel::AROMATIC_C_AROMATIC_C_C) + "]");
+		sulfonamidePattern = parseSMARTS("[#7v3X3:" + str(RECAPAtomLabel::SULFONAMIDE_N) + "](-[#1,#6])(-[#6])-!@[S:" + str(RECAPAtomLabel::SULFONAMIDE_S) + "](=O)(=O)-[#6,#1]");
+
+		methylXPattern = parseSMARTS("[*:1]-[CH3:1]");
+		ethylXPattern = parseSMARTS("[*:1]-[CH2:1]-[CH3]");
+		propylXPattern = parseSMARTS("[*:1]-[CH2:1]-[CH2]-[CH3]");
+		butylXPattern = parseSMARTS("[*:1]-[CH2:1]-[CH2]-[CH2]-[CH3]");
 	}
 };
 

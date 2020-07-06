@@ -319,6 +319,9 @@
 #include "CDPL/Chem/RECAPRuleID.hpp"  
 #include "CDPL/Chem/RECAPAtomLabel.hpp"  
 #include "CDPL/Chem/RECAPFragmentGenerator.hpp"  
+#include "CDPL/Chem/BRICSRuleID.hpp"  
+#include "CDPL/Chem/BRICSAtomLabel.hpp"  
+#include "CDPL/Chem/BRICSFragmentGenerator.hpp"  
 
 #include "CDPL/Chem/TopologicalEntityAlignment.hpp"
 #include "CDPL/Chem/GeometricalEntityAlignment.hpp"

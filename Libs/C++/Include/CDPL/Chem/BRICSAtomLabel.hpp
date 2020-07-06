@@ -1,7 +1,7 @@
 /* -*- mode: c++; c-basic-offset: 4; tab-width: 4; indent-tabs-mode: t -*- */
 
 /* 
- * RECAPRuleID.hpp 
+ * BRICSAtomLabel.hpp 
  *
  * This file is part of the Chemical Data Processing Toolkit
  *
@@ -25,11 +25,11 @@
 
 /**
  * \file
- * \brief Definition of constants in namespace CDPL::Chem::RECAPRuleID.
+ * \brief Definition of constants in namespace CDPL::Chem::BRICSAtomLabel.
  */
 
-#ifndef CDPL_CHEM_RECAPRULEID_HPP
-#define CDPL_CHEM_RECAPRULEID_HPP
+#ifndef CDPL_CHEM_BRICSATOMLABEL_HPP
+#define CDPL_CHEM_BRICSATOMLABEL_HPP
 
 
 namespace CDPL 
@@ -38,36 +38,41 @@ namespace CDPL
     namespace Chem 
     {
 
-		/**
-		 * \addtogroup CDPL_CHEM_CONSTANTS
-		 * @{
-		 */
+	/**
+	 * \addtogroup CDPL_CHEM_CONSTANTS
+	 * @{
+	 */
 
-		/**
-		 * \brief Provides constants for the identification of RECAP fragmentation rules.
-		 * \see [\ref RECAP]
-		 */
-		namespace RECAPRuleID 
-		{
+	/**
+	 * \brief Provides constants for the labeling of atoms in bonds matched by a BRICS fragmentation rule.
+	 * \see [\ref BRICS]
+	 */
+	namespace BRICSAtomLabel 
+	{
 
-			const unsigned int NONE                   = 0;
-			const unsigned int AMIDE                  = 1;
-			const unsigned int ESTER                  = 2;
-			const unsigned int AMINE                  = 3;
-			const unsigned int UREA                   = 4;
-			const unsigned int ETHER                  = 5;
-			const unsigned int OLEFIN                 = 6;
-			const unsigned int QUARTERNARY_N          = 7;
-			const unsigned int AROMATIC_N_ALIPHATIC_C = 8;
-			const unsigned int LACTAM_N_ALIPHATIC_C   = 9;
-			const unsigned int AROMATIC_C_AROMATIC_C  = 10;
-			const unsigned int SULFONAMIDE            = 11;
-		}
+	    const unsigned int NONE = 0;
+		const unsigned int L1   = 1;
+		const unsigned int L2   = 2;
+		const unsigned int L3   = 3;
+		const unsigned int L4   = 4;
+		const unsigned int L5   = 5;
+		const unsigned int L6   = 6;
+		const unsigned int L7   = 7;
+		const unsigned int L8   = 8;
+		const unsigned int L9   = 9;
+		const unsigned int L10  = 10;
+		const unsigned int L11  = 11;
+		const unsigned int L12  = 12;
+		const unsigned int L13  = 13;
+		const unsigned int L14  = 14;
+		const unsigned int L15  = 15;
+		const unsigned int L16  = 16;
+	}
 
-		/**
-		 * @}
-		 */
+	/**
+	 * @}
+	 */
     }
 }
 
-#endif // CDPL_CHEM_RECAPRULEID_HPP
+#endif // CDPL_CHEM_BRICSATOMLABEL_HPP

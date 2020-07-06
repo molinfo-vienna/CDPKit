@@ -79,6 +79,14 @@ Boost.Function documentation: http://www.boost.org/doc/html/function.html
 </tr>
 
 <tr>
+<td valign="top">\anchor BRICS<i>[BRICS]</i></td>
+<td valign="top">
+J. Degen, C. Wegscheid-Gerlach, A. Zaliani, M. Rarey, On the art of compiling and using ’drug-like’ chemical fragment spaces,
+<i>Chem. Med. Chem.</i> <b>2008</b>, 3, 1503-1507
+</td>
+</tr>
+
+<tr>
 <td valign="top">\anchor BSHPTR<i>[BSHPTR]</i></td>
 <td valign="top">
 Boost \c shared_ptr documentation: http://www.boost.org/libs/smart_ptr/shared_ptr.htm
