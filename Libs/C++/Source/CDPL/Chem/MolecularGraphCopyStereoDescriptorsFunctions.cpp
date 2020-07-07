@@ -69,6 +69,8 @@ void Chem::copyAtomStereoDescriptors(MolecularGraph& molgraph_copy, const Molecu
 														   molgraph_copy.getAtom(molgraph.getAtomIndex(*ref_atoms[3]) + atom_idx_offs)));
 		} catch (const Base::IndexError& e) {
 			clearStereoDescriptor(atom);
+		} catch (const Base::ItemNotFound& e) {
+			clearStereoDescriptor(atom);
 		} 
 	}
 }
@@ -98,6 +100,8 @@ void Chem::copyBondStereoDescriptors(MolecularGraph& molgraph_copy, const Molecu
 													   molgraph_copy.getAtom(molgraph.getAtomIndex(*ref_atoms[2]) + atom_idx_offs),
 													   molgraph_copy.getAtom(molgraph.getAtomIndex(*ref_atoms[3]) + atom_idx_offs)));
 		} catch (const Base::IndexError& e) {
+			clearStereoDescriptor(bond);
+		} catch (const Base::ItemNotFound& e) {
 			clearStereoDescriptor(bond);
 		} 
 	}
