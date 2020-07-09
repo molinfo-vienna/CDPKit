@@ -51,9 +51,14 @@ void Pharm::prepareForPharmacophoreGeneration(Chem::Molecule& mol)
     setAromaticityFlags(mol, false);
 
 	if (makeHydrogenComplete(mol)) {
-		std::for_each(mol.getAtomsBegin(), mol.getAtomsEnd(), boost::bind(&Chem::setImplicitHydrogenCount, _1, 0));
-	
 		generateHydrogen3DCoordinates(mol);
-		Biomol::setHydrogenResidueSequenceInfo(mol, false);
+
+		try {
+			Biomol::setHydrogenResidueSequenceInfo(mol, false);
+
+		} catch (const Base::ItemNotFound& e) {
+		} catch (...) {
+			throw;
+		}
 	}
 }
