@@ -59,5 +59,5 @@ void CDPLPythonChem::exportAtomPropertyFlags()
 		.def_readonly("SYMBOL", &Chem::AtomPropertyFlag::SYMBOL)
 		.def_readonly("TOPOLOGY", &Chem::AtomPropertyFlag::TOPOLOGY)
 		.def_readonly("HYBRIDIZATION_STATE", &Chem::AtomPropertyFlag::HYBRIDIZATION_STATE)
-		.def_readonly("ATOM_MAPPING_ID", &Chem::AtomPropertyFlag::TOPOLOGY);
+		.def_readonly("ATOM_MAPPING_ID", &Chem::AtomPropertyFlag::ATOM_MAPPING_ID);
 }

@@ -40,7 +40,7 @@ SET(shape_MOD_SRCS
     FastGaussianShapeOverlapFunctionExport.cpp
     GaussianShapeAlignmentStartGeneratorExport.cpp
     PrincipalAxesAlignmentStartGeneratorExport.cpp
-    GaussianShapeAlignmentExport.cpp
+    GaussianShapeFunctionAlignmentExport.cpp
 
     SymmetryClassExport.cpp
     

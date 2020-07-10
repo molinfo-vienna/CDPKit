@@ -331,6 +331,7 @@ Daylight SMARTS Theory website: http://www.daylight.com/dayhtml/doc/theory/theor
 Daylight SMILES Theory website: http://www.daylight.com/dayhtml/doc/theory/theory.smiles.html
 </td>
 </tr>
+
 <tr><td></td>
 <td valign="top">
 D. Weininger,
@@ -338,6 +339,7 @@ SMILES, a chemical language and information system. 1. Introduction to methodolo
 <i>J. Chem. Inf. Comput. Sci.</i> <b>1988</b>, 28, 31-36
 </td>
 </tr>
+
 <tr><td></td>
 <td valign="top">
 D. Weininger, A. Weininger and J. L. Weininger, 
@@ -346,7 +348,7 @@ SMILES. 2. Algorithm for generation of unique SMILES notation,
 </td>
 </tr>
 
-tr>
+<tr>
 <td valign="top">\anchor STECFP<i>[STECFP]</i></td>
 <td valign="top">
 D. Rogers and M. Hahn, Extended-Connectivity Fingerprints, 

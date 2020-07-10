@@ -64,6 +64,6 @@ void CDPLPythonShape::exportGaussianShapeFunctions()
 				(python::arg("features"), python::arg("shape"), python::arg("append") = false,
 				 python::arg("radius") = -1.0, python::arg("inc_xv") = false, python::arg("p") = 3.5));
 	python::def("transform", &Shape::transform, (python::arg("shape"), python::arg("xform")));
-	python::def("prepareForAlignment", &Shape::prepareForAlignment,
+	python::def("centerAndAlignPrincipalAxes", &Shape::centerAndAlignPrincipalAxes,
 				(python::arg("shape"), python::arg("func"), python::arg("xform"), python::arg("is_ref"), python::arg("mom_eq_thresh") = 0.15));
 }

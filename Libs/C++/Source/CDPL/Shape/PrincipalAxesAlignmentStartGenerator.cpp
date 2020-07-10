@@ -29,6 +29,7 @@
 #include <cmath>
 
 #include "CDPL/Shape/PrincipalAxesAlignmentStartGenerator.hpp"
+#include "CDPL/Shape/GaussianShapeFunctions.hpp"
 #include "CDPL/Shape/SymmetryClass.hpp"
 #include "CDPL/Math/Quaternion.hpp"
 #include "CDPL/Base/Exceptions.hpp"
@@ -82,6 +83,16 @@ namespace
 Shape::PrincipalAxesAlignmentStartGenerator::PrincipalAxesAlignmentStartGenerator():
 	refAxesSwapFlags(getAxesSwapFlags(SymmetryClass::UNDEF))
 {}
+
+unsigned int Shape::PrincipalAxesAlignmentStartGenerator::setupReference(GaussianShape& shape, GaussianShapeFunction& shape_func, Math::Matrix4D& xform) const
+{
+	return centerAndAlignPrincipalAxes(shape, shape_func, xform, true);
+}
+
+unsigned int Shape::PrincipalAxesAlignmentStartGenerator::setupAligned(GaussianShape& shape, GaussianShapeFunction& shape_func, Math::Matrix4D& xform) const
+{
+	return centerAndAlignPrincipalAxes(shape, shape_func, xform, false);
+}
 
 void Shape::PrincipalAxesAlignmentStartGenerator::setReference(const GaussianShapeFunction& ref_shape_func, unsigned int sym_class)
 {

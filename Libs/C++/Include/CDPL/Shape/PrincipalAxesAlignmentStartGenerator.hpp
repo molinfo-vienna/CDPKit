@@ -56,6 +56,10 @@ namespace CDPL
 		  public:
 			PrincipalAxesAlignmentStartGenerator();
 				
+			unsigned int setupReference(GaussianShape& shape, GaussianShapeFunction& shape_func, Math::Matrix4D& xform) const; 
+
+			unsigned int setupAligned(GaussianShape& shape, GaussianShapeFunction& shape_func, Math::Matrix4D& xform) const; 
+
 			void setReference(const GaussianShapeFunction& ref_shape_func, unsigned int sym_class);
 
 			bool generate(const GaussianShapeFunction& aligned_shape_func, unsigned int sym_class);

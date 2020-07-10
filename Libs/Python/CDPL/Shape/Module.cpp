@@ -46,7 +46,7 @@ BOOST_PYTHON_MODULE(_shape)
 	exportGaussianShapeAlignmentStartGenerator();
 	exportPrincipalAxesAlignmentStartGenerator();
 
-	exportGaussianShapeAlignment();
+	exportGaussianShapeFunctionAlignment();
 
 	exportSymmetryClasses();
 	

@@ -69,8 +69,8 @@ namespace CDPL
 
 		CDPL_SHAPE_API void transform(GaussianShape& shape, const Math::Matrix4D& xform);
 		
-		CDPL_SHAPE_API unsigned int prepareForAlignment(GaussianShape& shape, GaussianShapeFunction& func, Math::Matrix4D& xform,
-														bool is_ref, double mom_eq_thresh = 0.15);
+		CDPL_SHAPE_API unsigned int centerAndAlignPrincipalAxes(GaussianShape& shape, GaussianShapeFunction& func, Math::Matrix4D& xform,
+																bool is_ref, double mom_eq_thresh = 0.15);
 		/**
 		 * @}
 		 */

@@ -1,7 +1,7 @@
 /* -*- mode: c++; c-basic-offset: 4; tab-width: 4; indent-tabs-mode: t -*- */
 
 /* 
- * GaussianShapeAlignment.cpp 
+ * GaussianShapeFunctionAlignment.cpp 
  *
  * This file is part of the Chemical Data Processing Toolkit
  *
@@ -29,7 +29,7 @@
 #include <boost/math/special_functions/fpclassify.hpp>
 #include <boost/bind.hpp>
 
-#include "CDPL/Shape/GaussianShapeAlignment.hpp"
+#include "CDPL/Shape/GaussianShapeFunctionAlignment.hpp"
 #include "CDPL/Shape/GaussianShapeFunction.hpp"
 #include "CDPL/Shape/GaussianShape.hpp"
 #include "CDPL/Shape/UtilityFunctions.hpp"
@@ -49,23 +49,23 @@ namespace
 }
 
 
-Shape::GaussianShapeAlignment::GaussianShapeAlignment():
+Shape::GaussianShapeFunctionAlignment::GaussianShapeFunctionAlignment():
 	overlapFunc(&defOverlapFunc), startGen(&defStartGen), refShapeFunc(0), refShapeSymClass(SymmetryClass::UNDEF),
-	minimizer(boost::bind(&GaussianShapeAlignment::calcAlignmentFunctionValue, this, _1),
-			  boost::bind(&GaussianShapeAlignment::calcAlignmentFunctionGradient, this, _1, _2))
+	minimizer(boost::bind(&GaussianShapeFunctionAlignment::calcAlignmentFunctionValue, this, _1),
+			  boost::bind(&GaussianShapeFunctionAlignment::calcAlignmentFunctionGradient, this, _1, _2))
 {}
 
-Shape::GaussianShapeAlignment::GaussianShapeAlignment(const GaussianShapeFunction& ref_shape_func, unsigned int sym_class):
+Shape::GaussianShapeFunctionAlignment::GaussianShapeFunctionAlignment(const GaussianShapeFunction& ref_shape_func, unsigned int sym_class):
 	overlapFunc(&defOverlapFunc), startGen(&defStartGen),
-	minimizer(boost::bind(&GaussianShapeAlignment::calcAlignmentFunctionValue, this, _1),
-			  boost::bind(&GaussianShapeAlignment::calcAlignmentFunctionGradient, this, _1, _2))
+	minimizer(boost::bind(&GaussianShapeFunctionAlignment::calcAlignmentFunctionValue, this, _1),
+			  boost::bind(&GaussianShapeFunctionAlignment::calcAlignmentFunctionGradient, this, _1, _2))
 {
    setReferenceShapeFunction(ref_shape_func,  sym_class);
 }
 
-Shape::GaussianShapeAlignment::~GaussianShapeAlignment() {}
+Shape::GaussianShapeFunctionAlignment::~GaussianShapeFunctionAlignment() {}
 
-void Shape::GaussianShapeAlignment::setOverlapFunction(GaussianShapeOverlapFunction& func)
+void Shape::GaussianShapeFunctionAlignment::setOverlapFunction(GaussianShapeOverlapFunction& func)
 {
 	overlapFunc = &func;
 
@@ -73,12 +73,12 @@ void Shape::GaussianShapeAlignment::setOverlapFunction(GaussianShapeOverlapFunct
 		overlapFunc->setShapeFunction(*refShapeFunc, true);
 }
 			
-Shape::GaussianShapeOverlapFunction& Shape::GaussianShapeAlignment::getOverlapFunction() const
+Shape::GaussianShapeOverlapFunction& Shape::GaussianShapeFunctionAlignment::getOverlapFunction() const
 {
 	return *overlapFunc;
 }
 
-void Shape::GaussianShapeAlignment::setStartGenerator(PrincipalAxesAlignmentStartGenerator& gen)
+void Shape::GaussianShapeFunctionAlignment::setStartGenerator(GaussianShapeAlignmentStartGenerator& gen)
 {
 	startGen = &gen;
 
@@ -86,12 +86,12 @@ void Shape::GaussianShapeAlignment::setStartGenerator(PrincipalAxesAlignmentStar
 		startGen->setReference(*refShapeFunc, refShapeSymClass);
 }
 			
-Shape::GaussianShapeAlignmentStartGenerator& Shape::GaussianShapeAlignment::getStartGenerator() const
+Shape::GaussianShapeAlignmentStartGenerator& Shape::GaussianShapeFunctionAlignment::getStartGenerator() const
 {
 	return *startGen;
 }
 
-void Shape::GaussianShapeAlignment::setReferenceShapeFunction(const GaussianShapeFunction& func, unsigned int sym_class)
+void Shape::GaussianShapeFunctionAlignment::setReferenceShapeFunction(const GaussianShapeFunction& func, unsigned int sym_class)
 {
 	refShapeFunc = &func;
 	refShapeSymClass = sym_class;
@@ -100,12 +100,12 @@ void Shape::GaussianShapeAlignment::setReferenceShapeFunction(const GaussianShap
 	startGen->setReference(*refShapeFunc, refShapeSymClass);
 }
 
-const Shape::GaussianShapeFunction* Shape::GaussianShapeAlignment::getReferenceShapeFunction() const
+const Shape::GaussianShapeFunction* Shape::GaussianShapeFunctionAlignment::getReferenceShapeFunction() const
 {
     return refShapeFunc;
 }
 
-bool Shape::GaussianShapeAlignment::align(const GaussianShapeFunction& func, unsigned int sym_class)
+bool Shape::GaussianShapeFunctionAlignment::align(const GaussianShapeFunction& func, unsigned int sym_class)
 {
 	results.clear();
 
@@ -150,30 +150,30 @@ bool Shape::GaussianShapeAlignment::align(const GaussianShapeFunction& func, uns
 	return !results.empty();
 }
 
-std::size_t Shape::GaussianShapeAlignment::getNumResults() const
+std::size_t Shape::GaussianShapeFunctionAlignment::getNumResults() const
 {
 	return results.size();
 }
 
-const Shape::GaussianShapeAlignment::Result& Shape::GaussianShapeAlignment::getResult(std::size_t idx) const
+const Shape::GaussianShapeFunctionAlignment::Result& Shape::GaussianShapeFunctionAlignment::getResult(std::size_t idx) const
 {
 	if (idx >= results.size())
-		throw Base::IndexError("GaussianShapeAlignment: result index out of bounds");
+		throw Base::IndexError("GaussianShapeFunctionAlignment: result index out of bounds");
 
 	return results[idx];
 }
 
-Shape::GaussianShapeAlignment::ConstResultIterator Shape::GaussianShapeAlignment::getResultsBegin() const
+Shape::GaussianShapeFunctionAlignment::ConstResultIterator Shape::GaussianShapeFunctionAlignment::getResultsBegin() const
 {
 	return results.begin();
 }
 
-Shape::GaussianShapeAlignment::ConstResultIterator Shape::GaussianShapeAlignment::getResultsEnd() const
+Shape::GaussianShapeFunctionAlignment::ConstResultIterator Shape::GaussianShapeFunctionAlignment::getResultsEnd() const
 {
 	return results.end();
 }
 /*
-double Shape::GaussianShapeAlignment::calcAlignmentFunctionValue(const QuaternionTransformation& xform_quat)
+double Shape::GaussianShapeFunctionAlignment::calcAlignmentFunctionValue(const QuaternionTransformation& xform_quat)
 {
 	QuaternionTransformation::ConstPointer xform_quat_data = xform_quat.getData();
 	Math::Matrix4D xform_mtx;
@@ -189,7 +189,7 @@ double Shape::GaussianShapeAlignment::calcAlignmentFunctionValue(const Quaternio
 	return (quat_non_unity_pen - overlapFunc->calcOverlap(optPoseCoords));	
 }
 */
-double Shape::GaussianShapeAlignment::calcAlignmentFunctionValue(const QuaternionTransformation& xform_quat)
+double Shape::GaussianShapeFunctionAlignment::calcAlignmentFunctionValue(const QuaternionTransformation& xform_quat)
 {
 	QuaternionTransformation::ConstPointer xform_quat_data = xform_quat.getData();
 	Math::Matrix4D xform_mtx;
@@ -216,7 +216,7 @@ double Shape::GaussianShapeAlignment::calcAlignmentFunctionValue(const Quaternio
 	return (quat_non_unity_pen - overlapFunc->calcOverlap(optPoseCoords));
 }
 /*
-double Shape::GaussianShapeAlignment::calcAlignmentFunctionGradient(const QuaternionTransformation& xform_quat, QuaternionTransformation& xform_quat_grad)
+double Shape::GaussianShapeFunctionAlignment::calcAlignmentFunctionGradient(const QuaternionTransformation& xform_quat, QuaternionTransformation& xform_quat_grad)
 {
 	xform_quat_grad.clear();
 
@@ -268,7 +268,7 @@ double Shape::GaussianShapeAlignment::calcAlignmentFunctionGradient(const Quater
 	return (neg_overlap + 0.5 * pen_grad_factor * quat_non_unity_pen);
 }
 */
-double Shape::GaussianShapeAlignment::calcAlignmentFunctionGradient(const QuaternionTransformation& xform_quat, QuaternionTransformation& xform_quat_grad)
+double Shape::GaussianShapeFunctionAlignment::calcAlignmentFunctionGradient(const QuaternionTransformation& xform_quat, QuaternionTransformation& xform_quat_grad)
 {
     xform_quat_grad.clear();
 

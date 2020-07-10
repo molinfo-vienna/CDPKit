@@ -1,7 +1,7 @@
 /* -*- mode: c++; c-basic-offset: 4; tab-width: 4; indent-tabs-mode: t -*- */
 
 /* 
- * GaussianShapeAlignment.hpp 
+ * GaussianShapeFunctionAlignment.hpp 
  *
  * This file is part of the Chemical Data Processing Toolkit
  *
@@ -25,11 +25,11 @@
 
 /**
  * \file
- * \brief Definition of the class CDPL::Shape::GaussianShapeAlignment.
+ * \brief Definition of the class CDPL::Shape::GaussianShapeFunctionAlignment.
  */
 
-#ifndef CDPL_SHAPE_GAUSSIANSHAPEALIGNMENT_HPP
-#define CDPL_SHAPE_GAUSSIANSHAPEALIGNMENT_HPP
+#ifndef CDPL_SHAPE_GAUSSIANSHAPEFUNCTIONALIGNMENT_HPP
+#define CDPL_SHAPE_GAUSSIANSHAPEFUNCTIONALIGNMENT_HPP
 
 #include <cstddef>
 #include <vector>
@@ -56,7 +56,7 @@ namespace CDPL
 		 * @{
 		 */
 
-		class CDPL_SHAPE_API GaussianShapeAlignment
+		class CDPL_SHAPE_API GaussianShapeFunctionAlignment
 		{
 
 		  public:
@@ -86,19 +86,19 @@ namespace CDPL
 		  public:
 			typedef ResultList::const_iterator ConstResultIterator;
 				
-			typedef boost::shared_ptr<GaussianShapeAlignment> SharedPointer;
+			typedef boost::shared_ptr<GaussianShapeFunctionAlignment> SharedPointer;
 
-			GaussianShapeAlignment();
+			GaussianShapeFunctionAlignment();
 
-			GaussianShapeAlignment(const GaussianShapeFunction& ref_shape_func, unsigned int sym_class);
+			GaussianShapeFunctionAlignment(const GaussianShapeFunction& ref_shape_func, unsigned int sym_class);
 
-			~GaussianShapeAlignment();
+			~GaussianShapeFunctionAlignment();
 
 			void setOverlapFunction(GaussianShapeOverlapFunction& func);
 			
 			GaussianShapeOverlapFunction& getOverlapFunction() const;
 
-			void setStartGenerator(PrincipalAxesAlignmentStartGenerator& gen);
+			void setStartGenerator(GaussianShapeAlignmentStartGenerator& gen);
 			
 			GaussianShapeAlignmentStartGenerator& getStartGenerator() const;
 			
@@ -117,9 +117,9 @@ namespace CDPL
 			ConstResultIterator getResultsEnd() const;
 						
 		  private:
-			GaussianShapeAlignment(const GaussianShapeAlignment& alignment);
+			GaussianShapeFunctionAlignment(const GaussianShapeFunctionAlignment& alignment);
 
-			GaussianShapeAlignment& operator=(const GaussianShapeAlignment& alignment);
+			GaussianShapeFunctionAlignment& operator=(const GaussianShapeFunctionAlignment& alignment);
 
 			double calcAlignmentFunctionValue(const QuaternionTransformation& xform_quat);
 			double calcAlignmentFunctionGradient(const QuaternionTransformation& xform_quat, QuaternionTransformation& xform_grad);
@@ -145,4 +145,4 @@ namespace CDPL
     }
 }
 
-#endif // CDPL_SHAPE_GAUSSIANSHAPEALIGNMENT_HPP
+#endif // CDPL_SHAPE_GAUSSIANSHAPEFUNCTIONALIGNMENT_HPP

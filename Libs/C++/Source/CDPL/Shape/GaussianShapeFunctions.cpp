@@ -128,8 +128,8 @@ void Shape::transform(GaussianShape& shape, const Math::Matrix4D& xform)
 	}
 }
 
-unsigned int Shape::prepareForAlignment(GaussianShape& shape, GaussianShapeFunction& func, Math::Matrix4D& xform,
-										bool is_ref, double mom_eq_thresh)
+unsigned int Shape::centerAndAlignPrincipalAxes(GaussianShape& shape, GaussianShapeFunction& func, Math::Matrix4D& xform,
+												bool is_ref, double mom_eq_thresh)
 {
 	Math::Matrix4D to_ctr_xform;
 	Math::Matrix4D from_ctr_xform;
