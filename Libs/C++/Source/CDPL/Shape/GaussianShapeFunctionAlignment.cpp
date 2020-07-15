@@ -68,9 +68,6 @@ Shape::GaussianShapeFunctionAlignment::~GaussianShapeFunctionAlignment() {}
 void Shape::GaussianShapeFunctionAlignment::setOverlapFunction(GaussianShapeOverlapFunction& func)
 {
 	overlapFunc = &func;
-
-	if (refShapeFunc)
-		overlapFunc->setShapeFunction(*refShapeFunc, true);
 }
 			
 Shape::GaussianShapeOverlapFunction& Shape::GaussianShapeFunctionAlignment::getOverlapFunction() const
@@ -78,17 +75,54 @@ Shape::GaussianShapeOverlapFunction& Shape::GaussianShapeFunctionAlignment::getO
 	return *overlapFunc;
 }
 
+const Shape::FastGaussianShapeOverlapFunction& Shape::GaussianShapeFunctionAlignment::getDefaultOverlapFunction() const
+{
+	return defOverlapFunc;
+}
+
+Shape::FastGaussianShapeOverlapFunction& Shape::GaussianShapeFunctionAlignment::getDefaultOverlapFunction()
+{
+	return defOverlapFunc;
+}
+
 void Shape::GaussianShapeFunctionAlignment::setStartGenerator(GaussianShapeAlignmentStartGenerator& gen)
 {
 	startGen = &gen;
-
-	if (refShapeFunc)
-		startGen->setReference(*refShapeFunc, refShapeSymClass);
 }
 			
 Shape::GaussianShapeAlignmentStartGenerator& Shape::GaussianShapeFunctionAlignment::getStartGenerator() const
 {
 	return *startGen;
+}
+
+const Shape::PrincipalAxesAlignmentStartGenerator& Shape::GaussianShapeFunctionAlignment::getDefaultStartGenerator() const
+{
+	return defStartGen;
+}
+
+Shape::PrincipalAxesAlignmentStartGenerator& Shape::GaussianShapeFunctionAlignment::getDefaultStartGenerator()
+{
+	return defStartGen;
+}
+
+void Shape::GaussianShapeFunctionAlignment::setColorMatchFunction(const ColorMatchFunction& func)
+{
+	overlapFunc->setColorMatchFunction(func);
+}
+
+const Shape::GaussianShapeFunctionAlignment::ColorMatchFunction& Shape::GaussianShapeFunctionAlignment::getColorMatchFunction() const
+{
+	return overlapFunc->getColorMatchFunction();
+}
+
+unsigned int Shape::GaussianShapeFunctionAlignment::setupReferenceShape(GaussianShape& shape, GaussianShapeFunction& shape_func, Math::Matrix4D& xform) const
+{
+	return startGen->setupReferenceShape(shape, shape_func, xform);
+}
+
+unsigned int Shape::GaussianShapeFunctionAlignment::setupAlignedShape(GaussianShape& shape, GaussianShapeFunction& shape_func, Math::Matrix4D& xform) const
+{
+	return startGen->setupAlignedShape(shape, shape_func, xform);
 }
 
 void Shape::GaussianShapeFunctionAlignment::setReferenceShapeFunction(const GaussianShapeFunction& func, unsigned int sym_class)
@@ -97,7 +131,7 @@ void Shape::GaussianShapeFunctionAlignment::setReferenceShapeFunction(const Gaus
 	refShapeSymClass = sym_class;
 	
     overlapFunc->setShapeFunction(func, true);
-	startGen->setReference(*refShapeFunc, refShapeSymClass);
+	startGen->setReferenceShapeFunction(*refShapeFunc, refShapeSymClass);
 }
 
 const Shape::GaussianShapeFunction* Shape::GaussianShapeFunctionAlignment::getReferenceShapeFunction() const

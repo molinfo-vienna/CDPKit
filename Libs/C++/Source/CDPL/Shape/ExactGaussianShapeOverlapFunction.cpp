@@ -40,16 +40,16 @@ using namespace CDPL;
 
 
 Shape::ExactGaussianShapeOverlapFunction::ExactGaussianShapeOverlapFunction():
-	refShapeFunc(0), ovlShapeFunc(0)
+	refShapeFunc(0), ovlShapeFunc(0), colorMatchFunc()
 {}
 
 Shape::ExactGaussianShapeOverlapFunction::ExactGaussianShapeOverlapFunction(const ExactGaussianShapeOverlapFunction& func):
-	refShapeFunc(func.refShapeFunc), ovlShapeFunc(func.ovlShapeFunc)
+	refShapeFunc(func.refShapeFunc), ovlShapeFunc(func.ovlShapeFunc), colorMatchFunc(func.colorMatchFunc)
 {}
 
 Shape::ExactGaussianShapeOverlapFunction::ExactGaussianShapeOverlapFunction(const GaussianShapeFunction& ref_shape_func,
 																			const GaussianShapeFunction& ovl_shape_func):
-	refShapeFunc(&ref_shape_func), ovlShapeFunc(&ovl_shape_func)
+	refShapeFunc(&ref_shape_func), ovlShapeFunc(&ovl_shape_func), colorMatchFunc()
 {}
 
 Shape::ExactGaussianShapeOverlapFunction::~ExactGaussianShapeOverlapFunction() {}
@@ -62,6 +62,16 @@ void Shape::ExactGaussianShapeOverlapFunction::setShapeFunction(const GaussianSh
 const Shape::GaussianShapeFunction* Shape::ExactGaussianShapeOverlapFunction::getShapeFunction(bool ref) const
 {
 	return (ref ? refShapeFunc : ovlShapeFunc);
+}
+
+void Shape::ExactGaussianShapeOverlapFunction::setColorMatchFunction(const ColorMatchFunction& func)
+{
+	colorMatchFunc = func;
+}
+
+const Shape::GaussianShapeOverlapFunction::ColorMatchFunction& Shape::ExactGaussianShapeOverlapFunction::getColorMatchFunction() const
+{
+	return colorMatchFunc;
 }
 
 double Shape::ExactGaussianShapeOverlapFunction::calcSelfOverlap(bool ref) const
@@ -116,7 +126,8 @@ Shape::ExactGaussianShapeOverlapFunction& Shape::ExactGaussianShapeOverlapFuncti
 	
 	refShapeFunc = func.refShapeFunc;
 	ovlShapeFunc = func.ovlShapeFunc;
-	
+	colorMatchFunc = func.colorMatchFunc;
+
 	return *this;
 }
 
@@ -141,9 +152,13 @@ double Shape::ExactGaussianShapeOverlapFunction::calcOverlap(const GaussianProdu
 		for (GaussianProductList::ConstProductIterator p_it2 = ref_prod_list->getProductsBegin(), p_end2 = ref_prod_list->getProductsEnd(); p_it2 != p_end2; ++p_it2) {
 			const GaussianProduct* prod2 = *p_it2;
 
-			if (prod2->getColor() != prod1_color) // TODO
+			if (!colorMatchFunc) {
+				if (prod2->getColor() != prod1_color)
+					continue;
+
+			} else if (!colorMatchFunc(prod1_color, prod2->getColor()))
 				continue;
-	
+
 			double prod2_delta = prod2->getDelta();
 			double delta = prod1_delta + prod2_delta;
 			double vol_factor = M_PI / delta;
@@ -213,7 +228,11 @@ double Shape::ExactGaussianShapeOverlapFunction::calcOverlap(const GaussianProdu
 		for (GaussianProductList::ConstProductIterator p_it2 = ref_prod_list->getProductsBegin(), p_end2 = ref_prod_list->getProductsEnd(); p_it2 != p_end2; ++p_it2) {
 			const GaussianProduct* prod2 = *p_it2;
 
-			if (prod2->getColor() != prod1_color) // TODO
+			if (!colorMatchFunc) {
+				if (prod2->getColor() != prod1_color)
+					continue;
+
+			} else if (!colorMatchFunc(prod1_color, prod2->getColor()))
 				continue;
 	
 			double prod2_delta = prod2->getDelta();
@@ -290,7 +309,11 @@ double Shape::ExactGaussianShapeOverlapFunction::calcOverlapGradient(const Gauss
 		for (GaussianProductList::ConstProductIterator p_it2 = ref_prod_list->getProductsBegin(), p_end2 = ref_prod_list->getProductsEnd(); p_it2 != p_end2; ++p_it2) {
 			const GaussianProduct* prod2 = *p_it2;
 
-			if (prod2->getColor() != prod1_color) // TODO
+			if (!colorMatchFunc) {
+				if (prod2->getColor() != prod1_color)
+					continue;
+
+			} else if (!colorMatchFunc(prod1_color, prod2->getColor()))
 				continue;
 			
 			Math::Vector3D::ConstPointer prod2_ctr = prod2->getCenter().getData();

@@ -1,7 +1,7 @@
 /* -*- mode: c++; c-basic-offset: 4; tab-width: 4; indent-tabs-mode: t -*- */
 
 /* 
- * Shape.hpp 
+ * GaussianShapeSetExport.cpp 
  *
  * This file is part of the Chemical Data Processing Toolkit
  *
@@ -23,30 +23,28 @@
  * Boston, MA 02111-1307, USA.
  */
 
-/**
- * \file
- * \brief A convenience header including everything that is defined in namespace CDPL::Shape.
- */
 
-#ifndef CDPL_SHAPE_HPP
-#define CDPL_SHAPE_HPP
+#include <boost/python.hpp>
 
-#include "CDPL/Shape/GaussianShape.hpp"
 #include "CDPL/Shape/GaussianShapeSet.hpp"
-#include "CDPL/Shape/QuaternionTransformation.hpp"
 
-#include "CDPL/Shape/GaussianShapeFunction.hpp"
-#include "CDPL/Shape/GaussianShapeOverlapFunction.hpp"
-#include "CDPL/Shape/ExactGaussianShapeOverlapFunction.hpp"
-#include "CDPL/Shape/FastGaussianShapeOverlapFunction.hpp"
+#include "Util/ArrayVisitor.hpp"
 
-#include "CDPL/Shape/GaussianShapeFunctionAlignment.hpp"
-#include "CDPL/Shape/GaussianShapeAlignmentStartGenerator.hpp"
-#include "CDPL/Shape/PrincipalAxesAlignmentStartGenerator.hpp"
+#include "ClassExports.hpp"
 
-#include "CDPL/Shape/SymmetryClass.hpp"
 
-#include "CDPL/Shape/GaussianShapeFunctions.hpp"
-#include "CDPL/Shape/UtilityFunctions.hpp"
+void CDPLPythonShape::exportGaussianShapeSet()
+{
+	using namespace boost;
+	using namespace CDPL;
 
-#endif // CDPL_SHAPE_HPP
+	python::class_<Shape::GaussianShapeSet, Shape::GaussianShapeSet::SharedPointer>("GaussianShapeSet", python::no_init)
+		.def(python::init<>(python::arg("self")))
+		.def(python::init<const Shape::GaussianShapeSet&>((python::arg("self"), python::arg("list")))
+			 [python::with_custodian_and_ward<1, 2>()])
+		.def(CDPLPythonUtil::ArrayVisitor<Shape::GaussianShapeSet, 
+			 python::return_value_policy<python::copy_non_const_reference, python::with_custodian_and_ward_postcall<0, 1> >, 
+			 python::with_custodian_and_ward<1, 2>, python::with_custodian_and_ward<1, 3>, python::with_custodian_and_ward<1, 4> >())
+		.def("__eq__", &Shape::GaussianShapeSet::operator==, (python::arg("self"), python::arg("list")))
+		.def("__ne__", &Shape::GaussianShapeSet::operator!=, (python::arg("self"), python::arg("list")));
+}

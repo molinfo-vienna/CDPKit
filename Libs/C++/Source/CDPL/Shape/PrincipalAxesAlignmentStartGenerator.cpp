@@ -29,6 +29,8 @@
 #include <cmath>
 
 #include "CDPL/Shape/PrincipalAxesAlignmentStartGenerator.hpp"
+#include "CDPL/Shape/GaussianShapeFunction.hpp"
+#include "CDPL/Shape/GaussianShape.hpp"
 #include "CDPL/Shape/GaussianShapeFunctions.hpp"
 #include "CDPL/Shape/SymmetryClass.hpp"
 #include "CDPL/Math/Quaternion.hpp"
@@ -81,67 +83,115 @@ namespace
 
 
 Shape::PrincipalAxesAlignmentStartGenerator::PrincipalAxesAlignmentStartGenerator():
-	refAxesSwapFlags(getAxesSwapFlags(SymmetryClass::UNDEF))
+	ctrAlignmentMode(SHAPE_CENTROID), refShape(0), refAxesSwapFlags(getAxesSwapFlags(SymmetryClass::UNDEF))
 {}
 
-unsigned int Shape::PrincipalAxesAlignmentStartGenerator::setupReference(GaussianShape& shape, GaussianShapeFunction& shape_func, Math::Matrix4D& xform) const
+unsigned int Shape::PrincipalAxesAlignmentStartGenerator::setupReferenceShape(GaussianShape& shape, GaussianShapeFunction& shape_func, Math::Matrix4D& xform) const
 {
 	return centerAndAlignPrincipalAxes(shape, shape_func, xform, true);
 }
 
-unsigned int Shape::PrincipalAxesAlignmentStartGenerator::setupAligned(GaussianShape& shape, GaussianShapeFunction& shape_func, Math::Matrix4D& xform) const
+unsigned int Shape::PrincipalAxesAlignmentStartGenerator::setupAlignedShape(GaussianShape& shape, GaussianShapeFunction& shape_func, Math::Matrix4D& xform) const
 {
 	return centerAndAlignPrincipalAxes(shape, shape_func, xform, false);
 }
 
-void Shape::PrincipalAxesAlignmentStartGenerator::setReference(const GaussianShapeFunction& ref_shape_func, unsigned int sym_class)
+void Shape::PrincipalAxesAlignmentStartGenerator::setCenterAlignmentMode(CenterAlignmentMode mode)
 {
+	ctrAlignmentMode = mode;
+}
+
+Shape::PrincipalAxesAlignmentStartGenerator::CenterAlignmentMode Shape::PrincipalAxesAlignmentStartGenerator::getCenterAlignmentMode() const
+{
+	return ctrAlignmentMode;
+}
+
+void Shape::PrincipalAxesAlignmentStartGenerator::setReferenceShapeFunction(const GaussianShapeFunction& ref_shape_func, unsigned int sym_class)
+{
+	refShape = ref_shape_func.getShape();
 	refAxesSwapFlags = getAxesSwapFlags(sym_class);
 }
 
 bool Shape::PrincipalAxesAlignmentStartGenerator::generate(const GaussianShapeFunction& aligned_shape_func, unsigned int sym_class)
 {
+	if (!refShape)
+		return false;
+
 	startTransforms.clear();
 
-	addStartTransform(IDENTITY_ROT);
-	addStartTransform(X_180_ROT);
-	addStartTransform(Y_180_ROT);
-	addStartTransform(Z_180_ROT);
+	unsigned int axes_swap_flags = refAxesSwapFlags | getAxesSwapFlags(sym_class);
 
-	unsigned int axes_swap_flags = (refAxesSwapFlags | getAxesSwapFlags(sym_class));
+	if (ctrAlignmentMode & SHAPE_CENTROID)
+		generate(Math::Vector3D(), aligned_shape_func, axes_swap_flags);
+
+	switch (ctrAlignmentMode & (NON_COLOR_ELEMENT_CENTERS | COLOR_ELEMENT_CENTERS)) {
+
+		case (NON_COLOR_ELEMENT_CENTERS | COLOR_ELEMENT_CENTERS):
+			for (GaussianShape::ConstElementIterator it = refShape->getElementsBegin(), end = refShape->getElementsEnd(); it != end; ++it) 
+				generate(it->getPosition(), aligned_shape_func, axes_swap_flags);
+
+			return true;
+
+		case NON_COLOR_ELEMENT_CENTERS:
+			for (GaussianShape::ConstElementIterator it = refShape->getElementsBegin(), end = refShape->getElementsEnd(); it != end; ++it) 
+				if (it->getColor() == 0)
+					generate(it->getPosition(), aligned_shape_func, axes_swap_flags);
+
+			return true;
+
+		case COLOR_ELEMENT_CENTERS:
+			for (GaussianShape::ConstElementIterator it = refShape->getElementsBegin(), end = refShape->getElementsEnd(); it != end; ++it) 
+				if (it->getColor() != 0)
+					generate(it->getPosition(), aligned_shape_func, axes_swap_flags);
+
+			return true;
+
+		default:
+			return true;
+	}
+
+	return true;
+}
+
+void Shape::PrincipalAxesAlignmentStartGenerator::generate(const Math::Vector3D& ctr_trans, const GaussianShapeFunction& aligned_shape_func, unsigned int axes_swap_flags)
+{
+	Math::Vector3D::ConstPointer ctr_trans_data = ctr_trans.getData();
+
+	addStartTransform(ctr_trans_data, IDENTITY_ROT);
+	addStartTransform(ctr_trans_data, X_180_ROT);
+	addStartTransform(ctr_trans_data, Y_180_ROT);
+	addStartTransform(ctr_trans_data, Z_180_ROT);
 	
 	if (axes_swap_flags & 0b01) {
-		addStartTransform(XY_SWAP_ROT);
-		addStartTransform(X_180_ROT * XY_SWAP_ROT);
-		addStartTransform(Y_180_ROT * XY_SWAP_ROT);
-		addStartTransform(Z_180_ROT * XY_SWAP_ROT);
+		addStartTransform(ctr_trans_data, XY_SWAP_ROT);
+		addStartTransform(ctr_trans_data, X_180_ROT * XY_SWAP_ROT);
+		addStartTransform(ctr_trans_data, Y_180_ROT * XY_SWAP_ROT);
+		addStartTransform(ctr_trans_data, Z_180_ROT * XY_SWAP_ROT);
 	}
 			
 	if (axes_swap_flags & 0b10) {
-		addStartTransform(YZ_SWAP_ROT);
-		addStartTransform(X_180_ROT * YZ_SWAP_ROT);
-		addStartTransform(Y_180_ROT * YZ_SWAP_ROT);
-		addStartTransform(Z_180_ROT * YZ_SWAP_ROT);
+		addStartTransform(ctr_trans_data, YZ_SWAP_ROT);
+		addStartTransform(ctr_trans_data, X_180_ROT * YZ_SWAP_ROT);
+		addStartTransform(ctr_trans_data, Y_180_ROT * YZ_SWAP_ROT);
+		addStartTransform(ctr_trans_data, Z_180_ROT * YZ_SWAP_ROT);
 	}
 
 	if (axes_swap_flags == 0b11) {
-		addStartTransform(XZ_SWAP_ROT);
-		addStartTransform(X_180_ROT * XZ_SWAP_ROT);
-		addStartTransform(Y_180_ROT * XZ_SWAP_ROT);
-		addStartTransform(Z_180_ROT * XZ_SWAP_ROT);
+		addStartTransform(ctr_trans_data, XZ_SWAP_ROT);
+		addStartTransform(ctr_trans_data, X_180_ROT * XZ_SWAP_ROT);
+		addStartTransform(ctr_trans_data, Y_180_ROT * XZ_SWAP_ROT);
+		addStartTransform(ctr_trans_data, Z_180_ROT * XZ_SWAP_ROT);
 		
-		addStartTransform(XYZ_SWAP_ROT1);
-		addStartTransform(X_180_ROT * XYZ_SWAP_ROT1);
-		addStartTransform(Y_180_ROT * XYZ_SWAP_ROT1);
-		addStartTransform(Z_180_ROT * XYZ_SWAP_ROT1);
+		addStartTransform(ctr_trans_data, XYZ_SWAP_ROT1);
+		addStartTransform(ctr_trans_data, X_180_ROT * XYZ_SWAP_ROT1);
+		addStartTransform(ctr_trans_data, Y_180_ROT * XYZ_SWAP_ROT1);
+		addStartTransform(ctr_trans_data, Z_180_ROT * XYZ_SWAP_ROT1);
 
-		addStartTransform(XYZ_SWAP_ROT2);
-		addStartTransform(X_180_ROT * XYZ_SWAP_ROT2);
-		addStartTransform(Y_180_ROT * XYZ_SWAP_ROT2);
-		addStartTransform(Z_180_ROT * XYZ_SWAP_ROT2);
+		addStartTransform(ctr_trans_data, XYZ_SWAP_ROT2);
+		addStartTransform(ctr_trans_data, X_180_ROT * XYZ_SWAP_ROT2);
+		addStartTransform(ctr_trans_data, Y_180_ROT * XYZ_SWAP_ROT2);
+		addStartTransform(ctr_trans_data, Z_180_ROT * XYZ_SWAP_ROT2);
 	}
-	
-	return true;
 }
 			
 std::size_t Shape::PrincipalAxesAlignmentStartGenerator::getNumStartTransforms() const
@@ -158,14 +208,18 @@ const Shape::QuaternionTransformation& Shape::PrincipalAxesAlignmentStartGenerat
 }
 
 template <typename QE>
-void Shape::PrincipalAxesAlignmentStartGenerator::addStartTransform(const Math::QuaternionExpression<QE>& rot_quat)
+void Shape::PrincipalAxesAlignmentStartGenerator::addStartTransform(Math::Vector3D::ConstPointer ctr_trans_data, const Math::QuaternionExpression<QE>& rot_quat)
 {
 	QuaternionTransformation xform;
+	QuaternionTransformation::Pointer xform_data = xform.getData();
 
-	xform[0] = rot_quat().getC1();
-	xform[1] = rot_quat().getC2();
-	xform[2] = rot_quat().getC3();
-	xform[3] = rot_quat().getC4();
-	
+	xform_data[0] = rot_quat().getC1();
+	xform_data[1] = rot_quat().getC2();
+	xform_data[2] = rot_quat().getC3();
+	xform_data[3] = rot_quat().getC4();
+	xform_data[4] = ctr_trans_data[0];
+	xform_data[5] = ctr_trans_data[1];
+	xform_data[6] = ctr_trans_data[2];
+
 	startTransforms.push_back(xform);
 }

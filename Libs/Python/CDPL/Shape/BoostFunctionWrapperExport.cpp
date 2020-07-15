@@ -1,7 +1,7 @@
 /* -*- mode: c++; c-basic-offset: 4; tab-width: 4; indent-tabs-mode: t -*- */
 
 /* 
- * Shape.hpp 
+ * BoostFunctionWrapperExport.cpp 
  *
  * This file is part of the Chemical Data Processing Toolkit
  *
@@ -23,30 +23,20 @@
  * Boston, MA 02111-1307, USA.
  */
 
-/**
- * \file
- * \brief A convenience header including everything that is defined in namespace CDPL::Shape.
- */
 
-#ifndef CDPL_SHAPE_HPP
-#define CDPL_SHAPE_HPP
+#include <boost/function.hpp>
 
-#include "CDPL/Shape/GaussianShape.hpp"
-#include "CDPL/Shape/GaussianShapeSet.hpp"
-#include "CDPL/Shape/QuaternionTransformation.hpp"
-
-#include "CDPL/Shape/GaussianShapeFunction.hpp"
 #include "CDPL/Shape/GaussianShapeOverlapFunction.hpp"
-#include "CDPL/Shape/ExactGaussianShapeOverlapFunction.hpp"
-#include "CDPL/Shape/FastGaussianShapeOverlapFunction.hpp"
 
-#include "CDPL/Shape/GaussianShapeFunctionAlignment.hpp"
-#include "CDPL/Shape/GaussianShapeAlignmentStartGenerator.hpp"
-#include "CDPL/Shape/PrincipalAxesAlignmentStartGenerator.hpp"
+#include "Base/BoostFunctionWrapperExport.hpp"
 
-#include "CDPL/Shape/SymmetryClass.hpp"
+#include "ClassExports.hpp"
 
-#include "CDPL/Shape/GaussianShapeFunctions.hpp"
-#include "CDPL/Shape/UtilityFunctions.hpp"
 
-#endif // CDPL_SHAPE_HPP
+void CDPLPythonShape::exportBoostFunctionWrappers()
+{
+	using namespace boost;
+    using namespace CDPL;
+
+	CDPLPythonBase::BoostFunction2Export<Shape::GaussianShapeOverlapFunction::ColorMatchFunction, std::size_t, std::size_t>("ColorMatchFunction");
+}

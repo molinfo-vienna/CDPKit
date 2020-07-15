@@ -38,10 +38,21 @@ void CDPLPythonShape::exportPrincipalAxesAlignmentStartGenerator()
     using namespace boost;
     using namespace CDPL;
 
-    python::class_<Shape::PrincipalAxesAlignmentStartGenerator, python::bases<Shape::GaussianShapeAlignmentStartGenerator> >
+	python::scope scope = python::class_<Shape::PrincipalAxesAlignmentStartGenerator, python::bases<Shape::GaussianShapeAlignmentStartGenerator> >
 		("PrincipalAxesAlignmentStartGenerator", python::no_init)
 		.def(python::init<>(python::arg("self")))
 		.def(python::init<const Shape::PrincipalAxesAlignmentStartGenerator&>((python::arg("self"), python::arg("gen"))))
+		.def("setCenterAlignmentMode", &Shape::PrincipalAxesAlignmentStartGenerator::setCenterAlignmentMode,
+			 (python::arg("self"), python::arg("mode")))
+		.def("getCenterAlignmentMode", &Shape::PrincipalAxesAlignmentStartGenerator::getCenterAlignmentMode, python::arg("self"))
 		.def("assign", CDPLPythonBase::copyAssOp(&Shape::PrincipalAxesAlignmentStartGenerator::operator=),
-			 (python::arg("self"), python::arg("gen")), python::return_self<>());
+			 (python::arg("self"), python::arg("gen")), python::return_self<>())
+		.add_property("centerAlignmentMode", &Shape::PrincipalAxesAlignmentStartGenerator::getCenterAlignmentMode,
+					  &Shape::PrincipalAxesAlignmentStartGenerator::setCenterAlignmentMode);
+
+	python::enum_<Shape::PrincipalAxesAlignmentStartGenerator::CenterAlignmentMode>("CenterAlignmentMode")
+		.value("SHAPE_CENTROID", Shape::PrincipalAxesAlignmentStartGenerator::SHAPE_CENTROID)
+		.value("NON_COLOR_ELEMENT_CENTERS", Shape::PrincipalAxesAlignmentStartGenerator::NON_COLOR_ELEMENT_CENTERS)
+		.value("COLOR_ELEMENT_CENTERS", Shape::PrincipalAxesAlignmentStartGenerator::COLOR_ELEMENT_CENTERS)
+		.export_values();
 }

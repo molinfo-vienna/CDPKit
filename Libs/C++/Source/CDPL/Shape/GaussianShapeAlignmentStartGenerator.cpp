@@ -33,12 +33,12 @@
 using namespace CDPL;
 
 
-unsigned int Shape::GaussianShapeAlignmentStartGenerator::setupReference(GaussianShape& shape, GaussianShapeFunction& shape_func, Math::Matrix4D& xform) const
+unsigned int Shape::GaussianShapeAlignmentStartGenerator::setupReferenceShape(GaussianShape& shape, GaussianShapeFunction& shape_func, Math::Matrix4D& xform) const
 {
 	return SymmetryClass::UNDEF;
 }
 
-unsigned int Shape::GaussianShapeAlignmentStartGenerator::setupAligned(GaussianShape& shape, GaussianShapeFunction& shape_func, Math::Matrix4D& xform) const
+unsigned int Shape::GaussianShapeAlignmentStartGenerator::setupAlignedShape(GaussianShape& shape, GaussianShapeFunction& shape_func, Math::Matrix4D& xform) const
 {
 	return SymmetryClass::UNDEF;
 }

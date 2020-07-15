@@ -51,6 +51,14 @@ namespace
 			return this->get_override("getShapeFunction")(ref);
 		}
 
+		void setColorMatchFunction(const ColorMatchFunction& func) {
+			this->get_override("setColorMatchFunction")(boost::ref(func));
+		}
+
+		const ColorMatchFunction& getColorMatchFunction() const {
+			return this->get_override("getColorMatchFunction")();
+		}
+
 		double calcSelfOverlap(bool ref) const {
 			return this->get_override("calcSelfOverlap")(ref);
 		}
@@ -83,6 +91,10 @@ void CDPLPythonShape::exportGaussianShapeOverlapFunction()
 			 (python::arg("self"), python::arg("func"), python::arg("is_ref")), python::with_custodian_and_ward<1, 2>())
 		.def("getShapeFunction", python::pure_virtual(&Shape::GaussianShapeOverlapFunction::getShapeFunction),
 			 (python::arg("self"), python::arg("ref")), python::return_internal_reference<>())
+		.def("setColorMatchFunction", python::pure_virtual(&Shape::GaussianShapeOverlapFunction::setColorMatchFunction),
+			 (python::arg("self"), python::arg("func")), python::with_custodian_and_ward<1, 2>())
+		.def("getColorMatchFunction", python::pure_virtual(&Shape::GaussianShapeOverlapFunction::getColorMatchFunction),
+			 python::arg("self"), python::return_internal_reference<>())
 		.def("calcSelfOverlap", python::pure_virtual(&Shape::GaussianShapeOverlapFunction::calcSelfOverlap),
 			 (python::arg("self"), python::arg("ref")))
 		.def("calcOverlap", python::pure_virtual(static_cast<double (Shape::GaussianShapeOverlapFunction::*)() const>
@@ -93,5 +105,8 @@ void CDPLPythonShape::exportGaussianShapeOverlapFunction()
 			 (python::arg("self"), python::arg("coords")))
 		.def("calcOverlapGradient", python::pure_virtual(static_cast<double (Shape::GaussianShapeOverlapFunction::*)(const Math::Vector3DArray&, Math::Vector3DArray&) const>
 														 (&Shape::GaussianShapeOverlapFunction::calcOverlapGradient)),
-			 (python::arg("self"), python::arg("coords"), python::arg("grad")));
+			 (python::arg("self"), python::arg("coords"), python::arg("grad")))
+		.add_property("colorMatchFunction", python::make_function(&Shape::GaussianShapeOverlapFunction::getColorMatchFunction,
+																  python::return_internal_reference<>()),
+					  &Shape::GaussianShapeOverlapFunction::setColorMatchFunction);
 }

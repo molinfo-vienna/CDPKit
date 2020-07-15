@@ -27,6 +27,7 @@
 #include <boost/python.hpp>
 
 #include "CDPL/Shape/GaussianShapeFunctionAlignment.hpp"
+#include "CDPL/Shape/GaussianShape.hpp"
 #include "CDPL/Shape/GaussianShapeFunction.hpp"
 
 #include "Base/ObjectIdentityCheckVisitor.hpp"
@@ -49,6 +50,9 @@ void CDPLPythonShape::exportGaussianShapeFunctionAlignment()
 			 (python::arg("self"), python::arg("func")), python::with_custodian_and_ward<1, 2>())
 		.def("getOverlapFunction", &Shape::GaussianShapeFunctionAlignment::getOverlapFunction,
 			 python::arg("self"), python::return_internal_reference<>())
+		.def("getDefaultOverlapFunction", static_cast<Shape::FastGaussianShapeOverlapFunction& (Shape::GaussianShapeFunctionAlignment::*)()>
+			 (&Shape::GaussianShapeFunctionAlignment::getDefaultOverlapFunction),
+			 python::arg("self"), python::return_internal_reference<>())
 		.def("setReferenceShapeFunction", &Shape::GaussianShapeFunctionAlignment::setReferenceShapeFunction,
 			 (python::arg("self"), python::arg("func"), python::arg("sym_class")), python::with_custodian_and_ward<1, 2>())
 		.def("getReferenceShapeFunction", &Shape::GaussianShapeFunctionAlignment::getReferenceShapeFunction,
@@ -57,6 +61,17 @@ void CDPLPythonShape::exportGaussianShapeFunctionAlignment()
 			 (python::arg("self"), python::arg("gen")), python::with_custodian_and_ward<1, 2>())
 		.def("getStartGenerator", &Shape::GaussianShapeFunctionAlignment::getStartGenerator,
 			 python::arg("self"), python::return_internal_reference<>())
+		.def("getDefaultStartGenerator", static_cast<Shape::PrincipalAxesAlignmentStartGenerator& (Shape::GaussianShapeFunctionAlignment::*)()>
+			 (&Shape::GaussianShapeFunctionAlignment::getDefaultStartGenerator),
+			 python::arg("self"), python::return_internal_reference<>())
+		.def("setColorMatchFunction", &Shape::GaussianShapeFunctionAlignment::setColorMatchFunction,
+			 (python::arg("self"), python::arg("func")), python::with_custodian_and_ward<1, 2>())
+		.def("getColorMatchFunction", &Shape::GaussianShapeFunctionAlignment::getColorMatchFunction,
+			 python::arg("self"), python::return_internal_reference<>())
+		.def("setupReferenceShape", &Shape::GaussianShapeFunctionAlignment::setupReferenceShape,
+			 (python::arg("self"), python::arg("shape"), python::arg("shape_func"), python::arg("xform")))
+		.def("setupAlignedShape", &Shape::GaussianShapeFunctionAlignment::setupAlignedShape, 
+			 (python::arg("self"), python::arg("shape"), python::arg("shape_func"), python::arg("xform")))
 		.def("align", &Shape::GaussianShapeFunctionAlignment::align, (python::arg("self"), python::arg("func"), python::arg("sym_class")))
 		.def("getNumResults", &Shape::GaussianShapeFunctionAlignment::getNumResults, python::arg("self"))
 		.def("__len__", &Shape::GaussianShapeFunctionAlignment::getNumResults, python::arg("self"))
@@ -70,6 +85,10 @@ void CDPLPythonShape::exportGaussianShapeFunctionAlignment()
 											python::return_internal_reference<>()),
 					  python::make_function(&Shape::GaussianShapeFunctionAlignment::setOverlapFunction,
 											python::with_custodian_and_ward<1, 2>()))
+		.add_property("defOverlapFunction",
+					  python::make_function(static_cast<Shape::FastGaussianShapeOverlapFunction& (Shape::GaussianShapeFunctionAlignment::*)()>
+											(&Shape::GaussianShapeFunctionAlignment::getDefaultOverlapFunction),
+											python::return_internal_reference<>()))
 		.add_property("refShapeFunction",
 					  python::make_function(&Shape::GaussianShapeFunctionAlignment::getReferenceShapeFunction,
 											python::return_internal_reference<>()),
@@ -79,7 +98,14 @@ void CDPLPythonShape::exportGaussianShapeFunctionAlignment()
 					  python::make_function(&Shape::GaussianShapeFunctionAlignment::getStartGenerator,
 											python::return_internal_reference<>()),
 					  python::make_function(&Shape::GaussianShapeFunctionAlignment::setStartGenerator,
-											python::with_custodian_and_ward<1, 2>()));
+											python::with_custodian_and_ward<1, 2>()))
+		.add_property("defStartGenerator",
+					  python::make_function(static_cast<Shape::PrincipalAxesAlignmentStartGenerator& (Shape::GaussianShapeFunctionAlignment::*)()>
+											(&Shape::GaussianShapeFunctionAlignment::getDefaultStartGenerator),
+											python::return_internal_reference<>()))
+		.add_property("colorMatchFunction", python::make_function(&Shape::GaussianShapeFunctionAlignment::getColorMatchFunction,
+																  python::return_internal_reference<>()),
+					  &Shape::GaussianShapeFunctionAlignment::setColorMatchFunction);
 
 	python::class_<Shape::GaussianShapeFunctionAlignment::Result>("Result", python::no_init)
 		.def(python::init<const Math::Matrix4D&, double>((python::arg("self"), python::arg("transform"), python::arg("overlap"))))

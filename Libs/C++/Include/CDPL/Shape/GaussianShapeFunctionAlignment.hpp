@@ -37,7 +37,7 @@
 #include <boost/shared_ptr.hpp>
 
 #include "CDPL/Shape/APIPrefix.hpp"
-#include "CDPL/Shape/ExactGaussianShapeOverlapFunction.hpp"
+#include "CDPL/Shape/FastGaussianShapeOverlapFunction.hpp"
 #include "CDPL/Shape/PrincipalAxesAlignmentStartGenerator.hpp"
 #include "CDPL/Shape/QuaternionTransformation.hpp"
 #include "CDPL/Math/Matrix.hpp"
@@ -84,9 +84,9 @@ namespace CDPL
 			typedef std::vector<Result> ResultList;
 			
 		  public:
-			typedef ResultList::const_iterator ConstResultIterator;
-				
 			typedef boost::shared_ptr<GaussianShapeFunctionAlignment> SharedPointer;
+			typedef ResultList::const_iterator ConstResultIterator;
+			typedef GaussianShapeOverlapFunction::ColorMatchFunction ColorMatchFunction;
 
 			GaussianShapeFunctionAlignment();
 
@@ -98,10 +98,26 @@ namespace CDPL
 			
 			GaussianShapeOverlapFunction& getOverlapFunction() const;
 
+			const FastGaussianShapeOverlapFunction& getDefaultOverlapFunction() const;
+
+			FastGaussianShapeOverlapFunction& getDefaultOverlapFunction();
+
 			void setStartGenerator(GaussianShapeAlignmentStartGenerator& gen);
 			
 			GaussianShapeAlignmentStartGenerator& getStartGenerator() const;
-			
+
+			const PrincipalAxesAlignmentStartGenerator& getDefaultStartGenerator() const;
+
+			PrincipalAxesAlignmentStartGenerator& getDefaultStartGenerator();
+
+			void setColorMatchFunction(const ColorMatchFunction& func);
+
+			const ColorMatchFunction& getColorMatchFunction() const;
+
+			unsigned int setupReferenceShape(GaussianShape& shape, GaussianShapeFunction& shape_func, Math::Matrix4D& xform) const;
+
+			unsigned int setupAlignedShape(GaussianShape& shape, GaussianShapeFunction& shape_func, Math::Matrix4D& xform) const; 
+
 			void setReferenceShapeFunction(const GaussianShapeFunction& func, unsigned int sym_class);
 
 			const GaussianShapeFunction* getReferenceShapeFunction() const;
@@ -126,7 +142,7 @@ namespace CDPL
 			
 			typedef Math::BFGSMinimizer<QuaternionTransformation> BFGSMinimizer;
 
-			ExactGaussianShapeOverlapFunction     defOverlapFunc;
+			FastGaussianShapeOverlapFunction      defOverlapFunc;
 			PrincipalAxesAlignmentStartGenerator  defStartGen;
 			GaussianShapeOverlapFunction*         overlapFunc;
 			GaussianShapeAlignmentStartGenerator* startGen;

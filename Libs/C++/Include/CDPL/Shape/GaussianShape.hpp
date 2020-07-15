@@ -37,6 +37,7 @@
 #include <boost/shared_ptr.hpp>
 
 #include "CDPL/Shape/APIPrefix.hpp"
+#include "CDPL/Base/PropertyContainer.hpp"
 #include "CDPL/Math/Vector.hpp"
 
 
@@ -54,7 +55,7 @@ namespace CDPL
 		/**
 		 * \brief A data type for the descripton of arbitrary shapes composed of spheres approximated by gaussian functions.
 		 */
-		class CDPL_SHAPE_API GaussianShape
+		class CDPL_SHAPE_API GaussianShape : public Base::PropertyContainer
 		{
 
 		  public:
@@ -109,6 +110,7 @@ namespace CDPL
 
 		  public:
 			typedef boost::shared_ptr<GaussianShape> SharedPointer;
+
 			typedef ElementList::const_iterator ConstElementIterator;
 			typedef ElementList::iterator ElementIterator;
 		    

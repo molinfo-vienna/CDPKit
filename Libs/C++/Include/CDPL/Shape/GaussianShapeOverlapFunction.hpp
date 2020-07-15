@@ -31,7 +31,10 @@
 #ifndef CDPL_SHAPE_GAUSSIANSHAPEOVERLAPFUNCTION_HPP
 #define CDPL_SHAPE_GAUSSIANSHAPEOVERLAPFUNCTION_HPP
 
+#include <cstddef>
+
 #include <boost/shared_ptr.hpp>
+#include <boost/function.hpp>
 
 #include "CDPL/Shape/APIPrefix.hpp"
 #include "CDPL/Math/VectorArray.hpp"
@@ -55,12 +58,17 @@ namespace CDPL
 			
 		  public:
 			typedef boost::shared_ptr<GaussianShapeOverlapFunction> SharedPointer;
+			typedef boost::function2<bool, std::size_t, std::size_t> ColorMatchFunction;
 
 			virtual ~GaussianShapeOverlapFunction() {}
 
 			virtual void setShapeFunction(const GaussianShapeFunction& func, bool is_ref) = 0;
 
 			virtual const GaussianShapeFunction* getShapeFunction(bool ref) const = 0;
+
+			virtual void setColorMatchFunction(const ColorMatchFunction& func) = 0;
+
+			virtual const ColorMatchFunction& getColorMatchFunction() const = 0;
 
 			virtual double calcSelfOverlap(bool ref) const = 0;
 			

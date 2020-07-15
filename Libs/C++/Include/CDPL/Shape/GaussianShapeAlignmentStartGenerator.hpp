@@ -58,11 +58,11 @@ namespace CDPL
 		  public:
 			virtual ~GaussianShapeAlignmentStartGenerator() {}
 
-			virtual unsigned int setupReference(GaussianShape& shape, GaussianShapeFunction& shape_func, Math::Matrix4D& xform) const; 
+			virtual unsigned int setupReferenceShape(GaussianShape& shape, GaussianShapeFunction& shape_func, Math::Matrix4D& xform) const; 
 
-			virtual unsigned int setupAligned(GaussianShape& shape, GaussianShapeFunction& shape_func, Math::Matrix4D& xform) const; 
+			virtual unsigned int setupAlignedShape(GaussianShape& shape, GaussianShapeFunction& shape_func, Math::Matrix4D& xform) const; 
 
-			virtual void setReference(const GaussianShapeFunction& ref_shape_func, unsigned int sym_class) = 0;
+			virtual void setReferenceShapeFunction(const GaussianShapeFunction& ref_shape_func, unsigned int sym_class) = 0;
 
 			virtual bool generate(const GaussianShapeFunction& aligned_shape_func, unsigned int sym_class) = 0;
 			

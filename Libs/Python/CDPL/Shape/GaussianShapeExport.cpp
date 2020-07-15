@@ -25,13 +25,34 @@
 
 
 #include <boost/python.hpp>
+#include <boost/shared_ptr.hpp>
 
 #include "CDPL/Shape/GaussianShape.hpp"
 
+#include "Base/PropertyContainerVisitor.hpp"
 #include "Base/CopyAssOp.hpp"
 #include "Base/ObjectIdentityCheckVisitor.hpp"
 
 #include "ClassExports.hpp"
+
+
+namespace
+{
+
+	struct GaussianShapeWrapper : CDPL::Shape::GaussianShape, boost::python::wrapper<CDPL::Shape::GaussianShape> 
+	{
+	
+		typedef boost::shared_ptr<GaussianShapeWrapper> SharedPointer;
+
+		GaussianShapeWrapper(): 
+			CDPL::Shape::GaussianShape() {}
+
+		GaussianShapeWrapper(const CDPL::Shape::GaussianShape& shape): 
+			CDPL::Shape::GaussianShape(shape) {}
+
+		PROPERTYCONTAINER_IMPL(GaussianShapeWrapper) 	
+	};
+}
 
 
 void CDPLPythonShape::exportGaussianShape()
@@ -39,12 +60,14 @@ void CDPLPythonShape::exportGaussianShape()
     using namespace boost;
     using namespace CDPL;
 
-	python::scope scope = python::class_<Shape::GaussianShape, Shape::GaussianShape::SharedPointer>("GaussianShape", python::no_init)
+	python::scope scope = python::class_<GaussianShapeWrapper, GaussianShapeWrapper::SharedPointer, 
+										 python::bases<Base::PropertyContainer> >("GaussianShape", python::no_init)
 		.def(python::init<>(python::arg("self")))
 		.def(python::init<const Shape::GaussianShape&>((python::arg("self"), python::arg("shape"))))
-		.def(CDPLPythonBase::ObjectIdentityCheckVisitor<Shape::GaussianShape>())
 		.def("assign", CDPLPythonBase::copyAssOp(&Shape::GaussianShape::operator=), (python::arg("self"), python::arg("shape")),
 			 python::return_self<>())
+		.def(CDPLPythonBase::PropertyContainerVirtualFunctionsVisitor<GaussianShapeWrapper>())
+		.def(CDPLPythonBase::PropertyContainerSpecialFunctionsVisitor(true))	
 		.def("clear", &Shape::GaussianShape::clear, python::arg("self"))
 		.def("getNumElements", &Shape::GaussianShape::getNumElements, python::arg("self"))
 		.def("__len__", &Shape::GaussianShape::getNumElements, python::arg("self"))
@@ -84,4 +107,6 @@ void CDPLPythonShape::exportGaussianShape()
 		.add_property("position", python::make_function(&Shape::GaussianShape::Element::getPosition,
 														python::return_internal_reference<>()),
 					  &Shape::GaussianShape::Element::setPosition);
+
+	python::register_ptr_to_python<Shape::GaussianShape::SharedPointer>();
 }

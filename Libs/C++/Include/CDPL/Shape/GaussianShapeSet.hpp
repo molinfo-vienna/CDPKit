@@ -1,7 +1,7 @@
 /* -*- mode: c++; c-basic-offset: 4; tab-width: 4; indent-tabs-mode: t -*- */
 
 /* 
- * Shape.hpp 
+ * GaussianShapeSet.hpp 
  *
  * This file is part of the Chemical Data Processing Toolkit
  *
@@ -25,28 +25,46 @@
 
 /**
  * \file
- * \brief A convenience header including everything that is defined in namespace CDPL::Shape.
+ * \brief Definition of the class CDPL::Shape::GaussianShapeSet.
  */
 
-#ifndef CDPL_SHAPE_HPP
-#define CDPL_SHAPE_HPP
+#ifndef CDPL_SHAPE_GAUSSIANSHAPESET_HPP
+#define CDPL_SHAPE_GAUSSIANSHAPESET_HPP
 
+#include <boost/shared_ptr.hpp>
+
+#include "CDPL/Shape/APIPrefix.hpp"
 #include "CDPL/Shape/GaussianShape.hpp"
-#include "CDPL/Shape/GaussianShapeSet.hpp"
-#include "CDPL/Shape/QuaternionTransformation.hpp"
+#include "CDPL/Util/IndirectArray.hpp"
 
-#include "CDPL/Shape/GaussianShapeFunction.hpp"
-#include "CDPL/Shape/GaussianShapeOverlapFunction.hpp"
-#include "CDPL/Shape/ExactGaussianShapeOverlapFunction.hpp"
-#include "CDPL/Shape/FastGaussianShapeOverlapFunction.hpp"
 
-#include "CDPL/Shape/GaussianShapeFunctionAlignment.hpp"
-#include "CDPL/Shape/GaussianShapeAlignmentStartGenerator.hpp"
-#include "CDPL/Shape/PrincipalAxesAlignmentStartGenerator.hpp"
+namespace CDPL 
+{
 
-#include "CDPL/Shape/SymmetryClass.hpp"
+    namespace Shape
+    {
 
-#include "CDPL/Shape/GaussianShapeFunctions.hpp"
-#include "CDPL/Shape/UtilityFunctions.hpp"
+		/**
+		 * \addtogroup CDPL_SHAPE_DATA_STRUCTURES
+		 * @{
+		 */
+		
+		class CDPL_SHAPE_API GaussianShapeSet : public Util::IndirectArray<GaussianShape>
+		{
 
-#endif // CDPL_SHAPE_HPP
+		  public:
+			typedef boost::shared_ptr<GaussianShapeSet> SharedPointer;
+
+		  private:
+			const char* getClassName() const {
+				return "GaussianShapeSet";
+			}
+		};
+
+		/**
+		 * @}
+		 */
+    }
+}
+
+#endif // CDPL_SHAPE_GAUSSIANSHAPESET_HPP

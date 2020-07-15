@@ -69,6 +69,10 @@ namespace CDPL
 
 			const GaussianShapeFunction* getShapeFunction(bool ref) const;
 
+			void setColorMatchFunction(const ColorMatchFunction& func);
+
+			const ColorMatchFunction& getColorMatchFunction() const;
+
 			double calcSelfOverlap(bool ref) const;
 			
 			double calcOverlap() const;
@@ -90,6 +94,7 @@ namespace CDPL
 
 			const GaussianShapeFunction* refShapeFunc;
 			const GaussianShapeFunction* ovlShapeFunc;
+			ColorMatchFunction           colorMatchFunc;
 		};
 
 		/**
