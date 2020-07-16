@@ -38,27 +38,40 @@
 
 #include "Utilities.hpp"
 
-
+//#include <iostream>
 using namespace CDPL;
 
 
 namespace
 {
-	const double QUATERNION_UNITY_DEVIATION_PENALTY_FACTOR = 10000.0;
 
+	const double QUATERNION_UNITY_DEVIATION_PENALTY_FACTOR = 10000.0;
+	const double BFGS_MINIMIZER_STEP_SIZE                  = 0.01;
+	const double BFGS_MINIMIZER_TOLERANCE                  = 0.1;
+
+	bool defColorFilterFunc(std::size_t color) 
+	{
+		return (color != 0);
+	}
 }
+
+
+const double      Shape::GaussianShapeFunctionAlignment::DEF_REFINEMENT_STOP_GRADIENT = 0.1;
+const std::size_t Shape::GaussianShapeFunctionAlignment::DEF_MAX_REFINEMENT_ITERATIONS;
 
 
 Shape::GaussianShapeFunctionAlignment::GaussianShapeFunctionAlignment():
 	overlapFunc(&defOverlapFunc), startGen(&defStartGen), refShapeFunc(0), refShapeSymClass(SymmetryClass::UNDEF),
-	minimizer(boost::bind(&GaussianShapeFunctionAlignment::calcAlignmentFunctionValue, this, _1),
-			  boost::bind(&GaussianShapeFunctionAlignment::calcAlignmentFunctionGradient, this, _1, _2))
+	refStartPoses(true), maxNumRefIters(DEF_MAX_REFINEMENT_ITERATIONS), refStopGrad(DEF_REFINEMENT_STOP_GRADIENT),
+	colFilterFunc(&defColorFilterFunc), minimizer(boost::bind(&GaussianShapeFunctionAlignment::calcAlignmentFunctionValue, this, _1),
+												  boost::bind(&GaussianShapeFunctionAlignment::calcAlignmentFunctionGradient, this, _1, _2))
 {}
 
 Shape::GaussianShapeFunctionAlignment::GaussianShapeFunctionAlignment(const GaussianShapeFunction& ref_shape_func, unsigned int sym_class):
 	overlapFunc(&defOverlapFunc), startGen(&defStartGen),
-	minimizer(boost::bind(&GaussianShapeFunctionAlignment::calcAlignmentFunctionValue, this, _1),
-			  boost::bind(&GaussianShapeFunctionAlignment::calcAlignmentFunctionGradient, this, _1, _2))
+	refStartPoses(true), maxNumRefIters(DEF_MAX_REFINEMENT_ITERATIONS), refStopGrad(DEF_REFINEMENT_STOP_GRADIENT),
+	colFilterFunc(&defColorFilterFunc), minimizer(boost::bind(&GaussianShapeFunctionAlignment::calcAlignmentFunctionValue, this, _1),
+												  boost::bind(&GaussianShapeFunctionAlignment::calcAlignmentFunctionGradient, this, _1, _2))
 {
    setReferenceShapeFunction(ref_shape_func,  sym_class);
 }
@@ -115,6 +128,46 @@ const Shape::GaussianShapeFunctionAlignment::ColorMatchFunction& Shape::Gaussian
 	return overlapFunc->getColorMatchFunction();
 }
 
+void Shape::GaussianShapeFunctionAlignment::setColorFilterFunction(const ColorFilterFunction& func)
+{
+	colFilterFunc = func;
+}
+
+const Shape::GaussianShapeFunctionAlignment::ColorFilterFunction& Shape::GaussianShapeFunctionAlignment::getColorFilterFunction() const
+{
+	return colFilterFunc;
+}
+
+void Shape::GaussianShapeFunctionAlignment::refineStartingPoses(bool refine)
+{
+	refStartPoses = refine;
+}
+
+bool Shape::GaussianShapeFunctionAlignment::refineStartingPoses() const
+{
+	return refStartPoses;
+}
+
+void Shape::GaussianShapeFunctionAlignment::setMaxNumRefinementIterations(std::size_t max_iter)
+{
+	maxNumRefIters = max_iter;
+}
+
+std::size_t Shape::GaussianShapeFunctionAlignment::getMaxNumRefinementIterations() const
+{
+	return maxNumRefIters;
+}
+
+void Shape::GaussianShapeFunctionAlignment::setRefinementStopGradient(double grad_norm)
+{
+	refStopGrad = grad_norm;
+}
+
+double Shape::GaussianShapeFunctionAlignment::getRefinementStopGradient() const
+{
+	return refStopGrad;
+}
+
 unsigned int Shape::GaussianShapeFunctionAlignment::setupReferenceShape(GaussianShape& shape, GaussianShapeFunction& shape_func, Math::Matrix4D& xform) const
 {
 	return startGen->setupReferenceShape(shape, shape_func, xform);
@@ -138,15 +191,29 @@ const Shape::GaussianShapeFunction* Shape::GaussianShapeFunctionAlignment::getRe
 {
     return refShapeFunc;
 }
+			
+double Shape::GaussianShapeFunctionAlignment::calcSelfOverlap(const GaussianShapeFunction& func)
+{
+	overlapFunc->setShapeFunction(func, false);
 
-bool Shape::GaussianShapeFunctionAlignment::align(const GaussianShapeFunction& func, unsigned int sym_class)
+	return overlapFunc->calcSelfOverlap(false);
+}
+
+double Shape::GaussianShapeFunctionAlignment::calcColorSelfOverlap(const GaussianShapeFunction& func)
+{
+	overlapFunc->setShapeFunction(func, false);
+
+	return overlapFunc->calcSelfOverlap(false, colFilterFunc);
+}
+
+bool Shape::GaussianShapeFunctionAlignment::align(const GaussianShapeFunction& func, unsigned int sym_class, bool calc_col_overlap)
 {
 	results.clear();
 
-	if (!refShapeFunc || !refShapeFunc->getShape() || refShapeFunc->getShape()->getNumElements() == 0)
+	if (!refShapeFunc || !checkValidity(*refShapeFunc))
 		return false;
 
-	if (!func.getShape() || func.getShape()->getNumElements() == 0)
+	if (!checkValidity(func))
 		return false;
 
 	if (!startGen->generate(func, sym_class))
@@ -165,19 +232,34 @@ bool Shape::GaussianShapeFunctionAlignment::align(const GaussianShapeFunction& f
 	Math::Matrix4D opt_xform_mtx;
 
 	overlapFunc->setShapeFunction(func, false);
-	
+//	std::cerr << "--------- Num Starts: " << num_starts << std::endl; 
 	for (std::size_t i = 0; i < num_starts; i++) {
+		if (!refStartPoses) {
+			quaternionToMatrix(startGen->getStartTransform(i), opt_xform_mtx);
+			transform(optPoseCoords, opt_xform_mtx, startPoseCoords);
+
+			results.push_back(Result(opt_xform_mtx, overlapFunc->calcOverlap(optPoseCoords), 
+									 calc_col_overlap ? overlapFunc->calcOverlap(optPoseCoords, colFilterFunc) : 0.0));
+			continue;
+		}
+
 		opt_xform = startGen->getStartTransform(i);
-		
-		minimizer.setup(opt_xform, opt_xform_grad, 0.01, 0.1);
-		minimizer.minimize(opt_xform, opt_xform_grad, 200, 0.1, -1.0, false);
+
+		minimizer.setup(opt_xform, opt_xform_grad, BFGS_MINIMIZER_STEP_SIZE, BFGS_MINIMIZER_TOLERANCE);
+
+//		double start_val = calcAlignmentFunctionValue(opt_xform);
+
+		minimizer.minimize(opt_xform, opt_xform_grad, maxNumRefIters, refStopGrad, -1.0, false);
 		
 	    if (boost::math::isfinite(minimizer.getFunctionValue())) {  // sanity check
 			normalize(opt_xform);
 			quaternionToMatrix(opt_xform, opt_xform_mtx);
 			transform(optPoseCoords, opt_xform_mtx, startPoseCoords);
 
-			results.push_back(Result(opt_xform_mtx, overlapFunc->calcOverlap(optPoseCoords)));
+//			std::cerr << "Minimized from " << start_val << " to " << minimizer.getFunctionValue() << " in " << minimizer.getNumIterations() << " iterations" << std::endl;
+
+			results.push_back(Result(opt_xform_mtx, overlapFunc->calcOverlap(optPoseCoords), 
+									 calc_col_overlap ? overlapFunc->calcOverlap(optPoseCoords, colFilterFunc) : 0.0));
 		}
 	}
 	
@@ -206,6 +288,12 @@ Shape::GaussianShapeFunctionAlignment::ConstResultIterator Shape::GaussianShapeF
 {
 	return results.end();
 }
+
+bool Shape::GaussianShapeFunctionAlignment::checkValidity(const GaussianShapeFunction& func) const
+{
+	return (func.getShape() && func.getShape()->getNumElements() > 0);
+}
+
 /*
 double Shape::GaussianShapeFunctionAlignment::calcAlignmentFunctionValue(const QuaternionTransformation& xform_quat)
 {

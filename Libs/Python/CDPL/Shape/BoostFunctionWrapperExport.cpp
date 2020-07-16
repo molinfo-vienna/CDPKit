@@ -24,9 +24,9 @@
  */
 
 
-#include <boost/function.hpp>
+#include <cstddef>
 
-#include "CDPL/Shape/GaussianShapeOverlapFunction.hpp"
+#include <boost/function.hpp>
 
 #include "Base/BoostFunctionWrapperExport.hpp"
 
@@ -36,7 +36,8 @@
 void CDPLPythonShape::exportBoostFunctionWrappers()
 {
 	using namespace boost;
-    using namespace CDPL;
 
-	CDPLPythonBase::BoostFunction2Export<Shape::GaussianShapeOverlapFunction::ColorMatchFunction, std::size_t, std::size_t>("ColorMatchFunction");
+	CDPLPythonBase::BoostFunction1Export<boost::function1<bool, std::size_t> >("BoolSizeTypeFunctor");
+
+	CDPLPythonBase::BoostFunction2Export<boost::function2<bool, std::size_t, std::size_t> >("BoolSizeType2Functor");
 }

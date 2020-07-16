@@ -89,7 +89,6 @@ namespace CDPLPythonBase
 
 		static void convConstruct(PyObject* obj_ptr, boost::python::converter::rvalue_from_python_stage1_data* data) {
 			using namespace boost;
-			using namespace CDPL;
 
 			void* storage = ((python::converter::rvalue_from_python_storage<FunctionType>*)data)->storage.bytes;
 
@@ -145,7 +144,6 @@ namespace CDPLPythonBase
 
 		static void convConstruct(PyObject* obj_ptr, boost::python::converter::rvalue_from_python_stage1_data* data) {
 			using namespace boost;
-			using namespace CDPL;
 
 			void* storage = ((python::converter::rvalue_from_python_storage<FunctionType>*)data)->storage.bytes;
 
@@ -199,7 +197,6 @@ namespace CDPLPythonBase
 
 		static void convConstruct(PyObject* obj_ptr, boost::python::converter::rvalue_from_python_stage1_data* data) {
 			using namespace boost;
-			using namespace CDPL;
 
 			void* storage = ((python::converter::rvalue_from_python_storage<FunctionType>*)data)->storage.bytes;
 
@@ -249,7 +246,6 @@ namespace CDPLPythonBase
 
 		static void convConstruct(PyObject* obj_ptr, boost::python::converter::rvalue_from_python_stage1_data* data) {
 			using namespace boost;
-			using namespace CDPL;
 
 			void* storage = ((python::converter::rvalue_from_python_storage<FunctionType>*)data)->storage.bytes;
 
@@ -296,7 +292,6 @@ namespace CDPLPythonBase
 
 		static void convConstruct(PyObject* obj_ptr, boost::python::converter::rvalue_from_python_stage1_data* data) {
 			using namespace boost;
-			using namespace CDPL;
 
 			void* storage = ((python::converter::rvalue_from_python_storage<FunctionType>*)data)->storage.bytes;
 

@@ -58,21 +58,68 @@ namespace
 		const ColorMatchFunction& getColorMatchFunction() const {
 			return this->get_override("getColorMatchFunction")();
 		}
-
+	
 		double calcSelfOverlap(bool ref) const {
-			return this->get_override("calcSelfOverlap")(ref);
+			if (boost::python::override f = this->get_override("calcSelfOverlap"))
+				return f(ref);
+
+			return GaussianShapeOverlapFunction::calcSelfOverlap(ref);
+		}
+
+		double calcSelfOverlapDef(bool ref) const {
+			return GaussianShapeOverlapFunction::calcSelfOverlap(ref);
+		}
+
+		double calcSelfOverlap(bool ref, const ColorFilterFunction& col_filter_func) const {
+			return this->get_override("calcSelfOverlap")(ref, boost::ref(col_filter_func));
+		}
+
+		double calcOverlap() const {
+			if (boost::python::override f = this->get_override("calcOverlap"))
+				return f();
+
+			return GaussianShapeOverlapFunction::calcOverlap();
+		}
+
+		double calcOverlapDef1() const {
+			return GaussianShapeOverlapFunction::calcOverlap();
 		}
 			
-		double calcOverlap() const {
-			return this->get_override("calcOverlap")();
+		double calcOverlap(const ColorFilterFunction& col_filter_func) const {
+			return this->get_override("calcOverlap")(boost::ref(col_filter_func));
+		}
+
+		double calcOverlap(const CDPL::Math::Vector3DArray& coords) const {
+			if (boost::python::override f = this->get_override("calcOverlap"))
+				return f(boost::ref(coords));
+
+			return GaussianShapeOverlapFunction::calcOverlap(coords);
+		}
+
+		double calcOverlapDef2(const CDPL::Math::Vector3DArray& coords) const {
+			return GaussianShapeOverlapFunction::calcOverlap(coords);
 		}
 		
-		double calcOverlap(const CDPL::Math::Vector3DArray& coords) const {
-			return this->get_override("calcOverlap")(boost::ref(coords));
+		double calcOverlap(const CDPL::Math::Vector3DArray& coords, const ColorFilterFunction& col_filter_func) const {
+			return this->get_override("calcOverlap")(boost::ref(coords), boost::ref(col_filter_func));
 		}
 
 		double calcOverlapGradient(const CDPL::Math::Vector3DArray& coords, CDPL::Math::Vector3DArray& grad) const {
-			return this->get_override("calcOverlapGradient")(boost::ref(coords), boost::ref(grad));
+			if (boost::python::override f = this->get_override("calcOverlapGradient"))
+				return f(boost::ref(coords), boost::ref(grad));
+
+			return GaussianShapeOverlapFunction::calcOverlapGradient(coords, grad);
+		}
+
+		double calcOverlapGradientDef(const CDPL::Math::Vector3DArray& coords, CDPL::Math::Vector3DArray& grad) const {
+
+			return GaussianShapeOverlapFunction::calcOverlapGradient(coords, grad);
+		}
+
+		double calcOverlapGradient(const CDPL::Math::Vector3DArray& coords, CDPL::Math::Vector3DArray& grad, 
+								   const ColorFilterFunction& col_filter_func) const {
+
+			return this->get_override("calcOverlapGradient")(boost::ref(coords), boost::ref(grad), boost::ref(col_filter_func));
 		}
 	};
 }
@@ -92,20 +139,47 @@ void CDPLPythonShape::exportGaussianShapeOverlapFunction()
 		.def("getShapeFunction", python::pure_virtual(&Shape::GaussianShapeOverlapFunction::getShapeFunction),
 			 (python::arg("self"), python::arg("ref")), python::return_internal_reference<>())
 		.def("setColorMatchFunction", python::pure_virtual(&Shape::GaussianShapeOverlapFunction::setColorMatchFunction),
-			 (python::arg("self"), python::arg("func")), python::with_custodian_and_ward<1, 2>())
+			 (python::arg("self"), python::arg("func")))
 		.def("getColorMatchFunction", python::pure_virtual(&Shape::GaussianShapeOverlapFunction::getColorMatchFunction),
 			 python::arg("self"), python::return_internal_reference<>())
-		.def("calcSelfOverlap", python::pure_virtual(&Shape::GaussianShapeOverlapFunction::calcSelfOverlap),
+		.def("calcSelfOverlap", 
+			 static_cast<double (Shape::GaussianShapeOverlapFunction::*)(bool) const>(&Shape::GaussianShapeOverlapFunction::calcSelfOverlap),
+			 &GaussianShapeOverlapFunctionWrapper::calcSelfOverlapDef,
 			 (python::arg("self"), python::arg("ref")))
-		.def("calcOverlap", python::pure_virtual(static_cast<double (Shape::GaussianShapeOverlapFunction::*)() const>
-												 (&Shape::GaussianShapeOverlapFunction::calcOverlap)),
+		.def("calcSelfOverlap", 
+			 python::pure_virtual(static_cast<double (Shape::GaussianShapeOverlapFunction::*)
+								  (bool, const Shape::GaussianShapeOverlapFunction::ColorFilterFunction&) const>
+								  (&Shape::GaussianShapeOverlapFunction::calcSelfOverlap)),
+			 (python::arg("self"), python::arg("ref"), python::arg("col_filter_func")))
+		.def("calcOverlap", 
+			 static_cast<double (Shape::GaussianShapeOverlapFunction::*)() const>
+			 (&Shape::GaussianShapeOverlapFunction::calcOverlap), &GaussianShapeOverlapFunctionWrapper::calcOverlapDef1,
 			 python::arg("self"))
-		.def("calcOverlap", python::pure_virtual(static_cast<double (Shape::GaussianShapeOverlapFunction::*)(const Math::Vector3DArray&) const>
-												 (&Shape::GaussianShapeOverlapFunction::calcOverlap)),
+		.def("calcOverlap", 
+			 python::pure_virtual(static_cast<double (Shape::GaussianShapeOverlapFunction::*)
+								  (const Shape::GaussianShapeOverlapFunction::ColorFilterFunction&) const>
+								  (&Shape::GaussianShapeOverlapFunction::calcOverlap)),
+			 (python::arg("self"), python::arg("col_filter_func")))
+		.def("calcOverlap", 
+			 static_cast<double (Shape::GaussianShapeOverlapFunction::*)
+			 (const Math::Vector3DArray&) const>
+			 (&Shape::GaussianShapeOverlapFunction::calcOverlap), &GaussianShapeOverlapFunctionWrapper::calcOverlapDef2,
 			 (python::arg("self"), python::arg("coords")))
-		.def("calcOverlapGradient", python::pure_virtual(static_cast<double (Shape::GaussianShapeOverlapFunction::*)(const Math::Vector3DArray&, Math::Vector3DArray&) const>
-														 (&Shape::GaussianShapeOverlapFunction::calcOverlapGradient)),
+		.def("calcOverlap", 
+			 python::pure_virtual(static_cast<double (Shape::GaussianShapeOverlapFunction::*)
+								  (const Math::Vector3DArray&, const Shape::GaussianShapeOverlapFunction::ColorFilterFunction&) const>
+								  (&Shape::GaussianShapeOverlapFunction::calcOverlap)),
+			 (python::arg("self"), python::arg("coords"), python::arg("col_filter_func")))
+		.def("calcOverlapGradient", 
+			 static_cast<double (Shape::GaussianShapeOverlapFunction::*)
+			 (const Math::Vector3DArray&, Math::Vector3DArray&) const>
+			 (&Shape::GaussianShapeOverlapFunction::calcOverlapGradient), &GaussianShapeOverlapFunctionWrapper::calcOverlapGradientDef,
 			 (python::arg("self"), python::arg("coords"), python::arg("grad")))
+		.def("calcOverlapGradient", 
+			 python::pure_virtual(static_cast<double (Shape::GaussianShapeOverlapFunction::*)
+								  (const Math::Vector3DArray&, Math::Vector3DArray&, const Shape::GaussianShapeOverlapFunction::ColorFilterFunction&) const>
+								  (&Shape::GaussianShapeOverlapFunction::calcOverlapGradient)),
+			 (python::arg("self"), python::arg("coords"), python::arg("grad"), python::arg("col_filter_func")))
 		.add_property("colorMatchFunction", python::make_function(&Shape::GaussianShapeOverlapFunction::getColorMatchFunction,
 																  python::return_internal_reference<>()),
 					  &Shape::GaussianShapeOverlapFunction::setColorMatchFunction);

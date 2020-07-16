@@ -116,30 +116,30 @@ const Shape::GaussianShapeOverlapFunction::ColorMatchFunction& Shape::FastGaussi
 	return colorMatchFunc;
 }
 
-double Shape::FastGaussianShapeOverlapFunction::calcSelfOverlap(bool ref) const
+double Shape::FastGaussianShapeOverlapFunction::calcSelfOverlap(bool ref, const ColorFilterFunction& col_filter_func) const
 {
 	if (ref) {
 		if (!refShapeFunc)
 			return 0.0;
 		
-		return calcOverlap(refShapeFunc->getProductList(), refShapeFunc->getProductList());
+		return calcOverlap(refShapeFunc->getProductList(), refShapeFunc->getProductList(), col_filter_func);
 	}
 
 	if (!ovlShapeFunc)
 		return 0.0;
 		
-	return calcOverlap(ovlShapeFunc->getProductList(), ovlShapeFunc->getProductList());
+	return calcOverlap(ovlShapeFunc->getProductList(), ovlShapeFunc->getProductList(), col_filter_func);
 }
 
-double Shape::FastGaussianShapeOverlapFunction::calcOverlap() const
+double Shape::FastGaussianShapeOverlapFunction::calcOverlap(const ColorFilterFunction& col_filter_func) const
 {
 	if (!checkShapeFuncsNotNull())
 		return 0.0;
 	
-	return calcOverlap(refShapeFunc->getProductList(), ovlShapeFunc->getProductList());
+	return calcOverlap(refShapeFunc->getProductList(), ovlShapeFunc->getProductList(), col_filter_func);
 }
 
-double Shape::FastGaussianShapeOverlapFunction::calcOverlap(const Math::Vector3DArray& coords) const
+double Shape::FastGaussianShapeOverlapFunction::calcOverlap(const Math::Vector3DArray& coords, const ColorFilterFunction& col_filter_func) const
 {
 	if (!checkShapeFuncsNotNull())
 		return 0.0;
@@ -147,10 +147,11 @@ double Shape::FastGaussianShapeOverlapFunction::calcOverlap(const Math::Vector3D
 	if (coords.getSize() != ovlShapeFunc->getProductList()->getNumShapeElements())
 		return 0.0;
 	
-	return calcOverlap(refShapeFunc->getProductList(), ovlShapeFunc->getProductList(), coords);
+	return calcOverlap(refShapeFunc->getProductList(), ovlShapeFunc->getProductList(), coords, col_filter_func);
 }
 
-double Shape::FastGaussianShapeOverlapFunction::calcOverlapGradient(const Math::Vector3DArray& coords, Math::Vector3DArray& grad) const
+double Shape::FastGaussianShapeOverlapFunction::calcOverlapGradient(const Math::Vector3DArray& coords, Math::Vector3DArray& grad, 
+																	const ColorFilterFunction& col_filter_func) const
 {
 	if (!checkShapeFuncsNotNull())
 		return 0.0;
@@ -158,7 +159,7 @@ double Shape::FastGaussianShapeOverlapFunction::calcOverlapGradient(const Math::
 	if (coords.getSize() != ovlShapeFunc->getProductList()->getNumShapeElements())
 		return 0.0;
 
-	return calcOverlapGradient(refShapeFunc->getProductList(), ovlShapeFunc->getProductList(), coords, grad);
+	return calcOverlapGradient(refShapeFunc->getProductList(), ovlShapeFunc->getProductList(), coords, grad, col_filter_func);
 }
 
 Shape::FastGaussianShapeOverlapFunction& Shape::FastGaussianShapeOverlapFunction::operator=(const FastGaussianShapeOverlapFunction& func)
@@ -181,40 +182,50 @@ bool Shape::FastGaussianShapeOverlapFunction::checkShapeFuncsNotNull() const
 	return (refShapeFunc && ovlShapeFunc);
 }
 
-double Shape::FastGaussianShapeOverlapFunction::calcOverlap(const GaussianProductList* ref_prod_list, const GaussianProductList* ovl_prod_list) const
+double Shape::FastGaussianShapeOverlapFunction::calcOverlap(const GaussianProductList* ref_prod_list, const GaussianProductList* ovl_prod_list, 
+															const ColorFilterFunction& col_filter_func) const
 {
 	if (proximityOpt) {
 		if (fastExpFunc)
-			return calcOverlapFastExpProxCheck(ref_prod_list, ovl_prod_list);
+			return calcOverlapFastExpProxCheck(ref_prod_list, ovl_prod_list, col_filter_func);
 
-		return calcOverlapProxCheck(ref_prod_list, ovl_prod_list);
+		return calcOverlapProxCheck(ref_prod_list, ovl_prod_list, col_filter_func);
 		
 	} else if (fastExpFunc)
-		return calcOverlapFastExp(ref_prod_list, ovl_prod_list);
+		return calcOverlapFastExp(ref_prod_list, ovl_prod_list, col_filter_func);
 
-	return calcOverlapExact(ref_prod_list, ovl_prod_list);
+	return calcOverlapExact(ref_prod_list, ovl_prod_list, col_filter_func);
 }
 
-double Shape::FastGaussianShapeOverlapFunction::calcOverlapExact(const GaussianProductList* ref_prod_list, const GaussianProductList* ovl_prod_list) const
+double Shape::FastGaussianShapeOverlapFunction::calcOverlapExact(const GaussianProductList* ref_prod_list, const GaussianProductList* ovl_prod_list,
+																 const ColorFilterFunction& col_filter_func) const
 {
 	double overlap = 0.0;
 
 	if (ref_prod_list->getMaxOrder() == 1 && ovl_prod_list->getMaxOrder() == 1) {
 		for (GaussianProductList::ConstProductIterator p_it1 = ovl_prod_list->getProductsBegin(), p_end1 = ovl_prod_list->getProductsEnd(); p_it1 != p_end1; ++p_it1) {
 			const GaussianProduct* prod1 = *p_it1;
+			std::size_t prod1_color = prod1->getColor();
+
+			if (col_filter_func && !col_filter_func(prod1_color))
+				continue;
+
 			double prod1_delta = prod1->getDelta();
 			double prod1_weight = prod1->getWeightFactor();
-			std::size_t prod1_color = prod1->getColor();
 			Math::Vector3D::ConstPointer prod1_ctr = prod1->getCenter().getData();
 	
 			for (GaussianProductList::ConstProductIterator p_it2 = ref_prod_list->getProductsBegin(), p_end2 = ref_prod_list->getProductsEnd(); p_it2 != p_end2; ++p_it2) {
 				const GaussianProduct* prod2 = *p_it2;
+				std::size_t prod2_color = prod2->getColor();
+
+				if (col_filter_func && !col_filter_func(prod2_color))
+					continue;
 
 				if (!colorMatchFunc) {
-					if (prod2->getColor() != prod1_color)
+					if (prod2_color != prod1_color)
 						continue;
 
-				} else if (!colorMatchFunc(prod1_color, prod2->getColor()))
+				} else if (!colorMatchFunc(prod1_color, prod2_color))
 					continue;
 
 				double prod2_delta = prod2->getDelta();
@@ -231,23 +242,31 @@ double Shape::FastGaussianShapeOverlapFunction::calcOverlapExact(const GaussianP
 	
 	for (GaussianProductList::ConstProductIterator p_it1 = ovl_prod_list->getProductsBegin(), p_end1 = ovl_prod_list->getProductsEnd(); p_it1 != p_end1; ++p_it1) {
 		const GaussianProduct* prod1 = *p_it1;
+		std::size_t prod1_color = prod1->getColor();
+
+		if (col_filter_func && !col_filter_func(prod1_color))
+			continue;
+
 		double prod1_delta = prod1->getDelta();
 		double prod1_weight = prod1->getWeightFactor();
 		double prod1_fact_exp = prod1_delta * prod1->getProductFactorExponent();
 		bool prod1_odd = prod1->hasOddOrder();
-		std::size_t prod1_color = prod1->getColor();
 		Math::Vector3D::ConstPointer prod1_ctr = prod1->getCenter().getData();
 
 		for (GaussianProductList::ConstProductIterator p_it2 = ref_prod_list->getProductsBegin(), p_end2 = ref_prod_list->getProductsEnd(); p_it2 != p_end2; ++p_it2) {
 			const GaussianProduct* prod2 = *p_it2;
+			std::size_t prod2_color = prod2->getColor();
+
+			if (col_filter_func && !col_filter_func(prod2_color))
+				continue;
 
 			if (!colorMatchFunc) {
-				if (prod2->getColor() != prod1_color)
+				if (prod2_color != prod1_color)
 					continue;
 
-			} else if (!colorMatchFunc(prod1_color, prod2->getColor()))
+			} else if (!colorMatchFunc(prod1_color, prod2_color))
 				continue;
-	
+
 			double prod2_delta = prod2->getDelta();
 			double delta = prod1_delta + prod2_delta;
 			double vol_factor = M_PI / delta;
@@ -270,28 +289,37 @@ double Shape::FastGaussianShapeOverlapFunction::calcOverlapExact(const GaussianP
 	return overlap;
 }
 
-double Shape::FastGaussianShapeOverlapFunction::calcOverlapFastExp(const GaussianProductList* ref_prod_list, const GaussianProductList* ovl_prod_list) const
+double Shape::FastGaussianShapeOverlapFunction::calcOverlapFastExp(const GaussianProductList* ref_prod_list, const GaussianProductList* ovl_prod_list,
+																   const ColorFilterFunction& col_filter_func) const
 {
 	double overlap = 0.0;
 
 	if (ref_prod_list->getMaxOrder() == 1 && ovl_prod_list->getMaxOrder() == 1) {
 		for (GaussianProductList::ConstProductIterator p_it1 = ovl_prod_list->getProductsBegin(), p_end1 = ovl_prod_list->getProductsEnd(); p_it1 != p_end1; ++p_it1) {
 			const GaussianProduct* prod1 = *p_it1;
+			std::size_t prod1_color = prod1->getColor();
+
+			if (col_filter_func && !col_filter_func(prod1_color))
+				continue;
+
 			double prod1_delta = prod1->getDelta();
 			double prod1_weight = prod1->getWeightFactor();
-			std::size_t prod1_color = prod1->getColor();
 			Math::Vector3D::ConstPointer prod1_ctr = prod1->getCenter().getData();
 
 			for (GaussianProductList::ConstProductIterator p_it2 = ref_prod_list->getProductsBegin(), p_end2 = ref_prod_list->getProductsEnd(); p_it2 != p_end2; ++p_it2) {
 				const GaussianProduct* prod2 = *p_it2;
+				std::size_t prod2_color = prod2->getColor();
+
+				if (col_filter_func && !col_filter_func(prod2_color))
+					continue;
 
 				if (!colorMatchFunc) {
-					if (prod2->getColor() != prod1_color)
+					if (prod2_color != prod1_color)
 						continue;
 
-				} else if (!colorMatchFunc(prod1_color, prod2->getColor()))
+				} else if (!colorMatchFunc(prod1_color, prod2_color))
 					continue;
-	
+
 				double prod2_delta = prod2->getDelta();
 				double delta = prod1_delta + prod2_delta;
 				double vol_factor = M_PI / delta;
@@ -307,21 +335,29 @@ double Shape::FastGaussianShapeOverlapFunction::calcOverlapFastExp(const Gaussia
 	
 	for (GaussianProductList::ConstProductIterator p_it1 = ovl_prod_list->getProductsBegin(), p_end1 = ovl_prod_list->getProductsEnd(); p_it1 != p_end1; ++p_it1) {
 		const GaussianProduct* prod1 = *p_it1;
+		std::size_t prod1_color = prod1->getColor();
+
+		if (col_filter_func && !col_filter_func(prod1_color))
+			continue;
+
 		double prod1_delta = prod1->getDelta();
 		double prod1_weight = prod1->getWeightFactor();
 		double prod1_fact_exp = prod1_delta * prod1->getProductFactorExponent();
 		bool prod1_odd = prod1->hasOddOrder();
-		std::size_t prod1_color = prod1->getColor();
 		Math::Vector3D::ConstPointer prod1_ctr = prod1->getCenter().getData();
 
 		for (GaussianProductList::ConstProductIterator p_it2 = ref_prod_list->getProductsBegin(), p_end2 = ref_prod_list->getProductsEnd(); p_it2 != p_end2; ++p_it2) {
 			const GaussianProduct* prod2 = *p_it2;
+			std::size_t prod2_color = prod2->getColor();
+
+			if (col_filter_func && !col_filter_func(prod2_color))
+				continue;
 
 			if (!colorMatchFunc) {
-				if (prod2->getColor() != prod1_color)
+				if (prod2_color != prod1_color)
 					continue;
 
-			} else if (!colorMatchFunc(prod1_color, prod2->getColor()))
+			} else if (!colorMatchFunc(prod1_color, prod2_color))
 				continue;
 	
 			double prod2_delta = prod2->getDelta();
@@ -346,27 +382,36 @@ double Shape::FastGaussianShapeOverlapFunction::calcOverlapFastExp(const Gaussia
 	return overlap;
 }
 
-double Shape::FastGaussianShapeOverlapFunction::calcOverlapProxCheck(const GaussianProductList* ref_prod_list, const GaussianProductList* ovl_prod_list) const
+double Shape::FastGaussianShapeOverlapFunction::calcOverlapProxCheck(const GaussianProductList* ref_prod_list, const GaussianProductList* ovl_prod_list,
+																	 const ColorFilterFunction& col_filter_func) const
 {
 	double overlap = 0.0;
 
 	if (ref_prod_list->getMaxOrder() == 1 && ovl_prod_list->getMaxOrder() == 1) {
 		for (GaussianProductList::ConstProductIterator p_it1 = ovl_prod_list->getProductsBegin(), p_end1 = ovl_prod_list->getProductsEnd(); p_it1 != p_end1; ++p_it1) {
 			const GaussianProduct* prod1 = *p_it1;
+			std::size_t prod1_color = prod1->getColor();
+
+			if (col_filter_func && !col_filter_func(prod1_color))
+				continue;
+
 			double prod1_delta = prod1->getDelta();
 			double prod1_weight = prod1->getWeightFactor();
-			std::size_t prod1_color = prod1->getColor();
 			Math::Vector3D::ConstPointer prod1_ctr = prod1->getCenter().getData();
 			double prod1_radius = prod1->getRadius() * radScalingFact;
 
 			for (GaussianProductList::ConstProductIterator p_it2 = ref_prod_list->getProductsBegin(), p_end2 = ref_prod_list->getProductsEnd(); p_it2 != p_end2; ++p_it2) {
 				const GaussianProduct* prod2 = *p_it2;
+				std::size_t prod2_color = prod2->getColor();
+
+				if (col_filter_func && !col_filter_func(prod2_color))
+					continue;
 
 				if (!colorMatchFunc) {
-					if (prod2->getColor() != prod1_color)
+					if (prod2_color != prod1_color)
 						continue;
 
-				} else if (!colorMatchFunc(prod1_color, prod2->getColor()))
+				} else if (!colorMatchFunc(prod1_color, prod2_color))
 					continue;
 
 				double sqrd_prod_ctr_dist = calcSquaredDistance(prod1_ctr, prod2->getCenter().getData());
@@ -389,22 +434,30 @@ double Shape::FastGaussianShapeOverlapFunction::calcOverlapProxCheck(const Gauss
 	
 	for (GaussianProductList::ConstProductIterator p_it1 = ovl_prod_list->getProductsBegin(), p_end1 = ovl_prod_list->getProductsEnd(); p_it1 != p_end1; ++p_it1) {
 		const GaussianProduct* prod1 = *p_it1;
+		std::size_t prod1_color = prod1->getColor();
+
+		if (col_filter_func && !col_filter_func(prod1_color))
+			continue;
+
 		double prod1_delta = prod1->getDelta();
 		double prod1_weight = prod1->getWeightFactor();
 		double prod1_fact_exp = prod1_delta * prod1->getProductFactorExponent();
 		bool prod1_odd = prod1->hasOddOrder();
-		std::size_t prod1_color = prod1->getColor();
 		Math::Vector3D::ConstPointer prod1_ctr = prod1->getCenter().getData();
 		double prod1_radius = prod1->getRadius() * radScalingFact;
 
 		for (GaussianProductList::ConstProductIterator p_it2 = ref_prod_list->getProductsBegin(), p_end2 = ref_prod_list->getProductsEnd(); p_it2 != p_end2; ++p_it2) {
 			const GaussianProduct* prod2 = *p_it2;
+			std::size_t prod2_color = prod2->getColor();
+
+			if (col_filter_func && !col_filter_func(prod2_color))
+				continue;
 
 			if (!colorMatchFunc) {
-				if (prod2->getColor() != prod1_color)
+				if (prod2_color != prod1_color)
 					continue;
 
-			} else if (!colorMatchFunc(prod1_color, prod2->getColor()))
+			} else if (!colorMatchFunc(prod1_color, prod2_color))
 				continue;
 	
 			double sqrd_prod_ctr_dist = calcSquaredDistance(prod1_ctr, prod2->getCenter().getData());
@@ -435,29 +488,38 @@ double Shape::FastGaussianShapeOverlapFunction::calcOverlapProxCheck(const Gauss
 	return overlap;
 }
 
-double Shape::FastGaussianShapeOverlapFunction::calcOverlapFastExpProxCheck(const GaussianProductList* ref_prod_list, const GaussianProductList* ovl_prod_list) const
+double Shape::FastGaussianShapeOverlapFunction::calcOverlapFastExpProxCheck(const GaussianProductList* ref_prod_list, const GaussianProductList* ovl_prod_list,
+																			const ColorFilterFunction& col_filter_func) const
 {
 	double overlap = 0.0;
 
 	if (ref_prod_list->getMaxOrder() == 1 && ovl_prod_list->getMaxOrder() == 1) {
 		for (GaussianProductList::ConstProductIterator p_it1 = ovl_prod_list->getProductsBegin(), p_end1 = ovl_prod_list->getProductsEnd(); p_it1 != p_end1; ++p_it1) {
 			const GaussianProduct* prod1 = *p_it1;
+			std::size_t prod1_color = prod1->getColor();
+
+			if (col_filter_func && !col_filter_func(prod1_color))
+				continue;
+
 			double prod1_delta = prod1->getDelta();
 			double prod1_weight = prod1->getWeightFactor();
-			std::size_t prod1_color = prod1->getColor();
 			Math::Vector3D::ConstPointer prod1_ctr = prod1->getCenter().getData();
 			double prod1_radius = prod1->getRadius() * radScalingFact;
 
 			for (GaussianProductList::ConstProductIterator p_it2 = ref_prod_list->getProductsBegin(), p_end2 = ref_prod_list->getProductsEnd(); p_it2 != p_end2; ++p_it2) {
 				const GaussianProduct* prod2 = *p_it2;
+				std::size_t prod2_color = prod2->getColor();
+
+				if (col_filter_func && !col_filter_func(prod2_color))
+					continue;
 
 				if (!colorMatchFunc) {
-					if (prod2->getColor() != prod1_color)
+					if (prod2_color != prod1_color)
 						continue;
 
-				} else if (!colorMatchFunc(prod1_color, prod2->getColor()))
+				} else if (!colorMatchFunc(prod1_color, prod2_color))
 					continue;
-			
+		
 				double sqrd_prod_ctr_dist = calcSquaredDistance(prod1_ctr, prod2->getCenter().getData());
 				double max_dist = prod1_radius + prod2->getRadius() * radScalingFact;
 
@@ -479,22 +541,30 @@ double Shape::FastGaussianShapeOverlapFunction::calcOverlapFastExpProxCheck(cons
 	
 	for (GaussianProductList::ConstProductIterator p_it1 = ovl_prod_list->getProductsBegin(), p_end1 = ovl_prod_list->getProductsEnd(); p_it1 != p_end1; ++p_it1) {
 		const GaussianProduct* prod1 = *p_it1;
+		std::size_t prod1_color = prod1->getColor();
+
+		if (col_filter_func && !col_filter_func(prod1_color))
+			continue;
+
 		double prod1_delta = prod1->getDelta();
 		double prod1_weight = prod1->getWeightFactor();
 		double prod1_fact_exp = prod1_delta * prod1->getProductFactorExponent();
 		bool prod1_odd = prod1->hasOddOrder();
-		std::size_t prod1_color = prod1->getColor();
 		Math::Vector3D::ConstPointer prod1_ctr = prod1->getCenter().getData();
 		double prod1_radius = prod1->getRadius() * radScalingFact;
 
 		for (GaussianProductList::ConstProductIterator p_it2 = ref_prod_list->getProductsBegin(), p_end2 = ref_prod_list->getProductsEnd(); p_it2 != p_end2; ++p_it2) {
 			const GaussianProduct* prod2 = *p_it2;
+			std::size_t prod2_color = prod2->getColor();
+
+			if (col_filter_func && !col_filter_func(prod2_color))
+				continue;
 
 			if (!colorMatchFunc) {
-				if (prod2->getColor() != prod1_color)
+				if (prod2_color != prod1_color)
 					continue;
 
-			} else if (!colorMatchFunc(prod1_color, prod2->getColor()))
+			} else if (!colorMatchFunc(prod1_color, prod2_color))
 				continue;
 	
 			double sqrd_prod_ctr_dist = calcSquaredDistance(prod1_ctr, prod2->getCenter().getData());
@@ -526,22 +596,22 @@ double Shape::FastGaussianShapeOverlapFunction::calcOverlapFastExpProxCheck(cons
 }
 
 double Shape::FastGaussianShapeOverlapFunction::calcOverlap(const GaussianProductList* ref_prod_list, const GaussianProductList* ovl_prod_list,
-															const Math::Vector3DArray& coords) const
+															const Math::Vector3DArray& coords, const ColorFilterFunction& col_filter_func) const
 {
 	if (proximityOpt) {
 		if (fastExpFunc)
-			return calcOverlapFastExpProxCheck(ref_prod_list, ovl_prod_list, coords);
+			return calcOverlapFastExpProxCheck(ref_prod_list, ovl_prod_list, coords, col_filter_func);
 
-		return calcOverlapProxCheck(ref_prod_list, ovl_prod_list, coords);
+		return calcOverlapProxCheck(ref_prod_list, ovl_prod_list, coords, col_filter_func);
 		
 	} else if (fastExpFunc)
-		return calcOverlapFastExp(ref_prod_list, ovl_prod_list, coords);
+		return calcOverlapFastExp(ref_prod_list, ovl_prod_list, coords, col_filter_func);
 
-	return calcOverlapExact(ref_prod_list, ovl_prod_list, coords);
+	return calcOverlapExact(ref_prod_list, ovl_prod_list, coords, col_filter_func);
 }
 
 double Shape::FastGaussianShapeOverlapFunction::calcOverlapExact(const GaussianProductList* ref_prod_list, const GaussianProductList* ovl_prod_list,
-																 const Math::Vector3DArray& coords) const
+																 const Math::Vector3DArray& coords, const ColorFilterFunction& col_filter_func) const
 {
 	const Math::Vector3DArray::StorageType& coords_data = coords.getData();
 	double overlap = 0.0;
@@ -549,19 +619,27 @@ double Shape::FastGaussianShapeOverlapFunction::calcOverlapExact(const GaussianP
 	if (ref_prod_list->getMaxOrder() == 1 && ovl_prod_list->getMaxOrder() == 1) {
 		for (GaussianProductList::ConstProductIterator p_it1 = ovl_prod_list->getProductsBegin(), p_end1 = ovl_prod_list->getProductsEnd(); p_it1 != p_end1; ++p_it1) {
 			const GaussianProduct* prod1 = *p_it1;
+			std::size_t prod1_color = prod1->getColor();
+
+			if (col_filter_func && !col_filter_func(prod1_color))
+				continue;
+
 			double prod1_delta = prod1->getDelta();
 			double prod1_weight = prod1->getWeightFactor();
-			std::size_t prod1_color = prod1->getColor();
 			Math::Vector3D::ConstPointer prod1_ctr = coords_data[prod1->getIndex()].getData();
 
 			for (GaussianProductList::ConstProductIterator p_it2 = ref_prod_list->getProductsBegin(), p_end2 = ref_prod_list->getProductsEnd(); p_it2 != p_end2; ++p_it2) {
 				const GaussianProduct* prod2 = *p_it2;
+				std::size_t prod2_color = prod2->getColor();
+
+				if (col_filter_func && !col_filter_func(prod2_color))
+					continue;
 
 				if (!colorMatchFunc) {
-					if (prod2->getColor() != prod1_color)
+					if (prod2_color != prod1_color)
 						continue;
 
-				} else if (!colorMatchFunc(prod1_color, prod2->getColor()))
+				} else if (!colorMatchFunc(prod1_color, prod2_color))
 					continue;
 				
 				double sqrd_prod_ctr_dist = calcSquaredDistance(prod1_ctr, prod2->getCenter().getData());
@@ -582,10 +660,14 @@ double Shape::FastGaussianShapeOverlapFunction::calcOverlapExact(const GaussianP
 	
 	for (GaussianProductList::ConstProductIterator p_it1 = ovl_prod_list->getProductsBegin(), p_end1 = ovl_prod_list->getProductsEnd(); p_it1 != p_end1; ++p_it1) {
 		const GaussianProduct* prod1 = *p_it1;
+		std::size_t prod1_color = prod1->getColor();
+
+		if (col_filter_func && !col_filter_func(prod1_color))
+			continue;
+
 		double prod1_delta = prod1->getDelta();
 		double prod1_weight = prod1->getWeightFactor();
 		bool prod1_odd = prod1->hasOddOrder();
-		std::size_t prod1_color = prod1->getColor();
 		Math::Vector3D::ConstPointer prod1_ctr = 0;
 		double prod1_fact_exp = 0.0;
 
@@ -618,14 +700,18 @@ double Shape::FastGaussianShapeOverlapFunction::calcOverlapExact(const GaussianP
 				 
 		for (GaussianProductList::ConstProductIterator p_it2 = ref_prod_list->getProductsBegin(), p_end2 = ref_prod_list->getProductsEnd(); p_it2 != p_end2; ++p_it2) {
 			const GaussianProduct* prod2 = *p_it2;
+			std::size_t prod2_color = prod2->getColor();
+
+			if (col_filter_func && !col_filter_func(prod2_color))
+				continue;
 
 			if (!colorMatchFunc) {
-				if (prod2->getColor() != prod1_color)
+				if (prod2_color != prod1_color)
 					continue;
 
-			} else if (!colorMatchFunc(prod1_color, prod2->getColor()))
+			} else if (!colorMatchFunc(prod1_color, prod2_color))
 				continue;
-					
+				
 			double prod2_delta = prod2->getDelta();
 			double delta = prod1_delta + prod2_delta;
 			double vol_factor = M_PI / delta;
@@ -649,7 +735,7 @@ double Shape::FastGaussianShapeOverlapFunction::calcOverlapExact(const GaussianP
 }
 
 double Shape::FastGaussianShapeOverlapFunction::calcOverlapFastExp(const GaussianProductList* ref_prod_list, const GaussianProductList* ovl_prod_list,
-																   const Math::Vector3DArray& coords) const
+																   const Math::Vector3DArray& coords, const ColorFilterFunction& col_filter_func) const
 {
 	const Math::Vector3DArray::StorageType& coords_data = coords.getData();
 	double overlap = 0.0;
@@ -657,19 +743,27 @@ double Shape::FastGaussianShapeOverlapFunction::calcOverlapFastExp(const Gaussia
 	if (ref_prod_list->getMaxOrder() == 1 && ovl_prod_list->getMaxOrder() == 1) {
 		for (GaussianProductList::ConstProductIterator p_it1 = ovl_prod_list->getProductsBegin(), p_end1 = ovl_prod_list->getProductsEnd(); p_it1 != p_end1; ++p_it1) {
 			const GaussianProduct* prod1 = *p_it1;
+			std::size_t prod1_color = prod1->getColor();
+
+			if (col_filter_func && !col_filter_func(prod1_color))
+				continue;
+
 			double prod1_delta = prod1->getDelta();
 			double prod1_weight = prod1->getWeightFactor();
-			std::size_t prod1_color = prod1->getColor();
 			Math::Vector3D::ConstPointer prod1_ctr = coords_data[prod1->getIndex()].getData();
 
 			for (GaussianProductList::ConstProductIterator p_it2 = ref_prod_list->getProductsBegin(), p_end2 = ref_prod_list->getProductsEnd(); p_it2 != p_end2; ++p_it2) {
 				const GaussianProduct* prod2 = *p_it2;
+				std::size_t prod2_color = prod2->getColor();
+
+				if (col_filter_func && !col_filter_func(prod2_color))
+					continue;
 
 				if (!colorMatchFunc) {
-					if (prod2->getColor() != prod1_color)
+					if (prod2_color != prod1_color)
 						continue;
 
-				} else if (!colorMatchFunc(prod1_color, prod2->getColor()))
+				} else if (!colorMatchFunc(prod1_color, prod2_color))
 					continue;
 				
 				double sqrd_prod_ctr_dist = calcSquaredDistance(prod1_ctr, prod2->getCenter().getData());
@@ -691,10 +785,14 @@ double Shape::FastGaussianShapeOverlapFunction::calcOverlapFastExp(const Gaussia
 	
 	for (GaussianProductList::ConstProductIterator p_it1 = ovl_prod_list->getProductsBegin(), p_end1 = ovl_prod_list->getProductsEnd(); p_it1 != p_end1; ++p_it1) {
 		const GaussianProduct* prod1 = *p_it1;
+		std::size_t prod1_color = prod1->getColor();
+
+		if (col_filter_func && !col_filter_func(prod1_color))
+			continue;
+
 		double prod1_delta = prod1->getDelta();
 		double prod1_weight = prod1->getWeightFactor();
 		bool prod1_odd = prod1->hasOddOrder();
-		std::size_t prod1_color = prod1->getColor();
 		Math::Vector3D::ConstPointer prod1_ctr = 0;
 		double prod1_fact_exp = 0.0;
 
@@ -727,12 +825,16 @@ double Shape::FastGaussianShapeOverlapFunction::calcOverlapFastExp(const Gaussia
 				 
 		for (GaussianProductList::ConstProductIterator p_it2 = ref_prod_list->getProductsBegin(), p_end2 = ref_prod_list->getProductsEnd(); p_it2 != p_end2; ++p_it2) {
 			const GaussianProduct* prod2 = *p_it2;
+			std::size_t prod2_color = prod2->getColor();
+
+			if (col_filter_func && !col_filter_func(prod2_color))
+				continue;
 
 			if (!colorMatchFunc) {
-				if (prod2->getColor() != prod1_color)
+				if (prod2_color != prod1_color)
 					continue;
 
-			} else if (!colorMatchFunc(prod1_color, prod2->getColor()))
+			} else if (!colorMatchFunc(prod1_color, prod2_color))
 				continue;
 				
 			double prod2_delta = prod2->getDelta();
@@ -758,7 +860,7 @@ double Shape::FastGaussianShapeOverlapFunction::calcOverlapFastExp(const Gaussia
 }
 
 double Shape::FastGaussianShapeOverlapFunction::calcOverlapProxCheck(const GaussianProductList* ref_prod_list, const GaussianProductList* ovl_prod_list,
-																	 const Math::Vector3DArray& coords) const
+																	 const Math::Vector3DArray& coords, const ColorFilterFunction& col_filter_func) const
 {
 	const Math::Vector3DArray::StorageType& coords_data = coords.getData();
 	double overlap = 0.0;
@@ -766,20 +868,28 @@ double Shape::FastGaussianShapeOverlapFunction::calcOverlapProxCheck(const Gauss
 	if (ref_prod_list->getMaxOrder() == 1 && ovl_prod_list->getMaxOrder() == 1) {
 		for (GaussianProductList::ConstProductIterator p_it1 = ovl_prod_list->getProductsBegin(), p_end1 = ovl_prod_list->getProductsEnd(); p_it1 != p_end1; ++p_it1) {
 			const GaussianProduct* prod1 = *p_it1;
+			std::size_t prod1_color = prod1->getColor();
+
+			if (col_filter_func && !col_filter_func(prod1_color))
+				continue;
+
 			double prod1_delta = prod1->getDelta();
 			double prod1_weight = prod1->getWeightFactor();
-			std::size_t prod1_color = prod1->getColor();
 			Math::Vector3D::ConstPointer prod1_ctr = coords_data[prod1->getIndex()].getData();
 			double prod1_radius = prod1->getRadius() * radScalingFact;
 
 			for (GaussianProductList::ConstProductIterator p_it2 = ref_prod_list->getProductsBegin(), p_end2 = ref_prod_list->getProductsEnd(); p_it2 != p_end2; ++p_it2) {
 				const GaussianProduct* prod2 = *p_it2;
+				std::size_t prod2_color = prod2->getColor();
+
+				if (col_filter_func && !col_filter_func(prod2_color))
+					continue;
 
 				if (!colorMatchFunc) {
-					if (prod2->getColor() != prod1_color)
+					if (prod2_color != prod1_color)
 						continue;
 
-				} else if (!colorMatchFunc(prod1_color, prod2->getColor()))
+				} else if (!colorMatchFunc(prod1_color, prod2_color))
 					continue;
 				
 				double sqrd_prod_ctr_dist = calcSquaredDistance(prod1_ctr, prod2->getCenter().getData());
@@ -805,10 +915,14 @@ double Shape::FastGaussianShapeOverlapFunction::calcOverlapProxCheck(const Gauss
 	
 	for (GaussianProductList::ConstProductIterator p_it1 = ovl_prod_list->getProductsBegin(), p_end1 = ovl_prod_list->getProductsEnd(); p_it1 != p_end1; ++p_it1) {
 		const GaussianProduct* prod1 = *p_it1;
+		std::size_t prod1_color = prod1->getColor();
+
+		if (col_filter_func && !col_filter_func(prod1_color))
+			continue;
+
 		double prod1_delta = prod1->getDelta();
 		double prod1_weight = prod1->getWeightFactor();
 		bool prod1_odd = prod1->hasOddOrder();
-		std::size_t prod1_color = prod1->getColor();
 		double prod1_radius = prod1->getRadius() * radScalingFact;
 		Math::Vector3D::ConstPointer prod1_ctr = 0;
 		double prod1_fact_exp = 0.0;
@@ -842,14 +956,18 @@ double Shape::FastGaussianShapeOverlapFunction::calcOverlapProxCheck(const Gauss
 				 
 		for (GaussianProductList::ConstProductIterator p_it2 = ref_prod_list->getProductsBegin(), p_end2 = ref_prod_list->getProductsEnd(); p_it2 != p_end2; ++p_it2) {
 			const GaussianProduct* prod2 = *p_it2;
+			std::size_t prod2_color = prod2->getColor();
+
+			if (col_filter_func && !col_filter_func(prod2_color))
+				continue;
 
 			if (!colorMatchFunc) {
-				if (prod2->getColor() != prod1_color)
+				if (prod2_color != prod1_color)
 					continue;
 
-			} else if (!colorMatchFunc(prod1_color, prod2->getColor()))
+			} else if (!colorMatchFunc(prod1_color, prod2_color))
 				continue;
-		
+
 			double sqrd_prod_ctr_dist = calcSquaredDistance(prod1_ctr, prod2->getCenter().getData());
 			double max_dist = prod1_radius + prod2->getRadius() * radScalingFact;
 
@@ -879,7 +997,7 @@ double Shape::FastGaussianShapeOverlapFunction::calcOverlapProxCheck(const Gauss
 }
 
 double Shape::FastGaussianShapeOverlapFunction::calcOverlapFastExpProxCheck(const GaussianProductList* ref_prod_list, const GaussianProductList* ovl_prod_list,
-																			const Math::Vector3DArray& coords) const
+																			const Math::Vector3DArray& coords, const ColorFilterFunction& col_filter_func) const
 {
 	const Math::Vector3DArray::StorageType& coords_data = coords.getData();
 	double overlap = 0.0;
@@ -887,20 +1005,28 @@ double Shape::FastGaussianShapeOverlapFunction::calcOverlapFastExpProxCheck(cons
 	if (ref_prod_list->getMaxOrder() == 1 && ovl_prod_list->getMaxOrder() == 1) {
 		for (GaussianProductList::ConstProductIterator p_it1 = ovl_prod_list->getProductsBegin(), p_end1 = ovl_prod_list->getProductsEnd(); p_it1 != p_end1; ++p_it1) {
 			const GaussianProduct* prod1 = *p_it1;
+			std::size_t prod1_color = prod1->getColor();
+
+			if (col_filter_func && !col_filter_func(prod1_color))
+				continue;
+
 			double prod1_delta = prod1->getDelta();
 			double prod1_weight = prod1->getWeightFactor();
-			std::size_t prod1_color = prod1->getColor();
 			Math::Vector3D::ConstPointer prod1_ctr = coords_data[prod1->getIndex()].getData();
 			double prod1_radius = prod1->getRadius() * radScalingFact;
 
 			for (GaussianProductList::ConstProductIterator p_it2 = ref_prod_list->getProductsBegin(), p_end2 = ref_prod_list->getProductsEnd(); p_it2 != p_end2; ++p_it2) {
 				const GaussianProduct* prod2 = *p_it2;
+				std::size_t prod2_color = prod2->getColor();
+
+				if (col_filter_func && !col_filter_func(prod2_color))
+					continue;
 
 				if (!colorMatchFunc) {
-					if (prod2->getColor() != prod1_color)
+					if (prod2_color != prod1_color)
 						continue;
 
-				} else if (!colorMatchFunc(prod1_color, prod2->getColor()))
+				} else if (!colorMatchFunc(prod1_color, prod2_color))
 					continue;
 				
 				double sqrd_prod_ctr_dist = calcSquaredDistance(prod1_ctr, prod2->getCenter().getData());
@@ -927,10 +1053,14 @@ double Shape::FastGaussianShapeOverlapFunction::calcOverlapFastExpProxCheck(cons
 	
 	for (GaussianProductList::ConstProductIterator p_it1 = ovl_prod_list->getProductsBegin(), p_end1 = ovl_prod_list->getProductsEnd(); p_it1 != p_end1; ++p_it1) {
 		const GaussianProduct* prod1 = *p_it1;
+		std::size_t prod1_color = prod1->getColor();
+
+		if (col_filter_func && !col_filter_func(prod1_color))
+			continue;
+
 		double prod1_delta = prod1->getDelta();
 		double prod1_weight = prod1->getWeightFactor();
 		bool prod1_odd = prod1->hasOddOrder();
-		std::size_t prod1_color = prod1->getColor();
 		double prod1_radius = prod1->getRadius() * radScalingFact;
 		Math::Vector3D::ConstPointer prod1_ctr = 0;
 		double prod1_fact_exp = 0.0;
@@ -964,14 +1094,18 @@ double Shape::FastGaussianShapeOverlapFunction::calcOverlapFastExpProxCheck(cons
 				 
 		for (GaussianProductList::ConstProductIterator p_it2 = ref_prod_list->getProductsBegin(), p_end2 = ref_prod_list->getProductsEnd(); p_it2 != p_end2; ++p_it2) {
 			const GaussianProduct* prod2 = *p_it2;
+			std::size_t prod2_color = prod2->getColor();
+
+			if (col_filter_func && !col_filter_func(prod2_color))
+				continue;
 
 			if (!colorMatchFunc) {
-				if (prod2->getColor() != prod1_color)
+				if (prod2_color != prod1_color)
 					continue;
 
-			} else if (!colorMatchFunc(prod1_color, prod2->getColor()))
+			} else if (!colorMatchFunc(prod1_color, prod2_color))
 				continue;
-	
+
 			double sqrd_prod_ctr_dist = calcSquaredDistance(prod1_ctr, prod2->getCenter().getData());
 			double max_dist = prod1_radius + prod2->getRadius() * radScalingFact;
 
@@ -1001,24 +1135,26 @@ double Shape::FastGaussianShapeOverlapFunction::calcOverlapFastExpProxCheck(cons
 }
 
 double Shape::FastGaussianShapeOverlapFunction::calcOverlapGradient(const GaussianProductList* ref_prod_list, const GaussianProductList* ovl_prod_list,
-																	const Math::Vector3DArray& coords, Math::Vector3DArray& grad) const
+																	const Math::Vector3DArray& coords, Math::Vector3DArray& grad,
+																	const ColorFilterFunction& col_filter_func) const
 {
 	grad.assign(ovl_prod_list->getNumShapeElements(), Math::Vector3D());
 
 	if (proximityOpt) {
 		if (fastExpFunc)
-			return calcOverlapGradientFastExpProxCheck(ref_prod_list, ovl_prod_list, coords, grad);
+			return calcOverlapGradientFastExpProxCheck(ref_prod_list, ovl_prod_list, coords, grad, col_filter_func);
 
-		return calcOverlapGradientProxCheck(ref_prod_list, ovl_prod_list, coords, grad);
+		return calcOverlapGradientProxCheck(ref_prod_list, ovl_prod_list, coords, grad, col_filter_func);
 		
 	} else if (fastExpFunc)
-		return calcOverlapGradientFastExp(ref_prod_list, ovl_prod_list, coords, grad);
+		return calcOverlapGradientFastExp(ref_prod_list, ovl_prod_list, coords, grad, col_filter_func);
 
-	return calcOverlapGradientExact(ref_prod_list, ovl_prod_list, coords, grad);	
+	return calcOverlapGradientExact(ref_prod_list, ovl_prod_list, coords, grad, col_filter_func);	
 }
 
 double Shape::FastGaussianShapeOverlapFunction::calcOverlapGradientExact(const GaussianProductList* ref_prod_list, const GaussianProductList* ovl_prod_list,
-																		 const Math::Vector3DArray& coords, Math::Vector3DArray& grad) const
+																		 const Math::Vector3DArray& coords, Math::Vector3DArray& grad,
+																		 const ColorFilterFunction& col_filter_func) const
 {
 	const Math::Vector3DArray::StorageType& coords_data = coords.getData();
 	Math::Vector3DArray::StorageType& grad_data = grad.getData();
@@ -1029,20 +1165,28 @@ double Shape::FastGaussianShapeOverlapFunction::calcOverlapGradientExact(const G
 	if (ref_prod_list->getMaxOrder() == 1 && ovl_prod_list->getMaxOrder() == 1) {
 		for (GaussianProductList::ConstProductIterator p_it1 = ovl_prod_list->getProductsBegin(), p_end1 = ovl_prod_list->getProductsEnd(); p_it1 != p_end1; ++p_it1) {
 			const GaussianProduct* prod1 = *p_it1;
+			std::size_t prod1_color = prod1->getColor();
+
+			if (col_filter_func && !col_filter_func(prod1_color))
+				continue;
+
 			std::size_t prod1_idx = prod1->getIndex();
 			double prod1_delta = prod1->getDelta();
 			double prod1_weight = prod1->getWeightFactor();
-			std::size_t prod1_color = prod1->getColor();
 			Math::Vector3D::ConstPointer prod1_ctr = coords_data[prod1_idx].getData();
 				 
 			for (GaussianProductList::ConstProductIterator p_it2 = ref_prod_list->getProductsBegin(), p_end2 = ref_prod_list->getProductsEnd(); p_it2 != p_end2; ++p_it2) {
 				const GaussianProduct* prod2 = *p_it2;
+				std::size_t prod2_color = prod2->getColor();
+
+				if (col_filter_func && !col_filter_func(prod2_color))
+					continue;
 
 				if (!colorMatchFunc) {
-					if (prod2->getColor() != prod1_color)
+					if (prod2_color != prod1_color)
 						continue;
 
-				} else if (!colorMatchFunc(prod1_color, prod2->getColor()))
+				} else if (!colorMatchFunc(prod1_color, prod2_color))
 					continue;
 			
 				Math::Vector3D::ConstPointer prod2_ctr = prod2->getCenter().getData();
@@ -1077,10 +1221,14 @@ double Shape::FastGaussianShapeOverlapFunction::calcOverlapGradientExact(const G
 
 	for (GaussianProductList::ConstProductIterator p_it1 = ovl_prod_list->getProductsBegin(), p_end1 = ovl_prod_list->getProductsEnd(); p_it1 != p_end1; ++p_it1) {
 		const GaussianProduct* prod1 = *p_it1;
+		std::size_t prod1_color = prod1->getColor();
+
+		if (col_filter_func && !col_filter_func(prod1_color))
+			continue;
+
 		double prod1_delta = prod1->getDelta();
 		double prod1_weight = prod1->getWeightFactor();
 		bool prod1_odd = prod1->hasOddOrder();
-		std::size_t prod1_color = prod1->getColor();
 		Math::Vector3D::ConstPointer prod1_ctr = 0;
 		double prod1_fact_exp = 0.0;
 
@@ -1113,12 +1261,16 @@ double Shape::FastGaussianShapeOverlapFunction::calcOverlapGradientExact(const G
 				 
 		for (GaussianProductList::ConstProductIterator p_it2 = ref_prod_list->getProductsBegin(), p_end2 = ref_prod_list->getProductsEnd(); p_it2 != p_end2; ++p_it2) {
 			const GaussianProduct* prod2 = *p_it2;
+			std::size_t prod2_color = prod2->getColor();
+
+			if (col_filter_func && !col_filter_func(prod2_color))
+				continue;
 
 			if (!colorMatchFunc) {
-				if (prod2->getColor() != prod1_color)
+				if (prod2_color != prod1_color)
 					continue;
 
-			} else if (!colorMatchFunc(prod1_color, prod2->getColor()))
+			} else if (!colorMatchFunc(prod1_color, prod2_color))
 				continue;
 			
 			Math::Vector3D::ConstPointer prod2_ctr = prod2->getCenter().getData();
@@ -1163,7 +1315,8 @@ double Shape::FastGaussianShapeOverlapFunction::calcOverlapGradientExact(const G
 }
 
 double Shape::FastGaussianShapeOverlapFunction::calcOverlapGradientFastExp(const GaussianProductList* ref_prod_list, const GaussianProductList* ovl_prod_list,
-																		   const Math::Vector3DArray& coords, Math::Vector3DArray& grad) const
+																		   const Math::Vector3DArray& coords, Math::Vector3DArray& grad,
+																		   const ColorFilterFunction& col_filter_func) const
 {
 	const Math::Vector3DArray::StorageType& coords_data = coords.getData();
 	Math::Vector3DArray::StorageType& grad_data = grad.getData();
@@ -1174,22 +1327,30 @@ double Shape::FastGaussianShapeOverlapFunction::calcOverlapGradientFastExp(const
 	if (ref_prod_list->getMaxOrder() == 1 && ovl_prod_list->getMaxOrder() == 1) {
 		for (GaussianProductList::ConstProductIterator p_it1 = ovl_prod_list->getProductsBegin(), p_end1 = ovl_prod_list->getProductsEnd(); p_it1 != p_end1; ++p_it1) {
 			const GaussianProduct* prod1 = *p_it1;
+			std::size_t prod1_color = prod1->getColor();
+
+			if (col_filter_func && !col_filter_func(prod1_color))
+				continue;
+
 			std::size_t prod1_idx = prod1->getIndex();
 			double prod1_delta = prod1->getDelta();
 			double prod1_weight = prod1->getWeightFactor();
-			std::size_t prod1_color = prod1->getColor();
 			Math::Vector3D::ConstPointer prod1_ctr = coords_data[prod1_idx].getData();
 				 
 			for (GaussianProductList::ConstProductIterator p_it2 = ref_prod_list->getProductsBegin(), p_end2 = ref_prod_list->getProductsEnd(); p_it2 != p_end2; ++p_it2) {
 				const GaussianProduct* prod2 = *p_it2;
+				std::size_t prod2_color = prod2->getColor();
+
+				if (col_filter_func && !col_filter_func(prod2_color))
+					continue;
 
 				if (!colorMatchFunc) {
-					if (prod2->getColor() != prod1_color)
+					if (prod2_color != prod1_color)
 						continue;
 
-				} else if (!colorMatchFunc(prod1_color, prod2->getColor()))
+				} else if (!colorMatchFunc(prod1_color, prod2_color))
 					continue;
-			
+		
 				Math::Vector3D::ConstPointer prod2_ctr = prod2->getCenter().getData();
 				double sqrd_prod_ctr_dist = calcSquaredDistance(prod1_ctr, prod2_ctr);
 				double prod2_delta = prod2->getDelta();
@@ -1223,10 +1384,14 @@ double Shape::FastGaussianShapeOverlapFunction::calcOverlapGradientFastExp(const
 
 	for (GaussianProductList::ConstProductIterator p_it1 = ovl_prod_list->getProductsBegin(), p_end1 = ovl_prod_list->getProductsEnd(); p_it1 != p_end1; ++p_it1) {
 		const GaussianProduct* prod1 = *p_it1;
+		std::size_t prod1_color = prod1->getColor();
+
+		if (col_filter_func && !col_filter_func(prod1_color))
+			continue;
+
 		double prod1_delta = prod1->getDelta();
 		double prod1_weight = prod1->getWeightFactor();
 		bool prod1_odd = prod1->hasOddOrder();
-		std::size_t prod1_color = prod1->getColor();
 		Math::Vector3D::ConstPointer prod1_ctr = 0;
 		double prod1_fact_exp = 0.0;
 
@@ -1259,14 +1424,18 @@ double Shape::FastGaussianShapeOverlapFunction::calcOverlapGradientFastExp(const
 				 
 		for (GaussianProductList::ConstProductIterator p_it2 = ref_prod_list->getProductsBegin(), p_end2 = ref_prod_list->getProductsEnd(); p_it2 != p_end2; ++p_it2) {
 			const GaussianProduct* prod2 = *p_it2;
+			std::size_t prod2_color = prod2->getColor();
+
+			if (col_filter_func && !col_filter_func(prod2_color))
+				continue;
 
 			if (!colorMatchFunc) {
-				if (prod2->getColor() != prod1_color)
+				if (prod2_color != prod1_color)
 					continue;
 
-			} else if (!colorMatchFunc(prod1_color, prod2->getColor()))
+			} else if (!colorMatchFunc(prod1_color, prod2_color))
 				continue;
-			
+		
 			Math::Vector3D::ConstPointer prod2_ctr = prod2->getCenter().getData();
 			double prod2_delta = prod2->getDelta();
 			double delta = prod1_delta + prod2_delta;
@@ -1309,7 +1478,8 @@ double Shape::FastGaussianShapeOverlapFunction::calcOverlapGradientFastExp(const
 }
 
 double Shape::FastGaussianShapeOverlapFunction::calcOverlapGradientProxCheck(const GaussianProductList* ref_prod_list, const GaussianProductList* ovl_prod_list,
-																			 const Math::Vector3DArray& coords, Math::Vector3DArray& grad) const
+																			 const Math::Vector3DArray& coords, Math::Vector3DArray& grad,
+																			 const ColorFilterFunction& col_filter_func) const
 {
 	const Math::Vector3DArray::StorageType& coords_data = coords.getData();
 	Math::Vector3DArray::StorageType& grad_data = grad.getData();
@@ -1320,23 +1490,31 @@ double Shape::FastGaussianShapeOverlapFunction::calcOverlapGradientProxCheck(con
 	if (ref_prod_list->getMaxOrder() == 1 && ovl_prod_list->getMaxOrder() == 1) {
 		for (GaussianProductList::ConstProductIterator p_it1 = ovl_prod_list->getProductsBegin(), p_end1 = ovl_prod_list->getProductsEnd(); p_it1 != p_end1; ++p_it1) {
 			const GaussianProduct* prod1 = *p_it1;
+			std::size_t prod1_color = prod1->getColor();
+
+			if (col_filter_func && !col_filter_func(prod1_color))
+				continue;
+
 			std::size_t prod1_idx = prod1->getIndex();
 			double prod1_delta = prod1->getDelta();
 			double prod1_weight = prod1->getWeightFactor();
-			std::size_t prod1_color = prod1->getColor();
 			double prod1_radius = prod1->getRadius() * radScalingFact;
 			Math::Vector3D::ConstPointer prod1_ctr = coords_data[prod1_idx].getData();
 				 
 			for (GaussianProductList::ConstProductIterator p_it2 = ref_prod_list->getProductsBegin(), p_end2 = ref_prod_list->getProductsEnd(); p_it2 != p_end2; ++p_it2) {
 				const GaussianProduct* prod2 = *p_it2;
+				std::size_t prod2_color = prod2->getColor();
+
+				if (col_filter_func && !col_filter_func(prod2_color))
+					continue;
 
 				if (!colorMatchFunc) {
-					if (prod2->getColor() != prod1_color)
+					if (prod2_color != prod1_color)
 						continue;
 
-				} else if (!colorMatchFunc(prod1_color, prod2->getColor()))
+				} else if (!colorMatchFunc(prod1_color, prod2_color))
 					continue;
-			
+	
 				Math::Vector3D::ConstPointer prod2_ctr = prod2->getCenter().getData();
 				double sqrd_prod_ctr_dist = calcSquaredDistance(prod1_ctr, prod2_ctr);
 				double max_dist = prod1_radius + prod2->getRadius() * radScalingFact;
@@ -1374,10 +1552,14 @@ double Shape::FastGaussianShapeOverlapFunction::calcOverlapGradientProxCheck(con
 
 	for (GaussianProductList::ConstProductIterator p_it1 = ovl_prod_list->getProductsBegin(), p_end1 = ovl_prod_list->getProductsEnd(); p_it1 != p_end1; ++p_it1) {
 		const GaussianProduct* prod1 = *p_it1;
+		std::size_t prod1_color = prod1->getColor();
+
+		if (col_filter_func && !col_filter_func(prod1_color))
+			continue;
+
 		double prod1_delta = prod1->getDelta();
 		double prod1_weight = prod1->getWeightFactor();
 		bool prod1_odd = prod1->hasOddOrder();
-		std::size_t prod1_color = prod1->getColor();
 		double prod1_radius = prod1->getRadius() * radScalingFact;
 		Math::Vector3D::ConstPointer prod1_ctr = 0;
 		double prod1_fact_exp = 0.0;
@@ -1411,12 +1593,16 @@ double Shape::FastGaussianShapeOverlapFunction::calcOverlapGradientProxCheck(con
 				 
 		for (GaussianProductList::ConstProductIterator p_it2 = ref_prod_list->getProductsBegin(), p_end2 = ref_prod_list->getProductsEnd(); p_it2 != p_end2; ++p_it2) {
 			const GaussianProduct* prod2 = *p_it2;
+			std::size_t prod2_color = prod2->getColor();
+
+			if (col_filter_func && !col_filter_func(prod2_color))
+				continue;
 
 			if (!colorMatchFunc) {
-				if (prod2->getColor() != prod1_color)
+				if (prod2_color != prod1_color)
 					continue;
 
-			} else if (!colorMatchFunc(prod1_color, prod2->getColor()))
+			} else if (!colorMatchFunc(prod1_color, prod2_color))
 				continue;
 			
 			Math::Vector3D::ConstPointer prod2_ctr = prod2->getCenter().getData();
@@ -1467,7 +1653,8 @@ double Shape::FastGaussianShapeOverlapFunction::calcOverlapGradientProxCheck(con
 }
 
 double Shape::FastGaussianShapeOverlapFunction::calcOverlapGradientFastExpProxCheck(const GaussianProductList* ref_prod_list, const GaussianProductList* ovl_prod_list,
-																					const Math::Vector3DArray& coords, Math::Vector3DArray& grad) const
+																					const Math::Vector3DArray& coords, Math::Vector3DArray& grad,
+																					const ColorFilterFunction& col_filter_func) const
 {
 	const Math::Vector3DArray::StorageType& coords_data = coords.getData();
 	Math::Vector3DArray::StorageType& grad_data = grad.getData();
@@ -1478,23 +1665,31 @@ double Shape::FastGaussianShapeOverlapFunction::calcOverlapGradientFastExpProxCh
 	if (ref_prod_list->getMaxOrder() == 1 && ovl_prod_list->getMaxOrder() == 1) {
 		for (GaussianProductList::ConstProductIterator p_it1 = ovl_prod_list->getProductsBegin(), p_end1 = ovl_prod_list->getProductsEnd(); p_it1 != p_end1; ++p_it1) {
 			const GaussianProduct* prod1 = *p_it1;
+			std::size_t prod1_color = prod1->getColor();
+
+			if (col_filter_func && !col_filter_func(prod1_color))
+				continue;
+
 			std::size_t prod1_idx = prod1->getIndex();
 			double prod1_delta = prod1->getDelta();
 			double prod1_weight = prod1->getWeightFactor();
-			std::size_t prod1_color = prod1->getColor();
 			double prod1_radius = prod1->getRadius() * radScalingFact;
 			Math::Vector3D::ConstPointer prod1_ctr = coords_data[prod1_idx].getData();
 				 
 			for (GaussianProductList::ConstProductIterator p_it2 = ref_prod_list->getProductsBegin(), p_end2 = ref_prod_list->getProductsEnd(); p_it2 != p_end2; ++p_it2) {
 				const GaussianProduct* prod2 = *p_it2;
+				std::size_t prod2_color = prod2->getColor();
+
+				if (col_filter_func && !col_filter_func(prod2_color))
+					continue;
 
 				if (!colorMatchFunc) {
-					if (prod2->getColor() != prod1_color)
+					if (prod2_color != prod1_color)
 						continue;
 
-				} else if (!colorMatchFunc(prod1_color, prod2->getColor()))
+				} else if (!colorMatchFunc(prod1_color, prod2_color))
 					continue;
-			
+	
 				Math::Vector3D::ConstPointer prod2_ctr = prod2->getCenter().getData();
 				double sqrd_prod_ctr_dist = calcSquaredDistance(prod1_ctr, prod2_ctr);
 				double max_dist = prod1_radius + prod2->getRadius() * radScalingFact;
@@ -1533,10 +1728,14 @@ double Shape::FastGaussianShapeOverlapFunction::calcOverlapGradientFastExpProxCh
 
 	for (GaussianProductList::ConstProductIterator p_it1 = ovl_prod_list->getProductsBegin(), p_end1 = ovl_prod_list->getProductsEnd(); p_it1 != p_end1; ++p_it1) {
 		const GaussianProduct* prod1 = *p_it1;
+		std::size_t prod1_color = prod1->getColor();
+
+		if (col_filter_func && !col_filter_func(prod1_color))
+			continue;
+
 		double prod1_delta = prod1->getDelta();
 		double prod1_weight = prod1->getWeightFactor();
 		bool prod1_odd = prod1->hasOddOrder();
-		std::size_t prod1_color = prod1->getColor();
 		double prod1_radius = prod1->getRadius() * radScalingFact;
 		Math::Vector3D::ConstPointer prod1_ctr = 0;
 		double prod1_fact_exp = 0.0;
@@ -1570,14 +1769,18 @@ double Shape::FastGaussianShapeOverlapFunction::calcOverlapGradientFastExpProxCh
 				 
 		for (GaussianProductList::ConstProductIterator p_it2 = ref_prod_list->getProductsBegin(), p_end2 = ref_prod_list->getProductsEnd(); p_it2 != p_end2; ++p_it2) {
 			const GaussianProduct* prod2 = *p_it2;
+			std::size_t prod2_color = prod2->getColor();
+
+			if (col_filter_func && !col_filter_func(prod2_color))
+				continue;
 
 			if (!colorMatchFunc) {
-				if (prod2->getColor() != prod1_color)
+				if (prod2_color != prod1_color)
 					continue;
 
-			} else if (!colorMatchFunc(prod1_color, prod2->getColor()))
+			} else if (!colorMatchFunc(prod1_color, prod2_color))
 				continue;
-			
+		
 			Math::Vector3D::ConstPointer prod2_ctr = prod2->getCenter().getData();
 			double sqrd_prod_ctr_dist = calcSquaredDistance(prod1_ctr, prod2_ctr);
 			double max_dist = prod1_radius + prod2->getRadius() * radScalingFact;

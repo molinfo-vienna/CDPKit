@@ -58,6 +58,8 @@ namespace CDPL
 			
 		  public:
 			typedef boost::shared_ptr<GaussianShapeOverlapFunction> SharedPointer;
+
+			typedef boost::function1<bool, std::size_t> ColorFilterFunction;
 			typedef boost::function2<bool, std::size_t, std::size_t> ColorMatchFunction;
 
 			virtual ~GaussianShapeOverlapFunction() {}
@@ -70,13 +72,22 @@ namespace CDPL
 
 			virtual const ColorMatchFunction& getColorMatchFunction() const = 0;
 
-			virtual double calcSelfOverlap(bool ref) const = 0;
+			virtual double calcSelfOverlap(bool ref) const;
+
+			virtual double calcSelfOverlap(bool ref, const ColorFilterFunction& col_filter_func) const = 0;
 			
-			virtual double calcOverlap() const = 0;
+			virtual double calcOverlap() const;
 
-			virtual double calcOverlap(const Math::Vector3DArray& coords) const = 0;
+			virtual double calcOverlap(const ColorFilterFunction& col_filter_func) const = 0;
 
-			virtual double calcOverlapGradient(const Math::Vector3DArray& coords, Math::Vector3DArray& grad) const = 0;
+			virtual double calcOverlap(const Math::Vector3DArray& coords) const;
+
+			virtual double calcOverlap(const Math::Vector3DArray& coords, const ColorFilterFunction& col_filter_func) const = 0;
+
+			virtual double calcOverlapGradient(const Math::Vector3DArray& coords, Math::Vector3DArray& grad) const;
+
+			virtual double calcOverlapGradient(const Math::Vector3DArray& coords, Math::Vector3DArray& grad, 
+											   const ColorFilterFunction& col_filter_func) const = 0;
 
 		  protected:
 			GaussianShapeOverlapFunction() {}
