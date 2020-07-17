@@ -190,7 +190,6 @@ namespace CDPL
 			Math::Vector3DArray                   optPoseCoordsGrad;
 			BFGSMinimizer                         minimizer;
 			ResultList                            results;
-		
 		};
 
 		/**

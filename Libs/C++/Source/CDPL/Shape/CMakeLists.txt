@@ -33,6 +33,7 @@ SET(cdpl-shape_LIB_SRCS
     ExactGaussianShapeOverlapFunction.cpp
     FastGaussianShapeOverlapFunction.cpp
 
+    GaussianShapeAlignment.cpp
     GaussianShapeFunctionAlignment.cpp
     GaussianShapeAlignmentStartGenerator.cpp
     PrincipalAxesAlignmentStartGenerator.cpp

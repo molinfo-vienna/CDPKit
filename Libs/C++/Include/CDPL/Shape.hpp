@@ -40,9 +40,10 @@
 #include "CDPL/Shape/ExactGaussianShapeOverlapFunction.hpp"
 #include "CDPL/Shape/FastGaussianShapeOverlapFunction.hpp"
 
-#include "CDPL/Shape/GaussianShapeFunctionAlignment.hpp"
 #include "CDPL/Shape/GaussianShapeAlignmentStartGenerator.hpp"
 #include "CDPL/Shape/PrincipalAxesAlignmentStartGenerator.hpp"
+#include "CDPL/Shape/GaussianShapeFunctionAlignment.hpp"
+#include "CDPL/Shape/GaussianShapeAlignment.hpp"
 
 #include "CDPL/Shape/SymmetryClass.hpp"
 
