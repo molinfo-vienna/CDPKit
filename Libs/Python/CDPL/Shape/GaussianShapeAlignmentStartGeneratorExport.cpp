@@ -42,34 +42,34 @@ namespace
 		CDPL::Shape::GaussianShapeAlignmentStartGenerator, boost::python::wrapper<CDPL::Shape::GaussianShapeAlignmentStartGenerator> 
 	{
 
-		unsigned int setupReferenceShape(CDPL::Shape::GaussianShape& shape, CDPL::Shape::GaussianShapeFunction& shape_func, CDPL::Math::Matrix4D& xform) const {
-			if (boost::python::override f = this->get_override("setupReferenceShape")) \
-				return f(boost::ref(shape), boost::ref(shape_func), boost::ref(xform));
+		unsigned int setupReference(CDPL::Shape::GaussianShapeFunction& func, CDPL::Math::Matrix4D& xform) const {
+			if (boost::python::override f = this->get_override("setupReference")) \
+				return f(boost::ref(func), boost::ref(xform));
 
-			return GaussianShapeAlignmentStartGenerator::setupReferenceShape(shape, shape_func, xform);
+			return GaussianShapeAlignmentStartGenerator::setupReference(func, xform);
 		}
 
-		unsigned int setupReferenceShapeDef(CDPL::Shape::GaussianShape& shape, CDPL::Shape::GaussianShapeFunction& shape_func, CDPL::Math::Matrix4D& xform) const {
-			return GaussianShapeAlignmentStartGenerator::setupReferenceShape(shape, shape_func, xform);
+		unsigned int setupReferenceDef(CDPL::Shape::GaussianShapeFunction& func, CDPL::Math::Matrix4D& xform) const {
+			return GaussianShapeAlignmentStartGenerator::setupReference(func, xform);
 		}
 
-		unsigned int setupAlignedShape(CDPL::Shape::GaussianShape& shape, CDPL::Shape::GaussianShapeFunction& shape_func, CDPL::Math::Matrix4D& xform) const {
-			if (boost::python::override f = this->get_override("setupAlignedShape")) \
-				return f(boost::ref(shape), boost::ref(shape_func), boost::ref(xform));
+		unsigned int setupAligned(CDPL::Shape::GaussianShapeFunction& func, CDPL::Math::Matrix4D& xform) const {
+			if (boost::python::override f = this->get_override("setupAligned")) \
+				return f(boost::ref(func), boost::ref(xform));
 
-			return GaussianShapeAlignmentStartGenerator::setupAlignedShape(shape, shape_func, xform);
+			return GaussianShapeAlignmentStartGenerator::setupAligned(func, xform);
 		}
 
-		unsigned int setupAlignedShapeDef(CDPL::Shape::GaussianShape& shape, CDPL::Shape::GaussianShapeFunction& shape_func, CDPL::Math::Matrix4D& xform) const {
-			return GaussianShapeAlignmentStartGenerator::setupAlignedShape(shape, shape_func, xform);
+		unsigned int setupAlignedDef(CDPL::Shape::GaussianShapeFunction& func, CDPL::Math::Matrix4D& xform) const {
+			return GaussianShapeAlignmentStartGenerator::setupAligned(func, xform);
 		}
 
-		void setReferenceShapeFunction(const CDPL::Shape::GaussianShapeFunction& ref_shape_func, unsigned int sym_class) {
-			this->get_override("setReferenceShapeFunction")(boost::ref(ref_shape_func), sym_class);
+		void setReference(const CDPL::Shape::GaussianShapeFunction& func, unsigned int sym_class) {
+			this->get_override("setReference")(boost::ref(func), sym_class);
 		}
 
-		bool generate(const CDPL::Shape::GaussianShapeFunction& aligned_shape_func, unsigned int sym_class) {
-			return this->get_override("generate")(boost::ref(aligned_shape_func), sym_class);
+		bool generate(const CDPL::Shape::GaussianShapeFunction& func, unsigned int sym_class) {
+			return this->get_override("generate")(boost::ref(func), sym_class);
 		}
 			
 		std::size_t getNumStartTransforms() const {
@@ -91,16 +91,16 @@ void CDPLPythonShape::exportGaussianShapeAlignmentStartGenerator()
     python::class_<GaussianShapeAlignmentStartGeneratorWrapper, boost::noncopyable>("GaussianShapeAlignmentStartGenerator", python::no_init)
 		.def(python::init<>(python::arg("self")))
 		.def(CDPLPythonBase::ObjectIdentityCheckVisitor<Shape::GaussianShapeAlignmentStartGenerator>())
-		.def("setupReferenceShape", &GaussianShapeAlignmentStartGeneratorWrapper::setupReferenceShape,
-			 &GaussianShapeAlignmentStartGeneratorWrapper::setupReferenceShapeDef,
-			 (python::arg("self"), python::arg("shape"), python::arg("shape_func"), python::arg("xform")))
-		.def("setupAlignedShape", &GaussianShapeAlignmentStartGeneratorWrapper::setupAlignedShape, 
-			 &GaussianShapeAlignmentStartGeneratorWrapper::setupAlignedShapeDef,
-			 (python::arg("self"), python::arg("shape"), python::arg("shape_func"), python::arg("xform")))
-		.def("setReferenceShapeFunction", python::pure_virtual(&Shape::GaussianShapeAlignmentStartGenerator::setReferenceShapeFunction),
-			 (python::arg("self"), python::arg("ref_shape_func"), python::arg("sym_class")))
+		.def("setupReference", &GaussianShapeAlignmentStartGeneratorWrapper::setupReference,
+			 &GaussianShapeAlignmentStartGeneratorWrapper::setupReferenceDef,
+			 (python::arg("self"), python::arg("func"), python::arg("xform")))
+		.def("setupAligned", &GaussianShapeAlignmentStartGeneratorWrapper::setupAligned, 
+			 &GaussianShapeAlignmentStartGeneratorWrapper::setupAlignedDef,
+			 (python::arg("self"), python::arg("func"), python::arg("xform")))
+		.def("setReference", python::pure_virtual(&Shape::GaussianShapeAlignmentStartGenerator::setReference),
+			 (python::arg("self"), python::arg("func"), python::arg("sym_class")))
 		.def("generate", python::pure_virtual(&Shape::GaussianShapeAlignmentStartGenerator::generate),
-			 (python::arg("self"), python::arg("aligned_shape_func"), python::arg("sym_class")))
+			 (python::arg("self"), python::arg("func"), python::arg("sym_class")))
 		.def("getNumStartTransforms", python::pure_virtual(&Shape::GaussianShapeAlignmentStartGenerator::getNumStartTransforms),
 			 python::arg("self"))
 		.def("getStartTransform", python::pure_virtual(&Shape::GaussianShapeAlignmentStartGenerator::getStartTransform),

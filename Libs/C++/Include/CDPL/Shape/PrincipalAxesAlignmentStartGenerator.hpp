@@ -64,17 +64,21 @@ namespace CDPL
 
 			PrincipalAxesAlignmentStartGenerator();
 				
-			unsigned int setupReferenceShape(GaussianShape& shape, GaussianShapeFunction& shape_func, Math::Matrix4D& xform) const; 
+			unsigned int setupReference(GaussianShapeFunction& func, Math::Matrix4D& xform) const; 
 
-			unsigned int setupAlignedShape(GaussianShape& shape, GaussianShapeFunction& shape_func, Math::Matrix4D& xform) const; 
+			unsigned int setupAligned(GaussianShapeFunction& func, Math::Matrix4D& xform) const; 
 
 			void setCenterAlignmentMode(CenterAlignmentMode mode);
 
 			CenterAlignmentMode getCenterAlignmentMode() const;
 
-			void setReferenceShapeFunction(const GaussianShapeFunction& ref_shape_func, unsigned int sym_class);
+			void setSymmetryThreshold(double thresh);
 
-			bool generate(const GaussianShapeFunction& aligned_shape_func, unsigned int sym_class);
+			double getSymmetryThreshold();
+
+			void setReference(const GaussianShapeFunction& func, unsigned int sym_class);
+
+			bool generate(const GaussianShapeFunction& func, unsigned int sym_class);
 			
 			std::size_t getNumStartTransforms() const;
 
@@ -83,7 +87,7 @@ namespace CDPL
 		  private:
 			typedef std::vector<QuaternionTransformation> StartTransformList;
 
-			void generate(const Math::Vector3D& ctr_trans, const GaussianShapeFunction& aligned_shape_func, unsigned int axes_swap_flags);
+			void generate(const Math::Vector3D& ctr_trans, const GaussianShapeFunction& func, unsigned int axes_swap_flags);
 
 			template <typename QE>
 			void addStartTransform(Math::Vector3D::ConstPointer ctr_trans_data, const Math::QuaternionExpression<QE>& rot_quat);
@@ -91,6 +95,7 @@ namespace CDPL
 			CenterAlignmentMode  ctrAlignmentMode;
 			StartTransformList   startTransforms;
 			const GaussianShape* refShape;
+			double               symThreshold;
 			unsigned int         refAxesSwapFlags;
 		};
 

@@ -42,11 +42,16 @@ void CDPLPythonShape::exportPrincipalAxesAlignmentStartGenerator()
 		("PrincipalAxesAlignmentStartGenerator", python::no_init)
 		.def(python::init<>(python::arg("self")))
 		.def(python::init<const Shape::PrincipalAxesAlignmentStartGenerator&>((python::arg("self"), python::arg("gen"))))
+		.def("setSymmetryThreshold", &Shape::PrincipalAxesAlignmentStartGenerator::setSymmetryThreshold,
+			 (python::arg("self"), python::arg("thresh")))
+		.def("getSymmetryThreshold", &Shape::PrincipalAxesAlignmentStartGenerator::getSymmetryThreshold, python::arg("self"))
 		.def("setCenterAlignmentMode", &Shape::PrincipalAxesAlignmentStartGenerator::setCenterAlignmentMode,
 			 (python::arg("self"), python::arg("mode")))
 		.def("getCenterAlignmentMode", &Shape::PrincipalAxesAlignmentStartGenerator::getCenterAlignmentMode, python::arg("self"))
 		.def("assign", CDPLPythonBase::copyAssOp(&Shape::PrincipalAxesAlignmentStartGenerator::operator=),
 			 (python::arg("self"), python::arg("gen")), python::return_self<>())
+		.add_property("symmetryThreshold", &Shape::PrincipalAxesAlignmentStartGenerator::getSymmetryThreshold,
+					  &Shape::PrincipalAxesAlignmentStartGenerator::setSymmetryThreshold)
 		.add_property("centerAlignmentMode", &Shape::PrincipalAxesAlignmentStartGenerator::getCenterAlignmentMode,
 					  &Shape::PrincipalAxesAlignmentStartGenerator::setCenterAlignmentMode);
 

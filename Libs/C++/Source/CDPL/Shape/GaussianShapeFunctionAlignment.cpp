@@ -31,7 +31,6 @@
 
 #include "CDPL/Shape/GaussianShapeFunctionAlignment.hpp"
 #include "CDPL/Shape/GaussianShapeFunction.hpp"
-#include "CDPL/Shape/GaussianShape.hpp"
 #include "CDPL/Shape/UtilityFunctions.hpp"
 #include "CDPL/Shape/SymmetryClass.hpp"
 #include "CDPL/Base/Exceptions.hpp"
@@ -67,13 +66,13 @@ Shape::GaussianShapeFunctionAlignment::GaussianShapeFunctionAlignment():
 												  boost::bind(&GaussianShapeFunctionAlignment::calcAlignmentFunctionGradient, this, _1, _2))
 {}
 
-Shape::GaussianShapeFunctionAlignment::GaussianShapeFunctionAlignment(const GaussianShapeFunction& ref_shape_func, unsigned int sym_class):
+Shape::GaussianShapeFunctionAlignment::GaussianShapeFunctionAlignment(const GaussianShapeFunction& ref_func, unsigned int sym_class):
 	overlapFunc(&defOverlapFunc), startGen(&defStartGen),
 	refStartPoses(true), maxNumRefIters(DEF_MAX_REFINEMENT_ITERATIONS), refStopGrad(DEF_REFINEMENT_STOP_GRADIENT),
 	colFilterFunc(&defColorFilterFunc), minimizer(boost::bind(&GaussianShapeFunctionAlignment::calcAlignmentFunctionValue, this, _1),
 												  boost::bind(&GaussianShapeFunctionAlignment::calcAlignmentFunctionGradient, this, _1, _2))
 {
-   setReferenceShapeFunction(ref_shape_func,  sym_class);
+   setReference(ref_func,  sym_class);
 }
 
 Shape::GaussianShapeFunctionAlignment::~GaussianShapeFunctionAlignment() {}
@@ -168,26 +167,26 @@ double Shape::GaussianShapeFunctionAlignment::getRefinementStopGradient() const
 	return refStopGrad;
 }
 
-unsigned int Shape::GaussianShapeFunctionAlignment::setupReferenceShape(GaussianShape& shape, GaussianShapeFunction& shape_func, Math::Matrix4D& xform) const
+unsigned int Shape::GaussianShapeFunctionAlignment::setupReference(GaussianShapeFunction& func, Math::Matrix4D& xform) const
 {
-	return startGen->setupReferenceShape(shape, shape_func, xform);
+	return startGen->setupReference(func, xform);
 }
 
-unsigned int Shape::GaussianShapeFunctionAlignment::setupAlignedShape(GaussianShape& shape, GaussianShapeFunction& shape_func, Math::Matrix4D& xform) const
+unsigned int Shape::GaussianShapeFunctionAlignment::setupAligned(GaussianShapeFunction& func, Math::Matrix4D& xform) const
 {
-	return startGen->setupAlignedShape(shape, shape_func, xform);
+	return startGen->setupAligned(func, xform);
 }
 
-void Shape::GaussianShapeFunctionAlignment::setReferenceShapeFunction(const GaussianShapeFunction& func, unsigned int sym_class)
+void Shape::GaussianShapeFunctionAlignment::setReference(const GaussianShapeFunction& func, unsigned int sym_class)
 {
 	refShapeFunc = &func;
 	refShapeSymClass = sym_class;
 	
     overlapFunc->setShapeFunction(func, true);
-	startGen->setReferenceShapeFunction(*refShapeFunc, refShapeSymClass);
+	startGen->setReference(*refShapeFunc, refShapeSymClass);
 }
 
-const Shape::GaussianShapeFunction* Shape::GaussianShapeFunctionAlignment::getReferenceShapeFunction() const
+const Shape::GaussianShapeFunction* Shape::GaussianShapeFunctionAlignment::getReference() const
 {
     return refShapeFunc;
 }
@@ -219,8 +218,7 @@ bool Shape::GaussianShapeFunctionAlignment::align(const GaussianShapeFunction& f
 	if (!startGen->generate(func, sym_class))
 		return false;
 
-	getCoordinates(*func.getShape(), startPoseCoords);
-
+	func.getElementPositions(startPoseCoords);
 	optPoseCoords.resize(startPoseCoords.getSize());
 	
 	std::size_t num_starts = startGen->getNumStartTransforms();

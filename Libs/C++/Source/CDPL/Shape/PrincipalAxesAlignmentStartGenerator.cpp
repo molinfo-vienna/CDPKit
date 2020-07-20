@@ -31,7 +31,7 @@
 #include "CDPL/Shape/PrincipalAxesAlignmentStartGenerator.hpp"
 #include "CDPL/Shape/GaussianShapeFunction.hpp"
 #include "CDPL/Shape/GaussianShape.hpp"
-#include "CDPL/Shape/GaussianShapeFunctions.hpp"
+#include "CDPL/Shape/UtilityFunctions.hpp"
 #include "CDPL/Shape/SymmetryClass.hpp"
 #include "CDPL/Math/Quaternion.hpp"
 #include "CDPL/Base/Exceptions.hpp"
@@ -83,17 +83,40 @@ namespace
 
 
 Shape::PrincipalAxesAlignmentStartGenerator::PrincipalAxesAlignmentStartGenerator():
-	ctrAlignmentMode(SHAPE_CENTROID), refShape(0), refAxesSwapFlags(getAxesSwapFlags(SymmetryClass::UNDEF))
+	ctrAlignmentMode(SHAPE_CENTROID), refShape(0), symThreshold(0.15), 
+	refAxesSwapFlags(getAxesSwapFlags(SymmetryClass::UNDEF))
 {}
 
-unsigned int Shape::PrincipalAxesAlignmentStartGenerator::setupReferenceShape(GaussianShape& shape, GaussianShapeFunction& shape_func, Math::Matrix4D& xform) const
+unsigned int Shape::PrincipalAxesAlignmentStartGenerator::setupReference(GaussianShapeFunction& func, Math::Matrix4D& xform) const
 {
-	return centerAndAlignPrincipalAxes(shape, shape_func, xform, true);
+	Math::Matrix4D to_ctr_xform;
+	Math::Matrix4D from_ctr_xform;
+	unsigned int sym_class = calcCenterAlignmentTransforms(func, to_ctr_xform, from_ctr_xform, symThreshold);
+
+	if (sym_class == SymmetryClass::UNDEF)
+		return SymmetryClass::UNDEF;
+
+	func.transform(to_ctr_xform);
+		
+	xform.assign(from_ctr_xform);
+	
+	return sym_class;
 }
 
-unsigned int Shape::PrincipalAxesAlignmentStartGenerator::setupAlignedShape(GaussianShape& shape, GaussianShapeFunction& shape_func, Math::Matrix4D& xform) const
+unsigned int Shape::PrincipalAxesAlignmentStartGenerator::setupAligned(GaussianShapeFunction& func, Math::Matrix4D& xform) const
 {
-	return centerAndAlignPrincipalAxes(shape, shape_func, xform, false);
+	Math::Matrix4D to_ctr_xform;
+	Math::Matrix4D from_ctr_xform;
+	unsigned int sym_class = calcCenterAlignmentTransforms(func, to_ctr_xform, from_ctr_xform, symThreshold);
+
+	if (sym_class == SymmetryClass::UNDEF)
+		return SymmetryClass::UNDEF;
+
+	func.transform(to_ctr_xform);
+		
+	xform.assign(to_ctr_xform);
+	
+	return sym_class;
 }
 
 void Shape::PrincipalAxesAlignmentStartGenerator::setCenterAlignmentMode(CenterAlignmentMode mode)
@@ -106,13 +129,23 @@ Shape::PrincipalAxesAlignmentStartGenerator::CenterAlignmentMode Shape::Principa
 	return ctrAlignmentMode;
 }
 
-void Shape::PrincipalAxesAlignmentStartGenerator::setReferenceShapeFunction(const GaussianShapeFunction& ref_shape_func, unsigned int sym_class)
+void Shape::PrincipalAxesAlignmentStartGenerator::setSymmetryThreshold(double thresh)
 {
-	refShape = ref_shape_func.getShape();
+	symThreshold = thresh;
+}
+
+double Shape::PrincipalAxesAlignmentStartGenerator::getSymmetryThreshold()
+{
+	return symThreshold;
+}
+
+void Shape::PrincipalAxesAlignmentStartGenerator::setReference(const GaussianShapeFunction& func, unsigned int sym_class)
+{
+	refShape = func.getShape();
 	refAxesSwapFlags = getAxesSwapFlags(sym_class);
 }
 
-bool Shape::PrincipalAxesAlignmentStartGenerator::generate(const GaussianShapeFunction& aligned_shape_func, unsigned int sym_class)
+bool Shape::PrincipalAxesAlignmentStartGenerator::generate(const GaussianShapeFunction& func, unsigned int sym_class)
 {
 	if (!refShape)
 		return false;
@@ -122,27 +155,27 @@ bool Shape::PrincipalAxesAlignmentStartGenerator::generate(const GaussianShapeFu
 	unsigned int axes_swap_flags = refAxesSwapFlags | getAxesSwapFlags(sym_class);
 
 	if (ctrAlignmentMode & SHAPE_CENTROID)
-		generate(Math::Vector3D(), aligned_shape_func, axes_swap_flags);
+		generate(Math::Vector3D(), func, axes_swap_flags);
 
 	switch (ctrAlignmentMode & (NON_COLOR_ELEMENT_CENTERS | COLOR_ELEMENT_CENTERS)) {
 
 		case (NON_COLOR_ELEMENT_CENTERS | COLOR_ELEMENT_CENTERS):
 			for (GaussianShape::ConstElementIterator it = refShape->getElementsBegin(), end = refShape->getElementsEnd(); it != end; ++it) 
-				generate(it->getPosition(), aligned_shape_func, axes_swap_flags);
+				generate(it->getPosition(), func, axes_swap_flags);
 
 			return true;
 
 		case NON_COLOR_ELEMENT_CENTERS:
 			for (GaussianShape::ConstElementIterator it = refShape->getElementsBegin(), end = refShape->getElementsEnd(); it != end; ++it) 
 				if (it->getColor() == 0)
-					generate(it->getPosition(), aligned_shape_func, axes_swap_flags);
+					generate(it->getPosition(), func, axes_swap_flags);
 
 			return true;
 
 		case COLOR_ELEMENT_CENTERS:
 			for (GaussianShape::ConstElementIterator it = refShape->getElementsBegin(), end = refShape->getElementsEnd(); it != end; ++it) 
 				if (it->getColor() != 0)
-					generate(it->getPosition(), aligned_shape_func, axes_swap_flags);
+					generate(it->getPosition(), func, axes_swap_flags);
 
 			return true;
 
@@ -153,7 +186,7 @@ bool Shape::PrincipalAxesAlignmentStartGenerator::generate(const GaussianShapeFu
 	return true;
 }
 
-void Shape::PrincipalAxesAlignmentStartGenerator::generate(const Math::Vector3D& ctr_trans, const GaussianShapeFunction& aligned_shape_func, unsigned int axes_swap_flags)
+void Shape::PrincipalAxesAlignmentStartGenerator::generate(const Math::Vector3D& ctr_trans, const GaussianShapeFunction& func, unsigned int axes_swap_flags)
 {
 	Math::Vector3D::ConstPointer ctr_trans_data = ctr_trans.getData();
 

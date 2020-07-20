@@ -155,8 +155,11 @@ const Shape::GaussianShape* Shape::GaussianShapeFunction::getShape() const
 	return shape;
 }
 
-void Shape::GaussianShapeFunction::update()
+void Shape::GaussianShapeFunction::reset()
 {
+	if (!shape)
+		return;
+
 	for (GaussianProductList::ConstProductIterator p_it = prodList->getProductsBegin(), p_end = prodList->getProductsEnd(); p_it != p_end; ++p_it) {
 		GaussianProduct* prod = *p_it;
 
@@ -164,6 +167,42 @@ void Shape::GaussianShapeFunction::update()
 			prod->init(shape->getElement(prod->getIndex()));
 		else
 			prod->init();
+	}
+}
+
+void Shape::GaussianShapeFunction::transform(const Math::Matrix4D& xform) 
+{
+	if (!shape)
+		return;
+
+	const Math::Matrix4D::ConstArrayPointer xform_data = xform.getData();
+
+	for (GaussianProductList::ConstProductIterator p_it = prodList->getProductsBegin(), p_end = prodList->getProductsEnd(); p_it != p_end; ++p_it) {
+		GaussianProduct* prod = *p_it;
+
+		if (prod->getNumFactors() == 1)
+			Shape::transform(prod->getCenter().getData(), xform_data, shape->getElement(prod->getIndex()).getPosition().getData());
+		else
+			prod->init();
+	}
+}
+
+void Shape::GaussianShapeFunction::getElementPositions(Math::Vector3DArray& coords) const
+{
+	if (!shape)
+		return;
+
+	coords.resize(shape->getNumElements());
+
+	for (GaussianProductList::ConstProductIterator p_it = prodList->getProductsBegin(), p_end = prodList->getProductsEnd(); p_it != p_end; ++p_it) {
+		GaussianProduct* prod = *p_it;
+
+		if (prod->getNumFactors() > 1)
+			break;
+
+		std::size_t elem_idx = prod->getIndex();
+
+		coords[elem_idx].assign(prod->getCenter());
 	}
 }
 

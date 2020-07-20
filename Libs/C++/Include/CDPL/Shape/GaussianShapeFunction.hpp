@@ -39,6 +39,7 @@
 #include "CDPL/Shape/APIPrefix.hpp"
 #include "CDPL/Math/Vector.hpp"
 #include "CDPL/Math/Matrix.hpp"
+#include "CDPL/Math/VectorArray.hpp"
 
 
 namespace CDPL 
@@ -86,8 +87,12 @@ namespace CDPL
 
 			const GaussianShape* getShape() const;
 
-			void update();
+			void reset();
 			
+			void transform(const Math::Matrix4D& xform);
+
+			void getElementPositions(Math::Vector3DArray& coords) const;
+
 			double calcDensity(const Math::Vector3D& pos) const;
 			
 			double calcVolume() const;

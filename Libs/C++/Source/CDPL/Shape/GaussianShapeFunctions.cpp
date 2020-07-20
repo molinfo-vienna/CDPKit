@@ -128,21 +128,16 @@ void Shape::transform(GaussianShape& shape, const Math::Matrix4D& xform)
 	}
 }
 
-unsigned int Shape::centerAndAlignPrincipalAxes(GaussianShape& shape, GaussianShapeFunction& func, Math::Matrix4D& xform,
-												bool is_ref, double mom_eq_thresh)
+unsigned int Shape::centerAndAlignPrincipalAxes(GaussianShape& shape, const GaussianShapeFunction& func, Math::Matrix4D& back_xform, 
+												double mom_eq_thresh)
 {
 	Math::Matrix4D to_ctr_xform;
-	Math::Matrix4D from_ctr_xform;
-
-	unsigned int sym_class = calcCenterAlignmentTransforms(func, to_ctr_xform, from_ctr_xform, mom_eq_thresh);
+	unsigned int sym_class = calcCenterAlignmentTransforms(func, to_ctr_xform, back_xform, mom_eq_thresh);
 
 	if (sym_class == SymmetryClass::UNDEF)
 		return SymmetryClass::UNDEF;
 
 	transform(shape, to_ctr_xform);
-	func.update();
-		
-	xform.assign(is_ref ? from_ctr_xform : to_ctr_xform);
 	
 	return sym_class;
 }

@@ -43,6 +43,7 @@ namespace CDPLPythonShape
 	void exportGaussianShapeAlignmentStartGenerator();
 	void exportPrincipalAxesAlignmentStartGenerator();
 	void exportGaussianShapeFunctionAlignment();
+	void exportGaussianShapeAlignment();
 
 	void exportBoostFunctionWrappers();
 }

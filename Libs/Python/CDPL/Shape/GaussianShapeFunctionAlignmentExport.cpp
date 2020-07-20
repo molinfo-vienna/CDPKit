@@ -46,7 +46,7 @@ void CDPLPythonShape::exportGaussianShapeFunctionAlignment()
     python::scope scope = python::class_<Shape::GaussianShapeFunctionAlignment, Shape::GaussianShapeFunctionAlignment::SharedPointer, boost::noncopyable>(
 		"GaussianShapeFunctionAlignment", python::no_init)
 		.def(python::init<>(python::arg("self")))
-		.def(python::init<const Shape::GaussianShapeFunction&, unsigned int>((python::arg("self"), python::arg("ref_shape_func"), python::arg("sym_class")))
+		.def(python::init<const Shape::GaussianShapeFunction&, unsigned int>((python::arg("self"), python::arg("ref_func"), python::arg("sym_class")))
 			 [python::with_custodian_and_ward<1, 2>()])
 		.def(CDPLPythonBase::ObjectIdentityCheckVisitor<Shape::GaussianShapeFunctionAlignment>())
 		.def("setOverlapFunction", &Shape::GaussianShapeFunctionAlignment::setOverlapFunction,
@@ -56,9 +56,9 @@ void CDPLPythonShape::exportGaussianShapeFunctionAlignment()
 		.def("getDefaultOverlapFunction", static_cast<Shape::FastGaussianShapeOverlapFunction& (Shape::GaussianShapeFunctionAlignment::*)()>
 			 (&Shape::GaussianShapeFunctionAlignment::getDefaultOverlapFunction),
 			 python::arg("self"), python::return_internal_reference<>())
-		.def("setReferenceShapeFunction", &Shape::GaussianShapeFunctionAlignment::setReferenceShapeFunction,
+		.def("setReference", &Shape::GaussianShapeFunctionAlignment::setReference,
 			 (python::arg("self"), python::arg("func"), python::arg("sym_class")), python::with_custodian_and_ward<1, 2>())
-		.def("getReferenceShapeFunction", &Shape::GaussianShapeFunctionAlignment::getReferenceShapeFunction,
+		.def("getReference", &Shape::GaussianShapeFunctionAlignment::getReference,
 			 python::arg("self"), python::return_internal_reference<>())
 		.def("setStartGenerator", &Shape::GaussianShapeFunctionAlignment::setStartGenerator,
 			 (python::arg("self"), python::arg("gen")), python::with_custodian_and_ward<1, 2>())
@@ -87,12 +87,12 @@ void CDPLPythonShape::exportGaussianShapeFunctionAlignment()
 			 (python::arg("self"), python::arg("refine")))
 		.def("refineStartingPoses", GetBoolFunc(&Shape::GaussianShapeFunctionAlignment::refineStartingPoses),
 			 python::arg("self"))
-		.def("setupReferenceShape", &Shape::GaussianShapeFunctionAlignment::setupReferenceShape,
-			 (python::arg("self"), python::arg("shape"), python::arg("shape_func"), python::arg("xform")))
-		.def("setupAlignedShape", &Shape::GaussianShapeFunctionAlignment::setupAlignedShape, 
-			 (python::arg("self"), python::arg("shape"), python::arg("shape_func"), python::arg("xform")))
-		.def("calcSelfOverlap", &Shape::GaussianShapeFunctionAlignment::calcSelfOverlap, (python::arg("self"), python::arg("func")))
-		.def("calcColorSelfOverlap", &Shape::GaussianShapeFunctionAlignment::calcColorSelfOverlap, (python::arg("self"), python::arg("func")))
+		.def("setupReference", &Shape::GaussianShapeFunctionAlignment::setupReference,
+			 (python::arg("self"), python::arg("func"), python::arg("xform")))
+		.def("setupAligned", &Shape::GaussianShapeFunctionAlignment::setupAligned, 
+			 (python::arg("self"), python::arg("func"), python::arg("xform")))
+		.def("calcSelfOverlap", &Shape::GaussianShapeFunctionAlignment::calcSelfOverlap, (python::arg("self"), python::arg("calc")))
+		.def("calcColorSelfOverlap", &Shape::GaussianShapeFunctionAlignment::calcColorSelfOverlap, (python::arg("self"), python::arg("calc")))
 		.def("align", &Shape::GaussianShapeFunctionAlignment::align, 
 			 (python::arg("self"), python::arg("func"), python::arg("sym_class"), python::arg("calc_col_overlap") = false))
 		.def("getNumResults", &Shape::GaussianShapeFunctionAlignment::getNumResults, python::arg("self"))
@@ -114,9 +114,9 @@ void CDPLPythonShape::exportGaussianShapeFunctionAlignment()
 											(&Shape::GaussianShapeFunctionAlignment::getDefaultOverlapFunction),
 											python::return_internal_reference<>()))
 		.add_property("refShapeFunction",
-					  python::make_function(&Shape::GaussianShapeFunctionAlignment::getReferenceShapeFunction,
+					  python::make_function(&Shape::GaussianShapeFunctionAlignment::getReference,
 											python::return_internal_reference<>()),
-					  python::make_function(&Shape::GaussianShapeFunctionAlignment::setReferenceShapeFunction,
+					  python::make_function(&Shape::GaussianShapeFunctionAlignment::setReference,
 											python::with_custodian_and_ward<1, 2>()))
 		.add_property("startGenerator",
 					  python::make_function(&Shape::GaussianShapeFunctionAlignment::getStartGenerator,

@@ -101,7 +101,7 @@ namespace CDPL
 
 			GaussianShapeFunctionAlignment();
 
-			GaussianShapeFunctionAlignment(const GaussianShapeFunction& ref_shape_func, unsigned int sym_class);
+			GaussianShapeFunctionAlignment(const GaussianShapeFunction& ref_func, unsigned int sym_class);
 
 			~GaussianShapeFunctionAlignment();
 
@@ -141,13 +141,13 @@ namespace CDPL
 
 			double getRefinementStopGradient() const;
 
-			unsigned int setupReferenceShape(GaussianShape& shape, GaussianShapeFunction& shape_func, Math::Matrix4D& xform) const;
+			unsigned int setupReference(GaussianShapeFunction& func, Math::Matrix4D& xform) const;
 
-			unsigned int setupAlignedShape(GaussianShape& shape, GaussianShapeFunction& shape_func, Math::Matrix4D& xform) const; 
+			unsigned int setupAligned(GaussianShapeFunction& func, Math::Matrix4D& xform) const; 
 
-			void setReferenceShapeFunction(const GaussianShapeFunction& func, unsigned int sym_class);
+			void setReference(const GaussianShapeFunction& func, unsigned int sym_class);
 
-			const GaussianShapeFunction* getReferenceShapeFunction() const;
+			const GaussianShapeFunction* getReference() const;
 		
 			double calcSelfOverlap(const GaussianShapeFunction& func);
 

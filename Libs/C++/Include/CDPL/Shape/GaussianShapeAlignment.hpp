@@ -66,45 +66,45 @@ namespace CDPL
 			public:
 				Result();
 
-				const Math::Matrix4D& getTransform() const {
-					return transform;
-				}
+				const Math::Matrix4D& getTransform() const;
 
-				std::size_t getReferenceShapeIndex() const {
-					return refShapeIdx;
-				}
+				void setTransform(const Math::Matrix4D& xform);
 
-				std::size_t getAlignedShapeIndex() const {
-					return algdShapeIdx;
-				}
+				std::size_t getReferenceShapeIndex() const;
 
-				std::size_t getStartingPoseID() const {
-					return startPoseID;
-				}
+				void setReferenceShapeIndex(std::size_t idx);
+
+				std::size_t getAlignedShapeIndex() const;
+
+				void setAlignedShapeIndex(std::size_t idx);
+
+				std::size_t getStartingPoseID() const;
+
+				void setStartingPoseID(std::size_t id);
 				
-				double getReferenceSelfOverlap() const {
-					return refSelfOverlap;
-				}
+				double getReferenceSelfOverlap() const;
 
-				double getReferenceColorSelfOverlap() const {
-					return refColSelfOverlap;
-				}
+				void setReferenceSelfOverlap(double overlap);
 
-				double getAlignedSelfOverlap() const {
-					return algdSelfOverlap;
-				}
+				double getReferenceColorSelfOverlap() const;
 
-				double getAlignedColorSelfOverlap() const {
-					return algdColSelfOverlap;
-				}
+				void setReferenceColorSelfOverlap(double overlap);
 
-				double getOverlap() const {
-					return overlap;
-				}
+				double getAlignedSelfOverlap() const;
 
-				double getColorOverlap() const {
-					return colOverlap;
-				}
+				void setAlignedSelfOverlap(double overlap);
+
+				double getAlignedColorSelfOverlap() const;
+
+				void setAlignedColorSelfOverlap(double overlap);
+
+				double getOverlap() const;
+
+				void setOverlap(double overlap);
+
+				double getColorOverlap() const;
+
+				void setColorOverlap(double overlap);
 				
 			private:
 				Math::Matrix4D transform;
@@ -212,11 +212,13 @@ namespace CDPL
 
 			double getDistanceCutoff() const;
 
-			void setReferenceShape(const GaussianShape& shape);
+			void setReference(const GaussianShape& shape);
 
-			void setReferenceShapes(const GaussianShapeSet& shapes);
+			void setReferenceSet(const GaussianShapeSet& shapes);
 
-			const GaussianShapeSet& getReferenceShapes() const;
+			std::size_t getReferenceSetSize() const;
+
+			const GaussianShape& getReference(std::size_t idx) const;
 		
 			bool align(const GaussianShape& shape);
 
@@ -235,24 +237,17 @@ namespace CDPL
 
 			GaussianShapeAlignment& operator=(const GaussianShapeAlignment& alignment);
 
-			typedef Util::ObjectStack<GaussianShape> ShapeCache;
 			typedef Util::ObjectStack<GaussianShapeFunction> ShapeFunctionCache;
-			typedef std::vector<GaussianShape*> ShapeList;
 			typedef std::vector<GaussianShapeFunction*> ShapeFunctionList;
 
 			ShapeFunctionCache             shapeFuncCache;
-			ShapeCache                     shapeCache;
 			bool                           calcSlfOverlaps;
 			bool                           calcColSlfOverlaps;
 			bool                           calcColOverlaps;
 			ResultSelectionMode            resultSelMode;
 			ResultCompareFunction          resultCmpFunc;
-			std::size_t                    maxOrder;
-			double                         distCutoff;
 			GaussianShapeFunctionAlignment shapeFuncAlmnt;
-			ShapeList                      refShapes;
 			ShapeFunctionList              refShapeFuncs;
-			GaussianShape                  algdShape;
 			GaussianShapeFunction          algdShapeFunc;
 			ResultList                     results;
 		};
