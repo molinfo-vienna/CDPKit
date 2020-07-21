@@ -28,6 +28,8 @@
 
 #include <boost/function.hpp>
 
+#include "CDPL/Shape/AlignmentResult.hpp"
+
 #include "Base/BoostFunctionWrapperExport.hpp"
 
 #include "ClassExports.hpp"
@@ -36,8 +38,11 @@
 void CDPLPythonShape::exportBoostFunctionWrappers()
 {
 	using namespace boost;
+	using namespace CDPL;
 
+	CDPLPythonBase::BoostFunction1Export<boost::function1<double, const Shape::AlignmentResult&> >("DoubleAlignmentResultFunctor");
 	CDPLPythonBase::BoostFunction1Export<boost::function1<bool, std::size_t> >("BoolSizeTypeFunctor");
 
+	CDPLPythonBase::BoostFunction2Export<boost::function2<bool, const Shape::AlignmentResult&, const Shape::AlignmentResult&> >("BoolAlignmentResult2Functor");
 	CDPLPythonBase::BoostFunction2Export<boost::function2<bool, std::size_t, std::size_t> >("BoolSizeType2Functor");
 }

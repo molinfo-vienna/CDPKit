@@ -131,13 +131,4 @@ void CDPLPythonShape::exportGaussianShapeAlignment()
 					  &Shape::GaussianShapeAlignment::setRefinementStopGradient)
 		.add_property("refineStartPoses", GetBoolFunc(&Shape::GaussianShapeAlignment::refineStartingPoses),
 					  SetBoolFunc(&Shape::GaussianShapeAlignment::refineStartingPoses));
-
-	python::class_<Shape::GaussianShapeAlignment::Result>("Result", python::no_init)
-		.def(python::init<>(python::arg("self")))
-		.def("getTransform", &Shape::GaussianShapeAlignment::Result::getTransform, python::arg("self"), python::return_internal_reference<>())
-		.def("getOverlap", &Shape::GaussianShapeAlignment::Result::getOverlap, python::arg("self"))
-		.def("getColorOverlap", &Shape::GaussianShapeAlignment::Result::getColorOverlap, python::arg("self"))
-		.add_property("transform", python::make_function(&Shape::GaussianShapeAlignment::Result::getTransform, python::return_internal_reference<>()))
-		.add_property("overlap", &Shape::GaussianShapeAlignment::Result::getOverlap)
-		.add_property("colorOverlap", &Shape::GaussianShapeAlignment::Result::getColorOverlap);
 }

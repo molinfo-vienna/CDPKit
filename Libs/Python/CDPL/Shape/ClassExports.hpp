@@ -40,6 +40,8 @@ namespace CDPLPythonShape
 	void exportExactGaussianShapeOverlapFunction();
 	void exportFastGaussianShapeOverlapFunction();
 
+	void exportAlignmentResult();
+
 	void exportGaussianShapeAlignmentStartGenerator();
 	void exportPrincipalAxesAlignmentStartGenerator();
 	void exportGaussianShapeFunctionAlignment();

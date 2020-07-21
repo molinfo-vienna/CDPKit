@@ -36,11 +36,13 @@
 
 #include <boost/shared_ptr.hpp>
 #include <boost/function.hpp>
+#include <boost/iterator/transform_iterator.hpp>
 
 #include "CDPL/Shape/APIPrefix.hpp"
 #include "CDPL/Shape/GaussianShapeFunctionAlignment.hpp"
 #include "CDPL/Shape/GaussianShapeFunction.hpp"
 #include "CDPL/Shape/GaussianShapeSet.hpp"
+#include "CDPL/Shape/AlignmentResult.hpp"
 #include "CDPL/Math/Matrix.hpp"
 #include "CDPL/Util/ObjectStack.hpp"
 
@@ -60,65 +62,6 @@ namespace CDPL
 		{
 
 		  public:
-			class Result
-			{
-
-			public:
-				Result();
-
-				const Math::Matrix4D& getTransform() const;
-
-				void setTransform(const Math::Matrix4D& xform);
-
-				std::size_t getReferenceShapeIndex() const;
-
-				void setReferenceShapeIndex(std::size_t idx);
-
-				std::size_t getAlignedShapeIndex() const;
-
-				void setAlignedShapeIndex(std::size_t idx);
-
-				std::size_t getStartingPoseID() const;
-
-				void setStartingPoseID(std::size_t id);
-				
-				double getReferenceSelfOverlap() const;
-
-				void setReferenceSelfOverlap(double overlap);
-
-				double getReferenceColorSelfOverlap() const;
-
-				void setReferenceColorSelfOverlap(double overlap);
-
-				double getAlignedSelfOverlap() const;
-
-				void setAlignedSelfOverlap(double overlap);
-
-				double getAlignedColorSelfOverlap() const;
-
-				void setAlignedColorSelfOverlap(double overlap);
-
-				double getOverlap() const;
-
-				void setOverlap(double overlap);
-
-				double getColorOverlap() const;
-
-				void setColorOverlap(double overlap);
-				
-			private:
-				Math::Matrix4D transform;
-				std::size_t    refShapeIdx;
-				std::size_t    algdShapeIdx;
-				std::size_t    startPoseID;
-				double         refSelfOverlap;
-				double         refColSelfOverlap;
-				double         algdSelfOverlap;
-				double         algdColSelfOverlap;
-				double         overlap;
-				double         colOverlap;
-			};
-
 			enum ResultSelectionMode
 			{
 
@@ -129,16 +72,21 @@ namespace CDPL
 			};
 
 		  private:
-			typedef std::vector<Result> ResultList;
-			
+			typedef std::vector<AlignmentResult> ResultList;
+			typedef std::vector<GaussianShapeFunction*> ShapeFunctionList;
+
+			typedef const GaussianShape& (*GetShapeFunction)(const GaussianShapeFunction*);
+
 		  public:
 			typedef boost::shared_ptr<GaussianShapeAlignment> SharedPointer;
 
 			typedef ResultList::const_iterator ConstResultIterator;
+			typedef boost::transform_iterator<GetShapeFunction, ShapeFunctionList::const_iterator> ConstShapeIterator;
 
 			typedef GaussianShapeFunctionAlignment::ColorFilterFunction ColorFilterFunction;
 			typedef GaussianShapeFunctionAlignment::ColorMatchFunction ColorMatchFunction;
-			typedef boost::function2<bool, const Result&, const Result&> ResultCompareFunction;
+			typedef boost::function1<double, const AlignmentResult&> ScoringFunction;
+			typedef boost::function2<bool, const AlignmentResult&, const AlignmentResult&> ResultCompareFunction;
 
 			GaussianShapeAlignment();
 
@@ -175,6 +123,10 @@ namespace CDPL
 			void setResultCompareFunction(const ResultCompareFunction& func);
 
 			const ResultCompareFunction& getResultCompareFunction() const;
+
+			void setScoringFunction(const ScoringFunction& func);
+
+			const ScoringFunction& getScoringFunction() const;
 
 			void setResultSelectionMode(ResultSelectionMode mode);
 
@@ -220,13 +172,17 @@ namespace CDPL
 
 			const GaussianShape& getReference(std::size_t idx) const;
 		
+			ConstShapeIterator getReferencesBegin() const;
+
+			ConstShapeIterator getReferencesEnd() const;
+
 			bool align(const GaussianShape& shape);
 
 			bool align(const GaussianShapeSet& shapes);
 
 			std::size_t getNumResults() const;
 
-			const Result& getResult(std::size_t idx) const;
+			const AlignmentResult& getResult(std::size_t idx) const;
 
 			ConstResultIterator getResultsBegin() const;
 
@@ -238,7 +194,6 @@ namespace CDPL
 			GaussianShapeAlignment& operator=(const GaussianShapeAlignment& alignment);
 
 			typedef Util::ObjectStack<GaussianShapeFunction> ShapeFunctionCache;
-			typedef std::vector<GaussianShapeFunction*> ShapeFunctionList;
 
 			ShapeFunctionCache             shapeFuncCache;
 			bool                           calcSlfOverlaps;
@@ -246,6 +201,7 @@ namespace CDPL
 			bool                           calcColOverlaps;
 			ResultSelectionMode            resultSelMode;
 			ResultCompareFunction          resultCmpFunc;
+			ScoringFunction                scoringFunc;
 			GaussianShapeFunctionAlignment shapeFuncAlmnt;
 			ShapeFunctionList              refShapeFuncs;
 			GaussianShapeFunction          algdShapeFunc;

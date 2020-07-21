@@ -27,6 +27,7 @@
 #include "StaticInit.hpp"
 
 #include "CDPL/Shape/GaussianShapeAlignment.hpp"
+#include "CDPL/Shape/TotalOverlapTanimotoScore.hpp"
 #include "CDPL/Base/Exceptions.hpp"
 
 
@@ -36,133 +37,32 @@ using namespace CDPL;
 namespace
 {
 
-	bool compareOverlap(const Shape::GaussianShapeAlignment::Result& res1, const Shape::GaussianShapeAlignment::Result& res2)
+	bool compareScore(const Shape::AlignmentResult& res1, const Shape::AlignmentResult& res2)
 	{
-		return (res1.getOverlap() >= res2.getOverlap());
+		return (res1.getScore() >= res2.getScore());
+	}
+
+	const Shape::GaussianShape& getShape(const Shape::GaussianShapeFunction* func)
+	{
+		return *func->getShape();
 	}
 
 	const std::size_t MAX_SHAPE_FUNC_CACHE_SIZE = 200;
 }
 
 
-Shape::GaussianShapeAlignment::Result::Result():
-	transform(), refShapeIdx(0), algdShapeIdx(0), startPoseID(0), refSelfOverlap(0.0),
-	refColSelfOverlap(0.0), algdSelfOverlap(0.0), algdColSelfOverlap(0.0), overlap(0.0),
-	colOverlap(0.0)
-{}
-
-const Math::Matrix4D& Shape::GaussianShapeAlignment::Result::getTransform() const
-{
-	return transform;
-}
-
-void Shape::GaussianShapeAlignment::Result::setTransform(const Math::Matrix4D& xform)
-{
-	transform = xform;
-}
-
-std::size_t Shape::GaussianShapeAlignment::Result::getReferenceShapeIndex() const 
-{
-	return refShapeIdx;
-}
-
-void Shape::GaussianShapeAlignment::Result::setReferenceShapeIndex(std::size_t idx)
-{
-	refShapeIdx = idx;
-}
-
-std::size_t Shape::GaussianShapeAlignment::Result::getAlignedShapeIndex() const 
-{
-	return algdShapeIdx;
-}
-
-void Shape::GaussianShapeAlignment::Result::setAlignedShapeIndex(std::size_t idx)
-{
-	algdShapeIdx = idx;
-}
-
-std::size_t Shape::GaussianShapeAlignment::Result::getStartingPoseID() const 
-{
-	return startPoseID;
-}
-			
-void Shape::GaussianShapeAlignment::Result::setStartingPoseID(std::size_t id)
-{
-	startPoseID = id;
-}
-		
-double Shape::GaussianShapeAlignment::Result::getReferenceSelfOverlap() const 
-{
-	return refSelfOverlap;
-}
-
-void Shape::GaussianShapeAlignment::Result::setReferenceSelfOverlap(double overlap)
-{
-	refSelfOverlap = overlap;
-}
-
-double Shape::GaussianShapeAlignment::Result::getReferenceColorSelfOverlap() const 
-{
-	return refColSelfOverlap;
-}
-
-void Shape::GaussianShapeAlignment::Result::setReferenceColorSelfOverlap(double overlap)
-{
-	refColSelfOverlap = overlap;
-}
-
-double Shape::GaussianShapeAlignment::Result::getAlignedSelfOverlap() const 
-{
-	return algdSelfOverlap;
-}
-
-void Shape::GaussianShapeAlignment::Result::setAlignedSelfOverlap(double overlap)
-{
-	algdSelfOverlap = overlap;
-}
-
-double Shape::GaussianShapeAlignment::Result::getAlignedColorSelfOverlap() const 
-{
-	return algdColSelfOverlap;
-}
-
-void Shape::GaussianShapeAlignment::Result::setAlignedColorSelfOverlap(double overlap)
-{
-	algdColSelfOverlap = overlap;
-}
-
-double Shape::GaussianShapeAlignment::Result::getOverlap() const 
-{
-	return overlap;
-}
-
-void Shape::GaussianShapeAlignment::Result::setOverlap(double overlap)
-{
-	this->overlap = overlap;
-}
-
-double Shape::GaussianShapeAlignment::Result::getColorOverlap() const 
-{
-	return colOverlap;
-}
-				
-void Shape::GaussianShapeAlignment::Result::setColorOverlap(double overlap)
-{
-	colOverlap = overlap;
-}
-
-//------
-
 Shape::GaussianShapeAlignment::GaussianShapeAlignment():
 	shapeFuncCache(MAX_SHAPE_FUNC_CACHE_SIZE), calcSlfOverlaps(false), calcColSlfOverlaps(false),
-	calcColOverlaps(false), resultSelMode(BEST_RESULT_PAIR), resultCmpFunc(&compareOverlap)
+	calcColOverlaps(false), resultSelMode(BEST_RESULT_PAIR), resultCmpFunc(&compareScore), 
+	scoringFunc(TotalOverlapTanimotoScore())
 {
 	algdShapeFunc.setMaxOrder(1);
 }
 
 Shape::GaussianShapeAlignment::GaussianShapeAlignment(const GaussianShape& ref_shape):
 	shapeFuncCache(MAX_SHAPE_FUNC_CACHE_SIZE), calcSlfOverlaps(false), calcColSlfOverlaps(false),
-	calcColOverlaps(false), resultSelMode(BEST_RESULT_PAIR), resultCmpFunc(&compareOverlap)
+	calcColOverlaps(false), resultSelMode(BEST_RESULT_PAIR), resultCmpFunc(&compareScore), 
+	scoringFunc(TotalOverlapTanimotoScore())
 {
 	algdShapeFunc.setMaxOrder(1);
 
@@ -171,7 +71,8 @@ Shape::GaussianShapeAlignment::GaussianShapeAlignment(const GaussianShape& ref_s
 
 Shape::GaussianShapeAlignment::GaussianShapeAlignment(const GaussianShapeSet& ref_shapes):
 	shapeFuncCache(MAX_SHAPE_FUNC_CACHE_SIZE), calcSlfOverlaps(false), calcColSlfOverlaps(false),
-	calcColOverlaps(false), resultSelMode(BEST_RESULT_PAIR), resultCmpFunc(&compareOverlap)
+	calcColOverlaps(false), resultSelMode(BEST_RESULT_PAIR), resultCmpFunc(&compareScore), 
+	scoringFunc(TotalOverlapTanimotoScore())
 {
 	algdShapeFunc.setMaxOrder(1);
 
@@ -249,6 +150,16 @@ void Shape::GaussianShapeAlignment::setResultCompareFunction(const ResultCompare
 const Shape::GaussianShapeAlignment::ResultCompareFunction& Shape::GaussianShapeAlignment::getResultCompareFunction() const
 {
 	return resultCmpFunc;
+}
+
+void Shape::GaussianShapeAlignment::setScoringFunction(const ScoringFunction& func)
+{
+	scoringFunc = func;
+}
+
+const Shape::GaussianShapeAlignment::ScoringFunction& Shape::GaussianShapeAlignment::getScoringFunction() const
+{
+	return scoringFunc;
 }
 
 void Shape::GaussianShapeAlignment::setResultSelectionMode(ResultSelectionMode mode)
@@ -363,7 +274,17 @@ const Shape::GaussianShape& Shape::GaussianShapeAlignment::getReference(std::siz
 
 	return *refShapeFuncs[idx]->getShape();
 }
-		
+
+Shape::GaussianShapeAlignment::ConstShapeIterator Shape::GaussianShapeAlignment::getReferencesBegin() const
+{
+	return ConstShapeIterator(refShapeFuncs.begin(), &getShape);
+}
+
+Shape::GaussianShapeAlignment::ConstShapeIterator Shape::GaussianShapeAlignment::getReferencesEnd() const
+{
+	return ConstShapeIterator(refShapeFuncs.end(), &getShape);
+}
+
 bool Shape::GaussianShapeAlignment::align(const GaussianShape& shape)
 {
 	return false; // TODO
@@ -379,7 +300,7 @@ std::size_t Shape::GaussianShapeAlignment::getNumResults() const
 	return results.size();
 }
 
-const Shape::GaussianShapeAlignment::Result& Shape::GaussianShapeAlignment::getResult(std::size_t idx) const
+const Shape::AlignmentResult& Shape::GaussianShapeAlignment::getResult(std::size_t idx) const
 {
 	if (idx >= results.size())
 		throw Base::IndexError("GaussianShapeAlignment: result index out of bounds");

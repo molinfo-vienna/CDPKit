@@ -553,6 +553,9 @@
 \defgroup CDPL_SHAPE_ALIGNMENT Shape Alignment
 \ingroup CDPL_SHAPE
 
+\defgroup CDPL_SHAPE_SIMILARITY_SCORING Similarity Scoring
+\ingroup CDPL_SHAPE
+
 \defgroup CDPL_SHAPE_FUNCTIONS Free Functions
 \ingroup CDPL_SHAPE
 

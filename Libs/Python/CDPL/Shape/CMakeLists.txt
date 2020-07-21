@@ -48,6 +48,8 @@ SET(shape_MOD_SRCS
     GaussianShapeFunctionAlignmentExport.cpp
     GaussianShapeAlignmentExport.cpp
 
+    AlignmentResultExport.cpp
+
     SymmetryClassExport.cpp
     
     UtilityFunctionExport.cpp

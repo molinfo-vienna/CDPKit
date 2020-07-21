@@ -31,6 +31,7 @@
 #include "CDPL/Shape/GaussianShapeFunction.hpp"
 
 #include "Base/ObjectIdentityCheckVisitor.hpp"
+#include "Base/CopyAssOp.hpp"
 
 #include "ClassExports.hpp"
 
@@ -142,6 +143,10 @@ void CDPLPythonShape::exportGaussianShapeFunctionAlignment()
 
 	python::class_<Shape::GaussianShapeFunctionAlignment::Result>("Result", python::no_init)
 		.def(python::init<const Math::Matrix4D&, double, double>((python::arg("self"), python::arg("transform"), python::arg("overlap"), python::arg("col_overlap"))))
+		.def(python::init<const Shape::GaussianShapeFunctionAlignment::Result&>((python::arg("self"), python::arg("res"))))
+		.def(CDPLPythonBase::ObjectIdentityCheckVisitor<Shape::GaussianShapeFunctionAlignment::Result>())
+		.def("assign", CDPLPythonBase::copyAssOp(&Shape::GaussianShapeFunctionAlignment::Result::operator=),
+			 (python::arg("self"), python::arg("res")), python::return_self<>())
 		.def("getTransform", &Shape::GaussianShapeFunctionAlignment::Result::getTransform, python::arg("self"), python::return_internal_reference<>())
 		.def("getOverlap", &Shape::GaussianShapeFunctionAlignment::Result::getOverlap, python::arg("self"))
 		.def("getColorOverlap", &Shape::GaussianShapeFunctionAlignment::Result::getColorOverlap, python::arg("self"))

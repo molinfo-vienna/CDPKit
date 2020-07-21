@@ -1,7 +1,7 @@
 /* -*- mode: c++; c-basic-offset: 4; tab-width: 4; indent-tabs-mode: t -*- */
 
 /* 
- * Module.cpp 
+ * TotalOverlapTanimotoScore.hpp 
  *
  * This file is part of the Chemical Data Processing Toolkit
  *
@@ -23,39 +23,42 @@
  * Boston, MA 02111-1307, USA.
  */
 
+/**
+ * \file
+ * \brief Definition of the class CDPL::Shape::TotalOverlapTanimotoScore.
+ */
 
-#include <boost/python.hpp>
+#ifndef CDPL_SHAPE_TOTALOVERLAPTANIMOTOSCORE_HPP
+#define CDPL_SHAPE_TOTALOVERLAPTANIMOTOSCORE_HPP
 
-#include "ClassExports.hpp"
-#include "FunctionExports.hpp"
-#include "NamespaceExports.hpp"
+#include "CDPL/Shape/APIPrefix.hpp"
+#include "CDPL/Shape/AlignmentResult.hpp"
 
 
-BOOST_PYTHON_MODULE(_shape)
+namespace CDPL 
 {
-	using namespace CDPLPythonShape;
 
-	exportGaussianShape();
-	exportGaussianShapeSet();
+    namespace Shape
+    {
+		
+	/**
+	 * \addtogroup CDPL_SHAPE_SIMILARITY_SCORING
+	 * @{
+	 */
 
-	exportGaussianShapeFunction();
-	exportGaussianShapeOverlapFunction();
+	class CDPL_SHAPE_API TotalOverlapTanimotoScore
+	{
 
-	exportExactGaussianShapeOverlapFunction();
-	exportFastGaussianShapeOverlapFunction();
+	  public:
+	    double operator()(const AlignmentResult& res) const {
+		return (res.getOverlap() / (res.getReferenceSelfOverlap() + res.getAlignedSelfOverlap() - res.getOverlap()));
+	    }
+	};
 
-	exportGaussianShapeAlignmentStartGenerator();
-	exportPrincipalAxesAlignmentStartGenerator();
-
-	exportAlignmentResult();
-
-	exportGaussianShapeFunctionAlignment();
-	exportGaussianShapeAlignment();
-
-	exportSymmetryClasses();
-	
-	exportUtilityFunctions();
-	exportGaussianShapeFunctions();
-
-	exportBoostFunctionWrappers();
+	/**
+	 * @}
+	 */
+    }
 }
+
+#endif // CDPL_SHAPE_TOTALOVERLAPTANIMOTOSCORE_HPP
