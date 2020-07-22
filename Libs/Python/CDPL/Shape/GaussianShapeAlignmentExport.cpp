@@ -58,7 +58,6 @@ void CDPLPythonShape::exportGaussianShapeAlignment()
 			 (python::arg("self"), python::arg("shape")))
 		.def("setReferenceSet", &Shape::GaussianShapeAlignment::setReferenceSet,
 			 (python::arg("self"), python::arg("shapes")))
-	
 		.def("setStartGenerator", &Shape::GaussianShapeAlignment::setStartGenerator,
 			 (python::arg("self"), python::arg("gen")), python::with_custodian_and_ward<1, 2>())
 		.def("getStartGenerator", &Shape::GaussianShapeAlignment::getStartGenerator,
@@ -86,6 +85,8 @@ void CDPLPythonShape::exportGaussianShapeAlignment()
 			 (python::arg("self"), python::arg("refine")))
 		.def("refineStartingPoses", GetBoolFunc(&Shape::GaussianShapeAlignment::refineStartingPoses),
 			 python::arg("self"))
+		.def("calcColorOverlaps", SetBoolFunc(&Shape::GaussianShapeAlignment::calcColorOverlaps),
+			 (python::arg("self"), python::arg("calc")))
 		.def("calcSelfOverlaps", SetBoolFunc(&Shape::GaussianShapeAlignment::calcSelfOverlaps), 
 			 (python::arg("self"), python::arg("calc")))
 		.def("calcColorSelfOverlaps", SetBoolFunc(&Shape::GaussianShapeAlignment::calcColorSelfOverlaps),

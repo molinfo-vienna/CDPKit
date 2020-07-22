@@ -27,7 +27,7 @@
 #include "StaticInit.hpp"
 
 #include "CDPL/Shape/GaussianShapeAlignment.hpp"
-#include "CDPL/Shape/TotalOverlapTanimotoScore.hpp"
+#include "CDPL/Shape/SimilarityScores.hpp"
 #include "CDPL/Base/Exceptions.hpp"
 
 
@@ -52,7 +52,7 @@ namespace
 
 
 Shape::GaussianShapeAlignment::GaussianShapeAlignment():
-	shapeFuncCache(MAX_SHAPE_FUNC_CACHE_SIZE), calcSlfOverlaps(false), calcColSlfOverlaps(false),
+	shapeFuncCache(MAX_SHAPE_FUNC_CACHE_SIZE), calcSlfOverlaps(true), calcColSlfOverlaps(false),
 	calcColOverlaps(false), resultSelMode(BEST_RESULT_PAIR), resultCmpFunc(&compareScore), 
 	scoringFunc(TotalOverlapTanimotoScore())
 {
@@ -60,7 +60,7 @@ Shape::GaussianShapeAlignment::GaussianShapeAlignment():
 }
 
 Shape::GaussianShapeAlignment::GaussianShapeAlignment(const GaussianShape& ref_shape):
-	shapeFuncCache(MAX_SHAPE_FUNC_CACHE_SIZE), calcSlfOverlaps(false), calcColSlfOverlaps(false),
+	shapeFuncCache(MAX_SHAPE_FUNC_CACHE_SIZE), calcSlfOverlaps(true), calcColSlfOverlaps(false),
 	calcColOverlaps(false), resultSelMode(BEST_RESULT_PAIR), resultCmpFunc(&compareScore), 
 	scoringFunc(TotalOverlapTanimotoScore())
 {
@@ -70,7 +70,7 @@ Shape::GaussianShapeAlignment::GaussianShapeAlignment(const GaussianShape& ref_s
 }
 
 Shape::GaussianShapeAlignment::GaussianShapeAlignment(const GaussianShapeSet& ref_shapes):
-	shapeFuncCache(MAX_SHAPE_FUNC_CACHE_SIZE), calcSlfOverlaps(false), calcColSlfOverlaps(false),
+	shapeFuncCache(MAX_SHAPE_FUNC_CACHE_SIZE), calcSlfOverlaps(true), calcColSlfOverlaps(false),
 	calcColOverlaps(false), resultSelMode(BEST_RESULT_PAIR), resultCmpFunc(&compareScore), 
 	scoringFunc(TotalOverlapTanimotoScore())
 {
@@ -144,7 +144,10 @@ const Shape::GaussianShapeAlignment::ColorFilterFunction& Shape::GaussianShapeAl
 
 void Shape::GaussianShapeAlignment::setResultCompareFunction(const ResultCompareFunction& func)
 {
-	resultCmpFunc = func;
+	if (!func)
+		resultCmpFunc = &compareScore;
+	else
+		resultCmpFunc = func;
 }
 
 const Shape::GaussianShapeAlignment::ResultCompareFunction& Shape::GaussianShapeAlignment::getResultCompareFunction() const
@@ -154,7 +157,10 @@ const Shape::GaussianShapeAlignment::ResultCompareFunction& Shape::GaussianShape
 
 void Shape::GaussianShapeAlignment::setScoringFunction(const ScoringFunction& func)
 {
-	scoringFunc = func;
+	if (!func)
+		scoringFunc = TotalOverlapTanimotoScore();
+	else
+		scoringFunc = func;
 }
 
 const Shape::GaussianShapeAlignment::ScoringFunction& Shape::GaussianShapeAlignment::getScoringFunction() const
@@ -254,12 +260,31 @@ double Shape::GaussianShapeAlignment::getDistanceCutoff() const
 
 void Shape::GaussianShapeAlignment::setReference(const GaussianShape& shape)
 {
-	// TODO
+	if (refShapeMetaData.empty())
+		refShapeMetaData.resize(1);
+
+	refShapeFuncs.clear();
+	refShapeFuncs.push_back(allocShapeFunction(shape));
+
+	prepareForAlignment(*refShapeFuncs[0], refShapeMetaData[0], true);
 }
 
 void Shape::GaussianShapeAlignment::setReferenceSet(const GaussianShapeSet& shapes)
 {
-	// TODO
+	std::size_t num_shapes = shapes.getSize();
+
+	if (refShapeMetaData.size() < num_shapes)
+		refShapeMetaData.resize(num_shapes);
+
+	refShapeFuncs.clear();
+
+	for (std::size_t i = 0; i < num_shapes; i++) {
+		GaussianShapeFunction* func = allocShapeFunction(shapes[i]);
+
+		refShapeFuncs.push_back(func);
+
+		prepareForAlignment(*func, refShapeMetaData[i], true);
+	}
 }
 
 std::size_t Shape::GaussianShapeAlignment::getReferenceSetSize() const
@@ -287,12 +312,49 @@ Shape::GaussianShapeAlignment::ConstShapeIterator Shape::GaussianShapeAlignment:
 
 bool Shape::GaussianShapeAlignment::align(const GaussianShape& shape)
 {
-	return false; // TODO
+	results.clear();
+	shapeToResIndexMap.clear();
+
+	algdShapeFunc.setShape(shape);
+
+	prepareForAlignment(algdShapeFunc, algdShapeMetaData, false);
+
+	for (std::size_t i = 0, num_ref_shapes = refShapeFuncs.size(); i < num_ref_shapes; i++) {
+		shapeFuncAlmnt.setReference(*refShapeFuncs[i], refShapeMetaData[i].symClass);
+
+		if (!shapeFuncAlmnt.align(algdShapeFunc, algdShapeMetaData.symClass, calcColOverlaps)) 
+			continue;
+
+		for (std::size_t j = 0, num_res = shapeFuncAlmnt.getNumResults(); j < num_res; j++)
+			processResult(i, 0, j, shapeFuncAlmnt.getResult(j));
+	}
+
+	return !results.empty();
 }
 
 bool Shape::GaussianShapeAlignment::align(const GaussianShapeSet& shapes)
 {
-	return false; // TODO
+	results.clear();
+	shapeToResIndexMap.clear();
+
+	for (std::size_t i = 0, num_algd_shapes = shapes.getSize(), num_ref_shapes = refShapeFuncs.size(); i < num_algd_shapes; i++) {
+		algdShapeFunc.setShape(shapes.getElement(i));
+
+		prepareForAlignment(algdShapeFunc, algdShapeMetaData, false);
+
+		for (std::size_t j = 0; j < num_ref_shapes; j++) {
+			if (num_ref_shapes > 1 || i == 0)
+				shapeFuncAlmnt.setReference(*refShapeFuncs[j], refShapeMetaData[j].symClass);
+
+			if (!shapeFuncAlmnt.align(algdShapeFunc, algdShapeMetaData.symClass, calcColOverlaps))
+				continue;
+
+			for (std::size_t k = 0, num_res = shapeFuncAlmnt.getNumResults(); k < num_res; k++)
+				processResult(j, i, k, shapeFuncAlmnt.getResult(k));
+		}
+	}
+
+	return !results.empty();
 }
 
 std::size_t Shape::GaussianShapeAlignment::getNumResults() const
@@ -316,4 +378,102 @@ Shape::GaussianShapeAlignment::ConstResultIterator Shape::GaussianShapeAlignment
 Shape::GaussianShapeAlignment::ConstResultIterator Shape::GaussianShapeAlignment::getResultsEnd() const
 {
 	return results.end();
+}
+	
+void Shape::GaussianShapeAlignment::prepareForAlignment(GaussianShapeFunction& func, ShapeMetaData& data, bool ref)
+{
+	data.selfOverlap = (calcSlfOverlaps ? shapeFuncAlmnt.calcSelfOverlap(func) : 0.0);
+	data.colSelfOverlap = (calcColSlfOverlaps ? shapeFuncAlmnt.calcColorSelfOverlap(func) : 0.0);
+	data.symClass = (ref ? shapeFuncAlmnt.setupReference(func, data.transform) : shapeFuncAlmnt.setupAligned(func, data.transform));
+}
+
+void Shape::GaussianShapeAlignment::processResult(std::size_t ref_idx, std::size_t al_idx, std::size_t start_idx, 
+												  const GaussianShapeFunctionAlignment::Result& res)
+{
+	AlignmentResult curr_res;
+	std::size_t out_res_idx = 0;
+
+	curr_res.setOverlap(res.getOverlap());
+	curr_res.setColorOverlap(res.getColorOverlap());
+	curr_res.setReferenceSelfOverlap(refShapeMetaData[ref_idx].selfOverlap);
+	curr_res.setReferenceColorSelfOverlap(refShapeMetaData[ref_idx].colSelfOverlap);
+	curr_res.setAlignedSelfOverlap(algdShapeMetaData.selfOverlap);
+	curr_res.setAlignedColorSelfOverlap(algdShapeMetaData.colSelfOverlap);
+	curr_res.setScore(scoringFunc(curr_res));
+
+	switch (resultSelMode) {
+
+		case ALL:
+			out_res_idx = results.size();
+			results.resize(out_res_idx + 1);
+			break;
+
+		case BEST_RESULT_FOR_EACH_PAIR:
+			if (getResultIndex(ref_idx, al_idx, out_res_idx))
+				break;
+
+			if (resultCmpFunc(curr_res, results[out_res_idx]))
+				break;
+
+			return;
+
+		case BEST_RESULT_FOR_EACH_REF:
+			if (getResultIndex(ref_idx, 0, out_res_idx))
+				break;
+
+			if (resultCmpFunc(curr_res, results[out_res_idx]))
+				break;
+
+			return;
+
+		case BEST_RESULT_PAIR:
+			if (results.empty()) {
+				results.resize(1);
+				break;
+			} 
+
+			if (resultCmpFunc(curr_res, results[0]))
+				break;
+
+		default:
+			return;
+	}
+
+	Math::Matrix4D tmp(prod(refShapeMetaData[ref_idx].transform, res.getTransform()));
+
+	curr_res.setTransform(prod(tmp, algdShapeMetaData.transform));
+	curr_res.setReferenceShapeIndex(ref_idx);
+	curr_res.setAlignedShapeIndex(al_idx);
+	curr_res.setStartingPoseID(start_idx);
+
+	results[out_res_idx] = curr_res;
+}
+
+bool Shape::GaussianShapeAlignment::getResultIndex(std::size_t ref_idx, std::size_t al_idx, std::size_t& res_idx)
+{
+	std::pair<std::size_t, std::size_t> idx_pair(ref_idx, al_idx); 
+	ShapePairToResultIndexMap::const_iterator it = shapeToResIndexMap.find(idx_pair);
+
+	if (it == shapeToResIndexMap.end()) {
+		res_idx = results.size();
+
+		results.resize(res_idx + 1);
+		shapeToResIndexMap.insert(ShapePairToResultIndexMap::value_type(idx_pair, res_idx));
+
+		return true;
+	}
+
+	res_idx = it->second;
+	return false;
+}
+
+Shape::GaussianShapeFunction* Shape::GaussianShapeAlignment::allocShapeFunction(const GaussianShape& shape)
+{
+	GaussianShapeFunction* func = shapeFuncCache.getRaw();
+
+	func->setMaxOrder(algdShapeFunc.getMaxOrder());
+	func->setDistanceCutoff(algdShapeFunc.getDistanceCutoff());
+	func->setShape(shape);
+
+	return func;
 }

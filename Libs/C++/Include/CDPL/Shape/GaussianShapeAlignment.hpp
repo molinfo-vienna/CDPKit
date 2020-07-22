@@ -33,9 +33,11 @@
 
 #include <vector>
 #include <cstddef>
+#include <utility>
 
 #include <boost/shared_ptr.hpp>
 #include <boost/function.hpp>
+#include <boost/unordered_map.hpp>
 #include <boost/iterator/transform_iterator.hpp>
 
 #include "CDPL/Shape/APIPrefix.hpp"
@@ -189,11 +191,31 @@ namespace CDPL
 			ConstResultIterator getResultsEnd() const;
 						
 		  private:
+			struct ShapeMetaData 
+			{
+
+				unsigned int   symClass;
+				Math::Matrix4D transform;
+				double         selfOverlap;
+				double         colSelfOverlap;
+			};
+
 			GaussianShapeAlignment(const GaussianShapeAlignment& alignment);
 
 			GaussianShapeAlignment& operator=(const GaussianShapeAlignment& alignment);
 
+			void prepareForAlignment(GaussianShapeFunction& func, ShapeMetaData& data, bool ref);
+
+			void processResult(std::size_t ref_idx, std::size_t al_idx, std::size_t start_idx, 
+							   const GaussianShapeFunctionAlignment::Result& res);
+
+			bool getResultIndex(std::size_t ref_idx, std::size_t al_idx, std::size_t& res_idx);
+
+			GaussianShapeFunction* allocShapeFunction(const GaussianShape& shape);
+
 			typedef Util::ObjectStack<GaussianShapeFunction> ShapeFunctionCache;
+			typedef std::vector<ShapeMetaData> ShapeMetaDataArray;
+			typedef boost::unordered_map<std::pair<std::size_t, std::size_t>, std::size_t> ShapePairToResultIndexMap;
 
 			ShapeFunctionCache             shapeFuncCache;
 			bool                           calcSlfOverlaps;
@@ -204,7 +226,10 @@ namespace CDPL
 			ScoringFunction                scoringFunc;
 			GaussianShapeFunctionAlignment shapeFuncAlmnt;
 			ShapeFunctionList              refShapeFuncs;
+			ShapeMetaDataArray             refShapeMetaData;
 			GaussianShapeFunction          algdShapeFunc;
+			ShapeMetaData                  algdShapeMetaData;
+			ShapePairToResultIndexMap      shapeToResIndexMap;
 			ResultList                     results;
 		};
 

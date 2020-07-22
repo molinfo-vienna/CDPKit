@@ -49,6 +49,7 @@ SET(shape_MOD_SRCS
     GaussianShapeAlignmentExport.cpp
 
     AlignmentResultExport.cpp
+    SimilarityScoresExport.cpp
 
     SymmetryClassExport.cpp
     

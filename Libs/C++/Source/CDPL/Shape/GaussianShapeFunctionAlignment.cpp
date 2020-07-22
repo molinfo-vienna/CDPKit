@@ -48,9 +48,9 @@ namespace
 	const double BFGS_MINIMIZER_STEP_SIZE                  = 0.01;
 	const double BFGS_MINIMIZER_TOLERANCE                  = 0.1;
 
-	bool defColorFilterFunc(std::size_t color) 
+	bool defColorFilterFunc(std::size_t col) 
 	{
-		return (color != 0);
+		return (col != 0);
 	}
 }
 
@@ -129,7 +129,10 @@ const Shape::GaussianShapeFunctionAlignment::ColorMatchFunction& Shape::Gaussian
 
 void Shape::GaussianShapeFunctionAlignment::setColorFilterFunction(const ColorFilterFunction& func)
 {
-	colFilterFunc = func;
+	if (!func)
+		colFilterFunc = &defColorFilterFunc;
+	else
+		colFilterFunc = func;
 }
 
 const Shape::GaussianShapeFunctionAlignment::ColorFilterFunction& Shape::GaussianShapeFunctionAlignment::getColorFilterFunction() const

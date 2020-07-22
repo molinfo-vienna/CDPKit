@@ -1,7 +1,7 @@
 /* -*- mode: c++; c-basic-offset: 4; tab-width: 4; indent-tabs-mode: t -*- */
 
 /* 
- * TotalOverlapTanimotoScore.hpp 
+ * SimilarityScores.hpp 
  *
  * This file is part of the Chemical Data Processing Toolkit
  *
@@ -25,11 +25,11 @@
 
 /**
  * \file
- * \brief Definition of the class CDPL::Shape::TotalOverlapTanimotoScore.
+ * \brief Definition of shape similarity scoring functors.
  */
 
-#ifndef CDPL_SHAPE_TOTALOVERLAPTANIMOTOSCORE_HPP
-#define CDPL_SHAPE_TOTALOVERLAPTANIMOTOSCORE_HPP
+#ifndef CDPL_SHAPE_SIMILARITYSCORES_HPP
+#define CDPL_SHAPE_SIMILARITYSCORES_HPP
 
 #include "CDPL/Shape/APIPrefix.hpp"
 #include "CDPL/Shape/AlignmentResult.hpp"
@@ -61,4 +61,4 @@ namespace CDPL
     }
 }
 
-#endif // CDPL_SHAPE_TOTALOVERLAPTANIMOTOSCORE_HPP
+#endif // CDPL_SHAPE_SIMILARITYSCORES_HPP

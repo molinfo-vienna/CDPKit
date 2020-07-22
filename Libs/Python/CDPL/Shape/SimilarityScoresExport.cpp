@@ -1,7 +1,7 @@
 /* -*- mode: c++; c-basic-offset: 4; tab-width: 4; indent-tabs-mode: t -*- */
 
 /* 
- * ClassExports.hpp 
+ * SimilarityScoresExport.cpp 
  *
  * This file is part of the Chemical Data Processing Toolkit
  *
@@ -24,31 +24,26 @@
  */
 
 
-#ifndef CDPL_PYTHON_SHAPE_CLASSEXPORTS_HPP
-#define CDPL_PYTHON_SHAPE_CLASSEXPORTS_HPP
+#include <boost/python.hpp>
+
+#include "CDPL/Shape/SimilarityScores.hpp"
+
+#include "Base/ObjectIdentityCheckVisitor.hpp"
+#include "Base/CopyAssOp.hpp"
+
+#include "ClassExports.hpp"
 
 
-namespace CDPLPythonShape
+void CDPLPythonShape::exportSimilarityScores()
 {
+    using namespace boost;
+    using namespace CDPL;
 
-	void exportGaussianShape();
-	void exportGaussianShapeSet();
-	
-	void exportGaussianShapeFunction();
-
-	void exportGaussianShapeOverlapFunction();
-	void exportExactGaussianShapeOverlapFunction();
-	void exportFastGaussianShapeOverlapFunction();
-
-	void exportAlignmentResult();
-	void exportSimilarityScores();
-
-	void exportGaussianShapeAlignmentStartGenerator();
-	void exportPrincipalAxesAlignmentStartGenerator();
-	void exportGaussianShapeFunctionAlignment();
-	void exportGaussianShapeAlignment();
-
-	void exportBoostFunctionWrappers();
+    python::class_<Shape::TotalOverlapTanimotoScore>("TotalOverlapTanimotoScore", python::no_init)
+	.def(python::init<>(python::arg("self")))
+	.def(python::init<const Shape::TotalOverlapTanimotoScore&>((python::arg("self"), python::arg("score"))))
+	.def(CDPLPythonBase::ObjectIdentityCheckVisitor<Shape::TotalOverlapTanimotoScore>())
+	.def("assign", CDPLPythonBase::copyAssOp(&Shape::TotalOverlapTanimotoScore::operator=),
+	     (python::arg("self"), python::arg("score")), python::return_self<>())
+	.def("__call__", &Shape::TotalOverlapTanimotoScore::operator(), (python::arg("self"), python::arg("res")));
 }
-
-#endif // CDPL_PYTHON_SHAPE_CLASSEXPORTS_HPP
