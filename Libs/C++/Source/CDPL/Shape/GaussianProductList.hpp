@@ -115,6 +115,16 @@ namespace CDPL
 	{
 		return products[idx];
 	}
+	
+	inline Shape::GaussianProductList::ConstProductIterator Shape::GaussianProductList::getProductsBegin() const
+	{
+		return products.begin();
+	}
+
+	inline Shape::GaussianProductList::ConstProductIterator Shape::GaussianProductList::getProductsEnd() const
+	{
+		return products.end();
+	}
 }
 
 #endif // CDPL_SHAPE_GAUSSIANPRODUCTLIST_HPP

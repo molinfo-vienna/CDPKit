@@ -52,16 +52,16 @@ namespace
 
 
 Shape::GaussianShapeAlignment::GaussianShapeAlignment():
-	shapeFuncCache(MAX_SHAPE_FUNC_CACHE_SIZE), calcSlfOverlaps(true), calcColSlfOverlaps(false),
-	calcColOverlaps(false), resultSelMode(BEST_RESULT_PAIR), resultCmpFunc(&compareScore), 
+	shapeFuncCache(MAX_SHAPE_FUNC_CACHE_SIZE), calcSlfOverlaps(true), calcColSlfOverlaps(true),
+	calcColOverlaps(true), resultSelMode(BEST_RESULT_PAIR), resultCmpFunc(&compareScore), 
 	scoringFunc(TotalOverlapTanimotoScore())
 {
 	algdShapeFunc.setMaxOrder(1);
 }
 
 Shape::GaussianShapeAlignment::GaussianShapeAlignment(const GaussianShape& ref_shape):
-	shapeFuncCache(MAX_SHAPE_FUNC_CACHE_SIZE), calcSlfOverlaps(true), calcColSlfOverlaps(false),
-	calcColOverlaps(false), resultSelMode(BEST_RESULT_PAIR), resultCmpFunc(&compareScore), 
+	shapeFuncCache(MAX_SHAPE_FUNC_CACHE_SIZE), calcSlfOverlaps(true), calcColSlfOverlaps(true),
+	calcColOverlaps(true), resultSelMode(BEST_RESULT_PAIR), resultCmpFunc(&compareScore), 
 	scoringFunc(TotalOverlapTanimotoScore())
 {
 	algdShapeFunc.setMaxOrder(1);
@@ -70,8 +70,8 @@ Shape::GaussianShapeAlignment::GaussianShapeAlignment(const GaussianShape& ref_s
 }
 
 Shape::GaussianShapeAlignment::GaussianShapeAlignment(const GaussianShapeSet& ref_shapes):
-	shapeFuncCache(MAX_SHAPE_FUNC_CACHE_SIZE), calcSlfOverlaps(true), calcColSlfOverlaps(false),
-	calcColOverlaps(false), resultSelMode(BEST_RESULT_PAIR), resultCmpFunc(&compareScore), 
+	shapeFuncCache(MAX_SHAPE_FUNC_CACHE_SIZE), calcSlfOverlaps(true), calcColSlfOverlaps(true),
+	calcColOverlaps(true), resultSelMode(BEST_RESULT_PAIR), resultCmpFunc(&compareScore), 
 	scoringFunc(TotalOverlapTanimotoScore())
 {
 	algdShapeFunc.setMaxOrder(1);

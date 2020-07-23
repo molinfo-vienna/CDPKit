@@ -158,16 +158,6 @@ void Shape::GaussianProductList::setup(const GaussianShape& shape)
 		generateProducts(i);
 }
 
-Shape::GaussianProductList::ConstProductIterator Shape::GaussianProductList::getProductsBegin() const
-{
-    return products.begin();
-}
-
-Shape::GaussianProductList::ConstProductIterator Shape::GaussianProductList::getProductsEnd() const
-{
-    return products.end();
-}
-
 std::size_t Shape::GaussianProductList::getNumProducts() const
 {
     return products.size();

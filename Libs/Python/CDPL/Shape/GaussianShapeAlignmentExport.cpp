@@ -45,7 +45,10 @@ void CDPLPythonShape::exportGaussianShapeAlignment()
     python::scope scope = python::class_<Shape::GaussianShapeAlignment, Shape::GaussianShapeAlignment::SharedPointer, boost::noncopyable>(
 		"GaussianShapeAlignment", python::no_init)
 		.def(python::init<>(python::arg("self")))
-		.def(python::init<const Shape::GaussianShape&>((python::arg("self"), python::arg("ref_shape"))))
+		.def(python::init<const Shape::GaussianShape&>((python::arg("self"), python::arg("ref_shape")))
+			 [python::with_custodian_and_ward<1, 2>()])
+		.def(python::init<const Shape::GaussianShapeSet&>((python::arg("self"), python::arg("ref_shapes")))
+			 [python::with_custodian_and_ward<1, 2>()])
 		.def(CDPLPythonBase::ObjectIdentityCheckVisitor<Shape::GaussianShapeAlignment>())
 		.def("setOverlapFunction", &Shape::GaussianShapeAlignment::setOverlapFunction,
 			 (python::arg("self"), python::arg("func")), python::with_custodian_and_ward<1, 2>())
@@ -54,10 +57,6 @@ void CDPLPythonShape::exportGaussianShapeAlignment()
 		.def("getDefaultOverlapFunction", static_cast<Shape::FastGaussianShapeOverlapFunction& (Shape::GaussianShapeAlignment::*)()>
 			 (&Shape::GaussianShapeAlignment::getDefaultOverlapFunction),
 			 python::arg("self"), python::return_internal_reference<>())
-		.def("setReference", &Shape::GaussianShapeAlignment::setReference,
-			 (python::arg("self"), python::arg("shape")))
-		.def("setReferenceSet", &Shape::GaussianShapeAlignment::setReferenceSet,
-			 (python::arg("self"), python::arg("shapes")))
 		.def("setStartGenerator", &Shape::GaussianShapeAlignment::setStartGenerator,
 			 (python::arg("self"), python::arg("gen")), python::with_custodian_and_ward<1, 2>())
 		.def("getStartGenerator", &Shape::GaussianShapeAlignment::getStartGenerator,
@@ -73,6 +72,18 @@ void CDPLPythonShape::exportGaussianShapeAlignment()
 			 (python::arg("self"), python::arg("func")))
 		.def("getColorFilterFunction", &Shape::GaussianShapeAlignment::getColorFilterFunction,
 			 python::arg("self"), python::return_internal_reference<>())
+		.def("setResultCompareFunction", &Shape::GaussianShapeAlignment::setResultCompareFunction,
+			 (python::arg("self"), python::arg("func")))
+		.def("getResultCompareFunction", &Shape::GaussianShapeAlignment::getResultCompareFunction,
+			 python::arg("self"), python::return_internal_reference<>())
+		.def("setScoringFunction", &Shape::GaussianShapeAlignment::setScoringFunction,
+			 (python::arg("self"), python::arg("func")))
+		.def("getScoringFunction", &Shape::GaussianShapeAlignment::getScoringFunction,
+			 python::arg("self"), python::return_internal_reference<>())
+		.def("setResultSelectionMode", &Shape::GaussianShapeAlignment::setResultSelectionMode,
+			 (python::arg("self"), python::arg("mode")))
+		.def("getResultSelectionMode", &Shape::GaussianShapeAlignment::getResultSelectionMode,
+			 python::arg("self"))
 		.def("setMaxNumRefinementIterations", &Shape::GaussianShapeAlignment::setMaxNumRefinementIterations,
 			 (python::arg("self"), python::arg("max_iter")))
 		.def("getMaxNumRefinementIterations", &Shape::GaussianShapeAlignment::getMaxNumRefinementIterations,
@@ -87,12 +98,36 @@ void CDPLPythonShape::exportGaussianShapeAlignment()
 			 python::arg("self"))
 		.def("calcColorOverlaps", SetBoolFunc(&Shape::GaussianShapeAlignment::calcColorOverlaps),
 			 (python::arg("self"), python::arg("calc")))
+		.def("calcColorOverlaps", GetBoolFunc(&Shape::GaussianShapeAlignment::calcColorOverlaps),
+			 python::arg("self"))
 		.def("calcSelfOverlaps", SetBoolFunc(&Shape::GaussianShapeAlignment::calcSelfOverlaps), 
 			 (python::arg("self"), python::arg("calc")))
+		.def("calcSelfOverlaps", GetBoolFunc(&Shape::GaussianShapeAlignment::calcSelfOverlaps), 
+			 python::arg("self"))
 		.def("calcColorSelfOverlaps", SetBoolFunc(&Shape::GaussianShapeAlignment::calcColorSelfOverlaps),
 			 (python::arg("self"), python::arg("calc")))
+		.def("calcColorSelfOverlaps", GetBoolFunc(&Shape::GaussianShapeAlignment::calcColorSelfOverlaps),
+			 python::arg("self"))
+		.def("setMaxOrder", &Shape::GaussianShapeAlignment::setMaxOrder, 
+			 (python::arg("self"), python::arg("max_order")))
+		.def("getMaxOrder", &Shape::GaussianShapeAlignment::getMaxOrder, 
+			 python::arg("self"))
+		.def("setDistanceCutoff", &Shape::GaussianShapeAlignment::setDistanceCutoff, 
+			 (python::arg("self"), python::arg("cutoff")))
+		.def("getDistanceCutoff", &Shape::GaussianShapeAlignment::getDistanceCutoff,
+			 python::arg("self"))
+		.def("setReference", &Shape::GaussianShapeAlignment::setReference,
+			 (python::arg("self"), python::arg("shape")), python::with_custodian_and_ward<1, 2>())
+		.def("setReferenceSet", &Shape::GaussianShapeAlignment::setReferenceSet,
+			 (python::arg("self"), python::arg("shapes")), python::with_custodian_and_ward<1, 2>())
+		.def("getReferenceSetSize", &Shape::GaussianShapeAlignment::getReferenceSetSize, 
+			 python::arg("self"))
+		.def("getReference", &Shape::GaussianShapeAlignment::getReference,
+			 (python::arg("self"), python::arg("idx")), python::return_internal_reference<>())
 		.def("align", static_cast<bool (Shape::GaussianShapeAlignment::*)(const Shape::GaussianShape&)>(&Shape::GaussianShapeAlignment::align), 
 			 (python::arg("self"), python::arg("shape")))
+		.def("align", static_cast<bool (Shape::GaussianShapeAlignment::*)(const Shape::GaussianShapeSet&)>(&Shape::GaussianShapeAlignment::align), 
+			 (python::arg("self"), python::arg("shapes")))
 		.def("getNumResults", &Shape::GaussianShapeAlignment::getNumResults, python::arg("self"))
 		.def("__len__", &Shape::GaussianShapeAlignment::getNumResults, python::arg("self"))
 		.def("getResult", &Shape::GaussianShapeAlignment::getResult,
@@ -101,6 +136,8 @@ void CDPLPythonShape::exportGaussianShapeAlignment()
 			 (python::arg("self"), python::arg("idx")), python::return_internal_reference<>())
 		.def_readonly("DEF_REFINEMENT_STOP_GRADIENT", Shape::GaussianShapeFunctionAlignment::DEF_REFINEMENT_STOP_GRADIENT)
 		.def_readonly("DEF_MAX_REFINEMENT_ITERATIONS", Shape::GaussianShapeFunctionAlignment::DEF_MAX_REFINEMENT_ITERATIONS)
+		.def_readonly("DEF_MAX_PRODUCT_ORDER", &Shape::GaussianShapeFunction::DEF_MAX_PRODUCT_ORDER)
+		.def_readonly("DEF_DISTANCE_CUTOFF", &Shape::GaussianShapeFunction::DEF_DISTANCE_CUTOFF)
 		.add_property("numResults", &Shape::GaussianShapeAlignment::getNumResults)
 		.add_property("overlapFunction",
 					  python::make_function(&Shape::GaussianShapeAlignment::getOverlapFunction,
@@ -126,10 +163,36 @@ void CDPLPythonShape::exportGaussianShapeAlignment()
 		.add_property("colorFilterFunction", python::make_function(&Shape::GaussianShapeAlignment::getColorFilterFunction,
 																   python::return_internal_reference<>()),
 					  &Shape::GaussianShapeAlignment::setColorFilterFunction)
+		.add_property("resultCompareFunction", python::make_function(&Shape::GaussianShapeAlignment::getResultCompareFunction,
+																   python::return_internal_reference<>()),
+					  &Shape::GaussianShapeAlignment::setResultCompareFunction)
+		.add_property("scoringFunction", python::make_function(&Shape::GaussianShapeAlignment::getScoringFunction,
+																   python::return_internal_reference<>()),
+					  &Shape::GaussianShapeAlignment::setScoringFunction)
+		.add_property("resultSelectionMode", &Shape::GaussianShapeAlignment::getResultSelectionMode,
+					  &Shape::GaussianShapeAlignment::setResultSelectionMode)
 		.add_property("maxNumRefinementIterations", &Shape::GaussianShapeAlignment::getMaxNumRefinementIterations,
 					  &Shape::GaussianShapeAlignment::setMaxNumRefinementIterations)
 		.add_property("refinementStopGradient", &Shape::GaussianShapeAlignment::getRefinementStopGradient,
 					  &Shape::GaussianShapeAlignment::setRefinementStopGradient)
 		.add_property("refineStartPoses", GetBoolFunc(&Shape::GaussianShapeAlignment::refineStartingPoses),
-					  SetBoolFunc(&Shape::GaussianShapeAlignment::refineStartingPoses));
+					  SetBoolFunc(&Shape::GaussianShapeAlignment::refineStartingPoses))
+		.add_property("selfOverlaps", GetBoolFunc(&Shape::GaussianShapeAlignment::calcSelfOverlaps),
+					  SetBoolFunc(&Shape::GaussianShapeAlignment::calcSelfOverlaps))
+		.add_property("colorSelfOverlaps", GetBoolFunc(&Shape::GaussianShapeAlignment::calcColorSelfOverlaps),
+					  SetBoolFunc(&Shape::GaussianShapeAlignment::calcColorSelfOverlaps))
+		.add_property("colorOverlaps", GetBoolFunc(&Shape::GaussianShapeAlignment::calcColorOverlaps),
+					  SetBoolFunc(&Shape::GaussianShapeAlignment::calcColorOverlaps))
+		.add_property("maxOrder", &Shape::GaussianShapeFunction::getMaxOrder, 
+					  &Shape::GaussianShapeFunction::setMaxOrder)
+		.add_property("distCutoff", &Shape::GaussianShapeFunction::getDistanceCutoff, 
+					  &Shape::GaussianShapeFunction::setDistanceCutoff)
+		.add_property("referenceSetSize", &Shape::GaussianShapeAlignment::getReferenceSetSize);
+
+	python::enum_<Shape::GaussianShapeAlignment::ResultSelectionMode>("ResultSelectionMode")
+		.value("ALL", Shape::GaussianShapeAlignment::ALL)
+		.value("BEST_RESULT_FOR_EACH_PAIR", Shape::GaussianShapeAlignment::BEST_RESULT_FOR_EACH_PAIR)
+		.value("BEST_RESULT_FOR_EACH_REF", Shape::GaussianShapeAlignment::BEST_RESULT_FOR_EACH_REF)
+		.value("BEST_RESULT_PAIR", Shape::GaussianShapeAlignment::BEST_RESULT_PAIR)
+		.export_values();
 }
