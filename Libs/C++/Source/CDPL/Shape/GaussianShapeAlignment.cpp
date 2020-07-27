@@ -51,12 +51,22 @@ namespace
 }
 
 
+const double      Shape::GaussianShapeAlignment::DEF_REFINEMENT_STOP_GRADIENT = 1.0;
+const std::size_t Shape::GaussianShapeAlignment::DEF_MAX_REFINEMENT_ITERATIONS;
+const std::size_t Shape::GaussianShapeAlignment::DEF_MAX_PRODUCT_ORDER;
+const double      Shape::GaussianShapeAlignment::DEF_DISTANCE_CUTOFF = 0.0;
+
+
 Shape::GaussianShapeAlignment::GaussianShapeAlignment():
 	shapeFuncCache(MAX_SHAPE_FUNC_CACHE_SIZE), calcSlfOverlaps(true), calcColSlfOverlaps(true),
 	calcColOverlaps(true), resultSelMode(BEST_RESULT_PAIR), resultCmpFunc(&compareScore), 
 	scoringFunc(TotalOverlapTanimotoScore())
 {
-	algdShapeFunc.setMaxOrder(1);
+	algdShapeFunc.setMaxOrder(DEF_MAX_PRODUCT_ORDER);
+	algdShapeFunc.setDistanceCutoff(DEF_DISTANCE_CUTOFF);
+
+	shapeFuncAlmnt.setMaxNumRefinementIterations(DEF_MAX_REFINEMENT_ITERATIONS);
+	shapeFuncAlmnt.setRefinementStopGradient(DEF_REFINEMENT_STOP_GRADIENT);
 }
 
 Shape::GaussianShapeAlignment::GaussianShapeAlignment(const GaussianShape& ref_shape):
@@ -64,7 +74,11 @@ Shape::GaussianShapeAlignment::GaussianShapeAlignment(const GaussianShape& ref_s
 	calcColOverlaps(true), resultSelMode(BEST_RESULT_PAIR), resultCmpFunc(&compareScore), 
 	scoringFunc(TotalOverlapTanimotoScore())
 {
-	algdShapeFunc.setMaxOrder(1);
+	algdShapeFunc.setMaxOrder(DEF_MAX_PRODUCT_ORDER);
+	algdShapeFunc.setDistanceCutoff(DEF_DISTANCE_CUTOFF);
+
+	shapeFuncAlmnt.setMaxNumRefinementIterations(DEF_MAX_REFINEMENT_ITERATIONS);
+	shapeFuncAlmnt.setRefinementStopGradient(DEF_REFINEMENT_STOP_GRADIENT);
 
 	setReference(ref_shape);
 }
@@ -74,7 +88,11 @@ Shape::GaussianShapeAlignment::GaussianShapeAlignment(const GaussianShapeSet& re
 	calcColOverlaps(true), resultSelMode(BEST_RESULT_PAIR), resultCmpFunc(&compareScore), 
 	scoringFunc(TotalOverlapTanimotoScore())
 {
-	algdShapeFunc.setMaxOrder(1);
+	algdShapeFunc.setMaxOrder(DEF_MAX_PRODUCT_ORDER);
+	algdShapeFunc.setDistanceCutoff(DEF_DISTANCE_CUTOFF);
+
+	shapeFuncAlmnt.setMaxNumRefinementIterations(DEF_MAX_REFINEMENT_ITERATIONS);
+	shapeFuncAlmnt.setRefinementStopGradient(DEF_REFINEMENT_STOP_GRADIENT);
 
 	setReferenceSet(ref_shapes);
 }

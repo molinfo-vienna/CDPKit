@@ -134,10 +134,10 @@ void CDPLPythonShape::exportGaussianShapeAlignment()
 			 (python::arg("self"), python::arg("idx")), python::return_internal_reference<>())
 		.def("__getitem__", &Shape::GaussianShapeAlignment::getResult,
 			 (python::arg("self"), python::arg("idx")), python::return_internal_reference<>())
-		.def_readonly("DEF_REFINEMENT_STOP_GRADIENT", Shape::GaussianShapeFunctionAlignment::DEF_REFINEMENT_STOP_GRADIENT)
-		.def_readonly("DEF_MAX_REFINEMENT_ITERATIONS", Shape::GaussianShapeFunctionAlignment::DEF_MAX_REFINEMENT_ITERATIONS)
-		.def_readonly("DEF_MAX_PRODUCT_ORDER", &Shape::GaussianShapeFunction::DEF_MAX_PRODUCT_ORDER)
-		.def_readonly("DEF_DISTANCE_CUTOFF", &Shape::GaussianShapeFunction::DEF_DISTANCE_CUTOFF)
+		.def_readonly("DEF_REFINEMENT_STOP_GRADIENT", Shape::GaussianShapeAlignment::DEF_REFINEMENT_STOP_GRADIENT)
+		.def_readonly("DEF_MAX_REFINEMENT_ITERATIONS", Shape::GaussianShapeAlignment::DEF_MAX_REFINEMENT_ITERATIONS)
+		.def_readonly("DEF_MAX_PRODUCT_ORDER", &Shape::GaussianShapeAlignment::DEF_MAX_PRODUCT_ORDER)
+		.def_readonly("DEF_DISTANCE_CUTOFF", &Shape::GaussianShapeAlignment::DEF_DISTANCE_CUTOFF)
 		.add_property("numResults", &Shape::GaussianShapeAlignment::getNumResults)
 		.add_property("overlapFunction",
 					  python::make_function(&Shape::GaussianShapeAlignment::getOverlapFunction,

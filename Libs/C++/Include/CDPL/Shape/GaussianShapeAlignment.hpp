@@ -80,6 +80,11 @@ namespace CDPL
 			typedef const GaussianShape& (*GetShapeFunction)(const GaussianShapeFunction*);
 
 		  public:
+			static const double      DEF_REFINEMENT_STOP_GRADIENT;
+			static const std::size_t DEF_MAX_REFINEMENT_ITERATIONS = 20;
+			static const std::size_t DEF_MAX_PRODUCT_ORDER = 1;
+			static const double      DEF_DISTANCE_CUTOFF;
+
 			typedef boost::shared_ptr<GaussianShapeAlignment> SharedPointer;
 
 			typedef ResultList::const_iterator ConstResultIterator;

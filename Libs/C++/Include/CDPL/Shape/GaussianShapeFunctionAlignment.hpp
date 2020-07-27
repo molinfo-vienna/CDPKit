@@ -90,7 +90,7 @@ namespace CDPL
 			
 		  public:
 			static const double      DEF_REFINEMENT_STOP_GRADIENT;
-			static const std::size_t DEF_MAX_REFINEMENT_ITERATIONS = 200;
+			static const std::size_t DEF_MAX_REFINEMENT_ITERATIONS = 20;
 
 			typedef boost::shared_ptr<GaussianShapeFunctionAlignment> SharedPointer;
 

@@ -55,7 +55,7 @@ namespace
 }
 
 
-const double      Shape::GaussianShapeFunctionAlignment::DEF_REFINEMENT_STOP_GRADIENT = 0.1;
+const double      Shape::GaussianShapeFunctionAlignment::DEF_REFINEMENT_STOP_GRADIENT = 1.0;
 const std::size_t Shape::GaussianShapeFunctionAlignment::DEF_MAX_REFINEMENT_ITERATIONS;
 
 
