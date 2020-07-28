@@ -80,8 +80,8 @@ namespace CDPL
 			typedef const GaussianShape& (*GetShapeFunction)(const GaussianShapeFunction*);
 
 		  public:
-			static const double      DEF_REFINEMENT_STOP_GRADIENT;
-			static const std::size_t DEF_MAX_REFINEMENT_ITERATIONS = 20;
+			static const double      DEF_OPTIMIZATION_STOP_GRADIENT;
+			static const std::size_t DEF_MAX_OPTIMIZATION_ITERATIONS = 20;
 			static const std::size_t DEF_MAX_PRODUCT_ORDER = 1;
 			static const double      DEF_DISTANCE_CUTOFF;
 
@@ -151,17 +151,21 @@ namespace CDPL
 
 			bool calcColorOverlaps() const;
 
-			void refineStartingPoses(bool refine);
+			void optimizeOverlap(bool optimize);
 
-			bool refineStartingPoses() const;
+			bool optimizeOverlap() const;
 
-			void setMaxNumRefinementIterations(std::size_t max_iter);
+			void rigorousOptimization(bool rigorous);
 
-			std::size_t getMaxNumRefinementIterations() const;
+			bool rigorousOptimization() const;
 
-			void setRefinementStopGradient(double grad_norm);
+			void setMaxNumOptimizationIterations(std::size_t max_iter);
 
-			double getRefinementStopGradient() const;
+			std::size_t getMaxNumOptimizationIterations() const;
+
+			void setOptimizationStopGradient(double grad_norm);
+
+			double getOptimizationStopGradient() const;
 
 			void setMaxOrder(std::size_t max_order);
 
@@ -211,8 +215,7 @@ namespace CDPL
 
 			void prepareForAlignment(GaussianShapeFunction& func, ShapeMetaData& data, bool ref);
 
-			void processResult(std::size_t ref_idx, std::size_t al_idx, std::size_t start_idx, 
-							   const GaussianShapeFunctionAlignment::Result& res);
+			void processResult(std::size_t ref_idx, std::size_t al_idx);
 
 			bool getResultIndex(std::size_t ref_idx, std::size_t al_idx, std::size_t& res_idx);
 

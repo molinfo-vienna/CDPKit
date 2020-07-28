@@ -51,10 +51,10 @@ namespace
 }
 
 
-const double      Shape::GaussianShapeAlignment::DEF_REFINEMENT_STOP_GRADIENT = 1.0;
-const std::size_t Shape::GaussianShapeAlignment::DEF_MAX_REFINEMENT_ITERATIONS;
+const double      Shape::GaussianShapeAlignment::DEF_OPTIMIZATION_STOP_GRADIENT = 1.0;
+const double      Shape::GaussianShapeAlignment::DEF_DISTANCE_CUTOFF            = 0.0;
+const std::size_t Shape::GaussianShapeAlignment::DEF_MAX_OPTIMIZATION_ITERATIONS;
 const std::size_t Shape::GaussianShapeAlignment::DEF_MAX_PRODUCT_ORDER;
-const double      Shape::GaussianShapeAlignment::DEF_DISTANCE_CUTOFF = 0.0;
 
 
 Shape::GaussianShapeAlignment::GaussianShapeAlignment():
@@ -65,8 +65,8 @@ Shape::GaussianShapeAlignment::GaussianShapeAlignment():
 	algdShapeFunc.setMaxOrder(DEF_MAX_PRODUCT_ORDER);
 	algdShapeFunc.setDistanceCutoff(DEF_DISTANCE_CUTOFF);
 
-	shapeFuncAlmnt.setMaxNumRefinementIterations(DEF_MAX_REFINEMENT_ITERATIONS);
-	shapeFuncAlmnt.setRefinementStopGradient(DEF_REFINEMENT_STOP_GRADIENT);
+	shapeFuncAlmnt.setMaxNumOptimizationIterations(DEF_MAX_OPTIMIZATION_ITERATIONS);
+	shapeFuncAlmnt.setOptimizationStopGradient(DEF_OPTIMIZATION_STOP_GRADIENT);
 }
 
 Shape::GaussianShapeAlignment::GaussianShapeAlignment(const GaussianShape& ref_shape):
@@ -77,8 +77,8 @@ Shape::GaussianShapeAlignment::GaussianShapeAlignment(const GaussianShape& ref_s
 	algdShapeFunc.setMaxOrder(DEF_MAX_PRODUCT_ORDER);
 	algdShapeFunc.setDistanceCutoff(DEF_DISTANCE_CUTOFF);
 
-	shapeFuncAlmnt.setMaxNumRefinementIterations(DEF_MAX_REFINEMENT_ITERATIONS);
-	shapeFuncAlmnt.setRefinementStopGradient(DEF_REFINEMENT_STOP_GRADIENT);
+	shapeFuncAlmnt.setMaxNumOptimizationIterations(DEF_MAX_OPTIMIZATION_ITERATIONS);
+	shapeFuncAlmnt.setOptimizationStopGradient(DEF_OPTIMIZATION_STOP_GRADIENT);
 
 	setReference(ref_shape);
 }
@@ -91,8 +91,8 @@ Shape::GaussianShapeAlignment::GaussianShapeAlignment(const GaussianShapeSet& re
 	algdShapeFunc.setMaxOrder(DEF_MAX_PRODUCT_ORDER);
 	algdShapeFunc.setDistanceCutoff(DEF_DISTANCE_CUTOFF);
 
-	shapeFuncAlmnt.setMaxNumRefinementIterations(DEF_MAX_REFINEMENT_ITERATIONS);
-	shapeFuncAlmnt.setRefinementStopGradient(DEF_REFINEMENT_STOP_GRADIENT);
+	shapeFuncAlmnt.setMaxNumOptimizationIterations(DEF_MAX_OPTIMIZATION_ITERATIONS);
+	shapeFuncAlmnt.setOptimizationStopGradient(DEF_OPTIMIZATION_STOP_GRADIENT);
 
 	setReferenceSet(ref_shapes);
 }
@@ -226,34 +226,44 @@ bool Shape::GaussianShapeAlignment::calcColorOverlaps() const
 	return calcColOverlaps;
 }
 
-void Shape::GaussianShapeAlignment::refineStartingPoses(bool refine)
+void Shape::GaussianShapeAlignment::optimizeOverlap(bool optimize)
 {
-	shapeFuncAlmnt.refineStartingPoses(refine);
+	shapeFuncAlmnt.optimizeOverlap(optimize);
 }
 
-bool Shape::GaussianShapeAlignment::refineStartingPoses() const
+bool Shape::GaussianShapeAlignment::optimizeOverlap() const
 {
-	return shapeFuncAlmnt.refineStartingPoses();
+	return shapeFuncAlmnt.optimizeOverlap();
 }
 
-void Shape::GaussianShapeAlignment::setMaxNumRefinementIterations(std::size_t max_iter)
+void Shape::GaussianShapeAlignment::rigorousOptimization(bool rigorous)
 {
-	shapeFuncAlmnt.setMaxNumRefinementIterations(max_iter);
+	shapeFuncAlmnt.rigorousOptimization(rigorous);
 }
 
-std::size_t Shape::GaussianShapeAlignment::getMaxNumRefinementIterations() const
+bool Shape::GaussianShapeAlignment::rigorousOptimization() const
 {
-	return shapeFuncAlmnt.getMaxNumRefinementIterations();
+	return shapeFuncAlmnt.rigorousOptimization();
 }
 
-void Shape::GaussianShapeAlignment::setRefinementStopGradient(double grad_norm)
+void Shape::GaussianShapeAlignment::setMaxNumOptimizationIterations(std::size_t max_iter)
 {
-	shapeFuncAlmnt.setRefinementStopGradient(grad_norm);
+	shapeFuncAlmnt.setMaxNumOptimizationIterations(max_iter);
 }
 
-double Shape::GaussianShapeAlignment::getRefinementStopGradient() const
+std::size_t Shape::GaussianShapeAlignment::getMaxNumOptimizationIterations() const
 {
-	return shapeFuncAlmnt.getRefinementStopGradient();
+	return shapeFuncAlmnt.getMaxNumOptimizationIterations();
+}
+
+void Shape::GaussianShapeAlignment::setOptimizationStopGradient(double grad_norm)
+{
+	shapeFuncAlmnt.setOptimizationStopGradient(grad_norm);
+}
+
+double Shape::GaussianShapeAlignment::getOptimizationStopGradient() const
+{
+	return shapeFuncAlmnt.getOptimizationStopGradient();
 }
 
 void Shape::GaussianShapeAlignment::setMaxOrder(std::size_t max_order)
@@ -343,8 +353,7 @@ bool Shape::GaussianShapeAlignment::align(const GaussianShape& shape)
 		if (!shapeFuncAlmnt.align(algdShapeFunc, algdShapeMetaData.symClass, calcColOverlaps)) 
 			continue;
 
-		for (std::size_t j = 0, num_res = shapeFuncAlmnt.getNumResults(); j < num_res; j++)
-			processResult(i, 0, j, shapeFuncAlmnt.getResult(j));
+		processResult(i, 0);
 	}
 
 	return !results.empty();
@@ -367,8 +376,7 @@ bool Shape::GaussianShapeAlignment::align(const GaussianShapeSet& shapes)
 			if (!shapeFuncAlmnt.align(algdShapeFunc, algdShapeMetaData.symClass, calcColOverlaps))
 				continue;
 
-			for (std::size_t k = 0, num_res = shapeFuncAlmnt.getNumResults(); k < num_res; k++)
-				processResult(j, i, k, shapeFuncAlmnt.getResult(k));
+			processResult(j, i);
 		}
 	}
 
@@ -405,14 +413,13 @@ void Shape::GaussianShapeAlignment::prepareForAlignment(GaussianShapeFunction& f
 	data.symClass = (ref ? shapeFuncAlmnt.setupReference(func, data.transform) : shapeFuncAlmnt.setupAligned(func, data.transform));
 }
 
-void Shape::GaussianShapeAlignment::processResult(std::size_t ref_idx, std::size_t al_idx, std::size_t start_idx, 
-												  const GaussianShapeFunctionAlignment::Result& res)
+void Shape::GaussianShapeAlignment::processResult(std::size_t ref_idx, std::size_t al_idx)
 {
 	AlignmentResult curr_res;
 	std::size_t out_res_idx = 0;
 
-	curr_res.setOverlap(res.getOverlap());
-	curr_res.setColorOverlap(res.getColorOverlap());
+	curr_res.setOverlap(shapeFuncAlmnt.getOverlap());
+	curr_res.setColorOverlap(shapeFuncAlmnt.getColorOverlap());
 	curr_res.setReferenceSelfOverlap(refShapeMetaData[ref_idx].selfOverlap);
 	curr_res.setReferenceColorSelfOverlap(refShapeMetaData[ref_idx].colSelfOverlap);
 	curr_res.setAlignedSelfOverlap(algdShapeMetaData.selfOverlap);
@@ -457,12 +464,11 @@ void Shape::GaussianShapeAlignment::processResult(std::size_t ref_idx, std::size
 			return;
 	}
 
-	Math::Matrix4D tmp(prod(refShapeMetaData[ref_idx].transform, res.getTransform()));
+	Math::Matrix4D tmp(prod(refShapeMetaData[ref_idx].transform, shapeFuncAlmnt.getTransform()));
 
 	curr_res.setTransform(prod(tmp, algdShapeMetaData.transform));
 	curr_res.setReferenceShapeIndex(ref_idx);
 	curr_res.setAlignedShapeIndex(al_idx);
-	curr_res.setStartingPoseID(start_idx);
 
 	results[out_res_idx] = curr_res;
 }

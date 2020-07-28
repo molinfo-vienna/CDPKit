@@ -32,7 +32,6 @@
 #define CDPL_SHAPE_GAUSSIANSHAPEFUNCTIONALIGNMENT_HPP
 
 #include <cstddef>
-#include <vector>
 
 #include <boost/shared_ptr.hpp>
 
@@ -60,41 +59,10 @@ namespace CDPL
 		{
 
 		  public:
-			class Result
-			{
-
-			public:
-				Result(const Math::Matrix4D& xform, double overlap, double col_overlap):
-					transform(xform), overlap(overlap), colOverlap(col_overlap) {}
-
-				const Math::Matrix4D& getTransform() const {
-					return transform;
-				}
-
-				double getOverlap() const {
-					return overlap;
-				}
-
-				double getColorOverlap() const {
-					return colOverlap;
-				}
-				
-			private:
-				Math::Matrix4D transform;
-				double         overlap;
-				double         colOverlap;
-			};
-
-		  private:
-			typedef std::vector<Result> ResultList;
-			
-		  public:
-			static const double      DEF_REFINEMENT_STOP_GRADIENT;
-			static const std::size_t DEF_MAX_REFINEMENT_ITERATIONS = 20;
+			static const double      DEF_OPTIMIZATION_STOP_GRADIENT;
+			static const std::size_t DEF_MAX_OPTIMIZATION_ITERATIONS = 20;
 
 			typedef boost::shared_ptr<GaussianShapeFunctionAlignment> SharedPointer;
-
-			typedef ResultList::const_iterator ConstResultIterator;
 
 			typedef GaussianShapeOverlapFunction::ColorFilterFunction ColorFilterFunction;
 			typedef GaussianShapeOverlapFunction::ColorMatchFunction ColorMatchFunction;
@@ -129,17 +97,21 @@ namespace CDPL
 
 			const ColorFilterFunction& getColorFilterFunction() const;
 
-			void refineStartingPoses(bool refine);
+			void optimizeOverlap(bool optimize);
 
-			bool refineStartingPoses() const;
+			bool optimizeOverlap() const;
 
-			void setMaxNumRefinementIterations(std::size_t max_iter);
+			void rigorousOptimization(bool rigorous);
 
-			std::size_t getMaxNumRefinementIterations() const;
+			bool rigorousOptimization() const;
 
-			void setRefinementStopGradient(double grad_norm);
+			void setMaxNumOptimizationIterations(std::size_t max_iter);
 
-			double getRefinementStopGradient() const;
+			std::size_t getMaxNumOptimizationIterations() const;
+
+			void setOptimizationStopGradient(double grad_norm);
+
+			double getOptimizationStopGradient() const;
 
 			unsigned int setupReference(GaussianShapeFunction& func, Math::Matrix4D& xform) const;
 
@@ -155,13 +127,11 @@ namespace CDPL
 
 			bool align(const GaussianShapeFunction& func, unsigned int sym_class, bool calc_col_overlap = false);
 
-			std::size_t getNumResults() const;
+			const Math::Matrix4D& getTransform() const;
 
-			const Result& getResult(std::size_t idx) const;
+			double getOverlap() const;
 
-			ConstResultIterator getResultsBegin() const;
-
-			ConstResultIterator getResultsEnd() const;
+			double getColorOverlap() const;
 						
 		  private:
 			GaussianShapeFunctionAlignment(const GaussianShapeFunctionAlignment& alignment);
@@ -181,15 +151,17 @@ namespace CDPL
 			GaussianShapeAlignmentStartGenerator* startGen;
 			const GaussianShapeFunction*          refShapeFunc;
 			unsigned int                          refShapeSymClass;
-			bool                                  refStartPoses;
-			std::size_t                           maxNumRefIters;
-			double                                refStopGrad;
-			ColorFilterFunction                   colFilterFunc;
+			bool                                  optOverlap;
+			bool                                  rigOptimization;
+			std::size_t                           maxNumOptIters;
+			double                                optStopGrad;
 			Math::Vector3DArray                   startPoseCoords;
 			Math::Vector3DArray                   optPoseCoords;
 			Math::Vector3DArray                   optPoseCoordsGrad;
 			BFGSMinimizer                         minimizer;
-			ResultList                            results;
+			Math::Matrix4D                        transform;
+			double                                overlap;
+			double                                colOverlap;
 		};
 
 		/**

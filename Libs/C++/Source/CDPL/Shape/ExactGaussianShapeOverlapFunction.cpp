@@ -40,16 +40,17 @@ using namespace CDPL;
 
 
 Shape::ExactGaussianShapeOverlapFunction::ExactGaussianShapeOverlapFunction():
-	refShapeFunc(0), ovlShapeFunc(0), colorMatchFunc()
+	refShapeFunc(0), ovlShapeFunc(0), colorMatchFunc(), colorFilterFunc()
 {}
 
 Shape::ExactGaussianShapeOverlapFunction::ExactGaussianShapeOverlapFunction(const ExactGaussianShapeOverlapFunction& func):
-	refShapeFunc(func.refShapeFunc), ovlShapeFunc(func.ovlShapeFunc), colorMatchFunc(func.colorMatchFunc)
+	refShapeFunc(func.refShapeFunc), ovlShapeFunc(func.ovlShapeFunc), colorMatchFunc(func.colorMatchFunc),
+	colorFilterFunc(func.colorFilterFunc)
 {}
 
 Shape::ExactGaussianShapeOverlapFunction::ExactGaussianShapeOverlapFunction(const GaussianShapeFunction& ref_shape_func,
 																			const GaussianShapeFunction& ovl_shape_func):
-	refShapeFunc(&ref_shape_func), ovlShapeFunc(&ovl_shape_func), colorMatchFunc()
+	refShapeFunc(&ref_shape_func), ovlShapeFunc(&ovl_shape_func), colorMatchFunc(), colorFilterFunc()
 {}
 
 Shape::ExactGaussianShapeOverlapFunction::~ExactGaussianShapeOverlapFunction() {}
@@ -74,50 +75,93 @@ const Shape::GaussianShapeOverlapFunction::ColorMatchFunction& Shape::ExactGauss
 	return colorMatchFunc;
 }
 
-double Shape::ExactGaussianShapeOverlapFunction::calcSelfOverlap(bool ref, const ColorFilterFunction& col_filter_func) const
+void Shape::ExactGaussianShapeOverlapFunction::setColorFilterFunction(const ColorFilterFunction& func)
+{
+	colorFilterFunc = func;
+}
+
+const Shape::GaussianShapeOverlapFunction::ColorFilterFunction& Shape::ExactGaussianShapeOverlapFunction::getColorFilterFunction() const
+{
+	return colorFilterFunc;
+}
+
+double Shape::ExactGaussianShapeOverlapFunction::calcSelfOverlap(bool ref) const
 {
 	if (ref) {
 		if (!refShapeFunc)
 			return 0.0;
 		
-		return calcOverlap(refShapeFunc->getProductList(), refShapeFunc->getProductList(), col_filter_func);
+		return calcOverlap(refShapeFunc->getProductList(), refShapeFunc->getProductList(), false);
 	}
 
 	if (!ovlShapeFunc)
 		return 0.0;
 		
-	return calcOverlap(ovlShapeFunc->getProductList(), ovlShapeFunc->getProductList(), col_filter_func);
+	return calcOverlap(ovlShapeFunc->getProductList(), ovlShapeFunc->getProductList(), false);
 }
 
-double Shape::ExactGaussianShapeOverlapFunction::calcOverlap(const ColorFilterFunction& col_filter_func) const
+double Shape::ExactGaussianShapeOverlapFunction::calcColorSelfOverlap(bool ref) const
+{
+	if (ref) {
+		if (!refShapeFunc)
+			return 0.0;
+		
+		return calcOverlap(refShapeFunc->getProductList(), refShapeFunc->getProductList(), true);
+	}
+
+	if (!ovlShapeFunc)
+		return 0.0;
+		
+	return calcOverlap(ovlShapeFunc->getProductList(), ovlShapeFunc->getProductList(), true);
+}
+
+double Shape::ExactGaussianShapeOverlapFunction::calcOverlap() const
 {
 	if (!checkShapeFuncsNotNull())
 		return 0.0;
 	
-	return calcOverlap(refShapeFunc->getProductList(), ovlShapeFunc->getProductList(), col_filter_func);
+	return calcOverlap(refShapeFunc->getProductList(), ovlShapeFunc->getProductList(), false);
 }
 
-double Shape::ExactGaussianShapeOverlapFunction::calcOverlap(const Math::Vector3DArray& coords, const ColorFilterFunction& col_filter_func) const
+double Shape::ExactGaussianShapeOverlapFunction::calcColorOverlap() const
 {
 	if (!checkShapeFuncsNotNull())
-		return 0.0;
-
-	if (coords.getSize() != ovlShapeFunc->getProductList()->getNumShapeElements())
 		return 0.0;
 	
-	return calcOverlap(refShapeFunc->getProductList(), ovlShapeFunc->getProductList(), coords, col_filter_func);
+	return calcOverlap(refShapeFunc->getProductList(), ovlShapeFunc->getProductList(), true);
 }
 
-double Shape::ExactGaussianShapeOverlapFunction::calcOverlapGradient(const Math::Vector3DArray& coords, Math::Vector3DArray& grad, 
-																	 const ColorFilterFunction& col_filter_func) const
+double Shape::ExactGaussianShapeOverlapFunction::calcOverlap(const Math::Vector3DArray& coords) const
 {
 	if (!checkShapeFuncsNotNull())
 		return 0.0;
 
-	if (coords.getSize() != ovlShapeFunc->getProductList()->getNumShapeElements())
+	if (coords.getSize() < ovlShapeFunc->getProductList()->getNumShapeElements())
+		return 0.0;
+	
+	return calcOverlap(refShapeFunc->getProductList(), ovlShapeFunc->getProductList(), coords, false);
+}
+
+double Shape::ExactGaussianShapeOverlapFunction::calcColorOverlap(const Math::Vector3DArray& coords) const
+{
+	if (!checkShapeFuncsNotNull())
 		return 0.0;
 
-	return calcOverlapGradient(refShapeFunc->getProductList(), ovlShapeFunc->getProductList(), coords, grad, col_filter_func);
+	if (coords.getSize() < ovlShapeFunc->getProductList()->getNumShapeElements())
+		return 0.0;
+	
+	return calcOverlap(refShapeFunc->getProductList(), ovlShapeFunc->getProductList(), coords, true);
+}
+
+double Shape::ExactGaussianShapeOverlapFunction::calcOverlapGradient(const Math::Vector3DArray& coords, Math::Vector3DArray& grad) const
+{
+	if (!checkShapeFuncsNotNull())
+		return 0.0;
+
+	if (coords.getSize() < ovlShapeFunc->getProductList()->getNumShapeElements())
+		return 0.0;
+
+	return calcOverlapGradient(refShapeFunc->getProductList(), ovlShapeFunc->getProductList(), coords, grad);
 }
 
 Shape::ExactGaussianShapeOverlapFunction& Shape::ExactGaussianShapeOverlapFunction::operator=(const ExactGaussianShapeOverlapFunction& func)
@@ -128,6 +172,7 @@ Shape::ExactGaussianShapeOverlapFunction& Shape::ExactGaussianShapeOverlapFuncti
 	refShapeFunc = func.refShapeFunc;
 	ovlShapeFunc = func.ovlShapeFunc;
 	colorMatchFunc = func.colorMatchFunc;
+	colorFilterFunc = func.colorFilterFunc;
 
 	return *this;
 }
@@ -138,7 +183,7 @@ bool Shape::ExactGaussianShapeOverlapFunction::checkShapeFuncsNotNull() const
 }
 
 double Shape::ExactGaussianShapeOverlapFunction::calcOverlap(const GaussianProductList* ref_prod_list, const GaussianProductList* ovl_prod_list,
-															 const ColorFilterFunction& col_filter_func) const
+															 bool color) const
 {
 	double overlap = 0.0;
 
@@ -146,9 +191,15 @@ double Shape::ExactGaussianShapeOverlapFunction::calcOverlap(const GaussianProdu
 		const GaussianProduct* prod1 = *p_it1;
 		std::size_t prod1_color = prod1->getColor();
 
-		if (col_filter_func && !col_filter_func(prod1_color))
-			continue;
+		if (color) {
+			if (colorFilterFunc) {
+				if (!colorFilterFunc(prod1_color))
+					continue;
 
+			} else if (prod1_color == 0)
+				continue;
+		}
+		
 		double prod1_delta = prod1->getDelta();
 		double prod1_weight = prod1->getWeightFactor();
 		double prod1_fact_exp = prod1_delta * prod1->getProductFactorExponent();
@@ -159,8 +210,14 @@ double Shape::ExactGaussianShapeOverlapFunction::calcOverlap(const GaussianProdu
 			const GaussianProduct* prod2 = *p_it2;
 			std::size_t prod2_color = prod2->getColor();
 
-			if (col_filter_func && !col_filter_func(prod2_color))
-				continue;
+			if (color) {
+				if (colorFilterFunc) {
+					if (!colorFilterFunc(prod2_color))
+						continue;
+
+				} else if (prod2_color == 0)
+					continue;
+			}
 
 			if (!colorMatchFunc) {
 				if (prod2_color != prod1_color)
@@ -192,7 +249,7 @@ double Shape::ExactGaussianShapeOverlapFunction::calcOverlap(const GaussianProdu
 }
 
 double Shape::ExactGaussianShapeOverlapFunction::calcOverlap(const GaussianProductList* ref_prod_list, const GaussianProductList* ovl_prod_list,
-															const Math::Vector3DArray& coords, const ColorFilterFunction& col_filter_func) const
+															const Math::Vector3DArray& coords, bool color) const
 {
 	const Math::Vector3DArray::StorageType& coords_data = coords.getData();
 	Math::Vector3D ovl_prod_ctr;
@@ -203,8 +260,14 @@ double Shape::ExactGaussianShapeOverlapFunction::calcOverlap(const GaussianProdu
 		const GaussianProduct* prod1 = *p_it1;
 		std::size_t prod1_color = prod1->getColor();
 
-		if (col_filter_func && !col_filter_func(prod1_color))
-			continue;
+		if (color) {
+			if (colorFilterFunc) {
+				if (!colorFilterFunc(prod1_color))
+					continue;
+
+			} else if (prod1_color == 0)
+				continue;
+		}
 
 		double prod1_delta = prod1->getDelta();
 		double prod1_weight = prod1->getWeightFactor();
@@ -243,8 +306,14 @@ double Shape::ExactGaussianShapeOverlapFunction::calcOverlap(const GaussianProdu
 			const GaussianProduct* prod2 = *p_it2;
 			std::size_t prod2_color = prod2->getColor();
 
-			if (col_filter_func && !col_filter_func(prod2_color))
-				continue;
+			if (color) {
+				if (colorFilterFunc) {
+					if (!colorFilterFunc(prod2_color))
+						continue;
+
+				} else if (prod2_color == 0)
+					continue;
+			}
 
 			if (!colorMatchFunc) {
 				if (prod2_color != prod1_color)
@@ -276,8 +345,7 @@ double Shape::ExactGaussianShapeOverlapFunction::calcOverlap(const GaussianProdu
 }
 
 double Shape::ExactGaussianShapeOverlapFunction::calcOverlapGradient(const GaussianProductList* ref_prod_list, const GaussianProductList* ovl_prod_list,
-																	 const Math::Vector3DArray& coords, Math::Vector3DArray& grad,
-																	 const ColorFilterFunction& col_filter_func) const
+																	 const Math::Vector3DArray& coords, Math::Vector3DArray& grad) const
 {
 	grad.assign(ovl_prod_list->getNumShapeElements(), Math::Vector3D());
 
@@ -292,10 +360,6 @@ double Shape::ExactGaussianShapeOverlapFunction::calcOverlapGradient(const Gauss
 	for (GaussianProductList::ConstProductIterator p_it1 = ovl_prod_list->getProductsBegin(), p_end1 = ovl_prod_list->getProductsEnd(); p_it1 != p_end1; ++p_it1) {
 		const GaussianProduct* prod1 = *p_it1;
 		std::size_t prod1_color = prod1->getColor();
-
-		if (col_filter_func && !col_filter_func(prod1_color))
-			continue;
-
 		double prod1_delta = prod1->getDelta();
 		double prod1_weight = prod1->getWeightFactor();
 		bool prod1_odd = prod1->hasOddOrder();
@@ -332,9 +396,6 @@ double Shape::ExactGaussianShapeOverlapFunction::calcOverlapGradient(const Gauss
 		for (GaussianProductList::ConstProductIterator p_it2 = ref_prod_list->getProductsBegin(), p_end2 = ref_prod_list->getProductsEnd(); p_it2 != p_end2; ++p_it2) {
 			const GaussianProduct* prod2 = *p_it2;
 			std::size_t prod2_color = prod2->getColor();
-
-			if (col_filter_func && !col_filter_func(prod2_color))
-				continue;
 
 			if (!colorMatchFunc) {
 				if (prod2_color != prod1_color)

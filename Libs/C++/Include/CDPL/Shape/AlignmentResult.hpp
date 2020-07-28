@@ -69,11 +69,7 @@ namespace CDPL
 			std::size_t getAlignedShapeIndex() const;
 
 			void setAlignedShapeIndex(std::size_t idx);
-
-			std::size_t getStartingPoseID() const;
-
-			void setStartingPoseID(std::size_t id);
-				
+		
 			double getReferenceSelfOverlap() const;
 
 			void setReferenceSelfOverlap(double overlap);
@@ -103,7 +99,6 @@ namespace CDPL
 			double         score;
 			std::size_t    refShapeIdx;
 			std::size_t    algdShapeIdx;
-			std::size_t    startPoseID;
 			double         refSelfOverlap;
 			double         refColSelfOverlap;
 			double         algdSelfOverlap;

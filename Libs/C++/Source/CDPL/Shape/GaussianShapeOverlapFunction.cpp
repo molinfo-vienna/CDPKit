@@ -32,29 +32,3 @@
 using namespace CDPL;
 
 
-namespace
-{
-
-	const Shape::GaussianShapeOverlapFunction::ColorFilterFunction VOID_FILTER;
-}
-
-
-double Shape::GaussianShapeOverlapFunction::calcSelfOverlap(bool ref) const
-{
-	return calcSelfOverlap(ref, VOID_FILTER);
-}
-
-double Shape::GaussianShapeOverlapFunction::calcOverlap() const
-{
-	return calcOverlap(VOID_FILTER);
-}
-
-double Shape::GaussianShapeOverlapFunction::calcOverlap(const Math::Vector3DArray& coords) const
-{
-	return calcOverlap(coords, VOID_FILTER);
-}
-
-double Shape::GaussianShapeOverlapFunction::calcOverlapGradient(const Math::Vector3DArray& coords, Math::Vector3DArray& grad) const
-{
-	return calcOverlapGradient(coords, grad, VOID_FILTER);
-}

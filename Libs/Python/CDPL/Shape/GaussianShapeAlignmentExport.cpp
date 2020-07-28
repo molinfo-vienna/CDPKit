@@ -84,17 +84,21 @@ void CDPLPythonShape::exportGaussianShapeAlignment()
 			 (python::arg("self"), python::arg("mode")))
 		.def("getResultSelectionMode", &Shape::GaussianShapeAlignment::getResultSelectionMode,
 			 python::arg("self"))
-		.def("setMaxNumRefinementIterations", &Shape::GaussianShapeAlignment::setMaxNumRefinementIterations,
+		.def("setMaxNumOptimizationIterations", &Shape::GaussianShapeAlignment::setMaxNumOptimizationIterations,
 			 (python::arg("self"), python::arg("max_iter")))
-		.def("getMaxNumRefinementIterations", &Shape::GaussianShapeAlignment::getMaxNumRefinementIterations,
+		.def("getMaxNumOptimizationIterations", &Shape::GaussianShapeAlignment::getMaxNumOptimizationIterations,
 			 python::arg("self"))
-		.def("setRefinementStopGradient", &Shape::GaussianShapeAlignment::setRefinementStopGradient,
+		.def("setOptimizationStopGradient", &Shape::GaussianShapeAlignment::setOptimizationStopGradient,
 			 (python::arg("self"), python::arg("grad_norm")))
-		.def("getRefinementStopGradient", &Shape::GaussianShapeAlignment::getRefinementStopGradient,
+		.def("getOptimizationStopGradient", &Shape::GaussianShapeAlignment::getOptimizationStopGradient,
 			 python::arg("self"))
-		.def("refineStartingPoses", SetBoolFunc(&Shape::GaussianShapeAlignment::refineStartingPoses),
-			 (python::arg("self"), python::arg("refine")))
-		.def("refineStartingPoses", GetBoolFunc(&Shape::GaussianShapeAlignment::refineStartingPoses),
+		.def("optimizeOverlap", SetBoolFunc(&Shape::GaussianShapeAlignment::optimizeOverlap),
+			 (python::arg("self"), python::arg("optimize")))
+		.def("optimizeOverlap", GetBoolFunc(&Shape::GaussianShapeAlignment::optimizeOverlap),
+			 python::arg("self"))
+		.def("rigorousOptimization", SetBoolFunc(&Shape::GaussianShapeAlignment::rigorousOptimization),
+			 (python::arg("self"), python::arg("rigorous")))
+		.def("rigorousOptimization", GetBoolFunc(&Shape::GaussianShapeAlignment::rigorousOptimization),
 			 python::arg("self"))
 		.def("calcColorOverlaps", SetBoolFunc(&Shape::GaussianShapeAlignment::calcColorOverlaps),
 			 (python::arg("self"), python::arg("calc")))
@@ -134,8 +138,8 @@ void CDPLPythonShape::exportGaussianShapeAlignment()
 			 (python::arg("self"), python::arg("idx")), python::return_internal_reference<>())
 		.def("__getitem__", &Shape::GaussianShapeAlignment::getResult,
 			 (python::arg("self"), python::arg("idx")), python::return_internal_reference<>())
-		.def_readonly("DEF_REFINEMENT_STOP_GRADIENT", Shape::GaussianShapeAlignment::DEF_REFINEMENT_STOP_GRADIENT)
-		.def_readonly("DEF_MAX_REFINEMENT_ITERATIONS", Shape::GaussianShapeAlignment::DEF_MAX_REFINEMENT_ITERATIONS)
+		.def_readonly("DEF_OPTIMIZATION_STOP_GRADIENT", Shape::GaussianShapeAlignment::DEF_OPTIMIZATION_STOP_GRADIENT)
+		.def_readonly("DEF_MAX_OPTIMIZATION_ITERATIONS", Shape::GaussianShapeAlignment::DEF_MAX_OPTIMIZATION_ITERATIONS)
 		.def_readonly("DEF_MAX_PRODUCT_ORDER", &Shape::GaussianShapeAlignment::DEF_MAX_PRODUCT_ORDER)
 		.def_readonly("DEF_DISTANCE_CUTOFF", &Shape::GaussianShapeAlignment::DEF_DISTANCE_CUTOFF)
 		.add_property("numResults", &Shape::GaussianShapeAlignment::getNumResults)
@@ -144,7 +148,7 @@ void CDPLPythonShape::exportGaussianShapeAlignment()
 											python::return_internal_reference<>()),
 					  python::make_function(&Shape::GaussianShapeAlignment::setOverlapFunction,
 											python::with_custodian_and_ward<1, 2>()))
-		.add_property("defOverlapFunction",
+		.add_property("defaultOverlapFunction",
 					  python::make_function(static_cast<Shape::FastGaussianShapeOverlapFunction& (Shape::GaussianShapeAlignment::*)()>
 											(&Shape::GaussianShapeAlignment::getDefaultOverlapFunction),
 											python::return_internal_reference<>()))
@@ -153,7 +157,7 @@ void CDPLPythonShape::exportGaussianShapeAlignment()
 											python::return_internal_reference<>()),
 					  python::make_function(&Shape::GaussianShapeAlignment::setStartGenerator,
 											python::with_custodian_and_ward<1, 2>()))
-		.add_property("defStartGenerator",
+		.add_property("defaultStartGenerator",
 					  python::make_function(static_cast<Shape::PrincipalAxesAlignmentStartGenerator& (Shape::GaussianShapeAlignment::*)()>
 											(&Shape::GaussianShapeAlignment::getDefaultStartGenerator),
 											python::return_internal_reference<>()))
@@ -171,12 +175,14 @@ void CDPLPythonShape::exportGaussianShapeAlignment()
 					  &Shape::GaussianShapeAlignment::setScoringFunction)
 		.add_property("resultSelectionMode", &Shape::GaussianShapeAlignment::getResultSelectionMode,
 					  &Shape::GaussianShapeAlignment::setResultSelectionMode)
-		.add_property("maxNumRefinementIterations", &Shape::GaussianShapeAlignment::getMaxNumRefinementIterations,
-					  &Shape::GaussianShapeAlignment::setMaxNumRefinementIterations)
-		.add_property("refinementStopGradient", &Shape::GaussianShapeAlignment::getRefinementStopGradient,
-					  &Shape::GaussianShapeAlignment::setRefinementStopGradient)
-		.add_property("refineStartPoses", GetBoolFunc(&Shape::GaussianShapeAlignment::refineStartingPoses),
-					  SetBoolFunc(&Shape::GaussianShapeAlignment::refineStartingPoses))
+		.add_property("maxNumOptIterations", &Shape::GaussianShapeAlignment::getMaxNumOptimizationIterations,
+					  &Shape::GaussianShapeAlignment::setMaxNumOptimizationIterations)
+		.add_property("optStopGradient", &Shape::GaussianShapeAlignment::getOptimizationStopGradient,
+					  &Shape::GaussianShapeAlignment::setOptimizationStopGradient)
+		.add_property("optOverlap", GetBoolFunc(&Shape::GaussianShapeAlignment::optimizeOverlap),
+					  SetBoolFunc(&Shape::GaussianShapeAlignment::optimizeOverlap))
+		.add_property("rigorousOpt", GetBoolFunc(&Shape::GaussianShapeAlignment::rigorousOptimization),
+					  SetBoolFunc(&Shape::GaussianShapeAlignment::rigorousOptimization))
 		.add_property("selfOverlaps", GetBoolFunc(&Shape::GaussianShapeAlignment::calcSelfOverlaps),
 					  SetBoolFunc(&Shape::GaussianShapeAlignment::calcSelfOverlaps))
 		.add_property("colorSelfOverlaps", GetBoolFunc(&Shape::GaussianShapeAlignment::calcColorSelfOverlaps),

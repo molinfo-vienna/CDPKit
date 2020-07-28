@@ -61,10 +61,6 @@ void CDPLPythonShape::exportAlignmentResult()
 			 python::arg("self"))
 		.def("setAlignedShapeIndex", &Shape::AlignmentResult::setAlignedShapeIndex, 
 			 (python::arg("self"), python::arg("idx")))
-		.def("getStartingPoseID", &Shape::AlignmentResult::getStartingPoseID, 
-			 python::arg("self"))
-		.def("setStartingPoseID", &Shape::AlignmentResult::setStartingPoseID, 
-			 (python::arg("self"), python::arg("id")))
 		.def("getOverlap", &Shape::AlignmentResult::getOverlap, 
 			 python::arg("self"))
 		.def("setOverlap", &Shape::AlignmentResult::setOverlap, 
@@ -101,9 +97,6 @@ void CDPLPythonShape::exportAlignmentResult()
 		.add_property("alignedShapeIndex", 
 					  &Shape::AlignmentResult::getAlignedShapeIndex, 
 					  &Shape::AlignmentResult::setAlignedShapeIndex)
-		.add_property("startingPoseID", 
-					  &Shape::AlignmentResult::getStartingPoseID, 
-					  &Shape::AlignmentResult::setStartingPoseID)
 		.add_property("overlap", 
 					  &Shape::AlignmentResult::getOverlap, 
 					  &Shape::AlignmentResult::setOverlap)
