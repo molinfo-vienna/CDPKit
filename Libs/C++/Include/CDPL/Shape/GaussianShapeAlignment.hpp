@@ -215,7 +215,7 @@ namespace CDPL
 
 			void prepareForAlignment(GaussianShapeFunction& func, ShapeMetaData& data, bool ref);
 
-			void processResult(std::size_t ref_idx, std::size_t al_idx);
+			void processResults(std::size_t ref_idx, std::size_t al_idx);
 
 			bool getResultIndex(std::size_t ref_idx, std::size_t al_idx, std::size_t& res_idx);
 
@@ -228,7 +228,6 @@ namespace CDPL
 			ShapeFunctionCache             shapeFuncCache;
 			bool                           calcSlfOverlaps;
 			bool                           calcColSlfOverlaps;
-			bool                           calcColOverlaps;
 			ResultSelectionMode            resultSelMode;
 			ResultCompareFunction          resultCmpFunc;
 			ScoringFunction                scoringFunc;

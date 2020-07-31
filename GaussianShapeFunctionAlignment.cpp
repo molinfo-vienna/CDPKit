@@ -37,7 +37,7 @@
 
 #include "Utilities.hpp"
 
-
+//#include <iostream>
 using namespace CDPL;
 
 
@@ -47,25 +47,30 @@ namespace
 	const double QUATERNION_UNITY_DEVIATION_PENALTY_FACTOR = 10000.0;
 	const double BFGS_MINIMIZER_STEP_SIZE                  = 0.01;
 	const double BFGS_MINIMIZER_TOLERANCE                  = 0.1;
+
+	bool defColorFilterFunc(std::size_t col) 
+	{
+		return (col != 0);
+	}
 }
 
 
-const double      Shape::GaussianShapeFunctionAlignment::DEF_OPTIMIZATION_STOP_GRADIENT = 1.0;
-const std::size_t Shape::GaussianShapeFunctionAlignment::DEF_MAX_OPTIMIZATION_ITERATIONS;
+const double      Shape::GaussianShapeFunctionAlignment::DEF_REFINEMENT_STOP_GRADIENT = 1.0;
+const std::size_t Shape::GaussianShapeFunctionAlignment::DEF_MAX_REFINEMENT_ITERATIONS;
 
 
 Shape::GaussianShapeFunctionAlignment::GaussianShapeFunctionAlignment():
-	overlapFunc(&defOverlapFunc), startGen(&defStartGen), refShapeFunc(0), refShapeSymClass(SymmetryClass::UNDEF), calcColOverlaps(true),
-	optOverlap(true), rigOptimization(false), maxNumOptIters(DEF_MAX_OPTIMIZATION_ITERATIONS), optStopGrad(DEF_OPTIMIZATION_STOP_GRADIENT),
-	minimizer(boost::bind(&GaussianShapeFunctionAlignment::calcAlignmentFunctionValue, this, _1),
-			  boost::bind(&GaussianShapeFunctionAlignment::calcAlignmentFunctionGradient, this, _1, _2))
+	overlapFunc(&defOverlapFunc), startGen(&defStartGen), refShapeFunc(0), refShapeSymClass(SymmetryClass::UNDEF),
+	refStartPoses(true), maxNumRefIters(DEF_MAX_REFINEMENT_ITERATIONS), refStopGrad(DEF_REFINEMENT_STOP_GRADIENT),
+	colFilterFunc(&defColorFilterFunc), minimizer(boost::bind(&GaussianShapeFunctionAlignment::calcAlignmentFunctionValue, this, _1),
+												  boost::bind(&GaussianShapeFunctionAlignment::calcAlignmentFunctionGradient, this, _1, _2))
 {}
 
 Shape::GaussianShapeFunctionAlignment::GaussianShapeFunctionAlignment(const GaussianShapeFunction& ref_func, unsigned int sym_class):
-	overlapFunc(&defOverlapFunc), startGen(&defStartGen), calcColOverlaps(true),
-	optOverlap(true), rigOptimization(false), maxNumOptIters(DEF_MAX_OPTIMIZATION_ITERATIONS), optStopGrad(DEF_OPTIMIZATION_STOP_GRADIENT),
-	minimizer(boost::bind(&GaussianShapeFunctionAlignment::calcAlignmentFunctionValue, this, _1),
-			  boost::bind(&GaussianShapeFunctionAlignment::calcAlignmentFunctionGradient, this, _1, _2))
+	overlapFunc(&defOverlapFunc), startGen(&defStartGen),
+	refStartPoses(true), maxNumRefIters(DEF_MAX_REFINEMENT_ITERATIONS), refStopGrad(DEF_REFINEMENT_STOP_GRADIENT),
+	colFilterFunc(&defColorFilterFunc), minimizer(boost::bind(&GaussianShapeFunctionAlignment::calcAlignmentFunctionValue, this, _1),
+												  boost::bind(&GaussianShapeFunctionAlignment::calcAlignmentFunctionGradient, this, _1, _2))
 {
    setReference(ref_func,  sym_class);
 }
@@ -124,52 +129,45 @@ const Shape::GaussianShapeFunctionAlignment::ColorMatchFunction& Shape::Gaussian
 
 void Shape::GaussianShapeFunctionAlignment::setColorFilterFunction(const ColorFilterFunction& func)
 {
-	overlapFunc->setColorFilterFunction(func);
+	if (!func)
+		colFilterFunc = &defColorFilterFunc;
+	else
+		colFilterFunc = func;
 }
 
 const Shape::GaussianShapeFunctionAlignment::ColorFilterFunction& Shape::GaussianShapeFunctionAlignment::getColorFilterFunction() const
 {
-	return overlapFunc->getColorFilterFunction();
+	return colFilterFunc;
 }
 
-void Shape::GaussianShapeFunctionAlignment::optimizeOverlap(bool optimize)
+void Shape::GaussianShapeFunctionAlignment::refineStartingPoses(bool refine)
 {
-	optOverlap = optimize;
+	refStartPoses = refine;
 }
 
-bool Shape::GaussianShapeFunctionAlignment::optimizeOverlap() const
+bool Shape::GaussianShapeFunctionAlignment::refineStartingPoses() const
 {
-	return optOverlap;
+	return refStartPoses;
 }
 
-void Shape::GaussianShapeFunctionAlignment::rigorousOptimization(bool rigorous)
+void Shape::GaussianShapeFunctionAlignment::setMaxNumRefinementIterations(std::size_t max_iter)
 {
-	rigOptimization = rigorous;
+	maxNumRefIters = max_iter;
 }
 
-bool Shape::GaussianShapeFunctionAlignment::rigorousOptimization() const
+std::size_t Shape::GaussianShapeFunctionAlignment::getMaxNumRefinementIterations() const
 {
-	return rigOptimization;
+	return maxNumRefIters;
 }
 
-void Shape::GaussianShapeFunctionAlignment::setMaxNumOptimizationIterations(std::size_t max_iter)
+void Shape::GaussianShapeFunctionAlignment::setRefinementStopGradient(double grad_norm)
 {
-	maxNumOptIters = max_iter;
+	refStopGrad = grad_norm;
 }
 
-std::size_t Shape::GaussianShapeFunctionAlignment::getMaxNumOptimizationIterations() const
+double Shape::GaussianShapeFunctionAlignment::getRefinementStopGradient() const
 {
-	return maxNumOptIters;
-}
-
-void Shape::GaussianShapeFunctionAlignment::setOptimizationStopGradient(double grad_norm)
-{
-	optStopGrad = grad_norm;
-}
-
-double Shape::GaussianShapeFunctionAlignment::getOptimizationStopGradient() const
-{
-	return optStopGrad;
+	return refStopGrad;
 }
 
 unsigned int Shape::GaussianShapeFunctionAlignment::setupReference(GaussianShapeFunction& func, Math::Matrix4D& xform) const
@@ -207,20 +205,10 @@ double Shape::GaussianShapeFunctionAlignment::calcColorSelfOverlap(const Gaussia
 {
 	overlapFunc->setShapeFunction(func, false);
 
-	return overlapFunc->calcColorSelfOverlap(false);
+	return overlapFunc->calcSelfOverlap(false, colFilterFunc);
 }
 
-void Shape::GaussianShapeFunctionAlignment::calcColorOverlaps(bool calc)
-{
-	calcColOverlaps = calc;
-}
-
-bool Shape::GaussianShapeFunctionAlignment::calcColorOverlaps() const
-{
-	return calcColOverlaps;
-}
-
-bool Shape::GaussianShapeFunctionAlignment::align(const GaussianShapeFunction& func, unsigned int sym_class)
+bool Shape::GaussianShapeFunctionAlignment::align(const GaussianShapeFunction& func, unsigned int sym_class, bool calc_col_overlap)
 {
 	results.clear();
 
@@ -235,42 +223,45 @@ bool Shape::GaussianShapeFunctionAlignment::align(const GaussianShapeFunction& f
 
 	func.getElementPositions(startPoseCoords);
 	optPoseCoords.resize(startPoseCoords.getSize());
-
-	overlapFunc->setShapeFunction(func, false);
 	
 	std::size_t num_starts = startGen->getNumStartTransforms();
-	Result curr_res;
+	
+	results.reserve(num_starts);
+
 	QuaternionTransformation opt_xform;
 	QuaternionTransformation opt_xform_grad;
+	Math::Matrix4D opt_xform_mtx;
 
+	overlapFunc->setShapeFunction(func, false);
+//	std::cerr << "--------- Num Starts: " << num_starts << std::endl; 
 	for (std::size_t i = 0; i < num_starts; i++) {
-		if (!optOverlap) {
-			quaternionToMatrix(startGen->getStartTransform(i), curr_res.transform);
-			Shape::transform(optPoseCoords, curr_res.transform, startPoseCoords);
+		if (!refStartPoses) {
+			quaternionToMatrix(startGen->getStartTransform(i), opt_xform_mtx);
+			transform(optPoseCoords, opt_xform_mtx, startPoseCoords);
 
-			curr_res.overlap = overlapFunc->calcOverlap(optPoseCoords);
-			curr_res.colOverlap = (calcColOverlaps ? overlapFunc->calcColorOverlap(optPoseCoords) : 0.0);
-	
-			results.push_back(curr_res);
+			results.push_back(Result(opt_xform_mtx, overlapFunc->calcOverlap(optPoseCoords), 
+									 calc_col_overlap ? overlapFunc->calcOverlap(optPoseCoords, colFilterFunc) : 0.0));
 			continue;
 		}
 
 		opt_xform = startGen->getStartTransform(i);
 
 		minimizer.setup(opt_xform, opt_xform_grad, BFGS_MINIMIZER_STEP_SIZE, BFGS_MINIMIZER_TOLERANCE);
-		minimizer.minimize(opt_xform, opt_xform_grad, maxNumOptIters, optStopGrad, -1.0, false);
-		
-	    if (!boost::math::isfinite(minimizer.getFunctionValue()))  // sanity check
-			continue;
-				   
-		normalize(opt_xform);
-		quaternionToMatrix(opt_xform, curr_res.transform);
-		Shape::transform(optPoseCoords, curr_res.transform, startPoseCoords);
 
-		curr_res.overlap = overlapFunc->calcOverlap(optPoseCoords);
-		curr_res.colOverlap = (calcColOverlaps ? overlapFunc->calcColorOverlap(optPoseCoords) : 0.0);
-	
-		results.push_back(curr_res);
+//		double start_val = calcAlignmentFunctionValue(opt_xform);
+
+		minimizer.minimize(opt_xform, opt_xform_grad, maxNumRefIters, refStopGrad, -1.0, false);
+		
+	    if (boost::math::isfinite(minimizer.getFunctionValue())) {  // sanity check
+			normalize(opt_xform);
+			quaternionToMatrix(opt_xform, opt_xform_mtx);
+			transform(optPoseCoords, opt_xform_mtx, startPoseCoords);
+
+//			std::cerr << "Minimized from " << start_val << " to " << minimizer.getFunctionValue() << " in " << minimizer.getNumIterations() << " iterations" << std::endl;
+
+			results.push_back(Result(opt_xform_mtx, overlapFunc->calcOverlap(optPoseCoords), 
+									 calc_col_overlap ? overlapFunc->calcOverlap(optPoseCoords, colFilterFunc) : 0.0));
+		}
 	}
 	
 	return !results.empty();
@@ -304,6 +295,23 @@ bool Shape::GaussianShapeFunctionAlignment::checkValidity(const GaussianShapeFun
 	return (func.getShape() && func.getShape()->getNumElements() > 0);
 }
 
+/*
+double Shape::GaussianShapeFunctionAlignment::calcAlignmentFunctionValue(const QuaternionTransformation& xform_quat)
+{
+	QuaternionTransformation::ConstPointer xform_quat_data = xform_quat.getData();
+	Math::Matrix4D xform_mtx;
+	
+	double quat_non_unity_pen = 1.0 - (xform_quat_data[0] * xform_quat_data[0] + xform_quat_data[1] * xform_quat_data[1] + 
+									   xform_quat_data[2] * xform_quat_data[2] + xform_quat_data[3] * xform_quat_data[3]);
+
+	quat_non_unity_pen *= 0.5 * QUATERNION_UNITY_DEVIATION_PENALTY_FACTOR * quat_non_unity_pen;
+
+	quaternionToMatrix(xform_quat, xform_mtx);
+	transform(optPoseCoords, xform_mtx, startPoseCoords);
+	
+	return (quat_non_unity_pen - overlapFunc->calcOverlap(optPoseCoords));	
+}
+*/
 double Shape::GaussianShapeFunctionAlignment::calcAlignmentFunctionValue(const QuaternionTransformation& xform_quat)
 {
 	QuaternionTransformation::ConstPointer xform_quat_data = xform_quat.getData();
@@ -326,11 +334,63 @@ double Shape::GaussianShapeFunctionAlignment::calcAlignmentFunctionValue(const Q
 		norm_xform_quat_data[i] = xform_quat_data[i];
 		
 	quaternionToMatrix(norm_xform_quat, xform_mtx);
-	Shape::transform(optPoseCoords, xform_mtx, startPoseCoords);
+	transform(optPoseCoords, xform_mtx, startPoseCoords);
 
 	return (quat_non_unity_pen - overlapFunc->calcOverlap(optPoseCoords));
 }
+/*
+double Shape::GaussianShapeFunctionAlignment::calcAlignmentFunctionGradient(const QuaternionTransformation& xform_quat, QuaternionTransformation& xform_quat_grad)
+{
+	xform_quat_grad.clear();
 
+	QuaternionTransformation::ConstPointer xform_quat_data = xform_quat.getData();
+	QuaternionTransformation::Pointer grad_data = xform_quat_grad.getData();
+	Math::Matrix4D xform_mtx;
+
+	quaternionToMatrix(xform_quat, xform_mtx);
+	transform(optPoseCoords, xform_mtx, startPoseCoords);
+
+	double neg_overlap = -overlapFunc->calcOverlapGradient(optPoseCoords, optPoseCoordsGrad);
+
+	for (std::size_t i = 0, num_elem = startPoseCoords.getSize(); i < num_elem; i++) {
+		const Math::Vector3D::ConstPointer elem_pos = startPoseCoords[i].getData();
+		const Math::Vector3D::ConstPointer pos_grad = optPoseCoordsGrad[i].getData();
+		
+		grad_data[0] +=
+			pos_grad[0] * ( xform_quat_data[0] * elem_pos[0] - xform_quat_data[3] * elem_pos[1] + xform_quat_data[2] * elem_pos[2]) +
+			pos_grad[1] * ( xform_quat_data[3] * elem_pos[0] + xform_quat_data[0] * elem_pos[1] - xform_quat_data[1] * elem_pos[2]) +
+			pos_grad[2] * (-xform_quat_data[2] * elem_pos[0] + xform_quat_data[1] * elem_pos[1] + xform_quat_data[0] * elem_pos[2]);
+
+		grad_data[1] +=
+			pos_grad[0] * ( xform_quat_data[1] * elem_pos[0] - xform_quat_data[2] * elem_pos[1] + xform_quat_data[3] * elem_pos[2]) +
+			pos_grad[1] * ( xform_quat_data[2] * elem_pos[0] - xform_quat_data[1] * elem_pos[1] - xform_quat_data[0] * elem_pos[2]) +
+			pos_grad[2] * ( xform_quat_data[3] * elem_pos[0] + xform_quat_data[0] * elem_pos[1] - xform_quat_data[1] * elem_pos[2]);
+
+		grad_data[2] +=
+			pos_grad[0] * (-xform_quat_data[2] * elem_pos[0] + xform_quat_data[1] * elem_pos[1] + xform_quat_data[0] * elem_pos[2]) +
+			pos_grad[1] * ( xform_quat_data[1] * elem_pos[0] + xform_quat_data[2] * elem_pos[1] + xform_quat_data[3] * elem_pos[2]) +
+			pos_grad[2] * (-xform_quat_data[0] * elem_pos[0] + xform_quat_data[3] * elem_pos[1] - xform_quat_data[2] * elem_pos[2]);
+
+		grad_data[3] +=
+			pos_grad[0] * (-xform_quat_data[3] * elem_pos[0] - xform_quat_data[0] * elem_pos[1] + xform_quat_data[1] * elem_pos[2]) +
+			pos_grad[1] * ( xform_quat_data[0] * elem_pos[0] - xform_quat_data[3] * elem_pos[1] + xform_quat_data[2] * elem_pos[2]) +
+			pos_grad[2] * ( xform_quat_data[1] * elem_pos[0] + xform_quat_data[2] * elem_pos[1] + xform_quat_data[3] * elem_pos[2]);
+		
+		grad_data[4] -= pos_grad[0];
+		grad_data[5] -= pos_grad[1];
+		grad_data[6] -= pos_grad[2];
+	}
+	
+	double quat_non_unity_pen = 1.0 - (xform_quat_data[0] * xform_quat_data[0] + xform_quat_data[1] * xform_quat_data[1] + 
+									   xform_quat_data[2] * xform_quat_data[2] + xform_quat_data[3] * xform_quat_data[3]);
+	double pen_grad_factor = QUATERNION_UNITY_DEVIATION_PENALTY_FACTOR * quat_non_unity_pen;
+
+	for (std::size_t i = 0; i < 4; i++)
+		grad_data[i] = -2.0 * (grad_data[i] + pen_grad_factor * xform_quat_data[i]);
+
+	return (neg_overlap + 0.5 * pen_grad_factor * quat_non_unity_pen);
+}
+*/
 double Shape::GaussianShapeFunctionAlignment::calcAlignmentFunctionGradient(const QuaternionTransformation& xform_quat, QuaternionTransformation& xform_quat_grad)
 {
     xform_quat_grad.clear();
@@ -355,7 +415,7 @@ double Shape::GaussianShapeFunctionAlignment::calcAlignmentFunctionGradient(cons
 		norm_xform_quat_data[i] = xform_quat_data[i];
 		
 	quaternionToMatrix(norm_xform_quat, xform_mtx);
-	Shape::transform(optPoseCoords, xform_mtx, startPoseCoords);
+	transform(optPoseCoords, xform_mtx, startPoseCoords);
 
 	double neg_overlap = -overlapFunc->calcOverlapGradient(optPoseCoords, optPoseCoordsGrad);
 
