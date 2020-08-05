@@ -44,8 +44,8 @@ namespace
     struct CDPLShapeInit
     {
 
-	CDPLShapeInit() {
-	}
+		CDPLShapeInit() {
+		}
 
     } cdplShapeInit;
 }

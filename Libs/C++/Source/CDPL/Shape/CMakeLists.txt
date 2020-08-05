@@ -42,6 +42,7 @@ SET(cdpl-shape_LIB_SRCS
 
     GaussianShapeFunctions.cpp
     UtilityFunctions.cpp
+    ScoringFunctions.cpp
     
     GaussianProductList.cpp
    )

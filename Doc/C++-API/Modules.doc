@@ -553,10 +553,13 @@
 \defgroup CDPL_SHAPE_ALIGNMENT Shape Alignment
 \ingroup CDPL_SHAPE
 
-\defgroup CDPL_SHAPE_SIMILARITY_SCORING Similarity Scoring
+\defgroup CDPL_SHAPE_SCORING_FUNCTORS Scoring Functors
 \ingroup CDPL_SHAPE
 
 \defgroup CDPL_SHAPE_FUNCTIONS Free Functions
+\ingroup CDPL_SHAPE
+\
+defgroup CDPL_SHAPE_SCORING_FUNCTIONS Scoring Functors
 \ingroup CDPL_SHAPE
 
 \defgroup CDPL_SHAPE_CONSTANTS Flags and Constants

@@ -1,7 +1,7 @@
 /* -*- mode: c++; c-basic-offset: 4; tab-width: 4; indent-tabs-mode: t -*- */
 
 /* 
- * ClassExports.hpp 
+ * ScoringFunctions.hpp 
  *
  * This file is part of the Chemical Data Processing Toolkit
  *
@@ -23,32 +23,40 @@
  * Boston, MA 02111-1307, USA.
  */
 
+/**
+ * \file
+ * \brief Definition of shape alignment scoring functions.
+ */
 
-#ifndef CDPL_PYTHON_SHAPE_CLASSEXPORTS_HPP
-#define CDPL_PYTHON_SHAPE_CLASSEXPORTS_HPP
+#ifndef CDPL_SHAPE_SCORINGFUNCTIONS_HPP
+#define CDPL_SHAPE_SCORINGFUNCTIONS_HPP
+
+#include "CDPL/Shape/APIPrefix.hpp"
 
 
-namespace CDPLPythonShape
+namespace CDPL 
 {
 
-	void exportGaussianShape();
-	void exportGaussianShapeSet();
-	
-	void exportGaussianShapeFunction();
+    namespace Shape
+    {
+		
+		class AlignmentResult;
 
-	void exportGaussianShapeOverlapFunction();
-	void exportExactGaussianShapeOverlapFunction();
-	void exportFastGaussianShapeOverlapFunction();
+		/**
+		 * \addtogroup CDPL_SHAPE_SCORING_FUNCTIONS
+		 * @{
+		 */
 
-	void exportAlignmentResult();
-	void exportScoringFunctors();
+		CDPL_SHAPE_API double calcTotalOverlapTanimotoScore(const AlignmentResult& res);
 
-	void exportGaussianShapeAlignmentStartGenerator();
-	void exportPrincipalAxesAlignmentStartGenerator();
-	void exportGaussianShapeFunctionAlignment();
-	void exportGaussianShapeAlignment();
+		CDPL_SHAPE_API double calcShapeTanimotoScore(const AlignmentResult& res);
 
-	void exportBoostFunctionWrappers();
+		CDPL_SHAPE_API double calcColorTanimotoScore(const AlignmentResult& res);
+
+		/**
+		 * @}
+		 */
+    }
 }
 
-#endif // CDPL_PYTHON_SHAPE_CLASSEXPORTS_HPP
+#endif // CDPL_SHAPE_SCORINGFUNCTIONS_HPP

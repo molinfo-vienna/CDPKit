@@ -49,11 +49,12 @@ SET(shape_MOD_SRCS
     GaussianShapeAlignmentExport.cpp
 
     AlignmentResultExport.cpp
-    SimilarityScoresExport.cpp
+    ScoringFunctorsExport.cpp
 
     SymmetryClassExport.cpp
     
     UtilityFunctionExport.cpp
+    ScoringFunctionExport.cpp
     GaussianShapeFunctionsExport.cpp
 
     BoostFunctionWrapperExport.cpp

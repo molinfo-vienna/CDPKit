@@ -1,7 +1,7 @@
 /* -*- mode: c++; c-basic-offset: 4; tab-width: 4; indent-tabs-mode: t -*- */
 
 /* 
- * SimilarityScores.hpp 
+ * ScoringFunctors.hpp 
  *
  * This file is part of the Chemical Data Processing Toolkit
  *
@@ -25,14 +25,14 @@
 
 /**
  * \file
- * \brief Definition of shape similarity scoring functors.
+ * \brief Definition of shape alignment scoring functors.
  */
 
-#ifndef CDPL_SHAPE_SIMILARITYSCORES_HPP
-#define CDPL_SHAPE_SIMILARITYSCORES_HPP
+#ifndef CDPL_SHAPE_SCORINGFUNCTORS_HPP
+#define CDPL_SHAPE_SCORINGFUNCTORS_HPP
 
 #include "CDPL/Shape/APIPrefix.hpp"
-#include "CDPL/Shape/AlignmentResult.hpp"
+#include "CDPL/Shape/ScoringFunctions.hpp"
 
 
 namespace CDPL 
@@ -41,24 +41,42 @@ namespace CDPL
     namespace Shape
     {
 		
-	/**
-	 * \addtogroup CDPL_SHAPE_SIMILARITY_SCORING
-	 * @{
-	 */
+		/**
+		 * \addtogroup CDPL_SHAPE_SCORING_FUNCTORS
+		 * @{
+		 */
 
-	class CDPL_SHAPE_API TotalOverlapTanimotoScore
-	{
+		class CDPL_SHAPE_API TotalOverlapTanimotoScore
+		{
 
-	  public:
-	    double operator()(const AlignmentResult& res) const {
-		return (res.getOverlap() / (res.getReferenceSelfOverlap() + res.getAlignedSelfOverlap() - res.getOverlap()));
-	    }
-	};
+		  public:
+			double operator()(const AlignmentResult& res) const {
+				return calcTotalOverlapTanimotoScore(res);
+			}
+		};
 
-	/**
-	 * @}
-	 */
+		class CDPL_SHAPE_API ShapeTanimotoScore
+		{
+
+		  public:
+			double operator()(const AlignmentResult& res) const {
+				return calcShapeTanimotoScore(res);
+			}
+		};
+
+		class CDPL_SHAPE_API ColorTanimotoScore
+		{
+
+		  public:
+			double operator()(const AlignmentResult& res) const {
+				return calcColorTanimotoScore(res);
+			}
+		};
+
+		/**
+		 * @}
+		 */
     }
 }
 
-#endif // CDPL_SHAPE_SIMILARITYSCORES_HPP
+#endif // CDPL_SHAPE_SCORINGFUNCTORS_HPP

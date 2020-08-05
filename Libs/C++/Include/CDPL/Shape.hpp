@@ -41,7 +41,8 @@
 #include "CDPL/Shape/FastGaussianShapeOverlapFunction.hpp"
 
 #include "CDPL/Shape/AlignmentResult.hpp"
-#include "CDPL/Shape/SimilarityScores.hpp"
+#include "CDPL/Shape/ScoringFunctions.hpp"
+#include "CDPL/Shape/ScoringFunctors.hpp"
 
 #include "CDPL/Shape/GaussianShapeAlignmentStartGenerator.hpp"
 #include "CDPL/Shape/PrincipalAxesAlignmentStartGenerator.hpp"

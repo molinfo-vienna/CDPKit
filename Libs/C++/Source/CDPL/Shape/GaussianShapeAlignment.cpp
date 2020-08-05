@@ -27,7 +27,7 @@
 #include "StaticInit.hpp"
 
 #include "CDPL/Shape/GaussianShapeAlignment.hpp"
-#include "CDPL/Shape/SimilarityScores.hpp"
+#include "CDPL/Shape/ScoringFunctions.hpp"
 #include "CDPL/Base/Exceptions.hpp"
 
 
@@ -60,7 +60,7 @@ const std::size_t Shape::GaussianShapeAlignment::DEF_MAX_PRODUCT_ORDER;
 Shape::GaussianShapeAlignment::GaussianShapeAlignment():
 	shapeFuncCache(MAX_SHAPE_FUNC_CACHE_SIZE), calcSlfOverlaps(true), calcColSlfOverlaps(true),
 	resultSelMode(BEST_RESULT_PAIR), resultCmpFunc(&compareScore), 
-	scoringFunc(TotalOverlapTanimotoScore())
+	scoringFunc(&calcTotalOverlapTanimotoScore)
 {
 	algdShapeFunc.setMaxOrder(DEF_MAX_PRODUCT_ORDER);
 	algdShapeFunc.setDistanceCutoff(DEF_DISTANCE_CUTOFF);
@@ -72,7 +72,7 @@ Shape::GaussianShapeAlignment::GaussianShapeAlignment():
 Shape::GaussianShapeAlignment::GaussianShapeAlignment(const GaussianShape& ref_shape):
 	shapeFuncCache(MAX_SHAPE_FUNC_CACHE_SIZE), calcSlfOverlaps(true), calcColSlfOverlaps(true),
 	resultSelMode(BEST_RESULT_PAIR), resultCmpFunc(&compareScore), 
-	scoringFunc(TotalOverlapTanimotoScore())
+	scoringFunc(&calcTotalOverlapTanimotoScore)
 {
 	algdShapeFunc.setMaxOrder(DEF_MAX_PRODUCT_ORDER);
 	algdShapeFunc.setDistanceCutoff(DEF_DISTANCE_CUTOFF);
@@ -86,7 +86,7 @@ Shape::GaussianShapeAlignment::GaussianShapeAlignment(const GaussianShape& ref_s
 Shape::GaussianShapeAlignment::GaussianShapeAlignment(const GaussianShapeSet& ref_shapes):
 	shapeFuncCache(MAX_SHAPE_FUNC_CACHE_SIZE), calcSlfOverlaps(true), calcColSlfOverlaps(true),
 	resultSelMode(BEST_RESULT_PAIR), resultCmpFunc(&compareScore), 
-	scoringFunc(TotalOverlapTanimotoScore())
+	scoringFunc(&calcTotalOverlapTanimotoScore)
 {
 	algdShapeFunc.setMaxOrder(DEF_MAX_PRODUCT_ORDER);
 	algdShapeFunc.setDistanceCutoff(DEF_DISTANCE_CUTOFF);
@@ -176,7 +176,7 @@ const Shape::GaussianShapeAlignment::ResultCompareFunction& Shape::GaussianShape
 void Shape::GaussianShapeAlignment::setScoringFunction(const ScoringFunction& func)
 {
 	if (!func)
-		scoringFunc = TotalOverlapTanimotoScore();
+		scoringFunc = &calcTotalOverlapTanimotoScore;
 	else
 		scoringFunc = func;
 }

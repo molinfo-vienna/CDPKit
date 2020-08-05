@@ -31,6 +31,7 @@
 namespace CDPLPythonShape
 {
 
+	void exportScoringFunctions();
 	void exportUtilityFunctions();
 	void exportGaussianShapeFunctions();
 }

@@ -48,13 +48,14 @@ BOOST_PYTHON_MODULE(_shape)
 	exportPrincipalAxesAlignmentStartGenerator();
 
 	exportAlignmentResult();
-	exportSimilarityScores();
+	exportScoringFunctors();
 
 	exportGaussianShapeFunctionAlignment();
 	exportGaussianShapeAlignment();
 
 	exportSymmetryClasses();
 	
+	exportScoringFunctions();
 	exportUtilityFunctions();
 	exportGaussianShapeFunctions();
 
