@@ -51,3 +51,78 @@ double Shape::calcShapeTanimotoScore(const AlignmentResult& res)
 
     return (shape_ovlp / (ref_shape_self_ovlp + al_shape_self_ovlp - shape_ovlp));
 }
+
+double Shape::calcTanimotoComboScore(const AlignmentResult& res)
+{
+	return (calcShapeTanimotoScore(res) + calcColorTanimotoScore(res));
+}
+
+double Shape::calcTotalOverlapTverskyScore(const AlignmentResult& res, double alpha, double beta)
+{
+	return (res.getOverlap() / (res.getReferenceSelfOverlap() * alpha + res.getAlignedSelfOverlap() * beta));
+}
+
+double Shape::calcShapeTverskyScore(const AlignmentResult& res, double alpha, double beta)
+{
+	double shape_ovlp = res.getOverlap() - res.getColorOverlap();
+    double ref_shape_self_ovlp = res.getReferenceSelfOverlap() - res.getReferenceColorSelfOverlap();
+    double al_shape_self_ovlp = res.getAlignedSelfOverlap() - res.getAlignedColorSelfOverlap();
+
+    return (shape_ovlp / (ref_shape_self_ovlp * alpha + al_shape_self_ovlp * beta));
+}
+
+double Shape::calcColorTverskyScore(const AlignmentResult& res, double alpha, double beta)
+{
+    return (res.getColorOverlap() / (res.getReferenceColorSelfOverlap() * alpha + res.getAlignedColorSelfOverlap() * beta));
+}
+
+double Shape::calcTverskyComboScore(const AlignmentResult& res, double alpha, double beta)
+{
+	return (calcShapeTverskyScore(res, alpha, beta) + calcColorTverskyScore(res, alpha, beta));
+}
+
+double Shape::calcReferenceTotalOverlapTverskyScore(const AlignmentResult& res, double alpha)
+{
+	return (res.getOverlap() / (res.getReferenceSelfOverlap() * alpha));
+}
+
+double Shape::calcReferenceShapeTverskyScore(const AlignmentResult& res, double alpha)
+{
+	double shape_ovlp = res.getOverlap() - res.getColorOverlap();
+    double ref_shape_self_ovlp = res.getReferenceSelfOverlap() - res.getReferenceColorSelfOverlap();
+
+    return (shape_ovlp / (ref_shape_self_ovlp * alpha));
+}
+
+double Shape::calcReferenceColorTverskyScore(const AlignmentResult& res, double alpha)
+{
+   return (res.getColorOverlap() / (res.getReferenceColorSelfOverlap() * alpha));
+}
+
+double Shape::calcReferenceTverskyComboScore(const AlignmentResult& res, double alpha)
+{
+	return (calcReferenceShapeTverskyScore(res, alpha) + calcReferenceColorTverskyScore(res, alpha));
+}
+
+double Shape::calcAlignedTotalOverlapTverskyScore(const AlignmentResult& res, double beta)
+{
+	return (res.getOverlap() / (res.getAlignedSelfOverlap() * beta));
+}
+
+double Shape::calcAlignedShapeTverskyScore(const AlignmentResult& res, double beta)
+{
+	double shape_ovlp = res.getOverlap() - res.getColorOverlap();
+    double al_shape_self_ovlp = res.getAlignedSelfOverlap() - res.getAlignedColorSelfOverlap();
+
+    return (shape_ovlp / ( al_shape_self_ovlp * beta));
+}
+
+double Shape::calcAlignedColorTverskyScore(const AlignmentResult& res, double beta)
+{
+	return (res.getColorOverlap() / (res.getAlignedColorSelfOverlap() * beta));
+}
+
+double Shape::calcAlignedTverskyComboScore(const AlignmentResult& res, double beta)
+{
+	return (calcAlignedShapeTverskyScore(res, beta) + calcAlignedColorTverskyScore(res, beta));
+}

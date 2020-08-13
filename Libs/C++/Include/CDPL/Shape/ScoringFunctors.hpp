@@ -73,6 +73,199 @@ namespace CDPL
 			}
 		};
 
+		class CDPL_SHAPE_API TanimotoComboScore
+		{
+
+		  public:
+			double operator()(const AlignmentResult& res) const {
+				return calcTanimotoComboScore(res);
+			}
+		};
+
+		class CDPL_SHAPE_API TotalOverlapTverskyScore
+		{
+
+		  public:
+			TotalOverlapTverskyScore(double alpha = 0.95, double beta = 0.05): 
+				alpha(alpha), beta(beta) {}
+
+			double operator()(const AlignmentResult& res) const {
+				return calcTotalOverlapTverskyScore(res, alpha, beta);
+			}
+
+		  private:
+			double alpha;
+			double beta;
+		};
+
+		class CDPL_SHAPE_API ShapeTverskyScore
+		{
+
+		  public:
+			ShapeTverskyScore(double alpha = 0.95, double beta = 0.05): 
+				alpha(alpha), beta(beta) {}
+
+			double operator()(const AlignmentResult& res) const {
+				return calcShapeTverskyScore(res, alpha, beta);
+			}
+
+		  private:
+			double alpha;
+			double beta;
+		};
+
+		class CDPL_SHAPE_API ColorTverskyScore
+		{
+
+		  public:
+			ColorTverskyScore(double alpha = 0.95, double beta = 0.05): 
+				alpha(alpha), beta(beta) {}
+
+			double operator()(const AlignmentResult& res) const {
+				return calcColorTverskyScore(res, alpha, beta);
+			}
+
+		  private:
+			double alpha;
+			double beta;
+		};
+
+		class CDPL_SHAPE_API TverskyComboScore
+		{
+
+		  public:
+			TverskyComboScore(double alpha = 0.95, double beta = 0.05): 
+				alpha(alpha), beta(beta) {}
+
+			double operator()(const AlignmentResult& res) const {
+				return calcTverskyComboScore(res, alpha, beta);
+			}
+
+		  private:
+			double alpha;
+			double beta;
+		};
+
+		class CDPL_SHAPE_API ReferenceTotalOverlapTverskyScore
+		{
+
+		  public:
+			ReferenceTotalOverlapTverskyScore(double alpha = 0.95): 
+				alpha(alpha) {}
+
+			double operator()(const AlignmentResult& res) const {
+				return calcReferenceTotalOverlapTverskyScore(res, alpha);
+			}
+
+		  private:
+			double alpha;
+		};
+
+		class CDPL_SHAPE_API ReferenceShapeTverskyScore
+		{
+
+		  public:
+			ReferenceShapeTverskyScore(double alpha = 0.95): 
+				alpha(alpha) {}
+
+			double operator()(const AlignmentResult& res) const {
+				return calcReferenceShapeTverskyScore(res, alpha);
+			}
+
+		  private:
+			double alpha;
+		};
+
+		class CDPL_SHAPE_API ReferenceColorTverskyScore
+		{
+
+		  public:
+			ReferenceColorTverskyScore(double alpha = 0.95): 
+				alpha(alpha) {}
+
+			double operator()(const AlignmentResult& res) const {
+				return calcReferenceColorTverskyScore(res, alpha);
+			}
+
+		  private:
+			double alpha;
+		};
+
+		class CDPL_SHAPE_API ReferenceTverskyComboScore
+		{
+
+		  public:
+			ReferenceTverskyComboScore(double alpha = 0.95): 
+				alpha(alpha) {}
+
+			double operator()(const AlignmentResult& res) const {
+				return calcReferenceTverskyComboScore(res, alpha);
+			}
+
+		  private:
+			double alpha;
+		};
+
+		class CDPL_SHAPE_API AlignedTotalOverlapTverskyScore
+		{
+
+		  public:
+			AlignedTotalOverlapTverskyScore(double beta = 0.95): 
+				beta(beta) {}
+
+			double operator()(const AlignmentResult& res) const {
+				return calcAlignedTotalOverlapTverskyScore(res, beta);
+			}
+
+		  private:
+			double beta;
+		};
+
+		class CDPL_SHAPE_API AlignedShapeTverskyScore
+		{
+
+		  public:
+			AlignedShapeTverskyScore(double beta = 0.95): 
+				beta(beta) {}
+
+			double operator()(const AlignmentResult& res) const {
+				return calcAlignedShapeTverskyScore(res, beta);
+			}
+
+		  private:
+			double beta;
+		};
+
+		class CDPL_SHAPE_API AlignedColorTverskyScore
+		{
+
+		  public:
+			AlignedColorTverskyScore(double beta = 0.95): 
+				beta(beta) {}
+
+			double operator()(const AlignmentResult& res) const {
+				return calcAlignedColorTverskyScore(res, beta);
+			}
+
+		  private:
+			double beta;
+		};
+
+		class CDPL_SHAPE_API AlignedTverskyComboScore
+		{
+
+		  public:
+			AlignedTverskyComboScore(double beta = 0.95): 
+				beta(beta) {}
+
+			double operator()(const AlignmentResult& res) const {
+				return calcAlignedTverskyComboScore(res, beta);
+			}
+
+		  private:
+			double beta;
+		};
+
 		/**
 		 * @}
 		 */
