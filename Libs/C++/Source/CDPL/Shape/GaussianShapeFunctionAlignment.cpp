@@ -56,14 +56,14 @@ const std::size_t Shape::GaussianShapeFunctionAlignment::DEF_MAX_OPTIMIZATION_IT
 
 Shape::GaussianShapeFunctionAlignment::GaussianShapeFunctionAlignment():
 	overlapFunc(&defOverlapFunc), startGen(&defStartGen), refShapeFunc(0), refShapeSymClass(SymmetryClass::UNDEF), calcColOverlaps(true),
-	optOverlap(true), rigOptimization(false), maxNumOptIters(DEF_MAX_OPTIMIZATION_ITERATIONS), optStopGrad(DEF_OPTIMIZATION_STOP_GRADIENT),
+	optOverlap(true), greedyOpt(false), maxNumOptIters(DEF_MAX_OPTIMIZATION_ITERATIONS), optStopGrad(DEF_OPTIMIZATION_STOP_GRADIENT),
 	minimizer(boost::bind(&GaussianShapeFunctionAlignment::calcAlignmentFunctionValue, this, _1),
 			  boost::bind(&GaussianShapeFunctionAlignment::calcAlignmentFunctionGradient, this, _1, _2))
 {}
 
 Shape::GaussianShapeFunctionAlignment::GaussianShapeFunctionAlignment(const GaussianShapeFunction& ref_func, unsigned int sym_class):
 	overlapFunc(&defOverlapFunc), startGen(&defStartGen), calcColOverlaps(true),
-	optOverlap(true), rigOptimization(false), maxNumOptIters(DEF_MAX_OPTIMIZATION_ITERATIONS), optStopGrad(DEF_OPTIMIZATION_STOP_GRADIENT),
+	optOverlap(true), greedyOpt(false), maxNumOptIters(DEF_MAX_OPTIMIZATION_ITERATIONS), optStopGrad(DEF_OPTIMIZATION_STOP_GRADIENT),
 	minimizer(boost::bind(&GaussianShapeFunctionAlignment::calcAlignmentFunctionValue, this, _1),
 			  boost::bind(&GaussianShapeFunctionAlignment::calcAlignmentFunctionGradient, this, _1, _2))
 {
@@ -142,14 +142,14 @@ bool Shape::GaussianShapeFunctionAlignment::optimizeOverlap() const
 	return optOverlap;
 }
 
-void Shape::GaussianShapeFunctionAlignment::rigorousOptimization(bool rigorous)
+void Shape::GaussianShapeFunctionAlignment::greedyOptimization(bool greedy)
 {
-	rigOptimization = rigorous;
+	greedyOpt = greedy;
 }
 
-bool Shape::GaussianShapeFunctionAlignment::rigorousOptimization() const
+bool Shape::GaussianShapeFunctionAlignment::greedyOptimization() const
 {
-	return rigOptimization;
+	return greedyOpt;
 }
 
 void Shape::GaussianShapeFunctionAlignment::setMaxNumOptimizationIterations(std::size_t max_iter)

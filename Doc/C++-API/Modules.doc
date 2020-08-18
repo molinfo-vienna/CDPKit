@@ -550,6 +550,9 @@
 \defgroup CDPL_SHAPE_FUNCTORS Shape Property and Overlap Calculation
 \ingroup CDPL_SHAPE
 
+\defgroup CDPL_SHAPE_GENERATION Shape Generation
+\ingroup CDPL_SHAPE
+
 \defgroup CDPL_SHAPE_ALIGNMENT Shape Alignment
 \ingroup CDPL_SHAPE
 
@@ -559,7 +562,7 @@
 \defgroup CDPL_SHAPE_FUNCTIONS Free Functions
 \ingroup CDPL_SHAPE
 \
-defgroup CDPL_SHAPE_SCORING_FUNCTIONS Scoring Functors
+defgroup CDPL_SHAPE_SCORING_FUNCTIONS Scoring Functions
 \ingroup CDPL_SHAPE
 
 \defgroup CDPL_SHAPE_CONSTANTS Flags and Constants

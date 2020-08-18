@@ -139,9 +139,9 @@ namespace CDPL
 
 			bool optimizeOverlap() const;
 
-			void rigorousOptimization(bool rigorous);
+			void greedyOptimization(bool greedy);
 
-			bool rigorousOptimization() const;
+			bool greedyOptimization() const;
 
 			void setMaxNumOptimizationIterations(std::size_t max_iter);
 
@@ -197,7 +197,7 @@ namespace CDPL
 			unsigned int                          refShapeSymClass;
 			bool                                  calcColOverlaps;
 			bool                                  optOverlap;
-			bool                                  rigOptimization;
+			bool                                  greedyOpt;
 			std::size_t                           maxNumOptIters;
 			double                                optStopGrad;
 			Math::Vector3DArray                   startPoseCoords;

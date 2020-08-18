@@ -53,6 +53,7 @@ namespace
 
 const double      Shape::GaussianShapeAlignment::DEF_OPTIMIZATION_STOP_GRADIENT = 1.0;
 const double      Shape::GaussianShapeAlignment::DEF_DISTANCE_CUTOFF            = 0.0;
+const int         Shape::GaussianShapeAlignment::DEF_RESULT_SELECTION_MODE;
 const std::size_t Shape::GaussianShapeAlignment::DEF_MAX_OPTIMIZATION_ITERATIONS;
 const std::size_t Shape::GaussianShapeAlignment::DEF_MAX_PRODUCT_ORDER;
 
@@ -236,14 +237,14 @@ bool Shape::GaussianShapeAlignment::optimizeOverlap() const
 	return shapeFuncAlmnt.optimizeOverlap();
 }
 
-void Shape::GaussianShapeAlignment::rigorousOptimization(bool rigorous)
+void Shape::GaussianShapeAlignment::greedyOptimization(bool greedy)
 {
-	shapeFuncAlmnt.rigorousOptimization(rigorous);
+	shapeFuncAlmnt.greedyOptimization(greedy);
 }
 
-bool Shape::GaussianShapeAlignment::rigorousOptimization() const
+bool Shape::GaussianShapeAlignment::greedyOptimization() const
 {
-	return shapeFuncAlmnt.rigorousOptimization();
+	return shapeFuncAlmnt.greedyOptimization();
 }
 
 void Shape::GaussianShapeAlignment::setMaxNumOptimizationIterations(std::size_t max_iter)

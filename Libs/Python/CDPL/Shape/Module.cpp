@@ -38,6 +38,8 @@ BOOST_PYTHON_MODULE(_shape)
 	exportGaussianShape();
 	exportGaussianShapeSet();
 
+	exportGaussianShapeGenerator();
+
 	exportGaussianShapeFunction();
 	exportGaussianShapeOverlapFunction();
 

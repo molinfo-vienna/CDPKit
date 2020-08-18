@@ -34,6 +34,8 @@ namespace CDPLPythonShape
 	void exportGaussianShape();
 	void exportGaussianShapeSet();
 	
+	void exportGaussianShapeGenerator();
+
 	void exportGaussianShapeFunction();
 
 	void exportGaussianShapeOverlapFunction();

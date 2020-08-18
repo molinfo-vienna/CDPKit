@@ -44,6 +44,7 @@
 #include "CDPL/Shape/ScoringFunctions.hpp"
 #include "CDPL/Shape/ScoringFunctors.hpp"
 
+#include "CDPL/Shape/GaussianShapeGenerator.hpp"
 #include "CDPL/Shape/GaussianShapeAlignmentStartGenerator.hpp"
 #include "CDPL/Shape/PrincipalAxesAlignmentStartGenerator.hpp"
 #include "CDPL/Shape/GaussianShapeFunctionAlignment.hpp"

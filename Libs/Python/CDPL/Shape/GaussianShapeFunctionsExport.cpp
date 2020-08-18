@@ -38,10 +38,17 @@
 namespace
 {
 	
-	void generateGaussianShapeForAtoms(CDPL::Chem::AtomContainer& atoms, CDPL::Shape::GaussianShape& shape,
-									   bool append, bool inc_h, bool all_carbon, double p)
+	void generateGaussianShapeForAtoms1(CDPL::Chem::AtomContainer& atoms, CDPL::Shape::GaussianShape& shape,
+										bool append, double radius, bool inc_h, double p)
 	{
-		CDPL::Shape::generateGaussianShape(atoms, shape, append, inc_h, all_carbon, p);
+		CDPL::Shape::generateGaussianShape(atoms, shape, append, radius, inc_h, p);
+	}
+
+	void generateGaussianShapeForAtoms2(CDPL::Chem::AtomContainer& atoms, CDPL::Shape::GaussianShape& shape,
+										const CDPL::Chem::Atom3DCoordinatesFunction& coords_func,
+										bool append, double radius, bool inc_h, double p)
+	{
+		CDPL::Shape::generateGaussianShape(atoms, shape, coords_func, append, radius, inc_h, p);
 	}
 
 	void generateGaussianShapeForFeatures(CDPL::Pharm::FeatureContainer& features, CDPL::Shape::GaussianShape& shape,
@@ -57,9 +64,12 @@ void CDPLPythonShape::exportGaussianShapeFunctions()
 	using namespace boost;
 	using namespace CDPL;
 
-	python::def("generateGaussianShape", &generateGaussianShapeForAtoms,
+	python::def("generateGaussianShape", &generateGaussianShapeForAtoms1,
 				(python::arg("atoms"), python::arg("shape"), python::arg("append") = false,
-				 python::arg("inc_h") = false, python::arg("all_carbon") = false, python::arg("p") = 2.7));
+				 python::arg("radius") = -1.0, python::arg("inc_h") = false, python::arg("p") = 2.7));
+	python::def("generateGaussianShape", &generateGaussianShapeForAtoms2,
+				(python::arg("atoms"), python::arg("shape"), python::arg("coords_func"), python::arg("append") = false,
+				 python::arg("radius") = -1.0, python::arg("inc_h") = false, python::arg("p") = 2.7));
 	python::def("generateGaussianShape", &generateGaussianShapeForFeatures,
 				(python::arg("features"), python::arg("shape"), python::arg("append") = false,
 				 python::arg("radius") = -1.0, python::arg("inc_xv") = false, python::arg("p") = 5.0));

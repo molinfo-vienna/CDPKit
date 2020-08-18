@@ -96,9 +96,9 @@ void CDPLPythonShape::exportGaussianShapeAlignment()
 			 (python::arg("self"), python::arg("optimize")))
 		.def("optimizeOverlap", GetBoolFunc(&Shape::GaussianShapeAlignment::optimizeOverlap),
 			 python::arg("self"))
-		.def("rigorousOptimization", SetBoolFunc(&Shape::GaussianShapeAlignment::rigorousOptimization),
-			 (python::arg("self"), python::arg("rigorous")))
-		.def("rigorousOptimization", GetBoolFunc(&Shape::GaussianShapeAlignment::rigorousOptimization),
+		.def("greedyOptimization", SetBoolFunc(&Shape::GaussianShapeAlignment::greedyOptimization),
+			 (python::arg("self"), python::arg("greedy")))
+		.def("greedyOptimization", GetBoolFunc(&Shape::GaussianShapeAlignment::greedyOptimization),
 			 python::arg("self"))
 		.def("calcColorOverlaps", SetBoolFunc(&Shape::GaussianShapeAlignment::calcColorOverlaps),
 			 (python::arg("self"), python::arg("calc")))
@@ -142,6 +142,7 @@ void CDPLPythonShape::exportGaussianShapeAlignment()
 		.def_readonly("DEF_MAX_OPTIMIZATION_ITERATIONS", Shape::GaussianShapeAlignment::DEF_MAX_OPTIMIZATION_ITERATIONS)
 		.def_readonly("DEF_MAX_PRODUCT_ORDER", &Shape::GaussianShapeAlignment::DEF_MAX_PRODUCT_ORDER)
 		.def_readonly("DEF_DISTANCE_CUTOFF", &Shape::GaussianShapeAlignment::DEF_DISTANCE_CUTOFF)
+		.def_readonly("DEF_RESULT_SELECTION_MODE", &Shape::GaussianShapeAlignment::DEF_RESULT_SELECTION_MODE)
 		.add_property("numResults", &Shape::GaussianShapeAlignment::getNumResults)
 		.add_property("overlapFunction",
 					  python::make_function(&Shape::GaussianShapeAlignment::getOverlapFunction,
@@ -181,8 +182,8 @@ void CDPLPythonShape::exportGaussianShapeAlignment()
 					  &Shape::GaussianShapeAlignment::setOptimizationStopGradient)
 		.add_property("optOverlap", GetBoolFunc(&Shape::GaussianShapeAlignment::optimizeOverlap),
 					  SetBoolFunc(&Shape::GaussianShapeAlignment::optimizeOverlap))
-		.add_property("rigorousOpt", GetBoolFunc(&Shape::GaussianShapeAlignment::rigorousOptimization),
-					  SetBoolFunc(&Shape::GaussianShapeAlignment::rigorousOptimization))
+		.add_property("greedyOpt", GetBoolFunc(&Shape::GaussianShapeAlignment::greedyOptimization),
+					  SetBoolFunc(&Shape::GaussianShapeAlignment::greedyOptimization))
 		.add_property("selfOverlaps", GetBoolFunc(&Shape::GaussianShapeAlignment::calcSelfOverlaps),
 					  SetBoolFunc(&Shape::GaussianShapeAlignment::calcSelfOverlaps))
 		.add_property("colorSelfOverlaps", GetBoolFunc(&Shape::GaussianShapeAlignment::calcColorSelfOverlaps),

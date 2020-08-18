@@ -83,6 +83,7 @@ namespace CDPL
 			static const double      DEF_OPTIMIZATION_STOP_GRADIENT;
 			static const std::size_t DEF_MAX_OPTIMIZATION_ITERATIONS = 20;
 			static const std::size_t DEF_MAX_PRODUCT_ORDER = 1;
+			static const int         DEF_RESULT_SELECTION_MODE = BEST_RESULT_PAIR;
 			static const double      DEF_DISTANCE_CUTOFF;
 
 			typedef boost::shared_ptr<GaussianShapeAlignment> SharedPointer;
@@ -155,9 +156,9 @@ namespace CDPL
 
 			bool optimizeOverlap() const;
 
-			void rigorousOptimization(bool rigorous);
+			void greedyOptimization(bool greedy);
 
-			bool rigorousOptimization() const;
+			bool greedyOptimization() const;
 
 			void setMaxNumOptimizationIterations(std::size_t max_iter);
 

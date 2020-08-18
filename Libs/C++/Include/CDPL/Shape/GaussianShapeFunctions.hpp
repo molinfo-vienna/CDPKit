@@ -32,6 +32,7 @@
 #define CDPL_SHAPE_GAUSSIANSHAPEFUNCTIONS_HPP
 
 #include "CDPL/Shape/APIPrefix.hpp"
+#include "CDPL/Chem/Atom3DCoordinatesFunction.hpp"
 #include "CDPL/Math/Matrix.hpp"
 
 
@@ -62,7 +63,10 @@ namespace CDPL
 		 */
 	
 		CDPL_SHAPE_API void generateGaussianShape(const Chem::AtomContainer& atoms, GaussianShape& shape,
-												  bool append = false, bool inc_h = false, bool all_carbon = false, double p = 2.7);
+												  bool append = false, double radius = -1.0, bool inc_h = false, double p = 2.7);
+
+		CDPL_SHAPE_API void generateGaussianShape(const Chem::AtomContainer& atoms, GaussianShape& shape, const Chem::Atom3DCoordinatesFunction& coords_func,
+												  bool append = false, double radius = -1.0, bool inc_h = false, double p = 2.7);
 
 		CDPL_SHAPE_API void generateGaussianShape(const Pharm::FeatureContainer& features, GaussianShape& shape,
 												  bool append = false, double radius = -1.0, bool inc_xv = false, double p = 5.0);

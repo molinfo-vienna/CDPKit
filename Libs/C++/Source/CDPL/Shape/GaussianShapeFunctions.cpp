@@ -49,12 +49,16 @@ using namespace CDPL;
 
 
 void Shape::generateGaussianShape(const Chem::AtomContainer& atoms, GaussianShape& shape,
-								  bool append, bool inc_h, bool all_carbon, double p)
+								  bool append, double radius, bool inc_h, double p)
+{
+	generateGaussianShape(atoms, shape, &Chem::get3DCoordinates, append, radius, inc_h, p);
+}
+
+void Shape::generateGaussianShape(const Chem::AtomContainer& atoms, GaussianShape& shape, const Chem::Atom3DCoordinatesFunction& coords_func,
+								  bool append, double radius, bool inc_h, double p)
 {
 	using namespace Chem;
 
-	const double C_RADIUS = (all_carbon ? AtomDictionary::getVdWRadius(AtomType::C) : 0.0);
-	
 	if (!append)
 		shape.clear();
 
@@ -68,16 +72,16 @@ void Shape::generateGaussianShape(const Chem::AtomContainer& atoms, GaussianShap
 		if (!inc_h && atom_type == AtomType::H)
 			continue;
 
-		if (all_carbon)
-			shape.addElement(get3DCoordinates(atom), C_RADIUS, 0, p);
+		if (radius > 0.0)
+			shape.addElement(coords_func(atom), radius, 0, p);
 
 		else {
 			double r = AtomDictionary::getVdWRadius(atom_type);
 
 			if (r > 0.0)  // sanity check
-				shape.addElement(get3DCoordinates(atom), r, 0, p);
+				shape.addElement(coords_func(atom), r, 0, p);
 			else
-				shape.addElement(get3DCoordinates(atom), 1.0, 0, p);
+				shape.addElement(coords_func(atom), 1.0, 0, p);
 		}
 	}
 }
@@ -91,7 +95,7 @@ void Shape::generateGaussianShape(const Pharm::FeatureContainer& features, Gauss
 		shape.clear();
 
 	if (p <= 0.0) // sanity check
-		p = 3.5;
+		p = 5.0;
 	
 	for (FeatureContainer::ConstFeatureIterator it = features.getFeaturesBegin(), end = features.getFeaturesEnd(); it != end; ++it) {
 		const Feature& feature = *it;

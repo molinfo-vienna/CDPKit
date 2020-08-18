@@ -88,9 +88,9 @@ void CDPLPythonShape::exportGaussianShapeFunctionAlignment()
 			 (python::arg("self"), python::arg("optimize")))
 		.def("optimizeOverlap", GetBoolFunc(&Shape::GaussianShapeFunctionAlignment::optimizeOverlap),
 			 python::arg("self"))
-		.def("rigorousOptimization", SetBoolFunc(&Shape::GaussianShapeFunctionAlignment::rigorousOptimization),
-			 (python::arg("self"), python::arg("rigorous")))
-		.def("rigorousOptimization", GetBoolFunc(&Shape::GaussianShapeFunctionAlignment::rigorousOptimization),
+		.def("greedyOptimization", SetBoolFunc(&Shape::GaussianShapeFunctionAlignment::greedyOptimization),
+			 (python::arg("self"), python::arg("greedy")))
+		.def("greedyOptimization", GetBoolFunc(&Shape::GaussianShapeFunctionAlignment::greedyOptimization),
 			 python::arg("self"))
 		.def("setupReference", &Shape::GaussianShapeFunctionAlignment::setupReference,
 			 (python::arg("self"), python::arg("func"), python::arg("xform")))
@@ -148,8 +148,8 @@ void CDPLPythonShape::exportGaussianShapeFunctionAlignment()
 					  &Shape::GaussianShapeFunctionAlignment::setOptimizationStopGradient)
 		.add_property("optOverlap", GetBoolFunc(&Shape::GaussianShapeFunctionAlignment::optimizeOverlap),
 					  SetBoolFunc(&Shape::GaussianShapeFunctionAlignment::optimizeOverlap))
-		.add_property("rigorousOpt", GetBoolFunc(&Shape::GaussianShapeFunctionAlignment::rigorousOptimization),
-					  SetBoolFunc(&Shape::GaussianShapeFunctionAlignment::rigorousOptimization))
+		.add_property("greedyOpt", GetBoolFunc(&Shape::GaussianShapeFunctionAlignment::greedyOptimization),
+					  SetBoolFunc(&Shape::GaussianShapeFunctionAlignment::greedyOptimization))
 		.add_property("colorOverlaps", GetBoolFunc(&Shape::GaussianShapeFunctionAlignment::calcColorOverlaps),
 					  SetBoolFunc(&Shape::GaussianShapeFunctionAlignment::calcColorOverlaps));
 
