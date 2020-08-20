@@ -62,6 +62,10 @@ namespace CDPL
 
 			void setScore(double score);
 
+			std::size_t getReferenceShapeSetIndex() const;
+
+			void setReferenceShapeSetIndex(std::size_t idx);
+
 			std::size_t getReferenceShapeIndex() const;
 
 			void setReferenceShapeIndex(std::size_t idx);
@@ -97,6 +101,7 @@ namespace CDPL
 		  private:
 			Math::Matrix4D transform;
 			double         score;
+			std::size_t    refShapeSetIdx;
 			std::size_t    refShapeIdx;
 			std::size_t    algdShapeIdx;
 			double         refSelfOverlap;

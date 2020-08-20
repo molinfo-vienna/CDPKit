@@ -68,9 +68,10 @@ namespace CDPL
 			{
 
 			    ALL,
-				BEST_RESULT_FOR_EACH_PAIR,
-				BEST_RESULT_FOR_EACH_REF,
-				BEST_RESULT_PAIR
+				BEST_PER_SHAPE_COMBINATION,
+				BEST_PER_REFERENCE_SHAPE,
+				BEST_PER_REFERENCE_SET,
+				BEST_OVERALL
 			};
 
 		  private:
@@ -80,11 +81,11 @@ namespace CDPL
 			typedef const GaussianShape& (*GetShapeFunction)(const GaussianShapeFunction*);
 
 		  public:
-			static const double      DEF_OPTIMIZATION_STOP_GRADIENT;
-			static const std::size_t DEF_MAX_OPTIMIZATION_ITERATIONS = 20;
-			static const std::size_t DEF_MAX_PRODUCT_ORDER = 1;
-			static const int         DEF_RESULT_SELECTION_MODE = BEST_RESULT_PAIR;
-			static const double      DEF_DISTANCE_CUTOFF;
+			static const double              DEF_OPTIMIZATION_STOP_GRADIENT;
+			static const std::size_t         DEF_MAX_OPTIMIZATION_ITERATIONS = 20;
+			static const std::size_t         DEF_MAX_PRODUCT_ORDER = 1;
+			static const ResultSelectionMode DEF_RESULT_SELECTION_MODE = BEST_PER_REFERENCE_SET;
+			static const double              DEF_DISTANCE_CUTOFF;
 
 			typedef boost::shared_ptr<GaussianShapeAlignment> SharedPointer;
 
@@ -176,17 +177,19 @@ namespace CDPL
 
 			double getDistanceCutoff() const;
 
-			void setReference(const GaussianShape& shape);
+			void clearReferenceShapes();
 
-			void setReferenceSet(const GaussianShapeSet& shapes);
+			void addReferenceShape(const GaussianShape& shape, bool new_set = true);
 
-			std::size_t getReferenceSetSize() const;
+			void addReferenceShapes(const GaussianShapeSet& shapes, bool new_set = true);
 
-			const GaussianShape& getReference(std::size_t idx) const;
+			std::size_t getNumReferenceShapes() const;
+
+			const GaussianShape& getReferenceShape(std::size_t idx) const;
 		
-			ConstShapeIterator getReferencesBegin() const;
+			ConstShapeIterator getReferenceShapesBegin() const;
 
-			ConstShapeIterator getReferencesEnd() const;
+			ConstShapeIterator getReferenceShapesEnd() const;
 
 			bool align(const GaussianShape& shape);
 
@@ -204,12 +207,16 @@ namespace CDPL
 			struct ShapeMetaData 
 			{
 
+				std::size_t    setIndex;
+				std::size_t    index;
 				unsigned int   symClass;
 				Math::Matrix4D transform;
 				double         selfOverlap;
 				double         colSelfOverlap;
 			};
 
+			typedef std::pair<std::size_t, std::size_t> ResultID;
+	
 			GaussianShapeAlignment(const GaussianShapeAlignment& alignment);
 
 			GaussianShapeAlignment& operator=(const GaussianShapeAlignment& alignment);
@@ -218,13 +225,13 @@ namespace CDPL
 
 			void processResults(std::size_t ref_idx, std::size_t al_idx);
 
-			bool getResultIndex(std::size_t ref_idx, std::size_t al_idx, std::size_t& res_idx);
+			bool getResultIndex(const ResultID& res_id, std::size_t& res_idx);
 
 			GaussianShapeFunction* allocShapeFunction(const GaussianShape& shape);
 
 			typedef Util::ObjectStack<GaussianShapeFunction> ShapeFunctionCache;
 			typedef std::vector<ShapeMetaData> ShapeMetaDataArray;
-			typedef boost::unordered_map<std::pair<std::size_t, std::size_t>, std::size_t> ShapePairToResultIndexMap;
+			typedef boost::unordered_map<ResultID, std::size_t> ResultIndexMap;
 
 			ShapeFunctionCache             shapeFuncCache;
 			bool                           calcSlfOverlaps;
@@ -237,8 +244,10 @@ namespace CDPL
 			ShapeMetaDataArray             refShapeMetaData;
 			GaussianShapeFunction          algdShapeFunc;
 			ShapeMetaData                  algdShapeMetaData;
-			ShapePairToResultIndexMap      shapeToResIndexMap;
+			ResultIndexMap                 resIndexMap;
 			ResultList                     results;
+			std::size_t                    currSetIndex;
+			std::size_t                    currShapeIndex;
 		};
 
 		/**

@@ -82,6 +82,8 @@ namespace CDPL
 			
 			std::size_t getNumStartTransforms() const;
 
+			std::size_t getNumStartSubTransforms() const;
+
 			const QuaternionTransformation& getStartTransform(std::size_t idx) const;
 
 		  private:
@@ -97,6 +99,7 @@ namespace CDPL
 			const GaussianShape* refShape;
 			double               symThreshold;
 			unsigned int         refAxesSwapFlags;
+			std::size_t          numSubTransforms;
 		};
 
 		/**

@@ -120,13 +120,15 @@ void CDPLPythonShape::exportGaussianShapeAlignment()
 			 (python::arg("self"), python::arg("cutoff")))
 		.def("getDistanceCutoff", &Shape::GaussianShapeAlignment::getDistanceCutoff,
 			 python::arg("self"))
-		.def("setReference", &Shape::GaussianShapeAlignment::setReference,
-			 (python::arg("self"), python::arg("shape")), python::with_custodian_and_ward<1, 2>())
-		.def("setReferenceSet", &Shape::GaussianShapeAlignment::setReferenceSet,
-			 (python::arg("self"), python::arg("shapes")), python::with_custodian_and_ward<1, 2>())
-		.def("getReferenceSetSize", &Shape::GaussianShapeAlignment::getReferenceSetSize, 
+		.def("clearReferenceShapes", &Shape::GaussianShapeAlignment::clearReferenceShapes,
 			 python::arg("self"))
-		.def("getReference", &Shape::GaussianShapeAlignment::getReference,
+		.def("addReferenceShape", &Shape::GaussianShapeAlignment::addReferenceShape,
+			 (python::arg("self"), python::arg("shape"), python::arg("new_set") = true), python::with_custodian_and_ward<1, 2>())
+		.def("addReferenceShapes", &Shape::GaussianShapeAlignment::addReferenceShapes,
+			 (python::arg("self"), python::arg("shapes"), python::arg("new_set") = true), python::with_custodian_and_ward<1, 2>())
+		.def("getNumReferenceShapes", &Shape::GaussianShapeAlignment::getNumReferenceShapes, 
+			 python::arg("self"))
+		.def("getReferenceShape", &Shape::GaussianShapeAlignment::getReferenceShape,
 			 (python::arg("self"), python::arg("idx")), python::return_internal_reference<>())
 		.def("align", static_cast<bool (Shape::GaussianShapeAlignment::*)(const Shape::GaussianShape&)>(&Shape::GaussianShapeAlignment::align), 
 			 (python::arg("self"), python::arg("shape")))
@@ -194,12 +196,13 @@ void CDPLPythonShape::exportGaussianShapeAlignment()
 					  &Shape::GaussianShapeFunction::setMaxOrder)
 		.add_property("distCutoff", &Shape::GaussianShapeFunction::getDistanceCutoff, 
 					  &Shape::GaussianShapeFunction::setDistanceCutoff)
-		.add_property("referenceSetSize", &Shape::GaussianShapeAlignment::getReferenceSetSize);
+		.add_property("numReferenceShapes", &Shape::GaussianShapeAlignment::getNumReferenceShapes);
 
 	python::enum_<Shape::GaussianShapeAlignment::ResultSelectionMode>("ResultSelectionMode")
 		.value("ALL", Shape::GaussianShapeAlignment::ALL)
-		.value("BEST_RESULT_FOR_EACH_PAIR", Shape::GaussianShapeAlignment::BEST_RESULT_FOR_EACH_PAIR)
-		.value("BEST_RESULT_FOR_EACH_REF", Shape::GaussianShapeAlignment::BEST_RESULT_FOR_EACH_REF)
-		.value("BEST_RESULT_PAIR", Shape::GaussianShapeAlignment::BEST_RESULT_PAIR)
+		.value("BEST_PER_SHAPE_COMBINATION", Shape::GaussianShapeAlignment::BEST_PER_SHAPE_COMBINATION)
+		.value("BEST_PER_REFERENCE_SHAPE", Shape::GaussianShapeAlignment::BEST_PER_REFERENCE_SHAPE)
+		.value("BEST_PER_REFERENCE_SET", Shape::GaussianShapeAlignment::BEST_PER_REFERENCE_SET)
+		.value("BEST_OVERALL", Shape::GaussianShapeAlignment::BEST_OVERALL)
 		.export_values();
 }

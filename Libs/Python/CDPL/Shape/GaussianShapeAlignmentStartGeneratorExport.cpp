@@ -76,6 +76,10 @@ namespace
 			return this->get_override("getNumStartTransforms")();
 		}
 
+		std::size_t getNumStartSubTransforms() const {
+			return this->get_override("getNumStartSubTransforms")();
+		}
+
 		const CDPL::Shape::QuaternionTransformation& getStartTransform(std::size_t idx) const {
 			return this->get_override("getStartTransform")(idx);
 		}
@@ -103,9 +107,12 @@ void CDPLPythonShape::exportGaussianShapeAlignmentStartGenerator()
 			 (python::arg("self"), python::arg("func"), python::arg("sym_class")))
 		.def("getNumStartTransforms", python::pure_virtual(&Shape::GaussianShapeAlignmentStartGenerator::getNumStartTransforms),
 			 python::arg("self"))
+		.def("getNumStartSubTransforms", python::pure_virtual(&Shape::GaussianShapeAlignmentStartGenerator::getNumStartSubTransforms),
+			 python::arg("self"))
 		.def("getStartTransform", python::pure_virtual(&Shape::GaussianShapeAlignmentStartGenerator::getStartTransform),
 			 (python::arg("self"), python::arg("idx")), python::return_internal_reference<>())
 		.def("__len__", &Shape::GaussianShapeAlignmentStartGenerator::getNumStartTransforms,  python::arg("self"))
 		.def("__getitem__", &Shape::GaussianShapeAlignmentStartGenerator::getStartTransform,
-			 (python::arg("self"), python::arg("idx")), python::return_internal_reference<>());
+			 (python::arg("self"), python::arg("idx")), python::return_internal_reference<>())
+		.add_property("numStartSubTransforms", &Shape::GaussianShapeAlignmentStartGenerator::getNumStartSubTransforms);
 }

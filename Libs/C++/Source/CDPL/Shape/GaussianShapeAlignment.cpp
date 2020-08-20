@@ -51,17 +51,17 @@ namespace
 }
 
 
-const double      Shape::GaussianShapeAlignment::DEF_OPTIMIZATION_STOP_GRADIENT = 1.0;
-const double      Shape::GaussianShapeAlignment::DEF_DISTANCE_CUTOFF            = 0.0;
-const int         Shape::GaussianShapeAlignment::DEF_RESULT_SELECTION_MODE;
-const std::size_t Shape::GaussianShapeAlignment::DEF_MAX_OPTIMIZATION_ITERATIONS;
-const std::size_t Shape::GaussianShapeAlignment::DEF_MAX_PRODUCT_ORDER;
+const double                                             Shape::GaussianShapeAlignment::DEF_OPTIMIZATION_STOP_GRADIENT = 1.0;
+const double                                             Shape::GaussianShapeAlignment::DEF_DISTANCE_CUTOFF            = 0.0;
+const Shape::GaussianShapeAlignment::ResultSelectionMode Shape::GaussianShapeAlignment::DEF_RESULT_SELECTION_MODE;
+const std::size_t                                        Shape::GaussianShapeAlignment::DEF_MAX_OPTIMIZATION_ITERATIONS;
+const std::size_t                                        Shape::GaussianShapeAlignment::DEF_MAX_PRODUCT_ORDER;
 
 
 Shape::GaussianShapeAlignment::GaussianShapeAlignment():
 	shapeFuncCache(MAX_SHAPE_FUNC_CACHE_SIZE), calcSlfOverlaps(true), calcColSlfOverlaps(true),
-	resultSelMode(BEST_RESULT_PAIR), resultCmpFunc(&compareScore), 
-	scoringFunc(&calcTotalOverlapTanimotoScore)
+	resultSelMode(DEF_RESULT_SELECTION_MODE), resultCmpFunc(&compareScore), 
+	scoringFunc(&calcTotalOverlapTanimotoScore), currSetIndex(0), currShapeIndex(0)
 {
 	algdShapeFunc.setMaxOrder(DEF_MAX_PRODUCT_ORDER);
 	algdShapeFunc.setDistanceCutoff(DEF_DISTANCE_CUTOFF);
@@ -72,8 +72,8 @@ Shape::GaussianShapeAlignment::GaussianShapeAlignment():
 
 Shape::GaussianShapeAlignment::GaussianShapeAlignment(const GaussianShape& ref_shape):
 	shapeFuncCache(MAX_SHAPE_FUNC_CACHE_SIZE), calcSlfOverlaps(true), calcColSlfOverlaps(true),
-	resultSelMode(BEST_RESULT_PAIR), resultCmpFunc(&compareScore), 
-	scoringFunc(&calcTotalOverlapTanimotoScore)
+	resultSelMode(DEF_RESULT_SELECTION_MODE), resultCmpFunc(&compareScore), 
+	scoringFunc(&calcTotalOverlapTanimotoScore), currSetIndex(0), currShapeIndex(0)
 {
 	algdShapeFunc.setMaxOrder(DEF_MAX_PRODUCT_ORDER);
 	algdShapeFunc.setDistanceCutoff(DEF_DISTANCE_CUTOFF);
@@ -81,13 +81,13 @@ Shape::GaussianShapeAlignment::GaussianShapeAlignment(const GaussianShape& ref_s
 	shapeFuncAlmnt.setMaxNumOptimizationIterations(DEF_MAX_OPTIMIZATION_ITERATIONS);
 	shapeFuncAlmnt.setOptimizationStopGradient(DEF_OPTIMIZATION_STOP_GRADIENT);
 
-	setReference(ref_shape);
+	addReferenceShape(ref_shape);
 }
 
 Shape::GaussianShapeAlignment::GaussianShapeAlignment(const GaussianShapeSet& ref_shapes):
 	shapeFuncCache(MAX_SHAPE_FUNC_CACHE_SIZE), calcSlfOverlaps(true), calcColSlfOverlaps(true),
-	resultSelMode(BEST_RESULT_PAIR), resultCmpFunc(&compareScore), 
-	scoringFunc(&calcTotalOverlapTanimotoScore)
+	resultSelMode(DEF_RESULT_SELECTION_MODE), resultCmpFunc(&compareScore), 
+	scoringFunc(&calcTotalOverlapTanimotoScore), currSetIndex(0), currShapeIndex(0)
 {
 	algdShapeFunc.setMaxOrder(DEF_MAX_PRODUCT_ORDER);
 	algdShapeFunc.setDistanceCutoff(DEF_DISTANCE_CUTOFF);
@@ -95,7 +95,7 @@ Shape::GaussianShapeAlignment::GaussianShapeAlignment(const GaussianShapeSet& re
 	shapeFuncAlmnt.setMaxNumOptimizationIterations(DEF_MAX_OPTIMIZATION_ITERATIONS);
 	shapeFuncAlmnt.setOptimizationStopGradient(DEF_OPTIMIZATION_STOP_GRADIENT);
 
-	setReferenceSet(ref_shapes);
+	addReferenceShapes(ref_shapes);
 }
 
 Shape::GaussianShapeAlignment::~GaussianShapeAlignment() 
@@ -287,41 +287,65 @@ double Shape::GaussianShapeAlignment::getDistanceCutoff() const
 	return algdShapeFunc.getDistanceCutoff();
 }
 
-void Shape::GaussianShapeAlignment::setReference(const GaussianShape& shape)
+void Shape::GaussianShapeAlignment::clearReferenceShapes()
 {
-	if (refShapeMetaData.empty())
-		refShapeMetaData.resize(1);
-
 	refShapeFuncs.clear();
-	refShapeFuncs.push_back(allocShapeFunction(shape));
 
-	prepareForAlignment(*refShapeFuncs[0], refShapeMetaData[0], true);
+	currSetIndex = 0;
+	currShapeIndex = 0;
 }
 
-void Shape::GaussianShapeAlignment::setReferenceSet(const GaussianShapeSet& shapes)
+void Shape::GaussianShapeAlignment::addReferenceShape(const GaussianShape& shape, bool new_set)
 {
-	std::size_t num_shapes = shapes.getSize();
+	std::size_t num_ref_shapes = refShapeFuncs.size();
+	
+	if (new_set) {
+		if (num_ref_shapes > 0)
+			currSetIndex++;
 
-	if (refShapeMetaData.size() < num_shapes)
-		refShapeMetaData.resize(num_shapes);
+		currShapeIndex = 0;
+	}
 
-	refShapeFuncs.clear();
+	if (refShapeMetaData.size() < (num_ref_shapes + 1))
+		refShapeMetaData.resize(num_ref_shapes + 1);
 
-	for (std::size_t i = 0; i < num_shapes; i++) {
+	GaussianShapeFunction* func = allocShapeFunction(shape);
+
+	refShapeFuncs.push_back(func);
+
+	prepareForAlignment(*func, refShapeMetaData[num_ref_shapes], true);
+}
+
+void Shape::GaussianShapeAlignment::addReferenceShapes(const GaussianShapeSet& shapes, bool new_set)
+{
+	std::size_t num_ref_shapes = refShapeFuncs.size();
+	std::size_t num_new_ref_shapes = shapes.getSize();
+	
+	if (new_set) {
+		if (num_ref_shapes > 0)
+			currSetIndex++;
+
+		currShapeIndex = 0;
+	}
+
+	if (refShapeMetaData.size() < (num_ref_shapes + num_new_ref_shapes))
+		refShapeMetaData.resize(num_ref_shapes + num_new_ref_shapes);
+
+	for (std::size_t i = 0; i < num_new_ref_shapes; i++) {
 		GaussianShapeFunction* func = allocShapeFunction(shapes[i]);
 
 		refShapeFuncs.push_back(func);
 
-		prepareForAlignment(*func, refShapeMetaData[i], true);
+		prepareForAlignment(*func, refShapeMetaData[num_ref_shapes + i], true);
 	}
 }
 
-std::size_t Shape::GaussianShapeAlignment::getReferenceSetSize() const
+std::size_t Shape::GaussianShapeAlignment::getNumReferenceShapes() const
 {
 	return refShapeFuncs.size();
 }
 
-const Shape::GaussianShape& Shape::GaussianShapeAlignment::getReference(std::size_t idx) const
+const Shape::GaussianShape& Shape::GaussianShapeAlignment::getReferenceShape(std::size_t idx) const
 {
 	if (idx >= refShapeFuncs.size())
 		throw Base::IndexError("GaussianShapeAlignment: reference shape index out of bounds");
@@ -329,12 +353,12 @@ const Shape::GaussianShape& Shape::GaussianShapeAlignment::getReference(std::siz
 	return *refShapeFuncs[idx]->getShape();
 }
 
-Shape::GaussianShapeAlignment::ConstShapeIterator Shape::GaussianShapeAlignment::getReferencesBegin() const
+Shape::GaussianShapeAlignment::ConstShapeIterator Shape::GaussianShapeAlignment::getReferenceShapesBegin() const
 {
 	return ConstShapeIterator(refShapeFuncs.begin(), &getShape);
 }
 
-Shape::GaussianShapeAlignment::ConstShapeIterator Shape::GaussianShapeAlignment::getReferencesEnd() const
+Shape::GaussianShapeAlignment::ConstShapeIterator Shape::GaussianShapeAlignment::getReferenceShapesEnd() const
 {
 	return ConstShapeIterator(refShapeFuncs.end(), &getShape);
 }
@@ -342,7 +366,7 @@ Shape::GaussianShapeAlignment::ConstShapeIterator Shape::GaussianShapeAlignment:
 bool Shape::GaussianShapeAlignment::align(const GaussianShape& shape)
 {
 	results.clear();
-	shapeToResIndexMap.clear();
+	resIndexMap.clear();
 
 	algdShapeFunc.setShape(shape);
 
@@ -363,7 +387,7 @@ bool Shape::GaussianShapeAlignment::align(const GaussianShape& shape)
 bool Shape::GaussianShapeAlignment::align(const GaussianShapeSet& shapes)
 {
 	results.clear();
-	shapeToResIndexMap.clear();
+	resIndexMap.clear();
 
 	for (std::size_t i = 0, num_algd_shapes = shapes.getSize(), num_ref_shapes = refShapeFuncs.size(); i < num_algd_shapes; i++) {
 		algdShapeFunc.setShape(shapes.getElement(i));
@@ -409,6 +433,11 @@ Shape::GaussianShapeAlignment::ConstResultIterator Shape::GaussianShapeAlignment
 	
 void Shape::GaussianShapeAlignment::prepareForAlignment(GaussianShapeFunction& func, ShapeMetaData& data, bool ref)
 {
+	if (ref) {
+		data.setIndex = currSetIndex;
+		data.index = currShapeIndex++;
+	}
+
 	data.selfOverlap = (calcSlfOverlaps ? shapeFuncAlmnt.calcSelfOverlap(func) : 0.0);
 	data.colSelfOverlap = (calcColSlfOverlaps ? shapeFuncAlmnt.calcColorSelfOverlap(func) : 0.0);
 	data.symClass = (ref ? shapeFuncAlmnt.setupReference(func, data.transform) : shapeFuncAlmnt.setupAligned(func, data.transform));
@@ -437,8 +466,8 @@ void Shape::GaussianShapeAlignment::processResults(std::size_t ref_idx, std::siz
 				results.resize(out_res_idx + 1);
 				break;
 
-			case BEST_RESULT_FOR_EACH_PAIR:
-				if (getResultIndex(ref_idx, al_idx, out_res_idx))
+			case BEST_PER_SHAPE_COMBINATION:
+				if (getResultIndex(ResultID(ref_idx, al_idx), out_res_idx))
 					break;
 
 				if (resultCmpFunc(curr_res, results[out_res_idx]))
@@ -446,8 +475,8 @@ void Shape::GaussianShapeAlignment::processResults(std::size_t ref_idx, std::siz
 
 				return;
 
-			case BEST_RESULT_FOR_EACH_REF:
-				if (getResultIndex(ref_idx, 0, out_res_idx))
+			case BEST_PER_REFERENCE_SHAPE:
+				if (getResultIndex(ResultID(ref_idx, 0), out_res_idx))
 					break;
 
 				if (resultCmpFunc(curr_res, results[out_res_idx]))
@@ -455,7 +484,16 @@ void Shape::GaussianShapeAlignment::processResults(std::size_t ref_idx, std::siz
 
 				return;
 
-			case BEST_RESULT_PAIR:
+			case BEST_PER_REFERENCE_SET:
+				if (getResultIndex(ResultID(refShapeMetaData[ref_idx].setIndex, 0), out_res_idx))
+					break;
+
+				if (resultCmpFunc(curr_res, results[out_res_idx]))
+					break;
+
+				return;
+
+			case BEST_OVERALL:
 				if (results.empty()) {
 					results.resize(1);
 					break;
@@ -471,23 +509,23 @@ void Shape::GaussianShapeAlignment::processResults(std::size_t ref_idx, std::siz
 		Math::Matrix4D tmp(prod(refShapeMetaData[ref_idx].transform, shapeFuncAlmnt.getResult(i).getTransform()));
 
 		curr_res.setTransform(prod(tmp, algdShapeMetaData.transform));
-		curr_res.setReferenceShapeIndex(ref_idx);
+		curr_res.setReferenceShapeSetIndex(refShapeMetaData[ref_idx].setIndex);
+		curr_res.setReferenceShapeIndex(refShapeMetaData[ref_idx].index);
 		curr_res.setAlignedShapeIndex(al_idx);
 
 		results[out_res_idx] = curr_res;
 	}
 }
 
-bool Shape::GaussianShapeAlignment::getResultIndex(std::size_t ref_idx, std::size_t al_idx, std::size_t& res_idx)
+bool Shape::GaussianShapeAlignment::getResultIndex(const ResultID& res_id, std::size_t& res_idx)
 {
-	std::pair<std::size_t, std::size_t> idx_pair(ref_idx, al_idx); 
-	ShapePairToResultIndexMap::const_iterator it = shapeToResIndexMap.find(idx_pair);
+	ResultIndexMap::const_iterator it = resIndexMap.find(res_id);
 
-	if (it == shapeToResIndexMap.end()) {
+	if (it == resIndexMap.end()) {
 		res_idx = results.size();
 
 		results.resize(res_idx + 1);
-		shapeToResIndexMap.insert(ShapePairToResultIndexMap::value_type(idx_pair, res_idx));
+		resIndexMap.insert(ResultIndexMap::value_type(res_id, res_idx));
 
 		return true;
 	}

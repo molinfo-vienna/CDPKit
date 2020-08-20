@@ -35,6 +35,8 @@
 #include "CDPL/Shape/GaussianShapeSet.hpp"
 #include "CDPL/Shape/QuaternionTransformation.hpp"
 
+#include "CDPL/Shape/GaussianShapeGenerator.hpp"
+
 #include "CDPL/Shape/GaussianShapeFunction.hpp"
 #include "CDPL/Shape/GaussianShapeOverlapFunction.hpp"
 #include "CDPL/Shape/ExactGaussianShapeOverlapFunction.hpp"
@@ -44,7 +46,6 @@
 #include "CDPL/Shape/ScoringFunctions.hpp"
 #include "CDPL/Shape/ScoringFunctors.hpp"
 
-#include "CDPL/Shape/GaussianShapeGenerator.hpp"
 #include "CDPL/Shape/GaussianShapeAlignmentStartGenerator.hpp"
 #include "CDPL/Shape/PrincipalAxesAlignmentStartGenerator.hpp"
 #include "CDPL/Shape/GaussianShapeFunctionAlignment.hpp"

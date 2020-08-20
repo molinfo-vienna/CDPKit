@@ -68,6 +68,8 @@ namespace CDPL
 			
 			virtual std::size_t getNumStartTransforms() const = 0;
 
+			virtual std::size_t getNumStartSubTransforms() const = 0;
+
 			virtual const QuaternionTransformation& getStartTransform(std::size_t idx) const = 0;
 		};
 

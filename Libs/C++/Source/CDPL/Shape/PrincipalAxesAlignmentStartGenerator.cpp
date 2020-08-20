@@ -84,7 +84,7 @@ namespace
 
 Shape::PrincipalAxesAlignmentStartGenerator::PrincipalAxesAlignmentStartGenerator():
 	ctrAlignmentMode(SHAPE_CENTROID), refShape(0), symThreshold(0.15), 
-	refAxesSwapFlags(getAxesSwapFlags(SymmetryClass::UNDEF))
+	refAxesSwapFlags(getAxesSwapFlags(SymmetryClass::UNDEF)), numSubTransforms(0)
 {}
 
 unsigned int Shape::PrincipalAxesAlignmentStartGenerator::setupReference(GaussianShapeFunction& func, Math::Matrix4D& xform) const
@@ -150,9 +150,19 @@ bool Shape::PrincipalAxesAlignmentStartGenerator::generate(const GaussianShapeFu
 	if (!refShape)
 		return false;
 
-	startTransforms.clear();
-
 	unsigned int axes_swap_flags = refAxesSwapFlags | getAxesSwapFlags(sym_class);
+
+	startTransforms.clear();
+	numSubTransforms = 4;
+	
+	if (axes_swap_flags & 0b01) 
+		numSubTransforms += 4;
+				
+	if (axes_swap_flags & 0b10) 
+		numSubTransforms += 4;
+	
+	if (axes_swap_flags == 0b11)
+		numSubTransforms += 12;
 
 	if (ctrAlignmentMode & SHAPE_CENTROID)
 		generate(Math::Vector3D(), func, axes_swap_flags);
@@ -194,7 +204,7 @@ void Shape::PrincipalAxesAlignmentStartGenerator::generate(const Math::Vector3D&
 	addStartTransform(ctr_trans_data, X_180_ROT);
 	addStartTransform(ctr_trans_data, Y_180_ROT);
 	addStartTransform(ctr_trans_data, Z_180_ROT);
-	
+
 	if (axes_swap_flags & 0b01) {
 		addStartTransform(ctr_trans_data, XY_SWAP_ROT);
 		addStartTransform(ctr_trans_data, X_180_ROT * XY_SWAP_ROT);
@@ -230,6 +240,11 @@ void Shape::PrincipalAxesAlignmentStartGenerator::generate(const Math::Vector3D&
 std::size_t Shape::PrincipalAxesAlignmentStartGenerator::getNumStartTransforms() const
 {
     return startTransforms.size();
+}
+
+std::size_t Shape::PrincipalAxesAlignmentStartGenerator::getNumStartSubTransforms() const
+{
+    return numSubTransforms;
 }
 
 const Shape::QuaternionTransformation& Shape::PrincipalAxesAlignmentStartGenerator::getStartTransform(std::size_t idx) const

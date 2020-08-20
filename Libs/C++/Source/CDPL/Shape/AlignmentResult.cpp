@@ -33,7 +33,7 @@ using namespace CDPL;
 
 
 Shape::AlignmentResult::AlignmentResult():
-	transform(), score(0.0), refShapeIdx(0), algdShapeIdx(0), refSelfOverlap(0.0),
+	transform(), score(0.0), refShapeSetIdx(0), refShapeIdx(0), algdShapeIdx(0), refSelfOverlap(0.0),
 	refColSelfOverlap(0.0), algdSelfOverlap(0.0), algdColSelfOverlap(0.0), overlap(0.0),
 	colOverlap(0.0)
 {}
@@ -56,6 +56,16 @@ double Shape::AlignmentResult::getScore() const
 void Shape::AlignmentResult::setScore(double score)
 {
 	this->score = score;
+}
+
+std::size_t Shape::AlignmentResult::getReferenceShapeSetIndex() const 
+{
+	return refShapeSetIdx;
+}
+
+void Shape::AlignmentResult::setReferenceShapeSetIndex(std::size_t idx)
+{
+	refShapeSetIdx = idx;
 }
 
 std::size_t Shape::AlignmentResult::getReferenceShapeIndex() const 

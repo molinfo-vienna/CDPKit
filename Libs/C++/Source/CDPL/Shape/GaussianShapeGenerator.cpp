@@ -148,10 +148,10 @@ Pharm::DefaultPharmacophoreGenerator& Shape::GaussianShapeGenerator::getDefaultP
     return defPharmGen;
 }
 
-std::size_t Shape::GaussianShapeGenerator::generate(const Chem::MolecularGraph& molgraph, GaussianShapeSet& shapes, bool append)
+void Shape::GaussianShapeGenerator::generate(const Chem::MolecularGraph& molgraph, GaussianShapeSet& shapes, bool append)
 {
 	if (!genMolShape && !genPharmShape)
-		return 0;
+		return;
 
     if (!append)
 		shapes.clear();
@@ -164,7 +164,7 @@ std::size_t Shape::GaussianShapeGenerator::generate(const Chem::MolecularGraph& 
 		createShape(molgraph, Chem::Atom3DCoordinatesFunctor(), *shape_ptr);
 		shapes.addElement(shape_ptr);
 
-		return 1;
+		return;
 	}
 
 	for (std::size_t i = 0; i < num_confs; i++) {
@@ -173,8 +173,6 @@ std::size_t Shape::GaussianShapeGenerator::generate(const Chem::MolecularGraph& 
 		createShape(molgraph, Chem::AtomConformer3DCoordinatesFunctor(i), *shape_ptr);
 		shapes.addElement(shape_ptr);
 	}
-
-    return num_confs;
 }
 
 template <typename CoordsFunc>
@@ -227,5 +225,4 @@ void Shape::GaussianShapeGenerator::createShape(const Chem::MolecularGraph& molg
 			}
 		}
 	}
-
 }

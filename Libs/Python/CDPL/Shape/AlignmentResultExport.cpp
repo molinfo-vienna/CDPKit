@@ -53,6 +53,10 @@ void CDPLPythonShape::exportAlignmentResult()
 			 python::arg("self"))
 		.def("setScore", &Shape::AlignmentResult::setScore, 
 			 (python::arg("self"), python::arg("score")))
+		.def("getReferenceShapeSetIndex", &Shape::AlignmentResult::getReferenceShapeSetIndex, 
+			 python::arg("self"))
+		.def("setReferenceShapeSetIndex", &Shape::AlignmentResult::setReferenceShapeSetIndex, 
+			 (python::arg("self"), python::arg("idx")))
 		.def("getReferenceShapeIndex", &Shape::AlignmentResult::getReferenceShapeIndex, 
 			 python::arg("self"))
 		.def("setReferenceShapeIndex", &Shape::AlignmentResult::setReferenceShapeIndex, 
@@ -91,6 +95,9 @@ void CDPLPythonShape::exportAlignmentResult()
 		.add_property("score", 
 					  &Shape::AlignmentResult::getScore, 
 					  &Shape::AlignmentResult::setScore)
+		.add_property("referenceShapeSetIndex", 
+					  &Shape::AlignmentResult::getReferenceShapeSetIndex, 
+					  &Shape::AlignmentResult::setReferenceShapeSetIndex)
 		.add_property("referenceShapeIndex", 
 					  &Shape::AlignmentResult::getReferenceShapeIndex, 
 					  &Shape::AlignmentResult::setReferenceShapeIndex)

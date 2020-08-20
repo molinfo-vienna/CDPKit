@@ -239,38 +239,45 @@ bool Shape::GaussianShapeFunctionAlignment::align(const GaussianShapeFunction& f
 	overlapFunc->setShapeFunction(func, false);
 	
 	std::size_t num_starts = startGen->getNumStartTransforms();
+	std::size_t num_sub_xforms = startGen->getNumStartSubTransforms();
+
 	Result curr_res;
 	QuaternionTransformation opt_xform;
 	QuaternionTransformation opt_xform_grad;
 
-	for (std::size_t i = 0; i < num_starts; i++) {
-		if (!optOverlap) {
-			quaternionToMatrix(startGen->getStartTransform(i), curr_res.transform);
-			Shape::transform(optPoseCoords, curr_res.transform, startPoseCoords);
+	for (std::size_t i = 0; i < num_starts; ) {
+		for (std::size_t j = 0; j < num_sub_xforms && i < num_starts; j++, i++) {
+			if (!optOverlap) {
+				quaternionToMatrix(startGen->getStartTransform(i), curr_res.transform);
+				Shape::transform(optPoseCoords, curr_res.transform, startPoseCoords);
 
-			curr_res.overlap = overlapFunc->calcOverlap(optPoseCoords);
-			curr_res.colOverlap = (calcColOverlaps ? overlapFunc->calcColorOverlap(optPoseCoords) : 0.0);
-	
-			results.push_back(curr_res);
-			continue;
-		}
+				curr_res.overlap = overlapFunc->calcOverlap(optPoseCoords);
 
-		opt_xform = startGen->getStartTransform(i);
+			} else {
+				opt_xform = startGen->getStartTransform(i);
 
-		minimizer.setup(opt_xform, opt_xform_grad, BFGS_MINIMIZER_STEP_SIZE, BFGS_MINIMIZER_TOLERANCE);
-		minimizer.minimize(opt_xform, opt_xform_grad, maxNumOptIters, optStopGrad, -1.0, false);
+				minimizer.setup(opt_xform, opt_xform_grad, BFGS_MINIMIZER_STEP_SIZE, BFGS_MINIMIZER_TOLERANCE);
+				minimizer.minimize(opt_xform, opt_xform_grad, maxNumOptIters, optStopGrad, -1.0, false);
 		
-	    if (!boost::math::isfinite(minimizer.getFunctionValue()))  // sanity check
-			continue;
+				if (!boost::math::isfinite(minimizer.getFunctionValue()))  // sanity check
+					continue;
 				   
-		normalize(opt_xform);
-		quaternionToMatrix(opt_xform, curr_res.transform);
-		Shape::transform(optPoseCoords, curr_res.transform, startPoseCoords);
+				normalize(opt_xform);
+				quaternionToMatrix(opt_xform, curr_res.transform);
+				Shape::transform(optPoseCoords, curr_res.transform, startPoseCoords);
 
-		curr_res.overlap = overlapFunc->calcOverlap(optPoseCoords);
-		curr_res.colOverlap = (calcColOverlaps ? overlapFunc->calcColorOverlap(optPoseCoords) : 0.0);
+				curr_res.overlap = overlapFunc->calcOverlap(optPoseCoords);
+			}
 	
-		results.push_back(curr_res);
+			if (j == 0) {
+				curr_res.colOverlap = (calcColOverlaps ? overlapFunc->calcColorOverlap(optPoseCoords) : 0.0);
+				results.push_back(curr_res);
+
+			} else if (curr_res.overlap > results.back().overlap) {
+				curr_res.colOverlap = (calcColOverlaps ? overlapFunc->calcColorOverlap(optPoseCoords) : 0.0);
+				results.back() = curr_res;
+			}
+		}
 	}
 	
 	return !results.empty();
