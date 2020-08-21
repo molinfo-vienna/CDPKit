@@ -60,6 +60,9 @@ namespace CDPL
 			    SHAPE_CENTROID            = 0x1,
 				NON_COLOR_ELEMENT_CENTERS = 0x2,
 				COLOR_ELEMENT_CENTERS     = 0x4,
+				REFERENCE_SHAPE           = 0x8,
+				ALIGNED_SHAPE             = 0x10,
+				LARGEST_SHAPE             = 0x20
 			};
 
 			PrincipalAxesAlignmentStartGenerator();
@@ -89,6 +92,8 @@ namespace CDPL
 		  private:
 			typedef std::vector<QuaternionTransformation> StartTransformList;
 
+			void generateForElementCenters(const GaussianShape* shape, const GaussianShapeFunction& func, 
+										   unsigned int axes_swap_flags, bool ref_shape);
 			void generate(const Math::Vector3D& ctr_trans, const GaussianShapeFunction& func, unsigned int axes_swap_flags);
 
 			template <typename QE>

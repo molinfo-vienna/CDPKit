@@ -59,5 +59,8 @@ void CDPLPythonShape::exportPrincipalAxesAlignmentStartGenerator()
 		.value("SHAPE_CENTROID", Shape::PrincipalAxesAlignmentStartGenerator::SHAPE_CENTROID)
 		.value("NON_COLOR_ELEMENT_CENTERS", Shape::PrincipalAxesAlignmentStartGenerator::NON_COLOR_ELEMENT_CENTERS)
 		.value("COLOR_ELEMENT_CENTERS", Shape::PrincipalAxesAlignmentStartGenerator::COLOR_ELEMENT_CENTERS)
+		.value("REFERENCE_SHAPE", Shape::PrincipalAxesAlignmentStartGenerator::REFERENCE_SHAPE)
+		.value("ALIGNED_SHAPE", Shape::PrincipalAxesAlignmentStartGenerator::ALIGNED_SHAPE)
+		.value("LARGEST_SHAPE", Shape::PrincipalAxesAlignmentStartGenerator::LARGEST_SHAPE)
 		.export_values();
 }

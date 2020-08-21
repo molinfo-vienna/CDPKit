@@ -150,6 +150,9 @@ bool Shape::PrincipalAxesAlignmentStartGenerator::generate(const GaussianShapeFu
 	if (!refShape)
 		return false;
 
+	if (!func.getShape())
+		return false;
+
 	unsigned int axes_swap_flags = refAxesSwapFlags | getAxesSwapFlags(sym_class);
 
 	startTransforms.clear();
@@ -167,33 +170,88 @@ bool Shape::PrincipalAxesAlignmentStartGenerator::generate(const GaussianShapeFu
 	if (ctrAlignmentMode & SHAPE_CENTROID)
 		generate(Math::Vector3D(), func, axes_swap_flags);
 
+	if (ctrAlignmentMode & (NON_COLOR_ELEMENT_CENTERS | COLOR_ELEMENT_CENTERS)) {
+		switch (ctrAlignmentMode & (REFERENCE_SHAPE | ALIGNED_SHAPE | LARGEST_SHAPE)) {
+
+			case LARGEST_SHAPE:
+				if (func.getShape()->getNumElements() > refShape->getNumElements())
+					generateForElementCenters(func.getShape(), func, axes_swap_flags, false);				
+				else
+					generateForElementCenters(refShape, func, axes_swap_flags, true);
+
+				break;
+
+			case (REFERENCE_SHAPE | LARGEST_SHAPE): 
+				if (func.getShape()->getNumElements() > refShape->getNumElements()) {
+					generateForElementCenters(func.getShape(), func, axes_swap_flags, false);				
+					generateForElementCenters(refShape, func, axes_swap_flags, true);				
+
+				} else
+					generateForElementCenters(refShape, func, axes_swap_flags, true);
+			
+				break;
+
+			case (ALIGNED_SHAPE | LARGEST_SHAPE):
+				if (func.getShape()->getNumElements() > refShape->getNumElements()) 
+					generateForElementCenters(func.getShape(), func, axes_swap_flags, false);				
+
+				else {
+					generateForElementCenters(func.getShape(), func, axes_swap_flags, false);				
+					generateForElementCenters(refShape, func, axes_swap_flags, true);
+				}
+
+				break;
+
+			case (REFERENCE_SHAPE | ALIGNED_SHAPE | LARGEST_SHAPE):
+			case (REFERENCE_SHAPE | ALIGNED_SHAPE):
+				generateForElementCenters(func.getShape(), func, axes_swap_flags, false);				
+
+			default:
+				generateForElementCenters(refShape, func, axes_swap_flags, true);
+				break;
+		}
+	}
+
+	return !startTransforms.empty();
+}
+
+void Shape::PrincipalAxesAlignmentStartGenerator::generateForElementCenters(const GaussianShape* shape, const GaussianShapeFunction& func, unsigned int axes_swap_flags, bool ref_shape)
+{
 	switch (ctrAlignmentMode & (NON_COLOR_ELEMENT_CENTERS | COLOR_ELEMENT_CENTERS)) {
 
 		case (NON_COLOR_ELEMENT_CENTERS | COLOR_ELEMENT_CENTERS):
-			for (GaussianShape::ConstElementIterator it = refShape->getElementsBegin(), end = refShape->getElementsEnd(); it != end; ++it) 
-				generate(it->getPosition(), func, axes_swap_flags);
+			for (GaussianShape::ConstElementIterator it = shape->getElementsBegin(), end = shape->getElementsEnd(); it != end; ++it) {
+				if (ref_shape)
+					generate(it->getPosition(), func, axes_swap_flags);
+				else
+					generate(-it->getPosition(), func, axes_swap_flags);
+			}
 
-			return true;
+			return;
 
 		case NON_COLOR_ELEMENT_CENTERS:
-			for (GaussianShape::ConstElementIterator it = refShape->getElementsBegin(), end = refShape->getElementsEnd(); it != end; ++it) 
-				if (it->getColor() == 0)
-					generate(it->getPosition(), func, axes_swap_flags);
+			for (GaussianShape::ConstElementIterator it = shape->getElementsBegin(), end = shape->getElementsEnd(); it != end; ++it) 
+				if (it->getColor() == 0) {
+					if (ref_shape)
+						generate(it->getPosition(), func, axes_swap_flags);
+					else
+						generate(-it->getPosition(), func, axes_swap_flags);
+				}
 
-			return true;
+			return;
 
 		case COLOR_ELEMENT_CENTERS:
-			for (GaussianShape::ConstElementIterator it = refShape->getElementsBegin(), end = refShape->getElementsEnd(); it != end; ++it) 
-				if (it->getColor() != 0)
-					generate(it->getPosition(), func, axes_swap_flags);
-
-			return true;
+			for (GaussianShape::ConstElementIterator it = shape->getElementsBegin(), end = shape->getElementsEnd(); it != end; ++it) 
+				if (it->getColor() != 0) {
+					if (ref_shape)
+						generate(it->getPosition(), func, axes_swap_flags);
+					else
+						generate(-it->getPosition(), func, axes_swap_flags);
+				}
 
 		default:
-			return true;
+			break;
 	}
-
-	return true;
 }
 
 void Shape::PrincipalAxesAlignmentStartGenerator::generate(const Math::Vector3D& ctr_trans, const GaussianShapeFunction& func, unsigned int axes_swap_flags)
