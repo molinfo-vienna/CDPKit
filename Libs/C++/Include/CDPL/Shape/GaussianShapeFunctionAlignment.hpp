@@ -135,6 +135,10 @@ namespace CDPL
 
 			const ColorFilterFunction& getColorFilterFunction() const;
 
+			void performAlignment(bool perf_align);
+
+			bool performAlignment() const;
+
 			void optimizeOverlap(bool optimize);
 
 			bool optimizeOverlap() const;
@@ -195,6 +199,7 @@ namespace CDPL
 			GaussianShapeAlignmentStartGenerator* startGen;
 			const GaussianShapeFunction*          refShapeFunc;
 			unsigned int                          refShapeSymClass;
+			bool                                  perfAlignment;
 			bool                                  calcColOverlaps;
 			bool                                  optOverlap;
 			bool                                  greedyOpt;

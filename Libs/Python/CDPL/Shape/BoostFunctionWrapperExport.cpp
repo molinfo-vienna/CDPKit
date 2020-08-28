@@ -29,6 +29,7 @@
 #include <boost/function.hpp>
 
 #include "CDPL/Shape/AlignmentResult.hpp"
+#include "CDPL/Chem/MolecularGraph.hpp"
 
 #include "Base/BoostFunctionWrapperExport.hpp"
 
@@ -45,4 +46,6 @@ void CDPLPythonShape::exportBoostFunctionWrappers()
 
 	CDPLPythonBase::BoostFunction2Export<boost::function2<bool, const Shape::AlignmentResult&, const Shape::AlignmentResult&> >("BoolAlignmentResult2Functor");
 	CDPLPythonBase::BoostFunction2Export<boost::function2<bool, std::size_t, std::size_t> >("BoolSizeType2Functor");
+
+	CDPLPythonBase::BoostFunction3Export<boost::function3<void, const Chem::MolecularGraph&, const Chem::MolecularGraph&, const Shape::AlignmentResult&> >("VoidMolecularGraph2AlignmentResultFunctor");
 }

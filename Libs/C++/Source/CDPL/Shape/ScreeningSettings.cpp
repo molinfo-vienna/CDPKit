@@ -1,0 +1,146 @@
+/* -*- mode: c++; c-basic-offset: 4; tab-width: 4; indent-tabs-mode: t -*- */
+
+/* 
+ * ScreeningSettings.cpp 
+ *
+ * This file is part of the Chemical Data Processing Toolkit
+ *
+ * Copyright (C) 2003-2020 Thomas A. Seidel <thomas.seidel@univie.ac.at>
+ *
+ * This library is free software; you can redistribute it and/or
+ * modify it under the terms of the GNU Lesser General Public
+ * License as published by the Free Software Foundation; either
+ * version 2 of the License, or (at your option) any later version.
+ *
+ * This library is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU
+ * Lesser General Public License for more details.
+ *
+ * You should have received a copy of the GNU Lesser General Public License
+ * along with this library; see the file COPYING. If not, write to
+ * the Free Software Foundation, Inc., 59 Temple Place - Suite 330,
+ * Boston, MA 02111-1307, USA.
+ */
+
+ 
+#include "StaticInit.hpp"
+
+#include <limits>
+
+#include "CDPL/Shape/ScreeningSettings.hpp"
+#include "CDPL/Shape/ScoringFunctions.hpp"
+
+
+using namespace CDPL;
+
+
+const Shape::ScreeningSettings Shape::ScreeningSettings::DEFAULT;
+const double                   Shape::ScreeningSettings::NO_THRESHOLD = std::numeric_limits<double>::quiet_NaN();
+
+
+Shape::ScreeningSettings::ScreeningSettings():
+    scoringFunc(&calcTanimotoComboScore), colorFtrType(PHARMACOPHORE_IMP_CHARGES), screeningMode(BEST_OVERALL_MATCH),
+    almntMode(SHAPE_CENTROID), multiConfQry(true), optOverlap(true), greedyOpt(true), numOptIter(20), optStopGrad(1.0), 
+    scoreThresh(NO_THRESHOLD)    
+{}
+
+void Shape::ScreeningSettings::setScoringFunction(const ScoringFunction& func)
+{
+    scoringFunc = func;
+}
+
+const Shape::ScreeningSettings::ScoringFunction& Shape::ScreeningSettings::getScoringFunction() const
+{
+    return scoringFunc;
+}
+
+void Shape::ScreeningSettings::setColorFeatureType(ColorFeatureType type)
+{
+    colorFtrType = type;
+}
+
+Shape::ScreeningSettings::ColorFeatureType Shape::ScreeningSettings::getColorFeatureType() const
+{
+    return colorFtrType;
+}
+
+void Shape::ScreeningSettings::setScreeningMode(ScreeningMode mode)
+{
+    screeningMode = mode;
+}
+
+Shape::ScreeningSettings::ScreeningMode Shape::ScreeningSettings::getScreeningMode() const
+{
+    return screeningMode;
+}
+
+void Shape::ScreeningSettings::setAlignmentMode(AlignmentMode mode)
+{
+    almntMode = mode;
+}
+
+Shape::ScreeningSettings::AlignmentMode Shape::ScreeningSettings::getAlignmentMode() const
+{
+    return almntMode;
+}
+
+void Shape::ScreeningSettings::multiConformerQuery(bool multi_conf)
+{
+    multiConfQry = multi_conf;
+}
+
+bool Shape::ScreeningSettings::multiConformerQuery() const
+{
+    return multiConfQry;
+}
+
+void Shape::ScreeningSettings::optimizeOverlap(bool optimize)
+{
+    optOverlap = optimize;
+}
+
+bool Shape::ScreeningSettings::optimizeOverlap() const
+{
+    return optOverlap;
+}
+
+void Shape::ScreeningSettings::greedyOptimization(bool greedy)
+{
+    greedyOpt = greedy;
+}
+
+bool Shape::ScreeningSettings::greedyOptimization() const
+{
+    return greedyOpt;
+}
+
+void Shape::ScreeningSettings::setMaxNumOptimizationIterations(std::size_t max_iter)
+{
+    numOptIter  = max_iter;
+}
+
+std::size_t Shape::ScreeningSettings::getMaxNumOptimizationIterations() const
+{
+    return numOptIter;
+}
+
+void Shape::ScreeningSettings::setOptimizationStopGradient(double grad_norm)
+{
+    optStopGrad = grad_norm;
+}
+
+double Shape::ScreeningSettings::getOptimizationStopGradient() const
+{
+    return optStopGrad;
+}
+		
+void Shape::ScreeningSettings::setScoreThreshold(double thresh)
+{
+    scoreThresh = thresh;
+}
+
+double Shape::ScreeningSettings::getScoreThreshold() const
+{
+    return scoreThresh;
+}

@@ -83,8 +83,8 @@ namespace CDPL
 		  public:
 			static const double              DEF_OPTIMIZATION_STOP_GRADIENT;
 			static const std::size_t         DEF_MAX_OPTIMIZATION_ITERATIONS = 20;
-			static const std::size_t         DEF_MAX_PRODUCT_ORDER = 1;
-			static const ResultSelectionMode DEF_RESULT_SELECTION_MODE = BEST_PER_REFERENCE_SET;
+			static const std::size_t         DEF_MAX_PRODUCT_ORDER           = 1;
+			static const ResultSelectionMode DEF_RESULT_SELECTION_MODE       = BEST_PER_REFERENCE_SET;
 			static const double              DEF_DISTANCE_CUTOFF;
 
 			typedef boost::shared_ptr<GaussianShapeAlignment> SharedPointer;
@@ -152,6 +152,10 @@ namespace CDPL
 			void calcColorOverlaps(bool calc);
 
 			bool calcColorOverlaps() const;
+
+			void performAlignment(bool perf_align);
+
+			bool performAlignment() const;
 
 			void optimizeOverlap(bool optimize);
 

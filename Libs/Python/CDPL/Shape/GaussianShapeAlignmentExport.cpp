@@ -92,6 +92,10 @@ void CDPLPythonShape::exportGaussianShapeAlignment()
 			 (python::arg("self"), python::arg("grad_norm")))
 		.def("getOptimizationStopGradient", &Shape::GaussianShapeAlignment::getOptimizationStopGradient,
 			 python::arg("self"))
+		.def("performAlignment", SetBoolFunc(&Shape::GaussianShapeAlignment::performAlignment),
+			 (python::arg("self"), python::arg("perf_align")))
+		.def("performAlignment", GetBoolFunc(&Shape::GaussianShapeAlignment::performAlignment),
+			 python::arg("self"))
 		.def("optimizeOverlap", SetBoolFunc(&Shape::GaussianShapeAlignment::optimizeOverlap),
 			 (python::arg("self"), python::arg("optimize")))
 		.def("optimizeOverlap", GetBoolFunc(&Shape::GaussianShapeAlignment::optimizeOverlap),
@@ -182,6 +186,8 @@ void CDPLPythonShape::exportGaussianShapeAlignment()
 					  &Shape::GaussianShapeAlignment::setMaxNumOptimizationIterations)
 		.add_property("optStopGradient", &Shape::GaussianShapeAlignment::getOptimizationStopGradient,
 					  &Shape::GaussianShapeAlignment::setOptimizationStopGradient)
+		.add_property("perfAlignment", GetBoolFunc(&Shape::GaussianShapeAlignment::performAlignment),
+					  SetBoolFunc(&Shape::GaussianShapeAlignment::performAlignment))
 		.add_property("optOverlap", GetBoolFunc(&Shape::GaussianShapeAlignment::optimizeOverlap),
 					  SetBoolFunc(&Shape::GaussianShapeAlignment::optimizeOverlap))
 		.add_property("greedyOpt", GetBoolFunc(&Shape::GaussianShapeAlignment::greedyOptimization),

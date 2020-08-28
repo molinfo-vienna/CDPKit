@@ -45,6 +45,9 @@ namespace CDPLPythonShape
 	void exportAlignmentResult();
 	void exportScoringFunctors();
 
+	void exportScreeningSettings();
+	void exportScreeningProcessor();
+
 	void exportGaussianShapeAlignmentStartGenerator();
 	void exportPrincipalAxesAlignmentStartGenerator();
 	void exportGaussianShapeFunctionAlignment();

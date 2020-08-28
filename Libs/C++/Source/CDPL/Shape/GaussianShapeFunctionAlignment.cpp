@@ -33,6 +33,7 @@
 #include "CDPL/Shape/GaussianShapeFunction.hpp"
 #include "CDPL/Shape/UtilityFunctions.hpp"
 #include "CDPL/Shape/SymmetryClass.hpp"
+#include "CDPL/Math/Matrix.hpp"
 #include "CDPL/Base/Exceptions.hpp"
 
 #include "Utilities.hpp"
@@ -55,14 +56,14 @@ const std::size_t Shape::GaussianShapeFunctionAlignment::DEF_MAX_OPTIMIZATION_IT
 
 
 Shape::GaussianShapeFunctionAlignment::GaussianShapeFunctionAlignment():
-	overlapFunc(&defOverlapFunc), startGen(&defStartGen), refShapeFunc(0), refShapeSymClass(SymmetryClass::UNDEF), calcColOverlaps(true),
-	optOverlap(true), greedyOpt(false), maxNumOptIters(DEF_MAX_OPTIMIZATION_ITERATIONS), optStopGrad(DEF_OPTIMIZATION_STOP_GRADIENT),
+	overlapFunc(&defOverlapFunc), startGen(&defStartGen), refShapeFunc(0), refShapeSymClass(SymmetryClass::UNDEF), perfAlignment(true),
+	calcColOverlaps(true), optOverlap(true), greedyOpt(false), maxNumOptIters(DEF_MAX_OPTIMIZATION_ITERATIONS), optStopGrad(DEF_OPTIMIZATION_STOP_GRADIENT),
 	minimizer(boost::bind(&GaussianShapeFunctionAlignment::calcAlignmentFunctionValue, this, _1),
 			  boost::bind(&GaussianShapeFunctionAlignment::calcAlignmentFunctionGradient, this, _1, _2))
 {}
 
 Shape::GaussianShapeFunctionAlignment::GaussianShapeFunctionAlignment(const GaussianShapeFunction& ref_func, unsigned int sym_class):
-	overlapFunc(&defOverlapFunc), startGen(&defStartGen), calcColOverlaps(true),
+	overlapFunc(&defOverlapFunc), startGen(&defStartGen), perfAlignment(true), calcColOverlaps(true),
 	optOverlap(true), greedyOpt(false), maxNumOptIters(DEF_MAX_OPTIMIZATION_ITERATIONS), optStopGrad(DEF_OPTIMIZATION_STOP_GRADIENT),
 	minimizer(boost::bind(&GaussianShapeFunctionAlignment::calcAlignmentFunctionValue, this, _1),
 			  boost::bind(&GaussianShapeFunctionAlignment::calcAlignmentFunctionGradient, this, _1, _2))
@@ -130,6 +131,16 @@ void Shape::GaussianShapeFunctionAlignment::setColorFilterFunction(const ColorFi
 const Shape::GaussianShapeFunctionAlignment::ColorFilterFunction& Shape::GaussianShapeFunctionAlignment::getColorFilterFunction() const
 {
 	return overlapFunc->getColorFilterFunction();
+}
+
+void Shape::GaussianShapeFunctionAlignment::performAlignment(bool perf_align)
+{
+	perfAlignment = perf_align;
+}
+
+bool Shape::GaussianShapeFunctionAlignment::performAlignment() const
+{
+	return perfAlignment;
 }
 
 void Shape::GaussianShapeFunctionAlignment::optimizeOverlap(bool optimize)
@@ -229,6 +240,20 @@ bool Shape::GaussianShapeFunctionAlignment::align(const GaussianShapeFunction& f
 
 	if (!checkValidity(func))
 		return false;
+
+	if (!perfAlignment) {
+		overlapFunc->setShapeFunction(func, false);
+
+		Result res;
+
+		res.overlap = overlapFunc->calcOverlap();
+		res.colOverlap = (calcColOverlaps ? overlapFunc->calcColorOverlap() : 0.0);
+		res.transform = Math::IdentityMatrix<double>(4, 4);
+
+		results.push_back(res);
+
+		return true;
+	}
 
 	if (!startGen->generate(func, sym_class))
 		return false;

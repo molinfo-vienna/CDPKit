@@ -28,6 +28,8 @@
 
 #include "CDPL/Shape/GaussianShapeAlignment.hpp"
 #include "CDPL/Shape/ScoringFunctions.hpp"
+#include "CDPL/Shape/SymmetryClass.hpp"
+#include "CDPL/Math/Matrix.hpp"
 #include "CDPL/Base/Exceptions.hpp"
 
 
@@ -225,6 +227,31 @@ void Shape::GaussianShapeAlignment::calcColorOverlaps(bool calc)
 bool Shape::GaussianShapeAlignment::calcColorOverlaps() const
 {
 	return shapeFuncAlmnt.calcColorOverlaps();
+}
+
+void Shape::GaussianShapeAlignment::performAlignment(bool perf_align)
+{
+	if (shapeFuncAlmnt.performAlignment() == perf_align)
+		return;
+
+	for (std::size_t i = 0, num_ref_shapes = refShapeFuncs.size(); i < num_ref_shapes; i++) {
+		refShapeFuncs[i]->reset();
+
+		if (perf_align) 
+			refShapeMetaData[i].symClass = shapeFuncAlmnt.setupReference(*refShapeFuncs[i], refShapeMetaData[i].transform);
+
+		else {
+			refShapeMetaData[i].symClass = SymmetryClass::UNDEF;
+			refShapeMetaData[i].transform = Math::IdentityMatrix<double>(4, 4);
+		}
+	}
+
+	shapeFuncAlmnt.performAlignment(perf_align);
+}
+
+bool Shape::GaussianShapeAlignment::performAlignment() const
+{
+	return shapeFuncAlmnt.performAlignment();
 }
 
 void Shape::GaussianShapeAlignment::optimizeOverlap(bool optimize)
@@ -440,7 +467,13 @@ void Shape::GaussianShapeAlignment::prepareForAlignment(GaussianShapeFunction& f
 
 	data.selfOverlap = (calcSlfOverlaps ? shapeFuncAlmnt.calcSelfOverlap(func) : 0.0);
 	data.colSelfOverlap = (calcColSlfOverlaps ? shapeFuncAlmnt.calcColorSelfOverlap(func) : 0.0);
-	data.symClass = (ref ? shapeFuncAlmnt.setupReference(func, data.transform) : shapeFuncAlmnt.setupAligned(func, data.transform));
+
+	if (!shapeFuncAlmnt.performAlignment()) {
+		data.symClass = SymmetryClass::UNDEF;
+		data.transform = Math::IdentityMatrix<double>(4, 4);
+
+	} else
+		data.symClass = (ref ? shapeFuncAlmnt.setupReference(func, data.transform) : shapeFuncAlmnt.setupAligned(func, data.transform));
 }
 
 void Shape::GaussianShapeAlignment::processResults(std::size_t ref_idx, std::size_t al_idx)

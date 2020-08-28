@@ -28,19 +28,21 @@ INCLUDE_DIRECTORIES("${CMAKE_CURRENT_SOURCE_DIR}" "${CDPKIT_EXTERNAL_DIR}")
 SET(cdpl-shape_LIB_SRCS
     GaussianShape.cpp
     GaussianShapeFunction.cpp
+
+    GaussianShapeGenerator.cpp
     
     GaussianShapeOverlapFunction.cpp
     ExactGaussianShapeOverlapFunction.cpp
     FastGaussianShapeOverlapFunction.cpp
 
-    GaussianShapeGenerator.cpp
-
     AlignmentResult.cpp
-
     GaussianShapeAlignment.cpp
     GaussianShapeFunctionAlignment.cpp
     GaussianShapeAlignmentStartGenerator.cpp
     PrincipalAxesAlignmentStartGenerator.cpp
+
+    ScreeningSettings.cpp
+    ScreeningProcessor.cpp
 
     GaussianShapeFunctions.cpp
     UtilityFunctions.cpp

@@ -44,7 +44,7 @@ namespace CDPL
     {
 		
 		/**
-		 * \addtogroup CDPL_SHAPE_DATA_STRUCTURES
+		 * \addtogroup CDPL_SHAPE_ALIGNMENT
 		 * @{
 		 */
 

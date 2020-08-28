@@ -76,6 +76,10 @@ void CDPLPythonShape::exportGaussianShapeFunctionAlignment()
 			 (python::arg("self"), python::arg("func")))
 		.def("getColorFilterFunction", &Shape::GaussianShapeFunctionAlignment::getColorFilterFunction,
 			 python::arg("self"), python::return_internal_reference<>())
+		.def("performAlignment", SetBoolFunc(&Shape::GaussianShapeFunctionAlignment::performAlignment),
+			 (python::arg("self"), python::arg("perf_align")))
+		.def("performAlignment", GetBoolFunc(&Shape::GaussianShapeFunctionAlignment::performAlignment),
+			 python::arg("self"))
 		.def("setMaxNumOptimizationIterations", &Shape::GaussianShapeFunctionAlignment::setMaxNumOptimizationIterations,
 			 (python::arg("self"), python::arg("max_iter")))
 		.def("getMaxNumOptimizationIterations", &Shape::GaussianShapeFunctionAlignment::getMaxNumOptimizationIterations,
@@ -142,6 +146,8 @@ void CDPLPythonShape::exportGaussianShapeFunctionAlignment()
 		.add_property("colorFilterFunction", python::make_function(&Shape::GaussianShapeFunctionAlignment::getColorFilterFunction,
 																   python::return_internal_reference<>()),
 					  &Shape::GaussianShapeFunctionAlignment::setColorFilterFunction)
+		.add_property("perfAlignment", GetBoolFunc(&Shape::GaussianShapeFunctionAlignment::performAlignment),
+					  SetBoolFunc(&Shape::GaussianShapeFunctionAlignment::performAlignment))
 		.add_property("maxNumOptIterations", &Shape::GaussianShapeFunctionAlignment::getMaxNumOptimizationIterations,
 					  &Shape::GaussianShapeFunctionAlignment::setMaxNumOptimizationIterations)
 		.add_property("optStopGradient", &Shape::GaussianShapeFunctionAlignment::getOptimizationStopGradient,
