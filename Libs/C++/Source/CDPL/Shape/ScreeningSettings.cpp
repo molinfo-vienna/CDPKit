@@ -41,8 +41,8 @@ const double                   Shape::ScreeningSettings::NO_THRESHOLD = std::num
 
 Shape::ScreeningSettings::ScreeningSettings():
     scoringFunc(&calcTanimotoComboScore), colorFtrType(PHARMACOPHORE_IMP_CHARGES), screeningMode(BEST_OVERALL_MATCH),
-    almntMode(SHAPE_CENTROID), multiConfQry(true), optOverlap(true), greedyOpt(true), numOptIter(20), optStopGrad(1.0), 
-    scoreThresh(NO_THRESHOLD)    
+    almntMode(SHAPE_CENTROID), allCarbon(false), multiConfQry(true), optOverlap(true), greedyOpt(true), numOptIter(20), 
+	optStopGrad(1.0), scoreThresh(NO_THRESHOLD)    
 {}
 
 void Shape::ScreeningSettings::setScoringFunction(const ScoringFunction& func)
@@ -83,6 +83,16 @@ void Shape::ScreeningSettings::setAlignmentMode(AlignmentMode mode)
 Shape::ScreeningSettings::AlignmentMode Shape::ScreeningSettings::getAlignmentMode() const
 {
     return almntMode;
+}
+
+void Shape::ScreeningSettings::allCarbonMode(bool all_c)
+{
+    allCarbon = all_c;
+}
+
+bool Shape::ScreeningSettings::allCarbonMode() const
+{
+    return allCarbon;
 }
 
 void Shape::ScreeningSettings::multiConformerQuery(bool multi_conf)

@@ -103,6 +103,10 @@ namespace CDPL
 
 			AlignmentMode getAlignmentMode() const;
 
+			void allCarbonMode(bool all_c);
+
+			bool allCarbonMode() const;
+
 			void multiConformerQuery(bool multi_conf);
 
 			bool multiConformerQuery() const;
@@ -132,6 +136,7 @@ namespace CDPL
 			ColorFeatureType  colorFtrType;
 			ScreeningMode     screeningMode;
 			AlignmentMode     almntMode;
+			bool              allCarbon;
 			bool              multiConfQry;
 			bool              optOverlap;
 			bool              greedyOpt;

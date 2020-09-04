@@ -43,6 +43,7 @@
 #include "CDPL/Shape/GaussianShapeGenerator.hpp"
 #include "CDPL/Shape/ScreeningSettings.hpp"
 #include "CDPL/Shape/GaussianShapeSet.hpp"
+#include "CDPL/Pharm/DefaultPharmacophoreGenerator.hpp"
 
 
 namespace CDPL 
@@ -108,13 +109,20 @@ namespace CDPL
 			ScreeningProcessor& operator=(const ScreeningProcessor& proc);
 
 			void init();
+			void applyShapeGenSettings(bool query);
+			void applyAlignmentSettings();
+			void resetQuery();
 
-			ScreeningSettings      settings;
-			GaussianShapeAlignment alignment;
-			GaussianShapeGenerator shapeGen;
-			MolecularGraphList     queryList;
-			HitCallbackFunction    hitCallback;
-			GaussianShapeSet       shapes;
+			ScreeningSettings                    settings;
+			ScreeningSettings::ColorFeatureType  colorFtrType;
+			bool                                 multiConfQuery;
+			bool                                 allCarbon;
+			Pharm::DefaultPharmacophoreGenerator expChgPharmGen;
+			GaussianShapeAlignment               alignment;
+			GaussianShapeGenerator               shapeGen;
+			MolecularGraphList                   queryList;
+			HitCallbackFunction                  hitCallback;
+			GaussianShapeSet                     shapes;
 		};
 
 		/**

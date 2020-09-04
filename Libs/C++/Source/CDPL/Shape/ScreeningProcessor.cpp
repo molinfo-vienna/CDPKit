@@ -36,12 +36,27 @@
 using namespace CDPL;
 
 
-Shape::ScreeningProcessor::ScreeningProcessor()
+namespace
+{
+
+	const double CARBON_RADIUS = 1.7;
+}
+
+
+Shape::ScreeningProcessor::ScreeningProcessor():
+	colorFtrType(ScreeningSettings::DEFAULT.getColorFeatureType()), 
+	multiConfQuery(ScreeningSettings::DEFAULT.multiConformerQuery()),
+	allCarbon(ScreeningSettings::DEFAULT.allCarbonMode()),
+    expChgPharmGen(false)
 {
 	init();
 }
 
-Shape::ScreeningProcessor::ScreeningProcessor(const Chem::MolecularGraph& query)
+Shape::ScreeningProcessor::ScreeningProcessor(const Chem::MolecularGraph& query):
+	colorFtrType(ScreeningSettings::DEFAULT.getColorFeatureType()), 
+	multiConfQuery(ScreeningSettings::DEFAULT.multiConformerQuery()),
+	allCarbon(ScreeningSettings::DEFAULT.allCarbonMode()),
+    expChgPharmGen(false)
 {
 	init();
 	addQuery(query);
@@ -78,7 +93,7 @@ void Shape::ScreeningProcessor::clearQuerySet()
 
 void Shape::ScreeningProcessor::addQuery(const Chem::MolecularGraph& molgraph)
 {
-	// TODO: apply settings
+	applyShapeGenSettings(true);
 
 	shapeGen.generate(molgraph, shapes, false);
 	alignment.addReferenceShapes(shapes, true);
@@ -110,7 +125,8 @@ Shape::ScreeningProcessor::ConstMolecularGraphIterator Shape::ScreeningProcessor
 
 bool Shape::ScreeningProcessor::process(const Chem::MolecularGraph& molgraph)
 {
-	// TODO: apply settings
+	applyShapeGenSettings(false);
+	applyAlignmentSettings();
 
 	shapeGen.generate(molgraph, shapes, false);
 	
@@ -142,4 +158,133 @@ void Shape::ScreeningProcessor::init()
 	alignment.getDefaultOverlapFunction().fastExpFunction(true);
 
 	shapeGen.includeHydrogens(false);
+}
+
+void Shape::ScreeningProcessor::applyShapeGenSettings(bool query)
+{
+	using namespace Pharm;
+
+	bool query_changed = false;
+
+	if (allCarbon != settings.allCarbonMode()) {
+		query_changed = true;
+		allCarbon = settings.allCarbonMode();
+	}
+
+	shapeGen.setAtomRadius(allCarbon ? CARBON_RADIUS : -1.0);
+
+	if (multiConfQuery != settings.multiConformerQuery()) {
+		query_changed = true;
+		multiConfQuery = settings.multiConformerQuery();
+	}
+
+	if (colorFtrType != settings.getColorFeatureType()) {
+		query_changed = true;
+		colorFtrType = settings.getColorFeatureType();
+	}
+
+	switch (colorFtrType) {
+
+		case ScreeningSettings::PHARMACOPHORE_EXP_CHARGES:
+			shapeGen.setPharmacophoreGenerator(expChgPharmGen);
+			shapeGen.generatePharmacophoreShape(true);
+			break;
+
+		case ScreeningSettings::PHARMACOPHORE_IMP_CHARGES:
+			shapeGen.setPharmacophoreGenerator(shapeGen.getDefaultPharmacophoreGenerator());
+			shapeGen.generatePharmacophoreShape(true);
+			break;
+				
+		default:
+			shapeGen.generatePharmacophoreShape(false);
+			break;
+	}
+
+	if (query_changed) {
+		shapeGen.multiConformerMode(multiConfQuery);
+		alignment.clearReferenceShapes();
+
+		for (MolecularGraphList::const_iterator it = queryList.begin(), end = queryList.end(); it != end; ++it) {
+			shapeGen.generate(**it, shapes, false);
+			alignment.addReferenceShapes(shapes, true);
+		}
+	}
+
+	shapeGen.multiConformerMode(query ? multiConfQuery : true);
+}
+
+void Shape::ScreeningProcessor::applyAlignmentSettings()
+{
+	alignment.setScoringFunction(settings.getScoringFunction());
+	alignment.optimizeOverlap(settings.optimizeOverlap());
+	alignment.greedyOptimization(settings.greedyOptimization());
+	alignment.setMaxNumOptimizationIterations(settings.getMaxNumOptimizationIterations());
+	alignment.setOptimizationStopGradient(settings.getOptimizationStopGradient());
+
+	int almnt_mode = PrincipalAxesAlignmentStartGenerator::UNDEF;
+
+	switch (int(settings.getAlignmentMode())) {
+
+		case ScreeningSettings::SHAPE_CENTROID:
+			almnt_mode = PrincipalAxesAlignmentStartGenerator::SHAPE_CENTROID;
+			break;
+
+		case ScreeningSettings::ATOM_CENTERS:
+			almnt_mode = (PrincipalAxesAlignmentStartGenerator::NON_COLOR_ELEMENT_CENTERS |
+						  PrincipalAxesAlignmentStartGenerator::LARGEST_SHAPE);
+			break;
+
+		case ScreeningSettings::COLOR_FEATURE_CENTERS:
+			almnt_mode = (PrincipalAxesAlignmentStartGenerator::COLOR_ELEMENT_CENTERS |
+						  PrincipalAxesAlignmentStartGenerator::LARGEST_SHAPE);
+			break;
+
+		case (ScreeningSettings::SHAPE_CENTROID | ScreeningSettings::ATOM_CENTERS):
+			almnt_mode = (PrincipalAxesAlignmentStartGenerator::SHAPE_CENTROID |
+						  PrincipalAxesAlignmentStartGenerator::NON_COLOR_ELEMENT_CENTERS |
+						  PrincipalAxesAlignmentStartGenerator::LARGEST_SHAPE);
+			break;
+
+		case (ScreeningSettings::SHAPE_CENTROID | ScreeningSettings::COLOR_FEATURE_CENTERS):
+			almnt_mode =(PrincipalAxesAlignmentStartGenerator::SHAPE_CENTROID |
+						 PrincipalAxesAlignmentStartGenerator::COLOR_ELEMENT_CENTERS |
+						 PrincipalAxesAlignmentStartGenerator::LARGEST_SHAPE);
+			break;
+
+		case (ScreeningSettings::ATOM_CENTERS | ScreeningSettings::COLOR_FEATURE_CENTERS):
+			almnt_mode = (PrincipalAxesAlignmentStartGenerator::NON_COLOR_ELEMENT_CENTERS |
+						  PrincipalAxesAlignmentStartGenerator::COLOR_ELEMENT_CENTERS |
+						  PrincipalAxesAlignmentStartGenerator::LARGEST_SHAPE);
+			break;
+
+		case (ScreeningSettings::SHAPE_CENTROID | ScreeningSettings::ATOM_CENTERS | ScreeningSettings::COLOR_FEATURE_CENTERS):
+			almnt_mode = (PrincipalAxesAlignmentStartGenerator::SHAPE_CENTROID |
+						  PrincipalAxesAlignmentStartGenerator::NON_COLOR_ELEMENT_CENTERS |
+						  PrincipalAxesAlignmentStartGenerator::COLOR_ELEMENT_CENTERS |
+						  PrincipalAxesAlignmentStartGenerator::LARGEST_SHAPE);
+		default:
+			break;
+	}
+
+	if (almnt_mode != PrincipalAxesAlignmentStartGenerator::UNDEF) {
+		alignment.performAlignment(true);
+		alignment.getDefaultStartGenerator().setCenterAlignmentMode(PrincipalAxesAlignmentStartGenerator::CenterAlignmentMode(almnt_mode));
+
+	} else
+		alignment.performAlignment(false);
+
+	switch (settings.getScreeningMode()) {
+
+		case ScreeningSettings::BEST_OVERALL_MATCH:
+			alignment.setResultSelectionMode(GaussianShapeAlignment::BEST_OVERALL);
+			break;
+
+		case ScreeningSettings::BEST_MATCH_PER_QUERY_CONF:
+			alignment.setResultSelectionMode(GaussianShapeAlignment::BEST_PER_REFERENCE_SHAPE);
+			break;
+
+		default:
+			alignment.setResultSelectionMode(GaussianShapeAlignment::BEST_PER_REFERENCE_SET);
+			break;
+	}
 }

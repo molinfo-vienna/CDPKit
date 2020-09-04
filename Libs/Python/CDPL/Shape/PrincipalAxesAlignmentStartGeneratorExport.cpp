@@ -56,6 +56,7 @@ void CDPLPythonShape::exportPrincipalAxesAlignmentStartGenerator()
 					  &Shape::PrincipalAxesAlignmentStartGenerator::setCenterAlignmentMode);
 
 	python::enum_<Shape::PrincipalAxesAlignmentStartGenerator::CenterAlignmentMode>("CenterAlignmentMode")
+		.value("UNDEF", Shape::PrincipalAxesAlignmentStartGenerator::UNDEF)
 		.value("SHAPE_CENTROID", Shape::PrincipalAxesAlignmentStartGenerator::SHAPE_CENTROID)
 		.value("NON_COLOR_ELEMENT_CENTERS", Shape::PrincipalAxesAlignmentStartGenerator::NON_COLOR_ELEMENT_CENTERS)
 		.value("COLOR_ELEMENT_CENTERS", Shape::PrincipalAxesAlignmentStartGenerator::COLOR_ELEMENT_CENTERS)

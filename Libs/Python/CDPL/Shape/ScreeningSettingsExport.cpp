@@ -68,6 +68,10 @@ void CDPLPythonShape::exportScreeningSettings()
 			 (python::arg("self"), python::arg("mode")))
 		.def("getAlignmentMode", &Shape::ScreeningSettings::getAlignmentMode,
 			 python::arg("self"))
+		.def("allCarbonMode", SetBoolFunc(&Shape::ScreeningSettings::allCarbonMode),
+			 (python::arg("self"), python::arg("all_c")))
+		.def("allCarbonMode", GetBoolFunc(&Shape::ScreeningSettings::allCarbonMode),
+			 python::arg("self"))
 		.def("setMaxNumOptimizationIterations", &Shape::ScreeningSettings::setMaxNumOptimizationIterations,
 			 (python::arg("self"), python::arg("max_iter")))
 		.def("getMaxNumOptimizationIterations", &Shape::ScreeningSettings::getMaxNumOptimizationIterations,
@@ -95,6 +99,8 @@ void CDPLPythonShape::exportScreeningSettings()
 					  &Shape::ScreeningSettings::setScreeningMode)
 		.add_property("alignmentMode", &Shape::ScreeningSettings::getAlignmentMode,
 					  &Shape::ScreeningSettings::setAlignmentMode)
+		.add_property("allCarbon", GetBoolFunc(&Shape::ScreeningSettings::allCarbonMode),
+					  SetBoolFunc(&Shape::ScreeningSettings::allCarbonMode))
 		.add_property("colorFeatureType", &Shape::ScreeningSettings::getColorFeatureType,
 					  &Shape::ScreeningSettings::setColorFeatureType)
 		.add_property("maxNumOptIterations", &Shape::ScreeningSettings::getMaxNumOptimizationIterations,

@@ -57,6 +57,7 @@ namespace CDPL
 			enum CenterAlignmentMode
 			{
 
+			    UNDEF                     = 0x0,
 			    SHAPE_CENTROID            = 0x1,
 				NON_COLOR_ELEMENT_CENTERS = 0x2,
 				COLOR_ELEMENT_CENTERS     = 0x4,
