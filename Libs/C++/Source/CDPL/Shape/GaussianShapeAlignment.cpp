@@ -448,12 +448,30 @@ const Shape::AlignmentResult& Shape::GaussianShapeAlignment::getResult(std::size
 	return results[idx];
 }
 
+Shape::AlignmentResult& Shape::GaussianShapeAlignment::getResult(std::size_t idx)
+{
+	if (idx >= results.size())
+		throw Base::IndexError("GaussianShapeAlignment: result index out of bounds");
+
+	return results[idx];
+}
+
 Shape::GaussianShapeAlignment::ConstResultIterator Shape::GaussianShapeAlignment::getResultsBegin() const
 {
 	return results.begin();
 }
 
 Shape::GaussianShapeAlignment::ConstResultIterator Shape::GaussianShapeAlignment::getResultsEnd() const
+{
+	return results.end();
+}
+
+Shape::GaussianShapeAlignment::ResultIterator Shape::GaussianShapeAlignment::getResultsBegin()
+{
+	return results.begin();
+}
+
+Shape::GaussianShapeAlignment::ResultIterator Shape::GaussianShapeAlignment::getResultsEnd()
 {
 	return results.end();
 }

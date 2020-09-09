@@ -56,7 +56,7 @@ namespace CDPL
 
 		  public:
 			static const ScreeningSettings DEFAULT;
-			static const double            NO_THRESHOLD;
+			static const double            NO_CUTOFF;
 
 			typedef boost::function1<double, const AlignmentResult&> ScoringFunction;
 
@@ -82,7 +82,8 @@ namespace CDPL
 	    		NO_ALIGNMENT          = 0x0,
 			    SHAPE_CENTROID        = 0x1,
 				ATOM_CENTERS          = 0x2,
-				COLOR_FEATURE_CENTERS = 0x4
+				COLOR_FEATURE_CENTERS = 0x4,
+				RANDOM                = 0x8
 			};
 
 			ScreeningSettings();
@@ -107,9 +108,9 @@ namespace CDPL
 
 			bool allCarbonMode() const;
 
-			void multiConformerQuery(bool multi_conf);
+			void singleConformerSearch(bool single_conf);
 
-			bool multiConformerQuery() const;
+			bool singleConformerSearch() const;
 
 			void optimizeOverlap(bool optimize);
 
@@ -127,9 +128,9 @@ namespace CDPL
 
 			double getOptimizationStopGradient() const;
 		
-			void setScoreThreshold(double thresh);
+			void setScoreCutoff(double cutoff);
 
-			double getScoreThreshold() const;
+			double getScoreCutoff() const;
 
 		  private:
 			ScoringFunction   scoringFunc;
@@ -137,12 +138,12 @@ namespace CDPL
 			ScreeningMode     screeningMode;
 			AlignmentMode     almntMode;
 			bool              allCarbon;
-			bool              multiConfQry;
+			bool              singleConfSearch;
 			bool              optOverlap;
 			bool              greedyOpt;
 			std::size_t       numOptIter;
 			double            optStopGrad;
-			double            scoreThresh;
+			double            scoreCutoff;
 		};
 
 		/**

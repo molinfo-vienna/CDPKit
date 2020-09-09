@@ -45,7 +45,6 @@ namespace
 
 Shape::ScreeningProcessor::ScreeningProcessor():
 	colorFtrType(ScreeningSettings::DEFAULT.getColorFeatureType()), 
-	multiConfQuery(ScreeningSettings::DEFAULT.multiConformerQuery()),
 	allCarbon(ScreeningSettings::DEFAULT.allCarbonMode()),
     expChgPharmGen(false)
 {
@@ -54,7 +53,6 @@ Shape::ScreeningProcessor::ScreeningProcessor():
 
 Shape::ScreeningProcessor::ScreeningProcessor(const Chem::MolecularGraph& query):
 	colorFtrType(ScreeningSettings::DEFAULT.getColorFeatureType()), 
-	multiConfQuery(ScreeningSettings::DEFAULT.multiConformerQuery()),
 	allCarbon(ScreeningSettings::DEFAULT.allCarbonMode()),
     expChgPharmGen(false)
 {
@@ -129,17 +127,48 @@ bool Shape::ScreeningProcessor::process(const Chem::MolecularGraph& molgraph)
 	applyAlignmentSettings();
 
 	shapeGen.generate(molgraph, shapes, false);
+
+	if (shapes.isEmpty())
+		return false;
+
+	bool have_cutoff = boost::math::isfinite(settings.getScoreCutoff());
+
+	if (settings.singleConformerSearch()) {
+		bool success = false;
+		
+		for (std::size_t i = 0, num_confs = shapes.getSize(); i < num_confs; i++) {
+			const GaussianShape& shape = shapes[i];
+
+			if (!alignment.align(shape))
+				continue;
+
+			if (hitCallback) {
+				for (GaussianShapeAlignment::ResultIterator it = alignment.getResultsBegin(), end = alignment.getResultsEnd(); it != end; ++it) {
+					AlignmentResult& res = *it;
+
+					if (have_cutoff && res.getScore() < settings.getScoreCutoff())
+						continue;
+
+					res.setAlignedShapeIndex(i);
+					
+					hitCallback(*queryList[res.getReferenceShapeSetIndex()], molgraph, res);
+				}
+			}
+	
+			success = true;
+		}
+		
+		return success;
+	}
 	
 	if (!alignment.align(shapes))
 		return false;
 
 	if (hitCallback) {
-		bool have_thresh = boost::math::isfinite(settings.getScoreThreshold());
-
 		for (GaussianShapeAlignment::ConstResultIterator it = alignment.getResultsBegin(), end = alignment.getResultsEnd(); it != end; ++it) {
 			const AlignmentResult& res = *it;
 
-			if (have_thresh && res.getScore() < settings.getScoreThreshold())
+			if (have_cutoff && res.getScore() < settings.getScoreCutoff())
 				continue;
 
 			hitCallback(*queryList[res.getReferenceShapeSetIndex()], molgraph, res);
@@ -158,6 +187,7 @@ void Shape::ScreeningProcessor::init()
 	alignment.getDefaultOverlapFunction().fastExpFunction(true);
 
 	shapeGen.includeHydrogens(false);
+	shapeGen.multiConformerMode(true);
 }
 
 void Shape::ScreeningProcessor::applyShapeGenSettings(bool query)
@@ -172,11 +202,6 @@ void Shape::ScreeningProcessor::applyShapeGenSettings(bool query)
 	}
 
 	shapeGen.setAtomRadius(allCarbon ? CARBON_RADIUS : -1.0);
-
-	if (multiConfQuery != settings.multiConformerQuery()) {
-		query_changed = true;
-		multiConfQuery = settings.multiConformerQuery();
-	}
 
 	if (colorFtrType != settings.getColorFeatureType()) {
 		query_changed = true;
@@ -201,7 +226,6 @@ void Shape::ScreeningProcessor::applyShapeGenSettings(bool query)
 	}
 
 	if (query_changed) {
-		shapeGen.multiConformerMode(multiConfQuery);
 		alignment.clearReferenceShapes();
 
 		for (MolecularGraphList::const_iterator it = queryList.begin(), end = queryList.end(); it != end; ++it) {
@@ -209,8 +233,6 @@ void Shape::ScreeningProcessor::applyShapeGenSettings(bool query)
 			alignment.addReferenceShapes(shapes, true);
 		}
 	}
-
-	shapeGen.multiConformerMode(query ? multiConfQuery : true);
 }
 
 void Shape::ScreeningProcessor::applyAlignmentSettings()
@@ -262,6 +284,57 @@ void Shape::ScreeningProcessor::applyAlignmentSettings()
 						  PrincipalAxesAlignmentStartGenerator::NON_COLOR_ELEMENT_CENTERS |
 						  PrincipalAxesAlignmentStartGenerator::COLOR_ELEMENT_CENTERS |
 						  PrincipalAxesAlignmentStartGenerator::LARGEST_SHAPE);
+			break;
+
+		case ScreeningSettings::RANDOM:
+			almnt_mode = PrincipalAxesAlignmentStartGenerator::RANDOM;
+			break;
+
+		case (ScreeningSettings::SHAPE_CENTROID | ScreeningSettings::RANDOM):
+			almnt_mode = (PrincipalAxesAlignmentStartGenerator::SHAPE_CENTROID |
+						  PrincipalAxesAlignmentStartGenerator::RANDOM);
+			break;
+
+		case (ScreeningSettings::ATOM_CENTERS | ScreeningSettings::RANDOM):
+			almnt_mode = (PrincipalAxesAlignmentStartGenerator::NON_COLOR_ELEMENT_CENTERS |
+						  PrincipalAxesAlignmentStartGenerator::RANDOM |
+						  PrincipalAxesAlignmentStartGenerator::LARGEST_SHAPE);
+			break;
+
+		case (ScreeningSettings::COLOR_FEATURE_CENTERS | ScreeningSettings::RANDOM):
+			almnt_mode = (PrincipalAxesAlignmentStartGenerator::COLOR_ELEMENT_CENTERS |
+						  PrincipalAxesAlignmentStartGenerator::RANDOM |
+						  PrincipalAxesAlignmentStartGenerator::LARGEST_SHAPE);
+			break;
+
+		case (ScreeningSettings::SHAPE_CENTROID | ScreeningSettings::ATOM_CENTERS | ScreeningSettings::RANDOM):
+			almnt_mode = (PrincipalAxesAlignmentStartGenerator::SHAPE_CENTROID |
+						  PrincipalAxesAlignmentStartGenerator::NON_COLOR_ELEMENT_CENTERS |
+						  PrincipalAxesAlignmentStartGenerator::RANDOM |
+						  PrincipalAxesAlignmentStartGenerator::LARGEST_SHAPE);
+			break;
+
+		case (ScreeningSettings::SHAPE_CENTROID | ScreeningSettings::COLOR_FEATURE_CENTERS | ScreeningSettings::RANDOM):
+			almnt_mode =(PrincipalAxesAlignmentStartGenerator::SHAPE_CENTROID |
+						 PrincipalAxesAlignmentStartGenerator::COLOR_ELEMENT_CENTERS |
+						 PrincipalAxesAlignmentStartGenerator::RANDOM |
+						 PrincipalAxesAlignmentStartGenerator::LARGEST_SHAPE);
+			break;
+
+		case (ScreeningSettings::ATOM_CENTERS | ScreeningSettings::COLOR_FEATURE_CENTERS | ScreeningSettings::RANDOM):
+			almnt_mode = (PrincipalAxesAlignmentStartGenerator::NON_COLOR_ELEMENT_CENTERS |
+						  PrincipalAxesAlignmentStartGenerator::COLOR_ELEMENT_CENTERS |
+						  PrincipalAxesAlignmentStartGenerator::RANDOM |
+						  PrincipalAxesAlignmentStartGenerator::LARGEST_SHAPE);
+			break;
+
+		case (ScreeningSettings::SHAPE_CENTROID | ScreeningSettings::ATOM_CENTERS | ScreeningSettings::COLOR_FEATURE_CENTERS | ScreeningSettings::RANDOM):
+			almnt_mode = (PrincipalAxesAlignmentStartGenerator::SHAPE_CENTROID |
+						  PrincipalAxesAlignmentStartGenerator::NON_COLOR_ELEMENT_CENTERS |
+						  PrincipalAxesAlignmentStartGenerator::COLOR_ELEMENT_CENTERS |
+						  PrincipalAxesAlignmentStartGenerator::RANDOM |
+						  PrincipalAxesAlignmentStartGenerator::LARGEST_SHAPE);
+			
 		default:
 			break;
 	}

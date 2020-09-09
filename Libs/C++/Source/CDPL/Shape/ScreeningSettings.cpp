@@ -36,13 +36,13 @@ using namespace CDPL;
 
 
 const Shape::ScreeningSettings Shape::ScreeningSettings::DEFAULT;
-const double                   Shape::ScreeningSettings::NO_THRESHOLD = std::numeric_limits<double>::quiet_NaN();
+const double                   Shape::ScreeningSettings::NO_CUTOFF = std::numeric_limits<double>::quiet_NaN();
 
 
 Shape::ScreeningSettings::ScreeningSettings():
     scoringFunc(&calcTanimotoComboScore), colorFtrType(PHARMACOPHORE_IMP_CHARGES), screeningMode(BEST_OVERALL_MATCH),
-    almntMode(SHAPE_CENTROID), allCarbon(false), multiConfQry(true), optOverlap(true), greedyOpt(true), numOptIter(20), 
-	optStopGrad(1.0), scoreThresh(NO_THRESHOLD)    
+    almntMode(SHAPE_CENTROID), allCarbon(false), singleConfSearch(false), optOverlap(true), greedyOpt(true), numOptIter(20), 
+	optStopGrad(1.0), scoreCutoff(NO_CUTOFF)    
 {}
 
 void Shape::ScreeningSettings::setScoringFunction(const ScoringFunction& func)
@@ -95,14 +95,14 @@ bool Shape::ScreeningSettings::allCarbonMode() const
     return allCarbon;
 }
 
-void Shape::ScreeningSettings::multiConformerQuery(bool multi_conf)
+void Shape::ScreeningSettings::singleConformerSearch(bool single_conf)
 {
-    multiConfQry = multi_conf;
+    singleConfSearch = single_conf;
 }
 
-bool Shape::ScreeningSettings::multiConformerQuery() const
+bool Shape::ScreeningSettings::singleConformerSearch() const
 {
-    return multiConfQry;
+    return singleConfSearch;
 }
 
 void Shape::ScreeningSettings::optimizeOverlap(bool optimize)
@@ -145,12 +145,12 @@ double Shape::ScreeningSettings::getOptimizationStopGradient() const
     return optStopGrad;
 }
 		
-void Shape::ScreeningSettings::setScoreThreshold(double thresh)
+void Shape::ScreeningSettings::setScoreCutoff(double cutoff)
 {
-    scoreThresh = thresh;
+    scoreCutoff = cutoff;
 }
 
-double Shape::ScreeningSettings::getScoreThreshold() const
+double Shape::ScreeningSettings::getScoreCutoff() const
 {
-    return scoreThresh;
+    return scoreCutoff;
 }

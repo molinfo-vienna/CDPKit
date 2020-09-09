@@ -115,7 +115,6 @@ namespace CDPL
 
 			ScreeningSettings                    settings;
 			ScreeningSettings::ColorFeatureType  colorFtrType;
-			bool                                 multiConfQuery;
 			bool                                 allCarbon;
 			Pharm::DefaultPharmacophoreGenerator expChgPharmGen;
 			GaussianShapeAlignment               alignment;

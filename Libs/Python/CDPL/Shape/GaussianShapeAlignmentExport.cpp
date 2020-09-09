@@ -140,9 +140,9 @@ void CDPLPythonShape::exportGaussianShapeAlignment()
 			 (python::arg("self"), python::arg("shapes")))
 		.def("getNumResults", &Shape::GaussianShapeAlignment::getNumResults, python::arg("self"))
 		.def("__len__", &Shape::GaussianShapeAlignment::getNumResults, python::arg("self"))
-		.def("getResult", &Shape::GaussianShapeAlignment::getResult,
+		.def("getResult", static_cast<Shape::AlignmentResult& (Shape::GaussianShapeAlignment::*)(std::size_t)>(&Shape::GaussianShapeAlignment::getResult),
 			 (python::arg("self"), python::arg("idx")), python::return_internal_reference<>())
-		.def("__getitem__", &Shape::GaussianShapeAlignment::getResult,
+		.def("__getitem__", static_cast<Shape::AlignmentResult& (Shape::GaussianShapeAlignment::*)(std::size_t)>(&Shape::GaussianShapeAlignment::getResult),
 			 (python::arg("self"), python::arg("idx")), python::return_internal_reference<>())
 		.def_readonly("DEF_OPTIMIZATION_STOP_GRADIENT", Shape::GaussianShapeAlignment::DEF_OPTIMIZATION_STOP_GRADIENT)
 		.def_readonly("DEF_MAX_OPTIMIZATION_ITERATIONS", Shape::GaussianShapeAlignment::DEF_MAX_OPTIMIZATION_ITERATIONS)

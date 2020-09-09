@@ -30,6 +30,8 @@
 #include <cstddef>
 #include <vector>
 #include <string>
+#include <memory>
+
 
 #include <boost/thread.hpp>
 #include <boost/chrono/chrono.hpp>
@@ -74,6 +76,10 @@ namespace ShapeScreen
 		const char* getProgCopyright() const;
 		const char* getProgAboutText() const;
 
+		void setQueryFormat(const std::string& file_ext);
+		void setDatabaseFormat(const std::string& file_ext);
+		void setOutputFormat(const std::string& file_ext);
+
 		int process();
 
 		void processSingleThreaded();
@@ -82,23 +88,28 @@ namespace ShapeScreen
 		std::size_t readNextMolecule(CDPL::Chem::Molecule& mol);
 		std::size_t doReadNextMolecule(CDPL::Chem::Molecule& mol);
 
-		void writeMolecule(const CDPL::Chem::MolecularGraph& mol, bool failed);
-		void doWriteMolecule(const CDPL::Chem::MolecularGraph& mol, bool failed);
+		void writeMolecule(const CDPL::Chem::MolecularGraph& mol);
+		void doWriteMolecule(const CDPL::Chem::MolecularGraph& mol);
 
 		void setErrorMessage(const std::string& msg);
 		bool haveErrorMessage();
 
 		void printMessage(VerbosityLevel level, const std::string& msg, bool nl = true, bool file_only = false);
 
-		void printStatistics(std::size_t num_proc_mols, std::size_t num_failed_mols, std::size_t num_gen_confs, std::size_t proc_time);
+		void printStatistics(std::size_t proc_time);
 
 		void checkInputFiles() const;
+		void checkOutputOptions() const;
 		void printOptionSummary();
-		void initInputReader();
+		void initQueryReader();
+		void initDatabaseReader();
 		void initOutputWriters();
 
-		InputHandlerPtr getInputHandler(const std::string& file_path) const;
+		InputHandlerPtr getQueryHandler(const std::string& file_path) const;
+		InputHandlerPtr getDatabaseHandler(const std::string& file_path) const;
 		OutputHandlerPtr getOutputHandler(const std::string& file_path) const;
+
+		std::string createMoleculeIdentifier(std::size_t rec_idx);
 
 		void addOptionLongDescriptions();
 
@@ -109,13 +120,24 @@ namespace ShapeScreen
 		typedef CDPL::Base::DataReader<CDPL::Chem::Molecule> MoleculeReader;
 		typedef CDPL::Util::CompoundDataReader<CDPL::Chem::Molecule> CompMoleculeReader;
 		typedef CDPL::Base::DataWriter<CDPL::Chem::MolecularGraph>::SharedPointer MoleculeWriterPtr;
+		typedef std::auto_ptr<std::ofstream> ReportFileStreamPtr;
 		typedef boost::chrono::system_clock Clock;
 		typedef CDPL::Shape::ScreeningSettings ScreeningSettings;
-	
-		StringList                     inputFiles;
+
+		StringList                     queryFiles;
+		StringList                     databaseFiles;
 		std::string                    outputFile;
+		std::string                    reportFile;
 		std::size_t                    numThreads;
 		ScreeningSettings              settings;
+		InputHandlerPtr                queryHandler;
+		CompMoleculeReader             queryReader;
+		InputHandlerPtr                databaseHandler;
+		CompMoleculeReader             databaseReader;
+		OutputHandlerPtr               outputHandler;
+		MoleculeWriterPtr              outputWriter;
+		ReportFileStreamPtr            reportFileWriter;
+		boost::mutex                   mutex;
 		boost::mutex                   readMolMutex;
 		boost::mutex                   writeMolMutex;
 		std::string                    errorMessage;

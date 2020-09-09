@@ -90,6 +90,7 @@ namespace CDPL
 			typedef boost::shared_ptr<GaussianShapeAlignment> SharedPointer;
 
 			typedef ResultList::const_iterator ConstResultIterator;
+			typedef ResultList::iterator ResultIterator;
 			typedef boost::transform_iterator<GetShapeFunction, ShapeFunctionList::const_iterator> ConstShapeIterator;
 
 			typedef GaussianShapeFunctionAlignment::ColorFilterFunction ColorFilterFunction;
@@ -203,9 +204,15 @@ namespace CDPL
 
 			const AlignmentResult& getResult(std::size_t idx) const;
 
+			AlignmentResult& getResult(std::size_t idx);
+
 			ConstResultIterator getResultsBegin() const;
 
 			ConstResultIterator getResultsEnd() const;
+
+			ResultIterator getResultsBegin();
+
+			ResultIterator getResultsEnd();
 						
 		  private:
 			struct ShapeMetaData 

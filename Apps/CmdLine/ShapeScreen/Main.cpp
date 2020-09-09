@@ -29,5 +29,5 @@
 
 int main(int argc, char* argv[])
 {
-    return 0;//ShapeScreen::ShapeScreenImpl().run(argc, argv);
+    return ShapeScreen::ShapeScreenImpl().run(argc, argv);
 }

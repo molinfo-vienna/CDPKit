@@ -33,6 +33,9 @@
 
 #include <vector>
 
+#include <boost/random/mersenne_twister.hpp>
+#include <boost/random/uniform_real.hpp>
+
 #include "CDPL/Shape/APIPrefix.hpp"
 #include "CDPL/Shape/GaussianShapeAlignmentStartGenerator.hpp"
 #include "CDPL/Math/Vector.hpp"
@@ -61,11 +64,17 @@ namespace CDPL
 			    SHAPE_CENTROID            = 0x1,
 				NON_COLOR_ELEMENT_CENTERS = 0x2,
 				COLOR_ELEMENT_CENTERS     = 0x4,
-				REFERENCE_SHAPE           = 0x8,
-				ALIGNED_SHAPE             = 0x10,
-				LARGEST_SHAPE             = 0x20
+				RANDOM                    = 0x8,
+				REFERENCE_SHAPE           = 0x10,
+				ALIGNED_SHAPE             = 0x20,
+				LARGEST_SHAPE             = 0x40
 			};
 
+			static const CenterAlignmentMode DEF_CENTER_ALIGNMENT_MODE = SHAPE_CENTROID;
+			static const double              DEF_SYMMETRY_THRESHOLD;
+			static const std::size_t         DEF_NUM_RANDOM_STARTS = 4;
+			static const double              DEF_MAX_RANDOM_TRANSLATION;
+			
 			PrincipalAxesAlignmentStartGenerator();
 				
 			unsigned int setupReference(GaussianShapeFunction& func, Math::Matrix4D& xform) const; 
@@ -80,6 +89,16 @@ namespace CDPL
 
 			double getSymmetryThreshold();
 
+			void setMaxRandomTranslation(double max_trans);
+
+			double getMaxRandomTranslation() const;
+
+			void setNumRandomStarts(std::size_t num_starts);
+
+			std::size_t getNumRandomStarts() const;
+
+			void setRandomSeed(unsigned int seed);
+			
 			void setReference(const GaussianShapeFunction& func, unsigned int sym_class);
 
 			bool generate(const GaussianShapeFunction& func, unsigned int sym_class);
@@ -91,21 +110,25 @@ namespace CDPL
 			const QuaternionTransformation& getStartTransform(std::size_t idx) const;
 
 		  private:
-			typedef std::vector<QuaternionTransformation> StartTransformList;
-
 			void generateForElementCenters(const GaussianShape* shape, const GaussianShapeFunction& func, 
 										   unsigned int axes_swap_flags, bool ref_shape);
 			void generate(const Math::Vector3D& ctr_trans, const GaussianShapeFunction& func, unsigned int axes_swap_flags);
 
 			template <typename QE>
 			void addStartTransform(Math::Vector3D::ConstPointer ctr_trans_data, const Math::QuaternionExpression<QE>& rot_quat);
-		
+
+			typedef std::vector<QuaternionTransformation> StartTransformList;
+			typedef boost::random::mt11213b RandomEngine;
+
 			CenterAlignmentMode  ctrAlignmentMode;
 			StartTransformList   startTransforms;
 			const GaussianShape* refShape;
 			double               symThreshold;
+			double               maxRandomTrans;
+			std::size_t          numRandomStarts;
 			unsigned int         refAxesSwapFlags;
 			std::size_t          numSubTransforms;
+			RandomEngine         randomEngine;
 		};
 
 		/**

@@ -27,7 +27,7 @@ INCLUDE_DIRECTORIES("${CMAKE_CURRENT_SOURCE_DIR}" "${APPS_SOURCE_DIR}")
 
 SET(shapescreen_SRCS
     Main.cpp
-    #ShapeScreenImpl.cpp
+    ShapeScreenImpl.cpp
    )
 
 LINK_LIBRARIES(${Boost_THREAD_LIBRARY} ${Boost_CHRONO_LIBRARY} ${Boost_FILESYSTEM_LIBRARY} ${Boost_SYSTEM_LIBRARY})

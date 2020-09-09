@@ -48,18 +48,35 @@ void CDPLPythonShape::exportPrincipalAxesAlignmentStartGenerator()
 		.def("setCenterAlignmentMode", &Shape::PrincipalAxesAlignmentStartGenerator::setCenterAlignmentMode,
 			 (python::arg("self"), python::arg("mode")))
 		.def("getCenterAlignmentMode", &Shape::PrincipalAxesAlignmentStartGenerator::getCenterAlignmentMode, python::arg("self"))
+		.def("setMaxRandomTranslation", &Shape::PrincipalAxesAlignmentStartGenerator::setMaxRandomTranslation,
+			 (python::arg("self"), python::arg("max_trans")))
+		.def("getMaxRandomTranslation", &Shape::PrincipalAxesAlignmentStartGenerator::getMaxRandomTranslation, python::arg("self"))
+		.def("setNumRandomStarts", &Shape::PrincipalAxesAlignmentStartGenerator::setNumRandomStarts,
+			 (python::arg("self"), python::arg("num_starts")))
+		.def("getNumRandomStarts", &Shape::PrincipalAxesAlignmentStartGenerator::getNumRandomStarts, python::arg("self"))
+		.def("setRandomSeed", &Shape::PrincipalAxesAlignmentStartGenerator::setRandomSeed,
+			 (python::arg("self"), python::arg("seed")))
 		.def("assign", CDPLPythonBase::copyAssOp(&Shape::PrincipalAxesAlignmentStartGenerator::operator=),
 			 (python::arg("self"), python::arg("gen")), python::return_self<>())
+		.def_readonly("DEF_CENTER_ALIGNMENT_MODE", Shape::PrincipalAxesAlignmentStartGenerator::DEF_CENTER_ALIGNMENT_MODE)
+		.def_readonly("DEF_SYMMETRY_THRESHOLD", Shape::PrincipalAxesAlignmentStartGenerator::DEF_SYMMETRY_THRESHOLD)
+		.def_readonly("DEF_NUM_RANDOM_STARTS", Shape::PrincipalAxesAlignmentStartGenerator::DEF_NUM_RANDOM_STARTS)
+		.def_readonly("DEF_MAX_RANDOM_TRANSLATION", Shape::PrincipalAxesAlignmentStartGenerator::DEF_MAX_RANDOM_TRANSLATION)
 		.add_property("symmetryThreshold", &Shape::PrincipalAxesAlignmentStartGenerator::getSymmetryThreshold,
 					  &Shape::PrincipalAxesAlignmentStartGenerator::setSymmetryThreshold)
 		.add_property("centerAlignmentMode", &Shape::PrincipalAxesAlignmentStartGenerator::getCenterAlignmentMode,
-					  &Shape::PrincipalAxesAlignmentStartGenerator::setCenterAlignmentMode);
+					  &Shape::PrincipalAxesAlignmentStartGenerator::setCenterAlignmentMode)
+		.add_property("maxRandomTranslation", &Shape::PrincipalAxesAlignmentStartGenerator::getMaxRandomTranslation,
+					  &Shape::PrincipalAxesAlignmentStartGenerator::setMaxRandomTranslation)
+		.add_property("nunRandomStarts", &Shape::PrincipalAxesAlignmentStartGenerator::getNumRandomStarts,
+					  &Shape::PrincipalAxesAlignmentStartGenerator::setNumRandomStarts);
 
 	python::enum_<Shape::PrincipalAxesAlignmentStartGenerator::CenterAlignmentMode>("CenterAlignmentMode")
 		.value("UNDEF", Shape::PrincipalAxesAlignmentStartGenerator::UNDEF)
 		.value("SHAPE_CENTROID", Shape::PrincipalAxesAlignmentStartGenerator::SHAPE_CENTROID)
 		.value("NON_COLOR_ELEMENT_CENTERS", Shape::PrincipalAxesAlignmentStartGenerator::NON_COLOR_ELEMENT_CENTERS)
 		.value("COLOR_ELEMENT_CENTERS", Shape::PrincipalAxesAlignmentStartGenerator::COLOR_ELEMENT_CENTERS)
+		.value("RANDOM", Shape::PrincipalAxesAlignmentStartGenerator::RANDOM)
 		.value("REFERENCE_SHAPE", Shape::PrincipalAxesAlignmentStartGenerator::REFERENCE_SHAPE)
 		.value("ALIGNED_SHAPE", Shape::PrincipalAxesAlignmentStartGenerator::ALIGNED_SHAPE)
 		.value("LARGEST_SHAPE", Shape::PrincipalAxesAlignmentStartGenerator::LARGEST_SHAPE)

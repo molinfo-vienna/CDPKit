@@ -28,6 +28,8 @@
 
 #include <cmath>
 
+#include <boost/random/uniform_real.hpp>
+
 #include "CDPL/Shape/PrincipalAxesAlignmentStartGenerator.hpp"
 #include "CDPL/Shape/GaussianShapeFunction.hpp"
 #include "CDPL/Shape/GaussianShape.hpp"
@@ -82,8 +84,15 @@ namespace
 }
 
 
+const Shape::PrincipalAxesAlignmentStartGenerator::CenterAlignmentMode Shape::PrincipalAxesAlignmentStartGenerator::DEF_CENTER_ALIGNMENT_MODE;
+const double                                                           Shape::PrincipalAxesAlignmentStartGenerator::DEF_SYMMETRY_THRESHOLD = 0.15;
+const std::size_t                                                      Shape::PrincipalAxesAlignmentStartGenerator::DEF_NUM_RANDOM_STARTS;
+const double                                                           Shape::PrincipalAxesAlignmentStartGenerator::DEF_MAX_RANDOM_TRANSLATION = 2.0;
+
+
 Shape::PrincipalAxesAlignmentStartGenerator::PrincipalAxesAlignmentStartGenerator():
-	ctrAlignmentMode(SHAPE_CENTROID), refShape(0), symThreshold(0.15), 
+	ctrAlignmentMode(DEF_CENTER_ALIGNMENT_MODE), refShape(0), symThreshold(DEF_SYMMETRY_THRESHOLD), 
+	maxRandomTrans(DEF_MAX_RANDOM_TRANSLATION), numRandomStarts(DEF_NUM_RANDOM_STARTS),
 	refAxesSwapFlags(getAxesSwapFlags(SymmetryClass::UNDEF)), numSubTransforms(0)
 {}
 
@@ -137,6 +146,31 @@ void Shape::PrincipalAxesAlignmentStartGenerator::setSymmetryThreshold(double th
 double Shape::PrincipalAxesAlignmentStartGenerator::getSymmetryThreshold()
 {
 	return symThreshold;
+}
+
+void Shape::PrincipalAxesAlignmentStartGenerator::setMaxRandomTranslation(double max_trans)
+{
+	maxRandomTrans = max_trans;
+}
+
+double Shape::PrincipalAxesAlignmentStartGenerator::getMaxRandomTranslation() const
+{
+	return maxRandomTrans;
+}
+
+void Shape::PrincipalAxesAlignmentStartGenerator::setNumRandomStarts(std::size_t num_starts)
+{
+	numRandomStarts = num_starts;
+}
+
+std::size_t Shape::PrincipalAxesAlignmentStartGenerator::getNumRandomStarts() const
+{
+	return numRandomStarts;
+}
+
+void Shape::PrincipalAxesAlignmentStartGenerator::setRandomSeed(unsigned int seed)
+{
+	randomEngine.seed(seed);
 }
 
 void Shape::PrincipalAxesAlignmentStartGenerator::setReference(const GaussianShapeFunction& func, unsigned int sym_class)
@@ -211,7 +245,14 @@ bool Shape::PrincipalAxesAlignmentStartGenerator::generate(const GaussianShapeFu
 				break;
 		}
 	}
+	
+	if (ctrAlignmentMode & RANDOM) {
+		boost::random::uniform_real_distribution<double> rand_dist(-maxRandomTrans, maxRandomTrans);
 
+		for (std::size_t i = 0; i < numRandomStarts; i++)
+			generate(Math::vec(rand_dist(randomEngine), rand_dist(randomEngine), rand_dist(randomEngine)), func, axes_swap_flags);
+	}
+		
 	return !startTransforms.empty();
 }
 

@@ -52,9 +52,9 @@ void CDPLPythonShape::exportScreeningSettings()
 			 (python::arg("self"), python::arg("func")))
 		.def("getScoringFunction", &Shape::ScreeningSettings::getScoringFunction,
 			 python::arg("self"), python::return_internal_reference<>())
-		.def("setScoreThreshold", &Shape::ScreeningSettings::setScoreThreshold,
-			 (python::arg("self"), python::arg("thresh")))
-		.def("getScoreThreshold", &Shape::ScreeningSettings::getScoreThreshold,
+		.def("setScoreCutoff", &Shape::ScreeningSettings::setScoreCutoff,
+			 (python::arg("self"), python::arg("cutoff")))
+		.def("getScoreCutoff", &Shape::ScreeningSettings::getScoreCutoff,
 			 python::arg("self"))
 		.def("setColorFeatureType", &Shape::ScreeningSettings::setColorFeatureType,
 			 (python::arg("self"), python::arg("type")))
@@ -71,6 +71,10 @@ void CDPLPythonShape::exportScreeningSettings()
 		.def("allCarbonMode", SetBoolFunc(&Shape::ScreeningSettings::allCarbonMode),
 			 (python::arg("self"), python::arg("all_c")))
 		.def("allCarbonMode", GetBoolFunc(&Shape::ScreeningSettings::allCarbonMode),
+			 python::arg("self"))
+		.def("singleConformerSearch", SetBoolFunc(&Shape::ScreeningSettings::singleConformerSearch),
+			 (python::arg("self"), python::arg("all_c")))
+		.def("singleConformerSearch", GetBoolFunc(&Shape::ScreeningSettings::singleConformerSearch),
 			 python::arg("self"))
 		.def("setMaxNumOptimizationIterations", &Shape::ScreeningSettings::setMaxNumOptimizationIterations,
 			 (python::arg("self"), python::arg("max_iter")))
@@ -89,18 +93,20 @@ void CDPLPythonShape::exportScreeningSettings()
 		.def("greedyOptimization", GetBoolFunc(&Shape::ScreeningSettings::greedyOptimization),
 			 python::arg("self"))
 		.def_readonly("DEFAULT", Shape::ScreeningSettings::DEFAULT)
-		.def_readonly("NO_THRESHOLD", Shape::ScreeningSettings::NO_THRESHOLD)
+		.def_readonly("NO_CUTOFF", Shape::ScreeningSettings::NO_CUTOFF)
 		.add_property("scoringFunction", python::make_function(&Shape::ScreeningSettings::getScoringFunction,
 															   python::return_internal_reference<>()),
 					  &Shape::ScreeningSettings::setScoringFunction)
-		.add_property("scoreThreshold", &Shape::ScreeningSettings::getScoreThreshold,
-					  &Shape::ScreeningSettings::setScoreThreshold)
+		.add_property("scoreCutoff", &Shape::ScreeningSettings::getScoreCutoff,
+					  &Shape::ScreeningSettings::setScoreCutoff)
 		.add_property("screeningMode", &Shape::ScreeningSettings::getScreeningMode,
 					  &Shape::ScreeningSettings::setScreeningMode)
 		.add_property("alignmentMode", &Shape::ScreeningSettings::getAlignmentMode,
 					  &Shape::ScreeningSettings::setAlignmentMode)
 		.add_property("allCarbon", GetBoolFunc(&Shape::ScreeningSettings::allCarbonMode),
 					  SetBoolFunc(&Shape::ScreeningSettings::allCarbonMode))
+		.add_property("singleConfSearch", GetBoolFunc(&Shape::ScreeningSettings::singleConformerSearch),
+					  SetBoolFunc(&Shape::ScreeningSettings::singleConformerSearch))
 		.add_property("colorFeatureType", &Shape::ScreeningSettings::getColorFeatureType,
 					  &Shape::ScreeningSettings::setColorFeatureType)
 		.add_property("maxNumOptIterations", &Shape::ScreeningSettings::getMaxNumOptimizationIterations,
@@ -126,5 +132,6 @@ void CDPLPythonShape::exportScreeningSettings()
 		.value("NO_ALIGNMENT", Shape::ScreeningSettings::NO_ALIGNMENT)
 		.value("SHAPE_CENTROID", Shape::ScreeningSettings::SHAPE_CENTROID)
 		.value("ATOM_CENTERS", Shape::ScreeningSettings::ATOM_CENTERS)
-		.value("COLOR_FEATURE_CENTERS", Shape::ScreeningSettings::COLOR_FEATURE_CENTERS);
+		.value("COLOR_FEATURE_CENTERS", Shape::ScreeningSettings::COLOR_FEATURE_CENTERS)
+		.value("RANDOM", Shape::ScreeningSettings::RANDOM);
 }
