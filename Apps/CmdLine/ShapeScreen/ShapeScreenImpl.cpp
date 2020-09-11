@@ -91,7 +91,9 @@ private:
 
 
 ShapeScreenImpl::ShapeScreenImpl(): 
-    numThreads(0), settings()
+    numThreads(0), settings(), reportAll(false), outputQuery(true), scoreSDTags(true), queryNameSDTags(false), 
+	queryMolIdxSDTags(true), queryConfIdxSDTags(true), dbMolIdxSDTags(false), dbConfIdxSDTags(true), 
+	numBestHits(1000), maxNumHits(0), shapeScoreCutoff(0.0)
 {
     addOption("query,q", "Query input file(s).", 
 			  value<StringList>(&queryFiles)->multitoken()->required());
@@ -99,17 +101,71 @@ ShapeScreenImpl::ShapeScreenImpl():
 			  value<StringList>(&databaseFiles)->multitoken()->required());
     addOption("output,o", "Hit output file.", 
 			  value<std::string>(&outputFile));
-	addOption("report,r", "Report file.", 
+	addOption("report,r", "Report output file.", 
 			  value<std::string>(&reportFile));
+	addOption("report-all,e", "If specified, best overlay results of ALL database molecules get written to the report file "
+			  "(default: false, i.e. only records for hit molecules are output).", 
+			  value<bool>(&reportAll)->implicit_value(true));
+	addOption("mode,m", "Screening mode specifying which of the obtained results for the query molecule are of interest.", // TODO
+			  value<std::string>()->notifier(boost::bind(&ShapeScreenImpl::setScreeningMode, this, _1)));
+	addOption("score,s", "Primary scoring function that will be in effect for hit ranking and filtering operations.",  // TODO
+			  value<std::string>()->notifier(boost::bind(&ShapeScreenImpl::setScoringFunction, this, _1)));
+	addOption("best-hits,b", "Maximum number of best scoring hits to output (default: " +
+			  boost::lexical_cast<std::string>(numBestHits) + ").",
+			  value<std::size_t>(&numBestHits));
+	addOption("max-hits,n", "Maximum number of found hits at which the search will terminate (overrides the 'best-hits' option, default: 0 - no limit).",
+			  value<std::size_t>(&maxNumHits));
+	addOption("cutoff,x", "Score cutoff value which determines whether a database molecule is considered as a hit (default: 0.0 - no cutoff).",
+			  value<double>()->notifier(boost::bind(&ShapeScreenImpl::setScoreCutoff, this, _1)));
+	addOption("shape-tanimoto-cutoff,X", "Shape tanimoto score cutoff that will be used for hit identifiaction in addition to the value specified by the 'cutoff' "
+			  "option (default: 0.0 - no cutoff).",
+			  value<double>(&shapeScoreCutoff));
+	addOption("score-only,y", "If specified, no shape overlay of the query and database molecules will be performed and the input "
+			  "poses get scored as they are (default: false).",
+			  value<bool>()->implicit_value(true)->notifier(boost::bind(&ShapeScreenImpl::setScoringOnly, this, _1)));
+	addOption("opt-overlay,a", "Specifies whether or not to perform an overlay optimization of the generated starting poses "
+			  "(only in effect if option 'score-only' is false, default: true).",
+			  value<bool>()->implicit_value(true)->notifier(boost::bind(&ShapeScreenImpl::setOverlayOptimization, this, _1)));
+	addOption("output-query,u", "If specified, query molecules will be written at the beginning of the hit output file (default: true).",
+			  value<bool>(&outputQuery)->implicit_value(true));
+	addOption("single-conf-db,g", "If specified, conformers of the database molecules are treated as individual single conf. molecules (default: false).",
+			  value<bool>()->notifier(boost::bind(&ShapeScreenImpl::setSingleConformerSearch, this, _1)));
+	addOption("color-ftr-type,f", "Specifies which type of color features to generate and score (default: ).", // TODO
+			  value<std::string>()->notifier(boost::bind(&ShapeScreenImpl::setColorFeatureType, this, _1)));
+	addOption("all-carbon,C", "If specified, every heavy atom is interpreted as carbon (default: false).",
+			  value<bool>()->implicit_value(true)->notifier(boost::bind(&ShapeScreenImpl::setAllCarbonMode, this, _1)));
+	addOption("shape-center-starts,S", "If specified, principal axes aligned starting poses will be generated where both shape centers are located at"
+			  "origin the coordinates system (default: true).",
+			  value<bool>()->implicit_value(true)->notifier(boost::bind(&ShapeScreenImpl::setShapeCenterStarts, this, _1)));
+	addOption("atom-center-starts,A", "If specified, principal axes aligned starting poses will be generated so that the center of the smaller "
+			  "shape is located at all the heavy atom centers of the larger shape (default: false).",
+			  value<bool>()->implicit_value(true)->notifier(boost::bind(&ShapeScreenImpl::setAtomCenterStarts, this, _1)));
+	addOption("color-center-starts,C", "If specified, principal axes aligned starting poses will be generated so that the center of the smaller "
+			  "shape is located at the color feature centers of the larger shape (default: false).",
+			  value<bool>()->implicit_value(true)->notifier(boost::bind(&ShapeScreenImpl::setColorFeatureCenterStarts, this, _1)));
+	addOption("random-starts,R", "Generates the specified number of principal axes aligned starting poses with randomized shape center displacements"
+			  "shape is located at all the heavy atom centers of the larger shape (default: false).",
+			  value<std::size_t>()->notifier(boost::bind(&ShapeScreenImpl::setNumRandomStarts, this, _1)));
+	addOption("score-sd-tags,E", "If true, score values will be appended as SD-block entries of the output hit molecules (default: true).",
+			  value<bool>(&scoreSDTags)->implicit_value(true));
+	addOption("query-name-sd-tags,N", "If true, the query molecule name will be appended to the SD-block of the output hit molecules (default: false).",
+			  value<bool>(&queryNameSDTags)->implicit_value(true));
+	addOption("query-idx-sd-tags,G", "If true, the query molecule index will be appended to the SD-block of the output hit molecules (default: true).",
+			  value<bool>(&queryMolIdxSDTags)->implicit_value(true));
+	addOption("query-conf-sd-tags,F", "If true, the query conformer index will be appended to the SD-block of the output hit molecules (default: true).",
+			  value<bool>(&queryConfIdxSDTags)->implicit_value(true));
+	addOption("db-idx-sd-tags,B", "If true, the database molecule index will be appended to the SD-block of the output hit molecules (default: false).",
+			  value<bool>(&dbMolIdxSDTags)->implicit_value(true));
+	addOption("db-conf-sd-tags,Y", "If true, the database conformer index will be appended to the SD-block of the output hit molecules (default: true).",
+			  value<bool>(&dbConfIdxSDTags)->implicit_value(true));
 
-  
     addOption("num-threads,t", "Number of parallel execution threads (default: no multithreading, implicit value: " +
 			  boost::lexical_cast<std::string>(boost::thread::hardware_concurrency()) + 
 			  " threads, must be >= 0, 0 disables multithreading).", 
 			  value<std::size_t>(&numThreads)->implicit_value(boost::thread::hardware_concurrency()));
 	addOption("query-format,Q", "Query input file format (default: auto-detect from file extension).", 
 			  value<std::string>()->notifier(boost::bind(&ShapeScreenImpl::setQueryFormat, this, _1)));
-     addOption("database-format,D", "Screening database input file format (default: auto-detect from file extension).", 
+	addOption("database-format,D", "Screening database input file format (default: auto-detect from file extension).", 
 			  value<std::string>()->notifier(boost::bind(&ShapeScreenImpl::setDatabaseFormat, this, _1)));
     addOption("output-format,O", "Hit output file format (default: auto-detect from file extension).", 
 			  value<std::string>()->notifier(boost::bind(&ShapeScreenImpl::setOutputFormat, this, _1)));
@@ -129,7 +185,7 @@ const char* ShapeScreenImpl::getProgCopyright() const
 
 const char* ShapeScreenImpl::getProgAboutText() const
 {
-    return "Performs a shape-based similarity screening of a set of input molecules.\n\n";
+    return "Performs a fast shape-based similarity screening of a set of query molecules against one or more molecule databases.\n\n";
 }
 
 void ShapeScreenImpl::addOptionLongDescriptions()
@@ -183,6 +239,99 @@ void ShapeScreenImpl::addOptionLongDescriptions()
 
     addOptionLongDescription("output", 
 							 "Specifies the screening hit output file.\n\n" + formats_str);
+}
+
+void ShapeScreenImpl::setColorFeatureType(const std::string& type)
+{
+    using namespace CDPL;
+
+    std::string lc_type = type;
+    boost::to_lower(lc_type);
+
+	// TODO
+}
+
+void ShapeScreenImpl::setScoringFunction(const std::string& func)
+{
+    using namespace CDPL;
+
+    std::string lc_func = func;
+    boost::to_lower(lc_func);
+
+	// TODO
+}
+
+void ShapeScreenImpl::setScreeningMode(const std::string& mode)
+{
+    using namespace CDPL;
+
+    std::string lc_mode = mode;
+    boost::to_lower(lc_mode);
+
+	// TODO
+}
+
+void ShapeScreenImpl::setNumRandomStarts(std::size_t num_starts)
+{
+    using namespace CDPL;
+
+	// TODO
+}
+
+void ShapeScreenImpl::setColorFeatureCenterStarts(bool col_ctr_starts)
+{
+    using namespace CDPL;
+
+	// TODO
+}
+
+void ShapeScreenImpl::setAtomCenterStarts(bool atom_ctr_starts)
+{
+    using namespace CDPL;
+
+	// TODO
+}
+
+void ShapeScreenImpl::setShapeCenterStarts(bool shp_ctr_starts)
+{
+    using namespace CDPL;
+
+	// TODO
+}
+
+void ShapeScreenImpl::setAllCarbonMode(bool all_c)
+{
+    using namespace CDPL;
+
+	// TODO
+}
+
+void ShapeScreenImpl::setOverlayOptimization(bool opt)
+{
+    using namespace CDPL;
+
+	// TODO
+}
+
+void ShapeScreenImpl::setScoringOnly(bool score_only)
+{
+    using namespace CDPL;
+
+	// TODO
+}
+
+void ShapeScreenImpl::setSingleConformerSearch(bool single_conf)
+{
+    using namespace CDPL;
+
+	// TODO
+}
+
+void ShapeScreenImpl::setScoreCutoff(double cutoff)
+{
+    using namespace CDPL;
+
+	// TODO
 }
 
 void ShapeScreenImpl::setQueryFormat(const std::string& file_ext)

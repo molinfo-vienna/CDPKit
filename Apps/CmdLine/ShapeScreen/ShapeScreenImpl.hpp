@@ -76,6 +76,18 @@ namespace ShapeScreen
 		const char* getProgCopyright() const;
 		const char* getProgAboutText() const;
 
+		void setColorFeatureType(const std::string& type);
+		void setScoringFunction(const std::string& func);
+		void setScreeningMode(const std::string& mode);
+		void setNumRandomStarts(std::size_t num_starts);
+		void setColorFeatureCenterStarts(bool col_ctr_starts);
+		void setAtomCenterStarts(bool atom_ctr_starts);
+		void setShapeCenterStarts(bool atom_ctr_starts);
+		void setAllCarbonMode(bool all_c);
+		void setOverlayOptimization(bool opt);
+		void setScoringOnly(bool score_only);
+		void setSingleConformerSearch(bool single_conf);
+		void setScoreCutoff(double cutoff);
 		void setQueryFormat(const std::string& file_ext);
 		void setDatabaseFormat(const std::string& file_ext);
 		void setOutputFormat(const std::string& file_ext);
@@ -130,6 +142,17 @@ namespace ShapeScreen
 		std::string                    reportFile;
 		std::size_t                    numThreads;
 		ScreeningSettings              settings;
+		bool                           reportAll;
+		bool                           outputQuery;
+		bool                           scoreSDTags;
+		bool                           queryNameSDTags;
+		bool                           queryMolIdxSDTags;
+		bool                           queryConfIdxSDTags;
+		bool                           dbMolIdxSDTags;
+		bool                           dbConfIdxSDTags;
+		std::size_t                    numBestHits;
+		std::size_t                    maxNumHits;
+		double                         shapeScoreCutoff;
 		InputHandlerPtr                queryHandler;
 		CompMoleculeReader             queryReader;
 		InputHandlerPtr                databaseHandler;
