@@ -104,6 +104,10 @@ namespace CDPL
 
 			AlignmentMode getAlignmentMode() const;
 
+			void setNumRandomStarts(std::size_t num_starts);
+
+			std::size_t getNumRandomStarts() const;
+
 			void allCarbonMode(bool all_c);
 
 			bool allCarbonMode() const;
@@ -137,6 +141,7 @@ namespace CDPL
 			ColorFeatureType  colorFtrType;
 			ScreeningMode     screeningMode;
 			AlignmentMode     almntMode;
+			std::size_t       numRandomStarts;
 			bool              allCarbon;
 			bool              singleConfSearch;
 			bool              optOverlap;

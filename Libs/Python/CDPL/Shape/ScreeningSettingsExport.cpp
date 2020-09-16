@@ -68,6 +68,10 @@ void CDPLPythonShape::exportScreeningSettings()
 			 (python::arg("self"), python::arg("mode")))
 		.def("getAlignmentMode", &Shape::ScreeningSettings::getAlignmentMode,
 			 python::arg("self"))
+		.def("setNumRandomStarts", &Shape::ScreeningSettings::setNumRandomStarts,
+			 (python::arg("self"), python::arg("num_starts")))
+		.def("getNumRandomStarts", &Shape::ScreeningSettings::getNumRandomStarts,
+			 python::arg("self"))
 		.def("allCarbonMode", SetBoolFunc(&Shape::ScreeningSettings::allCarbonMode),
 			 (python::arg("self"), python::arg("all_c")))
 		.def("allCarbonMode", GetBoolFunc(&Shape::ScreeningSettings::allCarbonMode),
@@ -103,6 +107,8 @@ void CDPLPythonShape::exportScreeningSettings()
 					  &Shape::ScreeningSettings::setScreeningMode)
 		.add_property("alignmentMode", &Shape::ScreeningSettings::getAlignmentMode,
 					  &Shape::ScreeningSettings::setAlignmentMode)
+		.add_property("numRandomStarts", &Shape::ScreeningSettings::getNumRandomStarts,
+					  &Shape::ScreeningSettings::setNumRandomStarts)
 		.add_property("allCarbon", GetBoolFunc(&Shape::ScreeningSettings::allCarbonMode),
 					  SetBoolFunc(&Shape::ScreeningSettings::allCarbonMode))
 		.add_property("singleConfSearch", GetBoolFunc(&Shape::ScreeningSettings::singleConformerSearch),

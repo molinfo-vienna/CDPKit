@@ -69,7 +69,7 @@ public:
 		parent(parent), offset(offset), scale(scale) {}
 
 	void operator()(const CDPL::Base::DataIOBase&, double progress) const {
-		if (ConfGenImpl::termSignalCaught())
+		if (termSignalCaught())
 			throw Terminated();
 
 		parent->printProgress("Scanning Input File(s)...      ", offset + scale * progress);
@@ -316,7 +316,7 @@ private:
 	}
 
 	bool abort() const {
-		if (parent->haveErrorMessage() || ConfGenImpl::termSignalCaught())
+		if (parent->haveErrorMessage() || termSignalCaught())
 			return true;
 
 		return false;
@@ -1155,7 +1155,7 @@ void ConfGenImpl::loadTorsionLibrary()
 	torsionLib.reset(new TorsionLibrary());
 	torsionLib->load(is);
 
-	if (ConfGenImpl::termSignalCaught())
+	if (termSignalCaught())
 		return;
 
 	if (!is)
@@ -1184,7 +1184,7 @@ void ConfGenImpl::loadFragmentLibrary()
 	fragmentLib.reset(new FragmentLibrary());
 	fragmentLib->load(is);
 
-	if (ConfGenImpl::termSignalCaught())
+	if (termSignalCaught())
 		return;
 
 	if (!is)
@@ -1236,7 +1236,7 @@ void ConfGenImpl::initInputReader()
 		reader_ptr->unregisterIOCallback(cb_id);
 	}
 
-	if (ConfGenImpl::termSignalCaught())
+	if (termSignalCaught())
 		return;
 
 	printMessage(INFO, " - Found " + boost::lexical_cast<std::string>(inputReader.getNumRecords()) + " input molecule(s)");

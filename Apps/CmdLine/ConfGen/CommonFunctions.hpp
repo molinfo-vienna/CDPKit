@@ -48,63 +48,76 @@ namespace ConfGen
 
 		if (uc_type == "MMFF94")
 			return ForceFieldType::MMFF94;
-		else if (uc_type == "MMFF94_NO_ESTAT")
-			return ForceFieldType::MMFF94_NO_ESTAT;
-		else if (uc_type == "MMFF94S")
-			return ForceFieldType::MMFF94S;
-		else if (uc_type == "MMFF94S_XOOP")
-			return ForceFieldType::MMFF94S_XOOP;
-		else if (uc_type == "MMFF94S_RTOR")
-			return ForceFieldType::MMFF94S_RTOR;
-		else if (uc_type == "MMFF94S_RTOR_XOOP")
-			return ForceFieldType::MMFF94S_RTOR_XOOP;
-		else if (uc_type == "MMFF94S_NO_ESTAT")
-			return ForceFieldType::MMFF94S_NO_ESTAT;
-		else if (uc_type == "MMFF94S_XOOP_NO_ESTAT")
-			return ForceFieldType::MMFF94S_XOOP_NO_ESTAT;
-		else if (uc_type == "MMFF94S_RTOR_NO_ESTAT")
-			return ForceFieldType::MMFF94S_RTOR_NO_ESTAT;
-		else if (uc_type == "MMFF94S_RTOR_XOOP_NO_ESTAT")
-			return ForceFieldType::MMFF94S_RTOR_XOOP_NO_ESTAT;
-		else
-			throw po::validation_error(po::validation_error::invalid_option_value, opt);
 
-		return ForceFieldType::MMFF94S_XOOP_NO_ESTAT;
+		if (uc_type == "MMFF94_NO_ESTAT")
+			return ForceFieldType::MMFF94_NO_ESTAT;
+
+		if (uc_type == "MMFF94S")
+			return ForceFieldType::MMFF94S;
+
+		if (uc_type == "MMFF94S_XOOP")
+			return ForceFieldType::MMFF94S_XOOP;
+
+		if (uc_type == "MMFF94S_RTOR")
+			return ForceFieldType::MMFF94S_RTOR;
+
+		if (uc_type == "MMFF94S_RTOR_XOOP")
+			return ForceFieldType::MMFF94S_RTOR_XOOP;
+
+		if (uc_type == "MMFF94S_NO_ESTAT")
+			return ForceFieldType::MMFF94S_NO_ESTAT;
+
+		if (uc_type == "MMFF94S_XOOP_NO_ESTAT")
+			return ForceFieldType::MMFF94S_XOOP_NO_ESTAT;
+
+		if (uc_type == "MMFF94S_RTOR_NO_ESTAT")
+			return ForceFieldType::MMFF94S_RTOR_NO_ESTAT;
+
+		if (uc_type == "MMFF94S_RTOR_XOOP_NO_ESTAT")
+			return ForceFieldType::MMFF94S_RTOR_XOOP_NO_ESTAT;
+
+		throw po::validation_error(po::validation_error::invalid_option_value, opt);
 	}
 	
 	std::string getForceFieldTypeString(unsigned int ff_type)
 	{
 		using namespace CDPL::ConfGen;
 
-		if (ff_type == ForceFieldType::MMFF94)
-			return "MMFF94";
+		switch (ff_type) {
+
+			case ForceFieldType::MMFF94:
+				return "MMFF94";
 	
-		if (ff_type == ForceFieldType::MMFF94_NO_ESTAT)
-			return "MMFF94_NO_ESTAT";
+			case ForceFieldType::MMFF94_NO_ESTAT:
+				return "MMFF94_NO_ESTAT";
 
-		if (ff_type == ForceFieldType::MMFF94S)
-			return "MMFF94S";
+			case ForceFieldType::MMFF94S:
+				return "MMFF94S";
 
-		if (ff_type == ForceFieldType::MMFF94S_XOOP)
-			return "MMFF94S_XOOP";
+			case ForceFieldType::MMFF94S_XOOP:
+				return "MMFF94S_XOOP";
 
-		if (ff_type == ForceFieldType::MMFF94S_RTOR)
-			return "MMFF94S_RTOR";
+			case ForceFieldType::MMFF94S_RTOR:
+				return "MMFF94S_RTOR";
 
-		if (ff_type == ForceFieldType::MMFF94S_RTOR_XOOP)
-			return "MMFF94S_RTOR_XOOP";
+			case ForceFieldType::MMFF94S_RTOR_XOOP:
+				return "MMFF94S_RTOR_XOOP";
 
-		if (ff_type == ForceFieldType::MMFF94S_NO_ESTAT)
-			return "MMFF94S_NO_ESTAT";
+			case ForceFieldType::MMFF94S_NO_ESTAT:
+				return "MMFF94S_NO_ESTAT";
 
-		if (ff_type == ForceFieldType::MMFF94S_XOOP_NO_ESTAT)
-			return "MMFF94S_XOOP_NO_ESTAT";
+			case ForceFieldType::MMFF94S_XOOP_NO_ESTAT:
+				return "MMFF94S_XOOP_NO_ESTAT";
 
-		if (ff_type == ForceFieldType::MMFF94S_RTOR_NO_ESTAT)
-			return "MMFF94S_RTOR_NO_ESTAT";
+			case ForceFieldType::MMFF94S_RTOR_NO_ESTAT:
+				return "MMFF94S_RTOR_NO_ESTAT";
 
-		if (ff_type == ForceFieldType::MMFF94S_RTOR_XOOP_NO_ESTAT)
-			return "MMFF94S_RTOR_XOOP_NO_ESTAT";
+			case ForceFieldType::MMFF94S_RTOR_XOOP_NO_ESTAT:
+				return "MMFF94S_RTOR_XOOP_NO_ESTAT";
+
+			default:
+				break;
+		}
 
 		return "UNKNOWN";	
 	}

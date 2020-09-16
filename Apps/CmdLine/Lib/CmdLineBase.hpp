@@ -84,12 +84,16 @@ namespace CmdLineLib
 		std::ostream& logStream() const;
 
 		bool progressEnabled() const;
+
 		void initProgress(std::size_t prog_bar_len = 40);
+		void initInfiniteProgress(std::size_t prog_update_interv = 100);
+
 		void printProgress(const std::string& prefix, double progress);
+		void printInfiniteProgress(const std::string& prefix);
 
 		std::string getProgTitleString() const;
 
-		void throwValidationError(const char* option) const;
+		void throwValidationError(const std::string& opt_name) const;
 
 		template <typename T> 
 		static boost::program_options::typed_value<T>* value();
@@ -143,6 +147,8 @@ namespace CmdLineLib
 		bool               showProgress;
 		std::size_t        progressBarLen;
 		long               lastProgressValue;
+		std::size_t        progressUpdateInterv;
+		std::size_t        lastProgressDotCount;
 		Clock::time_point  progressStartTime;
 		bool               inProgressLine;
 		bool               inNewLine;

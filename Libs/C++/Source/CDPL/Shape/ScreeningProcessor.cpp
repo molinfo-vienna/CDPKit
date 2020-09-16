@@ -242,6 +242,7 @@ void Shape::ScreeningProcessor::applyAlignmentSettings()
 	alignment.greedyOptimization(settings.greedyOptimization());
 	alignment.setMaxNumOptimizationIterations(settings.getMaxNumOptimizationIterations());
 	alignment.setOptimizationStopGradient(settings.getOptimizationStopGradient());
+	alignment.getDefaultStartGenerator().setNumRandomStarts(settings.getNumRandomStarts());
 
 	int almnt_mode = PrincipalAxesAlignmentStartGenerator::UNDEF;
 

@@ -40,9 +40,9 @@ const double                   Shape::ScreeningSettings::NO_CUTOFF = std::numeri
 
 
 Shape::ScreeningSettings::ScreeningSettings():
-    scoringFunc(&calcTanimotoComboScore), colorFtrType(PHARMACOPHORE_IMP_CHARGES), screeningMode(BEST_OVERALL_MATCH),
-    almntMode(SHAPE_CENTROID), allCarbon(false), singleConfSearch(false), optOverlap(true), greedyOpt(true), numOptIter(20), 
-	optStopGrad(1.0), scoreCutoff(NO_CUTOFF)    
+    scoringFunc(&calcTanimotoComboScore), colorFtrType(PHARMACOPHORE_IMP_CHARGES), screeningMode(BEST_MATCH_PER_QUERY),
+    almntMode(SHAPE_CENTROID), numRandomStarts(0), allCarbon(false), singleConfSearch(false), optOverlap(true), 
+	greedyOpt(true), numOptIter(20), optStopGrad(1.0), scoreCutoff(NO_CUTOFF)    
 {}
 
 void Shape::ScreeningSettings::setScoringFunction(const ScoringFunction& func)
@@ -83,6 +83,16 @@ void Shape::ScreeningSettings::setAlignmentMode(AlignmentMode mode)
 Shape::ScreeningSettings::AlignmentMode Shape::ScreeningSettings::getAlignmentMode() const
 {
     return almntMode;
+}
+
+void Shape::ScreeningSettings::setNumRandomStarts(std::size_t num_starts)
+{
+	numRandomStarts = num_starts;
+}
+
+std::size_t Shape::ScreeningSettings::getNumRandomStarts() const
+{
+	return numRandomStarts;
 }
 
 void Shape::ScreeningSettings::allCarbonMode(bool all_c)

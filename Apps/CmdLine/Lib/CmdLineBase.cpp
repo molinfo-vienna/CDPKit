@@ -307,11 +307,43 @@ void CmdLineBase::printProgress(const std::string& prefix, double progress)
 	inNewLine = false;
 }
 
-void CmdLineBase::throwValidationError(const char* option) const
+void CmdLineBase::printInfiniteProgress(const std::string& prefix)
+{
+	if (!showProgress || verbLevel == QUIET || termSignalCaught())
+		return;
+
+	Clock::duration elapsed = Clock::now() - progressStartTime;
+
+	if (boost::chrono::duration_cast<boost::chrono::milliseconds>(elapsed).count() < boost::int_least64_t(progressUpdateInterv))
+		return;
+
+	if (logStreamPtr == &std::cerr && !inProgressLine && !inNewLine)
+		std::cerr << std::endl;
+
+	std::cerr << prefix << std::setfill('.') << std::setw(lastProgressDotCount) << "" << 
+		std::setfill(' ') << std::setw(3 - lastProgressDotCount) << "" << "\r";
+
+	if (++lastProgressDotCount == 4)
+		lastProgressDotCount = 1;
+
+	progressStartTime = Clock::now();
+
+	inProgressLine = true;
+	inNewLine = false;
+}
+
+void CmdLineBase::initInfiniteProgress(std::size_t prog_update_interv)
+{
+	progressUpdateInterv = prog_update_interv;
+	lastProgressDotCount = 1;
+	progressStartTime = Clock::now();
+}
+
+void CmdLineBase::throwValidationError(const std::string& opt_name) const
 {
 	namespace po = boost::program_options;
 
-	throw po::validation_error(po::validation_error::invalid_option_value, option);
+	throw po::validation_error(po::validation_error::invalid_option_value, opt_name);
 }
 
 void CmdLineBase::setVerbosityLevel(const std::string& level)
@@ -432,7 +464,7 @@ void CmdLineBase::printHelpForOption(const std::string& name) const
 	const OptionDescription* opt_desc = getOptionDescriptor(name);
 
 	if (!opt_desc)
-		throw po::validation_error(po::validation_error::invalid_option_value, name);
+		throwValidationError(name);
 
 	std::cerr << opt_desc->format_name() << ' ' << opt_desc->format_parameter() 
 			  << std::endl << std::endl;
@@ -535,7 +567,9 @@ const std::string& CmdLineBase::getOptionDescription(const std::string& name) co
 	if (opt_desc)
 		return opt_desc->description();
 
-	throw po::validation_error(po::validation_error::invalid_option_value, name);
+	throwValidationError(name);
+
+	return name;
 }
 
 const CmdLineBase::OptionDescription* CmdLineBase::getOptionDescriptor(const std::string& name) const

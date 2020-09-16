@@ -28,10 +28,7 @@
 #define SHAPESCREEN_SHAPESCREENIMPL_HPP
 
 #include <cstddef>
-#include <vector>
 #include <string>
-#include <memory>
-
 
 #include <boost/thread.hpp>
 #include <boost/chrono/chrono.hpp>
@@ -71,26 +68,30 @@ namespace ShapeScreen
 		typedef CDPL::Base::DataInputHandler<CDPL::Chem::Molecule> InputHandler;
 		typedef InputHandler::SharedPointer InputHandlerPtr;
 		typedef OutputHandler::SharedPointer OutputHandlerPtr;
+		typedef CDPL::Shape::ScreeningSettings ScreeningSettings;
 
 		const char* getProgName() const;
 		const char* getProgCopyright() const;
 		const char* getProgAboutText() const;
 
+		void setNumRandomStarts(std::size_t num_starts);
+
 		void setColorFeatureType(const std::string& type);
 		void setScoringFunction(const std::string& func);
 		void setScreeningMode(const std::string& mode);
-		void setNumRandomStarts(std::size_t num_starts);
-		void setColorFeatureCenterStarts(bool col_ctr_starts);
-		void setAtomCenterStarts(bool atom_ctr_starts);
-		void setShapeCenterStarts(bool atom_ctr_starts);
-		void setAllCarbonMode(bool all_c);
-		void setOverlayOptimization(bool opt);
-		void setScoringOnly(bool score_only);
-		void setSingleConformerSearch(bool single_conf);
+	
+		void enableAllCarbonMode(bool all_c);
+		void performOverlayOptimization(bool opt);
+		void performThoroughOverlayOptimization(bool thorough);
+		void performSingleConformerSearch(bool single_conf);
+
 		void setScoreCutoff(double cutoff);
+
 		void setQueryFormat(const std::string& file_ext);
 		void setDatabaseFormat(const std::string& file_ext);
 		void setOutputFormat(const std::string& file_ext);
+
+		void setAlignmentMode();
 
 		int process();
 
@@ -100,9 +101,6 @@ namespace ShapeScreen
 		std::size_t readNextMolecule(CDPL::Chem::Molecule& mol);
 		std::size_t doReadNextMolecule(CDPL::Chem::Molecule& mol);
 
-		void writeMolecule(const CDPL::Chem::MolecularGraph& mol);
-		void doWriteMolecule(const CDPL::Chem::MolecularGraph& mol);
-
 		void setErrorMessage(const std::string& msg);
 		bool haveErrorMessage();
 
@@ -111,15 +109,22 @@ namespace ShapeScreen
 		void printStatistics(std::size_t proc_time);
 
 		void checkInputFiles() const;
-		void checkOutputOptions() const;
+		void checkOutputFileOptions() const;
+
 		void printOptionSummary();
+
 		void initQueryReader();
 		void initDatabaseReader();
-		void initOutputWriters();
 
 		InputHandlerPtr getQueryHandler(const std::string& file_path) const;
 		InputHandlerPtr getDatabaseHandler(const std::string& file_path) const;
 		OutputHandlerPtr getOutputHandler(const std::string& file_path) const;
+
+		std::string screeningModeToString(ScreeningSettings::ScreeningMode mode) const;
+		ScreeningSettings::ScreeningMode stringToScreeningMode(const std::string& mode_str) const;
+
+		std::string colorFeatureTypeToString(ScreeningSettings::ColorFeatureType type) const;
+		ScreeningSettings::ColorFeatureType stringToColorFeatureType(const std::string& type_str) const;
 
 		std::string createMoleculeIdentifier(std::size_t rec_idx);
 
@@ -128,20 +133,20 @@ namespace ShapeScreen
 		class InputScanProgressCallback;
 		class ScreeningWorker;
 
-		typedef std::vector<std::string> StringList;
-		typedef CDPL::Base::DataReader<CDPL::Chem::Molecule> MoleculeReader;
-		typedef CDPL::Util::CompoundDataReader<CDPL::Chem::Molecule> CompMoleculeReader;
+		typedef CDPL::Base::DataReader<CDPL::Chem::Molecule>::SharedPointer MoleculeReaderPtr;
 		typedef CDPL::Base::DataWriter<CDPL::Chem::MolecularGraph>::SharedPointer MoleculeWriterPtr;
-		typedef std::auto_ptr<std::ofstream> ReportFileStreamPtr;
 		typedef boost::chrono::system_clock Clock;
-		typedef CDPL::Shape::ScreeningSettings ScreeningSettings;
 
-		StringList                     queryFiles;
-		StringList                     databaseFiles;
+		std::string                    queryFile;
+		std::string                    databaseFile;
 		std::string                    outputFile;
 		std::string                    reportFile;
+		std::string                    scoringFunc;
 		std::size_t                    numThreads;
 		ScreeningSettings              settings;
+		bool                           scoringOnly;
+		bool                           mergeHitLists;
+		bool                           splitOutFiles;
 		bool                           reportAll;
 		bool                           outputQuery;
 		bool                           scoreSDTags;
@@ -150,19 +155,22 @@ namespace ShapeScreen
 		bool                           queryConfIdxSDTags;
 		bool                           dbMolIdxSDTags;
 		bool                           dbConfIdxSDTags;
+		bool                           colorCenterStarts;
+		bool                           atomCenterStarts;
+		bool                           shapeCenterStarts;
+		std::size_t                    numRandomStarts;
+		std::string                    hitNamePattern;
 		std::size_t                    numBestHits;
 		std::size_t                    maxNumHits;
 		double                         shapeScoreCutoff;
 		InputHandlerPtr                queryHandler;
-		CompMoleculeReader             queryReader;
+		MoleculeReaderPtr              queryReader;
 		InputHandlerPtr                databaseHandler;
-		CompMoleculeReader             databaseReader;
+		MoleculeReaderPtr              databaseReader;
 		OutputHandlerPtr               outputHandler;
 		MoleculeWriterPtr              outputWriter;
-		ReportFileStreamPtr            reportFileWriter;
 		boost::mutex                   mutex;
 		boost::mutex                   readMolMutex;
-		boost::mutex                   writeMolMutex;
 		std::string                    errorMessage;
 		Clock::time_point              startTime;
     };
