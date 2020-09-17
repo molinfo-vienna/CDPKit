@@ -26,18 +26,19 @@
 
 #include <algorithm>
 #include <iterator>
-#include <vector>
+#include <fstream>
 
 #include <boost/algorithm/string.hpp>
 #include <boost/bind.hpp>
-#include <boost/format.hpp>
 #include <boost/lexical_cast.hpp>
 #include <boost/timer/timer.hpp>
 
 #include "CDPL/Chem/BasicMolecule.hpp"
 #include "CDPL/Chem/ControlParameterFunctions.hpp"
+#include "CDPL/Chem/MolecularGraphFunctions.hpp"
 #include "CDPL/Shape/ScreeningProcessor.hpp"
 #include "CDPL/Shape/ScoringFunctors.hpp"
+#include "CDPL/Shape/ScoringFunctions.hpp"
 #include "CDPL/Util/FileFunctions.hpp"
 #include "CDPL/Base/DataIOManager.hpp"
 #include "CDPL/Base/Exceptions.hpp"
@@ -50,49 +51,59 @@
 using namespace ShapeScreen;
 
 
-class ShapeScreenImpl::InputScanProgressCallback
-{
-
-public:
-    class Terminated : public std::exception {};
-
-    InputScanProgressCallback(ShapeScreenImpl* parent): parent(parent) {}
-
-    void operator()(const CDPL::Base::DataIOBase&, double progress) const {
-		if (ShapeScreenImpl::termSignalCaught())
-			throw Terminated();
-
-		parent->printInfiniteProgress("Scanning Input File(s)");
-    }
-
-private:
-    ShapeScreenImpl* parent;
-};
-
-
 class ShapeScreenImpl::ScreeningWorker
 {
 
 public:
-    ScreeningWorker(ShapeScreenImpl* parent): parent(parent) {}
+    ScreeningWorker(ShapeScreenImpl* parent): parent(parent), terminate(false) {
+		screeningProc.getSettings() = parent->settings;
+		screeningProc.setHitCallback(boost::bind(&ScreeningWorker::hitCallback, this, _1, _2, _3));
+
+		for (QueryMoleculeList::const_iterator it = parent->queryMolecules.begin(), end = parent->queryMolecules.end(); it != end; ++it)
+			screeningProc.addQuery(**it);
+	}
 
     void operator()() {
+		while (!terminate) {
+			if (!(dbMolIndex = parent->readNextMolecule(molecule)))
+				return;
+			
+			try {
+				if (!screeningProc.process(molecule))
+					parent->printMessage(ERROR, "Processing of database molecule " + parent->createMoleculeIdentifier(dbMolIndex, molecule) + " failed");
+
+				continue;
+				
+			} catch (const std::exception& e) {
+				parent->setErrorMessage("unexpected exception while processing database molecule " + parent->createMoleculeIdentifier(dbMolIndex, molecule) + ": " + e.what());
+
+			} catch (...) {
+				parent->setErrorMessage("unexpected exception while processing database molecule " + parent->createMoleculeIdentifier(dbMolIndex, molecule));
+			}
+
+			return;
+		}
     }
 
 private:
-
+	void hitCallback(const CDPL::Chem::MolecularGraph& query_mol, const CDPL::Chem::MolecularGraph& db_mol, const CDPL::Shape::AlignmentResult& res) {
+		terminate = !parent->processHit(dbMolIndex - 1, getName(molecule), res);
+	}
+	
     ShapeScreenImpl*                     parent;
     CDPL::Shape::ScreeningProcessor      screeningProc;
     CDPL::Chem::BasicMolecule            molecule;
+	std::size_t                          dbMolIndex;
+	bool                                 terminate;
 };
 
 
 ShapeScreenImpl::ShapeScreenImpl(): 
     scoringFunc("TANIMOTO_COMBO"), numThreads(0), settings(), scoringOnly(false), mergeHitLists(false), 
-	splitOutFiles(true), reportAll(false), outputQuery(true), scoreSDTags(true), queryNameSDTags(false), 
+	splitOutFiles(true), outputQuery(true), scoreSDTags(true), queryNameSDTags(false), 
 	queryMolIdxSDTags(false), queryConfIdxSDTags(true), dbMolIdxSDTags(false), dbConfIdxSDTags(true),
 	colorCenterStarts(false), atomCenterStarts(false), shapeCenterStarts(true),
-	hitNamePattern("@D@_@q@_@d@"), numBestHits(1000), maxNumHits(0), shapeScoreCutoff(0.0)
+	hitNamePattern("@D@_@q@_@d@"), numBestHits(1000), maxNumHits(0), shapeScoreCutoff(0.0), numHits(0)
 {
    	addOption("query,q", "Query molecule file.", 
 			  value<std::string>(&queryFile)->required());
@@ -126,9 +137,6 @@ ShapeScreenImpl::ShapeScreenImpl():
 			  value<bool>(&mergeHitLists)->implicit_value(true));
 	addOption("split-output,P", "If true, for every query molecule a separate report and hit output file will be written (default: true).", 
 			  value<bool>(&splitOutFiles)->implicit_value(true));
-	addOption("report-all,e", "If specified, best overlay results of ALL database molecules get written to the report file "
-			  "(default: false, i.e. only records for hit molecules are output).", 
-			  value<bool>(&reportAll)->implicit_value(true));
 	addOption("score-only,y", "If specified, no shape overlay of the query and database molecules will be performed and the input "
 			  "poses get scored as they are (default: false).",
 			  value<bool>(&scoringOnly)->implicit_value(true));
@@ -171,7 +179,7 @@ ShapeScreenImpl::ShapeScreenImpl():
 			  value<bool>(&dbMolIdxSDTags)->implicit_value(true));
 	addOption("db-conf-sd-tags,Y", "If true, the database conformer index will be appended to the SD-block of the output hit molecules (default: true).",
 			  value<bool>(&dbConfIdxSDTags)->implicit_value(true));
-	addOption("hit-name-ptn,T", "Pattern for composing the names of output hit molecules by variable substitution (supported variables: @Q@ = query molecule name, "
+	addOption("hit-name-ptn,T", "Pattern for composing the names of written hit molecules by variable substitution (supported variables: @Q@ = query molecule name, "
 			  "@D@ = database molecule name, @C@ = query molecule conformer index, @c@ = database molecule conformer index, @I@ = query molecule index "
 			  "and @i@ = database molecule index, default: @D@_@q@_@d@).",
 			  value<std::string>(&hitNamePattern));
@@ -441,11 +449,14 @@ int ShapeScreenImpl::process()
     if (termSignalCaught())
 		return EXIT_FAILURE;
 
+	readQueryMolecules();
+	setupHitLists();
+	
     if (progressEnabled()) {
-		initProgress();
-		printMessage(INFO, "Screening Molecules", true, true);
+		initInfiniteProgress();
+		printMessage(INFO, "Screening Molecules...", true, true);
     } else
-		printMessage(INFO, "Screening Molecules");
+		printMessage(INFO, "Screening Molecules...");
 
     if (numThreads > 0)
 		processMultiThreaded();
@@ -479,7 +490,8 @@ void ShapeScreenImpl::processSingleThreaded()
     if (termSignalCaught())
 		return;
 
-    printStatistics(boost::chrono::duration_cast<boost::chrono::duration<std::size_t> >(Clock::now() - startTime).count());
+	outputHitLists();
+    printStatistics();
 }
 
 void ShapeScreenImpl::processMultiThreaded()
@@ -527,8 +539,203 @@ void ShapeScreenImpl::processMultiThreaded()
 
     if (termSignalCaught())
 		return;
+
+	outputHitLists();
+    printStatistics();
+}
+
+bool ShapeScreenImpl::processHit(std::size_t db_mol_idx, const std::string& db_mol_name, const CDPL::Shape::AlignmentResult& res)
+{
+	if (shapeScoreCutoff > 0.0 && calcShapeTanimotoScore(res) < shapeScoreCutoff)
+		return true;
+
+	if (numThreads > 0) {
+		boost::lock_guard<boost::mutex> lock(mutex);
+
+		return doProcessHit(db_mol_idx, db_mol_name, res);
+    }
+
+	return doProcessHit(db_mol_idx, db_mol_name, res);
+}
+
+bool ShapeScreenImpl::doProcessHit(std::size_t db_mol_idx, const std::string& db_mol_name, const CDPL::Shape::AlignmentResult& res)
+{
+	if (maxNumHits > 0 && numHits >= maxNumHits)
+		return false;
+
+	numHits++;
 	
-    printStatistics(boost::chrono::duration_cast<boost::chrono::duration<std::size_t> >(Clock::now() - startTime).count());
+	HitList& hit_list = (mergeHitLists ? hitLists[0] : hitLists[res.getReferenceShapeSetIndex()]);
+		
+	if (numBestHits > 0) {
+		if (hit_list.size() >= numBestHits) {
+			if (hit_list.rbegin()->almntResult.getScore() >= res.getScore())
+				return true;
+
+			hit_list.erase(--hit_list.end());
+		}
+	}
+
+	hit_list.insert(HitMoleculeData(db_mol_idx, db_mol_name, res));
+
+	return true;
+}
+
+void ShapeScreenImpl::readQueryMolecules()
+{
+	using namespace CDPL;
+	
+	printMessage(INFO, "Reading Query Molecules...");
+
+	while (!termSignalCaught()) {
+		MoleculePtr query_mol(new Chem::BasicMolecule());
+
+		if (!queryReader->read(*query_mol))
+			break;
+
+		queryMolecules.push_back(query_mol);
+	}
+
+	if (termSignalCaught())
+		return;
+
+    printMessage(INFO, " - Read " + boost::lexical_cast<std::string>(queryMolecules.size()) + " query molecule(s)");
+    printMessage(INFO, "");
+}
+
+void ShapeScreenImpl::setupHitLists()
+{
+	hitLists.resize(mergeHitLists ? 1 : queryMolecules.size());
+}
+
+void ShapeScreenImpl::outputHitLists()
+{
+	if (!reportFile.empty())
+		outputReportFiles();
+	
+	// TODO
+}
+
+void ShapeScreenImpl::outputReportFiles()
+{
+	if (splitOutFiles) {
+		for (std::size_t i = 0, num_query_mols = queryMolecules.size(); i < num_query_mols; i++)
+			outputReportFile(i);
+		
+	} else
+		outputReportFile(0);
+}
+
+void ShapeScreenImpl::outputReportFile(std::size_t query_mol_idx)
+{
+	std::ofstream os(splitOutFiles ? getReportFileName(query_mol_idx) : reportFile);
+
+	os << std::fixed;
+	
+	outputReportFileHeader(os);
+
+	if (splitOutFiles) {
+		const HitList& hit_list = (mergeHitLists ? hitLists[0] : hitLists[query_mol_idx]);
+
+		for (HitList::const_iterator it = hit_list.begin(), end = hit_list.end(); it != end; ++it) {
+			const HitMoleculeData& hit_data = *it;
+
+			if (mergeHitLists && hit_data.almntResult.getReferenceShapeSetIndex() != query_mol_idx)
+				continue;
+
+			outputReportFileHitData(os, hit_data);
+		}
+		
+	} else {
+		for (std::size_t i = 0, num_hit_lists = hitLists.size(); i < num_hit_lists; i++) {
+			const HitList& hit_list = hitLists[i];
+
+			std::for_each(hit_list.begin(), hit_list.end(), boost::bind(&ShapeScreenImpl::outputReportFileHitData, this, boost::ref(os), _1));
+		}
+	}
+	
+	os.flush();
+	os.close();
+	
+	if (!os.good())
+		printMessage(ERROR, "Writing report file '" + (splitOutFiles ? getReportFileName(query_mol_idx) : reportFile) + "' failed");
+}
+
+std::string ShapeScreenImpl::getReportFileName(std::size_t query_mol_idx) const
+{
+	std::string::size_type suffix_pos = reportFile.find_last_of('.');
+	std::string file_name = reportFile;
+		
+	if (suffix_pos != std::string::npos)
+		return file_name.insert(suffix_pos, "_" + boost::lexical_cast<std::string>(query_mol_idx + 1));
+
+	return file_name.append("_" + boost::lexical_cast<std::string>(query_mol_idx + 1));
+}
+
+void ShapeScreenImpl::outputReportFileHeader(std::ostream& os) const
+{
+	os << "Database Mol. Name\t"
+	   << "Database Mol. Index\t"
+	   << "Database Conf. Index\t";
+
+	if (!splitOutFiles) {
+		os << "Query Mol. Name\t"
+		   << "Query Mol. Index\t";
+	}
+	
+	os << "Query Conf. Index\t"
+	   << "Total Overlap\t"
+	   << "Shape Overlap\t"
+	   << "Color Overlap\t"
+	   << "Total Overlap Tanimoto\t"
+	   << "Shape Tanimoto\t"
+	   << "Color Tanimoto\t"
+	   << "Tanimoto Combo\t"
+	   << "Total Overlap Tversky\t"
+	   << "Shape Tversky\t"
+	   << "Color Tversky\t"
+	   << "Tversky Combo\t"
+	   << "Query Total Overlap Tversky\t"
+	   << "Query Shape Tversky\t"
+	   << "Query Color Tversky\t"
+	   << "Query Tversky Combo\t"
+	   << "DB Total Overlap Tversky\t"
+	   << "DB Shape Tversky\t"
+	   << "DB Color Tversky\t"
+	   << "DB Tversky Combo\n";
+}
+
+void ShapeScreenImpl::outputReportFileHitData(std::ostream& os, const HitMoleculeData& hit_data) const
+{
+	os << hit_data.dbMolName << '\t'
+	   << (hit_data.dbMolIndex + 1) << '\t'
+	   << (hit_data.almntResult.getAlignedShapeIndex() + 1) << '\t';
+
+	if (!splitOutFiles) {
+		os << getName(*queryMolecules[hit_data.almntResult.getReferenceShapeSetIndex()]) << '\t'
+		   << (hit_data.almntResult.getReferenceShapeSetIndex() + 1) << '\t';
+	}
+	
+	os << (hit_data.almntResult.getReferenceShapeIndex() + 1) << '\t'
+	   << hit_data.almntResult.getOverlap() << '\t'
+	   << (hit_data.almntResult.getOverlap() - hit_data.almntResult.getColorOverlap()) << '\t'
+	   << hit_data.almntResult.getColorOverlap() << '\t'
+	   << calcTotalOverlapTanimotoScore(hit_data.almntResult) << '\t'
+	   << calcShapeTanimotoScore(hit_data.almntResult) << '\t'
+	   << calcColorTanimotoScore(hit_data.almntResult) << '\t'
+	   << calcTanimotoComboScore(hit_data.almntResult) << '\t'
+	   << calcTotalOverlapTverskyScore(hit_data.almntResult) << '\t'
+	   << calcShapeTverskyScore(hit_data.almntResult) << '\t'
+	   << calcColorTverskyScore(hit_data.almntResult) << '\t'
+	   << calcTverskyComboScore(hit_data.almntResult) << '\t'
+	   << calcReferenceTotalOverlapTverskyScore(hit_data.almntResult) << '\t'
+	   << calcReferenceShapeTverskyScore(hit_data.almntResult) << '\t'
+	   << calcReferenceColorTverskyScore(hit_data.almntResult) << '\t'
+	   << calcReferenceTverskyComboScore(hit_data.almntResult) << '\t'
+	   << calcAlignedTotalOverlapTverskyScore(hit_data.almntResult) << '\t'
+	   << calcAlignedShapeTverskyScore(hit_data.almntResult) << '\t'
+	   << calcAlignedColorTverskyScore(hit_data.almntResult) << '\t'
+	   << calcAlignedTverskyComboScore(hit_data.almntResult) << '\n';
 }
 
 void ShapeScreenImpl::setErrorMessage(const std::string& msg)
@@ -543,23 +750,6 @@ void ShapeScreenImpl::setErrorMessage(const std::string& msg)
 
     if (errorMessage.empty())
 		errorMessage = msg;
-}
-
-bool ShapeScreenImpl::haveErrorMessage()
-{
-    if (numThreads > 0) {
-		boost::lock_guard<boost::mutex> lock(mutex);
-		return !errorMessage.empty();
-    }
-
-    return !errorMessage.empty();
-}
-
-void ShapeScreenImpl::printStatistics(std::size_t proc_time)
-{
-    printMessage(INFO, "Statistics:");
-    printMessage(INFO, " Processing Time:      " + CmdLineLib::formatTimeDuration(proc_time));
-    printMessage(INFO, "");
 }
 
 std::size_t ShapeScreenImpl::readNextMolecule(CDPL::Chem::Molecule& mol)
@@ -583,31 +773,43 @@ std::size_t ShapeScreenImpl::doReadNextMolecule(CDPL::Chem::Molecule& mol)
 {
     while (true) {
 		try {
-			if (databaseReader->getRecordIndex() >= databaseReader->getNumRecords()) 
-				return 0;
-
-			if (!databaseReader->read(mol)) {
-				printMessage(ERROR, "Reading molecule " + createMoleculeIdentifier(databaseReader->getRecordIndex() + 1) + " failed");			
-				
-				databaseReader->setRecordIndex(databaseReader->getRecordIndex() + 1);
-				continue;
-			}
-
 			printInfiniteProgress("Screening Molecules");
+
+			if (!databaseReader->read(mol))
+				return 0;
 
 			return databaseReader->getRecordIndex();
 
 		} catch (const std::exception& e) {
-			printMessage(ERROR, "Error while reading molecule " + createMoleculeIdentifier(databaseReader->getRecordIndex() + 1) + ": " + e.what());
+			printMessage(ERROR, "Error while reading database molecule " + createMoleculeIdentifier(databaseReader->getRecordIndex() + 1) + ": " + e.what());
 
 		} catch (...) {
-			printMessage(ERROR, "Unspecified error while reading molecule " + createMoleculeIdentifier(databaseReader->getRecordIndex() + 1));
+			printMessage(ERROR, "Unspecified error while reading database molecule " + createMoleculeIdentifier(databaseReader->getRecordIndex() + 1));
 		}
 
 		databaseReader->setRecordIndex(databaseReader->getRecordIndex() + 1);
     }
 
     return 0;
+}
+
+bool ShapeScreenImpl::haveErrorMessage()
+{
+    if (numThreads > 0) {
+		boost::lock_guard<boost::mutex> lock(mutex);
+		return !errorMessage.empty();
+    }
+
+    return !errorMessage.empty();
+}
+
+void ShapeScreenImpl::printStatistics()
+{
+	std::size_t proc_time = boost::chrono::duration_cast<boost::chrono::duration<std::size_t> >(Clock::now() - startTime).count();
+	
+    printMessage(INFO, "Statistics:");
+    printMessage(INFO, " Processing Time:      " + CmdLineLib::formatTimeDuration(proc_time));
+    printMessage(INFO, "");
 }
 
 void ShapeScreenImpl::checkOutputFileOptions() const
@@ -666,12 +868,11 @@ void ShapeScreenImpl::printOptionSummary()
 	printMessage(VERBOSE, " Max. Num. Hits:                      " + (maxNumHits > 0 ? boost::lexical_cast<std::string>(maxNumHits) : std::string("No Limit")));
 	printMessage(VERBOSE, " Score Cutoff:                        " + (settings.getScoreCutoff() == ScreeningSettings::NO_CUTOFF ? boost::lexical_cast<std::string>(settings.getScoreCutoff()) : std::string("None")));
 	printMessage(VERBOSE, " Shape Tanimoto Cutoff:               " + (shapeScoreCutoff > 0.0 ? boost::lexical_cast<std::string>(shapeScoreCutoff) : std::string("None")));
-	printMessage(VERBOSE, " Hit List Merging:                    " + std::string(mergeHitLists ? "Yes" : "No"));
+	printMessage(VERBOSE, " Merge Hit Lists:                     " + std::string(mergeHitLists ? "Yes" : "No"));
 	printMessage(VERBOSE, " Output File Splitting:               " + std::string(splitOutFiles ? "Yes" : "No"));
-	printMessage(VERBOSE, " Report File Mode:                    " + std::string(reportAll ? "All best Results" : "Hits only"));
-	printMessage(VERBOSE, " Alignment Performed:                 " + std::string(scoringOnly ? "No" : "Yes"));
-	printMessage(VERBOSE, " Overlay Optimization                 " + std::string(settings.optimizeOverlap() ? "Yes" : "No"));
-	printMessage(VERBOSE, " Thorough Overlay Optimization        " + std::string(settings.greedyOptimization() ? "No" : "Yes"));
+	printMessage(VERBOSE, " Shape Alignment:                     " + std::string(scoringOnly ? "No" : "Yes"));
+	printMessage(VERBOSE, " Overlay Optimization:                " + std::string(settings.optimizeOverlap() ? "Yes" : "No"));
+	printMessage(VERBOSE, " Thorough Overlay Optimization:       " + std::string(settings.greedyOptimization() ? "No" : "Yes"));
 	printMessage(VERBOSE, " Output Query Molecules:              " + std::string(outputQuery ? "Yes" : "No"));
 	printMessage(VERBOSE, " Single Conformer DB-Mode:            " + std::string(settings.singleConformerSearch() ? "Yes" : "No"));
 	printMessage(VERBOSE, " Color Feature Type:                  " + colorFeatureTypeToString(settings.getColorFeatureType()));
@@ -684,7 +885,9 @@ void ShapeScreenImpl::printOptionSummary()
 	printMessage(VERBOSE, " Output Query Mol. Name SD-Tags:      " + std::string(queryNameSDTags ? "Yes" : "No"));
 	printMessage(VERBOSE, " Output Query Mol. Index SD-Tags:     " + std::string(queryMolIdxSDTags ? "Yes" : "No"));
 	printMessage(VERBOSE, " Output Query Conf. Index SD-Tags:    " + std::string(queryConfIdxSDTags ? "Yes" : "No"));
-
+	printMessage(VERBOSE, " Output Database Mol. Index SD-Tags:  " + std::string(dbMolIdxSDTags ? "Yes" : "No"));
+	printMessage(VERBOSE, " Output Database Conf. Index SD-Tags: " + std::string(dbConfIdxSDTags ? "Yes" : "No"));
+	printMessage(VERBOSE, " Hit Output Mol. Name Pattern:        " + hitNamePattern);
     printMessage(VERBOSE, " Multithreading:                      " + std::string(numThreads > 0 ? "Yes" : "No"));
 
     if (numThreads > 0)
@@ -703,12 +906,6 @@ void ShapeScreenImpl::initQueryReader()
 	if (termSignalCaught())
 		return;
 
-     if (progressEnabled()) {
-		initInfiniteProgress();
-		printMessage(INFO, "Scanning Query File", true, true);
-    } else
-		printMessage(INFO, "Scanning Query File");
-
 	InputHandlerPtr query_handler = getQueryHandler(queryFile);
 
 	if (!query_handler)
@@ -717,21 +914,6 @@ void ShapeScreenImpl::initQueryReader()
 	queryReader = query_handler->createReader(queryFile);
 
 	setMultiConfImportParameter(*queryReader, true);
-
-	std::size_t cb_id = queryReader->registerIOCallback(InputScanProgressCallback(this));
-
-	try {
-		queryReader->getNumRecords();
-
-	} catch (const InputScanProgressCallback::Terminated&) {}
-
-	queryReader->unregisterIOCallback(cb_id);
-
-	if (termSignalCaught())
-		return;
-
-    printMessage(INFO, " - Found " + boost::lexical_cast<std::string>(queryReader->getNumRecords()) + " query molecule(s)");
-    printMessage(INFO, "");
 }
 
 void ShapeScreenImpl::initDatabaseReader()
@@ -741,12 +923,6 @@ void ShapeScreenImpl::initDatabaseReader()
 	if (termSignalCaught())
 		return;
 
-    if (progressEnabled()) {
-		initInfiniteProgress();
-		printMessage(INFO, "Scanning Database File", true, true);
-    } else
-		printMessage(INFO, "Scanning Database File");
-
 	InputHandlerPtr database_handler = getDatabaseHandler(databaseFile);
 
 	if (!database_handler)
@@ -755,21 +931,6 @@ void ShapeScreenImpl::initDatabaseReader()
 	databaseReader = database_handler->createReader(databaseFile);
 
 	setMultiConfImportParameter(*databaseReader, true);
-
-	std::size_t cb_id = databaseReader->registerIOCallback(InputScanProgressCallback(this));
-
-	try {
-		databaseReader->getNumRecords();
-
-	} catch (const InputScanProgressCallback::Terminated&) {}
-
-	databaseReader->unregisterIOCallback(cb_id);
-
-	if (termSignalCaught())
-		return;
-
-    printMessage(INFO, " - Found " + boost::lexical_cast<std::string>(databaseReader->getNumRecords()) + " screening database molecule(s)");
-    printMessage(INFO, "");
 }
 
 ShapeScreenImpl::InputHandlerPtr ShapeScreenImpl::getQueryHandler(const std::string& file_path) const
@@ -874,7 +1035,15 @@ ShapeScreenImpl::ScreeningSettings::ColorFeatureType ShapeScreenImpl::stringToCo
 	return ScreeningSettings::PHARMACOPHORE_IMP_CHARGES;
 }
 
+std::string ShapeScreenImpl::createMoleculeIdentifier(std::size_t rec_idx, const CDPL::Chem::Molecule& mol)
+{
+	if (!getName(mol).empty())
+		return ('\'' + getName(mol) + "' (" + createMoleculeIdentifier(rec_idx) + ')');
+
+	return createMoleculeIdentifier(rec_idx);
+}
+
 std::string ShapeScreenImpl::createMoleculeIdentifier(std::size_t rec_idx)
 {
-    return (boost::lexical_cast<std::string>(rec_idx) + '/' + boost::lexical_cast<std::string>(databaseReader->getNumRecords()));
+    return boost::lexical_cast<std::string>(rec_idx);
 }

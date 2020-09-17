@@ -309,7 +309,7 @@ void CmdLineBase::printProgress(const std::string& prefix, double progress)
 
 void CmdLineBase::printInfiniteProgress(const std::string& prefix)
 {
-	if (!showProgress || verbLevel == QUIET || termSignalCaught())
+	if (!showProgress || verbLevel == QUIET || termSignalCaught() || maxProgressDotCount == 0)
 		return;
 
 	Clock::duration elapsed = Clock::now() - progressStartTime;
@@ -321,22 +321,22 @@ void CmdLineBase::printInfiniteProgress(const std::string& prefix)
 		std::cerr << std::endl;
 
 	std::cerr << prefix << std::setfill('.') << std::setw(lastProgressDotCount) << "" << 
-		std::setfill(' ') << std::setw(3 - lastProgressDotCount) << "" << "\r";
+		std::setfill(' ') << std::setw(maxProgressDotCount - lastProgressDotCount) << "" << "\r";
 
-	if (++lastProgressDotCount == 4)
+	if (++lastProgressDotCount > maxProgressDotCount)
 		lastProgressDotCount = 1;
 
 	progressStartTime = Clock::now();
-
 	inProgressLine = true;
 	inNewLine = false;
 }
 
-void CmdLineBase::initInfiniteProgress(std::size_t prog_update_interv)
+void CmdLineBase::initInfiniteProgress(std::size_t prog_update_interv, std::size_t max_num_dots)
 {
 	progressUpdateInterv = prog_update_interv;
 	lastProgressDotCount = 1;
-	progressStartTime = Clock::now();
+	maxProgressDotCount = max_num_dots;
+	progressStartTime = Clock::now() - boost::chrono::milliseconds(prog_update_interv);
 }
 
 void CmdLineBase::throwValidationError(const std::string& opt_name) const

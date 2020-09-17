@@ -86,7 +86,7 @@ namespace CmdLineLib
 		bool progressEnabled() const;
 
 		void initProgress(std::size_t prog_bar_len = 40);
-		void initInfiniteProgress(std::size_t prog_update_interv = 100);
+		void initInfiniteProgress(std::size_t prog_update_interv = 1000, std::size_t max_num_dots = 4);
 
 		void printProgress(const std::string& prefix, double progress);
 		void printInfiniteProgress(const std::string& prefix);
@@ -149,6 +149,7 @@ namespace CmdLineLib
 		long               lastProgressValue;
 		std::size_t        progressUpdateInterv;
 		std::size_t        lastProgressDotCount;
+		std::size_t        maxProgressDotCount;
 		Clock::time_point  progressStartTime;
 		bool               inProgressLine;
 		bool               inNewLine;

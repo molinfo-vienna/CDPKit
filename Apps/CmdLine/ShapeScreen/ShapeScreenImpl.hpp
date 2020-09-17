@@ -29,29 +29,22 @@
 
 #include <cstddef>
 #include <string>
+#include <vector>
+#include <set>
+#include <iosfwd>
 
 #include <boost/thread.hpp>
 #include <boost/chrono/chrono.hpp>
 
+#include "CDPL/Chem/Molecule.hpp"
 #include "CDPL/Util/CompoundDataReader.hpp"
 #include "CDPL/Base/DataWriter.hpp"
 #include "CDPL/Base/DataInputHandler.hpp"
 #include "CDPL/Base/DataOutputHandler.hpp"
 #include "CDPL/Shape/ScreeningSettings.hpp"
+#include "CDPL/Shape/AlignmentResult.hpp"
 
 #include "CmdLine/Lib/CmdLineBase.hpp"
-
-
-namespace CDPL
-{
-
-	namespace Chem
-	{
-
-		class Molecule;
-		class MolecularGraph;
-	}
-}
 
 
 namespace ShapeScreen
@@ -70,6 +63,23 @@ namespace ShapeScreen
 		typedef OutputHandler::SharedPointer OutputHandlerPtr;
 		typedef CDPL::Shape::ScreeningSettings ScreeningSettings;
 
+		class ScreeningWorker;
+
+		struct HitMoleculeData
+		{
+
+			HitMoleculeData(std::size_t db_mol_idx, const std::string& db_mol_name, const CDPL::Shape::AlignmentResult& res):
+				dbMolIndex(db_mol_idx), dbMolName(db_mol_name), almntResult(res) {}
+			
+			bool operator<(const HitMoleculeData& rhs) const {
+				return (almntResult.getScore() > rhs.almntResult.getScore());
+			}
+			
+			std::size_t                  dbMolIndex;
+			std::string                  dbMolName;
+			CDPL::Shape::AlignmentResult almntResult;
+		};
+		
 		const char* getProgName() const;
 		const char* getProgCopyright() const;
 		const char* getProgAboutText() const;
@@ -98,6 +108,21 @@ namespace ShapeScreen
 		void processSingleThreaded();
 		void processMultiThreaded();
 
+		bool processHit(std::size_t db_mol_idx, const std::string& db_mol_name, const CDPL::Shape::AlignmentResult& res);
+		bool doProcessHit(std::size_t db_mol_idx, const std::string& db_mol_name, const CDPL::Shape::AlignmentResult& res);
+		
+		void readQueryMolecules();
+		void setupHitLists();
+		void outputHitLists();
+
+		void outputReportFiles();
+		void outputReportFile(std::size_t query_mol_idx);
+
+		std::string getReportFileName(std::size_t hit_list_idx) const;
+
+		void outputReportFileHeader(std::ostream& os) const;
+		void outputReportFileHitData(std::ostream& os, const HitMoleculeData& hit_data) const;
+				
 		std::size_t readNextMolecule(CDPL::Chem::Molecule& mol);
 		std::size_t doReadNextMolecule(CDPL::Chem::Molecule& mol);
 
@@ -106,7 +131,7 @@ namespace ShapeScreen
 
 		void printMessage(VerbosityLevel level, const std::string& msg, bool nl = true, bool file_only = false);
 
-		void printStatistics(std::size_t proc_time);
+		void printStatistics();
 
 		void checkInputFiles() const;
 		void checkOutputFileOptions() const;
@@ -126,15 +151,17 @@ namespace ShapeScreen
 		std::string colorFeatureTypeToString(ScreeningSettings::ColorFeatureType type) const;
 		ScreeningSettings::ColorFeatureType stringToColorFeatureType(const std::string& type_str) const;
 
+		std::string createMoleculeIdentifier(std::size_t rec_idx, const CDPL::Chem::Molecule& mol);
 		std::string createMoleculeIdentifier(std::size_t rec_idx);
 
 		void addOptionLongDescriptions();
 
-		class InputScanProgressCallback;
-		class ScreeningWorker;
-
 		typedef CDPL::Base::DataReader<CDPL::Chem::Molecule>::SharedPointer MoleculeReaderPtr;
 		typedef CDPL::Base::DataWriter<CDPL::Chem::MolecularGraph>::SharedPointer MoleculeWriterPtr;
+		typedef CDPL::Chem::Molecule::SharedPointer MoleculePtr;
+		typedef std::vector<MoleculePtr> QueryMoleculeList;
+		typedef std::multiset<HitMoleculeData> HitList;
+		typedef std::vector<HitList> HitListArray;
 		typedef boost::chrono::system_clock Clock;
 
 		std::string                    queryFile;
@@ -147,7 +174,6 @@ namespace ShapeScreen
 		bool                           scoringOnly;
 		bool                           mergeHitLists;
 		bool                           splitOutFiles;
-		bool                           reportAll;
 		bool                           outputQuery;
 		bool                           scoreSDTags;
 		bool                           queryNameSDTags;
@@ -169,6 +195,9 @@ namespace ShapeScreen
 		MoleculeReaderPtr              databaseReader;
 		OutputHandlerPtr               outputHandler;
 		MoleculeWriterPtr              outputWriter;
+		QueryMoleculeList              queryMolecules;
+		HitListArray                   hitLists;
+		std::size_t                    numHits;
 		boost::mutex                   mutex;
 		boost::mutex                   readMolMutex;
 		std::string                    errorMessage;
