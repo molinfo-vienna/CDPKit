@@ -215,15 +215,18 @@ namespace CDPL
 			ResultIterator getResultsEnd();
 						
 		  private:
+			typedef GaussianShape::SharedPointer GaussianShapePtr;
+
 			struct ShapeMetaData 
 			{
 
-				std::size_t    setIndex;
-				std::size_t    index;
-				unsigned int   symClass;
-				Math::Matrix4D transform;
-				double         selfOverlap;
-				double         colSelfOverlap;
+				std::size_t      setIndex;
+				std::size_t      index;
+				unsigned int     symClass;
+				Math::Matrix4D   transform;
+				double           selfOverlap;
+				double           colSelfOverlap;
+				GaussianShapePtr shape;
 			};
 
 			typedef std::pair<std::size_t, std::size_t> ResultID;

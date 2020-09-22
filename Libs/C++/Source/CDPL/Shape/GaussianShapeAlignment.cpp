@@ -317,6 +317,7 @@ double Shape::GaussianShapeAlignment::getDistanceCutoff() const
 void Shape::GaussianShapeAlignment::clearReferenceShapes()
 {
 	refShapeFuncs.clear();
+	shapeFuncCache.putAll();
 
 	currSetIndex = 0;
 	currShapeIndex = 0;
@@ -336,7 +337,12 @@ void Shape::GaussianShapeAlignment::addReferenceShape(const GaussianShape& shape
 	if (refShapeMetaData.size() < (num_ref_shapes + 1))
 		refShapeMetaData.resize(num_ref_shapes + 1);
 
-	GaussianShapeFunction* func = allocShapeFunction(shape);
+	if (!refShapeMetaData[num_ref_shapes].shape)
+		refShapeMetaData[num_ref_shapes].shape.reset(new GaussianShape(shape));
+	else
+		*refShapeMetaData[num_ref_shapes].shape = shape;
+
+	GaussianShapeFunction* func = allocShapeFunction(*refShapeMetaData[num_ref_shapes].shape);
 
 	refShapeFuncs.push_back(func);
 
@@ -359,7 +365,13 @@ void Shape::GaussianShapeAlignment::addReferenceShapes(const GaussianShapeSet& s
 		refShapeMetaData.resize(num_ref_shapes + num_new_ref_shapes);
 
 	for (std::size_t i = 0; i < num_new_ref_shapes; i++) {
-		GaussianShapeFunction* func = allocShapeFunction(shapes[i]);
+		if (!refShapeMetaData[num_ref_shapes + i].shape)
+			refShapeMetaData[num_ref_shapes + i].shape.reset(new GaussianShape(shapes[i]));
+		else
+			*refShapeMetaData[num_ref_shapes + i].shape = shapes[i];
+
+
+		GaussianShapeFunction* func = allocShapeFunction(*refShapeMetaData[num_ref_shapes + i].shape);
 
 		refShapeFuncs.push_back(func);
 

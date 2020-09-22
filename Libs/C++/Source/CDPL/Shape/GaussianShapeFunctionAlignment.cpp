@@ -235,10 +235,10 @@ bool Shape::GaussianShapeFunctionAlignment::align(const GaussianShapeFunction& f
 {
 	results.clear();
 
-	if (!refShapeFunc || !checkValidity(*refShapeFunc))
+	if (!refShapeFunc || !checkValidity(*refShapeFunc)) 
 		return false;
 
-	if (!checkValidity(func))
+	if (!checkValidity(func)) 
 		return false;
 
 	if (!perfAlignment) {
@@ -251,7 +251,6 @@ bool Shape::GaussianShapeFunctionAlignment::align(const GaussianShapeFunction& f
 		res.transform = Math::IdentityMatrix<double>(4, 4);
 
 		results.push_back(res);
-
 		return true;
 	}
 
@@ -261,7 +260,7 @@ bool Shape::GaussianShapeFunctionAlignment::align(const GaussianShapeFunction& f
 	std::size_t num_starts = startGen->getNumStartTransforms();
 	std::size_t num_sub_xforms = startGen->getNumStartSubTransforms();
 
-	if (num_starts == 0 || num_sub_xforms == 0)
+	if (num_starts == 0 || num_sub_xforms == 0) 
 		return false;
 
 	func.getElementPositions(startPoseCoords);
@@ -295,9 +294,9 @@ bool Shape::GaussianShapeFunctionAlignment::align(const GaussianShapeFunction& f
 			minimizer.setup(opt_xform, opt_xform_grad, BFGS_MINIMIZER_STEP_SIZE, BFGS_MINIMIZER_TOLERANCE);
 			minimizer.minimize(opt_xform, opt_xform_grad, maxNumOptIters, optStopGrad, -1.0, false);
 		
-			if (!boost::math::isfinite(minimizer.getFunctionValue()))  // sanity check
+			if (!boost::math::isfinite(minimizer.getFunctionValue())) // sanity check 
 				continue;
-				   
+
 			normalize(opt_xform);
 			quaternionToMatrix(opt_xform, curr_res.transform);
 			Shape::transform(optPoseCoords, curr_res.transform, startPoseCoords);
@@ -324,7 +323,7 @@ bool Shape::GaussianShapeFunctionAlignment::align(const GaussianShapeFunction& f
 		
 				if (!boost::math::isfinite(minimizer.getFunctionValue()))  // sanity check
 					continue;
-				   
+
 				normalize(opt_xform);
 				quaternionToMatrix(opt_xform, curr_res.transform);
 				Shape::transform(optPoseCoords, curr_res.transform, startPoseCoords);

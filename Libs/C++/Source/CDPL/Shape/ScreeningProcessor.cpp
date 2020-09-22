@@ -161,7 +161,7 @@ bool Shape::ScreeningProcessor::process(const Chem::MolecularGraph& molgraph)
 		return success;
 	}
 	
-	if (!alignment.align(shapes))
+	if (!alignment.align(shapes)) 
 		return false;
 
 	if (hitCallback) {

@@ -27,6 +27,7 @@
 #include <algorithm>
 #include <iterator>
 #include <fstream>
+#include <iomanip>
 
 #include <boost/algorithm/string.hpp>
 #include <boost/bind.hpp>
@@ -36,6 +37,7 @@
 #include "CDPL/Chem/BasicMolecule.hpp"
 #include "CDPL/Chem/ControlParameterFunctions.hpp"
 #include "CDPL/Chem/MolecularGraphFunctions.hpp"
+#include "CDPL/Chem/AtomContainerFunctions.hpp"
 #include "CDPL/Shape/ScreeningProcessor.hpp"
 #include "CDPL/Shape/ScoringFunctors.hpp"
 #include "CDPL/Shape/ScoringFunctions.hpp"
@@ -55,7 +57,9 @@ class ShapeScreenImpl::ScreeningWorker
 {
 
 public:
-    ScreeningWorker(ShapeScreenImpl* parent): parent(parent), terminate(false) {
+    ScreeningWorker(ShapeScreenImpl* parent): 
+		parent(parent), molecule(new CDPL::Chem::BasicMolecule()), terminate(false) {
+
 		screeningProc.getSettings() = parent->settings;
 		screeningProc.setHitCallback(boost::bind(&ScreeningWorker::hitCallback, this, _1, _2, _3));
 
@@ -65,20 +69,23 @@ public:
 
     void operator()() {
 		while (!terminate) {
-			if (!(dbMolIndex = parent->readNextMolecule(molecule)))
+			if (!molecule.unique())
+				molecule.reset(new CDPL::Chem::BasicMolecule());
+
+			if (!(dbMolIndex = parent->readNextMolecule(*molecule)))
 				return;
 			
 			try {
-				if (!screeningProc.process(molecule))
-					parent->printMessage(ERROR, "Processing of database molecule " + parent->createMoleculeIdentifier(dbMolIndex, molecule) + " failed");
+				if (!screeningProc.process(*molecule))
+					parent->printMessage(ERROR, "Processing of database molecule " + parent->createMoleculeIdentifier(dbMolIndex, *molecule) + " failed");
 
 				continue;
 				
 			} catch (const std::exception& e) {
-				parent->setErrorMessage("unexpected exception while processing database molecule " + parent->createMoleculeIdentifier(dbMolIndex, molecule) + ": " + e.what());
+				parent->setErrorMessage("unexpected exception while processing database molecule " + parent->createMoleculeIdentifier(dbMolIndex, *molecule) + ": " + e.what());
 
 			} catch (...) {
-				parent->setErrorMessage("unexpected exception while processing database molecule " + parent->createMoleculeIdentifier(dbMolIndex, molecule));
+				parent->setErrorMessage("unexpected exception while processing database molecule " + parent->createMoleculeIdentifier(dbMolIndex, *molecule));
 			}
 
 			return;
@@ -87,12 +94,15 @@ public:
 
 private:
 	void hitCallback(const CDPL::Chem::MolecularGraph& query_mol, const CDPL::Chem::MolecularGraph& db_mol, const CDPL::Shape::AlignmentResult& res) {
-		terminate = !parent->processHit(dbMolIndex - 1, getName(molecule), res);
+		if (terminate)
+			return;
+
+		terminate = !parent->processHit(dbMolIndex - 1, getName(*molecule), molecule, res);
 	}
 	
     ShapeScreenImpl*                     parent;
     CDPL::Shape::ScreeningProcessor      screeningProc;
-    CDPL::Chem::BasicMolecule            molecule;
+    MoleculePtr                          molecule;
 	std::size_t                          dbMolIndex;
 	bool                                 terminate;
 };
@@ -103,14 +113,15 @@ ShapeScreenImpl::ShapeScreenImpl():
 	splitOutFiles(true), outputQuery(true), scoreSDTags(true), queryNameSDTags(false), 
 	queryMolIdxSDTags(false), queryConfIdxSDTags(true), dbMolIdxSDTags(false), dbConfIdxSDTags(true),
 	colorCenterStarts(false), atomCenterStarts(false), shapeCenterStarts(true),
-	hitNamePattern("@D@_@q@_@d@"), numBestHits(1000), maxNumHits(0), shapeScoreCutoff(0.0), numHits(0)
+	hitNamePattern("@D@_@c@_@Q@_@C@"), numBestHits(1000), maxNumHits(0), shapeScoreCutoff(0.0), 
+	numProcMols(0), numHits(0)
 {
    	addOption("query,q", "Query molecule file.", 
 			  value<std::string>(&queryFile)->required());
     addOption("database,d", "Screened database file(s).", 
 			  value<std::string>(&databaseFile)->required());
     addOption("output,o", "Screening hit output file.", 
-			  value<std::string>(&outputFile));
+			  value<std::string>(&hitOutputFile));
 	addOption("report,r", "Report output file.", 
 			  value<std::string>(&reportFile));
 	addOption("mode,m", "Screening mode specifying which of the obtained results for the query molecule are of interest "
@@ -181,7 +192,7 @@ ShapeScreenImpl::ShapeScreenImpl():
 			  value<bool>(&dbConfIdxSDTags)->implicit_value(true));
 	addOption("hit-name-ptn,T", "Pattern for composing the names of written hit molecules by variable substitution (supported variables: @Q@ = query molecule name, "
 			  "@D@ = database molecule name, @C@ = query molecule conformer index, @c@ = database molecule conformer index, @I@ = query molecule index "
-			  "and @i@ = database molecule index, default: @D@_@q@_@d@).",
+			  "and @i@ = database molecule index, default: " + hitNamePattern + ").",
 			  value<std::string>(&hitNamePattern));
     addOption("num-threads,t", "Number of parallel execution threads (default: no multithreading, implicit value: " +
 			  boost::lexical_cast<std::string>(boost::thread::hardware_concurrency()) + 
@@ -192,7 +203,7 @@ ShapeScreenImpl::ShapeScreenImpl():
 	addOption("database-format,D", "Screening database input file format (default: auto-detect from file extension).", 
 			  value<std::string>()->notifier(boost::bind(&ShapeScreenImpl::setDatabaseFormat, this, _1)));
     addOption("output-format,O", "Hit output file format (default: auto-detect from file extension).", 
-			  value<std::string>()->notifier(boost::bind(&ShapeScreenImpl::setOutputFormat, this, _1)));
+			  value<std::string>()->notifier(boost::bind(&ShapeScreenImpl::setHitOutputFormat, this, _1)));
  
     addOptionLongDescriptions();
 }
@@ -394,16 +405,16 @@ void ShapeScreenImpl::setDatabaseFormat(const std::string& file_ext)
 		throwValidationError("database-format");
 }
 
-void ShapeScreenImpl::setOutputFormat(const std::string& file_ext)
+void ShapeScreenImpl::setHitOutputFormat(const std::string& file_ext)
 {
     using namespace CDPL;
 
     std::string lc_file_ext = file_ext;
     boost::to_lower(lc_file_ext);
 
-    outputHandler = Base::DataIOManager<Chem::MolecularGraph>::getOutputHandlerByFileExtension(file_ext);
+    hitOutputHandler = Base::DataIOManager<Chem::MolecularGraph>::getOutputHandlerByFileExtension(file_ext);
 
-    if (!outputHandler)
+    if (!hitOutputHandler)
 		throwValidationError("output-format");
 }
 
@@ -471,6 +482,15 @@ int ShapeScreenImpl::process()
     if (termSignalCaught())
 		return EXIT_FAILURE;
 
+    printMessage(INFO, "");
+
+	outputHitLists();
+
+	if (termSignalCaught())
+		return EXIT_FAILURE;
+
+    printStatistics();
+
     return EXIT_SUCCESS;
 }
 
@@ -481,17 +501,6 @@ void ShapeScreenImpl::processSingleThreaded()
     ScreeningWorker worker(this);
 
     worker();
-
-    printMessage(INFO, "");
-
-    if (haveErrorMessage())
-		return;
-
-    if (termSignalCaught())
-		return;
-
-	outputHitLists();
-    printStatistics();
 }
 
 void ShapeScreenImpl::processMultiThreaded()
@@ -531,20 +540,10 @@ void ShapeScreenImpl::processMultiThreaded()
     } catch (...) {
 		setErrorMessage("unspecified error while waiting for worker-threads to finish");
     }
-	
-    printMessage(INFO, "");
-
-    if (haveErrorMessage())
-		return;
-
-    if (termSignalCaught())
-		return;
-
-	outputHitLists();
-    printStatistics();
 }
 
-bool ShapeScreenImpl::processHit(std::size_t db_mol_idx, const std::string& db_mol_name, const CDPL::Shape::AlignmentResult& res)
+bool ShapeScreenImpl::processHit(std::size_t db_mol_idx, const std::string& db_mol_name, 
+								 const MoleculePtr& db_mol, const CDPL::Shape::AlignmentResult& res)
 {
 	if (shapeScoreCutoff > 0.0 && calcShapeTanimotoScore(res) < shapeScoreCutoff)
 		return true;
@@ -552,13 +551,14 @@ bool ShapeScreenImpl::processHit(std::size_t db_mol_idx, const std::string& db_m
 	if (numThreads > 0) {
 		boost::lock_guard<boost::mutex> lock(mutex);
 
-		return doProcessHit(db_mol_idx, db_mol_name, res);
+		return doProcessHit(db_mol_idx, db_mol_name, db_mol, res);
     }
 
-	return doProcessHit(db_mol_idx, db_mol_name, res);
+	return doProcessHit(db_mol_idx, db_mol_name, db_mol, res);
 }
 
-bool ShapeScreenImpl::doProcessHit(std::size_t db_mol_idx, const std::string& db_mol_name, const CDPL::Shape::AlignmentResult& res)
+bool ShapeScreenImpl::doProcessHit(std::size_t db_mol_idx, const std::string& db_mol_name, 
+								   const MoleculePtr& db_mol, const CDPL::Shape::AlignmentResult& res)
 {
 	if (maxNumHits > 0 && numHits >= maxNumHits)
 		return false;
@@ -576,8 +576,7 @@ bool ShapeScreenImpl::doProcessHit(std::size_t db_mol_idx, const std::string& db
 		}
 	}
 
-	hit_list.insert(HitMoleculeData(db_mol_idx, db_mol_name, res));
-
+	hit_list.insert(HitMoleculeData(db_mol_idx, db_mol_name, res, db_mol));
 	return true;
 }
 
@@ -610,10 +609,21 @@ void ShapeScreenImpl::setupHitLists()
 
 void ShapeScreenImpl::outputHitLists()
 {
+
+    if (progressEnabled()) {
+		initInfiniteProgress();
+		printMessage(INFO, "Writing Output Files...", true, true);
+    } else
+		printMessage(INFO, "Writing Output Files...");
+
 	if (!reportFile.empty())
 		outputReportFiles();
 	
-	// TODO
+	if (termSignalCaught())
+		return;
+
+	if (!hitOutputFile.empty())
+		outputHitMoleculeFiles();
 }
 
 void ShapeScreenImpl::outputReportFiles()
@@ -628,9 +638,9 @@ void ShapeScreenImpl::outputReportFiles()
 
 void ShapeScreenImpl::outputReportFile(std::size_t query_mol_idx)
 {
-	std::ofstream os(splitOutFiles ? getReportFileName(query_mol_idx) : reportFile);
+	std::ofstream os(splitOutFiles ? getOutputFileName(reportFile, query_mol_idx) : reportFile);
 
-	os << std::fixed;
+	os << std::fixed << std::setw(8) << std::showpoint << std::setprecision(3);
 	
 	outputReportFileHeader(os);
 
@@ -647,8 +657,8 @@ void ShapeScreenImpl::outputReportFile(std::size_t query_mol_idx)
 		}
 		
 	} else {
-		for (std::size_t i = 0, num_hit_lists = hitLists.size(); i < num_hit_lists; i++) {
-			const HitList& hit_list = hitLists[i];
+		for (HitListArray::const_iterator it = hitLists.begin(), end = hitLists.end(); it != end; ++it) {
+			const HitList& hit_list = *it;
 
 			std::for_each(hit_list.begin(), hit_list.end(), boost::bind(&ShapeScreenImpl::outputReportFileHitData, this, boost::ref(os), _1));
 		}
@@ -658,18 +668,7 @@ void ShapeScreenImpl::outputReportFile(std::size_t query_mol_idx)
 	os.close();
 	
 	if (!os.good())
-		printMessage(ERROR, "Writing report file '" + (splitOutFiles ? getReportFileName(query_mol_idx) : reportFile) + "' failed");
-}
-
-std::string ShapeScreenImpl::getReportFileName(std::size_t query_mol_idx) const
-{
-	std::string::size_type suffix_pos = reportFile.find_last_of('.');
-	std::string file_name = reportFile;
-		
-	if (suffix_pos != std::string::npos)
-		return file_name.insert(suffix_pos, "_" + boost::lexical_cast<std::string>(query_mol_idx + 1));
-
-	return file_name.append("_" + boost::lexical_cast<std::string>(query_mol_idx + 1));
+		throw CDPL::Base::IOError("writing report file '" + (splitOutFiles ? getOutputFileName(reportFile, query_mol_idx) : reportFile) + "' failed");
 }
 
 void ShapeScreenImpl::outputReportFileHeader(std::ostream& os) const
@@ -705,8 +704,10 @@ void ShapeScreenImpl::outputReportFileHeader(std::ostream& os) const
 	   << "DB Tversky Combo\n";
 }
 
-void ShapeScreenImpl::outputReportFileHitData(std::ostream& os, const HitMoleculeData& hit_data) const
+void ShapeScreenImpl::outputReportFileHitData(std::ostream& os, const HitMoleculeData& hit_data)
 {
+	printInfiniteProgress("Writing Output Files");
+
 	os << hit_data.dbMolName << '\t'
 	   << (hit_data.dbMolIndex + 1) << '\t'
 	   << (hit_data.almntResult.getAlignedShapeIndex() + 1) << '\t';
@@ -736,6 +737,165 @@ void ShapeScreenImpl::outputReportFileHitData(std::ostream& os, const HitMolecul
 	   << calcAlignedShapeTverskyScore(hit_data.almntResult) << '\t'
 	   << calcAlignedColorTverskyScore(hit_data.almntResult) << '\t'
 	   << calcAlignedTverskyComboScore(hit_data.almntResult) << '\n';
+}
+
+void ShapeScreenImpl::outputHitMoleculeFiles()
+{
+	if (splitOutFiles) {
+		for (std::size_t i = 0, num_query_mols = queryMolecules.size(); i < num_query_mols; i++)
+			outputHitMoleculeFile(i);
+		
+	} else
+		outputHitMoleculeFile(0);
+}
+
+void ShapeScreenImpl::outputHitMoleculeFile(std::size_t query_mol_idx)
+{
+	std::string file_name = (splitOutFiles ? getOutputFileName(hitOutputFile, query_mol_idx) : hitOutputFile);
+	OutputHandlerPtr handler = getHitOutputHandler(file_name);
+
+	if (!handler)
+		throw CDPL::Base::IOError("no output handler found for hit molecule file '" + file_name + '\'');
+
+	MoleculeWriterPtr writer_ptr = handler->createWriter(file_name);
+
+	if (outputQuery) {
+		if (splitOutFiles)
+			outputQueryMolecule(query_mol_idx, queryMolecules[query_mol_idx], writer_ptr);
+		else
+			for (std::size_t i = 0, num_query_mols = queryMolecules.size(); i < num_query_mols; i++)
+				outputQueryMolecule(i, queryMolecules[i], writer_ptr);
+	}
+
+	if (splitOutFiles) {
+		const HitList& hit_list = (mergeHitLists ? hitLists[0] : hitLists[query_mol_idx]);
+
+		for (HitList::const_iterator it = hit_list.begin(), end = hit_list.end(); it != end; ++it) {
+			const HitMoleculeData& hit_data = *it;
+
+			if (mergeHitLists && hit_data.almntResult.getReferenceShapeSetIndex() != query_mol_idx)
+				continue;
+
+			outputHitMolecule(writer_ptr, hit_data);
+		}
+		
+	} else {
+		for (HitListArray::const_iterator it = hitLists.begin(), end = hitLists.end(); it != end; ++it) {
+			const HitList& hit_list = *it;
+
+			std::for_each(hit_list.begin(), hit_list.end(), boost::bind(&ShapeScreenImpl::outputHitMolecule, this, writer_ptr, _1));
+		}
+	}
+	
+	writer_ptr->close();
+}
+
+void ShapeScreenImpl::outputQueryMolecule(std::size_t query_mol_idx, const MoleculePtr& query_mol, const MoleculeWriterPtr& writer)
+{
+	try {
+		printInfiniteProgress("Writing Output Files");
+		setMultiConfExportParameter(*writer, true);
+
+		if (writer->write(*query_mol))
+			return;
+
+	} catch (const std::exception& e) {
+		throw CDPL::Base::IOError("writing query molecule " + createMoleculeIdentifier(query_mol_idx + 1, *query_mol) + " failed: " + e.what());
+
+	} catch (...) {}
+
+	throw CDPL::Base::IOError("unspecified error while writing query molecule " + createMoleculeIdentifier(query_mol_idx + 1, *query_mol));
+}
+
+void ShapeScreenImpl::outputHitMolecule(const MoleculeWriterPtr& writer, const HitMoleculeData& hit_data)
+{
+	using namespace CDPL;
+
+	try {
+		printInfiniteProgress("Writing Output Files");
+
+		std::string name = hitNamePattern;
+
+		boost::replace_all(name, "@Q@", getName(*queryMolecules[hit_data.almntResult.getReferenceShapeSetIndex()]));
+		boost::replace_all(name, "@D@", hit_data.dbMolName);
+		boost::replace_all(name, "@C@", boost::lexical_cast<std::string>(hit_data.almntResult.getReferenceShapeIndex() + 1));
+		boost::replace_all(name, "@c@", boost::lexical_cast<std::string>(hit_data.almntResult.getAlignedShapeIndex() + 1));
+		boost::replace_all(name, "@I@", boost::lexical_cast<std::string>(hit_data.almntResult.getReferenceShapeSetIndex() + 1));
+		boost::replace_all(name, "@i@", boost::lexical_cast<std::string>(hit_data.dbMolIndex + 1));
+
+		setName(*hit_data.dbMolecule, name);
+		applyConformation(*hit_data.dbMolecule, hit_data.almntResult.getAlignedShapeIndex());
+		transform3DCoordinates(*hit_data.dbMolecule, hit_data.almntResult.getTransform());
+		setMultiConfExportParameter(*writer, false);
+
+		if (scoreSDTags || queryNameSDTags || queryMolIdxSDTags || queryConfIdxSDTags || dbMolIdxSDTags || dbConfIdxSDTags) {
+			Chem::StringDataBlock::SharedPointer old_sd_block;
+			Chem::StringDataBlock::SharedPointer new_sd_block;
+
+			if (hasStructureData(*hit_data.dbMolecule)) {
+				old_sd_block = getStructureData(*hit_data.dbMolecule);
+				new_sd_block.reset(new Chem::StringDataBlock(*old_sd_block));
+
+			} else
+				new_sd_block.reset(new Chem::StringDataBlock());
+
+			if (dbConfIdxSDTags)
+				new_sd_block->addEntry("<Conf. Index>", boost::lexical_cast<std::string>(hit_data.almntResult.getAlignedShapeIndex() + 1));
+
+			if (dbMolIdxSDTags)
+				new_sd_block->addEntry("<Mol. Index>", boost::lexical_cast<std::string>(hit_data.dbMolIndex + 1));
+
+			if (queryConfIdxSDTags)
+				new_sd_block->addEntry("<Query Conf. Index>", boost::lexical_cast<std::string>(hit_data.almntResult.getReferenceShapeIndex() + 1));
+
+			if (queryMolIdxSDTags)
+				new_sd_block->addEntry("<Query Mol. Index>", boost::lexical_cast<std::string>(hit_data.almntResult.getReferenceShapeSetIndex() + 1));
+
+			if (queryNameSDTags)
+				new_sd_block->addEntry("<Query Name>", getName(*queryMolecules[hit_data.almntResult.getReferenceShapeSetIndex()]));
+			
+			if (scoreSDTags) {
+				new_sd_block->addEntry("<Total Overlap>", boost::lexical_cast<std::string>(hit_data.almntResult.getOverlap()));
+				new_sd_block->addEntry("<Shape Overlap>", boost::lexical_cast<std::string>((hit_data.almntResult.getOverlap() - hit_data.almntResult.getColorOverlap())));
+				new_sd_block->addEntry("<Color Overlap>", boost::lexical_cast<std::string>(hit_data.almntResult.getColorOverlap()));
+				new_sd_block->addEntry("<Total Overlap Tanimoto>", boost::lexical_cast<std::string>(calcTotalOverlapTanimotoScore(hit_data.almntResult)));
+				new_sd_block->addEntry("<Shape Tanimoto>", boost::lexical_cast<std::string>(calcShapeTanimotoScore(hit_data.almntResult)));
+				new_sd_block->addEntry("<Color Tanimoto>", boost::lexical_cast<std::string>(calcColorTanimotoScore(hit_data.almntResult)));
+				new_sd_block->addEntry("<Tanimoto Combo>", boost::lexical_cast<std::string>(calcTanimotoComboScore(hit_data.almntResult)));
+				new_sd_block->addEntry("<Total Overlap Tversky>", boost::lexical_cast<std::string>(calcTotalOverlapTverskyScore(hit_data.almntResult)));
+				new_sd_block->addEntry("<Shape Tversky>", boost::lexical_cast<std::string>(calcShapeTverskyScore(hit_data.almntResult)));
+				new_sd_block->addEntry("<Color Tversky>", boost::lexical_cast<std::string>(calcColorTverskyScore(hit_data.almntResult)));
+				new_sd_block->addEntry("<Tversky Combo>", boost::lexical_cast<std::string>(calcTverskyComboScore(hit_data.almntResult)));
+				new_sd_block->addEntry("<Query Total Overlap Tversky>", boost::lexical_cast<std::string>(calcReferenceTotalOverlapTverskyScore(hit_data.almntResult)));
+				new_sd_block->addEntry("<Query Shape Tversky>", boost::lexical_cast<std::string>(calcReferenceShapeTverskyScore(hit_data.almntResult)));
+				new_sd_block->addEntry("<Query Color Tversky>", boost::lexical_cast<std::string>(calcReferenceColorTverskyScore(hit_data.almntResult)));
+				new_sd_block->addEntry("<Query Tversky Combo>", boost::lexical_cast<std::string>(calcReferenceTverskyComboScore(hit_data.almntResult)));
+				new_sd_block->addEntry("<DB Total Overlap Tversky>", boost::lexical_cast<std::string>(calcAlignedTotalOverlapTverskyScore(hit_data.almntResult)));
+				new_sd_block->addEntry("<DB Shape Tversky>", boost::lexical_cast<std::string>(calcAlignedShapeTverskyScore(hit_data.almntResult)));
+				new_sd_block->addEntry("<DB Color Tversky>", boost::lexical_cast<std::string>(calcAlignedColorTverskyScore(hit_data.almntResult)));
+				new_sd_block->addEntry("<DB Tversky Combo>", boost::lexical_cast<std::string>(calcAlignedTverskyComboScore(hit_data.almntResult)));
+			}
+
+			setStructureData(*hit_data.dbMolecule, new_sd_block);
+
+			if (writer->write(*hit_data.dbMolecule)) {
+				if (old_sd_block)
+					setStructureData(*hit_data.dbMolecule, old_sd_block);
+				else
+					clearStructureData(*hit_data.dbMolecule);
+
+				return;
+			}
+
+		} else if (writer->write(*hit_data.dbMolecule))
+			return;
+
+	} catch (const std::exception& e) {
+		throw CDPL::Base::IOError("writing hit molecule " + createMoleculeIdentifier(hit_data.dbMolIndex + 1, *hit_data.dbMolecule) + " failed: " + e.what());
+
+	} catch (...) {}
+
+	throw CDPL::Base::IOError("unspecified error while writing hit molecule " + createMoleculeIdentifier(hit_data.dbMolIndex + 1, *hit_data.dbMolecule));
 }
 
 void ShapeScreenImpl::setErrorMessage(const std::string& msg)
@@ -778,6 +938,8 @@ std::size_t ShapeScreenImpl::doReadNextMolecule(CDPL::Chem::Molecule& mol)
 			if (!databaseReader->read(mol))
 				return 0;
 
+			numProcMols++;
+
 			return databaseReader->getRecordIndex();
 
 		} catch (const std::exception& e) {
@@ -808,13 +970,15 @@ void ShapeScreenImpl::printStatistics()
 	std::size_t proc_time = boost::chrono::duration_cast<boost::chrono::duration<std::size_t> >(Clock::now() - startTime).count();
 	
     printMessage(INFO, "Statistics:");
-    printMessage(INFO, " Processing Time:      " + CmdLineLib::formatTimeDuration(proc_time));
+    printMessage(INFO, " Num. processed Molecules: " + boost::lexical_cast<std::string>(numProcMols));
+    printMessage(INFO, " Num. Hit Molecules:       " + boost::lexical_cast<std::string>(numHits));
+    printMessage(INFO, " Processing Time:          " + CmdLineLib::formatTimeDuration(proc_time));
     printMessage(INFO, "");
 }
 
 void ShapeScreenImpl::checkOutputFileOptions() const
 {
-	if (outputFile.empty() && reportFile.empty())
+	if (hitOutputFile.empty() && reportFile.empty())
 		throw CDPL::Base::ValueError("A hit output and/or report file has to be specified");
 }
 
@@ -829,13 +993,13 @@ void ShapeScreenImpl::checkInputFiles() const
 		throw Base::IOError("database file '" + databaseFile + "' does not exist");
 
 	if (!splitOutFiles) {
-		if (queryFile == outputFile)
+		if (queryFile == hitOutputFile)
 			throw Base::ValueError("hit output file must not be identical to query molecule file");
 
 		if (queryFile == reportFile)
 			throw Base::ValueError("report output file must not be identical to query molecule file");
 
-		if (databaseFile == outputFile)
+		if (databaseFile == hitOutputFile)
 			throw Base::ValueError("hit output file must not be identical to screening database file");
 
 		if (databaseFile == reportFile)
@@ -860,7 +1024,7 @@ void ShapeScreenImpl::printOptionSummary()
     printMessage(VERBOSE, "Option Summary:");
     printMessage(VERBOSE, " Query File:                          " + queryFile);
     printMessage(VERBOSE, " Database File:                       " + databaseFile);
-    printMessage(VERBOSE, " Hit Output File:                     " + (outputFile.empty() ? std::string("None") : outputFile));
+    printMessage(VERBOSE, " Hit Output File:                     " + (hitOutputFile.empty() ? std::string("None") : hitOutputFile));
     printMessage(VERBOSE, " Report Output File:                  " + (reportFile.empty() ? std::string("None") : reportFile));
 	printMessage(VERBOSE, " Screening Mode:                      " + screeningModeToString(settings.getScreeningMode()));
 	printMessage(VERBOSE, " Scoring Function:                    " + scoringFunc);
@@ -895,7 +1059,7 @@ void ShapeScreenImpl::printOptionSummary()
 
 	printMessage(VERBOSE, " Query File Format:                   " + (queryHandler ? queryHandler->getDataFormat().getName() : std::string("Auto-detect")));
     printMessage(VERBOSE, " Database File Format:                " + (databaseHandler ? databaseHandler->getDataFormat().getName() : std::string("Auto-detect")));
-	printMessage(VERBOSE, " Hit File Format:                     " + (outputHandler ? outputHandler->getDataFormat().getName() : std::string("Auto-detect")));
+	printMessage(VERBOSE, " Hit File Format:                     " + (hitOutputHandler ? hitOutputHandler->getDataFormat().getName() : std::string("Auto-detect")));
     printMessage(VERBOSE, "");
 }
 
@@ -949,10 +1113,10 @@ ShapeScreenImpl::InputHandlerPtr ShapeScreenImpl::getDatabaseHandler(const std::
     return CmdLineLib::getInputHandler<CDPL::Chem::Molecule>(file_path);
 }
 
-ShapeScreenImpl::OutputHandlerPtr ShapeScreenImpl::getOutputHandler(const std::string& file_path) const
+ShapeScreenImpl::OutputHandlerPtr ShapeScreenImpl::getHitOutputHandler(const std::string& file_path) const
 {
-    if (outputHandler)
-		return outputHandler;
+    if (hitOutputHandler)
+		return hitOutputHandler;
 
     return CmdLineLib::getOutputHandler<CDPL::Chem::MolecularGraph>(file_path);
 }
@@ -1046,4 +1210,15 @@ std::string ShapeScreenImpl::createMoleculeIdentifier(std::size_t rec_idx, const
 std::string ShapeScreenImpl::createMoleculeIdentifier(std::size_t rec_idx)
 {
     return boost::lexical_cast<std::string>(rec_idx);
+}
+
+std::string ShapeScreenImpl::getOutputFileName(const std::string& file_name_tmplt, std::size_t query_mol_idx) const
+{
+	std::string::size_type suffix_pos = file_name_tmplt.find_last_of('.');
+	std::string file_name = file_name_tmplt;
+		
+	if (suffix_pos != std::string::npos)
+		return file_name.insert(suffix_pos, "_" + boost::lexical_cast<std::string>(query_mol_idx + 1));
+
+	return file_name.append("_" + boost::lexical_cast<std::string>(query_mol_idx + 1));
 }

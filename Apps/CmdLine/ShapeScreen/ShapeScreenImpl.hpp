@@ -61,7 +61,10 @@ namespace ShapeScreen
 		typedef CDPL::Base::DataInputHandler<CDPL::Chem::Molecule> InputHandler;
 		typedef InputHandler::SharedPointer InputHandlerPtr;
 		typedef OutputHandler::SharedPointer OutputHandlerPtr;
+		typedef CDPL::Base::DataWriter<CDPL::Chem::MolecularGraph> MoleculeWriter;
+		typedef MoleculeWriter::SharedPointer MoleculeWriterPtr;
 		typedef CDPL::Shape::ScreeningSettings ScreeningSettings;
+		typedef CDPL::Chem::Molecule::SharedPointer MoleculePtr;
 
 		class ScreeningWorker;
 
@@ -69,7 +72,11 @@ namespace ShapeScreen
 		{
 
 			HitMoleculeData(std::size_t db_mol_idx, const std::string& db_mol_name, const CDPL::Shape::AlignmentResult& res):
-				dbMolIndex(db_mol_idx), dbMolName(db_mol_name), almntResult(res) {}
+				dbMolIndex(db_mol_idx), dbMolName(db_mol_name), almntResult(res), dbMolecule() {}
+
+			HitMoleculeData(std::size_t db_mol_idx, const std::string& db_mol_name, 
+							const CDPL::Shape::AlignmentResult& res, const MoleculePtr& db_mol):
+				dbMolIndex(db_mol_idx), dbMolName(db_mol_name), almntResult(res), dbMolecule(db_mol) {}
 			
 			bool operator<(const HitMoleculeData& rhs) const {
 				return (almntResult.getScore() > rhs.almntResult.getScore());
@@ -78,6 +85,7 @@ namespace ShapeScreen
 			std::size_t                  dbMolIndex;
 			std::string                  dbMolName;
 			CDPL::Shape::AlignmentResult almntResult;
+			MoleculePtr                  dbMolecule;
 		};
 		
 		const char* getProgName() const;
@@ -99,17 +107,21 @@ namespace ShapeScreen
 
 		void setQueryFormat(const std::string& file_ext);
 		void setDatabaseFormat(const std::string& file_ext);
-		void setOutputFormat(const std::string& file_ext);
+		void setHitOutputFormat(const std::string& file_ext);
 
 		void setAlignmentMode();
 
 		int process();
 
+		void addOptionLongDescriptions();
+
 		void processSingleThreaded();
 		void processMultiThreaded();
 
-		bool processHit(std::size_t db_mol_idx, const std::string& db_mol_name, const CDPL::Shape::AlignmentResult& res);
-		bool doProcessHit(std::size_t db_mol_idx, const std::string& db_mol_name, const CDPL::Shape::AlignmentResult& res);
+		bool processHit(std::size_t db_mol_idx, const std::string& db_mol_name, 
+						const MoleculePtr& db_mol, const CDPL::Shape::AlignmentResult& res);
+		bool doProcessHit(std::size_t db_mol_idx, const std::string& db_mol_name, 
+						  const MoleculePtr& db_mol, const CDPL::Shape::AlignmentResult& res);
 		
 		void readQueryMolecules();
 		void setupHitLists();
@@ -118,11 +130,15 @@ namespace ShapeScreen
 		void outputReportFiles();
 		void outputReportFile(std::size_t query_mol_idx);
 
-		std::string getReportFileName(std::size_t hit_list_idx) const;
-
 		void outputReportFileHeader(std::ostream& os) const;
-		void outputReportFileHitData(std::ostream& os, const HitMoleculeData& hit_data) const;
+		void outputReportFileHitData(std::ostream& os, const HitMoleculeData& hit_data);
 				
+		void outputHitMoleculeFiles();
+		void outputHitMoleculeFile(std::size_t query_mol_idx);
+
+		void outputQueryMolecule(std::size_t query_mol_idx, const MoleculePtr& query_mol, const MoleculeWriterPtr& writer);
+		void outputHitMolecule(const MoleculeWriterPtr& writer, const HitMoleculeData& hit_data);
+
 		std::size_t readNextMolecule(CDPL::Chem::Molecule& mol);
 		std::size_t doReadNextMolecule(CDPL::Chem::Molecule& mol);
 
@@ -143,7 +159,7 @@ namespace ShapeScreen
 
 		InputHandlerPtr getQueryHandler(const std::string& file_path) const;
 		InputHandlerPtr getDatabaseHandler(const std::string& file_path) const;
-		OutputHandlerPtr getOutputHandler(const std::string& file_path) const;
+		OutputHandlerPtr getHitOutputHandler(const std::string& file_path) const;
 
 		std::string screeningModeToString(ScreeningSettings::ScreeningMode mode) const;
 		ScreeningSettings::ScreeningMode stringToScreeningMode(const std::string& mode_str) const;
@@ -153,12 +169,9 @@ namespace ShapeScreen
 
 		std::string createMoleculeIdentifier(std::size_t rec_idx, const CDPL::Chem::Molecule& mol);
 		std::string createMoleculeIdentifier(std::size_t rec_idx);
-
-		void addOptionLongDescriptions();
+		std::string getOutputFileName(const std::string& file_name_tmplt, std::size_t query_mol_idx) const;
 
 		typedef CDPL::Base::DataReader<CDPL::Chem::Molecule>::SharedPointer MoleculeReaderPtr;
-		typedef CDPL::Base::DataWriter<CDPL::Chem::MolecularGraph>::SharedPointer MoleculeWriterPtr;
-		typedef CDPL::Chem::Molecule::SharedPointer MoleculePtr;
 		typedef std::vector<MoleculePtr> QueryMoleculeList;
 		typedef std::multiset<HitMoleculeData> HitList;
 		typedef std::vector<HitList> HitListArray;
@@ -166,7 +179,7 @@ namespace ShapeScreen
 
 		std::string                    queryFile;
 		std::string                    databaseFile;
-		std::string                    outputFile;
+		std::string                    hitOutputFile;
 		std::string                    reportFile;
 		std::string                    scoringFunc;
 		std::size_t                    numThreads;
@@ -193,10 +206,10 @@ namespace ShapeScreen
 		MoleculeReaderPtr              queryReader;
 		InputHandlerPtr                databaseHandler;
 		MoleculeReaderPtr              databaseReader;
-		OutputHandlerPtr               outputHandler;
-		MoleculeWriterPtr              outputWriter;
+		OutputHandlerPtr               hitOutputHandler;
 		QueryMoleculeList              queryMolecules;
 		HitListArray                   hitLists;
+		std::size_t                    numProcMols;
 		std::size_t                    numHits;
 		boost::mutex                   mutex;
 		boost::mutex                   readMolMutex;
