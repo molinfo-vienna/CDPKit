@@ -32,6 +32,7 @@
 #include <boost/algorithm/string.hpp>
 #include <boost/bind.hpp>
 #include <boost/lexical_cast.hpp>
+#include <boost/format.hpp>
 #include <boost/timer/timer.hpp>
 
 #include "CDPL/Chem/BasicMolecule.hpp"
@@ -120,7 +121,7 @@ ShapeScreenImpl::ShapeScreenImpl():
 			  value<std::string>(&queryFile)->required());
     addOption("database,d", "Screened database file(s).", 
 			  value<std::string>(&databaseFile)->required());
-    addOption("output,o", "Screening hit output file.", 
+    addOption("output,o", "Hit molecule output file.", 
 			  value<std::string>(&hitOutputFile));
 	addOption("report,r", "Report output file.", 
 			  value<std::string>(&reportFile));
@@ -146,7 +147,7 @@ ShapeScreenImpl::ShapeScreenImpl():
 	addOption("merge-hits,M", "If true, identified hits are merged into a single, combined hit list. "
 			  "If false, a separate hit list for every query molecule will be maintained (default: false).", 
 			  value<bool>(&mergeHitLists)->implicit_value(true));
-	addOption("split-output,P", "If true, for every query molecule a separate report and hit output file will be written (default: true).", 
+	addOption("split-output,P", "If true, for every query molecule a separate report and hit output file will be generated (default: true).", 
 			  value<bool>(&splitOutFiles)->implicit_value(true));
 	addOption("score-only,y", "If specified, no shape overlay of the query and database molecules will be performed and the input "
 			  "poses get scored as they are (default: false).",
@@ -157,9 +158,9 @@ ShapeScreenImpl::ShapeScreenImpl():
 	addOption("thorough-overlay-opt,z", "Specifies whether or not to perform a thorough overlay optimization of the generated starting poses "
 			  "(note: the screening time will increase significantly, default: false).",
 			  value<bool>()->implicit_value(true)->notifier(boost::bind(&ShapeScreenImpl::performThoroughOverlayOptimization, this, _1)));
-	addOption("output-query,u", "If specified, query molecules will be written at the beginning of the hit output file (default: true).",
+	addOption("output-query,u", "If specified, query molecules will be written at the beginning of the hit molecule output file (default: true).",
 			  value<bool>(&outputQuery)->implicit_value(true));
-	addOption("single-conf-db,g", "If specified, conformers of the database molecules are treated as individual single conf. molecules (default: false).",
+	addOption("single-conf-db,g", "If specified, conformers of the database molecules are treated as individual single conformer molecules (default: false).",
 			  value<bool>()->notifier(boost::bind(&ShapeScreenImpl::performSingleConformerSearch, this, _1)));
 	addOption("color-ftr-type,f", "Specifies which type of color features to generate and score "
 			  "(NONE, EXP_PHARM, IMP_PHARM, default: IMP_PHARM).",
@@ -198,11 +199,11 @@ ShapeScreenImpl::ShapeScreenImpl():
 			  boost::lexical_cast<std::string>(boost::thread::hardware_concurrency()) + 
 			  " threads, must be >= 0, 0 disables multithreading).", 
 			  value<std::size_t>(&numThreads)->implicit_value(boost::thread::hardware_concurrency()));
-	addOption("query-format,Q", "Query input file format (default: auto-detect from file extension).", 
+	addOption("query-format,Q", "Query molecule input file format (default: auto-detect from file extension).", 
 			  value<std::string>()->notifier(boost::bind(&ShapeScreenImpl::setQueryFormat, this, _1)));
 	addOption("database-format,D", "Screening database input file format (default: auto-detect from file extension).", 
 			  value<std::string>()->notifier(boost::bind(&ShapeScreenImpl::setDatabaseFormat, this, _1)));
-    addOption("output-format,O", "Hit output file format (default: auto-detect from file extension).", 
+    addOption("output-format,O", "Hit molecule output file format (default: auto-detect from file extension).", 
 			  value<std::string>()->notifier(boost::bind(&ShapeScreenImpl::setHitOutputFormat, this, _1)));
  
     addOptionLongDescriptions();
@@ -268,7 +269,7 @@ void ShapeScreenImpl::addOptionLongDescriptions()
 		formats_str.append(" - ").append(*it).push_back('\n');
 
     addOptionLongDescription("output-format", 
-							 "Allows to explicitly specify the hit output file format by providing one of the supported "
+							 "Allows to explicitly specify the hit molecule output file format by providing one of the supported "
 							 "file-extensions (without leading dot!) as argument.\n\n" +
 							 formats_str +
 							 "\nThis option is useful when the format cannot be auto-detected from the actual extension of the file "
@@ -276,7 +277,7 @@ void ShapeScreenImpl::addOptionLongDescriptions()
     formats_str.pop_back();
 
     addOptionLongDescription("output", 
-							 "Screening hit output file.\n\n" + formats_str);
+							 "Hit molecule output file.\n\n" + formats_str);
 }
 
 void ShapeScreenImpl::setNumRandomStarts(std::size_t num_starts)
@@ -453,15 +454,18 @@ int ShapeScreenImpl::process()
     checkInputFiles();
     printOptionSummary();
 
+	setAlignmentMode();
+
 	initQueryReader();
     initDatabaseReader();
-	setAlignmentMode();
 
     if (termSignalCaught())
 		return EXIT_FAILURE;
 
 	readQueryMolecules();
-	setupHitLists();
+	initReportFileStreams();
+	initHitMoleculeWriters();
+	initHitLists();
 	
     if (progressEnabled()) {
 		initInfiniteProgress();
@@ -481,8 +485,6 @@ int ShapeScreenImpl::process()
 
     if (termSignalCaught())
 		return EXIT_FAILURE;
-
-    printMessage(INFO, "");
 
 	outputHitLists();
 
@@ -549,7 +551,7 @@ bool ShapeScreenImpl::processHit(std::size_t db_mol_idx, const std::string& db_m
 		return true;
 
 	if (numThreads > 0) {
-		boost::lock_guard<boost::mutex> lock(mutex);
+		boost::lock_guard<boost::mutex> lock(hitProcMutex);
 
 		return doProcessHit(db_mol_idx, db_mol_name, db_mol, res);
     }
@@ -565,6 +567,18 @@ bool ShapeScreenImpl::doProcessHit(std::size_t db_mol_idx, const std::string& db
 
 	numHits++;
 	
+	if (numBestHits == 0) {
+		HitMoleculeData hit_data(db_mol_idx, db_mol_name, res, db_mol);
+
+		if (!hitOutputFile.empty())
+			outputHitMolecule(splitOutFiles ? hitMolWriters[res.getReferenceShapeSetIndex()] : hitMolWriters[0], hit_data);
+
+		if (!reportFile.empty())
+			outputReportFileHitData(splitOutFiles ? *reportOStreams[res.getReferenceShapeSetIndex()] : *reportOStreams[0], hit_data);
+
+		return true;
+	}
+
 	HitList& hit_list = (mergeHitLists ? hitLists[0] : hitLists[res.getReferenceShapeSetIndex()]);
 		
 	if (numBestHits > 0) {
@@ -602,13 +616,83 @@ void ShapeScreenImpl::readQueryMolecules()
     printMessage(INFO, "");
 }
 
-void ShapeScreenImpl::setupHitLists()
+void ShapeScreenImpl::initHitLists()
 {
 	hitLists.resize(mergeHitLists ? 1 : queryMolecules.size());
 }
 
+void ShapeScreenImpl::initReportFileStreams()
+{
+	if (reportFile.empty())
+		return;
+
+	if (!splitOutFiles) 
+		reportOStreams.push_back(OStreamPtr(new std::ofstream(reportFile)));
+
+	else 
+		for (std::size_t i = 0, num_query_mols = queryMolecules.size(); i < num_query_mols; i++)
+			reportOStreams.push_back(OStreamPtr(new std::ofstream(getOutputFileName(reportFile, i))));
+	
+	for (OStreamArray::const_iterator it = reportOStreams.begin(), end = reportOStreams.end(); it != end; ++it) {
+		std::ostream& os = **it;
+
+		if (!os.good())
+			throw CDPL::Base::IOError("opening report file failed");
+	
+		outputReportFileHeader(os);
+	}
+}
+
+void ShapeScreenImpl::initHitMoleculeWriters()
+{
+	if (hitOutputFile.empty())
+		return;
+
+	if (!splitOutFiles) {
+		OutputHandlerPtr handler = getHitOutputHandler(hitOutputFile);
+
+		if (!handler)
+			throw CDPL::Base::IOError("no output handler found for hit molecule file '" + hitOutputFile + '\'');
+
+		MoleculeWriterPtr writer_ptr = handler->createWriter(hitOutputFile);
+
+		if (outputQuery) {
+			setMultiConfExportParameter(*writer_ptr, true);
+
+			for (std::size_t i = 0, num_query_mols = queryMolecules.size(); i < num_query_mols; i++)
+				outputQueryMolecule(writer_ptr, i);
+		}
+
+		setMultiConfExportParameter(*writer_ptr, false);
+		hitMolWriters.push_back(writer_ptr);
+
+	} else {
+		for (std::size_t i = 0, num_query_mols = queryMolecules.size(); i < num_query_mols; i++) {
+			std::string file_name = getOutputFileName(hitOutputFile, i);
+			OutputHandlerPtr handler = getHitOutputHandler(file_name);
+
+			if (!handler)
+				throw CDPL::Base::IOError("no output handler found for hit molecule file '" + file_name + '\'');
+
+			MoleculeWriterPtr writer_ptr = handler->createWriter(file_name);
+
+			if (outputQuery) {
+				setMultiConfExportParameter(*writer_ptr, true);
+				outputQueryMolecule(writer_ptr, i);
+			}
+
+			setMultiConfExportParameter(*writer_ptr, false);
+			hitMolWriters.push_back(writer_ptr);
+		}
+	}
+}
+
 void ShapeScreenImpl::outputHitLists()
 {
+	if (numBestHits == 0)
+		return;
+
+    printMessage(INFO, "");
 
     if (progressEnabled()) {
 		initInfiniteProgress();
@@ -629,46 +713,35 @@ void ShapeScreenImpl::outputHitLists()
 void ShapeScreenImpl::outputReportFiles()
 {
 	if (splitOutFiles) {
-		for (std::size_t i = 0, num_query_mols = queryMolecules.size(); i < num_query_mols; i++)
-			outputReportFile(i);
-		
-	} else
-		outputReportFile(0);
-}
+		for (std::size_t i = 0, num_query_mols = queryMolecules.size(); i < num_query_mols; i++) {
+			std::ostream& os = *reportOStreams[i];
+			const HitList& hit_list = (mergeHitLists ? hitLists[0] : hitLists[i]);
 
-void ShapeScreenImpl::outputReportFile(std::size_t query_mol_idx)
-{
-	std::ofstream os(splitOutFiles ? getOutputFileName(reportFile, query_mol_idx) : reportFile);
+			for (HitList::const_iterator it = hit_list.begin(), end = hit_list.end(); it != end; ++it) {
+				const HitMoleculeData& hit_data = *it;
 
-	os << std::fixed << std::setw(8) << std::showpoint << std::setprecision(3);
-	
-	outputReportFileHeader(os);
+				if (mergeHitLists && hit_data.almntResult.getReferenceShapeSetIndex() != i)
+					continue;
 
-	if (splitOutFiles) {
-		const HitList& hit_list = (mergeHitLists ? hitLists[0] : hitLists[query_mol_idx]);
-
-		for (HitList::const_iterator it = hit_list.begin(), end = hit_list.end(); it != end; ++it) {
-			const HitMoleculeData& hit_data = *it;
-
-			if (mergeHitLists && hit_data.almntResult.getReferenceShapeSetIndex() != query_mol_idx)
-				continue;
-
-			outputReportFileHitData(os, hit_data);
+				printInfiniteProgress("Writing Output Files");
+				outputReportFileHitData(os, hit_data);
+			}
 		}
-		
-	} else {
-		for (HitListArray::const_iterator it = hitLists.begin(), end = hitLists.end(); it != end; ++it) {
-			const HitList& hit_list = *it;
 
-			std::for_each(hit_list.begin(), hit_list.end(), boost::bind(&ShapeScreenImpl::outputReportFileHitData, this, boost::ref(os), _1));
+	} else {
+		std::ostream& os = *reportOStreams[0];
+
+		for (HitListArray::const_iterator it1 = hitLists.begin(), end1 = hitLists.end(); it1 != end1; ++it1) {
+			const HitList& hit_list = *it1;
+
+			for (HitList::const_iterator it2 = hit_list.begin(), end2 = hit_list.end(); it2 != end2; ++it2) {
+				const HitMoleculeData& hit_data = *it2;
+
+				printInfiniteProgress("Writing Output Files");
+				outputReportFileHitData(os, hit_data);
+			}
 		}
 	}
-	
-	os.flush();
-	os.close();
-	
-	if (!os.good())
-		throw CDPL::Base::IOError("writing report file '" + (splitOutFiles ? getOutputFileName(reportFile, query_mol_idx) : reportFile) + "' failed");
 }
 
 void ShapeScreenImpl::outputReportFileHeader(std::ostream& os) const
@@ -702,12 +775,13 @@ void ShapeScreenImpl::outputReportFileHeader(std::ostream& os) const
 	   << "DB Shape Tversky\t"
 	   << "DB Color Tversky\t"
 	   << "DB Tversky Combo\n";
+
+	if (!os.good())
+		throw CDPL::Base::IOError("writing to report file failed");
 }
 
 void ShapeScreenImpl::outputReportFileHitData(std::ostream& os, const HitMoleculeData& hit_data)
 {
-	printInfiniteProgress("Writing Output Files");
-
 	os << hit_data.dbMolName << '\t'
 	   << (hit_data.dbMolIndex + 1) << '\t'
 	   << (hit_data.almntResult.getAlignedShapeIndex() + 1) << '\t';
@@ -718,93 +792,80 @@ void ShapeScreenImpl::outputReportFileHitData(std::ostream& os, const HitMolecul
 	}
 	
 	os << (hit_data.almntResult.getReferenceShapeIndex() + 1) << '\t'
-	   << hit_data.almntResult.getOverlap() << '\t'
-	   << (hit_data.almntResult.getOverlap() - hit_data.almntResult.getColorOverlap()) << '\t'
-	   << hit_data.almntResult.getColorOverlap() << '\t'
-	   << calcTotalOverlapTanimotoScore(hit_data.almntResult) << '\t'
-	   << calcShapeTanimotoScore(hit_data.almntResult) << '\t'
-	   << calcColorTanimotoScore(hit_data.almntResult) << '\t'
-	   << calcTanimotoComboScore(hit_data.almntResult) << '\t'
-	   << calcTotalOverlapTverskyScore(hit_data.almntResult) << '\t'
-	   << calcShapeTverskyScore(hit_data.almntResult) << '\t'
-	   << calcColorTverskyScore(hit_data.almntResult) << '\t'
-	   << calcTverskyComboScore(hit_data.almntResult) << '\t'
-	   << calcReferenceTotalOverlapTverskyScore(hit_data.almntResult) << '\t'
-	   << calcReferenceShapeTverskyScore(hit_data.almntResult) << '\t'
-	   << calcReferenceColorTverskyScore(hit_data.almntResult) << '\t'
-	   << calcReferenceTverskyComboScore(hit_data.almntResult) << '\t'
-	   << calcAlignedTotalOverlapTverskyScore(hit_data.almntResult) << '\t'
-	   << calcAlignedShapeTverskyScore(hit_data.almntResult) << '\t'
-	   << calcAlignedColorTverskyScore(hit_data.almntResult) << '\t'
-	   << calcAlignedTverskyComboScore(hit_data.almntResult) << '\n';
+	   << (boost::format("%.3f") % hit_data.almntResult.getOverlap()).str() << '\t'
+	   << (boost::format("%.3f") % (hit_data.almntResult.getOverlap() - hit_data.almntResult.getColorOverlap())).str() << '\t'
+	   << (boost::format("%.3f") % hit_data.almntResult.getColorOverlap()).str() << '\t'
+	   << (boost::format("%.3f") % calcTotalOverlapTanimotoScore(hit_data.almntResult)).str() << '\t'
+	   << (boost::format("%.3f") % calcShapeTanimotoScore(hit_data.almntResult)).str() << '\t'
+	   << (boost::format("%.3f") % calcColorTanimotoScore(hit_data.almntResult)).str() << '\t'
+	   << (boost::format("%.3f") % calcTanimotoComboScore(hit_data.almntResult)).str() << '\t'
+	   << (boost::format("%.3f") % calcTotalOverlapTverskyScore(hit_data.almntResult)).str() << '\t'
+	   << (boost::format("%.3f") % calcShapeTverskyScore(hit_data.almntResult)).str() << '\t'
+	   << (boost::format("%.3f") % calcColorTverskyScore(hit_data.almntResult)).str() << '\t'
+	   << (boost::format("%.3f") % calcTverskyComboScore(hit_data.almntResult)).str() << '\t'
+	   << (boost::format("%.3f") % calcReferenceTotalOverlapTverskyScore(hit_data.almntResult)).str() << '\t'
+	   << (boost::format("%.3f") % calcReferenceShapeTverskyScore(hit_data.almntResult)).str() << '\t'
+	   << (boost::format("%.3f") % calcReferenceColorTverskyScore(hit_data.almntResult)).str() << '\t'
+	   << (boost::format("%.3f") % calcReferenceTverskyComboScore(hit_data.almntResult)).str() << '\t'
+	   << (boost::format("%.3f") % calcAlignedTotalOverlapTverskyScore(hit_data.almntResult)).str() << '\t'
+	   << (boost::format("%.3f") % calcAlignedShapeTverskyScore(hit_data.almntResult)).str() << '\t'
+	   << (boost::format("%.3f") % calcAlignedColorTverskyScore(hit_data.almntResult)).str() << '\t'
+	   << (boost::format("%.3f") % calcAlignedTverskyComboScore(hit_data.almntResult)).str() << '\n';
+
+	if (!os.good())
+		throw CDPL::Base::IOError("writing to report file failed");
 }
 
 void ShapeScreenImpl::outputHitMoleculeFiles()
 {
 	if (splitOutFiles) {
-		for (std::size_t i = 0, num_query_mols = queryMolecules.size(); i < num_query_mols; i++)
-			outputHitMoleculeFile(i);
-		
-	} else
-		outputHitMoleculeFile(0);
-}
+		for (std::size_t i = 0, num_query_mols = queryMolecules.size(); i < num_query_mols; i++) {
+			const MoleculeWriterPtr& writer_ptr = hitMolWriters[i];
+			const HitList& hit_list = (mergeHitLists ? hitLists[0] : hitLists[i]);
 
-void ShapeScreenImpl::outputHitMoleculeFile(std::size_t query_mol_idx)
-{
-	std::string file_name = (splitOutFiles ? getOutputFileName(hitOutputFile, query_mol_idx) : hitOutputFile);
-	OutputHandlerPtr handler = getHitOutputHandler(file_name);
+			for (HitList::const_iterator it = hit_list.begin(), end = hit_list.end(); it != end; ++it) {
+				const HitMoleculeData& hit_data = *it;
 
-	if (!handler)
-		throw CDPL::Base::IOError("no output handler found for hit molecule file '" + file_name + '\'');
+				if (mergeHitLists && hit_data.almntResult.getReferenceShapeSetIndex() != i)
+					continue;
 
-	MoleculeWriterPtr writer_ptr = handler->createWriter(file_name);
-
-	if (outputQuery) {
-		if (splitOutFiles)
-			outputQueryMolecule(query_mol_idx, queryMolecules[query_mol_idx], writer_ptr);
-		else
-			for (std::size_t i = 0, num_query_mols = queryMolecules.size(); i < num_query_mols; i++)
-				outputQueryMolecule(i, queryMolecules[i], writer_ptr);
-	}
-
-	if (splitOutFiles) {
-		const HitList& hit_list = (mergeHitLists ? hitLists[0] : hitLists[query_mol_idx]);
-
-		for (HitList::const_iterator it = hit_list.begin(), end = hit_list.end(); it != end; ++it) {
-			const HitMoleculeData& hit_data = *it;
-
-			if (mergeHitLists && hit_data.almntResult.getReferenceShapeSetIndex() != query_mol_idx)
-				continue;
-
-			outputHitMolecule(writer_ptr, hit_data);
+				printInfiniteProgress("Writing Output Files");
+				outputHitMolecule(writer_ptr, hit_data);
+			}
 		}
-		
+
 	} else {
-		for (HitListArray::const_iterator it = hitLists.begin(), end = hitLists.end(); it != end; ++it) {
-			const HitList& hit_list = *it;
+		const MoleculeWriterPtr& writer_ptr = hitMolWriters[0];
 
-			std::for_each(hit_list.begin(), hit_list.end(), boost::bind(&ShapeScreenImpl::outputHitMolecule, this, writer_ptr, _1));
+		for (HitListArray::const_iterator it1 = hitLists.begin(), end1 = hitLists.end(); it1 != end1; ++it1) {
+			const HitList& hit_list = *it1;
+
+			for (HitList::const_iterator it2 = hit_list.begin(), end2 = hit_list.end(); it2 != end2; ++it2) {
+				const HitMoleculeData& hit_data = *it2;
+
+				printInfiniteProgress("Writing Output Files");
+				outputHitMolecule(writer_ptr, hit_data);
+			}
 		}
 	}
-	
-	writer_ptr->close();
 }
 
-void ShapeScreenImpl::outputQueryMolecule(std::size_t query_mol_idx, const MoleculePtr& query_mol, const MoleculeWriterPtr& writer)
+void ShapeScreenImpl::outputQueryMolecule(const MoleculeWriterPtr& writer, std::size_t query_mol_idx)
 {
-	try {
-		printInfiniteProgress("Writing Output Files");
-		setMultiConfExportParameter(*writer, true);
+	using namespace CDPL;
 
-		if (writer->write(*query_mol))
+	const Chem::Molecule& query_mol = *queryMolecules[query_mol_idx];
+
+	try {
+		if (writer->write(query_mol))
 			return;
 
 	} catch (const std::exception& e) {
-		throw CDPL::Base::IOError("writing query molecule " + createMoleculeIdentifier(query_mol_idx + 1, *query_mol) + " failed: " + e.what());
+		throw Base::IOError("writing query molecule " + createMoleculeIdentifier(query_mol_idx + 1, query_mol) + " failed: " + e.what());
 
 	} catch (...) {}
 
-	throw CDPL::Base::IOError("unspecified error while writing query molecule " + createMoleculeIdentifier(query_mol_idx + 1, *query_mol));
+	throw Base::IOError("unspecified error while writing query molecule " + createMoleculeIdentifier(query_mol_idx + 1, query_mol));
 }
 
 void ShapeScreenImpl::outputHitMolecule(const MoleculeWriterPtr& writer, const HitMoleculeData& hit_data)
@@ -812,8 +873,6 @@ void ShapeScreenImpl::outputHitMolecule(const MoleculeWriterPtr& writer, const H
 	using namespace CDPL;
 
 	try {
-		printInfiniteProgress("Writing Output Files");
-
 		std::string name = hitNamePattern;
 
 		boost::replace_all(name, "@Q@", getName(*queryMolecules[hit_data.almntResult.getReferenceShapeSetIndex()]));
@@ -826,7 +885,6 @@ void ShapeScreenImpl::outputHitMolecule(const MoleculeWriterPtr& writer, const H
 		setName(*hit_data.dbMolecule, name);
 		applyConformation(*hit_data.dbMolecule, hit_data.almntResult.getAlignedShapeIndex());
 		transform3DCoordinates(*hit_data.dbMolecule, hit_data.almntResult.getTransform());
-		setMultiConfExportParameter(*writer, false);
 
 		if (scoreSDTags || queryNameSDTags || queryMolIdxSDTags || queryConfIdxSDTags || dbMolIdxSDTags || dbConfIdxSDTags) {
 			Chem::StringDataBlock::SharedPointer old_sd_block;
@@ -855,25 +913,25 @@ void ShapeScreenImpl::outputHitMolecule(const MoleculeWriterPtr& writer, const H
 				new_sd_block->addEntry("<Query Name>", getName(*queryMolecules[hit_data.almntResult.getReferenceShapeSetIndex()]));
 			
 			if (scoreSDTags) {
-				new_sd_block->addEntry("<Total Overlap>", boost::lexical_cast<std::string>(hit_data.almntResult.getOverlap()));
-				new_sd_block->addEntry("<Shape Overlap>", boost::lexical_cast<std::string>((hit_data.almntResult.getOverlap() - hit_data.almntResult.getColorOverlap())));
-				new_sd_block->addEntry("<Color Overlap>", boost::lexical_cast<std::string>(hit_data.almntResult.getColorOverlap()));
-				new_sd_block->addEntry("<Total Overlap Tanimoto>", boost::lexical_cast<std::string>(calcTotalOverlapTanimotoScore(hit_data.almntResult)));
-				new_sd_block->addEntry("<Shape Tanimoto>", boost::lexical_cast<std::string>(calcShapeTanimotoScore(hit_data.almntResult)));
-				new_sd_block->addEntry("<Color Tanimoto>", boost::lexical_cast<std::string>(calcColorTanimotoScore(hit_data.almntResult)));
-				new_sd_block->addEntry("<Tanimoto Combo>", boost::lexical_cast<std::string>(calcTanimotoComboScore(hit_data.almntResult)));
-				new_sd_block->addEntry("<Total Overlap Tversky>", boost::lexical_cast<std::string>(calcTotalOverlapTverskyScore(hit_data.almntResult)));
-				new_sd_block->addEntry("<Shape Tversky>", boost::lexical_cast<std::string>(calcShapeTverskyScore(hit_data.almntResult)));
-				new_sd_block->addEntry("<Color Tversky>", boost::lexical_cast<std::string>(calcColorTverskyScore(hit_data.almntResult)));
-				new_sd_block->addEntry("<Tversky Combo>", boost::lexical_cast<std::string>(calcTverskyComboScore(hit_data.almntResult)));
-				new_sd_block->addEntry("<Query Total Overlap Tversky>", boost::lexical_cast<std::string>(calcReferenceTotalOverlapTverskyScore(hit_data.almntResult)));
-				new_sd_block->addEntry("<Query Shape Tversky>", boost::lexical_cast<std::string>(calcReferenceShapeTverskyScore(hit_data.almntResult)));
-				new_sd_block->addEntry("<Query Color Tversky>", boost::lexical_cast<std::string>(calcReferenceColorTverskyScore(hit_data.almntResult)));
-				new_sd_block->addEntry("<Query Tversky Combo>", boost::lexical_cast<std::string>(calcReferenceTverskyComboScore(hit_data.almntResult)));
-				new_sd_block->addEntry("<DB Total Overlap Tversky>", boost::lexical_cast<std::string>(calcAlignedTotalOverlapTverskyScore(hit_data.almntResult)));
-				new_sd_block->addEntry("<DB Shape Tversky>", boost::lexical_cast<std::string>(calcAlignedShapeTverskyScore(hit_data.almntResult)));
-				new_sd_block->addEntry("<DB Color Tversky>", boost::lexical_cast<std::string>(calcAlignedColorTverskyScore(hit_data.almntResult)));
-				new_sd_block->addEntry("<DB Tversky Combo>", boost::lexical_cast<std::string>(calcAlignedTverskyComboScore(hit_data.almntResult)));
+				new_sd_block->addEntry("<Total Overlap>", (boost::format("%.3f") % hit_data.almntResult.getOverlap()).str());
+				new_sd_block->addEntry("<Shape Overlap>", (boost::format("%.3f") % (hit_data.almntResult.getOverlap() - hit_data.almntResult.getColorOverlap())).str());
+				new_sd_block->addEntry("<Color Overlap>", (boost::format("%.3f") % hit_data.almntResult.getColorOverlap()).str());
+				new_sd_block->addEntry("<Total Overlap Tanimoto>", (boost::format("%.3f") % calcTotalOverlapTanimotoScore(hit_data.almntResult)).str());
+				new_sd_block->addEntry("<Shape Tanimoto>", (boost::format("%.3f") % calcShapeTanimotoScore(hit_data.almntResult)).str());
+				new_sd_block->addEntry("<Color Tanimoto>", (boost::format("%.3f") % calcColorTanimotoScore(hit_data.almntResult)).str());
+				new_sd_block->addEntry("<Tanimoto Combo>", (boost::format("%.3f") % calcTanimotoComboScore(hit_data.almntResult)).str());
+				new_sd_block->addEntry("<Total Overlap Tversky>", (boost::format("%.3f") % calcTotalOverlapTverskyScore(hit_data.almntResult)).str());
+				new_sd_block->addEntry("<Shape Tversky>", (boost::format("%.3f") % calcShapeTverskyScore(hit_data.almntResult)).str());
+				new_sd_block->addEntry("<Color Tversky>", (boost::format("%.3f") % calcColorTverskyScore(hit_data.almntResult)).str());
+				new_sd_block->addEntry("<Tversky Combo>", (boost::format("%.3f") % calcTverskyComboScore(hit_data.almntResult)).str());
+				new_sd_block->addEntry("<Query Total Overlap Tversky>", (boost::format("%.3f") % calcReferenceTotalOverlapTverskyScore(hit_data.almntResult)).str());
+				new_sd_block->addEntry("<Query Shape Tversky>", (boost::format("%.3f") % calcReferenceShapeTverskyScore(hit_data.almntResult)).str());
+				new_sd_block->addEntry("<Query Color Tversky>", (boost::format("%.3f") % calcReferenceColorTverskyScore(hit_data.almntResult)).str());
+				new_sd_block->addEntry("<Query Tversky Combo>", (boost::format("%.3f") % calcReferenceTverskyComboScore(hit_data.almntResult)).str());
+				new_sd_block->addEntry("<DB Total Overlap Tversky>", (boost::format("%.3f") % calcAlignedTotalOverlapTverskyScore(hit_data.almntResult)).str());
+				new_sd_block->addEntry("<DB Shape Tversky>", (boost::format("%.3f") % calcAlignedShapeTverskyScore(hit_data.almntResult)).str());
+				new_sd_block->addEntry("<DB Color Tversky>", (boost::format("%.3f") % calcAlignedColorTverskyScore(hit_data.almntResult)).str());
+				new_sd_block->addEntry("<DB Tversky Combo>", (boost::format("%.3f") % calcAlignedTverskyComboScore(hit_data.almntResult)).str());
 			}
 
 			setStructureData(*hit_data.dbMolecule, new_sd_block);
@@ -921,7 +979,7 @@ std::size_t ShapeScreenImpl::readNextMolecule(CDPL::Chem::Molecule& mol)
 		return 0;
 
     if (numThreads > 0) {
-		boost::lock_guard<boost::mutex> lock(readMolMutex);
+		boost::lock_guard<boost::mutex> lock(molReadMutex);
 
 		return doReadNextMolecule(mol);
     }
@@ -969,11 +1027,11 @@ void ShapeScreenImpl::printStatistics()
 {
 	std::size_t proc_time = boost::chrono::duration_cast<boost::chrono::duration<std::size_t> >(Clock::now() - startTime).count();
 	
-    printMessage(INFO, "Statistics:");
+	printMessage(INFO, "");
+	printMessage(INFO, "Statistics:");
     printMessage(INFO, " Num. processed Molecules: " + boost::lexical_cast<std::string>(numProcMols));
     printMessage(INFO, " Num. Hit Molecules:       " + boost::lexical_cast<std::string>(numHits));
     printMessage(INFO, " Processing Time:          " + CmdLineLib::formatTimeDuration(proc_time));
-    printMessage(INFO, "");
 }
 
 void ShapeScreenImpl::checkOutputFileOptions() const
@@ -1030,8 +1088,8 @@ void ShapeScreenImpl::printOptionSummary()
 	printMessage(VERBOSE, " Scoring Function:                    " + scoringFunc);
 	printMessage(VERBOSE, " Num. saved best Hits:                " + (numBestHits > 0 ? boost::lexical_cast<std::string>(numBestHits) : std::string("All Hits")));
 	printMessage(VERBOSE, " Max. Num. Hits:                      " + (maxNumHits > 0 ? boost::lexical_cast<std::string>(maxNumHits) : std::string("No Limit")));
-	printMessage(VERBOSE, " Score Cutoff:                        " + (settings.getScoreCutoff() == ScreeningSettings::NO_CUTOFF ? boost::lexical_cast<std::string>(settings.getScoreCutoff()) : std::string("None")));
-	printMessage(VERBOSE, " Shape Tanimoto Cutoff:               " + (shapeScoreCutoff > 0.0 ? boost::lexical_cast<std::string>(shapeScoreCutoff) : std::string("None")));
+	printMessage(VERBOSE, " Score Cutoff:                        " + (settings.getScoreCutoff() == ScreeningSettings::NO_CUTOFF ? std::string("None") : (boost::format("%.4f") % settings.getScoreCutoff()).str()));
+	printMessage(VERBOSE, " Shape Tanimoto Cutoff:               " + (shapeScoreCutoff > 0.0 ? (boost::format("%.4f") % shapeScoreCutoff).str() : std::string("None")));
 	printMessage(VERBOSE, " Merge Hit Lists:                     " + std::string(mergeHitLists ? "Yes" : "No"));
 	printMessage(VERBOSE, " Output File Splitting:               " + std::string(splitOutFiles ? "Yes" : "No"));
 	printMessage(VERBOSE, " Shape Alignment:                     " + std::string(scoringOnly ? "No" : "Yes"));

@@ -35,6 +35,7 @@
 
 #include <boost/thread.hpp>
 #include <boost/chrono/chrono.hpp>
+#include <boost/shared_ptr.hpp>
 
 #include "CDPL/Chem/Molecule.hpp"
 #include "CDPL/Util/CompoundDataReader.hpp"
@@ -92,6 +93,8 @@ namespace ShapeScreen
 		const char* getProgCopyright() const;
 		const char* getProgAboutText() const;
 
+		void addOptionLongDescriptions();
+
 		void setNumRandomStarts(std::size_t num_starts);
 
 		void setColorFeatureType(const std::string& type);
@@ -110,10 +113,16 @@ namespace ShapeScreen
 		void setHitOutputFormat(const std::string& file_ext);
 
 		void setAlignmentMode();
+		void checkInputFiles() const;
+		void checkOutputFileOptions() const;
+
+		void initQueryReader();
+		void initDatabaseReader();
+		void initHitLists();
+		void initReportFileStreams();
+		void initHitMoleculeWriters();
 
 		int process();
-
-		void addOptionLongDescriptions();
 
 		void processSingleThreaded();
 		void processMultiThreaded();
@@ -124,19 +133,15 @@ namespace ShapeScreen
 						  const MoleculePtr& db_mol, const CDPL::Shape::AlignmentResult& res);
 		
 		void readQueryMolecules();
-		void setupHitLists();
-		void outputHitLists();
 
+		void outputHitLists();
 		void outputReportFiles();
-		void outputReportFile(std::size_t query_mol_idx);
+		void outputHitMoleculeFiles();
 
 		void outputReportFileHeader(std::ostream& os) const;
 		void outputReportFileHitData(std::ostream& os, const HitMoleculeData& hit_data);
-				
-		void outputHitMoleculeFiles();
-		void outputHitMoleculeFile(std::size_t query_mol_idx);
 
-		void outputQueryMolecule(std::size_t query_mol_idx, const MoleculePtr& query_mol, const MoleculeWriterPtr& writer);
+		void outputQueryMolecule(const MoleculeWriterPtr& writer, std::size_t query_mol_idx);
 		void outputHitMolecule(const MoleculeWriterPtr& writer, const HitMoleculeData& hit_data);
 
 		std::size_t readNextMolecule(CDPL::Chem::Molecule& mol);
@@ -149,13 +154,7 @@ namespace ShapeScreen
 
 		void printStatistics();
 
-		void checkInputFiles() const;
-		void checkOutputFileOptions() const;
-
 		void printOptionSummary();
-
-		void initQueryReader();
-		void initDatabaseReader();
 
 		InputHandlerPtr getQueryHandler(const std::string& file_path) const;
 		InputHandlerPtr getDatabaseHandler(const std::string& file_path) const;
@@ -169,12 +168,16 @@ namespace ShapeScreen
 
 		std::string createMoleculeIdentifier(std::size_t rec_idx, const CDPL::Chem::Molecule& mol);
 		std::string createMoleculeIdentifier(std::size_t rec_idx);
+
 		std::string getOutputFileName(const std::string& file_name_tmplt, std::size_t query_mol_idx) const;
 
+		typedef boost::shared_ptr<std::ostream> OStreamPtr;
 		typedef CDPL::Base::DataReader<CDPL::Chem::Molecule>::SharedPointer MoleculeReaderPtr;
 		typedef std::vector<MoleculePtr> QueryMoleculeList;
 		typedef std::multiset<HitMoleculeData> HitList;
 		typedef std::vector<HitList> HitListArray;
+		typedef std::vector<OStreamPtr> OStreamArray;
+		typedef std::vector<MoleculeWriterPtr> MoleculeWriterArray;
 		typedef boost::chrono::system_clock Clock;
 
 		std::string                    queryFile;
@@ -209,10 +212,13 @@ namespace ShapeScreen
 		OutputHandlerPtr               hitOutputHandler;
 		QueryMoleculeList              queryMolecules;
 		HitListArray                   hitLists;
+		OStreamArray                   reportOStreams;
+		MoleculeWriterArray            hitMolWriters;
 		std::size_t                    numProcMols;
 		std::size_t                    numHits;
 		boost::mutex                   mutex;
-		boost::mutex                   readMolMutex;
+		boost::mutex                   molReadMutex;
+		boost::mutex                   hitProcMutex;
 		std::string                    errorMessage;
 		Clock::time_point              startTime;
     };
