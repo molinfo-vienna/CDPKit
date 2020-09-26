@@ -687,7 +687,6 @@ const Chem::AtomDictionary::Entry::IsotopeMassMap& Chem::AtomDictionary::Entry::
 void Chem::AtomDictionary::addEntry(const Entry& entry)
 {
 	EntryLookupTable::key_type key(entry.getType(), entry.getIsotope());
-	EntryLookupTable::iterator it = entries.find(key);
 
 	entries.insert(EntryLookupTable::value_type(key, entry));
 }

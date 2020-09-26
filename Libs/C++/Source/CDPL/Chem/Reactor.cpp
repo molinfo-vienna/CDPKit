@@ -618,7 +618,7 @@ void Chem::Reactor::editStereoProperties() const
 	}
 
 	IDPairBondMap::const_iterator created_bonds_end = prodBondsToCreate.end();
-	AtomMap::const_iterator tgt_atom_mapping_end = tgtAtomMapping.end();
+	//AtomMap::const_iterator tgt_atom_mapping_end = tgtAtomMapping.end();
 
 	for (IDPairBondMap::const_iterator it = prodBondsToCreate.begin(); it != created_bonds_end; ++it) {
 		const Bond* ptn_prod_bond = it->second;

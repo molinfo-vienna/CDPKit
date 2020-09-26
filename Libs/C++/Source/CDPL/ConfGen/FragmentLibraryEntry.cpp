@@ -59,11 +59,6 @@ namespace
 		return (atom1.getIndex() < atom2.getIndex());
 	}
 
-	bool comparePointerAtomIndex(const Chem::Atom* atom1, const Chem::Atom* atom2)
-	{
-		return (atom1->getIndex() < atom2->getIndex());
-	}
-
 	bool compareBondAtomIndices(const Chem::Bond& bond1, const Chem::Bond& bond2)
 	{
 		std::size_t bond1_beg_idx = bond1.getBegin().getIndex();

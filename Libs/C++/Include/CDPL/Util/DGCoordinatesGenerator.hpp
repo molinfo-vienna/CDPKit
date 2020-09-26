@@ -605,7 +605,7 @@ void CDPL::Util::DGCoordinatesGeneratorBase<Dim, T, Derived>::embedCoords(std::s
 				if (constr_idx < num_dist_constrs)
 					adjCoordsForDistanceConstraint(coords, lambda, constr_idx);
 				else
-					static_cast<Derived&>(*this).adjCoordsForVolumeConstraint<CoordsArray>(coords, lambda, constr_idx - num_dist_constrs);
+					static_cast<Derived&>(*this).template adjCoordsForVolumeConstraint<CoordsArray>(coords, lambda, constr_idx - num_dist_constrs);
 			}
 		}
 
@@ -626,7 +626,7 @@ void CDPL::Util::DGCoordinatesGeneratorBase<Dim, T, Derived>::embedCoords(std::s
 
 	for (std::size_t i = 0; i < numCycles; i++, lambda -= learningRateDecr) 
 		for (std::size_t j = 0; j < num_steps; j++) 
-			static_cast<Derived&>(*this).adjCoordsForVolumeConstraint<CoordsArray>(coords, lambda, constr_sd(randomEngine));
+			static_cast<Derived&>(*this).template adjCoordsForVolumeConstraint<CoordsArray>(coords, lambda, constr_sd(randomEngine));
 }
 
 template <std::size_t Dim, typename T, typename Derived>
