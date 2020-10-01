@@ -307,15 +307,17 @@ void CmdLineBase::printProgress(const std::string& prefix, double progress)
 	inNewLine = false;
 }
 
-void CmdLineBase::printInfiniteProgress(const std::string& prefix)
+void CmdLineBase::printInfiniteProgress(const std::string& prefix, bool force)
 {
 	if (!showProgress || verbLevel == QUIET || termSignalCaught() || maxProgressDotCount == 0)
 		return;
 
-	Clock::duration elapsed = Clock::now() - progressStartTime;
+	if (!force) {
+		Clock::duration elapsed = Clock::now() - progressStartTime;
 
-	if (boost::chrono::duration_cast<boost::chrono::milliseconds>(elapsed).count() < boost::int_least64_t(progressUpdateInterv))
-		return;
+		if (boost::chrono::duration_cast<boost::chrono::milliseconds>(elapsed).count() < boost::int_least64_t(progressUpdateInterv))
+			return;
+	}
 
 	if (logStreamPtr == &std::cerr && !inProgressLine && !inNewLine)
 		std::cerr << std::endl;

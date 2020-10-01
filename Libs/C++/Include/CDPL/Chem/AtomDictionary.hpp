@@ -68,6 +68,7 @@ namespace CDPL
 
 		  private:
 			typedef boost::unordered_map<std::pair<unsigned int, std::size_t>, Entry> EntryLookupTable;
+			typedef boost::unordered_map<std::string, unsigned int> SymbolToTypeLookupTable;
 
 		  public:
 			typedef boost::shared_ptr<AtomDictionary> SharedPointer;
@@ -323,8 +324,10 @@ namespace CDPL
 			static bool isNobleGas(unsigned int type);
 
 		  private:
-			static SharedPointer defaultDict;
-			EntryLookupTable     entries;
+			static SharedPointer     defaultDict;
+			EntryLookupTable         entries;
+			SymbolToTypeLookupTable  strictSymToTypeTable;
+			SymbolToTypeLookupTable  nonstrictSymToTypeTable;
 		};
 	};
 

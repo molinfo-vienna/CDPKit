@@ -31,6 +31,10 @@
 #ifndef CDPL_SHAPE_GAUSSIANSHAPEGENERATOR_HPP
 #define CDPL_SHAPE_GAUSSIANSHAPEGENERATOR_HPP
 
+#include <cstddef>
+#include <vector>
+#include <utility>
+
 #include <boost/shared_ptr.hpp>
 
 #include "CDPL/Shape/APIPrefix.hpp"
@@ -103,8 +107,12 @@ namespace CDPL
 			void generate(const Chem::MolecularGraph& molgraph, GaussianShapeSet& shapes, bool append = false);
 
 		  private:
+			typedef std::pair<std::size_t, double> ShapeElement;
+			typedef std::vector<ShapeElement> ShapeElementArray;
+
 			template <typename CoordsFunc>
-			void createShape(const Chem::MolecularGraph& molgraph, const CoordsFunc& coords_func, GaussianShape& shape);
+			void createShape(const Chem::MolecularGraph& molgraph, const CoordsFunc& coords_func, 
+							 GaussianShape& shape, bool init);
 
 			Pharm::DefaultPharmacophoreGenerator defPharmGen;
 			Pharm::PharmacophoreGenerator*       pharmGen;
@@ -117,6 +125,8 @@ namespace CDPL
 			double                               ftrRadius;
 			double                               ftrHardness;
 			Pharm::BasicPharmacophore            pharm;
+			ShapeElementArray                    atomElements;
+			ShapeElementArray                    ftrElements;
 		};
 
 		/**

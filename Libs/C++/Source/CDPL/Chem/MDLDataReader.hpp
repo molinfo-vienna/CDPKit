@@ -36,6 +36,7 @@
 
 #include "CDPL/Chem/Molecule.hpp"
 #include "CDPL/Chem/Fragment.hpp"
+#include "CDPL/Math/VectorArray.hpp"
 
 
 namespace CDPL 
@@ -76,6 +77,9 @@ namespace CDPL
 		private:
 			bool readMolecule(std::istream&, Molecule&, bool);
 			bool skipMolecule(std::istream&, bool);
+
+			bool addConformer(std::istream&, MolecularGraph&);
+			bool readNextConformer(std::istream&, const MolecularGraph&, bool);
 
 			void init(std::istream&);
 
@@ -241,6 +245,7 @@ namespace CDPL
 			Fragment::SharedPointer confTargetFragment;
 			Molecule::SharedPointer confTargetMolecule;
 			Molecule::SharedPointer confTestMolecule;
+			Math::Vector3DArray     confCoords;
 		};
 	}
 }

@@ -61,7 +61,6 @@ namespace CDPL
 		std::string& readLine(std::istream& is, std::string& line, const char* err_msg = "Error", bool trim = false, 
 							  bool check_ll = false, std::size_t max_llen = 80, char eol_char = '\n');
 
-
 		std::string& readString(std::istream& is, std::size_t field_size, std::string& str, bool clear = true,
 								const char* err_msg = "Error", bool trim = true, char eol_char = '\n');
 	

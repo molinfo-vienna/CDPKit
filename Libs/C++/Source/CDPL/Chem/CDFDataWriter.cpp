@@ -150,6 +150,8 @@ void Chem::CDFDataWriter::writeConnectionTable(const MolecularGraph& molgraph, I
 
 void Chem::CDFDataWriter::outputAtoms(const MolecularGraph& molgraph, Internal::ByteBuffer& bbuf)
 {
+	bool multi_conf = getMultiConfExportParameter(ctrlParams);
+
 	bbuf.putInt(boost::numeric_cast<CDF::SizeType>(molgraph.getNumAtoms()), false);
 
 	for (MolecularGraph::ConstAtomIterator it = molgraph.getAtomsBegin(), end = molgraph.getAtomsEnd(); 
@@ -196,7 +198,7 @@ void Chem::CDFDataWriter::outputAtoms(const MolecularGraph& molgraph, Internal::
 		if (has3DCoordinates(atom))
 			putCVectorProperty(CDF::AtomProperty::COORDINATES_3D, get3DCoordinates(atom), bbuf);
 
-		if (has3DCoordinatesArray(atom))
+		if (multi_conf && has3DCoordinatesArray(atom))
 			putCVectorArrayProperty(CDF::AtomProperty::COORDINATES_3D_ARRAY, *get3DCoordinatesArray(atom), bbuf);
 
 		if (hasCIPConfiguration(atom))

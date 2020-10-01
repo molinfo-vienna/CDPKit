@@ -689,6 +689,8 @@ void Chem::AtomDictionary::addEntry(const Entry& entry)
 	EntryLookupTable::key_type key(entry.getType(), entry.getIsotope());
 
 	entries.insert(EntryLookupTable::value_type(key, entry));
+	strictSymToTypeTable.insert(SymbolToTypeLookupTable::value_type(entry.getSymbol(), entry.getType()));
+	nonstrictSymToTypeTable.insert(SymbolToTypeLookupTable::value_type(boost::to_upper_copy(entry.getSymbol()), entry.getType()));
 }
 
 bool Chem::AtomDictionary::containsEntry(unsigned int type, std::size_t isotope) const
@@ -701,9 +703,14 @@ bool Chem::AtomDictionary::containsEntry(unsigned int type, std::size_t isotope)
 
 void Chem::AtomDictionary::removeEntry(unsigned int type, std::size_t isotope)
 {
-	EntryLookupTable::key_type key(type, isotope);
-	
-	entries.erase(key);
+	EntryLookupTable::iterator it = entries.find(EntryLookupTable::key_type(type, isotope));
+
+	if (it == entries.end())
+		return;
+
+	strictSymToTypeTable.erase(it->second.getSymbol());
+	nonstrictSymToTypeTable.erase(boost::to_upper_copy(it->second.getSymbol()));
+	entries.erase(it);
 }
 			
 const Chem::AtomDictionary::Entry& Chem::AtomDictionary::getEntry(unsigned int type, std::size_t isotope) const
@@ -720,6 +727,8 @@ const Chem::AtomDictionary::Entry& Chem::AtomDictionary::getEntry(unsigned int t
 void Chem::AtomDictionary::clear()
 {
 	entries.clear();
+	strictSymToTypeTable.clear();
+	nonstrictSymToTypeTable.clear();
 }
 
 std::size_t Chem::AtomDictionary::getNumEntries() const
@@ -786,28 +795,20 @@ const std::string& Chem::AtomDictionary::getName(unsigned int type, std::size_t 
 unsigned int Chem::AtomDictionary::getType(const std::string& sym, bool strict) 
 {
 	if (strict) {
-		for (EntryLookupTable::const_iterator it = defaultDict->entries.begin(), end = defaultDict->entries.end(); it != end; ++it)
-			if (it->second.getSymbol() == sym)
-				return it->first.first;
+		SymbolToTypeLookupTable::const_iterator it = defaultDict->strictSymToTypeTable.find(sym);
 
+		if (it == defaultDict->strictSymToTypeTable.end())
+			return AtomType::UNKNOWN;
+
+		return it->second;
+	}
+
+	SymbolToTypeLookupTable::const_iterator it = defaultDict->nonstrictSymToTypeTable.find(boost::to_upper_copy(sym));
+
+	if (it == defaultDict->nonstrictSymToTypeTable.end())
 		return AtomType::UNKNOWN;
-	}
 
-	std::string uc_dict_sym;
-	std::string uc_arg_sym = sym;
-
-	boost::to_upper(uc_arg_sym);
-
-	for (EntryLookupTable::const_iterator it = defaultDict->entries.begin(), end = defaultDict->entries.end(); it != end; ++it) {
-		uc_dict_sym = it->second.getSymbol();
-
-		boost::to_upper(uc_dict_sym);
-
-		if (uc_dict_sym == uc_arg_sym)
-			return it->first.first;
-	}
-
-	return AtomType::UNKNOWN;
+	return it->second;
 }
 
 std::size_t Chem::AtomDictionary::getMostAbundantIsotope(unsigned int type) 

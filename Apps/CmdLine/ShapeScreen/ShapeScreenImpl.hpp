@@ -34,7 +34,7 @@
 #include <iosfwd>
 
 #include <boost/thread.hpp>
-#include <boost/chrono/chrono.hpp>
+#include <boost/timer/timer.hpp>
 #include <boost/shared_ptr.hpp>
 
 #include "CDPL/Chem/Molecule.hpp"
@@ -134,6 +134,8 @@ namespace ShapeScreen
 		
 		void readQueryMolecules();
 
+		void setupMolecule(CDPL::Chem::Molecule& mol) const;
+
 		void outputHitLists();
 		void outputReportFiles();
 		void outputHitMoleculeFiles();
@@ -178,7 +180,6 @@ namespace ShapeScreen
 		typedef std::vector<HitList> HitListArray;
 		typedef std::vector<OStreamPtr> OStreamArray;
 		typedef std::vector<MoleculeWriterPtr> MoleculeWriterArray;
-		typedef boost::chrono::system_clock Clock;
 
 		std::string                    queryFile;
 		std::string                    databaseFile;
@@ -216,11 +217,12 @@ namespace ShapeScreen
 		MoleculeWriterArray            hitMolWriters;
 		std::size_t                    numProcMols;
 		std::size_t                    numHits;
+		std::size_t                    numSavedHits;
 		boost::mutex                   mutex;
 		boost::mutex                   molReadMutex;
 		boost::mutex                   hitProcMutex;
 		std::string                    errorMessage;
-		Clock::time_point              startTime;
+		boost::timer::cpu_timer        timer;
     };
 }
 

@@ -33,12 +33,12 @@
 #include <boost/bind.hpp>
 #include <boost/lexical_cast.hpp>
 #include <boost/format.hpp>
-#include <boost/timer/timer.hpp>
 
 #include "CDPL/Chem/BasicMolecule.hpp"
 #include "CDPL/Chem/ControlParameterFunctions.hpp"
 #include "CDPL/Chem/MolecularGraphFunctions.hpp"
 #include "CDPL/Chem/AtomContainerFunctions.hpp"
+#include "CDPL/Pharm/MoleculeFunctions.hpp"
 #include "CDPL/Shape/ScreeningProcessor.hpp"
 #include "CDPL/Shape/ScoringFunctors.hpp"
 #include "CDPL/Shape/ScoringFunctions.hpp"
@@ -69,6 +69,8 @@ public:
 	}
 
     void operator()() {
+		using namespace CDPL;
+
 		while (!terminate) {
 			if (!molecule.unique())
 				molecule.reset(new CDPL::Chem::BasicMolecule());
@@ -77,6 +79,8 @@ public:
 				return;
 			
 			try {
+				parent->setupMolecule(*molecule);
+
 				if (!screeningProc.process(*molecule))
 					parent->printMessage(ERROR, "Processing of database molecule " + parent->createMoleculeIdentifier(dbMolIndex, *molecule) + " failed");
 
@@ -115,7 +119,7 @@ ShapeScreenImpl::ShapeScreenImpl():
 	queryMolIdxSDTags(false), queryConfIdxSDTags(true), dbMolIdxSDTags(false), dbConfIdxSDTags(true),
 	colorCenterStarts(false), atomCenterStarts(false), shapeCenterStarts(true),
 	hitNamePattern("@D@_@c@_@Q@_@C@"), numBestHits(1000), maxNumHits(0), shapeScoreCutoff(0.0), 
-	numProcMols(0), numHits(0)
+	numProcMols(0), numHits(0), numSavedHits(0)
 {
    	addOption("query,q", "Query molecule file.", 
 			  value<std::string>(&queryFile)->required());
@@ -445,7 +449,7 @@ void ShapeScreenImpl::setAlignmentMode()
 
 int ShapeScreenImpl::process()
 {
-    startTime = Clock::now();
+    timer.start();
 
     printMessage(INFO, getProgTitleString());
     printMessage(INFO, "");
@@ -485,6 +489,8 @@ int ShapeScreenImpl::process()
 
     if (termSignalCaught())
 		return EXIT_FAILURE;
+
+	timer.stop();
 
 	outputHitLists();
 
@@ -594,6 +600,11 @@ bool ShapeScreenImpl::doProcessHit(std::size_t db_mol_idx, const std::string& db
 	return true;
 }
 
+void ShapeScreenImpl::setupMolecule(CDPL::Chem::Molecule& mol) const
+{
+	CDPL::Pharm::prepareForPharmacophoreGeneration(mol);
+}
+
 void ShapeScreenImpl::readQueryMolecules()
 {
 	using namespace CDPL;
@@ -605,6 +616,8 @@ void ShapeScreenImpl::readQueryMolecules()
 
 		if (!queryReader->read(*query_mol))
 			break;
+
+		setupMolecule(*query_mol);
 
 		queryMolecules.push_back(query_mol);
 	}
@@ -654,17 +667,16 @@ void ShapeScreenImpl::initHitMoleculeWriters()
 		if (!handler)
 			throw CDPL::Base::IOError("no output handler found for hit molecule file '" + hitOutputFile + '\'');
 
-		MoleculeWriterPtr writer_ptr = handler->createWriter(hitOutputFile);
+		MoleculeWriterPtr writer = handler->createWriter(hitOutputFile);
 
-		if (outputQuery) {
-			setMultiConfExportParameter(*writer_ptr, true);
+		if (outputQuery && (numBestHits == 0 || mergeHitLists)) {
+			setMultiConfExportParameter(*writer, true);
 
 			for (std::size_t i = 0, num_query_mols = queryMolecules.size(); i < num_query_mols; i++)
-				outputQueryMolecule(writer_ptr, i);
+				outputQueryMolecule(writer, i);
 		}
 
-		setMultiConfExportParameter(*writer_ptr, false);
-		hitMolWriters.push_back(writer_ptr);
+		hitMolWriters.push_back(writer);
 
 	} else {
 		for (std::size_t i = 0, num_query_mols = queryMolecules.size(); i < num_query_mols; i++) {
@@ -674,15 +686,14 @@ void ShapeScreenImpl::initHitMoleculeWriters()
 			if (!handler)
 				throw CDPL::Base::IOError("no output handler found for hit molecule file '" + file_name + '\'');
 
-			MoleculeWriterPtr writer_ptr = handler->createWriter(file_name);
+			MoleculeWriterPtr writer = handler->createWriter(file_name);
 
 			if (outputQuery) {
-				setMultiConfExportParameter(*writer_ptr, true);
-				outputQueryMolecule(writer_ptr, i);
+				setMultiConfExportParameter(*writer, true);
+				outputQueryMolecule(writer, i);
 			}
 
-			setMultiConfExportParameter(*writer_ptr, false);
-			hitMolWriters.push_back(writer_ptr);
+			hitMolWriters.push_back(writer);
 		}
 	}
 }
@@ -782,6 +793,8 @@ void ShapeScreenImpl::outputReportFileHeader(std::ostream& os) const
 
 void ShapeScreenImpl::outputReportFileHitData(std::ostream& os, const HitMoleculeData& hit_data)
 {
+	numSavedHits++;
+
 	os << hit_data.dbMolName << '\t'
 	   << (hit_data.dbMolIndex + 1) << '\t'
 	   << (hit_data.almntResult.getAlignedShapeIndex() + 1) << '\t';
@@ -820,7 +833,7 @@ void ShapeScreenImpl::outputHitMoleculeFiles()
 {
 	if (splitOutFiles) {
 		for (std::size_t i = 0, num_query_mols = queryMolecules.size(); i < num_query_mols; i++) {
-			const MoleculeWriterPtr& writer_ptr = hitMolWriters[i];
+			const MoleculeWriterPtr& writer = hitMolWriters[i];
 			const HitList& hit_list = (mergeHitLists ? hitLists[0] : hitLists[i]);
 
 			for (HitList::const_iterator it = hit_list.begin(), end = hit_list.end(); it != end; ++it) {
@@ -830,21 +843,27 @@ void ShapeScreenImpl::outputHitMoleculeFiles()
 					continue;
 
 				printInfiniteProgress("Writing Output Files");
-				outputHitMolecule(writer_ptr, hit_data);
+				outputHitMolecule(writer, hit_data);
 			}
 		}
 
 	} else {
-		const MoleculeWriterPtr& writer_ptr = hitMolWriters[0];
+		const MoleculeWriterPtr& writer = hitMolWriters[0];
+		std::size_t i = 0;
 
-		for (HitListArray::const_iterator it1 = hitLists.begin(), end1 = hitLists.end(); it1 != end1; ++it1) {
+		for (HitListArray::const_iterator it1 = hitLists.begin(), end1 = hitLists.end(); it1 != end1; ++it1, i++) {
 			const HitList& hit_list = *it1;
+
+			if (outputQuery && !mergeHitLists) {
+				setMultiConfExportParameter(*writer, true);
+				outputQueryMolecule(writer, i);
+			}
 
 			for (HitList::const_iterator it2 = hit_list.begin(), end2 = hit_list.end(); it2 != end2; ++it2) {
 				const HitMoleculeData& hit_data = *it2;
 
 				printInfiniteProgress("Writing Output Files");
-				outputHitMolecule(writer_ptr, hit_data);
+				outputHitMolecule(writer, hit_data);
 			}
 		}
 	}
@@ -872,6 +891,9 @@ void ShapeScreenImpl::outputHitMolecule(const MoleculeWriterPtr& writer, const H
 {
 	using namespace CDPL;
 
+	if (reportFile.empty())
+		numSavedHits++;
+
 	try {
 		std::string name = hitNamePattern;
 
@@ -885,6 +907,8 @@ void ShapeScreenImpl::outputHitMolecule(const MoleculeWriterPtr& writer, const H
 		setName(*hit_data.dbMolecule, name);
 		applyConformation(*hit_data.dbMolecule, hit_data.almntResult.getAlignedShapeIndex());
 		transform3DCoordinates(*hit_data.dbMolecule, hit_data.almntResult.getTransform());
+
+		setMultiConfExportParameter(*writer, false);
 
 		if (scoreSDTags || queryNameSDTags || queryMolIdxSDTags || queryConfIdxSDTags || dbMolIdxSDTags || dbConfIdxSDTags) {
 			Chem::StringDataBlock::SharedPointer old_sd_block;
@@ -991,12 +1015,13 @@ std::size_t ShapeScreenImpl::doReadNextMolecule(CDPL::Chem::Molecule& mol)
 {
     while (true) {
 		try {
-			printInfiniteProgress("Screening Molecules");
-
-			if (!databaseReader->read(mol))
+			if (!databaseReader->read(mol)) {
+				printInfiniteProgress("Screening Molecules (" + boost::lexical_cast<std::string>(numProcMols) + " passed)", true);
 				return 0;
+			}
 
 			numProcMols++;
+			printInfiniteProgress("Screening Molecules (" + boost::lexical_cast<std::string>(numProcMols) + " passed)");
 
 			return databaseReader->getRecordIndex();
 
@@ -1006,6 +1031,8 @@ std::size_t ShapeScreenImpl::doReadNextMolecule(CDPL::Chem::Molecule& mol)
 		} catch (...) {
 			printMessage(ERROR, "Unspecified error while reading database molecule " + createMoleculeIdentifier(databaseReader->getRecordIndex() + 1));
 		}
+
+		numProcMols++;
 
 		databaseReader->setRecordIndex(databaseReader->getRecordIndex() + 1);
     }
@@ -1025,13 +1052,15 @@ bool ShapeScreenImpl::haveErrorMessage()
 
 void ShapeScreenImpl::printStatistics()
 {
-	std::size_t proc_time = boost::chrono::duration_cast<boost::chrono::duration<std::size_t> >(Clock::now() - startTime).count();
+	boost::timer::nanosecond_type proc_time = timer.elapsed().wall;
 	
 	printMessage(INFO, "");
 	printMessage(INFO, "Statistics:");
     printMessage(INFO, " Num. processed Molecules: " + boost::lexical_cast<std::string>(numProcMols));
     printMessage(INFO, " Num. Hit Molecules:       " + boost::lexical_cast<std::string>(numHits));
-    printMessage(INFO, " Processing Time:          " + CmdLineLib::formatTimeDuration(proc_time));
+    printMessage(INFO, " Num. saved Hits:          " + boost::lexical_cast<std::string>(numSavedHits));
+    printMessage(INFO, " Processing Time:          " + CmdLineLib::formatTimeDuration(proc_time / 1000000000) + 
+				 " (" + (boost::format("%.3f") % (double(numProcMols) * 1000000000 / proc_time)).str() + " Mols./s)");
 }
 
 void ShapeScreenImpl::checkOutputFileOptions() const

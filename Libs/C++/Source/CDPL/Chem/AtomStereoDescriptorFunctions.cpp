@@ -284,9 +284,6 @@ Chem::StereoDescriptor Chem::calcStereoDescriptorFromMDLParity(const Atom& atom,
 	if (getHybridizationState(atom) != HybridizationState::SP3)
 		return makeStereoDescriptor(AtomConfiguration::NONE, atom, molgraph);
 
-    if (getAromaticityFlag(atom))
-		return makeStereoDescriptor(AtomConfiguration::NONE, atom, molgraph);
-
 	if ((num_bonds + getImplicitHydrogenCount(atom)) > 4)
 		return makeStereoDescriptor(AtomConfiguration::NONE, atom, molgraph);
 

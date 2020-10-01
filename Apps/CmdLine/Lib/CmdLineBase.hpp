@@ -89,7 +89,7 @@ namespace CmdLineLib
 		void initInfiniteProgress(std::size_t prog_update_interv = 1000, std::size_t max_num_dots = 4);
 
 		void printProgress(const std::string& prefix, double progress);
-		void printInfiniteProgress(const std::string& prefix);
+		void printInfiniteProgress(const std::string& prefix, bool force = false);
 
 		std::string getProgTitleString() const;
 

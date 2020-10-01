@@ -53,6 +53,7 @@
 #include "CDPL/Chem/StereoDescriptor.hpp"
 #include "CDPL/Chem/AtomDictionary.hpp"
 #include "CDPL/Chem/AtomType.hpp"
+#include "CDPL/Chem/AtomConfiguration.hpp"
 #include "CDPL/Chem/BondStereoFlag.hpp"
 #include "CDPL/Chem/ReactionCenterStatus.hpp"
 #include "CDPL/Chem/ReactionRole.hpp"
@@ -129,11 +130,6 @@ bool Chem::MDLDataReader::readMolecule(std::istream& is, Molecule& mol, bool rea
 		readSDFData(is, mol);
 
 	if (multiConfImport) {
-		MultiConfMoleculeInputProcessor::SharedPointer mc_input_proc = getMultiConfInputProcessorParameter(ioBase);
-
-		if (!mc_input_proc)
-			return true;
-
 		MolecularGraph* tgt_molgraph;
 
 		if (atom_idx_offs == 0) {
@@ -153,6 +149,38 @@ bool Chem::MDLDataReader::readMolecule(std::istream& is, Molecule& mol, bool rea
 			confTargetFragment->copyProperties(mol);
 		}
 
+		MultiConfMoleculeInputProcessor::SharedPointer mc_input_proc = getMultiConfInputProcessorParameter(ioBase);
+
+		if (!mc_input_proc) {
+			if (!hasCoordinates(*tgt_molgraph, 3))
+				return true;
+
+			confCoords.resize(tgt_molgraph->getNumAtoms());
+
+			for (MolecularGraph::AtomIterator it = tgt_molgraph->getAtomsBegin(), end = tgt_molgraph->getAtomsEnd(); it != end; ++it) {
+				Atom& atom = *it;
+				Math::Vector3DArray::SharedPointer coords_array(new Math::Vector3DArray());
+		
+				set3DCoordinatesArray(atom, coords_array);
+		
+				coords_array->addElement(get3DCoordinates(atom));
+			}
+
+			while (hasMoreData(is)) {
+				std::istream::pos_type last_spos = is.tellg();
+
+				if (!addConformer(is, *tgt_molgraph)) {
+					is.seekg(last_spos);
+					return true;
+				}
+
+				if (read_data)
+					skipSDFData(is);
+			}
+
+			return true;
+		}
+
 		if (!mc_input_proc->init(*tgt_molgraph))
 			return true;
 
@@ -166,13 +194,13 @@ bool Chem::MDLDataReader::readMolecule(std::istream& is, Molecule& mol, bool rea
 			readMOLHeaderBlock(is, *confTestMolecule);
 			readMOLCTab(is, *confTestMolecule);
 
-			if (read_data)
-				readSDFData(is, *confTestMolecule);
-
 			if (!mc_input_proc->addConformation(*tgt_molgraph, *confTestMolecule)) {
 				is.seekg(last_spos);
 				return true;
 			}
+
+			if (read_data)
+				skipSDFData(is);
 		}
 	}
 
@@ -252,18 +280,6 @@ bool Chem::MDLDataReader::skipMolecule(std::istream& is, bool skip_data)
 		return true;
 	}
 
-	MultiConfMoleculeInputProcessor::SharedPointer mc_input_proc = getMultiConfInputProcessorParameter(ioBase);
-
-	if (!mc_input_proc) {
-		skipMOLHeaderBlock(is);
-		skipMOLCTab(is);
-
-		if (skip_data)
-			skipSDFData(is);
-
-		return true;
-	}
-
 	if (!confTargetMolecule)
 		confTargetMolecule.reset(new BasicMolecule());
 	else
@@ -275,7 +291,27 @@ bool Chem::MDLDataReader::skipMolecule(std::istream& is, bool skip_data)
 	readMOLCTab(is, *confTargetMolecule);
 
 	if (skip_data)
-		readSDFData(is, *confTargetMolecule);
+		skipSDFData(is);
+
+	MultiConfMoleculeInputProcessor::SharedPointer mc_input_proc = getMultiConfInputProcessorParameter(ioBase);
+
+	if (!mc_input_proc) {
+		confCoords.resize(confTargetMolecule->getNumAtoms());
+
+		while (hasMoreData(is)) {
+			std::istream::pos_type last_spos = is.tellg();
+
+			if (!readNextConformer(is, *confTargetMolecule, false)) {
+				is.seekg(last_spos);
+				return true;
+			}
+
+			if (skip_data)
+				skipSDFData(is);
+		}
+		
+		return true;
+	}
 
 	if (!mc_input_proc->init(*confTargetMolecule))
 		return true;
@@ -290,13 +326,13 @@ bool Chem::MDLDataReader::skipMolecule(std::istream& is, bool skip_data)
 		readMOLHeaderBlock(is, *confTestMolecule);
 		readMOLCTab(is, *confTestMolecule);
 
-		if (skip_data)
-			readSDFData(is, *confTestMolecule);
-
 		if (!mc_input_proc->isConformation(*confTargetMolecule, *confTestMolecule)) {
 			is.seekg(last_spos);
 			return true;
 		}
+
+		if (skip_data)
+			skipSDFData(is);
 	}
 
 	return true;
@@ -358,6 +394,150 @@ void Chem::MDLDataReader::init(std::istream& is)
 	multiConfImport     = getMultiConfImportParameter(ioBase);
 
 	is.imbue(std::locale::classic());
+}
+
+bool Chem::MDLDataReader::addConformer(std::istream& is, MolecularGraph& molgraph)
+{
+	if (!readNextConformer(is, molgraph, true))
+		return false;
+
+	addConformation(molgraph, confCoords);
+	return true;
+}
+
+bool Chem::MDLDataReader::readNextConformer(std::istream& is, const MolecularGraph& molgraph, bool save_coords)
+{
+	using namespace MDL::MOLFile;
+	using namespace MDL::MOLFile::CTab;
+
+	skipMOLHeaderBlock(is);
+
+	atomCount = readMDLNumber<std::size_t, 3>(is, "MDLDataReader: error while reading number of atoms from counts-line"); 
+	bondCount = readMDLNumber<std::size_t, 3>(is, "MDLDataReader: error while reading number of bonds from counts-line"); 
+
+	skipMDLChars(is, 27, "MDLDataReader: error while reading counts-line");
+
+	readMDLString(is, 6, tmpString, true, "MDLDataReader: error while reading version string from counts-line");
+
+	skipMDLLines(is, 1, "MDLDataReader: error while reading counts-line");
+
+	if (tmpString == CountsLine::V3000_TAG) {
+		return false;
+/*
+		atomIndexMap.clear();
+
+		readV3000BlockBegin(is, V3000::BLOCK_TYPE_KEY);
+		readV3000DataLine(is);
+
+		std::istringstream line_iss(line);
+
+		if (!(line_iss >> tmpString))
+			throw Base::IOError("MDLDataReader: error while reading ctab V3000 counts-line tag");
+
+		if (tmpString != V3000::CountsLine::COUNTS_TAG)
+			throw Base::IOError("MDLDataReader: missing ctab V3000 counts-line tag");
+
+		if (!(line_iss >> atomCount))
+			throw Base::IOError("MDLDataReader: error while reading number of atoms from ctab V3000 counts-line");
+
+		if (molgraph.getNumAtoms() != atomCount)
+			return false;
+
+		if (!(line_iss >> bondCount))
+			throw Base::IOError("MDLDataReader: error while reading number of bonds from ctab V3000 counts-line");
+
+		if (molgraph.getNumBonds() != bondCount)
+			return false;
+
+		readPastCTabV3000BlockEnd(is);
+*/
+	} else {
+		if (molgraph.getNumAtoms() != atomCount)
+			return false;
+
+		if (molgraph.getNumBonds() != bondCount)
+			return false;
+
+		for (std::size_t i = 0; i < atomCount; i++) {
+			if (!stereoAtoms.empty() || save_coords) {
+				Math::Vector3D& coords = confCoords[i];
+
+				coords(0) = readMDLNumber<double, 10>(is, "MDLDataReader: error while reading atom x coordinate");  
+				coords(1) = readMDLNumber<double, 10>(is, "MDLDataReader: error while reading atom y coordinate");
+				coords(2) = readMDLNumber<double, 10>(is, "MDLDataReader: error while reading atom z coordinate"); 
+
+				skipMDLChars(is, 1, "MDLDataReader: error while reading atom block");
+
+			} else
+				skipMDLChars(is, 1, "MDLDataReader: error while reading atom block");
+
+			readMDLString(is, 3, tmpString, true, "MDLDataReader: error while reading atom symbol", trimStrings);
+
+			if (tmpString != getSymbol(molgraph.getAtom(i)))
+				return false;
+		
+			skipMDLLines(is, 1, "MDLDataReader: error while reading atom block");
+		}	
+
+		for (std::size_t i = 0; i < bondCount; i++) {
+			std::size_t atom1_idx = readMDLNumber<std::size_t, 3>(is, "MDLDataReader: error while reading bond start atom index");
+
+			if (atom1_idx == 0 || atom1_idx > atomCount)
+				return false;
+
+			const Bond& bond = molgraph.getBond(i);
+
+			if (molgraph.getAtomIndex(bond.getBegin()) != (atom1_idx - 1))
+				return false;
+
+			std::size_t atom2_idx = readMDLNumber<std::size_t, 3>(is, "MDLDataReader: error while reading bond target atom index");
+
+			if (atom2_idx == 0 || atom2_idx > atomCount)
+				return false;
+
+			if (molgraph.getAtomIndex(bond.getEnd()) != (atom2_idx - 1))
+				return false;
+
+			switch (readMDLNumber<unsigned int, 3>(is, "MDLDataReader: error while reading bond type specification")) {
+
+				case V2000::BondBlock::TYPE_SINGLE:
+					if (getOrder(bond) != 1)
+						return false;
+					break;
+
+				case V2000::BondBlock::TYPE_DOUBLE:
+					if (getOrder(bond) != 2)
+						return false;
+					break;
+
+				case V2000::BondBlock::TYPE_TRIPLE:
+					if (getOrder(bond) != 3)
+						return false;
+					break;
+			}
+
+			skipMDLLines(is, 1, "MDLDataReader: error while reading bond block");	
+		}
+
+		skipMDLLines(is, atomListCount, "MDLDataReader: error while skipping atom list block");
+		skipMDLLines(is, sTextEntryCount * 2, "MDLDataReader: error while skipping stext block");
+		skipCTabV2000PropertyBlock(is);
+	}
+
+	for (StereoAtomList::const_iterator it = stereoAtoms.begin(), end = stereoAtoms.end(); it != end; ++it) {
+		Atom& atom = **it;
+		const StereoDescriptor& descr = getStereoDescriptor(atom);
+
+		if (descr.getConfiguration() != AtomConfiguration::R && descr.getConfiguration() != AtomConfiguration::S)
+			continue;
+
+		unsigned int calc_config = calcAtomConfiguration(atom, molgraph, descr, confCoords);
+
+		if (calc_config != descr.getConfiguration()) 
+			return false;
+	}
+
+	return true;
 }
 
 void Chem::MDLDataReader::readMOLHeaderBlock(std::istream& is, Molecule& mol)
@@ -3666,16 +3846,10 @@ void Chem::MDLDataReader::addAtomQueryHCountConstraints() const
 
 void Chem::MDLDataReader::convertParities(Molecule& mol) const
 {
-	perceiveComponents(mol, false);
-	perceiveSSSR(mol, false);
-	setRingFlags(mol, false);
 	calcImplicitHydrogenCounts(mol, false);
 	perceiveHybridizationStates(mol, false);
-	setAromaticityFlags(mol, false);
 
-	StereoAtomList::const_iterator end = stereoAtoms.end();
-
-	for (StereoAtomList::const_iterator it = stereoAtoms.begin(); it != end; ++it) {
+	for (StereoAtomList::const_iterator it = stereoAtoms.begin(), end = stereoAtoms.end(); it != end; ++it) {
 		Atom& atom = **it;
 
 		if (getMDLParity(atom) != MDLParity::NONE)

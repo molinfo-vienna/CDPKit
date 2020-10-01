@@ -238,8 +238,10 @@ std::size_t Chem::CDFDataReader::readAtoms(Molecule& mol, Internal::ByteBuffer& 
 	Math::Vector3D coords_3d_val;
 	CDF::SizeType num_atoms;
 
-	bbuf.getInt(num_atoms);
+	bool multi_conf = getMultiConfImportParameter(ctrlParams);
+	std::size_t num_coords_arrays = 0;
 
+	bbuf.getInt(num_atoms);
 	mol.reserveMemoryForAtoms(num_atoms);
 
 	for (std::size_t i = 0; i < num_atoms; i++) {
@@ -326,7 +328,12 @@ std::size_t Chem::CDFDataReader::readAtoms(Molecule& mol, Internal::ByteBuffer& 
 					Math::Vector3DArray::SharedPointer va_ptr(new Math::Vector3DArray());
 
 					getCVectorArrayProperty(prop_spec, *va_ptr, bbuf);
-					set3DCoordinatesArray(atom, va_ptr);
+					
+					if (multi_conf) {
+						set3DCoordinatesArray(atom, va_ptr);
+						num_coords_arrays++;
+					}
+
 					continue;
 				}
 
@@ -366,6 +373,22 @@ std::size_t Chem::CDFDataReader::readAtoms(Molecule& mol, Internal::ByteBuffer& 
 		}
 	}
 
+	if (multi_conf && num_coords_arrays < num_atoms) {
+		for (Molecule::AtomIterator it = mol.getAtomsBegin(), end = mol.getAtomsEnd(); it != end; ++it) {
+			Atom& atom = *it;
+
+			if (has3DCoordinatesArray(atom))
+				continue;
+
+			Math::Vector3DArray::SharedPointer va_ptr(new Math::Vector3DArray());
+
+			if (has3DCoordinates(atom))
+				va_ptr->addElement(get3DCoordinates(atom));
+
+			set3DCoordinatesArray(atom, va_ptr);
+		}
+	}
+
 	return num_atoms;
 }
 
@@ -380,7 +403,6 @@ void Chem::CDFDataReader::readBonds(Molecule& mol, Internal::ByteBuffer& bbuf, s
 	CDF::SizeType num_bonds;
 
 	bbuf.getInt(num_bonds);
-
 	mol.reserveMemoryForBonds(num_bonds);
 
 	for (std::size_t i = 0; i < num_bonds; i++) {
