@@ -39,7 +39,6 @@
 #include "CDPL/Chem/AtomPropertyFlag.hpp"
 #include "CDPL/Chem/BondPropertyFlag.hpp"
 #include "CDPL/Chem/MatchExpression.hpp"
-#include "CDPL/Chem/StereoDescriptor.hpp"
 
 
 namespace CDPL 
@@ -208,7 +207,7 @@ namespace CDPL
 			{
 
 			public:
-				AtomMatchExpression(AutomorphismGroupSearch* parent): parent(parent), stereoDescr(0) {}
+				AtomMatchExpression(AutomorphismGroupSearch* parent): parent(parent) {}
 
 				bool requiresAtomBondMapping() const;
 
@@ -228,14 +227,13 @@ namespace CDPL
 				mutable long                   charge;
 				mutable bool                   aromatic;
 				mutable std::size_t            expBondCount;
-				mutable StereoDescriptor       stereoDescr;
 			};
 	 
 			class BondMatchExpression : public MatchExpression<Bond, MolecularGraph>
 			{
 			
 			public:
-				BondMatchExpression(AutomorphismGroupSearch* parent): parent(parent), stereoDescr(0) {}
+				BondMatchExpression(AutomorphismGroupSearch* parent): parent(parent) {}
 			
 				bool requiresAtomBondMapping() const;
 
@@ -251,7 +249,6 @@ namespace CDPL
 				mutable std::size_t            order;
 				mutable bool                   inRing;
 				mutable bool                   aromatic;
-				mutable StereoDescriptor       stereoDescr;
 			};
 
 			class MolGraphMatchExpression : public MatchExpression<MolecularGraph>

@@ -207,9 +207,6 @@ bool Chem::AutomorphismGroupSearch::AtomMatchExpression::operator()(const Atom& 
 		if (parent->atomPropFlags & AtomPropertyFlag::EXPLICIT_BOND_COUNT)
 			expBondCount = getExplicitBondCount(query_atom, query_molgraph);
 
-		if (parent->atomPropFlags & AtomPropertyFlag::CONFIGURATION)
-			stereoDescr = getStereoDescriptor(query_atom);
-
 		parent->lastQueryAtom = &query_atom;
 	}
 
@@ -244,8 +241,8 @@ bool Chem::AutomorphismGroupSearch::AtomMatchExpression::operator()(const Atom& 
 	if ((parent->atomPropFlags & AtomPropertyFlag::CONFIGURATION) == 0)
 		return true;
 
-	return AtomConfigurationMatchExpression(stereoDescr, query_atom, false, false)(query_atom, query_molgraph, target_atom, target_molgraph, 
-																				   mapping, aux_data);
+	return AtomConfigurationMatchExpression(getStereoDescriptor(query_atom), query_atom, false, false)(query_atom, query_molgraph, target_atom, target_molgraph, 
+																									   mapping, aux_data);
 }
 
 
@@ -267,9 +264,6 @@ bool Chem::AutomorphismGroupSearch::BondMatchExpression::operator()(const Bond& 
  
 		if (parent->bondPropFlags & (BondPropertyFlag::AROMATICITY | BondPropertyFlag::ORDER))
 			aromatic = getAromaticityFlag(query_bond);
-
-		if (parent->bondPropFlags & BondPropertyFlag::CONFIGURATION)
-			stereoDescr = getStereoDescriptor(query_bond);
 
 		parent->lastQueryBond = &query_bond;
 	}
@@ -299,8 +293,8 @@ bool Chem::AutomorphismGroupSearch::BondMatchExpression::operator()(const Bond& 
  	if (!(parent->bondPropFlags & BondPropertyFlag::CONFIGURATION) == 0)
 		return true;
 
-	return BondConfigurationMatchExpression(stereoDescr, query_bond, false, false)(query_bond, query_molgraph, target_bond, target_molgraph, 
-																				   mapping, aux_data);
+	return BondConfigurationMatchExpression(getStereoDescriptor(query_bond), query_bond, false, false)(query_bond, query_molgraph, target_bond, target_molgraph, 
+																									   mapping, aux_data);
 }
 
 
