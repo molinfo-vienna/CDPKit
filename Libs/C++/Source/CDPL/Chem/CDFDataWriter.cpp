@@ -302,6 +302,9 @@ void Chem::CDFDataWriter::outputMolGraphProperties(const MolecularGraph& molgrap
 	if (hasStructureData(molgraph))
 		putStringData(CDF::MolecularGraphProperty::STRUCTURE_DATA, getStructureData(molgraph), bbuf);
 
+	if (hasSSSR(molgraph))
+		putFragmentList(molgraph, CDF::MolecularGraphProperty::SSSR, getSSSR(molgraph), bbuf);
+
 	if (hasHashCode(molgraph))
 		putIntProperty(CDF::MolecularGraphProperty::HASH_CODE, getHashCode(molgraph), bbuf);
 
@@ -388,6 +391,28 @@ void Chem::CDFDataWriter::putStereoDescriptor(const MolecularGraph& molgraph, un
 		bbuf.setIOPointer(old_io_pos);
 		bbuf.putInt(boost::numeric_cast<Base::uint8>(num_bytes), false);
 		bbuf.setIOPointer(new_io_pos);
+	}
+}
+
+void Chem::CDFDataWriter::putFragmentList(const MolecularGraph& molgraph, unsigned int prop_id, const FragmentList::SharedPointer& frag_list, 
+										  Internal::ByteBuffer& bbuf) const
+{
+	std::size_t num_entries = frag_list->getSize();
+
+	putIntProperty(prop_id, boost::numeric_cast<CDF::SizeType>(num_entries), bbuf);
+
+	for (FragmentList::ConstElementIterator it = frag_list->getElementsBegin(), end = frag_list->getElementsEnd(); it != end; ++it) {
+		const Fragment& frag = *it;
+
+		bbuf.putInt(boost::numeric_cast<CDF::SizeType>(frag.getNumAtoms()), false);
+
+		for (Fragment::ConstAtomIterator a_it = frag.getAtomsBegin(), a_end = frag.getAtomsEnd(); a_it != a_end; ++a_it)
+			bbuf.putInt(boost::numeric_cast<CDF::SizeType>(molgraph.getAtomIndex(*a_it)), false);
+
+		bbuf.putInt(boost::numeric_cast<CDF::SizeType>(frag.getNumBonds()), false);
+
+		for (Fragment::ConstBondIterator b_it = frag.getBondsBegin(), b_end = frag.getBondsEnd(); b_it != b_end; ++b_it)
+			bbuf.putInt(boost::numeric_cast<CDF::SizeType>(molgraph.getBondIndex(*b_it)), false);
 	}
 }
 

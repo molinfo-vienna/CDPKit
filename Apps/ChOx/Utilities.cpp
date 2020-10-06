@@ -125,8 +125,13 @@ void ChOx::initData(CDPL::Chem::Molecule& mol)
 	for (Molecule::AtomIterator it = mol.getAtomsBegin(), end = mol.getAtomsEnd(); it != end; ++it) {
 		Atom& atom = *it;
 
-		if (getStereoCenterFlag(atom) && (!hasStereoDescriptor(atom) || getStereoDescriptor(atom).getConfiguration() == AtomConfiguration::UNDEF)) 
+		if (!getStereoCenterFlag(atom)) 
+			setStereoDescriptor(atom, StereoDescriptor(AtomConfiguration::NONE));
+		
+		else if ((!hasStereoDescriptor(atom) || getStereoDescriptor(atom).getConfiguration() == AtomConfiguration::UNDEF) &&
+				 !isInvertibleNitrogen(atom, mol) && !isAmideNitrogen(atom, mol, false, false) && !isPlanarNitrogen(atom, mol)) 
 			setStereoDescriptor(atom, calcStereoDescriptor(atom, mol, 1));
+
 	}
 
 	for (Molecule::BondIterator it = mol.getBondsBegin(), end = mol.getBondsEnd(); it != end; ++it) {

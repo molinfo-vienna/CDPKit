@@ -107,6 +107,7 @@ namespace CDPL
 				const unsigned int STRUCTURE_DATA           = 5;
 				const unsigned int HASH_CODE                = 6;
 				const unsigned int CONFORMER_ENERGIES       = 7;
+				const unsigned int SSSR                     = 8;
 			}
 
 			namespace ReactionProperty

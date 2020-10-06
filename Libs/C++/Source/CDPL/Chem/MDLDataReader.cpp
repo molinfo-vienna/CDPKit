@@ -155,8 +155,6 @@ bool Chem::MDLDataReader::readMolecule(std::istream& is, Molecule& mol, bool rea
 			if (!hasCoordinates(*tgt_molgraph, 3))
 				return true;
 
-			confCoords.resize(tgt_molgraph->getNumAtoms());
-
 			for (MolecularGraph::AtomIterator it = tgt_molgraph->getAtomsBegin(), end = tgt_molgraph->getAtomsEnd(); it != end; ++it) {
 				Atom& atom = *it;
 				Math::Vector3DArray::SharedPointer coords_array(new Math::Vector3DArray());
@@ -296,7 +294,8 @@ bool Chem::MDLDataReader::skipMolecule(std::istream& is, bool skip_data)
 	MultiConfMoleculeInputProcessor::SharedPointer mc_input_proc = getMultiConfInputProcessorParameter(ioBase);
 
 	if (!mc_input_proc) {
-		confCoords.resize(confTargetMolecule->getNumAtoms());
+		if (!hasCoordinates(*confTargetMolecule, 3))
+			return true;
 
 		while (hasMoreData(is)) {
 			std::istream::pos_type last_spos = is.tellg();
@@ -410,6 +409,9 @@ bool Chem::MDLDataReader::readNextConformer(std::istream& is, const MolecularGra
 	using namespace MDL::MOLFile;
 	using namespace MDL::MOLFile::CTab;
 
+	if (!stereoAtoms.empty() || save_coords)
+		confCoords.resize(molgraph.getNumAtoms());
+
 	skipMOLHeaderBlock(is);
 
 	atomCount = readMDLNumber<std::size_t, 3>(is, "MDLDataReader: error while reading number of atoms from counts-line"); 
@@ -422,9 +424,7 @@ bool Chem::MDLDataReader::readNextConformer(std::istream& is, const MolecularGra
 	skipMDLLines(is, 1, "MDLDataReader: error while reading counts-line");
 
 	if (tmpString == CountsLine::V3000_TAG) {
-		return false;
-/*
-		atomIndexMap.clear();
+		using namespace V3000;
 
 		readV3000BlockBegin(is, V3000::BLOCK_TYPE_KEY);
 		readV3000DataLine(is);
@@ -449,8 +449,126 @@ bool Chem::MDLDataReader::readNextConformer(std::istream& is, const MolecularGra
 		if (molgraph.getNumBonds() != bondCount)
 			return false;
 
+		atomIndexMap.clear();
+
+		readV3000BlockBegin(is, AtomBlock::BLOCK_TYPE_KEY);
+
+		for (std::size_t i = 0; i < atomCount; i++) {
+			readV3000DataLine(is);
+
+			std::istringstream line_iss(line);
+			std::size_t atom_index;
+
+			if (!(line_iss >> atom_index))
+				throw Base::IOError("MDLDataReader: error while reading ctab V3000 atom index");
+
+			if (strictErrorChecking && atom_index == 0)
+				throw Base::IOError("MDLDataReader: invalid ctab V3000 atom index - has to be > 0");
+
+			AtomIndexMap::iterator lb = atomIndexMap.lower_bound(atom_index);
+
+			if (lb != atomIndexMap.end() && !(atomIndexMap.key_comp()(atom_index, lb->first)))
+				throw Base::IOError("MDLDataReader: found non-unique ctab V3000 atom index");
+
+			atomIndexMap.insert(lb, AtomIndexMap::value_type(atom_index, i));
+
+			readCTabV3000PropertyStringValue(line_iss, tmpString);
+
+			if (trimStrings)
+				Internal::trimString(tmpString);
+
+			if (tmpString != getSymbol(molgraph.getAtom(i)))
+				return false;
+
+			if (!stereoAtoms.empty() || save_coords) {
+				Math::Vector3D& coords = confCoords[i];
+
+				if (!(line_iss >> coords(0)))
+					throw Base::IOError("MDLDataReader: error while reading ctab V3000 atom x coordinate");
+
+				if (!(line_iss >> coords(1)))
+					throw Base::IOError("MDLDataReader: error while reading ctab V3000 atom y coordinate");
+
+				if (!(line_iss >> coords(2)))
+					throw Base::IOError("MDLDataReader: error while reading ctab V3000 atom z coordinate");
+
+			}
+		}
+
+		readV3000BlockEnd(is, AtomBlock::BLOCK_TYPE_KEY);
+
+		readV3000BlockBegin(is, BondBlock::BLOCK_TYPE_KEY);
+
+		for (std::size_t i = 0; i < bondCount; i++) {
+			readV3000DataLine(is);
+
+			std::istringstream line_iss(line);
+
+			if (!(line_iss >> tmpString))
+				throw Base::IOError("MDLDataReader: error while reading ctab V3000 bond index");
+
+			unsigned int bond_type;
+
+			if (!(line_iss >> bond_type))
+				throw Base::IOError("MDLDataReader: error while reading ctab V3000 bond type property");
+
+			const Bond& bond = molgraph.getBond(i);
+
+			switch (bond_type) {
+
+				case BondBlock::TYPE_SINGLE:
+					if (getOrder(bond) != 1)
+						return false;
+					break;
+
+				case BondBlock::TYPE_DOUBLE:
+					if (getOrder(bond) != 2)
+						return false;
+					break;
+
+				case BondBlock::TYPE_TRIPLE:
+					if (getOrder(bond) != 3)
+						return false;
+					break;
+			}
+
+			std::size_t atom1_index;
+
+			if (!(line_iss >> atom1_index))
+				throw Base::IOError("MDLDataReader: error while reading ctab V3000 bond start atom index");
+
+			if (strictErrorChecking && atom1_index == 0)
+				throw Base::IOError("MDLDataReader: invalid ctab V3000 bond start atom index - has to be > 0");
+
+			AtomIndexMap::const_iterator mol_atom1_index_it = atomIndexMap.find(atom1_index);
+	
+			if (mol_atom1_index_it == atomIndexMap.end())
+				throw Base::IOError("MDLDataReader: ctab V3000 bond start atom with specified index does not exist");
+
+			if (molgraph.getAtomIndex(bond.getBegin()) != mol_atom1_index_it->second)
+				return false;
+
+			std::size_t atom2_index;
+
+			if (!(line_iss >> atom2_index))
+				throw Base::IOError("MDLDataReader: error while reading ctab V3000 bond target atom index");
+
+			if (strictErrorChecking && atom2_index == 0)
+				throw Base::IOError("MDLDataReader: invalid ctab V3000 bond target atom index - has to be > 0");
+
+			AtomIndexMap::const_iterator mol_atom2_index_it = atomIndexMap.find(atom2_index);
+	
+			if (mol_atom2_index_it == atomIndexMap.end())
+				throw Base::IOError("MDLDataReader: ctab V3000 bond target atom with specified index does not exist");
+
+			if (molgraph.getAtomIndex(bond.getEnd()) != mol_atom2_index_it->second)
+				return false;
+		}
+
+		readV3000BlockEnd(is, BondBlock::BLOCK_TYPE_KEY);
+
 		readPastCTabV3000BlockEnd(is);
-*/
+
 	} else {
 		if (molgraph.getNumAtoms() != atomCount)
 			return false;
@@ -469,7 +587,7 @@ bool Chem::MDLDataReader::readNextConformer(std::istream& is, const MolecularGra
 				skipMDLChars(is, 1, "MDLDataReader: error while reading atom block");
 
 			} else
-				skipMDLChars(is, 1, "MDLDataReader: error while reading atom block");
+				skipMDLChars(is, 30, "MDLDataReader: error while reading atom block");
 
 			readMDLString(is, 3, tmpString, true, "MDLDataReader: error while reading atom symbol", trimStrings);
 
@@ -1042,7 +1160,7 @@ void Chem::MDLDataReader::readCTabV2000AtomParity(std::istream& is, Atom& atom)
 
 	setMDLParity(atom, parity);
 
-	if (!ignoreParity)
+	if (!ignoreParity && parity != MDLParity::NONE)
 		stereoAtoms.push_back(&atom);
 }
 

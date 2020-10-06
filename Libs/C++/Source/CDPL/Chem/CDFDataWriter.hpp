@@ -34,6 +34,7 @@
 
 #include "CDPL/Chem/APIPrefix.hpp"
 #include "CDPL/Chem/StringDataBlock.hpp"
+#include "CDPL/Chem/FragmentList.hpp"
 
 #include "CDPL/Internal/CDFDataWriterBase.hpp"
 #include "CDPL/Internal/ByteBuffer.hpp"
@@ -100,6 +101,9 @@ namespace CDPL
 
 			void putStereoDescriptor(const MolecularGraph& molgraph, 
 									 unsigned int prop_id, const StereoDescriptor& descr, Internal::ByteBuffer& bbuf) const;
+
+			void putFragmentList(const MolecularGraph& molgraph, unsigned int prop_id, const FragmentList::SharedPointer& frag_list, 
+								 Internal::ByteBuffer& bbuf) const;
 
 			void putStringData(unsigned int prop_id, const StringDataBlock::SharedPointer& sdata, Internal::ByteBuffer& bbuf) const;
 

@@ -536,6 +536,10 @@ void Chem::CDFDataReader::readMoleculeProperties(Molecule& mol, Internal::ByteBu
 				setStructureData(mol, readStringData(prop_spec, bbuf));
 				continue;
 
+			case CDF::MolecularGraphProperty::SSSR:
+				setSSSR(mol, readFragmentList(mol, prop_spec, bbuf));
+				continue;
+
 			case CDF::MolecularGraphProperty::HASH_CODE:
 				getIntProperty(prop_spec, uint64_val, bbuf);
 				setHashCode(mol, uint64_val);
@@ -651,16 +655,55 @@ void Chem::CDFDataReader::setStereoDescriptor(T& obj, const Molecule& mol, const
 	}
 }
 
+Chem::FragmentList::SharedPointer Chem::CDFDataReader::readFragmentList(const Molecule& mol, CDF::PropertySpec prop_spec, Internal::ByteBuffer& bbuf) const
+{
+	FragmentList::SharedPointer frag_list(new FragmentList());
+	CDF::SizeType num_entries;
+
+	getIntProperty(prop_spec, num_entries, bbuf);
+
+	for (CDF::SizeType i = 0; i < num_entries; i++) {
+		Fragment::SharedPointer frag(new Fragment());
+		CDF::SizeType num_atoms;
+
+		bbuf.getInt(num_atoms);
+		
+		for (CDF::SizeType j = 0; j < num_atoms; j++) {
+			CDF::SizeType atom_idx;
+
+			bbuf.getInt(atom_idx);
+
+			frag->addAtom(mol.getAtom(atom_idx));
+		}
+
+		CDF::SizeType num_bonds;
+
+		bbuf.getInt(num_bonds);
+		
+		for (CDF::SizeType j = 0; j < num_bonds; j++) {
+			CDF::SizeType bond_idx;
+
+			bbuf.getInt(bond_idx);
+
+			frag->addBond(mol.getBond(bond_idx));
+		}
+
+		frag_list->addElement(frag);
+	}
+
+	return frag_list;
+}
+
 Chem::StringDataBlock::SharedPointer Chem::CDFDataReader::readStringData(CDF::PropertySpec prop_spec, Internal::ByteBuffer& bbuf) const
 {
 	StringDataBlock::SharedPointer sdata(new StringDataBlock());
-	std::size_t num_entries;
+	CDF::SizeType num_entries;
 
 	getIntProperty(prop_spec, num_entries, bbuf);
 
 	std::string header, data;
 
-	for (std::size_t i = 0; i < num_entries; i++) {
+	for (CDF::SizeType i = 0; i < num_entries; i++) {
 		getString(header, bbuf);
 		getString(data, bbuf);
 

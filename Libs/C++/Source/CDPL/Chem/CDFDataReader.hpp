@@ -36,6 +36,7 @@
 #include "CDPL/Chem/APIPrefix.hpp"
 #include "CDPL/Chem/CDFFormatData.hpp"
 #include "CDPL/Chem/StringDataBlock.hpp"
+#include "CDPL/Chem/FragmentList.hpp"
 
 #include "CDPL/Internal/CDFDataReaderBase.hpp"
 #include "CDPL/Internal/ByteBuffer.hpp"
@@ -116,6 +117,7 @@ namespace CDPL
 			bool readExternalProperties(unsigned int handler_id, Bond& bond, Internal::ByteBuffer& data);
 			bool readExternalProperties(unsigned int handler_id, Molecule& mol, Internal::ByteBuffer& data);
 
+			FragmentList::SharedPointer readFragmentList(const Molecule& mol, CDF::PropertySpec prop_spec, Internal::ByteBuffer& bbuf) const;
 			StringDataBlock::SharedPointer readStringData(CDF::PropertySpec prop_spec, Internal::ByteBuffer& bbuf) const;
 
 			void readStereoDescriptor(CDF::PropertySpec prop_spec, CDFStereoDescr& descr, Internal::ByteBuffer& data) const;

@@ -36,11 +36,14 @@
 #include "CDPL/Chem/MultiConfMoleculeInputProcessor.hpp"
 #include "CDPL/Chem/ControlParameterFunctions.hpp"
 #include "CDPL/Chem/MolecularGraphFunctions.hpp"
+#include "CDPL/Chem/AtomContainerFunctions.hpp"
 #include "CDPL/Chem/AtomFunctions.hpp"
 #include "CDPL/Chem/BondFunctions.hpp"
 #include "CDPL/Chem/Entity3DFunctions.hpp"
 #include "CDPL/Chem/AtomType.hpp"
+#include "CDPL/Chem/AtomConfiguration.hpp"
 #include "CDPL/Chem/AtomDictionary.hpp"
+#include "CDPL/Chem/StereoDescriptor.hpp"
 #include "CDPL/Base/DataIOBase.hpp"
 #include "CDPL/Base/Exceptions.hpp"
 #include "CDPL/Internal/StringUtilities.hpp"
@@ -117,11 +120,6 @@ bool Chem::MOL2DataReader::readMolecule(std::istream& is, Molecule& mol)
 	doReadMolecule(is, mol);
 
 	if (multiConfImport) {
-		MultiConfMoleculeInputProcessor::SharedPointer mc_input_proc = getMultiConfInputProcessorParameter(ioBase);
-
-		if (!mc_input_proc)
-			return true;
-
 		MolecularGraph* tgt_molgraph;
 
 		if (atom_idx_offs == 0) {
@@ -139,6 +137,32 @@ bool Chem::MOL2DataReader::readMolecule(std::istream& is, Molecule& mol)
 			std::for_each(mol.getBondsBegin() + bond_idx_offs, mol.getBondsEnd(), boost::bind(&Fragment::addBond, confTargetFragment.get(), _1));
 			
 			confTargetFragment->copyProperties(mol);
+		}
+
+		MultiConfMoleculeInputProcessor::SharedPointer mc_input_proc = getMultiConfInputProcessorParameter(ioBase);
+
+		if (!mc_input_proc) {
+			for (MolecularGraph::AtomIterator it = tgt_molgraph->getAtomsBegin(), end = tgt_molgraph->getAtomsEnd(); it != end; ++it) {
+				Atom& atom = *it;
+				Math::Vector3DArray::SharedPointer coords_array(new Math::Vector3DArray());
+		
+				set3DCoordinatesArray(atom, coords_array);
+		
+				coords_array->addElement(get3DCoordinates(atom));
+			}
+
+			extractStereoAtoms(*tgt_molgraph);
+
+			while (hasMoreData(is)) {
+				std::istream::pos_type last_spos = is.tellg();
+
+				if (!addConformer(is, *tgt_molgraph)) {
+					is.seekg(last_spos);
+					return true;
+				}
+			}
+
+			return true;
 		}
 
 		if (!mc_input_proc->init(*tgt_molgraph))
@@ -172,17 +196,29 @@ bool Chem::MOL2DataReader::skipMolecule(std::istream& is)
 	if (!multiConfImport)
 		return true;
 	
-	MultiConfMoleculeInputProcessor::SharedPointer mc_input_proc = getMultiConfInputProcessorParameter(ioBase);
-
-	if (!mc_input_proc)
-		return true;
-
 	if (!confTargetMolecule)
 		confTargetMolecule.reset(new BasicMolecule());
 	else
 		confTargetMolecule->clear();
 
 	doReadMolecule(is, *confTargetMolecule);
+
+	MultiConfMoleculeInputProcessor::SharedPointer mc_input_proc = getMultiConfInputProcessorParameter(ioBase);
+
+	if (!mc_input_proc) {
+		extractStereoAtoms(*confTargetMolecule);
+
+		while (hasMoreData(is)) {
+			std::istream::pos_type last_spos = is.tellg();
+
+			if (!readNextConformer(is, *confTargetMolecule, false)) {
+				is.seekg(last_spos);
+				return true;
+			}
+		}
+
+		return true;
+	}
 
 	if (!mc_input_proc->init(*confTargetMolecule))
 		return true;
@@ -249,7 +285,7 @@ void Chem::MOL2DataReader::readMoleculeRecord(std::istream& is, Molecule& mol)
 // Atom count
 
 	if (!readDataLine(is))
-		throw Base::IOError("MOL2DataReader: error while reading count line: unexpected end of molecule record");
+		throw Base::IOError("MOL2DataReader: error while reading counts line: unexpected end of molecule record");
 
 	lineTokenizer.assign(dataLine);
 
@@ -613,6 +649,258 @@ void Chem::MOL2DataReader::readSubstructSection(std::istream& is, Molecule& mol)
 
 			if (!subtype.empty())
 				setMOL2SubstructureSubtype(*atoms.first->second, subtype);
+		}
+	}
+}
+
+bool Chem::MOL2DataReader::addConformer(std::istream& is, MolecularGraph& molgraph)
+{
+	if (!readNextConformer(is, molgraph, true))
+		return false;
+
+	addConformation(molgraph, confCoords);
+	return true;
+}
+
+bool Chem::MOL2DataReader::readNextConformer(std::istream& is, const MolecularGraph& molgraph, bool save_coords)
+{
+	using namespace Internal;
+
+	if (!skipInputToRTI(is, MOL2::MOLECULE_RTI, true))
+		return false;
+
+	if (!readDataLine(is))
+		throw Base::IOError("MOL2DataReader: error while reading molecule name: unexpected end of molecule record");
+
+	if (!readDataLine(is))
+		throw Base::IOError("MOL2DataReader: error while reading counts line: unexpected end of molecule record");
+
+	lineTokenizer.assign(dataLine);
+
+	Tokenizer::iterator t_it = lineTokenizer.begin();
+	Tokenizer::iterator t_end = lineTokenizer.end();
+
+	if (t_it == t_end)
+		throw Base::IOError("MOL2DataReader: missing number of atoms in molecule record");
+
+	if (molAtomCount != parseNumber<std::size_t>(*t_it, "MOL2DataReader: error while parsing number of molecule atoms"))
+		return false;
+
+	if (++t_it != t_end) { 
+		if (molBondCount != parseNumber<std::size_t>(*t_it, "MOL2DataReader: error while parsing number of molecule bonds"))
+			return false;
+
+	} else if (molBondCount != 0) 
+		return false;
+
+	if (molAtomCount == 0)
+		return true;
+
+	if (!skipInputToRTI(is, MOL2::ATOM_RTI, true))
+		throw Base::IOError("MOL2DataReader: error while looking for molecule atom section: unexpected end of input");
+
+	atomIDsToIndex.clear();
+
+	if (!stereoAtoms.empty() || save_coords)
+		confCoords.resize(molAtomCount);
+
+	std::string tmp_string;
+
+	for (std::size_t i = 0; i < molAtomCount; i++) {
+		if (!readDataLine(is))
+			throw Base::IOError("MOL2DataReader: error while reading atom data line: unexpected end of input");
+
+		lineTokenizer.assign(dataLine);
+
+		Tokenizer::iterator t_it = lineTokenizer.begin();
+		Tokenizer::iterator t_end = lineTokenizer.end();
+
+// Atom ID
+
+		if (t_it == t_end)
+			throw Base::IOError("MOL2DataReader: missing atom ID number");
+
+		std::size_t id = parseNumber<std::size_t>(*t_it, "MOL2DataReader: error while parsing atom ID number");
+		
+		if (strictErrorChecking && atomIDsToIndex.find(id) != atomIDsToIndex.end())
+			throw Base::IOError("MOL2DataReader: found multiple atoms with ID " + boost::lexical_cast<std::string>(id));
+
+		atomIDsToIndex.insert(AtomIDToIndexMap::value_type(id, i));
+
+// Atom name
+	
+		if (++t_it == t_end)
+			throw Base::IOError("MOL2DataReader: missing atom name");
+
+// Atom coordinates
+
+		if (!stereoAtoms.empty() || save_coords) {
+			Math::Vector3D::Pointer coords = confCoords[i].getData();
+
+			if (++t_it == t_end)
+				throw Base::IOError("MOL2DataReader: missing atom x-coordinate");
+
+			coords[0] = parseNumber<double>(*t_it, "MOL2DataReader: error while parsing atom x-coordinate");
+
+			if (++t_it == t_end)
+				throw Base::IOError("MOL2DataReader: missing atom y-coordinate");
+
+			coords[1] = parseNumber<double>(*t_it, "MOL2DataReader: error while parsing atom y-coordinate");
+
+			if (++t_it == t_end)
+				throw Base::IOError("MOL2DataReader: missing atom z-coordinate");
+
+			coords[2] = parseNumber<double>(*t_it, "MOL2DataReader: error while parsing atom z-coordinate");
+
+		} else {
+			if (++t_it == t_end)
+				throw Base::IOError("MOL2DataReader: missing atom x-coordinate");
+
+			if (++t_it == t_end)
+				throw Base::IOError("MOL2DataReader: missing atom y-coordinate");
+
+			if (++t_it == t_end)
+				throw Base::IOError("MOL2DataReader: missing atom z-coordinate");
+		}
+
+// Atom type
+
+		if (++t_it == t_end)
+			throw Base::IOError("MOL2DataReader: missing Sybyl atom type");
+
+		const Atom& atom = molgraph.getAtom(i);
+
+		tmp_string = *t_it;
+		boost::to_lower(tmp_string);
+
+		StringToTypeMap::const_iterator it = stringToAtomTypeMap.find(tmp_string);
+
+		if (it == stringToAtomTypeMap.end()) {
+			if (!tmp_string.empty())
+				tmp_string[0] = std::toupper(tmp_string[0], std::locale::classic());		
+
+			if (getType(atom) != AtomDictionary::getType(tmp_string))
+				return false;
+
+		} else {
+			if (getSybylType(atom) != it->second)
+				return false;
+		}
+	}
+
+	if (molBondCount > 0) {
+		if (!skipInputToRTI(is, MOL2::BOND_RTI, true))
+			throw Base::IOError("MOL2DataReader: error while looking for molecule bond section: unexpected end of input");
+
+		for (std::size_t i = 0; i < molBondCount; i++) {
+			if (!readDataLine(is))
+				throw Base::IOError("MOL2DataReader: error while reading bond data line: unexpected end of input");
+
+			lineTokenizer.assign(dataLine);
+
+			Tokenizer::iterator t_it = lineTokenizer.begin();
+			Tokenizer::iterator t_end = lineTokenizer.end();
+
+// Bond ID
+
+			if (t_it == t_end)
+				throw Base::IOError("MOL2DataReader: missing bond ID number");
+
+// Bond atom IDs
+
+			if (++t_it == t_end)
+				throw Base::IOError("MOL2DataReader: missing atom ID of bond origin");
+
+			std::size_t atom1_id = parseNumber<std::size_t>(*t_it, "MOL2DataReader: error while parsing bond origin atom ID");
+			AtomIDToIndexMap::const_iterator idx_it = atomIDsToIndex.find(atom1_id);
+
+			if (idx_it == atomIDsToIndex.end())
+				throw Base::IOError("MOL2DataReader: bond origin atom with ID '" + *t_it + "' does not exist");
+
+			const Bond& bond = molgraph.getBond(i);
+			
+			if (molgraph.getAtomIndex(bond.getBegin()) != idx_it->second)
+				return false;
+
+			if (++t_it == t_end)
+				throw Base::IOError("MOL2DataReader: missing atom ID of bond target");
+
+			std::size_t atom2_id = parseNumber<std::size_t>(*t_it, "MOL2DataReader: error while parsing bond target atom ID");
+			idx_it = atomIDsToIndex.find(atom2_id);
+
+			if (idx_it == atomIDsToIndex.end())
+				throw Base::IOError("MOL2DataReader: bond target atom with ID '" + *t_it + "' does not exist");
+
+			if (molgraph.getAtomIndex(bond.getEnd()) != idx_it->second)
+				return false;
+
+// Bond type
+
+			if (++t_it == t_end)
+				throw Base::IOError("MOL2DataReader: missing Sybyl bond type");
+
+			tmp_string = *t_it;
+			boost::to_lower(tmp_string);
+
+			unsigned int bond_type = SybylBondType::UNKNOWN;
+			StringToTypeMap::const_iterator it = stringToBondTypeMap.find(tmp_string);
+
+			if (it != stringToBondTypeMap.end())
+				bond_type = it->second;
+
+			else if (strictErrorChecking)
+				throw Base::IOError("MOL2DataReader: unknown Sybyl bond type");
+
+			if (bond_type == SybylBondType::NOT_CONNECTED)
+				continue;
+
+			if (getSybylType(bond) != bond_type)
+				return false;
+		}
+	}
+
+	for (StereoAtomList::const_iterator it = stereoAtoms.begin(), end = stereoAtoms.end(); it != end; ++it) {
+		const Atom& atom = **it;
+		const StereoDescriptor& descr = getStereoDescriptor(atom);
+		unsigned int calc_config = calcAtomConfiguration(atom, molgraph, descr, confCoords);
+
+		if (calc_config != descr.getConfiguration()) 
+			return false;
+	}
+
+	return true;
+}
+
+void Chem::MOL2DataReader::extractStereoAtoms(MolecularGraph& molgraph)
+{
+	stereoAtoms.clear();
+
+	perceiveSSSR(molgraph, true);
+	setRingFlags(molgraph, false);
+	calcImplicitHydrogenCounts(molgraph, false);
+	perceiveHybridizationStates(molgraph, false);
+	setAromaticityFlags(molgraph, false);
+	calcCIPPriorities(molgraph, false);
+
+	perceiveAtomStereoCenters(molgraph, false, true, false);
+
+	for (MolecularGraph::AtomIterator it = molgraph.getAtomsBegin(), end = molgraph.getAtomsEnd(); it != end; ++it) {
+		Atom& atom = *it;
+
+		if (!getStereoCenterFlag(atom)) {
+			setStereoDescriptor(atom, StereoDescriptor(AtomConfiguration::NONE));
+			continue;
+		} 
+		
+		if ((!hasStereoDescriptor(atom) || getStereoDescriptor(atom).getConfiguration() == AtomConfiguration::UNDEF) &&
+			!isInvertibleNitrogen(atom, molgraph) && !isAmideNitrogen(atom, molgraph, false, false) && !isPlanarNitrogen(atom, molgraph)) { 
+
+			StereoDescriptor descr = calcStereoDescriptor(atom, molgraph, 3);
+
+			setStereoDescriptor(atom, descr);
+
+			if (descr.getConfiguration() == AtomConfiguration::R || descr.getConfiguration() == AtomConfiguration::R)
+				stereoAtoms.push_back(&atom);
 		}
 	}
 }

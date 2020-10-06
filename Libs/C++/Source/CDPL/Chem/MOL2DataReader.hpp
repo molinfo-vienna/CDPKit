@@ -30,12 +30,14 @@
 #include <iosfwd>
 #include <string>
 #include <cstddef>
+#include <vector>
 
 #include <boost/unordered_map.hpp>
 #include <boost/tokenizer.hpp>
 
 #include "CDPL/Chem/Molecule.hpp"
 #include "CDPL/Chem/Fragment.hpp"
+#include "CDPL/Math/VectorArray.hpp"
 
 
 namespace CDPL 
@@ -70,6 +72,11 @@ namespace CDPL
 			void readBondSection(std::istream& is, Molecule& mol);
 			void readSubstructSection(std::istream& is, Molecule& mol);
 
+			bool addConformer(std::istream& is, MolecularGraph& molgraph);
+			bool readNextConformer(std::istream& is, const MolecularGraph& molgraph, bool save_coords);
+
+			void extractStereoAtoms(MolecularGraph& molgraph);
+
 			bool readInputLine(std::istream& is);
 			bool readDataLine(std::istream& is);
 
@@ -78,6 +85,7 @@ namespace CDPL
 			typedef boost::unordered_map<std::size_t, std::size_t> AtomIDToIndexMap;
 			typedef boost::unordered_multimap<std::size_t, Atom*> SubstructIDToAtomMap;
             typedef boost::tokenizer<boost::char_separator<char> > Tokenizer;
+			typedef std::vector<const Atom*> StereoAtomList;
 
 			const Base::DataIOBase& ioBase;
 			bool                    strictErrorChecking;
@@ -94,6 +102,8 @@ namespace CDPL
 			Fragment::SharedPointer confTargetFragment;
 			Molecule::SharedPointer confTargetMolecule;
 			Molecule::SharedPointer confTestMolecule;
+			Math::Vector3DArray     confCoords;
+			StereoAtomList          stereoAtoms;
 		};
     }
 }
