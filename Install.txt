@@ -1,10 +1,11 @@
 Installation Instructions
 *************************
 
-For a successful build of CDPKit the following dependencies
-need to be installed on the build host:
+For a successful build of CDPKit the following packages
+have to be installed on the build host:
 
-- cmake3 (V >= 3.13.1)
+- a c++11 compliant compiler (mandatory)
+- cmake
 - Boost-devel C++ libraries (V >= 1.52, mandatory)
 - Qt5-devel (optional)
 - Cairo-devel (V >= 1.14, optional)
@@ -17,15 +18,15 @@ build makefiles. The makefiles are generated as follows
 
 > mkdir <BUILD-DIR>
 > cd <BUILD-DIR>
-> cmake3 <CDPKIT-SOURCE-DIR>
+> cmake <CDPKIT-SOURCE-DIR>
 
 If the makefiles have been generated without errors, invoking
 'make' from within <BUILD-DIR> starts the actual build process: 
 
 > make
 
-Building CDPKit should proceed without any issues at least on RHEL 7 based systems 
-(other current systems should also work). 
+Building CDPKit should proceed without any issues at least on RHEL 7/8 based systems 
+(should also work on other current systems with minor configuration tweaks). 
 
 If the build finished without errors
 
@@ -34,4 +35,4 @@ If the build finished without errors
 will install CDPKit in the /opt directory of your system (please refer to
 the CMake documentation for how to change the default path).
 
-Enjoy!!!!!
+Have fun !!!!!

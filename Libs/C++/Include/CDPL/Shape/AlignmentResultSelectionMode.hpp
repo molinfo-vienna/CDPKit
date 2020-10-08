@@ -1,7 +1,7 @@
 /* -*- mode: c++; c-basic-offset: 4; tab-width: 4; indent-tabs-mode: t -*- */
 
 /* 
- * NamespaceExports.hpp 
+ * AlignmentResultSelectionMode.hpp 
  *
  * This file is part of the Chemical Data Processing Toolkit
  *
@@ -23,16 +23,40 @@
  * Boston, MA 02111-1307, USA.
  */
 
+/**
+ * \file
+ * \brief Definition of constants in namespace CDPL::Shape::AlignmentResultSelectionMode.
+ */
 
-#ifndef CDPL_PYTHON_SHAPE_NAMESPACEEXPORTS_HPP
-#define CDPL_PYTHON_SHAPE_NAMESPACEEXPORTS_HPP
+#ifndef CDPL_SHAPE_ALIGNMENTRESULTSELECTIONMODE_HPP
+#define CDPL_SHAPE_ALIGNMENTRESULTSELECTIONMODE_HPP
 
 
-namespace CDPLPythonShape
+namespace CDPL 
 {
 
-	void exportSymmetryClasses();
-	void exportAlignmentResultSelectionModes();
+    namespace Shape
+    {
+
+	/**
+	 * \addtogroup CDPL_SHAPE_CONSTANTS
+	 * @{
+	 */
+	
+	namespace AlignmentResultSelectionMode
+	{
+			
+	    const unsigned int ALL                        = 0;
+	    const unsigned int BEST_PER_SHAPE_COMBINATION = 1;
+	    const unsigned int BEST_PER_REFERENCE_SHAPE   = 2;
+	    const unsigned int BEST_PER_REFERENCE_SET     = 3;
+	    const unsigned int BEST_OVERALL               = 4;
+	}
+
+	/**
+	 * @}
+	 */
+    }
 }
 
-#endif // CDPL_PYTHON_SHAPE_NAMESPACEEXPORTS_HPP
+#endif // CDPL_SHAPE_ALIGNMENTRESULTSELECTIONMODE_HPP

@@ -42,7 +42,7 @@ void CDPLPythonShape::exportGaussianShapeAlignment()
 	typedef void (Shape::GaussianShapeAlignment::*SetBoolFunc)(bool);
 	typedef bool (Shape::GaussianShapeAlignment::*GetBoolFunc)() const;
 
-    python::scope scope = python::class_<Shape::GaussianShapeAlignment, Shape::GaussianShapeAlignment::SharedPointer, boost::noncopyable>(
+    python::class_<Shape::GaussianShapeAlignment, Shape::GaussianShapeAlignment::SharedPointer, boost::noncopyable>(
 		"GaussianShapeAlignment", python::no_init)
 		.def(python::init<>(python::arg("self")))
 		.def(python::init<const Shape::GaussianShape&>((python::arg("self"), python::arg("ref_shape")))
@@ -204,11 +204,4 @@ void CDPLPythonShape::exportGaussianShapeAlignment()
 					  &Shape::GaussianShapeFunction::setDistanceCutoff)
 		.add_property("numReferenceShapes", &Shape::GaussianShapeAlignment::getNumReferenceShapes);
 
-	python::enum_<Shape::GaussianShapeAlignment::ResultSelectionMode>("ResultSelectionMode")
-		.value("ALL", Shape::GaussianShapeAlignment::ALL)
-		.value("BEST_PER_SHAPE_COMBINATION", Shape::GaussianShapeAlignment::BEST_PER_SHAPE_COMBINATION)
-		.value("BEST_PER_REFERENCE_SHAPE", Shape::GaussianShapeAlignment::BEST_PER_REFERENCE_SHAPE)
-		.value("BEST_PER_REFERENCE_SET", Shape::GaussianShapeAlignment::BEST_PER_REFERENCE_SET)
-		.value("BEST_OVERALL", Shape::GaussianShapeAlignment::BEST_OVERALL)
-		.export_values();
 }

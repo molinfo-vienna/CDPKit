@@ -1,7 +1,7 @@
 /* -*- mode: c++; c-basic-offset: 4; tab-width: 4; indent-tabs-mode: t -*- */
 
 /* 
- * NamespaceExports.hpp 
+ * AlignmentResultSelectionModeExport.cpp 
  *
  * This file is part of the Chemical Data Processing Toolkit
  *
@@ -24,15 +24,29 @@
  */
 
 
-#ifndef CDPL_PYTHON_SHAPE_NAMESPACEEXPORTS_HPP
-#define CDPL_PYTHON_SHAPE_NAMESPACEEXPORTS_HPP
+#include <boost/python.hpp>
+
+#include "CDPL/Shape/AlignmentResultSelectionMode.hpp"
+
+#include "NamespaceExports.hpp"
 
 
-namespace CDPLPythonShape
+namespace 
 {
 
-	void exportSymmetryClasses();
-	void exportAlignmentResultSelectionModes();
+    struct AlignmentResultSelectionMode {};
 }
 
-#endif // CDPL_PYTHON_SHAPE_NAMESPACEEXPORTS_HPP
+
+void CDPLPythonShape::exportAlignmentResultSelectionModes()
+{
+    using namespace boost;
+    using namespace CDPL;
+
+    python::class_<AlignmentResultSelectionMode, boost::noncopyable>("AlignmentResultSelectionMode", python::no_init)
+		.def_readonly("ALL", Shape::AlignmentResultSelectionMode::ALL)
+		.def_readonly("BEST_PER_SHAPE_COMBINATION", Shape::AlignmentResultSelectionMode::BEST_PER_SHAPE_COMBINATION)
+		.def_readonly("BEST_PER_REFERENCE_SHAPE", Shape::AlignmentResultSelectionMode::BEST_PER_REFERENCE_SHAPE)
+		.def_readonly("BEST_PER_REFERENCE_SET", Shape::AlignmentResultSelectionMode::BEST_PER_REFERENCE_SET)
+		.def_readonly("BEST_OVERALL", Shape::AlignmentResultSelectionMode::BEST_OVERALL);
+}

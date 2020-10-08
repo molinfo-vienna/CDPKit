@@ -350,15 +350,15 @@ void Shape::ScreeningProcessor::applyAlignmentSettings()
 	switch (settings.getScreeningMode()) {
 
 		case ScreeningSettings::BEST_OVERALL_MATCH:
-			alignment.setResultSelectionMode(GaussianShapeAlignment::BEST_OVERALL);
+			alignment.setResultSelectionMode(AlignmentResultSelectionMode::BEST_OVERALL);
 			break;
 
 		case ScreeningSettings::BEST_MATCH_PER_QUERY_CONF:
-			alignment.setResultSelectionMode(GaussianShapeAlignment::BEST_PER_REFERENCE_SHAPE);
+			alignment.setResultSelectionMode(AlignmentResultSelectionMode::BEST_PER_REFERENCE_SHAPE);
 			break;
 
 		default:
-			alignment.setResultSelectionMode(GaussianShapeAlignment::BEST_PER_REFERENCE_SET);
+			alignment.setResultSelectionMode(AlignmentResultSelectionMode::BEST_PER_REFERENCE_SET);
 			break;
 	}
 }

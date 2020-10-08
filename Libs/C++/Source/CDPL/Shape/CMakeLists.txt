@@ -37,6 +37,7 @@ SET(cdpl-shape_LIB_SRCS
 
     AlignmentResult.cpp
     GaussianShapeAlignment.cpp
+    FastGaussianShapeAlignment.cpp
     GaussianShapeFunctionAlignment.cpp
     GaussianShapeAlignmentStartGenerator.cpp
     PrincipalAxesAlignmentStartGenerator.cpp

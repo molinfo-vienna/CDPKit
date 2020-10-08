@@ -59,7 +59,8 @@ BOOST_PYTHON_MODULE(_shape)
 	exportScreeningProcessor();
 
 	exportSymmetryClasses();
-	
+	exportAlignmentResultSelectionModes();
+
 	exportScoringFunctions();
 	exportUtilityFunctions();
 	exportGaussianShapeFunctions();

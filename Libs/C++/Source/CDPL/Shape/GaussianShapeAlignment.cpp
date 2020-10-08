@@ -29,7 +29,6 @@
 #include "CDPL/Shape/GaussianShapeAlignment.hpp"
 #include "CDPL/Shape/ScoringFunctions.hpp"
 #include "CDPL/Shape/SymmetryClass.hpp"
-#include "CDPL/Math/Matrix.hpp"
 #include "CDPL/Base/Exceptions.hpp"
 
 
@@ -53,11 +52,11 @@ namespace
 }
 
 
-const double                                             Shape::GaussianShapeAlignment::DEF_OPTIMIZATION_STOP_GRADIENT = 1.0;
-const double                                             Shape::GaussianShapeAlignment::DEF_DISTANCE_CUTOFF            = 0.0;
-const Shape::GaussianShapeAlignment::ResultSelectionMode Shape::GaussianShapeAlignment::DEF_RESULT_SELECTION_MODE;
-const std::size_t                                        Shape::GaussianShapeAlignment::DEF_MAX_OPTIMIZATION_ITERATIONS;
-const std::size_t                                        Shape::GaussianShapeAlignment::DEF_MAX_PRODUCT_ORDER;
+const double       Shape::GaussianShapeAlignment::DEF_OPTIMIZATION_STOP_GRADIENT = 1.0;
+const double       Shape::GaussianShapeAlignment::DEF_DISTANCE_CUTOFF            = 0.0;
+const unsigned int Shape::GaussianShapeAlignment::DEF_RESULT_SELECTION_MODE;
+const std::size_t  Shape::GaussianShapeAlignment::DEF_MAX_OPTIMIZATION_ITERATIONS;
+const std::size_t  Shape::GaussianShapeAlignment::DEF_MAX_PRODUCT_ORDER;
 
 
 Shape::GaussianShapeAlignment::GaussianShapeAlignment():
@@ -189,12 +188,12 @@ const Shape::GaussianShapeAlignment::ScoringFunction& Shape::GaussianShapeAlignm
 	return scoringFunc;
 }
 
-void Shape::GaussianShapeAlignment::setResultSelectionMode(ResultSelectionMode mode)
+void Shape::GaussianShapeAlignment::setResultSelectionMode(unsigned int mode)
 {
 	resultSelMode = mode;
 }
 
-Shape::GaussianShapeAlignment::ResultSelectionMode Shape::GaussianShapeAlignment::getResultSelectionMode() const
+unsigned int Shape::GaussianShapeAlignment::getResultSelectionMode() const
 {
 	return resultSelMode;
 }
@@ -508,6 +507,8 @@ void Shape::GaussianShapeAlignment::prepareForAlignment(GaussianShapeFunction& f
 
 void Shape::GaussianShapeAlignment::processResults(std::size_t ref_idx, std::size_t al_idx)
 {
+	using namespace AlignmentResultSelectionMode;
+
 	AlignmentResult curr_res;
 
 	curr_res.setReferenceSelfOverlap(refShapeMetaData[ref_idx].selfOverlap);

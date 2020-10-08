@@ -76,7 +76,6 @@ namespace CDPL
 				return empty_def_val;
 		
 			T val;
-			const char* old_loc = std::setlocale(LC_ALL, "C");
 			char* parse_end;
 
 			if (std::numeric_limits<T>::is_integer) {
@@ -85,10 +84,13 @@ namespace CDPL
 				else
 					val = T(std::strtoul(str_beg, &parse_end, 10));
 
-			} else 
+			} else {
+				const char* old_loc = std::setlocale(LC_NUMERIC, "C");
+
 				val = T(std::strtod(str_beg, &parse_end)); 
 
-			std::setlocale(LC_ALL, old_loc);
+				std::setlocale(LC_NUMERIC, old_loc);
+			}
 
 			if (str_end != parse_end) {
 				if (throw_ex)
@@ -118,7 +120,7 @@ namespace CDPL
 			char c = 0;
 
 			for (std::size_t i = 0; i < FieldSize && is.get(c) && c != eol_char; i++) {
-				if (std::isspace(c, std::locale::classic()))
+				if (std::isspace(c))
 					continue;
 
 				*buf_end_ptr++ = c;

@@ -57,6 +57,7 @@ SET(shape_MOD_SRCS
     ScreeningProcessorExport.cpp
 
     SymmetryClassExport.cpp
+    AlignmentResultSelectionModeExport.cpp
     
     UtilityFunctionExport.cpp
     ScoringFunctionExport.cpp

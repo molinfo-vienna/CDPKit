@@ -50,11 +50,13 @@
 #include "CDPL/Shape/PrincipalAxesAlignmentStartGenerator.hpp"
 #include "CDPL/Shape/GaussianShapeFunctionAlignment.hpp"
 #include "CDPL/Shape/GaussianShapeAlignment.hpp"
+#include "CDPL/Shape/FastGaussianShapeAlignment.hpp"
 
 #include "CDPL/Shape/ScreeningSettings.hpp"
 #include "CDPL/Shape/ScreeningProcessor.hpp"
 
 #include "CDPL/Shape/SymmetryClass.hpp"
+#include "CDPL/Shape/AlignmentResultSelectionMode.hpp"
 
 #include "CDPL/Shape/GaussianShapeFunctions.hpp"
 #include "CDPL/Shape/UtilityFunctions.hpp"
