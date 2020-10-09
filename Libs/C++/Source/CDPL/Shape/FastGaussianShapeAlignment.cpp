@@ -471,11 +471,46 @@ double Shape::FastGaussianShapeAlignment::calcOverlapGradient(const ShapeData& r
 	Math::Vector3D::Pointer inters_prod_ctr_data = inters_prod_ctr.getData();
 	double overlap = 0.0;
 
-	for (std::size_t i = 0, num_ovl_elem = ovl_data.elements.size(); i < num_ovl_elem; i++) {
+	for (std::size_t i = 0, num_ovl_elem = ovl_data.colElemOffs; i < num_ovl_elem; i++) {
 		const ShapeData::Element& elem1 = ovl_data.elements[i];
 		Math::Vector3D::ConstPointer elem1_ctr = elem1.center.getData();
 
-		for (std::size_t j = 0, num_ref_elem = ref_data.elements.size(); j < num_ref_elem; j++) {
+		for (std::size_t j = 0, num_ref_elem = ref_data.colElemOffs; j < num_ref_elem; j++) {
+			const ShapeData::Element& elem2 = ref_data.elements[j];
+			Math::Vector3D::ConstPointer elem2_ctr = elem2.center.getData();
+			double sqrd_ctr_dist = calcSquaredDistance(elem1_ctr, elem2_ctr);
+			double max_dist = (elem1.radius + elem2.radius) * RADIUS_SCALING_FACTOR;
+
+			if (sqrd_ctr_dist > (max_dist * max_dist))
+				continue;
+
+			double delta = elem1.delta + elem2.delta;
+			double vol_factor = M_PI / delta;
+			double prod_fact_exp = -elem1.delta * elem2.delta * sqrd_ctr_dist / delta;
+
+			double overlap_contrib = elem1.weightFactor * elem2.weightFactor * vol_factor *
+				std::sqrt(vol_factor) * fastexp::IEEE<double, 3>::evaluate(prod_fact_exp);
+
+			overlap += overlap_contrib;
+
+			inters_prod_ctr_data[0] = (elem1_ctr[0] * elem1.delta + elem2_ctr[0] * elem2.delta) / delta;
+			inters_prod_ctr_data[1] = (elem1_ctr[1] * elem1.delta + elem2_ctr[1] * elem2.delta) / delta;
+			inters_prod_ctr_data[2] = (elem1_ctr[2] * elem1.delta + elem2_ctr[2] * elem2.delta) / delta;
+
+			Math::Vector3D::Pointer elem1_grad = grad_data[i].getData();
+			double grad_factor = -elem1.delta * 2.0 * overlap_contrib;
+			
+			elem1_grad[0] += grad_factor * (elem1_ctr[0] - inters_prod_ctr_data[0]);
+			elem1_grad[1] += grad_factor * (elem1_ctr[1] - inters_prod_ctr_data[1]);
+			elem1_grad[2] += grad_factor * (elem1_ctr[2] - inters_prod_ctr_data[2]);
+		}
+	}
+	
+	for (std::size_t i = ovl_data.colElemOffs, num_ovl_elem = ovl_data.elements.size(); i < num_ovl_elem; i++) {
+		const ShapeData::Element& elem1 = ovl_data.elements[i];
+		Math::Vector3D::ConstPointer elem1_ctr = elem1.center.getData();
+
+		for (std::size_t j = ref_data.colElemOffs, num_ref_elem = ref_data.elements.size(); j < num_ref_elem; j++) {
 			const ShapeData::Element& elem2 = ref_data.elements[j];
 
 			if (elem2.color != elem1.color)

@@ -38,16 +38,44 @@ void CDPLPythonShape::exportPrincipalAxesAlignmentStartGenerator()
     using namespace boost;
     using namespace CDPL;
 
-	python::scope scope = python::class_<Shape::PrincipalAxesAlignmentStartGenerator, python::bases<Shape::GaussianShapeAlignmentStartGenerator> >
+	typedef void (Shape::PrincipalAxesAlignmentStartGenerator::*SetBoolFunc)(bool);
+    typedef bool (Shape::PrincipalAxesAlignmentStartGenerator::*GetBoolFunc)() const;
+
+	python::class_<Shape::PrincipalAxesAlignmentStartGenerator, python::bases<Shape::GaussianShapeAlignmentStartGenerator> >
 		("PrincipalAxesAlignmentStartGenerator", python::no_init)
 		.def(python::init<>(python::arg("self")))
 		.def(python::init<const Shape::PrincipalAxesAlignmentStartGenerator&>((python::arg("self"), python::arg("gen"))))
 		.def("setSymmetryThreshold", &Shape::PrincipalAxesAlignmentStartGenerator::setSymmetryThreshold,
 			 (python::arg("self"), python::arg("thresh")))
 		.def("getSymmetryThreshold", &Shape::PrincipalAxesAlignmentStartGenerator::getSymmetryThreshold, python::arg("self"))
-		.def("setCenterAlignmentMode", &Shape::PrincipalAxesAlignmentStartGenerator::setCenterAlignmentMode,
-			 (python::arg("self"), python::arg("mode")))
-		.def("getCenterAlignmentMode", &Shape::PrincipalAxesAlignmentStartGenerator::getCenterAlignmentMode, python::arg("self"))
+		.def("genShapeCenterStarts", SetBoolFunc(&Shape::PrincipalAxesAlignmentStartGenerator::genShapeCenterStarts),
+			 (python::arg("self"), python::arg("generate")))
+		.def("genShapeCenterStarts", GetBoolFunc(&Shape::PrincipalAxesAlignmentStartGenerator::genShapeCenterStarts),
+			 python::arg("self"))
+		.def("genColorCenterStarts", SetBoolFunc(&Shape::PrincipalAxesAlignmentStartGenerator::genColorCenterStarts),
+			 (python::arg("self"), python::arg("generate")))
+		.def("genColorCenterStarts", GetBoolFunc(&Shape::PrincipalAxesAlignmentStartGenerator::genColorCenterStarts),
+			 python::arg("self"))
+		.def("genNonColorCenterStarts", SetBoolFunc(&Shape::PrincipalAxesAlignmentStartGenerator::genNonColorCenterStarts),
+			 (python::arg("self"), python::arg("generate")))
+		.def("genNonColorCenterStarts", GetBoolFunc(&Shape::PrincipalAxesAlignmentStartGenerator::genNonColorCenterStarts),
+			 python::arg("self"))
+		.def("genRandomStarts", SetBoolFunc(&Shape::PrincipalAxesAlignmentStartGenerator::genRandomStarts),
+			 (python::arg("self"), python::arg("generate")))
+		.def("genRandomStarts", GetBoolFunc(&Shape::PrincipalAxesAlignmentStartGenerator::genRandomStarts),
+			 python::arg("self"))
+		.def("genForAlignedShapeCenters", SetBoolFunc(&Shape::PrincipalAxesAlignmentStartGenerator::genForAlignedShapeCenters),
+			 (python::arg("self"), python::arg("generate")))
+		.def("genForAlignedShapeCenters", GetBoolFunc(&Shape::PrincipalAxesAlignmentStartGenerator::genForAlignedShapeCenters),
+			 python::arg("self"))
+		.def("genForReferenceShapeCenters", SetBoolFunc(&Shape::PrincipalAxesAlignmentStartGenerator::genForReferenceShapeCenters),
+			 (python::arg("self"), python::arg("generate")))
+		.def("genForReferenceShapeCenters", GetBoolFunc(&Shape::PrincipalAxesAlignmentStartGenerator::genForReferenceShapeCenters),
+			 python::arg("self"))
+		.def("genForLargerShapeCenters", SetBoolFunc(&Shape::PrincipalAxesAlignmentStartGenerator::genForLargerShapeCenters),
+			 (python::arg("self"), python::arg("generate")))
+		.def("genForLargerShapeCenters", GetBoolFunc(&Shape::PrincipalAxesAlignmentStartGenerator::genForLargerShapeCenters),
+			 python::arg("self"))
 		.def("setMaxRandomTranslation", &Shape::PrincipalAxesAlignmentStartGenerator::setMaxRandomTranslation,
 			 (python::arg("self"), python::arg("max_trans")))
 		.def("getMaxRandomTranslation", &Shape::PrincipalAxesAlignmentStartGenerator::getMaxRandomTranslation, python::arg("self"))
@@ -58,27 +86,27 @@ void CDPLPythonShape::exportPrincipalAxesAlignmentStartGenerator()
 			 (python::arg("self"), python::arg("seed")))
 		.def("assign", CDPLPythonBase::copyAssOp(&Shape::PrincipalAxesAlignmentStartGenerator::operator=),
 			 (python::arg("self"), python::arg("gen")), python::return_self<>())
-		.def_readonly("DEF_CENTER_ALIGNMENT_MODE", Shape::PrincipalAxesAlignmentStartGenerator::DEF_CENTER_ALIGNMENT_MODE)
 		.def_readonly("DEF_SYMMETRY_THRESHOLD", Shape::PrincipalAxesAlignmentStartGenerator::DEF_SYMMETRY_THRESHOLD)
 		.def_readonly("DEF_NUM_RANDOM_STARTS", Shape::PrincipalAxesAlignmentStartGenerator::DEF_NUM_RANDOM_STARTS)
 		.def_readonly("DEF_MAX_RANDOM_TRANSLATION", Shape::PrincipalAxesAlignmentStartGenerator::DEF_MAX_RANDOM_TRANSLATION)
 		.add_property("symmetryThreshold", &Shape::PrincipalAxesAlignmentStartGenerator::getSymmetryThreshold,
 					  &Shape::PrincipalAxesAlignmentStartGenerator::setSymmetryThreshold)
-		.add_property("centerAlignmentMode", &Shape::PrincipalAxesAlignmentStartGenerator::getCenterAlignmentMode,
-					  &Shape::PrincipalAxesAlignmentStartGenerator::setCenterAlignmentMode)
 		.add_property("maxRandomTranslation", &Shape::PrincipalAxesAlignmentStartGenerator::getMaxRandomTranslation,
 					  &Shape::PrincipalAxesAlignmentStartGenerator::setMaxRandomTranslation)
-		.add_property("nunRandomStarts", &Shape::PrincipalAxesAlignmentStartGenerator::getNumRandomStarts,
-					  &Shape::PrincipalAxesAlignmentStartGenerator::setNumRandomStarts);
-
-	python::enum_<Shape::PrincipalAxesAlignmentStartGenerator::CenterAlignmentMode>("CenterAlignmentMode")
-		.value("UNDEF", Shape::PrincipalAxesAlignmentStartGenerator::UNDEF)
-		.value("SHAPE_CENTROID", Shape::PrincipalAxesAlignmentStartGenerator::SHAPE_CENTROID)
-		.value("NON_COLOR_ELEMENT_CENTERS", Shape::PrincipalAxesAlignmentStartGenerator::NON_COLOR_ELEMENT_CENTERS)
-		.value("COLOR_ELEMENT_CENTERS", Shape::PrincipalAxesAlignmentStartGenerator::COLOR_ELEMENT_CENTERS)
-		.value("RANDOM", Shape::PrincipalAxesAlignmentStartGenerator::RANDOM)
-		.value("REFERENCE_SHAPE", Shape::PrincipalAxesAlignmentStartGenerator::REFERENCE_SHAPE)
-		.value("ALIGNED_SHAPE", Shape::PrincipalAxesAlignmentStartGenerator::ALIGNED_SHAPE)
-		.value("LARGEST_SHAPE", Shape::PrincipalAxesAlignmentStartGenerator::LARGEST_SHAPE)
-		.export_values();
+		.add_property("numRandomStarts", &Shape::PrincipalAxesAlignmentStartGenerator::getNumRandomStarts,
+					  &Shape::PrincipalAxesAlignmentStartGenerator::setNumRandomStarts)
+		.add_property("shapeCenterStarts", GetBoolFunc(&Shape::PrincipalAxesAlignmentStartGenerator::genShapeCenterStarts),
+					  SetBoolFunc(&Shape::PrincipalAxesAlignmentStartGenerator::genShapeCenterStarts))
+		.add_property("colorCenterStarts", GetBoolFunc(&Shape::PrincipalAxesAlignmentStartGenerator::genColorCenterStarts),
+					  SetBoolFunc(&Shape::PrincipalAxesAlignmentStartGenerator::genColorCenterStarts))
+		.add_property("nonColorCenterStarts", GetBoolFunc(&Shape::PrincipalAxesAlignmentStartGenerator::genNonColorCenterStarts),
+					  SetBoolFunc(&Shape::PrincipalAxesAlignmentStartGenerator::genNonColorCenterStarts))
+		.add_property("randomStarts", GetBoolFunc(&Shape::PrincipalAxesAlignmentStartGenerator::genRandomStarts),
+					  SetBoolFunc(&Shape::PrincipalAxesAlignmentStartGenerator::genRandomStarts))
+		.add_property("genForAlignedShapeCtrs", GetBoolFunc(&Shape::PrincipalAxesAlignmentStartGenerator::genForAlignedShapeCenters),
+					  SetBoolFunc(&Shape::PrincipalAxesAlignmentStartGenerator::genForAlignedShapeCenters))
+		.add_property("genForReferenceShapeCrs", GetBoolFunc(&Shape::PrincipalAxesAlignmentStartGenerator::genForReferenceShapeCenters),
+					  SetBoolFunc(&Shape::PrincipalAxesAlignmentStartGenerator::genForReferenceShapeCenters))
+		.add_property("genForLargerShapeCtrs", GetBoolFunc(&Shape::PrincipalAxesAlignmentStartGenerator::genForLargerShapeCenters),
+					  SetBoolFunc(&Shape::PrincipalAxesAlignmentStartGenerator::genForLargerShapeCenters));
 }

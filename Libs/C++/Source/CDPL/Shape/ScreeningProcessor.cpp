@@ -185,7 +185,10 @@ void Shape::ScreeningProcessor::init()
 	alignment.setMaxOrder(1);
 	alignment.getDefaultOverlapFunction().proximityOptimization(true);
 	alignment.getDefaultOverlapFunction().fastExpFunction(true);
-
+	alignment.getDefaultStartGenerator().genForAlignedShapeCenters(false);
+	alignment.getDefaultStartGenerator().genForReferenceShapeCenters(false);
+	alignment.getDefaultStartGenerator().genForLargerShapeCenters(true);
+	
 	shapeGen.includeHydrogens(false);
 	shapeGen.multiConformerMode(true);
 }
@@ -244,109 +247,19 @@ void Shape::ScreeningProcessor::applyAlignmentSettings()
 	alignment.setOptimizationStopGradient(settings.getOptimizationStopGradient());
 	alignment.getDefaultStartGenerator().setNumRandomStarts(settings.getNumRandomStarts());
 
-	int almnt_mode = PrincipalAxesAlignmentStartGenerator::UNDEF;
-
-	switch (int(settings.getAlignmentMode())) {
-
-		case ScreeningSettings::SHAPE_CENTROID:
-			almnt_mode = PrincipalAxesAlignmentStartGenerator::SHAPE_CENTROID;
-			break;
-
-		case ScreeningSettings::ATOM_CENTERS:
-			almnt_mode = (PrincipalAxesAlignmentStartGenerator::NON_COLOR_ELEMENT_CENTERS |
-						  PrincipalAxesAlignmentStartGenerator::LARGEST_SHAPE);
-			break;
-
-		case ScreeningSettings::COLOR_FEATURE_CENTERS:
-			almnt_mode = (PrincipalAxesAlignmentStartGenerator::COLOR_ELEMENT_CENTERS |
-						  PrincipalAxesAlignmentStartGenerator::LARGEST_SHAPE);
-			break;
-
-		case (ScreeningSettings::SHAPE_CENTROID | ScreeningSettings::ATOM_CENTERS):
-			almnt_mode = (PrincipalAxesAlignmentStartGenerator::SHAPE_CENTROID |
-						  PrincipalAxesAlignmentStartGenerator::NON_COLOR_ELEMENT_CENTERS |
-						  PrincipalAxesAlignmentStartGenerator::LARGEST_SHAPE);
-			break;
-
-		case (ScreeningSettings::SHAPE_CENTROID | ScreeningSettings::COLOR_FEATURE_CENTERS):
-			almnt_mode =(PrincipalAxesAlignmentStartGenerator::SHAPE_CENTROID |
-						 PrincipalAxesAlignmentStartGenerator::COLOR_ELEMENT_CENTERS |
-						 PrincipalAxesAlignmentStartGenerator::LARGEST_SHAPE);
-			break;
-
-		case (ScreeningSettings::ATOM_CENTERS | ScreeningSettings::COLOR_FEATURE_CENTERS):
-			almnt_mode = (PrincipalAxesAlignmentStartGenerator::NON_COLOR_ELEMENT_CENTERS |
-						  PrincipalAxesAlignmentStartGenerator::COLOR_ELEMENT_CENTERS |
-						  PrincipalAxesAlignmentStartGenerator::LARGEST_SHAPE);
-			break;
-
-		case (ScreeningSettings::SHAPE_CENTROID | ScreeningSettings::ATOM_CENTERS | ScreeningSettings::COLOR_FEATURE_CENTERS):
-			almnt_mode = (PrincipalAxesAlignmentStartGenerator::SHAPE_CENTROID |
-						  PrincipalAxesAlignmentStartGenerator::NON_COLOR_ELEMENT_CENTERS |
-						  PrincipalAxesAlignmentStartGenerator::COLOR_ELEMENT_CENTERS |
-						  PrincipalAxesAlignmentStartGenerator::LARGEST_SHAPE);
-			break;
-
-		case ScreeningSettings::RANDOM:
-			almnt_mode = PrincipalAxesAlignmentStartGenerator::RANDOM;
-			break;
-
-		case (ScreeningSettings::SHAPE_CENTROID | ScreeningSettings::RANDOM):
-			almnt_mode = (PrincipalAxesAlignmentStartGenerator::SHAPE_CENTROID |
-						  PrincipalAxesAlignmentStartGenerator::RANDOM);
-			break;
-
-		case (ScreeningSettings::ATOM_CENTERS | ScreeningSettings::RANDOM):
-			almnt_mode = (PrincipalAxesAlignmentStartGenerator::NON_COLOR_ELEMENT_CENTERS |
-						  PrincipalAxesAlignmentStartGenerator::RANDOM |
-						  PrincipalAxesAlignmentStartGenerator::LARGEST_SHAPE);
-			break;
-
-		case (ScreeningSettings::COLOR_FEATURE_CENTERS | ScreeningSettings::RANDOM):
-			almnt_mode = (PrincipalAxesAlignmentStartGenerator::COLOR_ELEMENT_CENTERS |
-						  PrincipalAxesAlignmentStartGenerator::RANDOM |
-						  PrincipalAxesAlignmentStartGenerator::LARGEST_SHAPE);
-			break;
-
-		case (ScreeningSettings::SHAPE_CENTROID | ScreeningSettings::ATOM_CENTERS | ScreeningSettings::RANDOM):
-			almnt_mode = (PrincipalAxesAlignmentStartGenerator::SHAPE_CENTROID |
-						  PrincipalAxesAlignmentStartGenerator::NON_COLOR_ELEMENT_CENTERS |
-						  PrincipalAxesAlignmentStartGenerator::RANDOM |
-						  PrincipalAxesAlignmentStartGenerator::LARGEST_SHAPE);
-			break;
-
-		case (ScreeningSettings::SHAPE_CENTROID | ScreeningSettings::COLOR_FEATURE_CENTERS | ScreeningSettings::RANDOM):
-			almnt_mode =(PrincipalAxesAlignmentStartGenerator::SHAPE_CENTROID |
-						 PrincipalAxesAlignmentStartGenerator::COLOR_ELEMENT_CENTERS |
-						 PrincipalAxesAlignmentStartGenerator::RANDOM |
-						 PrincipalAxesAlignmentStartGenerator::LARGEST_SHAPE);
-			break;
-
-		case (ScreeningSettings::ATOM_CENTERS | ScreeningSettings::COLOR_FEATURE_CENTERS | ScreeningSettings::RANDOM):
-			almnt_mode = (PrincipalAxesAlignmentStartGenerator::NON_COLOR_ELEMENT_CENTERS |
-						  PrincipalAxesAlignmentStartGenerator::COLOR_ELEMENT_CENTERS |
-						  PrincipalAxesAlignmentStartGenerator::RANDOM |
-						  PrincipalAxesAlignmentStartGenerator::LARGEST_SHAPE);
-			break;
-
-		case (ScreeningSettings::SHAPE_CENTROID | ScreeningSettings::ATOM_CENTERS | ScreeningSettings::COLOR_FEATURE_CENTERS | ScreeningSettings::RANDOM):
-			almnt_mode = (PrincipalAxesAlignmentStartGenerator::SHAPE_CENTROID |
-						  PrincipalAxesAlignmentStartGenerator::NON_COLOR_ELEMENT_CENTERS |
-						  PrincipalAxesAlignmentStartGenerator::COLOR_ELEMENT_CENTERS |
-						  PrincipalAxesAlignmentStartGenerator::RANDOM |
-						  PrincipalAxesAlignmentStartGenerator::LARGEST_SHAPE);
-			
-		default:
-			break;
-	}
-
-	if (almnt_mode != PrincipalAxesAlignmentStartGenerator::UNDEF) {
-		alignment.performAlignment(true);
-		alignment.getDefaultStartGenerator().setCenterAlignmentMode(PrincipalAxesAlignmentStartGenerator::CenterAlignmentMode(almnt_mode));
-
-	} else
+	if (settings.getAlignmentMode() == ScreeningSettings::NO_ALIGNMENT)
 		alignment.performAlignment(false);
 
+	else {
+		alignment.getDefaultStartGenerator().genShapeCenterStarts(settings.getAlignmentMode() & ScreeningSettings::SHAPE_CENTROID);
+		alignment.getDefaultStartGenerator().genNonColorCenterStarts(settings.getAlignmentMode() & ScreeningSettings::ATOM_CENTERS);
+		alignment.getDefaultStartGenerator().genColorCenterStarts(settings.getAlignmentMode() & ScreeningSettings::COLOR_FEATURE_CENTERS);
+		alignment.getDefaultStartGenerator().genRandomStarts(settings.getAlignmentMode() & ScreeningSettings::RANDOM);
+
+		alignment.performAlignment(alignment.getDefaultStartGenerator().genShapeCenterStarts() || alignment.getDefaultStartGenerator().genNonColorCenterStarts() ||
+								   alignment.getDefaultStartGenerator().genColorCenterStarts() || alignment.getDefaultStartGenerator().genRandomStarts());
+	}
+	
 	switch (settings.getScreeningMode()) {
 
 		case ScreeningSettings::BEST_OVERALL_MATCH:

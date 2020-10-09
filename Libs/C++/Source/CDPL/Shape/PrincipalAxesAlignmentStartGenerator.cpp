@@ -84,16 +84,17 @@ namespace
 }
 
 
-const Shape::PrincipalAxesAlignmentStartGenerator::CenterAlignmentMode Shape::PrincipalAxesAlignmentStartGenerator::DEF_CENTER_ALIGNMENT_MODE;
-const double                                                           Shape::PrincipalAxesAlignmentStartGenerator::DEF_SYMMETRY_THRESHOLD = 0.15;
-const std::size_t                                                      Shape::PrincipalAxesAlignmentStartGenerator::DEF_NUM_RANDOM_STARTS;
-const double                                                           Shape::PrincipalAxesAlignmentStartGenerator::DEF_MAX_RANDOM_TRANSLATION = 2.0;
+const double      Shape::PrincipalAxesAlignmentStartGenerator::DEF_SYMMETRY_THRESHOLD = 0.15;
+const std::size_t Shape::PrincipalAxesAlignmentStartGenerator::DEF_NUM_RANDOM_STARTS;
+const double      Shape::PrincipalAxesAlignmentStartGenerator::DEF_MAX_RANDOM_TRANSLATION = 2.0;
 
 
 Shape::PrincipalAxesAlignmentStartGenerator::PrincipalAxesAlignmentStartGenerator():
-	ctrAlignmentMode(DEF_CENTER_ALIGNMENT_MODE), refShape(0), symThreshold(DEF_SYMMETRY_THRESHOLD), 
-	maxRandomTrans(DEF_MAX_RANDOM_TRANSLATION), numRandomStarts(DEF_NUM_RANDOM_STARTS),
-	refAxesSwapFlags(getAxesSwapFlags(SymmetryClass::UNDEF)), numSubTransforms(0)
+	shapeCtrStarts(true), colCtrStarts(false), nonColCtrStarts(false), randomStarts(false),
+	genForAlgdShape(false), genForRefShape(true), genForLargerShape(true), refShape(0),
+	symThreshold(DEF_SYMMETRY_THRESHOLD), maxRandomTrans(DEF_MAX_RANDOM_TRANSLATION),
+	numRandomStarts(DEF_NUM_RANDOM_STARTS),refAxesSwapFlags(getAxesSwapFlags(SymmetryClass::UNDEF)),
+	numSubTransforms(0)
 {}
 
 unsigned int Shape::PrincipalAxesAlignmentStartGenerator::setupReference(GaussianShapeFunction& func, Math::Matrix4D& xform) const
@@ -128,14 +129,74 @@ unsigned int Shape::PrincipalAxesAlignmentStartGenerator::setupAligned(GaussianS
 	return sym_class;
 }
 
-void Shape::PrincipalAxesAlignmentStartGenerator::setCenterAlignmentMode(CenterAlignmentMode mode)
+void Shape::PrincipalAxesAlignmentStartGenerator::genShapeCenterStarts(bool generate)
 {
-	ctrAlignmentMode = mode;
+	shapeCtrStarts = generate;
 }
 
-Shape::PrincipalAxesAlignmentStartGenerator::CenterAlignmentMode Shape::PrincipalAxesAlignmentStartGenerator::getCenterAlignmentMode() const
+bool Shape::PrincipalAxesAlignmentStartGenerator::genShapeCenterStarts() const
 {
-	return ctrAlignmentMode;
+	return shapeCtrStarts;
+}
+			
+void Shape::PrincipalAxesAlignmentStartGenerator::genColorCenterStarts(bool generate)
+{
+	colCtrStarts = generate;
+}
+
+bool Shape::PrincipalAxesAlignmentStartGenerator::genColorCenterStarts() const
+{
+	return colCtrStarts;
+}
+
+void Shape::PrincipalAxesAlignmentStartGenerator::genNonColorCenterStarts(bool generate)
+{
+	nonColCtrStarts = generate;
+}
+
+bool Shape::PrincipalAxesAlignmentStartGenerator::genNonColorCenterStarts() const
+{
+	return nonColCtrStarts;
+}
+			
+void Shape::PrincipalAxesAlignmentStartGenerator::genRandomStarts(bool generate)
+{
+	randomStarts = generate;
+}
+
+bool Shape::PrincipalAxesAlignmentStartGenerator::genRandomStarts() const
+{
+	return randomStarts;
+}
+
+void Shape::PrincipalAxesAlignmentStartGenerator::genForAlignedShapeCenters(bool generate)
+{
+	genForAlgdShape = generate;
+}
+
+bool Shape::PrincipalAxesAlignmentStartGenerator::genForAlignedShapeCenters() const
+{
+	return genForAlgdShape;
+}
+
+void Shape::PrincipalAxesAlignmentStartGenerator::genForReferenceShapeCenters(bool generate)
+{
+	genForRefShape = generate;
+}
+
+bool Shape::PrincipalAxesAlignmentStartGenerator::genForReferenceShapeCenters() const
+{
+	return genForRefShape;
+}
+
+void Shape::PrincipalAxesAlignmentStartGenerator::genForLargerShapeCenters(bool generate)
+{
+	genForLargerShape = generate;
+}
+
+bool Shape::PrincipalAxesAlignmentStartGenerator::genForLargerShapeCenters() const
+{
+	return genForLargerShape;
 }
 
 void Shape::PrincipalAxesAlignmentStartGenerator::setSymmetryThreshold(double thresh)
@@ -201,52 +262,43 @@ bool Shape::PrincipalAxesAlignmentStartGenerator::generate(const GaussianShapeFu
 	if (axes_swap_flags == 0b11)
 		numSubTransforms += 12;
 
-	if (ctrAlignmentMode & SHAPE_CENTROID)
+	if (shapeCtrStarts)
 		generate(Math::Vector3D(), func, axes_swap_flags);
 
-	if (ctrAlignmentMode & (NON_COLOR_ELEMENT_CENTERS | COLOR_ELEMENT_CENTERS)) {
-		switch (ctrAlignmentMode & (REFERENCE_SHAPE | ALIGNED_SHAPE | LARGEST_SHAPE)) {
+	if (colCtrStarts | nonColCtrStarts) {
+		if (genForLargerShape && !genForAlgdShape && !genForRefShape) {
+			if (func.getShape()->getNumElements() > refShape->getNumElements())
+				generateForElementCenters(func.getShape(), func, axes_swap_flags, false);				
+			else
+				generateForElementCenters(refShape, func, axes_swap_flags, true);
 
-			case LARGEST_SHAPE:
-				if (func.getShape()->getNumElements() > refShape->getNumElements())
-					generateForElementCenters(func.getShape(), func, axes_swap_flags, false);				
-				else
-					generateForElementCenters(refShape, func, axes_swap_flags, true);
+		} else if (genForLargerShape && !genForAlgdShape && genForRefShape) {
+			if (func.getShape()->getNumElements() > refShape->getNumElements()) {
+				generateForElementCenters(func.getShape(), func, axes_swap_flags, false);				
+				generateForElementCenters(refShape, func, axes_swap_flags, true);				
 
-				break;
+			} else
+				generateForElementCenters(refShape, func, axes_swap_flags, true);
 
-			case (REFERENCE_SHAPE | LARGEST_SHAPE): 
-				if (func.getShape()->getNumElements() > refShape->getNumElements()) {
-					generateForElementCenters(func.getShape(), func, axes_swap_flags, false);				
-					generateForElementCenters(refShape, func, axes_swap_flags, true);				
-
-				} else
-					generateForElementCenters(refShape, func, axes_swap_flags, true);
-			
-				break;
-
-			case (ALIGNED_SHAPE | LARGEST_SHAPE):
-				if (func.getShape()->getNumElements() > refShape->getNumElements()) 
-					generateForElementCenters(func.getShape(), func, axes_swap_flags, false);				
-
-				else {
-					generateForElementCenters(func.getShape(), func, axes_swap_flags, false);				
-					generateForElementCenters(refShape, func, axes_swap_flags, true);
-				}
-
-				break;
-
-			case (REFERENCE_SHAPE | ALIGNED_SHAPE | LARGEST_SHAPE):
-			case (REFERENCE_SHAPE | ALIGNED_SHAPE):
+		}  else if (genForLargerShape && genForAlgdShape && !genForRefShape) {			
+			if (func.getShape()->getNumElements() > refShape->getNumElements()) 
 				generateForElementCenters(func.getShape(), func, axes_swap_flags, false);				
 
-			default:
+			else {
+				generateForElementCenters(func.getShape(), func, axes_swap_flags, false);				
 				generateForElementCenters(refShape, func, axes_swap_flags, true);
-				break;
+			}
+
+		} else {
+			if (genForAlgdShape)
+				generateForElementCenters(func.getShape(), func, axes_swap_flags, false);				
+
+			if (genForRefShape)
+				generateForElementCenters(refShape, func, axes_swap_flags, true);
 		}
 	}
 	
-	if (ctrAlignmentMode & RANDOM) {
+	if (randomStarts) {
 		boost::random::uniform_real_distribution<double> rand_dist(-maxRandomTrans, maxRandomTrans);
 
 		for (std::size_t i = 0; i < numRandomStarts; i++)
@@ -258,40 +310,31 @@ bool Shape::PrincipalAxesAlignmentStartGenerator::generate(const GaussianShapeFu
 
 void Shape::PrincipalAxesAlignmentStartGenerator::generateForElementCenters(const GaussianShape* shape, const GaussianShapeFunction& func, unsigned int axes_swap_flags, bool ref_shape)
 {
-	switch (ctrAlignmentMode & (NON_COLOR_ELEMENT_CENTERS | COLOR_ELEMENT_CENTERS)) {
+	if (colCtrStarts && nonColCtrStarts) {
+		for (GaussianShape::ConstElementIterator it = shape->getElementsBegin(), end = shape->getElementsEnd(); it != end; ++it) {
+			if (ref_shape)
+				generate(it->getPosition(), func, axes_swap_flags);
+			else
+				generate(-it->getPosition(), func, axes_swap_flags);
+		}
 
-		case (NON_COLOR_ELEMENT_CENTERS | COLOR_ELEMENT_CENTERS):
-			for (GaussianShape::ConstElementIterator it = shape->getElementsBegin(), end = shape->getElementsEnd(); it != end; ++it) {
+	} else if (nonColCtrStarts) {
+		for (GaussianShape::ConstElementIterator it = shape->getElementsBegin(), end = shape->getElementsEnd(); it != end; ++it) 
+			if (it->getColor() == 0) {
 				if (ref_shape)
 					generate(it->getPosition(), func, axes_swap_flags);
 				else
 					generate(-it->getPosition(), func, axes_swap_flags);
 			}
 
-			return;
-
-		case NON_COLOR_ELEMENT_CENTERS:
-			for (GaussianShape::ConstElementIterator it = shape->getElementsBegin(), end = shape->getElementsEnd(); it != end; ++it) 
-				if (it->getColor() == 0) {
-					if (ref_shape)
-						generate(it->getPosition(), func, axes_swap_flags);
-					else
-						generate(-it->getPosition(), func, axes_swap_flags);
-				}
-
-			return;
-
-		case COLOR_ELEMENT_CENTERS:
-			for (GaussianShape::ConstElementIterator it = shape->getElementsBegin(), end = shape->getElementsEnd(); it != end; ++it) 
-				if (it->getColor() != 0) {
-					if (ref_shape)
-						generate(it->getPosition(), func, axes_swap_flags);
-					else
-						generate(-it->getPosition(), func, axes_swap_flags);
-				}
-
-		default:
-			break;
+	} else if (colCtrStarts) {
+		for (GaussianShape::ConstElementIterator it = shape->getElementsBegin(), end = shape->getElementsEnd(); it != end; ++it) 
+			if (it->getColor() != 0) {
+				if (ref_shape)
+					generate(it->getPosition(), func, axes_swap_flags);
+				else
+					generate(-it->getPosition(), func, axes_swap_flags);
+			}
 	}
 }
 

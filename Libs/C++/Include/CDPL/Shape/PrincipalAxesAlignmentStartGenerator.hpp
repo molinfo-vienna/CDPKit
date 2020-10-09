@@ -57,23 +57,9 @@ namespace CDPL
 		{
 			
 		  public:
-			enum CenterAlignmentMode
-			{
-
-			    UNDEF                     = 0x0,
-			    SHAPE_CENTROID            = 0x1,
-				NON_COLOR_ELEMENT_CENTERS = 0x2,
-				COLOR_ELEMENT_CENTERS     = 0x4,
-				RANDOM                    = 0x8,
-				REFERENCE_SHAPE           = 0x10,
-				ALIGNED_SHAPE             = 0x20,
-				LARGEST_SHAPE             = 0x40
-			};
-
-			static const CenterAlignmentMode DEF_CENTER_ALIGNMENT_MODE = SHAPE_CENTROID;
-			static const double              DEF_SYMMETRY_THRESHOLD;
-			static const std::size_t         DEF_NUM_RANDOM_STARTS = 4;
-			static const double              DEF_MAX_RANDOM_TRANSLATION;
+			static const double      DEF_SYMMETRY_THRESHOLD;
+			static const std::size_t DEF_NUM_RANDOM_STARTS = 4;
+			static const double      DEF_MAX_RANDOM_TRANSLATION;
 			
 			PrincipalAxesAlignmentStartGenerator();
 				
@@ -81,10 +67,34 @@ namespace CDPL
 
 			unsigned int setupAligned(GaussianShapeFunction& func, Math::Matrix4D& xform) const; 
 
-			void setCenterAlignmentMode(CenterAlignmentMode mode);
+			void genShapeCenterStarts(bool generate);
 
-			CenterAlignmentMode getCenterAlignmentMode() const;
+			bool genShapeCenterStarts() const;
+			
+			void genColorCenterStarts(bool generate);
 
+			bool genColorCenterStarts() const;
+
+			void genNonColorCenterStarts(bool generate);
+
+			bool genNonColorCenterStarts() const;
+			
+			void genRandomStarts(bool generate);
+
+			bool genRandomStarts() const;
+
+			void genForAlignedShapeCenters(bool generate);
+
+			bool genForAlignedShapeCenters() const;
+
+			void genForReferenceShapeCenters(bool generate);
+
+			bool genForReferenceShapeCenters() const;
+
+			void genForLargerShapeCenters(bool generate);
+
+			bool genForLargerShapeCenters() const;
+			
 			void setSymmetryThreshold(double thresh);
 
 			double getSymmetryThreshold();
@@ -120,7 +130,13 @@ namespace CDPL
 			typedef std::vector<QuaternionTransformation> StartTransformList;
 			typedef boost::random::mt11213b RandomEngine;
 
-			CenterAlignmentMode  ctrAlignmentMode;
+			bool                 shapeCtrStarts;
+			bool                 colCtrStarts;
+			bool                 nonColCtrStarts;
+			bool                 randomStarts;
+			bool                 genForAlgdShape;
+			bool                 genForRefShape;
+			bool                 genForLargerShape;
 			StartTransformList   startTransforms;
 			const GaussianShape* refShape;
 			double               symThreshold;
