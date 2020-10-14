@@ -49,6 +49,7 @@ SET(shape_MOD_SRCS
 
     GaussianShapeFunctionAlignmentExport.cpp
     GaussianShapeAlignmentExport.cpp
+    FastGaussianShapeAlignmentExport.cpp
 
     AlignmentResultExport.cpp
     ScoringFunctorExport.cpp

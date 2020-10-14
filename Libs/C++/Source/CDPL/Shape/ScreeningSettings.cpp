@@ -41,7 +41,7 @@ const double                   Shape::ScreeningSettings::NO_CUTOFF = std::numeri
 
 Shape::ScreeningSettings::ScreeningSettings():
     scoringFunc(&calcTanimotoComboScore), colorFtrType(PHARMACOPHORE_IMP_CHARGES), screeningMode(BEST_MATCH_PER_QUERY),
-    almntMode(SHAPE_CENTROID), numRandomStarts(0), allCarbon(false), singleConfSearch(false), optOverlap(true), 
+    almntMode(SHAPE_CENTROID), numRandomStarts(0), allCarbon(true), singleConfSearch(false), optOverlap(true), 
 	greedyOpt(true), numOptIter(20), optStopGrad(1.0), scoreCutoff(NO_CUTOFF)    
 {}
 

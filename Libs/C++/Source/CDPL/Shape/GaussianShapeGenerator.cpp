@@ -26,6 +26,8 @@
  
 #include "StaticInit.hpp"
 
+#include <cstddef>
+
 #include "CDPL/Shape/GaussianShapeGenerator.hpp"
 #include "CDPL/Shape/GaussianShapeSet.hpp"
 #include "CDPL/Pharm/FeatureFunctions.hpp"
@@ -161,94 +163,102 @@ void Shape::GaussianShapeGenerator::generate(const Chem::MolecularGraph& molgrap
 	if (num_confs == 0) {
 		GaussianShape::SharedPointer shape_ptr(new GaussianShape());
 
-		createShape(molgraph, Chem::Atom3DCoordinatesFunctor(), *shape_ptr, true);
+		createShape(molgraph, Chem::Atom3DCoordinatesFunctor(), *shape_ptr);
 		shapes.addElement(shape_ptr);
-
 		return;
 	}
 
-	for (std::size_t i = 0; i < num_confs; i++) {
-		GaussianShape::SharedPointer shape_ptr(new GaussianShape());
+	GaussianShape::SharedPointer tmplt_shape_ptr;
 
-		createShape(molgraph, Chem::AtomConformer3DCoordinatesFunctor(i), *shape_ptr, i == 0);
-		shapes.addElement(shape_ptr);
+	for (std::size_t i = 0; i < num_confs; i++) {
+		if (i == 0) {
+			tmplt_shape_ptr.reset(new GaussianShape());
+
+			createShape(molgraph, Chem::AtomConformer3DCoordinatesFunctor(i), *tmplt_shape_ptr);
+			shapes.addElement(tmplt_shape_ptr);
+
+		} else {
+			GaussianShape::SharedPointer shape_ptr(new GaussianShape(*tmplt_shape_ptr));
+
+			createShape(Chem::AtomConformer3DCoordinatesFunctor(i), *shape_ptr);
+			shapes.addElement(shape_ptr);
+		}
 	}
 }
 
 template <typename CoordsFunc>
-void Shape::GaussianShapeGenerator::createShape(const Chem::MolecularGraph& molgraph, const CoordsFunc& coords_func, GaussianShape& shape, bool init)
+void Shape::GaussianShapeGenerator::createShape(const Chem::MolecularGraph& molgraph, const CoordsFunc& coords_func, GaussianShape& shape)
 {
 	using namespace Chem;
+	using namespace Pharm;
 
 	if (genMolShape) {
-		if (init) {
-			atomElements.clear();
+		shapeAtoms.clear();
 
-			for (std::size_t i = 0, num_atoms = molgraph.getNumAtoms(); i < num_atoms; i++) {
-				const Atom& atom = molgraph.getAtom(i);
-				unsigned int atom_type = getType(atom);
+		for (std::size_t i = 0, num_atoms = molgraph.getNumAtoms(); i < num_atoms; i++) {
+			const Atom& atom = molgraph.getAtom(i);
+			unsigned int atom_type = getType(atom);
 		
-				if (!incHydrogens && atom_type == AtomType::H)
-					continue;
+			if (!incHydrogens && atom_type == AtomType::H)
+				continue;
 
-				if (atomRadius > 0.0)
-					atomElements.push_back(ShapeElement(i, atomRadius));
+			shapeAtoms.push_back(&atom);
 
-				else {
-					double r = AtomDictionary::getVdWRadius(atom_type);
+			if (atomRadius > 0.0)
+				shape.addElement(coords_func(molgraph.getAtom(i)), atomRadius, 0, atomHardness);
 
-					if (r > 0.0)  // sanity check
-						atomElements.push_back(ShapeElement(i, r));
-					else
-						atomElements.push_back(ShapeElement(i, 1.0));
-				}
+			else {
+				double r = AtomDictionary::getVdWRadius(atom_type);
+
+				if (r > 0.0)  // sanity check
+					shape.addElement(coords_func(atom), r, 0, atomHardness);
+				else
+					shape.addElement(coords_func(atom), 1.0, 0, atomHardness);
 			}
-		}
-
-		for (ShapeElementArray::const_iterator it = atomElements.begin(), end = atomElements.end(); it != end; ++it) {
-			const ShapeElement& shape_elem = *it;
-
-			shape.addElement(coords_func(molgraph.getAtom(shape_elem.first)), shape_elem.second, 0, atomHardness);
 		}
 	}
 
 	if (genPharmShape) {
-		using namespace Pharm;
+		pharmGen->setAtom3DCoordinatesFunction(coords_func);
+		pharmGen->generate(molgraph, pharm, false);
 
-		if (init) {
-			pharmGen->setAtom3DCoordinatesFunction(coords_func);
-			pharmGen->generate(molgraph, pharm, false);
+		for (BasicPharmacophore::ConstFeatureIterator it = pharm.getFeaturesBegin(), end = pharm.getFeaturesEnd(); it != end; ++it) {
+			const Feature& feature = *it;
+			unsigned int feature_type = getType(feature) + 1;
 
-			ftrElements.clear();
+			if (ftrRadius > 0.0)
+				shape.addElement(get3DCoordinates(feature), ftrRadius, feature_type, ftrHardness);
 
-			for (BasicPharmacophore::ConstFeatureIterator it = pharm.getFeaturesBegin(), end = pharm.getFeaturesEnd(); it != end; ++it) {
-				const Feature& feature = *it;
-				unsigned int feature_type = getType(feature) + 1;
+			else {
+				double r = getTolerance(feature);
 
-				if (ftrRadius > 0.0)
-					ftrElements.push_back(ShapeElement(feature_type, ftrRadius));
-
-				else {
-					double r = getTolerance(feature);
-
-					if (r > 0.0)  // sanity check
-						ftrElements.push_back(ShapeElement(feature_type, r));
-					else
-						ftrElements.push_back(ShapeElement(feature_type, 1.0));
-				}
+				if (r > 0.0)  // sanity check
+					shape.addElement(get3DCoordinates(feature), r, feature_type, ftrHardness);
+				else
+					shape.addElement(get3DCoordinates(feature), 1.0, feature_type, ftrHardness);
 			}
 		}
+	}
+}
 
-		std::size_t i = 0;
+template <typename CoordsFunc>
+void Shape::GaussianShapeGenerator::createShape(const CoordsFunc& coords_func, GaussianShape& shape) const
+{
+	using namespace Chem;
+	using namespace Pharm;
+
+	std::size_t i = 0;
+
+	if (genMolShape) {
+		for (std::size_t num_atoms = shapeAtoms.size(); i < num_atoms; i++) 
+			shape.getElement(i).setPosition(coords_func(*shapeAtoms[i]));
+	}
+
+	if (genPharmShape) {
 		double ftr_pos[3];
 
 		for (BasicPharmacophore::ConstFeatureIterator it = pharm.getFeaturesBegin(), end = pharm.getFeaturesEnd(); it != end; ++it, i++) {
 			const Feature& feature = *it;
-
-			if (init) {
-				shape.addElement(get3DCoordinates(feature), ftrElements[i].second, ftrElements[i].first, ftrHardness);
-				continue;
-			}
 
 			if (!hasSubstructure(feature))
 				continue;
@@ -275,7 +285,7 @@ void Shape::GaussianShapeGenerator::createShape(const Chem::MolecularGraph& molg
 			ftr_pos[1] /= num_atoms;
 			ftr_pos[2] /= num_atoms;
 
-			shape.addElement(Math::vec(ftr_pos[0], ftr_pos[1], ftr_pos[2]), ftrElements[i].second, ftrElements[i].first, ftrHardness);
+			shape.getElement(i).setPosition(Math::vec(ftr_pos[0], ftr_pos[1], ftr_pos[2]));
 		}
 	}
 }

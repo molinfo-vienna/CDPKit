@@ -32,6 +32,7 @@
 #include <boost/bind.hpp>
 
 #include "CDPL/Shape/GaussianShapeFunction.hpp"
+#include "CDPL/Base/Exceptions.hpp"
 
 #include "GaussianProductList.hpp"
 #include "GaussianProduct.hpp"
@@ -185,6 +186,14 @@ void Shape::GaussianShapeFunction::transform(const Math::Matrix4D& xform)
 		else
 			prod->init();
 	}
+}
+
+const Math::Vector3D& Shape::GaussianShapeFunction::getElementPosition(std::size_t idx) const
+{
+	if (idx >= shape->getNumElements())
+		throw Base::IndexError("GaussianShapeFunction: element index out of bounds");
+
+	return prodList->getProduct(idx)->getCenter();
 }
 
 void Shape::GaussianShapeFunction::getElementPositions(Math::Vector3DArray& coords) const

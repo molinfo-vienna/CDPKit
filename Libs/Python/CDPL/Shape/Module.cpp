@@ -54,6 +54,7 @@ BOOST_PYTHON_MODULE(_shape)
 
 	exportGaussianShapeFunctionAlignment();
 	exportGaussianShapeAlignment();
+	exportFastGaussianShapeAlignment();
 
 	exportScreeningSettings();
 	exportScreeningProcessor();

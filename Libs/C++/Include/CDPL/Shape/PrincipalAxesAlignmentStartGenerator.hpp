@@ -34,7 +34,6 @@
 #include <vector>
 
 #include <boost/random/mersenne_twister.hpp>
-#include <boost/random/uniform_real.hpp>
 
 #include "CDPL/Shape/APIPrefix.hpp"
 #include "CDPL/Shape/GaussianShapeAlignmentStartGenerator.hpp"
@@ -120,9 +119,8 @@ namespace CDPL
 			const QuaternionTransformation& getStartTransform(std::size_t idx) const;
 
 		  private:
-			void generateForElementCenters(const GaussianShape* shape, const GaussianShapeFunction& func, 
-										   unsigned int axes_swap_flags, bool ref_shape);
-			void generate(const Math::Vector3D& ctr_trans, const GaussianShapeFunction& func, unsigned int axes_swap_flags);
+			void generateForElementCenters(const GaussianShapeFunction& func, unsigned int axes_swap_flags, bool ref_shape);
+			void generate(const Math::Vector3D& ctr_trans, unsigned int axes_swap_flags);
 
 			template <typename QE>
 			void addStartTransform(Math::Vector3D::ConstPointer ctr_trans_data, const Math::QuaternionExpression<QE>& rot_quat);
@@ -130,21 +128,21 @@ namespace CDPL
 			typedef std::vector<QuaternionTransformation> StartTransformList;
 			typedef boost::random::mt11213b RandomEngine;
 
-			bool                 shapeCtrStarts;
-			bool                 colCtrStarts;
-			bool                 nonColCtrStarts;
-			bool                 randomStarts;
-			bool                 genForAlgdShape;
-			bool                 genForRefShape;
-			bool                 genForLargerShape;
-			StartTransformList   startTransforms;
-			const GaussianShape* refShape;
-			double               symThreshold;
-			double               maxRandomTrans;
-			std::size_t          numRandomStarts;
-			unsigned int         refAxesSwapFlags;
-			std::size_t          numSubTransforms;
-			RandomEngine         randomEngine;
+			bool                         shapeCtrStarts;
+			bool                         colCtrStarts;
+			bool                         nonColCtrStarts;
+			bool                         randomStarts;
+			bool                         genForAlgdShape;
+			bool                         genForRefShape;
+			bool                         genForLargerShape;
+			StartTransformList           startTransforms;
+			const GaussianShapeFunction* refShapeFunc;
+			double                       symThreshold;
+			double                       maxRandomTrans;
+			std::size_t                  numRandomStarts;
+			unsigned int                 refAxesSwapFlags;
+			std::size_t                  numSubTransforms;
+			RandomEngine                 randomEngine;
 		};
 
 		/**

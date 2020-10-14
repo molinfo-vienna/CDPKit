@@ -91,6 +91,8 @@ namespace CDPL
 			
 			void transform(const Math::Matrix4D& xform);
 
+			const Math::Vector3D& getElementPosition(std::size_t idx) const;
+
 			void getElementPositions(Math::Vector3DArray& coords) const;
 
 			double calcDensity(const Math::Vector3D& pos) const;

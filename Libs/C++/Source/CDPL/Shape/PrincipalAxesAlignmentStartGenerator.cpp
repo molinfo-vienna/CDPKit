@@ -91,7 +91,7 @@ const double      Shape::PrincipalAxesAlignmentStartGenerator::DEF_MAX_RANDOM_TR
 
 Shape::PrincipalAxesAlignmentStartGenerator::PrincipalAxesAlignmentStartGenerator():
 	shapeCtrStarts(true), colCtrStarts(false), nonColCtrStarts(false), randomStarts(false),
-	genForAlgdShape(false), genForRefShape(true), genForLargerShape(true), refShape(0),
+	genForAlgdShape(false), genForRefShape(true), genForLargerShape(false), refShapeFunc(0),
 	symThreshold(DEF_SYMMETRY_THRESHOLD), maxRandomTrans(DEF_MAX_RANDOM_TRANSLATION),
 	numRandomStarts(DEF_NUM_RANDOM_STARTS),refAxesSwapFlags(getAxesSwapFlags(SymmetryClass::UNDEF)),
 	numSubTransforms(0)
@@ -236,13 +236,16 @@ void Shape::PrincipalAxesAlignmentStartGenerator::setRandomSeed(unsigned int see
 
 void Shape::PrincipalAxesAlignmentStartGenerator::setReference(const GaussianShapeFunction& func, unsigned int sym_class)
 {
-	refShape = func.getShape();
+	refShapeFunc = &func;
 	refAxesSwapFlags = getAxesSwapFlags(sym_class);
 }
 
 bool Shape::PrincipalAxesAlignmentStartGenerator::generate(const GaussianShapeFunction& func, unsigned int sym_class)
 {
-	if (!refShape)
+	if (!refShapeFunc)
+		return false;
+
+	if (!refShapeFunc->getShape())
 		return false;
 
 	if (!func.getShape())
@@ -262,39 +265,39 @@ bool Shape::PrincipalAxesAlignmentStartGenerator::generate(const GaussianShapeFu
 	if (axes_swap_flags == 0b11)
 		numSubTransforms += 12;
 
-	if (shapeCtrStarts)
-		generate(Math::Vector3D(), func, axes_swap_flags);
+	if (shapeCtrStarts) 
+		generate(Math::Vector3D(), axes_swap_flags);
 
 	if (colCtrStarts | nonColCtrStarts) {
 		if (genForLargerShape && !genForAlgdShape && !genForRefShape) {
-			if (func.getShape()->getNumElements() > refShape->getNumElements())
-				generateForElementCenters(func.getShape(), func, axes_swap_flags, false);				
+			if (func.getShape()->getNumElements() > refShapeFunc->getShape()->getNumElements())
+				generateForElementCenters(func, axes_swap_flags, false);				
 			else
-				generateForElementCenters(refShape, func, axes_swap_flags, true);
+				generateForElementCenters(*refShapeFunc, axes_swap_flags, true);
 
 		} else if (genForLargerShape && !genForAlgdShape && genForRefShape) {
-			if (func.getShape()->getNumElements() > refShape->getNumElements()) {
-				generateForElementCenters(func.getShape(), func, axes_swap_flags, false);				
-				generateForElementCenters(refShape, func, axes_swap_flags, true);				
+			if (func.getShape()->getNumElements() > refShapeFunc->getShape()->getNumElements()) {
+				generateForElementCenters(func, axes_swap_flags, false);				
+				generateForElementCenters(*refShapeFunc, axes_swap_flags, true);				
 
 			} else
-				generateForElementCenters(refShape, func, axes_swap_flags, true);
+				generateForElementCenters(*refShapeFunc, axes_swap_flags, true);
 
 		}  else if (genForLargerShape && genForAlgdShape && !genForRefShape) {			
-			if (func.getShape()->getNumElements() > refShape->getNumElements()) 
-				generateForElementCenters(func.getShape(), func, axes_swap_flags, false);				
+			if (func.getShape()->getNumElements() > refShapeFunc->getShape()->getNumElements()) 
+				generateForElementCenters(func, axes_swap_flags, false);				
 
 			else {
-				generateForElementCenters(func.getShape(), func, axes_swap_flags, false);				
-				generateForElementCenters(refShape, func, axes_swap_flags, true);
+				generateForElementCenters(func, axes_swap_flags, false);				
+				generateForElementCenters(*refShapeFunc, axes_swap_flags, true);
 			}
 
 		} else {
 			if (genForAlgdShape)
-				generateForElementCenters(func.getShape(), func, axes_swap_flags, false);				
+				generateForElementCenters(func, axes_swap_flags, false);				
 
 			if (genForRefShape)
-				generateForElementCenters(refShape, func, axes_swap_flags, true);
+				generateForElementCenters(*refShapeFunc, axes_swap_flags, true);
 		}
 	}
 	
@@ -302,43 +305,45 @@ bool Shape::PrincipalAxesAlignmentStartGenerator::generate(const GaussianShapeFu
 		boost::random::uniform_real_distribution<double> rand_dist(-maxRandomTrans, maxRandomTrans);
 
 		for (std::size_t i = 0; i < numRandomStarts; i++)
-			generate(Math::vec(rand_dist(randomEngine), rand_dist(randomEngine), rand_dist(randomEngine)), func, axes_swap_flags);
+			generate(Math::vec(rand_dist(randomEngine), rand_dist(randomEngine), rand_dist(randomEngine)), axes_swap_flags);
 	}
-		
+
 	return !startTransforms.empty();
 }
 
-void Shape::PrincipalAxesAlignmentStartGenerator::generateForElementCenters(const GaussianShape* shape, const GaussianShapeFunction& func, unsigned int axes_swap_flags, bool ref_shape)
+void Shape::PrincipalAxesAlignmentStartGenerator::generateForElementCenters(const GaussianShapeFunction& func, unsigned int axes_swap_flags, bool ref_shape)
 {
+	const GaussianShape& shape = *func.getShape();
+
 	if (colCtrStarts && nonColCtrStarts) {
-		for (GaussianShape::ConstElementIterator it = shape->getElementsBegin(), end = shape->getElementsEnd(); it != end; ++it) {
+		for (std::size_t i = 0, num_elem = shape.getNumElements(); i < num_elem; i++) {
 			if (ref_shape)
-				generate(it->getPosition(), func, axes_swap_flags);
+				generate(func.getElementPosition(i), axes_swap_flags);
 			else
-				generate(-it->getPosition(), func, axes_swap_flags);
+				generate(-func.getElementPosition(i), axes_swap_flags);
 		}
 
 	} else if (nonColCtrStarts) {
-		for (GaussianShape::ConstElementIterator it = shape->getElementsBegin(), end = shape->getElementsEnd(); it != end; ++it) 
-			if (it->getColor() == 0) {
+		for (std::size_t i = 0, num_elem = shape.getNumElements(); i < num_elem; i++) 
+			if (shape.getElement(i).getColor() == 0) {
 				if (ref_shape)
-					generate(it->getPosition(), func, axes_swap_flags);
+					generate(func.getElementPosition(i), axes_swap_flags);
 				else
-					generate(-it->getPosition(), func, axes_swap_flags);
+					generate(-func.getElementPosition(i), axes_swap_flags);
 			}
 
 	} else if (colCtrStarts) {
-		for (GaussianShape::ConstElementIterator it = shape->getElementsBegin(), end = shape->getElementsEnd(); it != end; ++it) 
-			if (it->getColor() != 0) {
+		for (std::size_t i = 0, num_elem = shape.getNumElements(); i < num_elem; i++) 
+			if (shape.getElement(i).getColor() != 0) {
 				if (ref_shape)
-					generate(it->getPosition(), func, axes_swap_flags);
+					generate(func.getElementPosition(i), axes_swap_flags);
 				else
-					generate(-it->getPosition(), func, axes_swap_flags);
+					generate(-func.getElementPosition(i), axes_swap_flags);
 			}
 	}
 }
 
-void Shape::PrincipalAxesAlignmentStartGenerator::generate(const Math::Vector3D& ctr_trans, const GaussianShapeFunction& func, unsigned int axes_swap_flags)
+void Shape::PrincipalAxesAlignmentStartGenerator::generate(const Math::Vector3D& ctr_trans, unsigned int axes_swap_flags)
 {
 	Math::Vector3D::ConstPointer ctr_trans_data = ctr_trans.getData();
 

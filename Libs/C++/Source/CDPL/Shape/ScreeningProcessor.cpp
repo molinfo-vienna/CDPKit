@@ -143,7 +143,7 @@ bool Shape::ScreeningProcessor::process(const Chem::MolecularGraph& molgraph)
 				continue;
 
 			if (hitCallback) {
-				for (GaussianShapeAlignment::ResultIterator it = alignment.getResultsBegin(), end = alignment.getResultsEnd(); it != end; ++it) {
+				for (FastGaussianShapeAlignment::ResultIterator it = alignment.getResultsBegin(), end = alignment.getResultsEnd(); it != end; ++it) {
 					AlignmentResult& res = *it;
 
 					if (have_cutoff && res.getScore() < settings.getScoreCutoff())
@@ -165,7 +165,7 @@ bool Shape::ScreeningProcessor::process(const Chem::MolecularGraph& molgraph)
 		return false;
 
 	if (hitCallback) {
-		for (GaussianShapeAlignment::ConstResultIterator it = alignment.getResultsBegin(), end = alignment.getResultsEnd(); it != end; ++it) {
+		for (FastGaussianShapeAlignment::ConstResultIterator it = alignment.getResultsBegin(), end = alignment.getResultsEnd(); it != end; ++it) {
 			const AlignmentResult& res = *it;
 
 			if (have_cutoff && res.getScore() < settings.getScoreCutoff())
@@ -180,14 +180,10 @@ bool Shape::ScreeningProcessor::process(const Chem::MolecularGraph& molgraph)
 
 void Shape::ScreeningProcessor::init()
 {
-	alignment.calcSelfOverlaps(true);
-	alignment.calcColorSelfOverlaps(true);
-	alignment.setMaxOrder(1);
-	alignment.getDefaultOverlapFunction().proximityOptimization(true);
-	alignment.getDefaultOverlapFunction().fastExpFunction(true);
-	alignment.getDefaultStartGenerator().genForAlignedShapeCenters(false);
-	alignment.getDefaultStartGenerator().genForReferenceShapeCenters(false);
-	alignment.getDefaultStartGenerator().genForLargerShapeCenters(true);
+	alignment.genShapeCenterStarts(true);
+	alignment.genForAlignedShapeCenters(false);
+	alignment.genForReferenceShapeCenters(false);
+	alignment.genForLargerShapeCenters(true);
 	
 	shapeGen.includeHydrogens(false);
 	shapeGen.multiConformerMode(true);
@@ -245,19 +241,19 @@ void Shape::ScreeningProcessor::applyAlignmentSettings()
 	alignment.greedyOptimization(settings.greedyOptimization());
 	alignment.setMaxNumOptimizationIterations(settings.getMaxNumOptimizationIterations());
 	alignment.setOptimizationStopGradient(settings.getOptimizationStopGradient());
-	alignment.getDefaultStartGenerator().setNumRandomStarts(settings.getNumRandomStarts());
+	alignment.setNumRandomStarts(settings.getNumRandomStarts());
 
 	if (settings.getAlignmentMode() == ScreeningSettings::NO_ALIGNMENT)
 		alignment.performAlignment(false);
 
 	else {
-		alignment.getDefaultStartGenerator().genShapeCenterStarts(settings.getAlignmentMode() & ScreeningSettings::SHAPE_CENTROID);
-		alignment.getDefaultStartGenerator().genNonColorCenterStarts(settings.getAlignmentMode() & ScreeningSettings::ATOM_CENTERS);
-		alignment.getDefaultStartGenerator().genColorCenterStarts(settings.getAlignmentMode() & ScreeningSettings::COLOR_FEATURE_CENTERS);
-		alignment.getDefaultStartGenerator().genRandomStarts(settings.getAlignmentMode() & ScreeningSettings::RANDOM);
+		alignment.genShapeCenterStarts(settings.getAlignmentMode() & ScreeningSettings::SHAPE_CENTROID);
+		alignment.genNonColorCenterStarts(settings.getAlignmentMode() & ScreeningSettings::ATOM_CENTERS);
+		alignment.genColorCenterStarts(settings.getAlignmentMode() & ScreeningSettings::COLOR_FEATURE_CENTERS);
+		alignment.genRandomStarts(settings.getAlignmentMode() & ScreeningSettings::RANDOM);
 
-		alignment.performAlignment(alignment.getDefaultStartGenerator().genShapeCenterStarts() || alignment.getDefaultStartGenerator().genNonColorCenterStarts() ||
-								   alignment.getDefaultStartGenerator().genColorCenterStarts() || alignment.getDefaultStartGenerator().genRandomStarts());
+		alignment.performAlignment(alignment.genShapeCenterStarts() || alignment.genNonColorCenterStarts() ||
+								   alignment.genColorCenterStarts() || alignment.genRandomStarts());
 	}
 	
 	switch (settings.getScreeningMode()) {

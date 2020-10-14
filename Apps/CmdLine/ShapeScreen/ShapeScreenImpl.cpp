@@ -123,7 +123,7 @@ ShapeScreenImpl::ShapeScreenImpl():
 {
    	addOption("query,q", "Query molecule file.", 
 			  value<std::string>(&queryFile)->required());
-    addOption("database,d", "Screened database file(s).", 
+	addOption("database,d", "Screened database file(s).", 
 			  value<std::string>(&databaseFile)->required());
     addOption("output,o", "Hit molecule output file.", 
 			  value<std::string>(&hitOutputFile));
@@ -169,7 +169,7 @@ ShapeScreenImpl::ShapeScreenImpl():
 	addOption("color-ftr-type,f", "Specifies which type of color features to generate and score "
 			  "(NONE, EXP_PHARM, IMP_PHARM, default: IMP_PHARM).",
 			  value<std::string>()->notifier(boost::bind(&ShapeScreenImpl::setColorFeatureType, this, _1)));
-	addOption("all-carbon,C", "If specified, every heavy atom is interpreted as carbon (default: false).",
+	addOption("all-carbon,W", "If specified, every heavy atom is interpreted as carbon (default: true).",
 			  value<bool>()->implicit_value(true)->notifier(boost::bind(&ShapeScreenImpl::enableAllCarbonMode, this, _1)));
 	addOption("shape-center-starts,S", "If specified, principal axes aligned starting poses will be generated where both shape centers are located at"
 			  "origin the coordinates system (default: true).",

@@ -308,6 +308,8 @@ bool Shape::GaussianShapeFunctionAlignment::align(const GaussianShapeFunction& f
 			continue;
 		}
 
+		bool have_sol = false;
+
 		for (std::size_t j = 0; j < num_sub_xforms && i < num_starts; j++, i++) {
 			if (!optOverlap) {
 				quaternionToMatrix(startGen->getStartTransform(i), curr_res.transform);
@@ -331,10 +333,11 @@ bool Shape::GaussianShapeFunctionAlignment::align(const GaussianShapeFunction& f
 				curr_res.overlap = overlapFunc->calcOverlap(optPoseCoords);
 			}
 
-			if (j == 0) {
+			if (!have_sol) {
 				curr_res.colOverlap = (calcColOverlaps ? overlapFunc->calcColorOverlap(optPoseCoords) : 0.0);
 
 				results.push_back(curr_res);
+				have_sol = true;
 
 			} else if (curr_res.overlap > results.back().overlap) {
 				curr_res.colOverlap = (calcColOverlaps ? overlapFunc->calcColorOverlap(optPoseCoords) : 0.0);
@@ -343,7 +346,7 @@ bool Shape::GaussianShapeFunctionAlignment::align(const GaussianShapeFunction& f
 			}
 		}
 	}
-	
+
 	return !results.empty();
 }
 

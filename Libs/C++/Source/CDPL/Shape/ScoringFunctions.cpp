@@ -40,7 +40,12 @@ double Shape::calcTotalOverlapTanimotoScore(const AlignmentResult& res)
 
 double Shape::calcColorTanimotoScore(const AlignmentResult& res)
 {
-    return (res.getColorOverlap() / (res.getReferenceColorSelfOverlap() + res.getAlignedColorSelfOverlap() - res.getColorOverlap()));
+	double denom = res.getReferenceColorSelfOverlap() + res.getAlignedColorSelfOverlap() - res.getColorOverlap();
+
+	if (denom == 0.0)
+		return 0.0;
+
+    return (res.getColorOverlap() / denom);
 }
 
 double Shape::calcShapeTanimotoScore(const AlignmentResult& res)
@@ -48,8 +53,12 @@ double Shape::calcShapeTanimotoScore(const AlignmentResult& res)
     double shape_ovlp = res.getOverlap() - res.getColorOverlap();
     double ref_shape_self_ovlp = res.getReferenceSelfOverlap() - res.getReferenceColorSelfOverlap();
     double al_shape_self_ovlp = res.getAlignedSelfOverlap() - res.getAlignedColorSelfOverlap();
+	double denom = ref_shape_self_ovlp + al_shape_self_ovlp - shape_ovlp;
 
-    return (shape_ovlp / (ref_shape_self_ovlp + al_shape_self_ovlp - shape_ovlp));
+	if (denom == 0.0)
+		return 0.0;
+
+    return (shape_ovlp / denom);
 }
 
 double Shape::calcTanimotoComboScore(const AlignmentResult& res)
@@ -59,7 +68,12 @@ double Shape::calcTanimotoComboScore(const AlignmentResult& res)
 
 double Shape::calcTotalOverlapTverskyScore(const AlignmentResult& res, double alpha, double beta)
 {
-	return (res.getOverlap() / (res.getReferenceSelfOverlap() * alpha + res.getAlignedSelfOverlap() * beta));
+	double denom = res.getReferenceSelfOverlap() * alpha + res.getAlignedSelfOverlap() * beta;
+
+	if (denom == 0.0)
+		return 0.0;
+
+	return (res.getOverlap() / denom);
 }
 
 double Shape::calcShapeTverskyScore(const AlignmentResult& res, double alpha, double beta)
@@ -67,13 +81,22 @@ double Shape::calcShapeTverskyScore(const AlignmentResult& res, double alpha, do
 	double shape_ovlp = res.getOverlap() - res.getColorOverlap();
     double ref_shape_self_ovlp = res.getReferenceSelfOverlap() - res.getReferenceColorSelfOverlap();
     double al_shape_self_ovlp = res.getAlignedSelfOverlap() - res.getAlignedColorSelfOverlap();
+	double denom = ref_shape_self_ovlp * alpha + al_shape_self_ovlp * beta;
 
-    return (shape_ovlp / (ref_shape_self_ovlp * alpha + al_shape_self_ovlp * beta));
+	if (denom == 0.0)
+		return 0.0;
+
+    return (shape_ovlp / denom);
 }
 
 double Shape::calcColorTverskyScore(const AlignmentResult& res, double alpha, double beta)
 {
-    return (res.getColorOverlap() / (res.getReferenceColorSelfOverlap() * alpha + res.getAlignedColorSelfOverlap() * beta));
+	double denom = res.getReferenceColorSelfOverlap() * alpha + res.getAlignedColorSelfOverlap() * beta;
+
+	if (denom == 0.0)
+		return 0.0;
+
+    return (res.getColorOverlap() / denom);
 }
 
 double Shape::calcTverskyComboScore(const AlignmentResult& res, double alpha, double beta)
@@ -83,20 +106,34 @@ double Shape::calcTverskyComboScore(const AlignmentResult& res, double alpha, do
 
 double Shape::calcReferenceTotalOverlapTverskyScore(const AlignmentResult& res, double alpha)
 {
-	return (res.getOverlap() / (res.getReferenceSelfOverlap() * alpha));
+	double denom = res.getReferenceSelfOverlap() * alpha;
+
+	if (denom == 0.0)
+		return 0.0;
+
+	return (res.getOverlap() / denom);
 }
 
 double Shape::calcReferenceShapeTverskyScore(const AlignmentResult& res, double alpha)
 {
 	double shape_ovlp = res.getOverlap() - res.getColorOverlap();
     double ref_shape_self_ovlp = res.getReferenceSelfOverlap() - res.getReferenceColorSelfOverlap();
+	double denom = ref_shape_self_ovlp * alpha;
 
-    return (shape_ovlp / (ref_shape_self_ovlp * alpha));
+	if (denom == 0.0)
+		return 0.0;
+
+    return (shape_ovlp / denom);
 }
 
 double Shape::calcReferenceColorTverskyScore(const AlignmentResult& res, double alpha)
 {
-   return (res.getColorOverlap() / (res.getReferenceColorSelfOverlap() * alpha));
+	double denom = res.getReferenceColorSelfOverlap() * alpha;
+
+	if (denom == 0.0)
+		return 0.0;
+
+   return (res.getColorOverlap() / denom);
 }
 
 double Shape::calcReferenceTverskyComboScore(const AlignmentResult& res, double alpha)
@@ -106,20 +143,34 @@ double Shape::calcReferenceTverskyComboScore(const AlignmentResult& res, double 
 
 double Shape::calcAlignedTotalOverlapTverskyScore(const AlignmentResult& res, double beta)
 {
-	return (res.getOverlap() / (res.getAlignedSelfOverlap() * beta));
+	double denom = res.getAlignedSelfOverlap() * beta;
+
+	if (denom == 0.0)
+		return 0.0;
+
+	return (res.getOverlap() / denom);
 }
 
 double Shape::calcAlignedShapeTverskyScore(const AlignmentResult& res, double beta)
 {
 	double shape_ovlp = res.getOverlap() - res.getColorOverlap();
     double al_shape_self_ovlp = res.getAlignedSelfOverlap() - res.getAlignedColorSelfOverlap();
+	double denom = al_shape_self_ovlp * beta;
 
-    return (shape_ovlp / ( al_shape_self_ovlp * beta));
+	if (denom == 0.0)
+		return 0.0;
+
+    return (shape_ovlp / denom);
 }
 
 double Shape::calcAlignedColorTverskyScore(const AlignmentResult& res, double beta)
 {
-	return (res.getColorOverlap() / (res.getAlignedColorSelfOverlap() * beta));
+	double denom = res.getAlignedColorSelfOverlap() * beta;
+
+	if (denom == 0.0)
+		return 0.0;
+
+	return (res.getColorOverlap() / denom);
 }
 
 double Shape::calcAlignedTverskyComboScore(const AlignmentResult& res, double beta)

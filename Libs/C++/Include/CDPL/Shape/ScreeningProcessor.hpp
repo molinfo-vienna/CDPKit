@@ -39,7 +39,7 @@
 #include <boost/function.hpp>
 
 #include "CDPL/Shape/APIPrefix.hpp"
-#include "CDPL/Shape/GaussianShapeAlignment.hpp"
+#include "CDPL/Shape/FastGaussianShapeAlignment.hpp"
 #include "CDPL/Shape/GaussianShapeGenerator.hpp"
 #include "CDPL/Shape/ScreeningSettings.hpp"
 #include "CDPL/Shape/GaussianShapeSet.hpp"
@@ -117,7 +117,7 @@ namespace CDPL
 			ScreeningSettings::ColorFeatureType  colorFtrType;
 			bool                                 allCarbon;
 			Pharm::DefaultPharmacophoreGenerator expChgPharmGen;
-			GaussianShapeAlignment               alignment;
+			FastGaussianShapeAlignment           alignment;
 			GaussianShapeGenerator               shapeGen;
 			MolecularGraphList                   queryList;
 			HitCallbackFunction                  hitCallback;

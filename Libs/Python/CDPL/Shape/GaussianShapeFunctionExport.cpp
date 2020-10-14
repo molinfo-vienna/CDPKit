@@ -54,6 +54,8 @@ void CDPLPythonShape::exportGaussianShapeFunction()
 		.def("reset", &Shape::GaussianShapeFunction::reset, python::arg("self"))
 		.def("transform", &Shape::GaussianShapeFunction::transform, (python::arg("self"), python::arg("xform")))
 		.def("getElementPositions", &Shape::GaussianShapeFunction::getElementPositions, (python::arg("self"), python::arg("coords")))
+		.def("getElementPosition", &Shape::GaussianShapeFunction::getElementPosition, (python::arg("self"), python::arg("idx")),
+			python::return_internal_reference<>())
 		.def("calcDensity", &Shape::GaussianShapeFunction::calcDensity, (python::arg("self"), python::arg("pos")))
 		.def("calcSurfaceArea", static_cast<double (Shape::GaussianShapeFunction::*)() const>(&Shape::GaussianShapeFunction::calcSurfaceArea),
 			 python::arg("self"))
