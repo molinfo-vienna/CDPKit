@@ -649,6 +649,11 @@ void Shape::FastGaussianShapeAlignment::setupShapeData(const GaussianShape& shap
 	data.colElemOffs = 0;
 	data.equalNonColDelta = true;
 
+	if (ref) {
+		data.setIndex = currSetIndex;
+		data.index = currShapeIndex++;
+	}
+
 	for (std::size_t i = 0; i < num_elem; i++) {
 		const GaussianShape::Element& gs_elem = shape.getElement(i);
 
