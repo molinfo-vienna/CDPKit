@@ -46,8 +46,8 @@ namespace
 {
 
 	const double QUATERNION_UNITY_DEVIATION_PENALTY_FACTOR = 10000.0;
-	const double BFGS_MINIMIZER_STEP_SIZE                  = 0.01;
-	const double BFGS_MINIMIZER_TOLERANCE                  = 0.1;
+	const double BFGS_MINIMIZER_STEP_SIZE                  = 0.1;
+	const double BFGS_MINIMIZER_TOLERANCE                  = 0.5;
 }
 
 

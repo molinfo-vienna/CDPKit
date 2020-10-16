@@ -44,9 +44,16 @@
 using namespace CDPL;
 
 
+namespace
+{
+
+	const std::size_t MAX_SHAPE_CACHE_SIZE = 500;
+}
+
+
 Shape::GaussianShapeGenerator::GaussianShapeGenerator():
-    defPharmGen(true), pharmGen(&defPharmGen), genMolShape(true), genPharmShape(true), 
-	incHydrogens(false), multiConf(true), atomRadius(-1.0), atomHardness(2.7), 
+    shapeCache(MAX_SHAPE_CACHE_SIZE), defPharmGen(true), pharmGen(&defPharmGen), genMolShape(true),
+	genPharmShape(true), incHydrogens(false), multiConf(true), atomRadius(-1.0), atomHardness(2.7), 
 	ftrRadius(-1.0), ftrHardness(5.0)
 {}
 
@@ -150,40 +157,50 @@ Pharm::DefaultPharmacophoreGenerator& Shape::GaussianShapeGenerator::getDefaultP
     return defPharmGen;
 }
 
-void Shape::GaussianShapeGenerator::generate(const Chem::MolecularGraph& molgraph, GaussianShapeSet& shapes, bool append)
+const Shape::GaussianShapeSet& Shape::GaussianShapeGenerator::generate(const Chem::MolecularGraph& molgraph)
 {
+	shapes.clear();
+	shapeCache.putAll();
+	
 	if (!genMolShape && !genPharmShape)
-		return;
-
-    if (!append)
-		shapes.clear();
+		return shapes;
 
 	std::size_t num_confs = (multiConf ? getNumConformations(molgraph) : 0);
 
 	if (num_confs == 0) {
-		GaussianShape::SharedPointer shape_ptr(new GaussianShape());
+		GaussianShape::SharedPointer shape_ptr = shapeCache.get();
 
 		createShape(molgraph, Chem::Atom3DCoordinatesFunctor(), *shape_ptr);
 		shapes.addElement(shape_ptr);
-		return;
+
+		return shapes;
 	}
 
 	GaussianShape::SharedPointer tmplt_shape_ptr;
 
 	for (std::size_t i = 0; i < num_confs; i++) {
 		if (i == 0) {
-			tmplt_shape_ptr.reset(new GaussianShape());
+			tmplt_shape_ptr = shapeCache.get();
 
 			createShape(molgraph, Chem::AtomConformer3DCoordinatesFunctor(i), *tmplt_shape_ptr);
 			shapes.addElement(tmplt_shape_ptr);
 
 		} else {
-			GaussianShape::SharedPointer shape_ptr(new GaussianShape(*tmplt_shape_ptr));
+			GaussianShape::SharedPointer shape_ptr = shapeCache.get();
+
+			*shape_ptr = *tmplt_shape_ptr;
 
 			createShape(Chem::AtomConformer3DCoordinatesFunctor(i), *shape_ptr);
 			shapes.addElement(shape_ptr);
 		}
 	}
+
+	return shapes;
+}
+
+const Shape::GaussianShapeSet& Shape::GaussianShapeGenerator::getShapes() const
+{
+	return shapes;
 }
 
 template <typename CoordsFunc>
@@ -192,6 +209,8 @@ void Shape::GaussianShapeGenerator::createShape(const Chem::MolecularGraph& molg
 	using namespace Chem;
 	using namespace Pharm;
 
+	shape.clear();
+	
 	if (genMolShape) {
 		shapeAtoms.clear();
 

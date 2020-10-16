@@ -98,10 +98,10 @@ namespace
 		return (res1.getScore() >= res2.getScore());
 	}
 
-    const double RADIUS_SCALING_FACTOR                     = 1.3;
+    const double RADIUS_SCALING_FACTOR                     = 1.4;
 	const double QUATERNION_UNITY_DEVIATION_PENALTY_FACTOR = 10000.0;
-	const double BFGS_MINIMIZER_STEP_SIZE                  = 0.01;
-	const double BFGS_MINIMIZER_TOLERANCE                  = 0.1;
+	const double BFGS_MINIMIZER_STEP_SIZE                  = 0.1;
+	const double BFGS_MINIMIZER_TOLERANCE                  = 0.5;
 }
 
 
@@ -245,6 +245,9 @@ double Shape::FastGaussianShapeAlignment::getOptimizationStopGradient() const
 void Shape::FastGaussianShapeAlignment::clearReferenceShapes()
 {
 	refShapeData.clear();
+
+	currSetIndex = 0;
+	currShapeIndex = 0;
 }
 
 void Shape::FastGaussianShapeAlignment::addReferenceShape(const GaussianShape& shape, bool new_set)
@@ -285,7 +288,6 @@ std::size_t Shape::FastGaussianShapeAlignment::getNumReferenceShapes() const
 {
 	return refShapeData.size();
 }
-
 
 void Shape::FastGaussianShapeAlignment::genShapeCenterStarts(bool generate)
 {
@@ -470,6 +472,10 @@ Shape::FastGaussianShapeAlignment::ResultIterator Shape::FastGaussianShapeAlignm
 void Shape::FastGaussianShapeAlignment::alignAndProcessResults(std::size_t ref_idx, std::size_t al_idx)
 {
 	const ShapeData& ref_data = refShapeData[ref_idx];
+
+	if (ref_data.elements.empty())
+		return;
+	
 	AlignmentResult curr_res;
 
 	if (!perfAlignment) {
@@ -1100,8 +1106,7 @@ double Shape::FastGaussianShapeAlignment::calcOverlap(const ShapeData& ref_data,
 	double overlap = 0.0;
 
 	if (!color) {
-		if (ref_data.equalNonColDelta && ovl_data.equalNonColDelta && (ref_data.elements.size() > 0) &&
-			ref_data.elements[0].delta == ovl_data.elements[0].delta) {
+		if (ref_data.equalNonColDelta && ovl_data.equalNonColDelta && ref_data.elements[0].delta == ovl_data.elements[0].delta) {
 
 			double max_dist = ref_data.elements[0].radius * 2.0 * RADIUS_SCALING_FACTOR;
 			double elem_delta = ref_data.elements[0].delta;
@@ -1188,8 +1193,7 @@ double Shape::FastGaussianShapeAlignment::calcOverlapGradient(const ShapeData& r
 	Math::Vector3D::Pointer inters_prod_ctr_data = inters_prod_ctr.getData();
 	double overlap = 0.0;
 
-	if (ref_data.equalNonColDelta && algdShapeData.equalNonColDelta && (ref_data.elements.size() > 0) &&
-		ref_data.elements[0].delta == algdShapeData.elements[0].delta) {
+	if (ref_data.equalNonColDelta && algdShapeData.equalNonColDelta && ref_data.elements[0].delta == algdShapeData.elements[0].delta) {
 
 		double max_dist = ref_data.elements[0].radius * 2.0 * RADIUS_SCALING_FACTOR;
 		double elem_delta = ref_data.elements[0].delta;

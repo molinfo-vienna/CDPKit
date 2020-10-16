@@ -42,7 +42,6 @@
 #include "CDPL/Shape/FastGaussianShapeAlignment.hpp"
 #include "CDPL/Shape/GaussianShapeGenerator.hpp"
 #include "CDPL/Shape/ScreeningSettings.hpp"
-#include "CDPL/Shape/GaussianShapeSet.hpp"
 #include "CDPL/Pharm/DefaultPharmacophoreGenerator.hpp"
 
 
@@ -121,7 +120,6 @@ namespace CDPL
 			GaussianShapeGenerator               shapeGen;
 			MolecularGraphList                   queryList;
 			HitCallbackFunction                  hitCallback;
-			GaussianShapeSet                     shapes;
 		};
 
 		/**

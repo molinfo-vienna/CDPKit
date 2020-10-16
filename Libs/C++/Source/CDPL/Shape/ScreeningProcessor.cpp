@@ -93,8 +93,7 @@ void Shape::ScreeningProcessor::addQuery(const Chem::MolecularGraph& molgraph)
 {
 	applyShapeGenSettings(true);
 
-	shapeGen.generate(molgraph, shapes, false);
-	alignment.addReferenceShapes(shapes, true);
+	alignment.addReferenceShapes(shapeGen.generate(molgraph), true);
 	queryList.push_back(&molgraph);
 }
 
@@ -125,9 +124,9 @@ bool Shape::ScreeningProcessor::process(const Chem::MolecularGraph& molgraph)
 {
 	applyShapeGenSettings(false);
 	applyAlignmentSettings();
-
-	shapeGen.generate(molgraph, shapes, false);
-
+	
+	const GaussianShapeSet& shapes = shapeGen.generate(molgraph);
+	
 	if (shapes.isEmpty())
 		return false;
 
@@ -180,7 +179,6 @@ bool Shape::ScreeningProcessor::process(const Chem::MolecularGraph& molgraph)
 
 void Shape::ScreeningProcessor::init()
 {
-	alignment.genShapeCenterStarts(true);
 	alignment.genForAlignedShapeCenters(false);
 	alignment.genForReferenceShapeCenters(false);
 	alignment.genForLargerShapeCenters(true);
@@ -226,11 +224,9 @@ void Shape::ScreeningProcessor::applyShapeGenSettings(bool query)
 
 	if (query_changed) {
 		alignment.clearReferenceShapes();
-
-		for (MolecularGraphList::const_iterator it = queryList.begin(), end = queryList.end(); it != end; ++it) {
-			shapeGen.generate(**it, shapes, false);
-			alignment.addReferenceShapes(shapes, true);
-		}
+		
+		for (MolecularGraphList::const_iterator it = queryList.begin(), end = queryList.end(); it != end; ++it)
+			alignment.addReferenceShapes(shapeGen.generate(**it), true);
 	}
 }
 

@@ -204,7 +204,6 @@ double Shape::ExactGaussianShapeOverlapFunction::calcOverlap(const GaussianProdu
 		double prod1_weight = prod1->getWeightFactor();
 		double prod1_fact_exp = prod1_delta * prod1->getProductFactorExponent();
 		bool prod1_odd = prod1->hasOddOrder();
-		Math::Vector3D::ConstPointer prod1_ctr = prod1->getCenter().getData();
 
 		for (GaussianProductList::ConstProductIterator p_it2 = ref_prod_list->getProductsBegin(), p_end2 = ref_prod_list->getProductsEnd(); p_it2 != p_end2; ++p_it2) {
 			const GaussianProduct* prod2 = *p_it2;
@@ -252,8 +251,6 @@ double Shape::ExactGaussianShapeOverlapFunction::calcOverlap(const GaussianProdu
 															const Math::Vector3DArray& coords, bool color) const
 {
 	const Math::Vector3DArray::StorageType& coords_data = coords.getData();
-	Math::Vector3D ovl_prod_ctr;
-	Math::Vector3D::Pointer ovl_prod_ctr_data = ovl_prod_ctr.getData();
 	double overlap = 0.0;
 	
 	for (GaussianProductList::ConstProductIterator p_it1 = ovl_prod_list->getProductsBegin(), p_end1 = ovl_prod_list->getProductsEnd(); p_it1 != p_end1; ++p_it1) {
@@ -272,36 +269,8 @@ double Shape::ExactGaussianShapeOverlapFunction::calcOverlap(const GaussianProdu
 		double prod1_delta = prod1->getDelta();
 		double prod1_weight = prod1->getWeightFactor();
 		bool prod1_odd = prod1->hasOddOrder();
-		Math::Vector3D::ConstPointer prod1_ctr = 0;
 		double prod1_fact_exp = 0.0;
 
-		if (prod1->getNumFactors() == 1) {
-			prod1_ctr = coords_data[prod1->getIndex()].getData();
-			
-		} else {
-			ovl_prod_ctr.clear();
-			prod1_ctr = ovl_prod_ctr_data;
-			
-			for (GaussianProduct::ConstFactorIterator f_it1 = prod1->getFactorsBegin(), f_end = prod1->getFactorsEnd(); f_it1 != f_end; ) {
-				const GaussianProduct* prod1_fact = *f_it1;
-				Math::Vector3D::ConstPointer ctr1_data = coords_data[prod1_fact->getIndex()].getData();
-				double fact1_delta = prod1_fact->getDelta();
-
-				ovl_prod_ctr_data[0] += fact1_delta * ctr1_data[0];
-				ovl_prod_ctr_data[1] += fact1_delta * ctr1_data[1];
-				ovl_prod_ctr_data[2] += fact1_delta * ctr1_data[2];
-				
-				++f_it1;
-				
-				for (GaussianProduct::ConstFactorIterator f_it2 = f_it1; f_it2 != f_end; ++f_it2) 
-					prod1_fact_exp += fact1_delta * (*f_it2)->getDelta() * calcSquaredDistance(ctr1_data, coords_data[(*f_it2)->getIndex()].getData());
-			}
-
-			ovl_prod_ctr_data[0] /= prod1_delta;
-			ovl_prod_ctr_data[1] /= prod1_delta;
-			ovl_prod_ctr_data[2] /= prod1_delta;
-		}
-				 
 		for (GaussianProductList::ConstProductIterator p_it2 = ref_prod_list->getProductsBegin(), p_end2 = ref_prod_list->getProductsEnd(); p_it2 != p_end2; ++p_it2) {
 			const GaussianProduct* prod2 = *p_it2;
 			std::size_t prod2_color = prod2->getColor();

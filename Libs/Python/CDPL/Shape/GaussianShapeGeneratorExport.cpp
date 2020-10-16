@@ -92,7 +92,9 @@ void CDPLPythonShape::exportGaussianShapeGenerator()
 		.def("includeHydrogens", GetBoolFunc(&Shape::GaussianShapeGenerator::includeHydrogens), 
 			 python::arg("self"))
 		.def("generate", &Shape::GaussianShapeGenerator::generate,
-			 (python::arg("self"), python::arg("molgraph"), python::arg("shapes"), python::arg("append") = false))
+			 (python::arg("self"), python::arg("molgraph")), python::return_internal_reference<>())
+		.def("getShapes", &Shape::GaussianShapeGenerator::getShapes,
+			 python::arg("self"), python::return_internal_reference<>())
 		.add_property("pharmacophoreGenerator",
 					  python::make_function(&Shape::GaussianShapeGenerator::getPharmacophoreGenerator,
 											python::return_internal_reference<>()),
@@ -102,6 +104,8 @@ void CDPLPythonShape::exportGaussianShapeGenerator()
 					  python::make_function(static_cast<Pharm::DefaultPharmacophoreGenerator& (Shape::GaussianShapeGenerator::*)()>
 											(&Shape::GaussianShapeGenerator::getDefaultPharmacophoreGenerator),
 											python::return_internal_reference<>()))
+		.add_property("shapes", python::make_function(&Shape::GaussianShapeGenerator::getShapes,
+													  python::return_internal_reference<>()))
 		.add_property("genPharmacophoreShape", GetBoolFunc(&Shape::GaussianShapeGenerator::generatePharmacophoreShape),
 					  SetBoolFunc(&Shape::GaussianShapeGenerator::generatePharmacophoreShape))
 		.add_property("genMoleculeShape", GetBoolFunc(&Shape::GaussianShapeGenerator::generateMoleculeShape),

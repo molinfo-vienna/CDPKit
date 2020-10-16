@@ -36,9 +36,10 @@
 #include <boost/shared_ptr.hpp>
 
 #include "CDPL/Shape/APIPrefix.hpp"
-#include "CDPL/Shape/GaussianShape.hpp"
+#include "CDPL/Shape/GaussianShapeSet.hpp"
 #include "CDPL/Pharm/DefaultPharmacophoreGenerator.hpp"
 #include "CDPL/Pharm/BasicPharmacophore.hpp"
+#include "CDPL/Util/ObjectStack.hpp"
 
 
 namespace CDPL 
@@ -53,8 +54,6 @@ namespace CDPL
     namespace Shape
     {
 		
-		class GaussianShapeSet;
-
 		/**
 		 * \addtogroup CDPL_SHAPE_GENERATION
 		 * @{
@@ -64,7 +63,7 @@ namespace CDPL
 		{
 			
 		  public:
-			typedef boost::shared_ptr<GaussianShapeGenerator> SharedPointer;
+		    typedef boost::shared_ptr<GaussianShapeGenerator> SharedPointer;
 
 			GaussianShapeGenerator();
 
@@ -108,8 +107,10 @@ namespace CDPL
 
 			Pharm::DefaultPharmacophoreGenerator& getDefaultPharmacophoreGenerator();
 
-			void generate(const Chem::MolecularGraph& molgraph, GaussianShapeSet& shapes, bool append = false);
+			const GaussianShapeSet& generate(const Chem::MolecularGraph& molgraph);
 
+		    const GaussianShapeSet& getShapes() const;
+		  
 		  private:
 			typedef std::vector<const Chem::Atom*> AtomList;
 
@@ -120,6 +121,9 @@ namespace CDPL
 			template <typename CoordsFunc>
 			void createShape(const CoordsFunc& coords_func, GaussianShape& shape) const;
 
+		    typedef Util::ObjectStack<GaussianShape> ShapeCache;
+
+		    ShapeCache                           shapeCache;
 			Pharm::DefaultPharmacophoreGenerator defPharmGen;
 			Pharm::PharmacophoreGenerator*       pharmGen;
 			bool                                 genMolShape;
@@ -130,6 +134,7 @@ namespace CDPL
 			double                               atomHardness;
 			double                               ftrRadius;
 			double                               ftrHardness;
+		    GaussianShapeSet                     shapes;
 			Pharm::BasicPharmacophore            pharm;
 			AtomList                             shapeAtoms;
 		};
