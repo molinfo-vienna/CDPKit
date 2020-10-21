@@ -36,6 +36,10 @@
 #include "CDPL/ConfGen/ReturnCode.hpp"
 #include "CDPL/ConfGen/FragmentType.hpp"
 #include "CDPL/Chem/MolecularGraphFunctions.hpp"
+#include "CDPL/Chem/AtomFunctions.hpp"
+#include "CDPL/Chem/BondFunctions.hpp"
+
+#include "UtilityFunctions.hpp"
 
 
 using namespace CDPL;
@@ -117,22 +121,35 @@ unsigned int ConfGen::FragmentLibraryGenerator::process(const Chem::MolecularGra
 	try {
 		fragLibEntry.perceiveSSSR();
 
+		if (getLogMessageCallback()) {
+			getLogMessageCallback()("Library Fragment: " + getSMILES(fragLibEntry) + "\n");
+			getLogMessageCallback()("Hash Code: " + boost::lexical_cast<std::string>(fragLibEntry.getHashCode()) + "\n");
+		}
+
 		unsigned int ret_code = fragConfGen.generate(fragLibEntry);
 		numGenConfs = fragConfGen.getNumConformers();
-		
+
 		if (numGenConfs == 0) {
 			removeNewLibraryEntry();
 			return ret_code;
 		}
 
-		fl_entry->copy(fragLibEntry);
-		fl_entry->clearProperties();
+		for (FragmentLibraryEntry::ConstAtomIterator it = fragLibEntry.getAtomsBegin(), end = fragLibEntry.getAtomsEnd(); it != end; ++it) {
+			const Atom& atom = *it;
+			Atom& atom_copy = fl_entry->addAtom();
+
+			setType(atom_copy, getType(atom));
+			setFormalCharge(atom_copy, getFormalCharge(atom));
+		}
+
+		for (FragmentLibraryEntry::ConstBondIterator it = fragLibEntry.getBondsBegin(), end = fragLibEntry.getBondsEnd(); it != end; ++it) {
+			const Bond& bond = *it;
+
+			setOrder(fl_entry->addBond(fragLibEntry.getAtomIndex(bond.getBegin()), fragLibEntry.getAtomIndex(bond.getEnd())), getOrder(bond));
+		}
 
 		fragConfGen.setConformers(*fl_entry);
 		setName(*fl_entry, boost::lexical_cast<std::string>(fragLibEntry.getHashCode()));
-
-		copyAtomStereoDescriptors(*fl_entry, fragLibEntry, 0);
-		copyBondStereoDescriptors(*fl_entry, fragLibEntry, 0, 0);
 
 		return ret_code;
 

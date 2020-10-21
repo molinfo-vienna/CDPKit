@@ -212,7 +212,7 @@ private:
 					num_confs << (num_confs == 1 ? " conf." : " confs.") << std::endl;
 			
 		} else if (verbLevel == VERBOSE) 
-			logRecordStream << "Fragment " << getSMILES(frag) << ": already in library" << std::endl;
+			logRecordStream << "Fragment " << getSMILES(frag) << ": in library" << std::endl;
 
 		else if (verbLevel >= DEBUG) 
 			logRecordStream << " Already in library!" << std::endl;

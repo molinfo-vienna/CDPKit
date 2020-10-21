@@ -785,7 +785,7 @@ void Chem::CanonicalNumberingGenerator::AtomNode::appendAtomConfigData(Connectio
 	assert(num_edges == 3 || num_edges == 4);
 
 	std::size_t perm_pty = (num_edges == 3 ? stereoDescr.getPermutationParity(*edges[0]->getNeighborNode()->atom, *edges[1]->getNeighborNode()->atom, *edges[2]->getNeighborNode()->atom) :
-							stereoDescr.getPermutationParity(*edges[0]->getNeighborNode()->atom, *edges[1]->getNeighborNode()->atom, *edges[2]->getNeighborNode()->atom, *edges[2]->getNeighborNode()->atom));
+							stereoDescr.getPermutationParity(*edges[0]->getNeighborNode()->atom, *edges[1]->getNeighborNode()->atom, *edges[2]->getNeighborNode()->atom, *edges[3]->getNeighborNode()->atom));
 
 	if (perm_pty != 1 && perm_pty != 2) {
 		hasConfiguration = false;

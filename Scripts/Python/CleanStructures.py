@@ -31,18 +31,18 @@ import CDPL.Base as Base
 import CDPL.Chem as Chem
 
 
-REMOVE_FLUORINATED = True
-#REMOVE_FLUORINATED = False
-FLUOR_ATOM_COUNT = 9
-MIN_HEAVY_ATOM_COUNT = 5
+#REMOVE_FLUORINATED = True
+REMOVE_FLUORINATED = False
+#FLUOR_ATOM_COUNT = 9
+MIN_HEAVY_ATOM_COUNT = 3
 #VALID_ATOM_TYPES = [Chem.AtomType.H, Chem.AtomType.C, Chem.AtomType.F, Chem.AtomType.Cl, Chem.AtomType.Br, Chem.AtomType.I, Chem.AtomType.N, Chem.AtomType.O, Chem.AtomType.S, Chem.AtomType.Se, Chem.AtomType.P, Chem.AtomType.Pt, Chem.AtomType.As, Chem.AtomType.Si]    
-VALID_ATOM_TYPES = [Chem.AtomType.H, Chem.AtomType.C, Chem.AtomType.F, Chem.AtomType.Cl, Chem.AtomType.Br, Chem.AtomType.I, Chem.AtomType.N, Chem.AtomType.O, Chem.AtomType.S, Chem.AtomType.P, Chem.AtomType.Si]    
+VALID_ATOM_TYPES = [Chem.AtomType.H, Chem.AtomType.C, Chem.AtomType.F, Chem.AtomType.Cl, Chem.AtomType.Br, Chem.AtomType.I, Chem.AtomType.N, Chem.AtomType.O, Chem.AtomType.S, Chem.AtomType.P ]    
 CARBON_ATOMS_MANDATORY = True
 #NEUTRALIZE = True
 NEUTRALIZE = False
 KEEP_ONLY_LARGEST_COMP = True
-PRINT_SMILES = True
-#PRINT_SMILES = False
+#PRINT_SMILES = True
+PRINT_SMILES = False
 
 
 class Stats:
@@ -165,7 +165,17 @@ def cleanStructures():
 
     stats.read = offset
     
-    while reader.read(mol):
+    while True:
+        try:
+            if not reader.read(mol):
+                break
+
+        except Base.IOError as e:
+            print('-  Processing input molecule', stats.read, 'failed:', e, file=sys.stderr)
+            stats.read += 1
+            reader.setRecordIndex(stats.read)
+            continue
+
         #print('Processing Molecule ' + str(stats.read)
         proc_mol = processMolecule(mol, stats)
 
@@ -178,7 +188,7 @@ def cleanStructures():
        
         stats.read += 1
 
-        if stats.read % 10000 == 0:
+        if (stats.read - offset) % 10000 == 0:
             print('Processed ' + str(stats.read - offset) + ' Molecules...', file=sys.stderr)
 
         if count > 0 and (stats.read - offset) >= count:
