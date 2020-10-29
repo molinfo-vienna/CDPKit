@@ -40,11 +40,15 @@ SET(confgen_MOD_SRCS
     NitrogenEnumerationModeExport.cpp
     ConformerSamplingModeExport.cpp
     StructureGenerationModeExport.cpp
+    DataFormatExport.cpp 
+    ControlParameterExport.cpp 
+    ControlParameterDefaultExport.cpp 
 
     DGConstraintGeneratorExport.cpp
     DGConstraintGeneratorSettingsExport.cpp
     DGStructureGeneratorExport.cpp
     DGStructureGeneratorSettingsExport.cpp
+    CanonicalFragmentExport.cpp
     FragmentLibraryEntryExport.cpp
     FragmentLibraryExport.cpp
     ConformerDataExport.cpp
@@ -60,10 +64,14 @@ SET(confgen_MOD_SRCS
     ConformerGeneratorSettingsExport.cpp
     FragmentConformerGeneratorSettingsExport.cpp
     FragmentAssemblerSettingsExport.cpp
+    
+    CFLMoleculeReaderExport.cpp
+    CFLMoleculeInputHandlerExport.cpp 
 
     BondFunctionExport.cpp
     MolecularGraphFunctionExport.cpp
     MoleculeFunctionExport.cpp
+    ControlParameterFunctionExport.cpp 
 
     BoostFunctionWrapperExport.cpp
    

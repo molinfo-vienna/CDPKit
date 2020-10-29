@@ -37,6 +37,9 @@ namespace CDPLPythonConfGen
 	void exportNitrogenEnumerationModes();
 	void exportConformerSamplingModes();
 	void exportStructureGenerationModes();
+	void exportDataFormats();
+	void exportControlParameters();
+	void exportControlParameterDefaults();
 }
 
 #endif // CDPL_PYTHON_CONFGEN_NAMESPACEEXPORTS_HPP

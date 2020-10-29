@@ -75,6 +75,7 @@
   OM      HOM
   CB      HC 
   NPYL    HPYL
+  NPYD    HPD+    ! ADDED ENTRY FOR CONFGEN FRAGMENTS
   NC=C    HNCC
   NC=N    HNCN
   CO2M    HC 

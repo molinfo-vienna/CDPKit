@@ -124,6 +124,7 @@
     [#7X1+0:1]=[*]                                       =N=     SPECIAL ENTRY FOR CONFGEN: SP NITROGEN
     [#7X2H1+0:1]                                         N=C     SPECIAL ENTRY FOR CONFGEN: SP2 NITROGEN
     [nX1:1]                                              NPYL    SPECIAL ENTRY FOR CONFGEN: AROMATIC NITROGEN
+    [nX3+:1]-[#1]                                        N2OX    SPECIAL ENTRY FOR CONFGEN: SP2-HYDRIDIZED N-OXIDE NITROGEN
     [#7X3:1]-[#7]=[#6]                                   NN=C    NITROGEN IN N-N=C
     [#7X3v3:1]                                           NR      NITROGEN IN ALIPHATIC AMINES
     [#7X4v4+:1]                                          NR+     QUATERNARY NITROGEN, SP3, POSITIVELY CHARGED
@@ -142,7 +143,7 @@
     [#7X3:1]-[#6]=[#8]                                   NC=O    NITROGEN IN AMIDES
     [#7X3:1]-[#6X3H2+1]                                  NC=O    SPECIAL ENTRY FOR CONFGEN: NITROGEN IN AMIDES
     [#7X1:1]#[*]                                         NSP     NITROGEN, TRIPLE BONDED
-    [#7X2-:1]-[#6,#16]                                   NM      DEPROTONATED SULFONAMIDE N-; FORMAL CHARGE=-1
+    [#7X2-:1]-[#6,#16,#15]                               NM      DEPROTONATED SULFONAMIDE N-; FORMAL CHARGE=-1
     [#7X2-:1]-[#16](-,=[#8X1])(-,=[!#8])-,=[!#8]         NSO     DIVALENT NITROGEN REPLACING MONOVALENT O IN SO2 GROUP
     [#7X2:1]=[#16](-,=[#8X1])(-,=[!#8])-,=[!#8]          NSO     DIVALENT NITROGEN REPLACING MONOVALENT O IN SO2 GROUP
     [#7X2:1](=[!#6])-[#16](-,=[#8X1])-,=[#8X1]           NSO2    NITROGEN IN SULFONAMIDES
@@ -223,6 +224,8 @@
 *   [s:1]                                                STHI    SULFUR AS IN THIOPHENE
 
 *   Phosphorus
+    [pX1:1]                                              -P=C    SPECIAL ENTRY FOR CONFGEN: PHOSPHOROUS DOUBLY BONDED TO CARBON
+    [#15X2:1]([#1])=[#7]                                 -P=C    SPECIAL ENTRY FOR CONFGEN: PHOSPHOROUS DOUBLY BONDED TO NITROGEN
     [#15X3:1]                                            P       TRICOORDINATE P, AS IN PHOSPHINES
     [#15X4:1]                                            PTET    GENERAL TETRACOORDINATE PHOSPHORUS
     [#15X4:1]=,-[#8]                                     PO      TETRACOORDINATE P WITH ONE ATTACHED OXYGEN

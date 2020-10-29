@@ -515,7 +515,7 @@
 \ingroup CDPL_FORCEFIELD_FUNCTIONS
 
 
-\defgroup CDPL_CONFGEN Molecule Conformer and 3D Coordinates Generation
+\defgroup CDPL_CONFGEN Molecule 3D Coordinates and Conformer Generation
 
 \defgroup CDPL_CONFGEN_GENERATORS Generator Classes
 \ingroup CDPL_CONFGEN
@@ -535,8 +535,23 @@
 \defgroup CDPL_CONFGEN_MOLECULE_FUNCTIONS Molecule Functions
 \ingroup CDPL_CONFGEN_FUNCTIONS
 
+\defgroup CDPL_CONFGEN_CONTROL_PARAMETER_FUNCTIONS Control-Parameter Functions
+\ingroup CDPL_CONFGEN_FUNCTIONS
+
 \defgroup CDPL_CONFGEN_CONSTANTS Flags and Constants
 \ingroup CDPL_CONFGEN
+
+\defgroup CDPL_CONFGEN_CONTROL_PARAMETERS Control-Parameter Keys
+\ingroup CDPL_CONFGEN
+
+\defgroup CDPL_CONFGEN_DATA_IO Data I/O
+\ingroup CDPL_CONFGEN
+
+\defgroup CDPL_CONFGEN_DATA_FORMATS Data Format Descriptors
+\ingroup CDPL_CONFGEN_DATA_IO
+
+\defgroup CDPL_CONFGEN_CFL_IO Fragment Libraries
+\ingroup CDPL_CONFGEN_DATA_IO
 
 \defgroup CDPL_CONFGEN_HELPERS Implementation Helper Classes
 \ingroup CDPL_CONFGEN

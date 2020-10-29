@@ -41,7 +41,6 @@
 #include "CDPL/ConfGen/FragmentType.hpp"
 #include "CDPL/ConfGen/TorsionLibrary.hpp"
 #include "CDPL/Chem/MolecularGraphFunctions.hpp"
-#include "CDPL/Chem/AtomContainerFunctions.hpp"
 #include "CDPL/Chem/Entity3DFunctions.hpp"
 #include "CDPL/Chem/AtomFunctions.hpp"
 #include "CDPL/Chem/BondFunctions.hpp"
@@ -284,24 +283,24 @@ unsigned int ConfGen::FragmentAssemblerImpl::getFragmentConformers()
 		FragmentTreeNode* frag_node = fragTree.getFragmentNode(i); 
 		unsigned int frag_type = perceiveFragmentType(frag);
 
-		fragLibEntry.clear();
+		canonFrag.clear();
 
 		if (logCallback) {
-			initFragmentLibraryEntry(frag, frag_node);
+			initCanonicalFragment(frag, frag_node);
 
-			fragLibEntry.perceiveSSSR();
-			perceiveComponents(fragLibEntry, true);
+			canonFrag.perceiveSSSR();
+			perceiveComponents(canonFrag, true);
 
-			logCallback("Build fragment " + getSMILES(fragLibEntry) + ":\n");
+			logCallback("Build fragment " + getSMILES(canonFrag) + ":\n");
 			logCallback(" Type: " + fragmentTypeToString(frag_type, true) + '\n');
-			logCallback(" Hash Code: " + boost::lexical_cast<std::string>(fragLibEntry.getHashCode()) + "\n");
+			logCallback(" Hash Code: " + boost::lexical_cast<std::string>(canonFrag.getHashCode()) + "\n");
 		}
 
 		if (!(!settings.generateCoordinatesFromScratch() && 
 			  (!settings.enumerateRings() || frag_type != FragmentType::FLEXIBLE_RING_SYSTEM) && 
 			  copyInputCoordinates(frag_type, frag, frag_node))) {
 
-			initFragmentLibraryEntry(frag, frag_node);
+			initCanonicalFragment(frag, frag_node);
 
 			if (!fetchConformersFromFragmentLibrary(frag_type, frag, frag_node) && !fetchConformersFromFragmentCache(frag_type, frag, frag_node)) {
 				unsigned int ret_code = generateFragmentConformers(frag_type, frag, frag_node);
@@ -331,25 +330,25 @@ unsigned int ConfGen::FragmentAssemblerImpl::getFragmentConformers()
 	return ReturnCode::SUCCESS;
 }
 
-void ConfGen::FragmentAssemblerImpl::initFragmentLibraryEntry(const Chem::Fragment& frag, FragmentTreeNode* frag_node) 
+void ConfGen::FragmentAssemblerImpl::initCanonicalFragment(const Chem::Fragment& frag, FragmentTreeNode* frag_node) 
 {
-	if (fragLibEntry.getNumAtoms() == 0) {
-		fragLibEntry.create(frag, *fragTree.getMolecularGraph());
+	if (canonFrag.getNumAtoms() == 0) {
+		canonFrag.create(frag, *fragTree.getMolecularGraph());
 
-		buildFragmentLibraryEntryAtomIndexMap(frag, frag_node);
+		buildCanonicalFragmentAtomIndexMap(frag, frag_node);
 	}
 }
 
-void ConfGen::FragmentAssemblerImpl::buildFragmentLibraryEntryAtomIndexMap(const Chem::Fragment& frag, 
+void ConfGen::FragmentAssemblerImpl::buildCanonicalFragmentAtomIndexMap(const Chem::Fragment& frag, 
 																		   const FragmentTreeNode* frag_node)
 {
 	const FragmentTreeNode::IndexArray& atom_inds = frag_node->getAtomIndices();
-	const FragmentLibraryEntry::AtomMapping& entry_atom_map = fragLibEntry.getAtomMapping();
+	const CanonicalFragment::AtomMapping& entry_atom_map = canonFrag.getAtomMapping();
 
-	fragLibEntryAtomIdxMap.clear();
+	canonFragAtomIdxMap.clear();
 
 	for (std::size_t i = 0, num_atoms = frag.getNumAtoms(); i < num_atoms; i++)
-		fragLibEntryAtomIdxMap.push_back(IndexPair(fragLibEntry.getAtomIndex(*entry_atom_map[i]), atom_inds[i]));
+		canonFragAtomIdxMap.push_back(IndexPair(canonFrag.getAtomIndex(*entry_atom_map[i]), atom_inds[i]));
 }
 
 bool ConfGen::FragmentAssemblerImpl::copyInputCoordinates(unsigned int frag_type, const Chem::Fragment& frag, 
@@ -369,16 +368,16 @@ bool ConfGen::FragmentAssemblerImpl::copyInputCoordinates(unsigned int frag_type
 		} catch (const Base::ItemNotFound& e) { 
 			// see if at least heavy atom coordinates are available and then generate missing hydrogens
 
-			initFragmentLibraryEntry(frag, node);
+			initCanonicalFragment(frag, node);
 
-			if (!fragConfGen.generateConformerFromInputCoordinates(fragLibEntry)) { 
+			if (!fragConfGen.generateConformerFromInputCoordinates(canonFrag)) { 
 				confDataCache.put();
 				return false;
 			};
 
 			Math::Vector3DArray::StorageType& entry_coords_data = fragConfGen.getConformer(0).getData();
 
-			for (IndexPairList::const_iterator it = fragLibEntryAtomIdxMap.begin(), end = fragLibEntryAtomIdxMap.end(); it != end; ++it) {
+			for (IndexPairList::const_iterator it = canonFragAtomIdxMap.begin(), end = canonFragAtomIdxMap.end(); it != end; ++it) {
 				const IndexPair& idx_mapping = *it;
 			
 				coords_data[idx_mapping.second].assign(entry_coords_data[idx_mapping.first]);
@@ -412,56 +411,13 @@ bool ConfGen::FragmentAssemblerImpl::fetchConformersFromFragmentLibrary(unsigned
 	using namespace Chem;
 
 	for (FragmentLibraryList::const_iterator it = fragLibs.begin(), end = fragLibs.end(); it != end; ++it) {
-		const MolecularGraph::SharedPointer& entry_ptr = (*it)->getEntry(fragLibEntry.getHashCode());
+		const FragmentLibraryEntry::SharedPointer& entry_ptr = (*it)->getEntry(canonFrag.getHashCode());
 
 		if (!entry_ptr)
 			continue;
 
-		if (entry_ptr->getNumAtoms() != fragLibEntry.getNumAtoms())  // sanity check
+		if (!setNodeConformers(frag_type, frag, node, entry_ptr->getData()))
 			continue;
-
-		std::size_t num_confs = getNumConformations(*entry_ptr);
-
-		if (num_confs == 0)
-			continue;
-
-		if (frag_type == FragmentType::CHAIN)
-			num_confs = 1;
-
-		else if (frag_type == FragmentType::FLEXIBLE_RING_SYSTEM && !settings.enumerateRings()) {
-			if (hasConformerEnergies(*entry_ptr)) {
-				const Util::DArray& energies = *getConformerEnergies(*entry_ptr);
-				double lowest_e = energies[0];
-
-				for (std::size_t i = 1; i < num_confs; i++) {
-					if (energies[i] > lowest_e) {
-						num_confs = i;
-						break;
-					}
-				}
-
-			} else
-				num_confs = 1;
-		}
-
-		for (std::size_t i = 0; i < num_confs; i++)
-			node->addConformer(allocConformerData());
-
-		for (IndexPairList::const_iterator it = fragLibEntryAtomIdxMap.begin(), end = fragLibEntryAtomIdxMap.end(); it != end; ++it) {
-			const IndexPair& idx_mapping = *it;
-			const Math::Vector3DArray::StorageType& atom_coords_data = get3DCoordinatesArray(entry_ptr->getAtom(idx_mapping.first))->getData();
-
-			for (std::size_t i = 0; i < num_confs; i++)
-				node->getConformers()[i]->getData()[idx_mapping.second].assign(atom_coords_data[i]);
-		}
-
-		fixBondLengths(frag, node);
-
-		if (frag_type == FragmentType::CHAIN)
-			postprocChainFragment(true, frag, node);
-
-		else if (frag_type == FragmentType::FLEXIBLE_RING_SYSTEM)
-			enumRingFragmentNitrogens(frag, node);
 
 		if (logCallback)
 			logCallback(" Coordinates source: library\n");
@@ -476,24 +432,39 @@ bool ConfGen::FragmentAssemblerImpl::fetchConformersFromFragmentCache(unsigned i
 																	  FragmentTreeNode* node)
 {
 	boost::lock_guard<boost::mutex> cache_lock(FragmentConformerCache::getMutex());
-	const ConformerDataArray* cache_confs = FragmentConformerCache::getEntry(fragLibEntry.getHashCode());
+	const ConformerDataArray* cache_confs = FragmentConformerCache::getEntry(canonFrag.getHashCode());
 
 	if (!cache_confs)
 		return false;
 
-	std::size_t num_confs = cache_confs->size();
+	if (!setNodeConformers(frag_type, frag, node, *cache_confs))
+		return false;
+
+	if (logCallback)
+		logCallback(" Coordinates source: cache\n");
+
+	return true;
+}
+
+bool ConfGen::FragmentAssemblerImpl::setNodeConformers(unsigned int frag_type, const Chem::Fragment& frag, 
+													   FragmentTreeNode* node, const ConformerDataArray& confs)
+{
+	std::size_t num_confs = confs.size();
 
 	if (num_confs == 0)
 		return false;
 
-	if (cache_confs->front()->size() != fragLibEntry.getNumAtoms())  // sanity check
+	if (confs.front()->size() != canonFrag.getNumAtoms())  // sanity check
 		return false;
 
-	if (frag_type == FragmentType::FLEXIBLE_RING_SYSTEM && !settings.enumerateRings()) {
-		double lowest_e = (*cache_confs)[0]->getEnergy();
+	if (frag_type == FragmentType::CHAIN)
+		num_confs = 1;
+
+	else if (frag_type == FragmentType::FLEXIBLE_RING_SYSTEM && !settings.enumerateRings()) {
+		double lowest_e = confs[0]->getEnergy();
 
 		for (std::size_t i = 1; i < num_confs; i++) {
-			if ((*cache_confs)[i]->getEnergy() > lowest_e) {
+			if (confs[i]->getEnergy() != lowest_e) {
 				num_confs = i;
 				break;
 			}
@@ -503,9 +474,9 @@ bool ConfGen::FragmentAssemblerImpl::fetchConformersFromFragmentCache(unsigned i
 	for (std::size_t i = 0; i < num_confs; i++) {
 		ConformerData::SharedPointer conf_data = allocConformerData();
 		Math::Vector3DArray::StorageType& conf_coords_data = conf_data->getData();
-		const Math::Vector3DArray::StorageType& cache_conf_coords_data = (*cache_confs)[i]->getData();
+		const Math::Vector3DArray::StorageType& cache_conf_coords_data = confs[i]->getData();
 
-		for (IndexPairList::const_iterator it = fragLibEntryAtomIdxMap.begin(), end = fragLibEntryAtomIdxMap.end(); it != end; ++it) {
+		for (IndexPairList::const_iterator it = canonFragAtomIdxMap.begin(), end = canonFragAtomIdxMap.end(); it != end; ++it) {
 			const IndexPair& idx_mapping = *it;
 
 			conf_coords_data[idx_mapping.second].assign(cache_conf_coords_data[idx_mapping.first]);
@@ -521,19 +492,16 @@ bool ConfGen::FragmentAssemblerImpl::fetchConformersFromFragmentCache(unsigned i
 
 	else if (frag_type == FragmentType::FLEXIBLE_RING_SYSTEM)
 		enumRingFragmentNitrogens(frag, node);
-
-	if (logCallback)
-		logCallback(" Coordinates source: cache\n");
-
+	
 	return true;
 }
 
 unsigned int ConfGen::FragmentAssemblerImpl::generateFragmentConformers(unsigned int frag_type, const Chem::Fragment& frag, 
 																		FragmentTreeNode* node)
 {
-	fragLibEntry.perceiveSSSR();
+	canonFrag.perceiveSSSR();
 
-	unsigned int ret_code = fragConfGen.generate(fragLibEntry, frag_type);
+	unsigned int ret_code = fragConfGen.generate(canonFrag, frag_type);
 
 	if (ret_code != ReturnCode::SUCCESS && ret_code != ReturnCode::FRAGMENT_CONF_GEN_TIMEOUT) 
 		return ret_code;
@@ -556,7 +524,7 @@ unsigned int ConfGen::FragmentAssemblerImpl::generateFragmentConformers(unsigned
 		Math::Vector3DArray::StorageType& conf_coords_data = conf_data->getData();
 		const Math::Vector3DArray::StorageType& gen_conf_coords_data = fragConfGen.getConformer(i).getData();
 
-		for (IndexPairList::const_iterator it = fragLibEntryAtomIdxMap.begin(), end = fragLibEntryAtomIdxMap.end(); it != end; ++it) {
+		for (IndexPairList::const_iterator it = canonFragAtomIdxMap.begin(), end = canonFragAtomIdxMap.end(); it != end; ++it) {
 			const IndexPair& idx_mapping = *it;
 
 			conf_coords_data[idx_mapping.second].assign(gen_conf_coords_data[idx_mapping.first]);
@@ -567,7 +535,7 @@ unsigned int ConfGen::FragmentAssemblerImpl::generateFragmentConformers(unsigned
 
 	boost::lock_guard<boost::mutex> cache_lock(FragmentConformerCache::getMutex());
 
-	FragmentConformerCache::addEntry(fragLibEntry.getHashCode(), fragConfGen.getConformersBegin(), fragConfGen.getConformersEnd());
+	FragmentConformerCache::addEntry(canonFrag.getHashCode(), fragConfGen.getConformersBegin(), fragConfGen.getConformersEnd());
 
 	fixBondLengths(frag, node);
 

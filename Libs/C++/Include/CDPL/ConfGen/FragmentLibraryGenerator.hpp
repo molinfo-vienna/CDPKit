@@ -31,11 +31,13 @@
 #ifndef CDPL_CONFGEN_FRAGMENTLIBRARYGENERATOR_HPP
 #define CDPL_CONFGEN_FRAGMENTLIBRARYGENERATOR_HPP
 
+#include <sstream>
+
 #include "CDPL/ConfGen/APIPrefix.hpp"
 #include "CDPL/ConfGen/FragmentLibrary.hpp"
-#include "CDPL/ConfGen/FragmentLibraryEntry.hpp"
+#include "CDPL/ConfGen/CanonicalFragment.hpp"
 #include "CDPL/ConfGen/FragmentConformerGenerator.hpp"
-#include "CDPL/Chem/Molecule.hpp"
+#include "CDPL/Chem/SMILESMolecularGraphWriter.hpp"
 
 
 namespace CDPL 
@@ -91,14 +93,18 @@ namespace CDPL
 
 			FragmentLibraryGenerator& operator=(const FragmentLibraryGenerator&);
 
-			Chem::Molecule::SharedPointer addNewLibraryEntry(const Chem::MolecularGraph& frag, const Chem::MolecularGraph& parent);
+			FragmentLibraryEntry::SharedPointer addNewLibraryEntry(const Chem::MolecularGraph& frag, const Chem::MolecularGraph& parent);
 
 			void removeNewLibraryEntry() const;
 
-			FragmentLibrary::SharedPointer fragLib;
-			FragmentLibraryEntry           fragLibEntry;
-			FragmentConformerGenerator     fragConfGen;
-			std::size_t                    numGenConfs;
+			void init();
+
+			FragmentLibrary::SharedPointer   fragLib;
+			CanonicalFragment                canonFrag;
+			FragmentConformerGenerator       fragConfGen;
+			std::ostringstream               smilesStream;
+			Chem::SMILESMolecularGraphWriter smilesGen;
+			std::size_t                      numGenConfs;
 		};
 
 		/**

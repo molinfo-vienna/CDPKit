@@ -40,6 +40,7 @@ BOOST_PYTHON_MODULE(_confgen)
 	exportDGConstraintGenerator();
 	exportDGStructureGeneratorSettings();
 	exportDGStructureGenerator();
+	exportCanonicalFragment();
 	exportFragmentLibraryEntry();
 	exportFragmentLibrary();
 	exportConformerData();
@@ -55,6 +56,9 @@ BOOST_PYTHON_MODULE(_confgen)
 	exportConformerGeneratorSettings();
 	exportFragmentConformerGeneratorSettings();
 	exportFragmentAssemblerSettings();
+
+	exportCFLMoleculeReader();
+	exportCFLMoleculeInputHandler();
 
 #if defined(HAVE_BOOST_TIMER) && defined(HAVE_BOOST_CHRONO)
 
@@ -72,10 +76,14 @@ BOOST_PYTHON_MODULE(_confgen)
 	exportNitrogenEnumerationModes();
 	exportConformerSamplingModes();
 	exportStructureGenerationModes();
+	exportDataFormats();
+	exportControlParameters();
+	exportControlParameterDefaults();
 
 	exportBondFunctions();
 	exportMolecularGraphFunctions();
 	exportMoleculeFunctions();
+	exportControlParameterFunctions();
 
 	exportBoostFunctionWrappers();
 

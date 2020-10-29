@@ -37,6 +37,7 @@ namespace CDPLPythonConfGen
 	void exportDGConstraintGeneratorSettings();
 	void exportDGStructureGenerator();
 	void exportDGStructureGeneratorSettings();
+	void exportCanonicalFragment();
 	void exportFragmentLibraryEntry();
 	void exportFragmentLibrary();
 	void exportConformerData();
@@ -52,6 +53,9 @@ namespace CDPLPythonConfGen
 	void exportConformerGeneratorSettings();
 	void exportFragmentConformerGeneratorSettings();
 	void exportFragmentAssemblerSettings();
+
+	void exportCFLMoleculeReader();
+	void exportCFLMoleculeInputHandler();
 
 	void exportBoostFunctionWrappers();
 

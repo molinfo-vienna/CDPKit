@@ -28,7 +28,7 @@ INCLUDE_DIRECTORIES("${CMAKE_CURRENT_SOURCE_DIR}" "${CDPL_SOURCE_DIR}" "${CMAKE_
 SET(DATA_FILES
     TorsionLibrary.xml
     FallbackTorsionLibrary.xml
-    FragmentLibrary.cdf
+    FragmentLibrary.cfl
    )
 
 FOREACH(DATA_FILE ${DATA_FILES})
@@ -44,8 +44,13 @@ ENDFOREACH(DATA_FILE)
 SET(cdpl-confgen_LIB_SRCS
     ${DATA_FILE_STRINGS}
 
+    DataFormat.cpp
+    ControlParameter.cpp
+    ControlParameterDefault.cpp
+
     DGConstraintGenerator.cpp
     DGStructureGenerator.cpp
+    CanonicalFragment.cpp
     FragmentLibraryEntry.cpp
     FragmentLibrary.cpp
     TorsionLibrary.cpp
@@ -66,8 +71,10 @@ SET(cdpl-confgen_LIB_SRCS
     FragmentAssemblerSettings.cpp
     SettingsPresets.cpp
 
-    CDFFragmentLibraryDataReader.cpp
-    CDFFragmentLibraryDataWriter.cpp
+    CFLFragmentLibraryEntryReader.cpp
+    CFLFragmentLibraryEntryWriter.cpp
+    CFLDataReader.cpp
+    CFLMoleculeReader.cpp
     TorsionLibraryDataReader.cpp
     TorsionLibraryDataWriter.cpp
 
@@ -83,7 +90,7 @@ SET(cdpl-confgen_LIB_SRCS
 
     ForceFieldInteractionMask.cpp
 
-    CDFMoleculeDataFunctions.cpp
+    ControlParameterFunctions.cpp
     BondFunctions.cpp
     MolecularGraphFunctions.cpp
     MoleculeFunctions.cpp

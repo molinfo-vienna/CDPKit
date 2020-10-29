@@ -37,11 +37,9 @@
 #include <boost/shared_ptr.hpp>
 #include <boost/unordered_map.hpp>
 #include <boost/thread.hpp>
-#include <boost/function.hpp>
-#include <boost/iterator/transform_iterator.hpp>
 
 #include "CDPL/ConfGen/APIPrefix.hpp"
-#include "CDPL/Chem/MolecularGraph.hpp"
+#include "CDPL/ConfGen/FragmentLibraryEntry.hpp"
 #include "CDPL/Base/IntegerTypes.hpp"
 
 
@@ -59,17 +57,14 @@ namespace CDPL
 		class CDPL_CONFGEN_API FragmentLibrary
 		{
 
-			typedef boost::unordered_map<Base::uint64, Chem::MolecularGraph::SharedPointer> HashToFragmentMap;
+			typedef boost::unordered_map<Base::uint64, FragmentLibraryEntry::SharedPointer> HashToEntryMap;
 
 		  public:
 			typedef boost::shared_ptr<FragmentLibrary> SharedPointer;
 	
-			typedef HashToFragmentMap::value_type Entry;
-
-			typedef boost::transform_iterator<boost::function1<const Entry&, Entry&>, 
-											  HashToFragmentMap::iterator> ConstEntryIterator;
-			typedef boost::transform_iterator<boost::function1<Entry&, Entry&>, 
-											  HashToFragmentMap::iterator> EntryIterator;
+			typedef HashToEntryMap::value_type Entry;
+			typedef HashToEntryMap::const_iterator ConstEntryIterator;
+			typedef HashToEntryMap::iterator EntryIterator;
 
 			FragmentLibrary();
 
@@ -81,17 +76,17 @@ namespace CDPL
 
 			void addEntries(const FragmentLibrary& lib);
 
-			bool addEntry(Base::uint64 frag_hash, const Chem::MolecularGraph::SharedPointer& frag);
+			bool addEntry(const FragmentLibraryEntry::SharedPointer& entry);
 
-			const Chem::MolecularGraph::SharedPointer& getEntry(Base::uint64 frag_hash) const;
+			const FragmentLibraryEntry::SharedPointer& getEntry(Base::uint64 hash_code) const;
 
-			bool containsEntry(Base::uint64 frag_hash) const;
+			bool containsEntry(Base::uint64 hash_code) const;
 
 			std::size_t getNumEntries() const;
 
 			void clear();
 
-			bool removeEntry(Base::uint64 frag_hash);
+			bool removeEntry(Base::uint64 hash_code);
 
 			EntryIterator removeEntry(const EntryIterator& it);
 
@@ -116,11 +111,9 @@ namespace CDPL
 			static const SharedPointer& get();
 
 		  private:
-			Entry& loadMolStructure(Entry& entry) const;
-
-			static SharedPointer      defaultLib;
-			mutable HashToFragmentMap hashToFragMap;
-			mutable boost::mutex      mutex;
+			static SharedPointer   defaultLib;
+			mutable HashToEntryMap hashToEntryMap;
+			mutable boost::mutex   mutex;
 		};
     
 		/**

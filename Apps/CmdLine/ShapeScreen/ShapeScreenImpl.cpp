@@ -180,8 +180,7 @@ ShapeScreenImpl::ShapeScreenImpl():
 	addOption("color-center-starts,C", "If specified, principal axes aligned starting poses will be generated so that the center of the smaller "
 			  "shape is located at the color feature centers of the larger shape (default: false).",
 			  value<bool>(&colorCenterStarts)->implicit_value(true));
-	addOption("random-starts,R", "Generates the specified number of principal axes aligned starting poses with randomized shape center displacements"
-			  "shape is located at all the heavy atom centers of the larger shape (default: 0).",
+	addOption("random-starts,R", "Generates the specified number of principal axes aligned starting poses with randomized shape center displacements (default: 0).",
 			  value<std::size_t>()->notifier(boost::bind(&ShapeScreenImpl::setNumRandomStarts, this, _1)));
 	addOption("score-sd-tags,E", "If true, score values will be appended as SD-block entries of the output hit molecules (default: true).",
 			  value<bool>(&scoreSDTags)->implicit_value(true));

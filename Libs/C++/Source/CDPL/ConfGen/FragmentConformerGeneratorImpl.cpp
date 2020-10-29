@@ -28,6 +28,7 @@
 
 #include <cmath>
 #include <algorithm>
+#include <limits>
 
 #include <boost/bind.hpp>
 #include <boost/lexical_cast.hpp>
@@ -68,6 +69,7 @@ namespace
 
 	const std::size_t MAX_CONF_DATA_CACHE_SIZE     = 10000;
 	const std::size_t MAX_NUM_STRUCTURE_GEN_TRIALS = 10;
+	const std::size_t MAX_NUM_SYM_MAPPINGS         = 64;
 }
 
 
@@ -89,6 +91,7 @@ ConfGen::FragmentConformerGeneratorImpl::FragmentConformerGeneratorImpl():
 	hCoordsGen.setAtom3DCoordinatesCheckFunction(boost::bind(&FragmentConformerGeneratorImpl::has3DCoordinates, this, _1));
 
 	symMappingSearch.includeIdentityMapping(false);
+	symMappingSearch.setMaxNumMappings(MAX_NUM_SYM_MAPPINGS);
 	symMappingSearch.setAtomPropertyFlags(AtomPropertyFlag::TYPE | AtomPropertyFlag::FORMAL_CHARGE | 
 										  AtomPropertyFlag::CONFIGURATION | AtomPropertyFlag::AROMATICITY |
 										  AtomPropertyFlag::EXPLICIT_BOND_COUNT | AtomPropertyFlag::HYBRIDIZATION_STATE);
@@ -171,8 +174,16 @@ unsigned int ConfGen::FragmentConformerGeneratorImpl::generate(const Chem::Molec
 		logCallback("Processing time: " + timer.format(3, "%w") + "s\n");
 		logCallback("Num. output conformers: " + boost::lexical_cast<std::string>(outputConfs.size()) + '\n');
 
-		if (outputConfs.size() > 1)
-			logCallback("Energy range: " + (boost::format("%.4f") % (outputConfs.back()->getEnergy() - outputConfs.front()->getEnergy())).str() + '\n');
+		if (outputConfs.size() > 1) {
+			double min_e = std::numeric_limits<double>::max(), max_e = -std::numeric_limits<double>::max();
+
+			for (ConformerDataArray::iterator it = outputConfs.begin(), end = outputConfs.end(); it != end; ++it) {
+				max_e = std::max(max_e, (*it)->getEnergy());
+				min_e = std::min(min_e, (*it)->getEnergy());
+			}
+
+			logCallback("Energy range: " + (boost::format("%.4f") % (max_e - min_e)).str() + '\n');
+		}
 	}
 
 	return ret_code;
@@ -505,7 +516,7 @@ unsigned int ConfGen::FragmentConformerGeneratorImpl::generateFlexibleRingConfor
 
 	if (logCallback) 
 		logCallback("Performing output conformer selection (min. RMSD: " + (boost::format("%.4f") % rmsd).str() + 
-					", num. top. sym. mappings: " + boost::lexical_cast<std::string>(symMappings.size()) + ")...\n");
+					", num. top. sym. mappings: " + boost::lexical_cast<std::string>(symMappings.size() / numAtoms) + ")...\n");
 	
 	for (ConformerDataArray::iterator it = workingConfs.begin(), end = workingConfs.end(); 
 		 it != end && outputConfs.size() < max_num_out_confs; ++it) {
@@ -520,6 +531,12 @@ unsigned int ConfGen::FragmentConformerGeneratorImpl::generateFlexibleRingConfor
 			
 		addSymmetryMappedConformers(*conf_data, rmsd, max_num_out_confs);
 		addMirroredConformer(*conf_data, rmsd, max_num_out_confs);
+
+		if ((ret_code = invokeCallbacks()) != ReturnCode::SUCCESS)
+			return ret_code;
+
+		if (timedout(timeout))
+			return ReturnCode::FRAGMENT_CONF_GEN_TIMEOUT;
 	}
 
 	return ret_code;

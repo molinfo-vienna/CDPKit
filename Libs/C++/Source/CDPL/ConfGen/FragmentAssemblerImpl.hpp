@@ -40,7 +40,7 @@
 
 #include "CDPL/ConfGen/FragmentAssemblerSettings.hpp"
 #include "CDPL/ConfGen/TorsionRuleMatcher.hpp"
-#include "CDPL/ConfGen/FragmentLibraryEntry.hpp"
+#include "CDPL/ConfGen/CanonicalFragment.hpp"
 #include "CDPL/ConfGen/FragmentLibrary.hpp"
 #include "CDPL/ConfGen/ConformerDataArray.hpp"
 #include "CDPL/Chem/FragmentList.hpp"
@@ -127,9 +127,12 @@ namespace CDPL
 			unsigned int generateFragmentConformers(unsigned int frag_type, const Chem::Fragment& frag, 
 													FragmentTreeNode* node);
 
-			void initFragmentLibraryEntry(const Chem::Fragment& frag, FragmentTreeNode* frag_node) ;
+			bool setNodeConformers(unsigned int frag_type, const Chem::Fragment& frag, 
+								   FragmentTreeNode* node, const ConformerDataArray& confs);
 
-			void buildFragmentLibraryEntryAtomIndexMap(const Chem::Fragment& frag, 
+			void initCanonicalFragment(const Chem::Fragment& frag, FragmentTreeNode* frag_node);
+
+			void buildCanonicalFragmentAtomIndexMap(const Chem::Fragment& frag, 
 													   const FragmentTreeNode* frag_node);
 
 			void postprocChainFragment(bool fix_stereo, const Chem::Fragment& frag, FragmentTreeNode* node);
@@ -182,8 +185,8 @@ namespace CDPL
 			FragmentTree                      fragTree;
 			TorsionRuleMatcher                torRuleMatcher;
 			FragmentConformerGeneratorImpl    fragConfGen;
-			FragmentLibraryEntry              fragLibEntry;
-			IndexPairList                     fragLibEntryAtomIdxMap;
+			CanonicalFragment                 canonFrag;
+			IndexPairList                     canonFragAtomIdxMap;
 			BondLengthTablePtr                bondLengthTable;
 			Util::BitSet                      invertibleNMask;
 			Util::BitSet                      invertedNMask;

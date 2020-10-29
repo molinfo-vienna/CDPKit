@@ -201,7 +201,7 @@ ELSE(APPLE)
     INSTALL(SCRIPT "${CMAKE_CURRENT_BINARY_DIR}/InstallExternalRuntimeDependencies.cmake")
   ENDIF(WIN32)
 
-  TARGET_LINK_LIBRARIES(chox cdpl-vis-shared cdpl-biomol-shared cdpl-pharm-shared Qt5::Gui Qt5::Widgets Qt5::PrintSupport)
+  TARGET_LINK_LIBRARIES(chox cdpl-vis-shared cdpl-biomol-shared cdpl-pharm-shared cdpl-confgen-shared Qt5::Gui Qt5::Widgets Qt5::PrintSupport)
 ENDIF(APPLE)
 
 INSTALL(TARGETS chox DESTINATION "${CDPKIT_EXECUTABLE_INSTALL_DIR}" COMPONENT Applications)

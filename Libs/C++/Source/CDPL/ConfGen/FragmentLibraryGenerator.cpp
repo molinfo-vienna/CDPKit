@@ -29,15 +29,13 @@
 #include <string>
 #include <exception>
 
-#include <boost/lexical_cast.hpp>
 #include <boost/thread.hpp>
+#include <boost/lexical_cast.hpp>
 
 #include "CDPL/ConfGen/FragmentLibraryGenerator.hpp"
 #include "CDPL/ConfGen/ReturnCode.hpp"
-#include "CDPL/ConfGen/FragmentType.hpp"
 #include "CDPL/Chem/MolecularGraphFunctions.hpp"
-#include "CDPL/Chem/AtomFunctions.hpp"
-#include "CDPL/Chem/BondFunctions.hpp"
+#include "CDPL/Chem/ControlParameterFunctions.hpp"
 
 #include "UtilityFunctions.hpp"
 
@@ -46,12 +44,16 @@ using namespace CDPL;
 
 
 ConfGen::FragmentLibraryGenerator::FragmentLibraryGenerator(): 
-	fragLib(), numGenConfs(0)
-{}
+	fragLib(), smilesGen(smilesStream), numGenConfs(0)
+{
+	init();
+}
 
 ConfGen::FragmentLibraryGenerator::FragmentLibraryGenerator(const FragmentLibrary::SharedPointer& lib): 
-	fragLib(lib), numGenConfs(0)
-{}
+	fragLib(lib), smilesGen(smilesStream), numGenConfs(0)
+{
+	init();
+}
 
 void ConfGen::FragmentLibraryGenerator::setFragmentLibrary(const FragmentLibrary::SharedPointer& lib)
 {
@@ -113,20 +115,26 @@ unsigned int ConfGen::FragmentLibraryGenerator::process(const Chem::MolecularGra
 
 	numGenConfs = 0;
 
-	Molecule::SharedPointer fl_entry = addNewLibraryEntry(frag, parent);
+	FragmentLibraryEntry::SharedPointer fl_entry = addNewLibraryEntry(frag, parent);
 
 	if (!fl_entry) 
 		return ReturnCode::FRAGMENT_ALREADY_PROCESSED;
 	
 	try {
-		fragLibEntry.perceiveSSSR();
+		canonFrag.perceiveSSSR();
+		perceiveComponents(canonFrag, false);
+
+		smilesStream.str(std::string());
+		smilesGen.write(canonFrag);
+
+		fl_entry->setSMILES(smilesStream.str());
 
 		if (getLogMessageCallback()) {
-			getLogMessageCallback()("Library Fragment: " + getSMILES(fragLibEntry) + "\n");
-			getLogMessageCallback()("Hash Code: " + boost::lexical_cast<std::string>(fragLibEntry.getHashCode()) + "\n");
+			getLogMessageCallback()("Canon. Fragment: " + fl_entry->getSMILES() + "\n");
+			getLogMessageCallback()("Hash Code: " + boost::lexical_cast<std::string>(fl_entry->getHashCode()) + "\n");
 		}
 
-		unsigned int ret_code = fragConfGen.generate(fragLibEntry);
+		unsigned int ret_code = fragConfGen.generate(canonFrag);
 		numGenConfs = fragConfGen.getNumConformers();
 
 		if (numGenConfs == 0) {
@@ -134,22 +142,12 @@ unsigned int ConfGen::FragmentLibraryGenerator::process(const Chem::MolecularGra
 			return ret_code;
 		}
 
-		for (FragmentLibraryEntry::ConstAtomIterator it = fragLibEntry.getAtomsBegin(), end = fragLibEntry.getAtomsEnd(); it != end; ++it) {
-			const Atom& atom = *it;
-			Atom& atom_copy = fl_entry->addAtom();
+		for (FragmentConformerGenerator::ConformerIterator it = fragConfGen.getConformersBegin(), end = fragConfGen.getConformersEnd(); it != end; ++it) {
+			ConformerData::SharedPointer conf_data(new ConformerData());
 
-			setType(atom_copy, getType(atom));
-			setFormalCharge(atom_copy, getFormalCharge(atom));
+			conf_data->swap(*it);
+			fl_entry->addConformer(conf_data);
 		}
-
-		for (FragmentLibraryEntry::ConstBondIterator it = fragLibEntry.getBondsBegin(), end = fragLibEntry.getBondsEnd(); it != end; ++it) {
-			const Bond& bond = *it;
-
-			setOrder(fl_entry->addBond(fragLibEntry.getAtomIndex(bond.getBegin()), fragLibEntry.getAtomIndex(bond.getEnd())), getOrder(bond));
-		}
-
-		fragConfGen.setConformers(*fl_entry);
-		setName(*fl_entry, boost::lexical_cast<std::string>(fragLibEntry.getHashCode()));
 
 		return ret_code;
 
@@ -168,30 +166,46 @@ std::size_t ConfGen::FragmentLibraryGenerator::getNumGeneratedConformers() const
 
 Base::uint64 ConfGen::FragmentLibraryGenerator::getLibraryEntryHashCode() const
 {
-	return fragLibEntry.getHashCode();
+	return canonFrag.getHashCode();
 }
 
-Chem::Molecule::SharedPointer ConfGen::FragmentLibraryGenerator::addNewLibraryEntry(const Chem::MolecularGraph& frag, const Chem::MolecularGraph& parent)
+ConfGen::FragmentLibraryEntry::SharedPointer ConfGen::FragmentLibraryGenerator::addNewLibraryEntry(const Chem::MolecularGraph& frag, const Chem::MolecularGraph& parent)
 {
 	using namespace Chem;
 
-	fragLibEntry.create(frag, parent);
+	canonFrag.create(frag, parent);
 
 	boost::lock_guard<boost::mutex> lock(fragLib->getMutex());
 
-	if (fragLib->containsEntry(fragLibEntry.getHashCode())) 
-		return Chem::Molecule::SharedPointer();
+	if (fragLib->containsEntry(canonFrag.getHashCode())) 
+		return FragmentLibraryEntry::SharedPointer();
 
-	Molecule::SharedPointer entry_mol(new BasicMolecule());
+	FragmentLibraryEntry::SharedPointer entry_ptr(new FragmentLibraryEntry());
 
-	fragLib->addEntry(fragLibEntry.getHashCode(), entry_mol);
+	entry_ptr->setHashCode(canonFrag.getHashCode());
+	fragLib->addEntry(entry_ptr);
 
-	return entry_mol;
+	return entry_ptr;
 }
 
 void ConfGen::FragmentLibraryGenerator::removeNewLibraryEntry() const
 {
 	boost::lock_guard<boost::mutex> lock(fragLib->getMutex());
 
-	fragLib->removeEntry(fragLibEntry.getHashCode());
+	fragLib->removeEntry(canonFrag.getHashCode());
 }
+
+void ConfGen::FragmentLibraryGenerator::init()
+{	
+	setRecordSeparatorParameter(smilesGen, "");
+	setOrdinaryHydrogenDepleteParameter(smilesGen, false);
+	setSMILESWriteCanonicalFormParameter(smilesGen, false);
+	setSMILESMolWriteAtomMappingIDParameter(smilesGen, false);
+	setSMILESWriteIsotopeParameter(smilesGen, false);
+	setSMILESWriteAtomStereoParameter(smilesGen, true);
+	setSMILESWriteBondStereoParameter(smilesGen, true);
+	setSMILESWriteRingBondStereoParameter(smilesGen, true);
+	setSMILESWriteAromaticBondsParameter(smilesGen, false);
+	setSMILESWriteKekuleFormParameter(smilesGen, false);
+}
+

@@ -39,6 +39,9 @@ namespace CDPL
 		void initAtomProperties();
 		void initBondProperties();
 		void initMolecularGraphProperties();
+		void initDataFormats();
+		void initControlParameters();
+		void initControlParameterDefaults();
 	}
 }
 
@@ -49,6 +52,9 @@ namespace
 	{
 
 		CDPLConfGenInit() {
+			CDPL::ConfGen::initDataFormats();
+			CDPL::ConfGen::initControlParameters();
+			CDPL::ConfGen::initControlParameterDefaults();
 /*
 			CDPL::ConfGen::initAtomProperties();
 			CDPL::ConfGen::initBondProperties();

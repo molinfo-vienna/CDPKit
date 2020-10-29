@@ -27,6 +27,7 @@
 #include <boost/python.hpp>
 
 #include "CDPL/ConfGen/FragmentAssembler.hpp"
+#include "CDPL/Chem/MolecularGraph.hpp"
 
 #include "Base/ObjectIdentityCheckVisitor.hpp"
 

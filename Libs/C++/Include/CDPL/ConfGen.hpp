@@ -37,8 +37,9 @@
 #include "CDPL/ConfGen/DGStructureGenerator.hpp"
 #include "CDPL/ConfGen/ConformerData.hpp"
 #include "CDPL/ConfGen/ConformerDataArray.hpp"
-#include "CDPL/ConfGen/FragmentLibraryEntry.hpp"
+#include "CDPL/ConfGen/CanonicalFragment.hpp"
 #include "CDPL/ConfGen/FragmentLibrary.hpp"
+#include "CDPL/ConfGen/FragmentLibraryEntry.hpp"
 #include "CDPL/ConfGen/TorsionRule.hpp"
 #include "CDPL/ConfGen/TorsionCategory.hpp"
 #include "CDPL/ConfGen/TorsionLibrary.hpp"
@@ -49,6 +50,7 @@
 #include "CDPL/ConfGen/BondFunctions.hpp"
 #include "CDPL/ConfGen/MoleculeFunctions.hpp"
 #include "CDPL/ConfGen/MolecularGraphFunctions.hpp"
+#include "CDPL/ConfGen/ControlParameterFunctions.hpp"
 #include "CDPL/ConfGen/CallbackFunction.hpp"
 #include "CDPL/ConfGen/LogMessageCallbackFunction.hpp"
 #include "CDPL/ConfGen/FragmentType.hpp"
@@ -57,6 +59,9 @@
 #include "CDPL/ConfGen/StructureGenerationMode.hpp"
 #include "CDPL/ConfGen/ReturnCode.hpp"
 #include "CDPL/ConfGen/NitrogenEnumerationMode.hpp"
+#include "CDPL/ConfGen/DataFormat.hpp"
+#include "CDPL/ConfGen/ControlParameter.hpp"
+#include "CDPL/ConfGen/ControlParameterDefault.hpp"
 #include "CDPL/ConfGen/TorsionDriverSettings.hpp"
 #include "CDPL/ConfGen/DGConstraintGeneratorSettings.hpp"
 #include "CDPL/ConfGen/DGStructureGeneratorSettings.hpp"
@@ -64,6 +69,9 @@
 #include "CDPL/ConfGen/ConformerGeneratorSettings.hpp"
 #include "CDPL/ConfGen/FragmentConformerGeneratorSettings.hpp"
 #include "CDPL/ConfGen/FragmentAssemblerSettings.hpp"
+
+#include "CDPL/ConfGen/CFLMoleculeInputHandler.hpp"
+#include "CDPL/ConfGen/CFLMoleculeReader.hpp"
 
 #if defined(HAVE_BOOST_TIMER) && defined(HAVE_BOOST_CHRONO)
 

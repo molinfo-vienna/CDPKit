@@ -37,15 +37,15 @@
 namespace
 {
 
-    boost::python::list getEntries(const CDPL::ConfGen::FragmentLibrary& map)
+    boost::python::list getEntries(const CDPL::ConfGen::FragmentLibrary& lib)
     {
 		using namespace CDPL;
 		using namespace ConfGen;
 
 		boost::python::list entries;
 
-		for (FragmentLibrary::ConstEntryIterator it = map.getEntriesBegin(), end = map.getEntriesEnd(); it != end; ++it)
-			entries.append(boost::ref(*it));
+		for (FragmentLibrary::ConstEntryIterator it = lib.getEntriesBegin(), end = lib.getEntriesEnd(); it != end; ++it)
+			entries.append(boost::python::make_tuple(it->first, it->second));
 
 		return entries;
     }
@@ -65,13 +65,13 @@ void CDPLPythonConfGen::exportFragmentLibrary()
 		.def("addEntries", &ConfGen::FragmentLibrary::addEntries, 
 			 (python::arg("self"), python::arg("lib"))) 
 		.def("addEntry", &ConfGen::FragmentLibrary::addEntry, 
-			 (python::arg("self"), python::arg("frag_hash"), python::arg("frag"))) 
+			 (python::arg("self"), python::arg("entry"))) 
 		.def("removeEntry", static_cast<bool (ConfGen::FragmentLibrary::*)(Base::uint64)>(
-				 &ConfGen::FragmentLibrary::removeEntry), (python::arg("self"), python::arg("frag_hash"))) 
+				 &ConfGen::FragmentLibrary::removeEntry), (python::arg("self"), python::arg("hash_code"))) 
 		.def("getEntry", &ConfGen::FragmentLibrary::getEntry, 
-			 (python::arg("self"), python::arg("frag_hash")), python::return_value_policy<python::copy_const_reference>()) 
+			 (python::arg("self"), python::arg("hash_code")), python::return_value_policy<python::copy_const_reference>()) 
 		.def("containsEntry", &ConfGen::FragmentLibrary::containsEntry, 
-			 (python::arg("self"), python::arg("frag_hash"))) 
+			 (python::arg("self"), python::arg("hash_code"))) 
 		.def("clear", &ConfGen::FragmentLibrary::clear, python::arg("self")) 
 		.def("getNumEntries", &ConfGen::FragmentLibrary::getNumEntries, python::arg("self")) 
 		.def("getEntries", &getEntries, python::arg("self")) 
@@ -86,13 +86,4 @@ void CDPLPythonConfGen::exportFragmentLibrary()
 		.staticmethod("set")
 		.def("get", &ConfGen::FragmentLibrary::get, python::return_value_policy<python::copy_const_reference>())
 		.staticmethod("get");
-
-    python::class_<ConfGen::FragmentLibrary::Entry>("Entry", python::no_init)
-		.def(python::init<>(python::arg("self")))
-		.def(python::init<const ConfGen::FragmentLibrary::Entry&>((python::arg("self"), python::arg("entry"))))
-		.def(python::init<Base::uint64, Chem::MolecularGraph::SharedPointer>(
-				 (python::arg("self"), python::arg("frag_hash"), python::arg("frag"))))
-		.def(CDPLPythonBase::ObjectIdentityCheckVisitor<ConfGen::FragmentLibrary::Entry>())	
-		.def_readonly("hashCode", &ConfGen::FragmentLibrary::Entry::first)
-		.def_readonly("fragment", &ConfGen::FragmentLibrary::Entry::second);
 }
