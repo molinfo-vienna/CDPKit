@@ -468,7 +468,7 @@ namespace CDPLPythonMath
 	};
 
 #else // HAVE_NUMPY
-	template <typename MatrixType, bool RESIZE>
+	template <typename MatrixType, bool RESIZE = false>
 	struct MatrixNDArrayAssignVisitor : public boost::python::def_visitor<MatrixNDArrayAssignVisitor<MatrixType, RESIZE> >
 	{
 
@@ -480,7 +480,7 @@ namespace CDPLPythonMath
 		void visit(ClassType& cl) const {}
 	};
 
-	template <typename MatrixType, bool RESIZE>
+	template <typename MatrixType, bool RESIZE = false>
 	struct MatrixNDArrayInitVisitor : public boost::python::def_visitor<MatrixNDArrayInitVisitor<MatrixType, RESIZE> >
 	{
 

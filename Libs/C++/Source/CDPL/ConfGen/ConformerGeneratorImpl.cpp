@@ -340,8 +340,8 @@ void ConfGen::ConformerGeneratorImpl::combineComponentConformers(const Chem::Mol
 
 	std::size_t num_comps = compConfData.size();
 	std::size_t num_atoms = molgraph.getNumAtoms();
-	double bbox_min[3];
-	double bbox_max[3];
+	double bbox_min[3] = {};
+	double bbox_max[3] = {};
 
 	for (std::size_t i = 0; i < max_num_confs; i++) {
 		ConformerData::SharedPointer opt_conf_data = confDataCache.get();

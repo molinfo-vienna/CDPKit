@@ -465,7 +465,7 @@ namespace CDPLPythonMath
 	};
 
 #else // HAVE_NUMPY
-	template <typename GridType, bool RESIZE>
+	template <typename GridType, bool RESIZE = false>
 	struct GridNDArrayAssignVisitor : public boost::python::def_visitor<GridNDArrayAssignVisitor<GridType, RESIZE> >
 	{
 

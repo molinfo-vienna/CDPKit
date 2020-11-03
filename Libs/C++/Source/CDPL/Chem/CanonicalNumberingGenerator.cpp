@@ -394,69 +394,26 @@ void Chem::CanonicalNumberingGenerator::canonicalize(std::size_t depth)
 	}
 
 	if (depth == 0) {
-		bool with_stereo = false;
+		for (NodeList::iterator it = nodes_begin; it != nodes_end; ) {
+			NodeList::iterator ub = std::upper_bound(it, nodes_end, *it, node_cmp_func);
 
-		if ((atomPropertyFlags & AtomPropertyFlag::CONFIGURATION) || (bondPropertyFlags & BondPropertyFlag::CONFIGURATION)) {
-			for (NodeList::iterator it = nodes_begin; it != nodes_end; ++it) {
-				if ((*it)->involvedInStereocenter()) {
-					with_stereo = true;
-					break;
-				}
-			}
+			if ((ub - it) > 1) {
+				while (it != ub) {
+					AtomNode* node1 = *it;
 
-			if (with_stereo) {
-				for (NodeList::iterator it = nodes_begin; it != nodes_end; ) {
-					NodeList::iterator ub = std::upper_bound(it, nodes_end, *it, node_cmp_func);
+					for (NodeList::iterator it1 = ++it ; it1 != ub; ++it1) {
+						AtomNode* node2 = *it1;
 
-					if ((ub - it) > 1) {
-						while (it != ub) {
-							AtomNode* node1 = *it;
+						if (!AtomNode::terminalAndOnCommonNonStereoNode(node1, node2))
+							continue;
 
-							for (NodeList::iterator it1 = ++it ; it1 != ub; ++it1) {
-								AtomNode* node2 = *it1;
-
-								if (AtomNode::terminalAndOnCommonNonStereoNode(node1, node2)) {
-									node1->addToEquivalenceSet(node2);
-									node2->addToEquivalenceSet(node1);
-									continue;
-								}
-
-								if (!node1->reachesNodeViaStereocenter(node2, false))
-									continue;
-
-								node1->addToNonEquivalenceSet(node2);
-								node2->addToNonEquivalenceSet(node1);
-							}
-						}
-
-					} else
-						++it;
-				}
-			}
-		}
-
-		if (!with_stereo) {
-			for (NodeList::iterator it = nodes_begin; it != nodes_end; ) {
-				NodeList::iterator ub = std::upper_bound(it, nodes_end, *it, node_cmp_func);
-
-				if ((ub - it) > 1) {
-					while (it != ub) {
-						AtomNode* node1 = *it;
-
-						for (NodeList::iterator it1 = ++it ; it1 != ub; ++it1) {
-							AtomNode* node2 = *it1;
-
-							if (!AtomNode::terminalAndOnCommonNonStereoNode(node1, node2))
-								continue;
-
-							node1->addToEquivalenceSet(node2);
-							node2->addToEquivalenceSet(node1);
-						}
+						node1->addToEquivalenceSet(node2);
+						node2->addToEquivalenceSet(node1);
 					}
+				}
 
-				} else
-					++it;
-			}
+			} else
+				++it;
 		}
 	}
 
@@ -699,7 +656,6 @@ void Chem::CanonicalNumberingGenerator::AtomNode::init(Generator* generator, con
 	partOfStereocenterValid = false;
 
 	equivNodeMask.clear();
-	nonEquivNodeMask.clear();
 	edges.clear();
 }
 
@@ -832,63 +788,12 @@ bool Chem::CanonicalNumberingGenerator::AtomNode::isEquivalent(const AtomNode* n
 	return equivNodeMask.test(node->id);
 }
 
-bool Chem::CanonicalNumberingGenerator::AtomNode::isNonEquivalent(const AtomNode* node) const
-{
-	if (nonEquivNodeMask.size() <= node->id)
-		return false;
-
-	return nonEquivNodeMask.test(node->id);
-}
-
 void Chem::CanonicalNumberingGenerator::AtomNode::addToEquivalenceSet(const AtomNode* node)
 {
-	if (isNonEquivalent(node))
-		return;
-
 	if (equivNodeMask.size() <= node->id)
 		equivNodeMask.resize(node->id + 1);
 
 	equivNodeMask.set(node->id);
-}
-
-void Chem::CanonicalNumberingGenerator::AtomNode::addToNonEquivalenceSet(const AtomNode* node)
-{
-	if (nonEquivNodeMask.size() <= node->id)
-		nonEquivNodeMask.resize(node->id + 1);
-
-	nonEquivNodeMask.set(node->id);
-}
-
-bool Chem::CanonicalNumberingGenerator::AtomNode::reachesNodeViaStereocenter(AtomNode* node, bool found_ctr)
-{
-	if (!found_ctr)
-		found_ctr = involvedInStereocenter();
-
-	if (this == node)
-		return found_ctr;
-
-	Util::BitSet& vis_edge_mask = generator->visitedEdgeMask;
-
-	EdgeList::const_iterator edges_end = edges.end();
-
-	for (EdgeList::const_iterator it = edges.begin(); it != edges_end; ++it) {
-		Edge* edge = *it;
-		std::size_t edge_id = edge->getID();
-
-		if (vis_edge_mask.test(edge_id))
-			continue;
-
-		vis_edge_mask.set(edge_id);
-
-		bool found_node = edge->getNeighborNode()->reachesNodeViaStereocenter(node, found_ctr);
-
-		vis_edge_mask.reset(edge_id);
-
-		if (found_node)
-			return true;
-	}
-
-	return false;
 }
 
 bool Chem::CanonicalNumberingGenerator::AtomNode::involvedInStereocenter() 

@@ -443,7 +443,7 @@ namespace CDPLPythonMath
 	};
 
 #else // HAVE_NUMPY
-	template <typename VectorType, bool RESIZE>
+	template <typename VectorType, bool RESIZE = false>
 	struct VectorNDArrayAssignVisitor : public boost::python::def_visitor<VectorNDArrayAssignVisitor<VectorType, RESIZE> >
 	{
 
@@ -455,7 +455,7 @@ namespace CDPLPythonMath
 		void visit(ClassType& cl) const {}
 	};
 
-	template <typename VectorType, bool RESIZE>
+	template <typename VectorType, bool RESIZE = false>
 	struct VectorNDArrayInitVisitor : public boost::python::def_visitor<VectorNDArrayInitVisitor<VectorType, RESIZE> >
 	{
 

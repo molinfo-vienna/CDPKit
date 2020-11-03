@@ -123,12 +123,14 @@
     [#7X1+0:1]-[*]                                       NSP     SPECIAL ENTRY FOR CONFGEN: SP NITROGEN
     [#7X1+0:1]=[*]                                       =N=     SPECIAL ENTRY FOR CONFGEN: SP NITROGEN
     [#7X2H1+0:1]                                         N=C     SPECIAL ENTRY FOR CONFGEN: SP2 NITROGEN
+    [#7X1-:1]=[#6]                                       N=C     SPECIAL ENTRY FOR CONFGEN: NITROGEN IN IMINES
+    [#7X2-:1](-[*,#1])-[*]                               NM      SPECIAL ENTRY FOR CONFGEN: DEPROTONATED SULFONAMIDE N-; FORMAL CHARGE=-1
+    [#7X2:1](=[#16])-[*]                                 NSO2    SPECIAL ENTRY FOR CONFGEN: NITROGEN IN SULFONAMIDES
     [nX1:1]                                              NPYL    SPECIAL ENTRY FOR CONFGEN: AROMATIC NITROGEN
     [nX3+:1]-[#1]                                        N2OX    SPECIAL ENTRY FOR CONFGEN: SP2-HYDRIDIZED N-OXIDE NITROGEN
-    [#7X3:1]-[#7]=[#6]                                   NN=C    NITROGEN IN N-N=C
     [#7X3v3:1]                                           NR      NITROGEN IN ALIPHATIC AMINES
     [#7X4v4+:1]                                          NR+     QUATERNARY NITROGEN, SP3, POSITIVELY CHARGED
-    [#7X3:1]-[#7X2H1+0]                                  NN=C    SPECIAL ENTRY FOR CONFGEN: NITROGEN BONDED TO SP2 NITROGEN
+    [#7;X3,X2-:1]-[#7;X2+0,X3+1]                         NN=C    SPECIAL ENTRY FOR CONFGEN: NITROGEN BONDED TO SP2 NITROGEN
     [#7X3:1]-[#6X3H2]                                    NC=C    SPECIAL ENTRY FOR CONFGEN: NITROGEN BONDED TO SP2 CARBON
     [#7X3:1]-[aX1]                                       NC=C    SPECIAL ENTRY FOR CONFGEN: NITROGEN BONDED TO AROMATIC ATOM
     [#7X2:1]=[#6]                                        N=C     NITROGEN IN IMINES
@@ -225,6 +227,8 @@
 
 *   Phosphorus
     [pX1:1]                                              -P=C    SPECIAL ENTRY FOR CONFGEN: PHOSPHOROUS DOUBLY BONDED TO CARBON
+    [#15X1-1]=[#6]                                       -P=C    SPECIAL ENTRY FOR CONFGEN: PHOSPHOROUS DOUBLY BONDED TO CARBON
+    [#15X2-1:1]                                          PO4     SPECIAL ENTRY FOR CONFGEN: PHOSPHOROUS IN PHOSPHATES AND PHOSPHODIESTERS
     [#15X2:1]([#1])=[#7]                                 -P=C    SPECIAL ENTRY FOR CONFGEN: PHOSPHOROUS DOUBLY BONDED TO NITROGEN
     [#15X3:1]                                            P       TRICOORDINATE P, AS IN PHOSPHINES
     [#15X4:1]                                            PTET    GENERAL TETRACOORDINATE PHOSPHORUS

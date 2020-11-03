@@ -241,8 +241,6 @@ namespace CDPL
 				void appendBondConfigData(ConnectionTable& ctab) const;
 				void appendAtomConfigData(ConnectionTable& ctab);
 
-				bool reachesNodeViaStereocenter(AtomNode* node, bool found_ctr);
-
 				bool involvedInStereocenter();
 
 				bool isEquivalent(const AtomNode* node) const;
@@ -269,7 +267,6 @@ namespace CDPL
 				std::size_t       newLabel;
 				std::size_t       id;
 				Util::BitSet      equivNodeMask;
-				Util::BitSet      nonEquivNodeMask;
 				EdgeList          edges;
 				StereoDescriptor  stereoDescr;
 				bool              hasConfiguration;
