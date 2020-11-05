@@ -32,6 +32,7 @@
 #define CDPL_CONFGEN_RMSDCONFORMERSELECTOR_HPP
 
 #include <vector>
+#include <cstddef>
 
 #include "CDPL/ConfGen/APIPrefix.hpp"
 #include "CDPL/Chem/Fragment.hpp"
@@ -59,7 +60,9 @@ namespace CDPL
 		{
 
 		  public:
-			RMSDConformerSelector();
+		    static const std::size_t DEF_MAX_NUM_SYMMETRY_MAPPINGS = 32768;
+		  
+		    RMSDConformerSelector();
 	
 			void setMinRMSD(double min_rmsd);
 
@@ -67,6 +70,10 @@ namespace CDPL
 
 			std::size_t getNumSymmetryMappings() const;
 
+		    void setMaxNumSymmetryMappings(std::size_t max_num);
+
+		    std::size_t getMaxNumSymmetryMappings() const;
+		  
 			void setup(const Chem::MolecularGraph& molgraph, const Util::BitSet& atom_mask);
 
 			void setup(const Chem::MolecularGraph& molgraph, const Util::BitSet& atom_mask, 
@@ -113,6 +120,7 @@ namespace CDPL
 			VectorArrayList               selectedConfAlignCoords;
 			AtomList                      atomNeighbors;
 			double                        minRMSD;
+		    std::size_t                   maxNumSymMappings; 
 		};
 
 		/**

@@ -44,6 +44,8 @@ void CDPLPythonConfGen::exportRMSDConformerSelector()
 		.def("setMinRMSD", &ConfGen::RMSDConformerSelector::setMinRMSD, (python::arg("self"), python::arg("min_rmsd")))
 		.def("getMinRMSD", &ConfGen::RMSDConformerSelector::getMinRMSD, python::arg("self"))
 		.def("getNumSymmetryMappings", &ConfGen::RMSDConformerSelector::getNumSymmetryMappings, python::arg("self"))
+		.def("setMaxNumSymmetryMappings", &ConfGen::RMSDConformerSelector::setMaxNumSymmetryMappings, (python::arg("self"), python::arg("max_num")))
+		.def("getMaxNumSymmetryMappings", &ConfGen::RMSDConformerSelector::getMaxNumSymmetryMappings, python::arg("self"))
 		.def("setup", 
 			 static_cast<void (ConfGen::RMSDConformerSelector::*)(const Chem::MolecularGraph&, const Util::BitSet&, const Util::BitSet&, const Math::Vector3DArray&)>
 			 (&ConfGen::RMSDConformerSelector::setup), 
@@ -55,6 +57,9 @@ void CDPLPythonConfGen::exportRMSDConformerSelector()
 			 (python::arg("self"), python::arg("molgraph"), python::arg("atom_mask")), python::with_custodian_and_ward<1, 2>())
 		.def("selected", &ConfGen::RMSDConformerSelector::selected, 
 			 (python::arg("self"), python::arg("conf_coords")), python::with_custodian_and_ward<1, 2>())
+		.def_readonly("DEF_MAX_NUM_SYMMETRY_MAPPINGS", ConfGen::RMSDConformerSelector::DEF_MAX_NUM_SYMMETRY_MAPPINGS)
 		.add_property("numSymmetryMappings", &ConfGen::RMSDConformerSelector::getNumSymmetryMappings)
+		.add_property("maxNumSymmetryMappings", &ConfGen::RMSDConformerSelector::getMaxNumSymmetryMappings,
+					  &ConfGen::RMSDConformerSelector::setMaxNumSymmetryMappings)
 		.add_property("minRMSD", &ConfGen::RMSDConformerSelector::getMinRMSD, &ConfGen::RMSDConformerSelector::setMinRMSD);
 }

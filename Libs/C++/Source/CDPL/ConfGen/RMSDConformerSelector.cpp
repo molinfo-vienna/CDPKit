@@ -51,15 +51,20 @@ namespace
 	const std::size_t MAX_INDEX_ARRAY_CACHE_SIZE          = 1000;
 	const std::size_t MAX_VECTOR_ARRAY_CACHE_SIZE         = 2000;
 	const double      MIN_TETRAHEDRAL_ATOM_GEOM_OOP_ANGLE = 10.0 / 180.0 * M_PI;
+
+	struct ExitSearch {};
 }
 
 
 using namespace CDPL;
 
 
+const std::size_t ConfGen::RMSDConformerSelector::DEF_MAX_NUM_SYMMETRY_MAPPINGS;
+
+
 ConfGen::RMSDConformerSelector::RMSDConformerSelector(): 
 	idxArrayCache(MAX_INDEX_ARRAY_CACHE_SIZE), vecArrayCache(MAX_VECTOR_ARRAY_CACHE_SIZE), 
-	molGraph(0), minRMSD(0.0)
+	molGraph(0), minRMSD(0.0), maxNumSymMappings(DEF_MAX_NUM_SYMMETRY_MAPPINGS)
 {
 	using namespace Chem;
 
@@ -107,11 +112,24 @@ std::size_t ConfGen::RMSDConformerSelector::getNumSymmetryMappings() const
 	return symMappings.size();
 }
 
+void ConfGen::RMSDConformerSelector::setMaxNumSymmetryMappings(std::size_t max_num)
+{
+	maxNumSymMappings = max_num;
+}
+
+std::size_t ConfGen::RMSDConformerSelector::getMaxNumSymmetryMappings() const
+{
+	return maxNumSymMappings;
+}
+
 bool ConfGen::RMSDConformerSelector::selected(const Math::Vector3DArray& conf_coords)
 {
 	if (symMappings.empty()) {
-		symMappingSearch.findMappings(symMappingSearchMolGraph);
+		try {
+			symMappingSearch.findMappings(symMappingSearchMolGraph);
 
+		} catch (const ExitSearch& e) {}
+		
 		if (symMappings.empty())
 			throw Base::OperationFailed("RMSDConformerSelector: could not perceive molecular graph automorphism group");
 	}
@@ -226,7 +244,7 @@ void ConfGen::RMSDConformerSelector::setupSymMappingValidationData(const Util::B
 bool ConfGen::RMSDConformerSelector::processSymMapping(const Chem::MolecularGraph& molgraph, const Chem::AtomBondMapping& mapping)
 {
 	using namespace Chem;
-
+	
 	if (!isValidSymMapping(mapping))
 		return false;
 
@@ -245,6 +263,9 @@ bool ConfGen::RMSDConformerSelector::processSymMapping(const Chem::MolecularGrap
 
 	symMappings.push_back(idx_mapping);
 
+	if (maxNumSymMappings > 0 && symMappings.size() == maxNumSymMappings)
+		throw ExitSearch();
+	
 	return false;
 }
 
