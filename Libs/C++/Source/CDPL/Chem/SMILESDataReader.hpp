@@ -91,17 +91,17 @@ namespace CDPL
 
 			void init(const Molecule&);
 		
-			void parseSMILES(Molecule&, const Atom*);
+			void parseSMILES(Molecule&, Atom*);
 
-			void parseRingClosures(Molecule&, const Atom&);
+			void parseRingClosures(Molecule&, Atom&);
 
 			bool parseBondParameters(BondParameters&);
 
-			void createBond(Molecule&, const Atom*, const Atom*, const BondParameters&, std::size_t);
+			void createBond(Molecule&, Atom*, Atom*, const BondParameters&, std::size_t);
 
-			const Chem::Atom* parseAtom(Molecule&);
-			const Chem::Atom* parseOrgSubsetAtom(Molecule&);
-			const Chem::Atom* parseSpecialAtom(Molecule&);
+			Chem::Atom* parseAtom(Molecule&);
+			Chem::Atom* parseOrgSubsetAtom(Molecule&);
+			Chem::Atom* parseSpecialAtom(Molecule&);
 
 			bool parseElementSymbol(char[3], bool);
 			unsigned int parseStereoSpec();
@@ -136,11 +136,11 @@ namespace CDPL
 			struct ClosureBond
 			{
 
-				ClosureBond(std::size_t lex_bond_no, const Atom* start_atom, const BondParameters& bond_params):
+				ClosureBond(std::size_t lex_bond_no, Atom* start_atom, const BondParameters& bond_params):
 					lexBondNumber(lex_bond_no), startAtom(start_atom), bondParameters(bond_params) {} 
 
 				std::size_t    lexBondNumber;
-				const Atom*    startAtom;
+				Atom*          startAtom;
 				BondParameters bondParameters;
 			};
 

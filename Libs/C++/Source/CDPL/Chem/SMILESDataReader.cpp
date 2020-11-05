@@ -292,7 +292,7 @@ void Chem::SMILESDataReader::init(const Molecule& mol)
 	nbrBondListTable.assign(nbrBondListTable.size(), STArray());
 }
 
-void Chem::SMILESDataReader::parseSMILES(Molecule& mol, const Atom* prev_atom)
+void Chem::SMILESDataReader::parseSMILES(Molecule& mol, Atom* prev_atom)
 {
 	char c;
 
@@ -336,7 +336,7 @@ void Chem::SMILESDataReader::parseSMILES(Molecule& mol, const Atom* prev_atom)
 
 	ungetChar();
 
-	const Atom* next_atom;
+	Atom* next_atom;
 
 	if (prev_atom) {
 		BondParameters bond_params;
@@ -356,7 +356,7 @@ void Chem::SMILESDataReader::parseSMILES(Molecule& mol, const Atom* prev_atom)
 	parseSMILES(mol, next_atom);
 }
 
-void Chem::SMILESDataReader::parseRingClosures(Molecule& mol, const Atom& atom)
+void Chem::SMILESDataReader::parseRingClosures(Molecule& mol, Atom& atom)
 {
 	BondParameters bond_params;
 
@@ -454,7 +454,7 @@ bool Chem::SMILESDataReader::parseBondParameters(BondParameters& bond_params)
 	return true;
 }
 
-void Chem::SMILESDataReader::createBond(Molecule& mol, const Atom* atom1, const Atom* atom2,
+void Chem::SMILESDataReader::createBond(Molecule& mol, Atom* atom1, Atom* atom2,
 										const BondParameters& bond_params, std::size_t lex_bond_no)
 {
 	assert(atom1 != 0 && atom2 != 0);
@@ -469,6 +469,9 @@ void Chem::SMILESDataReader::createBond(Molecule& mol, const Atom* atom1, const 
 	if (bond_params.aromatic) {
 		setAtomAromaticityFlag(atom1_idx);
 		setAtomAromaticityFlag(atom2_idx);
+		setAromaticityFlag(*atom1, true);
+		setAromaticityFlag(*atom2, true);
+		
 		setAromaticityFlag(bond, true);
 
 	} else {
@@ -480,7 +483,7 @@ void Chem::SMILESDataReader::createBond(Molecule& mol, const Atom* atom1, const 
 	setBondTableEntry(lex_bond_no, &bond);
 }
 
-const Chem::Atom* Chem::SMILESDataReader::parseAtom(Molecule& mol)
+Chem::Atom* Chem::SMILESDataReader::parseAtom(Molecule& mol)
 {
 	char c;
 
@@ -494,7 +497,7 @@ const Chem::Atom* Chem::SMILESDataReader::parseAtom(Molecule& mol)
 	return parseOrgSubsetAtom(mol);
 }
 
-const Chem::Atom* Chem::SMILESDataReader::parseOrgSubsetAtom(Molecule& mol)
+Chem::Atom* Chem::SMILESDataReader::parseOrgSubsetAtom(Molecule& mol)
 {
 	char symbol[3];
 	bool aromatic = parseElementSymbol(symbol, true);
@@ -505,15 +508,17 @@ const Chem::Atom* Chem::SMILESDataReader::parseOrgSubsetAtom(Molecule& mol)
 	setSymbol(atom, symbol_str);
 	setType(atom, AtomDictionary::getType(symbol_str));
 
-	if (aromatic)
+	if (aromatic) {
 		setAtomAromaticityFlag(mol.getAtomIndex(atom));
-
+		setAromaticityFlag(atom, true);
+	}
+	
 	parseRingClosures(mol, atom);
 
 	return &atom;
 }
 
-const Chem::Atom* Chem::SMILESDataReader::parseSpecialAtom(Molecule& mol)
+Chem::Atom* Chem::SMILESDataReader::parseSpecialAtom(Molecule& mol)
 {
 	std::size_t isotope;
 	bool iso_spec = parseNumber(isotope);
@@ -556,9 +561,11 @@ const Chem::Atom* Chem::SMILESDataReader::parseSpecialAtom(Molecule& mol)
 	if (aam_id > 0)
 		setAtomMappingID(atom, aam_id + atomMappingIDOffset);
 
-	if (aromatic)
+	if (aromatic) {
 		setAtomAromaticityFlag(atom_idx);
-
+		setAromaticityFlag(atom, true);
+	}
+	
 	if (perm_desig > 0)
 		addStereoAtom(&atom, perm_desig);
 

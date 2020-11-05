@@ -106,5 +106,7 @@ Chem::FragmentList::SharedPointer Chem::copySSSR(const MolecularGraph& src_molgr
 		tgt_sssr->addElement(tgt_ring);
 	}
 
+	setSSSR(tgt_molgraph, tgt_sssr);
+	
 	return tgt_sssr;
 }

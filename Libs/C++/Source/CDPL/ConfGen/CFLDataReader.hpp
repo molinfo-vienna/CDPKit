@@ -28,9 +28,12 @@
 #define CDPL_CONFGEN_CFLDATAREADER_HPP
 
 #include <sstream>
+#include <vector>
 
 #include "CDPL/ConfGen/FragmentLibraryEntry.hpp"
+#include "CDPL/ConfGen/CanonicalFragment.hpp"
 #include "CDPL/Chem/SMILESMoleculeReader.hpp"
+#include "CDPL/Chem/Fragment.hpp"
 
 #include "CFLFragmentLibraryEntryReader.hpp"
 
@@ -54,11 +57,16 @@ namespace CDPL
 			bool hasMoreData(std::istream& is);
 
 		private:
+			typedef std::vector<Chem::Atom*> AtomList;
+			
 			const Base::ControlParameterContainer& ctrlParams;
 			CFLFragmentLibraryEntryReader          entryReader;
 			FragmentLibraryEntry                   entry;
 			std::istringstream                     smilesStream;
 			Chem::SMILESMoleculeReader             smilesReader;
+			Chem::Fragment                         tmpFragment;
+			CanonicalFragment                      canonFragment;
+			AtomList                               aromAtoms;
 		};
 	}
 }

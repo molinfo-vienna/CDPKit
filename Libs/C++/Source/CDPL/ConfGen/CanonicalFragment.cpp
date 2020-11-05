@@ -249,6 +249,9 @@ ConfGen::CanonicalFragment& ConfGen::CanonicalFragment::operator=(const Canonica
 	molecule.operator=(frag.molecule);
 	hashCode = frag.hashCode;
 
+	if (hasSSSR(frag))
+		copySSSR(frag, *this);
+	
 	atomMapping.clear();
 
 	for (AtomMapping::const_iterator it = frag.atomMapping.begin(), end = frag.atomMapping.end(); it != end; ++it) 
@@ -257,15 +260,18 @@ ConfGen::CanonicalFragment& ConfGen::CanonicalFragment::operator=(const Canonica
 	return *this;
 }
 	
-void ConfGen::CanonicalFragment::create(const Chem::MolecularGraph& molgraph, const Chem::MolecularGraph& parent)
+void ConfGen::CanonicalFragment::create(const Chem::MolecularGraph& molgraph, const Chem::MolecularGraph& parent, bool modify)
 {
     clear();
-	copyAtoms(molgraph, parent);
+	copyAtoms(molgraph, parent, modify);
 
 	bool flex_ring_sys = copyBonds(molgraph);
 
 	fixStereoDescriptors(molgraph, !flex_ring_sys);
-	hydrogenize();
+
+	if (modify)
+		hydrogenize();
+	
 	canonicalize(flex_ring_sys);
 	calcHashCode(flex_ring_sys);
 }
@@ -287,7 +293,7 @@ void ConfGen::CanonicalFragment::perceiveSSSR()
 	setSSSR(*this, sssr);
 }
 
-void ConfGen::CanonicalFragment::copyAtoms(const Chem::MolecularGraph& molgraph, const Chem::MolecularGraph& parent)
+void ConfGen::CanonicalFragment::copyAtoms(const Chem::MolecularGraph& molgraph, const Chem::MolecularGraph& parent, bool modify)
 {
     using namespace Chem;
  
@@ -321,7 +327,7 @@ void ConfGen::CanonicalFragment::copyAtoms(const Chem::MolecularGraph& molgraph,
 
 		atomMapping.push_back(&new_atom);
 
-		if (exp_atom_count == 1 && have_arom_ring_nbr) {
+		if (modify && exp_atom_count == 1 && have_arom_ring_nbr) {
 			setType(new_atom, AtomType::H);
 			setAromaticityFlag(new_atom, false);
 			setRingFlag(new_atom, false);
@@ -354,7 +360,7 @@ void ConfGen::CanonicalFragment::copyAtoms(const Chem::MolecularGraph& molgraph,
 		setAromaticityFlag(new_atom, arom_flag);
 		setHybridizationState(new_atom, hyb_state);
 	
-		if (arom_flag || (atom_type != AtomType::N && atom_type != AtomType::C && atom_type != AtomType::S) || exp_atom_count != 1)
+		if (!modify || arom_flag || (atom_type != AtomType::N && atom_type != AtomType::C && atom_type != AtomType::S) || exp_atom_count != 1)
 			continue;
 		
 		if (hyb_state == HybridizationState::SP) {
