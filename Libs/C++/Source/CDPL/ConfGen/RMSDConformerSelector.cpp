@@ -51,8 +51,6 @@ namespace
 	const std::size_t MAX_INDEX_ARRAY_CACHE_SIZE          = 1000;
 	const std::size_t MAX_VECTOR_ARRAY_CACHE_SIZE         = 2000;
 	const double      MIN_TETRAHEDRAL_ATOM_GEOM_OOP_ANGLE = 10.0 / 180.0 * M_PI;
-
-	struct ExitSearch {};
 }
 
 
@@ -125,10 +123,7 @@ std::size_t ConfGen::RMSDConformerSelector::getMaxNumSymmetryMappings() const
 bool ConfGen::RMSDConformerSelector::selected(const Math::Vector3DArray& conf_coords)
 {
 	if (symMappings.empty()) {
-		try {
-			symMappingSearch.findMappings(symMappingSearchMolGraph);
-
-		} catch (const ExitSearch& e) {}
+		symMappingSearch.findMappings(symMappingSearchMolGraph);
 		
 		if (symMappings.empty())
 			throw Base::OperationFailed("RMSDConformerSelector: could not perceive molecular graph automorphism group");
@@ -245,6 +240,11 @@ bool ConfGen::RMSDConformerSelector::processSymMapping(const Chem::MolecularGrap
 {
 	using namespace Chem;
 	
+	if (maxNumSymMappings > 0 && symMappings.size() >= maxNumSymMappings) {
+		symMappingSearch.stopSearch();
+		return false;
+	}
+	
 	if (!isValidSymMapping(mapping))
 		return false;
 
@@ -262,9 +262,6 @@ bool ConfGen::RMSDConformerSelector::processSymMapping(const Chem::MolecularGrap
 	}
 
 	symMappings.push_back(idx_mapping);
-
-	if (maxNumSymMappings > 0 && symMappings.size() == maxNumSymMappings)
-		throw ExitSearch();
 	
 	return false;
 }

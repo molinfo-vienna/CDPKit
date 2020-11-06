@@ -53,7 +53,7 @@ Chem::SubstructureSearch::SubstructureSearch():
 	bondMatchExprFunc(static_cast<const BondMatchExprPtr& (*)(const Bond&)>(&getMatchExpression)), 
 	molGraphMatchExprFunc(static_cast<const MolGraphMatchExprPtr& (*)(const MolecularGraph&)>(&getMatchExpression)),
 	mappingCache(MAX_MAPPING_CACHE_SIZE), queryChanged(true), initQueryData(true), uniqueMatches(false), 
-	numMappedAtoms(0), maxNumMappings(0) 
+	exitSearch(false), numMappedAtoms(0), maxNumMappings(0) 
 {
 	mappingCache.setCleanupFunction(&AtomBondMapping::clear);
 }
@@ -62,7 +62,7 @@ Chem::SubstructureSearch::SubstructureSearch(const MolecularGraph& query):
 	atomMatchExprFunc(static_cast<const AtomMatchExprPtr& (*)(const Atom&)>(&getMatchExpression)), 
 	bondMatchExprFunc(static_cast<const BondMatchExprPtr& (*)(const Bond&)>(&getMatchExpression)), 
 	molGraphMatchExprFunc(static_cast<const MolGraphMatchExprPtr& (*)(const MolecularGraph&)>(&getMatchExpression)),
-	mappingCache(MAX_MAPPING_CACHE_SIZE), uniqueMatches(false), numMappedAtoms(0), maxNumMappings(0)
+	mappingCache(MAX_MAPPING_CACHE_SIZE), uniqueMatches(false), exitSearch(false), numMappedAtoms(0), maxNumMappings(0)
 {
 	mappingCache.setCleanupFunction(&AtomBondMapping::clear);
 
@@ -94,7 +94,7 @@ bool Chem::SubstructureSearch::mappingExists(const MolecularGraph& target)
 		return false;
 
 	saveMappings = false;
-
+	
 	return mapAtoms();
 }
 
@@ -109,6 +109,11 @@ bool Chem::SubstructureSearch::findMappings(const MolecularGraph& target)
 	mapAtoms();
 
 	return !foundMappings.empty();
+}
+
+void Chem::SubstructureSearch::stopSearch()
+{
+	exitSearch = true;
 }
 
 std::size_t Chem::SubstructureSearch::getNumMappings() const
@@ -205,10 +210,11 @@ bool Chem::SubstructureSearch::init(const MolecularGraph& tgt)
 	if (!query)
 		return false;
 
+	exitSearch = false;
 	numTargetAtoms = tgt.getNumAtoms();
 	numTargetBonds = tgt.getNumBonds();
 	target = &tgt;
-
+	
 	if (queryChanged) {
 		numQueryAtoms = query->getNumAtoms();
 		numQueryBonds = query->getNumBonds();
@@ -365,6 +371,9 @@ bool Chem::SubstructureSearch::findEquivBonds()
 
 bool Chem::SubstructureSearch::mapAtoms()
 {
+	if (exitSearch)
+		return true;
+	
 	if (numMappedAtoms == numQueryAtoms)
 		return mappingFound();
 
@@ -536,6 +545,9 @@ bool Chem::SubstructureSearch::mapBonds(std::size_t query_atom_idx, std::size_t 
 
 bool Chem::SubstructureSearch::mapAtoms(std::size_t query_atom_idx, std::size_t target_atom_idx)
 {
+	if (exitSearch)
+		return true;
+
 	if (!mapBonds(query_atom_idx, target_atom_idx))
 		return false;
 

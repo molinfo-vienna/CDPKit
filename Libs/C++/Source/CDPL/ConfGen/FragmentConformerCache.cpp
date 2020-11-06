@@ -35,7 +35,7 @@ using namespace CDPL;
 namespace
 {
 
-    const std::size_t MAX_CACHE_SIZE = 30000;
+    const std::size_t MAX_CACHE_SIZE = 10000;
 }
 
 

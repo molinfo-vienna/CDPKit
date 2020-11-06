@@ -94,7 +94,7 @@ namespace CDPL
 			AutomorphismGroupSearch(unsigned int atom_flags = DEF_ATOM_PROPERTY_FLAGS, 
 									unsigned int bond_flags = DEF_BOND_PROPERTY_FLAGS);
 		  
-			void setAtomPropertyFlags(unsigned int flags);
+		    void setAtomPropertyFlags(unsigned int flags);
 
 			unsigned int getAtomPropertyFlags() const;
 
@@ -120,6 +120,8 @@ namespace CDPL
 			 */
 			bool findMappings(const MolecularGraph& molgraph);
 
+		    void stopSearch();
+		  
 			/**
 			 * \brief Returns the number of atom/bond mappings that were recorded in the last call to findMappings().
 			 * \return The number of atom/bond mappings that were recorded in the last call to findMappings().

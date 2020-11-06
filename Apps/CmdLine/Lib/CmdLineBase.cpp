@@ -61,6 +61,11 @@ namespace
 
 	void handleSignal(int sig) 
 	{
+		if (signalCaught.load()) {
+			std::cerr << std::endl << "Caught signal (" << strsignal(sig) << ") - exiting..." << std::endl;
+			std::exit(EXIT_FAILURE);
+		}
+			
 		std::cerr << std::endl << "Caught signal (" << strsignal(sig) << ") - attempting graceful shutdown..." << std::endl;
 		signalCaught.store(true);
 	}

@@ -76,7 +76,7 @@ namespace CDPL
 			typedef MatchExpression<Atom, MolecularGraph>::SharedPointer AtomMatchExprPtr;
 			typedef MatchExpression<Bond, MolecularGraph>::SharedPointer BondMatchExprPtr;
 
-		public:
+		  public:
 			typedef boost::shared_ptr<SubstructureSearch> SharedPointer;
 
 			/**
@@ -153,6 +153,8 @@ namespace CDPL
 			 */
 			bool findMappings(const MolecularGraph& target);
 
+			void stopSearch();
+			
 			/**
 			 * \brief Returns the number of atom/bond mappings that were recorded in the last call to findMappings().
 			 * \return The number of atom/bond mappings that were recorded in the last call to findMappings().
@@ -377,6 +379,7 @@ namespace CDPL
 			bool                                  initQueryData;
 			bool                                  uniqueMatches;
 			bool                                  saveMappings;
+			bool                                  exitSearch;
 			std::size_t                           numQueryAtoms;
 			std::size_t                           numQueryBonds;
 			std::size_t                           numTargetAtoms;

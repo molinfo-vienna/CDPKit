@@ -60,6 +60,7 @@ void CDPLPythonChem::exportSubstructureSearch()
 			 python::with_custodian_and_ward<1, 2>())
 		.def("findMappings", &Chem::SubstructureSearch::findMappings, (python::arg("self"), python::arg("target")), 
 			 python::with_custodian_and_ward<1, 2>())
+		.def("stopSearch", &Chem::SubstructureSearch::stopSearch, python::arg("self"))
 		.def("getNumMappings", &Chem::SubstructureSearch::getNumMappings, python::arg("self"))
 		.def("getMapping", getMappingFunc, (python::arg("self"), python::arg("idx")),
 			 python::return_internal_reference<1>())

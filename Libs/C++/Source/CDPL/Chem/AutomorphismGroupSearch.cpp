@@ -101,6 +101,11 @@ bool Chem::AutomorphismGroupSearch::findMappings(const MolecularGraph& molgraph)
     return substructSearch.findMappings(molgraph);
 }
 
+void Chem::AutomorphismGroupSearch::stopSearch()
+{
+	substructSearch.stopSearch();
+}
+
 std::size_t Chem::AutomorphismGroupSearch::getNumMappings() const
 {
     return substructSearch.getNumMappings();
@@ -173,7 +178,6 @@ Chem::AutomorphismGroupSearch::getMolGraphMatchExpression(const MolecularGraph& 
 {
     return molGraphMatchExpr;
 }
-
 
 bool Chem::AutomorphismGroupSearch::AtomMatchExpression::requiresAtomBondMapping() const
 {

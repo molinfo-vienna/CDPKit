@@ -55,6 +55,7 @@ void CDPLPythonChem::exportAutomorphismGroupSearch()
 		.def("identityMappingIncluded", &Chem::AutomorphismGroupSearch::identityMappingIncluded, python::arg("self"))
 		.def("findMappings", &Chem::AutomorphismGroupSearch::findMappings, (python::arg("self"), python::arg("molgraph")), 
 			 python::with_custodian_and_ward<1, 2>())
+		.def("stopSearch", &Chem::AutomorphismGroupSearch::stopSearch, python::arg("self"))
 		.def("getNumMappings", &Chem::AutomorphismGroupSearch::getNumMappings, python::arg("self"))
 		.def("getMapping", getMappingFunc, (python::arg("self"), python::arg("idx")),
 			 python::return_internal_reference<1>())

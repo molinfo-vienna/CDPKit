@@ -93,6 +93,7 @@ namespace
 	const std::size_t MAX_FRAG_CONF_COMBINATIONS             = 100000;
 	const double      FRAG_CONF_COMBINATIONS_E_WINDOW_FACTOR = 1.5;
 	const double      CONF_DUPLICATE_ENERGY_TOLERANCE        = 0.01;
+	const std::size_t CONF_RMSD_TEST_TIMEOUT_CHECK_THRESH    = 1000;
 }
 
 
@@ -1291,6 +1292,9 @@ bool ConfGen::ConformerGeneratorImpl::selectOutputConformers(bool struct_gen_onl
 
 		if (confSelector.selected(*conf_data))
 			outputConfs.push_back(conf_data);
+
+		if ((outputConfs.size() * confSelector.getNumSymmetryMappings()) > CONF_RMSD_TEST_TIMEOUT_CHECK_THRESH && invokeCallbacks() != ReturnCode::SUCCESS)
+			return have_ipt_coords;
 	}
 
 	if (logCallback) {
