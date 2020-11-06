@@ -215,7 +215,7 @@ private:
 			logRecordStream << "Fragment " << getSMILES(frag) << ": in library" << std::endl;
 
 		else if (verbLevel >= DEBUG) 
-			logRecordStream << " Already in library!" << std::endl;
+			logRecordStream << " In library." << std::endl;
 	}
 
 	void handleError(const CDPL::Chem::MolecularGraph& frag, unsigned int ret_code) {

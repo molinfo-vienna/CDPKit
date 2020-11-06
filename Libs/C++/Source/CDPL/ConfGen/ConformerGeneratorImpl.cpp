@@ -84,7 +84,7 @@ namespace
 		}
 	}
 
-	const std::size_t MAX_CONF_DATA_CACHE_SIZE               = 20000;
+	const std::size_t MAX_CONF_DATA_CACHE_SIZE               = 10000;
 	const std::size_t MAX_FRAG_CONF_DATA_CACHE_SIZE          = 100;
 	const std::size_t MAX_FRAG_CONF_COMBINATION_CACHE_SIZE   = 100000;
 	const double      COMP_CONFORMER_SPACING                 = 4.0;
