@@ -48,9 +48,10 @@
 namespace
 {
 
-	const std::size_t MAX_INDEX_ARRAY_CACHE_SIZE          = 1000;
-	const std::size_t MAX_VECTOR_ARRAY_CACHE_SIZE         = 2000;
-	const double      MIN_TETRAHEDRAL_ATOM_GEOM_OOP_ANGLE = 10.0 / 180.0 * M_PI;
+	const std::size_t MAX_INDEX_ARRAY_CACHE_SIZE           = 1000;
+	const std::size_t MAX_VECTOR_ARRAY_CACHE_SIZE          = 2000;
+	const double      MIN_TETRAHEDRAL_ATOM_GEOM_OOP_ANGLE  = 10.0 / 180.0 * M_PI;
+	const std::size_t ABORT_CALLBACK_ALIGNMENT_COUNT       = 10;
 }
 
 
@@ -83,6 +84,16 @@ void ConfGen::RMSDConformerSelector::setMinRMSD(double min_rmsd)
 double ConfGen::RMSDConformerSelector::getMinRMSD() const
 {
     return minRMSD;
+}
+
+void ConfGen::RMSDConformerSelector::setAbortCallback(const CallbackFunction& func)
+{
+	abortCallback = func;
+}
+
+const ConfGen::CallbackFunction& ConfGen::RMSDConformerSelector::getAbortCallback() const
+{
+	return abortCallback;
 }
 
 void ConfGen::RMSDConformerSelector::setup(const Chem::MolecularGraph& molgraph, const Util::BitSet& atom_mask)
@@ -133,9 +144,10 @@ bool ConfGen::RMSDConformerSelector::selected(const Math::Vector3DArray& conf_co
 		std::size_t num_mappings = symMappings.size();
 		bool first_pass = true;
 		Math::Matrix4D conf_xform;
-
+		std::size_t num_perf_almnts = 0;
+		
 		confAlignCoords.clear();
-
+		
 		for (VectorArrayList::const_reverse_iterator it = selectedConfAlignCoords.rbegin(), end = selectedConfAlignCoords.rend(); 
 			 it != end; ++it, first_pass = false) {
 
@@ -154,6 +166,13 @@ bool ConfGen::RMSDConformerSelector::selected(const Math::Vector3DArray& conf_co
 
 				if (rmsd < minRMSD) 
 					return false;
+
+				if (abortCallback && ++num_perf_almnts == ABORT_CALLBACK_ALIGNMENT_COUNT) {
+					if (abortCallback())
+						return false;
+
+					num_perf_almnts = 0;
+				}
 			}
 		}
 

@@ -70,7 +70,6 @@ namespace
 	const std::size_t MAX_CONF_DATA_CACHE_SIZE            = 4000;
 	const std::size_t MAX_NUM_STRUCTURE_GEN_TRIALS        = 10;
 	const std::size_t MAX_NUM_SYM_MAPPINGS                = 64;
-	const std::size_t CONF_RMSD_TEST_TIMEOUT_CHECK_THRESH = 1000;
 }
 
 
@@ -533,13 +532,11 @@ unsigned int ConfGen::FragmentConformerGeneratorImpl::generateFlexibleRingConfor
 		addSymmetryMappedConformers(*conf_data, rmsd, max_num_out_confs);
 		addMirroredConformer(*conf_data, rmsd, max_num_out_confs);
 
-		if ((outputConfs.size() * symMappings.size() / numAtoms) > CONF_RMSD_TEST_TIMEOUT_CHECK_THRESH) {
-			if ((ret_code = invokeCallbacks()) != ReturnCode::SUCCESS)
-				return ret_code;
+		if ((ret_code = invokeCallbacks()) != ReturnCode::SUCCESS)
+			return ret_code;
 
-			if (timedout(timeout))
-				return ReturnCode::FRAGMENT_CONF_GEN_TIMEOUT;
-		}
+		if (timedout(timeout))
+			return ReturnCode::FRAGMENT_CONF_GEN_TIMEOUT;
 	}
 
 	return ret_code;

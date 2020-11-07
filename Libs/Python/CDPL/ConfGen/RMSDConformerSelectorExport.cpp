@@ -43,6 +43,10 @@ void CDPLPythonConfGen::exportRMSDConformerSelector()
 		.def(CDPLPythonBase::ObjectIdentityCheckVisitor<ConfGen::RMSDConformerSelector>())
 		.def("setMinRMSD", &ConfGen::RMSDConformerSelector::setMinRMSD, (python::arg("self"), python::arg("min_rmsd")))
 		.def("getMinRMSD", &ConfGen::RMSDConformerSelector::getMinRMSD, python::arg("self"))
+		.def("setAbortCallback", &ConfGen::RMSDConformerSelector::setAbortCallback, 
+			 (python::arg("self"), python::arg("func")))
+		.def("getAbortCallback", &ConfGen::RMSDConformerSelector::getAbortCallback, 
+			 python::arg("self"), python::return_internal_reference<>())
 		.def("getNumSymmetryMappings", &ConfGen::RMSDConformerSelector::getNumSymmetryMappings, python::arg("self"))
 		.def("setMaxNumSymmetryMappings", &ConfGen::RMSDConformerSelector::setMaxNumSymmetryMappings, (python::arg("self"), python::arg("max_num")))
 		.def("getMaxNumSymmetryMappings", &ConfGen::RMSDConformerSelector::getMaxNumSymmetryMappings, python::arg("self"))
@@ -58,6 +62,10 @@ void CDPLPythonConfGen::exportRMSDConformerSelector()
 		.def("selected", &ConfGen::RMSDConformerSelector::selected, 
 			 (python::arg("self"), python::arg("conf_coords")), python::with_custodian_and_ward<1, 2>())
 		.def_readonly("DEF_MAX_NUM_SYMMETRY_MAPPINGS", ConfGen::RMSDConformerSelector::DEF_MAX_NUM_SYMMETRY_MAPPINGS)
+		.add_property("abortCallback", 
+					  python::make_function(&ConfGen::RMSDConformerSelector::getAbortCallback,
+											python::return_internal_reference<>()),
+					  &ConfGen::RMSDConformerSelector::setAbortCallback)
 		.add_property("numSymmetryMappings", &ConfGen::RMSDConformerSelector::getNumSymmetryMappings)
 		.add_property("maxNumSymmetryMappings", &ConfGen::RMSDConformerSelector::getMaxNumSymmetryMappings,
 					  &ConfGen::RMSDConformerSelector::setMaxNumSymmetryMappings)

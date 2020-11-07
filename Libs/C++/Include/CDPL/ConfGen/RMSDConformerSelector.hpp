@@ -35,6 +35,7 @@
 #include <cstddef>
 
 #include "CDPL/ConfGen/APIPrefix.hpp"
+#include "CDPL/ConfGen/CallbackFunction.hpp"
 #include "CDPL/Chem/Fragment.hpp"
 #include "CDPL/Chem/StereoDescriptor.hpp"
 #include "CDPL/Chem/AutomorphismGroupSearch.hpp"
@@ -67,6 +68,10 @@ namespace CDPL
 			void setMinRMSD(double min_rmsd);
 
 			double getMinRMSD() const;
+
+		  void setAbortCallback(const CallbackFunction& func);
+
+			const CallbackFunction& getAbortCallback() const;
 
 			std::size_t getNumSymmetryMappings() const;
 
@@ -120,7 +125,8 @@ namespace CDPL
 			VectorArrayList               selectedConfAlignCoords;
 			AtomList                      atomNeighbors;
 			double                        minRMSD;
-		    std::size_t                   maxNumSymMappings; 
+		    std::size_t                   maxNumSymMappings;
+		  	CallbackFunction              abortCallback;
 		};
 
 		/**

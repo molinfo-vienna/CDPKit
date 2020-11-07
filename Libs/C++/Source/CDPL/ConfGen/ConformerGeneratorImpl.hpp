@@ -152,7 +152,7 @@ namespace CDPL
 
 			unsigned int generateOutputConformers(bool struct_gen_only);
 
-			bool selectOutputConformers(bool struct_gen_only);
+			unsigned int selectOutputConformers(bool struct_gen_only, bool& );
 
 			double getMMFF94BondLength(std::size_t atom1_idx, std::size_t atom2_idx) const;
 
@@ -168,6 +168,8 @@ namespace CDPL
 			unsigned int invokeCallbacks() const;
 			bool timedout() const;
 
+			bool rmsdConfSelectorAbortCallback() const;
+			
 			typedef std::vector<std::size_t> UIntArray;
 
 			struct FragmentConfData

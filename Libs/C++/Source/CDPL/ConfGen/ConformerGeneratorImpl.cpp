@@ -86,14 +86,13 @@ namespace
 
 	const std::size_t MAX_CONF_DATA_CACHE_SIZE               = 10000;
 	const std::size_t MAX_FRAG_CONF_DATA_CACHE_SIZE          = 100;
-	const std::size_t MAX_FRAG_CONF_COMBINATION_CACHE_SIZE   = 100000;
+	const std::size_t MAX_FRAG_CONF_COMBINATION_CACHE_SIZE   = 50000;
 	const double      COMP_CONFORMER_SPACING                 = 4.0;
 	const std::size_t MAX_NUM_STRUCTURE_GEN_TRIALS           = 10;
 	const std::size_t MAX_NUM_STRUCTURE_GEN_FAILS            = 100;
 	const std::size_t MAX_FRAG_CONF_COMBINATIONS             = 100000;
 	const double      FRAG_CONF_COMBINATIONS_E_WINDOW_FACTOR = 1.5;
 	const double      CONF_DUPLICATE_ENERGY_TOLERANCE        = 0.01;
-	const std::size_t CONF_RMSD_TEST_TIMEOUT_CHECK_THRESH    = 1000;
 }
 
 
@@ -106,7 +105,9 @@ ConfGen::ConformerGeneratorImpl::ConformerGeneratorImpl():
 	fragAssembler.setBondLengthFunction(boost::bind(&ConformerGeneratorImpl::getMMFF94BondLength, this, _1, _2));
 
 	torDriver.setTimeoutCallback(boost::bind(&ConformerGeneratorImpl::timedout, this));
-	
+
+	confSelector.setAbortCallback(boost::bind(&ConformerGeneratorImpl::rmsdConfSelectorAbortCallback, this));
+		
 	TorsionDriverSettings& td_settings = torDriver.getSettings();
 
 	td_settings.sampleHeteroAtomHydrogens(false);
@@ -210,9 +211,14 @@ unsigned int ConfGen::ConformerGeneratorImpl::generate(const Chem::MolecularGrap
 
 			ret_code = generateConformers(molgraph, struct_gen_only, true);
 
-			if (ret_code == ReturnCode::SUCCESS || ret_code == ReturnCode::TIMEOUT) 
-				if (selectOutputConformers(struct_gen_only))
+			if (ret_code == ReturnCode::SUCCESS) {
+				bool have_ipt_coords = false;
+				
+				ret_code = selectOutputConformers(struct_gen_only, have_ipt_coords);
+
+				if (ret_code == ReturnCode::SUCCESS && have_ipt_coords)
 					orderConformersByEnergy(outputConfs);
+			}
 
 		} else
 			ret_code = generateConformers(molgraph, comps, struct_gen_only);
@@ -265,7 +271,6 @@ unsigned int ConfGen::ConformerGeneratorImpl::generateConformers(const Chem::Mol
 		logCallback("Found " + boost::lexical_cast<std::string>(comps.getSize()) + " molecular graph components\n");
 
 	bool have_full_ipt_coords = true;
-	bool have_timeout = false;
 
 	for (std::size_t i = 0, num_comps = comps.getSize(); i < num_comps; i++) {
 		const Fragment::SharedPointer& comp = comps.getBase()[i];
@@ -278,22 +283,16 @@ unsigned int ConfGen::ConformerGeneratorImpl::generateConformers(const Chem::Mol
 
 		unsigned int ret_code = generateConformers(*comp, struct_gen_only, i == 0);
 
-		if (ret_code == ReturnCode::TIMEOUT) {
-			if (i < (num_comps - 1)) {
-				if (logCallback)
-					logCallback("Time limit exceeded!\n");
-
-				return ReturnCode::CONF_GEN_FAILED;
-			}
-
-			have_timeout = true;
-
-		} else if (ret_code != ReturnCode::SUCCESS) 
+		if (ret_code != ReturnCode::SUCCESS) 
 			return ret_code;
 
 		FragmentConfDataPtr comp_conf_data = fragConfDataCache.get();
 
-		comp_conf_data->haveInputCoords = selectOutputConformers(struct_gen_only);
+		ret_code = selectOutputConformers(struct_gen_only, comp_conf_data->haveInputCoords);
+
+		if (ret_code != ReturnCode::SUCCESS)
+			return ret_code;
+		
 		comp_conf_data->fragment = comp;
 		comp_conf_data->conformers.swap(outputConfs);
 
@@ -306,9 +305,6 @@ unsigned int ConfGen::ConformerGeneratorImpl::generateConformers(const Chem::Mol
 
 	if (outputConfs.empty())
 		return ReturnCode::CONF_GEN_FAILED;
-
-	if (have_timeout)
-		return ReturnCode::TIMEOUT;
 
 	return ReturnCode::SUCCESS;
 }
@@ -1174,13 +1170,15 @@ unsigned int ConfGen::ConformerGeneratorImpl::generateOutputConformers(bool stru
 	return ReturnCode::SUCCESS;
 }
 
-bool ConfGen::ConformerGeneratorImpl::selectOutputConformers(bool struct_gen_only)
+unsigned int ConfGen::ConformerGeneratorImpl::selectOutputConformers(bool struct_gen_only, bool& have_ipt_coords)
 {
 	using namespace Chem;
 
+	have_ipt_coords = false;
+	
 	if (struct_gen_only) {
 		if (!outputConfs.empty())
-			return true;
+			return ReturnCode::SUCCESS;
 
 		if (!workingConfs.empty()) {
 			orderConformersByEnergy(workingConfs); 
@@ -1188,9 +1186,11 @@ bool ConfGen::ConformerGeneratorImpl::selectOutputConformers(bool struct_gen_onl
 
 			if (logCallback)
 				logCallback("Selected structure with lowest energy of " + (boost::format("%.4f") % outputConfs.front()->getEnergy()).str() + '\n');
+
+			return ReturnCode::SUCCESS;
 		}
 
-		return false;
+		return ReturnCode::CONF_GEN_FAILED;
 	}
 
 	std::size_t num_atoms = molGraph->getNumAtoms();
@@ -1269,7 +1269,6 @@ bool ConfGen::ConformerGeneratorImpl::selectOutputConformers(bool struct_gen_onl
 
 	double max_energy = workingConfs.front()->getEnergy() + settings.getEnergyWindow();
 	std::size_t max_num_confs = settings.getMaxNumOutputConformers();
-	bool have_ipt_coords = false;
 
 	if (settings.includeInputCoordinates()) {
 		ConformerData::SharedPointer ipt_coords = getInputCoordinates();
@@ -1293,8 +1292,12 @@ bool ConfGen::ConformerGeneratorImpl::selectOutputConformers(bool struct_gen_onl
 		if (confSelector.selected(*conf_data))
 			outputConfs.push_back(conf_data);
 
-		if ((outputConfs.size() * confSelector.getNumSymmetryMappings()) > CONF_RMSD_TEST_TIMEOUT_CHECK_THRESH && invokeCallbacks() != ReturnCode::SUCCESS)
-			return have_ipt_coords;
+		unsigned int ret_code = invokeCallbacks();
+
+		if (ret_code != ReturnCode::SUCCESS) {
+			outputConfs.clear();
+			return ret_code;
+		}
 	}
 
 	if (logCallback) {
@@ -1303,7 +1306,7 @@ bool ConfGen::ConformerGeneratorImpl::selectOutputConformers(bool struct_gen_onl
 		logCallback("Selected " +  boost::lexical_cast<std::string>(outputConfs.size()) + " conformer(s)\n"); 
 	}
 
-	return have_ipt_coords;
+	return ReturnCode::SUCCESS;
 }
 
 double ConfGen::ConformerGeneratorImpl::getMMFF94BondLength(std::size_t atom1_idx, std::size_t atom2_idx) const
@@ -1372,4 +1375,9 @@ bool ConfGen::ConformerGeneratorImpl::timedout() const
 		return false;
 
 	return (timer.elapsed().wall > (boost::timer::nanosecond_type(timeout) * 1000000));
+}
+
+bool ConfGen::ConformerGeneratorImpl::rmsdConfSelectorAbortCallback() const
+{
+	return (invokeCallbacks() != ReturnCode::SUCCESS);
 }
