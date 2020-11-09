@@ -166,12 +166,6 @@ private:
 					case ReturnCode::ABORTED:
 						return false;
 
-					case ReturnCode::TIMEOUT:
-						if (parent->hardTimeout) {
-							handleError(rec_idx, ret_code);
-							break;
-						}
-
 					case ReturnCode::SUCCESS:
 						outputConformers(rec_idx, ret_code);
 						break;
@@ -232,12 +226,9 @@ private:
 
 		std::size_t num_confs = confGen.getNumConformers();
 
-		if (verbLevel == VERBOSE || (verbLevel == INFO && ret_code == ReturnCode::TIMEOUT)) {
+		if (verbLevel == VERBOSE) {
 			logRecordStream << "Molecule " << parent->createMoleculeIdentifier(rec_idx, molecule) << ": " << 
 				num_confs << (num_confs == 1 ? " conf., " : " confs., ") << timer.format(3, "%w") << 's';
-
-			if (ret_code == ReturnCode::TIMEOUT)
-				logRecordStream << " (time limit exceeded)";
 
 			logRecordStream << std::endl;
 		}
@@ -272,12 +263,8 @@ private:
 		if (verbLevel < ERROR)
 			return;
 
-		if (verbLevel >= DEBUG) {
-			if (parent->hardTimeout)
-				logRecordStream << "Conformer generation failed due to hard timeout setting!" << std::endl;
-			
+		if (verbLevel >= DEBUG)
 			return;
-		}
 
 		std::string err_msg;
 
@@ -340,7 +327,7 @@ private:
 ConfGenImpl::ConfGenImpl(): 
 	numThreads(0), settings(ConformerGeneratorSettings::MEDIUM_SET_DIVERSE), 
 	confGenPreset("MEDIUM_SET_DIVERSE"), fragBuildPreset("FAST"), canonicalize(false), energySDEntry(false), 
-	energyComment(false), confIndexSuffix(false), hardTimeout(false), maxNumRotorBonds(-1), torsionLib(), fragmentLib(),
+	energyComment(false), confIndexSuffix(false), maxNumRotorBonds(-1), torsionLib(), fragmentLib(),
 	inputHandler(), outputHandler(), outputWriter(), failedOutputHandler(), failedOutputWriter()
 {
 	addOption("input,i", "Input file(s).", 
@@ -439,9 +426,6 @@ ConfGenImpl::ConfGenImpl():
 			  value<std::string>()->notifier(boost::bind(&ConfGenImpl::setFragmentLib, this, _1)));
 	addOption("canonicalize,z", "Canonicalize input molecules (default: false).", 
 			  value<bool>(&canonicalize)->implicit_value(true));
-	addOption("hard-timeout,U", "Specifies that exceeding the time limit shall be considered as an error and cause molecule "
-			  "conformer generation to fail (default: false).", 
-			  value<bool>(&hardTimeout)->implicit_value(true));
 	addOption("energy-sd-entry,Y", "Output conformer energy in the structure data section of SD-files (default: false).", 
 			  value<bool>(&energySDEntry)->implicit_value(true));
 	addOption("energy-comment,M", "Output conformer energy in the comment field (if supported by output format, default: false).", 
@@ -1118,7 +1102,6 @@ void ConfGenImpl::printOptionSummary()
 	printMessage(VERBOSE, " Refinement Energy Tolerance:         " + (boost::format("%.4f") % settings.getRefinementTolerance()).str());
 	printMessage(VERBOSE, " Max. Num. Refinement Iterations:     " + boost::lexical_cast<std::string>(settings.getMaxNumRefinementIterations()));
 	printMessage(VERBOSE, " Timeout:                             " + boost::lexical_cast<std::string>(settings.getTimeout() / 1000) + "s");
- 	printMessage(VERBOSE, " Hard Timeout:                        " + std::string(hardTimeout ? "Yes" : "No"));
 	printMessage(VERBOSE, " Max. Num. Allowed Rotatable Bonds:   " + (maxNumRotorBonds < 0 ? std::string("No Limit") : boost::lexical_cast<std::string>(maxNumRotorBonds)));
 	printMessage(VERBOSE, " Multithreading:                      " + std::string(numThreads > 0 ? "Yes" : "No"));
 

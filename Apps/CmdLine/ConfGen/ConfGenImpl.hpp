@@ -170,7 +170,6 @@ namespace ConfGen
 		bool                           energySDEntry;
 		bool                           energyComment;
 		bool                           confIndexSuffix;
-		bool                           hardTimeout;
 		long                           maxNumRotorBonds;
 		std::string                    torsionLibName;
 		TorsionLibraryPtr              torsionLib;

@@ -517,12 +517,8 @@ unsigned int ConfGen::ConformerGeneratorImpl::generateConformersStochastic(bool 
 		logCallback(struct_gen_only ? "Performing distance geometry based structure generation...\n" : "Performing stochastic conformer sampling...\n");
 
 	while (max_num_conf_samples == 0 || i < max_num_conf_samples) {
-		if ((ret_code = invokeCallbacks()) != ReturnCode::SUCCESS) {
-			if (ret_code == ReturnCode::TIMEOUT)
-				break;
-
+		if ((ret_code = invokeCallbacks()) != ReturnCode::SUCCESS)
 			return ret_code;
-		}
 
 		if (!conf_data_ptr) {
 			conf_data_ptr = confDataCache.get();
@@ -609,7 +605,7 @@ unsigned int ConfGen::ConformerGeneratorImpl::generateConformersStochastic(bool 
 			logCallback("Time limit exceeded!\n");
 	}
 	
-	return (workingConfs.empty() ? ReturnCode::CONF_GEN_FAILED : ret_code);
+	return (workingConfs.empty() ? ReturnCode::CONF_GEN_FAILED : ReturnCode::SUCCESS);
 }
 
 void ConfGen::ConformerGeneratorImpl::removeWorkingConfDuplicates()
@@ -846,16 +842,8 @@ unsigned int ConfGen::ConformerGeneratorImpl::generateFragmentConformers(bool st
 
 		unsigned int ret_code = fragAssembler.assemble(frag, *molGraph);
 
-		if (ret_code != ReturnCode::SUCCESS) {
-			if (ret_code == ReturnCode::TIMEOUT) {
-				if (logCallback)
-					logCallback("Time limit exceeded!\n");
-
-				return ReturnCode::CONF_GEN_FAILED;
-			}
-
+		if (ret_code != ReturnCode::SUCCESS) 
 			return ret_code;
-		}
 
 		invertibleNMask |= fragAssembler.getInvertibleNitrogenMask();
 
@@ -916,16 +904,8 @@ unsigned int ConfGen::ConformerGeneratorImpl::generateFragmentConformers(bool st
 
 				ret_code = torDriver.generateConformers();
 
-				if (ret_code != ReturnCode::SUCCESS) {
-					if (ret_code == ReturnCode::TIMEOUT) {
-						if (logCallback)
-							logCallback("Time limit exceeded!\n");
-
-						return ReturnCode::CONF_GEN_FAILED;
-					}
-
+				if (ret_code != ReturnCode::SUCCESS)
 					return ret_code;
-				}
 
 				if (struct_gen_only) {
 					TorsionDriverImpl::ConstConformerIterator min_e_conf = std::min_element(torDriver.getConformersBegin(), torDriver.getConformersEnd(), 
@@ -1009,12 +989,8 @@ unsigned int ConfGen::ConformerGeneratorImpl::generateFragmentConformerCombinati
 
 	unsigned int ret_code = invokeCallbacks();
 
-	if (ret_code == ReturnCode::TIMEOUT) {
-		if (logCallback)
-			logCallback("Time limit exceeded!\n");
-
-		return ReturnCode::CONF_GEN_FAILED;
-	}
+	if (ret_code != ReturnCode::SUCCESS)
+		return ret_code;
 
 	if (logCallback) {
 		logCallback("Generated " + boost::lexical_cast<std::string>(torFragConfCombData.size()) + 
@@ -1023,7 +999,7 @@ unsigned int ConfGen::ConformerGeneratorImpl::generateFragmentConformerCombinati
 					", max. energy: " + (boost::format("%.4f") % torFragConfCombData.back()->energy).str() + ")\n");
 	}
 
-	return ret_code;
+	return ReturnCode::SUCCESS;
 }
 
 void ConfGen::ConformerGeneratorImpl::generateFragmentConformerCombinations(std::size_t frag_idx, double comb_energy)
@@ -1074,7 +1050,6 @@ unsigned int ConfGen::ConformerGeneratorImpl::generateOutputConformers(bool stru
 	double min_energy = 0.0;
 	double min_comb_energy = 0.0;
 	double e_window = settings.getEnergyWindow();
-	bool have_timeout = false;
 
 	for (ConfCombinationDataList::const_iterator comb_it = torFragConfCombData.begin(), combs_end = torFragConfCombData.end(); comb_it != combs_end; ++comb_it) {
 		const ConfCombinationData& comb = **comb_it;
@@ -1099,12 +1074,7 @@ unsigned int ConfGen::ConformerGeneratorImpl::generateOutputConformers(bool stru
 
 		unsigned int ret_code = torDriver.generateConformers();
 
-		if (ret_code == ReturnCode::TIMEOUT) {
-			have_timeout = true;
-			break;
-		} 
-
-		if (ret_code == ReturnCode::ABORTED)
+		if (ret_code == ReturnCode::TIMEOUT || ret_code == ReturnCode::ABORTED)
 			return ret_code;
 
 		if (ret_code != ReturnCode::SUCCESS) 
@@ -1155,17 +1125,11 @@ unsigned int ConfGen::ConformerGeneratorImpl::generateOutputConformers(bool stru
 			break;
 	}
 
-	if (logCallback && have_timeout && workingConfs.empty())
-		logCallback("Time limit exceeded!\n");
-
 	if (workingConfs.empty())
 		return ReturnCode::CONF_GEN_FAILED;
 
 	if (logCallback) 
 		logCallback("Generated " + boost::lexical_cast<std::string>(workingConfs.size()) + (struct_gen_only ? " output structure candidate(s)\n" : " output conformer candidate(s)\n"));
-
-	if (have_timeout)
-		return ReturnCode::TIMEOUT;
 
 	return ReturnCode::SUCCESS;
 }
