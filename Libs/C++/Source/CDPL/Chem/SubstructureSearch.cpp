@@ -696,8 +696,8 @@ bool Chem::SubstructureSearch::foundMappingUnique()
 
 void Chem::SubstructureSearch::freeAtomBondMappings()
 {
-	mappingCache.putAll();
 	foundMappings.clear();
+	mappingCache.putAll();
 
 	if (uniqueMatches)
 		uniqueMappings.clear();

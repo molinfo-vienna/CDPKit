@@ -52,6 +52,7 @@ namespace
 	const std::size_t MAX_VECTOR_ARRAY_CACHE_SIZE          = 2000;
 	const double      MIN_TETRAHEDRAL_ATOM_GEOM_OOP_ANGLE  = 10.0 / 180.0 * M_PI;
 	const std::size_t ABORT_CALLBACK_ALIGNMENT_COUNT       = 10;
+	const std::size_t ABORT_CALLBACK_SYM_MAPPING_COUNT     = 1;
 }
 
 
@@ -139,6 +140,9 @@ bool ConfGen::RMSDConformerSelector::selected(const Math::Vector3DArray& conf_co
 		if (symMappings.empty())
 			throw Base::OperationFailed("RMSDConformerSelector: could not perceive molecular graph automorphism group");
 	}
+
+	if (abortCallback && abortCallback())
+		return false;
 
 	if (!selectedConfAlignCoords.empty()) {
 		std::size_t num_mappings = symMappings.size();
@@ -259,6 +263,11 @@ bool ConfGen::RMSDConformerSelector::processSymMapping(const Chem::MolecularGrap
 {
 	using namespace Chem;
 	
+	if (abortCallback && (symMappings.size() % ABORT_CALLBACK_SYM_MAPPING_COUNT) == 0 && abortCallback()) {
+		symMappingSearch.stopSearch();
+		return false;
+	}
+
 	if (maxNumSymMappings > 0 && symMappings.size() >= maxNumSymMappings) {
 		symMappingSearch.stopSearch();
 		return false;
