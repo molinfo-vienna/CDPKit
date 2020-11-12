@@ -493,14 +493,13 @@ void ConfGen::FragmentTreeNode::alignAndRotateChildConformers(double e_window)
 		if (num_tor_angles > 0 && new_conf) 
 			copyCoordinates(left_conf, leftChild->atomIndices, *new_conf, right_atom_idx);
 
-		bool new_min_energy = false;                                                                                                                                                                                                                          		
 		for (std::size_t j = 0; j < num_right_chld_confs; j++) {
 			const ConformerData& right_conf = *rightChild->conformers[j];
 			double conf_energy_sum = left_conf_energy + right_conf.getEnergy();
 
 			if (num_tor_angles == 0) {
 				if (e_window > 0.0) {
-					if (conformers.empty() || conf_energy_sum < min_energy)
+					if (conformers.empty() || conf_energy_sum < min_energy) 
 						min_energy = conf_energy_sum;
 
 					else if (conf_energy_sum > (min_energy + e_window))
@@ -529,11 +528,10 @@ void ConfGen::FragmentTreeNode::alignAndRotateChildConformers(double e_window)
 					double energy = conf_energy_sum + calcMMFF94Energy(*new_conf);
 
 					if (e_window > 0.0) {
-						if (conformers.empty() || energy < min_energy) {
+						if (conformers.empty() || energy < min_energy)
 							min_energy = energy;
-							new_min_energy = (energy < min_energy);
 
-						} else if (energy > (min_energy + e_window)) 
+						else if (energy > (min_energy + e_window)) 
 							continue;
 					}
 
@@ -544,10 +542,10 @@ void ConfGen::FragmentTreeNode::alignAndRotateChildConformers(double e_window)
 				}
 			}
 		}
-
-		if (new_min_energy && e_window > 0.0)
-			removeOutOfWindowConformers(min_energy + e_window);
 	}
+
+	if (e_window > 0.0)
+		removeOutOfWindowConformers(min_energy + e_window);
 }
 
 void ConfGen::FragmentTreeNode::initTorsionAngleData()
