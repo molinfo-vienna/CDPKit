@@ -126,6 +126,10 @@ namespace CDPL
 				return obj_ptr;
 			}
 
+			std::size_t getSize() const {
+				return pool.size();
+			}
+
 			std::size_t getMaxSize() const {
 				return maxSize;
 			}
