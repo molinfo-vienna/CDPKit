@@ -231,6 +231,8 @@ namespace CDPL
 			void setupShapeData(const GaussianShape& shape, ShapeData& data, bool ref);
 			void setupShapeDataElement(const GaussianShape::Element& gs_elem, ShapeData::Element& sd_elem) const;
 
+			void prepareForAlignment();
+
 			bool generateStartTransforms(const ShapeData& ref_data);
 
 			void generateTransformsForElementCenters(const ShapeData& data, unsigned int axes_swap_flags, bool ref_shape);

@@ -403,7 +403,8 @@ bool Shape::FastGaussianShapeAlignment::align(const GaussianShape& shape)
 	resIndexMap.clear();
 
 	setupShapeData(shape, algdShapeData, false);
-
+	prepareForAlignment();
+	
 	for (std::size_t i = 0, num_ref_shapes = refShapeData.size(); i < num_ref_shapes; i++)
 		alignAndProcessResults(i, 0);
 
@@ -420,7 +421,8 @@ bool Shape::FastGaussianShapeAlignment::align(const GaussianShapeSet& shapes)
 			continue;
 
 		setupShapeData(shapes.getElement(i), algdShapeData, false);
-
+		prepareForAlignment();
+		
 		for (std::size_t j = 0; j < num_ref_shapes; j++)
 			alignAndProcessResults(j, i);
 	}
@@ -490,11 +492,6 @@ void Shape::FastGaussianShapeAlignment::alignAndProcessResults(std::size_t ref_i
 		return;
 
 	currRefShapeIdx = ref_idx;
-	startPoseCoords.resize(algdShapeData.elements.size());
-	optPoseCoordsGrad.resize(startPoseCoords.getSize());
-
-	for (std::size_t i = 0, num_algd_elem = startPoseCoords.size(); i < num_algd_elem; i++)
-		startPoseCoords[i].assign(algdShapeData.elements[i].center);
 
 	QuaternionTransformation opt_xform;
 	QuaternionTransformation opt_xform_grad;
@@ -816,7 +813,7 @@ void Shape::FastGaussianShapeAlignment::setupShapeData(const GaussianShape& shap
 		xform_data[3][3] = 1.0;
 	}
 
-	data.symClass = perceiveSymmetryClass(moments, symThreshold);
+	data.symClass = perceiveSymmetryClass(moments, symThreshold);	
 }
 
 void Shape::FastGaussianShapeAlignment::setupShapeDataElement(const GaussianShape::Element& gs_elem, ShapeData::Element& sd_elem) const
@@ -833,6 +830,15 @@ void Shape::FastGaussianShapeAlignment::setupShapeDataElement(const GaussianShap
 	double vol_factor = M_PI / sd_elem.delta;
 
 	sd_elem.volume = sd_elem.weightFactor * vol_factor * std::sqrt(vol_factor);
+}
+
+void Shape::FastGaussianShapeAlignment::prepareForAlignment()
+{
+	startPoseCoords.resize(algdShapeData.elements.size());
+	optPoseCoordsGrad.resize(startPoseCoords.getSize());
+
+	for (std::size_t i = 0, num_algd_elem = startPoseCoords.size(); i < num_algd_elem; i++)
+		startPoseCoords[i].assign(algdShapeData.elements[i].center);
 }
 
 bool Shape::FastGaussianShapeAlignment::generateStartTransforms(const ShapeData& ref_data)
