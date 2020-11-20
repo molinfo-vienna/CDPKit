@@ -1136,9 +1136,11 @@ double Shape::FastGaussianShapeAlignment::calcOverlap(const ShapeData& ref_data,
 
 					double prod_fact_exp = -delta_fact * sqrd_ctr_dist;
 
-					overlap += vol_factor * fastexp::IEEE<double, 3>::evaluate(prod_fact_exp);
+					overlap += fastexp::IEEE<double, 3>::evaluate(prod_fact_exp);
 				}
 			}
+
+			overlap *= vol_factor;
 
 		} else {
 			for (std::size_t i = 0, num_ovl_elem = ovl_data.colElemOffs; i < num_ovl_elem; i++) {
@@ -1200,15 +1202,15 @@ double Shape::FastGaussianShapeAlignment::calcOverlapGradient(const ShapeData& r
 	double overlap = 0.0;
 
 	if (ref_data.equalNonColDelta && algdShapeData.equalNonColDelta && ref_data.elements[0].delta == algdShapeData.elements[0].delta) {
-
 		double max_dist = ref_data.elements[0].radius * 2.0 * RADIUS_SCALING_FACTOR;
 		double elem_delta = ref_data.elements[0].delta;
 		double delta_fact =  elem_delta * 0.5;
-		double delta = 2 * elem_delta;
-		double vol_factor = M_PI / delta;
+		double vol_factor = M_PI * 0.5 / elem_delta;
 
 		vol_factor *= std::sqrt(vol_factor) * ref_data.elements[0].weightFactor * ref_data.elements[0].weightFactor;
 		max_dist *= max_dist;
+
+		double grad_fact = -elem_delta * vol_factor;
 
 		for (std::size_t i = 0, num_ovl_elem = algdShapeData.colElemOffs; i < num_ovl_elem; i++) {
 			const ShapeData::Element& elem1 = algdShapeData.elements[i];
@@ -1228,17 +1230,21 @@ double Shape::FastGaussianShapeAlignment::calcOverlapGradient(const ShapeData& r
 					continue;
 
 				double prod_fact_exp = -delta_fact * sqrd_ctr_dist;
-				double overlap_contrib = vol_factor * fastexp::IEEE<double, 3>::evaluate(prod_fact_exp);
+				double overlap_contrib = fastexp::IEEE<double, 3>::evaluate(prod_fact_exp);
 
 				overlap += overlap_contrib;
-
-				double grad_factor = -delta * overlap_contrib * 0.5;
-			
-				elem1_grad[0] += grad_factor * (elem1_ctr[0] - elem2_ctr[0]);
-				elem1_grad[1] += grad_factor * (elem1_ctr[1] - elem2_ctr[1]);
-				elem1_grad[2] += grad_factor * (elem1_ctr[2] - elem2_ctr[2]);
+	
+				elem1_grad[0] += overlap_contrib * (elem1_ctr[0] - elem2_ctr[0]);
+				elem1_grad[1] += overlap_contrib * (elem1_ctr[1] - elem2_ctr[1]);
+				elem1_grad[2] += overlap_contrib * (elem1_ctr[2] - elem2_ctr[2]);
 			}
+
+			elem1_grad[0] *= grad_fact;
+			elem1_grad[1] *= grad_fact;
+			elem1_grad[2] *= grad_fact;
 		}
+
+		overlap *= vol_factor;
 
 	} else {
 		for (std::size_t i = 0, num_ovl_elem = algdShapeData.colElemOffs; i < num_ovl_elem; i++) {
