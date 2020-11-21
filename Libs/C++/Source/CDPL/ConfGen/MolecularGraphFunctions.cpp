@@ -255,6 +255,8 @@ unsigned int ConfGen::parameterizeMMFF94Interactions(const Chem::MolecularGraph&
 			
 	}	
 
+	param_data.clear();
+
 	parameterizer.setDielectricConstant(estat_de_const);
 	parameterizer.setDistanceExponent(estat_dist_expo);
 	parameterizer.parameterize(molgraph, param_data, int_types, strict);

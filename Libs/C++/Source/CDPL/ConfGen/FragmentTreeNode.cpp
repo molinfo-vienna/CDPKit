@@ -347,10 +347,10 @@ void ConfGen::FragmentTreeNode::lineupChildConformers(double e_window)
 
 	conformers.reserve(num_opt_confs);
 
-	double left_bbox_min[3];
-	double left_bbox_max[3];
-	double right_bbox_min[3];
-	double right_bbox_max[3];
+	double left_bbox_min[3] = {};
+	double left_bbox_max[3] = {};
+	double right_bbox_min[3] = {};
+	double right_bbox_max[3] = {};
 
 	if (e_window > 0.0) {
 		leftChild->orderConformersByEnergy();
