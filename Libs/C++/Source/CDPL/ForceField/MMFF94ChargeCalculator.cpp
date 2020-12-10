@@ -196,7 +196,7 @@ void ForceField::MMFF94ChargeCalculator::distFormalAromAtomCharges(const Chem::A
 	for (FragmentList::ConstElementIterator r_it = arom_rings->getElementsBegin(), r_end = arom_rings->getElementsEnd(); r_it != r_end; ++r_it) {
 		const Fragment& ring = *r_it;
 
-		if (!ring.getNumAtoms() == entry.getAssignmentMode())
+		if (ring.getNumAtoms() != entry.getAssignmentMode())
 			continue;
 
 		if (!ring.containsAtom(atom))
