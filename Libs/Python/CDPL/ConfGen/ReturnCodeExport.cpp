@@ -56,5 +56,6 @@ void CDPLPythonConfGen::exportReturnCodes()
 		.def_readonly("FRAGMENT_ALREADY_PROCESSED", &ConfGen::ReturnCode::FRAGMENT_ALREADY_PROCESSED)
 		.def_readonly("TORSION_DRIVING_FAILED", &ConfGen::ReturnCode::TORSION_DRIVING_FAILED)
 		.def_readonly("CONF_GEN_FAILED", &ConfGen::ReturnCode::CONF_GEN_FAILED)
+		.def_readonly("TOO_MUCH_SYMMETRY", &ConfGen::ReturnCode::TOO_MUCH_SYMMETRY)
 		;
 }

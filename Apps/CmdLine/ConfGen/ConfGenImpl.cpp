@@ -290,6 +290,10 @@ private:
 				err_msg = "time limit exceeded";
 				break;
 
+			case ReturnCode::TOO_MUCH_SYMMETRY:
+				err_msg = "too much symmetry";
+				break;
+
 			default:
 				err_msg = "unspecified error: " + boost::lexical_cast<std::string>(ret_code);
 				break;

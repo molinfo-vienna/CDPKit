@@ -72,6 +72,8 @@ namespace CDPL
 	    const int TORSION_DRIVING_FAILED          = 10;
 
 	    const int CONF_GEN_FAILED                 = 11;
+
+		const int TOO_MUCH_SYMMETRY               = 12;
 	}
 
 	/**

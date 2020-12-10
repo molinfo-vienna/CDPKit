@@ -101,6 +101,9 @@ std::string ConfGen::returnCodeToString(unsigned int ret_code)
 	    case ReturnCode::CONF_GEN_FAILED:
 			return "CONF_GEN_FAILED";
 
+	    case ReturnCode::TOO_MUCH_SYMMETRY:
+			return "TOO_MUCH_SYMMETRY";
+
 		default:
 			break;
 	}
