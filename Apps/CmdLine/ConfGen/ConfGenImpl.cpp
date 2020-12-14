@@ -353,7 +353,7 @@ ConfGenImpl::ConfGenImpl():
 			  boost::lexical_cast<std::string>(settings.getEnergyWindow()) + ", must be >= 0).",
 			  value<double>()->notifier(boost::bind(&ConfGenImpl::setEnergyWindow, this, _1)));
 	addOption("rmsd,r", "Minimum RMSD for output conformer selection (default: " + 
-			  (boost::format("%.4f") % settings.getMinRMSD()).str() + ", must be >= 0).",
+			  (boost::format("%.4f") % settings.getMinRMSD()).str() + ", must be >= 0, 0 disables RMSD checking).",
 			  value<double>()->notifier(boost::bind(&ConfGenImpl::setRMSD, this, _1)));
 	addOption("max-num-out-confs,n", "Maximum number of output conformers per molecule (default: " + 
 			  boost::lexical_cast<std::string>(settings.getMaxNumOutputConformers()) + ", must be >= 0, 0 disables limit).",
@@ -1085,7 +1085,12 @@ void ConfGenImpl::printOptionSummary()
  	printMessage(VERBOSE, " Fragment Build Preset:               " + fragBuildPreset);
  	printMessage(VERBOSE, " Conformer Sampling Mode:             " + getSamplingModeString());
 	printMessage(VERBOSE, " Max. Num. Output Conformers:         " + boost::lexical_cast<std::string>(settings.getMaxNumOutputConformers()));
-	printMessage(VERBOSE, " Min. RMSD:                           " + (boost::format("%.3f") % settings.getMinRMSD()).str());
+
+	if (settings.getMinRMSD() > 0.0)
+		printMessage(VERBOSE, " Min. RMSD:                           " + (boost::format("%.3f") % settings.getMinRMSD()).str());
+	else
+		printMessage(VERBOSE, " Min. RMSD:                           RMSD Checking disabled");
+	
 	printMessage(VERBOSE, " Energy Window:                       " + (boost::format("%.3f") % settings.getEnergyWindow()).str());
  	printMessage(VERBOSE, " Nitrogen Enumeration Mode:           " + getNitrogenEnumModeString());
  	printMessage(VERBOSE, " Enumerate Ring Conformers:           " + std::string(settings.enumerateRings() ? "Yes" : "No"));

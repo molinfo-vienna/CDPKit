@@ -1159,79 +1159,83 @@ unsigned int ConfGen::ConformerGeneratorImpl::selectOutputConformers(bool struct
 		return ReturnCode::CONF_GEN_FAILED;
 	}
 
-	std::size_t num_atoms = molGraph->getNumAtoms();
+	bool perf_rmsd_check = (settings.getMinRMSD() > 0.0);
+	
+	if (perf_rmsd_check) {
+		std::size_t num_atoms = molGraph->getNumAtoms();
 
-	tmpBitSet.resize(num_atoms);
-	tmpBitSet.reset();
+		tmpBitSet.resize(num_atoms);
+		tmpBitSet.reset();
 
-	fixedAtomConfigMask.resize(num_atoms);
-	fixedAtomConfigMask.reset();
+		fixedAtomConfigMask.resize(num_atoms);
+		fixedAtomConfigMask.reset();
 
-	if (inStochasticMode) {
-		for (std::size_t i = 0; i < num_atoms; i++) {
-			const Atom& atom = molGraph->getAtom(i);
+		if (inStochasticMode) {
+			for (std::size_t i = 0; i < num_atoms; i++) {
+				const Atom& atom = molGraph->getAtom(i);
 
-			if (getType(atom) == AtomType::H)
-				continue;
+				if (getType(atom) == AtomType::H)
+					continue;
 
-			tmpBitSet.set(i);
-		}
+				tmpBitSet.set(i);
+			}
 
-		for (DGConstraintGenerator::ConstStereoCenterDataIterator it = dgStructureGen.getConstraintGenerator().getAtomStereoCenterDataBegin(),
-				 end = dgStructureGen.getConstraintGenerator().getAtomStereoCenterDataEnd(); it != end; ++it) 
-			fixedAtomConfigMask.set(it->first);
+			for (DGConstraintGenerator::ConstStereoCenterDataIterator it = dgStructureGen.getConstraintGenerator().getAtomStereoCenterDataBegin(),
+					 end = dgStructureGen.getConstraintGenerator().getAtomStereoCenterDataEnd(); it != end; ++it) 
+				fixedAtomConfigMask.set(it->first);
 
-		if (settings.sampleHeteroAtomHydrogens()) {
-			for (MolecularGraph::ConstBondIterator it = molGraph->getBondsBegin(), end = molGraph->getBondsEnd(); it != end; ++it) {
-				const Bond& bond = *it;
+			if (settings.sampleHeteroAtomHydrogens()) {
+				for (MolecularGraph::ConstBondIterator it = molGraph->getBondsBegin(), end = molGraph->getBondsEnd(); it != end; ++it) {
+					const Bond& bond = *it;
+					const Atom& atom1 = bond.getBegin();
+					unsigned int atom1_type = getType(atom1);
+
+					if (atom1_type != AtomType::C && atom1_type != AtomType::H && getExplicitBondCount(atom1, *molGraph) > 1 && getHeavyBondCount(atom1, *molGraph) == 1)
+						setNeighborAtomBits(atom1, *molGraph, tmpBitSet);
+
+					const Atom& atom2 = bond.getEnd();
+					unsigned int atom2_type = getType(atom2);
+
+					if (atom2_type != AtomType::C && atom2_type != AtomType::H && getExplicitBondCount(atom2, *molGraph) > 1 && getHeavyBondCount(atom2, *molGraph) == 1)
+						setNeighborAtomBits(atom2, *molGraph, tmpBitSet);
+				}
+			}
+
+		} else {
+			for (std::size_t i = 0; i < num_atoms; i++) {
+				const Atom& atom = molGraph->getAtom(i);
+
+				if (getType(atom) == AtomType::H)
+					continue;
+ 
+				tmpBitSet.set(i);
+
+				if (invertibleNMask.test(i)) 
+					setNeighborAtomBits(atom, *molGraph, tmpBitSet);
+
+				else if (!getRingFlag(atom)) 
+					fixedAtomConfigMask.set(i);
+			}
+
+			for (BondList::const_iterator it = torDriveBonds.begin(), end = torDriveBonds.end(); it != end; ++it) {
+				const Bond& bond = **it;
 				const Atom& atom1 = bond.getBegin();
-				unsigned int atom1_type = getType(atom1);
 
-				if (atom1_type != AtomType::C && atom1_type != AtomType::H && getExplicitBondCount(atom1, *molGraph) > 1 && getHeavyBondCount(atom1, *molGraph) == 1)
+				if (getHeavyBondCount(atom1, *molGraph) == 1)
 					setNeighborAtomBits(atom1, *molGraph, tmpBitSet);
 
 				const Atom& atom2 = bond.getEnd();
-				unsigned int atom2_type = getType(atom2);
 
-				if (atom2_type != AtomType::C && atom2_type != AtomType::H && getExplicitBondCount(atom2, *molGraph) > 1 && getHeavyBondCount(atom2, *molGraph) == 1)
+				if (getHeavyBondCount(atom2, *molGraph) == 1)
 					setNeighborAtomBits(atom2, *molGraph, tmpBitSet);
 			}
 		}
 
-	} else {
-		for (std::size_t i = 0; i < num_atoms; i++) {
-			const Atom& atom = molGraph->getAtom(i);
-
-			if (getType(atom) == AtomType::H)
-				continue;
- 
-			tmpBitSet.set(i);
-
-			if (invertibleNMask.test(i)) 
-				setNeighborAtomBits(atom, *molGraph, tmpBitSet);
-
-			else if (!getRingFlag(atom)) 
-				fixedAtomConfigMask.set(i);
-		}
-
-		for (BondList::const_iterator it = torDriveBonds.begin(), end = torDriveBonds.end(); it != end; ++it) {
-			const Bond& bond = **it;
-			const Atom& atom1 = bond.getBegin();
-
-			if (getHeavyBondCount(atom1, *molGraph) == 1)
-				setNeighborAtomBits(atom1, *molGraph, tmpBitSet);
-
-			const Atom& atom2 = bond.getEnd();
-
-			if (getHeavyBondCount(atom2, *molGraph) == 1)
-				setNeighborAtomBits(atom2, *molGraph, tmpBitSet);
-		}
+		confSelector.setMinRMSD(settings.getMinRMSD());
+		confSelector.setup(*molGraph, tmpBitSet, fixedAtomConfigMask, *workingConfs.front());
 	}
-
+	
 	orderConformersByEnergy(workingConfs); 
-
-	confSelector.setMinRMSD(settings.getMinRMSD());
-	confSelector.setup(*molGraph, tmpBitSet, fixedAtomConfigMask, *workingConfs.front());
 
 	double max_energy = workingConfs.front()->getEnergy() + settings.getEnergyWindow();
 	std::size_t max_num_confs = settings.getMaxNumOutputConformers();
@@ -1241,7 +1245,9 @@ unsigned int ConfGen::ConformerGeneratorImpl::selectOutputConformers(bool struct
 
 		if (ipt_coords) {
 			outputConfs.push_back(ipt_coords);
-			confSelector.selected(*ipt_coords);
+
+			if (perf_rmsd_check)
+				confSelector.selected(*ipt_coords);
 
 			have_ipt_coords = true;
 		}
@@ -1255,24 +1261,30 @@ unsigned int ConfGen::ConformerGeneratorImpl::selectOutputConformers(bool struct
 		if (conf_data->getEnergy() > max_energy)
 			break;
 
-		bool selected = confSelector.selected(*conf_data);
-		unsigned int ret_code = invokeCallbacks();
+		if (perf_rmsd_check) {
+			bool selected = confSelector.selected(*conf_data);
+			unsigned int ret_code = invokeCallbacks();
 
-		if (ret_code != ReturnCode::SUCCESS) {
-			outputConfs.clear();
-			return ret_code;
-		}
+			if (ret_code != ReturnCode::SUCCESS) {
+				outputConfs.clear();
+				return ret_code;
+			}
 
-		if (outputConfs.empty() && confSelector.getNumSymmetryMappings() >= MAX_NUM_SYMMETRY_MAPPINGS)
-			return ReturnCode::TOO_MUCH_SYMMETRY;
+			if (outputConfs.empty() && confSelector.getNumSymmetryMappings() >= MAX_NUM_SYMMETRY_MAPPINGS)
+				return ReturnCode::TOO_MUCH_SYMMETRY;
 				
-		if (selected)
+			if (selected)
+				outputConfs.push_back(conf_data);
+
+		} else
 			outputConfs.push_back(conf_data);
 	}
 
 	if (logCallback) {
-		logCallback("Performing output conformer selection (min. RMSD: " + (boost::format("%.4f") % settings.getMinRMSD()).str() + 
-					", num. top. sym. mappings: " + boost::lexical_cast<std::string>(confSelector.getNumSymmetryMappings()) + ")...\n");
+		if (perf_rmsd_check)
+			logCallback("Performing RMSD-based output conformer selection (min. RMSD: " + (boost::format("%.4f") % settings.getMinRMSD()).str() + 
+						", num. top. sym. mappings: " + boost::lexical_cast<std::string>(confSelector.getNumSymmetryMappings()) + ")...\n");
+		
 		logCallback("Selected " +  boost::lexical_cast<std::string>(outputConfs.size()) + " conformer(s)\n"); 
 	}
 
