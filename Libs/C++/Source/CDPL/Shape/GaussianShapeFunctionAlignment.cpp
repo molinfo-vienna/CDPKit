@@ -27,6 +27,8 @@
 #include "StaticInit.hpp"
 
 #include <boost/math/special_functions/fpclassify.hpp>
+
+#define BOOST_BIND_GLOBAL_PLACEHOLDERS
 #include <boost/bind.hpp>
 
 #include "CDPL/Shape/GaussianShapeFunctionAlignment.hpp"

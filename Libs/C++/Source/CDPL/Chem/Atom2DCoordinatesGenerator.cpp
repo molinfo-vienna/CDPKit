@@ -35,6 +35,8 @@
 #include <cassert>
 
 #include <boost/random/linear_congruential.hpp>
+
+#define BOOST_BIND_GLOBAL_PLACEHOLDERS
 #include <boost/bind.hpp>
 
 #include "CDPL/Chem/Atom2DCoordinatesGenerator.hpp"

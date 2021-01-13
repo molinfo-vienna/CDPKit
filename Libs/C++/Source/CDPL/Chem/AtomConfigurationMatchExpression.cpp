@@ -84,7 +84,7 @@ bool Chem::AtomConfigurationMatchExpression::operator()(const Atom& query_atom, 
 	std::size_t num_query_ref_atoms = queryStereoDescr.getNumReferenceAtoms();
 	const Atom* const* query_desc_atoms = queryStereoDescr.getReferenceAtoms();
 
-	const Atom* mpd_query_ref_atoms[4];
+	const Atom* mpd_query_ref_atoms[4] = { 0 };
 	const AtomMapping& atom_mapping = mapping.getAtomMapping();
 
 	for (std::size_t i = 0; i < num_query_ref_atoms; i++)

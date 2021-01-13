@@ -28,6 +28,7 @@
 
 #include <algorithm>
 
+#define BOOST_BIND_GLOBAL_PLACEHOLDERS
 #include <boost/bind.hpp>
 #include <boost/math/special_functions/prime.hpp>
 

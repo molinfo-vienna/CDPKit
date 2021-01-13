@@ -31,6 +31,8 @@
 
 #include <boost/tokenizer.hpp>
 #include <boost/algorithm/string.hpp>
+
+#define BOOST_BIND_GLOBAL_PLACEHOLDERS
 #include <boost/bind.hpp>
 
 #include "CDPL/Biomol/MolecularGraphFunctions.hpp"

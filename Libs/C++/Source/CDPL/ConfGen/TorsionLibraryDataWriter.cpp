@@ -30,6 +30,7 @@
 #include <iomanip>
 #include <algorithm>
 
+#define BOOST_BIND_GLOBAL_PLACEHOLDERS
 #include <boost/bind.hpp>
 
 #include "CDPL/ConfGen/TorsionLibrary.hpp"

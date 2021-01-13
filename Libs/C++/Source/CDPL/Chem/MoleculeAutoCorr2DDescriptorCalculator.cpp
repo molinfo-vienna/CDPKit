@@ -26,6 +26,7 @@
 
 #include "StaticInit.hpp"
 
+#define BOOST_BIND_GLOBAL_PLACEHOLDERS
 #include <boost/bind.hpp>
 
 #include "CDPL/Chem/MoleculeAutoCorr2DDescriptorCalculator.hpp"

@@ -28,7 +28,21 @@
 #include <ostream>
 #include <cstring>
 
-#include <boost/detail/endian.hpp>
+#include <boost/version.hpp>
+
+#if (BOOST_VERSION < 105800)
+# include <boost/detail/endian.hpp>
+# if defined(BOOST_BIG_ENDIAN)
+#  define CDPL_BIG_ENDIAN_NATIVE_ORDER true
+# elif defined(BOOST_LITTLE_ENDIAN)
+#  define CDPL_BIG_ENDIAN_NATIVE_ORDER false
+# else
+#  error "ByteBuffer: BOOST_LITTLE_ENDIAN or BOOST_BIG_ENDIAN needs to be defined"
+# endif
+#else
+# include <boost/endian/detail/order.hpp>
+# define CDPL_BIG_ENDIAN_NATIVE_ORDER (boost::endian::order::native == boost::endian::order::big)
+#endif
 
 #include "CDPL/Base/Exceptions.hpp"
 
@@ -120,27 +134,25 @@ void Internal::ByteBuffer::checkReadSpace(std::size_t num_bytes) const
 
 std::size_t Internal::ByteBuffer::putValueBytes(const char* bytes, std::size_t num_bytes, bool compress)
 {
-#if defined(BOOST_BIG_ENDIAN)
+	if (CDPL_BIG_ENDIAN_NATIVE_ORDER) {
+		if (compress) {
+			std::size_t nz_offs = 0;
 
-	if (compress) {
-		std::size_t nz_offs = 0;
+			for ( ; nz_offs < (num_bytes - 1) && bytes[nz_offs] == 0; nz_offs++);
 
-		for ( ; nz_offs < (num_bytes - 1) && bytes[nz_offs] == 0; nz_offs++);
-
-		bytes += num_bytes;
-		num_bytes -= nz_offs;
+			bytes += num_bytes;
+			num_bytes -= nz_offs;
 	
-	} else
-		bytes += num_bytes;	
+		} else
+			bytes += num_bytes;	
 
-	reserveWriteSpace(num_bytes);
+		reserveWriteSpace(num_bytes);
 
-	for (std::size_t i = 0; i < num_bytes; i++)
-		data[ioPointer++] = *(--bytes);
+		for (std::size_t i = 0; i < num_bytes; i++)
+			data[ioPointer++] = *(--bytes);
 
-	return num_bytes;
-
-#elif defined(BOOST_LITTLE_ENDIAN)
+		return num_bytes;
+	} 
 
 	if (compress)
 		for ( ; num_bytes > 1 && bytes[num_bytes - 1] == 0; num_bytes--);
@@ -151,31 +163,22 @@ std::size_t Internal::ByteBuffer::putValueBytes(const char* bytes, std::size_t n
 	ioPointer += num_bytes;
 
 	return num_bytes;
-
-#else
-# error "ByteBuffer: BOOST_LITTLE_ENDIAN or BOOST_BIG_ENDIAN needs to be defined"
-#endif
 }
 
 void Internal::ByteBuffer::getValueBytes(char* bytes, std::size_t type_size, std::size_t num_bytes)
 {
 	checkReadSpace(num_bytes);
 
-#if defined(BOOST_BIG_ENDIAN)
+	if (CDPL_BIG_ENDIAN_NATIVE_ORDER) {
+		bytes += type_size;
 
-	bytes += type_size;
+		for (std::size_t i = 0; i < num_bytes; i++)
+			*(--bytes) = data[ioPointer++];
 
-	for (std::size_t i = 0; i < num_bytes; i++)
-		*(--bytes) = data[ioPointer++];
-
-#elif defined(BOOST_LITTLE_ENDIAN)
-
-	std::memcpy(bytes, &data[ioPointer], num_bytes);
-	ioPointer += num_bytes;
-
-#else
-# error "ByteBuffer: BOOST_LITTLE_ENDIAN or BOOST_BIG_ENDIAN needs to be defined"
-#endif
+	} else {
+		std::memcpy(bytes, &data[ioPointer], num_bytes);
+		ioPointer += num_bytes;
+	}
 }
 
 const char* Internal::ByteBuffer::getData() const

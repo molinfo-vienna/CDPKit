@@ -32,6 +32,7 @@
 
 #include "CDPL/Config.hpp"
 
+#define BOOST_BIND_GLOBAL_PLACEHOLDERS
 #include <boost/bind.hpp>
 #include <boost/thread.hpp>
 

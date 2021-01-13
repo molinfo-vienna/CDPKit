@@ -354,10 +354,10 @@ unsigned int Chem::perceiveSybylType(const Atom& atom, const MolecularGraph& mol
 			if (getFormalCharge(atom) == 1 && getBondCount(atom, molgraph) == 4 && getBondCount(atom, molgraph, 1) == 4)
 				return SybylAtomType::N_4;				
 
-			if (isAmideNitrogen(atom, molgraph))
+			if (::isAmideNitrogen(atom, molgraph))
 				return SybylAtomType::N_am;
 	
-			if (isPlanarNitrogen(atom, molgraph))
+			if (::isPlanarNitrogen(atom, molgraph))
 				return SybylAtomType::N_pl3;
 
 			switch (getHybridizationState(atom)) {

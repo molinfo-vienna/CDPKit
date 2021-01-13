@@ -33,6 +33,8 @@
 #include <algorithm>
 
 #include <boost/random/uniform_real.hpp>
+
+#define BOOST_BIND_GLOBAL_PLACEHOLDERS
 #include <boost/bind.hpp>
 
 #include "FastExp/fastexp.h"

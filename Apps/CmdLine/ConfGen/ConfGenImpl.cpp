@@ -30,7 +30,10 @@
 #include <sstream>
 
 #include <boost/algorithm/string.hpp>
+
+#define BOOST_BIND_GLOBAL_PLACEHOLDERS
 #include <boost/bind.hpp>
+
 #include <boost/format.hpp>
 #include <boost/lexical_cast.hpp>
 #include <boost/timer/timer.hpp>

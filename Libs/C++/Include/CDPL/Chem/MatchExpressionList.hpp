@@ -34,6 +34,8 @@
 #include <algorithm>
 
 #include <boost/shared_ptr.hpp>
+
+#define BOOST_BIND_GLOBAL_PLACEHOLDERS
 #include <boost/bind.hpp>
 
 #include "CDPL/Chem/MatchExpression.hpp"

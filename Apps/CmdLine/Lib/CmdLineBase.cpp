@@ -37,7 +37,10 @@
 #include <boost/shared_ptr.hpp>
 #include <boost/algorithm/string.hpp>
 #include <boost/filesystem.hpp>
+
+#define BOOST_BIND_GLOBAL_PLACEHOLDERS
 #include <boost/bind.hpp>
+
 #include <boost/tokenizer.hpp>
 #include <boost/atomic.hpp>
 

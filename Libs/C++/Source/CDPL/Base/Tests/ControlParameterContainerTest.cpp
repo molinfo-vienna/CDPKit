@@ -27,7 +27,10 @@
 #include <string>
 
 #include <boost/test/auto_unit_test.hpp>
+
+#define BOOST_BIND_GLOBAL_PLACEHOLDERS
 #include <boost/bind.hpp>
+
 #include <boost/shared_ptr.hpp>
 
 #include "CDPL/Base/ControlParameterContainer.hpp"

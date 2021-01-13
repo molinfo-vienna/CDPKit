@@ -36,7 +36,10 @@
 
 #include <boost/date_time/posix_time/posix_time.hpp>
 #include <boost/lexical_cast.hpp>
+
+#define BOOST_BIND_GLOBAL_PLACEHOLDERS
 #include <boost/bind.hpp>
+
 #include <boost/tokenizer.hpp>
 
 #include "CDPL/Chem/Reaction.hpp"

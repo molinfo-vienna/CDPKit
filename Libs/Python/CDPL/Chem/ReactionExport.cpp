@@ -26,8 +26,10 @@
 
 #include <boost/python.hpp>
 #include <boost/shared_ptr.hpp>
-#include <boost/bind.hpp>
 #include <boost/function.hpp>
+
+#define BOOST_BIND_GLOBAL_PLACEHOLDERS
+#include <boost/bind.hpp>
 
 #include "CDPL/Chem/Reaction.hpp"
 #include "CDPL/Chem/Molecule.hpp"
