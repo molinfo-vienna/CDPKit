@@ -29,8 +29,6 @@
 #include <algorithm>
 
 #include <boost/numeric/conversion/cast.hpp>
-
-#define BOOST_BIND_GLOBAL_PLACEHOLDERS
 #include <boost/bind.hpp>
 
 #include "CDPL/Grid/AttributedGridFunctions.hpp"

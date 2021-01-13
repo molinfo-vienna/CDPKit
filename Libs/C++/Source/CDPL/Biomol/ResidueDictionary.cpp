@@ -29,10 +29,7 @@
 #include "CDPL/Config.hpp"
 
 #include <boost/unordered_set.hpp>
-
-#define BOOST_BIND_GLOBAL_PLACEHOLDERS
 #include <boost/bind.hpp>
-
 #include <boost/thread.hpp>
 
 #if defined(HAVE_BOOST_IOSTREAMS)

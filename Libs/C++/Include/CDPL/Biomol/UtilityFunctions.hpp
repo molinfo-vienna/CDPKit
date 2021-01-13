@@ -33,7 +33,10 @@
 
 #include <algorithm>
 
-#define BOOST_BIND_GLOBAL_PLACEHOLDERS
+#ifndef BOOST_BIND_GLOBAL_PLACEHOLDERS
+# define BOOST_BIND_GLOBAL_PLACEHOLDERS
+#endif
+
 #include <boost/bind.hpp>
 
 #include "CDPL/Biomol/MolecularGraphFunctions.hpp"

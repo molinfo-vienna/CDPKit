@@ -31,7 +31,6 @@
 #include <functional>
 #include <iterator>
 
-#define BOOST_BIND_GLOBAL_PLACEHOLDERS
 #include <boost/bind.hpp>
 
 #include "CDPL/ForceField/MMFF94AtomTyper.hpp"

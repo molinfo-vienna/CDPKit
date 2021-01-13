@@ -29,12 +29,14 @@
 
 #include <algorithm>
 
+#ifndef BOOST_BIND_GLOBAL_PLACEHOLDERS
+# define BOOST_BIND_GLOBAL_PLACEHOLDERS
+#endif
+
+#include <boost/bind.hpp>
 #include <boost/python.hpp>
 #include <boost/python/def_visitor.hpp>
 #include <boost/mpl/if.hpp>
-
-#define BOOST_BIND_GLOBAL_PLACEHOLDERS
-#include <boost/bind.hpp>
 
 #include "Base/ObjectIdentityCheckVisitor.hpp"
 #include "Base/CopyAssOp.hpp"

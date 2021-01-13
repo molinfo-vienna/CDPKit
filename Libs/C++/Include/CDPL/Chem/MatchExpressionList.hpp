@@ -33,10 +33,12 @@
 
 #include <algorithm>
 
-#include <boost/shared_ptr.hpp>
+#ifndef BOOST_BIND_GLOBAL_PLACEHOLDERS
+# define BOOST_BIND_GLOBAL_PLACEHOLDERS
+#endif
 
-#define BOOST_BIND_GLOBAL_PLACEHOLDERS
 #include <boost/bind.hpp>
+#include <boost/shared_ptr.hpp>
 
 #include "CDPL/Chem/MatchExpression.hpp"
 #include "CDPL/Util/IndirectArray.hpp"

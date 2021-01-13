@@ -31,7 +31,6 @@
 #include <cmath>
 #include <iterator>
 
-#define BOOST_BIND_GLOBAL_PLACEHOLDERS
 #include <boost/bind.hpp>
 #include <boost/lexical_cast.hpp>
 

@@ -26,7 +26,6 @@
 
 #include <functional>
 
-#define BOOST_BIND_GLOBAL_PLACEHOLDERS
 #include <boost/bind.hpp>
 #include <boost/test/auto_unit_test.hpp>
 

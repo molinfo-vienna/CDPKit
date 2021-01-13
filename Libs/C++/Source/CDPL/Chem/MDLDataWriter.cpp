@@ -39,10 +39,7 @@
 #include <boost/date_time/posix_time/posix_time.hpp>
 #include <boost/math/special_functions.hpp>
 #include <boost/algorithm/string.hpp>
-
-#define BOOST_BIND_GLOBAL_PLACEHOLDERS
 #include <boost/bind.hpp>
-
 #include <boost/tokenizer.hpp>
 #include <boost/lexical_cast.hpp>
 #include <boost/function.hpp>

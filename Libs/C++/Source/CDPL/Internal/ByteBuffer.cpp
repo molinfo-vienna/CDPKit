@@ -40,7 +40,8 @@
 #  error "ByteBuffer: BOOST_LITTLE_ENDIAN or BOOST_BIG_ENDIAN needs to be defined"
 # endif
 #else
-# include <boost/endian/detail/order.hpp>
+# define BOOST_ENDIAN_DEPRECATED_NAMES
+# include <boost/endian/endian.hpp>
 # define CDPL_BIG_ENDIAN_NATIVE_ORDER (boost::endian::order::native == boost::endian::order::big)
 #endif
 
