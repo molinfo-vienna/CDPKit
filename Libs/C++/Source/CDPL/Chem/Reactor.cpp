@@ -661,7 +661,7 @@ void Chem::Reactor::editProdAtomStereoDescriptor(const Atom* ptn_prod_atom, Atom
 		return;
 
 	const Atom* const* ptn_ref_atoms = ptn_stereo_desc.getReferenceAtoms();
-	const Atom* tgt_ref_atoms[4];
+	const Atom* tgt_ref_atoms[4] = { 0 };
 
 	for (std::size_t i = 0; i < num_ptn_ref_atoms; i++) {
 		const Atom* mpd_ptn_nbr = getMappedTgtProdAtom(ptn_ref_atoms[i]);

@@ -275,7 +275,7 @@ namespace CDPL
 				typedef std::pair<std::size_t, std::size_t> NeighborData;
 				typedef std::vector<NeighborData> NeighborList;
 
-				Feature(Base::uint64 init_id): currentID(init_id), stereoFlag(0), duplicate(false) {}
+				Feature(Base::uint64 init_id): currentID(init_id), nextID(0), stereoFlag(0), duplicate(false) {}
 
 				void addNeighbor(std::size_t bond_idx, std::size_t nbr_idx);
 
