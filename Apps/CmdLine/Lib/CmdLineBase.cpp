@@ -69,13 +69,13 @@ namespace
 				
 			case SIGINT:
 				return "Interrupt";
-				
+#ifndef _WIN32				
 			case SIGHUP:
 				return "Hangup";
 				
 			case SIGQUIT:
 				return "Quit";
-				
+#endif // !defined _WIN32				
 			default:
 				return "Unknown";
 		}
@@ -116,10 +116,10 @@ CmdLineBase::CmdLineBase():
 	std::signal(SIGTERM, &handleSignal);
 	std::signal(SIGINT, &handleSignal);
 
-//#ifndef _WIN32
+#ifndef _WIN32
 	std::signal(SIGHUP, &handleSignal);
 	std::signal(SIGQUIT, &handleSignal);
-//#endif // !defined _WIN32
+#endif // !defined _WIN32
 }
 
 int CmdLineBase::run(int argc, char* argv[])
