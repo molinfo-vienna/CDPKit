@@ -31,7 +31,6 @@
 #include <cmath>
 #include <csignal>
 #include <iostream>
-#include <cstring>
 
 #include <boost/program_options/parsers.hpp>
 #include <boost/shared_ptr.hpp>
@@ -60,14 +59,38 @@ namespace
 
 	boost::atomic<bool> signalCaught(false);
 
+	const char* sigNumberToString(int sig)
+	{
+
+		switch (sig) {
+
+			case SIGTERM:
+				return "Terminated";
+				
+			case SIGINT:
+				return "Interrupt";
+				
+			case SIGHUP:
+				return "Hangup";
+				
+			case SIGQUIT:
+				return "Quit";
+				
+			default:
+				return "Unknown";
+		}
+
+		return 0;
+	}
+	
 	void handleSignal(int sig) 
 	{
 		if (signalCaught.load()) {
-			std::cerr << std::endl << "Caught signal (" << strsignal(sig) << ") - exiting..." << std::endl;
+			std::cerr << std::endl << "Caught signal (" << sigNumberToString(sig) << ") - exiting..." << std::endl;
 			std::exit(EXIT_FAILURE);
 		}
 			
-		std::cerr << std::endl << "Caught signal (" << strsignal(sig) << ") - attempting graceful shutdown..." << std::endl;
+		std::cerr << std::endl << "Caught signal (" << sigNumberToString(sig) << ") - attempting graceful shutdown..." << std::endl;
 		signalCaught.store(true);
 	}
 }
@@ -93,10 +116,10 @@ CmdLineBase::CmdLineBase():
 	std::signal(SIGTERM, &handleSignal);
 	std::signal(SIGINT, &handleSignal);
 
-#ifndef _WIN32
+//#ifndef _WIN32
 	std::signal(SIGHUP, &handleSignal);
 	std::signal(SIGQUIT, &handleSignal);
-#endif // !defined _WIN32
+//#endif // !defined _WIN32
 }
 
 int CmdLineBase::run(int argc, char* argv[])

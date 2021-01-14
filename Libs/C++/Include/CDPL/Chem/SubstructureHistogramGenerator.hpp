@@ -74,7 +74,7 @@ namespace CDPL
 			typedef PatternList::const_iterator ConstPatternIterator;
 			typedef PatternList::iterator PatternIterator;
 
-			class Pattern
+			class CDPL_CHEM_API Pattern
 			{
 
 			public:

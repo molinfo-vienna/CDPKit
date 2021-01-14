@@ -66,7 +66,7 @@ namespace CDPL
 
 			typedef boost::function1<bool, const MolecularGraph&> FragmentFilterFunction;
 			
-			class FragmentationRule
+			class CDPL_CHEM_API FragmentationRule
 			{
 
 			public:
@@ -85,7 +85,7 @@ namespace CDPL
 				unsigned int                  id;
 			};
 			
-			class ExcludePattern
+			class CDPL_CHEM_API ExcludePattern
 			{
 
 			public:
@@ -111,7 +111,7 @@ namespace CDPL
 				bool                          generic;
 			};
 
-			class FragmentLink
+			class CDPL_CHEM_API FragmentLink
 			{
 
 			public:

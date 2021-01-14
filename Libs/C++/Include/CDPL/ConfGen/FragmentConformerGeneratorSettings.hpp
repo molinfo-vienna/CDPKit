@@ -55,7 +55,7 @@ namespace CDPL
 			static const FragmentConformerGeneratorSettings FAST;
 			static const FragmentConformerGeneratorSettings THOROUGH;
 
-			class FragmentSettings
+			class CDPL_CONFGEN_API FragmentSettings
 			{
 		
 			public:

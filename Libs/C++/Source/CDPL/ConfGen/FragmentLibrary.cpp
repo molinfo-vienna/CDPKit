@@ -54,13 +54,13 @@ using namespace CDPL;
 namespace
 {
 
-	const char BUILTIN_FRAG_LIB_DATA[] =                 
-        #include "FragmentLibrary.cfl.str" 
+	const char BUILTIN_FRAG_LIB_DATA[] =
+	 	#include "FragmentLibrary.cfl.str" 
 		;
 
-    const ConfGen::FragmentLibraryEntry::SharedPointer NO_ENTRY;
+	const ConfGen::FragmentLibraryEntry::SharedPointer NO_ENTRY;
 
-    ConfGen::FragmentLibrary::SharedPointer builtinFragLib(new ConfGen::FragmentLibrary());
+	ConfGen::FragmentLibrary::SharedPointer builtinFragLib(new ConfGen::FragmentLibrary());
 
 	boost::once_flag initBuiltinFragLibFlag = BOOST_ONCE_INIT;
 	

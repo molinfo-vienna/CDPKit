@@ -318,7 +318,7 @@ bool ConfGen::RMSDConformerSelector::isValidSymMapping(const Chem::AtomBondMappi
 		const StereoDescriptor& atom_stereo = it->second;
 		const Atom* const* ref_atoms = atom_stereo.getReferenceAtoms();
 		std::size_t num_ref_atoms = atom_stereo.getNumReferenceAtoms();
-		const Atom* mpd_ref_atoms[4];
+		const Atom* mpd_ref_atoms[4] = { 0 };
 		bool valid = true;
 
 		for (std::size_t i = 0; i < num_ref_atoms; i++) {
