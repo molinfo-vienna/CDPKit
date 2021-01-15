@@ -36,13 +36,15 @@ ADD_EXECUTABLE(psdmerge ${psdmerge_SRCS})
 
 SET_TARGET_PROPERTIES(psdmerge PROPERTIES INSTALL_RPATH "${CDPKIT_EXECUTABLE_INSTALL_RPATH}")
 
-SET(BINARY_INPUT_FILE "${CMAKE_CURRENT_BINARY_DIR}/psdmerge")
-CONFIGURE_FILE("${CDPKIT_CMAKE_SCRIPTS_DIR}/InstallExternalRuntimeDependencies.cmake.in" 
-               "${CMAKE_CURRENT_BINARY_DIR}/InstallExternalRuntimeDependencies.cmake" 
-               @ONLY
-              )
+IF(NOT APPLE)
+  SET(BINARY_INPUT_FILE "${CMAKE_CURRENT_BINARY_DIR}/psdmerge")
+  CONFIGURE_FILE("${CDPKIT_CMAKE_SCRIPTS_DIR}/InstallExternalRuntimeDependencies.cmake.in" 
+    "${CMAKE_CURRENT_BINARY_DIR}/InstallExternalRuntimeDependencies.cmake" 
+    @ONLY
+    )
 
-INSTALL(SCRIPT "${CMAKE_CURRENT_BINARY_DIR}/InstallExternalRuntimeDependencies.cmake")
+  INSTALL(SCRIPT "${CMAKE_CURRENT_BINARY_DIR}/InstallExternalRuntimeDependencies.cmake")
+ENDIF(NOT APPLE)
 
 TARGET_LINK_LIBRARIES(psdmerge cmdline-lib-static cdpl-pharm-shared cdpl-util-shared)
 

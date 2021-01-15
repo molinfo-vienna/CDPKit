@@ -36,13 +36,15 @@ ADD_EXECUTABLE(psdcreate ${psdcreate_SRCS})
 
 SET_TARGET_PROPERTIES(psdcreate PROPERTIES INSTALL_RPATH "${CDPKIT_EXECUTABLE_INSTALL_RPATH}")
 
-SET(BINARY_INPUT_FILE "${CMAKE_CURRENT_BINARY_DIR}/psdcreate")
-CONFIGURE_FILE("${CDPKIT_CMAKE_SCRIPTS_DIR}/InstallExternalRuntimeDependencies.cmake.in" 
-               "${CMAKE_CURRENT_BINARY_DIR}/InstallExternalRuntimeDependencies.cmake" 
-               @ONLY
-              )
+IF(NOT APPLE)
+  SET(BINARY_INPUT_FILE "${CMAKE_CURRENT_BINARY_DIR}/psdcreate")
+  CONFIGURE_FILE("${CDPKIT_CMAKE_SCRIPTS_DIR}/InstallExternalRuntimeDependencies.cmake.in" 
+    "${CMAKE_CURRENT_BINARY_DIR}/InstallExternalRuntimeDependencies.cmake" 
+    @ONLY
+    )
 
-INSTALL(SCRIPT "${CMAKE_CURRENT_BINARY_DIR}/InstallExternalRuntimeDependencies.cmake")
+  INSTALL(SCRIPT "${CMAKE_CURRENT_BINARY_DIR}/InstallExternalRuntimeDependencies.cmake")
+ENDIF(NOT APPLE)
 
 TARGET_LINK_LIBRARIES(psdcreate cmdline-lib-static cdpl-util-shared cdpl-base-shared cdpl-chem-shared 
 		      cdpl-pharm-shared cdpl-biomol-shared)

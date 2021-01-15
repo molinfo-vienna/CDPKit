@@ -207,14 +207,12 @@ ELSE(APPLE)
                         INSTALL_RPATH "${CDPKIT_LIBRARY_INSTALL_RPATH}"
                        )
 
-  IF(UNIX)
-    SET(BINARY_INPUT_FILE "${CMAKE_CURRENT_BINARY_DIR}/libcdpl-pharm.so")
-    CONFIGURE_FILE("${CDPKIT_CMAKE_SCRIPTS_DIR}/InstallExternalRuntimeDependencies.cmake.in" 
-                   "${CMAKE_CURRENT_BINARY_DIR}/InstallExternalRuntimeDependencies.cmake"
-                    @ONLY
-                  )
-    INSTALL(SCRIPT "${CMAKE_CURRENT_BINARY_DIR}/InstallExternalRuntimeDependencies.cmake")
-  ENDIF(UNIX)
+  SET(BINARY_INPUT_FILE "${CMAKE_CURRENT_BINARY_DIR}/libcdpl-pharm.so")
+  CONFIGURE_FILE("${CDPKIT_CMAKE_SCRIPTS_DIR}/InstallExternalRuntimeDependencies.cmake.in" 
+    "${CMAKE_CURRENT_BINARY_DIR}/InstallExternalRuntimeDependencies.cmake"
+    @ONLY
+    )
+  INSTALL(SCRIPT "${CMAKE_CURRENT_BINARY_DIR}/InstallExternalRuntimeDependencies.cmake")
 ENDIF(APPLE)
 
 INSTALL(TARGETS cdpl-pharm-shared

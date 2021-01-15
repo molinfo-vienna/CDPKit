@@ -407,16 +407,25 @@ IF(WIN32)
   SET(CPACK_COMPONENT_CDPLPYTHONMODULES_DEPENDS CDPLSharedLibraries)
 
   SET(CPACK_COMPONENTS_ALL 
-      Applications 
-      CDPLSharedLibraries
-      CDPLImportLibraries
-      CDPLStaticLibraries
-      CDPLHeaderFiles
-      CDPLAPIDocumentation
-      CDPLPythonModules
-      CDPLPythonAPIDocumentation
-     )
+    Applications 
+    CDPLSharedLibraries
+    CDPLImportLibraries
+    CDPLStaticLibraries
+    CDPLHeaderFiles
+    CDPLPythonModules
+    CDPLPythonAPIDocumentation
+    )
 
+  IF(EXISTS "${CMAKE_CURRENT_BINARY_DIR}/Doc/C++-API/html")
+    LIST(APPEND CPACK_COMPONENTS_ALL CDPLAPIDocumentation)
+    LIST(APPEND CPACK_NSIS_MENU_LINKS "${CDPKIT_DOC_INSTALL_DIR}/C++-API/index.html" "C++-API Documentation")
+  ENDIF()
+
+  IF(EXISTS "${CMAKE_CURRENT_BINARY_DIR}/Doc/Python-API/html")
+    LIST(APPEND CPACK_COMPONENTS_ALL CDPLPythonAPIDocumentation)
+    LIST(APPEND CPACK_NSIS_MENU_LINKS "${CDPKIT_DOC_INSTALL_DIR}/Python-API/index.html" "Python-API Documentation")
+  ENDIF()
+  
   SET(CPACK_GENERATOR "NSIS")
   SET(CPACK_PACKAGE_INSTALL_REGISTRY_KEY "${PROJECT_NAME}")
   SET(CPACK_NSIS_MODIFY_PATH ON)
@@ -424,10 +433,6 @@ IF(WIN32)
   SET(CPACK_PACKAGE_EXECUTABLES "chox;ChOX")
   SET(CPACK_CREATE_DESKTOP_LINKS "ChOx")
   SET(CPACK_NSIS_INSTALLED_ICON_NAME "${CDPKIT_EXECUTABLE_INSTALL_DIR}\\\\ChOx.exe")
-  SET(CPACK_NSIS_MENU_LINKS
-      "Doc/C++-API/html/index.html" "C++-API Documentation"
-      "Doc/Python-API/html/index.html" "Python-API Documentation"
-     )
   SET(CPACK_NSIS_MUI_ICON "${CDPKIT_GRAPHICS_DIR}/Icon.ico")
   SET(CPACK_NSIS_MUI_UNIICON "${CDPKIT_GRAPHICS_DIR}/Icon.ico")
   SET(CPACK_PACKAGE_DEFAULT_LOCATION "C:/Program Files")
