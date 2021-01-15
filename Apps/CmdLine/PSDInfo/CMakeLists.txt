@@ -35,13 +35,18 @@ ADD_EXECUTABLE(psdinfo ${psdinfo_SRCS})
 SET_TARGET_PROPERTIES(psdinfo PROPERTIES INSTALL_RPATH "${CDPKIT_EXECUTABLE_INSTALL_RPATH}")
 
 IF(NOT APPLE)
-  SET(BINARY_INPUT_FILE "${CMAKE_CURRENT_BINARY_DIR}/psdinfo")
+  IF(WIN32)
+    SET(BINARY_INPUT_FILE "${CMAKE_CURRENT_BINARY_DIR}/psdinfo.exe")
+  ELSE()
+    SET(BINARY_INPUT_FILE "${CMAKE_CURRENT_BINARY_DIR}/psdinfo")
+  ENDIF(WIN32)
+
   CONFIGURE_FILE("${CDPKIT_CMAKE_SCRIPTS_DIR}/InstallExternalRuntimeDependencies.cmake.in" 
     "${CMAKE_CURRENT_BINARY_DIR}/InstallExternalRuntimeDependencies.cmake" 
     @ONLY
     )
 
-  INSTALL(SCRIPT "${CMAKE_CURRENT_BINARY_DIR}/InstallExternalRuntimeDependencies.cmake")
+  INSTALL(SCRIPT "${CMAKE_CURRENT_BINARY_DIR}/InstallExternalRuntimeDependencies.cmake" COMPONENT Applications)
 ENDIF(NOT APPLE)
 
 TARGET_LINK_LIBRARIES(psdinfo cmdline-lib-static cdpl-pharm-shared cdpl-util-shared)

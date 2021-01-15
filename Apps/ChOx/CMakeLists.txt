@@ -184,13 +184,6 @@ ELSE(APPLE)
     SET_TARGET_PROPERTIES(chox PROPERTIES OUTPUT_NAME ChOx)
 
     SET(BINARY_INPUT_FILE "${CMAKE_CURRENT_BINARY_DIR}/ChOx.exe")
-    CONFIGURE_FILE("${CDPKIT_CMAKE_SCRIPTS_DIR}/InstallExternalRuntimeDependencies.cmake.in" 
-      "${CMAKE_CURRENT_BINARY_DIR}/InstallExternalRuntimeDependencies.cmake" 
-      @ONLY
-      )
-
-    INSTALL(SCRIPT "${CMAKE_CURRENT_BINARY_DIR}/InstallExternalRuntimeDependencies.cmake")
-
   ELSE(WIN32)
     ADD_EXECUTABLE(chox ${chox_SRCS})
 
@@ -203,13 +196,14 @@ ELSE(APPLE)
     INSTALL(FILES Icons/chox.png DESTINATION "${CDPKIT_EXECUTABLE_INSTALL_DIR}" COMPONENT Applications)
 
     SET(BINARY_INPUT_FILE "${CMAKE_CURRENT_BINARY_DIR}/chox")
-    CONFIGURE_FILE("${CDPKIT_CMAKE_SCRIPTS_DIR}/InstallExternalRuntimeDependencies.cmake.in" 
-                   "${CMAKE_CURRENT_BINARY_DIR}/InstallExternalRuntimeDependencies.cmake" 
-                   @ONLY
-                  )
-    INSTALL(SCRIPT "${CMAKE_CURRENT_BINARY_DIR}/InstallExternalRuntimeDependencies.cmake")
   ENDIF(WIN32)
 
+  CONFIGURE_FILE("${CDPKIT_CMAKE_SCRIPTS_DIR}/InstallExternalRuntimeDependencies.cmake.in" 
+    "${CMAKE_CURRENT_BINARY_DIR}/InstallExternalRuntimeDependencies.cmake" 
+    @ONLY
+    )
+  INSTALL(SCRIPT "${CMAKE_CURRENT_BINARY_DIR}/InstallExternalRuntimeDependencies.cmake" COMPONENT Applications)
+  
   TARGET_LINK_LIBRARIES(chox cdpl-vis-shared cdpl-biomol-shared cdpl-pharm-shared cdpl-confgen-shared Qt5::Gui Qt5::Widgets Qt5::PrintSupport)
 ENDIF(APPLE)
 

@@ -77,12 +77,17 @@ ELSE(APPLE)
                         INSTALL_RPATH "${CDPKIT_LIBRARY_INSTALL_RPATH}"
                        )
 
-  SET(BINARY_INPUT_FILE "${CMAKE_CURRENT_BINARY_DIR}/libcdpl-util.so")
+  IF(WIN32)
+    SET(BINARY_INPUT_FILE "${CMAKE_CURRENT_BINARY_DIR}/libcdpl-util.dll")
+  ELSE()			
+    SET(BINARY_INPUT_FILE "${CMAKE_CURRENT_BINARY_DIR}/libcdpl-util.so")
+  ENDIF(WIN32)
+
   CONFIGURE_FILE("${CDPKIT_CMAKE_SCRIPTS_DIR}/InstallExternalRuntimeDependencies.cmake.in" 
     "${CMAKE_CURRENT_BINARY_DIR}/InstallExternalRuntimeDependencies.cmake" 
     @ONLY
     )
-  INSTALL(SCRIPT "${CMAKE_CURRENT_BINARY_DIR}/InstallExternalRuntimeDependencies.cmake")
+  INSTALL(SCRIPT "${CMAKE_CURRENT_BINARY_DIR}/InstallExternalRuntimeDependencies.cmake" COMPONENT CDPLSharedLibraries)
 ENDIF(APPLE)
 
 INSTALL(TARGETS cdpl-util-shared

@@ -76,20 +76,24 @@ IF(APPLE)
                         OUTPUT_NAME CDPL-Shape
                         INSTALL_NAME_DIR "${CDPKIT_FRAMEWORK_INSTALL_NAME_DIR}"
                         LINK_FLAGS "-Wl,-rpath,\"${CDPKIT_FRAMEWORK_INSTALL_RPATH}\""
-                       )
+			)
 ELSE(APPLE)
   SET_TARGET_PROPERTIES(cdpl-shape-shared PROPERTIES VERSION "${CDPL_VERSION}" SOVERSION "${CDPL_SO_VERSION}"
                         OUTPUT_NAME cdpl-shape
                         CLEAN_DIRECT_OUTPUT 1
                         INSTALL_RPATH "${CDPKIT_LIBRARY_INSTALL_RPATH}"
-                       )
-
-  SET(BINARY_INPUT_FILE "${CMAKE_CURRENT_BINARY_DIR}/libcdpl-shape.so")
+			)
+  IF(WIN32)
+    SET(BINARY_INPUT_FILE "${CMAKE_CURRENT_BINARY_DIR}/libcdpl-shape.dll")
+  ELSE()			
+    SET(BINARY_INPUT_FILE "${CMAKE_CURRENT_BINARY_DIR}/libcdpl-shape.so")
+  ENDIF(WIN32)
+    
   CONFIGURE_FILE("${CDPKIT_CMAKE_SCRIPTS_DIR}/InstallExternalRuntimeDependencies.cmake.in" 
     "${CMAKE_CURRENT_BINARY_DIR}/InstallExternalRuntimeDependencies.cmake" 
     @ONLY
     )
-  INSTALL(SCRIPT "${CMAKE_CURRENT_BINARY_DIR}/InstallExternalRuntimeDependencies.cmake")
+  INSTALL(SCRIPT "${CMAKE_CURRENT_BINARY_DIR}/InstallExternalRuntimeDependencies.cmake" COMPONENT CDPLSharedLibraries)
 ENDIF(APPLE)
 
 INSTALL(TARGETS cdpl-shape-shared
