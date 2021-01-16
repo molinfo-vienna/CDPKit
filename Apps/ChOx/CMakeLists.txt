@@ -162,12 +162,12 @@ IF(APPLE)
           COMPONENT Applications
          )
 
-  TARGET_LINK_LIBRARIES(chox cdpl-vis-static cdpl-biomol-static cdpl-pharm-static Qt5::Gui Qt5::Widgets Qt5::PrintSupport)
+  TARGET_LINK_LIBRARIES(chox cdpl-chem-static cdpl-vis-static cdpl-biomol-static cdpl-pharm-static cdpl-confgen-static Qt5::Gui Qt5::Widgets Qt5::PrintSupport)
 ELSE(APPLE)
   IF(WIN32)
     IF(MINGW) # resource compilation for mingw
       FIND_PROGRAM(WINDRES_EXECUTABLE NAMES windres.exe windres)
-  
+
       IF(WINDRES_EXECUTABLE)
         ADD_CUSTOM_COMMAND(OUTPUT "${CMAKE_CURRENT_BINARY_DIR}/chox_rc.obj"
                            COMMAND "${WINDRES_EXECUTABLE}" "-I${CMAKE_CURRENT_SOURCE_DIR}/Icons"
@@ -182,6 +182,9 @@ ELSE(APPLE)
     ADD_EXECUTABLE(chox WIN32 ${chox_SRCS})
 
     SET_TARGET_PROPERTIES(chox PROPERTIES OUTPUT_NAME ChOx)
+
+    INCLUDE(WinDeployQt)
+    WinDeployQt(chox "${CMAKE_CURRENT_BINARY_DIR}" Applications "${CDPKIT_EXECUTABLE_INSTALL_DIR}")
 
     SET(BINARY_INPUT_FILE "${CMAKE_CURRENT_BINARY_DIR}/ChOx.exe")
   ELSE(WIN32)
@@ -204,7 +207,7 @@ ELSE(APPLE)
     )
   INSTALL(SCRIPT "${CMAKE_CURRENT_BINARY_DIR}/InstallExternalRuntimeDependencies.cmake" COMPONENT Applications)
   
-  TARGET_LINK_LIBRARIES(chox cdpl-vis-shared cdpl-biomol-shared cdpl-pharm-shared cdpl-confgen-shared Qt5::Gui Qt5::Widgets Qt5::PrintSupport)
+  TARGET_LINK_LIBRARIES(chox cdpl-chem-shared cdpl-vis-shared cdpl-biomol-shared cdpl-pharm-shared cdpl-confgen-shared Qt5::Gui Qt5::Widgets Qt5::PrintSupport)
 ENDIF(APPLE)
 
 INSTALL(TARGETS chox DESTINATION "${CDPKIT_EXECUTABLE_INSTALL_DIR}" COMPONENT Applications)
