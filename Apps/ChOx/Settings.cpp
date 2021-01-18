@@ -40,6 +40,8 @@
 #include "CDPL/Pharm/DataFormat.hpp"
 #include "CDPL/Biomol/ControlParameter.hpp"
 #include "CDPL/Biomol/DataFormat.hpp"
+#include "CDPL/ConfGen/ControlParameter.hpp"
+#include "CDPL/ConfGen/DataFormat.hpp"
 #include "CDPL/Vis/ControlParameter.hpp"
 #include "CDPL/Vis/ControlParameterDefault.hpp"
 #include "CDPL/Vis/ControlParameterFunctions.hpp"
@@ -637,6 +639,18 @@ void Settings::load()
 
 	settings.endGroup();
 
+	// ------
+
+	settings.beginGroup(QString::fromStdString("Input/" + ConfGen::DataFormat::CFL.getName()));
+
+	SettingsContainer& cfl_rparams = readerControlParams[ConfGen::DataFormat::CFL.getName()];
+
+	cfl_rparams.setParent(this);
+
+	readParameter<bool>(cfl_rparams, settings, ConfGen::ControlParameter::STRICT_ERROR_CHECKING, ControlParameterDefault::CFL_INPUT_STRICT_ERROR_CHECKING);
+	
+	settings.endGroup();
+
 	// +++
 
 	// ------
@@ -1117,6 +1131,18 @@ void Settings::save() const
 	writeParameter<bool>(cdf_wparams, settings, Chem::ControlParameter::CDF_WRITE_SINGLE_PRECISION_FLOATS);
 
 	settings.endGroup();
+
+	// ------
+
+	settings.beginGroup(QString::fromStdString("Input/" + ConfGen::DataFormat::CFL.getName()));
+
+	const SettingsContainer& cfl_rparams = getReaderControlParameters(ConfGen::DataFormat::CFL.getName());
+
+	writeParameter<bool>(cfl_rparams, settings, ConfGen::ControlParameter::STRICT_ERROR_CHECKING);
+
+	settings.endGroup();
+
+	// +++
 
 	// ------
 

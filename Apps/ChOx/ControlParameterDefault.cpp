@@ -217,7 +217,9 @@ namespace ChOx
 
 		const bool                                 CDF_OUTPUT_WRITE_SINGLE_RECORD_FILES     = false;
 		const bool                                 CDF_OUTPUT_WRITE_SINGLE_PRECISION_FLOATS = true;
-		
+
+		const bool                                 CFL_INPUT_STRICT_ERROR_CHECKING         = true;
+
 		const bool                                  PSD_OUTPUT_WRITE_SINGLE_RECORD_FILES     = false;
 		const bool                                  PSD_OUTPUT_WRITE_SINGLE_PRECISION_FLOATS = true;
 		const bool                                  PSD_OUTPUT_ALLOW_DUPLICATES              = true;

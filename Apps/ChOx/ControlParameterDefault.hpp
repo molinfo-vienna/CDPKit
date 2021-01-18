@@ -230,7 +230,9 @@ namespace ChOx
 
 		extern const bool                                 CDF_OUTPUT_WRITE_SINGLE_RECORD_FILES;
 		extern const bool                                 CDF_OUTPUT_WRITE_SINGLE_PRECISION_FLOATS;
-		
+
+		extern const bool                                 CFL_INPUT_STRICT_ERROR_CHECKING;
+	
 		extern const bool                                  PSD_OUTPUT_WRITE_SINGLE_RECORD_FILES;
 		extern const bool                                  PSD_OUTPUT_WRITE_SINGLE_PRECISION_FLOATS;
 		extern const bool                                  PSD_OUTPUT_ALLOW_DUPLICATES;
