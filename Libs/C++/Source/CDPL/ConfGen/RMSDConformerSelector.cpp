@@ -267,11 +267,6 @@ bool ConfGen::RMSDConformerSelector::processSymMapping(const Chem::MolecularGrap
 		symMappingSearch.stopSearch();
 		return false;
 	}
-
-	if (maxNumSymMappings > 0 && symMappings.size() >= maxNumSymMappings) {
-		symMappingSearch.stopSearch();
-		return false;
-	}
 	
 	if (!isValidSymMapping(mapping))
 		return false;
@@ -291,6 +286,9 @@ bool ConfGen::RMSDConformerSelector::processSymMapping(const Chem::MolecularGrap
 
 	symMappings.push_back(idx_mapping);
 	
+	if (maxNumSymMappings > 0 && symMappings.size() >= maxNumSymMappings)
+		symMappingSearch.stopSearch();
+
 	return false;
 }
 

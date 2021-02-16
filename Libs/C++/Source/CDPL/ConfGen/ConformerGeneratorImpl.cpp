@@ -91,7 +91,7 @@ namespace
 	const std::size_t MAX_NUM_STRUCTURE_GEN_TRIALS           = 10;
 	const std::size_t MAX_NUM_STRUCTURE_GEN_FAILS            = 100;
 	const std::size_t MAX_FRAG_CONF_COMBINATIONS             = 100000;
-	const std::size_t MAX_NUM_SYMMETRY_MAPPINGS              = 32768;
+	const std::size_t MAX_NUM_SYMMETRY_MAPPINGS              = 131072;
 	const double      FRAG_CONF_COMBINATIONS_E_WINDOW_FACTOR = 1.5;
 	const double      CONF_DUPLICATE_ENERGY_TOLERANCE        = 0.01;
 }
@@ -108,7 +108,7 @@ ConfGen::ConformerGeneratorImpl::ConformerGeneratorImpl():
 	torDriver.setTimeoutCallback(boost::bind(&ConformerGeneratorImpl::timedout, this));
 
 	confSelector.setAbortCallback(boost::bind(&ConformerGeneratorImpl::rmsdConfSelectorAbortCallback, this));
-	confSelector.setMaxNumSymmetryMappings(MAX_NUM_SYMMETRY_MAPPINGS);
+	confSelector.setMaxNumSymmetryMappings(MAX_NUM_SYMMETRY_MAPPINGS + 1);
 	
 	TorsionDriverSettings& td_settings = torDriver.getSettings();
 
@@ -1270,7 +1270,7 @@ unsigned int ConfGen::ConformerGeneratorImpl::selectOutputConformers(bool struct
 				return ret_code;
 			}
 
-			if (outputConfs.empty() && confSelector.getNumSymmetryMappings() >= MAX_NUM_SYMMETRY_MAPPINGS)
+			if (outputConfs.empty() && confSelector.getNumSymmetryMappings() > MAX_NUM_SYMMETRY_MAPPINGS)
 				return ReturnCode::TOO_MUCH_SYMMETRY;
 				
 			if (selected)
