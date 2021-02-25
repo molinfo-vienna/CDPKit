@@ -142,14 +142,16 @@ void ConfGen::prepareForConformerGeneration(Chem::Molecule& mol, bool canon)
 
 	bool added_hs = makeHydrogenComplete(mol, true);
 
+	perceiveComponents(mol, added_hs);
+
 	if (canon) {
 		generateCanonicalNumbering(mol, false);
 		canonicalize(mol, true, true, true, true);
 		perceiveSSSR(mol, true);
+		perceiveComponents(mol, true);
 	}
 
 	calcTopologicalDistanceMatrix(mol, canon || added_hs);
-	perceiveComponents(mol, canon || added_hs);
 
 	FragmentList& comps = *getComponents(mol);
 
