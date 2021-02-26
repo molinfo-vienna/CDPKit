@@ -34,7 +34,7 @@
     [cX1:1]                                              C=C     SPECIAL ENTRY FOR CONFGEN: AROMATIC CARBON
     [#6X4:1]                                             CR      ALKYL CARBON, SP3
     [#6X3:1]                                             CSP2    GENERIC SP2 CARBON
-    [#6H2X3+0:1]                                         C=ON    SPECIAL ENTRY FOR CONFGEN: AMIDE CARBONYL CARBON
+    [#6H2X3+1:1]                                         C=ON    SPECIAL ENTRY FOR CONFGEN: AMIDE CARBONYL CARBON
     [#6X3:1]=[#6]                                        C=C     VINYLIC CARBON, SP2
     [#6X4:1]1~[*]~[*]~[*]1                               CR4R    CARBON IN 4-MEMBERED RINGS
     [#6X4:1]1~[*]~[*]1                                   CR3R    CARBON IN A 3-MEMBERED RING
