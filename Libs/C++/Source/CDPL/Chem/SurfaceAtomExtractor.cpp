@@ -335,34 +335,33 @@ void Chem::SurfaceAtomExtractor::extractSurfaceAtoms(Fragment& frag)
 			std::size_t z_idx = (test_pos(2) - bBoxMin(2)) / gridStepSize;
 
 			AtomIndexListPtr& alist_ptr = gridAtomLookup[z_idx * gridXSize * gridYSize + y_idx * gridXSize + x_idx];
-
-			if (!alist_ptr) {
-				num_acc_pts++;
-				continue;
-			}
-
 			bool found_coll = false;
 
-			for (AtomIndexList::const_iterator al_it = alist_ptr->begin(), al_end = alist_ptr->end(); al_it != al_end; ++al_it) {
-				std::size_t nbr_atom_idx = *al_it;
+			if (alist_ptr) {
+				for (AtomIndexList::const_iterator al_it = alist_ptr->begin(), al_end = alist_ptr->end(); al_it != al_end; ++al_it) {
+					std::size_t nbr_atom_idx = *al_it;
 
-				if (nbr_atom_idx == atom_idx)
-					continue;
+					if (nbr_atom_idx == atom_idx)
+						continue;
 
-				tmp.assign(atomCoords[nbr_atom_idx] - test_pos);
+					tmp.assign(atomCoords[nbr_atom_idx] - test_pos);
 
-				if (length(tmp) <= atomRadii[nbr_atom_idx]) {
-					found_coll = true;
+					if (length(tmp) <= atomRadii[nbr_atom_idx]) {
+						found_coll = true;
+						break;
+					}
+				} 
+			}
+			
+			if (!found_coll) {
+				num_acc_pts++;
+				
+				if ((double(num_acc_pts) / numTestPoints) >= minSurfAcc) {
+					frag.addAtom(parentMolGraph->getAtom(atom_idx));
 					break;
 				}
-			} 
-
-			if (!found_coll) 
-				num_acc_pts++;
+			}
 		}
-
-		if ((double(num_acc_pts) / numTestPoints) >= minSurfAcc)
-			frag.addAtom(parentMolGraph->getAtom(atom_idx));
 	}
 }
 
