@@ -36,7 +36,10 @@
 
 #include <boost/date_time/posix_time/posix_time.hpp>
 #include <boost/lexical_cast.hpp>
+
+#define BOOST_BIND_GLOBAL_PLACEHOLDERS
 #include <boost/bind.hpp>
+
 #include <boost/tokenizer.hpp>
 
 #include "CDPL/Chem/Reaction.hpp"
@@ -412,7 +415,13 @@ bool Chem::MDLDataReader::readNextConformer(std::istream& is, const MolecularGra
 	if (!stereoAtoms.empty() || save_coords)
 		confCoords.resize(molgraph.getNumAtoms());
 
-	skipMOLHeaderBlock(is);
+	readMDLLine(is, line, "MDLDataReader: error while reading molecule name from molfile header block", 
+				trimLines, checkLineLength);
+
+	if (getName(molgraph) != line)
+		return false;
+
+	skipMDLLines(is, 2, "MDLDataReader: error while skipping molfile header block");
 
 	atomCount = readMDLNumber<std::size_t, 3>(is, "MDLDataReader: error while reading number of atoms from counts-line"); 
 	bondCount = readMDLNumber<std::size_t, 3>(is, "MDLDataReader: error while reading number of bonds from counts-line"); 
