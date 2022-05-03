@@ -360,18 +360,18 @@ ConfGenImpl::ConfGenImpl():
 			  value<std::size_t>()->notifier(boost::bind(&ConfGenImpl::setMaxNumConfs, this, _1)));
 	addOption("nitrogen-enum-mode,N", "Invertible nitrogen enumeration mode (NONE, ALL, UNSPECIFIED, default: " + 
 			  getNitrogenEnumModeString() + ").", value<std::string>()->notifier(boost::bind(&ConfGenImpl::setNitrogenEnumMode, this, _1)));
-	addOption("enum-rings,R", "Enumerate ring conformers (only effective in systematic sampling, default: true).", 
+	addOption("enum-rings,R", "Enumerate ring conformers (only effective in systematic sampling mode, default: true).", 
 			  value<bool>()->implicit_value(true)->notifier(boost::bind(&ConfGenImpl::setEnumRings, this, _1)));
 	addOption("sample-het-hydrogens,H", "Perform torsion sampling for hydrogens on hetero atoms (default: false).", 
 			  value<bool>()->implicit_value(true)->notifier(boost::bind(&ConfGenImpl::setSampleHetAtomHydrogens, this, _1)));
 	addOption("tol-range-sampling,A", "Additionally generate conformers for angles at the boundaries of the first "
-			  "torsion angle tolerance range (only effective in systematic sampling, default: false).", 
+			  "torsion angle tolerance range (only effective in systematic sampling mode, default: false).", 
 			  value<bool>()->implicit_value(true)->notifier(boost::bind(&ConfGenImpl::setSampleAngleTolRanges, this, _1)));
-	addOption("include-input,u", "Include original input structure in output conformers (default: false).", 
+	addOption("include-input,u", "Add input 3D-structure to output conformer ensemble (default: false).", 
 			  value<bool>()->implicit_value(true)->notifier(boost::bind(&ConfGenImpl::setIncludeInput, this, _1)));
-	addOption("from-scratch,S", "Discard input 3D-coordinates and generate structures from scratch (default: true).", 
+	addOption("from-scratch,S", "Discard input 3D-coordinates and generate conformers from scratch (default: true).", 
 			  value<bool>()->implicit_value(true)->notifier(boost::bind(&ConfGenImpl::setGenerateFromScratch, this, _1)));
-	addOption("systematic-search-force-field,d", "Search force field used in systematic smapling (MMFF94, MMFF94_NO_ESTAT, "
+	addOption("systematic-search-force-field,d", "Search force field used in systematic sampling (MMFF94, MMFF94_NO_ESTAT, "
 			  "MMFF94S, MMFF94S_XOOP, MMFF94S_RTOR, MMFF94S_RTOR_XOOP, MMFF94S_NO_ESTAT, MMFF94S_XOOP_NO_ESTAT, MMFF94S_RTOR_NO_ESTAT, MMFF94S_RTOR_XOOP_NO_ESTAT, default: " +
 			  getForceFieldTypeString(settings.getForceFieldTypeSystematic()) + ").", 
 			  value<std::string>()->notifier(boost::bind(&ConfGenImpl::setSystematicSearchForceFieldType, this, _1)));
@@ -388,45 +388,45 @@ ConfGenImpl::ConfGenImpl():
 			  (boost::format("%.4f") % settings.getDistanceExponent()).str() + ").", 
 			  value<double>()->notifier(boost::bind(&ConfGenImpl::setDistExponent, this, _1)));
 	addOption("timeout,T", "Time in seconds after which molecule conformer generation will be stopped (default: " + 
-			  boost::lexical_cast<std::string>(settings.getTimeout() / 1000) + "s, must be >= 0, 0 disables timeout).",
+			  boost::lexical_cast<std::string>(settings.getTimeout() / 1000) + " s, must be >= 0, 0 disables timeout).",
 			  value<std::size_t>()->notifier(boost::bind(&ConfGenImpl::setTimeout, this, _1)));
 	addOption("max-num-rot-bonds,X", "Maximum number of allowed rotatable bonds, exceeding this limit causes molecule conf. generation to fail (default: " +
 			  boost::lexical_cast<std::string>(maxNumRotorBonds) + ", negative values disable limit).", 
 			  value<long>(&maxNumRotorBonds));
-	addOption("max-pool-size,L", "Puts an upper limit on the number of generated output conformer candidates (only effective in systematic sampling, default: " +
+	addOption("max-pool-size,L", "Puts an upper limit on the number of generated output conformer candidates (only effective in systematic sampling mode, default: " +
 			  boost::lexical_cast<std::string>(settings.getMaxPoolSize()) + ", must be >= 0, 0 disables limit).", 
 			  value<std::size_t>()->notifier(boost::bind(&ConfGenImpl::setMaxPoolSize, this, _1)));
-	addOption("max-num-sampled-confs,x", "Maximum number of sampled conformers (only effective in stochastic sampling, default: " +
+	addOption("max-num-sampled-confs,x", "Maximum number of sampled conformers (only effective in stochastic sampling mode, default: " +
 			  boost::lexical_cast<std::string>(settings.getMaxNumSampledConformers()) + ", must be >= 0, 0 disables limit).", 
 			  value<std::size_t>()->notifier(boost::bind(&ConfGenImpl::setMaxNumSampledConfs, this, _1)));
 	addOption("conv-check-cycle-size,y", "Minimum number of duplicate conformers that have to be generated in succession to "
-			  " consider convergence to be reached (only effective in stochastic sampling, default: " +
+			  " consider convergence to be reached (only effective in stochastic sampling mode, default: " +
 			  boost::lexical_cast<std::string>(settings.getConvergenceCheckCycleSize()) + ", must be > 0).", 
 			  value<std::size_t>()->notifier(boost::bind(&ConfGenImpl::setConvergenceCheckCycleSize, this, _1)));
 	addOption("mc-rot-bond-count-thresh,Z", "Number of rotatable bonds in a ring above which stochastic sampling will be performed"
 			  "(only effective in sampling mode AUTO, default: " +
 			  boost::lexical_cast<std::string>(settings.getMacrocycleRotorBondCountThreshold()) + ", must be > 0).", 
 			  value<std::size_t>()->notifier(boost::bind(&ConfGenImpl::setMacrocycleRotorBondCountThreshold, this, _1)));
-	addOption("ref-tol,P", "Energy tolerance at which force field structure refinement stops (only effective in stochastic sampling, default: " +
+	addOption("ref-tol,P", "Energy tolerance at which force field structure refinement stops (only effective in stochastic sampling mode, default: " +
 			  (boost::format("%.4f") % settings.getRefinementTolerance()).str() + ", must be >= 0, 0 results in refinement until convergence).", 
 			  value<double>()->notifier(boost::bind(&ConfGenImpl::setRefTolerance, this, _1)));
-	addOption("max-ref-iter,w", "Maximum number of force field structure refinement iterations (only effective in stochastic sampling, default: " +
+	addOption("max-ref-iter,w", "Maximum number of force field structure refinement iterations (only effective in stochastic sampling mode, default: " +
 			  boost::lexical_cast<std::string>(settings.getMaxNumRefinementIterations()) + ", must be >= 0, 0 disables limit).", 
 			  value<std::size_t>()->notifier(boost::bind(&ConfGenImpl::setMaxNumRefIterations, this, _1)));
-	addOption("add-tor-lib,k", "Torsion library to be used in addition to the built-in library (only effective in systematic sampling).",
+	addOption("add-tor-lib,k", "Torsion library to be used in addition to the built-in library (only effective in systematic sampling mode).",
 			  value<std::string>()->notifier(boost::bind(&ConfGenImpl::addTorsionLib, this, _1)));
-	addOption("set-tor-lib,K", "Torsion library used as a replacement for the built-in library (only effective in systematic sampling).",
+	addOption("set-tor-lib,K", "Torsion library used as a replacement for the built-in library (only effective in systematic sampling mode).",
 			  value<std::string>()->notifier(boost::bind(&ConfGenImpl::setTorsionLib, this, _1)));
-	addOption("frag-build-preset,B", "Fragment build preset to use (FAST, THOROUGH, only effective in systematic sampling, default: FAST).", 
+	addOption("frag-build-preset,B", "Fragment build preset to use (FAST, THOROUGH, only effective in systematic sampling mode, default: FAST).", 
 			  value<std::string>()->notifier(boost::bind(&ConfGenImpl::applyFragBuildPreset, this, _1)));
 	addOption("build-force-field,b", "Fragment build force field (MMFF94, MMFF94_NO_ESTAT, MMFF94S, "
 			  "MMFF94S_XOOP, MMFF94S_RTOR, MMFF94S_RTOR_XOOP, MMFF94S_NO_ESTAT, MMFF94S_XOOP_NO_ESTAT, MMFF94S_RTOR_NO_ESTAT, "
-			  "MMFF94S_RTOR_XOOP_NO_ESTAT, only effective in systematic sampling, default: " +
+			  "MMFF94S_RTOR_XOOP_NO_ESTAT, only effective in systematic sampling mode, default: " +
 			  getForceFieldTypeString(settings.getFragmentBuildSettings().getForceFieldType()) + ").", 
 			  value<std::string>()->notifier(boost::bind(&ConfGenImpl::setBuildForceFieldType, this, _1)));
-	addOption("add-frag-lib,g", "Fragment library to be used in addition to the built-in library (only effective in systematic sampling).",
+	addOption("add-frag-lib,g", "Fragment library to be used in addition to the built-in library (only effective in systematic sampling mode).",
 			  value<std::string>()->notifier(boost::bind(&ConfGenImpl::addFragmentLib, this, _1)));
-	addOption("set-frag-lib,G", "Fragment library used as a replacement for the built-in library (only effective in systematic sampling).",
+	addOption("set-frag-lib,G", "Fragment library used as a replacement for the built-in library (only effective in systematic sampling mode).",
 			  value<std::string>()->notifier(boost::bind(&ConfGenImpl::setFragmentLib, this, _1)));
 	addOption("canonicalize,z", "Canonicalize input molecules (default: false).", 
 			  value<bool>(&canonicalize)->implicit_value(true));
