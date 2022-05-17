@@ -90,7 +90,7 @@ namespace CDPL
 			/**
 			 * \brief Allows to specify the scaling factor for the \e RDF code elements.
 			 * \param factor The scaling factor.
-			 * \note The default scaling factor is <em>100.0</em>.
+			 * \note The default scaling factor is <em>1.0</em>.
 			 */
 			void setScalingFactor(double factor);
 

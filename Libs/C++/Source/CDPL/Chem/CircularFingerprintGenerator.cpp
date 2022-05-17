@@ -41,7 +41,6 @@
 #include "CDPL/Chem/AtomType.hpp"
 #include "CDPL/Chem/AtomConfiguration.hpp"
 #include "CDPL/Chem/BondConfiguration.hpp"
-#include "CDPL/Chem/StereoDescriptor.hpp"
 #include "CDPL/Base/Exceptions.hpp"
 #include "CDPL/Internal/RangeHashCode.hpp"
 
@@ -114,6 +113,25 @@ Base::uint64 Chem::CircularFingerprintGenerator::DefAtomIdentifierFunctor::opera
 		id += getRingFlag(atom);
     }
 
+	if (flags & AtomPropertyFlag::CIP_CONFIGURATION) {
+		id <<= 2;
+
+		unsigned int config = getCIPConfiguration(atom);
+
+		switch (config) {
+
+			case AtomConfiguration::R: 
+				id += 1;
+				break;
+				
+			case AtomConfiguration::S: 
+				id += 2;
+
+			default:
+				break;
+		}
+    }
+
     return id;
 }
 
@@ -123,9 +141,26 @@ Base::uint64 Chem::CircularFingerprintGenerator::DefBondIdentifierFunctor::opera
 {
     Base::uint64 id = 0;
 
+	if (flags & BondPropertyFlag::CIP_CONFIGURATION) {
+		unsigned int config = getCIPConfiguration(bond);
+
+		switch (config) {
+
+			case BondConfiguration::E: 
+				id = 0x10000;
+				break;
+				
+			case BondConfiguration::Z: 
+				id += 0x20000;
+
+			default:
+				break;
+		}
+    }
+
     if (flags & BondPropertyFlag::TOPOLOGY) {
 		if (getRingFlag(bond))
-			id = 0x8000;
+			id += 0x8000;
     }
 
     if (flags & BondPropertyFlag::AROMATICITY) {
@@ -144,11 +179,11 @@ Base::uint64 Chem::CircularFingerprintGenerator::DefBondIdentifierFunctor::opera
 //-----
 
 Chem::CircularFingerprintGenerator::CircularFingerprintGenerator():
-    numBits(1024), numIterations(2), remDuplicates(true), incAtomStereo(false), incBondStereo(false),
+    numBits(1024), numIterations(2), remDuplicates(true),
     atomIdentifierFunc(DefAtomIdentifierFunctor()), bondIdentifierFunc(DefBondIdentifierFunctor()) {}
 
 Chem::CircularFingerprintGenerator::CircularFingerprintGenerator(const MolecularGraph& molgraph, Util::BitSet& fp):
-    numBits(1024), numIterations(2), remDuplicates(true), incAtomStereo(false), incBondStereo(false),
+    numBits(1024), numIterations(2), remDuplicates(true),
     atomIdentifierFunc(DefAtomIdentifierFunctor()), bondIdentifierFunc(DefBondIdentifierFunctor())
 {
     generate(molgraph, fp);
@@ -192,26 +227,6 @@ void Chem::CircularFingerprintGenerator::removeDuplicates(bool remove)
 bool Chem::CircularFingerprintGenerator::duplicatesRemoved() const
 {
 	return remDuplicates;
-}
-
-void Chem::CircularFingerprintGenerator::includeAtomStereo(bool include)
-{
-	incAtomStereo = include;
-}
-
-bool Chem::CircularFingerprintGenerator::atomStereoIncluded() const
-{
-	return incAtomStereo;
-}
-
-void Chem::CircularFingerprintGenerator::includeBondStereo(bool include)
-{
-	incBondStereo = include;
-}
-
-bool Chem::CircularFingerprintGenerator::bondStereoIncluded() const
-{
-	return incBondStereo;
 }
 
 std::size_t Chem::CircularFingerprintGenerator::getNumFeatures() const
@@ -266,15 +281,11 @@ void Chem::CircularFingerprintGenerator::init(const MolecularGraph& molgraph)
 	fingerprintSet.clear();
 	fingerprintSet.reserve(num_atoms * (numIterations + 1));
 
-	stereoAtoms.clear();
-
 	std::size_t num_bonds = molgraph.getNumBonds();
 
 	if (bondIdentifiers.size() < num_bonds)
 		bondIdentifiers.resize(num_bonds);
 	
-	stereoBonds.clear();
-
 	bondSet.resize(num_bonds);
 
 	FingerprintSetEntry fp_entry;
@@ -286,17 +297,6 @@ void Chem::CircularFingerprintGenerator::init(const MolecularGraph& molgraph)
 
 		features.push_back(fp_entry.first);
 		fingerprintSet.push_back(fp_entry);
-
-		if (!incAtomStereo)
-			continue;
-
-		const StereoDescriptor& sto_descr = getStereoDescriptor(atom);
-
-		if (!sto_descr.isValid(atom))
-			continue;
-
-		if (sto_descr.getConfiguration() == AtomConfiguration::R || sto_descr.getConfiguration() == AtomConfiguration::S)
-			stereoAtoms.push_back(&atom);
 	}
 
 	std::size_t i = 0;
@@ -320,164 +320,13 @@ void Chem::CircularFingerprintGenerator::init(const MolecularGraph& molgraph)
 
 		features[atom1_idx].addNeighbor(i, atom2_idx);
 		features[atom2_idx].addNeighbor(i, atom1_idx);
-
-		if (!incBondStereo)
-			continue;
-
-		const StereoDescriptor& sto_descr = getStereoDescriptor(bond);
-
-		if (!sto_descr.isValid(bond))
-			continue;
-
-		if (sto_descr.getConfiguration() == BondConfiguration::CIS || sto_descr.getConfiguration() == BondConfiguration::TRANS)
-			stereoBonds.push_back(&bond);
 	}
 }
 
 void Chem::CircularFingerprintGenerator::performIteration(std::size_t iter_num)
 {
-	evaluateAtomStereoInformation();
-	evaluateBondStereoInformation();
-
 	extendFeatures(iter_num);
-
 	emitFingerprintSetEntries();
-}
-
-void Chem::CircularFingerprintGenerator::evaluateAtomStereoInformation()
-{
-	for (AtomList::iterator it = stereoAtoms.begin(), end = stereoAtoms.end(); it != end; ) {
-		const Atom& atom = **it;
-		std::size_t atom_idx = molGraph->getAtomIndex(atom);
-		Feature& ftr = features[atom_idx];
-		const Feature::NeighborList& nbrs = ftr.getNeighborList();
-
-		if (nbrs.size() < 3 || nbrs.size() > 4) {
-			it = stereoAtoms.erase(it);
-			continue;
-		}
-
-		nbrFeatureData.clear();
-	
-		for (Feature::NeighborList::const_iterator nbr_it = nbrs.begin(), nbrs_end = nbrs.end(); nbr_it != nbrs_end; ++nbr_it) {
-			const Feature::NeighborData& nbr_data = *nbr_it;
-
-			nbrFeatureData.push_back(UInt64Pair(nbr_data.second, features[nbr_data.second].getID()));
-		}
-
-		std::sort(nbrFeatureData.begin(), nbrFeatureData.end(), 
-				  boost::bind(std::less<Base::uint64>(), boost::bind(&UInt64Pair::second, _1), boost::bind(&UInt64Pair::second, _2)));
-
-		if (nbrFeatureData[0].second == nbrFeatureData[1].second || nbrFeatureData[1].second == nbrFeatureData[2].second ||
-			(nbrs.size() == 4 && (nbrFeatureData[2].second == nbrFeatureData[3].second))) {
-			++it;
-			continue;
-		}
-
-		const StereoDescriptor& sto_descr = getStereoDescriptor(atom);
-		unsigned int config = (nbrs.size() == 3 ? 
-							   sto_descr.getPermutationParity(molGraph->getAtom(nbrFeatureData[0].first), molGraph->getAtom(nbrFeatureData[1].first), 
-															  molGraph->getAtom(nbrFeatureData[2].first)) :
-							   sto_descr.getPermutationParity(molGraph->getAtom(nbrFeatureData[0].first), molGraph->getAtom(nbrFeatureData[1].first), 
-															  molGraph->getAtom(nbrFeatureData[2].first), molGraph->getAtom(nbrFeatureData[3].first)));
-		if (config == AtomConfiguration::R)
-			ftr.setStereoFlag(1);
-
-		else if (config == AtomConfiguration::S)
-			ftr.setStereoFlag(2);
-	
-		it = stereoAtoms.erase(it);
-	}
-}
-
-void Chem::CircularFingerprintGenerator::evaluateBondStereoInformation()
-{
-	for (BondList::iterator it = stereoBonds.begin(), end = stereoBonds.end(); it != end; ) {
-		const Bond& bond = **it;
-		const Atom* bond_atoms[] = { &bond.getBegin(), &bond.getEnd() };
-		const Atom* ref_atoms[2] = { 0, 0 };
-  		std::size_t bond_idx = molGraph->getBondIndex(bond);
-		bool erase = false;
-
-		for (std::size_t i = 0; i < 2; i++) {
-			std::size_t atom_idx = molGraph->getAtomIndex(*bond_atoms[i]);
-			Feature& ftr = features[atom_idx];
-			const Feature::NeighborList& nbrs = ftr.getNeighborList();
-
-			if (nbrs.size() < 2 || nbrs.size() > 3) {
-				erase = true;
-				break;
-			}
-
-			Base::uint64 curr_id = 0;
-		
-			for (Feature::NeighborList::const_iterator nbr_it = nbrs.begin(), nbrs_end = nbrs.end(); nbr_it != nbrs_end; ++nbr_it) {
-				const Feature::NeighborData& nbr_data = *nbr_it;
-
-				if (nbr_data.first == bond_idx)
-					continue;
-
-				if (!ref_atoms[i]) {
-					ref_atoms[i] = &molGraph->getAtom(nbr_data.second);
-					curr_id = features[nbr_data.second].getID();
-
-				} else {
-					Base::uint64 id = features[nbr_data.second].getID();
-
-					if (id == curr_id) {
-						ref_atoms[i] = 0;
-						i = 2;
-						break;
-					} 
-
-					if (id < curr_id) {
-						ref_atoms[i] = &molGraph->getAtom(nbr_data.second);
-						curr_id = id;
-					}
-				}
-			}
-		}
-
-		if (!ref_atoms[0] || !ref_atoms[1]) {
-			if (erase)
-				it = stereoBonds.erase(it);
-			else
-				++it;
-
-			continue;
-		}
-
-		const StereoDescriptor& stereo_desc = getStereoDescriptor(bond);
-		const Atom* const* sto_ref_atoms = stereo_desc.getReferenceAtoms();
-
-		if (bond_atoms[0] == sto_ref_atoms[2] && bond_atoms[1] == sto_ref_atoms[1])
-			std::swap(ref_atoms[0], ref_atoms[1]);
-
-		unsigned int config = stereo_desc.getConfiguration();
-
-		idCalculationData.clear();
-		idCalculationData.push_back(bondIdentifiers[bond_idx]);
-
-		switch (config) {
-
-			case BondConfiguration::Z:
-				idCalculationData.push_back((ref_atoms[0] == sto_ref_atoms[0]) ^ (ref_atoms[1] == sto_ref_atoms[3]) ?
-											BondConfiguration::E : BondConfiguration::Z);
-				break;
-
-			case BondConfiguration::E:
-				idCalculationData.push_back((ref_atoms[0] == sto_ref_atoms[0]) ^ (ref_atoms[1] == sto_ref_atoms[3]) ? 
-											BondConfiguration::Z : BondConfiguration::E);
-				break;
-
-			default:
-				it = stereoBonds.erase(it);
-				continue;
-		}
-
-		bondIdentifiers[bond_idx] = Internal::calcHashCode<Base::uint64>(idCalculationData.begin(), idCalculationData.end());
-		it = stereoBonds.erase(it);
-	}
 }
 
 void Chem::CircularFingerprintGenerator::extendFeatures(std::size_t iter_num)
@@ -520,8 +369,6 @@ void Chem::CircularFingerprintGenerator::extendFeature(std::size_t iter_num, Fea
 		idCalculationData.push_back(it->second);
 	}
 
-	idCalculationData.push_back(feature.getStereoFlag());
-
 	feature.setNextID(Internal::calcHashCode<Base::uint64>(idCalculationData.begin(), idCalculationData.end()));
 	feature.setNextBondSet(bondSet);
 }
@@ -538,7 +385,6 @@ void Chem::CircularFingerprintGenerator::setFeatureBits(Util::BitSet& fp)
 	for (FingerprintSet::const_iterator it = fingerprintSet.begin(), end = fingerprintSet.end(); it != end; ++it)
 		fp.set(it->first % numBits);
 }
-
 
 void Chem::CircularFingerprintGenerator::emitFingerprintSetEntries()
 {
@@ -632,14 +478,4 @@ void Chem::CircularFingerprintGenerator::Feature::setDuplicateFlag(bool flag)
 bool Chem::CircularFingerprintGenerator::Feature::isDuplicate() const
 {
 	return duplicate;
-}
-
-void Chem::CircularFingerprintGenerator::Feature::setStereoFlag(Base::uint64 flag)
-{
-	stereoFlag = flag;
-}
-
-Base::uint64 Chem::CircularFingerprintGenerator::Feature::getStereoFlag() const
-{
-	return stereoFlag;
 }

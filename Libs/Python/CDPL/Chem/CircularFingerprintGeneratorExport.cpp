@@ -77,10 +77,6 @@ void CDPLPythonChem::exportCircularFingerprintGenerator()
 		.def("getNumIterations", &Chem::CircularFingerprintGenerator::getNumIterations, python::arg("self"))
 		.def("removeDuplicates", &Chem::CircularFingerprintGenerator::removeDuplicates, (python::arg("self"), python::arg("remove")))
 		.def("duplicatesRemoved", &Chem::CircularFingerprintGenerator::duplicatesRemoved, python::arg("self"))
-		.def("includeAtomStereo", &Chem::CircularFingerprintGenerator::includeAtomStereo, (python::arg("self"), python::arg("include")))
-		.def("includeBondStereo", &Chem::CircularFingerprintGenerator::includeBondStereo, (python::arg("self"), python::arg("include")))
-		.def("atomStereoIncluded", &Chem::CircularFingerprintGenerator::atomStereoIncluded, python::arg("self"))
-		.def("bondStereoIncluded", &Chem::CircularFingerprintGenerator::bondStereoIncluded, python::arg("self"))
 		.def("generate", static_cast<void (Chem::CircularFingerprintGenerator::*)(const Chem::MolecularGraph&, Util::BitSet&)>(&Chem::CircularFingerprintGenerator::generate),
 			 (python::arg("self"), python::arg("molgraph"), python::arg("fp")))
 		.def("generate", static_cast<void (Chem::CircularFingerprintGenerator::*)(const Chem::MolecularGraph&)>(&Chem::CircularFingerprintGenerator::generate),
@@ -98,10 +94,6 @@ void CDPLPythonChem::exportCircularFingerprintGenerator()
 					  &Chem::CircularFingerprintGenerator::setNumIterations)
 		.add_property("remDuplicates", &Chem::CircularFingerprintGenerator::duplicatesRemoved,
 					  &Chem::CircularFingerprintGenerator::removeDuplicates)
-		.add_property("incAtomStereo", &Chem::CircularFingerprintGenerator::atomStereoIncluded,
-					  &Chem::CircularFingerprintGenerator::includeAtomStereo)
-		.add_property("incBondStereo", &Chem::CircularFingerprintGenerator::bondStereoIncluded,
-					  &Chem::CircularFingerprintGenerator::includeBondStereo)
 		.def_readonly("DEF_ATOM_PROPERTY_FLAGS", Chem::CircularFingerprintGenerator::DEF_ATOM_PROPERTY_FLAGS)
 		.def_readonly("DEF_BOND_PROPERTY_FLAGS", Chem::CircularFingerprintGenerator::DEF_BOND_PROPERTY_FLAGS);
 

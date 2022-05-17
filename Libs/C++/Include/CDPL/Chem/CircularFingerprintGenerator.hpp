@@ -35,7 +35,6 @@
 
 #include <cstddef>
 #include <vector>
-#include <list>
 #include <utility>
 
 #include <boost/function.hpp>
@@ -104,6 +103,7 @@ namespace CDPL
 				 *  - Chem::AtomPropertyFlag::HEAVY_BOND_COUNT
 				 *  - Chem::AtomPropertyFlag::VALENCE
 				 *  - Chem::AtomPropertyFlag::TOPOLOGY
+				 *  - Chem::AtomPropertyFlag::CIP_CONFIGURATION
 				 *  - and Chem::AtomPropertyFlag::FORMAL_CHARGE
 				 *
 				 * \param flags Specifies the set of considered atomic properties.
@@ -141,6 +141,7 @@ namespace CDPL
 				 * Chem::BondPropertyFlag. Supported property flags are:
 				 *  - Chem::BondPropertyFlag::ORDER
 				 *  - Chem::BondPropertyFlag::TOPOLOGY
+				 *  - Chem::BondPropertyFlag::CIP_CONFIGURATION
 				 *  - and Chem::BondPropertyFlag::AROMATICITY
 				 *
 				 * \param flags Specifies the set of considered bond properties.
@@ -240,14 +241,6 @@ namespace CDPL
 
 			bool duplicatesRemoved() const;
 
-			void includeAtomStereo(bool include);
-
-			bool atomStereoIncluded() const;
-
-			void includeBondStereo(bool include);
-
-			bool bondStereoIncluded() const;
-
 			/**
 			 * \brief Generates the fingerprint of the molecular graph \a molgraph.
 			 * \param molgraph The molecular graph for which to generate the fingerprint.
@@ -275,7 +268,7 @@ namespace CDPL
 				typedef std::pair<std::size_t, std::size_t> NeighborData;
 				typedef std::vector<NeighborData> NeighborList;
 
-				Feature(Base::uint64 init_id): currentID(init_id), nextID(0), stereoFlag(0), duplicate(false) {}
+				Feature(Base::uint64 init_id): currentID(init_id), nextID(0), duplicate(false) {}
 
 				void addNeighbor(std::size_t bond_idx, std::size_t nbr_idx);
 
@@ -292,13 +285,9 @@ namespace CDPL
 				void setDuplicateFlag(bool flag);
 				bool isDuplicate() const;
 
-				void setStereoFlag(Base::uint64 flag);
-				Base::uint64 getStereoFlag() const;
-
 			private:
 				Base::uint64 currentID;
 				Base::uint64 nextID;
-				Base::uint64 stereoFlag;
 				Util::BitSet currentBondSet;
 				Util::BitSet nextBondSet;
 				NeighborList nbrList;
@@ -312,8 +301,6 @@ namespace CDPL
 			void init(const MolecularGraph& molgraph);
 			void performIteration(std::size_t iter_num);
 
-			void evaluateAtomStereoInformation();
-			void evaluateBondStereoInformation();
 			void extendFeatures(std::size_t iter_num);
 			void emitFingerprintSetEntries();
 
@@ -329,20 +316,14 @@ namespace CDPL
 			typedef std::vector<Base::uint64> UInt64Array;
 			typedef std::pair<Base::uint64, Base::uint64> UInt64Pair;
 			typedef std::vector<UInt64Pair> UInt64PairArray;
-			typedef std::list<const Atom*> AtomList;
-			typedef std::list<const Bond*> BondList;
-
+	
 			const MolecularGraph*  molGraph;
 			std::size_t            numBits;
 			std::size_t            numIterations;
 			bool                   remDuplicates;
-			bool                   incAtomStereo;
-			bool                   incBondStereo;
 			AtomIdentifierFunction atomIdentifierFunc;
 			BondIdentifierFunction bondIdentifierFunc;
 			UInt64Array            bondIdentifiers;
-			AtomList               stereoAtoms;
-			BondList               stereoBonds;
 			FeatureList            features;
 			FingerprintSet         fingerprintSet;
 			UInt64Array            idCalculationData;
