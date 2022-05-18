@@ -1,53 +1,45 @@
 /*
  * International Chemical Identifier (InChI)
  * Version 1
- * Software version 1.04
- * September 9, 2011
+ * Software version 1.06
+ * December 15, 2020
  *
  * The InChI library and programs are free software developed under the
  * auspices of the International Union of Pure and Applied Chemistry (IUPAC).
- * Originally developed at NIST. Modifications and additions by IUPAC 
- * and the InChI Trust.
+ * Originally developed at NIST.
+ * Modifications and additions by IUPAC and the InChI Trust.
+ * Some portions of code were developed/changed by external contributors
+ * (either contractor or volunteer) which are listed in the file
+ * 'External-contributors' included in this distribution.
  *
- * IUPAC/InChI-Trust Licence No.1.0 for the 
- * International Chemical Identifier (InChI) Software version 1.04
- * Copyright (C) IUPAC and InChI Trust Limited
- * 
- * This library is free software; you can redistribute it and/or modify it 
- * under the terms of the IUPAC/InChI Trust InChI Licence No.1.0, 
+ * IUPAC/InChI-Trust Licence No.1.0 for the
+ * International Chemical Identifier (InChI)
+ * Copyright (C) IUPAC and InChI Trust
+ *
+ * This library is free software; you can redistribute it and/or modify it
+ * under the terms of the IUPAC/InChI Trust InChI Licence No.1.0,
  * or any later version.
- * 
- * Please note that this library is distributed WITHOUT ANY WARRANTIES 
- * whatsoever, whether expressed or implied.  See the IUPAC/InChI Trust 
- * Licence for the International Chemical Identifier (InChI) Software 
- * version 1.04, October 2011 ("IUPAC/InChI-Trust InChI Licence No.1.0") 
- * for more details.
- * 
- * You should have received a copy of the IUPAC/InChI Trust InChI 
- * Licence No. 1.0 with this library; if not, please write to:
- * 
- * The InChI Trust
- * c/o FIZ CHEMIE Berlin
  *
- * Franklinstrasse 11
- * 10587 Berlin
- * GERMANY
+ * Please note that this library is distributed WITHOUT ANY WARRANTIES
+ * whatsoever, whether expressed or implied.
+ * See the IUPAC/InChI-Trust InChI Licence No.1.0 for more details.
  *
- * or email to: ulrich@inchi-trust.org.
- * 
+ * You should have received a copy of the IUPAC/InChI Trust InChI
+ * Licence No. 1.0 with this library; if not, please e-mail:
+ *
+ * info@inchi-trust.org
+ *
  */
 
 
-/*^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-Former COMDEF.H
-Renamed 06/12/07 to avoid occassional conflict with Microsoft's COMDEF.H
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^*/
-/* common definitions -- do not change */
-#ifndef __INCOMDEF_H__
-#define __INCOMDEF_H__
+#ifndef _INCOMDEF_H_
+#define _INCOMDEF_H_
+
 
 #include "ichisize.h"
+#include "mode.h"
 
+/* Common definitions -- do not change */
 
 /* SDF treatment */
 #define MAX_SDF_HEADER        64 /* max length of the SDFile data header */
@@ -135,47 +127,50 @@ typedef unsigned short U_SHORT;
 #define INCHI_US_SHORT_DEF
 #endif
 
-/* BILLY 8/6/04 */
 #ifndef COMPILE_ALL_CPP
 #ifdef __cplusplus
 extern "C" {
 #endif
 #endif
 
-#define STR_ERR_LEN 256
-int AddMOLfileError( char *pStrErr, const char *szMsg );
 
 /* allocator */
 #ifndef inchi_malloc
-void *inchi_malloc(size_t c);
+    void *inchi_malloc( size_t c );
 #endif
 #ifndef inchi_calloc
-void *inchi_calloc(size_t c, size_t n);
+    void *inchi_calloc( size_t c, size_t n );
 #endif
 #ifndef inchi_free
-void inchi_free(void *p);
+    void inchi_free( void *p );
 #endif
 
 
 
 /* sorting etc */
-void inchi_swap ( char *a, char *b, size_t width );
-int insertions_sort( void *base, size_t num, size_t width, int ( *compare )(const void *e1, const void *e2 ) );
-int insertions_sort_AT_NUMBERS( AT_NUMB *base, int num, int ( *compare )(const void *e1, const void *e2 ) );
+
+    void inchi_swap( char *a, char *b, size_t width );
+
+    int insertions_sort( void *pCG,
+                         void *base, size_t num, size_t width, int( *compare )( const void *e1, const void *e2, void * ) );
+    int insertions_sort_AT_NUMBERS( void *pCG,
+                                    AT_NUMB *base, int num, int( *compare )( const void *e1, const void *e2, void * ) );
+    /*
+    int insertions_sort( void *base, size_t num, size_t width, int ( *compare )(const void *e1, const void *e2 ) );
+    int insertions_sort_AT_NUMBERS( AT_NUMB *base, int num, int ( *compare )(const void *e1, const void *e2 ) );
+    */
 
 
-#define MOLFILE_ERR_FIN(err, new_err, err_fin, msg) \
-        if ( !(err) && (new_err) ) { (err) = (new_err);} AddMOLfileError(pStrErr, (msg)); goto err_fin
-#define MOLFILE_ERR_SET(err, new_err, msg) \
-        if ( !(err) && (new_err) ) { (err) = (new_err);} AddMOLfileError(pStrErr, (msg))
+    /* min-max */
 
+#define inchi_max(a,b)  (((a)>(b))?(a):(b))
+#define inchi_min(a,b)  (((a)<(b))?(a):(b))
 
-/* BILLY 8/6/04 */
 #ifndef COMPILE_ALL_CPP
 #ifdef __cplusplus
 }
 #endif
 #endif
 
-#endif  /* __INCOMDEF_H__ */
 
+#endif    /* _INCOMDEF_H_ */
