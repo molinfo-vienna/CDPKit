@@ -243,6 +243,12 @@ namespace CDPL
 			 */
 			const Math::Matrix4D& getTransform() const;
 
+			/**
+			 * \brief Returns the topological entity mapping resulting from the last call to nextAlignment().
+			 * \return The topological entity mapping.
+			 */
+			const EntityMapping& getTopologicalMapping() const;
+
 		private:
 			TopologicalAlignment                   topAlignment;
 			EntityMapping                          topEntityMapping;
@@ -433,6 +439,13 @@ template <typename T, typename EM>
 const CDPL::Math::Matrix4D& CDPL::Chem::GeometricalEntityAlignment<T, EM>::getTransform() const 
 {
 	return transform;
+}
+
+template <typename T, typename EM>
+const typename CDPL::Chem::GeometricalEntityAlignment<T, EM>::EntityMapping&  
+CDPL::Chem::GeometricalEntityAlignment<T, EM>::getTopologicalMapping() const
+{
+	return topEntityMapping;
 }
 
 #endif // CDPL_CHEM_GEOMETRICALENTITYALIGNMENT_HPP
