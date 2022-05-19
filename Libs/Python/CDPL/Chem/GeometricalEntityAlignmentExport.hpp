@@ -38,10 +38,25 @@
 namespace CDPLPythonChem
 {
 
-    template <typename T, typename EM>
+	template <typename AlignmentType>
+	struct DefGeometricalEntityAlignmentTopMappingVisitor : public boost::python::def_visitor<DefGeometricalEntityAlignmentTopMappingVisitor<AlignmentType> >
+	{
+		
+		template <typename ClassType>
+		void visit(ClassType& cl) const {
+			using namespace boost;
+
+			cl
+				.def("getTopologicalMapping", &AlignmentType::getTopologicalMapping,
+					 python::arg("self"), python::return_internal_reference<>())
+				.add_property("topMapping", 
+							  python::make_function(&AlignmentType::getTopologicalMapping, python::return_internal_reference<>()));
+		}
+	};
+
+    template <typename T, typename EM, typename TopMappingVisitor = DefGeometricalEntityAlignmentTopMappingVisitor<CDPL::Chem::GeometricalEntityAlignment<T, EM> > >
     struct GeometricalEntityAlignmentExport
     {
-
 		typedef CDPL::Chem::GeometricalEntityAlignment<T, EM> AlignmentType;
 
 		GeometricalEntityAlignmentExport(const char* name) {
@@ -53,6 +68,7 @@ namespace CDPLPythonChem
 				.def(python::init<const AlignmentType&>(
 						 (python::arg("self"), python::arg("alignment")))[python::with_custodian_and_ward<1, 2>()])
 				.def(CDPLPythonBase::ObjectIdentityCheckVisitor<AlignmentType >())	
+				.def(TopMappingVisitor())	
 				.def("setEntityMatchFunction", &AlignmentType::setEntityMatchFunction, 
 					 (python::arg("self"), python::arg("func")))
 				.def("getEntityMatchFunction", &AlignmentType::getEntityMatchFunction, 
@@ -93,6 +109,8 @@ namespace CDPLPythonChem
 					 (python::arg("self"), python::arg("alignment")), python::return_self<python::with_custodian_and_ward<1, 2> >())
 				.add_property("minTopologicalMappingSize", &AlignmentType::getMinTopologicalMappingSize,
 					  &AlignmentType::setMinTopologicalMappingSize)
+				.add_property("transform", 
+							  python::make_function(&AlignmentType::getTransform, python::return_internal_reference<>()))
 				.add_property("entityMatchFunction", 
 							  python::make_function(&AlignmentType::getEntityMatchFunction, python::return_internal_reference<>()),
 							  &AlignmentType::setEntityMatchFunction)

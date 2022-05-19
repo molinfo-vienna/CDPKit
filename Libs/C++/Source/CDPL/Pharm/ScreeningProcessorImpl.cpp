@@ -390,8 +390,8 @@ bool Pharm::ScreeningProcessorImpl::check2PointPharmacophores(std::size_t pharm_
 		bool match = false;
 
 		for ( ; eq_range.first != eq_range.second; ++eq_range.first) {
-			if (!TwoPointPharmEqCmpFunc()(query_2pt_pharm, *eq_range.first))
-				continue;
+//			if (!TwoPointPharmEqCmpFunc()(query_2pt_pharm, *eq_range.first))
+//				continue;
 
 			double dist = eq_range.first->getFeatureDistance();
 
@@ -503,7 +503,7 @@ bool Pharm::ScreeningProcessorImpl::checkGeomAlignment()
 			const FeatureList& query_ftr_list = queryMandFeatures[i];
 
 			for (FeatureList::const_iterator ftr_it = query_ftr_list.begin(), ftr_end = query_ftr_list.end(); ftr_it != ftr_end; ++ftr_it) {
-				if (featureGeomMatchFunction(**ftr_it, db_ftr, xform)) {
+				if (featureGeomMatchFunction(**ftr_it, db_ftr, xform) > 0.0) {
 					match = true;
 					break;
 				}

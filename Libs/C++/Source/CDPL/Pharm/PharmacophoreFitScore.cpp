@@ -108,15 +108,36 @@ double Pharm::PharmacophoreFitScore::operator()(const FeatureContainer& ref_cntn
 			cnt_score += 1.0;
 		
 		if (ftrPosMatchFactor != 0.0) {
-			double max_score = 0.0;
+			if (ftrGeomMatchFactor != 0.0) {
+				double max_comb_score = 0.0;
+				double max_comb_pos_score = 0.0;
+				double max_comb_geom_score = 0.0;
 
-			for (FeatureMapping::ConstEntryIterator af_it = algnd_ftrs.first; af_it != algnd_ftrs.second; ++af_it)
-				max_score = std::max(max_score, geomFtrMappingExtractor.getPositionMatchScore(ref_ftr, *af_it->second));
+				for (FeatureMapping::ConstEntryIterator af_it = algnd_ftrs.first; af_it != algnd_ftrs.second; ++af_it) {
+					double curr_pos_score = geomFtrMappingExtractor.getPositionMatchScore(ref_ftr, *af_it->second);
+					double curr_geom_score = geomFtrMappingExtractor.getGeometryMatchScore(ref_ftr, *af_it->second);
+					double curr_comb_score = ftrPosMatchFactor * curr_pos_score + ftrGeomMatchFactor * curr_geom_score;
 
-			pos_score += max_score;
-		}
+					if (curr_comb_score > max_comb_score) {
+						max_comb_score = curr_comb_score;
+						max_comb_pos_score = curr_pos_score;
+						max_comb_geom_score = curr_geom_score;
+					}
+				}
 
-		if (ftrGeomMatchFactor != 0.0) {
+				pos_score += max_comb_pos_score;
+				geom_score += max_comb_geom_score;
+
+			} else {
+				double max_score = 0.0;
+
+				for (FeatureMapping::ConstEntryIterator af_it = algnd_ftrs.first; af_it != algnd_ftrs.second; ++af_it)
+					max_score = std::max(max_score, geomFtrMappingExtractor.getPositionMatchScore(ref_ftr, *af_it->second));
+
+				pos_score += max_score;
+			}
+			
+		} else if (ftrGeomMatchFactor != 0.0) {
 			double max_score = 0.0;
 
 			for (FeatureMapping::ConstEntryIterator af_it = algnd_ftrs.first; af_it != algnd_ftrs.second; ++af_it)
