@@ -34,6 +34,7 @@
 #include <vector>
 #include <string>
 #include <cstddef>
+#include <utility>
 
 #include <boost/shared_ptr.hpp>
 
@@ -626,6 +627,16 @@ namespace CDPL
 		 * \brief An array of unsigned integers of type <tt>std::size_t</tt>.
 		 */
 		typedef Array<std::size_t> STArray;
+
+		/**
+		 * \brief A pair of unsigned integers of type <tt>std::size_t</tt>.
+		 */
+		typedef std::pair<std::size_t, std::size_t> STPair;
+		
+		/**
+		 * \brief An array of pairs of unsigned integers of type <tt>std::size_t</tt>.
+		 */
+		typedef Array<STPair> STPairArray;
 
 		/**
 		 * \brief An array of double precision floating-point numbers.

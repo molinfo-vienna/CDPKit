@@ -91,7 +91,7 @@ namespace CDPLPythonChem
 	void exportAtomArray3DCoordinatesFunctor();
 
 	void exportTopologicalEntityAlignments();
-	void exportGeometricalEntityAlignments();
+	void exportSpatialEntityAlignments();
 	
 	void exportCompleteRingSet();
 	void exportAromaticRingSet();

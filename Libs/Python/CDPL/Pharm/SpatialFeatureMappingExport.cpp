@@ -1,7 +1,7 @@
 /* -*- mode: c++; c-basic-offset: 4; tab-width: 4; indent-tabs-mode: t -*- */
 
 /* 
- * GeometricalFeatureMappingExtractorExport.cpp 
+ * SpatialFeatureMappingExport.cpp 
  *
  * This file is part of the Chemical Data Processing Toolkit
  *
@@ -26,7 +26,7 @@
 
 #include <boost/python.hpp>
 
-#include "CDPL/Pharm/GeometricalFeatureMappingExtractor.hpp"
+#include "CDPL/Pharm/SpatialFeatureMapping.hpp"
 #include "CDPL/Pharm/FeatureContainer.hpp"
 #include "CDPL/Pharm/Feature.hpp"
 
@@ -39,13 +39,13 @@
 namespace
 {
 
-	double getPositionMatchScore(CDPL::Pharm::GeometricalFeatureMappingExtractor& xtractor,
+	double getPositionMatchScore(CDPL::Pharm::SpatialFeatureMapping& xtractor,
 								 CDPL::Pharm::Feature& ftr1, CDPL::Pharm::Feature& ftr2)
 	{
 		return xtractor.getPositionMatchScore(ftr1, ftr2);
 	}
 
-	double getGeometryMatchScore(CDPL::Pharm::GeometricalFeatureMappingExtractor& xtractor,
+	double getGeometryMatchScore(CDPL::Pharm::SpatialFeatureMapping& xtractor,
 								 CDPL::Pharm::Feature& ftr1, CDPL::Pharm::Feature& ftr2)
 	{
 		return xtractor.getGeometryMatchScore(ftr1, ftr2);
@@ -53,40 +53,41 @@ namespace
 }
 
 
-void CDPLPythonPharm::exportGeometricalFeatureMappingExtractor()
+void CDPLPythonPharm::exportSpatialFeatureMapping()
 {
     using namespace boost;
     using namespace CDPL;
 
-	python::class_<Pharm::GeometricalFeatureMappingExtractor, boost::noncopyable>("GeometricalFeatureMappingExtractor", python::no_init)
-		.def(python::init<const Pharm::GeometricalFeatureMappingExtractor&>((python::arg("self"), python::arg("extor"))))
+	python::class_<Pharm::SpatialFeatureMapping, python::bases<Pharm::FeatureMapping>, boost::noncopyable>("SpatialFeatureMapping", python::no_init)
+		.def(python::init<const Pharm::SpatialFeatureMapping&>((python::arg("self"), python::arg("mapping")))[python::with_custodian_and_ward<1, 2>()])
 		.def(python::init<bool>((python::arg("self"), python::arg("query_mode") = false)))
-		.def(CDPLPythonBase::ObjectIdentityCheckVisitor<Pharm::GeometricalFeatureMappingExtractor>())
-		.def("assign", CDPLPythonBase::copyAssOp(&Pharm::GeometricalFeatureMappingExtractor::operator=), 
-			 (python::arg("self"), python::arg("extor")), python::return_self<>())
-		.def("getMapping", &Pharm::GeometricalFeatureMappingExtractor::getMapping, 
-			 (python::arg("self"), python::arg("ref_cntnr"), python::arg("cntnr"), python::arg("xform"), python::arg("mapping")))
-		.def("setTypeMatchFunction", &Pharm::GeometricalFeatureMappingExtractor::setTypeMatchFunction, 
+		.def(CDPLPythonBase::ObjectIdentityCheckVisitor<Pharm::SpatialFeatureMapping>())
+		.def("assign", CDPLPythonBase::copyAssOp(&Pharm::SpatialFeatureMapping::operator=), 
+			 (python::arg("self"), python::arg("extor")), python::return_self<python::with_custodian_and_ward<1, 2> >())
+		.def("perceive", &Pharm::SpatialFeatureMapping::perceive, 
+			 (python::arg("self"), python::arg("cntnr1"), python::arg("cntnr2"), python::arg("xform")),
+			 python::with_custodian_and_ward<1, 2, python::with_custodian_and_ward<1, 3> >())
+		.def("setTypeMatchFunction", &Pharm::SpatialFeatureMapping::setTypeMatchFunction, 
 			 (python::arg("self"), python::arg("func")))
-		.def("getTypeMatchFunction", &Pharm::GeometricalFeatureMappingExtractor::getTypeMatchFunction, 
+		.def("getTypeMatchFunction", &Pharm::SpatialFeatureMapping::getTypeMatchFunction, 
 			 python::arg("self"), python::return_internal_reference<>())
-		.def("setPositionMatchFunction", &Pharm::GeometricalFeatureMappingExtractor::setPositionMatchFunction,
+		.def("setPositionMatchFunction", &Pharm::SpatialFeatureMapping::setPositionMatchFunction,
 			 (python::arg("self"), python::arg("func")))
-		.def("getPositionMatchFunction", &Pharm::GeometricalFeatureMappingExtractor::getPositionMatchFunction, 
+		.def("getPositionMatchFunction", &Pharm::SpatialFeatureMapping::getPositionMatchFunction, 
 			 python::arg("self"), python::return_internal_reference<>())
-		.def("setGeometryMatchFunction", &Pharm::GeometricalFeatureMappingExtractor::setGeometryMatchFunction,
+		.def("setGeometryMatchFunction", &Pharm::SpatialFeatureMapping::setGeometryMatchFunction,
 			 (python::arg("self"), python::arg("func")))
-		.def("getGeometryMatchFunction", &Pharm::GeometricalFeatureMappingExtractor::getGeometryMatchFunction, 
+		.def("getGeometryMatchFunction", &Pharm::SpatialFeatureMapping::getGeometryMatchFunction, 
 			 python::arg("self"), python::return_internal_reference<>())
 		.def("getPositionMatchScore", &getPositionMatchScore, (python::arg("self"), python::arg("ftr1"), python::arg("ftr2")))
 		.def("getGeometryMatchScore", &getGeometryMatchScore, (python::arg("self"), python::arg("ftr1"), python::arg("ftr2")))
-		.add_property("typeMatchFunction", python::make_function(&Pharm::GeometricalFeatureMappingExtractor::getTypeMatchFunction,
+		.add_property("typeMatchFunction", python::make_function(&Pharm::SpatialFeatureMapping::getTypeMatchFunction,
 																 python::return_internal_reference<>()), 
-					  &Pharm::GeometricalFeatureMappingExtractor::setTypeMatchFunction)
-		.add_property("positionMatchFunction", python::make_function(&Pharm::GeometricalFeatureMappingExtractor::getPositionMatchFunction,
+					  &Pharm::SpatialFeatureMapping::setTypeMatchFunction)
+		.add_property("positionMatchFunction", python::make_function(&Pharm::SpatialFeatureMapping::getPositionMatchFunction,
 																 python::return_internal_reference<>()), 
-					  &Pharm::GeometricalFeatureMappingExtractor::setPositionMatchFunction)
-		.add_property("geometryMatchFunction", python::make_function(&Pharm::GeometricalFeatureMappingExtractor::getGeometryMatchFunction,
+					  &Pharm::SpatialFeatureMapping::setPositionMatchFunction)
+		.add_property("geometryMatchFunction", python::make_function(&Pharm::SpatialFeatureMapping::getGeometryMatchFunction,
 																 python::return_internal_reference<>()), 
-					  &Pharm::GeometricalFeatureMappingExtractor::setGeometryMatchFunction);
+					  &Pharm::SpatialFeatureMapping::setGeometryMatchFunction);
 }

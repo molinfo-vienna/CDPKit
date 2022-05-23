@@ -1,7 +1,7 @@
 /* -*- mode: c++; c-basic-offset: 4; tab-width: 4; indent-tabs-mode: t -*- */
 
 /* 
- * GeometricalEntityAlignment.hpp 
+ * SpatialEntityAlignment.hpp 
  *
  * This file is part of the Chemical Data Processing Toolkit
  *
@@ -25,14 +25,15 @@
 
 /**
  * \file
- * \brief Definition of the class CDPL::Chem::GeometricalEntityAlignment.
+ * \brief Definition of the class CDPL::Chem::SpatialEntityAlignment.
  */
 
-#ifndef CDPL_CHEM_GEOMETRICALENTITYALIGNMENT_HPP
-#define CDPL_CHEM_GEOMETRICALENTITYALIGNMENT_HPP
+#ifndef CDPL_CHEM_SPATIALENTITYALIGNMENT_HPP
+#define CDPL_CHEM_SPATIALENTITYALIGNMENT_HPP
 
 #include <cstddef>
 #include <algorithm>
+#include <vector>
 
 #include <boost/function.hpp>
 
@@ -54,13 +55,13 @@ namespace CDPL
 		 */
 
 		/**
-		 * \brief GeometricalEntityAlignment.
+		 * \brief SpatialEntityAlignment.
 		 */
-		template <typename T, typename EM>
-		class GeometricalEntityAlignment 
+		template <typename T>
+		class SpatialEntityAlignment 
 		{
 
-			typedef TopologicalEntityAlignment<T, EM> TopologicalAlignment;
+			typedef TopologicalEntityAlignment<T> TopologicalAlignment;
 
 		public:
 			/**
@@ -74,14 +75,9 @@ namespace CDPL
 			typedef typename TopologicalAlignment::ConstEntityIterator ConstEntityIterator;
 
 			/**
-			 * \brief The container storing the entity-mapping of a found topological alignment solution.
-			 */
-			typedef typename TopologicalAlignment::EntityMapping EntityMapping;
-
-			/**
 			 * \brief A generic wrapper class used to store a user-defined predicate to restrict allowed topological entity alignments.
 			 */
-			typedef boost::function1<bool, const EntityMapping&> TopologicalAlignmentConstraintFunction;
+			typedef boost::function1<bool, const Util::STPairArray&> TopologicalAlignmentConstraintFunction;
 
 			/**
 			 * \brief A generic wrapper class used to store a user-defined entity 3D-coordinates function.
@@ -104,25 +100,25 @@ namespace CDPL
 			typedef typename TopologicalAlignment::EntityPairMatchFunction EntityPairMatchFunction;
 
 			/**
-			 * \brief Constructs the \c %GeometricalEntityAlignment instance.
+			 * \brief Constructs the \c %SpatialEntityAlignment instance.
 			 */
-			GeometricalEntityAlignment(): minTopMappingSize(3) {}
+			SpatialEntityAlignment(): minTopMappingSize(3), changes(true) {}
 
 			/**
 			 * \brief Virtual destructor.
 			 */
-			virtual ~GeometricalEntityAlignment() {}
+			virtual ~SpatialEntityAlignment() {}
 
 			/**
 			 * \brief Specifies the minimum number of topologically mapped entities that is required to enable a subsequent
-			 *        geometrical alignment.
+			 *        spatial alignment.
 			 * \param min_size The minimum required number of topologically mapped entities.
 			 */
 			void setMinTopologicalMappingSize(std::size_t min_size);
 
 			/**
 			 * \brief Returns the minimum number of topologically mapped entities that is required to enable a subsequent
-			 *        geometrical alignment.
+			 *        spatial alignment.
 			 * \return The minimum required number of topologically mapped entities.
 			 */
 			std::size_t getMinTopologicalMappingSize();
@@ -140,13 +136,13 @@ namespace CDPL
 			const Entity3DCoordinatesFunction& getEntity3DCoordinatesFunction() const;
  
 			/**
-			 * \brief Specifies a function for the retrieval of entity weights for geometrical alignment.
+			 * \brief Specifies a function for the retrieval of entity weights for spatial alignment.
 			 * \param func The entity weight function.
 			 */
 			void setEntityWeightFunction(const EntityWeightFunction& func);
 
 			/**
-			 * \brief Returns the function that was registered for the retrieval of entity weights for geometrical alignment.
+			 * \brief Returns the function that was registered for the retrieval of entity weights for spatial alignment.
 			 * \return The registered entity weight function.
 			 */
 			const EntityWeightFunction& getEntityWeightFunction() const;
@@ -222,10 +218,13 @@ namespace CDPL
 			ConstEntityIterator getEntitiesEnd(bool first_set) const;
 
 			/**
-			 * \brief Resets the internal state and prepares for a new search for entity alignments.
-			 * \note If addEntity() or clearEntity() was called before calling nextAlignment(), init() gets invoked automatically.
+			 * \brief Returns a non-\c const reference to the stored entity at index \a idx in the specified set.
+			 * \param idx The zero-based index of the entity instance to return.
+			 * \param first_set \c true, if the entity to return is stored in the first set. \c false, if stored in the second set.
+			 * \return A non-\c const reference to the entity stored at index \a idx in the specified set.
+			 * \throw Base::IndexError if the number of entities in the specified set is zero or \a idx is not in the range [0, getNumEntities() - 1].
 			 */
-			void init();
+			const EntityType& getEntity(std::size_t idx, bool first_set) const;
 
 			/**
 			 * \brief Searches for the next alignment solution.
@@ -233,10 +232,12 @@ namespace CDPL
 			 */
 			bool nextAlignment();
 
+			void reset();
+			
 			/**
 			 * \brief Returns the alignment transformation matrix that was calculated in the last successful call to nextAlignment().
 			 *
-			 * A transformation of the positions of the entities in the second set aligns them geometrically to the topologically mapped
+			 * A transformation of the positions of the entities in the second set aligns them spatially to the topologically mapped
 			 * entities in the first set.
 			 *
 			 * \return The alignment transformation matrix.
@@ -245,22 +246,32 @@ namespace CDPL
 
 			/**
 			 * \brief Returns the topological entity mapping resulting from the last call to nextAlignment().
-			 * \return The topological entity mapping.
+			 * \return The topological entity mapping as an array of pairs of entity indices.
 			 */
-			const EntityMapping& getTopologicalMapping() const;
+			const Util::STPairArray& getTopologicalMapping() const;
 
 		private:
+			void init();
+			
+			typedef std::vector<Math::Vector3D>    Vector3DArray;
+			typedef std::vector<double>            DoubleArray;
+			
 			TopologicalAlignment                   topAlignment;
-			EntityMapping                          topEntityMapping;
+			Util::STPairArray                      topEntityMapping;
 			TopologicalAlignmentConstraintFunction topAlignConstrFunc;
 			Entity3DCoordinatesFunction            coordsFunc;
 			EntityWeightFunction                   weightFunc;
 			Math::KabschAlgorithm<double>          kabschAlgorithm;
+			Vector3DArray                          firstSetCoords;
+			DoubleArray                            firstSetWeights;
+			Vector3DArray                          secondSetCoords;
+			DoubleArray                            secondSetWeights;
 			Math::DMatrix                          refPoints;
 			Math::DMatrix                          alignedPoints;
 			Math::DVector                          almntWeights;
 			Math::Matrix4D                         transform;
 			std::size_t                            minTopMappingSize;
+			bool                                   changes;
 		};
 
 		/**
@@ -272,127 +283,181 @@ namespace CDPL
 
 // Implementation
 
-template <typename T, typename EM>
-void CDPL::Chem::GeometricalEntityAlignment<T, EM>::setMinTopologicalMappingSize(std::size_t min_size)
+template <typename T>
+void CDPL::Chem::SpatialEntityAlignment<T>::setMinTopologicalMappingSize(std::size_t min_size)
 {
 	minTopMappingSize = min_size;
+
+	topAlignment.reset();
 }
 
-template <typename T, typename EM>
-std::size_t CDPL::Chem::GeometricalEntityAlignment<T, EM>::getMinTopologicalMappingSize()
+template <typename T>
+std::size_t CDPL::Chem::SpatialEntityAlignment<T>::getMinTopologicalMappingSize()
 {
 	return minTopMappingSize;
 }
 
-template <typename T, typename EM>
-void CDPL::Chem::GeometricalEntityAlignment<T, EM>::setEntity3DCoordinatesFunction(const Entity3DCoordinatesFunction& func)
+template <typename T>
+void CDPL::Chem::SpatialEntityAlignment<T>::setEntity3DCoordinatesFunction(const Entity3DCoordinatesFunction& func)
 {
 	coordsFunc = func;
+	changes = true;
 }
 
-template <typename T, typename EM>
-const typename CDPL::Chem::GeometricalEntityAlignment<T, EM>::Entity3DCoordinatesFunction& 
-CDPL::Chem::GeometricalEntityAlignment<T, EM>::getEntity3DCoordinatesFunction() const
+template <typename T>
+const typename CDPL::Chem::SpatialEntityAlignment<T>::Entity3DCoordinatesFunction& 
+CDPL::Chem::SpatialEntityAlignment<T>::getEntity3DCoordinatesFunction() const
 {
 	return coordsFunc; 
 }
 
-template <typename T, typename EM>
-void CDPL::Chem::GeometricalEntityAlignment<T, EM>::setEntityWeightFunction(const EntityWeightFunction& func)
+template <typename T>
+void CDPL::Chem::SpatialEntityAlignment<T>::setEntityWeightFunction(const EntityWeightFunction& func)
 {
 	weightFunc = func;
+	changes = true;
 }
 
-template <typename T, typename EM>
-const typename CDPL::Chem::GeometricalEntityAlignment<T, EM>::EntityWeightFunction& 
-CDPL::Chem::GeometricalEntityAlignment<T, EM>::getEntityWeightFunction() const
+template <typename T>
+const typename CDPL::Chem::SpatialEntityAlignment<T>::EntityWeightFunction& 
+CDPL::Chem::SpatialEntityAlignment<T>::getEntityWeightFunction() const
 {
 	return weightFunc; 
 }
 
-template <typename T, typename EM>
-void CDPL::Chem::GeometricalEntityAlignment<T, EM>::setTopAlignmentConstraintFunction(const TopologicalAlignmentConstraintFunction& func)
+template <typename T>
+void CDPL::Chem::SpatialEntityAlignment<T>::setTopAlignmentConstraintFunction(const TopologicalAlignmentConstraintFunction& func)
 {
 	topAlignConstrFunc = func;
+
+	topAlignment.reset();
 }
 
-template <typename T, typename EM>
-const typename CDPL::Chem::GeometricalEntityAlignment<T, EM>::TopologicalAlignmentConstraintFunction& 
-CDPL::Chem::GeometricalEntityAlignment<T, EM>::getTopAlignmentConstraintFunction() const
+template <typename T>
+const typename CDPL::Chem::SpatialEntityAlignment<T>::TopologicalAlignmentConstraintFunction& 
+CDPL::Chem::SpatialEntityAlignment<T>::getTopAlignmentConstraintFunction() const
 {
 	return topAlignConstrFunc; 
 }
 
-template <typename T, typename EM>
-void CDPL::Chem::GeometricalEntityAlignment<T, EM>::setEntityMatchFunction(const EntityMatchFunction& func)
+template <typename T>
+void CDPL::Chem::SpatialEntityAlignment<T>::setEntityMatchFunction(const EntityMatchFunction& func)
 {
 	topAlignment.setEntityMatchFunction(func);
 }
 
-template <typename T, typename EM>
-const typename CDPL::Chem::GeometricalEntityAlignment<T, EM>::EntityMatchFunction& 
-CDPL::Chem::GeometricalEntityAlignment<T, EM>::getEntityMatchFunction() const
+template <typename T>
+const typename CDPL::Chem::SpatialEntityAlignment<T>::EntityMatchFunction& 
+CDPL::Chem::SpatialEntityAlignment<T>::getEntityMatchFunction() const
 {
 	return topAlignment.getEntityMatchFunction();
 }
 
-template <typename T, typename EM>
-void CDPL::Chem::GeometricalEntityAlignment<T, EM>::setEntityPairMatchFunction(const EntityPairMatchFunction& func)
+template <typename T>
+void CDPL::Chem::SpatialEntityAlignment<T>::setEntityPairMatchFunction(const EntityPairMatchFunction& func)
 {
 	topAlignment.setEntityPairMatchFunction(func);
 }
 
-template <typename T, typename EM>
-const typename CDPL::Chem::GeometricalEntityAlignment<T, EM>::EntityPairMatchFunction& 
-CDPL::Chem::GeometricalEntityAlignment<T, EM>::getEntityPairMatchFunction() const
+template <typename T>
+const typename CDPL::Chem::SpatialEntityAlignment<T>::EntityPairMatchFunction& 
+CDPL::Chem::SpatialEntityAlignment<T>::getEntityPairMatchFunction() const
 {
 	return topAlignment.getEntityPairMatchFunction();
 }
 
-template <typename T, typename EM>
-std::size_t CDPL::Chem::GeometricalEntityAlignment<T, EM>::getNumEntities(bool first_set) const  
+template <typename T>
+std::size_t CDPL::Chem::SpatialEntityAlignment<T>::getNumEntities(bool first_set) const  
 {
 	return topAlignment.getNumEntities(first_set);
 }
 
-template <typename T, typename EM>
-void CDPL::Chem::GeometricalEntityAlignment<T, EM>::addEntity(const EntityType& entity, bool first_set)
+template <typename T>
+void CDPL::Chem::SpatialEntityAlignment<T>::addEntity(const EntityType& entity, bool first_set)
 {
 	topAlignment.addEntity(entity, first_set);
+	changes = true;
 }
 
-template <typename T, typename EM>
-void CDPL::Chem::GeometricalEntityAlignment<T, EM>::clearEntities(bool first_set)  
+template <typename T>
+void CDPL::Chem::SpatialEntityAlignment<T>::clearEntities(bool first_set)  
 {
 	topAlignment.clearEntities(first_set);
+	changes = true;
 }
 
-template <typename T, typename EM>
-typename CDPL::Chem::GeometricalEntityAlignment<T, EM>::ConstEntityIterator 
-CDPL::Chem::GeometricalEntityAlignment<T, EM>::getEntitiesBegin(bool first_set) const
+template <typename T>
+typename CDPL::Chem::SpatialEntityAlignment<T>::ConstEntityIterator 
+CDPL::Chem::SpatialEntityAlignment<T>::getEntitiesBegin(bool first_set) const
 {
 	return topAlignment.getEntitiesBegin(first_set);
 }
 
-template <typename T, typename EM>
-typename CDPL::Chem::GeometricalEntityAlignment<T, EM>::ConstEntityIterator 
-CDPL::Chem::GeometricalEntityAlignment<T, EM>::getEntitiesEnd(bool first_set) const
+template <typename T>
+typename CDPL::Chem::SpatialEntityAlignment<T>::ConstEntityIterator 
+CDPL::Chem::SpatialEntityAlignment<T>::getEntitiesEnd(bool first_set) const
 {
 	return topAlignment.getEntitiesEnd(first_set);
 }
 
-template <typename T, typename EM>
-void CDPL::Chem::GeometricalEntityAlignment<T, EM>::init()
+template <typename T>
+const typename CDPL::Chem::SpatialEntityAlignment<T>::EntityType&
+CDPL::Chem::SpatialEntityAlignment<T>::getEntity(std::size_t idx, bool first_set) const
 {
-	topAlignment.init();
+	return topAlignment.getEntity(idx, first_set);
 }
 
-template <typename T, typename EM>
-bool CDPL::Chem::GeometricalEntityAlignment<T, EM>::nextAlignment()
+template <typename T>
+void CDPL::Chem::SpatialEntityAlignment<T>::reset()  
 {
-	if (!coordsFunc)
+	topAlignment.reset();
+}
+
+template <typename T>
+void CDPL::Chem::SpatialEntityAlignment<T>::init()
+{
+	topAlignment.reset();
+	
+	firstSetCoords.clear();
+	secondSetCoords.clear();	
+
+	firstSetWeights.clear();
+	secondSetWeights.clear();	
+
+	if (coordsFunc) {
+		for (ConstEntityIterator it = getEntitiesBegin(true), end = getEntitiesEnd(true); it != end; ++it) {
+			const EntityType& entity = *it;
+
+			firstSetCoords.push_back(coordsFunc(entity));
+		
+			if (weightFunc)
+				firstSetWeights.push_back(weightFunc(entity));
+		}
+	
+		for (ConstEntityIterator it = getEntitiesBegin(false), end = getEntitiesEnd(false); it != end; ++it) {
+			const EntityType& entity = *it;
+
+			secondSetCoords.push_back(coordsFunc(entity));
+		
+			if (weightFunc)
+				secondSetWeights.push_back(weightFunc(entity));
+		}
+	}
+	
+	changes = false;
+}
+
+template <typename T>
+bool CDPL::Chem::SpatialEntityAlignment<T>::nextAlignment()
+{
+	if (changes)
+		init();
+
+	if (firstSetCoords.empty() || secondSetCoords.empty())
 		return false;
 
+	bool have_weights = !firstSetWeights.empty();
+		
 	while (topAlignment.nextAlignment(topEntityMapping)) {
 		std::size_t num_points = topEntityMapping.getSize();
 
@@ -404,20 +469,23 @@ bool CDPL::Chem::GeometricalEntityAlignment<T, EM>::nextAlignment()
 
 		refPoints.resize(3, num_points, false);
 		alignedPoints.resize(3, num_points, false);
-
-		if (weightFunc)
+		
+		if (have_weights)
 			almntWeights.resize(num_points, 1.0);
 
 		std::size_t i = 0;
 
-		for (typename EntityMapping::ConstEntryIterator it = topEntityMapping.getEntriesBegin(), end = topEntityMapping.getEntriesEnd();
+		for (Util::STPairArray::ConstElementIterator it = topEntityMapping.getElementsBegin(), end = topEntityMapping.getElementsEnd();
 			 it != end; ++it, i++) {
 
-			column(refPoints, i) = coordsFunc(*it->first);
-			column(alignedPoints, i) = coordsFunc(*it->second);
+			std::size_t first_idx = it->first;
+			std::size_t sec_idx = it->second;			
+			
+			column(refPoints, i) = firstSetCoords[first_idx];
+			column(alignedPoints, i) = secondSetCoords[sec_idx];
 
-			if (weightFunc)
-				almntWeights(i) = std::max(weightFunc(*it->first), weightFunc(*it->second));
+			if (have_weights)
+				almntWeights(i) = std::max(firstSetWeights[first_idx], secondSetWeights[sec_idx]);
 		}
 
 		if (!weightFunc) {
@@ -435,17 +503,17 @@ bool CDPL::Chem::GeometricalEntityAlignment<T, EM>::nextAlignment()
 	return false;
 }
 
-template <typename T, typename EM>
-const CDPL::Math::Matrix4D& CDPL::Chem::GeometricalEntityAlignment<T, EM>::getTransform() const 
+template <typename T>
+const CDPL::Math::Matrix4D& CDPL::Chem::SpatialEntityAlignment<T>::getTransform() const 
 {
 	return transform;
 }
 
-template <typename T, typename EM>
-const typename CDPL::Chem::GeometricalEntityAlignment<T, EM>::EntityMapping&  
-CDPL::Chem::GeometricalEntityAlignment<T, EM>::getTopologicalMapping() const
+template <typename T>
+const CDPL::Util::STPairArray&  
+CDPL::Chem::SpatialEntityAlignment<T>::getTopologicalMapping() const
 {
 	return topEntityMapping;
 }
 
-#endif // CDPL_CHEM_GEOMETRICALENTITYALIGNMENT_HPP
+#endif // CDPL_CHEM_SPATIALENTITYALIGNMENT_HPP

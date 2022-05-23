@@ -573,22 +573,25 @@ double Pharm::ScreeningProcessorImpl::calcScore(const SearchHit& hit)
 	return scoringFunction(hit);
 }
 
-bool Pharm::ScreeningProcessorImpl::checkTopologicalMapping(const FeaturePairList& mapping) const
+bool Pharm::ScreeningProcessorImpl::checkTopologicalMapping(const Util::STPairArray& mapping) const
 {
 	if (alignedQueryOptFeatures.empty())
 		return true;
 
-	std::size_t num_missing = 0;
+	std::size_t min_num_matches = (alignedQueryMandFeatures.size() > maxOmittedFeatures ? 
+								   std::size_t(alignedQueryMandFeatures.size() - maxOmittedFeatures) : std::size_t(0));
 
-	for (FeatureList::const_iterator it = alignedQueryMandFeatures.begin(), end = alignedQueryMandFeatures.end(); it != end; ++it)
-		if (!mapping.getValue(*it)) {
-			num_missing++;
+	if (min_num_matches == 0)
+		return true;
+	
+	std::size_t mand_ftr_matches = 0;
 
-			if (num_missing > maxOmittedFeatures)
-				return false;
-		}
-
-	return true;
+	for (Util::STPairArray::ConstElementIterator it = mapping.getElementsBegin(), end =  mapping.getElementsEnd(); it != end; ++it)
+		if (!getOptionalFlag(pharmAlignment.getEntity(it->first, true)))
+			if (++mand_ftr_matches >= min_num_matches)
+				return true;
+				
+	return false;
 }
 
 void Pharm::ScreeningProcessorImpl::loadMolecule(std::size_t mol_idx)

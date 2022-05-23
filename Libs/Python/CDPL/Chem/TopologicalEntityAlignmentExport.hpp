@@ -37,11 +37,11 @@
 namespace CDPLPythonChem
 {
 
-	template <typename T, typename EM>
+	template <typename T>
     struct TopologicalEntityAlignmentExport
     {
 
-		typedef CDPL::Chem::TopologicalEntityAlignment<T, EM> AlignmentType;
+		typedef CDPL::Chem::TopologicalEntityAlignment<T> AlignmentType;
 
 		TopologicalEntityAlignmentExport(const char* name) {
 			using namespace boost;
@@ -67,7 +67,9 @@ namespace CDPLPythonChem
 				.def("getNumEntities", &AlignmentType::getNumEntities, 
 					 (python::arg("self"), python::arg("first_set")))
 				.def("getEntities", &getEntitiesFunc, (python::arg("self"), python::arg("first_set")))
-				.def("init", &AlignmentType::init, python::arg("self"))
+				.def("getEntity", &AlignmentType::getEntity, (python::arg("self"), python::arg("idx"), python::arg("first_set")),
+					 python::return_internal_reference<>())
+				.def("reset", &AlignmentType::reset, python::arg("self"))
 				.def("nextAlignment", &AlignmentType::nextAlignment, 
 					 (python::arg("self"), python::arg("mapping")))
 				.def("assign", &AlignmentType::operator=, 

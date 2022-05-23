@@ -39,5 +39,5 @@ void CDPLPythonPharm::exportTopologicalEntityAlignment()
 	using namespace CDPL;
 	using namespace Pharm;
 
-	CDPLPythonChem::TopologicalEntityAlignmentExport<Feature, FeatureMapping>("TopologicalFeatureAlignment");
+	CDPLPythonChem::TopologicalEntityAlignmentExport<Feature>("TopologicalFeatureAlignment");
 }

@@ -31,11 +31,8 @@
 #ifndef CDPL_PHARM_PHARMACOPHOREALIGNMENT_HPP
 #define CDPL_PHARM_PHARMACOPHOREALIGNMENT_HPP
 
-#include <vector>
-#include <utility>
-
 #include "CDPL/Pharm/APIPrefix.hpp"
-#include "CDPL/Chem/GeometricalEntityAlignment.hpp"
+#include "CDPL/Chem/SpatialEntityAlignment.hpp"
 
 
 namespace CDPL 
@@ -53,53 +50,9 @@ namespace CDPL
 		 */
 
 		/**
-		 * \brief FeaturePairList.
-		 */
-		class FeaturePairList
-		{
-
-			typedef std::vector<std::pair<const Feature*, const Feature*> > StorageType;
-
-		public:
-			typedef StorageType::value_type Entry;
-			typedef StorageType::const_iterator ConstEntryIterator;
-
-			void clear() {
-				data.clear();
-			}
-
-			StorageType::size_type getSize() const {
-				return data.size();
-			}
-
-			void insertEntry(const Entry& entry) {
-				data.push_back(entry);
-			}
-
-			ConstEntryIterator getEntriesBegin() const {
-				return data.begin();
-			}
-		
-			ConstEntryIterator getEntriesEnd() const {
-				return data.end();
-			}
-
-			const Feature* getValue(const Feature* ftr) const {
-				for (StorageType::const_iterator it = data.begin(), end = data.end(); it != end; ++it)
-					if (it->first == ftr)
-						return it->second;
-
-				return 0;
-			}
-
-		private:
-			StorageType data;
-		};
-
-		/**
 		 * \brief PharmacophoreAlignment.
 		 */
-		class CDPL_PHARM_API PharmacophoreAlignment : public Chem::GeometricalEntityAlignment<Feature, FeaturePairList>
+		class CDPL_PHARM_API PharmacophoreAlignment : public Chem::SpatialEntityAlignment<Feature>
 		{
 
 		  public:

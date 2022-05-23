@@ -134,7 +134,7 @@ BOOST_PYTHON_MODULE(_pharm)
 
 	exportTopologicalEntityAlignment();
 	exportPharmacophoreAlignment();
-    exportGeometricalFeatureMappingExtractor();
+    exportSpatialFeatureMapping();
 	exportFeatureTypeMatchFunctor();
 	exportFeaturePairDistanceMatchFunctor();
 	exportFeaturePositionMatchFunctor();

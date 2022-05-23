@@ -44,6 +44,21 @@ bool Pharm::FeaturePositionMatchFunctor::queryMode() const
 	return qryMode;
 }
 
+double Pharm::FeaturePositionMatchFunctor::operator()(const Feature& ftr1, const Feature& ftr2) const
+{
+	const Math::Vector3D& pos1 = get3DCoordinates(ftr1);
+	const Math::Vector3D& pos2 = get3DCoordinates(ftr2);
+	Math::Vector3D tmp(pos2);
+
+	tmp.minusAssign(pos1);
+ 
+	double dist = length(tmp);
+	double tol = (qryMode ? getTolerance(ftr1) : std::max(getTolerance(ftr1), getTolerance(ftr2)));
+	double score = 1.0 - (dist / tol);
+
+	return (dist < 0.0 ? 0.0 : score);
+}
+
 double Pharm::FeaturePositionMatchFunctor::operator()(const Feature& ftr1, const Feature& ftr2, const Math::Matrix4D& xform) const
 {
 	const Math::Vector3D& pos1 = get3DCoordinates(ftr1);

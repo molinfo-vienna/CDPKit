@@ -92,7 +92,7 @@
 #include "CDPL/Pharm/InteractionScoreGridSetCalculator.hpp"  
 #include "CDPL/Pharm/DefaultInteractionScoreGridSetCalculator.hpp"  
 
-#include "CDPL/Pharm/GeometricalFeatureMappingExtractor.hpp"  
+#include "CDPL/Pharm/SpatialFeatureMapping.hpp"  
 #include "CDPL/Pharm/PharmacophoreAlignment.hpp"  
 #include "CDPL/Pharm/FeatureTypeMatchFunctor.hpp"  
 #include "CDPL/Pharm/FeaturePairDistanceMatchFunctor.hpp"  

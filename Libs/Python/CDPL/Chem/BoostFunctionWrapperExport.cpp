@@ -38,6 +38,7 @@
 #include "CDPL/Chem/BondPredicate.hpp"
 #include "CDPL/Chem/MatchExpression.hpp"
 #include "CDPL/Chem/AtomBondMapping.hpp"
+#include "CDPL/Util/Array.hpp"
 #include "CDPL/Math/Vector.hpp"
 #include "CDPL/Base/IntegerTypes.hpp"
 
@@ -59,6 +60,7 @@ void CDPLPythonChem::exportBoostFunctionWrappers()
     CDPLPythonBase::BoostFunction1Export<boost::function1<Base::uint64, const Bond&>, Bond&>("UInt64BondFunctor");
     CDPLPythonBase::BoostFunction1Export<boost::function1<bool, const Entity3DMapping&> >("BoolEntity3DMappingFunctor");
     CDPLPythonBase::BoostFunction1Export<boost::function1<bool, const AtomMapping&> >("BoolAtomMappingFunctor");
+	CDPLPythonBase::BoostFunction1Export<boost::function1<bool, const Util::STPairArray&> >("BoolSTPairArrayFunctor");
 	CDPLPythonBase::BoostFunction1Export<boost::function1<const Math::Vector2D&, const Atom&>, Atom&, 
 										 python::return_internal_reference<> >("Vector2DAtomFunctor");
     CDPLPythonBase::BoostFunction1Export<boost::function1<const Math::Vector3D&, const Entity3D&>, Entity3D&, 

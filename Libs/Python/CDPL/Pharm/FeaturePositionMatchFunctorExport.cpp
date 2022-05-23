@@ -38,8 +38,13 @@
 namespace
 {
 
-    bool callOperator(CDPL::Pharm::FeaturePositionMatchFunctor& func, 
-					  CDPL::Pharm::Feature& ftr1, CDPL::Pharm::Feature& ftr2, const CDPL::Math::Matrix4D& xform)
+	bool callOperator1(CDPL::Pharm::FeaturePositionMatchFunctor& func, CDPL::Pharm::Feature& ftr1, CDPL::Pharm::Feature& ftr2)
+    {
+		return func(ftr1, ftr2);
+    }
+	
+    bool callOperator2(CDPL::Pharm::FeaturePositionMatchFunctor& func, CDPL::Pharm::Feature& ftr1, CDPL::Pharm::Feature& ftr2,
+					   const CDPL::Math::Matrix4D& xform)
     {
 		return func(ftr1, ftr2, xform);
     }
@@ -57,6 +62,7 @@ void CDPLPythonPharm::exportFeaturePositionMatchFunctor()
 		.def(CDPLPythonBase::ObjectIdentityCheckVisitor<Pharm::FeaturePositionMatchFunctor>())
 		.def("assign", CDPLPythonBase::copyAssOp(&Pharm::FeaturePositionMatchFunctor::operator=), 
 			 (python::arg("self"), python::arg("func")), python::return_self<>())
-		.def("__call__", &callOperator, (python::arg("self"), python::arg("ftr1"), python::arg("ftr2"), python::arg("xform")))
+		.def("__call__", &callOperator1, (python::arg("self"), python::arg("ftr1"), python::arg("ftr2")))
+		.def("__call__", &callOperator2, (python::arg("self"), python::arg("ftr1"), python::arg("ftr2"), python::arg("xform")))
 		.add_property("qryMode", &Pharm::FeaturePositionMatchFunctor::queryMode);
 }

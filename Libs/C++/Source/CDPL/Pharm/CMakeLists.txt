@@ -82,7 +82,7 @@ SET(cdpl-pharm_LIB_SRCS
     FeaturePairDistanceMatchFunctor.cpp
     FeaturePositionMatchFunctor.cpp
     FeatureGeometryMatchFunctor.cpp
-    GeometricalFeatureMappingExtractor.cpp
+    SpatialFeatureMapping.cpp
     PharmacophoreAlignment.cpp
     FeatureRDFCodeCalculator.cpp
     FeatureAutoCorrelation3DVectorCalculator.cpp

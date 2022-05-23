@@ -33,6 +33,16 @@
 #include "ClassExports.hpp"
 
 
+namespace
+{
+
+	CDPL::Util::STPair& assignSTPair(CDPL::Util::STPair& lhs, const CDPL::Util::STPair& rhs)
+	{
+		return lhs.operator=(rhs);
+	}
+}
+
+
 void CDPLPythonUtil::exportArrays()
 {
 	using namespace boost;
@@ -64,6 +74,40 @@ void CDPLPythonUtil::exportArrays()
 		.def("__lt__", &Util::STArray::operator<, (python::arg("self"), python::arg("array")))
 		.def("__gt__", &Util::STArray::operator>, (python::arg("self"), python::arg("array")));
 
+	python::class_<Util::STPair>("STPair", python::no_init)
+		.def(python::init<>(python::arg("self")))
+		.def(python::init<const Util::STPair&>((python::arg("self"), python::arg("pair"))))
+		.def(python::init<std::size_t, std::size_t>((python::arg("self"), python::arg("first"), python::arg("second"))))
+		.def_readwrite("first", &Util::STPair::first)
+		.def_readwrite("second", &Util::STPair::second)
+		.def("assign", &assignSTPair,
+			 (python::arg("self"), python::arg("array")), python::return_self<>())
+		.def("__eq__", static_cast<bool (*)(const Util::STPair&, const Util::STPair&)>(&std::operator==),
+			 (python::arg("self"), python::arg("pair")))
+		.def("__ne__", static_cast<bool (*)(const Util::STPair&, const Util::STPair&)>(&std::operator!=),
+			 (python::arg("self"), python::arg("pair")))
+		.def("__le__", static_cast<bool (*)(const Util::STPair&, const Util::STPair&)>(&std::operator<=),
+			 (python::arg("self"), python::arg("pair")))
+		.def("__ge__", static_cast<bool (*)(const Util::STPair&, const Util::STPair&)>(&std::operator>=),
+			 (python::arg("self"), python::arg("pair")))
+		.def("__lt__", static_cast<bool (*)(const Util::STPair&, const Util::STPair&)>(&std::operator<),
+			 (python::arg("self"), python::arg("pair")))
+		.def("__gt__", static_cast<bool (*)(const Util::STPair&, const Util::STPair&)>(&std::operator>),
+			 (python::arg("self"), python::arg("pair")));
+	
+	python::class_<Util::STPairArray, Util::STPairArray::SharedPointer>("STPairArray", python::no_init)
+		.def(python::init<>(python::arg("self")))
+		.def(python::init<const Util::STPairArray&>((python::arg("self"), python::arg("array"))))
+		.def(ArrayVisitor<Util::STPairArray, 
+			 python::return_internal_reference<>, python::default_call_policies,
+			 python::default_call_policies, python::default_call_policies>())
+		.def("__eq__", &Util::STPairArray::operator==, (python::arg("self"), python::arg("array")))
+		.def("__ne__", &Util::STPairArray::operator!=, (python::arg("self"), python::arg("array")))
+		.def("__le__", &Util::STPairArray::operator<=, (python::arg("self"), python::arg("array")))
+		.def("__ge__", &Util::STPairArray::operator>=, (python::arg("self"), python::arg("array")))
+		.def("__lt__", &Util::STPairArray::operator<, (python::arg("self"), python::arg("array")))
+		.def("__gt__", &Util::STPairArray::operator>, (python::arg("self"), python::arg("array")));
+	
 	python::class_<Util::DArray, Util::DArray::SharedPointer>("DArray", python::no_init)
 		.def(python::init<>(python::arg("self")))
 		.def(python::init<const Util::DArray&>((python::arg("self"), python::arg("array"))))
@@ -94,7 +138,7 @@ void CDPLPythonUtil::exportArrays()
 		.def(python::init<>(python::arg("self")))
 		.def(python::init<const Util::BitSetArray&>((python::arg("self"), python::arg("array"))))
 		.def(ArrayVisitor<Util::BitSetArray, 
-			 python::return_value_policy<python::return_by_value>, python::default_call_policies,
+			 python::return_internal_reference<>, python::default_call_policies,
 			 python::default_call_policies, python::default_call_policies>())
 		.def("__eq__", &Util::BitSetArray::operator==, (python::arg("self"), python::arg("array")))
 		.def("__ne__", &Util::BitSetArray::operator!=, (python::arg("self"), python::arg("array")))

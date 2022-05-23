@@ -38,8 +38,14 @@
 namespace
 {
 
-    bool callOperator(CDPL::Pharm::FeatureGeometryMatchFunctor& func, 
-					  CDPL::Pharm::Feature& ftr1, CDPL::Pharm::Feature& ftr2, const CDPL::Math::Matrix4D& xform)
+	bool callOperator1(CDPL::Pharm::FeatureGeometryMatchFunctor& func, CDPL::Pharm::Feature& ftr1,
+					   CDPL::Pharm::Feature& ftr2)
+    {
+		return func(ftr1, ftr2);
+    }
+	
+    bool callOperator2(CDPL::Pharm::FeatureGeometryMatchFunctor& func, CDPL::Pharm::Feature& ftr1,
+					   CDPL::Pharm::Feature& ftr2, const CDPL::Math::Matrix4D& xform)
     {
 		return func(ftr1, ftr2, xform);
     }
@@ -68,7 +74,8 @@ void CDPLPythonPharm::exportFeatureGeometryMatchFunctor()
 			 python::arg("self"))
 		.def("strictGeometryMatching", &Pharm::FeatureGeometryMatchFunctor::strictGeometryMatching,
 			 python::arg("self"))
-		.def("__call__", &callOperator, (python::arg("self"), python::arg("ftr1"), python::arg("ftr2"), python::arg("xform")))
+		.def("__call__", &callOperator1, (python::arg("self"), python::arg("ftr1"), python::arg("ftr2")))
+		.def("__call__", &callOperator2, (python::arg("self"), python::arg("ftr1"), python::arg("ftr2"), python::arg("xform")))
 		.add_property("hBondAcceptorAngleTolerance", &Pharm::FeatureGeometryMatchFunctor::getHBondAcceptorAngleTolerance)
 		.add_property("hBondDonorAngleTolerance", &Pharm::FeatureGeometryMatchFunctor::getHBondDonorAngleTolerance)
 		.add_property("aromPlaneAngleTolerance", &Pharm::FeatureGeometryMatchFunctor::getAromPlaneAngleTolerance)

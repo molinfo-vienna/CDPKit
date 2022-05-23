@@ -64,6 +64,60 @@ bool Pharm::FeatureGeometryMatchFunctor::strictGeometryMatching() const
 	return strictMode;
 }
 
+double Pharm::FeatureGeometryMatchFunctor::operator()(const Feature& ftr1, const Feature& ftr2) const
+{
+	unsigned int ftr1_geom = getGeometry(ftr1);
+	unsigned int ftr2_geom = getGeometry(ftr2);
+
+	if (strictMode && ftr1_geom != ftr2_geom)
+		return 0.0;
+
+	if (ftr1_geom != FeatureGeometry::VECTOR && ftr1_geom != FeatureGeometry::PLANE)
+		return 1.0;
+
+	if (ftr2_geom != FeatureGeometry::VECTOR && ftr2_geom != FeatureGeometry::PLANE)
+		return 1.0;
+
+	if (ftr1_geom != ftr2_geom)
+		return 0.0;
+
+	if (!hasOrientation(ftr1))
+		return (strictMode ? 0.0 : 1.0);
+
+	if (!hasOrientation(ftr2))
+		return (strictMode ? 0.0 : 1.0);
+
+	double ang_tol = 0.0;
+	unsigned int ftr1_type = getType(ftr1);
+
+	switch (ftr1_type) {
+
+		case FeatureType::H_BOND_DONOR:
+			ang_tol = hbdVecAngleTol;
+			break;
+
+		case FeatureType::H_BOND_ACCEPTOR:
+			ang_tol = hbdVecAngleTol;
+			break;
+
+		case FeatureType::AROMATIC:
+			ang_tol = arPlaneAngleTol;
+			break;
+
+		default:
+			return 1.0;
+	}
+
+	double ang = std::acos(angleCos(getOrientation(ftr1), getOrientation(ftr2), 1.0)) / M_PI * 180.0;
+
+	if (ftr1_geom == FeatureGeometry::PLANE && ang > 90.0) 
+		ang = 180.0 - ang;
+
+	double score = 1.0 - (ang / ang_tol);
+
+	return (score < 0.0 ? 0.0 : score);
+}
+
 double Pharm::FeatureGeometryMatchFunctor::operator()(const Feature& ftr1, const Feature& ftr2, const Math::Matrix4D& xform) const
 {
 	unsigned int ftr1_geom = getGeometry(ftr1);

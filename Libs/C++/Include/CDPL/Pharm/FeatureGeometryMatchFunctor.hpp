@@ -63,8 +63,8 @@ namespace CDPL
 			FeatureGeometryMatchFunctor(bool strict_geom_mode, double hba_ang_tol = DEF_HBA_ANGLE_TOLERANCE, 
 										double hbd_ang_tol = DEF_HBD_ANGLE_TOLERANCE,
 										double ar_ang_tol = DEF_AR_PLANE_ANGLE_TOLERANCE):
-				strictMode(strict_geom_mode), hbaVecAngleTol(hba_ang_tol), 
-				hbdVecAngleTol(hbd_ang_tol), arPlaneAngleTol(ar_ang_tol) {}
+		         strictMode(strict_geom_mode), hbaVecAngleTol(hba_ang_tol), 
+		         hbdVecAngleTol(hbd_ang_tol), arPlaneAngleTol(ar_ang_tol) {}
 
 			double getHBondAcceptorAngleTolerance() const;
 
@@ -73,14 +73,33 @@ namespace CDPL
 			double getAromPlaneAngleTolerance() const;
 
 			bool strictGeometryMatching() const;
-
+		  
 			/**
-			 * \brief Checks if both \a ftr1 and \a ftr2 have the same  feature geometry within the respective tolerances.
+			 * \brief Checks if both \a ftr1 and \a ftr2 have the same feature geometry and calculates a score reflecting the goodness of their spatial match.
+			 *
+			 * If 'strict geometry matching' has been requested, the two features are required to have exactly the same geometry (if they do not, a score of \e 0 is returned).
+			 * Only for features that both possess geometry Pharm::FeatureGeometry::PLANE or Pharm::FeatureGeometry::VECTOR a goodness of match score is calculated. If one of the
+			 * features has a different geometry, a score of \e 1 is returned.
+			 *
 			 * \param ftr1 The first feature.
 			 * \param ftr2 The second feature.
-			 * \param xform The transformation to apply to geometrical properties of the second feature.
-			 * \return A score between \e 0 (outside allowed ranges) and \e 1 (optimum match) describing the 
-			 *         mutual match of the feature geometries.
+			 * \return A score from \e 0 (=spatial deviation outside the allowed range or incompatible geometries) and \e 1 (optimum spatial match) describing the 
+			 *         goodness of the spatial match of the two features.
+			 */
+			double operator()(const Feature& ftr1, const Feature& ftr2) const;
+
+			/**
+			 * \brief Checks if both \a ftr1 and \a ftr2 have the same feature geometry and calculates a score reflecting the goodness of their spatial match.
+			 *
+			 * If 'strict geometry matching' has been requested, the two features are required to have exactly the same geometry (if they do not, a score of \e 0 is returned).
+			 * Only for features that both possess geometry Pharm::FeatureGeometry::PLANE or Pharm::FeatureGeometry::VECTOR a goodness of match score is calculated. If one of the
+			 * features has a different geometry, a score of \e 1 is returned.
+			 *
+			 * \param ftr1 The first feature.
+			 * \param ftr2 The second feature.
+			 * \param xform The transformation to apply to the geometrical attributes of the second feature.
+			 * \return A score from \e 0 (=spatial deviation outside the allowed range or incompatible geometries) and \e 1 (optimum spatial match) describing the 
+			 *         goodness of the spatial match of the two features.
 			 */
 			double operator()(const Feature& ftr1, const Feature& ftr2, const Math::Matrix4D& xform) const;
 

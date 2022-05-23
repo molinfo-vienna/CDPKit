@@ -33,7 +33,7 @@
 
 #include "CDPL/Pharm/APIPrefix.hpp"
 #include "CDPL/Pharm/FeatureMapping.hpp"
-#include "CDPL/Pharm/GeometricalFeatureMappingExtractor.hpp"
+#include "CDPL/Pharm/SpatialFeatureMapping.hpp"
 
 
 namespace CDPL 
@@ -82,11 +82,10 @@ namespace CDPL
 		  private:
 			typedef std::vector<const Feature*> FeatureList;
 
-			FeatureMapping                     geomFtrMapping;
-			GeometricalFeatureMappingExtractor geomFtrMappingExtractor;
-			double                             ftrMatchCntFactor;
-			double                             ftrPosMatchFactor;
-			double                             ftrGeomMatchFactor;
+			SpatialFeatureMapping spatFtrMapping;
+			double                ftrMatchCntFactor;
+			double                ftrPosMatchFactor;
+			double                ftrGeomMatchFactor;
 		};
 
 		/**

@@ -1,7 +1,7 @@
 /* -*- mode: c++; c-basic-offset: 4; tab-width: 4; indent-tabs-mode: t -*- */
 
 /* 
- * GeometricalEntityAlignmentExport.hpp 
+ * SpatialEntityAlignmentExport.hpp 
  *
  * This file is part of the Chemical Data Processing Toolkit
  *
@@ -24,12 +24,12 @@
  */
 
 
-#ifndef CDPL_PYTHON_CHEM_GEOMETRICALENTITYALIGNMENTEXPORT_HPP
-#define CDPL_PYTHON_CHEM_GEOMETRICALENTITYALIGNMENTEXPORT_HPP
+#ifndef CDPL_PYTHON_CHEM_SPATIALENTITYALIGNMENTEXPORT_HPP
+#define CDPL_PYTHON_CHEM_SPATIALENTITYALIGNMENTEXPORT_HPP
 
 #include <boost/python.hpp>
 
-#include "CDPL/Chem/GeometricalEntityAlignment.hpp"
+#include "CDPL/Chem/SpatialEntityAlignment.hpp"
 
 #include "Base/CallableObjectAdapter.hpp"
 #include "Base/ObjectIdentityCheckVisitor.hpp"
@@ -38,28 +38,13 @@
 namespace CDPLPythonChem
 {
 
-	template <typename AlignmentType>
-	struct DefGeometricalEntityAlignmentTopMappingVisitor : public boost::python::def_visitor<DefGeometricalEntityAlignmentTopMappingVisitor<AlignmentType> >
-	{
-		
-		template <typename ClassType>
-		void visit(ClassType& cl) const {
-			using namespace boost;
-
-			cl
-				.def("getTopologicalMapping", &AlignmentType::getTopologicalMapping,
-					 python::arg("self"), python::return_internal_reference<>())
-				.add_property("topMapping", 
-							  python::make_function(&AlignmentType::getTopologicalMapping, python::return_internal_reference<>()));
-		}
-	};
-
-    template <typename T, typename EM, typename TopMappingVisitor = DefGeometricalEntityAlignmentTopMappingVisitor<CDPL::Chem::GeometricalEntityAlignment<T, EM> > >
-    struct GeometricalEntityAlignmentExport
+    template <typename T>
+    struct SpatialEntityAlignmentExport
     {
-		typedef CDPL::Chem::GeometricalEntityAlignment<T, EM> AlignmentType;
+		
+		typedef CDPL::Chem::SpatialEntityAlignment<T> AlignmentType;
 
-		GeometricalEntityAlignmentExport(const char* name) {
+		SpatialEntityAlignmentExport(const char* name) {
 			using namespace boost;
 			using namespace CDPL;
 
@@ -68,7 +53,6 @@ namespace CDPLPythonChem
 				.def(python::init<const AlignmentType&>(
 						 (python::arg("self"), python::arg("alignment")))[python::with_custodian_and_ward<1, 2>()])
 				.def(CDPLPythonBase::ObjectIdentityCheckVisitor<AlignmentType >())	
-				.def(TopMappingVisitor())	
 				.def("setEntityMatchFunction", &AlignmentType::setEntityMatchFunction, 
 					 (python::arg("self"), python::arg("func")))
 				.def("getEntityMatchFunction", &AlignmentType::getEntityMatchFunction, 
@@ -96,17 +80,23 @@ namespace CDPLPythonChem
 				.def("getNumEntities", &AlignmentType::getNumEntities, 
 					 (python::arg("self"), python::arg("first_set")))
 				.def("getEntities", &getEntitiesFunc, (python::arg("self"), python::arg("first_set")))
+				.def("getEntity", &AlignmentType::getEntity, (python::arg("self"), python::arg("idx"), python::arg("first_set")),
+					 python::return_internal_reference<>())
 				.def("setMinTopologicalMappingSize", &AlignmentType::setMinTopologicalMappingSize,
 					 (python::arg("self"), python::arg("min_size")))
 				.def("getMinTopologicalMappingSize", &AlignmentType::getMinTopologicalMappingSize,
 					 python::arg("self"))
-				.def("init", &AlignmentType::init, python::arg("self"))
+				.def("reset", &AlignmentType::reset, python::arg("reset"))
 				.def("nextAlignment", &AlignmentType::nextAlignment, 
 					 python::arg("self"))
 				.def("getTransform", &AlignmentType::getTransform,
 					 python::arg("self"), python::return_internal_reference<>())
 				.def("assign", &AlignmentType::operator=, 
 					 (python::arg("self"), python::arg("alignment")), python::return_self<python::with_custodian_and_ward<1, 2> >())
+				.def("getTopologicalMapping", &AlignmentType::getTopologicalMapping,
+					 python::arg("self"), python::return_internal_reference<>())
+				.add_property("topMapping", 
+							  python::make_function(&AlignmentType::getTopologicalMapping, python::return_internal_reference<>()))
 				.add_property("minTopologicalMappingSize", &AlignmentType::getMinTopologicalMappingSize,
 					  &AlignmentType::setMinTopologicalMappingSize)
 				.add_property("transform", 
@@ -146,4 +136,4 @@ namespace CDPLPythonChem
     };
 }
 
-#endif // CDPL_PYTHON_CHEM_GEOMETRICALENTITYALIGNMENTEXPORT_HPP
+#endif // CDPL_PYTHON_CHEM_SPATIALENTITYALIGNMENTEXPORT_HPP

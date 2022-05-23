@@ -1,7 +1,7 @@
 /* -*- mode: c++; c-basic-offset: 4; tab-width: 4; indent-tabs-mode: t -*- */
 
 /* 
- * GeometricalFeatureMappingExtractor.hpp 
+ * SpatialFeatureMappingExtractor.hpp 
  *
  * This file is part of the Chemical Data Processing Toolkit
  *
@@ -25,11 +25,11 @@
 
 /**
  * \file
- * \brief Definition of the class CDPL::Pharm::GeometricalFeatureMappingExtractor.
+ * \brief Definition of the class CDPL::Pharm::SpatialFeatureMapping.
  */
 
-#ifndef CDPL_PHARM_GEOMETRICALFEATUREMAPPINGEXTRACTOR_HPP
-#define CDPL_PHARM_GEOMETRICALFEATUREMAPPINGEXTRACTOR_HPP
+#ifndef CDPL_PHARM_SPATIALFEATUREMAPPING_HPP
+#define CDPL_PHARM_SPATIALFEATUREMAPPING_HPP
 
 #include <utility>
 
@@ -55,9 +55,9 @@ namespace CDPL
 		 */
 
 		/**
-		 * \brief GeometricalFeatureMappingExtractor.
+		 * \brief SpatialFeatureMapping.
 		 */
-		class CDPL_PHARM_API GeometricalFeatureMappingExtractor
+		class CDPL_PHARM_API SpatialFeatureMapping : public FeatureMapping
 		{
 
 		  public:
@@ -77,11 +77,11 @@ namespace CDPL
 			typedef boost::function3<double, const Feature&, const Feature&, const Math::Matrix4D&> GeometryMatchFunction;
 
 			/**
-			 * \brief Constructs a \c %GeometricalFeatureMappingExtractor instance.
+			 * \brief Constructs a \c %SpatialFeatureMapping instance.
 			 * \param query_mode If \c true, the reference feature container is interpreted as a query feature container and some of the
 			 *                   set default functions will operate in a special query mode.
 			 */
-			GeometricalFeatureMappingExtractor(bool query_mode = false);
+			SpatialFeatureMapping(bool query_mode = false);
 			
 			/**
 			 * \brief Specifies a function for testing the type compatibility of features.
@@ -123,7 +123,7 @@ namespace CDPL
 
 			double getGeometryMatchScore(const Feature& ftr1, const Feature& ftr2) const;
 
-			void getMapping(const FeatureContainer& ref_cntnr, const FeatureContainer& cntnr, const Math::Matrix4D& xform, FeatureMapping& mapping);
+			void perceive(const FeatureContainer& cntnr1, const FeatureContainer& cntnr2, const Math::Matrix4D& xform);
 
 		  private:
             typedef std::pair<const Feature*, const Feature*> FeaturePair;
@@ -142,4 +142,4 @@ namespace CDPL
     }
 }
 
-#endif // CDPL_PHARM_GEOMETRICALFEATUREMAPPINGEXTRACTOR_HPP
+#endif // CDPL_PHARM_SPATIALFEATUREMAPPING_HPP

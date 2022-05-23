@@ -81,7 +81,7 @@ void Pharm::PharmacophoreFitScore::setFeatureGeometryMatchFactor(double factor)
 double Pharm::PharmacophoreFitScore::operator()(const FeatureContainer& ref_cntnr, const FeatureContainer& algnd_cntnr, 
 												const Math::Matrix4D& xform)
 {
-	geomFtrMappingExtractor.getMapping(ref_cntnr, algnd_cntnr, xform, geomFtrMapping);
+	spatFtrMapping.perceive(ref_cntnr, algnd_cntnr, xform);
 
 	double cnt_score = 0.0;
 	double pos_score = 0.0;
@@ -99,7 +99,7 @@ double Pharm::PharmacophoreFitScore::operator()(const FeatureContainer& ref_cntn
 
 		num_ftrs++;
 
-		FeatureMapping::ConstEntryIteratorRange algnd_ftrs = geomFtrMapping.getEntries(&ref_ftr);
+		FeatureMapping::ConstEntryIteratorRange algnd_ftrs = spatFtrMapping.getEntries(&ref_ftr);
 
 		if (algnd_ftrs.first == algnd_ftrs.second)
 			continue;
@@ -114,8 +114,8 @@ double Pharm::PharmacophoreFitScore::operator()(const FeatureContainer& ref_cntn
 				double max_comb_geom_score = 0.0;
 
 				for (FeatureMapping::ConstEntryIterator af_it = algnd_ftrs.first; af_it != algnd_ftrs.second; ++af_it) {
-					double curr_pos_score = geomFtrMappingExtractor.getPositionMatchScore(ref_ftr, *af_it->second);
-					double curr_geom_score = geomFtrMappingExtractor.getGeometryMatchScore(ref_ftr, *af_it->second);
+					double curr_pos_score = spatFtrMapping.getPositionMatchScore(ref_ftr, *af_it->second);
+					double curr_geom_score = spatFtrMapping.getGeometryMatchScore(ref_ftr, *af_it->second);
 					double curr_comb_score = ftrPosMatchFactor * curr_pos_score + ftrGeomMatchFactor * curr_geom_score;
 
 					if (curr_comb_score > max_comb_score) {
@@ -132,7 +132,7 @@ double Pharm::PharmacophoreFitScore::operator()(const FeatureContainer& ref_cntn
 				double max_score = 0.0;
 
 				for (FeatureMapping::ConstEntryIterator af_it = algnd_ftrs.first; af_it != algnd_ftrs.second; ++af_it)
-					max_score = std::max(max_score, geomFtrMappingExtractor.getPositionMatchScore(ref_ftr, *af_it->second));
+					max_score = std::max(max_score, spatFtrMapping.getPositionMatchScore(ref_ftr, *af_it->second));
 
 				pos_score += max_score;
 			}
@@ -141,7 +141,7 @@ double Pharm::PharmacophoreFitScore::operator()(const FeatureContainer& ref_cntn
 			double max_score = 0.0;
 
 			for (FeatureMapping::ConstEntryIterator af_it = algnd_ftrs.first; af_it != algnd_ftrs.second; ++af_it)
-				max_score = std::max(max_score, geomFtrMappingExtractor.getGeometryMatchScore(ref_ftr, *af_it->second));
+				max_score = std::max(max_score, spatFtrMapping.getGeometryMatchScore(ref_ftr, *af_it->second));
 
 			geom_score += max_score;
 		}

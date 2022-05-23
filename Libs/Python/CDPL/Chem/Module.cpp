@@ -94,7 +94,7 @@ BOOST_PYTHON_MODULE(_chem)
 	exportReactor();
 
 	exportTopologicalEntityAlignments();
-	exportGeometricalEntityAlignments();
+	exportSpatialEntityAlignments();
 
 	exportCompleteRingSet();
 	exportAromaticRingSet();

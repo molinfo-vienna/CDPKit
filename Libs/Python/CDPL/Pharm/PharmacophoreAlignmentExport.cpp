@@ -28,55 +28,22 @@
 
 #include "CDPL/Pharm/PharmacophoreAlignment.hpp"
 #include "CDPL/Pharm/FeatureContainer.hpp"
-#include "CDPL/Pharm/FeatureMapping.hpp"
 #include "CDPL/Pharm/Feature.hpp"
 
 #include "Base/CopyAssOp.hpp"
-#include "Chem/GeometricalEntityAlignmentExport.hpp"
+#include "Chem/SpatialEntityAlignmentExport.hpp"
 
 #include "ClassExports.hpp"
 
-
-namespace
-{
-
-	struct PharmacophoreAlignmentTopMappingVisitor : public boost::python::def_visitor<PharmacophoreAlignmentTopMappingVisitor>
-	{
-
-		typedef CDPL::Chem::GeometricalEntityAlignment<CDPL::Pharm::Feature, CDPL::Pharm::FeaturePairList> AlignmentType;
-		
-		template <typename ClassType>
-		void visit(ClassType& cl) const {
-			using namespace boost;
-			
-			cl
-				.def("getTopologicalMapping", &getTopologicalMapping,
-					 python::arg("self"), python::with_custodian_and_ward_postcall<0, 1>())
-				.add_property("topMapping", 
-							  python::make_function(&getTopologicalMapping, python::with_custodian_and_ward_postcall<0, 1>()));
-		}
-
-		static CDPL::Pharm::FeatureMapping::SharedPointer getTopologicalMapping(const AlignmentType& align) {
-			 using namespace CDPL;
-			 
-			 Pharm::FeatureMapping::SharedPointer fm(new Pharm::FeatureMapping());
-
-			 fm->insertEntries(align.getTopologicalMapping().getEntriesBegin(), 
-							   align.getTopologicalMapping().getEntriesEnd());
-
-			 return fm;
-		}
-	};
-}
 
 void CDPLPythonPharm::exportPharmacophoreAlignment()
 {
     using namespace boost;
     using namespace CDPL;
 
-	CDPLPythonChem::GeometricalEntityAlignmentExport<Pharm::Feature, Pharm::FeaturePairList, PharmacophoreAlignmentTopMappingVisitor>("GeometricalFeatureAlignment");
+	CDPLPythonChem::SpatialEntityAlignmentExport<Pharm::Feature>("SpatialFeatureAlignment");
 
-    python::class_<Pharm::PharmacophoreAlignment, python::bases<Chem::GeometricalEntityAlignment<Pharm::Feature, Pharm::FeaturePairList> >,
+    python::class_<Pharm::PharmacophoreAlignment, python::bases<Chem::SpatialEntityAlignment<Pharm::Feature> >,
 				   boost::noncopyable>("PharmacophoreAlignment", python::no_init)
 		.def(python::init<bool>((python::arg("self"), python::arg("query_mode"))))
 		.def(python::init<const Pharm::PharmacophoreAlignment&>((python::arg("self"), python::arg("alignment")))[python::with_custodian_and_ward<1, 2>()])

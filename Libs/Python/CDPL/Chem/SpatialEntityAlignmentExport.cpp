@@ -1,7 +1,7 @@
 /* -*- mode: c++; c-basic-offset: 4; tab-width: 4; indent-tabs-mode: t -*- */
 
 /* 
- * GeometricalEntityAlignmentExport.cpp 
+ * SpatialEntityAlignmentExport.cpp 
  *
  * This file is part of the Chemical Data Processing Toolkit
  *
@@ -27,18 +27,16 @@
 #include <boost/python.hpp>
 
 #include "CDPL/Chem/Atom.hpp"
-#include "CDPL/Chem/AtomMapping.hpp"
-#include "CDPL/Chem/Entity3DMapping.hpp"
 
-#include "GeometricalEntityAlignmentExport.hpp"
+#include "SpatialEntityAlignmentExport.hpp"
 #include "ClassExports.hpp"
 
 
-void CDPLPythonChem::exportGeometricalEntityAlignments()
+void CDPLPythonChem::exportSpatialEntityAlignments()
 {
     using namespace CDPL;
     using namespace Chem;
 
-    GeometricalEntityAlignmentExport<Entity3D, Entity3DMapping>("GeometricalEntity3DAlignment");
-    GeometricalEntityAlignmentExport<Atom, AtomMapping>("GeometricalAtomAlignment");
+    SpatialEntityAlignmentExport<Entity3D>("SpatialEntity3DAlignment");
+    SpatialEntityAlignmentExport<Atom>("SpatialAtomAlignment");
 }

@@ -87,7 +87,7 @@ SET(chem_MOD_SRCS
     ReactorExport.cpp 
   
     TopologicalEntityAlignmentExport.cpp	
-    GeometricalEntityAlignmentExport.cpp
+    SpatialEntityAlignmentExport.cpp
    
     CompleteRingSetExport.cpp 
     AromaticRingSetExport.cpp 

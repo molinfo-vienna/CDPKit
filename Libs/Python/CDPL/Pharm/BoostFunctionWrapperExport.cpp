@@ -48,7 +48,6 @@ void CDPLPythonPharm::exportBoostFunctionWrappers()
 
 	CDPLPythonBase::BoostFunction1Export<Feature3DCoordinatesFunction, Feature&, 
 										 python::return_internal_reference<> >("Feature3DCoordinatesFunction");
-    CDPLPythonBase::BoostFunction1Export<boost::function1<bool, const FeatureMapping&> >("BoolFeatureMappingFunctor");
    	CDPLPythonBase::BoostFunction1Export<boost::function1<double, const ScreeningProcessor::SearchHit&> >("DoubleSearchHitFunctor");
     CDPLPythonBase::BoostFunction1Export<boost::function1<double, const Feature&>, Feature&>("DoubleFeatureFunctor");
 	CDPLPythonBase::BoostFunction1Export<boost::function1<bool, double>, double,

@@ -324,7 +324,7 @@
 #include "CDPL/Chem/BRICSFragmentGenerator.hpp"  
 
 #include "CDPL/Chem/TopologicalEntityAlignment.hpp"
-#include "CDPL/Chem/GeometricalEntityAlignment.hpp"
+#include "CDPL/Chem/SpatialEntityAlignment.hpp"
 
 #include "CDPL/Chem/Atom3DCoordinatesFunctor.hpp"
 #include "CDPL/Chem/AtomConformer3DCoordinatesFunctor.hpp"

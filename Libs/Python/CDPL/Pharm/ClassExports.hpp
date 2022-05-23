@@ -137,7 +137,7 @@ namespace CDPLPythonPharm
 	void exportFeatureGeometryMatchFunctor();
 	void exportTopologicalEntityAlignment();
 	void exportPharmacophoreAlignment();
-	void exportGeometricalFeatureMappingExtractor();
+	void exportSpatialFeatureMapping();
 }
 
 #endif // CDPL_PYTHON_PHARM_CLASSEXPORTS_HPP
