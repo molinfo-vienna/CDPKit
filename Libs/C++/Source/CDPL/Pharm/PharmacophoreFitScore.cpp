@@ -27,15 +27,49 @@
 #include "StaticInit.hpp"
 
 #include <algorithm>
+#include <functional>
 
 #include "CDPL/Pharm/PharmacophoreFitScore.hpp"
 #include "CDPL/Pharm/FeatureContainer.hpp"
 #include "CDPL/Pharm/Feature.hpp"
 #include "CDPL/Pharm/FeatureFunctions.hpp"
 #include "CDPL/Pharm/FeatureType.hpp"
+#include "CDPL/Chem/Entity3DFunctions.hpp"
+#include "CDPL/Math/Vector.hpp"
 
 
 using namespace CDPL;
+
+
+namespace
+{
+
+	struct FeatureCmpFunc : public std::binary_function<const Pharm::Feature*, const Pharm::Feature*, bool>
+	{
+
+	public:
+		bool operator()(const Pharm::Feature* ftr1, const Pharm::Feature* ftr2) const {
+			unsigned int type1 = getType(*ftr1);
+			unsigned int type2 = getType(*ftr2);
+
+			if (type1 == type2) {
+				const Math::Vector3D& pos1 = get3DCoordinates(*ftr1);
+				const Math::Vector3D& pos2 = get3DCoordinates(*ftr2);
+
+				if (pos1(0) == pos2(0)) {
+					if (pos1(1) == pos2(1)) 
+						return (pos1(2) < pos2(2));
+					
+					return (pos1(1) < pos2(1));
+				}
+
+				return (pos1(0) < pos2(0));
+			}
+
+			return (type1 < type2);
+		}
+	};
+}
 
 
 const double Pharm::PharmacophoreFitScore::DEF_FTR_MATCH_COUNT_FACTOR   = 0.8;
@@ -78,18 +112,20 @@ void Pharm::PharmacophoreFitScore::setFeatureGeometryMatchFactor(double factor)
     ftrGeomMatchFactor = factor;
 }
 
-double Pharm::PharmacophoreFitScore::operator()(const FeatureContainer& ref_cntnr, const FeatureContainer& algnd_cntnr, 
+double Pharm::PharmacophoreFitScore::operator()(const FeatureContainer& ref_ftrs, const FeatureContainer& algnd_ftrs, 
 												const Math::Matrix4D& xform)
 {
-	spatFtrMapping.perceive(ref_cntnr, algnd_cntnr, xform);
+	spatFtrMapping.perceive(ref_ftrs, algnd_ftrs, xform);
 
-	double cnt_score = 0.0;
-	double pos_score = 0.0;
-	double geom_score = 0.0;
-	double num_ftrs = 0;
+	return this->operator()(ref_ftrs, spatFtrMapping);
+}
 
-	for (FeatureContainer::ConstFeatureIterator f_it = ref_cntnr.getFeaturesBegin(), f_end = ref_cntnr.getFeaturesEnd(); f_it != f_end; ++f_it) {
-		const Feature& ref_ftr = *f_it;
+double Pharm::PharmacophoreFitScore::operator()(const FeatureContainer& ref_ftrs, const SpatialFeatureMapping& mapping)
+{
+	groupedRefFtrs.clear();
+
+	for (FeatureContainer::ConstFeatureIterator it = ref_ftrs.getFeaturesBegin(), end = ref_ftrs.getFeaturesEnd(); it != end; ++it) {
+		const Feature& ref_ftr = *it;
  
 		if (getDisabledFlag(ref_ftr))
 			continue;
@@ -97,58 +133,50 @@ double Pharm::PharmacophoreFitScore::operator()(const FeatureContainer& ref_cntn
 		if (getType(ref_ftr) == FeatureType::X_VOLUME)
 			continue;
 
-		num_ftrs++;
+		groupedRefFtrs.push_back(&ref_ftr);
+	}
 
-		FeatureMapping::ConstEntryIteratorRange algnd_ftrs = spatFtrMapping.getEntries(&ref_ftr);
+	if (groupedRefFtrs.empty())
+		return 0.0;
 
-		if (algnd_ftrs.first == algnd_ftrs.second)
-			continue;
+	std::sort(groupedRefFtrs.begin(), groupedRefFtrs.end(), FeatureCmpFunc());
 
-		if (ftrMatchCntFactor != 0.0)
-			cnt_score += 1.0;
-		
-		if (ftrPosMatchFactor != 0.0) {
-			if (ftrGeomMatchFactor != 0.0) {
-				double max_comb_score = 0.0;
-				double max_comb_pos_score = 0.0;
-				double max_comb_geom_score = 0.0;
+	double score = 0.0;
+	double num_ftrs = 0;
 
-				for (FeatureMapping::ConstEntryIterator af_it = algnd_ftrs.first; af_it != algnd_ftrs.second; ++af_it) {
-					double curr_pos_score = spatFtrMapping.getPositionMatchScore(ref_ftr, *af_it->second);
-					double curr_geom_score = spatFtrMapping.getGeometryMatchScore(ref_ftr, *af_it->second);
-					double curr_comb_score = ftrPosMatchFactor * curr_pos_score + ftrGeomMatchFactor * curr_geom_score;
+	for (FeatureList::const_iterator it = groupedRefFtrs.begin(), end = groupedRefFtrs.end(); it != end; ) {
+		unsigned int ref_type = 0;
+		const Math::Vector3D* ref_pos = 0;
+		double max_score = 0.0;
+		bool found_mapping = false;
 
-					if (curr_comb_score > max_comb_score) {
-						max_comb_score = curr_comb_score;
-						max_comb_pos_score = curr_pos_score;
-						max_comb_geom_score = curr_geom_score;
-					}
-				}
+		for (num_ftrs++; it != end; ++it) {
+			const Feature* ref_ftr = *it;
 
-				pos_score += max_comb_pos_score;
-				geom_score += max_comb_geom_score;
+			if (ref_pos == 0) {
+				ref_type = getType(*ref_ftr);
+				ref_pos = &get3DCoordinates(*ref_ftr);
 
-			} else {
-				double max_score = 0.0;
+			} else if (ref_type != getType(*ref_ftr) || *ref_pos != get3DCoordinates(*ref_ftr))
+				break;
 
-				for (FeatureMapping::ConstEntryIterator af_it = algnd_ftrs.first; af_it != algnd_ftrs.second; ++af_it)
-					max_score = std::max(max_score, spatFtrMapping.getPositionMatchScore(ref_ftr, *af_it->second));
+			FeatureMapping::ConstEntryIteratorRange mpd_ftrs = mapping.getEntries(ref_ftr);
 
-				pos_score += max_score;
-			}
+			for (FeatureMapping::ConstEntryIterator mf_it = mpd_ftrs.first; mf_it != mpd_ftrs.second; ++mf_it) {
+				const Feature* m_ftr = mf_it->second;
+				double pair_pos_score = mapping.getPositionMatchScore(*ref_ftr, *m_ftr);
+				double pair_geom_score = mapping.getGeometryMatchScore(*ref_ftr, *m_ftr);
 			
-		} else if (ftrGeomMatchFactor != 0.0) {
-			double max_score = 0.0;
+				max_score = std::max(max_score, ftrPosMatchFactor * pair_pos_score + ftrGeomMatchFactor * pair_geom_score);
+				found_mapping = true;
+			}
+		}
 
-			for (FeatureMapping::ConstEntryIterator af_it = algnd_ftrs.first; af_it != algnd_ftrs.second; ++af_it)
-				max_score = std::max(max_score, spatFtrMapping.getGeometryMatchScore(ref_ftr, *af_it->second));
-
-			geom_score += max_score;
+		if (found_mapping) {
+			score += ftrMatchCntFactor;
+			score += max_score;
 		}
 	}
 
-	if (num_ftrs == 0)
-		return 0.0;
-
-	return ((cnt_score * ftrMatchCntFactor + pos_score * ftrPosMatchFactor + geom_score * ftrGeomMatchFactor) / num_ftrs);
+	return (score / num_ftrs);
 }

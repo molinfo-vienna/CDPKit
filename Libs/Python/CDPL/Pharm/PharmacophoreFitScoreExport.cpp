@@ -49,7 +49,12 @@ void CDPLPythonPharm::exportPharmacophoreFitScore()
 		.def(CDPLPythonBase::ObjectIdentityCheckVisitor<Pharm::PharmacophoreFitScore>())
 		.def("assign", CDPLPythonBase::copyAssOp(&Pharm::PharmacophoreFitScore::operator=), 
 			 (python::arg("self"), python::arg("score")), python::return_self<>())
-		.def("__call__", &Pharm::PharmacophoreFitScore::operator(), (python::arg("self"), python::arg("ref_cntnr"), python::arg("algnd_cntnr"), python::arg("xform")))
+		.def("__call__", static_cast<double (Pharm::PharmacophoreFitScore::*)
+			 (const Pharm::FeatureContainer&, const Pharm::FeatureContainer&, const Math::Matrix4D&)>(&Pharm::PharmacophoreFitScore::operator()),
+			 (python::arg("self"), python::arg("ref_ftrs"), python::arg("algnd_ftrs"), python::arg("xform")))
+		.def("__call__", static_cast<double (Pharm::PharmacophoreFitScore::*)
+			 (const Pharm::FeatureContainer&, const Pharm::SpatialFeatureMapping&)>(&Pharm::PharmacophoreFitScore::operator()),
+			 (python::arg("self"), python::arg("ref_ftrs"), python::arg("mapping")))
 		.add_property("featureMatchCountFactor", &Pharm::PharmacophoreFitScore::getFeatureMatchCountFactor, 
 					  &Pharm::PharmacophoreFitScore::setFeatureMatchCountFactor)
 		.add_property("featurePositionMatchFactor", &Pharm::PharmacophoreFitScore::getFeaturePositionMatchFactor, 

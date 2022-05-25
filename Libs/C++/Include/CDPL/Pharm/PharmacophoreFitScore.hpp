@@ -31,6 +31,8 @@
 #ifndef CDPL_PHARM_PHARMACOPHOREFITSCORE_HPP
 #define CDPL_PHARM_PHARMACOPHOREFITSCORE_HPP
 
+#include <vector>
+
 #include "CDPL/Pharm/APIPrefix.hpp"
 #include "CDPL/Pharm/FeatureMapping.hpp"
 #include "CDPL/Pharm/SpatialFeatureMapping.hpp"
@@ -76,8 +78,10 @@ namespace CDPL
 
 			void setFeatureGeometryMatchFactor(double factor);
 
-			double operator()(const FeatureContainer& ref_cntnr, const FeatureContainer& algnd_cntnr, 
+			double operator()(const FeatureContainer& ref_ftrs, const FeatureContainer& algnd_ftrs, 
 							  const Math::Matrix4D& xform);
+
+			double operator()(const FeatureContainer& ref_ftrs, const SpatialFeatureMapping& mapping);
 
 		  private:
 			typedef std::vector<const Feature*> FeatureList;
@@ -86,6 +90,7 @@ namespace CDPL
 			double                ftrMatchCntFactor;
 			double                ftrPosMatchFactor;
 			double                ftrGeomMatchFactor;
+			FeatureList           groupedRefFtrs;
 		};
 
 		/**

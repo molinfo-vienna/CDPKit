@@ -75,9 +75,9 @@ Pharm::SpatialFeatureMapping::getGeometryMatchFunction() const
 	return geomMatchFunc;
 }
 
-double Pharm::SpatialFeatureMapping::getPositionMatchScore(const Feature& ftr1, const Feature& ftr2) const
+double Pharm::SpatialFeatureMapping::getPositionMatchScore(const Feature& ref_ftr, const Feature& aligned_ftr) const
 {
-	FeaturePairToScoreMap::const_iterator it = posMatchScores.find(FeaturePair(&ftr1, &ftr2));
+	FeaturePairToScoreMap::const_iterator it = posMatchScores.find(FeaturePair(&ref_ftr, &aligned_ftr));
 
 	if (it == posMatchScores.end())
 		return 0.0;
@@ -85,9 +85,9 @@ double Pharm::SpatialFeatureMapping::getPositionMatchScore(const Feature& ftr1, 
 	return it->second;
 }
 
-double Pharm::SpatialFeatureMapping::getGeometryMatchScore(const Feature& ftr1, const Feature& ftr2) const
+double Pharm::SpatialFeatureMapping::getGeometryMatchScore(const Feature& ref_ftr, const Feature& aligned_ftr) const
 {
-	FeaturePairToScoreMap::const_iterator it = geomMatchScores.find(FeaturePair(&ftr1, &ftr2));
+	FeaturePairToScoreMap::const_iterator it = geomMatchScores.find(FeaturePair(&ref_ftr, &aligned_ftr));
 
 	if (it == geomMatchScores.end())
 		return 0.0;
@@ -95,29 +95,29 @@ double Pharm::SpatialFeatureMapping::getGeometryMatchScore(const Feature& ftr1, 
 	return it->second;
 }
 
-void Pharm::SpatialFeatureMapping::perceive(const FeatureContainer& cntnr1, const FeatureContainer& cntnr2, const Math::Matrix4D& xform)
+void Pharm::SpatialFeatureMapping::perceive(const FeatureContainer& ref_ftrs, const FeatureContainer& aligned_ftrs, const Math::Matrix4D& xform)
 {
 	clear();
 
 	posMatchScores.clear();
 	geomMatchScores.clear();
 
-    FeatureContainer::ConstFeatureIterator fts2_beg = cntnr2.getFeaturesBegin(); 
-    FeatureContainer::ConstFeatureIterator fts2_end = cntnr2.getFeaturesEnd();
+    FeatureContainer::ConstFeatureIterator aligned_ftrs_beg = aligned_ftrs.getFeaturesBegin(); 
+    FeatureContainer::ConstFeatureIterator aligned_ftrs_end = aligned_ftrs.getFeaturesEnd();
 
-    for (FeatureContainer::ConstFeatureIterator it1 = cntnr1.getFeaturesBegin(), ref_end = cntnr1.getFeaturesEnd(); it1 != ref_end; ++it1) {
-		const Feature& ftr1 = *it1;
+    for (FeatureContainer::ConstFeatureIterator it1 = ref_ftrs.getFeaturesBegin(), ref_end = ref_ftrs.getFeaturesEnd(); it1 != ref_end; ++it1) {
+		const Feature& ref_ftr = *it1;
 
-		for (FeatureContainer::ConstFeatureIterator it2 = fts2_beg, mpd_end = fts2_end; it2 != mpd_end; ++it2) {
-			const Feature& ftr2 = *it2;
+		for (FeatureContainer::ConstFeatureIterator it2 = aligned_ftrs_beg, mpd_end = aligned_ftrs_end; it2 != mpd_end; ++it2) {
+			const Feature& aligned_ftr = *it2;
 
-			if (typeMatchFunc && !typeMatchFunc(ftr1, ftr2))
+			if (typeMatchFunc && !typeMatchFunc(ref_ftr, aligned_ftr))
 				continue;
 
 			double pos_score = 0.0;
 
 			if (posMatchFunc) {
-				pos_score = posMatchFunc(ftr1, ftr2, xform);
+				pos_score = posMatchFunc(ref_ftr, aligned_ftr, xform);
 
 				if (pos_score <= 0.0) 
 					continue;
@@ -126,19 +126,19 @@ void Pharm::SpatialFeatureMapping::perceive(const FeatureContainer& cntnr1, cons
 			double geom_score = 0.0;
 
 			if (geomMatchFunc) {
-				geom_score = geomMatchFunc(ftr1, ftr2, xform);
+				geom_score = geomMatchFunc(ref_ftr, aligned_ftr, xform);
 
 				if (geom_score <= 0.0) 
 					continue;
 			}
 
 			if (pos_score > 0.0)
-				posMatchScores[FeaturePair(&ftr1, &ftr2)] = pos_score;				
+				posMatchScores[FeaturePair(&ref_ftr, &aligned_ftr)] = pos_score;				
 
 			if (geom_score > 0.0)
-				geomMatchScores[FeaturePair(&ftr1, &ftr2)] = geom_score;		
+				geomMatchScores[FeaturePair(&ref_ftr, &aligned_ftr)] = geom_score;		
 
-			insertEntry(&ftr1, &ftr2);
+			insertEntry(&ref_ftr, &aligned_ftr);
 		}
 	}
 }

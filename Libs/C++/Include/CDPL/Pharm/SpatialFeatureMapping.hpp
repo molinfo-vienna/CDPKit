@@ -119,11 +119,11 @@ namespace CDPL
 			 */
 			const GeometryMatchFunction& getGeometryMatchFunction() const;
 
-			double getPositionMatchScore(const Feature& ftr1, const Feature& ftr2) const;
+			double getPositionMatchScore(const Feature& ref_ftr, const Feature& aligned_ftr) const;
 
-			double getGeometryMatchScore(const Feature& ftr1, const Feature& ftr2) const;
+			double getGeometryMatchScore(const Feature& ref_ftr, const Feature& aligned_ftr) const;
 
-			void perceive(const FeatureContainer& cntnr1, const FeatureContainer& cntnr2, const Math::Matrix4D& xform);
+			void perceive(const FeatureContainer& ref_ftrs, const FeatureContainer& aligned_ftrs, const Math::Matrix4D& xform);
 
 		  private:
             typedef std::pair<const Feature*, const Feature*> FeaturePair;
