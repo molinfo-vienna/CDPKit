@@ -107,7 +107,7 @@ namespace CDPL
 			/**
 			 * \brief Constructs the \c %SpatialEntityAlignment instance.
 			 */
-			SpatialEntityAlignment(): minTopMappingSize(3), changes(true), topMappingCache(5000) {}
+			SpatialEntityAlignment();
 
 			/**
 			 * \brief Virtual destructor.
@@ -257,6 +257,8 @@ namespace CDPL
 
 		private:
 			void init();
+
+			Util::STPairArray* allocTopMapping();
 			
 			struct MappingCmpFunc : public std::binary_function<const Util::STPairArray*, const Util::STPairArray*, bool>
 			{
@@ -276,7 +278,7 @@ namespace CDPL
 			TopologicalAlignment                   topAlignment;
 			TopMappingSet                          topMappings;
 			TopMappingSetIterator                  nextTopMappingIter;
-			Util::STPairArray                      currTopMapping;
+			Util::STPairArray*                     currTopMapping;
 			TopologicalAlignmentConstraintFunction topAlignConstrFunc;
 			Entity3DCoordinatesFunction            coordsFunc;
 			EntityWeightFunction                   weightFunc;
@@ -303,6 +305,12 @@ namespace CDPL
 
 
 // Implementation
+
+template <typename T>
+CDPL::Chem::SpatialEntityAlignment<T>::SpatialEntityAlignment(): minTopMappingSize(3), changes(true), topMappingCache(5000)
+{
+	currTopMapping = allocTopMapping();
+}
 
 template <typename T>
 void CDPL::Chem::SpatialEntityAlignment<T>::setMinTopologicalMappingSize(std::size_t min_size)
@@ -433,6 +441,102 @@ void CDPL::Chem::SpatialEntityAlignment<T>::reset()
 }
 
 template <typename T>
+bool CDPL::Chem::SpatialEntityAlignment<T>::nextAlignment()
+{
+	if (changes)
+		init();
+
+	if (firstSetCoords.empty() || secondSetCoords.empty())
+		return false;
+
+	bool have_weights = !firstSetWeights.empty();
+
+	while (nextTopMappingIter != topMappings.end()) {
+		currTopMapping = *nextTopMappingIter;
+
+		std::size_t num_points = currTopMapping->getSize();
+
+		refPoints.resize(3, num_points, false);
+		alignedPoints.resize(3, num_points, false);
+	
+		if (have_weights)
+			almntWeights.resize(num_points, 1.0);
+
+		std::size_t i = 0;
+	
+		for (Util::STPairArray::ConstElementIterator it = currTopMapping->getElementsBegin(), end = currTopMapping->getElementsEnd();
+			 it != end; ++it, i++) {
+		
+			std::size_t first_idx = it->first;
+			std::size_t sec_idx = it->second;			
+			
+			column(refPoints, i) = firstSetCoords[first_idx];
+			column(alignedPoints, i) = secondSetCoords[sec_idx];
+
+			if (have_weights)
+				almntWeights(i) = std::max(firstSetWeights[first_idx], secondSetWeights[sec_idx]);
+		}
+
+		if (num_points > minTopMappingSize) {
+			Util::STPairArray* sub_mpg = 0;
+			
+			for (std::size_t j = 0; j < num_points; j++) {
+				if (!sub_mpg)
+					sub_mpg = allocTopMapping();
+
+				sub_mpg->clear();
+
+				for (std::size_t k = 0; k < num_points; k++)
+					if (k != j)
+						sub_mpg->addElement(currTopMapping->getElement(k));
+
+				// Unsafe duplicate detection method due to hash collisions!
+				// However, should not have an impact in real-world scenarios....
+				if (!seenTopMappings.insert(boost::hash_value(sub_mpg->getData())).second) 
+					continue;
+
+				if (topAlignConstrFunc && !topAlignConstrFunc(*sub_mpg))
+					continue;
+				
+				topMappings.insert(sub_mpg);
+				sub_mpg = 0;
+			}
+		}
+		
+		if (!have_weights) {
+			if (!kabschAlgorithm.align(alignedPoints, refPoints)) {
+				++nextTopMappingIter;
+				continue;
+			}
+			
+		} else if (!kabschAlgorithm.align(alignedPoints, refPoints, almntWeights)) {
+			++nextTopMappingIter;
+			continue;
+		}
+		
+		transform.assign(kabschAlgorithm.getTransform());
+		++nextTopMappingIter;
+		
+		return true;
+	}
+
+	return false;
+}
+
+template <typename T>
+const CDPL::Math::Matrix4D& CDPL::Chem::SpatialEntityAlignment<T>::getTransform() const 
+{
+	return transform;
+}
+
+template <typename T>
+const CDPL::Util::STPairArray&  
+CDPL::Chem::SpatialEntityAlignment<T>::getTopologicalMapping() const
+{
+	return *currTopMapping;
+}
+
+template <typename T>
 void CDPL::Chem::SpatialEntityAlignment<T>::init()
 {
 	firstSetCoords.clear();
@@ -465,89 +569,31 @@ void CDPL::Chem::SpatialEntityAlignment<T>::init()
 	topMappingCache.putAll();
 	seenTopMappings.clear();
 	topMappings.clear();
+	
+	currTopMapping = allocTopMapping();
 
-	while (topAlignment.nextAlignment(currTopMapping)) {
-		std::size_t mpg_size = currTopMapping.getSize();
-
-		if (mpg_size < minTopMappingSize)
+	while (topAlignment.nextAlignment(*currTopMapping)) {
+		if (currTopMapping->getSize() < minTopMappingSize)
 			continue;
 		
-		if (topAlignConstrFunc && !topAlignConstrFunc(currTopMapping))
+		if (topAlignConstrFunc && !topAlignConstrFunc(*currTopMapping))
 			continue;
 
-		Util::STPairArray* mpg_ptr = topMappingCache.getRaw();
-
-		mpg_ptr->swap(currTopMapping);
-		topMappings.insert(mpg_ptr);
+		topMappings.insert(currTopMapping);
+		currTopMapping = allocTopMapping();
 	}
 
+	currTopMapping->clear();
+	
 	nextTopMappingIter = topMappings.begin();
 	changes = false;
 }
 
 template <typename T>
-bool CDPL::Chem::SpatialEntityAlignment<T>::nextAlignment()
+CDPL::Util::STPairArray*
+CDPL::Chem::SpatialEntityAlignment<T>::allocTopMapping()
 {
-	if (changes)
-		init();
-
-	if (firstSetCoords.empty() || secondSetCoords.empty())
-		return false;
-
-	bool have_weights = !firstSetWeights.empty();
-
-	while (nextTopMappingIter != topMappings.end()) {
-		currTopMapping.swap(**nextTopMappingIter); ++nextTopMappingIter;
-
-		std::size_t num_points = currTopMapping.getSize();
-
-		refPoints.resize(3, num_points, false);
-		alignedPoints.resize(3, num_points, false);
-	
-		if (have_weights)
-			almntWeights.resize(num_points, 1.0);
-
-		std::size_t i = 0;
-	
-		for (Util::STPairArray::ConstElementIterator it = currTopMapping.getElementsBegin(), end = currTopMapping.getElementsEnd();
-			 it != end; ++it, i++) {
-		
-			std::size_t first_idx = it->first;
-			std::size_t sec_idx = it->second;			
-			
-			column(refPoints, i) = firstSetCoords[first_idx];
-			column(alignedPoints, i) = secondSetCoords[sec_idx];
-
-			if (have_weights)
-				almntWeights(i) = std::max(firstSetWeights[first_idx], secondSetWeights[sec_idx]);
-		}
-
-		if (!have_weights) {
-			if (!kabschAlgorithm.align(alignedPoints, refPoints))
-				continue;
-
-		} else if (!kabschAlgorithm.align(alignedPoints, refPoints, almntWeights))
-			continue;
-
-		transform.assign(kabschAlgorithm.getTransform());
-
-		return true;
-	}
-
-	return false;
-}
-
-template <typename T>
-const CDPL::Math::Matrix4D& CDPL::Chem::SpatialEntityAlignment<T>::getTransform() const 
-{
-	return transform;
-}
-
-template <typename T>
-const CDPL::Util::STPairArray&  
-CDPL::Chem::SpatialEntityAlignment<T>::getTopologicalMapping() const
-{
-	return currTopMapping;
+	return topMappingCache.getRaw();
 }
 
 #endif // CDPL_CHEM_SPATIALENTITYALIGNMENT_HPP

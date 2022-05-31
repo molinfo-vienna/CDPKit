@@ -669,13 +669,13 @@ void PSDScreenImpl::analyzeInputFiles()
 
 	startMolIndex = std::min(startMolIndex, numDBMolecules);
 
-	printMessage(INFO, "- " + boost::lexical_cast<std::string>(numQueryPharms) + " Query Pharmacophore" + (numQueryPharms != 1 ? "s" : ""));
+	printMessage(INFO, "- " + boost::lexical_cast<std::string>(numQueryPharms) + " Query pharmacophore" + (numQueryPharms != 1 ? "s" : ""));
 	printMessage(INFO, "- " + boost::lexical_cast<std::string>(numDBMolecules) + " Molecule" + (numDBMolecules != 1 ? "s/" : "/") + 
-				 boost::lexical_cast<std::string>(numDBPharms) + " Pharmacophore" + (numDBPharms != 1 ? "s" : "")+ " in Database");
+				 boost::lexical_cast<std::string>(numDBPharms) + " pharmacophore" + (numDBPharms != 1 ? "s" : "")+ " in database");
 
 	std::size_t num_screened = endMolIndex - startMolIndex;
 
-	printMessage(VERBOSE, "-> Screening " + boost::lexical_cast<std::string>(num_screened) + " Molecule" + (num_screened != 1 ? "s" : ""));
+	printMessage(VERBOSE, "-> Screening " + boost::lexical_cast<std::string>(num_screened) + " molecule" + (num_screened != 1 ? "s" : ""));
 	printMessage(INFO, "");
 }
 

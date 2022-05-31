@@ -76,8 +76,10 @@ Pharm::ScreeningProcessorImpl::ScreeningProcessorImpl(ScreeningProcessor& parent
 	checkXVolumes(true), bestAlignments(false), hitCallback(), progressCallback(), 
 	scoringFunction(PharmacophoreFitScreeningScore()), featureGeomMatchFunction(false), pharmAlignment(true)
 {
+/*
 	pharmAlignment.setTopAlignmentConstraintFunction(
 		boost::bind(&ScreeningProcessorImpl::checkTopologicalMapping, this, _1));
+*/
 	pharmAlignment.setEntity3DCoordinatesFunction(
 		boost::bind(&ScreeningProcessorImpl::getFeatureCoordinates, this, _1));
 }
@@ -291,7 +293,8 @@ void Pharm::ScreeningProcessorImpl::initQueryData(const FeatureContainer& query)
 
 	minNum2PointPharmMatches = (min_num_ftrs < 2 ? std::size_t(0) : (min_num_ftrs * (min_num_ftrs - 1)) / 2);
 
-	pharmAlignment.setMinTopologicalMappingSize(min_num_ftrs);
+	//pharmAlignment.setMinTopologicalMappingSize(min_num_ftrs);
+	pharmAlignment.setMinTopologicalMappingSize(std::min(min_num_ftrs, std::size_t(3)));
 }
 
 void Pharm::ScreeningProcessorImpl::insertFeature(const Feature& ftr, FeatureMatrix& ftr_mtx) const
