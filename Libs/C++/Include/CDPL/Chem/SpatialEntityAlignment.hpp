@@ -450,6 +450,7 @@ bool CDPL::Chem::SpatialEntityAlignment<T>::nextAlignment()
 		return false;
 
 	bool have_weights = !firstSetWeights.empty();
+	std::size_t min_sub_mpg_size = (minTopMappingSize < 3 ? minTopMappingSize : std::size_t(3));
 
 	while (nextTopMappingIter != topMappings.end()) {
 		currTopMapping = *nextTopMappingIter;
@@ -477,7 +478,7 @@ bool CDPL::Chem::SpatialEntityAlignment<T>::nextAlignment()
 				almntWeights(i) = std::max(firstSetWeights[first_idx], secondSetWeights[sec_idx]);
 		}
 
-		if (num_points > minTopMappingSize) {
+		if (num_points > min_sub_mpg_size) {
 			Util::STPairArray* sub_mpg = 0;
 			
 			for (std::size_t j = 0; j < num_points; j++) {
@@ -490,17 +491,20 @@ bool CDPL::Chem::SpatialEntityAlignment<T>::nextAlignment()
 					if (k != j)
 						sub_mpg->addElement(currTopMapping->getElement(k));
 
-				// Unsafe duplicate detection method due to hash collisions!
-				// However, should not have an impact in real-world scenarios....
+				// Unsafe duplicate detection method due to possible hash collisions!
+				// However, should not have a noticeable impact in real-world scenarios....
 				if (!seenTopMappings.insert(boost::hash_value(sub_mpg->getData())).second) 
 					continue;
 
-				if (topAlignConstrFunc && !topAlignConstrFunc(*sub_mpg))
-					continue;
+				//if (topAlignConstrFunc && !topAlignConstrFunc(*sub_mpg))
+				//	continue;
 				
 				topMappings.insert(sub_mpg);
 				sub_mpg = 0;
 			}
+
+			if (sub_mpg)
+				topMappingCache.put();
 		}
 		
 		if (!have_weights) {
