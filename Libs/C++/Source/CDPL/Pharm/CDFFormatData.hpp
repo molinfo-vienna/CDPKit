@@ -73,6 +73,8 @@ namespace CDPL
 				const unsigned int OPTIONAL_FLAG           = 8; 
 				const unsigned int HYDROPHOBICITY          = 9;
 				const unsigned int WEIGHT                  = 10;
+				const unsigned int CONE_ANGLE              = 11;
+				const unsigned int INTERACTION_FLAG        = 12;
 			}
 		
 			namespace PharmacophoreProperty

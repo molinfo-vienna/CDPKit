@@ -49,11 +49,13 @@ void CDPLPythonPharm::exportFeatureProperties()
 	    .def_readonly("GEOMETRY", &Pharm::FeatureProperty::GEOMETRY)
 	    .def_readonly("LENGTH", &Pharm::FeatureProperty::LENGTH)
 	    .def_readonly("ORIENTATION", &Pharm::FeatureProperty::ORIENTATION)
+		.def_readonly("CONE_ANGLE", &Pharm::FeatureProperty::CONE_ANGLE)
 	    .def_readonly("TOLERANCE", &Pharm::FeatureProperty::TOLERANCE)
 	    .def_readonly("WEIGHT", &Pharm::FeatureProperty::WEIGHT)
 	    .def_readonly("SUBSTRUCTURE", &Pharm::FeatureProperty::SUBSTRUCTURE)
 	    .def_readonly("DISABLED_FLAG", &Pharm::FeatureProperty::DISABLED_FLAG)
 	    .def_readonly("OPTIONAL_FLAG", &Pharm::FeatureProperty::OPTIONAL_FLAG)
+		.def_readonly("INTERACTION_FLAG", &Pharm::FeatureProperty::INTERACTION_FLAG)
 	    .def_readonly("HYDROPHOBICITY", &Pharm::FeatureProperty::HYDROPHOBICITY)
 		;
 }

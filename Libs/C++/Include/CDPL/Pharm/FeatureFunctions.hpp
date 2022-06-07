@@ -85,6 +85,15 @@ namespace CDPL
 		CDPL_PHARM_API bool hasLength(const Feature& feature);
 
 
+		CDPL_PHARM_API double getConeAngle(const Feature& feature);
+
+		CDPL_PHARM_API void setConeAngle(Feature& feature, double angle);
+
+		CDPL_PHARM_API void clearConeAngle(Feature& feature);
+
+		CDPL_PHARM_API bool hasConeAngle(const Feature& feature);
+
+
 		CDPL_PHARM_API double getTolerance(const Feature& feature);
 
 		CDPL_PHARM_API void setTolerance(Feature& feature, double tol);
@@ -129,6 +138,15 @@ namespace CDPL
 
 		CDPL_PHARM_API bool hasOptionalFlag(const Feature& feature);
 
+
+		CDPL_PHARM_API bool getInteractionFlag(const Feature& feature);
+
+		CDPL_PHARM_API void setInteractionFlag(Feature& feature, bool flag);
+
+		CDPL_PHARM_API void clearInteractionFlag(Feature& feature);
+
+		CDPL_PHARM_API bool hasInteractionFlag(const Feature& feature);
+		
 	
 		CDPL_PHARM_API double getHydrophobicity(const Feature& feature);
 

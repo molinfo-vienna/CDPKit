@@ -120,8 +120,14 @@ void Pharm::CDFPharmacophoreDataWriter::outputFeatures(const FeatureContainer& c
 		if (hasOptionalFlag(feature))
 			putIntProperty(CDF::FeatureProperty::OPTIONAL_FLAG, CDF::BoolType(getOptionalFlag(feature)), bbuf);
 
+		if (hasInteractionFlag(feature))
+			putIntProperty(CDF::FeatureProperty::INTERACTION_FLAG, CDF::BoolType(getInteractionFlag(feature)), bbuf);
+
 		if (hasHydrophobicity(feature))
 			putFloatProperty(CDF::FeatureProperty::HYDROPHOBICITY, getHydrophobicity(feature), bbuf);
+
+		if (hasConeAngle(feature))
+			putFloatProperty(CDF::FeatureProperty::CONE_ANGLE, getConeAngle(feature), bbuf);
 
 		putPropertyListMarker(CDF::PROP_LIST_END, bbuf);
 	}
