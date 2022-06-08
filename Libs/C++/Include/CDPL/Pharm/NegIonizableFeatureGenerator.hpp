@@ -56,19 +56,19 @@ namespace CDPL
 			/**
 			 * \brief Constructs the \c %NegIonizableFeatureGenerator instance.
 			 */
-			NegIonizableFeatureGenerator(bool fuzzy);
+			NegIonizableFeatureGenerator(bool chgd_grps_only);
 				
 			/**
 			 * \brief Perceives the negative ionizable group features of the molecular graph a\ molgraph and adds 
 			 *        them to the pharmacophore \a pharm.
 			 * \param molgraph The molecular graph for which to perceive the features.
 			 * \param pharm The output pharmacophore where to add the generated features.
-			 * \param fuzzy \c false if features shall be generated only for charged groups.
+			 * \param chgd_grps_only \c true if features shall be generated only for charged groups.
 			 */
-			NegIonizableFeatureGenerator(const Chem::MolecularGraph& molgraph, Pharmacophore& pharm, bool fuzzy);
+			NegIonizableFeatureGenerator(const Chem::MolecularGraph& molgraph, Pharmacophore& pharm, bool chgd_groups_only);
 	    
 		  private:
-			void init(bool);
+			void init(bool chgd_groups_only);
 		};
 
 		/**

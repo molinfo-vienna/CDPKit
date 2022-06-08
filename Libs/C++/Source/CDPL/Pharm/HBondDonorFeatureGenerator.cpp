@@ -35,24 +35,24 @@
 using namespace CDPL; 
 
 
-Pharm::HBondDonorFeatureGenerator::HBondDonorFeatureGenerator(bool fuzzy)
+Pharm::HBondDonorFeatureGenerator::HBondDonorFeatureGenerator(bool static_h_bonds)
 {
-    init(fuzzy);
+    init(static_h_bonds);
 }
 
-Pharm::HBondDonorFeatureGenerator::HBondDonorFeatureGenerator(const Chem::MolecularGraph& molgraph, Pharmacophore& pharm, bool fuzzy) 
+Pharm::HBondDonorFeatureGenerator::HBondDonorFeatureGenerator(const Chem::MolecularGraph& molgraph, Pharmacophore& pharm, bool static_h_bonds) 
 {
-    init(fuzzy);
+    init(static_h_bonds);
     generate(molgraph, pharm);
 }
 
-void Pharm::HBondDonorFeatureGenerator::init(bool fuzzy)
+void Pharm::HBondDonorFeatureGenerator::init(bool static_h_bonds)
 {
     using namespace Chem;
 
     addIncludePattern(parseSMARTS("[CX2:7][#1:9]"), FeatureType::H_BOND_DONOR, 1.5, FeatureGeometry::VECTOR, -1.0);
 
-	if (fuzzy) {
+	if (!static_h_bonds) {
 		addIncludePattern(parseSMARTS("[*](=,:[a,O,S,N])-,:[#7:7][#1:9]"), FeatureType::H_BOND_DONOR, 1.5, FeatureGeometry::VECTOR, -2.0);
 		addIncludePattern(parseSMARTS("[*]=,:[#7:7][#1:9]"), FeatureType::H_BOND_DONOR, 1.5, FeatureGeometry::VECTOR, -2.0);
 		addIncludePattern(parseSMARTS("[#7:7]([*])([*])[#1:9]"), FeatureType::H_BOND_DONOR, 1.5, FeatureGeometry::VECTOR, -2.0);

@@ -39,9 +39,20 @@ void CDPLPythonPharm::exportDefaultPharmacophoreGenerator()
     using namespace CDPL;
 
     python::class_<Pharm::DefaultPharmacophoreGenerator, python::bases<Pharm::PharmacophoreGenerator>,
-				   boost::noncopyable>("DefaultPharmacophoreGenerator", python::no_init)
-		.def(python::init<bool>((python::arg("self"), python::arg("fuzzy"))))
-		.def(python::init<const Chem::MolecularGraph&, Pharm::Pharmacophore&, bool>(
-				 (python::arg("self"), python::arg("molgraph"), python::arg("pharm"), python::arg("fuzzy"))))
+				   boost::noncopyable> cls("DefaultPharmacophoreGenerator", python::no_init);
+	python::scope scope = cls;
+
+	python::enum_<Pharm::DefaultPharmacophoreGenerator::Config>("Config")
+		.value("PI_NI_ON_CHARGED_GROUPS_ONLY", Pharm::DefaultPharmacophoreGenerator::PI_NI_ON_CHARGED_GROUPS_ONLY)
+		.value("STATIC_H_DONORS", Pharm::DefaultPharmacophoreGenerator::STATIC_H_DONORS)
+		.value("DEFAULT_CONFIG", Pharm::DefaultPharmacophoreGenerator::DEFAULT_CONFIG)
+		.export_values();
+
+	cls
+		.def(python::init<Pharm::DefaultPharmacophoreGenerator::Config>((python::arg("self"), python::arg("config") = 
+																		 Pharm::DefaultPharmacophoreGenerator::DEFAULT_CONFIG)))
+		.def(python::init<const Chem::MolecularGraph&, Pharm::Pharmacophore&, Pharm::DefaultPharmacophoreGenerator::Config>(
+				 (python::arg("self"), python::arg("molgraph"), python::arg("pharm"), python::arg("config") = 
+				  Pharm::DefaultPharmacophoreGenerator::DEFAULT_CONFIG)))
 		.def(python::init<const Pharm::DefaultPharmacophoreGenerator&>((python::arg("self"), python::arg("gen"))));
 }

@@ -42,11 +42,11 @@ void CDPLPythonPharm::exportNegIonizableFeatureGenerator()
 
     python::class_<Pharm::NegIonizableFeatureGenerator, python::bases<Pharm::PatternBasedFeatureGenerator>,
 		   boost::noncopyable>("NegIonizableFeatureGenerator", python::no_init)
-		.def(python::init<bool>((python::arg("self"), python::arg("fuzzy"))))
+		.def(python::init<bool>((python::arg("self"), python::arg("chgd_groups_only"))))
 		.def(python::init<const Pharm::NegIonizableFeatureGenerator&>(
 				 (python::arg("self"), python::arg("gen"))))
 		.def(python::init<const Chem::MolecularGraph&, Pharm::Pharmacophore&, bool>(
-				 (python::arg("self"), python::arg("molgraph"), python::arg("pharm"), python::arg("fuzzy"))))
+				 (python::arg("self"), python::arg("molgraph"), python::arg("pharm"), python::arg("chgd_groups_only"))))
 		.def("assign", CDPLPythonBase::copyAssOp(&Pharm::NegIonizableFeatureGenerator::operator=), 
 			 (python::arg("self"), python::arg("gen")), python::return_self<>());
 }

@@ -56,23 +56,44 @@ namespace CDPL
 
 		  public:
 			/**
+			 * \brief Flags controlling feature generation.
+			 */
+			enum Config
+			{
+			
+			  /**
+			   * \brief If set, ionic feature generation is done only for actually charged atoms/groups.
+			   */
+			  PI_NI_ON_CHARGED_GROUPS_ONLY = 0x1,
+
+			  /**
+			   * \brief If set, the HBD feature representation will always be a defined vector
+			   *        from the hydrogen donor heavy atom to the connected hydrogen atom.
+			   */
+			  STATIC_H_DONORS = 0x2,
+
+			  /**
+			   * \brief Default configuration.
+			   */
+			  DEFAULT_CONFIG = 0
+			};
+
+			/**
 			 * \brief Constructs the \c %DefaultPharmacophoreGenerator instance.
 			 */
-			DefaultPharmacophoreGenerator(bool fuzzy);
+			DefaultPharmacophoreGenerator(Config config = DEFAULT_CONFIG);
 
 			/**
 			 * \brief Perceives all pharmacophore features of the molecular graph a\ molgraph
 			 *        and adds them to the pharmacophore \a pharm.
 			 * \param molgraph The molecular graph for which to perceive the features.
 			 * \param pharm The output pharmacophore where to add the generated features.
-			 * \param fuzzy if \c false, ionic feature generation is done only for actually charged
-			 *              atoms/groups and H-donor feature vectors strictly represent the direction
-			 *              of the donor-hydrogens.
+			 * \param config Feature generation configuration.
 			 */
-			DefaultPharmacophoreGenerator(const Chem::MolecularGraph& molgraph, Pharmacophore& pharm, bool fuzzy);
+			DefaultPharmacophoreGenerator(const Chem::MolecularGraph& molgraph, Pharmacophore& pharm, Config config = DEFAULT_CONFIG);
 
 		  private:
-			void init(bool);
+			void init(Config config);
 		};
 
 		/**

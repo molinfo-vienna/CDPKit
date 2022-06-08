@@ -39,24 +39,24 @@
 using namespace CDPL; 
 
 
-Pharm::DefaultPharmacophoreGenerator::DefaultPharmacophoreGenerator(bool fuzzy)
+Pharm::DefaultPharmacophoreGenerator::DefaultPharmacophoreGenerator(Config config)
 {
-    init(fuzzy);
+    init(config);
 }
 
-Pharm::DefaultPharmacophoreGenerator::DefaultPharmacophoreGenerator(const Chem::MolecularGraph& molgraph, Pharmacophore& pharm, bool fuzzy)
+Pharm::DefaultPharmacophoreGenerator::DefaultPharmacophoreGenerator(const Chem::MolecularGraph& molgraph, Pharmacophore& pharm, Config config)
 {
-    init(fuzzy);
+    init(config);
     generate(molgraph, pharm);
 }
 
-void Pharm::DefaultPharmacophoreGenerator::init(bool fuzzy)
+void Pharm::DefaultPharmacophoreGenerator::init(Config config)
 {
 	setFeatureGenerator(FeatureType::HYDROPHOBIC, FeatureGenerator::SharedPointer(new HydrophobicFeatureGenerator()));
 	setFeatureGenerator(FeatureType::AROMATIC, FeatureGenerator::SharedPointer(new AromaticFeatureGenerator()));
-	setFeatureGenerator(FeatureType::NEG_IONIZABLE, FeatureGenerator::SharedPointer(new NegIonizableFeatureGenerator(fuzzy)));
-	setFeatureGenerator(FeatureType::POS_IONIZABLE, FeatureGenerator::SharedPointer(new PosIonizableFeatureGenerator(fuzzy)));
-	setFeatureGenerator(FeatureType::H_BOND_DONOR, FeatureGenerator::SharedPointer(new HBondDonorFeatureGenerator(fuzzy)));
+	setFeatureGenerator(FeatureType::NEG_IONIZABLE, FeatureGenerator::SharedPointer(new NegIonizableFeatureGenerator(config & PI_NI_ON_CHARGED_GROUPS_ONLY)));
+	setFeatureGenerator(FeatureType::POS_IONIZABLE, FeatureGenerator::SharedPointer(new PosIonizableFeatureGenerator(config & PI_NI_ON_CHARGED_GROUPS_ONLY)));
+	setFeatureGenerator(FeatureType::H_BOND_DONOR, FeatureGenerator::SharedPointer(new HBondDonorFeatureGenerator(config & STATIC_H_DONORS)));
     setFeatureGenerator(FeatureType::H_BOND_ACCEPTOR, FeatureGenerator::SharedPointer(new HBondAcceptorFeatureGenerator()));
 
     enableFeature(FeatureType::HYDROPHOBIC, true);

@@ -35,22 +35,22 @@
 using namespace CDPL; 
 
 
-Pharm::PosIonizableFeatureGenerator::PosIonizableFeatureGenerator(bool fuzzy)
+Pharm::PosIonizableFeatureGenerator::PosIonizableFeatureGenerator(bool chgd_groups_only)
 {
-    init(fuzzy);
+    init(chgd_groups_only);
 }
 
-Pharm::PosIonizableFeatureGenerator::PosIonizableFeatureGenerator(const Chem::MolecularGraph& molgraph, Pharmacophore& pharm, bool fuzzy)
+Pharm::PosIonizableFeatureGenerator::PosIonizableFeatureGenerator(const Chem::MolecularGraph& molgraph, Pharmacophore& pharm, bool chgd_groups_only)
 {
-    init(fuzzy);
+    init(chgd_groups_only);
     generate(molgraph, pharm);
 }
 
-void Pharm::PosIonizableFeatureGenerator::init(bool fuzzy)
+void Pharm::PosIonizableFeatureGenerator::init(bool chgd_groups_only)
 {
     using namespace Chem;
 
-	if (fuzzy) {
+	if (!chgd_groups_only) {
 		addIncludePattern(parseSMARTS("[NX3:3]([CX4])([CX4,#1])[CX4,#1]"), FeatureType::POS_IONIZABLE, 1.5, FeatureGeometry::SPHERE);
 		addIncludePattern(parseSMARTS("[NX4:3]([CX4])([CX4,#1])([CX4,#1])[CX4,#1]"), FeatureType::POS_IONIZABLE, 1.5, FeatureGeometry::SPHERE);
 		addIncludePattern(parseSMARTS("[N:3]=[CX3:3]([N:3])[!N]"), FeatureType::POS_IONIZABLE, 1.5, FeatureGeometry::SPHERE);

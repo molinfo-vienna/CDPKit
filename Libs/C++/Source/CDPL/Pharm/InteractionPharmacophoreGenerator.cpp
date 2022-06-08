@@ -49,8 +49,9 @@ namespace
 }
 
 
-Pharm::InteractionPharmacophoreGenerator::InteractionPharmacophoreGenerator(bool fuzzy_core_ph4, bool fuzzy_env_ph4):
-	corePharmGen(fuzzy_core_ph4), envPharmGen(fuzzy_env_ph4), coreEnvRadius(8.0), addXVolumes(true)
+Pharm::InteractionPharmacophoreGenerator::InteractionPharmacophoreGenerator(DefaultPharmacophoreGenerator::Config core_ph4_gen_cfg,
+																			DefaultPharmacophoreGenerator::Config env_ph4_gen_cfg):
+	corePharmGen(core_ph4_gen_cfg), envPharmGen(env_ph4_gen_cfg), coreEnvRadius(8.0), addXVolumes(true)
 {}
 
 void Pharm::InteractionPharmacophoreGenerator::setCoreEnvironmentRadius(double radius)

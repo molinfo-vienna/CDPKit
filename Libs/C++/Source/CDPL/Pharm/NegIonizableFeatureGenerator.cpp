@@ -35,22 +35,22 @@
 using namespace CDPL; 
 
 
-Pharm::NegIonizableFeatureGenerator::NegIonizableFeatureGenerator(bool fuzzy)
+Pharm::NegIonizableFeatureGenerator::NegIonizableFeatureGenerator(bool chgd_groups_only)
 {
-    init(fuzzy);
+    init(chgd_groups_only);
 }
 
-Pharm::NegIonizableFeatureGenerator::NegIonizableFeatureGenerator(const Chem::MolecularGraph& molgraph, Pharmacophore& pharm, bool fuzzy)
+Pharm::NegIonizableFeatureGenerator::NegIonizableFeatureGenerator(const Chem::MolecularGraph& molgraph, Pharmacophore& pharm, bool chgd_groups_only)
 {
-    init(fuzzy);
+    init(chgd_groups_only);
     generate(molgraph, pharm);
 }
 
-void Pharm::NegIonizableFeatureGenerator::init(bool fuzzy)
+void Pharm::NegIonizableFeatureGenerator::init(bool chgd_groups_only)
 {
 	using namespace Chem;
 
-	if (fuzzy) {
+	if (!chgd_groups_only) {
 		addIncludePattern(parseSMARTS("[c;!$(c[#7][#6]);!$(c[#7][#7][#6]):3]1[n:3][n:3][n:3][n:3]1"), FeatureType::NEG_IONIZABLE, 1.5, FeatureGeometry::SPHERE);
 		addIncludePattern(parseSMARTS("[P,S:3](~[O:3])(~[O:3])(~[O:3])[OH1,O-:3]"), FeatureType::NEG_IONIZABLE, 2.0, FeatureGeometry::SPHERE);
 		addIncludePattern(parseSMARTS("[P,S:3](~[O:3])(~[O:3])[OH1,O-:3]"), FeatureType::NEG_IONIZABLE, 2.0, FeatureGeometry::SPHERE);

@@ -46,7 +46,7 @@ namespace
 Shape::ScreeningProcessor::ScreeningProcessor():
 	colorFtrType(ScreeningSettings::DEFAULT.getColorFeatureType()), 
 	allCarbon(ScreeningSettings::DEFAULT.allCarbonMode()),
-    expChgPharmGen(false)
+    expChgPharmGen()
 {
 	init();
 }
@@ -54,7 +54,7 @@ Shape::ScreeningProcessor::ScreeningProcessor():
 Shape::ScreeningProcessor::ScreeningProcessor(const Chem::MolecularGraph& query):
 	colorFtrType(ScreeningSettings::DEFAULT.getColorFeatureType()), 
 	allCarbon(ScreeningSettings::DEFAULT.allCarbonMode()),
-    expChgPharmGen(false)
+    expChgPharmGen()
 {
 	init();
 	addQuery(query);

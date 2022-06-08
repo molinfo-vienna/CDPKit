@@ -56,19 +56,19 @@ namespace CDPL
 			/**
 			 * \brief Constructs the \c %PosIonizableFeatureGenerator instance.
 			 */
-			PosIonizableFeatureGenerator(bool fuzzy);
+			PosIonizableFeatureGenerator(bool chgd_groups_only);
 				
 			/**
 			 * \brief Perceives the positive ionizable group features of the molecular graph a\ molgraph and adds 
 			 *        them to the pharmacophore \a pharm.
 			 * \param molgraph The molecular graph for which to perceive the features.
 			 * \param pharm The output pharmacophore where to add the generated features.
-			 * \param fuzzy \c false if features shall be generated only for charged groups.
+			 * \param chgd_groups_only \c true if features shall be generated only for charged groups.
 			 */
-			PosIonizableFeatureGenerator(const Chem::MolecularGraph& molgraph, Pharmacophore& pharm, bool fuzzy);
+			PosIonizableFeatureGenerator(const Chem::MolecularGraph& molgraph, Pharmacophore& pharm, bool chgd_groups_only);
 	    
 		  private:
-			void init(bool);
+			void init(bool chgd_groups_only);
 		};
 
 		/**

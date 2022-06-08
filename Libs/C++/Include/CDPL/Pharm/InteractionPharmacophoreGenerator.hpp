@@ -61,7 +61,8 @@ namespace CDPL
 			/**
 			 * \brief Constructs the \c %InteractionPharmacophoreGenerator instance.
 			 */
-			InteractionPharmacophoreGenerator(bool fuzzy_core_ph4 = true, bool fuzzy_env_ph4 = true);
+			InteractionPharmacophoreGenerator(DefaultPharmacophoreGenerator::Config core_ph4_gen_cfg = DefaultPharmacophoreGenerator::DEFAULT_CONFIG,
+											  DefaultPharmacophoreGenerator::Config env_ph4_gen_cfg = DefaultPharmacophoreGenerator::DEFAULT_CONFIG);
 
 			void setCoreEnvironmentRadius(double radius);
 

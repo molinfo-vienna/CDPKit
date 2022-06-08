@@ -52,7 +52,7 @@ namespace
 
 
 Shape::GaussianShapeGenerator::GaussianShapeGenerator():
-    shapeCache(MAX_SHAPE_CACHE_SIZE), defPharmGen(true), pharmGen(&defPharmGen), genMolShape(true),
+    shapeCache(MAX_SHAPE_CACHE_SIZE), defPharmGen(), pharmGen(&defPharmGen), genMolShape(true),
 	genPharmShape(true), incHydrogens(false), multiConf(true), atomRadius(-1.0), atomHardness(2.7), 
 	ftrRadius(-1.0), ftrHardness(5.0)
 {}
