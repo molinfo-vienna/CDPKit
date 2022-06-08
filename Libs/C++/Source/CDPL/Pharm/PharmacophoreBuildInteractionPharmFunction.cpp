@@ -93,6 +93,7 @@ void Pharm::buildInteractionPharmacophore(Pharmacophore& pharm, const FeatureMap
 					setOrientation(new_ftr, orient);
 					setGeometry(new_ftr, FeatureGeometry::VECTOR);
 					setLength(new_ftr, len);
+					setInteractionFlag(new_ftr, true);
 
 					created_ftrs = true;
 				}

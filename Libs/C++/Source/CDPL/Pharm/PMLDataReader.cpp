@@ -235,6 +235,7 @@ void Pharm::PMLDataReader::addVectorFeature(const XMLNode* ftr_node, Pharmacopho
 		return;
 	
 	setGeometry(*ftr, FeatureGeometry::VECTOR);
+	setInteractionFlag(*ftr, true);
 
 	const XMLAttribute* attr = ftr_node->first_attribute(PML::POINTS_TO_LIGAND_ATTRIBUTE.c_str());
 	bool points_to_lig = false;
