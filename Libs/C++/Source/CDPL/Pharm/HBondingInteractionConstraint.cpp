@@ -42,6 +42,7 @@ namespace
 {
 
 	const double H_BOND_LENGTH = 1.05;
+	const double DEF_H_BOND_TO_AXIS_ANGLE = 65.0;
 }
 
 
@@ -77,26 +78,47 @@ bool Pharm::HBondingInteractionConstraint::operator()(const Feature& ftr1, const
 	const Feature& acc_ftr = (donAccOrder ? ftr2 : ftr1);
 	const Math::Vector3D& don_pos = get3DCoordinates(don_ftr);
 	const Math::Vector3D& acc_pos = get3DCoordinates(acc_ftr);
+	unsigned int don_geom = getGeometry(don_ftr);
 	Math::Vector3D h_acc_vec;
 
-	if (getGeometry(don_ftr) == FeatureGeometry::VECTOR && hasOrientation(don_ftr)) {
+	if ((don_geom == FeatureGeometry::VECTOR || don_geom == FeatureGeometry::SPHERE) && hasOrientation(don_ftr)) {
 		const Math::Vector3D& orient = getOrientation(don_ftr);
-		Math::Vector3D don_h_vec(orient * H_BOND_LENGTH /*getLength(don_ftr)*/);
+
+		if (don_geom == FeatureGeometry::VECTOR) { 
+			Math::Vector3D don_h_vec(orient * H_BOND_LENGTH /*getLength(don_ftr)*/);
 		
-		h_acc_vec.assign(acc_pos - (don_pos + don_h_vec));
+			h_acc_vec.assign(acc_pos - (don_pos + don_h_vec));
 
-		double hb_len = length(h_acc_vec);
+			double hb_len = length(h_acc_vec);
 
-		if (hb_len < minLength || hb_len > maxLength)
-			return false;
+			if (hb_len < minLength || hb_len > maxLength)
+				return false;
 
-		h_acc_vec /= hb_len;
+			h_acc_vec /= hb_len;
+			
+			double ahd_ang = std::acos(angleCos(-orient, h_acc_vec, 1)) * 180.0 / M_PI;
 
-		double ahd_ang = std::acos(angleCos(-orient, h_acc_vec, 1)) * 180.0 / M_PI;
+			if (ahd_ang < minAHDAngle)
+				return false;
+			
+		} else {
+			h_acc_vec.assign(acc_pos - don_pos);
+			
+			double don_acc_vec_len = length(h_acc_vec);
+			double hda_ang = std::abs(std::acos(angleCos(orient, h_acc_vec, don_acc_vec_len)) - DEF_H_BOND_TO_AXIS_ANGLE / 180.0 * M_PI);
+			double hb_len = std::sqrt(H_BOND_LENGTH * H_BOND_LENGTH + don_acc_vec_len * don_acc_vec_len - 2 * H_BOND_LENGTH * don_acc_vec_len * std::cos(hda_ang));
 
-		if (ahd_ang < minAHDAngle)
-			return false;
+			if (hb_len < minLength || hb_len > maxLength)
+				return false;
 
+			double ahd_ang = std::acos((H_BOND_LENGTH * H_BOND_LENGTH - don_acc_vec_len * don_acc_vec_len + hb_len * hb_len) / (2 * H_BOND_LENGTH * hb_len)) * 180.0 / M_PI;
+
+			if (ahd_ang < minAHDAngle)
+				return false;
+
+			h_acc_vec /= hb_len;
+		}
+		
 	} else {
 		h_acc_vec.assign(acc_pos - don_pos);
 
@@ -108,8 +130,8 @@ bool Pharm::HBondingInteractionConstraint::operator()(const Feature& ftr1, const
 
 		h_acc_vec /= don_acc_vec_len;
 	}
-
-	if (getGeometry(acc_ftr) == FeatureGeometry::VECTOR && hasOrientation(acc_ftr)) {
+	
+	if (hasOrientation(acc_ftr)) {
 		const Math::Vector3D& acc_vec = getOrientation(acc_ftr);
 		double acc_ang = std::acos(angleCos(h_acc_vec, acc_vec, 1)) * 180.0 / M_PI;
 

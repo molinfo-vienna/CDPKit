@@ -506,7 +506,7 @@ bool CDPL::Chem::SpatialEntityAlignment<T>::nextAlignment()
 			if (sub_mpg)
 				topMappingCache.put();
 		}
-		
+
 		if (!have_weights) {
 			if (!kabschAlgorithm.align(alignedPoints, refPoints)) {
 				++nextTopMappingIter;

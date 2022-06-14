@@ -39,7 +39,7 @@ using namespace CDPL;
 
 Pharm::SpatialFeatureMapping::SpatialFeatureMapping(bool query_mode):
 	typeMatchFunc(FeatureTypeMatchFunctor()), posMatchFunc(FeaturePositionMatchFunctor(query_mode)),
-	geomMatchFunc(FeatureGeometryMatchFunctor(query_mode))
+	geomMatchFunc(FeatureGeometryMatchFunctor())
 {}
 	
 void Pharm::SpatialFeatureMapping::setTypeMatchFunction(const TypeMatchFunction& func)
@@ -119,7 +119,7 @@ void Pharm::SpatialFeatureMapping::perceive(const FeatureContainer& ref_ftrs, co
 			if (posMatchFunc) {
 				pos_score = posMatchFunc(ref_ftr, aligned_ftr, xform);
 
-				if (pos_score <= 0.0) 
+				if (pos_score <= 0.0)
 					continue;
 			}
 

@@ -62,7 +62,6 @@ namespace CDPL
 			extern CDPL_PHARM_API const Base::LookupKey GEOMETRY; 
 			extern CDPL_PHARM_API const Base::LookupKey LENGTH;
 			extern CDPL_PHARM_API const Base::LookupKey ORIENTATION; 
-			extern CDPL_PHARM_API const Base::LookupKey CONE_ANGLE; 
 			extern CDPL_PHARM_API const Base::LookupKey TOLERANCE; 
 			extern CDPL_PHARM_API const Base::LookupKey WEIGHT; 
 
@@ -70,7 +69,6 @@ namespace CDPL
 
 			extern CDPL_PHARM_API const Base::LookupKey DISABLED_FLAG; 
 			extern CDPL_PHARM_API const Base::LookupKey OPTIONAL_FLAG;
-			extern CDPL_PHARM_API const Base::LookupKey INTERACTION_FLAG; 
 
 			extern CDPL_PHARM_API const Base::LookupKey HYDROPHOBICITY;
 		}

@@ -59,28 +59,41 @@ void CDPLPythonPharm::exportFeatureGeometryMatchFunctor()
 
     python::class_<Pharm::FeatureGeometryMatchFunctor, boost::noncopyable>("FeatureGeometryMatchFunctor", python::no_init)
 		.def(python::init<const Pharm::FeatureGeometryMatchFunctor&>((python::arg("self"), python::arg("func"))))
-		.def(python::init<bool, double, double, double>((python::arg("self"), python::arg("query_mode"),
-														 python::arg("hba_ang_tol") = Pharm::FeatureGeometryMatchFunctor::DEF_HBA_ANGLE_TOLERANCE, 
-														 python::arg("hbd_ang_tol") = Pharm::FeatureGeometryMatchFunctor::DEF_HBD_ANGLE_TOLERANCE,
-														 python::arg("ar_ang_tol") = Pharm::FeatureGeometryMatchFunctor::DEF_AR_PLANE_ANGLE_TOLERANCE)))
+		.def(python::init<bool, double, double, double>((python::arg("self"), 
+														 python::arg("max_hba_int_dir_angle") = Pharm::FeatureGeometryMatchFunctor::DEF_MAX_HBA_INTERACTION_DIR_ANGLE, 
+														 python::arg("max_hba_orient_dev") = Pharm::FeatureGeometryMatchFunctor::DEF_MAX_HBA_ORIENTATION_DEVIATION,
+														 python::arg("max_hbd_int_dir_dev") = Pharm::FeatureGeometryMatchFunctor::DEF_MAX_HBD_INTERACTION_DIR_DEVIATION,
+														 python::arg("max_ar_orient_dev") = Pharm::FeatureGeometryMatchFunctor::DEF_MAX_AR_ORIENTATION_DEVIATION)))
 		.def(CDPLPythonBase::ObjectIdentityCheckVisitor<Pharm::FeatureGeometryMatchFunctor>())
 		.def("assign", CDPLPythonBase::copyAssOp(&Pharm::FeatureGeometryMatchFunctor::operator=), 
 			 (python::arg("self"), python::arg("func")), python::return_self<>())
-		.def("getHBondAcceptorAngleTolerance", &Pharm::FeatureGeometryMatchFunctor::getHBondAcceptorAngleTolerance,
+		.def("getMaxHBAInteractionDirAngle", &Pharm::FeatureGeometryMatchFunctor::getMaxHBAInteractionDirAngle,
 			 python::arg("self"))
-		.def("getHBondDonorAngleTolerance", &Pharm::FeatureGeometryMatchFunctor::getHBondDonorAngleTolerance,
+		.def("setMaxHBAInteractionDirAngle", &Pharm::FeatureGeometryMatchFunctor::setMaxHBAInteractionDirAngle,
+			 (python::arg("self"), python::arg("angle")))
+		.def("getMaxHBAOrientationDeviation",  &Pharm::FeatureGeometryMatchFunctor::getMaxHBAOrientationDeviation, python::arg("self"))
+		.def("setMaxHBAOrientationDeviation", &Pharm::FeatureGeometryMatchFunctor::setMaxHBAOrientationDeviation,
+			 (python::arg("self"), python::arg("angle")))
+		.def("getMaxHBDInteractionDirDeviation", &Pharm::FeatureGeometryMatchFunctor::getMaxHBDInteractionDirDeviation,
 			 python::arg("self"))
-		.def("getAromPlaneAngleTolerance", &Pharm::FeatureGeometryMatchFunctor::getAromPlaneAngleTolerance,
+		.def("setMaxHBDInteractionDirDeviation", &Pharm::FeatureGeometryMatchFunctor::setMaxHBDInteractionDirDeviation,
+			 (python::arg("self"), python::arg("angle")))
+		.def("getMaxAROrientationDeviation", &Pharm::FeatureGeometryMatchFunctor::getMaxAROrientationDeviation,
 			 python::arg("self"))
-		.def("strictGeometryMatching", &Pharm::FeatureGeometryMatchFunctor::strictGeometryMatching,
-			 python::arg("self"))
+		.def("setMaxAROrientationDeviation", &Pharm::FeatureGeometryMatchFunctor::setMaxAROrientationDeviation,
+			 (python::arg("self"), python::arg("angle")))
 		.def("__call__", &callOperator1, (python::arg("self"), python::arg("ftr1"), python::arg("ftr2")))
 		.def("__call__", &callOperator2, (python::arg("self"), python::arg("ftr1"), python::arg("ftr2"), python::arg("xform")))
-		.add_property("hBondAcceptorAngleTolerance", &Pharm::FeatureGeometryMatchFunctor::getHBondAcceptorAngleTolerance)
-		.add_property("hBondDonorAngleTolerance", &Pharm::FeatureGeometryMatchFunctor::getHBondDonorAngleTolerance)
-		.add_property("aromPlaneAngleTolerance", &Pharm::FeatureGeometryMatchFunctor::getAromPlaneAngleTolerance)
-		.add_property("strictGeomMatching", &Pharm::FeatureGeometryMatchFunctor::strictGeometryMatching)
-		.def_readonly("DEF_HBA_ANGLE_TOLERANCE", &Pharm::FeatureGeometryMatchFunctor::DEF_HBA_ANGLE_TOLERANCE)
-		.def_readonly("DEF_HBD_ANGLE_TOLERANCE", &Pharm::FeatureGeometryMatchFunctor::DEF_HBD_ANGLE_TOLERANCE)
-		.def_readonly("DEF_AR_PLANE_ANGLE_TOLERANCE", &Pharm::FeatureGeometryMatchFunctor::DEF_AR_PLANE_ANGLE_TOLERANCE);
+		.add_property("maxHBAInteractionDirAngle", &Pharm::FeatureGeometryMatchFunctor::getMaxHBAInteractionDirAngle,
+					  &Pharm::FeatureGeometryMatchFunctor::setMaxHBAInteractionDirAngle)
+		.add_property("maxHBAOrientationDeviation",  &Pharm::FeatureGeometryMatchFunctor::getMaxHBAOrientationDeviation,
+					  &Pharm::FeatureGeometryMatchFunctor::setMaxHBAOrientationDeviation)
+		.add_property("maxHBDInteractionDirDeviation", &Pharm::FeatureGeometryMatchFunctor::getMaxHBDInteractionDirDeviation,
+					  &Pharm::FeatureGeometryMatchFunctor::setMaxHBDInteractionDirDeviation)
+		.add_property("maxAROrientationDeviation", &Pharm::FeatureGeometryMatchFunctor::getMaxAROrientationDeviation,
+					  &Pharm::FeatureGeometryMatchFunctor::setMaxAROrientationDeviation)
+		.def_readonly("DEF_MAX_HBA_INTERACTION_DIR_ANGLE", &Pharm::FeatureGeometryMatchFunctor::DEF_MAX_HBA_INTERACTION_DIR_ANGLE)
+		.def_readonly("DEF_MAX_HBA_ORIENTATION_DEVIATION", &Pharm::FeatureGeometryMatchFunctor::DEF_MAX_HBA_ORIENTATION_DEVIATION)
+		.def_readonly("DEF_MAX_HBD_INTERACTION_DIR_DEVIATION", &Pharm::FeatureGeometryMatchFunctor::DEF_MAX_HBD_INTERACTION_DIR_DEVIATION)
+		.def_readonly("DEF_MAX_AR_ORIENTATION_DEVIATION", &Pharm::FeatureGeometryMatchFunctor::DEF_MAX_AR_ORIENTATION_DEVIATION);
 }

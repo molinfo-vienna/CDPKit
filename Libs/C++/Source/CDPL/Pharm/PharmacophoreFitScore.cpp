@@ -178,5 +178,7 @@ double Pharm::PharmacophoreFitScore::operator()(const FeatureContainer& ref_ftrs
 		}
 	}
 
-	return (score / num_ftrs);
+	score = (score / (num_ftrs * (ftrMatchCntFactor + ftrPosMatchFactor + ftrGeomMatchFactor)));
+
+	return score;
 }

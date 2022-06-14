@@ -212,6 +212,7 @@ void Pharm::PatternBasedFeatureGenerator::addFeature(const Chem::AtomBondMapping
 
 	switch (ftr_ptn.featureGeom) {
 
+		case FeatureGeometry::SPHERE:
 		case FeatureGeometry::VECTOR: {
 			Math::Vector3D orient;
 			double length = calcVecFeatureOrientation(geomRefAtom1List, geomRefAtom2List, orient);

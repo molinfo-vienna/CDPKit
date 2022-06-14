@@ -34,6 +34,7 @@
 #include "CDPL/Pharm/APIPrefix.hpp"
 
 #include "CDPL/Math/Matrix.hpp"
+#include "CDPL/Math/Vector.hpp"
 
 
 namespace CDPL 
@@ -56,58 +57,62 @@ namespace CDPL
 		{
 
 		  public:
-			static const double DEF_HBA_ANGLE_TOLERANCE;
-			static const double DEF_HBD_ANGLE_TOLERANCE;
-			static const double DEF_AR_PLANE_ANGLE_TOLERANCE;
+		    static const double DEF_MAX_HBA_INTERACTION_DIR_ANGLE;
+		    static const double DEF_MAX_HBA_ORIENTATION_DEVIATION;
+		    static const double DEF_MAX_HBD_INTERACTION_DIR_DEVIATION;
+		    static const double DEF_MAX_AR_ORIENTATION_DEVIATION;
 
-			FeatureGeometryMatchFunctor(bool strict_geom_mode, double hba_ang_tol = DEF_HBA_ANGLE_TOLERANCE, 
-										double hbd_ang_tol = DEF_HBD_ANGLE_TOLERANCE,
-										double ar_ang_tol = DEF_AR_PLANE_ANGLE_TOLERANCE):
-		         strictMode(strict_geom_mode), hbaVecAngleTol(hba_ang_tol), 
-		         hbdVecAngleTol(hbd_ang_tol), arPlaneAngleTol(ar_ang_tol) {}
+			FeatureGeometryMatchFunctor(double max_hba_int_dir_angle = DEF_MAX_HBA_INTERACTION_DIR_ANGLE, 
+										double max_hba_orient_dev = DEF_MAX_HBA_ORIENTATION_DEVIATION,
+										double max_hbd_int_dir_dev = DEF_MAX_HBD_INTERACTION_DIR_DEVIATION,
+										double max_ar_orient_dev = DEF_MAX_AR_ORIENTATION_DEVIATION);
+		  
+		    double getMaxHBAInteractionDirAngle() const;
 
-			double getHBondAcceptorAngleTolerance() const;
+			void setMaxHBAInteractionDirAngle(double angle);
 
-			double getHBondDonorAngleTolerance() const;
+			double getMaxHBAOrientationDeviation() const;
 
-			double getAromPlaneAngleTolerance() const;
+			void setMaxHBAOrientationDeviation(double angle);
 
-			bool strictGeometryMatching() const;
+			double getMaxHBDInteractionDirDeviation() const;
+
+			void setMaxHBDInteractionDirDeviation(double angle);
+
+			double getMaxAROrientationDeviation() const;
+
+			void setMaxAROrientationDeviation(double angle);
 		  
 			/**
-			 * \brief Checks if both \a ftr1 and \a ftr2 have the same feature geometry and calculates a score reflecting the goodness of their spatial match.
-			 *
-			 * If 'strict geometry matching' has been requested, the two features are required to have exactly the same geometry (if they do not, a score of \e 0 is returned).
-			 * Only for features that both possess geometry Pharm::FeatureGeometry::PLANE or Pharm::FeatureGeometry::VECTOR a goodness of match score is calculated. If one of the
-			 * features has a different geometry, a score of \e 1 is returned.
-			 *
+			 * \brief Calculates a score reflecting the goodness of the spatial feature orientation match.
 			 * \param ftr1 The first feature.
 			 * \param ftr2 The second feature.
-			 * \return A score from \e 0 (=spatial deviation outside the allowed range or incompatible geometries) and \e 1 (optimum spatial match) describing the 
-			 *         goodness of the spatial match of the two features.
+			 * \return A score from \e 0 (=spatial deviation outside the allowed range) and \e 1 (optimum match) describing the 
+			 *         goodness of the spatial orientation match of the two features.
 			 */
 			double operator()(const Feature& ftr1, const Feature& ftr2) const;
 
 			/**
-			 * \brief Checks if both \a ftr1 and \a ftr2 have the same feature geometry and calculates a score reflecting the goodness of their spatial match.
-			 *
-			 * If 'strict geometry matching' has been requested, the two features are required to have exactly the same geometry (if they do not, a score of \e 0 is returned).
-			 * Only for features that both possess geometry Pharm::FeatureGeometry::PLANE or Pharm::FeatureGeometry::VECTOR a goodness of match score is calculated. If one of the
-			 * features has a different geometry, a score of \e 1 is returned.
-			 *
+			 * \brief Calculates a score reflecting the goodness of the spatial feature orientation match.
 			 * \param ftr1 The first feature.
 			 * \param ftr2 The second feature.
-			 * \param xform The transformation to apply to the geometrical attributes of the second feature.
-			 * \return A score from \e 0 (=spatial deviation outside the allowed range or incompatible geometries) and \e 1 (optimum spatial match) describing the 
-			 *         goodness of the spatial match of the two features.
+			 * \param xform The transformation to apply to the spatial orientation of the second feature.
+			 * \return A score from \e 0 (=spatial deviation outside the allowed range) and \e 1 (optimum match) describing the 
+			 *         goodness of the spatial orientation match of the two features.
 			 */
 			double operator()(const Feature& ftr1, const Feature& ftr2, const Math::Matrix4D& xform) const;
 
 		  private:
-			bool   strictMode;
-			double hbaVecAngleTol;
-			double hbdVecAngleTol;
-			double arPlaneAngleTol;
+		    double calcHBDFeatureMatchScore(const Feature& ftr1, const Feature& ftr2, const Math::Matrix4D& xform) const;
+		    double calcHBAFeatureMatchScore(const Feature& ftr1, const Feature& ftr2, const Math::Matrix4D& xform) const;
+		    double calcARFeatureMatchScore(const Feature& ftr1, const Feature& ftr2, const Math::Matrix4D& xform) const;
+
+		    void transformOrientation(const Feature& ftr, const Math::Matrix4D& xform, Math::Vector3D& trans_orient) const;
+
+		    double maxHBAInteractionDirAngle;
+		    double maxHBAOrientationDeviation;
+		    double maxHBDInteractionDirDeviation;
+		    double maxAROrientationDeviation;
 		};
 
 		/**

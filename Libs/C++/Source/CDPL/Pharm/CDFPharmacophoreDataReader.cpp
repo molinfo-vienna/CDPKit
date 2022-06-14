@@ -174,19 +174,9 @@ void Pharm::CDFPharmacophoreDataReader::readFeatures(Pharmacophore& pharm, Inter
 					setOptionalFlag(feature, bool_val);
 					continue;
 
-				case CDF::FeatureProperty::INTERACTION_FLAG:
-					getIntProperty(prop_spec, bool_val, bbuf);
-					setInteractionFlag(feature, bool_val);
-					continue;
-
 				case CDF::FeatureProperty::HYDROPHOBICITY:
 					getFloatProperty(prop_spec, double_val, bbuf);
 					setHydrophobicity(feature, double_val);
-					continue;
-
-				case CDF::FeatureProperty::CONE_ANGLE:
-					getFloatProperty(prop_spec, double_val, bbuf);
-					setConeAngle(feature, double_val);
 					continue;
 
 				default:

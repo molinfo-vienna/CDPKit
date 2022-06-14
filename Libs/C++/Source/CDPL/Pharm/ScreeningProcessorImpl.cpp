@@ -74,7 +74,7 @@ namespace
 Pharm::ScreeningProcessorImpl::ScreeningProcessorImpl(ScreeningProcessor& parent, ScreeningDBAccessor& db_acc): 
 	parent(&parent), dbAccessor(&db_acc), reportMode(ScreeningProcessor::FIRST_MATCHING_CONF), maxOmittedFeatures(0),
 	checkXVolumes(true), bestAlignments(false), hitCallback(), progressCallback(), 
-	scoringFunction(PharmacophoreFitScreeningScore()), featureGeomMatchFunction(false), pharmAlignment(true)
+	scoringFunction(PharmacophoreFitScreeningScore()), featureGeomMatchFunction(), pharmAlignment(true)
 {
 
 	pharmAlignment.setTopAlignmentConstraintFunction(
@@ -276,7 +276,7 @@ void Pharm::ScreeningProcessorImpl::initQueryData(const FeatureContainer& query)
 
 	for (FeatureMatrix::iterator it = queryOptFeatures.begin(), end = queryOptFeatures.end(); it != end; ++it) {
 		FeatureList& ftr_list = *it; assert(!ftr_list.empty());		
-		const Feature& max_tol_ftr = **std::max_element(ftr_list.begin(), ftr_list.end(), FeatureTolCmpFunc());
+ 		const Feature& max_tol_ftr = **std::max_element(ftr_list.begin(), ftr_list.end(), FeatureTolCmpFunc());
 		
 		pharmAlignment.addEntity(max_tol_ftr, true);
 		alignedQueryOptFeatures.push_back(&max_tol_ftr);
@@ -473,6 +473,9 @@ bool Pharm::ScreeningProcessorImpl::checkGeomAlignment()
 
 		initDBFeaturesByType = false;
 	}
+
+	if (dbFeaturePositions.isEmpty())
+		get3DCoordinates(dbPharmacophore, dbFeaturePositions);
 
 	const Math::Matrix4D& xform = pharmAlignment.getTransform();
 	Math::Vector3D tmp;
