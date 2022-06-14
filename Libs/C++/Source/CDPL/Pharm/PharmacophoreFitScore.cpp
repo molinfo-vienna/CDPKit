@@ -130,7 +130,7 @@ double Pharm::PharmacophoreFitScore::operator()(const FeatureContainer& ref_ftrs
 		if (getDisabledFlag(ref_ftr))
 			continue;
 
-		if (getType(ref_ftr) == FeatureType::X_VOLUME)
+		if (getType(ref_ftr) == FeatureType::EXCLUSION_VOLUME)
 			continue;
 
 		groupedRefFtrs.push_back(&ref_ftr);

@@ -47,10 +47,10 @@ void CDPLPythonPharm::exportFeatureTypes()
 	.def_readonly("UNKNOWN", &Pharm::FeatureType::UNKNOWN)
 	.def_readonly("HYDROPHOBIC", &Pharm::FeatureType::HYDROPHOBIC)
 	.def_readonly("AROMATIC", &Pharm::FeatureType::AROMATIC)
-	.def_readonly("NEG_IONIZABLE", &Pharm::FeatureType::NEG_IONIZABLE)
-	.def_readonly("POS_IONIZABLE", &Pharm::FeatureType::POS_IONIZABLE)
+	.def_readonly("NEGATIVE_IONIZABLE", &Pharm::FeatureType::NEGATIVE_IONIZABLE)
+	.def_readonly("POSITIVE_IONIZABLE", &Pharm::FeatureType::POSITIVE_IONIZABLE)
 	.def_readonly("H_BOND_DONOR", &Pharm::FeatureType::H_BOND_DONOR)
 	.def_readonly("H_BOND_ACCEPTOR", &Pharm::FeatureType::H_BOND_ACCEPTOR)
-	.def_readonly("X_VOLUME", &Pharm::FeatureType::X_VOLUME)
+	.def_readonly("EXCLUSION_VOLUME", &Pharm::FeatureType::EXCLUSION_VOLUME)
 	.def_readonly("MAX_TYPE", &Pharm::FeatureType::MAX_TYPE);
 }

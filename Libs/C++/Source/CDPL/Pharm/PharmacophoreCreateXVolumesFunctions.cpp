@@ -62,7 +62,7 @@ void Pharm::createExclusionVolumes(Pharmacophore& pharm, const Chem::AtomContain
 	for (Pharmacophore::ConstFeatureIterator it = pharm.getFeaturesBegin(), end = pharm.getFeaturesEnd(); it != end; ++it) {
 		const Feature& ftr = *it;
 
-		if (getType(ftr) != FeatureType::X_VOLUME)
+		if (getType(ftr) != FeatureType::EXCLUSION_VOLUME)
 			continue;
 
 		xvol_positions.push_back(get3DCoordinates(ftr));
@@ -97,7 +97,7 @@ void Pharm::createExclusionVolumes(Pharmacophore& pharm, const Chem::AtomContain
 
 		set3DCoordinates(xvol, atom_pos);
 		setTolerance(xvol, xvol_tol);
-		setType(xvol, FeatureType::X_VOLUME);
+		setType(xvol, FeatureType::EXCLUSION_VOLUME);
 		setGeometry(xvol, FeatureGeometry::SPHERE);
 
 		Fragment::SharedPointer substruct(new Fragment());
@@ -129,7 +129,7 @@ void Pharm::createExclusionVolumes(Pharmacophore& pharm, const FeatureContainer&
 	for (Pharmacophore::ConstFeatureIterator it = pharm.getFeaturesBegin(), end = pharm.getFeaturesEnd(); it != end; ++it) {
 		const Feature& ftr = *it;
 
-		if (getType(ftr) != FeatureType::X_VOLUME)
+		if (getType(ftr) != FeatureType::EXCLUSION_VOLUME)
 			continue;
 
 		xvol_positions.push_back(get3DCoordinates(ftr));
@@ -164,7 +164,7 @@ void Pharm::createExclusionVolumes(Pharmacophore& pharm, const FeatureContainer&
 
 		set3DCoordinates(xvol, ftr_pos);
 		setTolerance(xvol, xvol_tol);
-		setType(xvol, FeatureType::X_VOLUME);
+		setType(xvol, FeatureType::EXCLUSION_VOLUME);
 		setGeometry(xvol, FeatureGeometry::SPHERE);
 
 		if (hasSubstructure(ftr))

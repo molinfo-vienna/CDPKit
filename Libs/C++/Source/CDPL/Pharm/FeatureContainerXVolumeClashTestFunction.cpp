@@ -79,7 +79,7 @@ bool Pharm::checkExclusionVolumeClash(const FeatureContainer& ftr_cntnr, const C
 		if (getDisabledFlag(ftr))
 			continue;
 
-		if (getType(ftr) != FeatureType::X_VOLUME)
+		if (getType(ftr) != FeatureType::EXCLUSION_VOLUME)
 			continue;
 
 		const Math::Vector3D& ftr_pos = get3DCoordinates(ftr);

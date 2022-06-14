@@ -62,8 +62,8 @@ namespace
 	unsigned int FEATURE_TYPES[] = {
 	    Pharm::FeatureType::HYDROPHOBIC,
 		Pharm::FeatureType::AROMATIC,
-		Pharm::FeatureType::NEG_IONIZABLE,
-		Pharm::FeatureType::POS_IONIZABLE,
+		Pharm::FeatureType::NEGATIVE_IONIZABLE,
+		Pharm::FeatureType::POSITIVE_IONIZABLE,
 		Pharm::FeatureType::H_BOND_DONOR,
 		Pharm::FeatureType::H_BOND_ACCEPTOR
 	};

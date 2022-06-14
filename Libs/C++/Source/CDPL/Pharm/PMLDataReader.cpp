@@ -68,8 +68,8 @@ namespace
 		Init() {
 			ls4FeatureTypes.insert(FeatureNameToTypeMap::value_type(Pharm::PML::HYDROPHOBIC_FEATURE_NAME, Pharm::FeatureType::HYDROPHOBIC));
 			ls4FeatureTypes.insert(FeatureNameToTypeMap::value_type(Pharm::PML::AROMATIC_FEATURE_NAME, Pharm::FeatureType::AROMATIC));
-			ls4FeatureTypes.insert(FeatureNameToTypeMap::value_type(Pharm::PML::NEG_IONIZABLE_FEATURE_NAME, Pharm::FeatureType::NEG_IONIZABLE));
-			ls4FeatureTypes.insert(FeatureNameToTypeMap::value_type(Pharm::PML::POS_IONIZABLE_FEATURE_NAME, Pharm::FeatureType::POS_IONIZABLE));
+			ls4FeatureTypes.insert(FeatureNameToTypeMap::value_type(Pharm::PML::NEG_IONIZABLE_FEATURE_NAME, Pharm::FeatureType::NEGATIVE_IONIZABLE));
+			ls4FeatureTypes.insert(FeatureNameToTypeMap::value_type(Pharm::PML::POS_IONIZABLE_FEATURE_NAME, Pharm::FeatureType::POSITIVE_IONIZABLE));
 			ls4FeatureTypes.insert(FeatureNameToTypeMap::value_type(Pharm::PML::H_BOND_DONOR_FEATURE_NAME, Pharm::FeatureType::H_BOND_DONOR));
 			ls4FeatureTypes.insert(FeatureNameToTypeMap::value_type(Pharm::PML::H_BOND_ACCEPTOR_FEATURE_NAME, Pharm::FeatureType::H_BOND_ACCEPTOR));
 		}
@@ -290,7 +290,7 @@ void Pharm::PMLDataReader::addVolumeFeature(const XMLNode* ftr_node, Pharmacopho
 
 	Feature& ftr = pharm.addFeature();
 
-	setType(ftr, FeatureType::X_VOLUME);
+	setType(ftr, FeatureType::EXCLUSION_VOLUME);
 	setGeometry(ftr, FeatureGeometry::SPHERE);
 	
 	getDefaultFeatureProperties(ftr_node, ftr);

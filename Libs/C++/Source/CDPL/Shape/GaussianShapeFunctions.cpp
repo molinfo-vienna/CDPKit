@@ -101,7 +101,7 @@ void Shape::generateGaussianShape(const Pharm::FeatureContainer& features, Gauss
 		const Feature& feature = *it;
 		unsigned int feature_type = getType(feature);
 		
-		if (!inc_xv && feature_type == FeatureType::X_VOLUME)
+		if (!inc_xv && feature_type == FeatureType::EXCLUSION_VOLUME)
 			continue;
 
 		if (radius > 0.0)

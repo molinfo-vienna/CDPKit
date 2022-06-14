@@ -249,7 +249,7 @@ void Pharm::ScreeningProcessorImpl::initQueryData(const FeatureContainer& query)
 		if (getDisabledFlag(ftr))
 			continue;
 
-		if (getType(ftr) == FeatureType::X_VOLUME) {
+		if (getType(ftr) == FeatureType::EXCLUSION_VOLUME) {
 			if (getOptionalFlag(ftr))
 				continue;
 

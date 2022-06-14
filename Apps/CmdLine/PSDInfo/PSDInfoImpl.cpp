@@ -169,8 +169,9 @@ void PSDInfoImpl::printStatistics(const std::string& db_name)
 		if (printFeatureStats) {
 			Pharm::FeatureTypeHistogram min_cnts, max_cnts, avg_cnts;
 			unsigned int ftr_types[] = { Pharm::FeatureType::H_BOND_ACCEPTOR, Pharm::FeatureType::H_BOND_DONOR,
-										 Pharm::FeatureType::NEG_IONIZABLE, Pharm::FeatureType::POS_IONIZABLE,
-										 Pharm::FeatureType::AROMATIC, Pharm::FeatureType::HYDROPHOBIC };
+										 Pharm::FeatureType::NEGATIVE_IONIZABLE, Pharm::FeatureType::POSITIVE_IONIZABLE,
+										 Pharm::FeatureType::AROMATIC, Pharm::FeatureType::HYDROPHOBIC,
+			                             Pharm::FeatureType::HALOGEN_BOND_DONOR };
 
 			for (std::size_t i = 0; i < num_pharms; i++) {
 				const Pharm::FeatureTypeHistogram& ftr_counts = db_acc.getFeatureCounts(i);
@@ -198,18 +199,21 @@ void PSDInfoImpl::printStatistics(const std::string& db_name)
 			printTableRow(oss, "HBD Feature Count", min_cnts[Pharm::FeatureType::H_BOND_DONOR], 
 						  double(avg_cnts[Pharm::FeatureType::H_BOND_DONOR]) / num_pharms, 
 						  max_cnts[Pharm::FeatureType::H_BOND_DONOR]);
-			printTableRow(oss, "NI Feature Count", min_cnts[Pharm::FeatureType::NEG_IONIZABLE], 
-						  double(avg_cnts[Pharm::FeatureType::NEG_IONIZABLE]) / num_pharms, 
-						  max_cnts[Pharm::FeatureType::NEG_IONIZABLE]);
-			printTableRow(oss, "PI Feature Count", min_cnts[Pharm::FeatureType::POS_IONIZABLE], 
-						  double(avg_cnts[Pharm::FeatureType::POS_IONIZABLE]) / num_pharms, 
-						  max_cnts[Pharm::FeatureType::POS_IONIZABLE]);
+			printTableRow(oss, "NI Feature Count", min_cnts[Pharm::FeatureType::NEGATIVE_IONIZABLE], 
+						  double(avg_cnts[Pharm::FeatureType::NEGATIVE_IONIZABLE]) / num_pharms, 
+						  max_cnts[Pharm::FeatureType::NEGATIVE_IONIZABLE]);
+			printTableRow(oss, "PI Feature Count", min_cnts[Pharm::FeatureType::POSITIVE_IONIZABLE], 
+						  double(avg_cnts[Pharm::FeatureType::POSITIVE_IONIZABLE]) / num_pharms, 
+						  max_cnts[Pharm::FeatureType::POSITIVE_IONIZABLE]);
 			printTableRow(oss, "AR Feature Count", min_cnts[Pharm::FeatureType::AROMATIC], 
 						  double(avg_cnts[Pharm::FeatureType::AROMATIC]) / num_pharms, 
 						  max_cnts[Pharm::FeatureType::AROMATIC]);
 			printTableRow(oss, "HYD Feature Count", min_cnts[Pharm::FeatureType::HYDROPHOBIC], 
 						  double(avg_cnts[Pharm::FeatureType::HYDROPHOBIC]) / num_pharms, 
 						  max_cnts[Pharm::FeatureType::HYDROPHOBIC]);
+			printTableRow(oss, "XBD Feature Count", min_cnts[Pharm::FeatureType::HALOGEN_BOND_DONOR], 
+						  double(avg_cnts[Pharm::FeatureType::HALOGEN_BOND_DONOR]) / num_pharms, 
+						  max_cnts[Pharm::FeatureType::HALOGEN_BOND_DONOR]);
 		}
 
 		printMessage(INFO, oss.str(), false);

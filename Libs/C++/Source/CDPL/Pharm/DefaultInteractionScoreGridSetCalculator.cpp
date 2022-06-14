@@ -157,17 +157,17 @@ Grid::DSpatialGrid::SharedPointer Pharm::DefaultInteractionScoreGridSetCalculato
 
 void Pharm::DefaultInteractionScoreGridSetCalculator::init()
 {
-	setScoringFunction(FeatureType::POS_IONIZABLE, FeatureType::NEG_IONIZABLE, IonicInteractionScore());
-	enableInteraction(FeatureType::POS_IONIZABLE, FeatureType::NEG_IONIZABLE, true);
+	setScoringFunction(FeatureType::POSITIVE_IONIZABLE, FeatureType::NEGATIVE_IONIZABLE, IonicInteractionScore());
+	enableInteraction(FeatureType::POSITIVE_IONIZABLE, FeatureType::NEGATIVE_IONIZABLE, true);
 
-	setScoringFunction(FeatureType::NEG_IONIZABLE, FeatureType::POS_IONIZABLE, IonicInteractionScore());
-	enableInteraction(FeatureType::NEG_IONIZABLE, FeatureType::POS_IONIZABLE, true);
+	setScoringFunction(FeatureType::NEGATIVE_IONIZABLE, FeatureType::POSITIVE_IONIZABLE, IonicInteractionScore());
+	enableInteraction(FeatureType::NEGATIVE_IONIZABLE, FeatureType::POSITIVE_IONIZABLE, true);
 
-	setScoringFunction(FeatureType::POS_IONIZABLE, FeatureType::AROMATIC, CationPiInteractionScore(false));
-	enableInteraction(FeatureType::POS_IONIZABLE, FeatureType::AROMATIC, true);
+	setScoringFunction(FeatureType::POSITIVE_IONIZABLE, FeatureType::AROMATIC, CationPiInteractionScore(false));
+	enableInteraction(FeatureType::POSITIVE_IONIZABLE, FeatureType::AROMATIC, true);
 
-	setScoringFunction(FeatureType::AROMATIC, FeatureType::POS_IONIZABLE, CationPiInteractionScore(true));
-	enableInteraction(FeatureType::AROMATIC, FeatureType::POS_IONIZABLE, true);
+	setScoringFunction(FeatureType::AROMATIC, FeatureType::POSITIVE_IONIZABLE, CationPiInteractionScore(true));
+	enableInteraction(FeatureType::AROMATIC, FeatureType::POSITIVE_IONIZABLE, true);
 
 	setScoringFunction(FeatureType::HYDROPHOBIC, FeatureType::HYDROPHOBIC, HydrophobicInteractionScore());
 	enableInteraction(FeatureType::HYDROPHOBIC, FeatureType::HYDROPHOBIC, true);

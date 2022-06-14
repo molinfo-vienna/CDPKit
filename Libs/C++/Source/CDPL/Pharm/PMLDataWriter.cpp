@@ -66,8 +66,8 @@ namespace
 		Init() {
 			ls4FeatureNames.insert(FeatureTypeToNameMap::value_type(Pharm::FeatureType::HYDROPHOBIC, Pharm::PML::HYDROPHOBIC_FEATURE_NAME));
 			ls4FeatureNames.insert(FeatureTypeToNameMap::value_type(Pharm::FeatureType::AROMATIC, Pharm::PML::AROMATIC_FEATURE_NAME));
-			ls4FeatureNames.insert(FeatureTypeToNameMap::value_type(Pharm::FeatureType::NEG_IONIZABLE, Pharm::PML::NEG_IONIZABLE_FEATURE_NAME));
-			ls4FeatureNames.insert(FeatureTypeToNameMap::value_type(Pharm::FeatureType::POS_IONIZABLE, Pharm::PML::POS_IONIZABLE_FEATURE_NAME));
+			ls4FeatureNames.insert(FeatureTypeToNameMap::value_type(Pharm::FeatureType::NEGATIVE_IONIZABLE, Pharm::PML::NEG_IONIZABLE_FEATURE_NAME));
+			ls4FeatureNames.insert(FeatureTypeToNameMap::value_type(Pharm::FeatureType::POSITIVE_IONIZABLE, Pharm::PML::POS_IONIZABLE_FEATURE_NAME));
 			ls4FeatureNames.insert(FeatureTypeToNameMap::value_type(Pharm::FeatureType::H_BOND_DONOR, Pharm::PML::H_BOND_DONOR_FEATURE_NAME));
 			ls4FeatureNames.insert(FeatureTypeToNameMap::value_type(Pharm::FeatureType::H_BOND_ACCEPTOR, Pharm::PML::H_BOND_ACCEPTOR_FEATURE_NAME));
 		}
@@ -173,7 +173,7 @@ void Pharm::PMLDataWriter::writeFeatures(std::ostream& os, const FeatureContaine
 		const Feature& ftr = *it;
 		unsigned int ftr_type = getType(ftr);
 
-		if (ftr_type == FeatureType::X_VOLUME) {
+		if (ftr_type == FeatureType::EXCLUSION_VOLUME) {
 			writeXVolume(os, ftr, id++);
 			continue;
 		}

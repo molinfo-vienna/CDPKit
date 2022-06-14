@@ -49,8 +49,8 @@ namespace
 }
 
 
-Pharm::InteractionPharmacophoreGenerator::InteractionPharmacophoreGenerator(DefaultPharmacophoreGenerator::Config core_ph4_gen_cfg,
-																			DefaultPharmacophoreGenerator::Config env_ph4_gen_cfg):
+Pharm::InteractionPharmacophoreGenerator::InteractionPharmacophoreGenerator(DefaultPharmacophoreGenerator::Configuration core_ph4_gen_cfg,
+																			DefaultPharmacophoreGenerator::Configuration env_ph4_gen_cfg):
 	corePharmGen(core_ph4_gen_cfg), envPharmGen(env_ph4_gen_cfg), coreEnvRadius(8.0), addXVolumes(true)
 {}
 

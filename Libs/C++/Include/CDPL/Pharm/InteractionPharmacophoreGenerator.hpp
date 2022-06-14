@@ -61,8 +61,8 @@ namespace CDPL
 			/**
 			 * \brief Constructs the \c %InteractionPharmacophoreGenerator instance.
 			 */
-			InteractionPharmacophoreGenerator(DefaultPharmacophoreGenerator::Config core_ph4_gen_cfg = DefaultPharmacophoreGenerator::DEFAULT_CONFIG,
-											  DefaultPharmacophoreGenerator::Config env_ph4_gen_cfg = DefaultPharmacophoreGenerator::DEFAULT_CONFIG);
+			InteractionPharmacophoreGenerator(DefaultPharmacophoreGenerator::Configuration core_ph4_gen_cfg = DefaultPharmacophoreGenerator::DEFAULT_CONFIG,
+											  DefaultPharmacophoreGenerator::Configuration env_ph4_gen_cfg = DefaultPharmacophoreGenerator::DEFAULT_CONFIG);
 
 			void setCoreEnvironmentRadius(double radius);
 

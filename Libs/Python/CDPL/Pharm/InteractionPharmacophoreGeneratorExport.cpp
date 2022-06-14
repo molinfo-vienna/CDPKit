@@ -40,7 +40,7 @@ void CDPLPythonPharm::exportInteractionPharmacophoreGenerator()
     using namespace CDPL;
 
 	python::class_<Pharm::InteractionPharmacophoreGenerator, boost::noncopyable>("InteractionPharmacophoreGenerator", python::no_init)
-		.def(python::init<Pharm::DefaultPharmacophoreGenerator::Config, Pharm::DefaultPharmacophoreGenerator::Config>
+		.def(python::init<Pharm::DefaultPharmacophoreGenerator::Configuration, Pharm::DefaultPharmacophoreGenerator::Configuration>
 			 ((python::arg("self"), python::arg("core_ph4_gen_cfg") = Pharm::DefaultPharmacophoreGenerator::DEFAULT_CONFIG, 
 			   python::arg("env_ph4_gen_cfg") = Pharm::DefaultPharmacophoreGenerator::DEFAULT_CONFIG)))
 		.def(python::init<const Pharm::InteractionPharmacophoreGenerator&>((python::arg("self"), python::arg("gen"))))
