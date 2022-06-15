@@ -44,6 +44,10 @@ namespace
 
 	MAKE_FUNCTION_WRAPPER6(void, createExclusionVolumes, CDPL::Pharm::Pharmacophore&,
 						   CDPL::Pharm::FeatureContainer&, double, double, bool, bool);
+
+	MAKE_FUNCTION_WRAPPER3(bool, removeExclusionVolumesWithClashes, CDPL::Pharm::Pharmacophore&,
+						   CDPL::Chem::AtomContainer&, const CDPL::Chem::Atom3DCoordinatesFunction&);
+
 }
 
 
@@ -62,4 +66,6 @@ void CDPLPythonPharm::exportPharmacophoreFunctions()
 				(python::arg("pharm"), python::arg("cntnr"), python::arg("tol") = 0.0, 
 				 python::arg("min_dist") = 0.0, python::arg("rel_dist") = true, 
 				 python::arg("append") = true));
+	python::def("removeExclusionVolumesWithClashes", &removeExclusionVolumesWithClashesWrapper3,
+				(python::arg("pharm"), python::arg("cntnr"), python::arg("coords_func")));
 }

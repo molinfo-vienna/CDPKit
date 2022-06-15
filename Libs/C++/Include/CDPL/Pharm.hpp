@@ -66,6 +66,8 @@
 #include "CDPL/Pharm/HBondDonorFeatureGenerator.hpp"  
 #include "CDPL/Pharm/PosIonizableFeatureGenerator.hpp"  
 #include "CDPL/Pharm/NegIonizableFeatureGenerator.hpp"  
+#include "CDPL/Pharm/XBondAcceptorFeatureGenerator.hpp"  
+#include "CDPL/Pharm/XBondDonorFeatureGenerator.hpp"  
 #include "CDPL/Pharm/PharmacophoreGenerator.hpp"  
 #include "CDPL/Pharm/DefaultPharmacophoreGenerator.hpp"  
 #include "CDPL/Pharm/InteractionAnalyzer.hpp"  

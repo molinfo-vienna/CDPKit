@@ -52,7 +52,9 @@ namespace
 Pharm::InteractionPharmacophoreGenerator::InteractionPharmacophoreGenerator(DefaultPharmacophoreGenerator::Configuration core_ph4_gen_cfg,
 																			DefaultPharmacophoreGenerator::Configuration env_ph4_gen_cfg):
 	corePharmGen(core_ph4_gen_cfg), envPharmGen(env_ph4_gen_cfg), coreEnvRadius(8.0), addXVolumes(true)
-{}
+{
+	envPharmGen.enableFeature(FeatureType::HALOGEN_BOND_ACCEPTOR, true);
+}
 
 void Pharm::InteractionPharmacophoreGenerator::setCoreEnvironmentRadius(double radius)
 {
@@ -172,5 +174,6 @@ void Pharm::InteractionPharmacophoreGenerator::generate(const Chem::MolecularGra
 		removeAtomsIfNot(iaEnvFeatureResAtoms, &isPDBAlphaAtom);
 
 		createExclusionVolumes(ia_pharm, iaEnvFeatureResAtoms, envPharmGen.getAtom3DCoordinatesFunction(), 1.0, 2.0, false);
+		removeExclusionVolumesWithClashes(ia_pharm, core, corePharmGen.getAtom3DCoordinatesFunction());
 	}
 }

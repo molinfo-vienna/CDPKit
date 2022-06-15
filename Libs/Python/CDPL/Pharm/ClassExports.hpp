@@ -107,6 +107,8 @@ namespace CDPLPythonPharm
 	void exportHBondDonorFeatureGenerator();
 	void exportPosIonizableFeatureGenerator();
 	void exportNegIonizableFeatureGenerator();
+	void exportXBondAcceptorFeatureGenerator();
+	void exportXBondDonorFeatureGenerator();
 	void exportInteractionAnalyzer();
 	void exportDefaultInteractionAnalyzer();
 	void exportInteractionConstraintConnector();

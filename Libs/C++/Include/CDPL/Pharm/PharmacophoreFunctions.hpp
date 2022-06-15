@@ -64,6 +64,10 @@ namespace CDPL
 
 		CDPL_PHARM_API void createExclusionVolumes(Pharmacophore& pharm, const FeatureContainer& cntnr, 
 												   double tol = 0.0, double min_dist = 0.0, bool rel_dist = true, bool append = true);
+
+		CDPL_PHARM_API bool removeExclusionVolumesWithClashes(Pharmacophore& pharm, const Chem::AtomContainer& cntnr, 
+															  const Chem::Atom3DCoordinatesFunction& coords_func);
+
 	
 		/**
 		 * @}

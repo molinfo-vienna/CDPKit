@@ -108,6 +108,8 @@ BOOST_PYTHON_MODULE(_pharm)
 	exportHBondDonorFeatureGenerator();
 	exportPosIonizableFeatureGenerator();
 	exportNegIonizableFeatureGenerator();
+	exportXBondAcceptorFeatureGenerator();
+	exportXBondDonorFeatureGenerator();
 	exportInteractionAnalyzer();
 	exportDefaultInteractionAnalyzer();
 	exportInteractionConstraintConnector();

@@ -31,6 +31,8 @@
 #include "CDPL/Pharm/HydrophobicFeatureGenerator.hpp"
 #include "CDPL/Pharm/HBondAcceptorFeatureGenerator.hpp"
 #include "CDPL/Pharm/HBondDonorFeatureGenerator.hpp"
+#include "CDPL/Pharm/XBondAcceptorFeatureGenerator.hpp"
+#include "CDPL/Pharm/XBondDonorFeatureGenerator.hpp"
 #include "CDPL/Pharm/PosIonizableFeatureGenerator.hpp"
 #include "CDPL/Pharm/NegIonizableFeatureGenerator.hpp"
 #include "CDPL/Pharm/FeatureType.hpp"
@@ -55,6 +57,8 @@ void Pharm::DefaultPharmacophoreGenerator::init(Configuration config)
 	setFeatureGenerator(FeatureType::HYDROPHOBIC, FeatureGenerator::SharedPointer(new HydrophobicFeatureGenerator()));
 	setFeatureGenerator(FeatureType::AROMATIC, FeatureGenerator::SharedPointer(new AromaticFeatureGenerator()));
     setFeatureGenerator(FeatureType::H_BOND_ACCEPTOR, FeatureGenerator::SharedPointer(new HBondAcceptorFeatureGenerator()));
+	setFeatureGenerator(FeatureType::HALOGEN_BOND_DONOR, FeatureGenerator::SharedPointer(new XBondDonorFeatureGenerator()));
+    setFeatureGenerator(FeatureType::HALOGEN_BOND_ACCEPTOR, FeatureGenerator::SharedPointer(new XBondAcceptorFeatureGenerator()));
 
 	applyConfiguration(config);
 	
@@ -64,6 +68,7 @@ void Pharm::DefaultPharmacophoreGenerator::init(Configuration config)
     enableFeature(FeatureType::POSITIVE_IONIZABLE, true);
     enableFeature(FeatureType::H_BOND_DONOR, true);
     enableFeature(FeatureType::H_BOND_ACCEPTOR, true);
+    enableFeature(FeatureType::HALOGEN_BOND_DONOR, true);
 }
 
 void Pharm::DefaultPharmacophoreGenerator::applyConfiguration(Configuration config)

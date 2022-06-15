@@ -84,6 +84,8 @@ SET(pharm_MOD_SRCS
     HBondDonorFeatureGeneratorExport.cpp
     PosIonizableFeatureGeneratorExport.cpp
     NegIonizableFeatureGeneratorExport.cpp
+    XBondAcceptorFeatureGeneratorExport.cpp
+    XBondDonorFeatureGeneratorExport.cpp
     InteractionAnalyzerExport.cpp
     DefaultInteractionAnalyzerExport.cpp
     InteractionConstraintConnectorExport.cpp

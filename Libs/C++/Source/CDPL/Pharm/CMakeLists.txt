@@ -52,6 +52,8 @@ SET(cdpl-pharm_LIB_SRCS
     HBondDonorFeatureGenerator.cpp
     PosIonizableFeatureGenerator.cpp
     NegIonizableFeatureGenerator.cpp
+    XBondAcceptorFeatureGenerator.cpp
+    XBondDonorFeatureGenerator.cpp
     PharmacophoreGenerator.cpp
     DefaultPharmacophoreGenerator.cpp
     InteractionAnalyzer.cpp
@@ -122,6 +124,7 @@ SET(cdpl-pharm_LIB_SRCS
 
     PharmacophoreBuildInteractionPharmFunction.cpp
     PharmacophoreCreateXVolumesFunctions.cpp
+    PharmacophoreXVolumeRemoveFunction.cpp
 
     ControlParameterFunctions.cpp
     MoleculeFunctions.cpp
