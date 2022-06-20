@@ -72,6 +72,8 @@ namespace
 			ls4FeatureTypes.insert(FeatureNameToTypeMap::value_type(Pharm::PML::POS_IONIZABLE_FEATURE_NAME, Pharm::FeatureType::POSITIVE_IONIZABLE));
 			ls4FeatureTypes.insert(FeatureNameToTypeMap::value_type(Pharm::PML::H_BOND_DONOR_FEATURE_NAME, Pharm::FeatureType::H_BOND_DONOR));
 			ls4FeatureTypes.insert(FeatureNameToTypeMap::value_type(Pharm::PML::H_BOND_ACCEPTOR_FEATURE_NAME, Pharm::FeatureType::H_BOND_ACCEPTOR));
+			ls4FeatureTypes.insert(FeatureNameToTypeMap::value_type(Pharm::PML::X_BOND_DONOR_FEATURE_NAME, Pharm::FeatureType::HALOGEN_BOND_DONOR));
+			ls4FeatureTypes.insert(FeatureNameToTypeMap::value_type(Pharm::PML::X_BOND_ACCEPTOR_FEATURE_NAME, Pharm::FeatureType::HALOGEN_BOND_ACCEPTOR));
 		}
 
 	} init;

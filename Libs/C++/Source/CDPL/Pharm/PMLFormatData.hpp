@@ -80,6 +80,8 @@ namespace CDPL
 			const std::string POS_IONIZABLE_FEATURE_NAME   = "PI";
 			const std::string H_BOND_DONOR_FEATURE_NAME    = "HBD";
 			const std::string H_BOND_ACCEPTOR_FEATURE_NAME = "HBA";
+			const std::string X_BOND_DONOR_FEATURE_NAME    = "XBD";
+			const std::string X_BOND_ACCEPTOR_FEATURE_NAME = "XBA";
 		}
     }
 }

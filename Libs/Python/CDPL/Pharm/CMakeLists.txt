@@ -96,6 +96,7 @@ SET(pharm_MOD_SRCS
     ParallelPiPiInteractionConstraintExport.cpp
     CationPiInteractionConstraintExport.cpp
     HBondingInteractionConstraintExport.cpp
+    XBondingInteractionConstraintExport.cpp
     InteractionPharmacophoreGeneratorExport.cpp
 
     InteractionScoreCombinerExport.cpp

@@ -58,10 +58,12 @@ void Pharm::buildInteractionPharmacophore(Pharmacophore& pharm, const FeatureMap
 			switch (getType(ftr1)) {
 
 				case FeatureType::H_BOND_ACCEPTOR:
+				case FeatureType::HALOGEN_BOND_ACCEPTOR:
 					dir_factor = -1.0;
 					break;
 
 				case FeatureType::H_BOND_DONOR:
+				case FeatureType::HALOGEN_BOND_DONOR:
 					dir_factor = 1.0;
 
 				default:

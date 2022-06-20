@@ -63,6 +63,7 @@ SET(cdpl-pharm_LIB_SRCS
     HydrophobicInteractionConstraint.cpp
     IonicInteractionConstraint.cpp
     HBondingInteractionConstraint.cpp
+    XBondingInteractionConstraint.cpp
     CationPiInteractionConstraint.cpp
     OrthogonalPiPiInteractionConstraint.cpp
     ParallelPiPiInteractionConstraint.cpp

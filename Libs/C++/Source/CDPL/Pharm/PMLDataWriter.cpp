@@ -70,6 +70,8 @@ namespace
 			ls4FeatureNames.insert(FeatureTypeToNameMap::value_type(Pharm::FeatureType::POSITIVE_IONIZABLE, Pharm::PML::POS_IONIZABLE_FEATURE_NAME));
 			ls4FeatureNames.insert(FeatureTypeToNameMap::value_type(Pharm::FeatureType::H_BOND_DONOR, Pharm::PML::H_BOND_DONOR_FEATURE_NAME));
 			ls4FeatureNames.insert(FeatureTypeToNameMap::value_type(Pharm::FeatureType::H_BOND_ACCEPTOR, Pharm::PML::H_BOND_ACCEPTOR_FEATURE_NAME));
+			ls4FeatureNames.insert(FeatureTypeToNameMap::value_type(Pharm::FeatureType::HALOGEN_BOND_DONOR, Pharm::PML::X_BOND_DONOR_FEATURE_NAME));
+			ls4FeatureNames.insert(FeatureTypeToNameMap::value_type(Pharm::FeatureType::HALOGEN_BOND_ACCEPTOR, Pharm::PML::X_BOND_ACCEPTOR_FEATURE_NAME));
 		}
 
 	} init;
@@ -194,7 +196,9 @@ void Pharm::PMLDataWriter::writeFeatures(std::ostream& os, const FeatureContaine
 				continue;
 
 			case FeatureGeometry::VECTOR:
-				writeVectorFeature(os, ftr, ls4_name, id++, ftr_type == FeatureType::H_BOND_ACCEPTOR);
+				writeVectorFeature(os, ftr, ls4_name, id++,
+								   ftr_type == FeatureType::H_BOND_ACCEPTOR ||
+								   ftr_type == FeatureType::HALOGEN_BOND_ACCEPTOR);
 				continue;
 
 			case FeatureGeometry::PLANE:

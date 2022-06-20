@@ -79,7 +79,8 @@
 #include "CDPL/Pharm/OrthogonalPiPiInteractionConstraint.hpp"  
 #include "CDPL/Pharm/ParallelPiPiInteractionConstraint.hpp"  
 #include "CDPL/Pharm/CationPiInteractionConstraint.hpp"  
-#include "CDPL/Pharm/HBondingInteractionConstraint.hpp"  
+#include "CDPL/Pharm/HBondingInteractionConstraint.hpp"
+#include "CDPL/Pharm/XBondingInteractionConstraint.hpp"  
 #include "CDPL/Pharm/InteractionPharmacophoreGenerator.hpp"  
 
 #include "CDPL/Pharm/InteractionScoreCombiner.hpp"  

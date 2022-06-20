@@ -30,6 +30,7 @@
 #include "CDPL/Pharm/IonicInteractionConstraint.hpp"
 #include "CDPL/Pharm/HydrophobicInteractionConstraint.hpp"
 #include "CDPL/Pharm/HBondingInteractionConstraint.hpp"
+#include "CDPL/Pharm/XBondingInteractionConstraint.hpp"
 #include "CDPL/Pharm/CationPiInteractionConstraint.hpp"
 #include "CDPL/Pharm/OrthogonalPiPiInteractionConstraint.hpp"
 #include "CDPL/Pharm/ParallelPiPiInteractionConstraint.hpp"
@@ -60,6 +61,9 @@ void Pharm::DefaultInteractionAnalyzer::init()
 
 	setConstraintFunction(FeatureType::H_BOND_DONOR, FeatureType::H_BOND_ACCEPTOR, HBondingInteractionConstraint(true));
 	setConstraintFunction(FeatureType::H_BOND_ACCEPTOR, FeatureType::H_BOND_DONOR, HBondingInteractionConstraint(false));
+
+	setConstraintFunction(FeatureType::HALOGEN_BOND_DONOR, FeatureType::HALOGEN_BOND_ACCEPTOR, XBondingInteractionConstraint(true));
+	setConstraintFunction(FeatureType::HALOGEN_BOND_ACCEPTOR, FeatureType::HALOGEN_BOND_DONOR, XBondingInteractionConstraint(false));
 
 	setConstraintFunction(FeatureType::AROMATIC, FeatureType::POSITIVE_IONIZABLE, CationPiInteractionConstraint(true));
 	setConstraintFunction(FeatureType::POSITIVE_IONIZABLE, FeatureType::AROMATIC, CationPiInteractionConstraint(false));
