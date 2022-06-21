@@ -32,6 +32,7 @@
 #include "CDPL/Chem/Atom.hpp"
 #include "CDPL/Chem/Bond.hpp"
 #include "CDPL/Chem/AtomFunctions.hpp"
+#include "CDPL/Chem/Entity3DFunctions.hpp"
 #include "CDPL/Chem/UtilityFunctions.hpp"
 #include "CDPL/Chem/AtomBondMapping.hpp"
 #include "CDPL/Math/Matrix.hpp"
@@ -203,11 +204,16 @@ namespace
 }
 
 
-Chem::AtomHydrophobicityCalculator::AtomHydrophobicityCalculator() {}
+Chem::AtomHydrophobicityCalculator::AtomHydrophobicityCalculator(): 
+	coordsFunc(&get3DCoordinates) 
+{}
 
-Chem::AtomHydrophobicityCalculator::AtomHydrophobicityCalculator(const AtomHydrophobicityCalculator& calc) {}
+Chem::AtomHydrophobicityCalculator::AtomHydrophobicityCalculator(const AtomHydrophobicityCalculator& calc): 
+	coordsFunc(&get3DCoordinates) 
+{}
 
-Chem::AtomHydrophobicityCalculator::AtomHydrophobicityCalculator(const MolecularGraph& molgraph, Util::DArray& hyd_table)
+Chem::AtomHydrophobicityCalculator::AtomHydrophobicityCalculator(const MolecularGraph& molgraph, Util::DArray& hyd_table): 
+	coordsFunc(&get3DCoordinates)
 {
     calculate(molgraph, hyd_table);
 }
@@ -294,7 +300,7 @@ void Chem::AtomHydrophobicityCalculator::calcHydrophobicities(Util::DArray& hyd_
 
 double Chem::AtomHydrophobicityCalculator::calcAccessibleSurfaceFactor(const Atom& atom)
 {
-    double vdw_radius = getVdWRadius(atom);
+	double vdw_radius = getVdWRadius(atom);
 
     if (coordsFunc.empty())
 		return vdw_radius * vdw_radius;
@@ -315,7 +321,7 @@ double Chem::AtomHydrophobicityCalculator::calcAccessibleSurfaceFactor(const Ato
 		if (!molGraph->containsAtom(nbr_atom))
 			continue;
 
-		nbrAtomPositions.push_back(coordsFunc(nbr_atom));
+		nbrAtomPositions.push_back(coordsFunc(nbr_atom) - atom_pos);
 		nbrAtomVdWRadii.push_back(getVdWRadius(nbr_atom));
     }
 
@@ -365,9 +371,9 @@ double Chem::AtomHydrophobicityCalculator::calcAccessibleSurfaceFactor(const Ato
 		double sp_y = spherePoints[i + 1] * vdw_radius;
 		double sp_z = spherePoints[i + 2] * vdw_radius;
 
-		trans_sp(0) = xform(0, 0) * sp_x + xform(0, 1) * sp_y +  xform(0, 2) * sp_z + atom_pos(0);
-		trans_sp(1) = xform(1, 0) * sp_x + xform(1, 1) * sp_y +  xform(1, 2) * sp_z + atom_pos(1);
-		trans_sp(2) = xform(2, 0) * sp_x + xform(2, 1) * sp_y +  xform(2, 2) * sp_z + atom_pos(2);
+		trans_sp(0) = xform(0, 0) * sp_x + xform(0, 1) * sp_y +  xform(0, 2) * sp_z;
+		trans_sp(1) = xform(1, 0) * sp_x + xform(1, 1) * sp_y +  xform(1, 2) * sp_z;
+		trans_sp(2) = xform(2, 0) * sp_x + xform(2, 1) * sp_y +  xform(2, 2) * sp_z;
 
 		for (std::size_t j = 0; j < num_nbrs; j++) {
 			if (length(trans_sp - nbrAtomPositions[j]) < nbrAtomVdWRadii[j]) {

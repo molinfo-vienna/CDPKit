@@ -125,7 +125,7 @@ SET(cdpl-pharm_LIB_SRCS
 
     PharmacophoreBuildInteractionPharmFunction.cpp
     PharmacophoreCreateXVolumesFunctions.cpp
-    PharmacophoreXVolumeRemoveFunction.cpp
+    PharmacophoreXVolumesModificationFunctions.cpp
 
     ControlParameterFunctions.cpp
     MoleculeFunctions.cpp

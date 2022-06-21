@@ -174,6 +174,6 @@ void Pharm::InteractionPharmacophoreGenerator::generate(const Chem::MolecularGra
 		removeAtomsIfNot(iaEnvFeatureResAtoms, &isPDBAlphaAtom);
 
 		createExclusionVolumes(ia_pharm, iaEnvFeatureResAtoms, envPharmGen.getAtom3DCoordinatesFunction(), 1.0, 2.0, false);
-		removeExclusionVolumesWithClashes(ia_pharm, core, corePharmGen.getAtom3DCoordinatesFunction());
+		resizeExclusionVolumesWithClashes(ia_pharm, core, corePharmGen.getAtom3DCoordinatesFunction());
 	}
 }

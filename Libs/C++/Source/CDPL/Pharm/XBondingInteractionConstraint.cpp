@@ -45,9 +45,9 @@ namespace
 }
 
 
-const double Pharm::XBondingInteractionConstraint::DEF_MIN_AX_DISTANCE = 2.0;
+const double Pharm::XBondingInteractionConstraint::DEF_MIN_AX_DISTANCE = 1.6;
 const double Pharm::XBondingInteractionConstraint::DEF_MAX_AX_DISTANCE = 3.5;
-const double Pharm::XBondingInteractionConstraint::DEF_MIN_AXB_ANGLE = 150.0;
+const double Pharm::XBondingInteractionConstraint::DEF_MIN_AXB_ANGLE = 140.0;
 const double Pharm::XBondingInteractionConstraint::DEF_ACC_ANGLE_TOLERANCE = 40.0;
 
 
@@ -73,29 +73,30 @@ double Pharm::XBondingInteractionConstraint::getAcceptorAngleTolerance() const
 
 bool Pharm::XBondingInteractionConstraint::operator()(const Feature& ftr1, const Feature& ftr2) const
 {
-
 	const Feature& don_ftr = (donAccOrder ? ftr1 : ftr2);
 	const Feature& acc_ftr = (donAccOrder ? ftr2 : ftr1);
+
 	const Math::Vector3D& don_pos = get3DCoordinates(don_ftr);
 	const Math::Vector3D& acc_pos = get3DCoordinates(acc_ftr);
 	Math::Vector3D x_acc_vec(acc_pos - don_pos);
+
 	double ax_dist = length(x_acc_vec);
 
 	if (ax_dist < minAXDist || ax_dist > maxAXDist)
 		return false;
 	
-	unsigned int acc_geom = getGeometry(acc_ftr);
-
 	if (hasOrientation(don_ftr)) {
-	
+		double axb_ang = 180.0 - std::acos(angleCos(x_acc_vec, getOrientation(don_ftr), ax_dist)) * 180.0 / M_PI;
 		
+		if (axb_ang < minAXBAngle)
+			return false;
 	}
 	
 	if (hasOrientation(acc_ftr)) {
 		const Math::Vector3D& acc_orient = getOrientation(acc_ftr);
-		double acc_ang_dev = std::acos(angleCos(x_acc_vec, acc_orient, 1)) * 180.0 / M_PI;
+		double acc_ang_dev = std::acos(angleCos(x_acc_vec, acc_orient, ax_dist)) * 180.0 / M_PI;
 			
-		if (acc_geom != FeatureGeometry::VECTOR) 
+		if (getGeometry(acc_ftr) != FeatureGeometry::VECTOR) 
 			acc_ang_dev = std::abs(acc_ang_dev - DEF_LP_TO_AXIS_ANGLE);
 		
 		if (acc_ang_dev > accAngleTol)

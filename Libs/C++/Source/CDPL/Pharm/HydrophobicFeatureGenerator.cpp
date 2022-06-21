@@ -50,15 +50,14 @@ using namespace CDPL;
 namespace
 {
 
-	const std::size_t RING_SIZE_LIMIT      = 7;
-	double MAX_CHAIN_HYD_FACTOR            = 2.0;
+	const std::size_t RING_SIZE_LIMIT = 7;
 }
 
 
 const double       Pharm::HydrophobicFeatureGenerator::DEF_FEATURE_TOL         = 1.5;
-const double       Pharm::HydrophobicFeatureGenerator::DEF_HYD_THRESHOLD_RING  = 7.0;
-const double       Pharm::HydrophobicFeatureGenerator::DEF_HYD_THRESHOLD_CHAIN = 3.0;
-const double       Pharm::HydrophobicFeatureGenerator::DEF_HYD_THRESHOLD_GROUP = 5.0;
+const double       Pharm::HydrophobicFeatureGenerator::DEF_HYD_THRESHOLD_RING  = 2.0;
+const double       Pharm::HydrophobicFeatureGenerator::DEF_HYD_THRESHOLD_CHAIN = 0.8;
+const double       Pharm::HydrophobicFeatureGenerator::DEF_HYD_THRESHOLD_GROUP = 0.8;
 const unsigned int Pharm::HydrophobicFeatureGenerator::DEF_FEATURE_TYPE;
 const unsigned int Pharm::HydrophobicFeatureGenerator::DEF_FEATURE_GEOM;
 
@@ -361,6 +360,9 @@ void Pharm::HydrophobicFeatureGenerator::extractChain(const Chem::Atom& atom)
 
 void Pharm::HydrophobicFeatureGenerator::processChain(Pharmacophore& pharm)
 {
+	if (chainAtoms.size() > 1 && (atomHydTable[molGraph->getAtomIndex(*chainAtoms.front())] > atomHydTable[molGraph->getAtomIndex(*chainAtoms.back())]))
+		std::reverse(chainAtoms.begin(), chainAtoms.end());
+
 	while (!chainAtoms.empty()) {
 		double hyd_sum = 0.0;
 
@@ -371,13 +373,14 @@ void Pharm::HydrophobicFeatureGenerator::processChain(Pharmacophore& pharm)
 			const Chem::Atom* atom = chainAtoms.back();
 			std::size_t atom_idx = molGraph->getAtomIndex(*atom);
 	
-			if ((hyd_sum + atomHydTable[atom_idx] >= hydThreshChain * MAX_CHAIN_HYD_FACTOR) && !featureAtoms.empty())
-				break;
-
 			featureAtoms.push_back(atom);
 			chainAtoms.pop_back();
 			tmpAtomMask.set(atom_idx);
+
 			hyd_sum += atomHydTable[atom_idx];
+
+			if (hyd_sum > hydThreshChain)
+				break;
 		} 
 
 		if (hyd_sum < hydThreshChain)
@@ -623,6 +626,7 @@ void Pharm::HydrophobicFeatureGenerator::getAtomHydrophobicities()
 			continue;
 		}
 
+		atomHydCalculator.setAtom3DCoordinatesFunction(getAtom3DCoordinatesFunction());
 		atomHydCalculator.calculate(*molGraph, atomHydTable);
 		return;
 	}

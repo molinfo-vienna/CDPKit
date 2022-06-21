@@ -1,7 +1,7 @@
 /* -*- mode: c++; c-basic-offset: 4; tab-width: 4; indent-tabs-mode: t -*- */
 
 /* 
- * PharmacophoreXVolumeRemoveFunction.cpp 
+ * PharmacophoreXVolumesModificationFunctions.cpp 
  *
  * This file is part of the Chemical Data Processing Toolkit
  *
@@ -40,10 +40,10 @@
 using namespace CDPL; 
 
 
-bool Pharm::removeExclusionVolumesWithClashes(Pharmacophore& pharm, const Chem::AtomContainer& cntnr, 
-											  const Chem::Atom3DCoordinatesFunction& coords_func)
+bool Pharm::removeExclusionVolumesWithClashes(Pharmacophore& pharm, const Chem::AtomContainer& cntnr,
+											  const Chem::Atom3DCoordinatesFunction& coords_func, double vdw_scaling_fact)
 {
-	bool removed = false;
+	bool modif = false;
 
 	for (std::size_t i = 0; i < pharm.getNumFeatures(); ) {
 		const Feature& ftr = pharm.getFeature(i);
@@ -65,7 +65,7 @@ bool Pharm::removeExclusionVolumesWithClashes(Pharmacophore& pharm, const Chem::
 			tmp.assign(xvol_pos);
 			tmp.minusAssign(atom_pos);
 
-			if ((length(tmp) - xvol_tol - getVdWRadius(atom)) < 0.0) {
+			if ((length(tmp) - xvol_tol - getVdWRadius(atom) * vdw_scaling_fact) < 0.0) {
 				clash = true;
 				break;;
 			}
@@ -73,12 +73,63 @@ bool Pharm::removeExclusionVolumesWithClashes(Pharmacophore& pharm, const Chem::
 
 		if (clash) {
 			pharm.removeFeature(i);
-			removed = true;
+			modif = true;
 			continue;
 		}
 
 		i++;
 	}
 
-	return removed;
+	return modif;
+}
+
+bool Pharm::resizeExclusionVolumesWithClashes(Pharmacophore& pharm, const Chem::AtomContainer& cntnr,
+											  const Chem::Atom3DCoordinatesFunction& coords_func, double vdw_scaling_fact)
+{
+	bool modif = false;
+
+	for (std::size_t i = 0; i < pharm.getNumFeatures(); ) {
+		Feature& ftr = pharm.getFeature(i);
+
+		if (getType(ftr) != FeatureType::EXCLUSION_VOLUME) {
+			i++;
+			continue;
+		}
+
+		const Math::Vector3D& xvol_pos = get3DCoordinates(ftr);
+		double xvol_tol = getTolerance(ftr);
+		Math::Vector3D tmp;
+		bool remove = false;
+
+		for (Chem::AtomContainer::ConstAtomIterator it = cntnr.getAtomsBegin(), end = cntnr.getAtomsEnd(); it != end; ++it) {
+			const Chem::Atom& atom = *it;
+			const Math::Vector3D& atom_pos = coords_func(atom);
+
+			tmp.assign(xvol_pos);
+			tmp.minusAssign(atom_pos);
+
+			double inters = (length(tmp) - xvol_tol - getVdWRadius(atom) * vdw_scaling_fact);
+
+			if (inters < 0.0) {
+				modif = true;
+
+				if ((xvol_tol + inters) < 0.25) {
+					remove = true;
+					break;
+				}
+
+				xvol_tol += inters;
+			}
+		}
+
+		if (remove) {
+			pharm.removeFeature(i);
+			continue;
+		}
+
+		setTolerance(ftr, xvol_tol);
+		i++;
+	}
+
+	return modif;
 }
