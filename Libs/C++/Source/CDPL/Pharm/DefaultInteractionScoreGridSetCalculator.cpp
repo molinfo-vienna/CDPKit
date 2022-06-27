@@ -32,7 +32,8 @@
 #include "CDPL/Pharm/InteractionScoreCombiner.hpp"  
 #include "CDPL/Pharm/HydrophobicInteractionScore.hpp"  
 #include "CDPL/Pharm/IonicInteractionScore.hpp"  
-#include "CDPL/Pharm/HBondingInteractionScore.hpp"  
+#include "CDPL/Pharm/HBondingInteractionScore.hpp"
+#include "CDPL/Pharm/XBondingInteractionScore.hpp"  
 #include "CDPL/Pharm/OrthogonalPiPiInteractionScore.hpp"  
 #include "CDPL/Pharm/ParallelPiPiInteractionScore.hpp"  
 #include "CDPL/Pharm/CationPiInteractionScore.hpp"  
@@ -181,4 +182,8 @@ void Pharm::DefaultInteractionScoreGridSetCalculator::init()
 
 	setScoringFunction(FeatureType::H_BOND_ACCEPTOR, FeatureType::H_BOND_DONOR, HBondingInteractionScore(false));
 	enableInteraction(FeatureType::H_BOND_ACCEPTOR, FeatureType::H_BOND_DONOR, true);
+
+	setScoringFunction(FeatureType::HALOGEN_BOND_DONOR, FeatureType::HALOGEN_BOND_ACCEPTOR, XBondingInteractionScore(true));
+	enableInteraction(FeatureType::HALOGEN_BOND_DONOR, FeatureType::HALOGEN_BOND_ACCEPTOR, true);
+
 }

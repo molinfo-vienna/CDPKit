@@ -130,6 +130,7 @@ namespace CDPLPythonPharm
 	void exportParallelPiPiInteractionScore();
 	void exportCationPiInteractionScore();
 	void exportHBondingInteractionScore();
+	void exportXBondingInteractionScore();
 	void exportInteractionScoreGridCalculator();
 	void exportInteractionScoreGridSetCalculator();
 	void exportDefaultInteractionScoreGridSetCalculator();

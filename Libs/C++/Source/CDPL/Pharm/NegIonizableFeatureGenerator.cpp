@@ -74,7 +74,7 @@ void Pharm::NegIonizableFeatureGenerator::init(bool chgd_groups_only)
 
     addIncludePattern(parseSMARTS("[-,-2,-3,-4,-5,-6,-7;!$(*~[+,+2,+3,+4,+5,+6,+7]):3]"), FeatureType::NEGATIVE_IONIZABLE, 1.5, FeatureGeometry::SPHERE);
 
-    addExcludePattern(parseSMARTS("C(=O)[OH0+0]"));
-    addExcludePattern(parseSMARTS("C(O)O"));
-    addExcludePattern(parseSMARTS("[P,S](~O)(~O)(~O)N"));
+    //addExcludePattern(parseSMARTS("C(=O)[OH0+0]"));
+    //addExcludePattern(parseSMARTS("C(O)O"));
+    //addExcludePattern(parseSMARTS("[P,S](~O)(~O)(~O)N"));
 }

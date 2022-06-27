@@ -74,6 +74,7 @@ SET(cdpl-pharm_LIB_SRCS
     HydrophobicInteractionScore.cpp
     IonicInteractionScore.cpp
     HBondingInteractionScore.cpp
+    XBondingInteractionScore.cpp
     OrthogonalPiPiInteractionScore.cpp
     ParallelPiPiInteractionScore.cpp
     CationPiInteractionScore.cpp

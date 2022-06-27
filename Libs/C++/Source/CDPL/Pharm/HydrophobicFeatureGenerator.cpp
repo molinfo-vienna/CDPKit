@@ -369,7 +369,7 @@ void Pharm::HydrophobicFeatureGenerator::processChain(Pharmacophore& pharm)
 		featureAtoms.clear();
 		tmpAtomMask.reset();
 
-		while (!chainAtoms.empty()) {
+		while (!chainAtoms.empty() && hyd_sum < hydThreshChain) {
 			const Chem::Atom* atom = chainAtoms.back();
 			std::size_t atom_idx = molGraph->getAtomIndex(*atom);
 	
@@ -378,9 +378,6 @@ void Pharm::HydrophobicFeatureGenerator::processChain(Pharmacophore& pharm)
 			tmpAtomMask.set(atom_idx);
 
 			hyd_sum += atomHydTable[atom_idx];
-
-			if (hyd_sum > hydThreshChain)
-				break;
 		} 
 
 		if (hyd_sum < hydThreshChain)

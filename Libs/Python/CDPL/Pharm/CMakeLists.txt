@@ -107,6 +107,7 @@ SET(pharm_MOD_SRCS
     ParallelPiPiInteractionScoreExport.cpp
     CationPiInteractionScoreExport.cpp
     HBondingInteractionScoreExport.cpp
+    XBondingInteractionScoreExport.cpp
     InteractionScoreGridCalculatorExport.cpp
     InteractionScoreGridSetCalculatorExport.cpp
     DefaultInteractionScoreGridSetCalculatorExport.cpp

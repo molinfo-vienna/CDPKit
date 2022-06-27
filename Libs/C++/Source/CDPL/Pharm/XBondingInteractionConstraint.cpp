@@ -48,7 +48,7 @@ namespace
 const double Pharm::XBondingInteractionConstraint::DEF_MIN_AX_DISTANCE = 1.6;
 const double Pharm::XBondingInteractionConstraint::DEF_MAX_AX_DISTANCE = 3.5;
 const double Pharm::XBondingInteractionConstraint::DEF_MIN_AXB_ANGLE = 140.0;
-const double Pharm::XBondingInteractionConstraint::DEF_ACC_ANGLE_TOLERANCE = 40.0;
+const double Pharm::XBondingInteractionConstraint::DEF_ACC_ANGLE_TOLERANCE = 45.0;
 
 
 double Pharm::XBondingInteractionConstraint::getMinAXDistance() const

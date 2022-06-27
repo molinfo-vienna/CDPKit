@@ -44,21 +44,27 @@ namespace
 	
 	const Math::Matrix4D ID_XFORM         = Math::IdentityMatrix<double>(4, 4);
 	const double DEF_H_BOND_TO_AXIS_ANGLE = 65.0;
+	const double DEF_LP_TO_AXIS_ANGLE     = 65.0;
 }
 
 
 const double Pharm::FeatureGeometryMatchFunctor::DEF_MAX_HBA_INTERACTION_DIR_ANGLE     = 85.0;
 const double Pharm::FeatureGeometryMatchFunctor::DEF_MAX_HBA_ORIENTATION_DEVIATION     = 45.0;
 const double Pharm::FeatureGeometryMatchFunctor::DEF_MAX_HBD_INTERACTION_DIR_DEVIATION = 45.0;
+const double Pharm::FeatureGeometryMatchFunctor::DEF_MAX_XBA_INTERACTION_DIR_DEVIATION = 45.0;
+const double Pharm::FeatureGeometryMatchFunctor::DEF_MAX_XBD_INTERACTION_DIR_DEVIATION = 45.0;
 const double Pharm::FeatureGeometryMatchFunctor::DEF_MAX_AR_ORIENTATION_DEVIATION      = 45.0;
 
 
 Pharm::FeatureGeometryMatchFunctor::FeatureGeometryMatchFunctor(double max_hba_int_dir_angle,
 																double max_hba_orient_dev,
 																double max_hbd_int_dir_dev,
+																double max_xba_int_dir_dev,
+																double max_xbd_int_dir_dev,
 																double max_ar_orient_dev):
 	maxHBAInteractionDirAngle(max_hba_int_dir_angle), maxHBAOrientationDeviation(max_hba_orient_dev),
-	maxHBDInteractionDirDeviation(max_hbd_int_dir_dev), maxAROrientationDeviation(max_ar_orient_dev)
+	maxHBDInteractionDirDeviation(max_hbd_int_dir_dev), maxXBAInteractionDirDeviation(max_xba_int_dir_dev),
+	maxXBDInteractionDirDeviation(max_xbd_int_dir_dev),maxAROrientationDeviation(max_ar_orient_dev)
 {}
 
 double Pharm::FeatureGeometryMatchFunctor::getMaxHBAInteractionDirAngle() const
@@ -91,6 +97,26 @@ void Pharm::FeatureGeometryMatchFunctor::setMaxHBDInteractionDirDeviation(double
 	maxHBDInteractionDirDeviation = angle;
 }
 
+double Pharm::FeatureGeometryMatchFunctor::getMaxXBAInteractionDirDeviation() const
+{
+	return maxXBAInteractionDirDeviation;
+}
+
+void Pharm::FeatureGeometryMatchFunctor::setMaxXBAInteractionDirDeviation(double angle)
+{
+	maxXBAInteractionDirDeviation = angle;
+}
+
+double Pharm::FeatureGeometryMatchFunctor::getMaxXBDInteractionDirDeviation() const
+{
+	return maxXBDInteractionDirDeviation;
+}
+
+void Pharm::FeatureGeometryMatchFunctor::setMaxXBDInteractionDirDeviation(double angle)
+{
+	maxXBDInteractionDirDeviation = angle;
+}
+
 double Pharm::FeatureGeometryMatchFunctor::getMaxAROrientationDeviation() const
 {
 	return maxAROrientationDeviation;
@@ -117,6 +143,12 @@ double Pharm::FeatureGeometryMatchFunctor::operator()(const Feature& ftr1, const
 
 		case FeatureType::H_BOND_ACCEPTOR:
 			return calcHBAFeatureMatchScore(ftr1, ftr2, xform);
+
+		case FeatureType::HALOGEN_BOND_DONOR:
+			return calcXBDFeatureMatchScore(ftr1, ftr2, xform);
+
+		case FeatureType::HALOGEN_BOND_ACCEPTOR:
+			return calcXBAFeatureMatchScore(ftr1, ftr2, xform);
 
 		case FeatureType::AROMATIC:
 			return calcARFeatureMatchScore(ftr1, ftr2, xform);
@@ -176,6 +208,49 @@ double Pharm::FeatureGeometryMatchFunctor::calcHBAFeatureMatchScore(const Featur
 		
 	double dev_angle = std::acos(angleCos(getOrientation(ftr1), trans_orient2, 1.0)) / M_PI * 180.0;
 	double score = 1.0 - (dev_angle / max_ang_dev);
+
+	return (score < 0.0 ? 0.0 : score);
+}
+
+double Pharm::FeatureGeometryMatchFunctor::calcXBDFeatureMatchScore(const Feature& ftr1, const Feature& ftr2, const Math::Matrix4D& xform) const
+{
+	if (!hasOrientation(ftr1) || !hasOrientation(ftr2))
+		return 1.0;
+
+	unsigned int ftr1_geom = getGeometry(ftr1);
+	unsigned int ftr2_geom = getGeometry(ftr2);
+	
+	if (!(ftr1_geom == FeatureGeometry::VECTOR && ftr1_geom == ftr2_geom)) 
+		return 1.0;
+
+	Math::Vector3D trans_orient2; transformOrientation(ftr2, xform, trans_orient2);
+		
+	double dev_angle = std::acos(angleCos(getOrientation(ftr1), trans_orient2, 1.0)) / M_PI * 180.0;
+	double score = 1.0 - (dev_angle / maxXBDInteractionDirDeviation);
+
+	return (score < 0.0 ? 0.0 : score);
+}
+
+double Pharm::FeatureGeometryMatchFunctor::calcXBAFeatureMatchScore(const Feature& ftr1, const Feature& ftr2, const Math::Matrix4D& xform) const
+{
+	if (!hasOrientation(ftr1) || !hasOrientation(ftr2))
+		return 1.0;
+
+	unsigned int ftr1_geom = getGeometry(ftr1);
+	unsigned int ftr2_geom = getGeometry(ftr2);
+	double ang_offs = 0.0;
+	
+	if ((ftr1_geom == FeatureGeometry::SPHERE && ftr2_geom == FeatureGeometry::VECTOR) ||
+		(ftr1_geom == FeatureGeometry::VECTOR && ftr2_geom == FeatureGeometry::SPHERE)) {
+		ang_offs = DEF_LP_TO_AXIS_ANGLE;
+
+	} else if (!((ftr1_geom == FeatureGeometry::SPHERE || ftr1_geom == FeatureGeometry::VECTOR) && ftr1_geom == ftr2_geom)) 
+		return 1.0;
+
+	Math::Vector3D trans_orient2; transformOrientation(ftr2, xform, trans_orient2);
+		
+	double dev_angle = std::abs(std::acos(angleCos(getOrientation(ftr1), trans_orient2, 1.0)) / M_PI * 180.0 - ang_offs);
+	double score = 1.0 - (dev_angle / maxXBAInteractionDirDeviation);
 
 	return (score < 0.0 ? 0.0 : score);
 }

@@ -131,6 +131,7 @@ BOOST_PYTHON_MODULE(_pharm)
 	exportParallelPiPiInteractionScore();
 	exportCationPiInteractionScore();
 	exportHBondingInteractionScore();
+	exportXBondingInteractionScore();
 	exportInteractionScoreGridCalculator();
 	exportInteractionScoreGridSetCalculator();
 	exportDefaultInteractionScoreGridSetCalculator();

@@ -60,11 +60,15 @@ namespace CDPL
 		    static const double DEF_MAX_HBA_INTERACTION_DIR_ANGLE;
 		    static const double DEF_MAX_HBA_ORIENTATION_DEVIATION;
 		    static const double DEF_MAX_HBD_INTERACTION_DIR_DEVIATION;
+			static const double DEF_MAX_XBA_INTERACTION_DIR_DEVIATION;
+			static const double DEF_MAX_XBD_INTERACTION_DIR_DEVIATION;
 		    static const double DEF_MAX_AR_ORIENTATION_DEVIATION;
 
 			FeatureGeometryMatchFunctor(double max_hba_int_dir_angle = DEF_MAX_HBA_INTERACTION_DIR_ANGLE, 
 										double max_hba_orient_dev = DEF_MAX_HBA_ORIENTATION_DEVIATION,
 										double max_hbd_int_dir_dev = DEF_MAX_HBD_INTERACTION_DIR_DEVIATION,
+										double max_xba_int_dir_dev = DEF_MAX_XBA_INTERACTION_DIR_DEVIATION,
+										double max_xbd_int_dir_dev = DEF_MAX_XBD_INTERACTION_DIR_DEVIATION,
 										double max_ar_orient_dev = DEF_MAX_AR_ORIENTATION_DEVIATION);
 		  
 		    double getMaxHBAInteractionDirAngle() const;
@@ -79,6 +83,14 @@ namespace CDPL
 
 			void setMaxHBDInteractionDirDeviation(double angle);
 
+			double getMaxXBDInteractionDirDeviation() const;
+
+			void setMaxXBDInteractionDirDeviation(double angle);
+
+			double getMaxXBAInteractionDirDeviation() const;
+
+			void setMaxXBAInteractionDirDeviation(double angle);
+			
 			double getMaxAROrientationDeviation() const;
 
 			void setMaxAROrientationDeviation(double angle);
@@ -105,6 +117,8 @@ namespace CDPL
 		  private:
 		    double calcHBDFeatureMatchScore(const Feature& ftr1, const Feature& ftr2, const Math::Matrix4D& xform) const;
 		    double calcHBAFeatureMatchScore(const Feature& ftr1, const Feature& ftr2, const Math::Matrix4D& xform) const;
+			double calcXBDFeatureMatchScore(const Feature& ftr1, const Feature& ftr2, const Math::Matrix4D& xform) const;
+		    double calcXBAFeatureMatchScore(const Feature& ftr1, const Feature& ftr2, const Math::Matrix4D& xform) const;
 		    double calcARFeatureMatchScore(const Feature& ftr1, const Feature& ftr2, const Math::Matrix4D& xform) const;
 
 		    void transformOrientation(const Feature& ftr, const Math::Matrix4D& xform, Math::Vector3D& trans_orient) const;
@@ -112,6 +126,8 @@ namespace CDPL
 		    double maxHBAInteractionDirAngle;
 		    double maxHBAOrientationDeviation;
 		    double maxHBDInteractionDirDeviation;
+			double maxXBAInteractionDirDeviation;
+			double maxXBDInteractionDirDeviation;
 		    double maxAROrientationDeviation;
 		};
 

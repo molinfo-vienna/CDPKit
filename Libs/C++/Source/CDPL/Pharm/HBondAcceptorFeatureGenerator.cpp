@@ -64,7 +64,8 @@ void Pharm::HBondAcceptorFeatureGenerator::init()
 	addIncludePattern(parseSMARTS("[*:8]-[F:7]"), FeatureType::H_BOND_ACCEPTOR, 1.5, FeatureGeometry::SPHERE);
 
 	addExcludePattern(parseSMARTS("[+1:1]"));
-	addExcludePattern(parseSMARTS("[O,N,S:1]-[a]"));
+	addExcludePattern(parseSMARTS("[N:1]-[a]"));
+	addExcludePattern(parseSMARTS("[O,S:1](-[a])-[a]"));
 	addExcludePattern(parseSMARTS("[O,S:1](-[*])-[P,S,C]=O"));
 	addExcludePattern(parseSMARTS("[N:1]-[P,S,C]=O"));
 	addExcludePattern(parseSMARTS("[N:1]=[P,S,C]-O"));
