@@ -59,7 +59,7 @@ void CDPLPythonPharm::exportFeatureGeometryMatchFunctor()
 
     python::class_<Pharm::FeatureGeometryMatchFunctor, boost::noncopyable>("FeatureGeometryMatchFunctor", python::no_init)
 		.def(python::init<const Pharm::FeatureGeometryMatchFunctor&>((python::arg("self"), python::arg("func"))))
-		.def(python::init<bool, double, double, double, double, double>((python::arg("self"), 
+		.def(python::init<double, double, double, double, double, double>((python::arg("self"), 
 														 python::arg("max_hba_int_dir_angle") = Pharm::FeatureGeometryMatchFunctor::DEF_MAX_HBA_INTERACTION_DIR_ANGLE, 
 														 python::arg("max_hba_orient_dev") = Pharm::FeatureGeometryMatchFunctor::DEF_MAX_HBA_ORIENTATION_DEVIATION,
 														 python::arg("max_hbd_int_dir_dev") = Pharm::FeatureGeometryMatchFunctor::DEF_MAX_HBD_INTERACTION_DIR_DEVIATION,

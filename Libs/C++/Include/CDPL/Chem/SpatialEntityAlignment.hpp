@@ -260,7 +260,7 @@ namespace CDPL
 
 			Util::STPairArray* allocTopMapping();
 			
-			struct MappingCmpFunc : public std::binary_function<const Util::STPairArray*, const Util::STPairArray*, bool>
+			struct TopMappingCmpFunc : public std::binary_function<const Util::STPairArray*, const Util::STPairArray*, bool>
 			{
 
 				bool operator()(const Util::STPairArray* m1, const Util::STPairArray* m2) const {
@@ -268,12 +268,28 @@ namespace CDPL
 				}
 			};
 
-			typedef Util::ObjectStack<Util::STPairArray>              TopMappingCache;
-			typedef std::vector<Math::Vector3D>                       Vector3DArray;
-			typedef std::vector<double>                               DoubleArray;
-			typedef std::multiset<Util::STPairArray*, MappingCmpFunc> TopMappingSet;
-			typedef typename TopMappingSet::iterator                  TopMappingSetIterator;
-			typedef boost::unordered_set<std::size_t>                 TopMappingHashSet;
+			struct TopMappingHashFunc : public std::unary_function<const Util::STPairArray*, std::size_t>
+			{
+
+				std::size_t operator()(const Util::STPairArray* m) const {
+					return boost::hash_value(m->getData());
+				}
+			};
+	
+			struct TopMappingEqCmpFunc : public std::binary_function<const Util::STPairArray*, const Util::STPairArray*, bool>
+			{
+
+				bool operator()(const Util::STPairArray* m1, const Util::STPairArray* m2) const {
+					return (m1->getData() == m2->getData());
+				}
+			};
+
+			typedef Util::ObjectStack<Util::STPairArray>                                                    TopMappingCache;
+			typedef std::vector<Math::Vector3D>                                                             Vector3DArray;
+			typedef std::vector<double>                                                                     DoubleArray;
+			typedef std::multiset<Util::STPairArray*, TopMappingCmpFunc>                                    TopMappingSet;
+			typedef typename TopMappingSet::iterator                                                        TopMappingSetIterator;
+			typedef boost::unordered_set<const Util::STPairArray*, TopMappingHashFunc, TopMappingEqCmpFunc> TopMappingHashSet;
 
 			TopologicalAlignment                   topAlignment;
 			TopMappingSet                          topMappings;
@@ -491,14 +507,9 @@ bool CDPL::Chem::SpatialEntityAlignment<T>::nextAlignment()
 					if (k != j)
 						sub_mpg->addElement(currTopMapping->getElement(k));
 
-				// Unsafe duplicate detection method due to possible hash collisions!
-				// However, should not have a noticeable impact in real-world scenarios....
-				if (!seenTopMappings.insert(boost::hash_value(sub_mpg->getData())).second) 
+				if (!seenTopMappings.insert(sub_mpg).second)
 					continue;
 
-				//if (topAlignConstrFunc && !topAlignConstrFunc(*sub_mpg))
-				//	continue;
-				
 				topMappings.insert(sub_mpg);
 				sub_mpg = 0;
 			}

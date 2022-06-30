@@ -49,7 +49,7 @@ namespace
 
 
 const double Pharm::XBondingInteractionScore::DEF_MIN_AX_DISTANCE = 1.6;
-const double Pharm::XBondingInteractionScore::DEF_MAX_AX_DISTANCE = 3.5;
+const double Pharm::XBondingInteractionScore::DEF_MAX_AX_DISTANCE = 3.75;
 const double Pharm::XBondingInteractionScore::DEF_MIN_AXB_ANGLE = 140.0;
 const double Pharm::XBondingInteractionScore::DEF_ACC_ANGLE_TOLERANCE = 45.0;
 
