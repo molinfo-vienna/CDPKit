@@ -1,16 +1,12 @@
-/* -*- mode: java; tab-width: 4 -*- */
-
 /**
- * \brief Serves as namespace for internal <em>%Boost.%Python</em> types.
- */
-package Boost.Python;
 
-/**
- * \brief The \e %Python base class of all wrapped C++ enumerations.
- */
-class enum extends int {}
+\package Boost.Python
+\brief Serves as namespace for internal <em>%Boost.%Python</em> types.
 
-/**
- * \brief The \e %Python base class of all wrapped C++ classes.
- */
-class instance extends object {}
+\class Boost.Python.enum
+\brief The \e %Python base class of all wrapped C++ enumerations.
+
+\class Boost.Python.instance
+\brief The \e %Python base class of all wrapped C++ classes.
+
+*/
