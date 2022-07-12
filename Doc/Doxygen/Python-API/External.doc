@@ -1,8 +1,5 @@
 /**
 
-\package Boost.Python
-\brief Serves as namespace for internal <em>%Boost.%Python</em> types.
-
 \class Boost.Python.enum
 \brief The \e %Python base class of all wrapped C++ enumerations.
 

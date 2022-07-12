@@ -30,4 +30,10 @@
 \package CDPL.Vis.CairoBackend
 \brief Contains classes related to the implementation of CDPL.Vis interfaces on top of the <em>Cairo 2D Graphics Library</em> [\ref CAIRO].
 
+\package Boost
+\brief The namespace of the <em>Boost Library</em>.
+
+\package Boost.Python
+\brief The namespace of the <em>%Boost.%Python Library</em>.
+
 */

@@ -69,12 +69,12 @@ IF(SPHINX_FOUND)
   IF(DOXYGEN_EXECUTABLE)
     ADD_CUSTOM_COMMAND(TARGET sphinx-doc POST_BUILD
       COMMAND ${CMAKE_COMMAND} -E copy_directory
-      "${CMAKE_CURRENT_BINARY_DIR}/../C++-API/html" "${CMAKE_CURRENT_BINARY_DIR}/html/cxx_api_doc"
+      "${CMAKE_CURRENT_BINARY_DIR}/../Doxygen/C++-API/html" "${CMAKE_CURRENT_BINARY_DIR}/html/cxx_api_doc"
       COMMENT "Copying C++-API documentation to Sphinx output directory")
 
     ADD_CUSTOM_COMMAND(TARGET sphinx-doc POST_BUILD
       COMMAND ${CMAKE_COMMAND} -E copy_directory
-      "${CMAKE_CURRENT_BINARY_DIR}/../Python-API/html" "${CMAKE_CURRENT_BINARY_DIR}/html/python_api_doc"
+      "${CMAKE_CURRENT_BINARY_DIR}/../Doxygen/Python-API/html" "${CMAKE_CURRENT_BINARY_DIR}/html/python_api_doc"
       COMMENT "Copying Python-API documentation to Sphinx output directory")
 
     ADD_DEPENDENCIES(sphinx-doc c++-api-doc)

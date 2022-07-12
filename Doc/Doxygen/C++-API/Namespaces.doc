@@ -30,6 +30,9 @@
 \namespace CDPL::ForceField
 \brief Contains classes and functions related to molecular force fields.
 
+\namespace CDPL::Shape
+\brief Contains classes and functions related to molecular shape representation and processing.
+
 \namespace boost
 \brief The namespace of the Boost C++ Libraries (see [\ref BOOST] for details).
 
