@@ -1,9 +1,0 @@
-/**
-
-\class Boost.Python.enum
-\brief The \e %Python base class of all wrapped C++ enumerations.
-
-\class Boost.Python.instance
-\brief The \e %Python base class of all wrapped C++ classes.
-
-*/
