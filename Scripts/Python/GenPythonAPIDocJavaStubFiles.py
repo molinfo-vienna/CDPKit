@@ -1,7 +1,7 @@
 # -*- mode: python; tab-width: 4 -*- 
 
 ## 
-# GenPythonAPIDocFiles.py 
+# GenPythonAPIDocJavaStubFiles.py 
 #
 # This file is part of the Chemical Data Processing Toolkit
 #
@@ -90,6 +90,8 @@ def cleanModuleName(name):
 	name = name.replace('._pharm', '')
 	name = name.replace('._biomol', '')
 	name = name.replace('._forcefield', '')
+    name = name.replace('._shape', '')
+    name = name.replace('._confgen', '')
 	name = name.replace('._grid', '')
 	name = name.replace('.Exceptions', '')
 	name = name.replace('__builtin__', '')

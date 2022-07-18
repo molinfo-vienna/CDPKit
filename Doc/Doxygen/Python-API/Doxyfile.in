@@ -152,7 +152,7 @@ FULL_PATH_NAMES        = NO
 # will be relative from the directory where doxygen is started.
 # This tag requires that the tag FULL_PATH_NAMES is set to YES.
 
-STRIP_FROM_PATH        = "@CMAKE_CURRENT_BINARY_DIR@"
+STRIP_FROM_PATH        = "@PROC_DOC_FILE_SOURCE_DIR@"
 
 # The STRIP_FROM_INC_PATH tag can be used to strip a user-defined part of the
 # path mentioned in the documentation of a class, which tells the reader which
@@ -772,7 +772,7 @@ WARN_LOGFILE           =
 # Note: If this tag is empty the current directory is searched.
 
 INPUT                  = "@DOXYGEN_DOC_SHARED_DIR@" \
-                         "@CMAKE_CURRENT_BINARY_DIR@/source" \
+                         "@PROC_DOC_FILE_SOURCE_DIR@" \
 
 # This tag can be used to specify the character encoding of the source files
 # that doxygen parses. Internally doxygen uses the UTF-8 encoding. Doxygen uses

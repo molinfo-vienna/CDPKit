@@ -329,11 +329,11 @@ namespace CDPL
 			SymbolToTypeLookupTable  strictSymToTypeTable;
 			SymbolToTypeLookupTable  nonstrictSymToTypeTable;
 		};
-	};
 
-	/**
-	 * @}
-	 */
+		/**
+		 * @}
+		 */
+	};
 }
 
 #endif // CDPL_CHEM_ATOMDICTIONARY_HPP

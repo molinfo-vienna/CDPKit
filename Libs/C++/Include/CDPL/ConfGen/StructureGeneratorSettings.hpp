@@ -133,11 +133,11 @@ namespace CDPL
 			std::size_t                        mcRotorBondCountThresh;
 			FragmentConformerGeneratorSettings fragBuildSettings;
 		};
+		
+		/**
+		 * @}
+		 */
 	};
-
-	/**
-	 * @}
-	 */
 }
 
 #endif // CDPL_CONFGEN_STRUCTUREGENERATORSETTINGS_HPP
