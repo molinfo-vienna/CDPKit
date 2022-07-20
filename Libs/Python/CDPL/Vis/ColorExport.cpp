@@ -39,11 +39,11 @@
 namespace
 {
 
-	std::string colorToString(const CDPL::Vis::Color& col)
+	std::string toString(const CDPL::Vis::Color& col)
 	{
 		std::ostringstream oss;
 
-		oss << "QColor(" << col.getRed() << ", " << col.getGreen() << ", " << col.getBlue() << ", " << col.getAlpha() << ")";
+		oss << "CDPL.Vis.Color(r=" << col.getRed() << ", g=" << col.getGreen() << ", b=" << col.getBlue() << ", a=" << col.getAlpha() << ")";
 
 		return oss.str();
 	}
@@ -77,7 +77,7 @@ void CDPLPythonVis::exportColor()
 			  python::arg("blue"), python::arg("alpha") = 1.0))    
         .def("__eq__", &Vis::Color::operator==, python::arg("self"))
         .def("__ne__", &Vis::Color::operator!=, python::arg("self"))
-		.def("__str__", &colorToString, python::arg("self"))
+		.def("__str__", &toString, python::arg("self"))
 		.add_property("red", &Vis::Color::getRed, &Vis::Color::setRed)
 		.add_property("green", &Vis::Color::getGreen, &Vis::Color::setGreen)
 		.add_property("blue", &Vis::Color::getBlue, &Vis::Color::setBlue)

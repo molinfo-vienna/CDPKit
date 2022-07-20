@@ -24,6 +24,8 @@
  */
 
 
+#include <sstream>
+
 #include <boost/python.hpp>
 
 #include "CDPL/Vis/SizeSpecification.hpp"
@@ -32,6 +34,21 @@
 #include "Base/CopyAssOp.hpp"
 
 #include "ClassExports.hpp"
+
+
+namespace
+{
+
+	std::string toString(const CDPL::Vis::SizeSpecification& spec)
+	{
+		std::ostringstream oss;
+
+		oss << "CDPL.Vis.SizeSpecification(value=" << spec.getValue() << ", relative=" << spec.isRelative() << ", in_scaling=" << spec.followsInputScaling() 
+			<< ", out_scaling=" << spec.followsOutputScaling() << ")";
+
+		return oss.str();
+	}
+}
 
 
 void CDPLPythonVis::exportSizeSpecification()
@@ -59,6 +76,7 @@ void CDPLPythonVis::exportSizeSpecification()
 		.def("setValue", &Vis::SizeSpecification::setValue, (python::arg("self"), python::arg("value")))
 		.def("__eq__", &Vis::SizeSpecification::operator==, (python::arg("self"), python::arg("spec")))
 		.def("__ne__", &Vis::SizeSpecification::operator!=, (python::arg("self"), python::arg("spec")))
+		.def("__str__", &toString, python::arg("self"))
 		.add_property("inputScaling", &Vis::SizeSpecification::followsInputScaling, 
 					  &Vis::SizeSpecification::followInputScaling)
 		.add_property("outputScaling", &Vis::SizeSpecification::followsOutputScaling, 

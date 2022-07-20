@@ -108,6 +108,7 @@ def stripExtModuleName(name):
     name = name.replace('._grid', '')
     name = name.replace('._shape', '')
     name = name.replace('._confgen', '')
+    name = name.replace('OpenMode24', 'OpenMode(24)')
 
     return name
     
@@ -156,10 +157,23 @@ def printMethod(class_obj, func_obj, method_name, out_file, ident):
                 out_file.write(ident + '##\n')
                 out_file.write(ident + '# \\brief ' + method_name + '.\n')
                 out_file.write(ident + '# \\param self The <tt>%' + class_obj.__name__ + '</tt> instance.\n')
+
+                for name in func_data['arg_names']:
+                    if name == 'self': continue
+
+                    out_file.write(ident + '# \\param ' + name + '\n')
+
+                if func_data['ret_type'] != 'None':
+                    out_file.write(ident + '# \\return \n')
+
                 out_file.write(ident + '#\n')
             else:    
                 out_file.write(ident + '##\n')
                 out_file.write(ident + '# \\brief ' + method_name + '.\n')
+
+                for name in func_data['arg_names']:
+                    out_file.write(ident + '# \\param ' + name + '\n')
+
                 out_file.write(ident + '#\n')
                 out_file.write(ident + '@staticmethod\n')
 
@@ -200,30 +214,33 @@ def printEnumeration(enum_obj, out_file = None, ident = '', scope = ''):
 
     for v, k in enum_obj.values.items():
         out_file.write('\n')
-        out_file.write(ident + '\t' + '##\n')
-        out_file.write(ident + '\t' + '# \\brief ' + str(k) + '.\n')
-        out_file.write(ident + '\t' + '#\n')
-        out_file.write(ident + '\t' + str(k) + ' = ' + str(v) + '\n')
+        out_file.write(ident + '    ' + '##\n')
+        out_file.write(ident + '    ' + '# \\brief ' + str(k) + '.\n')
+        out_file.write(ident + '    ' + '#\n')
+        out_file.write(ident + '    ' + str(k) + ' = ' + str(v) + '\n')
 
-def printProperty(property_name, out_file, ident):
+def printProperty(class_obj, prop_obj, property_name, out_file, ident):
     out_file.write('\n')
     out_file.write(ident + '##\n')
-    out_file.write(ident + '# \\brief ' + property_name + '.\n')
+    out_file.write(ident + '# \\brief ' + property_name + '. FIXME!\n')
+    out_file.write(ident + '# \\param self The <tt>%' + class_obj.__name__ + '</tt> instance.\n')
     out_file.write(ident + '#\n')
     out_file.write(ident + '@property\n')
-    out_file.write(ident + 'def ' + property_name + '(self): pass\n')
+    out_file.write(ident + 'def ' + property_name + '(self: ' + class_obj.__name__ + '): pass\n')
 
-def getPropertyValueString(prop_obj):
+def getValueString(prop_obj):
     value = prop_obj.fget()
     type_name = type(value).__name__
 
     if type_name == 'str':
         return '"' + value + '"'
 
-    #if type_name == 'int' or type_name == 'float' or type_name == 'long' or type_name == 'bool':
-    return str(value)
+    value = str(value)
 
-    #return None
+    if value.startswith('<'):
+        return None
+
+    return value.replace(sys.argv[1] + '.', '')
 
 def getPropertyValueType(prop_obj):
     try:
@@ -238,17 +255,6 @@ def getPropertyValueType(prop_obj):
 
     except:
         return 'None'
-
-def getVariableValueString(var_obj):
-    type_name = type(var_obj).__name__
-
-    if type_name == 'str':
-        return '"' + var_obj + '"'
-
-    #if type_name == 'int' or type_name == 'float' or type_name == 'long' or type_name == 'bool':
-    return str(var_obj)
-
-    #return None
 
 def getVariableValueType(var_obj):
     try:
@@ -266,13 +272,18 @@ def getVariableValueType(var_obj):
 def printStaticProperty(property_obj, property_name, out_file, ident):
     out_file.write('\n')
     out_file.write(ident + '##\n')
-    out_file.write(ident + '# \\brief ' + property_name + '.\n')
+
+    value_str = getValueString(property_obj)
+
+    if value_str != None:
+        out_file.write(ident + '# \\brief ' + property_name + '.\n')
+    else:
+        out_file.write(ident + '# \\brief ' + property_name + '. FIXME!\n')
+
     out_file.write(ident + '# \\valuetype ' + getPropertyValueType(property_obj) + '\n')
     out_file.write(ident + '#\n')
     out_file.write(ident + property_name)
-
-    value_str = getPropertyValueString(property_obj)
-
+ 
     if value_str != None:
         out_file.write(' = ' + value_str + '\n')
     else:
@@ -306,7 +317,7 @@ def printClass(class_obj, out_file = None, ident = '', scope = ''):
             continue
 
         if isProperty(obj):
-            properties.append(name)
+            properties.append((obj, name))
         elif isStaticProperty(class_obj, name):
             static_properties.append((obj, name))
         elif isMethod(obj) or isStaticMethod(class_obj, name):
@@ -323,34 +334,34 @@ def printClass(class_obj, out_file = None, ident = '', scope = ''):
 
     for enum_obj in enumerations:
         have_members = True
-        printEnumeration(enum_obj, out_file, ident + '\t', scope + class_obj.__name__ + '.')
+        printEnumeration(enum_obj, out_file, ident + '    ', scope + class_obj.__name__ + '.')
 
     for class_obj2 in classes:
         have_members = True
-        printClass(class_obj2, out_file, ident + '\t', scope + class_obj.__name__ + '.')
+        printClass(class_obj2, out_file, ident + '    ', scope + class_obj.__name__ + '.')
 
     for prop_data in static_properties:
         have_members = True
-        printStaticProperty(prop_data[0], prop_data[1], out_file, ident + '\t')    
+        printStaticProperty(prop_data[0], prop_data[1], out_file, ident + '    ')    
 
     for method_data in constructors:
         have_members = True
-        printMethod(class_obj, method_data[0], method_data[1], out_file, ident + '\t')    
+        printMethod(class_obj, method_data[0], method_data[1], out_file, ident + '    ')    
 
     for method_data in methods:
         have_members = True
-        printMethod(class_obj, method_data[0], method_data[1], out_file, ident + '\t')    
+        printMethod(class_obj, method_data[0], method_data[1], out_file, ident + '    ')    
 
     for method_data in special_methods:
         have_members = True
-        printMethod(class_obj, method_data[0], method_data[1], out_file, ident + '\t')    
+        printMethod(class_obj, method_data[0], method_data[1], out_file, ident + '    ')    
 
-    for prop_name in properties:
+    for prop_data in properties:
         have_members = True
-        printProperty(prop_name, out_file, ident + '\t')    
+        printProperty(class_obj, prop_data[0], prop_data[1], out_file, ident + '    ')    
 
     if not have_members:
-        out_file.write(ident + '\tpass\n')
+        out_file.write(ident + '    pass\n')
         
 def printFunctions(func_objects):
     if len(func_objects) == 0:
@@ -366,6 +377,13 @@ def printFunctions(func_objects):
                 out_file.write('\n')
                 out_file.write('##\n')
                 out_file.write('# \\brief ' + func_obj.__name__ + '.\n')
+    
+                for name in func_data['arg_names']:
+                    out_file.write('# \\param ' + name + '\n')
+
+                if func_data['ret_type'] != 'None':
+                    out_file.write('# \\return \n')
+
                 out_file.write('#\n')
                 out_file.write('def ' + func_data['name'] + '(' + func_data['arg_list'] + ') -> ' + func_data['ret_type'] + ': pass\n')
         else:        
@@ -400,7 +418,7 @@ def getFuncOverloads(func_obj, func_name):
             is_duplicate = False
 
             for func_data in overloads:
-                if func_arg_types == func_data['func_arg_types']:
+                if func_arg_types == func_data['arg_types']:
                     is_duplicate = True    
                     break    
 
@@ -410,8 +428,9 @@ def getFuncOverloads(func_obj, func_name):
                 func_data['name'] = func_name
                 func_data['ret_type'] = extendByModuleName(ret_type)
                 func_data['arg_list'] = addModulesToFuncArgTypes(arg_list)
-                func_data['func_arg_types'] = func_arg_types
-                
+                func_data['arg_types'] = func_arg_types
+                func_data['arg_names'] = extractFuncArgNames(arg_list)                
+
                 overloads.append(func_data)
     
     return overloads
@@ -426,6 +445,21 @@ def extractFuncArgTypes(arg_list):
         arg_types.append(arg_type)
 
     return arg_types
+
+def extractFuncArgNames(arg_list):
+    arg_names = list()
+
+    for arg_type_and_name in arg_list.split(', '):
+        arg_type, sep, name = arg_type_and_name.partition(' ')    
+
+        if '=' in name:
+            name, sep, def_val = name.partition('=')    
+
+        name = name.strip()
+
+        arg_names.append(name)
+
+    return arg_names
 
 def addModulesToFuncArgTypes(arg_list):
     new_arg_list = ''
@@ -466,12 +500,17 @@ def printVariables(variable_objects):
 
         out_file.write('\n')
         out_file.write('##\n')
-        out_file.write('# \\brief ' + name + '.\n')
+
+        value_str = getVariableValueString(var_obj)
+
+        if value_str != None:
+            out_file.write('# \\brief ' + name + '.\n')
+        else:
+            out_file.write('# \\brief ' + name + '. FIXME!\n')
+
         out_file.write('# \\valuetype ' + getVariableValueType(var_obj) + '\n')
         out_file.write('#\n')
         out_file.write(name)
-
-        value_str = getVariableValueString(var_obj)
 
         if value_str != None:
             out_file.write(' = ' + value_str + '\n')

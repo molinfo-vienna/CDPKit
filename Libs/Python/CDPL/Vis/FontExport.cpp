@@ -24,6 +24,8 @@
  */
 
 
+#include <sstream>
+
 #include <boost/python.hpp>
 
 #include "CDPL/Vis/Font.hpp"
@@ -32,6 +34,22 @@
 #include "Base/CopyAssOp.hpp"
 
 #include "ClassExports.hpp"
+
+
+namespace
+{
+
+	std::string toString(const CDPL::Vis::Font& font)
+	{
+		std::ostringstream oss;
+
+		oss << "CDPL.Vis.Font(family='" << font.getFamily() << "', size=" << font.getSize() << ", bold=" << font.isBold() 
+			<< ", italic=" << font.isItalic() << ", ulined=" << font.isUnderlined() <<  ", olined=" << font.isOverlined() 
+			<< ", strkdout=" << font.isStrikedOut() << ", fxdpitch=" << font.hasFixedPitch() << ")";
+
+		return oss.str();
+	}
+}
 
 
 void CDPLPythonVis::exportFont()
@@ -67,6 +85,7 @@ void CDPLPythonVis::exportFont()
 		.def("hasFixedPitch", &Vis::Font::hasFixedPitch, python::arg("self"))
         .def("__eq__", &Vis::Font::operator==, (python::arg("self"), python::arg("font")))    
 		.def("__ne__", &Vis::Font::operator!=, (python::arg("self"), python::arg("font")))
+		.def("__str__", &toString, python::arg("self"))
 		.add_property("family", 
 					  python::make_function(&Vis::Font::getFamily, 
 											python::return_value_policy<python::copy_const_reference>()),
