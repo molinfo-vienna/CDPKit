@@ -24,6 +24,18 @@
 \package CDPL.Biomol
 \brief Contains classes and functions related to biological macromolecules.
 
+\package CDPL.Grid
+\brief Contains classes and functions related to grid based data representation and processing.
+
+\package CDPL.ForceField
+\brief Contains classes and functions related to molecular force fields.
+
+\package CDPL.Shape
+\brief Contains classes and functions related to molecular shape representation and processing.
+
+\package CDPL.ConfGen
+\brief Contains classes and functions related to conformer ensemble generation.
+
 \package CDPL.Vis.QtBackend
 \brief Contains classes related to the implementation of CDPL.Vis interfaces on top of the <em>Qt Toolkit</em> [\ref QTDOC].
 

@@ -1,0 +1,110 @@
+#
+# This file is part of the Chemical Data Processing Toolkit
+#
+# Copyright (C) Thomas A. Seidel <thomas.seidel@univie.ac.at>
+#
+# This program is free software; you can redistribute it and/or
+# modify it under the terms of the GNU Lesser General Public
+# License as published by the Free Software Foundation; either
+# version 2 of the License, or (at your option) any later version.
+#
+# This program is distributed in the hope that it will be useful,
+# but WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU
+# Lesser General Public License for more details.
+#
+# You should have received a copy of the GNU Lesser General Public License
+# along with this program; see the file COPYING. If not, write to
+# the Free Software Foundation, Inc., 59 Temple Place - Suite 330,
+# Boston, MA 02111-1307, USA.
+#
+
+##
+# \brief 
+#
+class GeneralizedBellAtomDensity(Boost.Python.instance):
+
+    ##
+    # \brief 
+    #
+    DEF_RADIUS_SCALING_FACTOR = 1.0
+
+    ##
+    # \brief 
+    #
+    DEF_PROBE_RADIUS = 0.0
+
+    ##
+    # \brief Initializes the \e %GeneralizedBellAtomDensity instance.
+    # \param self The \e %GeneralizedBellAtomDensity instance to initialize.
+    # \param func 
+    #
+    def __init__(self: object, func: GeneralizedBellAtomDensity) -> None: pass
+
+    ##
+    # \brief Initializes the \e %GeneralizedBellAtomDensity instance.
+    # \param self The \e %GeneralizedBellAtomDensity instance to initialize.
+    # \param probe_radius 
+    # \param rad_scaling_factor 
+    #
+    def __init__(self: object, probe_radius: float = 0.0, rad_scaling_factor: float = 1.0) -> None: pass
+
+    ##
+    # \brief Returns the numeric identifier (ID) of the wrapped C++ class instance.
+    # \param self The \e %GeneralizedBellAtomDensity instance this method is called upon.
+    #
+    # Different Python \e %GeneralizedBellAtomDensity instances may reference the same underlying C++ class instance. The commonly used Python expression
+    # <tt>a is not b</tt> thus cannot tell reliably whether the two \e %GeneralizedBellAtomDensity instances \e a and \e b reference different C++ objects. 
+    # The numeric identifier returned by this method allows to correctly implement such an identity test via the simple expression
+    # <tt>a.getObjectID() != b.getObjectID()</tt>.
+    #
+    # \return The numeric ID of the internally referenced C++ class instance.
+    #
+    def getObjectID(self: GeneralizedBellAtomDensity) -> int: pass
+
+    ##
+    # \brief 
+    # \param self The \e %GeneralizedBellAtomDensity instance this method is called upon.
+    # \return 
+    #
+    def getProbeRadius(self: GeneralizedBellAtomDensity) -> float: pass
+
+    ##
+    # \brief 
+    # \param self The \e %GeneralizedBellAtomDensity instance this method is called upon.
+    # \return 
+    #
+    def getRadiusScalingFactor(self: GeneralizedBellAtomDensity) -> float: pass
+
+    ##
+    # \brief Replaces the current state of \a self with a copy of the state of the \e %GeneralizedBellAtomDensity instance \a func.
+    # \param self The \e %GeneralizedBellAtomDensity instance this method is called upon.
+    # \param func The \e %GeneralizedBellAtomDensity instance to copy.
+    # \return The assignment target \a self.
+    #
+    def assign(self: GeneralizedBellAtomDensity, func: GeneralizedBellAtomDensity) -> GeneralizedBellAtomDensity: pass
+
+    ##
+    # \brief 
+    # \param self The \e %GeneralizedBellAtomDensity instance this method is called upon.
+    # \param pos 
+    # \param atom_pos 
+    # \param atom 
+    # \return 
+    #
+    def __call__(self: GeneralizedBellAtomDensity, pos: CDPL.Math.Vector3D, atom_pos: CDPL.Math.Vector3D, atom: Atom) -> float: pass
+
+    ##
+    # \brief 
+    #
+    objectID = property(getObjectID)
+
+    ##
+    # \brief 
+    #
+    probeRadius = property(getProbeRadius)
+
+    ##
+    # \brief 
+    #
+    radiusScalingFactor = property(getRadiusScalingFactor)

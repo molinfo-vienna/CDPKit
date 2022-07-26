@@ -25,6 +25,7 @@
 
 
 #include <sstream>
+#include <iomanip>
 
 #include <boost/python.hpp>
 
@@ -43,10 +44,16 @@ namespace
 	{
 		std::ostringstream oss;
 
-		oss << "CDPL.Vis.Font(family='" << font.getFamily() << "', size=" << font.getSize() << ", bold=" << font.isBold() 
-			<< ", italic=" << font.isItalic() << ", ulined=" << font.isUnderlined() <<  ", olined=" << font.isOverlined() 
-			<< ", strkdout=" << font.isStrikedOut() << ", fxdpitch=" << font.hasFixedPitch() << ")";
+		if (font == CDPL::Vis::Font()) 
+			oss << "CDPL.Vis.Font()";
 
+		else {
+			oss << std::boolalpha;
+			oss << "CDPL.Vis.Font(family='" << font.getFamily() << "', size=" << font.getSize() << ", bold=" << font.isBold() 
+				<< ", italic=" << font.isItalic() << ", ulined=" << font.isUnderlined() <<  ", olined=" << font.isOverlined() 
+				<< ", strkdout=" << font.isStrikedOut() << ", fxdpitch=" << font.hasFixedPitch() << ')';
+		}
+		
 		return oss.str();
 	}
 }

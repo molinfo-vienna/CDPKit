@@ -24,6 +24,8 @@
  */
 
 
+#include <sstream>
+
 #include <boost/python.hpp>
 
 #include "CDPL/Chem/StereoDescriptor.hpp"
@@ -91,6 +93,24 @@ namespace
 	{
 		return descr.isValid(bond);
 	}
+
+	std::string toString(const CDPL::Chem::StereoDescriptor& descr)
+	{
+		std::ostringstream oss;
+
+		oss << "CDPL.Chem.StereoDescriptor(";
+		oss << "config=" << descr.getConfiguration();
+
+		if (descr.getNumReferenceAtoms() >= 3)
+			oss << ", atom1=" << descr.getReferenceAtoms()[0] << ", atom2=" << descr.getReferenceAtoms()[1] << ", atom3=" << descr.getReferenceAtoms()[2];
+
+		if (descr.getNumReferenceAtoms() > 3)
+			oss << ", atom4=" << descr.getReferenceAtoms()[3];
+
+		oss << ')';
+
+		return oss.str();
+	}
 }
 
 void CDPLPythonChem::exportStereoDescriptor()
@@ -130,6 +150,7 @@ void CDPLPythonChem::exportStereoDescriptor()
 		.def(CDPLPythonBase::ObjectIdentityCheckVisitor<Chem::StereoDescriptor>())
 		.def("isValid", &isValidForAtom, (python::arg("self"), python::arg("atom")))
 		.def("isValid", &isValidForBond, (python::arg("self"), python::arg("bond")))
+		.def("__str__", &toString, python::arg("self"))
 		.add_property("configuration", &Chem::StereoDescriptor::getConfiguration, 
 					  &Chem::StereoDescriptor::setConfiguration)  
 		.add_property("numReferenceAtoms", &Chem::StereoDescriptor::getNumReferenceAtoms)  

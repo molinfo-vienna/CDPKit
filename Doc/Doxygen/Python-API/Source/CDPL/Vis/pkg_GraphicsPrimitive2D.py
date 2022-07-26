@@ -1,0 +1,71 @@
+#
+# This file is part of the Chemical Data Processing Toolkit
+#
+# Copyright (C) Thomas A. Seidel <thomas.seidel@univie.ac.at>
+#
+# This program is free software; you can redistribute it and/or
+# modify it under the terms of the GNU Lesser General Public
+# License as published by the Free Software Foundation; either
+# version 2 of the License, or (at your option) any later version.
+#
+# This program is distributed in the hope that it will be useful,
+# but WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU
+# Lesser General Public License for more details.
+#
+# You should have received a copy of the GNU Lesser General Public License
+# along with this program; see the file COPYING. If not, write to
+# the Free Software Foundation, Inc., 59 Temple Place - Suite 330,
+# Boston, MA 02111-1307, USA.
+#
+
+##
+# \brief 
+#
+class GraphicsPrimitive2D(Boost.Python.instance):
+
+    ##
+    # \brief Initializes the \e %GraphicsPrimitive2D instance.
+    # \param self The \e %GraphicsPrimitive2D instance to initialize.
+    #
+    def __init__(self: object) -> None: pass
+
+    ##
+    # \brief Returns the numeric identifier (ID) of the wrapped C++ class instance.
+    # \param self The \e %GraphicsPrimitive2D instance this method is called upon.
+    #
+    # Different Python \e %GraphicsPrimitive2D instances may reference the same underlying C++ class instance. The commonly used Python expression
+    # <tt>a is not b</tt> thus cannot tell reliably whether the two \e %GraphicsPrimitive2D instances \e a and \e b reference different C++ objects. 
+    # The numeric identifier returned by this method allows to correctly implement such an identity test via the simple expression
+    # <tt>a.getObjectID() != b.getObjectID()</tt>.
+    #
+    # \return The numeric ID of the internally referenced C++ class instance.
+    #
+    def getObjectID(self: GraphicsPrimitive2D) -> int: pass
+
+    ##
+    # \brief 
+    # \param self The \e %GraphicsPrimitive2D instance this method is called upon.
+    # \param renderer 
+    #
+    def render(self: GraphicsPrimitive2D, renderer: Renderer2D) -> None: pass
+
+    ##
+    # \brief 
+    # \param self The \e %GraphicsPrimitive2D instance this method is called upon.
+    # \param bounds 
+    # \param font_metrics 
+    #
+    def getBounds(self: GraphicsPrimitive2D, bounds: Rectangle2D, font_metrics: FontMetrics = 0) -> None: pass
+
+    ##
+    # \brief 
+    # \param self The \e %GraphicsPrimitive2D instance this method is called upon.
+    # \return 
+    #
+    def clone(self: GraphicsPrimitive2D) -> GraphicsPrimitive2D: pass
+
+    ##
+    # \brief 
+    #
+    objectID = property(getObjectID)

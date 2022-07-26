@@ -24,6 +24,8 @@
  */
 
 
+#include <sstream>
+
 #include <boost/python.hpp>
 
 #include "CDPL/Base/LookupKey.hpp"
@@ -31,6 +33,20 @@
 #include "CopyAssOp.hpp"
 #include "ObjectIdentityCheckVisitor.hpp"
 #include "ClassExports.hpp"
+
+
+namespace
+{
+
+	std::string toString(const CDPL::Base::LookupKey& key)
+	{
+		std::ostringstream oss;
+
+		oss << "CDPL.Base.LookupKey(id=" << key.getID() << ", name='" << key.getName() << "')";
+
+		return oss.str();
+	}
+}
 
 
 void CDPLPythonBase::exportLookupKey()
@@ -55,5 +71,5 @@ void CDPLPythonBase::exportLookupKey()
 		.def("__lt__", &Base::LookupKey::operator<, (python::arg("self"), python::arg("key")))    
         .def("__eq__", &Base::LookupKey::operator==, (python::arg("self"), python::arg("key")))
         .def("__ne__", &Base::LookupKey::operator!=, (python::arg("self"), python::arg("key")))
-		.def("__str__", &Base::LookupKey::getName, python::arg("self"), python::return_value_policy<python::copy_const_reference>());
+		.def("__str__", &toString, python::arg("self"));
 }

@@ -24,6 +24,8 @@
  */
 
 
+#include <sstream>
+
 #include <boost/python.hpp>
 
 #include "CDPL/Vis/ColorTable.hpp"
@@ -31,6 +33,39 @@
 #include "Util/MapVisitor.hpp"
 
 #include "ClassExports.hpp"
+
+
+namespace
+{
+
+	std::string toString(const CDPL::Vis::ColorTable& tab)
+	{
+		std::ostringstream oss;
+
+		oss << "CDPL.Vis.ColorTable(";
+		
+		if (tab.isEmpty())
+			oss << ')';
+
+		else  {
+			bool first_entry = true;
+
+			for (CDPL::Vis::ColorTable::ConstEntryIterator it = tab.getEntriesBegin(), end = tab.getEntriesEnd(); it != end; ++it) {
+				if (!first_entry)
+					oss << ", ";
+				else
+					oss << '{';
+			
+				oss << it->first << ": (" << it->second.getRed() << ", " << it->second.getGreen() << ", " << it->second.getBlue() << ", " << it->second.getAlpha() << ')'; 
+				first_entry = false;
+			}
+
+			oss << "})";
+		}
+		
+		return oss.str();
+	}
+}
 
 
 void CDPLPythonVis::exportColorTable()
@@ -44,6 +79,7 @@ void CDPLPythonVis::exportColorTable()
 		.def(CDPLPythonUtil::MapVisitor<Vis::ColorTable, 
 			 python::return_internal_reference<>, python::default_call_policies, python::default_call_policies,
 			 python::return_internal_reference<1, python::with_custodian_and_ward_postcall<0, 3> >, true>())	
+		.def("__str__", &toString, python::arg("self"))
 		.def("__eq__", &Vis::ColorTable::operator==, (python::arg("self"), python::arg("table")))
 		.def("__ne__", &Vis::ColorTable::operator!=, (python::arg("self"), python::arg("table")));
 }

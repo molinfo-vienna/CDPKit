@@ -24,6 +24,8 @@
  */
 
 
+#include <sstream>
+
 #include <boost/python.hpp>
 
 #include "CDPL/Vis/Rectangle2D.hpp"
@@ -31,6 +33,24 @@
 #include "Base/ObjectIdentityCheckVisitor.hpp"
 
 #include "ClassExports.hpp"
+
+
+namespace
+{
+
+	std::string toString(const CDPL::Vis::Rectangle2D& rect)
+	{
+		std::ostringstream oss;
+
+		if (rect == CDPL::Vis::Rectangle2D())
+			oss << "CDPL.Vis.Rectangle2D()";
+		else
+			oss << "CDPL.Vis.Rectangle2D(min=(" << rect.getMin()[0] << ", " << rect.getMin()[1] << "), max=("
+				<< rect.getMax()[0] << ", " << rect.getMax()[1] << "))";
+
+		return oss.str();
+	}
+}
 
 
 void CDPLPythonVis::exportRectangle2D()
@@ -86,6 +106,7 @@ void CDPLPythonVis::exportRectangle2D()
 		.def("reset", &Vis::Rectangle2D::reset, python::arg("self"))
 		.def("scale", &Vis::Rectangle2D::scale, (python::arg("self"), python::arg("factor")))
 		.def("translate", PointFuncType1(&Vis::Rectangle2D::translate), (python::arg("self"), python::arg("vec")))
+		.def("__str__", &toString, python::arg("self"))
 		.def("__eq__", &Vis::Rectangle2D::operator==, (python::arg("self"), python::arg("rect")))
 		.def("__ne__", &Vis::Rectangle2D::operator!=, (python::arg("self"), python::arg("rect")))
 		.def("__contains__", containsPointFunc1, (python::arg("self"), python::arg("pt")))

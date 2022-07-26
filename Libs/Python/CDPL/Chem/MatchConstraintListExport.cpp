@@ -24,6 +24,8 @@
  */
 
 
+#include <sstream>
+
 #include <boost/python.hpp>
 
 #include "CDPL/Chem/MatchConstraintList.hpp"
@@ -40,6 +42,20 @@ namespace
 	const CDPL::Base::Variant& getConstraintValue(const CDPL::Chem::MatchConstraint& constr) 
 	{
 		return constr.getValue();
+	}
+
+	std::string toString(const CDPL::Chem::MatchConstraintList& list)
+	{
+		std::ostringstream oss;
+
+		oss << "CDPL.Chem.MatchConstraintList(";
+		
+		if (!list.isEmpty())
+			oss << "...";
+
+		oss << ')';
+		
+		return oss.str();
 	}
 }
 
@@ -119,5 +135,6 @@ void CDPLPythonChem::exportMatchConstraintList()
 		.def("addElement", addElementFunc1, (python::arg("self"), python::arg("id"), python::arg("relation")))
 		.def("addElement", addElementFunc2, (python::arg("self"), python::arg("id"), python::arg("relation"), 
 											 python::arg("value")))
+		.def("__str__", &toString, python::arg("self"))
 		.add_property("type", &Chem::MatchConstraintList::getType, &Chem::MatchConstraintList::setType);   
 }

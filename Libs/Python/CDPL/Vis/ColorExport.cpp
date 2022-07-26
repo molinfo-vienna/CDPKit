@@ -43,8 +43,20 @@ namespace
 	{
 		std::ostringstream oss;
 
-		oss << "CDPL.Vis.Color(r=" << col.getRed() << ", g=" << col.getGreen() << ", b=" << col.getBlue() << ", a=" << col.getAlpha() << ")";
+		oss << "CDPL.Vis.Color(";
+		
+		if (col == CDPL::Vis::Color())
+			oss << ')';
+		
+		else {
+			oss << "r=" << col.getRed() << ", g=" << col.getGreen() << ", b=" << col.getBlue();
 
+			if (col.getAlpha() != 1.0)
+				oss << ", a=" << col.getAlpha();
+
+			oss << ')';
+		}
+		
 		return oss.str();
 	}
 }
@@ -75,8 +87,8 @@ void CDPLPythonVis::exportColor()
         .def("setRGBA", &Vis::Color::setRGBA, 
 			 (python::arg("self"), python::arg("red"), python::arg("green"), 
 			  python::arg("blue"), python::arg("alpha") = 1.0))    
-        .def("__eq__", &Vis::Color::operator==, python::arg("self"))
-        .def("__ne__", &Vis::Color::operator!=, python::arg("self"))
+        .def("__eq__", &Vis::Color::operator==, (python::arg("self"), python::arg("color")))
+		.def("__ne__", &Vis::Color::operator!=, (python::arg("self"), python::arg("color")))
 		.def("__str__", &toString, python::arg("self"))
 		.add_property("red", &Vis::Color::getRed, &Vis::Color::setRed)
 		.add_property("green", &Vis::Color::getGreen, &Vis::Color::setGreen)

@@ -27,7 +27,7 @@
 ##
 # \brief class QtObjectFactory.
 #
-class QtObjectFactory(object):
+class QtObjectFactory:
 
 	def createQFont(font):
 

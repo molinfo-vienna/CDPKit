@@ -24,6 +24,8 @@
  */
 
 
+#include <sstream>
+#include <iomanip>
 #include <memory>
 
 #include <boost/python.hpp>
@@ -109,6 +111,29 @@ namespace
 	{
 		return FileExtensionSequence(fmt);
 	}
+
+	std::string toString(const CDPL::Base::DataFormat& fmt)
+	{
+		std::ostringstream oss;
+
+		oss << std::boolalpha;
+		oss << "CDPL.Base.DataFormat(name='" << fmt.getName() << "', descr='" << fmt.getDescription()
+			<< "', mime_type'" << fmt.getMimeType() << "', file_exts=[";
+
+		bool first_ext = true;
+		
+		for (CDPL::Base::DataFormat::ConstFileExtensionIterator it = fmt.getFileExtensionsBegin(), end = fmt.getFileExtensionsEnd(); it != end; ++it) {
+			if (!first_ext) 
+				oss << ", ";
+
+			oss << '\'' << *it << '\'';
+			first_ext = false;
+		}
+
+		oss << "], multi_rec=" << fmt.isMultiRecordFormat() << ')';
+
+		return oss.str();
+	}
 }
 
 
@@ -126,8 +151,8 @@ void CDPLPythonBase::exportDataFormat()
 							 python::arg("self"), python::arg("name"), python::arg("descr"),
 							 python::arg("mime_type"), python::arg("multi_rec"))))
 		.def(python::init<const std::string&, const std::string&, const std::string&, PyObject*, bool>((
-							 python::arg("self"), python::arg("name"), python::arg("description"),
-							 python::arg("mime_type"), python::arg("file_extensions"),
+							 python::arg("self"), python::arg("name"), python::arg("descr"),
+							 python::arg("mime_type"), python::arg("file_exts"),
 							 python::arg("multi_rec"))))
 		.def("getNumFileExtensions", &Base::DataFormat::getNumFileExtensions, python::arg("self"))
 		.def("getFileExtension", &Base::DataFormat::getFileExtension, (python::arg("self"), python::arg("idx")),
@@ -171,6 +196,7 @@ void CDPLPythonBase::exportDataFormat()
 		.add_property("multiRecordFormat", &Base::DataFormat::isMultiRecordFormat, 
 					  &Base::DataFormat::setMultiRecordFormat)    
 		.add_property("fileExtensions", &getFileExtensions)
+		.def("__str__", &toString, python::arg("self"))
 		.def("__ne__", &Base::DataFormat::operator!=, (python::arg("self"), python::arg("fmt")))    
         .def("__eq__", &Base::DataFormat::operator==, (python::arg("self"), python::arg("fmt")));
 

@@ -25,6 +25,7 @@
 
 
 #include <sstream>
+#include <iomanip>
 
 #include <boost/python.hpp>
 
@@ -43,8 +44,9 @@ namespace
 	{
 		std::ostringstream oss;
 
+		oss << std::boolalpha;
 		oss << "CDPL.Vis.SizeSpecification(value=" << spec.getValue() << ", relative=" << spec.isRelative() << ", in_scaling=" << spec.followsInputScaling() 
-			<< ", out_scaling=" << spec.followsOutputScaling() << ")";
+			<< ", out_scaling=" << spec.followsOutputScaling() << ')';
 
 		return oss.str();
 	}

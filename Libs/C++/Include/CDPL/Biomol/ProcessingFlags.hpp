@@ -40,17 +40,17 @@ namespace CDPL
     namespace Biomol 
     {
 
-	/**
-	 * \addtogroup CDPL_BIOMOL_CONSTANTS
-	 * @{
-	 */
+		/**
+		 * \addtogroup CDPL_BIOMOL_CONSTANTS
+		 * @{
+		 */
 
-	const long IGNORE_SEQUENCE_NO = std::numeric_limits<long>::min();
-	const long IGNORE_SERIAL_NO   = std::numeric_limits<long>::min();
+		const long IGNORE_SEQUENCE_NO = std::numeric_limits<long>::min();
+		const long IGNORE_SERIAL_NO   = std::numeric_limits<long>::min();
 
-	/**
-	 * @}
-	 */
+		/**
+		 * @}
+		 */
     }
 }
 

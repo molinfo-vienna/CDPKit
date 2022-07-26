@@ -64,7 +64,7 @@ namespace CDPLPythonBase
 				.def(python::init<>(python::arg("self")))
 				.def(python::init<const FunctionType&>((python::arg("self"), python::arg("func"))))
 				.def("__init__", python::make_constructor(&construct, python::default_call_policies(), 
-														  python::arg("callable")))
+														  (python::arg("callable"))))
 				.def("__call__", &callOperator, 
 					 (python::arg("self"), python::arg("arg1"), python::arg("arg2"), 
 					  python::arg("arg3"), python::arg("arg4")), RetValPolicy())
@@ -119,7 +119,7 @@ namespace CDPLPythonBase
 				.def(python::init<>(python::arg("self")))
 				.def(python::init<const FunctionType&>((python::arg("self"), python::arg("func"))))
 				.def("__init__", python::make_constructor(&construct, python::default_call_policies(), 
-														  python::arg("callable")))
+														  (python::arg("callable"))))
 				.def("__call__", &callOperator, 
 					 (python::arg("self"), python::arg("arg1"), python::arg("arg2"), python::arg("arg3")),
 					 RetValPolicy())
@@ -172,7 +172,7 @@ namespace CDPLPythonBase
 				.def(python::init<>(python::arg("self")))
 				.def(python::init<const FunctionType&>((python::arg("self"), python::arg("func"))))
 				.def("__init__", python::make_constructor(&construct, python::default_call_policies(), 
-														  python::arg("callable")))
+														  (python::arg("callable"))))
 				.def("__call__", &callOperator, 
 					 (python::arg("self"), python::arg("arg1"), python::arg("arg2")), 
 					 RetValPolicy())
@@ -223,7 +223,7 @@ namespace CDPLPythonBase
 				.def(python::init<>(python::arg("self")))
 				.def(python::init<const FunctionType&>((python::arg("self"), python::arg("func"))))
 				.def("__init__", python::make_constructor(&construct, python::default_call_policies(), 
-														  python::arg("callable")))
+														  (python::arg("callable"))))
 				.def("__call__", &callOperator, (python::arg("self"), python::arg("arg1")),
 					 RetValPolicy())
 				.def("__bool__", &this->nonZero, python::arg("self"))
@@ -271,7 +271,7 @@ namespace CDPLPythonBase
 				.def(python::init<>(python::arg("self")))
 				.def(python::init<const FunctionType&>((python::arg("self"), python::arg("func"))))
 				.def("__init__", python::make_constructor(&construct, python::default_call_policies(), 
-														  python::arg("callable")))
+														  (python::arg("callable"))))
 				.def("__call__", &callOperator, python::arg("self"), RetValPolicy())
 				.def("__bool__", &this->nonZero, python::arg("self"))
 				.def("__nonzero__", &this->nonZero, python::arg("self"));

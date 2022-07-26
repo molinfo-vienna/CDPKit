@@ -72,7 +72,7 @@ void CDPLPythonChem::exportBuriednessGridCalculator()
 		.add_property("minVdWSurfaceDistance", &Chem::BuriednessGridCalculator::getMinVdWSurfaceDistance, 
 					  &Chem::BuriednessGridCalculator::setMinVdWSurfaceDistance)
 		.add_property("numTestRays", &Chem::BuriednessGridCalculator::getNumTestRays, &Chem::BuriednessGridCalculator::setNumTestRays)
-		.add_property("atomCoordinatesFunction", 
+		.add_property("atom3DCoordinatesFunction", 
 					  python::make_function(&Chem::BuriednessGridCalculator::getAtom3DCoordinatesFunction, python::return_internal_reference<>()),
 					  &Chem::BuriednessGridCalculator::setAtom3DCoordinatesFunction);
 

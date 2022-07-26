@@ -23,7 +23,6 @@
 # Boston, MA 02111-1307, USA.
 ##
 
-
 # Copy files from source directory to destination directory, substituting any
 # variables.  Create destination directory if it does not exist.
 MACRO(CONFIGURE_FILES SRC_DIR DEST_DIR)
@@ -40,7 +39,6 @@ MACRO(CONFIGURE_FILES SRC_DIR DEST_DIR)
         ENDIF(NOT IS_DIRECTORY "${SRC_TEMPLATE_PATH}")
     ENDFOREACH(TEMPLATE_FILE)
 ENDMACRO(CONFIGURE_FILES)
-
 
 IF(SPHINX_FOUND)
   SET(SPHINX_SOURCE_DIR "${CMAKE_CURRENT_SOURCE_DIR}/Source")
@@ -62,22 +60,4 @@ IF(SPHINX_FOUND)
 
   ADD_DEPENDENCIES(sphinx-doc copy-sphinx-sources)
   CONFIGURE_FILES("${SPHINX_SOURCE_DIR}" "${SPHINX_PROC_SOURCE_DIR}")
-
-  IF(DOXYGEN_EXECUTABLE)
-    ADD_CUSTOM_COMMAND(TARGET sphinx-doc POST_BUILD
-      COMMAND ${CMAKE_COMMAND} -E copy_directory
-      "${CMAKE_CURRENT_BINARY_DIR}/../Doxygen/C++-API/html" "${CMAKE_CURRENT_BINARY_DIR}/html/cxx_api_doc"
-      COMMENT "Copying C++-API documentation to Sphinx output directory")
-
-    ADD_CUSTOM_COMMAND(TARGET sphinx-doc POST_BUILD
-      COMMAND ${CMAKE_COMMAND} -E copy_directory
-      "${CMAKE_CURRENT_BINARY_DIR}/../Doxygen/Python-API/html" "${CMAKE_CURRENT_BINARY_DIR}/html/python_api_doc"
-      COMMENT "Copying Python-API documentation to Sphinx output directory")
-
-    ADD_DEPENDENCIES(sphinx-doc c++-api-doc)
-    ADD_DEPENDENCIES(sphinx-doc python-api-doc)
-  ENDIF(DOXYGEN_EXECUTABLE)
-
-  INSTALL(DIRECTORY "${CMAKE_CURRENT_BINARY_DIR}/html/" DESTINATION "${CDPKIT_DOC_INSTALL_DIR}"
-          COMPONENT Documentation OPTIONAL)
 ENDIF(SPHINX_FOUND)
