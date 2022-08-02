@@ -298,6 +298,7 @@ def stripExtModuleName(name):
     name = name.replace('._shape', '')
     name = name.replace('._confgen', '')
     name = name.replace('OpenMode24', 'OpenMode(24)')
+    name = name.replace('OpenMode60', 'OpenMode(60)')
 
     return name
     

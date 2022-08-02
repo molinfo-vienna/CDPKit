@@ -51,13 +51,22 @@ IF(SPHINX_FOUND)
     "${CMAKE_CURRENT_BINARY_DIR}/html"
     COMMENT "Building HTML documentation with Sphinx")
 
-  FILE(WRITE "${CMAKE_CURRENT_BINARY_DIR}/CopySources.cmake"
-    "FILE(COPY ${SPHINX_SOURCE_DIR} DESTINATION ${CMAKE_CURRENT_BINARY_DIR} PATTERN *.in EXCLUDE PATTERN *~ EXCLUDE)")
+  FILE(WRITE "${CMAKE_CURRENT_BINARY_DIR}/CopySphinxSources.cmake"
+    "FILE(COPY \"${SPHINX_SOURCE_DIR}\" DESTINATION \"${CMAKE_CURRENT_BINARY_DIR}\" PATTERN *.in EXCLUDE PATTERN *~ EXCLUDE)")
 
   ADD_CUSTOM_TARGET(copy-sphinx-sources 
-    COMMAND ${CMAKE_COMMAND} -P "${CMAKE_CURRENT_BINARY_DIR}/CopySources.cmake"
+    COMMAND ${CMAKE_COMMAND} -P "${CMAKE_CURRENT_BINARY_DIR}/CopySphinxSources.cmake"
     COMMENT "Preprocessing Sphinx source files")
 
+  FILE(WRITE "${CMAKE_CURRENT_BINARY_DIR}/CopyExampleSourceFiles.cmake"
+    "FILE(GLOB SOURCE_FILES \"${CDPKIT_EXAMPLES_DIR}/C++/*.cpp\" \"${CDPKIT_EXAMPLES_DIR}/Python/*.py\")\n"
+    "FILE(COPY \$\{SOURCE_FILES\} DESTINATION \"${SPHINX_PROC_SOURCE_DIR}/examples\")")
+
+  ADD_CUSTOM_TARGET(copy-example-files 
+    COMMAND ${CMAKE_COMMAND} -P "${CMAKE_CURRENT_BINARY_DIR}/CopyExampleSourceFiles.cmake"
+    COMMENT "Copying example source code files")
+
   ADD_DEPENDENCIES(sphinx-doc copy-sphinx-sources)
+  ADD_DEPENDENCIES(sphinx-doc copy-example-files)
   CONFIGURE_FILES("${SPHINX_SOURCE_DIR}" "${SPHINX_PROC_SOURCE_DIR}")
 ENDIF(SPHINX_FOUND)

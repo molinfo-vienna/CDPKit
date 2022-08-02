@@ -1,18 +1,23 @@
-Welcome to the Chemical Data Processing Toolkit (CDPKit)
-========================================================
+Welcome to the Chemical Data Processing Toolkit (CDPKit) Documentation
+======================================================================
 
 .. toctree::
-   :maxdepth: 2
-   :caption: Table of Contents
+   :maxdepth: 1
+
+   introduction/index
+   getting_started/index
+   cdpl_prog_guide/index
+   cdpl_cookbook/index
+   bibliography
 
 Chemical Data Processing Library (CDPL) API documentation
-=========================================================
+---------------------------------------------------------
 
-* `CDPL C++-API <cxx_api_doc/index.html>`_
+* `CDPL C++-API <cpp_api_doc/index.html>`_
 * `CDPL Python-API <python_api_doc/index.html>`_
 
 Indices and tables
-==================
+------------------
 
 * :ref:`genindex`
 * :ref:`search`

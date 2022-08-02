@@ -577,10 +577,10 @@
 \defgroup CDPL_SHAPE_SCORING_FUNCTORS Scoring Functors
 \ingroup CDPL_SHAPE
 
-\defgroup CDPL_SHAPE_FUNCTIONS Free Functions
+\defgroup CDPL_SHAPE_SCORING_FUNCTIONS Scoring Functions
 \ingroup CDPL_SHAPE
-\
-defgroup CDPL_SHAPE_SCORING_FUNCTIONS Scoring Functions
+
+\defgroup CDPL_SHAPE_FUNCTIONS Free Functions
 \ingroup CDPL_SHAPE
 
 \defgroup CDPL_SHAPE_CONSTANTS Flags and Constants
