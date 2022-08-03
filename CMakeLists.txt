@@ -430,12 +430,11 @@ IF(WIN32)
   SET(CPACK_PACKAGE_EXECUTABLES "chox;ChOX")
   SET(CPACK_CREATE_DESKTOP_LINKS "ChOx")
   SET(CPACK_NSIS_INSTALLED_ICON_NAME "${CDPKIT_EXECUTABLE_INSTALL_DIR}\\\\ChOx.exe")
-  SET(CPACK_NSIS_MUI_ICON "${CDPKIT_GRAPHICS_DIR}/Icon.ico")
-  SET(CPACK_NSIS_MUI_UNIICON "${CDPKIT_GRAPHICS_DIR}/Icon.ico")
+  SET(CPACK_NSIS_MUI_ICON "${CDPKIT_DOC_GRAPHICS_DIR}/Logo.ico")
+  SET(CPACK_NSIS_MUI_UNIICON "${CDPKIT_DOC_GRAPHICS_DIR}/Logo.ico")
   SET(CPACK_PACKAGE_DEFAULT_LOCATION "C:/Program Files")
   SET(CPACK_NSIS_MENU_LINKS
-    "${CDPKIT_DOC_INSTALL_DIR}/C++-API/index.html" "Documentation"
-    "${CDPKIT_DOC_INSTALL_DIR}/Python-API/index.html" "Python-API Documentation")
+    "${CDPKIT_DOC_INSTALL_DIR}/Doc/index.html" "Documentation")
 
 ELSE(WIN32)
   IF(APPLE)
@@ -453,7 +452,6 @@ ELSE(WIN32)
         CDPLStaticLibraries
         CDPLHeaderFiles
         CDPLPythonModules
-        CDPLPythonAPIDocumentation
        )
 
     SET(CPACK_GENERATOR "PackageMaker")
